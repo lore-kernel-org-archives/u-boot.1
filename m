@@ -4,78 +4,113 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DE89CE7AFE
-	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 10:44:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE576CE7AA3
+	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 12:29:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 528DF88B58;
-	Fri,  6 Sep 2024 12:44:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id E53AB88908;
+	Fri,  6 Sep 2024 14:29:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="ijePNfzZ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fhVVDKwZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A2E988C5C; Fri,  6 Sep 2024 12:44:25 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2DA3488B58; Fri,  6 Sep 2024 14:09:33 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05D7E88770
- for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 12:44:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2294188908
+ for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 14:09:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1725619460; x=1726224260; i=xypron.glpk@gmx.de;
- bh=PBgGAzktgOjavvu/uS3kLO/5u077O3LCBmonrsS+Dl4=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=ijePNfzZSOxYsXFGpTgTZxebETUem5UjxFl2p+VIdATWmj6MxRRw1j4tiYm7auiy
- HSC4eihBmHPPfFKSNJFvSNLNJcEaTbe6Tbq8/lDO9wWnvYRW/HhXadnujjWu71gDm
- 8StI0ZLB05uquOsC+pNWsY4bjtaL54Ua3jdhIPc56mZfEqGMsjgXCzjth1tVDbap5
- nu/6CelXqgyxm7CBnLUeYDle9TnqKB2b8uES9RtCLa0tlzmbKAmS/M7jYUMe2LRPc
- 0ksKZqjnZSJLruUqBVl2hCW+I9gniRAcywO8C/TvfaMcO3n4tZguHVvGnRefnZy37
- WCpE3K4rWZKI13J79Q==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.143.105] ([46.114.162.74]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1N17Ye-1s1b8o18O2-00roqE; Fri, 06
- Sep 2024 12:44:20 +0200
-Message-ID: <adbefd8b-9d14-42f0-9a20-83416bf671c9@gmx.de>
-Date: Fri, 6 Sep 2024 12:44:19 +0200
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-42bb72a5e0bso15822745e9.1
+ for <u-boot@lists.denx.de>; Fri, 06 Sep 2024 05:09:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1725624570; x=1726229370; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=7DmR4REQSH1B0QWbejGNVbMMd6fqrm3h98m1H7+ztj4=;
+ b=fhVVDKwZ3MEaQ32QWRCDcdQrt8qdeC3jjtUfKVRVJKSpAmhfU2Vxt2nPB74+BVJsp3
+ 7+7MpJX7PXCKZ+mAPQ1C2hW2UXN6s/DgKX/zvcazyX6GKubBIylChK8W8A5zNAJpL5JP
+ 7OH4Uk5Jf5H2wgpP2l2umjpqbJhHXHNv1xZ32KyiqNCq9uOrkkdTotXQTg5ES22SZlWw
+ QJaCkV9AysUVjrMwMvX1GY7n4q7o0xer5Wt3KkZB7hrpO45Wzph+cU2bTP802YuHsXP7
+ uGeqmNclP1xUNJm4Wju35oCV6dR+r9HweiSmU6RlsWlpke7L1vv+eSJE+3oKSpqWTSUW
+ N4nA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725624570; x=1726229370;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=7DmR4REQSH1B0QWbejGNVbMMd6fqrm3h98m1H7+ztj4=;
+ b=MC0aQn64DJZ3Cyr8Sd07AfjpWb+Gxxjm/3ltRYMu7X2Fh7lZQ6Kegr+nHppSgColDs
+ iyq53YRqjkhIJEYiiJZfGTYc9i+SnB9OOdH8QaB0je6GkEwHUUbYX2wgKqJWPaEYQx68
+ +jxaT8b+0cW0xgiCugQa7Zjn646wLUi101LgJc0T04CubLSy9xpxK+57nm1K5Cgl3PoJ
+ YF947oBXePlktgXmkQ1Vl6XfM1JuXCHPDLwJ5ovxG+cOp5Ii01uDDW2d1QmIeEtTP1a8
+ pBAYKga852scCK/P9jhpBpNveWU5DZs6khgKBJ6vPcCnQMS3oYVPyS2+s8lz6JYcZb/C
+ TpjA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUanhSfMqAL4GoQ32Mdhrv3a9GNONZhO1kxe3Kn60cnhyHWQYAiX2LtuDhWK7Pvy4x4tIzGGvI=@lists.denx.de
+X-Gm-Message-State: AOJu0YwFjOUeKu0hHERndq23sc9EEwTQum1ZgWnp231tsGIS66Jgyzc7
+ R4N1q0zrsIuQV9kUgK3xcJ3u2zieXbOeCp6R8yBDc6LHIag5HMr9jaMz/3pJX9k=
+X-Google-Smtp-Source: AGHT+IF+6sshTCMdFZA7kKeLcvpyjlAz/I4F5hSdbRFp9xy6Eb326mEsGozMRfAIW9LYgpFaH3MJ9g==
+X-Received: by 2002:a5d:5d86:0:b0:374:af04:d6a3 with SMTP id
+ ffacd0b85a97d-374af04d7aamr12678057f8f.57.1725624570353; 
+ Fri, 06 Sep 2024 05:09:30 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:1679:7ccd:c07d:7c6?
+ ([2a01:e0a:3cb:7bb0:1679:7ccd:c07d:7c6])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-374b9859486sm18435387f8f.111.2024.09.06.05.09.28
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 06 Sep 2024 05:09:29 -0700 (PDT)
+Message-ID: <5d0aa1f3-f8ce-46d5-8984-654a2786d5a5@linaro.org>
+Date: Fri, 6 Sep 2024 14:09:28 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 14/28] efi_loader: Install ACPI tables
-To: Patrick Rudolph <patrick.rudolph@9elements.com>
-Cc: sjg@chromium.org, bmeng.cn@gmail.com, trini@konsulko.com, sr@denx.de,
- pbrobinson@gmail.com, mbrugger@suse.com, maximilian.brune@9elements.com,
- u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <20240906072231.2531491-1-patrick.rudolph@9elements.com>
- <20240906072231.2531491-15-patrick.rudolph@9elements.com>
+Subject: Re: [PATCH v9 20/37] net-lwip: add DHCP support and dhcp commmand
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
+ Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
+ Anton Antonov <Anton.Antonov@arm.com>,
+ Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
+ Matteo Lisi <matteo.lisi@engicam.com>, Gilles Talis
+ <gilles.talis@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Marek Vasut <marex@denx.de>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Nishanth Menon <nm@ti.com>,
+ Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
+ James Hilliard <james.hilliard1@gmail.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Petr Zejdl <petr.zejdl@cern.ch>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Eddie James <eajames@linux.ibm.com>, AKASHI Takahiro
+ <akashi.tkhro@gmail.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Johan Jonker <jbx6244@gmail.com>, Maxim Moskalets <maximmosk4@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Sean Anderson <sean.anderson@seco.com>, Artur Rojek <artur@conclusive.pl>,
+ Janne Grunau <j@jannau.net>, Neal Gompa <neal@gompa.dev>,
+ Yang Xiwen <forbidden405@outlook.com>, Gabor Juhos <j4g8y7@gmail.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Jonas Karlman <jonas@kwiboo.se>,
+ Boon Khai Ng <boon.khai.ng@intel.com>, Robert Marko <robert.marko@sartura.hr>
+References: <cover.1724419624.git.jerome.forissier@linaro.org>
+ <36a13357261f734187444b48b74dec2540e73b86.1724419624.git.jerome.forissier@linaro.org>
+ <CAFLszTi3YRpf4krkAYE1u7Sex0=Dn_YscSKxE8mQEh9Mxcgjow@mail.gmail.com>
+ <a946cdb4-648c-46a7-83c5-302ab0d666d3@linaro.org>
+ <20240904152011.GP2479150@bill-the-cat>
 Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240906072231.2531491-15-patrick.rudolph@9elements.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:lrbvaqEjhQuEX1LkUnyOyRD3gtt6xWQJysdH8DZNMsYKlNWus5e
- iHfVl/iXVf64b6sBWCjpnGFzXdnB4EOf80JvbIUxW/bXn+EE1VpfPg32Eabk5j0LjAMd6gb
- VAbCJ1BDcr6RXk4vUTe17sh4hesrlXqUDNQvdF+PHk7cQYhnkAc/xz8w1Vg+kidtxJtmhEM
- e2k61omvoeVXxq2lMCl/A==
-UI-OutboundReport: notjunk:1;M01:P0:ceuWP9gQxp8=;Cj1mkFI56l5/V70ETwptoIqQ68g
- oyFoDCnf0K+CTZZmb2R421k70El6ZoUxEQBQYAUXuYnjUnDHQJSAUKqt2TYMMqwlikC3S/9cQ
- A6kWi2lnTzmVxePuIkruX4bFdz6+lETAOvSOrZKwEuYXHWzvFLEOri8arJfGxPnGYJIuTkOpJ
- UK/DNGxEd9vt+7TXvZTSU1VjBB08HPEFWAniEUfDsKo6d9udkVW4HdFU+ujfD9yymSw1iSv8x
- 1eQfH0BFGy6C4tLKJfGjSJ+rFUb/ij/ckVYpf8q6+spgrky0M7V2z8ENSsy/cQsr7Np2T8zHM
- mqXF+ZRJ2PAmeWuD4p19pvodW2sSvYWBxv8SNeOS5japLcumGtZMWhnpV3b1Tk16q12kZYJIw
- v8hzS4jUrgd3IszWc0RipYmYJBkUCxcBgsnxdbD3yvzEQA8tQAfLjGOVE9SRcLh1XI6fPbfGM
- tE1XHLUXsnNGODNN5KmSR5v0W3DVsFUA9ktuBxXfTZgA1E+R47fWVjo1VUt0M87Yj9jczIjr2
- JDo7UAWcJHqnyi5bVYz1bJtqQpXR5PQ/Aq04QABqZWb92teJ7bPLWWgmCXqpovhcKQXb/SzEl
- 4eBcyPl3GVGv4JGLfCSeqsyWAvbDWS3veokWYSctKNCk2NywwH5seLXULOK99Po7FEAUopQP7
- lR9RANqgfGdKIZT5lyfjDuZbJ7cuKC0J9c8Pz234wkB8Fk4t3KunE80Hg8OLOPrspcoZShYSx
- 6iLJbg5S0+TPmV/hMqDRWP106NoCrydXR12Z7H8qYT9NQPFbp+WpSe3x9MFDqzcmV5AtPiBf0
- tNdFNOr5YJctnqYhygs7swTQ==
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20240904152011.GP2479150@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Fri, 06 Sep 2024 14:29:53 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,169 +127,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/6/24 09:22, Patrick Rudolph wrote:
-> Install ACPI tables inside the efi_loader similar to SMBIOS tables.
-> When ACPI is enabled and wasn't installed in other places, install
-> the ACPI table in EFI. Since EFI is necessary to pass the ACPI
-> table location when FDT isn't used, there's no need to install it
-> separately.
->
-> When CONFIG_BLOBLIST_TABLES is set the tables will be stored in a
-> bloblist.
 
-The UEFI specification clearly describes how to hand over ACPI tables. I
-can't see why bloblists should be of any relevance in the UEFI context.
 
->
-> TEST: Booted QEMU SBSA using EFI and ACPI only.
+On 9/4/24 18:09, Tom Rini wrote:
+> On Wed, Sep 04, 2024 at 09:54:15AM +0200, Jerome Forissier wrote:
+>> Hi Simon,
+>>
+>> On 8/29/24 16:05, Simon Glass wrote:
+>>> Hi Jerome,
+>>>
+>>> On Fri, 23 Aug 2024 at 07:49, Jerome Forissier
+>>> <jerome.forissier@linaro.org> wrote:
+>>>>
+>>>> Add what it takes to enable NETDEVICES with NET_LWIP and enable DHCP as
+>>>> well as the dhcp command. CMD_TFTPBOOT is selected by BOOTMETH_EFI due
+>>>> to this code having an implicit dependency on do_tftpb().
+>>>>
+>>>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+>>>> ---
+>>>>  board/engicam/imx8mp/icore_mx8mp.c            |   2 +-
+>>>>  .../imx8mp_debix_model_a.c                    |   2 +-
+>>>>  board/ti/am335x/board.c                       |   3 +-
+>>>>  board/xilinx/common/board.c                   |   3 +-
+>>>>  boot/Kconfig                                  |   3 +-
+>>>>  cmd/Kconfig                                   |  91 +++---
+>>>>  cmd/Makefile                                  |   6 +-
+>>>>  cmd/elf.c                                     |   2 +-
+>>>>  cmd/net-lwip.c                                |  13 +
+>>>>  common/board_r.c                              |   4 +-
+>>>>  common/usb_kbd.c                              |   2 +-
+>>>>  drivers/net/Kconfig                           |   2 +-
+>>>>  include/net-lwip.h                            |   3 +
+>>>>  lib/tiny-printf.c                             |   3 +-
+>>>>  net/Makefile                                  |  14 +-
+>>>>  net/lwip/Makefile                             |   5 +
+>>>>  net/lwip/dhcp.c                               | 125 ++++++++
+>>>>  net/lwip/eth_internal.h                       |  35 +++
+>>>>  net/lwip/net-lwip.c                           | 286 ++++++++++++++++++
+>>>>  net/lwip/tftp.c                               |  11 +
+>>>>  20 files changed, 560 insertions(+), 55 deletions(-)
+>>>>  create mode 100644 cmd/net-lwip.c
+>>>>  create mode 100644 net/lwip/Makefile
+>>>>  create mode 100644 net/lwip/dhcp.c
+>>>>  create mode 100644 net/lwip/eth_internal.h
+>>>>  create mode 100644 net/lwip/net-lwip.c
+>>>>  create mode 100644 net/lwip/tftp.c
+>>>>
+>>>> diff --git a/board/engicam/imx8mp/icore_mx8mp.c b/board/engicam/imx8mp/icore_mx8mp.c
+>>>> index e2ed70caa43..bfdc447c478 100644
+>>>> --- a/board/engicam/imx8mp/icore_mx8mp.c
+>>>> +++ b/board/engicam/imx8mp/icore_mx8mp.c
+>>>> @@ -33,7 +33,7 @@ static void setup_fec(void)
+>>>>         setbits_le32(&gpr->gpr[1], BIT(22));
+>>>>  }
+>>>>
+>>>> -#if CONFIG_IS_ENABLED(NET)
+>>>> +#if CONFIG_IS_ENABLED(NET) || CONFIG_IS_ENABLED(NET_LWIP)
+>>>
+>>> How about making NET mean 'net', rather than having two options?
+>>>
+>>> Perhaps the existing NET needs to be renamed to NET_INTERNAL or
+>>> something like that?
+>>
+>> The problem with that is it will make it a bit harder to remove
+>> the legacy NET implementation, because every occurrence of
+>> "if NET" would need to be questioned if it is applicable to
+>> NET_INTERNAL only or to NET_LWIP too. IOW, some of the thinking
+>> already done here would need to be done again.
+> 
+> Would a new symbol instead help? Make both NET and NEW_LWIP select
+> HAS_NETWORKING or something along those lines.
 
-With this description it is unclear if you used QFW to install ACPI
-tables which would not test the code below.
+Well in principle this HAS_NETWORKING would be !NO_NET, wouldn't it?
 
->
-> Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
-
-Please, cc maintainers as reported by scripts/get_maintainers in future.
-
-> ---
->   lib/efi_loader/efi_acpi.c        | 57 ++++++++++++++++++++++++++++++--
->   test/py/tests/test_event_dump.py |  1 +
->   2 files changed, 56 insertions(+), 2 deletions(-)
->
-> diff --git a/lib/efi_loader/efi_acpi.c b/lib/efi_loader/efi_acpi.c
-> index 67bd7f8ca2..9262f21ea6 100644
-> --- a/lib/efi_loader/efi_acpi.c
-> +++ b/lib/efi_loader/efi_acpi.c
-> @@ -6,15 +6,23 @@
->    */
->
->   #include <efi_loader.h>
-> -#include <log.h>
-> -#include <mapmem.h>
->   #include <acpi/acpi_table.h>
->   #include <asm/global_data.h>
-> +#include <asm/io.h>
-> +#include <bloblist.h>
-> +#include <linux/sizes.h>
-> +#include <linux/log2.h>
-> +#include <log.h>
-> +#include <malloc.h>
-> +#include <mapmem.h>
->
->   DECLARE_GLOBAL_DATA_PTR;
->
->   static const efi_guid_t acpi_guid =3D EFI_ACPI_TABLE_GUID;
->
-> +enum {
-> +	TABLE_SIZE	=3D SZ_64K,
-> +};
->   /*
->    * Install the ACPI table as a configuration table.
->    *
-> @@ -47,3 +55,48 @@ efi_status_t efi_acpi_register(void)
->   	return efi_install_configuration_table(&acpi_guid,
->   					       (void *)(ulong)addr);
->   }
-> +
-
-Please, provide a function description.
-
-> +static int install_acpi_table(void)
-> +{
-> +	u64 rom_addr, rom_table_end;
-
-There is no ROM involved here. Please, use meaningful variable names.
-
-> +	void *addr;
-> +
-> +	if (!IS_ENABLED(CONFIG_GENERATE_ACPI_TABLE) ||
-> +	    IS_ENABLED(CONFIG_X86) ||
-> +	    IS_ENABLED(CONFIG_QFW_ACPI))
-
-Why would you want to call write_acpi_tables() twice on the sandbox? See
-
-board/sandbox/sandbox.c:180:
-             end =3D write_acpi_tables(addr);
-
-We should remove the redundant code from board/sandbox/sandbox.c with
-this patch.
-
-> +		return 0;
-> +
-> +	/* Align the table to a 4KB boundary to keep EFI happy */
-> +	if (IS_ENABLED(CONFIG_BLOBLIST_TABLES))
-> +		addr =3D bloblist_add(BLOBLISTT_ACPI_TABLES, TABLE_SIZE,
-> +				    ilog2(SZ_4K));
-> +	else
-> +		addr =3D memalign(SZ_4K, TABLE_SIZE);
-
-The UEFI specification wants ACPI tables to reside in
-EfiACPIReclaimMemory. Neither bloblist_add() nor memalign() should be
-used here.
-
-> +
-> +	if (!addr)
-> +		return log_msg_ret("mem", -ENOBUFS);
-> +
-> +	rom_addr =3D virt_to_phys(addr);
-> +
-> +	gd->arch.table_start_high =3D rom_addr;
-> +
-> +	rom_table_end =3D write_acpi_tables(rom_addr);
-> +	if (!rom_table_end) {
-> +		log_err("Can't create ACPI configuration table\n");
-> +		return -EINTR;
-> +	}
-> +
-> +	debug("- wrote 'acpi' to %llx, end %llx\n", rom_addr, rom_table_end);
-
-Please, use log_debug().
-
-> +	if (rom_table_end - rom_addr > TABLE_SIZE) {
-> +		log_err("Out of space for configuration tables: need %llx, have %x\n"=
-,
-
-This check is too late. We must ensure that write_acpi_table() does not
-overwrite unallocated memory.
-
-> +			rom_table_end - rom_addr, TABLE_SIZE);
-> +		return log_msg_ret("acpi", -ENOSPC);
-> +	}
-> +	gd->arch.table_end_high =3D rom_table_end;
-> +
-> +	debug("- done writing tables\n");
-
-ditto
-
-Best regards
-
-Heinrich
-
-> +
-> +	return 0;
-> +}
-> +
-> +EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, install_acpi_table);
-> diff --git a/test/py/tests/test_event_dump.py b/test/py/tests/test_event=
-_dump.py
-> index e282c67335..88bbf34f71 100644
-> --- a/test/py/tests/test_event_dump.py
-> +++ b/test/py/tests/test_event_dump.py
-> @@ -18,6 +18,7 @@ def test_event_dump(u_boot_console):
->   --------------------  ------------------------------  ----------------=
---------------
->   EVT_FT_FIXUP          bootmeth_vbe_ft_fixup           .*boot/vbe_reque=
-st.c:.*
->   EVT_FT_FIXUP          bootmeth_vbe_simple_ft_fixup    .*boot/vbe_simpl=
-e_os.c:.*
-> +EVT_LAST_STAGE_INIT   install_acpi_table              .*lib/efi_loader/=
-efi_acpi.c:.*
->   EVT_LAST_STAGE_INIT   install_smbios_table            .*lib/efi_loader=
-/efi_smbios.c:.*
->   EVT_MISC_INIT_F       sandbox_early_getopt_check      .*arch/sandbox/c=
-pu/start.c:.*
->   EVT_TEST              h_adder_simple                  .*test/common/ev=
-ent.c:'''
-
+-- 
+Jerome
