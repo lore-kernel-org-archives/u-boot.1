@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68820CE7AB9
-	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 07:13:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 897A6CE7AB8
+	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 07:22:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 00FA888CE1;
-	Fri,  6 Sep 2024 09:13:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1FEC388D1A;
+	Fri,  6 Sep 2024 09:22:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ms0p+Ppv";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="Kgh/MNDa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0EFB088CF5; Fri,  6 Sep 2024 09:13:25 +0200 (CEST)
-Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
- [IPv6:2607:f8b0:4864:20::c30])
+ id 5725388D13; Fri,  6 Sep 2024 09:22:40 +0200 (CEST)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99652886F9
- for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 09:13:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6261F88ABE
+ for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 09:22:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=9elements.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-5e174925b7bso1126427eaf.0
- for <u-boot@lists.denx.de>; Fri, 06 Sep 2024 00:13:22 -0700 (PDT)
+ spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-53659867cbdso402628e87.3
+ for <u-boot@lists.denx.de>; Fri, 06 Sep 2024 00:22:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725606801; x=1726211601; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/+0OLALJLCxN4T2g4Z6OhrpryI3dlPwPvjhUonMBu9o=;
- b=ms0p+PpvE1hrZ2iLySrOddfDbaEo0zJIfMxncSiK3abHmo3DPLjNDNvMDIiTu3yuIG
- VJRH4QhzUDx5XN8OmPl2o6zDoGO6bTxOeKHroHnbfLOEMZcO5xaHr8gvugrfkcTuKpgG
- +Nf1HbETFkDyvpk7hAvHxGCanG96O/ZPEycjyVzPrFydFJNdsNsKK9Vqc3r4hPdL0Vk2
- 9VAgdgPi4jLkbiofrLmLbJdmGqXGKUSRMAjhkmJCyLzgBhOM9H9wIFVVgB0pWs9tRfO8
- PDu5XJr7XnZlnqVgCw90rRbGpY4QCBxDNxOeZcG/llpg6nhDuMNkCkzm9xDde2yjOwDy
- 407w==
+ d=9elements.com; s=google; t=1725607357; x=1726212157; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=/bl2WTJY6FcTtzp9LOsqBvU4hNUqQ4otT7/AFrfl8Ug=;
+ b=Kgh/MNDacu0Fr2hRIEsSsAwrgVT8/h31RxYdcDB9eBgv2tty7J/1NBzgBVmXWD3cf4
+ iuk5nFVp93QTZIs72zYNJk/cyAgLTCxlq9kPObWcyXubQhbA8WkjO1YxsfyUsqFW/yhF
+ ycnNCeaRGe/CAY2Fj9a0EjEnJ7r9w3RF3PXk84WFMDl/U7Tna6RkU8ReuDylwDPTMi9s
+ 6s7kNTH5ERAYQEO/qKAB/OceWu/yYeMq4KwPSLxdS/HVCDy0UwIUvHw6i/uqfzxGE3On
+ n+vZ1euiI9BOH76J7++Lo79VkFzVOKtfagPkOmsqnKExsmTpzBf7Q7A537AZT6QqLTSj
+ zZlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725606801; x=1726211601;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1725607357; x=1726212157;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=/+0OLALJLCxN4T2g4Z6OhrpryI3dlPwPvjhUonMBu9o=;
- b=KArY7H1YFwkhPsfbV6soK2BQZNrJ/Ob+Zpw+3cJZfByYNx0om+0ZYAWoWEEK9uHIl1
- Rdce3qKiOydX/8u03mCn4GW8gLAjoe/nOzO2sgQsHZkDF9LvsdgsM0kDGihdJ2Dk/8zF
- 6DgUK7i6Tb9IZdclcbOP3/ZqMHerQ6dzsgGK4VU+nhWSnhNkRlDv/nLejST505uxlAKU
- MLyYyHG2CGP7T1MCDNht7k8Q3tlj+dEsxRIuEJtH24Ykd7rAV6tzWrIjnqhjSv3i1yr1
- 2xcNcPSDpk0rU+bttwmhzbsV/OXa9GXxkpPXrPtrDxjrp0KNCE2RBB1VWH+iVKIlk0LO
- 8L+g==
-X-Gm-Message-State: AOJu0YxUAREjLPNFKdCppLXZrTTCKjat3SI72xehSNwN/ScoJzr2rjYP
- GeVut3HJJgmL3H0QdtR2S2x0mgt+IC/7uxP1L1ni4PDpk0RFUK2RYhQoCurw/cQ32PW7ixTUPN+
- aloKWSQKppzwDTLcM6DKgHRacZdDi6AyJkYVIjA==
-X-Google-Smtp-Source: AGHT+IEbYaUsevnFWRHJxFkuXq7KB4026zXioJws3LIf/2pHPl1I0+HiwNafjh0Fz1Lg+A5KKXozc3b5Qx0vkC0/qyE=
-X-Received: by 2002:a05:6870:414e:b0:270:2057:3373 with SMTP id
- 586e51a60fabf-27b82e09653mr1945113fac.18.1725606801033; Fri, 06 Sep 2024
- 00:13:21 -0700 (PDT)
+ bh=/bl2WTJY6FcTtzp9LOsqBvU4hNUqQ4otT7/AFrfl8Ug=;
+ b=BMFtfoXBokpF14CYM+juVoCa3HN/UUmpDYyqv/C8r9KY4HHtv20cr3QdqvFXt3acYM
+ Latt1l9crnfDaxzmFh2gVccjchbiPdBYfEW6tekGyzP0fkZEM7uePY+wzQ0PBv9YWGV/
+ exNlLvEe0Cj4F6qzyAlVV+VdBKzhs+kc3JFESwkxyghCSmiZZFKlMk033rxQH3a7e1NU
+ 89sHaRQZR0nlskVC8SSWNKDybgRKIqHkFcbobPLcK0Gbj3fG2l2ZhpKAO8inYEzk81/Z
+ 3dKW7bqH0dfXiOzPJBaIgYfGcTq7xPBpIyHEl++O9rmy4fC7nd611FHxX5XslKgBO9+F
+ Pq8g==
+X-Gm-Message-State: AOJu0YxpSi9JZRvy65wtyaBhu22YPWSyJK1EdEYx3W5dbcO9cukkofpX
+ rfHx9bQNbcHDlNoYBAfWbgs1iMRG/cQIviXJAr9GVq9FzBySXUQRNYkpKNFAa9Ai14ewYM9YpJp
+ Y
+X-Google-Smtp-Source: AGHT+IGtA2nw8eM0z+o73az2Zog2FLrN27B7Zx00OA4KfVIRc1RM/L/XvVkmL3mCNSe6a+Px3zDhXQ==
+X-Received: by 2002:a05:6512:4021:b0:536:5810:e89 with SMTP id
+ 2adb3069b0e04-5365880b041mr1155129e87.49.1725607356396; 
+ Fri, 06 Sep 2024 00:22:36 -0700 (PDT)
+Received: from fedora.sec.9e.network
+ (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a8a7f7f541csm107748466b.193.2024.09.06.00.22.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 06 Sep 2024 00:22:36 -0700 (PDT)
+From: Patrick Rudolph <patrick.rudolph@9elements.com>
+To: u-boot@lists.denx.de
+Cc: sjg@chromium.org, bmeng.cn@gmail.com, trini@konsulko.com, sr@denx.de,
+ pbrobinson@gmail.com, mbrugger@suse.com, maximilian.brune@9elements.com,
+ Patrick Rudolph <patrick.rudolph@9elements.com>
+Subject: [PATCH v2 00/28] Implement ACPI on aarch64
+Date: Fri,  6 Sep 2024 09:22:02 +0200
+Message-ID: <20240906072231.2531491-1-patrick.rudolph@9elements.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-References: <20240901222259.456932-1-sjg@chromium.org>
- <20240901222259.456932-3-sjg@chromium.org>
-In-Reply-To: <20240901222259.456932-3-sjg@chromium.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 6 Sep 2024 10:12:44 +0300
-Message-ID: <CAC_iWjLwbeU2vO5-BdYz8gbpTH4Zq=7W_JeUVVURCnMtPg8DWg@mail.gmail.com>
-Subject: Re: [PATCH v3 2/3] efi: Allow use of malloc() for the EFI pool
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Eugene Uriev <eugeneuriev@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Richard Weinberger <richard@nod.at>, Sean Anderson <seanga2@gmail.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,233 +92,225 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Based on the existing work done by Simon Glass this series adds
+support for booting aarch64 devices using ACPI only.
+As first target QEMU SBSA support is added, which relies on ACPI
+only to boot an OS. As secondary target the Raspberry Pi4 was used,
+which is broadly available and allows easy testing of the proposed
+solution.
 
-Apologies for the late reply, I was attending a conference.
+The series is split into ACPI cleanups and code movements, adding
+Arm specific ACPI tables and finally SoC and mainboard related
+changes to boot a Linux on the QEMU SBSA and RPi4. Currently only the
+mandatory ACPI tables are supported, allowing to boot into Linux
+without errors.
 
-On Mon, 2 Sept 2024 at 01:23, Simon Glass <sjg@chromium.org> wrote:
->
-> This API call is intended for allocating small amounts of memory,
-> similar to malloc(). The current implementation rounds up to whole pages
-> which can waste large amounts of memory. It also implements its own
-> malloc()-style header on each block.
->
-> For certain allocations (those of type EFI_BOOT_SERVICES_DATA) we can
-> use U-Boot's built-in malloc() instead, at least until the app starts.
-> This avoids poluting the memory space with blocks of data which may
-> interfere with boot scripts, etc.
->
-> Once the app has started, there is no advantage to using malloc(), since
-> it doesn't matter what memory is used: everything is under control of
-> the EFI subsystem. Also, using malloc() after the app starts might
-> result in running of memory, since U-Boot's malloc() space is typically
-> quite small.
->
-> In fact, malloc() is already used for most EFI-related allocations, so
-> the impact of this change is fairly small.
->
-> One side effect is that this seems to be showing up some bugs in the
-> EFI code, since the malloc() pool becomes corrupted with some tests.
-> This has likely crept in due to the very large gaps between allocations
-> (around 4KB), which provides a lot of leeway when the allocation size is
-> too small. Work around this by increasing the size for now, until these
-> (presumed) bugs are located.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->
-> (no changes since v1)
->
->  common/dlmalloc.c            |   7 +++
->  include/efi_loader.h         |  18 ++++++
->  include/malloc.h             |   7 +++
->  lib/efi_loader/efi_bootbin.c |   2 +
->  lib/efi_loader/efi_memory.c  | 110 ++++++++++++++++++++++++++---------
->  5 files changed, 117 insertions(+), 27 deletions(-)
->
-> diff --git a/common/dlmalloc.c b/common/dlmalloc.c
-> index 1ac7ce3f43c..48e9f3515f7 100644
-> --- a/common/dlmalloc.c
-> +++ b/common/dlmalloc.c
-> @@ -613,6 +613,13 @@ void mem_malloc_init(ulong start, ulong size)
->  #endif
->  }
->
-> +bool malloc_check_in_range(void *ptr)
-> +{
-> +       ulong val = (ulong)ptr;
-> +
-> +       return val >= mem_malloc_start && val < mem_malloc_end;
-> +}
-> +
->  /* field-extraction macros */
->
->  #define first(b) ((b)->fd)
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index 38971d01442..d07bc06bad4 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -805,6 +805,24 @@ int efi_disk_probe(void *ctx, struct event *event);
->  int efi_disk_remove(void *ctx, struct event *event);
->  /* Called by board init to initialize the EFI memory map */
->  int efi_memory_init(void);
-> +
-> +/**
-> + * enum efi_alloc_flags - controls EFI memory allocation
-> + *
-> + * @EFIAF_USE_MALLOC: Use malloc() pool for pool allocations of type
-> + *     EFI_BOOT_SERVICES_DATA, otherwise use page allocation
-> + */
-> +enum efi_alloc_flags {
-> +       EFIAF_USE_MALLOC        = BIT(0),
-> +};
+The QEMU SBSA support is feature complete and provides the same
+functionality as the EDK2 implementation.
 
-Why do we need to handle cases differently? IOW can't all EFI
-allocations that need a pool gi via malloc?
+The changes were tested on real hardware as well on QEMU v9.0:
 
-[...]
+qemu-system-aarch64 -machine sbsa-ref -nographic -cpu cortex-a57 \
+                    -pflash secure-world.rom \
+                    -pflash unsecure-world.rom
 
-> @@ -24,6 +24,14 @@ DECLARE_GLOBAL_DATA_PTR;
->  /* Magic number identifying memory allocated from pool */
->  #define EFI_ALLOC_POOL_MAGIC 0x1fe67ddf6491caa2
->
-> +/* Flags controlling EFI memory-allocation - see enum efi_alloc_flags */
-> +static int alloc_flags;
-> +
-> +void efi_set_alloc(int flags)
-> +{
-> +       alloc_flags = flags;
-> +}
-> +
->  efi_uintn_t efi_memory_map_key;
->
->  struct efi_mem_list {
-> @@ -57,8 +65,12 @@ void *efi_bounce_buffer;
->   * The checksum calculated in function checksum() is used in FreePool() to avoid
->   * freeing memory not allocated by AllocatePool() and duplicate freeing.
->   *
-> - * EFI requires 8 byte alignment for pool allocations, so we can
-> - * prepend each allocation with these header fields.
-> + * EFI requires 8-byte alignment for pool allocations, so we can prepend each
-> + * allocation with these header fields.
-> + *
-> + * Note that before the EFI app is booted, EFI_BOOT_SERVICES_DATA allocations
-> + * are served using malloc(), bypassing this struct. This helps to avoid memory
-> + * fragmentation, since efi_allocate_pages() uses any pages it likes.
->   */
->  struct efi_pool_allocation {
->         u64 num_pages;
-> @@ -631,18 +643,19 @@ void *efi_alloc_aligned_pages(u64 len, int memory_type, size_t align)
->  /**
->   * efi_allocate_pool - allocate memory from pool
->   *
-> + * This uses malloc() for EFI_BOOT_SERVICES_DATA allocations if EFIAF_USE_MALLOC
-> + * is enabled
-> + *
->   * @pool_type: type of the pool from which memory is to be allocated
->   * @size:      number of bytes to be allocated
->   * @buffer:    allocated memory
->   * Return:     status code
->   */
-> -efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size, void **buffer)
-> +efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size,
-> +                              void **buffer)
->  {
->         efi_status_t r;
->         u64 addr;
-> -       struct efi_pool_allocation *alloc;
-> -       u64 num_pages = efi_size_in_pages(size +
-> -                                         sizeof(struct efi_pool_allocation));
->
->         if (!buffer)
->                 return EFI_INVALID_PARAMETER;
-> @@ -652,13 +665,43 @@ efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size,
->                 return EFI_SUCCESS;
->         }
->
-> -       r = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, pool_type, num_pages,
-> -                              &addr);
-> -       if (r == EFI_SUCCESS) {
-> -               alloc = (struct efi_pool_allocation *)(uintptr_t)addr;
-> -               alloc->num_pages = num_pages;
-> -               alloc->checksum = checksum(alloc);
-> -               *buffer = alloc->data;
-> +       if ((alloc_flags & EFIAF_USE_MALLOC) &&
-> +           pool_type == EFI_BOOT_SERVICES_DATA) {
-> +               void *ptr;
-> +
-> +               /*
-> +                * Some tests crash on qemu_arm etc. if the correct size is
-> +                * allocated.
-> +                * Adding 0x10 seems to fix test_efi_selftest_device_tree
-> +                * Increasing it to 0x20 seems to fix test_efi_selftest_base
-> +                * except * for riscv64 (in CI only). But 0x100 fixes CI too.
-> +                *
-> +                * This workaround can be dropped once these problems are
-> +                * resolved
-> +                */
-> +               ptr = memalign(8, size + 0x100);
+qemu-system-aarch64 -machine raspi4b -kernel u-boot.bin -cpu cortex-a72 \
+-smp 4 -m 2G -drive file=raspbian.img,format=raw,index=0 \
+-dtb bcm2711-rpi-4-b.dtb -nographic
 
-I don't think the explanation is enough here. On top of that adding
-random values to fix the problem doesn't sound right. Can we figure
-out why?
+Please note that the current implementation still requires a DTB to be
+provided to U-Boot and that the DTB is used within U-Boot to load drivers,
+to disable/enable certain hardware blocks in ACPI. The DTB is not passed
+to the OS when using the bootefi cmd.
 
-> +               if (!ptr)
-> +                       return EFI_OUT_OF_RESOURCES;
-> +
-> +               *buffer = ptr;
-> +               r = EFI_SUCCESS;
-> +               log_debug("EFI pool: malloc(%zx) = %p\n", size, ptr);
+Tested against FWTS V24.03.00.
 
-So as I commented above, I think this is papering over whatever
-problem you are seeing. If you want to move the pool to use malloc()
-that's fine, but *all* of the pool allocations should use it. Not just
-boot services because its easier to retrofit it on the current code.
+Known issues:
+- The QEMU rpi4 support is currently limited as it doesn't emulate PCI,
+  USB or ethernet devices!
+- The SMP bringup doesn't work on real hardware, but works in QEMU.
+- PCI on RPI4 isn't working on real hardware since the pcie_brcmstb
+  Linux kernel module doesn't support ACPI yet.
 
-> +       } else {
-> +               u64 num_pages = efi_size_in_pages(size +
-> +                                       sizeof(struct efi_pool_allocation));
-> +
-> +               r = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, pool_type,
-> +                                      num_pages, &addr);
-> +               if (r == EFI_SUCCESS) {
-> +                       struct efi_pool_allocation *alloc;
-> +
-> +                       alloc = (struct efi_pool_allocation *)(uintptr_t)addr;
-> +                       alloc->num_pages = num_pages;
-> +                       alloc->checksum = checksum(alloc);
-> +                       *buffer = alloc->data;
-> +                       log_debug("EFI pool: pages alloc(%zx) type %d = %p\n",
-> +                                 size, pool_type, *buffer);
-> +               }
->         }
->
->         return r;
-> @@ -686,27 +729,37 @@ void *efi_alloc(size_t size)
->  efi_status_t efi_free_pool(void *buffer)
->  {
->         efi_status_t ret;
-> -       struct efi_pool_allocation *alloc;
->
->         if (!buffer)
->                 return EFI_INVALID_PARAMETER;
->
-> -       ret = efi_check_allocated((uintptr_t)buffer, true);
-> -       if (ret != EFI_SUCCESS)
-> -               return ret;
-> +       if (malloc_check_in_range(buffer)) {
-> +               log_debug("EFI pool: free(%p)\n", buffer);
-> +               free(buffer);
-> +               ret = EFI_SUCCESS;
-> +       } else {
-> +               struct efi_pool_allocation *alloc;
->
-> -       alloc = container_of(buffer, struct efi_pool_allocation, data);
-> +               ret = efi_check_allocated((uintptr_t)buffer, true);
-> +               if (ret != EFI_SUCCESS)
-> +                       return ret;
->
-[...]
+Maximilian Brune (3):
+  acpi: x86: Move SPCR and DBG2 into common code
+  acpi: x86: Write FADT in common code
+  serial: serial_pl01x: Implement .getinfo() for PL01
 
-Thanks
-/Ilias
+Patrick Rudolph (23):
+  acpi: x86: Move MADT to common code
+  acpi: Fix typo
+  acpi: Add define for GTDT
+  arm: acpi: Add generic ACPI methods
+  acpi: Add fill_madt to acpi_ops
+  acpi: acpi_table: Bump revisions
+  acpi: Add ACPITAB for PPTT and GTDT
+  acpi: acpi_table: Add IORT support
+  acpi: Move function prototype
+  acpi: acpi_table: Support ACPI 2.0 platforms
+  efi_loader: Install ACPI tables
+  acpi: Add processor device
+  drivers: usb: Add generic XHCI
+  drivers: ata: Rename ahci_mvebu
+  drivers/cpu: Add generic armv8 cpu driver
+  common: Enable BLOBLIST_TABLES on arm
+  board: emulation: Add QEMU sbsa support
+  arm: mach-bcm283x: Map the ARM local MMIO as well
+  arm: bcm283x: Generate ACPI tables
+  arm: cpu: Add ACPI parking protocol support
+  arm: mach-bcm283x: Add ARMV8_MULTIENTRY support
+  arm: mach-bcm283x: Enable ARMV8_MULTIENTRY
+  configs: Add RPI4 ACPI defconfig
+
+Simon Glass (2):
+  arm: mach-bcm283x: Bring in some header files from tianocore
+  board: raspberrypi: Add ASL files from tianocore
+
+ MAINTAINERS                                   |   2 +-
+ arch/arm/Kconfig                              |   2 +
+ arch/arm/cpu/armv8/Makefile                   |   1 +
+ arch/arm/cpu/armv8/acpi_park_v8.S             | 107 ++++
+ arch/arm/cpu/armv8/start.S                    |   4 +
+ arch/arm/dts/qemu-sbsa.dts                    |  49 ++
+ arch/arm/include/asm/acpi_table.h             | 160 +++++
+ arch/arm/include/asm/arch-qemu-sbsa/boot0.h   |  33 +
+ arch/arm/lib/Makefile                         |   1 +
+ arch/arm/lib/acpi_table.c                     | 237 +++++++
+ arch/arm/mach-bcm283x/Kconfig                 |   4 +
+ arch/arm/mach-bcm283x/Makefile                |   4 +
+ arch/arm/mach-bcm283x/bcm2711_acpi.c          | 149 +++++
+ .../mach-bcm283x/include/mach/acpi/bcm2711.h  | 152 +++++
+ .../mach-bcm283x/include/mach/acpi/bcm2836.h  | 127 ++++
+ .../include/mach/acpi/bcm2836_gpio.h          |  19 +
+ .../include/mach/acpi/bcm2836_gpu.h           |  47 ++
+ .../include/mach/acpi/bcm2836_pwm.h           |  33 +
+ .../include/mach/acpi/bcm2836_sdhost.h        |  18 +
+ .../include/mach/acpi/bcm2836_sdio.h          |  21 +
+ arch/arm/mach-bcm283x/init.c                  |  10 +-
+ arch/arm/mach-qemu/Kconfig                    |  36 +-
+ arch/sandbox/lib/Makefile                     |   9 +-
+ arch/sandbox/lib/acpi_table.c                 |   7 +
+ arch/x86/cpu/apollolake/acpi.c                |  20 +-
+ arch/x86/cpu/baytrail/acpi.c                  |  17 +-
+ arch/x86/cpu/intel_common/acpi.c              |  20 +-
+ arch/x86/cpu/quark/acpi.c                     |  19 +-
+ arch/x86/cpu/tangier/acpi.c                   |  31 +-
+ arch/x86/include/asm/acpi_table.h             |  28 +-
+ arch/x86/lib/acpi_table.c                     | 243 +-------
+ board/emulation/qemu-arm/MAINTAINERS          |   2 +
+ board/emulation/qemu-sbsa/Kconfig             |  56 ++
+ board/emulation/qemu-sbsa/Makefile            |   8 +
+ board/emulation/qemu-sbsa/acpi.c              | 244 ++++++++
+ board/emulation/qemu-sbsa/dsdt.asl            | 483 +++++++++++++++
+ board/emulation/qemu-sbsa/lowlevel_init.S     |  22 +
+ board/emulation/qemu-sbsa/qemu-sbsa.c         | 422 +++++++++++++
+ board/emulation/qemu-sbsa/qemu-sbsa.env       |  14 +
+ board/emulation/qemu-sbsa/qemu-sbsa.h         |  38 ++
+ board/emulation/qemu-sbsa/smc.c               |  72 +++
+ board/raspberrypi/rpi/.gitignore              |   3 +
+ board/raspberrypi/rpi/Makefile                |   2 +
+ board/raspberrypi/rpi/acpitables.h            |  90 +++
+ board/raspberrypi/rpi/dsdt.asl                | 290 +++++++++
+ board/raspberrypi/rpi/emmc.asl                | 136 +++++
+ board/raspberrypi/rpi/gpudevs.asl             | 372 +++++++++++
+ board/raspberrypi/rpi/pci.asl                 | 177 ++++++
+ board/raspberrypi/rpi/pep.asl                 |  90 +++
+ board/raspberrypi/rpi/rhpx.asl                | 195 ++++++
+ board/raspberrypi/rpi/rpi.c                   | 183 ++++++
+ board/raspberrypi/rpi/sdhc.asl                | 111 ++++
+ board/raspberrypi/rpi/uart.asl                | 208 +++++++
+ boot/bootflow.c                               |   8 +-
+ common/Kconfig                                |   1 +
+ configs/clearfog_defconfig                    |   2 +-
+ configs/clearfog_gt_8k_defconfig              |   2 +-
+ configs/clearfog_sata_defconfig               |   2 +-
+ configs/clearfog_spi_defconfig                |   2 +-
+ configs/db-88f6820-gp_defconfig               |   2 +-
+ configs/ds116_defconfig                       |   2 +-
+ configs/helios4_defconfig                     |   2 +-
+ configs/mvebu_crb_cn9130_defconfig            |   2 +-
+ configs/mvebu_db-88f3720_defconfig            |   2 +-
+ configs/mvebu_db_armada8k_defconfig           |   2 +-
+ configs/mvebu_db_cn9130_defconfig             |   2 +-
+ configs/mvebu_espressobin-88f3720_defconfig   |   2 +-
+ .../mvebu_espressobin_ultra-88f3720_defconfig |   2 +-
+ configs/mvebu_mcbin-88f8040_defconfig         |   2 +-
+ configs/mvebu_puzzle-m801-88f8040_defconfig   |   2 +-
+ configs/n2350_defconfig                       |   2 +-
+ configs/octeon_nic23_defconfig                |   2 +-
+ configs/qemu-arm-sbsa_defconfig               |  10 +
+ configs/rpi_4_acpi_defconfig                  |  72 +++
+ configs/turris_omnia_defconfig                |   2 +-
+ doc/board/emulation/index.rst                 |   1 +
+ doc/board/emulation/qemu-sbsa.rst             |  98 +++
+ doc/develop/driver-model/virtio.rst           |   1 +
+ drivers/ata/Kconfig                           |  12 +-
+ drivers/ata/Makefile                          |   2 +-
+ drivers/ata/{ahci_mvebu.c => ahci_generic.c}  |  17 +-
+ drivers/core/acpi.c                           |  16 +
+ drivers/cpu/Kconfig                           |   6 +
+ drivers/cpu/Makefile                          |   3 +
+ drivers/cpu/armv8_cpu.c                       |  90 +++
+ drivers/cpu/bcm283x_cpu.c                     | 194 ++++++
+ drivers/pci/pcie_brcmstb.c                    | 101 +--
+ drivers/serial/serial_pl01x.c                 |  24 +
+ drivers/usb/host/Kconfig                      |   8 +
+ drivers/usb/host/Makefile                     |   1 +
+ drivers/usb/host/xhci-generic.c               |  88 +++
+ include/acpi/acpi_table.h                     | 324 +++++++++-
+ include/acpi/acpigen.h                        |  12 +
+ include/bloblist.h                            |   1 +
+ include/configs/qemu-sbsa.h                   |  97 +++
+ include/dm/acpi.h                             |  26 +
+ include/serial.h                              |   1 +
+ lib/Kconfig                                   |  30 +-
+ lib/acpi/acpi_table.c                         | 577 ++++++++++++++++--
+ lib/acpi/acpigen.c                            |  11 +
+ lib/efi_loader/efi_acpi.c                     |  57 +-
+ test/dm/acpi.c                                |  42 ++
+ test/py/tests/test_event_dump.py              |   1 +
+ 103 files changed, 6262 insertions(+), 534 deletions(-)
+ create mode 100644 arch/arm/cpu/armv8/acpi_park_v8.S
+ create mode 100644 arch/arm/dts/qemu-sbsa.dts
+ create mode 100644 arch/arm/include/asm/arch-qemu-sbsa/boot0.h
+ create mode 100644 arch/arm/lib/acpi_table.c
+ create mode 100644 arch/arm/mach-bcm283x/bcm2711_acpi.c
+ create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2711.h
+ create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836.h
+ create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_gpio.h
+ create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_gpu.h
+ create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_pwm.h
+ create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_sdhost.h
+ create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_sdio.h
+ create mode 100644 arch/sandbox/lib/acpi_table.c
+ create mode 100644 board/emulation/qemu-sbsa/Kconfig
+ create mode 100644 board/emulation/qemu-sbsa/Makefile
+ create mode 100644 board/emulation/qemu-sbsa/acpi.c
+ create mode 100644 board/emulation/qemu-sbsa/dsdt.asl
+ create mode 100644 board/emulation/qemu-sbsa/lowlevel_init.S
+ create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.c
+ create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.env
+ create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.h
+ create mode 100644 board/emulation/qemu-sbsa/smc.c
+ create mode 100644 board/raspberrypi/rpi/.gitignore
+ create mode 100644 board/raspberrypi/rpi/acpitables.h
+ create mode 100644 board/raspberrypi/rpi/dsdt.asl
+ create mode 100644 board/raspberrypi/rpi/emmc.asl
+ create mode 100644 board/raspberrypi/rpi/gpudevs.asl
+ create mode 100644 board/raspberrypi/rpi/pci.asl
+ create mode 100644 board/raspberrypi/rpi/pep.asl
+ create mode 100644 board/raspberrypi/rpi/rhpx.asl
+ create mode 100644 board/raspberrypi/rpi/sdhc.asl
+ create mode 100644 board/raspberrypi/rpi/uart.asl
+ create mode 100644 configs/qemu-arm-sbsa_defconfig
+ create mode 100644 configs/rpi_4_acpi_defconfig
+ create mode 100644 doc/board/emulation/qemu-sbsa.rst
+ rename drivers/ata/{ahci_mvebu.c => ahci_generic.c} (71%)
+ create mode 100644 drivers/cpu/armv8_cpu.c
+ create mode 100644 drivers/cpu/bcm283x_cpu.c
+ create mode 100644 drivers/usb/host/xhci-generic.c
+ create mode 100644 include/configs/qemu-sbsa.h
+
+-- 
+2.45.2
+
