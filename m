@@ -4,98 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD74BCE7AE0
-	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 07:37:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFD74CE7AE6
+	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 07:55:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A52C88CFA;
-	Fri,  6 Sep 2024 09:37:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1826A88D06;
+	Fri,  6 Sep 2024 09:55:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bfc83u5G";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 76A5488CF5; Fri,  6 Sep 2024 09:37:01 +0200 (CEST)
-Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
- [IPv6:2607:f8b0:4864:20::62f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1725609301;
+	bh=PYUPOEhqb24JDnGyrxmDaSRUym7823aAthoOj8OfRJY=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=jVDS/sOQjcOhxIRa2tvw96/xqvoT0LTqzFIciS4OLL/NkpYBgaq0iihMdlO0guhpv
+	 ZvlJt+P0YXF/2S7354bRPLX5hWE69YJ6ElpYhUsYyYHJgY3JAp5RpysKmrMnNWnLuO
+	 0ydNRPC92stjV7grN17wKkn+HV6hON2Fmtkpoo704i6cztTWUhdfTFEJJgcBU08MbQ
+	 RIoxn3l4hZopZ3ccgEiU9JnwfCPdPCMTVrGlblQZL8/VrNpN8CESpbu96Pmd7YTByZ
+	 XF3fNAFvuJpbM/4Fahl2kJyMVAfZ2VW9sT2rRRYPaE1MFs/ecxfry1IJKtLpp4SADz
+	 wWbVm7gO13c9w==
+Received: from wsk (85-222-111-42.dynamic.chello.pl [85.222.111.42])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25E7B88CEB
- for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 09:36:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-2054e22ce3fso16980825ad.2
- for <u-boot@lists.denx.de>; Fri, 06 Sep 2024 00:36:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725608218; x=1726213018; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=uWHfd/yMC/YzmwkXM8qj3Tfm9bpHGD6lKp9DHhgozEU=;
- b=bfc83u5GcN+yyKIebhElLNBZynbmuIvwSh4QO0PexeuYJhHCJ+P+0ijO7PwnSzPR1Q
- DZXasI7LPIEX6pIbaxTNSeYfRBOsJd9z69fCIt2IqA6QafLlsiRNZXygO+LLUrLn2UyM
- LiAZyXtQ+lKBx1Ux1thQhReOh+OgX7/Znhss8VS9v69BT0qAtcN6GGmBh4W4JJ3YDtGj
- 8pwNbyrUkupoTVoL48U7JR+vpktdfO2rTxsG57XU8wfCZY14r2p39nGfEOl1nthKAQzk
- TOaN0ByIA8vtZ12WXlcSk3kTXHiAmG/D0T1nCaos0i8t87f0gY4t5JQtGQQ5db35z9wG
- qBnQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725608218; x=1726213018;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=uWHfd/yMC/YzmwkXM8qj3Tfm9bpHGD6lKp9DHhgozEU=;
- b=eKIKPnpNwwu74xYgUd15bFK4TewQXapbqPdU5533/ednEM/6veuCa27xRNK7A8ofsG
- 3Yor0PtXGzR3p8CySiIvRIbC61FU+0cJSLHsjwlw089KH7fx9dmMlfsng0yaxCCoGhSk
- 4bYUjPpeoiA4VySdd4q6+rc1S1Qv1O0A/n8hACCHOCXMlxjazdoZHPQg+9PSQaYkGPse
- 3ksmpG2NwOfRA/p8w5tZgRwBjywOHtdsvgSd+YGZAwRtYkiUs1ipEhypbfulO1I/3JKl
- UlLp77n2IKBUuur/ATtHthtDYWec6gQFoMWT1Gp5CrFvbUFQD8CVPS9RuKP67fJdrDYd
- 8xvg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVig6xMJ9NjaZUPrKhJYglp0p1aUlVU8JPrsTsleCNB/wKKEphBpG4G6XdoZH8AKRrDP12XmK0=@lists.denx.de
-X-Gm-Message-State: AOJu0YwsO/eL67oHkGXAgapGo6XQ+4Be/2s+ozY/kSafCi87xrNUipTs
- vkBdiXubCa4IOLje0yufUJBj3ALTirhf4iPVPWkfpKwe86BEkkU//lYY9eNqiHvjdkOT2TTuxIT
- rlbF8Ca553CmDXeXSpiCBIqUVG35w4tEB7sK7Ng==
-X-Google-Smtp-Source: AGHT+IHyC6+IkHnU5OmxKZYyRlxokzcff7YjTZ3Bb6subUfgFeO746ExvDh70aaE9fyKW/+bB8mmQm9t4WpMMK96FGg=
-X-Received: by 2002:a17:902:e550:b0:1fd:9a23:90cc with SMTP id
- d9443c01a7336-206f052e09bmr18646735ad.26.1725608217430; Fri, 06 Sep 2024
- 00:36:57 -0700 (PDT)
+ (Authenticated sender: lukma@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 0E45A88D17;
+ Fri,  6 Sep 2024 09:55:00 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1725609300;
+ bh=PYUPOEhqb24JDnGyrxmDaSRUym7823aAthoOj8OfRJY=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=dKexT5TOXm4LLBBRDsTPCzdEinINmeDnytOZo72axKFZgh6nzB51eqVpojsqZRvwa
+ J+ZsCVaqbPAUGFuZ5CdE2ulZpt+TIII3WRNRwFkXpS38azgDR6+azouBdhmYQQ4H6v
+ +oN0ISnAF91QsjoN3v+XrvIRayxJDsJLE1daBlDGIZnToT23Fm3pvzUeaI1Hp2YvTV
+ E5WTj85cdLTGWvIXoCjueraMwlmxCiqSYTSQG5g8q5tNADyRfrjIqtQghLA19YeCSU
+ K8gjDfiPAqMjNoDWrOYtT7YMR7YuBKBm/gn3WPvcwSLOwzhIsABnqpiGmLGADxtgm3
+ nyavZKAW1NJ1w==
+Date: Fri, 6 Sep 2024 09:54:59 +0200
+From: Lukasz Majewski <lukma@denx.de>
+To: Simon Glass <sjg@chromium.org>
+Cc: Adam Ford <aford173@gmail.com>, Fabio Estevam <festevam@gmail.com>,
+ Mamta Shukla <mamta.shukla@leica-geosystems.com>, u-boot@lists.denx.de,
+ Marek Vasut <marex@denx.de>
+Subject: Re: [Binman] Question regarding SPL symbol offsets generation
+Message-ID: <20240906095459.5565fe29@wsk>
+In-Reply-To: <CAFLszTh65OkyXnG3L7XTJFK69EYdj4DZwYGxizu4877n-mCw-w@mail.gmail.com>
+References: <20240808110654.4215b129@wsk>
+ <CAOMZO5A74MigLO0qkeXi04=7M70jaiEgk9zdFBjUV74vuZDP0g@mail.gmail.com>
+ <20240815221421.61f64a17@wsk>
+ <CAOMZO5B-fkLQsQx205mxXQdmk3ij6Hxx4ErM84DtEtBg3mYa7Q@mail.gmail.com>
+ <CAFLszTggpR9aaDAH_Mx_zDNnKAb7r_O+sdyyVVG_xULqkrWnzg@mail.gmail.com>
+ <20240828100452.2143873d@wsk>
+ <CAHCN7xLY4FxB4HZLcE0pEZsx7V=dhVokh2Wcrn2Jjf+B+SLCJg@mail.gmail.com>
+ <20240905155402.486a7110@wsk>
+ <CAFLszTh65OkyXnG3L7XTJFK69EYdj4DZwYGxizu4877n-mCw-w@mail.gmail.com>
+Organization: denx.de
+X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-References: <20240816214436.1877263-1-raymond.mao@linaro.org>
- <20240816214436.1877263-8-raymond.mao@linaro.org>
- <CAFLszTiWFD2dpb6z_5cibDe0aOpuPYug-mrC-ZiZ7v+SEDFhdQ@mail.gmail.com>
- <CAC_iWjJpfrK+-o_0x8ZJbWxhG4O-tprf1-oQvWmLZWOf=5qZMA@mail.gmail.com>
- <CAEfUkUKD4CC4YkU58zehmVdkUA9UwTGk3=Prpw=JHMNMYwHcHA@mail.gmail.com>
-In-Reply-To: <CAEfUkUKD4CC4YkU58zehmVdkUA9UwTGk3=Prpw=JHMNMYwHcHA@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 6 Sep 2024 10:36:21 +0300
-Message-ID: <CAC_iWjJbTVoV6vjGfRkYn5jOnfsmcVSseeCvN=stA4fmbZV25Q@mail.gmail.com>
-Subject: Re: [PATCH v6 07/28] hash: integrate hash on mbedtls
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- manish.pandey2@arm.com, 
- Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
- Mario Six <mario.six@gdsys.cc>, 
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Michal Simek <michal.simek@amd.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>, 
- Andrew Davis <afd@ti.com>, Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Sumit Garg <sumit.garg@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>, 
- "Leon M. Busch-George" <leon@georgemail.eu>,
- Igor Opaniuk <igor.opaniuk@gmail.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Alexander Gendin <agendin@matrox.com>, Jonathan Humphreys <j-humphreys@ti.com>,
- Eddie James <eajames@linux.ibm.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; boundary="Sig_/oQDDaNhmB/zxOVq.erEe3.K";
+ protocol="application/pgp-signature"; micalg=pgp-sha512
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,65 +78,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raymond,
+--Sig_/oQDDaNhmB/zxOVq.erEe3.K
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, 3 Sept 2024 at 18:54, Raymond Mao <raymond.mao@linaro.org> wrote:
->
-> Hi Ilias,
->
-> On Fri, 30 Aug 2024 at 05:37, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
->>
->> Hi Simon,
->>
->> On Thu, 29 Aug 2024 at 18:01, Simon Glass <sjg@chromium.org> wrote:
->> >
->> > Hi Raymond,
->> >
->> > On Fri, 16 Aug 2024 at 15:47, Raymond Mao <raymond.mao@linaro.org> wrote:
->> > >
->> > > Integrate common/hash.c on the hash shim layer so that hash APIs
->> > > from mbedtls can be leveraged by boot/image and efi_loader.
->> > >
->> > > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
->> > > ---
->> > > Changes in v2
->> > > - Use the original head files instead of creating new ones.
->> > > Changes in v3
->> > > - Add handle checkers for malloc.
->> > > Changes in v4
->> > > - None.
->> > > Changes in v5
->> > > - Add __maybe_unused to solve linker errors in some platforms.
->> > > - replace malloc with calloc.
->> > > Changes in v6
->> > > - None.
->> > >
->> > >  common/hash.c | 146 ++++++++++++++++++++++++++++++++++++++++++++++++++
->> > >  1 file changed, 146 insertions(+)
->> >
->> > I am not seeing the benefit of replacing U-Boot's hashing algorithms.
->> > They work well and don't change. Also it seems to be making the code a
->> > lot uglier, with an uncertain timeline for clean-up.
->>
->> A lot uglier where? It adds a few wrappers that fit into the current
->> design and callbacks.
->> I don't think what you are asking is possible. To do assymetric
->> crypto, signatures  etc -- and in the future add TLS support in wget
->> mbedTLS relies on its internal hashing functions for the cipher suites
->> it supports. So what you are asking would just make the code even
->> larger. Raymond can you please double check?
->>
-> Digest is the basic library of MbedTLS, I don't believe we can disable it
-> but only use the ones for certificates, unless MbedTLS makes changes
-> to allow hooking external digest libraries -  as I mentioned in a previous reply,
-> I don't think this is what MbedTLS wants.
+Hi Simon,
 
-There's a config option on config.h we could use to override shaXXX,
-but given that mbedTLS can be used to add more hashing alogorithms, I
-dont think we should do that
+> Hi Lukasz,
+>=20
+> On Thu, 5 Sept 2024 at 07:54, Lukasz Majewski <lukma@denx.de> wrote:
+> >
+> > Hi Adam,
+> > =20
+> > > On Wed, Aug 28, 2024 at 3:04=E2=80=AFAM Lukasz Majewski <lukma@denx.d=
+e>
+> > > wrote: =20
+> > > >
+> > > > Hi Simon,
+> > > > =20
+> > > > > Hi,
+> > > > >
+> > > > > On Tue, 27 Aug 2024 at 12:47, Fabio Estevam
+> > > > > <festevam@gmail.com> wrote: =20
+> > > > > >
+> > > > > > Hi Lukasz,
+> > > > > >
+> > > > > > On Thu, Aug 15, 2024 at 5:14=E2=80=AFPM Lukasz Majewski
+> > > > > > <lukma@denx.de> wrote: =20
+> > > > > > > Unfortunately not - this change is only for properly
+> > > > > > > setting start address of the u-boot.
+> > > > > > >
+> > > > > > > The _real_ problem here is the symbol placement generated
+> > > > > > > by binman when we try to define the image as a single one.
+> > > > > > >
+> > > > > > > Moreover, this change follows other boards with imx8mm
+> > > > > > > processor - ./configs/imx8mm_beacon_fspi_defconfig to be
+> > > > > > > specific.
+> > > > > > >
+> > > > > > > The "fix" (for which I'd been now probably opt) for this
+> > > > > > > issue would be to generate two images with binman - one
+> > > > > > > for u-boot-spl-ddr.bin and the final flash.bin with the
+> > > > > > > former one included (as it was before SHA1:
+> > > > > > > 37e50627efacd8dae18b564e9d8886a033e181bc) =20
+> > > > > >
+> > > > > > Is QSPI boot broken on i.MX8MM?
+> > > > > >
+> > > > > > I am adding Adam and Mamta who have tested QSPI booting on
+> > > > > > imx8mm_beacon and imx8mm_evk, respectively. =20
+> > > > >
+> > > > > Note also that I sent a series[1] which allows the
+> > > > > symbols-base to be adjusted, if that helps. =20
+> > > >
+> > > > I've seen them - but not yet tested.
+> > > >
+> > > > Thanks Simon for the patch series. =20
+> > >
+> > > Is it still broken with this patch series?  I have been traveling
+> > > and haven't had much time to test. =20
+> >
+> > Yes, I can confirm that it is still broken.
+> >
+> > I've applied:
+> > https://patchwork.ozlabs.org/project/uboot/cover/20240826191143.426387-=
+1-sjg@chromium.org/
+> >
+> > on top of mainline:
+> > SHA1: 1630ff26cc960439b5949b80cfc604a2c8aa47dd
+> >
+> > Adding symbols-base =3D <0>; to imx8mm-u-boot.dtsi did not help. =20
+>=20
+> Can you please point me to the tree?
 
-Cheers
-/Ilias
->
+https://github.com/lmajewski/u-boot/commits/imx8mm-test-qspi-boot-binman-pa=
+tches
+
+> I suspect that the symbols-base
+> is already 0, so setting it to 0 has no effect. I'm not sure though,
+>=20
+
+Ach... I see.
+
+Please correct me if I'm wrong, but isn't the "symbols-base" an
+absolute address?
+
+This is my impression from the descripion.
+
+However, in my case - I would need the "relative" modification - please
+see the required "hack":
+https://github.com/lmajewski/u-boot/commit/07c0057fcfd242fa791767aaf0ac752d=
+3d0545f7
+
+
 > Regards,
-> Raymond
+> Simon
+
+
+Best regards,
+
+Lukasz Majewski
+
+--
+
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
+
+--Sig_/oQDDaNhmB/zxOVq.erEe3.K
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAmbatVMACgkQAR8vZIA0
+zr2QQgf+Ir+ZfGWgP867II0mfhJEBVl69p/6/mr1yWTFpeZkoR9Lvvbbt0Lm5LHV
+5h94to7Mj8Ld+H5pAaZdl/Cs8CCTaDSFgJPOqpt9FKIFdnII55Wk18SWJ7VCJUpU
+QJiaXkGSFjG3Ezrtn4JSTBeU0LdKY3BT0C+8PIeAT2s4LRiGccytCS8VBKHuq/F7
+3cFQBbB3yZJaXR7gYdu0Y7Po9GITe0bmEzxMHjNh8vA9HydsDUYyu41TRDyqlDau
+7vMCamr1st2CP6Q8uYMWwBis4CiFV0XIfgM5Kz4i/x5dX0R731BTJn/ksNfsx0KP
+cHOXKMpkrDw4Ryea3/nMw3G+Avrp+g==
+=N9Gk
+-----END PGP SIGNATURE-----
+
+--Sig_/oQDDaNhmB/zxOVq.erEe3.K--
