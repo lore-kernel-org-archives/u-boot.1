@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9D7ECE7AE0
-	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 07:26:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85176CE7AB8
+	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 07:26:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3673388D8E;
+	by phobos.denx.de (Postfix) with ESMTP id 9ADEB88D91;
 	Fri,  6 Sep 2024 09:23:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="cRsdGQaS";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="TdOQyQbA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 568DA88D25; Fri,  6 Sep 2024 09:23:02 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 214C788D25; Fri,  6 Sep 2024 09:23:03 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 581FA88D34
- for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 09:22:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 32A1788D8E
+ for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 09:22:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=9elements.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a83597ce5beso273742666b.1
- for <u-boot@lists.denx.de>; Fri, 06 Sep 2024 00:22:56 -0700 (PDT)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-a8696e9bd24so225285866b.0
+ for <u-boot@lists.denx.de>; Fri, 06 Sep 2024 00:22:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1725607376; x=1726212176; darn=lists.denx.de;
+ d=9elements.com; s=google; t=1725607377; x=1726212177; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7Vk6fuNVZUpuzznznXks1qZHJNDr/B8u+7C+WXHIKeA=;
- b=cRsdGQaSfx9BDF3uf1v4WxWmOiFgyYT1R6upKGwCpmEnNlu2GPA7RQktuW4fLFj6iD
- 1WUzTZBVRg6SmQzoiWOX9sAAnhmewcwwGGdvX3E7SCfgxOJdSBmV78HDrkdQn1gVxiUm
- NKtQDS/JftnPSyb+e/yAzy1IoxuJyA28bzdl0Ns1H3YQecJwzRAsd3lgUQ8f5o/qiKlG
- zX1A1uIoXGCiWCdJib1LQTW2f3k/xlv2eKEN1pvnLngi75rlp+B5puCcNDLG3MKkMfnS
- WerX7nCOLME/FB3LKqO5in6hwoKh8hAyJhX5/vGwOeThb3Wmn6PAVl7ZGKX26o0CvzQe
- GXLg==
+ bh=DWODXll4/PUhxEMho4QuO4kPVFZDQyBCRuEz/s3lSnU=;
+ b=TdOQyQbAARgz1CbB/eI3SKjcvUuZKRApGmZ4Wj9YeIx+CL6werWDAXB7INUy4BfIFn
+ IG8n46sMjTelU0s7fES+1FbYZVolQ7rMoxH5v+kG65dBmrzKHl7GxjVzOs2DNdlBx88A
+ X3LPSpUFQoCqUfBrrVC4vLfSMChFTbeHjsn9sil3ennfL8ICs5jDbfwPdKb9hnY/ykf1
+ Xu3pkj5GNbqqnOSF5siBwmcg5Y/Vogj7LK2GYcDHmWzUYyunQtC5J2uzP/TiA511Sf1G
+ H2mzd1kmaL1AUdaSxpTEF4hjpTM4H6GvCZyxyH9dUdkQK4C9FXkEk3Unt48vMqU1uF17
+ WttQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725607376; x=1726212176;
+ d=1e100.net; s=20230601; t=1725607377; x=1726212177;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7Vk6fuNVZUpuzznznXks1qZHJNDr/B8u+7C+WXHIKeA=;
- b=rvmV+PhvqHqLY6Di05BQarz0HYDBzR50EF6QtQaxbgyZjPPBac7zl81Ae7bsBs/5WW
- kDWHwmow39ig/2dmIIUj90nWq5aHQ4qosu0yOp4FBJDCErLAfAKreC6PNzQO5MyUpiMC
- HTR+SgpgMeJxwTLVIxMjVG8o5GlF8efrTi+LvuuxeBiTce1KbBOl/tl3kRKQ/Pop4cvw
- BH0vPTTKZ2NB2LI41G/WQb6E5t27TWH7rKzRWe73DXSHsHIDzL7v8b/u0fqG/sW3+TTx
- yNSBVU6Qwb/FJQK2GEWSeollX3CQbIiogRck05Vla7bu5yWX9GgYPMcDVai+fbifRwUi
- z/bQ==
-X-Gm-Message-State: AOJu0Yy2fbIAXgOaCtjn8fpGqStrIS8+douN2ohVfSzcu0Cr2rDDv+zz
- AP0IDsNiLIzpxBtdhBD+qL/ngqWaR8lMtif+tTE/u0Nmmc3BMM+xxV36W8bUDk/6DD7waHXCPmZ
- z
-X-Google-Smtp-Source: AGHT+IEo3SER4UqkqtkDGn+ft9MGXhb83yezf0VTo6zWFbPcdrbinNGZS2GtoJwaW+GOUAlDNglgQw==
-X-Received: by 2002:a17:906:730a:b0:a7a:130e:fb6e with SMTP id
- a640c23a62f3a-a8a430914c1mr891257266b.15.1725607375698; 
- Fri, 06 Sep 2024 00:22:55 -0700 (PDT)
+ bh=DWODXll4/PUhxEMho4QuO4kPVFZDQyBCRuEz/s3lSnU=;
+ b=i1AeF8Z/cv6p90dx/Sy9eWJ1bYJkepQ38FM9I1l2m/oqoKUwKfgEEUCTfGLhfSPeC/
+ H4fb6dAF/JA+cDMUuptOoSfUs5+Yx+kYhjkVD4FArrPZP24i1nl+cU0CdtK36oY0sNQP
+ I4xa+Y6kQxVMJVp9k6KalGeu3TzQerx+7JB9ABojFjnXdo5tINa/S25mrBCuGNQXpNw0
+ liHCd/nyJOKsn5QKrg3KHnMk4kABGNMlY3PPGLqEIcf+Z1jB3MA53cSpZUgtqoNYH+VT
+ MUsBte5skUbn3NuGnQO/0qizExG0MSQwkX4Z2B/6ZOlYR3uhqla9bWUpJZT+YMtG8paY
+ tD5g==
+X-Gm-Message-State: AOJu0Yyes+negJ0qR3Q4uW+c41tcnoLqmMpbFiYlXNV9wQ0KOpKl9mWK
+ Ue0YX1A2P4mCCBA6uym8ai3pY49lc5a9IsKJ+WNAqH1dKEVfypvFfSGyoUwSf/1TmxOzZEZPO/d
+ 0
+X-Google-Smtp-Source: AGHT+IGBaHlGgpK2lcWWbvQQQlYKBrRzvNbs+geHKsO76xDFDNjboYOKgus2wv1kD1ftPydU62Cf1A==
+X-Received: by 2002:a17:907:3fa6:b0:a77:cf9d:f495 with SMTP id
+ a640c23a62f3a-a897f9309e2mr2224840766b.40.1725607376610; 
+ Fri, 06 Sep 2024 00:22:56 -0700 (PDT)
 Received: from fedora.sec.9e.network
  (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a8a7f7f541csm107748466b.193.2024.09.06.00.22.54
+ a640c23a62f3a-a8a7f7f541csm107748466b.193.2024.09.06.00.22.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Sep 2024 00:22:55 -0700 (PDT)
+ Fri, 06 Sep 2024 00:22:56 -0700 (PDT)
 From: Patrick Rudolph <patrick.rudolph@9elements.com>
 To: u-boot@lists.denx.de
 Cc: sjg@chromium.org, bmeng.cn@gmail.com, trini@konsulko.com, sr@denx.de,
  pbrobinson@gmail.com, mbrugger@suse.com, maximilian.brune@9elements.com,
  Patrick Rudolph <patrick.rudolph@9elements.com>
-Subject: [PATCH v2 22/28] arm: mach-bcm283x: Bring in some header files from
- tianocore
-Date: Fri,  6 Sep 2024 09:22:24 +0200
-Message-ID: <20240906072231.2531491-23-patrick.rudolph@9elements.com>
+Subject: [PATCH v2 23/28] arm: bcm283x: Generate ACPI tables
+Date: Fri,  6 Sep 2024 09:22:25 +0200
+Message-ID: <20240906072231.2531491-24-patrick.rudolph@9elements.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240906072231.2531491-1-patrick.rudolph@9elements.com>
 References: <20240906072231.2531491-1-patrick.rudolph@9elements.com>
@@ -96,668 +95,203 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Simon Glass <sjg@chromium.org>
+Generate SoC specific ACPI tables for BCM2711:
+- MADT
+- FADT
+- PPTT
+- GTDT
 
-These header files presumably duplicate things already in the U-Boot
-devicetree. For now, bring them in to get the ASL code and ACPI table
-code to compile.
+Board specific tables like DSDT and SSDT are added in a separate patch.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
+When ACPI is enabled for a different SoC compliation will fail by
+design, indicating the required functions that needs to be implemented.
+When ACPI is not enabled the added code does nothing, keeping existing
+behaviour.
+
+TEST: Booted on RPi4 with only ACPI enabled, providing no FDT to the OS.
+
 Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+Cc: Simon Glass <sjg@chromium.org>
 Cc: Matthias Brugger <mbrugger@suse.com>
 Cc: Peter Robinson <pbrobinson@gmail.com>
 Cc: Tom Rini <trini@konsulko.com>
 ---
- .../mach-bcm283x/include/mach/acpi/bcm2711.h  | 152 ++++++++++++++++++
- .../mach-bcm283x/include/mach/acpi/bcm2836.h  | 127 +++++++++++++++
- .../include/mach/acpi/bcm2836_gpio.h          |  19 +++
- .../include/mach/acpi/bcm2836_gpu.h           |  47 ++++++
- .../include/mach/acpi/bcm2836_pwm.h           |  33 ++++
- .../include/mach/acpi/bcm2836_sdhost.h        |  18 +++
- .../include/mach/acpi/bcm2836_sdio.h          |  21 +++
- drivers/pci/pcie_brcmstb.c                    | 101 ++----------
- 8 files changed, 427 insertions(+), 91 deletions(-)
- create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2711.h
- create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836.h
- create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_gpio.h
- create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_gpu.h
- create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_pwm.h
- create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_sdhost.h
- create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_sdio.h
+Changelog v2:
+- Drop duplicated code to generate ACPI tables. Is now part of efi loader.
+---
+ arch/arm/mach-bcm283x/Makefile       |   4 +
+ arch/arm/mach-bcm283x/bcm2711_acpi.c | 149 +++++++++++++++++++++++++++
+ 2 files changed, 153 insertions(+)
+ create mode 100644 arch/arm/mach-bcm283x/bcm2711_acpi.c
 
-diff --git a/arch/arm/mach-bcm283x/include/mach/acpi/bcm2711.h b/arch/arm/mach-bcm283x/include/mach/acpi/bcm2711.h
-new file mode 100644
-index 0000000000..a86875b183
---- /dev/null
-+++ b/arch/arm/mach-bcm283x/include/mach/acpi/bcm2711.h
-@@ -0,0 +1,152 @@
-+/* SPDX-License-Identifier: BSD-2-Clause-Patent */
-+/**
-+ *
-+ *  Copyright (c) 2019, Jeremy Linton
-+ *  Copyright (c) 2019, Pete Batard <pete@akeo.ie>.
-+ *
-+ **/
-+
-+#ifndef BCM2711_H__
-+#define BCM2711_H__
-+
-+#define BCM2711_SOC_REGISTERS              0xfc000000
-+#define BCM2711_SOC_REGISTER_LENGTH        0x02000000
-+
-+#define BCM2711_ARM_LOCAL_REGISTERS        0xfe000000
-+#define BCM2711_ARM_LOCAL_REGISTER_LENGTH  0x02000000
-+
-+/* arm local addresses */
-+#define BCM2711_ARMC_OFFSET                0x0000b000
-+#define BCM2711_ARMC_BASE_ADDRESS          (BCM2711_ARM_LOCAL_REGISTERS + BCM2711_ARMC_OFFSET)
-+#define BCM2711_ARMC_LENGTH                0x00000400
-+
-+#define BCM2711_ARM_LOCAL_OFFSET           0x01800000
-+#define BCM2711_ARM_LOCAL_BASE_ADDRESS     (BCM2711_ARM_LOCAL_REGISTERS + BCM2711_ARM_LOCAL_OFFSET)
-+#define BCM2711_ARM_LOCAL_LENGTH           0x00000080
-+
-+#define BCM2711_GIC400_OFFSET              0x01840000
-+#define BCM2711_GIC400_BASE_ADDRESS        (BCM2711_ARM_LOCAL_REGISTERS + BCM2711_GIC400_OFFSET)
-+#define BCM2711_GIC400_LENGTH              0x00008000
-+
-+/* Generic PCI addresses */
-+#define PCIE_TOP_OF_MEM_WIN                0xf8000000
-+#define PCIE_CPU_MMIO_WINDOW               0x600000000
-+#define PCIE_BRIDGE_MMIO_LEN               0x3ffffff
-+
-+/* PCI root bridge control registers location */
-+#define PCIE_REG_BASE                      0xfd500000
-+#define PCIE_REG_LIMIT                     0x9310
-+
-+/* PCI root bridge control registers */
-+#define BRCM_PCIE_CAP_REGS                        0x00ac
-+#define PCIE_RC_CFG_VENDOR_VENDOR_SPECIFIC_REG1   0x0188
-+#define  VENDOR_SPECIFIC_REG1_LITTLE_ENDIAN          0x0
-+#define PCIE_RC_CFG_PRIV1_ID_VAL3                 0x043c
-+#define PCIE_RC_CFG_PRIV1_LINK_CAPABILITY         0x04dc
-+#define  LINK_CAPABILITY_ASPM_SUPPORT_MASK         0xc00
-+
-+#define PCIE_RC_DL_MDIO_ADDR                      0x1100
-+#define PCIE_RC_DL_MDIO_WR_DATA                   0x1104
-+#define PCIE_RC_DL_MDIO_RD_DATA                   0x1108
-+
-+#define PCIE_MISC_MISC_CTRL                       0x4008
-+#define  MISC_CTRL_SCB_ACCESS_EN_MASK             0x1000
-+#define  MISC_CTRL_CFG_READ_UR_MODE_MASK          0x2000
-+#define  MISC_CTRL_MAX_BURST_SIZE_MASK            0x300000
-+#define  MISC_CTRL_MAX_BURST_SIZE_128             0x0
-+#define  MISC_CTRL_SCB0_SIZE_MASK                 0xf8000000
-+
-+#define PCIE_MISC_CPU_2_PCIE_MEM_WIN0_LO          0x400c
-+#define PCIE_MISC_CPU_2_PCIE_MEM_WIN0_HI          0x4010
-+#define PCIE_MEM_WIN0_LO(win)	\
-+		PCIE_MISC_CPU_2_PCIE_MEM_WIN0_LO + ((win) * 4)
-+
-+#define PCIE_MEM_WIN0_HI(win)	\
-+		PCIE_MISC_CPU_2_PCIE_MEM_WIN0_HI + ((win) * 4)
-+#define PCIE_MISC_RC_BAR1_CONFIG_LO               0x402c
-+#define  RC_BAR1_CONFIG_LO_SIZE_MASK                0x1f
-+#define PCIE_MISC_RC_BAR2_CONFIG_LO               0x4034
-+#define  RC_BAR2_CONFIG_LO_SIZE_MASK                0x1f
-+#define PCIE_MISC_RC_BAR2_CONFIG_HI               0x4038
-+#define PCIE_MISC_RC_BAR3_CONFIG_LO               0x403c
-+#define  RC_BAR3_CONFIG_LO_SIZE_MASK                0x1f
-+#define PCIE_MISC_PCIE_STATUS                     0x4068
-+#define  STATUS_PCIE_PORT_MASK                      0x80
-+#define  STATUS_PCIE_PORT_SHIFT                        7
-+#define  STATUS_PCIE_DL_ACTIVE_MASK                 0x20
-+#define  STATUS_PCIE_DL_ACTIVE_SHIFT                   5
-+#define  STATUS_PCIE_PHYLINKUP_MASK                 0x10
-+#define  STATUS_PCIE_PHYLINKUP_SHIFT                   4
-+#define PCIE_MISC_REVISION                        0x406c
-+#define PCIE_MISC_CPU_2_PCIE_MEM_WIN0_BASE_LIMIT  0x4070
-+#define  MEM_WIN0_BASE_LIMIT_LIMIT_MASK           0xfff00000
-+#define  MEM_WIN0_BASE_LIMIT_BASE_MASK            0xfff0
-+#define  MEM_WIN0_BASE_LIMIT_BASE_HI_SHIFT        12
-+#define PCIE_MEM_WIN0_BASE_LIMIT(win)	\
-+	 PCIE_MISC_CPU_2_PCIE_MEM_WIN0_BASE_LIMIT + ((win) * 4)
-+#define PCIE_MISC_CPU_2_PCIE_MEM_WIN0_BASE_HI     0x4080
-+#define  MEM_WIN0_BASE_HI_BASE_MASK               0xff
-+#define PCIE_MEM_WIN0_BASE_HI(win)	\
-+	 PCIE_MISC_CPU_2_PCIE_MEM_WIN0_BASE_HI + ((win) * 8)
-+#define PCIE_MISC_CPU_2_PCIE_MEM_WIN0_LIMIT_HI    0x4084
-+#define  PCIE_MEM_WIN0_LIMIT_HI_LIMIT_MASK        0xff
-+#define PCIE_MEM_WIN0_LIMIT_HI(win)	\
-+	 PCIE_MISC_CPU_2_PCIE_MEM_WIN0_LIMIT_HI + ((win) * 8)
-+
-+#define PCIE_MISC_HARD_PCIE_HARD_DEBUG            0x4204
-+#define  PCIE_HARD_DEBUG_SERDES_IDDQ_MASK         0x08000000
-+
-+#define PCIE_INTR2_CPU_STATUS                 0x4300
-+#define PCIE_INTR2_CPU_SET                    0x4304
-+#define PCIE_INTR2_CPU_CLR                    0x4308
-+#define PCIE_INTR2_CPU_MASK_STATUS            0x430c
-+#define PCIE_INTR2_CPU_MASK_SET               0x4310
-+#define PCIE_INTR2_CPU_MASK_CLR               0x4314
-+
-+#define PCIE_MSI_INTR2_CLR                    0x4508
-+#define PCIE_MSI_INTR2_MASK_SET               0x4510
-+
-+#define PCIE_RGR1_SW_INIT_1                   0x9210
-+#define PCIE_EXT_CFG_INDEX                    0x9000
-+/* A small window pointing at the ECAM of the device selected by CFG_INDEX */
-+#define PCIE_EXT_CFG_DATA                     0x8000
-+
-+#define PCIE_RC_CFG_VENDOR_VENDOR_SPECIFIC_REG1_ENDIAN_MODE_BAR2_MASK 0xc
-+#define PCIE_RC_CFG_PRIV1_ID_VAL3_CLASS_CODE_MASK                     0xffffff
-+
-+#define PCIE_MISC_MISC_CTRL_SCB_ACCESS_EN_MASK                  0x1000
-+#define PCIE_MISC_MISC_CTRL_CFG_READ_UR_MODE_MASK               0x2000
-+#define PCIE_MISC_MISC_CTRL_MAX_BURST_SIZE_MASK                 0x300000
-+#define PCIE_MISC_MISC_CTRL_SCB0_SIZE_MASK                      0xf8000000
-+#define PCIE_MISC_MISC_CTRL_SCB1_SIZE_MASK                      0x7c00000
-+#define PCIE_MISC_MISC_CTRL_SCB2_SIZE_MASK                      0x1f
-+#define PCIE_MISC_RC_BAR2_CONFIG_LO_SIZE_MASK                   0x1f
-+
-+#define PCIE_RGR1_SW_INIT_1_INIT_MASK                           0x2
-+#define PCIE_RGR1_SW_INIT_1_PERST_MASK                          0x1
-+
-+#define PCIE_MISC_HARD_PCIE_HARD_DEBUG_SERDES_IDDQ_MASK         0x08000000
-+
-+#define PCIE_MISC_HARD_PCIE_HARD_DEBUG_CLKREQ_DEBUG_ENABLE_MASK 0x2
-+
-+#define PCIE_MISC_CPU_2_PCIE_MEM_WIN0_BASE_LIMIT_LIMIT_MASK     0xfff00000
-+#define PCIE_MISC_CPU_2_PCIE_MEM_WIN0_BASE_LIMIT_BASE_MASK      0xfff0
-+#define PCIE_MISC_CPU_2_PCIE_MEM_WIN0_BASE_HI_BASE_MASK         0xff
-+#define PCIE_MISC_CPU_2_PCIE_MEM_WIN0_LIMIT_HI_LIMIT_MASK       0xff
-+#define PCIE_MISC_CPU_2_PCIE_MEM_WIN0_MASK_BITS                 0xc
-+
-+#define PCIE_MISC_REVISION_MAJMIN_MASK                          0xffff
-+
-+#define BURST_SIZE_128          0
-+#define BURST_SIZE_256          1
-+#define BURST_SIZE_512          2
-+
-+#define BCM2711_THERM_SENSOR_OFFSET           0x015d2200
-+#define BCM2711_THERM_SENSOR_BASE_ADDRESS     (BCM2711_SOC_REGISTERS + BCM2711_THERM_SENSOR_OFFSET)
-+#define BCM2711_THERM_SENSOR_LENGTH           0x00000008
-+
-+#define BCM2711_GENET_BASE_OFFSET             0x01580000
-+#define BCM2711_GENET_BASE_ADDRESS            (BCM2711_SOC_REGISTERS + BCM2711_GENET_BASE_OFFSET)
-+#define BCM2711_GENET_LENGTH                  0x10000
-+
-+#endif /* BCM2711_H__ */
-diff --git a/arch/arm/mach-bcm283x/include/mach/acpi/bcm2836.h b/arch/arm/mach-bcm283x/include/mach/acpi/bcm2836.h
-new file mode 100644
-index 0000000000..64cec36a94
---- /dev/null
-+++ b/arch/arm/mach-bcm283x/include/mach/acpi/bcm2836.h
-@@ -0,0 +1,127 @@
-+/* SPDX-License-Identifier: BSD-2-Clause-Patent */
-+/**
-+ *
-+ *  Copyright (c) 2019, ARM Limited. All rights reserved.
-+ *  Copyright (c) 2017, Andrei Warkentin <andrey.warkentin@gmail.com>
-+ *  Copyright (c) 2016, Linaro Limited. All rights reserved.
-+ *
-+ **/
-+
-+#ifndef __BCM2836_H__
-+#define __BCM2836_H__
-+
-+/*
-+ * Both "core" and SoC perpherals (1M each).
-+ */
-+#define BCM2836_SOC_REGISTERS                 0xfe000000
-+#define BCM2836_SOC_REGISTER_LENGTH           0x02000000
-+
-+/*
-+ * Offset between the CPU's view and the VC's view of system memory.
-+ */
-+#define BCM2836_DMA_DEVICE_OFFSET             0xc0000000
-+
-+/* watchdog constants */
-+#define BCM2836_WDOG_OFFSET                   0x00100000
-+#define BCM2836_WDOG_BASE_ADDRESS             (BCM2836_SOC_REGISTERS + BCM2836_WDOG_OFFSET)
-+#define BCM2836_WDOG_PASSWORD                 0x5a000000
-+#define BCM2836_WDOG_RSTC_OFFSET              0x0000001c
-+#define BCM2836_WDOG_WDOG_OFFSET              0x00000024
-+#define BCM2836_WDOG_RSTC_WRCFG_MASK          0x00000030
-+#define BCM2836_WDOG_RSTC_WRCFG_FULL_RESET    0x00000020
-+
-+/* clock manager constants */
-+#define BCM2836_CM_OFFSET                     0x00101000
-+#define BCM2836_CM_BASE                       (BCM2836_SOC_REGISTERS + BCM2836_CM_OFFSET)
-+#define BCM2836_CM_GEN_CLOCK_CONTROL          0x0000
-+#define BCM2836_CM_GEN_CLOCK_DIVISOR          0x0004
-+#define BCM2836_CM_VPU_CLOCK_CONTROL          0x0008
-+#define BCM2836_CM_VPU_CLOCK_DIVISOR          0x000c
-+#define BCM2836_CM_SYSTEM_CLOCK_CONTROL       0x0010
-+#define BCM2836_CM_SYSTEM_CLOCK_DIVISOR       0x0014
-+#define BCM2836_CM_H264_CLOCK_CONTROL         0x0028
-+#define BCM2836_CM_H264_CLOCK_DIVISOR         0x002c
-+#define BCM2836_CM_PWM_CLOCK_CONTROL          0x00a0
-+#define BCM2836_CM_PWM_CLOCK_DIVISOR          0x00a4
-+#define BCM2836_CM_UART_CLOCK_CONTROL         0x00f0
-+#define BCM2836_CM_UART_CLOCK_DIVISOR         0x00f4
-+#define BCM2836_CM_SDC_CLOCK_CONTROL          0x01a8
-+#define BCM2836_CM_SDC_CLOCK_DIVISOR          0x01ac
-+#define BCM2836_CM_ARM_CLOCK_CONTROL          0x01b0
-+#define BCM2836_CM_ARM_CLOCK_DIVISOR          0x01b4
-+#define BCM2836_CM_EMMC_CLOCK_CONTROL         0x01c0
-+#define BCM2836_CM_EMMC_CLOCK_DIVISOR         0x01c4
-+
-+/* mailbox interface constants */
-+#define BCM2836_MBOX_OFFSET                   0x0000b880
-+#define BCM2836_MBOX_BASE_ADDRESS             (BCM2836_SOC_REGISTERS + BCM2836_MBOX_OFFSET)
-+#define BCM2836_MBOX_LENGTH                   0x00000024
-+#define BCM2836_MBOX_READ_OFFSET              0x00000000
-+#define BCM2836_MBOX_STATUS_OFFSET            0x00000018
-+#define BCM2836_MBOX_CONFIG_OFFSET            0x0000001c
-+#define BCM2836_MBOX_WRITE_OFFSET             0x00000020
-+
-+#define BCM2836_MBOX_STATUS_FULL              0x1f
-+#define BCM2836_MBOX_STATUS_EMPTY             0x1e
-+
-+#define BCM2836_MBOX_NUM_CHANNELS             16
-+
-+/* interrupt controller constants */
-+#define BCM2836_INTC_TIMER_CONTROL_OFFSET     0x00000040
-+#define BCM2836_INTC_TIMER_PENDING_OFFSET     0x00000060
-+
-+/* usb constants */
-+#define BCM2836_USB_OFFSET                    0x00980000
-+#define BCM2836_USB_BASE_ADDRESS              (BCM2836_SOC_REGISTERS + BCM2836_USB_OFFSET)
-+#define BCM2836_USB_LENGTH                    0x00010000
-+
-+/* serial based protocol constants */
-+#define BCM2836_PL011_UART_OFFSET             0x00201000
-+#define BCM2836_PL011_UART_BASE_ADDRESS       (BCM2836_SOC_REGISTERS + BCM2836_PL011_UART_OFFSET)
-+#define BCM2836_PL011_UART_LENGTH             0x00001000
-+
-+#define BCM2836_MINI_UART_OFFSET              0x00215000
-+#define BCM2836_MINI_UART_BASE_ADDRESS        (BCM2836_SOC_REGISTERS + BCM2836_MINI_UART_OFFSET)
-+#define BCM2836_MINI_UART_LENGTH              0x00000070
-+
-+#define BCM2836_I2C0_OFFSET                   0x00205000
-+#define BCM2836_I2C0_BASE_ADDRESS             (BCM2836_SOC_REGISTERS + BCM2836_I2C0_OFFSET)
-+#define BCM2836_I2C0_LENGTH                   0x00000020
-+
-+#define BCM2836_I2C1_OFFSET                   0x00804000
-+#define BCM2836_I2C1_BASE_ADDRESS             (BCM2836_SOC_REGISTERS + BCM2836_I2C1_OFFSET)
-+#define BCM2836_I2C1_LENGTH                   0x00000020
-+
-+#define BCM2836_I2C2_OFFSET                   0x00805000
-+#define BCM2836_I2C2_BASE_ADDRESS             (BCM2836_SOC_REGISTERS + BCM2836_I2C2_OFFSET)
-+#define BCM2836_I2C2_LENGTH                   0x00000020
-+
-+#define BCM2836_SPI0_OFFSET                   0x00204000
-+#define BCM2836_SPI0_BASE_ADDRESS             (BCM2836_SOC_REGISTERS + BCM2836_SPI0_OFFSET)
-+#define BCM2836_SPI0_LENGTH                   0x00000020
-+
-+#define BCM2836_SPI1_OFFSET                   0x00215080
-+#define BCM2836_SPI1_LENGTH                   0x00000040
-+#define BCM2836_SPI1_BASE_ADDRESS             (BCM2836_SOC_REGISTERS + BCM2836_SPI1_OFFSET)
-+
-+#define BCM2836_SPI2_OFFSET                   0x002150C0
-+#define BCM2836_SPI2_LENGTH                   0x00000040
-+#define BCM2836_SPI2_BASE_ADDRESS             (BCM2836_SOC_REGISTERS + BCM2836_SPI2_OFFSET)
-+
-+#define BCM2836_SYSTEM_TIMER_OFFSET           0x00003000
-+#define BCM2836_SYSTEM_TIMER_LENGTH           0x00000020
-+#define BCM2836_SYSTEM_TIMER_ADDRESS          (BCM2836_SOC_REGISTERS + BCM2836_SYSTEM_TIMER_OFFSET)
-+
-+/* dma constants */
-+#define BCM2836_DMA0_OFFSET                   0x00007000
-+#define BCM2836_DMA0_BASE_ADDRESS             (BCM2836_SOC_REGISTERS + BCM2836_DMA0_OFFSET)
-+
-+#define BCM2836_DMA15_OFFSET                  0x00E05000
-+#define BCM2836_DMA15_BASE_ADDRESS            (BCM2836_SOC_REGISTERS + BCM2836_DMA15_OFFSET)
-+
-+#define BCM2836_DMA_CTRL_OFFSET               0x00007FE0
-+#define BCM2836_DMA_CTRL_BASE_ADDRESS         (BCM2836_SOC_REGISTERS + BCM2836_DMA_CTRL_OFFSET)
-+
-+#define BCM2836_DMA_CHANNEL_LENGTH            0x00000100
-+
-+#endif /*__BCM2836_H__ */
-diff --git a/arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_gpio.h b/arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_gpio.h
-new file mode 100644
-index 0000000000..c5b858b412
---- /dev/null
-+++ b/arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_gpio.h
-@@ -0,0 +1,19 @@
-+/* SPDX-License-Identifier: BSD-2-Clause-Patent */
-+/**
-+ *
-+ *  Copyright (c) 2020, Pete Batard <pete@akeo.ie>
-+ *  Copyright (c) 2018, Andrei Warkentin <andrey.warkentin@gmail.com>
-+ *  Copyright (c) Microsoft Corporation. All rights reserved.
-+ *
-+ **/
-+
-+#include <asm/arch/acpi/bcm2836.h>
-+
-+#ifndef __BCM2836_GPIO_H__
-+#define __BCM2836_GPIO_H__
-+
-+#define GPIO_OFFSET        0x00200000
-+#define GPIO_BASE_ADDRESS  (BCM2836_SOC_REGISTERS + GPIO_OFFSET)
-+#define GPIO_LENGTH        0x000000B4
-+
-+#endif /* __BCM2836_GPIO_H__ */
-diff --git a/arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_gpu.h b/arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_gpu.h
-new file mode 100644
-index 0000000000..5857d7581a
---- /dev/null
-+++ b/arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_gpu.h
-@@ -0,0 +1,47 @@
-+/* SPDX-License-Identifier: BSD-2-Clause-Patent */
-+/**
-+ *
-+ *  Copyright (c) 2020, Pete Batard <pete@akeo.ie>
-+ *
-+ **/
-+
-+#include <asm/arch/acpi/bcm2836.h>
-+
-+#ifndef __BCM2836_GPU_H__
-+#define __BCM2836_GPU_H__
-+
-+/* VideoCore constants */
-+
-+#define BCM2836_VCHIQ_OFFSET                  0x0000B840
-+#define BCM2836_VCHIQ_BASE_ADDRESS            (BCM2836_SOC_REGISTERS + BCM2836_VCHIQ_OFFSET)
-+#define BCM2836_VCHIQ_LENGTH                  0x00000010
-+
-+#define BCM2836_V3D_BUS_OFFSET                0x00C00000
-+#define BCM2836_V3D_BUS_BASE_ADDRESS          (BCM2836_SOC_REGISTERS + BCM2836_V3D_BUS_OFFSET)
-+#define BCM2836_V3D_BUS_LENGTH                0x00001000
-+
-+#define BCM2836_HVS_OFFSET                    0x00400000
-+#define BCM2836_HVS_BASE_ADDRESS              (BCM2836_SOC_REGISTERS + BCM2836_HVS_OFFSET)
-+#define BCM2836_HVS_LENGTH                    0x00006000
-+
-+#define BCM2836_PV0_OFFSET                    0x00206000
-+#define BCM2836_PV0_BASE_ADDRESS              (BCM2836_SOC_REGISTERS + BCM2836_PV0_OFFSET)
-+#define BCM2836_PV0_LENGTH                    0x00000100
-+
-+#define BCM2836_PV1_OFFSET                    0x00207000
-+#define BCM2836_PV1_BASE_ADDRESS              (BCM2836_SOC_REGISTERS + BCM2836_PV1_OFFSET)
-+#define BCM2836_PV1_LENGTH                    0x00000100
-+
-+#define BCM2836_PV2_OFFSET                    0x00807000
-+#define BCM2836_PV2_BASE_ADDRESS              (BCM2836_SOC_REGISTERS + BCM2836_PV2_OFFSET)
-+#define BCM2836_PV2_LENGTH                    0x00000100
-+
-+#define BCM2836_HDMI0_OFFSET                  0x00902000
-+#define BCM2836_HDMI0_BASE_ADDRESS            (BCM2836_SOC_REGISTERS + BCM2836_HDMI0_OFFSET)
-+#define BCM2836_HDMI0_LENGTH                  0x00000600
-+
-+#define BCM2836_HDMI1_OFFSET                  0x00808000
-+#define BCM2836_HDMI1_BASE_ADDRESS            (BCM2836_SOC_REGISTERS + BCM2836_HDMI1_OFFSET)
-+#define BCM2836_HDMI1_LENGTH                  0x00000100
-+
-+#endif /* __BCM2836_MISC_H__ */
-diff --git a/arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_pwm.h b/arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_pwm.h
-new file mode 100644
-index 0000000000..78a8486673
---- /dev/null
-+++ b/arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_pwm.h
-@@ -0,0 +1,33 @@
-+/* SPDX-License-Identifier: BSD-2-Clause-Patent */
-+/**
-+ *
-+ *  Copyright (c) 2020, Pete Batard <pete@akeo.ie>
-+ *
-+ **/
-+
-+#include <asm/arch/acpi/bcm2836.h>
-+
-+#ifndef __BCM2836_PWM_H__
-+#define __BCM2836_PWM_H__
-+
-+/* PWM controller constants */
-+
-+#define BCM2836_PWM_DMA_OFFSET                 0x00007B00
-+#define BCM2836_PWM_DMA_BASE_ADDRESS           (BCM2836_SOC_REGISTERS + BCM2836_PWM_DMA_OFFSET)
-+#define BCM2836_PWM_DMA_LENGTH                 0x00000100
-+
-+#define BCM2836_PWM_CLK_OFFSET                 0x001010A0
-+#define BCM2836_PWM_CLK_BASE_ADDRESS           (BCM2836_SOC_REGISTERS + BCM2836_PWM_CLK_OFFSET)
-+#define BCM2836_PWM_CLK_LENGTH                 0x00000008
-+
-+#define BCM2836_PWM_CTRL_OFFSET                0x0020C000
-+#define BCM2836_PWM_CTRL_BASE_ADDRESS          (BCM2836_SOC_REGISTERS + BCM2836_PWM_CTRL_OFFSET)
-+#define BCM2836_PWM_CTRL_LENGTH                0x00000028
-+
-+#define BCM2836_PWM_BUS_BASE_ADDRESS           0x7E20C000
-+#define BCM2836_PWM_BUS_LENGTH                 0x00000028
-+
-+#define BCM2836_PWM_CTRL_UNCACHED_BASE_ADDRESS 0xFF20C000
-+#define BCM2836_PWM_CTRL_UNCACHED_LENGTH       0x00000028
-+
-+#endif /* __BCM2836_PWM_H__ */
-diff --git a/arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_sdhost.h b/arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_sdhost.h
-new file mode 100644
-index 0000000000..9b1afe8440
---- /dev/null
-+++ b/arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_sdhost.h
-@@ -0,0 +1,18 @@
-+/* SPDX-License-Identifier: BSD-2-Clause-Patent */
-+/**
-+ *
-+ *  Copyright (c) 2017, Andrei Warkentin <andrey.warkentin@gmail.com>
-+ *  Copyright (c) Microsoft Corporation. All rights reserved.
-+ *
-+ **/
-+
-+#include <asm/arch/acpi/bcm2836.h>
-+
-+#ifndef __BCM2836_SDHOST_H__
-+#define __BCM2836_SDHOST_H__
-+
-+#define SDHOST_OFFSET               0x00202000
-+#define SDHOST_BASE_ADDRESS         (BCM2836_SOC_REGISTERS + SDHOST_OFFSET)
-+#define SDHOST_LENGTH               0x00000100
-+
-+#endif /*__BCM2836_SDHOST_H__ */
-diff --git a/arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_sdio.h b/arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_sdio.h
-new file mode 100644
-index 0000000000..48d073d434
---- /dev/null
-+++ b/arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_sdio.h
-@@ -0,0 +1,21 @@
-+/* SPDX-License-Identifier: BSD-2-Clause-Patent */
-+/**
-+ *
-+ *  Copyright (c) Microsoft Corporation. All rights reserved.
-+ *
-+ **/
-+
-+#include <asm/arch/acpi/bcm2836.h>
-+
-+#ifndef __BCM2836_SDIO_H__
-+#define __BCM2836_SDIO_H__
-+
-+// MMC/SD/SDIO1 register definitions.
-+#define MMCHS1_OFFSET     0x00300000
-+#define MMCHS2_OFFSET     0x00340000
-+#define MMCHS1_BASE       (BCM2836_SOC_REGISTERS + MMCHS1_OFFSET)
-+#define MMCHS2_BASE       (BCM2836_SOC_REGISTERS + MMCHS2_OFFSET)
-+#define MMCHS1_LENGTH     0x00000100
-+#define MMCHS2_LENGTH     0x00000100
-+
-+#endif /* __BCM2836_SDIO_H__ */
-diff --git a/drivers/pci/pcie_brcmstb.c b/drivers/pci/pcie_brcmstb.c
-index f978c64365..f089c48f02 100644
---- a/drivers/pci/pcie_brcmstb.c
-+++ b/drivers/pci/pcie_brcmstb.c
-@@ -12,6 +12,7 @@
-  * Copyright (C) 2020 Nicolas Saenz Julienne <nsaenzjulienne@suse.de>
-  */
+diff --git a/arch/arm/mach-bcm283x/Makefile b/arch/arm/mach-bcm283x/Makefile
+index 7cd068832f..38e320307d 100644
+--- a/arch/arm/mach-bcm283x/Makefile
++++ b/arch/arm/mach-bcm283x/Makefile
+@@ -4,3 +4,7 @@
  
+ obj-$(CONFIG_BCM2835) += lowlevel_init.o
+ obj-y	+= init.o reset.o mbox.o msg.o phys2bus.o
++
++ifeq ($(CONFIG_GENERATE_ACPI_TABLE),y)
++obj-$(CONFIG_BCM2711) += bcm2711_acpi.o
++endif
+\ No newline at end of file
+diff --git a/arch/arm/mach-bcm283x/bcm2711_acpi.c b/arch/arm/mach-bcm283x/bcm2711_acpi.c
+new file mode 100644
+index 0000000000..25af5fcb60
+--- /dev/null
++++ b/arch/arm/mach-bcm283x/bcm2711_acpi.c
+@@ -0,0 +1,149 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * (C) Copyright 2024 9elements GmbH
++ *
++ * See file CREDITS for list of people who contributed to this
++ * project.
++ */
++
++#include <acpi/acpi_table.h>
++#include <asm/acpi_table.h>
++#include <asm/armv8/sec_firmware.h>
 +#include <asm/arch/acpi/bcm2711.h>
- #include <errno.h>
- #include <dm.h>
- #include <dm/ofnode.h>
-@@ -21,88 +22,6 @@
- #include <linux/log2.h>
- #include <linux/iopoll.h>
- 
--/* Offset of the mandatory PCIe capability config registers */
--#define BRCM_PCIE_CAP_REGS				0x00ac
--
--/* The PCIe controller register offsets */
--#define PCIE_RC_CFG_VENDOR_SPECIFIC_REG1		0x0188
--#define  VENDOR_SPECIFIC_REG1_ENDIAN_MODE_BAR2_MASK	0xc
--#define  VENDOR_SPECIFIC_REG1_LITTLE_ENDIAN		0x0
--
--#define PCIE_RC_CFG_PRIV1_ID_VAL3			0x043c
--#define  CFG_PRIV1_ID_VAL3_CLASS_CODE_MASK		0xffffff
--
--#define PCIE_RC_CFG_PRIV1_LINK_CAPABILITY			0x04dc
--#define  PCIE_RC_CFG_PRIV1_LINK_CAPABILITY_ASPM_SUPPORT_MASK	0xc00
--
--#define PCIE_RC_DL_MDIO_ADDR				0x1100
--#define PCIE_RC_DL_MDIO_WR_DATA				0x1104
--#define PCIE_RC_DL_MDIO_RD_DATA				0x1108
--
--#define PCIE_MISC_MISC_CTRL				0x4008
--#define  MISC_CTRL_SCB_ACCESS_EN_MASK			0x1000
--#define  MISC_CTRL_CFG_READ_UR_MODE_MASK		0x2000
--#define  MISC_CTRL_MAX_BURST_SIZE_MASK			0x300000
--#define  MISC_CTRL_MAX_BURST_SIZE_128			0x0
--#define  MISC_CTRL_SCB0_SIZE_MASK			0xf8000000
--
--#define PCIE_MISC_CPU_2_PCIE_MEM_WIN0_LO		0x400c
--#define PCIE_MEM_WIN0_LO(win)	\
--		PCIE_MISC_CPU_2_PCIE_MEM_WIN0_LO + ((win) * 4)
--
--#define PCIE_MISC_CPU_2_PCIE_MEM_WIN0_HI		0x4010
--#define PCIE_MEM_WIN0_HI(win)	\
--		PCIE_MISC_CPU_2_PCIE_MEM_WIN0_HI + ((win) * 4)
--
--#define PCIE_MISC_RC_BAR1_CONFIG_LO			0x402c
--#define  RC_BAR1_CONFIG_LO_SIZE_MASK			0x1f
--
--#define PCIE_MISC_RC_BAR2_CONFIG_LO			0x4034
--#define  RC_BAR2_CONFIG_LO_SIZE_MASK			0x1f
--#define PCIE_MISC_RC_BAR2_CONFIG_HI			0x4038
--
--#define PCIE_MISC_RC_BAR3_CONFIG_LO			0x403c
--#define  RC_BAR3_CONFIG_LO_SIZE_MASK			0x1f
--
--#define PCIE_MISC_PCIE_STATUS				0x4068
--#define  STATUS_PCIE_PORT_MASK				0x80
--#define  STATUS_PCIE_PORT_SHIFT				7
--#define  STATUS_PCIE_DL_ACTIVE_MASK			0x20
--#define  STATUS_PCIE_DL_ACTIVE_SHIFT			5
--#define  STATUS_PCIE_PHYLINKUP_MASK			0x10
--#define  STATUS_PCIE_PHYLINKUP_SHIFT			4
--
--#define PCIE_MISC_CPU_2_PCIE_MEM_WIN0_BASE_LIMIT	0x4070
--#define  MEM_WIN0_BASE_LIMIT_LIMIT_MASK			0xfff00000
--#define  MEM_WIN0_BASE_LIMIT_BASE_MASK			0xfff0
--#define  MEM_WIN0_BASE_LIMIT_BASE_HI_SHIFT		12
--#define PCIE_MEM_WIN0_BASE_LIMIT(win)	\
--	 PCIE_MISC_CPU_2_PCIE_MEM_WIN0_BASE_LIMIT + ((win) * 4)
--
--#define PCIE_MISC_CPU_2_PCIE_MEM_WIN0_BASE_HI		0x4080
--#define  MEM_WIN0_BASE_HI_BASE_MASK			0xff
--#define PCIE_MEM_WIN0_BASE_HI(win)	\
--	 PCIE_MISC_CPU_2_PCIE_MEM_WIN0_BASE_HI + ((win) * 8)
--
--#define PCIE_MISC_CPU_2_PCIE_MEM_WIN0_LIMIT_HI		0x4084
--#define  PCIE_MEM_WIN0_LIMIT_HI_LIMIT_MASK		0xff
--#define PCIE_MEM_WIN0_LIMIT_HI(win)	\
--	 PCIE_MISC_CPU_2_PCIE_MEM_WIN0_LIMIT_HI + ((win) * 8)
--
--#define PCIE_MISC_HARD_PCIE_HARD_DEBUG			0x4204
--#define  PCIE_HARD_DEBUG_SERDES_IDDQ_MASK		0x08000000
--
--#define PCIE_MSI_INTR2_CLR				0x4508
--#define PCIE_MSI_INTR2_MASK_SET				0x4510
--
--#define PCIE_EXT_CFG_DATA				0x8000
--
--#define PCIE_EXT_CFG_INDEX				0x9000
--
--#define PCIE_RGR1_SW_INIT_1				0x9210
--#define  RGR1_SW_INIT_1_PERST_MASK			0x1
--#define  RGR1_SW_INIT_1_INIT_MASK			0x2
--
- /* PCIe parameters */
- #define BRCM_NUM_PCIE_OUT_WINS				4
- 
-@@ -447,7 +366,7 @@ static int brcm_pcie_probe(struct udevice *dev)
- 	 * This will need to be changed when support for other SoCs is added.
- 	 */
- 	setbits_le32(base + PCIE_RGR1_SW_INIT_1,
--		     RGR1_SW_INIT_1_INIT_MASK | RGR1_SW_INIT_1_PERST_MASK);
-+		     PCIE_RGR1_SW_INIT_1_INIT_MASK | PCIE_RGR1_SW_INIT_1_PERST_MASK);
- 	/*
- 	 * The delay is a safety precaution to preclude the reset signal
- 	 * from looking like a glitch.
-@@ -455,7 +374,7 @@ static int brcm_pcie_probe(struct udevice *dev)
- 	udelay(100);
- 
- 	/* Take the bridge out of reset */
--	clrbits_le32(base + PCIE_RGR1_SW_INIT_1, RGR1_SW_INIT_1_INIT_MASK);
-+	clrbits_le32(base + PCIE_RGR1_SW_INIT_1, PCIE_RGR1_SW_INIT_1_INIT_MASK);
- 
- 	clrbits_le32(base + PCIE_MISC_HARD_PCIE_HARD_DEBUG,
- 		     PCIE_HARD_DEBUG_SERDES_IDDQ_MASK);
-@@ -508,7 +427,7 @@ static int brcm_pcie_probe(struct udevice *dev)
- 
- 	/* Unassert the fundamental reset */
- 	clrbits_le32(pcie->base + PCIE_RGR1_SW_INIT_1,
--		     RGR1_SW_INIT_1_PERST_MASK);
-+		     PCIE_RGR1_SW_INIT_1_PERST_MASK);
- 
- 	/*
- 	 * Wait for 100ms after PERST# deassertion; see PCIe CEM specification
-@@ -552,7 +471,7 @@ static int brcm_pcie_probe(struct udevice *dev)
- 	 * a PCIe-PCIe bridge (the default setting is to be EP mode).
- 	 */
- 	clrsetbits_le32(base + PCIE_RC_CFG_PRIV1_ID_VAL3,
--			CFG_PRIV1_ID_VAL3_CLASS_CODE_MASK, 0x060400);
-+			PCIE_RC_CFG_PRIV1_ID_VAL3_CLASS_CODE_MASK, 0x060400);
- 
- 	if (pcie->ssc) {
- 		ret = brcm_pcie_set_ssc(pcie->base);
-@@ -570,8 +489,8 @@ static int brcm_pcie_probe(struct udevice *dev)
- 	       nlw, ssc_good ? "(SSC)" : "(!SSC)");
- 
- 	/* PCIe->SCB endian mode for BAR */
--	clrsetbits_le32(base + PCIE_RC_CFG_VENDOR_SPECIFIC_REG1,
--			VENDOR_SPECIFIC_REG1_ENDIAN_MODE_BAR2_MASK,
-+	clrsetbits_le32(base + PCIE_RC_CFG_VENDOR_VENDOR_SPECIFIC_REG1,
-+			PCIE_RC_CFG_VENDOR_VENDOR_SPECIFIC_REG1_ENDIAN_MODE_BAR2_MASK,
- 			VENDOR_SPECIFIC_REG1_LITTLE_ENDIAN);
- 
- 	/*
-@@ -584,7 +503,7 @@ static int brcm_pcie_probe(struct udevice *dev)
- 	 * let's instead just unadvertise ASPM support.
- 	 */
- 	clrbits_le32(base + PCIE_RC_CFG_PRIV1_LINK_CAPABILITY,
--		     PCIE_RC_CFG_PRIV1_LINK_CAPABILITY_ASPM_SUPPORT_MASK);
-+		     LINK_CAPABILITY_ASPM_SUPPORT_MASK);
- 
- 	return 0;
- }
-@@ -595,14 +514,14 @@ static int brcm_pcie_remove(struct udevice *dev)
- 	void __iomem *base = pcie->base;
- 
- 	/* Assert fundamental reset */
--	setbits_le32(base + PCIE_RGR1_SW_INIT_1, RGR1_SW_INIT_1_PERST_MASK);
-+	setbits_le32(base + PCIE_RGR1_SW_INIT_1, PCIE_RGR1_SW_INIT_1_PERST_MASK);
- 
- 	/* Turn off SerDes */
- 	setbits_le32(base + PCIE_MISC_HARD_PCIE_HARD_DEBUG,
- 		     PCIE_HARD_DEBUG_SERDES_IDDQ_MASK);
- 
- 	/* Shutdown bridge */
--	setbits_le32(base + PCIE_RGR1_SW_INIT_1, RGR1_SW_INIT_1_INIT_MASK);
-+	setbits_le32(base + PCIE_RGR1_SW_INIT_1, PCIE_RGR1_SW_INIT_1_INIT_MASK);
- 
- 	return 0;
- }
++#include <dm/uclass.h>
++#include <tables_csum.h>
++#include <string.h>
++
++void acpi_fill_fadt(struct acpi_fadt *fadt)
++{
++	fadt->flags = ACPI_FADT_HW_REDUCED_ACPI | ACPI_FADT_LOW_PWR_IDLE_S0;
++
++	if (CONFIG_IS_ENABLED(SEC_FIRMWARE_ARMV8_PSCI) &&
++	    sec_firmware_support_psci_version() != PSCI_INVALID_VER)
++		fadt->arm_boot_arch = ACPI_ARM_PSCI_COMPLIANT;
++}
++
++void *acpi_fill_madt(struct acpi_madt *madt, void *current)
++{
++	struct acpi_madt_gicc *gicc;
++	struct acpi_madt_gicd *gicd;
++
++	madt->lapic_addr = 0;
++	madt->flags = 0;
++
++	gicc = current;
++	for (int i = 0; i < uclass_id_count(UCLASS_CPU); i++) {
++		acpi_write_madt_gicc(gicc++, i, 0x30 + i, BCM2711_GIC400_BASE_ADDRESS + 0x2000,
++				     BCM2711_GIC400_BASE_ADDRESS + 0x6000,
++				     BCM2711_GIC400_BASE_ADDRESS + 0x4000,
++				     0x19, 0, i, 1);
++	}
++
++	gicd = (struct acpi_madt_gicd *)gicc;
++	acpi_write_madt_gicd(gicd++, 0, BCM2711_GIC400_BASE_ADDRESS + 0x1000, 2);
++	return gicd;
++}
++
++#define L3_ATTRIBUTES (ACPI_PPTT_READ_ALLOC | ACPI_PPTT_WRITE_ALLOC | \
++			(ACPI_PPTT_CACHE_TYPE_UNIFIED << \
++			 ACPI_PPTT_CACHE_TYPE_SHIFT))
++#define L3_SIZE 0x100000
++#define L3_SETS 0x400
++#define L3_WAYS 0x10
++
++#define L1D_ATTRIBUTES (ACPI_PPTT_READ_ALLOC | ACPI_PPTT_WRITE_ALLOC | \
++			(ACPI_PPTT_CACHE_TYPE_DATA << \
++			 ACPI_PPTT_CACHE_TYPE_SHIFT))
++#define L1D_SIZE 0x8000
++#define L1D_SETS 0x100
++#define L1D_WAYS 2
++
++#define L1I_ATTRIBUTES (ACPI_PPTT_READ_ALLOC | \
++			(ACPI_PPTT_CACHE_TYPE_INSTR << \
++			 ACPI_PPTT_CACHE_TYPE_SHIFT))
++#define L1I_SIZE 0xc000
++#define L1I_SETS 0x100
++#define L1I_WAYS 3
++
++static int acpi_write_pptt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
++{
++	struct acpi_table_header *header;
++	int cluster_offset, l3_offset;
++	u32 offsets[2];
++
++	header = ctx->current;
++	ctx->tab_start = ctx->current;
++
++	memset(header, '\0', sizeof(struct acpi_table_header));
++
++	acpi_fill_header(header, "PPTT");
++	header->revision = acpi_get_table_revision(ACPITAB_PPTT);
++	acpi_inc(ctx, sizeof(*header));
++
++	l3_offset = acpi_pptt_add_cache(ctx, ACPI_PPTT_ALL_VALID, 0, L3_SIZE,
++					L3_SETS, L3_WAYS, L3_ATTRIBUTES, 64);
++
++	cluster_offset = acpi_pptt_add_proc(ctx, ACPI_PPTT_PHYSICAL_PACKAGE |
++					    ACPI_PPTT_CHILDREN_IDENTICAL,
++					    0, 0, 1, &l3_offset);
++
++	offsets[0] = acpi_pptt_add_cache(ctx, ACPI_PPTT_ALL_VALID, 0, L1D_SIZE,
++					 L1D_SETS, L1D_WAYS, L1D_ATTRIBUTES, 64);
++
++	offsets[1] = acpi_pptt_add_cache(ctx, ACPI_PPTT_ALL_BUT_WRITE_POL, 0,
++					 L1I_SIZE, L1I_SETS, L1I_WAYS,
++					 L1I_ATTRIBUTES, 64);
++
++	for (int i = 0; i < uclass_id_count(UCLASS_CPU); i++) {
++		acpi_pptt_add_proc(ctx, ACPI_PPTT_CHILDREN_IDENTICAL |
++				   ACPI_PPTT_NODE_IS_LEAF |
++				   ACPI_PPTT_PROC_ID_VALID,
++				   cluster_offset, i, 2, offsets);
++	}
++
++	header->length = ctx->current - ctx->tab_start;
++	header->checksum = table_compute_checksum(header, header->length);
++
++	acpi_inc(ctx, header->length);
++	acpi_add_table(ctx, header);
++
++	return 0;
++};
++
++ACPI_WRITER(5pptt, "PPTT", acpi_write_pptt, 0);
++
++static int rpi_write_gtdt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
++{
++	struct acpi_table_header *header;
++	struct acpi_gtdt *gtdt;
++
++	gtdt = ctx->current;
++	header = &gtdt->header;
++
++	memset(gtdt, '\0', sizeof(struct acpi_gtdt));
++
++	acpi_fill_header(header, "GTDT");
++	header->length = sizeof(struct acpi_gtdt);
++	header->revision = acpi_get_table_revision(ACPITAB_GTDT);
++
++	gtdt->cnt_ctrl_base = BCM2711_ARM_LOCAL_BASE_ADDRESS + 0x1c;
++	gtdt->sec_el1_gsiv = 29;
++	gtdt->sec_el1_flags = GTDT_FLAG_INT_ACTIVE_LOW;
++	gtdt->el1_gsiv = 30;
++	gtdt->el1_flags = GTDT_FLAG_INT_ACTIVE_LOW;
++	gtdt->virt_el1_gsiv = 27;
++	gtdt->virt_el1_flags = GTDT_FLAG_INT_ACTIVE_LOW;
++	gtdt->el2_gsiv = 26;
++	gtdt->el2_flags = GTDT_FLAG_INT_ACTIVE_LOW;
++	gtdt->cnt_read_base = 0xffffffffffffffff;
++
++	header->checksum = table_compute_checksum(header, header->length);
++
++	acpi_add_table(ctx, gtdt);
++
++	acpi_inc(ctx, sizeof(struct acpi_gtdt));
++
++	return 0;
++};
++
++ACPI_WRITER(5gtdt, "GTDT", rpi_write_gtdt, 0);
 -- 
 2.45.2
 
