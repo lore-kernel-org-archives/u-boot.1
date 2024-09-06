@@ -4,55 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F023E6FE49
-	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 21:11:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE7F5E6FE4B
+	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 22:38:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DFE1A88D5A;
-	Fri,  6 Sep 2024 23:11:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id CC51D88D4E;
+	Sat,  7 Sep 2024 00:38:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1725657077;
-	bh=liUhaq4bvKy89VT9CsBASqvxijhJLuenpmS5b1tG8U0=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=MH9G8xYPM0pA8XQmqgd7mD8iX7eqsjFkmKXAhmu73J1+pArwYIaq4/AirNGtdVk5p
-	 u2TxvVpI/aW0Ay3jjtTHY9htZn3/qG+Glb/Bedr2xS3Z9GQdOp7Ms9DmLa8kb5Jin1
-	 PgeSHP51PFHGxpEFOzGpA3Kl7BcfQXXWAqE1PYCKLnwRYUFnzEQHqN1kHyiwRoHwoy
-	 YrfVzbcMu86L/pWlWYjHx6OukDK/ZCCeWN20b51Sy/IXe5OCP/MnKW6zYDeyBJiq3r
-	 OdQ9dVmiQlBwHnZB33uOBTvSU9qmvxbJb2oHdQiXapMMZM7nOUQvU/ae45L9OYwxQ8
-	 qOCJBWgV3lI0Q==
-Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="C4kWcmdF";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id EE52988D52; Sat,  7 Sep 2024 00:38:01 +0200 (CEST)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id F32EB88D4E;
- Fri,  6 Sep 2024 23:11:16 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1725657077;
- bh=liUhaq4bvKy89VT9CsBASqvxijhJLuenpmS5b1tG8U0=;
- h=From:To:Cc:Subject:Date:From;
- b=CDgY+a4rDtyN7pYi11pvyytF2R8hWZwkna+1sDIbjhZDA9+nV2TrP/ujvUy83TDBN
- dQs6+cG5ROWwpIuFHHdiaGEuRmDGZpHnrQ/BsaXmYtC4sx3GpeRYeWaysogZhUnDfR
- JY1Txyyb2POAEnf0FZ8KnUYpB+PoCzxTGdNkQXQNmg56aviGCsXdKCeDGpDsWSeAIE
- 9hExAo0zeW9tS8XlMVJnNLkig8JJhu60bUhTAZ84qB6FwLr2h00iWi5cLHFzcVYjdm
- Nnt/MAWZTKAOYyfqwonrEcTCFeN2/mBX3GJUkiyOE39tFHps7bZee7jUUEeXnbJ3+K
- Tt6sYKt0egpYA==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Andre Przywara <andre.przywara@arm.com>,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>, Dhruva Gole <d-gole@ti.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Jim Liu <jim.t90615@gmail.com>,
- Jonas Karlman <jonas@kwiboo.se>, Michal Simek <michal.simek@amd.com>,
- Neal Frager <neal.frager@amd.com>, Prasad Kummari <prasad.kummari@amd.com>,
- Teik Heng Chong <teik.heng.chong@intel.com>, Tom Rini <trini@konsulko.com>,
- Vignesh R <vigneshr@ti.com>
-Subject: [PATCH] mtd: spi-nor-ids: Extend w25q16cl entry with locking support
-Date: Fri,  6 Sep 2024 23:10:42 +0200
-Message-ID: <20240906211105.193254-1-marex@denx.de>
-X-Mailer: git-send-email 2.45.2
+ by phobos.denx.de (Postfix) with ESMTPS id DB0A288D4D
+ for <u-boot@lists.denx.de>; Sat,  7 Sep 2024 00:37:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-6bf92f96f83so13560336d6.3
+ for <u-boot@lists.denx.de>; Fri, 06 Sep 2024 15:37:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1725662278; x=1726267078; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=loSPyIzvcvUAtTFrCDQRrPFIFfacriUDnETZZ1rdWrw=;
+ b=C4kWcmdFTZR3rUKPkfLLyDY9HU63bonZ5BeK+y+ngFhq/dQfP2cqFMZkU1les8yzb0
+ iX/zMiNA+R7Lz3ciM13XrKwrootzdDPQkAk0mMMDGDJ2W0diF6w+ALi7XAyFLkJDkNBE
+ lU3gVeEBv/5kNY4Kj1f/gyN+6rWT3QLKSy7Zk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725662278; x=1726267078;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=loSPyIzvcvUAtTFrCDQRrPFIFfacriUDnETZZ1rdWrw=;
+ b=eK/t2yJO7DHvKVywlyrWjB8/vDYrQ8V5H7JoHOkntAEPhDEi3TQt+u3z2omHB95dtY
+ nW0Ez+3HhxQKiXXd0U1zwAkgPyNKSs8WTWkfWaC7dREkKb9tXiDSNbrK+TWvnp1rrkKw
+ vklAsgXbOKGR1TwsCMF2SfMCpVQZqwIzXE4pyIlZRWlgXbuEwUb4OQOvoehUht3FWHlf
+ VsJdvYOrsgwJlyvrM8XkS3brUBWh9BM9U5k/c45/t+XKp9+dQupZQsC3mBF6TfjcvowP
+ VtWwQjmMVjNgW+GhCvdSjTlIdyb/yZgR2v6BMGPC6GEejarrFA6am8dnuT51stEdY6bL
+ qW8A==
+X-Gm-Message-State: AOJu0YwMoZ6pavtKeS7nkpctbvy8b+kHRyBPC8sDwXQIyIK5psetd2q3
+ jzu6Llx1syg6CdKKZ11OHIPlQT9/WDLfE9cWFshSpf8AHIQczNKBIqp8FqvFCZU=
+X-Google-Smtp-Source: AGHT+IFKl9gUp3AFTuaiDDmCDr1Dl0w0OJOYR9Ku2XPEyzEP3usTR1r6VZ62u82+c6KeaDSFAQogig==
+X-Received: by 2002:a05:6214:5508:b0:6bb:a329:5dd1 with SMTP id
+ 6a1803df08f44-6c5282f913emr39958146d6.8.1725662278212; 
+ Fri, 06 Sep 2024 15:37:58 -0700 (PDT)
+Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6c5201e47a6sm20481296d6.55.2024.09.06.15.37.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 06 Sep 2024 15:37:57 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
+Cc: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Brandon Maier <brandon.maier@collins.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <20240815195746.749042-1-sjg@chromium.org>
+References: <20240815195746.749042-1-sjg@chromium.org>
+Subject: Re: (subset) [PATCH v3 0/3] This series adds a few patches to make
+ it easy to use the system dtc in
+Message-Id: <172566227676.3908710.3568578988369610881.b4-ty@konsulko.com>
+Date: Fri, 06 Sep 2024 16:37:56 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,45 +95,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The w25q16cl does support locking the same way w25q16dw does,
-fill in the missing flags.
+On Thu, 15 Aug 2024 13:57:43 -0600, Simon Glass wrote:
 
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: Andre Przywara <andre.przywara@arm.com>
-Cc: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
-Cc: Dhruva Gole <d-gole@ti.com>
-Cc: Jagan Teki <jagan@amarulasolutions.com>
-Cc: Jim Liu <jim.t90615@gmail.com>
-Cc: Jonas Karlman <jonas@kwiboo.se>
-Cc: Michal Simek <michal.simek@amd.com>
-Cc: Neal Frager <neal.frager@amd.com>
-Cc: Prasad Kummari <prasad.kummari@amd.com>
-Cc: Teik Heng Chong <teik.heng.chong@intel.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Vignesh R <vigneshr@ti.com>
-Cc: u-boot@lists.denx.de
----
- drivers/mtd/spi/spi-nor-ids.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+> buildman. It updates CI to do this for world builds, to save time.
+> 
+> It also includes an old patch which is now needed again since:
+> 
+>    e13fcae3fce Revert "buildman: Always use the full path in...
+> 
+> Changes in v3:
+> - Drop patches previously applied
+> - Add dtc patches
+> 
+> [...]
 
-diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-index 5582a978ab5..30cff8afdbd 100644
---- a/drivers/mtd/spi/spi-nor-ids.c
-+++ b/drivers/mtd/spi/spi-nor-ids.c
-@@ -536,7 +536,11 @@ const struct flash_info spi_nor_ids[] = {
- 	},
- 	{ INFO("w25q80", 0xef5014, 0, 64 * 1024,  16, SECT_4K) },
- 	{ INFO("w25q80bl", 0xef4014, 0, 64 * 1024,  16, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("w25q16cl", 0xef4015, 0, 64 * 1024,  32, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{
-+		INFO("w25q16cl", 0xef4015, 0, 64 * 1024,  32,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
-+	},
- 	{ INFO("w25q32bv", 0xef4016, 0, 64 * 1024,  64, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
- 	{ INFO("w25q64cv", 0xef4017, 0, 64 * 1024,  128, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
- 	{ INFO("w25q128", 0xef4018, 0, 64 * 1024, 256,
+Applied to u-boot/next, thanks!
+
 -- 
-2.45.2
+Tom
+
 
