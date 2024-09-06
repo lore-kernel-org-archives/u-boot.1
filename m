@@ -4,74 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B547ACE7B1D
-	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 15:02:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11ABACE7B1E
+	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 15:02:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D2B2788CF2;
-	Fri,  6 Sep 2024 17:02:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 378B488CC8;
+	Fri,  6 Sep 2024 17:02:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lKcjKExV";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="O1KPn6cn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5AA8888CE8; Fri,  6 Sep 2024 17:02:37 +0200 (CEST)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
+ id A34A788D02; Fri,  6 Sep 2024 17:02:39 +0200 (CEST)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E62FA88915
- for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 17:02:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8215188915
+ for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 17:02:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-6bf6606363fso11935706d6.3
- for <u-boot@lists.denx.de>; Fri, 06 Sep 2024 08:02:34 -0700 (PDT)
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6c35b545b41so30394506d6.1
+ for <u-boot@lists.denx.de>; Fri, 06 Sep 2024 08:02:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1725634954; x=1726239754; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1725634956; x=1726239756; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=SmL94QRFnmD+nqInk2nzdq8++hJsjZFS06sON8OoYkQ=;
- b=lKcjKExVAvRw3aUvzx5OW12UFEFeAW8Q+xNfBiv3L4ZFvBh8UmJWt408QfxxUG2+wb
- /7vanPGMTr6BkJryGk7uVwSG4rmyGjkgh2B8icmn2o1rEOVGhIeeaB0ynpe1hebCKrJh
- y3IyOS3M/WjL7yPU+nrtofNJXvhLIu9g0tBYA=
+ bh=KCSQSrZbzX6fCDdGRiYiaY0N+jxmw6u2u0MfrWPHEJs=;
+ b=O1KPn6cn7JWAdmDDm884Li+2+dNKl2VOTtYM9Ptz3Jgh+2T3sD9Ew16zYlUOoNhmP7
+ 8pJ9VX8/GhkteS/vlzPBoJjYryXI0Wwcf9vgM+HSlDbDx3twZho4um9pQamWWS6QW0Jj
+ 8hBUai7BH7trkKjdtmxuH8DQ4EPpibKcsrB8M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725634954; x=1726239754;
+ d=1e100.net; s=20230601; t=1725634956; x=1726239756;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=SmL94QRFnmD+nqInk2nzdq8++hJsjZFS06sON8OoYkQ=;
- b=rUm1texKdmaqy8Q/lkNJ8Kqj1UrTLxMWqHKXruqxq77GYkcIdWszakwtKKqOZFrpv1
- gBS7SJgq2oZquIHr5YTpBxWLiao70b2FB66uBHECy+1SStWRRRRSrqctZjxK12mL7SIW
- G8EvdlOZ7EJma/tdP/IItkzKErSVGeBCpkeEpazItch4cJh/93pdm9f2jK0pKEF54bAb
- xyOFQtClUxf0/r3FtU/Oi/7KBWMvefYwS3J28PP5Agx2hk+ZYK5zLPhpmRoqyNZH0oDw
- E8z5WW2dFM6veYcpp0Hm7AYjGJGCNifRBkMavk1VQq1LRc/k/+NCBtwFAPMofJ0DU94q
- 9vkQ==
-X-Gm-Message-State: AOJu0YzBX0iRzb3Y0URjFzp3AqkP8byFLnege1hE7YaAQkER6Yvde5vF
- DjPursZIueK/VwaGwgyCJeoSj4qzeLrLIjy4PNVH1p5tcRt2QSEQriVRlp+jFCK4cS91kLeO6vq
- xY/uWKYgGUf7O8uy0YAI1PwdhfiEXJu9eokWP
-X-Google-Smtp-Source: AGHT+IHlYYD5lvRVzgTGTwCtjpVFGcI2G7Q8/NDpJ9tjrFGFfr/8+3HvimpTpJTpqF+7tueb42X9eDbyYxj5r4lnJ8c=
-X-Received: by 2002:a05:6214:5707:b0:6c3:63f7:639e with SMTP id
- 6a1803df08f44-6c5284f43c2mr35559226d6.18.1725634953679; Fri, 06 Sep 2024
- 08:02:33 -0700 (PDT)
+ bh=KCSQSrZbzX6fCDdGRiYiaY0N+jxmw6u2u0MfrWPHEJs=;
+ b=UwSaNYXw67pcYaBPOQOyD06ZkeyK4ZawNeGGUqxZDXUAqLhM7ghWuIR/aflK/wH3+H
+ cS/n+fsIHwQ0HYFJ/drKLaQ4P9J8Yr4QTLu8oDyiOloeN5RSau6bG+DAoBvhQZH0LYiP
+ Lcb8a2tozsVGITWxN44wgWvqpN2qyKDG75jQPB4LwNnRquzjoIGzKjiiJccSAqlcJyf5
+ xdi9VTGh6njAB1DTGdjpK5+dY8TD583sE+FhLCgX95/GfOoxbEi7wdIKTJcyXglpVWuD
+ 4yNUUghZmlBIxcA1+gJ9+6cE8/mEP2zaURlWCbJFkxcoWJ8GSrPZFnTgURShQRAsZYQK
+ 59TQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUlU6FGqkeAZ9ye2JwcfspIfPwWYApQW0fgPsRpyPW2yjRoaRs7hdGBTFGChGmjkVnvt7oWi/U=@lists.denx.de
+X-Gm-Message-State: AOJu0YyIsAWOALc25DLoJ42R4jBpQ62g12p/PIyqs4N83HRz0jpHFewe
+ wOo2r0k1wPTsqu25L/VOIK096FNomhy+lrIM4Gm65XH7YK0xwP+j2pEOxWZtNQy4jEL/9YoyiqD
+ zs+sCJuzFYAwJHjVZ4WtPoYf+PR4gnxkKsb1MVQq1l8YZ/z0=
+X-Google-Smtp-Source: AGHT+IH3q0yMS3kEwO2BrOGbwv9Sje+CXsPR0/li5WbkbHoKLSbcUEzYek1MHlHlawzYdbrFRFGLT1aEoDKsvtoauRQ=
+X-Received: by 2002:a05:6214:3da0:b0:6c3:5454:6e1e with SMTP id
+ 6a1803df08f44-6c52850f35bmr62498756d6.24.1725634956360; Fri, 06 Sep 2024
+ 08:02:36 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1725351676.git.jerome.forissier@linaro.org>
- <a5617c0cb57624d004c4b4f42861822016edb2e9.1725351676.git.jerome.forissier@linaro.org>
-In-Reply-To: <a5617c0cb57624d004c4b4f42861822016edb2e9.1725351676.git.jerome.forissier@linaro.org>
+References: <20240831164639.2298097-1-caleb.connolly@linaro.org>
+ <20240903191422.GM2479150@bill-the-cat>
+ <722e2465-bd96-4fe5-a154-d48fbe78a975@linaro.org>
+In-Reply-To: <722e2465-bd96-4fe5-a154-d48fbe78a975@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 6 Sep 2024 09:02:22 -0600
-Message-ID: <CAFLszTgr9fEmdx9No2yh-1tiVW4P1qb+mWFJ=Zk6Om_d_CFuXQ@mail.gmail.com>
-Subject: Re: [PATCH v3 01/16] Makefile: detect HOST_ARCH properly when
- CROSS_COMPILE is multi-word
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Sumit Garg <sumit.garg@linaro.org>,
- Andrew Davis <afd@ti.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Bryan Brattlof <bb@ti.com>, 
- Jesse Taube <mr.bossman075@gmail.com>,
- "Leon M. Busch-George" <leon@georgemail.eu>
+Date: Fri, 6 Sep 2024 09:02:25 -0600
+Message-ID: <CAFLszTiXkq5=E_O8Y1o3NrAN+Y1ZoDmqrwSP9QwzF3pSoufZKg@mail.gmail.com>
+Subject: Re: [PATCH] cmd: fdt: use U-Boot's FDT by default
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,60 +85,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jerome,
+Hi Caleb,
 
-On Tue, 3 Sept 2024 at 02:38, Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
+On Fri, 6 Sept 2024 at 03:31, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> When CROSS_COMPILE contains multiple words, HOST_ARCH is not properly
-> detected and the sandbox build fail. It typically happens when using
-> ccache. For example:
 >
->  $ make sandbox_defconfig
->  $ make CROSS_COMPILE="ccache x86_64-linux-gnu-" \
->         CC="ccache x86_64-linux-gnu-gcc"
->  [...]
->  In file included from boot/bootmeth_efi.c:16:
->  include/efi_default_filename.h:33:2: error: #error Unsupported UEFI architecture
->     33 | #error Unsupported UEFI architecture
->        |  ^~~~~
 >
-> A similar error occurs when the build is done via buildman and
-> ~/.buildman contains:
+> On 03/09/2024 20:14, Tom Rini wrote:
+> > On Sat, Aug 31, 2024 at 05:46:19PM +0100, Caleb Connolly wrote:
+> >
+> >> When using the FDT command to inspect an arbitrary FDT in memory, it
+> >> will always be necessary to explicitly set the FDT address. However it
+> >> is also quite likely that the command is being used to inspect U-Boot's
+> >> own FDT. Simplify that common workflow of running "fdt addr -c" to get
+> >> the control address and set it by just making $fdtcontroladdr the
+> >> default FDT if there isn't one.
+> >>
+> >> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> >> ---
+> >>   cmd/fdt.c | 9 +++++++++
+> >>   1 file changed, 9 insertions(+)
+> >>
+> >> diff --git a/cmd/fdt.c b/cmd/fdt.c
+> >> index d16b141ce32d..8909706e2483 100644
+> >> --- a/cmd/fdt.c
+> >> +++ b/cmd/fdt.c
+> >> @@ -276,8 +276,17 @@ static int do_fdt(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+> >>
+> >>              return CMD_RET_SUCCESS;
+> >>      }
+> >>
+> >> +    /* Try using U-Boot's FDT by default */
+> >> +    if (!working_fdt) {
+> >> +            struct fdt_header *addr;
+> >> +
+> >> +            addr = (void *)env_get_hex("fdtcontroladdr", 0);
+> >> +            if (addr && fdt_check_header(&addr))
+> >> +                    set_working_fdt_addr((phys_addr_t)addr);
+> >> +    }
+> >> +
+> >>      if (!working_fdt) {
+> >>              puts("No FDT memory address configured. Please configure\n"
+> >>                   "the FDT address via \"fdt addr <address>\" command.\n"
+> >>                   "Aborting!\n");
+> >
+> > Setting aside the behavior change (which I am thinking about), this
+> > makes the next check of !working_fdt dead code which should be removed.
 >
->   [toolchain-wrapper]
->   wrapper = ccache
->
-> Fix the issue by considering only the last word in $(CROSS_COMPILE).
->
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
-> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
-> ---
->  Makefile | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/Makefile b/Makefile
-> index f90e48f58a5..dc7bdd79420 100644
-> --- a/Makefile
-> +++ b/Makefile
-> @@ -21,7 +21,7 @@ include include/host_arch.h
->  ifeq ("", "$(CROSS_COMPILE)")
->    MK_ARCH="${shell uname -m}"
->  else
-> -  MK_ARCH="${shell echo $(CROSS_COMPILE) | sed -n 's/^[[:space:]]*\([^\/]*\/\)*\([^-]*\)-[^[:space:]]*/\2/p'}"
-> +  MK_ARCH="${shell echo ${lastword $(CROSS_COMPILE)} | sed -n 's/^[[:space:]]*\([^\/]*\/\)*\([^-]*\)-[^[:space:]]*/\2/p'}"
->  endif
->  unexport HOST_ARCH
->  ifeq ("x86_64", $(MK_ARCH))
-> --
-> 2.40.1
->
+> I wasn't sure if we could safely assume that fdtcontroladdr always
+> points to a valid FDT, if that's true then yes this can be dropped.
 
-I've lost track of this, but did you pull in [1] first?
+$ ./tools/qconfig.py -f ~OF_CONTROL
+11 matches
+integratorap_cm720t integratorap_cm920t integratorap_cm926ejs
+integratorap_cm946es integratorcp_cm1136 integratorcp_cm920t
+integratorcp_cm926ejs integratorcp_cm946es mx6memcal work_92105 xtfpga
+
+So yes, there are boards where it would not be set.
 
 Regards,
 Simon
-
-[1] https://patchwork.ozlabs.org/project/uboot/patch/20240815195746.749042-2-sjg@chromium.org/
