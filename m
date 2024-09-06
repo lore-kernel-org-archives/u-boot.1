@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 524DDCE7B14
-	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 13:41:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84F2ACE7B10
+	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 13:42:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C84FE88D06;
-	Fri,  6 Sep 2024 15:41:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 35C2288D10;
+	Fri,  6 Sep 2024 15:41:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GbjSZmLd";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PSmf4tVV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A20788CF1; Fri,  6 Sep 2024 14:35:07 +0200 (CEST)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id 0218888D55; Fri,  6 Sep 2024 14:35:46 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A955588BAE
- for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 14:35:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AC4C588CD8
+ for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 14:35:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-3787e067230so1214432f8f.1
- for <u-boot@lists.denx.de>; Fri, 06 Sep 2024 05:35:04 -0700 (PDT)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-42c7bc97423so20770915e9.0
+ for <u-boot@lists.denx.de>; Fri, 06 Sep 2024 05:35:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725626104; x=1726230904; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1725626140; x=1726230940; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4O8vzSwczcTurXtocCsGP76Je8ErZiGkbDYKjogNVi4=;
- b=GbjSZmLdW/T5bptC6O/i8rSkOhA/7eIJ3bocB8nS/2lRkLgnFaR3i7pCs9OeQRCbHV
- cmUGRE5poe+1viN7ehzM+nyF6Ulvjq1RE/crVElh226p6kjP7TTA69k+bXjvE7av9SqE
- HypN70ddp001uQ13Mxn7VB+V/58LOu3yVDeuaPJ0MrKPuU6Jp5XHOflpb9uWyI8GH2ji
- J7xkiuhem2OCjw397+FmeomNEJmbQueNSlbwk4K3pH2yVr63cNMuXe8/Zx1BHHc9Xqsd
- mjA4o5jcfpGFdXZFp7z11sP0sByMNGGzTE9/0Xr87U4UzMJZV23mZN0HVaIrjLljhGFr
- 4Ndw==
+ bh=4GEuAyOK2LOUsojnIaTjq4wghylfQYiixiwaPjThXl0=;
+ b=PSmf4tVVzCJlM+TjXeSTGdcwXKJM/kDOrJ/4mEpcd1C8q4Vq69GvyzTt/MpHGFScgb
+ HEFKAWyNg/AlYo2eValKoeNrabHwKZBMN8FnEB8jctM6AcgS5bWblxpL0CWtRTUOi3NZ
+ 94iyqklcvaxRTbBueRGylLg4wy4aD/6X4NSzI//o18Fg3QsuO51OXjp3FzVM/ymKtYGj
+ p0sLO5ngHFwi9r61pm8J1kCSCvBUUC20G1dV84J4ejLS958U7Iv9IERw9f67E5H0oceC
+ kgL3fQBECw3Wmo/rkSHcXP4DeiWAz8q+guRuyb8jnV5r3+UpqiHAlrNqS5IjIdrcbKV9
+ Th5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725626104; x=1726230904;
+ d=1e100.net; s=20230601; t=1725626140; x=1726230940;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4O8vzSwczcTurXtocCsGP76Je8ErZiGkbDYKjogNVi4=;
- b=IkoT/LzasXDXLs2kEWpRUF8UrCPByMOIDSkXQzAHY0vhU1nulMvwsdI/Z2t4vBATOu
- OYaBND0CcbHb+qqS38q4g2l0ijRs54RSyvN8fxx2aMDRy/5Cu5MvS3ju24vu4XIs8ZV8
- bqxtD07kNoq559IfI9FEzzkH3GsR5kt9YP57B1EdVogmfyu7hEaBI8J08c1bu45XQFjK
- 7+5yaw31uv+TBs7gid26ggmaNqqd0tJCx3eFdF/3/YVvYRzkaN0XZWT+N/aFdTaqg97t
- tjj2uyaL4kz6cW3gmWAQ9RRPf0KAAzYRWf1zDGUgcSDtar/GpkFCelC9radXa/m4raw0
- HA9A==
-X-Gm-Message-State: AOJu0YwcclhPY6LHVC5TCQtX2YSwQlIuTkiS3ht50uiWee7aMZwdhmV9
- DcD9NfiK11lWQPEaYqm7pAdkbmr1H+uI+a7r5C+c/YEv7QA4VwapiQXkZwVdg6uwRv7mkkSQfVR
- T0NOoNZ10
-X-Google-Smtp-Source: AGHT+IEBeZkshBcqv5UNe7VH/3mGqoUWx9WDZd1FG4B4g8ZcavQRc2emOLKKTPOWWPl2uGilM0eO6A==
-X-Received: by 2002:a5d:55d0:0:b0:368:65ad:529 with SMTP id
- ffacd0b85a97d-378895ca93bmr1653134f8f.17.1725626103507; 
- Fri, 06 Sep 2024 05:35:03 -0700 (PDT)
+ bh=4GEuAyOK2LOUsojnIaTjq4wghylfQYiixiwaPjThXl0=;
+ b=Byzi1idtjs3VBI88bQqaYWRm+PNgLwHuQI4La7glTVwYMVG5/SZSBfw+ax5oLPeLh/
+ RwFZr6hVDUNMm/JsSm+463cU5VrzyXKXGQWwKJlKSPDRJLSktH/X3f3u347lXUz7RRNo
+ P537BKPGu2UWWkRKAdbiejbBlPoA2pBofw4vxOUxNVyNx/57WIYpPuNuOgf/dVKMpgSH
+ sWp43WzCv6oyOaeNc0SukSw3AiVB7y5/pCAqHBN7aCfsmabjoOLWgP6jYgoqtW5kilZ9
+ Or3TPCLLHOHskDZ1VMXb0yYR3oUmU6MSIgJDZxqgTBUVp44qI1/2/iU0Rb3YZ++HG+2m
+ be/A==
+X-Gm-Message-State: AOJu0Yzz+97USRXYPSnUJW9wWTRZ8a7F73SmTDSlYHlwENrq1SfkhEqB
+ N6wzqRTMSNFFTGxjh/PkZZbek5Fp33SPkPi/5PJ8qCBzSpsrbmEovbxdWTTfGfK95c9Rj4NH+N2
+ jEr2jnmIi
+X-Google-Smtp-Source: AGHT+IHy0bVMjbWXV6qZ8yiqWce9qwsF0M7nsDW3xyEhR/dfaRlc9OrPMyrAn5D8apBbO6SZ38PWnQ==
+X-Received: by 2002:a05:600c:35ce:b0:425:81bd:e5ee with SMTP id
+ 5b1f17b1804b1-42c9f98b2ddmr23579835e9.16.1725626139624; 
+ Fri, 06 Sep 2024 05:35:39 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:1ff1:215c:d8a4:9f99])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42ca05cf0e8sm19640125e9.27.2024.09.06.05.35.01
+ 5b1f17b1804b1-42ca05cf0e8sm19640125e9.27.2024.09.06.05.35.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Sep 2024 05:35:02 -0700 (PDT)
+ Fri, 06 Sep 2024 05:35:39 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -72,31 +72,50 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
  Anton Antonov <Anton.Antonov@arm.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
- Matteo Lisi <matteo.lisi@engicam.com>, Tom Rini <trini@konsulko.com>,
- Gilles Talis <gilles.talis@gmail.com>, Michal Simek <michal.simek@amd.com>,
- Marek Vasut <marex@denx.de>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Peng Fan <peng.fan@nxp.com>,
- Nishanth Menon <nm@ti.com>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Petr Zejdl <petr.zejdl@cern.ch>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
- James Hilliard <james.hilliard1@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
+ "Andrew F. Davis" <afd@ti.com>, Krzysztof Kozlowski <krzk@kernel.org>,
+ Christian Hewitt <christianshewitt@gmail.com>, Stefan Roese <sr@denx.de>,
+ Dennis Gilmore <dgilmore@redhat.com>,
+ Hugo Villeneuve <hvilleneuve@dimonoff.com>,
+ Viacheslav Bocharov <adeep@lexina.in>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Heiko Thiery <heiko.thiery@gmail.com>, Michael Walle <michael@walle.cc>,
+ =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>,
+ Kostya Porotchkin <kostap@marvell.com>,
+ Luka Kovacic <luka.kovacic@sartura.hr>,
+ Luka Perkov <luka.perkov@sartura.hr>,
+ Patrick Bruenn <p.bruenn@beckhoff.com>, Baruch Siach <baruch@tkos.co.il>,
+ Fabio Estevam <festevam@gmail.com>, Adrian Alonso <adrian.alonso@nxp.com>,
+ Parthiban Nallathambi <parthiban@linumiz.com>,
+ Beniamino Galvani <b.galvani@gmail.com>, Marek Vasut <marex@denx.de>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Lukasz Majewski <lukma@denx.de>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Richard Hu <richard.hu@technexion.com>,
+ Otavio Salvador <otavio@ossystems.com.br>,
+ Navin Sankar Velliangiri <navin@linumiz.com>,
+ Simon Glass <sjg@chromium.org>, Mathew McBride <matt@traverse.com.au>,
+ =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
+ Linus Walleij <linus.walleij@linaro.org>,
+ Liviu Dudau <liviu.dudau@foss.arm.com>, Peter Hoyes <Peter.Hoyes@arm.com>,
+ Josef Holzmayr <josef.holzmayr@northern.tech>,
+ Alexey Romanov <avromanov@salutedevices.com>,
+ Igor Prusov <ivprusov@sberdevices.ru>, Sean Anderson <seanga2@gmail.com>,
+ Paul Kocialkowski <contact@paulk.fr>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
+ Josua Mayer <josua@solid-run.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Anatolij Gustschin <agust@denx.de>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Eddie James <eajames@linux.ibm.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Maxim Moskalets <maximmosk4@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Sean Anderson <sean.anderson@seco.com>, Janne Grunau <j@jannau.net>,
- Neal Gompa <neal@gompa.dev>, Yang Xiwen <forbidden405@outlook.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Philip Oberfichtner <pro@denx.de>, Boon Khai Ng <boon.khai.ng@intel.com>,
- Robert Marko <robert.marko@sartura.hr>, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v10 08/25] net-lwip: add DHCP support and dhcp commmand
-Date: Fri,  6 Sep 2024 14:33:24 +0200
-Message-Id: <0cd90650b93ecb5b072cd9e5b9fd34a2149a40d8.1725625913.git.jerome.forissier@linaro.org>
+ Benjamin Hahn <B.Hahn@phytec.de>,
+ =?UTF-8?q?Marek=20Moj=C3=ADk?= <marek.mojik@nic.cz>,
+ "Ole P. Orhagen" <ole.orhagen@northern.tech>,
+ Patryk Biel <pbiel7@gmail.com>,
+ Kristian Amlie <kristian.amlie@northern.tech>
+Subject: [PATCH v10 24/25] [TESTING] configs: set CONFIG_NET=y when PXE is
+ enabled
+Date: Fri,  6 Sep 2024 14:33:40 +0200
+Message-Id: <8c743ef6c6a9b3dac33df7d777c19a586fca65d0.1725625913.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1725625913.git.jerome.forissier@linaro.org>
 References: <cover.1725625913.git.jerome.forissier@linaro.org>
@@ -119,902 +138,1041 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add what it takes to enable NETDEVICES with NET_LWIP and enable DHCP as
-well as the dhcp command. CMD_TFTPBOOT is selected by BOOTMETH_EFI due
-to this code having an implicit dependency on do_tftpb().
+Many platforms won't build when NET_LWIP is the default choice in
+Kconfig:
+
+ include/config_distro_bootcmd.h:443:9: error: expected '}' before 'BOOT_TARGET_DEVICES_references_PXE_without_CONFIG_CMD_DHCP_or_PXE'
+ [...]
+
+Set the legacy stack (CONFIG_NET=y) for these platforms.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 ---
- board/engicam/imx8mp/icore_mx8mp.c            |   2 +-
- .../imx8mp_debix_model_a.c                    |   2 +-
- board/ti/am335x/board.c                       |   3 +-
- board/xilinx/common/board.c                   |   3 +-
- boot/Kconfig                                  |   3 +-
- cmd/Kconfig                                   |  90 +++---
- cmd/Makefile                                  |   6 +-
- cmd/elf.c                                     |   2 +-
- cmd/net-lwip.c                                |  13 +
- common/board_r.c                              |   4 +-
- common/usb_kbd.c                              |   2 +-
- drivers/net/Kconfig                           |   2 +-
- include/net-lwip.h                            |   3 +
- lib/tiny-printf.c                             |   3 +-
- net/Makefile                                  |  14 +-
- net/lwip/Makefile                             |   5 +
- net/lwip/dhcp.c                               | 125 ++++++++
- net/lwip/eth_internal.h                       |  35 +++
- net/lwip/net-lwip.c                           | 286 ++++++++++++++++++
- net/lwip/tftp.c                               |  11 +
- 20 files changed, 559 insertions(+), 55 deletions(-)
- create mode 100644 cmd/net-lwip.c
- create mode 100644 net/lwip/Makefile
- create mode 100644 net/lwip/dhcp.c
- create mode 100644 net/lwip/eth_internal.h
- create mode 100644 net/lwip/net-lwip.c
- create mode 100644 net/lwip/tftp.c
+ configs/ad401_defconfig                     | 1 +
+ configs/am43xx_evm_defconfig                | 1 +
+ configs/am43xx_evm_qspiboot_defconfig       | 1 +
+ configs/am43xx_evm_rtconly_defconfig        | 1 +
+ configs/am43xx_evm_usbhost_boot_defconfig   | 1 +
+ configs/am43xx_hs_evm_defconfig             | 1 +
+ configs/am43xx_hs_evm_qspi_defconfig        | 1 +
+ configs/am57xx_evm_defconfig                | 1 +
+ configs/am57xx_hs_evm_defconfig             | 1 +
+ configs/am57xx_hs_evm_usb_defconfig         | 1 +
+ configs/arndale_defconfig                   | 1 +
+ configs/bananapi-cm4-cm4io_defconfig        | 1 +
+ configs/bananapi-m2-pro_defconfig           | 1 +
+ configs/bananapi-m2s_defconfig              | 1 +
+ configs/bananapi-m5_defconfig               | 1 +
+ configs/beelink-gsking-x_defconfig          | 1 +
+ configs/beelink-gt1-ultimate_defconfig      | 1 +
+ configs/beelink-gtking_defconfig            | 1 +
+ configs/beelink-gtkingpro_defconfig         | 1 +
+ configs/clearfog_defconfig                  | 1 +
+ configs/clearfog_gt_8k_defconfig            | 1 +
+ configs/clearfog_sata_defconfig             | 1 +
+ configs/clearfog_spi_defconfig              | 1 +
+ configs/dra7xx_evm_defconfig                | 1 +
+ configs/dra7xx_hs_evm_defconfig             | 1 +
+ configs/dra7xx_hs_evm_usb_defconfig         | 1 +
+ configs/helios4_defconfig                   | 1 +
+ configs/imx8mn_var_som_defconfig            | 1 +
+ configs/jethub_j100_defconfig               | 1 +
+ configs/jethub_j80_defconfig                | 1 +
+ configs/khadas-vim2_defconfig               | 1 +
+ configs/khadas-vim3_defconfig               | 1 +
+ configs/khadas-vim3l_defconfig              | 1 +
+ configs/khadas-vim_defconfig                | 1 +
+ configs/kontron-sl-mx6ul_defconfig          | 1 +
+ configs/kontron-sl-mx8mm_defconfig          | 1 +
+ configs/kontron_pitx_imx8m_defconfig        | 1 +
+ configs/kontron_sl28_defconfig              | 1 +
+ configs/libretech-ac_defconfig              | 1 +
+ configs/libretech-cc_defconfig              | 1 +
+ configs/libretech-cc_v2_defconfig           | 1 +
+ configs/libretech-s905d-pc_defconfig        | 1 +
+ configs/libretech-s912-pc_defconfig         | 1 +
+ configs/marsboard_defconfig                 | 1 +
+ configs/mvebu_crb_cn9130_defconfig          | 1 +
+ configs/mvebu_db_armada8k_defconfig         | 1 +
+ configs/mvebu_db_cn9130_defconfig           | 1 +
+ configs/mvebu_mcbin-88f8040_defconfig       | 1 +
+ configs/mvebu_puzzle-m801-88f8040_defconfig | 1 +
+ configs/mx53cx9020_defconfig                | 1 +
+ configs/mx6cuboxi_defconfig                 | 1 +
+ configs/mx7dsabresd_defconfig               | 1 +
+ configs/mx7dsabresd_qspi_defconfig          | 1 +
+ configs/myir_mys_6ulx_defconfig             | 1 +
+ configs/nanopi-k2_defconfig                 | 1 +
+ configs/novena_defconfig                    | 1 +
+ configs/odroid-c2_defconfig                 | 1 +
+ configs/odroid-c4_defconfig                 | 1 +
+ configs/odroid-go-ultra_defconfig           | 1 +
+ configs/odroid-hc4_defconfig                | 1 +
+ configs/odroid-n2_defconfig                 | 1 +
+ configs/odroid-n2l_defconfig                | 1 +
+ configs/odroid-xu3_defconfig                | 1 +
+ configs/p200_defconfig                      | 1 +
+ configs/p201_defconfig                      | 1 +
+ configs/p212_defconfig                      | 1 +
+ configs/peach-pi_defconfig                  | 1 +
+ configs/peach-pit_defconfig                 | 1 +
+ configs/phycore_pcl063_defconfig            | 1 +
+ configs/pico-dwarf-imx6ul_defconfig         | 1 +
+ configs/pico-dwarf-imx7d_defconfig          | 1 +
+ configs/pico-hobbit-imx6ul_defconfig        | 1 +
+ configs/pico-hobbit-imx7d_defconfig         | 1 +
+ configs/pico-imx6ul_defconfig               | 1 +
+ configs/pico-imx7d_bl33_defconfig           | 1 +
+ configs/pico-imx7d_defconfig                | 1 +
+ configs/pico-nymph-imx7d_defconfig          | 1 +
+ configs/pico-pi-imx6ul_defconfig            | 1 +
+ configs/pico-pi-imx7d_defconfig             | 1 +
+ configs/radxa-zero2_defconfig               | 1 +
+ configs/radxa-zero_defconfig                | 1 +
+ configs/riotboard_defconfig                 | 1 +
+ configs/s400_defconfig                      | 1 +
+ configs/seeed_npi_imx6ull_defconfig         | 1 +
+ configs/smdk5250_defconfig                  | 1 +
+ configs/smdk5420_defconfig                  | 1 +
+ configs/snow_defconfig                      | 1 +
+ configs/spring_defconfig                    | 1 +
+ configs/ten64_tfa_defconfig                 | 1 +
+ configs/turris_mox_defconfig                | 1 +
+ configs/turris_omnia_defconfig              | 1 +
+ configs/u200_defconfig                      | 1 +
+ configs/vexpress_aemv8a_juno_defconfig      | 1 +
+ configs/vexpress_aemv8a_semi_defconfig      | 1 +
+ configs/vexpress_aemv8r_defconfig           | 1 +
+ configs/vexpress_ca9x4_defconfig            | 1 +
+ configs/vexpress_fvp_defconfig              | 1 +
+ configs/videostrong-kii-pro_defconfig       | 1 +
+ configs/wandboard_defconfig                 | 1 +
+ configs/wetek-core2_defconfig               | 1 +
+ configs/wetek-hub_defconfig                 | 1 +
+ configs/wetek-play2_defconfig               | 1 +
+ 102 files changed, 102 insertions(+)
 
-diff --git a/board/engicam/imx8mp/icore_mx8mp.c b/board/engicam/imx8mp/icore_mx8mp.c
-index e2ed70caa43..bfdc447c478 100644
---- a/board/engicam/imx8mp/icore_mx8mp.c
-+++ b/board/engicam/imx8mp/icore_mx8mp.c
-@@ -33,7 +33,7 @@ static void setup_fec(void)
- 	setbits_le32(&gpr->gpr[1], BIT(22));
- }
- 
--#if CONFIG_IS_ENABLED(NET)
-+#if CONFIG_IS_ENABLED(NET) || CONFIG_IS_ENABLED(NET_LWIP)
- int board_phy_config(struct phy_device *phydev)
- {
- 	if (phydev->drv->config)
-diff --git a/board/polyhex/imx8mp_debix_model_a/imx8mp_debix_model_a.c b/board/polyhex/imx8mp_debix_model_a/imx8mp_debix_model_a.c
-index 112770ba493..c709d017483 100644
---- a/board/polyhex/imx8mp_debix_model_a/imx8mp_debix_model_a.c
-+++ b/board/polyhex/imx8mp_debix_model_a/imx8mp_debix_model_a.c
-@@ -29,7 +29,7 @@ static void setup_fec(void)
- 	setbits_le32(&gpr->gpr[1], BIT(22));
- }
- 
--#if CONFIG_IS_ENABLED(NET)
-+#if CONFIG_IS_ENABLED(NET) || CONFIG_IS_ENABLED(NET_LWIP)
- int board_phy_config(struct phy_device *phydev)
- {
- 	if (phydev->drv->config)
-diff --git a/board/ti/am335x/board.c b/board/ti/am335x/board.c
-index 681002ba1da..249c9fd2e7e 100644
---- a/board/ti/am335x/board.c
-+++ b/board/ti/am335x/board.c
-@@ -900,7 +900,8 @@ int board_late_init(void)
- #endif
- 
- /* CPSW plat */
--#if CONFIG_IS_ENABLED(NET) && !CONFIG_IS_ENABLED(OF_CONTROL)
-+#if (CONFIG_IS_ENABLED(NET) || CONFIG_IS_ENABLED(NET_LWIP)) && \
-+    !CONFIG_IS_ENABLED(OF_CONTROL)
- struct cpsw_slave_data slave_data[] = {
- 	{
- 		.slave_reg_ofs  = CPSW_SLAVE0_OFFSET,
-diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
-index 3440402ab46..cb396d4bb0b 100644
---- a/board/xilinx/common/board.c
-+++ b/board/xilinx/common/board.c
-@@ -494,7 +494,8 @@ int board_late_init_xilinx(void)
- 				ret |= env_set_by_index("uuid", id, uuid);
- 			}
- 
--			if (!CONFIG_IS_ENABLED(NET))
-+			if (!(CONFIG_IS_ENABLED(NET) ||
-+			      CONFIG_IS_ENABLED(NET_LWIP)))
- 				continue;
- 
- 			for (i = 0; i < EEPROM_HDR_NO_OF_MAC_ADDR; i++) {
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 798155a5422..f5346b34dcc 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -380,7 +380,7 @@ config BOOT_DEFAULTS_CMDS
- 	select CMD_PART if PARTITIONS
- 	select CMD_DHCP if CMD_NET
- 	select CMD_PING if CMD_NET
--	select CMD_PXE if CMD_NET
-+	select CMD_PXE if (CMD_NET && !NET_LWIP)
- 	select CMD_BOOTI if ARM64
- 	select CMD_BOOTZ if ARM && !ARM64
- 	imply CMD_MII if NET
-@@ -558,6 +558,7 @@ config BOOTMETH_EXTLINUX_PXE
- config BOOTMETH_EFILOADER
- 	bool "Bootdev support for EFI boot"
- 	depends on EFI_BINARY_EXEC
-+	select CMD_TFTPBOOT if CMD_NET
- 	default y
- 	help
- 	  Enables support for EFI boot using bootdevs. This makes the
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 2817ccbd3dc..c3281c97501 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -1788,12 +1788,16 @@ config CMD_AB_SELECT
- 
- endmenu
- 
--if NET
-+if NET || NET_LWIP
- 
- menuconfig CMD_NET
- 	bool "Network commands"
- 	default y
- 
-+endif
-+
-+if NET
-+
- if CMD_NET
- 
- config CMD_BOOTP
-@@ -1802,12 +1806,6 @@ config CMD_BOOTP
- 	help
- 	  bootp - boot image via network using BOOTP/TFTP protocol
- 
--config CMD_DHCP
--	bool "dhcp"
--	depends on CMD_BOOTP
--	help
--	  Boot image via network using DHCP/TFTP protocol
--
- config CMD_DHCP6
- 	bool "dhcp6"
- 	depends on IPV6
-@@ -1951,12 +1949,6 @@ config BOOTP_VCI_STRING
- 	default "U-Boot.arm" if ARM
- 	default "U-Boot"
- 
--config CMD_TFTPBOOT
--	bool "tftpboot"
--	default y
--	help
--	  tftpboot - load file via network using TFTP protocol
--
- config CMD_TFTPPUT
- 	bool "tftp put"
- 	depends on CMD_TFTPBOOT
-@@ -2016,29 +2008,6 @@ config CMD_WGET
- 	  wget is a simple command to download kernel, or other files,
- 	  from a http server over TCP.
- 
--config CMD_MII
--	bool "mii"
--	imply CMD_MDIO
--	help
--	  If set, allows 802.3(clause 22) MII Management functions interface access
--	  The management interface specified in Clause 22 provides
--	  a simple, two signal, serial interface to connect a
--	  Station Management entity and a managed PHY for providing access
--	  to management parameters and services.
--	  The interface is referred to as the MII management interface.
--
--config MII_INIT
--	bool "Call mii_init() in the mii command"
--	depends on CMD_MII && (MPC8XX_FEC || FSLDMAFE || MCFFEC)
--
--config CMD_MDIO
--	bool "mdio"
--	depends on PHYLIB
--	help
--	  If set, allows Enable 802.3(clause 45) MDIO interface registers access
--	  The MDIO interface is orthogonal to the MII interface and extends
--	  it by adding access to more registers through indirect addressing.
--
- config CMD_PING
- 	bool "ping"
- 	help
-@@ -2087,7 +2056,7 @@ config IPV6_ROUTER_DISCOVERY
- 	help
- 	  Will automatically perform router solicitation on first IPv6
- 	  network operation
--endif
-+endif  # if CMD_NET
- 
- config CMD_ETHSW
- 	bool "ethsw"
-@@ -2109,7 +2078,52 @@ config CMD_WOL
- 	help
- 	  Wait for wake-on-lan Magic Packet
- 
--endif
-+endif  # if NET
-+
-+if NET || NET_LWIP
-+
-+if CMD_NET
-+
-+config CMD_DHCP
-+	bool "dhcp"
-+	select PROT_DHCP_LWIP if NET_LWIP
-+	help
-+	  Boot image via network using DHCP/TFTP protocol
-+
-+config CMD_MII
-+	bool "mii"
-+	imply CMD_MDIO
-+	help
-+	  If set, allows 802.3(clause 22) MII Management functions interface access
-+	  The management interface specified in Clause 22 provides
-+	  a simple, two signal, serial interface to connect a
-+	  Station Management entity and a managed PHY for providing access
-+	  to management parameters and services.
-+	  The interface is referred to as the MII management interface.
-+
-+config MII_INIT
-+	bool "Call mii_init() in the mii command"
-+	depends on CMD_MII && (MPC8XX_FEC || FSLDMAFE || MCFFEC)
-+
-+config CMD_MDIO
-+	bool "mdio"
-+	depends on PHYLIB
-+	help
-+	  If set, allows Enable 802.3(clause 45) MDIO interface registers access
-+	  The MDIO interface is orthogonal to the MII interface and extends
-+	  it by adding access to more registers through indirect addressing.
-+
-+config CMD_TFTPBOOT
-+	bool "tftp"
-+	select PROT_UDP_LWIP if NET_LWIP
-+	default n
-+	help
-+	  tftpboot - load file via network using TFTP protocol
-+	  Currently a placeholder (not implemented) when NET_LWIP=y.
-+
-+endif  # if CMD_NET
-+
-+endif  # if NET || NET_LWIP
- 
- menu "Misc commands"
- 
-diff --git a/cmd/Makefile b/cmd/Makefile
-index 91227f1249c..1c8cc42503d 100644
---- a/cmd/Makefile
-+++ b/cmd/Makefile
-@@ -127,7 +127,11 @@ obj-y += legacy-mtd-utils.o
- endif
- obj-$(CONFIG_CMD_MUX) += mux.o
- obj-$(CONFIG_CMD_NAND) += nand.o
--obj-$(CONFIG_CMD_NET) += net.o
-+ifdef CONFIG_CMD_NET
-+obj-$(CONFIG_NET) += net.o
-+obj-$(CONFIG_NET_LWIP) += net-lwip.o
-+CFLAGS_net-lwip.o := -I$(srctree)/lib/lwip/lwip/src/include -I$(srctree)/lib/lwip/u-boot
-+endif
- obj-$(CONFIG_ENV_SUPPORT) += nvedit.o
- obj-$(CONFIG_CMD_NVEDIT_EFI) += nvedit_efi.o
- obj-$(CONFIG_CMD_ONENAND) += onenand.o
-diff --git a/cmd/elf.c b/cmd/elf.c
-index f07e344a596..e4c68744d5f 100644
---- a/cmd/elf.c
-+++ b/cmd/elf.c
-@@ -130,7 +130,7 @@ int do_bootvx(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	else
- 		addr = hextoul(argv[1], NULL);
- 
--#if defined(CONFIG_CMD_NET)
-+#if defined(CONFIG_CMD_NET) && !defined(CONFIG_NET_LWIP)
- 	/*
- 	 * Check to see if we need to tftp the image ourselves
- 	 * before starting
-diff --git a/cmd/net-lwip.c b/cmd/net-lwip.c
-new file mode 100644
-index 00000000000..82edb5fd2e6
---- /dev/null
-+++ b/cmd/net-lwip.c
-@@ -0,0 +1,13 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/* Copyright (C) 2024 Linaro Ltd. */
-+
-+#include <command.h>
-+#include <net.h>
-+
-+#if defined(CONFIG_CMD_DHCP)
-+U_BOOT_CMD(
-+        dhcp,   3,      1,      do_dhcp,
-+        "boot image via network using DHCP/TFTP protocol",
-+        "[loadAddress] [[hostIPaddr:]bootfilename]"
-+);
-+#endif
-diff --git a/common/board_r.c b/common/board_r.c
-index 4faaa202421..49347370a1f 100644
---- a/common/board_r.c
-+++ b/common/board_r.c
-@@ -472,7 +472,7 @@ static int initr_status_led(void)
- }
- #endif
- 
--#ifdef CONFIG_CMD_NET
-+#if defined(CONFIG_CMD_NET)
- static int initr_net(void)
- {
- 	puts("Net:   ");
-@@ -738,7 +738,7 @@ static init_fnc_t init_sequence_r[] = {
- #ifdef CONFIG_PCI_ENDPOINT
- 	pci_ep_init,
- #endif
--#ifdef CONFIG_CMD_NET
-+#if defined(CONFIG_CMD_NET)
- 	INIT_FUNC_WATCHDOG_RESET
- 	initr_net,
- #endif
-diff --git a/common/usb_kbd.c b/common/usb_kbd.c
-index f3b4a3c94e6..1a7d8ca9a67 100644
---- a/common/usb_kbd.c
-+++ b/common/usb_kbd.c
-@@ -418,7 +418,7 @@ static int usb_kbd_testc(struct stdio_dev *sdev)
- 	 */
- 	unsigned long poll_delay = CONFIG_SYS_HZ / 50;
- 
--#ifdef CONFIG_CMD_NET
-+#if defined(CONFIG_CMD_NET) && !defined(CONFIG_NET_LWIP)
- 	/*
- 	 * If net_busy_flag is 1, NET transfer is running,
- 	 * then we check key-pressed every second (first check may be
-diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
-index f893edbd094..12655082af4 100644
---- a/drivers/net/Kconfig
-+++ b/drivers/net/Kconfig
-@@ -97,7 +97,7 @@ config DSA_SANDBOX
- 
- menuconfig NETDEVICES
- 	bool "Network device support"
--	depends on NET
-+	depends on NET || NET_LWIP
- 	select DM_ETH
- 	help
- 	  You must select Y to enable any network device support
-diff --git a/include/net-lwip.h b/include/net-lwip.h
-index 5c3f9e7e86c..cfd06726577 100644
---- a/include/net-lwip.h
-+++ b/include/net-lwip.h
-@@ -10,5 +10,8 @@ struct netif *net_lwip_new_netif(struct udevice *udev);
- struct netif *net_lwip_new_netif_noip(struct udevice *udev);
- void net_lwip_remove_netif(struct netif *netif);
- struct netif *net_lwip_get_netif(void);
-+int net_lwip_rx(struct udevice *udev, struct netif *netif);
-+
-+int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
- 
- #endif /* __NET_LWIP_H__ */
-diff --git a/lib/tiny-printf.c b/lib/tiny-printf.c
-index 9a70c6095b3..f6727360097 100644
---- a/lib/tiny-printf.c
-+++ b/lib/tiny-printf.c
-@@ -269,7 +269,8 @@ static int _vprintf(struct printf_info *info, const char *fmt, va_list va)
- 				}
- 				break;
- 			case 'p':
--				if (CONFIG_IS_ENABLED(NET) || _DEBUG) {
-+				if (CONFIG_IS_ENABLED(NET) ||
-+				    CONFIG_IS_ENABLED(NET_LWIP) || _DEBUG) {
- 					pointer(info, fmt, va_arg(va, void *));
- 					/*
- 					 * Skip this because it pulls in _ctype which is
-diff --git a/net/Makefile b/net/Makefile
-index a9cecee637a..68370595a8e 100644
---- a/net/Makefile
-+++ b/net/Makefile
-@@ -12,11 +12,6 @@ obj-$(CONFIG_CMD_BOOTP) += bootp.o
- obj-$(CONFIG_CMD_CDP)  += cdp.o
- obj-$(CONFIG_CMD_DNS)  += dns.o
- obj-$(CONFIG_DM_DSA)   += dsa-uclass.o
--obj-$(CONFIG_$(SPL_)DM_ETH) += eth-uclass.o
--obj-$(CONFIG_$(SPL_TPL_)BOOTDEV_ETH) += eth_bootdev.o
--obj-$(CONFIG_DM_MDIO)  += mdio-uclass.o
--obj-$(CONFIG_DM_MDIO_MUX) += mdio-mux-uclass.o
--obj-$(CONFIG_$(SPL_)DM_ETH) += eth_common.o
- obj-$(CONFIG_CMD_LINK_LOCAL) += link_local.o
- obj-$(CONFIG_IPV6)     += ndisc.o
- obj-$(CONFIG_$(SPL_)DM_ETH) += net.o
-@@ -43,4 +38,13 @@ CFLAGS_eth_common.o += -Wno-format-extra-args
- 
- endif
- 
-+ifeq ($(filter y,$(CONFIG_NET) $(CONFIG_NET_LWIP)),y)
-+obj-$(CONFIG_$(SPL_TPL_)BOOTDEV_ETH) += eth_bootdev.o
-+obj-$(CONFIG_DM_MDIO)  += mdio-uclass.o
-+obj-$(CONFIG_DM_MDIO_MUX) += mdio-mux-uclass.o
-+obj-$(CONFIG_$(SPL_)DM_ETH) += eth-uclass.o
-+obj-$(CONFIG_$(SPL_)DM_ETH) += eth_common.o
- obj-y += net-common.o
-+endif
-+
-+obj-$(CONFIG_NET_LWIP) += lwip/
-diff --git a/net/lwip/Makefile b/net/lwip/Makefile
-new file mode 100644
-index 00000000000..4e92a101ddb
---- /dev/null
-+++ b/net/lwip/Makefile
-@@ -0,0 +1,5 @@
-+ccflags-y += -I$(srctree)/lib/lwip/lwip/src/include -I$(srctree)/lib/lwip/u-boot
-+
-+obj-$(CONFIG_$(SPL_)DM_ETH) += net-lwip.o
-+obj-$(CONFIG_CMD_DHCP) += dhcp.o
-+obj-$(CONFIG_CMD_TFTPBOOT) += tftp.o
-diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
-new file mode 100644
-index 00000000000..e492ad82a9b
---- /dev/null
-+++ b/net/lwip/dhcp.c
-@@ -0,0 +1,125 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/* Copyright (C) 2024 Linaro Ltd. */
-+
-+#include <command.h>
-+#include <console.h>
-+#include <dm/device.h>
-+#include <linux/delay.h>
-+#include <linux/errno.h>
-+#include <lwip/dhcp.h>
-+#include <lwip/dns.h>
-+#include <lwip/timeouts.h>
-+#include <net.h>
-+#include <time.h>
-+
-+#define DHCP_TIMEOUT_MS 10000
-+
-+#ifdef CONFIG_CMD_TFTPBOOT
-+/* Boot file obtained from DHCP (if present) */
-+static char boot_file_name[DHCP_BOOT_FILE_LEN];
-+#endif
-+
-+static void call_lwip_dhcp_fine_tmr(void *ctx)
-+{
-+	dhcp_fine_tmr();
-+	sys_timeout(10, call_lwip_dhcp_fine_tmr, NULL);
-+}
-+
-+static int dhcp_loop(struct udevice *udev)
-+{
-+	char *ipstr = "ipaddr\0\0";
-+	char *maskstr = "netmask\0\0";
-+	char *gwstr = "gatewayip\0\0";
-+	unsigned long start;
-+	struct netif *netif;
-+	struct dhcp *dhcp;
-+	bool bound;
-+	int idx;
-+
-+	idx = dev_seq(udev);
-+	if (idx < 0 || idx > 99) {
-+		log_err("unexpected idx %d\n", idx);
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	netif = net_lwip_new_netif_noip(udev);
-+	if (!netif)
-+		return CMD_RET_FAILURE;
-+
-+	start = get_timer(0);
-+	dhcp_start(netif);
-+	call_lwip_dhcp_fine_tmr(NULL);
-+
-+	/* Wait for DHCP to complete */
-+	do {
-+		net_lwip_rx(udev, netif);
-+		sys_check_timeouts();
-+		bound = dhcp_supplied_address(netif);
-+		if (bound)
-+			break;
-+		if (ctrlc()) {
-+			printf("Abort\n");
-+			break;
-+		}
-+		mdelay(1);
-+	} while (get_timer(start) < DHCP_TIMEOUT_MS);
-+
-+	sys_untimeout(call_lwip_dhcp_fine_tmr, NULL);
-+
-+	if (!bound) {
-+		net_lwip_remove_netif(netif);
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	dhcp = netif_dhcp_data(netif);
-+
-+	env_set("bootfile", dhcp->boot_file_name);
-+
-+	if (idx > 0) {
-+		sprintf(ipstr, "ipaddr%d", idx);
-+		sprintf(maskstr, "netmask%d", idx);
-+		sprintf(gwstr, "gatewayip%d", idx);
-+	}
-+
-+	env_set(ipstr, ip4addr_ntoa(&dhcp->offered_ip_addr));
-+	env_set(maskstr, ip4addr_ntoa(&dhcp->offered_sn_mask));
-+	env_set("serverip", ip4addr_ntoa(&dhcp->server_ip_addr));
-+	if (dhcp->offered_gw_addr.addr != 0)
-+		env_set(gwstr, ip4addr_ntoa(&dhcp->offered_gw_addr));
-+
-+#ifdef CONFIG_PROT_DNS_LWIP
-+	env_set("dnsip", ip4addr_ntoa(dns_getserver(0)));
-+	env_set("dnsip2", ip4addr_ntoa(dns_getserver(1)));
-+#endif
-+#ifdef CONFIG_CMD_TFTPBOOT
-+	if (dhcp->boot_file_name[0] != '\0')
-+		strncpy(boot_file_name, dhcp->boot_file_name,
-+			sizeof(boot_file_name));
-+#endif
-+
-+	printf("DHCP client bound to address %pI4 (%lu ms)\n",
-+	       &dhcp->offered_ip_addr, get_timer(start));
-+
-+	net_lwip_remove_netif(netif);
-+	return CMD_RET_SUCCESS;
-+}
-+
-+int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-+{
-+	eth_set_current();
-+
-+	return dhcp_loop(eth_get_dev());
-+}
-+
-+int dhcp_run(ulong addr, const char *fname, bool autoload)
-+{
-+	char *dhcp_argv[] = {"dhcp", NULL, };
-+	struct cmd_tbl cmdtp = {};	/* dummy */
-+
-+	if (autoload) {
-+		/* Will be supported when TFTP is added */
-+		return -EOPNOTSUPP;
-+	}
-+
-+	return do_dhcp(&cmdtp, 0, 1, dhcp_argv);
-+}
-diff --git a/net/lwip/eth_internal.h b/net/lwip/eth_internal.h
-new file mode 100644
-index 00000000000..0b829a8d388
---- /dev/null
-+++ b/net/lwip/eth_internal.h
-@@ -0,0 +1,35 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * (C) Copyright 2001-2015
-+ * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
-+ * Joe Hershberger, National Instruments
-+ */
-+
-+#ifndef __ETH_INTERNAL_H
-+#define __ETH_INTERNAL_H
-+
-+/* Do init that is common to driver model and legacy networking */
-+void eth_common_init(void);
-+
-+/**
-+ * eth_env_set_enetaddr_by_index() - set the MAC address environment variable
-+ *
-+ * This sets up an environment variable with the given MAC address (@enetaddr).
-+ * The environment variable to be set is defined by <@base_name><@index>addr.
-+ * If @index is 0 it is omitted. For common Ethernet this means ethaddr,
-+ * eth1addr, etc.
-+ *
-+ * @base_name:	Base name for variable, typically "eth"
-+ * @index:	Index of interface being updated (>=0)
-+ * @enetaddr:	Pointer to MAC address to put into the variable
-+ * Return: 0 if OK, other value on error
-+ */
-+int eth_env_set_enetaddr_by_index(const char *base_name, int index,
-+				 uchar *enetaddr);
-+
-+int eth_mac_skip(int index);
-+void eth_current_changed(void);
-+void eth_set_dev(struct udevice *dev);
-+void eth_set_current_to_next(void);
-+
-+#endif
-diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
-new file mode 100644
-index 00000000000..fa4ad2a65f8
---- /dev/null
-+++ b/net/lwip/net-lwip.c
-@@ -0,0 +1,286 @@
-+// SPDX-License-Identifier: GPL-2.0
-+
-+/* Copyright (C) 2024 Linaro Ltd. */
-+
-+#include <command.h>
-+#include <dm/device.h>
-+#include <dm/uclass.h>
-+#include <lwip/ip4_addr.h>
-+#include <lwip/err.h>
-+#include <lwip/netif.h>
-+#include <lwip/pbuf.h>
-+#include <lwip/etharp.h>
-+#include <lwip/prot/etharp.h>
-+#include <net.h>
-+
-+/* xx:xx:xx:xx:xx:xx\0 */
-+#define MAC_ADDR_STRLEN 18
-+
-+#if defined(CONFIG_API) || defined(CONFIG_EFI_LOADER)
-+void (*push_packet)(void *, int len) = 0;
-+#endif
-+int net_restart_wrap;
-+static uchar net_pkt_buf[(PKTBUFSRX) * PKTSIZE_ALIGN + PKTALIGN];
-+uchar *net_rx_packets[PKTBUFSRX];
-+uchar *net_rx_packet;
-+const u8 net_bcast_ethaddr[6] = { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff };
-+
-+static err_t linkoutput(struct netif *netif, struct pbuf *p)
-+{
-+	struct udevice *udev = netif->state;
-+	void *pp = NULL;
-+	int err;
-+
-+	if ((unsigned long)p->payload % PKTALIGN) {
-+		/*
-+		 * Some net drivers have strict alignment requirements and may
-+		 * fail or output invalid data if the packet is not aligned.
-+		 */
-+		pp = memalign(PKTALIGN, p->len);
-+		if (!pp)
-+			return ERR_ABRT;
-+		memcpy(pp, p->payload, p->len);
-+	}
-+
-+	err = eth_get_ops(udev)->send(udev, pp ? pp : p->payload, p->len);
-+	free(pp);
-+	if (err) {
-+		log_err("send error %d\n", err);
-+		return ERR_ABRT;
-+	}
-+
-+	return ERR_OK;
-+}
-+
-+static err_t net_lwip_if_init(struct netif *netif)
-+{
-+#if LWIP_IPV4
-+	netif->output = etharp_output;
-+#endif
-+	netif->linkoutput = linkoutput;
-+	netif->mtu = 1500;
-+	netif->flags = NETIF_FLAG_BROADCAST | NETIF_FLAG_ETHARP | NETIF_FLAG_LINK_UP;
-+
-+	return ERR_OK;
-+}
-+
-+static void eth_init_rings(void)
-+{
-+	int i;
-+
-+	for (i = 0; i < PKTBUFSRX; i++)
-+		net_rx_packets[i] = net_pkt_buf + i  * PKTSIZE_ALIGN;
-+}
-+
-+struct netif *net_lwip_get_netif(void)
-+{
-+	struct netif *netif, *found = NULL;
-+
-+	NETIF_FOREACH(netif) {
-+		if (!found)
-+			found = netif;
-+		else
-+			printf("Error: more than one netif in lwIP\n");
-+	}
-+	return found;
-+}
-+
-+static int get_udev_ipv4_info(struct udevice *dev, ip4_addr_t *ip,
-+			      ip4_addr_t *mask, ip4_addr_t *gw)
-+{
-+	char *ipstr = "ipaddr\0\0";
-+	char *maskstr = "netmask\0\0";
-+	char *gwstr = "gatewayip\0\0";
-+	int idx = dev_seq(dev);
-+	char *env;
-+
-+	if (idx < 0 || idx > 99) {
-+		log_err("unexpected idx %d\n", idx);
-+		return -1;
-+	}
-+
-+	if (idx) {
-+		sprintf(ipstr, "ipaddr%d", idx);
-+		sprintf(maskstr, "netmask%d", idx);
-+		sprintf(gwstr, "gatewayip%d", idx);
-+	}
-+
-+	ip4_addr_set_zero(ip);
-+	ip4_addr_set_zero(mask);
-+	ip4_addr_set_zero(gw);
-+
-+	env = env_get(ipstr);
-+	if (env)
-+		ip4addr_aton(env, ip);
-+
-+	env = env_get(maskstr);
-+	if (env)
-+		ip4addr_aton(env, mask);
-+
-+	env = env_get(gwstr);
-+	if (env)
-+		ip4addr_aton(env, gw);
-+
-+	return 0;
-+}
-+
-+static struct netif *new_netif(struct udevice *udev, bool with_ip)
-+{
-+	unsigned char enetaddr[ARP_HLEN];
-+	char hwstr[MAC_ADDR_STRLEN];
-+	ip4_addr_t ip, mask, gw;
-+	struct netif *netif;
-+	int ret = 0;
-+	bool first_call = true;
-+
-+	if (!udev)
-+		return NULL;
-+
-+	if (first_call) {
-+		eth_init_rings();
-+		/* Pick a valid active device, if any */
-+		eth_init();
-+		first_call = false;
-+	}
-+
-+	if (eth_start_udev(udev) < 0) {
-+		log_err("Could not start %s\n", udev->name);
-+		return NULL;
-+	}
-+
-+	netif_remove(net_lwip_get_netif());
-+
-+	ip4_addr_set_zero(&ip);
-+	ip4_addr_set_zero(&mask);
-+	ip4_addr_set_zero(&gw);
-+
-+	if (with_ip)
-+		if (get_udev_ipv4_info(udev, &ip, &mask, &gw) < 0)
-+			return NULL;
-+
-+	eth_env_get_enetaddr_by_index("eth", dev_seq(udev), enetaddr);
-+	ret = snprintf(hwstr, MAC_ADDR_STRLEN, "%pM",  enetaddr);
-+	if (ret < 0 || ret >= MAC_ADDR_STRLEN)
-+		return NULL;
-+
-+	netif = calloc(1, sizeof(struct netif));
-+	if (!netif)
-+		return NULL;
-+
-+	netif->name[0] = 'e';
-+	netif->name[1] = 't';
-+
-+	string_to_enetaddr(hwstr, netif->hwaddr);
-+	netif->hwaddr_len = ETHARP_HWADDR_LEN;
-+	debug("adding lwIP netif for %s with hwaddr:%s ip:%s ", udev->name,
-+	      hwstr, ip4addr_ntoa(&ip));
-+	debug("mask:%s ", ip4addr_ntoa(&mask));
-+	debug("gw:%s\n", ip4addr_ntoa(&gw));
-+
-+	if (!netif_add(netif, &ip, &mask, &gw, udev, net_lwip_if_init,
-+		       netif_input)) {
-+		printf("error: netif_add() failed\n");
-+		free(netif);
-+		return NULL;
-+	}
-+
-+	netif_set_up(netif);
-+	netif_set_link_up(netif);
-+	/* Routing: use this interface to reach the default gateway */
-+	netif_set_default(netif);
-+
-+	return netif;
-+}
-+
-+struct netif *net_lwip_new_netif(struct udevice *udev)
-+{
-+	return new_netif(udev, true);
-+}
-+
-+struct netif *net_lwip_new_netif_noip(struct udevice *udev)
-+{
-+
-+	return new_netif(udev, false);
-+}
-+
-+void net_lwip_remove_netif(struct netif *netif)
-+{
-+	netif_remove(netif);
-+	free(netif);
-+}
-+
-+int net_init(void)
-+{
-+	eth_set_current();
-+
-+	net_lwip_new_netif(eth_get_dev());
-+
-+	return 0;
-+}
-+
-+static struct pbuf *alloc_pbuf_and_copy(uchar *data, int len)
-+{
-+        struct pbuf *p, *q;
-+
-+        /* We allocate a pbuf chain of pbufs from the pool. */
-+        p = pbuf_alloc(PBUF_RAW, len, PBUF_POOL);
-+        if (!p) {
-+                LINK_STATS_INC(link.memerr);
-+                LINK_STATS_INC(link.drop);
-+                return NULL;
-+        }
-+
-+        for (q = p; q != NULL; q = q->next) {
-+                memcpy(q->payload, data, q->len);
-+                data += q->len;
-+        }
-+
-+        LINK_STATS_INC(link.recv);
-+
-+        return p;
-+}
-+
-+int net_lwip_rx(struct udevice *udev, struct netif *netif)
-+{
-+	struct pbuf *pbuf;
-+	uchar *packet;
-+	int flags;
-+	int len;
-+	int i;
-+
-+	if (!eth_is_active(udev))
-+		return -EINVAL;
-+
-+	flags = ETH_RECV_CHECK_DEVICE;
-+	for (i = 0; i < ETH_PACKETS_BATCH_RECV; i++) {
-+		len = eth_get_ops(udev)->recv(udev, flags, &packet);
-+		flags = 0;
-+
-+		if (len > 0) {
-+			pbuf = alloc_pbuf_and_copy(packet, len);
-+			if (pbuf)
-+				netif->input(pbuf, netif);
-+			if (eth_get_ops(udev)->free_pkt)
-+				eth_get_ops(udev)->free_pkt(udev, packet, len);
-+		}
-+		if (len <= 0)
-+			break;
-+	}
-+	if (len == -EAGAIN)
-+		len = 0;
-+
-+	return len;
-+}
-+
-+void net_process_received_packet(uchar *in_packet, int len)
-+{
-+#if defined(CONFIG_API) || defined(CONFIG_EFI_LOADER)
-+	if (push_packet)
-+		(*push_packet)(in_packet, len);
-+#endif
-+}
-+
-+u32_t sys_now(void)
-+{
-+	return get_timer(0);
-+}
-diff --git a/net/lwip/tftp.c b/net/lwip/tftp.c
-new file mode 100644
-index 00000000000..1fa246f55d9
---- /dev/null
-+++ b/net/lwip/tftp.c
-@@ -0,0 +1,11 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/* Copyright (C) 2024 Linaro Ltd. */
-+
-+#include <command.h>
-+#include <net-lwip.h>
-+
-+int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-+{
-+	/* Not implemented */
-+	return CMD_RET_FAILURE;
-+}
+diff --git a/configs/ad401_defconfig b/configs/ad401_defconfig
+index b44b9c63e83..9502523b447 100644
+--- a/configs/ad401_defconfig
++++ b/configs/ad401_defconfig
+@@ -56,3 +56,4 @@ CONFIG_USB=y
+ CONFIG_DM_USB_GADGET=y
+ CONFIG_USB_GADGET=y
+ CONFIG_WDT=y
++CONFIG_NET=y
+diff --git a/configs/am43xx_evm_defconfig b/configs/am43xx_evm_defconfig
+index 0fc4c0f269a..3d478615734 100644
+--- a/configs/am43xx_evm_defconfig
++++ b/configs/am43xx_evm_defconfig
+@@ -106,3 +106,4 @@ CONFIG_USB_GADGET_PRODUCT_NUM=0xbd00
+ CONFIG_USB_GADGET_DOWNLOAD=y
+ CONFIG_USB_ETHER=y
+ CONFIG_SPL_USB_ETHER=y
++CONFIG_NET=y
+diff --git a/configs/am43xx_evm_qspiboot_defconfig b/configs/am43xx_evm_qspiboot_defconfig
+index c538c1ae352..fec1e57db42 100644
+--- a/configs/am43xx_evm_qspiboot_defconfig
++++ b/configs/am43xx_evm_qspiboot_defconfig
+@@ -68,3 +68,4 @@ CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
+ CONFIG_USB_GADGET_VENDOR_NUM=0x0403
+ CONFIG_USB_GADGET_PRODUCT_NUM=0xbd00
+ CONFIG_USB_GADGET_DOWNLOAD=y
++CONFIG_NET=y
+diff --git a/configs/am43xx_evm_rtconly_defconfig b/configs/am43xx_evm_rtconly_defconfig
+index 0fe5479757b..6e42869ffc0 100644
+--- a/configs/am43xx_evm_rtconly_defconfig
++++ b/configs/am43xx_evm_rtconly_defconfig
+@@ -85,3 +85,4 @@ CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
+ CONFIG_USB_GADGET_VENDOR_NUM=0x0403
+ CONFIG_USB_GADGET_PRODUCT_NUM=0xbd00
+ CONFIG_USB_GADGET_DOWNLOAD=y
++CONFIG_NET=y
+diff --git a/configs/am43xx_evm_usbhost_boot_defconfig b/configs/am43xx_evm_usbhost_boot_defconfig
+index c4693bc9824..0d0791b3dfa 100644
+--- a/configs/am43xx_evm_usbhost_boot_defconfig
++++ b/configs/am43xx_evm_usbhost_boot_defconfig
+@@ -106,3 +106,4 @@ CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
+ CONFIG_USB_GADGET_VENDOR_NUM=0x0403
+ CONFIG_USB_GADGET_PRODUCT_NUM=0xbd00
+ CONFIG_USB_GADGET_DOWNLOAD=y
++CONFIG_NET=y
+diff --git a/configs/am43xx_hs_evm_defconfig b/configs/am43xx_hs_evm_defconfig
+index 980ef13f104..4be7c6fbef2 100644
+--- a/configs/am43xx_hs_evm_defconfig
++++ b/configs/am43xx_hs_evm_defconfig
+@@ -103,3 +103,4 @@ CONFIG_USB_GADGET_PRODUCT_NUM=0xbd00
+ CONFIG_USB_GADGET_DOWNLOAD=y
+ CONFIG_USB_ETHER=y
+ CONFIG_SPL_USB_ETHER=y
++CONFIG_NET=y
+diff --git a/configs/am43xx_hs_evm_qspi_defconfig b/configs/am43xx_hs_evm_qspi_defconfig
+index 75725e179d7..4ca30fd07ff 100644
+--- a/configs/am43xx_hs_evm_qspi_defconfig
++++ b/configs/am43xx_hs_evm_qspi_defconfig
+@@ -69,3 +69,4 @@ CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
+ CONFIG_USB_GADGET_VENDOR_NUM=0x0403
+ CONFIG_USB_GADGET_PRODUCT_NUM=0xbd00
+ CONFIG_USB_GADGET_DOWNLOAD=y
++CONFIG_NET=y
+diff --git a/configs/am57xx_evm_defconfig b/configs/am57xx_evm_defconfig
+index 587af53acb6..282979769bb 100644
+--- a/configs/am57xx_evm_defconfig
++++ b/configs/am57xx_evm_defconfig
+@@ -120,3 +120,4 @@ CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
+ CONFIG_USB_GADGET_VENDOR_NUM=0x0451
+ CONFIG_USB_GADGET_PRODUCT_NUM=0xd022
+ CONFIG_LIBAVB=y
++CONFIG_NET=y
+diff --git a/configs/am57xx_hs_evm_defconfig b/configs/am57xx_hs_evm_defconfig
+index b790897645f..eb45b0d75ee 100644
+--- a/configs/am57xx_hs_evm_defconfig
++++ b/configs/am57xx_hs_evm_defconfig
+@@ -116,3 +116,4 @@ CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
+ CONFIG_USB_GADGET_VENDOR_NUM=0x0451
+ CONFIG_USB_GADGET_PRODUCT_NUM=0xd022
+ CONFIG_LIBAVB=y
++CONFIG_NET=y
+diff --git a/configs/am57xx_hs_evm_usb_defconfig b/configs/am57xx_hs_evm_usb_defconfig
+index 450751b354f..de63ff515e1 100644
+--- a/configs/am57xx_hs_evm_usb_defconfig
++++ b/configs/am57xx_hs_evm_usb_defconfig
+@@ -117,3 +117,4 @@ CONFIG_USB_GADGET_VENDOR_NUM=0x0451
+ CONFIG_USB_GADGET_PRODUCT_NUM=0xd022
+ CONFIG_SPL_DFU=y
+ CONFIG_LIBAVB=y
++CONFIG_NET=y
+diff --git a/configs/arndale_defconfig b/configs/arndale_defconfig
+index b664ad58773..9a8439a24df 100644
+--- a/configs/arndale_defconfig
++++ b/configs/arndale_defconfig
+@@ -57,3 +57,4 @@ CONFIG_USB_XHCI_HCD=y
+ CONFIG_USB_XHCI_DWC3=y
+ CONFIG_USB_EHCI_HCD=y
+ CONFIG_USB_HOST_ETHER=y
++CONFIG_NET=y
+diff --git a/configs/bananapi-cm4-cm4io_defconfig b/configs/bananapi-cm4-cm4io_defconfig
+index cb78dabc13a..a2baec987b6 100644
+--- a/configs/bananapi-cm4-cm4io_defconfig
++++ b/configs/bananapi-cm4-cm4io_defconfig
+@@ -88,3 +88,4 @@ CONFIG_VIDEO_BMP_RLE8=y
+ CONFIG_BMP_16BPP=y
+ CONFIG_BMP_24BPP=y
+ CONFIG_BMP_32BPP=y
++CONFIG_NET=y
+diff --git a/configs/bananapi-m2-pro_defconfig b/configs/bananapi-m2-pro_defconfig
+index 196bc4077d6..fad40f49fdc 100644
+--- a/configs/bananapi-m2-pro_defconfig
++++ b/configs/bananapi-m2-pro_defconfig
+@@ -81,3 +81,4 @@ CONFIG_VIDEO_BMP_RLE8=y
+ CONFIG_BMP_16BPP=y
+ CONFIG_BMP_24BPP=y
+ CONFIG_BMP_32BPP=y
++CONFIG_NET=y
+diff --git a/configs/bananapi-m2s_defconfig b/configs/bananapi-m2s_defconfig
+index 7b137d5e1c4..d3e2bb9aeac 100644
+--- a/configs/bananapi-m2s_defconfig
++++ b/configs/bananapi-m2s_defconfig
+@@ -86,3 +86,4 @@ CONFIG_VIDEO_BMP_RLE8=y
+ CONFIG_BMP_16BPP=y
+ CONFIG_BMP_24BPP=y
+ CONFIG_BMP_32BPP=y
++CONFIG_NET=y
+diff --git a/configs/bananapi-m5_defconfig b/configs/bananapi-m5_defconfig
+index 99ed7c9669a..0505283a061 100644
+--- a/configs/bananapi-m5_defconfig
++++ b/configs/bananapi-m5_defconfig
+@@ -81,3 +81,4 @@ CONFIG_VIDEO_BMP_RLE8=y
+ CONFIG_BMP_16BPP=y
+ CONFIG_BMP_24BPP=y
+ CONFIG_BMP_32BPP=y
++CONFIG_NET=y
+diff --git a/configs/beelink-gsking-x_defconfig b/configs/beelink-gsking-x_defconfig
+index c1e60ede4a0..28e13a155b3 100644
+--- a/configs/beelink-gsking-x_defconfig
++++ b/configs/beelink-gsking-x_defconfig
+@@ -78,3 +78,4 @@ CONFIG_VIDEO_MESON=y
+ CONFIG_VIDEO_DT_SIMPLEFB=y
+ CONFIG_SPLASH_SCREEN=y
+ CONFIG_SPLASH_SCREEN_ALIGN=y
++CONFIG_NET=y
+diff --git a/configs/beelink-gt1-ultimate_defconfig b/configs/beelink-gt1-ultimate_defconfig
+index 0e30e13c823..73a843f9e5a 100644
+--- a/configs/beelink-gt1-ultimate_defconfig
++++ b/configs/beelink-gt1-ultimate_defconfig
+@@ -82,3 +82,4 @@ CONFIG_VIDEO_BMP_RLE8=y
+ CONFIG_BMP_16BPP=y
+ CONFIG_BMP_24BPP=y
+ CONFIG_BMP_32BPP=y
++CONFIG_NET=y
+diff --git a/configs/beelink-gtking_defconfig b/configs/beelink-gtking_defconfig
+index 0b644f0e349..281f6ae496b 100644
+--- a/configs/beelink-gtking_defconfig
++++ b/configs/beelink-gtking_defconfig
+@@ -78,3 +78,4 @@ CONFIG_VIDEO_MESON=y
+ CONFIG_VIDEO_DT_SIMPLEFB=y
+ CONFIG_SPLASH_SCREEN=y
+ CONFIG_SPLASH_SCREEN_ALIGN=y
++CONFIG_NET=y
+diff --git a/configs/beelink-gtkingpro_defconfig b/configs/beelink-gtkingpro_defconfig
+index a694617a968..93ac53fb1dc 100644
+--- a/configs/beelink-gtkingpro_defconfig
++++ b/configs/beelink-gtkingpro_defconfig
+@@ -78,3 +78,4 @@ CONFIG_VIDEO_MESON=y
+ CONFIG_VIDEO_DT_SIMPLEFB=y
+ CONFIG_SPLASH_SCREEN=y
+ CONFIG_SPLASH_SCREEN_ALIGN=y
++CONFIG_NET=y
+diff --git a/configs/clearfog_defconfig b/configs/clearfog_defconfig
+index 62dbf2aa48f..bd21d3e0f02 100644
+--- a/configs/clearfog_defconfig
++++ b/configs/clearfog_defconfig
+@@ -77,3 +77,4 @@ CONFIG_SYS_NS16550=y
+ CONFIG_KIRKWOOD_SPI=y
+ CONFIG_USB=y
+ CONFIG_USB_XHCI_HCD=y
++CONFIG_NET=y
+diff --git a/configs/clearfog_gt_8k_defconfig b/configs/clearfog_gt_8k_defconfig
+index df7e04a75bb..5e1292dc7e7 100644
+--- a/configs/clearfog_gt_8k_defconfig
++++ b/configs/clearfog_gt_8k_defconfig
+@@ -81,3 +81,4 @@ CONFIG_USB_ETHER_ASIX=y
+ CONFIG_USB_ETHER_MCS7830=y
+ CONFIG_USB_ETHER_RTL8152=y
+ CONFIG_USB_ETHER_SMSC95XX=y
++CONFIG_NET=y
+diff --git a/configs/clearfog_sata_defconfig b/configs/clearfog_sata_defconfig
+index 41382f995d3..16d052223b3 100644
+--- a/configs/clearfog_sata_defconfig
++++ b/configs/clearfog_sata_defconfig
+@@ -78,3 +78,4 @@ CONFIG_SYS_NS16550=y
+ CONFIG_KIRKWOOD_SPI=y
+ CONFIG_USB=y
+ CONFIG_USB_XHCI_HCD=y
++CONFIG_NET=y
+diff --git a/configs/clearfog_spi_defconfig b/configs/clearfog_spi_defconfig
+index f345b12e6c7..820f3575316 100644
+--- a/configs/clearfog_spi_defconfig
++++ b/configs/clearfog_spi_defconfig
+@@ -78,3 +78,4 @@ CONFIG_SYS_NS16550=y
+ CONFIG_KIRKWOOD_SPI=y
+ CONFIG_USB=y
+ CONFIG_USB_XHCI_HCD=y
++CONFIG_NET=y
+diff --git a/configs/dra7xx_evm_defconfig b/configs/dra7xx_evm_defconfig
+index 6264d9fa7ad..b6bca2ad99c 100644
+--- a/configs/dra7xx_evm_defconfig
++++ b/configs/dra7xx_evm_defconfig
+@@ -144,3 +144,4 @@ CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
+ CONFIG_USB_GADGET_VENDOR_NUM=0x0451
+ CONFIG_USB_GADGET_PRODUCT_NUM=0xd022
+ CONFIG_SPL_DFU=y
++CONFIG_NET=y
+diff --git a/configs/dra7xx_hs_evm_defconfig b/configs/dra7xx_hs_evm_defconfig
+index 4e7929718fd..0fedb21a362 100644
+--- a/configs/dra7xx_hs_evm_defconfig
++++ b/configs/dra7xx_hs_evm_defconfig
+@@ -138,3 +138,4 @@ CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
+ CONFIG_USB_GADGET_VENDOR_NUM=0x0451
+ CONFIG_USB_GADGET_PRODUCT_NUM=0xd022
+ CONFIG_SPL_DFU=y
++CONFIG_NET=y
+diff --git a/configs/dra7xx_hs_evm_usb_defconfig b/configs/dra7xx_hs_evm_usb_defconfig
+index 68d342b277c..528a4fcec24 100644
+--- a/configs/dra7xx_hs_evm_usb_defconfig
++++ b/configs/dra7xx_hs_evm_usb_defconfig
+@@ -125,3 +125,4 @@ CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
+ CONFIG_USB_GADGET_VENDOR_NUM=0x0451
+ CONFIG_USB_GADGET_PRODUCT_NUM=0xd022
+ CONFIG_SPL_DFU=y
++CONFIG_NET=y
+diff --git a/configs/helios4_defconfig b/configs/helios4_defconfig
+index 29b6230e901..1a2166d3778 100644
+--- a/configs/helios4_defconfig
++++ b/configs/helios4_defconfig
+@@ -77,3 +77,4 @@ CONFIG_SYS_NS16550=y
+ CONFIG_KIRKWOOD_SPI=y
+ CONFIG_USB=y
+ CONFIG_USB_XHCI_HCD=y
++CONFIG_NET=y
+diff --git a/configs/imx8mn_var_som_defconfig b/configs/imx8mn_var_som_defconfig
+index 0155cb2044e..d8aea3b474c 100644
+--- a/configs/imx8mn_var_som_defconfig
++++ b/configs/imx8mn_var_som_defconfig
+@@ -114,3 +114,4 @@ CONFIG_USB_GADGET_VENDOR_NUM=0x0525
+ CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
+ CONFIG_CI_UDC=y
+ CONFIG_IMX_WATCHDOG=y
++CONFIG_NET=y
+diff --git a/configs/jethub_j100_defconfig b/configs/jethub_j100_defconfig
+index 9de6b4b44d9..805223551a3 100644
+--- a/configs/jethub_j100_defconfig
++++ b/configs/jethub_j100_defconfig
+@@ -73,3 +73,4 @@ CONFIG_USB_GADGET_PRODUCT_NUM=0xfada
+ CONFIG_USB_GADGET_DWC2_OTG=y
+ CONFIG_USB_GADGET_DOWNLOAD=y
+ CONFIG_RANDOM_UUID=y
++CONFIG_NET=y
+diff --git a/configs/jethub_j80_defconfig b/configs/jethub_j80_defconfig
+index 85306872f9a..c22d81a755b 100644
+--- a/configs/jethub_j80_defconfig
++++ b/configs/jethub_j80_defconfig
+@@ -77,3 +77,4 @@ CONFIG_USB_GADGET_PRODUCT_NUM=0xfada
+ CONFIG_USB_GADGET_DWC2_OTG=y
+ CONFIG_USB_GADGET_DOWNLOAD=y
+ CONFIG_RANDOM_UUID=y
++CONFIG_NET=y
+diff --git a/configs/khadas-vim2_defconfig b/configs/khadas-vim2_defconfig
+index 50f8b306505..5eb7106b674 100644
+--- a/configs/khadas-vim2_defconfig
++++ b/configs/khadas-vim2_defconfig
+@@ -77,3 +77,4 @@ CONFIG_USB_GADGET_VENDOR_NUM=0x1b8e
+ CONFIG_USB_GADGET_PRODUCT_NUM=0xfada
+ CONFIG_USB_GADGET_DWC2_OTG=y
+ CONFIG_USB_GADGET_DOWNLOAD=y
++CONFIG_NET=y
+diff --git a/configs/khadas-vim3_defconfig b/configs/khadas-vim3_defconfig
+index 32579b8ac36..d0f03dad0a8 100644
+--- a/configs/khadas-vim3_defconfig
++++ b/configs/khadas-vim3_defconfig
+@@ -102,3 +102,4 @@ CONFIG_VIDEO_BMP_RLE8=y
+ CONFIG_BMP_16BPP=y
+ CONFIG_BMP_24BPP=y
+ CONFIG_BMP_32BPP=y
++CONFIG_NET=y
+diff --git a/configs/khadas-vim3l_defconfig b/configs/khadas-vim3l_defconfig
+index b9f4690045a..94dd1055b3c 100644
+--- a/configs/khadas-vim3l_defconfig
++++ b/configs/khadas-vim3l_defconfig
+@@ -102,3 +102,4 @@ CONFIG_VIDEO_BMP_RLE8=y
+ CONFIG_BMP_16BPP=y
+ CONFIG_BMP_24BPP=y
+ CONFIG_BMP_32BPP=y
++CONFIG_NET=y
+diff --git a/configs/khadas-vim_defconfig b/configs/khadas-vim_defconfig
+index ac00e8975e1..13be376ebd7 100644
+--- a/configs/khadas-vim_defconfig
++++ b/configs/khadas-vim_defconfig
+@@ -68,3 +68,4 @@ CONFIG_USB_GADGET_VENDOR_NUM=0x1b8e
+ CONFIG_USB_GADGET_PRODUCT_NUM=0xfada
+ CONFIG_USB_GADGET_DWC2_OTG=y
+ CONFIG_USB_GADGET_DOWNLOAD=y
++CONFIG_NET=y
+diff --git a/configs/kontron-sl-mx6ul_defconfig b/configs/kontron-sl-mx6ul_defconfig
+index f295ecfe4b7..7096d21468b 100644
+--- a/configs/kontron-sl-mx6ul_defconfig
++++ b/configs/kontron-sl-mx6ul_defconfig
+@@ -109,3 +109,4 @@ CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
+ CONFIG_CI_UDC=y
+ CONFIG_USB_GADGET_DOWNLOAD=y
+ CONFIG_SPL_USB_SDP_SUPPORT=y
++CONFIG_NET=y
+diff --git a/configs/kontron-sl-mx8mm_defconfig b/configs/kontron-sl-mx8mm_defconfig
+index d85a4335c63..facdedd22b0 100644
+--- a/configs/kontron-sl-mx8mm_defconfig
++++ b/configs/kontron-sl-mx8mm_defconfig
+@@ -150,3 +150,4 @@ CONFIG_EFI_SET_TIME=y
+ CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
+ CONFIG_EFI_CAPSULE_ON_DISK=y
+ CONFIG_EFI_CAPSULE_FIRMWARE_FIT=y
++CONFIG_NET=y
+diff --git a/configs/kontron_pitx_imx8m_defconfig b/configs/kontron_pitx_imx8m_defconfig
+index 52238831229..b35d9aa0283 100644
+--- a/configs/kontron_pitx_imx8m_defconfig
++++ b/configs/kontron_pitx_imx8m_defconfig
+@@ -114,3 +114,4 @@ CONFIG_USB_DWC3=y
+ CONFIG_EFI_SET_TIME=y
+ CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
+ CONFIG_EFI_CAPSULE_FIRMWARE_FIT=y
++CONFIG_NET=y
+diff --git a/configs/kontron_sl28_defconfig b/configs/kontron_sl28_defconfig
+index c4493e50a32..aebcdaea9e5 100644
+--- a/configs/kontron_sl28_defconfig
++++ b/configs/kontron_sl28_defconfig
+@@ -132,3 +132,4 @@ CONFIG_WDT_SP805=y
+ CONFIG_EFI_SET_TIME=y
+ CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
+ CONFIG_EFI_CAPSULE_FIRMWARE_FIT=y
++CONFIG_NET=y
+diff --git a/configs/libretech-ac_defconfig b/configs/libretech-ac_defconfig
+index 6ad04570022..874153174df 100644
+--- a/configs/libretech-ac_defconfig
++++ b/configs/libretech-ac_defconfig
+@@ -96,3 +96,4 @@ CONFIG_VIDEO_BMP_RLE8=y
+ CONFIG_BMP_16BPP=y
+ CONFIG_BMP_24BPP=y
+ CONFIG_BMP_32BPP=y
++CONFIG_NET=y
+diff --git a/configs/libretech-cc_defconfig b/configs/libretech-cc_defconfig
+index beb919ca6e8..fe40804f9fc 100644
+--- a/configs/libretech-cc_defconfig
++++ b/configs/libretech-cc_defconfig
+@@ -79,3 +79,4 @@ CONFIG_VIDEO_BMP_RLE8=y
+ CONFIG_BMP_16BPP=y
+ CONFIG_BMP_24BPP=y
+ CONFIG_BMP_32BPP=y
++CONFIG_NET=y
+diff --git a/configs/libretech-cc_v2_defconfig b/configs/libretech-cc_v2_defconfig
+index 6859dfd517c..646f71be6a0 100644
+--- a/configs/libretech-cc_v2_defconfig
++++ b/configs/libretech-cc_v2_defconfig
+@@ -83,3 +83,4 @@ CONFIG_VIDEO=y
+ CONFIG_SYS_WHITE_ON_BLACK=y
+ CONFIG_VIDEO_MESON=y
+ CONFIG_VIDEO_DT_SIMPLEFB=y
++CONFIG_NET=y
+diff --git a/configs/libretech-s905d-pc_defconfig b/configs/libretech-s905d-pc_defconfig
+index 0adc0afdf30..eb02012a21d 100644
+--- a/configs/libretech-s905d-pc_defconfig
++++ b/configs/libretech-s905d-pc_defconfig
+@@ -90,3 +90,4 @@ CONFIG_VIDEO_BMP_RLE8=y
+ CONFIG_BMP_16BPP=y
+ CONFIG_BMP_24BPP=y
+ CONFIG_BMP_32BPP=y
++CONFIG_NET=y
+diff --git a/configs/libretech-s912-pc_defconfig b/configs/libretech-s912-pc_defconfig
+index cbce0cf4000..1be8ab43e4b 100644
+--- a/configs/libretech-s912-pc_defconfig
++++ b/configs/libretech-s912-pc_defconfig
+@@ -89,3 +89,4 @@ CONFIG_VIDEO_BMP_RLE8=y
+ CONFIG_BMP_16BPP=y
+ CONFIG_BMP_24BPP=y
+ CONFIG_BMP_32BPP=y
++CONFIG_NET=y
+diff --git a/configs/marsboard_defconfig b/configs/marsboard_defconfig
+index 198fec2cb2c..24c48b101ee 100644
+--- a/configs/marsboard_defconfig
++++ b/configs/marsboard_defconfig
+@@ -71,3 +71,4 @@ CONFIG_IMX_HDMI=y
+ CONFIG_SPLASH_SCREEN=y
+ CONFIG_SPLASH_SCREEN_ALIGN=y
+ CONFIG_BMP_16BPP=y
++CONFIG_NET=y
+diff --git a/configs/mvebu_crb_cn9130_defconfig b/configs/mvebu_crb_cn9130_defconfig
+index 4d5f575b038..722fe226b43 100644
+--- a/configs/mvebu_crb_cn9130_defconfig
++++ b/configs/mvebu_crb_cn9130_defconfig
+@@ -86,3 +86,4 @@ CONFIG_USB_ETHER_ASIX=y
+ CONFIG_USB_ETHER_MCS7830=y
+ CONFIG_USB_ETHER_RTL8152=y
+ CONFIG_USB_ETHER_SMSC95XX=y
++CONFIG_NET=y
+diff --git a/configs/mvebu_db_armada8k_defconfig b/configs/mvebu_db_armada8k_defconfig
+index 6913796c010..9964c5d8244 100644
+--- a/configs/mvebu_db_armada8k_defconfig
++++ b/configs/mvebu_db_armada8k_defconfig
+@@ -75,3 +75,4 @@ CONFIG_USB_ETHER_ASIX=y
+ CONFIG_USB_ETHER_MCS7830=y
+ CONFIG_USB_ETHER_RTL8152=y
+ CONFIG_USB_ETHER_SMSC95XX=y
++CONFIG_NET=y
+diff --git a/configs/mvebu_db_cn9130_defconfig b/configs/mvebu_db_cn9130_defconfig
+index 9133e25b241..3cf83522e67 100644
+--- a/configs/mvebu_db_cn9130_defconfig
++++ b/configs/mvebu_db_cn9130_defconfig
+@@ -91,3 +91,4 @@ CONFIG_USB_ETHER_ASIX=y
+ CONFIG_USB_ETHER_MCS7830=y
+ CONFIG_USB_ETHER_RTL8152=y
+ CONFIG_USB_ETHER_SMSC95XX=y
++CONFIG_NET=y
+diff --git a/configs/mvebu_mcbin-88f8040_defconfig b/configs/mvebu_mcbin-88f8040_defconfig
+index eef612a261e..c89d6c33d4e 100644
+--- a/configs/mvebu_mcbin-88f8040_defconfig
++++ b/configs/mvebu_mcbin-88f8040_defconfig
+@@ -81,3 +81,4 @@ CONFIG_USB_ETHER_ASIX=y
+ CONFIG_USB_ETHER_MCS7830=y
+ CONFIG_USB_ETHER_RTL8152=y
+ CONFIG_USB_ETHER_SMSC95XX=y
++CONFIG_NET=y
+diff --git a/configs/mvebu_puzzle-m801-88f8040_defconfig b/configs/mvebu_puzzle-m801-88f8040_defconfig
+index b00e92908b3..8304fd6cd87 100644
+--- a/configs/mvebu_puzzle-m801-88f8040_defconfig
++++ b/configs/mvebu_puzzle-m801-88f8040_defconfig
+@@ -83,3 +83,4 @@ CONFIG_USB=y
+ CONFIG_USB_XHCI_HCD=y
+ CONFIG_USB_EHCI_HCD=y
+ # CONFIG_EFI_LOADER is not set
++CONFIG_NET=y
+diff --git a/configs/mx53cx9020_defconfig b/configs/mx53cx9020_defconfig
+index c20c6a40a1d..9d127dd2d64 100644
+--- a/configs/mx53cx9020_defconfig
++++ b/configs/mx53cx9020_defconfig
+@@ -41,3 +41,4 @@ CONFIG_VIDEO=y
+ CONFIG_SYS_WHITE_ON_BLACK=y
+ CONFIG_VIDEO_IPUV3=y
+ CONFIG_IMX_VIDEO_SKIP=y
++CONFIG_NET=y
+diff --git a/configs/mx6cuboxi_defconfig b/configs/mx6cuboxi_defconfig
+index e3aba715aa5..cd400eec02f 100644
+--- a/configs/mx6cuboxi_defconfig
++++ b/configs/mx6cuboxi_defconfig
+@@ -93,3 +93,4 @@ CONFIG_SPLASH_SCREEN=y
+ CONFIG_SPLASH_SCREEN_ALIGN=y
+ CONFIG_BMP_16BPP=y
+ CONFIG_IMX_WATCHDOG=y
++CONFIG_NET=y
+diff --git a/configs/mx7dsabresd_defconfig b/configs/mx7dsabresd_defconfig
+index 7811b17bf0f..2072fea5bc7 100644
+--- a/configs/mx7dsabresd_defconfig
++++ b/configs/mx7dsabresd_defconfig
+@@ -89,3 +89,4 @@ CONFIG_CI_UDC=y
+ CONFIG_USB_GADGET_DOWNLOAD=y
+ CONFIG_IMX_WATCHDOG=y
+ CONFIG_ERRNO_STR=y
++CONFIG_NET=y
+diff --git a/configs/mx7dsabresd_qspi_defconfig b/configs/mx7dsabresd_qspi_defconfig
+index 2ee8bd36252..36464c1387e 100644
+--- a/configs/mx7dsabresd_qspi_defconfig
++++ b/configs/mx7dsabresd_qspi_defconfig
+@@ -91,3 +91,4 @@ CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
+ CONFIG_CI_UDC=y
+ CONFIG_USB_GADGET_DOWNLOAD=y
+ CONFIG_ERRNO_STR=y
++CONFIG_NET=y
+diff --git a/configs/myir_mys_6ulx_defconfig b/configs/myir_mys_6ulx_defconfig
+index b165dd407d1..39ceea85115 100644
+--- a/configs/myir_mys_6ulx_defconfig
++++ b/configs/myir_mys_6ulx_defconfig
+@@ -70,3 +70,4 @@ CONFIG_SPL_USB_HOST=y
+ CONFIG_USB_GADGET=y
+ CONFIG_SPL_USB_GADGET=y
+ # CONFIG_RANDOM_UUID is not set
++CONFIG_NET=y
+diff --git a/configs/nanopi-k2_defconfig b/configs/nanopi-k2_defconfig
+index 2e1c756bf7a..db0a6f8c079 100644
+--- a/configs/nanopi-k2_defconfig
++++ b/configs/nanopi-k2_defconfig
+@@ -46,3 +46,4 @@ CONFIG_DM_REGULATOR_FIXED=y
+ CONFIG_DEBUG_UART_ANNOUNCE=y
+ CONFIG_DEBUG_UART_SKIP_INIT=y
+ CONFIG_MESON_SERIAL=y
++CONFIG_NET=y
+diff --git a/configs/novena_defconfig b/configs/novena_defconfig
+index dd3541bc59a..9dc80863d9d 100644
+--- a/configs/novena_defconfig
++++ b/configs/novena_defconfig
+@@ -106,3 +106,4 @@ CONFIG_IMX_VIDEO_SKIP=y
+ CONFIG_IMX_HDMI=y
+ CONFIG_SPLASH_SCREEN=y
+ CONFIG_BMP_16BPP=y
++CONFIG_NET=y
+diff --git a/configs/odroid-c2_defconfig b/configs/odroid-c2_defconfig
+index ce5eaec3cd2..e922314e54a 100644
+--- a/configs/odroid-c2_defconfig
++++ b/configs/odroid-c2_defconfig
+@@ -71,3 +71,4 @@ CONFIG_VIDEO_BMP_RLE8=y
+ CONFIG_BMP_16BPP=y
+ CONFIG_BMP_24BPP=y
+ CONFIG_BMP_32BPP=y
++CONFIG_NET=y
+diff --git a/configs/odroid-c4_defconfig b/configs/odroid-c4_defconfig
+index 4ef1e681666..9b59ecea421 100644
+--- a/configs/odroid-c4_defconfig
++++ b/configs/odroid-c4_defconfig
+@@ -82,3 +82,4 @@ CONFIG_VIDEO_BMP_RLE8=y
+ CONFIG_BMP_16BPP=y
+ CONFIG_BMP_24BPP=y
+ CONFIG_BMP_32BPP=y
++CONFIG_NET=y
+diff --git a/configs/odroid-go-ultra_defconfig b/configs/odroid-go-ultra_defconfig
+index 06437fe3ae0..20e4bdea976 100644
+--- a/configs/odroid-go-ultra_defconfig
++++ b/configs/odroid-go-ultra_defconfig
+@@ -75,3 +75,4 @@ CONFIG_USB_GADGET_PRODUCT_NUM=0xfada
+ CONFIG_USB_GADGET_DWC2_OTG=y
+ CONFIG_USB_GADGET_DWC2_OTG_PHY_BUS_WIDTH_8=y
+ CONFIG_USB_GADGET_DOWNLOAD=y
++CONFIG_NET=y
+diff --git a/configs/odroid-hc4_defconfig b/configs/odroid-hc4_defconfig
+index 60233fb9cee..ffcdb4f4a2e 100644
+--- a/configs/odroid-hc4_defconfig
++++ b/configs/odroid-hc4_defconfig
+@@ -99,3 +99,4 @@ CONFIG_VIDEO_BMP_RLE8=y
+ CONFIG_BMP_16BPP=y
+ CONFIG_BMP_24BPP=y
+ CONFIG_BMP_32BPP=y
++CONFIG_NET=y
+diff --git a/configs/odroid-n2_defconfig b/configs/odroid-n2_defconfig
+index a4cc766f84a..72a0c2e51c7 100644
+--- a/configs/odroid-n2_defconfig
++++ b/configs/odroid-n2_defconfig
+@@ -79,3 +79,4 @@ CONFIG_VIDEO_DT_SIMPLEFB=y
+ CONFIG_BMP_16BPP=y
+ CONFIG_BMP_24BPP=y
+ CONFIG_BMP_32BPP=y
++CONFIG_NET=y
+diff --git a/configs/odroid-n2l_defconfig b/configs/odroid-n2l_defconfig
+index 3f657d18812..45617f04705 100644
+--- a/configs/odroid-n2l_defconfig
++++ b/configs/odroid-n2l_defconfig
+@@ -74,3 +74,4 @@ CONFIG_VIDEO_DT_SIMPLEFB=y
+ CONFIG_BMP_16BPP=y
+ CONFIG_BMP_24BPP=y
+ CONFIG_BMP_32BPP=y
++CONFIG_NET=y
+diff --git a/configs/odroid-xu3_defconfig b/configs/odroid-xu3_defconfig
+index c80900e2cc5..66e51ad1b79 100644
+--- a/configs/odroid-xu3_defconfig
++++ b/configs/odroid-xu3_defconfig
+@@ -72,3 +72,4 @@ CONFIG_USB_GADGET_VENDOR_NUM=0x04e8
+ CONFIG_USB_GADGET_PRODUCT_NUM=0x6601
+ CONFIG_USB_GADGET_DOWNLOAD=y
+ CONFIG_ERRNO_STR=y
++CONFIG_NET=y
+diff --git a/configs/p200_defconfig b/configs/p200_defconfig
+index b6946034795..1a84f5cfb5b 100644
+--- a/configs/p200_defconfig
++++ b/configs/p200_defconfig
+@@ -45,3 +45,4 @@ CONFIG_DM_REGULATOR_FIXED=y
+ CONFIG_DEBUG_UART_ANNOUNCE=y
+ CONFIG_DEBUG_UART_SKIP_INIT=y
+ CONFIG_MESON_SERIAL=y
++CONFIG_NET=y
+diff --git a/configs/p201_defconfig b/configs/p201_defconfig
+index dcc1454be16..dfbe1b79ed0 100644
+--- a/configs/p201_defconfig
++++ b/configs/p201_defconfig
+@@ -46,3 +46,4 @@ CONFIG_DM_REGULATOR_FIXED=y
+ CONFIG_DEBUG_UART_ANNOUNCE=y
+ CONFIG_DEBUG_UART_SKIP_INIT=y
+ CONFIG_MESON_SERIAL=y
++CONFIG_NET=y
+diff --git a/configs/p212_defconfig b/configs/p212_defconfig
+index 9cf22ca4db7..1ae033bc804 100644
+--- a/configs/p212_defconfig
++++ b/configs/p212_defconfig
+@@ -54,3 +54,4 @@ CONFIG_USB_XHCI_HCD=y
+ CONFIG_USB_XHCI_DWC3=y
+ CONFIG_USB_DWC3=y
+ CONFIG_USB_DWC3_MESON_GXL=y
++CONFIG_NET=y
+diff --git a/configs/peach-pi_defconfig b/configs/peach-pi_defconfig
+index 27d438efb79..b420b278764 100644
+--- a/configs/peach-pi_defconfig
++++ b/configs/peach-pi_defconfig
+@@ -90,3 +90,4 @@ CONFIG_VIDEO_BRIDGE=y
+ CONFIG_VIDEO_BRIDGE_PARADE_PS862X=y
+ CONFIG_TPM=y
+ CONFIG_ERRNO_STR=y
++CONFIG_NET=y
+diff --git a/configs/peach-pit_defconfig b/configs/peach-pit_defconfig
+index 1c7e0114a85..42323d5e547 100644
+--- a/configs/peach-pit_defconfig
++++ b/configs/peach-pit_defconfig
+@@ -89,3 +89,4 @@ CONFIG_VIDEO_BRIDGE=y
+ CONFIG_VIDEO_BRIDGE_PARADE_PS862X=y
+ CONFIG_TPM=y
+ CONFIG_ERRNO_STR=y
++CONFIG_NET=y
+diff --git a/configs/phycore_pcl063_defconfig b/configs/phycore_pcl063_defconfig
+index 2f6b158a677..fdc2b1493d9 100644
+--- a/configs/phycore_pcl063_defconfig
++++ b/configs/phycore_pcl063_defconfig
+@@ -68,3 +68,4 @@ CONFIG_USB_GADGET_PRODUCT_NUM=0x4fff
+ CONFIG_CI_UDC=y
+ CONFIG_USB_GADGET_DOWNLOAD=y
+ # CONFIG_RANDOM_UUID is not set
++CONFIG_NET=y
+diff --git a/configs/pico-dwarf-imx6ul_defconfig b/configs/pico-dwarf-imx6ul_defconfig
+index 8b90285980f..668a9321504 100644
+--- a/configs/pico-dwarf-imx6ul_defconfig
++++ b/configs/pico-dwarf-imx6ul_defconfig
+@@ -79,3 +79,4 @@ CONFIG_USB_GADGET_VENDOR_NUM=0x0525
+ CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
+ CONFIG_CI_UDC=y
+ CONFIG_SPL_USB_SDP_SUPPORT=y
++CONFIG_NET=y
+diff --git a/configs/pico-dwarf-imx7d_defconfig b/configs/pico-dwarf-imx7d_defconfig
+index 9d5241a50d0..e390cd4e304 100644
+--- a/configs/pico-dwarf-imx7d_defconfig
++++ b/configs/pico-dwarf-imx7d_defconfig
+@@ -95,3 +95,4 @@ CONFIG_SYS_WHITE_ON_BLACK=y
+ CONFIG_SPLASH_SCREEN=y
+ CONFIG_SPLASH_SCREEN_ALIGN=y
+ CONFIG_BMP_16BPP=y
++CONFIG_NET=y
+diff --git a/configs/pico-hobbit-imx6ul_defconfig b/configs/pico-hobbit-imx6ul_defconfig
+index e3aca6e82e1..7283a6754d1 100644
+--- a/configs/pico-hobbit-imx6ul_defconfig
++++ b/configs/pico-hobbit-imx6ul_defconfig
+@@ -82,3 +82,4 @@ CONFIG_USB_GADGET_VENDOR_NUM=0x0525
+ CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
+ CONFIG_CI_UDC=y
+ CONFIG_SPL_USB_SDP_SUPPORT=y
++CONFIG_NET=y
+diff --git a/configs/pico-hobbit-imx7d_defconfig b/configs/pico-hobbit-imx7d_defconfig
+index 690139c09ca..a48ce623f2b 100644
+--- a/configs/pico-hobbit-imx7d_defconfig
++++ b/configs/pico-hobbit-imx7d_defconfig
+@@ -94,3 +94,4 @@ CONFIG_SYS_WHITE_ON_BLACK=y
+ CONFIG_SPLASH_SCREEN=y
+ CONFIG_SPLASH_SCREEN_ALIGN=y
+ CONFIG_BMP_16BPP=y
++CONFIG_NET=y
+diff --git a/configs/pico-imx6ul_defconfig b/configs/pico-imx6ul_defconfig
+index ce29718a903..2d4e68ca76e 100644
+--- a/configs/pico-imx6ul_defconfig
++++ b/configs/pico-imx6ul_defconfig
+@@ -90,3 +90,4 @@ CONFIG_VIDEO_LOGO=y
+ CONFIG_VIDEO_MXS=y
+ CONFIG_SPLASH_SCREEN=y
+ CONFIG_SPLASH_SCREEN_ALIGN=y
++CONFIG_NET=y
+diff --git a/configs/pico-imx7d_bl33_defconfig b/configs/pico-imx7d_bl33_defconfig
+index 1327523e289..c63a4620089 100644
+--- a/configs/pico-imx7d_bl33_defconfig
++++ b/configs/pico-imx7d_bl33_defconfig
+@@ -94,3 +94,4 @@ CONFIG_VIDEO_MXS=y
+ CONFIG_SPLASH_SCREEN=y
+ CONFIG_SPLASH_SCREEN_ALIGN=y
+ CONFIG_BMP_16BPP=y
++CONFIG_NET=y
+diff --git a/configs/pico-imx7d_defconfig b/configs/pico-imx7d_defconfig
+index 6009b1c65c1..f614c6fbc40 100644
+--- a/configs/pico-imx7d_defconfig
++++ b/configs/pico-imx7d_defconfig
+@@ -96,3 +96,4 @@ CONFIG_VIDEO_MXS=y
+ CONFIG_SPLASH_SCREEN=y
+ CONFIG_SPLASH_SCREEN_ALIGN=y
+ CONFIG_BMP_16BPP=y
++CONFIG_NET=y
+diff --git a/configs/pico-nymph-imx7d_defconfig b/configs/pico-nymph-imx7d_defconfig
+index 9d5241a50d0..e390cd4e304 100644
+--- a/configs/pico-nymph-imx7d_defconfig
++++ b/configs/pico-nymph-imx7d_defconfig
+@@ -95,3 +95,4 @@ CONFIG_SYS_WHITE_ON_BLACK=y
+ CONFIG_SPLASH_SCREEN=y
+ CONFIG_SPLASH_SCREEN_ALIGN=y
+ CONFIG_BMP_16BPP=y
++CONFIG_NET=y
+diff --git a/configs/pico-pi-imx6ul_defconfig b/configs/pico-pi-imx6ul_defconfig
+index 81f3e9bbebb..2b86127d59b 100644
+--- a/configs/pico-pi-imx6ul_defconfig
++++ b/configs/pico-pi-imx6ul_defconfig
+@@ -82,3 +82,4 @@ CONFIG_USB_GADGET_VENDOR_NUM=0x0525
+ CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
+ CONFIG_CI_UDC=y
+ CONFIG_SPL_USB_SDP_SUPPORT=y
++CONFIG_NET=y
+diff --git a/configs/pico-pi-imx7d_defconfig b/configs/pico-pi-imx7d_defconfig
+index 28c46abed78..6a14e3bcd72 100644
+--- a/configs/pico-pi-imx7d_defconfig
++++ b/configs/pico-pi-imx7d_defconfig
+@@ -98,3 +98,4 @@ CONFIG_SPLASH_SCREEN=y
+ CONFIG_SPLASH_SCREEN_ALIGN=y
+ CONFIG_BMP_16BPP=y
+ CONFIG_IMX_WATCHDOG=y
++CONFIG_NET=y
+diff --git a/configs/radxa-zero2_defconfig b/configs/radxa-zero2_defconfig
+index 92e0a8833cc..ba90842e973 100644
+--- a/configs/radxa-zero2_defconfig
++++ b/configs/radxa-zero2_defconfig
+@@ -77,3 +77,4 @@ CONFIG_VIDEO_BMP_RLE8=y
+ CONFIG_BMP_16BPP=y
+ CONFIG_BMP_24BPP=y
+ CONFIG_BMP_32BPP=y
++CONFIG_NET=y
+diff --git a/configs/radxa-zero_defconfig b/configs/radxa-zero_defconfig
+index 5179c58dadc..b734fa8c6a4 100644
+--- a/configs/radxa-zero_defconfig
++++ b/configs/radxa-zero_defconfig
+@@ -73,3 +73,4 @@ CONFIG_VIDEO_MESON=y
+ CONFIG_VIDEO_DT_SIMPLEFB=y
+ CONFIG_SPLASH_SCREEN=y
+ CONFIG_SPLASH_SCREEN_ALIGN=y
++CONFIG_NET=y
+diff --git a/configs/riotboard_defconfig b/configs/riotboard_defconfig
+index a1e806be421..3f61fe5831e 100644
+--- a/configs/riotboard_defconfig
++++ b/configs/riotboard_defconfig
+@@ -89,3 +89,4 @@ CONFIG_SPLASH_SCREEN=y
+ CONFIG_SPLASH_SCREEN_ALIGN=y
+ CONFIG_BMP_16BPP=y
+ CONFIG_SPL_OF_LIBFDT=y
++CONFIG_NET=y
+diff --git a/configs/s400_defconfig b/configs/s400_defconfig
+index d75d296fa0e..01607562552 100644
+--- a/configs/s400_defconfig
++++ b/configs/s400_defconfig
+@@ -60,3 +60,4 @@ CONFIG_USB_GADGET_VENDOR_NUM=0x1b8e
+ CONFIG_USB_GADGET_PRODUCT_NUM=0xfada
+ CONFIG_USB_GADGET_DWC2_OTG=y
+ CONFIG_USB_GADGET_DOWNLOAD=y
++CONFIG_NET=y
+diff --git a/configs/seeed_npi_imx6ull_defconfig b/configs/seeed_npi_imx6ull_defconfig
+index e7557025dd2..f093c26dd7f 100644
+--- a/configs/seeed_npi_imx6ull_defconfig
++++ b/configs/seeed_npi_imx6ull_defconfig
+@@ -75,3 +75,4 @@ CONFIG_SPL_USB_HOST=y
+ CONFIG_USB_GADGET=y
+ CONFIG_SPL_USB_GADGET=y
+ # CONFIG_RANDOM_UUID is not set
++CONFIG_NET=y
+diff --git a/configs/smdk5250_defconfig b/configs/smdk5250_defconfig
+index 8b42c8bdb32..abc601da69f 100644
+--- a/configs/smdk5250_defconfig
++++ b/configs/smdk5250_defconfig
+@@ -73,3 +73,4 @@ CONFIG_USB_EHCI_HCD=y
+ CONFIG_USB_HOST_ETHER=y
+ CONFIG_USB_ETHER_ASIX88179=y
+ CONFIG_ERRNO_STR=y
++CONFIG_NET=y
+diff --git a/configs/smdk5420_defconfig b/configs/smdk5420_defconfig
+index 55a53178f9c..dd4e4fb9849 100644
+--- a/configs/smdk5420_defconfig
++++ b/configs/smdk5420_defconfig
+@@ -58,3 +58,4 @@ CONFIG_USB=y
+ CONFIG_USB_XHCI_HCD=y
+ CONFIG_USB_XHCI_DWC3=y
+ CONFIG_USB_HOST_ETHER=y
++CONFIG_NET=y
+diff --git a/configs/snow_defconfig b/configs/snow_defconfig
+index 2c0757194bd..664ea4032f7 100644
+--- a/configs/snow_defconfig
++++ b/configs/snow_defconfig
+@@ -108,3 +108,4 @@ CONFIG_VIDEO_BRIDGE_NXP_PTN3460=y
+ CONFIG_TPM=y
+ CONFIG_ERRNO_STR=y
+ CONFIG_UNIT_TEST=y
++CONFIG_NET=y
+diff --git a/configs/spring_defconfig b/configs/spring_defconfig
+index 2bd45cb9d60..4b5a4e61896 100644
+--- a/configs/spring_defconfig
++++ b/configs/spring_defconfig
+@@ -101,3 +101,4 @@ CONFIG_VIDEO_BRIDGE=y
+ CONFIG_VIDEO_BRIDGE_PARADE_PS862X=y
+ CONFIG_TPM=y
+ CONFIG_ERRNO_STR=y
++CONFIG_NET=y
+diff --git a/configs/ten64_tfa_defconfig b/configs/ten64_tfa_defconfig
+index 88609d8401f..5cb2c6070ad 100644
+--- a/configs/ten64_tfa_defconfig
++++ b/configs/ten64_tfa_defconfig
+@@ -97,3 +97,4 @@ CONFIG_WDT=y
+ CONFIG_WDT_SP805=y
+ CONFIG_TPM=y
+ CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
++CONFIG_NET=y
+diff --git a/configs/turris_mox_defconfig b/configs/turris_mox_defconfig
+index c62e0d04c9c..7b394a904cf 100644
+--- a/configs/turris_mox_defconfig
++++ b/configs/turris_mox_defconfig
+@@ -106,3 +106,4 @@ CONFIG_USB_ETHER_RTL8152=y
+ CONFIG_USB_ETHER_SMSC95XX=y
+ CONFIG_WDT=y
+ CONFIG_WDT_ARMADA_37XX=y
++CONFIG_NET=y
+diff --git a/configs/turris_omnia_defconfig b/configs/turris_omnia_defconfig
+index c8756a3a788..e82e1e727ed 100644
+--- a/configs/turris_omnia_defconfig
++++ b/configs/turris_omnia_defconfig
+@@ -129,3 +129,4 @@ CONFIG_USB_XHCI_HCD=y
+ CONFIG_USB_EHCI_HCD=y
+ CONFIG_WDT=y
+ CONFIG_WDT_ORION=y
++CONFIG_NET=y
+diff --git a/configs/u200_defconfig b/configs/u200_defconfig
+index 879ae0defa7..6079f68d82a 100644
+--- a/configs/u200_defconfig
++++ b/configs/u200_defconfig
+@@ -63,3 +63,4 @@ CONFIG_USB_GADGET_PRODUCT_NUM=0xfada
+ CONFIG_USB_GADGET_DWC2_OTG=y
+ CONFIG_USB_GADGET_DWC2_OTG_PHY_BUS_WIDTH_8=y
+ CONFIG_USB_GADGET_DOWNLOAD=y
++CONFIG_NET=y
+diff --git a/configs/vexpress_aemv8a_juno_defconfig b/configs/vexpress_aemv8a_juno_defconfig
+index 7ac70edc2ea..63647b0ff8d 100644
+--- a/configs/vexpress_aemv8a_juno_defconfig
++++ b/configs/vexpress_aemv8a_juno_defconfig
+@@ -36,3 +36,4 @@ CONFIG_SYS_FLASH_PROTECTION=y
+ CONFIG_SYS_FLASH_CFI=y
+ CONFIG_SYS_MAX_FLASH_SECT=259
+ CONFIG_USB=y
++CONFIG_NET=y
+diff --git a/configs/vexpress_aemv8a_semi_defconfig b/configs/vexpress_aemv8a_semi_defconfig
+index 29f8213e6e0..234d7d86cd1 100644
+--- a/configs/vexpress_aemv8a_semi_defconfig
++++ b/configs/vexpress_aemv8a_semi_defconfig
+@@ -31,3 +31,4 @@ CONFIG_SYS_FLASH_EMPTY_INFO=y
+ CONFIG_SYS_FLASH_PROTECTION=y
+ CONFIG_SYS_FLASH_CFI=y
+ CONFIG_SYS_MAX_FLASH_SECT=256
++CONFIG_NET=y
+diff --git a/configs/vexpress_aemv8r_defconfig b/configs/vexpress_aemv8r_defconfig
+index 96fbef5fa19..2d8810782ff 100644
+--- a/configs/vexpress_aemv8r_defconfig
++++ b/configs/vexpress_aemv8r_defconfig
+@@ -14,3 +14,4 @@ CONFIG_SYS_PBSIZE=541
+ # CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_SYS_PROMPT="VExpress64# "
+ # CONFIG_MMC is not set
++CONFIG_NET=y
+diff --git a/configs/vexpress_ca9x4_defconfig b/configs/vexpress_ca9x4_defconfig
+index 67adba437bf..ec33e22a982 100644
+--- a/configs/vexpress_ca9x4_defconfig
++++ b/configs/vexpress_ca9x4_defconfig
+@@ -36,6 +36,7 @@ CONFIG_OF_CONTROL=y
+ CONFIG_OF_EMBED=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_FLASH=y
++CONFIG_NET=y
+ CONFIG_CLK=y
+ CONFIG_ARM_PL180_MMCI=y
+ CONFIG_SYS_MMC_MAX_BLK_COUNT=127
+diff --git a/configs/vexpress_fvp_defconfig b/configs/vexpress_fvp_defconfig
+index 7362c1fc35c..c054cbef539 100644
+--- a/configs/vexpress_fvp_defconfig
++++ b/configs/vexpress_fvp_defconfig
+@@ -3,3 +3,4 @@ CONFIG_ARCH_VEXPRESS64=y
+ CONFIG_DEFAULT_DEVICE_TREE="arm_fvp"
+ CONFIG_IDENT_STRING=" arm_fvp"
+ # CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_NET=y
+diff --git a/configs/videostrong-kii-pro_defconfig b/configs/videostrong-kii-pro_defconfig
+index 7a5af234471..6f9b2f15e92 100644
+--- a/configs/videostrong-kii-pro_defconfig
++++ b/configs/videostrong-kii-pro_defconfig
+@@ -69,3 +69,4 @@ CONFIG_VIDEO_BMP_RLE8=y
+ CONFIG_BMP_16BPP=y
+ CONFIG_BMP_24BPP=y
+ CONFIG_BMP_32BPP=y
++CONFIG_NET=y
+diff --git a/configs/wandboard_defconfig b/configs/wandboard_defconfig
+index e9deab38038..df41406a7ef 100644
+--- a/configs/wandboard_defconfig
++++ b/configs/wandboard_defconfig
+@@ -91,3 +91,4 @@ CONFIG_SPLASH_SCREEN=y
+ CONFIG_SPLASH_SCREEN_ALIGN=y
+ CONFIG_BMP_16BPP=y
+ CONFIG_IMX_WATCHDOG=y
++CONFIG_NET=y
+diff --git a/configs/wetek-core2_defconfig b/configs/wetek-core2_defconfig
+index c4b126c2b7e..2f601f8c008 100644
+--- a/configs/wetek-core2_defconfig
++++ b/configs/wetek-core2_defconfig
+@@ -76,3 +76,4 @@ CONFIG_VIDEO=y
+ CONFIG_SYS_WHITE_ON_BLACK=y
+ CONFIG_VIDEO_MESON=y
+ CONFIG_VIDEO_DT_SIMPLEFB=y
++CONFIG_NET=y
+diff --git a/configs/wetek-hub_defconfig b/configs/wetek-hub_defconfig
+index 85cff73f50f..6fd4cc1410a 100644
+--- a/configs/wetek-hub_defconfig
++++ b/configs/wetek-hub_defconfig
+@@ -69,3 +69,4 @@ CONFIG_VIDEO_BMP_RLE8=y
+ CONFIG_BMP_16BPP=y
+ CONFIG_BMP_24BPP=y
+ CONFIG_BMP_32BPP=y
++CONFIG_NET=y
+diff --git a/configs/wetek-play2_defconfig b/configs/wetek-play2_defconfig
+index efdf820165b..fa270b4db66 100644
+--- a/configs/wetek-play2_defconfig
++++ b/configs/wetek-play2_defconfig
+@@ -69,3 +69,4 @@ CONFIG_VIDEO_BMP_RLE8=y
+ CONFIG_BMP_16BPP=y
+ CONFIG_BMP_24BPP=y
+ CONFIG_BMP_32BPP=y
++CONFIG_NET=y
 -- 
 2.40.1
 
