@@ -4,58 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0227CE7AB6
-	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 06:35:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AB78CE7AB6
+	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 06:46:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BA3088CF5;
-	Fri,  6 Sep 2024 08:35:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 72111885A5;
+	Fri,  6 Sep 2024 08:46:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="IBi6NXIJ";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="lki39UC7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB6E088CF6; Fri,  6 Sep 2024 08:35:39 +0200 (CEST)
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on20613.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2412::613])
+ id 216A988CF1; Fri,  6 Sep 2024 08:46:51 +0200 (CEST)
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on20629.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2414::629])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1353588CF2
- for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 08:35:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A14AA88413
+ for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 08:46:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=MHApmtSIhZOAnBX4qk8PHXmhYbdMOxKK/EA8EVsyVL0Eo8FMURqFVhNFWxQ7PI7CtR7W2aAORud3QDBJvPotpOlBSx89DZO5zaldPtiriLQyJ1DRxAPB0khLtKij0siXcHoCSg8j6Q1tm76DsZ/39DTZpFVRQA9lHVocpqYQFowGfaSXTJR40LrOCfy8pmLmTsvr9xpWfc09yOT9vEGz00E6Ag27AFGxrABwjZT5f/dEXI0pN9kyQb0s5YGbhAFBkfinsaU21FJm4xtfwWCyRotJcSWMVAttYT0X95Yo1Ixm5aXFg0uV9WV1+ueOxYx38Asl5RUxsBUuvKt4OjfB3A==
+ b=R2/AvFzfBII+P1i3iqz1Utgv5PbOorYAU1TotoNpurfP9NdZpFPBIbFV3A3GIL+WAM6OrdzLohbxTqgSRRxdnc8pvFfXpQkT0f37ulVjVw1uQAtgzS+5loIK6pkrYiD4wavf9e1rop3vCW2TEpGUx/3XnmseAqBqTb7/GfVizypc0eysevz7XHFv5N8EFPl9+IAiKXRD1bT/dbvEskgABHrxXLWNiQEUpMvaNFQeI17VrQNDyv7CrV2pLeSK+nYYCUqYau042M/IaiPZ506P7Zm++9CUwWui5D5yyvNZOzlS+elj9OL5sbZrGlxzjbffgMrqi60jOsjti1RSOzG9AQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jiWQkqdmtewWeFlux7gjJ356t7FnuiWQj0koWTztIs0=;
- b=MaDYRKaqpDZy9wyAWPDHN9HPcir90I2e8OdawfvRTt64rV3dQCb3JsexqzbNHB2Fsmuk9Hkn+a5XnUgcIUuiD7P3HweFxPzPDLHCTTg1IvMT0EdAuA36Upz7Ybrv2a8RQjLeXdv28sE6Ij9ENGfZr6C/1aqd2W24CeJ+ETjOEv5x8gjKKwwyk1kojjq9zHCozABw+7oqlxWAbQtMK8Q+KvD2VCzkCTOInHP3/4r5shKcJd1odo2pYq4xZ4KFRCyTczUKh79/0af2vLvmR6XpiZzg3hL+/kHOuXubvLLZeLoJeVgGdUFfcl+/k0jXvS2dcYa7TXzpfYZf4pbbCCWvKw==
+ bh=ClnDHQEy0eGnjoNASByKTEguzNRSv3XuCWU6MWgpe44=;
+ b=eRSphwyphanfRyTj0sSHrCZm9vHqCkLuK7AgFHd2MkfQ1/SVO+PHYfeRXN4FDkNeZqz++BS5IyHeX9MnqDw7LrN3vTdx7lLkFSSnNt2KncqrjRzm7XLbGt4W3ui8VXvlfanfezeFqisaFAHSE21pHO15tECVSoAYjcBf10Hw7Fmr0vHikarvC2S7fbrekHjSyxcgCyNXVf65fYkNT3l58gCtM5OzQVULspvWfP7LyPCsD+2GKuJmQAnlQHKHYLaDDOlLWrlRjCX0C/fyI/svGa3vL9jb1meo5jfrl4oHjyD8DWYh4/Z6+yyvBLXQdMncvOX7oyk8yAZY4VtR2g7V2Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jiWQkqdmtewWeFlux7gjJ356t7FnuiWQj0koWTztIs0=;
- b=IBi6NXIJ8ygmjSCLq4YIM741XFQgeyqbX9KlLmTBvjc1E4w2kD+9Gtkev5rUf1FPAUfJ6ESsr7qoUyBk+qlcCv/5OBd9RR5SviHfga0Olb4GhX8aLxiqbN5rUzBMPKKE33CEtfGLlIOn0MNy0G1rFg5jnff25jSVhgENa/3LWrM=
+ bh=ClnDHQEy0eGnjoNASByKTEguzNRSv3XuCWU6MWgpe44=;
+ b=lki39UC7lWjinUTTiexHfvPIaVUunR84dio1QmfVkYUFARcXCnn+Axt2pMt9dKh6GlRuEu8tKLUMTO5TP8lZ5fPGIkIpaDGxGm5x6eEDUroUU9maW1HpgBlpFNFwP5TkiIOuEIUtaeRpP2ckPEW52cjLu8jbRJkxesXGW0tNzNw=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by MN0PR12MB6101.namprd12.prod.outlook.com (2603:10b6:208:3cb::10)
+ by SN7PR12MB6931.namprd12.prod.outlook.com (2603:10b6:806:261::21)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.28; Fri, 6 Sep
- 2024 06:35:33 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.25; Fri, 6 Sep
+ 2024 06:46:46 +0000
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30%4]) with mapi id 15.20.7918.024; Fri, 6 Sep 2024
- 06:35:33 +0000
-Message-ID: <1bf05e73-3ef2-4f15-87ab-64c32d60f924@amd.com>
-Date: Fri, 6 Sep 2024 08:35:28 +0200
+ 06:46:45 +0000
+Message-ID: <867d741a-f856-48e4-8689-9c432f31c75b@amd.com>
+Date: Fri, 6 Sep 2024 08:46:41 +0200
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 0/6] Miscellaneous FWU fixes
+From: Michal Simek <michal.simek@amd.com>
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>
@@ -70,8 +71,8 @@ References: <20240830114057.891069-1-sughosh.ganu@linaro.org>
  <CADg8p97-Nbn0AsnL4Tu=375uoONmPSgr9Yj0MnEB5u1O8P0AEg@mail.gmail.com>
  <db7aaa38-d66b-4575-a50c-0b1bdbcda9eb@amd.com>
  <CADg8p95Sg9ASrTOXOGJz8-HcFxuadRL6K9URYAQdZGCZ9NPgQw@mail.gmail.com>
+ <1bf05e73-3ef2-4f15-87ab-64c32d60f924@amd.com>
 Content-Language: en-US
-From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
  howHe8Y9nSbG92obZMqsdt+d/hmRu3fgwRYiiU97YJjUkCN5paHXyBb+3IdrLNGt8I7C9RMy
@@ -116,100 +117,100 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <CADg8p95Sg9ASrTOXOGJz8-HcFxuadRL6K9URYAQdZGCZ9NPgQw@mail.gmail.com>
+In-Reply-To: <1bf05e73-3ef2-4f15-87ab-64c32d60f924@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: BY3PR05CA0048.namprd05.prod.outlook.com
- (2603:10b6:a03:39b::23) To SJ2PR12MB8109.namprd12.prod.outlook.com
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: BY3PR10CA0013.namprd10.prod.outlook.com
+ (2603:10b6:a03:255::18) To SJ2PR12MB8109.namprd12.prod.outlook.com
  (2603:10b6:a03:4f5::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|MN0PR12MB6101:EE_
-X-MS-Office365-Filtering-Correlation-Id: 50aa1863-8f7e-45f5-8a22-08dcce3e1c17
+X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|SN7PR12MB6931:EE_
+X-MS-Office365-Filtering-Correlation-Id: 11079613-dda1-4f7b-388a-08dcce3facdd
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?amp1aC9KaHRnUzNGWithVkQycmNmM2toYzEvMEw4RnpUMVRaazlyUk5lbVFr?=
- =?utf-8?B?QWpnUFR3TlA0ckYrTFRjQzBmU3d5WVNYV3NWOUcrNjdiamJHZ2JIRnVkT3Uw?=
- =?utf-8?B?cmQ4cmpsenNkZ0VDOHJvMlFzY2Uyd3JIZkdNcFVmYzExZ1JkY3lrQTBCN09y?=
- =?utf-8?B?VzdBWTJzejBvM1pxNWxWM0E1c013WkpjSDlJL1N5SkF3YktjNXlmbFRMdXpJ?=
- =?utf-8?B?a25KUkZRQnlBUGZ4QnZYbTZ3OTd2aTlocjJxSnJqd1FkWFMrcE4reGtCWmJq?=
- =?utf-8?B?UjFDeS9wL0tQT3AzTTFockFIYUxrUFpMcGlaT00vcjNibnhkZDZqWlI2YVlQ?=
- =?utf-8?B?U3NOMHpldytndXRFNS9CYkVvbkZONU8zWWoycGYvNmVISXRrMS9GdVdONXRE?=
- =?utf-8?B?QUlBc3o1WlRaWWpPUGhvdXA1K0Y1Q05tZk9EZ2pwRTFnMVJaM28yUnBRYnJo?=
- =?utf-8?B?R0xCaSs1aWNSRXpMbFowOFJCMW9IdDJIZmxxWFVzV1lQUTYxZFFITm81d2tw?=
- =?utf-8?B?M1lVZ0FzRWdKaWdCdFdqbVZSZnllNk5UVEVYNTk3U0czbm9CYm10aTZZOEUv?=
- =?utf-8?B?YktqNlhIUzQ4YW1PaDlPQlhqSm12ZzNRTGtyQks0TitLRnJMaTMwazNBcllN?=
- =?utf-8?B?Z2txUTYrZE5xWWtrUlNXUytCZUhvY2xXaVM0dmwyd1U3eXJWMzh4NVV4dGZa?=
- =?utf-8?B?by9wNkRoUTJ6NEpOVUJjMTB6aTZKY3lWSTFONnl3SWJ0Y1d1QXR2dUVKd0pS?=
- =?utf-8?B?U2NtTldtd3RlcU10bTR1TlRIZWhDODJuWjBWWjExSStZNENoMkpkMWwxcW1p?=
- =?utf-8?B?Nk1Zd1VOVkFRZllDcjlxNWd0ZXRQV29FYTNTdjJrRnp2SFR6SE5vZ1o0V3N3?=
- =?utf-8?B?NTBDS1pCbVhjanpoSU9SMmJtRXFveXhlS2F0c2VYT2lOc3FodDVuRlJiZWk0?=
- =?utf-8?B?Q3ptZUh1dFBySHpxbE5lTWliQXBYeUYzaEtsNzZPUHVTQlhPT1I0dnN0OWE5?=
- =?utf-8?B?M2ljbHoxcFBVNm9pQUNmeFBsT0tEc2dsRThXVjF3dzA1WE9QSXEyYVZFRWJ0?=
- =?utf-8?B?cHBSR29hUFNUN0tCU2lxOFROV25hT3dCanlqc1k4VlJrS1o4aWFwMDNOVnJZ?=
- =?utf-8?B?d3N1RDdqaWR6WEtOZlRCbWJDSk5JaVZIU3AxOEZ0U29iTGozQklPb1ZyeGlh?=
- =?utf-8?B?N1RCQlhYWE1mUzZ5anRud3I3dG5KSjVzUTErWUJIeFFWRW12T2FpOHVMNGpp?=
- =?utf-8?B?R3hIcUZrU2NBWTZ4dlFBcUlRMjc4Q2phUk9heW54S3pDRnBkR1dBcXVuVVcx?=
- =?utf-8?B?blhzMnY4bE03U0YrSk9IcEVlZml2VXEvUHVnWE0xbWRoejBBeWVSMGI2Tnc2?=
- =?utf-8?B?VmQ4dHVXMVBZRGREKzZuZ2ZRdDBNYlZKdkM5TDVVZDdVNWR5QjhBN2F4MEJJ?=
- =?utf-8?B?T1MxVlVpd052aUthSS92Vy96bWFsdElkWENnRGZDZkVHaWs3NUlGRjlZNG9Z?=
- =?utf-8?B?aEtOZzFML011MFdiZ1o0QnE1SmxyQ1kydUQ4TEs2ajhZUTAwdjc2ZXk1NEhY?=
- =?utf-8?B?RkZlYzh5d1paQ2tRYzliM2JtWmlRcGRqWHJIaXIwc1VEWnZDWmo1R3dqSUth?=
- =?utf-8?B?cVBpS1NaUkNCQnpFWlVILzQ4cHBvVXBrZ2Q0a1k1L3cyNmhjTERKQVlwZXBB?=
- =?utf-8?B?S0ZXSlA2VEMrWmlmcXJ3TC9GbmpiTDNMcGdPY1NqQVVNb2lsa3lpYXkvbFlN?=
- =?utf-8?B?dkprbjVObTFnK0hjemtCOEtXMjYvc01lclJlRDZnUkFtTGRaWFF2UG1uKzN0?=
- =?utf-8?B?Ny85UFlQOEZwc0hkdzVwdz09?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?TFVzd29paXpteFBzMStjZ1lUY296dVZUMDM2SUhVa0pvNGJPV0NJVFVMR1Vk?=
+ =?utf-8?B?S0xzT2RGQlhuZjZCTWZDT1loR1VxSHZ6bmQxVnpYaFZHMERZM3AxZzNlbWM5?=
+ =?utf-8?B?dWFZSWZndkhuMmt3RU54T1Y4MGE1SEZwTDljeWJOR2pDZzBEeXNhekxreERF?=
+ =?utf-8?B?WUF5RE1xUVEyeXhqaFM5SFBLcTk2N29Pbms5R3lTYUtEb2RQMXd0QnRjRGtX?=
+ =?utf-8?B?am5ZU0ZWNk1lemtYZHU1bE1CMmJqRzM5ekVNbjJ1S0lTRFVMK3NidnJEZlhM?=
+ =?utf-8?B?N0dxYnZPOVJWVXY3YW0yK2hrZWxFS3gzeC9FaHNpWWQzRFRNeHc0MHNYd2xn?=
+ =?utf-8?B?UHIxeDE2S1dQZmVkZ2VBeElUYzAyS0NxMlJqUmNDZTVCdXlzMVh5L05VeEJa?=
+ =?utf-8?B?dy91Vll3N1J6dm1tUm9laitwRGdNdnJHQ1QvSWJnMkVXNkIveWVLdmNuaGRi?=
+ =?utf-8?B?ajdSQUlWRHFsLzhTdWdiQkJBeGxWeWJWRWt0Qnp2US9MbGFyMEpDdFB1Zy9q?=
+ =?utf-8?B?dDBGcEI5VHJZNlNJL3MrM3hXRHI0cVVaRkR6NWRuSWFFNGNLZ0VpMVBCdHZQ?=
+ =?utf-8?B?R0xSc3ZQUHlSSkRZQWhnUzlrL1RYUVFSU21GUmVIZTVRbHdmdE9vU21IM0Zv?=
+ =?utf-8?B?NEI4Sm1RYUxleVRFNlU4bUF3LzRPNWhvQXRXSDExU2MxVzA5WVFDcFliU0Mz?=
+ =?utf-8?B?YkRpcDl1VVRnVFBYUkJQNTlTdjNta1FKbEp0b0ltTC94ZnlvNlN1bXg1WGt5?=
+ =?utf-8?B?YXp4YjlpYlNnQmc3K1A3OFRtSDZBRm1PVklLRXNRVGY1V1ZxaVRBWUpzRnc0?=
+ =?utf-8?B?Znp5L0Z4YmZoOWFLS3VqZVVPU013V2EvNThNcGYrejJXeGN3UE5OV0UrQ3dK?=
+ =?utf-8?B?R1hwUUV3ekVOTnVxM3Backlhbkd6cFhrczJOM2t6L21yN3YwWDR4TU5USDJv?=
+ =?utf-8?B?dWtYZ0dQQjRvTDJGVUJzNnoramlNSW1vakc0YkZ0QkN5dHNTRmZOdTFqTmVs?=
+ =?utf-8?B?STRxZTlBaDA4MEpFeDkvTlhCUmpNYkNtQ09FQkVYckNxWDNIUCszeThUVTVo?=
+ =?utf-8?B?WmpoOEpyVlJxd1d4TXBNNkR0R3dLWWVRbFpCRldLOU5NeFhrZ2JYbi80a3N4?=
+ =?utf-8?B?TlBFMEN6dlhSeDRaazI1T0tiUitNaC94emlGRHNiYnpwZUFUNEpDYnJkMzU5?=
+ =?utf-8?B?T05CSkdKUmVrT0ZIU3N2eU52NVJoMlQybEZsQlh4SjdZUlZPeVlXaXF2bGhU?=
+ =?utf-8?B?dXkxYytncEp5TGNqTXZOL3lUbkF6U0xhZzFJSkE3aUk4SEZYRndHWTlYU2dE?=
+ =?utf-8?B?NWthNFdOdy9WL0c1WmtaWHJ2M29OTTZxdlNxcksybVVMMFZ0c2syNWZXTyt1?=
+ =?utf-8?B?Mk1GOUJrd0E0NW9GK3ZEMFdqRklDVFY0Tnpra2VZZTFDeTE1VmQvN1orM3Vq?=
+ =?utf-8?B?cFFHVnNkU0VvRkFtWjd6NjdETTRlcUFDYzdKa095Ui9TSkZnOTRJU3BiSHQ3?=
+ =?utf-8?B?MzBNdFpSZ0N5cUZDTVRad3hyQkM0Q0hKbDA4b1pCRm8vM3VMYmhsUG9pQWlH?=
+ =?utf-8?B?M29vc2NrNnJKQzFvM2NRYXg5L1NpdndNR0pkcW5MbFFjc3BmQUhPYnVRYUl0?=
+ =?utf-8?B?bzN0U3pxaHc4QlhGWDNnMTJocHV4bUQ5RlNrTE1HM0Z6eG9CYXFTcjRLdjR5?=
+ =?utf-8?B?bGg4bm5JVUxDVVNldGlMQjFjZ04vaStuWVNaUWw5YTJVTjNWcC91UGpienJn?=
+ =?utf-8?B?akUrNmdLeW1pQ1lJdEMvZXlSZTlaMEU3YmVxNnJZcnpMS3lBWDdUZWdCRmFu?=
+ =?utf-8?B?OG9WcDk3STJzU0xxS1VBZz09?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?S0xTaVVmNXV6SzM3NTBVVXVHYVZUSEJ1c0lEVnZrbGJnTCtRVkxqUzFIL0FU?=
- =?utf-8?B?bEVhMldKR1p5QWZVWUk1Sk01THVmbDlpZDU2NTN1dkc4TEVWeXdEVGJYNkdP?=
- =?utf-8?B?Ui82bUsremFzZkdxK1VvSmJZN1EzZlYvOERYelpJTTlJd3E0QnpUK2R1QkdP?=
- =?utf-8?B?TE9HckRab1BaSXQ4V3FmeXBNcTMwS3pkUWxsVHE5aXNsYWJ0WXVUQWRrTnlR?=
- =?utf-8?B?MFRCVjR2SUlaYURFNk5udzBlbFJ3L0ExTHFPVjRKVGZCMUZNSE1KSXpRNXNo?=
- =?utf-8?B?UHY0bTRVQWR4S2pEZ212UXYzbmVpZGYxMG94aGZqNExzcE5SZUNQaTBMY2Fj?=
- =?utf-8?B?K3pKM2FpTG9tUnhESTBuT1BEMVdMWjB6SFF6WHZ5V0lFVEo5em9BYkJTaFFQ?=
- =?utf-8?B?REtRVGZiREdrY29ndmRJbU1kaG5OR0FYR1diWFg3bmgrS09ZUWZFZWZiN0g2?=
- =?utf-8?B?cXYwbDNXbVlFa3ZZbld4bzRJcm9xTktvc1NhZ2FheUdmNHJHNzNuQkxjMkxH?=
- =?utf-8?B?czRZN3BQcEFqNTF0ZUJWWjR2cTBrR2JUWFhTdTJmc1p6cGhUR0hVOFA3MHNz?=
- =?utf-8?B?dnFWNDkyTEhuZGUwOHQwZHFsMWVQV0htQ3Y3Y05ZQ0x1WEp1Z1pXcUVoaVB6?=
- =?utf-8?B?Nm94SjBnQlhudTJSR1g3Z1NYQlpPT2JkVW0rb01Kd1FPTnp3TU5JMDdTaGR5?=
- =?utf-8?B?ZHRzQlNMaGR4WUxaaVhBVXQ0cC9LcGl2TjZqZzZxY1g3dE5iSTQ3RGw0b0JR?=
- =?utf-8?B?OTYyUkxtNC9DdHlFYlBNMHdYYkQvYWxRSFU1UkMwbFpGVmo1SkZIT2RqN0dE?=
- =?utf-8?B?Q3EzK2J1YU43MmpuY0JHT3FEZkR4TW8rWjExY2Z6Q3V6dmxjNFYxWndkSk5h?=
- =?utf-8?B?MkkrT1BIemlqY05JdE9XUU5zSXQzSU9Kc0VRQVp0bk1zdUpIMlRhUStjUUVx?=
- =?utf-8?B?MGhFWFRvdzhCMEo4NU5XdlBRQ2RuaVRobWtVTVVkbUpjK2o5Vk1CdHJ4MVhO?=
- =?utf-8?B?UGF6bTJGNW1DNDF6MUlGL3p2NjBiSjF1Z210R0pGNy96WFp3T1FpTE85YXZP?=
- =?utf-8?B?QmlCSnRvOVNiS3Y2UFVEbmZQSnVnUG9uNXVIL1ZBcmVtNUh6Sm0rcU5YSDll?=
- =?utf-8?B?QXVtR280SVBtWWtjczFTTGZtMWVDcGxsZEp6dmc0NjM5bFg5Ym9HQ0t3ZFFM?=
- =?utf-8?B?VEpXVzFIR0JhaGd4d0REM0ZHY0x3b0VkazBpVlYxb3FvZENxSjVjTm5PaTFz?=
- =?utf-8?B?ZW1TYnpUL2hIUU9JZmJXSnEwWVM1YWo3empnMVNLR2NjTm41cWFWL3BETS9B?=
- =?utf-8?B?SUNEZUJ5bHhnUWhwRUZpWmxyYUZmajJKMWRwL3lockFPbjlqbVRMUm96QXVO?=
- =?utf-8?B?dkFpWkhKYS80VDg2emJERDN6dDNVU05Mb1JudlhOUVhCV1QwQSt5a1V0OHVX?=
- =?utf-8?B?M1FKOFRLNWhxM05rRjE0ZmNWTHRldWQ3YmpLbEVHcjJIdkY4SHd6L3ZnekJS?=
- =?utf-8?B?Umx1VlhaSG53V2o5ZnZENTBXWHcvM0hMb0tyM29ieGtKY0JqR255cm5MVXZ0?=
- =?utf-8?B?T3dwdnUvK1VFL2g3c1RvYWRadWg3clp2aTRveTROSCtnSnZoR3REa3JrQnlV?=
- =?utf-8?B?TWVubjBkT2M5ZEZRU0krR3BabUNBRjVMR1h2bG03OUd5SnVCM0pnc0ZEeVFM?=
- =?utf-8?B?UjkrOUdwa1FCdUFLYk1sbCs2bVp5WWFCSmZDTHEyb0l3eEk1b1lvM01XVkNO?=
- =?utf-8?B?c3lnMGFTbGJBVy9uTVlJL0xBNW51VFl3RWU0aVE0TWpXWGF0Vm9aTDNvTnBq?=
- =?utf-8?B?cVN2bUgxNGdlNVY5My84dTBqa1NQbjFSd1dvcXJJU0tvc2p0MnB5ajNuTmZE?=
- =?utf-8?B?c1VQREp5VWFJUDRGYXA0SmRmNTA0NGFEcmJZdUo1RzMyNEVPUzdzTWx3RkhF?=
- =?utf-8?B?R0daMkQ3eEVtcityRlRrNTNuSm80dGxqZkorcDMvakptV2FHWEh4MFE5c1ls?=
- =?utf-8?B?VXVwQXQzQk02ZVFobTJuK09GWXE1WHo4Z1F2UGoyUGlvOUhZa0ZXNnNaKzlK?=
- =?utf-8?B?MWJwQXJ5d3NTWXdnaTJHMFBQM0ovaWQ0ZjNkWFg1VDFhWVVwTEsxbUNaREJ5?=
- =?utf-8?Q?rIbHL9dOZwCPSb0ezB+A2rUe7?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZnJzQ1BQM0kxSHRIQWU2bGZDaFlFYTJlRC9uOGVHUWtHMUhUZEVjajdzSW85?=
+ =?utf-8?B?eGZuYnVuZlp0M0o3RTdhZG1HZENPYStESW1KbTdmMWZSN0t1M0YycUt0Q0V2?=
+ =?utf-8?B?bHY1NEd6MUFGbVA2MEhPcUZ1SUNFbDQ5YUdadDhTbTk4NHl0YnU5ZGR0U25S?=
+ =?utf-8?B?MWsvUXZJQlcrZkZkKzlnZWs0d3ROM0t5NkU2SkVTTlBLMjhaZ1I1RHF2bW0v?=
+ =?utf-8?B?SlMrOXRMRVE0N3c1SjZOWGVVNEloZUEwWTlkQUE4L2ZDZFZHV2F5aUYrV3BL?=
+ =?utf-8?B?akEvZEdPbDVzOXlxUGVrVVBZVlQ0QVdwMTZYTG5UUHU5OTk4WFdoTDhXSXd3?=
+ =?utf-8?B?NkFmcENkdUV5RlkvUVJBRS9CaktpRlpYaDZycXFzb2NYdmV6eWhpVVc5OFVv?=
+ =?utf-8?B?UHFUUzlsUTZDUTUxOExHSWR6QnY1R3UraUhYbTEra200ZEtyRWZTK0FMQnlK?=
+ =?utf-8?B?cEhzaU9yWXBnUnJlQmtXM2U2aGhTRXpNRnR1eGJ6SUpVWGtxbjNsWm5iczFy?=
+ =?utf-8?B?dko4Kzg0Nk9VWDlDMXJvK3lncTVJUU9NUHdTd3U0amVOTHcxcnJZOEIvNCs0?=
+ =?utf-8?B?a1RoQ1o2aUU2Ymt2cTRmRGJJelNLTi94dkRUZzJJajMzU3FCMXp1WHpJazRF?=
+ =?utf-8?B?cGh2UksxdlFzcmhldFo0Y3BPdStwaGlBYjFMRzFaaWFqRWJrSXBYdzA5Szlo?=
+ =?utf-8?B?a05pVURYV0NIL1V4cjZaU1ZxbitkWTRiaHl3eWFDQVBkOUFSOWNEeXZqSC9U?=
+ =?utf-8?B?dnBqay95Uk15UWxyUFJkZEVNNEhIdXlHTlF4WnRBWFM0aFBiREJtZzhpeHBS?=
+ =?utf-8?B?RnRiTzF0VDFJSmhPWGhxMEJhVTc2QXpNSXF6VmR4bEhsbk1yclBzNThURXd0?=
+ =?utf-8?B?R0JQWXdaM0Y2Z2c5THNtLzROZXl1MXFrcDJxU0RiSlFXUjZDWW8vaFFucm9L?=
+ =?utf-8?B?cU9ocjRNZ0c0cTJlVEJ2N0JiMW1SdW1oMllIMWVNb2dYeEp4RmszOFRtTjVV?=
+ =?utf-8?B?L1ZJckFQbjh0UXMyNVVEK01hMXM4RjZkWWZHZnd6TkFjY3RhM0ZwOUxtclpR?=
+ =?utf-8?B?VzU5d21sN1VtYTg3VzN3S1o0Z2p3UCtMS0pNd20xYUpDUldTbkVTTHVWcmRR?=
+ =?utf-8?B?cGZJdDNiMFNWTnFBbTZqY2p1Mm9yRFNCS2FpL29DK1E0OUhjdWVOc2U1b0N0?=
+ =?utf-8?B?Mk14YmxLdjc5ODY2alJvbjdkRjJ3TEJsOHZMTFl5d3dvRTVHTDA5TkpFRFNV?=
+ =?utf-8?B?UFZ5Z1VhRnN3YWpWWThtTWpUb0loMW1RRlFIRTFNcHBpb1JRcUllU0FJZkV4?=
+ =?utf-8?B?QTZPM2dweVZ4dzhPZmRjT2UxV1lkVHkveFpDc3M5bHhRbCtacjdhQjQ4UXlr?=
+ =?utf-8?B?R0NpeUhQODlzNXE1L0hqSXVraHBiUkplM2JaQ1pxeDIyTld4QnlleWR3NFNB?=
+ =?utf-8?B?ckhjblRjS0tWWWlQcXlsRzhlaE5hL3NBQUU5VG1nWU9PSlZRSGR1WWVyMkQw?=
+ =?utf-8?B?WE5jZFQ2TU9wdVptcHNYOGdLQTNPa3lhdFRXWFBaS0UyTk1EVFdLSE80dUZJ?=
+ =?utf-8?B?dWdSR1E0QStKM2NtQkUyTDVDMUJ0S2pGOGZEZ1lDQUwyN1dVQUpFR1dWeUpQ?=
+ =?utf-8?B?RmJybCtrS0R4dXFHTGpFNnptYzM5bWptN0pvNTZybElaMmxCTEcrU0JQT2Ez?=
+ =?utf-8?B?eEFLOWkySUIxdUhubEU5cVhRL09VZGFoK2ZrV0RlNlZvZUZkQWloZmhCak9J?=
+ =?utf-8?B?UzY5WlpuZWZIcXJEdVhsd0VwaW1zcEFXTDFVeDUvMEhSekhtVmIyS0R0MDFJ?=
+ =?utf-8?B?UVNqS3NLRkRyczMzVS8zN0dLaWJEeXJqRk1PY2REVDJaOGE3QkdjVGhTSzZS?=
+ =?utf-8?B?RHArQ09NNFpuVlZKRGwrZlpxOXA2SVR5dDNtMHJUVE9Ma3RaODFTSVRKVmxI?=
+ =?utf-8?B?QUxhZ3N6cTM1ZHZTbTE3RHpYYTQrUGRmN1JBcnppbHdocHJPY0tRd3FUODFw?=
+ =?utf-8?B?SVZMNE50UHRQRlNDUnd5aUR1ODZCTlcyRE1IMGNRRkJYM1RwREdQL2pONTM5?=
+ =?utf-8?B?NkQwd2t3aFlsNlhObmhFVkxYaUlXQXBENmx4UDVrNGtKZytkVm9MUmZTZHF0?=
+ =?utf-8?Q?qEDI2HMkiiylfKaduRPa6l2ik?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 50aa1863-8f7e-45f5-8a22-08dcce3e1c17
+X-MS-Exchange-CrossTenant-Network-Message-Id: 11079613-dda1-4f7b-388a-08dcce3facdd
 X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Sep 2024 06:35:33.5064 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Sep 2024 06:46:45.8802 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: xFcB0lQ8Z42EJ/edoNDiydDUMUm61aDD9Z77L6J20sNrTkDtO06oMyC3/tYTmK8y
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB6101
+X-MS-Exchange-CrossTenant-UserPrincipalName: smocGnTinOWXLx1W4ov4cYElI+4ENmcZdD1WcpUJ9/9mU35K/g3v6mEzZdpdGOpU
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB6931
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -228,172 +229,209 @@ X-Virus-Status: Clean
 
 
 
-On 9/5/24 11:17, Sughosh Ganu wrote:
-> On Thu, 5 Sept 2024 at 14:07, Michal Simek <michal.simek@amd.com> wrote:
->>
->>
->>
->> On 9/5/24 10:12, Sughosh Ganu wrote:
->>> On Thu, 5 Sept 2024 at 13:20, Michal Simek <michal.simek@amd.com> wrote:
->>>>
->>>>
->>>>
->>>> On 9/5/24 09:43, Sughosh Ganu wrote:
->>>>> On Thu, 5 Sept 2024 at 13:09, Michal Simek <michal.simek@amd.com> wrote:
->>>>>>
->>>>>>
->>>>>>
->>>>>> On 9/5/24 09:38, Sughosh Ganu wrote:
->>>>>>> On Thu, 5 Sept 2024 at 13:03, Michal Simek <michal.simek@amd.com> wrote:
->>>>>>>>
->>>>>>>>
->>>>>>>>
->>>>>>>> On 9/5/24 08:24, Sughosh Ganu wrote:
->>>>>>>>> On Wed, 4 Sept 2024 at 17:30, Michal Simek <michal.simek@amd.com> wrote:
->>>>>>>>>>
->>>>>>>>>>
->>>>>>>>>>
->>>>>>>>>> On 8/30/24 13:40, Sughosh Ganu wrote:
->>>>>>>>>>>
->>>>>>>>>>> The following set of patches are miscellaneous fixes and some
->>>>>>>>>>> hardening of the FWU update logic.
->>>>>>>>>>>
->>>>>>>>>>> Sughosh Ganu (6):
->>>>>>>>>>>         fwu: v2: perform some checks before reading metadata
->>>>>>>>>>>         fwu: v2: try reading both copies of metadata
->>>>>>>>>>>         fwu: v1: do a version check for the metadata
->>>>>>>>>>>         fwu: check all images for transitioning out of Trial State
->>>>>>>>>>>         fwu: add dependency checks for selecting FWU metadata version
->>>>>>>>>>>         fwu: do not allow capsule processing on exceeding Trial Counter
->>>>>>>>>>>           threshold
->>>>>>>>>>>
->>>>>>>>>>>        include/fwu.h            | 11 ++++++
->>>>>>>>>>>        lib/fwu_updates/Kconfig  |  1 +
->>>>>>>>>>>        lib/fwu_updates/fwu.c    | 31 +++++++++++++++-
->>>>>>>>>>>        lib/fwu_updates/fwu_v1.c | 18 +++++++--
->>>>>>>>>>>        lib/fwu_updates/fwu_v2.c | 80 ++++++++++++++++++++++------------------
->>>>>>>>>>>        5 files changed, 99 insertions(+), 42 deletions(-)
->>>>>>>>>>>
->>>>>>>>>>
->>>>>>>>>> I found one more thing.
->>>>>>>>>>
->>>>>>>>>> I did this change
->>>>>>>>>>
->>>>>>>>>> diff --git a/tools/mkfwumdata.c b/tools/mkfwumdata.c
->>>>>>>>>> index fbc2067bc12d..dab9530e499c 100644
->>>>>>>>>> --- a/tools/mkfwumdata.c
->>>>>>>>>> +++ b/tools/mkfwumdata.c
->>>>>>>>>> @@ -293,7 +293,7 @@ static void fwu_fill_version_specific_mdata(struct
->>>>>>>>>> fwu_mdata_object *mobj)
->>>>>>>>>>               struct fwu_mdata *mdata = mobj->mdata;
->>>>>>>>>>
->>>>>>>>>>               mdata->metadata_size = mobj->size;
->>>>>>>>>> -       mdata->desc_offset = sizeof(struct fwu_mdata);
->>>>>>>>>> +       mdata->desc_offset = 0x21; sizeof(struct fwu_mdata);
->>>>>>>>>>
->>>>>>>>>>               for (i = 0; i < MAX_BANKS_V2; i++)
->>>>>>>>>>                       mdata->bank_state[i] = i < mobj->banks ?
->>>>>>>>>>
->>>>>>>>>>
->>>>>>>>>> to break desc_offset location. I generated mdata structure and write it to
->>>>>>>>>> primary mdata partition.
->>>>>>>>>>
->>>>>>>>>> This has been spotted by (my debug) which is the reason why I did it.
->>>>>>>>>>
->>>>>>>>>>              if (g_mdata.desc_offset != FWU_IMG_DESC_OFFSET) {
->>>>>>>>>>                      printf("mdata offset is not 0x20\n");
->>>>>>>>>>                      return false;
->>>>>>>>>>              }
->>>>>>>>>>
->>>>>>>>>> But I got one more message below which
->>>>>>>>>>
->>>>>>>>>> mdata offset is not 0x20
->>>>>>>>>> Both FWU metadata copies are valid but do not match. Restoring the secondary
->>>>>>>>>> partition from the primary
->>>>>>>>>
->>>>>>>>> The reason why this logic is in place is to handle the scenario
->>>>>>>>> whereby, during the metadata update, the primary copy gets updated
->>>>>>>>> correctly, but due to some reason (like a power cut), the secondary
->>>>>>>>> copy does not -- this is because the primary copy gets updated first.
->>>>>>>>> In such a scenario, the secondary copy of metadata can be then
->>>>>>>>> restored from the primary copy. In the scenario where the primary copy
->>>>>>>>> is corrupted, it will show up in the crc check, and will get restored
->>>>>>>>> from the secondary copy.
->>>>>>>>
->>>>>>>> But in this case - CRC of primary is correct but data inside is wrong because
->>>>>>>> offset is at 0x21 not at 0x20.
->>>>>>>
->>>>>>> How will this event play out ? Am I missing something ? When the
->>>>>>> metadata is getting updated, the offset will be written as 0x20, and
->>>>>>> not 0x21. And in case the metadata gets corrupted, the CRC check would
->>>>>>> fail and the primary partition would get restored from the secondary
->>>>>>> (assuming that the secondary copy is correct).
->>>>>>
->>>>>> It is not after update. It is initial state with incorrect mdata structure.
->>>>>
->>>>> Well, if the metadata partition is being written with incorrect data,
->>>>> not sure how we combat that (or even if we should). After all, the
->>>>> spec clearly states that the metadata cannot be protected against
->>>>> malicious writes. The logic that you pointed out earlier is to handle
->>>>> the scenario where the primary partition got updated, but the
->>>>> secondary did not.
->>>>
->>>> I don't disagree with you.
->>>>
->>>> Scenario here is that primary partition is updated with incorrect data content
->>>> (but still correct CRC). This is correctly detected that data is not right.
->>>> It means primary partition is wrong and shouldn't be used and it is not used.
->>>>
->>>> But because it has correct CRC syncup code logic is doing syncup.
->>>>
->>>> That's why I think we have two codes which have pretty much independent logic
->>>> what to do. If primary is wrong sync should be from secondary to primary but
->>>> that's not what code is doing.
+On 9/6/24 08:35, Michal Simek wrote:
+> 
+> 
+> On 9/5/24 11:17, Sughosh Ganu wrote:
+>> On Thu, 5 Sept 2024 at 14:07, Michal Simek <michal.simek@amd.com> wrote:
 >>>
->>> The scenario of "primary is wrong" will only play out in case of
->>> corruption in the metadata. The scenario that you highlight, that of
->>> the metadata being wrong, but the CRC check succeeds will only happen
->>> when the metadata has been maliciously written --
+>>>
+>>>
+>>> On 9/5/24 10:12, Sughosh Ganu wrote:
+>>>> On Thu, 5 Sept 2024 at 13:20, Michal Simek <michal.simek@amd.com> wrote:
+>>>>>
+>>>>>
+>>>>>
+>>>>> On 9/5/24 09:43, Sughosh Ganu wrote:
+>>>>>> On Thu, 5 Sept 2024 at 13:09, Michal Simek <michal.simek@amd.com> wrote:
+>>>>>>>
+>>>>>>>
+>>>>>>>
+>>>>>>> On 9/5/24 09:38, Sughosh Ganu wrote:
+>>>>>>>> On Thu, 5 Sept 2024 at 13:03, Michal Simek <michal.simek@amd.com> wrote:
+>>>>>>>>>
+>>>>>>>>>
+>>>>>>>>>
+>>>>>>>>> On 9/5/24 08:24, Sughosh Ganu wrote:
+>>>>>>>>>> On Wed, 4 Sept 2024 at 17:30, Michal Simek <michal.simek@amd.com> wrote:
+>>>>>>>>>>>
+>>>>>>>>>>>
+>>>>>>>>>>>
+>>>>>>>>>>> On 8/30/24 13:40, Sughosh Ganu wrote:
+>>>>>>>>>>>>
+>>>>>>>>>>>> The following set of patches are miscellaneous fixes and some
+>>>>>>>>>>>> hardening of the FWU update logic.
+>>>>>>>>>>>>
+>>>>>>>>>>>> Sughosh Ganu (6):
+>>>>>>>>>>>>         fwu: v2: perform some checks before reading metadata
+>>>>>>>>>>>>         fwu: v2: try reading both copies of metadata
+>>>>>>>>>>>>         fwu: v1: do a version check for the metadata
+>>>>>>>>>>>>         fwu: check all images for transitioning out of Trial State
+>>>>>>>>>>>>         fwu: add dependency checks for selecting FWU metadata version
+>>>>>>>>>>>>         fwu: do not allow capsule processing on exceeding Trial Counter
+>>>>>>>>>>>>           threshold
+>>>>>>>>>>>>
+>>>>>>>>>>>>        include/fwu.h            | 11 ++++++
+>>>>>>>>>>>>        lib/fwu_updates/Kconfig  |  1 +
+>>>>>>>>>>>>        lib/fwu_updates/fwu.c    | 31 +++++++++++++++-
+>>>>>>>>>>>>        lib/fwu_updates/fwu_v1.c | 18 +++++++--
+>>>>>>>>>>>>        lib/fwu_updates/fwu_v2.c | 80 
+>>>>>>>>>>>> ++++++++++++++++++++++------------------
+>>>>>>>>>>>>        5 files changed, 99 insertions(+), 42 deletions(-)
+>>>>>>>>>>>>
+>>>>>>>>>>>
+>>>>>>>>>>> I found one more thing.
+>>>>>>>>>>>
+>>>>>>>>>>> I did this change
+>>>>>>>>>>>
+>>>>>>>>>>> diff --git a/tools/mkfwumdata.c b/tools/mkfwumdata.c
+>>>>>>>>>>> index fbc2067bc12d..dab9530e499c 100644
+>>>>>>>>>>> --- a/tools/mkfwumdata.c
+>>>>>>>>>>> +++ b/tools/mkfwumdata.c
+>>>>>>>>>>> @@ -293,7 +293,7 @@ static void fwu_fill_version_specific_mdata(struct
+>>>>>>>>>>> fwu_mdata_object *mobj)
+>>>>>>>>>>>               struct fwu_mdata *mdata = mobj->mdata;
+>>>>>>>>>>>
+>>>>>>>>>>>               mdata->metadata_size = mobj->size;
+>>>>>>>>>>> -       mdata->desc_offset = sizeof(struct fwu_mdata);
+>>>>>>>>>>> +       mdata->desc_offset = 0x21; sizeof(struct fwu_mdata);
+>>>>>>>>>>>
+>>>>>>>>>>>               for (i = 0; i < MAX_BANKS_V2; i++)
+>>>>>>>>>>>                       mdata->bank_state[i] = i < mobj->banks ?
+>>>>>>>>>>>
+>>>>>>>>>>>
+>>>>>>>>>>> to break desc_offset location. I generated mdata structure and write 
+>>>>>>>>>>> it to
+>>>>>>>>>>> primary mdata partition.
+>>>>>>>>>>>
+>>>>>>>>>>> This has been spotted by (my debug) which is the reason why I did it.
+>>>>>>>>>>>
+>>>>>>>>>>>              if (g_mdata.desc_offset != FWU_IMG_DESC_OFFSET) {
+>>>>>>>>>>>                      printf("mdata offset is not 0x20\n");
+>>>>>>>>>>>                      return false;
+>>>>>>>>>>>              }
+>>>>>>>>>>>
+>>>>>>>>>>> But I got one more message below which
+>>>>>>>>>>>
+>>>>>>>>>>> mdata offset is not 0x20
+>>>>>>>>>>> Both FWU metadata copies are valid but do not match. Restoring the 
+>>>>>>>>>>> secondary
+>>>>>>>>>>> partition from the primary
+>>>>>>>>>>
+>>>>>>>>>> The reason why this logic is in place is to handle the scenario
+>>>>>>>>>> whereby, during the metadata update, the primary copy gets updated
+>>>>>>>>>> correctly, but due to some reason (like a power cut), the secondary
+>>>>>>>>>> copy does not -- this is because the primary copy gets updated first.
+>>>>>>>>>> In such a scenario, the secondary copy of metadata can be then
+>>>>>>>>>> restored from the primary copy. In the scenario where the primary copy
+>>>>>>>>>> is corrupted, it will show up in the crc check, and will get restored
+>>>>>>>>>> from the secondary copy.
+>>>>>>>>>
+>>>>>>>>> But in this case - CRC of primary is correct but data inside is wrong 
+>>>>>>>>> because
+>>>>>>>>> offset is at 0x21 not at 0x20.
+>>>>>>>>
+>>>>>>>> How will this event play out ? Am I missing something ? When the
+>>>>>>>> metadata is getting updated, the offset will be written as 0x20, and
+>>>>>>>> not 0x21. And in case the metadata gets corrupted, the CRC check would
+>>>>>>>> fail and the primary partition would get restored from the secondary
+>>>>>>>> (assuming that the secondary copy is correct).
+>>>>>>>
+>>>>>>> It is not after update. It is initial state with incorrect mdata structure.
+>>>>>>
+>>>>>> Well, if the metadata partition is being written with incorrect data,
+>>>>>> not sure how we combat that (or even if we should). After all, the
+>>>>>> spec clearly states that the metadata cannot be protected against
+>>>>>> malicious writes. The logic that you pointed out earlier is to handle
+>>>>>> the scenario where the primary partition got updated, but the
+>>>>>> secondary did not.
+>>>>>
+>>>>> I don't disagree with you.
+>>>>>
+>>>>> Scenario here is that primary partition is updated with incorrect data content
+>>>>> (but still correct CRC). This is correctly detected that data is not right.
+>>>>> It means primary partition is wrong and shouldn't be used and it is not used.
+>>>>>
+>>>>> But because it has correct CRC syncup code logic is doing syncup.
+>>>>>
+>>>>> That's why I think we have two codes which have pretty much independent logic
+>>>>> what to do. If primary is wrong sync should be from secondary to primary but
+>>>>> that's not what code is doing.
+>>>>
+>>>> The scenario of "primary is wrong" will only play out in case of
+>>>> corruption in the metadata. The scenario that you highlight, that of
+>>>> the metadata being wrong, but the CRC check succeeds will only happen
+>>>> when the metadata has been maliciously written --
+>>>
+>>> yes. And I did it on purpose to check your code and all error condition you are
+>>> checking to make sure that code traps them.
 >>
->> yes. And I did it on purpose to check your code and all error condition you are
->> checking to make sure that code traps them.
-> 
-> The code should detect and fix any genuine error conditions that might
-> come up in the field. Even the check for the case where the two
-> metadata copies are valid but different is a scenario that can
-> actually happen when updating the metadata copies, and there is a
-> reason why we are assuming that the primary is the correct copy and
-> should be used to restore the secondary. If there are any valid
-> scenarios that are not being handled, they should be identified and
-> fixed.
-> 
+>> The code should detect and fix any genuine error conditions that might
+>> come up in the field. Even the check for the case where the two
+>> metadata copies are valid but different is a scenario that can
+>> actually happen when updating the metadata copies, and there is a
+>> reason why we are assuming that the primary is the correct copy and
+>> should be used to restore the secondary. If there are any valid
+>> scenarios that are not being handled, they should be identified and
+>> fixed.
 >>
->>> if not, then the
->>> secondary partition should also be written with the wrong metadata,
->>> and the checks would then fail. In the case of the primary metadata
->>> getting corrupted, it does get restored from the secondary partition,
->>> assuming that the secondary partition is intact.
+>>>
+>>>> if not, then the
+>>>> secondary partition should also be written with the wrong metadata,
+>>>> and the checks would then fail. In the case of the primary metadata
+>>>> getting corrupted, it does get restored from the secondary partition,
+>>>> assuming that the secondary partition is intact.
+>>>
+>>> When primary is cleared/has incorrect CRC there is no problem and recovery
+>>> happens but if CRC is right but data inside wrong code doesn't check it.
 >>
->> When primary is cleared/has incorrect CRC there is no problem and recovery
->> happens but if CRC is right but data inside wrong code doesn't check it.
+>> This is where I think that this is not a genuine "error" case. So, if
+>> someone has written a metadata copy with wrong data but right CRC, and
+>> only written this bad copy to the primary partition, how do we trust
+>> that the secondary copy is actually correct ? One can generate a
+>> secondary metadata copy where the primary checks pass, but the image
+>> information in the metadata is incorrect.
 > 
-> This is where I think that this is not a genuine "error" case. So, if
-> someone has written a metadata copy with wrong data but right CRC, and
-> only written this bad copy to the primary partition, how do we trust
-> that the secondary copy is actually correct ? One can generate a
-> secondary metadata copy where the primary checks pass, but the image
-> information in the metadata is incorrect.
+> If U-Boot knows that data is not correct, based on it's check (in this case one 
+> incorrect field), you should never use it. If second also won't pass this check 
+> U-Boot shouldn't use it too.
+> 
+> If secondary copy pass all your tests you trust that it is fine. But if not, 
+> then you don't trust it.
+> 
+> And that's exactly what it is happening here. Code knows that primary data is 
+> wrong and properly detect it but another code blindly not checking it and just 
+> copy it incorrect data over correct one.
 
-If U-Boot knows that data is not correct, based on it's check (in this case one 
-incorrect field), you should never use it. If second also won't pass this check 
-U-Boot shouldn't use it too.
+here is where the problem is. Code reads mdata structure and checks only CRC 
+over it and that's it. There should be additional checking perform before you 
+can say that data is correct.
 
-If secondary copy pass all your tests you trust that it is fine. But if not, 
-then you don't trust it.
+diff --git a/lib/fwu_updates/fwu.c b/lib/fwu_updates/fwu.c
+index 983f232bd179..9ec750b51da0 100644
+--- a/lib/fwu_updates/fwu.c
++++ b/lib/fwu_updates/fwu.c
+@@ -313,10 +313,13 @@ int fwu_get_mdata(struct fwu_mdata *mdata)
+                 err = fwu_read_mdata(g_dev, parts_mdata[i], !i, mdata_size);
+                 if (!err) {
+                         err = mdata_crc_check(parts_mdata[i]);
+-                       if (!err)
+-                               parts_ok[i] = true;
+-                       else
+-                               log_debug("mdata : %s crc32 failed\n", i ? 
+"secondary" : "primary");
++                       if (!err) {
++                               if (check that format is corrrect)
++                                       parts_ok[i] = true;
++
++                               continue;
++                       }
++                       log_debug("mdata : %s crc32 failed\n", i ? "secondary" : 
+"primary");
+                 }
+         }
 
-And that's exactly what it is happening here. Code knows that primary data is 
-wrong and properly detect it but another code blindly not checking it and just 
-copy it incorrect data over correct one.
+Because issue is that CRC check only cause that part_ok[0] = true but that's wrong.
 
 Thanks,
 Michal
