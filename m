@@ -4,107 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 756B7CE7B15
-	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 13:41:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 072EDCE7B10
+	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 13:41:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 143CF88CEF;
+	by phobos.denx.de (Postfix) with ESMTP id 6F322888F0;
 	Fri,  6 Sep 2024 15:41:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CShv1kxe";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HzOZG/MH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7291788C9F; Fri,  6 Sep 2024 14:34:32 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 5CADF88BD6; Fri,  6 Sep 2024 14:34:57 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8005288CD8
- for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 14:34:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C619388CC8
+ for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 14:34:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-42bb8cf8abeso15231345e9.2
- for <u-boot@lists.denx.de>; Fri, 06 Sep 2024 05:34:26 -0700 (PDT)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-42c79deb7c4so14939665e9.3
+ for <u-boot@lists.denx.de>; Fri, 06 Sep 2024 05:34:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725626066; x=1726230866; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1725626090; x=1726230890; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CyeBZ0DLA6zQ+juCrEW2Qv3rK8oiqdwIVFJS7M/NbyU=;
- b=CShv1kxej+0FwiGNV/jf49n4p+7oBVvxAiXAjTYpc0yuivD+2x7nMf//zaiYldtgoh
- MsRaOHJfhoCNrrS7L4seSW6/Yu6N0w/ue6iee68iGvItv0b/qCP37mOH8cPe9WH1iVvS
- F5qUtsbe9HPvHU860om/xlCETi8hVivVW2MBBOmXS5klN75VThkuek9vb53ml+Z52IQt
- efv4fRgAyQ8TdZCLhuHYKK1ytjFfi6q4W8CjnwCkjl/cSPaz+/ij8esLMRVtELQSpdNi
- jCHTxBwIYIZxOjfoc1i1O9fos6mhxL2hwC8BSMv5f8Zo9p3ZmvwR2rjDzaFO4dOjWIf0
- nFEw==
+ bh=GosR7VMpkoVByMXOpu4LiNAj/1DQy5mnx904UmnIiPg=;
+ b=HzOZG/MHk6Tg22WDq1gTQp2I0Igd9kKattpLKwXPeLXiq7PGiFHoSd50RcxPzRoKb+
+ NFCOCka/v2JQOV3qrzh8TmSUMDruZEBzzWcea8ywybooVRy1RyFM6PKB+Ps91IKiMEXL
+ tqcDao3vhTAeU31hiPTd6WPyGuuZVn1zJ3K5QYaUCHssTCaPfBiCoF4vttW6hAe1WP+L
+ KHRznw2B86kKEV9BO7OvXXuXtyf9GPuOX5TTfqtSrG+rwiRPVgWhjmjuVlDFg+JzAzok
+ LZ+UfrP9quuI+KpOAv6nGlLpJJuW1PH+7fI94CttNEjmYv+Cy0EjALifvcV0hYx+Ox4n
+ A/tg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725626066; x=1726230866;
+ d=1e100.net; s=20230601; t=1725626090; x=1726230890;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CyeBZ0DLA6zQ+juCrEW2Qv3rK8oiqdwIVFJS7M/NbyU=;
- b=rKoLB88gAqnz5qoJFM9catlr+8RLa5EkR8bQU4uuaOJf0uzys8O/lF5Sgca5RU8Lcs
- M/MzYv5eUNo3Pzwsqs7mbWHuSpOE6s2F4TGVvPY9OPkcj9LxqoEh/eyJL6VPl0mDsRYw
- KCM6Znd4QUp1Q9nVzyCfxh27XkK9HwxklmsTL+b/ba8tl29y6juDPOAvnssVbpVwtneI
- evDzUwYQglCAUZqqLmb8ZxoKsQ53ue3+J+YNVKtthFe3hZrBn5KyAhqDJclnubzvLFEh
- FjjXnOlz8pU4eeNqZehyJLaRJqojIzOvIdvRd2XBMMY9wwWcDVjMy8lkEIrfkD5aThaS
- kNmQ==
-X-Gm-Message-State: AOJu0YxKKJ5H3PTbhRT8mbgkiVErQa4pVUljNIeb2xoqFpy41WL/GFkV
- ArQcvx8mxzgYyTv2tlrC9ox0qEh7r71NTPPKVXft19L7h8awmG2KxFcj45/pC4YY3P64FO1Fs/s
- KED+VTmwL
-X-Google-Smtp-Source: AGHT+IEZi70uYvegpuF1P5YFVMagY7w54u1P0G24wObZUwh4bTH/nHnGUTyXOHGwH4Vj/zvIY871eQ==
-X-Received: by 2002:a05:600c:1c01:b0:427:9a8f:9717 with SMTP id
- 5b1f17b1804b1-42c9f8e665dmr18283165e9.0.1725626065246; 
- Fri, 06 Sep 2024 05:34:25 -0700 (PDT)
+ bh=GosR7VMpkoVByMXOpu4LiNAj/1DQy5mnx904UmnIiPg=;
+ b=UcS5FyE+VtL9MiGHQT7NS/2Y99Jq50cU/kG6yxbyL+MIdEk6hgpVlJmnEGVT6lCUSi
+ r2WbsTLsgFoDdmjkqMMwytIEmwv4oyknIH18iDEX5qLyxQ4W9St9h6JP33PC7YMxCwHn
+ h0mPwIXc5AQyehsFEMcOmiICKB8qq5NZMEv0AiLW2mU11yFLBf1SD/eGcwj7yP4Q00Ho
+ JpYmQ5HYZgVEgLiIlsq4nxEt0UTiwCkDM7dQTf6bjNIFTYsLJRGJHPaOm5qb8jsO+Ij6
+ faXlwnnGqpz/PmcTLkw8LTSv1bU4U0bjGKuFaT2k9IQKhX58XBJIzunpSvjeG91vp78M
+ PRYw==
+X-Gm-Message-State: AOJu0YywsE++d4XrbK9zsWHHpPG25GtRyG6ksRu4qcY979whi9MtccDW
+ ZjVoELSVYhVf7l6PaHlkcnvh3CoPcBZLs4FL6j8qdxannp895eTW0AG/VkePzu+MOF7ZUPKMECc
+ 8Ax/CDFA/
+X-Google-Smtp-Source: AGHT+IEFDLtKR2rHc74QSMprdANnFHQ0iustu185SFz7uLY0hBvCTpc1t3DbaGhvfu48VoVm3Tjiuw==
+X-Received: by 2002:a05:600c:1c01:b0:42b:8965:1638 with SMTP id
+ 5b1f17b1804b1-42c9f978c80mr17562915e9.1.1725626090257; 
+ Fri, 06 Sep 2024 05:34:50 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:1ff1:215c:d8a4:9f99])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42ca05cf0e8sm19640125e9.27.2024.09.06.05.34.23
+ 5b1f17b1804b1-42ca05cf0e8sm19640125e9.27.2024.09.06.05.34.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Sep 2024 05:34:24 -0700 (PDT)
+ Fri, 06 Sep 2024 05:34:49 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
  Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
  Anton Antonov <Anton.Antonov@arm.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>, Eugen Hristev <eugen.hristev@collabora.com>,
- Nicolas Ferre <nicolas.ferre@microchip.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>, Felix Brack <fb@ltec.ch>,
+ Icenowy Zheng <icenowy@aosc.xyz>, Tom Rini <trini@konsulko.com>,
  Angelo Dureghello <angelo@kernel-space.org>,
- Jakub Klama <jakub@conclusive.pl>, Artur Rojek <artur@conclusive.pl>,
- TsiChung Liew <Tsi-Chung.Liew@nxp.com>, Stefan Roese <sr@denx.de>,
- Heiko Schocher <hs@denx.de>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, egnite GmbH <info@egnite.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Andrew Davis <afd@ti.com>,
- Sumit Garg <sumit.garg@linaro.org>, Bryan Brattlof <bb@ti.com>,
- Jesse Taube <mr.bossman075@gmail.com>,
- "Leon M. Busch-George" <leon@georgemail.eu>, Marek Vasut <marex@denx.de>,
- Marcin Jabrzyk <marcin@conclusive.pl>, Peng Fan <peng.fan@nxp.com>,
- Jason Liu <jason.hui.liu@nxp.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>,
+ Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Chris Morgan <macromorgan@hotmail.com>, Wills Wang <wills.wang@live.com>,
+ Rosy Song <rosysong@rosinson.com>, Mark Kettenis <kettenis@openbsd.org>,
+ Wolfgang Wegner <w.wegner@astro-kom.de>, Stelian Pop <stelian@popies.net>,
+ Thomas Fitzsimmons <fitzsim@fitzsim.org>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Linus Walleij <linus.walleij@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Alex Nemirovsky <alex.nemirovsky@cortina-access.com>,
+ liuhao <liuhao@phytium.com.cn>, shuyiqi <shuyiqi@phytium.com.cn>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Trevor Woerner <twoerner@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Alexey Brodkin <abrodkin@synopsys.com>, Andy Yan <andy.yan@rock-chips.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Yang Xiwen <firbidden405@outlook.com>,
+ Enric Balletbo i Serra <eballetbo@gmail.com>,
+ Matthias Winker <matthias.winker@de.bosch.com>,
+ Philip Oberfichtner <pro@denx.de>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Vaishnav Achath <vaishnav.a@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>,
+ David Lechner <david@lechnology.com>, Johan Jonker <jbx6244@gmail.com>,
+ Fabio Estevam <festevam@gmail.com>,
+ Otavio Salvador <otavio@ossystems.com.br>, Eric Nelson <eric@nelint.com>,
+ Peng Fan <peng.fan@nxp.com>,
+ =?UTF-8?q?=C3=81lvaro=20Fern=C3=A1ndez=20Rojas?= <noltari@gmail.com>,
+ Tianrui Wei <tianrui-wei@outlook.com>, Minkyu Kang <mk7.kang@samsung.com>,
+ lixinde <lixinde@phytium.com.cn>,
+ weichangzheng <weichangzheng@phytium.com.cn>,
+ Ilko Iliev <iliev@ronetix.at>, Stefan Bosch <stefan_b@posteo.net>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Greg Gallagher <greg@embeddedgreg.com>,
+ Mihai Sain <mihai.sain@microchip.com>, Sean Anderson <seanga2@gmail.com>,
+ Stephan Gerhold <stephan@gerhold.net>, Kamil Lulko <kamil.lulko@gmail.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Dillon Min <dillon.minfei@gmail.com>, Wei Fu <wefu@redhat.com>,
+ Yixun Lan <dlan@gentoo.org>, Sergey Temerkhanov <s.temerkhanov@gmail.com>,
+ Mike Looijmans <mike.looijmans@topic.nl>, Usama Arif <usama.arif@arm.com>,
+ Anastasiia Lukianenko <anastasiia_lukianenko@epam.com>,
+ Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+ Paul Kocialkowski <paulk@sys-base.io>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Martyn Welch <martyn.welch@collabora.com>, Andrew Davis <afd@ti.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- William Zhang <william.zhang@broadcom.com>,
- Yang Xiwen <forbidden405@outlook.com>, Gabor Juhos <j4g8y7@gmail.com>,
- Boon Khai Ng <boon.khai.ng@intel.com>, Philip Oberfichtner <pro@denx.de>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Robert Marko <robert.marko@sartura.hr>,
- Ye Li <ye.li@nxp.com>, Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
- Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Yasuharu Shibata <yasuharu.shibata@gmail.com>,
- Richard Weinberger <richard@nod.at>, Love Kumar <love.kumar@amd.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Brandon Maier <brandon.maier@collins.com>
-Subject: [PATCH v10 01/25] Miscellaneous fixes
-Date: Fri,  6 Sep 2024 14:33:17 +0200
-Message-Id: <93ccc45cc6928e54878708d77607c5ad1e4a979f.1725625913.git.jerome.forissier@linaro.org>
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Dragan Simic <dsimic@manjaro.org>,
+ Janne Grunau <j@jannau.net>, Neal Gompa <neal@gompa.dev>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Hector Martin <marcan@marcan.st>,
+ Bin Meng <bmeng.cn@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
+ Javier Martinez Canillas <javierm@redhat.com>,
+ Patrick Barsanti <patrick.barsanti@amarulasolutions.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Marek Vasut <marex@denx.de>, Heiko Schocher <hs@denx.de>,
+ TracyMg_Li <TracyMg_Li@outlook.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Andrii Chepurnyi <Andrii_Chepurnyi@epam.com>
+Subject: [PATCH v10 03/25] configs: replace '# CONFIG_NET is not set' with
+ CONFIG_NO_NET=y
+Date: Fri,  6 Sep 2024 14:33:19 +0200
+Message-Id: <527ae437aa2d0e99e8b2757298933f9319b186db.1725625913.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1725625913.git.jerome.forissier@linaro.org>
 References: <cover.1725625913.git.jerome.forissier@linaro.org>
@@ -127,1197 +159,1552 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Squashed commit of patches posted separately [1][2][3].
-
-    cmd: pxe: CMD_PXE implies CMD_TFTPBOOT
-    common: update: UPDATE_COMMON implies CMD_TFTPBOOT
-    test/py: test_efi_loader: add HTTP (wget) test for the EFI loader
-    test/py: test_efi_loader: add missing dependency on cmd_tftpboot
-    test/py: net_boot: fix comment
-    net: fec_mxc_init(): do not ignore return status of fec_open()
-    net: wget: allow EFI boot
-    net: ftgmac100: depend on NET
-    net: phy: ncsi: depend on NET
-    net: wget: removed unused function wget_success()
-    net: fm: call dtsec_init_phy() only when it is defined
-    arm: omap2: add missing #include <netdev.h>
-    at91: rename mem_init() to at91_mem_init()
-    flash: prefix error codes with FL_
-    buildman/toolchain.py: do not set CROSS_COMPILE for sandbox
-    Makefile: detect HOST_ARCH properly when CROSS_COMPILE is multi-word
-    [1]
-    net: guard call to tftp_start() with IS_ENABLED(CONFIG_CMD_TFTPBOOT)
-    [2]
-    configs/ethernut5.h: define CFG_SYS_I2C_RTC_ADDR unconditionally
-    [3]
-
-[1] http://patchwork.ozlabs.org/project/uboot/list/?series=422079
-[2] http://patchwork.ozlabs.org/project/uboot/patch/20240902132511.148683-1-jerome.forissier@linaro.org/
-[3] http://patchwork.ozlabs.org/project/uboot/patch/20240902131246.127897-1-jerome.forissier@linaro.org/
+The parent patch has made the networking stack a choice between NO_NET,
+NET and NET_LWIP. Therefore '# CONFIG_NET is not set' is now
+'CONFIG_NO_NET=y'. Adjust the defconfigs accordingly. Note that this
+patch is intended to be folded in but is kept separate separate for now
+to make review easier.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Tested-by: Felix Brack <fb@ltec.ch>
 ---
- Makefile                                      |  2 +-
- arch/arm/mach-at91/include/mach/at91_common.h |  2 +-
- arch/arm/mach-at91/spl_at91.c                 |  2 +-
- arch/arm/mach-at91/spl_atmel.c                |  2 +-
- arch/arm/mach-omap2/omap3/emac.c              |  1 +
- .../atmel/at91sam9m10g45ek/at91sam9m10g45ek.c |  2 +-
- board/atmel/at91sam9n12ek/at91sam9n12ek.c     |  2 +-
- board/atmel/at91sam9x5ek/at91sam9x5ek.c       |  2 +-
- .../atmel/sama5d27_som1_ek/sama5d27_som1_ek.c |  2 +-
- .../sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c   |  2 +-
- board/atmel/sama5d2_icp/sama5d2_icp.c         |  2 +-
- .../atmel/sama5d2_xplained/sama5d2_xplained.c |  2 +-
- .../atmel/sama5d3_xplained/sama5d3_xplained.c |  2 +-
- board/atmel/sama5d3xek/sama5d3xek.c           |  2 +-
- .../atmel/sama5d4_xplained/sama5d4_xplained.c |  2 +-
- board/atmel/sama5d4ek/sama5d4ek.c             |  2 +-
- board/cobra5272/flash.c                       | 26 ++++----
- .../conclusive/kstr-sama5d27/kstr-sama5d27.c  |  2 +-
- board/freescale/m5253demo/flash.c             |  6 +-
- board/gardena/smart-gateway-at91sam/spl.c     |  2 +-
- board/siemens/corvus/board.c                  |  2 +-
- board/siemens/smartweb/smartweb.c             |  2 +-
- board/siemens/taurus/taurus.c                 |  2 +-
- cmd/Kconfig                                   |  1 +
- common/Kconfig                                |  1 +
- common/flash.c                                | 44 ++++++-------
- drivers/mtd/altera_qspi.c                     |  4 +-
- drivers/mtd/cfi_flash.c                       | 36 +++++------
- drivers/net/Kconfig                           |  1 +
- drivers/net/fec_mxc.c                         |  3 +-
- drivers/net/fm/eth.c                          | 10 ++-
- drivers/net/phy/Kconfig                       |  1 +
- include/configs/ethernut5.h                   |  2 -
- include/flash.h                               | 20 +++---
- net/net.c                                     | 23 ++++---
- net/wget.c                                    | 11 ++--
- test/py/tests/test_efi_loader.py              | 62 ++++++++++++++-----
- test/py/tests/test_net_boot.py                |  2 +-
- tools/buildman/test.py                        | 46 ++++++++++++++
- tools/buildman/toolchain.py                   |  6 +-
- 40 files changed, 217 insertions(+), 129 deletions(-)
+ configs/LicheePi_Zero_defconfig                  | 2 +-
+ configs/M5249EVB_defconfig                       | 2 +-
+ configs/am335x_pdu001_defconfig                  | 2 +-
+ configs/am62ax_evm_r5_defconfig                  | 2 +-
+ configs/am62px_evm_r5_defconfig                  | 2 +-
+ configs/am62x_beagleplay_r5_defconfig            | 2 +-
+ configs/amcore_defconfig                         | 2 +-
+ configs/amd_versal2_mini_defconfig               | 2 +-
+ configs/amd_versal2_mini_emmc_defconfig          | 2 +-
+ configs/amd_versal2_mini_ospi_defconfig          | 2 +-
+ configs/amd_versal2_mini_qspi_defconfig          | 2 +-
+ configs/anbernic-rgxx3-rk3566_defconfig          | 2 +-
+ configs/ap143_defconfig                          | 2 +-
+ configs/ap152_defconfig                          | 2 +-
+ configs/apple_m1_defconfig                       | 2 +-
+ configs/astro_mcf5373l_defconfig                 | 2 +-
+ configs/at91sam9rlek_dataflash_defconfig         | 2 +-
+ configs/at91sam9rlek_mmc_defconfig               | 2 +-
+ configs/at91sam9rlek_nandflash_defconfig         | 2 +-
+ configs/bcm7260_defconfig                        | 2 +-
+ configs/bcm7445_defconfig                        | 2 +-
+ configs/bcm968380gerg_ram_defconfig              | 2 +-
+ configs/bcmns_defconfig                          | 2 +-
+ configs/chromebook_samus_tpl_defconfig           | 2 +-
+ configs/cortina_presidio-asic-base_defconfig     | 2 +-
+ configs/cortina_presidio-asic-pnand_defconfig    | 2 +-
+ configs/durian_defconfig                         | 2 +-
+ configs/e850-96_defconfig                        | 2 +-
+ configs/ea-lpc3250devkitv2_defconfig             | 2 +-
+ configs/efi-x86_app32_defconfig                  | 2 +-
+ configs/efi-x86_app64_defconfig                  | 2 +-
+ configs/emsdp_defconfig                          | 2 +-
+ configs/evb-px5_defconfig                        | 2 +-
+ configs/generic-rk3568_defconfig                 | 2 +-
+ configs/generic-rk3588_defconfig                 | 2 +-
+ configs/hc2910_2aghd05_defconfig                 | 2 +-
+ configs/igep00x0_defconfig                       | 2 +-
+ configs/imx6q_bosch_acc_defconfig                | 2 +-
+ configs/imx6ulz_smm_m2_defconfig                 | 2 +-
+ configs/iot_devkit_defconfig                     | 2 +-
+ configs/j722s_evm_r5_defconfig                   | 2 +-
+ configs/legoev3_defconfig                        | 2 +-
+ configs/mk808_defconfig                          | 2 +-
+ configs/mx23evk_defconfig                        | 2 +-
+ configs/mx28evk_defconfig                        | 2 +-
+ configs/mx6memcal_defconfig                      | 2 +-
+ configs/mx6ulz_14x14_evk_defconfig               | 2 +-
+ configs/mx7ulp_com_defconfig                     | 2 +-
+ configs/mx7ulp_evk_defconfig                     | 2 +-
+ configs/mx7ulp_evk_plugin_defconfig              | 2 +-
+ configs/netgear_cg3100d_ram_defconfig            | 2 +-
+ configs/nsim_700_defconfig                       | 2 +-
+ configs/nsim_700be_defconfig                     | 2 +-
+ configs/nsim_hs38be_defconfig                    | 2 +-
+ configs/openpiton_riscv64_defconfig              | 2 +-
+ configs/openpiton_riscv64_spl_defconfig          | 2 +-
+ configs/origen_defconfig                         | 2 +-
+ configs/pe2201_defconfig                         | 2 +-
+ configs/pinecube_defconfig                       | 2 +-
+ configs/pm9261_defconfig                         | 2 +-
+ configs/s5p4418_nanopi2_defconfig                | 2 +-
+ configs/s5p_goni_defconfig                       | 2 +-
+ configs/s5pc210_universal_defconfig              | 2 +-
+ configs/sama5d27_giantboard_defconfig            | 2 +-
+ configs/sama5d29_curiosity_mmc1_defconfig        | 2 +-
+ configs/sama5d29_curiosity_mmc_defconfig         | 2 +-
+ configs/sama5d29_curiosity_qspiflash_defconfig   | 2 +-
+ configs/sama7g54_curiosity_mmc_defconfig         | 2 +-
+ configs/sama7g54_curiosity_nandflash_defconfig   | 2 +-
+ configs/sama7g54_curiosity_qspiflash_defconfig   | 2 +-
+ configs/sipeed_maix_bitm_defconfig               | 2 +-
+ configs/sipeed_maix_smode_defconfig              | 2 +-
+ configs/stemmy_defconfig                         | 2 +-
+ configs/stm32f429-discovery_defconfig            | 2 +-
+ configs/stm32f429-evaluation_defconfig           | 2 +-
+ configs/stm32f469-discovery_defconfig            | 2 +-
+ configs/stm32h743-disco_defconfig                | 2 +-
+ configs/stm32h743-eval_defconfig                 | 2 +-
+ configs/stm32h750-art-pi_defconfig               | 2 +-
+ configs/stm32mp25_defconfig                      | 2 +-
+ configs/stmark2_defconfig                        | 2 +-
+ configs/th1520_lpi4a_defconfig                   | 2 +-
+ configs/thunderx_88xx_defconfig                  | 2 +-
+ configs/tools-only_defconfig                     | 2 +-
+ configs/topic_miami_defconfig                    | 2 +-
+ configs/topic_miamilite_defconfig                | 2 +-
+ configs/topic_miamiplus_defconfig                | 2 +-
+ configs/total_compute_defconfig                  | 2 +-
+ configs/trats2_defconfig                         | 2 +-
+ configs/trats_defconfig                          | 2 +-
+ configs/xenguest_arm64_defconfig                 | 2 +-
+ configs/xenguest_arm64_virtio_defconfig          | 2 +-
+ configs/xilinx_versal_mini_defconfig             | 2 +-
+ configs/xilinx_versal_mini_emmc0_defconfig       | 2 +-
+ configs/xilinx_versal_mini_emmc1_defconfig       | 2 +-
+ configs/xilinx_versal_mini_ospi_defconfig        | 2 +-
+ configs/xilinx_versal_mini_qspi_defconfig        | 2 +-
+ configs/xilinx_versal_net_mini_defconfig         | 2 +-
+ configs/xilinx_versal_net_mini_emmc_defconfig    | 2 +-
+ configs/xilinx_versal_net_mini_ospi_defconfig    | 2 +-
+ configs/xilinx_versal_net_mini_qspi_defconfig    | 2 +-
+ configs/xilinx_zynqmp_mini_defconfig             | 2 +-
+ configs/xilinx_zynqmp_mini_emmc0_defconfig       | 2 +-
+ configs/xilinx_zynqmp_mini_emmc1_defconfig       | 2 +-
+ configs/xilinx_zynqmp_mini_nand_defconfig        | 2 +-
+ configs/xilinx_zynqmp_mini_nand_single_defconfig | 2 +-
+ configs/xilinx_zynqmp_mini_qspi_defconfig        | 2 +-
+ configs/zynq_cse_nand_defconfig                  | 2 +-
+ configs/zynq_cse_nor_defconfig                   | 2 +-
+ configs/zynq_cse_qspi_defconfig                  | 2 +-
+ 110 files changed, 110 insertions(+), 110 deletions(-)
 
-diff --git a/Makefile b/Makefile
-index f23554da4c1..5113098d29c 100644
---- a/Makefile
-+++ b/Makefile
-@@ -21,7 +21,7 @@ include include/host_arch.h
- ifeq ("", "$(CROSS_COMPILE)")
-   MK_ARCH="${shell uname -m}"
- else
--  MK_ARCH="${shell echo $(CROSS_COMPILE) | sed -n 's/^[[:space:]]*\([^\/]*\/\)*\([^-]*\)-[^[:space:]]*/\2/p'}"
-+  MK_ARCH="${shell echo ${lastword $(CROSS_COMPILE)} | sed -n 's/^[[:space:]]*\([^\/]*\/\)*\([^-]*\)-[^[:space:]]*/\2/p'}"
- endif
- unexport HOST_ARCH
- ifeq ("x86_64", $(MK_ARCH))
-diff --git a/arch/arm/mach-at91/include/mach/at91_common.h b/arch/arm/mach-at91/include/mach/at91_common.h
-index 683e539b1b3..8fec346c1e4 100644
---- a/arch/arm/mach-at91/include/mach/at91_common.h
-+++ b/arch/arm/mach-at91/include/mach/at91_common.h
-@@ -28,7 +28,7 @@ void at91_pllb_init(u32 pllar);
- void at91_mck_init(u32 mckr);
- void at91_mck_init_down(u32 mckr);
- void at91_pmc_init(void);
--void mem_init(void);
-+void at91_mem_init(void);
- void at91_phy_reset(void);
- void at91_sdram_hw_init(void);
- void at91_mck_init(u32 mckr);
-diff --git a/arch/arm/mach-at91/spl_at91.c b/arch/arm/mach-at91/spl_at91.c
-index cde1700a283..0d1233cd109 100644
---- a/arch/arm/mach-at91/spl_at91.c
-+++ b/arch/arm/mach-at91/spl_at91.c
-@@ -142,7 +142,7 @@ void board_init_f(ulong dummy)
- 	preloader_console_init();
- #endif
- 
--	mem_init();
-+	at91_mem_init();
- 
- 	at91_spl_board_init();
- }
-diff --git a/arch/arm/mach-at91/spl_atmel.c b/arch/arm/mach-at91/spl_atmel.c
-index 62a7df8a195..7bfbadf0483 100644
---- a/arch/arm/mach-at91/spl_atmel.c
-+++ b/arch/arm/mach-at91/spl_atmel.c
-@@ -134,7 +134,7 @@ void board_init_f(ulong dummy)
- 
- 	board_early_init_f();
- 
--	mem_init();
-+	at91_mem_init();
- 
- 	ret = spl_init();
- 	if (ret) {
-diff --git a/arch/arm/mach-omap2/omap3/emac.c b/arch/arm/mach-omap2/omap3/emac.c
-index 7348e92cabd..1e30a06361d 100644
---- a/arch/arm/mach-omap2/omap3/emac.c
-+++ b/arch/arm/mach-omap2/omap3/emac.c
-@@ -9,6 +9,7 @@
- #include <net.h>
- #include <asm/io.h>
- #include <asm/arch/am35x_def.h>
-+#include <netdev.h>
- 
- /*
-  * Initializes on-chip ethernet controllers.
-diff --git a/board/atmel/at91sam9m10g45ek/at91sam9m10g45ek.c b/board/atmel/at91sam9m10g45ek/at91sam9m10g45ek.c
-index 3bd94d0889d..af486e977e5 100644
---- a/board/atmel/at91sam9m10g45ek/at91sam9m10g45ek.c
-+++ b/board/atmel/at91sam9m10g45ek/at91sam9m10g45ek.c
-@@ -125,7 +125,7 @@ static void ddr2_conf(struct atmel_mpddrc_config *ddr2)
- 		      2 << ATMEL_MPDDRC_TPR2_TXARD_OFFSET);
- }
- 
--void mem_init(void)
-+void at91_mem_init(void)
- {
- 	struct atmel_mpddrc_config ddr2;
- 
-diff --git a/board/atmel/at91sam9n12ek/at91sam9n12ek.c b/board/atmel/at91sam9n12ek/at91sam9n12ek.c
-index afc0c0520e1..6f9abcbb127 100644
---- a/board/atmel/at91sam9n12ek/at91sam9n12ek.c
-+++ b/board/atmel/at91sam9n12ek/at91sam9n12ek.c
-@@ -167,7 +167,7 @@ static void ddr2_conf(struct atmel_mpddrc_config *ddr2)
- 		      2 << ATMEL_MPDDRC_TPR2_TXARD_OFFSET);
- }
- 
--void mem_init(void)
-+void at91_mem_init(void)
- {
- 	struct at91_pmc *pmc = (struct at91_pmc *)ATMEL_BASE_PMC;
- 	struct at91_matrix *matrix = (struct at91_matrix *)ATMEL_BASE_MATRIX;
-diff --git a/board/atmel/at91sam9x5ek/at91sam9x5ek.c b/board/atmel/at91sam9x5ek/at91sam9x5ek.c
-index e5688c6cf13..f52b9a97731 100644
---- a/board/atmel/at91sam9x5ek/at91sam9x5ek.c
-+++ b/board/atmel/at91sam9x5ek/at91sam9x5ek.c
-@@ -181,7 +181,7 @@ static void ddr2_conf(struct atmel_mpddrc_config *ddr2)
- 		      2 << ATMEL_MPDDRC_TPR2_TXARD_OFFSET);
- }
- 
--void mem_init(void)
-+void at91_mem_init(void)
- {
- 	struct at91_pmc *pmc = (struct at91_pmc *)ATMEL_BASE_PMC;
- 	struct at91_matrix *matrix = (struct at91_matrix *)ATMEL_BASE_MATRIX;
-diff --git a/board/atmel/sama5d27_som1_ek/sama5d27_som1_ek.c b/board/atmel/sama5d27_som1_ek/sama5d27_som1_ek.c
-index 36995a927cf..cb3cd7ac9ae 100644
---- a/board/atmel/sama5d27_som1_ek/sama5d27_som1_ek.c
-+++ b/board/atmel/sama5d27_som1_ek/sama5d27_som1_ek.c
-@@ -146,7 +146,7 @@ static void ddrc_conf(struct atmel_mpddrc_config *ddrc)
- 		      (8 << ATMEL_MPDDRC_TPR2_TFAW_OFFSET));
- }
- 
--void mem_init(void)
-+void at91_mem_init(void)
- {
- 	struct at91_pmc *pmc = (struct at91_pmc *)ATMEL_BASE_PMC;
- 	struct atmel_mpddr *mpddrc = (struct atmel_mpddr *)ATMEL_BASE_MPDDRC;
-diff --git a/board/atmel/sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c b/board/atmel/sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c
-index c775d593e58..15cbd0daa6f 100644
---- a/board/atmel/sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c
-+++ b/board/atmel/sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c
-@@ -208,7 +208,7 @@ static void ddrc_conf(struct atmel_mpddrc_config *ddrc)
- 	ddrc->cal_mr4 |= ATMEL_MPDDRC_CAL_MR4_MR4R(0xFFFE);
- }
- 
--void mem_init(void)
-+void at91_mem_init(void)
- {
- 	struct at91_pmc *pmc = (struct at91_pmc *)ATMEL_BASE_PMC;
- 	struct atmel_mpddr *mpddrc = (struct atmel_mpddr *)ATMEL_BASE_MPDDRC;
-diff --git a/board/atmel/sama5d2_icp/sama5d2_icp.c b/board/atmel/sama5d2_icp/sama5d2_icp.c
-index 986da01639f..6f0d578abf7 100644
---- a/board/atmel/sama5d2_icp/sama5d2_icp.c
-+++ b/board/atmel/sama5d2_icp/sama5d2_icp.c
-@@ -180,7 +180,7 @@ static void ddrc_conf(struct atmel_mpddrc_config *ddrc)
- 		      (7 << ATMEL_MPDDRC_TPR2_TFAW_OFFSET));
- }
- 
--void mem_init(void)
-+void at91_mem_init(void)
- {
- 	struct at91_pmc *pmc = (struct at91_pmc *)ATMEL_BASE_PMC;
- 	struct atmel_mpddr *mpddrc = (struct atmel_mpddr *)ATMEL_BASE_MPDDRC;
-diff --git a/board/atmel/sama5d2_xplained/sama5d2_xplained.c b/board/atmel/sama5d2_xplained/sama5d2_xplained.c
-index c8a8eb49826..d104736fa7c 100644
---- a/board/atmel/sama5d2_xplained/sama5d2_xplained.c
-+++ b/board/atmel/sama5d2_xplained/sama5d2_xplained.c
-@@ -146,7 +146,7 @@ static void ddrc_conf(struct atmel_mpddrc_config *ddrc)
- 		      7 << ATMEL_MPDDRC_TPR2_TFAW_OFFSET);
- }
- 
--void mem_init(void)
-+void at91_mem_init(void)
- {
- 	struct at91_pmc *pmc = (struct at91_pmc *)ATMEL_BASE_PMC;
- 	struct atmel_mpddr *mpddrc = (struct atmel_mpddr *)ATMEL_BASE_MPDDRC;
-diff --git a/board/atmel/sama5d3_xplained/sama5d3_xplained.c b/board/atmel/sama5d3_xplained/sama5d3_xplained.c
-index 54cc3c4d900..f98322fb540 100644
---- a/board/atmel/sama5d3_xplained/sama5d3_xplained.c
-+++ b/board/atmel/sama5d3_xplained/sama5d3_xplained.c
-@@ -175,7 +175,7 @@ static void ddr2_conf(struct atmel_mpddrc_config *ddr2)
- 		      8 << ATMEL_MPDDRC_TPR2_TXARD_OFFSET);
- }
- 
--void mem_init(void)
-+void at91_mem_init(void)
- {
- 	struct atmel_mpddrc_config ddr2;
- 
-diff --git a/board/atmel/sama5d3xek/sama5d3xek.c b/board/atmel/sama5d3xek/sama5d3xek.c
-index f2e1242fcb0..28079a81517 100644
---- a/board/atmel/sama5d3xek/sama5d3xek.c
-+++ b/board/atmel/sama5d3xek/sama5d3xek.c
-@@ -241,7 +241,7 @@ static void ddr2_conf(struct atmel_mpddrc_config *ddr2)
- 		      8 << ATMEL_MPDDRC_TPR2_TXARD_OFFSET);
- }
- 
--void mem_init(void)
-+void at91_mem_init(void)
- {
- 	struct atmel_mpddrc_config ddr2;
- 
-diff --git a/board/atmel/sama5d4_xplained/sama5d4_xplained.c b/board/atmel/sama5d4_xplained/sama5d4_xplained.c
-index 09ca16ca88c..f9112fc5321 100644
---- a/board/atmel/sama5d4_xplained/sama5d4_xplained.c
-+++ b/board/atmel/sama5d4_xplained/sama5d4_xplained.c
-@@ -184,7 +184,7 @@ static void ddr2_conf(struct atmel_mpddrc_config *ddr2)
- 		      8 << ATMEL_MPDDRC_TPR2_TXARD_OFFSET);
- }
- 
--void mem_init(void)
-+void at91_mem_init(void)
- {
- 	struct atmel_mpddrc_config ddr2;
- 
-diff --git a/board/atmel/sama5d4ek/sama5d4ek.c b/board/atmel/sama5d4ek/sama5d4ek.c
-index 1f8b85f0614..0bdc6adbdc8 100644
---- a/board/atmel/sama5d4ek/sama5d4ek.c
-+++ b/board/atmel/sama5d4ek/sama5d4ek.c
-@@ -169,7 +169,7 @@ static void ddr2_conf(struct atmel_mpddrc_config *ddr2)
- 		      8 << ATMEL_MPDDRC_TPR2_TXARD_OFFSET);
- }
- 
--void mem_init(void)
-+void at91_mem_init(void)
- {
- 	struct atmel_mpddrc_config ddr2;
- 	const struct atmel_mpddr *mpddr = (struct atmel_mpddr *)ATMEL_BASE_MPDDRC;
-diff --git a/board/cobra5272/flash.c b/board/cobra5272/flash.c
-index 616842e62f4..d324aa6ac11 100644
---- a/board/cobra5272/flash.c
-+++ b/board/cobra5272/flash.c
-@@ -135,22 +135,22 @@ int flash_erase(flash_info_t *info, int s_first, int s_last)
- {
- 	ulong result;
- 	int iflag, cflag, prot, sect;
--	int rc = ERR_OK;
-+	int rc = FL_ERR_OK;
- 	int chip1;
- 	ulong start;
- 
- 	/* first look for protection bits */
- 
- 	if (info->flash_id == FLASH_UNKNOWN)
--		return ERR_UNKNOWN_FLASH_TYPE;
-+		return FL_ERR_UNKNOWN_FLASH_TYPE;
- 
- 	if ((s_first < 0) || (s_first > s_last)) {
--		return ERR_INVAL;
-+		return FL_ERR_INVAL;
- 	}
- 
- 	if ((info->flash_id & FLASH_VENDMASK) !=
- 	    (AMD_MANUFACT & FLASH_VENDMASK)) {
--		return ERR_UNKNOWN_FLASH_VENDOR;
-+		return FL_ERR_UNKNOWN_FLASH_VENDOR;
- 	}
- 
- 	prot = 0;
-@@ -160,7 +160,7 @@ int flash_erase(flash_info_t *info, int s_first, int s_last)
- 		}
- 	}
- 	if (prot)
--		return ERR_PROTECTED;
-+		return FL_ERR_PROTECTED;
- 
- 	/*
- 	 * Disable interrupts which might cause a timeout
-@@ -217,11 +217,11 @@ int flash_erase(flash_info_t *info, int s_first, int s_last)
- 			MEM_FLASH_ADDR1 = CMD_READ_ARRAY;
- 
- 			if (chip1 == ERR) {
--				rc = ERR_PROG_ERROR;
-+				rc = FL_ERR_PROG_ERROR;
- 				goto outahere;
- 			}
- 			if (chip1 == TMO) {
--				rc = ERR_TIMEOUT;
-+				rc = FL_ERR_TIMEOUT;
- 				goto outahere;
- 			}
- 
-@@ -252,7 +252,7 @@ static int write_word(flash_info_t *info, ulong dest, ulong data)
- {
- 	volatile u16 *addr = (volatile u16 *) dest;
- 	ulong result;
--	int rc = ERR_OK;
-+	int rc = FL_ERR_OK;
- 	int cflag, iflag;
- 	int chip1;
- 	ulong start;
-@@ -262,7 +262,7 @@ static int write_word(flash_info_t *info, ulong dest, ulong data)
- 	 */
- 	result = *addr;
- 	if ((result & data) != data)
--		return ERR_NOT_ERASED;
-+		return FL_ERR_NOT_ERASED;
- 
- 	/*
- 	 * Disable interrupts which might cause a timeout
-@@ -302,7 +302,7 @@ static int write_word(flash_info_t *info, ulong dest, ulong data)
- 	*addr = CMD_READ_ARRAY;
- 
- 	if (chip1 == ERR || *addr != data)
--		rc = ERR_PROG_ERROR;
-+		rc = FL_ERR_PROG_ERROR;
- 
- 	if (iflag)
- 		enable_interrupts();
-@@ -320,13 +320,13 @@ int write_buff(flash_info_t *info, uchar *src, ulong addr, ulong cnt)
- 
- 	if (addr & 1) {
- 		printf ("unaligned destination not supported\n");
--		return ERR_ALIGN;
-+		return FL_ERR_ALIGN;
- 	}
- 
- #if 0
- 	if (cnt & 1) {
- 		printf ("odd transfer sizes not supported\n");
--		return ERR_ALIGN;
-+		return FL_ERR_ALIGN;
- 	}
- #endif
- 
-@@ -364,5 +364,5 @@ int write_buff(flash_info_t *info, uchar *src, ulong addr, ulong cnt)
- 		cnt -= 1;
- 	}
- 
--	return ERR_OK;
-+	return FL_ERR_OK;
- }
-diff --git a/board/conclusive/kstr-sama5d27/kstr-sama5d27.c b/board/conclusive/kstr-sama5d27/kstr-sama5d27.c
-index 64282ae9dc7..37750137ad9 100644
---- a/board/conclusive/kstr-sama5d27/kstr-sama5d27.c
-+++ b/board/conclusive/kstr-sama5d27/kstr-sama5d27.c
-@@ -182,7 +182,7 @@ static void ddrc_conf(struct atmel_mpddrc_config *ddrc)
- 		      (8 << ATMEL_MPDDRC_TPR2_TFAW_OFFSET));
- }
- 
--void mem_init(void)
-+void at91_mem_init(void)
- {
- 	struct at91_pmc *pmc = (struct at91_pmc *)ATMEL_BASE_PMC;
- 	struct atmel_mpddr *mpddrc = (struct atmel_mpddr *)ATMEL_BASE_MPDDRC;
-diff --git a/board/freescale/m5253demo/flash.c b/board/freescale/m5253demo/flash.c
-index 334518a4bc9..ab5d2ebff64 100644
---- a/board/freescale/m5253demo/flash.c
-+++ b/board/freescale/m5253demo/flash.c
-@@ -72,7 +72,7 @@ int flash_get_offsets(ulong base, flash_info_t * info)
- 		}
- 	}
- 
--	return ERR_OK;
-+	return FL_ERR_OK;
- }
- 
- void flash_print_info(flash_info_t * info)
-@@ -369,9 +369,9 @@ int write_buff(flash_info_t * info, uchar * src, ulong addr, ulong cnt)
- 	}
- 
- 	if (cnt == 0)
--		return ERR_OK;
-+		return FL_ERR_OK;
- 
--	return ERR_OK;
-+	return FL_ERR_OK;
- }
- 
- /*-----------------------------------------------------------------------
-diff --git a/board/gardena/smart-gateway-at91sam/spl.c b/board/gardena/smart-gateway-at91sam/spl.c
-index fb3ec48f9c5..db9ba881884 100644
---- a/board/gardena/smart-gateway-at91sam/spl.c
-+++ b/board/gardena/smart-gateway-at91sam/spl.c
-@@ -110,7 +110,7 @@ static void ddr2_conf(struct atmel_mpddrc_config *ddr2)
- 		      2 << ATMEL_MPDDRC_TPR2_TXARD_OFFSET);
- }
- 
--void mem_init(void)
-+void at91_mem_init(void)
- {
- 	struct at91_matrix *matrix = (struct at91_matrix *)ATMEL_BASE_MATRIX;
- 	struct at91_pmc *pmc = (struct at91_pmc *)ATMEL_BASE_PMC;
-diff --git a/board/siemens/corvus/board.c b/board/siemens/corvus/board.c
-index 7d73d1f2b36..cd27fc1cc37 100644
---- a/board/siemens/corvus/board.c
-+++ b/board/siemens/corvus/board.c
-@@ -187,7 +187,7 @@ static void ddr2_conf(struct atmel_mpddrc_config *ddr2)
- 		      2 << ATMEL_MPDDRC_TPR2_TXARD_OFFSET);
- }
- 
--void mem_init(void)
-+void at91_mem_init(void)
- {
- 	struct atmel_mpddrc_config ddr2;
- 
-diff --git a/board/siemens/smartweb/smartweb.c b/board/siemens/smartweb/smartweb.c
-index 946fbc3f229..e9e4bc348cb 100644
---- a/board/siemens/smartweb/smartweb.c
-+++ b/board/siemens/smartweb/smartweb.c
-@@ -238,7 +238,7 @@ void at91_spl_board_init(void)
- 			 | AT91_SDRAMC_TRP_VAL(2) | AT91_SDRAMC_TRCD_VAL(2) \
- 			 | AT91_SDRAMC_TRAS_VAL(5) | AT91_SDRAMC_TXSR_VAL(8))
- 
--void mem_init(void)
-+void at91_mem_init(void)
- {
- 	struct at91_matrix *ma = (struct at91_matrix *)ATMEL_BASE_MATRIX;
- 	struct at91_port *port = (struct at91_port *)ATMEL_BASE_PIOC;
-diff --git a/board/siemens/taurus/taurus.c b/board/siemens/taurus/taurus.c
-index bda12a97708..3764ab48ab3 100644
---- a/board/siemens/taurus/taurus.c
-+++ b/board/siemens/taurus/taurus.c
-@@ -177,7 +177,7 @@ void sdramc_configure(unsigned int mask)
- 	sdramc_initialize(ATMEL_BASE_CS1, &setting);
- }
- 
--void mem_init(void)
-+void at91_mem_init(void)
- {
- 	unsigned int ram_size = 0;
- 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 43f78a5aeb1..83c82818bf4 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -2099,6 +2099,7 @@ config CMD_ETHSW
- config CMD_PXE
- 	bool "pxe"
- 	select PXE_UTILS
-+	imply CMD_TFTPBOOT
- 	help
- 	  Boot image via network using PXE protocol
- 
-diff --git a/common/Kconfig b/common/Kconfig
-index 83c81edac20..968d4fb66a8 100644
---- a/common/Kconfig
-+++ b/common/Kconfig
-@@ -934,6 +934,7 @@ menu "Update support"
- config UPDATE_COMMON
- 	bool
- 	select DFU_WRITE_ALT
-+	imply CMD_TFTPBOOT
- 
- config UPDATE_TFTP
- 	bool "Auto-update using fitImage via TFTP"
-diff --git a/common/flash.c b/common/flash.c
-index 24ddc8bee72..a64e51a9b5a 100644
---- a/common/flash.c
-+++ b/common/flash.c
-@@ -110,13 +110,13 @@ addr2info(ulong addr)
-  * Make sure all target addresses are within Flash bounds,
-  * and no protected sectors are hit.
-  * Returns:
-- * ERR_OK          0 - OK
-- * ERR_TIMEOUT     1 - write timeout
-- * ERR_NOT_ERASED  2 - Flash not erased
-- * ERR_PROTECTED   4 - target range includes protected sectors
-- * ERR_INVAL       8 - target address not in Flash memory
-- * ERR_ALIGN       16 - target address not aligned on boundary
-- *			(only some targets require alignment)
-+ * FL_ERR_OK          0 - OK
-+ * FL_ERR_TIMEOUT     1 - write timeout
-+ * FL_ERR_NOT_ERASED  2 - Flash not erased
-+ * FL_ERR_PROTECTED   4 - target range includes protected sectors
-+ * FL_ERR_INVAL       8 - target address not in Flash memory
-+ * FL_ERR_ALIGN       16 - target address not aligned on boundary
-+ *			   (only some targets require alignment)
-  */
- int
- flash_write(char *src, ulong addr, ulong cnt)
-@@ -131,11 +131,11 @@ flash_write(char *src, ulong addr, ulong cnt)
- 	__maybe_unused ulong cnt_orig = cnt;
- 
- 	if (cnt == 0) {
--		return (ERR_OK);
-+		return (FL_ERR_OK);
- 	}
- 
- 	if (!info_first || !info_last) {
--		return (ERR_INVAL);
-+		return (FL_ERR_INVAL);
- 	}
- 
- 	for (info = info_first; info <= info_last; ++info) {
-@@ -146,7 +146,7 @@ flash_write(char *src, ulong addr, ulong cnt)
- 
- 			if ((end >= info->start[i]) && (addr < e_addr) &&
- 			    (info->protect[i] != 0) ) {
--				return (ERR_PROTECTED);
-+				return (FL_ERR_PROTECTED);
- 			}
- 		}
- 	}
-@@ -169,11 +169,11 @@ flash_write(char *src, ulong addr, ulong cnt)
- #if defined(CONFIG_FLASH_VERIFY)
- 	if (memcmp(src_orig, addr_orig, cnt_orig)) {
- 		printf("\nVerify failed!\n");
--		return ERR_PROG_ERROR;
-+		return FL_ERR_PROG_ERROR;
- 	}
- #endif /* CONFIG_SYS_FLASH_VERIFY_AFTER_WRITE */
- 
--	return (ERR_OK);
-+	return (FL_ERR_OK);
- }
- 
- /*-----------------------------------------------------------------------
-@@ -182,33 +182,33 @@ flash_write(char *src, ulong addr, ulong cnt)
- void flash_perror(int err)
- {
- 	switch (err) {
--	case ERR_OK:
-+	case FL_ERR_OK:
- 		break;
--	case ERR_TIMEOUT:
-+	case FL_ERR_TIMEOUT:
- 		puts ("Timeout writing to Flash\n");
- 		break;
--	case ERR_NOT_ERASED:
-+	case FL_ERR_NOT_ERASED:
- 		puts ("Flash not Erased\n");
- 		break;
--	case ERR_PROTECTED:
-+	case FL_ERR_PROTECTED:
- 		puts ("Can't write to protected Flash sectors\n");
- 		break;
--	case ERR_INVAL:
-+	case FL_ERR_INVAL:
- 		puts ("Outside available Flash\n");
- 		break;
--	case ERR_ALIGN:
-+	case FL_ERR_ALIGN:
- 		puts ("Start and/or end address not on sector boundary\n");
- 		break;
--	case ERR_UNKNOWN_FLASH_VENDOR:
-+	case FL_ERR_UNKNOWN_FLASH_VENDOR:
- 		puts ("Unknown Vendor of Flash\n");
- 		break;
--	case ERR_UNKNOWN_FLASH_TYPE:
-+	case FL_ERR_UNKNOWN_FLASH_TYPE:
- 		puts ("Unknown Type of Flash\n");
- 		break;
--	case ERR_PROG_ERROR:
-+	case FL_ERR_PROG_ERROR:
- 		puts ("General Flash Programming Error\n");
- 		break;
--	case ERR_ABORTED:
-+	case FL_ERR_ABORTED:
- 		puts("Flash Programming Aborted\n");
- 		break;
- 	default:
-diff --git a/drivers/mtd/altera_qspi.c b/drivers/mtd/altera_qspi.c
-index c26615821c8..e5c8df750b7 100644
---- a/drivers/mtd/altera_qspi.c
-+++ b/drivers/mtd/altera_qspi.c
-@@ -96,7 +96,7 @@ int flash_erase(flash_info_t *info, int s_first, int s_last)
- 	ret = mtd_erase(mtd, &instr);
- 	flash_set_verbose(0);
- 	if (ret)
--		return ERR_PROTECTED;
-+		return FL_ERR_PROTECTED;
- 
- 	puts(" done\n");
- 	return 0;
-@@ -114,7 +114,7 @@ int write_buff(flash_info_t *info, uchar *src, ulong addr, ulong cnt)
- 
- 	ret = mtd_write(mtd, to, cnt, &retlen, src);
- 	if (ret)
--		return ERR_PROTECTED;
-+		return FL_ERR_PROTECTED;
- 
- 	return 0;
- }
-diff --git a/drivers/mtd/cfi_flash.c b/drivers/mtd/cfi_flash.c
-index a7826e81c17..e50502824ac 100644
---- a/drivers/mtd/cfi_flash.c
-+++ b/drivers/mtd/cfi_flash.c
-@@ -593,11 +593,11 @@ static int flash_status_check(flash_info_t *info, flash_sect_t sector,
- 			       flash_read_long(info, sector, 0));
- 			flash_write_cmd(info, sector, 0, info->cmd_reset);
- 			udelay(1);
--			return ERR_TIMEOUT;
-+			return FL_ERR_TIMEOUT;
- 		}
- 		udelay(1);		/* also triggers watchdog */
- 	}
--	return ERR_OK;
-+	return FL_ERR_OK;
- }
- 
- /*-----------------------------------------------------------------------
-@@ -616,9 +616,9 @@ static int flash_full_status_check(flash_info_t *info, flash_sect_t sector,
- 	case CFI_CMDSET_INTEL_PROG_REGIONS:
- 	case CFI_CMDSET_INTEL_EXTENDED:
- 	case CFI_CMDSET_INTEL_STANDARD:
--		if (retcode == ERR_OK &&
-+		if (retcode == FL_ERR_OK &&
- 		    !flash_isset(info, sector, 0, FLASH_STATUS_DONE)) {
--			retcode = ERR_INVAL;
-+			retcode = FL_ERR_INVAL;
- 			printf("Flash %s error at address %lx\n", prompt,
- 			       info->start[sector]);
- 			if (flash_isset(info, sector, 0, FLASH_STATUS_ECLBS |
-@@ -627,14 +627,14 @@ static int flash_full_status_check(flash_info_t *info, flash_sect_t sector,
- 			} else if (flash_isset(info, sector, 0,
- 						FLASH_STATUS_ECLBS)) {
- 				puts("Block Erase Error.\n");
--				retcode = ERR_NOT_ERASED;
-+				retcode = FL_ERR_NOT_ERASED;
- 			} else if (flash_isset(info, sector, 0,
- 						FLASH_STATUS_PSLBS)) {
- 				puts("Locking Error\n");
- 			}
- 			if (flash_isset(info, sector, 0, FLASH_STATUS_DPS)) {
- 				puts("Block locked.\n");
--				retcode = ERR_PROTECTED;
-+				retcode = FL_ERR_PROTECTED;
- 			}
- 			if (flash_isset(info, sector, 0, FLASH_STATUS_VPENS))
- 				puts("Vpp Low Error.\n");
-@@ -702,12 +702,12 @@ static int flash_status_poll(flash_info_t *info, void *src, void *dst,
- 		if (get_timer(start) > tout) {
- 			printf("Flash %s timeout at address %lx data %lx\n",
- 			       prompt, (ulong)dst, (ulong)flash_read8(dst));
--			return ERR_TIMEOUT;
-+			return FL_ERR_TIMEOUT;
- 		}
- 		udelay(1);		/* also triggers watchdog */
- 	}
- #endif /* CONFIG_SYS_CFI_FLASH_STATUS_POLL */
--	return ERR_OK;
-+	return FL_ERR_OK;
- }
- 
- /*-----------------------------------------------------------------------
-@@ -810,7 +810,7 @@ static int flash_write_cfiword(flash_info_t *info, ulong dest, cfiword_t cword)
- 		break;
- 	}
- 	if (!flag)
--		return ERR_NOT_ERASED;
-+		return FL_ERR_NOT_ERASED;
- 
- 	/* Disable interrupts which might cause a timeout here */
- 	flag = disable_interrupts();
-@@ -899,7 +899,7 @@ static int flash_write_cfibuffer(flash_info_t *info, ulong dest, uchar *cp,
- 		shift = 3;
- 		break;
- 	default:
--		retcode = ERR_INVAL;
-+		retcode = FL_ERR_INVAL;
- 		goto out_unmap;
- 	}
- 
-@@ -930,7 +930,7 @@ static int flash_write_cfibuffer(flash_info_t *info, ulong dest, uchar *cp,
- 		}
- 	}
- 	if (!flag) {
--		retcode = ERR_NOT_ERASED;
-+		retcode = FL_ERR_NOT_ERASED;
- 		goto out_unmap;
- 	}
- 
-@@ -950,7 +950,7 @@ static int flash_write_cfibuffer(flash_info_t *info, ulong dest, uchar *cp,
- 		retcode = flash_status_check(info, sector,
- 					     info->buffer_write_tout,
- 					     "write to buffer");
--		if (retcode == ERR_OK) {
-+		if (retcode == FL_ERR_OK) {
- 			/* reduce the number of loops by the width of
- 			 * the port
- 			 */
-@@ -975,7 +975,7 @@ static int flash_write_cfibuffer(flash_info_t *info, ulong dest, uchar *cp,
- 					src += 8, dst += 8;
- 					break;
- 				default:
--					retcode = ERR_INVAL;
-+					retcode = FL_ERR_INVAL;
- 					goto out_unmap;
- 				}
- 			}
-@@ -1025,7 +1025,7 @@ static int flash_write_cfibuffer(flash_info_t *info, ulong dest, uchar *cp,
- 			}
- 			break;
- 		default:
--			retcode = ERR_INVAL;
-+			retcode = FL_ERR_INVAL;
- 			goto out_unmap;
- 		}
- 
-@@ -1043,7 +1043,7 @@ static int flash_write_cfibuffer(flash_info_t *info, ulong dest, uchar *cp,
- 
- 	default:
- 		debug("Unknown Command Set\n");
--		retcode = ERR_INVAL;
-+		retcode = FL_ERR_INVAL;
- 		break;
- 	}
- 
-@@ -1389,7 +1389,7 @@ int write_buff(flash_info_t *info, uchar *src, ulong addr, ulong cnt)
- 		if (i > cnt)
- 			i = cnt;
- 		rc = flash_write_cfibuffer(info, wp, src, i);
--		if (rc != ERR_OK)
-+		if (rc != FL_ERR_OK)
- 			return rc;
- 		i -= i & (info->portwidth - 1);
- 		wp += i;
-@@ -1398,7 +1398,7 @@ int write_buff(flash_info_t *info, uchar *src, ulong addr, ulong cnt)
- 		FLASH_SHOW_PROGRESS(scale, dots, digit, i);
- 		/* Only check every once in a while */
- 		if ((cnt & 0xFFFF) < buffered_size && ctrlc())
--			return ERR_ABORTED;
-+			return FL_ERR_ABORTED;
- 	}
- #else
- 	while (cnt >= info->portwidth) {
-@@ -1413,7 +1413,7 @@ int write_buff(flash_info_t *info, uchar *src, ulong addr, ulong cnt)
- 		FLASH_SHOW_PROGRESS(scale, dots, digit, info->portwidth);
- 		/* Only check every once in a while */
- 		if ((cnt & 0xFFFF) < info->portwidth && ctrlc())
--			return ERR_ABORTED;
-+			return FL_ERR_ABORTED;
- 	}
- #endif /* CONFIG_SYS_FLASH_USE_BUFFER_WRITE */
- 
-diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
-index 6ed325517c0..e7d0ddfe25a 100644
---- a/drivers/net/Kconfig
-+++ b/drivers/net/Kconfig
-@@ -468,6 +468,7 @@ config FTMAC100
- config FTGMAC100
- 	bool "Ftgmac100 Ethernet Support"
- 	select PHYLIB
-+	depends on NET
- 	help
- 	  This driver supports the Faraday's FTGMAC100 Gigabit SoC
- 	  Ethernet controller that can be found on Aspeed SoCs (which
-diff --git a/drivers/net/fec_mxc.c b/drivers/net/fec_mxc.c
-index 0a0d92bc2cd..2dc1364beec 100644
---- a/drivers/net/fec_mxc.c
-+++ b/drivers/net/fec_mxc.c
-@@ -615,8 +615,7 @@ static int fecmxc_init(struct udevice *dev)
- 	if (fec->xcv_type != SEVENWIRE)
- 		miiphy_restart_aneg(dev);
- #endif
--	fec_open(dev);
--	return 0;
-+	return fec_open(dev);
- }
- 
- /**
-diff --git a/drivers/net/fm/eth.c b/drivers/net/fm/eth.c
-index 19f3f0fef07..22025b6a273 100644
---- a/drivers/net/fm/eth.c
-+++ b/drivers/net/fm/eth.c
-@@ -26,7 +26,8 @@
- 
- #include "fm.h"
- 
--#if defined(CONFIG_MII) || defined(CONFIG_CMD_MII) && !defined(BITBANGMII)
-+#if ((defined(CONFIG_MII) || defined(CONFIG_CMD_MII)) && \
-+     !defined(CONFIG_BITBANGMII))
- 
- #define TBIANA_SETTINGS (TBIANA_ASYMMETRIC_PAUSE | TBIANA_SYMMETRIC_PAUSE | \
- 			 TBIANA_FULL_DUPLEX)
-@@ -701,8 +702,11 @@ static int init_phy(struct fm_eth *fm_eth)
- 		supported |= SUPPORTED_2500baseX_Full;
- #endif
- 
--	if (fm_eth->type == FM_ETH_1G_E)
--		dtsec_init_phy(fm_eth);
-+	if ((IS_ENABLED(CONFIG_MII) || IS_ENABLED(CONFIG_CMD_MII)) &&
-+	    !IS_ENABLED(CONFIG_BITBANGMII)) {
-+		if (fm_eth->type == FM_ETH_1G_E)
-+			dtsec_init_phy(fm_eth);
-+	}
- 
- #ifdef CONFIG_PHYLIB
- #ifdef CONFIG_DM_MDIO
-diff --git a/drivers/net/phy/Kconfig b/drivers/net/phy/Kconfig
-index 73064b2af68..a9efc509814 100644
---- a/drivers/net/phy/Kconfig
-+++ b/drivers/net/phy/Kconfig
-@@ -368,6 +368,7 @@ config PHY_FIXED
- 
- config PHY_NCSI
- 	bool "NC-SI based PHY"
-+	depends on NET
- 
- endif #PHYLIB
- 
-diff --git a/include/configs/ethernut5.h b/include/configs/ethernut5.h
-index c327bbbe07d..338306dfe08 100644
---- a/include/configs/ethernut5.h
-+++ b/include/configs/ethernut5.h
-@@ -55,9 +55,7 @@
- #endif
- 
- /* RTC */
--#if defined(CONFIG_CMD_DATE) || defined(CONFIG_CMD_SNTP)
- #define CFG_SYS_I2C_RTC_ADDR		0x51
--#endif
- 
- #define I2C_SOFT_DECLARATIONS
- 
-diff --git a/include/flash.h b/include/flash.h
-index 60babe8a805..32bc65e7b60 100644
---- a/include/flash.h
-+++ b/include/flash.h
-@@ -127,16 +127,16 @@ void flash_perror(int err);
- /*-----------------------------------------------------------------------
-  * return codes from flash_write():
-  */
--#define ERR_OK				0
--#define ERR_TIMEOUT			1
--#define ERR_NOT_ERASED			2
--#define ERR_PROTECTED			4
--#define ERR_INVAL			8
--#define ERR_ALIGN			16
--#define ERR_UNKNOWN_FLASH_VENDOR	32
--#define ERR_UNKNOWN_FLASH_TYPE		64
--#define ERR_PROG_ERROR			128
--#define ERR_ABORTED			256
-+#define FL_ERR_OK			0
-+#define FL_ERR_TIMEOUT			1
-+#define FL_ERR_NOT_ERASED		2
-+#define FL_ERR_PROTECTED		4
-+#define FL_ERR_INVAL			8
-+#define FL_ERR_ALIGN			16
-+#define FL_ERR_UNKNOWN_FLASH_VENDOR	32
-+#define FL_ERR_UNKNOWN_FLASH_TYPE	64
-+#define FL_ERR_PROG_ERROR		128
-+#define FL_ERR_ABORTED			256
- 
- /*-----------------------------------------------------------------------
-  * Protection Flags for flash_protect():
-diff --git a/net/net.c b/net/net.c
-index d9bc9df643f..1e0b7c85624 100644
---- a/net/net.c
-+++ b/net/net.c
-@@ -334,17 +334,22 @@ void net_auto_load(void)
- 		net_set_state(NETLOOP_SUCCESS);
- 		return;
- 	}
--	if (net_check_prereq(TFTPGET)) {
--/* We aren't expecting to get a serverip, so just accept the assigned IP */
--		if (IS_ENABLED(CONFIG_BOOTP_SERVERIP)) {
--			net_set_state(NETLOOP_SUCCESS);
--		} else {
--			printf("Cannot autoload with TFTPGET\n");
--			net_set_state(NETLOOP_FAIL);
-+	if (IS_ENABLED(CONFIG_CMD_TFTPBOOT)) {
-+		if (net_check_prereq(TFTPGET)) {
-+			/*
-+			 * We aren't expecting to get a serverip, so just
-+			 * accept the assigned IP
-+			 */
-+			if (IS_ENABLED(CONFIG_BOOTP_SERVERIP)) {
-+				net_set_state(NETLOOP_SUCCESS);
-+			} else {
-+				printf("Cannot autoload with TFTPGET\n");
-+				net_set_state(NETLOOP_FAIL);
-+			}
-+			return;
- 		}
--		return;
-+		tftp_start(TFTPGET);
- 	}
--	tftp_start(TFTPGET);
- }
- 
- static int net_init_loop(void)
-diff --git a/net/wget.c b/net/wget.c
-index 4a168641c65..c8cce554c5e 100644
---- a/net/wget.c
-+++ b/net/wget.c
-@@ -8,6 +8,7 @@
- #include <command.h>
- #include <display_options.h>
- #include <env.h>
-+#include <efi_loader.h>
- #include <image.h>
- #include <lmb.h>
- #include <mapmem.h>
-@@ -196,13 +197,6 @@ void wget_fail(char *error_message, unsigned int tcp_seq_num,
- 	wget_send(action, tcp_seq_num, tcp_ack_num, 0);
- }
- 
--void wget_success(u8 action, unsigned int tcp_seq_num,
--		  unsigned int tcp_ack_num, int len, int packets)
--{
--	printf("Packets received %d, Transfer Successful\n", packets);
--	wget_send(action, tcp_seq_num, tcp_ack_num, len);
--}
--
- /*
-  * Interfaces of U-BOOT
-  */
-@@ -432,6 +426,9 @@ static void wget_handler(uchar *pkt, u16 dport,
- 	case WGET_TRANSFERRED:
- 		printf("Packets received %d, Transfer Successful\n", packets);
- 		net_set_state(wget_loop_state);
-+		efi_set_bootdev("Net", "", image_url,
-+				map_sysmem(image_load_addr, 0),
-+				net_boot_file_size);
- 		break;
- 	}
- }
-diff --git a/test/py/tests/test_efi_loader.py b/test/py/tests/test_efi_loader.py
-index 85473a9049b..5f3b448a066 100644
---- a/test/py/tests/test_efi_loader.py
-+++ b/test/py/tests/test_efi_loader.py
-@@ -45,11 +45,18 @@ env__efi_loader_helloworld_file = {
-     'crc32': 'c2244b26',                   # CRC32 check sum
-     'addr': 0x40400000,                    # load address
- }
-+
-+# False if the helloworld EFI over HTTP boot test should be performed.
-+# If HTTP boot testing is not possible or desired, set this variable to True or
-+# ommit it.
-+env__efi_helloworld_net_http_test_skip = True
- """
- 
- import pytest
- import u_boot_utils
- 
-+PROTO_TFTP, PROTO_HTTP = range(0, 2)
-+
- net_set_up = False
- 
- def test_efi_pre_commands(u_boot_console):
-@@ -110,10 +117,10 @@ def test_efi_setup_static(u_boot_console):
-     global net_set_up
-     net_set_up = True
- 
--def fetch_tftp_file(u_boot_console, env_conf):
--    """Grab an env described file via TFTP and return its address
-+def fetch_file(u_boot_console, env_conf, proto):
-+    """Grab an env described file via TFTP or HTTP and return its address
- 
--    A file as described by an env config <env_conf> is downloaded from the TFTP
-+    A file as described by an env config <env_conf> is downloaded from the
-     server. The address to that file is returned.
-     """
-     if not net_set_up:
-@@ -128,7 +135,13 @@ def fetch_tftp_file(u_boot_console, env_conf):
-         addr = u_boot_utils.find_ram_base(u_boot_console)
- 
-     fn = f['fn']
--    output = u_boot_console.run_command('tftpboot %x %s' % (addr, fn))
-+    if proto == PROTO_TFTP:
-+        cmd = 'tftpboot'
-+    elif proto == PROTO_HTTP:
-+        cmd = 'wget'
-+    else:
-+        assert False
-+    output = u_boot_console.run_command('%s %x %s' % (cmd, addr, fn))
-     expected_text = 'Bytes transferred = '
-     sz = f.get('size', None)
-     if sz:
-@@ -147,16 +160,8 @@ def fetch_tftp_file(u_boot_console, env_conf):
- 
-     return addr
- 
--@pytest.mark.buildconfigspec('of_control')
--@pytest.mark.buildconfigspec('cmd_bootefi_hello_compile')
--def test_efi_helloworld_net(u_boot_console):
--    """Run the helloworld.efi binary via TFTP.
--
--    The helloworld.efi file is downloaded from the TFTP server and is executed
--    using the fallback device tree at $fdtcontroladdr.
--    """
--
--    addr = fetch_tftp_file(u_boot_console, 'env__efi_loader_helloworld_file')
-+def do_test_efi_helloworld_net(u_boot_console, proto):
-+    addr = fetch_file(u_boot_console, 'env__efi_loader_helloworld_file', proto)
- 
-     output = u_boot_console.run_command('bootefi %x' % addr)
-     expected_text = 'Hello, world'
-@@ -164,6 +169,32 @@ def test_efi_helloworld_net(u_boot_console):
-     expected_text = '## Application failed'
-     assert expected_text not in output
- 
-+@pytest.mark.buildconfigspec('of_control')
-+@pytest.mark.buildconfigspec('cmd_bootefi_hello_compile')
-+@pytest.mark.buildconfigspec('cmd_tftpboot')
-+def test_efi_helloworld_net_tftp(u_boot_console):
-+    """Run the helloworld.efi binary via TFTP.
-+
-+    The helloworld.efi file is downloaded from the TFTP server and is executed
-+    using the fallback device tree at $fdtcontroladdr.
-+    """
-+
-+    do_test_efi_helloworld_net(u_boot_console, PROTO_TFTP);
-+
-+@pytest.mark.buildconfigspec('of_control')
-+@pytest.mark.buildconfigspec('cmd_bootefi_hello_compile')
-+@pytest.mark.buildconfigspec('cmd_wget')
-+def test_efi_helloworld_net_http(u_boot_console):
-+    """Run the helloworld.efi binary via HTTP.
-+
-+    The helloworld.efi file is downloaded from the HTTP server and is executed
-+    using the fallback device tree at $fdtcontroladdr.
-+    """
-+    if u_boot_console.config.env.get('env__efi_helloworld_net_http_test_skip', True):
-+        pytest.skip('helloworld.efi HTTP test is not enabled!')
-+
-+    do_test_efi_helloworld_net(u_boot_console, PROTO_HTTP);
-+
- @pytest.mark.buildconfigspec('cmd_bootefi_hello')
- def test_efi_helloworld_builtin(u_boot_console):
-     """Run the builtin helloworld.efi binary.
-@@ -178,6 +209,7 @@ def test_efi_helloworld_builtin(u_boot_console):
- 
- @pytest.mark.buildconfigspec('of_control')
- @pytest.mark.buildconfigspec('cmd_bootefi')
-+@pytest.mark.buildconfigspec('cmd_tftpboot')
- def test_efi_grub_net(u_boot_console):
-     """Run the grub.efi binary via TFTP.
- 
-@@ -185,7 +217,7 @@ def test_efi_grub_net(u_boot_console):
-     executed.
-     """
- 
--    addr = fetch_tftp_file(u_boot_console, 'env__efi_loader_grub_file')
-+    addr = fetch_file(u_boot_console, 'env__efi_loader_grub_file', PROTO_TFTP)
- 
-     u_boot_console.run_command('bootefi %x' % addr, wait_for_prompt=False)
- 
-diff --git a/test/py/tests/test_net_boot.py b/test/py/tests/test_net_boot.py
-index 63309fe82e1..d7d74356928 100644
---- a/test/py/tests/test_net_boot.py
-+++ b/test/py/tests/test_net_boot.py
-@@ -75,7 +75,7 @@ env__net_pxe_bootable_file = {
-     'check_pattern': 'ERROR',
- }
- 
--# False or omitted if a PXE boot test should be tested.
-+# False if a PXE boot test should be tested.
- # If PXE boot testing is not possible or desired, set this variable to True.
- # For example: If pxe configuration file is not proper to boot
- env__pxe_boot_test_skip = False
-diff --git a/tools/buildman/test.py b/tools/buildman/test.py
-index e9d2c7e41b0..d4f0dd8f0e5 100644
---- a/tools/buildman/test.py
-+++ b/tools/buildman/test.py
-@@ -36,6 +36,16 @@ main: /usr/sbin
- x86: i386 x86_64
- '''
- 
-+settings_data_wrapper = '''
-+# Buildman settings file
-+
-+[toolchain]
-+main: /usr/sbin
-+
-+[toolchain-wrapper]
-+wrapper = ccache
-+'''
-+
- migration = '''===================== WARNING ======================
- This board does not use CONFIG_DM. CONFIG_DM will be
- compulsory starting with the v2020.01 release.
-@@ -605,6 +615,9 @@ class TestBuild(unittest.TestCase):
-                          tc.GetEnvArgs(toolchain.VAR_ARCH))
-         self.assertEqual('', tc.GetEnvArgs(toolchain.VAR_MAKE_ARGS))
- 
-+        tc = self.toolchains.Select('sandbox')
-+        self.assertEqual('', tc.GetEnvArgs(toolchain.VAR_CROSS_COMPILE))
-+
-         self.toolchains.Add('/path/to/x86_64-linux-gcc', test=False)
-         tc = self.toolchains.Select('x86')
-         self.assertEqual('/path/to',
-@@ -613,6 +626,39 @@ class TestBuild(unittest.TestCase):
-         self.assertEqual('HOSTCC=clang CC=clang',
-                          tc.GetEnvArgs(toolchain.VAR_MAKE_ARGS))
- 
-+        # Test config with ccache wrapper
-+        bsettings.setup(None)
-+        bsettings.add_file(settings_data_wrapper)
-+
-+        tc = self.toolchains.Select('arm')
-+        self.assertEqual('ccache arm-linux-',
-+                         tc.GetEnvArgs(toolchain.VAR_CROSS_COMPILE))
-+
-+        tc = self.toolchains.Select('sandbox')
-+        self.assertEqual('', tc.GetEnvArgs(toolchain.VAR_CROSS_COMPILE))
-+
-+    def testMakeEnvironment(self):
-+        """Test the MakeEnvironment function"""
-+        tc = self.toolchains.Select('arm')
-+        env = tc.MakeEnvironment(False)
-+        self.assertEqual(env[b'CROSS_COMPILE'], b'arm-linux-')
-+
-+        tc = self.toolchains.Select('sandbox')
-+        env = tc.MakeEnvironment(False)
-+        self.assertTrue(b'CROSS_COMPILE' not in env)
-+
-+        # Test config with ccache wrapper
-+        bsettings.setup(None)
-+        bsettings.add_file(settings_data_wrapper)
-+
-+        tc = self.toolchains.Select('arm')
-+        env = tc.MakeEnvironment(False)
-+        self.assertEqual(env[b'CROSS_COMPILE'], b'ccache arm-linux-')
-+
-+        tc = self.toolchains.Select('sandbox')
-+        env = tc.MakeEnvironment(False)
-+        self.assertTrue(b'CROSS_COMPILE' not in env)
-+
-     def testPrepareOutputSpace(self):
-         def _Touch(fname):
-             tools.write_file(os.path.join(base_dir, fname), b'')
-diff --git a/tools/buildman/toolchain.py b/tools/buildman/toolchain.py
-index 324ad0e0821..cbd8ce03d30 100644
---- a/tools/buildman/toolchain.py
-+++ b/tools/buildman/toolchain.py
-@@ -159,6 +159,8 @@ class Toolchain:
-         if which == VAR_CROSS_COMPILE:
-             wrapper = self.GetWrapper()
-             base = '' if self.arch == 'sandbox' else self.path
-+            if (base == '' and self.cross == ''):
-+                return ''
-             return wrapper + os.path.join(base, self.cross)
-         elif which == VAR_PATH:
-             return self.path
-@@ -201,10 +203,10 @@ class Toolchain:
-         if self.override_toolchain:
-             # We'll use MakeArgs() to provide this
-             pass
--        elif full_path:
-+        elif full_path and self.cross:
-             env[b'CROSS_COMPILE'] = tools.to_bytes(
-                 wrapper + os.path.join(self.path, self.cross))
--        else:
-+        elif self.cross:
-             env[b'CROSS_COMPILE'] = tools.to_bytes(wrapper + self.cross)
-             env[b'PATH'] = tools.to_bytes(self.path) + b':' + env[b'PATH']
- 
+diff --git a/configs/LicheePi_Zero_defconfig b/configs/LicheePi_Zero_defconfig
+index 009384eaf1b..c37c49ccbb1 100644
+--- a/configs/LicheePi_Zero_defconfig
++++ b/configs/LicheePi_Zero_defconfig
+@@ -5,4 +5,4 @@ CONFIG_SPL=y
+ CONFIG_MACH_SUN8I_V3S=y
+ CONFIG_DRAM_CLK=360
+ # CONFIG_HAS_ARMV7_SECURE_BASE is not set
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+diff --git a/configs/M5249EVB_defconfig b/configs/M5249EVB_defconfig
+index eac85b9c2d5..ed1446d81cb 100644
+--- a/configs/M5249EVB_defconfig
++++ b/configs/M5249EVB_defconfig
+@@ -22,7 +22,7 @@ CONFIG_CMD_MX_CYCLIC=y
+ # CONFIG_CMD_SETEXPR is not set
+ CONFIG_CMD_CACHE=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_MTD=y
+ CONFIG_MTD_NOR_FLASH=y
+ CONFIG_FLASH_CFI_DRIVER=y
+diff --git a/configs/am335x_pdu001_defconfig b/configs/am335x_pdu001_defconfig
+index d9acc81e9d3..a8e901b40f9 100644
+--- a/configs/am335x_pdu001_defconfig
++++ b/configs/am335x_pdu001_defconfig
+@@ -41,7 +41,7 @@ CONFIG_OF_CONTROL=y
+ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_SPL_DM=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_SPL_OF_TRANSLATE=y
+diff --git a/configs/am62ax_evm_r5_defconfig b/configs/am62ax_evm_r5_defconfig
+index 092d0830623..6b926f47507 100644
+--- a/configs/am62ax_evm_r5_defconfig
++++ b/configs/am62ax_evm_r5_defconfig
+@@ -68,7 +68,7 @@ CONFIG_ENV_IS_NOWHERE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_SYS_MMC_ENV_PART=1
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_SPL_DM=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_REGMAP=y
+diff --git a/configs/am62px_evm_r5_defconfig b/configs/am62px_evm_r5_defconfig
+index 4f7be44cfba..11a00dbfc04 100644
+--- a/configs/am62px_evm_r5_defconfig
++++ b/configs/am62px_evm_r5_defconfig
+@@ -72,7 +72,7 @@ CONFIG_ENV_IS_NOWHERE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_SYS_MMC_ENV_PART=1
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_SPL_DM=y
+ CONFIG_SPL_DM_DEVICE_REMOVE=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+diff --git a/configs/am62x_beagleplay_r5_defconfig b/configs/am62x_beagleplay_r5_defconfig
+index ee4c43ff97f..e32ec42111c 100644
+--- a/configs/am62x_beagleplay_r5_defconfig
++++ b/configs/am62x_beagleplay_r5_defconfig
+@@ -69,7 +69,7 @@ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_SPL_MULTI_DTB_FIT=y
+ CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_SPL_DM=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_REGMAP=y
+diff --git a/configs/amcore_defconfig b/configs/amcore_defconfig
+index f1f5201b30a..94c5379590d 100644
+--- a/configs/amcore_defconfig
++++ b/configs/amcore_defconfig
+@@ -33,7 +33,7 @@ CONFIG_CMD_DIAG=y
+ CONFIG_ENV_IS_IN_FLASH=y
+ CONFIG_USE_HOSTNAME=y
+ CONFIG_HOSTNAME="AMCORE"
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_MTD=y
+ CONFIG_MTD_NOR_FLASH=y
+ CONFIG_FLASH_CFI_DRIVER=y
+diff --git a/configs/amd_versal2_mini_defconfig b/configs/amd_versal2_mini_defconfig
+index 0dd2305bfb2..684205d25a3 100644
+--- a/configs/amd_versal2_mini_defconfig
++++ b/configs/amd_versal2_mini_defconfig
+@@ -62,7 +62,7 @@ CONFIG_CMD_CACHE=y
+ # CONFIG_CMD_SLEEP is not set
+ CONFIG_OF_EMBED=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_DM_DEVICE_REMOVE is not set
+ # CONFIG_GPIO is not set
+ # CONFIG_I2C is not set
+diff --git a/configs/amd_versal2_mini_emmc_defconfig b/configs/amd_versal2_mini_emmc_defconfig
+index 7ad44386a6d..8484f182b93 100644
+--- a/configs/amd_versal2_mini_emmc_defconfig
++++ b/configs/amd_versal2_mini_emmc_defconfig
+@@ -53,7 +53,7 @@ CONFIG_CMD_FAT=y
+ CONFIG_CMD_FS_GENERIC=y
+ CONFIG_OF_EMBED=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_DM_DEVICE_REMOVE is not set
+ CONFIG_MMC_HS200_SUPPORT=y
+ CONFIG_MMC_SDHCI=y
+diff --git a/configs/amd_versal2_mini_ospi_defconfig b/configs/amd_versal2_mini_ospi_defconfig
+index 2242960392f..d064165d79b 100644
+--- a/configs/amd_versal2_mini_ospi_defconfig
++++ b/configs/amd_versal2_mini_ospi_defconfig
+@@ -56,7 +56,7 @@ CONFIG_CMD_CACHE=y
+ # CONFIG_CMD_SLEEP is not set
+ CONFIG_OF_EMBED=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_DM_DEVICE_REMOVE is not set
+ # CONFIG_GPIO is not set
+ # CONFIG_I2C is not set
+diff --git a/configs/amd_versal2_mini_qspi_defconfig b/configs/amd_versal2_mini_qspi_defconfig
+index 3360c1546a2..e48c26243b8 100644
+--- a/configs/amd_versal2_mini_qspi_defconfig
++++ b/configs/amd_versal2_mini_qspi_defconfig
+@@ -56,7 +56,7 @@ CONFIG_CMD_CACHE=y
+ # CONFIG_CMD_SLEEP is not set
+ CONFIG_OF_EMBED=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_DM_DEVICE_REMOVE is not set
+ # CONFIG_GPIO is not set
+ # CONFIG_I2C is not set
+diff --git a/configs/anbernic-rgxx3-rk3566_defconfig b/configs/anbernic-rgxx3-rk3566_defconfig
+index a03509bf467..937c27a947e 100644
+--- a/configs/anbernic-rgxx3-rk3566_defconfig
++++ b/configs/anbernic-rgxx3-rk3566_defconfig
+@@ -41,7 +41,7 @@ CONFIG_OF_LIVE=y
+ # CONFIG_OF_UPSTREAM is not set
+ CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_SPL_REGMAP=y
+ CONFIG_SPL_SYSCON=y
+diff --git a/configs/ap143_defconfig b/configs/ap143_defconfig
+index c22048c1b53..13842e6c0f8 100644
+--- a/configs/ap143_defconfig
++++ b/configs/ap143_defconfig
+@@ -46,7 +46,7 @@ CONFIG_MTDPARTS_DEFAULT="mtdparts=spi-flash.0:256k(u-boot),64k(u-boot-env),6336k
+ CONFIG_ENV_IS_IN_SPI_FLASH=y
+ CONFIG_ENV_SPI_MAX_HZ=25000000
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_MTD=y
+ CONFIG_DM_SPI_FLASH=y
+ CONFIG_SPI_FLASH_ATMEL=y
+diff --git a/configs/ap152_defconfig b/configs/ap152_defconfig
+index ec700a5b3f0..5cc0ad2e682 100644
+--- a/configs/ap152_defconfig
++++ b/configs/ap152_defconfig
+@@ -46,7 +46,7 @@ CONFIG_MTDPARTS_DEFAULT="mtdparts=spi-flash.0:256k(u-boot),64k(u-boot-env),6336k
+ CONFIG_ENV_IS_IN_SPI_FLASH=y
+ CONFIG_ENV_SPI_MAX_HZ=25000000
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_MTD=y
+ CONFIG_DM_SPI_FLASH=y
+ CONFIG_SPI_FLASH_BAR=y
+diff --git a/configs/apple_m1_defconfig b/configs/apple_m1_defconfig
+index dca6e0ca8ba..d491a5d03c5 100644
+--- a/configs/apple_m1_defconfig
++++ b/configs/apple_m1_defconfig
+@@ -11,7 +11,7 @@ CONFIG_SYS_PBSIZE=276
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_BOARD_LATE_INIT=y
+ CONFIG_CMD_SELECT_FONT=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_SYS_64BIT_LBA=y
+ CONFIG_APPLE_SPI_KEYB=y
+ # CONFIG_MMC is not set
+diff --git a/configs/astro_mcf5373l_defconfig b/configs/astro_mcf5373l_defconfig
+index d1942c28971..8dd369d68a1 100644
+--- a/configs/astro_mcf5373l_defconfig
++++ b/configs/astro_mcf5373l_defconfig
+@@ -27,7 +27,7 @@ CONFIG_CMD_I2C=y
+ # CONFIG_CMD_SETEXPR is not set
+ CONFIG_CMD_CACHE=y
+ CONFIG_CMD_JFFS2=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_FPGA_ALTERA=y
+ CONFIG_FPGA_CYCLON2=y
+ CONFIG_FPGA_XILINX=y
+diff --git a/configs/at91sam9rlek_dataflash_defconfig b/configs/at91sam9rlek_dataflash_defconfig
+index 931af2b2fda..01ac2cc8d1e 100644
+--- a/configs/at91sam9rlek_dataflash_defconfig
++++ b/configs/at91sam9rlek_dataflash_defconfig
+@@ -41,7 +41,7 @@ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_IS_IN_SPI_FLASH=y
+ CONFIG_ENV_SPI_MAX_HZ=15000000
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_CLK=y
+ CONFIG_CLK_AT91=y
+ CONFIG_AT91_GPIO=y
+diff --git a/configs/at91sam9rlek_mmc_defconfig b/configs/at91sam9rlek_mmc_defconfig
+index 70d431c1f52..93f7d762109 100644
+--- a/configs/at91sam9rlek_mmc_defconfig
++++ b/configs/at91sam9rlek_mmc_defconfig
+@@ -39,7 +39,7 @@ CONFIG_CMD_FAT=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_IS_IN_FAT=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_CLK=y
+ CONFIG_CLK_AT91=y
+ CONFIG_AT91_GPIO=y
+diff --git a/configs/at91sam9rlek_nandflash_defconfig b/configs/at91sam9rlek_nandflash_defconfig
+index 1277a357cd2..928ad9f4f70 100644
+--- a/configs/at91sam9rlek_nandflash_defconfig
++++ b/configs/at91sam9rlek_nandflash_defconfig
+@@ -40,7 +40,7 @@ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_IS_IN_NAND=y
+ CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_CLK=y
+ CONFIG_CLK_AT91=y
+ CONFIG_AT91_GPIO=y
+diff --git a/configs/bcm7260_defconfig b/configs/bcm7260_defconfig
+index 2bf3c0d7fbe..345e37bca7e 100644
+--- a/configs/bcm7260_defconfig
++++ b/configs/bcm7260_defconfig
+@@ -35,7 +35,7 @@ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_MMC_SDHCI=y
+ CONFIG_MMC_SDHCI_BCMSTB=y
+ CONFIG_MTD=y
+diff --git a/configs/bcm7445_defconfig b/configs/bcm7445_defconfig
+index 07e3b57ac33..eb6629ba57a 100644
+--- a/configs/bcm7445_defconfig
++++ b/configs/bcm7445_defconfig
+@@ -37,7 +37,7 @@ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_SPI_FLASH=y
+ CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_MMC_SDHCI=y
+ CONFIG_MMC_SDHCI_BCMSTB=y
+ CONFIG_MTD=y
+diff --git a/configs/bcm968380gerg_ram_defconfig b/configs/bcm968380gerg_ram_defconfig
+index 6c119eb42a6..053c459e05c 100644
+--- a/configs/bcm968380gerg_ram_defconfig
++++ b/configs/bcm968380gerg_ram_defconfig
+@@ -41,7 +41,7 @@ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_NAND=y
+ # CONFIG_CMD_SLEEP is not set
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_DM_DEVICE_REMOVE is not set
+ CONFIG_BCM6345_GPIO=y
+ CONFIG_LED=y
+diff --git a/configs/bcmns_defconfig b/configs/bcmns_defconfig
+index 365284e94c3..f2719821656 100644
+--- a/configs/bcmns_defconfig
++++ b/configs/bcmns_defconfig
+@@ -28,7 +28,7 @@ CONFIG_CMD_CACHE=y
+ CONFIG_OF_EMBED=y
+ CONFIG_USE_HOSTNAME=y
+ CONFIG_HOSTNAME="NS"
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_CLK=y
+ CONFIG_MTD=y
+ CONFIG_DM_MTD=y
+diff --git a/configs/chromebook_samus_tpl_defconfig b/configs/chromebook_samus_tpl_defconfig
+index 1be57560f89..075e3f192a3 100644
+--- a/configs/chromebook_samus_tpl_defconfig
++++ b/configs/chromebook_samus_tpl_defconfig
+@@ -74,7 +74,7 @@ CONFIG_ENV_OVERWRITE=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_USE_BOOTFILE=y
+ CONFIG_BOOTFILE="bzImage"
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_REGMAP=y
+ CONFIG_SYSCON=y
+ # CONFIG_ACPIGEN is not set
+diff --git a/configs/cortina_presidio-asic-base_defconfig b/configs/cortina_presidio-asic-base_defconfig
+index eb5743da64d..78167d56d83 100644
+--- a/configs/cortina_presidio-asic-base_defconfig
++++ b/configs/cortina_presidio-asic-base_defconfig
+@@ -31,7 +31,7 @@ CONFIG_CMD_TIMER=y
+ CONFIG_CMD_SMC=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_OF_LIVE=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_CORTINA_GPIO=y
+ # CONFIG_MMC is not set
+ CONFIG_DM_SERIAL=y
+diff --git a/configs/cortina_presidio-asic-pnand_defconfig b/configs/cortina_presidio-asic-pnand_defconfig
+index c7367d4d91c..f1526227d65 100644
+--- a/configs/cortina_presidio-asic-pnand_defconfig
++++ b/configs/cortina_presidio-asic-pnand_defconfig
+@@ -32,7 +32,7 @@ CONFIG_CMD_TIMER=y
+ CONFIG_CMD_SMC=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_OF_LIVE=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_CORTINA_GPIO=y
+ # CONFIG_MMC is not set
+ CONFIG_MTD=y
+diff --git a/configs/durian_defconfig b/configs/durian_defconfig
+index f1d45ca3064..ae7a05edee1 100644
+--- a/configs/durian_defconfig
++++ b/configs/durian_defconfig
+@@ -28,7 +28,7 @@ CONFIG_SYS_PROMPT="durian#"
+ CONFIG_CMD_PCI=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_SCSI_AHCI=y
+ CONFIG_AHCI_PCI=y
+ # CONFIG_MMC is not set
+diff --git a/configs/e850-96_defconfig b/configs/e850-96_defconfig
+index e5d90996234..5797c6cb1f9 100644
+--- a/configs/e850-96_defconfig
++++ b/configs/e850-96_defconfig
+@@ -20,7 +20,7 @@ CONFIG_CMD_MMC=y
+ CONFIG_CMD_PART=y
+ CONFIG_CMD_TIME=y
+ CONFIG_CMD_RNG=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_CLK_EXYNOS850=y
+ CONFIG_MMC_DW=y
+ CONFIG_SOC_SAMSUNG=y
+diff --git a/configs/ea-lpc3250devkitv2_defconfig b/configs/ea-lpc3250devkitv2_defconfig
+index af9fc5f2f5c..c3af7afced1 100644
+--- a/configs/ea-lpc3250devkitv2_defconfig
++++ b/configs/ea-lpc3250devkitv2_defconfig
+@@ -25,7 +25,7 @@ CONFIG_SYS_PROMPT="EA-LPC3250v2=> "
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_I2C=y
+ CONFIG_OF_CONTROL=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_LPC32XX_GPIO=y
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_LPC32XX=y
+diff --git a/configs/efi-x86_app32_defconfig b/configs/efi-x86_app32_defconfig
+index 53ec63461d5..c2856b4000f 100644
+--- a/configs/efi-x86_app32_defconfig
++++ b/configs/efi-x86_app32_defconfig
+@@ -35,7 +35,7 @@ CONFIG_ENV_OVERWRITE=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_USE_BOOTFILE=y
+ CONFIG_BOOTFILE="bzImage"
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_REGMAP=y
+ CONFIG_SYSCON=y
+ # CONFIG_GZIP is not set
+diff --git a/configs/efi-x86_app64_defconfig b/configs/efi-x86_app64_defconfig
+index 3d021483dd0..0b709cf4dad 100644
+--- a/configs/efi-x86_app64_defconfig
++++ b/configs/efi-x86_app64_defconfig
+@@ -38,7 +38,7 @@ CONFIG_ENV_OVERWRITE=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_USE_BOOTFILE=y
+ CONFIG_BOOTFILE="bzImage"
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_REGMAP=y
+ CONFIG_SYSCON=y
+ CONFIG_CONSOLE_SCROLL_LINES=5
+diff --git a/configs/emsdp_defconfig b/configs/emsdp_defconfig
+index 07bed2b5623..26efa794058 100644
+--- a/configs/emsdp_defconfig
++++ b/configs/emsdp_defconfig
+@@ -30,7 +30,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_USE_BOOTFILE=y
+ CONFIG_BOOTFILE="app.bin"
+ CONFIG_VERSION_VARIABLE=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_MMC=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_SNPS=y
+diff --git a/configs/evb-px5_defconfig b/configs/evb-px5_defconfig
+index ccd38831533..8efab0c2fc0 100644
+--- a/configs/evb-px5_defconfig
++++ b/configs/evb-px5_defconfig
+@@ -57,7 +57,7 @@ CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names interrupt-parent"
+ CONFIG_TPL_OF_PLATDATA=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_TPL_DM=y
+ CONFIG_REGMAP=y
+ CONFIG_SPL_REGMAP=y
+diff --git a/configs/generic-rk3568_defconfig b/configs/generic-rk3568_defconfig
+index 66a33afbbaf..383dad3087b 100644
+--- a/configs/generic-rk3568_defconfig
++++ b/configs/generic-rk3568_defconfig
+@@ -40,7 +40,7 @@ CONFIG_OF_LIVE=y
+ # CONFIG_OF_UPSTREAM is not set
+ CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_SPL_REGMAP=y
+ CONFIG_SPL_SYSCON=y
+diff --git a/configs/generic-rk3588_defconfig b/configs/generic-rk3588_defconfig
+index 42bc2c9a765..3c81401968d 100644
+--- a/configs/generic-rk3588_defconfig
++++ b/configs/generic-rk3588_defconfig
+@@ -35,7 +35,7 @@ CONFIG_OF_LIVE=y
+ # CONFIG_OF_UPSTREAM is not set
+ CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_SPL_REGMAP=y
+ CONFIG_SPL_SYSCON=y
+diff --git a/configs/hc2910_2aghd05_defconfig b/configs/hc2910_2aghd05_defconfig
+index e68b44478a9..4302436d2e6 100644
+--- a/configs/hc2910_2aghd05_defconfig
++++ b/configs/hc2910_2aghd05_defconfig
+@@ -36,7 +36,7 @@ CONFIG_CMD_EXT4_WRITE=y
+ CONFIG_PARTITION_TYPE_GUID=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_GPIO is not set
+ # CONFIG_I2C is not set
+ # CONFIG_INPUT is not set
+diff --git a/configs/igep00x0_defconfig b/configs/igep00x0_defconfig
+index f1d9bb34aba..51c825d3fbe 100644
+--- a/configs/igep00x0_defconfig
++++ b/configs/igep00x0_defconfig
+@@ -60,7 +60,7 @@ CONFIG_ENV_UBI_VOLUME="config"
+ CONFIG_ENV_UBI_VOLUME_REDUND="config_r"
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_VERSION_VARIABLE=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_SPL_DM=y
+ CONFIG_DM_I2C=y
+ CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+diff --git a/configs/imx6q_bosch_acc_defconfig b/configs/imx6q_bosch_acc_defconfig
+index dce1b64bf69..3fca5d5139d 100644
+--- a/configs/imx6q_bosch_acc_defconfig
++++ b/configs/imx6q_bosch_acc_defconfig
+@@ -81,7 +81,7 @@ CONFIG_SYS_MMC_ENV_PART=1
+ CONFIG_ENV_WRITEABLE_LIST=y
+ CONFIG_ENV_ACCESS_IGNORE_FORCE=y
+ CONFIG_VERSION_VARIABLE=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_SPL_DM=y
+ CONFIG_BOOTCOUNT_LIMIT=y
+ CONFIG_DM_BOOTCOUNT=y
+diff --git a/configs/imx6ulz_smm_m2_defconfig b/configs/imx6ulz_smm_m2_defconfig
+index 93ead4c373b..c2adff17abf 100644
+--- a/configs/imx6ulz_smm_m2_defconfig
++++ b/configs/imx6ulz_smm_m2_defconfig
+@@ -42,7 +42,7 @@ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_NAND=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_BOUNCE_BUFFER=y
+ CONFIG_USB_FUNCTION_FASTBOOT=y
+ CONFIG_FASTBOOT_BUF_ADDR=0x82000000
+diff --git a/configs/iot_devkit_defconfig b/configs/iot_devkit_defconfig
+index c4920052f82..3dda897f765 100644
+--- a/configs/iot_devkit_defconfig
++++ b/configs/iot_devkit_defconfig
+@@ -34,7 +34,7 @@ CONFIG_ENV_FAT_DEVICE_AND_PART="0:1"
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_USE_BOOTFILE=y
+ CONFIG_BOOTFILE="app.bin"
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_MMC=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_SNPS=y
+diff --git a/configs/j722s_evm_r5_defconfig b/configs/j722s_evm_r5_defconfig
+index e574be9e19d..fd3259f6afb 100644
+--- a/configs/j722s_evm_r5_defconfig
++++ b/configs/j722s_evm_r5_defconfig
+@@ -72,7 +72,7 @@ CONFIG_ENV_IS_NOWHERE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_SYS_MMC_ENV_PART=1
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_SPL_DM=y
+ CONFIG_SPL_DM_DEVICE_REMOVE=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+diff --git a/configs/legoev3_defconfig b/configs/legoev3_defconfig
+index 34ef3493cac..60b7a84205c 100644
+--- a/configs/legoev3_defconfig
++++ b/configs/legoev3_defconfig
+@@ -44,7 +44,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_USE_BOOTFILE=y
+ CONFIG_BOOTFILE="uImage"
+ CONFIG_VERSION_VARIABLE=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_DM_DEVICE_REMOVE is not set
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_DAVINCI=y
+diff --git a/configs/mk808_defconfig b/configs/mk808_defconfig
+index 9a342d3a33a..36ab4b03401 100644
+--- a/configs/mk808_defconfig
++++ b/configs/mk808_defconfig
+@@ -68,7 +68,7 @@ CONFIG_OF_DTB_PROPS_REMOVE=y
+ CONFIG_SPL_OF_PLATDATA=y
+ CONFIG_TPL_OF_PLATDATA=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_TPL_DM=y
+ CONFIG_REGMAP=y
+ CONFIG_SPL_REGMAP=y
+diff --git a/configs/mx23evk_defconfig b/configs/mx23evk_defconfig
+index 7d0e7cc1e00..59ab64ec97a 100644
+--- a/configs/mx23evk_defconfig
++++ b/configs/mx23evk_defconfig
+@@ -41,7 +41,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_USE_BOOTFILE=y
+ CONFIG_BOOTFILE="uImage"
+ CONFIG_VERSION_VARIABLE=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_MXS_GPIO=y
+ CONFIG_MMC_MXS=y
+ CONFIG_PINCTRL=y
+diff --git a/configs/mx28evk_defconfig b/configs/mx28evk_defconfig
+index dddb57efd3e..1295ff80c7b 100644
+--- a/configs/mx28evk_defconfig
++++ b/configs/mx28evk_defconfig
+@@ -47,7 +47,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_USE_BOOTFILE=y
+ CONFIG_BOOTFILE="uImage"
+ CONFIG_VERSION_VARIABLE=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_SPL_DM=y
+ CONFIG_MXS_GPIO=y
+ CONFIG_MMC_MXS=y
+diff --git a/configs/mx6memcal_defconfig b/configs/mx6memcal_defconfig
+index 4c8a5960d38..5cc8236feb9 100644
+--- a/configs/mx6memcal_defconfig
++++ b/configs/mx6memcal_defconfig
+@@ -38,7 +38,7 @@ CONFIG_CMD_MEMTEST=y
+ CONFIG_CMD_CACHE=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_BOUNCE_BUFFER=y
+ # CONFIG_MMC is not set
+ CONFIG_FSL_USDHC=y
+diff --git a/configs/mx6ulz_14x14_evk_defconfig b/configs/mx6ulz_14x14_evk_defconfig
+index d57b47ef47a..2c13dd4dbc3 100644
+--- a/configs/mx6ulz_14x14_evk_defconfig
++++ b/configs/mx6ulz_14x14_evk_defconfig
+@@ -36,7 +36,7 @@ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_SYS_MMC_ENV_DEV=1
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_BOUNCE_BUFFER=y
+ CONFIG_DM_74X164=y
+ CONFIG_DM_I2C=y
+diff --git a/configs/mx7ulp_com_defconfig b/configs/mx7ulp_com_defconfig
+index f8dcc0abef5..6ea84c053ca 100644
+--- a/configs/mx7ulp_com_defconfig
++++ b/configs/mx7ulp_com_defconfig
+@@ -33,7 +33,7 @@ CONFIG_CMD_FAT=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_BOUNCE_BUFFER=y
+ CONFIG_IMX_RGPIO2P=y
+ # CONFIG_MXC_GPIO is not set
+diff --git a/configs/mx7ulp_evk_defconfig b/configs/mx7ulp_evk_defconfig
+index 38e6b62df45..5aadb9e93f1 100644
+--- a/configs/mx7ulp_evk_defconfig
++++ b/configs/mx7ulp_evk_defconfig
+@@ -33,7 +33,7 @@ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_BOUNCE_BUFFER=y
+ CONFIG_IMX_RGPIO2P=y
+ # CONFIG_MXC_GPIO is not set
+diff --git a/configs/mx7ulp_evk_plugin_defconfig b/configs/mx7ulp_evk_plugin_defconfig
+index d007d180969..2f45fac0a89 100644
+--- a/configs/mx7ulp_evk_plugin_defconfig
++++ b/configs/mx7ulp_evk_plugin_defconfig
+@@ -31,7 +31,7 @@ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_BOUNCE_BUFFER=y
+ CONFIG_IMX_RGPIO2P=y
+ # CONFIG_MXC_GPIO is not set
+diff --git a/configs/netgear_cg3100d_ram_defconfig b/configs/netgear_cg3100d_ram_defconfig
+index 352b98fc0a5..377cc26f937 100644
+--- a/configs/netgear_cg3100d_ram_defconfig
++++ b/configs/netgear_cg3100d_ram_defconfig
+@@ -39,7 +39,7 @@ CONFIG_CMD_MEMINFO=y
+ CONFIG_CMD_SPI=y
+ # CONFIG_CMD_SLEEP is not set
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_DM_DEVICE_REMOVE is not set
+ CONFIG_BCM6345_GPIO=y
+ CONFIG_LED=y
+diff --git a/configs/nsim_700_defconfig b/configs/nsim_700_defconfig
+index be2539e8cd7..e8400c2dc30 100644
+--- a/configs/nsim_700_defconfig
++++ b/configs/nsim_700_defconfig
+@@ -25,7 +25,7 @@ CONFIG_OF_EMBED=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_USE_BOOTFILE=y
+ CONFIG_BOOTFILE="uImage"
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_DM_SERIAL=y
+ CONFIG_DEBUG_UART_SHIFT=2
+ CONFIG_SYS_NS16550=y
+diff --git a/configs/nsim_700be_defconfig b/configs/nsim_700be_defconfig
+index 1fcf36a28a5..9ce1a255227 100644
+--- a/configs/nsim_700be_defconfig
++++ b/configs/nsim_700be_defconfig
+@@ -26,7 +26,7 @@ CONFIG_OF_EMBED=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_USE_BOOTFILE=y
+ CONFIG_BOOTFILE="uImage"
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_DM_SERIAL=y
+ CONFIG_DEBUG_UART_SHIFT=2
+ CONFIG_SYS_NS16550=y
+diff --git a/configs/nsim_hs38be_defconfig b/configs/nsim_hs38be_defconfig
+index 9c26e4da7d2..80d0e54192d 100644
+--- a/configs/nsim_hs38be_defconfig
++++ b/configs/nsim_hs38be_defconfig
+@@ -27,7 +27,7 @@ CONFIG_OF_EMBED=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_USE_BOOTFILE=y
+ CONFIG_BOOTFILE="uImage"
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_DM_SERIAL=y
+ CONFIG_DEBUG_UART_SHIFT=2
+ CONFIG_SYS_NS16550=y
+diff --git a/configs/openpiton_riscv64_defconfig b/configs/openpiton_riscv64_defconfig
+index cdb9e1c932e..9df92e5c318 100644
+--- a/configs/openpiton_riscv64_defconfig
++++ b/configs/openpiton_riscv64_defconfig
+@@ -61,7 +61,7 @@ CONFIG_CMD_FAT=y
+ CONFIG_CMD_FS_GENERIC=y
+ # CONFIG_DOS_PARTITION is not set
+ CONFIG_OF_EMBED=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_CPU=y
+ CONFIG_MMC=y
+ # CONFIG_MMC_WRITE is not set
+diff --git a/configs/openpiton_riscv64_spl_defconfig b/configs/openpiton_riscv64_spl_defconfig
+index a08040d878d..29304cc50fe 100644
+--- a/configs/openpiton_riscv64_spl_defconfig
++++ b/configs/openpiton_riscv64_spl_defconfig
+@@ -77,7 +77,7 @@ CONFIG_CMD_FAT=y
+ CONFIG_CMD_FS_GENERIC=y
+ # CONFIG_DOS_PARTITION is not set
+ # CONFIG_SPL_PARTITION_UUIDS is not set
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_CPU=y
+ CONFIG_MMC=y
+ # CONFIG_MMC_WRITE is not set
+diff --git a/configs/origen_defconfig b/configs/origen_defconfig
+index dc9285d4e99..26702d77079 100644
+--- a/configs/origen_defconfig
++++ b/configs/origen_defconfig
+@@ -41,7 +41,7 @@ CONFIG_CMD_EXT4_WRITE=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_DFU_MMC=y
+ CONFIG_SYS_DFU_DATA_BUF_SIZE=0x2000000
+ CONFIG_MMC_DW=y
+diff --git a/configs/pe2201_defconfig b/configs/pe2201_defconfig
+index 5d32cbf8bf1..91fe7ebf982 100644
+--- a/configs/pe2201_defconfig
++++ b/configs/pe2201_defconfig
+@@ -27,7 +27,7 @@ CONFIG_CMD_DM=y
+ CONFIG_CMD_PCI=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_SCSI_AHCI=y
+ CONFIG_AHCI_PCI=y
+ # CONFIG_MMC is not set
+diff --git a/configs/pinecube_defconfig b/configs/pinecube_defconfig
+index 7cc0a862949..7567a6aa739 100644
+--- a/configs/pinecube_defconfig
++++ b/configs/pinecube_defconfig
+@@ -9,7 +9,7 @@ CONFIG_DRAM_ODT_EN=y
+ CONFIG_I2C0_ENABLE=y
+ # CONFIG_HAS_ARMV7_SECURE_BASE is not set
+ CONFIG_SPL_I2C=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_SPL_SYS_I2C_LEGACY=y
+ CONFIG_SYS_I2C_MVTWSI=y
+ CONFIG_SYS_I2C_SLAVE=0x7f
+diff --git a/configs/pm9261_defconfig b/configs/pm9261_defconfig
+index 9f4d434f3e2..026c6de3109 100644
+--- a/configs/pm9261_defconfig
++++ b/configs/pm9261_defconfig
+@@ -37,7 +37,7 @@ CONFIG_MTDPARTS_DEFAULT="mtdparts=physmap-flash.0:256k(u-boot)ro,64k(u-boot-env)
+ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_FLASH=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_CLK=y
+ CONFIG_CLK_AT91=y
+ CONFIG_AT91_GPIO=y
+diff --git a/configs/s5p4418_nanopi2_defconfig b/configs/s5p4418_nanopi2_defconfig
+index ee72778995b..0bee0008294 100644
+--- a/configs/s5p4418_nanopi2_defconfig
++++ b/configs/s5p4418_nanopi2_defconfig
+@@ -49,7 +49,7 @@ CONFIG_CMD_FAT=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_MMC_ENV_DEV=2
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_NEXELL=y
+ CONFIG_MMC_DW=y
+diff --git a/configs/s5p_goni_defconfig b/configs/s5p_goni_defconfig
+index 4316510541c..084e19e1258 100644
+--- a/configs/s5p_goni_defconfig
++++ b/configs/s5p_goni_defconfig
+@@ -44,7 +44,7 @@ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_DFU_MMC=y
+ CONFIG_SYS_DFU_DATA_BUF_SIZE=0x2000000
+ CONFIG_DM_I2C_GPIO=y
+diff --git a/configs/s5pc210_universal_defconfig b/configs/s5pc210_universal_defconfig
+index 67959ad79cd..99e873ff427 100644
+--- a/configs/s5pc210_universal_defconfig
++++ b/configs/s5pc210_universal_defconfig
+@@ -41,7 +41,7 @@ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_DFU_MMC=y
+ CONFIG_SYS_DFU_DATA_BUF_SIZE=0x2000000
+ CONFIG_SYS_I2C_S3C24X0=y
+diff --git a/configs/sama5d27_giantboard_defconfig b/configs/sama5d27_giantboard_defconfig
+index 283c9300c56..34274ca4a32 100644
+--- a/configs/sama5d27_giantboard_defconfig
++++ b/configs/sama5d27_giantboard_defconfig
+@@ -64,7 +64,7 @@ CONFIG_OF_CONTROL=y
+ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_OF_SPL_REMOVE_PROPS="interrupts interrupt-parent dmas dma-names"
+ CONFIG_ENV_IS_IN_FAT=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_SPL_DM=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_CLK=y
+diff --git a/configs/sama5d29_curiosity_mmc1_defconfig b/configs/sama5d29_curiosity_mmc1_defconfig
+index 61edb23b196..5d9173a0e57 100644
+--- a/configs/sama5d29_curiosity_mmc1_defconfig
++++ b/configs/sama5d29_curiosity_mmc1_defconfig
+@@ -70,7 +70,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_USE_HOSTNAME=y
+ CONFIG_HOSTNAME="SAMA5D29"
+ CONFIG_VERSION_VARIABLE=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_CLK=y
+ CONFIG_CLK_AT91=y
+ CONFIG_AT91_UTMI=y
+diff --git a/configs/sama5d29_curiosity_mmc_defconfig b/configs/sama5d29_curiosity_mmc_defconfig
+index 0b16f386735..2b765f56dda 100644
+--- a/configs/sama5d29_curiosity_mmc_defconfig
++++ b/configs/sama5d29_curiosity_mmc_defconfig
+@@ -69,7 +69,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_USE_HOSTNAME=y
+ CONFIG_HOSTNAME="SAMA5D29"
+ CONFIG_VERSION_VARIABLE=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_CLK=y
+ CONFIG_CLK_AT91=y
+ CONFIG_AT91_UTMI=y
+diff --git a/configs/sama5d29_curiosity_qspiflash_defconfig b/configs/sama5d29_curiosity_qspiflash_defconfig
+index 9b522e81ef5..d840d0f3d6f 100644
+--- a/configs/sama5d29_curiosity_qspiflash_defconfig
++++ b/configs/sama5d29_curiosity_qspiflash_defconfig
+@@ -69,7 +69,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_USE_HOSTNAME=y
+ CONFIG_HOSTNAME="SAMA5D29"
+ CONFIG_VERSION_VARIABLE=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_CLK=y
+ CONFIG_CLK_AT91=y
+ CONFIG_AT91_UTMI=y
+diff --git a/configs/sama7g54_curiosity_mmc_defconfig b/configs/sama7g54_curiosity_mmc_defconfig
+index 00a091df0e5..ba8643c912c 100644
+--- a/configs/sama7g54_curiosity_mmc_defconfig
++++ b/configs/sama7g54_curiosity_mmc_defconfig
+@@ -74,7 +74,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_USE_HOSTNAME=y
+ CONFIG_HOSTNAME="SAMA7G54"
+ CONFIG_VERSION_VARIABLE=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_CLK=y
+ CONFIG_CLK_CCF=y
+ CONFIG_CLK_AT91=y
+diff --git a/configs/sama7g54_curiosity_nandflash_defconfig b/configs/sama7g54_curiosity_nandflash_defconfig
+index 0b2116d0419..49b08d3fc2b 100644
+--- a/configs/sama7g54_curiosity_nandflash_defconfig
++++ b/configs/sama7g54_curiosity_nandflash_defconfig
+@@ -72,7 +72,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_USE_HOSTNAME=y
+ CONFIG_HOSTNAME="SAMA7G54"
+ CONFIG_VERSION_VARIABLE=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_CLK=y
+ CONFIG_CLK_CCF=y
+ CONFIG_CLK_AT91=y
+diff --git a/configs/sama7g54_curiosity_qspiflash_defconfig b/configs/sama7g54_curiosity_qspiflash_defconfig
+index 00e5362a1fa..8fa5857e245 100644
+--- a/configs/sama7g54_curiosity_qspiflash_defconfig
++++ b/configs/sama7g54_curiosity_qspiflash_defconfig
+@@ -73,7 +73,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_USE_HOSTNAME=y
+ CONFIG_HOSTNAME="SAMA7G54"
+ CONFIG_VERSION_VARIABLE=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_CLK=y
+ CONFIG_CLK_CCF=y
+ CONFIG_CLK_AT91=y
+diff --git a/configs/sipeed_maix_bitm_defconfig b/configs/sipeed_maix_bitm_defconfig
+index 67d5a007a8e..8788eabf55a 100644
+--- a/configs/sipeed_maix_bitm_defconfig
++++ b/configs/sipeed_maix_bitm_defconfig
+@@ -17,7 +17,7 @@ CONFIG_BOARD_EARLY_INIT_F=y
+ CONFIG_HUSH_PARSER=y
+ CONFIG_MTDIDS_DEFAULT="nor0=spi3:0"
+ CONFIG_MTDPARTS_DEFAULT="nor0:1M(u-boot),0x1000@0xfff000(env)"
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_CLK_K210_SET_RATE=y
+ # CONFIG_INPUT is not set
+ CONFIG_SF_DEFAULT_BUS=3
+diff --git a/configs/sipeed_maix_smode_defconfig b/configs/sipeed_maix_smode_defconfig
+index 049fac02cac..c8d8b1ac9e1 100644
+--- a/configs/sipeed_maix_smode_defconfig
++++ b/configs/sipeed_maix_smode_defconfig
+@@ -18,7 +18,7 @@ CONFIG_SYS_PBSIZE=276
+ CONFIG_HUSH_PARSER=y
+ CONFIG_MTDIDS_DEFAULT="nor0=spi3:0"
+ CONFIG_MTDPARTS_DEFAULT="nor0:1M(u-boot),0x1000@0xfff000(env)"
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_INPUT is not set
+ CONFIG_SF_DEFAULT_BUS=3
+ CONFIG_FS_EXT4=y
+diff --git a/configs/stemmy_defconfig b/configs/stemmy_defconfig
+index ee8e6be6e2c..efa3b477a6e 100644
+--- a/configs/stemmy_defconfig
++++ b/configs/stemmy_defconfig
+@@ -28,7 +28,7 @@ CONFIG_CMD_MMC=y
+ CONFIG_CMD_PART=y
+ CONFIG_CMD_GETTIME=y
+ CONFIG_EFI_PARTITION=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_USB_FUNCTION_FASTBOOT=y
+ CONFIG_FASTBOOT_BUF_ADDR=0x18100000
+ CONFIG_FASTBOOT_FLASH=y
+diff --git a/configs/stm32f429-discovery_defconfig b/configs/stm32f429-discovery_defconfig
+index 5d59edb7381..21a466572bd 100644
+--- a/configs/stm32f429-discovery_defconfig
++++ b/configs/stm32f429-discovery_defconfig
+@@ -27,7 +27,7 @@ CONFIG_CMD_IMLS=y
+ CONFIG_CMD_TIMER=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_IS_IN_FLASH=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_MMC is not set
+ CONFIG_MTD=y
+ CONFIG_MTD_NOR_FLASH=y
+diff --git a/configs/stm32f429-evaluation_defconfig b/configs/stm32f429-evaluation_defconfig
+index 3e220d73984..8f20d4ca3f5 100644
+--- a/configs/stm32f429-evaluation_defconfig
++++ b/configs/stm32f429-evaluation_defconfig
+@@ -25,7 +25,7 @@ CONFIG_CMD_TIMER=y
+ # CONFIG_ISO_PARTITION is not set
+ CONFIG_OF_CONTROL=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_ARM_PL180_MMCI=y
+ CONFIG_MTD=y
+ CONFIG_MTD_NOR_FLASH=y
+diff --git a/configs/stm32f469-discovery_defconfig b/configs/stm32f469-discovery_defconfig
+index 9b5f38b9efa..33292bfaf0c 100644
+--- a/configs/stm32f469-discovery_defconfig
++++ b/configs/stm32f469-discovery_defconfig
+@@ -26,7 +26,7 @@ CONFIG_CMD_TIMER=y
+ # CONFIG_ISO_PARTITION is not set
+ CONFIG_OF_CONTROL=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_ARM_PL180_MMCI=y
+ CONFIG_MTD=y
+ CONFIG_DM_MTD=y
+diff --git a/configs/stm32h743-disco_defconfig b/configs/stm32h743-disco_defconfig
+index 89d79e98b6f..f098b8dd6da 100644
+--- a/configs/stm32h743-disco_defconfig
++++ b/configs/stm32h743-disco_defconfig
+@@ -30,6 +30,6 @@ CONFIG_CMD_EXT4_WRITE=y
+ # CONFIG_ISO_PARTITION is not set
+ CONFIG_OF_CONTROL=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_STM32_SDMMC2=y
+ # CONFIG_PINCTRL_FULL is not set
+diff --git a/configs/stm32h743-eval_defconfig b/configs/stm32h743-eval_defconfig
+index 6b4ebd11691..82823e8631f 100644
+--- a/configs/stm32h743-eval_defconfig
++++ b/configs/stm32h743-eval_defconfig
+@@ -30,6 +30,6 @@ CONFIG_CMD_EXT4_WRITE=y
+ # CONFIG_ISO_PARTITION is not set
+ CONFIG_OF_CONTROL=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_STM32_SDMMC2=y
+ # CONFIG_PINCTRL_FULL is not set
+diff --git a/configs/stm32h750-art-pi_defconfig b/configs/stm32h750-art-pi_defconfig
+index 319b3033a40..df3ff43f4a9 100644
+--- a/configs/stm32h750-art-pi_defconfig
++++ b/configs/stm32h750-art-pi_defconfig
+@@ -36,7 +36,7 @@ CONFIG_CMD_EXT4_WRITE=y
+ # CONFIG_ISO_PARTITION is not set
+ CONFIG_OF_CONTROL=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_DM_DMA=y
+ CONFIG_STM32_SDMMC2=y
+ # CONFIG_PINCTRL_FULL is not set
+diff --git a/configs/stm32mp25_defconfig b/configs/stm32mp25_defconfig
+index f5623a19bb2..9533e30db4d 100644
+--- a/configs/stm32mp25_defconfig
++++ b/configs/stm32mp25_defconfig
+@@ -31,7 +31,7 @@ CONFIG_CMD_TIMER=y
+ CONFIG_CMD_REGULATOR=y
+ CONFIG_CMD_LOG=y
+ CONFIG_OF_LIVE=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_GPIO_HOG=y
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_STM32F7=y
+diff --git a/configs/stmark2_defconfig b/configs/stmark2_defconfig
+index f43a24c5b5e..79b21acd032 100644
+--- a/configs/stmark2_defconfig
++++ b/configs/stmark2_defconfig
+@@ -39,7 +39,7 @@ CONFIG_ENV_SPI_CS=1
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_USE_HOSTNAME=y
+ CONFIG_HOSTNAME="stmark2"
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_FSL=y
+ CONFIG_MTD=y
+diff --git a/configs/th1520_lpi4a_defconfig b/configs/th1520_lpi4a_defconfig
+index db80e33870b..9ab228256b0 100644
+--- a/configs/th1520_lpi4a_defconfig
++++ b/configs/th1520_lpi4a_defconfig
+@@ -58,7 +58,7 @@ CONFIG_CMD_BOOTMENU=y
+ CONFIG_PARTITION_TYPE_GUID=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_VERSION_VARIABLE=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_BLOCK_CACHE is not set
+ # CONFIG_GPIO is not set
+ # CONFIG_I2C is not set
+diff --git a/configs/thunderx_88xx_defconfig b/configs/thunderx_88xx_defconfig
+index b754cc01cc8..107ad279e1b 100644
+--- a/configs/thunderx_88xx_defconfig
++++ b/configs/thunderx_88xx_defconfig
+@@ -32,7 +32,7 @@ CONFIG_SYS_PROMPT="ThunderX_88XX> "
+ # CONFIG_CMD_SAVEENV is not set
+ # CONFIG_CMD_ENV_EXISTS is not set
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_MMC is not set
+ CONFIG_DM_SERIAL=y
+ CONFIG_DEBUG_UART_SKIP_INIT=y
+diff --git a/configs/tools-only_defconfig b/configs/tools-only_defconfig
+index b54d2cefa10..e00f2c48598 100644
+--- a/configs/tools-only_defconfig
++++ b/configs/tools-only_defconfig
+@@ -22,7 +22,7 @@ CONFIG_BOOTCOMMAND="run distro_bootcmd"
+ # CONFIG_CMD_DATE is not set
+ CONFIG_OF_CONTROL=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_ACPIGEN is not set
+ CONFIG_AXI=y
+ CONFIG_AXI_SANDBOX=y
+diff --git a/configs/topic_miami_defconfig b/configs/topic_miami_defconfig
+index 638d7306146..74b03d19ffb 100644
+--- a/configs/topic_miami_defconfig
++++ b/configs/topic_miami_defconfig
+@@ -52,7 +52,7 @@ CONFIG_CMD_CACHE=y
+ CONFIG_OF_EMBED=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_DFU_RAM=y
+ CONFIG_SYS_DFU_DATA_BUF_SIZE=0x600000
+diff --git a/configs/topic_miamilite_defconfig b/configs/topic_miamilite_defconfig
+index af47fab83c0..46071399a4d 100644
+--- a/configs/topic_miamilite_defconfig
++++ b/configs/topic_miamilite_defconfig
+@@ -52,7 +52,7 @@ CONFIG_CMD_CACHE=y
+ CONFIG_OF_EMBED=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_DFU_RAM=y
+ CONFIG_SYS_DFU_DATA_BUF_SIZE=0x600000
+diff --git a/configs/topic_miamiplus_defconfig b/configs/topic_miamiplus_defconfig
+index ad321749694..5562c738c5e 100644
+--- a/configs/topic_miamiplus_defconfig
++++ b/configs/topic_miamiplus_defconfig
+@@ -52,7 +52,7 @@ CONFIG_CMD_CACHE=y
+ CONFIG_OF_EMBED=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_DFU_RAM=y
+ CONFIG_SYS_DFU_DATA_BUF_SIZE=0x600000
+diff --git a/configs/total_compute_defconfig b/configs/total_compute_defconfig
+index 5f21d2e367a..b3d2e5c88a6 100644
+--- a/configs/total_compute_defconfig
++++ b/configs/total_compute_defconfig
+@@ -43,7 +43,7 @@ CONFIG_CMD_AVB=y
+ CONFIG_CMD_UBI=y
+ # CONFIG_ISO_PARTITION is not set
+ CONFIG_OF_CONTROL=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_CLK=y
+ # CONFIG_MMC_WRITE is not set
+ CONFIG_ARM_PL180_MMCI=y
+diff --git a/configs/trats2_defconfig b/configs/trats2_defconfig
+index 67561368128..acfc42842e3 100644
+--- a/configs/trats2_defconfig
++++ b/configs/trats2_defconfig
+@@ -43,7 +43,7 @@ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_DFU_MMC=y
+ CONFIG_SYS_DFU_DATA_BUF_SIZE=0x2000000
+ CONFIG_DM_I2C_GPIO=y
+diff --git a/configs/trats_defconfig b/configs/trats_defconfig
+index 98925243bf4..070ab268474 100644
+--- a/configs/trats_defconfig
++++ b/configs/trats_defconfig
+@@ -42,7 +42,7 @@ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ CONFIG_DFU_MMC=y
+ CONFIG_SYS_DFU_DATA_BUF_SIZE=0x2000000
+ CONFIG_DM_I2C_GPIO=y
+diff --git a/configs/xenguest_arm64_defconfig b/configs/xenguest_arm64_defconfig
+index 6d040c2c15c..91657e0cd8b 100644
+--- a/configs/xenguest_arm64_defconfig
++++ b/configs/xenguest_arm64_defconfig
+@@ -37,7 +37,7 @@ CONFIG_CMD_PVBLOCK=y
+ # CONFIG_CMD_SLEEP is not set
+ CONFIG_CMD_EXT4=y
+ CONFIG_CMD_FAT=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_MMC is not set
+ # CONFIG_REQUIRE_SERIAL_CONSOLE is not set
+ CONFIG_DM_SERIAL=y
+diff --git a/configs/xenguest_arm64_virtio_defconfig b/configs/xenguest_arm64_virtio_defconfig
+index d00a1ba0143..217b45a2c5e 100644
+--- a/configs/xenguest_arm64_virtio_defconfig
++++ b/configs/xenguest_arm64_virtio_defconfig
+@@ -42,7 +42,7 @@ CONFIG_CMD_PCI=y
+ CONFIG_CMD_EXT4=y
+ CONFIG_CMD_FAT=y
+ CONFIG_PARTITION_TYPE_GUID=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_MMC is not set
+ CONFIG_DM_PCI_COMPAT=y
+ CONFIG_PCI_REGION_MULTI_ENTRY=y
+diff --git a/configs/xilinx_versal_mini_defconfig b/configs/xilinx_versal_mini_defconfig
+index b97bf5e60a9..e9183bc8071 100644
+--- a/configs/xilinx_versal_mini_defconfig
++++ b/configs/xilinx_versal_mini_defconfig
+@@ -57,7 +57,7 @@ CONFIG_SYS_ALT_MEMTEST=y
+ # CONFIG_CMD_SETEXPR is not set
+ # CONFIG_CMD_SLEEP is not set
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_DM_DEVICE_REMOVE is not set
+ # CONFIG_MMC is not set
+ CONFIG_ARM_DCC=y
+diff --git a/configs/xilinx_versal_mini_emmc0_defconfig b/configs/xilinx_versal_mini_emmc0_defconfig
+index 5c949e34442..7ba7e65597a 100644
+--- a/configs/xilinx_versal_mini_emmc0_defconfig
++++ b/configs/xilinx_versal_mini_emmc0_defconfig
+@@ -55,7 +55,7 @@ CONFIG_CMD_FAT=y
+ CONFIG_CMD_FS_GENERIC=y
+ CONFIG_OF_EMBED=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_DM_DEVICE_REMOVE is not set
+ CONFIG_MMC_SDHCI=y
+ CONFIG_MMC_SDHCI_ZYNQ=y
+diff --git a/configs/xilinx_versal_mini_emmc1_defconfig b/configs/xilinx_versal_mini_emmc1_defconfig
+index 04cba5bc72d..54cc51ee7f3 100644
+--- a/configs/xilinx_versal_mini_emmc1_defconfig
++++ b/configs/xilinx_versal_mini_emmc1_defconfig
+@@ -55,7 +55,7 @@ CONFIG_CMD_FAT=y
+ CONFIG_CMD_FS_GENERIC=y
+ CONFIG_OF_EMBED=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_DM_DEVICE_REMOVE is not set
+ CONFIG_MMC_SDHCI=y
+ CONFIG_MMC_SDHCI_ZYNQ=y
+diff --git a/configs/xilinx_versal_mini_ospi_defconfig b/configs/xilinx_versal_mini_ospi_defconfig
+index 8f162597603..5ffb2cd5bfb 100644
+--- a/configs/xilinx_versal_mini_ospi_defconfig
++++ b/configs/xilinx_versal_mini_ospi_defconfig
+@@ -51,7 +51,7 @@ CONFIG_SYS_PROMPT="Versal> "
+ # CONFIG_CMD_ITEST is not set
+ # CONFIG_CMD_SOURCE is not set
+ # CONFIG_CMD_SETEXPR is not set
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_DM_DEVICE_REMOVE is not set
+ # CONFIG_MMC is not set
+ CONFIG_MTD=y
+diff --git a/configs/xilinx_versal_mini_qspi_defconfig b/configs/xilinx_versal_mini_qspi_defconfig
+index 8fbde1c7d3c..552cbdd740b 100644
+--- a/configs/xilinx_versal_mini_qspi_defconfig
++++ b/configs/xilinx_versal_mini_qspi_defconfig
+@@ -53,7 +53,7 @@ CONFIG_SYS_PROMPT="Versal> "
+ # CONFIG_CMD_SOURCE is not set
+ # CONFIG_CMD_SETEXPR is not set
+ # CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG is not set
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_DM_DEVICE_REMOVE is not set
+ # CONFIG_GPIO is not set
+ # CONFIG_I2C is not set
+diff --git a/configs/xilinx_versal_net_mini_defconfig b/configs/xilinx_versal_net_mini_defconfig
+index d6ebd080463..c4b1a5d5416 100644
+--- a/configs/xilinx_versal_net_mini_defconfig
++++ b/configs/xilinx_versal_net_mini_defconfig
+@@ -61,7 +61,7 @@ CONFIG_CMD_CACHE=y
+ # CONFIG_CMD_SLEEP is not set
+ CONFIG_OF_EMBED=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_DM_DEVICE_REMOVE is not set
+ # CONFIG_GPIO is not set
+ # CONFIG_I2C is not set
+diff --git a/configs/xilinx_versal_net_mini_emmc_defconfig b/configs/xilinx_versal_net_mini_emmc_defconfig
+index fc88eee10af..c64ab92533b 100644
+--- a/configs/xilinx_versal_net_mini_emmc_defconfig
++++ b/configs/xilinx_versal_net_mini_emmc_defconfig
+@@ -50,7 +50,7 @@ CONFIG_CMD_FAT=y
+ CONFIG_CMD_FS_GENERIC=y
+ CONFIG_OF_EMBED=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_DM_DEVICE_REMOVE is not set
+ CONFIG_MMC_HS200_SUPPORT=y
+ CONFIG_MMC_SDHCI=y
+diff --git a/configs/xilinx_versal_net_mini_ospi_defconfig b/configs/xilinx_versal_net_mini_ospi_defconfig
+index 872a4a55952..f1a136fe52c 100644
+--- a/configs/xilinx_versal_net_mini_ospi_defconfig
++++ b/configs/xilinx_versal_net_mini_ospi_defconfig
+@@ -50,7 +50,7 @@ CONFIG_SYS_PROMPT="Versal NET> "
+ # CONFIG_CMD_ITEST is not set
+ # CONFIG_CMD_SOURCE is not set
+ # CONFIG_CMD_SETEXPR is not set
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_DM_DEVICE_REMOVE is not set
+ # CONFIG_MMC is not set
+ CONFIG_MTD=y
+diff --git a/configs/xilinx_versal_net_mini_qspi_defconfig b/configs/xilinx_versal_net_mini_qspi_defconfig
+index 00319e06102..75589c478d8 100644
+--- a/configs/xilinx_versal_net_mini_qspi_defconfig
++++ b/configs/xilinx_versal_net_mini_qspi_defconfig
+@@ -52,7 +52,7 @@ CONFIG_SYS_PROMPT="Versal NET> "
+ # CONFIG_CMD_SOURCE is not set
+ # CONFIG_CMD_SETEXPR is not set
+ # CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG is not set
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_DM_DEVICE_REMOVE is not set
+ # CONFIG_GPIO is not set
+ # CONFIG_I2C is not set
+diff --git a/configs/xilinx_zynqmp_mini_defconfig b/configs/xilinx_zynqmp_mini_defconfig
+index 4b45074efc4..09d73b0617f 100644
+--- a/configs/xilinx_zynqmp_mini_defconfig
++++ b/configs/xilinx_zynqmp_mini_defconfig
+@@ -53,7 +53,7 @@ CONFIG_CMD_CACHE=y
+ # CONFIG_CMD_SLEEP is not set
+ CONFIG_OF_EMBED=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_DM_DEVICE_REMOVE is not set
+ # CONFIG_DM_MAILBOX is not set
+ # CONFIG_MMC is not set
+diff --git a/configs/xilinx_zynqmp_mini_emmc0_defconfig b/configs/xilinx_zynqmp_mini_emmc0_defconfig
+index 49c7235fb8c..0e0242d8aac 100644
+--- a/configs/xilinx_zynqmp_mini_emmc0_defconfig
++++ b/configs/xilinx_zynqmp_mini_emmc0_defconfig
+@@ -64,7 +64,7 @@ CONFIG_CMD_FS_GENERIC=y
+ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_OF_EMBED=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_DM_DEVICE_REMOVE is not set
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ # CONFIG_DM_MAILBOX is not set
+diff --git a/configs/xilinx_zynqmp_mini_emmc1_defconfig b/configs/xilinx_zynqmp_mini_emmc1_defconfig
+index 1ef89f50444..01297f615b8 100644
+--- a/configs/xilinx_zynqmp_mini_emmc1_defconfig
++++ b/configs/xilinx_zynqmp_mini_emmc1_defconfig
+@@ -64,7 +64,7 @@ CONFIG_CMD_FS_GENERIC=y
+ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_OF_EMBED=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_DM_DEVICE_REMOVE is not set
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ # CONFIG_DM_MAILBOX is not set
+diff --git a/configs/xilinx_zynqmp_mini_nand_defconfig b/configs/xilinx_zynqmp_mini_nand_defconfig
+index b4719536be1..fd27f565b03 100644
+--- a/configs/xilinx_zynqmp_mini_nand_defconfig
++++ b/configs/xilinx_zynqmp_mini_nand_defconfig
+@@ -48,7 +48,7 @@ CONFIG_CLOCKS=y
+ # CONFIG_CMD_SETEXPR is not set
+ CONFIG_OF_EMBED=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_DM_DEVICE_REMOVE is not set
+ # CONFIG_DM_MAILBOX is not set
+ # CONFIG_MMC is not set
+diff --git a/configs/xilinx_zynqmp_mini_nand_single_defconfig b/configs/xilinx_zynqmp_mini_nand_single_defconfig
+index 7ede17654dd..480c00ed152 100644
+--- a/configs/xilinx_zynqmp_mini_nand_single_defconfig
++++ b/configs/xilinx_zynqmp_mini_nand_single_defconfig
+@@ -48,7 +48,7 @@ CONFIG_CLOCKS=y
+ # CONFIG_CMD_SETEXPR is not set
+ CONFIG_OF_EMBED=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_DM_DEVICE_REMOVE is not set
+ # CONFIG_DM_MAILBOX is not set
+ # CONFIG_MMC is not set
+diff --git a/configs/xilinx_zynqmp_mini_qspi_defconfig b/configs/xilinx_zynqmp_mini_qspi_defconfig
+index 0d79ecece71..d8830a6f247 100644
+--- a/configs/xilinx_zynqmp_mini_qspi_defconfig
++++ b/configs/xilinx_zynqmp_mini_qspi_defconfig
+@@ -67,7 +67,7 @@ CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
+ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_OF_EMBED=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_DM_DEVICE_REMOVE is not set
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ # CONFIG_FIRMWARE is not set
+diff --git a/configs/zynq_cse_nand_defconfig b/configs/zynq_cse_nand_defconfig
+index 750ea0db2b2..e7414c78d1e 100644
+--- a/configs/zynq_cse_nand_defconfig
++++ b/configs/zynq_cse_nand_defconfig
+@@ -69,7 +69,7 @@ CONFIG_SYS_MAXARGS=32
+ CONFIG_OF_EMBED=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_DM_DEVICE_REMOVE is not set
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ # CONFIG_MMC is not set
+diff --git a/configs/zynq_cse_nor_defconfig b/configs/zynq_cse_nor_defconfig
+index 3155fe0b378..4f2186b2a51 100644
+--- a/configs/zynq_cse_nor_defconfig
++++ b/configs/zynq_cse_nor_defconfig
+@@ -69,7 +69,7 @@ CONFIG_SYS_MAXARGS=32
+ CONFIG_OF_EMBED=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_DM_DEVICE_REMOVE is not set
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ # CONFIG_MMC is not set
+diff --git a/configs/zynq_cse_qspi_defconfig b/configs/zynq_cse_qspi_defconfig
+index f2e1aa6d3ab..a372a13fe2d 100644
+--- a/configs/zynq_cse_qspi_defconfig
++++ b/configs/zynq_cse_qspi_defconfig
+@@ -78,7 +78,7 @@ CONFIG_SYS_MAXARGS=32
+ CONFIG_OF_EMBED=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-# CONFIG_NET is not set
++CONFIG_NO_NET=y
+ # CONFIG_DM_DEVICE_REMOVE is not set
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ # CONFIG_MMC is not set
 -- 
 2.40.1
 
