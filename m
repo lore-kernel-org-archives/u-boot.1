@@ -4,72 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE482CE7AA6
-	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 01:09:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A121DCE7AA6
+	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 01:09:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF5B288966;
-	Fri,  6 Sep 2024 03:09:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C392E88CD1;
+	Fri,  6 Sep 2024 03:09:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ecPKiWWo";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ve0yJCXN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 993F888CC5; Fri,  6 Sep 2024 03:09:27 +0200 (CEST)
-Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
- [IPv6:2607:f8b0:4864:20::f2b])
+ id 2C07388AB2; Fri,  6 Sep 2024 03:09:29 +0200 (CEST)
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [IPv6:2607:f8b0:4864:20::f29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92CDB886F9
- for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 03:09:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 20AFF88AB2
+ for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 03:09:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-6c354091616so8352516d6.0
- for <u-boot@lists.denx.de>; Thu, 05 Sep 2024 18:09:25 -0700 (PDT)
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-6c353f2f954so8377006d6.3
+ for <u-boot@lists.denx.de>; Thu, 05 Sep 2024 18:09:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1725584964; x=1726189764; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1725584966; x=1726189766; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9fCeqDRxz2BlsaVvOnlRJWuOw8GIDJDPdqb7C2hlMvM=;
- b=ecPKiWWoVft0enUMXmnpwbVuFgV7iC7XLHevdcsJDnfDjNvHQbTli/SGG7kabCQ1jD
- VKr6kjmckg196NFpll8juVIuhCG9Fw2x49v3MOLVal2LFB97RGgFo0qTVaDEm2UmvwPP
- B7H4Xoe8QvJ+9U7YGscGoAWImw5wrT4lCE66U=
+ bh=PfVIyqRjMedV7jC9eKmeB7IToxfZYuI3A55seb23GYs=;
+ b=Ve0yJCXNtgfvhvhUY9HVaT2J/0v9E6tpJ/yezIklPNPMcHt9m8emybdgfu7XFZFXmU
+ yIHsNdMbpFzV9z1buta5hcTnW+Br66zOr2ogMPT8XRcBubtRLxRNSp+A2VpUfEpgCAt2
+ WLH8EeHb4uGmjkr7cEGQDiaYXckJKpPAkTxUI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725584964; x=1726189764;
+ d=1e100.net; s=20230601; t=1725584966; x=1726189766;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9fCeqDRxz2BlsaVvOnlRJWuOw8GIDJDPdqb7C2hlMvM=;
- b=dFNk9Qub4WDV980QucUAIXrsZu7TF70njru2201pI7D+stVEJ05/wB7mf3QwLp5yyM
- VvgzjCe8WvDi0Jdwzch9FgKjhAEIF0T81jClzrfR5ZeQcjbzKSH82/x+/xBsfOtbdy21
- ltTxlEM7Swwffh15SqjkwcKv0ytI55Beonwk1hHkyjQLxyybP608/cLJSVnKIJqfV2Z6
- Q+JwT6sytZhHXu3KeqRYIxw8dl6mr1Bcdvgf47dOKDzB3jl7JHRANDPNzexsL1KJ4euu
- woJvEiPo8Ys7ZpMmrg2ul3eTxcynCjIEqW4T1Xo4lUNsjqD2E2Wb+K2s1Sq9aRdjiwCM
- gzCQ==
-X-Gm-Message-State: AOJu0YzujjSPFqypAzYAY1iuSR7U6Abx9wH3AWVoYkHBNKFDGIY02U2s
- ZMukQZtKvp1/ddqJ/1mgJ+Bvvi9XgarJlQwmHH8mNFpySMg+pfCwDijalEDlPuA=
-X-Google-Smtp-Source: AGHT+IESjPVNCdZYO432WkeA5q6esFIBcx0zn7OhPv6nm1WYURTIhIcjoTYt+ipjoLRTBdzG5L5xgQ==
-X-Received: by 2002:a05:6214:2d49:b0:6c3:3e01:7fad with SMTP id
- 6a1803df08f44-6c5285128b9mr15430786d6.46.1725584964376; 
- Thu, 05 Sep 2024 18:09:24 -0700 (PDT)
+ bh=PfVIyqRjMedV7jC9eKmeB7IToxfZYuI3A55seb23GYs=;
+ b=BI6YeyIgLrBSIH2HFgJ8ly5sXAZNHuVVNCxtBilDd6Jd0ytLWUuAbCWQeRtG1mzEGF
+ UbQTYMyhh6bvABv96uxG03FcsfCFbNiSoTjknFWUFwH/9KZ7YLg06rOAW1S+Nxl098Ru
+ B8Im3Quzx58gzZRCRH18VTptB8JRDdmu+jIF21CJw+JzfEvpzf5Cuvvf5+OXj5NcU8ty
+ vJi/72IOBMxS3/2lB2BPN++134Etx3BQlfxQcjjq5FlteXot6RKLVRu+RCM3obhavzVF
+ lu8ml9RMHhtycxPsQ4DzDshvSaWtzRztobH8mQz/zunT0fJVrgH3QEqBUvhQWEW89m30
+ OkdQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWEvdbhn/ssNlUCHuhENrdLza7HsQQfhhS+jBbb1ww/QL2pRUmbL05BC0A8CBImAXKeiMePTY0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxJ28/IcCA8p8Ls3A3VstLlM0k8dUFu89BFq12HA+mXN7LHrn+i
+ ddTdLdJiTxtVSpk7otpQL2XUsPZheP58WyYiI68elFmSLkL5OMEORYy/waiZdjw=
+X-Google-Smtp-Source: AGHT+IGnEMaeFfuQ+xnGTOtqi+D++E9ucUUvo/xNq92svcXQ/lFeVOThcP8XSazJOEa3OmIhnEa06w==
+X-Received: by 2002:a05:6214:4888:b0:6c3:6e6f:794a with SMTP id
+ 6a1803df08f44-6c5283fcaa9mr15621756d6.20.1725584966073; 
+ Thu, 05 Sep 2024 18:09:26 -0700 (PDT)
 Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6c52041803bsm12145516d6.105.2024.09.05.18.09.23
+ 6a1803df08f44-6c52041803bsm12145516d6.105.2024.09.05.18.09.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Sep 2024 18:09:23 -0700 (PDT)
+ Thu, 05 Sep 2024 18:09:25 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, 
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Cc: peng.fan@nxp.com, jh80.chung@samsung.com, git@amd.com
-In-Reply-To: <20240423053057.15863-1-venkatesh.abbarapu@amd.com>
-References: <20240423053057.15863-1-venkatesh.abbarapu@amd.com>
-Subject: Re: [PATCH] mmc: Change the frequency to MMC_HS_52 when selecting
- hs400
-Message-Id: <172558496312.1864439.5624811039683546824.b4-ty@konsulko.com>
-Date: Thu, 05 Sep 2024 19:09:23 -0600
+To: Jaehoon Chung <jh80.chung@samsung.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
+ Sean Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@linaro.org>, 
+ Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de, 
+ u-boot-qcom@groups.io
+In-Reply-To: <20240621015351.1573934-1-caleb.connolly@linaro.org>
+References: <20240621015351.1573934-1-caleb.connolly@linaro.org>
+Subject: Re: [PATCH] mmc: msm_sdhci: program core_vendor_spec
+Message-Id: <172558496459.1864439.12871400960449171932.b4-ty@konsulko.com>
+Date: Thu, 05 Sep 2024 19:09:24 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -90,17 +94,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 23 Apr 2024 11:00:57 +0530, Venkatesh Yadav Abbarapu wrote:
+On Fri, 21 Jun 2024 03:53:09 +0200, Caleb Connolly wrote:
 
-> Per JESD84-B51 P47, host need to change frequency to <=52MHz
-> after setting HS_TIMING to 0x1, and host need to set the
-> 8-bit DDR buswidth. Currently setting the frequency to 26MHz
-> and trying to switch 8-bit DDR buswidth resulting timeouts.
+> After resetting the host controller, program in the POR val for this
+> register just like the Linux driver does.
 > 
-> mmc dev 1 0
-> Select HS400 failed -110
-> switch to partitions #0, OK
-> mmc1(part 0) is current device
+> This seems to help with initialization when running U-Boot as the primary
+> bootloader on some boards.
+> 
 > 
 > [...]
 
