@@ -4,98 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BE2ECE7AF1
-	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 09:06:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5538DCE7AF1
+	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 09:30:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 99B00888C8;
-	Fri,  6 Sep 2024 11:05:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 930168870D;
+	Fri,  6 Sep 2024 11:30:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZIhKKK4i";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FmjRUC7a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E976888966; Fri,  6 Sep 2024 11:05:58 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 65C5388B11; Fri,  6 Sep 2024 11:30:49 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EFF0688440
- for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 11:05:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 574DD87FCD
+ for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 11:30:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-58ef19aa69dso1882490a12.3
- for <u-boot@lists.denx.de>; Fri, 06 Sep 2024 02:05:56 -0700 (PDT)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a7aa086b077so182734466b.0
+ for <u-boot@lists.denx.de>; Fri, 06 Sep 2024 02:30:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1725613556; x=1726218356; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=yryLcSJrIOG/NbbIIhdF8IQx9SjEz9EZ++xeZVKduO0=;
- b=ZIhKKK4in9dwsU+xZr4TdGLaVD3qUUL10/lL0UPbunzh/efB353I3Ss4L6Gg5pRubk
- VbPkp2/pPrbX8RQ9Ew9YoKxFW+OqR8Hoaoab+rVzjyzvnS9RK+XeD9vu9dSSmqKgsUFw
- ruLlxbIpoRC/HWo5NQ5baPbqWfD4peULSm1a9bhwGkMICHcQp8y5kYVWpw+NThF6C+jv
- VCtciDeS4OyLgr6QXDcVSlVd5a4wzKIKTGHtXPUP5qdfrj+Cs60bK6Rp58ZQqU0u+qmn
- 8EXV6Gr0Wu/kw6YEwSCRxAPKzzKxJmt2VZGdBKBu58TAfMAQ7VEBUzKeFFPh9PskAyyr
- aYUg==
+ d=linaro.org; s=google; t=1725615047; x=1726219847; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=4Ss7javkAySbBOd7DM+jWCdVbS5cEgrZA3VGcJ08eMs=;
+ b=FmjRUC7a94HqKMzjfWk2o6yLPmr6Kr4iyP8JbdJeLIsdFqRuP0WnxctjmgyCVFx1p5
+ GE1ISg1F2Ho2a2KQsiPFxiv9Wqbua3pZXZS+sYPQdPvaUk5X3dRBPVbAegA2XeWLWeGz
+ 8jT6XoUInq9xA1/siZx7NHGGjvgBzFCQH76r4eoF7Ok9SHQV9MY2qDhpqZsPjBrqFbw7
+ B3vBTdfqkAD4YjjmkYkCijIQetc8KEn2Z0dqT71bpWoRHjfyAnmlP+j/dEDwWOtG3oo2
+ dxifOu3nfKfzdJjHQ6SuI0w52yZTtxBzCkp/RCKdh+QTNZJdOcw4SeymK+tuDED/ksxs
+ /utA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725613556; x=1726218356;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=yryLcSJrIOG/NbbIIhdF8IQx9SjEz9EZ++xeZVKduO0=;
- b=JNxVYRZEv5WNTpSH3UHya1yn3pucymTTPpEzQK9KYVGIQUCG+yCMAssvbLE+RirFn4
- GCL2dIBeE5sDH009o8GXyQ9Ru7PGWQbq8d/Ob8YQYPWxfmYmPQ7rEwjMR3tK4VrePoht
- rPwDBHax1qecpwN4NyiXrPEnUHc9M0rjwMG0yOH+y7nYaJPT0lX3LBKfEJTpr6fK6X/u
- hLG/kLQ8aT7FMWjEIEQCxqlTZ9ZfADtB60bY6o0+MIit+ZVSYRB9FSuxzDzS/2a6k0ax
- BCjj4S2vevKdfh/wQe0UG0BnFvcfmTZ6zfrKRRbskszzGdHxgOJgOJ43VfCG4L6cf8fl
- D5SA==
+ d=1e100.net; s=20230601; t=1725615047; x=1726219847;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=4Ss7javkAySbBOd7DM+jWCdVbS5cEgrZA3VGcJ08eMs=;
+ b=H4KYWfzZZelmFKcOho4cWiLR3IWeijNs9uhOIFlOE0L+QzpOfqdl3lBBvSkiQjy/wU
+ sOX898Jnv1D3cGSP+bPCidy5WnjPpixEKAy5X5U5wgJ10Wq3ERtlwmTcM87Aawh/bzBH
+ ts8QQ2qEg8zd9AwTjMjeEp1yhinOP0C/arl0RVLgUaA/FipWsg94aBRJzXsYoGjI1t+K
+ NVXRTqcS1NPTmD2ApzZuItCekmOuei+/2aAYE4cCHfwUMPO0jrnjXLTdCCCgxi/uMU29
+ hc7oI+Bjryl76t9XotrjrFvr5S3/4GPQM470pRP11TUT/vsC559ZGKJfGyv6RH4FWWDS
+ BtvQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWYoqFq41UwyuozbbijM04T2RwYncWCzP9QnU+RuXd8zpeXq5Tdy4hmbQY4Yqkp4Lm6v6XnDeM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzBuMTH/8/qMaP1wrxEveLDrmlAAlRHYT71IBfDlXEnR0Hj3MmB
- ZQ+PGOuKRzlgcQb4PxgmMVvnftGpYjsT1oe2r8LIhgnENzbNIMa2r4wvXNx1um9tSEk/mWq86Ji
- 1Z1FdBxvTjWZOTT6wJAYrN0j7wZE=
-X-Google-Smtp-Source: AGHT+IFwxWNIlejPPtuMkTwhBLr0NzmeuCX0mGO2/F007Ux2tUapJx0yJKi6YtVnu7WOQnI3ZlrjiIdcfrULsroWgFA=
-X-Received: by 2002:a05:6402:34c6:b0:5be:e01c:6b5f with SMTP id
- 4fb4d7f45d1cf-5c3dc7c71f8mr1044441a12.33.1725613555614; Fri, 06 Sep 2024
- 02:05:55 -0700 (PDT)
+ AJvYcCWENnhHeA+U/JqKfpJx2JpFaBLi2s/qymqmXWEjl+BeZEutY4MYH9f9pTKowxA/8X3g9Y7tpm0=@lists.denx.de
+X-Gm-Message-State: AOJu0YwxQWjBu4gT+i4ZDzmyM4PkeLKxwzXaVdIyjUM/VLf0onls93N4
+ zzYPkRwRWPdD1UquW0OzCc50/lG/v29piQf7X+bTMOj+XqnXwugPN/1VKB+mtPo=
+X-Google-Smtp-Source: AGHT+IGBGO/fBoMqgKoZITZ8Wm1tWDbF9D+cdsy9BS4qha4p7s5tIOq9pz/yKeRYzpC6wesYT45SqQ==
+X-Received: by 2002:a17:907:36c7:b0:a86:ab90:6af6 with SMTP id
+ a640c23a62f3a-a8a885f9ca6mr136175066b.16.1725615046475; 
+ Fri, 06 Sep 2024 02:30:46 -0700 (PDT)
+Received: from ?IPV6:2a02:8109:aa0d:be00::1450? ([2a02:8109:aa0d:be00::1450])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a8a93843af8sm37075766b.223.2024.09.06.02.30.45
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 06 Sep 2024 02:30:46 -0700 (PDT)
+Message-ID: <c3cfb727-1c55-4249-bc84-835d3a2428b7@linaro.org>
+Date: Fri, 6 Sep 2024 11:30:44 +0200
 MIME-Version: 1.0
-References: <20240816214436.1877263-1-raymond.mao@linaro.org>
- <CAFLszTiRy3dkrTVnkV-H=CcCxJH6W5=RBM9tokOiSN-AVXGywA@mail.gmail.com>
- <CALeDE9PqT54MH0riLFng3ONi=rtEa53LsxRgYcV1ENX=ikuV0A@mail.gmail.com>
- <CAFLszThd7LoiOv6XjWe8hP1QWO5VZF_RSeXNSxqif=-BO1BkfA@mail.gmail.com>
-In-Reply-To: <CAFLszThd7LoiOv6XjWe8hP1QWO5VZF_RSeXNSxqif=-BO1BkfA@mail.gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Fri, 6 Sep 2024 10:05:44 +0100
-Message-ID: <CALeDE9PeZ9eJA1rQ5vaW_BYscL4ywJKKpi_kV3mDoU9rjSaf_Q@mail.gmail.com>
-Subject: Re: [PATCH v6 00/28] Integrate MbedTLS v3.6 LTS with U-Boot
-To: Simon Glass <sjg@chromium.org>
-Cc: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de,
- manish.pandey2@arm.com, 
- Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
- Mario Six <mario.six@gdsys.cc>, 
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Michal Simek <michal.simek@amd.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Andrew Davis <afd@ti.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Sumit Garg <sumit.garg@linaro.org>, 
- Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>, 
- "Leon M. Busch-George" <leon@georgemail.eu>,
- Igor Opaniuk <igor.opaniuk@gmail.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Alexander Gendin <agendin@matrox.com>, Jonathan Humphreys <j-humphreys@ti.com>,
- Eddie James <eajames@linux.ibm.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Betterbird (Linux)
+Subject: Re: [PATCH] cmd: fdt: use U-Boot's FDT by default
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, E Shattow <lucent@gmail.com>,
+ u-boot@lists.denx.de
+References: <20240831164639.2298097-1-caleb.connolly@linaro.org>
+ <CANV2PTM+wevfK7w15j-=a2oakPMMXpTdr7ntzBfkc3jbbv+veg@mail.gmail.com>
+ <feff5299-6378-4de9-867d-808c23625af4@linaro.org>
+ <CAFLszTiZ75zK2L8=5E9dXOHXqEybh7O=OsQiW5hkJ9xoPiWT4Q@mail.gmail.com>
+ <96798312-858e-40e9-b174-a850da8de6e9@linaro.org>
+ <20240903192938.GN2479150@bill-the-cat>
+Content-Language: en-US
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20240903192938.GN2479150@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,94 +101,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 6 Sept 2024 at 01:44, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi,
->
-> On Wed, 4 Sept 2024 at 06:48, Peter Robinson <pbrobinson@gmail.com> wrote:
-> >
-> > Hi Simon,
-> >
-> > > I wonder if we could leave out the SHA stuff? The algorithms are
-> >
-> > One of the big advantages of the mbedtls when it comes to all things
-> > security is that it's seen a wide audit of it's code which for a lot
-> > of usecases is very useful from a security PoV, I'm not sure the
-> > amount of audit the U-Boot in project code has had, I'm sure there has
-> > been but I've not seen anything published.
->
-> Definitely the hash routines and signing have been audited, in fact
-> there was at least one bug that came out of it, although not in the
-> hash routines themselves, which are solid.
->
-> >
-> > > stable and this would seem to avoid much of the size growth, and all
-> > > the pain of trying to integrate another yet another hashing layer (we
-> > > already have normal, progressive and h/w acceleration, plus
-> >
-> > What's the difference between the first two?
->
-> Normal hashes the whole lot at once. Progressive does things a chunk
-> at a time, to be watchdog-friendly. If CPUs are fast enough (and
-> watchdogs lax enough), perhaps we don't need that code?
->
-> >
-> > > UCLASS_HASH which h/w acceleration should use but that migration never
-> >
-> > How hard would it be for UCLASS_HASH to use the mbed hashing underneath?
->
-> I really don't see the point as there is nothing wrong with U-Boot's
-> hashing, so far as I know. Half the patches in this series would
-> likely not be necessary?
->
-> But there is a hash_sw driver for UCLASS_HASH, which results in using
-> software hashing, if hardware acceleration is not available.
->
-> >
-> > > happened). I struggle to see any benefit in replacing U-Boot's very
-> > > solid hashing infra with something else, particularly as this series
-> >
-> > I would need to look at the HW support in both U-Boot and mbedtls but
-> > given wider use of mbedtls I bet adding HW support there that U-Boot
-> > could utilise may be more apertising to most HW vendors as it means
-> > they only have to write one set of code and have it used much more
-> > widely.
->
-> I'm really not sure that mbedtls has wider use than U-Boot :-)
 
-It's used extensively in RTOSes such as zephyr, micropython, FreeRTOS
-just to name a few places I'm aware of.
 
-> Yes, anything is possible in software, but I worry we might create
-> Frankenstein's monster. U-Boot's acceleration stuff works fine and has
-> a proper drive model. For example, with ast2500 it automatically does
-> the right thing with the "aspeed,ast2600-hace" (compatible) node.
->
-> >
-> > > adds yet another. Better to invest the time to refactor it. I asked
-> > > about this before and was told that it would happen 'later'. Let's
-> > > just not change it at all, then it is more likely someone will sort it
-> >
-> > What, like the HW support in UCLASS_HASH? Things clearly don't work like that.
->
-> Well, the big challenge here was the difficulty of avoiding *any* size
-> growth, when I wrote common/hash.c - perhaps with the large features
-> going in, this might be less important.
->
-> >
-> > > Also, if MbedTLS is wanting to be a general library for TLS (I assume
-> > > transport-local security, not thread-local storage) perhaps it might
-> > > consider changing to non-Windows newlines, or perhaps even kernel code
-> > > style?
-> >
-> > I think the newlines might be a possible ask, they are generally
-> > receptive to change (they relicensed it to be a dual license
-> > compatible with U-Boot when asked), I don't think forcing a separate
-> > to the kernel project to a kernel code style is a fair request.
->
-> OK. So long as I don't have to change the code... but with this series
-> there is an increase in the code debt in common/hash.c which I'm
-> really not keen on, sorry.
->
-> Regards,
-> Simon
+On 03/09/2024 20:29, Tom Rini wrote:
+> On Mon, Sep 02, 2024 at 03:07:44PM +0200, Caleb Connolly wrote:
+>> Hi Simon,
+>>
+>> On 01/09/2024 21:10, Simon Glass wrote:
+>>> Hi Caleb,
+>>>
+>>> On Sun, 1 Sept 2024 at 08:21, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>>>>
+>>>> Hi,
+>>>>
+>>>> On 31/08/2024 23:22, E Shattow wrote:
+>>>>> Hi Caleb, the problem here is hidden conditional behavior.
+>>>>>
+>>>>> On Sat, Aug 31, 2024 at 9:56 AM Caleb Connolly
+>>>>> <caleb.connolly@linaro.org> wrote:
+>>>>>>
+>>>>>> When using the FDT command to inspect an arbitrary FDT in memory, it
+>>>>>> will always be necessary to explicitly set the FDT address. However it
+>>>>>> is also quite likely that the command is being used to inspect U-Boot's
+>>>>>> own FDT. Simplify that common workflow of running "fdt addr -c" to get
+>>>>>> the control address and set it by just making $fdtcontroladdr the
+>>>>>> default FDT if there isn't one.
+>>>>>>
+>>>>>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+>>>>>> ---
+>>>>>>    cmd/fdt.c | 9 +++++++++
+>>>>>>    1 file changed, 9 insertions(+)
+>>>>>>
+>>>>>> diff --git a/cmd/fdt.c b/cmd/fdt.c
+>>>>>> index d16b141ce32d..8909706e2483 100644
+>>>>>> --- a/cmd/fdt.c
+>>>>>> +++ b/cmd/fdt.c
+>>>>>> @@ -276,8 +276,17 @@ static int do_fdt(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>>>>>>
+>>>>>>                   return CMD_RET_SUCCESS;
+>>>>>>           }
+>>>>>>
+>>>>>> +       /* Try using U-Boot's FDT by default */
+>>>>>> +       if (!working_fdt) {
+>>>>>> +               struct fdt_header *addr;
+>>>>>> +
+>>>>>> +               addr = (void *)env_get_hex("fdtcontroladdr", 0);
+>>>>>> +               if (addr && fdt_check_header(&addr))
+>>>>>> +                       set_working_fdt_addr((phys_addr_t)addr);
+>>>>>> +       }
+>>>>>> +
+>>>>>>           if (!working_fdt) {
+>>>>>>                   puts("No FDT memory address configured. Please configure\n"
+>>>>>>                        "the FDT address via \"fdt addr <address>\" command.\n"
+>>>>>>                        "Aborting!\n");
+>>>>>> --
+>>>>>> 2.46.0
+>>>>>>
+>>>>>
+>>>>> The use of `fdt` command in the default action might be depended on by
+>>>>> some userspace script as a success/fail result. I don't imagine what
+>>>>> that might possibly be, just that the logic of scripts in u-boot
+>>>>> depend on that pattern of use.
+> 
+> I don't think anything depends on "fdt addr" returning 1 if nothing is
+> set.
+> 
+>>>> I'm not sure what the rule is about breaking changes in the CLI, I do
+>>>> think this is not a realistic concern here though. Maybe Tom or Simon
+>>>> can weigh in?
+>>>>>
+>>>>> Secondly there would need to be a warning to the user that some hidden
+>>>>> conditional action is being applied? i.e. "No valid FDT address is
+>>>>> configured to $fdt_addr_r or $fdt_addr so now configuring to use
+>>>>> $fdtcontroladdr instead." or however you would phrase that.
+>>>>
+>>>> Since I call set_working_fdt_addr() it prints a message telling you that
+>>>> the fdt address was set on the first call.
+> 
+> Yes, but it's not obvious as-is where that address came from / why,
+> since today that happens because you're passing that to the command.
+> 
+>>>>> Otherwise I agree improvement to the fdt is welcome and my memory of
+>>>>> first using this command is that it has not-sensible defaults but I
+>>>>> then assumed it was designed this way because of possible use in
+>>>>> U-Boot scripts.
+>>>
+>>> Definitely a useful feature, but how about adding a flag which sets
+>>> the working fdt to the control one? That would make it less painful
+>>> than using -c, and will keep existing cases running.
+>>
+>> Surely we have to /have/ some usecases to justify this??
+> 
+> Well, "fdt" the command was introduced back when Linux started taking
+> device trees on PowerPC platforms, so there wasn't some default to look
+> at. U-Boot isn't standardized on "fdtaddr" or "fdt_addr_r" or "fdt_addr"
+> as where the device tree for the OS is, only that "fdtcontroladdr" is
+> ours. So yes, I would also prefer a new flag to automatically set the
+> working address to fdtcontroladdr. But I assume there's a good reason to
+> not just do like other platforms have historically and fdt addr ... as
+> needed before other commands? Or is this really just for interactive
+> development?
+
+My original justification was so we could add a boot menu option on 
+phones that just did "fdt print /chosen bootargs" (to dump the cmdline 
+args set by Qualcomm's bootloader). I originally had "fdt addr 
+$fdtcontroladdr" in preboot but it felt a bit hacky, but maybe that was 
+the right approach
+> 
+
+-- 
+// Caleb (they/them)
