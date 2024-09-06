@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA7A7E6FE48
-	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 21:10:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02126E6FE48
+	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 21:10:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A9F588D51;
-	Fri,  6 Sep 2024 23:10:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7CAD988D4F;
+	Fri,  6 Sep 2024 23:10:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1725657006;
-	bh=MVAxerUvirdf2SBTYfonj2pNlo4PPGO1VpNWSJGKTBY=;
+	s=phobos-20191101; t=1725657039;
+	bh=UG0Z67STPmJ/pfNVqZ5sO7bt3gkZ9PoNve3T5LxZKlk=;
 	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=uxdIYzBLKdy8t62mZAoXjq2PtMcuaF+kyeek1afUPIUi7wxDeLZeC7yYjgxHe1OUU
-	 sUXsi6SDDzltEpkG6mCW75bUOfl3Y54B+K5ecDIZ2dJHwSeGxi9m3jn/vrZekFrznM
-	 xrMNE0wGVzSP+si8Muedr4ewUKpQvmdubvMZp57JDUbZKZfmJS4r3jWr7rQnqkpaec
-	 qdKzaV2NXXIjfUkp7dJob6Vr//BdN862F1c/u5NyHu67pqfkv3rqWr6hbkWfj8LD4l
-	 4p15JzIt1hx/lBQrVUFDFwFFXJFlYMUu3B6z3yiwr5323R7f7ki8op0x5NfzmVqZ4n
-	 yuUvolZgeLSoA==
+	b=PUgjgARm+LSaEkidxxxjjL6ZcKq7+UGniytOYShkJZ1SSefj2tPjXSdUiE8wJAa4A
+	 D3LxlbbQ3y3zGeBh4/hErstixcg9pHjP7Qlor/OKypbd/2jW4ccomd6qDR3SElD9BY
+	 bCZH5FFggMJl1MweqLqSerBAgedItteWL2o8WDmetKuXyxCPiGzg+QEUpVftrLBC9m
+	 8Jo8VH47HnCPc6Fszekul01e+Rpn/Msa5kT94LwRw0KzlS3AJKDIa04ESWtaTpvN5p
+	 Ad4O5LyWx/OzJBvKxTziAnwcavDG7Gh7GG7pzP+n/LnlCOOZcaE30LOsSpUWaobnJe
+	 2XYSdtQxIlplQ==
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 7585588D4E;
- Fri,  6 Sep 2024 23:10:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id E211D88CD8;
+ Fri,  6 Sep 2024 23:10:37 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1725657005;
- bh=MVAxerUvirdf2SBTYfonj2pNlo4PPGO1VpNWSJGKTBY=;
+ s=phobos-20191101; t=1725657038;
+ bh=UG0Z67STPmJ/pfNVqZ5sO7bt3gkZ9PoNve3T5LxZKlk=;
  h=From:To:Cc:Subject:Date:From;
- b=r/jBlQ/+tgGlATGa1ju3Mim8xqkW4X8XltxlJG7vDmmOm7Jsr5aClkw7AtG3SNQxa
- qShcYVkBBl8BI1JAzoT+Gy+yfp0xW/htQilBCJ04G12jIpQxuNZCLPXDieKKGx8gIL
- wEr8uHhspE/Q5r1JsEAU7pbVE+3spEBsiwJa9A6T2yCIgvdcp3I9pSLKdlXWcQTrmB
- 1wWfyJiemgU9Bf52tLGi9DhfpFM+xZipG6jwDpdG8mWaK299FIitmzmzjAL13W/FXT
- ez0ElWUnIHUQtCRg8hnmPU2p4ID1aS032CgWCEcdzYikcrQ/Pv0d2UcHGrKWz+n8P+
- drVOuB9SvFajg==
+ b=XTV6Qv+a8M0FYTnTjsrhq2R361jnAB33Pz0fjDu7gWETlppV9fi34yO2oMMK3QiaP
+ EfU5XOLDpqGWHTd0lA4KNHoEgSk5PTwLUtwyUKfMAx0aKTMPzKLHeHQIgYkLIMGyI3
+ l5e5oTW+f4iBOCCcSCYYOChiOECTdScWZ9DGTDsO+QON1hZQrCfEsT2tl0sQGZUAOK
+ QMlkFDzevm97VQeJwWXWcWJ4xekpoz+64sCChljuJsbsuUwB5E8gU1w7khqJzW5LMr
+ SJE+KzFCazbDVXnl4DaUnxQUw7NRv3FZHxwAGiunzccjV2CjCkwCRBuPzIBXQO1M5Q
+ 1Qw1GZIWbrE8A==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>, Andre Przywara <andre.przywara@arm.com>,
@@ -47,9 +47,9 @@ Cc: Marek Vasut <marex@denx.de>, Andre Przywara <andre.przywara@arm.com>,
  Neal Frager <neal.frager@amd.com>, Prasad Kummari <prasad.kummari@amd.com>,
  Teik Heng Chong <teik.heng.chong@intel.com>, Tom Rini <trini@konsulko.com>,
  Vignesh R <vigneshr@ti.com>
-Subject: [PATCH] mtd: spi-nor-ids: Deduplicate w25q16dw entry
-Date: Fri,  6 Sep 2024 23:09:16 +0200
-Message-ID: <20240906210951.193142-1-marex@denx.de>
+Subject: [PATCH] mtd: spi-nor-ids: Deduplicate mx25u25635f entry
+Date: Fri,  6 Sep 2024 23:10:10 +0200
+Message-ID: <20240906211022.193224-1-marex@denx.de>
 X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -69,10 +69,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The w25q16dw entry exists twice in spi_nor_ids, remove the less
+The mx25u25635f entry exists twice in spi_nor_ids, remove the less
 complete variant of the entry and keep only one copy of it.
 
-Fixes: baef13ec9d59 ("mtd: spi-nor-ids: Add support for flashes tested by xilinx")
+Fixes: f0084f1dfdbc ("drivers/mtd/spi/spi-nor-ids.c: add mx25u25635f support")
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
 Cc: Andre Przywara <andre.przywara@arm.com>
@@ -89,35 +89,21 @@ Cc: Tom Rini <trini@konsulko.com>
 Cc: Vignesh R <vigneshr@ti.com>
 Cc: u-boot@lists.denx.de
 ---
- drivers/mtd/spi/spi-nor-ids.c | 8 ++------
- 1 file changed, 2 insertions(+), 6 deletions(-)
+ drivers/mtd/spi/spi-nor-ids.c | 1 -
+ 1 file changed, 1 deletion(-)
 
 diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-index 88709a52b3a..d1389e681d6 100644
+index d1389e681d6..5582a978ab5 100644
 --- a/drivers/mtd/spi/spi-nor-ids.c
 +++ b/drivers/mtd/spi/spi-nor-ids.c
-@@ -430,11 +430,6 @@ const struct flash_info spi_nor_ids[] = {
- 	{ INFO("w25x05", 0xef3010, 0, 64 * 1024,  1,  SECT_4K) },
- 	{ INFO("w25x40", 0xef3013, 0, 64 * 1024,  8,  SECT_4K) },
- 	{ INFO("w25x16", 0xef3015, 0, 64 * 1024,  32, SECT_4K) },
--	{
--		INFO("w25q16dw", 0xef6015, 0, 64 * 1024,  32,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
- 	{ INFO("w25x32", 0xef3016, 0, 64 * 1024,  64, SECT_4K) },
- 	{ INFO("w25q20cl", 0xef4012, 0, 64 * 1024,  4, SECT_4K) },
- 	{ INFO("w25q20bw", 0xef5012, 0, 64 * 1024,  4, SECT_4K) },
-@@ -442,7 +437,8 @@ const struct flash_info spi_nor_ids[] = {
- 	{ INFO("w25q32", 0xef4016, 0, 64 * 1024,  64, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
- 	{
- 		INFO("w25q16dw", 0xef6015, 0, 64 * 1024,  32,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ)
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
- 	},
- 	{
- 		INFO("w25q32dw", 0xef6016, 0, 64 * 1024,  64,
+@@ -258,7 +258,6 @@ const struct flash_info spi_nor_ids[] = {
+ 	{ INFO("mx25u6435f",  0xc22537, 0, 64 * 1024, 128, SECT_4K) },
+ 	{ INFO("mx25l12805d", 0xc22018, 0, 64 * 1024, 256, SECT_4K) },
+ 	{ INFO("mx25u12835f", 0xc22538, 0, 64 * 1024, 256, SECT_4K) },
+-	{ INFO("mx25u25635f", 0xc22539, 0, 64 * 1024, 512, SECT_4K) },
+ 	{ INFO("mx25u51245g", 0xc2253a, 0, 64 * 1024, 1024, SECT_4K |
+ 	       SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
+ 	{ INFO("mx25l12855e", 0xc22618, 0, 64 * 1024, 256, 0) },
 -- 
 2.45.2
 
