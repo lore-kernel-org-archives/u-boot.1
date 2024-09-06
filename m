@@ -4,136 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1175CE7AB9
-	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 07:09:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68820CE7AB9
+	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 07:13:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0850188D1C;
-	Fri,  6 Sep 2024 09:08:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 00FA888CE1;
+	Fri,  6 Sep 2024 09:13:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="bbeNiZWd";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ms0p+Ppv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8FED788D13; Fri,  6 Sep 2024 09:08:53 +0200 (CEST)
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on20609.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2417::609])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 0EFB088CF5; Fri,  6 Sep 2024 09:13:25 +0200 (CEST)
+Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
+ [IPv6:2607:f8b0:4864:20::c30])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3658F88D09
- for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 09:08:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 99652886F9
+ for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 09:13:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Prasad.Kummari@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ONYbYmw500RfjG3mtRczhyYlB18GWf/ozug8btXnjrq2wIUhg9DpWI2l7RH93EBkDCCYFNxb2mBXhqvCFACGKtmDGYlVJJrRW3x2pCL0T2SeTXeXAFqBm+NWdNiu8A437tM7CoZL0JcejGFTs1BGEaZ2KCUHXU5viawL1Pc/KjwhTFMw5FqfgpAP8d5W2Rd0Aaicx2qLUHKQX0W46GUCngx2YgdMTfPN3sR+DaS7f8YPCjIKQ1tW4Do9au7iXviu4iMHI7cfR/Ee1jlMgFP/7lbJ3T8rZVYKd3JoIinUuDt3NqNsKcgsN64bZ+08PL5NuqnCj9MHkaNg01djnVquGQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vjPPOAkBuM0klSWyrFyGETCn3RHcEWe/cWTTh5FKMt8=;
- b=Cn1cAfIQXKPZgyYS/ST+ROdv75MjoUomNc3qvfcmMzPAnhxgiWRfTt7hfPpg3eYrhIS+MVD2MUCPOzjs6UPtR7V4sxjwOPNklnvQwDK3Om248oInk1ZlWAGz3HxCG9t74CHg9dB78VudKE/Xze1eJp9dROd4WWKyw3INvqLB30uwktZ0rTd6g5P0XKck1wiuYI36E9rt5iLOJLXGUtPH2kxvdgRoptM9ylo96OUDsYkCkL7VvFAF6ys0/lyEnrAoEQ8eNzKhBwRmmTGftlP8dNgRFFzdnZgLLRxVUeMX3xtw5WeFxEM41p1dYEbKf6RlyAmnI7auqh3jkON1Qd3ILw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vjPPOAkBuM0klSWyrFyGETCn3RHcEWe/cWTTh5FKMt8=;
- b=bbeNiZWd4fv4IA2Vz1ig3wbrG/H8CTlPpJ6A5dbYdhU15Ojf/RJ19N2RjBbfoom4vGHiGNC6lSxYaEBpn0i6Jyr6eG8voyK7IMdWLXFECt2WZbfrRzddCOGy4dynRI11hA5dGIC+hoHpGRDncWTTvdWnDvmDKKiiDW2kWagwuX4=
-Received: from SA0PR11CA0153.namprd11.prod.outlook.com (2603:10b6:806:1bb::8)
- by PH7PR12MB6934.namprd12.prod.outlook.com (2603:10b6:510:1b8::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.27; Fri, 6 Sep
- 2024 07:08:47 +0000
-Received: from SN1PEPF0002BA4E.namprd03.prod.outlook.com
- (2603:10b6:806:1bb:cafe::9f) by SA0PR11CA0153.outlook.office365.com
- (2603:10b6:806:1bb::8) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.27 via Frontend
- Transport; Fri, 6 Sep 2024 07:08:47 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SN1PEPF0002BA4E.mail.protection.outlook.com (10.167.242.71) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7918.13 via Frontend Transport; Fri, 6 Sep 2024 07:08:46 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 6 Sep
- 2024 02:08:45 -0500
-Received: from xhdkummari40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Fri, 6 Sep 2024 02:08:43 -0500
-From: Prasad Kummari <prasad.kummari@amd.com>
-To: <u-boot@lists.denx.de>, <git@amd.com>
-CC: <michal.simek@amd.com>, <venkatesh.abbarapu@amd.com>,
- <padmarao.begari@amd.com>, <git@xilinx.com>, <jagan@amarulasolutions.com>,
- <n-francis@ti.com>, <d-gole@ti.com>, Prasad Kummari <prasad.kummari@amd.com>
-Subject: [PATCH v2 2/2] arm64: zynqmp: Remove overlays and add new dtb entries
- for ZynqMP
-Date: Fri, 6 Sep 2024 12:38:08 +0530
-Message-ID: <20240906070808.1045991-3-prasad.kummari@amd.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240906070808.1045991-1-prasad.kummari@amd.com>
-References: <20240906070808.1045991-1-prasad.kummari@amd.com>
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-oo1-xc30.google.com with SMTP id
+ 006d021491bc7-5e174925b7bso1126427eaf.0
+ for <u-boot@lists.denx.de>; Fri, 06 Sep 2024 00:13:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1725606801; x=1726211601; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=/+0OLALJLCxN4T2g4Z6OhrpryI3dlPwPvjhUonMBu9o=;
+ b=ms0p+PpvE1hrZ2iLySrOddfDbaEo0zJIfMxncSiK3abHmo3DPLjNDNvMDIiTu3yuIG
+ VJRH4QhzUDx5XN8OmPl2o6zDoGO6bTxOeKHroHnbfLOEMZcO5xaHr8gvugrfkcTuKpgG
+ +Nf1HbETFkDyvpk7hAvHxGCanG96O/ZPEycjyVzPrFydFJNdsNsKK9Vqc3r4hPdL0Vk2
+ 9VAgdgPi4jLkbiofrLmLbJdmGqXGKUSRMAjhkmJCyLzgBhOM9H9wIFVVgB0pWs9tRfO8
+ PDu5XJr7XnZlnqVgCw90rRbGpY4QCBxDNxOeZcG/llpg6nhDuMNkCkzm9xDde2yjOwDy
+ 407w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725606801; x=1726211601;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/+0OLALJLCxN4T2g4Z6OhrpryI3dlPwPvjhUonMBu9o=;
+ b=KArY7H1YFwkhPsfbV6soK2BQZNrJ/Ob+Zpw+3cJZfByYNx0om+0ZYAWoWEEK9uHIl1
+ Rdce3qKiOydX/8u03mCn4GW8gLAjoe/nOzO2sgQsHZkDF9LvsdgsM0kDGihdJ2Dk/8zF
+ 6DgUK7i6Tb9IZdclcbOP3/ZqMHerQ6dzsgGK4VU+nhWSnhNkRlDv/nLejST505uxlAKU
+ MLyYyHG2CGP7T1MCDNht7k8Q3tlj+dEsxRIuEJtH24Ykd7rAV6tzWrIjnqhjSv3i1yr1
+ 2xcNcPSDpk0rU+bttwmhzbsV/OXa9GXxkpPXrPtrDxjrp0KNCE2RBB1VWH+iVKIlk0LO
+ 8L+g==
+X-Gm-Message-State: AOJu0YxUAREjLPNFKdCppLXZrTTCKjat3SI72xehSNwN/ScoJzr2rjYP
+ GeVut3HJJgmL3H0QdtR2S2x0mgt+IC/7uxP1L1ni4PDpk0RFUK2RYhQoCurw/cQ32PW7ixTUPN+
+ aloKWSQKppzwDTLcM6DKgHRacZdDi6AyJkYVIjA==
+X-Google-Smtp-Source: AGHT+IEbYaUsevnFWRHJxFkuXq7KB4026zXioJws3LIf/2pHPl1I0+HiwNafjh0Fz1Lg+A5KKXozc3b5Qx0vkC0/qyE=
+X-Received: by 2002:a05:6870:414e:b0:270:2057:3373 with SMTP id
+ 586e51a60fabf-27b82e09653mr1945113fac.18.1725606801033; Fri, 06 Sep 2024
+ 00:13:21 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: prasad.kummari@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF0002BA4E:EE_|PH7PR12MB6934:EE_
-X-MS-Office365-Filtering-Correlation-Id: 14529894-a8e7-484c-ca46-08dcce42c05c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|1800799024|376014|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?mpgMZkgH0M8RzERt9BN0AHOyP61/PjrGSZVoJN6Y1OW/pq01xg7Ws2Nxot4M?=
- =?us-ascii?Q?PvZYrVprfwZe4jGMnixvOq2O0zuLQc3KFtHomkRiwdqBA2IEgbD4W18o1h7N?=
- =?us-ascii?Q?BJPBUaz1yuMgnaMuFNgIv2ozWIDL1eukQ/vGs9M+2tsvIlfegHWBz7l9zt9k?=
- =?us-ascii?Q?xNHuIYsDr9z7BKtkeNRbPzQ5DJgQmG+Kx9aarP/2H/qa7OfbWKn84r4DP1rE?=
- =?us-ascii?Q?YY4KHOHMC0wuCOYhHyhcNXEgbCLeFXob2yq4JNy9FKeiNF1bnSiaf97mdAre?=
- =?us-ascii?Q?wJs5zkjmH6m2iMzqPpObntr/ypQ8Bqq/27zQHCagqSt5TXaLm8PxXgySAnxo?=
- =?us-ascii?Q?WmlTtXYAI4gM0KVdHETpCxW9ITR1z3rUYTREW1bbNuCE5SLC0CIbSm4O0Mxk?=
- =?us-ascii?Q?SasDU0p8XWi1DLTCOgyejRs94H/eY2hufnA9JvrbKhGIazcQXashdmPkUhYv?=
- =?us-ascii?Q?E3oCdmGsG0XQqVcTc5bVcl/Tu5Vjs/BKUclse7iSKAJ5IOA3JwSxT5YeaUa9?=
- =?us-ascii?Q?0M1hP8+0ZEXZuZOKCGI1fzP5XswGMBDzNx0dI5DEUpFwgfMiQxfjAeI8+v7Y?=
- =?us-ascii?Q?/LwE4ofumF4+TAPwwQ+Se6nEBWXJnQw1HWb3AfFsdODTZ3v/7ta4/YhE2P2H?=
- =?us-ascii?Q?MBN0x8SPGN3Ox9gxwZgC/H9a5QBd6iFWXjwHpDxu4xzMBVBfC7mpSZZW74wK?=
- =?us-ascii?Q?b7EvkiMLGjWSyF4sLkMA6mbnW4CjkivbHA/TE9OZo7rvHnSdqh5fw3xx2F8y?=
- =?us-ascii?Q?9s1J8PrD+Hqq34LVyQAKDzdwiROwP6wbz40KOYhyvBDCtc4MJRaBfybQOUCp?=
- =?us-ascii?Q?JuTWFfqTJcPlqSZmkhxwIM0KUb2Dlj22ndDN+PdYt/PvJQuJgojioI/PmAMC?=
- =?us-ascii?Q?hSS8qvv7DdTb31YZ39UTaBjR4pFdTFfQjYULLxYC7tUbsD7rN4q7eOEUaRVl?=
- =?us-ascii?Q?82r1q4O6WvWnenC4f0f9RlCqGjWFOgD3g/QZOcBVJnv+KuRZFz7Z4MAPJ20m?=
- =?us-ascii?Q?Gfp83K9OASg46E0AQFKkARPVpn6BR4ZTkn2sU4VWqmkPU03OMNU7rHEPGlYF?=
- =?us-ascii?Q?7X7NkV9C1+hzITha8VLe/qd5OAA9yOGayguSc1rDo4MpgJyFnpl4I5PAdJ/g?=
- =?us-ascii?Q?9bTKqfIuuwIpNKQL4V7a9p7JV+q5GmD9WuPemANWN8Ps/fNX2JChzp7ZULXr?=
- =?us-ascii?Q?x2LLIsr9fm+5OHVSm62kICQXGHhNMRe3k/vHs4n64brMwgTBHotia8Az0AMp?=
- =?us-ascii?Q?ZNUzIWhhkhV+uTz8dv8vZ6nC12/oPTFGt2gHXvlCcDC4lWB7xVMp1QsNzloM?=
- =?us-ascii?Q?kL+Im8aEqGiWWfDgs4fydYWNVk+Bb6i4qoKRWYRRiJW7pbCngbZdbmHKYeTA?=
- =?us-ascii?Q?Z4dPXBU3D0SJ5Pmw0PQOBzlJOTDWyMOh/NCU0wHD+MSqPLSr60jpBlG5b7ZK?=
- =?us-ascii?Q?bSeBznjRlnhNDCIlke1bm4ckl9WD0Hyb?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Sep 2024 07:08:46.9456 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 14529894-a8e7-484c-ca46-08dcce42c05c
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002BA4E.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6934
+References: <20240901222259.456932-1-sjg@chromium.org>
+ <20240901222259.456932-3-sjg@chromium.org>
+In-Reply-To: <20240901222259.456932-3-sjg@chromium.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 6 Sep 2024 10:12:44 +0300
+Message-ID: <CAC_iWjLwbeU2vO5-BdYz8gbpTH4Zq=7W_JeUVVURCnMtPg8DWg@mail.gmail.com>
+Subject: Re: [PATCH v3 2/3] efi: Allow use of malloc() for the EFI pool
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, Eugene Uriev <eugeneuriev@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Richard Weinberger <richard@nod.at>, Sean Anderson <seanga2@gmail.com>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,73 +93,233 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove device tree overlay (DTBO) entries for the ZynqMP target
-from the Makefile. Add new device tree binaries (DTBs) for the
-zynqmp-sm-k24-revA and zynqmp-smk-k24-revA configurations.
+Hi Simon,
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
-Signed-off-by: Prasad Kummari <prasad.kummari@amd.com>
----
- arch/arm/dts/Makefile | 21 ++++-----------------
- 1 file changed, 4 insertions(+), 17 deletions(-)
+Apologies for the late reply, I was attending a conference.
 
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index c82fbeb1e1..9ed0c2487d 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -262,11 +262,6 @@ dtb-$(CONFIG_ARCH_ZYNQMP) += \
- 	zynqmp-m-a2197-02-revA.dtb		\
- 	zynqmp-m-a2197-03-revA.dtb		\
- 	zynqmp-p-a2197-00-revA.dtb		\
--	zynqmp-p-a2197-00-revA-x-prc-01-revA.dtbo	\
--	zynqmp-p-a2197-00-revA-x-prc-02-revA.dtbo	\
--	zynqmp-p-a2197-00-revA-x-prc-03-revA.dtbo	\
--	zynqmp-p-a2197-00-revA-x-prc-04-revA.dtbo	\
--	zynqmp-p-a2197-00-revA-x-prc-05-revA.dtbo	\
- 	zynqmp-mini.dtb				\
- 	zynqmp-mini-emmc0.dtb			\
- 	zynqmp-mini-emmc1.dtb			\
-@@ -281,22 +276,10 @@ dtb-$(CONFIG_ARCH_ZYNQMP) += \
- 	zynqmp-mini-qspi-x2-stacked.dtb		\
- 	zynqmp-sc-revB.dtb			\
- 	zynqmp-sc-revC.dtb			\
--	zynqmp-sc-vek280-revA.dtbo		\
--	zynqmp-sc-vek280-revB.dtbo		\
--	zynqmp-sc-vhk158-revA.dtbo		\
--	zynqmp-sc-vpk120-revB.dtbo		\
--	zynqmp-sc-vpk180-revA.dtbo		\
--	zynqmp-sc-vpk180-revB.dtbo		\
--	zynqmp-sc-vn-p-b2197-00-revA.dtbo	\
- 	zynqmp-sm-k24-revA.dtb			\
- 	zynqmp-smk-k24-revA.dtb			\
- 	zynqmp-sm-k26-revA.dtb			\
- 	zynqmp-smk-k26-revA.dtb			\
--	zynqmp-sck-kd-g-revA.dtbo		\
--	zynqmp-sck-kr-g-revA.dtbo		\
--	zynqmp-sck-kr-g-revB.dtbo		\
--	zynqmp-sck-kv-g-revA.dtbo		\
--	zynqmp-sck-kv-g-revB.dtbo		\
- 	zynqmp-topic-miamimp-xilinx-xdp-v1r1.dtb	\
- 	zynqmp-vpk120-revA.dtb			\
- 	zynqmp-vp-x-a2785-00-revA.dtb		\
-@@ -367,6 +350,8 @@ zynqmp-sm-k24-revA-sck-kd-g-revA-dtbs := zynqmp-sm-k24-revA.dtb zynqmp-sck-kd-g-
- zynqmp-smk-k24-revA-sck-kd-g-revA-dtbs := zynqmp-smk-k24-revA.dtb zynqmp-sck-kd-g-revA.dtbo
- zynqmp-sm-k24-revA-sck-kv-g-revB-dtbs := zynqmp-sm-k24-revA.dtb zynqmp-sck-kv-g-revB.dtbo
- zynqmp-smk-k24-revA-sck-kv-g-revB-dtbs := zynqmp-smk-k24-revA.dtb zynqmp-sck-kv-g-revB.dtbo
-+zynqmp-sm-k24-revA-sck-kr-g-revB-dtbs := zynqmp-sm-k24-revA.dtb zynqmp-sck-kr-g-revB.dtbo
-+zynqmp-smk-k24-revA-sck-kr-g-revB-dtbs := zynqmp-smk-k24-revA.dtb zynqmp-sck-kr-g-revB.dtbo
- 
- dtb-$(CONFIG_ARCH_ZYNQMP) += zynqmp-sm-k26-revA-sck-kv-g-revA.dtb
- dtb-$(CONFIG_ARCH_ZYNQMP) += zynqmp-sm-k26-revA-sck-kv-g-revB.dtb
-@@ -380,6 +365,8 @@ dtb-$(CONFIG_ARCH_ZYNQMP) += zynqmp-sm-k24-revA-sck-kd-g-revA.dtb
- dtb-$(CONFIG_ARCH_ZYNQMP) += zynqmp-smk-k24-revA-sck-kd-g-revA.dtb
- dtb-$(CONFIG_ARCH_ZYNQMP) += zynqmp-sm-k24-revA-sck-kv-g-revB.dtb
- dtb-$(CONFIG_ARCH_ZYNQMP) += zynqmp-smk-k24-revA-sck-kv-g-revB.dtb
-+dtb-$(CONFIG_ARCH_ZYNQMP) += zynqmp-sm-k24-revA-sck-kr-g-revB.dtb
-+dtb-$(CONFIG_ARCH_ZYNQMP) += zynqmp-smk-k24-revA-sck-kr-g-revB.dtb
- 
- dtb-$(CONFIG_ARCH_VERSAL) += \
- 	versal-mini.dtb \
--- 
-2.25.1
+On Mon, 2 Sept 2024 at 01:23, Simon Glass <sjg@chromium.org> wrote:
+>
+> This API call is intended for allocating small amounts of memory,
+> similar to malloc(). The current implementation rounds up to whole pages
+> which can waste large amounts of memory. It also implements its own
+> malloc()-style header on each block.
+>
+> For certain allocations (those of type EFI_BOOT_SERVICES_DATA) we can
+> use U-Boot's built-in malloc() instead, at least until the app starts.
+> This avoids poluting the memory space with blocks of data which may
+> interfere with boot scripts, etc.
+>
+> Once the app has started, there is no advantage to using malloc(), since
+> it doesn't matter what memory is used: everything is under control of
+> the EFI subsystem. Also, using malloc() after the app starts might
+> result in running of memory, since U-Boot's malloc() space is typically
+> quite small.
+>
+> In fact, malloc() is already used for most EFI-related allocations, so
+> the impact of this change is fairly small.
+>
+> One side effect is that this seems to be showing up some bugs in the
+> EFI code, since the malloc() pool becomes corrupted with some tests.
+> This has likely crept in due to the very large gaps between allocations
+> (around 4KB), which provides a lot of leeway when the allocation size is
+> too small. Work around this by increasing the size for now, until these
+> (presumed) bugs are located.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+> (no changes since v1)
+>
+>  common/dlmalloc.c            |   7 +++
+>  include/efi_loader.h         |  18 ++++++
+>  include/malloc.h             |   7 +++
+>  lib/efi_loader/efi_bootbin.c |   2 +
+>  lib/efi_loader/efi_memory.c  | 110 ++++++++++++++++++++++++++---------
+>  5 files changed, 117 insertions(+), 27 deletions(-)
+>
+> diff --git a/common/dlmalloc.c b/common/dlmalloc.c
+> index 1ac7ce3f43c..48e9f3515f7 100644
+> --- a/common/dlmalloc.c
+> +++ b/common/dlmalloc.c
+> @@ -613,6 +613,13 @@ void mem_malloc_init(ulong start, ulong size)
+>  #endif
+>  }
+>
+> +bool malloc_check_in_range(void *ptr)
+> +{
+> +       ulong val = (ulong)ptr;
+> +
+> +       return val >= mem_malloc_start && val < mem_malloc_end;
+> +}
+> +
+>  /* field-extraction macros */
+>
+>  #define first(b) ((b)->fd)
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index 38971d01442..d07bc06bad4 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -805,6 +805,24 @@ int efi_disk_probe(void *ctx, struct event *event);
+>  int efi_disk_remove(void *ctx, struct event *event);
+>  /* Called by board init to initialize the EFI memory map */
+>  int efi_memory_init(void);
+> +
+> +/**
+> + * enum efi_alloc_flags - controls EFI memory allocation
+> + *
+> + * @EFIAF_USE_MALLOC: Use malloc() pool for pool allocations of type
+> + *     EFI_BOOT_SERVICES_DATA, otherwise use page allocation
+> + */
+> +enum efi_alloc_flags {
+> +       EFIAF_USE_MALLOC        = BIT(0),
+> +};
 
+Why do we need to handle cases differently? IOW can't all EFI
+allocations that need a pool gi via malloc?
+
+[...]
+
+> @@ -24,6 +24,14 @@ DECLARE_GLOBAL_DATA_PTR;
+>  /* Magic number identifying memory allocated from pool */
+>  #define EFI_ALLOC_POOL_MAGIC 0x1fe67ddf6491caa2
+>
+> +/* Flags controlling EFI memory-allocation - see enum efi_alloc_flags */
+> +static int alloc_flags;
+> +
+> +void efi_set_alloc(int flags)
+> +{
+> +       alloc_flags = flags;
+> +}
+> +
+>  efi_uintn_t efi_memory_map_key;
+>
+>  struct efi_mem_list {
+> @@ -57,8 +65,12 @@ void *efi_bounce_buffer;
+>   * The checksum calculated in function checksum() is used in FreePool() to avoid
+>   * freeing memory not allocated by AllocatePool() and duplicate freeing.
+>   *
+> - * EFI requires 8 byte alignment for pool allocations, so we can
+> - * prepend each allocation with these header fields.
+> + * EFI requires 8-byte alignment for pool allocations, so we can prepend each
+> + * allocation with these header fields.
+> + *
+> + * Note that before the EFI app is booted, EFI_BOOT_SERVICES_DATA allocations
+> + * are served using malloc(), bypassing this struct. This helps to avoid memory
+> + * fragmentation, since efi_allocate_pages() uses any pages it likes.
+>   */
+>  struct efi_pool_allocation {
+>         u64 num_pages;
+> @@ -631,18 +643,19 @@ void *efi_alloc_aligned_pages(u64 len, int memory_type, size_t align)
+>  /**
+>   * efi_allocate_pool - allocate memory from pool
+>   *
+> + * This uses malloc() for EFI_BOOT_SERVICES_DATA allocations if EFIAF_USE_MALLOC
+> + * is enabled
+> + *
+>   * @pool_type: type of the pool from which memory is to be allocated
+>   * @size:      number of bytes to be allocated
+>   * @buffer:    allocated memory
+>   * Return:     status code
+>   */
+> -efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size, void **buffer)
+> +efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size,
+> +                              void **buffer)
+>  {
+>         efi_status_t r;
+>         u64 addr;
+> -       struct efi_pool_allocation *alloc;
+> -       u64 num_pages = efi_size_in_pages(size +
+> -                                         sizeof(struct efi_pool_allocation));
+>
+>         if (!buffer)
+>                 return EFI_INVALID_PARAMETER;
+> @@ -652,13 +665,43 @@ efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size,
+>                 return EFI_SUCCESS;
+>         }
+>
+> -       r = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, pool_type, num_pages,
+> -                              &addr);
+> -       if (r == EFI_SUCCESS) {
+> -               alloc = (struct efi_pool_allocation *)(uintptr_t)addr;
+> -               alloc->num_pages = num_pages;
+> -               alloc->checksum = checksum(alloc);
+> -               *buffer = alloc->data;
+> +       if ((alloc_flags & EFIAF_USE_MALLOC) &&
+> +           pool_type == EFI_BOOT_SERVICES_DATA) {
+> +               void *ptr;
+> +
+> +               /*
+> +                * Some tests crash on qemu_arm etc. if the correct size is
+> +                * allocated.
+> +                * Adding 0x10 seems to fix test_efi_selftest_device_tree
+> +                * Increasing it to 0x20 seems to fix test_efi_selftest_base
+> +                * except * for riscv64 (in CI only). But 0x100 fixes CI too.
+> +                *
+> +                * This workaround can be dropped once these problems are
+> +                * resolved
+> +                */
+> +               ptr = memalign(8, size + 0x100);
+
+I don't think the explanation is enough here. On top of that adding
+random values to fix the problem doesn't sound right. Can we figure
+out why?
+
+> +               if (!ptr)
+> +                       return EFI_OUT_OF_RESOURCES;
+> +
+> +               *buffer = ptr;
+> +               r = EFI_SUCCESS;
+> +               log_debug("EFI pool: malloc(%zx) = %p\n", size, ptr);
+
+So as I commented above, I think this is papering over whatever
+problem you are seeing. If you want to move the pool to use malloc()
+that's fine, but *all* of the pool allocations should use it. Not just
+boot services because its easier to retrofit it on the current code.
+
+> +       } else {
+> +               u64 num_pages = efi_size_in_pages(size +
+> +                                       sizeof(struct efi_pool_allocation));
+> +
+> +               r = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, pool_type,
+> +                                      num_pages, &addr);
+> +               if (r == EFI_SUCCESS) {
+> +                       struct efi_pool_allocation *alloc;
+> +
+> +                       alloc = (struct efi_pool_allocation *)(uintptr_t)addr;
+> +                       alloc->num_pages = num_pages;
+> +                       alloc->checksum = checksum(alloc);
+> +                       *buffer = alloc->data;
+> +                       log_debug("EFI pool: pages alloc(%zx) type %d = %p\n",
+> +                                 size, pool_type, *buffer);
+> +               }
+>         }
+>
+>         return r;
+> @@ -686,27 +729,37 @@ void *efi_alloc(size_t size)
+>  efi_status_t efi_free_pool(void *buffer)
+>  {
+>         efi_status_t ret;
+> -       struct efi_pool_allocation *alloc;
+>
+>         if (!buffer)
+>                 return EFI_INVALID_PARAMETER;
+>
+> -       ret = efi_check_allocated((uintptr_t)buffer, true);
+> -       if (ret != EFI_SUCCESS)
+> -               return ret;
+> +       if (malloc_check_in_range(buffer)) {
+> +               log_debug("EFI pool: free(%p)\n", buffer);
+> +               free(buffer);
+> +               ret = EFI_SUCCESS;
+> +       } else {
+> +               struct efi_pool_allocation *alloc;
+>
+> -       alloc = container_of(buffer, struct efi_pool_allocation, data);
+> +               ret = efi_check_allocated((uintptr_t)buffer, true);
+> +               if (ret != EFI_SUCCESS)
+> +                       return ret;
+>
+[...]
+
+Thanks
+/Ilias
