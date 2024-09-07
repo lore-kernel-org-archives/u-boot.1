@@ -4,71 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3867EB64CC
-	for <u-boot@archiver.kernel.org>; Sat,  7 Sep 2024 16:02:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 281BAEB64CA
+	for <u-boot@archiver.kernel.org>; Sat,  7 Sep 2024 16:02:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2001F88846;
-	Sat,  7 Sep 2024 18:02:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8085C88AD8;
+	Sat,  7 Sep 2024 18:02:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PV0DPBqb";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NvJYMQtJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C3AA885F4; Sat,  7 Sep 2024 18:02:04 +0200 (CEST)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
+ id 4373F88B3F; Sat,  7 Sep 2024 18:02:41 +0200 (CEST)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6433788846
- for <u-boot@lists.denx.de>; Sat,  7 Sep 2024 18:02:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5390488AD7
+ for <u-boot@lists.denx.de>; Sat,  7 Sep 2024 18:02:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-53655b9bbcdso2671291e87.2
- for <u-boot@lists.denx.de>; Sat, 07 Sep 2024 09:02:02 -0700 (PDT)
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-536584f6c84so2293729e87.0
+ for <u-boot@lists.denx.de>; Sat, 07 Sep 2024 09:02:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1725724922; x=1726329722; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1725724959; x=1726329759; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bDWSkOuUqGLn5Mr+SyHXTu4/dxdTizUqpbAqFMheuRg=;
- b=PV0DPBqbX9W6Njc3VM1XM/kHIPN3J3t26pLO4YS2cSjSv19a8V665wj5sUzY/zQy0o
- UmxsatMm+UxZkcbnuYFdoYIQIF+Hr86fEKAnbwb4cOFKYHYEdfLb+HRTZOBfZj3SSpd7
- tOE2h2hF/k03g3mOTBXPAfjS2p+3D+fx0lFfFtdvTJbH3bBMe82S1kTSiwtFHEIg6Xjx
- W4TbyIe6SmobpNDn73JYgcrGWq2FTeChNL7cYRo3hZIfRima8gG7R38QM5tFw1E9uiq1
- CmR44tC1DpD0tvEMTbXjf3l7vWz6XuSOywh/dHLrce4RiWEoceWX7bufsJfUtM+ufeki
- pkVA==
+ bh=lcqWeRAvY0MmB1ZarKRB3nSM3lJuSckRoU8Wd24AXL4=;
+ b=NvJYMQtJ8/KThaOcl6lWYb1uIrV/TjgOET09SwnPZd+98nRWX20rJdbqsQwux4L29I
+ tD4AQvuW29VJvGNTNNO+fYClzey80y91f3g8LJY2GIPydxXdoe8UCpVOSKy0Vr7cWUzV
+ lNmaRqdPIaXtE/VNGwdHl2dRrKUZwaPqPQL7SI+HCnBFKdMWbhKRssgBlfYucydh/pVk
+ qtblm9EK4BT8uEZLIQTOoU8gcw1ZiPLitRoUKDj63x5H9jkdLx6FpKe9ATWDh5ytEbu5
+ lR4yftB3UiRQvUlsiFbtL1tD2veYZ6EpmhjxW+1o4CAU6MM5aXZS3fUOPNDd181pyZaI
+ mkXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725724922; x=1726329722;
+ d=1e100.net; s=20230601; t=1725724959; x=1726329759;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bDWSkOuUqGLn5Mr+SyHXTu4/dxdTizUqpbAqFMheuRg=;
- b=Bvu2ufGlqiQyeVT1eNH2pPd2ipuJU5ZDjmmcpx6bTcVLuXMGlX3DHfnvm8Kc+SBxLy
- gnZ8YBEBKv4So4mivjCu7yUyhvDuOs7uDz5BkEgdIzrVl/RvA2mfCs7Ue3Eo076MFE0s
- 55Yf6PtG3XLuHHinuME7g0appYdViJwLkuPO8fvSjFNFvdDKEKFRC2DOqhjeBEe6s0lH
- vGdjv/XH6gkNWHF2+sqWlfaL7u/VDuzwFw0j/2GgJuFZc3XLp2UCkhlgy6BYrPjJCKlv
- jhD9lXfjIr66ereZFhdf1l8bPL/2SKep1IP9i4xSef+ZQIQDYt7hrZWlyYP8b7FqvUHt
- NtLw==
-X-Gm-Message-State: AOJu0YyfxYYCgi3Cphi374GTk8s85KaFepL7He2HgLllKpx/snRLn44R
- PEJda5s2qRzHSZmNF/tUCEgOmPhR49Yv76WGUosI62Urqapu8KPlz28HDCd002on+n5+g1AgQ5y
- FZJKocAed2g5Mei/IU94qAUvz0ULTiA==
-X-Google-Smtp-Source: AGHT+IE0H7VVDZVnday3M/0n6snUHakeBnyWBH/vvP292ZQEJO9IbBI44MQeWIEVXEYOuuT+Mm+kCzpvslY4oJVUSfA=
-X-Received: by 2002:a05:6512:3b0a:b0:536:14a1:d660 with SMTP id
- 2adb3069b0e04-536587a54b0mr3446486e87.6.1725724921145; Sat, 07 Sep 2024
- 09:02:01 -0700 (PDT)
+ bh=lcqWeRAvY0MmB1ZarKRB3nSM3lJuSckRoU8Wd24AXL4=;
+ b=dhQUcK07ZDkY9KWMTxQSktwKaMuq/sfEfoQYykMZkA29VqZW5jjakysd6BhOfvgtWu
+ W82LY9XoMTkPtfYmqnEXNjb2X+qckXCn2bfETz+OBw9exTidFKVIGhSG0Tkt4ZDhk033
+ bBAOYo2m91cV9iyHlTfwus5GBsZmDBwNY8NpVGhrLJ93usYTe0VYRetuWE9R3H9NZqO7
+ E/FW5xsjzh4YOy0LjRPkowLMn5rX1yxTgTGozd07HYGtjYsypHICHwTyKPuF+X7NoppI
+ jh2njJjrFNObAT6K7DQcr4Uf0XFLp2ZEU6xTXWSDMENKqB383UfOLCqTfaouod51rk5a
+ z1ig==
+X-Gm-Message-State: AOJu0YyKWpmFr1EMuTAvHDXFZJ9gOZ2zW8tAj9BDSmux3r1QCAyXdWYz
+ J4adeyS199rnzCaFmecb0kiknVltTGS+0xuEOm/M90Hmgmqoq7vCL75tcAuijhMu5zHFo2RYFKT
+ Fo3az/APx07LXOht9HWhytUqJV9I=
+X-Google-Smtp-Source: AGHT+IHU8evFdxyr7zHRVxbh9NmhszvAybKOHPd4U8tsZJClz2+M+1uQif3llzYIyUWU2TTrZ5hpe32Z3Ad+zzMMkK8=
+X-Received: by 2002:a05:6512:3987:b0:52f:244:206f with SMTP id
+ 2adb3069b0e04-53658809f15mr3598571e87.53.1725724958337; Sat, 07 Sep 2024
+ 09:02:38 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240905190826.538309-1-tharvey@gateworks.com>
-In-Reply-To: <20240905190826.538309-1-tharvey@gateworks.com>
+References: <20240905153517.24887-1-marex@denx.de>
+In-Reply-To: <20240905153517.24887-1-marex@denx.de>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 7 Sep 2024 13:01:49 -0300
-Message-ID: <CAOMZO5AVWRZxGqz-Ymm+O8yxduUsMeB4nrubsNLUoZ-1N==qww@mail.gmail.com>
-Subject: Re: [PATCH] configs: venice: enable DM_RNG
-To: Tim Harvey <tharvey@gateworks.com>
-Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>
+Date: Sat, 7 Sep 2024 13:02:27 -0300
+Message-ID: <CAOMZO5CAX0FKYZS5e9vbzfWcMmVr-SGe3SH7_DhR5=anTsD4yA@mail.gmail.com>
+Subject: Re: [PATCH v2] ARM: imx: Enable MMU and dcache very early on i.MX8M
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Peng Fan <peng.fan@nxp.com>, 
+ Stefano Babic <sbabic@denx.de>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -87,12 +89,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Sep 5, 2024 at 4:08=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> w=
-rote:
+On Thu, Sep 5, 2024 at 12:35=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
 >
-> Enable DM_RNG so that the kaslr-seed property is set in the dt allowing
-> Linux KASLR.
+> Enable MMU and caches very early on in the boot process on i.MX8M
+> in U-Boot proper. This allows board_init_f to run with icache and
+> dcache enabled, which saves some 700 milliseconds of boot time on
+> i.MX8M Plus based device.
 >
-> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+> The 'bootstage report' output is below:
+>
+> Before:
+> ```
+> Timer summary in microseconds (8 records):
+>        Mark    Elapsed  Stage
+>           0          0  reset
+>     961,363    961,363  board_init_f
+>   1,818,874    857,511  board_init_r
+>   1,921,474    102,600  eth_common_init
+>   2,013,702     92,228  eth_initialize
+>   2,015,238      1,536  main_loop
+>
+> Accumulated time:
+>                 32,775  dm_r
+>                289,165  dm_f
+> ```
+>
+> After:
+> ```
+> Timer summary in microseconds (8 records):
+>        Mark    Elapsed  Stage
+>           0          0  reset
+>     989,466    989,466  board_init_f
+>   1,179,100    189,634  board_init_r
+>   1,281,456    102,356  eth_common_init
+>   1,373,857     92,401  eth_initialize
+>   1,375,396      1,539  main_loop
+>
+> Accumulated time:
+>                 12,630  dm_f
+>                 32,635  dm_r
+> ```
+>
+> Signed-off-by: Marek Vasut <marex@denx.de>
+> ---
+> Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+> Cc: Fabio Estevam <festevam@gmail.com>
+> Cc: Peng Fan <peng.fan@nxp.com>
+> Cc: Stefano Babic <sbabic@denx.de>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> ---
+> V2: Include linux/sizes.h to fix build error due to SZ_64K undefined
 
 Reviewed-by: Fabio Estevam <festevam@gmail.com>
