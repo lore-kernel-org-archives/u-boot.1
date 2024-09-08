@@ -4,67 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 395BFCD4F4C
-	for <u-boot@archiver.kernel.org>; Mon,  9 Sep 2024 04:38:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12909CE7AB0
+	for <u-boot@archiver.kernel.org>; Mon,  9 Sep 2024 04:38:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 420AE88C31;
+	by phobos.denx.de (Postfix) with ESMTP id BD2D688C4D;
 	Mon,  9 Sep 2024 06:38:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dIj5nR7I";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="J5EUMTVy";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="W2A/RoiI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB13388875; Sun,  8 Sep 2024 19:00:09 +0200 (CEST)
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1C3CE88B39; Mon,  9 Sep 2024 01:07:28 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C02658880F
- for <u-boot@lists.denx.de>; Sun,  8 Sep 2024 19:00:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E5075888F0
+ for <u-boot@lists.denx.de>; Mon,  9 Sep 2024 01:07:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=vincent.legoll@gmail.com
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-2d88c0f8e79so2801500a91.3
- for <u-boot@lists.denx.de>; Sun, 08 Sep 2024 10:00:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1725814804; x=1726419604; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=cbsWT2U6ipptpEp2w7W29FPIb/QLcpI3Lj8eCNRfYKw=;
- b=dIj5nR7IKZ51Zyb1dF99fja85Vm7gBLHfGs7BD3zeETnjfUGPK3h/aG1XKn7/3BHYM
- RgBa4QmTCvHopbmspXKhOufVG3E+g8BvrLpQV8x3Gf8wXfhoxTKg2uupW7VltqQpiUnQ
- M5N9fhm320zrZz5MDGuXflAZTjYLoOcTcgk85EM+navBzqvD66HUfmfzJFqSQCR+wLAB
- vbBz7Wpx8vp+Cmpqy52LAv1riwayg0qKV4bDusHC7aZvulTp/nq4cx655gN2sYdSac++
- WtzivIqrsSmq9uZyL+rXpYNRX67x4ozmP3/sCsaAjWLPdWoJ5dXHdAZD6zWuBWd82e9S
- HBOA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725814804; x=1726419604;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=cbsWT2U6ipptpEp2w7W29FPIb/QLcpI3Lj8eCNRfYKw=;
- b=jax45ype2phuedOiKtN53CpIfS9Ooqgx5wNemxnvxEnZFk5Z2Say5lU4gJsKn5w5Hv
- p4Gg6Vdm/RBSVQOVO+15f6oVRjnaUBf9UHiZf2MmYq8DV/OZcoF7VMEl7rXSPv6aCYRj
- 33Q6dySiwTQoXXqMT+HwOQOTsabZaiCx9rgBmjBQ3SFrdjfSOLu0mGJ/SD0IAfkmmykz
- /LfWFq1xaRi6YU9QKser3SfxsMeCLJ8r5ZGwrSKs3vnfQNST4sm+DeZ7Yi6gPJv5GLb2
- XP5Kux1la/aB5IJ7aJ78x3q+XiVY2kYfOYjaULNpzp6UWxERCeJo2myftmomA3LPrXGL
- Ef/Q==
-X-Gm-Message-State: AOJu0YyLQDvOo46neNcbCzaWbsH21ylnY+Qh+FZCPkhiNiVUQPU879hV
- DOA0LebUJeV3VBI92uchYbfm0ZzHXKUqZ6jxfyR3jPMdDLmHVelhqxWzILP4osgGVv33LDTqwEu
- t1dA3pILm0dGCfMHkaAxkhKEX57W6oEaf
-X-Google-Smtp-Source: AGHT+IHZWdt0m4Ld0yecXqeogcsNI7fIQpdQRgSrMELvQwpE2aZjkz9YvSprcuVs2bSORog28juX25jNCLcB03rxQJc=
-X-Received: by 2002:a17:90b:1b42:b0:2d8:ca33:42a5 with SMTP id
- 98e67ed59e1d1-2dad50fc6c0mr9149347a91.40.1725814804211; Sun, 08 Sep 2024
- 10:00:04 -0700 (PDT)
-MIME-Version: 1.0
-From: Vincent Legoll <vincent.legoll@gmail.com>
-Date: Sun, 8 Sep 2024 16:59:51 +0000
-Message-ID: <CAEwRq=qZSs9va2ztMQ2t_kfqHFAiMydyUHY13U_-AfKdSuhL-w@mail.gmail.com>
-Subject: persistent environment
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4X25G142gqz9shm;
+ Mon,  9 Sep 2024 01:07:21 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1725836841;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=XQOtPgUMT6MHIzfgmxGXJkAFlss0viyT5/SjlvCr38c=;
+ b=J5EUMTVyHUdPLUjSmXnEGfbhVOU0bvi/cGY0B5IHTFmkvUJihvNvRcuPH+HP0X3jJ4cSGT
+ rSVMxamwm895bmevho69egsGz9YMAMjYUhko5PEkG0n/0nyJEX0HElwXbQ4hRF0zuv5NiX
+ W0ZwhxTYkAoLx7J7KNIejmgRo58/5bMFglwoOW42gf73yKq7Rr3eraJK5CSkDg5Y/24f2x
+ hJr+s5HQrUL5Y61MMY6ROerU9u4l0wpqlVqcNpXMps0rmlwifQ7+oc5dQx1SbWUOCxf5L6
+ 8djEvvm15ZImFLVjuggzG/RR9DMY9aNF97pUoAYmqz36PmdedsqKz+wvqoj4xw==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1725836839;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=XQOtPgUMT6MHIzfgmxGXJkAFlss0viyT5/SjlvCr38c=;
+ b=W2A/RoiI/3GM3oiOSwUGZ0jVT7KXrD8CZETaMyiOc0z4X+wxft986wlNiFT7dvYEmt/lD+
+ ge749VYyQx4hQUZdixOQ92wmIVd73HFrBTVCtyB6gfKFheNVwljrcPr3DSSRM06Fj41pa6
+ tqVhuI76H+7o2YRqtKpFo9J8FvtixFMe6b1G/vQHdy9iBeumabU4u5I5DvGzJRRl06J1Rz
+ l2QbqYY3vSmyiz0HeskdpeItpuiIotgVGPljgP4stryw5PYCJbzNdiMtogihUR03dK0ZG/
+ phSMDl7ekSmW+ncC0dSeIXMAxLhVmU8qlammzRUct1hqj1TUyLLsOqhBn3wK/w==
 To: u-boot@lists.denx.de
-Content-Type: multipart/mixed; boundary="0000000000005b18bf06219e92bc"
+Cc: Vitaliy Vasylskyy <vitaliy.vasylskyy@globallogic.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2] usb: gadget: usbhs: Add Renesas USBHS device driver
+Date: Mon,  9 Sep 2024 01:06:24 +0200
+Message-ID: <20240908230654.286062-1-marek.vasut+renesas@mailbox.org>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: oo8jwta4xr343f4dhkiyuukhuxihidm4
+X-MBO-RS-ID: 68bfb361b5b952185fc
+X-Rspamd-Queue-Id: 4X25G142gqz9shm
 X-Mailman-Approved-At: Mon, 09 Sep 2024 06:38:32 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,1243 +88,4879 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---0000000000005b18bf06219e92bc
-Content-Type: text/plain; charset="UTF-8"
+From: Vitaliy Vasylskyy <vitaliy.vasylskyy@globallogic.com>
 
-Hello,
+Add UDC driver for Renesas USBHS controller found in R-Car Gen3 SoCs.
+This is mostly ported from the Linux kernel, with additional porting
+glue. The code has been synchronized with 1b4861e32e46 ("Linux 6.9.3")
+and cleaned up and ported to DM since the original implementation by
+Vitaliy.
 
-I'm struggling to setup u-boot to be able to save the environment.
+Signed-off-by: Vitaliy Vasylskyy <vitaliy.vasylskyy@globallogic.com>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Note that the driver does have a few checkpatch warnings in it, those
+also partly come from Linux.
+---
+Cc: Jonas Karlman <jonas@kwiboo.se>
+Cc: Lukasz Majewski <lukma@denx.de>
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Vitaliy Vasylskyy <vitaliy.vasylskyy@globallogic.com>
+---
+V2: Drop CONFIG_USB_RENESAS_USBHS_UDC check
+---
+ drivers/usb/gadget/Kconfig            |    9 +
+ drivers/usb/gadget/Makefile           |    1 +
+ drivers/usb/gadget/rcar/Makefile      |    8 +
+ drivers/usb/gadget/rcar/common.c      |  478 +++++++++++
+ drivers/usb/gadget/rcar/common.h      |  328 +++++++
+ drivers/usb/gadget/rcar/fifo.c        | 1067 +++++++++++++++++++++++
+ drivers/usb/gadget/rcar/fifo.h        |  114 +++
+ drivers/usb/gadget/rcar/mod.c         |  345 ++++++++
+ drivers/usb/gadget/rcar/mod.h         |  161 ++++
+ drivers/usb/gadget/rcar/mod_gadget.c  | 1136 +++++++++++++++++++++++++
+ drivers/usb/gadget/rcar/pipe.c        |  849 ++++++++++++++++++
+ drivers/usb/gadget/rcar/pipe.h        |  114 +++
+ drivers/usb/gadget/rcar/renesas_usb.h |  125 +++
+ 13 files changed, 4735 insertions(+)
+ create mode 100644 drivers/usb/gadget/rcar/Makefile
+ create mode 100644 drivers/usb/gadget/rcar/common.c
+ create mode 100644 drivers/usb/gadget/rcar/common.h
+ create mode 100644 drivers/usb/gadget/rcar/fifo.c
+ create mode 100644 drivers/usb/gadget/rcar/fifo.h
+ create mode 100644 drivers/usb/gadget/rcar/mod.c
+ create mode 100644 drivers/usb/gadget/rcar/mod.h
+ create mode 100644 drivers/usb/gadget/rcar/mod_gadget.c
+ create mode 100644 drivers/usb/gadget/rcar/pipe.c
+ create mode 100644 drivers/usb/gadget/rcar/pipe.h
+ create mode 100644 drivers/usb/gadget/rcar/renesas_usb.h
 
-The board is Pine64 QuartzPro64.
-
-ATF is collabora's:
-https://gitlab.collabora.com/hardware-enablement/rockchip-3588/trusted-firmware-a.git
-collabora-enablement-tfa/master
-44418fce30938ee483fbfc79cc32fde33753d1aa
-
-rkbin is
-https://github.com/rockchip-linux/rkbin.git
-master
-a2a0b89b6c8c612dca5ed9ed8a68db8a07f68bc0
-
-U-boot is:
-https://source.denx.de/u-boot/u-boot.git
-master
-1630ff26cc960439b5949b80cfc604a2c8aa47dd
-
-export BL31=../trusted-firmware-a/build/rk3588/release/bl31/bl31.elf
-export ROCKCHIP_TPL=../rkbin/bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2736MHz_eyescan_v1.11.bin
-make quartzpro64-rk3588_defconfig
-make CROSS_COMPILE=aarch64-linux-gnu-
-
-SD card is GPT partitionned:
-Device           Start     End Sectors  Size Type
-/dev/mmcblk1p1      64   16383   16320    8M Linux filesystem
-/dev/mmcblk1p2   16384   32767   16384    8M Linux filesystem
-/dev/mmcblk1p3   32768   65535   32768   16M Linux filesystem
-/dev/mmcblk1p4   65536 1114111 1048576  512M EFI System
-/dev/mmcblk1p5 1114112 8388607 7274496  3.5G Linux filesystem
-
-I put on:
-* mmcblk1p1: idbloader.img
-* mmcblk1p2: u-boot.itb
-
-environment should be on : mmcblk1p3
-
-I tried to use:
-CONFIG_ENV_IS_IN_MMC=y
-CONFIG_SYS_MMC_ENV_DEV=1
-CONFIG_SYS_MMC_ENV_PART=3
-CONFIG_ENV_SIZE=0x1f000
-CONFIG_ENV_OFFSET=0x3f8000
-
-I tried to add:
-* USE_ENV_MMC_PARTITION
-
-I tried to change ENV_OFFSET to 0x0
-
-I'm getting:
-
-Loading Environment from MMC... MMC partition switch failed
-*** Warning - MMC partition switch failed, using default environment
-[...]
-=> env info
-env_valid = valid
-env_ready = true
-env_use_default = true
-=> env erase
-Erasing Environment on MMC... MMC partition switch failed
-MMC partition switch failed
-Failed (1)
-=> env select MMC
-Select Environment on MMC: OK
-=> env select MMC 1:3
-Select Environment on MMC: OK
-=> env erase
-Erasing Environment on MMC... MMC partition switch failed
-MMC partition switch failed
-Failed (1)
-
-I've attached the config and a more complete serial console log.
-
-I'm probably doing something wrong, but I can't see it.
-
-I'd like some hints about how to get further.
-Thanks
-
+diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
+index 4621a6fd5e6..5fb73890c78 100644
+--- a/drivers/usb/gadget/Kconfig
++++ b/drivers/usb/gadget/Kconfig
+@@ -114,6 +114,15 @@ config USB_GADGET_DWC2_OTG
+ 	  driver to operate in Peripheral mode. This option requires
+ 	  USB_GADGET to be enabled.
+ 
++config USB_RENESAS_USBHS
++	bool "Renesas RCar USB2.0 HS controller (gadget mode)"
++	select USB_GADGET_DUALSPEED
++	help
++	  The Renesas Rcar USB 2.0 high-speed gadget controller
++	  integrated into Salvator and Kingfisher boards. Select this
++	  option if you want the driver to operate in Peripheral mode.
++	  This option requires USB_GADGET to be enabled.
++
+ if USB_GADGET_DWC2_OTG
+ 
+ config USB_GADGET_DWC2_OTG_PHY
+diff --git a/drivers/usb/gadget/Makefile b/drivers/usb/gadget/Makefile
+index 6abcce0d9c7..da76b6524de 100644
+--- a/drivers/usb/gadget/Makefile
++++ b/drivers/usb/gadget/Makefile
+@@ -21,6 +21,7 @@ obj-$(CONFIG_USB_GADGET_BCM_UDC_OTG_PHY) += bcm_udc_otg_phy.o
+ obj-$(CONFIG_USB_GADGET_DWC2_OTG) += dwc2_udc_otg.o
+ obj-$(CONFIG_USB_GADGET_DWC2_OTG_PHY) += dwc2_udc_otg_phy.o
+ obj-$(CONFIG_USB_GADGET_MAX3420) += max3420_udc.o
++obj-$(CONFIG_USB_RENESAS_USBHS) += rcar/
+ ifndef CONFIG_SPL_BUILD
+ obj-$(CONFIG_USB_GADGET_DOWNLOAD) += g_dnl.o
+ obj-$(CONFIG_USB_FUNCTION_THOR) += f_thor.o
+diff --git a/drivers/usb/gadget/rcar/Makefile b/drivers/usb/gadget/rcar/Makefile
+new file mode 100644
+index 00000000000..676f39c8e24
+--- /dev/null
++++ b/drivers/usb/gadget/rcar/Makefile
+@@ -0,0 +1,8 @@
++# SPDX-License-Identifier: GPL-2.0
++
++obj-$(CONFIG_USB_RENESAS_USBHS) += \
++	common.o \
++	fifo.o \
++	mod.o \
++	mod_gadget.o \
++	pipe.o
+diff --git a/drivers/usb/gadget/rcar/common.c b/drivers/usb/gadget/rcar/common.c
+new file mode 100644
+index 00000000000..2ba022a3f2c
+--- /dev/null
++++ b/drivers/usb/gadget/rcar/common.c
+@@ -0,0 +1,478 @@
++// SPDX-License-Identifier: GPL-1.0+
++/*
++ * Renesas USB driver
++ *
++ * Copyright (C) 2011 Renesas Solutions Corp.
++ * Copyright (C) 2019 Renesas Electronics Corporation
++ * Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
++ */
++
++#include <asm/io.h>
++#include <clk.h>
++#include <dm.h>
++#include <errno.h>
++#include <generic-phy.h>
++#include <linux/err.h>
++#include <linux/usb/ch9.h>
++#include <linux/usb/gadget.h>
++#include <usb.h>
++
++#include "common.h"
++
++/*
++ *		image of renesas_usbhs
++ *
++ * ex) gadget case
++
++ * mod.c
++ * mod_gadget.c
++ * mod_host.c		pipe.c		fifo.c
++ *
++ *			+-------+	+-----------+
++ *			| pipe0 |------>| fifo pio  |
++ * +------------+	+-------+	+-----------+
++ * | mod_gadget |=====> | pipe1 |--+
++ * +------------+	+-------+  |	+-----------+
++ *			| pipe2 |  |  +-| fifo dma0 |
++ * +------------+	+-------+  |  |	+-----------+
++ * | mod_host   |	| pipe3 |<-|--+
++ * +------------+	+-------+  |	+-----------+
++ *			| ....  |  +--->| fifo dma1 |
++ *			| ....  |	+-----------+
++ */
++
++/*
++ *		common functions
++ */
++u16 usbhs_read(struct usbhs_priv *priv, u32 reg)
++{
++	return ioread16(priv->base + reg);
++}
++
++void usbhs_write(struct usbhs_priv *priv, u32 reg, u16 data)
++{
++	iowrite16(data, priv->base + reg);
++}
++
++void usbhs_bset(struct usbhs_priv *priv, u32 reg, u16 mask, u16 data)
++{
++	u16 val = usbhs_read(priv, reg);
++
++	val &= ~mask;
++	val |= data & mask;
++
++	usbhs_write(priv, reg, val);
++}
++
++/*
++ *		syscfg functions
++ */
++static void usbhs_sys_clock_ctrl(struct usbhs_priv *priv, int enable)
++{
++	usbhs_bset(priv, SYSCFG, SCKE, enable ? SCKE : 0);
++}
++
++void usbhs_sys_host_ctrl(struct usbhs_priv *priv, int enable)
++{
++	u16 mask = DCFM | DRPD | DPRPU | HSE | USBE;
++	u16 val  = DCFM | DRPD | HSE | USBE;
++
++	/*
++	 * if enable
++	 *
++	 * - select Host mode
++	 * - D+ Line/D- Line Pull-down
++	 */
++	usbhs_bset(priv, SYSCFG, mask, enable ? val : 0);
++}
++
++void usbhs_sys_function_ctrl(struct usbhs_priv *priv, int enable)
++{
++	u16 mask = DCFM | DRPD | DPRPU | HSE | USBE;
++	u16 val  = HSE | USBE;
++
++	/*
++	 * if enable
++	 *
++	 * - select Function mode
++	 * - D+ Line Pull-up is disabled
++	 *      When D+ Line Pull-up is enabled,
++	 *      calling usbhs_sys_function_pullup(,1)
++	 */
++	usbhs_bset(priv, SYSCFG, mask, enable ? val : 0);
++}
++
++void usbhs_sys_function_pullup(struct usbhs_priv *priv, int enable)
++{
++	usbhs_bset(priv, SYSCFG, DPRPU, enable ? DPRPU : 0);
++}
++
++void usbhs_sys_set_test_mode(struct usbhs_priv *priv, u16 mode)
++{
++	usbhs_write(priv, TESTMODE, mode);
++}
++
++/*
++ *		frame functions
++ */
++int usbhs_frame_get_num(struct usbhs_priv *priv)
++{
++	return usbhs_read(priv, FRMNUM) & FRNM_MASK;
++}
++
++/*
++ *		usb request functions
++ */
++void usbhs_usbreq_get_val(struct usbhs_priv *priv, struct usb_ctrlrequest *req)
++{
++	u16 val;
++
++	val = usbhs_read(priv, USBREQ);
++	req->bRequest		= (val >> 8) & 0xFF;
++	req->bRequestType	= (val >> 0) & 0xFF;
++
++	req->wValue	= cpu_to_le16(usbhs_read(priv, USBVAL));
++	req->wIndex	= cpu_to_le16(usbhs_read(priv, USBINDX));
++	req->wLength	= cpu_to_le16(usbhs_read(priv, USBLENG));
++}
++
++void usbhs_usbreq_set_val(struct usbhs_priv *priv, struct usb_ctrlrequest *req)
++{
++	usbhs_write(priv, USBREQ,  (req->bRequest << 8) | req->bRequestType);
++	usbhs_write(priv, USBVAL,  le16_to_cpu(req->wValue));
++	usbhs_write(priv, USBINDX, le16_to_cpu(req->wIndex));
++	usbhs_write(priv, USBLENG, le16_to_cpu(req->wLength));
++
++	usbhs_bset(priv, DCPCTR, SUREQ, SUREQ);
++}
++
++/*
++ *		bus/vbus functions
++ */
++void usbhs_bus_send_sof_enable(struct usbhs_priv *priv)
++{
++	u16 status = usbhs_read(priv, DVSTCTR) & (USBRST | UACT);
++
++	if (status != USBRST) {
++		struct device *dev = usbhs_priv_to_dev(priv);
++		dev_err(dev, "usbhs should be reset\n");
++	}
++
++	usbhs_bset(priv, DVSTCTR, (USBRST | UACT), UACT);
++}
++
++void usbhs_bus_send_reset(struct usbhs_priv *priv)
++{
++	usbhs_bset(priv, DVSTCTR, (USBRST | UACT), USBRST);
++}
++
++int usbhs_bus_get_speed(struct usbhs_priv *priv)
++{
++	u16 dvstctr = usbhs_read(priv, DVSTCTR);
++
++	switch (RHST & dvstctr) {
++	case RHST_LOW_SPEED:
++		return USB_SPEED_LOW;
++	case RHST_FULL_SPEED:
++		return USB_SPEED_FULL;
++	case RHST_HIGH_SPEED:
++		return USB_SPEED_HIGH;
++	}
++
++	return USB_SPEED_UNKNOWN;
++}
++
++static void usbhsc_bus_init(struct usbhs_priv *priv)
++{
++	usbhs_write(priv, DVSTCTR, 0);
++}
++
++/*
++ *		device configuration
++ */
++int usbhs_set_device_config(struct usbhs_priv *priv, int devnum,
++			   u16 upphub, u16 hubport, u16 speed)
++{
++	struct device *dev = usbhs_priv_to_dev(priv);
++	u16 usbspd = 0;
++	u32 reg = DEVADD0 + (2 * devnum);
++
++	if (devnum > 10) {
++		dev_err(dev, "cannot set speed to unknown device %d\n", devnum);
++		return -EIO;
++	}
++
++	if (upphub > 0xA) {
++		dev_err(dev, "unsupported hub number %d\n", upphub);
++		return -EIO;
++	}
++
++	switch (speed) {
++	case USB_SPEED_LOW:
++		usbspd = USBSPD_SPEED_LOW;
++		break;
++	case USB_SPEED_FULL:
++		usbspd = USBSPD_SPEED_FULL;
++		break;
++	case USB_SPEED_HIGH:
++		usbspd = USBSPD_SPEED_HIGH;
++		break;
++	default:
++		dev_err(dev, "unsupported speed %d\n", speed);
++		return -EIO;
++	}
++
++	usbhs_write(priv, reg,	UPPHUB(upphub)	|
++				HUBPORT(hubport)|
++				USBSPD(usbspd));
++
++	return 0;
++}
++
++/*
++ *		interrupt functions
++ */
++void usbhs_xxxsts_clear(struct usbhs_priv *priv, u16 sts_reg, u16 bit)
++{
++	u16 pipe_mask = (u16)GENMASK(usbhs_get_dparam(priv, pipe_size), 0);
++
++	usbhs_write(priv, sts_reg, ~(1 << bit) & pipe_mask);
++}
++
++/*
++ *		local functions
++ */
++static void usbhsc_set_buswait(struct usbhs_priv *priv)
++{
++	int wait = usbhs_get_dparam(priv, buswait_bwait);
++
++	/* set bus wait if platform have */
++	if (wait)
++		usbhs_bset(priv, BUSWAIT, 0x000F, wait);
++}
++
++/*
++ *		platform default param
++ */
++
++/* commonly used on newer SH-Mobile and R-Car SoCs */
++static struct renesas_usbhs_driver_pipe_config usbhsc_new_pipe[] = {
++	RENESAS_USBHS_PIPE(USB_ENDPOINT_XFER_CONTROL, 64, 0x00, false),
++	RENESAS_USBHS_PIPE(USB_ENDPOINT_XFER_ISOC, 1024, 0x08, true),
++	RENESAS_USBHS_PIPE(USB_ENDPOINT_XFER_ISOC, 1024, 0x28, true),
++	RENESAS_USBHS_PIPE(USB_ENDPOINT_XFER_BULK, 512, 0x48, true),
++	RENESAS_USBHS_PIPE(USB_ENDPOINT_XFER_BULK, 512, 0x58, true),
++	RENESAS_USBHS_PIPE(USB_ENDPOINT_XFER_BULK, 512, 0x68, true),
++	RENESAS_USBHS_PIPE(USB_ENDPOINT_XFER_INT, 64, 0x04, false),
++	RENESAS_USBHS_PIPE(USB_ENDPOINT_XFER_INT, 64, 0x05, false),
++	RENESAS_USBHS_PIPE(USB_ENDPOINT_XFER_INT, 64, 0x06, false),
++	RENESAS_USBHS_PIPE(USB_ENDPOINT_XFER_BULK, 512, 0x78, true),
++	RENESAS_USBHS_PIPE(USB_ENDPOINT_XFER_BULK, 512, 0x88, true),
++	RENESAS_USBHS_PIPE(USB_ENDPOINT_XFER_BULK, 512, 0x98, true),
++	RENESAS_USBHS_PIPE(USB_ENDPOINT_XFER_BULK, 512, 0xa8, true),
++	RENESAS_USBHS_PIPE(USB_ENDPOINT_XFER_BULK, 512, 0xb8, true),
++	RENESAS_USBHS_PIPE(USB_ENDPOINT_XFER_BULK, 512, 0xc8, true),
++	RENESAS_USBHS_PIPE(USB_ENDPOINT_XFER_BULK, 512, 0xd8, true),
++};
++
++#define LPSTS			0x102
++#define LPSTS_SUSPM		BIT(14)
++
++#define UGCTRL2			0x184
++#define UGCTRL2_RESERVED_3	BIT(0)
++#define UGCTRL2_USB0SEL_EHCI	0x10
++#define UGCTRL2_USB0SEL_HSUSB	0x20
++#define UGCTRL2_USB0SEL_OTG	0x30
++#define UGCTRL2_USB0SEL_MASK	0x30
++#define UGCTRL2_VBUSSEL		BIT(10)
++
++struct usbhs_priv_otg_data {
++	void __iomem		*base;
++	void __iomem		*phybase;
++
++	struct platform_device	usbhs_dev;
++	struct usbhs_priv	usbhs_priv;
++
++	struct phy		phy;
++};
++
++static int usbhs_rcar3_power_ctrl(struct usbhs_priv *priv, bool enable)
++{
++	if (enable) {
++		writel(UGCTRL2_USB0SEL_OTG | UGCTRL2_VBUSSEL | UGCTRL2_RESERVED_3,
++		       priv->base + UGCTRL2);
++
++		usbhs_bset(priv, LPSTS, LPSTS_SUSPM, LPSTS_SUSPM);
++		/* The controller on R-Car Gen3 needs to wait up to 90 usec */
++		udelay(90);
++
++		usbhs_sys_clock_ctrl(priv, enable);
++	} else {
++		usbhs_sys_clock_ctrl(priv, enable);
++
++		usbhs_bset(priv, LPSTS, LPSTS_SUSPM, 0);
++	}
++
++	return 0;
++}
++
++void usbhsc_hotplug(struct usbhs_priv *priv)
++{
++	int ret;
++
++	ret = usbhs_mod_change(priv, USBHS_GADGET);
++	if (ret < 0)
++		return;
++
++	usbhs_rcar3_power_ctrl(priv, true);
++
++	/* bus init */
++	usbhsc_set_buswait(priv);
++	usbhsc_bus_init(priv);
++
++	/* module start */
++	usbhs_mod_call(priv, start, priv);
++}
++
++#define USB2_OBINTSTA		0x604
++#define USB2_OBINT_SESSVLDCHG		BIT(12)
++#define USB2_OBINT_IDDIGCHG		BIT(11)
++
++static int usbhs_udc_otg_gadget_handle_interrupts(struct udevice *dev)
++{
++	struct usbhs_priv_otg_data *priv = dev_get_priv(dev);
++	const u32 status = readl(priv->phybase + USB2_OBINTSTA);
++
++	/* We don't have a good way to forward IRQ to PHY yet */
++	if (status & (USB2_OBINT_SESSVLDCHG | USB2_OBINT_IDDIGCHG)) {
++		writel(USB2_OBINT_SESSVLDCHG | USB2_OBINT_IDDIGCHG,
++		       priv->phybase + USB2_OBINTSTA);
++		generic_phy_set_mode(&priv->phy, PHY_MODE_USB_OTG, 0);
++	}
++
++	usbhs_interrupt(0, &priv->usbhs_priv);
++
++	return 0;
++}
++
++static int usbhs_probe(struct usbhs_priv *priv)
++{
++	int ret;
++
++	priv->dparam.type = USBHS_TYPE_RCAR_GEN3;
++	priv->dparam.pio_dma_border = 64;
++	priv->dparam.pipe_configs = usbhsc_new_pipe;
++	priv->dparam.pipe_size = ARRAY_SIZE(usbhsc_new_pipe);
++
++	/* call pipe and module init */
++	ret = usbhs_pipe_probe(priv);
++	if (ret < 0)
++		return ret;
++
++	ret = usbhs_fifo_probe(priv);
++	if (ret < 0)
++		goto probe_end_pipe_exit;
++
++	ret = usbhs_mod_probe(priv);
++	if (ret < 0)
++		goto probe_end_fifo_exit;
++
++	usbhs_sys_clock_ctrl(priv, 0);
++
++	usbhs_rcar3_power_ctrl(priv, true);
++	usbhs_mod_autonomy_mode(priv);
++	usbhsc_hotplug(priv);
++
++	return ret;
++
++probe_end_fifo_exit:
++	usbhs_fifo_remove(priv);
++probe_end_pipe_exit:
++	usbhs_pipe_remove(priv);
++	return ret;
++}
++
++static int usbhs_udc_otg_probe(struct udevice *dev)
++{
++	struct usbhs_priv_otg_data *priv = dev_get_priv(dev);
++	struct usb_gadget *gadget;
++	struct clk_bulk clk_bulk;
++	int ret = -EINVAL;
++
++	priv->base = dev_read_addr_ptr(dev);
++	if (!priv->base)
++		return -EINVAL;
++
++	ret = clk_get_bulk(dev, &clk_bulk);
++	if (ret)
++		return ret;
++
++	ret = clk_enable_bulk(&clk_bulk);
++	if (ret)
++		return ret;
++
++	clrsetbits_le32(priv->base + UGCTRL2, UGCTRL2_USB0SEL_MASK, UGCTRL2_USB0SEL_EHCI);
++	clrsetbits_le16(priv->base + LPSTS, LPSTS_SUSPM, LPSTS_SUSPM);
++
++	ret = generic_setup_phy(dev, &priv->phy, 0, PHY_MODE_USB_OTG, 1);
++	if (ret)
++		goto err_clk;
++
++	priv->phybase = dev_read_addr_ptr(priv->phy.dev);
++
++	priv->usbhs_priv.pdev = &priv->usbhs_dev;
++	priv->usbhs_priv.base = priv->base;
++	priv->usbhs_dev.dev.driver_data = &priv->usbhs_priv;
++	ret = usbhs_probe(&priv->usbhs_priv);
++	if (ret < 0)
++		goto err_phy;
++
++	gadget = usbhsg_get_gadget(&priv->usbhs_priv);
++	gadget->is_dualspeed = 1;
++	gadget->is_otg = 0;
++	gadget->is_a_peripheral = 0;
++	gadget->b_hnp_enable = 0;
++	gadget->a_hnp_support = 0;
++	gadget->a_alt_hnp_support = 0;
++
++	return usb_add_gadget_udc((struct device *)dev, gadget);
++
++err_phy:
++	generic_shutdown_phy(&priv->phy);
++err_clk:
++	clk_disable_bulk(&clk_bulk);
++	return ret;
++}
++
++static int usbhs_udc_otg_remove(struct udevice *dev)
++{
++	struct usbhs_priv_otg_data *priv = dev_get_priv(dev);
++
++	usbhs_rcar3_power_ctrl(&priv->usbhs_priv, false);
++	usbhs_mod_remove(&priv->usbhs_priv);
++	usbhs_fifo_remove(&priv->usbhs_priv);
++	usbhs_pipe_remove(&priv->usbhs_priv);
++
++	generic_shutdown_phy(&priv->phy);
++
++	return dm_scan_fdt_dev(dev);
++}
++
++static const struct udevice_id usbhs_udc_otg_ids[] = {
++	{ .compatible = "renesas,rcar-gen3-usbhs" },
++	{},
++};
++
++static const struct usb_gadget_generic_ops usbhs_udc_otg_ops = {
++	.handle_interrupts = usbhs_udc_otg_gadget_handle_interrupts,
++};
++
++U_BOOT_DRIVER(usbhs_udc_otg) = {
++	.name		= "usbhs-udc-otg",
++	.id		= UCLASS_USB_GADGET_GENERIC,
++	.ops		= &usbhs_udc_otg_ops,
++	.of_match	= usbhs_udc_otg_ids,
++	.probe		= usbhs_udc_otg_probe,
++	.remove		= usbhs_udc_otg_remove,
++	.priv_auto	= sizeof(struct usbhs_priv_otg_data),
++};
+diff --git a/drivers/usb/gadget/rcar/common.h b/drivers/usb/gadget/rcar/common.h
+new file mode 100644
+index 00000000000..544cfd77cdf
+--- /dev/null
++++ b/drivers/usb/gadget/rcar/common.h
+@@ -0,0 +1,328 @@
++/* SPDX-License-Identifier: GPL-1.0+ */
++/*
++ * Renesas USB driver
++ *
++ * Copyright (C) 2011 Renesas Solutions Corp.
++ * Copyright (C) 2019 Renesas Electronics Corporation
++ * Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
++ */
++#ifndef RENESAS_USB_DRIVER_H
++#define RENESAS_USB_DRIVER_H
++
++#include <dm/device.h>
++#include <dm/device_compat.h>
++#include <linux/bug.h>
++#include <linux/delay.h>
++#include <linux/io.h>
++#include "renesas_usb.h"
++
++struct usbhs_priv;
++
++#include "mod.h"
++#include "pipe.h"
++
++/*
++ *
++ *		register define
++ *
++ */
++#define SYSCFG		0x0000
++#define BUSWAIT		0x0002
++#define DVSTCTR		0x0008
++#define TESTMODE	0x000C
++#define CFIFO		0x0014
++#define CFIFOSEL	0x0020
++#define CFIFOCTR	0x0022
++#define D0FIFO		0x0100
++#define D0FIFOSEL	0x0028
++#define D0FIFOCTR	0x002A
++#define D1FIFO		0x0120
++#define D1FIFOSEL	0x002C
++#define D1FIFOCTR	0x002E
++#define INTENB0		0x0030
++#define INTENB1		0x0032
++#define BRDYENB		0x0036
++#define NRDYENB		0x0038
++#define BEMPENB		0x003A
++#define INTSTS0		0x0040
++#define INTSTS1		0x0042
++#define BRDYSTS		0x0046
++#define NRDYSTS		0x0048
++#define BEMPSTS		0x004A
++#define FRMNUM		0x004C
++#define USBREQ		0x0054	/* USB request type register */
++#define USBVAL		0x0056	/* USB request value register */
++#define USBINDX		0x0058	/* USB request index register */
++#define USBLENG		0x005A	/* USB request length register */
++#define DCPCFG		0x005C
++#define DCPMAXP		0x005E
++#define DCPCTR		0x0060
++#define PIPESEL		0x0064
++#define PIPECFG		0x0068
++#define PIPEBUF		0x006A
++#define PIPEMAXP	0x006C
++#define PIPEPERI	0x006E
++#define PIPEnCTR	0x0070
++#define PIPE1TRE	0x0090
++#define PIPE1TRN	0x0092
++#define PIPE2TRE	0x0094
++#define PIPE2TRN	0x0096
++#define PIPE3TRE	0x0098
++#define PIPE3TRN	0x009A
++#define PIPE4TRE	0x009C
++#define PIPE4TRN	0x009E
++#define PIPE5TRE	0x00A0
++#define PIPE5TRN	0x00A2
++#define PIPEBTRE	0x00A4
++#define PIPEBTRN	0x00A6
++#define PIPECTRE	0x00A8
++#define PIPECTRN	0x00AA
++#define PIPEDTRE	0x00AC
++#define PIPEDTRN	0x00AE
++#define PIPEETRE	0x00B0
++#define PIPEETRN	0x00B2
++#define PIPEFTRE	0x00B4
++#define PIPEFTRN	0x00B6
++#define PIPE9TRE	0x00B8
++#define PIPE9TRN	0x00BA
++#define PIPEATRE	0x00BC
++#define PIPEATRN	0x00BE
++#define DEVADD0		0x00D0 /* Device address n configuration */
++#define DEVADD1		0x00D2
++#define DEVADD2		0x00D4
++#define DEVADD3		0x00D6
++#define DEVADD4		0x00D8
++#define DEVADD5		0x00DA
++#define DEVADD6		0x00DC
++#define DEVADD7		0x00DE
++#define DEVADD8		0x00E0
++#define DEVADD9		0x00E2
++#define DEVADDA		0x00E4
++#define D2FIFOSEL	0x00F0	/* for R-Car Gen2 */
++#define D2FIFOCTR	0x00F2	/* for R-Car Gen2 */
++#define D3FIFOSEL	0x00F4	/* for R-Car Gen2 */
++#define D3FIFOCTR	0x00F6	/* for R-Car Gen2 */
++#define SUSPMODE	0x0102	/* for RZ/A */
++
++/* SYSCFG */
++#define SCKE	(1 << 10)	/* USB Module Clock Enable */
++#define CNEN	(1 << 8)	/* Single-ended receiver operation Enable */
++#define HSE	(1 << 7)	/* High-Speed Operation Enable */
++#define DCFM	(1 << 6)	/* Controller Function Select */
++#define DRPD	(1 << 5)	/* D+ Line/D- Line Resistance Control */
++#define DPRPU	(1 << 4)	/* D+ Line Resistance Control */
++#define USBE	(1 << 0)	/* USB Module Operation Enable */
++#define UCKSEL	(1 << 2)	/* Clock Select for RZ/A1 */
++#define UPLLE	(1 << 1)	/* USB PLL Enable for RZ/A1 */
++
++/* DVSTCTR */
++#define EXTLP	(1 << 10)	/* Controls the EXTLP pin output state */
++#define PWEN	(1 << 9)	/* Controls the PWEN pin output state */
++#define USBRST	(1 << 6)	/* Bus Reset Output */
++#define UACT	(1 << 4)	/* USB Bus Enable */
++#define RHST	(0x7)		/* Reset Handshake */
++#define  RHST_LOW_SPEED  1	/* Low-speed connection */
++#define  RHST_FULL_SPEED 2	/* Full-speed connection */
++#define  RHST_HIGH_SPEED 3	/* High-speed connection */
++
++/* CFIFOSEL */
++#define DREQE	(1 << 12)	/* DMA Transfer Request Enable */
++#define MBW_32	(0x2 << 10)	/* CFIFO Port Access Bit Width */
++
++/* CFIFOCTR */
++#define BVAL	(1 << 15)	/* Buffer Memory Enable Flag */
++#define BCLR	(1 << 14)	/* CPU buffer clear */
++#define FRDY	(1 << 13)	/* FIFO Port Ready */
++#define DTLN_MASK (0x0FFF)	/* Receive Data Length */
++
++/* INTENB0 */
++#define VBSE	(1 << 15)	/* Enable IRQ VBUS_0 and VBUSIN_0 */
++#define RSME	(1 << 14)	/* Enable IRQ Resume */
++#define SOFE	(1 << 13)	/* Enable IRQ Frame Number Update */
++#define DVSE	(1 << 12)	/* Enable IRQ Device State Transition */
++#define CTRE	(1 << 11)	/* Enable IRQ Control Stage Transition */
++#define BEMPE	(1 << 10)	/* Enable IRQ Buffer Empty */
++#define NRDYE	(1 << 9)	/* Enable IRQ Buffer Not Ready Response */
++#define BRDYE	(1 << 8)	/* Enable IRQ Buffer Ready */
++
++/* INTENB1 */
++#define BCHGE	(1 << 14)	/* USB Bus Change Interrupt Enable */
++#define DTCHE	(1 << 12)	/* Disconnection Detect Interrupt Enable */
++#define ATTCHE	(1 << 11)	/* Connection Detect Interrupt Enable */
++#define EOFERRE	(1 << 6)	/* EOF Error Detect Interrupt Enable */
++#define SIGNE	(1 << 5)	/* Setup Transaction Error Interrupt Enable */
++#define SACKE	(1 << 4)	/* Setup Transaction ACK Interrupt Enable */
++
++/* INTSTS0 */
++#define VBINT	(1 << 15)	/* VBUS0_0 and VBUS1_0 Interrupt Status */
++#define DVST	(1 << 12)	/* Device State Transition Interrupt Status */
++#define CTRT	(1 << 11)	/* Control Stage Interrupt Status */
++#define BEMP	(1 << 10)	/* Buffer Empty Interrupt Status */
++#define BRDY	(1 << 8)	/* Buffer Ready Interrupt Status */
++#define VBSTS	(1 << 7)	/* VBUS_0 and VBUSIN_0 Input Status */
++#define VALID	(1 << 3)	/* USB Request Receive */
++
++#define DVSQ_MASK		(0x7 << 4)	/* Device State */
++#define  POWER_STATE		(0 << 4)
++#define  DEFAULT_STATE		(1 << 4)
++#define  ADDRESS_STATE		(2 << 4)
++#define  CONFIGURATION_STATE	(3 << 4)
++#define  SUSPENDED_STATE	(4 << 4)
++
++#define CTSQ_MASK		(0x7)	/* Control Transfer Stage */
++#define  IDLE_SETUP_STAGE	0	/* Idle stage or setup stage */
++#define  READ_DATA_STAGE	1	/* Control read data stage */
++#define  READ_STATUS_STAGE	2	/* Control read status stage */
++#define  WRITE_DATA_STAGE	3	/* Control write data stage */
++#define  WRITE_STATUS_STAGE	4	/* Control write status stage */
++#define  NODATA_STATUS_STAGE	5	/* Control write NoData status stage */
++#define  SEQUENCE_ERROR		6	/* Control transfer sequence error */
++
++/* INTSTS1 */
++#define OVRCR	(1 << 15) /* OVRCR Interrupt Status */
++#define BCHG	(1 << 14) /* USB Bus Change Interrupt Status */
++#define DTCH	(1 << 12) /* USB Disconnection Detect Interrupt Status */
++#define ATTCH	(1 << 11) /* ATTCH Interrupt Status */
++#define EOFERR	(1 << 6)  /* EOF Error Detect Interrupt Status */
++#define SIGN	(1 << 5)  /* Setup Transaction Error Interrupt Status */
++#define SACK	(1 << 4)  /* Setup Transaction ACK Response Interrupt Status */
++
++/* PIPECFG */
++/* DCPCFG */
++#define TYPE_NONE	(0 << 14)	/* Transfer Type */
++#define TYPE_BULK	(1 << 14)
++#define TYPE_INT	(2 << 14)
++#define TYPE_ISO	(3 << 14)
++#define BFRE		(1 << 10)	/* BRDY Interrupt Operation Spec. */
++#define DBLB		(1 << 9)	/* Double Buffer Mode */
++#define SHTNAK		(1 << 7)	/* Pipe Disable in Transfer End */
++#define DIR_OUT		(1 << 4)	/* Transfer Direction */
++
++/* PIPEMAXP */
++/* DCPMAXP */
++#define DEVSEL_MASK	(0xF << 12)	/* Device Select */
++#define DCP_MAXP_MASK	(0x7F)
++#define PIPE_MAXP_MASK	(0x7FF)
++
++/* PIPEBUF */
++#define BUFSIZE_SHIFT	10
++#define BUFSIZE_MASK	(0x1F << BUFSIZE_SHIFT)
++#define BUFNMB_MASK	(0xFF)
++
++/* PIPEnCTR */
++/* DCPCTR */
++#define BSTS		(1 << 15)	/* Buffer Status */
++#define SUREQ		(1 << 14)	/* Sending SETUP Token */
++#define INBUFM		(1 << 14)	/* (PIPEnCTR) Transfer Buffer Monitor */
++#define CSSTS		(1 << 12)	/* CSSTS Status */
++#define	ACLRM		(1 << 9)	/* Buffer Auto-Clear Mode */
++#define SQCLR		(1 << 8)	/* Toggle Bit Clear */
++#define SQSET		(1 << 7)	/* Toggle Bit Set */
++#define SQMON		(1 << 6)	/* Toggle Bit Check */
++#define PBUSY		(1 << 5)	/* Pipe Busy */
++#define PID_MASK	(0x3)		/* Response PID */
++#define  PID_NAK	0
++#define  PID_BUF	1
++#define  PID_STALL10	2
++#define  PID_STALL11	3
++
++#define CCPL		(1 << 2)	/* Control Transfer End Enable */
++
++/* PIPEnTRE */
++#define TRENB		(1 << 9)	/* Transaction Counter Enable */
++#define TRCLR		(1 << 8)	/* Transaction Counter Clear */
++
++/* FRMNUM */
++#define FRNM_MASK	(0x7FF)
++
++/* DEVADDn */
++#define UPPHUB(x)	(((x) & 0xF) << 11)	/* HUB Register */
++#define HUBPORT(x)	(((x) & 0x7) << 8)	/* HUB Port for Target Device */
++#define USBSPD(x)	(((x) & 0x3) << 6)	/* Device Transfer Rate */
++#define USBSPD_SPEED_LOW	0x1
++#define USBSPD_SPEED_FULL	0x2
++#define USBSPD_SPEED_HIGH	0x3
++
++/* SUSPMODE */
++#define SUSPM		(1 << 14)	/* SuspendM Control */
++
++/*
++ *		struct
++ */
++struct usbhs_priv {
++	void __iomem *base;
++	struct renesas_usbhs_driver_param	dparam;
++	struct platform_device			*pdev;
++
++	/*
++	 * module control
++	 */
++	struct usbhs_mod_info mod_info;
++
++	/*
++	 * pipe control
++	 */
++	struct usbhs_pipe_info pipe_info;
++
++	/*
++	 * fifo control
++	 */
++	struct usbhs_fifo_info fifo_info;
++};
++
++/*
++ * common
++ */
++u16 usbhs_read(struct usbhs_priv *priv, u32 reg);
++void usbhs_write(struct usbhs_priv *priv, u32 reg, u16 data);
++void usbhs_bset(struct usbhs_priv *priv, u32 reg, u16 mask, u16 data);
++
++#define usbhs_lock(p, f) spin_lock_irqsave(usbhs_priv_to_lock(p), f)
++#define usbhs_unlock(p, f) spin_unlock_irqrestore(usbhs_priv_to_lock(p), f)
++
++/*
++ * sysconfig
++ */
++void usbhs_sys_host_ctrl(struct usbhs_priv *priv, int enable);
++void usbhs_sys_function_ctrl(struct usbhs_priv *priv, int enable);
++void usbhs_sys_function_pullup(struct usbhs_priv *priv, int enable);
++void usbhs_sys_set_test_mode(struct usbhs_priv *priv, u16 mode);
++
++/*
++ * usb request
++ */
++void usbhs_usbreq_get_val(struct usbhs_priv *priv, struct usb_ctrlrequest *req);
++void usbhs_usbreq_set_val(struct usbhs_priv *priv, struct usb_ctrlrequest *req);
++
++/*
++ * bus
++ */
++void usbhs_bus_send_sof_enable(struct usbhs_priv *priv);
++void usbhs_bus_send_reset(struct usbhs_priv *priv);
++int usbhs_bus_get_speed(struct usbhs_priv *priv);
++int usbhs_vbus_ctrl(struct usbhs_priv *priv, int enable);
++void usbhsc_hotplug(struct usbhs_priv *priv);
++
++/*
++ * frame
++ */
++int usbhs_frame_get_num(struct usbhs_priv *priv);
++
++/*
++ * device config
++ */
++int usbhs_set_device_config(struct usbhs_priv *priv, int devnum, u16 upphub,
++			   u16 hubport, u16 speed);
++
++/*
++ * interrupt functions
++ */
++void usbhs_xxxsts_clear(struct usbhs_priv *priv, u16 sts_reg, u16 bit);
++
++/*
++ * data
++ */
++#define usbhs_get_dparam(priv, param)	(priv->dparam.param)
++#define usbhs_priv_to_dev(priv)		(&priv->pdev->dev)
++
++#endif /* RENESAS_USB_DRIVER_H */
+diff --git a/drivers/usb/gadget/rcar/fifo.c b/drivers/usb/gadget/rcar/fifo.c
+new file mode 100644
+index 00000000000..6016b2987d5
+--- /dev/null
++++ b/drivers/usb/gadget/rcar/fifo.c
+@@ -0,0 +1,1067 @@
++// SPDX-License-Identifier: GPL-1.0+
++/*
++ * Renesas USB driver
++ *
++ * Copyright (C) 2011 Renesas Solutions Corp.
++ * Copyright (C) 2019 Renesas Electronics Corporation
++ * Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
++ */
++#include <linux/delay.h>
++#include <linux/io.h>
++#include "common.h"
++#include "pipe.h"
++
++#define usbhsf_get_cfifo(p)	(&((p)->fifo_info.cfifo))
++
++#define usbhsf_fifo_is_busy(f)	((f)->pipe) /* see usbhs_pipe_select_fifo */
++
++/*
++ *		packet initialize
++ */
++void usbhs_pkt_init(struct usbhs_pkt *pkt)
++{
++	INIT_LIST_HEAD(&pkt->node);
++}
++
++/*
++ *		packet control function
++ */
++static int usbhsf_null_handle(struct usbhs_pkt *pkt, int *is_done)
++{
++	struct usbhs_priv *priv = usbhs_pipe_to_priv(pkt->pipe);
++	struct device *dev = usbhs_priv_to_dev(priv);
++
++	dev_err(dev, "null handler\n");
++
++	return -EINVAL;
++}
++
++static const struct usbhs_pkt_handle usbhsf_null_handler = {
++	.prepare = usbhsf_null_handle,
++	.try_run = usbhsf_null_handle,
++};
++
++void usbhs_pkt_push(struct usbhs_pipe *pipe, struct usbhs_pkt *pkt,
++		    void (*done)(struct usbhs_priv *priv,
++				 struct usbhs_pkt *pkt),
++		    void *buf, int len, int zero, int sequence)
++{
++	struct usbhs_priv *priv = usbhs_pipe_to_priv(pipe);
++	struct device *dev = usbhs_priv_to_dev(priv);
++	unsigned long flags;
++
++	if (!done) {
++		dev_err(dev, "no done function\n");
++		return;
++	}
++
++	/********************  spin lock ********************/
++	usbhs_lock(priv, flags);
++
++	if (!pipe->handler) {
++		dev_err(dev, "no handler function\n");
++		pipe->handler = &usbhsf_null_handler;
++	}
++
++	list_move_tail(&pkt->node, &pipe->list);
++
++	/*
++	 * each pkt must hold own handler.
++	 * because handler might be changed by its situation.
++	 * dma handler -> pio handler.
++	 */
++	pkt->pipe	= pipe;
++	pkt->buf	= buf;
++	pkt->handler	= pipe->handler;
++	pkt->length	= len;
++	pkt->zero	= zero;
++	pkt->actual	= 0;
++	pkt->done	= done;
++	pkt->sequence	= sequence;
++
++	usbhs_unlock(priv, flags);
++	/********************  spin unlock ******************/
++}
++
++static void __usbhsf_pkt_del(struct usbhs_pkt *pkt)
++{
++	list_del_init(&pkt->node);
++}
++
++struct usbhs_pkt *__usbhsf_pkt_get(struct usbhs_pipe *pipe)
++{
++	return list_first_entry_or_null(&pipe->list, struct usbhs_pkt, node);
++}
++
++static void usbhsf_fifo_unselect(struct usbhs_pipe *pipe,
++				 struct usbhs_fifo *fifo);
++static struct dma_chan *usbhsf_dma_chan_get(struct usbhs_fifo *fifo,
++					    struct usbhs_pkt *pkt);
++#define usbhsf_dma_map(p)	__usbhsf_dma_map_ctrl(p, 1)
++#define usbhsf_dma_unmap(p)	__usbhsf_dma_map_ctrl(p, 0)
++static int __usbhsf_dma_map_ctrl(struct usbhs_pkt *pkt, int map);
++static void usbhsf_tx_irq_ctrl(struct usbhs_pipe *pipe, int enable);
++static void usbhsf_rx_irq_ctrl(struct usbhs_pipe *pipe, int enable);
++struct usbhs_pkt *usbhs_pkt_pop(struct usbhs_pipe *pipe, struct usbhs_pkt *pkt)
++{
++	struct usbhs_fifo *fifo = usbhs_pipe_to_fifo(pipe);
++	unsigned long flags;
++
++	/********************  spin lock ********************/
++	usbhs_lock(priv, flags);
++
++	usbhs_pipe_disable(pipe);
++
++	if (!pkt)
++		pkt = __usbhsf_pkt_get(pipe);
++
++	if (pkt) {
++		struct dma_chan *chan = NULL;
++
++		if (fifo)
++			chan = usbhsf_dma_chan_get(fifo, pkt);
++		if (chan)
++			usbhsf_dma_unmap(pkt);
++
++		usbhs_pipe_clear_without_sequence(pipe, 0, 0);
++		usbhs_pipe_running(pipe, 0);
++
++		__usbhsf_pkt_del(pkt);
++	}
++
++	if (fifo)
++		usbhsf_fifo_unselect(pipe, fifo);
++
++	usbhs_unlock(priv, flags);
++	/********************  spin unlock ******************/
++
++	return pkt;
++}
++
++enum {
++	USBHSF_PKT_PREPARE,
++	USBHSF_PKT_TRY_RUN,
++	USBHSF_PKT_DMA_DONE,
++};
++
++static int usbhsf_pkt_handler(struct usbhs_pipe *pipe, int type)
++{
++	struct usbhs_priv *priv = usbhs_pipe_to_priv(pipe);
++	struct usbhs_pkt *pkt;
++	struct device *dev = usbhs_priv_to_dev(priv);
++	int (*func)(struct usbhs_pkt *pkt, int *is_done);
++	unsigned long flags;
++	int ret = 0;
++	int is_done = 0;
++
++	/********************  spin lock ********************/
++	usbhs_lock(priv, flags);
++
++	pkt = __usbhsf_pkt_get(pipe);
++	if (!pkt) {
++		ret = -EINVAL;
++		goto __usbhs_pkt_handler_end;
++	}
++
++	switch (type) {
++	case USBHSF_PKT_PREPARE:
++		func = pkt->handler->prepare;
++		break;
++	case USBHSF_PKT_TRY_RUN:
++		func = pkt->handler->try_run;
++		break;
++	case USBHSF_PKT_DMA_DONE:
++		func = pkt->handler->dma_done;
++		break;
++	default:
++		dev_err(dev, "unknown pkt handler\n");
++		goto __usbhs_pkt_handler_end;
++	}
++
++	if (likely(func))
++		ret = func(pkt, &is_done);
++
++	if (is_done)
++		__usbhsf_pkt_del(pkt);
++
++__usbhs_pkt_handler_end:
++	usbhs_unlock(priv, flags);
++	/********************  spin unlock ******************/
++
++	if (is_done) {
++		pkt->done(priv, pkt);
++		usbhs_pkt_start(pipe);
++	}
++
++	return ret;
++}
++
++void usbhs_pkt_start(struct usbhs_pipe *pipe)
++{
++	usbhsf_pkt_handler(pipe, USBHSF_PKT_PREPARE);
++}
++
++/*
++ *		irq enable/disable function
++ */
++#define usbhsf_irq_empty_ctrl(p, e) usbhsf_irq_callback_ctrl(p, irq_bempsts, e)
++#define usbhsf_irq_ready_ctrl(p, e) usbhsf_irq_callback_ctrl(p, irq_brdysts, e)
++#define usbhsf_irq_callback_ctrl(pipe, status, enable)			\
++	({								\
++		struct usbhs_priv *priv = usbhs_pipe_to_priv(pipe);	\
++		struct usbhs_mod *mod = usbhs_mod_get_current(priv);	\
++		u16 status = (1 << usbhs_pipe_number(pipe));		\
++		if (!mod)						\
++			return;						\
++		if (enable)						\
++			mod->status |= status;				\
++		else							\
++			mod->status &= ~status;				\
++		usbhs_irq_callback_update(priv, mod);			\
++	})
++
++static void usbhsf_tx_irq_ctrl(struct usbhs_pipe *pipe, int enable)
++{
++	/*
++	 * And DCP pipe can NOT use "ready interrupt" for "send"
++	 * it should use "empty" interrupt.
++	 * see
++	 *   "Operation" - "Interrupt Function" - "BRDY Interrupt"
++	 *
++	 * on the other hand, normal pipe can use "ready interrupt" for "send"
++	 * even though it is single/double buffer
++	 */
++	if (usbhs_pipe_is_dcp(pipe))
++		usbhsf_irq_empty_ctrl(pipe, enable);
++	else
++		usbhsf_irq_ready_ctrl(pipe, enable);
++}
++
++static void usbhsf_rx_irq_ctrl(struct usbhs_pipe *pipe, int enable)
++{
++	usbhsf_irq_ready_ctrl(pipe, enable);
++}
++
++/*
++ *		FIFO ctrl
++ */
++static void usbhsf_send_terminator(struct usbhs_pipe *pipe,
++				   struct usbhs_fifo *fifo)
++{
++	struct usbhs_priv *priv = usbhs_pipe_to_priv(pipe);
++
++	usbhs_bset(priv, fifo->ctr, BVAL, BVAL);
++}
++
++static int usbhsf_fifo_barrier(struct usbhs_priv *priv,
++			       struct usbhs_fifo *fifo)
++{
++	/* The FIFO port is accessible */
++	if (usbhs_read(priv, fifo->ctr) & FRDY)
++		return 0;
++
++	return -EBUSY;
++}
++
++static void usbhsf_fifo_clear(struct usbhs_pipe *pipe,
++			      struct usbhs_fifo *fifo)
++{
++	struct usbhs_priv *priv = usbhs_pipe_to_priv(pipe);
++	int ret = 0;
++
++	if (!usbhs_pipe_is_dcp(pipe)) {
++		/*
++		 * This driver checks the pipe condition first to avoid -EBUSY
++		 * from usbhsf_fifo_barrier() if the pipe is RX direction and
++		 * empty.
++		 */
++		if (usbhs_pipe_is_dir_in(pipe))
++			ret = usbhs_pipe_is_accessible(pipe);
++		if (!ret)
++			ret = usbhsf_fifo_barrier(priv, fifo);
++	}
++
++	/*
++	 * if non-DCP pipe, this driver should set BCLR when
++	 * usbhsf_fifo_barrier() returns 0.
++	 */
++	if (!ret)
++		usbhs_write(priv, fifo->ctr, BCLR);
++}
++
++static int usbhsf_fifo_rcv_len(struct usbhs_priv *priv,
++			       struct usbhs_fifo *fifo)
++{
++	return usbhs_read(priv, fifo->ctr) & DTLN_MASK;
++}
++
++static void usbhsf_fifo_unselect(struct usbhs_pipe *pipe,
++				 struct usbhs_fifo *fifo)
++{
++	struct usbhs_priv *priv = usbhs_pipe_to_priv(pipe);
++
++	usbhs_pipe_select_fifo(pipe, NULL);
++	usbhs_write(priv, fifo->sel, 0);
++}
++
++static int usbhsf_fifo_select(struct usbhs_pipe *pipe,
++			      struct usbhs_fifo *fifo,
++			      int write)
++{
++	struct usbhs_priv *priv = usbhs_pipe_to_priv(pipe);
++	struct device *dev = usbhs_priv_to_dev(priv);
++	int timeout = 1024;
++	u16 mask = ((1 << 5) | 0xF);		/* mask of ISEL | CURPIPE */
++	u16 base = usbhs_pipe_number(pipe);	/* CURPIPE */
++
++	if (usbhs_pipe_is_busy(pipe) ||
++	    usbhsf_fifo_is_busy(fifo))
++		return -EBUSY;
++
++	if (usbhs_pipe_is_dcp(pipe)) {
++		base |= (1 == write) << 5;	/* ISEL */
++
++		if (usbhs_mod_is_host(priv))
++			usbhs_dcp_dir_for_host(pipe, write);
++	}
++
++	/* "base" will be used below  */
++	usbhs_write(priv, fifo->sel, base | MBW_32);
++
++	/* check ISEL and CURPIPE value */
++	while (timeout--) {
++		if (base == (mask & usbhs_read(priv, fifo->sel))) {
++			usbhs_pipe_select_fifo(pipe, fifo);
++			return 0;
++		}
++		udelay(10);
++	}
++
++	dev_err(dev, "fifo select error\n");
++
++	return -EIO;
++}
++
++/*
++ *		DCP status stage
++ */
++static int usbhs_dcp_dir_switch_to_write(struct usbhs_pkt *pkt, int *is_done)
++{
++	struct usbhs_pipe *pipe = pkt->pipe;
++	struct usbhs_priv *priv = usbhs_pipe_to_priv(pipe);
++	struct usbhs_fifo *fifo = usbhsf_get_cfifo(priv); /* CFIFO */
++	struct device *dev = usbhs_priv_to_dev(priv);
++	int ret;
++
++	usbhs_pipe_disable(pipe);
++
++	ret = usbhsf_fifo_select(pipe, fifo, 1);
++	if (ret < 0) {
++		dev_err(dev, "%s() failed\n", __func__);
++		return ret;
++	}
++
++	usbhs_pipe_sequence_data1(pipe); /* DATA1 */
++
++	usbhsf_fifo_clear(pipe, fifo);
++	usbhsf_send_terminator(pipe, fifo);
++
++	usbhsf_fifo_unselect(pipe, fifo);
++
++	usbhsf_tx_irq_ctrl(pipe, 1);
++	usbhs_pipe_enable(pipe);
++
++	return ret;
++}
++
++static int usbhs_dcp_dir_switch_to_read(struct usbhs_pkt *pkt, int *is_done)
++{
++	struct usbhs_pipe *pipe = pkt->pipe;
++	struct usbhs_priv *priv = usbhs_pipe_to_priv(pipe);
++	struct usbhs_fifo *fifo = usbhsf_get_cfifo(priv); /* CFIFO */
++	struct device *dev = usbhs_priv_to_dev(priv);
++	int ret;
++
++	usbhs_pipe_disable(pipe);
++
++	ret = usbhsf_fifo_select(pipe, fifo, 0);
++	if (ret < 0) {
++		dev_err(dev, "%s() fail\n", __func__);
++		return ret;
++	}
++
++	usbhs_pipe_sequence_data1(pipe); /* DATA1 */
++	usbhsf_fifo_clear(pipe, fifo);
++
++	usbhsf_fifo_unselect(pipe, fifo);
++
++	usbhsf_rx_irq_ctrl(pipe, 1);
++	usbhs_pipe_enable(pipe);
++
++	return ret;
++
++}
++
++static int usbhs_dcp_dir_switch_done(struct usbhs_pkt *pkt, int *is_done)
++{
++	struct usbhs_pipe *pipe = pkt->pipe;
++
++	if (pkt->handler == &usbhs_dcp_status_stage_in_handler)
++		usbhsf_tx_irq_ctrl(pipe, 0);
++	else
++		usbhsf_rx_irq_ctrl(pipe, 0);
++
++	pkt->actual = pkt->length;
++	*is_done = 1;
++
++	return 0;
++}
++
++const struct usbhs_pkt_handle usbhs_dcp_status_stage_in_handler = {
++	.prepare = usbhs_dcp_dir_switch_to_write,
++	.try_run = usbhs_dcp_dir_switch_done,
++};
++
++const struct usbhs_pkt_handle usbhs_dcp_status_stage_out_handler = {
++	.prepare = usbhs_dcp_dir_switch_to_read,
++	.try_run = usbhs_dcp_dir_switch_done,
++};
++
++/*
++ *		DCP data stage (push)
++ */
++static int usbhsf_dcp_data_stage_try_push(struct usbhs_pkt *pkt, int *is_done)
++{
++	struct usbhs_pipe *pipe = pkt->pipe;
++
++	usbhs_pipe_sequence_data1(pipe); /* DATA1 */
++
++	/*
++	 * change handler to PIO push
++	 */
++	pkt->handler = &usbhs_fifo_pio_push_handler;
++
++	return pkt->handler->prepare(pkt, is_done);
++}
++
++const struct usbhs_pkt_handle usbhs_dcp_data_stage_out_handler = {
++	.prepare = usbhsf_dcp_data_stage_try_push,
++};
++
++/*
++ *		DCP data stage (pop)
++ */
++static int usbhsf_dcp_data_stage_prepare_pop(struct usbhs_pkt *pkt,
++					     int *is_done)
++{
++	struct usbhs_pipe *pipe = pkt->pipe;
++	struct usbhs_priv *priv = usbhs_pipe_to_priv(pipe);
++	struct usbhs_fifo *fifo = usbhsf_get_cfifo(priv);
++
++	if (usbhs_pipe_is_busy(pipe))
++		return 0;
++
++	/*
++	 * prepare pop for DCP should
++	 *  - change DCP direction,
++	 *  - clear fifo
++	 *  - DATA1
++	 */
++	usbhs_pipe_disable(pipe);
++
++	usbhs_pipe_sequence_data1(pipe); /* DATA1 */
++
++	usbhsf_fifo_select(pipe, fifo, 0);
++	usbhsf_fifo_clear(pipe, fifo);
++	usbhsf_fifo_unselect(pipe, fifo);
++
++	/*
++	 * change handler to PIO pop
++	 */
++	pkt->handler = &usbhs_fifo_pio_pop_handler;
++
++	return pkt->handler->prepare(pkt, is_done);
++}
++
++const struct usbhs_pkt_handle usbhs_dcp_data_stage_in_handler = {
++	.prepare = usbhsf_dcp_data_stage_prepare_pop,
++};
++
++/*
++ *		PIO push handler
++ */
++static int usbhsf_pio_try_push(struct usbhs_pkt *pkt, int *is_done)
++{
++	struct usbhs_pipe *pipe = pkt->pipe;
++	struct usbhs_priv *priv = usbhs_pipe_to_priv(pipe);
++	struct device *dev = usbhs_priv_to_dev(priv);
++	struct usbhs_fifo *fifo = usbhsf_get_cfifo(priv); /* CFIFO */
++	void __iomem *addr = priv->base + fifo->port;
++	u8 *buf;
++	int maxp = usbhs_pipe_get_maxpacket(pipe);
++	int total_len;
++	int i, ret, len;
++	int is_short;
++
++	usbhs_pipe_data_sequence(pipe, pkt->sequence);
++	pkt->sequence = -1; /* -1 sequence will be ignored */
++
++	usbhs_pipe_set_trans_count_if_bulk(pipe, pkt->length);
++
++	ret = usbhsf_fifo_select(pipe, fifo, 1);
++	if (ret < 0)
++		return 0;
++
++	ret = usbhs_pipe_is_accessible(pipe);
++	if (ret < 0) {
++		/* inaccessible pipe is not an error */
++		ret = 0;
++		goto usbhs_fifo_write_busy;
++	}
++
++	ret = usbhsf_fifo_barrier(priv, fifo);
++	if (ret < 0)
++		goto usbhs_fifo_write_busy;
++
++	buf		= pkt->buf    + pkt->actual;
++	len		= pkt->length - pkt->actual;
++	len		= min(len, maxp);
++	total_len	= len;
++	is_short	= total_len < maxp;
++
++	/*
++	 * FIXME
++	 *
++	 * 32-bit access only
++	 */
++	if (len >= 4 && !((unsigned long)buf & 0x03)) {
++		iowrite32_rep(addr, buf, len / 4);
++		len %= 4;
++		buf += total_len - len;
++	}
++
++	/* the rest operation */
++	if (usbhs_get_dparam(priv, cfifo_byte_addr)) {
++		for (i = 0; i < len; i++)
++			iowrite8(buf[i], addr + (i & 0x03));
++	} else {
++		for (i = 0; i < len; i++)
++			iowrite8(buf[i], addr + (0x03 - (i & 0x03)));
++	}
++
++	/*
++	 * variable update
++	 */
++	pkt->actual += total_len;
++
++	if (pkt->actual < pkt->length)
++		*is_done = 0;		/* there are remainder data */
++	else if (is_short)
++		*is_done = 1;		/* short packet */
++	else
++		*is_done = !pkt->zero;	/* send zero packet ? */
++
++	/*
++	 * pipe/irq handling
++	 */
++	if (is_short)
++		usbhsf_send_terminator(pipe, fifo);
++
++	usbhsf_tx_irq_ctrl(pipe, !*is_done);
++	usbhs_pipe_running(pipe, !*is_done);
++	usbhs_pipe_enable(pipe);
++
++	dev_dbg(dev, "  send %d (%d/ %d/ %d/ %d)\n",
++		usbhs_pipe_number(pipe),
++		pkt->length, pkt->actual, *is_done, pkt->zero);
++
++	usbhsf_fifo_unselect(pipe, fifo);
++
++	return 0;
++
++usbhs_fifo_write_busy:
++	usbhsf_fifo_unselect(pipe, fifo);
++
++	/*
++	 * pipe is busy.
++	 * retry in interrupt
++	 */
++	usbhsf_tx_irq_ctrl(pipe, 1);
++	usbhs_pipe_running(pipe, 1);
++
++	return ret;
++}
++
++static int usbhsf_pio_prepare_push(struct usbhs_pkt *pkt, int *is_done)
++{
++	if (usbhs_pipe_is_running(pkt->pipe))
++		return 0;
++
++	return usbhsf_pio_try_push(pkt, is_done);
++}
++
++const struct usbhs_pkt_handle usbhs_fifo_pio_push_handler = {
++	.prepare = usbhsf_pio_prepare_push,
++	.try_run = usbhsf_pio_try_push,
++};
++
++/*
++ *		PIO pop handler
++ */
++static int usbhsf_prepare_pop(struct usbhs_pkt *pkt, int *is_done)
++{
++	struct usbhs_pipe *pipe = pkt->pipe;
++	struct usbhs_priv *priv = usbhs_pipe_to_priv(pipe);
++	struct usbhs_fifo *fifo = usbhsf_get_cfifo(priv);
++
++	if (usbhs_pipe_is_busy(pipe))
++		return 0;
++
++	if (usbhs_pipe_is_running(pipe))
++		return 0;
++
++	/*
++	 * pipe enable to prepare packet receive
++	 */
++	usbhs_pipe_data_sequence(pipe, pkt->sequence);
++	pkt->sequence = -1; /* -1 sequence will be ignored */
++
++	if (usbhs_pipe_is_dcp(pipe))
++		usbhsf_fifo_clear(pipe, fifo);
++
++	usbhs_pipe_set_trans_count_if_bulk(pipe, pkt->length);
++	usbhs_pipe_enable(pipe);
++	usbhs_pipe_running(pipe, 1);
++	usbhsf_rx_irq_ctrl(pipe, 1);
++
++	return 0;
++}
++
++static int usbhsf_pio_try_pop(struct usbhs_pkt *pkt, int *is_done)
++{
++	struct usbhs_pipe *pipe = pkt->pipe;
++	struct usbhs_priv *priv = usbhs_pipe_to_priv(pipe);
++	struct device *dev = usbhs_priv_to_dev(priv);
++	struct usbhs_fifo *fifo = usbhsf_get_cfifo(priv); /* CFIFO */
++	void __iomem *addr = priv->base + fifo->port;
++	u8 *buf;
++	u32 data = 0;
++	int maxp = usbhs_pipe_get_maxpacket(pipe);
++	int rcv_len, len;
++	int i, ret;
++	int total_len = 0;
++
++	ret = usbhsf_fifo_select(pipe, fifo, 0);
++	if (ret < 0)
++		return 0;
++
++	ret = usbhsf_fifo_barrier(priv, fifo);
++	if (ret < 0)
++		goto usbhs_fifo_read_busy;
++
++	rcv_len = usbhsf_fifo_rcv_len(priv, fifo);
++
++	buf		= pkt->buf    + pkt->actual;
++	len		= pkt->length - pkt->actual;
++	len		= min(len, rcv_len);
++	total_len	= len;
++
++	/*
++	 * update actual length first here to decide disable pipe.
++	 * if this pipe keeps BUF status and all data were popped,
++	 * then, next interrupt/token will be issued again
++	 */
++	pkt->actual += total_len;
++
++	if ((pkt->actual == pkt->length) ||	/* receive all data */
++	    (total_len < maxp)) {		/* short packet */
++		*is_done = 1;
++		usbhsf_rx_irq_ctrl(pipe, 0);
++		usbhs_pipe_running(pipe, 0);
++		/*
++		 * If function mode, since this controller is possible to enter
++		 * Control Write status stage at this timing, this driver
++		 * should not disable the pipe. If such a case happens, this
++		 * controller is not able to complete the status stage.
++		 */
++		if (!usbhs_mod_is_host(priv) && !usbhs_pipe_is_dcp(pipe))
++			usbhs_pipe_disable(pipe);	/* disable pipe first */
++	}
++
++	/*
++	 * Buffer clear if Zero-Length packet
++	 *
++	 * see
++	 * "Operation" - "FIFO Buffer Memory" - "FIFO Port Function"
++	 */
++	if (0 == rcv_len) {
++		pkt->zero = 1;
++		usbhsf_fifo_clear(pipe, fifo);
++		goto usbhs_fifo_read_end;
++	}
++
++	/*
++	 * FIXME
++	 *
++	 * 32-bit access only
++	 */
++	if (len >= 4 && !((unsigned long)buf & 0x03)) {
++		ioread32_rep(addr, buf, len / 4);
++		len %= 4;
++		buf += total_len - len;
++	}
++
++	/* the rest operation */
++	for (i = 0; i < len; i++) {
++		if (!(i & 0x03))
++			data = ioread32(addr);
++
++		buf[i] = (data >> ((i & 0x03) * 8)) & 0xff;
++	}
++
++usbhs_fifo_read_end:
++	dev_dbg(dev, "  recv %d (%d/ %d/ %d/ %d)\n",
++		usbhs_pipe_number(pipe),
++		pkt->length, pkt->actual, *is_done, pkt->zero);
++
++usbhs_fifo_read_busy:
++	usbhsf_fifo_unselect(pipe, fifo);
++
++	return ret;
++}
++
++const struct usbhs_pkt_handle usbhs_fifo_pio_pop_handler = {
++	.prepare = usbhsf_prepare_pop,
++	.try_run = usbhsf_pio_try_pop,
++};
++
++/*
++ *		DCP ctrol statge handler
++ */
++static int usbhsf_ctrl_stage_end(struct usbhs_pkt *pkt, int *is_done)
++{
++	usbhs_dcp_control_transfer_done(pkt->pipe);
++
++	*is_done = 1;
++
++	return 0;
++}
++
++const struct usbhs_pkt_handle usbhs_ctrl_stage_end_handler = {
++	.prepare = usbhsf_ctrl_stage_end,
++	.try_run = usbhsf_ctrl_stage_end,
++};
++
++/*
++ *		DMA fifo functions
++ */
++static struct dma_chan *usbhsf_dma_chan_get(struct usbhs_fifo *fifo,
++					    struct usbhs_pkt *pkt)
++{
++	if (&usbhs_fifo_dma_push_handler == pkt->handler)
++		return fifo->tx_chan;
++
++	if (&usbhs_fifo_dma_pop_handler == pkt->handler)
++		return fifo->rx_chan;
++
++	return NULL;
++}
++
++#define usbhsf_dma_start(p, f)	__usbhsf_dma_ctrl(p, f, DREQE)
++#define usbhsf_dma_stop(p, f)	__usbhsf_dma_ctrl(p, f, 0)
++static void __usbhsf_dma_ctrl(struct usbhs_pipe *pipe,
++			      struct usbhs_fifo *fifo,
++			      u16 dreqe)
++{
++	struct usbhs_priv *priv = usbhs_pipe_to_priv(pipe);
++
++	usbhs_bset(priv, fifo->sel, DREQE, dreqe);
++}
++
++static int __usbhsf_dma_map_ctrl(struct usbhs_pkt *pkt, int map)
++{
++	struct usbhs_pipe *pipe = pkt->pipe;
++	struct usbhs_priv *priv = usbhs_pipe_to_priv(pipe);
++	struct usbhs_pipe_info *info = usbhs_priv_to_pipeinfo(priv);
++
++	return info->dma_map_ctrl(pkt, map);
++}
++
++/*
++ *		DMA push handler
++ */
++static int usbhsf_dma_prepare_push(struct usbhs_pkt *pkt, int *is_done)
++{
++	struct usbhs_pipe *pipe = pkt->pipe;
++
++	if (usbhs_pipe_is_busy(pipe))
++		return 0;
++
++	/*
++	 * change handler to PIO
++	 */
++	pkt->handler = &usbhs_fifo_pio_push_handler;
++
++	return pkt->handler->prepare(pkt, is_done);
++}
++
++static int usbhsf_dma_push_done(struct usbhs_pkt *pkt, int *is_done)
++{
++	struct usbhs_pipe *pipe = pkt->pipe;
++	int is_short = pkt->trans % usbhs_pipe_get_maxpacket(pipe);
++
++	pkt->actual += pkt->trans;
++
++	if (pkt->actual < pkt->length)
++		*is_done = 0;		/* there are remainder data */
++	else if (is_short)
++		*is_done = 1;		/* short packet */
++	else
++		*is_done = !pkt->zero;	/* send zero packet? */
++
++	usbhs_pipe_running(pipe, !*is_done);
++
++	usbhsf_dma_stop(pipe, pipe->fifo);
++	usbhsf_dma_unmap(pkt);
++	usbhsf_fifo_unselect(pipe, pipe->fifo);
++
++	if (!*is_done) {
++		/* change handler to PIO */
++		pkt->handler = &usbhs_fifo_pio_push_handler;
++		return pkt->handler->try_run(pkt, is_done);
++	}
++
++	return 0;
++}
++
++const struct usbhs_pkt_handle usbhs_fifo_dma_push_handler = {
++	.prepare	= usbhsf_dma_prepare_push,
++	.dma_done	= usbhsf_dma_push_done,
++};
++
++/*
++ *		DMA pop handler
++ */
++
++static int usbhsf_dma_prepare_pop_with_rx_irq(struct usbhs_pkt *pkt,
++					      int *is_done)
++{
++	return usbhsf_prepare_pop(pkt, is_done);
++}
++
++static int usbhsf_dma_prepare_pop(struct usbhs_pkt *pkt, int *is_done)
++{
++	return usbhsf_dma_prepare_pop_with_rx_irq(pkt, is_done);
++}
++
++static int usbhsf_dma_try_pop_with_rx_irq(struct usbhs_pkt *pkt, int *is_done)
++{
++	struct usbhs_pipe *pipe = pkt->pipe;
++
++	if (usbhs_pipe_is_busy(pipe))
++		return 0;
++
++	/*
++	 * change handler to PIO
++	 */
++	pkt->handler = &usbhs_fifo_pio_pop_handler;
++
++	return pkt->handler->try_run(pkt, is_done);
++}
++
++static int usbhsf_dma_try_pop(struct usbhs_pkt *pkt, int *is_done)
++{
++	struct usbhs_priv *priv = usbhs_pipe_to_priv(pkt->pipe);
++
++	BUG_ON(usbhs_get_dparam(priv, has_usb_dmac));
++
++	return usbhsf_dma_try_pop_with_rx_irq(pkt, is_done);
++}
++
++static int usbhsf_dma_pop_done_with_rx_irq(struct usbhs_pkt *pkt, int *is_done)
++{
++	struct usbhs_pipe *pipe = pkt->pipe;
++	int maxp = usbhs_pipe_get_maxpacket(pipe);
++
++	usbhsf_dma_stop(pipe, pipe->fifo);
++	usbhsf_dma_unmap(pkt);
++	usbhsf_fifo_unselect(pipe, pipe->fifo);
++
++	pkt->actual += pkt->trans;
++
++	if ((pkt->actual == pkt->length) ||	/* receive all data */
++	    (pkt->trans < maxp)) {		/* short packet */
++		*is_done = 1;
++		usbhs_pipe_running(pipe, 0);
++	} else {
++		/* re-enable */
++		usbhs_pipe_running(pipe, 0);
++		usbhsf_prepare_pop(pkt, is_done);
++	}
++
++	return 0;
++}
++
++static int usbhsf_dma_pop_done(struct usbhs_pkt *pkt, int *is_done)
++{
++	return usbhsf_dma_pop_done_with_rx_irq(pkt, is_done);
++}
++
++const struct usbhs_pkt_handle usbhs_fifo_dma_pop_handler = {
++	.prepare	= usbhsf_dma_prepare_pop,
++	.try_run	= usbhsf_dma_try_pop,
++	.dma_done	= usbhsf_dma_pop_done
++};
++
++/*
++ *		irq functions
++ */
++static int usbhsf_irq_empty(struct usbhs_priv *priv,
++			    struct usbhs_irq_state *irq_state)
++{
++	struct usbhs_pipe *pipe;
++	struct device *dev = usbhs_priv_to_dev(priv);
++	int i, ret;
++
++	if (!irq_state->bempsts) {
++		dev_err(dev, "debug %s !!\n", __func__);
++		return -EIO;
++	}
++
++	dev_dbg(dev, "irq empty [0x%04x]\n", irq_state->bempsts);
++
++	/*
++	 * search interrupted "pipe"
++	 * not "uep".
++	 */
++	usbhs_for_each_pipe_with_dcp(pipe, priv, i) {
++		if (!(irq_state->bempsts & (1 << i)))
++			continue;
++
++		ret = usbhsf_pkt_handler(pipe, USBHSF_PKT_TRY_RUN);
++		if (ret < 0)
++			dev_err(dev, "irq_empty run_error %d : %d\n", i, ret);
++	}
++
++	return 0;
++}
++
++static int usbhsf_irq_ready(struct usbhs_priv *priv,
++			    struct usbhs_irq_state *irq_state)
++{
++	struct usbhs_pipe *pipe;
++	struct device *dev = usbhs_priv_to_dev(priv);
++	int i, ret;
++
++	if (!irq_state->brdysts) {
++		dev_err(dev, "debug %s !!\n", __func__);
++		return -EIO;
++	}
++
++	dev_dbg(dev, "irq ready [0x%04x]\n", irq_state->brdysts);
++
++	/*
++	 * search interrupted "pipe"
++	 * not "uep".
++	 */
++	usbhs_for_each_pipe_with_dcp(pipe, priv, i) {
++		if (!(irq_state->brdysts & (1 << i)))
++			continue;
++
++		ret = usbhsf_pkt_handler(pipe, USBHSF_PKT_TRY_RUN);
++		if (ret < 0)
++			dev_err(dev, "irq_ready run_error %d : %d\n", i, ret);
++	}
++
++	return 0;
++}
++
++void usbhs_fifo_clear_dcp(struct usbhs_pipe *pipe)
++{
++	struct usbhs_priv *priv = usbhs_pipe_to_priv(pipe);
++	struct usbhs_fifo *fifo = usbhsf_get_cfifo(priv); /* CFIFO */
++
++	/* clear DCP FIFO of transmission */
++	if (usbhsf_fifo_select(pipe, fifo, 1) < 0)
++		return;
++	usbhsf_fifo_clear(pipe, fifo);
++	usbhsf_fifo_unselect(pipe, fifo);
++
++	/* clear DCP FIFO of reception */
++	if (usbhsf_fifo_select(pipe, fifo, 0) < 0)
++		return;
++	usbhsf_fifo_clear(pipe, fifo);
++	usbhsf_fifo_unselect(pipe, fifo);
++}
++
++/*
++ *		fifo init
++ */
++void usbhs_fifo_init(struct usbhs_priv *priv)
++{
++	struct usbhs_mod *mod = usbhs_mod_get_current(priv);
++	struct usbhs_fifo *cfifo = usbhsf_get_cfifo(priv);
++	struct usbhs_fifo *dfifo;
++	int i;
++
++	mod->irq_empty		= usbhsf_irq_empty;
++	mod->irq_ready		= usbhsf_irq_ready;
++	mod->irq_bempsts	= 0;
++	mod->irq_brdysts	= 0;
++
++	cfifo->pipe	= NULL;
++	usbhs_for_each_dfifo(priv, dfifo, i)
++		dfifo->pipe	= NULL;
++}
++
++void usbhs_fifo_quit(struct usbhs_priv *priv)
++{
++	struct usbhs_mod *mod = usbhs_mod_get_current(priv);
++
++	mod->irq_empty		= NULL;
++	mod->irq_ready		= NULL;
++	mod->irq_bempsts	= 0;
++	mod->irq_brdysts	= 0;
++}
++
++#define __USBHS_DFIFO_INIT(priv, fifo, channel, fifo_port)		\
++do {									\
++	fifo = usbhsf_get_dnfifo(priv, channel);			\
++	fifo->name	= "D"#channel"FIFO";				\
++	fifo->port	= fifo_port;					\
++	fifo->sel	= D##channel##FIFOSEL;				\
++	fifo->ctr	= D##channel##FIFOCTR;				\
++	fifo->tx_slave.shdma_slave.slave_id =				\
++			usbhs_get_dparam(priv, d##channel##_tx_id);	\
++	fifo->rx_slave.shdma_slave.slave_id =				\
++			usbhs_get_dparam(priv, d##channel##_rx_id);	\
++} while (0)
++
++#define USBHS_DFIFO_INIT(priv, fifo, channel)				\
++		__USBHS_DFIFO_INIT(priv, fifo, channel, D##channel##FIFO)
++#define USBHS_DFIFO_INIT_NO_PORT(priv, fifo, channel)			\
++		__USBHS_DFIFO_INIT(priv, fifo, channel, 0)
++
++int usbhs_fifo_probe(struct usbhs_priv *priv)
++{
++	struct usbhs_fifo *fifo;
++
++	/* CFIFO */
++	fifo = usbhsf_get_cfifo(priv);
++	fifo->name	= "CFIFO";
++	fifo->port	= CFIFO;
++	fifo->sel	= CFIFOSEL;
++	fifo->ctr	= CFIFOCTR;
++
++	/* DFIFO */
++	USBHS_DFIFO_INIT(priv, fifo, 0);
++	USBHS_DFIFO_INIT(priv, fifo, 1);
++	USBHS_DFIFO_INIT_NO_PORT(priv, fifo, 2);
++	USBHS_DFIFO_INIT_NO_PORT(priv, fifo, 3);
++
++	return 0;
++}
++
++void usbhs_fifo_remove(struct usbhs_priv *priv)
++{
++}
+diff --git a/drivers/usb/gadget/rcar/fifo.h b/drivers/usb/gadget/rcar/fifo.h
+new file mode 100644
+index 00000000000..86746ca9bdd
+--- /dev/null
++++ b/drivers/usb/gadget/rcar/fifo.h
+@@ -0,0 +1,114 @@
++/* SPDX-License-Identifier: GPL-1.0+ */
++/*
++ * Renesas USB driver
++ *
++ * Copyright (C) 2011 Renesas Solutions Corp.
++ * Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
++ */
++#ifndef RENESAS_USB_FIFO_H
++#define RENESAS_USB_FIFO_H
++
++#include <dma.h>
++#include "pipe.h"
++
++/*
++ * Drivers, using this library are expected to embed struct shdma_dev,
++ * struct shdma_chan, struct shdma_desc, and struct shdma_slave
++ * in their respective device, channel, descriptor and slave objects.
++ */
++
++struct shdma_slave {
++	int slave_id;
++};
++
++/* Used by slave DMA clients to request DMA to/from a specific peripheral */
++struct sh_dmae_slave {
++	struct shdma_slave		shdma_slave;	/* Set by the platform */
++};
++
++struct usbhs_fifo {
++	char *name;
++	u32 port;	/* xFIFO */
++	u32 sel;	/* xFIFOSEL */
++	u32 ctr;	/* xFIFOCTR */
++
++	struct usbhs_pipe	*pipe;
++
++	struct dma_chan		*tx_chan;
++	struct dma_chan		*rx_chan;
++
++	struct sh_dmae_slave	tx_slave;
++	struct sh_dmae_slave	rx_slave;
++};
++
++#define USBHS_MAX_NUM_DFIFO	4
++struct usbhs_fifo_info {
++	struct usbhs_fifo cfifo;
++	struct usbhs_fifo dfifo[USBHS_MAX_NUM_DFIFO];
++};
++#define usbhsf_get_dnfifo(p, n)	(&((p)->fifo_info.dfifo[n]))
++#define usbhs_for_each_dfifo(priv, dfifo, i)			\
++	for ((i) = 0;						\
++	     ((i) < USBHS_MAX_NUM_DFIFO) &&			\
++		     ((dfifo) = usbhsf_get_dnfifo(priv, (i)));	\
++	     (i)++)
++
++struct usbhs_pkt_handle;
++struct usbhs_pkt {
++	struct list_head node;
++	struct usbhs_pipe *pipe;
++	const struct usbhs_pkt_handle *handler;
++	void (*done)(struct usbhs_priv *priv,
++		     struct usbhs_pkt *pkt);
++	struct work_struct work;
++	dma_addr_t dma;
++	const struct dmaengine_result *dma_result;
++	void *buf;
++	int length;
++	int trans;
++	int actual;
++	int zero;
++	int sequence;
++};
++
++struct usbhs_pkt_handle {
++	int (*prepare)(struct usbhs_pkt *pkt, int *is_done);
++	int (*try_run)(struct usbhs_pkt *pkt, int *is_done);
++	int (*dma_done)(struct usbhs_pkt *pkt, int *is_done);
++};
++
++/*
++ * fifo
++ */
++int usbhs_fifo_probe(struct usbhs_priv *priv);
++void usbhs_fifo_remove(struct usbhs_priv *priv);
++void usbhs_fifo_init(struct usbhs_priv *priv);
++void usbhs_fifo_quit(struct usbhs_priv *priv);
++void usbhs_fifo_clear_dcp(struct usbhs_pipe *pipe);
++
++/*
++ * packet info
++ */
++extern const struct usbhs_pkt_handle usbhs_fifo_pio_push_handler;
++extern const struct usbhs_pkt_handle usbhs_fifo_pio_pop_handler;
++extern const struct usbhs_pkt_handle usbhs_ctrl_stage_end_handler;
++
++extern const struct usbhs_pkt_handle usbhs_fifo_dma_push_handler;
++extern const struct usbhs_pkt_handle usbhs_fifo_dma_pop_handler;
++
++extern const struct usbhs_pkt_handle usbhs_dcp_status_stage_in_handler;
++extern const struct usbhs_pkt_handle usbhs_dcp_status_stage_out_handler;
++
++extern const struct usbhs_pkt_handle usbhs_dcp_data_stage_in_handler;
++extern const struct usbhs_pkt_handle usbhs_dcp_data_stage_out_handler;
++
++void usbhs_pkt_init(struct usbhs_pkt *pkt);
++void usbhs_pkt_push(struct usbhs_pipe *pipe, struct usbhs_pkt *pkt,
++		    void (*done)(struct usbhs_priv *priv,
++				 struct usbhs_pkt *pkt),
++		    void *buf, int len, int zero, int sequence);
++struct usbhs_pkt *usbhs_pkt_pop(struct usbhs_pipe *pipe, struct usbhs_pkt *pkt);
++void usbhs_pkt_start(struct usbhs_pipe *pipe);
++struct usbhs_pkt *__usbhsf_pkt_get(struct usbhs_pipe *pipe);
++
++#endif /* RENESAS_USB_FIFO_H */
+diff --git a/drivers/usb/gadget/rcar/mod.c b/drivers/usb/gadget/rcar/mod.c
+new file mode 100644
+index 00000000000..f5f8d169e17
+--- /dev/null
++++ b/drivers/usb/gadget/rcar/mod.c
+@@ -0,0 +1,345 @@
++// SPDX-License-Identifier: GPL-1.0+
++/*
++ * Renesas USB driver
++ *
++ * Copyright (C) 2011 Renesas Solutions Corp.
++ * Copyright (C) 2019 Renesas Electronics Corporation
++ * Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
++ */
++#include "common.h"
++#include "mod.h"
++
++/*
++ *		autonomy
++ *
++ * these functions are used if platform doesn't have external phy.
++ *  -> there is no "notify_hotplug" callback from platform
++ *  -> call "notify_hotplug" by itself
++ *  -> use own interrupt to connect/disconnect
++ *  -> it mean module clock is always ON
++ *             ~~~~~~~~~~~~~~~~~~~~~~~~~
++ */
++static int usbhsm_autonomy_irq_vbus(struct usbhs_priv *priv,
++				    struct usbhs_irq_state *irq_state)
++{
++	usbhsc_hotplug(priv);
++
++	return 0;
++}
++
++void usbhs_mod_autonomy_mode(struct usbhs_priv *priv)
++{
++	struct usbhs_mod_info *info = usbhs_priv_to_modinfo(priv);
++
++	info->irq_vbus = usbhsm_autonomy_irq_vbus;
++
++	usbhs_irq_callback_update(priv, NULL);
++}
++
++/*
++ *		host / gadget functions
++ *
++ * renesas_usbhs host/gadget can register itself by below functions.
++ * these functions are called when probe
++ *
++ */
++void usbhs_mod_register(struct usbhs_priv *priv, struct usbhs_mod *mod, int id)
++{
++	struct usbhs_mod_info *info = usbhs_priv_to_modinfo(priv);
++
++	info->mod[id]	= mod;
++	mod->priv	= priv;
++}
++
++struct usbhs_mod *usbhs_mod_get(struct usbhs_priv *priv, int id)
++{
++	struct usbhs_mod_info *info = usbhs_priv_to_modinfo(priv);
++	struct usbhs_mod *ret = NULL;
++
++	switch (id) {
++	case USBHS_HOST:
++	case USBHS_GADGET:
++		ret = info->mod[id];
++		break;
++	}
++
++	return ret;
++}
++
++int usbhs_mod_is_host(struct usbhs_priv *priv)
++{
++	struct usbhs_mod *mod = usbhs_mod_get_current(priv);
++	struct usbhs_mod_info *info = usbhs_priv_to_modinfo(priv);
++
++	if (!mod)
++		return -EINVAL;
++
++	return info->mod[USBHS_HOST] == mod;
++}
++
++struct usbhs_mod *usbhs_mod_get_current(struct usbhs_priv *priv)
++{
++	struct usbhs_mod_info *info = usbhs_priv_to_modinfo(priv);
++
++	return info->curt;
++}
++
++int usbhs_mod_change(struct usbhs_priv *priv, int id)
++{
++	struct usbhs_mod_info *info = usbhs_priv_to_modinfo(priv);
++	struct usbhs_mod *mod = NULL;
++	int ret = 0;
++
++	/* id < 0 mean no current */
++	switch (id) {
++	case USBHS_HOST:
++	case USBHS_GADGET:
++		mod = info->mod[id];
++		break;
++	default:
++		ret = -EINVAL;
++	}
++	info->curt = mod;
++
++	return ret;
++}
++
++irqreturn_t usbhs_interrupt(int irq, void *data);
++int usbhs_mod_probe(struct usbhs_priv *priv)
++{
++	int ret;
++
++	/*
++	 * install host/gadget driver
++	 */
++	ret = usbhs_mod_host_probe(priv);
++	if (ret < 0)
++		return ret;
++
++	ret = usbhs_mod_gadget_probe(priv);
++	if (ret < 0)
++		goto mod_init_host_err;
++
++	return ret;
++
++mod_init_host_err:
++	usbhs_mod_host_remove(priv);
++
++	return ret;
++}
++
++void usbhs_mod_remove(struct usbhs_priv *priv)
++{
++	usbhs_mod_host_remove(priv);
++	usbhs_mod_gadget_remove(priv);
++}
++
++/*
++ *		status functions
++ */
++int usbhs_status_get_device_state(struct usbhs_irq_state *irq_state)
++{
++	return (int)irq_state->intsts0 & DVSQ_MASK;
++}
++
++int usbhs_status_get_ctrl_stage(struct usbhs_irq_state *irq_state)
++{
++	/*
++	 * return value
++	 *
++	 * IDLE_SETUP_STAGE
++	 * READ_DATA_STAGE
++	 * READ_STATUS_STAGE
++	 * WRITE_DATA_STAGE
++	 * WRITE_STATUS_STAGE
++	 * NODATA_STATUS_STAGE
++	 * SEQUENCE_ERROR
++	 */
++	return (int)irq_state->intsts0 & CTSQ_MASK;
++}
++
++static int usbhs_status_get_each_irq(struct usbhs_priv *priv,
++				     struct usbhs_irq_state *state)
++{
++	struct usbhs_mod *mod = usbhs_mod_get_current(priv);
++	u16 intenb0, intenb1;
++	unsigned long flags;
++
++	/********************  spin lock ********************/
++	usbhs_lock(priv, flags);
++	state->intsts0 = usbhs_read(priv, INTSTS0);
++	intenb0 = usbhs_read(priv, INTENB0);
++
++	if (usbhs_mod_is_host(priv)) {
++		state->intsts1 = usbhs_read(priv, INTSTS1);
++		intenb1 = usbhs_read(priv, INTENB1);
++	} else {
++		state->intsts1 = intenb1 = 0;
++	}
++
++	/* mask */
++	if (mod) {
++		state->brdysts = usbhs_read(priv, BRDYSTS);
++		state->nrdysts = usbhs_read(priv, NRDYSTS);
++		state->bempsts = usbhs_read(priv, BEMPSTS);
++
++		state->bempsts &= mod->irq_bempsts;
++		state->brdysts &= mod->irq_brdysts;
++	}
++	usbhs_unlock(priv, flags);
++	/********************  spin unlock ******************/
++
++	return 0;
++}
++
++/*
++ *		interrupt
++ */
++#define INTSTS0_MAGIC 0xF800 /* acknowledge magical interrupt sources */
++#define INTSTS1_MAGIC 0xA870 /* acknowledge magical interrupt sources */
++irqreturn_t usbhs_interrupt(int irq, void *data)
++{
++	struct usbhs_priv *priv = data;
++	struct usbhs_irq_state irq_state;
++
++	if (usbhs_status_get_each_irq(priv, &irq_state) < 0)
++		return IRQ_NONE;
++
++	/*
++	 * clear interrupt
++	 *
++	 * The hardware is _very_ picky to clear interrupt bit.
++	 * Especially INTSTS0_MAGIC, INTSTS1_MAGIC value.
++	 *
++	 * see
++	 *	"Operation"
++	 *	 - "Control Transfer (DCP)"
++	 *	   - Function :: VALID bit should 0
++	 */
++	usbhs_write(priv, INTSTS0, ~irq_state.intsts0 & INTSTS0_MAGIC);
++	if (usbhs_mod_is_host(priv))
++		usbhs_write(priv, INTSTS1, ~irq_state.intsts1 & INTSTS1_MAGIC);
++
++	/*
++	 * The driver should not clear the xxxSTS after the line of
++	 * "call irq callback functions" because each "if" statement is
++	 * possible to call the callback function for avoiding any side effects.
++	 */
++	if (irq_state.intsts0 & BRDY)
++		usbhs_write(priv, BRDYSTS, ~irq_state.brdysts);
++	usbhs_write(priv, NRDYSTS, ~irq_state.nrdysts);
++	if (irq_state.intsts0 & BEMP)
++		usbhs_write(priv, BEMPSTS, ~irq_state.bempsts);
++
++	/*
++	 * call irq callback functions
++	 * see also
++	 *	usbhs_irq_setting_update
++	 */
++
++	/* INTSTS0 */
++	if (irq_state.intsts0 & VBINT)
++		usbhs_mod_info_call(priv, irq_vbus, priv, &irq_state);
++
++	if (irq_state.intsts0 & DVST)
++		usbhs_mod_call(priv, irq_dev_state, priv, &irq_state);
++
++	if (irq_state.intsts0 & CTRT)
++		usbhs_mod_call(priv, irq_ctrl_stage, priv, &irq_state);
++
++	if (irq_state.intsts0 & BEMP)
++		usbhs_mod_call(priv, irq_empty, priv, &irq_state);
++
++	if (irq_state.intsts0 & BRDY)
++		usbhs_mod_call(priv, irq_ready, priv, &irq_state);
++
++	if (usbhs_mod_is_host(priv)) {
++		/* INTSTS1 */
++		if (irq_state.intsts1 & ATTCH)
++			usbhs_mod_call(priv, irq_attch, priv, &irq_state);
++
++		if (irq_state.intsts1 & DTCH)
++			usbhs_mod_call(priv, irq_dtch, priv, &irq_state);
++
++		if (irq_state.intsts1 & SIGN)
++			usbhs_mod_call(priv, irq_sign, priv, &irq_state);
++
++		if (irq_state.intsts1 & SACK)
++			usbhs_mod_call(priv, irq_sack, priv, &irq_state);
++	}
++	return IRQ_HANDLED;
++}
++
++void usbhs_irq_callback_update(struct usbhs_priv *priv, struct usbhs_mod *mod)
++{
++	u16 intenb0 = 0;
++	u16 intenb1 = 0;
++	struct usbhs_mod_info *info = usbhs_priv_to_modinfo(priv);
++
++	/*
++	 * BEMPENB/BRDYENB are picky.
++	 * below method is required
++	 *
++	 *  - clear  INTSTS0
++	 *  - update BEMPENB/BRDYENB
++	 *  - update INTSTS0
++	 */
++	usbhs_write(priv, INTENB0, 0);
++	if (usbhs_mod_is_host(priv))
++		usbhs_write(priv, INTENB1, 0);
++
++	usbhs_write(priv, BEMPENB, 0);
++	usbhs_write(priv, BRDYENB, 0);
++
++	/*
++	 * see also
++	 *	usbhs_interrupt
++	 */
++
++	if (info->irq_vbus)
++		intenb0 |= VBSE;
++
++	if (mod) {
++		/*
++		 * INTSTS0
++		 */
++		if (mod->irq_ctrl_stage)
++			intenb0 |= CTRE;
++
++		if (mod->irq_dev_state)
++			intenb0 |= DVSE;
++
++		if (mod->irq_empty && mod->irq_bempsts) {
++			usbhs_write(priv, BEMPENB, mod->irq_bempsts);
++			intenb0 |= BEMPE;
++		}
++
++		if (mod->irq_ready && mod->irq_brdysts) {
++			usbhs_write(priv, BRDYENB, mod->irq_brdysts);
++			intenb0 |= BRDYE;
++		}
++
++		if (usbhs_mod_is_host(priv)) {
++			/*
++			 * INTSTS1
++			 */
++			if (mod->irq_attch)
++				intenb1 |= ATTCHE;
++
++			if (mod->irq_dtch)
++				intenb1 |= DTCHE;
++
++			if (mod->irq_sign)
++				intenb1 |= SIGNE;
++
++			if (mod->irq_sack)
++				intenb1 |= SACKE;
++		}
++	}
++
++	if (intenb0)
++		usbhs_write(priv, INTENB0, intenb0);
++
++	if (usbhs_mod_is_host(priv) && intenb1)
++		usbhs_write(priv, INTENB1, intenb1);
++}
+diff --git a/drivers/usb/gadget/rcar/mod.h b/drivers/usb/gadget/rcar/mod.h
+new file mode 100644
+index 00000000000..b670e950a28
+--- /dev/null
++++ b/drivers/usb/gadget/rcar/mod.h
+@@ -0,0 +1,161 @@
++/* SPDX-License-Identifier: GPL-1.0+ */
++/*
++ * Renesas USB driver
++ *
++ * Copyright (C) 2011 Renesas Solutions Corp.
++ * Copyright (C) 2019 Renesas Electronics Corporation
++ * Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
++ */
++#ifndef RENESAS_USB_MOD_H
++#define RENESAS_USB_MOD_H
++
++#include "common.h"
++
++/*
++ *	struct
++ */
++struct usbhs_irq_state {
++	u16 intsts0;
++	u16 intsts1;
++	u16 brdysts;
++	u16 nrdysts;
++	u16 bempsts;
++};
++
++struct usbhs_mod {
++	char *name;
++
++	/*
++	 * entry point from common.c
++	 */
++	int (*start)(struct usbhs_priv *priv);
++	int (*stop)(struct usbhs_priv *priv);
++
++	/*
++	 * INTSTS0
++	 */
++
++	/* DVST (DVSQ) */
++	int (*irq_dev_state)(struct usbhs_priv *priv,
++			     struct usbhs_irq_state *irq_state);
++
++	/* CTRT (CTSQ) */
++	int (*irq_ctrl_stage)(struct usbhs_priv *priv,
++			      struct usbhs_irq_state *irq_state);
++
++	/* BEMP / BEMPSTS */
++	int (*irq_empty)(struct usbhs_priv *priv,
++			 struct usbhs_irq_state *irq_state);
++	u16 irq_bempsts;
++
++	/* BRDY / BRDYSTS */
++	int (*irq_ready)(struct usbhs_priv *priv,
++			 struct usbhs_irq_state *irq_state);
++	u16 irq_brdysts;
++
++	/*
++	 * INTSTS1
++	 */
++
++	/* ATTCHE */
++	int (*irq_attch)(struct usbhs_priv *priv,
++			 struct usbhs_irq_state *irq_state);
++
++	/* DTCHE */
++	int (*irq_dtch)(struct usbhs_priv *priv,
++			struct usbhs_irq_state *irq_state);
++
++	/* SIGN */
++	int (*irq_sign)(struct usbhs_priv *priv,
++			struct usbhs_irq_state *irq_state);
++
++	/* SACK */
++	int (*irq_sack)(struct usbhs_priv *priv,
++			struct usbhs_irq_state *irq_state);
++
++	struct usbhs_priv *priv;
++};
++
++struct usbhs_mod_info {
++	struct usbhs_mod *mod[USBHS_MAX];
++	struct usbhs_mod *curt; /* current mod */
++
++	/*
++	 * INTSTS0 :: VBINT
++	 *
++	 * This function will be used as autonomy mode (runtime_pwctrl == 0)
++	 * when the platform doesn't have own get_vbus function.
++	 *
++	 * This callback cannot be member of "struct usbhs_mod" because it
++	 * will be used even though host/gadget has not been selected.
++	 */
++	int (*irq_vbus)(struct usbhs_priv *priv,
++			struct usbhs_irq_state *irq_state);
++};
++
++/*
++ *		for host/gadget module
++ */
++struct usbhs_mod *usbhs_mod_get(struct usbhs_priv *priv, int id);
++struct usbhs_mod *usbhs_mod_get_current(struct usbhs_priv *priv);
++void usbhs_mod_register(struct usbhs_priv *priv, struct usbhs_mod *usb, int id);
++int usbhs_mod_is_host(struct usbhs_priv *priv);
++int usbhs_mod_change(struct usbhs_priv *priv, int id);
++int usbhs_mod_probe(struct usbhs_priv *priv);
++void usbhs_mod_remove(struct usbhs_priv *priv);
++
++void usbhs_mod_autonomy_mode(struct usbhs_priv *priv);
++void usbhs_mod_non_autonomy_mode(struct usbhs_priv *priv);
++
++/*
++ *		status functions
++ */
++int usbhs_status_get_device_state(struct usbhs_irq_state *irq_state);
++int usbhs_status_get_ctrl_stage(struct usbhs_irq_state *irq_state);
++
++/*
++ *		callback functions
++ */
++void usbhs_irq_callback_update(struct usbhs_priv *priv, struct usbhs_mod *mod);
++
++irqreturn_t usbhs_interrupt(int irq, void *data);
++
++#define usbhs_mod_call(priv, func, param...)		\
++	({						\
++		struct usbhs_mod *mod;			\
++		mod = usbhs_mod_get_current(priv);	\
++		!mod		? -ENODEV :		\
++		!mod->func	? 0 :			\
++		 mod->func(param);			\
++	})
++
++#define usbhs_priv_to_modinfo(priv) (&priv->mod_info)
++#define usbhs_mod_info_call(priv, func, param...)	\
++({							\
++	struct usbhs_mod_info *info;			\
++	info = usbhs_priv_to_modinfo(priv);		\
++	!info->func ? 0 :				\
++	 info->func(param);				\
++})
++
++/*
++ * host / gadget control
++ */
++#if	defined(CONFIG_USB_RENESAS_USBHS_HCD) || \
++	defined(CONFIG_USB_RENESAS_USBHS_HCD_MODULE)
++extern int usbhs_mod_host_probe(struct usbhs_priv *priv);
++extern int usbhs_mod_host_remove(struct usbhs_priv *priv);
++#else
++static inline int usbhs_mod_host_probe(struct usbhs_priv *priv)
++{
++	return 0;
++}
++static inline void usbhs_mod_host_remove(struct usbhs_priv *priv)
++{
++}
++#endif
++
++extern int usbhs_mod_gadget_probe(struct usbhs_priv *priv);
++extern void usbhs_mod_gadget_remove(struct usbhs_priv *priv);
++
++#endif /* RENESAS_USB_MOD_H */
+diff --git a/drivers/usb/gadget/rcar/mod_gadget.c b/drivers/usb/gadget/rcar/mod_gadget.c
+new file mode 100644
+index 00000000000..bd9855eb4fa
+--- /dev/null
++++ b/drivers/usb/gadget/rcar/mod_gadget.c
+@@ -0,0 +1,1136 @@
++// SPDX-License-Identifier: GPL-1.0+
++/*
++ * Renesas USB driver
++ *
++ * Copyright (C) 2011 Renesas Solutions Corp.
++ * Copyright (C) 2019 Renesas Electronics Corporation
++ * Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
++ */
++#include <linux/delay.h>
++#include <linux/dma-mapping.h>
++#include <linux/io.h>
++#include <linux/usb/ch9.h>
++#include <linux/usb/gadget.h>
++#include <linux/usb/otg.h>
++#include "common.h"
++
++/*
++ *		struct
++ */
++struct usbhsg_request {
++	struct usb_request	req;
++	struct usbhs_pkt	pkt;
++};
++
++#define EP_NAME_SIZE 8
++struct usbhsg_gpriv;
++struct usbhsg_uep {
++	struct usb_ep		 ep;
++	struct usbhs_pipe	*pipe;
++	spinlock_t		lock;	/* protect the pipe */
++
++	char ep_name[EP_NAME_SIZE];
++
++	struct usbhsg_gpriv *gpriv;
++};
++
++struct usbhsg_gpriv {
++	struct usb_gadget	 gadget;
++	struct usbhs_mod	 mod;
++
++	struct usbhsg_uep	*uep;
++	int			 uep_size;
++
++	struct usb_gadget_driver	*driver;
++	bool			 vbus_active;
++
++	u32	status;
++#define USBHSG_STATUS_STARTED		(1 << 0)
++#define USBHSG_STATUS_REGISTERD		(1 << 1)
++#define USBHSG_STATUS_WEDGE		(1 << 2)
++#define USBHSG_STATUS_SELF_POWERED	(1 << 3)
++#define USBHSG_STATUS_SOFT_CONNECT	(1 << 4)
++};
++
++struct usbhsg_recip_handle {
++	char *name;
++	int (*device)(struct usbhs_priv *priv, struct usbhsg_uep *uep,
++		      struct usb_ctrlrequest *ctrl);
++	int (*interface)(struct usbhs_priv *priv, struct usbhsg_uep *uep,
++			 struct usb_ctrlrequest *ctrl);
++	int (*endpoint)(struct usbhs_priv *priv, struct usbhsg_uep *uep,
++			struct usb_ctrlrequest *ctrl);
++};
++
++/*
++ *		macro
++ */
++#define usbhsg_priv_to_gpriv(priv)			\
++	container_of(					\
++		usbhs_mod_get(priv, USBHS_GADGET),	\
++		struct usbhsg_gpriv, mod)
++
++#define __usbhsg_for_each_uep(start, pos, g, i)	\
++	for ((i) = start;					\
++	     ((i) < (g)->uep_size) && ((pos) = (g)->uep + (i));	\
++	     (i)++)
++
++#define usbhsg_for_each_uep(pos, gpriv, i)	\
++	__usbhsg_for_each_uep(1, pos, gpriv, i)
++
++#define usbhsg_for_each_uep_with_dcp(pos, gpriv, i)	\
++	__usbhsg_for_each_uep(0, pos, gpriv, i)
++
++#define usbhsg_gadget_to_gpriv(g)\
++	container_of(g, struct usbhsg_gpriv, gadget)
++
++#define usbhsg_req_to_ureq(r)\
++	container_of(r, struct usbhsg_request, req)
++
++#define usbhsg_ep_to_uep(e)		container_of(e, struct usbhsg_uep, ep)
++#define usbhsg_gpriv_to_dev(gp)		usbhs_priv_to_dev((gp)->mod.priv)
++#define usbhsg_gpriv_to_priv(gp)	((gp)->mod.priv)
++#define usbhsg_gpriv_to_dcp(gp)		((gp)->uep)
++#define usbhsg_gpriv_to_nth_uep(gp, i)	((gp)->uep + i)
++#define usbhsg_uep_to_gpriv(u)		((u)->gpriv)
++#define usbhsg_uep_to_pipe(u)		((u)->pipe)
++#define usbhsg_pipe_to_uep(p)		((p)->mod_private)
++#define usbhsg_is_dcp(u)		((u) == usbhsg_gpriv_to_dcp((u)->gpriv))
++
++#define usbhsg_ureq_to_pkt(u)		(&(u)->pkt)
++#define usbhsg_pkt_to_ureq(i)	\
++	container_of(i, struct usbhsg_request, pkt)
++
++#define usbhsg_is_not_connected(gp) ((gp)->gadget.speed == USB_SPEED_UNKNOWN)
++
++/* status */
++#define usbhsg_status_init(gp)   do {(gp)->status = 0; } while (0)
++#define usbhsg_status_set(gp, b) (gp->status |=  b)
++#define usbhsg_status_clr(gp, b) (gp->status &= ~b)
++#define usbhsg_status_has(gp, b) (gp->status &   b)
++
++/*
++ *		queue push/pop
++ */
++static void __usbhsg_queue_pop(struct usbhsg_uep *uep,
++			       struct usbhsg_request *ureq,
++			       int status)
++{
++	struct usbhsg_gpriv *gpriv = usbhsg_uep_to_gpriv(uep);
++	struct usbhs_pipe *pipe = usbhsg_uep_to_pipe(uep);
++	struct device *dev = usbhsg_gpriv_to_dev(gpriv);
++
++	if (pipe)
++		dev_dbg(dev, "pipe %d : queue pop\n", usbhs_pipe_number(pipe));
++
++	ureq->req.status = status;
++	spin_unlock(usbhs_priv_to_lock(priv));
++	usb_gadget_giveback_request(&uep->ep, &ureq->req);
++	spin_lock(usbhs_priv_to_lock(priv));
++}
++
++static void usbhsg_queue_pop(struct usbhsg_uep *uep,
++			     struct usbhsg_request *ureq,
++			     int status)
++{
++	unsigned long flags;
++
++	usbhs_lock(priv, flags);
++	__usbhsg_queue_pop(uep, ureq, status);
++	usbhs_unlock(priv, flags);
++}
++
++static void usbhsg_queue_done(struct usbhs_priv *priv, struct usbhs_pkt *pkt)
++{
++	struct usbhs_pipe *pipe = pkt->pipe;
++	struct usbhsg_uep *uep = usbhsg_pipe_to_uep(pipe);
++	struct usbhsg_request *ureq = usbhsg_pkt_to_ureq(pkt);
++	unsigned long flags;
++
++	ureq->req.actual = pkt->actual;
++
++	usbhs_lock(priv, flags);
++	if (uep)
++		__usbhsg_queue_pop(uep, ureq, 0);
++	usbhs_unlock(priv, flags);
++}
++
++static void usbhsg_queue_push(struct usbhsg_uep *uep,
++			      struct usbhsg_request *ureq)
++{
++	struct usbhsg_gpriv *gpriv = usbhsg_uep_to_gpriv(uep);
++	struct device *dev = usbhsg_gpriv_to_dev(gpriv);
++	struct usbhs_pipe *pipe = usbhsg_uep_to_pipe(uep);
++	struct usbhs_pkt *pkt = usbhsg_ureq_to_pkt(ureq);
++	struct usb_request *req = &ureq->req;
++
++	req->actual = 0;
++	req->status = -EINPROGRESS;
++	usbhs_pkt_push(pipe, pkt, usbhsg_queue_done,
++		       req->buf, req->length, req->zero, -1);
++	usbhs_pkt_start(pipe);
++
++	dev_dbg(dev, "pipe %d : queue push (%d)\n",
++		usbhs_pipe_number(pipe),
++		req->length);
++}
++
++/*
++ *		dma map/unmap
++ */
++static int usbhsg_dma_map_ctrl(struct usbhs_pkt *pkt, int map)
++{
++	return -1;
++}
++
++/*
++ *		USB_TYPE_STANDARD / clear feature functions
++ */
++static int usbhsg_recip_handler_std_control_done(struct usbhs_priv *priv,
++						 struct usbhsg_uep *uep,
++						 struct usb_ctrlrequest *ctrl)
++{
++	struct usbhsg_gpriv *gpriv = usbhsg_priv_to_gpriv(priv);
++	struct usbhsg_uep *dcp = usbhsg_gpriv_to_dcp(gpriv);
++	struct usbhs_pipe *pipe = usbhsg_uep_to_pipe(dcp);
++
++	usbhs_dcp_control_transfer_done(pipe);
++
++	return 0;
++}
++
++static int usbhsg_recip_handler_std_clear_endpoint(struct usbhs_priv *priv,
++						   struct usbhsg_uep *uep,
++						   struct usb_ctrlrequest *ctrl)
++{
++	struct usbhsg_gpriv *gpriv = usbhsg_uep_to_gpriv(uep);
++	struct usbhs_pipe *pipe = usbhsg_uep_to_pipe(uep);
++
++	if (!usbhsg_status_has(gpriv, USBHSG_STATUS_WEDGE)) {
++		usbhs_pipe_disable(pipe);
++		usbhs_pipe_sequence_data0(pipe);
++		usbhs_pipe_enable(pipe);
++	}
++
++	usbhsg_recip_handler_std_control_done(priv, uep, ctrl);
++
++	usbhs_pkt_start(pipe);
++
++	return 0;
++}
++
++static struct usbhsg_recip_handle req_clear_feature = {
++	.name		= "clear feature",
++	.device		= usbhsg_recip_handler_std_control_done,
++	.interface	= usbhsg_recip_handler_std_control_done,
++	.endpoint	= usbhsg_recip_handler_std_clear_endpoint,
++};
++
++/*
++ *		USB_TYPE_STANDARD / set feature functions
++ */
++static int usbhsg_recip_handler_std_set_device(struct usbhs_priv *priv,
++						 struct usbhsg_uep *uep,
++						 struct usb_ctrlrequest *ctrl)
++{
++	switch (le16_to_cpu(ctrl->wValue)) {
++	case USB_DEVICE_TEST_MODE:
++		usbhsg_recip_handler_std_control_done(priv, uep, ctrl);
++		udelay(100);
++		usbhs_sys_set_test_mode(priv, le16_to_cpu(ctrl->wIndex) >> 8);
++		break;
++	default:
++		usbhsg_recip_handler_std_control_done(priv, uep, ctrl);
++		break;
++	}
++
++	return 0;
++}
++
++static int usbhsg_recip_handler_std_set_endpoint(struct usbhs_priv *priv,
++						 struct usbhsg_uep *uep,
++						 struct usb_ctrlrequest *ctrl)
++{
++	struct usbhs_pipe *pipe = usbhsg_uep_to_pipe(uep);
++
++	usbhs_pipe_stall(pipe);
++
++	usbhsg_recip_handler_std_control_done(priv, uep, ctrl);
++
++	return 0;
++}
++
++static struct usbhsg_recip_handle req_set_feature = {
++	.name		= "set feature",
++	.device		= usbhsg_recip_handler_std_set_device,
++	.interface	= usbhsg_recip_handler_std_control_done,
++	.endpoint	= usbhsg_recip_handler_std_set_endpoint,
++};
++
++/*
++ *		USB_TYPE_STANDARD / get status functions
++ */
++static void __usbhsg_recip_send_complete(struct usb_ep *ep,
++					 struct usb_request *req)
++{
++	struct usbhsg_request *ureq = usbhsg_req_to_ureq(req);
++
++	/* free allocated recip-buffer/usb_request */
++	kfree(ureq->pkt.buf);
++	usb_ep_free_request(ep, req);
++}
++
++static void __usbhsg_recip_send_status(struct usbhsg_gpriv *gpriv,
++				       unsigned short status)
++{
++	struct usbhsg_uep *dcp = usbhsg_gpriv_to_dcp(gpriv);
++	struct usbhs_pipe *pipe = usbhsg_uep_to_pipe(dcp);
++	struct device *dev = usbhsg_gpriv_to_dev(gpriv);
++	struct usb_request *req;
++	__le16 *buf;
++
++	/* alloc new usb_request for recip */
++	req = usb_ep_alloc_request(&dcp->ep, GFP_ATOMIC);
++	if (!req) {
++		dev_err(dev, "recip request allocation fail\n");
++		return;
++	}
++
++	/* alloc recip data buffer */
++	buf = kmalloc(sizeof(*buf), GFP_ATOMIC);
++	if (!buf) {
++		usb_ep_free_request(&dcp->ep, req);
++		return;
++	}
++
++	/* recip data is status */
++	*buf = cpu_to_le16(status);
++
++	/* allocated usb_request/buffer will be freed */
++	req->complete	= __usbhsg_recip_send_complete;
++	req->buf	= buf;
++	req->length	= sizeof(*buf);
++	req->zero	= 0;
++
++	/* push packet */
++	pipe->handler = &usbhs_fifo_pio_push_handler;
++	usbhsg_queue_push(dcp, usbhsg_req_to_ureq(req));
++}
++
++static int usbhsg_recip_handler_std_get_device(struct usbhs_priv *priv,
++					       struct usbhsg_uep *uep,
++					       struct usb_ctrlrequest *ctrl)
++{
++	struct usbhsg_gpriv *gpriv = usbhsg_uep_to_gpriv(uep);
++	unsigned short status = 0;
++
++	if (usbhsg_status_has(gpriv, USBHSG_STATUS_SELF_POWERED))
++		status = 1 << USB_DEVICE_SELF_POWERED;
++
++	__usbhsg_recip_send_status(gpriv, status);
++
++	return 0;
++}
++
++static int usbhsg_recip_handler_std_get_interface(struct usbhs_priv *priv,
++						  struct usbhsg_uep *uep,
++						  struct usb_ctrlrequest *ctrl)
++{
++	struct usbhsg_gpriv *gpriv = usbhsg_uep_to_gpriv(uep);
++	unsigned short status = 0;
++
++	__usbhsg_recip_send_status(gpriv, status);
++
++	return 0;
++}
++
++static int usbhsg_recip_handler_std_get_endpoint(struct usbhs_priv *priv,
++						 struct usbhsg_uep *uep,
++						 struct usb_ctrlrequest *ctrl)
++{
++	struct usbhsg_gpriv *gpriv = usbhsg_uep_to_gpriv(uep);
++	struct usbhs_pipe *pipe = usbhsg_uep_to_pipe(uep);
++	unsigned short status = 0;
++
++	if (usbhs_pipe_is_stall(pipe))
++		status = 1 << USB_ENDPOINT_HALT;
++
++	__usbhsg_recip_send_status(gpriv, status);
++
++	return 0;
++}
++
++static struct usbhsg_recip_handle req_get_status = {
++	.name		= "get status",
++	.device		= usbhsg_recip_handler_std_get_device,
++	.interface	= usbhsg_recip_handler_std_get_interface,
++	.endpoint	= usbhsg_recip_handler_std_get_endpoint,
++};
++
++/*
++ *		USB_TYPE handler
++ */
++static int usbhsg_recip_run_handle(struct usbhs_priv *priv,
++				   struct usbhsg_recip_handle *handler,
++				   struct usb_ctrlrequest *ctrl)
++{
++	struct usbhsg_gpriv *gpriv = usbhsg_priv_to_gpriv(priv);
++	struct device *dev = usbhsg_gpriv_to_dev(gpriv);
++	struct usbhsg_uep *uep;
++	struct usbhs_pipe *pipe;
++	int recip = ctrl->bRequestType & USB_RECIP_MASK;
++	int nth = le16_to_cpu(ctrl->wIndex) & USB_ENDPOINT_NUMBER_MASK;
++	int ret = 0;
++	int (*func)(struct usbhs_priv *priv, struct usbhsg_uep *uep,
++		    struct usb_ctrlrequest *ctrl);
++	char *msg;
++
++	uep = usbhsg_gpriv_to_nth_uep(gpriv, nth);
++	pipe = usbhsg_uep_to_pipe(uep);
++	if (!pipe) {
++		dev_err(dev, "wrong recip request\n");
++		return -EINVAL;
++	}
++
++	switch (recip) {
++	case USB_RECIP_DEVICE:
++		msg	= "DEVICE";
++		func	= handler->device;
++		break;
++	case USB_RECIP_INTERFACE:
++		msg	= "INTERFACE";
++		func	= handler->interface;
++		break;
++	case USB_RECIP_ENDPOINT:
++		msg	= "ENDPOINT";
++		func	= handler->endpoint;
++		break;
++	default:
++		dev_warn(dev, "unsupported RECIP(%d)\n", recip);
++		func = NULL;
++		ret = -EINVAL;
++	}
++
++	if (func) {
++		dev_dbg(dev, "%s (pipe %d :%s)\n", handler->name, nth, msg);
++		ret = func(priv, uep, ctrl);
++	}
++
++	return ret;
++}
++
++/*
++ *		irq functions
++ *
++ * it will be called from usbhs_interrupt
++ */
++static int usbhsg_irq_dev_state(struct usbhs_priv *priv,
++				struct usbhs_irq_state *irq_state)
++{
++	struct usbhsg_gpriv *gpriv = usbhsg_priv_to_gpriv(priv);
++	struct device *dev = usbhsg_gpriv_to_dev(gpriv);
++	int state = usbhs_status_get_device_state(irq_state);
++
++	gpriv->gadget.speed = usbhs_bus_get_speed(priv);
++
++	dev_dbg(dev, "state = %x : speed : %d\n", state, gpriv->gadget.speed);
++
++	if (gpriv->gadget.speed != USB_SPEED_UNKNOWN &&
++	    (state & SUSPENDED_STATE)) {
++		if (gpriv->driver && gpriv->driver->suspend)
++			gpriv->driver->suspend(&gpriv->gadget);
++		usb_gadget_set_state(&gpriv->gadget, USB_STATE_SUSPENDED);
++	}
++
++	return 0;
++}
++
++static int usbhsg_irq_ctrl_stage(struct usbhs_priv *priv,
++				 struct usbhs_irq_state *irq_state)
++{
++	struct usbhsg_gpriv *gpriv = usbhsg_priv_to_gpriv(priv);
++	struct usbhsg_uep *dcp = usbhsg_gpriv_to_dcp(gpriv);
++	struct usbhs_pipe *pipe = usbhsg_uep_to_pipe(dcp);
++	struct device *dev = usbhsg_gpriv_to_dev(gpriv);
++	struct usb_ctrlrequest ctrl;
++	struct usbhsg_recip_handle *recip_handler = NULL;
++	int stage = usbhs_status_get_ctrl_stage(irq_state);
++	int ret = 0;
++
++	dev_dbg(dev, "stage = %d\n", stage);
++
++	/*
++	 * see Manual
++	 *
++	 *  "Operation"
++	 *  - "Interrupt Function"
++	 *    - "Control Transfer Stage Transition Interrupt"
++	 *      - Fig. "Control Transfer Stage Transitions"
++	 */
++
++	switch (stage) {
++	case READ_DATA_STAGE:
++		pipe->handler = &usbhs_fifo_pio_push_handler;
++		break;
++	case WRITE_DATA_STAGE:
++		pipe->handler = &usbhs_fifo_pio_pop_handler;
++		break;
++	case NODATA_STATUS_STAGE:
++		pipe->handler = &usbhs_ctrl_stage_end_handler;
++		break;
++	case READ_STATUS_STAGE:
++	case WRITE_STATUS_STAGE:
++		usbhs_dcp_control_transfer_done(pipe);
++		fallthrough;
++	default:
++		return ret;
++	}
++
++	/*
++	 * get usb request
++	 */
++	usbhs_usbreq_get_val(priv, &ctrl);
++
++	switch (ctrl.bRequestType & USB_TYPE_MASK) {
++	case USB_TYPE_STANDARD:
++		switch (ctrl.bRequest) {
++		case USB_REQ_CLEAR_FEATURE:
++			recip_handler = &req_clear_feature;
++			break;
++		case USB_REQ_SET_FEATURE:
++			recip_handler = &req_set_feature;
++			break;
++		case USB_REQ_GET_STATUS:
++			recip_handler = &req_get_status;
++			break;
++		}
++	}
++
++	/*
++	 * setup stage / run recip
++	 */
++	if (recip_handler)
++		ret = usbhsg_recip_run_handle(priv, recip_handler, &ctrl);
++	else
++		ret = gpriv->driver->setup(&gpriv->gadget, &ctrl);
++
++	if (ret < 0)
++		usbhs_pipe_stall(pipe);
++
++	return ret;
++}
++
++/*
++ *
++ *		usb_dcp_ops
++ *
++ */
++static int usbhsg_pipe_disable(struct usbhsg_uep *uep)
++{
++	struct usbhs_pipe *pipe = usbhsg_uep_to_pipe(uep);
++	struct usbhs_pkt *pkt;
++
++	while (1) {
++		pkt = usbhs_pkt_pop(pipe, NULL);
++		if (!pkt)
++			break;
++
++		usbhsg_queue_pop(uep, usbhsg_pkt_to_ureq(pkt), -ESHUTDOWN);
++	}
++
++	usbhs_pipe_disable(pipe);
++
++	return 0;
++}
++
++/*
++ *
++ *		usb_ep_ops
++ *
++ */
++static int usbhsg_ep_enable(struct usb_ep *ep,
++			 const struct usb_endpoint_descriptor *desc)
++{
++	struct usbhsg_uep *uep   = usbhsg_ep_to_uep(ep);
++	struct usbhsg_gpriv *gpriv = usbhsg_uep_to_gpriv(uep);
++	struct usbhs_priv *priv = usbhsg_gpriv_to_priv(gpriv);
++	struct usbhs_pipe *pipe;
++	int ret = -EIO;
++	unsigned long flags;
++
++	usbhs_lock(priv, flags);
++
++	/*
++	 * if it already have pipe,
++	 * nothing to do
++	 */
++	if (uep->pipe) {
++		usbhs_pipe_clear(uep->pipe);
++		usbhs_pipe_sequence_data0(uep->pipe);
++		ret = 0;
++		goto usbhsg_ep_enable_end;
++	}
++
++	pipe = usbhs_pipe_malloc(priv,
++				 usb_endpoint_type(desc),
++				 usb_endpoint_dir_in(desc));
++	if (pipe) {
++		uep->pipe		= pipe;
++		pipe->mod_private	= uep;
++
++		/* set epnum / maxp */
++		usbhs_pipe_config_update(pipe, 0,
++					 usb_endpoint_num(desc),
++					 usb_endpoint_maxp(desc));
++
++		/*
++		 * usbhs_fifo_dma_push/pop_handler try to
++		 * use dmaengine if possible.
++		 * It will use pio handler if impossible.
++		 */
++		if (usb_endpoint_dir_in(desc)) {
++			pipe->handler = &usbhs_fifo_dma_push_handler;
++		} else {
++			pipe->handler = &usbhs_fifo_dma_pop_handler;
++			usbhs_xxxsts_clear(priv, BRDYSTS,
++					   usbhs_pipe_number(pipe));
++		}
++
++		ret = 0;
++	}
++
++usbhsg_ep_enable_end:
++	usbhs_unlock(priv, flags);
++
++	return ret;
++}
++
++static int usbhsg_ep_disable(struct usb_ep *ep)
++{
++	struct usbhsg_uep *uep = usbhsg_ep_to_uep(ep);
++	struct usbhs_pipe *pipe;
++	unsigned long flags;
++
++	spin_lock_irqsave(&uep->lock, flags);
++	pipe = usbhsg_uep_to_pipe(uep);
++	if (!pipe)
++		goto out;
++
++	usbhsg_pipe_disable(uep);
++	usbhs_pipe_free(pipe);
++
++	uep->pipe->mod_private	= NULL;
++	uep->pipe		= NULL;
++
++out:
++	spin_unlock_irqrestore(&uep->lock, flags);
++
++	return 0;
++}
++
++static struct usb_request *usbhsg_ep_alloc_request(struct usb_ep *ep,
++						   gfp_t gfp_flags)
++{
++	struct usbhsg_request *ureq;
++
++	ureq = kzalloc(sizeof *ureq, gfp_flags);
++	if (!ureq)
++		return NULL;
++
++	usbhs_pkt_init(usbhsg_ureq_to_pkt(ureq));
++
++	return &ureq->req;
++}
++
++static void usbhsg_ep_free_request(struct usb_ep *ep,
++				   struct usb_request *req)
++{
++	struct usbhsg_request *ureq = usbhsg_req_to_ureq(req);
++
++	WARN_ON(!list_empty(&ureq->pkt.node));
++	kfree(ureq);
++}
++
++static int usbhsg_ep_queue(struct usb_ep *ep, struct usb_request *req,
++			  gfp_t gfp_flags)
++{
++	struct usbhsg_uep *uep = usbhsg_ep_to_uep(ep);
++	struct usbhsg_gpriv *gpriv = usbhsg_uep_to_gpriv(uep);
++	struct usbhsg_request *ureq = usbhsg_req_to_ureq(req);
++	struct usbhs_pipe *pipe = usbhsg_uep_to_pipe(uep);
++
++	/* param check */
++	if (usbhsg_is_not_connected(gpriv)	||
++	    unlikely(!gpriv->driver)		||
++	    unlikely(!pipe))
++		return -ESHUTDOWN;
++
++	usbhsg_queue_push(uep, ureq);
++
++	return 0;
++}
++
++static int usbhsg_ep_dequeue(struct usb_ep *ep, struct usb_request *req)
++{
++	struct usbhsg_uep *uep = usbhsg_ep_to_uep(ep);
++	struct usbhsg_request *ureq = usbhsg_req_to_ureq(req);
++	struct usbhs_pipe *pipe;
++	unsigned long flags;
++
++	spin_lock_irqsave(&uep->lock, flags);
++	pipe = usbhsg_uep_to_pipe(uep);
++	if (pipe)
++		usbhs_pkt_pop(pipe, usbhsg_ureq_to_pkt(ureq));
++
++	/*
++	 * To dequeue a request, this driver should call the usbhsg_queue_pop()
++	 * even if the pipe is NULL.
++	 */
++	usbhsg_queue_pop(uep, ureq, -ECONNRESET);
++	spin_unlock_irqrestore(&uep->lock, flags);
++
++	return 0;
++}
++
++bool usbhs_pipe_contains_transmittable_data(struct usbhs_pipe *pipe);
++static int __usbhsg_ep_set_halt_wedge(struct usb_ep *ep, int halt, int wedge)
++{
++	struct usbhsg_uep *uep = usbhsg_ep_to_uep(ep);
++	struct usbhs_pipe *pipe = usbhsg_uep_to_pipe(uep);
++	struct usbhsg_gpriv *gpriv = usbhsg_uep_to_gpriv(uep);
++	struct device *dev = usbhsg_gpriv_to_dev(gpriv);
++	unsigned long flags;
++	int ret = 0;
++
++	dev_dbg(dev, "set halt %d (pipe %d)\n",
++		halt, usbhs_pipe_number(pipe));
++
++	/********************  spin lock ********************/
++	usbhs_lock(priv, flags);
++
++	/*
++	 * According to usb_ep_set_halt()'s description, this function should
++	 * return -EAGAIN if the IN endpoint has any queue or data. Note
++	 * that the usbhs_pipe_is_dir_in() returns false if the pipe is an
++	 * IN endpoint in the gadget mode.
++	 */
++	if (!usbhs_pipe_is_dir_in(pipe) && (__usbhsf_pkt_get(pipe) ||
++	    usbhs_pipe_contains_transmittable_data(pipe))) {
++		ret = -EAGAIN;
++		goto out;
++	}
++
++	if (halt)
++		usbhs_pipe_stall(pipe);
++	else
++		usbhs_pipe_disable(pipe);
++
++	if (halt && wedge)
++		usbhsg_status_set(gpriv, USBHSG_STATUS_WEDGE);
++	else
++		usbhsg_status_clr(gpriv, USBHSG_STATUS_WEDGE);
++
++out:
++	usbhs_unlock(priv, flags);
++	/********************  spin unlock ******************/
++
++	return ret;
++}
++
++static int usbhsg_ep_set_halt(struct usb_ep *ep, int value)
++{
++	return __usbhsg_ep_set_halt_wedge(ep, value, 0);
++}
++
++static int usbhsg_ep_set_wedge(struct usb_ep *ep)
++{
++	return __usbhsg_ep_set_halt_wedge(ep, 1, 1);
++}
++
++static const struct usb_ep_ops usbhsg_ep_ops = {
++	.enable		= usbhsg_ep_enable,
++	.disable	= usbhsg_ep_disable,
++
++	.alloc_request	= usbhsg_ep_alloc_request,
++	.free_request	= usbhsg_ep_free_request,
++
++	.queue		= usbhsg_ep_queue,
++	.dequeue	= usbhsg_ep_dequeue,
++
++	.set_halt	= usbhsg_ep_set_halt,
++	.set_wedge	= usbhsg_ep_set_wedge,
++};
++
++/*
++ *		pullup control
++ */
++static int usbhsg_can_pullup(struct usbhs_priv *priv)
++{
++	struct usbhsg_gpriv *gpriv = usbhsg_priv_to_gpriv(priv);
++
++	return gpriv->driver &&
++	       usbhsg_status_has(gpriv, USBHSG_STATUS_SOFT_CONNECT);
++}
++
++static void usbhsg_update_pullup(struct usbhs_priv *priv)
++{
++	if (usbhsg_can_pullup(priv))
++		usbhs_sys_function_pullup(priv, 1);
++	else
++		usbhs_sys_function_pullup(priv, 0);
++}
++
++/*
++ *		usb module start/end
++ */
++static int usbhsg_try_start(struct usbhs_priv *priv, u32 status)
++{
++	struct usbhsg_gpriv *gpriv = usbhsg_priv_to_gpriv(priv);
++	struct usbhsg_uep *dcp = usbhsg_gpriv_to_dcp(gpriv);
++	struct usbhs_mod *mod = usbhs_mod_get_current(priv);
++	struct device *dev = usbhs_priv_to_dev(priv);
++	unsigned long flags;
++	int ret = 0;
++
++	/********************  spin lock ********************/
++	usbhs_lock(priv, flags);
++
++	usbhsg_status_set(gpriv, status);
++	if (!(usbhsg_status_has(gpriv, USBHSG_STATUS_STARTED) &&
++	      usbhsg_status_has(gpriv, USBHSG_STATUS_REGISTERD)))
++		ret = -1; /* not ready */
++
++	usbhs_unlock(priv, flags);
++	/********************  spin unlock ********************/
++
++	if (ret < 0)
++		return 0; /* not ready is not error */
++
++	/*
++	 * enable interrupt and systems if ready
++	 */
++	dev_dbg(dev, "start gadget\n");
++
++	/*
++	 * pipe initialize and enable DCP
++	 */
++	usbhs_fifo_init(priv);
++	usbhs_pipe_init(priv,
++			usbhsg_dma_map_ctrl);
++
++	/* dcp init instead of usbhsg_ep_enable() */
++	dcp->pipe		= usbhs_dcp_malloc(priv);
++	dcp->pipe->mod_private	= dcp;
++	usbhs_pipe_config_update(dcp->pipe, 0, 0, 64);
++
++	/*
++	 * system config enble
++	 * - HI speed
++	 * - function
++	 * - usb module
++	 */
++	usbhs_sys_function_ctrl(priv, 1);
++	usbhsg_update_pullup(priv);
++
++	/*
++	 * enable irq callback
++	 */
++	mod->irq_dev_state	= usbhsg_irq_dev_state;
++	mod->irq_ctrl_stage	= usbhsg_irq_ctrl_stage;
++	usbhs_irq_callback_update(priv, mod);
++
++	return 0;
++}
++
++static int usbhsg_try_stop(struct usbhs_priv *priv, u32 status)
++{
++	struct usbhsg_gpriv *gpriv = usbhsg_priv_to_gpriv(priv);
++	struct usbhs_mod *mod = usbhs_mod_get_current(priv);
++	struct usbhsg_uep *uep;
++	struct device *dev = usbhs_priv_to_dev(priv);
++	unsigned long flags;
++	int ret = 0, i;
++
++	/********************  spin lock ********************/
++	usbhs_lock(priv, flags);
++
++	usbhsg_status_clr(gpriv, status);
++	if (!usbhsg_status_has(gpriv, USBHSG_STATUS_STARTED) &&
++	    !usbhsg_status_has(gpriv, USBHSG_STATUS_REGISTERD))
++		ret = -1; /* already done */
++
++	usbhs_unlock(priv, flags);
++	/********************  spin unlock ********************/
++
++	if (ret < 0)
++		return 0; /* already done is not error */
++
++	/*
++	 * disable interrupt and systems if 1st try
++	 */
++	usbhs_fifo_quit(priv);
++
++	/* disable all irq */
++	mod->irq_dev_state	= NULL;
++	mod->irq_ctrl_stage	= NULL;
++	usbhs_irq_callback_update(priv, mod);
++
++	gpriv->gadget.speed = USB_SPEED_UNKNOWN;
++
++	/* disable sys */
++	usbhs_sys_set_test_mode(priv, 0);
++	usbhs_sys_function_ctrl(priv, 0);
++
++	/* disable all eps */
++	usbhsg_for_each_uep_with_dcp(uep, gpriv, i)
++		usbhsg_ep_disable(&uep->ep);
++
++	dev_dbg(dev, "stop gadget\n");
++
++	return 0;
++}
++
++/*
++ * VBUS provided by the PHY
++ */
++static void usbhs_mod_phy_mode(struct usbhs_priv *priv)
++{
++	struct usbhs_mod_info *info = &priv->mod_info;
++
++	info->irq_vbus = NULL;
++
++	usbhs_irq_callback_update(priv, NULL);
++}
++
++/*
++ *
++ *		linux usb function
++ *
++ */
++static int usbhsg_gadget_start(struct usb_gadget *gadget,
++		struct usb_gadget_driver *driver)
++{
++	struct usbhsg_gpriv *gpriv = usbhsg_gadget_to_gpriv(gadget);
++	struct usbhs_priv *priv = usbhsg_gpriv_to_priv(gpriv);
++
++	if (!driver || !driver->setup)
++		return -EINVAL;
++
++	/* get vbus using phy versions */
++	usbhs_mod_phy_mode(priv);
++
++	/* first hook up the driver ... */
++	gpriv->driver = driver;
++
++	return usbhsg_try_start(priv, USBHSG_STATUS_REGISTERD);
++}
++
++static int usbhsg_gadget_stop(struct usb_gadget *gadget)
++{
++	struct usbhsg_gpriv *gpriv = usbhsg_gadget_to_gpriv(gadget);
++	struct usbhs_priv *priv = usbhsg_gpriv_to_priv(gpriv);
++
++	usbhsg_try_stop(priv, USBHSG_STATUS_REGISTERD);
++
++	gpriv->driver = NULL;
++
++	return 0;
++}
++
++/*
++ *		usb gadget ops
++ */
++static int usbhsg_get_frame(struct usb_gadget *gadget)
++{
++	struct usbhsg_gpriv *gpriv = usbhsg_gadget_to_gpriv(gadget);
++	struct usbhs_priv *priv = usbhsg_gpriv_to_priv(gpriv);
++
++	return usbhs_frame_get_num(priv);
++}
++
++static int usbhsg_pullup(struct usb_gadget *gadget, int is_on)
++{
++	struct usbhsg_gpriv *gpriv = usbhsg_gadget_to_gpriv(gadget);
++	struct usbhs_priv *priv = usbhsg_gpriv_to_priv(gpriv);
++	unsigned long flags;
++
++	usbhs_lock(priv, flags);
++	if (is_on)
++		usbhsg_status_set(gpriv, USBHSG_STATUS_SOFT_CONNECT);
++	else
++		usbhsg_status_clr(gpriv, USBHSG_STATUS_SOFT_CONNECT);
++	usbhsg_update_pullup(priv);
++	usbhs_unlock(priv, flags);
++
++	return 0;
++}
++
++static int usbhsg_set_selfpowered(struct usb_gadget *gadget, int is_self)
++{
++	struct usbhsg_gpriv *gpriv = usbhsg_gadget_to_gpriv(gadget);
++
++	if (is_self)
++		usbhsg_status_set(gpriv, USBHSG_STATUS_SELF_POWERED);
++	else
++		usbhsg_status_clr(gpriv, USBHSG_STATUS_SELF_POWERED);
++
++	return 0;
++}
++
++static int usbhsg_vbus_session(struct usb_gadget *gadget, int is_active)
++{
++	struct usbhsg_gpriv *gpriv = usbhsg_gadget_to_gpriv(gadget);
++	struct usbhs_priv *priv = usbhsg_gpriv_to_priv(gpriv);
++
++	gpriv->vbus_active = !!is_active;
++
++	usbhsc_hotplug(priv);
++
++	return 0;
++}
++
++static const struct usb_gadget_ops usbhsg_gadget_ops = {
++	.get_frame		= usbhsg_get_frame,
++	.set_selfpowered	= usbhsg_set_selfpowered,
++	.udc_start		= usbhsg_gadget_start,
++	.udc_stop		= usbhsg_gadget_stop,
++	.pullup			= usbhsg_pullup,
++	.vbus_session		= usbhsg_vbus_session,
++};
++
++static int usbhsg_start(struct usbhs_priv *priv)
++{
++	return usbhsg_try_start(priv, USBHSG_STATUS_STARTED);
++}
++
++static int usbhsg_stop(struct usbhs_priv *priv)
++{
++	struct usbhsg_gpriv *gpriv = usbhsg_priv_to_gpriv(priv);
++
++	/* cable disconnect */
++	if (gpriv->driver &&
++	    gpriv->driver->disconnect)
++		gpriv->driver->disconnect(&gpriv->gadget);
++
++	return usbhsg_try_stop(priv, USBHSG_STATUS_STARTED);
++}
++
++int usbhs_mod_gadget_probe(struct usbhs_priv *priv)
++{
++	struct usbhsg_gpriv *gpriv;
++	struct usbhsg_uep *uep;
++	struct device *dev = usbhs_priv_to_dev(priv);
++	struct renesas_usbhs_driver_pipe_config *pipe_configs =
++					usbhs_get_dparam(priv, pipe_configs);
++	int pipe_size = usbhs_get_dparam(priv, pipe_size);
++	int i;
++	int ret;
++
++	gpriv = kzalloc(sizeof(struct usbhsg_gpriv), GFP_KERNEL);
++	if (!gpriv)
++		return -ENOMEM;
++
++	uep = kcalloc(pipe_size, sizeof(struct usbhsg_uep), GFP_KERNEL);
++	if (!uep) {
++		ret = -ENOMEM;
++		goto usbhs_mod_gadget_probe_err_gpriv;
++	}
++
++	/*
++	 * CAUTION
++	 *
++	 * There is no guarantee that it is possible to access usb module here.
++	 * Don't accesses to it.
++	 * The accesse will be enable after "usbhsg_start"
++	 */
++
++	/*
++	 * register itself
++	 */
++	usbhs_mod_register(priv, &gpriv->mod, USBHS_GADGET);
++
++	/* init gpriv */
++	gpriv->mod.name		= "gadget";
++	gpriv->mod.start	= usbhsg_start;
++	gpriv->mod.stop		= usbhsg_stop;
++	gpriv->uep		= uep;
++	gpriv->uep_size		= pipe_size;
++	usbhsg_status_init(gpriv);
++
++	/*
++	 * init gadget
++	 */
++	gpriv->gadget.dev.parent	= dev;
++	gpriv->gadget.name		= "renesas_usbhs_udc";
++	gpriv->gadget.ops		= &usbhsg_gadget_ops;
++	gpriv->gadget.max_speed		= USB_SPEED_HIGH;
++
++	INIT_LIST_HEAD(&gpriv->gadget.ep_list);
++
++	/*
++	 * init usb_ep
++	 */
++	usbhsg_for_each_uep_with_dcp(uep, gpriv, i) {
++		uep->gpriv	= gpriv;
++		uep->pipe	= NULL;
++		snprintf(uep->ep_name, EP_NAME_SIZE, "ep%d", i);
++
++		uep->ep.name		= uep->ep_name;
++		uep->ep.ops		= &usbhsg_ep_ops;
++		INIT_LIST_HEAD(&uep->ep.ep_list);
++		spin_lock_init(&uep->lock);
++
++		/* init DCP */
++		if (usbhsg_is_dcp(uep)) {
++			gpriv->gadget.ep0 = &uep->ep;
++			usb_ep_set_maxpacket_limit(&uep->ep, 64);
++			uep->ep.caps.type_control = true;
++		} else {
++			/* init normal pipe */
++			if (pipe_configs[i].type == USB_ENDPOINT_XFER_ISOC)
++				uep->ep.caps.type_iso = true;
++			if (pipe_configs[i].type == USB_ENDPOINT_XFER_BULK)
++				uep->ep.caps.type_bulk = true;
++			if (pipe_configs[i].type == USB_ENDPOINT_XFER_INT)
++				uep->ep.caps.type_int = true;
++			usb_ep_set_maxpacket_limit(&uep->ep,
++						   pipe_configs[i].bufsize);
++			list_add_tail(&uep->ep.ep_list, &gpriv->gadget.ep_list);
++		}
++		uep->ep.caps.dir_in = true;
++		uep->ep.caps.dir_out = true;
++	}
++
++	ret = usb_add_gadget_udc(dev, &gpriv->gadget);
++	if (ret)
++		goto err_add_udc;
++
++
++	dev_info(dev, "gadget probed\n");
++
++	return 0;
++
++err_add_udc:
++	kfree(gpriv->uep);
++
++usbhs_mod_gadget_probe_err_gpriv:
++	kfree(gpriv);
++
++	return ret;
++}
++
++void usbhs_mod_gadget_remove(struct usbhs_priv *priv)
++{
++	struct usbhsg_gpriv *gpriv = usbhsg_priv_to_gpriv(priv);
++
++	usb_del_gadget_udc(&gpriv->gadget);
++
++	kfree(gpriv->uep);
++	kfree(gpriv);
++}
++
++struct usb_gadget *usbhsg_get_gadget(struct usbhs_priv *priv)
++{
++	struct usbhsg_gpriv *gpriv = usbhsg_priv_to_gpriv(priv);
++	return &gpriv->gadget;
++}
+diff --git a/drivers/usb/gadget/rcar/pipe.c b/drivers/usb/gadget/rcar/pipe.c
+new file mode 100644
+index 00000000000..a2b24f38144
+--- /dev/null
++++ b/drivers/usb/gadget/rcar/pipe.c
+@@ -0,0 +1,849 @@
++// SPDX-License-Identifier: GPL-1.0+
++/*
++ * Renesas USB driver
++ *
++ * Copyright (C) 2011 Renesas Solutions Corp.
++ * Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
++ */
++#include <linux/delay.h>
++#include "common.h"
++#include "pipe.h"
++
++/*
++ *		macros
++ */
++#define usbhsp_addr_offset(p)	((usbhs_pipe_number(p) - 1) * 2)
++
++#define usbhsp_flags_set(p, f)	((p)->flags |=  USBHS_PIPE_FLAGS_##f)
++#define usbhsp_flags_clr(p, f)	((p)->flags &= ~USBHS_PIPE_FLAGS_##f)
++#define usbhsp_flags_has(p, f)	((p)->flags &   USBHS_PIPE_FLAGS_##f)
++#define usbhsp_flags_init(p)	do {(p)->flags = 0; } while (0)
++
++/*
++ * for debug
++ */
++static char *usbhsp_pipe_name[] = {
++	[USB_ENDPOINT_XFER_CONTROL]	= "DCP",
++	[USB_ENDPOINT_XFER_BULK]	= "BULK",
++	[USB_ENDPOINT_XFER_INT]		= "INT",
++	[USB_ENDPOINT_XFER_ISOC]	= "ISO",
++};
++
++char *usbhs_pipe_name(struct usbhs_pipe *pipe)
++{
++	return usbhsp_pipe_name[usbhs_pipe_type(pipe)];
++}
++
++static struct renesas_usbhs_driver_pipe_config
++*usbhsp_get_pipe_config(struct usbhs_priv *priv, int pipe_num)
++{
++	struct renesas_usbhs_driver_pipe_config *pipe_configs =
++					usbhs_get_dparam(priv, pipe_configs);
++
++	return &pipe_configs[pipe_num];
++}
++
++/*
++ *		DCPCTR/PIPEnCTR functions
++ */
++static void usbhsp_pipectrl_set(struct usbhs_pipe *pipe, u16 mask, u16 val)
++{
++	struct usbhs_priv *priv = usbhs_pipe_to_priv(pipe);
++	int offset = usbhsp_addr_offset(pipe);
++
++	if (usbhs_pipe_is_dcp(pipe))
++		usbhs_bset(priv, DCPCTR, mask, val);
++	else
++		usbhs_bset(priv, PIPEnCTR + offset, mask, val);
++}
++
++static u16 usbhsp_pipectrl_get(struct usbhs_pipe *pipe)
++{
++	struct usbhs_priv *priv = usbhs_pipe_to_priv(pipe);
++	int offset = usbhsp_addr_offset(pipe);
++
++	if (usbhs_pipe_is_dcp(pipe))
++		return usbhs_read(priv, DCPCTR);
++	else
++		return usbhs_read(priv, PIPEnCTR + offset);
++}
++
++/*
++ *		DCP/PIPE functions
++ */
++static void __usbhsp_pipe_xxx_set(struct usbhs_pipe *pipe,
++				  u16 dcp_reg, u16 pipe_reg,
++				  u16 mask, u16 val)
++{
++	struct usbhs_priv *priv = usbhs_pipe_to_priv(pipe);
++
++	if (usbhs_pipe_is_dcp(pipe))
++		usbhs_bset(priv, dcp_reg, mask, val);
++	else
++		usbhs_bset(priv, pipe_reg, mask, val);
++}
++
++static u16 __usbhsp_pipe_xxx_get(struct usbhs_pipe *pipe,
++				 u16 dcp_reg, u16 pipe_reg)
++{
++	struct usbhs_priv *priv = usbhs_pipe_to_priv(pipe);
++
++	if (usbhs_pipe_is_dcp(pipe))
++		return usbhs_read(priv, dcp_reg);
++	else
++		return usbhs_read(priv, pipe_reg);
++}
++
++/*
++ *		DCPCFG/PIPECFG functions
++ */
++static void usbhsp_pipe_cfg_set(struct usbhs_pipe *pipe, u16 mask, u16 val)
++{
++	__usbhsp_pipe_xxx_set(pipe, DCPCFG, PIPECFG, mask, val);
++}
++
++static u16 usbhsp_pipe_cfg_get(struct usbhs_pipe *pipe)
++{
++	return __usbhsp_pipe_xxx_get(pipe, DCPCFG, PIPECFG);
++}
++
++/*
++ *		PIPEnTRN/PIPEnTRE functions
++ */
++static void usbhsp_pipe_trn_set(struct usbhs_pipe *pipe, u16 mask, u16 val)
++{
++	struct usbhs_priv *priv = usbhs_pipe_to_priv(pipe);
++	struct device *dev = usbhs_priv_to_dev(priv);
++	int num = usbhs_pipe_number(pipe);
++	u16 reg;
++
++	/*
++	 * It is impossible to calculate address,
++	 * since PIPEnTRN addresses were mapped randomly.
++	 */
++#define CASE_PIPExTRN(a)		\
++	case 0x ## a:			\
++		reg = PIPE ## a ## TRN;	\
++		break;
++
++	switch (num) {
++	CASE_PIPExTRN(1);
++	CASE_PIPExTRN(2);
++	CASE_PIPExTRN(3);
++	CASE_PIPExTRN(4);
++	CASE_PIPExTRN(5);
++	CASE_PIPExTRN(B);
++	CASE_PIPExTRN(C);
++	CASE_PIPExTRN(D);
++	CASE_PIPExTRN(E);
++	CASE_PIPExTRN(F);
++	CASE_PIPExTRN(9);
++	CASE_PIPExTRN(A);
++	default:
++		dev_err(dev, "unknown pipe (%d)\n", num);
++		return;
++	}
++	__usbhsp_pipe_xxx_set(pipe, 0, reg, mask, val);
++}
++
++static void usbhsp_pipe_tre_set(struct usbhs_pipe *pipe, u16 mask, u16 val)
++{
++	struct usbhs_priv *priv = usbhs_pipe_to_priv(pipe);
++	struct device *dev = usbhs_priv_to_dev(priv);
++	int num = usbhs_pipe_number(pipe);
++	u16 reg;
++
++	/*
++	 * It is impossible to calculate address,
++	 * since PIPEnTRE addresses were mapped randomly.
++	 */
++#define CASE_PIPExTRE(a)			\
++	case 0x ## a:				\
++		reg = PIPE ## a ## TRE;		\
++		break;
++
++	switch (num) {
++	CASE_PIPExTRE(1);
++	CASE_PIPExTRE(2);
++	CASE_PIPExTRE(3);
++	CASE_PIPExTRE(4);
++	CASE_PIPExTRE(5);
++	CASE_PIPExTRE(B);
++	CASE_PIPExTRE(C);
++	CASE_PIPExTRE(D);
++	CASE_PIPExTRE(E);
++	CASE_PIPExTRE(F);
++	CASE_PIPExTRE(9);
++	CASE_PIPExTRE(A);
++	default:
++		dev_err(dev, "unknown pipe (%d)\n", num);
++		return;
++	}
++
++	__usbhsp_pipe_xxx_set(pipe, 0, reg, mask, val);
++}
++
++/*
++ *		PIPEBUF
++ */
++static void usbhsp_pipe_buf_set(struct usbhs_pipe *pipe, u16 mask, u16 val)
++{
++	if (usbhs_pipe_is_dcp(pipe))
++		return;
++
++	__usbhsp_pipe_xxx_set(pipe, 0, PIPEBUF, mask, val);
++}
++
++/*
++ *		DCPMAXP/PIPEMAXP
++ */
++static void usbhsp_pipe_maxp_set(struct usbhs_pipe *pipe, u16 mask, u16 val)
++{
++	__usbhsp_pipe_xxx_set(pipe, DCPMAXP, PIPEMAXP, mask, val);
++}
++
++/*
++ *		pipe control functions
++ */
++static void usbhsp_pipe_select(struct usbhs_pipe *pipe)
++{
++	struct usbhs_priv *priv = usbhs_pipe_to_priv(pipe);
++
++	/*
++	 * On pipe, this is necessary before
++	 * accesses to below registers.
++	 *
++	 * PIPESEL	: usbhsp_pipe_select
++	 * PIPECFG	: usbhsp_pipe_cfg_xxx
++	 * PIPEBUF	: usbhsp_pipe_buf_xxx
++	 * PIPEMAXP	: usbhsp_pipe_maxp_xxx
++	 * PIPEPERI
++	 */
++
++	/*
++	 * if pipe is dcp, no pipe is selected.
++	 * it is no problem, because dcp have its register
++	 */
++	usbhs_write(priv, PIPESEL, 0xF & usbhs_pipe_number(pipe));
++}
++
++static int usbhsp_pipe_barrier(struct usbhs_pipe *pipe)
++{
++	struct usbhs_priv *priv = usbhs_pipe_to_priv(pipe);
++	int timeout = 1024;
++	u16 mask = usbhs_mod_is_host(priv) ? (CSSTS | PID_MASK) : PID_MASK;
++
++	/*
++	 * make sure....
++	 *
++	 * Modify these bits when CSSTS = 0, PID = NAK, and no pipe number is
++	 * specified by the CURPIPE bits.
++	 * When changing the setting of this bit after changing
++	 * the PID bits for the selected pipe from BUF to NAK,
++	 * check that CSSTS = 0 and PBUSY = 0.
++	 */
++
++	/*
++	 * CURPIPE bit = 0
++	 *
++	 * see also
++	 *  "Operation"
++	 *  - "Pipe Control"
++	 *   - "Pipe Control Registers Switching Procedure"
++	 */
++	usbhs_write(priv, CFIFOSEL, 0);
++	usbhs_pipe_disable(pipe);
++
++	do {
++		if (!(usbhsp_pipectrl_get(pipe) & mask))
++			return 0;
++
++		udelay(10);
++
++	} while (timeout--);
++
++	return -EBUSY;
++}
++
++int usbhs_pipe_is_accessible(struct usbhs_pipe *pipe)
++{
++	u16 val;
++
++	val = usbhsp_pipectrl_get(pipe);
++	if (val & BSTS)
++		return 0;
++
++	return -EBUSY;
++}
++
++bool usbhs_pipe_contains_transmittable_data(struct usbhs_pipe *pipe)
++{
++	u16 val;
++
++	/* Do not support for DCP pipe */
++	if (usbhs_pipe_is_dcp(pipe))
++		return false;
++
++	val = usbhsp_pipectrl_get(pipe);
++	if (val & INBUFM)
++		return true;
++
++	return false;
++}
++
++/*
++ *		PID ctrl
++ */
++static void __usbhsp_pid_try_nak_if_stall(struct usbhs_pipe *pipe)
++{
++	u16 pid = usbhsp_pipectrl_get(pipe);
++
++	pid &= PID_MASK;
++
++	/*
++	 * see
++	 * "Pipe n Control Register" - "PID"
++	 */
++	switch (pid) {
++	case PID_STALL11:
++		usbhsp_pipectrl_set(pipe, PID_MASK, PID_STALL10);
++		fallthrough;
++	case PID_STALL10:
++		usbhsp_pipectrl_set(pipe, PID_MASK, PID_NAK);
++	}
++}
++
++void usbhs_pipe_disable(struct usbhs_pipe *pipe)
++{
++	int timeout = 1024;
++	u16 val;
++
++	/* see "Pipe n Control Register" - "PID" */
++	__usbhsp_pid_try_nak_if_stall(pipe);
++
++	usbhsp_pipectrl_set(pipe, PID_MASK, PID_NAK);
++
++	do {
++		val  = usbhsp_pipectrl_get(pipe);
++		val &= PBUSY;
++		if (!val)
++			break;
++
++		udelay(10);
++	} while (timeout--);
++}
++
++void usbhs_pipe_enable(struct usbhs_pipe *pipe)
++{
++	/* see "Pipe n Control Register" - "PID" */
++	__usbhsp_pid_try_nak_if_stall(pipe);
++
++	usbhsp_pipectrl_set(pipe, PID_MASK, PID_BUF);
++}
++
++void usbhs_pipe_stall(struct usbhs_pipe *pipe)
++{
++	u16 pid = usbhsp_pipectrl_get(pipe);
++
++	pid &= PID_MASK;
++
++	/*
++	 * see
++	 * "Pipe n Control Register" - "PID"
++	 */
++	switch (pid) {
++	case PID_NAK:
++		usbhsp_pipectrl_set(pipe, PID_MASK, PID_STALL10);
++		break;
++	case PID_BUF:
++		usbhsp_pipectrl_set(pipe, PID_MASK, PID_STALL11);
++		break;
++	}
++}
++
++int usbhs_pipe_is_stall(struct usbhs_pipe *pipe)
++{
++	u16 pid = usbhsp_pipectrl_get(pipe) & PID_MASK;
++
++	return (int)(pid == PID_STALL10 || pid == PID_STALL11);
++}
++
++void usbhs_pipe_set_trans_count_if_bulk(struct usbhs_pipe *pipe, int len)
++{
++	if (!usbhs_pipe_type_is(pipe, USB_ENDPOINT_XFER_BULK))
++		return;
++
++	/*
++	 * clear and disable transfer counter for IN/OUT pipe
++	 */
++	usbhsp_pipe_tre_set(pipe, TRCLR | TRENB, TRCLR);
++
++	/*
++	 * Only IN direction bulk pipe can use transfer count.
++	 * Without using this function,
++	 * received data will break if it was large data size.
++	 * see PIPEnTRN/PIPEnTRE for detail
++	 */
++	if (usbhs_pipe_is_dir_in(pipe)) {
++		int maxp = usbhs_pipe_get_maxpacket(pipe);
++
++		usbhsp_pipe_trn_set(pipe, 0xffff, DIV_ROUND_UP(len, maxp));
++		usbhsp_pipe_tre_set(pipe, TRENB, TRENB); /* enable */
++	}
++}
++
++
++/*
++ *		pipe setup
++ */
++static int usbhsp_setup_pipecfg(struct usbhs_pipe *pipe, int is_host,
++				int dir_in, u16 *pipecfg)
++{
++	u16 type = 0;
++	u16 bfre = 0;
++	u16 dblb = 0;
++	u16 cntmd = 0;
++	u16 dir = 0;
++	u16 epnum = 0;
++	u16 shtnak = 0;
++	static const u16 type_array[] = {
++		[USB_ENDPOINT_XFER_BULK] = TYPE_BULK,
++		[USB_ENDPOINT_XFER_INT]  = TYPE_INT,
++		[USB_ENDPOINT_XFER_ISOC] = TYPE_ISO,
++	};
++
++	if (usbhs_pipe_is_dcp(pipe))
++		return -EINVAL;
++
++	/*
++	 * PIPECFG
++	 *
++	 * see
++	 *  - "Register Descriptions" - "PIPECFG" register
++	 *  - "Features"  - "Pipe configuration"
++	 *  - "Operation" - "Pipe Control"
++	 */
++
++	/* TYPE */
++	type = type_array[usbhs_pipe_type(pipe)];
++
++	/* BFRE */
++	if (usbhs_pipe_type_is(pipe, USB_ENDPOINT_XFER_ISOC) ||
++	    usbhs_pipe_type_is(pipe, USB_ENDPOINT_XFER_BULK))
++		bfre = 0; /* FIXME */
++
++	/* DBLB: see usbhs_pipe_config_update() */
++
++	/* CNTMD */
++	if (usbhs_pipe_type_is(pipe, USB_ENDPOINT_XFER_BULK))
++		cntmd = 0; /* FIXME */
++
++	/* DIR */
++	if (dir_in)
++		usbhsp_flags_set(pipe, IS_DIR_HOST);
++
++	if (!!is_host ^ !!dir_in)
++		dir |= DIR_OUT;
++
++	if (!dir)
++		usbhsp_flags_set(pipe, IS_DIR_IN);
++
++	/* SHTNAK */
++	if (usbhs_pipe_type_is(pipe, USB_ENDPOINT_XFER_BULK) &&
++	    !dir)
++		shtnak = SHTNAK;
++
++	/* EPNUM */
++	epnum = 0; /* see usbhs_pipe_config_update() */
++	*pipecfg = type		|
++		   bfre		|
++		   dblb		|
++		   cntmd	|
++		   dir		|
++		   shtnak	|
++		   epnum;
++	return 0;
++}
++
++static u16 usbhsp_setup_pipebuff(struct usbhs_pipe *pipe)
++{
++	struct usbhs_priv *priv = usbhs_pipe_to_priv(pipe);
++	struct device *dev = usbhs_priv_to_dev(priv);
++	int pipe_num = usbhs_pipe_number(pipe);
++	u16 buff_size;
++	u16 bufnmb;
++	u16 bufnmb_cnt;
++	struct renesas_usbhs_driver_pipe_config *pipe_config =
++					usbhsp_get_pipe_config(priv, pipe_num);
++
++	/*
++	 * PIPEBUF
++	 *
++	 * see
++	 *  - "Register Descriptions" - "PIPEBUF" register
++	 *  - "Features"  - "Pipe configuration"
++	 *  - "Operation" - "FIFO Buffer Memory"
++	 *  - "Operation" - "Pipe Control"
++	 */
++	buff_size = pipe_config->bufsize;
++	bufnmb = pipe_config->bufnum;
++
++	/* change buff_size to register value */
++	bufnmb_cnt = (buff_size / 64) - 1;
++
++	dev_dbg(dev, "pipe : %d : buff_size 0x%x: bufnmb 0x%x\n",
++		pipe_num, buff_size, bufnmb);
++
++	return	(0x1f & bufnmb_cnt)	<< 10 |
++		(0xff & bufnmb)		<<  0;
++}
++
++void usbhs_pipe_config_update(struct usbhs_pipe *pipe, u16 devsel,
++			      u16 epnum, u16 maxp)
++{
++	struct usbhs_priv *priv = usbhs_pipe_to_priv(pipe);
++	int pipe_num = usbhs_pipe_number(pipe);
++	struct renesas_usbhs_driver_pipe_config *pipe_config =
++					usbhsp_get_pipe_config(priv, pipe_num);
++	u16 dblb = pipe_config->double_buf ? DBLB : 0;
++
++	if (devsel > 0xA) {
++		struct device *dev = usbhs_priv_to_dev(priv);
++
++		dev_err(dev, "devsel error %d\n", devsel);
++
++		devsel = 0;
++	}
++
++	usbhsp_pipe_barrier(pipe);
++
++	pipe->maxp = maxp;
++
++	usbhsp_pipe_select(pipe);
++	usbhsp_pipe_maxp_set(pipe, 0xFFFF,
++			     (devsel << 12) |
++			     maxp);
++
++	if (!usbhs_pipe_is_dcp(pipe))
++		usbhsp_pipe_cfg_set(pipe,  0x000F | DBLB, epnum | dblb);
++}
++
++/*
++ *		pipe control
++ */
++int usbhs_pipe_get_maxpacket(struct usbhs_pipe *pipe)
++{
++	/*
++	 * see
++	 *	usbhs_pipe_config_update()
++	 *	usbhs_dcp_malloc()
++	 */
++	return pipe->maxp;
++}
++
++int usbhs_pipe_is_dir_in(struct usbhs_pipe *pipe)
++{
++	return usbhsp_flags_has(pipe, IS_DIR_IN);
++}
++
++int usbhs_pipe_is_dir_host(struct usbhs_pipe *pipe)
++{
++	return usbhsp_flags_has(pipe, IS_DIR_HOST);
++}
++
++int usbhs_pipe_is_running(struct usbhs_pipe *pipe)
++{
++	return usbhsp_flags_has(pipe, IS_RUNNING);
++}
++
++void usbhs_pipe_running(struct usbhs_pipe *pipe, int running)
++{
++	if (running)
++		usbhsp_flags_set(pipe, IS_RUNNING);
++	else
++		usbhsp_flags_clr(pipe, IS_RUNNING);
++}
++
++void usbhs_pipe_data_sequence(struct usbhs_pipe *pipe, int sequence)
++{
++	u16 mask = (SQCLR | SQSET);
++	u16 val;
++
++	/*
++	 * sequence
++	 *  0  : data0
++	 *  1  : data1
++	 *  -1 : no change
++	 */
++	switch (sequence) {
++	case 0:
++		val = SQCLR;
++		break;
++	case 1:
++		val = SQSET;
++		break;
++	default:
++		return;
++	}
++
++	usbhsp_pipectrl_set(pipe, mask, val);
++}
++
++static int usbhs_pipe_get_data_sequence(struct usbhs_pipe *pipe)
++{
++	return !!(usbhsp_pipectrl_get(pipe) & SQMON);
++}
++
++void usbhs_pipe_clear(struct usbhs_pipe *pipe)
++{
++	if (usbhs_pipe_is_dcp(pipe)) {
++		usbhs_fifo_clear_dcp(pipe);
++	} else {
++		usbhsp_pipectrl_set(pipe, ACLRM, ACLRM);
++		usbhsp_pipectrl_set(pipe, ACLRM, 0);
++	}
++}
++
++/* Should call usbhsp_pipe_select() before */
++void usbhs_pipe_clear_without_sequence(struct usbhs_pipe *pipe,
++				       int needs_bfre, int bfre_enable)
++{
++	int sequence;
++
++	usbhsp_pipe_select(pipe);
++	sequence = usbhs_pipe_get_data_sequence(pipe);
++	if (needs_bfre)
++		usbhsp_pipe_cfg_set(pipe, BFRE, bfre_enable ? BFRE : 0);
++	usbhs_pipe_clear(pipe);
++	usbhs_pipe_data_sequence(pipe, sequence);
++}
++
++void usbhs_pipe_config_change_bfre(struct usbhs_pipe *pipe, int enable)
++{
++	if (usbhs_pipe_is_dcp(pipe))
++		return;
++
++	usbhsp_pipe_select(pipe);
++	/* check if the driver needs to change the BFRE value */
++	if (!(enable ^ !!(usbhsp_pipe_cfg_get(pipe) & BFRE)))
++		return;
++
++	usbhs_pipe_clear_without_sequence(pipe, 1, enable);
++}
++
++static struct usbhs_pipe *usbhsp_get_pipe(struct usbhs_priv *priv, u32 type)
++{
++	struct usbhs_pipe *pos, *pipe;
++	int i;
++
++	/*
++	 * find target pipe
++	 */
++	pipe = NULL;
++	usbhs_for_each_pipe_with_dcp(pos, priv, i) {
++		if (!usbhs_pipe_type_is(pos, type))
++			continue;
++		if (usbhsp_flags_has(pos, IS_USED))
++			continue;
++
++		pipe = pos;
++		break;
++	}
++
++	if (!pipe)
++		return NULL;
++
++	/*
++	 * initialize pipe flags
++	 */
++	usbhsp_flags_init(pipe);
++	usbhsp_flags_set(pipe, IS_USED);
++
++	return pipe;
++}
++
++static void usbhsp_put_pipe(struct usbhs_pipe *pipe)
++{
++	usbhsp_flags_init(pipe);
++}
++
++void usbhs_pipe_init(struct usbhs_priv *priv,
++		     int (*dma_map_ctrl)(struct usbhs_pkt *pkt, int map))
++{
++	struct usbhs_pipe_info *info = usbhs_priv_to_pipeinfo(priv);
++	struct usbhs_pipe *pipe;
++	int i;
++
++	usbhs_for_each_pipe_with_dcp(pipe, priv, i) {
++		usbhsp_flags_init(pipe);
++		pipe->fifo = NULL;
++		pipe->mod_private = NULL;
++		INIT_LIST_HEAD(&pipe->list);
++
++		/* pipe force init */
++		usbhs_pipe_clear(pipe);
++	}
++
++	info->dma_map_ctrl = dma_map_ctrl;
++}
++
++struct usbhs_pipe *usbhs_pipe_malloc(struct usbhs_priv *priv,
++				     int endpoint_type,
++				     int dir_in)
++{
++	struct device *dev = usbhs_priv_to_dev(priv);
++	struct usbhs_pipe *pipe;
++	int is_host = usbhs_mod_is_host(priv);
++	int ret;
++	u16 pipecfg, pipebuf;
++
++	pipe = usbhsp_get_pipe(priv, endpoint_type);
++	if (!pipe) {
++		dev_err(dev, "can't get pipe (%s)\n",
++			usbhsp_pipe_name[endpoint_type]);
++		return NULL;
++	}
++
++	INIT_LIST_HEAD(&pipe->list);
++
++	usbhs_pipe_disable(pipe);
++
++	/* make sure pipe is not busy */
++	ret = usbhsp_pipe_barrier(pipe);
++	if (ret < 0) {
++		dev_err(dev, "pipe setup failed %d\n", usbhs_pipe_number(pipe));
++		return NULL;
++	}
++
++	if (usbhsp_setup_pipecfg(pipe, is_host, dir_in, &pipecfg)) {
++		dev_err(dev, "can't setup pipe\n");
++		return NULL;
++	}
++
++	pipebuf  = usbhsp_setup_pipebuff(pipe);
++
++	usbhsp_pipe_select(pipe);
++	usbhsp_pipe_cfg_set(pipe, 0xFFFF, pipecfg);
++	usbhsp_pipe_buf_set(pipe, 0xFFFF, pipebuf);
++	usbhs_pipe_clear(pipe);
++
++	usbhs_pipe_sequence_data0(pipe);
++
++	dev_dbg(dev, "enable pipe %d : %s (%s)\n",
++		usbhs_pipe_number(pipe),
++		usbhs_pipe_name(pipe),
++		usbhs_pipe_is_dir_in(pipe) ? "in" : "out");
++
++	/*
++	 * epnum / maxp are still not set to this pipe.
++	 * call usbhs_pipe_config_update() after this function !!
++	 */
++
++	return pipe;
++}
++
++void usbhs_pipe_free(struct usbhs_pipe *pipe)
++{
++	usbhsp_pipe_select(pipe);
++	usbhsp_pipe_cfg_set(pipe, 0xFFFF, 0);
++	usbhsp_put_pipe(pipe);
++}
++
++void usbhs_pipe_select_fifo(struct usbhs_pipe *pipe, struct usbhs_fifo *fifo)
++{
++	if (pipe->fifo)
++		pipe->fifo->pipe = NULL;
++
++	pipe->fifo = fifo;
++
++	if (fifo)
++		fifo->pipe = pipe;
++}
++
++
++/*
++ *		dcp control
++ */
++struct usbhs_pipe *usbhs_dcp_malloc(struct usbhs_priv *priv)
++{
++	struct usbhs_pipe *pipe;
++
++	pipe = usbhsp_get_pipe(priv, USB_ENDPOINT_XFER_CONTROL);
++	if (!pipe)
++		return NULL;
++
++	INIT_LIST_HEAD(&pipe->list);
++
++	/*
++	 * call usbhs_pipe_config_update() after this function !!
++	 */
++
++	return pipe;
++}
++
++void usbhs_dcp_control_transfer_done(struct usbhs_pipe *pipe)
++{
++	struct usbhs_priv *priv = usbhs_pipe_to_priv(pipe);
++
++	WARN_ON(!usbhs_pipe_is_dcp(pipe));
++
++	usbhs_pipe_enable(pipe);
++
++	if (!usbhs_mod_is_host(priv)) /* funconly */
++		usbhsp_pipectrl_set(pipe, CCPL, CCPL);
++}
++
++void usbhs_dcp_dir_for_host(struct usbhs_pipe *pipe, int dir_out)
++{
++	usbhsp_pipe_cfg_set(pipe, DIR_OUT,
++			    dir_out ? DIR_OUT : 0);
++}
++
++/*
++ *		pipe module function
++ */
++int usbhs_pipe_probe(struct usbhs_priv *priv)
++{
++	struct usbhs_pipe_info *info = usbhs_priv_to_pipeinfo(priv);
++	struct usbhs_pipe *pipe;
++	struct device *dev = usbhs_priv_to_dev(priv);
++	struct renesas_usbhs_driver_pipe_config *pipe_configs =
++					usbhs_get_dparam(priv, pipe_configs);
++	int pipe_size = usbhs_get_dparam(priv, pipe_size);
++	int i;
++
++	/* This driver expects 1st pipe is DCP */
++	if (pipe_configs[0].type != USB_ENDPOINT_XFER_CONTROL) {
++		dev_err(dev, "1st PIPE is not DCP\n");
++		return -EINVAL;
++	}
++
++	info->pipe = kcalloc(pipe_size, sizeof(struct usbhs_pipe),
++			     GFP_KERNEL);
++	if (!info->pipe)
++		return -ENOMEM;
++
++	info->size = pipe_size;
++
++	/*
++	 * init pipe
++	 */
++	usbhs_for_each_pipe_with_dcp(pipe, priv, i) {
++		pipe->priv = priv;
++
++		usbhs_pipe_type(pipe) =
++			pipe_configs[i].type & USB_ENDPOINT_XFERTYPE_MASK;
++
++		dev_dbg(dev, "pipe %x\t: %s\n",
++			i, usbhsp_pipe_name[pipe_configs[i].type]);
++	}
++
++	return 0;
++}
++
++void usbhs_pipe_remove(struct usbhs_priv *priv)
++{
++	struct usbhs_pipe_info *info = usbhs_priv_to_pipeinfo(priv);
++
++	kfree(info->pipe);
++}
+diff --git a/drivers/usb/gadget/rcar/pipe.h b/drivers/usb/gadget/rcar/pipe.h
+new file mode 100644
+index 00000000000..01c15178a28
+--- /dev/null
++++ b/drivers/usb/gadget/rcar/pipe.h
+@@ -0,0 +1,114 @@
++// SPDX-License-Identifier: GPL-1.0+
++/*
++ * Renesas USB driver
++ *
++ * Copyright (C) 2011 Renesas Solutions Corp.
++ * Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
++ */
++#ifndef RENESAS_USB_PIPE_H
++#define RENESAS_USB_PIPE_H
++
++#include "common.h"
++#include "fifo.h"
++
++/*
++ *	struct
++ */
++struct usbhs_pipe {
++	u32 pipe_type;	/* USB_ENDPOINT_XFER_xxx */
++
++	struct usbhs_priv *priv;
++	struct usbhs_fifo *fifo;
++	struct list_head list;
++
++	int maxp;
++
++	u32 flags;
++#define USBHS_PIPE_FLAGS_IS_USED		(1 << 0)
++#define USBHS_PIPE_FLAGS_IS_DIR_IN		(1 << 1)
++#define USBHS_PIPE_FLAGS_IS_DIR_HOST		(1 << 2)
++#define USBHS_PIPE_FLAGS_IS_RUNNING		(1 << 3)
++
++	const struct usbhs_pkt_handle *handler;
++
++	void *mod_private;
++};
++
++struct usbhs_pipe_info {
++	struct usbhs_pipe *pipe;
++	int size;	/* array size of "pipe" */
++
++	int (*dma_map_ctrl)(struct usbhs_pkt *pkt, int map);
++};
++
++/*
++ * pipe list
++ */
++#define __usbhs_for_each_pipe(start, pos, info, i)	\
++	for ((i) = start;						\
++	     ((i) < (info)->size) && ((pos) = (info)->pipe + (i));	\
++	     (i)++)
++
++#define usbhs_for_each_pipe(pos, priv, i)			\
++	__usbhs_for_each_pipe(1, pos, &((priv)->pipe_info), i)
++
++#define usbhs_for_each_pipe_with_dcp(pos, priv, i)		\
++	__usbhs_for_each_pipe(0, pos, &((priv)->pipe_info), i)
++
++/*
++ * data
++ */
++#define usbhs_priv_to_pipeinfo(pr)	(&(pr)->pipe_info)
++
++/*
++ * pipe control
++ */
++char *usbhs_pipe_name(struct usbhs_pipe *pipe);
++struct usbhs_pipe
++*usbhs_pipe_malloc(struct usbhs_priv *priv, int endpoint_type, int dir_in);
++void usbhs_pipe_free(struct usbhs_pipe *pipe);
++int usbhs_pipe_probe(struct usbhs_priv *priv);
++void usbhs_pipe_remove(struct usbhs_priv *priv);
++int usbhs_pipe_is_dir_in(struct usbhs_pipe *pipe);
++int usbhs_pipe_is_dir_host(struct usbhs_pipe *pipe);
++int usbhs_pipe_is_running(struct usbhs_pipe *pipe);
++void usbhs_pipe_running(struct usbhs_pipe *pipe, int running);
++
++void usbhs_pipe_init(struct usbhs_priv *priv,
++		     int (*dma_map_ctrl)(struct usbhs_pkt *pkt, int map));
++int usbhs_pipe_get_maxpacket(struct usbhs_pipe *pipe);
++void usbhs_pipe_clear(struct usbhs_pipe *pipe);
++void usbhs_pipe_clear_without_sequence(struct usbhs_pipe *pipe,
++				       int needs_bfre, int bfre_enable);
++int usbhs_pipe_is_accessible(struct usbhs_pipe *pipe);
++void usbhs_pipe_enable(struct usbhs_pipe *pipe);
++void usbhs_pipe_disable(struct usbhs_pipe *pipe);
++void usbhs_pipe_stall(struct usbhs_pipe *pipe);
++int usbhs_pipe_is_stall(struct usbhs_pipe *pipe);
++void usbhs_pipe_set_trans_count_if_bulk(struct usbhs_pipe *pipe, int len);
++void usbhs_pipe_select_fifo(struct usbhs_pipe *pipe, struct usbhs_fifo *fifo);
++void usbhs_pipe_config_update(struct usbhs_pipe *pipe, u16 devsel,
++			      u16 epnum, u16 maxp);
++void usbhs_pipe_config_change_bfre(struct usbhs_pipe *pipe, int enable);
++
++#define usbhs_pipe_sequence_data0(pipe)	usbhs_pipe_data_sequence(pipe, 0)
++#define usbhs_pipe_sequence_data1(pipe)	usbhs_pipe_data_sequence(pipe, 1)
++void usbhs_pipe_data_sequence(struct usbhs_pipe *pipe, int data);
++
++#define usbhs_pipe_to_priv(p)	((p)->priv)
++#define usbhs_pipe_number(p)	(int)((p) - (p)->priv->pipe_info.pipe)
++#define usbhs_pipe_is_dcp(p)	((p)->priv->pipe_info.pipe == (p))
++#define usbhs_pipe_to_fifo(p)	((p)->fifo)
++#define usbhs_pipe_is_busy(p)	usbhs_pipe_to_fifo(p)
++
++#define usbhs_pipe_type(p)		((p)->pipe_type)
++#define usbhs_pipe_type_is(p, t)	((p)->pipe_type == t)
++
++/*
++ * dcp control
++ */
++struct usbhs_pipe *usbhs_dcp_malloc(struct usbhs_priv *priv);
++void usbhs_dcp_control_transfer_done(struct usbhs_pipe *pipe);
++void usbhs_dcp_dir_for_host(struct usbhs_pipe *pipe, int dir_out);
++
++#endif /* RENESAS_USB_PIPE_H */
+diff --git a/drivers/usb/gadget/rcar/renesas_usb.h b/drivers/usb/gadget/rcar/renesas_usb.h
+new file mode 100644
+index 00000000000..8155e3dcaf6
+--- /dev/null
++++ b/drivers/usb/gadget/rcar/renesas_usb.h
+@@ -0,0 +1,125 @@
++// SPDX-License-Identifier: GPL-1.0+
++/*
++ * Renesas USB
++ *
++ * Copyright (C) 2011 Renesas Solutions Corp.
++ * Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
++ *
++ * Ported to u-boot
++ * Copyright (C) 2016 GlobalLogic
++ */
++#ifndef RENESAS_USB_H
++#define RENESAS_USB_H
++
++#include <linux/usb/ch9.h>
++#include <linux/compat.h>
++
++struct platform_device {
++	const char	*name;
++	struct device	dev;
++};
++
++/*
++ * module type
++ *
++ * it will be return value from get_id
++ */
++enum {
++	USBHS_HOST = 0,
++	USBHS_GADGET,
++	USBHS_MAX,
++};
++
++/*
++ * parameters for renesas usbhs
++ *
++ * some register needs USB chip specific parameters.
++ * This struct show it to driver
++ */
++
++struct renesas_usbhs_driver_pipe_config {
++	u8 type;	/* USB_ENDPOINT_XFER_xxx */
++	u16 bufsize;
++	u8 bufnum;
++	bool double_buf;
++};
++#define RENESAS_USBHS_PIPE(_type, _size, _num, _double_buf)	{	\
++			.type = (_type),		\
++			.bufsize = (_size),		\
++			.bufnum = (_num),		\
++			.double_buf = (_double_buf),	\
++	}
++
++struct renesas_usbhs_driver_param {
++	/*
++	 * pipe settings
++	 */
++	struct renesas_usbhs_driver_pipe_config *pipe_configs;
++	int pipe_size; /* pipe_configs array size */
++
++	/*
++	 * option:
++	 *
++	 * for BUSWAIT :: BWAIT
++	 * see
++	 *	renesas_usbhs/common.c :: usbhsc_set_buswait()
++	 * */
++	int buswait_bwait;
++
++	/*
++	 * option:
++	 *
++	 * delay time from notify_hotplug callback
++	 */
++	int detection_delay; /* msec */
++
++	/*
++	 * option:
++	 *
++	 * dma id for dmaengine
++	 * The data transfer direction on D0FIFO/D1FIFO should be
++	 * fixed for keeping consistency.
++	 * So, the platform id settings will be..
++	 *	.d0_tx_id = xx_TX,
++	 *	.d1_rx_id = xx_RX,
++	 * or
++	 *	.d1_tx_id = xx_TX,
++	 *	.d0_rx_id = xx_RX,
++	 */
++	int d0_tx_id;
++	int d0_rx_id;
++	int d1_tx_id;
++	int d1_rx_id;
++	int d2_tx_id;
++	int d2_rx_id;
++	int d3_tx_id;
++	int d3_rx_id;
++
++	/*
++	 * option:
++	 *
++	 * pio <--> dma border.
++	 */
++	int pio_dma_border; /* default is 64byte */
++
++	uintptr_t type;
++	u32 enable_gpio;
++
++	/*
++	 * option:
++	 */
++	u32 has_otg:1; /* for controlling PWEN/EXTLP */
++	u32 has_sudmac:1; /* for SUDMAC */
++	u32 has_usb_dmac:1; /* for USB-DMAC */
++	u32 cfifo_byte_addr:1; /* CFIFO is byte addressable */
++#define USBHS_USB_DMAC_XFER_SIZE	32	/* hardcode the xfer size */
++	u32 multi_clks:1;
++	u32 has_new_pipe_configs:1;
++};
++
++#define USBHS_TYPE_RCAR_GEN3		2
++
++struct usbhs_priv;
++struct usb_gadget *usbhsg_get_gadget(struct usbhs_priv *priv);
++
++#endif /* RENESAS_USB_H */
 -- 
-Vincent Legoll
+2.45.2
 
---0000000000005b18bf06219e92bc
-Content-Type: text/x-log; charset="US-ASCII"; name="u-boot.log"
-Content-Disposition: attachment; filename="u-boot.log"
-Content-Transfer-Encoding: base64
-Content-ID: <f_m0tthrgb1>
-X-Attachment-Id: f_m0tthrgb1
-
-RERSIDlmZmZiZTFlNzggY3ltIDI0LzAyLzA0LTEwOjA5OjIwLGZ3dmVyOiB2MS4xNgpMUEREUjRY
-LCAyMTEyTUh6CmNoYW5uZWxbMF0gQlc9MTYgQ29sPTEwIEJrPTggQ1MwIFJvdz0xNyBDUzEgUm93
-PTE3IENTPTIgRGllIEJXPTggU2l6ZT00MDk2TUIKY2hhbm5lbFsxXSBCVz0xNiBDb2w9MTAgQms9
-OCBDUzAgUm93PTE3IENTMSBSb3c9MTcgQ1M9MiBEaWUgQlc9OCBTaXplPTQwOTZNQgpjaGFubmVs
-WzJdIEJXPTE2IENvbD0xMCBCaz04IENTMCBSb3c9MTcgQ1MxIFJvdz0xNyBDUz0yIERpZSBCVz04
-IFNpemU9NDA5Nk1CCmNoYW5uZWxbM10gQlc9MTYgQ29sPTEwIEJrPTggQ1MwIFJvdz0xNyBDUzEg
-Um93PTE3IENTPTIgRGllIEJXPTggU2l6ZT00MDk2TUIKTWFudWZhY3R1cmVyIElEOjB4NgpDSDAg
-UlggVnJlZjoyOS4zJSwgVFggVnJlZjoyMi44JSwyMS44JQpDSDEgUlggVnJlZjoyNy45JSwgVFgg
-VnJlZjoyMy44JSwyMy44JQpDSDIgUlggVnJlZjoyOS43JSwgVFggVnJlZjoyMi44JSwyMi44JQpD
-SDMgUlggVnJlZjozMS44JSwgVFggVnJlZjoyMi44JSwyMi44JQpjaGFuZ2UgdG8gRjE6IDUyOE1I
-egpjaGFuZ2UgdG8gRjI6IDEwNjhNSHoKY2hhbmdlIHRvIEYzOiAxNTYwTUh6CmNoYW5nZSB0byBG
-MDogMjExMk1IegpvdXQKVS1Cb290IFNQTCBib2FyZCBpbml0ClUtQm9vdCBTUEwgMjAxNy4wOS1n
-ZTRlMTI0OTI2ZS0yMzA5MjIgI2x4aCAoU2VwIDI1IDIwMjMgLSAxMDo1ODozOCksIGZ3dmVyOiB2
-MS4xMwp1bmtub3duIHJhdyBJRCAwIDAgMAp1bnJlY29nbml6ZWQgSkVERUMgaWQgYnl0ZXM6IDAw
-LCAwMCwgMDAKVHJ5aW5nIHRvIGJvb3QgZnJvbSBNTUMyCk5vIG1pc2MgcGFydGl0aW9uClRyeWlu
-ZyBmaXQgaW1hZ2UgYXQgMHg0MDAwIHNlY3RvcgojIyBWZXJpZmllZC1ib290OiAwCiMjIENoZWNr
-aW5nIGF0Zi0xIDB4MDAwNDAwMDAgLi4uIHNoYTI1NihhYzI5MjA0YTAyLi4uKSArIE9LCiMjIENo
-ZWNraW5nIHUtYm9vdCAweDAwYTAwMDAwIC4uLiBzaGEyNTYoYzdmNDkyYmRkNy4uLikgKyBPSwoj
-IyBDaGVja2luZyBmZHQtMSAweDAwYWQzOWUwIC4uLiBzaGEyNTYoZTBkY2FiNGU3ZC4uLikgKyBP
-SwojIyBDaGVja2luZyBhdGYtMiAweGZmMTAwMDAwIC4uLiBzaGEyNTYoNzM0MWY5Y2Y3Ny4uLikg
-KyBPSwpKdW1waW5nIHRvIFUtQm9vdCgweDAwYTAwMDAwKSB2aWEgQVJNIFRydXN0ZWQgRmlybXdh
-cmUoMHgwMDA0MDAwMCkKVG90YWw6IDMxMS42NzAvNDc1Ljg1NiBtcwoKTk9USUNFOiAgQkwzMTog
-djIuMTEuMChyZWxlYXNlKTp2Mi4xMS4wLTUzMy1nNDQ0MThmY2UzCk5PVElDRTogIEJMMzE6IEJ1
-aWx0IDogMTA6NDI6MzYsIFNlcCAgOCAyMDI0CgoKVS1Cb290IDIwMjQuMTAtcmM0LTAwMDA0LWcx
-NjMwZmYyNmNjOTYgKFNlcCAwOCAyMDI0IC0gMTg6NDE6MzYgKzAyMDApCgpNb2RlbDogUGluZTY0
-IFF1YXJ0elBybzY0CkRSQU06ICAxNiBHaUIKQ29yZTogIDMzOCBkZXZpY2VzLCAzMSB1Y2xhc3Nl
-cywgZGV2aWNldHJlZTogc2VwYXJhdGUKTU1DOiAgIG1tY0BmZTJjMDAwMDogMSwgbW1jQGZlMmUw
-MDAwOiAwCkxvYWRpbmcgRW52aXJvbm1lbnQgZnJvbSBNTUMuLi4gTU1DIHBhcnRpdGlvbiBzd2l0
-Y2ggZmFpbGVkCioqKiBXYXJuaW5nIC0gTU1DIHBhcnRpdGlvbiBzd2l0Y2ggZmFpbGVkLCB1c2lu
-ZyBkZWZhdWx0IGVudmlyb25tZW50CgpJbjogICAgc2VyaWFsQGZlYjUwMDAwCk91dDogICBzZXJp
-YWxAZmViNTAwMDAKRXJyOiAgIHNlcmlhbEBmZWI1MDAwMApNb2RlbDogUGluZTY0IFF1YXJ0elBy
-bzY0Ck5ldDogICBldGgwOiBldGhlcm5ldEBmZTFiMDAwMApIaXQgYW55IGtleSB0byBzdG9wIGF1
-dG9ib290OiAgMAo9PiBlbnYgaW5mbwplbnZfdmFsaWQgPSB2YWxpZAplbnZfcmVhZHkgPSB0cnVl
-CmVudl91c2VfZGVmYXVsdCA9IHRydWUKPT4gZW52IHNhdmUKU2F2aW5nIEVudmlyb25tZW50IHRv
-IE1NQy4uLiBNTUMgcGFydGl0aW9uIHN3aXRjaCBmYWlsZWQKTU1DIHBhcnRpdGlvbiBzd2l0Y2gg
-ZmFpbGVkCkZhaWxlZCAoMSkKPT4gZW52IGVyYXNlCkVyYXNpbmcgRW52aXJvbm1lbnQgb24gTU1D
-Li4uIE1NQyBwYXJ0aXRpb24gc3dpdGNoIGZhaWxlZApNTUMgcGFydGl0aW9uIHN3aXRjaCBmYWls
-ZWQKRmFpbGVkICgxKQo9PiBlbnYgc2VsZWN0IE1NQwpTZWxlY3QgRW52aXJvbm1lbnQgb24gTU1D
-OiBPSwo9PiBlbnYgZXJhc2UKRXJhc2luZyBFbnZpcm9ubWVudCBvbiBNTUMuLi4gTU1DIHBhcnRp
-dGlvbiBzd2l0Y2ggZmFpbGVkCk1NQyBwYXJ0aXRpb24gc3dpdGNoIGZhaWxlZApGYWlsZWQgKDEp
-Cj0+IGVudiBzZWxlY3QgTU1DIDE6MwpTZWxlY3QgRW52aXJvbm1lbnQgb24gTU1DOiBPSwo9PiBl
-bnYgZXJhc2UKRXJhc2luZyBFbnZpcm9ubWVudCBvbiBNTUMuLi4gTU1DIHBhcnRpdGlvbiBzd2l0
-Y2ggZmFpbGVkCk1NQyBwYXJ0aXRpb24gc3dpdGNoIGZhaWxlZApGYWlsZWQgKDEpCj0+IG1tYyBk
-ZXYgMQpzd2l0Y2ggdG8gcGFydGl0aW9ucyAjMCwgT0sKbW1jMSBpcyBjdXJyZW50IGRldmljZQo9
-PiBtbWMgZGV2IDAKc3dpdGNoIHRvIHBhcnRpdGlvbnMgIzAsIE9LCm1tYzAocGFydCAwKSBpcyBj
-dXJyZW50IGRldmljZQo9PiBtbWMgZGV2IDEKc3dpdGNoIHRvIHBhcnRpdGlvbnMgIzAsIE9LCm1t
-YzEgaXMgY3VycmVudCBkZXZpY2UKPT4gZW52IHNlbGVjdCBNTUMgMTozClNlbGVjdCBFbnZpcm9u
-bWVudCBvbiBNTUM6IE9LCj0+IGVudiBlcmFzZQpFcmFzaW5nIEVudmlyb25tZW50IG9uIE1NQy4u
-LiBNTUMgcGFydGl0aW9uIHN3aXRjaCBmYWlsZWQKTU1DIHBhcnRpdGlvbiBzd2l0Y2ggZmFpbGVk
-CkZhaWxlZCAoMSkKPT4gZW52IHNlbGVjdCBNTUMgMApTZWxlY3QgRW52aXJvbm1lbnQgb24gTU1D
-OiBPSwo9PiBlbnYgZXJhc2UKRXJhc2luZyBFbnZpcm9ubWVudCBvbiBNTUMuLi4gTU1DIHBhcnRp
-dGlvbiBzd2l0Y2ggZmFpbGVkCk1NQyBwYXJ0aXRpb24gc3dpdGNoIGZhaWxlZApGYWlsZWQgKDEp
-Cj0+IGVudiBzZWxlY3QgbW1jIDAKU2VsZWN0IEVudmlyb25tZW50IG9uIG1tYzogZHJpdmVyIG5v
-dCBmb3VuZAo9PiBlbnYgc2VsZWN0IE1NQyAwClNlbGVjdCBFbnZpcm9ubWVudCBvbiBNTUM6IE9L
-Cj0+IGVudiBzZWxlY3QKU2VsZWN0IEVudmlyb25tZW50IG9uIDxOVUxMPjogIlN5bmNocm9ub3Vz
-IEFib3J0IiBoYW5kbGVyLCBlc3IgMHg5NjAwMDAxMCwgZmFyIDB4MAplbHI6IDAwMDAwMDAwMDBh
-OGU3ODQgbHIgOiAwMDAwMDAwMDAwYTY1YzQwIChyZWxvYykKZWxyOiAwMDAwMDAwMGVmZjljNzg0
-IGxyIDogMDAwMDAwMDBlZmY3M2M0MAp4MCA6IDAwMDAwMDAwZWZmYmExMzMgeDEgOiAwMDAwMDAw
-MDAwMDAwMDAwCngyIDogMDAwMDAwMDAwMDAwMDAyMCB4MyA6IDAwMDAwMDAwMDAwMDAwMDAKeDQg
-OiAwMDAwMDAwMGZlYjUwMDAwIHg1IDogMDAwMDAwMDBlZmZiYTEzMwp4NiA6IDAwMDAwMDAwMDAw
-MDAwNzQgeDcgOiAwMDAwMDAwMGVmZmM1Zjg4Cng4IDogMDAwMDAwMDAwMDAwMDBjMCB4OSA6IDAw
-MDAwMDAwZmZmZmZmZDAKeDEwOiAwMDAwMDAwMDAwMDAwMDBkIHgxMTogMDAwMDAwMDAwMDAwMDAw
-Ngp4MTI6IDAwMDAwMDAwMDAwMDAwMDIgeDEzOiAwMDAwMDAwMDAwMDAwMjAwCngxNDogMDAwMDAw
-MDBmZmZmZmZmZiB4MTU6IDAwMDAwMDAwZWRiZTFmNTAKeDE2OiAwMDAwMDAwMGVmZjYzZDJjIHgx
-NzogMDAwMDAwMDAwMDAwMDAwMAp4MTg6IDAwMDAwMDAwZWRiZmZkMjAgeDE5OiAwMDAwMDAwMGVm
-ZmNjNzAwCngyMDogMDAwMDAwMDBlZmZjYzZkMCB4MjE6IDAwMDAwMDAwMDAwMDAwMDAKeDIyOiAw
-MDAwMDAwMGVmZmNjNmQwIHgyMzogMDAwMDAwMDAwMDAwMDAwMgp4MjQ6IDAwMDAwMDAwZWZmZTdj
-YWMgeDI1OiAwMDAwMDAwMDAwMDAwMDAwCngyNjogMDAwMDAwMDAwMDAwMDAwMCB4Mjc6IDAwMDAw
-MDAwMDAwMDAwMDAKeDI4OiAwMDAwMDAwMGVkZjM1OWIwIHgyOTogMDAwMDAwMDBlZGJlMjNlMAoK
-Q29kZTogMzkwMDAwN2YgZDY1ZjAzYzAgYWEwMDAzZTUgZDI4MDAwMDMgKDM4NjM2ODI0KQpSZXNl
-dHRpbmcgQ1BVIC4uLgoKcmVzZXR0aW5nIC4uLgo=
---0000000000005b18bf06219e92bc
-Content-Type: application/octet-stream; name=config-u-boot
-Content-Disposition: attachment; filename=config-u-boot
-Content-Transfer-Encoding: base64
-Content-ID: <f_m0tthrfu0>
-X-Attachment-Id: f_m0tthrfu0
-
-IwojIEF1dG9tYXRpY2FsbHkgZ2VuZXJhdGVkIGZpbGU7IERPIE5PVCBFRElULgojIFUtQm9vdCAy
-MDI0LjEwLXJjNCBDb25maWd1cmF0aW9uCiMKCiMKIyBDb21waWxlcjogYWFyY2g2NC1saW51eC1n
-bnUtZ2NjIChHQ0MpIDEzLjIuMAojCkNPTkZJR19DUkVBVEVfQVJDSF9TWU1MSU5LPXkKQ09ORklH
-X1NVUFBPUlRfTElUVExFX0VORElBTj15CkNPTkZJR19TWVNfQ0FDSEVfU0hJRlRfNj15CkNPTkZJ
-R182NEJJVD15CkNPTkZJR19TWVNfQ0FDSEVMSU5FX1NJWkU9NjQKQ09ORklHX0xJTktFUl9MSVNU
-X0FMSUdOPTgKIyBDT05GSUdfQVJDIGlzIG5vdCBzZXQKQ09ORklHX0FSTT15CiMgQ09ORklHX002
-OEsgaXMgbm90IHNldAojIENPTkZJR19NSUNST0JMQVpFIGlzIG5vdCBzZXQKIyBDT05GSUdfTUlQ
-UyBpcyBub3Qgc2V0CiMgQ09ORklHX05JT1MyIGlzIG5vdCBzZXQKIyBDT05GSUdfUFBDIGlzIG5v
-dCBzZXQKIyBDT05GSUdfUklTQ1YgaXMgbm90IHNldAojIENPTkZJR19TQU5EQk9YIGlzIG5vdCBz
-ZXQKIyBDT05GSUdfU0ggaXMgbm90IHNldAojIENPTkZJR19YODYgaXMgbm90IHNldAojIENPTkZJ
-R19YVEVOU0EgaXMgbm90IHNldApDT05GSUdfU1lTX0FSQ0g9ImFybSIKQ09ORklHX1NZU19DUFU9
-ImFybXY4IgpDT05GSUdfU1lTX1NPQz0icmszNTg4IgpDT05GSUdfU1lTX1ZFTkRPUj0icGluZTY0
-IgpDT05GSUdfU1lTX0JPQVJEPSJxdWFydHpwcm82NC1yazM1ODgiCkNPTkZJR19TWVNfQ09ORklH
-X05BTUU9InF1YXJ0enBybzY0LXJrMzU4OCIKCiMKIyBTa2lwcGluZyBsb3cgbGV2ZWwgaW5pdGlh
-bGl6YXRpb24gZnVuY3Rpb25zCiMKQ09ORklHX1NLSVBfTE9XTEVWRUxfSU5JVD15CiMgQ09ORklH
-X1NQTF9TS0lQX0xPV0xFVkVMX0lOSVQgaXMgbm90IHNldAojIENPTkZJR19UUExfU0tJUF9MT1dM
-RVZFTF9JTklUIGlzIG5vdCBzZXQKIyBDT05GSUdfU0tJUF9MT1dMRVZFTF9JTklUX09OTFkgaXMg
-bm90IHNldAojIENPTkZJR19TUExfU0tJUF9MT1dMRVZFTF9JTklUX09OTFkgaXMgbm90IHNldApD
-T05GSUdfU1lTX0hBU19OT05DQUNIRURfTUVNT1JZPXkKQ09ORklHX1NZU19OT05DQUNIRURfTUVN
-T1JZPTB4MTAwMDAwCiMgQ09ORklHX1NZU19JQ0FDSEVfT0ZGIGlzIG5vdCBzZXQKIyBDT05GSUdf
-U1BMX1NZU19JQ0FDSEVfT0ZGIGlzIG5vdCBzZXQKIyBDT05GSUdfU1lTX0RDQUNIRV9PRkYgaXMg
-bm90IHNldAojIENPTkZJR19TUExfU1lTX0RDQUNIRV9PRkYgaXMgbm90IHNldAoKIwojIEFSTSBh
-cmNoaXRlY3R1cmUKIwpDT05GSUdfQVJNNjQ9eQpDT05GSUdfQVJNNjRfQ1JDMzI9eQpDT05GSUdf
-Q09VTlRFUl9GUkVRVUVOQ1k9MjQwMDAwMDAKIyBDT05GSUdfUE9TSVRJT05fSU5ERVBFTkRFTlQg
-aXMgbm90IHNldAojIENPTkZJR19JTklUX1NQX1JFTEFUSVZFIGlzIG5vdCBzZXQKQ09ORklHX0xO
-WF9LUk5MX0lNR19URVhUX09GRlNFVF9CQVNFPTB4MDBhMDAwMDAKIyBDT05GSUdfR0lDX1YzX0lU
-UyBpcyBub3Qgc2V0CiMgQ09ORklHX0dJQ1YzX1NVUFBPUlRfR0lDNjAwIGlzIG5vdCBzZXQKQ09O
-RklHX1NUQVRJQ19SRUxBPXkKQ09ORklHX0RNQV9BRERSX1RfNjRCSVQ9eQpDT05GSUdfQVJNX0FT
-TV9VTklGSUVEPXkKIyBDT05GSUdfU1lTX0FSTV9DQUNIRV9DUDE1IGlzIG5vdCBzZXQKIyBDT05G
-SUdfU1lTX0FSTV9NTVUgaXMgbm90IHNldAojIENPTkZJR19TWVNfQVJNX01QVSBpcyBub3Qgc2V0
-CkNPTkZJR19TWVNfQVJNX0FSQ0g9OApDT05GSUdfU1lTX0FSTV9DQUNIRV9XUklURUJBQ0s9eQoj
-IENPTkZJR19TWVNfQVJNX0NBQ0hFX1dSSVRFVEhST1VHSCBpcyBub3Qgc2V0CiMgQ09ORklHX1NZ
-U19BUk1fQ0FDSEVfV1JJVEVBTExPQyBpcyBub3Qgc2V0CiMgQ09ORklHX0FSQ0hfQ1BVX0lOSVQg
-aXMgbm90IHNldApDT05GSUdfU1lTX0FSQ0hfVElNRVI9eQpDT05GSUdfQVJNX1NNQ0NDPXkKIyBD
-T05GSUdfU1lTX0wyX1BMMzEwIGlzIG5vdCBzZXQKIyBDT05GSUdfU1BMX1NZU19MMl9QTDMxMCBp
-cyBub3Qgc2V0CiMgQ09ORklHX1NZU19MMkNBQ0hFX09GRiBpcyBub3Qgc2V0CkNPTkZJR19FTkFC
-TEVfQVJNX1NPQ19CT09UMF9IT09LPXkKIyBDT05GSUdfVVNFX0FSQ0hfTUVNQ1BZIGlzIG5vdCBz
-ZXQKIyBDT05GSUdfU1BMX1VTRV9BUkNIX01FTUNQWSBpcyBub3Qgc2V0CiMgQ09ORklHX1VTRV9B
-UkNIX01FTVNFVCBpcyBub3Qgc2V0CiMgQ09ORklHX1NQTF9VU0VfQVJDSF9NRU1TRVQgaXMgbm90
-IHNldApDT05GSUdfQVJNNjRfU1VQUE9SVF9BQVJDSDMyPXkKIyBDT05GSUdfQVJDSF9BVDkxIGlz
-IG5vdCBzZXQKIyBDT05GSUdfQVJDSF9EQVZJTkNJIGlzIG5vdCBzZXQKIyBDT05GSUdfQVJDSF9I
-SVNUQiBpcyBub3Qgc2V0CiMgQ09ORklHX0FSQ0hfS0lSS1dPT0QgaXMgbm90IHNldAojIENPTkZJ
-R19BUkNIX01WRUJVIGlzIG5vdCBzZXQKIyBDT05GSUdfQVJDSF9PUklPTjVYIGlzIG5vdCBzZXQK
-IyBDT05GSUdfQVJDSF9CQ00yODNYIGlzIG5vdCBzZXQKIyBDT05GSUdfQVJDSF9CQ01TVEIgaXMg
-bm90IHNldAojIENPTkZJR19BUkNIX0JDTUJDQSBpcyBub3Qgc2V0CiMgQ09ORklHX1RBUkdFVF9W
-RVhQUkVTU19DQTlYNCBpcyBub3Qgc2V0CiMgQ09ORklHX1RBUkdFVF9CQ01OUyBpcyBub3Qgc2V0
-CiMgQ09ORklHX1RBUkdFVF9CQ01OUzMgaXMgbm90IHNldAojIENPTkZJR19BUkNIX0VYWU5PUyBp
-cyBub3Qgc2V0CiMgQ09ORklHX0FSQ0hfUzVQQzFYWCBpcyBub3Qgc2V0CiMgQ09ORklHX0FSQ0hf
-SElHSEJBTksgaXMgbm90IHNldAojIENPTkZJR19BUkNIX0lOVEVHUkFUT1IgaXMgbm90IHNldAoj
-IENPTkZJR19BUkNIX0lQUTQwWFggaXMgbm90IHNldAojIENPTkZJR19BUkNIX0tFWVNUT05FIGlz
-IG5vdCBzZXQKIyBDT05GSUdfQVJDSF9LMyBpcyBub3Qgc2V0CiMgQ09ORklHX0FSQ0hfT01BUDJQ
-TFVTIGlzIG5vdCBzZXQKIyBDT05GSUdfQVJDSF9NRVNPTiBpcyBub3Qgc2V0CiMgQ09ORklHX0FS
-Q0hfTUVESUFURUsgaXMgbm90IHNldAojIENPTkZJR19BUkNIX0xQQzMyWFggaXMgbm90IHNldAoj
-IENPTkZJR19BUkNIX0lNWDggaXMgbm90IHNldAojIENPTkZJR19BUkNIX0lNWDhNIGlzIG5vdCBz
-ZXQKIyBDT05GSUdfQVJDSF9JTVg4VUxQIGlzIG5vdCBzZXQKIyBDT05GSUdfQVJDSF9JTVg5IGlz
-IG5vdCBzZXQKIyBDT05GSUdfQVJDSF9JTVhSVCBpcyBub3Qgc2V0CiMgQ09ORklHX0FSQ0hfTVgy
-MyBpcyBub3Qgc2V0CiMgQ09ORklHX0FSQ0hfTVgyOCBpcyBub3Qgc2V0CiMgQ09ORklHX0FSQ0hf
-TVgzMSBpcyBub3Qgc2V0CiMgQ09ORklHX0FSQ0hfTVg3VUxQIGlzIG5vdCBzZXQKIyBDT05GSUdf
-QVJDSF9NWDcgaXMgbm90IHNldAojIENPTkZJR19BUkNIX01YNiBpcyBub3Qgc2V0CiMgQ09ORklH
-X0FSQ0hfTVg1IGlzIG5vdCBzZXQKIyBDT05GSUdfQVJDSF9ORVhFTEwgaXMgbm90IHNldAojIENP
-TkZJR19BUkNIX05QQ00gaXMgbm90IHNldAojIENPTkZJR19BUkNIX0FQUExFIGlzIG5vdCBzZXQK
-IyBDT05GSUdfQVJDSF9PV0wgaXMgbm90IHNldAojIENPTkZJR19BUkNIX1FFTVUgaXMgbm90IHNl
-dAojIENPTkZJR19BUkNIX1JFTkVTQVMgaXMgbm90IHNldAojIENPTkZJR19BUkNIX1NOQVBEUkFH
-T04gaXMgbm90IHNldAojIENPTkZJR19BUkNIX1NPQ0ZQR0EgaXMgbm90IHNldAojIENPTkZJR19B
-UkNIX1NVTlhJIGlzIG5vdCBzZXQKIyBDT05GSUdfQVJDSF9VODUwMCBpcyBub3Qgc2V0CiMgQ09O
-RklHX0FSQ0hfVkVSU0FMIGlzIG5vdCBzZXQKIyBDT05GSUdfQVJDSF9WRVJTQUwyIGlzIG5vdCBz
-ZXQKIyBDT05GSUdfQVJDSF9WRVJTQUxfTkVUIGlzIG5vdCBzZXQKIyBDT05GSUdfQVJDSF9WRjYx
-MCBpcyBub3Qgc2V0CiMgQ09ORklHX0FSQ0hfWllOUSBpcyBub3Qgc2V0CiMgQ09ORklHX0FSQ0hf
-WllOUU1QX1I1IGlzIG5vdCBzZXQKIyBDT05GSUdfQVJDSF9aWU5RTVAgaXMgbm90IHNldAojIENP
-TkZJR19BUkNIX1RFR1JBIGlzIG5vdCBzZXQKIyBDT05GSUdfQVJDSF9WRVhQUkVTUzY0IGlzIG5v
-dCBzZXQKIyBDT05GSUdfVEFSR0VUX0NPUlNUT05FMTAwMCBpcyBub3Qgc2V0CiMgQ09ORklHX1RB
-UkdFVF9UT1RBTF9DT01QVVRFIGlzIG5vdCBzZXQKIyBDT05GSUdfVEFSR0VUX0xTMjA4MEFfRU1V
-IGlzIG5vdCBzZXQKIyBDT05GSUdfVEFSR0VUX0xTMTA4OEFRRFMgaXMgbm90IHNldAojIENPTkZJ
-R19UQVJHRVRfTFMyMDgwQVFEUyBpcyBub3Qgc2V0CiMgQ09ORklHX1RBUkdFVF9MUzIwODBBUkRC
-IGlzIG5vdCBzZXQKIyBDT05GSUdfVEFSR0VUX0xTMjA4MUFSREIgaXMgbm90IHNldAojIENPTkZJ
-R19UQVJHRVRfTFgyMTYwQVJEQiBpcyBub3Qgc2V0CiMgQ09ORklHX1RBUkdFVF9MWDIxNjBBUURT
-IGlzIG5vdCBzZXQKIyBDT05GSUdfVEFSR0VUX0xYMjE2MkFRRFMgaXMgbm90IHNldAojIENPTkZJ
-R19UQVJHRVRfSElLRVkgaXMgbm90IHNldAojIENPTkZJR19UQVJHRVRfSElLRVk5NjAgaXMgbm90
-IHNldAojIENPTkZJR19UQVJHRVRfUE9QTEFSIGlzIG5vdCBzZXQKIyBDT05GSUdfVEFSR0VUX0xT
-MTAxMkFRRFMgaXMgbm90IHNldAojIENPTkZJR19UQVJHRVRfTFMxMDEyQVJEQiBpcyBub3Qgc2V0
-CiMgQ09ORklHX1RBUkdFVF9MUzEwMTJBMkc1UkRCIGlzIG5vdCBzZXQKIyBDT05GSUdfVEFSR0VU
-X0xTMTAxMkFGUldZIGlzIG5vdCBzZXQKIyBDT05GSUdfVEFSR0VUX0xTMTAxMkFGUkRNIGlzIG5v
-dCBzZXQKIyBDT05GSUdfVEFSR0VUX0xTMTAyOEFRRFMgaXMgbm90IHNldAojIENPTkZJR19UQVJH
-RVRfTFMxMDI4QVJEQiBpcyBub3Qgc2V0CiMgQ09ORklHX1RBUkdFVF9MUzEwODhBUkRCIGlzIG5v
-dCBzZXQKIyBDT05GSUdfVEFSR0VUX0xTMTAyMUFRRFMgaXMgbm90IHNldAojIENPTkZJR19UQVJH
-RVRfTFMxMDIxQVRXUiBpcyBub3Qgc2V0CiMgQ09ORklHX1RBUkdFVF9QR19XQ09NX1NFTEk4IGlz
-IG5vdCBzZXQKIyBDT05GSUdfVEFSR0VUX1BHX1dDT01fRVhQVTEgaXMgbm90IHNldAojIENPTkZJ
-R19UQVJHRVRfTFMxMDIxQVRTTiBpcyBub3Qgc2V0CiMgQ09ORklHX1RBUkdFVF9MUzEwMjFBSU9U
-IGlzIG5vdCBzZXQKIyBDT05GSUdfVEFSR0VUX0xTMTA0M0FRRFMgaXMgbm90IHNldAojIENPTkZJ
-R19UQVJHRVRfTFMxMDQzQVJEQiBpcyBub3Qgc2V0CiMgQ09ORklHX1RBUkdFVF9MUzEwNDZBUURT
-IGlzIG5vdCBzZXQKIyBDT05GSUdfVEFSR0VUX0xTMTA0NkFSREIgaXMgbm90IHNldAojIENPTkZJ
-R19UQVJHRVRfTFMxMDQ2QUZSV1kgaXMgbm90IHNldAojIENPTkZJR19BUkNIX1NDNVhYIGlzIG5v
-dCBzZXQKIyBDT05GSUdfVEFSR0VUX1NMMjggaXMgbm90IHNldAojIENPTkZJR19UQVJHRVRfVEVO
-NjQgaXMgbm90IHNldAojIENPTkZJR19BUkNIX1VOSVBISUVSIGlzIG5vdCBzZXQKIyBDT05GSUdf
-QVJDSF9TWU5RVUFDRVIgaXMgbm90IHNldAojIENPTkZJR19BUkNIX1NUTTMyIGlzIG5vdCBzZXQK
-IyBDT05GSUdfQVJDSF9TVEkgaXMgbm90IHNldAojIENPTkZJR19BUkNIX1NUTTMyTVAgaXMgbm90
-IHNldApDT05GSUdfQVJDSF9ST0NLQ0hJUD15CiMgQ09ORklHX0FSQ0hfT0NURU9OVFggaXMgbm90
-IHNldAojIENPTkZJR19BUkNIX09DVEVPTlRYMiBpcyBub3Qgc2V0CiMgQ09ORklHX1RBUkdFVF9U
-SFVOREVSWF84OFhYIGlzIG5vdCBzZXQKIyBDT05GSUdfQVJDSF9BU1BFRUQgaXMgbm90IHNldAoj
-IENPTkZJR19UQVJHRVRfRFVSSUFOIGlzIG5vdCBzZXQKIyBDT05GSUdfVEFSR0VUX1BPTUVMTyBp
-cyBub3Qgc2V0CiMgQ09ORklHX1RBUkdFVF9QRTIyMDEgaXMgbm90IHNldAojIENPTkZJR19UQVJH
-RVRfUFJFU0lESU9fQVNJQyBpcyBub3Qgc2V0CiMgQ09ORklHX1RBUkdFVF9YRU5HVUVTVF9BUk02
-NCBpcyBub3Qgc2V0CiMgQ09ORklHX0FSQ0hfR1hQIGlzIG5vdCBzZXQKIyBDT05GSUdfU1RBVElD
-X01BQ0hfVFlQRSBpcyBub3Qgc2V0CkNPTkZJR19URVhUX0JBU0U9MHgwMGEwMDAwMApDT05GSUdf
-U1lTX01BTExPQ19MRU49MHgyMDAwMDAwCkNPTkZJR19TWVNfTUFMTE9DX0ZfTEVOPTB4MTAwMDAK
-IyBDT05GSUdfU1BMX0dQSU8gaXMgbm90IHNldApDT05GSUdfU1BMX0xJQkNPTU1PTl9TVVBQT1JU
-PXkKQ09ORklHX1NQTF9MSUJHRU5FUklDX1NVUFBPUlQ9eQpDT05GSUdfTlJfRFJBTV9CQU5LUz0x
-MApDT05GSUdfU1BMX0xEU0NSSVBUPSJhcmNoL2FybS9jcHUvYXJtdjgvdS1ib290LXNwbC5sZHMi
-CkNPTkZJR19FTlZfU09VUkNFX0ZJTEU9IiIKQ09ORklHX0hBU19DVVNUT01fU1lTX0lOSVRfU1Bf
-QUREUj15CkNPTkZJR19DVVNUT01fU1lTX0lOSVRfU1BfQUREUj0weDNmMDAwMDAKQ09ORklHX1NG
-X0RFRkFVTFRfU1BFRUQ9MTAwMDAwMApDT05GSUdfU0ZfREVGQVVMVF9NT0RFPTB4MApDT05GSUdf
-RU5WX1NJWkU9MHgxZjAwMApDT05GSUdfRU5WX09GRlNFVD0weDAKQ09ORklHX0RNX0dQSU89eQpD
-T05GSUdfU1BMX0RNX1NQST15CkNPTkZJR19ERUZBVUxUX0RFVklDRV9UUkVFPSJyb2NrY2hpcC9y
-azM1ODgtcXVhcnR6cHJvNjQiCkNPTkZJR19TUExfVEVYVF9CQVNFPTB4MApDT05GSUdfT0ZfTElC
-RkRUX09WRVJMQVk9eQpDT05GSUdfTVVMVElfRFRCX0ZJVF9VTkNPTVBSRVNTX1NaPTB4ODAwMApD
-T05GSUdfRE1fUkVTRVQ9eQpDT05GSUdfU1lTX01PTklUT1JfTEVOPTAKIyBDT05GSUdfUk9DS0NI
-SVBfUFgzMCBpcyBub3Qgc2V0CiMgQ09ORklHX1JPQ0tDSElQX1JLMzAzNiBpcyBub3Qgc2V0CiMg
-Q09ORklHX1JPQ0tDSElQX1JLMzA2NiBpcyBub3Qgc2V0CiMgQ09ORklHX1JPQ0tDSElQX1JLMzEy
-OCBpcyBub3Qgc2V0CiMgQ09ORklHX1JPQ0tDSElQX1JLMzE4OCBpcyBub3Qgc2V0CiMgQ09ORklH
-X1JPQ0tDSElQX1JLMzIyWCBpcyBub3Qgc2V0CiMgQ09ORklHX1JPQ0tDSElQX1JLMzI4OCBpcyBu
-b3Qgc2V0CiMgQ09ORklHX1JPQ0tDSElQX1JLMzMwOCBpcyBub3Qgc2V0CiMgQ09ORklHX1JPQ0tD
-SElQX1JLMzMyOCBpcyBub3Qgc2V0CiMgQ09ORklHX1JPQ0tDSElQX1JLMzM2OCBpcyBub3Qgc2V0
-CiMgQ09ORklHX1JPQ0tDSElQX1JLMzM5OSBpcyBub3Qgc2V0CiMgQ09ORklHX1JPQ0tDSElQX1JL
-MzU2OCBpcyBub3Qgc2V0CkNPTkZJR19ST0NLQ0hJUF9SSzM1ODg9eQojIENPTkZJR19ST0NLQ0hJ
-UF9SVjExMDggaXMgbm90IHNldAojIENPTkZJR19ST0NLQ0hJUF9SVjExMjYgaXMgbm90IHNldAoj
-IENPTkZJR19ST0NLQ0hJUF9VU0JfVUFSVCBpcyBub3Qgc2V0CiMgQ09ORklHX1NQTF9ST0NLQ0hJ
-UF9CQUNLX1RPX0JST00gaXMgbm90IHNldApDT05GSUdfUk9DS0NISVBfQ09NTU9OX0JPQVJEPXkK
-Q09ORklHX1NQTF9ST0NLQ0hJUF9DT01NT05fQk9BUkQ9eQpDT05GSUdfUk9DS0NISVBfRVhURVJO
-QUxfVFBMPXkKQ09ORklHX1JPQ0tDSElQX0JPT1RfTU9ERV9SRUc9MHhmZDU4ODA4MApDT05GSUdf
-Uk9DS0NISVBfU1RJTUVSPXkKQ09ORklHX1JPQ0tDSElQX1NUSU1FUl9CQVNFPTB4ZmQ4YzgwMDAK
-Q09ORklHX1JPQ0tDSElQX1NQTF9SRVNFUlZFX0lSQU09MHgwCiMgQ09ORklHX1NQTF9ST0NLQ0hJ
-UF9FQVJMWVJFVFVSTl9UT19CUk9NIGlzIG5vdCBzZXQKQ09ORklHX1JPQ0tDSElQX0RJU0FCTEVf
-Rk9SQ0VfSlRBRz15CkNPTkZJR19TUExfTU1DPXkKIyBDT05GSUdfUk9DS0NISVBfU1BJX0lNQUdF
-IGlzIG5vdCBzZXQKQ09ORklHX1JPQ0tDSElQX0NPTU1PTl9TVEFDS19BRERSPXkKQ09ORklHX1NQ
-TF9TRVJJQUw9eQpDT05GSUdfVFBMX1NZU19NQUxMT0NfRl9MRU49MHg0MDAwCiMgQ09ORklHX1NQ
-TF9EUklWRVJTX01JU0MgaXMgbm90IHNldApDT05GSUdfU1BMX1NUQUNLX1JfQUREUj0weDNlMDAw
-MDAKIyBDT05GSUdfVEFSR0VUX0VWQl9SSzM1ODggaXMgbm90IHNldAojIENPTkZJR19UQVJHRVRf
-Q00zNTg4X05BU19SSzM1ODggaXMgbm90IHNldAojIENPTkZJR19UQVJHRVRfSkFHVUFSX1JLMzU4
-OCBpcyBub3Qgc2V0CiMgQ09ORklHX1RBUkdFVF9OQU5PUENUNl9SSzM1ODggaXMgbm90IHNldAoj
-IENPTkZJR19UQVJHRVRfTkFOT1BJX1I2Q19SSzM1ODhTIGlzIG5vdCBzZXQKIyBDT05GSUdfVEFS
-R0VUX05BTk9QSV9SNlNfUkszNTg4UyBpcyBub3Qgc2V0CiMgQ09ORklHX1RBUkdFVF9OT1ZBX1JL
-MzU4OCBpcyBub3Qgc2V0CiMgQ09ORklHX1RBUkdFVF9SSzM1ODhfTkVVNiBpcyBub3Qgc2V0CiMg
-Q09ORklHX1RBUkdFVF9ST0NLNUFfUkszNTg4IGlzIG5vdCBzZXQKIyBDT05GSUdfVEFSR0VUX1JP
-Q0s1Ql9SSzM1ODggaXMgbm90IHNldAojIENPTkZJR19UQVJHRVRfUk9DS181X0lUWF9SSzM1ODgg
-aXMgbm90IHNldAojIENPTkZJR19UQVJHRVRfU0lHRTdfUkszNTg4IGlzIG5vdCBzZXQKQ09ORklH
-X1RBUkdFVF9RVUFSVFpQUk82NF9SSzM1ODg9eQojIENPTkZJR19UQVJHRVRfVElHRVJfUkszNTg4
-IGlzIG5vdCBzZXQKIyBDT05GSUdfVEFSR0VUX1RVUklOR1JLMV9SSzM1ODggaXMgbm90IHNldAoj
-IENPTkZJR19UQVJHRVRfVE9ZQlJJQ0tfUkszNTg4IGlzIG5vdCBzZXQKQ09ORklHX1NQTF9TWVNf
-TUFMTE9DX0ZfTEVOPTB4ODAwMApDT05GSUdfU1BMX0hBU19CU1NfTElOS0VSX1NFQ1RJT049eQpD
-T05GSUdfU1BMX0JTU19TVEFSVF9BRERSPTB4M2Y4MDAwMApDT05GSUdfU1BMX0JTU19NQVhfU0la
-RT0weDgwMDAKQ09ORklHX1NQTF9TVEFDS19SPXkKQ09ORklHX1NQTF9TVEFDS19SX01BTExPQ19T
-SU1QTEVfTEVOPTB4MjAwMDAwCkNPTkZJR19XQVRDSERPR19USU1FT1VUX01TRUNTPTYwMDAwCkNP
-TkZJR19TUExfU1lTX01BTExPQ19GPXkKQ09ORklHX0VSUl9QVFJfT0ZGU0VUPTB4MApDT05GSUdf
-U1BMX1NJWkVfTElNSVQ9MHgwCkNPTkZJR19TUEw9eQpDT05GSUdfREVCVUdfVUFSVF9CQVNFPTB4
-RkVCNTAwMDAKQ09ORklHX0RFQlVHX1VBUlRfQ0xPQ0s9MjQwMDAwMDAKQ09ORklHX0RFQlVHX1VB
-UlRfQk9BUkRfSU5JVD15CkNPTkZJR19JREVOVF9TVFJJTkc9IiIKQ09ORklHX1NZU19DTEtfRlJF
-UT0wCiMgQ09ORklHX0NISVBfRElQX1NDQU4gaXMgbm90IHNldAojIENPTkZJR19TUExfRlNfRkFU
-IGlzIG5vdCBzZXQKIyBDT05GSUdfU1BMX0xJQkRJU0tfU1VQUE9SVCBpcyBub3Qgc2V0CiMgQ09O
-RklHX1NQTF9TUEkgaXMgbm90IHNldAojIENPTkZJR19DTU9fQllfVkFfT05MWSBpcyBub3Qgc2V0
-CiMgQ09ORklHX0FSTVY4X1NQTF9FWENFUFRJT05fVkVDVE9SUyBpcyBub3Qgc2V0CiMgQ09ORklH
-X0FSTVY4X01VTFRJRU5UUlkgaXMgbm90IHNldAojIENPTkZJR19BUk1WOF9TRVRfU01QRU4gaXMg
-bm90IHNldAojIENPTkZJR19BUk1WOF9TV0lUQ0hfVE9fRUwxIGlzIG5vdCBzZXQKCiMKIyBBUk12
-OCBzZWN1cmUgbW9uaXRvciBmaXJtd2FyZQojCiMgQ09ORklHX0FSTVY4X1NFQ19GSVJNV0FSRV9T
-VVBQT1JUIGlzIG5vdCBzZXQKIyBDT05GSUdfU1BMX0FSTVY4X1NFQ19GSVJNV0FSRV9TVVBQT1JU
-IGlzIG5vdCBzZXQKIyBDT05GSUdfU1BMX1JFQ09WRVJfREFUQV9TRUNUSU9OIGlzIG5vdCBzZXQK
-Q09ORklHX1BTQ0lfUkVTRVQ9eQojIENPTkZJR19BUk1WOF9QU0NJIGlzIG5vdCBzZXQKIyBDT05G
-SUdfQVJNVjhfRUFfRUwzX0ZJUlNUIGlzIG5vdCBzZXQKIyBDT05GSUdfQVJNVjhfVURFTEFZX0VW
-RU5UX1NUUkVBTSBpcyBub3Qgc2V0CiMgQ09ORklHX0FSTVY4X0NSWVBUTyBpcyBub3Qgc2V0CiMg
-Q09ORklHX0NNRF9ERUtCTE9CIGlzIG5vdCBzZXQKIyBDT05GSUdfSU1YX0NBQU1fREVLX0VOQ0FQ
-IGlzIG5vdCBzZXQKIyBDT05GSUdfSU1YX09QVEVFX0RFS19FTkNBUCBpcyBub3Qgc2V0CiMgQ09O
-RklHX0lNWF9TRUNPX0RFS19FTkNBUCBpcyBub3Qgc2V0CiMgQ09ORklHX0lNWF9FTEVfREVLX0VO
-Q0FQIGlzIG5vdCBzZXQKIyBDT05GSUdfQ01EX0hETUlERVRFQ1QgaXMgbm90IHNldApDT05GSUdf
-SU1YX0RDRF9BRERSPTB4MDA5MTAwMDAKQ09ORklHX1NZU19NRU1fVE9QX0hJREU9MHgwCkNPTkZJ
-R19TWVNfTE9BRF9BRERSPTB4YzAwODAwCgojCiMgQVJNIGRlYnVnCiMKQ09ORklHX1NQTF9QQVlM
-T0FEPSJ1LWJvb3QuYmluIgpDT05GSUdfQlVJTERfVEFSR0VUPSIiCiMgQ09ORklHX1NZU19QQ0lf
-NjRCSVQgaXMgbm90IHNldApDT05GSUdfUENJPXkKQ09ORklHX0ZXVV9OVU1fQkFOS1M9MgpDT05G
-SUdfRldVX05VTV9JTUFHRVNfUEVSX0JBTks9MgpDT05GSUdfREVCVUdfVUFSVD15CkNPTkZJR19B
-SENJPXkKIyBDT05GSUdfT0ZfQk9BUkRfRklYVVAgaXMgbm90IHNldAoKIwojIEZ1bmN0aW9uYWxp
-dHkgc2hhcmVkIGJldHdlZW4gTlhQIFNvQ3MKIwojIENPTkZJR19OWFBfRVNCQyBpcyBub3Qgc2V0
-CkNPTkZJR19TWVNfTElUVExFX0VORElBTj15CgojCiMgR2VuZXJhbCBzZXR1cAojCkNPTkZJR19M
-T0NBTFZFUlNJT049IiIKQ09ORklHX0xPQ0FMVkVSU0lPTl9BVVRPPXkKQ09ORklHX0NDX0lTX0dD
-Qz15CkNPTkZJR19HQ0NfVkVSU0lPTj0xMzAyMDAKQ09ORklHX0NMQU5HX1ZFUlNJT049MApDT05G
-SUdfQ0NfT1BUSU1JWkVfRk9SX1NJWkU9eQojIENPTkZJR19DQ19PUFRJTUlaRV9GT1JfU1BFRUQg
-aXMgbm90IHNldAojIENPTkZJR19DQ19PUFRJTUlaRV9GT1JfREVCVUcgaXMgbm90IHNldAojIENP
-TkZJR19PUFRJTUlaRV9JTkxJTklORyBpcyBub3Qgc2V0CiMgQ09ORklHX1NQTF9PUFRJTUlaRV9J
-TkxJTklORyBpcyBub3Qgc2V0CkNPTkZJR19BUkNIX1NVUFBPUlRTX0xUTz15CiMgQ09ORklHX0xU
-TyBpcyBub3Qgc2V0CkNPTkZJR19DQ19IQVNfQVNNX0lOTElORT15CiMgQ09ORklHX1hFTiBpcyBu
-b3Qgc2V0CkNPTkZJR19FTlZfVkFSU19VQk9PVF9DT05GSUc9eQojIENPTkZJR19TWVNfQk9PVF9H
-RVRfQ01ETElORSBpcyBub3Qgc2V0CiMgQ09ORklHX1NZU19CT09UX0dFVF9LQkQgaXMgbm90IHNl
-dApDT05GSUdfU1lTX01BTExPQ19GPXkKIyBDT05GSUdfVkFMR1JJTkQgaXMgbm90IHNldApDT05G
-SUdfRVhQRVJUPXkKQ09ORklHX1NZU19NQUxMT0NfQ0xFQVJfT05fSU5JVD15CkNPTkZJR19TUExf
-U1lTX01BTExPQ19DTEVBUl9PTl9JTklUPXkKIyBDT05GSUdfU1lTX01BTExPQ19ERUZBVUxUX1RP
-X0lOSVQgaXMgbm90IHNldAojIENPTkZJR19UT09MU19ERUJVRyBpcyBub3Qgc2V0CkNPTkZJR19Q
-SFlTXzY0QklUPXkKQ09ORklHX0ZEVF82NEJJVD15CkNPTkZJR19TUExfSU1BR0U9InNwbC91LWJv
-b3Qtc3BsLmJpbiIKIyBDT05GSUdfUkVNQUtFX0VMRiBpcyBub3Qgc2V0CiMgQ09ORklHX0hBU19C
-T0FSRF9TSVpFX0xJTUlUIGlzIG5vdCBzZXQKIyBDT05GSUdfU1lTX0NVU1RPTV9MRFNDUklQVCBp
-cyBub3Qgc2V0CkNPTkZJR19QTEFURk9STV9FTEZFTlRSWT0iX3N0YXJ0IgpDT05GSUdfU1RBQ0tf
-U0laRT0weDEwMDAwMDAKQ09ORklHX1NZU19TUkFNX0JBU0U9MHgwCkNPTkZJR19TWVNfU1JBTV9T
-SVpFPTB4MAojIENPTkZJR19NUCBpcyBub3Qgc2V0CkNPTkZJR19IQVZFX1RFWFRfQkFTRT15CiMg
-Q09ORklHX0hBVkVfU1lTX1VCT09UX1NUQVJUIGlzIG5vdCBzZXQKQ09ORklHX1NZU19VQk9PVF9T
-VEFSVD0weDAwYTAwMDAwCiMgQ09ORklHX0RZTkFNSUNfU1lTX0NMS19GUkVRIGlzIG5vdCBzZXQK
-IyBDT05GSUdfQVBJIGlzIG5vdCBzZXQKCiMKIyBCb290IG9wdGlvbnMKIwoKIwojIEJvb3QgaW1h
-Z2VzCiMKIyBDT05GSUdfQU5EUk9JRF9CT09UX0lNQUdFIGlzIG5vdCBzZXQKIyBDT05GSUdfVElN
-RVNUQU1QIGlzIG5vdCBzZXQKQ09ORklHX0ZJVD15CkNPTkZJR19GSVRfRVhURVJOQUxfT0ZGU0VU
-PTB4MApDT05GSUdfRklUX0ZVTExfQ0hFQ0s9eQpDT05GSUdfRklUX1NJR05BVFVSRT15CkNPTkZJ
-R19GSVRfU0lHTkFUVVJFX01BWF9TSVpFPTB4MTAwMDAwMDAKIyBDT05GSUdfRklUX1JTQVNTQV9Q
-U1MgaXMgbm90IHNldAojIENPTkZJR19GSVRfQ0lQSEVSIGlzIG5vdCBzZXQKQ09ORklHX0ZJVF9W
-RVJCT1NFPXkKIyBDT05GSUdfRklUX0JFU1RfTUFUQ0ggaXMgbm90IHNldApDT05GSUdfRklUX1BS
-SU5UPXkKQ09ORklHX1NQTF9GSVQ9eQojIENPTkZJR19TUExfRklUX1BSSU5UIGlzIG5vdCBzZXQK
-Q09ORklHX1NQTF9GSVRfRlVMTF9DSEVDSz15CkNPTkZJR19TUExfRklUX1NJR05BVFVSRT15CkNP
-TkZJR19TUExfRklUX1NJR05BVFVSRV9NQVhfU0laRT0weDEwMDAwMDAwCiMgQ09ORklHX1NQTF9G
-SVRfUlNBU1NBX1BTUyBpcyBub3Qgc2V0CkNPTkZJR19TUExfTE9BRF9GSVQ9eQpDT05GSUdfU1BM
-X0xPQURfRklUX0FERFJFU1M9MHgwCiMgQ09ORklHX1NQTF9MT0FEX0ZJVF9BUFBMWV9PVkVSTEFZ
-IGlzIG5vdCBzZXQKIyBDT05GSUdfU1BMX0xPQURfRklUX0ZVTEwgaXMgbm90IHNldAojIENPTkZJ
-R19TUExfRklUX0lNQUdFX1BPU1RfUFJPQ0VTUyBpcyBub3Qgc2V0CkNPTkZJR19TUExfRklUX1NP
-VVJDRT0iIgojIENPTkZJR19VU0VfU1BMX0ZJVF9HRU5FUkFUT1IgaXMgbm90IHNldApDT05GSUdf
-UFhFX1VUSUxTPXkKQ09ORklHX0JPT1RfREVGQVVMVFNfRkVBVFVSRVM9eQpDT05GSUdfQk9PVF9E
-RUZBVUxUU19DTURTPXkKQ09ORklHX0JPT1RfREVGQVVMVFM9eQpDT05GSUdfQk9PVFNURD15CiMg
-Q09ORklHX1NQTF9CT09UU1REIGlzIG5vdCBzZXQKQ09ORklHX0JPT1RTVERfRlVMTD15CkNPTkZJ
-R19CT09UU1REX0RFRkFVTFRTPXkKQ09ORklHX0JPT1RTVERfQk9PVENPTU1BTkQ9eQpDT05GSUdf
-Qk9PVE1FVEhfR0xPQkFMPXkKIyBDT05GSUdfQk9PVE1FVEhfQU5EUk9JRCBpcyBub3Qgc2V0CiMg
-Q09ORklHX0JPT1RNRVRIX0NST1MgaXMgbm90IHNldApDT05GSUdfQk9PVE1FVEhfRVhUTElOVVg9
-eQpDT05GSUdfQk9PVE1FVEhfRVhUTElOVVhfUFhFPXkKQ09ORklHX0JPT1RNRVRIX0VGSUxPQURF
-Uj15CkNPTkZJR19CT09UTUVUSF9FRklfQk9PVE1HUj15CkNPTkZJR19CT09UTUVUSF9WQkU9eQpD
-T05GSUdfQk9PVE1FVEhfRElTVFJPPXkKIyBDT05GSUdfU1BMX0JPT1RNRVRIX1ZCRSBpcyBub3Qg
-c2V0CkNPTkZJR19CT09UTUVUSF9WQkVfUkVRVUVTVD15CiMgQ09ORklHX1NQTF9CT09UTUVUSF9W
-QkVfUkVRVUVTVCBpcyBub3Qgc2V0CkNPTkZJR19CT09UTUVUSF9WQkVfU0lNUExFPXkKQ09ORklH
-X0JPT1RNRVRIX1ZCRV9TSU1QTEVfT1M9eQojIENPTkZJR19TUExfQk9PVE1FVEhfVkJFX1NJTVBM
-RSBpcyBub3Qgc2V0CkNPTkZJR19CT09UTUVUSF9TQ1JJUFQ9eQpDT05GSUdfTEVHQUNZX0lNQUdF
-X0ZPUk1BVD15CkNPTkZJR19TWVNfQk9PVE1fTEVOPTB4NDAwMDAwMApDT05GSUdfU1VQUE9SVF9S
-QVdfSU5JVFJEPXkKIyBDT05GSUdfQ0hST01FT1MgaXMgbm90IHNldAojIENPTkZJR19DSFJPTUVP
-U19WQk9PVCBpcyBub3Qgc2V0CiMgQ09ORklHX1JBTUJPT1RfUEJMIGlzIG5vdCBzZXQKQ09ORklH
-X1NZU19CT09UX1JBTURJU0tfSElHSD15CiMgQ09ORklHX0RJU1RST19ERUZBVUxUUyBpcyBub3Qg
-c2V0CgojCiMgQm9vdCB0aW1pbmcKIwojIENPTkZJR19CT09UU1RBR0UgaXMgbm90IHNldAojIENP
-TkZJR19TSE9XX0JPT1RfUFJPR1JFU1MgaXMgbm90IHNldAojIENPTkZJR19TUExfU0hPV19CT09U
-X1BST0dSRVNTIGlzIG5vdCBzZXQKCiMKIyBCb290IG1lZGlhCiMKIyBDT05GSUdfTkFORF9CT09U
-IGlzIG5vdCBzZXQKIyBDT05GSUdfT05FTkFORF9CT09UIGlzIG5vdCBzZXQKIyBDT05GSUdfUVNQ
-SV9CT09UIGlzIG5vdCBzZXQKIyBDT05GSUdfU0FUQV9CT09UIGlzIG5vdCBzZXQKIyBDT05GSUdf
-U0RfQk9PVCBpcyBub3Qgc2V0CiMgQ09ORklHX1NEX0JPT1RfUVNQSSBpcyBub3Qgc2V0CiMgQ09O
-RklHX1NQSV9CT09UIGlzIG5vdCBzZXQKCiMKIyBBdXRvYm9vdCBvcHRpb25zCiMKQ09ORklHX0FV
-VE9CT09UPXkKQ09ORklHX0JPT1RERUxBWT0yCiMgQ09ORklHX0FVVE9CT09UX0tFWUVEIGlzIG5v
-dCBzZXQKIyBDT05GSUdfQVVUT0JPT1RfVVNFX01FTlVLRVkgaXMgbm90IHNldAojIENPTkZJR19B
-VVRPQk9PVF9NRU5VX1NIT1cgaXMgbm90IHNldAojIENPTkZJR19CT09UX1JFVFJZIGlzIG5vdCBz
-ZXQKCiMKIyBJbWFnZSBzdXBwb3J0CiMKIyBDT05GSUdfSU1BR0VfUFJFX0xPQUQgaXMgbm90IHNl
-dAoKIwojIERldmljZXRyZWUgZml4dXAKIwojIENPTkZJR19PRl9FTlZfU0VUVVAgaXMgbm90IHNl
-dAojIENPTkZJR19PRl9CT0FSRF9TRVRVUCBpcyBub3Qgc2V0CiMgQ09ORklHX09GX1NZU1RFTV9T
-RVRVUCBpcyBub3Qgc2V0CiMgQ09ORklHX09GX1NURE9VVF9WSUFfQUxJQVMgaXMgbm90IHNldAoj
-IENPTkZJR19GRFRfRklYVVBfUEFSVElUSU9OUyBpcyBub3Qgc2V0CiMgQ09ORklHX0ZEVF9TSU1Q
-TEVGQiBpcyBub3Qgc2V0CkNPTkZJR19BUkNIX0ZJWFVQX0ZEVF9NRU1PUlk9eQojIENPTkZJR19V
-U0VfQk9PVEFSR1MgaXMgbm90IHNldAojIENPTkZJR19CT09UQVJHU19TVUJTVCBpcyBub3Qgc2V0
-CkNPTkZJR19VU0VfQk9PVENPTU1BTkQ9eQpDT05GSUdfQk9PVENPTU1BTkQ9InNldGVudiBib290
-X3RhcmdldHMgbW1jMSA7IHNldGVudiBib290bWV0aHMgZXh0bGludXggOyBib290ZmxvdyBzY2Fu
-IC1sYiIKIyBDT05GSUdfVVNFX1BSRUJPT1QgaXMgbm90IHNldApDT05GSUdfREVGQVVMVF9GRFRf
-RklMRT0icm9ja2NoaXAvcmszNTg4LXF1YXJ0enBybzY0LmR0YiIKIyBDT05GSUdfU0FWRV9QUkVW
-X0JMX0ZEVF9BRERSIGlzIG5vdCBzZXQKIyBDT05GSUdfU0FWRV9QUkVWX0JMX0lOSVRSQU1GU19T
-VEFSVF9BRERSIGlzIG5vdCBzZXQKCiMKIyBDb25maWd1cmF0aW9uIGVkaXRvcgojCgojCiMgQ29u
-c29sZQojCkNPTkZJR19NRU5VPXkKIyBDT05GSUdfQ09OU09MRV9SRUNPUkQgaXMgbm90IHNldApD
-T05GSUdfU1lTX0NCU0laRT0xMDI0CkNPTkZJR19TWVNfUEJTSVpFPTEwNDQKIyBDT05GSUdfRElT
-QUJMRV9DT05TT0xFIGlzIG5vdCBzZXQKQ09ORklHX0xPR0xFVkVMPTQKQ09ORklHX1NQTF9MT0dM
-RVZFTD00CiMgQ09ORklHX1NJTEVOVF9DT05TT0xFIGlzIG5vdCBzZXQKIyBDT05GSUdfU1BMX1NJ
-TEVOVF9DT05TT0xFIGlzIG5vdCBzZXQKIyBDT05GSUdfVFBMX1NJTEVOVF9DT05TT0xFIGlzIG5v
-dCBzZXQKIyBDT05GSUdfUFJFX0NPTlNPTEVfQlVGRkVSIGlzIG5vdCBzZXQKQ09ORklHX0NPTlNP
-TEVfRkxVU0hfU1VQUE9SVD15CiMgQ09ORklHX0NPTlNPTEVfRkxVU0hfT05fTkVXTElORSBpcyBu
-b3Qgc2V0CiMgQ09ORklHX0NPTlNPTEVfTVVYIGlzIG5vdCBzZXQKIyBDT05GSUdfU1lTX0NPTlNP
-TEVfSVNfSU5fRU5WIGlzIG5vdCBzZXQKIyBDT05GSUdfU1lTX0NPTlNPTEVfT1ZFUldSSVRFX1JP
-VVRJTkUgaXMgbm90IHNldAojIENPTkZJR19TWVNfQ09OU09MRV9JTkZPX1FVSUVUIGlzIG5vdCBz
-ZXQKQ09ORklHX1NZU19TVERJT19ERVJFR0lTVEVSPXkKIyBDT05GSUdfU1BMX1NZU19TVERJT19E
-RVJFR0lTVEVSIGlzIG5vdCBzZXQKIyBDT05GSUdfU1lTX0RFVklDRV9OVUxMREVWIGlzIG5vdCBz
-ZXQKCiMKIyBMb2dnaW5nCiMKIyBDT05GSUdfTE9HIGlzIG5vdCBzZXQKCiMKIyBJbml0IG9wdGlv
-bnMKIwojIENPTkZJR19CT0FSRF9UWVBFUyBpcyBub3Qgc2V0CiMgQ09ORklHX0RJU1BMQVlfQ1BV
-SU5GTyBpcyBub3Qgc2V0CkNPTkZJR19ESVNQTEFZX0JPQVJESU5GTz15CkNPTkZJR19ESVNQTEFZ
-X0JPQVJESU5GT19MQVRFPXkKCiMKIyBTdGFydC11cCBob29rcwojCiMgQ09ORklHX0NZQ0xJQyBp
-cyBub3Qgc2V0CkNPTkZJR19FVkVOVD15CkNPTkZJR19FVkVOVF9EWU5BTUlDPXkKIyBDT05GSUdf
-RVZFTlRfREVCVUcgaXMgbm90IHNldAojIENPTkZJR19BUkNIX01JU0NfSU5JVCBpcyBub3Qgc2V0
-CiMgQ09ORklHX0JPQVJEX0VBUkxZX0lOSVRfRiBpcyBub3Qgc2V0CiMgQ09ORklHX0JPQVJEX0VB
-UkxZX0lOSVRfUiBpcyBub3Qgc2V0CiMgQ09ORklHX0JPQVJEX1BPU1RDTEtfSU5JVCBpcyBub3Qg
-c2V0CkNPTkZJR19CT0FSRF9MQVRFX0lOSVQ9eQojIENPTkZJR19DTE9DS1MgaXMgbm90IHNldAoj
-IENPTkZJR19IV0NPTkZJRyBpcyBub3Qgc2V0CkNPTkZJR19MQVNUX1NUQUdFX0lOSVQ9eQpDT05G
-SUdfTUlTQ19JTklUX1I9eQojIENPTkZJR19TWVNfTUFMTE9DX0JPT1RQQVJBTVMgaXMgbm90IHNl
-dAojIENPTkZJR19JRF9FRVBST00gaXMgbm90IHNldAojIENPTkZJR19QQ0lfSU5JVF9SIGlzIG5v
-dCBzZXQKIyBDT05GSUdfUkVTRVRfUEhZX1IgaXMgbm90IHNldAoKIwojIFNlY3VyaXR5IHN1cHBv
-cnQKIwpDT05GSUdfSEFTSD15CkNPTkZJR19TUExfSEFTSD15CiMgQ09ORklHX1NUQUNLUFJPVEVD
-VE9SIGlzIG5vdCBzZXQKIyBDT05GSUdfQk9BUkRfUk5HX1NFRUQgaXMgbm90IHNldAoKIwojIFVw
-ZGF0ZSBzdXBwb3J0CiMKIyBDT05GSUdfVVBEQVRFX1RGVFAgaXMgbm90IHNldAojIENPTkZJR19B
-TkRST0lEX0FCIGlzIG5vdCBzZXQKCiMKIyBCbG9iIGxpc3QKIwojIENPTkZJR19CTE9CTElTVCBp
-cyBub3Qgc2V0CkNPTkZJR19TVVBQT1JUX1NQTD15CgojCiMgU1BMIGNvbmZpZ3VyYXRpb24gb3B0
-aW9ucwojCkNPTkZJR19TUExfRlJBTUVXT1JLPXkKIyBDT05GSUdfU1BMX0ZSQU1FV09SS19CT0FS
-RF9JTklUX0YgaXMgbm90IHNldApDT05GSUdfU1BMX01BWF9TSVpFPTB4NDAwMDAKQ09ORklHX1NQ
-TF9QQURfVE89MHg3ZjgwMDAKIyBDT05GSUdfU1BMX05PX0JTU19MSU1JVCBpcyBub3Qgc2V0CkNP
-TkZJR19TUExfQlNTX0xJTUlUPXkKIyBDT05GSUdfU1BMX0ZPT1RQUklOVF9MSU1JVCBpcyBub3Qg
-c2V0CkNPTkZJR19TUExfU1lTX1NUQUNLX0ZfQ0hFQ0tfQllURT0weGFhCiMgQ09ORklHX1NQTF9T
-WVNfUkVQT1JUX1NUQUNLX0ZfVVNBR0UgaXMgbm90IHNldAojIENPTkZJR19TUExfU0hPV19FUlJP
-UlMgaXMgbm90IHNldApDT05GSUdfU1BMX0JJTk1BTl9TWU1CT0xTPXkKQ09ORklHX1NQTF9CSU5N
-QU5fVUJPT1RfU1lNQk9MUz15CiMgQ09ORklHX1NQTF9TT0NfSU5JVCBpcyBub3Qgc2V0CiMgQ09O
-RklHX1NQTF9CT0FSRF9JTklUIGlzIG5vdCBzZXQKQ09ORklHX1NQTF9MT0FEX0JMT0NLPXkKIyBD
-T05GSUdfU1BMX0JPT1RST01fU1VQUE9SVCBpcyBub3Qgc2V0CiMgQ09ORklHX1NQTF9SQVdfSU1B
-R0VfU1VQUE9SVCBpcyBub3Qgc2V0CiMgQ09ORklHX1NQTF9MRUdBQ1lfSU1BR0VfRk9STUFUIGlz
-IG5vdCBzZXQKIyBDT05GSUdfU1BMX0xPQURfSU1YX0NPTlRBSU5FUiBpcyBub3Qgc2V0CkNPTkZJ
-R19TUExfU1lTX01BTExPQ19TSU1QTEU9eQpDT05GSUdfU1BMX1NIQVJFU19JTklUX1NQX0FERFI9
-eQpDT05GSUdfU1BMX1NFUEFSQVRFX0JTUz15CiMgQ09ORklHX1NQTF9TWVNfTUFMTE9DIGlzIG5v
-dCBzZXQKQ09ORklHX1NQTF9CQU5ORVJfUFJJTlQ9eQojIENPTkZJR19TUExfRElTUExBWV9QUklO
-VCBpcyBub3Qgc2V0CkNPTkZJR19TUExfU1lTX01NQ1NEX1JBV19NT0RFPXkKQ09ORklHX1NZU19N
-TUNTRF9SQVdfTU9ERV9VX0JPT1RfVVNFX1NFQ1RPUj15CkNPTkZJR19TWVNfTU1DU0RfUkFXX01P
-REVfVV9CT09UX1NFQ1RPUj0weDQwMDAKQ09ORklHX1NZU19NTUNTRF9SQVdfTU9ERV9VX0JPT1Rf
-REFUQV9QQVJUX09GRlNFVD0weDAKIyBDT05GSUdfU1lTX01NQ1NEX1JBV19NT0RFX1VfQk9PVF9V
-U0VfUEFSVElUSU9OIGlzIG5vdCBzZXQKIyBDT05GSUdfU1BMX0ZJVF9JTUFHRV9USU5ZIGlzIG5v
-dCBzZXQKIyBDT05GSUdfU1BMX0NBQ0hFIGlzIG5vdCBzZXQKIyBDT05GSUdfU1BMX0NQVSBpcyBu
-b3Qgc2V0CkNPTkZJR19TUExfQ1JZUFRPPXkKIyBDT05GSUdfU1BMX0RNQSBpcyBub3Qgc2V0CiMg
-Q09ORklHX1NQTF9FTlZfU1VQUE9SVCBpcyBub3Qgc2V0CiMgQ09ORklHX1NQTF9GU19FWFQ0IGlz
-IG5vdCBzZXQKIyBDT05GSUdfU1BMX0ZTX1NRVUFTSEZTIGlzIG5vdCBzZXQKIyBDT05GSUdfU1BM
-X0ZBVF9XUklURSBpcyBub3Qgc2V0CiMgQ09ORklHX1NQTF9GUEdBIGlzIG5vdCBzZXQKIyBDT05G
-SUdfU1BMX0kyQyBpcyBub3Qgc2V0CiMgQ09ORklHX1NQTF9ETV9NQUlMQk9YIGlzIG5vdCBzZXQK
-IyBDT05GSUdfU1BMX01FTU9SWSBpcyBub3Qgc2V0CkNPTkZJR19TWVNfTU1DU0RfRlNfQk9PVD15
-CkNPTkZJR19TWVNfTU1DU0RfRlNfQk9PVF9QQVJUSVRJT049MQojIENPTkZJR19TUExfTU1DX1RJ
-TlkgaXMgbm90IHNldAojIENPTkZJR19TUExfTU1DX1dSSVRFIGlzIG5vdCBzZXQKIyBDT05GSUdf
-U1BMX01QQzhYWFhfSU5JVF9ERFIgaXMgbm90IHNldAojIENPTkZJR19TUExfTVREIGlzIG5vdCBz
-ZXQKIyBDT05GSUdfU1BMX01VU0JfTkVXIGlzIG5vdCBzZXQKIyBDT05GSUdfU1BMX05BTkRfU1VQ
-UE9SVCBpcyBub3Qgc2V0CiMgQ09ORklHX1NQTF9OQU5EX0RSSVZFUlMgaXMgbm90IHNldAojIENP
-TkZJR19TUExfTkFORF9FQ0MgaXMgbm90IHNldAojIENPTkZJR19TUExfTkFORF9TSU1QTEUgaXMg
-bm90IHNldAojIENPTkZJR19TUExfVUJJIGlzIG5vdCBzZXQKQ09ORklHX1NQTF9ETV9TUElfRkxB
-U0g9eQojIENPTkZJR19TUExfTkVUIGlzIG5vdCBzZXQKIyBDT05GSUdfU1BMX05PUl9TVVBQT1JU
-IGlzIG5vdCBzZXQKIyBDT05GSUdfU1BMX1hJUF9TVVBQT1JUIGlzIG5vdCBzZXQKIyBDT05GSUdf
-U1BMX09ORU5BTkRfU1VQUE9SVCBpcyBub3Qgc2V0CiMgQ09ORklHX1NQTF9PU19CT09UIGlzIG5v
-dCBzZXQKIyBDT05GSUdfU1BMX1BDSSBpcyBub3Qgc2V0CiMgQ09ORklHX1NQTF9QQ0ggaXMgbm90
-IHNldAojIENPTkZJR19TUExfUE9TVF9NRU1fU1VQUE9SVCBpcyBub3Qgc2V0CiMgQ09ORklHX1NQ
-TF9ETV9SRVNFVCBpcyBub3Qgc2V0CiMgQ09ORklHX1NQTF9QT1dFUiBpcyBub3Qgc2V0CiMgQ09O
-RklHX1NQTF9QT1dFUl9ET01BSU4gaXMgbm90IHNldAojIENPTkZJR19TUExfUkFNX1NVUFBPUlQg
-aXMgbm90IHNldAojIENPTkZJR19TUExfUkVNT1RFUFJPQyBpcyBub3Qgc2V0CiMgQ09ORklHX1NQ
-TF9SVEMgaXMgbm90IHNldAojIENPTkZJR19TUExfU0FUQSBpcyBub3Qgc2V0CiMgQ09ORklHX1NQ
-TF9OVk1FIGlzIG5vdCBzZXQKIyBDT05GSUdfU1BMX1NQSV9GTEFTSF9NVEQgaXMgbm90IHNldAoj
-IENPTkZJR19TUExfVEhFUk1BTCBpcyBub3Qgc2V0CiMgQ09ORklHX1NQTF9XQVRDSERPRyBpcyBu
-b3Qgc2V0CiMgQ09ORklHX1NQTF9ZTU9ERU1fU1VQUE9SVCBpcyBub3Qgc2V0CkNPTkZJR19TUExf
-QVRGPXkKIyBDT05GSUdfU1BMX0FURl9MT0FEX0lNQUdFX1YyIGlzIG5vdCBzZXQKQ09ORklHX1NQ
-TF9BVEZfTk9fUExBVEZPUk1fUEFSQU09eQojIENPTkZJR19TUExfT1BURUVfSU1BR0UgaXMgbm90
-IHNldApDT05GSUdfU1BMX1RBUkdFVD0iIgojIENPTkZJR19WUEwgaXMgbm90IHNldApDT05GSUdf
-SU1BR0VfU0lHTl9JTkZPPXkKQ09ORklHX1NQTF9JTUFHRV9TSUdOX0lORk89eQpDT05GSUdfQ01E
-TElORT15CkNPTkZJR19IVVNIX1BBUlNFUj15CgojCiMgSHVzaCBmbGF2b3IgdG8gdXNlCiMKQ09O
-RklHX0hVU0hfT0xEX1BBUlNFUj15CiMgQ09ORklHX0hVU0hfTU9ERVJOX1BBUlNFUiBpcyBub3Qg
-c2V0CkNPTkZJR19DTURMSU5FX0VESVRJTkc9eQojIENPTkZJR19DTURMSU5FX1BTX1NVUFBPUlQg
-aXMgbm90IHNldApDT05GSUdfQVVUT19DT01QTEVURT15CkNPTkZJR19TWVNfTE9OR0hFTFA9eQpD
-T05GSUdfU1lTX1BST01QVD0iPT4gIgpDT05GSUdfU1lTX1BST01QVF9IVVNIX1BTMj0iPiAiCkNP
-TkZJR19TWVNfTUFYQVJHUz02NApDT05GSUdfU1lTX1hUUkFDRT15CgojCiMgQ29tbWFuZHMKIwoK
-IwojIEluZm8gY29tbWFuZHMKIwpDT05GSUdfQ01EX0JEST15CiMgQ09ORklHX0NNRF9CRElORk9f
-RVhUUkEgaXMgbm90IHNldAojIENPTkZJR19DTURfQ09ORklHIGlzIG5vdCBzZXQKQ09ORklHX0NN
-RF9DT05TT0xFPXkKIyBDT05GSUdfQ01EX0hJU1RPUlkgaXMgbm90IHNldAojIENPTkZJR19DTURf
-TElDRU5TRSBpcyBub3Qgc2V0CiMgQ09ORklHX0NNRF9QTUMgaXMgbm90IHNldAojIENPTkZJR19D
-TURfU01CSU9TIGlzIG5vdCBzZXQKCiMKIyBCb290IGNvbW1hbmRzCiMKQ09ORklHX0NNRF9CT09U
-RD15CkNPTkZJR19DTURfQk9PVE09eQpDT05GSUdfQ01EX0JPT1RERVY9eQpDT05GSUdfQ01EX0JP
-T1RGTE9XPXkKQ09ORklHX0NNRF9CT09URkxPV19GVUxMPXkKQ09ORklHX0NNRF9CT09UTUVUSD15
-CkNPTkZJR19CT09UTV9FRkk9eQpDT05GSUdfQk9PVE1fRUxGPXkKIyBDT05GSUdfQ01EX0JPT1Ra
-IGlzIG5vdCBzZXQKQ09ORklHX0NNRF9CT09UST15CkNPTkZJR19CT09UTV9MSU5VWD15CkNPTkZJ
-R19CT09UTV9ORVRCU0Q9eQojIENPTkZJR19CT09UTV9PUEVOUlRPUyBpcyBub3Qgc2V0CiMgQ09O
-RklHX0JPT1RNX09TRSBpcyBub3Qgc2V0CkNPTkZJR19CT09UTV9QTEFOOT15CkNPTkZJR19CT09U
-TV9SVEVNUz15CkNPTkZJR19DTURfVkJFPXkKQ09ORklHX0JPT1RNX1ZYV09SS1M9eQpDT05GSUdf
-Q01EX0JPT1RFRkk9eQpDT05GSUdfQ01EX0JPT1RFRklfQklOQVJZPXkKQ09ORklHX0NNRF9CT09U
-RUZJX0JPT1RNR1I9eQpDT05GSUdfQ01EX0JPT1RFRklfSEVMTE9fQ09NUElMRT15CiMgQ09ORklH
-X0NNRF9CT09URUZJX0hFTExPIGlzIG5vdCBzZXQKIyBDT05GSUdfQ01EX0JPT1RFRklfU0VMRlRF
-U1QgaXMgbm90IHNldApDT05GSUdfQ01EX0JPT1RNRU5VPXkKIyBDT05GSUdfQ01EX0FEVElNRyBp
-cyBub3Qgc2V0CkNPTkZJR19DTURfRUxGPXkKIyBDT05GSUdfQ01EX0VMRl9GRFRfU0VUVVAgaXMg
-bm90IHNldApDT05GSUdfQ01EX0ZEVD15CkNPTkZJR19DTURfR089eQpDT05GSUdfQ01EX1JVTj15
-CkNPTkZJR19DTURfSU1JPXkKQ09ORklHX0NNRF9YSU1HPXkKQ09ORklHX1NZU19YSU1HX0xFTj0w
-eDgwMDAwMAojIENPTkZJR19DTURfU1BMIGlzIG5vdCBzZXQKCiMKIyBFbnZpcm9ubWVudCBjb21t
-YW5kcwojCiMgQ09ORklHX0NNRF9BU0tFTlYgaXMgbm90IHNldApDT05GSUdfQ01EX0VYUE9SVEVO
-Vj15CkNPTkZJR19DTURfSU1QT1JURU5WPXkKQ09ORklHX0NNRF9FRElURU5WPXkKIyBDT05GSUdf
-Q01EX0dSRVBFTlYgaXMgbm90IHNldApDT05GSUdfQ01EX1NBVkVFTlY9eQpDT05GSUdfQ01EX0VS
-QVNFRU5WPXkKQ09ORklHX0NNRF9FTlZfRVhJU1RTPXkKIyBDT05GSUdfQ01EX0VOVl9DQUxMQkFD
-SyBpcyBub3Qgc2V0CiMgQ09ORklHX0NNRF9FTlZfRkxBR1MgaXMgbm90IHNldAojIENPTkZJR19D
-TURfTlZFRElUX0VGSSBpcyBub3Qgc2V0CiMgQ09ORklHX0NNRF9OVkVESVRfSU5ESVJFQ1QgaXMg
-bm90IHNldApDT05GSUdfQ01EX05WRURJVF9JTkZPPXkKQ09ORklHX0NNRF9OVkVESVRfTE9BRD15
-CkNPTkZJR19DTURfTlZFRElUX1NFTEVDVD15CgojCiMgTWVtb3J5IGNvbW1hbmRzCiMKIyBDT05G
-SUdfQ01EX0JJTk9QIGlzIG5vdCBzZXQKQ09ORklHX0NNRF9DUkMzMj15CiMgQ09ORklHX0NSQzMy
-X1ZFUklGWSBpcyBub3Qgc2V0CiMgQ09ORklHX0NNRF9FRVBST00gaXMgbm90IHNldApDT05GSUdf
-U1lTX0VFUFJPTV9QQUdFX1dSSVRFX0RFTEFZX01TPTAKIyBDT05GSUdfTE9PUFcgaXMgbm90IHNl
-dAojIENPTkZJR19DTURfTUQ1U1VNIGlzIG5vdCBzZXQKIyBDT05GSUdfQ01EX01FTUlORk8gaXMg
-bm90IHNldApDT05GSUdfQ01EX01FTU9SWT15CiMgQ09ORklHX0NNRF9NRU1fU0VBUkNIIGlzIG5v
-dCBzZXQKIyBDT05GSUdfQ01EX01YX0NZQ0xJQyBpcyBub3Qgc2V0CkNPTkZJR19DTURfUkFORE9N
-PXkKIyBDT05GSUdfQ01EX01FTVRFU1QgaXMgbm90IHNldAojIENPTkZJR19DTURfU0hBMVNVTSBp
-cyBub3Qgc2V0CiMgQ09ORklHX0NNRF9TVFJJTkdTIGlzIG5vdCBzZXQKCiMKIyBDb21wcmVzc2lv
-biBjb21tYW5kcwojCkNPTkZJR19DTURfTFpNQURFQz15CkNPTkZJR19DTURfVU5MWjQ9eQpDT05G
-SUdfQ01EX1VOWklQPXkKIyBDT05GSUdfQ01EX1pJUCBpcyBub3Qgc2V0CgojCiMgRGV2aWNlIGFj
-Y2VzcyBjb21tYW5kcwojCiMgQ09ORklHX0NNRF9BREMgaXMgbm90IHNldAojIENPTkZJR19DTURf
-QkNCIGlzIG5vdCBzZXQKIyBDT05GSUdfQ01EX0JJTkQgaXMgbm90IHNldAojIENPTkZJR19DTURf
-Q0xLIGlzIG5vdCBzZXQKIyBDT05GSUdfQ01EX0RFTU8gaXMgbm90IHNldAojIENPTkZJR19DTURf
-REZVIGlzIG5vdCBzZXQKQ09ORklHX0NNRF9ETT15CiMgQ09ORklHX0NNRF9GVVNFIGlzIG5vdCBz
-ZXQKQ09ORklHX0NNRF9HUElPPXkKIyBDT05GSUdfQ01EX0dQSU9fUkVBRCBpcyBub3Qgc2V0CiMg
-Q09ORklHX0NNRF9QV00gaXMgbm90IHNldApDT05GSUdfQ01EX0dQVD15CiMgQ09ORklHX0NNRF9H
-UFRfUkVOQU1FIGlzIG5vdCBzZXQKIyBDT05GSUdfQ01EX0lERSBpcyBub3Qgc2V0CiMgQ09ORklH
-X0NNRF9JTyBpcyBub3Qgc2V0CiMgQ09ORklHX0NNRF9JT1RSQUNFIGlzIG5vdCBzZXQKQ09ORklH
-X0NNRF9JMkM9eQpDT05GSUdfQ01EX0xPQURCPXkKIyBDT05GSUdfQ01EX0xPQURNIGlzIG5vdCBz
-ZXQKQ09ORklHX0NNRF9MT0FEUz15CiMgQ09ORklHX0xPQURTX0VDSE8gaXMgbm90IHNldAojIENP
-TkZJR19DTURfU0FWRVMgaXMgbm90IHNldAojIENPTkZJR19TWVNfTE9BRFNfQkFVRF9DSEFOR0Ug
-aXMgbm90IHNldApDT05GSUdfQ01EX0xPQURYWV9USU1FT1VUPTkwCiMgQ09ORklHX0NNRF9MU0JM
-SyBpcyBub3Qgc2V0CiMgQ09ORklHX0NNRF9NQlIgaXMgbm90IHNldAojIENPTkZJR19DTURfTUlT
-QyBpcyBub3Qgc2V0CkNPTkZJR19DTURfTU1DPXkKIyBDT05GSUdfQ01EX0JLT1BTX0VOQUJMRSBp
-cyBub3Qgc2V0CiMgQ09ORklHX0NNRF9NTUNfUkVHIGlzIG5vdCBzZXQKQ09ORklHX0NNRF9NTUNf
-UlBNQj15CiMgQ09ORklHX0NNRF9NTUNfU1dSSVRFIGlzIG5vdCBzZXQKIyBDT05GSUdfQ01EX0NM
-T05FIGlzIG5vdCBzZXQKIyBDT05GSUdfQ01EX01URCBpcyBub3Qgc2V0CkNPTkZJR19DTURfTlZN
-RT15CiMgQ09ORklHX0NNRF9PTkVOQU5EIGlzIG5vdCBzZXQKIyBDT05GSUdfQ01EX09TRCBpcyBu
-b3Qgc2V0CkNPTkZJR19DTURfUEFSVD15CkNPTkZJR19DTURfUENJPXkKIyBDT05GSUdfQ01EX1BD
-SV9NUFMgaXMgbm90IHNldApDT05GSUdfQ01EX1BJTk1VWD15CiMgQ09ORklHX0NNRF9QT1dFUk9G
-RiBpcyBub3Qgc2V0CiMgQ09ORklHX0NNRF9SRUFEIGlzIG5vdCBzZXQKIyBDT05GSUdfQ01EX1NB
-VEEgaXMgbm90IHNldApDT05GSUdfQ01EX1NDU0k9eQojIENPTkZJR19DTURfU0RSQU0gaXMgbm90
-IHNldApDT05GSUdfQ01EX1NGPXkKIyBDT05GSUdfQ01EX1NGX1RFU1QgaXMgbm90IHNldAojIENP
-TkZJR19DTURfU1BJIGlzIG5vdCBzZXQKQ09ORklHX0NNRF9VU0I9eQojIENPTkZJR19DTURfVVNC
-X1NEUCBpcyBub3Qgc2V0CiMgQ09ORklHX0NNRF9SS01URCBpcyBub3Qgc2V0CiMgQ09ORklHX0NN
-RF9XUklURSBpcyBub3Qgc2V0CgojCiMgU2hlbGwgc2NyaXB0aW5nIGNvbW1hbmRzCiMKIyBDT05G
-SUdfQ01EX0NBVCBpcyBub3Qgc2V0CkNPTkZJR19DTURfRUNITz15CkNPTkZJR19DTURfSVRFU1Q9
-eQpDT05GSUdfQ01EX1NPVVJDRT15CiMgQ09ORklHX0NNRF9TRVRFWFBSIGlzIG5vdCBzZXQKIyBD
-T05GSUdfQ01EX1hYRCBpcyBub3Qgc2V0CgojCiMgQW5kcm9pZCBzdXBwb3J0IGNvbW1hbmRzCiMK
-Q09ORklHX0NNRF9ORVQ9eQpDT05GSUdfQ01EX0JPT1RQPXkKQ09ORklHX0NNRF9ESENQPXkKIyBD
-T05GSUdfQk9PVFBfTUFZX0ZBSUwgaXMgbm90IHNldApDT05GSUdfQk9PVFBfQk9PVFBBVEg9eQoj
-IENPTkZJR19CT09UUF9WRU5ET1JFWCBpcyBub3Qgc2V0CiMgQ09ORklHX0JPT1RQX0JPT1RGSUxF
-U0laRSBpcyBub3Qgc2V0CkNPTkZJR19CT09UUF9ETlM9eQojIENPTkZJR19CT09UUF9ETlMyIGlz
-IG5vdCBzZXQKQ09ORklHX0JPT1RQX0dBVEVXQVk9eQpDT05GSUdfQk9PVFBfSE9TVE5BTUU9eQoj
-IENPTkZJR19CT09UUF9QUkVGRVJfU0VSVkVSSVAgaXMgbm90IHNldApDT05GSUdfQk9PVFBfU1VC
-TkVUTUFTSz15CiMgQ09ORklHX0JPT1RQX05JU0RPTUFJTiBpcyBub3Qgc2V0CiMgQ09ORklHX0JP
-T1RQX05UUFNFUlZFUiBpcyBub3Qgc2V0CiMgQ09ORklHX0NNRF9QQ0FQIGlzIG5vdCBzZXQKQ09O
-RklHX0JPT1RQX1BYRT15CkNPTkZJR19CT09UUF9QWEVfQ0xJRU5UQVJDSD0weDE2CiMgQ09ORklH
-X0JPT1RQX1BYRV9ESENQX09QVElPTiBpcyBub3Qgc2V0CkNPTkZJR19CT09UUF9WQ0lfU1RSSU5H
-PSJVLUJvb3QuYXJtdjgiCkNPTkZJR19DTURfVEZUUEJPT1Q9eQojIENPTkZJR19DTURfVEZUUFBV
-VCBpcyBub3Qgc2V0CiMgQ09ORklHX0NNRF9URlRQU1JWIGlzIG5vdCBzZXQKQ09ORklHX05FVF9U
-RlRQX1ZBUlM9eQojIENPTkZJR19DTURfUkFSUCBpcyBub3Qgc2V0CiMgQ09ORklHX0NNRF9ORlMg
-aXMgbm90IHNldAojIENPTkZJR19TWVNfRElTQUJMRV9BVVRPTE9BRCBpcyBub3Qgc2V0CiMgQ09O
-RklHX0NNRF9XR0VUIGlzIG5vdCBzZXQKQ09ORklHX0NNRF9NSUk9eQpDT05GSUdfQ01EX01ESU89
-eQpDT05GSUdfQ01EX1BJTkc9eQojIENPTkZJR19DTURfQ0RQIGlzIG5vdCBzZXQKIyBDT05GSUdf
-Q01EX1NOVFAgaXMgbm90IHNldAojIENPTkZJR19DTURfRE5TIGlzIG5vdCBzZXQKIyBDT05GSUdf
-Q01EX0xJTktfTE9DQUwgaXMgbm90IHNldAojIENPTkZJR19DTURfRVRIU1cgaXMgbm90IHNldApD
-T05GSUdfQ01EX1BYRT15CiMgQ09ORklHX0NNRF9XT0wgaXMgbm90IHNldAoKIwojIE1pc2MgY29t
-bWFuZHMKIwojIENPTkZJR19DTURfMjA0OCBpcyBub3Qgc2V0CiMgQ09ORklHX0NNRF9CU1AgaXMg
-bm90IHNldApDT05GSUdfQ01EX0JMT0NLX0NBQ0hFPXkKIyBDT05GSUdfQ01EX0NBQ0hFIGlzIG5v
-dCBzZXQKIyBDT05GSUdfQ01EX0NPTklUUkFDRSBpcyBub3Qgc2V0CiMgQ09ORklHX0NNRF9DTFMg
-aXMgbm90IHNldAojIENPTkZJR19DTURfRUZJREVCVUcgaXMgbm90IHNldApDT05GSUdfQ01EX0VG
-SUNPTkZJRz15CiMgQ09ORklHX0NNRF9FWENFUFRJT04gaXMgbm90IHNldAojIENPTkZJR19DTURf
-SU5JIGlzIG5vdCBzZXQKIyBDT05GSUdfQ01EX0RBVEUgaXMgbm90IHNldAojIENPTkZJR19DTURf
-VElNRSBpcyBub3Qgc2V0CiMgQ09ORklHX0NNRF9HRVRUSU1FIGlzIG5vdCBzZXQKIyBDT05GSUdf
-Q01EX1BBVVNFIGlzIG5vdCBzZXQKIyBDT05GSUdfQ01EX1JORyBpcyBub3Qgc2V0CiMgQ09ORklH
-X0NNRF9LQVNMUlNFRUQgaXMgbm90IHNldApDT05GSUdfQ01EX1NMRUVQPXkKIyBDT05GSUdfQ01E
-X1RJTUVSIGlzIG5vdCBzZXQKIyBDT05GSUdfQ01EX1NZU0JPT1QgaXMgbm90IHNldAojIENPTkZJ
-R19DTURfUUZXIGlzIG5vdCBzZXQKIyBDT05GSUdfQ01EX1BTVE9SRSBpcyBub3Qgc2V0CiMgQ09O
-RklHX0NNRF9URVJNSU5BTCBpcyBub3Qgc2V0CiMgQ09ORklHX0NNRF9VVUlEIGlzIG5vdCBzZXQK
-CiMKIyBUSSBzcGVjaWZpYyBjb21tYW5kIGxpbmUgaW50ZXJmYWNlCiMKCiMKIyBQb3dlciBjb21t
-YW5kcwojCkNPTkZJR19DTURfUkVHVUxBVE9SPXkKCiMKIyBTZWN1cml0eSBjb21tYW5kcwojCiMg
-Q09ORklHX0NNRF9BRVMgaXMgbm90IHNldAojIENPTkZJR19DTURfQkxPQiBpcyBub3Qgc2V0CiMg
-Q09ORklHX0NNRF9IQVNIIGlzIG5vdCBzZXQKIyBDT05GSUdfQ01EX0hWQyBpcyBub3Qgc2V0CiMg
-Q09ORklHX0NNRF9TTUMgaXMgbm90IHNldAoKIwojIEZpcm13YXJlIGNvbW1hbmRzCiMKIyBDT05G
-SUdfQ01EX1NDTUkgaXMgbm90IHNldAoKIwojIEZpbGVzeXN0ZW0gY29tbWFuZHMKIwojIENPTkZJ
-R19DTURfQlRSRlMgaXMgbm90IHNldAojIENPTkZJR19DTURfRVJPRlMgaXMgbm90IHNldApDT05G
-SUdfQ01EX0VYVDI9eQpDT05GSUdfQ01EX0VYVDQ9eQojIENPTkZJR19DTURfRVhUNF9XUklURSBp
-cyBub3Qgc2V0CkNPTkZJR19DTURfRkFUPXkKIyBDT05GSUdfQ01EX1NRVUFTSEZTIGlzIG5vdCBz
-ZXQKQ09ORklHX0NNRF9GU19HRU5FUklDPXkKIyBDT05GSUdfQ01EX0ZTX1VVSUQgaXMgbm90IHNl
-dAojIENPTkZJR19DTURfSkZGUzIgaXMgbm90IHNldAojIENPTkZJR19DTURfTVREUEFSVFMgaXMg
-bm90IHNldApDT05GSUdfTVRESURTX0RFRkFVTFQ9IiIKQ09ORklHX01URFBBUlRTX0RFRkFVTFQ9
-IiIKIyBDT05GSUdfQ01EX1pGUyBpcyBub3Qgc2V0CgojCiMgRGVidWcgY29tbWFuZHMKIwojIENP
-TkZJR19DTURfRElBRyBpcyBub3Qgc2V0CiMgQ09ORklHX0NNRF9FVkVOVCBpcyBub3Qgc2V0CiMg
-Q09ORklHX0NNRF9MT0cgaXMgbm90IHNldAojIENPTkZJR19DTURfVUJJIGlzIG5vdCBzZXQKIyBD
-T05GSUdfTU1DX1NQRUVEX01PREVfU0VUIGlzIG5vdCBzZXQKCiMKIyBQYXJ0aXRpb24gVHlwZXMK
-IwpDT05GSUdfUEFSVElUSU9OUz15CkNPTkZJR19TUExfUEFSVElUSU9OUz15CiMgQ09ORklHX01B
-Q19QQVJUSVRJT04gaXMgbm90IHNldAojIENPTkZJR19TUExfTUFDX1BBUlRJVElPTiBpcyBub3Qg
-c2V0CkNPTkZJR19ET1NfUEFSVElUSU9OPXkKIyBDT05GSUdfU1BMX0RPU19QQVJUSVRJT04gaXMg
-bm90IHNldApDT05GSUdfSVNPX1BBUlRJVElPTj15CiMgQ09ORklHX1NQTF9JU09fUEFSVElUSU9O
-IGlzIG5vdCBzZXQKIyBDT05GSUdfQU1JR0FfUEFSVElUSU9OIGlzIG5vdCBzZXQKIyBDT05GSUdf
-U1BMX0FNSUdBX1BBUlRJVElPTiBpcyBub3Qgc2V0CkNPTkZJR19FRklfUEFSVElUSU9OPXkKQ09O
-RklHX0VGSV9QQVJUSVRJT05fRU5UUklFU19OVU1CRVJTPTEyOApDT05GSUdfRUZJX1BBUlRJVElP
-Tl9FTlRSSUVTX09GRj0wCkNPTkZJR19TUExfRUZJX1BBUlRJVElPTj15CkNPTkZJR19QQVJUSVRJ
-T05fVVVJRFM9eQpDT05GSUdfU1BMX1BBUlRJVElPTl9VVUlEUz15CiMgQ09ORklHX1BBUlRJVElP
-Tl9UWVBFX0dVSUQgaXMgbm90IHNldAojIENPTkZJR19TUExfUEFSVElUSU9OX1RZUEVfR1VJRCBp
-cyBub3Qgc2V0CkNPTkZJR19TVVBQT1JUX09GX0NPTlRST0w9eQpDT05GSUdfUFlMSUJGRFQ9eQpD
-T05GSUdfRFRPQz15CkNPTkZJR19CSU5NQU49eQoKIwojIERldmljZSBUcmVlIENvbnRyb2wKIwpD
-T05GSUdfT0ZfQ09OVFJPTD15CkNPTkZJR19PRl9SRUFMPXkKQ09ORklHX1NQTF9PRl9DT05UUk9M
-PXkKQ09ORklHX09GX0xJVkU9eQpDT05GSUdfT0ZfVVBTVFJFQU09eQojIENPTkZJR19PRl9VUFNU
-UkVBTV9CVUlMRF9WRU5ET1IgaXMgbm90IHNldApDT05GSUdfT0ZfU0VQQVJBVEU9eQojIENPTkZJ
-R19PRl9FTUJFRCBpcyBub3Qgc2V0CiMgQ09ORklHX09GX0lOSVRJQUxfRFRCX1JFQURPTkxZIGlz
-IG5vdCBzZXQKIyBDT05GSUdfT0ZfQk9BUkQgaXMgbm90IHNldAojIENPTkZJR19PRl9PTUlUX0RU
-QiBpcyBub3Qgc2V0CkNPTkZJR19ERVZJQ0VfVFJFRV9JTkNMVURFUz0iIgpDT05GSUdfT0ZfTElT
-VD0icm9ja2NoaXAvcmszNTg4LXF1YXJ0enBybzY0IgojIENPTkZJR19NVUxUSV9EVEJfRklUIGlz
-IG5vdCBzZXQKIyBDT05GSUdfU1BMX01VTFRJX0RUQl9GSVQgaXMgbm90IHNldApDT05GSUdfU1BM
-X09GX0xJU1Q9InJvY2tjaGlwL3JrMzU4OC1xdWFydHpwcm82NCIKQ09ORklHX09GX1RBR19NSUdS
-QVRFPXkKQ09ORklHX09GX1NQTF9SRU1PVkVfUFJPUFM9ImNsb2NrLW5hbWVzIGludGVycnVwdC1w
-YXJlbnQgYXNzaWduZWQtY2xvY2tzIGFzc2lnbmVkLWNsb2NrLXJhdGVzIGFzc2lnbmVkLWNsb2Nr
-LXBhcmVudHMiCiMgQ09ORklHX09GX0RUQl9QUk9QU19SRU1PVkUgaXMgbm90IHNldAojIENPTkZJ
-R19TUExfT0ZfUExBVERBVEEgaXMgbm90IHNldApDT05GSUdfU1BMX09GX1JFQUw9eQoKIwojIEVu
-dmlyb25tZW50CiMKQ09ORklHX0VOVl9TVVBQT1JUPXkKQ09ORklHX1NBVkVFTlY9eQpDT05GSUdf
-RU5WX09WRVJXUklURT15CkNPTkZJR19FTlZfTUlOX0VOVFJJRVM9NjQKQ09ORklHX0VOVl9NQVhf
-RU5UUklFUz01MTIKIyBDT05GSUdfRU5WX0lTX05PV0hFUkUgaXMgbm90IHNldAojIENPTkZJR19F
-TlZfSVNfSU5fRUVQUk9NIGlzIG5vdCBzZXQKIyBDT05GSUdfRU5WX0lTX0lOX0ZBVCBpcyBub3Qg
-c2V0CiMgQ09ORklHX0VOVl9JU19JTl9FWFQ0IGlzIG5vdCBzZXQKIyBDT05GSUdfRU5WX0lTX0lO
-X0ZMQVNIIGlzIG5vdCBzZXQKQ09ORklHX0VOVl9JU19JTl9NTUM9eQojIENPTkZJR19FTlZfSVNf
-SU5fTkFORCBpcyBub3Qgc2V0CiMgQ09ORklHX0VOVl9JU19JTl9OVlJBTSBpcyBub3Qgc2V0CiMg
-Q09ORklHX0VOVl9JU19JTl9SRU1PVEUgaXMgbm90IHNldAojIENPTkZJR19FTlZfSVNfSU5fU1BJ
-X0ZMQVNIIGlzIG5vdCBzZXQKIyBDT05GSUdfU1lTX1JFRFVOREFORF9FTlZJUk9OTUVOVCBpcyBu
-b3Qgc2V0CiMgQ09ORklHX1NZU19SRUxPQ19HRF9FTlZfQUREUiBpcyBub3Qgc2V0CkNPTkZJR19T
-WVNfTU1DX0VOVl9ERVY9MQpDT05GSUdfU1lTX01NQ19FTlZfUEFSVD0zCiMgQ09ORklHX1VTRV9F
-TlZfTU1DX1BBUlRJVElPTiBpcyBub3Qgc2V0CiMgQ09ORklHX0VOVl9NTUNfVVNFX0RUIGlzIG5v
-dCBzZXQKIyBDT05GSUdfVVNFX0RFRkFVTFRfRU5WX0ZJTEUgaXMgbm90IHNldAojIENPTkZJR19F
-TlZfVkFSU19VQk9PVF9SVU5USU1FX0NPTkZJRyBpcyBub3Qgc2V0CiMgQ09ORklHX0VOVl9JTVBP
-UlRfRkRUIGlzIG5vdCBzZXQKIyBDT05GSUdfRU5WX0FQUEVORCBpcyBub3Qgc2V0CiMgQ09ORklH
-X0VOVl9XUklURUFCTEVfTElTVCBpcyBub3Qgc2V0CiMgQ09ORklHX0VOVl9BQ0NFU1NfSUdOT1JF
-X0ZPUkNFIGlzIG5vdCBzZXQKIyBDT05GSUdfVVNFX0JPT1RGSUxFIGlzIG5vdCBzZXQKIyBDT05G
-SUdfVVNFX0VUSFBSSU1FIGlzIG5vdCBzZXQKIyBDT05GSUdfVVNFX0hPU1ROQU1FIGlzIG5vdCBz
-ZXQKIyBDT05GSUdfVkVSU0lPTl9WQVJJQUJMRSBpcyBub3Qgc2V0CkNPTkZJR19ORVQ9eQpDT05G
-SUdfQVJQX1RJTUVPVVQ9NTAwMApDT05GSUdfTkVUX1JFVFJZX0NPVU5UPTUKIyBDT05GSUdfUFJP
-VF9VRFAgaXMgbm90IHNldApDT05GSUdfQk9PVERFVl9FVEg9eQojIENPTkZJR19CT09UUF9TRU5E
-X0hPU1ROQU1FIGlzIG5vdCBzZXQKIyBDT05GSUdfTkVUX1JBTkRPTV9FVEhBRERSIGlzIG5vdCBz
-ZXQKIyBDT05GSUdfTkVUQ09OU09MRSBpcyBub3Qgc2V0CiMgQ09ORklHX0lQX0RFRlJBRyBpcyBu
-b3Qgc2V0CiMgQ09ORklHX1NZU19GQVVMVF9FQ0hPX0xJTktfRE9XTiBpcyBub3Qgc2V0CkNPTkZJ
-R19URlRQX0JMT0NLU0laRT0xNDY4CiMgQ09ORklHX1RGVFBfUE9SVCBpcyBub3Qgc2V0CkNPTkZJ
-R19URlRQX1dJTkRPV1NJWkU9MQojIENPTkZJR19URlRQX1RTSVpFIGlzIG5vdCBzZXQKIyBDT05G
-SUdfU0VSVkVSSVBfRlJPTV9QUk9YWURIQ1AgaXMgbm90IHNldApDT05GSUdfU0VSVkVSSVBfRlJP
-TV9QUk9YWURIQ1BfREVMQVlfTVM9MTAwCiMgQ09ORklHX0tFRVBfU0VSVkVSQUREUiBpcyBub3Qg
-c2V0CiMgQ09ORklHX1VEUF9DSEVDS1NVTSBpcyBub3Qgc2V0CiMgQ09ORklHX0JPT1RQX1NFUlZF
-UklQIGlzIG5vdCBzZXQKQ09ORklHX0JPT1RQX01BWF9ST09UX1BBVEhfTEVOPTY0CiMgQ09ORklH
-X1VTRV9HQVRFV0FZSVAgaXMgbm90IHNldAojIENPTkZJR19VU0VfSVBBRERSIGlzIG5vdCBzZXQK
-IyBDT05GSUdfVVNFX05FVE1BU0sgaXMgbm90IHNldAojIENPTkZJR19VU0VfUk9PVFBBVEggaXMg
-bm90IHNldAojIENPTkZJR19VU0VfU0VSVkVSSVAgaXMgbm90IHNldAojIENPTkZJR19QUk9UX1RD
-UCBpcyBub3Qgc2V0CiMgQ09ORklHX0lQVjYgaXMgbm90IHNldApDT05GSUdfU1lTX1JYX0VUSF9C
-VUZGRVI9NAoKIwojIERldmljZSBEcml2ZXJzCiMKCiMKIyBHZW5lcmljIERyaXZlciBPcHRpb25z
-CiMKQ09ORklHX0RNPXkKQ09ORklHX1NQTF9ETT15CiMgQ09ORklHX0RNX1dBUk4gaXMgbm90IHNl
-dAojIENPTkZJR19TUExfRE1fV0FSTiBpcyBub3Qgc2V0CiMgQ09ORklHX0RNX0RFQlVHIGlzIG5v
-dCBzZXQKIyBDT05GSUdfRE1fU1RBVFMgaXMgbm90IHNldAojIENPTkZJR19TUExfRE1fU1RBVFMg
-aXMgbm90IHNldApDT05GSUdfRE1fREVWSUNFX1JFTU9WRT15CkNPTkZJR19ETV9FVkVOVD15CiMg
-Q09ORklHX1NQTF9ETV9ERVZJQ0VfUkVNT1ZFIGlzIG5vdCBzZXQKQ09ORklHX0RNX1NURElPPXkK
-Q09ORklHX0RNX1NFUV9BTElBUz15CkNPTkZJR19TUExfRE1fU0VRX0FMSUFTPXkKQ09ORklHX1NQ
-TF9ETV9JTkxJTkVfT0ZOT0RFPXkKIyBDT05GSUdfRE1fRE1BIGlzIG5vdCBzZXQKQ09ORklHX1JF
-R01BUD15CkNPTkZJR19TUExfUkVHTUFQPXkKQ09ORklHX1NZU0NPTj15CkNPTkZJR19TUExfU1lT
-Q09OPXkKIyBDT05GSUdfREVWUkVTIGlzIG5vdCBzZXQKQ09ORklHX1NJTVBMRV9CVVM9eQpDT05G
-SUdfU1BMX1NJTVBMRV9CVVM9eQojIENPTkZJR19TSU1QTEVfQlVTX0NPUlJFQ1RfUkFOR0UgaXMg
-bm90IHNldApDT05GSUdfT0ZfVFJBTlNMQVRFPXkKIyBDT05GSUdfU1BMX09GX1RSQU5TTEFURSBp
-cyBub3Qgc2V0CiMgQ09ORklHX1RSQU5TTEFUSU9OX09GRlNFVCBpcyBub3Qgc2V0CkNPTkZJR19P
-Rk5PREVfTVVMVElfVFJFRT15CkNPTkZJR19PRk5PREVfTVVMVElfVFJFRV9NQVg9NApDT05GSUdf
-Qk9VTkNFX0JVRkZFUj15CkNPTkZJR19BREM9eQojIENPTkZJR19TUExfQURDIGlzIG5vdCBzZXQK
-IyBDT05GSUdfQURDX0VYWU5PUyBpcyBub3Qgc2V0CiMgQ09ORklHX0FEQ19TQU5EQk9YIGlzIG5v
-dCBzZXQKIyBDT05GSUdfU0FSQURDX01FU09OIGlzIG5vdCBzZXQKQ09ORklHX1NBUkFEQ19ST0NL
-Q0hJUD15CiMgQ09ORklHX0FEQ19JTVg5MyBpcyBub3Qgc2V0CiMgQ09ORklHX1NBVEEgaXMgbm90
-IHNldApDT05GSUdfTElCQVRBPXkKQ09ORklHX1NDU0lfQUhDST15CgojCiMgU0FUQS9TQ1NJIGRl
-dmljZSBzdXBwb3J0CiMKQ09ORklHX0FIQ0lfUENJPXkKQ09ORklHX0RXQ19BSENJPXkKIyBDT05G
-SUdfRFdDX0FIU0FUQSBpcyBub3Qgc2V0CiMgQ09ORklHX01US19BSENJIGlzIG5vdCBzZXQKIyBD
-T05GSUdfU1VOWElfQUhDSSBpcyBub3Qgc2V0CiMgQ09ORklHX0FYSSBpcyBub3Qgc2V0CgojCiMg
-QnVzIGRldmljZXMKIwpDT05GSUdfQkxLPXkKQ09ORklHX1NQTF9MRUdBQ1lfQkxPQ0s9eQpDT05G
-SUdfU1BMX0JMSz15CkNPTkZJR19CTE9DS19DQUNIRT15CiMgQ09ORklHX0JMS01BUCBpcyBub3Qg
-c2V0CiMgQ09ORklHX1NQTF9CTE9DS19DQUNIRSBpcyBub3Qgc2V0CiMgQ09ORklHX0VGSV9NRURJ
-QSBpcyBub3Qgc2V0CiMgQ09ORklHX1NQTF9CTEtfRlMgaXMgbm90IHNldAojIENPTkZJR19JREUg
-aXMgbm90IHNldAojIENPTkZJR19MQkE0OCBpcyBub3Qgc2V0CiMgQ09ORklHX1NZU182NEJJVF9M
-QkEgaXMgbm90IHNldAojIENPTkZJR19SS01URCBpcyBub3Qgc2V0CiMgQ09ORklHX0JPT1RDT1VO
-VF9MSU1JVCBpcyBub3Qgc2V0CgojCiMgQnV0dG9uIFN1cHBvcnQKIwojIENPTkZJR19CVVRUT04g
-aXMgbm90IHNldAoKIwojIENhY2hlIENvbnRyb2xsZXIgZHJpdmVycwojCiMgQ09ORklHX0NBQ0hF
-IGlzIG5vdCBzZXQKIyBDT05GSUdfTDJYMF9DQUNIRSBpcyBub3Qgc2V0CiMgQ09ORklHX0FOREVT
-X0wyX0NBQ0hFIGlzIG5vdCBzZXQKIyBDT05GSUdfTkNPUkVfQ0FDSEUgaXMgbm90IHNldAojIENP
-TkZJR19TSUZJVkVfQ0NBQ0hFIGlzIG5vdCBzZXQKIyBDT05GSUdfU0lGSVZFX1BMMiBpcyBub3Qg
-c2V0CgojCiMgQ2xvY2sKIwpDT05GSUdfQ0xLPXkKQ09ORklHX1NQTF9DTEs9eQojIENPTkZJR19T
-UExfQ0xLX0NDRiBpcyBub3Qgc2V0CiMgQ09ORklHX0NMS19DQ0YgaXMgbm90IHNldAojIENPTkZJ
-R19DTEtfR1BJTyBpcyBub3Qgc2V0CiMgQ09ORklHX1NQTF9DTEtfR1BJTyBpcyBub3Qgc2V0CiMg
-Q09ORklHX0NMS19DRENFOVhYIGlzIG5vdCBzZXQKIyBDT05GSUdfQ0xLX0lDUzhOM1FWMDEgaXMg
-bm90IHNldAojIENPTkZJR19DTEtfSzIxMCBpcyBub3Qgc2V0CiMgQ09ORklHX0NMS19NUEM4M1hY
-IGlzIG5vdCBzZXQKQ09ORklHX0NMS19TQ01JPXkKIyBDT05GSUdfQ0xLX1hMTlhfQ0xLV1pSRCBp
-cyBub3Qgc2V0CiMgQ09ORklHX0NPTU1PTl9DTEtfQURJX1NIQVJFRCBpcyBub3Qgc2V0CiMgQ09O
-RklHX0NMS19BVDkxIGlzIG5vdCBzZXQKIyBDT05GSUdfQ0xLX1JDQVIgaXMgbm90IHNldAojIENP
-TkZJR19DTEtfUkNBUl9DUEdfTElCIGlzIG5vdCBzZXQKIyBDT05GSUdfQ0xLX1NJRklWRSBpcyBu
-b3Qgc2V0CiMgQ09ORklHX0NMS19USV9BTTNfRFBMTCBpcyBub3Qgc2V0CiMgQ09ORklHX0NMS19U
-SV9DVFJMIGlzIG5vdCBzZXQKIyBDT05GSUdfQ0xLX1RJX0dBVEUgaXMgbm90IHNldAojIENPTkZJ
-R19DTEtfSzMgaXMgbm90IHNldAojIENPTkZJR19TUExfQ0xLX0szIGlzIG5vdCBzZXQKIyBDT05G
-SUdfQ1BVIGlzIG5vdCBzZXQKCiMKIyBIYXJkd2FyZSBjcnlwdG8gZGV2aWNlcwojCiMgQ09ORklH
-X0RNX0hBU0ggaXMgbm90IHNldAojIENPTkZJR19GU0xfQ0FBTSBpcyBub3Qgc2V0CkNPTkZJR19D
-QUFNXzY0QklUPXkKIyBDT05GSUdfU1lTX0ZTTF9TRUNfQkUgaXMgbm90IHNldAojIENPTkZJR19T
-WVNfRlNMX1NFQ19MRSBpcyBub3Qgc2V0CiMgQ09ORklHX0ZTTF9EQ1BfUk5HIGlzIG5vdCBzZXQK
-IyBDT05GSUdfTlBDTV9BRVMgaXMgbm90IHNldAojIENPTkZJR19OUENNX1NIQSBpcyBub3Qgc2V0
-CiMgQ09ORklHX0REUl9TUEQgaXMgbm90IHNldAojIENPTkZJR19JTVhfU05QU19ERFJfUEhZIGlz
-IG5vdCBzZXQKCiMKIyBEZW1vIGZvciBkcml2ZXIgbW9kZWwKIwojIENPTkZJR19ETV9ERU1PIGlz
-IG5vdCBzZXQKCiMKIyBERlUgc3VwcG9ydAojCgojCiMgRE1BIFN1cHBvcnQKIwojIENPTkZJR19E
-TUEgaXMgbm90IHNldAojIENPTkZJR19ETUFfTFBDMzJYWCBpcyBub3Qgc2V0CiMgQ09ORklHX1RJ
-X0VETUEzIGlzIG5vdCBzZXQKIyBDT05GSUdfRE1BX0xFR0FDWSBpcyBub3Qgc2V0CgojCiMgRXh0
-Y29uIFN1cHBvcnQKIwojIENPTkZJR19FWFRDT04gaXMgbm90IHNldAoKIwojIEZhc3Rib290IHN1
-cHBvcnQKIwojIENPTkZJR19VRFBfRlVOQ1RJT05fRkFTVEJPT1QgaXMgbm90IHNldAojIENPTkZJ
-R19UQ1BfRlVOQ1RJT05fRkFTVEJPT1QgaXMgbm90IHNldApDT05GSUdfRklSTVdBUkU9eQojIENP
-TkZJR19TUExfRklSTVdBUkUgaXMgbm90IHNldApDT05GSUdfQVJNX1BTQ0lfRlc9eQojIENPTkZJ
-R19aWU5RTVBfRklSTVdBUkUgaXMgbm90IHNldAojIENPTkZJR19BUk1fU01DQ0NfRkVBVFVSRVMg
-aXMgbm90IHNldAojIENPTkZJR19BUk1fRkZBX1RSQU5TUE9SVCBpcyBub3Qgc2V0CkNPTkZJR19T
-Q01JX0ZJUk1XQVJFPXkKQ09ORklHX1NDTUlfQUdFTlRfU01DQ0M9eQojIENPTkZJR19ETV9GVVpa
-SU5HX0VOR0lORSBpcyBub3Qgc2V0CgojCiMgRlBHQSBzdXBwb3J0CiMKIyBDT05GSUdfRlBHQV9B
-TFRFUkEgaXMgbm90IHNldAojIENPTkZJR19GUEdBX1NPQ0ZQR0EgaXMgbm90IHNldAojIENPTkZJ
-R19GUEdBX0xBVFRJQ0UgaXMgbm90IHNldAojIENPTkZJR19GUEdBX1hJTElOWCBpcyBub3Qgc2V0
-CiMgQ09ORklHX0RNX0ZQR0EgaXMgbm90IHNldAojIENPTkZJR19GV1VfTURBVEEgaXMgbm90IHNl
-dApDT05GSUdfR1BJTz15CiMgQ09ORklHX0dQSU9fSE9HIGlzIG5vdCBzZXQKIyBDT05GSUdfRE1f
-R1BJT19MT09LVVBfTEFCRUwgaXMgbm90IHNldAojIENPTkZJR19BTFRFUkFfUElPIGlzIG5vdCBz
-ZXQKIyBDT05GSUdfQkNNMjgzNV9HUElPIGlzIG5vdCBzZXQKIyBDT05GSUdfRFdBUEJfR1BJTyBp
-cyBub3Qgc2V0CiMgQ09ORklHX0FUOTFfR1BJTyBpcyBub3Qgc2V0CiMgQ09ORklHX0FUTUVMX1BJ
-TzQgaXMgbm90IHNldAojIENPTkZJR19BU1BFRURfR1BJTyBpcyBub3Qgc2V0CiMgQ09ORklHX0RB
-OFhYX0dQSU8gaXMgbm90IHNldAojIENPTkZJR19GWEw2NDA4X0dQSU8gaXMgbm90IHNldAojIENP
-TkZJR19ISUtFWV9HUElPIGlzIG5vdCBzZXQKIyBDT05GSUdfSU5URUxfQlJPQURXRUxMX0dQSU8g
-aXMgbm90IHNldAojIENPTkZJR19JTlRFTF9HUElPIGlzIG5vdCBzZXQKIyBDT05GSUdfSU5URUxf
-SUNINl9HUElPIGlzIG5vdCBzZXQKIyBDT05GSUdfSU1YX1JHUElPMlAgaXMgbm90IHNldAojIENP
-TkZJR19JUFJPQ19HUElPIGlzIG5vdCBzZXQKIyBDT05GSUdfSFNES19DUkVHX0dQSU8gaXMgbm90
-IHNldAojIENPTkZJR19LSVJLV09PRF9HUElPIGlzIG5vdCBzZXQKIyBDT05GSUdfTFBDMzJYWF9H
-UElPIGlzIG5vdCBzZXQKIyBDT05GSUdfTUFYNzMyMF9HUElPIGlzIG5vdCBzZXQKIyBDT05GSUdf
-TUNQMjMwWFhfR1BJTyBpcyBub3Qgc2V0CiMgQ09ORklHX01TTV9HUElPIGlzIG5vdCBzZXQKIyBD
-T05GSUdfTVhDX0dQSU8gaXMgbm90IHNldAojIENPTkZJR19NWFNfR1BJTyBpcyBub3Qgc2V0CiMg
-Q09ORklHX05QQ01fR1BJTyBpcyBub3Qgc2V0CiMgQ09ORklHX0NNRF9QQ0E5NTNYIGlzIG5vdCBz
-ZXQKIyBDT05GSUdfUENGODU3NV9HUElPIGlzIG5vdCBzZXQKQ09ORklHX1JPQ0tDSElQX0dQSU89
-eQojIENPTkZJR19YSUxJTlhfR1BJTyBpcyBub3Qgc2V0CiMgQ09ORklHX1RDQTY0MlggaXMgbm90
-IHNldAojIENPTkZJR19URUdSQV9HUElPIGlzIG5vdCBzZXQKIyBDT05GSUdfVEVHUkExODZfR1BJ
-TyBpcyBub3Qgc2V0CiMgQ09ORklHX1ZZQlJJRF9HUElPIGlzIG5vdCBzZXQKIyBDT05GSUdfU0lG
-SVZFX0dQSU8gaXMgbm90IHNldAojIENPTkZJR19aWU5RX0dQSU8gaXMgbm90IHNldAojIENPTkZJ
-R19ETV83NFgxNjQgaXMgbm90IHNldAojIENPTkZJR19ETV9QQ0E5NTNYIGlzIG5vdCBzZXQKIyBD
-T05GSUdfUENBOTUzWCBpcyBub3Qgc2V0CiMgQ09ORklHX01QQzhYWFhfR1BJTyBpcyBub3Qgc2V0
-CiMgQ09ORklHX01QQzhYWF9HUElPIGlzIG5vdCBzZXQKIyBDT05GSUdfTlhfR1BJTyBpcyBub3Qg
-c2V0CiMgQ09ORklHX05PTUFESUtfR1BJTyBpcyBub3Qgc2V0CiMgQ09ORklHX1NMRzdYTDQ1MTA2
-X0kyQ19HUE8gaXMgbm90IHNldAojIENPTkZJR19GVEdQSU8wMTAgaXMgbm90IHNldAojIENPTkZJ
-R19BRFA1NTg1X0dQSU8gaXMgbm90IHNldAoKIwojIEhhcmR3YXJlIFNwaW5sb2NrIFN1cHBvcnQK
-IwojIENPTkZJR19ETV9IV1NQSU5MT0NLIGlzIG5vdCBzZXQKQ09ORklHX0kyQz15CkNPTkZJR19E
-TV9JMkM9eQpDT05GSUdfU1BMX0RNX0kyQz15CiMgQ09ORklHX0kyQ19TRVRfREVGQVVMVF9CVVNf
-TlVNIGlzIG5vdCBzZXQKIyBDT05GSUdfRE1fSTJDX0dQSU8gaXMgbm90IHNldAojIENPTkZJR19T
-WVNfSTJDX0lQUk9DIGlzIG5vdCBzZXQKIyBDT05GSUdfU1lTX0kyQ19GU0wgaXMgbm90IHNldAoj
-IENPTkZJR19TWVNfSTJDX0NBREVOQ0UgaXMgbm90IHNldAojIENPTkZJR19TWVNfSTJDX0RXIGlz
-IG5vdCBzZXQKIyBDT05GSUdfU1lTX0kyQ19JTlRFTCBpcyBub3Qgc2V0CiMgQ09ORklHX1NZU19J
-MkNfSU1YX0xQSTJDIGlzIG5vdCBzZXQKIyBDT05GSUdfU1lTX0kyQ19NVEsgaXMgbm90IHNldAoj
-IENPTkZJR19TWVNfSTJDX01JQ1JPQ0hJUCBpcyBub3Qgc2V0CiMgQ09ORklHX1NZU19JMkNfTVhD
-IGlzIG5vdCBzZXQKIyBDT05GSUdfU1lTX0kyQ19ORVhFTEwgaXMgbm90IHNldAojIENPTkZJR19T
-WVNfSTJDX05QQ00gaXMgbm90IHNldAojIENPTkZJR19TWVNfSTJDX09DT1JFUyBpcyBub3Qgc2V0
-CkNPTkZJR19TWVNfSTJDX1JPQ0tDSElQPXkKIyBDT05GSUdfU1lTX0kyQ19TT0ZUIGlzIG5vdCBz
-ZXQKIyBDT05GSUdfU1lTX0kyQ19TM0MyNFgwIGlzIG5vdCBzZXQKIyBDT05GSUdfU1lTX0kyQ19N
-ViBpcyBub3Qgc2V0CiMgQ09ORklHX1NZU19JMkNfTVZUV1NJIGlzIG5vdCBzZXQKIyBDT05GSUdf
-U1lTX0kyQ19YSUxJTlhfWElJQyBpcyBub3Qgc2V0CiMgQ09ORklHX1NZU19JMkNfSUhTIGlzIG5v
-dCBzZXQKIyBDT05GSUdfSTJDX01VWCBpcyBub3Qgc2V0CkNPTkZJR19JTlBVVD15CiMgQ09ORklH
-X1NQTF9JTlBVVCBpcyBub3Qgc2V0CkNPTkZJR19ETV9LRVlCT0FSRD15CiMgQ09ORklHX1NQTF9E
-TV9LRVlCT0FSRCBpcyBub3Qgc2V0CiMgQ09ORklHX0FQUExFX1NQSV9LRVlCIGlzIG5vdCBzZXQK
-IyBDT05GSUdfQlVUVE9OX0tFWUJPQVJEIGlzIG5vdCBzZXQKIyBDT05GSUdfQ1JPU19FQ19LRVlC
-IGlzIG5vdCBzZXQKIyBDT05GSUdfSTgwNDJfS0VZQiBpcyBub3Qgc2V0CiMgQ09ORklHX1RFR1JB
-X0tFWUJPQVJEIGlzIG5vdCBzZXQKIyBDT05GSUdfVFdMNDAzMF9JTlBVVCBpcyBub3Qgc2V0Cgoj
-CiMgSU9NTVUgZGV2aWNlIGRyaXZlcnMKIwojIENPTkZJR19JT01NVSBpcyBub3Qgc2V0CgojCiMg
-TEVEIFN1cHBvcnQKIwojIENPTkZJR19MRUQgaXMgbm90IHNldAojIENPTkZJR19TUExfTEVEIGlz
-IG5vdCBzZXQKIyBDT05GSUdfTEVEX1NUQVRVUyBpcyBub3Qgc2V0CgojCiMgTWFpbGJveCBDb250
-cm9sbGVyIFN1cHBvcnQKIwojIENPTkZJR19ETV9NQUlMQk9YIGlzIG5vdCBzZXQKCiMKIyBNZW1v
-cnkgQ29udHJvbGxlciBkcml2ZXJzCiMKIyBDT05GSUdfTUVNT1JZIGlzIG5vdCBzZXQKIyBDT05G
-SUdfQVRNRUxfRUJJIGlzIG5vdCBzZXQKIyBDT05GSUdfTUZEX0FUTUVMX1NNQyBpcyBub3Qgc2V0
-CgojCiMgTXVsdGlmdW5jdGlvbiBkZXZpY2UgZHJpdmVycwojCkNPTkZJR19NSVNDPXkKQ09ORklH
-X1NQTF9NSVNDPXkKIyBDT05GSUdfTlZNRU0gaXMgbm90IHNldAojIENPTkZJR19TUExfTlZNRU0g
-aXMgbm90IHNldAojIENPTkZJR19BTFRFUkFfU1lTSUQgaXMgbm90IHNldAojIENPTkZJR19BVFNI
-QTIwNEEgaXMgbm90IHNldAojIENPTkZJR19HQVRFV09SS1NfU0MgaXMgbm90IHNldAojIENPTkZJ
-R19ST0NLQ0hJUF9FRlVTRSBpcyBub3Qgc2V0CkNPTkZJR19ST0NLQ0hJUF9PVFA9eQojIENPTkZJ
-R19ST0NLQ0hJUF9JT0RPTUFJTiBpcyBub3Qgc2V0CiMgQ09ORklHX1NJRklWRV9PVFAgaXMgbm90
-IHNldAojIENPTkZJR19TTVNDX0xQQzQ3TSBpcyBub3Qgc2V0CiMgQ09ORklHX1NNU0NfU0lPMTAw
-NyBpcyBub3Qgc2V0CiMgQ09ORklHX1ZFWFBSRVNTX0NPTkZJRyBpcyBub3Qgc2V0CiMgQ09ORklH
-X0NST1NfRUMgaXMgbm90IHNldAojIENPTkZJR19TUExfQ1JPU19FQyBpcyBub3Qgc2V0CiMgQ09O
-RklHX0RTNDUxMCBpcyBub3Qgc2V0CiMgQ09ORklHX0ZTTF9TRUNfTU9OIGlzIG5vdCBzZXQKIyBD
-T05GSUdfSVJRIGlzIG5vdCBzZXQKIyBDT05GSUdfTlBDTV9IT1NUIGlzIG5vdCBzZXQKIyBDT05G
-SUdfTlVWT1RPTl9OQ1Q2MTAyRCBpcyBub3Qgc2V0CiMgQ09ORklHX1BXUlNFUSBpcyBub3Qgc2V0
-CiMgQ09ORklHX1BDQTk1NTFfTEVEIGlzIG5vdCBzZXQKIyBDT05GSUdfVEVTVF9EUlYgaXMgbm90
-IHNldAojIENPTkZJR19UVVJSSVNfT01OSUFfTUNVIGlzIG5vdCBzZXQKIyBDT05GSUdfVVNCX0hV
-Ql9VU0IyNTFYQiBpcyBub3Qgc2V0CiMgQ09ORklHX1RXTDQwMzBfTEVEIGlzIG5vdCBzZXQKIyBD
-T05GSUdfV0lOQk9ORF9XODM2MjcgaXMgbm90IHNldAojIENPTkZJR19JMkNfRUVQUk9NIGlzIG5v
-dCBzZXQKIyBDT05GSUdfU1BMX0kyQ19FRVBST00gaXMgbm90IHNldAojIENPTkZJR19HRFNZU19S
-WEFVSV9DVFJMIGlzIG5vdCBzZXQKIyBDT05GSUdfR0RTWVNfSU9FUCBpcyBub3Qgc2V0CiMgQ09O
-RklHX01QQzgzWFhfU0VSREVTIGlzIG5vdCBzZXQKIyBDT05GSUdfRlNfTE9BREVSIGlzIG5vdCBz
-ZXQKIyBDT05GSUdfU1BMX0ZTX0xPQURFUiBpcyBub3Qgc2V0CiMgQ09ORklHX0dEU1lTX1NPQyBp
-cyBub3Qgc2V0CiMgQ09ORklHX0lIU19GUEdBIGlzIG5vdCBzZXQKIyBDT05GSUdfTUlDUk9DSElQ
-X0ZMRVhDT00gaXMgbm90IHNldAojIENPTkZJR19TTDI4Q1BMRCBpcyBub3Qgc2V0CiMgQ09ORklH
-X1NQTF9TT0NGUEdBX0RUX1JFRyBpcyBub3Qgc2V0CgojCiMgTU1DIEhvc3QgY29udHJvbGxlciBT
-dXBwb3J0CiMKQ09ORklHX01NQz15CkNPTkZJR19NTUNfV1JJVEU9eQojIENPTkZJR19NTUNfQlJP
-S0VOX0NEIGlzIG5vdCBzZXQKQ09ORklHX0RNX01NQz15CkNPTkZJR19TUExfRE1fTU1DPXkKIyBD
-T05GSUdfTU1DX1NQSSBpcyBub3Qgc2V0CiMgQ09ORklHX0FSTV9QTDE4MF9NTUNJIGlzIG5vdCBz
-ZXQKQ09ORklHX01NQ19RVUlSS1M9eQpDT05GSUdfU1lTX01NQ19NQVhfQkxLX0NPVU5UPTY1NTM1
-CkNPTkZJR19NTUNfSFdfUEFSVElUSU9OSU5HPXkKQ09ORklHX1NVUFBPUlRfRU1NQ19SUE1CPXkK
-IyBDT05GSUdfU1VQUE9SVF9FTU1DX0JPT1QgaXMgbm90IHNldAojIENPTkZJR19NTUNfSU9fVk9M
-VEFHRSBpcyBub3Qgc2V0CiMgQ09ORklHX1NQTF9NTUNfSU9fVk9MVEFHRSBpcyBub3Qgc2V0CkNP
-TkZJR19NTUNfU1VQUE9SVFNfVFVOSU5HPXkKQ09ORklHX1NQTF9NTUNfU1VQUE9SVFNfVFVOSU5H
-PXkKIyBDT05GSUdfTU1DX0hTNDAwX0VTX1NVUFBPUlQgaXMgbm90IHNldAojIENPTkZJR19TUExf
-TU1DX0hTNDAwX0VTX1NVUFBPUlQgaXMgbm90IHNldAojIENPTkZJR19NTUNfSFM0MDBfU1VQUE9S
-VCBpcyBub3Qgc2V0CiMgQ09ORklHX1NQTF9NTUNfSFM0MDBfU1VQUE9SVCBpcyBub3Qgc2V0CkNP
-TkZJR19NTUNfSFMyMDBfU1VQUE9SVD15CkNPTkZJR19TUExfTU1DX0hTMjAwX1NVUFBPUlQ9eQpD
-T05GSUdfTU1DX1ZFUkJPU0U9eQojIENPTkZJR19NTUNfVFJBQ0UgaXMgbm90IHNldApDT05GSUdf
-TU1DX0RXPXkKIyBDT05GSUdfTU1DX0RXX0NPUlRJTkEgaXMgbm90IHNldAojIENPTkZJR19NTUNf
-RFdfSzMgaXMgbm90IHNldApDT05GSUdfTU1DX0RXX1JPQ0tDSElQPXkKIyBDT05GSUdfTU1DX0RX
-X1NOUFMgaXMgbm90IHNldAojIENPTkZJR19NTUNfTVhDIGlzIG5vdCBzZXQKIyBDT05GSUdfTU1D
-X1BDSSBpcyBub3Qgc2V0CiMgQ09ORklHX01NQ19PTUFQX0hTIGlzIG5vdCBzZXQKQ09ORklHX01N
-Q19TREhDST15CkNPTkZJR19NTUNfU0RIQ0lfU0RNQT15CkNPTkZJR19TUExfTU1DX1NESENJX1NE
-TUE9eQojIENPTkZJR19NTUNfU0RIQ0lfQURNQSBpcyBub3Qgc2V0CiMgQ09ORklHX1NQTF9NTUNf
-U0RIQ0lfQURNQSBpcyBub3Qgc2V0CiMgQ09ORklHX01NQ19TREhDSV9BRE1BX0ZPUkNFXzMyQklU
-IGlzIG5vdCBzZXQKQ09ORklHX01NQ19TREhDSV9BRE1BXzY0QklUPXkKIyBDT05GSUdfTU1DX1NE
-SENJX0JDTVNUQiBpcyBub3Qgc2V0CiMgQ09ORklHX01NQ19TREhDSV9DQURFTkNFIGlzIG5vdCBz
-ZXQKIyBDT05GSUdfTU1DX1NESENJX0NWMTgwMEIgaXMgbm90IHNldAojIENPTkZJR19NTUNfU0RI
-Q0lfSVBST0MgaXMgbm90IHNldAojIENPTkZJR19NTUNfU0RIQ0lfRl9TREgzMCBpcyBub3Qgc2V0
-CiMgQ09ORklHX01NQ19TREhDSV9LT05BIGlzIG5vdCBzZXQKIyBDT05GSUdfTU1DX1NESENJX01T
-TSBpcyBub3Qgc2V0CiMgQ09ORklHX01NQ19TREhDSV9OUENNIGlzIG5vdCBzZXQKQ09ORklHX01N
-Q19TREhDSV9ST0NLQ0hJUD15CiMgQ09ORklHX01NQ19TREhDSV9TNVAgaXMgbm90IHNldAojIENP
-TkZJR19NTUNfU0RIQ0lfU1RJIGlzIG5vdCBzZXQKIyBDT05GSUdfTU1DX1NESENJX1hFTk9OIGlz
-IG5vdCBzZXQKIyBDT05GSUdfTU1DX1NESENJX1RBTkdJRVIgaXMgbm90IHNldAojIENPTkZJR19N
-TUNfU0RIQ0lfWllOUSBpcyBub3Qgc2V0CiMgQ09ORklHX01NQ19QSVRPTiBpcyBub3Qgc2V0CiMg
-Q09ORklHX1NUTTMyX1NETU1DMiBpcyBub3Qgc2V0CiMgQ09ORklHX0ZUU0RDMDEwIGlzIG5vdCBz
-ZXQKIyBDT05GSUdfRlNMX0VTREhDIGlzIG5vdCBzZXQKIyBDT05GSUdfRlNMX0VTREhDX0lNWCBp
-cyBub3Qgc2V0CgojCiMgTVREIFN1cHBvcnQKIwpDT05GSUdfTVREPXkKIyBDT05GSUdfRE1fTVRE
-IGlzIG5vdCBzZXQKIyBDT05GSUdfTVREX05PUl9GTEFTSCBpcyBub3Qgc2V0CiMgQ09ORklHX01U
-RF9DT05DQVQgaXMgbm90IHNldAojIENPTkZJR19NVERfQkxPQ0sgaXMgbm90IHNldAojIENPTkZJ
-R19TWVNfTVREUEFSVFNfUlVOVElNRSBpcyBub3Qgc2V0CiMgQ09ORklHX0ZMQVNIX0NGSV9EUklW
-RVIgaXMgbm90IHNldAojIENPTkZJR19IQk1DX0FNNjU0IGlzIG5vdCBzZXQKIyBDT05GSUdfU0FN
-U1VOR19PTkVOQU5EIGlzIG5vdCBzZXQKIyBDT05GSUdfVVNFX1NZU19NQVhfRkxBU0hfQkFOS1Mg
-aXMgbm90IHNldAojIENPTkZJR19NVERfUkFXX05BTkQgaXMgbm90IHNldAoKIwojIFNQSSBGbGFz
-aCBTdXBwb3J0CiMKQ09ORklHX0RNX1NQSV9GTEFTSD15CkNPTkZJR19TUElfRkxBU0g9eQpDT05G
-SUdfU0ZfREVGQVVMVF9CVVM9MApDT05GSUdfU0ZfREVGQVVMVF9DUz0wCiMgQ09ORklHX0JPT1RE
-RVZfU1BJX0ZMQVNIIGlzIG5vdCBzZXQKIyBDT05GSUdfU1BJX0ZMQVNIX1NGRFBfU1VQUE9SVCBp
-cyBub3Qgc2V0CkNPTkZJR19TUElfRkxBU0hfU01BUlRfSFdDQVBTPXkKIyBDT05GSUdfU1BJX05P
-Ul9CT09UX1NPRlRfUkVTRVRfRVhUX0lOVkVSVCBpcyBub3Qgc2V0CiMgQ09ORklHX1NQSV9GTEFT
-SF9TT0ZUX1JFU0VUIGlzIG5vdCBzZXQKIyBDT05GSUdfU1BJX0ZMQVNIX0JBUiBpcyBub3Qgc2V0
-CkNPTkZJR19TUElfRkxBU0hfTE9DSz15CkNPTkZJR19TUElfRkxBU0hfVU5MT0NLX0FMTD15CiMg
-Q09ORklHX1NQSV9GTEFTSF9BVE1FTCBpcyBub3Qgc2V0CiMgQ09ORklHX1NQSV9GTEFTSF9FT04g
-aXMgbm90IHNldAojIENPTkZJR19TUElfRkxBU0hfR0lHQURFVklDRSBpcyBub3Qgc2V0CiMgQ09O
-RklHX1NQSV9GTEFTSF9JU1NJIGlzIG5vdCBzZXQKIyBDT05GSUdfU1BJX0ZMQVNIX01BQ1JPTklY
-IGlzIG5vdCBzZXQKIyBDT05GSUdfU1BJX0ZMQVNIX1NJTElDT05LQUlTRVIgaXMgbm90IHNldAoj
-IENPTkZJR19TUElfRkxBU0hfU1BBTlNJT04gaXMgbm90IHNldAojIENPTkZJR19TUElfRkxBU0hf
-U1RNSUNSTyBpcyBub3Qgc2V0CiMgQ09ORklHX1NQSV9GTEFTSF9TU1QgaXMgbm90IHNldAojIENP
-TkZJR19TUElfRkxBU0hfV0lOQk9ORCBpcyBub3Qgc2V0CiMgQ09ORklHX1NQSV9GTEFTSF9YTUMg
-aXMgbm90IHNldAojIENPTkZJR19TUElfRkxBU0hfWFRYIGlzIG5vdCBzZXQKIyBDT05GSUdfU1BJ
-X0ZMQVNIX1pCSVQgaXMgbm90IHNldApDT05GSUdfU1BJX0ZMQVNIX1VTRV80S19TRUNUT1JTPXkK
-IyBDT05GSUdfU1BJX0ZMQVNIX0RBVEFGTEFTSCBpcyBub3Qgc2V0CiMgQ09ORklHX1NQSV9GTEFT
-SF9NVEQgaXMgbm90IHNldAoKIwojIFVCSSBzdXBwb3J0CiMKIyBDT05GSUdfVUJJX1NJTEVOQ0Vf
-TVNHIGlzIG5vdCBzZXQKIyBDT05GSUdfTVREX1VCSSBpcyBub3Qgc2V0CiMgQ09ORklHX05WTVhJ
-UCBpcyBub3Qgc2V0CiMgQ09ORklHX05WTVhJUF9RU1BJIGlzIG5vdCBzZXQKCiMKIyBNdWx0aXBs
-ZXhlciBkcml2ZXJzCiMKIyBDT05GSUdfTVVMVElQTEVYRVIgaXMgbm90IHNldAojIENPTkZJR19C
-SVRCQU5HTUlJIGlzIG5vdCBzZXQKIyBDT05GSUdfTVY4OEU2MzUyX1NXSVRDSCBpcyBub3Qgc2V0
-CkNPTkZJR19QSFlMSUI9eQojIENPTkZJR19QSFlfQUREUl9FTkFCTEUgaXMgbm90IHNldApDT05G
-SUdfUEhZX0FORUdfVElNRU9VVD00MDAwCiMgQ09ORklHX0I1M19TV0lUQ0ggaXMgbm90IHNldAoj
-IENPTkZJR19NVjg4RTYxWFhfU1dJVENIIGlzIG5vdCBzZXQKIyBDT05GSUdfUEhZTElCXzEwRyBp
-cyBub3Qgc2V0CiMgQ09ORklHX1BIWV9BRElOIGlzIG5vdCBzZXQKIyBDT05GSUdfUEhZX0FRVUFO
-VElBIGlzIG5vdCBzZXQKIyBDT05GSUdfUEhZX0FUSEVST1MgaXMgbm90IHNldAojIENPTkZJR19T
-UExfUEhZX0FUSEVST1MgaXMgbm90IHNldAojIENPTkZJR19QSFlfQlJPQURDT00gaXMgbm90IHNl
-dAojIENPTkZJR19QSFlfQ09SVElOQSBpcyBub3Qgc2V0CiMgQ09ORklHX1BIWV9EQVZJQ09NIGlz
-IG5vdCBzZXQKIyBDT05GSUdfUEhZX0VUMTAxMUMgaXMgbm90IHNldAojIENPTkZJR19QSFlfTFhU
-IGlzIG5vdCBzZXQKIyBDT05GSUdfUEhZX01BUlZFTEwgaXMgbm90IHNldAojIENPTkZJR19QSFlf
-TUFSVkVMTF8xMEcgaXMgbm90IHNldAojIENPTkZJR19QSFlfTUVTT05fR1hMIGlzIG5vdCBzZXQK
-IyBDT05GSUdfUEhZX01JQ1JFTCBpcyBub3Qgc2V0CiMgQ09ORklHX1BIWV9NT1RPUkNPTU0gaXMg
-bm90IHNldAojIENPTkZJR19QSFlfTVNDQyBpcyBub3Qgc2V0CiMgQ09ORklHX1BIWV9OQVRTRU1J
-IGlzIG5vdCBzZXQKIyBDT05GSUdfUEhZX05YUF9DNDVfVEpBMTFYWCBpcyBub3Qgc2V0CiMgQ09O
-RklHX1BIWV9OWFBfVEpBMTFYWCBpcyBub3Qgc2V0CkNPTkZJR19QSFlfUkVBTFRFSz15CiMgQ09O
-RklHX1JUTDgyMTFYX1BIWV9GT1JDRV9NQVNURVIgaXMgbm90IHNldAojIENPTkZJR19SVEw4MjEx
-Rl9QSFlfRk9SQ0VfRUVFX1JYQ19PTiBpcyBub3Qgc2V0CiMgQ09ORklHX1JUTDgyMDFGX1BIWV9T
-NzAwX1JNSUlfVElNSU5HUyBpcyBub3Qgc2V0CiMgQ09ORklHX1BIWV9TTVNDIGlzIG5vdCBzZXQK
-IyBDT05GSUdfUEhZX1RFUkFORVRJQ1MgaXMgbm90IHNldAojIENPTkZJR19QSFlfVEkgaXMgbm90
-IHNldAojIENPTkZJR19QSFlfVElfRFA4Mzg2NyBpcyBub3Qgc2V0CiMgQ09ORklHX1BIWV9USV9E
-UDgzODY5IGlzIG5vdCBzZXQKIyBDT05GSUdfUEhZX1RJX0dFTkVSSUMgaXMgbm90IHNldAojIENP
-TkZJR19QSFlfVklURVNTRSBpcyBub3Qgc2V0CiMgQ09ORklHX1BIWV9YSUxJTlggaXMgbm90IHNl
-dAojIENPTkZJR19QSFlfWElMSU5YX0dNSUkyUkdNSUkgaXMgbm90IHNldAojIENPTkZJR19QSFlf
-WFdBWSBpcyBub3Qgc2V0CiMgQ09ORklHX1BIWV9FVEhFUk5FVF9JRCBpcyBub3Qgc2V0CiMgQ09O
-RklHX1BIWV9GSVhFRCBpcyBub3Qgc2V0CiMgQ09ORklHX1BIWV9OQ1NJIGlzIG5vdCBzZXQKIyBD
-T05GSUdfRlNMX01FTUFDIGlzIG5vdCBzZXQKQ09ORklHX1BIWV9SRVNFVF9ERUxBWT0wCiMgQ09O
-RklHX0ZTTF9QRkUgaXMgbm90IHNldApDT05GSUdfRVRIPXkKQ09ORklHX0RNX0VUSD15CiMgQ09O
-RklHX0RNX01ESU8gaXMgbm90IHNldApDT05GSUdfRE1fRVRIX1BIWT15CkNPTkZJR19ORVRERVZJ
-Q0VTPXkKQ09ORklHX1BIWV9HSUdFPXkKIyBDT05GSUdfQUxURVJBX1RTRSBpcyBub3Qgc2V0CiMg
-Q09ORklHX0JDTV9TRjJfRVRIIGlzIG5vdCBzZXQKIyBDT05GSUdfQkNNR0VORVQgaXMgbm90IHNl
-dAojIENPTkZJR19CTlhUX0VUSCBpcyBub3Qgc2V0CiMgQ09ORklHX0NBTFhFREFfWEdNQUMgaXMg
-bm90IHNldAojIENPTkZJR19EV0NfRVRIX1hHTUFDIGlzIG5vdCBzZXQKIyBDT05GSUdfRFJJVkVS
-X0RNOTAwMCBpcyBub3Qgc2V0CkNPTkZJR19EV0NfRVRIX1FPUz15CiMgQ09ORklHX0RXQ19FVEhf
-UU9TX0lNWCBpcyBub3Qgc2V0CkNPTkZJR19EV0NfRVRIX1FPU19ST0NLQ0hJUD15CiMgQ09ORklH
-X0RXQ19FVEhfUU9TX1NUTTMyIGlzIG5vdCBzZXQKIyBDT05GSUdfRFdDX0VUSF9RT1NfVEVHUkEx
-ODYgaXMgbm90IHNldAojIENPTkZJR19EV0NfRVRIX1FPU19RQ09NIGlzIG5vdCBzZXQKIyBDT05G
-SUdfRFdDX0VUSF9RT1NfU1RBUkZJVkUgaXMgbm90IHNldAojIENPTkZJR19FMTAwMCBpcyBub3Qg
-c2V0CiMgQ09ORklHX0VFUFJPMTAwIGlzIG5vdCBzZXQKIyBDT05GSUdfRVRIX0RFU0lHTldBUkUg
-aXMgbm90IHNldAojIENPTkZJR19FVEhfREVTSUdOV0FSRV9NRVNPTjhCIGlzIG5vdCBzZXQKIyBD
-T05GSUdfRVRIT0MgaXMgbm90IHNldAojIENPTkZJR19GTUFOX0VORVQgaXMgbm90IHNldAojIENP
-TkZJR19GVE1BQzEwMCBpcyBub3Qgc2V0CiMgQ09ORklHX0ZUR01BQzEwMCBpcyBub3Qgc2V0CiMg
-Q09ORklHX01DRkZFQyBpcyBub3Qgc2V0CiMgQ09ORklHX0tTODg1MV9NTEwgaXMgbm90IHNldAoj
-IENPTkZJR19MSVRFRVRIIGlzIG5vdCBzZXQKIyBDT05GSUdfTUFDQiBpcyBub3Qgc2V0CiMgQ09O
-RklHX05FVF9OUENNNzUwIGlzIG5vdCBzZXQKIyBDT05GSUdfUENIX0dCRSBpcyBub3Qgc2V0CiMg
-Q09ORklHX1JHTUlJIGlzIG5vdCBzZXQKIyBDT05GSUdfTUlJIGlzIG5vdCBzZXQKIyBDT05GSUdf
-Uk1JSSBpcyBub3Qgc2V0CiMgQ09ORklHX1BDTkVUIGlzIG5vdCBzZXQKIyBDT05GSUdfUUVfVUVD
-IGlzIG5vdCBzZXQKIyBDT05GSUdfUlRMODEzOSBpcyBub3Qgc2V0CkNPTkZJR19SVEw4MTY5PXkK
-IyBDT05GSUdfU01DOTExWCBpcyBub3Qgc2V0CiMgQ09ORklHX1NVTjdJX0dNQUMgaXMgbm90IHNl
-dAojIENPTkZJR19TVU40SV9FTUFDIGlzIG5vdCBzZXQKIyBDT05GSUdfU1VOOElfRU1BQyBpcyBu
-b3Qgc2V0CiMgQ09ORklHX1NIX0VUSEVSIGlzIG5vdCBzZXQKIyBDT05GSUdfRFJJVkVSX1RJX0NQ
-U1cgaXMgbm90IHNldAojIENPTkZJR19EUklWRVJfVElfRU1BQyBpcyBub3Qgc2V0CiMgQ09ORklH
-X0RSSVZFUl9USV9LRVlTVE9ORV9ORVQgaXMgbm90IHNldAojIENPTkZJR19UVUxJUCBpcyBub3Qg
-c2V0CiMgQ09ORklHX1hJTElOWF9BWElFTUFDIGlzIG5vdCBzZXQKIyBDT05GSUdfVlNDNzM4NV9F
-TkVUIGlzIG5vdCBzZXQKIyBDT05GSUdfWElMSU5YX0VNQUNMSVRFIGlzIG5vdCBzZXQKIyBDT05G
-SUdfWllOUV9HRU0gaXMgbm90IHNldAojIENPTkZJR19TWVNfRFBBQV9RQk1BTiBpcyBub3Qgc2V0
-CiMgQ09ORklHX1RTRUNfRU5FVCBpcyBub3Qgc2V0CiMgQ09ORklHX01FRElBVEVLX0VUSCBpcyBu
-b3Qgc2V0CiMgQ09ORklHX0hJRkVNQUNfRVRIIGlzIG5vdCBzZXQKIyBDT05GSUdfSElHTUFDVjMw
-MF9FVEggaXMgbm90IHNldApDT05GSUdfTlZNRT15CiMgQ09ORklHX05WTUVfQVBQTEUgaXMgbm90
-IHNldApDT05GSUdfTlZNRV9QQ0k9eQojIENPTkZJR19ETV9QQ0lfQ09NUEFUIGlzIG5vdCBzZXQK
-Q09ORklHX1BDSV9QTlA9eQojIENPTkZJR19QQ0lfUkVHSU9OX01VTFRJX0VOVFJZIGlzIG5vdCBz
-ZXQKIyBDT05GSUdfUENJX0NPTkZJR19IT1NUX0JSSURHRSBpcyBub3Qgc2V0CiMgQ09ORklHX1BD
-SV9TUklPViBpcyBub3Qgc2V0CkNPTkZJR19QQ0lfRU5IQU5DRURfQUxMT0NBVElPTj15CiMgQ09O
-RklHX1BDSV9BUklEIGlzIG5vdCBzZXQKIyBDT05GSUdfUENJRV9FQ0FNX0dFTkVSSUMgaXMgbm90
-IHNldAojIENPTkZJR19QQ0lFX0VDQU1fU1lOUVVBQ0VSIGlzIG5vdCBzZXQKIyBDT05GSUdfUENJ
-X0ZUUENJMTAwIGlzIG5vdCBzZXQKIyBDT05GSUdfUENJX1BIWVRJVU0gaXMgbm90IHNldAojIENP
-TkZJR19QQ0lFX0ZTTCBpcyBub3Qgc2V0CiMgQ09ORklHX1BDSV9NUEM4NVhYIGlzIG5vdCBzZXQK
-IyBDT05GSUdfUENJX1hJTElOWCBpcyBub3Qgc2V0CiMgQ09ORklHX1BDSUVfTEFZRVJTQ0FQRV9S
-QyBpcyBub3Qgc2V0CiMgQ09ORklHX1BDSUVfTEFZRVJTQ0FQRV9FUCBpcyBub3Qgc2V0CiMgQ09O
-RklHX1BDSUVfTEFZRVJTQ0FQRV9HRU40IGlzIG5vdCBzZXQKIyBDT05GSUdfUENJRV9JTlRFTF9G
-UEdBIGlzIG5vdCBzZXQKIyBDT05GSUdfUENJRV9JUFJPQyBpcyBub3Qgc2V0CkNPTkZJR19QQ0lF
-X0RXX0NPTU1PTj15CiMgQ09ORklHX1BDSV9LRVlTVE9ORSBpcyBub3Qgc2V0CiMgQ09ORklHX1BD
-SUVfUk9DS0NISVAgaXMgbm90IHNldApDT05GSUdfUENJRV9EV19ST0NLQ0hJUD15CiMgQ09ORklH
-X1BDSUVfU1RBUkZJVkVfSkg3MTEwIGlzIG5vdCBzZXQKCiMKIyBQQ0kgRW5kcG9pbnQKIwojIENP
-TkZJR19QQ0lfRU5EUE9JTlQgaXMgbm90IHNldAojIENPTkZJR19YODZfUENINyBpcyBub3Qgc2V0
-CiMgQ09ORklHX1g4Nl9QQ0g5IGlzIG5vdCBzZXQKCiMKIyBQSFkgU3Vic3lzdGVtCiMKQ09ORklH
-X1BIWT15CiMgQ09ORklHX1NQTF9QSFkgaXMgbm90IHNldAojIENPTkZJR19OT1BfUEhZIGlzIG5v
-dCBzZXQKIyBDT05GSUdfTUlQSV9EUEhZX0hFTFBFUlMgaXMgbm90IHNldAojIENPTkZJR19CQ01f
-U1JfUENJRV9QSFkgaXMgbm90IHNldAojIENPTkZJR19PTUFQX1VTQjJfUEhZIGlzIG5vdCBzZXQK
-CiMKIyBSb2NrY2hpcCBQSFkgZHJpdmVyCiMKIyBDT05GSUdfUEhZX1JPQ0tDSElQX0lOTk9fRFNJ
-RFBIWSBpcyBub3Qgc2V0CiMgQ09ORklHX1BIWV9ST0NLQ0hJUF9JTk5PX0hETUkgaXMgbm90IHNl
-dApDT05GSUdfUEhZX1JPQ0tDSElQX0lOTk9fVVNCMj15CkNPTkZJR19QSFlfUk9DS0NISVBfTkFO
-RU5HX0NPTUJPUEhZPXkKIyBDT05GSUdfUEhZX1JPQ0tDSElQX1BDSUUgaXMgbm90IHNldApDT05G
-SUdfUEhZX1JPQ0tDSElQX1NOUFNfUENJRTM9eQpDT05GSUdfUEhZX1JPQ0tDSElQX1VTQkRQPXkK
-IyBDT05GSUdfUEhZX1JPQ0tDSElQX1RZUEVDIGlzIG5vdCBzZXQKIyBDT05GSUdfUEhZX0NBREVO
-Q0VfU0lFUlJBIGlzIG5vdCBzZXQKIyBDT05GSUdfUEhZX0NBREVOQ0VfVE9SUkVOVCBpcyBub3Qg
-c2V0CiMgQ09ORklHX01TTTg5MTZfVVNCX1BIWSBpcyBub3Qgc2V0CiMgQ09ORklHX01WRUJVX0NP
-TVBIWV9TVVBQT1JUIGlzIG5vdCBzZXQKCiMKIyBQaW4gY29udHJvbGxlcnMKIwpDT05GSUdfUElO
-Q1RSTD15CkNPTkZJR19QSU5DVFJMX0ZVTEw9eQpDT05GSUdfUElOQ1RSTF9HRU5FUklDPXkKQ09O
-RklHX1BJTk1VWD15CiMgQ09ORklHX1BJTkNPTkYgaXMgbm90IHNldApDT05GSUdfUElOQ09ORl9S
-RUNVUlNJVkU9eQpDT05GSUdfU1BMX1BJTkNUUkw9eQpDT05GSUdfU1BMX1BJTkNUUkxfRlVMTD15
-CkNPTkZJR19TUExfUElOQ1RSTF9HRU5FUklDPXkKQ09ORklHX1NQTF9QSU5NVVg9eQojIENPTkZJ
-R19TUExfUElOQ09ORiBpcyBub3Qgc2V0CkNPTkZJR19TUExfUElOQ09ORl9SRUNVUlNJVkU9eQoj
-IENPTkZJR19QSU5DVFJMX0FUOTEgaXMgbm90IHNldAojIENPTkZJR19QSU5DVFJMX0FUOTFQSU80
-IGlzIG5vdCBzZXQKIyBDT05GSUdfUElOQ1RSTF9JTlRFTCBpcyBub3Qgc2V0CiMgQ09ORklHX1BJ
-TkNUUkxfUUUgaXMgbm90IHNldAojIENPTkZJR19QSU5DVFJMX1JPQ0tDSElQX1JWMTEwOCBpcyBu
-b3Qgc2V0CiMgQ09ORklHX1BJTkNUUkxfU0lOR0xFIGlzIG5vdCBzZXQKIyBDT05GSUdfUElOQ1RS
-TF9TVE0zMiBpcyBub3Qgc2V0CiMgQ09ORklHX1BJTkNUUkxfU1RNRlggaXMgbm90IHNldAojIENP
-TkZJR19TUExfUElOQ1RSTF9TVE1GWCBpcyBub3Qgc2V0CiMgQ09ORklHX1BJTkNUUkxfSzIxMCBp
-cyBub3Qgc2V0CkNPTkZJR19QSU5DVFJMX1JPQ0tDSElQPXkKQ09ORklHX1NQTF9QSU5DVFJMX1JP
-Q0tDSElQPXkKIyBDT05GSUdfUElOQ1RSTF9URUdSQSBpcyBub3Qgc2V0CiMgQ09ORklHX1NQTF9Q
-SU5DVFJMX1RFR1JBIGlzIG5vdCBzZXQKQ09ORklHX1BPV0VSPXkKIyBDT05GSUdfUE9XRVJfTEVH
-QUNZIGlzIG5vdCBzZXQKIyBDT05GSUdfU1BMX1BPV0VSX0xFR0FDWSBpcyBub3Qgc2V0CiMgQ09O
-RklHX0FDUElfUE1DIGlzIG5vdCBzZXQKIyBDT05GSUdfU1BMX0FDUElfUE1DIGlzIG5vdCBzZXQK
-CiMKIyBQb3dlciBEb21haW4gU3VwcG9ydAojCiMgQ09ORklHX1BPV0VSX0RPTUFJTiBpcyBub3Qg
-c2V0CiMgQ09ORklHX0RNX1BNSUMgaXMgbm90IHNldAojIENPTkZJR19QTUlDX1RQUzY1MjE3IGlz
-IG5vdCBzZXQKIyBDT05GSUdfUE9XRVJfVFBTNjUyMTggaXMgbm90IHNldAojIENPTkZJR19QT1dF
-Ul9UUFM2MjM2MiBpcyBub3Qgc2V0CiMgQ09ORklHX1NQTF9QT1dFUl9UUFM2MjM2MiBpcyBub3Qg
-c2V0CiMgQ09ORklHX1NQTF9QT1dFUl9UUFM2NTkxMCBpcyBub3Qgc2V0CkNPTkZJR19ETV9SRUdV
-TEFUT1I9eQojIENPTkZJR19SRUdVTEFUT1JfUFdNIGlzIG5vdCBzZXQKQ09ORklHX0RNX1JFR1VM
-QVRPUl9DT01NT049eQpDT05GSUdfRE1fUkVHVUxBVE9SX0ZJWEVEPXkKIyBDT05GSUdfU1BMX0RN
-X1JFR1VMQVRPUl9GSVhFRCBpcyBub3Qgc2V0CiMgQ09ORklHX0RNX1JFR1VMQVRPUl9HUElPIGlz
-IG5vdCBzZXQKIyBDT05GSUdfRE1fUkVHVUxBVE9SX1BCSUFTIGlzIG5vdCBzZXQKIyBDT05GSUdf
-RE1fUkVHVUxBVE9SX1RQUzYyMzYwIGlzIG5vdCBzZXQKIyBDT05GSUdfRE1fUkVHVUxBVE9SX0FO
-QVRPUCBpcyBub3Qgc2V0CiMgQ09ORklHX0RNX1JFR1VMQVRPUl9TQ01JIGlzIG5vdCBzZXQKIyBD
-T05GSUdfVFBTNjU4NlhfUE9XRVIgaXMgbm90IHNldAojIENPTkZJR19QT1dFUl9NVDYzMjMgaXMg
-bm90IHNldApDT05GSUdfRE1fUFdNPXkKIyBDT05GSUdfUFdNX0FTUEVFRCBpcyBub3Qgc2V0CiMg
-Q09ORklHX1BXTV9DQURFTkNFX1RUQyBpcyBub3Qgc2V0CiMgQ09ORklHX1BXTV9DUk9TX0VDIGlz
-IG5vdCBzZXQKIyBDT05GSUdfUFdNX0VYWU5PUyBpcyBub3Qgc2V0CiMgQ09ORklHX1BXTV9JTVgg
-aXMgbm90IHNldAojIENPTkZJR19QV01fTUVTT04gaXMgbm90IHNldAojIENPTkZJR19QV01fTVRL
-IGlzIG5vdCBzZXQKQ09ORklHX1BXTV9ST0NLQ0hJUD15CiMgQ09ORklHX1BXTV9TQU5EQk9YIGlz
-IG5vdCBzZXQKIyBDT05GSUdfUFdNX1NJRklWRSBpcyBub3Qgc2V0CiMgQ09ORklHX1BXTV9URUdS
-QSBpcyBub3Qgc2V0CiMgQ09ORklHX1BXTV9TVU5YSSBpcyBub3Qgc2V0CiMgQ09ORklHX1VfUUUg
-aXMgbm90IHNldApDT05GSUdfUkFNPXkKQ09ORklHX1NQTF9SQU09eQojIENPTkZJR19TVE0zMl9T
-RFJBTSBpcyBub3Qgc2V0CiMgQ09ORklHX01QQzgzWFhfU0RSQU0gaXMgbm90IHNldAojIENPTkZJ
-R19LM19ERFJTUyBpcyBub3Qgc2V0CiMgQ09ORklHX0lNWFJUX1NEUkFNIGlzIG5vdCBzZXQKIyBD
-T05GSUdfQ0FERU5DRV9ERFJfQ1RSTCBpcyBub3Qgc2V0CkNPTkZJR19SQU1fUk9DS0NISVA9eQoj
-IENPTkZJR19ST0NLQ0hJUF9TRFJBTV9DT01NT04gaXMgbm90IHNldApDT05GSUdfUkFNX1JPQ0tD
-SElQX0RFQlVHPXkKIyBDT05GSUdfUkFNX1JPQ0tDSElQX0REUjQgaXMgbm90IHNldAojIENPTkZJ
-R19SQU1fUk9DS0NISVBfTFBERFIyIGlzIG5vdCBzZXQKIyBDT05GSUdfUkFNX1JPQ0tDSElQX0xQ
-RERSMyBpcyBub3Qgc2V0CiMgQ09ORklHX1JBTV9ST0NLQ0hJUF9MUEREUjQgaXMgbm90IHNldAoK
-IwojIFJlYm9vdCBNb2RlIFN1cHBvcnQKIwojIENPTkZJR19ETV9SRUJPT1RfTU9ERSBpcyBub3Qg
-c2V0CgojCiMgUmVtb3RlIFByb2Nlc3NvciBkcml2ZXJzCiMKQ09ORklHX1JFTU9URVBST0NfTUFY
-X0ZXX1NJWkU9MHgxMDAwMAoKIwojIFJlc2V0IENvbnRyb2xsZXIgU3VwcG9ydAojCiMgQ09ORklH
-X1JFU0VUX0FTVDI1MDAgaXMgbm90IHNldAojIENPTkZJR19SRVNFVF9BU1QyNjAwIGlzIG5vdCBz
-ZXQKQ09ORklHX1JFU0VUX1JPQ0tDSElQPXkKIyBDT05GSUdfUkVTRVRfSElTSUxJQ09OIGlzIG5v
-dCBzZXQKIyBDT05GSUdfUkVTRVRfU1lTQ09OIGlzIG5vdCBzZXQKIyBDT05GSUdfUkVTRVRfU0NN
-SSBpcyBub3Qgc2V0CiMgQ09ORklHX1JFU0VUX0RSQTcgaXMgbm90IHNldApDT05GSUdfRE1fUk5H
-PXkKIyBDT05GSUdfU1BMX0RNX1JORyBpcyBub3Qgc2V0CiMgQ09ORklHX1JOR19NU00gaXMgbm90
-IHNldAojIENPTkZJR19STkdfTlBDTSBpcyBub3Qgc2V0CkNPTkZJR19STkdfUk9DS0NISVA9eQoj
-IENPTkZJR19STkdfSVBST0MyMDAgaXMgbm90IHNldAojIENPTkZJR19STkdfU01DQ0NfVFJORyBp
-cyBub3Qgc2V0CiMgQ09ORklHX1JOR19BUk1fUk5EUiBpcyBub3Qgc2V0CiMgQ09ORklHX1JOR19F
-WFlOT1MgaXMgbm90IHNldAoKIwojIFJlYWwgVGltZSBDbG9jawojCiMgQ09ORklHX0RNX1JUQyBp
-cyBub3Qgc2V0CiMgQ09ORklHX1NQTF9ETV9SVEMgaXMgbm90IHNldAojIENPTkZJR19SVENfRU5B
-QkxFXzMyS0haX09VVFBVVCBpcyBub3Qgc2V0CiMgQ09ORklHX1JUQ19EUzEzMzcgaXMgbm90IHNl
-dAojIENPTkZJR19SVENfRFMxMzM4IGlzIG5vdCBzZXQKIyBDT05GSUdfUlRDX0RTMTM3NCBpcyBu
-b3Qgc2V0CiMgQ09ORklHX1JUQ19EUzMyMzEgaXMgbm90IHNldAojIENPTkZJR19SVENfUENGODU2
-MyBpcyBub3Qgc2V0CiMgQ09ORklHX1JUQ19QVDdDNDMzOCBpcyBub3Qgc2V0CiMgQ09ORklHX1JU
-Q19QTDAzMSBpcyBub3Qgc2V0CiMgQ09ORklHX1JUQ19TMzUzOTJBIGlzIG5vdCBzZXQKIyBDT05G
-SUdfUlRDX01DMTNYWFggaXMgbm90IHNldAojIENPTkZJR19SVENfTUMxNDY4MTggaXMgbm90IHNl
-dAojIENPTkZJR19SVENfTTQxVDYyIGlzIG5vdCBzZXQKQ09ORklHX1NDU0k9eQpDT05GSUdfU0VS
-SUFMPXkKQ09ORklHX0JBVURSQVRFPTE1MDAwMDAKIyBDT05GSUdfREVGQVVMVF9FTlZfSVNfUlcg
-aXMgbm90IHNldApDT05GSUdfUkVRVUlSRV9TRVJJQUxfQ09OU09MRT15CiMgQ09ORklHX1NQRUNJ
-RllfQ09OU09MRV9JTkRFWCBpcyBub3Qgc2V0CkNPTkZJR19TRVJJQUxfUFJFU0VOVD15CkNPTkZJ
-R19TUExfU0VSSUFMX1BSRVNFTlQ9eQpDT05GSUdfRE1fU0VSSUFMPXkKIyBDT05GSUdfU0VSSUFM
-X1JYX0JVRkZFUiBpcyBub3Qgc2V0CiMgQ09ORklHX1NFUklBTF9QVVRTIGlzIG5vdCBzZXQKIyBD
-T05GSUdfU0VSSUFMX1NFQVJDSF9BTEwgaXMgbm90IHNldAojIENPTkZJR19TRVJJQUxfUFJPQkVf
-QUxMIGlzIG5vdCBzZXQKQ09ORklHX1NQTF9ETV9TRVJJQUw9eQojIENPTkZJR19WUExfRE1fU0VS
-SUFMIGlzIG5vdCBzZXQKQ09ORklHX0RFQlVHX1VBUlRfTlMxNjU1MD15CkNPTkZJR19TUExfREVC
-VUdfVUFSVF9CQVNFPTB4RkVCNTAwMDAKQ09ORklHX0RFQlVHX1VBUlRfU0hJRlQ9MgojIENPTkZJ
-R19ERUJVR19VQVJUX0FOTk9VTkNFIGlzIG5vdCBzZXQKIyBDT05GSUdfREVCVUdfVUFSVF9TS0lQ
-X0lOSVQgaXMgbm90IHNldAojIENPTkZJR19ERUJVR19VQVJUX05TMTY1NTBfQ0hFQ0tfRU5BQkxF
-RCBpcyBub3Qgc2V0CiMgQ09ORklHX0FMVEVSQV9KVEFHX1VBUlQgaXMgbm90IHNldAojIENPTkZJ
-R19BTFRFUkFfVUFSVCBpcyBub3Qgc2V0CiMgQ09ORklHX0FSQ19TRVJJQUwgaXMgbm90IHNldAoj
-IENPTkZJR19BUk1fRENDIGlzIG5vdCBzZXQKIyBDT05GSUdfQVRNRUxfVVNBUlQgaXMgbm90IHNl
-dAojIENPTkZJR19CQ002MzQ1X1NFUklBTCBpcyBub3Qgc2V0CiMgQ09ORklHX0NPUkVCT09UX1NF
-UklBTCBpcyBub3Qgc2V0CiMgQ09ORklHX0NPUlRJTkFfVUFSVCBpcyBub3Qgc2V0CiMgQ09ORklH
-X0ZTTF9MSU5GTEVYVUFSVCBpcyBub3Qgc2V0CiMgQ09ORklHX0ZTTF9MUFVBUlQgaXMgbm90IHNl
-dAojIENPTkZJR19NVkVCVV9BMzcwMF9VQVJUIGlzIG5vdCBzZXQKIyBDT05GSUdfTUNGVUFSVCBp
-cyBub3Qgc2V0CiMgQ09ORklHX05VTExERVZfU0VSSUFMIGlzIG5vdCBzZXQKQ09ORklHX1NZU19O
-UzE2NTUwPXkKIyBDT05GSUdfTlMxNjU1MF9EWU5BTUlDIGlzIG5vdCBzZXQKQ09ORklHX1NZU19O
-UzE2NTUwX01FTTMyPXkKIyBDT05GSUdfU1lTX05TMTY1NTBfUE9SVF9NQVBQRUQgaXMgbm90IHNl
-dAojIENPTkZJR19QTDAxWF9TRVJJQUwgaXMgbm90IHNldAojIENPTkZJR19ST0NLQ0hJUF9TRVJJ
-QUwgaXMgbm90IHNldAojIENPTkZJR19YSUxJTlhfVUFSVExJVEUgaXMgbm90IHNldAojIENPTkZJ
-R19NU01fU0VSSUFMIGlzIG5vdCBzZXQKIyBDT05GSUdfTVNNX0dFTklfU0VSSUFMIGlzIG5vdCBz
-ZXQKIyBDT05GSUdfTVhTX0FVQVJUX1NFUklBTCBpcyBub3Qgc2V0CiMgQ09ORklHX09NQVBfU0VS
-SUFMIGlzIG5vdCBzZXQKIyBDT05GSUdfSFRJRl9DT05TT0xFIGlzIG5vdCBzZXQKIyBDT05GSUdf
-U0lGSVZFX1NFUklBTCBpcyBub3Qgc2V0CiMgQ09ORklHX1pZTlFfU0VSSUFMIGlzIG5vdCBzZXQK
-IyBDT05GSUdfTVRLX1NFUklBTCBpcyBub3Qgc2V0CiMgQ09ORklHX01UNzYyMF9TRVJJQUwgaXMg
-bm90IHNldAojIENPTkZJR19OUENNX1NFUklBTCBpcyBub3Qgc2V0CiMgQ09ORklHX1NNIGlzIG5v
-dCBzZXQKIyBDT05GSUdfTUVTT05fU00gaXMgbm90IHNldAojIENPTkZJR19TTUVNIGlzIG5vdCBz
-ZXQKCiMKIyBTb3VuZCBzdXBwb3J0CiMKIyBDT05GSUdfU09VTkQgaXMgbm90IHNldAojIENPTkZJ
-R19TT1VORF9NQVg5ODM1N0EgaXMgbm90IHNldAoKIwojIFNPQyAoU3lzdGVtIE9uIENoaXApIHNw
-ZWNpZmljIERyaXZlcnMKIwojIENPTkZJR19TT0NfREVWSUNFIGlzIG5vdCBzZXQKIyBDT05GSUdf
-U09DX1FDT00gaXMgbm90IHNldAojIENPTkZJR19TT0NfU0FNU1VORyBpcyBub3Qgc2V0CiMgQ09O
-RklHX1NPQ19USSBpcyBub3Qgc2V0CkNPTkZJR19TUEk9eQpDT05GSUdfRE1fU1BJPXkKQ09ORklH
-X1NQSV9NRU09eQojIENPTkZJR19TUElfRElSTUFQIGlzIG5vdCBzZXQKIyBDT05GSUdfQUxURVJB
-X1NQSSBpcyBub3Qgc2V0CiMgQ09ORklHX0FQUExFX1NQSSBpcyBub3Qgc2V0CiMgQ09ORklHX0FU
-Q1NQSTIwMF9TUEkgaXMgbm90IHNldAojIENPTkZJR19BVE1FTF9TUEkgaXMgbm90IHNldAojIENP
-TkZJR19CQ01TVEJfU1BJIGlzIG5vdCBzZXQKIyBDT05GSUdfQ09SVElOQV9TRkxBU0ggaXMgbm90
-IHNldAojIENPTkZJR19DQURFTkNFX1FTUEkgaXMgbm90IHNldAojIENPTkZJR19DRl9TUEkgaXMg
-bm90IHNldAojIENPTkZJR19DVjE4MDBCX1NQSUYgaXMgbm90IHNldAojIENPTkZJR19ERVNJR05X
-QVJFX1NQSSBpcyBub3Qgc2V0CiMgQ09ORklHX0VYWU5PU19TUEkgaXMgbm90IHNldAojIENPTkZJ
-R19GU0xfRFNQSSBpcyBub3Qgc2V0CiMgQ09ORklHX0ZTTF9RU1BJIGlzIG5vdCBzZXQKIyBDT05G
-SUdfR1hQX1NQSSBpcyBub3Qgc2V0CiMgQ09ORklHX0lDSF9TUEkgaXMgbm90IHNldAojIENPTkZJ
-R19JUFJPQ19RU1BJIGlzIG5vdCBzZXQKIyBDT05GSUdfS0lSS1dPT0RfU1BJIGlzIG5vdCBzZXQK
-IyBDT05GSUdfTUlDUk9DSElQX0NPUkVRU1BJIGlzIG5vdCBzZXQKIyBDT05GSUdfTVBDOFhYWF9T
-UEkgaXMgbm90IHNldAojIENPTkZJR19NVEtfU05PUiBpcyBub3Qgc2V0CiMgQ09ORklHX01US19T
-TkZJX1NQSSBpcyBub3Qgc2V0CiMgQ09ORklHX01US19TUElNIGlzIG5vdCBzZXQKIyBDT05GSUdf
-TVZFQlVfQTM3MDBfU1BJIGlzIG5vdCBzZXQKIyBDT05GSUdfTVhTX1NQSSBpcyBub3Qgc2V0CiMg
-Q09ORklHX1NQSV9NWElDIGlzIG5vdCBzZXQKIyBDT05GSUdfTlBDTV9GSVVfU1BJIGlzIG5vdCBz
-ZXQKIyBDT05GSUdfTlBDTV9QU1BJIGlzIG5vdCBzZXQKIyBDT05GSUdfTlhQX0ZTUEkgaXMgbm90
-IHNldAojIENPTkZJR19PTUFQM19TUEkgaXMgbm90IHNldAojIENPTkZJR19QTDAyMl9TUEkgaXMg
-bm90IHNldAojIENPTkZJR19ST0NLQ0hJUF9TRkMgaXMgbm90IHNldAojIENPTkZJR19ST0NLQ0hJ
-UF9TUEkgaXMgbm90IHNldAojIENPTkZJR19TUElfQVNQRUVEX1NNQyBpcyBub3Qgc2V0CiMgQ09O
-RklHX1NQSV9TSUZJVkUgaXMgbm90IHNldAojIENPTkZJR19TT0ZUX1NQSSBpcyBub3Qgc2V0CiMg
-Q09ORklHX1NQSV9TTl9GX09TUEkgaXMgbm90IHNldAojIENPTkZJR19TUElfU1VOWEkgaXMgbm90
-IHNldAojIENPTkZJR19URUdSQTExNF9TUEkgaXMgbm90IHNldAojIENPTkZJR19URUdSQTIwX1NG
-TEFTSCBpcyBub3Qgc2V0CiMgQ09ORklHX1RFR1JBMjBfU0xJTksgaXMgbm90IHNldAojIENPTkZJ
-R19URUdSQTIxMF9RU1BJIGlzIG5vdCBzZXQKIyBDT05GSUdfVElfUVNQSSBpcyBub3Qgc2V0CiMg
-Q09ORklHX1hJTElOWF9TUEkgaXMgbm90IHNldAojIENPTkZJR19aWU5RX1NQSSBpcyBub3Qgc2V0
-CiMgQ09ORklHX1pZTlFfUVNQSSBpcyBub3Qgc2V0CiMgQ09ORklHX1pZTlFNUF9HUVNQSSBpcyBu
-b3Qgc2V0CiMgQ09ORklHX1NIX1FTUEkgaXMgbm90IHNldAojIENPTkZJR19NWENfU1BJIGlzIG5v
-dCBzZXQKCiMKIyBTUE1JIHN1cHBvcnQKIwojIENPTkZJR19TUE1JIGlzIG5vdCBzZXQKIyBDT05G
-SUdfU1lTSU5GTyBpcyBub3Qgc2V0CgojCiMgU3lzdGVtIHJlc2V0IGRldmljZSBkcml2ZXJzCiMK
-Q09ORklHX1NZU1JFU0VUPXkKQ09ORklHX1NQTF9TWVNSRVNFVD15CkNPTkZJR19TWVNSRVNFVF9D
-TURfUkVTRVQ9eQojIENPTkZJR19TWVNSRVNFVF9DVjE4MDBCIGlzIG5vdCBzZXQKIyBDT05GSUdf
-UE9XRVJPRkZfR1BJTyBpcyBub3Qgc2V0CiMgQ09ORklHX1NZU1JFU0VUX0dQSU8gaXMgbm90IHNl
-dAojIENPTkZJR19TWVNSRVNFVF9QU0NJIGlzIG5vdCBzZXQKIyBDT05GSUdfU1lTUkVTRVRfU1lT
-Q09OIGlzIG5vdCBzZXQKIyBDT05GSUdfU1lTUkVTRVRfV0FUQ0hET0cgaXMgbm90IHNldAojIENP
-TkZJR19TWVNSRVNFVF9SRVNFVENUTCBpcyBub3Qgc2V0CiMgQ09ORklHX1NZU1JFU0VUX01QQzgz
-WFggaXMgbm90IHNldAojIENPTkZJR19URUUgaXMgbm90IHNldAojIENPTkZJR19ETV9USEVSTUFM
-IGlzIG5vdCBzZXQKCiMKIyBUaW1lciBTdXBwb3J0CiMKIyBDT05GSUdfVElNRVIgaXMgbm90IHNl
-dAoKIwojIFRQTSBzdXBwb3J0CiMKQ09ORklHX1VTQj15CkNPTkZJR19ETV9VU0I9eQpDT05GSUdf
-U1BMX0RNX1VTQj15CiMgQ09ORklHX0RNX1VTQl9HQURHRVQgaXMgbm90IHNldAojIENPTkZJR19T
-UExfRE1fVVNCX0dBREdFVCBpcyBub3Qgc2V0CgojCiMgVVNCIEhvc3QgQ29udHJvbGxlciBEcml2
-ZXJzCiMKQ09ORklHX1VTQl9IT1NUPXkKIyBDT05GSUdfU1BMX1VTQl9IT1NUIGlzIG5vdCBzZXQK
-Q09ORklHX1VTQl9YSENJX0hDRD15CiMgQ09ORklHX1VTQl9YSENJX0RXQzMgaXMgbm90IHNldAoj
-IENPTkZJR19VU0JfWEhDSV9EV0MzX09GX1NJTVBMRSBpcyBub3Qgc2V0CiMgQ09ORklHX1VTQl9Y
-SENJX1BDSSBpcyBub3Qgc2V0CiMgQ09ORklHX1VTQl9YSENJX0ZTTCBpcyBub3Qgc2V0CiMgQ09O
-RklHX1VTQl9YSENJX0JSQ00gaXMgbm90IHNldApDT05GSUdfVVNCX0VIQ0lfSENEPXkKIyBDT05G
-SUdfVVNCX0VIQ0lfTVNNIGlzIG5vdCBzZXQKIyBDT05GSUdfVVNCX0VIQ0lfUENJIGlzIG5vdCBz
-ZXQKIyBDT05GSUdfVVNCX0VIQ0lfWllOUSBpcyBub3Qgc2V0CkNPTkZJR19VU0JfRUhDSV9HRU5F
-UklDPXkKIyBDT05GSUdfVVNCX0VIQ0lfRlNMIGlzIG5vdCBzZXQKQ09ORklHX1VTQl9PSENJX05F
-Vz15CkNPTkZJR19VU0JfT0hDSV9IQ0Q9eQojIENPTkZJR19VU0JfT0hDSV9QQ0kgaXMgbm90IHNl
-dApDT05GSUdfVVNCX09IQ0lfR0VORVJJQz15CiMgQ09ORklHX1VTQl9PSENJX0RBOFhYIGlzIG5v
-dCBzZXQKIyBDT05GSUdfU1lTX09IQ0lfU1dBUF9SRUdfQUNDRVNTIGlzIG5vdCBzZXQKIyBDT05G
-SUdfVVNCX1VIQ0lfSENEIGlzIG5vdCBzZXQKIyBDT05GSUdfVVNCX0RXQzIgaXMgbm90IHNldAoj
-IENPTkZJR19VU0JfUjhBNjY1OTdfSENEIGlzIG5vdCBzZXQKIyBDT05GSUdfVVNCX0lTUDE3NjAg
-aXMgbm90IHNldAojIENPTkZJR19VU0JfQ0ROUzMgaXMgbm90IHNldApDT05GSUdfVVNCX0RXQzM9
-eQoKIwojIFBsYXRmb3JtIEdsdWUgRHJpdmVyIFN1cHBvcnQKIwojIENPTkZJR19VU0JfRFdDM19P
-TUFQIGlzIG5vdCBzZXQKQ09ORklHX1VTQl9EV0MzX0dFTkVSSUM9eQojIENPTkZJR19TUExfVVNC
-X0RXQzNfR0VORVJJQyBpcyBub3Qgc2V0CiMgQ09ORklHX1VTQl9EV0MzX0FNNjIgaXMgbm90IHNl
-dAojIENPTkZJR19VU0JfRFdDM19MQVlFUlNDQVBFIGlzIG5vdCBzZXQKCiMKIyBQSFkgU3Vic3lz
-dGVtCiMKIyBDT05GSUdfVVNCX0RXQzNfUEhZX09NQVAgaXMgbm90IHNldAojIENPTkZJR19VU0Jf
-RFdDM19QSFlfU0FNU1VORyBpcyBub3Qgc2V0CgojCiMgTGVnYWN5IE1VU0IgU3VwcG9ydAojCiMg
-Q09ORklHX1VTQl9NVVNCX0hDRCBpcyBub3Qgc2V0CiMgQ09ORklHX1VTQl9NVVNCX1VEQyBpcyBu
-b3Qgc2V0CgojCiMgTVVTQiBDb250cm9sbGVyIERyaXZlcgojCiMgQ09ORklHX1VTQl9NVVNCX0hP
-U1QgaXMgbm90IHNldAojIENPTkZJR19VU0JfTVVTQl9QSU9fT05MWSBpcyBub3Qgc2V0CgojCiMg
-VVNCIFBoeQojCiMgQ09ORklHX1RXTDQwMzBfVVNCIGlzIG5vdCBzZXQKQ09ORklHX1JPQ0tDSElQ
-X1VTQjJfUEhZPXkKCiMKIyBVTFBJIGRyaXZlcnMKIwoKIwojIFVTQiBwZXJpcGhlcmFscwojCkNP
-TkZJR19VU0JfU1RPUkFHRT15CkNPTkZJR19VU0JfS0VZQk9BUkQ9eQpDT05GSUdfVVNCX09OQk9B
-UkRfSFVCPXkKQ09ORklHX1VTQl9IVUJfREVCT1VOQ0VfVElNRU9VVD0xMDAwCkNPTkZJR19VU0Jf
-S0VZQk9BUkRfRk5fS0VZUz15CkNPTkZJR19TWVNfVVNCX0VWRU5UX1BPTEw9eQojIENPTkZJR19T
-WVNfVVNCX0VWRU5UX1BPTExfVklBX0lOVF9RVUVVRSBpcyBub3Qgc2V0CiMgQ09ORklHX1NZU19V
-U0JfRVZFTlRfUE9MTF9WSUFfQ09OVFJPTF9FUCBpcyBub3Qgc2V0CiMgQ09ORklHX1VTQl9IT1NU
-X0VUSEVSIGlzIG5vdCBzZXQKIyBDT05GSUdfVVNCX0dBREdFVCBpcyBub3Qgc2V0CiMgQ09ORklH
-X1NQTF9VU0JfR0FER0VUIGlzIG5vdCBzZXQKCiMKIyBVRlMgSG9zdCBDb250cm9sbGVyIFN1cHBv
-cnQKIwojIENPTkZJR19VRlMgaXMgbm90IHNldAojIENPTkZJR19USV9KNzIxRV9VRlMgaXMgbm90
-IHNldAoKIwojIEdyYXBoaWNzIHN1cHBvcnQKIwojIENPTkZJR19WSURFTyBpcyBub3Qgc2V0CiMg
-Q09ORklHX1NQTF9WSURFTyBpcyBub3Qgc2V0CgojCiMgVmlydElPIERyaXZlcnMKIwojIENPTkZJ
-R19WSVJUSU9fTU1JTyBpcyBub3Qgc2V0CiMgQ09ORklHX1ZJUlRJT19QQ0kgaXMgbm90IHNldAoj
-IENPTkZJR19WSVJUSU9fUENJX0xFR0FDWSBpcyBub3Qgc2V0CgojCiMgMS1XaXJlIHN1cHBvcnQK
-IwojIENPTkZJR19XMSBpcyBub3Qgc2V0CgojCiMgMS13aXJlIEVFUFJPTSBzdXBwb3J0CiMKIyBD
-T05GSUdfVzFfRUVQUk9NIGlzIG5vdCBzZXQKCiMKIyBXYXRjaGRvZyBUaW1lciBTdXBwb3J0CiMK
-IyBDT05GSUdfV0FUQ0hET0cgaXMgbm90IHNldAojIENPTkZJR19JTVhfV0FUQ0hET0cgaXMgbm90
-IHNldAojIENPTkZJR19VTFBfV0FUQ0hET0cgaXMgbm90IHNldAojIENPTkZJR19XRFQgaXMgbm90
-IHNldAojIENPTkZJR19TUExfV0RUIGlzIG5vdCBzZXQKIyBDT05GSUdfUEhZU19UT19CVVMgaXMg
-bm90IHNldAoKIwojIEZpbGUgc3lzdGVtcwojCiMgQ09ORklHX0ZTX0JUUkZTIGlzIG5vdCBzZXQK
-IyBDT05GSUdfRlNfQ0JGUyBpcyBub3Qgc2V0CiMgQ09ORklHX1NQTF9GU19DQkZTIGlzIG5vdCBz
-ZXQKQ09ORklHX0ZTX0VYVDQ9eQojIENPTkZJR19FWFQ0X1dSSVRFIGlzIG5vdCBzZXQKQ09ORklH
-X0ZTX0ZBVD15CkNPTkZJR19GQVRfV1JJVEU9eQpDT05GSUdfRlNfRkFUX01BWF9DTFVTVFNJWkU9
-NjU1MzYKIyBDT05GSUdfRlNfSkZGUzIgaXMgbm90IHNldAojIENPTkZJR19VQklGU19TSUxFTkNF
-X01TRyBpcyBub3Qgc2V0CiMgQ09ORklHX1VCSUZTX1NJTEVOQ0VfREVCVUdfRFVNUCBpcyBub3Qg
-c2V0CiMgQ09ORklHX0ZTX0NSQU1GUyBpcyBub3Qgc2V0CiMgQ09ORklHX1lBRkZTMiBpcyBub3Qg
-c2V0CiMgQ09ORklHX0ZTX1NRVUFTSEZTIGlzIG5vdCBzZXQKIyBDT05GSUdfRlNfRVJPRlMgaXMg
-bm90IHNldAoKIwojIExpYnJhcnkgcm91dGluZXMKIwojIENPTkZJR19BRERSX01BUCBpcyBub3Qg
-c2V0CiMgQ09ORklHX1NZU19USU1FUl9DT1VOVFNfRE9XTiBpcyBub3Qgc2V0CiMgQ09ORklHX1BI
-WVNNRU0gaXMgbm90IHNldAojIENPTkZJR19CQ0ggaXMgbm90IHNldApDT05GSUdfQklOTUFOX0ZE
-VD15CiMgQ09ORklHX0NDX09QVElNSVpFX0xJQlNfRk9SX1NQRUVEIGlzIG5vdCBzZXQKQ09ORklH
-X0NIQVJTRVQ9eQojIENPTkZJR19EWU5BTUlDX0NSQ19UQUJMRSBpcyBub3Qgc2V0CkNPTkZJR19M
-SUJfVVVJRD15CkNPTkZJR19SQU5ET01fVVVJRD15CkNPTkZJR19TUExfTElCX1VVSUQ9eQojIENP
-TkZJR19TRU1JSE9TVElORyBpcyBub3Qgc2V0CiMgQ09ORklHX1NQTF9TRU1JSE9TVElORyBpcyBu
-b3Qgc2V0CkNPTkZJR19QUklOVEY9eQpDT05GSUdfU1BMX1BSSU5URj15CkNPTkZJR19TUFJJTlRG
-PXkKQ09ORklHX1NQTF9TUFJJTlRGPXkKQ09ORklHX1NUUlRPPXkKQ09ORklHX1NQTF9TVFJUTz15
-CkNPTkZJR19TWVNfSFo9MTAwMApDT05GSUdfU1BMX1VTRV9USU5ZX1BSSU5URj15CiMgQ09ORklH
-X1BBTklDX0hBTkcgaXMgbm90IHNldApDT05GSUdfUkVHRVg9eQpDT05GSUdfTElCX1JBTkQ9eQoj
-IENPTkZJR19MSUJfSFdfUkFORCBpcyBub3Qgc2V0CkNPTkZJR19TVVBQT1JUX0FDUEk9eQojIENP
-TkZJR19BQ1BJIGlzIG5vdCBzZXQKIyBDT05GSUdfU1BMX0FDUEkgaXMgbm90IHNldAojIENPTkZJ
-R19TUExfVElOWV9NRU1TRVQgaXMgbm90IHNldAojIENPTkZJR19CSVRSRVZFUlNFIGlzIG5vdCBz
-ZXQKIyBDT05GSUdfVFJBQ0UgaXMgbm90IHNldAojIENPTkZJR19DSVJDQlVGIGlzIG5vdCBzZXQK
-IyBDT05GSUdfQ01EX0RIUllTVE9ORSBpcyBub3Qgc2V0CgojCiMgU2VjdXJpdHkgc3VwcG9ydAoj
-CiMgQ09ORklHX0FFUyBpcyBub3Qgc2V0CiMgQ09ORklHX0VDRFNBIGlzIG5vdCBzZXQKQ09ORklH
-X1JTQT15CkNPTkZJR19TUExfUlNBPXkKQ09ORklHX1NQTF9SU0FfVkVSSUZZPXkKQ09ORklHX1JT
-QV9WRVJJRlk9eQojIENPTkZJR19SU0FfVkVSSUZZX1dJVEhfUEtFWSBpcyBub3Qgc2V0CiMgQ09O
-RklHX1NQTF9SU0FfVkVSSUZZX1dJVEhfUEtFWSBpcyBub3Qgc2V0CkNPTkZJR19SU0FfU09GVFdB
-UkVfRVhQPXkKIyBDT05GSUdfQVNZTU1FVFJJQ19LRVlfVFlQRSBpcyBub3Qgc2V0CiMgQ09ORklH
-X1RQTSBpcyBub3Qgc2V0CiMgQ09ORklHX1NQTF9UUE0gaXMgbm90IHNldAoKIwojIEFuZHJvaWQg
-VmVyaWZpZWQgQm9vdAojCgojCiMgSGFzaGluZyBTdXBwb3J0CiMKIyBDT05GSUdfQkxBS0UyIGlz
-IG5vdCBzZXQKQ09ORklHX1NIQTE9eQpDT05GSUdfU0hBMjU2PXkKIyBDT05GSUdfU0hBNTEyIGlz
-IG5vdCBzZXQKIyBDT05GSUdfU0hBMzg0IGlzIG5vdCBzZXQKIyBDT05GSUdfU0hBX0hXX0FDQ0VM
-IGlzIG5vdCBzZXQKQ09ORklHX1NQTF9DUkMzMj15CkNPTkZJR19TUExfU0hBMT15CkNPTkZJR19T
-UExfU0hBMjU2PXkKIyBDT05GSUdfU1BMX1NIQTUxMiBpcyBub3Qgc2V0CiMgQ09ORklHX1NQTF9T
-SEEzODQgaXMgbm90IHNldAojIENPTkZJR19TUExfU0hBX0hXX0FDQ0VMIGlzIG5vdCBzZXQKQ09O
-RklHX01ENT15CiMgQ09ORklHX1NQTF9NRDUgaXMgbm90IHNldApDT05GSUdfQ1JDOD15CiMgQ09O
-RklHX1NQTF9DUkM4IGlzIG5vdCBzZXQKIyBDT05GSUdfU1BMX0NSQzE2IGlzIG5vdCBzZXQKQ09O
-RklHX0NSQzMyPXkKCiMKIyBDb21wcmVzc2lvbiBTdXBwb3J0CiMKQ09ORklHX0xaND15CkNPTkZJ
-R19MWk1BPXkKIyBDT05GSUdfTFpPIGlzIG5vdCBzZXQKQ09ORklHX0daSVA9eQojIENPTkZJR19a
-TElCX1VOQ09NUFJFU1MgaXMgbm90IHNldAojIENPTkZJR19CWklQMiBpcyBub3Qgc2V0CkNPTkZJ
-R19aTElCPXkKIyBDT05GSUdfWlNURCBpcyBub3Qgc2V0CiMgQ09ORklHX1NQTF9CWklQMiBpcyBu
-b3Qgc2V0CiMgQ09ORklHX1NQTF9MWjQgaXMgbm90IHNldAojIENPTkZJR19TUExfTFpNQSBpcyBu
-b3Qgc2V0CkNPTkZJR19WUExfTFpNQT15CiMgQ09ORklHX1NQTF9MWk8gaXMgbm90IHNldAojIENP
-TkZJR19TUExfR1pJUCBpcyBub3Qgc2V0CiMgQ09ORklHX1NQTF9aU1REIGlzIG5vdCBzZXQKQ09O
-RklHX0VSUk5PX1NUUj15CiMgQ09ORklHX0hFWERVTVAgaXMgbm90IHNldAojIENPTkZJR19HRVRP
-UFQgaXMgbm90IHNldApDT05GSUdfT0ZfTElCRkRUPXkKQ09ORklHX09GX0xJQkZEVF9BU1NVTUVf
-TUFTSz0weDAKQ09ORklHX1NZU19GRFRfUEFEPTB4MzAwMApDT05GSUdfU1BMX09GX0xJQkZEVD15
-CkNPTkZJR19TUExfT0ZfTElCRkRUX0FTU1VNRV9NQVNLPTB4ZmYKCiMKIyBTeXN0ZW0gdGFibGVz
-CiMKQ09ORklHX0dFTkVSQVRFX1NNQklPU19UQUJMRT15CiMgQ09ORklHX0xJQl9SQVRJT05BTCBp
-cyBub3Qgc2V0CiMgQ09ORklHX1NQTF9MSUJfUkFUSU9OQUwgaXMgbm90IHNldApDT05GSUdfU01C
-SU9TPXkKIyBDT05GSUdfU01CSU9TX1BBUlNFUiBpcyBub3Qgc2V0CkNPTkZJR19FRklfTE9BREVS
-PXkKQ09ORklHX0VGSV9CSU5BUllfRVhFQz15CkNPTkZJR19FRklfQk9PVE1HUj15CkNPTkZJR19F
-RklfVkFSSUFCTEVfRklMRV9TVE9SRT15CiMgQ09ORklHX0VGSV9SVF9WT0xBVElMRV9TVE9SRSBp
-cyBub3Qgc2V0CiMgQ09ORklHX0VGSV9WQVJJQUJMRV9OT19TVE9SRSBpcyBub3Qgc2V0CiMgQ09O
-RklHX0VGSV9WQVJJQUJMRVNfUFJFU0VFRCBpcyBub3Qgc2V0CkNPTkZJR19FRklfVkFSX0JVRl9T
-SVpFPTEzMTA3MgojIENPTkZJR19FRklfU0NST0xMX09OX0NMRUFSX1NDUkVFTiBpcyBub3Qgc2V0
-CiMgQ09ORklHX0VGSV9SVU5USU1FX1VQREFURV9DQVBTVUxFIGlzIG5vdCBzZXQKIyBDT05GSUdf
-RUZJX0NBUFNVTEVfT05fRElTSyBpcyBub3Qgc2V0CkNPTkZJR19FRklfQ0FQU1VMRV9NQVg9MTUK
-Q09ORklHX0VGSV9ERVZJQ0VfUEFUSF9UT19URVhUPXkKQ09ORklHX0VGSV9ERVZJQ0VfUEFUSF9V
-VElMPXkKQ09ORklHX0VGSV9EVF9GSVhVUD15CkNPTkZJR19FRklfTE9BREVSX0hJST15CkNPTkZJ
-R19FRklfVU5JQ09ERV9DT0xMQVRJT05fUFJPVE9DT0wyPXkKQ09ORklHX0VGSV9VTklDT0RFX0NB
-UElUQUxJWkFUSU9OPXkKIyBDT05GSUdfRUZJX0xPQURFUl9CT1VOQ0VfQlVGRkVSIGlzIG5vdCBz
-ZXQKQ09ORklHX0VGSV9QTEFURk9STV9MQU5HX0NPREVTPSJlbi1VUyIKQ09ORklHX0VGSV9IQVZF
-X1JVTlRJTUVfUkVTRVQ9eQpDT05GSUdfRUZJX1JOR19QUk9UT0NPTD15CkNPTkZJR19FRklfTE9B
-RF9GSUxFMl9JTklUUkQ9eQojIENPTkZJR19FRklfU0VDVVJFX0JPT1QgaXMgbm90IHNldApDT05G
-SUdfRUZJX0VDUFQ9eQpDT05GSUdfRUZJX0VCQlJfMl8xX0NPTkZPUk1BTkNFPXkKIyBDT05GSUdf
-RUZJX0hUVFBfQk9PVCBpcyBub3Qgc2V0CiMgQ09ORklHX09QVEVFX0xJQiBpcyBub3Qgc2V0CiMg
-Q09ORklHX09QVEVFX0lNQUdFIGlzIG5vdCBzZXQKIyBDT05GSUdfQk9PVE1fT1BURUUgaXMgbm90
-IHNldAojIENPTkZJR19URVNUX0ZEVERFQyBpcyBub3Qgc2V0CkNPTkZJR19MSUJfRUxGPXkKQ09O
-RklHX0xNQj15CkNPTkZJR19MTUJfVVNFX01BWF9SRUdJT05TPXkKQ09ORklHX0xNQl9NQVhfUkVH
-SU9OUz0xNgojIENPTkZJR19QSEFORExFX0NIRUNLX1NFUSBpcyBub3Qgc2V0CgojCiMgVGVzdGlu
-ZwojCiMgQ09ORklHX1VOSVRfVEVTVCBpcyBub3Qgc2V0CiMgQ09ORklHX1NQTF9VTklUX1RFU1Qg
-aXMgbm90IHNldAojIENPTkZJR19QT1NUIGlzIG5vdCBzZXQKCiMKIyBUb29scyBvcHRpb25zCiMK
-Q09ORklHX01LSU1BR0VfRFRDX1BBVEg9ImR0YyIKQ09ORklHX1RPT0xTX0NSQzMyPXkKQ09ORklH
-X1RPT0xTX0xJQkNSWVBUTz15CkNPTkZJR19UT09MU19LV0JJTUFHRT15CkNPTkZJR19UT09MU19G
-SVQ9eQpDT05GSUdfVE9PTFNfRklUX0ZVTExfQ0hFQ0s9eQpDT05GSUdfVE9PTFNfRklUX1BSSU5U
-PXkKQ09ORklHX1RPT0xTX0ZJVF9SU0FTU0FfUFNTPXkKQ09ORklHX1RPT0xTX0ZJVF9TSUdOQVRV
-UkU9eQpDT05GSUdfVE9PTFNfRklUX1NJR05BVFVSRV9NQVhfU0laRT0weDEwMDAwMDAwCkNPTkZJ
-R19UT09MU19GSVRfVkVSQk9TRT15CkNPTkZJR19UT09MU19NRDU9eQpDT05GSUdfVE9PTFNfT0Zf
-TElCRkRUPXkKQ09ORklHX1RPT0xTX1NIQTE9eQpDT05GSUdfVE9PTFNfU0hBMjU2PXkKQ09ORklH
-X1RPT0xTX1NIQTM4ND15CkNPTkZJR19UT09MU19TSEE1MTI9eQpDT05GSUdfVE9PTFNfTUtFRklD
-QVBTVUxFPXkKIyBDT05GSUdfRlNQSV9DT05GX0hFQURFUiBpcyBub3Qgc2V0CiMgQ09ORklHX1RP
-T0xTX01LRldVTURBVEEgaXMgbm90IHNldAo=
---0000000000005b18bf06219e92bc--
