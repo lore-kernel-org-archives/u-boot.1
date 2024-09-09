@@ -4,94 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5765ECE579
-	for <u-boot@archiver.kernel.org>; Mon,  9 Sep 2024 10:30:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94667ECE57A
+	for <u-boot@archiver.kernel.org>; Mon,  9 Sep 2024 10:40:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E83EE88D9C;
-	Mon,  9 Sep 2024 12:30:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0843E88972;
+	Mon,  9 Sep 2024 12:40:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GZCJ6i/L";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZokHLBLN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A96DF88D94; Mon,  9 Sep 2024 12:30:40 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 7EFCE88995; Mon,  9 Sep 2024 12:40:41 +0200 (CEST)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C227988D9A
- for <u-boot@lists.denx.de>; Mon,  9 Sep 2024 12:30:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 74F4787C80
+ for <u-boot@lists.denx.de>; Mon,  9 Sep 2024 12:40:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5c2561e8041so4573388a12.2
- for <u-boot@lists.denx.de>; Mon, 09 Sep 2024 03:30:38 -0700 (PDT)
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-5365d3f9d34so2476907e87.3
+ for <u-boot@lists.denx.de>; Mon, 09 Sep 2024 03:40:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725877838; x=1726482638; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=Mi15XKWYmicpB8d0P38/d1YCpd8kNtO2VsH8ZAQ+ugQ=;
- b=GZCJ6i/L70fCFvSYDoSuPUQ0MBkrAgOlf6h9P0XzesUxQX53JPPjucKFjYNLT7gRas
- 2zOXe5k9y8DDG0yTL+VZFy1kHEu15jRQyUttGb716Krageljpl15bGUNvVdRP3dU/jBo
- /yufOYn4G/8AV6RyVT7m2NI+2eR3XOqCwRL6mBVDB12XlHK5QMBydl9RTrmZTFbJx5U3
- LihpOxCJTKFyT/FYYgHME/7V2b1qOhPgvoiVK8Jlz+F9gYT5KifrZHf7cWdjpZIb+xl0
- LDfE0rWHmgx7gnSBH6CrMrCNIw9XbwzjKPgJfOA3oLAL30w3CNwoW/BgUUh5Owku2K8o
- HA1Q==
+ d=linaro.org; s=google; t=1725878439; x=1726483239; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=A2Bi1m6nhE67OtitS0aDIpkPMEpuzJU0+vwy8apsRLQ=;
+ b=ZokHLBLNKT/gdmNqAbU0VkLAykm4J4EavRqe8fhz3Gw+scGsRsqc7Mwvnnh5hVWxpY
+ 107DhBXOXU+zwweL8jF2O4rXp707BNxh6Qf7DoUASi7gP5YL1+B/DrnCY0q+L+7bdj5n
+ GzJ7r8pwsNA4Aywu0C2kygNfNxNlTWgbsAIs163BcErgEEgrVfzAofDwMOaaLPq6KJc+
+ g5HY2DQCcI63Nxjturm/s8qXW22Dyh3FopJjyRBtfuE8MoA4lUkZkpKc+7VmZ8PIhm+1
+ o7BkKgA6dNm9xFs1SBwDaljRca+eO0lZs1ASYUwr1z+BN8cuKImPx6zJqjZsKz3VlqN8
+ kbRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725877838; x=1726482638;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Mi15XKWYmicpB8d0P38/d1YCpd8kNtO2VsH8ZAQ+ugQ=;
- b=Urz1BKw8R3oJauqDICDcHgVAFF39Zhmn0VcZONs+GcJw9+MHnu4UWIENvcR7bXlkfe
- tC79xufF+fQp9FuIrmyWb/Sbtik8DHWHwoEPDu5I9CE6j405hSoA88ehxcaMoKEWtz6v
- ecaPV9IFiUKmlqJckbpDR8r2cAA6PZoPs8ddZLtWCX1EzQUQYhpvpMqR+qV7Kkl9MMT7
- w4oIKIXypyyK5cPd25JLs+O4ZmPne1pkyvgbK2sFD4MDMuTsRwzYKewvcTiVsxoHn925
- V5W42fM6oomXwHZCFbZYfUmryuXQjuTaiiKUY8i0DhRPq7Fpts1TNVLahrGWmrxMx5T7
- rgdQ==
+ d=1e100.net; s=20230601; t=1725878439; x=1726483239;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=A2Bi1m6nhE67OtitS0aDIpkPMEpuzJU0+vwy8apsRLQ=;
+ b=afv6l6E5d/Snfz+oACFD7mccKq4ZWsGgZyrbGqU4RFeskVaPhTOxe/aujXIKX+7RoJ
+ HDi+hQocmeuj2wDFJ3u9pfEmhyxFOnJsGYzO+9heuNYyi5tobaooK8uY2pPEsIFe2jVV
+ +4dR2DcKe3pUxPU9mDc9DgNnJI44GMlbKOr9jOEs/4zNAsFHR3cpKDEgb6PWOlq4qmYl
+ xSNXexosg44kemlbSlIBqnU/BtHelU+OTTQjiAOSPD30Vgoc472I6d4ml1L6i1cXL4he
+ hwfn1eZKY7Ttor7d/V4qE2PfDERDgqpnjQtciqR79EH8o2iddfDw405P1ffLhLxG+jI4
+ 7Cww==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUItVri7N4p5o0rnGjaPUjzlPI5Ecb8r6MTPXEHOJ/0ue/nk5T77ZhUYf3xG0Dc2CdtBoEGvhk=@lists.denx.de
-X-Gm-Message-State: AOJu0YxMD8oumYYZD5z82w9d0En+eLEBe3j3kUGhsc1Rq8INpl2PFNkx
- kIYhGgkym/HjckwPaknj1PCKhZlASk5OUTS9UxataDGr0fehVAZ6ZECFZhLsxd0=
-X-Google-Smtp-Source: AGHT+IF67gVHCUZIgXJ9Lu+DcdX+NMvev9DXM05wF3yuti1bdkZ5fk61Ob5QzlLXgnyJphIGPoDdWw==
-X-Received: by 2002:a05:6402:35c1:b0:5c2:112e:f106 with SMTP id
- 4fb4d7f45d1cf-5c3e95354f8mr5028043a12.3.1725877838028; 
- Mon, 09 Sep 2024 03:30:38 -0700 (PDT)
-Received: from lion.localdomain ([2a02:8109:aa0d:be00::8db])
+ AJvYcCVU54rtYk8uZd0orml1Wg8Sk30D5FuxdGCEVynM/huiCMc9xh8qw6s+r3/Zgfydd7VqO/dZ2N4=@lists.denx.de
+X-Gm-Message-State: AOJu0YzQ6eBaMvZSel4vwERLgPtRwC+IxYgYENO68+/HQIbbzaB53rku
+ 8XVEIDEBixIBAmFK5o8mhsm45/cEt2BKXqxHi+UPWo4khSy41e/hRKQb8RlTrb4=
+X-Google-Smtp-Source: AGHT+IHgtBckmKKAcoTKYEJ2XSNvoGe0L+Y/x5gcPtjX49lo2imcbz7qUtUi2oZC9oSMuFtz+U6yNA==
+X-Received: by 2002:a05:6512:1191:b0:535:6935:7869 with SMTP id
+ 2adb3069b0e04-5365880fe89mr5377575e87.55.1725878438348; 
+ Mon, 09 Sep 2024 03:40:38 -0700 (PDT)
+Received: from ?IPV6:2a02:8109:aa0d:be00::8db? ([2a02:8109:aa0d:be00::8db])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c3ebd46733sm2822287a12.27.2024.09.09.03.30.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Sep 2024 03:30:36 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Mon, 09 Sep 2024 12:30:33 +0200
-Subject: [PATCH v3 2/2] qcom_defconfig: enable stub clock
+ a640c23a62f3a-a8d25d63bebsm321266466b.207.2024.09.09.03.40.37
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 09 Sep 2024 03:40:37 -0700 (PDT)
+Message-ID: <a504b481-8e30-4f17-aced-4a9eb1ac32d1@linaro.org>
+Date: Mon, 9 Sep 2024 12:40:36 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Betterbird (Linux)
+Subject: Re: [PATCH] dm: button: support remapping phone keys
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20240714194948.1271135-1-caleb.connolly@linaro.org>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20240714194948.1271135-1-caleb.connolly@linaro.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240909-b4-clk-stub-v3-2-ef09307534d5@linaro.org>
-References: <20240909-b4-clk-stub-v3-0-ef09307534d5@linaro.org>
-In-Reply-To: <20240909-b4-clk-stub-v3-0-ef09307534d5@linaro.org>
-To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
- u-boot-qcom@groups.io
-X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=724;
- i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=S563xq/0B3eIs5xDd1khgPjrL40NOHgJDl9j8z56vEY=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhrR75zy+T734cmnAk5lv7FjeKdf82bj21D6lJu821ztyR
- c42Pb63OkpZGAQ5GGTFFFnETyyzbFp72V5j+4ILMHNYmUCGMHBxCsBETmgz/Hffq7/VurdkdV60
- 8RVjaa4boedO/zDZ8X/jzDWxWXwR69oZ/lcf667MZ65I4z96Sab70YU1rIIN2d/NlE5+rV64xGt
- qgA4A
-X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,30 +97,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable the stub clock driver for rpmcc
+Hi all,
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
- configs/qcom_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+There's been some interesting discussion around this (thanks everyone
+who has chipped in).
 
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index edbb624baf0c..2e8422dc1a88 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -48,8 +48,9 @@ CONFIG_CLK_QCOM_SDM845=y
- CONFIG_CLK_QCOM_SM6115=y
- CONFIG_CLK_QCOM_SM8250=y
- CONFIG_CLK_QCOM_SM8550=y
- CONFIG_CLK_QCOM_SM8650=y
-+CONFIG_CLK_STUB=y
- CONFIG_MSM_GPIO=y
- CONFIG_QCOM_PMIC_GPIO=y
- CONFIG_DM_I2C=y
- CONFIG_SYS_I2C_QUP=y
+To summarise, it seems like a more elegant solution to this problem
+would be to introduce a new devicetree property "bootph,keys" (or
+u-boot,keys?) to denote the keycodes which should be send when a key is
+pressed in the bootloader stage, rather than the OS.
+
+This does seem like an elegant solution, but it would also require
+changing all the devicetree files for all the devices where this
+matters. Considering the lack of other usecases for this, I'm not sure
+if a generic solution like that is really worth it compared to what I'm
+proposing here. I also don't think that accepting this patch is mutually
+exclusive with implementing a "proper" generic solution later on.
+
+Does anyone have further thoughts? Can we go ahead with this patch?
+
+I'd be happy to re-send it, and go ahead with Quentin's suggestion to
+make the funtion weak so that boards can override it (though maybe that
+could be done in a future patch if there is some usecase for it).
+
+Thanks and regards,
+
+On 14/07/2024 21:49, Caleb Connolly wrote:
+> We don't have audio support in U-Boot, but we do have boot menus. Add an
+> option to re-map the volume and power buttons to up/down/enter so that
+> in situations where these are the only available buttons (such as on
+> mobile phones) it's still possible to navigate menus built in U-Boot or
+> an external EFI app like GRUB or systemd-boot.
+> 
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+> Cc: u-boot-qcom@groups.io
+> ---
+>  drivers/button/Kconfig         | 11 +++++++++++
+>  drivers/button/button-uclass.c | 22 +++++++++++++++++++++-
+>  2 files changed, 32 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/button/Kconfig b/drivers/button/Kconfig
+> index 3918b05ae03e..6cae16fcc8bf 100644
+> --- a/drivers/button/Kconfig
+> +++ b/drivers/button/Kconfig
+> @@ -8,8 +8,19 @@ config BUTTON
+>  	  U-Boot provides a uclass API to implement this feature. Button drivers
+>  	  can provide access to board-specific buttons. Use of the device tree
+>  	  for configuration is encouraged.
+>  
+> +config BUTTON_REMAP_PHONE_KEYS
+> +	bool "Remap phone keys for navigation"
+> +	depends on BUTTON
+> +	help
+> +	  Enable remapping of phone keys to navigation keys. This is useful for
+> +	  devices with phone keys that are not used in U-Boot. The phone keys
+> +	  are remapped to the following navigation keys:
+> +	  - Volume up: Up
+> +	  - Volume down: Down
+> +	  - Power: Enter
+> +
+>  config BUTTON_ADC
+>  	bool "Button adc"
+>  	depends on BUTTON
+>  	depends on ADC
+> diff --git a/drivers/button/button-uclass.c b/drivers/button/button-uclass.c
+> index cda243389df3..729983d58701 100644
+> --- a/drivers/button/button-uclass.c
+> +++ b/drivers/button/button-uclass.c
+> @@ -9,8 +9,9 @@
+>  
+>  #include <button.h>
+>  #include <dm.h>
+>  #include <dm/uclass-internal.h>
+> +#include <dt-bindings/input/linux-event-codes.h>
+>  
+>  int button_get_by_label(const char *label, struct udevice **devp)
+>  {
+>  	struct udevice *dev;
+> @@ -36,16 +37,35 @@ enum button_state_t button_get_state(struct udevice *dev)
+>  
+>  	return ops->get_state(dev);
+>  }
+>  
+> +static int button_remap_phone_keys(int code)
+> +{
+> +	switch (code) {
+> +	case KEY_VOLUMEUP:
+> +		return KEY_UP;
+> +	case KEY_VOLUMEDOWN:
+> +		return KEY_DOWN;
+> +	case KEY_POWER:
+> +		return KEY_ENTER;
+> +	default:
+> +		return code;
+> +	}
+> +}
+> +
+>  int button_get_code(struct udevice *dev)
+>  {
+>  	struct button_ops *ops = button_get_ops(dev);
+> +	int code;
+>  
+>  	if (!ops->get_code)
+>  		return -ENOSYS;
+>  
+> -	return ops->get_code(dev);
+> +	code = ops->get_code(dev);
+> +	if (CONFIG_IS_ENABLED(BUTTON_REMAP_PHONE_KEYS))
+> +		return button_remap_phone_keys(code);
+> +	else
+> +		return code;
+>  }
+>  
+>  UCLASS_DRIVER(button) = {
+>  	.id		= UCLASS_BUTTON,
 
 -- 
-2.46.0
-
+// Caleb (they/them)
