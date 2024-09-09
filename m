@@ -4,88 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B4B5ECE57A
-	for <u-boot@archiver.kernel.org>; Mon,  9 Sep 2024 13:37:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 178EBECE57E
+	for <u-boot@archiver.kernel.org>; Mon,  9 Sep 2024 14:04:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B1F1088DC6;
-	Mon,  9 Sep 2024 15:37:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 42F4088DD8;
+	Mon,  9 Sep 2024 16:04:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NgRXsuiV";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="qR8cPW6T";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="f/XdIKX1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A889388D83; Mon,  9 Sep 2024 15:37:51 +0200 (CEST)
-Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
- [IPv6:2607:f8b0:4864:20::42a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5242488CC9; Mon,  9 Sep 2024 16:04:45 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 313BC88DC6
- for <u-boot@lists.denx.de>; Mon,  9 Sep 2024 15:37:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 25B2988DE1
+ for <u-boot@lists.denx.de>; Mon,  9 Sep 2024 16:04:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pf1-x42a.google.com with SMTP id
- d2e1a72fcca58-718e285544fso1452556b3a.1
- for <u-boot@lists.denx.de>; Mon, 09 Sep 2024 06:37:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725889066; x=1726493866; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bKTfB+KRMtJiEKt1TbpZFagGrTt37Ehia305pP5y/pY=;
- b=NgRXsuiVpaa2B40Jtwnz3if/oRIPY5gmn9Pv0jNfAJhLSQlIE7Q/ml0XRyAGPbhwmt
- 4YKCHyR5DEkIT+BBacCaO8kIAPpNiu9ZYFlsG3EMpMoz7LJHXdzx834/+6jT9A5ZXcnL
- jDfLAKKFPqr0d/YQ6GaR2g7Ps6yf4pHkQr/OijDfMCoeDczfTlNck2OyhvllIn+v9/0L
- u0nYBOxhHpji3giMj5CUWlmmeImsDXKD46tD/l0NgS1eUqmI8x9lZ6MphMVFVLSkozJb
- 31fl85+fXg9Ha6+85ED0d/GLK2/puh4/aJ+el/bmKn4BB/BX1n780XuklyB8/xliz2DX
- RRLw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725889066; x=1726493866;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=bKTfB+KRMtJiEKt1TbpZFagGrTt37Ehia305pP5y/pY=;
- b=e+FzGm5LSCvdfMeqmqQbVHJ09BpSiia+6uG2KWkDh4OTjKmSllJqr6y+I3n6uz6e0k
- TLPb+cfBVE8ly7b322WYNr5GOvJgFpeyl1c9tgpGrR+A3Led/mXEdUMhCgk0WXxHblWs
- 6Z9FmxUSu3tRmOpDwtukrcTe6HskWv4HGwc5Wvrq9Jk0pClbRbBXVA/Lvt1sNJUJFY0a
- WQNbphtfmGNbOWhEEESX5tUC+1YCSdbRSDjiMe/dPy7d1qrSIZbb9YFhosomYj0n3ryI
- s9N0YUZ+TKu65ftwlmjFFHX80K4Scfgn0xfD9HuJ/QwpfF/bXxAgDB6PP9VfvKcMe05+
- 01og==
-X-Gm-Message-State: AOJu0YzL7m93KTEsi0Z12nvm/e4ZEOupWIRWkH0v8phYJGF1WjG6+7OJ
- kBAseav0fy+P/jUtbXFqSc5CqeQB7rviXuxus8lvtZq9t8bRXQjVxZDfECcu1+yMObHGkYvbZcj
- whI/8EYq3H/4A425pI7q4JLHc7eINJPETtb1PYQ==
-X-Google-Smtp-Source: AGHT+IGaD/A2SjeyCuWIXxrUHNTpx+6WYTAtRzPQuaQuJr2monLTAAJKAQRPou6pAL22B7rEb3uThWeSWpmo4BH+Qew=
-X-Received: by 2002:a05:6a21:3994:b0:1cf:47ef:190f with SMTP id
- adf61e73a8af0-1cf47ef1af2mr1784288637.1.1725889066596; Mon, 09 Sep 2024
- 06:37:46 -0700 (PDT)
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4X2T9N390jz9slB;
+ Mon,  9 Sep 2024 16:04:40 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1725890680;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=71tlnADO8qMbsmY6CDoaJiXI92ZS/OM0knw5jCuQvfY=;
+ b=qR8cPW6ThMYVMJ6+f9hxFemhhaMrDKZKdP7s/MQe8TiDnlCQV2e58+FH1lpzQr8tc0zn1I
+ eDfeZpm+LdBRDOUJsEB7snF+6uKDDqXqAU+NzlHd7uaZPpGc8kpDim5VDdiGUhgVk2rh+E
+ Egmr3nANzbP1Bpos3aLtl6IDA92C0uF4LfWEp+2j/D1pJfG+kQFANO/0L0Y/F2bi9twFl8
+ ABO6MNjOEWh87/uIO69HWunCwui8FUvp/j5qMw0GFd4hXvt14nQ30Vrfhe5+TAdlYhfcU0
+ JAE5Ya3nygsp/rxJUVtm+BHzYJiRmmKKgeDrIrO7fdpRjxMlrow25phBhQTT4g==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1725890678;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=71tlnADO8qMbsmY6CDoaJiXI92ZS/OM0knw5jCuQvfY=;
+ b=f/XdIKX1oc83ZpFxSLqh+zUzWLg+HaiHVRGYvzJY4ctG4gnPoiAO5hOOsDyB4CR6r1pNCE
+ SmaeIbBq36ozNqD75oqIh1eEARZDpXdeikP8ypCWttc0lBFNiRC1bXoAC0+TKvlmqJvl2C
+ /spc/bVI0FAY+ltGqxBPTLlSLEgsQ+3vxhYERkHpKN/IipAnvt/BrSBZI/HlCOoImIt3Sa
+ 7HG+LCzVR3IyomZM8E+3OH4fk34FKQjbMioLwKlYjZumKg0ZotIu7NWjLnl9vUBfZT1l7N
+ mjk1WG3Wd2NGHgjchjNBIPb/QHY8Cr3jYeMgd1hZT5KJ4iUO5E7IdMRLx2OsWQ==
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: [PULL] u-boot-sh/master-spi-fixes
+Date: Mon,  9 Sep 2024 16:02:55 +0200
+Message-ID: <20240909140419.7713-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-References: <20240816154658.1866186-1-raymond.mao@linaro.org>
- <b692118e-7a53-438d-afa6-7109d4d61167@linaro.org>
-In-Reply-To: <b692118e-7a53-438d-afa6-7109d4d61167@linaro.org>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Mon, 9 Sep 2024 09:37:36 -0400
-Message-ID: <CAEfUkULS3VG+jccC+XkmkAb2QPJ2-VRZmmQ4X+D9MuWsPAeyZg@mail.gmail.com>
-Subject: Re: [PATCH 00/10] SMBIOS improvements
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng@tinylab.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
- Stefan Roese <sr@denx.de>, 
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Wan Yee Lau <wan.yee.lau@intel.com>, Alexander Gendin <agendin@matrox.com>, 
- Michal Simek <michal.simek@amd.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Max Krummenacher <max.krummenacher@toradex.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Sean Anderson <seanga2@gmail.com>, 
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Peter Robinson <pbrobinson@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: 1gppuemdu4ozkrakub3mnwx9p93jfg9u
+X-MBO-RS-ID: ac13fe8d65cf1873f15
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,24 +82,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Caleb,
+Last minute SPI fixes for R-Car to make the SPI NOR work on Gen4.
+Also one RPC HF fix for Gen4.
 
-On Mon, 19 Aug 2024 at 07:56, Caleb Connolly <caleb.connolly@linaro.org>
-wrote:
+The following changes since commit 1630ff26cc960439b5949b80cfc604a2c8aa47dd:
 
-> Hi Raymond,
->
-> I haven't managed to root cause it yet, but this series seems to make
-> the RB3 Gen 2 Qualcomm board hang during relocation.
->
-> How early post-relocation does any code here get called?
->
-> Does it have permission to access MIDR_EL1, MPIDR_EL1 or CLIDR_EL1?
-I don't have a Qualcomm board in hand but can you try if the hang still
-appears if we comment out the reg access lines in patch #5 and #8?
-I guess just about 3 lines.
+  Merge https://gitlab.denx.de/u-boot/custodians/u-boot-marvell (2024-09-04 10:34:54 -0600)
 
-[snip]
+are available in the Git repository at:
 
-Regards,
-Raymond
+  https://source.denx.de/u-boot/custodians/u-boot-sh.git master-spi-fixes
+
+for you to fetch changes up to 3faeb78378ea32922fbd00e9ddf675ce0aa526a3:
+
+  ARM: dts: renesas: Minimize R8A779G0 V4H RPC SPI DT node (2024-09-09 01:10:44 +0200)
+
+----------------------------------------------------------------
+Marek Vasut (7):
+      mtd: rpc: renesas: Add R-Car Gen4 DT compatible
+      mtd: spi: renesas: Write DREAR register once
+      mtd: spi: renesas: Write DRDMCR register once
+      mtd: spi: renesas: Configure DRDRENR register
+      mtd: spi: renesas: Configure RPC PHY timing registers
+      mtd: spi: renesas: Add R-Car Gen4 DT compatible
+      ARM: dts: renesas: Minimize R8A779G0 V4H RPC SPI DT node
+
+ arch/arm/dts/r8a779g0-u-boot.dtsi            |  1 -
+ arch/arm/dts/r8a779g0-white-hawk-u-boot.dtsi | 22 +---------------------
+ drivers/mtd/renesas_rpc_hf.c                 |  1 +
+ drivers/spi/renesas_rpc_spi.c                | 23 ++++++++++++++++++-----
+ 4 files changed, 20 insertions(+), 27 deletions(-)
