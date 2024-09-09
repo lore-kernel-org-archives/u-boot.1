@@ -4,74 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D91CECE579
-	for <u-boot@archiver.kernel.org>; Mon,  9 Sep 2024 16:13:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DB74ECE579
+	for <u-boot@archiver.kernel.org>; Mon,  9 Sep 2024 16:19:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A5D588DFA;
-	Mon,  9 Sep 2024 18:13:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id B8D4388D17;
+	Mon,  9 Sep 2024 18:19:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1725898434;
-	bh=FUXuQPoEy5z3anhIbOWZnJkHWp+dwoSWYHBOM9CngVk=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=xR1z+tCDMBWRvQcI6xBMDPspmTkZNQ+kek5dH45ZKT2Yw5YIipZRivP+2LawRNJvA
-	 bq5fEUhsW/3b0jDgX6OMLz/BDeCmz5540wTRRSNMqwUvzsKZzHCN6YBCPdTdSYzD6b
-	 vTAamwRiuY/zDZCOvgeoHQQqvP0Xngk5lNp8yn367PMIRoPLbN/pPCYNp8nethDQcI
-	 23Ph5e8UX6WxDJPsiRnwDtoATtyRiDTs3rwk3TDBJ3h/c/nEbL774T23RyJwJ5KZhx
-	 3D7XDrRyoSf5dnA+TPcwTrjC5sbogOsRp03f6TO8wGmhPX+7ssGfPPQVtuniFu25Vv
-	 FxBwzK6f9BJWA==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ufwfe8Xf";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id AA75288D1F; Mon,  9 Sep 2024 18:19:45 +0200 (CEST)
+Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
+ [IPv6:2607:f8b0:4864:20::c32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id BF89E88B11;
- Mon,  9 Sep 2024 18:13:52 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1725898433;
- bh=FUXuQPoEy5z3anhIbOWZnJkHWp+dwoSWYHBOM9CngVk=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=UnyW3Q+AxUjWkpRCqyXQ7MCvzVfq9TDa309XMZyPJduryI8Qe88A5g65vhUUtfIFA
- PVHlZzGGtgcyosNqE61eborNv6dErihvvkT70eWT2ZGQJS7ClyqfXFHkzOVr7aNwpw
- jeFGucrPnZu0VC2xGrEN/DD8yWFOWXkuhaBx+h6q5J0ajQrIY54bB/0wfZhyAeNnf8
- IfgGQ1GQMGcEeS9JnutApSQrV1MKP+04+d1v02dkfXkl40b1FmFtie4iMB7IXxf0MW
- zHYa4ZYihauQ2L81QJBUa3FwDDs6JFKxeQvcbjqam0rK1qKpBWYKcreLvKddILbvlF
- cgHa2lZEsYNSw==
-Message-ID: <e5837ce4-0a14-4822-960d-6ab667a9f4b1@denx.de>
-Date: Mon, 9 Sep 2024 18:10:52 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 7D84388CC2
+ for <u-boot@lists.denx.de>; Mon,  9 Sep 2024 18:19:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc32.google.com with SMTP id
+ 006d021491bc7-5e174925b7bso2870906eaf.0
+ for <u-boot@lists.denx.de>; Mon, 09 Sep 2024 09:19:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1725898776; x=1726503576; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=i9p73k4oua7KgVJQWjG3/qvtd8pBpnIrsER8xyf67Cs=;
+ b=Ufwfe8XftUAEjRO5n5CMJT/5o5tGUwcfRgcidW2VjJ0va54P5nXwBDF5yqlM85SkCS
+ 0IF06Tv6PrffFDxTULuU++xiNq1m1CtCwFy+PtXi/tBYDtd+XCm8GMgpmn/G1l0c5WO2
+ dDB5eWD8klC9hSd2lAfTALdjh69C0PyAm9fqM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725898776; x=1726503576;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=i9p73k4oua7KgVJQWjG3/qvtd8pBpnIrsER8xyf67Cs=;
+ b=GbwM7JVpWE+csyudowcABHA4a9TC5Hqb8rR/u3Kd1YBuJnEOQDY8rXkftzWH7HXgRw
+ BetP2c0rLnOOurC+ujBuSFsvXTeInOk6+0QELcp2kS7OMNOzjdY63GLlfvFEXuVlDMn+
+ nMM8mES9TvHExHy9lZkc4A982MUxuunDjdx6GtajURVRIBvYINbIcZnOVZ2OC0Ytql4i
+ kH8d0KTEK7iDRnoEtq1nkIo6OQR1Fp5Ji8Md7zrZU6GGrMzpcEBZ6ZNMt/D7odv1Xxhw
+ oyoSTSV64SU/9c+aqxJTRNqKODD0s0lge77GzkJ5AjrhyRsqvk7Vx4lDbml8Kbn06lRH
+ KEPQ==
+X-Gm-Message-State: AOJu0Yz8UHlppGRZfvo9oM7aZIM1rlb68sVvWMr9mJLiC49ApN8EATJE
+ LypN3o8p8r6E1OnWHd/qDB3O/ycqr/pPWiiuCpNmFJvTypry/Q2djsoreo4wBOM=
+X-Google-Smtp-Source: AGHT+IHK2I6ZH7n1zYrp8uXmdHGFao9IbvD+q5g5fSYlgaaB4S43Qqw2K3XZlNrG9to7RODxE6DNAw==
+X-Received: by 2002:a05:6358:787:b0:1b5:c53d:74b2 with SMTP id
+ e5c5f4694b2df-1b8380e78camr777790955d.0.1725898776125; 
+ Mon, 09 Sep 2024 09:19:36 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7a9a7967e7asm232412085a.38.2024.09.09.09.19.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Sep 2024 09:19:35 -0700 (PDT)
+Date: Mon, 9 Sep 2024 10:19:32 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
+ Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
+ Anton Antonov <Anton.Antonov@arm.com>
+Subject: Re: [PATCH v10 00/25] Introduce the lwIP network stack
+Message-ID: <20240909161932.GC4252@bill-the-cat>
+References: <cover.1725625913.git.jerome.forissier@linaro.org>
+ <20240906175433.GE3879073@bill-the-cat>
+ <4b66d045-5410-4991-96e5-1d9cd98cbdf9@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] power: regulator: Trigger probe of regulators which
- are always-on or boot-on
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
- Sumit Garg <sumit.garg@linaro.org>, uboot-stm32@st-md-mailman.stormreply.com
-References: <20240626235717.272219-1-marex@denx.de>
- <a73dffe5-87e3-4e96-965f-9d029f2af8ed@denx.de>
- <CAPVz0n0C6TPdBRUEvJmgAUGAKoetuzr1j=0cMXweP2EqMTwn=g@mail.gmail.com>
- <0910419d-e8ab-4bf9-a083-dc2783afaca1@denx.de>
- <4D07A6E5-F156-44C3-A26D-0F2D913CE92D@gmail.com>
- <18d84528-d2e5-41d6-ae1d-109ee30853b2@denx.de>
- <CAPVz0n2Jzfih0Z85TSQbnz-8OrX4D6UN=anKGTJ=hckRt8f3xA@mail.gmail.com>
- <a95f0d60-2883-4c3d-8a53-ee3ef414cc32@denx.de>
- <CAPVz0n3Ji1sKQK+Lnq8rP3ZqwX3o-kXe2btj93UuVBa3T5C=qw@mail.gmail.com>
- <eced1020-2157-44a4-98a9-845e218529d9@denx.de>
- <45c74c58-98cf-43df-b837-c48b0341c551@denx.de>
- <CAPVz0n2-DCKDcVrAi00kF6yDcE2bN1mtUhzBcw7JDiZoXgzu0w@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAPVz0n2-DCKDcVrAi00kF6yDcE2bN1mtUhzBcw7JDiZoXgzu0w@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="35Ss66Vv7KzIGTns"
+Content-Disposition: inline
+In-Reply-To: <4b66d045-5410-4991-96e5-1d9cd98cbdf9@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,109 +94,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/20/24 9:08 AM, Svyatoslav Ryhel wrote:
-> пн, 19 серп. 2024 р. о 20:27 Marek Vasut <marex@denx.de> пише:
->>
->> On 8/1/24 2:28 AM, Marek Vasut wrote:
->>> On 7/29/24 1:55 PM, Svyatoslav Ryhel wrote:
->>>
->>> [...]
->>>
->>>>>>> What is the problem you observe on tegra 3 ?
->>>>>> i2c line fails since it probes in spl with your patch, but it does not
->>>>>> relocate and then probes once more after relocation. Probe fails along
->>>>>> with all devices on same line.
->>>>>
->>>>> Could it be that you either have to:
->>>>> - Add DM_I2C to tegra 3 SPL
->>>>> - Remove bootph-* from DT to remove the regulator node from SPL
->>>>> - /delete-property/ regulator-always-on; and /delete-property/
->>>>> regulator-boot-on; in -u-boot.dtsi to prevent the regulator from being
->>>>> enabled in SPL ?
->>>>>
->>>> Obviously NO, you propose nonsense. Same dts is used for both stages.
->>>
->>> DT source yes, DT blob likely no.
->>>
->>>> And I have to add hack-ish stuff just because you wanna introduce code
->>>> which causes known regressions.
->>>
->>> I am trying to understand what problem there is on tegra 3, but it is
->>> still not clear to me.
->>>
->>> Is the problem somehow related to PMICs (?) being probed in SPL (?)
->>> because they have regulators (?) which are marked as regulator-always-on
->>> ? If so, then this is correct behavior, and if this is not desired in
->>> SPL, then you can remove this property from SPL DT in -u-boot.dtsi using
->>> /delete-property/ .
->>>
->>> [...]
->>>
->>>> "We must not probe things as we go. There might be other
->>>> dependencies not yet bound. It may also take some time. This is not
->>>> following driver model design, sorry.
->>>>
->>>> So please think of a way to do this properly."
->>>
->>> What is this quote about ? Where is this from ?
->>
->> What is the problem with Tegra 3 and this patchset ?
->>
->> Can you please explain that so this patchset can move forward ?
->>
-> 
-> with your changes
-> 
-> U-Boot 2024.07-00696-ge217e2769db9-dirty (Aug 20 2024 - 09:55:29 +0300)
-> 
-> SoC: tegra114
-> Model: NVIDIA Tegra Note 7
-> Board: NVIDIA TegraTab
-> DRAM:  1 GiB
-> tegra_i2c_probe: called
-> i2c: controller bus 0 at 7000d000, speed 0: tegra_i2c_probe: exit
-> i2c_init_controller: speed=400000
-> i2c_init_controller: CLK_DIV_STD_FAST_MODE setting = 25
-> i2c_xfer: 2 messages
-> i2c_xfer: chip=0x58, len=0x1
-> i2c_write_data: chip=0x58, len=0x1
-> write_data:  0x37
-> pkt header 1 sent (0x10010)
-> pkt header 2 sent (0x0)
-> pkt header 3 sent (0x100b0)
-> pkt data sent (0x37)
-> tegra_i2c_write_data: Error (-1) !!!
-> i2c_write_data(): rc=-1
-> i2c_write: error sending
-> read error from device: bd26f8e0 register: 0x37!
 
-This seems like the PMIC driver (palmas?) is trying to read register 
-0x37 PGOOD and the I2C transfer fails . Why does the I2C transfer fail ?
+--35Ss66Vv7KzIGTns
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-You did mention something regarding I2C/PMIC driver probe timing, but it 
-seems the I2C driver and PMIC drivers probe roughly around the same time 
-in both pass and fail cases ?
+On Mon, Sep 09, 2024 at 04:11:37PM +0200, Jerome Forissier wrote:
+>=20
+>=20
+> On 9/6/24 19:54, Tom Rini wrote:
+> > On Fri, Sep 06, 2024 at 02:33:16PM +0200, Jerome Forissier wrote:
+> >=20
+> >> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
+> >> library for the network stack" [1]. The goal is to introduce the lwIP =
+TCP/IP
+> >> stack [2] [3] as an alternative to the current implementation in net/,
+> >> selectable with Kconfig, and ultimately keep only lwIP if possible. So=
+me
+> >> reasons for doing so are:
+> >> - Make the support of HTTPS in the wget command easier. Javier T. and
+> >> Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
+> >> so. With that it becomes possible to fetch and launch a distro install=
+er
+> >> such as Debian etc. using a secure, authenticated connection directly
+> >> from the U-Boot shell. Several use cases:
+> >>   * Authentication: prevent MITM attack (third party replacing the
+> >> binary with a different one)
+> >>   * Confidentiality: prevent third parties from grabbing a copy of the
+> >> image as it is being downloaded
+> >>   * Allow connection to servers that do not support plain HTTP anymore
+> >> (this is becoming more and more common on the Internet these days)
+> >> - Possibly benefit from additional features implemented in lwIP
+> >> - Less code to maintain in U-Boot
+> >=20
+> > On am64x-sk (am64x_evm_a53_defconfig) I'm seeing:
+> > =3D> tftpboot 80200000 EFI/arm64/grubaa64.efi
+> > Using ethernet@8000000port@1 device
+> > TFTP from server 192.168.116.10; our IP address is 192.168.116.23
+> > Filename 'EFI/arm64/grubaa64.efi'.
+> > Load address: 0x80200000
+> > Loading:
+> > ... silent hang ...
+> >=20
+> > Which I didn't see with v9. I can test other TI K3 platforms if it would
+> > help.
+>=20
+> Weird. I compared v9 and v10 (rebased onto the same commit as v9) but
+> I saw nothing obvious. Would you mind running the test again with these
+> traces added?
+>=20
+> diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
+> index 1948fc1c309..9bbfd8ee5a7 100644
+> --- a/net/lwip/net-lwip.c
+> +++ b/net/lwip/net-lwip.c
+> @@ -35,6 +35,7 @@ static err_t linkoutput(struct netif *netif, struct pbu=
+f *p)
+>  	void *pp =3D NULL;
+>  	int err;
+> =20
+> +	printf("[OUT|%d]", p->len);
+>  	if ((unsigned long)p->payload % PKTALIGN) {
+>  		/*
+>  		 * Some net drivers have strict alignment requirements and may
+> @@ -252,12 +253,16 @@ int net_lwip_rx(struct udevice *udev, struct netif =
+*netif)
+>  	int len;
+>  	int i;
+> =20
+> -	if (!eth_is_active(udev))
+> +	printf("[IN]");
+> +	if (!eth_is_active(udev)) {
+> +		printf("ERR: !eth_is_active()\n");
+>  		return -EINVAL;
+> +	}
+> =20
+>  	flags =3D ETH_RECV_CHECK_DEVICE;
+>  	for (i =3D 0; i < ETH_PACKETS_BATCH_RECV; i++) {
+>  		len =3D eth_get_ops(udev)->recv(udev, flags, &packet);
+> +		printf("[IN|%d]", len);
+>  		flags =3D 0;
+> =20
+>  		if (len > 0) {
 
-It seems the tegra3 DTs have most of the PMIC regulators marked as 
-boot-on and always-on , so enabling the regulators early is the right 
-thing to do.
+I have the log, if it helps. However, with debug prints added, now it
+completes. And I can see (as part of trimming down my test setup) that
+without the prints, some tests are OK. The much smaller "helloworld.efi"
+file and test is fine.
 
-[...]
+--=20
+Tom
 
-> SoC: tegra114
-> Model: NVIDIA Tegra Note 7
-> Board: NVIDIA TegraTab
-> DRAM:  1 GiB
-> tegra_i2c_probe: called
-> i2c: controller bus 0 at 7000d000, speed 0: tegra_i2c_probe: exit
-> i2c_init_controller: speed=400000
-> i2c_init_controller: CLK_DIV_STD_FAST_MODE setting = 25
-> pkt header 1 sent (0x10010)
-> pkt header 2 sent (0x0)
-> pkt header 3 sent (0xb0)
-> pkt data sent (0x0)
-> i2c_xfer: 2 messages
-> i2c_xfer: chip=0x58, len=0x1
-> i2c_write_data: chip=0x58, len=0x1
-> write_data:  0xfb
-This seems to be access to register 0xfb , i.e. something else ?
+--35Ss66Vv7KzIGTns
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbfIAwACgkQFHw5/5Y0
+tyz9OAwAllrb1Mmf9vEeH66ckexZA9iGHb4tqhrYm3mjKzJA8smH8GFRcXg7xHfT
+5aTcAbX7zq0OiXatGcGgUauSH1bYPb6FBsK/p0V7Nf3kxtCboce7RZ9CxQe/5O1h
+1O4tDIlmxXOHs74X18lkL0rdq7zTn7BDlDjIHcY6YdO1Vok2QifdLfTPLFpOnPMm
+9Fzp/ODQ+Yr5TZvhJpptSMmUMgoRrSK3YFi4Qb+W9iXvredfkpbgfZbTAoY64p9G
+WXev5CsOI1lndM3ZZvy0qJegJ115FicVTDzLjn6+18vkbl3cyetrksmcwmvMxw94
+CUw05QQemWoyM+6It+wOISIqbb8QyxOUhRGdMCBO4BwOsbl+sHyRpHKGC58WWMZY
+mI60fwh0kUu5ihL8qyn6cukvIZUYULRIUvDlcHtvopPHL9SeVPHhZ8GcoEg/tJro
+PmJ2srWet61llL2Nd7mQOiC9OSFMGrcaIEkrW1RDS3Wuzjgv7Nby41OobUqYrWwm
+V+fi0/HV
+=cdu1
+-----END PGP SIGNATURE-----
+
+--35Ss66Vv7KzIGTns--
