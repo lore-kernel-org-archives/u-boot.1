@@ -4,54 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90510ECE579
-	for <u-boot@archiver.kernel.org>; Mon,  9 Sep 2024 12:20:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD7E5ECE57A
+	for <u-boot@archiver.kernel.org>; Mon,  9 Sep 2024 12:21:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2A4988DD0;
-	Mon,  9 Sep 2024 14:20:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4166588DDC;
+	Mon,  9 Sep 2024 14:21:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C5BF88A9D; Mon,  9 Sep 2024 14:20:31 +0200 (CEST)
+ id 47B6F88DDE; Mon,  9 Sep 2024 14:21:30 +0200 (CEST)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D175D88DD7
- for <u-boot@lists.denx.de>; Mon,  9 Sep 2024 14:20:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1799788DD0
+ for <u-boot@lists.denx.de>; Mon,  9 Sep 2024 14:21:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ycliang@andestech.com
 Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 489CKHH4076300
+ by Atcsqr.andestech.com with ESMTPS id 489CLIGi076711
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Mon, 9 Sep 2024 20:20:17 +0800 (+08)
+ Mon, 9 Sep 2024 20:21:18 +0800 (+08)
  (envelope-from ycliang@andestech.com)
 Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 9 Sep
- 2024 20:20:18 +0800
-Date: Mon, 9 Sep 2024 20:20:16 +0800
+ 2024 20:21:19 +0800
+Date: Mon, 9 Sep 2024 20:21:17 +0800
 From: Leo Liang <ycliang@andestech.com>
 To: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
 CC: <rick@andestech.com>, <trini@konsulko.com>, <ryan_chen@aspeedtech.com>,
  <joel@jms.id.au>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH 3/8] riscv: u-boot-spl.lds: Remove _image_binary_end
- alignment
-Message-ID: <Zt7oAF_SWM0GxHaQ@swlinux02>
+Subject: Re: [PATCH 5/8] timer: Add AST2700 IBEX timer support
+Message-ID: <Zt7oPfQugUEFReZq@swlinux02>
 References: <20240819101704.1612317-1-chiawei_wang@aspeedtech.com>
- <20240819101704.1612317-4-chiawei_wang@aspeedtech.com>
+ <20240819101704.1612317-6-chiawei_wang@aspeedtech.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20240819101704.1612317-4-chiawei_wang@aspeedtech.com>
+In-Reply-To: <20240819101704.1612317-6-chiawei_wang@aspeedtech.com>
 User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
 X-Originating-IP: [10.0.15.183]
 X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
  ATCPCS34.andestech.com (10.0.1.134)
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 489CKHH4076300
+X-MAIL: Atcsqr.andestech.com 489CLIGi076711
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,20 +67,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Aug 19, 2024 at 06:16:59PM +0800, Chia-Wei Wang wrote:
-> The _image_binary_end symbol was aligned to the 8-bytes boundary.
-> However, the SPL device tree (u-boot-spl.dtb) is concatenated right
-> after the binary (u-boot-spl-nodtb.bin) wihtout the consideration of
-> the 8-bytes alignment restriction.
-> 
-> After then, for the SPL_SEPARATE_BSS case, fdtdec_setup() searching
-> for the DTB by _image_binary_end will return the "Missing DTB" error.
-> As the real DTB starting point does not align to a 8-bytes address
-> like _image_binary_end does.
+On Mon, Aug 19, 2024 at 06:17:01PM +0800, Chia-Wei Wang wrote:
+> Add the driver for the AST2700 Ibex timer, which uses CPU
+> cycles as the timer count running at 200MHz.
 > 
 > Signed-off-by: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
 > ---
->  arch/riscv/cpu/u-boot-spl.lds | 2 --
->  1 file changed, 2 deletions(-)
+>  drivers/timer/Kconfig          |  6 +++++
+>  drivers/timer/Makefile         |  1 +
+>  drivers/timer/ast_ibex_timer.c | 45 ++++++++++++++++++++++++++++++++++
+>  3 files changed, 52 insertions(+)
+>  create mode 100644 drivers/timer/ast_ibex_timer.c
 
 Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
