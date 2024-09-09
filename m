@@ -4,68 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 178EBECE57E
-	for <u-boot@archiver.kernel.org>; Mon,  9 Sep 2024 14:04:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7017ECE579
+	for <u-boot@archiver.kernel.org>; Mon,  9 Sep 2024 14:11:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42F4088DD8;
-	Mon,  9 Sep 2024 16:04:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 34E7088DD8;
+	Mon,  9 Sep 2024 16:11:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="qR8cPW6T";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="f/XdIKX1";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lnTHMSZ8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5242488CC9; Mon,  9 Sep 2024 16:04:45 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 49B3E88DFD; Mon,  9 Sep 2024 16:11:44 +0200 (CEST)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25B2988DE1
- for <u-boot@lists.denx.de>; Mon,  9 Sep 2024 16:04:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 16C9588DD8
+ for <u-boot@lists.denx.de>; Mon,  9 Sep 2024 16:11:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4X2T9N390jz9slB;
- Mon,  9 Sep 2024 16:04:40 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1725890680;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=71tlnADO8qMbsmY6CDoaJiXI92ZS/OM0knw5jCuQvfY=;
- b=qR8cPW6ThMYVMJ6+f9hxFemhhaMrDKZKdP7s/MQe8TiDnlCQV2e58+FH1lpzQr8tc0zn1I
- eDfeZpm+LdBRDOUJsEB7snF+6uKDDqXqAU+NzlHd7uaZPpGc8kpDim5VDdiGUhgVk2rh+E
- Egmr3nANzbP1Bpos3aLtl6IDA92C0uF4LfWEp+2j/D1pJfG+kQFANO/0L0Y/F2bi9twFl8
- ABO6MNjOEWh87/uIO69HWunCwui8FUvp/j5qMw0GFd4hXvt14nQ30Vrfhe5+TAdlYhfcU0
- JAE5Ya3nygsp/rxJUVtm+BHzYJiRmmKKgeDrIrO7fdpRjxMlrow25phBhQTT4g==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1725890678;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=71tlnADO8qMbsmY6CDoaJiXI92ZS/OM0knw5jCuQvfY=;
- b=f/XdIKX1oc83ZpFxSLqh+zUzWLg+HaiHVRGYvzJY4ctG4gnPoiAO5hOOsDyB4CR6r1pNCE
- SmaeIbBq36ozNqD75oqIh1eEARZDpXdeikP8ypCWttc0lBFNiRC1bXoAC0+TKvlmqJvl2C
- /spc/bVI0FAY+ltGqxBPTLlSLEgsQ+3vxhYERkHpKN/IipAnvt/BrSBZI/HlCOoImIt3Sa
- 7HG+LCzVR3IyomZM8E+3OH4fk34FKQjbMioLwKlYjZumKg0ZotIu7NWjLnl9vUBfZT1l7N
- mjk1WG3Wd2NGHgjchjNBIPb/QHY8Cr3jYeMgd1hZT5KJ4iUO5E7IdMRLx2OsWQ==
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PULL] u-boot-sh/master-spi-fixes
-Date: Mon,  9 Sep 2024 16:02:55 +0200
-Message-ID: <20240909140419.7713-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-52f01b8738dso2938439e87.1
+ for <u-boot@lists.denx.de>; Mon, 09 Sep 2024 07:11:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1725891100; x=1726495900; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=wiifKrrO9Ik/P3NzWvAd9ea/jSnF6t3lUHHux08a2WA=;
+ b=lnTHMSZ8obnnMnlKZ7VHeiY0CGlwahmN9/q46pGNKkzIaXyYCTHrguADf3z2WSD4Lz
+ 3/mkEUaFxGIeaJ8h2fQZ4jg1uw0erYvIeufVXcMl/Z/7avkiW1iJHt+NTl75PpN42/7P
+ xnIz1rPK0RbjAh05Fr5PIxfzaqZaO6Hfxdfhzlc3+sfUP4Za3Bz62jUyDiMfURvYV8dT
+ ZGSFoiBqj1MXU5jOrUoN1RQ/sIepIgq8SQ9luUUGMIMGnk7SwLxtoOzgz+jsuLSf3zRJ
+ wpWvGk4zOHEOSabTP0lrD0VmDDdr18rVWsQcpccFkH7YPvNOoY7QXxN3CDtDCdTKB+h7
+ lIoA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725891100; x=1726495900;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=wiifKrrO9Ik/P3NzWvAd9ea/jSnF6t3lUHHux08a2WA=;
+ b=mT2GZ0+uvmC+7ez+RwdMGQ93QwXWe/kTasMzORMDmf/ddyy4MfFBIe9fzFoYH3aFzu
+ gW2xPtRO5srjsgWd2z7ZM84QbvLg6zGrDGdjO5PZBOWLh96VOPAzV/+pOuuT5WmjeENm
+ jYXfyf8dlDruDu2h87J0VpszNonX/2/JLBV8LS/LmKhKOikWN5y4TEkNZuSZ/r8hFjbN
+ oiQiYOulWNIVQejiek6u9wWCh5v4phfxzNSfQI3HyHER2hgGvwL5idunlwLrNvsQew9v
+ xuTzcjn8IJ6myxNlcrmt8qmWF14CipqFtxgtL6maWECsyMAq7Bgj9r7X6erH0yKBVsaL
+ odJg==
+X-Gm-Message-State: AOJu0Yw2hCsCmK20mYwrKsJKlUKFvSA1MgG8+PTFZJz6AJmdu/0hzwmJ
+ QzvipMJDeojlwjxNr+U7uda/qPnf14GRD48Oe0Vlk8jMjCCOxlWygRLfhknhvBaMiHWGwr2q0Hx
+ utyaffw==
+X-Google-Smtp-Source: AGHT+IHA8JN0Z+VO9fcsyYTwoqAKXzuecgZ4fgAG76ljv5lht3+GC1ZJqvHfZn73+lInr0o6sCSkXg==
+X-Received: by 2002:a05:6512:3c98:b0:530:abec:9a1b with SMTP id
+ 2adb3069b0e04-536587aabdcmr8375431e87.13.1725891099957; 
+ Mon, 09 Sep 2024 07:11:39 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:659a:bce2:fc2e:d886?
+ ([2a01:e0a:3cb:7bb0:659a:bce2:fc2e:d886])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a8d25c80a24sm347587266b.137.2024.09.09.07.11.38
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 09 Sep 2024 07:11:39 -0700 (PDT)
+Message-ID: <4b66d045-5410-4991-96e5-1d9cd98cbdf9@linaro.org>
+Date: Mon, 9 Sep 2024 16:11:37 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 1gppuemdu4ozkrakub3mnwx9p93jfg9u
-X-MBO-RS-ID: ac13fe8d65cf1873f15
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v10 00/25] Introduce the lwIP network stack
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
+ Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
+ Anton Antonov <Anton.Antonov@arm.com>
+References: <cover.1725625913.git.jerome.forissier@linaro.org>
+ <20240906175433.GE3879073@bill-the-cat>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20240906175433.GE3879073@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,33 +99,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Last minute SPI fixes for R-Car to make the SPI NOR work on Gen4.
-Also one RPC HF fix for Gen4.
 
-The following changes since commit 1630ff26cc960439b5949b80cfc604a2c8aa47dd:
 
-  Merge https://gitlab.denx.de/u-boot/custodians/u-boot-marvell (2024-09-04 10:34:54 -0600)
+On 9/6/24 19:54, Tom Rini wrote:
+> On Fri, Sep 06, 2024 at 02:33:16PM +0200, Jerome Forissier wrote:
+> 
+>> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
+>> library for the network stack" [1]. The goal is to introduce the lwIP TCP/IP
+>> stack [2] [3] as an alternative to the current implementation in net/,
+>> selectable with Kconfig, and ultimately keep only lwIP if possible. Some
+>> reasons for doing so are:
+>> - Make the support of HTTPS in the wget command easier. Javier T. and
+>> Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
+>> so. With that it becomes possible to fetch and launch a distro installer
+>> such as Debian etc. using a secure, authenticated connection directly
+>> from the U-Boot shell. Several use cases:
+>>   * Authentication: prevent MITM attack (third party replacing the
+>> binary with a different one)
+>>   * Confidentiality: prevent third parties from grabbing a copy of the
+>> image as it is being downloaded
+>>   * Allow connection to servers that do not support plain HTTP anymore
+>> (this is becoming more and more common on the Internet these days)
+>> - Possibly benefit from additional features implemented in lwIP
+>> - Less code to maintain in U-Boot
+> 
+> On am64x-sk (am64x_evm_a53_defconfig) I'm seeing:
+> => tftpboot 80200000 EFI/arm64/grubaa64.efi
+> Using ethernet@8000000port@1 device
+> TFTP from server 192.168.116.10; our IP address is 192.168.116.23
+> Filename 'EFI/arm64/grubaa64.efi'.
+> Load address: 0x80200000
+> Loading:
+> ... silent hang ...
+> 
+> Which I didn't see with v9. I can test other TI K3 platforms if it would
+> help.
 
-are available in the Git repository at:
+Weird. I compared v9 and v10 (rebased onto the same commit as v9) but
+I saw nothing obvious. Would you mind running the test again with these
+traces added?
 
-  https://source.denx.de/u-boot/custodians/u-boot-sh.git master-spi-fixes
+diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
+index 1948fc1c309..9bbfd8ee5a7 100644
+--- a/net/lwip/net-lwip.c
++++ b/net/lwip/net-lwip.c
+@@ -35,6 +35,7 @@ static err_t linkoutput(struct netif *netif, struct pbuf *p)
+ 	void *pp = NULL;
+ 	int err;
+ 
++	printf("[OUT|%d]", p->len);
+ 	if ((unsigned long)p->payload % PKTALIGN) {
+ 		/*
+ 		 * Some net drivers have strict alignment requirements and may
+@@ -252,12 +253,16 @@ int net_lwip_rx(struct udevice *udev, struct netif *netif)
+ 	int len;
+ 	int i;
+ 
+-	if (!eth_is_active(udev))
++	printf("[IN]");
++	if (!eth_is_active(udev)) {
++		printf("ERR: !eth_is_active()\n");
+ 		return -EINVAL;
++	}
+ 
+ 	flags = ETH_RECV_CHECK_DEVICE;
+ 	for (i = 0; i < ETH_PACKETS_BATCH_RECV; i++) {
+ 		len = eth_get_ops(udev)->recv(udev, flags, &packet);
++		printf("[IN|%d]", len);
+ 		flags = 0;
+ 
+ 		if (len > 0) {
 
-for you to fetch changes up to 3faeb78378ea32922fbd00e9ddf675ce0aa526a3:
-
-  ARM: dts: renesas: Minimize R8A779G0 V4H RPC SPI DT node (2024-09-09 01:10:44 +0200)
-
-----------------------------------------------------------------
-Marek Vasut (7):
-      mtd: rpc: renesas: Add R-Car Gen4 DT compatible
-      mtd: spi: renesas: Write DREAR register once
-      mtd: spi: renesas: Write DRDMCR register once
-      mtd: spi: renesas: Configure DRDRENR register
-      mtd: spi: renesas: Configure RPC PHY timing registers
-      mtd: spi: renesas: Add R-Car Gen4 DT compatible
-      ARM: dts: renesas: Minimize R8A779G0 V4H RPC SPI DT node
-
- arch/arm/dts/r8a779g0-u-boot.dtsi            |  1 -
- arch/arm/dts/r8a779g0-white-hawk-u-boot.dtsi | 22 +---------------------
- drivers/mtd/renesas_rpc_hf.c                 |  1 +
- drivers/spi/renesas_rpc_spi.c                | 23 ++++++++++++++++++-----
- 4 files changed, 20 insertions(+), 27 deletions(-)
+Thanks,
+-- 
+Jerome
