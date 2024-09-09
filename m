@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B87F9ECE57E
-	for <u-boot@archiver.kernel.org>; Mon,  9 Sep 2024 08:17:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BAF5ECE57E
+	for <u-boot@archiver.kernel.org>; Mon,  9 Sep 2024 08:18:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 30E1888C85;
-	Mon,  9 Sep 2024 10:17:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AF77B88D7B;
+	Mon,  9 Sep 2024 10:18:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DBEF788D5A; Mon,  9 Sep 2024 10:17:44 +0200 (CEST)
+ id 2E81188D7E; Mon,  9 Sep 2024 10:18:36 +0200 (CEST)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D7ED788ABE
- for <u-boot@lists.denx.de>; Mon,  9 Sep 2024 10:17:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F3ADE88ABE
+ for <u-boot@lists.denx.de>; Mon,  9 Sep 2024 10:18:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ycliang@andestech.com
 Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 4898HR6s053246
+ by Atcsqr.andestech.com with ESMTPS id 4898IL4s054294
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Mon, 9 Sep 2024 16:17:27 +0800 (+08)
+ Mon, 9 Sep 2024 16:18:21 +0800 (+08)
  (envelope-from ycliang@andestech.com)
 Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 9 Sep
- 2024 16:17:28 +0800
-Date: Mon, 9 Sep 2024 16:17:25 +0800
+ 2024 16:18:22 +0800
+Date: Mon, 9 Sep 2024 16:18:19 +0800
 From: Leo Liang <ycliang@andestech.com>
 To: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
 CC: <rick@andestech.com>, <trini@konsulko.com>, <ryan_chen@aspeedtech.com>,
  <joel@jms.id.au>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH 1/8] riscv: Make A ISA extension selectable
-Message-ID: <Zt6vFU7-PEz2AXxh@swlinux02>
+Subject: Re: [PATCH 2/8] riscv: Make stack size shift configurable
+Message-ID: <Zt6vS4riP7CGP_aj@swlinux02>
 References: <20240819101704.1612317-1-chiawei_wang@aspeedtech.com>
- <20240819101704.1612317-2-chiawei_wang@aspeedtech.com>
+ <20240819101704.1612317-3-chiawei_wang@aspeedtech.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20240819101704.1612317-2-chiawei_wang@aspeedtech.com>
+In-Reply-To: <20240819101704.1612317-3-chiawei_wang@aspeedtech.com>
 User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
 X-Originating-IP: [10.0.15.183]
 X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
  ATCPCS34.andestech.com (10.0.1.134)
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 4898HR6s053246
+X-MAIL: Atcsqr.andestech.com 4898IL4s054294
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,13 +67,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Aug 19, 2024 at 06:16:57PM +0800, Chia-Wei Wang wrote:
-> Make the Atomic (A) ISA extension selectable. Thus CPUs such as
-> Ibex without the A extension can be supported.
+On Mon, Aug 19, 2024 at 06:16:58PM +0800, Chia-Wei Wang wrote:
+> Add prompt for STACK_SIZE_SHIFT to make it configurable.
+> The default value remains 14 as usual.
 > 
 > Signed-off-by: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
 > ---
->  arch/riscv/Kconfig | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
+>  arch/riscv/Kconfig | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
 Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
