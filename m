@@ -4,137 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 785B9ECE57B
-	for <u-boot@archiver.kernel.org>; Mon,  9 Sep 2024 09:45:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5472ECE579
+	for <u-boot@archiver.kernel.org>; Mon,  9 Sep 2024 10:12:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B1E4188CBD;
-	Mon,  9 Sep 2024 11:45:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id EA07E88D0C;
+	Mon,  9 Sep 2024 12:12:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="xDMoZ94v";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xTgM13qb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E00F188C8E; Mon,  9 Sep 2024 11:45:29 +0200 (CEST)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on20606.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2416::606])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id BEF0988D0C; Mon,  9 Sep 2024 12:12:56 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 594BF88D70
- for <u-boot@lists.denx.de>; Mon,  9 Sep 2024 11:45:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 62D3188D01
+ for <u-boot@lists.denx.de>; Mon,  9 Sep 2024 12:12:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Prasad.Kummari@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=a/PoIo/Slp3PAmAPs3tx0LrK+SFtj876gHpUuVx0LrDsRQQgAbLjjpLe9SvrhxByXQg3HLjFzgz1Ad4Z83w2i9p0hbXqLquCabZ+mRNjJBk10jnwSlKHzmcgWQcX0MZBLgtUn9bWiuIAx2C/QEgpjMM1ZoDOLyBRbciZKqTekiT2HWTEjyI5zOftYit2pvwZKJSDoU0a+r/Dq/qJC/dChwR7R/vDojyK/q3AeKaqV4H4UqytMXQLYS7lpyo+3bROjmVLJgHF+8Qbv4R5lAnEPP3TolJkcULqze2vg6W+LO6YfMHEjY762jGpzKk9v3tjzOM+J9fEMNmPVWHNkl32vg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=PGIcg0JQtgYm7I1LUdZDkxyBIdfk3PlFnVVR6rXkBNQ=;
- b=W540lLl5WyZW3o6FoAvNWQXrcydX2ziUcU9gQYGl9vTJZyEVhrnxXt/XbnRTCV3TIjf39QqoQYALnuD7tL7daZ2PLlWwbnXTtXMWosuoUyOSzFqoqNoX7cQ/WIahP1zcQPr7bKZmki0Qg8YzTyjz/0bdZt9FV+WcD6zZ8dB1Qzz9dd2g9rlqLsmZkJHIN25PJ2imjFuc2QfYEHNzK16au6uoxQQsY2TKCWnaBBGOMRWKL+DG6Y40J4l245Eg/x2Q1uKEG1pUpKTxJhIlPPccgkrMtcMqsDT2ZNujvXU0o6LWZh5XtEDQrSgxdE2OxYR92Hqw9BJPbw8415YyaFRadQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PGIcg0JQtgYm7I1LUdZDkxyBIdfk3PlFnVVR6rXkBNQ=;
- b=xDMoZ94v79SER1TKvNJpKJ11PJxEYvxeyun6+AXO/+SFAMz2hg6H4djNFKhD2Rxuw4ifB+GfSASeUnk24OdJ+2eBP8xQ4j3eCfSK9B44y0/IBZY4DTxtzp7DWf+8HncGn5/6rMtvlloPx55S7s4ndjhNHxNKIshJOLhwc02a0A4=
-Received: from CH5P223CA0016.NAMP223.PROD.OUTLOOK.COM (2603:10b6:610:1f3::21)
- by LV3PR12MB9258.namprd12.prod.outlook.com (2603:10b6:408:1bb::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.25; Mon, 9 Sep
- 2024 09:45:23 +0000
-Received: from CH2PEPF00000142.namprd02.prod.outlook.com
- (2603:10b6:610:1f3:cafe::7c) by CH5P223CA0016.outlook.office365.com
- (2603:10b6:610:1f3::21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7939.24 via Frontend
- Transport; Mon, 9 Sep 2024 09:45:23 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- CH2PEPF00000142.mail.protection.outlook.com (10.167.244.75) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7918.13 via Frontend Transport; Mon, 9 Sep 2024 09:45:22 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 9 Sep
- 2024 04:45:22 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 9 Sep
- 2024 04:45:21 -0500
-Received: from xhdkummari40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Mon, 9 Sep 2024 04:45:18 -0500
-From: Prasad Kummari <prasad.kummari@amd.com>
-To: <u-boot@lists.denx.de>, <git@amd.com>
-CC: <michal.simek@amd.com>, <venkatesh.abbarapu@amd.com>,
- <padmarao.begari@amd.com>, <git@xilinx.com>, <jagan@amarulasolutions.com>,
- <n-francis@ti.com>, <d-gole@ti.com>, Prasad Kummari <prasad.kummari@amd.com>
-Subject: [PATCH v2] cmd: sf: prevent overwriting the reserved memory
-Date: Mon, 9 Sep 2024 15:15:09 +0530
-Message-ID: <20240909094509.1481038-1-prasad.kummari@amd.com>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5c3c30e663fso4688699a12.1
+ for <u-boot@lists.denx.de>; Mon, 09 Sep 2024 03:12:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1725876774; x=1726481574; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=dDnq8am6FoD2oWBGee/4fTlvaATRICZn4HZNvt5S5C8=;
+ b=xTgM13qbR6XoNxtBysBmhcyHoqiEQMANAOi+HMMHViSZVVUxkabk/fXN63dEkc3mtu
+ AEHs1vtb9TVZBW8/PC0b8w69t0ySm9CKxvM7K2SVNCUQRkyuiPXJnoIEVpPxvINzGueR
+ 2m3Vb3+ihl6sowqZK4aB3c5xHiXJ4OMxFoHkZ2jyIyDXTjgTj6VZ5dOs88ErXsc3+yJQ
+ r8/E6OHiSdD4ERjmoZ5EHa1xSVZmllg2RUAg0l2j5oTAdizlE/hka4Vn9XEeT9YcCPbE
+ uyUEKNRhhmOK+Q7GPAkBlS2NgGUI+TjIA6SfpuC/v2dTsxxXCd8zB5OHqj66CIFeYqoz
+ uXpw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725876774; x=1726481574;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=dDnq8am6FoD2oWBGee/4fTlvaATRICZn4HZNvt5S5C8=;
+ b=sMpLF2fMsuh+O3NZKMD5d/18oQXIZQAsVe4H2kn33KeALf8DVpdPZAb69N0E+tiHYc
+ 3PvV4wDhrn4cznQZZhoe9qyAyxC5CzDQo5T9h39KKowOZ6/pP4bEynYXBI2d5A5FJsR4
+ Cn/WGJ9DGlzIa3iFVbCDoCcPNCKvYRtT7mCwCcEDp6Cher9XfPdhPQRMGoL58vfPSQd4
+ C5TOrjYT1DrSlmkJLqKzqri42J7Qnj6vSK6ZTlHRChOG36LXBtPrP5LQ1svh6IWTFQz3
+ MPrrB42Rg0NHVsO6i2DArfA+Q41ejQoHF/GSLIRjFAEmiXbA0jlLIEbzI6T6fgYEBhLJ
+ 7XcQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX5gzLqkywEQ3A/twlMoMPJrKfxnP75Q6VLQ2ih87hDWGSs5P4AWOBGfb24cpfC34tZjuWWd2k=@lists.denx.de
+X-Gm-Message-State: AOJu0YxGblGTudNVymTPgFbQIhRUM130yOJh6VrHXOa16K7TFX5qGKRe
+ DT/8GxKW+SGQoIpuLIxbqd5AbyTHHD4xVsAHeb/8SYF+8JCbefpUj791iWXKubg=
+X-Google-Smtp-Source: AGHT+IEYmR1+P2LPrT0ZZv7gYLhNFaRUkfKtIazkdJ6cH3enNdZAghJyvEWkfLYUP12KNYTEfFJPEQ==
+X-Received: by 2002:a17:907:a02:b0:a7a:bcbc:f7e1 with SMTP id
+ a640c23a62f3a-a8a885f4462mr965733866b.15.1725876773698; 
+ Mon, 09 Sep 2024 03:12:53 -0700 (PDT)
+Received: from lion.caleb.rex.connolly.tech ([2a02:8109:aa0d:be00::8db])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a8d25c72727sm317441466b.107.2024.09.09.03.12.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Sep 2024 03:12:53 -0700 (PDT)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+To: Tom Rini <trini@konsulko.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
+ u-boot-qcom@lists.denx.de, Caleb Connolly <caleb.connolly@linaro.org>
+Subject: [PULL] Please pull qcom/qcom-next
+Date: Mon,  9 Sep 2024 12:04:46 +0200
+Message-ID: <20240909101245.1302713-1-caleb.connolly@linaro.org>
+X-Mailer: git-send-email 2.46.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB05.amd.com: prasad.kummari@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PEPF00000142:EE_|LV3PR12MB9258:EE_
-X-MS-Office365-Filtering-Correlation-Id: caa48c75-8e99-4ef1-41b3-08dcd0b41fef
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|36860700013|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?669iDqPSQwBIhTpMf3fUjloP6v8at7x44t0u0X6ZJ2KjFQAsjOPriJTWznz7?=
- =?us-ascii?Q?ewHLk/Hobtqm/FhsOm56fLU3HZiXh+DacSLIYo2qwnro7Lzu5qEQbLk8Nbsi?=
- =?us-ascii?Q?1Z6mM1+AtE4Dby3Kp06p6hIz7a1o2N5tvNEuYE9qY8RWgB2S22VZ6Yji7PT+?=
- =?us-ascii?Q?39+tgg5PFqXk9d4GB8gvADLI9WFTTC1t1vrQbPUPKqMDqJ2lCnzqCMGsoHP+?=
- =?us-ascii?Q?S4QwPSvaLD45rk0NsHknCbSjhrWcjZ5U/O5W1UssCT+1/AAthQ37NQi5IyYK?=
- =?us-ascii?Q?CRBVpcxiNTgtZ0FhX7loL9ZmriOSnC/aupzXDHiO6zBA6ihftS3l36J+cC/e?=
- =?us-ascii?Q?XDJH7ToEu7CrIr0t0bdpBWrxLLeiHNcW8y8YFw6Be2X56CSrBmPJjlKQDqj6?=
- =?us-ascii?Q?J7AguZcyZ4BYKpFLN3UT58Ml+IvBZ+KKmjozJrW3knia/YKAJwZDbIf71/z4?=
- =?us-ascii?Q?HurFSyPRW5k0DeMPsvWV9Gnf5gWhOrevK0M/eOQDAyNhZDMwf5ZR1KO7THir?=
- =?us-ascii?Q?IYSih7IM57lHVn4lrxNiHjohR64isJG15AfS3ACHqnDB0wvSZ+Cj+Lgp66rh?=
- =?us-ascii?Q?22uI17zv3VKAaZe/U506Y5b15xvYDj2U1gM0DhcDW4eXFP23j4oQZy9r+lqt?=
- =?us-ascii?Q?JxjlJo9TaEqHQhRSr9DGPnOta7UHNNdmlSdDIMEYSxdgzb9m1tstAMDzJfE8?=
- =?us-ascii?Q?GqyGJApyWlTLGgYs9+IYnmgLjOe7ZuE1a+dsTNZy7ayMziC2DsQaCJ+UvkY7?=
- =?us-ascii?Q?QV2tdnLhz4+AGE0LCO6U4MTMEu1buU365B/6ftbnoLGRd+ozRt1lHrA8SdxU?=
- =?us-ascii?Q?ZDJaZ4RsZvPpqAGTodcAhkkd32QGkLFV05HD8wSI/Gy8PrqYm0nsMcSMUImj?=
- =?us-ascii?Q?/Qq+NLpEkuIZ2lpuV6Gun6CyVv11wPqN3X531MaxeUkM8K6469/grUVoJhQh?=
- =?us-ascii?Q?ulWSKOmxi5G0nXsml9OpRCgagdkj3Myga7sH4HSjVP3xpWwg+4CyibEa2heN?=
- =?us-ascii?Q?Rf+tPppT67/5Vrbfb+yx4H9B0E8xdogsBKNsU0wBtxf/BwLb4zyyAgc3IOEs?=
- =?us-ascii?Q?VUDhH1/L2ogQi0w8F012carFmIa9SFkvssTuDxjCEi+ioh4uDvA9Bjdi2QaE?=
- =?us-ascii?Q?UHvfY0umEoqQQEpFoPwEE4ZWr3gzFgHeEUUNGeHxoavQGt5PxgJfUo5hVc5d?=
- =?us-ascii?Q?stuFIbAcW9b3uVdNBtekLhauhxrs7YR3Px9ZONPgd8LcvTpavEAh4WLfUyc8?=
- =?us-ascii?Q?lOOYx7ymJdCOLrl8AaUsudGtETZ1HPj6CpD4rIXqVVUAdY/BtHkCxJI3YV/f?=
- =?us-ascii?Q?/Dv/1FuH1G2kYyUhMvREAJyoGQPkCPcdmbal6AxFy/I3e4HoJX+Ifb2BQSOl?=
- =?us-ascii?Q?e70A04NQoIitzrsyo2y20NKMc2rRfm729bnZEq6QGtNrxMWveYzHlvHyiJnd?=
- =?us-ascii?Q?0N+h2LmKu8P3Hne5IaZLsb14TAPq9EeM?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(36860700013)(82310400026); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Sep 2024 09:45:22.7450 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: caa48c75-8e99-4ef1-41b3-08dcd0b41fef
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH2PEPF00000142.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR12MB9258
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -151,106 +92,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Added LMB API to prevent SF command from overwriting reserved
-memory areas. The current SPI code does not use LMB APIs for
-loading data into memory addresses. To resolve this, LMB APIs
-were added to check the load address of an SF command and ensure it
-does not overwrite reserved memory addresses. Similar checks are
-used in TFTP, serial load, and boot code to prevent overwriting
-reserved memory.
+Hi Tom,
 
-Signed-off-by: Prasad Kummari <prasad.kummari@amd.com>
----
+Various improvements to Snapdragon support:
 
-Changes in V2:
-- Rebased the code changes on top of the next branch. 
+* Bumped up the pagetable size to handle newer SoCs with much more RAM
+* Made memory map parsing more robust, fixing chainloading on SM8550/SM8650
+* Populate fdt_addr_r with U-Boot's FDT by default, and set $loadaddr to prevent
+  crashes with some commands which expect it
+* Added initial support for SC7280/QCM6490 and the new RB3 Gen 2 board
+* Add debug config fragments to enable debug UART on some SoCs.
+* Enable RPMh regulators on SM8550/SM8650
+* Map the cmd-db memory explicitly since it may not be in the memory map
 
-UT:
-Tested on Versal NET board
+CI: https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/pipelines/22255
 
-Versal NET> sf read 0xf000000 0x0 0x100                                         
-device 0 offset 0x0, size 0x100                                                 
-ERROR: trying to overwrite reserved memory...
-                                   
-Versal NET> sf read 0x79ea9000 0x 0x100                                         
-device 0 offset 0x0, size 0x100                                                 
-ERROR: trying to overwrite reserved memory...       
-                            
-Versal NET> sf write 0x79ea9000 0x 0x100                                        
-device 0 offset 0x0, size 0x100                                                 
-ERROR: trying to overwrite reserved memory...
+Thanks,
 
-Versal NET> sf write 0x79eaf000 0x20000 0x100 
-device 0 offset 0x20000, size 0x100
-ERROR: trying to overwrite reserved memory...
+The following changes since commit cbaf53fdf12534be50075fdd84105c682955424f:
 
+  mmc: consider cd-gpios in Synopsys DesignWare driver (2024-09-05 19:08:14 -0600)
 
- cmd/sf.c | 38 +++++++++++++++++++++++++++++++++++++-
- 1 file changed, 37 insertions(+), 1 deletion(-)
+are available in the Git repository at:
 
-diff --git a/cmd/sf.c b/cmd/sf.c
-index f43a2e08b3..d2ce1af8a0 100644
---- a/cmd/sf.c
-+++ b/cmd/sf.c
-@@ -10,6 +10,7 @@
- #include <div64.h>
- #include <dm.h>
- #include <log.h>
-+#include <lmb.h>
- #include <malloc.h>
- #include <mapmem.h>
- #include <spi.h>
-@@ -272,6 +273,35 @@ static int spi_flash_update(struct spi_flash *flash, u32 offset,
- 	return 0;
- }
- 
-+#ifdef CONFIG_LMB
-+static int do_spi_read_lmb_check(ulong start_addr, loff_t len)
-+{
-+	struct lmb lmb;
-+	phys_size_t max_size;
-+	ulong end_addr;
-+
-+	lmb_init_and_reserve(&lmb, gd->bd, (void *)gd->fdt_blob);
-+	lmb_dump_all(&lmb);
-+
-+	max_size = lmb_get_free_size(&lmb, start_addr);
-+	if (!max_size) {
-+		printf("ERROR: trying to overwrite reserved memory...\n");
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	end_addr = start_addr + max_size;
-+	if (!end_addr)
-+		end_addr = ULONG_MAX;
-+
-+	if ((start_addr + len) > end_addr) {
-+		printf("ERROR: trying to overwrite reserved memory...\n");
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	return 0;
-+}
-+#endif
-+
- static int do_spi_flash_read_write(int argc, char *const argv[])
- {
- 	unsigned long addr;
-@@ -315,7 +345,13 @@ static int do_spi_flash_read_write(int argc, char *const argv[])
- 		ret = spi_flash_update(flash, offset, len, buf);
- 	} else if (strncmp(argv[0], "read", 4) == 0 ||
- 			strncmp(argv[0], "write", 5) == 0) {
--		int read;
-+		int read, ret;
-+
-+#ifdef CONFIG_LMB
-+		ret = do_spi_read_lmb_check(addr, len);
-+		if (ret)
-+			return ret;
-+#endif
- 
- 		read = strncmp(argv[0], "read", 4) == 0;
- 		if (read)
--- 
-2.25.1
+  git@source.denx.de:/u-boot/custodians/u-boot-snapdragon.git HEAD
 
+for you to fetch changes up to 41864bb2b66d0c68e6b2f6ae0c70d3c239ad258d:
+
+  board/qualcomm: add debug config fragments for some SoCs (2024-09-06 11:59:51 +0200)
+
+----------------------------------------------------------------
+Caleb Connolly (18):
+      mach-snapdragon: refactor board_fdt_blob_setup()
+      mach-snapdragon: parse memory ourselves
+      mach-snapdragon: set serial number
+      mach-snapdragon: allocate fastboot buffer dynamically
+      mach-snapdragon: populate fallback FDT
+      mach-snapdragon: set loadaddr
+      armv8: mmu: add a way to map additional regions
+      soc: qcom: cmd-db: use strncmp() instead of memcmp()
+      soc: qcom: cmd-db: map cmd-db region
+      qcom_defconfig: bump CONFIG_NR_DRAM_BANKS
+      clk/qcom: add initial clock driver for sc7280
+      dts: qcs6490-rb3gen2-u-boot: add override dtsi
+      dts: qcs6490-rb3gen2-u-boot: USB host mode
+      iommu: qcom-smmu: add sc7280-smmu-500 compatible
+      qcom_defconfig: enable SC7280 clocks
+      configs: add qcm6490_defconfig
+      doc: board/qualcomm: document rb3gen2 building/flashing
+      board/qualcomm: add debug config fragments for some SoCs
+
+Neil Armstrong (3):
+      mach-snapdragon: use 1MiB for get_page_table_size()
+      soc: qcom: rpmh-rsc: add back __tcs_set_trigger() for SM8550/SM8650
+      regulator: qcom-rpmh-regulator: add support for PM8550 & related regulators
+
+ MAINTAINERS                                   |   1 +
+ arch/arm/cpu/armv8/cache_v8.c                 |  25 ++++
+ arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi      |  28 ++++
+ arch/arm/include/asm/system.h                 |  10 ++
+ arch/arm/mach-snapdragon/board.c              | 204 ++++++++++++++++++++++----
+ board/qualcomm/debug-sdm845.config            |   5 +
+ board/qualcomm/debug-sm6115.config            |   5 +
+ board/qualcomm/debug-sm8250.config            |   5 +
+ configs/qcm6490_defconfig                     |  21 +++
+ configs/qcom_defconfig                        |   2 +
+ doc/board/qualcomm/index.rst                  |   1 +
+ doc/board/qualcomm/rb3gen2.rst                |  53 +++++++
+ drivers/clk/qcom/Kconfig                      |   8 +
+ drivers/clk/qcom/Makefile                     |   1 +
+ drivers/clk/qcom/clock-qcom.h                 |   1 +
+ drivers/clk/qcom/clock-sc7280.c               | 132 +++++++++++++++++
+ drivers/iommu/qcom-hyp-smmu.c                 |   1 +
+ drivers/power/regulator/qcom-rpmh-regulator.c | 136 +++++++++++++++++
+ drivers/soc/qcom/cmd-db.c                     |  11 +-
+ drivers/soc/qcom/rpmh-rsc.c                   |  43 ++++++
+ 20 files changed, 664 insertions(+), 29 deletions(-)
+ create mode 100644 arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi
+ create mode 100644 board/qualcomm/debug-sdm845.config
+ create mode 100644 board/qualcomm/debug-sm6115.config
+ create mode 100644 board/qualcomm/debug-sm8250.config
+ create mode 100644 configs/qcm6490_defconfig
+ create mode 100644 doc/board/qualcomm/rb3gen2.rst
+ create mode 100644 drivers/clk/qcom/clock-sc7280.c
