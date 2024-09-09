@@ -4,81 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58921ECE579
-	for <u-boot@archiver.kernel.org>; Mon,  9 Sep 2024 13:23:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B4B5ECE57A
+	for <u-boot@archiver.kernel.org>; Mon,  9 Sep 2024 13:37:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4806788D83;
-	Mon,  9 Sep 2024 15:23:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B1F1088DC6;
+	Mon,  9 Sep 2024 15:37:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wpbzlxNn";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NgRXsuiV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 191BF88D1F; Mon,  9 Sep 2024 15:23:33 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id A889388D83; Mon,  9 Sep 2024 15:37:51 +0200 (CEST)
+Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
+ [IPv6:2607:f8b0:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21E9E88DEE
- for <u-boot@lists.denx.de>; Mon,  9 Sep 2024 15:23:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 313BC88DC6
+ for <u-boot@lists.denx.de>; Mon,  9 Sep 2024 15:37:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-42cb8dac900so7802165e9.3
- for <u-boot@lists.denx.de>; Mon, 09 Sep 2024 06:23:31 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-718e285544fso1452556b3a.1
+ for <u-boot@lists.denx.de>; Mon, 09 Sep 2024 06:37:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725888208; x=1726493008; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=K7xMBYaYE2Ibn/0VK+ds2g8ad9Z8O8TKHvpQ7/fYy3g=;
- b=wpbzlxNnJ4O+/K3XL+4nvkBR4nUlWYHccKUMuEeln6Lj2NFzr4wWhKUFBA5gRl7RQ+
- heuMMEG8dnGy/QCF3Jm4YJ6J8k+HsdDfbTRDBklgodee4EpYb+MLqR3K+3vZWvOtr89v
- fxXPW1jtnAV+q08n9ioJw9aINdVtdZYdgd35qjnftgDY9TglqjCDAFRC3/UBxubWTgox
- S0nDCe2oh9T5AkycAOX/5uqvUiQpUYceX3auFSguYdCGHusGphDvUQZyG0JHHzD9VtVG
- sD2IFA4jCVW0ctNeq2/8zwE4tE+cisfQRnQoriimdLuiE4wOTuvMy1IYoQR3DzuzS4Lq
- laGw==
+ d=linaro.org; s=google; t=1725889066; x=1726493866; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=bKTfB+KRMtJiEKt1TbpZFagGrTt37Ehia305pP5y/pY=;
+ b=NgRXsuiVpaa2B40Jtwnz3if/oRIPY5gmn9Pv0jNfAJhLSQlIE7Q/ml0XRyAGPbhwmt
+ 4YKCHyR5DEkIT+BBacCaO8kIAPpNiu9ZYFlsG3EMpMoz7LJHXdzx834/+6jT9A5ZXcnL
+ jDfLAKKFPqr0d/YQ6GaR2g7Ps6yf4pHkQr/OijDfMCoeDczfTlNck2OyhvllIn+v9/0L
+ u0nYBOxhHpji3giMj5CUWlmmeImsDXKD46tD/l0NgS1eUqmI8x9lZ6MphMVFVLSkozJb
+ 31fl85+fXg9Ha6+85ED0d/GLK2/puh4/aJ+el/bmKn4BB/BX1n780XuklyB8/xliz2DX
+ RRLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725888208; x=1726493008;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1725889066; x=1726493866;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=K7xMBYaYE2Ibn/0VK+ds2g8ad9Z8O8TKHvpQ7/fYy3g=;
- b=rP5/yQjEajGyyDED7clL2Em3JBXf9fVd5sqFHOJVCmhDf8sbgZqjtwhf8PhtjXDsij
- 06SLByGAYfg3rY+zagSwM11suZm1VE3/nCUgxQNWO858XclVk79/yfADCiNsfVk2Ty1g
- s8BPoFcPD3rhVT5DhouwZ6uZMax82mjCXnDSpCciuyO93IKj5kEgpj13Y4TBJhwgBwSj
- iQZsykTZp0mqV+slFACe5U6mpbhqofm02JsohfnqcqNJ3mICd1v+gfHL6AN4Mas/Fni3
- gowEM9jmKQjMdgiTtlJJZWzO9C0l/t7W4hMP4g+L6QpOBlwbyghwK+ql4C2sdIq0CVCW
- S5Eg==
-X-Gm-Message-State: AOJu0YxjyovikcR9K0N2bCTxiaEHf/lVVYKBgyMKQf6Rz1AXlx0UDVvR
- 87AqZP/slaw6oqRF9uweE137ex3E0wgU24kdMu5UB6pKvlSiwU4hP9gfddRaYccaWAsUvXKI0xe
- HQ5XZqg==
-X-Google-Smtp-Source: AGHT+IEepLAavy+YAdIKgmT3nBHc9Fmm3o+0Hgm0MNhlS914qzbTbP9VNCYsP9+JC0U8yv8ek4ClBw==
-X-Received: by 2002:a05:6000:542:b0:374:c57b:a90f with SMTP id
- ffacd0b85a97d-37889659729mr6399292f8f.42.1725888207546; 
- Mon, 09 Sep 2024 06:23:27 -0700 (PDT)
-Received: from builder.. ([2a01:e0a:3cb:7bb0:4bd0:b9bf:1fda:1d0d])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37895649bafsm6112189f8f.7.2024.09.09.06.23.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Sep 2024 06:23:27 -0700 (PDT)
-From: Jerome Forissier <jerome.forissier@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH] spl: ram: fix build warning when neither RAM_DEVICE nor DFU
- are enabled
-Date: Mon,  9 Sep 2024 15:22:52 +0200
-Message-Id: <20240909132252.3975017-1-jerome.forissier@linaro.org>
-X-Mailer: git-send-email 2.40.1
+ bh=bKTfB+KRMtJiEKt1TbpZFagGrTt37Ehia305pP5y/pY=;
+ b=e+FzGm5LSCvdfMeqmqQbVHJ09BpSiia+6uG2KWkDh4OTjKmSllJqr6y+I3n6uz6e0k
+ TLPb+cfBVE8ly7b322WYNr5GOvJgFpeyl1c9tgpGrR+A3Led/mXEdUMhCgk0WXxHblWs
+ 6Z9FmxUSu3tRmOpDwtukrcTe6HskWv4HGwc5Wvrq9Jk0pClbRbBXVA/Lvt1sNJUJFY0a
+ WQNbphtfmGNbOWhEEESX5tUC+1YCSdbRSDjiMe/dPy7d1qrSIZbb9YFhosomYj0n3ryI
+ s9N0YUZ+TKu65ftwlmjFFHX80K4Scfgn0xfD9HuJ/QwpfF/bXxAgDB6PP9VfvKcMe05+
+ 01og==
+X-Gm-Message-State: AOJu0YzL7m93KTEsi0Z12nvm/e4ZEOupWIRWkH0v8phYJGF1WjG6+7OJ
+ kBAseav0fy+P/jUtbXFqSc5CqeQB7rviXuxus8lvtZq9t8bRXQjVxZDfECcu1+yMObHGkYvbZcj
+ whI/8EYq3H/4A425pI7q4JLHc7eINJPETtb1PYQ==
+X-Google-Smtp-Source: AGHT+IGaD/A2SjeyCuWIXxrUHNTpx+6WYTAtRzPQuaQuJr2monLTAAJKAQRPou6pAL22B7rEb3uThWeSWpmo4BH+Qew=
+X-Received: by 2002:a05:6a21:3994:b0:1cf:47ef:190f with SMTP id
+ adf61e73a8af0-1cf47ef1af2mr1784288637.1.1725889066596; Mon, 09 Sep 2024
+ 06:37:46 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20240816154658.1866186-1-raymond.mao@linaro.org>
+ <b692118e-7a53-438d-afa6-7109d4d61167@linaro.org>
+In-Reply-To: <b692118e-7a53-438d-afa6-7109d4d61167@linaro.org>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Mon, 9 Sep 2024 09:37:36 -0400
+Message-ID: <CAEfUkULS3VG+jccC+XkmkAb2QPJ2-VRZmmQ4X+D9MuWsPAeyZg@mail.gmail.com>
+Subject: Re: [PATCH 00/10] SMBIOS improvements
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Bin Meng <bmeng@tinylab.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Stefan Roese <sr@denx.de>, 
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ Wan Yee Lau <wan.yee.lau@intel.com>, Alexander Gendin <agendin@matrox.com>, 
+ Michal Simek <michal.simek@amd.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Max Krummenacher <max.krummenacher@toradex.com>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Peter Robinson <pbrobinson@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,38 +102,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fixes the following warning:
+Hi Caleb,
 
-common/spl/spl_ram.c:19:14: warning: ‘spl_ram_load_read’ defined but not used [-Wunused-function]
-   19 | static ulong spl_ram_load_read(struct spl_load_info *load, ulong sector,
-      |              ^~~~~~~~~~~~~~~~~
+On Mon, 19 Aug 2024 at 07:56, Caleb Connolly <caleb.connolly@linaro.org>
+wrote:
 
-Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
----
- common/spl/spl_ram.c | 3 +++
- 1 file changed, 3 insertions(+)
+> Hi Raymond,
+>
+> I haven't managed to root cause it yet, but this series seems to make
+> the RB3 Gen 2 Qualcomm board hang during relocation.
+>
+> How early post-relocation does any code here get called?
+>
+> Does it have permission to access MIDR_EL1, MPIDR_EL1 or CLIDR_EL1?
+I don't have a Qualcomm board in hand but can you try if the hang still
+appears if we comment out the reg access lines in patch #5 and #8?
+I guess just about 3 lines.
 
-diff --git a/common/spl/spl_ram.c b/common/spl/spl_ram.c
-index 71b7a8374bb..1a5874c3949 100644
---- a/common/spl/spl_ram.c
-+++ b/common/spl/spl_ram.c
-@@ -16,6 +16,7 @@
- #include <spl.h>
- #include <linux/libfdt.h>
- 
-+#if CONFIG_IS_ENABLED(RAM_DEVICE) || CONFIG_IS_ENABLED(DFU)
- static ulong spl_ram_load_read(struct spl_load_info *load, ulong sector,
- 			       ulong count, void *buf)
- {
-@@ -96,6 +97,8 @@ static int spl_ram_load_image(struct spl_image_info *spl_image,
- 
- 	return ret;
- }
-+#endif
-+
- #if CONFIG_IS_ENABLED(RAM_DEVICE)
- SPL_LOAD_IMAGE_METHOD("RAM", 0, BOOT_DEVICE_RAM, spl_ram_load_image);
- #endif
--- 
-2.40.1
+[snip]
 
+Regards,
+Raymond
