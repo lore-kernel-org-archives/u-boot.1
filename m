@@ -4,70 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF1B9ECE577
-	for <u-boot@archiver.kernel.org>; Mon,  9 Sep 2024 19:11:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0992ECE588
+	for <u-boot@archiver.kernel.org>; Mon,  9 Sep 2024 19:30:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2E7C88DC6;
-	Mon,  9 Sep 2024 21:11:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E7BAB88D08;
+	Mon,  9 Sep 2024 21:30:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VshYTs2D";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XbmnbQPj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94A9388E15; Mon,  9 Sep 2024 21:11:38 +0200 (CEST)
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [IPv6:2a00:1450:4864:20::232])
+ id BD9FE88E13; Mon,  9 Sep 2024 21:30:15 +0200 (CEST)
+Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
+ [IPv6:2607:f8b0:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF99588D08
- for <u-boot@lists.denx.de>; Mon,  9 Sep 2024 21:11:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A310D889C9
+ for <u-boot@lists.denx.de>; Mon,  9 Sep 2024 21:30:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-2f7529203ddso32138721fa.0
- for <u-boot@lists.denx.de>; Mon, 09 Sep 2024 12:11:36 -0700 (PDT)
+Received: by mail-pg1-x529.google.com with SMTP id
+ 41be03b00d2f7-7ae3d7222d4so3944466a12.3
+ for <u-boot@lists.denx.de>; Mon, 09 Sep 2024 12:30:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1725909096; x=1726513896; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=haTJCk00ZcLSdRWdOwNLw8LpXGMRtGcJ5YzgUpk21u0=;
- b=VshYTs2DFBdfMwk0hyz08k3VFLoUhUPFG2TAyvmSI/leU6qlK/+HswZygg4U0CLprA
- Y7IRfpUdaKXyH+uxgnCdHui9ZDhmHBF2QGx5wGnYhiz38zfM2mTwI9Ap12tM2H5EEjxg
- RECeD4h7gai4q6/fLNBkUKXE7+i8bLyCqUJ8YN1+v7Lyri/7IDheOO4zz6JtLSVJ5S6k
- 6+/BAA/Z2gVxX+gVRN6wXpC0KM2MF5berUEHGzqdWO8pvtZtloruwwCDOsEQuU0mF6Aw
- vpoORmWjZywdN5jY5XTH/IQG67j69ioQBPCCtTpiTstMNlDjHwdUjT5RCCZRaBTjRWYy
- VSbg==
+ d=gmail.com; s=20230601; t=1725910212; x=1726515012; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=vfsel9a3yBCySK/wqYJDE9QCIVci9yyD86Xf0x9DJvE=;
+ b=XbmnbQPj9Yusqp1LmQHhmODbUlVzCpwwBUZyWOeJ/AFRBjFxjA1JPX2S5OrI60S5Go
+ NH5cluvWbcWDJLwNHFmKwFg3oN/u0mkwR4KYS1WO/PNUfnFmE1OKbCCXsyKbU5VTGbKD
+ Qejl03l8asvqPNUl3K+P8QiojdnBGvmGaY8YWmB5H6qQCgjc1HF8mrB6gViQPDpSDaCV
+ qIQjkofE/geuvWd17QOoRvMQ9FXWBOCGk+LoenF7pjAsjeZDB3qRgm83iPOnKfVybqES
+ 8sUEcSm+N8MIdSjYJ0G/SagNbamkArnWi3GmtMEKLMQE0YK6CBOvQe7su8SgK5oMHkpp
+ 39RA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725909096; x=1726513896;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=haTJCk00ZcLSdRWdOwNLw8LpXGMRtGcJ5YzgUpk21u0=;
- b=kogjyKl33cG6vmQecMROcAkA8aJEpj08Qr3AN9/CgWiPsd6AyC8G/mswdxKQGn2ScL
- 5pdsT5N363RMCrPCQQgelIx0D9454rirATTyHMdEtnnBEV8Fpzq83Xyp64jbjVqKt5dI
- 4wfeq7CTG2lRNOJAYbtQolE9VUL/23lVSsn6WibHjJC9jOr2a5IThn/2v+Kiu7Ih5hGd
- pxmMJ8X/dQPHbg2vsnE1zfmMj3WFum+h/o1xSk+7wI+BLYmLiT8eBt5dmpAhbqu6hEqN
- F6CL4zLpBOqwnCh5789zgLXT8Py6T/MXoqH6fjkpGGTUBH3az1PUlMY4vFEGrT0sG6cu
- MU+Q==
-X-Gm-Message-State: AOJu0Yxduqobl9UYrcadiwy54xFF1JLToDgUcoHrT6eWHgqZJtqv4mMY
- jorc2/cvfia0oLBnCi414C6j8LaN47jkTq5hgvZZ7Cbf4S0CqcGl4Xn7w22F4byoZpq94K2MXD4
- 9dYiWGl7y603kdCgM5PETN+tF67YbJ10y
-X-Google-Smtp-Source: AGHT+IGpbmqZ33AD1FaU3loN+HjexgYRyg6bozS9VvfzT4zd1VtjSFr+aaRe6isKRGh93Q5IAqO8Y2MumK0nCpSfcM4=
-X-Received: by 2002:a2e:9d16:0:b0:2f3:f287:17df with SMTP id
- 38308e7fff4ca-2f77270d09fmr1919121fa.20.1725909095391; Mon, 09 Sep 2024
- 12:11:35 -0700 (PDT)
-MIME-Version: 1.0
+ d=1e100.net; s=20230601; t=1725910212; x=1726515012;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vfsel9a3yBCySK/wqYJDE9QCIVci9yyD86Xf0x9DJvE=;
+ b=e8hO9RKzAC5KFsUMUgBdjhqTrYASuTCBZBdsFr4m++ngQSWyrHqtxKB/8TYsN+8Sdt
+ lufpxefbXVqv/owrXKpaY4Hv8DgFVnX7egXaJSmLJN+c86iz1t0YufTMe56v2KxxlQ9E
+ AcIlAgAqZo+WMQIN4XOofG6zc2iFkMJ7tplQY8x5S9HgZ3JksfiCzYXLqqHEGu9WnKB1
+ krVRjPgYl0lWrlTURVKuT9rn01PtoJJRDe4PBTpt+fU2aGiIfwGBCnpVob9uSQv7MS3/
+ vtnzoGZPleI5Nk58pr2AEGMKtuKT3VhmDHPA7tOToQjYgWRP3ibdEv6AtcfYZecLsWwR
+ N/oQ==
+X-Gm-Message-State: AOJu0YyM0ETqpJp9wcaghKxGtQuOzf9fcbSMJKS1mKonzOKDn7UhjAQN
+ wjVXyJh4iJ6UP021hnrPczF+KUk2W4f6RbCF8uLgzMK9Hw2LbdHkjY6wjw==
+X-Google-Smtp-Source: AGHT+IF+l4UpefT92tQy8y7LgSWguo7yITdEZ43nr/P48KiQBXgnKAQdXoueppDBRIGZmGJgEOF2yQ==
+X-Received: by 2002:a05:6a21:478b:b0:1cf:2d44:1f2d with SMTP id
+ adf61e73a8af0-1cf2d441f4bmr10052008637.38.1725910212007; 
+ Mon, 09 Sep 2024 12:30:12 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:953d:9fc6:a5e:5881])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-7d823cf3a6asm4347075a12.26.2024.09.09.12.30.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Sep 2024 12:30:11 -0700 (PDT)
 From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 9 Sep 2024 16:11:23 -0300
-Message-ID: <CAOMZO5DT5-dtAF1cDbga3vjtk1UakQin1XboPyjmG=-h3-808g@mail.gmail.com>
-Subject: imx8mq_evk: Boot regression
-To: Marek Vasut <marex@denx.de>, Peng Fan <peng.fan@nxp.com>,
- Ye Li <ye.li@nxp.com>
-Cc: U-Boot-Denx <u-boot@lists.denx.de>,
- Otavio Salvador <otavio@ossystems.com.br>
-Content-Type: text/plain; charset="UTF-8"
+To: marex@denx.de
+Cc: u-boot@lists.denx.de, uboot-imx@nxp.com, otavio@ossystems.com.br,
+ Fabio Estevam <festevam@gmail.com>
+Subject: [PATCH] imx8mq-u-boot: Pass FIT offset to fix boot regression
+Date: Mon,  9 Sep 2024 16:30:03 -0300
+Message-Id: <20240909193003.707732-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,9 +89,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
-imx8mq-evk fails to boot with top of tree U-Boot:
+Since commit 37e50627efac ("ARM: dts: imx: Convert i.MX8M flash.bin
+image generation to binman") the imx8mq-evk fails to boot:
 
 U-Boot SPL 2024.10-rc4 (Sep 09 2024 - 16:08:22 -0300)
 PMIC:  PFUZE100 ID=0x10
@@ -94,28 +98,28 @@ SEC0:  RNG instantiated
 Normal Boot
 Trying to boot from MMC2
 
-I ran git bisect and the first bad commit was:
+Fix it by passing the offset property for the FIT image, just like
+it is done on i.MX8MM.
 
-commit 37e50627efacd8dae18b564e9d8886a033e181bc
-Author: Marek Vasut <marex@denx.de>
-Date:   Fri Apr 26 01:00:37 2024 +0200
+Fixes: 37e50627efac ("ARM: dts: imx: Convert i.MX8M flash.bin image generation to binman")
+Signed-off-by: Fabio Estevam <festevam@gmail.com>
+---
+ arch/arm/dts/imx8mq-u-boot.dtsi | 2 ++
+ 1 file changed, 2 insertions(+)
 
-    ARM: dts: imx: Convert i.MX8M flash.bin image generation to binman
+diff --git a/arch/arm/dts/imx8mq-u-boot.dtsi b/arch/arm/dts/imx8mq-u-boot.dtsi
+index e1cd6f8996dc..9b895a63857a 100644
+--- a/arch/arm/dts/imx8mq-u-boot.dtsi
++++ b/arch/arm/dts/imx8mq-u-boot.dtsi
+@@ -111,6 +111,8 @@
+ #endif
+ 				#address-cells = <1>;
+ 
++				offset = <0x57c00>;
++
+ 				images {
+ 					uboot {
+ 						arch = "arm64";
+-- 
+2.34.1
 
-    Rework the flash.bin image generation such that it uses the new binman
-    nxp_imx8mimage etype. This way, the flash.bin is assembled in correct
-    order using plain binman, without any workarounds or sections assembled
-    in special DT node order.
-
-    Reviewed-By: Tim Harvey <tharvey@gateworks.com>
-    Tested-By: Tim Harvey <tharvey@gateworks.com> # imx8mm_venice
-    Tested-by: Fabio Estevam <festevam@gmail.com> # imx8mm-evk and imx8mn-evk
-    Signed-off-by: Marek Vasut <marex@denx.de>
-
-It seems that that binman conversion for imx8mq has issues.
-
-Does anyone have any suggestions?
-
-Thanks,
-
-Fabio Estevam
