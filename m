@@ -4,58 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8792EDE996
-	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 02:57:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C24AEDE994
+	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 03:19:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C07088EC1;
-	Tue, 10 Sep 2024 04:57:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id A08BF88BFA;
+	Tue, 10 Sep 2024 05:19:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=devpi.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=devpi.de header.i=@devpi.de header.b="rZGEOUWd";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A7CD188EC7; Tue, 10 Sep 2024 04:57:52 +0200 (CEST)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
+ id 29A4288E14; Mon,  9 Sep 2024 17:53:22 +0200 (CEST)
+Received: from smtp9.goneo.de (smtp9.goneo.de [IPv6:2001:1640:5::9:6])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8DEA888829
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 04:57:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=andestech.com
+ by phobos.denx.de (Postfix) with ESMTPS id 2BC1388DC6
+ for <u-boot@lists.denx.de>; Mon,  9 Sep 2024 17:53:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
-Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 48A2v5Lr054685
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Tue, 10 Sep 2024 10:57:05 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 10 Sep
- 2024 10:57:05 +0800
-Date: Tue, 10 Sep 2024 10:57:02 +0800
-From: Leo Liang <ycliang@andestech.com>
-To: Kongyang Liu <seashell11234455@gmail.com>
-CC: <u-boot@lists.denx.de>, Ben Dooks <ben.dooks@codethink.co.uk>, Bin Meng
- <bmeng@tinylab.org>, Dan Carpenter <dan.carpenter@linaro.org>, "Heinrich
- Schuchardt" <xypron.glpk@gmx.de>, Michal Simek <michal.simek@amd.com>,
- Padmarao Begari <padmarao.begari@microchip.com>, Randolph
- <randolph@andestech.com>, Rick Chen <rick@andestech.com>, Samuel Holland
- <samuel@sholland.org>, Tom Rini <trini@konsulko.com>, Yu Chien Peter Lin
- <peterlin@andestech.com>
-Subject: Re: [PATCH v2 1/2] riscv: spacemit: bananapi_f3: initial support added
-Message-ID: <Zt-1forn-r6YzKSb@swlinux02>
-References: <20240718043329.1500-1-seashell11234455@gmail.com>
- <20240718043329.1500-2-seashell11234455@gmail.com>
+ dmarc=none (p=none dis=none) header.from=devpi.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=lehmanju@devpi.de
+Received: from hub1.goneo.de (hub1.goneo.de [85.220.129.52])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp9.goneo.de (Postfix) with ESMTPS id D821C240446;
+ Mon,  9 Sep 2024 17:53:18 +0200 (CEST)
+Received: from hub1.goneo.de (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
+ (No client certificate requested)
+ by hub1.goneo.de (Postfix) with ESMTPS id 4AFE6240591;
+ Mon,  9 Sep 2024 17:53:17 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=devpi.de; s=DKIM001;
+ t=1725897197;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=hUEQs2gh2CqPsZaA33gkx3NpE7grftmJ/vP8hgZj3DM=;
+ b=rZGEOUWdHVRTUK+ZbUc2lAobKG/RU/XJ12fDpW17aWdvNN2Q/jToXFtBkGt8+XxBPTk8DW
+ SrjLzWZFXHNdYPnA0SSGvc0HdI6DD03VUj+NST1yiTcgWOLJdiqwP5MKuteIBqpQUviRmf
+ oQV22XaaJa8ZTJ+ALD8rBhfGhuRHI8PEtdOFw60OKyBtS92QnbW9Z1i8zAtfGR9peIucmz
+ eWn7wfe/wOzD2aA1Rhu0A4KHuf9Q9EXvMbdfYMqxRihU4nMF/iyzqhkYWGLnH2XqkJW3q3
+ npSGwaexsTbFRKKyftycrOTVDHVurny3GUKcrQJO6ChSs+whxqqd6WSLRLfbig==
+Received: from thinkarch.lan
+ (p200300cbef069810000000000000076d.dip0.t-ipconnect.de
+ [IPv6:2003:cb:ef06:9810::76d])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by hub1.goneo.de (Postfix) with ESMTPSA id C9D4B240564;
+ Mon,  9 Sep 2024 17:53:16 +0200 (CEST)
+From: Julius Lehmann <lehmanju@devpi.de>
+To: u-boot@lists.denx.de
+Cc: Julius Lehmann <lehmanju@devpi.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Konrad Dybcio <konrad.dybcio@linaro.org>, Lukasz Majewski <lukma@denx.de>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Robert Marko <robert.marko@sartura.hr>, Sean Anderson <seanga2@gmail.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, u-boot-qcom@groups.io
+Subject: [PATCH 0/3] Support for Qualcomm sm8150 SoC
+Date: Mon,  9 Sep 2024 17:53:09 +0200
+Message-ID: <20240909155315.307026-1-lehmanju@devpi.de>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20240718043329.1500-2-seashell11234455@gmail.com>
-User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
-X-Originating-IP: [10.0.15.183]
-X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
- ATCPCS34.andestech.com (10.0.1.134)
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 48A2v5Lr054685
+Content-Transfer-Encoding: 8bit
+X-Rspamd-UID: 84522b
+X-Rspamd-UID: 4efb3e
+X-Mailman-Approved-At: Tue, 10 Sep 2024 05:19:45 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,111 +90,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jul 18, 2024 at 12:33:22PM +0800, Kongyang Liu wrote:
-> Add basic support for SpacemiT's Banana Pi F3 board
-> 
-> Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
-> Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
-> ---
-> 
-> Changes in v2:
-> - Change license to GPL-2.0-or-later
-> - Add memory node for dts
-> - Add ft_board_setup function for kernel memory init
-> - Use default prompt
-> 
->  arch/riscv/Kconfig                     |   5 +
->  arch/riscv/cpu/k1/Kconfig              |  18 ++
->  arch/riscv/cpu/k1/Makefile             |   6 +
->  arch/riscv/cpu/k1/cpu.c                |   9 +
->  arch/riscv/cpu/k1/dram.c               |  54 ++++
->  arch/riscv/dts/Makefile                |   1 +
->  arch/riscv/dts/k1-bananapi-f3.dts      |  25 ++
->  arch/riscv/dts/k1.dtsi                 | 375 +++++++++++++++++++++++++
->  board/spacemit/bananapi_f3/Kconfig     |  25 ++
->  board/spacemit/bananapi_f3/MAINTAINERS |   6 +
->  board/spacemit/bananapi_f3/Makefile    |   5 +
->  board/spacemit/bananapi_f3/board.c     |   9 +
->  configs/bananapi_f3_defconfig          |  20 ++
->  include/configs/bananapi_f3.h          |  15 +
->  14 files changed, 573 insertions(+)
->  create mode 100644 arch/riscv/cpu/k1/Kconfig
->  create mode 100644 arch/riscv/cpu/k1/Makefile
->  create mode 100644 arch/riscv/cpu/k1/cpu.c
->  create mode 100644 arch/riscv/cpu/k1/dram.c
->  create mode 100644 arch/riscv/dts/k1-bananapi-f3.dts
->  create mode 100644 arch/riscv/dts/k1.dtsi
->  create mode 100644 board/spacemit/bananapi_f3/Kconfig
->  create mode 100644 board/spacemit/bananapi_f3/MAINTAINERS
->  create mode 100644 board/spacemit/bananapi_f3/Makefile
->  create mode 100644 board/spacemit/bananapi_f3/board.c
->  create mode 100644 configs/bananapi_f3_defconfig
->  create mode 100644 include/configs/bananapi_f3.h
 
-Hi Kongyang,
+This series picks up the work from Volodymyr Babchuk ([v2] Add support for Qualcomm SA8155-ADP board). clk and pinctrl drivers are adjusted to work similarly to existing qcom drivers. I could only test this using android boot chainloading.
 
-`$ make bananapi_f3_defconfig && make` produces the following warning.
+This is my first patch ever using mailing lists, so hopefully nothing is missing.
 
-In file included from drivers/serial/ns16550.c:13:
-include/ns16550.h:205:9: warning: "UART_IIR_ID" redefined
-  205 | #define UART_IIR_ID     0x06    /* Mask for the interrupt ID */
-      |         ^~~~~~~~~~~
-In file included from include/configs/bananapi_f3.h:10,
-                 from include/config.h:3,
-                 from drivers/serial/ns16550.c:8:
-include/linux/serial_reg.h:33:9: note: this is the location of the previous definition
-   33 | #define UART_IIR_ID             0x0e /* Mask for the interrupt ID */
-      |         ^~~~~~~~~~~
 
-There seems to be Macro redefinition.
-Could you please take a look?
+Julius Lehmann (3):
+  clk: qcom: add driver for SM8150 SoC
+  pinctrl: qcom: add driver for SM8150 SoC
+  config: qcom: add sm8150 to qcom_defconfig
 
-Best regards,
-Leo
-> diff --git a/configs/bananapi_f3_defconfig b/configs/bananapi_f3_defconfig
-> new file mode 100644
-> index 0000000000..6363620208
-> --- /dev/null
-> +++ b/configs/bananapi_f3_defconfig
-> @@ -0,0 +1,20 @@
-> +CONFIG_RISCV=y
-> +CONFIG_SYS_MALLOC_LEN=0x1000000
-> +CONFIG_NR_DRAM_BANKS=2
-> +CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-> +CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1000000
-> +CONFIG_DEFAULT_DEVICE_TREE="k1-bananapi-f3"
-> +CONFIG_SYS_LOAD_ADDR=0x200000
-> +CONFIG_TARGET_BANANAPI_F3=y
-> +CONFIG_ARCH_RV64I=y
-> +CONFIG_RISCV_SMODE=y
-> +CONFIG_FIT=y
-> +CONFIG_SYS_BOOTM_LEN=0xa000000
-> +CONFIG_SUPPORT_RAW_INITRD=y
-> +CONFIG_OF_BOARD_SETUP=y
-> +CONFIG_SYS_CBSIZE=256
-> +CONFIG_SYS_PBSIZE=276
-> +CONFIG_HUSH_PARSER=y
-> +CONFIG_ENV_OVERWRITE=y
-> +CONFIG_SYS_NS16550=y
-> +CONFIG_SYS_NS16550_MEM32=y
-> diff --git a/include/configs/bananapi_f3.h b/include/configs/bananapi_f3.h
-> new file mode 100644
-> index 0000000000..723bbaab69
-> --- /dev/null
-> +++ b/include/configs/bananapi_f3.h
-> @@ -0,0 +1,15 @@
-> +/* SPDX-License-Identifier: GPL-2.0-or-later */
-> +/*
-> + * Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
-> + *
-> + */
-> +
-> +#ifndef __CONFIG_H
-> +#define __CONFIG_H
-> +
-> +#include <linux/serial_reg.h>
-> +
-> +#define CFG_SYS_SDRAM_BASE         0x0
-> +#define CFG_SYS_NS16550_IER        UART_IER_UUE
-> +
-> +#endif /* __CONFIG_H */
+ configs/qcom_defconfig                |   2 +
+ drivers/clk/qcom/Kconfig              |   9 +
+ drivers/clk/qcom/Makefile             |   1 +
+ drivers/clk/qcom/clock-sm8150.c       | 298 ++++++++++++++++++++++++++
+ drivers/pinctrl/qcom/Kconfig          |   8 +
+ drivers/pinctrl/qcom/Makefile         |   1 +
+ drivers/pinctrl/qcom/pinctrl-sm8150.c | 119 ++++++++++
+ 7 files changed, 438 insertions(+)
+ create mode 100644 drivers/clk/qcom/clock-sm8150.c
+ create mode 100644 drivers/pinctrl/qcom/pinctrl-sm8150.c
+
+-- 
+2.45.2
+
