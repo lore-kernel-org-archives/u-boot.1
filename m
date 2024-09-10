@@ -4,91 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0782ECE564
-	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 09:50:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0541CECE582
+	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 09:50:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D69788FC9;
-	Tue, 10 Sep 2024 11:50:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7FCE588F9C;
+	Tue, 10 Sep 2024 11:50:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gFJUH6gv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UiIqqj83";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA68988FB7; Tue, 10 Sep 2024 11:50:22 +0200 (CEST)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id 5988088FDB; Tue, 10 Sep 2024 11:50:26 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E2FAE88C1B
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 11:50:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5FDF888F9C
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 11:50:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-42cbaf9bfdbso12021335e9.0
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 02:50:20 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-42cb58d810eso12184215e9.0
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 02:50:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725961810; x=1726566610; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=YbppJgl6wdos+sFIVR8ApXSBMia2tiIIGkDLj12AvVs=;
- b=gFJUH6gv4AnkdvGjjPc4jka0KJiP3GUj5BHC5XdMESU2GkxEK2MCEjv05UJSAo4TJa
- hQ1X9h9QgJyfd0LSP1+l5ToGRVN3tXt2O+4zSXtnYghzkvApad1VfBTHbj98uQBxYBA7
- 2O5Z97qB44szBrNNRV451/I0FWC5vsynvgYLI5+jY+j92mj+6JrmIfDVHy2MWKdd2FUp
- 1l6dYVoMDg68fke3rQ43AiXSBCRqg7KmQ8rAnj3fGLsC7O8rsjIjDmgwmj9GLL1ffBSW
- O3lblUsK+QfWJ44HIc6bOpz8+mppm2/rcueH2haNRPDnL/q1sKUAPKU6IlN9l7WuxnHN
- eLkg==
+ d=linaro.org; s=google; t=1725961815; x=1726566615; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=Mrl4DVgfVspjBhaS8wZ41H4N1ax33wp/NdwErCC4h9Q=;
+ b=UiIqqj83ZNhvGYzQoy1W06aCNrm5jcWJodnqj9kFCQVIP4A9Vn5pZ179wmUN2qxZgk
+ IihYVa5J8A7ieWbWtAT9o/CwXDImsYxg4FSV/fW0NN5itWdYS0S0EMKPvYGDZktmJCf9
+ kWFbnQIgp2h9HIBPYnbztMAeXkSqvdyxT9DyIeK2iL5QAMYw/Gmozvoxxb77UAF0ocbN
+ qY3/YLaahptSbekcxc2EUTrDHEklBTFIFB2Ly+QmBFxa1Fhmd2Xk3cEEOBlIb0VovoHf
+ CtxesbrIljy2uPRL19/YpQy8oF92Woq3ZStFA/U5X8G8qaz/hHQLzWClgWgjsbgqriuQ
+ 97yA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725961810; x=1726566610;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=YbppJgl6wdos+sFIVR8ApXSBMia2tiIIGkDLj12AvVs=;
- b=kc2hAxi0UfJ2Dx0AgqSjJ75L6pgka89MFoIvIbCjb9lxUrhl546F2SzD1Xx3/y1zzX
- qolLs8xxSESS5Frc6MhphUtn+hIvGOiz1yuysEHD8GUN1i/1IVBxQjDXydjnFyxAejOr
- 52yRgGKWIEWtARKFkIlwxHyZKl4X2Qd1l02wrqXH5Gg6NDuOQcOtYjdQAneAwk4WV+Jr
- tDjFOz4IX5f6qjiPwUfjfQR0LrVxiLCMOCbnndbhkFJuVLbD0Ynhg7AKsMctxFf5pR7W
- tliMrgD6NgI0pe0TNl9Gyz8+bxarwRik6Dg5mLCqgLrv6qBMNSTWh0GDszSasaw3Pr0S
- v67w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUGgSX+b22YlbPv0YZKZm5y3N7GHUPkUcHD/GiNOZ7Rs82jl+RQ+09k7l0zb65c9HEa/DBujr0=@lists.denx.de
-X-Gm-Message-State: AOJu0YzqUAEhlTDzYfDmw+WSnW7j2Exx5DajrFe6RO2YmUZZL4qjUSEL
- Xd0gHzSTXknedto9mvb11K0X9umySt/38sPzf7ie07HMWJwG9CNfInA26v0qehY=
-X-Google-Smtp-Source: AGHT+IHi8o2cHO4yZh2gPFv/HXOd6opkJ3wRKlk5mzNdNa7j8jvX2o7JSKfghSnMr89l/fzfo3Og+w==
-X-Received: by 2002:a5d:590f:0:b0:371:7e73:eb43 with SMTP id
- ffacd0b85a97d-378896a403bmr8004657f8f.42.1725961810116; 
- Tue, 10 Sep 2024 02:50:10 -0700 (PDT)
-Received: from [192.168.7.95] ([212.114.21.58])
+ d=1e100.net; s=20230601; t=1725961815; x=1726566615;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Mrl4DVgfVspjBhaS8wZ41H4N1ax33wp/NdwErCC4h9Q=;
+ b=dRb3BpvwSvFLjs+IGdTZ7lfXyyUkNM4AWl1YLm1kR2wtb7vq8gXdUSEu8d2Kr9apVq
+ 1+NL9D7tYo4qtf96yuj/KbPd5WkTf2wcGycp21Vqskv1n06MBV41DvkhMRK/gXtFH0Pw
+ 3BZ8Jt2/kUf2boLMtxd/rs1H7uwtD20Z/bpDsx/fuG4Y+C5Fh3i8/2NiFlHGASF8OkXS
+ Gq4JxuSN0sKcYTa0aipzJgWlgJL1iaZoICHUDMEaq0l+bN0+n15CCvbgsnwblOoaIxw8
+ F7fyKu+/hrPUhkKa38rVHiB+GQaBR90ilhmI6LM73ozjxsOXk3NfehfBB4HMh2CxusTS
+ dpSA==
+X-Gm-Message-State: AOJu0YxVVcA5QsWtbMt9Y218tNHyrD+HY3CK9sMnjw8uuZBxuL0gnbaj
+ Bk38leLhxPGF67pAfHJMBYefie3W9hYIIph/epQfhiuiriz/CdkWRzyfKv6fWqA=
+X-Google-Smtp-Source: AGHT+IHUuOoiTUWF6T/tTw2ckBaNwLVV9pR77NvZ4G+OpkNYBN2JshkFHTWZKcu1Z6DW4Jyi8PtTfA==
+X-Received: by 2002:a5d:4ec9:0:b0:374:c4c2:5ad5 with SMTP id
+ ffacd0b85a97d-378a8a792fcmr1428968f8f.27.1725961814724; 
+ Tue, 10 Sep 2024 02:50:14 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-378956de00fsm8371653f8f.99.2024.09.10.02.50.09
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 10 Sep 2024 02:50:09 -0700 (PDT)
-Message-ID: <ba59fbf9-5158-4f4b-b797-5c6253282576@linaro.org>
-Date: Tue, 10 Sep 2024 11:50:08 +0200
+ ffacd0b85a97d-378956d3738sm8364030f8f.69.2024.09.10.02.50.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 10 Sep 2024 02:50:14 -0700 (PDT)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Date: Tue, 10 Sep 2024 11:50:10 +0200
+Subject: [PATCH 1/4] ufs: add device_reset callback
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v10 21/25] Kconfig: fix undefined symbols (g_dnl*) when
- NET_LWIP is default enabled
-To: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
- Anton Antonov <Anton.Antonov@arm.com>, Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Jonas Karlman <jonas@kwiboo.se>,
- Miquel Raynal <miquel.raynal@bootlin.com>
-References: <cover.1725625913.git.jerome.forissier@linaro.org>
- <9462e25d33d93c670a882e6ee329ca7e6668d7ab.1725625913.git.jerome.forissier@linaro.org>
- <0571d892-caa7-4f36-a094-bedb77ac33df@denx.de>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <0571d892-caa7-4f36-a094-bedb77ac33df@denx.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20240910-topic-ufs-qcom-controller-v1-1-54c0d2231b10@linaro.org>
+References: <20240910-topic-ufs-qcom-controller-v1-0-54c0d2231b10@linaro.org>
+In-Reply-To: <20240910-topic-ufs-qcom-controller-v1-0-54c0d2231b10@linaro.org>
+To: Bhupesh Sharma <bhupesh.linux@gmail.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.14.1
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1827;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=zKPp3bheL4MlkG+SNNaa74uWjsT0ac9V/26Go9Z7VT8=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBm4BZTvCKL7SyQPdNbv8mXFv65iHxVYOmKtZTQ8uy5
+ SQF21i+JAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZuAWUwAKCRB33NvayMhJ0RlmEA
+ DO+LSKM2l266PtSRTrytuti6BlZBUD4wJs3b1YCBf5lMZwe34tbqaPQpzHBsy5ec//7Pv87JfWmZ7+
+ XssxGD4IjAWgyVtP6zLFZRDm/Ycv8iYW5t4q+Ro/qfFCoYc2orElhkWVtCqNWi/1Y58acVsQz5p5Il
+ WRuM1E50JJhlTLbMSHpxC8JKjzRltbAQlhncqcLYJVd9OF5eRw2i3mmpO3/+kz0yRUHbJEy0S6g6e1
+ 6xhPWKE+c6nDe9JYpgy1ppshE/AvqnWpsUdOTQCDS1MvrM73yeWrZpHTsSYJogvqs5d2QabaEJS/Yb
+ KSfv5sGHO5JrsQSwz6Y+AtfrzC0pWttohiX4T/tmAYb5jTyK2CTcWq8qeaHeIWWXiXguEYd7QZ1TIO
+ f+cEHFeZWmIKoqhjhwQyC/JVevU3BbFAytzfI004JzlOPUDI8g59guTWpvcKnLuImY7tX+KAPKtLYL
+ a4YwAtW6i34vICWRFYvYstlBby8waCCEUSRL9udqDeNgvB8fdTYMJnkyAkfQ1l9rXSjGRUEuHVGPxZ
+ lNPSCG4RrZ0NHJ40tF+Qs8/7Hw3p6xtgWpIXxzPPsq+cvWgBqsSTxwxW8c5LbBpwBa4fWTFWUIAL7w
+ 0XLAwHAq6l4r3ZKkEfkBRpLIO3M96ZNTmGt5+MSE9709L9wuZ0XmgeyA6USQ==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,63 +111,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Add device_reset op to permit resetting the UFS device if
+the UFS controller drivers supports the operation.
 
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
+ drivers/ufs/ufs.c | 8 ++++++++
+ drivers/ufs/ufs.h | 9 +++++++++
+ 2 files changed, 17 insertions(+)
 
-On 9/9/24 16:35, Marek Vasut wrote:
-> On 9/6/24 2:33 PM, Jerome Forissier wrote:
->> Fix for link errors on am62px_evm_a53and other platforms when NET_LWIP
->> is enabled:
->>
->>   common/dfu.c:34:(.text.run_usb_dnl_gadget+0x68): undefined reference to `g_dnl_clear_detach
->>   [...]
->>   common/spl/spl_dfu.c:29:(.text.spl_dfu_cmd+0xb0): undefined reference to `run_usb_dnl_gadget'
->>
->> - DFU_OVER_USB compiles common/dfu.c which calls g_dnl_clear_detach()
->> which is implemented in drivers/usb/gadget/g_dnl.c which needs
->> USB_GADGET_DOWNLOAD
->> - SPL_DFU compiles common/spl/spl_dfu.c which calls run_usb_dnl_gadget()
->> which is implemented in common/dfu.c which needs DFU_OVER_USB
->>
->> Therefore add these dependencies to Kconfig.
->>
->> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
->> ---
->>   drivers/dfu/Kconfig        | 1 +
->>   drivers/usb/gadget/Kconfig | 1 +
->>   2 files changed, 2 insertions(+)
->>
->> diff --git a/drivers/dfu/Kconfig b/drivers/dfu/Kconfig
->> index d034b501360..7de629f103a 100644
->> --- a/drivers/dfu/Kconfig
->> +++ b/drivers/dfu/Kconfig
->> @@ -8,6 +8,7 @@ config DFU_OVER_USB
->>       bool
->>       select HASH
->>       depends on USB_GADGET
->> +    depends on USB_GADGET_DOWNLOAD
-> 
-> Is it necessary to 'depends' on both USB_GADGET and USB_GADGET_DOWNLOAD ? The later should imply the former is already selected, no ?
-
-Yes, it looks like so. Will fix.
-
-> 
->>   config DFU_OVER_TFTP
->>       bool
->> diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
->> index 03fe3bca197..ce9364c3172 100644
->> --- a/drivers/usb/gadget/Kconfig
->> +++ b/drivers/usb/gadget/Kconfig
->> @@ -324,6 +324,7 @@ config SPL_DFU
->>       select SPL_HASH
->>       select SPL_DFU_NO_RESET
->>       depends on SPL_RAM_SUPPORT
->> +    depends on DFU_OVER_USB
-> Keep the list sorted please.
-
-Sure.
-
-I will post this one separately as I did for other fixes. Thanks for
-the review.
+diff --git a/drivers/ufs/ufs.c b/drivers/ufs/ufs.c
+index e34e4586224..de8ba011d57 100644
+--- a/drivers/ufs/ufs.c
++++ b/drivers/ufs/ufs.c
+@@ -125,6 +125,11 @@ static void ufshcd_print_pwr_info(struct ufs_hba *hba)
+ 		hba->pwr_info.hs_rate);
+ }
+ 
++static void ufshcd_device_reset(struct ufs_hba *hba)
++{
++	ufshcd_vops_device_reset(hba);
++}
++
+ /**
+  * ufshcd_ready_for_uic_cmd - Check if controller is ready
+  *                            to accept UIC commands
+@@ -1997,6 +2002,9 @@ int ufshcd_probe(struct udevice *ufs_dev, struct ufs_hba_ops *hba_ops)
+ 
+ 	mb();
+ 
++	/* Reset the attached device */
++	ufshcd_device_reset(hba);
++
+ 	err = ufshcd_hba_enable(hba);
+ 	if (err) {
+ 		dev_err(hba->dev, "Host controller enable failed\n");
+diff --git a/drivers/ufs/ufs.h b/drivers/ufs/ufs.h
+index e8a14411560..faaebf1f9f7 100644
+--- a/drivers/ufs/ufs.h
++++ b/drivers/ufs/ufs.h
+@@ -701,6 +701,7 @@ struct ufs_hba_ops {
+ 	int (*link_startup_notify)(struct ufs_hba *hba,
+ 				   enum ufs_notify_change_status);
+ 	int (*phy_initialization)(struct ufs_hba *hba);
++	int (*device_reset)(struct ufs_hba *hba);
+ };
+ 
+ struct ufs_hba {
+@@ -878,6 +879,14 @@ static inline int ufshcd_ops_link_startup_notify(struct ufs_hba *hba,
+ 	return 0;
+ }
+ 
++static inline int ufshcd_vops_device_reset(struct ufs_hba *hba)
++{
++	if (hba->ops && hba->ops->device_reset)
++		return hba->ops->device_reset(hba);
++
++	return 0;
++}
++
+ /* Controller UFSHCI version */
+ enum {
+ 	UFSHCI_VERSION_10 = 0x00010000, /* 1.0 */
 
 -- 
-Jerome
+2.34.1
+
