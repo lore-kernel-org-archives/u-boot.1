@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9999ECE582
-	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 08:58:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50EACECE582
+	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 08:58:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A314F88F48;
-	Tue, 10 Sep 2024 10:58:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0C74988F45;
+	Tue, 10 Sep 2024 10:58:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DqdqKZst";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KpbdBtB5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D98AF88861; Tue, 10 Sep 2024 10:58:22 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 1228D88F4D; Tue, 10 Sep 2024 10:58:24 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E072788F42
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 10:58:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 58AA188F44
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 10:58:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-42cb7a2e4d6so17037755e9.0
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 01:58:20 -0700 (PDT)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-42cc43454d5so1573675e9.3
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 01:58:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725958693; x=1726563493; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1725958694; x=1726563494; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=wiAtme929kZSm5f6Dxzpw/4FODGxe7FfO8rO9BH0BXE=;
- b=DqdqKZst8ukTtRhY4kLIqpZBBBDAAYJpWPBfXe1fr25UdZZlmWBGSQYaQFgV46UXz8
- 0BMArSpxMmVgkwuAbEtBbwnazYEMzBh1Y0Yjjv9tvkOQLnJC9LFUZyOnrvig5UIjbShN
- +im8IwFHLt+YfJ2MSKCdYKpGcen9p/8GXovE3sM+MQd8+plznEZrc9Q3azzZ2ROggZQT
- bmsxvjb5V1BARxcNEtHErLjVP6daQ5c50wfm/5eqzOYlnCBMW3bVugWBkriuFfFvUSix
- 2tR0RciLAyWpodLRN2fl3r98mUXP3HrPWyGDyOIWY1u5brJpsVG2IJ7Ox+xbyOKPjChH
- 4HeQ==
+ :reply-to; bh=gPZWPtvJ9C5F6c4zaPRHfI/0I5S5iUkcV7tAc+zevEw=;
+ b=KpbdBtB5F98pnqZFhlvb2ywGaxwtcc3ocje3kK5RXuaAhn4/cQWruIxcoqExfP3Y57
+ FcqSceiAWX4jvpACTt0eK1rk8KLdh+sTmgFrUCX+GnGeRtkmg3Z1a+T2XpE2xVuAI3iE
+ I8lJvm7XztvSEr1AnePypEJjwLR8upD0acLJd2jYyD/phui2zm6ptrtOj/qOWCM666cj
+ OZ90uZH8l0+Wz43JmCFjun76HYnd+/DLsaFToZUkExS+lS5v5VxP6pgWntC1puFdZcuY
+ NKMUpw+8+daAokGaklx+KaP3WGkjU+2CyO8ZctL7/M3VyKxPhYATrnPkbmlb8njfz3VJ
+ q/1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725958693; x=1726563493;
+ d=1e100.net; s=20230601; t=1725958694; x=1726563494;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wiAtme929kZSm5f6Dxzpw/4FODGxe7FfO8rO9BH0BXE=;
- b=qL4/ytFyK+B4hhAeI7yaxmd9hzxMJ9ryAcT0NKRkVLhZyfSRU5fME52mvASuDrey6f
- qqaE7dBbwwlxHE933PBKWIkhadSodW7SRZVAFk9oVLFvTQ0BjDLX8vd0c0HYoz50dFrP
- nMuuuM0rpDEV/JlThvYv0a9uj43Y8lTwlYo+qPKmRP4OEQN8UWhCmTy1TMoP8TVLWgyc
- GSgfCecgvHmo0y0YR+TrWEJOCaLcZzUele/waY/WncgVnC1FU9MbNBZHtnk+eOYNJBSA
- 5v7uOViV+VXTD+VZYMrBkHPVIPkq1UfF5QMMPlER/Gk5R0tIQs55DNVgpvRBg4xxpE8p
- FU8w==
+ bh=gPZWPtvJ9C5F6c4zaPRHfI/0I5S5iUkcV7tAc+zevEw=;
+ b=aqLya0pMmlthqSwrKqNJT+GhlaNjJ505o8jsYfu1wj7pt8EqZIQe3+W47kPMQRfV1f
+ /Bm/o/4MJGOCLHIZWHvEWTvvThBCJ/ecK+m+FNV8L7j6KC4FgLjOSMA1/hSLwfC+KFvR
+ 8ZseyoTnvDF2VlJvEW1y+Zcwxl5ApvwhmvYmQ7jaHQIGLE1e06nC6Co5pjhBckdu58np
+ f9FACVuWWBLtS1+JOMpqOu7dYYZSPea4Tu/WrEOb2DOjmoDn/XaGIY4CpZX9nKGViiBD
+ 8Tcj05p3EXKKnFzU4LY4B4oOCp3M/0RU3D9F1Lj8Lytx/dg/1aGkMbmsFMq7hj6ym4Tw
+ xWYA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU9gyGc1DC5CBc0if6V/3FgDGBjTSU+kWBNra9JMwmU5ccnCA59vn1DGG8xmuzm2VRSBvbBWUw=@lists.denx.de
-X-Gm-Message-State: AOJu0YzmzPRu5XJXaDfIzp69oftPpiYLTk+s/1R19jXaXq67fuN46IE7
- qeMEkiSyKug34opYoccZK7xGpJ9OHdgrn57/JMt+n+hhSNdNQqeDANMukhmmik4=
-X-Google-Smtp-Source: AGHT+IEEzZKwINIU9yrOhzetphYZg4CH1SIqJqMMdB9TE1Ok0izrtYkX5mVvZvHVyjLabJfYcqbBXg==
-X-Received: by 2002:a05:600c:5025:b0:42c:bc04:58a5 with SMTP id
- 5b1f17b1804b1-42cbc0458c9mr24588025e9.33.1725958693364; 
- Tue, 10 Sep 2024 01:58:13 -0700 (PDT)
+ AJvYcCU36UF8soRD2/I+YAtWObGWc2+3oHtFdatdH8DFGxNWXROqzUbRRq9o1EjrkaqFEiuU9xTIdio=@lists.denx.de
+X-Gm-Message-State: AOJu0YxOkxwWJItvptKmGAn4gZH774o542ED5SEAVUzoG7jjwI5+weef
+ RPWeKHuh4bwNLlnLgvzjuiu1IJiNhELFPMQyGoEuOwF2Iv4SIVzvf/DMOKQeAxI=
+X-Google-Smtp-Source: AGHT+IFdsmCA77dms3T9jTmzQCdZrerqsQTEC+aUJepZUZ8YeglJbZJSK9MMV6y6u6hyYWfpxYfjsA==
+X-Received: by 2002:a05:600c:46ce:b0:42b:ac94:6929 with SMTP id
+ 5b1f17b1804b1-42cae79c465mr72284575e9.32.1725958694062; 
+ Tue, 10 Sep 2024 01:58:14 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42cc01d4617sm12905325e9.0.2024.09.10.01.58.12
+ 5b1f17b1804b1-42cc01d4617sm12905325e9.0.2024.09.10.01.58.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Tue, 10 Sep 2024 01:58:13 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Tue, 10 Sep 2024 10:58:06 +0200
-Subject: [PATCH 1/2] gpio: msm: add support for special pins
+Date: Tue, 10 Sep 2024 10:58:07 +0200
+Subject: [PATCH 2/2] pinctr: qcom: sm8250: add special pins pins
+ configuration data
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240910-topic-sm8x50-msm-gpio-special-pins-sm8250-v1-1-50623a7e4931@linaro.org>
+Message-Id: <20240910-topic-sm8x50-msm-gpio-special-pins-sm8250-v1-2-50623a7e4931@linaro.org>
 References: <20240910-topic-sm8x50-msm-gpio-special-pins-sm8250-v1-0-50623a7e4931@linaro.org>
 In-Reply-To: <20240910-topic-sm8x50-msm-gpio-special-pins-sm8250-v1-0-50623a7e4931@linaro.org>
 To: Caleb Connolly <caleb.connolly@linaro.org>, 
@@ -79,20 +80,20 @@ To: Caleb Connolly <caleb.connolly@linaro.org>,
 Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, 
  Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4823;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2622;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=hpzDe3p6sPzJQLFujHI5KRQb2puJ+WsxzjYzQ7F0P44=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBm4Aoj1m9xL+ZuhUjpjd4AP8VkihP+Y7h9y44sh8RD
- piNjGyGJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZuAKIwAKCRB33NvayMhJ0SzeD/
- 4weO9fPX1dVlqKIf5UduEteIOwyBcCRJs22qf/Flf8j9a1wsti5flm8bhPyTciZntofm6Fjsne7PTG
- CcFkjO6GCZHzLTN9kupsWKb7ROU0UQaKSx3U8bSrd1H9KEaZBEqRMr2jkUP1/FLoIC1iZPMA+0bBPg
- eDNEe/loT+kX0dwZ7tj2vxBeWYXSG41HeWsRhtP0n/5vrybZgCjhycyqnhjIlMOTGF/NBAF1Dbfzvk
- qJJP3rhwjBnMgB9/suWx7POrElcAhzui2atE1jxmJLAJGCLRC7tEwwCA6yyzW0oXau1nKqapJPKczl
- mTWZ7TTqn1W/qF5TUDnqv1+DcFFVLx7vY/K6Yow9XfKGKgco7ydK733MClZWAJIFhoFJnB9plPRPuU
- wWFfPWlWhaZoDv/yfxImhCuL98ZxecHiftMF/i5HNWnmi+RuB7h+RFpURHHN66xB3Zpg7bvSdTs0dv
- NfzAJmbqtgNmWiURIcIBfUR0BV4vgUqvfwn2w9qp2h7Y7p/JTc/aX+jA8Dsikyn9I2OechnTAKcxVu
- iZ6TTNgONtrvkGX4cAxy7pCcobzj2OEilt/KieBYGse/jLuZlNOZx1tL0q20AJf5GcJK7+lmo0xphh
- C2FFx+LS3yyFW5PgDy30kiJVVoKK6N4L/+zXctVydKQ9mY8hFBLlfh76h4CQ==
+ bh=cWamk3BaNR7zDwiQskXuBiLuOQYcDKjaVh4Dia/789E=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBm4AojoGO9FiD7hBUx0LQiqg217DyPR3dm97W9oHXg
+ 9onjwcGJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZuAKIwAKCRB33NvayMhJ0ZTmD/
+ 9B7bPjsBS7TV6CnnkSX/X8bnmOyYK/zXDH4ImQfn7tRYPtYlI/S3g0+UHFOsGIfJTUlW+Qt2leVWDL
+ ErSebkxy/IuUQPsZm7KY6dBHgypSa1KIeT8E8FBm78pa75BhCpN0sKFLqN3bpteW+MY71Rxe6+Al9F
+ Ujzjh9GrS4LAWChQ++4z1Mzd3pNAKqaXwTHwGnsvEAevcNV73Qewsd+K612wUdnVLB6hRwOUPDlsol
+ CkDYlKPKLtTLZg13nZcvnyCtIHect+cwu2aZqcHgjtncNZ0OVLP6lFfutrB9hllNcb4KbxE/G6pXk3
+ ZbcMxfZh9q8ey4EDnq2JN5nAX0kArkMpVD9CQa4eTbxQiGhlIzu2E7b0xTVJozpbqUephSiUPtBlU/
+ VQTyVqfgVR+7aqNq9AcG2diwmHN6R6yC26S/P4jVbzyKkr8EAQUD9f0D3ucSYIYGmMtFu445Nfn7ti
+ 7yDm2LBinv7z904nO6OvmwZ8Ko3/uuD9vSzhYHE3C6xzIZ8njhZNSue1wRsCuLEPuuXGPl7yc5Mh8t
+ pNwiy2C0I227/M+9KdncRBhd/ZTaRHL8XojfgN0rZZFRc7m2xcrTc0X9moaGL3JD1nb98j9idbIBEn
+ 3/TNxJR3vT4bTOiulGGJmbhFu8bXpFkzl+F+C2Sz8fjK06Cu+QCGwCiZfFhA==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
@@ -111,164 +112,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Leverage the data introduced in the struct msm_special_pin_data to allow
-setting the gpio direction and value if supported by the pin data.
+Add the special pins configuration data to allow setup the bias
+of the UFS and SDCard pins on the SM8250 SoC.
 
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- drivers/gpio/msm_gpio.c | 97 +++++++++++++++++++++++++++++++++++++++++++++----
- 1 file changed, 89 insertions(+), 8 deletions(-)
+ drivers/pinctrl/qcom/pinctrl-sm8250.c | 41 ++++++++++++++++++++++++++++++++---
+ 1 file changed, 38 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/gpio/msm_gpio.c b/drivers/gpio/msm_gpio.c
-index 2fb266f1285..cea073b3297 100644
---- a/drivers/gpio/msm_gpio.c
-+++ b/drivers/gpio/msm_gpio.c
-@@ -34,13 +34,31 @@ struct msm_gpio_bank {
- #define GPIO_IN_OUT_REG(dev, x) \
- 	(GPIO_CONFIG_REG(dev, x) + 0x4)
+diff --git a/drivers/pinctrl/qcom/pinctrl-sm8250.c b/drivers/pinctrl/qcom/pinctrl-sm8250.c
+index dac24f11bc2..69c907e3868 100644
+--- a/drivers/pinctrl/qcom/pinctrl-sm8250.c
++++ b/drivers/pinctrl/qcom/pinctrl-sm8250.c
+@@ -18,8 +18,37 @@
+ static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
  
-+static void msm_gpio_direction_input_special(struct msm_gpio_bank *priv,
-+					     unsigned int gpio)
-+{
-+	unsigned int offset = gpio - priv->pin_data->special_pins_start;
-+	const struct msm_special_pin_data *data;
+ static const struct pinctrl_function msm_pinctrl_functions[] = { { "qup12", 1 },
+-								 { "gpio", 0 },
+-								 { "sdc2_clk", 0 } };
++								 { "gpio", 0 }, };
++#define SDC_PINGROUP(pg_name, ctl, pull, drv)		\
++	{						\
++		.name = pg_name,			\
++		.ctl_reg = ctl,				\
++		.io_reg = 0,				\
++		.pull_bit = pull,			\
++		.drv_bit = drv,				\
++		.oe_bit = -1,				\
++		.in_bit = -1,				\
++		.out_bit = -1,				\
++	}
 +
-+	if (!priv->pin_data->special_pins_data)
-+		return;
++#define UFS_RESET(pg_name, offset)			\
++	{						\
++		.name = pg_name,			\
++		.ctl_reg = offset,			\
++		.io_reg = offset + 0x4,			\
++		.pull_bit = 3,				\
++		.drv_bit = 0,				\
++		.oe_bit = -1,				\
++		.in_bit = -1,				\
++		.out_bit = 0,				\
++	}
 +
-+	data = &priv->pin_data->special_pins_data[offset];
-+
-+	if (!data->ctl_reg || data->oe_bit >= 31)
-+		return;
-+
-+	/* switch direction */
-+	clrsetbits_le32(priv->base + data->ctl_reg,
-+			BIT(data->oe_bit), 0);
-+}
-+
- static void msm_gpio_direction_input(struct udevice *dev, unsigned int gpio)
++static const struct msm_special_pin_data sm8250_special_pins_data[] = {
++	[0] = UFS_RESET("ufs_reset", SOUTH + 0xb8000),
++	[1] = SDC_PINGROUP("sdc2_clk", NORTH + 0xb7000, 14, 6),
++	[2] = SDC_PINGROUP("sdc2_cmd", NORTH + 0xb7000, 11, 3),
++	[3] = SDC_PINGROUP("sdc2_data", NORTH + 0xb7000, 9, 0),
++};
+ 
+ static const unsigned int sm8250_pin_offsets[] = {
+ 	[0] = SOUTH,   [1] = SOUTH,   [2] = SOUTH,   [3] = SOUTH,   [4] = NORTH,   [5] = NORTH,
+@@ -62,7 +91,12 @@ static const char *sm8250_get_function_name(struct udevice *dev, unsigned int se
+ 
+ static const char *sm8250_get_pin_name(struct udevice *dev, unsigned int selector)
  {
- 	struct msm_gpio_bank *priv = dev_get_priv(dev);
- 
--	/* Always NOP for special pins, assume they're in the correct state */
- 	if (qcom_is_special_pin(priv->pin_data, gpio))
--		return;
-+		msm_gpio_direction_input_special(priv, gpio);
- 
- 	/* Disable OE bit */
- 	clrsetbits_le32(priv->base + GPIO_CONFIG_REG(dev, gpio),
-@@ -49,13 +67,33 @@ static void msm_gpio_direction_input(struct udevice *dev, unsigned int gpio)
- 	return;
+-	snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
++	if (selector >= 180 && selector <= 183)
++		snprintf(pin_name, MAX_PIN_NAME_LEN,
++			 sm8250_special_pins_data[selector - 180].name);
++	else
++		snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
++
+ 	return pin_name;
  }
  
-+static int msm_gpio_set_value_special(struct msm_gpio_bank *priv,
-+				      unsigned int gpio, int value)
-+{
-+	unsigned int offset = gpio - priv->pin_data->special_pins_start;
-+	const struct msm_special_pin_data *data;
-+
-+	if (!priv->pin_data->special_pins_data)
-+		return 0;
-+
-+	data = &priv->pin_data->special_pins_data[offset];
-+
-+	if (!data->io_reg || data->out_bit >= 31)
-+		return 0;
-+
-+	value = !!value;
-+	/* set value */
-+	writel(value << data->out_bit, priv->base + data->io_reg);
-+
-+	return 0;
-+}
-+
- static int msm_gpio_set_value(struct udevice *dev, unsigned int gpio, int value)
- {
- 	struct msm_gpio_bank *priv = dev_get_priv(dev);
- 
--	/* Always NOP for special pins, assume they're in the correct state */
- 	if (qcom_is_special_pin(priv->pin_data, gpio))
--		return 0;
-+		return msm_gpio_set_value_special(priv, gpio, value);
- 
- 	value = !!value;
- 	/* set value */
-@@ -64,14 +102,42 @@ static int msm_gpio_set_value(struct udevice *dev, unsigned int gpio, int value)
- 	return 0;
- }
- 
-+static int msm_gpio_direction_output_special(struct msm_gpio_bank *priv,
-+					     unsigned int gpio,
-+					     int value)
-+{
-+	unsigned int offset = gpio - priv->pin_data->special_pins_start;
-+	const struct msm_special_pin_data *data;
-+
-+	if (!priv->pin_data->special_pins_data)
-+		return 0;
-+
-+	data = &priv->pin_data->special_pins_data[offset];
-+
-+	if (!data->io_reg || data->out_bit >= 31)
-+		return 0;
-+
-+	value = !!value;
-+	/* set value */
-+	writel(value << data->out_bit, priv->base + data->io_reg);
-+
-+	if (!data->ctl_reg || data->oe_bit >= 31)
-+		return 0;
-+
-+	/* switch direction */
-+	clrsetbits_le32(priv->base + data->ctl_reg,
-+			BIT(data->oe_bit), BIT(data->oe_bit));
-+
-+	return 0;
-+}
-+
- static int msm_gpio_direction_output(struct udevice *dev, unsigned int gpio,
- 				     int value)
- {
- 	struct msm_gpio_bank *priv = dev_get_priv(dev);
- 
--	/* Always NOP for special pins, assume they're in the correct state */
- 	if (qcom_is_special_pin(priv->pin_data, gpio))
--		return 0;
-+		return msm_gpio_direction_output_special(priv, gpio, value);
- 
- 	value = !!value;
- 	/* set value */
-@@ -100,13 +166,28 @@ static int msm_gpio_set_flags(struct udevice *dev, unsigned int gpio, ulong flag
- 	return 0;
- }
- 
-+static int msm_gpio_get_value_special(struct msm_gpio_bank *priv, unsigned int gpio)
-+{
-+	unsigned int offset = gpio - priv->pin_data->special_pins_start;
-+	const struct msm_special_pin_data *data;
-+
-+	if (!priv->pin_data->special_pins_data)
-+		return 0;
-+
-+	data = &priv->pin_data->special_pins_data[offset];
-+
-+	if (!data->io_reg || data->in_bit >= 31)
-+		return 0;
-+
-+	return !!(readl(priv->base + data->io_reg) >> data->in_bit);
-+}
-+
- static int msm_gpio_get_value(struct udevice *dev, unsigned int gpio)
- {
- 	struct msm_gpio_bank *priv = dev_get_priv(dev);
- 
--	/* Always NOP for special pins, assume they're in the correct state */
- 	if (qcom_is_special_pin(priv->pin_data, gpio))
--		return 0;
-+		return msm_gpio_get_value_special(priv, gpio);
- 
- 	return !!(readl(priv->base + GPIO_IN_OUT_REG(dev, gpio)) >> GPIO_IN);
- }
+@@ -76,6 +110,7 @@ static struct msm_pinctrl_data sm8250_data = {
+ 		.pin_offsets = sm8250_pin_offsets,
+ 		.pin_count = ARRAY_SIZE(sm8250_pin_offsets),
+ 		.special_pins_start = 180,
++		.special_pins_data = sm8250_special_pins_data,
+ 	},
+ 	.functions_count = ARRAY_SIZE(msm_pinctrl_functions),
+ 	.get_function_name = sm8250_get_function_name,
 
 -- 
 2.34.1
