@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D25AFEB64DE
-	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 11:09:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4877EB64DE
+	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 11:14:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 349FA88F86;
-	Tue, 10 Sep 2024 13:09:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jms.id.au
+	by phobos.denx.de (Postfix) with ESMTP id 131D089016;
+	Tue, 10 Sep 2024 13:14:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=jms.id.au header.i=@jms.id.au header.b="nzkcPV0+";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fetmrs8o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 338C089031; Tue, 10 Sep 2024 13:09:05 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A471D89039; Tue, 10 Sep 2024 13:14:22 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3205888F35
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 13:09:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1632388F63
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 13:14:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=jms.id.au
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=joel.stan@gmail.com
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-a86e9db75b9so89169066b.1
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 04:09:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=jms.id.au; s=google; t=1725966541; x=1726571341; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Yf7kI9BAwGneadGoKmVrPjCeY+wkh/gAWCwtENPhMIM=;
- b=nzkcPV0+qs236zGzn9IJBjTUOa/6anSdx0IgY0lE5mrkTHUGuJpYtfTMjl+ofy45Q/
- G2mHhIe67EDLsTtNcYovFwycYRFYz9JkVU331/r3RXpQ7lQ3enN2jTmp3wpfFY3QGMuI
- C3VST0kxoHpKnH1CQGaZCNLqlwgevV0gR8Irs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725966541; x=1726571341;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Yf7kI9BAwGneadGoKmVrPjCeY+wkh/gAWCwtENPhMIM=;
- b=wFVZKcxAiL+jbVHK/y0Bvtt/VWQ8mNt2y3xhwjXbyvi/fcSMKjw3xwKwaGVLfCM364
- WFTwJu09esX+3cGvr4aezDvlyOBaMJuwhwC+v3komztHLwE8MuFJrS1nij/J0QCOrILx
- CvWVkz2he+yivAexNnLXhjx4pen9t9KT1an2M+Xk9o4LdZ5vUCzaTHfB/jXji1f+dxKf
- 1lDIvB1WsF8SihkfM7EsvjihA9ePJQwkKW2V/81fP0TseMT3ytcLwhmNdVEV5gQL5SJl
- knDR1cFq4l3dXjenTN65R4V5bN1RQp00SR8SxMhgR4UqqJwCuZ0ufymGaf3m3wX61hTL
- pbXA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXSiNrxtWcJKUDGyL1z4IO7/HmrYzjUKqGky+J0vte2YTfmiTZC40PrKIqEXOZTEkAbNm7fbWc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx5PLkoGJmXUsc+GMmIQouvATCtzntvOMEUqRCRWggXMCgHKAn5
- FCxbBdj9PvJ59EKST8/qK9TTuA6c6vdwWKE7fFGyF/wvNt18mCwE2CYD0oThrtFCuWKDsDDaUF/
- To8+9l8QTkE2IeMLYb+ypN3cuWKM=
-X-Google-Smtp-Source: AGHT+IFeGmxdqyqaFSrY3jRWOtVTkZg/7Zdc3H+EuWW56DzIQSJvjnwlZ7LvP5EZDzpYdQ7Q5VqasMT05P7zuGD0t8o=
-X-Received: by 2002:a17:907:3f98:b0:a8d:4b02:3351 with SMTP id
- a640c23a62f3a-a8ffadf9053mr32807366b.50.1725966540906; Tue, 10 Sep 2024
- 04:09:00 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 48ABE9sx123379;
+ Tue, 10 Sep 2024 06:14:09 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1725966849;
+ bh=MqmkLRfrriQHie+nPEPR5fKH12d7eLgVmdTzlz8Mrgw=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=fetmrs8ote4pMEaybprAxK7LzuUBmM+bOIAZ5lHy5MWHgX0bechlnrS1jNgMwqJA3
+ 0BnSjIl9hmGhhtdZ8m0sm2z39sVU9mWIR+b0QH5viAys+aCvqcFYsMLgZYMUT7CXkv
+ lbuL+5IyD17rcEj22XMFbM1W7T9C8Kjjy9JNK9Jw=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 48ABE9hA094351
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 10 Sep 2024 06:14:09 -0500
+Received: from flwvowa02.ent.ti.com (10.64.41.53) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 10
+ Sep 2024 06:14:09 -0500
+Received: from DFLE103.ent.ti.com (10.64.6.24) by flwvowa02.ent.ti.com
+ (10.64.41.53) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2507.34; Tue, 10 Sep
+ 2024 06:14:08 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 10 Sep 2024 06:14:08 -0500
+Received: from [172.24.227.36]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36]
+ (may be forged))
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 48ABE6LU090186;
+ Tue, 10 Sep 2024 06:14:07 -0500
+Message-ID: <e35541ac-734f-4b86-9974-10fd602f2b52@ti.com>
+Date: Tue, 10 Sep 2024 16:44:06 +0530
 MIME-Version: 1.0
-References: <20240708060718.186075-1-jacky_chou@aspeedtech.com>
-In-Reply-To: <20240708060718.186075-1-jacky_chou@aspeedtech.com>
-From: Joel Stanley <joel@jms.id.au>
-Date: Tue, 10 Sep 2024 20:38:47 +0930
-Message-ID: <CACPK8XdVr8G7hBQ3QA2tXqbMwMiRjo2u0tZSa_2YjJEh4a8Cig@mail.gmail.com>
-Subject: Re: [PATCH] net: ftgmac100: Add Aspeed AST2700 support
-To: Jacky Chou <jacky_chou@aspeedtech.com>
-Cc: ryan_chen@aspeedtech.com, chiawei_wang@aspeedtech.com, 
- BMC-SW@aspeedtech.com, joe.hershberger@ni.com, rfried.dev@gmail.com, 
- trini@konsulko.com, sjg@chromium.org, kobedylan@gmail.com, 
- u-boot@lists.denx.de, Andrew Jeffery <andrew@aj.id.au>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 02/13] ufs: fix dcache flush and invalidate range
+ calculation
+To: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Bhupesh Sharma <bhupesh.linux@gmail.com>
+CC: <u-boot@lists.denx.de>, <u-boot-qcom@groups.io>
+References: <20240910-topic-ufs-enhancements-v1-0-3ee0bffacc64@linaro.org>
+ <20240910-topic-ufs-enhancements-v1-2-3ee0bffacc64@linaro.org>
+Content-Language: en-US
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20240910-topic-ufs-enhancements-v1-2-3ee0bffacc64@linaro.org>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,78 +88,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jacky,
+On 10/09/24 14:50, Neil Armstrong wrote:
+> The current calculation will omit doing a flush/invalidate on the last
+> cacheline if the base address is not aligned with DMA_MINALIGN.
+> 
+> This causes commands failures and write corruptions on Qualcomm
+> platforms.
+> 
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+> ---
+>   drivers/ufs/ufs.c | 16 ++++++++--------
+>   1 file changed, 8 insertions(+), 8 deletions(-)
+> 
+> diff --git a/drivers/ufs/ufs.c b/drivers/ufs/ufs.c
+> index e005cc90608..3d9a7d7ee12 100644
+> --- a/drivers/ufs/ufs.c
+> +++ b/drivers/ufs/ufs.c
+> @@ -703,11 +703,11 @@ static inline u8 ufshcd_get_upmcrs(struct ufs_hba *hba)
+>    */
+>   static void ufshcd_cache_flush_and_invalidate(void *addr, unsigned long size)
+>   {
+> -	uintptr_t aaddr = (uintptr_t)addr & ~(ARCH_DMA_MINALIGN - 1);
+> -	unsigned long asize = ALIGN(size, ARCH_DMA_MINALIGN);
+> +	uintptr_t start_addr = (uintptr_t)addr & ~(ARCH_DMA_MINALIGN - 1);
+> +	uintptr_t end_addr = ALIGN((uintptr_t)addr + size, ARCH_DMA_MINALIGN);
+>   
+> -	flush_dcache_range(aaddr, aaddr + asize);
+> -	invalidate_dcache_range(aaddr, aaddr + asize);
+> +	flush_dcache_range(start_addr, end_addr);
+> +	invalidate_dcache_range(start_addr, end_addr);
+>   }
+>   
+>   /**
+> @@ -1466,13 +1466,13 @@ static void prepare_prdt_table(struct ufs_hba *hba, struct scsi_cmd *pccb)
+>   	}
+>   
+>   	if (pccb->dma_dir == DMA_TO_DEVICE) {	/* Write to device */
+> -		flush_dcache_range(aaddr, aaddr +
+> -				   ALIGN(datalen, ARCH_DMA_MINALIGN));
+> +		flush_dcache_range(aaddr,
+> +				   ALIGN((uintptr_t)pccb->pdata + datalen, ARCH_DMA_MINALIGN));
+>   	}
+>   
+>   	/* In any case, invalidate cache to avoid stale data in it. */
+> -	invalidate_dcache_range(aaddr, aaddr +
+> -				ALIGN(datalen, ARCH_DMA_MINALIGN));
+> +	invalidate_dcache_range(aaddr,
+> +				ALIGN((uintptr_t)pccb->pdata + datalen, ARCH_DMA_MINALIGN));
+>   
+>   	table_length = DIV_ROUND_UP(pccb->datalen, MAX_PRDT_ENTRY);
+>   	buf = pccb->pdata;
+> 
 
-On Mon, 8 Jul 2024 at 15:37, Jacky Chou <jacky_chou@aspeedtech.com> wrote:
->
-> Add support of Aspeed AST2700 SoC.  AST2700 is based on ARM64 so modify
-> the DMA address related code to fit both ARM and ARM64.  Besides, the
-> RMII/RGMII mode control register is moved from SCU500 to MAC50 so
-> initialize the register in ftgmac100_start correspondingly.
+Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
 
-It looks like these changes will affect the older platforms. Have you
-tested on an ast2600?
-
-Is it okay to be writing to the new memory locations on the old
-platforms? If this is the case, please mention it in the commit
-message.
-
-> diff --git a/drivers/net/ftgmac100.c b/drivers/net/ftgmac100.c
-> index 9fb8c12838..a909a0b309 100644
-> --- a/drivers/net/ftgmac100.c
-> +++ b/drivers/net/ftgmac100.c
-
-> @@ -321,6 +333,7 @@ static int ftgmac100_start(struct udevice *dev)
->         struct eth_pdata *plat = dev_get_plat(dev);
->         struct ftgmac100_data *priv = dev_get_priv(dev);
->         struct ftgmac100 *ftgmac100 = priv->iobase;
-> +       union ftgmac100_dma_addr dma_addr = {.hi = 0, .lo = 0};
-
-You always set dma_addr before using it, so this zero-init is unnecessary.
-
-> @@ -352,7 +366,14 @@ static int ftgmac100_start(struct udevice *dev)
->         flush_dcache_range(start, end);
->
->         for (i = 0; i < PKTBUFSRX; i++) {
-> -               priv->rxdes[i].rxdes3 = (unsigned int)net_rx_packets[i];
-> +               unsigned int ip_align = 0;
-> +
-> +               dma_addr.addr = (dma_addr_t)net_rx_packets[i];
-> +               priv->rxdes[i].rxdes2 = FIELD_PREP(FTGMAC100_RXDES2_RXBUF_BADR_HI, dma_addr.hi);
-> +               /* For IP alignment */
-> +               if ((dma_addr.lo & (PKTALIGN - 1)) == 0)
-> +                       ip_align = 2;
-> +               priv->rxdes[i].rxdes3 = dma_addr.lo + ip_align;
-
-Please explain why the old code didn't need alignment added, and the
-new version does.
-
-> @@ -394,6 +419,10 @@ static int ftgmac100_start(struct udevice *dev)
->                 FTGMAC100_MACCR_RX_RUNT |
->                 FTGMAC100_MACCR_RX_BROADPKT;
->
-> +       if (priv->is_ast2700 && (priv->phydev->interface == PHY_INTERFACE_MODE_RMII ||
-> +                                priv->phydev->interface == PHY_INTERFACE_MODE_NCSI))
-
-Use device_is_compatible(dev, "aspeed,ast2700-mac") instead of adding
-is_ast2700.
-
-> +               maccr |= FTGMAC100_MACCR_RMII_ENABLE;
-> +
->         writel(maccr, &ftgmac100->maccr);
->
->         ret = phy_startup(phydev);
-> @@ -443,9 +472,11 @@ static int ftgmac100_recv(struct udevice *dev, int flags, uchar **packetp)
->         ulong des_start = ((ulong)curr_des) & ~(ARCH_DMA_MINALIGN - 1);
->         ulong des_end = des_start +
->                 roundup(sizeof(*curr_des), ARCH_DMA_MINALIGN);
-> -       ulong data_start = curr_des->rxdes3;
-> +       union ftgmac100_dma_addr data_start = { .lo = 0, .hi = 0 };
-
-Same here.
-
->         ulong data_end;
->
-> +       data_start.hi = FIELD_GET(FTGMAC100_RXDES2_RXBUF_BADR_HI, curr_des->rxdes2);
-> +       data_start.lo = curr_des->rxdes3;
->         invalidate_dcache_range(des_start, des_end);
+-- 
+Thanking You
+Neha Malcom Francis
