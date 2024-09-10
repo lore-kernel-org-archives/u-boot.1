@@ -4,76 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A420DEDE9AB
-	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 17:55:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63753EDE9AC
+	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 18:37:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EBAA9890D7;
-	Tue, 10 Sep 2024 19:55:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id B3674890C5;
+	Tue, 10 Sep 2024 20:37:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=grimler.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ocit17ui";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="cFswqDWH";
+	dkim=pass (1024-bit key; secure) header.d=grimler.se header.i=@grimler.se header.b="BrHx+S03";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 884D0890D5; Tue, 10 Sep 2024 19:55:03 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id 9A1E9890C9; Tue, 10 Sep 2024 20:37:28 +0200 (CEST)
+Received: from out-186.mta0.migadu.com (out-186.mta0.migadu.com
+ [IPv6:2001:41d0:1004:224b::ba])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 35E4789056
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 19:55:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 584F789037
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 20:37:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=grimler.se
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4X3BDh6q6Yz9sZZ;
- Tue, 10 Sep 2024 19:55:00 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1725990901;
+ spf=pass smtp.mailfrom=henrik@grimler.se
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=grimler.se; s=key1;
+ t=1725993445;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=SZa+UHd5fsrF8hjSHVSZA7aeL8jk3NM/ipL/aZGhL/c=;
- b=ocit17ui2wOTwhPvQGkNgkR+lnrZclfmUwbmCWsCYWntULcPKtjm27ILPdfi0Uco24LYvi
- JD7f3kqYRWVW0P5QamrmH66ovdAWsSu8GGaxmtaAbBHHGA2BTkYkpsndQfvWK4wv4Nao6s
- iHmAQlwcQ6qA1tPr8RpMavSf9s77Q2f7to0GLdX7uA6XWYtXA/793SWI7rlA6LUXoywklf
- VvfTLgBSj7J5IOpR9er6jVvflBwiT/wMq6wQg0EDOAT/B5KWOigRs0MrCqhvnLZtfMzq6P
- w1IQLf3GTkvBlBFVd9GOuvq0F2K3FxmzcA10mcd4rbXQe4DngOSxMVE4ymBhyA==
-Message-ID: <1cd4c1c1-b709-43aa-aff8-14cb1d21aee2@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1725990898;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=SZa+UHd5fsrF8hjSHVSZA7aeL8jk3NM/ipL/aZGhL/c=;
- b=cFswqDWH6FeAmP7MnhqrFq9cC2iz9X5ueUFsVhMi1wJb366iOVNnMhee9jP4J94ormbZFy
- bMSeSi2oHALnsCj41DkP3zGPQYTZCe0eQhd5QhJT3B0BgC62ggXR3HzsGfSDW6xFRo2oXa
- V+MivYSPV0ys963b7CUi2nFEaXkXFzeRAhLOx+z2Z1uXERejnuj4u8ZEgjlt15+1gShuXx
- DKa7ImTR1WYrS26g/CYJF0tkq1ZXSsDtmJu8ZXiFGSRyqP1xBwtxbhnZ5L1cIcb72ZN2if
- EjX+V9oO7sJdsicYRSlyfPXWvkcW2YchQfwLddzESuF5U7qr6JJk44pgkJMWdQ==
-Date: Tue, 10 Sep 2024 19:54:56 +0200
+ content-transfer-encoding:content-transfer-encoding;
+ bh=HB86UobLCP218lu5UHXYxrozTRKSFW8RUGg5kVXfg+c=;
+ b=BrHx+S03drCAZKqnX4sYUK6s6A7MuGWyqv6o0fK+dY1p5fi2hZKP/goy68havRNt4TnqdQ
+ P8Sj/0TAUYxCAkpo0Ap/R7xD3fyGZDQ240gezAgqQMx9TMoxyWxDaSOj8KPDvYJSd9YqBl
+ hHQ86UGn115pM22RSbyvdvUM6wxqF3M=
+From: Henrik Grimler <henrik@grimler.se>
+Date: Tue, 10 Sep 2024 20:37:18 +0200
+Subject: [PATCH] pinctrl: exynos: fix type of count integer
 MIME-Version: 1.0
-Subject: Re: [PATCH] sh: cache: Fill in invalidate_icache_all()
-To: Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Geert Uytterhoeven <geert+renesas@glider.be>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-References: <20240910001612.88569-1-marek.vasut+renesas@mailbox.org>
- <20240910172151.GG4252@bill-the-cat>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20240910172151.GG4252@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 264ec32601b08e0f69a
-X-MBO-RS-META: 5sqhctqcwiw494judckqqq9yr4hp3nb8
+Message-Id: <20240910-exynos-pinctrl-v1-1-f220454470ef@grimler.se>
+X-B4-Tracking: v=1; b=H4sIAN2R4GYC/x3MQQqAIBBA0avIrBNUCrGrRIvSsQZCRSOM6O5Jy
+ 7f4/4GCmbDAyB7IeFGhGBpkx8DuS9iQk2sGJVQvjBQc6x1i4YmCPfPBrRbODMppb1ZoUcroqf7
+ DaX7fD4clhxBgAAAA
+To: Sam Protsenko <semen.protsenko@linaro.org>, 
+ Minkyu Kang <mk7.kang@samsung.com>, Thomas Abraham <thomas.ab@samsung.com>, 
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Henrik Grimler <henrik@grimler.se>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1309; i=henrik@grimler.se;
+ h=from:subject:message-id; bh=4WMz7WRdUAwF2Xfk8C+fmFiSNfe7yhJ8Ru6tB8wMQdQ=;
+ b=owGbwMvMwMG4gT3Pk7swMZvxtFoSQ9qDiU+ezDxseCRWlOOzx8NUlk0Pftw0KDrDXX+0KohR3
+ iFopnFNJ6MxCwMjB4OsmCKLTr3muumd8imSKx+dhRnEygQyhYGLUwAmMiGLg6HVRkZ8Q8f3r3XG
+ f54cMl7i1jxPbc11zbdrM+aYZDqsvL1xgsCRSVcaJRUsT+Sv82+tc2KNOl7NwrVN3HLC273MJ0/
+ rffrmGf2g+s7EJ6crjlpukvQKa+jrOmF2p8ZYWT02+EN1X26lhG/m5fYNgg1/1yipnL6XZLV7ie
+ tCRv/DrVqNR5Xru+42n1yRw8vMadGTOWnG1Y3mAbt2zNX4azt79dq0FVtV/K9Mcffl3ZHEKJTVd
+ /yxxcxlmw2PrJl9XtdUcK4G8+nJ8/wdq0tLmK6lZokunKFfMLtZp1JUu/Py0UeZs2uEpN8Z2wRr
+ 90RLMMdcls2WLdOOjRSV5/q+W3GWQ2jokuqKbonEI2GxAA==
+X-Developer-Key: i=henrik@grimler.se; a=openpgp;
+ fpr=2C7F29AE97891F6419A9E2CDB0076E490B71616B
+X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,61 +79,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/10/24 7:21 PM, Tom Rini wrote:
-> On Tue, Sep 10, 2024 at 02:15:58AM +0200, Marek Vasut wrote:
-> 
->> Implement invalidate_icache_all() by clearing all V bits in
->> IC and OC. This is done by setting CCR cache control register
->> ICI and OCI bits.
->>
->> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->> ---
->> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
->> Cc: Tom Rini <trini@konsulko.com>
->> Cc: u-boot@lists.denx.de
->> ---
->>   arch/sh/cpu/sh4/cache.c | 11 +++++++----
->>   1 file changed, 7 insertions(+), 4 deletions(-)
->>
->> diff --git a/arch/sh/cpu/sh4/cache.c b/arch/sh/cpu/sh4/cache.c
->> index d3c480e79ed..99acc599965 100644
->> --- a/arch/sh/cpu/sh4/cache.c
->> +++ b/arch/sh/cpu/sh4/cache.c
->> @@ -33,8 +33,9 @@ static inline void cache_wback_all(void)
->>   	}
->>   }
->>   
->> -#define CACHE_ENABLE      0
->> -#define CACHE_DISABLE     1
->> +#define CACHE_ENABLE		0
->> +#define CACHE_DISABLE		1
->> +#define CACHE_INVALIDATE	2
->>   
->>   static int cache_control(unsigned int cmd)
->>   {
->> @@ -46,7 +47,9 @@ static int cache_control(unsigned int cmd)
->>   	if (ccr & CCR_CACHE_ENABLE)
->>   		cache_wback_all();
->>   
->> -	if (cmd == CACHE_DISABLE)
->> +	if (cmd == CACHE_INVALIDATE)
->> +		outl(CCR_CACHE_ICI | ccr, CCR);
->> +	else if (cmd == CACHE_DISABLE)
->>   		outl(CCR_CACHE_STOP, CCR);
->>   	else
->>   		outl(CCR_CACHE_INIT, CCR);
->> @@ -103,7 +106,7 @@ void icache_disable(void)
->>   
->>   void invalidate_icache_all(void)
->>   {
->> -	puts("No arch specific invalidate_icache_all available!\n");
->> +	cache_control(CACHE_INVALIDATE);
->>   }
->>   
->>   int icache_status(void)
-> 
-> Thanks for filling this in, I wasn't sure how the implementation would
-> look from a quick skim of the linux kernel code.
-I believe it should look like the above, but lemme CC Geert to be on the 
-safe side.
+unsigned int count is used to capture return of dev_read_string_count.
+When an error occurs dev_read_string_count returns -ve, which can
+hence not be handled correctly. Use int instead of unsigned int so
+that errors are detected.
+
+Fixes: 16ca80adc551 ("pinctrl: Add pinctrl driver support for Exynos7420 SoC")
+
+Signed-off-by: Henrik Grimler <henrik@grimler.se>
+---
+ drivers/pinctrl/exynos/pinctrl-exynos.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/pinctrl/exynos/pinctrl-exynos.c b/drivers/pinctrl/exynos/pinctrl-exynos.c
+index b393127c64..b37282fa9d 100644
+--- a/drivers/pinctrl/exynos/pinctrl-exynos.c
++++ b/drivers/pinctrl/exynos/pinctrl-exynos.c
+@@ -114,8 +114,8 @@ static void exynos_pinctrl_set_pincfg(unsigned long reg_base, u32 pin_num,
+ int exynos_pinctrl_set_state(struct udevice *dev, struct udevice *config)
+ {
+ 	struct exynos_pinctrl_priv *priv = dev_get_priv(dev);
+-	unsigned int count, idx;
+-	unsigned int pinvals[PINCFG_TYPE_NUM];
++	int count;
++	unsigned int idx, pinvals[PINCFG_TYPE_NUM];
+ 
+ 	/*
+ 	 * refer to the following document for the pinctrl bindings
+
+---
+base-commit: ce1a2630827a1f9ddadb2598ab7936732e6cb723
+change-id: 20240910-exynos-pinctrl-c70d952d7f9b
+
+Best regards,
+-- 
+Henrik Grimler <henrik@grimler.se>
+
