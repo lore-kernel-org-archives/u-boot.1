@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AB26ECE564
-	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 07:32:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EEE5ECE582
+	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 08:23:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A489F888A7;
-	Tue, 10 Sep 2024 09:32:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 70B5888E83;
+	Tue, 10 Sep 2024 10:23:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dx7WDNxn";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="cB/NNpQp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E2B988EFD; Tue, 10 Sep 2024 09:32:23 +0200 (CEST)
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
+ id 8C134882BE; Tue, 10 Sep 2024 10:23:19 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B218B888A7
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 09:32:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 379F588E83
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 10:23:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-206e614953aso41969425ad.1
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 00:32:20 -0700 (PDT)
+ spf=pass smtp.mailfrom=jmasson@baylibre.com
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-42cae102702so27672265e9.0
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 01:23:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725953535; x=1726558335; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5bTz5JWiI86/6jkNTxkStyWi8R+B9sw6zyPKFGlv4C8=;
- b=dx7WDNxnMB8fRWMNi7VfoIX4jVFmyDBZfmJ5XO1Pbp3WA0yYUez28BvjOGP3/M7JV/
- uPa8LoAenIhWmFDNc/d3zbd1tKiOTweLHwNpdqcajEdFEYAB5yrTIG/mMbydp2B6CaYX
- liKt9BM3uPwyNs6VGVDZKFJSc7z0UyXxB2q/UMuXT4pzG7+gYXxvqwcmhkiYiwWkZsuO
- scRViw4BVYt5LCtHEGfhi6nYV41N9QoMtsnmoOR0C8mng3NWtFKnQ16OaXp5neUCx86m
- EWe2iMADGEYZkJylzaJlwafZ448o0tsvOoXXhNgJzXrryakbYADgiy3RWE3YCTNjMAfN
- 2rMQ==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1725956596; x=1726561396;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:in-reply-to:subject:cc:to:from:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=qlIhkS8UQimoGpa8INTiFICikqYb3u/JvWqitb3U3T0=;
+ b=cB/NNpQpWEOQjoPYh1Y2JuOu9inIrDxo21UV+OMVi15fKdNEjA/C4Uv5u+ZiC9KFJA
+ 50mt44LYv7I4UcGImLihN5Oki0h0HQZfwTSXXm9gq8lUlvpZifflLtYg9aXrAvWM4A6A
+ WlS/hNrdiL7vCaBA4dktKFNfJfwboMqPq9ydBZOtOual6e9kGCs/i4IY2xNV/PjiAe0o
+ y6il5INPfJnD0HImj25RY5LofRKHi+rQ5EkhKOlMNeq8fldg2aG6DoNWpmvIsCmU/eXE
+ re41SwBgY0Vlzj7gSsYWAI9W0TdDX3xtRfbLJuEeRfTNtLQDcG2TUSpsgRsZKw0tEti7
+ TVnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725953535; x=1726558335;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=5bTz5JWiI86/6jkNTxkStyWi8R+B9sw6zyPKFGlv4C8=;
- b=ZTc+xNNWajWU8u0DsBx5oHC7SVGpaq//lMtl6AWGGjwRi6pk8F0lXy3W3utztOsjZX
- j1S6wSnaihX1DlAXHgw0r9iubz1S8lP28q7EX26wqrInIRcLbZlh6npr61pTKkFhXR3m
- 2MXclqWNfh0TTS6VTJ3nY5WEA4nPxeVs/UEtOutnai/W6tqbNhPm7hYSzSUnf32mPsKV
- 1TstQ2US4eoL3c6hLV5BKjcyFR6mvpiAlqUk/7iAlmk1RgszzSYj5fn/xt8qvIj5OMbs
- Dl7F1eqvOhwAme1NVLJFKhmdjGEGYPP4+alpP6Rpk/480umjCUzNbtanZr1QUR5620Vt
- YcVg==
+ d=1e100.net; s=20230601; t=1725956596; x=1726561396;
+ h=mime-version:message-id:date:in-reply-to:subject:cc:to:from
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=qlIhkS8UQimoGpa8INTiFICikqYb3u/JvWqitb3U3T0=;
+ b=wggh9TS5maeW6UwHnW07mUvuiJTu0WH/3QAJIUZLSf/Bo43sChvkX3Hc+I8PLOYxgK
+ e2Q9B28vpjROsaO4zmOq+OYM3REdrQZUBtxenNazknR8t+CZS3xH+skeVts8UgL7uIPb
+ yjsJwwWxj/4oOUVcRMQ0Xibx71zUpXnkPlaf3UpRBkNJHcOK/1Cb64Rx/OrZsWs7jCmC
+ 5TkkvfDluWr0Fb72HQEYsDw5hOb8KkIWVqSjG2oan1HI72DXDt+1+Wv/Rt80bEmt0VyE
+ ZwgjtovIIJ9WhCfaVf3z0k5PFTB58JfY0zDCaD1JWSPWetJNcKkWpvOjP4XXNk8gS23F
+ 3f9A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXXuhONUxEAapXVPeRjhCYgWpxX58HUAKBnZmCNh8wef4SUrD7MxzwHHxLOGHcY6RTJn5DHw/M=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxotn8tRt+1xZZaOav6pdMzOeUXdO7Gqdqu9YFybnVPj91uNI+w
- J2S5lyYglrCk2OOs56vEbATHVO9+PBEn2Zalmm6rixxjTd015omN91YYSG7p5Y5kwP/jZpOiJ7G
- ze/hmH/b3phAqd3c/JGUSFJnELZNRW/beNtcCxA==
-X-Google-Smtp-Source: AGHT+IFjErOQCCUF0/2GQZ4an+/k+e0liPNicJ3mdYM5utvEZak071yxPEVUt4inLTl7/YgyK0EanH1lHZHJELEs7ek=
-X-Received: by 2002:a17:903:946:b0:207:20fa:83a7 with SMTP id
- d9443c01a7336-20720fa83c4mr141671735ad.47.1725953534469; Tue, 10 Sep 2024
- 00:32:14 -0700 (PDT)
+ AJvYcCUm8wYI5srByrc76Pq0JCxEY8dHMayJo70k0Rga19bCjilUxV54iXlDqss4m36ghjrcZMyLbS8=@lists.denx.de
+X-Gm-Message-State: AOJu0YztWJntVbAT34TBO27vbV3Cj1UdHylQ1/FqI3LivQbbUOaM+Aa2
+ YCXRJ2jLGdDHc5HE65Zr+L5cuCNX7K7wWqdLEYflsdFwBUs7TcFrtE0dw9aC3FY=
+X-Google-Smtp-Source: AGHT+IEGvZC1kXWRf3Pj6qmOMa3alsSLZRhy3wKu0QpTSDnL2jCmRC8V51YNRTrVMON26sqWSaLZ6g==
+X-Received: by 2002:a05:600c:1ca6:b0:426:6ed5:d682 with SMTP id
+ 5b1f17b1804b1-42cae70f0e2mr60467395e9.12.1725956596462; 
+ Tue, 10 Sep 2024 01:23:16 -0700 (PDT)
+Received: from localhost ([89.207.171.77]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-42caeb8afc9sm103701525e9.44.2024.09.10.01.23.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 10 Sep 2024 01:23:15 -0700 (PDT)
+From: Julien Masson <jmasson@baylibre.com>
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Cc: Guillaume La Roque <glaroque@baylibre.com>, Julien Masson
+ <jmasson@baylibre.com>, <u-boot@lists.denx.de>, Mattijs Korpershoek
+ <mkorpershoek@baylibre.com>
+Subject: Re: [PATCH] bootstd: android: Add U-Boot version to cmdline
+In-Reply-To: <20240904-bootmeth-bootloader-version-v1-1-9979a8428566@baylibre.com>
+Date: Tue, 10 Sep 2024 10:23:11 +0200
+Message-ID: <87plpb9ats.fsf@baylibre.com>
 MIME-Version: 1.0
-References: <20240910063933.141283-1-ilias.apalodimas@linaro.org>
- <CADg8p94ZnxVCc0VJ9hkAQ1Ka2Y9=Yt995KisJpFDXboMMfT3Yw@mail.gmail.com>
-In-Reply-To: <CADg8p94ZnxVCc0VJ9hkAQ1Ka2Y9=Yt995KisJpFDXboMMfT3Yw@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 10 Sep 2024 10:31:38 +0300
-Message-ID: <CAC_iWjL2ufC9RwDmdyjLq-Oxy0_Zjr3AkLqfyf=LbcQhgskUBQ@mail.gmail.com>
-Subject: Re: [PATCH] board: rpi: Enable capsule updates
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: pbrobinson@gmail.com, mbrugger@suse.com, Tom Rini <trini@konsulko.com>, 
- Stefan Roese <sr@denx.de>, "Ivan T. Ivanov" <iivanov@suse.de>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Francois Berder <fberder@outlook.fr>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,83 +92,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thanks for testing
 
-On Tue, 10 Sept 2024 at 10:29, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
->
-> On Tue, 10 Sept 2024 at 12:09, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > Since RPI works well using EFI and has no size limitations with regards
-> > to U-Boot, add the needed structures and Kconfig options needed to
-> > enable capsule updates
-> > ---
-> >  board/raspberrypi/rpi/rpi.c | 22 ++++++++++++++++++++++
-> >  configs/rpi_4_defconfig     |  2 ++
-> >  2 files changed, 24 insertions(+)
->
-> Tested-by: Sughosh Ganu <sughosh.ganu@linaro.org>
->
-> A couple of nits below.
->
-> >
-> > diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
-> > index ab5ea85cf9f8..1f342eee12b2 100644
-> > --- a/board/raspberrypi/rpi/rpi.c
-> > +++ b/board/raspberrypi/rpi/rpi.c
-> > @@ -63,6 +63,28 @@ struct msg_get_clock_rate {
-> >         u32 end_tag;
-> >  };
-> >
-> > +struct efi_fw_image fw_images[] = {
-> > +       {
-> > +               .fw_name = u"RPI_UBOOT",
-> > +               .image_index = 1,
-> > +       },
-> > +};
-> > +
-> > +struct efi_capsule_update_info update_info = {
-> > +       .dfu_string = "mmc 0=u-boot.bin fat 0 1",
-> > +       .num_images = ARRAY_SIZE(fw_images),
-> > +       .images = fw_images,
-> > +};
-> > +
-> > +#if IS_ENABLED(CONFIG_SET_DFU_ALT_INFO)
-> > +void set_dfu_alt_info(char *interface, char *devstr)
-> > +{
-> > +       if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
-> > +               env_set("dfu_alt_info", update_info.dfu_string);
-> > +}
-> > +#endif
->
-> Is this really needed? We have a weak function in efi_firrmware.c
-> which is doing exactly this.
+On Tue 10 Sep 2024 at 10:23, Mattijs Korpershoek <mkorpershoek@baylibre.com> wrote:
 
-Good point, I'll get rid of this
+> When booting into Android fastbootd (a subset of recovery), the default
+> UI shows the bootloader version in the screen [1].
+> This is done via the ro.bootloader property which should come from the
+> bootloader.
+> 
+> Provide the U-Boot version via a kernel commandline argument so that
+> fastbootd can show it properly on the screen.
+> 
+> [1] https://android.googlesource.com/platform/bootable/recovery/+/refs/heads/main/fastboot/fastboot.cpp#42
+> 
+> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> ---
+>  boot/bootmeth_android.c | 9 +++++++++
+>  1 file changed, 9 insertions(+)
+> 
+> diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
+> index 6e8d3e615db0..2fb82a5073de 100644
+> --- a/boot/bootmeth_android.c
+> +++ b/boot/bootmeth_android.c
+> @@ -22,6 +22,7 @@
+>  #include <malloc.h>
+>  #include <mapmem.h>
+>  #include <part.h>
+> +#include <version.h>
+>  #include "bootmeth_android.h"
+>  
+>  #define BCB_FIELD_COMMAND_SZ 32
+> @@ -171,6 +172,12 @@ static int configure_serialno(struct bootflow *bflow)
+>  	return bootflow_cmdline_set_arg(bflow, "androidboot.serialno", serialno, false);
+>  }
+>  
+> +static int configure_bootloader_version(struct bootflow *bflow)
+> +{
+> +	return bootflow_cmdline_set_arg(bflow, "androidboot.bootloader",
+> +					PLAIN_VERSION, false);
+> +}
+> +
+>  static int android_read_bootflow(struct udevice *dev, struct bootflow *bflow)
+>  {
+>  	struct blk_desc *desc = dev_get_uclass_plat(bflow->blk);
+> @@ -267,6 +274,8 @@ static int android_read_bootflow(struct udevice *dev, struct bootflow *bflow)
+>  	/* Ignoring return code: setting serial number is not mandatory for booting */
+>  	configure_serialno(bflow);
+>  
+> +	configure_bootloader_version(bflow);
+> +
+>  	if (priv->boot_mode == ANDROID_BOOT_MODE_NORMAL) {
+>  		ret = bootflow_cmdline_set_arg(bflow, "androidboot.force_normal_boot",
+>  					       "1", false);
+> 
+> ---
+> base-commit: 360aaddd9cea8c256f50c576794415cadfb61819
+> change-id: 20240904-bootmeth-bootloader-version-2a2b35fce4cf
+> 
+> Best regards,
+> -- 
+> Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> 
 
->
-> > +
-> > +
-> >  #ifdef CONFIG_ARM64
-> >  #define DTB_DIR "broadcom/"
-> >  #else
-> > diff --git a/configs/rpi_4_defconfig b/configs/rpi_4_defconfig
-> > index f5fb322aa8fc..c70414e6fcaf 100644
-> > --- a/configs/rpi_4_defconfig
-> > +++ b/configs/rpi_4_defconfig
-> > @@ -65,3 +65,5 @@ CONFIG_SYS_WHITE_ON_BLACK=y
-> >  CONFIG_VIDEO_BCM2835=y
-> >  CONFIG_CONSOLE_SCROLL_LINES=10
-> >  CONFIG_PHYS_TO_BUS=y
-> > +CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
-> > +CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
->
-> Can we also add the efidebug and efi nvedit commands here. They are
-> pretty handy especially when it comes to capsule updates. Thanks.
-
-Sure, I'll add those
-
-
-/Ilias
->
-> -sughosh
+Reviewed-by: Julien Masson <jmasson@baylibre.com>
+-- 
+Julien Masson
