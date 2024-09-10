@@ -4,98 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 786B8EE01EB
-	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 21:29:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20EDDEE01E9
+	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 22:07:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AFCED890FC;
-	Tue, 10 Sep 2024 23:29:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 55A9F88F35;
+	Wed, 11 Sep 2024 00:07:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Wi0tiTVn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cthByZgB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC6D289100; Tue, 10 Sep 2024 23:29:25 +0200 (CEST)
-Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
- [IPv6:2607:f8b0:4864:20::42f])
+ id 4011E88F5C; Wed, 11 Sep 2024 00:07:16 +0200 (CEST)
+Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
+ [IPv6:2607:f8b0:4864:20::730])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91179890E6
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 23:29:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B25B388EBF
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 00:07:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pf1-x42f.google.com with SMTP id
- d2e1a72fcca58-71781f42f75so4805440b3a.1
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 14:29:22 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x730.google.com with SMTP id
+ af79cd13be357-7a9ab721058so26340485a.1
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 15:07:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726003761; x=1726608561; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=eqhQ7+97u802hsw1JTp1oQ5xU6runJQCJDbmjPjrxb0=;
- b=Wi0tiTVnfcVq9KeCbr/V12U3XuZmQco2t0VOkZScJYIyH7UEGD0jougFw/7JLsghdJ
- PydLYVETETW6gMX9GD7PgGQ20aJREXqHB/AY6u4QyLxdU+UrHAimnbUr+TfH5j32TV7J
- IgsEKqZxhx7piXcjlUgm1lmVTA6hliftCd5Po05KgaS5W+2e4qt0hshd3nY+JDeqoAey
- rvNKNsCv0qpCX8iD7oRpqXeDmvhr5j3kV7Cwu5ay+pnJf9g6q6PWg2TJvEWT9kfeVBkh
- divQySMA4uJMogbYZuUC+wKpkZBUVsT9NoaePuL48YX9JQJnklRHUUnL1ful3TAXfpVz
- Hd4A==
+ d=konsulko.com; s=google; t=1726006032; x=1726610832; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=nkcWUPzLNtyzh/lKSs1xElyv5wJdeQcxvUVRSwn+p+o=;
+ b=cthByZgB2Q3ENQXfDrSxxxeCSv3PIJNXTM4R32YG/NEesabB7DGB6RRSDGCC/hm8YJ
+ SBf4+oQxuETyIVG5t+eTUUMub45TdqoaYJg9lDb9uYnl84X5LRrKJmBUm7VHyJr1kWFc
+ Yqjt9Z18ExljGMGYknxBOMyc2UUyvJyMnoy6w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726003761; x=1726608561;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=eqhQ7+97u802hsw1JTp1oQ5xU6runJQCJDbmjPjrxb0=;
- b=pc5oUrCcDXjTwkwGlUKaNmRXPYkYINcmsGtejd4gqi8FZI+KfDTt0HOofUq47IHZzC
- lbyQuI77iIRBvZmyZp76hcmqcEaB29vdFvuUKGYFZ+RF/uIcFLpC7PVtNjcGPTY5T6fC
- tRdfSUZooakMGSESM0QEa/hRQZeTB7FvCjbB3wRZEoglL6oC120JqXGRgI4IB9c5MYnH
- 8k/A4iSTN1jbUhYJWvJPLi+9c/YDEj/4I9oXKr9mnD1V/JnxQrE48MQhNtVuQwMNvzbu
- vxaKwzD3xkEgxsluiylFIjg1Yf1eTdGfwkvzOysRIbCpFhwyOG+7PJigIpWfyHSfbsGe
- 1CLQ==
-X-Gm-Message-State: AOJu0YycdNmNoQfc/+NhXYdsn7uhb7RmvDOZAsPl09THpuYCLRdts7v6
- 4mpcQpkgzDIBOBv2NvZDwXO7vQ8KcIgyAhZWPJy5+a/HiASWmK23AkIi2EVh/iha4atjgbfwmqH
- OtXNo1+Rskqxb9t3AjbyOZzlFZve52A39yFjwnQ==
-X-Google-Smtp-Source: AGHT+IHH6TUQ5gl/uv2zFuDoEyVGBKbwHJfjti+j1f306uG+zuQk2yvbhipDgzW962lxCh00aG6zoI4RUPDtV7QJLwY=
-X-Received: by 2002:a05:6a00:148a:b0:70d:2e24:af75 with SMTP id
- d2e1a72fcca58-718d5f06932mr24475484b3a.24.1726003760730; Tue, 10 Sep 2024
- 14:29:20 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240816214436.1877263-1-raymond.mao@linaro.org>
- <CAFLszTiRy3dkrTVnkV-H=CcCxJH6W5=RBM9tokOiSN-AVXGywA@mail.gmail.com>
- <CAEfUkU++=WbmePTa_JwPkn6VoG0C+Y=U7SebXmNhcLyPTbKrZQ@mail.gmail.com>
- <CAFLszTh56FrvLaHvat6Oz97EVzw9xYmQr+WyDNtYE=c2qmyJ5w@mail.gmail.com>
- <CAEfUkU+iXQVBTmTc3A4HUEFdm2NapoqzQefOamczRkkhPsa0Bw@mail.gmail.com>
- <CAFLszThct-czdZcBr-pjco9+ewtYtPJMvKtWf6vJb5n2s=9=gg@mail.gmail.com>
-In-Reply-To: <CAFLszThct-czdZcBr-pjco9+ewtYtPJMvKtWf6vJb5n2s=9=gg@mail.gmail.com>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Tue, 10 Sep 2024 17:29:08 -0400
-Message-ID: <CAEfUkUJ1karN9=-DbswLAkdG+PavmCDi1+TNk7AKfQVniB_6nA@mail.gmail.com>
-Subject: Re: [PATCH v6 00/28] Integrate MbedTLS v3.6 LTS with U-Boot
+ d=1e100.net; s=20230601; t=1726006032; x=1726610832;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nkcWUPzLNtyzh/lKSs1xElyv5wJdeQcxvUVRSwn+p+o=;
+ b=LyLMUcaa3A4lW8h0wl+5V3FeqemSOUwz6eSehqr446guYw9aEpC375nf+yNiwWoHIo
+ uygh+UnwF6knephU5LWDn5ZPH/HwktF9JboFNX6HFOpisXIWWR/IE15XgoAh13nO7HOF
+ x+oGEyiqu2lgokHfhDOLzt0SjM3VbB4F/OJRAHcPYAlC1WnFoHbLN0QlazMGHlubhi2k
+ pxIfLJ/59+XlpA53WizhJTdNRg5IsNtQQ7WkaOS2jNABQG68MMm+yav7jCzEzpTNLHQs
+ Jm11C/ySKE/qUnfZLsLGdx0BI9c6AR2eET8R4RpG5KxplmMHg3ss77W5YXCdZ99N1NIT
+ XIkA==
+X-Gm-Message-State: AOJu0YzzOMbTz1dWlYjJcbOk+YhesFY6II8N5t6iv7W9tGkEFlLkisIr
+ Hmjh+KoEvRpR3wcxfx5oCKk3+3nvqjmTVFUFcPly8ilM6P8Dz+skpE6wZZrfY2I=
+X-Google-Smtp-Source: AGHT+IHHa6Prxpcjib0P2vUSEWk/r0swvLKYwMc1E68fgzUqH4h8H8JAecrztnrmgMkrFSJgbJM2fw==
+X-Received: by 2002:a05:620a:4014:b0:7a9:b3eb:9c9b with SMTP id
+ af79cd13be357-7a9bf96ddcbmr1040756585a.13.1726006032350; 
+ Tue, 10 Sep 2024 15:07:12 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7a9a7a040dbsm347663685a.86.2024.09.10.15.07.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 10 Sep 2024 15:07:11 -0700 (PDT)
+Date: Tue, 10 Sep 2024 16:07:08 -0600
+From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, manish.pandey2@arm.com, 
- Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
- Mario Six <mario.six@gdsys.cc>, 
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Michal Simek <michal.simek@amd.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Andrew Davis <afd@ti.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Sumit Garg <sumit.garg@linaro.org>, 
- Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>, 
- "Leon M. Busch-George" <leon@georgemail.eu>,
- Igor Opaniuk <igor.opaniuk@gmail.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Alexander Gendin <agendin@matrox.com>, Jonathan Humphreys <j-humphreys@ti.com>,
- Eddie James <eajames@linux.ibm.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Brandon Maier <brandon.maier@collins.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [PATCH v3 2/3] buildman: Allow skipping the dtc build
+Message-ID: <20240910220708.GN4252@bill-the-cat>
+References: <CAFLszTh1Nig-hs+Gtxzg8f-=vE1z4BvNSfEyUGtatZohj0pnuQ@mail.gmail.com>
+ <CAFLszTgufCxvXjJupqDphcGwJ0gfvrYxQACK3kYRKaumpKgrYQ@mail.gmail.com>
+ <20240822141013.GQ1626301@bill-the-cat>
+ <CAFLszTiV8Nut06NeJFqT87y8qSTfzMYwxY6vc10+Q6NY6u2m-A@mail.gmail.com>
+ <20240902153904.GX2479150@bill-the-cat>
+ <CAFLszTi4_=n6SmfN8unNx6DgO+C4HQwpxG8gcWuOGUd4Lna_ug@mail.gmail.com>
+ <20240910184242.GL4252@bill-the-cat>
+ <CAFLszTjfU8m-dQyXXAHJ0FWGfAMdvF3yYDMOofN87qocY0mRyg@mail.gmail.com>
+ <20240910185237.GM4252@bill-the-cat>
+ <CAFLszTgNPmHD7t4k1BkB_eSVZz7ZgP9=vuoPykm2ZGV0PQxg3g@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="kfytsXdrXqQxG9YB"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTgNPmHD7t4k1BkB_eSVZz7ZgP9=vuoPykm2ZGV0PQxg3g@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,192 +101,213 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
 
-On Tue, 10 Sept 2024 at 14:44, Simon Glass <sjg@chromium.org> wrote:
+--kfytsXdrXqQxG9YB
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> Hi Raymond,
->
-> On Fri, 6 Sept 2024 at 08:50, Raymond Mao <raymond.mao@linaro.org> wrote:
+On Tue, Sep 10, 2024 at 02:14:35PM -0600, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Tue, 10 Sept 2024 at 12:52, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > Hi Simon,
+> > On Tue, Sep 10, 2024 at 12:45:39PM -0600, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Tue, 10 Sept 2024 at 12:42, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Tue, Sep 10, 2024 at 12:41:11PM -0600, Simon Glass wrote:
+> > > > > Hi Tom,
+> > > > >
+> > > > > On Mon, 2 Sept 2024 at 09:39, Tom Rini <trini@konsulko.com> wrote:
+> > > > > >
+> > > > > > On Sun, Sep 01, 2024 at 02:09:39PM -0600, Simon Glass wrote:
+> > > > > > > Hi Tom,
+> > > > > > >
+> > > > > > > On Thu, 22 Aug 2024 at 08:10, Tom Rini <trini@konsulko.com> w=
+rote:
+> > > > > > > >
+> > > > > > > > On Wed, Aug 21, 2024 at 09:00:25PM -0600, Simon Glass wrote:
+> > > > > > > > > Hi Tom,
+> > > > > > > > >
+> > > > > > > > > On Fri, 16 Aug 2024 at 17:53, Simon Glass <sjg@chromium.o=
+rg> wrote:
+> > > > > > > > > >
+> > > > > > > > > > Hi Tom,
+> > > > > > > > > >
+> > > > > > > > > > On Fri, 16 Aug 2024 at 11:22, Tom Rini <trini@konsulko.=
+com> wrote:
+> > > > > > > > > > >
+> > > > > > > > > > > On Thu, Aug 15, 2024 at 01:57:45PM -0600, Simon Glass=
+ wrote:
+> > > > > > > > > > >
+> > > > > > > > > > > > For most boards, the device-tree compiler is built =
+in-tree, ignoring the
+> > > > > > > > > > > > system version. Add a special option to skip this b=
+uild. This can be
+> > > > > > > > > > > > useful when the system dtc is up-to-date, as it spe=
+eds up the build.
+> > > > > > > > > > > >
+> > > > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > > > > > > ---
+> > > > > > > > > > > >
+> > > > > > > > > > > > (no changes since v1)
+> > > > > > > > > > > >
+> > > > > > > > > > > >  tools/buildman/builder.py       | 27 +++++++++++++=
++++++++++++++-
+> > > > > > > > > > > >  tools/buildman/builderthread.py |  4 ++--
+> > > > > > > > > > > >  tools/buildman/buildman.rst     |  3 +++
+> > > > > > > > > > > >  tools/buildman/cmdline.py       |  2 ++
+> > > > > > > > > > > >  tools/buildman/control.py       |  3 ++-
+> > > > > > > > > > > >  tools/buildman/test.py          | 31 +++++++++++++=
+++++++++++++++++++
+> > > > > > > > > > > >  6 files changed, 66 insertions(+), 4 deletions(-)
+> > > > > > > > > > >
+> > > > > > > > > > > We should probably do this more generically, outside =
+of buildman. We
+> > > > > > > > > > > have scripts/dtc-version.sh and if the system version=
+ isn't new enough
+> > > > > > > > > > > (and we just need to define whatever the minimum vers=
+ion is), then we
+> > > > > > > > > > > build our (not currently that new anymore) dtc instea=
+d.
+> > > > > > > > > >
+> > > > > > > > > > Yes I think I did a patch for that ages ago [1], but it=
+ was rejected.
+> > > > > > > > > >
+> > > > > > > > > > I'd be very happy for it to be applied as I think it is=
+ a better
+> > > > > > > > > > solution than this one.
+> > > > > > > > > >
+> > > > > > > > > > I see that some poor sod tried to do this in Linux this=
+ morning.
+> > > > > > > > >
+> > > > > > > > > Any thoughts on that patch?
+> > > > > > > >
+> > > > > > > > I'm open to re-considering [1] again, but we need to handle=
+ the warning
+> > > > > > > > problem first. That means...
+> > > > > > > >
+> > > > > > > > > Also I do see one problem. Newer dtc version produce a lo=
+t of
+> > > > > > > > > warnings, which causes CI to fail. So if we always use th=
+e newest
+> > > > > > > > > version, people are going to see a ton of warnings when t=
+hey run
+> > > > > > > > > locally. Am I missing something here?
+> > > > > > > >
+> > > > > > > > Well, it would be great to get our Kbuild logic anywhere cl=
+ose to
+> > > > > > > > in-sync again with upstream. But syncing up the disabling w=
+arning flags
+> > > > > > > > shouldn't be too hard.
+> > > > > > >
+> > > > > > > So, coming back to this patch, the nice thing about it is tha=
+t it is
+> > > > > > > deterministic. So people who build U-Boot and don't want funky
+> > > > > > > behaviour will be happy. It will use the internal dtc by defa=
+ult. To
+> > > > > > > use the external one, you must provide an option.
+> > > > > > >
+> > > > > > > This patch only affects buildman, but as you can see the mech=
+anism it
+> > > > > > > uses is to set the DTC variable, which people can do without =
+buildman.
+> > > > > > > It's just a convenience, but useful enough to have a flag, I =
+believe.
+> > > > > >
+> > > > > > Wait, that's right, we have DTC as a thing that can be set in t=
+he
+> > > > > > environment, so why do we need something for buildman at all?
+> > > > >
+> > > > > It's a convenience. I have found that it speeds things up quite a=
+ bit,
+> > > > > so I want to enable it most of the time. But we can't do it by de=
+fault
+> > > > > and need it to be optional, I believe.
+> > > >
+> > > > I wasn't clear, sorry. Why is:
+> > > > $ export DTC=3D/usr/local/bin/dtc
+> > > > $ tools/buildman/buildman ...
+> > > >
+> > > > Enough?
+> > >
+> > > My patch is more equivalent to:
+> > >
+> > > DTC=3D`which dtc` buildman...
+> > >
+> > > As I said it is a convenience which I want to use all the time,
+> > > including in CI. Are you worried about changing buildman? What is the
+> > > issue here?
 > >
-> > On Thu, 5 Sept 2024 at 20:43, Simon Glass <sjg@chromium.org> wrote:
-> >>
-> >> Hi Raymond,
-> >>
-> >> On Tue, 3 Sept 2024 at 08:59, Raymond Mao <raymond.mao@linaro.org>
-> wrote:
-> >> >
-> >> > Hi Simon,
-> >> >
-> >> > On Sat, 17 Aug 2024 at 11:58, Simon Glass <sjg@chromium.org> wrote:
-> >> >>
-> >> >> Hi Raymond,
-> >> >>
-> >> >> On Fri, 16 Aug 2024 at 15:44, Raymond Mao <raymond.mao@linaro.org>
-> wrote:
-> >> >> >
-> >> >> > Integrate MbedTLS v3.6 LTS (currently v3.6.0) with U-Boot.
-> >> >> >
-> >> >> > Motivations:
-> >> >> > ------------
-> >> >> >
-> >> >> > 1. MbedTLS is well maintained with LTS versions.
-> >> >> > 2. LWIP is integrated with MbedTLS and easily to enable HTTPS.
-> >> >> > 3. MbedTLS recently switched license back to GPLv2.
-> >> >> >
-> >> >> > Prerequisite:
-> >> >> > -------------
-> >> >> >
-> >> >> > This patch series requires mbedtls git repo to be added as a
-> >> >> > subtree to the main U-Boot repo via:
-> >> >> >     $ git subtree add --prefix lib/mbedtls/external/mbedtls \
-> >> >> >           https://github.com/Mbed-TLS/mbedtls.git \
-> >> >> >           v3.6.0 --squash
-> >> >> > Moreover, due to the Windows-style files from mbedtls git repo,
-> >> >> > we need to convert the CRLF endings to LF and do a commit manually:
-> >> >> >     $ git add --renormalize .
-> >> >> >     $ git commit
-> >> >> >
-> >> >> > New Kconfig options:
-> >> >> > --------------------
-> >> >> >
-> >> >> > `MBEDTLS_LIB` is for MbedTLS general switch.
-> >> >> > `MBEDTLS_LIB_CRYPTO` is for replacing original digest and crypto
-> libs with
-> >> >> > MbedTLS.
-> >> >> > `MBEDTLS_LIB_X509` is for replacing original X509, PKCS7, MSCode,
-> ASN1,
-> >> >> > and Pubkey parser with MbedTLS.
-> >> >> > `LEGACY_CRYPTO` is introduced as a main switch for legacy crypto
-> library.
-> >> >> > `LEGACY_CRYPTO_BASIC` is for the basic crypto functionalities and
-> >> >> > `LEGACY_CRYPTO_CERT` is for the certificate related
-> functionalities.
-> >> >> > For each of the algorithm, a pair of `<alg>_LEGACY` and
-> `<alg>_MBEDTLS`
-> >> >> > Kconfig options are introduced. Meanwhile, `SPL_` Kconfig options
-> are
-> >> >> > introduced.
-> >> >> >
-> >> >> > In this patch set, MBEDTLS_LIB, MBEDTLS_LIB_CRYPTO and
-> MBEDTLS_LIB_X509
-> >> >> > are by default enabled in qemu_arm64_defconfig and
-> sandbox_defconfig
-> >> >> > for testing purpose.
-> >> >> >
-> >> >> > Patches for external MbedTLS project:
-> >> >> > -------------------------------------
-> >> >> >
-> >> >> > Since U-Boot uses Microsoft Authentication Code to verify PE/COFFs
-> >> >> > executables which is not supported by MbedTLS at the moment,
-> >> >> > addtional patches for MbedTLS are created to adapt with the EFI
-> loader:
-> >> >> > 1. Decoding of Microsoft Authentication Code.
-> >> >> > 2. Decoding of PKCS#9 Authenticate Attributes.
-> >> >> > 3. Extending MbedTLS PKCS#7 lib to support multiple signer's
-> certificates.
-> >> >> > 4. MbedTLS native test suites for PKCS#7 signer's info.
-> >> >> >
-> >> >> > All above 4 patches (tagged with `mbedtls/external`) are submitted
-> to
-> >> >> > MbedTLS project and being reviewed, eventually they should be part
-> of
-> >> >> > MbedTLS LTS release.
-> >> >> > But before that, please merge them into U-Boot, otherwise the
-> building
-> >> >> > will be broken when MBEDTLS_LIB_X509 is enabled.
-> >> >> >
-> >> >> > See below PR link for the reference:
-> >> >> > https://github.com/Mbed-TLS/mbedtls/pull/9001
-> >> >> >
-> >> >> > Miscellaneous:
-> >> >> > --------------
-> >> >> >
-> >> >> > Optimized MbedTLS library size by tailoring the config file
-> >> >> > and disabling all unnecessary features for EFI loader.
-> >> >> > From v2, original libs (rsa, asn1_decoder, rsa_helper, md5, sha1,
-> sha256,
-> >> >> > sha512) are completely replaced when MbedTLS is enabled.
-> >> >> > From v3, the size-growth is slightly reduced by refactoring Hash
-> functions.
-> >> >> > From v6, smaller implementations for SHA256 and SHA512 are enabled
-> and
-> >> >> > target size reduce significantly.
-> >> >> > Target(QEMU arm64) size-growth when enabling MbedTLS:
-> >> >> > v1: 6.03%
-> >> >> > v2: 4.66%
-> >> >> > v3 - v5: 4.55%
-> >> >> > v6: 2.90%
-> >> >> >
-> >> >> > Please see the latest output from buildman for size-growth on QEMU
-> arm64,
-> >> >> > Sandbox and Nanopi A64. [1]
-> >> >> >
-> >> >> > Tests done:
-> >> >> > -----------
-> >> >> >
-> >> >> > EFI Secure Boot test (EFI variables loading and verifying, EFI
-> signed image
-> >> >> > verifying and booting) via U-Boot console.
-> >> >> > EFI Secure Boot and Capsule sandbox test passed.
-> >> >> >
-> >> >> > Known issues:
-> >> >> > -------------
-> >> >> >
-> >> >> > None.
-> >> >>
-> >> >> I wonder if we could leave out the SHA stuff? The algorithms are
-> >> >> stable and this would seem to avoid much of the size growth, and all
-> >> >> the pain of trying to integrate another yet another hashing layer (we
-> >> >> already have normal, progressive and h/w acceleration, plus
-> >> >> UCLASS_HASH which h/w acceleration should use but that migration
-> never
-> >> >> happened). I struggle to see any benefit in replacing U-Boot's very
-> >> >> solid hashing infra with something else, particularly as this series
-> >> >> adds yet another. Better to invest the time to refactor it. I asked
-> >> >> about this before and was told that it would happen 'later'. Let's
-> >> >> just not change it at all, then it is more likely someone will sort
-> it
-> >> >> out.
-> >> >>
-> >> > Unfortunately, MbedTLS depends on its own digest layer. Unless we
-> patch MbedTLS
-> >> > to allow an external digest library from U-Boot ...
-> >>
-> >> Yes that sounds best. It looks like only a few call sites, so it
-> >> should be a matter of leaving out the MbedTLS code and adding some
-> >> static inlines.
-> >>
-> > Inspired by Ilias's reply to patch #7, though we can use the MbedTLS
-> hash alternative options,
-> > we still need to convert all U-Boot hash APIs to adapt to the MbedTLS
-> style.
-> > This will impact all callers in U-Boot and I don't think it worth to do,
-> at least now.
->
-> Agreed.
->
-> > As the first patch set to introduce MbedTLS to U-Boot with turning on
-> all necessary features,
-> > I think this patch set is in the best way with an overall consideration.
->
-> I am not convinced, sorry. Can you update MbedTLS so that its hash
-> algo can be changed to call the U-Boot one? Then we can deal with
-> hardware acceleration, driver model and avoid yet another layer of
-> cruft in common/hash.c
->
-> MbedTLS reserves an alternative interface for external algorithms but it
-requires to
-adapt all args to the ones of MbedTLS which means we have to modify all hash
-APIs we have in U-boot and doesn't make too much sense.
+> > My question / concern is why do we need:
+> >
+> > >  6 files changed, 66 insertions(+), 4 deletions(-)
+> >
+> > When we can do it with zero code changes?
+>=20
+> We don't need anything here...but this helps with my productivity as
+> and can add this flag easily when doing large builds.
+>=20
+> Note that half of those lines are a test and another half are just
+> plumbing it through all the layers. Any new flag will end up with
+> this, even if it is a few lines of 'real' code.
+>=20
+> > And then similar to the
+> > worries I set aside with the "venv" related changes,
+>=20
+> That change does fix a bug. Without the change, we cannot run code
+> coverage in CI, which I very-much want to turn on once Marek can
+> figure out the missing Binman tests.
+>=20
+> > you're making one
+> > tool be clever and work as exactly as expected (but perhaps in a "do
+> > what I meant, not what I said" manner?) way.
+>=20
+> The only magic is that it locates dtc on the path, but that is the
+> thing that I find valuable.
+>=20
+> > If we have "set DTC in
+> > environment, it's always obeyed, can be passed directly to make" but
+> > also "pass buildman a flag to say where dtc is" why do we need the
+> > latter if it should already be working, and I think already is working?
+>=20
+> The flag doesn't tell buildman where dtc is, though. It tells buildman
+> to hunt for it and use that in preference to the internal build. I am
+> not suggesting adding anything non-deterministics.
+>=20
+> A general point here...buildman is pretty stable but it is not perfect
+> and we continue to tweak it to help make it a better tool. When it is
+> perfect, I will certainly stop sending patches for it. I normally only
+> send a patch when a bug is reported or something annoys me. The dtc
+> thing annoys me *a lot* because it chews up ~20% of my CPU for no
+> purpose. I had not realised how bad this problem was.
 
-But I decided to drop patch #7, and then we won't have any changes in
-common/hash.c
-from v7.
+Thanks for explaining. Whenever you want to pick this one up, go ahead
+and send it along then. And I guess at some point we should look at (a)
+re-syncing our libfdt code and (b) switching to using system dtc by
+default?
 
-[snip]
+--=20
+Tom
 
-Regards,
-Raymond
+--kfytsXdrXqQxG9YB
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbgwwkACgkQFHw5/5Y0
+tywBkwv9FIuBETbHwsdCtlORiSe0v24dz8Y4mebuzpzjvt2dTBYMFpkZKT3dvphM
+0Qkk/Kif6inVvszdOk6Y4WdnjaFvY5kmYHUxIT3PhDRi53AOty2WN+HLy99HYihC
+kSBC8/rk2Y8SsmrLeF461J9cSBNsJeyOGYvdvU7KHFxfJNQPewi4OQWdEk59E+9c
+dnhdYjPYEgzAwuiHchyrbs/jYWjobpyTETKAkpQIQHbN3c+LObTFpNlEJuym6FCo
+YsTWawyvd6daEvexpjfpD6/8K1JgCt6kjQeRZ1oN90bM/3K3XTvPEc11P/4j6E8B
+Qb5Nzzt3IbnGBRI28o/g3LOjWeIs/mQmJPuwny4qApHYk+mATH2v54tV34Y9FQ0V
+zo9z5/VNxqkEQPla6kYFg9myRcS0khc8az+kWcV4t+tBxarjMviJo5WlVPj48zu7
+IeG5BkJxna7kPD7r7inPhJuluzgz+OuTWONnxG0vQnmpskwzG7pRIDBf3F9wvBFE
+L7O58uHe
+=WOXQ
+-----END PGP SIGNATURE-----
+
+--kfytsXdrXqQxG9YB--
