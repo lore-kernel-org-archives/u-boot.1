@@ -4,80 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF153EDE9AB
-	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 18:41:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D4F4EDE9AB
+	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 18:42:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A8EA88CE7;
-	Tue, 10 Sep 2024 20:41:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 84925890B9;
+	Tue, 10 Sep 2024 20:41:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="H36IPIn4";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AAWFVxbK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68B35890C4; Tue, 10 Sep 2024 20:41:45 +0200 (CEST)
-Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
- [IPv6:2607:f8b0:4864:20::f2e])
+ id 4CA7B88216; Tue, 10 Sep 2024 20:41:54 +0200 (CEST)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 528F1890C5
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 20:41:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F36E890B9
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 20:41:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2e.google.com with SMTP id
- 6a1803df08f44-6c35334dfb1so40187356d6.0
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 11:41:43 -0700 (PDT)
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6c54b1f52f7so8079156d6.3
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 11:41:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1725993702; x=1726598502; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1725993708; x=1726598508; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=dWcV2yos/zPr6utuUjCu1cfmxrR5Z3O7mA8x2P4CE1Y=;
- b=H36IPIn4BQeMLTtuWsP4YetrOXN+dFB/jaNgnCd4BphNY3u9Tmb/hozTBPMlc4ABSM
- np1fefvfCAk4fs8eBjRWjQGAtP/nf6r+896wEntth0uDdcZTbARdjQqNARLRT6XzBlvV
- bKrz+u9fk7TGhLhGTR1aTnDyaTbpDCHumx9vo=
+ bh=bEnVpAgU5D1g0YIjaJyhDk5TGL9k8vK9au1+OWYzTyw=;
+ b=AAWFVxbKZxwr1JD91M9nV18f4W2wk8bc81iflRbtr9mgJvWqGOL0DhOu0lt38SPmHV
+ XC6C5To7R1t3Uu0D3tTbHQ0aD7QF7nzf8gEtBq9XLjeRBVZUiszrHJMHVkmVLMha9xZV
+ kg4PFCf/5N5+v3ydpr5HiEq3jZf7dhwgm+F3k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725993702; x=1726598502;
+ d=1e100.net; s=20230601; t=1725993708; x=1726598508;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=dWcV2yos/zPr6utuUjCu1cfmxrR5Z3O7mA8x2P4CE1Y=;
- b=kb2q/DdUOlcr2m/3jA5RqJu2A9vLPF7N1Na3OBz9rL4jaEDhInt37ZGM8yNqDUEIoy
- X7+NuNuHGIWKUmzc/jFusEZvWEYuRc8TR2Kz/ZgYaea2dRnSn3cZUPzFKXee1w9roHe5
- HFbNSYoc3NBl0/w5r5a+l8kc+Ruwce6SN07otKUfLMAgwv6gVbYGDMxKHtU3EnOoCZke
- tyhgugowVVhx2WPSspjPTx7r0hbmh3OGioSt2NTmG3QURA79vUW3XgxkpOh1JjDFdaKJ
- r0zfQKMcqr1G2f5b5WHA5uUR8U7gJUqjyEkhacP5hU+GZ5FaA2HivG4SN9a75vdt5UER
- X1+w==
+ bh=bEnVpAgU5D1g0YIjaJyhDk5TGL9k8vK9au1+OWYzTyw=;
+ b=gGSoC2MeGoIVXnPYLQfFbxeHycM4le7a1r0q/yD/bW8Xv9y587xnoD3UX1hl68repF
+ wMQOoPPyuKzD5V0oenh1sqLevswzfOPohzHI5sS+WCfWg3U7kzfxwn0hV+hlk0ee2uzQ
+ BxMs12dnulQ33SSdeuoi8IIthAdWc3z3FXuwXK2DJL6yn8+/lywhe/4AlX+oSYUzlRTj
+ b4/enQn0JuS3a1pEsJtpYmf53AMDFRHhuEu0l8aYZNBygO8JsFjPOvHTfZs79EqUGSed
+ 3Ryajflglzz/JxuCtIKg3OwhiaThx076fYi/OJAWFvbQkFeGoo/B6m+GDWmnl4g7GdZI
+ nFlA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV2XXBY0xlwCvko2RkoDbe7NQLqpEeO6NrjZsrNkSbPiz8kSi3bD7Ecoom5+0xZz3aeCuHDjkI=@lists.denx.de
-X-Gm-Message-State: AOJu0YwE7liE8SrR7QuZ6VS2kVqasgeSIDKFTe6mgD+M2Hka910BVKBb
- cxUPFXpqZoxyoVXvOqqtjkRC4Pelq87rTxokQp41U91Yc54RPkffhMtUu05HsuVc+Af28wpRmsN
- KtXGCBcaGm544bMtxj2ygocATQzDYTyTPBa49
-X-Google-Smtp-Source: AGHT+IHu9aXJpvz4rIaaYX9FQ3Sc9HDt3AgRt+WN+Hq4hbxDRSbxyBrT7xbAgn3LmWjiBNatd2QrzwONJDwgiFjeifQ=
-X-Received: by 2002:a05:6214:c9:b0:6c5:3338:4e34 with SMTP id
- 6a1803df08f44-6c533384f65mr136895736d6.32.1725993702165; Tue, 10 Sep 2024
- 11:41:42 -0700 (PDT)
+ AJvYcCVUtBLY15J8gSghrzUFuU3GmX4xoxpLK4cavd1fzHiKon1HC/M73LlHzRrZTACXpevoWoRiX+I=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw0xu6656oLaaAmyLLXXNJ9fBjwqY/ZYZa2ntX/k+2tlnWpXxrL
+ hvMV7c4LcHePzAU1VB0BrRyv8CLPpwOQMxeh9mPkZQ2/Ypk9nEVlSg53KcnXAvOdqmgJjYtpE0d
+ Thc8wXg6x3UNTF3J9ZkuRIBo73Sc+6Ehlfv8Q
+X-Google-Smtp-Source: AGHT+IF9PcxMyEotP9TR0wWsxud0tRcyK3sOXcnbhUcOBn5xRl/DUou5RnKBvGWAQb0ZmHYpT6x/sVBeFpfyt+LTlxc=
+X-Received: by 2002:a05:6214:3991:b0:6c3:68dd:b71f with SMTP id
+ 6a1803df08f44-6c55fb7633emr3480596d6.51.1725993707986; Tue, 10 Sep 2024
+ 11:41:47 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1724846454.git.jerome.forissier@linaro.org>
- <1a6084e845a0612546a1e86d142208af945c8f77.1724846454.git.jerome.forissier@linaro.org>
- <CAC_iWjL9g0c8UHF3L44b8HEG-2=d57XsDXPpSogthWDPgzPcaw@mail.gmail.com>
- <CAFLszTjLmgXO-31CwAOv1qQ9x0aDk4aHGVkScDF1bz-WhfrHGw@mail.gmail.com>
- <CAFLszTgQNatTrhY_PVwN96tbuRvS=PRqawhH93+1TM9y_Mg79Q@mail.gmail.com>
- <CAC_iWjLg5h5uPgK0rO04ajGL1z8bpxYAzv3j048hsXAwz22MzQ@mail.gmail.com>
- <CAFLszTjsTYi_jddj+05i77xjQ7gdvYC115C2hYYauAv7xTEhNg@mail.gmail.com>
- <20240902154155.GA2479150@bill-the-cat>
-In-Reply-To: <20240902154155.GA2479150@bill-the-cat>
+References: <20240901222634.460873-1-sjg@chromium.org>
+ <20240901222634.460873-3-sjg@chromium.org>
+ <20240902161047.GC2479150@bill-the-cat>
+In-Reply-To: <20240902161047.GC2479150@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 10 Sep 2024 12:41:31 -0600
-Message-ID: <CAFLszTi_PGoDzDPyqF69W3umEFXt6dGZRx-e3Tm5su-Ov6d6-w@mail.gmail.com>
-Subject: Re: [PATCH 09/13] net: wget: allow EFI boot
+Date: Tue, 10 Sep 2024 12:41:37 -0600
+Message-ID: <CAFLszTg0-+m_hZf0n+-t+8gZz1m_ByJ=h=Ga1GkB37LL+6_7rg@mail.gmail.com>
+Subject: Re: [PATCH v4 02/23] nvmxip: Avoid probing on boot
 To: Tom Rini <trini@konsulko.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de, 
- Peter Robinson <pbrobinson@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Yasuharu Shibata <yasuharu.shibata@gmail.com>, Marek Vasut <marex@denx.de>
+Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
+ Hugues Kamba Mpiana <hugues.kambampiana@arm.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,66 +89,47 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Mon, 2 Sept 2024 at 09:41, Tom Rini <trini@konsulko.com> wrote:
+On Mon, 2 Sept 2024 at 10:10, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Sun, Sep 01, 2024 at 02:09:40PM -0600, Simon Glass wrote:
-> > Hi Ilias,
-> >
-> > On Fri, 30 Aug 2024 at 08:28, Ilias Apalodimas
-> > <ilias.apalodimas@linaro.org> wrote:
-> > >
-> > > Hi Simon
-> > >
-> > > On Fri, 30 Aug 2024 at 17:18, Simon Glass <sjg@chromium.org> wrote:
-> > > >
-> > > > Hi Jerome,
-> > > >
-> > > > On Thu, 29 Aug 2024 at 08:04, Simon Glass <sjg@chromium.org> wrote:
-> > > > >
-> > > > > On Thu, 29 Aug 2024 at 01:34, Ilias Apalodimas
-> > > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > > >
-> > > > > > On Wed, 28 Aug 2024 at 15:10, Jerome Forissier
-> > > > > > <jerome.forissier@linaro.org> wrote:
-> > > > > > >
-> > > > > > > wget followed by bootefi currently fails as follows:
-> > > > > > >
-> > > > > > >  U-Boot> wget 200000 192.168.0.30:helloworld.efi
-> > > > > > >  Waiting for Ethernet connection... done.
-> > > > > > >  HTTP/1.0 200 OK
-> > > > > > >  Packets received 13, Transfer Successful
-> > > > > > >  Bytes transferred = 12720 (31b0 hex)
-> > > > > > >  U-Boot> bootefi 200000
-> > > > > > >  No UEFI binary known at 200000
-> > > > > > >  U-Boot>
-> > > > > > >
-> > > > > > > Fix the problem by adding the missing efi_set_bootdev() call.
-> > > > > > >
-> > > > > > > Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> > > > > > > ---
-> > > > > > >  net/wget.c | 4 ++++
-> > > > > > >  1 file changed, 4 insertions(+)
-> > > > >
-> > > > > OMG the hack never dies. I hope I will someday create a series to tidy this up.
-> > > >
-> > > > I'm sorry for that remark, not helpful to collaboration.
-> > >
-> > > If you've figured out what needs to be done to remove it, I can deal with it.
-> > > If not I'll put it on my backlog and have a look
-> >
-> > Mostly...my idea is to track loads within bootstd, adding a way for
-> > bootmeths to record files they load, in struct bootflow. Then when
-> > booting EFI, we just pass that info from distro_efi_boot() to
-> > efi_binary_run().
+> On Sun, Sep 01, 2024 at 04:26:13PM -0600, Simon Glass wrote:
 >
-> I worry about conflating "loaded something" with "need to boot thing
-> thing". Maybe it's not a problem in the end, but there is not a 1:1
-> between "loaded something" and "will boot this thing".
+> > Devices should be probed when they are used, not before. Drop this
+> > boot-time probing.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> > (no changes since v1)
+> >
+> >  drivers/mtd/nvmxip/nvmxip-uclass.c | 7 -------
+> >  1 file changed, 7 deletions(-)
+> >
+> > diff --git a/drivers/mtd/nvmxip/nvmxip-uclass.c b/drivers/mtd/nvmxip/nvmxip-uclass.c
+> > index 58e8c3fb74b..d18bd0e3d6b 100644
+> > --- a/drivers/mtd/nvmxip/nvmxip-uclass.c
+> > +++ b/drivers/mtd/nvmxip/nvmxip-uclass.c
+> > @@ -53,14 +53,7 @@ int nvmxip_probe(struct udevice *udev)
+> >       return 0;
+> >  }
+> >
+> > -static int nvmxip_post_bind(struct udevice *udev)
+> > -{
+> > -     dev_or_flags(udev, DM_FLAG_PROBE_AFTER_BIND);
+> > -     return 0;
+> > -}
+> > -
+> >  UCLASS_DRIVER(nvmxip) = {
+> >       .name      = "nvmxip",
+> >       .id        = UCLASS_NVMXIP,
+> > -     .post_bind = nvmxip_post_bind,
+> >  };
+>
+> Once again, adding in the corstone1000 maintainers as the platform that
+> actually uses this.
 
-Yes, exactly. Bootstd tries to search for things and build a table of
-what is there. Only when something is booted does it go ahead and set
-it up to boot. In fact, some bootmeths delay kernel loading until
-needed.
+Just to mention that Abdellatif was added automatically by patman for
+the first version, but if there is no reply, after v2 I tend to drop
+it back, to avoid sending too many emails.
 
 Regards,
 Simon
