@@ -4,79 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D49FEDE9B8
-	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 20:14:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CF44EDE9B4
+	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 20:15:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 63029890E6;
-	Tue, 10 Sep 2024 22:14:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CDA0F890E6;
+	Tue, 10 Sep 2024 22:15:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eoiYh5Xh";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="M2KMqNTD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 72679890E6; Tue, 10 Sep 2024 22:14:50 +0200 (CEST)
+ id EA4DF890E6; Tue, 10 Sep 2024 22:15:52 +0200 (CEST)
 Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
  [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E020689113
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 22:14:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BA2D2890D2
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 22:15:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-6c159150ff4so36312856d6.2
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 13:14:47 -0700 (PDT)
+ 6a1803df08f44-6bf6606363fso38745836d6.3
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 13:15:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1725999287; x=1726604087; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1725999348; x=1726604148; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Gy68GKFQ4aGkP3QVsnAipImTpvRUUNrY7uEgOusUBwA=;
- b=eoiYh5Xhfj9IIvONVZm/Y4BUmRYjQLuJSfc9qrld9GXqI2HWWwxdMnMOUDryLN+A+p
- toAkwOiIBfBKARoz9A4u1DOtZbMqfjnYkUHO/+uOUkpTbrt6ZvSJgyPETbHJgJ3CfjXE
- SNRi2dYyhm8FlI+WQVARFC1/nkYa00Dthdq/k=
+ bh=LmRqfnDw+brsUxe/kWQLrMDu7KgLHTaBSMOl6cEmKW0=;
+ b=M2KMqNTDPc4CCeRf6NSAdFz/OvS2tmtHOmFLW3rOPy9Q2bhcblhyY5AtEM12kjyhk6
+ zJHcWD7ZGDKzHW0YmTbVA1KsA3iN4jsgeaXEMIOzn2VgY9IFmVkGYDKpkfRd4kT2tatK
+ 2rB5QcyiF2ePlW2m2WCT3bFmEAeQ7ms/F4Nns=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725999287; x=1726604087;
+ d=1e100.net; s=20230601; t=1725999348; x=1726604148;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Gy68GKFQ4aGkP3QVsnAipImTpvRUUNrY7uEgOusUBwA=;
- b=Ab/ODcAu/BKv+uxcuTM1iyK0OwQsrYOpqA1O6+1vSJsNUb6Fc59/WilLx+OX/e2PE1
- A2LouK8D1NFeejjPIwxjvdsyM//xfpCdDElglIBStdzvpJSp8M/xwZh5SQUVF65oG3Q1
- 51qrQaKZRH/33U2qT7WG4wncrhNVr0qN5P3uQfl2OjqeXj5mlISkhtv9qcW/eeAqCrZU
- JnGeXnd+HklU9vqcr8XOM+dPKO9xTt4CCkiladXzYzUbCk9YiobkuZYi7bd1XU+UJwyN
- Os19thxY8xsqWBX3prf4RgFsCQLdmDTM5ulbkDBZ1rmWPex3S2HYFsN0CKXT0rP5PFwi
- v7YA==
-X-Gm-Message-State: AOJu0YxnuurLflK6z1cF8z2Pt5C/P8QsTcjxjDYlVW8/n5mtStiGYFPY
- ArEoJ+EsvYbvPywAOAqR00Y8wPOQJEii1YFxCKFnWilc0lLvp1QiV1LLebKMHjLxlLQwH5W7ACY
- pRATrxypjzlQ1f4/4omlDETPkhZBzFeZH6kz+
-X-Google-Smtp-Source: AGHT+IEcdjpmu5URllXJTCQ5oU+D2B+uTfarycNF2vjooa8UXsmF2RIp3ppo8xRlFKQ+Na6WTA8IfIPT+9IwbgWt9PY=
-X-Received: by 2002:a05:6214:43c9:b0:6c3:5bc3:78d1 with SMTP id
- 6a1803df08f44-6c52851ba3fmr235633056d6.43.1725999286714; Tue, 10 Sep 2024
- 13:14:46 -0700 (PDT)
+ bh=LmRqfnDw+brsUxe/kWQLrMDu7KgLHTaBSMOl6cEmKW0=;
+ b=nvWgV3mhY1nIFk+QHmdLhXi8bp6Gkcf7RtzJUYuA03XbHFyW3O3Jmaqg2XQtFqye9I
+ yl1xXAsveko8utXXGJMuFaipd4EQiDucrGbNsiS3NEqTFLJkwq1j6I9/xtAejaIOOxkA
+ 1ljfuQSKiMXD2RSEA0dmPUL2edD2GtmIUIca8j6K10hK0N1feWbS9pN7RwKRIsuDxhM1
+ Yk0Co2hyVMDsAHlE1MR6CuJP5IaiUVMXlKNEjrdvV0HGkNNuYN/h0RfdCbeZbKtGBF9p
+ nKPMW3wgC+UKeGUTfQey69i8BSnWn0KBBH1t5mF8b+5FzRXrJvdTfnj9b/S/lKjpf8iy
+ XUNQ==
+X-Gm-Message-State: AOJu0YyO13T6GpsB/yAbF+qGlWzjaA25TmoWrsue1nQfJfsQeeIZ2bFL
+ NJP/nZ0c5LNC6GXJJrvDGN+mGpO1TbubJ41s0lilVD5ejONy1JdfAD5/Yv83do8nP0B/wB4oSed
+ 7zdDParePmpMYZahJ2q+Q74ZHOkYjbAFTwA0l
+X-Google-Smtp-Source: AGHT+IHuYC8eePuUGxxwZJ65r1EFWgap2IAN9LyI9j6mehRrfvrEzfPVh5oHS3R77gM1+vVzM2R/KL905xcOYnt3wcg=
+X-Received: by 2002:a05:6214:570e:b0:6c3:6799:ddef with SMTP id
+ 6a1803df08f44-6c5283f6d21mr159984646d6.3.1725999348644; Tue, 10 Sep 2024
+ 13:15:48 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240815195746.749042-3-sjg@chromium.org>
- <20240816172237.GA1626301@bill-the-cat>
- <CAFLszTh1Nig-hs+Gtxzg8f-=vE1z4BvNSfEyUGtatZohj0pnuQ@mail.gmail.com>
- <CAFLszTgufCxvXjJupqDphcGwJ0gfvrYxQACK3kYRKaumpKgrYQ@mail.gmail.com>
- <20240822141013.GQ1626301@bill-the-cat>
- <CAFLszTiV8Nut06NeJFqT87y8qSTfzMYwxY6vc10+Q6NY6u2m-A@mail.gmail.com>
- <20240902153904.GX2479150@bill-the-cat>
- <CAFLszTi4_=n6SmfN8unNx6DgO+C4HQwpxG8gcWuOGUd4Lna_ug@mail.gmail.com>
- <20240910184242.GL4252@bill-the-cat>
- <CAFLszTjfU8m-dQyXXAHJ0FWGfAMdvF3yYDMOofN87qocY0mRyg@mail.gmail.com>
- <20240910185237.GM4252@bill-the-cat>
-In-Reply-To: <20240910185237.GM4252@bill-the-cat>
+References: <20240816154658.1866186-1-raymond.mao@linaro.org>
+ <CAFLszTjE+8BmdmtFXER94LmEYshNDEA4x_MDTqvyGhHYed2OCw@mail.gmail.com>
+ <CAEfUkU+mhmesTgXAO+iGwVdH7hsmY9iF78M4fyM6YciK9o3Dzw@mail.gmail.com>
+ <CAFLszTg5pNV+bfy0T74hpM6xA2ix-PgSGR6SvennHh4hhXeu7g@mail.gmail.com>
+ <CAEfUkU+9Lp9S+bZC1LnHtE-C+jaQvb4iBB4mcCD0t28LMHRtVw@mail.gmail.com>
+In-Reply-To: <CAEfUkU+9Lp9S+bZC1LnHtE-C+jaQvb4iBB4mcCD0t28LMHRtVw@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 10 Sep 2024 14:14:35 -0600
-Message-ID: <CAFLszTgNPmHD7t4k1BkB_eSVZz7ZgP9=vuoPykm2ZGV0PQxg3g@mail.gmail.com>
-Subject: Re: [PATCH v3 2/3] buildman: Allow skipping the dtc build
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
- Brandon Maier <brandon.maier@collins.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
+Date: Tue, 10 Sep 2024 14:15:37 -0600
+Message-ID: <CAFLszTjRkMZOnb4nV3SuU_3vW7tog5D8vuwkVPToPMy_V-hPaQ@mail.gmail.com>
+Subject: Re: [PATCH 00/10] SMBIOS improvements
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Bin Meng <bmeng@tinylab.org>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Stefan Roese <sr@denx.de>,
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ Wan Yee Lau <wan.yee.lau@intel.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Alexander Gendin <agendin@matrox.com>, Michal Simek <michal.simek@amd.com>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Max Krummenacher <max.krummenacher@toradex.com>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Peter Robinson <pbrobinson@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,151 +100,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Raymond,
 
-On Tue, 10 Sept 2024 at 12:52, Tom Rini <trini@konsulko.com> wrote:
+On Tue, 10 Sept 2024 at 13:20, Raymond Mao <raymond.mao@linaro.org> wrote:
 >
-> On Tue, Sep 10, 2024 at 12:45:39PM -0600, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Tue, 10 Sept 2024 at 12:42, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Tue, Sep 10, 2024 at 12:41:11PM -0600, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Mon, 2 Sept 2024 at 09:39, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Sun, Sep 01, 2024 at 02:09:39PM -0600, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Thu, 22 Aug 2024 at 08:10, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Wed, Aug 21, 2024 at 09:00:25PM -0600, Simon Glass wrote:
-> > > > > > > > Hi Tom,
-> > > > > > > >
-> > > > > > > > On Fri, 16 Aug 2024 at 17:53, Simon Glass <sjg@chromium.org> wrote:
-> > > > > > > > >
-> > > > > > > > > Hi Tom,
-> > > > > > > > >
-> > > > > > > > > On Fri, 16 Aug 2024 at 11:22, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > > >
-> > > > > > > > > > On Thu, Aug 15, 2024 at 01:57:45PM -0600, Simon Glass wrote:
-> > > > > > > > > >
-> > > > > > > > > > > For most boards, the device-tree compiler is built in-tree, ignoring the
-> > > > > > > > > > > system version. Add a special option to skip this build. This can be
-> > > > > > > > > > > useful when the system dtc is up-to-date, as it speeds up the build.
-> > > > > > > > > > >
-> > > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > > > > ---
-> > > > > > > > > > >
-> > > > > > > > > > > (no changes since v1)
-> > > > > > > > > > >
-> > > > > > > > > > >  tools/buildman/builder.py       | 27 ++++++++++++++++++++++++++-
-> > > > > > > > > > >  tools/buildman/builderthread.py |  4 ++--
-> > > > > > > > > > >  tools/buildman/buildman.rst     |  3 +++
-> > > > > > > > > > >  tools/buildman/cmdline.py       |  2 ++
-> > > > > > > > > > >  tools/buildman/control.py       |  3 ++-
-> > > > > > > > > > >  tools/buildman/test.py          | 31 +++++++++++++++++++++++++++++++
-> > > > > > > > > > >  6 files changed, 66 insertions(+), 4 deletions(-)
-> > > > > > > > > >
-> > > > > > > > > > We should probably do this more generically, outside of buildman. We
-> > > > > > > > > > have scripts/dtc-version.sh and if the system version isn't new enough
-> > > > > > > > > > (and we just need to define whatever the minimum version is), then we
-> > > > > > > > > > build our (not currently that new anymore) dtc instead.
-> > > > > > > > >
-> > > > > > > > > Yes I think I did a patch for that ages ago [1], but it was rejected.
-> > > > > > > > >
-> > > > > > > > > I'd be very happy for it to be applied as I think it is a better
-> > > > > > > > > solution than this one.
-> > > > > > > > >
-> > > > > > > > > I see that some poor sod tried to do this in Linux this morning.
-> > > > > > > >
-> > > > > > > > Any thoughts on that patch?
-> > > > > > >
-> > > > > > > I'm open to re-considering [1] again, but we need to handle the warning
-> > > > > > > problem first. That means...
-> > > > > > >
-> > > > > > > > Also I do see one problem. Newer dtc version produce a lot of
-> > > > > > > > warnings, which causes CI to fail. So if we always use the newest
-> > > > > > > > version, people are going to see a ton of warnings when they run
-> > > > > > > > locally. Am I missing something here?
-> > > > > > >
-> > > > > > > Well, it would be great to get our Kbuild logic anywhere close to
-> > > > > > > in-sync again with upstream. But syncing up the disabling warning flags
-> > > > > > > shouldn't be too hard.
-> > > > > >
-> > > > > > So, coming back to this patch, the nice thing about it is that it is
-> > > > > > deterministic. So people who build U-Boot and don't want funky
-> > > > > > behaviour will be happy. It will use the internal dtc by default. To
-> > > > > > use the external one, you must provide an option.
-> > > > > >
-> > > > > > This patch only affects buildman, but as you can see the mechanism it
-> > > > > > uses is to set the DTC variable, which people can do without buildman.
-> > > > > > It's just a convenience, but useful enough to have a flag, I believe.
-> > > > >
-> > > > > Wait, that's right, we have DTC as a thing that can be set in the
-> > > > > environment, so why do we need something for buildman at all?
-> > > >
-> > > > It's a convenience. I have found that it speeds things up quite a bit,
-> > > > so I want to enable it most of the time. But we can't do it by default
-> > > > and need it to be optional, I believe.
-> > >
-> > > I wasn't clear, sorry. Why is:
-> > > $ export DTC=/usr/local/bin/dtc
-> > > $ tools/buildman/buildman ...
-> > >
-> > > Enough?
-> >
-> > My patch is more equivalent to:
-> >
-> > DTC=`which dtc` buildman...
-> >
-> > As I said it is a convenience which I want to use all the time,
-> > including in CI. Are you worried about changing buildman? What is the
-> > issue here?
+> Hi Simon,
 >
-> My question / concern is why do we need:
->
-> >  6 files changed, 66 insertions(+), 4 deletions(-)
->
-> When we can do it with zero code changes?
+> On Tue, 10 Sept 2024 at 14:44, Simon Glass <sjg@chromium.org> wrote:
+>>
+>> Hi Raymond,
+>>
+>> On Tue, 3 Sept 2024 at 10:07, Raymond Mao <raymond.mao@linaro.org> wrote:
+>> >
+>> > Hi Simon,
+>> >
+>> > On Sat, 17 Aug 2024 at 11:58, Simon Glass <sjg@chromium.org> wrote:
+>> >>
+>> >> Hi Raymond,
+>> >>
+>> >> On Fri, 16 Aug 2024 at 09:47, Raymond Mao <raymond.mao@linaro.org> wrote:
+>> >> >
+>> >> > Motivations for changes:
+>> >> > Current SMBIOS library and command-line tool is not fully matching with
+>> >> > the requirements:
+>> >> > 1. Missing support for other mandatory types (#7, #9, #16, #17, #19).
+>> >> > 2. Only a few platforms support SMBIOS node from the device tree.
+>> >> > 3. Values of some fields are hardcoded in the library other than fetching
+>> >> >    from the device hardware.
+>> >> > 4. Embedded data with dynamic length is not supported (E.g. Contained
+>> >> >    Object Handles in Type #2 and Contained Elements in Type #3)
+>> >> >
+>> >> > Changes:
+>> >> > 1. Refactor the SMBIOS library and command-line tool to better align with
+>> >> >    the SMBIOS spec.
+>> >> > 2. Create an arch-specific driver for all aarch64-based platforms to fetch
+>> >> >    SMBIOS private data from the device hardware.
+>> >> > 3. Create a sysinfo driver to poppulate platform SMBIOS private data.
+>> >> > 4. Put device tree SMBIOS node as a fallback solution when SMBIOS data is
+>> >> >    missing from sysinfo driver.
+>> >> > 5. Add support for Type #7 (Cache Information) and link its handles to
+>> >> >    Type #4.
+>> >> >
+>> >> > Once this patch is acceptted, subsequent patch sets will add other missing
+>> >> > types (#9, #16, #17, #19).
+>> >> >
+>> >> > Raymond Mao (10):
+>> >> >   sysinfo: Add sysinfo API for accessing data area
+>> >> >   sysinfo: Add sysinfo driver and data structure for SMBIOS
+>> >> >   smbios: Refactor SMBIOS library
+>> >> >   smbios: ignore the non-existence of platform sysinfo detect
+>> >> >   armv8: Add arch-specific sysinfo driver
+>> >> >   sysinfo: Add sysinfo driver for SMBIOS type 7
+>> >> >   smbios: Add support to SMBIOS type 7
+>> >> >   armv8: Add sysinfo driver for cache information
+>> >> >   configs: Enable sysinfo for QEMU Arm64
+>> >> >   tests: update smbios pytest
+>> >> >
+>> >> >  arch/arm/cpu/armv8/Makefile      |   5 +
+>> >> >  arch/arm/cpu/armv8/sysinfo.c     | 391 ++++++++++++++++++++++++++
+>> >> >  cmd/smbios.c                     | 350 ++++++++++++++++++++++-
+>> >> >  configs/qemu_arm64_defconfig     |   2 +
+>> >> >  drivers/misc/Kconfig             |   2 +-
+>> >> >  drivers/sysinfo/Makefile         |   1 +
+>> >> >  drivers/sysinfo/smbios_plat.c    | 442 +++++++++++++++++++++++++++++
+>> >> >  drivers/sysinfo/smbios_plat.h    | 131 +++++++++
+>> >> >  drivers/sysinfo/sysinfo-uclass.c |  20 ++
+>> >> >  include/smbios.h                 | 240 ++++++++++++++--
+>> >> >  include/sysinfo.h                | 124 ++++++++-
+>> >> >  lib/Makefile                     |   2 +
+>> >> >  lib/smbios.c                     | 461 ++++++++++++++++++++++++++-----
+>> >> >  test/py/tests/test_smbios.py     |   2 +-
+>> >> >  14 files changed, 2058 insertions(+), 115 deletions(-)
+>> >> >  create mode 100644 arch/arm/cpu/armv8/sysinfo.c
+>> >> >  create mode 100644 drivers/sysinfo/smbios_plat.c
+>> >> >  create mode 100644 drivers/sysinfo/smbios_plat.h
+>> >> >
+>> >> > --
+>> >> > 2.25.1
+>> >> >
+>> >>
+>> >> As a general comment, this is adding a load of code which is used by a
+>> >> lot of platforms. As more and more aarch64 platforms are created, this
+>> >> data grows. Why not use the devicetree for this hardware information?
+>> >> That is what it is for.
+>> >>
+>> >> Some of the information detected makes sense, such as cache setup, but
+>> >> some of it seems like an approximation, or is missing, but suggests it
+>> >> is authoritative.
+>> >>
+>> > The idea is that precise information can still come from dt (if the node exists,
+>> > but as a fact, not many platforms have it up to now).
+>> > When it does not exist, system drivers provides the information as much as
+>> > it can (some comes from registers, some comes from generic strings/enums).
+>> > So it is not assumed that each vendor to add their code but just uses the
+>> > arch-specific code in this series - if vendors want precise information they can
+>> > still add into the dt.
+>>
+>> I fully understand what you are doing. I just don't think it is a
+>> great idea. We should have a clear boundary between:
+>>
+>> 1. things which are part of the hardware (although not explicitly in
+>> the devicetree) and can be probed
+>> 2. things which we can only guess at
+>> 3. grey area
+>>
+>> I am very happy with 1). It is just 2) that I want to avoid.
+>>
+>> The grey area is where your series adds lots of strings for different
+>> hardware...that just seems like code-size bloat to me.
+>>
+>> How about working on a devicetree binding for this stuff? Or perhaps
+>> add the info to the boards you care about?
+>>
+> What I planned to do is to have a general one for arm64, then all the arm64 boards missing the dt
+> node can leverage it.
+> Regarding to 2) you pointed out, maybe we can leave them to the dt later, my patch can go first with
+> those architectural common stuffs, for example, cache information.
+> I will think about it before posting the next version.
 
-We don't need anything here...but this helps with my productivity as
-and can add this flag easily when doing large builds.
-
-Note that half of those lines are a test and another half are just
-plumbing it through all the layers. Any new flag will end up with
-this, even if it is a few lines of 'real' code.
-
-> And then similar to the
-> worries I set aside with the "venv" related changes,
-
-That change does fix a bug. Without the change, we cannot run code
-coverage in CI, which I very-much want to turn on once Marek can
-figure out the missing Binman tests.
-
-> you're making one
-> tool be clever and work as exactly as expected (but perhaps in a "do
-> what I meant, not what I said" manner?) way.
-
-The only magic is that it locates dtc on the path, but that is the
-thing that I find valuable.
-
-> If we have "set DTC in
-> environment, it's always obeyed, can be passed directly to make" but
-> also "pass buildman a flag to say where dtc is" why do we need the
-> latter if it should already be working, and I think already is working?
-
-The flag doesn't tell buildman where dtc is, though. It tells buildman
-to hunt for it and use that in preference to the internal build. I am
-not suggesting adding anything non-deterministics.
-
-A general point here...buildman is pretty stable but it is not perfect
-and we continue to tweak it to help make it a better tool. When it is
-perfect, I will certainly stop sending patches for it. I normally only
-send a patch when a bug is reported or something annoys me. The dtc
-thing annoys me *a lot* because it chews up ~20% of my CPU for no
-purpose. I had not realised how bad this problem was.
+OK. Let's try to avoid tables of strings.
 
 Regards,
 Simon
