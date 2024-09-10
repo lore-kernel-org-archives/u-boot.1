@@ -4,82 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBE52EB64DE
-	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 10:28:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 421EBECE564
+	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 10:31:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B7A289017;
-	Tue, 10 Sep 2024 12:28:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B5ADB8901D;
+	Tue, 10 Sep 2024 12:31:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lj8e7XBh";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="W7mZ1ZNn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F46989017; Tue, 10 Sep 2024 12:28:19 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 322F38901D; Tue, 10 Sep 2024 12:31:00 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 674598901C
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 12:28:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D70688901F
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 12:30:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-42cb57f8b41so28401465e9.0
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 03:28:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a80eab3945eso511697466b.1
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 03:30:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725964094; x=1726568894; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=wARXaWg6tLzBmXUfjS8MpABU+wrXkhyqtt5xJ/UdxsU=;
- b=lj8e7XBhc4u/u+zspvDslLLDXsBfGr9ntiJW/Ug5cP9epF+TwQ+hdEBTxN9NsZfajl
- HUMNz5Puj2qFU+HCwVxUKh5XeGe+eT4a8v4OSdoKXGniOlE4Vu7XcQpH2OJhrFKTOHc1
- M+uF5hN+YIP/kQ+rZVJg5y0Vo1PoI4yTo3gcG7XVbeELicU5OsTxX1vXbtCjLZuXJQBt
- MBRDNiXgHZcnTQP82hYhXNFrBMQJkqh9fpMdQoMQcIuaIuh7OEfVQ4XCrIPM05lViQlY
- 10m2CYD5AgUpHhPdEkwnhN+7y2+NtLdiW4c9rJjYDPBjsTgpv28BQBeV09f7nwh2JHLQ
- 9bLA==
+ d=amarulasolutions.com; s=google; t=1725964255; x=1726569055;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=l9laj52vQGCDss1jBFY3a3uE/JEeUy9qar7s1yA/MV8=;
+ b=W7mZ1ZNn8778KyEO01ioXwiB/aWKklufFGDQp7y325HdgXhMMKneMlePnJUVHgx+tQ
+ wfGLiTiu0uYLVwQqkyK9AcZgWhxZ9pC8/psqc/MTvpSPdB5y6mBhxkL4Kzt6kuyjAm7K
+ Su1PZguIUZy/4aUy2ksMYLCkB2YEzhv/l6Tn4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725964094; x=1726568894;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=wARXaWg6tLzBmXUfjS8MpABU+wrXkhyqtt5xJ/UdxsU=;
- b=AU55cb6ibQ5t6ECfUgXnFBhBiNuvz1CXLgeloTzH4NXeaQpPfCkezdCfWmOttghru9
- RrG9UtRJoIImZ/ubKt0iUVLsW+hUonOZvtLRqwwsW8PA/TAfielhniAdxttjpFxzJ2Ni
- xZy8WQFH/pNmjamlRMV04ijjjgGPfApa5afR6ds839K9PGMohUb3CVUgfanZ1FZ7e6fH
- MAQOi6P4zRDzSt7sEBiYv65ilXZuvWO28y/OmzMDtAYVjqFrxOXfNmzRGnqWxuoBmdSk
- J1JzjZFXTim5MkuJ2vhbndzV+qITRcMndyOoZ0JzmvzzmsrqTcVrglfhZ3RHDCqCkh5J
- h9DA==
-X-Gm-Message-State: AOJu0YxzR2vK0Io8XqgWMTpKnZXb7krpYj0L4CmKMdl3K7sm36tPqWr4
- ivDmyJgGmECGTKr1y4Sp2WcmNdJmTUkk6be/Iq4iRC4UV2npxDJdyA484Tn4DyWHomN/1cEGO5v
- rEzbkSQ==
-X-Google-Smtp-Source: AGHT+IHAk9mWrmnoOaHCVH0z3mgPtu9nGeKMK38S+ybB21QqVH6PIdnWxl+wRgTjToPI+4MJ3kTFOw==
-X-Received: by 2002:a05:600c:605a:b0:42c:af5f:c00c with SMTP id
- 5b1f17b1804b1-42caf5fc0b6mr99240155e9.21.1725964094232; 
- Tue, 10 Sep 2024 03:28:14 -0700 (PDT)
-Received: from builder.. ([2a01:e0a:3cb:7bb0:d022:7718:6b27:6851])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-378956652ddsm8549593f8f.29.2024.09.10.03.28.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Sep 2024 03:28:13 -0700 (PDT)
-From: Jerome Forissier <jerome.forissier@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jaehoon Chung <jh80.chung@samsung.com>, Jonas Karlman <jonas@kwiboo.se>,
- Miquel Raynal <miquel.raynal@bootlin.com>
-Subject: [PATCH] dfu: fix Kconfig dependencies
-Date: Tue, 10 Sep 2024 12:27:50 +0200
-Message-Id: <20240910102751.3182982-1-jerome.forissier@linaro.org>
-X-Mailer: git-send-email 2.40.1
+ d=1e100.net; s=20230601; t=1725964255; x=1726569055;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=l9laj52vQGCDss1jBFY3a3uE/JEeUy9qar7s1yA/MV8=;
+ b=ZwZwEOmdOdcQJab/ytM65epgGT2Krw28Wo8M+kiHQzGqdy/zPYhRJvNrFYDbO7XuQR
+ TYLXZppXImbhbBot2I9gkA+3qZp+pJfVsXBFELw2FXzp/ApxUoQY1M0vVlsRO0VAQg0g
+ XIqGTTKP1UsmL98FLGbIxDhLuJAAV5+iJuYhIM69oFo+F2nmsz/SxrLAJQXC8Y2d7wKF
+ bwDDYo6oYHbRgdEXtVnZ8F1zhycG5W6IdChIyqc+Fdx5Wg0uv09SRH0JDqcKp/8vtzXv
+ X/KfKzRMiQhtylxJShZhOHvZrgcYJ0hcsyTIaB9fx/wumLlyLyu1pHuhHSupbve7W5nW
+ uOag==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWjOQaLHZkj8Pm1mflQz08OzouaaBxLCwEwGWYYBmfn9dhwp2MambB0VwJboUF1y5W7f9zlgMs=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz11TicCM2j6/lOGEr8xnw7b8t0Wx+fvKI5ppWJz4KcE1qWKu1O
+ AEfYDcmOvBdoj8ojh707bDcXGx/eS6eLx0KSsN5hu69Z0YPUwxLcPvnb1QxAYxhqnQOtQcYZYSX
+ E32S7beS9yAod7kJqPr5kGvkv7yDcW+cgfmJq6g==
+X-Google-Smtp-Source: AGHT+IFkwAEbmOGlqfcTLF1SmHvmvrSKnRYcM+1H47GFpwb6ez62HdtaSuTMie6y2so70ze1JRxcx5aUSaEBYtBymDU=
+X-Received: by 2002:a17:907:7f0f:b0:a8b:6ee7:ba1b with SMTP id
+ a640c23a62f3a-a8ffab18a19mr31192166b.15.1725964254627; Tue, 10 Sep 2024
+ 03:30:54 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240910101344.110633-1-miquel.raynal@bootlin.com>
+In-Reply-To: <20240910101344.110633-1-miquel.raynal@bootlin.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Tue, 10 Sep 2024 12:30:42 +0200
+Message-ID: <CAOf5uwmzm=9=Vsu5cTbziyPG=KAqDGTcmrW0A36a2ix_+2WjNA@mail.gmail.com>
+Subject: Re: [PATCH 0/8] Add imx8mp video support
+To: Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Simon Glass <sjg@chromium.org>, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Anatolij Gustschin <agust@denx.de>, u-boot@lists.denx.de, 
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Ian Ray <ian.ray@gehealthcare.com>, Marek Vasut <marek.vasut@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,61 +92,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix link errors caused by missing Kconfig dependencies:
+Hi Miquel
 
-1. DFU_OVER_USB compiles common/dfu.c which calls g_dnl_clear_detach()
-which is implemented in drivers/usb/gadget/g_dnl.c which needs
-USB_GADGET_DOWNLOAD. Test case:
+On Tue, Sep 10, 2024 at 12:13=E2=80=AFPM Miquel Raynal
+<miquel.raynal@bootlin.com> wrote:
+>
+> In order to display a boot picture or an error message, the i.MX8MP
+> display pipeline must be enabled. The SoC has support for various
+> interfaces (LVDS, HDMI, DSI). The one supported in this series is the
+> standard 4-lane LVDS output. The minimal setup is thus composed of:
+> * An LCD InterFace (LCDIF) with an AXI/APB interface, generating a pixel
+>   stream
+> * One LVDS Display Bridge (LDB), also named pixel mapper, which receives
+>   the pixel stream and route it to one or two (possibly combined) LVDS
+>   displays.
+> * All necessary clocks and power controls coming from the MEDIAMIX
+>   control block.
+>
+> Patch 1 adds a very useful helper to the core in order to grab devices
+> through endpoints instead of being limited to phandles. Video pipelines
+> being often described using graphs endpoints, the introduced helper is
+> used several times in the serires (there are 3 LCDIF, one of them being
+> connected to the LDB, itself having 2 ports).
+>
+> Patch 2 is a fix which is necessary for this series to work properly,
+> but is way broader than just this use case. In practice, when assigned
+> clocks are defined in the device tree, the clock uclass tries to assign
+> the parents first and then sets them to the correct frequency. This only
+> works if the parents have been enabled themselves. Otherwise we end-up
+> with a non-clocked parent. I believe this is not the intended behavior
+> in general, but more importantly on the i.MX8MP, there are "clock
+> slices" which have pre-requisites in order to be modified and selecting
+> an ungated parent is one of them.
+>
+> All the other patches progressively build support for the whole video
+> pipeline. Regarding the LCDIF driver, there is already a similar driver
+> for older i.MX SoCs but I didn't manage to get it to work. It was
+> written more than a decade ago while device-model, clocks and others
+> were not yet generically supported. Thus, numerous ad-hoc solutions
+> were implemented, which no longer fit today's requirements. I preferred
+> to add a new "clean" driver instead of modifying the existing one
+> because of the too high risk of breaking these platforms. Once proper
+> clocks/power-domain descriptions will be added to them they might be
+> converted (and tested) to work with the "new" implementation, but going
+> the opposite way felt drawback.
+>
 
- $ printf "CONFIG_USB_GADGET_DOWNLOAD=n\nCONFIG_USB_FUNCTION_FASTBOOT=n" \
-       >>configs/am62px_evm_a53_defconfig
- $ make am62px_evm_a53_defconfig
- $ make CROSS_COMPILE=aarch64-linux-gnu-
- [...]
- common/dfu.c:34:(.text.run_usb_dnl_gadget+0x68): undefined reference to `g_dnl_clear_detach
- [...]
+Thank you for adding those patches. We are working on mipi support
+here and some of the clock patches
+are there too. I will try to look and rebase our patchset
 
-2. With the above fixed, the same build causes:
+https://patchwork.amarulasolutions.com/patch/3401/
 
- common/spl/spl_dfu.c:29:(.text.spl_dfu_cmd+0xb0): undefined reference to `run_usb_dnl_gadget'
+Michael
 
-This is because SPL_DFU compiles common/spl/spl_dfu.c which calls
-run_usb_dnl_gadget() which is implemented in common/dfu.c which needs
-DFU_OVER_USB.
 
-Therefore add these dependencies to Kconfig.
+> Thanks,
+> Miqu=C3=A8l
+>
+> Miquel Raynal (8):
+>   dm: core: Add a helper to retrieve devices through graph endpoints
+>   clk: Ensure the parent clocks are enabled while reparenting
+>   clk: imx8mp: Add media related clocks
+>   imx: power-domain: Describe the i.MX8 MEDIAMIX domain
+>   imx: power-domain: Add support for the MEDIAMIX control block
+>   video: imx: Fix Makefile in order to be able to add other imx drivers
+>   video: imx: Add LDB driver
+>   video: imx: Add LCDIF driver
+>
+>  drivers/clk/clk-uclass.c                  |   4 +
+>  drivers/clk/imx/clk-imx8mp.c              |  35 +++
+>  drivers/core/uclass.c                     |  62 +++++
+>  drivers/power/domain/Kconfig              |   7 +
+>  drivers/power/domain/Makefile             |   1 +
+>  drivers/power/domain/imx8m-power-domain.c |  17 ++
+>  drivers/power/domain/imx8mp-mediamix.c    | 185 +++++++++++++
+>  drivers/video/Makefile                    |   2 +-
+>  drivers/video/imx/Kconfig                 |   7 +
+>  drivers/video/imx/Makefile                |   4 +-
+>  drivers/video/imx/lcdif.c                 | 315 ++++++++++++++++++++++
+>  drivers/video/imx/ldb.c                   | 251 +++++++++++++++++
+>  include/dm/uclass.h                       |  21 ++
+>  13 files changed, 909 insertions(+), 2 deletions(-)
+>  create mode 100644 drivers/power/domain/imx8mp-mediamix.c
+>  create mode 100644 drivers/video/imx/lcdif.c
+>  create mode 100644 drivers/video/imx/ldb.c
+>
+> --
+> 2.43.0
+>
 
-Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
----
- drivers/dfu/Kconfig        | 2 +-
- drivers/usb/gadget/Kconfig | 1 +
- 2 files changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/dfu/Kconfig b/drivers/dfu/Kconfig
-index d034b501360..604386bb734 100644
---- a/drivers/dfu/Kconfig
-+++ b/drivers/dfu/Kconfig
-@@ -7,7 +7,7 @@ config DFU
- config DFU_OVER_USB
- 	bool
- 	select HASH
--	depends on USB_GADGET
-+	depends on USB_GADGET_DOWNLOAD
- 
- config DFU_OVER_TFTP
- 	bool
-diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
-index 03fe3bca197..9921d3e0a77 100644
---- a/drivers/usb/gadget/Kconfig
-+++ b/drivers/usb/gadget/Kconfig
-@@ -323,6 +323,7 @@ config SPL_DFU
- 	bool "Support DFU (Device Firmware Upgrade) in SPL"
- 	select SPL_HASH
- 	select SPL_DFU_NO_RESET
-+	depends on DFU_OVER_USB
- 	depends on SPL_RAM_SUPPORT
- 	help
- 	  This feature enables the DFU (Device Firmware Upgrade) in SPL with
--- 
-2.40.1
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
 
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
