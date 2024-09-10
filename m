@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EC25ECE582
-	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 10:13:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1687ECE564
+	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 10:14:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B8F488FEB;
+	by phobos.denx.de (Postfix) with ESMTP id D0FE188FFE;
 	Tue, 10 Sep 2024 12:13:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="ERFzwh+T";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="MGUwqBYG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D99F588FFC; Tue, 10 Sep 2024 12:13:49 +0200 (CEST)
+ id 872FE88FF9; Tue, 10 Sep 2024 12:13:50 +0200 (CEST)
 Received: from relay1-d.mail.gandi.net (relay1-d.mail.gandi.net
  [IPv6:2001:4b98:dc4:8::221])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD83888FF5
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 12:13:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A261788F47
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 12:13:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 12446240006;
- Tue, 10 Sep 2024 10:13:46 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 2912D24000D;
+ Tue, 10 Sep 2024 10:13:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1725963226;
+ t=1725963227;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=fbSsq+oYjWduI1kVBW6FKZHrLeCN3gr9EAnyFpGpqhI=;
- b=ERFzwh+TYGT6Yo++r8ao4foFk5TnJ5vJcozTRcvUoik3roLGqJbP1qFpsCUNX7Surhmqc/
- lIZbIK9EnlimQmcYqMXu51J1VZ1dja0l/Rf7XYwY1LAWkPT5BbgqAcONCz0eqGy6xtPAWf
- 9owKU7eUnLKBGJMbWcVa5keNRXOtpwyy3stYYJEjY4jSVWf2CXEt3XHXhRHNPj4tBok/iZ
- f6Qy0PGorjVI4z7AEey6UgLCslxZ518CpthK2/xwzQVl9+HzigPuoDxldTin/hh9vlnFDK
- CQJyIuCe+ilCV9TJRZy9d27X31sHFP50SOwvgl5KKq1SScO125k122k7UWmPMA==
+ bh=PL2HacEmJb0jY7cAlYq3Kmhv3XcDkmdxb2fFmmw5yc0=;
+ b=MGUwqBYGJH0jVhcUUgZKXHkr43YC4PjrtniWhTtL+TT4eSNLbPpao+WqtAAs/coYXbFbMR
+ qRB57Tc2BJcy0QE4Trt76nPANqaVq5wDMvKKbA7v6lrvkbhnqU7Ec2pV9A80DbxZ14//Qw
+ Ov0FJCyoZa0ygTCuk3nBuxkqOvr6CyqsOTw0ZnGIraNxmaT9oMagsBBdHN2a2kue3+Mnsr
+ u4QEnNpFXZ/gSV2OizTYT+GQ0YOuW91qww/fhft/G+g++Hv6UH2d2aKIo1JbmcImNjsBkn
+ S0Oec1rxHbPa3WtcHysAvJ3O8NOWjrfQxR6GsQsyJZulMweXh/nJeXUGhIbXjg==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
@@ -47,10 +47,9 @@ To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
 Cc: <u-boot@lists.denx.de>, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
  Ian Ray <ian.ray@gehealthcare.com>, Marek Vasut <marek.vasut@gmail.com>,
  Miquel Raynal <miquel.raynal@bootlin.com>
-Subject: [PATCH 2/8] clk: Ensure the parent clocks are enabled while
- reparenting
-Date: Tue, 10 Sep 2024 12:13:38 +0200
-Message-ID: <20240910101344.110633-3-miquel.raynal@bootlin.com>
+Subject: [PATCH 4/8] imx: power-domain: Describe the i.MX8 MEDIAMIX domain
+Date: Tue, 10 Sep 2024 12:13:40 +0200
+Message-ID: <20240910101344.110633-5-miquel.raynal@bootlin.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240910101344.110633-1-miquel.raynal@bootlin.com>
 References: <20240910101344.110633-1-miquel.raynal@bootlin.com>
@@ -73,39 +72,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Reparenting a clock C with a new parent P means that C will only
-continue clocking if P is already clocking when the mux is updated. In
-case the parent is currently disabled, failures (stalls) are likely to
-happen.
-
-This is exactly what happens on i.MX8 when enabling the video
-pipeline. We tell LCDIF clocks to use the VIDEO PLL as input, while the
-VIDEO PLL is currently off. This all happens as part of the
-assigned-clocks handling procedure, where the reparenting happens before
-the enable() calls. Enabling the parents as part of the reparenting
-procedure seems sane and also matches the logic applied in other parts
-of the CCM.
+Add support for the i.MX8 MEDIAMIX domain which is driving the power
+over the whole display/rendering pipeline.
 
 Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
 ---
- drivers/clk/clk-uclass.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ drivers/power/domain/imx8m-power-domain.c | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
 
-diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-index ed6e60bc484..24f801e16f1 100644
---- a/drivers/clk/clk-uclass.c
-+++ b/drivers/clk/clk-uclass.c
-@@ -595,6 +595,10 @@ int clk_set_parent(struct clk *clk, struct clk *parent)
- 	if (!ops->set_parent)
- 		return -ENOSYS;
+diff --git a/drivers/power/domain/imx8m-power-domain.c b/drivers/power/domain/imx8m-power-domain.c
+index df5d7d69562..18ed3c93835 100644
+--- a/drivers/power/domain/imx8m-power-domain.c
++++ b/drivers/power/domain/imx8m-power-domain.c
+@@ -41,6 +41,7 @@ DECLARE_GLOBAL_DATA_PTR;
+ #define IMX8MN_MIPI_A53_DOMAIN			BIT(2)
  
-+	ret = clk_enable(parent);
-+	if (ret)
-+		return ret;
+ #define IMX8MP_HSIOMIX_A53_DOMAIN		BIT(19)
++#define IMX8MP_MEDIAMIX_A53_DOMAIN		BIT(12)
+ #define IMX8MP_USB2_PHY_A53_DOMAIN		BIT(5)
+ #define IMX8MP_USB1_PHY_A53_DOMAIN		BIT(4)
+ #define IMX8MP_PCIE_PHY_A53_DOMAIN		BIT(3)
+@@ -64,6 +65,7 @@ DECLARE_GLOBAL_DATA_PTR;
+ #define IMX8MN_MIPI_SW_Pxx_REQ			BIT(0)
+ 
+ #define IMX8MP_HSIOMIX_Pxx_REQ			BIT(17)
++#define IMX8MP_MEDIAMIX_Pxx_REQ                 BIT(10)
+ #define IMX8MP_USB2_PHY_Pxx_REQ			BIT(3)
+ #define IMX8MP_USB1_PHY_Pxx_REQ			BIT(2)
+ #define IMX8MP_PCIE_PHY_SW_Pxx_REQ		BIT(1)
+@@ -82,6 +84,9 @@ DECLARE_GLOBAL_DATA_PTR;
+ #define IMX8MP_HSIOMIX_PWRDNACKN		BIT(28)
+ #define IMX8MP_HSIOMIX_PWRDNREQN		BIT(12)
+ 
++#define IMX8MP_MEDIAMIX_PWRDNACKN		BIT(30)
++#define IMX8MP_MEDIAMIX_PWRDNREQN		BIT(14)
 +
- 	ret = ops->set_parent(clk, parent);
- 	if (ret)
- 		return ret;
+ /*
+  * The PGC offset values in Reference Manual
+  * (Rev. 1, 01/2018 and the older ones) GPC chapter's
+@@ -102,6 +107,7 @@ DECLARE_GLOBAL_DATA_PTR;
+ #define IMX8MP_PGC_PCIE			13
+ #define IMX8MP_PGC_USB1			14
+ #define IMX8MP_PGC_USB2			15
++#define IMX8MP_PGC_MEDIAMIX		22
+ #define IMX8MP_PGC_HSIOMIX		29
+ 
+ #define GPC_PGC_CTRL(n)			(0x800 + (n) * 0x40)
+@@ -304,6 +310,17 @@ static const struct imx_pgc_domain imx8mp_pgc_domains[] = {
+ 		.pgc = BIT(IMX8MP_PGC_HSIOMIX),
+ 		.keep_clocks = true,
+ 	},
++
++	[IMX8MP_POWER_DOMAIN_MEDIAMIX] = {
++		.bits = {
++			.pxx = IMX8MP_MEDIAMIX_Pxx_REQ,
++			.map = IMX8MP_MEDIAMIX_A53_DOMAIN,
++			.hskreq = IMX8MP_MEDIAMIX_PWRDNREQN,
++			.hskack = IMX8MP_MEDIAMIX_PWRDNACKN,
++		},
++		.pgc = BIT(IMX8MP_PGC_MEDIAMIX),
++		.keep_clocks = true,
++	},
+ };
+ 
+ static const struct imx_pgc_regs imx8mp_pgc_regs = {
 -- 
 2.43.0
 
