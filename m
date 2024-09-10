@@ -4,78 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 421EBECE564
-	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 10:31:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB204EB64DE
+	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 10:32:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B5ADB8901D;
-	Tue, 10 Sep 2024 12:31:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 53D758901D;
+	Tue, 10 Sep 2024 12:32:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="W7mZ1ZNn";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 322F38901D; Tue, 10 Sep 2024 12:31:00 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8F87D89021; Tue, 10 Sep 2024 12:32:36 +0200 (CEST)
+Received: from smtpbg151.qq.com (smtpbg151.qq.com [18.169.211.239])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D70688901F
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 12:30:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 1004E8901D
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 12:32:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a80eab3945eso511697466b.1
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 03:30:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1725964255; x=1726569055;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=l9laj52vQGCDss1jBFY3a3uE/JEeUy9qar7s1yA/MV8=;
- b=W7mZ1ZNn8778KyEO01ioXwiB/aWKklufFGDQp7y325HdgXhMMKneMlePnJUVHgx+tQ
- wfGLiTiu0uYLVwQqkyK9AcZgWhxZ9pC8/psqc/MTvpSPdB5y6mBhxkL4Kzt6kuyjAm7K
- Su1PZguIUZy/4aUy2ksMYLCkB2YEzhv/l6Tn4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725964255; x=1726569055;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=l9laj52vQGCDss1jBFY3a3uE/JEeUy9qar7s1yA/MV8=;
- b=ZwZwEOmdOdcQJab/ytM65epgGT2Krw28Wo8M+kiHQzGqdy/zPYhRJvNrFYDbO7XuQR
- TYLXZppXImbhbBot2I9gkA+3qZp+pJfVsXBFELw2FXzp/ApxUoQY1M0vVlsRO0VAQg0g
- XIqGTTKP1UsmL98FLGbIxDhLuJAAV5+iJuYhIM69oFo+F2nmsz/SxrLAJQXC8Y2d7wKF
- bwDDYo6oYHbRgdEXtVnZ8F1zhycG5W6IdChIyqc+Fdx5Wg0uv09SRH0JDqcKp/8vtzXv
- X/KfKzRMiQhtylxJShZhOHvZrgcYJ0hcsyTIaB9fx/wumLlyLyu1pHuhHSupbve7W5nW
- uOag==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWjOQaLHZkj8Pm1mflQz08OzouaaBxLCwEwGWYYBmfn9dhwp2MambB0VwJboUF1y5W7f9zlgMs=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz11TicCM2j6/lOGEr8xnw7b8t0Wx+fvKI5ppWJz4KcE1qWKu1O
- AEfYDcmOvBdoj8ojh707bDcXGx/eS6eLx0KSsN5hu69Z0YPUwxLcPvnb1QxAYxhqnQOtQcYZYSX
- E32S7beS9yAod7kJqPr5kGvkv7yDcW+cgfmJq6g==
-X-Google-Smtp-Source: AGHT+IFkwAEbmOGlqfcTLF1SmHvmvrSKnRYcM+1H47GFpwb6ez62HdtaSuTMie6y2so70ze1JRxcx5aUSaEBYtBymDU=
-X-Received: by 2002:a17:907:7f0f:b0:a8b:6ee7:ba1b with SMTP id
- a640c23a62f3a-a8ffab18a19mr31192166b.15.1725964254627; Tue, 10 Sep 2024
- 03:30:54 -0700 (PDT)
+ dmarc=fail (p=none dis=none) header.from=radxa.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=naoki@radxa.com
+X-QQ-mid: bizesmtp79t1725964326tgrapyjz
+X-QQ-Originating-IP: OPsyFFx+sed5kjB6zYxLNoN6POt6ALj1vbkUtYI95Yc=
+Received: from [192.168.159.131] ( [106.150.157.243])
+ by bizesmtp.qq.com (ESMTP) with 
+ id ; Tue, 10 Sep 2024 18:32:02 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 374718111924827065
+Message-ID: <06019D8A008F58D0+19f3dadc-2788-45b6-b8ee-7b3383a8eb5b@radxa.com>
+Date: Tue, 10 Sep 2024 19:32:02 +0900
 MIME-Version: 1.0
-References: <20240910101344.110633-1-miquel.raynal@bootlin.com>
-In-Reply-To: <20240910101344.110633-1-miquel.raynal@bootlin.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Tue, 10 Sep 2024 12:30:42 +0200
-Message-ID: <CAOf5uwmzm=9=Vsu5cTbziyPG=KAqDGTcmrW0A36a2ix_+2WjNA@mail.gmail.com>
-Subject: Re: [PATCH 0/8] Add imx8mp video support
-To: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, 
- Simon Glass <sjg@chromium.org>, Jaehoon Chung <jh80.chung@samsung.com>, 
- Anatolij Gustschin <agust@denx.de>, u-boot@lists.denx.de, 
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Ian Ray <ian.ray@gehealthcare.com>, Marek Vasut <marek.vasut@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] rockchip: modify devicetree at runtime for Radxa ROCK Pi
+ E v3.0
+To: Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, banglang.huang@foxmail.com,
+ jonas@kwiboo.se
+References: <20240827013111.633-1-naoki@radxa.com>
+ <abfbeae4-1b9c-4fc0-865d-979af0b3d5de@rock-chips.com>
+Content-Language: en-US
+From: FUKAUMI Naoki <naoki@radxa.com>
+In-Reply-To: <abfbeae4-1b9c-4fc0-865d-979af0b3d5de@rock-chips.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: bizesmtp:radxa.com:qybglogicsvrgz:qybglogicsvrgz8a-1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,106 +63,170 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Miquel
+hi,
 
-On Tue, Sep 10, 2024 at 12:13=E2=80=AFPM Miquel Raynal
-<miquel.raynal@bootlin.com> wrote:
->
-> In order to display a boot picture or an error message, the i.MX8MP
-> display pipeline must be enabled. The SoC has support for various
-> interfaces (LVDS, HDMI, DSI). The one supported in this series is the
-> standard 4-lane LVDS output. The minimal setup is thus composed of:
-> * An LCD InterFace (LCDIF) with an AXI/APB interface, generating a pixel
->   stream
-> * One LVDS Display Bridge (LDB), also named pixel mapper, which receives
->   the pixel stream and route it to one or two (possibly combined) LVDS
->   displays.
-> * All necessary clocks and power controls coming from the MEDIAMIX
->   control block.
->
-> Patch 1 adds a very useful helper to the core in order to grab devices
-> through endpoints instead of being limited to phandles. Video pipelines
-> being often described using graphs endpoints, the introduced helper is
-> used several times in the serires (there are 3 LCDIF, one of them being
-> connected to the LDB, itself having 2 ports).
->
-> Patch 2 is a fix which is necessary for this series to work properly,
-> but is way broader than just this use case. In practice, when assigned
-> clocks are defined in the device tree, the clock uclass tries to assign
-> the parents first and then sets them to the correct frequency. This only
-> works if the parents have been enabled themselves. Otherwise we end-up
-> with a non-clocked parent. I believe this is not the intended behavior
-> in general, but more importantly on the i.MX8MP, there are "clock
-> slices" which have pre-requisites in order to be modified and selecting
-> an ungated parent is one of them.
->
-> All the other patches progressively build support for the whole video
-> pipeline. Regarding the LCDIF driver, there is already a similar driver
-> for older i.MX SoCs but I didn't manage to get it to work. It was
-> written more than a decade ago while device-model, clocks and others
-> were not yet generically supported. Thus, numerous ad-hoc solutions
-> were implemented, which no longer fit today's requirements. I preferred
-> to add a new "clean" driver instead of modifying the existing one
-> because of the too high risk of breaking these platforms. Once proper
-> clocks/power-domain descriptions will be added to them they might be
-> converted (and tested) to work with the "new" implementation, but going
-> the opposite way felt drawback.
->
+On 9/10/24 19:11, Kever Yang wrote:
+> Hi Naoki,
+> 
+> On 2024/8/27 09:31, FUKAUMI Naoki wrote:
+>> since Radxa ROCK Pi E v3.0 is different to ROCK Pi E, "model" and
+>> "compatible" in DT need to be different.
+>> (specifically, sysupgrade[1] in OpenWrt)
+>>
+>> also, "mmc0" and "mmc1" aliases need to be swapped to align with other
+>> Radxa's boards.
+>>
+>> modify them after loading DT for kernel.
+>>
+>> [1] https://openwrt.org/docs/techref/sysupgrade#how_it_works
+>>
+>> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
+>> ---
+>>   arch/arm/mach-rockchip/rk3328/Kconfig       |  6 ++++++
+>>   board/radxa/rockpie-rk3328/Kconfig          | 12 +++++++++++
+>>   board/radxa/rockpie-rk3328/MAINTAINERS      |  6 ++++++
+>>   board/radxa/rockpie-rk3328/Makefile         |  3 +++
+>>   board/radxa/rockpie-rk3328/rockpie-rk3328.c | 22 +++++++++++++++++++++
+>>   configs/rock-pi-e-v3-rk3328_defconfig       |  2 ++
+>>   6 files changed, 51 insertions(+)
+>>   create mode 100644 board/radxa/rockpie-rk3328/Kconfig
+>>   create mode 100644 board/radxa/rockpie-rk3328/MAINTAINERS
+>>   create mode 100644 board/radxa/rockpie-rk3328/Makefile
+>>   create mode 100644 board/radxa/rockpie-rk3328/rockpie-rk3328.c
+>>
+>> diff --git a/arch/arm/mach-rockchip/rk3328/Kconfig 
+>> b/arch/arm/mach-rockchip/rk3328/Kconfig
+>> index 70770da5fdf..654377672fe 100644
+>> --- a/arch/arm/mach-rockchip/rk3328/Kconfig
+>> +++ b/arch/arm/mach-rockchip/rk3328/Kconfig
+>> @@ -10,6 +10,11 @@ config TARGET_EVB_RK3328
+>>         with full function and phisical connectors support like
+>>         usb2.0 host ports, LVDS, JTAG, MAC, SDcard, HDMI, USB-2-serial...
+>> +config TARGET_ROCK_PI_E_V3_RK3328
+>> +    bool "Radxa ROCK Pi E v3.0"
+>> +    help
+>> +      Radxa ROCK Pi E v3.0 single board computers with a RK3328 SoC.
+>> +
+>>   endchoice
+>>   config ROCKCHIP_BOOT_MODE_REG
+>> @@ -37,5 +42,6 @@ config TPL_SYS_MALLOC_F_LEN
+>>       default 0x800
+>>   source "board/rockchip/evb_rk3328/Kconfig"
+>> +source "board/radxa/rockpie-rk3328/Kconfig"
+>>   endif
+>> diff --git a/board/radxa/rockpie-rk3328/Kconfig 
+>> b/board/radxa/rockpie-rk3328/Kconfig
+>> new file mode 100644
+>> index 00000000000..73485d93513
+>> --- /dev/null
+>> +++ b/board/radxa/rockpie-rk3328/Kconfig
+>> @@ -0,0 +1,12 @@
+>> +if TARGET_ROCK_PI_E_V3_RK3328
+>> +
+>> +config SYS_BOARD
+>> +    default "rockpie-rk3328"
+>> +
+>> +config SYS_VENDOR
+>> +    default "radxa"
+>> +
+>> +config SYS_CONFIG_NAME
+>> +    default "evb_rk3328"
+>> +
+>> +endif
+>> diff --git a/board/radxa/rockpie-rk3328/MAINTAINERS 
+>> b/board/radxa/rockpie-rk3328/MAINTAINERS
+>> new file mode 100644
+>> index 00000000000..f98ddce4e58
+>> --- /dev/null
+>> +++ b/board/radxa/rockpie-rk3328/MAINTAINERS
+>> @@ -0,0 +1,6 @@
+>> +ROCK-PI-E-V3-RK3328
+>> +M:    FUKAUMI Naoki <naoki@radxa.com>
+>> +S:    Maintained
+>> +F:    board/radxa/rockpie-rk3328
+>> +F:    configs/rock-pi-e-v3-rk3328_defconfig
+>> +F:    arch/arm/dts/rk3328-rock-pi-e*
+>> diff --git a/board/radxa/rockpie-rk3328/Makefile 
+>> b/board/radxa/rockpie-rk3328/Makefile
+>> new file mode 100644
+>> index 00000000000..cede3b2605d
+>> --- /dev/null
+>> +++ b/board/radxa/rockpie-rk3328/Makefile
+>> @@ -0,0 +1,3 @@
+>> +# SPDX-License-Identifier: GPL-2.0+
+>> +
+>> +obj-y += rockpie-rk3328.o
+>> diff --git a/board/radxa/rockpie-rk3328/rockpie-rk3328.c 
+>> b/board/radxa/rockpie-rk3328/rockpie-rk3328.c
+>> new file mode 100644
+>> index 00000000000..3178af3e472
+>> --- /dev/null
+>> +++ b/board/radxa/rockpie-rk3328/rockpie-rk3328.c
+>> @@ -0,0 +1,22 @@
+>> +// SPDX-License-Identifier: GPL-2.0+
+>> +
+>> +#include <fdt_support.h>
+>> +
+>> +#define MODEL        "Radxa ROCK Pi E v3.0"
+>> +#define COMPATIBLE1    "radxa,rockpi-e-v3"
+>> +#define COMPATIBLE2    "rockchip,rk3328"
+>> +
+>> +#define MMC0        "mmc@ff520000"
+>> +#define MMC1        "mmc@ff500000"
+>> +
+>> +int ft_board_setup(void *blob, struct bd_info *bd)
+>> +{
+>> +    fdt_setprop_string(blob, 0, "model", MODEL);
+>> +    fdt_setprop_string(blob, 0, "compatible", COMPATIBLE1);
+>> +    fdt_appendprop_string(blob, 0, "compatible", COMPATIBLE2);
+>> +
+>> +    fdt_find_and_setprop(blob, "/aliases", "mmc0", MMC0, 13, 1);
+>> +    fdt_find_and_setprop(blob, "/aliases", "mmc1", MMC1, 13, 1);
+> 
+> There is already  available dts arch/arm/dts/rk3328-rock-pi-e-v3.dts,
+> 
+> so this change should go to to dts instead.
+> 
+> Does arch/arm/dts/rk3328-rock-pi-e-v3.dts also go to mainline kernel?
 
-Thank you for adding those patches. We are working on mipi support
-here and some of the clock patches
-are there too. I will try to look and rebase our patchset
+https://lore.kernel.org/linux-rockchip/20240816213429.1093-2-naoki@radxa.com/t/#u
 
-https://patchwork.amarulasolutions.com/patch/3401/
+adding new dts for v3.0 will not be accepted for mainline kernel.
+I need new compatible for v3.0 in DT for kernel, but I have no good idea 
+to handle this issue...
 
-Michael
+Best regards,
 
+--
+FUKAUMI Naoki
+Radxa Computer (Shenzhen) Co., Ltd.
 
 > Thanks,
-> Miqu=C3=A8l
->
-> Miquel Raynal (8):
->   dm: core: Add a helper to retrieve devices through graph endpoints
->   clk: Ensure the parent clocks are enabled while reparenting
->   clk: imx8mp: Add media related clocks
->   imx: power-domain: Describe the i.MX8 MEDIAMIX domain
->   imx: power-domain: Add support for the MEDIAMIX control block
->   video: imx: Fix Makefile in order to be able to add other imx drivers
->   video: imx: Add LDB driver
->   video: imx: Add LCDIF driver
->
->  drivers/clk/clk-uclass.c                  |   4 +
->  drivers/clk/imx/clk-imx8mp.c              |  35 +++
->  drivers/core/uclass.c                     |  62 +++++
->  drivers/power/domain/Kconfig              |   7 +
->  drivers/power/domain/Makefile             |   1 +
->  drivers/power/domain/imx8m-power-domain.c |  17 ++
->  drivers/power/domain/imx8mp-mediamix.c    | 185 +++++++++++++
->  drivers/video/Makefile                    |   2 +-
->  drivers/video/imx/Kconfig                 |   7 +
->  drivers/video/imx/Makefile                |   4 +-
->  drivers/video/imx/lcdif.c                 | 315 ++++++++++++++++++++++
->  drivers/video/imx/ldb.c                   | 251 +++++++++++++++++
->  include/dm/uclass.h                       |  21 ++
->  13 files changed, 909 insertions(+), 2 deletions(-)
->  create mode 100644 drivers/power/domain/imx8mp-mediamix.c
->  create mode 100644 drivers/video/imx/lcdif.c
->  create mode 100644 drivers/video/imx/ldb.c
->
-> --
-> 2.43.0
->
-
-
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+> 
+> - Kever
+> 
+>> +
+>> +    return 0;
+>> +}
+>> diff --git a/configs/rock-pi-e-v3-rk3328_defconfig 
+>> b/configs/rock-pi-e-v3-rk3328_defconfig
+>> index 4c6cc634bd6..15036d01a40 100644
+>> --- a/configs/rock-pi-e-v3-rk3328_defconfig
+>> +++ b/configs/rock-pi-e-v3-rk3328_defconfig
+>> @@ -9,6 +9,7 @@ CONFIG_ENV_OFFSET=0x3F8000
+>>   CONFIG_DEFAULT_DEVICE_TREE="rk3328-rock-pi-e-v3"
+>>   CONFIG_DM_RESET=y
+>>   CONFIG_ROCKCHIP_RK3328=y
+>> +CONFIG_TARGET_ROCK_PI_E_V3_RK3328=y
+>>   CONFIG_DEBUG_UART_BASE=0xFF130000
+>>   CONFIG_DEBUG_UART_CLOCK=24000000
+>>   CONFIG_SYS_LOAD_ADDR=0x800800
+>> @@ -18,6 +19,7 @@ CONFIG_FIT_VERBOSE=y
+>>   CONFIG_SPL_FIT_SIGNATURE=y
+>>   CONFIG_SPL_LOAD_FIT=y
+>>   CONFIG_LEGACY_IMAGE_FORMAT=y
+>> +CONFIG_OF_BOARD_SETUP=y
+>>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-rock-pi-e.dtb"
+>>   # CONFIG_DISPLAY_CPUINFO is not set
+>>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+> 
