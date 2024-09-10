@@ -4,85 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34A67EDE996
-	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 03:21:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1798ECE564
+	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 04:08:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8759F88F2A;
-	Tue, 10 Sep 2024 05:19:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id F0D6788F04;
+	Tue, 10 Sep 2024 06:08:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="AmpFgeCu";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XDDlITIQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 543C4889B4; Mon,  9 Sep 2024 19:01:01 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id CBD3E88EC1; Tue, 10 Sep 2024 06:08:15 +0200 (CEST)
+Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
+ [IPv6:2607:f8b0:4864:20::f30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2783288D08
- for <u-boot@lists.denx.de>; Mon,  9 Sep 2024 19:00:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C7ECE88F03
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 06:08:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tudor.ambarus@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-42cb806623eso11852725e9.2
- for <u-boot@lists.denx.de>; Mon, 09 Sep 2024 10:00:59 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf30.google.com with SMTP id
+ 6a1803df08f44-6c548eb3380so8745506d6.1
+ for <u-boot@lists.denx.de>; Mon, 09 Sep 2024 21:08:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725901258; x=1726506058; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=DZJikMAcxwWE2aw2RKNfyyewoqe6sj7RdH95sUzdQr8=;
- b=AmpFgeCuMOWaD85PAbLajmGYMM092HsLV6hjjyWPjJR/eWav9HpeVCXYcom+Mibosd
- wK8MzUl2YURUVxM4ce0fSiBcCDJVPtuzLOw7VdIyyEdzar1KYj6HY92QQLmLK6l4jD+u
- m4deDEH6t5q8MpBrNyY+EXEaqYzUZZAnGf06e/ngoSoSLKAFAfC1tqGSloVGszvuxQwd
- uA94nDqOpwUDQ0frECcARGM6lmSkKaww6xOQb/hGOzRFvOL+ftlFJJHP0h29oFSBfpGa
- dGHUnUIPDwhjSetXRFfZp1zn3XKII9usPvZ2aBfuFLKdbSIrXSSpRfG3456yMkbZk+tB
- /weA==
+ d=konsulko.com; s=google; t=1725941291; x=1726546091; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=T3ktm6h1RVUKv9NhJwky4HCUkEQAeIVkC5rPKchc9PE=;
+ b=XDDlITIQ65F1TbTnvJsPC42BO833+BLUOCCHyL8jx+WtMJASky5GbG+39umVsiz1i8
+ mS4R7KQSebx0Y10+c08Xa8AbS+BHxkzJ0BDMyQC1TJ4RBr5sW4GNSFzPG/9exnZSeWgS
+ K5srPXhg5Nb0DeGeha2y6zD09K15BEHiB19sE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725901258; x=1726506058;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=DZJikMAcxwWE2aw2RKNfyyewoqe6sj7RdH95sUzdQr8=;
- b=aKwu2DDzoxGLamWqnBZUJaEp6YpDUXeid73GSjJuiXlKW4XE6Jtd5eYlLhU+WWTtXv
- hQltghwzKE4JDIXhHPuaMbwNVIHeLVazpi6EOWbIJh9aWYhc7YJRPNRUIDqx97R6erGJ
- uEYfzJaO98Qb9qLqJaNC2VeXIG2x8Lng8oVIJTWJWdgDVZLrOvm9bY91jI6/c61039vl
- HLzDz+D5ZiXV29meqdz7CvUIW7V8XGmx6RIQqs6qsf5nTLR/w9NxQk0aqZ9Z4ToJ/3KZ
- I4vgDiQzoDJrlDM0SU+nO+q8V+ZffgPwFrxZ+Og2tay9ig1oyYMTMmvysBqV+OBVQvjo
- +8uw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVwnYKa8+ZRwFT8yPuzlRmSXDm1Kt4FFWdYVmwI0ZkckmwQ3pO/ZVEv6YTrkkc0ctk2WF3Gn0M=@lists.denx.de
-X-Gm-Message-State: AOJu0YwCXw0P4Ras6iNshpFzb2nQqMgp+edKBh5TkqR5h1CW4Kwi2YXY
- xGvUIQgDghWwbtUuIiLWFiZ6otFPUzmqyurgy52fDnEpPUH68e6VPj8Dr4KC7ws=
-X-Google-Smtp-Source: AGHT+IF95LsWLnMea4gGZBZl8JU9ouKVbgVJAPFNVgUSoWUmAXCxC0+S7ZxinIJRXeiMp1336AIEUg==
-X-Received: by 2002:a05:600c:1d07:b0:42c:b4f1:f2ad with SMTP id
- 5b1f17b1804b1-42cb4f1f3e5mr41159255e9.33.1725901258216; 
- Mon, 09 Sep 2024 10:00:58 -0700 (PDT)
-Received: from [192.168.0.61] ([79.115.63.155])
+ d=1e100.net; s=20230601; t=1725941291; x=1726546091;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=T3ktm6h1RVUKv9NhJwky4HCUkEQAeIVkC5rPKchc9PE=;
+ b=cyF3wk7OINjfN1ygp08RKX7LC+1UkCbfwt4l5MbgIHeWeBUlFWm1ZOqaUrOHJO1m4A
+ BQ6vb0nHikjoxh/ompIGrzzeqQEdOLf5GbnKUGb81Hdd8RvIcUJnGjd/oxYMBG5T39po
+ 1Nzr5VlETLZghUQrLROe7PTXPFIORX2+QlE8JJr8hi6mYgfRPPVdU5pcWwv6wuKfaWD8
+ o18GXtwvzXps1AIirdFNkYvB+lXP9fMQgTY3ffXV5396pVVUs9x83QDifybxCku9xlC5
+ TQuczfbdsGg4bYzz6Unv9dgGc8xS8xIltASGsClejlOieHGD+VQ3CjtRSGaGDN8yEpR5
+ GA9Q==
+X-Gm-Message-State: AOJu0YyQpLoiJaNGs/fQOuYZOYr2mkwHGwbYt+K1iaOH2VEVzkxPChO4
+ gfbP9jFBkurilXg/WDSYZgWHIvQLPP/J39g/l4gzVPPUNqpPE4Knfls0WvxN0R60KQU3/TwqahX
+ RSnI=
+X-Google-Smtp-Source: AGHT+IEZYs1V3dYXblAJ1PQyFpWyWwTE4cMuL2uyAyCTPbDP9fdOT9Vwa0weT0z9G+3afwGIwSoJWw==
+X-Received: by 2002:a05:6214:578a:b0:6c3:5efc:d2fb with SMTP id
+ 6a1803df08f44-6c5283fdb53mr221683236d6.22.1725941290585; 
+ Mon, 09 Sep 2024 21:08:10 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-378956d3796sm6469603f8f.80.2024.09.09.10.00.56
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 09 Sep 2024 10:00:57 -0700 (PDT)
-Message-ID: <62ea78e8-c834-4960-9e59-8e824cc6537c@linaro.org>
-Date: Mon, 9 Sep 2024 20:00:55 +0300
+ 6a1803df08f44-6c534339839sm26729026d6.43.2024.09.09.21.08.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Sep 2024 21:08:09 -0700 (PDT)
+Date: Mon, 9 Sep 2024 22:08:07 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PULL] u-boot-usb/next
+Message-ID: <20240910040807.GF4252@bill-the-cat>
+References: <20240909202054.73857-1-marex@denx.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mtd: spi-nor-ids: Add NO_CHIP_ERASE flag to Infineon 2Gb
- parts
-To: tkuw584924@gmail.com, u-boot@lists.denx.de
-Cc: jagan@amarulasolutions.com, vigneshr@ti.com, pratyush@kernel.org,
- tejas.arvind.bhumkar@amd.com, prasad.kummari@amd.com,
- Bacem.Daassi@infineon.com, Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
-References: <20240830000537.18862-1-Takahiro.Kuwano@infineon.com>
-From: Tudor Ambarus <tudor.ambarus@linaro.org>
-Content-Language: en-US
-In-Reply-To: <20240830000537.18862-1-Takahiro.Kuwano@infineon.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Tue, 10 Sep 2024 05:19:45 +0200
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="BE/pbvDu60jVZ/3F"
+Content-Disposition: inline
+In-Reply-To: <20240909202054.73857-1-marex@denx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,59 +91,50 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--BE/pbvDu60jVZ/3F
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 30.08.2024 03:05, tkuw584924@gmail.com wrote:
-> From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
-> 
-> S25HS02GT, S25HL02GT, and S28HS02GT are dual-die package parts and do
-> not support chip erase.
-> 
-Please split the patch and add fixes tag so that the fixes can be
-applied/tracked easily. I already checked when those flashes were introduced
+On Mon, Sep 09, 2024 at 10:20:28PM +0200, Marek Vasut wrote:
 
-> Signed-off-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
-> ---
->  drivers/mtd/spi/spi-nor-ids.c | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-> index 88709a52b3..457965dad1 100644
-> --- a/drivers/mtd/spi/spi-nor-ids.c
-> +++ b/drivers/mtd/spi/spi-nor-ids.c
-> @@ -369,7 +369,7 @@ const struct flash_info spi_nor_ids[] = {
->  		SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES |
->  		USE_CLSR) },
->  	{ INFO6("s25hl02gt",  0x342a1c, 0x0f0090, 256 * 1024, 1024,
-> -		SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-> +		SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES | NO_CHIP_ERASE) },
->  	{ INFO6("s25hs512t",  0x342b1a, 0x0f0390, 256 * 1024, 256,
->  		SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES |
->  		USE_CLSR) },
-> @@ -377,7 +377,7 @@ const struct flash_info spi_nor_ids[] = {
->  		SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES |
->  		USE_CLSR) },
->  	{ INFO6("s25hs02gt",  0x342b1c, 0x0f0090, 256 * 1024, 1024,
-> -		SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-> +		SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES | NO_CHIP_ERASE) },
+> The following changes since commit d0f74bd417daf6492975ce346843ba0767caf5=
+1c:
+>=20
+>   buildman: Support building within a Python venv (2024-09-06 12:45:54 -0=
+600)
+>=20
+> are available in the Git repository at:
+>=20
+>   git://source.denx.de/u-boot-usb.git next
+>=20
+> for you to fetch changes up to e72e683e36a83214dbb2547d88d553b5fd816dc8:
+>=20
+>   phy: test: Implement sandbox PHY .set_mode and DM test (2024-09-09 17:1=
+8:04 +0200)
+>=20
 
-one patch for these two changes please with the following fixes tag:
-Fixes: c95a914aed7 ("mtd: spi-nor-ids: Add Cypress s25hl-t/s25hs-t")
+Applied to u-boot/next, thanks!
 
->  	{ INFO6("s25fs256t",  0x342b19, 0x0f0890, 128 * 1024, 256,
->  		SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
->  #ifdef CONFIG_SPI_FLASH_S28HX_T
-> @@ -385,7 +385,7 @@ const struct flash_info spi_nor_ids[] = {
->  	{ INFO("s28hl01gt",  0x345a1b,      0, 256 * 1024, 512, SPI_NOR_OCTAL_DTR_READ) },
->  	{ INFO("s28hs512t",  0x345b1a,      0, 256 * 1024, 256, SPI_NOR_OCTAL_DTR_READ) },
->  	{ INFO("s28hs01gt",  0x345b1b,      0, 256 * 1024, 512, SPI_NOR_OCTAL_DTR_READ) },
-> -	{ INFO("s28hs02gt",  0x345b1c,      0, 256 * 1024, 1024, SPI_NOR_OCTAL_DTR_READ) },
-> +	{ INFO("s28hs02gt",  0x345b1c,      0, 256 * 1024, 1024, SPI_NOR_OCTAL_DTR_READ | NO_CHIP_ERASE) },
+--=20
+Tom
 
-and another patch for this change:
-Fixes: 16dd1095101 ("mtd: spi-nor-ids: Add Infineon(Cypress) s28hs02gt ID")
+--BE/pbvDu60jVZ/3F
+Content-Type: application/pgp-signature; name="signature.asc"
 
-With that feel free to my R-b tag on both:
-Reviewed-by: Tudor Ambarus <tudor.ambarus@linaro.org>
->  #endif
->  #endif
->  #ifdef CONFIG_SPI_FLASH_SST		/* SST */
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbfxiAACgkQFHw5/5Y0
+tyyKMgv9GzySAYRteOb3dnNkzMUSzxFx/w858RLVyVPkU5GFkTMPYxEsAxR6YxJe
+CWm69p3HZhPIyLFuBOeMMQc3fXanMzY+kdktCGvjsq8h+EKNLAqJCjMBPqSpLn8b
+rvb53K5RwY2IdXpx1fVt3Gbzb35jGF5J7Zytz9c+iJTog7I5H0aFoIPr9xHoBpM6
+mFCYLoqB8G0/03LIU1XzzJY7IsdWdn1tOrQ3fHED5obO3w9vQUb84Ph1uGsF4vtZ
+I201K5V9vm5sBbfDSK0+tCbIkp/ft/GsIni7Ch0rDe2GP8gpELKVwTa+oaKmeR6N
+jjy/HVUcy0LkyVyRvQVrvdc70eA8KQuqMWAHlyZ13pr0/qvh0ivcj++H/r8409f/
+VxQ2timn0muhbiAehx00Li/DLg+r0GHO1fvf/Z/YKxnwfxBAUsFURPxgrz9UZhbx
+vUESrxHQV3KG/jE7qNqv1SHkAQFUUY3xvoA7epmIcjoWKoasuwxMAgc5zokMDl9E
+gkQDr3+S
+=0iNe
+-----END PGP SIGNATURE-----
+
+--BE/pbvDu60jVZ/3F--
