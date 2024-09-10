@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85484ECE582
-	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 06:42:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F35AECE582
+	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 07:29:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F27E88892C;
-	Tue, 10 Sep 2024 08:41:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B490688EEC;
+	Tue, 10 Sep 2024 09:29:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OZifZp0Z";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Lvm6RtpF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D2CF48892C; Tue, 10 Sep 2024 08:41:58 +0200 (CEST)
-Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
- [IPv6:2607:f8b0:4864:20::630])
+ id 0960D88EBC; Tue, 10 Sep 2024 09:29:44 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8175A8890D
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 08:41:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6771F88EEC
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 09:29:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-207115e3056so21609425ad.2
- for <u-boot@lists.denx.de>; Mon, 09 Sep 2024 23:41:55 -0700 (PDT)
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-5c3c3b63135so5553912a12.3
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 00:29:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725950514; x=1726555314; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1725953381; x=1726558181; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=if2PYaA7KCYsiHsqJo8oh1CWqO6TgW4K5P5gQB6BthQ=;
- b=OZifZp0Z7gjDRJoe6UDiIARPzJxAQqT8IVwSi+EbrQWjp6HER8TjUZRMKrC3s4FAj0
- H1oCZnOf/KhsrUyVLLHWDRqXRABpAZk2VCKhTIVwoux0vKM0+Ru2YVVYjOtl+itKNCdU
- GYBXhmK71QITOQ78K0azDV8Exqjgq+NxWGzsqP3cACLPNbBWkRQ8GtFzcQEcxj8HRtBO
- TQSkO2iz7u64wOLWjMvACC65krUtXKd2eB7JADCOpco+3EhjAFCiSmxZAkQikhbsCvCo
- 3OowFBDsaHCJjD4UARyPdTF3/4svkiZ8jY6LNZvGQPJtBD2GHgcl0spDBQmLFEW2C1tm
- BJsQ==
+ bh=bVQiExnsLojJ7gwq3QdoNqa/rFTdqPc3JyK8G8fa1nI=;
+ b=Lvm6RtpF/Qn4PkAlgcQns7KQcpgBfiMD0nlhS9UVK6o/nfhJeWYJbcg0+zrjn4Llkb
+ pXLHmF5LlephMP42DMa6m3b4iWpBLlmt8LtUwVoLskbRJmE9XFbPLunuqcjUqbkW8HDm
+ oRNmHhvRmBmU97zvAi66LyqYSSahP0WFydIbX0osirJj/7HFREusqBlgqolmJ4CaVir+
+ ZYCmn5+PwRJgD7d/mPaA0zUqnH8g1mKkZPrVDxanAO0Xb0vxRt5B2/8TeQKzkDG4d0zP
+ WICUblmhFA02Sul8eiV0BR+5eZSWnxOLWqy3q8CsXi/K/OiBnbxXwgkncyEPAHmLIdbC
+ HdDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725950514; x=1726555314;
+ d=1e100.net; s=20230601; t=1725953381; x=1726558181;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=if2PYaA7KCYsiHsqJo8oh1CWqO6TgW4K5P5gQB6BthQ=;
- b=tKdYXUDR3x1KqY62wXMPoOw1WEaluUnZPOG7bkCM0WAAPEwpuN5hvaqfDUl9p9CkCV
- unUGXXJctJabyMLj7q6qA+4FcPExJNXLfUkUXNUPZ754Fk7WIjh8gyeTawqkElxdsJXi
- IXYVae9AqxpVkCozRIwCzQWXheP4ex2PO5OqolTy0B+MLnnqTof9rSd7ita4yom4i8yN
- mtRb2eCDS6KwaE5bxHFL5EI+dmyJUdf9xLNEJM9immWfuxHUWq986ntfBog8X10qsR2D
- /ucH81cKyR/ooDlIyXRGf1WqEe6DXonRyzT5hVeOEzsHXM73smz1QS4nK3pbx/lx8aPX
- WHTQ==
+ bh=bVQiExnsLojJ7gwq3QdoNqa/rFTdqPc3JyK8G8fa1nI=;
+ b=fe5vUDqEDBsYqKjpTPloa3z2jQn8u7YNsSjDKxHomk7QfGhDykccVFKCl3cFySwEpz
+ YQ4OYXEC/STLNoNQAXDmRwW/N1exsrj0cc04GPECXTUaY7jlczOdQc+xMeqIc8GxarBh
+ TJ7eCGC+vyt38B+asi1Yojyi2EAsXWA3S265x5StjISGPhBZBFc5hvTioZY4utoHIUAf
+ ZL4Li/oSmMazbVSLi95mwgYL2/aZXbq3yqpMhmJwCERQrTsygD29/bzwxHbToW8BqR7U
+ YIflhOuH5nwwvRhopcdfEhM2NIJrVugBSW2g4tmxexEpprbyTVU+Pqr4Lee9wu0MOT5o
+ Vfaw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUMCLEhSQMlqYfuagaw7m/hMV8iDwh06gOHF+RET6VrXP45MwE6mI4O38qu4Q/pivj/MoFVm6w=@lists.denx.de
-X-Gm-Message-State: AOJu0YyYdmmzIu4djQf3izUXB1XnES3PnEF8Mx7e7XAViace48T36Rgv
- DfIo34TxgGNYRKjMfeuLULrF47HexX9R06qJ2UccNZe1edK05oBd7heU9vUQvWDEnnaAfyU1kdJ
- o3VYYzITSrKIsnoogRFatMA3XqtNK8o+WBePX3A==
-X-Google-Smtp-Source: AGHT+IFGrkaOqsYNlU50qrSz3y+DwNVb5vYvV2Kw8FlxtrNYtaioNfAV5yLoOSUPq+k3bztjhjJkh5s7NLfPcP76ido=
-X-Received: by 2002:a17:902:d4c4:b0:205:5f2:34cf with SMTP id
- d9443c01a7336-206f0525ccamr156852405ad.24.1725950513452; Mon, 09 Sep 2024
- 23:41:53 -0700 (PDT)
+ AJvYcCXYUXwqONasmYFhzQS/dT6/1cf7Kyh1X5DnxkJmqKwJUts+7Pj0D8lqjfhnBHc8H9UYtZwnkmI=@lists.denx.de
+X-Gm-Message-State: AOJu0YwklzUIKg2DkGjLEAR3WdHxGXt5TKmZcMpMLfGV96h6lD83e2DA
+ CV10bY1vzAyU5dqxI+EIuKQsmbEbrBoikVSO6ZPQxjt0j6UFL23UWA/af0/k/0w0g0xd44JJZ3C
+ hLZxlHQuTFVLKm8HIZl9pCvND1AhF43Ds7kgGHQ==
+X-Google-Smtp-Source: AGHT+IHBxpUwZAnV20+9+PjMkpFF8XMHK6JVZnrqPiqu9oZdNRh8WIfJKytN92Y640lwRiQ04KWGPTvIBV3HRkUTx78=
+X-Received: by 2002:a05:6402:5193:b0:5c3:c520:b019 with SMTP id
+ 4fb4d7f45d1cf-5c3dc7c7154mr9979736a12.34.1725953380584; Tue, 10 Sep 2024
+ 00:29:40 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240910063933.141283-1-ilias.apalodimas@linaro.org>
 In-Reply-To: <20240910063933.141283-1-ilias.apalodimas@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 10 Sep 2024 09:41:17 +0300
-Message-ID: <CAC_iWj+cph1uZuUkE1nxbZd-WSQtw8ef+4OmzD6fC1QWTbkj4Q@mail.gmail.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Tue, 10 Sep 2024 12:59:29 +0530
+Message-ID: <CADg8p94ZnxVCc0VJ9hkAQ1Ka2Y9=Yt995KisJpFDXboMMfT3Yw@mail.gmail.com>
 Subject: Re: [PATCH] board: rpi: Enable capsule updates
-To: pbrobinson@gmail.com, mbrugger@suse.com
-Cc: sughosh.ganu@linaro.org, Tom Rini <trini@konsulko.com>,
- Stefan Roese <sr@denx.de>, "Ivan T. Ivanov" <iivanov@suse.de>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: pbrobinson@gmail.com, mbrugger@suse.com, Tom Rini <trini@konsulko.com>, 
+ Stefan Roese <sr@denx.de>, "Ivan T. Ivanov" <iivanov@suse.de>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Francois Berder <fberder@outlook.fr>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -90,13 +90,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Apologies for the noise, forgot to mention this needs to be applied on
-top of https://lore.kernel.org/u-boot/20240830-b4-dynamic-uuid-v8-0-79b31b199bee@linaro.org/,
-once that lands
-
-/Ilias
-
-On Tue, 10 Sept 2024 at 09:39, Ilias Apalodimas
+On Tue, 10 Sept 2024 at 12:09, Ilias Apalodimas
 <ilias.apalodimas@linaro.org> wrote:
 >
 > Since RPI works well using EFI and has no size limitations with regards
@@ -106,6 +100,11 @@ On Tue, 10 Sept 2024 at 09:39, Ilias Apalodimas
 >  board/raspberrypi/rpi/rpi.c | 22 ++++++++++++++++++++++
 >  configs/rpi_4_defconfig     |  2 ++
 >  2 files changed, 24 insertions(+)
+
+Tested-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+
+A couple of nits below.
+
 >
 > diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
 > index ab5ea85cf9f8..1f342eee12b2 100644
@@ -135,6 +134,10 @@ On Tue, 10 Sept 2024 at 09:39, Ilias Apalodimas
 > +               env_set("dfu_alt_info", update_info.dfu_string);
 > +}
 > +#endif
+
+Is this really needed? We have a weak function in efi_firrmware.c
+which is doing exactly this.
+
 > +
 > +
 >  #ifdef CONFIG_ARM64
@@ -150,6 +153,8 @@ On Tue, 10 Sept 2024 at 09:39, Ilias Apalodimas
 >  CONFIG_PHYS_TO_BUS=y
 > +CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
 > +CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
-> --
-> 2.45.2
->
+
+Can we also add the efidebug and efi nvedit commands here. They are
+pretty handy especially when it comes to capsule updates. Thanks.
+
+-sughosh
