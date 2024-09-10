@@ -4,65 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63753EDE9AC
-	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 18:37:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C228EDE9AB
+	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 18:41:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B3674890C5;
-	Tue, 10 Sep 2024 20:37:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=grimler.se
+	by phobos.denx.de (Postfix) with ESMTP id E1EDE890E8;
+	Tue, 10 Sep 2024 20:41:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=grimler.se header.i=@grimler.se header.b="BrHx+S03";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YLLLZcO1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A1E9890C9; Tue, 10 Sep 2024 20:37:28 +0200 (CEST)
-Received: from out-186.mta0.migadu.com (out-186.mta0.migadu.com
- [IPv6:2001:41d0:1004:224b::ba])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 65A82890E8; Tue, 10 Sep 2024 20:41:15 +0200 (CEST)
+Received: from mail-ua1-x934.google.com (mail-ua1-x934.google.com
+ [IPv6:2607:f8b0:4864:20::934])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 584F789037
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 20:37:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=grimler.se
+ by phobos.denx.de (Postfix) with ESMTPS id 426B689037
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 20:41:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=henrik@grimler.se
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=grimler.se; s=key1;
- t=1725993445;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=HB86UobLCP218lu5UHXYxrozTRKSFW8RUGg5kVXfg+c=;
- b=BrHx+S03drCAZKqnX4sYUK6s6A7MuGWyqv6o0fK+dY1p5fi2hZKP/goy68havRNt4TnqdQ
- P8Sj/0TAUYxCAkpo0Ap/R7xD3fyGZDQ240gezAgqQMx9TMoxyWxDaSOj8KPDvYJSd9YqBl
- hHQ86UGn115pM22RSbyvdvUM6wxqF3M=
-From: Henrik Grimler <henrik@grimler.se>
-Date: Tue, 10 Sep 2024 20:37:18 +0200
-Subject: [PATCH] pinctrl: exynos: fix type of count integer
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ua1-x934.google.com with SMTP id
+ a1e0cc1a2514c-846cfc2f010so1483534241.2
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 11:41:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1725993672; x=1726598472; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=LGftHqyaoM/9XbBsJI8xgkXp+OwOpck19eST1REM1lE=;
+ b=YLLLZcO1zUWnjFEls/utH7wjClV76jtC5Ch4dKGC24X+MuzLtq4wIV3bgvct+wubYX
+ RYKbCkohIu01FdMkMUJKhHIwyXi4aXggDTwHIYAXeT+RN7hXF11mVVhCZIDuS1pQ6NSn
+ qozorsbk7HJ1s2QIGnrM7+uKGEF5WTNdcieeQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725993672; x=1726598472;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=LGftHqyaoM/9XbBsJI8xgkXp+OwOpck19eST1REM1lE=;
+ b=AokLXnNXBOSZM9im1A9sQ8KW6ovmZiOPruqemsn0QDh8GI2rG0k+37kfRKSNNCrJCS
+ ia5CUSGmTUI/dHtOgGR0c7gKn5EiSvdNKDpV0zBxq1oUN4ZftYPt3ymMoaiG+Y2Rpttz
+ MdV1Sa8hEN7ZMui8PoQpRJrozOfA0HDKOzqJtM7eL+LXsd2jXEqIp3CFPoZy9NBSO5Vy
+ AfS/zwyakQd70KSMe5RoZyjdeSZoRhVOuU4riUC72wlmzRSgmiSF9ngyA9QarzSkWt1w
+ Gpa8aidL7Slf0h53QufS2ONORLt/4vDp/kSthYGitqacrNU2SRPQ2cNRiETmrDfOj81F
+ m7xQ==
+X-Gm-Message-State: AOJu0YwbYS0jACA5Jhr+w8HfIPTVZi11o5fgRs1C4NkK07CDYSVBWA8Q
+ GisNs/0Q14pT0tDb9BLiKmpMYZYZCok1cEs7FGsgia1V9asl8HAE4oael7VkVx3eQy/APls4TA8
+ 4xcOLJKlO+uKHf/SFT80cotkBoKW7D9vN5djS7KLTvzpDjeI=
+X-Google-Smtp-Source: AGHT+IGS8ebW9S4UE5RWALLuk29a6ROuiBj8A+7+gCXRgYNPvkcNuDg8xWKFabwpf/Egtq3wMim5YxhSXk4W+B0YIhI=
+X-Received: by 2002:a05:6102:f0b:b0:498:9c0a:af1a with SMTP id
+ ada2fe7eead31-49bde13565dmr13241216137.4.1725993672061; Tue, 10 Sep 2024
+ 11:41:12 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240910-exynos-pinctrl-v1-1-f220454470ef@grimler.se>
-X-B4-Tracking: v=1; b=H4sIAN2R4GYC/x3MQQqAIBBA0avIrBNUCrGrRIvSsQZCRSOM6O5Jy
- 7f4/4GCmbDAyB7IeFGhGBpkx8DuS9iQk2sGJVQvjBQc6x1i4YmCPfPBrRbODMppb1ZoUcroqf7
- DaX7fD4clhxBgAAAA
-To: Sam Protsenko <semen.protsenko@linaro.org>, 
- Minkyu Kang <mk7.kang@samsung.com>, Thomas Abraham <thomas.ab@samsung.com>, 
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Henrik Grimler <henrik@grimler.se>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1309; i=henrik@grimler.se;
- h=from:subject:message-id; bh=4WMz7WRdUAwF2Xfk8C+fmFiSNfe7yhJ8Ru6tB8wMQdQ=;
- b=owGbwMvMwMG4gT3Pk7swMZvxtFoSQ9qDiU+ezDxseCRWlOOzx8NUlk0Pftw0KDrDXX+0KohR3
- iFopnFNJ6MxCwMjB4OsmCKLTr3muumd8imSKx+dhRnEygQyhYGLUwAmMiGLg6HVRkZ8Q8f3r3XG
- f54cMl7i1jxPbc11zbdrM+aYZDqsvL1xgsCRSVcaJRUsT+Sv82+tc2KNOl7NwrVN3HLC273MJ0/
- rffrmGf2g+s7EJ6crjlpukvQKa+jrOmF2p8ZYWT02+EN1X26lhG/m5fYNgg1/1yipnL6XZLV7ie
- tCRv/DrVqNR5Xru+42n1yRw8vMadGTOWnG1Y3mAbt2zNX4azt79dq0FVtV/K9Mcffl3ZHEKJTVd
- /yxxcxlmw2PrJl9XtdUcK4G8+nJ8/wdq0tLmK6lZokunKFfMLtZp1JUu/Py0UeZs2uEpN8Z2wRr
- 90RLMMdcls2WLdOOjRSV5/q+W3GWQ2jokuqKbonEI2GxAA==
-X-Developer-Key: i=henrik@grimler.se; a=openpgp;
- fpr=2C7F29AE97891F6419A9E2CDB0076E490B71616B
-X-Migadu-Flow: FLOW_OUT
+References: <20240907222013.10298-1-trini@konsulko.com>
+In-Reply-To: <20240907222013.10298-1-trini@konsulko.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 10 Sep 2024 12:41:01 -0600
+Message-ID: <CAFLszTgo2m7a+xwP_1PLEOgx8ny4r9AmebHR3sxDmwDuQ6rtew@mail.gmail.com>
+Subject: Re: [PATCH] arm: Remove ethernut5 board
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Harald Kipp <harald.kipp@egnite.de>, 
+ Eugen Hristev <eugen.hristev@collabora.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,39 +82,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-unsigned int count is used to capture return of dev_read_string_count.
-When an error occurs dev_read_string_count returns -ve, which can
-hence not be handled correctly. Use int instead of unsigned int so
-that errors are detected.
+On Sat, 7 Sept 2024 at 16:20, Tom Rini <trini@konsulko.com> wrote:
+>
+> As per the maintainers at egnite GmbH, they are no longer interested in
+> supporting this board. Go and remove the platform here. Furthermore,
+> this is the only AT91SAM9XE platform in-tree so remove supporting code
+> for that as well.
+>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+> Cc: Harald Kipp <harald.kipp@egnite.de>
+> Cc: Eugen Hristev <eugen.hristev@collabora.com>
+> ---
+>  arch/arm/dts/Makefile                         |   2 -
+>  arch/arm/dts/at91sam9xe.dtsi                  |  60 ----
+>  arch/arm/dts/ethernut5.dts                    |  96 ------
+>  arch/arm/mach-at91/Kconfig                    |  24 --
+>  arch/arm/mach-at91/arm926ejs/Makefile         |   2 -
+>  arch/arm/mach-at91/arm926ejs/eflash.c         | 255 --------------
+>  arch/arm/mach-at91/include/mach/at91_dbu.h    |  37 --
+>  arch/arm/mach-at91/include/mach/at91_eefc.h   |  47 ---
+>  arch/arm/mach-at91/include/mach/at91sam9260.h |  12 +-
+>  arch/arm/mach-at91/include/mach/hardware.h    |   3 +-
+>  board/egnite/ethernut5/Kconfig                |  12 -
+>  board/egnite/ethernut5/MAINTAINERS            |   6 -
+>  board/egnite/ethernut5/Makefile               |  10 -
+>  board/egnite/ethernut5/ethernut5.c            | 198 -----------
+>  board/egnite/ethernut5/ethernut5_pwrman.c     | 323 ------------------
+>  board/egnite/ethernut5/ethernut5_pwrman.h     |  51 ---
+>  configs/ethernut5_defconfig                   |  87 -----
+>  doc/board/atmel/at91ek.rst                    |   4 +-
+>  drivers/bootcount/Kconfig                     |   1 -
+>  include/configs/at91sam9260ek.h               |   6 +-
+>  include/configs/ethernut5.h                   |  88 -----
+>  21 files changed, 6 insertions(+), 1318 deletions(-)
+>  delete mode 100644 arch/arm/dts/at91sam9xe.dtsi
+>  delete mode 100644 arch/arm/dts/ethernut5.dts
+>  delete mode 100644 arch/arm/mach-at91/arm926ejs/eflash.c
+>  delete mode 100644 arch/arm/mach-at91/include/mach/at91_dbu.h
+>  delete mode 100644 arch/arm/mach-at91/include/mach/at91_eefc.h
+>  delete mode 100644 board/egnite/ethernut5/Kconfig
+>  delete mode 100644 board/egnite/ethernut5/MAINTAINERS
+>  delete mode 100644 board/egnite/ethernut5/Makefile
+>  delete mode 100644 board/egnite/ethernut5/ethernut5.c
+>  delete mode 100644 board/egnite/ethernut5/ethernut5_pwrman.c
+>  delete mode 100644 board/egnite/ethernut5/ethernut5_pwrman.h
+>  delete mode 100644 configs/ethernut5_defconfig
+>  delete mode 100644 include/configs/ethernut5.h
 
-Fixes: 16ca80adc551 ("pinctrl: Add pinctrl driver support for Exynos7420 SoC")
-
-Signed-off-by: Henrik Grimler <henrik@grimler.se>
----
- drivers/pinctrl/exynos/pinctrl-exynos.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/pinctrl/exynos/pinctrl-exynos.c b/drivers/pinctrl/exynos/pinctrl-exynos.c
-index b393127c64..b37282fa9d 100644
---- a/drivers/pinctrl/exynos/pinctrl-exynos.c
-+++ b/drivers/pinctrl/exynos/pinctrl-exynos.c
-@@ -114,8 +114,8 @@ static void exynos_pinctrl_set_pincfg(unsigned long reg_base, u32 pin_num,
- int exynos_pinctrl_set_state(struct udevice *dev, struct udevice *config)
- {
- 	struct exynos_pinctrl_priv *priv = dev_get_priv(dev);
--	unsigned int count, idx;
--	unsigned int pinvals[PINCFG_TYPE_NUM];
-+	int count;
-+	unsigned int idx, pinvals[PINCFG_TYPE_NUM];
- 
- 	/*
- 	 * refer to the following document for the pinctrl bindings
-
----
-base-commit: ce1a2630827a1f9ddadb2598ab7936732e6cb723
-change-id: 20240910-exynos-pinctrl-c70d952d7f9b
-
-Best regards,
--- 
-Henrik Grimler <henrik@grimler.se>
-
+Reviewed-by: Simon Glass <sjg@chromium.org>
