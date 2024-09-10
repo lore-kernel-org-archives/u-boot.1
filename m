@@ -4,94 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B253ECE564
-	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 09:21:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA9F1ECE582
+	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 09:21:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB43A88F90;
-	Tue, 10 Sep 2024 11:20:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5051A88F95;
+	Tue, 10 Sep 2024 11:20:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="z1aFuhwi";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Kn2qII41";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8738B88F8C; Tue, 10 Sep 2024 11:20:39 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 9073D88F75; Tue, 10 Sep 2024 11:20:39 +0200 (CEST)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D47DF88F75
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 11:20:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1D11D88F86
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 11:20:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-42cafda818aso27663305e9.2
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 02:20:35 -0700 (PDT)
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-53660856a21so2922168e87.2
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 02:20:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725960031; x=1726564831; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1725960032; x=1726564832; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=oqKlusR5GPCCrTUypghPMVt4yqn9KaI81pA8qZgjw04=;
- b=z1aFuhwiiaX4GJxZdcaXmA6X78ZsjAfBcMkDtReeSIHjULpf3YJWsXBHaGOODdMeE/
- FMXE1gtjqdkLHYp0rOD3Ue6o9rIOLieRJhk2UIR4WOC66OS6pzvd21qXXvJ74ldFjMK6
- E7RTooowCKHR767WtWTA77CA5hyGuxP8HGz7q8y4XaDs/K74VlFYTuv+0xKq45imJ3c6
- NPpSw2gXl3+Mmyqf6125YAEcaCydaOJWnBK9XAjLM45Gth3DEBE5ANjCzSCXWOVN68N9
- LtcGZe8RQgbIpu+eP5R0xJ9ID+m3nZFqaEE6xVxtJI0yaEPKwTvPLj4Q0/EjPtS1pfME
- 7PQg==
+ :reply-to; bh=q2LW5MkEO5pymB6e7w7IUQGE027uBvWv7Inx1yFDrmg=;
+ b=Kn2qII41EIXdN64MFO9dVeDVSLmc9J/LZl+BcGeDfcbaC5XrfQty8yPD9cohnhYGxU
+ /tv2p3gt3ut3yMdeLZ10cXC/RNGqnVwKmuXzXagLK5brwIbyr1mh1PgFxFwG4M98mEFI
+ dHvyHByypzNYOq00Cy3coRb9gR2GsNIvw8KTzTyR07KL4J62XiGT1ySFFl2cZk2rsHq+
+ DWWGoPvZHfD2zHR4a/DHQwZjAE8a//UnNJl6cJy2ulP7Pd3zfvENkQji6oCF+2iDRhgr
+ 3CogXsV2CLBJohYhwy158uhxS7OjsK6NOZq/1nYZs+ofBSySZRecMIV3PHHruv9EKarO
+ PPuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725960031; x=1726564831;
+ d=1e100.net; s=20230601; t=1725960032; x=1726564832;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oqKlusR5GPCCrTUypghPMVt4yqn9KaI81pA8qZgjw04=;
- b=r/SbP4ERSLt/HPhXaMzK77bQ7tH86g0zkUD4XPX3a3j5L+cIIKQWiom7FiHc7UiG+2
- lDuQtxKWNz+oEqTSnPI9b586p8BTz3UT2lL3f7RM9XodrKlE+umMzev+3/xnGPnmP2Yv
- 7nF+l3uU9YNrI9r9Bvye68BBdIl2JbBowc0vPPsxcx+xyJ+9kDg/HA4r8K8injDSEHYI
- QJ9OMFrBFbMBYbYu5uIxidScgB0pW+9Ad4gKrw9GniQGX0LKi19R/MyyzNEVdQ2AOhRm
- +fGVLAL4RqDnC4X+edb7Ni4moaFj407NkB8tgaUEpLbUjs3XELhiSyb86slZO5DaoxXP
- Bkqw==
-X-Gm-Message-State: AOJu0Yz2H8C+W2e3kO19nx2Rk9l5ku2SgqljEm0UUTUs17P84KrUTMbh
- bR/6Fm8K/kD8cgN0fAlawajUbzBbMr4c5sQef1myzLRM5+bhwtnca4ytREcxW0g=
-X-Google-Smtp-Source: AGHT+IGkP3brE6LmgzXUzVqPn90sIp5cTBMC1thJWAAyCgz1npY9kMN1OvBbiwiGF0dKkkvoaAseLg==
-X-Received: by 2002:a7b:c345:0:b0:42c:b6e4:e3aa with SMTP id
- 5b1f17b1804b1-42cb6e4e445mr51403875e9.5.1725960031359; 
- Tue, 10 Sep 2024 02:20:31 -0700 (PDT)
+ bh=q2LW5MkEO5pymB6e7w7IUQGE027uBvWv7Inx1yFDrmg=;
+ b=TCIKVacnmyN1E3kDT8ztBtPaSTCnO7tBN3mGyUhSaAku69VLHPJukVS85okH5/jOFE
+ bKRD0Qoj+bFn1RsJIRC3fRQe82vjK3RyT2v9dvjuAtsl87LyCDLq1jspKELXMTvlesk8
+ O6zulDp43+CqJT1a+va8kPTnp/vu2GFdvHDw17TshWd0eb9WbGd3sgE6B9Hqvbq05QIa
+ SrzPHMmFMpkAE+6NIKs1irygvFECUNekbRmHBkvv/4c1apyKdvQsS9eAtHUGhX7xCdka
+ UDaH5RJPkvtYHSLH3p6h5qfHCP89vl6qrhQ9/cPRfEEvT0iwlX/sXmz67VfV3Taiyi3V
+ FjyQ==
+X-Gm-Message-State: AOJu0Yz3FJIfKcerEqekAUVzIDMnPCn5Tluk0YsgcJyNcdW2/MMMGsbj
+ wWt+ufOuBmITweq/aXPnWpXXiL9Rcero9zR3jqQh/Zo1S8EnFtxFxLh/yqK/Mm0=
+X-Google-Smtp-Source: AGHT+IH/rUdCZ+jTEbxt0Bw2M+x86cDqqSn5amG6wgmCaTrBUt1BNEohy5zb1MQGqcYPzfQjgYGepA==
+X-Received: by 2002:a05:6512:1103:b0:52e:9ac6:a20f with SMTP id
+ 2adb3069b0e04-536587fc91amr9316054e87.37.1725960032097; 
+ Tue, 10 Sep 2024 02:20:32 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42cb099acf6sm101256245e9.9.2024.09.10.02.20.30
+ 5b1f17b1804b1-42cb099acf6sm101256245e9.9.2024.09.10.02.20.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Tue, 10 Sep 2024 02:20:31 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Tue, 10 Sep 2024 11:20:21 +0200
-Subject: [PATCH 04/13] ufs: use dcache helpers for scsi_cmd data and only
- invalidate if necessary
+From: neil.armstrong@linaro.org
+Date: Tue, 10 Sep 2024 11:20:22 +0200
+Subject: [PATCH 05/13] ufs: Add UFSHCD_QUIRK_BROKEN_64BIT_ADDRESS
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240910-topic-ufs-enhancements-v1-4-3ee0bffacc64@linaro.org>
+Message-Id: <20240910-topic-ufs-enhancements-v1-5-3ee0bffacc64@linaro.org>
 References: <20240910-topic-ufs-enhancements-v1-0-3ee0bffacc64@linaro.org>
 In-Reply-To: <20240910-topic-ufs-enhancements-v1-0-3ee0bffacc64@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Bhupesh Sharma <bhupesh.linux@gmail.com>, 
  Neha Malcom Francis <n-francis@ti.com>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
- Neil Armstrong <neil.armstrong@linaro.org>
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
 X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1884;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=972;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=lxI4HS7I1NPzQe4WEGjAEWu+wJ/tDWmbIzQmUpETYAY=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBm4A9XKZOOFnS0AMMQKlbGWz/p83lvY6NFAV9oBlUm
- sbFm7juJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZuAPVwAKCRB33NvayMhJ0R9VEA
- CMpaNJQFU69INFouPBXUVEgJr3sjbVCzjeo3yZelU+m6KHNDt5qOcscvyRvOj8fNpRfDfPSkCcGtT6
- FUa9PR36vf83JX1jAvW/IQvdEzuaiK0lPelOJr0gqw79cNslPTI67LFAHIvFS80GDHBE0H79p3la9g
- IJmX1+tQK7uvHtUDa5QCHi3VuRZXqC14yOkSqo6MlRRDTfLRhmAWh24ikWGIilwz2+5fa8S2HYrD4J
- 9hw4vqhGCLRYIgts6lv2PL29RhYBv8rRdTIXAbnFpz6QApY8q6o+/aihQk0531zu8lBs+uR/OqGYR+
- 1C46MWCOMB8hRv90bHvNVHxTZbWMjcV2OJVh7crOeCjw5ulxWVwJNkh4DE8WOcYFnBKufJihbPsADT
- 9MliClw3+rXW0G0uaklFtGyDqc4fFNCTrMCWy3Mtg4ikAZ08sSlKe/GM2hx6SRQF1oUI5QwhXYyyLm
- MAm4OYLJZPjfNUsb/oP+88Kuhjg9rnPauJlq/k6Bvg0qyCCdpqMWsmHt5HVI/SLDrIl7dxlu2OvsUY
- +ls15c7qSkcH3mq7zOxVE6bo2CTFWxYQi29oOz4rPhEJnIzJqU48DoE1ZJi7bMKCbbI9dGuOQsCWGq
- 4Fe4vqw4Di2TmmSa5GyZ+iOAqJWpQuNT3mvHm3EJnVbcDtou/fwffB2s8ssA==
+ bh=gzfDJdXexZqNaG9T3+YZbLI3JscEH/uXNYFxEdmKPMo=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBm4A9XyVAVvreJ4D+GnA405GxJCE9BF0WdMQsuyVDk
+ W1lEtRmJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZuAPVwAKCRB33NvayMhJ0d6jEA
+ CYMbqBrzHe3bK+BqJJHP28AzuzF8RhGsWeB1c3edNEeQVSV6OVrghBT5obv+3oKVc6dSXwiJX6Z/Hg
+ pqwqq9D9cMVz+UBmWbfW72GpscDFVGey4uuK//OderZzYFj/QdcreZnZPbwDVjSnvdyUreE6biGrz5
+ yenfe73mAutXumFB//7r0OKlypvMgAum/CTdorxwlk9fN2eVuUNZw9yqWCBIamJiF8LhYvOmarNoji
+ yJLyQD53BH2mG+jrF5x6rpowtop8ziF+S6lL61oMjcRqAW8yu1AFCZeoO3/fsFR5g4ztc4Kk/oc59y
+ s8WE8dJC0YNWxSpBWuuOCyNNPyXfVzSP2I/th8zMBhY8cYubPHmkHDl/L8Icl974QD4nau+vnALO0G
+ uUhicUWg83N10UrrI/JI7CZakSsZwLpNau7MMJSdS/q12VuQb6OdjDLY97IAXliGYZC4LPd1z6XuqX
+ p58F73AL4dc+RhBJSq0LaqTnq0vGUausuuQxbE1lqOJHVlwDEaO0S9H2S3U63sMuSojeNPuMiq7+rw
+ im2vmBtguJI59Bq13yhLlimUUURf3Ip4TKfRUiM+Cq44oR3vja//jtPEuoKPIxcSgXXUz6WA5jsSdC
+ H85IOsrtbpkRfRovucomtZf6thjJdpZ6LXVGRHmxcXn4G2mjWEe8OWEh1tXQ==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
@@ -110,58 +110,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now we have proper flush and invalidate helpers, we can use them
-directly to operate on the scsi_cmd data.
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
-Likewise, we do not need to flush then invalidate, just flush _or_
-invalidate depending on the data direction.
+Add UFSHCD_QUIRK_BROKEN_64BIT_ADDRESS for host controllers which do not
+support 64-bit addressing.
 
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+Ported from Linux kernel commit
+6554400d6f66 ("scsi: ufs: core: Add UFSHCD_QUIRK_BROKEN_64BIT_ADDRESS")
+with ufs_scsi_buffer_aligned() based on U-Boot generic bounce buffer.
+
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- drivers/ufs/ufs.c | 14 ++++----------
- 1 file changed, 4 insertions(+), 10 deletions(-)
+ drivers/ufs/ufs.h | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/drivers/ufs/ufs.c b/drivers/ufs/ufs.c
-index 5845fd694d3..d99dcdef7d0 100644
---- a/drivers/ufs/ufs.c
-+++ b/drivers/ufs/ufs.c
-@@ -1468,7 +1468,6 @@ static void prepare_prdt_table(struct ufs_hba *hba, struct scsi_cmd *pccb)
- {
- 	struct utp_transfer_req_desc *req_desc = hba->utrdl;
- 	struct ufshcd_sg_entry *prd_table = hba->ucd_prdt_ptr;
--	uintptr_t aaddr = (uintptr_t)(pccb->pdata) & ~(ARCH_DMA_MINALIGN - 1);
- 	ulong datalen = pccb->datalen;
- 	int table_length;
- 	u8 *buf;
-@@ -1480,15 +1479,6 @@ static void prepare_prdt_table(struct ufs_hba *hba, struct scsi_cmd *pccb)
- 		return;
- 	}
+diff --git a/drivers/ufs/ufs.h b/drivers/ufs/ufs.h
+index 43042c294bb..c92f47d82b5 100644
+--- a/drivers/ufs/ufs.h
++++ b/drivers/ufs/ufs.h
+@@ -732,6 +732,12 @@ struct ufs_hba {
+  */
+ #define UFSHCD_QUIRK_HIBERN_FASTAUTO			BIT(2)
  
--	if (pccb->dma_dir == DMA_TO_DEVICE) {	/* Write to device */
--		flush_dcache_range(aaddr,
--				   ALIGN((uintptr_t)pccb->pdata + datalen, ARCH_DMA_MINALIGN));
--	}
--
--	/* In any case, invalidate cache to avoid stale data in it. */
--	invalidate_dcache_range(aaddr,
--				ALIGN((uintptr_t)pccb->pdata + datalen, ARCH_DMA_MINALIGN));
--
- 	table_length = DIV_ROUND_UP(pccb->datalen, MAX_PRDT_ENTRY);
- 	buf = pccb->pdata;
- 	i = table_length;
-@@ -1517,8 +1507,12 @@ static int ufs_scsi_exec(struct udevice *scsi_dev, struct scsi_cmd *pccb)
- 	ufshcd_prepare_utp_scsi_cmd_upiu(hba, pccb, upiu_flags);
- 	prepare_prdt_table(hba, pccb);
- 
-+	ufshcd_cache_flush(pccb->pdata, pccb->datalen);
++/*
++ * This quirk needs to be enabled if the host controller has
++ * 64-bit addressing supported capability but it doesn't work.
++ */
++#define UFSHCD_QUIRK_BROKEN_64BIT_ADDRESS		0x2
 +
- 	ufshcd_send_command(hba, TASK_TAG);
- 
-+	ufshcd_cache_invalidate(pccb->pdata, pccb->datalen);
-+
- 	ocs = ufshcd_get_tr_ocs(hba);
- 	switch (ocs) {
- 	case OCS_SUCCESS:
+ 	/* Virtual memory reference */
+ 	struct utp_transfer_cmd_desc *ucdl;
+ 	struct utp_transfer_req_desc *utrdl;
 
 -- 
 2.34.1
