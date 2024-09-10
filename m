@@ -4,43 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BA30ECE564
-	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 12:57:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4815EB64DE
+	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 12:57:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B840388AB1;
-	Tue, 10 Sep 2024 14:56:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=aspeedtech.com
+	by phobos.denx.de (Postfix) with ESMTP id 1FBEF890A6;
+	Tue, 10 Sep 2024 14:56:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 82916889CD; Tue, 10 Sep 2024 09:49:41 +0200 (CEST)
-Received: from TWMBX01.aspeed.com (mail.aspeedtech.com [211.20.114.72])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8175188EFB
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 09:49:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=aspeedtech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jacky_chou@aspeedtech.com
-Received: from TWMBX01.aspeed.com (192.168.0.62) by TWMBX01.aspeed.com
- (192.168.0.62) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1258.12; Tue, 10 Sep
- 2024 15:49:34 +0800
-Received: from mail.aspeedtech.com (192.168.10.10) by TWMBX01.aspeed.com
- (192.168.0.62) with Microsoft SMTP Server id 15.2.1258.12 via Frontend
- Transport; Tue, 10 Sep 2024 15:49:34 +0800
-From: Jacky Chou <jacky_chou@aspeedtech.com>
-To: <joe.hershberger@ni.com>, <rfried.dev@gmail.com>,
- <ryan_chen@aspeedtech.com>, <chiawei_wang@aspeedtech.com>,
- <BMC-SW@aspeedtech.com>, <joel@jms.id.au>, <trini@konsulko.com>,
- <jacky_chou@aspeedtech.com>, <u-boot@lists.denx.de>
-Subject: [PATCH] driver: net: Add Aspeed AST2700 MDIO support
-Date: Tue, 10 Sep 2024 15:49:34 +0800
-Message-ID: <20240910074934.1216-1-jacky_chou@aspeedtech.com>
-X-Mailer: git-send-email 2.25.1
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KpgEo4kB";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 1042E88EFB; Tue, 10 Sep 2024 09:55:09 +0200 (CEST)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A1B7889CD
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 09:55:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=tudor.ambarus@gmail.com
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-374c962e5adso2885718f8f.1
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 00:55:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1725954907; x=1726559707; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=SJzm5yc3lkuXX8lCx7K7i+3KgJABzldT/TAQLwr5gtk=;
+ b=KpgEo4kBoSOzlfaamujko0v9bzsLWkyQDzQMJHtg5bERjXQ6Uml2cQhxD+eFFAsYQ6
+ n8gXevD9/1Ycl/a7AsmG5T4gYOStvSyYlWsNUsZVE97yb63tvzOoGxzPvSXrNl9AQcuD
+ qgLXgRztB9fJnnOnVffHM7CSVQjnyUHW2XBbhY9Yvg5TBqKl5R41c9RTvVHCHT2GujxG
+ SLVcujvo7hD5MzBbjzFjWp/2Q9SdD6ffKZvQFmNmhyZhsWCjYqG5QKyAAW3A2GBpixac
+ v594hFavmH6cHlgswrantLZCmt08uj8CPVwj57wsuQzajCSCrg6P4eAncNGrx9EzYpWZ
+ SgvA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725954907; x=1726559707;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=SJzm5yc3lkuXX8lCx7K7i+3KgJABzldT/TAQLwr5gtk=;
+ b=SnjwqM6J8gbrGoZ6z4ee4idem6ASEulfNjYsUJBIBfAn7Sojr7wNBNhSXPyCeTvJtq
+ +mBW3f0vPKzeNWDK4x9qVZbLZtlofSouS3HANPOsRHkQXJSGC1nVc9hOxjjKYBwtYOhf
+ oseCP8WN9kYSPxJ/PRdpqOAYkTc/qs73A3aY1ZoRFDxm6uXygJ1mpoeu4bS7oolFhXeE
+ cuP9pgz887Fr+hgvi16Fn7zkH4t9PzbpiUk8M4M7uhTVV4xNmcwRAK20zOur09JNwRzC
+ FzSTgMT4xOMtcEX1sjd2N+Xa/9wrOlUNrnT3QZSk22tNh3mDwFx7f2aqrSjuaX3/jpAl
+ 0KgQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXdODCuyTZmzoQAV7dPuj07eqesAkthyNAzMi6NImGXepEeSjcygg+OzpCvP9J7s2HhaXFe5zo=@lists.denx.de
+X-Gm-Message-State: AOJu0YzxtxFPfvDiu3/UdV06hhWyqcl/xnX5CU/9JwcyLKwv0DZ3omyH
+ 5dR8LgZT9CJStyIcchTAhODeXFLUD617nxntXWdTSk9fEtVgbeOr
+X-Google-Smtp-Source: AGHT+IEYoq7KNfpkj2eKYC7iSwl5v93789d6sYVEQWPEfCPeYZeXKpCLyM9wRlaPV41QIQ612xpR3g==
+X-Received: by 2002:a05:6000:1f11:b0:374:cf83:23dd with SMTP id
+ ffacd0b85a97d-378a89e639fmr980797f8f.2.1725954906399; 
+ Tue, 10 Sep 2024 00:55:06 -0700 (PDT)
+Received: from [192.168.0.61] ([79.115.63.155])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-37895665762sm8105409f8f.45.2024.09.10.00.55.05
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 10 Sep 2024 00:55:06 -0700 (PDT)
+Message-ID: <c399216d-34d1-435e-96a7-6716f9f2c32c@gmail.com>
+Date: Tue, 10 Sep 2024 10:55:05 +0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] mtd: spi-nor-core: allow overriding 4-byte OPCODE
+ support
+To: Robert Marko <robert.marko@sartura.hr>, jagan@amarulasolutions.com,
+ vigneshr@ti.com, trini@konsulko.com, u-boot@lists.denx.de
+References: <20240425143627.54648-1-robert.marko@sartura.hr>
+From: Tudor Ambarus <tudor.ambarus@gmail.com>
+Content-Language: en-US
+In-Reply-To: <20240425143627.54648-1-robert.marko@sartura.hr>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Tue, 10 Sep 2024 14:56:36 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -58,26 +97,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The AST2700 is the 7th generation SoC from Aspeed.
-And use the driver to support clause 22 access.
+Hiya,
 
-Signed-off-by: Jacky Chou <jacky_chou@aspeedtech.com>
----
- drivers/net/aspeed_mdio.c | 1 +
- 1 file changed, 1 insertion(+)
+Please specify which linux commit this patch follows. It helps reviewers
+and gives credit to the linux author.
 
-diff --git a/drivers/net/aspeed_mdio.c b/drivers/net/aspeed_mdio.c
-index f2e4392aa9..2e1f3cdf11 100644
---- a/drivers/net/aspeed_mdio.c
-+++ b/drivers/net/aspeed_mdio.c
-@@ -113,6 +113,7 @@ static int aspeed_mdio_probe(struct udevice *dev)
- 
- static const struct udevice_id aspeed_mdio_ids[] = {
- 	{ .compatible = "aspeed,ast2600-mdio" },
-+	{ .compatible = "aspeed,ast2700-mdio" },
- 	{ }
- };
- 
--- 
-2.25.1
-
+Thanks,
+ta
