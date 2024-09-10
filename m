@@ -4,163 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D5ECEDE99A
-	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 16:46:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01A9DECE582
+	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 17:22:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE3C889059;
-	Tue, 10 Sep 2024 18:46:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 2973C88FEB;
+	Tue, 10 Sep 2024 19:22:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="X3+0tjsZ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sZIbKWu/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6102C890B9; Tue, 10 Sep 2024 18:46:34 +0200 (CEST)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170110001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id C2E5A89049; Tue, 10 Sep 2024 19:21:58 +0200 (CEST)
+Received: from mail-qt1-x82d.google.com (mail-qt1-x82d.google.com
+ [IPv6:2607:f8b0:4864:20::82d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB14B88F6F
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 18:46:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id A3CB988F65
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 19:21:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=QUGKlliDW0Kt3Hd60R9qR5A2yXZ2NsoV7bVuaEz5JexgAmdLFFqRxIBTivC5RVFlCjd/ZIi1PbSHFeBQ/wPgcmzCuAwZHUT777OQvFtmyN+kgVhepShaIFlVHErOJttMGobCcDJ+b9N945VutDcA0HUvh1kMkMGuCmai64kfnBXE1vP/JjAFFJWSmOijo3OHHFSAC1T4ehZ4mEGUWspk6YOgTaSmmUbrGiE/Vze+EUr8iLe83fLQFd4WEDYzw2sgXpUWwbqVhcYZOhrkZynWBrbcG0oEnRT7faD1lX7SeIuwbQctMXbfL6+8F+nXuKUikwbrEvAOLmnXCAwL0cfDSQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=e122+cn2BwaiZqBKOCHfkDgHnYlqFLX+NaDtbhpXfSs=;
- b=dk7OTgL1N2OUOdIq7NvEwQQZ1kwLz9I+LdoSTZrEFaWYNDMHiW5aWSYK7u4bTdDdbqiGCk0SI2whrhPbTKOB2T5Nhbmpa2Ix/OVwpYJMuGLkrB/+m5iZ8QzfPEN4h+YZCsjp9zEYLYcD0PIGZiHdkqjMUoCHzWOiNSGYOFavP/WbgZDRnFqOimGpK7hKVSavuXzDHg5ZEDO2lS1A6hqU7ZhRegobgO5/b0Oo2ouw+d4tvJq/6ZI50fbTlQjUOIgWyDV8wPoH9QoHWYW3+ubXlvgbDqHq6Y0g7F7yMVVgqCgT0IvEBAO4ilC69yzqixxlAay5CSTscseQKCD9PxNfGg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=e122+cn2BwaiZqBKOCHfkDgHnYlqFLX+NaDtbhpXfSs=;
- b=X3+0tjsZSib0HbxUMu2YA/NSDTwVfINiZN8rXrdO7Zfe0JleCWnCdGwb5ENwjTcQYvbXZCrbS+o4BVcz2x2oyt2qUM9JIlsrDWvu7prGUldWoXeOKn+V2WiPeRSMA10LmWqmNs8rhlvZCI4RLU8dpWpagbF117OraBLx+kqZ7Eg=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AM9PR04MB8906.eurprd04.prod.outlook.com (2603:10a6:20b:409::9)
- by PAWPR04MB9910.eurprd04.prod.outlook.com (2603:10a6:102:380::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7939.23; Tue, 10 Sep
- 2024 16:46:26 +0000
-Received: from AM9PR04MB8906.eurprd04.prod.outlook.com
- ([fe80::d379:5378:b1:cea]) by AM9PR04MB8906.eurprd04.prod.outlook.com
- ([fe80::d379:5378:b1:cea%2]) with mapi id 15.20.7918.024; Tue, 10 Sep 2024
- 16:46:26 +0000
-Message-ID: <4bec0ca0-ef89-44ea-ab90-b07d1c0578f5@cherry.de>
-Date: Tue, 10 Sep 2024 18:46:24 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/5] ram: rockchip: Add separate RAM_ROCKCHIP_DEBUG
- config for TPL/SPL
-To: =?UTF-8?Q?=C5=81ukasz_Czechowski?= <lukasz.czechowski@thaumatec.com>,
- Kever Yang <kever.yang@rock-chips.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, sjg@chromium.org,
- philipp.tomsich@vrull.eu
-References: <20240903163858.1155218-1-lukasz.czechowski@thaumatec.com>
- <20240903163858.1155218-4-lukasz.czechowski@thaumatec.com>
- <b67d7193-7cda-461b-92fe-e07faa55017e@rock-chips.com>
- <CABd623sqBjcVyK8Ht2q30Rjvv=DXR-nOwB9dadg0VZSG4SZp5g@mail.gmail.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <CABd623sqBjcVyK8Ht2q30Rjvv=DXR-nOwB9dadg0VZSG4SZp5g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: WA0P291CA0011.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:1::23) To AM9PR04MB8906.eurprd04.prod.outlook.com
- (2603:10a6:20b:409::9)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x82d.google.com with SMTP id
+ d75a77b69052e-457e153cbdcso45003361cf.2
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 10:21:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1725988915; x=1726593715; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=KXdD2ngHNmh2XvF4FLrRGKZT1D1Ky2XA9R8kbxH7zgU=;
+ b=sZIbKWu/WIMh+GQZ07xRi/RD2WPAUK5T0Wtp9+cP/HRtS5FPaUcVUw5NZZtLK4hoM9
+ Zg6V0Bjiomw6iP68wmCBHAwjDEAdE7fNmpqlIsL43jnSe+HBll6NfF6sSA4WlAn8gPvE
+ 6wkXNPIsuZ+C+fp6r7EmkZV21JRw9ytConJXg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725988915; x=1726593715;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=KXdD2ngHNmh2XvF4FLrRGKZT1D1Ky2XA9R8kbxH7zgU=;
+ b=YBYLHOHWQXR/GorQsGAanKwl2cGdjZFfx7jwUkW7d1YRil+srxsnMu60fIsp/QEtAX
+ 1ap2u2hyQmKRnMDKo0tcEQiDZY8VPy99FbaVBCNAhfiYXdUIiISvbbNw1dV25J6du9vK
+ xCi7VR9cA50hpBwWGv7V3/I4xbsVL1Hmcq0xmXA8aDPLIfXLxdpGzSnSw5sHwC3/341I
+ APmU8dRApXsOcYl5Kwr6OkcGnn14TsnEFG8wQg+bpaVVIPSeTshXIxQVuQBXX48RJ3uq
+ cspAaP7jytdrbDVoCwff9a6gyBVMXY2LwBMxSIgUhGzfURNvZi/Id9yUOV2KFALWR5XQ
+ QuWg==
+X-Gm-Message-State: AOJu0Ywt9uTmwWezEk8qd8FiVcegGlItaybUuzncj2CfF4q8v/2/DOgv
+ 3PZOuBQoBdFx2mWl0nq4TKY5XA9WUBdQh+dySyewxlSb+P+C9+pLawn8CoUfvgY=
+X-Google-Smtp-Source: AGHT+IGMSKOFKk3c3lsDXf2+aJafIvU6ddh48rEBPD2kvMYeHOA1pa020T617WWfyweQG19miTahxg==
+X-Received: by 2002:a05:622a:613:b0:456:8170:bfa5 with SMTP id
+ d75a77b69052e-4580c67052cmr256182981cf.1.1725988915072; 
+ Tue, 10 Sep 2024 10:21:55 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-45822e7b3a6sm31422251cf.30.2024.09.10.10.21.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 10 Sep 2024 10:21:53 -0700 (PDT)
+Date: Tue, 10 Sep 2024 11:21:51 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Subject: Re: [PATCH] sh: cache: Fill in invalidate_icache_all()
+Message-ID: <20240910172151.GG4252@bill-the-cat>
+References: <20240910001612.88569-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM9PR04MB8906:EE_|PAWPR04MB9910:EE_
-X-MS-Office365-Filtering-Correlation-Id: 91111a3b-1375-45e6-5ce3-08dcd1b81c71
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?WCs5Y1cvcmlERmp3dDBIZk9ZRVZGMkUrRDQ1TlRTeVdGUGE4Zy9ERHkvajRz?=
- =?utf-8?B?a3ZoY0dsR0JZNmJXSDQxM1lOd0V0TTdQWlQ5SU8xYzd6aVM2MHhidlRBb0pO?=
- =?utf-8?B?Q1gvQUV2YTR5RDVkWnFVTHpRVkxuTnlxaGJ0NEF3UjdONkY0ZzZvS3RsYnov?=
- =?utf-8?B?S2RTa2M5QlFHQnFPZE51bXJ4Q2NISXN6c3FYc3piQ0pYaE9HaXBZQTdrbnFS?=
- =?utf-8?B?NVgrRjlYRXF0RGZJNVNxNjFMVWpZWWxva2xSZXNQSUd0ZWF3UWZwMUoxS09n?=
- =?utf-8?B?WkE2Kys1SzBzSktBb21OeEJYclhwbVRaNnAveVRPUE56eTI4QlA3ay9mU25W?=
- =?utf-8?B?QnhQWWVPeVlObVlQOXhKTjhwNnExMjluR09JQW1QKzNxS1dHUkFlbW5uWk91?=
- =?utf-8?B?Rmp4Yk1LS21NaWVpcEdQTTVKTFFnY2V1RmtjRm9uRUlIbytXTjR2TDlncDNa?=
- =?utf-8?B?cWpBUUh2bVl3RWRBQnZmR09EaGZFN3pXdXRWQkczUXc0S2Y5emNybUJTSjRO?=
- =?utf-8?B?ZzY2UlZFdXdtbzJzV0VJY2piQTlya0hhelJGTEVGQ2hOanloRzgva05xOUdC?=
- =?utf-8?B?N0U3UUpZV2toZW1BcFJVQXFOVVpjbXA0OXMwN2QydnBWbmZYalB0N3dHRUJH?=
- =?utf-8?B?MkRjSmJiTnF0RDBwRXZ1Z1I2cFpxUWNla1BFbUhOYy8wU0hNc1FwWm9OWkFX?=
- =?utf-8?B?NG91WXJuME9ld1BTc0Rza1ErMkFUeXo5djBrYm9hS3YzRXJzeXRkU0x3alB3?=
- =?utf-8?B?NW9CT1lsdTZiUUM1cVUrWVVrUnpOdmFmdGZJQkgrYXkvMk1GMTNwRXJFNVNh?=
- =?utf-8?B?ZlhTY3lCcGhSaXpvNW4xNDlVeWlOaEtaMk9UVUorakFWd3dZamJybVdudU84?=
- =?utf-8?B?QXpWTmozYnVjM2JDeVVtUDFnMVM3RTgweURRdU54Z0J4NWRWdStWL3RvYnI4?=
- =?utf-8?B?OWI1ZGZxNTRyd3BkQWprWXI4eTNzMHNNRFZQK2FuOVVST0gxSjNHQkhPamJC?=
- =?utf-8?B?RTl3VFE1eUZnamsxcjFBaWp2eFg5Y3ZrMFZEdExCNFowUGdWZmJ6M1J2TDl2?=
- =?utf-8?B?VjNsR2ZmK2FLL0N6OE11b1E4eFNQQmEwNm9LVlc5cHM2aEdOMFVEK1hyQTBn?=
- =?utf-8?B?dnFFalB3dDluT04wQ1NRNkVMd3Y2Wm56bG1Sc1Q1NnhkeW43dkYrSEUwb1Qr?=
- =?utf-8?B?NGZ1REhxRitZZWVQRGZSeG95aTVVTDk4N2s5Yk1tQmI3Wm1ocXRENTBUU3Rk?=
- =?utf-8?B?ZjFCMEthMEh1R2h2MG1Ha3FuMlphekVoVlJobjhVazg2Mng1TnBtU0ViV1hY?=
- =?utf-8?B?VWRPazdnVnBaVFhVZVVzdWQ3Z0JpSGV2aVRNVHpBaCtoMUpqU3g0UWdjMUVR?=
- =?utf-8?B?aXVEVkk2VXRrQ1RrQ2djWUtFVW9ScHBsdUw2ZFJZQlRGVHZDL1JPTkJrNnlV?=
- =?utf-8?B?UlBhcS9kanJNTG82OVFpSG5EOTF1cW53NzNpL1ZtWjU1TFRGL3lueDFQNXg0?=
- =?utf-8?B?bVI0Y09rQTFSdE9ra1FHOWI5eUdENTQ2dktHM290TDVqVHhQT1NhdXBFd2JI?=
- =?utf-8?B?OXl0Nkp0Q2xwdEcxSS9FYVZhL0hEQlhUL2VrNTlDdDlsUVh2c25vcjI2MEd1?=
- =?utf-8?B?M0RqWUxiTDBNZXVJMlhDN1JDYmNMSjg4UlBiUGt5a3NKSDFyZzhaMkJ1Tjc0?=
- =?utf-8?B?aVREM0hFTWpkaUVtK0JTblpkbFBQdEc2a1Zoa3g0aXpoRDMwQ0gyZG4yOVZk?=
- =?utf-8?Q?MnrAnB8wANniuvRhAo=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM9PR04MB8906.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?U0Z4czZNVGZFSjQ4QnNkb0l4OHRmNHRxNXlTUkdLbGwxTjJ6VjNycjhqczNq?=
- =?utf-8?B?SkJEVWdIbVJIaXVJWVljNEFqby8wZWN1MlJxWEp0akRBN2dVYVhuN0p6UVVw?=
- =?utf-8?B?RytKSjBoQnhjR05Hc0kvTWplMlBkbSsrVEhNelJWZitUdm5OL2pPVkIvcnFu?=
- =?utf-8?B?TElCTzk1MkV4c2NkVFh4TmQwV2xSRTN6NEFTVzNhOFFYZXlPa0hDNG1rYWRm?=
- =?utf-8?B?YnRoakZvNXhrbDcraHBiUUpWWnJVaStjN1hZMTdFeHE4Zk9pTEdmcUFFOGlQ?=
- =?utf-8?B?aHpDbndNQkd2MUtIbERrTkhrT0oraVVjL2tQMkgxU3N1cTNNcTV3cXNpU3U4?=
- =?utf-8?B?d0taeStaNEx4TnlIcjZSMFBCVkhKV3h0a3BVSjlUcmhDN0RaUysvUnY4TG9R?=
- =?utf-8?B?SGN5TFRndEpXYTNnUlFVY0VIaU9ZY2ZzMTFQbmNLSW5qMEp6TWM2UlNKWWEv?=
- =?utf-8?B?ZmpvN1g2RlJ3ZTRIaENVenZYa2VHVDJ3aHVOMzJQWE9sRDdmUVFLZnJkYUgx?=
- =?utf-8?B?YVVDYnY2SC9WcEhEWHRUaEl1V05jUDBHNko4SVZoR25Oc2pMYkNyOGl2V1g1?=
- =?utf-8?B?bW5nS0NvSGoyR2k2WTZnUmtUS2JDY3BDVm9TVkFpZVdoU0RzUWIyTWpkeUlr?=
- =?utf-8?B?NU5OSXFhczE4WUdwa3pwQlZxY0M0UTA5VVNjNFl4S2Y1UmhwaDlycDlqTisy?=
- =?utf-8?B?cEgreXFVZHpFR0x4c1QrTWx6S2lMeFFNUFcyZmM1WE95STg2cmM0SGt3SXht?=
- =?utf-8?B?K3FPWGFzdmxmalJSU1VrT0ZFakFYSlEyck93dWhkWnE4U3RBcUJIWVB2THpS?=
- =?utf-8?B?aXZ3Y1Q2RHpVMWlCS2JxSnAxbUdRMzk2Zkc2M014cnViLzUwak01ZFJjeWZT?=
- =?utf-8?B?NmY2TkthREtPWTNxeVR6VG9rMHpmanBPck81MWljK2VDTU44b2RjSXdXSzRS?=
- =?utf-8?B?U0Q4SlBkcUk1Q01xOWk0djdYYTN5aVpPLzlCV0oxRis4VjdZd3VFNllPSDFl?=
- =?utf-8?B?djM4UE1mYUdGWHR0SkMrUVlHRjdzaWJtSEVDRnRhWThuU3gwbEpwSEV5UFgz?=
- =?utf-8?B?ZjlPbXdLUitXYTk4eFBiUXBwbTZKUytaMGhpcG1ETWpnYUE1VFFNS3A2VzBF?=
- =?utf-8?B?YWkvdG1DbnF5YTdaZWlDOXZ5ekF1eEhuanBSQncvSEFmeER3VTh5d0tXTUFj?=
- =?utf-8?B?SHVzSUJXbFVreTJtcnlUT3o0M2ZqSzhiRXdOeExNazNPSjk2TkZsallFSnVY?=
- =?utf-8?B?eGYzTE9PWVJ2czhMeFZIWm84ZFhQeTBGOWVwQ0FCaTczSDNHN2laTUkxbjNl?=
- =?utf-8?B?aTVqcU5nbXhkUks0cjNyMVVZb1QrV0s2YWV2OVYycUdFdHdPOGxIY01DOE55?=
- =?utf-8?B?ajJPZEVXM3ZBTmN1Y0VlamJoOXNsZ3FFZWpjaFV0Q29leGhHelc2ZktDVGFO?=
- =?utf-8?B?OEFHYWNzYWFTWnl2Wkxiam5oWUdwMFE2NUtqNEJTY0JkQ0RUL0NuL0hjZEFF?=
- =?utf-8?B?ZnpCRStVdDRpSkw3T1ltbkd2VDYxWDhoZkZhV3hIV0h4QWR6K0pJeHlTcUlO?=
- =?utf-8?B?WnRrOHZhUURPelZKbS9EMVp3SHlVanRuTDFGS1Iya2J4SVNLZzdrUHNiQnJ5?=
- =?utf-8?B?UVNaeVJEN2drSzY1Z0h5b0FwQzBGMTlGdU4vdkFYSjRzMmxFYkI0RDJ6dldx?=
- =?utf-8?B?NmNrUFpvM01ha29tekwwQlh1ZFJNYlNwTTVlRk5QS1YzendjallRYm14Wk9L?=
- =?utf-8?B?dkxtV1pKVTNkdmt1VGNObXFtR1U4dUFnOEQ2bzRqalIxWkxYVHEyanEvVEhj?=
- =?utf-8?B?RTVNMUpmdGJ1aUNzZDlmM1YrY2dvYkVOUjJRSHkrOEJKeUtqQk01cmxkZWQv?=
- =?utf-8?B?M1BkNVlYU2JCOEM4b0QwK21ia3dLd29VanRvVGJtdG02WVJCZ1I1QUZXdlhT?=
- =?utf-8?B?NHI2cjFzSTh4N2VQekJTbGxOQVVUV0Z3RlpLQkN0L0NGWmJCU0tqcXpOWHNv?=
- =?utf-8?B?SUxVMzhxU0QwWGRTS3pYc1VoSXhDZ2dqR0VDeXdrMWVTRStvdU40YXBVNnV1?=
- =?utf-8?B?ZCtjdXBDTS9vVUpCSEtGTDVjZFhDeXZScS9sMEdlNkJHL1hqYTVGcjZ4azdn?=
- =?utf-8?B?eHdZeWVldCs1cHFKd0NCeU0xRHAzU2dMeTBTZGlXMkJSeG9lT1RkQmZDZ0V2?=
- =?utf-8?B?NWc9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 91111a3b-1375-45e6-5ce3-08dcd1b81c71
-X-MS-Exchange-CrossTenant-AuthSource: AM9PR04MB8906.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Sep 2024 16:46:26.2301 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: aqXmuagbL4+U4WRGOGX9b1SvvXzv03v44SyFRzwb4itfZ1Brp94cnQhJuw/wQDOeQE79cd8zOScobS5kgyn9lLEyj3CY+dmsuoASdWsgsd8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR04MB9910
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="IVSwh2sAnLBDnxAc"
+Content-Disposition: inline
+In-Reply-To: <20240910001612.88569-1-marek.vasut+renesas@mailbox.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -177,74 +90,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kever, Lukasz,
 
-On 9/10/24 5:17 PM, Łukasz Czechowski wrote:
-> Hi Kever,
-> Thanks for the review.
-> This patch is indeed intended to disallow enabling RAM_ROCKCHIP_DEBUG
-> when SILENT_CONSOLE is enabled and control what is printed on the
-> debug console more independently. Patch was created in response to
-> review of patchset v1, and implements change suggested by Quentin
-> Schulz <quentin.schulz@cherry.de>. The additional complexity with new
-> TPL/SPL symbols had been added because we couldn't simply add i.e.
-> `depends on !TPL_SILENT_CONSOLE if TPL` and  `depends on
-> !SPL_SILENT_CONSOLE if SPL`.
-> @Quentin, is it fine with you that we can drop this change?
-> 
-> Best regards,
-> Lukasz
-> 
+--IVSwh2sAnLBDnxAc
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-@Lukasz, please use interleaved style instead of top posting.
+On Tue, Sep 10, 2024 at 02:15:58AM +0200, Marek Vasut wrote:
 
-c.f. 
-https://www.kernel.org/doc/html/latest/process/submitting-patches.html#use-trimmed-interleaved-replies-in-email-discussions 
-and https://en.wikipedia.org/wiki/Posting_style#Interleaved_style
+> Implement invalidate_icache_all() by clearing all V bits in
+> IC and OC. This is done by setting CCR cache control register
+> ICI and OCI bits.
+>=20
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> ---
+>  arch/sh/cpu/sh4/cache.c | 11 +++++++----
+>  1 file changed, 7 insertions(+), 4 deletions(-)
+>=20
+> diff --git a/arch/sh/cpu/sh4/cache.c b/arch/sh/cpu/sh4/cache.c
+> index d3c480e79ed..99acc599965 100644
+> --- a/arch/sh/cpu/sh4/cache.c
+> +++ b/arch/sh/cpu/sh4/cache.c
+> @@ -33,8 +33,9 @@ static inline void cache_wback_all(void)
+>  	}
+>  }
+> =20
+> -#define CACHE_ENABLE      0
+> -#define CACHE_DISABLE     1
+> +#define CACHE_ENABLE		0
+> +#define CACHE_DISABLE		1
+> +#define CACHE_INVALIDATE	2
+> =20
+>  static int cache_control(unsigned int cmd)
+>  {
+> @@ -46,7 +47,9 @@ static int cache_control(unsigned int cmd)
+>  	if (ccr & CCR_CACHE_ENABLE)
+>  		cache_wback_all();
+> =20
+> -	if (cmd =3D=3D CACHE_DISABLE)
+> +	if (cmd =3D=3D CACHE_INVALIDATE)
+> +		outl(CCR_CACHE_ICI | ccr, CCR);
+> +	else if (cmd =3D=3D CACHE_DISABLE)
+>  		outl(CCR_CACHE_STOP, CCR);
+>  	else
+>  		outl(CCR_CACHE_INIT, CCR);
+> @@ -103,7 +106,7 @@ void icache_disable(void)
+> =20
+>  void invalidate_icache_all(void)
+>  {
+> -	puts("No arch specific invalidate_icache_all available!\n");
+> +	cache_control(CACHE_INVALIDATE);
+>  }
+> =20
+>  int icache_status(void)
 
-You also may want to look into your mail client as Kever's answer is now 
-at the same level as your original patch instead of a quote within a 
-quote making it harder to know who wrote what and when.
+Thanks for filling this in, I wasn't sure how the implementation would
+look from a quick skim of the linux kernel code.
 
-> 
-> wt., 10 wrz 2024 o 11:51 Kever Yang <kever.yang@rock-chips.com> napisał(a):
->>
->> Hi Lukasz,
->>
->> On 2024/9/4 00:38, Lukasz Czechowski wrote:
->>
->> Introduce new config symbols TPL_RAM_ROCKCHIP_DEBUG and
->> SPL_RAM_ROCKCHIP_DEBUG to allow for better dependencies control
->> of RAM driver debugging configuration.
->>
->> The RAM_ROCKCHIP_DEBUG should enough because this only happen when ram driver
->>
->> running the initialization, and this init process always only run only once for all SoCs.
->>
->> RAM_ROCKCHIP_DEBUG depends on DEBUG_UART is the correct and no need to add more
->>
->> other dependency.
->>
->> Add negative dependencies to TPL_SILENT_CONSOLE and
->> SPL_SILENT_CONSOLE, respectively.
->>
->> I believe this is he main target, you want to control the UART output by SILENT_CONTROL,
->>
->> but the RAM_DEBUG should follow the DEBUG_UART.
->>
->> So I think this patch is no need, please drop it.
->>
+--=20
+Tom
 
-I have this gut feeling we shouldn't drop this patch but I couldn't find 
-anything that would either confirm or contradict this gut feeling in the 
-hour I looked.
+--IVSwh2sAnLBDnxAc
+Content-Type: application/pgp-signature; name="signature.asc"
 
-I assume one wouldn't enable DEBUG_UART when one wants a silent console 
-in the first stage (TPL or SPL, whatever that is) which is usually where 
-DRAM happens (that may change with VBE I believe? but we're not entirely 
-there yet). So I guess the dependency on DEBUG_UART is actually 
-"stronger" than a dependency on TPL/SPL_SILENT_CONSOLE and therefore we 
-should be able to drop this patch.
+-----BEGIN PGP SIGNATURE-----
 
-Cheers,
-Quentin
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbggCgACgkQFHw5/5Y0
+tyxHDAv/cMLQB4n4N61sDOIb9d3/1q6l86cFRTNEEEB+yY0X0GOzCj9Gxn6T1TX5
+VdwRCELUAWEjbnv4+NgSjoNFf556rPiqSrhXwXxkqVT2ZOV/QXosBkvNsSi00h1F
+9f0kpMUhnVm96XggAFri6832iTIEVy6MOlYAY2NQ2Qs164Iis/0otuC4z5uXLBWD
+e9BGFA9xSwOShvD/Od/AoRkHIdJUwIrh3wDctxi+Bqrgv2vlOYXgMSZns+tsR3Au
+Sfk21sJyC7/ZiKWbk8e4RUdh/AYA675flIR4aEjPwqws8B2ziws1YRly9Hs2phxH
++IEjWuw0ELecjrxi+1QYsxZAHnA3hYHdLisCjtyl3aCdUR/8v+6S4d3NAfWPZl+V
+UCcbzxAz7rPkDNhQ7YipUd/s8B6CiVg2rMs1Xr+hVEK5aY/Vj2F5wtDMG/fAOk7m
+ZZ0Hcq+9KGcHXTgO8jXZGQFoDtMn7pumi9KFOQIsWMjRrtTLVRY5MglYTxtlj45R
+SjNgRvWg
+=znXm
+-----END PGP SIGNATURE-----
+
+--IVSwh2sAnLBDnxAc--
