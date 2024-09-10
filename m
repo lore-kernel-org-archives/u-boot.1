@@ -4,19 +4,19 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6374BECE582
-	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 09:39:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A096ECE564
+	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 09:40:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2C4388F90;
-	Tue, 10 Sep 2024 11:39:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 452CD88FC9;
+	Tue, 10 Sep 2024 11:39:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=aspeedtech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 449C888FAA; Tue, 10 Sep 2024 11:39:31 +0200 (CEST)
+ id 508D188F7E; Tue, 10 Sep 2024 11:39:31 +0200 (CEST)
 Received: from TWMBX01.aspeed.com (mail.aspeedtech.com [211.20.114.72])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C08988F75
+ by phobos.denx.de (Postfix) with ESMTPS id A8B8988F86
  for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 11:39:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=aspeedtech.com
@@ -32,9 +32,10 @@ Received: from mail.aspeedtech.com (192.168.10.152) by TWMBX01.aspeed.com
 From: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
 To: <rick@andestech.com>, <ycliang@andestech.com>, <trini@konsulko.com>,
  <ryan_chen@aspeedtech.com>, <joel@jms.id.au>, <u-boot@lists.denx.de>
-Subject: [PATCH v2 2/8] riscv: Make stack size shift configurable
-Date: Tue, 10 Sep 2024 17:39:14 +0800
-Message-ID: <20240910093920.1142455-3-chiawei_wang@aspeedtech.com>
+Subject: [PATCH v2 3/8] riscv: u-boot-spl.lds: Remove _image_binary_end
+ alignment
+Date: Tue, 10 Sep 2024 17:39:15 +0800
+Message-ID: <20240910093920.1142455-4-chiawei_wang@aspeedtech.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240910093920.1142455-1-chiawei_wang@aspeedtech.com>
 References: <20240910093920.1142455-1-chiawei_wang@aspeedtech.com>
@@ -57,28 +58,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add prompt for STACK_SIZE_SHIFT to make it configurable.
-The default value remains 14 as usual.
+The _image_binary_end symbol was aligned to the 8-bytes boundary.
+However, the SPL device tree (u-boot-spl.dtb) is concatenated right
+after the binary (u-boot-spl-nodtb.bin) wihtout the consideration of
+the 8-bytes alignment restriction.
+
+After then, for the SPL_SEPARATE_BSS case, fdtdec_setup() searching
+for the DTB by _image_binary_end will return the "Missing DTB" error.
+As the real DTB starting point does not align to a 8-bytes address
+like _image_binary_end does.
 
 Signed-off-by: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
 Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
 ---
- arch/riscv/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/riscv/cpu/u-boot-spl.lds | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
-index c5859c5c541..d0476f975c2 100644
---- a/arch/riscv/Kconfig
-+++ b/arch/riscv/Kconfig
-@@ -453,7 +453,7 @@ config RISCV_PRIV_1_9
- 	  memory is configured was also changed.
+diff --git a/arch/riscv/cpu/u-boot-spl.lds b/arch/riscv/cpu/u-boot-spl.lds
+index d1113a59aa6..907094620bd 100644
+--- a/arch/riscv/cpu/u-boot-spl.lds
++++ b/arch/riscv/cpu/u-boot-spl.lds
+@@ -44,8 +44,6 @@ SECTIONS
+ 		__binman_sym_end = .;
+ 	} > .spl_mem
  
- config STACK_SIZE_SHIFT
--	int
-+	int "Stack size shift"
- 	default 14
+-	. = ALIGN(8);
+-
+ 	_end = .;
+ 	_image_binary_end = .;
  
- config OF_BOARD_FIXUP
 -- 
 2.25.1
 
