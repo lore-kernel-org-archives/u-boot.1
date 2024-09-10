@@ -4,91 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F923EDE9AD
-	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 18:44:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F077DEDE9AD
+	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 18:44:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39EF589106;
-	Tue, 10 Sep 2024 20:44:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 99994890B9;
+	Tue, 10 Sep 2024 20:44:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jr6PxlPR";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KWWP0gl2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 08C8688CE7; Tue, 10 Sep 2024 20:44:27 +0200 (CEST)
-Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
- [IPv6:2607:f8b0:4864:20::f30])
+ id 720118910A; Tue, 10 Sep 2024 20:44:28 +0200 (CEST)
+Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
+ [IPv6:2607:f8b0:4864:20::832])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 556388910C
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 20:44:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 191D9890F6
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 20:44:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf30.google.com with SMTP id
- 6a1803df08f44-6c34fb4f65eso32909196d6.0
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 11:44:24 -0700 (PDT)
+Received: by mail-qt1-x832.google.com with SMTP id
+ d75a77b69052e-457cfc2106aso41024671cf.2
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 11:44:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1725993863; x=1726598663; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1725993865; x=1726598665; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=I+mDaoNPzyCJpRN15sCzVBIoBgdyzeg2gyP5R+PuOTc=;
- b=jr6PxlPR3OCy46v5jfEGf9aIC4UflZ6UNlJFjqk2Y5TtI9nx1YzmNeyO01pQIqKpZo
- LgXTLT06iTy+s53mhU4/XV6LWMtRw/yePYGxpse/J4IHFiDg5Kb4aiTBszjLVyDuNt0v
- yQlgZyzPWLgnvn6SCxq7hSMJ1JRD7DoxAnnXY=
+ bh=R2m/NtscKXJDVyueA8D2gu4T4gNB2/TxCSOCimlyye0=;
+ b=KWWP0gl2LeT6oPk6Z/w7iKL+n4kEIrYsIYvg2HHdepNEalcYWzF/7evjPFKz06Vult
+ SjuxpvY3GhFBASQ6FXJ7C80EX5cAswaT/fSfjWEVP8WNkAUeIMjzekWtfvRZCdtjiC3s
+ pAQDx2ZPhRtBxY/xHCjBr58yFwE6gAYFOShiU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725993863; x=1726598663;
+ d=1e100.net; s=20230601; t=1725993865; x=1726598665;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=I+mDaoNPzyCJpRN15sCzVBIoBgdyzeg2gyP5R+PuOTc=;
- b=qSp6xl3QgZRssAPTybDcVXIQFMh45Yu2YUBmhj9cFiAth+gOpz4xO+eDAnutmNeo/B
- MN0cIpAgHcJPeaghQjuLci8yA8be7UtEX+/D0X/BGbJVjD0sdJuZZCyWS2wRgCkmNNRt
- WFLNsWTFVSezkNgVtT2SEHcCeIF19CKIa0jfiGrFkEeZRQWiGnaNgIEDyrcM3p3Gyesk
- pgohf48wOAZMg+BBomFOP3j6He9jnzjp4mIRvP0JB9TE/e/eV2tWXMh7i8KHpEnnzjMB
- VflMU3rdPGswfXHjKDbe8D7kun+Qg6X1dHFlz8s0O1nE+GynVeJm1YmpbQrZWUHDofLz
- hSUA==
-X-Gm-Message-State: AOJu0YySlHrxVafhW8nJFp0RGHNWqJVPzpafssG1/j5mwu4LXfXrEn3Q
- 5rpowoSCIXX1f3wX1/NMc5RXyrmZTIOJKlIOmjRhlyRfOOzHN6B5cXIu+iJP4Uos6yBfe8nHQDm
- z7fVL+WqAEOhVitGZBv9vRuRsAQNPiXUpsYsV
-X-Google-Smtp-Source: AGHT+IHZGo4lT6p0XUpmXguxO36u0vGhfKJxolxGs1iUzrKfrecbyXuHvgF2RU6vb0WEmZhFmslchyKGYXOvgeHx0hY=
-X-Received: by 2002:a05:6214:3b87:b0:6c5:5324:6f44 with SMTP id
- 6a1803df08f44-6c553246f52mr72886926d6.35.1725993863104; Tue, 10 Sep 2024
- 11:44:23 -0700 (PDT)
+ bh=R2m/NtscKXJDVyueA8D2gu4T4gNB2/TxCSOCimlyye0=;
+ b=Jbt5akfsHzkwFnxYVkTY8ughvVjROERo8N96Whivd/IvFqwxvU4W8+/AzkBrjsPXwt
+ ohkklI5BklTd0Uc1d/7cnIxEXS8DNVCaJagBOizKP8xmVoqKl6Cd3cScReMqT06KK9PR
+ F0lEMjOeh2BPxekohIeEesKJr4Pw1W6eKDs/dZ8alEdxedVuQt+UepAEvcgUPhOSyv9r
+ zzTRDkDcIot8me39ro514g/nZQaNzkoXRmnMVj3osoplv0wWeqaWznJnhmJKLgbRAjnR
+ 2E87GgahQU7gXeKhVs5GSfo4nHm0GLRgLEzKYshdO5r02bB8H+bBmXIpYdcsXRHZ5Q8w
+ EfKw==
+X-Gm-Message-State: AOJu0Yxn7YI0Rs5XD+Lamn40kYtGbRPjjJb/NHuFeCWH8vxJLeVVYceF
+ aYRgWwhRc44lhOyblqu8p8xA72dOVpThugtvtx8RWsm7f5xB2Hefu4wlF5NpIpb073qJsCoAF5e
+ /jxuRZWz3TIapULc0XV4lhvkPpzxU/kz7ljas
+X-Google-Smtp-Source: AGHT+IGFYeMNFQKehL2CmYNkC3psdnm5iZnwh7GfkiDSiHSE9F2tLPSZH748JWaQ6JLQjXN4bYRNpMIdkz8wWAJRMC8=
+X-Received: by 2002:a05:6214:451a:b0:6c3:56e0:5fde with SMTP id
+ 6a1803df08f44-6c52850db38mr188180306d6.51.1725993864919; Tue, 10 Sep 2024
+ 11:44:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240816214436.1877263-1-raymond.mao@linaro.org>
- <CAFLszTiRy3dkrTVnkV-H=CcCxJH6W5=RBM9tokOiSN-AVXGywA@mail.gmail.com>
- <CAEfUkU++=WbmePTa_JwPkn6VoG0C+Y=U7SebXmNhcLyPTbKrZQ@mail.gmail.com>
- <CAFLszTh56FrvLaHvat6Oz97EVzw9xYmQr+WyDNtYE=c2qmyJ5w@mail.gmail.com>
- <CAEfUkU+iXQVBTmTc3A4HUEFdm2NapoqzQefOamczRkkhPsa0Bw@mail.gmail.com>
-In-Reply-To: <CAEfUkU+iXQVBTmTc3A4HUEFdm2NapoqzQefOamczRkkhPsa0Bw@mail.gmail.com>
+References: <cover.1725351676.git.jerome.forissier@linaro.org>
+ <a5617c0cb57624d004c4b4f42861822016edb2e9.1725351676.git.jerome.forissier@linaro.org>
+ <CAFLszTgr9fEmdx9No2yh-1tiVW4P1qb+mWFJ=Zk6Om_d_CFuXQ@mail.gmail.com>
+ <72a8df61-16b2-4d73-a1e5-db0ef1d5cd07@linaro.org>
+In-Reply-To: <72a8df61-16b2-4d73-a1e5-db0ef1d5cd07@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 10 Sep 2024 12:44:12 -0600
-Message-ID: <CAFLszThct-czdZcBr-pjco9+ewtYtPJMvKtWf6vJb5n2s=9=gg@mail.gmail.com>
-Subject: Re: [PATCH v6 00/28] Integrate MbedTLS v3.6 LTS with U-Boot
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, manish.pandey2@arm.com, 
- Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
- Mario Six <mario.six@gdsys.cc>, 
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Michal Simek <michal.simek@amd.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Andrew Davis <afd@ti.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Sumit Garg <sumit.garg@linaro.org>, 
- Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>, 
- "Leon M. Busch-George" <leon@georgemail.eu>,
- Igor Opaniuk <igor.opaniuk@gmail.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Alexander Gendin <agendin@matrox.com>, Jonathan Humphreys <j-humphreys@ti.com>,
- Eddie James <eajames@linux.ibm.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+Date: Tue, 10 Sep 2024 12:44:14 -0600
+Message-ID: <CAFLszTifWxDMmW=G_4w2f5bHU-FOg5nsmd4_EeOhwVSMzHzXFQ@mail.gmail.com>
+Subject: Re: [PATCH v3 01/16] Makefile: detect HOST_ARCH properly when
+ CROSS_COMPILE is multi-word
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Sumit Garg <sumit.garg@linaro.org>,
+ Andrew Davis <afd@ti.com>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Bryan Brattlof <bb@ti.com>, 
+ Jesse Taube <mr.bossman075@gmail.com>,
+ "Leon M. Busch-George" <leon@georgemail.eu>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -106,157 +91,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raymond,
+Hi Jerome,
 
-On Fri, 6 Sept 2024 at 08:50, Raymond Mao <raymond.mao@linaro.org> wrote:
+On Fri, 6 Sept 2024 at 09:10, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
 >
-> Hi Simon,
+> Hello Simon,
 >
-> On Thu, 5 Sept 2024 at 20:43, Simon Glass <sjg@chromium.org> wrote:
->>
->> Hi Raymond,
->>
->> On Tue, 3 Sept 2024 at 08:59, Raymond Mao <raymond.mao@linaro.org> wrote:
->> >
->> > Hi Simon,
->> >
->> > On Sat, 17 Aug 2024 at 11:58, Simon Glass <sjg@chromium.org> wrote:
->> >>
->> >> Hi Raymond,
->> >>
->> >> On Fri, 16 Aug 2024 at 15:44, Raymond Mao <raymond.mao@linaro.org> wrote:
->> >> >
->> >> > Integrate MbedTLS v3.6 LTS (currently v3.6.0) with U-Boot.
->> >> >
->> >> > Motivations:
->> >> > ------------
->> >> >
->> >> > 1. MbedTLS is well maintained with LTS versions.
->> >> > 2. LWIP is integrated with MbedTLS and easily to enable HTTPS.
->> >> > 3. MbedTLS recently switched license back to GPLv2.
->> >> >
->> >> > Prerequisite:
->> >> > -------------
->> >> >
->> >> > This patch series requires mbedtls git repo to be added as a
->> >> > subtree to the main U-Boot repo via:
->> >> >     $ git subtree add --prefix lib/mbedtls/external/mbedtls \
->> >> >           https://github.com/Mbed-TLS/mbedtls.git \
->> >> >           v3.6.0 --squash
->> >> > Moreover, due to the Windows-style files from mbedtls git repo,
->> >> > we need to convert the CRLF endings to LF and do a commit manually:
->> >> >     $ git add --renormalize .
->> >> >     $ git commit
->> >> >
->> >> > New Kconfig options:
->> >> > --------------------
->> >> >
->> >> > `MBEDTLS_LIB` is for MbedTLS general switch.
->> >> > `MBEDTLS_LIB_CRYPTO` is for replacing original digest and crypto libs with
->> >> > MbedTLS.
->> >> > `MBEDTLS_LIB_X509` is for replacing original X509, PKCS7, MSCode, ASN1,
->> >> > and Pubkey parser with MbedTLS.
->> >> > `LEGACY_CRYPTO` is introduced as a main switch for legacy crypto library.
->> >> > `LEGACY_CRYPTO_BASIC` is for the basic crypto functionalities and
->> >> > `LEGACY_CRYPTO_CERT` is for the certificate related functionalities.
->> >> > For each of the algorithm, a pair of `<alg>_LEGACY` and `<alg>_MBEDTLS`
->> >> > Kconfig options are introduced. Meanwhile, `SPL_` Kconfig options are
->> >> > introduced.
->> >> >
->> >> > In this patch set, MBEDTLS_LIB, MBEDTLS_LIB_CRYPTO and MBEDTLS_LIB_X509
->> >> > are by default enabled in qemu_arm64_defconfig and sandbox_defconfig
->> >> > for testing purpose.
->> >> >
->> >> > Patches for external MbedTLS project:
->> >> > -------------------------------------
->> >> >
->> >> > Since U-Boot uses Microsoft Authentication Code to verify PE/COFFs
->> >> > executables which is not supported by MbedTLS at the moment,
->> >> > addtional patches for MbedTLS are created to adapt with the EFI loader:
->> >> > 1. Decoding of Microsoft Authentication Code.
->> >> > 2. Decoding of PKCS#9 Authenticate Attributes.
->> >> > 3. Extending MbedTLS PKCS#7 lib to support multiple signer's certificates.
->> >> > 4. MbedTLS native test suites for PKCS#7 signer's info.
->> >> >
->> >> > All above 4 patches (tagged with `mbedtls/external`) are submitted to
->> >> > MbedTLS project and being reviewed, eventually they should be part of
->> >> > MbedTLS LTS release.
->> >> > But before that, please merge them into U-Boot, otherwise the building
->> >> > will be broken when MBEDTLS_LIB_X509 is enabled.
->> >> >
->> >> > See below PR link for the reference:
->> >> > https://github.com/Mbed-TLS/mbedtls/pull/9001
->> >> >
->> >> > Miscellaneous:
->> >> > --------------
->> >> >
->> >> > Optimized MbedTLS library size by tailoring the config file
->> >> > and disabling all unnecessary features for EFI loader.
->> >> > From v2, original libs (rsa, asn1_decoder, rsa_helper, md5, sha1, sha256,
->> >> > sha512) are completely replaced when MbedTLS is enabled.
->> >> > From v3, the size-growth is slightly reduced by refactoring Hash functions.
->> >> > From v6, smaller implementations for SHA256 and SHA512 are enabled and
->> >> > target size reduce significantly.
->> >> > Target(QEMU arm64) size-growth when enabling MbedTLS:
->> >> > v1: 6.03%
->> >> > v2: 4.66%
->> >> > v3 - v5: 4.55%
->> >> > v6: 2.90%
->> >> >
->> >> > Please see the latest output from buildman for size-growth on QEMU arm64,
->> >> > Sandbox and Nanopi A64. [1]
->> >> >
->> >> > Tests done:
->> >> > -----------
->> >> >
->> >> > EFI Secure Boot test (EFI variables loading and verifying, EFI signed image
->> >> > verifying and booting) via U-Boot console.
->> >> > EFI Secure Boot and Capsule sandbox test passed.
->> >> >
->> >> > Known issues:
->> >> > -------------
->> >> >
->> >> > None.
->> >>
->> >> I wonder if we could leave out the SHA stuff? The algorithms are
->> >> stable and this would seem to avoid much of the size growth, and all
->> >> the pain of trying to integrate another yet another hashing layer (we
->> >> already have normal, progressive and h/w acceleration, plus
->> >> UCLASS_HASH which h/w acceleration should use but that migration never
->> >> happened). I struggle to see any benefit in replacing U-Boot's very
->> >> solid hashing infra with something else, particularly as this series
->> >> adds yet another. Better to invest the time to refactor it. I asked
->> >> about this before and was told that it would happen 'later'. Let's
->> >> just not change it at all, then it is more likely someone will sort it
->> >> out.
->> >>
->> > Unfortunately, MbedTLS depends on its own digest layer. Unless we patch MbedTLS
->> > to allow an external digest library from U-Boot ...
->>
->> Yes that sounds best. It looks like only a few call sites, so it
->> should be a matter of leaving out the MbedTLS code and adding some
->> static inlines.
->>
-> Inspired by Ilias's reply to patch #7, though we can use the MbedTLS hash alternative options,
-> we still need to convert all U-Boot hash APIs to adapt to the MbedTLS style.
-> This will impact all callers in U-Boot and I don't think it worth to do, at least now.
+> On 9/6/24 17:02, Simon Glass wrote:
+> > Hi Jerome,
+> >
+> > On Tue, 3 Sept 2024 at 02:38, Jerome Forissier
+> > <jerome.forissier@linaro.org> wrote:
+> >>
+> >> When CROSS_COMPILE contains multiple words, HOST_ARCH is not properly
+> >> detected and the sandbox build fail. It typically happens when using
+> >> ccache. For example:
+> >>
+> >>  $ make sandbox_defconfig
+> >>  $ make CROSS_COMPILE="ccache x86_64-linux-gnu-" \
+> >>         CC="ccache x86_64-linux-gnu-gcc"
+> >>  [...]
+> >>  In file included from boot/bootmeth_efi.c:16:
+> >>  include/efi_default_filename.h:33:2: error: #error Unsupported UEFI architecture
+> >>     33 | #error Unsupported UEFI architecture
+> >>        |  ^~~~~
+> >>
+> >> A similar error occurs when the build is done via buildman and
+> >> ~/.buildman contains:
+> >>
+> >>   [toolchain-wrapper]
+> >>   wrapper = ccache
+> >>
+> >> Fix the issue by considering only the last word in $(CROSS_COMPILE).
+> >>
+> >> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> >> Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
+> >> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> >> Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
+> >> ---
+> >>  Makefile | 2 +-
+> >>  1 file changed, 1 insertion(+), 1 deletion(-)
+> >>
+> >> diff --git a/Makefile b/Makefile
+> >> index f90e48f58a5..dc7bdd79420 100644
+> >> --- a/Makefile
+> >> +++ b/Makefile
+> >> @@ -21,7 +21,7 @@ include include/host_arch.h
+> >>  ifeq ("", "$(CROSS_COMPILE)")
+> >>    MK_ARCH="${shell uname -m}"
+> >>  else
+> >> -  MK_ARCH="${shell echo $(CROSS_COMPILE) | sed -n 's/^[[:space:]]*\([^\/]*\/\)*\([^-]*\)-[^[:space:]]*/\2/p'}"
+> >> +  MK_ARCH="${shell echo ${lastword $(CROSS_COMPILE)} | sed -n 's/^[[:space:]]*\([^\/]*\/\)*\([^-]*\)-[^[:space:]]*/\2/p'}"
+> >>  endif
+> >>  unexport HOST_ARCH
+> >>  ifeq ("x86_64", $(MK_ARCH))
+> >> --
+> >> 2.40.1
+> >>
+> >
+> > I've lost track of this, but did you pull in [1] first?
+>
+> Oops! No I didn't :-/ In fact I could not find the reference to the patch
+> in your initial email, then I forgot about it.
+> Would you like me to resend the whole series as v4 with your patch included?
 
-Agreed.
-
-> As the first patch set to introduce MbedTLS to U-Boot with turning on all necessary features,
-> I think this patch set is in the best way with an overall consideration.
-
-I am not convinced, sorry. Can you update MbedTLS so that its hash
-algo can be changed to call the U-Boot one? Then we can deal with
-hardware acceleration, driver model and avoid yet another layer of
-cruft in common/hash.c
-
-I see only a few calls...and the hash algos are so simple and stable
-that there really is no value to U-Boot of all of this pain.
-
-Alternatively, if for some reason you really want this series in as
-is, if you have a plan and scheduling to tidy this up immediately
-after this series, I could be convinced to look the other way.
+I just want to know that there is still a problem, with my patch. So
+yes please try it and update the commit messages as needed for the two
+affected patches.
 
 Regards,
 Simon
+
+
+>
+> >
+> > Regards,
+> > Simon
+> >
+> > [1] https://patchwork.ozlabs.org/project/uboot/patch/20240815195746.749042-2-sjg@chromium.org/
+>
+> Thanks,
+> --
+> Jerome
