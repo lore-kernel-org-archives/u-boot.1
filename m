@@ -4,78 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3799EDE99A
-	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 15:18:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF381EDE99D
+	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 15:44:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A18D589037;
-	Tue, 10 Sep 2024 17:18:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=thaumatec.com
+	by phobos.denx.de (Postfix) with ESMTP id 0DF77889CD;
+	Tue, 10 Sep 2024 17:44:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thaumatec-com.20230601.gappssmtp.com header.i=@thaumatec-com.20230601.gappssmtp.com header.b="YjUSSqoF";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="pZsGRHUC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AFE0C8903D; Tue, 10 Sep 2024 17:17:58 +0200 (CEST)
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D921D889CD; Tue, 10 Sep 2024 17:44:23 +0200 (CEST)
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on2060e.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2416::60e])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6DD6D88CAF
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 17:17:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C65BB88B27
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 17:44:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=thaumatec.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=lukasz.czechowski@thaumatec.com
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-53659867cbdso7247104e87.3
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 08:17:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=thaumatec-com.20230601.gappssmtp.com; s=20230601; t=1725981476; x=1726586276;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wNf+g+o5S75zqMqKsfII6HuxOWT4/LHlFnajPuMSXrs=;
- b=YjUSSqoFxy4RDKGbOAqY0uyx00KTD5JdI6F4S1Ortn27XgXVEbb2Pgo+x9ZQWR+myl
- x8oO2oD55HiV+cYOFf3adErHZ/EYaJQEJ8cSiGv16ZYMGtt8kP0+9R4bIY/J7vD3F90U
- VfMaRQG6ahQ3RLKrR5zfcdmMQKCkQVjcM43+Mk9RRxERuv+v4ayGpatcTz8RjlN/T3So
- 3TzS92G98TLt5+fQ9SfC2Sm6I9G4clRd9yLn2hfs1qLu19z5HzzhVbumqYM3Px/WiWp/
- +AxfxhezqpwpZ7KYIey39i5rKdOofexl59XYkyEREmhrmb9Y81h+kn7EPMFLVl1YjC+d
- y9CQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725981476; x=1726586276;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=wNf+g+o5S75zqMqKsfII6HuxOWT4/LHlFnajPuMSXrs=;
- b=WUgZrMWQ5gNxiozhwIS/nKRn2WTdR4tJf+SOkkA7F6KuuXUMYlBubF/ycSjJTGcF0M
- p1nMfTXNbp9pA/vmFFN+aMloLGdf2V922TDCDDgCfu6ihqWsTAyKytNH2iU7wHHwH1rH
- QDTeRVQrjF6MzC7NbS5u0EqD3pgyALwz5uJqFWyu321kPDZ6TnQS0i6/GVJ4FafDnfv0
- 5U8YcViz8dGCH4wtuPBvZfnwtUFg6hcS9QGDv5NeFWBSBzlZ4f5jlGAXH2uVq2Qlb9yD
- 9pmywsqPjcDZwRArxCVNf71kcR4zG1AMd9UN9tKM8sGmxgibTivG2P5Rm24K1H80cTxo
- RJ2w==
-X-Gm-Message-State: AOJu0YxLKS/nZV9SjsBfgUwHTrFe/3VG/QEKTmfp7wxV+ymlG64xK+IP
- sNVuJ61W+1KoYfZkG1N24S8goWJ1HHjAtUeQGVox0PMy3bINTxpYMaadwGMBa9S8G1QswhoS53r
- yRnFWY6LCLuP9cJLpZuef9o9ym11N9phDsbjv7g==
-X-Google-Smtp-Source: AGHT+IEvn3BEhGDXVOXErvnTeb8CR395YnA/9yjN0zgxDsKvlGsJR+mJBfSiwMyvvACAW966twV8VtnuCnL1qvfUhp0=
-X-Received: by 2002:a05:6512:1283:b0:533:407f:5cbd with SMTP id
- 2adb3069b0e04-536587a687amr14504466e87.7.1725981475347; Tue, 10 Sep 2024
- 08:17:55 -0700 (PDT)
+ spf=fail smtp.mailfrom=Prasad.Kummari@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ZI7RiS1ht7kUCb5B06TI6U0fNZdli+0UGQ5DjQ7CEOcTq/NUvQclC0QH4/t2HRI0IJ8d7N/tZZhcX62ugeao8hEdgUzs4WASmimBpPpSPifh0TAH+ztDYRslzGp1EeMgY/N/BcIiEYwDZsh8W/1Zhycmr6SZ99Ay9sf4H42DstxoWEw4ZjBAIr9CPvdH8p4184Tn/IQBD0YOUpkfbNyKLdLcmDZvavq9LmcqncUuC5U/NmwVf/j4e19NHRUq/Ig+3ytsW6S1ajr60vHNtASXRmm5HAm9fLtjQGlMgVKT0zYFeE3GInwgBaTczXhr+nLl0WPO9oGRCyKeE4zo+zgnrA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=N1bCh1dBfydwpsLHA3TMu4qqHYMwopdJRbHG/tm9OsY=;
+ b=y+Db7MsCuK99mfOyNzKy5iRxAJx3yu/HQpwoeli0XPyDiM4/Blfdd470Omgbjt/KoQXy3KN70sZ9QOBVjZMiMube0azbLxNetVoMkkR14/HKqL2zoJ8XbHwPwgZDXBB0K6yPKMnK1hfeKHh+yAgmKoS7tEfVjowluE68pw/HfyMNYOy6IUfV2K0aQL3YwxhoNSP9eVJaMO9+WtZ0n2Zb31+0ExagwQOSQoV4Lvga2qWaxK34YOTczpaESc7wb78HfSLsJ1nslkzh0sv9mMdaspGcIKXFAiaTOcHXQjUnwydvgkAun+C1D3FIgnYV9irxru/iiFqbPhUvnqXTXlb9CQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=N1bCh1dBfydwpsLHA3TMu4qqHYMwopdJRbHG/tm9OsY=;
+ b=pZsGRHUC37u80PTLB+MgRvuAb4Pb+OuiRM/bNPVt5e9qTIAtpdrK3pKF/2vwQ/vQ+iYxXdPk5awndZ3nqurwMXWWSbl29Es8GNx+vDrt4ojSUdsVaiJWY60JByaP9Ijqf2dRgKiT/FKd6U5NnlW+Hyw2iu1uOE/xDUc5xmEyxJA=
+Received: from BN9PR03CA0275.namprd03.prod.outlook.com (2603:10b6:408:f5::10)
+ by MW4PR12MB6753.namprd12.prod.outlook.com (2603:10b6:303:1ec::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7939.20; Tue, 10 Sep
+ 2024 15:44:14 +0000
+Received: from BN1PEPF00006003.namprd05.prod.outlook.com
+ (2603:10b6:408:f5:cafe::f6) by BN9PR03CA0275.outlook.office365.com
+ (2603:10b6:408:f5::10) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7939.24 via Frontend
+ Transport; Tue, 10 Sep 2024 15:44:14 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ BN1PEPF00006003.mail.protection.outlook.com (10.167.243.235) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7918.13 via Frontend Transport; Tue, 10 Sep 2024 15:44:14 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 10 Sep
+ 2024 10:44:13 -0500
+Received: from xhdkummari40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Tue, 10 Sep 2024 10:44:10 -0500
+From: Prasad Kummari <prasad.kummari@amd.com>
+To: <u-boot@lists.denx.de>, <git@amd.com>
+CC: <michal.simek@amd.com>, <venkatesh.abbarapu@amd.com>,
+ <padmarao.begari@amd.com>, <git@xilinx.com>, <jagan@amarulasolutions.com>,
+ <n-francis@ti.com>, <d-gole@ti.com>, Prasad Kummari <prasad.kummari@amd.com>
+Subject: [PATCH v3] cmd: sf: prevent overwriting the reserved memory
+Date: Tue, 10 Sep 2024 21:13:45 +0530
+Message-ID: <20240910154344.1837906-2-prasad.kummari@amd.com>
+X-Mailer: git-send-email 2.44.1
 MIME-Version: 1.0
-References: <20240903163858.1155218-1-lukasz.czechowski@thaumatec.com>
- <20240903163858.1155218-4-lukasz.czechowski@thaumatec.com>
- <b67d7193-7cda-461b-92fe-e07faa55017e@rock-chips.com>
-In-Reply-To: <b67d7193-7cda-461b-92fe-e07faa55017e@rock-chips.com>
-From: =?UTF-8?Q?=C5=81ukasz_Czechowski?= <lukasz.czechowski@thaumatec.com>
-Date: Tue, 10 Sep 2024 17:17:44 +0200
-Message-ID: <CABd623sqBjcVyK8Ht2q30Rjvv=DXR-nOwB9dadg0VZSG4SZp5g@mail.gmail.com>
-Subject: Re: [PATCH v2 3/5] ram: rockchip: Add separate RAM_ROCKCHIP_DEBUG
- config for TPL/SPL
-To: Kever Yang <kever.yang@rock-chips.com>, quentin.schulz@cherry.de
-Cc: u-boot@lists.denx.de, trini@konsulko.com, sjg@chromium.org, 
- philipp.tomsich@vrull.eu
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB03.amd.com: prasad.kummari@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN1PEPF00006003:EE_|MW4PR12MB6753:EE_
+X-MS-Office365-Filtering-Correlation-Id: dcacf581-69ee-4fa9-6e22-08dcd1af6c0e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|82310400026|36860700013|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?h7iCK3PXehWV85f9eXtDmEHB/4Gbl2AU+nPDKLlXiD9FKnPticBCJYtSwcuE?=
+ =?us-ascii?Q?jsAGc274Laok0MxeGgjNCq4oYzLHx5iXuR3oqrnsI1f7HYAp9PZLWnIdIpJ5?=
+ =?us-ascii?Q?SJcTJ+d6KknXGIbK0vmRgreQQ02C07Xbn0lWxbyk5j7gF+kWVQXm6XxnEGkK?=
+ =?us-ascii?Q?vJRHfZqW8aRCg89Yx0/DnrLqvoOmnCO5LSx5MTlR4QxI73m+F4YMjMTgMuc+?=
+ =?us-ascii?Q?aN2agzJMzmjFL8j7U4pDJ5diCWcGpAgiNY1ft2iT4zoTKwmZmipz5i1UisqL?=
+ =?us-ascii?Q?l+SQwUfEhHmSm/IFnGybBQwPnH+S90lBLR0FFJcmXwcoKS7p0rwcUhMb9MsZ?=
+ =?us-ascii?Q?8K42eIck/g+E23doTozIgSFswRrEzKh8mdlC4ipPiSUd98kmXJTJQ4LvcXVV?=
+ =?us-ascii?Q?IRGhlp/9R+6K7ZbprC5hn4WZyCfaxBLwA1SJmhPqeWT5F8g3CwR4LfiHMUaf?=
+ =?us-ascii?Q?B+JfqPaQCAaF2SHCfZwBwB/rE3+l2kyJ02um2uU1GaNUxGuItszyBs2B5kiz?=
+ =?us-ascii?Q?Crcz4Wwd1ZrvJjQ3u9MiFKj7QEbZdN33TlUv7flywcJk3j29g4O7V5rgwnpn?=
+ =?us-ascii?Q?LXG+VJ4v04D/E5ui0qL6yvt+KLWLHLBnpzXLL5mLos9uKSRkkmTCplnTtfr1?=
+ =?us-ascii?Q?zO9FJv1bNI6HEARh/ybrRFWFiP6xpUA8ye1BerFe3uQnxyc1+DqSinSu1xSa?=
+ =?us-ascii?Q?O2LrkJblPie9j5CHAJyubCuO4pc2q/1Gl+mqiIk+ZbI9GdduUpBGWNIS7jQZ?=
+ =?us-ascii?Q?zAUTyZ8iGPTSg9tfHAJRZBEVhusTTtJKFHqr5t00xHCKBFiSDP79d5PJ+Xqk?=
+ =?us-ascii?Q?hYg5DqB343Hmq3dDCQzmFAOdOp1rsEWjtRv48CK61evQ3+1eJXE286fSC181?=
+ =?us-ascii?Q?/kdaHqdFEj4+MX4HsFkjCD0dYtb1tZVMWln6UvGy9E27FLLFwpnwBaKwKQ59?=
+ =?us-ascii?Q?2crztR10v2/jv8DLX/bST0WtRFD9MkQ2PVLk+sD6Dh/YgIU5rnrwosaB6Hbw?=
+ =?us-ascii?Q?PPIhIDpeDGcSEw2lmn52oIr8fPAJBPHCS/NEwRYKd78r7DISAHoAMtmv2BhC?=
+ =?us-ascii?Q?dv9X53PC2KioV/FLf0KqrWaYTEIYNB7unPfoK3WneNrkGEngaxs5CKYC1mbZ?=
+ =?us-ascii?Q?HFVly8iWVrfoIci8EPGR8Rq9mMF2g0l+Y129znwxIF1dc+cSq5K5Xk8Yrf0T?=
+ =?us-ascii?Q?xqt+uk0VVZ0OhHLESNSvREUuMQuWS8K4l6fUE0hloLecPKFWCYiFKLYWfjXQ?=
+ =?us-ascii?Q?wWLLoOyAAzzk/qHwq0E0yJjTH90PkM+BOwC+U5I9QzzoM54QYkCjX0DgbCjp?=
+ =?us-ascii?Q?bpJGqU16TkESpv7wEyM/P6VFV6rhQ02sTXRQ137L/eg2nbLBT8sD4r7PHeOH?=
+ =?us-ascii?Q?w7xup9En8RaDrGIUlJDYx2k5V1g2588uJwwgj0344yFSsR+kdZy7G/d7cV3/?=
+ =?us-ascii?Q?f6+1aDz367+vZAScGt3aseiL8r+h97zB?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Sep 2024 15:44:14.0416 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: dcacf581-69ee-4fa9-6e22-08dcd1af6c0e
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF00006003.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB6753
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,281 +147,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kever,
-Thanks for the review.
-This patch is indeed intended to disallow enabling RAM_ROCKCHIP_DEBUG
-when SILENT_CONSOLE is enabled and control what is printed on the
-debug console more independently. Patch was created in response to
-review of patchset v1, and implements change suggested by Quentin
-Schulz <quentin.schulz@cherry.de>. The additional complexity with new
-TPL/SPL symbols had been added because we couldn't simply add i.e.
-`depends on !TPL_SILENT_CONSOLE if TPL` and  `depends on
-!SPL_SILENT_CONSOLE if SPL`.
-@Quentin, is it fine with you that we can drop this change?
+Added LMB API to prevent SF command from overwriting reserved
+memory areas. The current SPI code does not use LMB APIs for
+loading data into memory addresses. To resolve this, LMB APIs
+were added to check the load address of an SF command and ensure it
+does not overwrite reserved memory addresses. Similar checks are
+used in TFTP, serial load, and boot code to prevent overwriting
+reserved memory.
 
-Best regards,
-Lukasz
+Signed-off-by: Prasad Kummari <prasad.kummari@amd.com>
+---
 
+Changes in V3:
+- Removed lmb_init_and_reserve() as part of latest LMB series.
+- Error message moved to one place.
+- lmb_alloc_addr() is not required because the given memory address is
+  being checked to ensure it is free or not. 
 
-wt., 10 wrz 2024 o 11:51 Kever Yang <kever.yang@rock-chips.com> napisa=C5=
-=82(a):
->
-> Hi Lukasz,
->
-> On 2024/9/4 00:38, Lukasz Czechowski wrote:
->
-> Introduce new config symbols TPL_RAM_ROCKCHIP_DEBUG and
-> SPL_RAM_ROCKCHIP_DEBUG to allow for better dependencies control
-> of RAM driver debugging configuration.
->
-> The RAM_ROCKCHIP_DEBUG should enough because this only happen when ram dr=
-iver
->
-> running the initialization, and this init process always only run only on=
-ce for all SoCs.
->
-> RAM_ROCKCHIP_DEBUG depends on DEBUG_UART is the correct and no need to ad=
-d more
->
-> other dependency.
->
-> Add negative dependencies to TPL_SILENT_CONSOLE and
-> SPL_SILENT_CONSOLE, respectively.
->
-> I believe this is he main target, you want to control the UART output by =
-SILENT_CONTROL,
->
-> but the RAM_DEBUG should follow the DEBUG_UART.
->
-> So I think this patch is no need, please drop it.
->
->
-> Thanks,
-> - Kever
->
-> Replace IS_ENABLED(CONFIG_RAM_ROCKCHIP_DEBUG) directives with
-> CONFIG_IS_ENABLED(RAM_ROCKCHIP_DEBUG) to utilize the configuration
-> changes.
->
-> Update defconfigs of affected boards so that behavior
-> is not changed.
->
-> Signed-off-by: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
-> ---
->  configs/anbernic-rgxx3-rk3566_defconfig   |  1 +
->  configs/neu2-io-rv1126_defconfig          |  2 ++
->  configs/roc-pc-mezzanine-rk3399_defconfig |  2 ++
->  configs/roc-pc-rk3399_defconfig           |  2 ++
->  configs/rock-pi-n10-rk3399pro_defconfig   |  2 ++
->  configs/sonoff-ihost-rv1126_defconfig     |  2 ++
->  drivers/ram/rockchip/Kconfig              | 24 +++++++++++++++++++++++
->  drivers/ram/rockchip/sdram_common.c       |  2 +-
->  drivers/ram/rockchip/sdram_rk3399.c       |  4 ++--
->  drivers/ram/rockchip/sdram_rv1126.c       | 10 +++++-----
->  10 files changed, 43 insertions(+), 8 deletions(-)
->
-> diff --git a/configs/anbernic-rgxx3-rk3566_defconfig b/configs/anbernic-r=
-gxx3-rk3566_defconfig
-> index a03509bf467..4392bb5af00 100644
-> --- a/configs/anbernic-rgxx3-rk3566_defconfig
-> +++ b/configs/anbernic-rgxx3-rk3566_defconfig
-> @@ -68,6 +68,7 @@ CONFIG_REGULATOR_RK8XX=3Dy
->  CONFIG_PWM_ROCKCHIP=3Dy
->  CONFIG_SPL_RAM=3Dy
->  # CONFIG_RAM_ROCKCHIP_DEBUG is not set
-> +# CONFIG_SPL_RAM_ROCKCHIP_DEBUG is not set
->  # CONFIG_RNG_SMCCC_TRNG is not set
->  CONFIG_BAUDRATE=3D1500000
->  CONFIG_DEBUG_UART_SHIFT=3D2
-> diff --git a/configs/neu2-io-rv1126_defconfig b/configs/neu2-io-rv1126_de=
-fconfig
-> index 2a4c9b45a04..1bdf99887b3 100644
-> --- a/configs/neu2-io-rv1126_defconfig
-> +++ b/configs/neu2-io-rv1126_defconfig
-> @@ -46,6 +46,8 @@ CONFIG_MMC_DW_ROCKCHIP=3Dy
->  CONFIG_REGULATOR_PWM=3Dy
->  CONFIG_PWM_ROCKCHIP=3Dy
->  # CONFIG_RAM_ROCKCHIP_DEBUG is not set
-> +# CONFIG_SPL_RAM_ROCKCHIP_DEBUG is not set
-> +# CONFIG_TPL_RAM_ROCKCHIP_DEBUG is not set
->  CONFIG_BAUDRATE=3D1500000
->  CONFIG_DEBUG_UART_SHIFT=3D2
->  CONFIG_SYSRESET=3Dy
-> diff --git a/configs/roc-pc-mezzanine-rk3399_defconfig b/configs/roc-pc-m=
-ezzanine-rk3399_defconfig
-> index a57899bfdfa..45c4975e452 100644
-> --- a/configs/roc-pc-mezzanine-rk3399_defconfig
-> +++ b/configs/roc-pc-mezzanine-rk3399_defconfig
-> @@ -66,6 +66,8 @@ CONFIG_SPL_DM_REGULATOR_FIXED=3Dy
->  CONFIG_REGULATOR_RK8XX=3Dy
->  CONFIG_PWM_ROCKCHIP=3Dy
->  # CONFIG_RAM_ROCKCHIP_DEBUG is not set
-> +# CONFIG_SPL_RAM_ROCKCHIP_DEBUG is not set
-> +# CONFIG_TPL_RAM_ROCKCHIP_DEBUG is not set
->  CONFIG_RAM_ROCKCHIP_LPDDR4=3Dy
->  CONFIG_BAUDRATE=3D1500000
->  CONFIG_DEBUG_UART_SHIFT=3D2
-> diff --git a/configs/roc-pc-rk3399_defconfig b/configs/roc-pc-rk3399_defc=
-onfig
-> index b45f0e0a899..3f2d5650249 100644
-> --- a/configs/roc-pc-rk3399_defconfig
-> +++ b/configs/roc-pc-rk3399_defconfig
-> @@ -63,6 +63,8 @@ CONFIG_SPL_DM_REGULATOR_FIXED=3Dy
->  CONFIG_REGULATOR_RK8XX=3Dy
->  CONFIG_PWM_ROCKCHIP=3Dy
->  # CONFIG_RAM_ROCKCHIP_DEBUG is not set
-> +# CONFIG_SPL_RAM_ROCKCHIP_DEBUG is not set
-> +# CONFIG_TPL_RAM_ROCKCHIP_DEBUG is not set
->  CONFIG_RAM_ROCKCHIP_LPDDR4=3Dy
->  CONFIG_BAUDRATE=3D1500000
->  CONFIG_DEBUG_UART_SHIFT=3D2
-> diff --git a/configs/rock-pi-n10-rk3399pro_defconfig b/configs/rock-pi-n1=
-0-rk3399pro_defconfig
-> index ec995a54a0e..d4ba628e428 100644
-> --- a/configs/rock-pi-n10-rk3399pro_defconfig
-> +++ b/configs/rock-pi-n10-rk3399pro_defconfig
-> @@ -52,6 +52,8 @@ CONFIG_PMIC_RK8XX=3Dy
->  CONFIG_REGULATOR_RK8XX=3Dy
->  CONFIG_PWM_ROCKCHIP=3Dy
->  # CONFIG_RAM_ROCKCHIP_DEBUG is not set
-> +# CONFIG_SPL_RAM_ROCKCHIP_DEBUG is not set
-> +# CONFIG_TPL_RAM_ROCKCHIP_DEBUG is not set
->  CONFIG_BAUDRATE=3D1500000
->  CONFIG_DEBUG_UART_SHIFT=3D2
->  CONFIG_SYS_NS16550_MEM32=3Dy
-> diff --git a/configs/sonoff-ihost-rv1126_defconfig b/configs/sonoff-ihost=
--rv1126_defconfig
-> index 4890644c7e6..1b10cded8fd 100644
-> --- a/configs/sonoff-ihost-rv1126_defconfig
-> +++ b/configs/sonoff-ihost-rv1126_defconfig
-> @@ -47,6 +47,8 @@ CONFIG_MMC_DW_ROCKCHIP=3Dy
->  CONFIG_REGULATOR_PWM=3Dy
->  CONFIG_PWM_ROCKCHIP=3Dy
->  # CONFIG_RAM_ROCKCHIP_DEBUG is not set
-> +# CONFIG_SPL_RAM_ROCKCHIP_DEBUG is not set
-> +# CONFIG_TPL_RAM_ROCKCHIP_DEBUG is not set
->  CONFIG_BAUDRATE=3D1500000
->  CONFIG_DEBUG_UART_SHIFT=3D2
->  CONFIG_SYSRESET=3Dy
-> diff --git a/drivers/ram/rockchip/Kconfig b/drivers/ram/rockchip/Kconfig
-> index d707d09c1c8..5e069dca3be 100644
-> --- a/drivers/ram/rockchip/Kconfig
-> +++ b/drivers/ram/rockchip/Kconfig
-> @@ -24,6 +24,30 @@ config RAM_ROCKCHIP_DEBUG
->    This is an option for developers to understand the ram drivers
->    initialization, configurations and etc.
->
-> +config SPL_RAM_ROCKCHIP_DEBUG
-> + bool "Rockchip ram drivers debugging in SPL"
-> + depends on DEBUG_UART
-> + depends on SPL && SPL_RAM && !SPL_SILENT_CONSOLE
-> + default y
-> + help
-> +  This enables debugging ram driver API's for the platforms
-> +  based on Rockchip SoCs.
-> +
-> +  This is an option for developers to understand the ram drivers
-> +  initialization, configurations and etc.
-> +
-> +config TPL_RAM_ROCKCHIP_DEBUG
-> + bool "Rockchip ram drivers debugging in TPL"
-> + depends on DEBUG_UART
-> + depends on TPL && TPL_RAM && !TPL_SILENT_CONSOLE
-> + default y
-> + help
-> +  This enables debugging ram driver API's for the platforms
-> +  based on Rockchip SoCs.
-> +
-> +  This is an option for developers to understand the ram drivers
-> +  initialization, configurations and etc.
-> +
->  config RAM_ROCKCHIP_DDR4
->   bool "DDR4 support for Rockchip SoCs"
->   help
-> diff --git a/drivers/ram/rockchip/sdram_common.c b/drivers/ram/rockchip/s=
-dram_common.c
-> index b7a8fce607c..c2a6310388c 100644
-> --- a/drivers/ram/rockchip/sdram_common.c
-> +++ b/drivers/ram/rockchip/sdram_common.c
-> @@ -10,7 +10,7 @@
->  #include <asm/arch-rockchip/sdram.h>
->  #include <asm/arch-rockchip/sdram_common.h>
->
-> -#ifdef CONFIG_RAM_ROCKCHIP_DEBUG
-> +#if CONFIG_IS_ENABLED(RAM_ROCKCHIP_DEBUG)
->  void sdram_print_dram_type(unsigned char dramtype)
->  {
->   switch (dramtype) {
-> diff --git a/drivers/ram/rockchip/sdram_rk3399.c b/drivers/ram/rockchip/s=
-dram_rk3399.c
-> index 45270e27184..99a1cc6c174 100644
-> --- a/drivers/ram/rockchip/sdram_rk3399.c
-> +++ b/drivers/ram/rockchip/sdram_rk3399.c
-> @@ -2558,7 +2558,7 @@ static int lpddr4_set_rate(struct dram_info *dram,
->   lpddr4_set_ctl(dram, params, ctl_fn,
->         dfs_cfgs_lpddr4[ctl_fn].base.ddr_freq);
->
-> - if (IS_ENABLED(CONFIG_RAM_ROCKCHIP_DEBUG))
-> + if (CONFIG_IS_ENABLED(RAM_ROCKCHIP_DEBUG))
->   printf("%s: change freq to %dMHz %d, %d\n", __func__,
->         dfs_cfgs_lpddr4[ctl_fn].base.ddr_freq / MHz,
->         ctl_fn, phy_fn);
-> @@ -2980,7 +2980,7 @@ static int sdram_init(struct dram_info *dram,
->   continue;
->   }
->
-> - if (IS_ENABLED(CONFIG_RAM_ROCKCHIP_DEBUG)) {
-> + if (CONFIG_IS_ENABLED(RAM_ROCKCHIP_DEBUG)) {
->   printf("Channel ");
->   printf(channel ? "1: " : "0: ");
->   }
-> diff --git a/drivers/ram/rockchip/sdram_rv1126.c b/drivers/ram/rockchip/s=
-dram_rv1126.c
-> index 4fbb088a8d9..14e1df71ae4 100644
-> --- a/drivers/ram/rockchip/sdram_rv1126.c
-> +++ b/drivers/ram/rockchip/sdram_rv1126.c
-> @@ -3375,7 +3375,7 @@ static void ddr_set_rate_for_fsp(struct dram_info *=
-dram,
->   if (get_wrlvl_val(dram, sdram_params))
->   printascii("get wrlvl value fail\n");
->
-> - if (IS_ENABLED(CONFIG_RAM_ROCKCHIP_DEBUG)) {
-> + if (CONFIG_IS_ENABLED(RAM_ROCKCHIP_DEBUG)) {
->   printascii("change to: ");
->   printdec(f1);
->   printascii("MHz\n");
-> @@ -3383,21 +3383,21 @@ static void ddr_set_rate_for_fsp(struct dram_info=
- *dram,
->   ddr_set_rate(&dram_info, sdram_params, f1,
->       sdram_params->base.ddr_freq, 1, 1, 1);
->
-> - if (IS_ENABLED(CONFIG_RAM_ROCKCHIP_DEBUG)) {
-> + if (CONFIG_IS_ENABLED(RAM_ROCKCHIP_DEBUG)) {
->   printascii("change to: ");
->   printdec(f2);
->   printascii("MHz\n");
->   }
->   ddr_set_rate(&dram_info, sdram_params, f2, f1, 2, 0, 1);
->
-> - if (IS_ENABLED(CONFIG_RAM_ROCKCHIP_DEBUG)) {
-> + if (CONFIG_IS_ENABLED(RAM_ROCKCHIP_DEBUG)) {
->   printascii("change to: ");
->   printdec(f3);
->   printascii("MHz\n");
->   }
->   ddr_set_rate(&dram_info, sdram_params, f3, f2, 3, 1, 1);
->
-> - if (IS_ENABLED(CONFIG_RAM_ROCKCHIP_DEBUG)) {
-> + if (CONFIG_IS_ENABLED(RAM_ROCKCHIP_DEBUG)) {
->   printascii("change to: ");
->   printdec(f0);
->   printascii("MHz(final freq)\n");
-> @@ -3493,7 +3493,7 @@ static int rv1126_dmc_init(struct udevice *dev)
->   save_rw_trn_result_to_ddr(&rw_trn_result);
->  #endif
->
-> - if (IS_ENABLED(CONFIG_RAM_ROCKCHIP_DEBUG))
-> + if (CONFIG_IS_ENABLED(RAM_ROCKCHIP_DEBUG))
->   printascii("out\n");
->
->   return ret;
+Changes in V2:
+- Rebased the code changes on top of the next branch.
+
+UT:
+Tested on Versal NET board
+
+Versal NET> fdt print /reserved-memory                                          
+reserved-memory {                                                               
+        ranges;                                                                 
+        #size-cells = <0x00000002>;                                             
+        #address-cells = <0x00000002>;                                          
+        tf-a {                                                                  
+                reg = <0x00000000 0x70000000 0x00000000 0x00050000>;            
+                no-map;                                                         
+        };                                                                      
+};                                                                              
+Versal NET> sf read 0x70000000 0x0 0x40
+device 0 offset 0x0, size 0x40                                                  
+ERROR: trying to overwrite reserved memory...
+
+Versal NET> sf write 0x70000000 0x0 0x40                                        
+device 0 offset 0x0, size 0x40                                                  
+ERROR: trying to overwrite reserved memory...
+
+relocaddr   = 0x000000007febc000
+
+Versal NET> sf read 0x000000007febc000 0x0 0x40                                 
+device 0 offset 0x0, size 0x40 
+ERROR: trying to overwrite reserved memory...         
+
+Versal NET> sf write 0x000000007febc000 0x0 0x40                                
+device 0 offset 0x0, size 0x40                                                  
+ERROR: trying to overwrite reserved memory... 
+
+ cmd/sf.c | 36 +++++++++++++++++++++++++++++++++++-
+ 1 file changed, 35 insertions(+), 1 deletion(-)
+
+diff --git a/cmd/sf.c b/cmd/sf.c
+index f43a2e08b3..7bb8bcfce2 100644
+--- a/cmd/sf.c
++++ b/cmd/sf.c
+@@ -10,6 +10,7 @@
+ #include <div64.h>
+ #include <dm.h>
+ #include <log.h>
++#include <lmb.h>
+ #include <malloc.h>
+ #include <mapmem.h>
+ #include <spi.h>
+@@ -272,6 +273,31 @@ static int spi_flash_update(struct spi_flash *flash, u32 offset,
+ 	return 0;
+ }
+ 
++#ifdef CONFIG_LMB
++static int do_spi_read_lmb_check(ulong start_addr, loff_t len)
++{
++	phys_size_t max_size;
++	ulong end_addr;
++
++	lmb_dump_all();
++
++	max_size = lmb_get_free_size(start_addr);
++	if (!max_size) {
++		return CMD_RET_FAILURE;
++	}
++
++	end_addr = start_addr + max_size;
++	if (!end_addr)
++		end_addr = ULONG_MAX;
++
++	if ((start_addr + len) > end_addr) {
++		return CMD_RET_FAILURE;
++	}
++
++	return 0;
++}
++#endif
++
+ static int do_spi_flash_read_write(int argc, char *const argv[])
+ {
+ 	unsigned long addr;
+@@ -315,7 +341,15 @@ static int do_spi_flash_read_write(int argc, char *const argv[])
+ 		ret = spi_flash_update(flash, offset, len, buf);
+ 	} else if (strncmp(argv[0], "read", 4) == 0 ||
+ 			strncmp(argv[0], "write", 5) == 0) {
+-		int read;
++		int read, ret;
++
++#ifdef CONFIG_LMB
++		ret = do_spi_read_lmb_check(addr, len);
++		if (ret) {
++			printf("ERROR: trying to overwrite reserved memory...\n");
++			return ret;
++		}
++#endif
+ 
+ 		read = strncmp(argv[0], "read", 4) == 0;
+ 		if (read)
+-- 
+2.25.1
+
