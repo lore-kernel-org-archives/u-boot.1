@@ -4,85 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68626ECE582
-	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 08:43:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF965ECE582
+	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 08:58:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CAC7A88AE2;
-	Tue, 10 Sep 2024 10:43:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 44DC48891E;
+	Tue, 10 Sep 2024 10:58:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LPwASn8S";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="i2HqurcR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DEA4188F2E; Tue, 10 Sep 2024 10:43:37 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id 27C6588F46; Tue, 10 Sep 2024 10:58:22 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C9FCE88881
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 10:43:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D89D188861
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 10:58:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-42cb5b3c57eso20354365e9.2
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 01:43:35 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-42cba6cdf32so12675865e9.1
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 01:58:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725957815; x=1726562615; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=HEcidVICuYspp6GSAy5Ohk5T1Ej4h0Hog3fVJFd8+RQ=;
- b=LPwASn8SYrn6rC1OEeuQS/DnXJ4UaBWm97qI0k1CZW8NLXPKLH99QbHmpkNuTuPqJ6
- VP9ih9YWKHWKi/HGPHHvuRZ1mGIKc/bno4dib2wHBqoG674Y3cPQo/ruTc9JRSvPw1KD
- UHv2jAAFhvsU1zmMKQBaFI8gIvvErIk/cmf8f4ZZ44bAlSvfSQJ8QsHUspolE9NKuIdP
- QpNXCEYDaDdSRdRHqYND4FIf0i6RYUV4wmEYHR9uGcp1Ap7IckT6zJmukUKbSyXo9nuM
- +m1zUqwO8TuAMCGHwUBFFhmjUSRGEC0+767IVOEXX+JG8ezBnIE4kZNSd7x/LemYnVxI
- W8Hg==
+ d=linaro.org; s=google; t=1725958693; x=1726563493; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=oNGPa6G3hlpB0QZYpgGOyP8SlsoJKrcJvviBcQCv21A=;
+ b=i2HqurcRGt9FHYUGdFytqOgpyT4A4UNuJr2/digaKYW9wo654JpynNBchllfdRn3BF
+ XLW8SHzwEHjIo+BBwzyuMDVNwuhT5IlFlPEP14TIBv0Cxvx2VsW9mSxGEsL9I7hZNerc
+ uZiSpklOrEubcft4QHNWImXPVf4pq6Y3g7gDrLn//NA5IEEoW7t84vLzh/CS1LaBdsLe
+ ketThPlSJSBzhb+YeJANR6ZPuoDJF9Vh6UexM67NZTwiGmZzoudjEjgEMUyVp7XV8GNE
+ gJGsdgap904YZHlPNyvlOMOaFnSlEv1zb9DsV87RWokPXkNd3dnKDe3pR4KOOaJLgqLF
+ UfTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725957815; x=1726562615;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=HEcidVICuYspp6GSAy5Ohk5T1Ej4h0Hog3fVJFd8+RQ=;
- b=ljOytysyXgs4ginSGZ7wck5utsfshqkC6CgZDSkwYbTUKFd6hNqhyjG5mVnSlTlB/d
- WaCtjJxYfEI/ZN0mOaQcUvi6k8DGn63y2Ew2psuScE332fTfa88jjfaQBGgCeJugnoJH
- f6cxWC/HseZRaBmw+ZOjmUll1wDn72QdnWdwYl7WVszrB6NJN5Gase4KegKxpAQg3BZ/
- tReoDci5rZpHJuH3HvGXwtTTl+ifExkF+sZogJqh88PjtcLrE4nz1XA+f1db9DENJLAD
- 133o0RkBbZxaFf7gwjutBUzEjzg35qGWMxxLjqCWf23arrMznNvZXH/oXYdDnUcWN0sW
- SzuA==
+ d=1e100.net; s=20230601; t=1725958693; x=1726563493;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=oNGPa6G3hlpB0QZYpgGOyP8SlsoJKrcJvviBcQCv21A=;
+ b=qmsA9Sw6T+J0Re6gCaTEFjX6ZR1wtNCttSCJHZp1BL/ZQvY7ipmO0Eemrvt6+BWK3k
+ UdaU87F39i2XmT5aJGwZYLBMUGNOjVYUxueIVSyf6BGWxJzIHIbwNwXsB5BDmUGcz3Zm
+ D0SxTV6pndlg+t1gR5EArxTcZB8XD/LwXRf6AZR8bmYVA59HsDw5rdz7g/rsep8z8PPe
+ Kw8lgwr1Q2IojVYgpT35k+6u/vLv9MbiA1n7MOlnOjWsRY2YP6oNb7JyfuGMbuf8vsLe
+ MOk9wrGiZOLE0kC6zuetRgoeXg2CoOKqRSwX53+IIv/9tEldWOb3zL/i8fXdfUNrxGJZ
+ aLNg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX+9c8+MRyBG7WiEELTg5oVRWBatKoS+T3Cr7RFMCXh/LrZqZ8WFDEkPqiztRY2ntC6N2koyJ4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx6UE80KljI04QL9kod4AoDnlTUiwiUaU9E2W52QvpN/ZEUm1JA
- SnyoON3RzpRu2IcT3luZSVxfox8Yj+lhfFPOek+H6Rz/yO4dOHp8caMu9vhTS9w=
-X-Google-Smtp-Source: AGHT+IGYzcRcYjDinR+lKolbE8jxk6JaEcAn7GZ09+An262uLVHJcuDu4hHYurV345a8ZuIHl4/+Sg==
-X-Received: by 2002:a5d:5e10:0:b0:378:8aaa:9cd6 with SMTP id
- ffacd0b85a97d-3788aaa9d24mr7840241f8f.49.1725957814909; 
- Tue, 10 Sep 2024 01:43:34 -0700 (PDT)
-Received: from [192.168.7.95] ([212.114.21.58])
+ AJvYcCUMFSkUKK5FumNkeeCDdurnVqigyReItTrxf5IJBWvK71Mz4mVZSoGkA7l1wG/3YGxxxSQOYQY=@lists.denx.de
+X-Gm-Message-State: AOJu0YyyA55K1q27aGG8diSfRK55VJsVAB8+v+tCD0wsQVLWggscVBfN
+ ghNy8lzBT4+m7X0cVfI82nm/HJNmHKpq1kltlt/L9GP0loukSiq0j9xdzbslSWI=
+X-Google-Smtp-Source: AGHT+IEZTd7rmL7dQfmQxm63Ie6AB85UaAQOQ6QNOVDFy5Ihn0B8HipRyBtad9co3Ypxv2Oh58FaEA==
+X-Received: by 2002:a05:600c:4d95:b0:42c:ae76:6cea with SMTP id
+ 5b1f17b1804b1-42cae766f99mr67149725e9.9.1725958692606; 
+ Tue, 10 Sep 2024 01:58:12 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42caeb44887sm103716905e9.23.2024.09.10.01.43.34
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 10 Sep 2024 01:43:34 -0700 (PDT)
-Message-ID: <39b61a84-83fb-4fc4-9891-edc4660b5404@linaro.org>
-Date: Tue, 10 Sep 2024 10:43:33 +0200
+ 5b1f17b1804b1-42cc01d4617sm12905325e9.0.2024.09.10.01.58.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 10 Sep 2024 01:58:12 -0700 (PDT)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [PATCH 0/2] qcom: allow msm_gpio to set special pins direction & value
+Date: Tue, 10 Sep 2024 10:58:05 +0200
+Message-Id: <20240910-topic-sm8x50-msm-gpio-special-pins-sm8250-v1-0-50623a7e4931@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] spl: ram: fix build warning when neither RAM_DEVICE nor
- DFU are enabled
-To: Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Michael Trimarchi <michael@amarulasolutions.com>
-References: <20240909132252.3975017-1-jerome.forissier@linaro.org>
- <8022cc2e-bcc0-62f9-b00e-c830987967e7@gmail.com>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <8022cc2e-bcc0-62f9-b00e-c830987967e7@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAB0K4GYC/x2NywqDMBAAf0X27EJeBe2vFA82bu1CkyxZKYL47
+ 009DgMzByhVJoV7d0ClLyuX3MD2HcT3nFdCXhqDMy6Y0RrcinBETcN+M5g04SpcUIUizx8Uzvq
+ XrskxeG/tMwyeHLSeVHrxfr0e03n+AJnQMRJ7AAAA
+To: Caleb Connolly <caleb.connolly@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.14.1
+X-Developer-Signature: v=1; a=openpgp-sha256; l=924;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=CkG8B/6DoN3JnRJHx1p2fmuD+msHch14zEAz+YT4i9o=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBm4AoigIXQca0ZMy4hCFXpluYNWh6o9Z5+QOk//p+l
+ gAia8CyJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZuAKIgAKCRB33NvayMhJ0fL8EA
+ CtbxaLGrLPnfdi5ANIS0QT0o6THMdQJ11i4cVdVhM60tc6E26PaeSjkiNufiOAO7j/QJJmAwKorJwQ
+ AVvbGyanbeeh+FZKESaMosuwnQCObx00mfAo2zwKFqAqsXcuMe9WO4UrBj/0l00n8kch2K0OvIzK1e
+ ywEDBrMB0Qw1ggW4S5+AxiCrPIVl+dl6FKsrbu6gBpoBJrVOfmjcabHmnIfNv4S2UQignBCcr/Cq3v
+ JNehSzxRHFimumcpOHMevh2K2QR5PanJGFvx9l30E3GNMdR1dUjvJplzamOAqw1G3ZZGxj/SGhRFI/
+ AmuzheXrxolLLvO3YtaTMxYsjh/lxsWoVFDCsw3TyfksPiAQDT4+8aWoqriGG8qPZb+rqdfKbAfKS9
+ MdVZRvSxJRzqGoC8cSjVv3r58JbtDVVrBCXjJLDescUiuB8zREgpLLp/RIPhjGPjzR0mZxbTQ8cWbI
+ jqhXkHEvDDidMiHL7RN/k4sciAW03vFEomIHo9nwckWBO2L0tZoH8BlxcPKwFvauXfkcqlYfgz9IHI
+ cVPf6sQ1xIbtJfW2iD4NRHfM/xbhqmVP5T5LP2/nEOlcev0/214KbKmg6ShZ02+HHRrcTb4mpajTCP
+ r+i2KvkzJ7Dvjwo6aNfTENAXhjIUBmbaMVFCXcjPncV/brkHk16ZeCiinj7w==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,58 +112,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+After struct msm_special_pin_data was introduced in [1], use the data
+to setup the pin direction and/or value if supported by the pin data.
 
+Add the proper msm_special_pin_data for sm8250 after sm8550 and sm8650.
 
-On 9/10/24 04:20, Sean Anderson wrote:
-> On 9/9/24 09:22, Jerome Forissier wrote:
->> Fixes the following warning:
->>
->> common/spl/spl_ram.c:19:14: warning: ‘spl_ram_load_read’ defined but not used [-Wunused-function]
->>     19 | static ulong spl_ram_load_read(struct spl_load_info *load, ulong sector,
->>        |              ^~~~~~~~~~~~~~~~~
-> 
-> Does this config even make sense? 
+[1] https://lore.kernel.org/all/20240528-topic-sm8x50-pinctrl-pinconf-v1-0-54d1e9ad7dfa@linaro.org/
 
-I don't think so.
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
+Neil Armstrong (2):
+      gpio: msm: add support for special pins
+      pinctr: qcom: sm8250: add special pins pins configuration data
 
-> What is the point of enabling SPL_RAM_SUPPORT without one of the above configs?
-> 
-> Maybe we should make those configs select RAM_SUPPORT instead.
+ drivers/gpio/msm_gpio.c               | 97 ++++++++++++++++++++++++++++++++---
+ drivers/pinctrl/qcom/pinctrl-sm8250.c | 41 +++++++++++++--
+ 2 files changed, 127 insertions(+), 11 deletions(-)
+---
+base-commit: ca55cf8104c0dd78aae45fa66dd8400ef1b3d0ac
+change-id: 20240910-topic-sm8x50-msm-gpio-special-pins-sm8250-943311b483e2
 
-Yes, and make SPL_RAM_SUPPORT an internal symbol so that it cannot be enabled
-on its own without SPL_DFU or SPL_RAM_DEVICE.
-Note that SPL_DFU already selects SPL_RAM_SUPPORT but SPL_RAM_DEVICE "depends on"
-it.
-
-If that sounds good to you I will post a new patch.
-
-> 
->> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
->> ---
->>   common/spl/spl_ram.c | 3 +++
->>   1 file changed, 3 insertions(+)
->>
->> diff --git a/common/spl/spl_ram.c b/common/spl/spl_ram.c
->> index 71b7a8374bb..1a5874c3949 100644
->> --- a/common/spl/spl_ram.c
->> +++ b/common/spl/spl_ram.c
->> @@ -16,6 +16,7 @@
->>   #include <spl.h>
->>   #include <linux/libfdt.h>
->>   +#if CONFIG_IS_ENABLED(RAM_DEVICE) || CONFIG_IS_ENABLED(DFU)
->>   static ulong spl_ram_load_read(struct spl_load_info *load, ulong sector,
->>                      ulong count, void *buf)
->>   {
->> @@ -96,6 +97,8 @@ static int spl_ram_load_image(struct spl_image_info *spl_image,
->>         return ret;
->>   }
->> +#endif
->> +
->>   #if CONFIG_IS_ENABLED(RAM_DEVICE)
->>   SPL_LOAD_IMAGE_METHOD("RAM", 0, BOOT_DEVICE_RAM, spl_ram_load_image);
->>   #endif
-> 
-
-Thanks,
+Best regards,
 -- 
-Jerome
+Neil Armstrong <neil.armstrong@linaro.org>
+
