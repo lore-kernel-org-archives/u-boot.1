@@ -4,94 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C669FEDE9BF
-	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 20:43:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 786B8EE01EB
+	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 21:29:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BB29890D6;
-	Tue, 10 Sep 2024 22:43:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=redhat.com
+	by phobos.denx.de (Postfix) with ESMTP id AFCED890FC;
+	Tue, 10 Sep 2024 23:29:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="UH0XaDN4";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Wi0tiTVn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6B1B890D5; Tue, 10 Sep 2024 19:22:53 +0200 (CEST)
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CC6D289100; Tue, 10 Sep 2024 23:29:25 +0200 (CEST)
+Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
+ [IPv6:2607:f8b0:4864:20::42f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D89E8890B9
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 19:22:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 91179890E6
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 23:29:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=redhat.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ahalaney@redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1725988969;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=3vjwCmPpTkBKGqOEkdExm0tsKjHnk98SQK6nD9tYe0s=;
- b=UH0XaDN4EXYt8MrZxKmnU+wqwscaZAqs3p/8wAN/UDEIFOqHWouaDvW8pzCAjbOIgs2v96
- 2pwIlxYTMEBv38kzx5Vn4e2ASvjsmaJM8WqaZZ2OF58YZqpfhWZ4X5xSdUQOV+EjQym3vl
- 3i9P2VTkwXuV0laD+x3hdfrgWhrPt2k=
-Received: from mail-yw1-f197.google.com (mail-yw1-f197.google.com
- [209.85.128.197]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-134-Bzm9_2VxMrKIJUbemxiLqw-1; Tue, 10 Sep 2024 13:22:48 -0400
-X-MC-Unique: Bzm9_2VxMrKIJUbemxiLqw-1
-Received: by mail-yw1-f197.google.com with SMTP id
- 00721157ae682-69a0536b23aso171713667b3.3
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 10:22:47 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-71781f42f75so4805440b3a.1
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 14:29:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1726003761; x=1726608561; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=eqhQ7+97u802hsw1JTp1oQ5xU6runJQCJDbmjPjrxb0=;
+ b=Wi0tiTVnfcVq9KeCbr/V12U3XuZmQco2t0VOkZScJYIyH7UEGD0jougFw/7JLsghdJ
+ PydLYVETETW6gMX9GD7PgGQ20aJREXqHB/AY6u4QyLxdU+UrHAimnbUr+TfH5j32TV7J
+ IgsEKqZxhx7piXcjlUgm1lmVTA6hliftCd5Po05KgaS5W+2e4qt0hshd3nY+JDeqoAey
+ rvNKNsCv0qpCX8iD7oRpqXeDmvhr5j3kV7Cwu5ay+pnJf9g6q6PWg2TJvEWT9kfeVBkh
+ divQySMA4uJMogbYZuUC+wKpkZBUVsT9NoaePuL48YX9JQJnklRHUUnL1ful3TAXfpVz
+ Hd4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725988967; x=1726593767;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3vjwCmPpTkBKGqOEkdExm0tsKjHnk98SQK6nD9tYe0s=;
- b=iyzMCWt6lcW4f+/IkJhO30x378eR7z6EXjM8S2O/kku7HIeaoAnAS0zQKEMzAQESuI
- uCDVdLb4QLacj83Bkl+cgTrK2wNdcqG3kjj6j8nFE86wi1Xhtj74GKHlyjoxN7foKpjQ
- FVvQxApXZVM2+MsZq5XqD5QAfxsJMVZMeJ85Fc9GnBOydkGWWtXqXsCA8l2FzUcnH63j
- ewZO186GF3CifQam1yQJRM2EB2+Y5gHRop8boN3tJeE18x1CYeKFT7S2fPdn36e/hS1C
- O1NidXNfM2iYWAlt+G2qUyicHi+E1g2EfhxTFENn7GamaEBBr1QXKIMuPk6cfIGhRPg2
- Vm1w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUJkfSxpxawGwlkviMuDEmqXWrZq/vZ+Ca4aIArVWY24ialcwdhdGn/LUkD7hwgD6+fvigpI5s=@lists.denx.de
-X-Gm-Message-State: AOJu0YwN28shu5GT3ntR8ZfZHqwryAxgpZfxcPVgijK9mM3gJ1r9ned2
- UoB/sFJG6sBykAiqd/9/rmmryQGfaY4/JZkI2RWJ2TFu3CS5CBVs9t7Fd7pwyOwCen5CXqX8MCg
- a3UQ2PJiMtluKjgExBeOvDOGCzZkvuMzczk2Xsuh738IIyxsrjU8=
-X-Received: by 2002:a05:690c:93:b0:650:858c:9b9c with SMTP id
- 00721157ae682-6db45154302mr142923037b3.29.1725988967245; 
- Tue, 10 Sep 2024 10:22:47 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHx3XWfh+9OzNFekXP792T5XrWK6szcgBwMqxM6D7Mi8KyaSfJmES+LOTTzU4KJuq2NJoXtlA==
-X-Received: by 2002:a05:690c:93:b0:650:858c:9b9c with SMTP id
- 00721157ae682-6db45154302mr142922777b3.29.1725988966922; 
- Tue, 10 Sep 2024 10:22:46 -0700 (PDT)
-Received: from x1gen2nano ([2600:1700:1ff0:d0e0::33])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7a9a7967dbcsm324397685a.40.2024.09.10.10.22.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Sep 2024 10:22:46 -0700 (PDT)
-Date: Tue, 10 Sep 2024 12:22:44 -0500
-From: Andrew Halaney <ahalaney@redhat.com>
-To: "Kumar, Udit" <u-kumar1@ti.com>
-Cc: Apurva Nandan <a-nandan@ti.com>, Tom Rini <trini@konsulko.com>, 
- Keerthy <j-keerthy@ti.com>, Neha Malcom Francis <n-francis@ti.com>, 
- Eric Chanudet <echanude@redhat.com>, Enric Balletbo <eballetb@redhat.com>,
- j-humphreys@ti.com, Nishanth Menon <nm@ti.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH RFC/RFT 2/3] board: ti: j784s4: Initialize the ESM & PMIC
- ESM
-Message-ID: <5xm64cbmev3egme4xx4n2mgeryn2hhs37ckoiuinveelbx433n@unhnob5wpfnx>
-References: <20240906-j784s4-esm-enable-v1-0-b83b17d5a744@redhat.com>
- <20240906-j784s4-esm-enable-v1-2-b83b17d5a744@redhat.com>
- <2fdfcb29-f6d1-4e30-960d-f1d500fb1cf6@ti.com>
+ d=1e100.net; s=20230601; t=1726003761; x=1726608561;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=eqhQ7+97u802hsw1JTp1oQ5xU6runJQCJDbmjPjrxb0=;
+ b=pc5oUrCcDXjTwkwGlUKaNmRXPYkYINcmsGtejd4gqi8FZI+KfDTt0HOofUq47IHZzC
+ lbyQuI77iIRBvZmyZp76hcmqcEaB29vdFvuUKGYFZ+RF/uIcFLpC7PVtNjcGPTY5T6fC
+ tRdfSUZooakMGSESM0QEa/hRQZeTB7FvCjbB3wRZEoglL6oC120JqXGRgI4IB9c5MYnH
+ 8k/A4iSTN1jbUhYJWvJPLi+9c/YDEj/4I9oXKr9mnD1V/JnxQrE48MQhNtVuQwMNvzbu
+ vxaKwzD3xkEgxsluiylFIjg1Yf1eTdGfwkvzOysRIbCpFhwyOG+7PJigIpWfyHSfbsGe
+ 1CLQ==
+X-Gm-Message-State: AOJu0YycdNmNoQfc/+NhXYdsn7uhb7RmvDOZAsPl09THpuYCLRdts7v6
+ 4mpcQpkgzDIBOBv2NvZDwXO7vQ8KcIgyAhZWPJy5+a/HiASWmK23AkIi2EVh/iha4atjgbfwmqH
+ OtXNo1+Rskqxb9t3AjbyOZzlFZve52A39yFjwnQ==
+X-Google-Smtp-Source: AGHT+IHH6TUQ5gl/uv2zFuDoEyVGBKbwHJfjti+j1f306uG+zuQk2yvbhipDgzW962lxCh00aG6zoI4RUPDtV7QJLwY=
+X-Received: by 2002:a05:6a00:148a:b0:70d:2e24:af75 with SMTP id
+ d2e1a72fcca58-718d5f06932mr24475484b3a.24.1726003760730; Tue, 10 Sep 2024
+ 14:29:20 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <2fdfcb29-f6d1-4e30-960d-f1d500fb1cf6@ti.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-X-Mailman-Approved-At: Tue, 10 Sep 2024 22:43:11 +0200
+References: <20240816214436.1877263-1-raymond.mao@linaro.org>
+ <CAFLszTiRy3dkrTVnkV-H=CcCxJH6W5=RBM9tokOiSN-AVXGywA@mail.gmail.com>
+ <CAEfUkU++=WbmePTa_JwPkn6VoG0C+Y=U7SebXmNhcLyPTbKrZQ@mail.gmail.com>
+ <CAFLszTh56FrvLaHvat6Oz97EVzw9xYmQr+WyDNtYE=c2qmyJ5w@mail.gmail.com>
+ <CAEfUkU+iXQVBTmTc3A4HUEFdm2NapoqzQefOamczRkkhPsa0Bw@mail.gmail.com>
+ <CAFLszThct-czdZcBr-pjco9+ewtYtPJMvKtWf6vJb5n2s=9=gg@mail.gmail.com>
+In-Reply-To: <CAFLszThct-czdZcBr-pjco9+ewtYtPJMvKtWf6vJb5n2s=9=gg@mail.gmail.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Tue, 10 Sep 2024 17:29:08 -0400
+Message-ID: <CAEfUkUJ1karN9=-DbswLAkdG+PavmCDi1+TNk7AKfQVniB_6nA@mail.gmail.com>
+Subject: Re: [PATCH v6 00/28] Integrate MbedTLS v3.6 LTS with U-Boot
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, manish.pandey2@arm.com, 
+ Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
+ Mario Six <mario.six@gdsys.cc>, 
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Andrew Davis <afd@ti.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Sumit Garg <sumit.garg@linaro.org>, 
+ Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>, 
+ "Leon M. Busch-George" <leon@georgemail.eu>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Alexander Gendin <agendin@matrox.com>, Jonathan Humphreys <j-humphreys@ti.com>,
+ Eddie James <eajames@linux.ibm.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,102 +112,192 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Sep 07, 2024 at 11:12:05AM GMT, Kumar, Udit wrote:
-> Hi Andrew,
-> 
-> On 9/7/2024 2:54 AM, Andrew Halaney wrote:
-> > From: Keerthy <j-keerthy@ti.com>
-> > 
-> > Initialize the ESM & PMIC ESM. This allows things like
-> > the watchdog to reset the board when tripped.
-> > 
-> > Signed-off-by: Keerthy <j-keerthy@ti.com>
-> > Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
-> > Link: https://git.ti.com/cgit/ti-u-boot/ti-u-boot/commit/board/ti/j784s4/evm.c?h=ti-u-boot-2024.04&id=9d8b40958ce792808bc571d828197dbc2e7978d6
-> > [halaney: add a line to the commit message, include header]
-> > Signed-off-by: Andrew Halaney <ahalaney@redhat.com>
-> > ---
-> >   board/ti/j784s4/evm.c | 28 ++++++++++++++++++++++++++++
-> >   1 file changed, 28 insertions(+)
-> > 
-> > diff --git a/board/ti/j784s4/evm.c b/board/ti/j784s4/evm.c
-> > index 548dbd5925d..a0ef3a44536 100644
-> > --- a/board/ti/j784s4/evm.c
-> > +++ b/board/ti/j784s4/evm.c
-> > @@ -7,6 +7,7 @@
-> >    *
-> >    */
-> > +#include <dm.h>
-> >   #include <efi_loader.h>
-> >   #include <init.h>
-> >   #include <spl.h>
-> > @@ -72,4 +73,31 @@ int board_late_init(void)
-> >   void spl_board_init(void)
-> >   {
-> > +	struct udevice *dev;
-> > +	int ret;
-> > +
-> > +	if (IS_ENABLED(CONFIG_ESM_K3)) {
-> > +		ret = uclass_get_device_by_name(UCLASS_MISC, "esm@700000",
-> > +						&dev);
-> > +		if (ret)
-> > +			printf("MISC init for esm@700000 failed: %d\n", ret);
-> > +
-> > +		ret = uclass_get_device_by_name(UCLASS_MISC, "esm@40800000",
-> > +						&dev);
-> > +		if (ret)
-> > +			printf("MISC init for esm@40800000 failed: %d\n", ret);
-> > +
-> > +		ret = uclass_get_device_by_name(UCLASS_MISC, "esm@42080000",
-> > +						&dev);
-> > +		if (ret)
-> > +			printf("MISC init for esm@42080000 failed: %d\n", ret);
-> > +	}
-> 
-> Thanks for patch ,
-> 
-> IMO, if one of esm is failing then we can skip other esm probe,
-> 
-> > +
-> > +	if (IS_ENABLED(CONFIG_ESM_PMIC)) {
-> > +		ret = uclass_get_device_by_driver(UCLASS_MISC,
-> > +						  DM_DRIVER_GET(pmic_esm),
-> > +						  &dev);
-> 
-> Same here if esm probe is successful then only we should probe pmic_esm.
-> 
-> Reason is , if any of probe is failing functionality will not work and
-> 
-> there is no point to probe devices, if function is not working.
+Hi Simon,
 
-Any preference on how this is handled? I was going to do something like:
+On Tue, 10 Sept 2024 at 14:44, Simon Glass <sjg@chromium.org> wrote:
 
-	if (IS_ENABLED(CONFIG_ESM_K3)) {
-		ret = uclass_get_device_by_name(UCLASS_MISC, "esm@700000",
-						&dev);
-		if (ret) {
-			printf("MISC init for esm@700000 failed: %d\n", ret);
-			return;
-		}
+> Hi Raymond,
+>
+> On Fri, 6 Sept 2024 at 08:50, Raymond Mao <raymond.mao@linaro.org> wrote:
+> >
+> > Hi Simon,
+> >
+> > On Thu, 5 Sept 2024 at 20:43, Simon Glass <sjg@chromium.org> wrote:
+> >>
+> >> Hi Raymond,
+> >>
+> >> On Tue, 3 Sept 2024 at 08:59, Raymond Mao <raymond.mao@linaro.org>
+> wrote:
+> >> >
+> >> > Hi Simon,
+> >> >
+> >> > On Sat, 17 Aug 2024 at 11:58, Simon Glass <sjg@chromium.org> wrote:
+> >> >>
+> >> >> Hi Raymond,
+> >> >>
+> >> >> On Fri, 16 Aug 2024 at 15:44, Raymond Mao <raymond.mao@linaro.org>
+> wrote:
+> >> >> >
+> >> >> > Integrate MbedTLS v3.6 LTS (currently v3.6.0) with U-Boot.
+> >> >> >
+> >> >> > Motivations:
+> >> >> > ------------
+> >> >> >
+> >> >> > 1. MbedTLS is well maintained with LTS versions.
+> >> >> > 2. LWIP is integrated with MbedTLS and easily to enable HTTPS.
+> >> >> > 3. MbedTLS recently switched license back to GPLv2.
+> >> >> >
+> >> >> > Prerequisite:
+> >> >> > -------------
+> >> >> >
+> >> >> > This patch series requires mbedtls git repo to be added as a
+> >> >> > subtree to the main U-Boot repo via:
+> >> >> >     $ git subtree add --prefix lib/mbedtls/external/mbedtls \
+> >> >> >           https://github.com/Mbed-TLS/mbedtls.git \
+> >> >> >           v3.6.0 --squash
+> >> >> > Moreover, due to the Windows-style files from mbedtls git repo,
+> >> >> > we need to convert the CRLF endings to LF and do a commit manually:
+> >> >> >     $ git add --renormalize .
+> >> >> >     $ git commit
+> >> >> >
+> >> >> > New Kconfig options:
+> >> >> > --------------------
+> >> >> >
+> >> >> > `MBEDTLS_LIB` is for MbedTLS general switch.
+> >> >> > `MBEDTLS_LIB_CRYPTO` is for replacing original digest and crypto
+> libs with
+> >> >> > MbedTLS.
+> >> >> > `MBEDTLS_LIB_X509` is for replacing original X509, PKCS7, MSCode,
+> ASN1,
+> >> >> > and Pubkey parser with MbedTLS.
+> >> >> > `LEGACY_CRYPTO` is introduced as a main switch for legacy crypto
+> library.
+> >> >> > `LEGACY_CRYPTO_BASIC` is for the basic crypto functionalities and
+> >> >> > `LEGACY_CRYPTO_CERT` is for the certificate related
+> functionalities.
+> >> >> > For each of the algorithm, a pair of `<alg>_LEGACY` and
+> `<alg>_MBEDTLS`
+> >> >> > Kconfig options are introduced. Meanwhile, `SPL_` Kconfig options
+> are
+> >> >> > introduced.
+> >> >> >
+> >> >> > In this patch set, MBEDTLS_LIB, MBEDTLS_LIB_CRYPTO and
+> MBEDTLS_LIB_X509
+> >> >> > are by default enabled in qemu_arm64_defconfig and
+> sandbox_defconfig
+> >> >> > for testing purpose.
+> >> >> >
+> >> >> > Patches for external MbedTLS project:
+> >> >> > -------------------------------------
+> >> >> >
+> >> >> > Since U-Boot uses Microsoft Authentication Code to verify PE/COFFs
+> >> >> > executables which is not supported by MbedTLS at the moment,
+> >> >> > addtional patches for MbedTLS are created to adapt with the EFI
+> loader:
+> >> >> > 1. Decoding of Microsoft Authentication Code.
+> >> >> > 2. Decoding of PKCS#9 Authenticate Attributes.
+> >> >> > 3. Extending MbedTLS PKCS#7 lib to support multiple signer's
+> certificates.
+> >> >> > 4. MbedTLS native test suites for PKCS#7 signer's info.
+> >> >> >
+> >> >> > All above 4 patches (tagged with `mbedtls/external`) are submitted
+> to
+> >> >> > MbedTLS project and being reviewed, eventually they should be part
+> of
+> >> >> > MbedTLS LTS release.
+> >> >> > But before that, please merge them into U-Boot, otherwise the
+> building
+> >> >> > will be broken when MBEDTLS_LIB_X509 is enabled.
+> >> >> >
+> >> >> > See below PR link for the reference:
+> >> >> > https://github.com/Mbed-TLS/mbedtls/pull/9001
+> >> >> >
+> >> >> > Miscellaneous:
+> >> >> > --------------
+> >> >> >
+> >> >> > Optimized MbedTLS library size by tailoring the config file
+> >> >> > and disabling all unnecessary features for EFI loader.
+> >> >> > From v2, original libs (rsa, asn1_decoder, rsa_helper, md5, sha1,
+> sha256,
+> >> >> > sha512) are completely replaced when MbedTLS is enabled.
+> >> >> > From v3, the size-growth is slightly reduced by refactoring Hash
+> functions.
+> >> >> > From v6, smaller implementations for SHA256 and SHA512 are enabled
+> and
+> >> >> > target size reduce significantly.
+> >> >> > Target(QEMU arm64) size-growth when enabling MbedTLS:
+> >> >> > v1: 6.03%
+> >> >> > v2: 4.66%
+> >> >> > v3 - v5: 4.55%
+> >> >> > v6: 2.90%
+> >> >> >
+> >> >> > Please see the latest output from buildman for size-growth on QEMU
+> arm64,
+> >> >> > Sandbox and Nanopi A64. [1]
+> >> >> >
+> >> >> > Tests done:
+> >> >> > -----------
+> >> >> >
+> >> >> > EFI Secure Boot test (EFI variables loading and verifying, EFI
+> signed image
+> >> >> > verifying and booting) via U-Boot console.
+> >> >> > EFI Secure Boot and Capsule sandbox test passed.
+> >> >> >
+> >> >> > Known issues:
+> >> >> > -------------
+> >> >> >
+> >> >> > None.
+> >> >>
+> >> >> I wonder if we could leave out the SHA stuff? The algorithms are
+> >> >> stable and this would seem to avoid much of the size growth, and all
+> >> >> the pain of trying to integrate another yet another hashing layer (we
+> >> >> already have normal, progressive and h/w acceleration, plus
+> >> >> UCLASS_HASH which h/w acceleration should use but that migration
+> never
+> >> >> happened). I struggle to see any benefit in replacing U-Boot's very
+> >> >> solid hashing infra with something else, particularly as this series
+> >> >> adds yet another. Better to invest the time to refactor it. I asked
+> >> >> about this before and was told that it would happen 'later'. Let's
+> >> >> just not change it at all, then it is more likely someone will sort
+> it
+> >> >> out.
+> >> >>
+> >> > Unfortunately, MbedTLS depends on its own digest layer. Unless we
+> patch MbedTLS
+> >> > to allow an external digest library from U-Boot ...
+> >>
+> >> Yes that sounds best. It looks like only a few call sites, so it
+> >> should be a matter of leaving out the MbedTLS code and adding some
+> >> static inlines.
+> >>
+> > Inspired by Ilias's reply to patch #7, though we can use the MbedTLS
+> hash alternative options,
+> > we still need to convert all U-Boot hash APIs to adapt to the MbedTLS
+> style.
+> > This will impact all callers in U-Boot and I don't think it worth to do,
+> at least now.
+>
+> Agreed.
+>
+> > As the first patch set to introduce MbedTLS to U-Boot with turning on
+> all necessary features,
+> > I think this patch set is in the best way with an overall consideration.
+>
+> I am not convinced, sorry. Can you update MbedTLS so that its hash
+> algo can be changed to call the U-Boot one? Then we can deal with
+> hardware acceleration, driver model and avoid yet another layer of
+> cruft in common/hash.c
+>
+> MbedTLS reserves an alternative interface for external algorithms but it
+requires to
+adapt all args to the ones of MbedTLS which means we have to modify all hash
+APIs we have in U-boot and doesn't make too much sense.
 
-		ret = uclass_get_device_by_name(UCLASS_MISC, "esm@40800000",
-						&dev);
-		...
-		if (IS_ENABLED(CONFIG_ESM_PMIC)) {
-			ret = uclass_get_device_by_driver(UCLASS_MISC,
-							  DM_DRIVER_GET(pmic_esm),
-							  &dev);
-			if (ret) {
-				printf("ESM PMIC init failed: %d\n", ret);
-				return;
-			}
-		}
-	}
+But I decided to drop patch #7, and then we won't have any changes in
+common/hash.c
+from v7.
 
-but wasn't sure if a err_esm label and goto would be more in line with
-what you imagined? Let me know otherwise I'll just submit this version
-tomorrow or so.
+[snip]
 
-Thanks,
-Andrew
-
+Regards,
+Raymond
