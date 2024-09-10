@@ -4,93 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E3FAECE564
-	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 09:22:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E533ECE582
+	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 09:22:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8839D88FC1;
+	by phobos.denx.de (Postfix) with ESMTP id DEC0988FB4;
 	Tue, 10 Sep 2024 11:20:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Q4ITwJzv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="j+9UEGv2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A1E7A88FB9; Tue, 10 Sep 2024 11:20:44 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id B47EF88FA8; Tue, 10 Sep 2024 11:20:44 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE02688F73
+ by phobos.denx.de (Postfix) with ESMTPS id C229888FA7
  for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 11:20:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-42ca6ba750eso21825755e9.0
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-42cacabd2e0so4606435e9.3
  for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 02:20:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1725960038; x=1726564838; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=5R77FTIvtPNu08lHr7vGlHnrY8zzK4MdH2DqP4QqLdQ=;
- b=Q4ITwJzv/E+LcDWtCkVgQaOR4GO4SUL5rWWmfq5ATfumJ12KVz1+0stK8uhhE30QU1
- Xq2k8NNKEjUWNN9l8h2OxCM291R1C2BNciYP0vwfE+5og6jGrupfvy0voNlYSsYwakPq
- b5Re3rYLWFLUFzlYd6i1k/rg8pXjEDOG9CZRcnVlpNTi4OYagxdllAqOkfJ+ecEI/RxK
- 9R9bwQpdXPlrquHyA5rVSuf6TQd980ApT2INHVjlMCWXtVaZ/RCboBpXJsXZ8uWs15ON
- kYRpBNR+E5YTn+S5iTOgztsge+rif79VXzuKggh0Ii8bSatWy/1WSD9wycrXErNEJF53
- tlNQ==
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9u3PCEu/NZJFHjelnIq2+vYbYZRLd2Pa1R6lxzoheII=;
+ b=j+9UEGv2JAe2sVjldkOhEsi/sGsFhI2eRfvpGdSm2D8fx/ZmKyQqkyapDWyKeAGVZq
+ BO6IwYr0ES3acX3mUw+atAgzJmXsVNi9cypYHarX4FHzvXFEbSjeJ+Yr3D1oCASCyWCj
+ 6WZ74LRXpxIPBC9HQ/ymjCuCJdkPE9IelWNDGRN18egyx2lxE1KJ2WrpEvm6Atpfp8cJ
+ BZxtrVeS0EXQtWQyPDNp6K6JRlxCP6f8btCkSzdUYJKyiUoAUwFP3ypOa9wkkQlkq2Jm
+ bRhmPV0BStq1wrtHQZghWt+WMpvpIds+XWBwktlIXqMDYknXBehZ1myYCJDhqbMi8krr
+ 03BQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1725960038; x=1726564838;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=5R77FTIvtPNu08lHr7vGlHnrY8zzK4MdH2DqP4QqLdQ=;
- b=W69NTPkOELB7OEIT/3YEhVIPqB4wROOUmqZ+ntO/UB7FkVsy3LjCT6yfjIqaEP6Ylk
- Ibz9gbYO+EBq8RyGBq9gZ/1F0i8pBdQ2cn+TdlMy+g8WvcIYXA/D11YXCos7+lHN+tyR
- fZbkLjMKPpoX8mQtO3khCHSeFRpWQW0zcMRq2LMAljojZp+5fbYiA+xelw5w8tZ3mOXL
- ZD6LmNFkueAfJXE73P9BljxBRqyfAsAAqwcUH7lBX91YSdBmxDHidkKssCYEaSaE5Y6v
- EDS8TfKAjaxc9Wh4auLcppE+P6iq5EOfYYWXXgnM6/EBTWssDIwd9wgrfobsPoBVigFj
- a1cg==
-X-Gm-Message-State: AOJu0YyoNRHhDncYqcTf1vrNnBLAxAgpEkOavKs+msTgMEnXlt5dCrAY
- Vl3ItHvPD/rO05RivwfYkgJTN9jVGITkOh9d7TaJMgVrwy86lPJ6zwbA68jX/Ek=
-X-Google-Smtp-Source: AGHT+IEBvVe/puofqkx6sxa26WEIyjLtFDg6XaacrzLz9XpMtG2Zui9jayy02bzK54V9wSaqgDETIg==
-X-Received: by 2002:a05:600c:4f08:b0:42c:b54c:a6d7 with SMTP id
- 5b1f17b1804b1-42cbde1a7b6mr13899315e9.14.1725960038071; 
- Tue, 10 Sep 2024 02:20:38 -0700 (PDT)
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9u3PCEu/NZJFHjelnIq2+vYbYZRLd2Pa1R6lxzoheII=;
+ b=MfMwbNoPgcxaPkMKT/wduNvvGLUV+Fo4sWGpP6FNnLWrrpDzjud3Ljjyf0+zCA8VUB
+ N6QCUxfKbUx2uQanbFTYjDy2nNNVOAZrSXnCzb8fBqNfEvIDKtMgUIZrsUAMW9i80PNt
+ 9Q9YfpwUIqWMfPBk0ueGfSYm9UB0TqdvCZaJMyBmiaMdQYXaZhr9Oia/6q26pquWtXzr
+ dliJ6SmuOVKMRi0E87ghMFob9hKvzLRFTzftHP/XaqNmXZfRBmYrGxHH13GAtZs4VmlY
+ Jo5l7/H6/Hcpza6zJ44bOsWoasCb3hqbBUyKhxVaecCEp6tmxB2uQvlcdnlf81CAieRr
+ TtAw==
+X-Gm-Message-State: AOJu0YzQWdLSsYFcRmtdmBjM9orJa20+JSFwwpOmYS8r6JM/TraakQZ8
+ ONTGuBOUL8Z7FMETLfocqwCLRVt6O8Flg++eb0+mYQ+BAClQEQ/uz4I9jSO45RW4KqN4lwyl+/j
+ 9
+X-Google-Smtp-Source: AGHT+IFK33aFwOp8jaswXaDmrlYtJe6uG5wDiZTiN0HIUgLFYFxxvvXhZpBl4leVI+yUOB7NDK79bQ==
+X-Received: by 2002:a05:600c:4452:b0:42b:a9b4:3f59 with SMTP id
+ 5b1f17b1804b1-42c9f984b58mr113192715e9.14.1725960028294; 
+ Tue, 10 Sep 2024 02:20:28 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42cb099acf6sm101256245e9.9.2024.09.10.02.20.37
+ 5b1f17b1804b1-42cb099acf6sm101256245e9.9.2024.09.10.02.20.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Sep 2024 02:20:37 -0700 (PDT)
+ Tue, 10 Sep 2024 02:20:27 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Tue, 10 Sep 2024 11:20:29 +0200
-Subject: [PATCH 12/13] ufs: core: remove link_startup_again logic
+Subject: [PATCH 00/13] ufs: enhancements to support Qualcomm UFS
+ controllers
+Date: Tue, 10 Sep 2024 11:20:17 +0200
+Message-Id: <20240910-topic-ufs-enhancements-v1-0-3ee0bffacc64@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240910-topic-ufs-enhancements-v1-12-3ee0bffacc64@linaro.org>
-References: <20240910-topic-ufs-enhancements-v1-0-3ee0bffacc64@linaro.org>
-In-Reply-To: <20240910-topic-ufs-enhancements-v1-0-3ee0bffacc64@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAFEP4GYC/x2MOwqAMBAFryJbuxA/hfEqYiHxRbcwSlZFCN7dY
+ DkwM4kUUaDUF4kiblHZQ4aqLMitU1jAMmem2tStsZXhcz/E8eWVEbLgsCGcyh4dvHVo7NxRjo8
+ IL88/Hsb3/QDs8eWpaAAAAA==
 To: Tom Rini <trini@konsulko.com>, Bhupesh Sharma <bhupesh.linux@gmail.com>, 
  Neha Malcom Francis <n-francis@ti.com>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
- Neil Armstrong <neil.armstrong@linaro.org>
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Bhupesh Sharma <bhupesh.linux@gmail.com>
 X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1234;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1964;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=NrIM0ZBahJTnOEZXBhlRGdNy6U8dDMrbIU2LDji0hxk=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBm4A9aUhOolvgxKvpxtsAo2w+OO3eef2gtQ1ljlzB6
- r6BIojGJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZuAPWgAKCRB33NvayMhJ0XH2D/
- 0fV7p0ujSUyT3mzPtmxDpVu6QuvyvQGjaQ7ImIn71kpU5DLhSbYw4yovTa+0Aa6V1e97yXJ7f6TehB
- VWbPGSDbqYcAydyo+Wsjjt0u4GcwQHYgWJsslZkLNM7xtb2pEznhBOlx0/OrbCKfAPlYwVtSSf1lb+
- sbik85E5WhXb7KMXczlmtf/d8L+22F8kkwhj+HP5xj5XvuK3zdyUH4WDbBZgvLw1TAx9XKOGkFmStQ
- InWZteD2pv5TPPHz1DdKyk4Nl2h0bBCucResnkmEI7IAcwhCmGgT2zFZRcw8UAsvfTB0f3yej3lAjn
- T/JbATTSd+MOXK/9ebm65kQQL0mWN3nQJ4v6fyxs6sz3fW4A3DleoG8OMk4+afQRb3GxNoKzzoXAaM
- W3Z+UQxAcllTpjTO+ro7hmD14tIdNtQPKQUjTnpawwp6fMxHgzyJUQXq1iizbn4krCY6oJtTZah+eI
- zrQGlmLMjc2D/v/juZdl4YbLbKUjFXxS4ZVzg/dp6dW5LIqtcU3cnT3wzD+D+u2YUBaG1UWnEupjJ4
- 7JQpf5oCWnkMREPgpVQTzETUmdh19+pw5M7yghSJ/FTd+1P/1OHmDNpL3qY4zhO+4ZzzgaCpQus91V
- K/woFGvfKbOcQ2y6rGbNGWzCEYS7tYZo9Gnr5cX9hwBit1oIvktFxVXr0U0Q==
+ bh=mPnpePlnNVOPaKDy2fp8mPI1jzQuFdMEplQUqfLDiP0=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBm4A9Vw4odvhjQfmIVfR/WaQpoCbTljbDJ9ruZoyaI
+ 5SOSo86JAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZuAPVQAKCRB33NvayMhJ0S5aD/
+ oDmmH+YTgXRbxrqtUg1CvCJ4vlRH6XgQWVZjAQb/lgOeVb1NZTaZyRXoe8ye25Vh+wai5ESfjheIeE
+ j7ynwXRv1YbC8Twrwe/IOhVFlSUgHyp/64DqaWbB6zAXkEqroJ82QUw9VhrTTnVM9C7rt8R8/ZUdgc
+ avmPfStokfyT/V6XG6hLt5Zm9WaYkVSqXaz+IkH72vJ7Z2XS7PBykZ4gvY+NqEIxB6JNQh/wTEC0cb
+ kQWlH198/vdkLQKZmAdqjGFKH7rpjZtJ0x5BdsRiu9DPPsO41oafgVQd2FJzNUDDcXd4yGcLIVhrk8
+ eQBudDhP1+WIhxFVIzbm8sNJO+Tf0peLaqvZ6oLQZdj7tY0CX98OlQsFZsPCRLv5RWlm/AlXv0wksn
+ GDq/bxa+9CK8m3dIfaM5d0xjQcW2NX843MB5M8pp/8CuQZwy/0b89Va0ENdt9mQc9dRKIbGSqNY2xB
+ KG80sQCpGthd8VN1WUWdPNUPn3SnF2E/g1Ezk8Ye20md1MznMzneIWD9U+vWajkLYEalOURiBvPCsv
+ eUZYOvctfv1mrD/FW2/jNwsb0k8+OYiLR46xo+E2K7Itt8FlkGegK+Z6eJYe2byjAl4+QorOrGimdE
+ izxAI4VQiZspnhIvylgJ1baIFOlftWTcrDgKSFRK9u3hjM6QXBTJ8a1n4qGg==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
@@ -109,47 +114,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The link_startup_again logic was added in Linux to handle device
-that were set in LinkDown state, which should not be the case since U-boot
-doesn't set LinkDown state are init, and Linux sets the device active
-in ufshcd_init() for the first link startup.
+This serie regroups all the fixes and base enhancements required to
+support the Qualcomm UFS controllers in U-Boot.
 
-While it worked to far, it breaks link startup for Qualcomm Controllers v5,
-let's just remove the logic.
+This syncs headers & defines from Linux, and includes 2 set of
+fixes that were sent separately:
+- ufs: core: remove link_startup_again logic
+- ufs: properly fix cache operations
+
+Without those 2 sets, UFS cannot initialize on Qualcomm controlers
+since v5, and a numerous of Cache issues makes any UFS controller
+fail to initialize.
+
+Since UFS core hasn't changed for a while, and since UFS is core
+technology for the Qualcomm SoCs, I volunteer maintaininig the
+UFS subsystem if Bhupesh & Neha Malcom Francis are ok with that.
 
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- drivers/ufs/ufs.c | 8 --------
- 1 file changed, 8 deletions(-)
+Bhupesh Sharma (5):
+      ufs/ufs.h: Add definition of 'ufshcd_rmwl()'
+      ufs: Clear UECPA once due to LINERESET has happened during LINK_STARTUP
+      ufs: Sync possible UFS Quirks with Linux UFS driver
+      ufs: Add missing memory barriers
+      ufs: Fix debug message in 'ufs_start'
 
-diff --git a/drivers/ufs/ufs.c b/drivers/ufs/ufs.c
-index d2df5c26f76..e34e4586224 100644
---- a/drivers/ufs/ufs.c
-+++ b/drivers/ufs/ufs.c
-@@ -462,9 +462,7 @@ static int ufshcd_link_startup(struct ufs_hba *hba)
- {
- 	int ret;
- 	int retries = DME_LINKSTARTUP_RETRIES;
--	bool link_startup_again = true;
- 
--link_startup:
- 	do {
- 		ufshcd_ops_link_startup_notify(hba, PRE_CHANGE);
- 
-@@ -490,12 +488,6 @@ link_startup:
- 		/* failed to get the link up... retire */
- 		goto out;
- 
--	if (link_startup_again) {
--		link_startup_again = false;
--		retries = DME_LINKSTARTUP_RETRIES;
--		goto link_startup;
--	}
--
- 	/* Mark that link is up in PWM-G1, 1-lane, SLOW-AUTO mode */
- 	ufshcd_init_pwr_info(hba);
- 
+Marek Vasut (2):
+      ufs: Add UFSHCD_QUIRK_BROKEN_64BIT_ADDRESS
+      ufs: Add UFSHCD_QUIRK_HIBERN_FASTAUTO
 
+Neil Armstrong (6):
+      ufs: allocate descriptors with size aligned with DMA_MINALIGN
+      ufs: fix dcache flush and invalidate range calculation
+      ufs: split flush and invalidate to only invalidate when required
+      ufs: use dcache helpers for scsi_cmd data and only invalidate if necessary
+      ufs: core: remove link_startup_again logic
+      MAINTAINERS: Add myself to the list of UFS maintainers
+
+ MAINTAINERS       |   1 +
+ drivers/ufs/ufs.c |  98 ++++++++++++++++++++--------------
+ drivers/ufs/ufs.h | 157 +++++++++++++++++++++++++++++++++++++++++++++++-------
+ 3 files changed, 197 insertions(+), 59 deletions(-)
+---
+base-commit: ca55cf8104c0dd78aae45fa66dd8400ef1b3d0ac
+change-id: 20240910-topic-ufs-enhancements-fe8ef9ce39d8
+
+Best regards,
 -- 
-2.34.1
+Neil Armstrong <neil.armstrong@linaro.org>
 
