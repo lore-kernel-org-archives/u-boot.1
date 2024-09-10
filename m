@@ -4,56 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 735C3ECE564
-	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 12:57:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 178CEECE564
+	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 12:58:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7C84890B1;
-	Tue, 10 Sep 2024 14:56:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id BE296890BC;
+	Tue, 10 Sep 2024 14:56:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="ZhljU6VI";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="DPQZ7vqE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D418088F71; Tue, 10 Sep 2024 11:16:27 +0200 (CEST)
-Received: from relay1-d.mail.gandi.net (relay1-d.mail.gandi.net
- [IPv6:2001:4b98:dc4:8::221])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 52E0489069; Tue, 10 Sep 2024 14:36:16 +0200 (CEST)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EFD6B88F6F
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 11:16:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B7FF488C94
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 14:36:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=none dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bastien.curutchet@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPA id 97DD0240004;
- Tue, 10 Sep 2024 09:16:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1725959778;
+ spf=pass smtp.mailfrom=ahalaney@redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1725971772;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=dtNGLU35uHqRhtq2T6AsPJ/PHc3n6SHvQJud6Vas9vs=;
- b=ZhljU6VI2N81DnEDiwXgP19dx+yBzAKCKHQmAMMq1x2SX1tue81ms7yh+q9WDDCZlVGxvk
- hqn2GNywdEds5eo02/7D6BbZrTl4jW2hKP/sgjIkbji2Mqrj0ehuwmiw2gWbCY5IGJSckl
- ng756Bb0WNYKw8AkS9U3XVo92D9bMw+hCe44PMm1oxsL++BVxRi2acfplZ8QF8+xQCQ0Ua
- FGTMrvMmcyzWAv9i/QlXfibhaeluMiiRpXy0HWTUh5Kp1hFjt4vxSY9v+Xk8U8wYMVnC6S
- ZdoTbBso4xBi12jh8uW/BfbzXBjGqGh2XgWdYjUfXK9E0JK5NDn5pOOgnIeVUg==
-From: Bastien Curutchet <bastien.curutchet@bootlin.com>
-To: Jagan Teki <jagan@amarulasolutions.com>,
-	Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Herve Codina <herve.codina@bootlin.com>,
- Christopher Cordahi <christophercordahi@nanometrics.ca>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>
-Subject: [PATCH] spi: davinci: Drop the preload of TX buffer before
- read/writes operations
-Date: Tue, 10 Sep 2024 11:16:16 +0200
-Message-ID: <20240910091616.61047-1-bastien.curutchet@bootlin.com>
-X-Mailer: git-send-email 2.46.0
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=mvKsVNsnMiSVMGhRrwbVyM+c4Eh6gk/39Vaw7SCvWgU=;
+ b=DPQZ7vqESOjA90opxXxN9wO824DzRdLbM64tZRVthpZ3nIQOP6QOiX9cebKXP4TUUNWfHm
+ R76n0NT+g0DFP16DQp8MnSgG+oiMwRqIga1oSo2hJvD10DNEcA96OgHIz3oFJrfiwq0Bau
+ xSd1Ol+FG1kj0G2cXnrf3ehOw6MZzCc=
+Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
+ [209.85.219.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-203-Rotr-QPzO3-PiuivU00U6g-1; Tue, 10 Sep 2024 08:36:11 -0400
+X-MC-Unique: Rotr-QPzO3-PiuivU00U6g-1
+Received: by mail-qv1-f71.google.com with SMTP id
+ 6a1803df08f44-6c366f8b1ebso126392616d6.1
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 05:36:11 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725971770; x=1726576570;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mvKsVNsnMiSVMGhRrwbVyM+c4Eh6gk/39Vaw7SCvWgU=;
+ b=A3JAEEtgVcG4Sts2Z05MrooLsemsPZvqg5o82dMwAjq4GhacSZO+afucNkgpi7biyh
+ v8puC6PHPGZoUUqowissFa0XaBg3WB0beeDRV4n9pisgHYfbglK3mx80QylMcjuNh5Q+
+ gAgK2OQPusyiL2JukR3qMiptlrcbaWepoAhsjqXjnOR3geH3aUBIbeS7k+uEIcvYtLTh
+ BjRpivM+VdFWFJyGNuvKZ8DvJ4SUXU2HJe7jd/6sLhEecErrLV9Vq+hj44WroqY/hgvm
+ rK41F+4gXiWMryteywfj8mXNmu9jxtysq1E6aln8XINav7X4K7iexBCoOJ9fbUjz0Ygp
+ TrBw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXPj/dgOpiFO0L/hl+w1mtOkHd6C4Npl0zfgnCcQQYVBD1o5OgYjIp0+4tui6OzyeVB9cT3RmQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyq+cn1rzejYcY0/99qMqMjL+6NNfIfqQqvNrCOVAhmA+prKHXU
+ qXq+i01OpayLZTqOCu3Fw9qm7cOjsEWz7qWFMPq0a4xOn7MG2v2gcXgbkri9VGPx99erSjv/4Jh
+ bhJsU+QCwLBRXiZlRFv2Li/xlMp6P3bj1nzjdGrRxM9DuTR2TkZs=
+X-Received: by 2002:a05:6214:320a:b0:6c5:2335:3ec9 with SMTP id
+ 6a1803df08f44-6c554d69e59mr47966566d6.21.1725971770463; 
+ Tue, 10 Sep 2024 05:36:10 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFQmWfMVpn7l12SXUO0VDwaWjeK0Wpp25MUg+2gxiSXUdm4rFxS3uv2JNo0M83HtMX6t2Jcfw==
+X-Received: by 2002:a05:6214:320a:b0:6c5:2335:3ec9 with SMTP id
+ 6a1803df08f44-6c554d69e59mr47966186d6.21.1725971770092; 
+ Tue, 10 Sep 2024 05:36:10 -0700 (PDT)
+Received: from x1gen2nano ([2600:1700:1ff0:d0e0::33])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6c534774795sm29608046d6.115.2024.09.10.05.36.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 10 Sep 2024 05:36:09 -0700 (PDT)
+Date: Tue, 10 Sep 2024 07:36:07 -0500
+From: Andrew Halaney <ahalaney@redhat.com>
+To: "Kumar, Udit" <u-kumar1@ti.com>
+Cc: Apurva Nandan <a-nandan@ti.com>, Tom Rini <trini@konsulko.com>, 
+ Keerthy <j-keerthy@ti.com>, Neha Malcom Francis <n-francis@ti.com>, 
+ Eric Chanudet <echanude@redhat.com>, Enric Balletbo <eballetb@redhat.com>,
+ j-humphreys@ti.com, 
+ Nishanth Menon <nm@ti.com>, u-boot@lists.denx.de, Andrew Davis <afd@ti.com>
+Subject: Re: [PATCH RFC/RFT 0/3] k3-j784s4-r5-evm: Enable ESMs and related PMIC
+Message-ID: <zbj4zuhu2sn6bteabibim4rpleb2wskofcalz3elly7ufzkyl7@3hsj7g4r35ih>
+References: <20240906-j784s4-esm-enable-v1-0-b83b17d5a744@redhat.com>
+ <a47a1830-9c06-4b59-8b44-2c376503bf91@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-GND-Sasl: bastien.curutchet@bootlin.com
+In-Reply-To: <a47a1830-9c06-4b59-8b44-2c376503bf91@ti.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 X-Mailman-Approved-At: Tue, 10 Sep 2024 14:56:36 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -71,50 +107,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A write to the TX buffer is performed before entering the loop to "avoid
-clock starvation". This sometimes results in subsequent writes in
-davinci_spi_xfer_data() to occur while the TXFULL bit is asserted,
-leading to write failures.
+On Tue, Sep 10, 2024 at 04:21:32PM GMT, Kumar, Udit wrote:
+> Hi Andrew
+> 
+> On 9/7/2024 2:54 AM, Andrew Halaney wrote:
+> > This enables the ESMs and the associated PMIC. Programming these bits is
+> > a requirement to make the watchdog actually reset the board.
+> > 
+> > Note, this relies on the linked devicetree changes to land in Linux
+> > first and get synced here, otherwise the board will fail to boot!
+> > 
+> > I've tested this series (with the linked change) on the k3-j784s4-evm,
+> > but not its sibling the k3-am69-sk. I'd appreciate at a minimum someone
+> > to test on that platform to ensure this doesn't break boot.
+> 
+> 
+> For am69-sk, I need to add esm node on top of your patches
+> 
+> Also, as commented in Linux patch series, boothph is enough in one child
+> node
+> 
+> with these two changes , tested on AM69 for watchdog reset.
+> 
+> 
+> https://gist.github.com/uditkumarti/e5666b5623c3a78e23548fbfcbe813c8
+> 
+> upto line https://gist.github.com/uditkumarti/e5666b5623c3a78e23548fbfcbe813c8#file-gistfile1-txt-L28,
+> Patch added for test
+> 
+> Line https://gist.github.com/uditkumarti/e5666b5623c3a78e23548fbfcbe813c8#file-gistfile1-txt-L1385
+> to see watchdog reset action
+> 
 
-Remove the preload of the TX buffer.
+Thanks for much for testing, somehow I mentally foobared the existence
+of the am69 specific dts in u-boot :)
 
-Signed-off-by: Bastien Curutchet <bastien.curutchet@bootlin.com>
----
-Hi all,
+Let me incorporate all your changes and requests for v2 of this and the
+kernel side of things too!
 
-I've ran into write failures to flash on my platform based on the
-DAVINCI/OMAP L138. This patch fixes it.
-
- drivers/spi/davinci_spi.c | 9 ---------
- 1 file changed, 9 deletions(-)
-
-diff --git a/drivers/spi/davinci_spi.c b/drivers/spi/davinci_spi.c
-index 25f5e9fdeb..07c46b8b66 100644
---- a/drivers/spi/davinci_spi.c
-+++ b/drivers/spi/davinci_spi.c
-@@ -129,9 +129,6 @@ static int davinci_spi_read(struct davinci_spi_slave *ds, unsigned int len,
- 	while (readl(&ds->regs->buf) & SPIBUF_TXFULL_MASK)
- 		;
- 
--	/* preload the TX buffer to avoid clock starvation */
--	writel(data1_reg_val, &ds->regs->dat1);
--
- 	/* keep reading 1 byte until only 1 byte left */
- 	while ((len--) > 1)
- 		*rxp++ = davinci_spi_xfer_data(ds, data1_reg_val);
-@@ -159,12 +156,6 @@ static int davinci_spi_write(struct davinci_spi_slave *ds, unsigned int len,
- 	while (readl(&ds->regs->buf) & SPIBUF_TXFULL_MASK)
- 		;
- 
--	/* preload the TX buffer to avoid clock starvation */
--	if (len > 2) {
--		writel(data1_reg_val | *txp++, &ds->regs->dat1);
--		len--;
--	}
--
- 	/* keep writing 1 byte until only 1 byte left */
- 	while ((len--) > 1)
- 		davinci_spi_xfer_data(ds, data1_reg_val | *txp++);
--- 
-2.46.0
+Thanks,
+Andrew
 
