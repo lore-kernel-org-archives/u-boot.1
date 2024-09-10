@@ -4,82 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA01FECE582
-	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 08:27:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68626ECE582
+	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 08:43:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A6B68860D;
-	Tue, 10 Sep 2024 10:27:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id CAC7A88AE2;
+	Tue, 10 Sep 2024 10:43:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="puQ1pKsE";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LPwASn8S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F95A8843A; Tue, 10 Sep 2024 10:27:18 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id DEA4188F2E; Tue, 10 Sep 2024 10:43:37 +0200 (CEST)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77C848860D
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 10:27:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C9FCE88881
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 10:43:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-374c7e64b60so262859f8f.2
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 01:27:15 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-42cb5b3c57eso20354365e9.2
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 01:43:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1725956835; x=1726561635;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=V/GrDu6PXRVApt/gnVaFVv3O9vkAtwevi02JV32w52g=;
- b=puQ1pKsEOXVC+rKCUvsWky4A9SQ4yfCSgGp3mXdPhtfzw7/DGzCS+m/T+A8sw9qJhP
- JrCRIExyiR0bGOiJSU9TtUye4Xl28ShWNKsglQI7e/i19tiAp9bNmsotSJJ6JsJyAo3Y
- 3pDOvtorHlbJ6p4Js7rEiQhYhlIKEsLZsIlAmbctA7E5y3qfVnLFvhMZfugbI1ewZkdV
- 3OFI/ErfUyMyF4CGieZo3Qjbm7vydVDA1neYsrGpha/UrWr8rH8/SbjR4oY41WAhishT
- D2/OUyAkCl6b9e1eU6/+uPlfQOGq+Q58/Jj6KQedDki9BK3nmjknJdcPCmMAaN9mbJaj
- Fgbw==
+ d=linaro.org; s=google; t=1725957815; x=1726562615; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=HEcidVICuYspp6GSAy5Ohk5T1Ej4h0Hog3fVJFd8+RQ=;
+ b=LPwASn8SYrn6rC1OEeuQS/DnXJ4UaBWm97qI0k1CZW8NLXPKLH99QbHmpkNuTuPqJ6
+ VP9ih9YWKHWKi/HGPHHvuRZ1mGIKc/bno4dib2wHBqoG674Y3cPQo/ruTc9JRSvPw1KD
+ UHv2jAAFhvsU1zmMKQBaFI8gIvvErIk/cmf8f4ZZ44bAlSvfSQJ8QsHUspolE9NKuIdP
+ QpNXCEYDaDdSRdRHqYND4FIf0i6RYUV4wmEYHR9uGcp1Ap7IckT6zJmukUKbSyXo9nuM
+ +m1zUqwO8TuAMCGHwUBFFhmjUSRGEC0+767IVOEXX+JG8ezBnIE4kZNSd7x/LemYnVxI
+ W8Hg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725956835; x=1726561635;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=V/GrDu6PXRVApt/gnVaFVv3O9vkAtwevi02JV32w52g=;
- b=bgtjvUrK2kfaPlDnt18Sk9UHjUCjjQbry5G23o0nXtnQo8SMdSXaV9AxEv16KqOSkG
- T7QZbWO2fVqdqdgHwlCgDNojlNUCSgfL3mhLpJ4uCv+F+VfOn9Gx8y2sp2Owjqpb/fxx
- kQGIMA7zGQuOqGgEvK8Su4aYtf5uVrvKTBZDr0NTzkXOLz4FEJ/mpjSxv7tJnGtfAIRh
- mhuBDxJaEyvo0/zoG2eXSqCCG82nnRDJPJx6hCkoLzySzmflYa4LBm+ZNjdcYfi10Fm2
- XC7BFbFsA5AKoqOnDlmrDHB+wqyyfquz7nDQ9K16eqxXzKkeRGCvOz6waHflhTtOsQ15
- +alA==
-X-Gm-Message-State: AOJu0Yz3fjSAdePA8ET8KJrj/kO4WqxUlRLHeEUbHHMuXsA6wq6BbarC
- pE2OT0yXVVoFfLJx/GainXRxdHK7uBezyoHXbAi0qTZMph4ajnYG4qa+YJV/3kw=
-X-Google-Smtp-Source: AGHT+IE9Y50e2dH387f8RCWbV/0S4jsFByLnruWLaTQlpJPy2oE9yGHOBZNebdwdLq6kg6Snv/0Lzw==
-X-Received: by 2002:a5d:5185:0:b0:374:c911:7756 with SMTP id
- ffacd0b85a97d-378896a4873mr7553039f8f.38.1725956834105; 
- Tue, 10 Sep 2024 01:27:14 -0700 (PDT)
-Received: from mkorpershoek-xps13.carmes.etincelle-coworking.com
- ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3789564a16fsm8228471f8f.10.2024.09.10.01.27.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Sep 2024 01:27:13 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Linus Walleij <linus.walleij@linaro.org>, 
- Lukasz Majewski <lukma@denx.de>, Miquel Raynal <miquel.raynal@bootlin.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Nishanth Menon <nm@ti.com>, 
- Zixun LI <admin@hifiphile.com>
-In-Reply-To: <20240826143851.8020-1-marek.vasut+renesas@mailbox.org>
-References: <20240826143851.8020-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH 1/6] usb: gadget: Inline usb_add_gadget_udc_release
-Message-Id: <172595683295.66154.13022419207192728411.b4-ty@baylibre.com>
-Date: Tue, 10 Sep 2024 10:27:12 +0200
+ d=1e100.net; s=20230601; t=1725957815; x=1726562615;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=HEcidVICuYspp6GSAy5Ohk5T1Ej4h0Hog3fVJFd8+RQ=;
+ b=ljOytysyXgs4ginSGZ7wck5utsfshqkC6CgZDSkwYbTUKFd6hNqhyjG5mVnSlTlB/d
+ WaCtjJxYfEI/ZN0mOaQcUvi6k8DGn63y2Ew2psuScE332fTfa88jjfaQBGgCeJugnoJH
+ f6cxWC/HseZRaBmw+ZOjmUll1wDn72QdnWdwYl7WVszrB6NJN5Gase4KegKxpAQg3BZ/
+ tReoDci5rZpHJuH3HvGXwtTTl+ifExkF+sZogJqh88PjtcLrE4nz1XA+f1db9DENJLAD
+ 133o0RkBbZxaFf7gwjutBUzEjzg35qGWMxxLjqCWf23arrMznNvZXH/oXYdDnUcWN0sW
+ SzuA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX+9c8+MRyBG7WiEELTg5oVRWBatKoS+T3Cr7RFMCXh/LrZqZ8WFDEkPqiztRY2ntC6N2koyJ4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx6UE80KljI04QL9kod4AoDnlTUiwiUaU9E2W52QvpN/ZEUm1JA
+ SnyoON3RzpRu2IcT3luZSVxfox8Yj+lhfFPOek+H6Rz/yO4dOHp8caMu9vhTS9w=
+X-Google-Smtp-Source: AGHT+IGYzcRcYjDinR+lKolbE8jxk6JaEcAn7GZ09+An262uLVHJcuDu4hHYurV345a8ZuIHl4/+Sg==
+X-Received: by 2002:a5d:5e10:0:b0:378:8aaa:9cd6 with SMTP id
+ ffacd0b85a97d-3788aaa9d24mr7840241f8f.49.1725957814909; 
+ Tue, 10 Sep 2024 01:43:34 -0700 (PDT)
+Received: from [192.168.7.95] ([212.114.21.58])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-42caeb44887sm103716905e9.23.2024.09.10.01.43.34
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 10 Sep 2024 01:43:34 -0700 (PDT)
+Message-ID: <39b61a84-83fb-4fc4-9891-edc4660b5404@linaro.org>
+Date: Tue, 10 Sep 2024 10:43:33 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] spl: ram: fix build warning when neither RAM_DEVICE nor
+ DFU are enabled
+To: Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Michael Trimarchi <michael@amarulasolutions.com>
+References: <20240909132252.3975017-1-jerome.forissier@linaro.org>
+ <8022cc2e-bcc0-62f9-b00e-c830987967e7@gmail.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <8022cc2e-bcc0-62f9-b00e-c830987967e7@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,29 +99,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-On Mon, 26 Aug 2024 16:38:36 +0200, Marek Vasut wrote:
-> The release parameter of usb_add_gadget_udc_release() is never used.
-> The function is never called from anywhere except from a wrapper in
-> udc-core.c . Inline the function into the wrapper.
+
+On 9/10/24 04:20, Sean Anderson wrote:
+> On 9/9/24 09:22, Jerome Forissier wrote:
+>> Fixes the following warning:
+>>
+>> common/spl/spl_ram.c:19:14: warning: ‘spl_ram_load_read’ defined but not used [-Wunused-function]
+>>     19 | static ulong spl_ram_load_read(struct spl_load_info *load, ulong sector,
+>>        |              ^~~~~~~~~~~~~~~~~
 > 
+> Does this config even make sense? 
+
+I don't think so.
+
+> What is the point of enabling SPL_RAM_SUPPORT without one of the above configs?
+> 
+> Maybe we should make those configs select RAM_SUPPORT instead.
+
+Yes, and make SPL_RAM_SUPPORT an internal symbol so that it cannot be enabled
+on its own without SPL_DFU or SPL_RAM_DEVICE.
+Note that SPL_DFU already selects SPL_RAM_SUPPORT but SPL_RAM_DEVICE "depends on"
+it.
+
+If that sounds good to you I will post a new patch.
+
+> 
+>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+>> ---
+>>   common/spl/spl_ram.c | 3 +++
+>>   1 file changed, 3 insertions(+)
+>>
+>> diff --git a/common/spl/spl_ram.c b/common/spl/spl_ram.c
+>> index 71b7a8374bb..1a5874c3949 100644
+>> --- a/common/spl/spl_ram.c
+>> +++ b/common/spl/spl_ram.c
+>> @@ -16,6 +16,7 @@
+>>   #include <spl.h>
+>>   #include <linux/libfdt.h>
+>>   +#if CONFIG_IS_ENABLED(RAM_DEVICE) || CONFIG_IS_ENABLED(DFU)
+>>   static ulong spl_ram_load_read(struct spl_load_info *load, ulong sector,
+>>                      ulong count, void *buf)
+>>   {
+>> @@ -96,6 +97,8 @@ static int spl_ram_load_image(struct spl_image_info *spl_image,
+>>         return ret;
+>>   }
+>> +#endif
+>> +
+>>   #if CONFIG_IS_ENABLED(RAM_DEVICE)
+>>   SPL_LOAD_IMAGE_METHOD("RAM", 0, BOOT_DEVICE_RAM, spl_ram_load_image);
+>>   #endif
 > 
 
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu-next)
-
-[1/6] usb: gadget: Inline usb_add_gadget_udc_release
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/188b26ea92f86b527f39ab66b38771a13fd67c7a
-[2/6] usb: gadget: Drop usb_udc_release()
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/1ef703d73dbb5cf524045bdb34226a86b4ab0680
-[3/6] usb: gadget: Track driver data as part of struct usb_gadget
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/534a3e8c1a067daf31f290acfbafdd0c407d28ad
-[4/6] usb: gadget: Drop dev_to_usb_gadget()
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/1d030ba01de4ed7c2ae08301a00453c937df3cce
-[5/6] usb: gadget: dwc2: Drop get/set_udc_gadget_private_data()
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/a765f5d6b4982202a42905db27f609365a47852e
-[6/6] usb: gadget: Pass struct udevice to usb_add_gadget_udc()
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/75c142c73242d91b0ea9670d3b7b891216351749
-
---
-Mattijs
+Thanks,
+-- 
+Jerome
