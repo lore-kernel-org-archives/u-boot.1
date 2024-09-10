@@ -4,71 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82568ECE58B
-	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 22:39:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C08EECE58B
+	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 22:39:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D044C89155;
-	Wed, 11 Sep 2024 00:38:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 32CD38913B;
+	Wed, 11 Sep 2024 00:38:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EB9jsDCg";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ribEVSdx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA09C89143; Wed, 11 Sep 2024 00:38:45 +0200 (CEST)
-Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
- [IPv6:2607:f8b0:4864:20::82b])
+ id 6045D8914C; Wed, 11 Sep 2024 00:38:47 +0200 (CEST)
+Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
+ [IPv6:2607:f8b0:4864:20::72b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E478E89140
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 00:38:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F9EB8913B
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 00:38:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82b.google.com with SMTP id
- d75a77b69052e-45812fdcd0aso2885071cf.0
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 15:38:43 -0700 (PDT)
+Received: by mail-qk1-x72b.google.com with SMTP id
+ af79cd13be357-7a99e8ad977so368927885a.3
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 15:38:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1726007923; x=1726612723; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1726007924; x=1726612724; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Bt8XWnk9WEykKwuMHtRqMt5iPvEVIdR0JXDWJUWXm3k=;
- b=EB9jsDCgqM4jxBDjPIuAI48KApfL9hDavUNtTZ+GlQ9buyiOymbDq3lNmBWre3gMQU
- XcqudmUkfeFuRbf4C4Pbb1NHHYmrQM0etOWeQ8eXN2wWpB/NdpddB8h42QdCZWI8YpBo
- jn6Y0s0VZdGnZQBjmnpmx7SMDHSlCjT0kj7A8=
+ bh=hwy9im2XhTZKwkZNcD3dDpOZLh+CDYRQ/JnoglJQEV4=;
+ b=ribEVSdx6KXqML/TKtlUjVX6o/ANwsncmtM9GgW7m454+7MOdrkT8ai0X1QdQjNHHj
+ 1Fl6Tj1wuOHE8euaTGT4IBA9rOv8XfWsQvVuXQ3G62uHxPRwluVkRcA8jsdZltBAqNMJ
+ qyF5nNSxOW7ZoaRvPGX1Hzad+D5uaFnqFCjLw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726007923; x=1726612723;
+ d=1e100.net; s=20230601; t=1726007924; x=1726612724;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Bt8XWnk9WEykKwuMHtRqMt5iPvEVIdR0JXDWJUWXm3k=;
- b=EfUxyQjOP0U/DWmJpLgrQEnt2dFsQ+qR5P4a6y8tACmorik/31npcwb0pmnp4NgKAz
- t2NsJv4x/DxiGN/b42M+MZ+BBIFwnY0WwklENIxgDxctahrU0jBOIM6Lm5Id0Lz6+dCm
- S3J0B5UGb6mdwo/QysRuWmdi+GE+QoUp5qKUdwnp7tpjKtHYRYV/UE+Vy2G6wlnTSQR/
- wiAzM73Y2cAzSJ0pceDExPDYnAqem45LKZpyfsZE2g5gfGirEo0tP0KWSfnWZY1JAsGW
- 8TwvWRcNS4+AJ0dNRE+kwxvIJTt/hMtdzD7mEJhWqlRbKQJInl/hTj36uXqIOxBZDj9W
- zBRQ==
-X-Gm-Message-State: AOJu0YyVpKRg/6BJguDvi/qgM6u0bD6qqRNC0IXCBXqYO+zCHVI8rh2r
- sODLGpO49bHe4ylKvB7d3FBFf3lebFsVzJjDx82LMXgi092bqnx58TM7DDgYqfU=
-X-Google-Smtp-Source: AGHT+IEZgSRKd892ufEuvKPJapBKchPgz5Sq18rB/ZHG9sEYEBeMTzzBBDmRWPgTm4YvW6GeSai0RQ==
-X-Received: by 2002:ac8:5a49:0:b0:458:29ea:b3ba with SMTP id
- d75a77b69052e-4583c74a0d7mr87346391cf.15.1726007922751; 
- Tue, 10 Sep 2024 15:38:42 -0700 (PDT)
+ bh=hwy9im2XhTZKwkZNcD3dDpOZLh+CDYRQ/JnoglJQEV4=;
+ b=Q1bk/DUCtdC+eTpQVGHNGtwuGMO8BHWdf18tlorU0Lap9sR+1mWeOveDQy0SFqVG+W
+ OOkQ7kPcwT4Ng6ksfm+AckEYAdnwh+9WukP4ByBi0IeL38NkGglIFgN2MRJ9UbJj7la8
+ oouTUpl6F8J6skUDtx9GR6S+CFhhK6GFB3/0HZ1mSziM0bCA3e38t5Qxdd1WNKYcD+qs
+ eD03O+uLbi40EIi0tPSCayo4t1YLszjmpgrBcLsb0Hu1+vyhkFlG0/CbJPPLDHI05L9A
+ bk8NQTN437uscWMjM7eFlCLsDL031ap5BuTI0/aqVZzce5YTF08vYpXfYNjXDLxqc9+I
+ XwTw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXfladax4NwKtdLF3nD4R6PDoTmucvV8iGwhN9xOec+6tYE6rSZfB8Thks2r6GDyHvcL3yO7fk=@lists.denx.de
+X-Gm-Message-State: AOJu0YzjNkiK7mF2bYRXbgA9IXw/vMySrLN+jhi92Gz0F09Z74qL8PIa
+ Mu5pHVEiRoh3s43axC5b4n8vG0h9HGuApbEqG+fUlFDjwP7vkUi09eV2Z8c6A1Gvg2LN6sEGE0c
+ CGpM=
+X-Google-Smtp-Source: AGHT+IGU4iyMzCVMV5C4g+b6I74tDJbQ2aBJLKmyWj4S1BaWcffkhdd69LYI3SjoNbBxhDBGjPqAaQ==
+X-Received: by 2002:a05:620a:4610:b0:7a6:68fc:ac5f with SMTP id
+ af79cd13be357-7a9a38ebc06mr1719311785a.44.1726007924057; 
+ Tue, 10 Sep 2024 15:38:44 -0700 (PDT)
 Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-45822e63873sm34009611cf.7.2024.09.10.15.38.41
+ d75a77b69052e-45822e63873sm34009611cf.7.2024.09.10.15.38.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Sep 2024 15:38:42 -0700 (PDT)
+ Tue, 10 Sep 2024 15:38:43 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Daniel Palmer <daniel@0x0f.com>
-Cc: sjg@chromium.org
-In-Reply-To: <20240831031706.2654697-1-daniel@0x0f.com>
-References: <20240831031706.2654697-1-daniel@0x0f.com>
-Subject: Re: [PATCH] spl: spl_load: fix comparison between negative error
- code and unsigned size
-Message-Id: <172600792174.367866.17571688175691835944.b4-ty@konsulko.com>
-Date: Tue, 10 Sep 2024 16:38:41 -0600
+To: w.egorov@phytec.de, joe.hershberger@ni.com, u-boot@lists.denx.de, 
+ Daniel Schultz <d.schultz@phytec.de>
+Cc: upstream@lists.phytec.de
+In-Reply-To: <20240830090940.2592157-1-d.schultz@phytec.de>
+References: <20240830090940.2592157-1-d.schultz@phytec.de>
+Subject: Re: [PATCH 00/13] phycore-am62/4: Add more boot sources
+Message-Id: <172600792288.367866.12307630100869051671.b4-ty@konsulko.com>
+Date: Tue, 10 Sep 2024 16:38:42 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -89,16 +92,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 31 Aug 2024 12:17:06 +0900, Daniel Palmer wrote:
+On Fri, 30 Aug 2024 02:09:27 -0700, Daniel Schultz wrote:
 
-> read could be a negative error value but size in spl_image is unsigned
-> so when they are compared read is used as if it's a unsigned value
-> and if it's negative it'll most likely be bigger than size and the
-> result will be true and _spl_load() will return 0 to the caller.
+> This patch stack extends the phyCORE-AM62x/AM64x U-Boot by following boot
+> sources:
 > 
-> This results in the caller to _spl_load() not seeing that an error happened
-> as it should and continuing as if the load was completed when it might
-> not have been.
+>   - Load U-Boot with USB DFU
+>   - Load a Linux and initramfs from OSPI/QSPI NOR flash
+>   - Load a Linux and rootfs from Network
 > 
 > [...]
 
