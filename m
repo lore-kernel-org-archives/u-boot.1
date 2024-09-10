@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A776AECE582
-	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 10:14:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0848FEB64DE
+	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 10:14:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F02389006;
-	Tue, 10 Sep 2024 12:14:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 63B3F89008;
+	Tue, 10 Sep 2024 12:14:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="hOAYHZdA";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="Ifk0qSWv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 979FF8900E; Tue, 10 Sep 2024 12:14:01 +0200 (CEST)
+ id D156588F65; Tue, 10 Sep 2024 12:14:04 +0200 (CEST)
 Received: from relay1-d.mail.gandi.net (relay1-d.mail.gandi.net
  [217.70.183.193])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 231F58900F
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 12:13:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AF4BE89009
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 12:13:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 56CF2240012;
- Tue, 10 Sep 2024 10:13:48 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 87DF3240002;
+ Tue, 10 Sep 2024 10:13:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1725963228;
+ t=1725963225;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=ifguc/q40qj9lXGFr56iCN5Qs72SMF6TtydG8r21acY=;
- b=hOAYHZdARDweu8E0fXCjEHsiu05BikhQBdwP8RDL/umo4BFSvVPJUqWJir1yclg+xqMQEx
- rezwz9e9jhQlY3Jbe3uQHevn7oFAp1f8b/hLV53ttM6ZjrZ8LebkStAeH1m23p54d1AZYi
- QGXEUxg7TwTE7jW4o/58/NhozQcP9HeNzxUQRB5Ii1e0iGJyhis0zFDsLV2d4476QY7/70
- 705sI3Ja7EJpZ/p5TdRxDSq9z0OtBQ0NINf5JQFbaR6lysvW/+LSUHNPSYjkujQRtLMdD3
- k4mggDxZ2fYfZ4MB0uKwXiBxv5U/Q9Ev3wSkYdvk8Yrf8OwwI55Q9cqPldQLoQ==
+ bh=fhzAhXCOa7WqpZhZQfRbfN0Hk/c0ij+peVQ5eiOmA8s=;
+ b=Ifk0qSWvPG8zfyhXKYFajxtcNaWE8kMrd0om/E7XOkboFkeT9162xvt08+P1m2crTVy5X/
+ 9CUGrPJ25x4eTOIvojp8LqQeADo9Yn3dlO5PjMQusv7/YnWWT+BVIddG8MXWUOBb7miG3f
+ kWFP7R812lfP/B8IKxlO7FsliTGaQopVC7OljIBPCrWQv268E8oLQFcLIbaNjRC1AQOm0U
+ KitFvyaaTp87UW8xjdkkEAtYTkoN/tePl9toVjBqhBQRm5Ro9vlSL6+zo7D0dbVSRs7Eni
+ KCzrSf5R0s5UpMjTnZWhP+ZbBlT5sLvCCxQeXMG4Up+j4PRyTjPAO1/OQiTUEw==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
@@ -47,10 +47,10 @@ To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
 Cc: <u-boot@lists.denx.de>, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
  Ian Ray <ian.ray@gehealthcare.com>, Marek Vasut <marek.vasut@gmail.com>,
  Miquel Raynal <miquel.raynal@bootlin.com>
-Subject: [PATCH 6/8] video: imx: Fix Makefile in order to be able to add other
- imx drivers
-Date: Tue, 10 Sep 2024 12:13:42 +0200
-Message-ID: <20240910101344.110633-7-miquel.raynal@bootlin.com>
+Subject: [PATCH 1/8] dm: core: Add a helper to retrieve devices through graph
+ endpoints
+Date: Tue, 10 Sep 2024 12:13:37 +0200
+Message-ID: <20240910101344.110633-2-miquel.raynal@bootlin.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240910101344.110633-1-miquel.raynal@bootlin.com>
 References: <20240910101344.110633-1-miquel.raynal@bootlin.com>
@@ -73,40 +73,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The IPUv3 is one IP part of the imx world, there are others, and
-selecting the whole imx/ folder based on such a specific Kconfig symbol
-is sub-optimal. Let's always enter the imx/ folder, and then selectively
-compile parts of the folder based on the configuration.
+There are already several helpers to find a udevice based on its
+position in a device tree, like getting a child or a node pointed by a
+phandle, but there was no support for graph endpoints, which are very
+common in display pipelines.
+
+Add a new helper, named uclass_get_device_by_endpoint() which enters the
+child graph reprensentation, looks for a specific port, then follows the
+remote endpoint, and finally retrieves the first parent of the given
+uclass_id.
+
+This is a very handy and straightforward way to get a bridge or a panel
+handle.
 
 Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
 ---
- drivers/video/Makefile     | 2 +-
- drivers/video/imx/Makefile | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ drivers/core/uclass.c | 62 +++++++++++++++++++++++++++++++++++++++++++
+ include/dm/uclass.h   | 21 +++++++++++++++
+ 2 files changed, 83 insertions(+)
 
-diff --git a/drivers/video/Makefile b/drivers/video/Makefile
-index f3f70cd04a1..20854b7081e 100644
---- a/drivers/video/Makefile
-+++ b/drivers/video/Makefile
-@@ -52,7 +52,7 @@ obj-$(CONFIG_VIDEO_COREBOOT) += coreboot.o
- obj-$(CONFIG_VIDEO_DW_HDMI) += dw_hdmi.o
- obj-$(CONFIG_VIDEO_DW_MIPI_DSI) += dw_mipi_dsi.o
- obj-$(CONFIG_VIDEO_EFI) += efi.o
--obj-$(CONFIG_VIDEO_IPUV3) += imx/
-+obj-y += imx/
- obj-$(CONFIG_VIDEO_IVYBRIDGE_IGD) += ivybridge_igd.o
- obj-$(CONFIG_VIDEO_LCD_ANX9804) += anx9804.o
- obj-$(CONFIG_VIDEO_LCD_ENDEAVORU) += endeavoru-panel.o
-diff --git a/drivers/video/imx/Makefile b/drivers/video/imx/Makefile
-index 179ea651fe8..46cc44d64b0 100644
---- a/drivers/video/imx/Makefile
-+++ b/drivers/video/imx/Makefile
-@@ -3,4 +3,4 @@
- # (C) Copyright 2000-2007
- # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+diff --git a/drivers/core/uclass.c b/drivers/core/uclass.c
+index e46d5717aa6..5803fd51986 100644
+--- a/drivers/core/uclass.c
++++ b/drivers/core/uclass.c
+@@ -572,6 +572,68 @@ int uclass_get_device_by_phandle(enum uclass_id id, struct udevice *parent,
+ 	ret = uclass_find_device_by_phandle(id, parent, name, &dev);
+ 	return uclass_get_device_tail(dev, ret, devp);
+ }
++
++int uclass_get_device_by_endpoint(enum uclass_id class_id, struct udevice *dev,
++				  u32 ep_idx, struct udevice **devp)
++{
++	ofnode port = ofnode_null(), ep, remote_ep;
++	struct udevice **target;
++	u32 remote_phandle;
++	int ret;
++
++	if (!ep_idx)
++		port = dev_read_subnode(dev, "port");
++
++	if (!ofnode_valid(port)) {
++		char port_name[32];
++
++		port = dev_read_subnode(dev, "ports");
++		if (!ofnode_valid(port)) {
++			debug("%s: no 'port'/'ports' subnode\n",
++			      dev_read_name(dev));
++			return -EINVAL;
++		}
++
++		snprintf(port_name, sizeof(port_name), "port@%x", ep_idx);
++		port = ofnode_find_subnode(port, port_name);
++		if (!ofnode_valid(port)) {
++			debug("%s: no 'port@%x' subnode\n",
++			      dev_read_name(dev), ep_idx);
++			return -EINVAL;
++		}
++	}
++
++	ep = ofnode_find_subnode(port, "endpoint");
++	if (!ofnode_valid(ep)) {
++		debug("%s: no 'endpoint' in %s subnode\n",
++		      ofnode_get_name(port), dev_read_name(dev));
++		return -EINVAL;
++	}
++
++	ret = ofnode_read_u32(ep, "remote-endpoint", &remote_phandle);
++	if (ret)
++		return ret;
++
++	remote_ep = ofnode_get_by_phandle(remote_phandle);
++	if (!ofnode_valid(remote_ep))
++		return -EINVAL;
++
++	while (ofnode_valid(remote_ep)) {
++		remote_ep = ofnode_get_parent(remote_ep);
++		debug("trying subnode: %s\n", ofnode_get_name(remote_ep));
++		if (!ofnode_valid(remote_ep)) {
++			debug("%s: no more remote devices\n",
++			      ofnode_get_name(remote_ep));
++			return -EINVAL;
++		}
++
++		ret = uclass_find_device_by_ofnode(class_id, remote_ep, target);
++		if (!ret)
++			break;
++	};
++
++	return uclass_get_device_tail(*target, ret, devp);
++}
+ #endif
  
--obj-y += mxc_ipuv3_fb.o ipu_common.o ipu_disp.o
-+obj-$(CONFIG_VIDEO_IPUV3) += mxc_ipuv3_fb.o ipu_common.o ipu_disp.o
+ /*
+diff --git a/include/dm/uclass.h b/include/dm/uclass.h
+index 456eef7f2f3..1194174ca9b 100644
+--- a/include/dm/uclass.h
++++ b/include/dm/uclass.h
+@@ -333,6 +333,27 @@ int uclass_get_device_by_phandle(enum uclass_id id, struct udevice *parent,
+ int uclass_get_device_by_driver(enum uclass_id id, const struct driver *drv,
+ 				struct udevice **devp);
+ 
++/**
++ * uclass_get_device_by_endpoint() - Get a uclass device for a remote endpoint
++ *
++ * This searches through the parents of the specified remote endpoint
++ * for the first device matching the uclass. Said otherwise, this helper
++ * goes through the graph (endpoint) representation and searches for
++ * matching devices. Endpoints can be subnodes of the "port" node or
++ * subnodes of ports identified with a reg property, themselves in a
++ * "ports" container.
++ *
++ * The device is probed to activate it ready for use.
++ *
++ * @class_id: uclass ID to look up
++ * @dev: Device to start from
++ * @ep_idx: Index of the endpoint to follow, 0 if there is none.
++ * @target: Returns pointer to the first device matching the expected uclass.
++ * Return: 0 if OK, -ve on error
++ */
++int uclass_get_device_by_endpoint(enum uclass_id class_id, struct udevice *dev,
++				  u32 ep_idx, struct udevice **target);
++
+ /**
+  * uclass_first_device() - Get the first device in a uclass
+  *
 -- 
 2.43.0
 
