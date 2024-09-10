@@ -4,133 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF381EDE99D
-	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 15:44:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE87BEDE99A
+	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 16:01:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0DF77889CD;
-	Tue, 10 Sep 2024 17:44:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 314BC89037;
+	Tue, 10 Sep 2024 18:01:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=devpi.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="pZsGRHUC";
+	dkim=pass (2048-bit key; unprotected) header.d=devpi.de header.i=@devpi.de header.b="fyP11ChA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D921D889CD; Tue, 10 Sep 2024 17:44:23 +0200 (CEST)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on2060e.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2416::60e])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 6A01888F3B; Tue, 10 Sep 2024 18:01:48 +0200 (CEST)
+Received: from smtp052.goneo.de (smtp5.goneo.de [IPv6:2001:1640:5::8:30])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C65BB88B27
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 17:44:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EE6F88891E
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 18:01:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=none (p=none dis=none) header.from=devpi.de
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Prasad.Kummari@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZI7RiS1ht7kUCb5B06TI6U0fNZdli+0UGQ5DjQ7CEOcTq/NUvQclC0QH4/t2HRI0IJ8d7N/tZZhcX62ugeao8hEdgUzs4WASmimBpPpSPifh0TAH+ztDYRslzGp1EeMgY/N/BcIiEYwDZsh8W/1Zhycmr6SZ99Ay9sf4H42DstxoWEw4ZjBAIr9CPvdH8p4184Tn/IQBD0YOUpkfbNyKLdLcmDZvavq9LmcqncUuC5U/NmwVf/j4e19NHRUq/Ig+3ytsW6S1ajr60vHNtASXRmm5HAm9fLtjQGlMgVKT0zYFeE3GInwgBaTczXhr+nLl0WPO9oGRCyKeE4zo+zgnrA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=N1bCh1dBfydwpsLHA3TMu4qqHYMwopdJRbHG/tm9OsY=;
- b=y+Db7MsCuK99mfOyNzKy5iRxAJx3yu/HQpwoeli0XPyDiM4/Blfdd470Omgbjt/KoQXy3KN70sZ9QOBVjZMiMube0azbLxNetVoMkkR14/HKqL2zoJ8XbHwPwgZDXBB0K6yPKMnK1hfeKHh+yAgmKoS7tEfVjowluE68pw/HfyMNYOy6IUfV2K0aQL3YwxhoNSP9eVJaMO9+WtZ0n2Zb31+0ExagwQOSQoV4Lvga2qWaxK34YOTczpaESc7wb78HfSLsJ1nslkzh0sv9mMdaspGcIKXFAiaTOcHXQjUnwydvgkAun+C1D3FIgnYV9irxru/iiFqbPhUvnqXTXlb9CQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=N1bCh1dBfydwpsLHA3TMu4qqHYMwopdJRbHG/tm9OsY=;
- b=pZsGRHUC37u80PTLB+MgRvuAb4Pb+OuiRM/bNPVt5e9qTIAtpdrK3pKF/2vwQ/vQ+iYxXdPk5awndZ3nqurwMXWWSbl29Es8GNx+vDrt4ojSUdsVaiJWY60JByaP9Ijqf2dRgKiT/FKd6U5NnlW+Hyw2iu1uOE/xDUc5xmEyxJA=
-Received: from BN9PR03CA0275.namprd03.prod.outlook.com (2603:10b6:408:f5::10)
- by MW4PR12MB6753.namprd12.prod.outlook.com (2603:10b6:303:1ec::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7939.20; Tue, 10 Sep
- 2024 15:44:14 +0000
-Received: from BN1PEPF00006003.namprd05.prod.outlook.com
- (2603:10b6:408:f5:cafe::f6) by BN9PR03CA0275.outlook.office365.com
- (2603:10b6:408:f5::10) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7939.24 via Frontend
- Transport; Tue, 10 Sep 2024 15:44:14 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- BN1PEPF00006003.mail.protection.outlook.com (10.167.243.235) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7918.13 via Frontend Transport; Tue, 10 Sep 2024 15:44:14 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 10 Sep
- 2024 10:44:13 -0500
-Received: from xhdkummari40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Tue, 10 Sep 2024 10:44:10 -0500
-From: Prasad Kummari <prasad.kummari@amd.com>
-To: <u-boot@lists.denx.de>, <git@amd.com>
-CC: <michal.simek@amd.com>, <venkatesh.abbarapu@amd.com>,
- <padmarao.begari@amd.com>, <git@xilinx.com>, <jagan@amarulasolutions.com>,
- <n-francis@ti.com>, <d-gole@ti.com>, Prasad Kummari <prasad.kummari@amd.com>
-Subject: [PATCH v3] cmd: sf: prevent overwriting the reserved memory
-Date: Tue, 10 Sep 2024 21:13:45 +0530
-Message-ID: <20240910154344.1837906-2-prasad.kummari@amd.com>
-X-Mailer: git-send-email 2.44.1
+ spf=pass smtp.mailfrom=lehmanju@devpi.de
+Received: from hub1.goneo.de (hub1.goneo.de [85.220.129.52])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
+ (No client certificate requested)
+ by smtp5.goneo.de (Postfix) with ESMTPS id 3485A240E42;
+ Tue, 10 Sep 2024 18:01:40 +0200 (CEST)
+Received: from hub1.goneo.de (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
+ (No client certificate requested)
+ by hub1.goneo.de (Postfix) with ESMTPS id 4EEFB2405B9;
+ Tue, 10 Sep 2024 18:01:38 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=devpi.de; s=DKIM001;
+ t=1725984098;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=bIqKVmk1kQfczBnWTtVqbTWEdIu6pjiwkVs5bJYfuwo=;
+ b=fyP11ChAHSRDtifYkgUS54i6M7ncIkf3kTcENY8u6GVdAYvgnZxUu/m8bPo3nX2YXlnrZL
+ YpuhTe5jt+uDjvFG4B63cJ5SagenxK4re7mnKZ7DeF8bKVkb2pCfml2tO7YIEf8dqkzPj7
+ p67LR4PSRfRw0BduCZupDUlMDGLlCNAtk2/3SZ0Ef6CnCZolgCuaCrs0t+b99eJlLUCUZA
+ x6mO3c/YUjKOq0sGS91h1uFtsFGN49srmJL2SWetNhIGwYAJxNZNXVOyMrcsNNtdojuCwd
+ OqKnFnUslcluyLuR2hWdAgVOdmHOhFziqhJLidWxq/x6Pw0iZAh3ea0L95bujg==
+Received: from [IPV6:2003:cb:ef06:9810::193]
+ (p200300cbef0698100000000000000193.dip0.t-ipconnect.de
+ [IPv6:2003:cb:ef06:9810::193])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by hub1.goneo.de (Postfix) with ESMTPSA id D11E2240B07;
+ Tue, 10 Sep 2024 18:01:37 +0200 (CEST)
+Message-ID: <fd96e94f-2325-4d5b-b427-7911f79fc36a@devpi.de>
+Date: Tue, 10 Sep 2024 18:01:37 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/3] pinctrl: qcom: add driver for SM8150 SoC
+To: neil.armstrong@linaro.org, Caleb Connolly <caleb.connolly@linaro.org>,
+ u-boot@lists.denx.de
+Cc: Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+ Robert Marko <robert.marko@sartura.hr>, Sumit Garg <sumit.garg@linaro.org>,
+ Tom Rini <trini@konsulko.com>, u-boot-qcom@groups.io
+References: <20240909155315.307026-1-lehmanju@devpi.de>
+ <20240909155315.307026-3-lehmanju@devpi.de>
+ <cd9da433-312c-4267-a26a-0d55f2093373@linaro.org>
+ <b22f8910-1278-4bd2-9d4c-1a494936f459@linaro.org>
+Content-Language: en-US
+From: Julius Lehmann <lehmanju@devpi.de>
+In-Reply-To: <b22f8910-1278-4bd2-9d4c-1a494936f459@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB03.amd.com: prasad.kummari@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN1PEPF00006003:EE_|MW4PR12MB6753:EE_
-X-MS-Office365-Filtering-Correlation-Id: dcacf581-69ee-4fa9-6e22-08dcd1af6c0e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|36860700013|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?h7iCK3PXehWV85f9eXtDmEHB/4Gbl2AU+nPDKLlXiD9FKnPticBCJYtSwcuE?=
- =?us-ascii?Q?jsAGc274Laok0MxeGgjNCq4oYzLHx5iXuR3oqrnsI1f7HYAp9PZLWnIdIpJ5?=
- =?us-ascii?Q?SJcTJ+d6KknXGIbK0vmRgreQQ02C07Xbn0lWxbyk5j7gF+kWVQXm6XxnEGkK?=
- =?us-ascii?Q?vJRHfZqW8aRCg89Yx0/DnrLqvoOmnCO5LSx5MTlR4QxI73m+F4YMjMTgMuc+?=
- =?us-ascii?Q?aN2agzJMzmjFL8j7U4pDJ5diCWcGpAgiNY1ft2iT4zoTKwmZmipz5i1UisqL?=
- =?us-ascii?Q?l+SQwUfEhHmSm/IFnGybBQwPnH+S90lBLR0FFJcmXwcoKS7p0rwcUhMb9MsZ?=
- =?us-ascii?Q?8K42eIck/g+E23doTozIgSFswRrEzKh8mdlC4ipPiSUd98kmXJTJQ4LvcXVV?=
- =?us-ascii?Q?IRGhlp/9R+6K7ZbprC5hn4WZyCfaxBLwA1SJmhPqeWT5F8g3CwR4LfiHMUaf?=
- =?us-ascii?Q?B+JfqPaQCAaF2SHCfZwBwB/rE3+l2kyJ02um2uU1GaNUxGuItszyBs2B5kiz?=
- =?us-ascii?Q?Crcz4Wwd1ZrvJjQ3u9MiFKj7QEbZdN33TlUv7flywcJk3j29g4O7V5rgwnpn?=
- =?us-ascii?Q?LXG+VJ4v04D/E5ui0qL6yvt+KLWLHLBnpzXLL5mLos9uKSRkkmTCplnTtfr1?=
- =?us-ascii?Q?zO9FJv1bNI6HEARh/ybrRFWFiP6xpUA8ye1BerFe3uQnxyc1+DqSinSu1xSa?=
- =?us-ascii?Q?O2LrkJblPie9j5CHAJyubCuO4pc2q/1Gl+mqiIk+ZbI9GdduUpBGWNIS7jQZ?=
- =?us-ascii?Q?zAUTyZ8iGPTSg9tfHAJRZBEVhusTTtJKFHqr5t00xHCKBFiSDP79d5PJ+Xqk?=
- =?us-ascii?Q?hYg5DqB343Hmq3dDCQzmFAOdOp1rsEWjtRv48CK61evQ3+1eJXE286fSC181?=
- =?us-ascii?Q?/kdaHqdFEj4+MX4HsFkjCD0dYtb1tZVMWln6UvGy9E27FLLFwpnwBaKwKQ59?=
- =?us-ascii?Q?2crztR10v2/jv8DLX/bST0WtRFD9MkQ2PVLk+sD6Dh/YgIU5rnrwosaB6Hbw?=
- =?us-ascii?Q?PPIhIDpeDGcSEw2lmn52oIr8fPAJBPHCS/NEwRYKd78r7DISAHoAMtmv2BhC?=
- =?us-ascii?Q?dv9X53PC2KioV/FLf0KqrWaYTEIYNB7unPfoK3WneNrkGEngaxs5CKYC1mbZ?=
- =?us-ascii?Q?HFVly8iWVrfoIci8EPGR8Rq9mMF2g0l+Y129znwxIF1dc+cSq5K5Xk8Yrf0T?=
- =?us-ascii?Q?xqt+uk0VVZ0OhHLESNSvREUuMQuWS8K4l6fUE0hloLecPKFWCYiFKLYWfjXQ?=
- =?us-ascii?Q?wWLLoOyAAzzk/qHwq0E0yJjTH90PkM+BOwC+U5I9QzzoM54QYkCjX0DgbCjp?=
- =?us-ascii?Q?bpJGqU16TkESpv7wEyM/P6VFV6rhQ02sTXRQ137L/eg2nbLBT8sD4r7PHeOH?=
- =?us-ascii?Q?w7xup9En8RaDrGIUlJDYx2k5V1g2588uJwwgj0344yFSsR+kdZy7G/d7cV3/?=
- =?us-ascii?Q?f6+1aDz367+vZAScGt3aseiL8r+h97zB?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Sep 2024 15:44:14.0416 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: dcacf581-69ee-4fa9-6e22-08dcd1af6c0e
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF00006003.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB6753
+X-Rspamd-UID: ec0727
+X-Rspamd-UID: ed2950
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -147,121 +94,209 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Added LMB API to prevent SF command from overwriting reserved
-memory areas. The current SPI code does not use LMB APIs for
-loading data into memory addresses. To resolve this, LMB APIs
-were added to check the load address of an SF command and ensure it
-does not overwrite reserved memory addresses. Similar checks are
-used in TFTP, serial load, and boot code to prevent overwriting
-reserved memory.
+Hi Neil and Caleb,
 
-Signed-off-by: Prasad Kummari <prasad.kummari@amd.com>
----
+thank you for taking a look at my patch.
 
-Changes in V3:
-- Removed lmb_init_and_reserve() as part of latest LMB series.
-- Error message moved to one place.
-- lmb_alloc_addr() is not required because the given memory address is
-  being checked to ensure it is free or not. 
+On 10.09.24 14:07, Neil Armstrong wrote:
+> On 10/09/2024 14:05, Caleb Connolly wrote:
+>> Hi Julius,
+>>
+>> Thanks for the patch!
+>>
+>> On 09/09/2024 17:53, Julius Lehmann wrote:
+>>> Add pinctrl and GPIO driver for SM8150. Driver code is based on the
+>>> similar U-Boot drivers. All constants are taken from the corresponding
+>>> Linux driver. This drivers differs from the similar U-Boot drivers,
+>>> because SM8150 SoC have different function IDs for the same functions
+>>> on different pins.
+>>>
+>>> Co-authored-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+>>> Signed-off-by: Julius Lehmann <lehmanju@devpi.de>
+>>> ---
+>>>
+>>>   drivers/pinctrl/qcom/Kconfig          |   8 ++
+>>>   drivers/pinctrl/qcom/Makefile         |   1 +
+>>>   drivers/pinctrl/qcom/pinctrl-sm8150.c | 119 
+>>> ++++++++++++++++++++++++++
+>>>   3 files changed, 128 insertions(+)
+>>>   create mode 100644 drivers/pinctrl/qcom/pinctrl-sm8150.c
+>>>
+>>> diff --git a/drivers/pinctrl/qcom/Kconfig 
+>>> b/drivers/pinctrl/qcom/Kconfig
+>>> index b326fa8514..501939f783 100644
+>>> --- a/drivers/pinctrl/qcom/Kconfig
+>>> +++ b/drivers/pinctrl/qcom/Kconfig
+>>> @@ -74,6 +74,14 @@ config PINCTRL_QCOM_SM8650
+>>>       select PINCTRL_QCOM
+>>>       help
+>>>         Say Y here to enable support for pinctrl on the Snapdragon 
+>>> SM8650 SoC,
+>>> +      as well as the associated GPIO driver.
+>>> +
+>>> +config PINCTRL_QCOM_SM8150
+>>> +    bool "Qualcomm SM8150 GCC"
+>>> +    select PINCTRL_QCOM
+>>> +    help
+>>> +      Say Y here to enable support for pinctrl on the Snapdragon 
+>>> SM8150 SoC,
+>>> +      as well as the associated GPIO driver.
+>>>     endmenu
+>>>   diff --git a/drivers/pinctrl/qcom/Makefile 
+>>> b/drivers/pinctrl/qcom/Makefile
+>>> index 4f1d96787b..cc3660a576 100644
+>>> --- a/drivers/pinctrl/qcom/Makefile
+>>> +++ b/drivers/pinctrl/qcom/Makefile
+>>> @@ -13,3 +13,4 @@ obj-$(CONFIG_PINCTRL_QCOM_SM6115) += pinctrl-sm6115.o
+>>>   obj-$(CONFIG_PINCTRL_QCOM_SM8250) += pinctrl-sm8250.o
+>>>   obj-$(CONFIG_PINCTRL_QCOM_SM8550) += pinctrl-sm8550.o
+>>>   obj-$(CONFIG_PINCTRL_QCOM_SM8650) += pinctrl-sm8650.o
+>>> +obj-$(CONFIG_PINCTRL_QCOM_SM8150) += pinctrl-sm8150.o
+>>> diff --git a/drivers/pinctrl/qcom/pinctrl-sm8150.c 
+>>> b/drivers/pinctrl/qcom/pinctrl-sm8150.c
+>>> new file mode 100644
+>>> index 0000000000..c3af3448f6
+>>> --- /dev/null
+>>> +++ b/drivers/pinctrl/qcom/pinctrl-sm8150.c
+>>> @@ -0,0 +1,119 @@
+>>> +// SPDX-License-Identifier: BSD-3-Clause
+>>> +/*
+>>> + * Qualcomm SM8150 pinctrl and GPIO driver
+>>> + *
+>>> + * Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+>>> + * Copyright (c) 2024 EPAM Systems.
+>>> + *
+>>> + * (C) Copyright 2024 Julius Lehmann <lehmanju@devpi.de>
+>>> + *
+>>> + * Based on similar U-Boot drivers. Constants were taken from the 
+>>> Linux driver
+>>> + */
+>>> +
+>>> +#include <dm.h>
+>>> +
+>>> +#include "pinctrl-qcom.h"
+>>> +
+>>> +#define WEST    0x00100000
+>>> +#define EAST    0x00500000
+>>> +#define NORTH    0x00900000
+>>> +#define SOUTH    0x00D00000
+>>> +
+>>> +#define MAX_PIN_NAME_LEN 32
+>>> +static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
+>>> +
+>>> +static const struct pinctrl_function msm_pinctrl_functions[] = { { 
+>>> "qup2", 1 },
+>>> +                                 { "gpio", 0 },
+>>> +                                { "sdc4", 0 } };
+>>> +
+>>> +static const unsigned int sm8150_pin_offsets[] = {
+>>> +    [0]   = SOUTH, [1]   = SOUTH, [2]   = SOUTH, [3]   = SOUTH,
+>>> +    [4]   = SOUTH, [5]   = SOUTH, [6]   = SOUTH, [7]   = SOUTH,
+>>> +    [8]   = NORTH, [9]   = NORTH, [10]  = NORTH, [11]  = NORTH,
+>>> +    [12]  = NORTH, [13]  = NORTH, [14]  = NORTH, [15]  = NORTH,
+>>> +    [16]  = NORTH, [17]  = NORTH, [18]  = NORTH, [19]  = NORTH,
+>>> +    [20]  = NORTH, [21]  = EAST,  [22]  = EAST,  [23]  = EAST,
+>>> +    [24]  = EAST,  [25]  = EAST,  [26]  = EAST,  [27]  = EAST,
+>>> +    [28]  = EAST,  [29]  = EAST,  [30]  = EAST,  [31]  = NORTH,
+>>> +    [32]  = NORTH, [33]  = NORTH, [34]  = NORTH, [35]  = NORTH,
+>>> +    [36]  = NORTH, [37]  = NORTH, [38]  = SOUTH, [39]  = NORTH,
+>>> +    [40]  = NORTH, [41]  = NORTH, [42]  = NORTH, [43]  = EAST,
+>>> +    [44]  = EAST,  [45]  = EAST,  [46]  = EAST,  [47]  = EAST,
+>>> +    [48]  = EAST,  [49]  = EAST,  [50]  = EAST,  [51]  = SOUTH,
+>>> +    [52]  = SOUTH, [53]  = SOUTH, [54]  = SOUTH, [55]  = SOUTH,
+>>> +    [56]  = SOUTH, [57]  = SOUTH, [58]  = SOUTH, [59]  = SOUTH,
+>>> +    [60]  = SOUTH, [61]  = SOUTH, [62]  = SOUTH, [63]  = SOUTH,
+>>> +    [64]  = SOUTH, [65]  = SOUTH, [66]  = SOUTH, [67]  = SOUTH,
+>>> +    [68]  = SOUTH, [69]  = SOUTH, [70]  = SOUTH, [71]  = SOUTH,
+>>> +    [72]  = SOUTH, [73]  = SOUTH, [74]  = SOUTH, [75]  = SOUTH,
+>>> +    [76]  = SOUTH, [77]  = SOUTH, [78]  = SOUTH, [79]  = SOUTH,
+>>> +    [80]  = SOUTH, [81]  = SOUTH, [82]  = SOUTH, [83]  = NORTH,
+>>> +    [84]  = NORTH, [85]  = NORTH, [86]  = NORTH, [87]  = EAST,
+>>> +    [88]  = NORTH, [89]  = NORTH, [90]  = NORTH, [91]  = NORTH,
+>>> +    [92]  = NORTH, [93]  = NORTH, [94]  = NORTH, [95]  = NORTH,
+>>> +    [96]  = NORTH, [97]  = NORTH, [98]  = SOUTH, [99]  = SOUTH,
+>>> +    [100] = SOUTH, [101] = SOUTH, [102] = NORTH, [103] = NORTH,
+>>> +    [104] = NORTH, [105] = WEST,  [106] = WEST,  [107] = WEST,
+>>> +    [108] = WEST,  [109] = WEST,  [110] = WEST,  [111] = WEST,
+>>> +    [112] = WEST,  [113] = WEST,  [114] = SOUTH, [115] = SOUTH,
+>>> +    [116] = SOUTH, [117] = SOUTH, [118] = SOUTH, [119] = SOUTH,
+>>> +    [120] = SOUTH, [121] = SOUTH, [122] = SOUTH, [123] = SOUTH,
+>>> +    [124] = SOUTH, [125] = WEST,  [126] = SOUTH, [127] = SOUTH,
+>>> +    [128] = SOUTH, [129] = SOUTH, [130] = SOUTH, [131] = SOUTH,
+>>> +    [132] = SOUTH, [133] = SOUTH, [134] = SOUTH, [135] = SOUTH,
+>>> +    [136] = SOUTH, [137] = SOUTH, [138] = SOUTH, [139] = SOUTH,
+>>> +    [140] = SOUTH, [141] = SOUTH, [142] = SOUTH, [143] = SOUTH,
+>>> +    [144] = SOUTH, [145] = SOUTH, [146] = SOUTH, [147] = SOUTH,
+>>> +    [148] = SOUTH, [149] = SOUTH, [150] = SOUTH, [151] = SOUTH,
+>>> +    [152] = SOUTH, [153] = SOUTH, [154] = SOUTH, [155] = WEST,
+>>> +    [156] = WEST,  [157] = WEST,  [158] = WEST,  [159] = WEST,
+>>> +    [160] = WEST,  [161] = WEST,  [162] = WEST,  [163] = WEST,
+>>> +    [164] = WEST,  [165] = WEST,  [166] = WEST,  [167] = WEST,
+>>> +    [168] = WEST,  [169] = NORTH, [170] = NORTH, [171] = NORTH,
+>>> +    [172] = NORTH, [173] = NORTH, [174] = NORTH,
+>>> +    // special pins
+>>> +    [175] = 0, [176] = 0, [177] = 0, [178] = 0,
+>>
+>> We have better support for special pins now, you can remove these 0
+>> entries and set .special_pins_start = 175 in pin_data below.
+>
+> You can look at the sm8250 patch at 
+> https://lore.kernel.org/all/20240910-topic-sm8x50-msm-gpio-special-pins-sm8250-v1-2-50623a7e4931@linaro.org/
+>
+I took a look at sm8550/sm8660 and noticed that the pin_offsets array is 
+completely missing. Is it not required at all (if special_pins_start and 
+special_pins_data are used)?
 
-Changes in V2:
-- Rebased the code changes on top of the next branch.
+For v2 I will also try to integrate UFS and SDC pin functions, just like 
+in sm8550/sm8660.
 
-UT:
-Tested on Versal NET board
-
-Versal NET> fdt print /reserved-memory                                          
-reserved-memory {                                                               
-        ranges;                                                                 
-        #size-cells = <0x00000002>;                                             
-        #address-cells = <0x00000002>;                                          
-        tf-a {                                                                  
-                reg = <0x00000000 0x70000000 0x00000000 0x00050000>;            
-                no-map;                                                         
-        };                                                                      
-};                                                                              
-Versal NET> sf read 0x70000000 0x0 0x40
-device 0 offset 0x0, size 0x40                                                  
-ERROR: trying to overwrite reserved memory...
-
-Versal NET> sf write 0x70000000 0x0 0x40                                        
-device 0 offset 0x0, size 0x40                                                  
-ERROR: trying to overwrite reserved memory...
-
-relocaddr   = 0x000000007febc000
-
-Versal NET> sf read 0x000000007febc000 0x0 0x40                                 
-device 0 offset 0x0, size 0x40 
-ERROR: trying to overwrite reserved memory...         
-
-Versal NET> sf write 0x000000007febc000 0x0 0x40                                
-device 0 offset 0x0, size 0x40                                                  
-ERROR: trying to overwrite reserved memory... 
-
- cmd/sf.c | 36 +++++++++++++++++++++++++++++++++++-
- 1 file changed, 35 insertions(+), 1 deletion(-)
-
-diff --git a/cmd/sf.c b/cmd/sf.c
-index f43a2e08b3..7bb8bcfce2 100644
---- a/cmd/sf.c
-+++ b/cmd/sf.c
-@@ -10,6 +10,7 @@
- #include <div64.h>
- #include <dm.h>
- #include <log.h>
-+#include <lmb.h>
- #include <malloc.h>
- #include <mapmem.h>
- #include <spi.h>
-@@ -272,6 +273,31 @@ static int spi_flash_update(struct spi_flash *flash, u32 offset,
- 	return 0;
- }
- 
-+#ifdef CONFIG_LMB
-+static int do_spi_read_lmb_check(ulong start_addr, loff_t len)
-+{
-+	phys_size_t max_size;
-+	ulong end_addr;
-+
-+	lmb_dump_all();
-+
-+	max_size = lmb_get_free_size(start_addr);
-+	if (!max_size) {
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	end_addr = start_addr + max_size;
-+	if (!end_addr)
-+		end_addr = ULONG_MAX;
-+
-+	if ((start_addr + len) > end_addr) {
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	return 0;
-+}
-+#endif
-+
- static int do_spi_flash_read_write(int argc, char *const argv[])
- {
- 	unsigned long addr;
-@@ -315,7 +341,15 @@ static int do_spi_flash_read_write(int argc, char *const argv[])
- 		ret = spi_flash_update(flash, offset, len, buf);
- 	} else if (strncmp(argv[0], "read", 4) == 0 ||
- 			strncmp(argv[0], "write", 5) == 0) {
--		int read;
-+		int read, ret;
-+
-+#ifdef CONFIG_LMB
-+		ret = do_spi_read_lmb_check(addr, len);
-+		if (ret) {
-+			printf("ERROR: trying to overwrite reserved memory...\n");
-+			return ret;
-+		}
-+#endif
- 
- 		read = strncmp(argv[0], "read", 4) == 0;
- 		if (read)
--- 
-2.25.1
-
+>>
+>> Kind regards,
+>>> +};
+>>> +
+>>> +static const char *sm8150_get_function_name(struct udevice *dev,
+>>> +                        unsigned int selector)
+>>> +{
+>>> +    return msm_pinctrl_functions[selector].name;
+>>> +}
+>>> +
+>>> +static const char *sm8150_get_pin_name(struct udevice *dev,
+>>> +                       unsigned int selector)
+>>> +{
+>>> +    snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
+>>> +    return pin_name;
+>>> +}
+>>> +
+>>> +static unsigned int sm8150_get_function_mux(__maybe_unused unsigned 
+>>> int pin,
+>>> +                        unsigned int selector)
+>>> +{
+>>> +    return msm_pinctrl_functions[selector].val;
+>>> +}
+>>> +
+>>> +static struct msm_pinctrl_data sm8150_data = {
+>>> +    .pin_data = {
+>>> +        .pin_offsets = sm8150_pin_offsets,
+>>> +        .pin_count = ARRAY_SIZE(sm8150_pin_offsets),
+>>> +    },
+>>> +    .functions_count = ARRAY_SIZE(msm_pinctrl_functions),
+>>> +    .get_function_name = sm8150_get_function_name,
+>>> +    .get_function_mux = sm8150_get_function_mux,
+>>> +    .get_pin_name = sm8150_get_pin_name,
+>>> +};
+>>> +
+>>> +static const struct udevice_id msm_pinctrl_ids[] = {
+>>> +    { .compatible = "qcom,sm8150-pinctrl", .data = 
+>>> (ulong)&sm8150_data },
+>>> +    { /* Sentinel */ }
+>>> +};
+>>> +
+>>> +U_BOOT_DRIVER(pinctrl_sm8150) = {
+>>> +    .name        = "pinctrl_sm8150",
+>>> +    .id        = UCLASS_NOP,
+>>> +    .of_match    = msm_pinctrl_ids,
+>>> +    .ops        = &msm_pinctrl_ops,
+>>> +    .bind        = msm_pinctrl_bind,
+>>> +};
+>>
+>
