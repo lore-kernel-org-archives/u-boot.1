@@ -4,88 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F6B7EB64DE
-	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 13:04:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A27F1ECE564
+	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 13:21:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9259789048;
-	Tue, 10 Sep 2024 15:04:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id DF61889098;
+	Tue, 10 Sep 2024 15:21:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="N8qet6TG";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="LxlabYNG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C162890BD; Tue, 10 Sep 2024 15:04:27 +0200 (CEST)
-Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
- [IPv6:2607:f8b0:4864:20::f2b])
+ id 027918906B; Tue, 10 Sep 2024 15:21:34 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E5D788F6F
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 15:04:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F3A7A89098
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 15:21:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-6c367e0ce98so2433936d6.3
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 06:04:25 -0700 (PDT)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-374c1963cb6so3464370f8f.3
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 06:21:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1725973459; x=1726578259; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=SnTCkW11Ol/b2hNHIeYaCSF5pmHbpWVm7telQKe60jU=;
- b=N8qet6TGTzQyu6y0OO2WDPSOAWP60WsRjYuXxfeJAXHTXO4LXg67aPTmhRDJoPZMa8
- OA5yb2LGjcGJT5PnhX0P7Ijy5+SeUBD//72JJio1zZKNbkgNoaNS4GYLr7cj8+3vLVET
- fOpaKA2yQzmodL1ToG/ytrEOHxVsj4hbBawfv0BNUeYFwCjHzwcG3SjasHUx+03mjPrt
- fk1pncSORVt4cQVTwns6IbmmVbbz9+O/rLhPVRQWvDnP/wKeUXR/7bOns8pMcomDfaN1
- lPZLKa7b6Zjb/mQvsPbOX9qeEvdqRY1VplrqmcsPr5n38NiiZ1f1dNKPNBPP9zI05cq/
- 2v/g==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1725974486; x=1726579286;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=D0Q60/qA2SDlj56RcJWIeuLMd9nDno5bdnuxCFM7uTM=;
+ b=LxlabYNGuQaa+jaOaHJFHOoSBWXxSiLEqvtSjy2w8UR0SCZMbn2bGEVe3/gZedCFPs
+ NK2dcn3RrUJpY3brsDRcBg+fZxkXKWYHHkBDBjQNVKP3IAL4rIyRMsdvmKZhYSGZ+S3G
+ rK4XXOp0bjgaQDM1uMZjn0TX/DiEB4Bu1k1z/CNdHZgtC+Ig7+byNTaKZnXz57YEHOtm
+ s4qie6nNRd4vgifObdYGdy2b5gOCWjbejqPYaYPBZsIaPBcslEeXSuu9LQtMuLqU/HwT
+ qM5m2fLl5nvXTUDYBohiz6dURG4Woh9YrCdOVLOv1ZlIf8I7odSd843bFy7yAHe66Slj
+ YXKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725973459; x=1726578259;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=SnTCkW11Ol/b2hNHIeYaCSF5pmHbpWVm7telQKe60jU=;
- b=JiJB+52H0++BgVhBqNb2ssGOJ3yWsfebVS8fyJP4/5lRODTT2wCgBrMvE3raTEkMTs
- CrCMQO/lwFKJva1VDgpgDFaguk1TZ22QWnDZlm2TIms99+pH7M1SUeJF17XZ+NhF9KVp
- hGgRvA65/87DqizEWxaZUUXKqRP7K3S7gSphZHAnCV4ib10JUkmgz0Dxn0GpRsbMH3wD
- WkvD370+GbnRtiEa/i25Fm3syC5BxxNrAHhT41qeoqZ8AZ9QOveXbuom+9ef/vemUsL8
- LkTj60wKdXc1d0hCX/ayaYsU27QyC8nHsrdeFm1ebRMjj1tzZf79NrLv2EXmjtkj/BGJ
- z8Kg==
+ d=1e100.net; s=20230601; t=1725974486; x=1726579286;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=D0Q60/qA2SDlj56RcJWIeuLMd9nDno5bdnuxCFM7uTM=;
+ b=MRrrQ1Trsm5ILBP3OFy+mBKP+uDNav7uDz08ZEbL85zRAmqhrH2ZI21SJc+8NKYHG5
+ G7iggfUxVnUUJ5jookStvY6UXw+tPzuFNsV19Rlizw/3/z/sgHO5RzaCNAB66LxQk056
+ lRwJIrIRtADGz75vVnOpKAVN5y++EzbS/TQrV/xztE8r5SbLj0EO3yNXVSuTRLc+jnM+
+ 04t+CURCGJMH1SZ3uvkkZ2KSx4clPpWSObmOtxafXu/gsdZLmmOyFF7YXrOVHs2Xo/Vc
+ X/AoJgohdcdbhJgC8VYNnajv9SxSiueDSMYn+FNiyJAbcoGCjGO2oKaRdkqBndJ1eA9v
+ O0kg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUuwu0iFWeHGAXji8KMkSdlRhF/shAtdwl8dL1eoX7knJh6PkvuyT4FTVd+MOPaZ1sd/HId8f8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz+mHgMhTcouVL5UIUrwTN0jnpn2BjIfS2agbF4WjAvo+C0kRpp
- rQkfHYY5YVInDxnDDtciMUxmdW2VnCdhQdM6Svbqb9y1WQaJF3wL
-X-Google-Smtp-Source: AGHT+IESjLyS7bFS02Y0RXCGlC6LKNaFDToqYqctspYMypYRwNSxEXjb8FzDXsGm4Q2Amjz3zCirIw==
-X-Received: by 2002:ad4:5f4d:0:b0:6c5:258f:26c1 with SMTP id
- 6a1803df08f44-6c52850dc46mr83344436d6.7.1725973457220; 
- Tue, 10 Sep 2024 06:04:17 -0700 (PDT)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6c53478601csm29787626d6.134.2024.09.10.06.04.16
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 10 Sep 2024 06:04:16 -0700 (PDT)
-Message-ID: <5feee73f-f2d2-e21a-af62-277fb54fc0d2@gmail.com>
-Date: Tue, 10 Sep 2024 09:04:15 -0400
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH v2] spl: ram: hide SPL_RAM_SUPPORT
-Content-Language: en-US
+ AJvYcCWbDF2uE5+kODM+rcgw1Cb0RkrdZdXS/LRGEPNhIvHJPvA313ANJXt+q72JgpXJyv9/vRpapFY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxdq9X38eU966Bxb85fFvF3AbTiHTFrYU7osH/+KuM4GMsmGCC0
+ PDaiw8IolgYg2yGmtMrThvF2j6G+JVYYlHTQKX9y4qH/rhDwJ2BqGPLAaVZ4xeo=
+X-Google-Smtp-Source: AGHT+IHQee9aYzFR/TtL0xmLmUf/QYzFXXjgj9EBfEzR7IKLtIDBLGwZZuJ62SfY+LSKQMBSVWs9sg==
+X-Received: by 2002:adf:f30a:0:b0:377:27f1:d54f with SMTP id
+ ffacd0b85a97d-3788967e268mr10737973f8f.45.1725974485381; 
+ Tue, 10 Sep 2024 06:21:25 -0700 (PDT)
+Received: from localhost (amarseille-656-1-38-54.w83-113.abo.wanadoo.fr.
+ [83.113.113.54]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-37895649b93sm8922199f8f.3.2024.09.10.06.21.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 10 Sep 2024 06:21:24 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 To: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, Marek Vasut
- <marex@denx.de>, Simon Glass <sjg@chromium.org>,
- Andre Przywara <andre.przywara@arm.com>, Samuel Holland
- <samuel@sholland.org>, Lukas Funke <lukas.funke@weidmueller.com>,
- Jonas Karlman <jonas@kwiboo.se>, Miquel Raynal <miquel.raynal@bootlin.com>
-References: <20240910130019.3211647-1-jerome.forissier@linaro.org>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20240910130019.3211647-1-jerome.forissier@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, Jerome Forissier
+ <jerome.forissier@linaro.org>, Lukasz Majewski <lukma@denx.de>, Tom Rini
+ <trini@konsulko.com>, Marek Vasut <marex@denx.de>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Jaehoon Chung <jh80.chung@samsung.com>, Jonas
+ Karlman <jonas@kwiboo.se>, Miquel Raynal <miquel.raynal@bootlin.com>
+Subject: Re: [PATCH] dfu: fix Kconfig dependencies
+In-Reply-To: <20240910102751.3182982-1-jerome.forissier@linaro.org>
+References: <20240910102751.3182982-1-jerome.forissier@linaro.org>
+Date: Tue, 10 Sep 2024 15:19:07 +0200
+Message-ID: <875xr363zo.fsf@baylibre.com>
+MIME-Version: 1.0
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,45 +95,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-T24gOS8xMC8yNCAwOTowMCwgSmVyb21lIEZvcmlzc2llciB3cm90ZToNCj4gTWFrZSBTUExf
-UkFNX1NVUFBPUlQgYSBoaWRkZW4gS2NvbmZpZyBzeW1ib2wsIGF1dG9tYXRpY2FsbHkgc2Vs
-ZWN0ZWQNCj4gYnkgU1BMX1JBTV9ERVZJQ0Ugb3IgU1BMX0RGVS4gQXZvaWRzIHRoZSBzaXR1
-YXRpb24gd2hlcmUgU1BMX1JBTV9TVVBQT1JUDQo+IG1heSBiZSBlbmFibGVkIHdpdGhvdXQg
-dGhlIG90aGVyIHR3byBiZWluZyBlbmFibGVkLCB3aGljaCByZXN1bHRzIGluIHRoZQ0KPiBm
-b2xsb3dpbmcgYnVpbGQgd2FybmluZzoNCj4gDQo+IGNvbW1vbi9zcGwvc3BsX3JhbS5jOjE5
-OjE0OiB3YXJuaW5nOiDigJhzcGxfcmFtX2xvYWRfcmVhZOKAmSBkZWZpbmVkIGJ1dCBub3Qg
-dXNlZCBbLVd1bnVzZWQtZnVuY3Rpb25dDQo+ICAgICAxOSB8IHN0YXRpYyB1bG9uZyBzcGxf
-cmFtX2xvYWRfcmVhZChzdHJ1Y3Qgc3BsX2xvYWRfaW5mbyAqbG9hZCwgdWxvbmcgc2VjdG9y
-LA0KPiAgICAgICAgfCAgICAgICAgICAgICAgXn5+fn5+fn5+fn5+fn5+fn4NCj4gDQo+IFNp
-Z25lZC1vZmYtYnk6IEplcm9tZSBGb3Jpc3NpZXIgPGplcm9tZS5mb3Jpc3NpZXJAbGluYXJv
-Lm9yZz4NCj4gLS0tDQo+ICAgY29tbW9uL3NwbC9LY29uZmlnICAgICAgICAgfCA4ICsrLS0t
-LS0tDQo+ICAgZHJpdmVycy91c2IvZ2FkZ2V0L0tjb25maWcgfCAyICstDQo+ICAgMiBmaWxl
-cyBjaGFuZ2VkLCAzIGluc2VydGlvbnMoKyksIDcgZGVsZXRpb25zKC0pDQo+IA0KPiBkaWZm
-IC0tZ2l0IGEvY29tbW9uL3NwbC9LY29uZmlnIGIvY29tbW9uL3NwbC9LY29uZmlnDQo+IGlu
-ZGV4IGMwOGZmMDY0NDkzLi44ODVhMDEyNDYxYyAxMDA2NDQNCj4gLS0tIGEvY29tbW9uL3Nw
-bC9LY29uZmlnDQo+ICsrKyBiL2NvbW1vbi9zcGwvS2NvbmZpZw0KPiBAQCAtMTIzOCwxNSAr
-MTIzOCwxMSBAQCBjb25maWcgU1BMX1BPV0VSX0RPTUFJTg0KPiAgIAkgIHRoZSBkcml2ZXJz
-IGluIGRyaXZlcnMvcG93ZXIvZG9tYWluIGFzIHBhcnQgb2YgYSBTUEwgYnVpbGQuDQo+ICAg
-DQo+ICAgY29uZmlnIFNQTF9SQU1fU1VQUE9SVA0KPiAtCWJvb2wgIlN1cHBvcnQgYm9vdGlu
-ZyBmcm9tIFJBTSINCj4gLQlkZWZhdWx0IHkgaWYgTUlDUk9CTEFaRSB8fCBBUkNIX1NPQ0ZQ
-R0EgfHwgQVJDSF9URUdSQSB8fCBBUkNIX1pZTlENCj4gLQloZWxwDQo+IC0JICBFbmFibGUg
-Ym9vdGluZyBvZiBhbiBpbWFnZSBpbiBSQU0uIFRoZSBpbWFnZSBjYW4gYmUgcHJlbG9hZGVk
-IG9yDQo+IC0JICBpdCBjYW4gYmUgbG9hZGVkIGJ5IFNQTCBkaXJlY3RseSBpbnRvIFJBTSAo
-ZS5nLiB1c2luZyBVU0IpLg0KPiArCWJvb2wNCj4gICANCj4gICBjb25maWcgU1BMX1JBTV9E
-RVZJQ0UNCj4gICAJYm9vbCAiU3VwcG9ydCBib290aW5nIGZyb20gcHJlbG9hZGVkIGltYWdl
-IGluIFJBTSINCj4gLQlkZXBlbmRzIG9uIFNQTF9SQU1fU1VQUE9SVA0KPiArCXNlbGVjdCBT
-UExfUkFNX1NVUFBPUlQNCj4gICAJZGVmYXVsdCB5IGlmIE1JQ1JPQkxBWkUgfHwgQVJDSF9T
-T0NGUEdBIHx8IEFSQ0hfVEVHUkEgfHwgQVJDSF9aWU5RDQo+ICAgCWhlbHANCj4gICAJICBF
-bmFibGUgYm9vdGluZyBvZiBhbiBpbWFnZSBhbHJlYWR5IGxvYWRlZCBpbiBSQU0uIFRoZSBp
-bWFnZSBoYXMgdG8NCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvdXNiL2dhZGdldC9LY29uZmln
-IGIvZHJpdmVycy91c2IvZ2FkZ2V0L0tjb25maWcNCj4gaW5kZXggNDYyMWE2ZmQ1ZTYuLmIx
-MjQ3YTllZWFlIDEwMDY0NA0KPiAtLS0gYS9kcml2ZXJzL3VzYi9nYWRnZXQvS2NvbmZpZw0K
-PiArKysgYi9kcml2ZXJzL3VzYi9nYWRnZXQvS2NvbmZpZw0KPiBAQCAtMzIzLDcgKzMyMyw3
-IEBAIGNvbmZpZyBTUExfREZVDQo+ICAgCWJvb2wgIlN1cHBvcnQgREZVIChEZXZpY2UgRmly
-bXdhcmUgVXBncmFkZSkgaW4gU1BMIg0KPiAgIAlzZWxlY3QgU1BMX0hBU0gNCj4gICAJc2Vs
-ZWN0IFNQTF9ERlVfTk9fUkVTRVQNCj4gLQlkZXBlbmRzIG9uIFNQTF9SQU1fU1VQUE9SVA0K
-PiArCXNlbGVjdCBTUExfUkFNX1NVUFBPUlQNCj4gICAJaGVscA0KPiAgIAkgIFRoaXMgZmVh
-dHVyZSBlbmFibGVzIHRoZSBERlUgKERldmljZSBGaXJtd2FyZSBVcGdyYWRlKSBpbiBTUEwg
-d2l0aA0KPiAgIAkgIFJBTSBtZW1vcnkgZGV2aWNlIHN1cHBvcnQuIFRoZSBST00gY29kZSB3
-aWxsIGxvYWQgYW5kIGV4ZWN1dGUNCg0KUmV2aWV3ZWQtYnk6IFNlYW4gQW5kZXJzb24gPHNl
-YW5nYTJAZ21haWwuY29tPg0K
+Hi Jerome,
+
+Thank you for the patch.
+
+On mar., sept. 10, 2024 at 12:27, Jerome Forissier <jerome.forissier@linaro.org> wrote:
+
+> Fix link errors caused by missing Kconfig dependencies:
+>
+> 1. DFU_OVER_USB compiles common/dfu.c which calls g_dnl_clear_detach()
+> which is implemented in drivers/usb/gadget/g_dnl.c which needs
+> USB_GADGET_DOWNLOAD. Test case:
+>
+>  $ printf "CONFIG_USB_GADGET_DOWNLOAD=n\nCONFIG_USB_FUNCTION_FASTBOOT=n" \
+>        >>configs/am62px_evm_a53_defconfig
+>  $ make am62px_evm_a53_defconfig
+>  $ make CROSS_COMPILE=aarch64-linux-gnu-
+>  [...]
+>  common/dfu.c:34:(.text.run_usb_dnl_gadget+0x68): undefined reference to `g_dnl_clear_detach
+>  [...]
+>
+> 2. With the above fixed, the same build causes:
+>
+>  common/spl/spl_dfu.c:29:(.text.spl_dfu_cmd+0xb0): undefined reference to `run_usb_dnl_gadget'
+>
+> This is because SPL_DFU compiles common/spl/spl_dfu.c which calls
+> run_usb_dnl_gadget() which is implemented in common/dfu.c which needs
+> DFU_OVER_USB.
+>
+> Therefore add these dependencies to Kconfig.
+>
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
+> ---
+>  drivers/dfu/Kconfig        | 2 +-
+>  drivers/usb/gadget/Kconfig | 1 +
+>  2 files changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/drivers/dfu/Kconfig b/drivers/dfu/Kconfig
+> index d034b501360..604386bb734 100644
+> --- a/drivers/dfu/Kconfig
+> +++ b/drivers/dfu/Kconfig
+> @@ -7,7 +7,7 @@ config DFU
+>  config DFU_OVER_USB
+>  	bool
+>  	select HASH
+> -	depends on USB_GADGET
+> +	depends on USB_GADGET_DOWNLOAD
+>  
+>  config DFU_OVER_TFTP
+>  	bool
+> diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
+> index 03fe3bca197..9921d3e0a77 100644
+> --- a/drivers/usb/gadget/Kconfig
+> +++ b/drivers/usb/gadget/Kconfig
+> @@ -323,6 +323,7 @@ config SPL_DFU
+>  	bool "Support DFU (Device Firmware Upgrade) in SPL"
+>  	select SPL_HASH
+>  	select SPL_DFU_NO_RESET
+> +	depends on DFU_OVER_USB
+>  	depends on SPL_RAM_SUPPORT
+>  	help
+>  	  This feature enables the DFU (Device Firmware Upgrade) in SPL with
+> -- 
+> 2.40.1
