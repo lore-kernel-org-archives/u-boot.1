@@ -4,58 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6ED9AECE564
-	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 10:15:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B01DEB64DE
+	for <u-boot@archiver.kernel.org>; Tue, 10 Sep 2024 10:18:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 219E588FF9;
-	Tue, 10 Sep 2024 12:14:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 10CCA89004;
+	Tue, 10 Sep 2024 12:18:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="kMyweyvc";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id B3BAA88F65; Tue, 10 Sep 2024 12:14:21 +0200 (CEST)
-Received: from relay1-d.mail.gandi.net (relay1-d.mail.gandi.net
- [217.70.183.193])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1725963517;
+	bh=obbBx79+BINc2fFD1CAqxPy3MoG0ZM6H/XK3HkCBUn8=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=SxMtfAft/xbIxAussmr3NyiCYPTMI3DB5QapX4qAWQVpYo+Ez8G43FQ4VVYKWUoRR
+	 9AkViIJLiQcfCjWQ2/WSdHB0ABo7tbSB2+BWXiJmMN+clZpi7B3njjgRsbyaKHlY0E
+	 0o3FoIKwHbP44ySZ/rGUet+oNUniHQgvLQmLGL1gd2OmuQoOn/EVTsyOzZ4ynNMvX4
+	 wUSouYEShnWlNxLB/N0VehFDN3+5d24aowKMV7oQunupBb3ktczLWIw5LbqainNaIk
+	 LPgxCf7VbTfJS8q8suk+dBFxIAjyD+pHMABoBIJoSvRQY9MEsWK+B+d449pnQoMq/I
+	 gMlX+XdvkyLJw==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 88ABB8900A
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 12:14:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 70468240014;
- Tue, 10 Sep 2024 10:13:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1725963229;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=bbMM8Pj3D2ReR/jhRyT0PR8OIaDPpFOPo90lKQhhVM4=;
- b=kMyweyvcS4s0e6TL/+YEQrH2xqqtuwMgZGCtSxP/paKi/Nr/JHKehBgZ3jIqPaQeK/sEWC
- vO8jmC4IW29ck72WqcAM35XegGQt0jb+930fNvrdR74yIB5BGxNWEs1idyjbx5tkQ8WaGO
- yjjZ9GPVG8exu2HvZvd5395yS+fCkZSWJlKuHBHLbe8bXMZZvtknqnvJ3hFvk7vLW0DuAZ
- nsMwIhuxpBax3mdpco4apcEfWLKkoqaQj0uAfK7t4CtGl0UjVtqZ9GgbLimMHubmDBSd0w
- SgJNy/ypW8WdieAmWevppj7pvBa06wbjHrPj1b0NFeRs8SK1E6/4NM/NquvR6A==
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Jaehoon Chung <jh80.chung@samsung.com>, Anatolij Gustschin <agust@denx.de>
-Cc: <u-boot@lists.denx.de>, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Ian Ray <ian.ray@gehealthcare.com>, Marek Vasut <marek.vasut@gmail.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>
-Subject: [PATCH 8/8] video: imx: Add LCDIF driver
-Date: Tue, 10 Sep 2024 12:13:44 +0200
-Message-ID: <20240910101344.110633-9-miquel.raynal@bootlin.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240910101344.110633-1-miquel.raynal@bootlin.com>
-References: <20240910101344.110633-1-miquel.raynal@bootlin.com>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id DD5B988FFB;
+ Tue, 10 Sep 2024 12:18:34 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1725963515;
+ bh=obbBx79+BINc2fFD1CAqxPy3MoG0ZM6H/XK3HkCBUn8=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=Y2mOO9FP/pqS9vIggr5KHd//rnA0HHVeJHwAyY7AwZJZCS4ML/+h8l6aAqyITfKwS
+ DM2oDWOgz+lTbL3qQ0PpiRhIMG0MGbCI3EoADKPF+USE9vy5s0HgGyNcM5hqf0DJz7
+ cEpkbol8J/PAGU52aIH3yWAzBQcBUb7FlQi7fSXwtAmi+v845JWtkK4xxMAseOGbOU
+ LFod3bzAC9gLejvGZHgRn9tGZg9qq5rcuZjDRcCKnGJZQJUzI1OARYEnnbdE3kh2kT
+ vww5aXASHflH22SSCYSz8OfQ4tHvg8aua9j6IYJTBO2RVNS65p29aRYahdZuPy1ejO
+ e6ShJtI0C5NEg==
+Message-ID: <f778366b-bdaf-415d-a94e-c995f62e8c71@denx.de>
+Date: Tue, 10 Sep 2024 12:16:13 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/4] power: regulator: Trigger probe of regulators which
+ are always-on or boot-on
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
+ Sumit Garg <sumit.garg@linaro.org>, uboot-stm32@st-md-mailman.stormreply.com
+References: <20240626235717.272219-1-marex@denx.de>
+ <a73dffe5-87e3-4e96-965f-9d029f2af8ed@denx.de>
+ <CAPVz0n0C6TPdBRUEvJmgAUGAKoetuzr1j=0cMXweP2EqMTwn=g@mail.gmail.com>
+ <0910419d-e8ab-4bf9-a083-dc2783afaca1@denx.de>
+ <4D07A6E5-F156-44C3-A26D-0F2D913CE92D@gmail.com>
+ <18d84528-d2e5-41d6-ae1d-109ee30853b2@denx.de>
+ <CAPVz0n2Jzfih0Z85TSQbnz-8OrX4D6UN=anKGTJ=hckRt8f3xA@mail.gmail.com>
+ <a95f0d60-2883-4c3d-8a53-ee3ef414cc32@denx.de>
+ <CAPVz0n3Ji1sKQK+Lnq8rP3ZqwX3o-kXe2btj93UuVBa3T5C=qw@mail.gmail.com>
+ <eced1020-2157-44a4-98a9-845e218529d9@denx.de>
+ <45c74c58-98cf-43df-b837-c48b0341c551@denx.de>
+ <CAPVz0n2-DCKDcVrAi00kF6yDcE2bN1mtUhzBcw7JDiZoXgzu0w@mail.gmail.com>
+ <e5837ce4-0a14-4822-960d-6ab667a9f4b1@denx.de>
+ <CAPVz0n323ktF6kb3WHR9JcE+xOzQr9-aWOR47+ZvwQr=ib18rg@mail.gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <CAPVz0n323ktF6kb3WHR9JcE+xOzQr9-aWOR47+ZvwQr=ib18rg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-GND-Sasl: miquel.raynal@bootlin.com
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,368 +90,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for the LCD interfaces (LCDIF1/2). When probed, these
-interfaces request numerous clocks and power doomains, attach the bridge
-and look for a panel in order to retrieve its capabilities and
-properties.
+On 9/10/24 11:05 AM, Svyatoslav Ryhel wrote:
+> пн, 9 вер. 2024 р. о 19:13 Marek Vasut <marex@denx.de> пише:
+>>
+>> On 8/20/24 9:08 AM, Svyatoslav Ryhel wrote:
+>>> пн, 19 серп. 2024 р. о 20:27 Marek Vasut <marex@denx.de> пише:
+>>>>
+>>>> On 8/1/24 2:28 AM, Marek Vasut wrote:
+>>>>> On 7/29/24 1:55 PM, Svyatoslav Ryhel wrote:
+>>>>>
+>>>>> [...]
+>>>>>
+>>>>>>>>> What is the problem you observe on tegra 3 ?
+>>>>>>>> i2c line fails since it probes in spl with your patch, but it does not
+>>>>>>>> relocate and then probes once more after relocation. Probe fails along
+>>>>>>>> with all devices on same line.
+>>>>>>>
+>>>>>>> Could it be that you either have to:
+>>>>>>> - Add DM_I2C to tegra 3 SPL
+>>>>>>> - Remove bootph-* from DT to remove the regulator node from SPL
+>>>>>>> - /delete-property/ regulator-always-on; and /delete-property/
+>>>>>>> regulator-boot-on; in -u-boot.dtsi to prevent the regulator from being
+>>>>>>> enabled in SPL ?
+>>>>>>>
+>>>>>> Obviously NO, you propose nonsense. Same dts is used for both stages.
+>>>>>
+>>>>> DT source yes, DT blob likely no.
+>>>>>
+>>>>>> And I have to add hack-ish stuff just because you wanna introduce code
+>>>>>> which causes known regressions.
+>>>>>
+>>>>> I am trying to understand what problem there is on tegra 3, but it is
+>>>>> still not clear to me.
+>>>>>
+>>>>> Is the problem somehow related to PMICs (?) being probed in SPL (?)
+>>>>> because they have regulators (?) which are marked as regulator-always-on
+>>>>> ? If so, then this is correct behavior, and if this is not desired in
+>>>>> SPL, then you can remove this property from SPL DT in -u-boot.dtsi using
+>>>>> /delete-property/ .
+>>>>>
+>>>>> [...]
+>>>>>
+>>>>>> "We must not probe things as we go. There might be other
+>>>>>> dependencies not yet bound. It may also take some time. This is not
+>>>>>> following driver model design, sorry.
+>>>>>>
+>>>>>> So please think of a way to do this properly."
+>>>>>
+>>>>> What is this quote about ? Where is this from ?
+>>>>
+>>>> What is the problem with Tegra 3 and this patchset ?
+>>>>
+>>>> Can you please explain that so this patchset can move forward ?
+>>>>
+>>>
+>>> with your changes
+>>>
+>>> U-Boot 2024.07-00696-ge217e2769db9-dirty (Aug 20 2024 - 09:55:29 +0300)
+>>>
+>>> SoC: tegra114
+>>> Model: NVIDIA Tegra Note 7
+>>> Board: NVIDIA TegraTab
+>>> DRAM:  1 GiB
+>>> tegra_i2c_probe: called
+>>> i2c: controller bus 0 at 7000d000, speed 0: tegra_i2c_probe: exit
+>>> i2c_init_controller: speed=400000
+>>> i2c_init_controller: CLK_DIV_STD_FAST_MODE setting = 25
+>>> i2c_xfer: 2 messages
+>>> i2c_xfer: chip=0x58, len=0x1
+>>> i2c_write_data: chip=0x58, len=0x1
+>>> write_data:  0x37
+>>> pkt header 1 sent (0x10010)
+>>> pkt header 2 sent (0x0)
+>>> pkt header 3 sent (0x100b0)
+>>> pkt data sent (0x37)
+>>> tegra_i2c_write_data: Error (-1) !!!
+>>> i2c_write_data(): rc=-1
+>>> i2c_write: error sending
+>>> read error from device: bd26f8e0 register: 0x37!
+>>
+>> This seems like the PMIC driver (palmas?) is trying to read register
+>> 0x37 PGOOD and the I2C transfer fails . Why does the I2C transfer fail ?
+> 
+> You  are asking me? Because your patches break some important setup sequence.
+> PMIC model does not matter, all behave same way.
 
-There is a similar driver existing in the upper folder for other i.MX
-targets, I discovered this driver a bit late. It is not tergetting the
-i.MX8 and I have no idea how different can the LCDIF be on this SoC, but
-I did not manage to get it work, especially because it is not fully
-compliant with the device-model, especially on the clocks/power
-management side which is all ad-hoc. This is normal though, it was
-contributed more than ten years ago.
+These regulator patches do not modify anything related to I2C and I 
+don't observe this kind of behavior on iMX8M or STM32 platforms, so I 
+suspect this is something specific to tegra.
 
-Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
----
- drivers/video/imx/Kconfig  |   3 +
- drivers/video/imx/Makefile |   1 +
- drivers/video/imx/lcdif.c  | 315 +++++++++++++++++++++++++++++++++++++
- 3 files changed, 319 insertions(+)
- create mode 100644 drivers/video/imx/lcdif.c
+>> You did mention something regarding I2C/PMIC driver probe timing, but it
+>> seems the I2C driver and PMIC drivers probe roughly around the same time
+>> in both pass and fail cases ?
+> 
+> Yes, here I agree that they both probe and probe passes, but I assume
+> timing of i2c call is critical and there may be some dependency which
+> is not ready.
 
-diff --git a/drivers/video/imx/Kconfig b/drivers/video/imx/Kconfig
-index f8e0e3b23b3..1a36d907e0c 100644
---- a/drivers/video/imx/Kconfig
-+++ b/drivers/video/imx/Kconfig
-@@ -17,3 +17,6 @@ config IMX_HDMI
- config IMX_LDB
- 	bool "i.MX LVDS display bridge (LDB)"
- 	depends on VIDEO_BRIDGE
-+
-+config IMX_LCDIF
-+	bool "i.MX LCD interface"
-diff --git a/drivers/video/imx/Makefile b/drivers/video/imx/Makefile
-index 8d106589b75..1edf5a6bdf0 100644
---- a/drivers/video/imx/Makefile
-+++ b/drivers/video/imx/Makefile
-@@ -5,3 +5,4 @@
- 
- obj-$(CONFIG_VIDEO_IPUV3) += mxc_ipuv3_fb.o ipu_common.o ipu_disp.o
- obj-$(CONFIG_IMX_LDB) += ldb.o
-+obj-$(CONFIG_IMX_LCDIF) += lcdif.o
-diff --git a/drivers/video/imx/lcdif.c b/drivers/video/imx/lcdif.c
-new file mode 100644
-index 00000000000..7871bba8d90
---- /dev/null
-+++ b/drivers/video/imx/lcdif.c
-@@ -0,0 +1,315 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * i.MX8 LCD interface driver inspired from the Linux driver
-+ * Copyright 2019 NXP
-+ * Copyright 2024 Bootlin
-+ * Adapted by Miquel Raynal <miquel.raynal@bootlin.com>
-+ */
-+
-+#include <asm/io.h>
-+#include <asm/mach-imx/dma.h>
-+#include <clk.h>
-+#include <dm.h>
-+#include <panel.h>
-+#include <power-domain.h>
-+#include <video.h>
-+#include <video_bridge.h>
-+#include <linux/delay.h>
-+
-+#include "../videomodes.h"
-+
-+#define LCDIFV3_CTRL 0x0
-+#define LCDIFV3_CTRL_SET 0x4
-+#define LCDIFV3_CTRL_CLR 0x8
-+#define   CTRL_INV_HS BIT(0)
-+#define   CTRL_INV_VS BIT(1)
-+#define   CTRL_INV_DE BIT(2)
-+#define   CTRL_INV_PXCK BIT(3)
-+#define   CTRL_CLK_GATE BIT(30)
-+#define   CTRL_SW_RESET BIT(31)
-+
-+#define LCDIFV3_DISP_PARA 0x10
-+#define   DISP_PARA_DISP_MODE_NORMAL 0
-+#define   DISP_PARA_LINE_PATTERN_RGB_YUV 0
-+#define   DISP_PARA_DISP_ON BIT(31)
-+
-+#define LCDIFV3_DISP_SIZE 0x14
-+#define   DISP_SIZE_DELTA_X(x) ((x) & 0xffff)
-+#define   DISP_SIZE_DELTA_Y(x) ((x) << 16)
-+
-+#define LCDIFV3_HSYN_PARA 0x18
-+#define   HSYN_PARA_FP_H(x) ((x) & 0xffff)
-+#define   HSYN_PARA_BP_H(x) ((x) << 16)
-+
-+#define LCDIFV3_VSYN_PARA 0x1C
-+#define   VSYN_PARA_FP_V(x) ((x) & 0xffff)
-+#define   VSYN_PARA_BP_V(x) ((x) << 16)
-+
-+#define LCDIFV3_VSYN_HSYN_WIDTH 0x20
-+#define   VSYN_HSYN_PW_H(x) ((x) & 0xffff)
-+#define   VSYN_HSYN_PW_V(x) ((x) << 16)
-+
-+#define LCDIFV3_CTRLDESCL0_1 0x200
-+#define   CTRLDESCL0_1_WIDTH(x) ((x) & 0xffff)
-+#define   CTRLDESCL0_1_HEIGHT(x) ((x) << 16)
-+
-+#define LCDIFV3_CTRLDESCL0_3 0x208
-+#define   CTRLDESCL0_3_PITCH(x) ((x) & 0xFFFF)
-+
-+#define LCDIFV3_CTRLDESCL_LOW0_4 0x20C
-+#define LCDIFV3_CTRLDESCL_HIGH0_4 0x210
-+
-+#define LCDIFV3_CTRLDESCL0_5 0x214
-+#define   CTRLDESCL0_5_YUV_FORMAT(x) (((x) & 0x3) << 14)
-+#define   CTRLDESCL0_5_BPP(x) (((x) & 0xf) << 24)
-+#define     BPP32_ARGB8888 0x9
-+#define   CTRLDESCL0_5_SHADOW_LOAD_EN BIT(30)
-+#define   CTRLDESCL0_5_EN BIT(31)
-+
-+struct lcdifv3_priv {
-+	void __iomem *base;
-+	struct clk pix_clk;
-+	struct power_domain pd;
-+	struct udevice *panel;
-+	struct udevice *bridge;
-+};
-+
-+static void lcdifv3_set_mode(struct lcdifv3_priv *priv,
-+			     struct display_timing *timings)
-+{
-+	u32 reg;
-+
-+	writel(DISP_SIZE_DELTA_X(timings->hactive.typ) |
-+	       DISP_SIZE_DELTA_Y(timings->vactive.typ),
-+	       priv->base + LCDIFV3_DISP_SIZE);
-+
-+	writel(HSYN_PARA_FP_H(timings->hfront_porch.typ) |
-+	       HSYN_PARA_BP_H(timings->hback_porch.typ),
-+	       priv->base + LCDIFV3_HSYN_PARA);
-+
-+	writel(VSYN_PARA_BP_V(timings->vback_porch.typ) |
-+	       VSYN_PARA_FP_V(timings->vfront_porch.typ),
-+	       priv->base + LCDIFV3_VSYN_PARA);
-+
-+	writel(VSYN_HSYN_PW_H(timings->hsync_len.typ) |
-+	       VSYN_HSYN_PW_V(timings->vsync_len.typ),
-+	       priv->base + LCDIFV3_VSYN_HSYN_WIDTH);
-+
-+	writel(CTRLDESCL0_1_WIDTH(timings->hactive.typ) |
-+	       CTRLDESCL0_1_HEIGHT(timings->vactive.typ),
-+	       priv->base + LCDIFV3_CTRLDESCL0_1);
-+
-+	if (timings->flags & DISPLAY_FLAGS_HSYNC_LOW)
-+		writel(CTRL_INV_HS, priv->base + LCDIFV3_CTRL_SET);
-+	else
-+		writel(CTRL_INV_HS, priv->base + LCDIFV3_CTRL_CLR);
-+
-+	if (timings->flags & DISPLAY_FLAGS_VSYNC_LOW)
-+		writel(CTRL_INV_VS, priv->base + LCDIFV3_CTRL_SET);
-+	else
-+		writel(CTRL_INV_VS, priv->base + LCDIFV3_CTRL_CLR);
-+
-+	if (timings->flags & DISPLAY_FLAGS_DE_LOW)
-+		writel(CTRL_INV_DE, priv->base + LCDIFV3_CTRL_SET);
-+	else
-+		writel(CTRL_INV_DE, priv->base + LCDIFV3_CTRL_CLR);
-+
-+	if (timings->flags & DISPLAY_FLAGS_PIXDATA_POSEDGE)
-+		writel(CTRL_INV_PXCK, priv->base + LCDIFV3_CTRL_SET);
-+	else
-+		writel(CTRL_INV_PXCK, priv->base + LCDIFV3_CTRL_CLR);
-+
-+	writel(0, priv->base + LCDIFV3_DISP_PARA);
-+
-+	reg = readl(priv->base + LCDIFV3_CTRLDESCL0_5);
-+	reg &= ~(CTRLDESCL0_5_BPP(0xf) | CTRLDESCL0_5_YUV_FORMAT(0x3));
-+	reg |= CTRLDESCL0_5_BPP(BPP32_ARGB8888);
-+	writel(reg, priv->base + LCDIFV3_CTRLDESCL0_5);
-+}
-+
-+static void lcdifv3_enable_controller(struct lcdifv3_priv *priv)
-+{
-+	u32 reg;
-+
-+	reg = readl(priv->base + LCDIFV3_DISP_PARA);
-+	reg |= DISP_PARA_DISP_ON;
-+	writel(reg, priv->base + LCDIFV3_DISP_PARA);
-+
-+	reg = readl(priv->base + LCDIFV3_CTRLDESCL0_5);
-+	reg |= CTRLDESCL0_5_EN;
-+	writel(reg, priv->base + LCDIFV3_CTRLDESCL0_5);
-+}
-+
-+static int lcdifv3_video_sync(struct udevice *dev)
-+{
-+	struct lcdifv3_priv *priv = dev_get_priv(dev);
-+	u32 reg;
-+
-+	reg = readl(priv->base + LCDIFV3_CTRLDESCL0_5);
-+	reg |= CTRLDESCL0_5_SHADOW_LOAD_EN;
-+	writel(reg, priv->base + LCDIFV3_CTRLDESCL0_5);
-+
-+	return 0;
-+}
-+
-+static void lcdifv3_init(struct udevice *dev, struct display_timing *timings)
-+{
-+	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
-+	struct lcdifv3_priv *priv = dev_get_priv(dev);
-+
-+	clk_set_rate(&priv->pix_clk, timings->pixelclock.typ);
-+
-+	writel(CTRL_SW_RESET | CTRL_CLK_GATE, priv->base + LCDIFV3_CTRL_CLR);
-+	udelay(10);
-+
-+	lcdifv3_set_mode(priv, timings);
-+
-+	writel(plat->base & 0xFFFFFFFF, priv->base + LCDIFV3_CTRLDESCL_LOW0_4);
-+	writel(plat->base >> 32, priv->base + LCDIFV3_CTRLDESCL_HIGH0_4);
-+
-+	writel(CTRLDESCL0_3_PITCH(timings->hactive.typ * 4), /* 32bpp */
-+	       priv->base + LCDIFV3_CTRLDESCL0_3);
-+
-+	lcdifv3_enable_controller(priv);
-+}
-+
-+static int lcdifv3_video_probe(struct udevice *dev)
-+{
-+	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
-+	struct video_priv *uc_priv = dev_get_uclass_priv(dev);
-+	struct lcdifv3_priv *priv = dev_get_priv(dev);
-+	struct clk axi_clk, disp_axi_clk;
-+	struct display_timing timings;
-+	u32 fb_start, fb_end;
-+	int ret;
-+
-+	ret = power_domain_get(dev, &priv->pd);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = clk_get_by_name(dev, "pix", &priv->pix_clk);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = clk_get_by_name(dev, "axi", &axi_clk);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = clk_get_by_name(dev, "disp_axi", &disp_axi_clk);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = power_domain_on(&priv->pd);
-+	if (ret)
-+		return ret;
-+
-+	ret = clk_enable(&priv->pix_clk);
-+	if (ret)
-+		goto dis_pd;
-+
-+	ret = clk_enable(&axi_clk);
-+	if (ret)
-+		goto dis_pix_clk;
-+
-+	ret = clk_enable(&disp_axi_clk);
-+	if (ret)
-+		goto dis_axi_clk;
-+
-+	priv->base = dev_remap_addr(dev);
-+	if (!priv->base) {
-+		ret = -EINVAL;
-+		goto dis_clks;
-+	}
-+
-+	/* Attach bridge */
-+	ret = uclass_get_device_by_endpoint(UCLASS_VIDEO_BRIDGE, dev,
-+					    0, &priv->bridge);
-+	if (ret)
-+		goto dis_clks;
-+
-+	ret = video_bridge_attach(priv->bridge);
-+	if (ret)
-+		goto dis_clks;
-+
-+	ret = video_bridge_set_backlight(priv->bridge, 80);
-+	if (ret)
-+		goto dis_clks;
-+
-+	/* Attach panels */
-+	ret = uclass_get_device_by_endpoint(UCLASS_PANEL, priv->bridge,
-+					    1, &priv->panel);
-+	if (ret) {
-+		ret = uclass_get_device_by_endpoint(UCLASS_PANEL, priv->bridge,
-+						    2, &priv->panel);
-+		if (ret)
-+			goto dis_clks;
-+	}
-+
-+	ret = panel_get_display_timing(priv->panel, &timings);
-+	if (ret) {
-+		ret = ofnode_decode_display_timing(dev_ofnode(priv->panel),
-+						   0, &timings);
-+		if (ret) {
-+			printf("Cannot decode panel timings (%d)\n", ret);
-+			goto dis_clks;
-+		}
-+	}
-+
-+	lcdifv3_init(dev, &timings);
-+
-+	/* Only support 32bpp for now */
-+	uc_priv->bpix = VIDEO_BPP32;
-+	uc_priv->xsize = timings.hactive.typ;
-+	uc_priv->ysize = timings.vactive.typ;
-+
-+	/* Enable dcache for the frame buffer */
-+	fb_start = plat->base & ~(MMU_SECTION_SIZE - 1);
-+	fb_end = ALIGN(plat->base + plat->size, 1 << MMU_SECTION_SHIFT);
-+	mmu_set_region_dcache_behaviour(fb_start, fb_end - fb_start,
-+					DCACHE_WRITEBACK);
-+	video_set_flush_dcache(dev, true);
-+	gd->fb_base = plat->base;
-+
-+	return 0;
-+
-+dis_clks:
-+	clk_disable(&disp_axi_clk);
-+dis_axi_clk:
-+	clk_disable(&axi_clk);
-+dis_pix_clk:
-+	clk_disable(&priv->pix_clk);
-+dis_pd:
-+	power_domain_off(&priv->pd);
-+
-+	return ret;
-+}
-+
-+static int lcdifv3_video_bind(struct udevice *dev)
-+{
-+	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
-+
-+	/* Max size supported by LCDIF */
-+	plat->size = 1920 * 1080 * VNBYTES(VIDEO_BPP32);
-+
-+	return 0;
-+}
-+
-+static const struct udevice_id lcdifv3_video_ids[] = {
-+	{ .compatible = "fsl,imx8mp-lcdif" },
-+	{ }
-+};
-+
-+static struct video_ops lcdifv3_video_ops = {
-+	.video_sync = lcdifv3_video_sync,
-+};
-+
-+U_BOOT_DRIVER(lcdifv3_video) = {
-+	.name = "lcdif",
-+	.id = UCLASS_VIDEO,
-+	.of_match = lcdifv3_video_ids,
-+	.bind = lcdifv3_video_bind,
-+	.ops = &lcdifv3_video_ops,
-+	.probe = lcdifv3_video_probe,
-+	.priv_auto = sizeof(struct lcdifv3_priv),
-+	.flags = DM_FLAG_PRE_RELOC | DM_FLAG_OS_PREPARE,
-+};
--- 
-2.43.0
-
+My guess would be pinmux or clock, maybe the i2c controller is marked as 
+bootph-* in DT and its pinmux/clock is not? Maybe the i2c on tegra works 
+by sheer coincidence right now? Can you have a look?
