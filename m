@@ -4,76 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4CB0EE4992
-	for <u-boot@archiver.kernel.org>; Wed, 11 Sep 2024 11:01:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA94FEE01EE
+	for <u-boot@archiver.kernel.org>; Wed, 11 Sep 2024 11:06:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2FB758926B;
-	Wed, 11 Sep 2024 13:01:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E0A218927B;
+	Wed, 11 Sep 2024 13:06:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1726052495;
-	bh=Al3jtDPhLxOvdIYKZNxcpagroFBcDaxM8JV+V4iFiD8=;
+	s=phobos-20191101; t=1726052763;
+	bh=4YMtn5JhdCBLrCEmyl2ITOfhp/UfToDtJ/fTSWJyS+M=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=wANp9bPbiD5MvmBn2VuadD0Hvrgfn17gx8EFPPq5U+ybMgHIg0tyYRsWb8zjQT3kR
-	 qNYbUSqc/Gr6Kl87V8CFwbqMbdIihEhHKI/XR+rDfLHBb9a/knZVNT0Mr/K7S0ugdU
-	 prMXfkMOMqVet1bf7CJ1qO1rluAbJtPnYSCSliEJTdafHfZ6daFftYdtvfJHyUMsSk
-	 mSGg6yvz2PAzkQvwNLWF8G8RjaccoeP2KGneM8ukUWb2xT1dydB0fBe4d3jPLB95Wx
-	 c+1G7533ktvIjOlFrE8tk9BLOrc1dvTajEYrYE06QHH1F2U8STeCW77AqluVd9yQzi
-	 nkB3Fc6WZ4RQA==
+	b=giHQWngdXt2KcajS8t3uk5MaQxa1z72gUlOPSYbVWSvmz44eOCwUCkKHW6YGDoXg0
+	 82Ep9cMqpjS0Kg8Rz7DG32Q0lfsks486iJqIdyATKUs7CPrmA3K7ngrgPuzSEsKcoo
+	 AXHZJuEXZRWgE3yGAoWWEEF8M9a0gbMv0wmCHyrgQE3ajeZ9eVuEqUh/L/0HSQP842
+	 qD9uWarCnY4nVBf3p8zw/3WtSesS0YmFUii839gGN7vHa+aZHlK77935hC9na9IduM
+	 dKT2NjUCBUZgAiuuGrx1hlkoLuWcn0cExFMJjMss7T9fmQ4/B5yIEdVjQrUcJ1Wk2F
+	 dwOsTCVyypgQw==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 333B489228;
- Wed, 11 Sep 2024 13:01:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 4854589228;
+ Wed, 11 Sep 2024 13:06:02 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1726052493;
- bh=Al3jtDPhLxOvdIYKZNxcpagroFBcDaxM8JV+V4iFiD8=;
+ s=phobos-20191101; t=1726052762;
+ bh=4YMtn5JhdCBLrCEmyl2ITOfhp/UfToDtJ/fTSWJyS+M=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=SG7nrscnfbfhj4Rvja0Kc+Jp54Y1xypEQ+qYYoRSKLTrDL/CX4dWRilD8xoUlvR48
- Z+moGOUP000/K1d2QGz0VpME0+BF3x194aYqLUtvdIDeAXcap9uAiv2zMByo5+CnCQ
- 8AT/0AZN6K5v5v/HQthS4qKyvTuEbAilUNlKh158CmNwonEuFiae7JPAQqpeZciM8U
- USVM7ih3kmYOeBhp7WX+Lr1NcPC1mw5NRn6r8zy3s48bOKumsHXrLhwWO64z5A1M7y
- HfUcEk48sNgrVKz3uWJmu/h19QHqfNY37NiIqkof8SS6LNmb6Hqdn+hXWmNlcRED7x
- 3OXg2LnA4/5Uw==
-Message-ID: <cfc1a158-6c35-4288-aed0-fcc78a8db832@denx.de>
-Date: Wed, 11 Sep 2024 12:46:39 +0200
+ b=lvDN2tzcMsG/0aF/xYDDJvt8eu+cbp3QuHL+E4k0hIvb8Yd/Zx3ABU6SvEN+hz5m6
+ 4W0oi+fgd3qN83gwTEtUSDslCMsouPjPuKfI1fhUFjoY7oDlWGwMTQlqEZu9zHI8zp
+ 7H50rnnIqWgQ9xZNhf/qAS6vl6ZzVpVjrJP2i72DWrGDsm4aoMaTNkI6LBjD+Xmhgk
+ /WA0ps2BrRK0if0PV+XHc+GMU5T1jcNZOsG1Lal4430mK10EBBVcr5/MnBprEGe0Qc
+ Bh7BWeH8GFlUyfqWRgo0pZke9CcMlYGviGLIhwBvWpubKsZvC5HhG8LH/p2/eQWHbv
+ Gg2nZrF/hZkRQ==
+Message-ID: <6c353eaa-1609-4a72-a557-0b81ee337c5f@denx.de>
+Date: Wed, 11 Sep 2024 13:05:02 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] power: regulator: Trigger probe of regulators which
- are always-on or boot-on
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
- Sumit Garg <sumit.garg@linaro.org>, uboot-stm32@st-md-mailman.stormreply.com
-References: <20240626235717.272219-1-marex@denx.de>
- <a73dffe5-87e3-4e96-965f-9d029f2af8ed@denx.de>
- <CAPVz0n0C6TPdBRUEvJmgAUGAKoetuzr1j=0cMXweP2EqMTwn=g@mail.gmail.com>
- <0910419d-e8ab-4bf9-a083-dc2783afaca1@denx.de>
- <4D07A6E5-F156-44C3-A26D-0F2D913CE92D@gmail.com>
- <18d84528-d2e5-41d6-ae1d-109ee30853b2@denx.de>
- <CAPVz0n2Jzfih0Z85TSQbnz-8OrX4D6UN=anKGTJ=hckRt8f3xA@mail.gmail.com>
- <a95f0d60-2883-4c3d-8a53-ee3ef414cc32@denx.de>
- <CAPVz0n3Ji1sKQK+Lnq8rP3ZqwX3o-kXe2btj93UuVBa3T5C=qw@mail.gmail.com>
- <eced1020-2157-44a4-98a9-845e218529d9@denx.de>
- <45c74c58-98cf-43df-b837-c48b0341c551@denx.de>
- <CAPVz0n2-DCKDcVrAi00kF6yDcE2bN1mtUhzBcw7JDiZoXgzu0w@mail.gmail.com>
- <e5837ce4-0a14-4822-960d-6ab667a9f4b1@denx.de>
- <CAPVz0n323ktF6kb3WHR9JcE+xOzQr9-aWOR47+ZvwQr=ib18rg@mail.gmail.com>
- <f778366b-bdaf-415d-a94e-c995f62e8c71@denx.de>
- <CAPVz0n0ru1rPb9SNw515mkwfs4=nNSOPjZY74JVkqnGbEouSLQ@mail.gmail.com>
+Subject: Re: [PATCH] mtd: spi-nor: Fix chip erase timeout issue
+To: Ye Li <ye.li@nxp.com>, jagan@amarulasolutions.com, u-boot@lists.denx.de
+Cc: uboot-imx@nxp.com, ye.li@oss.nxp.com
+References: <1726051530-56280-1-git-send-email-ye.li@nxp.com>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAPVz0n0ru1rPb9SNw515mkwfs4=nNSOPjZY74JVkqnGbEouSLQ@mail.gmail.com>
+In-Reply-To: <1726051530-56280-1-git-send-email-ye.li@nxp.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,41 +68,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/11/24 7:57 AM, Svyatoslav Ryhel wrote:
+On 9/11/24 12:45 PM, Ye Li wrote:
+> Chip erase support was added to spi_nor_erase, but the timeout
+> for polling SR ready is not updated and still for sector erase.
+> So the timeout value is not enough for chip erase on some NOR flash.
+> Follow kernel implementation to set new timeout for chip erase.
 
-[...]
+Is there a matching Linux kernel commit you could point to, from which 
+this was ported over ?
 
->>>> You did mention something regarding I2C/PMIC driver probe timing, but it
->>>> seems the I2C driver and PMIC drivers probe roughly around the same time
->>>> in both pass and fail cases ?
->>>
->>> Yes, here I agree that they both probe and probe passes, but I assume
->>> timing of i2c call is critical and there may be some dependency which
->>> is not ready.
->>
->> My guess would be pinmux or clock, maybe the i2c controller is marked as
->> bootph-* in DT and its pinmux/clock is not? Maybe the i2c on tegra works
->> by sheer coincidence right now? Can you have a look?
+> Fixes: b91a0822d752 ("mtd: spi-nor: Add CHIP_ERASE optimization")
 > 
-> Power i2c line (one that hosts PMIC) is configured extremely early in
-> SPL since it is needed for cpu and core voltage setup so even if, as
-> you say, tegra works by sheer coincidence, specifically this i2c line
-> should work non the less, since it has all its pre-requisites (clock
-> and pinmux) configured on early stage.
+> Signed-off-by: Ye Li <ye.li@nxp.com>
+> ---
+>   drivers/mtd/spi/spi-nor-core.c | 21 ++++++++++++++++++++-
+>   1 file changed, 20 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
+> index aea611fef523..338e5856337e 100644
+> --- a/drivers/mtd/spi/spi-nor-core.c
+> +++ b/drivers/mtd/spi/spi-nor-core.c
+> @@ -44,6 +44,12 @@
+>   
+>   #define DEFAULT_READY_WAIT_JIFFIES		(40UL * HZ)
+>   
+> +/*
+> + * For full-chip erase, calibrated to a 2MB flash (M25P16); should be scaled up
+> + * for larger flash
+> + */
+> +#define CHIP_ERASE_2MB_READY_WAIT_JIFFIES	(40UL * HZ)
+> +
+>   #define ROUND_UP_TO(x, y)	(((x) + (y) - 1) / (y) * (y))
+>   
+>   struct sfdp_parameter_header {
+> @@ -991,6 +997,7 @@ static int spi_nor_erase(struct mtd_info *mtd, struct erase_info *instr)
+>   	bool addr_known = false;
+>   	u32 addr, len, rem;
+>   	int ret, err;
+> +	unsigned long timeout = 0;
 
-Is it possible that this configuration is somehow reset or reconfigured 
-from DT early on in U-Boot proper ?
+Keep the variables in reverse xmas-tree please.
 
-Do you have serial console output in board_f.c time in U-Boot proper , 
-possibly using DEUBG_UART , to check if there might be some prior 
-failing I2C transfer at that board_f.c time ?
+>   	dev_dbg(nor->dev, "at 0x%llx, len %lld\n", (long long)instr->addr,
+>   		(long long)instr->len);
+> @@ -1026,6 +1033,15 @@ static int spi_nor_erase(struct mtd_info *mtd, struct erase_info *instr)
+>   		if (len == mtd->size &&
+>   		    !(nor->flags & SNOR_F_NO_OP_CHIP_ERASE)) {
+>   			ret = spi_nor_erase_chip(nor);
+> +			/*
+> +			 * Scale the timeout linearly with the size of the flash, with
+> +			 * a minimum calibrated to an old 2MB flash. We could try to
+> +			 * pull these from CFI/SFDP, but these values should be good
+> +			 * enough for now.
+> +			 */
+> +			timeout = max(CHIP_ERASE_2MB_READY_WAIT_JIFFIES,
+> +				      CHIP_ERASE_2MB_READY_WAIT_JIFFIES *
+> +				      (unsigned long)(mtd->size / SZ_2M));
+Is the type cast needed ?
 
-> As I have told, I was not able to determine exact reason why this
-> happens, it should not and yet it does. This is why I have abandoned
-> my attempt to implement same changes you are currently proposing.
-
-If tegra has a problem, it should be fixed on tegra side and not block 
-core plumbing. I am not seeing the problem on stm32 or imx systems, so I 
-am banking toward tegra-specific issue.
-
-Are you able to debug this ?
+Thanks
