@@ -4,71 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE488EE57F6
-	for <u-boot@archiver.kernel.org>; Wed, 11 Sep 2024 23:27:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE6E2EE57F6
+	for <u-boot@archiver.kernel.org>; Wed, 11 Sep 2024 23:27:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69DFC88CC7;
-	Thu, 12 Sep 2024 01:27:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CBB7F886B1;
+	Thu, 12 Sep 2024 01:27:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="N6WytkQg";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="m49nTw5t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E078A88CC7; Thu, 12 Sep 2024 01:27:11 +0200 (CEST)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
+ id A09AE886B1; Thu, 12 Sep 2024 01:27:36 +0200 (CEST)
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [IPv6:2a00:1450:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC8BA88009
- for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 01:27:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B51F288009
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 01:27:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-5365d3f9d34so396033e87.3
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 16:27:09 -0700 (PDT)
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-5365aa568ceso430963e87.0
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 16:27:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1726097225; x=1726702025; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1726097254; x=1726702054; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QTnFNwajuSL/d61ACiQAlao1VL3blH3joqJMIL00W24=;
- b=N6WytkQg9KJszR4cBmLg7Yjy8iwUxEMvT+Zd28dkT5GuP+QaQ4Rd5h0GSjAybCbMRW
- u4kQTMZqiC7y99fft0+7OjM42yHpRwdsT8tTTeo1PILD388FZNXN8LSk2IDy29d7uXKP
- uP4muUcCKjGBVhCZsziz8N4nQRq8kWzvRBKYFqWntuX3TlA41bdk5GJQn7CbkmXpP3EA
- 518jGCRSBWcraDp72LErFX/bJQceoW1citW4MgpkuhM4V4da7+rbTH+WYJUpQx6+iqXP
- +UPeY60uy8KKDt4GaITwrCN4NSoq+x8Cjp9dQ6pkhXqA+udMkimv6zoYBqDJ66I7jp90
- vNiQ==
+ bh=cDnjg6ckfHzPwb1Mk5iKmJtcd/3dCg6JiI6TwH9SsTo=;
+ b=m49nTw5tm4OTvyGgvhnz2NtQzny8wKiYMb4F3/WMv6w673kmULQdCwdOksdRJ2nrOj
+ 0QWgv7sVvLT0592cVe2OkAxikVuwqZcDjZlwaT9983Z/0Y5y5KJ74e3/tFtbLy7CoEUg
+ uJKf2k0L/JdBOOFjJpFmpAI4Vj59EO62ndfzHCibCJ+KHcdASMXN8HZBF4azOEkhioiL
+ dmaZkHRDMoC9q1ea+yZE/ZTzlS7gNhKUjI7Mwo3aw3Mg6OKiwEMMgvbjJyW9epjwAbST
+ pLPb6h6qwzWuEHxyHbTMV8odfdGZEm/6k1UQ41Zpo1XAXoUWan0Ap1mU82qLVJ7SoghG
+ DDpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726097225; x=1726702025;
+ d=1e100.net; s=20230601; t=1726097254; x=1726702054;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=QTnFNwajuSL/d61ACiQAlao1VL3blH3joqJMIL00W24=;
- b=kHWuw9+GTNDxuyq0r64WD0+uipvu0ZoFG9ufmealfXs0moszt6uwsr0er9hmc6jAfv
- nDSa5ZxNcHqM1OEng1x/17CbAAi89g5O4PaM+Mo/6z1cZgo9bUWsglq3S6Xn8QO78gFI
- VtQJVQCpou8BmyHzrjsynQjPq2pv0pHOgTCewZndjOJoQ0vpdzBmwiBDfrN0bm9M35jy
- UeigxOPaLxHO0xlyie3ZwAgkbOjkd8ddUwqlb7VnQYZ8TBbjfphtMkruogXKKDsQMVp8
- Wit01HqhE13pxXtGHImqN2MIIOqVQuBzp602hJHwCuq9AEkrJ1vB3V5XM/Pj1/jkOABn
- oE4A==
-X-Gm-Message-State: AOJu0YxQRU7e1vO51B8NQLCiJbDvER67IgxZ6/Ena0Qwhe84ea4cQIlO
- j798jre/r483Cf7UJyzQ6sAV1kEZ8qmQQUP2qtnzW+OT0/q8jE6plE5nLwuPTydXnYPQDDB8G7q
- 7faaTT4aXsl2s0i/Dm31Wfupk8AY=
-X-Google-Smtp-Source: AGHT+IGXcevva839gF9bbmR8gFTFlO/xPEuq8m3laQTpAYtZDwcHtDlcFrg1RjY9ZcaMafbesNTBbVBla3LjmqLMoBE=
-X-Received: by 2002:a05:6512:110f:b0:535:3dae:a14b with SMTP id
- 2adb3069b0e04-53678fb8a3cmr491969e87.2.1726097224937; Wed, 11 Sep 2024
- 16:27:04 -0700 (PDT)
+ bh=cDnjg6ckfHzPwb1Mk5iKmJtcd/3dCg6JiI6TwH9SsTo=;
+ b=Ty7Wf/+ezG/51vPp8z5d1baRaSMCg7EN9JWPxQNe4TrTv/mBXqgWdkHT5v8S8crJFR
+ SDMTLblVBlEXzKsxdCxhHkJFWkaQUy3qvpVijuZQHsHj+4MiyvqOjtqXXKFMQLWRLogA
+ 3KcEhvqQUv3Kakistg6jfIgvokM+Hf+txe/tdEVtXtQYMKsmZ5fS2NSnnwV2j6NTdVl7
+ bg2tK6ny5vlgB3rPFNJ3qHnIcyRfWv73FGLSAPjq8JEbczHecglcIyBemblRqRy9/+wp
+ cbHT3gobGUMcXsjr60lRlLiralEOYenaBy6wGgUCsWsDFTREAO/jwrutAfXp3DHd1JS2
+ 10Dw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWu4oYjiOUi4I/WyOyu+RHfi1Z4x0kIJRilwwoRr/TWjmdb3cyBVJqEWnVKFH5krtwHZdWgk3M=@lists.denx.de
+X-Gm-Message-State: AOJu0YyPOb26MLfBtTlW2qOhzYM4fToGZyPJvIoFgDWpdHoUh6TUmj0u
+ simJk8gwE2PCZes6BrxzTZcMZi/Q+YmTVPrBHgesKWwlMZOztHC4fLCMgTCveOAg9zxA2cTI7CQ
+ DwF9+GRVzJQ04uidaXSmTQneaSc8=
+X-Google-Smtp-Source: AGHT+IGUuOUyN/tOHxrUogrbTR9Oppx2AuUuvn7KarRWKBJj68zzuB8MBLxRUUfJPK8mOx5CvjuOSyRbuMbM9L1EWKc=
+X-Received: by 2002:a05:6512:3c9f:b0:535:681d:34b0 with SMTP id
+ 2adb3069b0e04-53678fe6a7emr752640e87.47.1726097253590; Wed, 11 Sep 2024
+ 16:27:33 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240905190826.538309-1-tharvey@gateworks.com>
-In-Reply-To: <20240905190826.538309-1-tharvey@gateworks.com>
+References: <20240910091359.102121-1-miquel.raynal@bootlin.com>
+In-Reply-To: <20240910091359.102121-1-miquel.raynal@bootlin.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 11 Sep 2024 20:26:53 -0300
-Message-ID: <CAOMZO5BaUJVQ9MTCNjmkk9pNxjF+PFiUrKL3-ATCLZuxXHwgVQ@mail.gmail.com>
-Subject: Re: [PATCH] configs: venice: enable DM_RNG
-To: Tim Harvey <tharvey@gateworks.com>
-Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>
+Date: Wed, 11 Sep 2024 20:27:22 -0300
+Message-ID: <CAOMZO5Brpa547b-8NnSX0CKNBeAC1fxQTk=bTqi4p5mmr=qGfA@mail.gmail.com>
+Subject: Re: [PATCH] pwm: imx: Don't drop the enable bit once set
+To: Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Ian Ray <ian.ray@gehealthcare.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -87,12 +91,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Sep 5, 2024 at 4:08=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> w=
-rote:
+On Tue, Sep 10, 2024 at 6:51=E2=80=AFAM Miquel Raynal <miquel.raynal@bootli=
+n.com> wrote:
 >
-> Enable DM_RNG so that the kaslr-seed property is set in the dt allowing
-> Linux KASLR.
+> Changing the duty-cycle should not blindly override (and clear) the
+> enable (EN) bit if it has already been set. For instance, a PWM
+> backlight can be enabled and set to a specific intensity using two
+> operations. The order of these operations should not matter.
 >
-> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
 
 Applied to u-boot-imx/next, thanks.
