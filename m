@@ -4,91 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C26BAEE4983
-	for <u-boot@archiver.kernel.org>; Wed, 11 Sep 2024 09:44:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A597EE4983
+	for <u-boot@archiver.kernel.org>; Wed, 11 Sep 2024 09:46:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42458885A5;
-	Wed, 11 Sep 2024 11:44:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C0A6D885A5;
+	Wed, 11 Sep 2024 11:46:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qvRZDH4Z";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HbBq8Qcb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4AE278922F; Wed, 11 Sep 2024 11:44:25 +0200 (CEST)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
+ id 3761E89232; Wed, 11 Sep 2024 11:46:07 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D84E088549
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 11:44:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F2E988549
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 11:46:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-536748c7e9aso766997e87.0
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 02:44:22 -0700 (PDT)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-5c24ebaa427so1129786a12.1
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 02:46:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726047862; x=1726652662; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=HD+XtklTeGu7bVc6uQeKUd5hWNcasyvSjGlbQI2T958=;
- b=qvRZDH4Z0/Dam3Qx2flMdNDvkYL/70/Wz44TEZYB4AnLxqOFVXBUSseu1IXX7oJaCU
- b7ubcDprjvQUOB+8yZD7zRJgBARiiZTpXtA/ijzAlS0a/F3RWZqQdsDPO5GOT1nsV36F
- FHRDE4SEGB2uL70P9qXmbLaJl3omIkusAKkzY9zHsrPkzvugqwCVwQullrnMXQlPkU/k
- +SNzpcybIeB7jKMfunoFslaEka1x/0bSZdk5PelRPGurI/e50jYcX1JMCZZCfb4hDDHr
- qfae77eUyeq0FRsjxKTlDE97h+b5TPQ/mlGq5TSatGcRcvUjfp5sb9TtaC4zJATCC0Vc
- QBBw==
+ d=gmail.com; s=20230601; t=1726047965; x=1726652765; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=n5322mb/FrjIW1JXplp1MkpsiFd9OP32TqeA8Keonw4=;
+ b=HbBq8QcbE7ahx8/Q4ekdUb6Hr1zKmG1tHtrY/Sk/HI4BEq8RKzYbADNgDA/jXtF3p/
+ jmaNfBpwnSrKgELN/gI276UJL7IInKhrxuCaxbg65p46dm9gOC15pB/a2x5kl+wy9pnS
+ sGe1Xhtl2jWB0E9Xz6JF4SnpGZa7PhrSDXS58jbyAwzVbpdYyCzfxniTh2A0N9lcM9yS
+ WLHPj6ra7p53rZGYJW9gOQSrgz44I1WUFhFAvQJMzPruIRizi6VDoS+cUI/N9RJdhO04
+ HuLJhEFVPI1rhRgIc1n/yuU/UwZJkcnOHEAcZYML3jcTgdhVTr3gZWAZfir1l8bnuQBy
+ pOhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726047862; x=1726652662;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=HD+XtklTeGu7bVc6uQeKUd5hWNcasyvSjGlbQI2T958=;
- b=hD3jTjq6EnSoD2IwSliw9jK9BEmbHuvdfQC+bD6xMbPqY6Ci3l4u8m0oEs5F8lU3rf
- Tvdhix1V/Csg/6zgbp6G8wgRjhZ4ob9BmQyM+9W9jQsUZEcktVVUQAPfrICqDHWBi4nz
- /560r3fbxbIVCTiGzz5QMR+umeB0FxbFqUK+Ji3GNSgL36XB1j+xLPxxJgGMeAEgem8m
- Gdv0tJr6ZiQECsvtrfnpM+zcXLQgHMqM8pEsplys6JR9yzEKQtwWB/bOO6hkhgOxunxA
- cjarmdekEBUvKEWmVuzuMMW77lQC3rdUlICfeEM1JyFaDLaivcpbkznSPOVs+Yzz8V7A
- 8umw==
-X-Gm-Message-State: AOJu0YzdrKMmbcb0HTNsjcrJ4vtG/Wzq24cc/1u8rxJXa9zS14H9zCOB
- qoYOOJTWoWXivcJAixegBNarN0BKZ/pmPs3HR5iJmg/lMBEd8LrsVP58jiByldA=
-X-Google-Smtp-Source: AGHT+IGbEHnuKYlSKbpW8np60cCatuCojf1xJvKwDWEkFOqXGOka3TBUpl9hiqPNuko//wpobT3eeA==
-X-Received: by 2002:a05:6512:3c88:b0:52c:e012:efad with SMTP id
- 2adb3069b0e04-53673a63416mr1720731e87.12.1726047861828; 
- Wed, 11 Sep 2024 02:44:21 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:1a64:5ef:379f:729a?
- ([2a01:e0a:3cb:7bb0:1a64:5ef:379f:729a])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a8d25c73c00sm591124466b.101.2024.09.11.02.44.21
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Sep 2024 02:44:21 -0700 (PDT)
-Message-ID: <f06b0774-d47c-4414-9974-89d2ebbf1902@linaro.org>
-Date: Wed, 11 Sep 2024 11:44:20 +0200
+ d=1e100.net; s=20230601; t=1726047965; x=1726652765;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=n5322mb/FrjIW1JXplp1MkpsiFd9OP32TqeA8Keonw4=;
+ b=E68OEaJn50ULMiGRWNUHpWRYIXtJ/gQh0Er+xPl+rEFWSAHe6V4Ixlw9llX3f7Jgg0
+ 6yjWvK4PsU75zBSMLjtcXAbiCTnDvSFIf/WzXOHvwD1SsqXpXYEoUni71+eF3qohYLoG
+ hyWTSi41edFyY/KMNsi+6aRszWGosAxm3BJtP4meiBNjln99FCk7u6oUD+UiBs9yP/L9
+ vk0wm2Dt2hfjCAe7tFMzuNdEokyadURxFx9fQJRNLovK8bhsk3TUOuppcaCwNkMKVR3+
+ TLrPtRQNu5z8DFg6MJ3+kjsQdG1N4mVxyXGCYWRen68cJukzkOFZb9JNsdLuqzwFq5AG
+ Q5Kg==
+X-Gm-Message-State: AOJu0Ywr3hFqR0D8qZexHAhH9j/yn+vFkKDOvZ6bD4nsvrac3ABCzkdN
+ r1T74qktODAsDab44CXn/pjb9C9QErhpE5bbwbwjmCtUs8HnSRQ6Ntwcp40MNZrXetrKlHmBCc2
+ Ydx+ObJnwcJQbXpQBH7eBA4o4Auc=
+X-Google-Smtp-Source: AGHT+IH8IPBM/2XAsqsMgGDQilZxHYXXnqfh3GBiELIAn53wNk8QZdIHBBgy+I6s3HEoUUnE+AvuRsO6ksba2/5gADc=
+X-Received: by 2002:a05:6402:5d2:b0:5c2:7699:92ef with SMTP id
+ 4fb4d7f45d1cf-5c4015ef7ddmr7650585a12.16.1726047963797; Wed, 11 Sep 2024
+ 02:46:03 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 01/16] Makefile: detect HOST_ARCH properly when
- CROSS_COMPILE is multi-word
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Sumit Garg
- <sumit.garg@linaro.org>, Andrew Davis <afd@ti.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Bryan Brattlof <bb@ti.com>,
- Jesse Taube <mr.bossman075@gmail.com>,
- "Leon M. Busch-George" <leon@georgemail.eu>
-References: <cover.1725351676.git.jerome.forissier@linaro.org>
- <a5617c0cb57624d004c4b4f42861822016edb2e9.1725351676.git.jerome.forissier@linaro.org>
- <CAFLszTgr9fEmdx9No2yh-1tiVW4P1qb+mWFJ=Zk6Om_d_CFuXQ@mail.gmail.com>
- <72a8df61-16b2-4d73-a1e5-db0ef1d5cd07@linaro.org>
- <CAFLszTifWxDMmW=G_4w2f5bHU-FOg5nsmd4_EeOhwVSMzHzXFQ@mail.gmail.com>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <CAFLszTifWxDMmW=G_4w2f5bHU-FOg5nsmd4_EeOhwVSMzHzXFQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20240911062511.494855-1-patrick.rudolph@9elements.com>
+ <20240911062511.494855-14-patrick.rudolph@9elements.com>
+In-Reply-To: <20240911062511.494855-14-patrick.rudolph@9elements.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Wed, 11 Sep 2024 10:45:30 +0100
+Message-ID: <CALeDE9O6fbvfjyqcd32vo6SYBy9OUm+xfz9DV7akiGRS9jGNCg@mail.gmail.com>
+Subject: Re: [PATCH v3 13/30] acpi: acpi_table: Support ACPI 2.0 platforms
+To: Patrick Rudolph <patrick.rudolph@9elements.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,113 +87,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+> On platforms that do not have usable DRAM below 4GiB, like QEMU sbsa,
+> the RSDT cannot be used. Allow both RSDT and XSDT to be null and only
+> fill those tables that are present in acpi_add_table().
 
-TL;DR: I am dropping this patch in v4.
+I'm not sure what ACPI 2.0 from the subject has to do with the above,
+eg ACPI only started supporting aarch64 with ACPI 5.1
 
-On 9/10/24 20:44, Simon Glass wrote:
-> Hi Jerome,
-> 
-> On Fri, 6 Sept 2024 at 09:10, Jerome Forissier
-> <jerome.forissier@linaro.org> wrote:
->>
->> Hello Simon,
->>
->> On 9/6/24 17:02, Simon Glass wrote:
->>> Hi Jerome,
->>>
->>> On Tue, 3 Sept 2024 at 02:38, Jerome Forissier
->>> <jerome.forissier@linaro.org> wrote:
->>>>
->>>> When CROSS_COMPILE contains multiple words, HOST_ARCH is not properly
->>>> detected and the sandbox build fail. It typically happens when using
->>>> ccache. For example:
->>>>
->>>>  $ make sandbox_defconfig
->>>>  $ make CROSS_COMPILE="ccache x86_64-linux-gnu-" \
->>>>         CC="ccache x86_64-linux-gnu-gcc"
->>>>  [...]
->>>>  In file included from boot/bootmeth_efi.c:16:
->>>>  include/efi_default_filename.h:33:2: error: #error Unsupported UEFI architecture
->>>>     33 | #error Unsupported UEFI architecture
->>>>        |  ^~~~~
-
-As you mentioned in your reply to this patch in v2 [1], this is not
-a valid use case (CROSS_COMPILE should not be set for sandbox).
-
-[1] http://patchwork.ozlabs.org/project/uboot/patch/e2f0809aa4b9d81cf1709a6b82d803a21ea1fac7.1725012294.git.jerome.forissier@linaro.org/#3377679
-
->>>>
->>>> A similar error occurs when the build is done via buildman and
->>>> ~/.buildman contains:
->>>>
->>>>   [toolchain-wrapper]
->>>>   wrapper = ccache
-
-
-This problem is still present in -next though (which does have your
-patch "buildman: Support building within a Python venv" [2]).
-
-It is my patch "buildman/toolchain.py: do not set CROSS_COMPILE for
-sandbox" [3] that solves the problem.
-
-[2] https://patchwork.ozlabs.org/project/uboot/patch/20240815195746.749042-2-sjg@chromium.org/
-[3] http://patchwork.ozlabs.org/project/uboot/patch/f4defe07f87f6c9761b401d435da03460b3b0947.1725351676.git.jerome.forissier@linaro.org/
-
-So all in all this patch is not needed.
-
-Regards,
--- 
-Jerome
-
->>>> Fix the issue by considering only the last word in $(CROSS_COMPILE).
->>>>
->>>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
->>>> Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
->>>> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->>>> Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
->>>> ---
->>>>  Makefile | 2 +-
->>>>  1 file changed, 1 insertion(+), 1 deletion(-)
->>>>
->>>> diff --git a/Makefile b/Makefile
->>>> index f90e48f58a5..dc7bdd79420 100644
->>>> --- a/Makefile
->>>> +++ b/Makefile
->>>> @@ -21,7 +21,7 @@ include include/host_arch.h
->>>>  ifeq ("", "$(CROSS_COMPILE)")
->>>>    MK_ARCH="${shell uname -m}"
->>>>  else
->>>> -  MK_ARCH="${shell echo $(CROSS_COMPILE) | sed -n 's/^[[:space:]]*\([^\/]*\/\)*\([^-]*\)-[^[:space:]]*/\2/p'}"
->>>> +  MK_ARCH="${shell echo ${lastword $(CROSS_COMPILE)} | sed -n 's/^[[:space:]]*\([^\/]*\/\)*\([^-]*\)-[^[:space:]]*/\2/p'}"
->>>>  endif
->>>>  unexport HOST_ARCH
->>>>  ifeq ("x86_64", $(MK_ARCH))
->>>> --
->>>> 2.40.1
->>>>
->>>
->>> I've lost track of this, but did you pull in [1] first?
->>
->> Oops! No I didn't :-/ In fact I could not find the reference to the patch
->> in your initial email, then I forgot about it.
->> Would you like me to resend the whole series as v4 with your patch included?
-> 
-> I just want to know that there is still a problem, with my patch. So
-> yes please try it and update the commit messages as needed for the two
-> affected patches.
-> 
-> Regards,
-> Simon
-> 
-> 
->>
->>>
->>> Regards,
->>> Simon
->>>
->>> [1] https://patchwork.ozlabs.org/project/uboot/patch/20240815195746.749042-2-sjg@chromium.org/
->>
->> Thanks,
->> --
->> Jerome
+> Fixes a crash on QEMU sbsa.
+>
+> Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> ---
+>  lib/acpi/acpi_table.c | 95 ++++++++++++++++++++++++++-----------------
+>  1 file changed, 57 insertions(+), 38 deletions(-)
+>
+> diff --git a/lib/acpi/acpi_table.c b/lib/acpi/acpi_table.c
+> index 4f5cfe522c..8aab41212a 100644
+> --- a/lib/acpi/acpi_table.c
+> +++ b/lib/acpi/acpi_table.c
+> @@ -157,51 +157,70 @@ int acpi_add_table(struct acpi_ctx *ctx, void *table)
+>         struct acpi_rsdt *rsdt;
+>         struct acpi_xsdt *xsdt;
+>
+> -       /* The RSDT is mandatory while the XSDT is not */
+> -       rsdt = ctx->rsdt;
+> -
+> -       /* This should always be MAX_ACPI_TABLES */
+> -       entries_num = ARRAY_SIZE(rsdt->entry);
+> -
+> -       for (i = 0; i < entries_num; i++) {
+> -               if (rsdt->entry[i] == 0)
+> -                       break;
+> -       }
+> -
+> -       if (i >= entries_num) {
+> -               log_err("ACPI: Error: too many tables\n");
+> -               return -E2BIG;
+> -       }
+> +       /* On legacy x86 platforms the RSDT is mandatory while the XSDT is not.
+> +        * On other platforms there might be no memory below 4GiB, thus RSDT is NULL.
+> +        */
+> +       if (ctx->rsdt) {
+> +               rsdt = ctx->rsdt;
+>
+> -       /* Add table to the RSDT */
+> -       rsdt->entry[i] = nomap_to_sysmem(table);
+> +               /* This should always be MAX_ACPI_TABLES */
+> +               entries_num = ARRAY_SIZE(rsdt->entry);
+>
+> -       /* Fix RSDT length or the kernel will assume invalid entries */
+> -       rsdt->header.length = sizeof(struct acpi_table_header) +
+> -                               (sizeof(u32) * (i + 1));
+> +               for (i = 0; i < entries_num; i++) {
+> +                       if (rsdt->entry[i] == 0)
+> +                               break;
+> +               }
+>
+> -       /* Re-calculate checksum */
+> -       rsdt->header.checksum = 0;
+> -       rsdt->header.checksum = table_compute_checksum((u8 *)rsdt,
+> -                                                      rsdt->header.length);
+> +               if (i >= entries_num) {
+> +                       log_err("ACPI: Error: too many tables\n");
+> +                       return -E2BIG;
+> +               }
+>
+> -       /*
+> -        * And now the same thing for the XSDT. We use the same index as for
+> -        * now we want the XSDT and RSDT to always be in sync in U-Boot
+> -        */
+> -       xsdt = ctx->xsdt;
+> +               /* Add table to the RSDT */
+> +               rsdt->entry[i] = nomap_to_sysmem(table);
+>
+> -       /* Add table to the XSDT */
+> -       xsdt->entry[i] = nomap_to_sysmem(table);
+> +               /* Fix RSDT length or the kernel will assume invalid entries */
+> +               rsdt->header.length = sizeof(struct acpi_table_header) +
+> +                                       (sizeof(u32) * (i + 1));
+>
+> -       /* Fix XSDT length */
+> -       xsdt->header.length = sizeof(struct acpi_table_header) +
+> -                               (sizeof(u64) * (i + 1));
+> +               /* Re-calculate checksum */
+> +               rsdt->header.checksum = 0;
+> +               rsdt->header.checksum = table_compute_checksum((u8 *)rsdt,
+> +                                                              rsdt->header.length);
+> +       }
+>
+> -       /* Re-calculate checksum */
+> -       xsdt->header.checksum = 0;
+> -       xsdt->header.checksum = table_compute_checksum((u8 *)xsdt,
+> -                                                      xsdt->header.length);
+> +       if (ctx->xsdt) {
+> +               /*
+> +                * And now the same thing for the XSDT. We use the same index as for
+> +                * now we want the XSDT and RSDT to always be in sync in U-Boot
+> +                */
+> +               xsdt = ctx->xsdt;
+> +
+> +               /* This should always be MAX_ACPI_TABLES */
+> +               entries_num = ARRAY_SIZE(xsdt->entry);
+> +
+> +               for (i = 0; i < entries_num; i++) {
+> +                       if (xsdt->entry[i] == 0)
+> +                               break;
+> +               }
+> +
+> +               if (i >= entries_num) {
+> +                       log_err("ACPI: Error: too many tables\n");
+> +                       return -E2BIG;
+> +               }
+> +
+> +               /* Add table to the XSDT */
+> +               xsdt->entry[i] = nomap_to_sysmem(table);
+> +
+> +               /* Fix XSDT length */
+> +               xsdt->header.length = sizeof(struct acpi_table_header) +
+> +                                       (sizeof(u64) * (i + 1));
+> +
+> +               /* Re-calculate checksum */
+> +               xsdt->header.checksum = 0;
+> +               xsdt->header.checksum = table_compute_checksum((u8 *)xsdt,
+> +                                                              xsdt->header.length);
+> +       }
+>
+>         return 0;
+>  }
+> --
+> 2.46.0
+>
