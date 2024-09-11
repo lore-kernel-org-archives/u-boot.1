@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCBE7EE57D7
-	for <u-boot@archiver.kernel.org>; Wed, 11 Sep 2024 21:50:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49482EE57DB
+	for <u-boot@archiver.kernel.org>; Wed, 11 Sep 2024 21:50:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D813A88C53;
-	Wed, 11 Sep 2024 23:50:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3C82288C6D;
+	Wed, 11 Sep 2024 23:50:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="WbNzJRYo";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="UCYW7hX9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A82388A74; Wed, 11 Sep 2024 23:50:04 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ id 456B188A74; Wed, 11 Sep 2024 23:50:04 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E980588BD6
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 23:49:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F25ED88744
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 23:49:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ddrokosov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 6C73612000F;
- Thu, 12 Sep 2024 00:49:59 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 6C73612000F
+Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 9F61F10001E;
+ Thu, 12 Sep 2024 00:49:54 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 9F61F10001E
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1726091399;
- bh=TVOUq/9kcm1is3dEfLbd03Y4HMoCAHZtCLHozYrKw5s=;
+ s=mail; t=1726091394;
+ bh=bthAxrht2wEOs4sG9WNf64jqArX0viGUSdmkBJEanzI=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=WbNzJRYokwgjP3lQSEGop8MxvKjcOihJZDWnsW8j7zpTdOFyIr4pM5l3s5P8wpU+D
- /jfoUBIGLqZPEAsRd+/N2S7LyK8IURDemgv7X4A96KwWBoInhQRjICYj6tEFqIA35Q
- cqhwtxtr0QlfZS+9yEgB8Zf7lLw/LXzO1hLq3TjlTfU9B3PTyw3Sg1YXhHxReVDEuI
- J+VbGQEdu6UcB0jg9YFIDhIjvu44My6TkyPIvY8WDsngazrXJJPIsj36xOQubcqovE
- W8MFwcIcO/Cb3E3Z3iaM2+AO7EmX/5nwd3nlM8p9HKpX3u/j8hNTifpZKoeasGn8xT
- nie20/Nd6Ehew==
-Received: from smtp.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
- [172.16.192.107])
+ b=UCYW7hX9IRLVGlFp4bLDWJ7h7Kwb+8FBo1ED10rft43ybhJpQYmGYtoo2LaJzoh2K
+ GRWukEU6ivW15Y5TFrYU4oua6gy0mUvdCgIGtwzs/XeF/aiXpbCA6Sl7ISuwjVhP3B
+ Mf57GeUJ+f+DKCFO/f2uJM8SsxcA/2LyKlZ9uQKvdf030UYyUWCqms8Zx7d4txWBrf
+ tF1a5Cm/jq9N3qOUkUQPaZkDTeRa6x6h8gKqS9sKH3U16gxh4k5VExLNPyilKDW6pE
+ asVJo+FADShDGcd1Ovds0hY9OY9OrLfbRJmasCsuor+xQGY7z45ts7H3yiJjuaFXgs
+ TMAd2zidbhMeg==
+Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
+ [172.16.192.103])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Thu, 12 Sep 2024 00:49:59 +0300 (MSK)
+ Thu, 12 Sep 2024 00:49:54 +0300 (MSK)
 From: Dmitry Rokosov <ddrokosov@salutedevices.com>
 To: <igor.opaniuk@gmail.com>, <mkorpershoek@baylibre.com>, <sjg@chromium.org>, 
  <semen.protsenko@linaro.org>, <trini@konsulko.com>,
@@ -52,12 +52,11 @@ To: <igor.opaniuk@gmail.com>, <mkorpershoek@baylibre.com>, <sjg@chromium.org>,
  <avromanov@salutedevices.com>
 CC: <u-boot@lists.denx.de>, <kernel@salutedevices.com>, <rockosov@gmail.com>, 
  Dmitry Rokosov <ddrokosov@salutedevices.com>
-Subject: [PATCH v2 5/6] common: android_ab: fix slot suffix for abc block
-Date: Thu, 12 Sep 2024 00:49:13 +0300
-Message-ID: <20240911214945.15873-6-ddrokosov@salutedevices.com>
+Subject: [PATCH v2 0/6] android_ab: introduce bcb ab_dump command and provide
+ several bcb fixes
+Date: Thu, 12 Sep 2024 00:49:08 +0300
+Message-ID: <20240911214945.15873-1-ddrokosov@salutedevices.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240911214945.15873-1-ddrokosov@salutedevices.com>
-References: <20240911214945.15873-1-ddrokosov@salutedevices.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -76,10 +75,9 @@ X-KSMG-AntiSpam-Auth: dkim=none
 X-KSMG-AntiSpam-Info: LuaCore: 32 0.3.32
  766319f57b3d5e49f2c79a76e7d7087b621090df, {Tracking_uf_ne_domains},
  {Tracking_from_domain_doesnt_match_to},
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
- android-review.googlesource.com:7.1.1,5.0.1; source.android.com:7.1.1,5.0.1;
- 127.0.0.199:7.1.2; smtp.sberdevices.ru:7.1.1,5.0.1;
- salutedevices.com:7.1.1, FromAlignment: s
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; salutedevices.com:7.1.1;
+ lore.kernel.org:7.1.1; smtp.sberdevices.ru:7.1.1,5.0.1;
+ 127.0.0.199:7.1.2, FromAlignment: s
 X-MS-Exchange-Organization-SCL: -1
 X-KSMG-AntiSpam-Interceptor-Info: scan successful
 X-KSMG-AntiPhishing: Clean, bases: 2024/09/11 19:53:00
@@ -103,47 +101,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-To align with the official Android BCB (Bootloader Control Block)
-specifications, it's important to note that the slot_suffix should start
-with an underscore symbol.
+The patch series include changes:
+    - move ab_select_slot() documentation to @ notation
+    - move ab_select command to bcb subcommands
+    - introduce the ab_dump command to print the content of the BCB
+      block; it's useful for debugging A/B logic on supported boards
+    - fix the slot suffix format in the ABC block to align with official
+      Android BCB specifications
+    - add a test for the ab_dump command to verify the accuracy of each
+      field within the ABC data displayed, it's also useful for testing
+      slot_suffix problem code paths
 
-For a comprehensive understanding of the expected slot_suffix format in
-userspace, please refer to the provided reference [1].
+Changes v2 since v1 at [1]:
+    - move ab_select_slot() documentation to @ notation
+    - move ab_select command to bcb subcommands per Simon and Mattijs
+      suggestions
+    - redesign ab_dump as bcb subcommand
+    - use spaces instead of tabs in the ab_dump command output
+    - print hex values in the lowercase
+    - add RvB tags
 
 Links:
-[1] - https://source.android.com/docs/core/architecture/bootloader/updating#slots
+    [1] https://lore.kernel.org/all/20240725194716.32232-1-ddrokosov@salutedevices.com/
 
-Based-on: https://android-review.googlesource.com/c/platform/external/u-boot/+/1446439
 Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
----
- boot/android_ab.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/boot/android_ab.c b/boot/android_ab.c
-index c93e51541019..a287eac04fe8 100644
---- a/boot/android_ab.c
-+++ b/boot/android_ab.c
-@@ -52,7 +52,7 @@ static int ab_control_default(struct bootloader_control *abc)
- 	if (!abc)
- 		return -EFAULT;
- 
--	memcpy(abc->slot_suffix, "a\0\0\0", 4);
-+	memcpy(abc->slot_suffix, "_a\0\0", 4);
- 	abc->magic = BOOT_CTRL_MAGIC;
- 	abc->version = BOOT_CTRL_VERSION;
- 	abc->nb_slot = NUM_SLOTS;
-@@ -328,7 +328,8 @@ int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
- 		 * or the device tree.
- 		 */
- 		memset(slot_suffix, 0, sizeof(slot_suffix));
--		slot_suffix[0] = BOOT_SLOT_NAME(slot);
-+		slot_suffix[0] = '_';
-+		slot_suffix[1] = BOOT_SLOT_NAME(slot);
- 		if (memcmp(abc->slot_suffix, slot_suffix,
- 			   sizeof(slot_suffix))) {
- 			memcpy(abc->slot_suffix, slot_suffix,
+Dmitry Rokosov (6):
+  include/android_ab: move ab_select_slot() documentation to @ notation
+  treewide: bcb: move ab_select command to bcb subcommands
+  cmd: bcb: change strcmp() usage style in the do_bcb_ab_select()
+  cmd: bcb: introduce 'ab_dump' command to print BCB block content
+  common: android_ab: fix slot suffix for abc block
+  test/py: introduce test for ab_dump command
+
+ MAINTAINERS                               |   1 -
+ boot/android_ab.c                         | 116 ++++++++++++++++++----
+ cmd/Kconfig                               |  15 +--
+ cmd/Makefile                              |   1 -
+ cmd/ab_select.c                           |  66 ------------
+ cmd/bcb.c                                 | 108 ++++++++++++++++++--
+ configs/am57xx_hs_evm_usb_defconfig       |   1 -
+ configs/khadas-vim3_android_ab_defconfig  |   1 -
+ configs/khadas-vim3l_android_ab_defconfig |   1 -
+ configs/sandbox64_defconfig               |   4 +-
+ configs/sandbox_defconfig                 |   4 +-
+ doc/android/ab.rst                        |  12 +--
+ include/android_ab.h                      |  17 +++-
+ include/configs/khadas-vim3_android.h     |   2 +-
+ include/configs/khadas-vim3l_android.h    |   2 +-
+ include/configs/meson64_android.h         |   4 +-
+ include/configs/ti_omap5_common.h         |   4 +-
+ test/py/tests/test_android/test_ab.py     |  31 +++++-
+ 18 files changed, 251 insertions(+), 139 deletions(-)
+ delete mode 100644 cmd/ab_select.c
+
 -- 
 2.43.0
 
