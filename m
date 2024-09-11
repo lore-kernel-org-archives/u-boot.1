@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B79DEE0211
-	for <u-boot@archiver.kernel.org>; Wed, 11 Sep 2024 06:25:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D53EEE0211
+	for <u-boot@archiver.kernel.org>; Wed, 11 Sep 2024 06:26:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1A0C8917E;
-	Wed, 11 Sep 2024 08:25:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4835689166;
+	Wed, 11 Sep 2024 08:25:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="SvgWDFTy";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="SwQ6hBvy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 286AC8917C; Wed, 11 Sep 2024 08:25:25 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 7C3BF89170; Wed, 11 Sep 2024 08:25:28 +0200 (CEST)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0CC7B89165
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 08:25:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 549B089167
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 08:25:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=9elements.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a8d29b7edc2so548068866b.1
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 23:25:23 -0700 (PDT)
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-5365a9574b6so7374034e87.1
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 23:25:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1726035922; x=1726640722; darn=lists.denx.de;
+ d=9elements.com; s=google; t=1726035924; x=1726640724; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=exbKHTCgULwzCfu29P5+T/2UFc01ZDB/l/m5nrspXoY=;
- b=SvgWDFTylOguljdg1EIvBdBe/lhWYRjQx+OYQ4sxwkBCXfya5QvbMrnSIhaZiSauAn
- 7fzD97qNpFg3pdiKVBBGpEerwGXpZEFC90VeSkjkyV0ur5AXUS5XTzHO9gKNDLa6t4UD
- Cp8OIdu2dNOIuWP4PZI5WAACiBq88F/rCBO/2av64wa7TkKcRPJkS+RZCZkOrGJOKTGq
- PL5L+RX7dHuTiu3iyhXB7VJ4c9/F6wdTXFVrI41KrXRp+6WHCGZeuCXs8WcnLAqOrzgN
- jOMqzmmdKDzOg7tmv+cyUzKqPC5L/5l3M2SzrDdEsNNWTFASGPgGMM/3lYwMowhkzE3f
- 2gzg==
+ bh=ye4pegRetMsk7hgGEAWGVKWSQXVODelTSdL4O4F/DrQ=;
+ b=SwQ6hBvyFYoVBw9exI7dnf7px1jUgquS8/JAC2+BzmziBXJhNDast1iq3J0otX0gQn
+ oBdEdUPMJOtItuLWi4Uo2H29jn12/4eEVoi8Zeo5cxzVNC6FOjfidycT4xdNCBYDXzo4
+ FBTsV3z/eMm1h9Igr5MOhyK032h04M9ok2B4JDGHleOv40cKucDIRX6OCN6b3LVuscfL
+ wP9dN8HOvNK0GmPckdyxgmyG6H83AsvFA2m01gyfVbJmzpdSSYbsrGJahySyP9ivyC8a
+ L9KVXfI/qfBZjGQwqIKJ4B+1q9jNoeHyGGbG90/aQ7OF32jx/MN9ReX7unCT+clpL5Y5
+ +RSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726035922; x=1726640722;
+ d=1e100.net; s=20230601; t=1726035924; x=1726640724;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=exbKHTCgULwzCfu29P5+T/2UFc01ZDB/l/m5nrspXoY=;
- b=P33qT18Bu+of6TI8krwOCMV876rDXt3WVxZrRPLkH45X1Og7+YRgR8C31XXUvjYPLa
- V9mxhxnRKKU1oN16K6URjWuXxtYOHDRd6KFiXtETsMvzzUXaUIwKw+/fqkVXW4OmT5Nq
- wED+tydVlTk3F3B7GoOTBRrgrP0rcd87jkXY6j16+kcPAqhZyD7/NwyYmX7J0SE8F9j4
- GnK5z07NBSHA3264UpdIxhTNTXh0UQGFRt6/JiHVK991gXMdIsgBthztTs1vwFkRQLMG
- xaDerC26ozVpsMgsxYKBAoAACai8FclN0FkC6eOvlHMmtUD53b1Y5r3ezfB6WI6hc4Tc
- MCeA==
-X-Gm-Message-State: AOJu0YwGNDEz9maOQKxbfbYcZJYzWGPRzaXCUasD8SLImNzzKQrnrUR8
- ignPEKLJ0poYSF9E7PvpPR4owsUyuhdarIKIMKpnsAutpmiF7K3NrX8uz0m1AJ2EpzKpmqBAR5b
- A
-X-Google-Smtp-Source: AGHT+IGmK4HSLReAp7V5rOycGEvFMcR1uQWLcV4AF+ChTwlEmQSfc/0XXUmw1CE/akgR2C7YeNeVtw==
-X-Received: by 2002:a17:907:2ce6:b0:a86:7e2d:f10b with SMTP id
- a640c23a62f3a-a8ffab83570mr253676566b.37.1726035922392; 
- Tue, 10 Sep 2024 23:25:22 -0700 (PDT)
+ bh=ye4pegRetMsk7hgGEAWGVKWSQXVODelTSdL4O4F/DrQ=;
+ b=uJNXGhchk68s+xDpgACrSR24wqkRm/WWswV1n8aBMFbKdMXm/bNQTZBPVaZcITU+WM
+ qbLYw+ZmzL1stbO/0U47T2K8HxIOdamKd6ZKmPu6f4C0kdVjfWndmuE1/OoM5AqUXVKp
+ EARIuSZdpky2t3IYzK9YlrYo/zJTjwrXOzZq4j6N/aECY7q9QVrlhLjpCKiznF53yNbi
+ ZZIvSlBXY7nNkKIJoWg3X4pOzEUc6GoO4XQ8+iY7CkpPCmX5bIe+GKWqOMIu0nDYzK2P
+ nkK41WSNqSUQvVkg/Jrk91pNHFGxwJe7w2Tw5j5xGM15xem0786Qmi9uB3r3fc7eXNa2
+ 2JuA==
+X-Gm-Message-State: AOJu0Yzl1vvxdrh6vjoVN6HSySYqD1Qfu3yQzuJbTAvE/TYS20ZQF9J7
+ P9RmG1t99xdGvvcRYAKstbFXnfqIU16KTG7Q86LiopJYknnxOzdUXRwWTPvqPuZR047Wf+nsbiu
+ 8
+X-Google-Smtp-Source: AGHT+IFFjLx3kH/SBPe3+v4yx5qa8vX/z2e+mxX5sLteBmLSL+1CikiMsIC262AXb13VcAm1yjnTUA==
+X-Received: by 2002:a05:6512:3ba5:b0:530:e0fd:4a97 with SMTP id
+ 2adb3069b0e04-5365856d92bmr15824068e87.0.1726035924229; 
+ Tue, 10 Sep 2024 23:25:24 -0700 (PDT)
 Received: from fedora.sec.9e.network
  (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a8d25a43365sm575545366b.94.2024.09.10.23.25.21
+ a640c23a62f3a-a8d25a43365sm575545366b.94.2024.09.10.23.25.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Sep 2024 23:25:22 -0700 (PDT)
+ Tue, 10 Sep 2024 23:25:23 -0700 (PDT)
 From: Patrick Rudolph <patrick.rudolph@9elements.com>
 To: u-boot@lists.denx.de,
 	Simon Glass <sjg@chromium.org>
 Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
- Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 03/30] acpi: x86: Move MADT to common code
-Date: Wed, 11 Sep 2024 08:23:53 +0200
-Message-ID: <20240911062511.494855-4-patrick.rudolph@9elements.com>
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 04/30] acpi: Fix typo
+Date: Wed, 11 Sep 2024 08:23:54 +0200
+Message-ID: <20240911062511.494855-5-patrick.rudolph@9elements.com>
 X-Mailer: git-send-email 2.46.0
 In-Reply-To: <20240911062511.494855-1-patrick.rudolph@9elements.com>
 References: <20240911062511.494855-1-patrick.rudolph@9elements.com>
@@ -95,312 +95,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Write MADT in common code and let the SoC fill out the body by
-calling acpi_fill_madt() which must be implemented at SoC level.
+Rename ACPI tables MADR to MADT.
 
 Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 Cc: Simon Glass <sjg@chromium.org>
-Cc: Bin Meng <bmeng.cn@gmail.com>
 ---
-Changelog v3:
-- Pass ACPI context to acpi_fill_madt
+ include/acpi/acpi_table.h | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
 
----
- arch/sandbox/lib/Makefile         |  9 +++---
- arch/sandbox/lib/acpi_table.c     |  7 +++++
- arch/x86/cpu/intel_common/acpi.c  | 21 +++++++++-----
- arch/x86/cpu/tangier/acpi.c       |  7 ++++-
- arch/x86/include/asm/acpi_table.h |  3 +-
- arch/x86/lib/acpi_table.c         | 47 ++++++-------------------------
- include/acpi/acpi_table.h         | 11 ++++++++
- lib/acpi/acpi_table.c             | 31 ++++++++++++++++++++
- 8 files changed, 84 insertions(+), 52 deletions(-)
- create mode 100644 arch/sandbox/lib/acpi_table.c
-
-diff --git a/arch/sandbox/lib/Makefile b/arch/sandbox/lib/Makefile
-index d7d15a50bb..5d7beb250c 100644
---- a/arch/sandbox/lib/Makefile
-+++ b/arch/sandbox/lib/Makefile
-@@ -5,7 +5,8 @@
- # (C) Copyright 2002-2006
- # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
- 
--obj-y			+= fdt_fixup.o interrupts.o
--obj-$(CONFIG_PCI)	+= pci_io.o
--obj-$(CONFIG_CMD_BOOTM) += bootm.o
--obj-$(CONFIG_CMD_BOOTZ) += bootm.o
-+obj-y				+= fdt_fixup.o interrupts.o
-+obj-$(CONFIG_PCI)		+= pci_io.o
-+obj-$(CONFIG_CMD_BOOTM)		+= bootm.o
-+obj-$(CONFIG_CMD_BOOTZ)		+= bootm.o
-+obj-$(CONFIG_$(SPL_)ACPIGEN)	+= acpi_table.o
-diff --git a/arch/sandbox/lib/acpi_table.c b/arch/sandbox/lib/acpi_table.c
-new file mode 100644
-index 0000000000..e74e8f83d4
---- /dev/null
-+++ b/arch/sandbox/lib/acpi_table.c
-@@ -0,0 +1,7 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+#include <acpi/acpi_table.h>
-+
-+void *acpi_fill_madt(struct acpi_madt *madt, struct acpi_ctx *ctx)
-+{
-+	return ctx->current;
-+}
-diff --git a/arch/x86/cpu/intel_common/acpi.c b/arch/x86/cpu/intel_common/acpi.c
-index 29676b4abf..a0179db395 100644
---- a/arch/x86/cpu/intel_common/acpi.c
-+++ b/arch/x86/cpu/intel_common/acpi.c
-@@ -19,6 +19,7 @@
- #include <asm/global_data.h>
- #include <asm/intel_acpi.h>
- #include <asm/ioapic.h>
-+#include <asm/lapic.h>
- #include <asm/mpspec.h>
- #include <asm/smm.h>
- #include <asm/turbo.h>
-@@ -80,33 +81,39 @@ static int acpi_sci_irq(void)
- 	return sci_irq;
- }
- 
--static unsigned long acpi_madt_irq_overrides(unsigned long current)
-+static void *acpi_madt_irq_overrides(void *current)
- {
- 	int sci = acpi_sci_irq();
- 	u16 flags = MP_IRQ_TRIGGER_LEVEL;
- 
--	if (sci < 0)
--		return log_msg_ret("sci irq", sci);
-+	if (sci < 0) {
-+		log_err("sci irq %d", sci);
-+		return current;
-+	}
- 
- 	/* INT_SRC_OVR */
--	current += acpi_create_madt_irqoverride((void *)current, 0, 0, 2, 0);
-+	current += acpi_create_madt_irqoverride(current, 0, 0, 2, 0);
- 
- 	flags |= arch_madt_sci_irq_polarity(sci);
- 
- 	/* SCI */
- 	current +=
--	    acpi_create_madt_irqoverride((void *)current, 0, sci, sci, flags);
-+	    acpi_create_madt_irqoverride(current, 0, sci, sci, flags);
- 
- 	return current;
- }
- 
--u32 acpi_fill_madt(u32 current)
-+void *acpi_fill_madt(struct acpi_madt *madt, struct acpi_ctx *ctx)
- {
-+	void *current = ctx->current;
-+	madt->lapic_addr = LAPIC_DEFAULT_BASE;
-+	madt->flags = ACPI_MADT_PCAT_COMPAT;
-+
- 	/* Local APICs */
- 	current += acpi_create_madt_lapics(current);
- 
- 	/* IOAPIC */
--	current += acpi_create_madt_ioapic((void *)current, 2, IO_APIC_ADDR, 0);
-+	current += acpi_create_madt_ioapic(current, 2, IO_APIC_ADDR, 0);
- 
- 	return acpi_madt_irq_overrides(current);
- }
-diff --git a/arch/x86/cpu/tangier/acpi.c b/arch/x86/cpu/tangier/acpi.c
-index 1c73a9dbfe..f476825ccb 100644
---- a/arch/x86/cpu/tangier/acpi.c
-+++ b/arch/x86/cpu/tangier/acpi.c
-@@ -10,6 +10,7 @@
- #include <mapmem.h>
- #include <acpi/acpi_table.h>
- #include <asm/ioapic.h>
-+#include <asm/lapic.h>
- #include <asm/mpspec.h>
- #include <asm/tables.h>
- #include <asm/arch/global_nvs.h>
-@@ -31,8 +32,12 @@ void acpi_fill_fadt(struct acpi_fadt *fadt)
- 	fadt->minor_revision = 2;
- }
- 
--u32 acpi_fill_madt(u32 current)
-+void *acpi_fill_madt(struct acpi_madt *madt, struct acpi_ctx *ctx)
- {
-+	void *current = ctx->current;
-+	madt->lapic_addr = LAPIC_DEFAULT_BASE;
-+	madt->flags = ACPI_MADT_PCAT_COMPAT;
-+
- 	current += acpi_create_madt_lapics(current);
- 
- 	current += acpi_create_madt_ioapic((struct acpi_madt_ioapic *)current,
-diff --git a/arch/x86/include/asm/acpi_table.h b/arch/x86/include/asm/acpi_table.h
-index 3988898f66..3254bbc380 100644
---- a/arch/x86/include/asm/acpi_table.h
-+++ b/arch/x86/include/asm/acpi_table.h
-@@ -24,14 +24,13 @@ struct acpi_table_header;
- 
- /* These can be used by the target port */
- 
--int acpi_create_madt_lapics(u32 current);
-+int acpi_create_madt_lapics(void *current);
- int acpi_create_madt_ioapic(struct acpi_madt_ioapic *ioapic, u8 id,
- 			    u32 addr, u32 gsi_base);
- int acpi_create_madt_irqoverride(struct acpi_madt_irqoverride *irqoverride,
- 				 u8 bus, u8 source, u32 gsirq, u16 flags);
- int acpi_create_madt_lapic_nmi(struct acpi_madt_lapic_nmi *lapic_nmi,
- 			       u8 cpu, u16 flags, u8 lint);
--u32 acpi_fill_madt(u32 current);
- int acpi_create_mcfg_mmconfig(struct acpi_mcfg_mmconfig *mmconfig, u32 base,
- 			      u16 seg_nr, u8 start, u8 end);
- 
-diff --git a/arch/x86/lib/acpi_table.c b/arch/x86/lib/acpi_table.c
-index ff02ce80d1..02d5c0fe8f 100644
---- a/arch/x86/lib/acpi_table.c
-+++ b/arch/x86/lib/acpi_table.c
-@@ -40,7 +40,7 @@ static int acpi_create_madt_lapic(struct acpi_madt_lapic *lapic,
- 	return lapic->length;
- }
- 
--int acpi_create_madt_lapics(u32 current)
-+int acpi_create_madt_lapics(void *current)
- {
- 	struct udevice *dev;
- 	int total_length = 0;
-@@ -100,23 +100,27 @@ int acpi_create_madt_lapic_nmi(struct acpi_madt_lapic_nmi *lapic_nmi,
- 	return lapic_nmi->length;
- }
- 
--static int acpi_create_madt_irq_overrides(u32 current)
-+static int acpi_create_madt_irq_overrides(void *current)
- {
- 	struct acpi_madt_irqoverride *irqovr;
- 	u16 sci_flags = MP_IRQ_TRIGGER_LEVEL | MP_IRQ_POLARITY_HIGH;
- 	int length = 0;
- 
--	irqovr = (void *)current;
-+	irqovr = current;
- 	length += acpi_create_madt_irqoverride(irqovr, 0, 0, 2, 0);
- 
--	irqovr = (void *)(current + length);
-+	irqovr = current + length;
- 	length += acpi_create_madt_irqoverride(irqovr, 0, 9, 9, sci_flags);
- 
- 	return length;
- }
- 
--__weak u32 acpi_fill_madt(u32 current)
-+__weak void *acpi_fill_madt(struct acpi_madt *madt, struct acpi_ctx *ctx)
- {
-+	void *current = ctx->current;
-+	madt->lapic_addr = LAPIC_DEFAULT_BASE;
-+	madt->flags = ACPI_MADT_PCAT_COMPAT;
-+
- 	current += acpi_create_madt_lapics(current);
- 
- 	current += acpi_create_madt_ioapic((struct acpi_madt_ioapic *)current,
-@@ -127,39 +131,6 @@ __weak u32 acpi_fill_madt(u32 current)
- 	return current;
- }
- 
--int acpi_write_madt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
--{
--	struct acpi_table_header *header;
--	struct acpi_madt *madt;
--	u32 current;
--
--	madt = ctx->current;
--
--	memset(madt, '\0', sizeof(struct acpi_madt));
--	header = &madt->header;
--
--	/* Fill out header fields */
--	acpi_fill_header(header, "APIC");
--	header->length = sizeof(struct acpi_madt);
--	header->revision = ACPI_MADT_REV_ACPI_3_0;
--
--	madt->lapic_addr = LAPIC_DEFAULT_BASE;
--	madt->flags = ACPI_MADT_PCAT_COMPAT;
--
--	current = (u32)madt + sizeof(struct acpi_madt);
--	current = acpi_fill_madt(current);
--
--	/* (Re)calculate length and checksum */
--	header->length = current - (u32)madt;
--
--	header->checksum = table_compute_checksum((void *)madt, header->length);
--	acpi_add_table(ctx, madt);
--	acpi_inc(ctx, madt->header.length);
--
--	return 0;
--}
--ACPI_WRITER(5x86, NULL, acpi_write_madt, 0);
--
- /**
-  * acpi_create_tcpa() - Create a TCPA table
-  *
 diff --git a/include/acpi/acpi_table.h b/include/acpi/acpi_table.h
-index aa79e61084..1a49578b6e 100644
+index 1a49578b6e..26da42967f 100644
 --- a/include/acpi/acpi_table.h
 +++ b/include/acpi/acpi_table.h
-@@ -963,6 +963,17 @@ int acpi_fill_csrt(struct acpi_ctx *ctx);
-  */
- void acpi_fill_fadt(struct acpi_fadt *fadt);
+@@ -386,20 +386,20 @@ struct __packed acpi_madt_lapic_nmi {
+ 	u8 lint;		/* Local APIC LINT# */
+ };
  
-+/**
-+ * acpi_fill_madt() - Fill out the body of the MADT
-+ *
-+ * Must be implemented in SoC specific code.
-+ *
-+ * @madt: The MADT to update
-+ * @ctx: ACPI context to write MADT sub-tables to
-+ * @return Pointer to the end of tables, where the next tables can be written
-+ */
-+void *acpi_fill_madt(struct acpi_madt *madt, struct acpi_ctx *ctx);
-+
+-/* flags for acpi_madr_gicc flags word */
++/* flags for acpi_madt_gicc flags word */
+ enum {
+-	ACPI_MADRF_ENABLED	= BIT(0),
+-	ACPI_MADRF_PERF		= BIT(1),
+-	ACPI_MADRF_VGIC		= BIT(2),
++	ACPI_MADTF_ENABLED	= BIT(0),
++	ACPI_MADTF_PERF		= BIT(1),
++	ACPI_MADTF_VGIC		= BIT(2),
+ };
+ 
  /**
-  * acpi_get_rsdp_addr() - get ACPI RSDP table address
+- * struct __packed acpi_madr_gicc - GIC CPU interface (type 0xb)
++ * struct __packed acpi_madt_gicc - GIC CPU interface (type 0xb)
   *
-diff --git a/lib/acpi/acpi_table.c b/lib/acpi/acpi_table.c
-index 1b25fe1b9c..d7deed2df1 100644
---- a/lib/acpi/acpi_table.c
-+++ b/lib/acpi/acpi_table.c
-@@ -244,6 +244,37 @@ int acpi_write_fadt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
+  * This holds information about the Generic Interrupt Controller (GIC) CPU
+  * interface. See ACPI Spec v6.3 section 5.2.12.14
+  */
+-struct acpi_madr_gicc {
++struct acpi_madt_gicc {
+ 	u8 type;
+ 	u8 length;
+ 	u16 reserved;
+@@ -421,12 +421,12 @@ struct acpi_madr_gicc {
+ } __packed;
  
- ACPI_WRITER(5fadt, "FADT", acpi_write_fadt, 0);
- 
-+int acpi_write_madt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
-+{
-+	struct acpi_table_header *header;
-+	struct acpi_madt *madt;
-+	void *current;
-+
-+	madt = ctx->current;
-+
-+	memset(madt, '\0', sizeof(struct acpi_madt));
-+	header = &madt->header;
-+
-+	/* Fill out header fields */
-+	acpi_fill_header(header, "APIC");
-+	header->length = sizeof(struct acpi_madt);
-+	header->revision = ACPI_MADT_REV_ACPI_3_0;
-+
-+	acpi_inc(ctx, sizeof(struct acpi_madt));
-+	current = acpi_fill_madt(madt, ctx);
-+
-+	/* (Re)calculate length and checksum */
-+	header->length = (uintptr_t)current - (uintptr_t)madt;
-+
-+	header->checksum = table_compute_checksum((void *)madt, header->length);
-+	acpi_add_table(ctx, madt);
-+	ctx->current = (void *)madt + madt->header.length;
-+
-+	return 0;
-+}
-+
-+ACPI_WRITER(5madt, "MADT", acpi_write_madt, 0);
-+
- void acpi_create_dbg2(struct acpi_dbg2_header *dbg2,
- 		      int port_type, int port_subtype,
- 		      struct acpi_gen_regaddr *address, u32 address_size,
+ /**
+- * struct __packed acpi_madr_gicc - GIC distributor (type 0xc)
++ * struct __packed acpi_madt_gicc - GIC distributor (type 0xc)
+  *
+  * This holds information about the Generic Interrupt Controller (GIC)
+  * Distributor interface. See ACPI Spec v6.3 section 5.2.12.15
+  */
+-struct acpi_madr_gicd {
++struct acpi_madt_gicd {
+ 	u8 type;
+ 	u8 length;
+ 	u16 reserved;
 -- 
 2.46.0
 
