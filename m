@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0C37EDE998
-	for <u-boot@archiver.kernel.org>; Wed, 11 Sep 2024 07:12:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9250DEDE998
+	for <u-boot@archiver.kernel.org>; Wed, 11 Sep 2024 07:12:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E523A891F5;
-	Wed, 11 Sep 2024 09:11:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6724E891CA;
+	Wed, 11 Sep 2024 09:11:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OntOG8p3";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Qu0SVrjN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B089891E7; Wed, 11 Sep 2024 09:11:42 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 3DA94891F9; Wed, 11 Sep 2024 09:11:44 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 107FA891FE
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 09:11:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DEBBC891D1
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 09:11:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=linus.walleij@linaro.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-5c26311c6f0so8062737a12.3
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 00:11:40 -0700 (PDT)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-5c3d2f9f896so6975531a12.1
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 00:11:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726038699; x=1726643499; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1726038701; x=1726643501; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=0thuF0I1ZnDB7MFUd0vK4BvdCnk5Fzf2pv7fmJ53tVo=;
- b=OntOG8p30yPq9PlnunEi7WGkjVys6IiESyIC7oTrtGFzxON03iCPSkcP+1cNg9Xdp6
- 5w1zjJprtaYjTofitMimicl748IGeAn0MILGsvJ5CCzUMIox0BF5FkRKT+2x4ZKvAYfU
- pZEO+UPGqpjf2gX1wpCWugO1n8X0tIQPOamIhfGaG1rlk8svjoSqQS3DiM6dsO/8bvm7
- h26QnWNvSGj0+/UUPwcW6tULu+Hn840fArw+WYTZiSIuHgE38AXrHNWweeoopd8L3knE
- Byog+J1VhO4ohZogVDQaJq3UeMYoxl9yC+4i/guGSUxK8RqfNTmFRg6ubGMncCm7tM0b
- D+nA==
+ :reply-to; bh=gngvSZSXDYIJVQBbZCkdBAj365BqDHKg2e7auavSkXs=;
+ b=Qu0SVrjNHt8HR6U3htEC6ICsMWffOcemdGZbD+KY7x0Te6l0QJVcX4zwDLxbmCmoLB
+ 38tkOdQpu9P51To++q1wjuzVENRDCeqNzdHoXOZQfC+gbz7KLqefOTdYUEHjg65QhECW
+ A2KpFlKDC3qAEnu2RNPi5kRcNVlunyLibiMczGah944yzeRdXcmPBoZIEqA1W+pH/X5q
+ AMI2+zr+sV+jSG4tAleZPetap5wwSHpf6n8UgvJxjs6KWSRtr3nmkZIXaIctF3Wb7333
+ DAr7t80C7WDlUMBUIcO4k59hPEjz0dHUoWLxq8adKPwdrMe+E3G01H/rYRkrNp3S+ZnD
+ /FgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726038699; x=1726643499;
+ d=1e100.net; s=20230601; t=1726038701; x=1726643501;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0thuF0I1ZnDB7MFUd0vK4BvdCnk5Fzf2pv7fmJ53tVo=;
- b=wTIGnXmlhV0/tMFqmuFLcmZuXi4bi9lCFpIXoPAdtQbjDXTNpUfW9tSKmTJmjQVig0
- wYQVEQFs7vwU2uUQaA+gccOyQoleNAqT2CwvwnTzvA1uQTSNFAUguCUfj8nNKONSUGKX
- CaH66YQACYw1r2ihp9R1Fk0CIxixrc4TRuI0MFu/zeFw/KIHOgVNzAU2fbufcCSV8Qlb
- F81Fv5r6MTIvuxvRcN4WV52pTh+UIGaiauawzb8qzHbQogmdt3smIsh+cxRsAHAkeejw
- IC1GcqjsnkfOET9zk2MXmIaH17QLJeWH/77M887Tk8iUbT1V9VpBObdBBI+VpuhvdWBr
- i4ZA==
-X-Gm-Message-State: AOJu0YwL2iM9Rk5tiycm+UE3fHd0fljfwwrwNPTVWAIx3FOMim4t3BOy
- SsV+G0zihwwjiR6z9TdXOpB1w0o9H55VXMM0r5zKHTDwKxvbDacKTryFxB5SKGM=
-X-Google-Smtp-Source: AGHT+IE1cUP1IvN43TwCqtcenkVj/MlKLHVT/2TsXXPCq3j+2Phcbf1u0W06pbILArdgeDBUd8DEog==
-X-Received: by 2002:a17:907:7f10:b0:a7a:af5d:f312 with SMTP id
- a640c23a62f3a-a8ffad9d1b3mr321307466b.46.1726038699324; 
- Wed, 11 Sep 2024 00:11:39 -0700 (PDT)
+ bh=gngvSZSXDYIJVQBbZCkdBAj365BqDHKg2e7auavSkXs=;
+ b=Ug7gRb1gczw0mw/a6cRKg3cPF4VeetQKKWbjjgOkOVGQ0SXdLTOaHL/HMcmrBGkLbS
+ a5YC2OzWRTjd6CxB2iNhsfEHNq6In05n2iXiDVGvN0uWTywIj+sEIHonrzsgjFwDaWxj
+ o8zGw9QqM8OVmPUam+UCCT0WMmlCviNVQw0k/y1y+rwlOQiBejUeaM8Vm2v2X7XZgQKL
+ p7JcXklzWF20Ujra41dV3R3ud1dusstbFgCNAwZwSQ8FRwTTUdIXOvwvL+2tJxl4DXID
+ qiMDjEpedJKtpS0mQCcfe19s5Y0Ij9XWlBLMvKcWlvQ6BxuKJF++k+2D1kaeK0tKA4TL
+ MntQ==
+X-Gm-Message-State: AOJu0Yyb1uVBilTRPNpS+EbV1oFrh+BK672fQ6KWq6w59A+K2TxC/hN9
+ kcJY4r3vQ5xCge94abrHZPvxmaa8f79XNSgeTZpAn3rEnAy73nhfE30DF1eUaas=
+X-Google-Smtp-Source: AGHT+IGqpmQ7t7VnX+wQLDBCnoGZr6tp2wOvORduFasVddoMXHu5xnceGUzNoy3++CHwqsyZy2390A==
+X-Received: by 2002:a17:907:7255:b0:a86:86d7:2890 with SMTP id
+ a640c23a62f3a-a8ffadee499mr298457366b.50.1726038701210; 
+ Wed, 11 Sep 2024 00:11:41 -0700 (PDT)
 Received: from lino.lan ([85.235.12.238]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a8d25926ee8sm580523866b.50.2024.09.11.00.11.37
+ a640c23a62f3a-a8d25926ee8sm580523866b.50.2024.09.11.00.11.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Sep 2024 00:11:38 -0700 (PDT)
+ Wed, 11 Sep 2024 00:11:39 -0700 (PDT)
 From: Linus Walleij <linus.walleij@linaro.org>
-Date: Wed, 11 Sep 2024 09:11:17 +0200
-Subject: [PATCH 6/7] mtd: rawnand: brcmnand: Support write protection
- setting from dts
+Date: Wed, 11 Sep 2024 09:11:18 +0200
+Subject: [PATCH 7/7] mtd: rawnand: brcmnand: Add support for getting ecc
+ setting from strap
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240911-brcmnand-fixes-v1-6-be112a20aaf1@linaro.org>
+Message-Id: <20240911-brcmnand-fixes-v1-7-be112a20aaf1@linaro.org>
 References: <20240911-brcmnand-fixes-v1-0-be112a20aaf1@linaro.org>
 In-Reply-To: <20240911-brcmnand-fixes-v1-0-be112a20aaf1@linaro.org>
 To: u-boot@lists.denx.de, 
@@ -80,8 +80,7 @@ To: u-boot@lists.denx.de,
  Kursad Oney <kursad.oney@broadcom.com>, 
  Philippe Reynes <philippe.reynes@softathome.com>
 Cc: Linus Walleij <linus.walleij@linaro.org>, 
- Florian Fainelli <florian.fainelli@broadcom.com>, 
- Kamal Dasu <kamal.dasu@broadcom.com>, David Regan <dregan@broadcom.com>, 
+ David Regan <dregan@broadcom.com>, 
  Miquel Raynal <miquel.raynal@bootlin.com>
 X-Mailer: b4 0.14.0
 X-BeenThere: u-boot@lists.denx.de
@@ -102,47 +101,132 @@ X-Virus-Status: Clean
 
 From: William Zhang <william.zhang@broadcom.com>
 
-Backport of upstream Linux
-commit 8e7daa85641c9559c113f6b217bdc923397de77c
-"mtd: rawnand: brcmnand: Support write protection setting from dts"
+Backport from the upstream Linux kernel
+commit c2cf7e25eb2a3c915a420fb8ceed8912add7f36c
+"mtd: rawnand: brcmnand: Add support for getting ecc setting from strap"
 
-The write protection feature is controlled by the module parameter wp_on
-with default set to enabled. But not all the board use this feature
-especially in BCMBCA broadband board. And module parameter is not
-sufficient as different board can have different option.  Add a device
-tree property and allow this feature to be configured through the board
-dts on per board basis.
+Note: the upstream kernel introduces a new
+bool brcmnand_get_sector_size_1k() function because the int
+version in U-Boot has been removed in Linux. I kept the old
+int-returning version that is already in U-Boot as we depend
+on that in other code.
+
+BCMBCA broadband SoC based board design does not specify ecc setting in
+dts but rather use the SoC NAND strap info to obtain the ecc strength
+and spare area size setting. Add brcm,nand-ecc-use-strap dts propety for
+this purpose and update driver to support this option. However these two
+options can not be used at the same time.
 
 Signed-off-by: William Zhang <william.zhang@broadcom.com>
-Reviewed-by: Florian Fainelli <florian.fainelli@broadcom.com>
-Reviewed-by: Kamal Dasu <kamal.dasu@broadcom.com>
 Reviewed-by: David Regan <dregan@broadcom.com>
 Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
-Link: https://lore.kernel.org/linux-mtd/20240223034758.13753-14-william.zhang@broadcom.com
+Link: https://lore.kernel.org/linux-mtd/20240301173308.226004-1-william.zhang@broadcom.com
 Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
 ---
- drivers/mtd/nand/raw/brcmnand/brcmnand.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ drivers/mtd/nand/raw/brcmnand/brcmnand.c | 70 ++++++++++++++++++++++++++++++--
+ 1 file changed, 66 insertions(+), 4 deletions(-)
 
 diff --git a/drivers/mtd/nand/raw/brcmnand/brcmnand.c b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
-index 2f786584a1ae..55d5d27438a8 100644
+index 55d5d27438a8..1ffd6cfff98f 100644
 --- a/drivers/mtd/nand/raw/brcmnand/brcmnand.c
 +++ b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
-@@ -2847,6 +2847,14 @@ int brcmnand_probe(struct udevice *dev, struct brcmnand_soc *soc)
- 	/* Read the write-protect configuration in the device tree */
- 	wp_on = dev_read_u32_default(dev, "write-protect", wp_on);
+@@ -980,6 +980,43 @@ static void brcmnand_set_sector_size_1k(struct brcmnand_host *host, int val)
+ 	nand_writereg(ctrl, acc_control_offs, tmp);
+ }
  
-+	/* Check if the board connects the WP pin */
-+#ifndef __UBOOT__
-+	if (of_property_read_bool(dn, "brcm,wp-not-connected"))
-+#else
-+	if (dev_read_bool(ctrl->dev, "brcm,wp-not-connected"))
-+#endif /* __UBOOT__ */
-+		wp_on = 0;
++static int brcmnand_get_spare_size(struct brcmnand_host *host)
++{
++	struct brcmnand_controller *ctrl = host->ctrl;
++	u16 acc_control_offs = brcmnand_cs_offset(ctrl, host->cs,
++						  BRCMNAND_CS_ACC_CONTROL);
++	u32 acc = nand_readreg(ctrl, acc_control_offs);
 +
- 	if (ctrl->features & BRCMNAND_HAS_WP) {
- 		/* Permanently disable write protection */
- 		if (wp_on == 2)
++	return (acc & brcmnand_spare_area_mask(ctrl));
++}
++
++static void brcmnand_get_ecc_settings(struct brcmnand_host *host, struct nand_chip *chip)
++{
++	struct brcmnand_controller *ctrl = host->ctrl;
++	u16 acc_control_offs = brcmnand_cs_offset(ctrl, host->cs,
++						  BRCMNAND_CS_ACC_CONTROL);
++	bool sector_size_1k = brcmnand_get_sector_size_1k(host);
++	int spare_area_size, ecc_level;
++	u32 acc;
++
++	spare_area_size = brcmnand_get_spare_size(host);
++	acc = nand_readreg(ctrl, acc_control_offs);
++	ecc_level = (acc & brcmnand_ecc_level_mask(ctrl)) >> ctrl->ecc_level_shift;
++	if (sector_size_1k)
++		chip->ecc.strength = ecc_level * 2;
++	else if (spare_area_size == 16 && ecc_level == 15)
++		chip->ecc.strength = 1; /* hamming */
++	else
++		chip->ecc.strength = ecc_level;
++
++	if (chip->ecc.size == 0) {
++		if (sector_size_1k)
++			chip->ecc.size = 1024;
++		else
++			chip->ecc.size = 512;
++	}
++}
++
+ /***********************************************************************
+  * CS_NAND_SELECT
+  ***********************************************************************/
+@@ -2323,12 +2360,33 @@ static int brcmnand_setup_dev(struct brcmnand_host *host)
+ 	struct nand_memory_organization *memorg = nanddev_get_memorg(nanddev);
+ 	struct brcmnand_controller *ctrl = host->ctrl;
+ 	struct brcmnand_cfg *cfg = &host->hwcfg;
+-	char msg[128];
+ 	u32 offs, tmp, oob_sector;
++	bool use_strap = false;
++	char msg[128];
+ 	int ret;
+ 
+ 	memset(cfg, 0, sizeof(*cfg));
+ 
++#ifndef __UBOOT__
++	use_strap = of_property_read_bool(nand_get_flash_node(chip),
++					  "brcm,nand-ecc-use-strap"):
++#else
++	ret = ofnode_read_bool(nand_get_flash_node(chip),
++			       "brcm,nand-ecc-use-strap");
++#endif /* __UBOOT__ */
++	/*
++	 * Either nand-ecc-xxx or brcm,nand-ecc-use-strap can be set. Error out
++	 * if both exist.
++	 */
++	if (chip->ecc.strength && use_strap) {
++		dev_err(ctrl->dev,
++			"ECC strap and DT ECC configuration properties are mutually exclusive\n");
++		return -EINVAL;
++	}
++
++	if (use_strap)
++		brcmnand_get_ecc_settings(host, chip);
++
+ #ifndef __UBOOT__
+ 	ret = of_property_read_u32(nand_get_flash_node(chip),
+ 				   "brcm,nand-oob-sector-size",
+@@ -2338,10 +2396,14 @@ static int brcmnand_setup_dev(struct brcmnand_host *host)
+ 			      "brcm,nand-oob-sector-size",
+ 			      &oob_sector);
+ #endif /* __UBOOT__ */
++
+ 	if (ret) {
+-		/* Use detected size */
+-		cfg->spare_area_size = mtd->oobsize /
+-					(mtd->writesize >> FC_SHIFT);
++		if (use_strap)
++			cfg->spare_area_size = brcmnand_get_spare_size(host);
++		else
++			/* Use detected size */
++			cfg->spare_area_size = mtd->oobsize /
++						(mtd->writesize >> FC_SHIFT);
+ 	} else {
+ 		cfg->spare_area_size = oob_sector;
+ 	}
 
 -- 
 2.46.0
