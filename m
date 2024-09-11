@@ -4,138 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D96AEE0215
-	for <u-boot@archiver.kernel.org>; Wed, 11 Sep 2024 08:04:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51A48EE0215
+	for <u-boot@archiver.kernel.org>; Wed, 11 Sep 2024 08:11:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 056D0891D1;
-	Wed, 11 Sep 2024 10:04:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id C47E1891A4;
+	Wed, 11 Sep 2024 10:11:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="g1IrMjNx";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="utGlpLbt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB51E8919A; Wed, 11 Sep 2024 10:04:52 +0200 (CEST)
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on20613.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2414::613])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 8CEC0891D1; Wed, 11 Sep 2024 10:11:09 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 830428920C
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 10:04:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 12EBF891A0
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 10:11:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=w5xWiJ1T7XhhPrCZUZD1PO4J0Cg0fBEet9akGyMyTksHL/tmUWMiN4nBtA75i/o+TTuVzr8bmFkvq39xKVK4ieTEOeSPkVOg2Ct8qA1nDSzpVIols3l2snf42KjcZu4CvFItMTUywN+EEka84kfy7BOdNJXa4oGuzEAykdfllu7HmZFVQ8pZLoeXoA4Nvfiv01WGpAKtEOuG8p1cBJQNxngXZFA19MOZiSJaKvCsXvgHHRjzt+3kINMGVaH88jgw87O9+0RtW51KvLeGjpnosHHObQzjaeJofJib7OX0C2yx9Ijg8jZid6MPAgMDytzEsbIQZ43O6VRAhdKJTv1Ebg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Kr7IAvYbpZrBOg39hXWfMDDP16guqnbc8O+OByPKxsQ=;
- b=pOI6DKrYllIfNnDRpcuOGZr2WFWyzApeJ/UeMbgfQvrICC0POgR3/X318VoVJ29fAZvRycWQCHRW0R/djXBORao2mMV4twrY9Wmc2Lw846+7vRc871+T/cvtuSL8zx9EhHIU1pDuh8XwQQBeb7Tdn8782qL8TaCe6bI+RXA9zM0pr4PlpGJYr59iKoL77dg4aZLQdI2G0H2lzmkgNMShVROaYJOGuwLN8NfZZISuU8V8AmcB8LdzS0C0u6Bcwec3z5zxaRA53e6Bm9ggKZIbNUV2YrjQKp9k3hHgtyfwwdciMg9mjHStdI86K+92TpG8zwurxN5evA6DBKiyKvK0Bg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Kr7IAvYbpZrBOg39hXWfMDDP16guqnbc8O+OByPKxsQ=;
- b=g1IrMjNx4geX30Js3C+d+S/g9ikT58f8aCOoe9vomn25W46g4E8ghsElszwnS/cPoNU64CGZ2jd0sob9d1dm+J81WsdiCwik08Kq5eUh95dv1p9H+pmr7/tEaUrJKmmvohyTbUoHegZJbBSDL1aeW5TEI6ROcW4deQax57CjSVc=
-Received: from BN0PR02CA0033.namprd02.prod.outlook.com (2603:10b6:408:e5::8)
- by SJ2PR12MB8784.namprd12.prod.outlook.com (2603:10b6:a03:4d0::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.32; Wed, 11 Sep
- 2024 08:04:45 +0000
-Received: from MN1PEPF0000ECD8.namprd02.prod.outlook.com
- (2603:10b6:408:e5:cafe::7) by BN0PR02CA0033.outlook.office365.com
- (2603:10b6:408:e5::8) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7939.24 via Frontend
- Transport; Wed, 11 Sep 2024 08:04:44 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- MN1PEPF0000ECD8.mail.protection.outlook.com (10.167.242.137) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7918.13 via Frontend Transport; Wed, 11 Sep 2024 08:04:44 +0000
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 11 Sep
- 2024 03:04:42 -0500
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: John Vicky Vykuntapu <johnvicky.vykuntapu@amd.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Shubhangi Shrikrushna Mahalle
- <shubhangi.shrikrushna-mahalle@amd.com>, Tom Rini <trini@konsulko.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Subject: [PATCH] xilinx: zynqmp: Add bootmenu support
-Date: Wed, 11 Sep 2024 10:04:13 +0200
-Message-ID: <6193d95a9c0f3ae319a900b46d6212f7ab16aba4.1726041851.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-42cb7a2e4d6so27358325e9.0
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 01:11:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1726042266; x=1726647066; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=lFzKUxTgPV5tvRaKb2jEaXJzqHX0l4vnNW9JndppQFo=;
+ b=utGlpLbtMLLGDBm+xg4PP8pRH6JHrJlhPB3Fd85uoSa/in1Gh+UZq9O0VEJ30sLOat
+ THfm8Cwcu/7Mfrh6IH44VB4FaPkYPUE+LDMQiOf6ocVjXdnbaT7wJkZ7c2A6FiFnZz2H
+ n8nmm16uKhtb3S30VSOqddi/cTibTyZtFNAGtiQN3qwGbkppoJGNYPuzhMWgZ5YofIai
+ xhi91EXMDNsDCXOAQTlY2KBKQrSznO5hmqULVw2FJ2l7/BeluCo3eNuzPsQ+YFGBQsPy
+ 45p4V69NGCpikW0Q0Xaj2cxoPxLHBNV+3qJVJSfDGjZunOKVMZz59SbdfPuuSjqzFij+
+ MTJQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1726042266; x=1726647066;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=lFzKUxTgPV5tvRaKb2jEaXJzqHX0l4vnNW9JndppQFo=;
+ b=WfnJ1SSW8U6YYJtbdZksvcSt3FPkIgcuF9k7lQgPXlx/GvxBcaNZZi73HQRZLZhfnF
+ E+ZsRM+cfLJlhKdLk+dd/dFSOXWDMmavakA8bHBL14BdbRwuuFb2uXgRKYg5+/KmocgR
+ RlG7h30MtMXcsiz8p29L1MubrMZOt0A15PUX1aWNL7vAsktHJwqQGmMAMzBFbsjyugmy
+ eAkhkceFa0Auc1YA5KKyO89IWc2RpEW2vBEgvlG2LOFIJS/Bo+pg3sAUCRTr4B1tC3hK
+ no36q5jdFwjQCasP/KzDBb0q1rmq5B/X4cvyOnQsPKbYwn5JaDXM3cHzpUPRwWf+VCS8
+ OQLA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXSq4FqF/b4iA7GNdd1Oefnax73CQcdfU+upqCoJ6eNHQfqqSUsyHfIYcr8+TMk2HMJm5AduI0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxhFs0/Gq/g3sV8BSioxTZyepE+q0FYwepr4byKenVhQEiFEyZE
+ HHWVA4QjXOhFuJN43vw/V4fDN7wvZKqKprEipvL7+vLcXuCt7w8kj9Bmhd5haR8=
+X-Google-Smtp-Source: AGHT+IGEDxJ0pVfJ7rXqyFaTIRggGGACPmn+P5XtuUizKjkQ1BVKmCRvVq16m0W49J9Dqf7tr/ctOw==
+X-Received: by 2002:a05:600c:511f:b0:42c:ba83:3f01 with SMTP id
+ 5b1f17b1804b1-42cba834352mr55403205e9.8.1726042266176; 
+ Wed, 11 Sep 2024 01:11:06 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:982:cbb0:1680:3625:e94b:7c21?
+ ([2a01:e0a:982:cbb0:1680:3625:e94b:7c21])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-42caf436998sm132547495e9.29.2024.09.11.01.11.05
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 11 Sep 2024 01:11:05 -0700 (PDT)
+Message-ID: <c161f0e6-95ed-438f-b854-cd20b3eb5952@linaro.org>
+Date: Wed, 11 Sep 2024 10:11:05 +0200
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2576; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=l64wyABcAp0A7u67grvDniZOn2vfav9SPM+RbBC7s/c=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhrSH/mKPeJdefPKcq1dvm5C/7Qnnfj8Wfa+omFM8YdON3
- yUtr6roiGVhEGRikBVTZJG2uXJmb+WMKcIXD8vBzGFlAhnCwMUpABN5P5Fhfo5bhOyCbVcWzZJM
- OX6m3Tlyu1e4C8P8oKeqk5b2PbvXvVt0f86xy+1m0gaaAA==
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+User-Agent: Mozilla Thunderbird
+From: neil.armstrong@linaro.org
+Subject: Re: [PATCH 2/3] pinctrl: qcom: add driver for SM8150 SoC
+To: Julius Lehmann <lehmanju@devpi.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de
+Cc: Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+ Robert Marko <robert.marko@sartura.hr>, Sumit Garg <sumit.garg@linaro.org>,
+ Tom Rini <trini@konsulko.com>, u-boot-qcom@groups.io
+References: <20240909155315.307026-1-lehmanju@devpi.de>
+ <20240909155315.307026-3-lehmanju@devpi.de>
+ <cd9da433-312c-4267-a26a-0d55f2093373@linaro.org>
+ <b22f8910-1278-4bd2-9d4c-1a494936f459@linaro.org>
+ <fd96e94f-2325-4d5b-b427-7911f79fc36a@devpi.de>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <fd96e94f-2325-4d5b-b427-7911f79fc36a@devpi.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN1PEPF0000ECD8:EE_|SJ2PR12MB8784:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6348ece9-fc2a-48f2-db8c-08dcd23865aa
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|1800799024|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?TwWpTSsOBLNlkKdOByLaIi6COLaOKFpEan8iqSUtUA/XQGU28Cn6bsOYuTou?=
- =?us-ascii?Q?iplDijQmZ6UazyeG6EphDpoeaEFRlV3mhSEGMNO2spn4sani88D9U3gce7Vd?=
- =?us-ascii?Q?Rec1XapWmMQ6F91JO/m4Ig5fRFo2oAMmmvFxSInkJAM4DkyEHiPSHDaGF4yZ?=
- =?us-ascii?Q?QlrOP+mYHYLaL6uwsw32XYV3ivcxiQTcx4Ib55ZwsykOj/Gi7qbgxyXhoyX5?=
- =?us-ascii?Q?WAz/4P2B29B5tA9GKQA+EZiwp0GZ9Kxp2jemvVqCtion2SHpHs66Ybqq8jIB?=
- =?us-ascii?Q?hq2d4zEOK4gptinwHu/Q5sAg9vGtnQoB9nG8l78DH113y5qOcfrEA9yZ6MIr?=
- =?us-ascii?Q?Ajg3zHHfrcwphZo05/Dl/lgAUUjJFXUpMoWyZd3Xl5pwg9dj8kYp8cD00Huu?=
- =?us-ascii?Q?56XYyImIXGGlU/3A/dfgShEM9XtdRexCxP1PSsQC82lyWUhqgGDgfANap9t0?=
- =?us-ascii?Q?xkbgVJLMwpDm+5y1DGanfvcUDeMayaqjS3qoEeki8WKphpkPe6ZWXsR/gtlc?=
- =?us-ascii?Q?CyYtqavk9MXx9g5QVd/6GRg+dlGt9RYvvTBcORi0EGZf3lThC5CpTpcHCPm8?=
- =?us-ascii?Q?4Cu5NHuFH5L2aAeyHbXz/uH6FfNGKPE1GV4ZlrL4DNwTdqkHB4y3YIfJpXx4?=
- =?us-ascii?Q?uZ+xhRx96NZDTsBwh7+XI6J50ldc+LQ7fki7J7PfgutMEUnoP2rKXRFagF0a?=
- =?us-ascii?Q?WHqEyUmQxpVjEoFsXBaLBjHbSJke6JNgCPPPnEOVQNk4YLENNV3QBGSHjehv?=
- =?us-ascii?Q?j5N7bubSVyKzEhtygE6k0fmPoLR5T2dX1G2iP5kZRhjCmW8EPI18e5eLx61r?=
- =?us-ascii?Q?PzE/2OlEaOI0CiqdaGJeJB5hJGyKMHcfc+q7zI/BwCFeJBVagWCM9nqcPaS+?=
- =?us-ascii?Q?/uAvMZEKIXqII3JgLFQlLZpzFhsp/AAOhwsWK+jBNzOgUwFHEXIxZsGgYg5g?=
- =?us-ascii?Q?TKaHvwFWh/HrJR9Qb2ogGF5DfskADxza6T8d60XVmIDjjT3DeSlCYd9DqFfg?=
- =?us-ascii?Q?P8Qu025pmBPHUjJpFxZ4hMgdZKu4bBMRjbPKZ0l2SQO9EZNCVKwd+F/uWjDE?=
- =?us-ascii?Q?oFv3sVEz4W5B+zlpTxlnx42LXTAZxlsQfggRlltv3HPXkyKqzoM/0AYwkoyy?=
- =?us-ascii?Q?z9eZo4NClxsSjANET6gZZP7uKUn+KMfRPWTQRgdGSmK4NHXs5sKn4Qagok/m?=
- =?us-ascii?Q?cHrndBqfnS3QXLcjZjJrctEQjD+3eTQLvAOzkgsogfxKQF9M1CR5b0Xuy0QZ?=
- =?us-ascii?Q?9ayGkwidqev/+sE0WUd8CdbKGT3WtM5lz0e5lJtRNk3hj2UFuobierpfWeTE?=
- =?us-ascii?Q?QEqC2VD3oZB+wjHr0F1mTi02YErjqMboaY6xumTeHuxehONT1PiMK3tYpVyq?=
- =?us-ascii?Q?MFOtD8d7ICEoPU0cDTJOtIUgokb3djfVEzEc37qqN9XkIpcV2OJtb1d4M8zp?=
- =?us-ascii?Q?s+jcEo/xGRHQR/vIHAuYM9Gx3qH9VUoZ?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(1800799024)(36860700013); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Sep 2024 08:04:44.4840 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6348ece9-fc2a-48f2-db8c-08dcd23865aa
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: MN1PEPF0000ECD8.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB8784
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -147,57 +124,206 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: John Vicky Vykuntapu <johnvicky.vykuntapu@amd.com>
+On 10/09/2024 18:01, Julius Lehmann wrote:
+> Hi Neil and Caleb,
+> 
+> thank you for taking a look at my patch.
+> 
+> On 10.09.24 14:07, Neil Armstrong wrote:
+>> On 10/09/2024 14:05, Caleb Connolly wrote:
+>>> Hi Julius,
+>>>
+>>> Thanks for the patch!
+>>>
+>>> On 09/09/2024 17:53, Julius Lehmann wrote:
+>>>> Add pinctrl and GPIO driver for SM8150. Driver code is based on the
+>>>> similar U-Boot drivers. All constants are taken from the corresponding
+>>>> Linux driver. This drivers differs from the similar U-Boot drivers,
+>>>> because SM8150 SoC have different function IDs for the same functions
+>>>> on different pins.
+>>>>
+>>>> Co-authored-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+>>>> Signed-off-by: Julius Lehmann <lehmanju@devpi.de>
+>>>> ---
+>>>>
+>>>>   drivers/pinctrl/qcom/Kconfig          |   8 ++
+>>>>   drivers/pinctrl/qcom/Makefile         |   1 +
+>>>>   drivers/pinctrl/qcom/pinctrl-sm8150.c | 119 ++++++++++++++++++++++++++
+>>>>   3 files changed, 128 insertions(+)
+>>>>   create mode 100644 drivers/pinctrl/qcom/pinctrl-sm8150.c
+>>>>
+>>>> diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
+>>>> index b326fa8514..501939f783 100644
+>>>> --- a/drivers/pinctrl/qcom/Kconfig
+>>>> +++ b/drivers/pinctrl/qcom/Kconfig
+>>>> @@ -74,6 +74,14 @@ config PINCTRL_QCOM_SM8650
+>>>>       select PINCTRL_QCOM
+>>>>       help
+>>>>         Say Y here to enable support for pinctrl on the Snapdragon SM8650 SoC,
+>>>> +      as well as the associated GPIO driver.
+>>>> +
+>>>> +config PINCTRL_QCOM_SM8150
+>>>> +    bool "Qualcomm SM8150 GCC"
+>>>> +    select PINCTRL_QCOM
+>>>> +    help
+>>>> +      Say Y here to enable support for pinctrl on the Snapdragon SM8150 SoC,
+>>>> +      as well as the associated GPIO driver.
+>>>>     endmenu
+>>>>   diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
+>>>> index 4f1d96787b..cc3660a576 100644
+>>>> --- a/drivers/pinctrl/qcom/Makefile
+>>>> +++ b/drivers/pinctrl/qcom/Makefile
+>>>> @@ -13,3 +13,4 @@ obj-$(CONFIG_PINCTRL_QCOM_SM6115) += pinctrl-sm6115.o
+>>>>   obj-$(CONFIG_PINCTRL_QCOM_SM8250) += pinctrl-sm8250.o
+>>>>   obj-$(CONFIG_PINCTRL_QCOM_SM8550) += pinctrl-sm8550.o
+>>>>   obj-$(CONFIG_PINCTRL_QCOM_SM8650) += pinctrl-sm8650.o
+>>>> +obj-$(CONFIG_PINCTRL_QCOM_SM8150) += pinctrl-sm8150.o
+>>>> diff --git a/drivers/pinctrl/qcom/pinctrl-sm8150.c b/drivers/pinctrl/qcom/pinctrl-sm8150.c
+>>>> new file mode 100644
+>>>> index 0000000000..c3af3448f6
+>>>> --- /dev/null
+>>>> +++ b/drivers/pinctrl/qcom/pinctrl-sm8150.c
+>>>> @@ -0,0 +1,119 @@
+>>>> +// SPDX-License-Identifier: BSD-3-Clause
+>>>> +/*
+>>>> + * Qualcomm SM8150 pinctrl and GPIO driver
+>>>> + *
+>>>> + * Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+>>>> + * Copyright (c) 2024 EPAM Systems.
+>>>> + *
+>>>> + * (C) Copyright 2024 Julius Lehmann <lehmanju@devpi.de>
+>>>> + *
+>>>> + * Based on similar U-Boot drivers. Constants were taken from the Linux driver
+>>>> + */
+>>>> +
+>>>> +#include <dm.h>
+>>>> +
+>>>> +#include "pinctrl-qcom.h"
+>>>> +
+>>>> +#define WEST    0x00100000
+>>>> +#define EAST    0x00500000
+>>>> +#define NORTH    0x00900000
+>>>> +#define SOUTH    0x00D00000
+>>>> +
+>>>> +#define MAX_PIN_NAME_LEN 32
+>>>> +static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
+>>>> +
+>>>> +static const struct pinctrl_function msm_pinctrl_functions[] = { { "qup2", 1 },
+>>>> +                                 { "gpio", 0 },
+>>>> +                                { "sdc4", 0 } };
+>>>> +
+>>>> +static const unsigned int sm8150_pin_offsets[] = {
+>>>> +    [0]   = SOUTH, [1]   = SOUTH, [2]   = SOUTH, [3]   = SOUTH,
+>>>> +    [4]   = SOUTH, [5]   = SOUTH, [6]   = SOUTH, [7]   = SOUTH,
+>>>> +    [8]   = NORTH, [9]   = NORTH, [10]  = NORTH, [11]  = NORTH,
+>>>> +    [12]  = NORTH, [13]  = NORTH, [14]  = NORTH, [15]  = NORTH,
+>>>> +    [16]  = NORTH, [17]  = NORTH, [18]  = NORTH, [19]  = NORTH,
+>>>> +    [20]  = NORTH, [21]  = EAST,  [22]  = EAST,  [23]  = EAST,
+>>>> +    [24]  = EAST,  [25]  = EAST,  [26]  = EAST,  [27]  = EAST,
+>>>> +    [28]  = EAST,  [29]  = EAST,  [30]  = EAST,  [31]  = NORTH,
+>>>> +    [32]  = NORTH, [33]  = NORTH, [34]  = NORTH, [35]  = NORTH,
+>>>> +    [36]  = NORTH, [37]  = NORTH, [38]  = SOUTH, [39]  = NORTH,
+>>>> +    [40]  = NORTH, [41]  = NORTH, [42]  = NORTH, [43]  = EAST,
+>>>> +    [44]  = EAST,  [45]  = EAST,  [46]  = EAST,  [47]  = EAST,
+>>>> +    [48]  = EAST,  [49]  = EAST,  [50]  = EAST,  [51]  = SOUTH,
+>>>> +    [52]  = SOUTH, [53]  = SOUTH, [54]  = SOUTH, [55]  = SOUTH,
+>>>> +    [56]  = SOUTH, [57]  = SOUTH, [58]  = SOUTH, [59]  = SOUTH,
+>>>> +    [60]  = SOUTH, [61]  = SOUTH, [62]  = SOUTH, [63]  = SOUTH,
+>>>> +    [64]  = SOUTH, [65]  = SOUTH, [66]  = SOUTH, [67]  = SOUTH,
+>>>> +    [68]  = SOUTH, [69]  = SOUTH, [70]  = SOUTH, [71]  = SOUTH,
+>>>> +    [72]  = SOUTH, [73]  = SOUTH, [74]  = SOUTH, [75]  = SOUTH,
+>>>> +    [76]  = SOUTH, [77]  = SOUTH, [78]  = SOUTH, [79]  = SOUTH,
+>>>> +    [80]  = SOUTH, [81]  = SOUTH, [82]  = SOUTH, [83]  = NORTH,
+>>>> +    [84]  = NORTH, [85]  = NORTH, [86]  = NORTH, [87]  = EAST,
+>>>> +    [88]  = NORTH, [89]  = NORTH, [90]  = NORTH, [91]  = NORTH,
+>>>> +    [92]  = NORTH, [93]  = NORTH, [94]  = NORTH, [95]  = NORTH,
+>>>> +    [96]  = NORTH, [97]  = NORTH, [98]  = SOUTH, [99]  = SOUTH,
+>>>> +    [100] = SOUTH, [101] = SOUTH, [102] = NORTH, [103] = NORTH,
+>>>> +    [104] = NORTH, [105] = WEST,  [106] = WEST,  [107] = WEST,
+>>>> +    [108] = WEST,  [109] = WEST,  [110] = WEST,  [111] = WEST,
+>>>> +    [112] = WEST,  [113] = WEST,  [114] = SOUTH, [115] = SOUTH,
+>>>> +    [116] = SOUTH, [117] = SOUTH, [118] = SOUTH, [119] = SOUTH,
+>>>> +    [120] = SOUTH, [121] = SOUTH, [122] = SOUTH, [123] = SOUTH,
+>>>> +    [124] = SOUTH, [125] = WEST,  [126] = SOUTH, [127] = SOUTH,
+>>>> +    [128] = SOUTH, [129] = SOUTH, [130] = SOUTH, [131] = SOUTH,
+>>>> +    [132] = SOUTH, [133] = SOUTH, [134] = SOUTH, [135] = SOUTH,
+>>>> +    [136] = SOUTH, [137] = SOUTH, [138] = SOUTH, [139] = SOUTH,
+>>>> +    [140] = SOUTH, [141] = SOUTH, [142] = SOUTH, [143] = SOUTH,
+>>>> +    [144] = SOUTH, [145] = SOUTH, [146] = SOUTH, [147] = SOUTH,
+>>>> +    [148] = SOUTH, [149] = SOUTH, [150] = SOUTH, [151] = SOUTH,
+>>>> +    [152] = SOUTH, [153] = SOUTH, [154] = SOUTH, [155] = WEST,
+>>>> +    [156] = WEST,  [157] = WEST,  [158] = WEST,  [159] = WEST,
+>>>> +    [160] = WEST,  [161] = WEST,  [162] = WEST,  [163] = WEST,
+>>>> +    [164] = WEST,  [165] = WEST,  [166] = WEST,  [167] = WEST,
+>>>> +    [168] = WEST,  [169] = NORTH, [170] = NORTH, [171] = NORTH,
+>>>> +    [172] = NORTH, [173] = NORTH, [174] = NORTH,
+>>>> +    // special pins
+>>>> +    [175] = 0, [176] = 0, [177] = 0, [178] = 0,
+>>>
+>>> We have better support for special pins now, you can remove these 0
+>>> entries and set .special_pins_start = 175 in pin_data below.
+>>
+>> You can look at the sm8250 patch at https://lore.kernel.org/all/20240910-topic-sm8x50-msm-gpio-special-pins-sm8250-v1-2-50623a7e4931@linaro.org/
+>>
+> I took a look at sm8550/sm8660 and noticed that the pin_offsets array is completely missing. Is it not required at all (if special_pins_start and special_pins_data are used)?
 
-Popup the bootmenu for 5 sec with default boot options to CC on AMD CCs and
-default to SOM on others.
-Users can anytime disable the bootmenu by setting the variable
-enable_bootmenu=0 in zynqmp_kria.env or setup it up at run time and save
-variables to NV memory.
+Yeah for newer platforms, the offsets are not required at all.
 
-The patch is also fixing issue created by commit 4c7363068651 ("cmd:
-setexpr: fix no matching string in gsub return empty value") which has
-changed return value from setexpr command (Before this commit when
-matching string wasn't found command return 1 that's why was possible to
-use with if).
-
-Signed-off-by: John Vicky Vykuntapu <johnvicky.vykuntapu@amd.com>
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
-
- board/xilinx/zynqmp/zynqmp_kria.env | 12 +++++++++++-
- 1 file changed, 11 insertions(+), 1 deletion(-)
-
-diff --git a/board/xilinx/zynqmp/zynqmp_kria.env b/board/xilinx/zynqmp/zynqmp_kria.env
-index 49ef3e7d7532..d0e431ebb46f 100644
---- a/board/xilinx/zynqmp/zynqmp_kria.env
-+++ b/board/xilinx/zynqmp/zynqmp_kria.env
-@@ -49,9 +49,19 @@ usb_boot_devices='usb0 usb1 usb2 usb3 usb4'
- som_cc_boot=if test ${card1_name} = SCK-KV-G; then setenv boot_targets mmc1 ${usb_boot_devices} pxe dhcp jtag && run distro_bootcmd; elif test ${card1_name} = SCK-KR-G; then setenv boot_targets ${usb_boot_devices} pxe dhcp jtag && run distro_bootcmd; else test ${card1_name} = SCK-KD-G; setenv boot_targets ${usb_boot_devices} pxe dhcp jtag && run distro_bootcmd; fi;"
- som_mmc_boot=setenv boot_targets mmc0 && run distro_bootcmd
- 
-+# To disable bootmenu set enable_bootmenu=0
-+enable_bootmenu=1
-+check_cc_for_default_boot=if test ${card1_name} = SCK-KV-G || test ${card1_name} = SCK-KR-G || test ${card1_name} = SCK-KD-G; then setenv bootmenu_default 1; else setenv bootmenu_default 0; fi
-+som_bootmenu=if test ${enable_bootmenu} = 1; then run check_cc_for_default_boot; bootmenu; else run som_mmc_boot; fi
-+
- k26_starter=SMK-K26-XCL2G
- k24_starter=SMK-K24-XCL2G
--bootcmd=setenv model $board_name && if setexpr model gsub .*$k24_starter* $k24_starter || setexpr model gsub .*$k26_starter* $k26_starter; then run som_cc_boot; else run som_mmc_boot; run som_cc_boot; fi
-+bootcmd=setenv model $board_name; setexpr model gsub ".*${k24_starter}.*" starter; setexpr model gsub ".*${k26_starter}.*" starter; if test ${model} = "starter"; then run som_cc_boot; else run som_bootmenu; fi
-+
-+# Boot menu
-+bootmenu_0=eMMC Boot=run som_mmc_boot
-+bootmenu_1=SD Boot=run som_cc_boot
-+bootmenu_delay=5
- 
- usb_hub_init=mw 1000 0056 && sleep 1 && i2c write 1000 2d aa 2 -s
- 
--- 
-2.43.0
+> 
+> For v2 I will also try to integrate UFS and SDC pin functions, just like in sm8550/sm8660.
+> 
+>>>
+>>> Kind regards,
+>>>> +};
+>>>> +
+>>>> +static const char *sm8150_get_function_name(struct udevice *dev,
+>>>> +                        unsigned int selector)
+>>>> +{
+>>>> +    return msm_pinctrl_functions[selector].name;
+>>>> +}
+>>>> +
+>>>> +static const char *sm8150_get_pin_name(struct udevice *dev,
+>>>> +                       unsigned int selector)
+>>>> +{
+>>>> +    snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
+>>>> +    return pin_name;
+>>>> +}
+>>>> +
+>>>> +static unsigned int sm8150_get_function_mux(__maybe_unused unsigned int pin,
+>>>> +                        unsigned int selector)
+>>>> +{
+>>>> +    return msm_pinctrl_functions[selector].val;
+>>>> +}
+>>>> +
+>>>> +static struct msm_pinctrl_data sm8150_data = {
+>>>> +    .pin_data = {
+>>>> +        .pin_offsets = sm8150_pin_offsets,
+>>>> +        .pin_count = ARRAY_SIZE(sm8150_pin_offsets),
+>>>> +    },
+>>>> +    .functions_count = ARRAY_SIZE(msm_pinctrl_functions),
+>>>> +    .get_function_name = sm8150_get_function_name,
+>>>> +    .get_function_mux = sm8150_get_function_mux,
+>>>> +    .get_pin_name = sm8150_get_pin_name,
+>>>> +};
+>>>> +
+>>>> +static const struct udevice_id msm_pinctrl_ids[] = {
+>>>> +    { .compatible = "qcom,sm8150-pinctrl", .data = (ulong)&sm8150_data },
+>>>> +    { /* Sentinel */ }
+>>>> +};
+>>>> +
+>>>> +U_BOOT_DRIVER(pinctrl_sm8150) = {
+>>>> +    .name        = "pinctrl_sm8150",
+>>>> +    .id        = UCLASS_NOP,
+>>>> +    .of_match    = msm_pinctrl_ids,
+>>>> +    .ops        = &msm_pinctrl_ops,
+>>>> +    .bind        = msm_pinctrl_bind,
+>>>> +};
+>>>
+>>
 
