@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F4D5EE0211
-	for <u-boot@archiver.kernel.org>; Wed, 11 Sep 2024 07:11:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F0A9EE0211
+	for <u-boot@archiver.kernel.org>; Wed, 11 Sep 2024 07:12:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D6A7891C4;
-	Wed, 11 Sep 2024 09:11:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B5FAD891ED;
+	Wed, 11 Sep 2024 09:11:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="or6zx83L";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GGucw/+E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6FCE5891DA; Wed, 11 Sep 2024 09:11:35 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id 3E11D88D17; Wed, 11 Sep 2024 09:11:37 +0200 (CEST)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8098A891B4
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 09:11:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E1BE9891CA
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 09:11:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=linus.walleij@linaro.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a8a6d1766a7so197825566b.3
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 00:11:32 -0700 (PDT)
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-5365a9574b6so7432270e87.1
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 00:11:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726038692; x=1726643492; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1726038694; x=1726643494; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=cy0AelE8X6/ImwZyMOvnLyspFv+MmXcjl2xKIRLZjow=;
- b=or6zx83LwwSfqBIAtqQ62KRpd3Yj65aL2pKoLVmLV+ZqfxihXVIa74oBGUGTGCwDng
- gTApGUQuGpMwx+8MeG4mqGyNhPAuq1Owu82++edWmiX126uqIoZZ4a0eAKfu+xh/wAOG
- ztenGlGnGcJ1/EQsMIKntpNSJlhm+AxBZMDEcaQutt6CrZHFFk/1RbiLb2qjsYRYIeYJ
- k18w1rQsz2B46zHm77318Kb0kUaLqeFTU8suwdPDlWAca3v6ITTmmj87GA0oiyn7F1oJ
- SR/gB4Wxa+a3EScXrRr0If10Pij7UhNDWx9m7oFDQyiFhkURnIbB7FBJ1UwiiznhtJVw
- vYeg==
+ :reply-to; bh=EvEkZF2r2AqggnLWTgwzPhL/JoYelLUDEL1aq/7CH+o=;
+ b=GGucw/+EDKFZ0daQCNxvIhDG+Cn5Q3v0LNMCsd4rYYxFv4zPS0OGALL/m7IRoj/rpp
+ xmVm+lqLU0aUHON8AM+WAiHdEDQsCDRFgZ43AXt+CVcmINjDv+H9cxZdmSi1QTDXeG+M
+ 9diqiWviT/DJqZ51HkwTsneGWfqFh6iipwnsfRhofkiztdgLR0W+zuIjUKjef83GQXAD
+ Us/LLi0PJgYKhG2rmjVU/4vRMrKOI3pq9y4UKdQEEROTYjfE+pmjefKWAuSOI54bolh/
+ IGwo2dBL4HmW8UkUVdnlG/93OgpfzTVQ9fzeqSwwWk1u20gjvtr+kw2Fx4/R8OR7UvjJ
+ 4YvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726038692; x=1726643492;
+ d=1e100.net; s=20230601; t=1726038694; x=1726643494;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cy0AelE8X6/ImwZyMOvnLyspFv+MmXcjl2xKIRLZjow=;
- b=gk70JzBiS6qvZZJvHHA5JJoMXlyJtHhZSsASaCvuWEiYIwnfRt3PYeMgpKgeR9+eNF
- QD+5IhqG9D2W6DWnLFunW3Zcs92VbFZYuJczPVOsbfV+l8v2QWPXHPzeh+5qe1gjjv8Y
- MA90oHgV51x4msrx01rwiWFXBUpSNvpyk8tnfH7iweE/FFwF275uDlv5WczMw1mPZPy5
- 5EE98mccA6y3bUZbDtlnOqFbZaKEPEAvzR0nlUx84fXJktFrEcoQTtQ0P/JLWmv0p4XD
- QuSM1mkDGaQpoTyUzpPQtGsJXxDGC/S0LVee3J1D6AfYYM3YG4dzKCyNHc/iA0E7Sxd2
- nfmw==
-X-Gm-Message-State: AOJu0YzUL48g8qJ79bJOz49rbFP4RgkxGLT3u1SV43lMZ9I/l+d+n8Ru
- 6Ssb40pb/Dl3CNFpU5fwRCpxu+y5U345jiC5gPaz6Ai1+2IlcinhIgWxU/a2JuQ=
-X-Google-Smtp-Source: AGHT+IHh0eiO7wFrgl9XD4fC14+/RUGF1FJdQlt5bv6KDTtkNwAwXFA5kb48bKFBcILLqurtmErUVg==
-X-Received: by 2002:a17:907:94c5:b0:a8a:1ffe:70f1 with SMTP id
- a640c23a62f3a-a9004a46f0amr172951366b.50.1726038691781; 
- Wed, 11 Sep 2024 00:11:31 -0700 (PDT)
+ bh=EvEkZF2r2AqggnLWTgwzPhL/JoYelLUDEL1aq/7CH+o=;
+ b=puklRy/Vp3U5aQx6dHpBPZXS98+NWSHJ5E9QJyTzIko3YAl9Ka4vLG304lUqeYrob3
+ yzy7etAQJUhpSDpgUGI/rgQM754rH5uv61H//1XwgY6AGYC5Psya3g0853eF6PFlTBjt
+ BJ5O/MnXD+3FhIs6B2OlT4A8GnaisMSn56asn1YtEnh6/5ZIIkCYmg9TDM2MbMrjGNCj
+ SElQkmyqlDZgKAkFX/P4Vs7iHwWorpiBLgLejqisAoMOMz8wH+VR0p5K44YAigPGtwku
+ pDbmLCSLRHSVfVxAeeQWYcvh5XOtxaq6PK91XornPeaQbfAc3BjELidOrsQZEKQwCLUX
+ djMQ==
+X-Gm-Message-State: AOJu0YwibC9ZfxsMM+QSbp7txc/aqPuVKsaksDzXlwHp2X5nMcAiNdwT
+ /KNQnkvmLRgC3GJ5ZxGkRGWrar8Sf4P0oZNTQnyNBIa83jnvgzxl1eAvkp2Mw+0aXLIol8yxF7A
+ f
+X-Google-Smtp-Source: AGHT+IHHELM51EHRzS+8G4S7O8HBYOT92XrkQd5DkIXa/7bIZTpDHB3azHBJocrhBtBtTsZVS1+7ww==
+X-Received: by 2002:a05:6512:33c8:b0:535:6aa8:dc49 with SMTP id
+ 2adb3069b0e04-536587a672emr14143652e87.9.1726038694002; 
+ Wed, 11 Sep 2024 00:11:34 -0700 (PDT)
 Received: from lino.lan ([85.235.12.238]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a8d25926ee8sm580523866b.50.2024.09.11.00.11.30
+ a640c23a62f3a-a8d25926ee8sm580523866b.50.2024.09.11.00.11.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Sep 2024 00:11:31 -0700 (PDT)
+ Wed, 11 Sep 2024 00:11:32 -0700 (PDT)
 From: Linus Walleij <linus.walleij@linaro.org>
-Date: Wed, 11 Sep 2024 09:11:13 +0200
-Subject: [PATCH 2/7] mtd: rawnand: brcmnand: Fix potential false time out
- warning
+Date: Wed, 11 Sep 2024 09:11:14 +0200
+Subject: [PATCH 3/7] mtd: rawnand: brcmnand: Fix potential out-of-bounds
+ access in oob write
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240911-brcmnand-fixes-v1-2-be112a20aaf1@linaro.org>
+Message-Id: <20240911-brcmnand-fixes-v1-3-be112a20aaf1@linaro.org>
 References: <20240911-brcmnand-fixes-v1-0-be112a20aaf1@linaro.org>
 In-Reply-To: <20240911-brcmnand-fixes-v1-0-be112a20aaf1@linaro.org>
 To: u-boot@lists.denx.de, 
@@ -101,42 +102,64 @@ X-Virus-Status: Clean
 
 From: William Zhang <william.zhang@broadcom.com>
 
-Backport from the Linux kernel:
-commit 9cc0a598b944816f2968baf2631757f22721b996
-"mtd: rawnand: brcmnand: Fix potential false time out warning"
+Backport of upstream Linux
+commit 5d53244186c9ac58cb88d76a0958ca55b83a15cd
+"mtd: rawnand: brcmnand: Fix potential out-of-bounds access in oob write"
 
-If system is busy during the command status polling function, the driver
-may not get the chance to poll the status register till the end of time
-out and return the premature status.  Do a final check after time out
-happens to ensure reading the correct status.
+When the oob buffer length is not in multiple of words, the oob write
+function does out-of-bounds read on the oob source buffer at the last
+iteration. Fix that by always checking length limit on the oob buffer
+read and fill with 0xff when reaching the end of the buffer to the oob
+registers.
 
 Signed-off-by: William Zhang <william.zhang@broadcom.com>
 Reviewed-by: Florian Fainelli <florian.fainelli@broadcom.com>
 Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
-Link: https://lore.kernel.org/linux-mtd/20230706182909.79151-3-william.zhang@broadcom.com
+Link: https://lore.kernel.org/linux-mtd/20230706182909.79151-5-william.zhang@broadcom.com
 Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
 ---
- drivers/mtd/nand/raw/brcmnand/brcmnand.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ drivers/mtd/nand/raw/brcmnand/brcmnand.c | 18 ++++++++++++++++--
+ 1 file changed, 16 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/mtd/nand/raw/brcmnand/brcmnand.c b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
-index 700d1122639f..46a4107a83a9 100644
+index 46a4107a83a9..60d34bd21f53 100644
 --- a/drivers/mtd/nand/raw/brcmnand/brcmnand.c
 +++ b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
-@@ -1011,6 +1011,14 @@ static int bcmnand_ctrl_poll_status(struct brcmnand_controller *ctrl,
- 	} while (get_timer(base) < limit);
- #endif /* __UBOOT__ */
+@@ -1334,19 +1334,33 @@ static int write_oob_to_regs(struct brcmnand_controller *ctrl, int i,
+ 			     const u8 *oob, int sas, int sector_1k)
+ {
+ 	int tbytes = sas << sector_1k;
+-	int j;
++	int j, k = 0;
++	u32 last = 0xffffffff;
++	u8 *plast = (u8 *)&last;
  
+ 	/* Adjust OOB values for 1K sector size */
+ 	if (sector_1k && (i & 0x01))
+ 		tbytes = max(0, tbytes - (int)ctrl->max_oob);
+ 	tbytes = min_t(int, tbytes, ctrl->max_oob);
+ 
+-	for (j = 0; j < tbytes; j += 4)
 +	/*
-+	 * do a final check after time out in case the CPU was busy and the driver
-+	 * did not get enough time to perform the polling to avoid false alarms
++	 * tbytes may not be multiple of words. Make sure we don't read out of
++	 * the boundary and stop at last word.
 +	 */
-+	val = brcmnand_read_reg(ctrl, BRCMNAND_INTFC_STATUS);
-+	if ((val & mask) == expected_val)
-+		return 0;
++	for (j = 0; (j + 3) < tbytes; j += 4)
+ 		oob_reg_write(ctrl, j,
+ 				(oob[j + 0] << 24) |
+ 				(oob[j + 1] << 16) |
+ 				(oob[j + 2] <<  8) |
+ 				(oob[j + 3] <<  0));
 +
- 	dev_warn(ctrl->dev, "timeout on status poll (expected %x got %x)\n",
- 		 expected_val, val & mask);
++	/* handle the remaing bytes */
++	while (j < tbytes)
++		plast[k++] = oob[j++];
++
++	if (tbytes & 0x3)
++		oob_reg_write(ctrl, (tbytes & ~0x3), (__force u32)cpu_to_be32(last));
++
+ 	return tbytes;
+ }
  
 
 -- 
