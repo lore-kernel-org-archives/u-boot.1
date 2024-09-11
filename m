@@ -4,81 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 232A5EE0212
-	for <u-boot@archiver.kernel.org>; Wed, 11 Sep 2024 06:31:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42206EE0212
+	for <u-boot@archiver.kernel.org>; Wed, 11 Sep 2024 06:31:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14B89891E7;
-	Wed, 11 Sep 2024 08:26:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9A66588CCA;
+	Wed, 11 Sep 2024 08:29:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="coofiX5v";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="HL7pNQTI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D6F8891E7; Wed, 11 Sep 2024 08:26:19 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 26C5889161; Wed, 11 Sep 2024 08:29:26 +0200 (CEST)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40786891D1
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 08:26:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 13925831A1
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 08:29:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=9elements.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-5c241feb80dso1057309a12.0
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 23:26:17 -0700 (PDT)
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-6d47d860fc4so46259227b3.3
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 23:29:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1726035977; x=1726640777; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=9elements.com; s=google; t=1726036163; x=1726640963; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FJhR8POOdlsqaJivG8AurnvjI6w6vQW9EPW9DK0r8uM=;
- b=coofiX5vVhehp/gZEJZHNzmepPrrBBon6JCFAzMg9JAK8llR7abxMuSxD3KHQDw27G
- nn90MMhzYd66H7AzqpvbPBkxh/2x2DTEQUB/a7tNPy426rpCUplTnM9164tJLSlznHrx
- sWPxxyZjRlgqlVAD4VWGvAH33MfWDUsJ89+Hl+droP8OBn+pyku1SvWZPdtezLVqATx+
- g8XMv2wLT+WI36gVCkFcXrWdy/3Vj441zh6jdI8y5iUGEH5IrcKEef+4H5Z2L9vtvRYS
- kmy0BKB1ls5xhvJDbFfeaOrSVhpxLYF957favZiGq2PwDLrg/xynyWjJyjTi9bfu05k1
- PWgQ==
+ bh=J0YFCDL03HG0JshISijB9JDBoiHrpvTp3KdJbuZ5bJo=;
+ b=HL7pNQTIxWki+5W+g5K6rHGHBiZDkVV1/Tm0ozFAWB70gOui4FvsDfj/yiupGrQe/h
+ zOb7afRuaRJI96VE/PR/F2c8+OJxUhGj3kbdZ/B3J00v4EDX2eKR2zHyRaFYH3LHenGG
+ rfAdUeY+EQSWr0YctHZCi7Wl1MSRpnuAESDOFEagJBbql6Ox2ts3Vib6d2jBofRvn37O
+ 14/vSAhNpbnBHuGHZG+GBYvuyFpjSXdiXpwPxx2ja8syJV9YZx9olLakDT0cLagiD25x
+ HawdBlSp2cvOxpDrytgPjEzDUAoEK1O6f5szArc69LepKcYuCepk9AFI3SW6yhIIdOhf
+ DWVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726035977; x=1726640777;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1726036163; x=1726640963;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FJhR8POOdlsqaJivG8AurnvjI6w6vQW9EPW9DK0r8uM=;
- b=gq6XiyuK5cgzl808OS8yaNhfyOpcAQF7qZ6wZgVMPVJXOLuvr0Ka2yZg454n55aNx6
- gxebBNpNULfs6OJX4k1aoir4EYFtiSwP3Bir8jfYkd1ZD2gvU2zIscla5SKPG2QBecQ3
- ez3GE41HMSyVkVFLvXdo2PG+h47dXq8k5cOZizb77psg4s8Pj6+kWZN5RPVknV8V2XGl
- cKp5hJwzmiNHGX4tSYaFXB0oPteNux6VvM6J/z6Rlg4INm1nRMIp+hK1Nox5s0nqssb7
- tZUary+UiyD4SomE2PL9zcOjKoZyVx64JyXZ+1wmnWQn0a0xx7wc3Px+CZ8ttmFtzGm2
- 5wvw==
-X-Gm-Message-State: AOJu0Ywo8sq4CthaSx4IUVUaHSrAEMvWijHLrrflyjtNR1EHFguONWMx
- NjjkCFozoGDZdxo6cRGW3n1wIiodWY1whhCP7s30teGPpK6R7N2Kq/MI4O0KPgNK2+qlXVUTskk
- 1O3Y=
-X-Google-Smtp-Source: AGHT+IFORijcQmz5KFU5TT4gCnY7CpHvAusXKcnThGqfCB7iKxhzIiFsZW8pLUPKbxsTiZVpkF/4EA==
-X-Received: by 2002:a17:907:da3:b0:a86:6a9a:d719 with SMTP id
- a640c23a62f3a-a8ffb2c454emr316288166b.29.1726035976627; 
- Tue, 10 Sep 2024 23:26:16 -0700 (PDT)
-Received: from fedora.sec.9e.network
- (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a8d25a43365sm575545366b.94.2024.09.10.23.26.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Sep 2024 23:26:16 -0700 (PDT)
-From: Patrick Rudolph <patrick.rudolph@9elements.com>
-To: u-boot@lists.denx.de, Matthias Brugger <mbrugger@suse.com>,
- Peter Robinson <pbrobinson@gmail.com>
-Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 30/30] configs: Add RPI4 ACPI defconfig
-Date: Wed, 11 Sep 2024 08:24:20 +0200
-Message-ID: <20240911062511.494855-31-patrick.rudolph@9elements.com>
-X-Mailer: git-send-email 2.46.0
-In-Reply-To: <20240911062511.494855-1-patrick.rudolph@9elements.com>
-References: <20240911062511.494855-1-patrick.rudolph@9elements.com>
+ bh=J0YFCDL03HG0JshISijB9JDBoiHrpvTp3KdJbuZ5bJo=;
+ b=Sg3g8uKZQ2xPdjfbNDBbVq8eNRLRz91iy0qVzTE7RjdkCwBpGtmjIlsFJoUV+oDE01
+ UcV4fIzyxcat2H6JDJDXKGckv5gvyiJQT95EkIA+rQnwJ1M9TnEjB9QY4xlmPp+8J7to
+ i3b6xtp3R5aAysC9XaFf/i4kjmoUc3mWTModYXjv60qb9KXpT73i7JSvLaBr5ve3YMFh
+ P0uQHlXUmyF4/6VB/Hf/+9RAffTo9vRLoSv3UpXU2i/VzhmQJyyNOIz3OuAqb3kcWw3x
+ eBiJ1zbf9Zzdp+FpH/M2is86Qs1bR27SzG88a4zdIxGjDFS/HIYALOH2sH9FqhEOP9mQ
+ EWzw==
+X-Gm-Message-State: AOJu0YwAaQBX9mkLdIsVGB9FdlLHf4jqN/xP2yAhWwy285eKBqwMPE3q
+ r9zyzG3WIK2ZIF1ZrurTCGJirbgtq5NzqGDqiYpfPQy3Hr37tKcZgjtkOeHQtCZCMl8QZiRutaK
+ otbBrdCIMoWhwT5lkH3JmWuBhSfkoCenHR6bl5g==
+X-Google-Smtp-Source: AGHT+IHHJHNo5BaqYVvPfNkqF0Ri8ZovKdu9Vc1XiS08ATLKORe7ARNt6cvQ3Rua70nxaajslAF87B54IAYFcAa0VHE=
+X-Received: by 2002:a05:690c:39b:b0:6ac:ce34:9726 with SMTP id
+ 00721157ae682-6db4513b515mr177619057b3.18.1726036162864; Tue, 10 Sep 2024
+ 23:29:22 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240727071742.1735703-1-patrick.rudolph@9elements.com>
+ <20240727071742.1735703-4-patrick.rudolph@9elements.com>
+ <CAFLszThVGswtjS5+1T8Ot0G1LYa9p6XaZpLpX3c5vOhDAKHQqw@mail.gmail.com>
+ <CALNFmy3zBpeZsofSbUuZmjkM2a5Ek=ySboGQ+ycxv8vjwRXC_Q@mail.gmail.com>
+In-Reply-To: <CALNFmy3zBpeZsofSbUuZmjkM2a5Ek=ySboGQ+ycxv8vjwRXC_Q@mail.gmail.com>
+From: Patrick Rudolph <patrick.rudolph@9elements.com>
+Date: Wed, 11 Sep 2024 08:29:12 +0200
+Message-ID: <CALNFmy2U1fg8GzR7NHmDH7L9qJLsG5XgnUoqVCqhywOFZshdng@mail.gmail.com>
+Subject: Re: [PATCH 03/17] acpi: x86: Move MADT to common code
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, mbrugger@suse.com, pbrobinson@gmail.com, 
+ trini@konsulko.com, bmeng.cn@gmail.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,98 +91,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Allows to build the RPi4 with ACPI enabled.
+Hi Simon,
+On Mon, Sep 2, 2024 at 11:14=E2=80=AFAM Patrick Rudolph
+<patrick.rudolph@9elements.com> wrote:
+>
+> On Mon, Jul 29, 2024 at 5:28=E2=80=AFPM Simon Glass <sjg@chromium.org> wr=
+ote:
+> >
+> > Hi Patrick,
+> >
+> > On Sat, 27 Jul 2024 at 01:20, Patrick Rudolph
+> > <patrick.rudolph@9elements.com> wrote:
+> > >
+> > > Write MADT in common code and let the SoC fill out the body by
+> > > calling acpi_fill_madt() which must be implemented at SoC level.
+> > >
+> > > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+> > > Cc: Simon Glass <sjg@chromium.org>
+> > > Cc: Bin Meng <bmeng.cn@gmail.com>
+> > > ---
+> > >  arch/sandbox/lib/Makefile         |  9 +++---
+> > >  arch/sandbox/lib/acpi_table.c     |  7 +++++
+> > >  arch/x86/cpu/intel_common/acpi.c  | 20 +++++++++-----
+> > >  arch/x86/cpu/tangier/acpi.c       |  6 +++-
+> > >  arch/x86/include/asm/acpi_table.h |  3 +-
+> > >  arch/x86/lib/acpi_table.c         | 46 ++++++-----------------------=
+--
+> > >  include/acpi/acpi_table.h         | 11 ++++++++
+> > >  lib/acpi/acpi_table.c             | 31 +++++++++++++++++++++
+> > >  8 files changed, 81 insertions(+), 52 deletions(-)
+> > >  create mode 100644 arch/sandbox/lib/acpi_table.c
+> >
+> > Same comment as previous patch.
+> While it might be possible to write out GICC and LAPIC or X2APIC using
+> a CPU driver,
+> how would the other sub-tables integrate into the acpi_ops?
+>
+> On x86 you have ioapic and irq_overrides and on arm GICR and ITS sub-tabl=
+es.
+> Would I need to add "Interrupt controller" drivers for each platform,
+> fill it with platform specific data
+> and then fill out the MADT table using acpi_ops?
+>
+> While that seems nice to have, it would be quite a lot of work, since
+> none of the interface
+> or drivers exists at the moment.
+> It even looks like not all platforms even use a CPU driver and even
+> less use an interrupt controller
+> driver...
+>
+I've implemented this in the latest patch series v3.
+See commit "drivers/arm: Implement acpi_fill_madt" that implements the
+driver model
+fill_madt for arm and allows to use it on QEMU SBSA. Other platforms
+are still using the
+"old" approach until they have been ported to the driver model.
 
-TEST: - Boots on qemu-system-aarch64 -machine raspi4b
-      - Boots on real hardware with arm_64bit=1 in config.txt
-
-Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Matthias Brugger <mbrugger@suse.com>
-Cc: Peter Robinson <pbrobinson@gmail.com>
----
- configs/rpi_4_acpi_defconfig | 72 ++++++++++++++++++++++++++++++++++++
- 1 file changed, 72 insertions(+)
- create mode 100644 configs/rpi_4_acpi_defconfig
-
-diff --git a/configs/rpi_4_acpi_defconfig b/configs/rpi_4_acpi_defconfig
-new file mode 100644
-index 0000000000..d8a3ee55f2
---- /dev/null
-+++ b/configs/rpi_4_acpi_defconfig
-@@ -0,0 +1,72 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_BCM283X=y
-+CONFIG_TEXT_BASE=0x00080000
-+CONFIG_TARGET_RPI_4=y
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x7fffe30
-+CONFIG_ENV_SIZE=0x4000
-+CONFIG_DEFAULT_DEVICE_TREE="bcm2711-rpi-4-b"
-+CONFIG_OF_LIBFDT_OVERLAY=y
-+CONFIG_DM_RESET=y
-+CONFIG_SYS_LOAD_ADDR=0x1000000
-+CONFIG_PCI=y
-+CONFIG_BOOTSTD_DEFAULTS=y
-+CONFIG_OF_BOARD_SETUP=y
-+CONFIG_FDT_SIMPLEFB=y
-+CONFIG_USE_PREBOOT=y
-+CONFIG_PREBOOT="pci enum; usb start;"
-+CONFIG_SYS_PBSIZE=1049
-+# CONFIG_DISPLAY_CPUINFO is not set
-+# CONFIG_DISPLAY_BOARDINFO is not set
-+CONFIG_MISC_INIT_R=y
-+CONFIG_SYS_PROMPT="U-Boot> "
-+CONFIG_CMD_DFU=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PCI=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_FS_UUID=y
-+CONFIG_ENV_FAT_DEVICE_AND_PART="0:1"
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
-+CONFIG_TFTP_TSIZE=y
-+CONFIG_DM_DMA=y
-+CONFIG_DFU_MMC=y
-+CONFIG_SYS_DFU_DATA_BUF_SIZE=0x100000
-+CONFIG_SYS_DFU_MAX_FILE_SIZE=0x200000
-+CONFIG_BCM2835_GPIO=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SDMA=y
-+CONFIG_MMC_SDHCI_BCM2835=y
-+CONFIG_BCMGENET=y
-+CONFIG_PCI_BRCMSTB=y
-+CONFIG_PINCTRL=y
-+# CONFIG_PINCTRL_GENERIC is not set
-+CONFIG_DM_RNG=y
-+CONFIG_RNG_IPROC200=y
-+# CONFIG_REQUIRE_SERIAL_CONSOLE is not set
-+CONFIG_SYSINFO=y
-+CONFIG_SYSINFO_SMBIOS=y
-+CONFIG_USB=y
-+CONFIG_DM_USB_GADGET=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_XHCI_PCI=y
-+CONFIG_USB_KEYBOARD=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_MANUFACTURER="FSL"
-+CONFIG_USB_GADGET_VENDOR_NUM=0x0525
-+CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
-+CONFIG_USB_GADGET_DWC2_OTG=y
-+CONFIG_USB_GADGET_DOWNLOAD=y
-+CONFIG_VIDEO=y
-+# CONFIG_VIDEO_BPP8 is not set
-+# CONFIG_VIDEO_BPP16 is not set
-+CONFIG_SYS_WHITE_ON_BLACK=y
-+CONFIG_VIDEO_BCM2835=y
-+CONFIG_CONSOLE_SCROLL_LINES=10
-+CONFIG_PHYS_TO_BUS=y
-+CONFIG_GENERATE_ACPI_TABLE=y
-+CONFIG_ACPI=y
-+CONFIG_ACPI_PARKING_PROTOCOL=y
-+CONFIG_CMD_ACPI=y
-+CONFIG_BOOTM_EFI=y
--- 
-2.46.0
-
+> >
+> > Regards,
+> > Simon
