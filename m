@@ -4,80 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 997C5EE0206
-	for <u-boot@archiver.kernel.org>; Wed, 11 Sep 2024 16:45:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F584EE0208
+	for <u-boot@archiver.kernel.org>; Wed, 11 Sep 2024 17:13:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9B11892D4;
-	Wed, 11 Sep 2024 18:45:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 982D7892CF;
+	Wed, 11 Sep 2024 19:13:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=devpi.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="qvUAyPeC";
+	dkim=pass (2048-bit key; unprotected) header.d=devpi.de header.i=@devpi.de header.b="tPqcBBen";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E00E6892D5; Wed, 11 Sep 2024 18:45:24 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9AF0E892E6; Wed, 11 Sep 2024 19:13:22 +0200 (CEST)
+Received: from smtp6.goneo.de (smtp6.goneo.de [85.220.129.31])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 85EA688F6F
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 18:45:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 564CB892D3
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 19:13:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a8a7b1c2f2bso6711366b.0
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 09:45:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1726073122; x=1726677922;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WAZ1aWT1fYKEwoNxPlQB8IN3mV4Hw3tYpacjXoBW5mk=;
- b=qvUAyPeCLwHDjQYb798RF+VQCPq/f2pFLWU/W2IqB+JdBlIzxQOx37KKFcmQVqRSib
- rWsDMAbgWEl7UzH3v4WV3P8Uj1q12zueKb4Zc8SmHC5yQFZd3SYQlkfwinK/p0EcLqz2
- BYdmAsJg12DFQnw5a87A+cVuavgi5BxB4UKF0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726073122; x=1726677922;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=WAZ1aWT1fYKEwoNxPlQB8IN3mV4Hw3tYpacjXoBW5mk=;
- b=psvQjLoA5Mv/hkqmyIioPHimAMCoJ8JPwK8qnlW0RRrrE44E7QWbzR2mqKJlAjn8yP
- a4sAee0i0nDoBq4Jfw53dQMdpJLqONfiOIbDijvAmv5DQ91b9vTxp9JQkaFcynJaQ1rc
- PAS4dpIEe2UTqlQMjQm7KUyfG4iNac+ogfWz/fQVMpFyidxMVkHTx2aDBLPnO6bzhkWY
- /rHGq/++zAEe4Ly1oz20goyYkrqtwGeTsoVV4vBerm1+5blCht3l9rg1rZo+AapTknP+
- x+nyMt2t1a/ekFHG68S4d1mKzWesO2tuwTTJbfdzyU6OGTZg05xzdMy7QdT4tSGoIdCH
- zmag==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVfd9cs1RrdqFNKNRF7S4BmfSf+YBy0dR/H5f/XUdE53z6aT+DkiKXVOQRSvVNRHgs+hyEB4WY=@lists.denx.de
-X-Gm-Message-State: AOJu0YyxVMgNkBh0+OsP4Kao80TT2Tn5J6FtjOKxK/yulsv35NtDA0z+
- 7DMlhBfyy/RhO59HjaAVc5sL3LFILKwm2tqCAm7DSK8/b3ZgVmvgE5qZSAaCZKjl83ZBrnKqTtI
- pNcKoZDVu9uDHhMBFHPsG7jeE4W1DizzDRpnnCQ==
-X-Google-Smtp-Source: AGHT+IHqomZwciDvJqFr8np/nyHDyrcAuzFOkMlKM4iiTNXoOjGVYM51AfSasWRgiFP7TKtm8l87s3hQ+54uq+gTA+U=
-X-Received: by 2002:a17:907:f1dd:b0:a8d:286f:7b46 with SMTP id
- a640c23a62f3a-a90295a213fmr8611766b.29.1726073121385; Wed, 11 Sep 2024
- 09:45:21 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=devpi.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=lehmanju@devpi.de
+Received: from hub1.goneo.de (hub1.goneo.de [IPv6:2001:1640:5::8:52])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
+ (No client certificate requested)
+ by smtp6.goneo.de (Postfix) with ESMTPS id 10E1D240897;
+ Wed, 11 Sep 2024 19:13:20 +0200 (CEST)
+Received: from hub1.goneo.de (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
+ (No client certificate requested)
+ by hub1.goneo.de (Postfix) with ESMTPS id 3B489240560;
+ Wed, 11 Sep 2024 19:13:18 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=devpi.de; s=DKIM001;
+ t=1726074798;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=FpgXVDhVbPADQxKnRq3foUO3W4z4Epbiv2PwcFXDaNI=;
+ b=tPqcBBen27un6TSLl1WYvfQUvM5Gt1H43OqDKbFwTrcdBHDFfslVDatzHjUgrKhYFCDuFL
+ AbHcyZJjjvZYhqj8stPDgdoBeoxnk3Ri2wh9oz0/jUJAk4DSGvJ9BIICrGsIqcHT5c4aHh
+ TRxFeUWrGFJ6Fjjc39UU0hEV5r0bwF5jHfX9YvY1IT62SF/R22F65ebcc9OXXrBQ7Aw1z9
+ 70Z6VFQON93pt/6CTdu2UjoTxdiOpbYVYA63u/XzmC7dH41l/e4CerD4WvygOEAjc0sOKq
+ e7/ZXOY3R2Vwpeunc8qNKgnYv3bM+uPACfjCt5kS59NXvPyjdlq3NTUwkQx5bw==
+Received: from p200300cbef0698100000000000000193.dip0.t-ipconnect.de
+ (p200300cbef0698100000000000000193.dip0.t-ipconnect.de
+ [IPv6:2003:cb:ef06:9810::193])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by hub1.goneo.de (Postfix) with ESMTPSA id BB9F92404BE;
+ Wed, 11 Sep 2024 19:13:17 +0200 (CEST)
+From: Julius Lehmann <lehmanju@devpi.de>
+Subject: [PATCH v3 0/3] Support for Qualcomm sm8150 SoC
+Date: Wed, 11 Sep 2024 19:13:08 +0200
+Message-Id: <20240911-sm8150-patches-v3-0-d9164b71316f@devpi.de>
 MIME-Version: 1.0
-References: <20240910101344.110633-1-miquel.raynal@bootlin.com>
- <CAOf5uwmzm=9=Vsu5cTbziyPG=KAqDGTcmrW0A36a2ix_+2WjNA@mail.gmail.com>
- <20240910145634.2ada70ad@xps-13>
-In-Reply-To: <20240910145634.2ada70ad@xps-13>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Wed, 11 Sep 2024 18:45:08 +0200
-Message-ID: <CAOf5uwm-CAbYCqFtx43Ynp23kVTvWM02qchuuwDHXE4=8NY48Q@mail.gmail.com>
-Subject: Re: [PATCH 0/8] Add imx8mp video support
-To: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAKTP4WYC/12Nyw6CMBBFf4V07ZBOS0Fc+R/GRWlHqZFHWmw0h
+ H+3EBfE5bnJOXdmgbyjwE7ZzDxFF9zQJ5CHjJlW93cCZxMzwUXBa+QQuiMqDqOeTEsBlKqNEUW
+ lLFmWpNHTzb234OWauHVhGvxn60dc118qxZSSqHLJKy5KQHhS2+n+8TpbiqPLLbE1EMVOQvz/j
+ wI4cC2FKZvSNqh39rIsX8jaghPgAAAA
+To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
  Sean Anderson <seanga2@gmail.com>, 
- Simon Glass <sjg@chromium.org>, Jaehoon Chung <jh80.chung@samsung.com>, 
- Anatolij Gustschin <agust@denx.de>, u-boot@lists.denx.de, 
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Ian Ray <ian.ray@gehealthcare.com>, Marek Vasut <marek.vasut@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
+ Julius Lehmann <lehmanju@devpi.de>, 
+ Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+X-Mailer: b4 0.14.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1909; i=lehmanju@devpi.de;
+ h=from:subject:message-id; bh=ZDDAnVHItBZnl4NEU5eoCUaTYwkN1ENPNHPNXVfW+hw=;
+ b=owEBbQKS/ZANAwAKARK2S7xC0EEDAcsmYgBm4c+t9VRfHms0+nslk0czaasNSEFjYv24xo6hA
+ uKv5wMp/I6JAjMEAAEKAB0WIQTCqoxFzEvlxm0XalUStku8QtBBAwUCZuHPrQAKCRAStku8QtBB
+ AxdaD/99QG9is3aqiLUO2zmaW2ReJvdxM5HP5Q3J6XPa+PYYJXRufl1WvbyVfwlwFULP5w4e0th
+ nqgNPnGjI/MdtFHa5pDESjCrkp+jMgXH6h3r/LZXrVelxW5NAStPF1o3nK5EdGX7xQFlM/PDP+L
+ ssmynU4neK06OrnYqO9vjYrcBwtbo9mWsbQojsHXHNBgdpg9U/POgOo6W6gN/bRKV43Wm1Ua5lN
+ S2r6pVKRi3P9Rk9H6DTmQiHdm51MtMP/ouvBWLmCAVslZm0GMrvWgMCUgkmLGAIOGFhFl8TSyWM
+ 8JX4IcnxGJj0M/JLEm0l1LGMR44RJm2nfkKIe/9p8ASbqUAnFdSA+wmFIbY7SkWIelcORIVsVCk
+ WHj3t4ac/zoP4TzyU0HgE538fcWSqG63fIqImMyxx6i5rTGsl1sUs2AnCsabmWKKPMmLbMAO3DN
+ Wo1KMexoRNSZo9kxw/Yw0qBbu91P/5Hs0Q/tZWPhVsQ9/hDLBOGsV9lMfFcXboD5vBqk40piR2U
+ 703AzGc/kY6pifLYY4IS9UdtZvkuhJjj+Gukr4mf93U0i8uF93Ogu+LNe2WWqakxbNKVImRWCS7
+ u/GW6v2/q/8bjqip0SHXJeQxsEllTA0XaQ0p3pMNR4iULuNCMk8Ayz2dsapJ4PJ8+FzieyPpVuU
+ 3Ek4GxK5Bgvwexg==
+X-Developer-Key: i=lehmanju@devpi.de; a=openpgp;
+ fpr=C2AA8C45CC4BE5C66D176A5512B64BBC42D04103
+X-Rspamd-UID: efd343
+X-Rspamd-UID: c9de7d
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,122 +110,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Miquel
+This series picks up the work from Volodymyr Babchuk (https://lore.kernel.org/u-boot/20240306005230.2638972-1-volodymyr_babchuk@epam.com). clk and pinctrl drivers are adjusted to work similarly to existing qcom drivers. I could only test this using android boot chainloading.
 
-On Tue, Sep 10, 2024 at 2:56=E2=80=AFPM Miquel Raynal <miquel.raynal@bootli=
-n.com> wrote:
->
-> Hi Michael,
->
-> michael@amarulasolutions.com wrote on Tue, 10 Sep 2024 12:30:42 +0200:
->
-> > Hi Miquel
-> >
-> > On Tue, Sep 10, 2024 at 12:13=E2=80=AFPM Miquel Raynal
-> > <miquel.raynal@bootlin.com> wrote:
-> > >
-> > > In order to display a boot picture or an error message, the i.MX8MP
-> > > display pipeline must be enabled. The SoC has support for various
-> > > interfaces (LVDS, HDMI, DSI). The one supported in this series is the
-> > > standard 4-lane LVDS output. The minimal setup is thus composed of:
-> > > * An LCD InterFace (LCDIF) with an AXI/APB interface, generating a pi=
-xel
-> > >   stream
-> > > * One LVDS Display Bridge (LDB), also named pixel mapper, which recei=
-ves
-> > >   the pixel stream and route it to one or two (possibly combined) LVD=
-S
-> > >   displays.
-> > > * All necessary clocks and power controls coming from the MEDIAMIX
-> > >   control block.
-> > >
-> > > Patch 1 adds a very useful helper to the core in order to grab device=
-s
-> > > through endpoints instead of being limited to phandles. Video pipelin=
-es
-> > > being often described using graphs endpoints, the introduced helper i=
-s
-> > > used several times in the serires (there are 3 LCDIF, one of them bei=
-ng
-> > > connected to the LDB, itself having 2 ports).
-> > >
-> > > Patch 2 is a fix which is necessary for this series to work properly,
-> > > but is way broader than just this use case. In practice, when assigne=
-d
-> > > clocks are defined in the device tree, the clock uclass tries to assi=
-gn
-> > > the parents first and then sets them to the correct frequency. This o=
-nly
-> > > works if the parents have been enabled themselves. Otherwise we end-u=
-p
-> > > with a non-clocked parent. I believe this is not the intended behavio=
-r
-> > > in general, but more importantly on the i.MX8MP, there are "clock
-> > > slices" which have pre-requisites in order to be modified and selecti=
-ng
-> > > an ungated parent is one of them.
-> > >
-> > > All the other patches progressively build support for the whole video
-> > > pipeline. Regarding the LCDIF driver, there is already a similar driv=
-er
-> > > for older i.MX SoCs but I didn't manage to get it to work. It was
-> > > written more than a decade ago while device-model, clocks and others
-> > > were not yet generically supported. Thus, numerous ad-hoc solutions
-> > > were implemented, which no longer fit today's requirements. I preferr=
-ed
-> > > to add a new "clean" driver instead of modifying the existing one
-> > > because of the too high risk of breaking these platforms. Once proper
-> > > clocks/power-domain descriptions will be added to them they might be
-> > > converted (and tested) to work with the "new" implementation, but goi=
-ng
-> > > the opposite way felt drawback.
-> > >
-> >
-> > Thank you for adding those patches. We are working on mipi support
-> > here and some of the clock patches
-> > are there too. I will try to look and rebase our patchset
-> >
-> > https://patchwork.amarulasolutions.com/patch/3401/
->
-> Thanks for letting me know. Indeed there are a couple of conflicts.
-> - My patch 2 can easily be replaced by your approach.
-> - Regarding the power domain we had two different approaches, I
->   didn't look in details, but again one or the other seems fine, I
->   guess.
-> - The LDB driver in my series is new.
-> - Finally regarding the LCDIF changes, the approach taken on your
->   side follows the somewhat too ad-hoc logic and would probably benefit
->   from being migrated to the driver I propose, which does make use of
->   the (DM) clock, power domain and DT API. I am really happy with the
->   core helper I've added retrieving a device in front of a graph
->   endpoint, which makes the whole "get panel/bridge" approach much more
->   flexible and adapted to today's needs.
->
+Fixed wrong register values in sm8150_clks, alphabetic ordering and added GCC_SDCC2_APPS_CLK rate setting.
 
-My idea is to work on top of your patches and try to migrate them and
-cover conflicts.
-What be helpful is to get some of our clock patches and include in
-your series and then I will try
-to move our work on it
+Thanks for all the help again!
 
-Michael
+Signed-off-by: Julius Lehmann <lehmanju@devpi.de>
+---
+Changes in v3:
+- fix: config: alphabetic ordering in Kconfig and Makefile
+- fix: clk: qcom: sm8150 if expression in clk_enable now correct
+- add: clk: qcom: sm8150 initialize GCC_SDCC2_APPS_CLK (similar to other clock drivers)
+- fix: clk: qcom: sm8150 GCC_UFS_* clock registers were wrong, copied correct ones over from Linux
+- Link to v2: https://lore.kernel.org/r/20240911-sm8150-patches-v2-0-0a32c6b6db1a@devpi.de
 
-> What is the status of your patchset? How shall we handle the conflicts?
->
-> Thanks,
-> Miqu=C3=A8l
+Changes in v2:
+- fix: clk: qcom: sm8150 command registers for phy_aux_clk (usb)
+- refactor: pinctrl: qcom: sm8150 use special_pin_start and special_pins_data
+- Link to v1: https://lore.kernel.org/r/20240909155315.307026-1-lehmanju@devpi.de
 
+---
+Julius Lehmann (3):
+      clk: qcom: add driver for SM8150 SoC
+      pinctrl: qcom: add driver for SM8150 SoC
+      config: qcom: add sm8150 to qcom_defconfig
 
+ configs/qcom_defconfig                |   2 +
+ drivers/clk/qcom/Kconfig              |   9 +
+ drivers/clk/qcom/Makefile             |   1 +
+ drivers/clk/qcom/clock-sm8150.c       | 319 ++++++++++++++++++++++++++++++++++
+ drivers/pinctrl/qcom/Kconfig          |   8 +
+ drivers/pinctrl/qcom/Makefile         |   1 +
+ drivers/pinctrl/qcom/pinctrl-sm8150.c | 156 +++++++++++++++++
+ 7 files changed, 496 insertions(+)
+---
+base-commit: 78d898eec080b02059c8dc09318b8761044fea85
+change-id: 20240910-sm8150-patches-559cc2475ded
 
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
+Best regards,
+-- 
+Julius Lehmann <lehmanju@devpi.de>
 
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
