@@ -4,74 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6753EE01F3
-	for <u-boot@archiver.kernel.org>; Wed, 11 Sep 2024 06:25:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1034EE0211
+	for <u-boot@archiver.kernel.org>; Wed, 11 Sep 2024 06:25:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BCFE889161;
-	Wed, 11 Sep 2024 08:25:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2597989168;
+	Wed, 11 Sep 2024 08:25:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="BftFhkHU";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="PBJE2Mw2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E937289169; Wed, 11 Sep 2024 08:25:19 +0200 (CEST)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id 251C78916D; Wed, 11 Sep 2024 08:25:22 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA32A89163
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 08:25:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 08C9589167
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 08:25:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=9elements.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-5c3c34e3c39so8885748a12.2
- for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 23:25:16 -0700 (PDT)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-a9018103214so8413966b.3
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 23:25:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1726035916; x=1726640716; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=QnfcBnTVjTvCRoYyBz7iAgM3j70IZAtJS4u6Bmm0Ryc=;
- b=BftFhkHUN9C99lI5tEdj3OSno4vu7fgl3hxFMBJLsrdu9ICIou9+2F66ZoYt01BIt+
- EFvJ1M9BIe3kIH+c8GJwUMcWt0KQJu31I1pOPBlPIODeaTS8OtVBm6meE5tTO6BubGko
- YrUFVjwm8kDL4LHkiY39ZQ16/+mLfABbC0OPqoRLnxOsx/iOz/GEb11g1T1Fra2hGGs+
- g5UCmADVFILdBxpHqcoITt7BLGAOcdIwC7RXHfgelgn9eSMv5OzChWBOvgfal2NwM1Ke
- HP5xIza79C+TFt23xpLVSLzw7siAAI27IsXAUYYc1sPmK1JMpHvQDd+cNmGEMCKYf1H1
- vGdg==
+ d=9elements.com; s=google; t=1726035918; x=1726640718; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nY7QWIhy+U/QX+VUK0fIANalbAZGkEG0oHH8USuakuk=;
+ b=PBJE2Mw2wASWqhjcJqQdUJ/FystJDXi3h2NhmOx2JqhFVc0eFk2GTjVsgMOok3TXWA
+ jE+08joTxmhPHDpvYidHSF9fx056sNj9moT3TmvRL7owJX8gGt1U93VrN2FlYwXLARcu
+ gNGxiG6QQ6xz4DMcm/CtfvwkRjR0tIZsCoDAc1sn3Z2RU8OUAkLbJBA/+kxUDpwC/38N
+ HyyIyhi2fw2M8FlUjiSH+JPxs56DWRYsVHCtR8KBL6roR3ZnPwsdg5Q2he4BZkZK04cl
+ IqgsLHdH8TsyLTVHyAfreADpMxSJez5ZjmvaMyezmy8VHesHucz3Mr1EVNV74w4sRYf2
+ wtxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726035916; x=1726640716;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=QnfcBnTVjTvCRoYyBz7iAgM3j70IZAtJS4u6Bmm0Ryc=;
- b=Yf10zLQGyeJnj864ISNDfcVqbqsodqQPZtraYTZU1S/yZKDeCoyjydYZzsv50FGeDg
- coLrYSyqS9EB0z+K8QL2ShTpTMYL8vqujVgcLIjHWlz1Xw1Mvb10lmxRhWef5t60U7FA
- Ob3KHK6V927xhBmdNJW/+amKqA3krR0j545y9YlxDAo0B+rLtTac5KCPGkeGsXQveT8+
- ARc0EN7nFGo5FN46naEnGFkUDE7q348occv8sb6NKrPj3jQmtcO3lNLhwu4effBU8vMn
- /hZzk4VC2KiTYHkV5DLhz+GzTVWoXka+sIsp2s/va7H5T8gSpmyiDOzQvZC1JWVkac56
- QnCA==
-X-Gm-Message-State: AOJu0YzYKeIXK5Wfy3GVdjalZBDNW5rQzr9CrbICLCOX928JoAS8CIkm
- 76DuKM0+efte+trQ3/d0RrT5mqV1isSbKStvWjaBw8D8sYo1sUfY9MQARXgctaRzL09rhX1ywJ6
- 2
-X-Google-Smtp-Source: AGHT+IEBq6h/3KEPXAToSdGp+FwklU7XL+OumNfc4xHXA+UHJysIqpJ6oU0lJxiV7r95lhQ4i5aF4A==
-X-Received: by 2002:a17:906:d552:b0:a7a:9ca6:527 with SMTP id
- a640c23a62f3a-a8ffaaacddamr261082266b.8.1726035915982; 
- Tue, 10 Sep 2024 23:25:15 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1726035918; x=1726640718;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=nY7QWIhy+U/QX+VUK0fIANalbAZGkEG0oHH8USuakuk=;
+ b=o604zHPmgis6YDcOIB1SZto9DfS2HZ/ac8ZuaxMHATU0BpMqM4gmgSNS/ROoap+9hS
+ 2yhxytR3T+i9IrziGPKHY6jTRMv3oWCYo6ZekuzfDSS5aBPt/TIox70ybD7Xk7ywwn69
+ OdJhWhIlkVtv+NforND6b2+tbfUFiHFtNKVniY6iIgCpydn4Xlh5ooW4sTxrVr3wa68u
+ 8JJz8rpLglOOsSVKlzkcx/18F+u0g+Igx1KvuBHxTMdweEAMVIoSu3PKmJhpNXeWf9XH
+ 44nV0Eryz0eyuAMJdQdYWacQS0l9XiSw67DDCuQzKe/0Oilcro8lyQgMldCVYR1G14Uu
+ VatQ==
+X-Gm-Message-State: AOJu0Ywdy4LeQ0dh5qGtURfKngCpbAvEW+PHgwz3QZM9yZ1Z2vGMo3vx
+ fGIH9eAEJV4SY6ujG06eV0ldUOxX/uoqqfToPiOg74+Evy8U5vaHY5zx2T7kjziUMgdjfGeTmzm
+ C
+X-Google-Smtp-Source: AGHT+IHnEe5UasKGfmzHvVpFFKtaazvYcA/Y90lgRdhaW6UP3wSvw6bqq8dEC76MdWOGDDe1LxBIgA==
+X-Received: by 2002:a17:907:9483:b0:a8d:4db5:529 with SMTP id
+ a640c23a62f3a-a8ffadc8cacmr308009966b.48.1726035918003; 
+ Tue, 10 Sep 2024 23:25:18 -0700 (PDT)
 Received: from fedora.sec.9e.network
  (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a8d25a43365sm575545366b.94.2024.09.10.23.25.15
+ a640c23a62f3a-a8d25a43365sm575545366b.94.2024.09.10.23.25.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Sep 2024 23:25:15 -0700 (PDT)
+ Tue, 10 Sep 2024 23:25:17 -0700 (PDT)
 From: Patrick Rudolph <patrick.rudolph@9elements.com>
-To: u-boot@lists.denx.de
-Cc: Patrick Rudolph <patrick.rudolph@9elements.com>
-Subject: [PATCH v3 00/30] Implement ACPI on aarch64
-Date: Wed, 11 Sep 2024 08:23:50 +0200
-Message-ID: <20240911062511.494855-1-patrick.rudolph@9elements.com>
+To: u-boot@lists.denx.de,
+	Simon Glass <sjg@chromium.org>
+Cc: Maximilian Brune <maximilian.brune@9elements.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 01/30] acpi: x86: Move SPCR and DBG2 into common code
+Date: Wed, 11 Sep 2024 08:23:51 +0200
+Message-ID: <20240911062511.494855-2-patrick.rudolph@9elements.com>
 X-Mailer: git-send-email 2.46.0
+In-Reply-To: <20240911062511.494855-1-patrick.rudolph@9elements.com>
+References: <20240911062511.494855-1-patrick.rudolph@9elements.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -90,225 +96,463 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Based on the existing work done by Simon Glass this series adds
-support for booting aarch64 devices using ACPI only.
-As first target QEMU SBSA support is added, which relies on ACPI
-only to boot an OS. As secondary target the Raspberry Pi4 was used,
-which is broadly available and allows easy testing of the proposed
-solution.
+From: Maximilian Brune <maximilian.brune@9elements.com>
 
-The series is split into ACPI cleanups and code movements, adding
-Arm specific ACPI tables and finally SoC and mainboard related
-changes to boot a Linux on the QEMU SBSA and RPi4. Currently only the
-mandatory ACPI tables are supported, allowing to boot into Linux
-without errors.
+This moves the SPCR and DBG2 table generation into common code, so that
+they can be used by architectures other than x86.
 
-The QEMU SBSA support is feature complete and provides the same
-functionality as the EDK2 implementation.
+Signed-off-by: Maximilian Brune <maximilian.brune@9elements.com>
+Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Bin Meng <bmeng.cn@gmail.com>
+---
+Changelog v2:
+- Do not add new features, just move code and make it compile on 64bit.
 
-The changes were tested on real hardware as well on QEMU v9.0:
+---
+ arch/x86/include/asm/acpi_table.h |  11 --
+ arch/x86/lib/acpi_table.c         | 174 ----------------------------
+ include/acpi/acpi_table.h         |  11 ++
+ lib/acpi/acpi_table.c             | 184 ++++++++++++++++++++++++++++++
+ 4 files changed, 195 insertions(+), 185 deletions(-)
 
-qemu-system-aarch64 -machine sbsa-ref -nographic -cpu cortex-a57 \
-                    -pflash secure-world.rom \
-                    -pflash unsecure-world.rom
-
-qemu-system-aarch64 -machine raspi4b -kernel u-boot.bin -cpu cortex-a72 \
--smp 4 -m 2G -drive file=raspbian.img,format=raw,index=0 \
--dtb bcm2711-rpi-4-b.dtb -nographic
-
-Tested against FWTS V24.03.00.
-
-Known issues:
-- The QEMU rpi4 support is currently limited as it doesn't emulate PCI,
-  USB or ethernet devices!
-- The SMP bringup doesn't work on RPi4, but works in QEMU (Possibly
-  cache related).
-- PCI on RPI4 isn't working on real hardware since the pcie_brcmstb
-  Linux kernel module doesn't support ACPI yet.
-
-Maximilian Brune (3):
-  acpi: x86: Move SPCR and DBG2 into common code
-  acpi: x86: Write FADT in common code
-  serial: serial_pl01x: Implement .getinfo() for PL01
-
-Patrick Rudolph (25):
-  acpi: x86: Move MADT to common code
-  acpi: Fix typo
-  acpi: Add define for GTDT
-  arm: acpi: Add generic ACPI methods
-  acpi: Add fill_madt to acpi_ops
-  acpi: acpi_table: Bump revisions
-  acpi: Add ACPITAB for PPTT and GTDT
-  acpi: acpi_table: Add IORT support
-  acpi: Move function prototype
-  acpi: acpi_table: Support ACPI 2.0 platforms
-  efi_loader: Allocate and write ACPI tables
-  acpi: Add processor device
-  drivers: usb: Add generic XHCI
-  drivers: ata: Rename ahci_mvebu
-  drivers/cpu: Add generic armv8 cpu driver
-  arm: gic-v3-its: Rename objects
-  drivers/arm: Implement acpi_fill_madt
-  common: Enable BLOBLIST_TABLES on arm
-  board: emulation: Add QEMU sbsa support
-  arm: mach-bcm283x: Map the ARM local MMIO as well
-  arm: bcm283x: Generate ACPI tables
-  arm: cpu: Add ACPI parking protocol support
-  arm: mach-bcm283x: Add ARMV8_MULTIENTRY support
-  arm: mach-bcm283x: Enable ARMV8_MULTIENTRY
-  configs: Add RPI4 ACPI defconfig
-
-Simon Glass (2):
-  arm: mach-bcm283x: Bring in some header files from tianocore
-  board: raspberrypi: Add ASL files from tianocore
-
- MAINTAINERS                                   |   2 +-
- arch/arm/Kconfig                              |   2 +
- arch/arm/cpu/armv8/Makefile                   |   1 +
- arch/arm/cpu/armv8/acpi_park_v8.S             | 107 ++++
- arch/arm/cpu/armv8/start.S                    |   4 +
- arch/arm/dts/qemu-sbsa.dts                    |  49 ++
- arch/arm/include/asm/acpi_table.h             | 160 +++++
- arch/arm/include/asm/arch-qemu-sbsa/boot0.h   |  33 +
- arch/arm/lib/Makefile                         |   1 +
- arch/arm/lib/acpi_table.c                     | 245 ++++++++
- arch/arm/lib/gic-v3-its.c                     |  97 ++-
- arch/arm/mach-bcm283x/Kconfig                 |   4 +
- arch/arm/mach-bcm283x/Makefile                |   4 +
- arch/arm/mach-bcm283x/bcm2711_acpi.c          | 150 +++++
- .../mach-bcm283x/include/mach/acpi/bcm2711.h  | 152 +++++
- .../mach-bcm283x/include/mach/acpi/bcm2836.h  | 127 ++++
- .../include/mach/acpi/bcm2836_gpio.h          |  19 +
- .../include/mach/acpi/bcm2836_gpu.h           |  47 ++
- .../include/mach/acpi/bcm2836_pwm.h           |  33 +
- .../include/mach/acpi/bcm2836_sdhost.h        |  18 +
- .../include/mach/acpi/bcm2836_sdio.h          |  21 +
- arch/arm/mach-bcm283x/init.c                  |  10 +-
- arch/arm/mach-qemu/Kconfig                    |  36 +-
- arch/sandbox/lib/Makefile                     |   9 +-
- arch/sandbox/lib/acpi_table.c                 |   7 +
- arch/x86/cpu/apollolake/acpi.c                |  20 +-
- arch/x86/cpu/baytrail/acpi.c                  |  17 +-
- arch/x86/cpu/intel_common/acpi.c              |  21 +-
- arch/x86/cpu/quark/acpi.c                     |  19 +-
- arch/x86/cpu/tangier/acpi.c                   |  32 +-
- arch/x86/include/asm/acpi_table.h             |  28 +-
- arch/x86/lib/acpi_table.c                     | 244 +-------
- board/emulation/qemu-arm/MAINTAINERS          |   2 +
- board/emulation/qemu-sbsa/Kconfig             |  58 ++
- board/emulation/qemu-sbsa/Makefile            |   8 +
- board/emulation/qemu-sbsa/acpi.c              | 235 ++++++++
- board/emulation/qemu-sbsa/dsdt.asl            | 483 +++++++++++++++
- board/emulation/qemu-sbsa/lowlevel_init.S     |  22 +
- board/emulation/qemu-sbsa/qemu-sbsa.c         | 481 +++++++++++++++
- board/emulation/qemu-sbsa/qemu-sbsa.env       |  14 +
- board/emulation/qemu-sbsa/qemu-sbsa.h         |  38 ++
- board/emulation/qemu-sbsa/smc.c               |  72 +++
- board/raspberrypi/rpi/.gitignore              |   3 +
- board/raspberrypi/rpi/Makefile                |   2 +
- board/raspberrypi/rpi/acpitables.h            |  90 +++
- board/raspberrypi/rpi/dsdt.asl                | 290 +++++++++
- board/raspberrypi/rpi/emmc.asl                | 136 +++++
- board/raspberrypi/rpi/gpudevs.asl             | 372 ++++++++++++
- board/raspberrypi/rpi/pci.asl                 | 177 ++++++
- board/raspberrypi/rpi/pep.asl                 |  90 +++
- board/raspberrypi/rpi/rhpx.asl                | 195 ++++++
- board/raspberrypi/rpi/rpi.c                   | 183 ++++++
- board/raspberrypi/rpi/sdhc.asl                | 111 ++++
- board/raspberrypi/rpi/uart.asl                | 208 +++++++
- boot/bootflow.c                               |   8 +-
- common/Kconfig                                |   1 +
- configs/clearfog_defconfig                    |   2 +-
- configs/clearfog_gt_8k_defconfig              |   2 +-
- configs/clearfog_sata_defconfig               |   2 +-
- configs/clearfog_spi_defconfig                |   2 +-
- configs/db-88f6820-gp_defconfig               |   2 +-
- configs/ds116_defconfig                       |   2 +-
- configs/helios4_defconfig                     |   2 +-
- configs/mvebu_crb_cn9130_defconfig            |   2 +-
- configs/mvebu_db-88f3720_defconfig            |   2 +-
- configs/mvebu_db_armada8k_defconfig           |   2 +-
- configs/mvebu_db_cn9130_defconfig             |   2 +-
- configs/mvebu_espressobin-88f3720_defconfig   |   2 +-
- .../mvebu_espressobin_ultra-88f3720_defconfig |   2 +-
- configs/mvebu_mcbin-88f8040_defconfig         |   2 +-
- configs/mvebu_puzzle-m801-88f8040_defconfig   |   2 +-
- configs/n2350_defconfig                       |   2 +-
- configs/octeon_nic23_defconfig                |   2 +-
- configs/qemu-arm-sbsa_defconfig               |  10 +
- configs/rpi_4_acpi_defconfig                  |  72 +++
- configs/turris_omnia_defconfig                |   2 +-
- doc/board/emulation/index.rst                 |   1 +
- doc/board/emulation/qemu-sbsa.rst             |  98 +++
- doc/develop/driver-model/virtio.rst           |   1 +
- drivers/ata/Kconfig                           |  12 +-
- drivers/ata/Makefile                          |   2 +-
- drivers/ata/{ahci_mvebu.c => ahci_generic.c}  |  17 +-
- drivers/core/acpi.c                           |  16 +
- drivers/cpu/Kconfig                           |   6 +
- drivers/cpu/Makefile                          |   3 +
- drivers/cpu/armv8_cpu.c                       | 117 ++++
- drivers/cpu/bcm283x_cpu.c                     | 194 ++++++
- drivers/pci/pcie_brcmstb.c                    | 101 +---
- drivers/serial/serial_pl01x.c                 |  24 +
- drivers/usb/host/Kconfig                      |   8 +
- drivers/usb/host/Makefile                     |   1 +
- drivers/usb/host/xhci-generic.c               |  76 +++
- include/acpi/acpi_table.h                     | 324 +++++++++-
- include/acpi/acpigen.h                        |  12 +
- include/bloblist.h                            |   1 +
- include/configs/qemu-sbsa.h                   |  98 +++
- include/cpu.h                                 |  27 +-
- include/dm/acpi.h                             |  26 +
- include/serial.h                              |   1 +
- lib/Kconfig                                   |  30 +-
- lib/acpi/acpi_table.c                         | 568 ++++++++++++++++--
- lib/acpi/acpigen.c                            |  11 +
- lib/efi_loader/efi_acpi.c                     |  80 ++-
- test/dm/acpi.c                                |  42 ++
- test/py/tests/test_event_dump.py              |   1 +
- 105 files changed, 6473 insertions(+), 541 deletions(-)
- create mode 100644 arch/arm/cpu/armv8/acpi_park_v8.S
- create mode 100644 arch/arm/dts/qemu-sbsa.dts
- create mode 100644 arch/arm/include/asm/arch-qemu-sbsa/boot0.h
- create mode 100644 arch/arm/lib/acpi_table.c
- create mode 100644 arch/arm/mach-bcm283x/bcm2711_acpi.c
- create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2711.h
- create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836.h
- create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_gpio.h
- create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_gpu.h
- create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_pwm.h
- create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_sdhost.h
- create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_sdio.h
- create mode 100644 arch/sandbox/lib/acpi_table.c
- create mode 100644 board/emulation/qemu-sbsa/Kconfig
- create mode 100644 board/emulation/qemu-sbsa/Makefile
- create mode 100644 board/emulation/qemu-sbsa/acpi.c
- create mode 100644 board/emulation/qemu-sbsa/dsdt.asl
- create mode 100644 board/emulation/qemu-sbsa/lowlevel_init.S
- create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.c
- create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.env
- create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.h
- create mode 100644 board/emulation/qemu-sbsa/smc.c
- create mode 100644 board/raspberrypi/rpi/.gitignore
- create mode 100644 board/raspberrypi/rpi/acpitables.h
- create mode 100644 board/raspberrypi/rpi/dsdt.asl
- create mode 100644 board/raspberrypi/rpi/emmc.asl
- create mode 100644 board/raspberrypi/rpi/gpudevs.asl
- create mode 100644 board/raspberrypi/rpi/pci.asl
- create mode 100644 board/raspberrypi/rpi/pep.asl
- create mode 100644 board/raspberrypi/rpi/rhpx.asl
- create mode 100644 board/raspberrypi/rpi/sdhc.asl
- create mode 100644 board/raspberrypi/rpi/uart.asl
- create mode 100644 configs/qemu-arm-sbsa_defconfig
- create mode 100644 configs/rpi_4_acpi_defconfig
- create mode 100644 doc/board/emulation/qemu-sbsa.rst
- rename drivers/ata/{ahci_mvebu.c => ahci_generic.c} (71%)
- create mode 100644 drivers/cpu/armv8_cpu.c
- create mode 100644 drivers/cpu/bcm283x_cpu.c
- create mode 100644 drivers/usb/host/xhci-generic.c
- create mode 100644 include/configs/qemu-sbsa.h
-
+diff --git a/arch/x86/include/asm/acpi_table.h b/arch/x86/include/asm/acpi_table.h
+index 57e41654ce..e617524617 100644
+--- a/arch/x86/include/asm/acpi_table.h
++++ b/arch/x86/include/asm/acpi_table.h
+@@ -45,17 +45,6 @@ int acpi_create_mcfg_mmconfig(struct acpi_mcfg_mmconfig *mmconfig, u32 base,
+  */
+ int acpi_write_hpet(struct acpi_ctx *ctx);
+ 
+-/**
+- * acpi_write_dbg2_pci_uart() - Write out a DBG2 table
+- *
+- * @ctx: Current ACPI context
+- * @dev: Debug UART device to describe
+- * @access_size: Access size for UART (e.g. ACPI_ACCESS_SIZE_DWORD_ACCESS)
+- * Return: 0 if OK, -ve on error
+- */
+-int acpi_write_dbg2_pci_uart(struct acpi_ctx *ctx, struct udevice *dev,
+-			     uint access_size);
+-
+ /**
+  * acpi_create_gnvs() - Create a GNVS (Global Non Volatile Storage) table
+  *
+diff --git a/arch/x86/lib/acpi_table.c b/arch/x86/lib/acpi_table.c
+index e38ce19ff7..08fd1e54ce 100644
+--- a/arch/x86/lib/acpi_table.c
++++ b/arch/x86/lib/acpi_table.c
+@@ -279,140 +279,6 @@ static int acpi_write_tpm2(struct acpi_ctx *ctx,
+ }
+ ACPI_WRITER(5tpm2, "TPM2", acpi_write_tpm2, 0);
+ 
+-int acpi_write_spcr(struct acpi_ctx *ctx, const struct acpi_writer *entry)
+-{
+-	struct serial_device_info serial_info = {0};
+-	ulong serial_address, serial_offset;
+-	struct acpi_table_header *header;
+-	struct acpi_spcr *spcr;
+-	struct udevice *dev;
+-	uint serial_config;
+-	uint serial_width;
+-	int access_size;
+-	int space_id;
+-	int ret = -ENODEV;
+-
+-	spcr = ctx->current;
+-	header = &spcr->header;
+-
+-	memset(spcr, '\0', sizeof(struct acpi_spcr));
+-
+-	/* Fill out header fields */
+-	acpi_fill_header(header, "SPCR");
+-	header->length = sizeof(struct acpi_spcr);
+-	header->revision = 2;
+-
+-	/* Read the device once, here. It is reused below */
+-	dev = gd->cur_serial_dev;
+-	if (dev)
+-		ret = serial_getinfo(dev, &serial_info);
+-	if (ret)
+-		serial_info.type = SERIAL_CHIP_UNKNOWN;
+-
+-	/* Encode chip type */
+-	switch (serial_info.type) {
+-	case SERIAL_CHIP_16550_COMPATIBLE:
+-		spcr->interface_type = ACPI_DBG2_16550_COMPATIBLE;
+-		break;
+-	case SERIAL_CHIP_UNKNOWN:
+-	default:
+-		spcr->interface_type = ACPI_DBG2_UNKNOWN;
+-		break;
+-	}
+-
+-	/* Encode address space */
+-	switch (serial_info.addr_space) {
+-	case SERIAL_ADDRESS_SPACE_MEMORY:
+-		space_id = ACPI_ADDRESS_SPACE_MEMORY;
+-		break;
+-	case SERIAL_ADDRESS_SPACE_IO:
+-	default:
+-		space_id = ACPI_ADDRESS_SPACE_IO;
+-		break;
+-	}
+-
+-	serial_width = serial_info.reg_width * 8;
+-	serial_offset = serial_info.reg_offset << serial_info.reg_shift;
+-	serial_address = serial_info.addr + serial_offset;
+-
+-	/* Encode register access size */
+-	switch (serial_info.reg_shift) {
+-	case 0:
+-		access_size = ACPI_ACCESS_SIZE_BYTE_ACCESS;
+-		break;
+-	case 1:
+-		access_size = ACPI_ACCESS_SIZE_WORD_ACCESS;
+-		break;
+-	case 2:
+-		access_size = ACPI_ACCESS_SIZE_DWORD_ACCESS;
+-		break;
+-	case 3:
+-		access_size = ACPI_ACCESS_SIZE_QWORD_ACCESS;
+-		break;
+-	default:
+-		access_size = ACPI_ACCESS_SIZE_UNDEFINED;
+-		break;
+-	}
+-
+-	debug("UART type %u @ %lx\n", spcr->interface_type, serial_address);
+-
+-	/* Fill GAS */
+-	spcr->serial_port.space_id = space_id;
+-	spcr->serial_port.bit_width = serial_width;
+-	spcr->serial_port.bit_offset = 0;
+-	spcr->serial_port.access_size = access_size;
+-	spcr->serial_port.addrl = lower_32_bits(serial_address);
+-	spcr->serial_port.addrh = upper_32_bits(serial_address);
+-
+-	/* Encode baud rate */
+-	switch (serial_info.baudrate) {
+-	case 9600:
+-		spcr->baud_rate = 3;
+-		break;
+-	case 19200:
+-		spcr->baud_rate = 4;
+-		break;
+-	case 57600:
+-		spcr->baud_rate = 6;
+-		break;
+-	case 115200:
+-		spcr->baud_rate = 7;
+-		break;
+-	default:
+-		spcr->baud_rate = 0;
+-		break;
+-	}
+-
+-	serial_config = SERIAL_DEFAULT_CONFIG;
+-	if (dev)
+-		ret = serial_getconfig(dev, &serial_config);
+-
+-	spcr->parity = SERIAL_GET_PARITY(serial_config);
+-	spcr->stop_bits = SERIAL_GET_STOP(serial_config);
+-
+-	/* No PCI devices for now */
+-	spcr->pci_device_id = 0xffff;
+-	spcr->pci_vendor_id = 0xffff;
+-
+-	/*
+-	 * SPCR has no clue if the UART base clock speed is different
+-	 * to the default one. However, the SPCR 1.04 defines baud rate
+-	 * 0 as a preconfigured state of UART and OS is supposed not
+-	 * to touch the configuration of the serial device.
+-	 */
+-	if (serial_info.clock != SERIAL_DEFAULT_CLOCK)
+-		spcr->baud_rate = 0;
+-
+-	/* Fix checksum */
+-	header->checksum = table_compute_checksum((void *)spcr, header->length);
+-
+-	acpi_add_table(ctx, spcr);
+-	acpi_inc(ctx, spcr->header.length);
+-
+-	return 0;
+-}
+-ACPI_WRITER(5spcr, "SPCR", acpi_write_spcr, 0);
+-
+ int acpi_write_gnvs(struct acpi_ctx *ctx, const struct acpi_writer *entry)
+ {
+ 	ulong addr;
+@@ -515,46 +381,6 @@ int acpi_write_hpet(struct acpi_ctx *ctx)
+ 	return 0;
+ }
+ 
+-int acpi_write_dbg2_pci_uart(struct acpi_ctx *ctx, struct udevice *dev,
+-			     uint access_size)
+-{
+-	struct acpi_dbg2_header *dbg2 = ctx->current;
+-	char path[ACPI_PATH_MAX];
+-	struct acpi_gen_regaddr address;
+-	phys_addr_t addr;
+-	int ret;
+-
+-	if (!device_active(dev)) {
+-		log_info("Device not enabled\n");
+-		return -EACCES;
+-	}
+-	/*
+-	 * PCI devices don't remember their resource allocation information in
+-	 * U-Boot at present. We assume that MMIO is used for the UART and that
+-	 * the address space is 32 bytes: ns16550 uses 8 registers of up to
+-	 * 32-bits each. This is only for debugging so it is not a big deal.
+-	 */
+-	addr = dm_pci_read_bar32(dev, 0);
+-	log_debug("UART addr %lx\n", (ulong)addr);
+-
+-	memset(&address, '\0', sizeof(address));
+-	address.space_id = ACPI_ADDRESS_SPACE_MEMORY;
+-	address.addrl = (uint32_t)addr;
+-	address.addrh = (uint32_t)((addr >> 32) & 0xffffffff);
+-	address.access_size = access_size;
+-
+-	ret = acpi_device_path(dev, path, sizeof(path));
+-	if (ret)
+-		return log_msg_ret("path", ret);
+-	acpi_create_dbg2(dbg2, ACPI_DBG2_SERIAL_PORT,
+-			 ACPI_DBG2_16550_COMPATIBLE, &address, 0x1000, path);
+-
+-	acpi_inc_align(ctx, dbg2->header.length);
+-	acpi_add_table(ctx, dbg2);
+-
+-	return 0;
+-}
+-
+ void acpi_fadt_common(struct acpi_fadt *fadt, struct acpi_facs *facs,
+ 		      void *dsdt)
+ {
+diff --git a/include/acpi/acpi_table.h b/include/acpi/acpi_table.h
+index 15fd61a51d..a372435492 100644
+--- a/include/acpi/acpi_table.h
++++ b/include/acpi/acpi_table.h
+@@ -913,6 +913,17 @@ static inline int acpi_add_fadt(struct acpi_ctx *ctx, struct acpi_fadt *fadt)
+ 	return 0;
+ }
+ 
++/**
++ * acpi_write_dbg2_pci_uart() - Write out a DBG2 table
++ *
++ * @ctx: Current ACPI context
++ * @dev: Debug UART device to describe
++ * @access_size: Access size for UART (e.g. ACPI_ACCESS_SIZE_DWORD_ACCESS)
++ * Return: 0 if OK, -ve on error
++ */
++int acpi_write_dbg2_pci_uart(struct acpi_ctx *ctx, struct udevice *dev,
++			     uint access_size);
++
+ /**
+  * acpi_write_rsdp() - Write out an RSDP indicating where the ACPI tables are
+  *
+diff --git a/lib/acpi/acpi_table.c b/lib/acpi/acpi_table.c
+index 6dbfdb22de..c9ddcca8cb 100644
+--- a/lib/acpi/acpi_table.c
++++ b/lib/acpi/acpi_table.c
+@@ -10,8 +10,10 @@
+ #include <log.h>
+ #include <mapmem.h>
+ #include <tables_csum.h>
++#include <serial.h>
+ #include <version_string.h>
+ #include <acpi/acpi_table.h>
++#include <acpi/acpi_device.h>
+ #include <asm/global_data.h>
+ #include <dm/acpi.h>
+ 
+@@ -262,3 +264,185 @@ void acpi_create_dbg2(struct acpi_dbg2_header *dbg2,
+ 	header->length = current - (uintptr_t)dbg2;
+ 	header->checksum = table_compute_checksum(dbg2, header->length);
+ }
++
++int acpi_write_dbg2_pci_uart(struct acpi_ctx *ctx, struct udevice *dev,
++			     uint access_size)
++{
++	struct acpi_dbg2_header *dbg2 = ctx->current;
++	char path[ACPI_PATH_MAX];
++	struct acpi_gen_regaddr address;
++	u64 addr;
++	int ret;
++
++	if (!device_active(dev)) {
++		log_info("Device not enabled\n");
++		return -EACCES;
++	}
++	/*
++	 * PCI devices don't remember their resource allocation information in
++	 * U-Boot at present. We assume that MMIO is used for the UART and that
++	 * the address space is 32 bytes: ns16550 uses 8 registers of up to
++	 * 32-bits each. This is only for debugging so it is not a big deal.
++	 */
++	addr = dm_pci_read_bar32(dev, 0);
++	log_debug("UART addr %lx\n", (ulong)addr);
++
++	ret = acpi_device_path(dev, path, sizeof(path));
++	if (ret)
++		return log_msg_ret("path", ret);
++
++	memset(&address, '\0', sizeof(address));
++	address.space_id = ACPI_ADDRESS_SPACE_MEMORY;
++	address.addrl = (uint32_t)addr;
++	address.addrh = (uint32_t)((addr >> 32) & 0xffffffff);
++	address.access_size = access_size;
++
++	ret = acpi_device_path(dev, path, sizeof(path));
++	if (ret)
++		return log_msg_ret("path", ret);
++	acpi_create_dbg2(dbg2, ACPI_DBG2_SERIAL_PORT,
++			 ACPI_DBG2_16550_COMPATIBLE, &address, 0x1000, path);
++
++	acpi_inc_align(ctx, dbg2->header.length);
++	acpi_add_table(ctx, dbg2);
++
++	return 0;
++}
++
++static int acpi_write_spcr(struct acpi_ctx *ctx, const struct acpi_writer *entry)
++{
++	struct serial_device_info serial_info = {0};
++	ulong serial_address, serial_offset;
++	struct acpi_table_header *header;
++	struct acpi_spcr *spcr;
++	struct udevice *dev;
++	uint serial_config;
++	uint serial_width;
++	int access_size;
++	int space_id;
++	int ret = -ENODEV;
++
++	spcr = ctx->current;
++	header = &spcr->header;
++
++	memset(spcr, '\0', sizeof(struct acpi_spcr));
++
++	/* Fill out header fields */
++	acpi_fill_header(header, "SPCR");
++	header->length = sizeof(struct acpi_spcr);
++	header->revision = 2;
++
++	/* Read the device once, here. It is reused below */
++	dev = gd->cur_serial_dev;
++	if (dev)
++		ret = serial_getinfo(dev, &serial_info);
++	if (ret)
++		serial_info.type = SERIAL_CHIP_UNKNOWN;
++
++	/* Encode chip type */
++	switch (serial_info.type) {
++	case SERIAL_CHIP_16550_COMPATIBLE:
++		spcr->interface_type = ACPI_DBG2_16550_COMPATIBLE;
++		break;
++	case SERIAL_CHIP_PL01X:
++		spcr->interface_type = ACPI_DBG2_ARM_PL011;
++		break;
++	case SERIAL_CHIP_UNKNOWN:
++	default:
++		spcr->interface_type = ACPI_DBG2_UNKNOWN;
++		break;
++	}
++
++	/* Encode address space */
++	switch (serial_info.addr_space) {
++	case SERIAL_ADDRESS_SPACE_MEMORY:
++		space_id = ACPI_ADDRESS_SPACE_MEMORY;
++		break;
++	case SERIAL_ADDRESS_SPACE_IO:
++	default:
++		space_id = ACPI_ADDRESS_SPACE_IO;
++		break;
++	}
++
++	serial_width = serial_info.reg_width * 8;
++	serial_offset = serial_info.reg_offset << serial_info.reg_shift;
++	serial_address = serial_info.addr + serial_offset;
++
++	/* Encode register access size */
++	switch (serial_info.reg_shift) {
++	case 0:
++		access_size = ACPI_ACCESS_SIZE_BYTE_ACCESS;
++		break;
++	case 1:
++		access_size = ACPI_ACCESS_SIZE_WORD_ACCESS;
++		break;
++	case 2:
++		access_size = ACPI_ACCESS_SIZE_DWORD_ACCESS;
++		break;
++	case 3:
++		access_size = ACPI_ACCESS_SIZE_QWORD_ACCESS;
++		break;
++	default:
++		access_size = ACPI_ACCESS_SIZE_UNDEFINED;
++		break;
++	}
++
++	debug("UART type %u @ %lx\n", spcr->interface_type, serial_address);
++
++	/* Fill GAS */
++	spcr->serial_port.space_id = space_id;
++	spcr->serial_port.bit_width = serial_width;
++	spcr->serial_port.bit_offset = 0;
++	spcr->serial_port.access_size = access_size;
++	spcr->serial_port.addrl = lower_32_bits(serial_address);
++	spcr->serial_port.addrh = upper_32_bits(serial_address);
++
++	/* Encode baud rate */
++	switch (serial_info.baudrate) {
++	case 9600:
++		spcr->baud_rate = 3;
++		break;
++	case 19200:
++		spcr->baud_rate = 4;
++		break;
++	case 57600:
++		spcr->baud_rate = 6;
++		break;
++	case 115200:
++		spcr->baud_rate = 7;
++		break;
++	default:
++		spcr->baud_rate = 0;
++		break;
++	}
++
++	serial_config = SERIAL_DEFAULT_CONFIG;
++	if (dev)
++		ret = serial_getconfig(dev, &serial_config);
++
++	spcr->parity = SERIAL_GET_PARITY(serial_config);
++	spcr->stop_bits = SERIAL_GET_STOP(serial_config);
++
++	/* No PCI devices for now */
++	spcr->pci_device_id = 0xffff;
++	spcr->pci_vendor_id = 0xffff;
++
++	/*
++	 * SPCR has no clue if the UART base clock speed is different
++	 * to the default one. However, the SPCR 1.04 defines baud rate
++	 * 0 as a preconfigured state of UART and OS is supposed not
++	 * to touch the configuration of the serial device.
++	 */
++	if (serial_info.clock != SERIAL_DEFAULT_CLOCK)
++		spcr->baud_rate = 0;
++
++	/* Fix checksum */
++	header->checksum = table_compute_checksum((void *)spcr, header->length);
++
++	acpi_add_table(ctx, spcr);
++	acpi_inc(ctx, spcr->header.length);
++
++	return 0;
++}
++
++ACPI_WRITER(5spcr, "SPCR", acpi_write_spcr, 0);
 -- 
 2.46.0
 
