@@ -4,72 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A597EE4983
-	for <u-boot@archiver.kernel.org>; Wed, 11 Sep 2024 09:46:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2711CEE4989
+	for <u-boot@archiver.kernel.org>; Wed, 11 Sep 2024 09:50:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C0A6D885A5;
-	Wed, 11 Sep 2024 11:46:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7EA0089133;
+	Wed, 11 Sep 2024 11:50:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HbBq8Qcb";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iK4KdsZ0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3761E89232; Wed, 11 Sep 2024 11:46:07 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 5699D89125; Wed, 11 Sep 2024 11:50:27 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3F2E988549
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 11:46:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6EBDE89205
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 11:50:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-5c24ebaa427so1129786a12.1
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 02:46:05 -0700 (PDT)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-5c40aea5c40so168580a12.0
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 02:50:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1726047965; x=1726652765; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1726048225; x=1726653025; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=n5322mb/FrjIW1JXplp1MkpsiFd9OP32TqeA8Keonw4=;
- b=HbBq8QcbE7ahx8/Q4ekdUb6Hr1zKmG1tHtrY/Sk/HI4BEq8RKzYbADNgDA/jXtF3p/
- jmaNfBpwnSrKgELN/gI276UJL7IInKhrxuCaxbg65p46dm9gOC15pB/a2x5kl+wy9pnS
- sGe1Xhtl2jWB0E9Xz6JF4SnpGZa7PhrSDXS58jbyAwzVbpdYyCzfxniTh2A0N9lcM9yS
- WLHPj6ra7p53rZGYJW9gOQSrgz44I1WUFhFAvQJMzPruIRizi6VDoS+cUI/N9RJdhO04
- HuLJhEFVPI1rhRgIc1n/yuU/UwZJkcnOHEAcZYML3jcTgdhVTr3gZWAZfir1l8bnuQBy
- pOhQ==
+ bh=AMKYFdFdc4/zbUayNZitro5pZkZilI+M3skGj0vEp6E=;
+ b=iK4KdsZ04zN9nHrHZjrAiNawglZXhzd3r2BPyuthQ7XxvOODkHW3Be2LuNH36L+X2E
+ fmIJyJ9P5/8zbew4ouOpQjJgTP19w7M3sR5UEBkn9m7YklQBVgYPWKgu9VRFALJY2m83
+ shmPqAgyhiF6cn0SM7Swl58yHMhuIWxBTKOGdohrUVaXniu4qH8hHDQeWdZhKy9jj+PM
+ I5HVReYrt8jrlQ/TnlrkSGAb7z002RXA7IqduUcZRr2Jivn510zzgbKXBMUgbYYPbSWN
+ Qbk1kgX8mcOmt6meYn0+9u6pMYt6ldEaLbdQgMoxQKV4qxdlcr/6WHJPYdRifbVz9qYS
+ V+tw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726047965; x=1726652765;
+ d=1e100.net; s=20230601; t=1726048225; x=1726653025;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=n5322mb/FrjIW1JXplp1MkpsiFd9OP32TqeA8Keonw4=;
- b=E68OEaJn50ULMiGRWNUHpWRYIXtJ/gQh0Er+xPl+rEFWSAHe6V4Ixlw9llX3f7Jgg0
- 6yjWvK4PsU75zBSMLjtcXAbiCTnDvSFIf/WzXOHvwD1SsqXpXYEoUni71+eF3qohYLoG
- hyWTSi41edFyY/KMNsi+6aRszWGosAxm3BJtP4meiBNjln99FCk7u6oUD+UiBs9yP/L9
- vk0wm2Dt2hfjCAe7tFMzuNdEokyadURxFx9fQJRNLovK8bhsk3TUOuppcaCwNkMKVR3+
- TLrPtRQNu5z8DFg6MJ3+kjsQdG1N4mVxyXGCYWRen68cJukzkOFZb9JNsdLuqzwFq5AG
- Q5Kg==
-X-Gm-Message-State: AOJu0Ywr3hFqR0D8qZexHAhH9j/yn+vFkKDOvZ6bD4nsvrac3ABCzkdN
- r1T74qktODAsDab44CXn/pjb9C9QErhpE5bbwbwjmCtUs8HnSRQ6Ntwcp40MNZrXetrKlHmBCc2
- Ydx+ObJnwcJQbXpQBH7eBA4o4Auc=
-X-Google-Smtp-Source: AGHT+IH8IPBM/2XAsqsMgGDQilZxHYXXnqfh3GBiELIAn53wNk8QZdIHBBgy+I6s3HEoUUnE+AvuRsO6ksba2/5gADc=
-X-Received: by 2002:a05:6402:5d2:b0:5c2:7699:92ef with SMTP id
- 4fb4d7f45d1cf-5c4015ef7ddmr7650585a12.16.1726047963797; Wed, 11 Sep 2024
- 02:46:03 -0700 (PDT)
+ bh=AMKYFdFdc4/zbUayNZitro5pZkZilI+M3skGj0vEp6E=;
+ b=Kb443q3/qjD9HH5gC8QtIHzqja3HjsujQB/Cj7pMamhGgK1WFenegzcpNQxjYGsyYc
+ BDlnvO9msx++PPpkaUfw7DDYDaOrHBMf7yflXv4nL6zOy/8XVbW3nLvrGF58ZE05+5K+
+ H/rNaUsLqqznMKvYXmR0tScsGQA5D2hI+XnWa6UAhDVso6ZhA95UcUlvPid7l99hh4y4
+ Indnei00XVfE58YlD+o0gSsi/StNgqRkU8XvREk4JMDWVzE5oKY1MUSa8L7ecOUWcljw
+ 6Z+/c8CNF1+P8rF+FJpljRL/79kOc6I3i4J3IP6+M62eKirTxnVb0EAMBzm8LvPw5+1N
+ eKeA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWadHLERhWyzZZ927lWw+SIoj/znA/Q/9GJqi10EgjUrDH5sK5xAYfcyKIhB98R3v438v+fhkM=@lists.denx.de
+X-Gm-Message-State: AOJu0YystaVWIfcdE9ASFzR6LgDRRWL5P4zEk9LVWdeqLFS2sUbEqbuS
+ bMtnx4EJ2E1y8FlXVPGRRbmfEIeNHppw1qApC/YftACEdrxi7l9b4Dzs1DHLjQPeMfLVrR7vNOq
+ cn81qX3bZJbl+5nB///ajkbeH9P8=
+X-Google-Smtp-Source: AGHT+IGxXKFNZexPcpMwJlMBsfNt6nfCDdlHAcaYQH9j8XaUsgpXA7tghlDv/isfKluGxNKUhu8Y8LMuKCOs0zxN894=
+X-Received: by 2002:a05:6402:1f0c:b0:5be:f5b0:fc38 with SMTP id
+ 4fb4d7f45d1cf-5c4015e5da3mr7561649a12.10.1726048224804; Wed, 11 Sep 2024
+ 02:50:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240911062511.494855-1-patrick.rudolph@9elements.com>
- <20240911062511.494855-14-patrick.rudolph@9elements.com>
-In-Reply-To: <20240911062511.494855-14-patrick.rudolph@9elements.com>
+References: <20240910063933.141283-1-ilias.apalodimas@linaro.org>
+ <CADg8p94ZnxVCc0VJ9hkAQ1Ka2Y9=Yt995KisJpFDXboMMfT3Yw@mail.gmail.com>
+In-Reply-To: <CADg8p94ZnxVCc0VJ9hkAQ1Ka2Y9=Yt995KisJpFDXboMMfT3Yw@mail.gmail.com>
 From: Peter Robinson <pbrobinson@gmail.com>
-Date: Wed, 11 Sep 2024 10:45:30 +0100
-Message-ID: <CALeDE9O6fbvfjyqcd32vo6SYBy9OUm+xfz9DV7akiGRS9jGNCg@mail.gmail.com>
-Subject: Re: [PATCH v3 13/30] acpi: acpi_table: Support ACPI 2.0 platforms
-To: Patrick Rudolph <patrick.rudolph@9elements.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
+Date: Wed, 11 Sep 2024 10:49:50 +0100
+Message-ID: <CALeDE9OyUBQFmrwqfrM+A7K+pcvS0Bd6GzzvEFpxh8w2Qms2TQ@mail.gmail.com>
+Subject: Re: [PATCH] board: rpi: Enable capsule updates
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, mbrugger@suse.com, 
+ Tom Rini <trini@konsulko.com>, Stefan Roese <sr@denx.de>,
+ "Ivan T. Ivanov" <iivanov@suse.de>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Francois Berder <fberder@outlook.fr>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,135 +92,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> On platforms that do not have usable DRAM below 4GiB, like QEMU sbsa,
-> the RSDT cannot be used. Allow both RSDT and XSDT to be null and only
-> fill those tables that are present in acpi_add_table().
+On Tue, 10 Sept 2024 at 08:29, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+>
+> On Tue, 10 Sept 2024 at 12:09, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > Since RPI works well using EFI and has no size limitations with regards
+> > to U-Boot, add the needed structures and Kconfig options needed to
+> > enable capsule updates
+> > ---
+> >  board/raspberrypi/rpi/rpi.c | 22 ++++++++++++++++++++++
+> >  configs/rpi_4_defconfig     |  2 ++
+> >  2 files changed, 24 insertions(+)
+>
+> Tested-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+>
+> A couple of nits below.
+>
+> >
+> > diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
+> > index ab5ea85cf9f8..1f342eee12b2 100644
+> > --- a/board/raspberrypi/rpi/rpi.c
+> > +++ b/board/raspberrypi/rpi/rpi.c
+> > @@ -63,6 +63,28 @@ struct msg_get_clock_rate {
+> >         u32 end_tag;
+> >  };
+> >
+> > +struct efi_fw_image fw_images[] = {
+> > +       {
+> > +               .fw_name = u"RPI_UBOOT",
+> > +               .image_index = 1,
+> > +       },
+> > +};
+> > +
+> > +struct efi_capsule_update_info update_info = {
+> > +       .dfu_string = "mmc 0=u-boot.bin fat 0 1",
+> > +       .num_images = ARRAY_SIZE(fw_images),
+> > +       .images = fw_images,
+> > +};
+> > +
+> > +#if IS_ENABLED(CONFIG_SET_DFU_ALT_INFO)
+> > +void set_dfu_alt_info(char *interface, char *devstr)
+> > +{
+> > +       if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
+> > +               env_set("dfu_alt_info", update_info.dfu_string);
+> > +}
+> > +#endif
+>
+> Is this really needed? We have a weak function in efi_firrmware.c
+> which is doing exactly this.
+>
+> > +
+> > +
+> >  #ifdef CONFIG_ARM64
+> >  #define DTB_DIR "broadcom/"
+> >  #else
+> > diff --git a/configs/rpi_4_defconfig b/configs/rpi_4_defconfig
+> > index f5fb322aa8fc..c70414e6fcaf 100644
+> > --- a/configs/rpi_4_defconfig
+> > +++ b/configs/rpi_4_defconfig
+> > @@ -65,3 +65,5 @@ CONFIG_SYS_WHITE_ON_BLACK=y
+> >  CONFIG_VIDEO_BCM2835=y
+> >  CONFIG_CONSOLE_SCROLL_LINES=10
+> >  CONFIG_PHYS_TO_BUS=y
+> > +CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
+> > +CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+>
+> Can we also add the efidebug and efi nvedit commands here. They are
+> pretty handy especially when it comes to capsule updates. Thanks.
 
-I'm not sure what ACPI 2.0 from the subject has to do with the above,
-eg ACPI only started supporting aarch64 with ACPI 5.1
-
-> Fixes a crash on QEMU sbsa.
->
-> Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> ---
->  lib/acpi/acpi_table.c | 95 ++++++++++++++++++++++++++-----------------
->  1 file changed, 57 insertions(+), 38 deletions(-)
->
-> diff --git a/lib/acpi/acpi_table.c b/lib/acpi/acpi_table.c
-> index 4f5cfe522c..8aab41212a 100644
-> --- a/lib/acpi/acpi_table.c
-> +++ b/lib/acpi/acpi_table.c
-> @@ -157,51 +157,70 @@ int acpi_add_table(struct acpi_ctx *ctx, void *table)
->         struct acpi_rsdt *rsdt;
->         struct acpi_xsdt *xsdt;
->
-> -       /* The RSDT is mandatory while the XSDT is not */
-> -       rsdt = ctx->rsdt;
-> -
-> -       /* This should always be MAX_ACPI_TABLES */
-> -       entries_num = ARRAY_SIZE(rsdt->entry);
-> -
-> -       for (i = 0; i < entries_num; i++) {
-> -               if (rsdt->entry[i] == 0)
-> -                       break;
-> -       }
-> -
-> -       if (i >= entries_num) {
-> -               log_err("ACPI: Error: too many tables\n");
-> -               return -E2BIG;
-> -       }
-> +       /* On legacy x86 platforms the RSDT is mandatory while the XSDT is not.
-> +        * On other platforms there might be no memory below 4GiB, thus RSDT is NULL.
-> +        */
-> +       if (ctx->rsdt) {
-> +               rsdt = ctx->rsdt;
->
-> -       /* Add table to the RSDT */
-> -       rsdt->entry[i] = nomap_to_sysmem(table);
-> +               /* This should always be MAX_ACPI_TABLES */
-> +               entries_num = ARRAY_SIZE(rsdt->entry);
->
-> -       /* Fix RSDT length or the kernel will assume invalid entries */
-> -       rsdt->header.length = sizeof(struct acpi_table_header) +
-> -                               (sizeof(u32) * (i + 1));
-> +               for (i = 0; i < entries_num; i++) {
-> +                       if (rsdt->entry[i] == 0)
-> +                               break;
-> +               }
->
-> -       /* Re-calculate checksum */
-> -       rsdt->header.checksum = 0;
-> -       rsdt->header.checksum = table_compute_checksum((u8 *)rsdt,
-> -                                                      rsdt->header.length);
-> +               if (i >= entries_num) {
-> +                       log_err("ACPI: Error: too many tables\n");
-> +                       return -E2BIG;
-> +               }
->
-> -       /*
-> -        * And now the same thing for the XSDT. We use the same index as for
-> -        * now we want the XSDT and RSDT to always be in sync in U-Boot
-> -        */
-> -       xsdt = ctx->xsdt;
-> +               /* Add table to the RSDT */
-> +               rsdt->entry[i] = nomap_to_sysmem(table);
->
-> -       /* Add table to the XSDT */
-> -       xsdt->entry[i] = nomap_to_sysmem(table);
-> +               /* Fix RSDT length or the kernel will assume invalid entries */
-> +               rsdt->header.length = sizeof(struct acpi_table_header) +
-> +                                       (sizeof(u32) * (i + 1));
->
-> -       /* Fix XSDT length */
-> -       xsdt->header.length = sizeof(struct acpi_table_header) +
-> -                               (sizeof(u64) * (i + 1));
-> +               /* Re-calculate checksum */
-> +               rsdt->header.checksum = 0;
-> +               rsdt->header.checksum = table_compute_checksum((u8 *)rsdt,
-> +                                                              rsdt->header.length);
-> +       }
->
-> -       /* Re-calculate checksum */
-> -       xsdt->header.checksum = 0;
-> -       xsdt->header.checksum = table_compute_checksum((u8 *)xsdt,
-> -                                                      xsdt->header.length);
-> +       if (ctx->xsdt) {
-> +               /*
-> +                * And now the same thing for the XSDT. We use the same index as for
-> +                * now we want the XSDT and RSDT to always be in sync in U-Boot
-> +                */
-> +               xsdt = ctx->xsdt;
-> +
-> +               /* This should always be MAX_ACPI_TABLES */
-> +               entries_num = ARRAY_SIZE(xsdt->entry);
-> +
-> +               for (i = 0; i < entries_num; i++) {
-> +                       if (xsdt->entry[i] == 0)
-> +                               break;
-> +               }
-> +
-> +               if (i >= entries_num) {
-> +                       log_err("ACPI: Error: too many tables\n");
-> +                       return -E2BIG;
-> +               }
-> +
-> +               /* Add table to the XSDT */
-> +               xsdt->entry[i] = nomap_to_sysmem(table);
-> +
-> +               /* Fix XSDT length */
-> +               xsdt->header.length = sizeof(struct acpi_table_header) +
-> +                                       (sizeof(u64) * (i + 1));
-> +
-> +               /* Re-calculate checksum */
-> +               xsdt->header.checksum = 0;
-> +               xsdt->header.checksum = table_compute_checksum((u8 *)xsdt,
-> +                                                              xsdt->header.length);
-> +       }
->
->         return 0;
->  }
-> --
-> 2.46.0
->
+Are they pretty handy for capsule updates for general users when
+things should "just work", as a user applies them from Linux with
+fwupdmgr and reboots, or for firmwre developers trying to debug
+things? If it's the later I don't think we should be enabling them by
+default :)
