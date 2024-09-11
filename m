@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5ACEEE4987
-	for <u-boot@archiver.kernel.org>; Wed, 11 Sep 2024 09:59:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BBFEEE498A
+	for <u-boot@archiver.kernel.org>; Wed, 11 Sep 2024 10:00:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1848789266;
+	by phobos.denx.de (Postfix) with ESMTP id 93A498926C;
 	Wed, 11 Sep 2024 11:58:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tHbAjfCC";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hCeTzT43";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7839C89254; Wed, 11 Sep 2024 11:58:56 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 3631389256; Wed, 11 Sep 2024 11:58:57 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 98BCB8923F
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 11:58:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 533F18923B
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 11:58:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-42cb1e623d1so17757225e9.0
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 02:58:54 -0700 (PDT)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-42cb6f3a5bcso40871005e9.2
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 02:58:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1726048734; x=1726653534; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2+kKclKOdggmvQLqu7epBFwPbgxjPaxHLYxPdceOudQ=;
- b=tHbAjfCCbF1fxSkwIt5lHG91PyB60hyIxoFEPHeL5cujVFxkTxIWW4OuT/XKWJiwSu
- HTuxJThKZ1Oc2VuoLELOpcCiWzQYIvBXJKkcm6BBe7iC4ejgOxCTVZvPfkZqHo5Umlwu
- Ax4GtmKDo2hEX6166CK6IGA225P/bUfT4+ObWW1oAEPeTd8Xr9qirOwiV2GOHdUX/yJg
- hjkv26ekb4zN8RuSuhttui0GPYjLUudGN1YCwgcMaC/xxYx1bYbI0j8VzOLBw5SQKSlY
- IThK267iPvYDEJEfAQaCEJhyVwVmvbAIrCrF2arNZenziG5OpNmj8+g4EwNOzX4Mw2Sy
- QzLg==
+ bh=8i3lBROvhfrY82vIccP41xA0yhZbBOfEI92vYpX/wGs=;
+ b=hCeTzT43HA+a1PfRqaqdJAj/J6kf7PpPHDEM36wMMvTh3lBPLq/SQnL2R2b0dYo5bF
+ OGsxi7yEEXrxlDuUgsOfTiqlNKE5xIVif3YSI5yh9eokcmqoOevl6VmYnQTGIyI+hWFG
+ OqKsTYWn3D6RV71D4XXZAv27jMttDkST/o+nIX15+s3eb4a5pMc/H78zsIeaA99pc/5j
+ rv6zmCELZcjZHwGi9oF80eHsIX/gP66K2DSvZa9cOWczaBqiLSqtAIkmoHrQGerWdOjS
+ Vab+qJ8igYdlJLjm7xTnpVplVC+9zVR8HHRso1sY0doushBDmUhnlsi77gMQLOXC5dvR
+ UlnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1726048734; x=1726653534;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2+kKclKOdggmvQLqu7epBFwPbgxjPaxHLYxPdceOudQ=;
- b=BN9aogRikSoqMDoj55egQM2snnXMKsMSmgQP0064C1DnogqBFd9ggja4bJrhI7n4A7
- lDOWjbNzEo39L2ffZj2glKhV4x0xKqDCg05/BkgnNb9GYMa8Rs3dWYQ79N5sL+PTB4V/
- e69RfptsFQHxvWvMGYUIUWfgtO6NgXI+OypMye/pU0Sz6ymthU2t1VTDnONALRNg8HPs
- nxVTG842Tll08Qx38NGGaANh6dTLyA9T02S4Eff8nnbW8GKY0PC+fZBs/MDSOnhfBF8R
- yyfXMdnZGLlQGkeeZ6ucHt0HG077G3lbCA9p2XooOgcDn3qqyJNo3R9r/vgAMNeHOT3k
- +GQg==
-X-Gm-Message-State: AOJu0Yza4yB7oDokoPvJKwwQVV8rpHSBIwayOtdycSLg5iqJVZ50+0eB
- YcTkL7W3MEDGKU1rg3VkQtbXN2PHyHB/ywBmpoCKxcWs16L2zJT/bafuSTAzT9OkzvkwKO2CNcp
- UJZhg/g==
-X-Google-Smtp-Source: AGHT+IGWmODcaUfHFw8KLGyJAwGoNsAqtap7YeliXeEk5ehCnAAPQvD2Xn7ux4M/iDJApbaNtWzhJw==
-X-Received: by 2002:a05:600c:3505:b0:42c:b950:680b with SMTP id
- 5b1f17b1804b1-42ccd32def2mr18513405e9.20.1726048733758; 
- Wed, 11 Sep 2024 02:58:53 -0700 (PDT)
+ bh=8i3lBROvhfrY82vIccP41xA0yhZbBOfEI92vYpX/wGs=;
+ b=gIFtcNtjGK6PD2bADb+D2Pun0qUhKEoB8EJ5fSrVVnIfTw5+oZ0hAfFQMQ7NN3L0nf
+ LPs2n1if8hZ5tJbU7haNDW0jVIwMvkakp5cZCCzJwErH5jZ6CAeM6hOnxof3eUU169NN
+ a0uUaNt637fIE7ADyuLpXb9O7SVdFQBWgUEFAxIEglJ7E4jkSVHMZkkdI7oBsmQqBXse
+ yrCIxD42MszROUs+2gsLTWlBSNoia9v2tNNs+lvyvhzm9oAeqDKNTFYeOKmjJD/9r0pi
+ zmjsRpJeUrdJprJgO2A+qNjNFjdLj6ilHNJHn3dQp9uWK3gWT7r/5B9hwMfy4sf6T1FP
+ iYQw==
+X-Gm-Message-State: AOJu0Yw+/h8qxW8KcdiaV+JW5XRgAPBOHPEGvE5gAxB8HgFpkGfz63sQ
+ 9VP5CZMTflAhu3aBANBx8nJOxORpQgPlmdUffHmHEx5KhfpEbnbgwQgIb0RFwnwIp9nQ0bMeia2
+ ahePL+g==
+X-Google-Smtp-Source: AGHT+IEOanyWiaHqcekbxG6MBbqeamRJNQ6rKPdCMO7MlMDcyGn2I479gNsWWM3SA/uZAY8IefhFBA==
+X-Received: by 2002:a05:600c:548e:b0:42c:c401:6d6f with SMTP id
+ 5b1f17b1804b1-42cc4017032mr48157255e9.16.1726048734541; 
+ Wed, 11 Sep 2024 02:58:54 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:7d92:535d:cd3d:335b])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37895649bafsm11300507f8f.7.2024.09.11.02.58.53
+ ffacd0b85a97d-37895649bafsm11300507f8f.7.2024.09.11.02.58.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Sep 2024 02:58:53 -0700 (PDT)
+ Wed, 11 Sep 2024 02:58:54 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -72,14 +72,11 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>,
- Yasuharu Shibata <yasuharu.shibata@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Marek Vasut <marex@denx.de>
-Subject: [PATCH v4 06/15] net: wget: removed unused function wget_success()
-Date: Wed, 11 Sep 2024 11:58:19 +0200
-Message-Id: <b5f87a420883cf1b1557202e13a2f08c1734132a.1726048404.git.jerome.forissier@linaro.org>
+ Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: [PATCH v4 07/15] net: phy: ncsi: depend on NET
+Date: Wed, 11 Sep 2024 11:58:20 +0200
+Message-Id: <de9f791bc516c5d2ed50a250589e357e77a94355.1726048404.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1726048404.git.jerome.forissier@linaro.org>
 References: <cover.1726048404.git.jerome.forissier@linaro.org>
@@ -101,33 +98,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-wget_success() is used nowhere so remove it.
+PHY_NCSI enables drivers/net/phy/ncsi.c which calls net_loop() and
+net_set_timeout_handler(). That's the legacy NET stack (as opposed to
+NET_LWIP). Therefore add the dependency to Kconfig.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- net/wget.c | 7 -------
- 1 file changed, 7 deletions(-)
+ drivers/net/phy/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/net/wget.c b/net/wget.c
-index 4a168641c65..6ebf9bca0d8 100644
---- a/net/wget.c
-+++ b/net/wget.c
-@@ -196,13 +196,6 @@ void wget_fail(char *error_message, unsigned int tcp_seq_num,
- 	wget_send(action, tcp_seq_num, tcp_ack_num, 0);
- }
+diff --git a/drivers/net/phy/Kconfig b/drivers/net/phy/Kconfig
+index 73064b2af68..a9efc509814 100644
+--- a/drivers/net/phy/Kconfig
++++ b/drivers/net/phy/Kconfig
+@@ -368,6 +368,7 @@ config PHY_FIXED
  
--void wget_success(u8 action, unsigned int tcp_seq_num,
--		  unsigned int tcp_ack_num, int len, int packets)
--{
--	printf("Packets received %d, Transfer Successful\n", packets);
--	wget_send(action, tcp_seq_num, tcp_ack_num, len);
--}
--
- /*
-  * Interfaces of U-BOOT
-  */
+ config PHY_NCSI
+ 	bool "NC-SI based PHY"
++	depends on NET
+ 
+ endif #PHYLIB
+ 
 -- 
 2.40.1
 
