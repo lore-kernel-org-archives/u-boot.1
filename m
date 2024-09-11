@@ -4,96 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DFB0EE57C1
-	for <u-boot@archiver.kernel.org>; Wed, 11 Sep 2024 16:25:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 997C5EE0206
+	for <u-boot@archiver.kernel.org>; Wed, 11 Sep 2024 16:45:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E2F8892CA;
-	Wed, 11 Sep 2024 18:25:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D9B11892D4;
+	Wed, 11 Sep 2024 18:45:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YU+bjpN+";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="qvUAyPeC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A9F888CA8; Wed, 11 Sep 2024 18:25:12 +0200 (CEST)
-Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
- [IPv6:2607:f8b0:4864:20::72d])
+ id E00E6892D5; Wed, 11 Sep 2024 18:45:24 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E987892CA
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 18:25:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 85EA688F6F
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 18:45:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72d.google.com with SMTP id
- af79cd13be357-7a7f8b0b7d0so613985a.2
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 09:25:09 -0700 (PDT)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-a8a7b1c2f2bso6711366b.0
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 09:45:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1726071908; x=1726676708; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=x9aeOgN8xMtMgMDmTT/h3ulinJsjS4y8oC1yyzYlb38=;
- b=YU+bjpN+ZEcVqUvl2M+ampYtc7t7/F2jpe8GaJCmquwstL5to5wK877oHTGJOmqCXQ
- 0XKOa0bNN8qtvQK+7iLXU0VLXVfTs96DEcguhXCanL5ocDlAHINxr5bPkb2PjH43I4Pz
- 1qe9+aVaaziltKCjTlOgW6j2FgK8retietkUk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726071908; x=1726676708;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=amarulasolutions.com; s=google; t=1726073122; x=1726677922;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=x9aeOgN8xMtMgMDmTT/h3ulinJsjS4y8oC1yyzYlb38=;
- b=V1m+KZ991fc5WGGYGGdC6dMEA3Q2Xhk8g2iTh8zy9EHF1/B5CTwAIgR/P08XPUIg/V
- xSbQgqR6yBVZFwcyX80j42ZRlXCUJd20NhPbYaijStVAImXNEiRvPZTergQ5lUoYYFTz
- Lr3FsdQtepGwuMR8CB1W+A53qQTDllu9x6cgGTcO54eGfSuIOvcr0XP41M5ZyNwO5Vxx
- 3H0Opo8Gey7dL9G0iSy+pk2jgDY4iqX01P8IU5oEYd+Uvor2AbrSGz9Iu8FXqYXNPHfv
- 9Pd+LJaMbe/rij5YvQM5XSSkyAmY20OHd1zbUnI2r+LcYSHwgQpbPlY7i+/BU9eqzfPC
- EUCw==
+ bh=WAZ1aWT1fYKEwoNxPlQB8IN3mV4Hw3tYpacjXoBW5mk=;
+ b=qvUAyPeCLwHDjQYb798RF+VQCPq/f2pFLWU/W2IqB+JdBlIzxQOx37KKFcmQVqRSib
+ rWsDMAbgWEl7UzH3v4WV3P8Uj1q12zueKb4Zc8SmHC5yQFZd3SYQlkfwinK/p0EcLqz2
+ BYdmAsJg12DFQnw5a87A+cVuavgi5BxB4UKF0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1726073122; x=1726677922;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=WAZ1aWT1fYKEwoNxPlQB8IN3mV4Hw3tYpacjXoBW5mk=;
+ b=psvQjLoA5Mv/hkqmyIioPHimAMCoJ8JPwK8qnlW0RRrrE44E7QWbzR2mqKJlAjn8yP
+ a4sAee0i0nDoBq4Jfw53dQMdpJLqONfiOIbDijvAmv5DQ91b9vTxp9JQkaFcynJaQ1rc
+ PAS4dpIEe2UTqlQMjQm7KUyfG4iNac+ogfWz/fQVMpFyidxMVkHTx2aDBLPnO6bzhkWY
+ /rHGq/++zAEe4Ly1oz20goyYkrqtwGeTsoVV4vBerm1+5blCht3l9rg1rZo+AapTknP+
+ x+nyMt2t1a/ekFHG68S4d1mKzWesO2tuwTTJbfdzyU6OGTZg05xzdMy7QdT4tSGoIdCH
+ zmag==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVimh10YvwJo9BRvZ24dGczkg7GhvqKE9OcNP24VWigGkWtSEktyUlcdasBqb52JeBpJsVwbiU=@lists.denx.de
-X-Gm-Message-State: AOJu0YxnhVlwUBGDM0ngiOvnIVsGtaKIcFdj65fej4+r9xY9hdcrXmv0
- An8eEYSoiTUfZBiozxHSN7tFU0lpPF98uGD3+hdi+9MiL/MImhzAYn3lFxwJFUw=
-X-Google-Smtp-Source: AGHT+IHgCATOhfD2w17tP2+icZgruUKYgHQ8g2cQhzGDqI5oAhF+y/wid/ws1zpD53j5nlOs9m9k2w==
-X-Received: by 2002:a05:620a:1a1e:b0:7a9:a3e3:7270 with SMTP id
- af79cd13be357-7a9a3e3a396mr2482949485a.62.1726071907923; 
- Wed, 11 Sep 2024 09:25:07 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-45822e7f569sm42725791cf.31.2024.09.11.09.25.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Sep 2024 09:25:07 -0700 (PDT)
-Date: Wed, 11 Sep 2024 10:25:03 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: Re: [PATCH 1/4] power: regulator: Trigger probe of regulators which
- are always-on or boot-on
-Message-ID: <20240911162503.GQ4252@bill-the-cat>
-References: <CAPVz0n3Ji1sKQK+Lnq8rP3ZqwX3o-kXe2btj93UuVBa3T5C=qw@mail.gmail.com>
- <eced1020-2157-44a4-98a9-845e218529d9@denx.de>
- <45c74c58-98cf-43df-b837-c48b0341c551@denx.de>
- <CAPVz0n2-DCKDcVrAi00kF6yDcE2bN1mtUhzBcw7JDiZoXgzu0w@mail.gmail.com>
- <e5837ce4-0a14-4822-960d-6ab667a9f4b1@denx.de>
- <CAPVz0n323ktF6kb3WHR9JcE+xOzQr9-aWOR47+ZvwQr=ib18rg@mail.gmail.com>
- <f778366b-bdaf-415d-a94e-c995f62e8c71@denx.de>
- <CAPVz0n0ru1rPb9SNw515mkwfs4=nNSOPjZY74JVkqnGbEouSLQ@mail.gmail.com>
- <cfc1a158-6c35-4288-aed0-fcc78a8db832@denx.de>
- <CAPVz0n1Vh7Vgnt8_Lx6U8p42QvtVnHB9yvb=RmjYrS=w1G3u1A@mail.gmail.com>
+ AJvYcCVfd9cs1RrdqFNKNRF7S4BmfSf+YBy0dR/H5f/XUdE53z6aT+DkiKXVOQRSvVNRHgs+hyEB4WY=@lists.denx.de
+X-Gm-Message-State: AOJu0YyxVMgNkBh0+OsP4Kao80TT2Tn5J6FtjOKxK/yulsv35NtDA0z+
+ 7DMlhBfyy/RhO59HjaAVc5sL3LFILKwm2tqCAm7DSK8/b3ZgVmvgE5qZSAaCZKjl83ZBrnKqTtI
+ pNcKoZDVu9uDHhMBFHPsG7jeE4W1DizzDRpnnCQ==
+X-Google-Smtp-Source: AGHT+IHqomZwciDvJqFr8np/nyHDyrcAuzFOkMlKM4iiTNXoOjGVYM51AfSasWRgiFP7TKtm8l87s3hQ+54uq+gTA+U=
+X-Received: by 2002:a17:907:f1dd:b0:a8d:286f:7b46 with SMTP id
+ a640c23a62f3a-a90295a213fmr8611766b.29.1726073121385; Wed, 11 Sep 2024
+ 09:45:21 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="esSR2Cp/8Y/3KA2m"
-Content-Disposition: inline
-In-Reply-To: <CAPVz0n1Vh7Vgnt8_Lx6U8p42QvtVnHB9yvb=RmjYrS=w1G3u1A@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20240910101344.110633-1-miquel.raynal@bootlin.com>
+ <CAOf5uwmzm=9=Vsu5cTbziyPG=KAqDGTcmrW0A36a2ix_+2WjNA@mail.gmail.com>
+ <20240910145634.2ada70ad@xps-13>
+In-Reply-To: <20240910145634.2ada70ad@xps-13>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Wed, 11 Sep 2024 18:45:08 +0200
+Message-ID: <CAOf5uwm-CAbYCqFtx43Ynp23kVTvWM02qchuuwDHXE4=8NY48Q@mail.gmail.com>
+Subject: Re: [PATCH 0/8] Add imx8mp video support
+To: Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Simon Glass <sjg@chromium.org>, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Anatolij Gustschin <agust@denx.de>, u-boot@lists.denx.de, 
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Ian Ray <ian.ray@gehealthcare.com>, Marek Vasut <marek.vasut@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,94 +94,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Miquel
 
---esSR2Cp/8Y/3KA2m
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Sep 11, 2024 at 02:12:12PM +0300, Svyatoslav Ryhel wrote:
-> =D1=81=D1=80, 11 =D0=B2=D0=B5=D1=80. 2024=E2=80=AF=D1=80. =D0=BE 14:01 Ma=
-rek Vasut <marex@denx.de> =D0=BF=D0=B8=D1=88=D0=B5:
+On Tue, Sep 10, 2024 at 2:56=E2=80=AFPM Miquel Raynal <miquel.raynal@bootli=
+n.com> wrote:
+>
+> Hi Michael,
+>
+> michael@amarulasolutions.com wrote on Tue, 10 Sep 2024 12:30:42 +0200:
+>
+> > Hi Miquel
 > >
-> > On 9/11/24 7:57 AM, Svyatoslav Ryhel wrote:
-> >
-> > [...]
-> >
-> > >>>> You did mention something regarding I2C/PMIC driver probe timing, =
-but it
-> > >>>> seems the I2C driver and PMIC drivers probe roughly around the sam=
-e time
-> > >>>> in both pass and fail cases ?
-> > >>>
-> > >>> Yes, here I agree that they both probe and probe passes, but I assu=
-me
-> > >>> timing of i2c call is critical and there may be some dependency whi=
-ch
-> > >>> is not ready.
-> > >>
-> > >> My guess would be pinmux or clock, maybe the i2c controller is marke=
-d as
-> > >> bootph-* in DT and its pinmux/clock is not? Maybe the i2c on tegra w=
-orks
-> > >> by sheer coincidence right now? Can you have a look?
+> > On Tue, Sep 10, 2024 at 12:13=E2=80=AFPM Miquel Raynal
+> > <miquel.raynal@bootlin.com> wrote:
 > > >
-> > > Power i2c line (one that hosts PMIC) is configured extremely early in
-> > > SPL since it is needed for cpu and core voltage setup so even if, as
-> > > you say, tegra works by sheer coincidence, specifically this i2c line
-> > > should work non the less, since it has all its pre-requisites (clock
-> > > and pinmux) configured on early stage.
+> > > In order to display a boot picture or an error message, the i.MX8MP
+> > > display pipeline must be enabled. The SoC has support for various
+> > > interfaces (LVDS, HDMI, DSI). The one supported in this series is the
+> > > standard 4-lane LVDS output. The minimal setup is thus composed of:
+> > > * An LCD InterFace (LCDIF) with an AXI/APB interface, generating a pi=
+xel
+> > >   stream
+> > > * One LVDS Display Bridge (LDB), also named pixel mapper, which recei=
+ves
+> > >   the pixel stream and route it to one or two (possibly combined) LVD=
+S
+> > >   displays.
+> > > * All necessary clocks and power controls coming from the MEDIAMIX
+> > >   control block.
+> > >
+> > > Patch 1 adds a very useful helper to the core in order to grab device=
+s
+> > > through endpoints instead of being limited to phandles. Video pipelin=
+es
+> > > being often described using graphs endpoints, the introduced helper i=
+s
+> > > used several times in the serires (there are 3 LCDIF, one of them bei=
+ng
+> > > connected to the LDB, itself having 2 ports).
+> > >
+> > > Patch 2 is a fix which is necessary for this series to work properly,
+> > > but is way broader than just this use case. In practice, when assigne=
+d
+> > > clocks are defined in the device tree, the clock uclass tries to assi=
+gn
+> > > the parents first and then sets them to the correct frequency. This o=
+nly
+> > > works if the parents have been enabled themselves. Otherwise we end-u=
+p
+> > > with a non-clocked parent. I believe this is not the intended behavio=
+r
+> > > in general, but more importantly on the i.MX8MP, there are "clock
+> > > slices" which have pre-requisites in order to be modified and selecti=
+ng
+> > > an ungated parent is one of them.
+> > >
+> > > All the other patches progressively build support for the whole video
+> > > pipeline. Regarding the LCDIF driver, there is already a similar driv=
+er
+> > > for older i.MX SoCs but I didn't manage to get it to work. It was
+> > > written more than a decade ago while device-model, clocks and others
+> > > were not yet generically supported. Thus, numerous ad-hoc solutions
+> > > were implemented, which no longer fit today's requirements. I preferr=
+ed
+> > > to add a new "clean" driver instead of modifying the existing one
+> > > because of the too high risk of breaking these platforms. Once proper
+> > > clocks/power-domain descriptions will be added to them they might be
+> > > converted (and tested) to work with the "new" implementation, but goi=
+ng
+> > > the opposite way felt drawback.
+> > >
 > >
-> > Is it possible that this configuration is somehow reset or reconfigured
-> > from DT early on in U-Boot proper ?
->=20
-> No
->=20
-> > Do you have serial console output in board_f.c time in U-Boot proper ,
-> > possibly using DEUBG_UART , to check if there might be some prior
-> > failing I2C transfer at that board_f.c time ?
->=20
-> Haven't spotted anything weird there.
->=20
-> > > As I have told, I was not able to determine exact reason why this
-> > > happens, it should not and yet it does. This is why I have abandoned
-> > > my attempt to implement same changes you are currently proposing.
+> > Thank you for adding those patches. We are working on mipi support
+> > here and some of the clock patches
+> > are there too. I will try to look and rebase our patchset
 > >
-> > If tegra has a problem, it should be fixed on tegra side and not block
-> > core plumbing. I am not seeing the problem on stm32 or imx systems, so I
-> > am banking toward tegra-specific issue.
-> >
->=20
-> And yet you are pushing tegra breaking stuff. I will insist on
-> reverting this is it passes.
->=20
-> > Are you able to debug this ?
->=20
-> No, I am not able find exact cuse of this behavior.
+> > https://patchwork.amarulasolutions.com/patch/3401/
+>
+> Thanks for letting me know. Indeed there are a couple of conflicts.
+> - My patch 2 can easily be replaced by your approach.
+> - Regarding the power domain we had two different approaches, I
+>   didn't look in details, but again one or the other seems fine, I
+>   guess.
+> - The LDB driver in my series is new.
+> - Finally regarding the LCDIF changes, the approach taken on your
+>   side follows the somewhat too ad-hoc logic and would probably benefit
+>   from being migrated to the driver I propose, which does make use of
+>   the (DM) clock, power domain and DT API. I am really happy with the
+>   core helper I've added retrieving a device in front of a graph
+>   endpoint, which makes the whole "get panel/bridge" approach much more
+>   flexible and adapted to today's needs.
+>
 
-How do you propose we resolve this then, Svyatoslav? I threw this patch
-at some TI platforms as well and they're all fine. Are you unable to get
-some early debuging information out like Marek was asking? Thanks.
+My idea is to work on top of your patches and try to migrate them and
+cover conflicts.
+What be helpful is to get some of our clock patches and include in
+your series and then I will try
+to move our work on it
+
+Michael
+
+> What is the status of your patchset? How shall we handle the conflicts?
+>
+> Thanks,
+> Miqu=C3=A8l
+
+
 
 --=20
-Tom
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
 
---esSR2Cp/8Y/3KA2m
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbhxFsACgkQFHw5/5Y0
-tyw71wwAn/baxpBRJxptF4uekpATAo24mWw9w0JoKRSdXSBVgNui+btFcvkyQ1X/
-VtJHwJWtem9hhKeIqbbYyQNVjb5dN1brT7ORRtBDN5cXtzTSG6Ylj+pd1ORs73bu
-oHitL2pffneo+8ful/SkqOa8xTpaMZlNV/fb5hYf4gOrWNt++UOawM9NFG+BSK4r
-PdAXmkpnNBMHBA+a8E4JcijdY2SoNsZF4YQpC+fJ7ErKB8BFx5HOd/4Sc86kmL+0
-z964CJU0Rc8D/ZJT9qMvE8c2S7RImO8PXME6QiLIyfBAtG40whlQZrV5XrQqYYRU
-71euKRzHE8s7PEQ3hLYlmdKYUYf5y8smAkx8+HBru4rkJylYpSBEToSH9Y7iOmKY
-YGbtZgQ5rTHiegHftUXbAhMG97P9ThYUjG1XBg6VMKSVRsTBoRRkt5+DdoR1rxaY
-FJrRr82pW3GWJwi4KsEnEcy1J+P7o2aXfNrtq/E6YZzuD6lO0KT8Z3VaQnWcOwOg
-vzxf8SHc
-=9uk4
------END PGP SIGNATURE-----
-
---esSR2Cp/8Y/3KA2m--
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
