@@ -4,170 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 780BDEE0209
-	for <u-boot@archiver.kernel.org>; Wed, 11 Sep 2024 04:59:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C77E0EE0209
+	for <u-boot@archiver.kernel.org>; Wed, 11 Sep 2024 05:57:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BAEA988A1B;
-	Wed, 11 Sep 2024 06:59:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=aspeedtech.com
+	by phobos.denx.de (Postfix) with ESMTP id 1272588D1B;
+	Wed, 11 Sep 2024 07:57:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=aspeedtech.com header.i=@aspeedtech.com header.b="DnQn4GnX";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XJlDQ1h5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E4458915A; Wed, 11 Sep 2024 05:21:48 +0200 (CEST)
-Received: from APC01-PSA-obe.outbound.protection.outlook.com
- (mail-psaapc01on2070a.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:feae::70a])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 9290E8915A; Wed, 11 Sep 2024 07:57:38 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4DB2E88F5B
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 05:21:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=aspeedtech.com
+ by phobos.denx.de (Postfix) with ESMTPS id 99A7888D1B
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 07:57:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jacky_chou@aspeedtech.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=VWhEw9u3a4G++2ajY/nsW+YpMsxl9ROXICiMAnR/o9mNe2fSCsL5IULJOFDCT4rBVQK6xv79h2WAibPQVEiBeIzdGrZsvkHjd4tRXW+Er/6eb4Q8tlrxRiJ9cv8p2tLF0JT+GENoZFSifnsJgRIRAxK5u2LIKccgEFRWtUenmf36S1L1NMlj3xVyRcjvLUXMfhCZZlKmbBKC2A7/RmK4Nuse1jqC2NHuhKLhFSUIvmhYigMqA5j/HwbgqN5eh00h8oRLJl919epg+5ltTEWH5DGnnOPKbdUdLl7cqhsSwnm37JU5F3C5HGehEHtIzUuUH1TvjJt+BsXD2NaVXCJTMg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=P0T3UJYXTs7gFPTJrRoFp6Acj8jq3wyEL0F6190KiEw=;
- b=U735OG9oj5qKscHnQMu2Vyr9pQtuKrrXY6Ny9EnqX5HCd3Sdl0daw3dp5r0oVOsfXTv4bt3LelXd0QxEbjYAYYvPPvXpTJexMmFPFjT6+xgE3ngKSVrymDngxWlXNzKPiugdMkMeDlRdAroyvSs6d1Yzn4Ax64b/kpLIF9NGsJFGqoAIas6x7wr4vgyrXb0oTESgQIN2bs0MnmglP/2FTuzpZfC3eWHdUiPjNFql5e6BinlRxnwJtbDEB1YlVSuw2YxvWPiuyiZ0ZdqJzrmmQAkwZBFvsCIpJuXlD9Kul3znTBHvA/U5iQuplcMeJ/3c3jT7FyJTaLwXsRLrAgspUQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=aspeedtech.com; dmarc=pass action=none
- header.from=aspeedtech.com; dkim=pass header.d=aspeedtech.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aspeedtech.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=P0T3UJYXTs7gFPTJrRoFp6Acj8jq3wyEL0F6190KiEw=;
- b=DnQn4GnXbXZIJnUeIaCvQwVEcZyv3rnp1REe2cR3ERrQFm/2qmW/mjnGPmrAjcInonKuyJANmVODJAy17F1mOoJPzGMU44iM/28BSEzh+4hZIEej6uIBtCyPn6LXDBOmfXNiUVcJMNUEP1vuKO5gLasm8FulfnSPQCx6tkGyUmh7cGYEfJW25bIaD1mpcEHxlE9Ilz2L+zjVmJRbXNDjk4d0SQpaB0veNeS3TYqIaW1jRYjDoT48qhdpi6U9hiAPFszlRFGNwZZLi3EDODLh60BAjPF7ptKyTk8lqIVGly+oi8KkQ0N82dLGSE3/xJMqVrFRAVpruPhcclY/am2eVw==
-Received: from SEYPR06MB5134.apcprd06.prod.outlook.com (2603:1096:101:5a::12)
- by TYZPR06MB7169.apcprd06.prod.outlook.com (2603:1096:405:b7::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.25; Wed, 11 Sep
- 2024 03:21:39 +0000
-Received: from SEYPR06MB5134.apcprd06.prod.outlook.com
- ([fe80::6b58:6014:be6e:2f28]) by SEYPR06MB5134.apcprd06.prod.outlook.com
- ([fe80::6b58:6014:be6e:2f28%4]) with mapi id 15.20.7939.022; Wed, 11 Sep 2024
- 03:21:39 +0000
-From: Jacky Chou <jacky_chou@aspeedtech.com>
-To: Joel Stanley <joel@jms.id.au>
-CC: Ryan Chen <ryan_chen@aspeedtech.com>, ChiaWei Wang
- <chiawei_wang@aspeedtech.com>, BMC-SW <BMC-SW@aspeedtech.com>,
- "joe.hershberger@ni.com" <joe.hershberger@ni.com>, "rfried.dev@gmail.com"
- <rfried.dev@gmail.com>, "trini@konsulko.com" <trini@konsulko.com>,
- "sjg@chromium.org" <sjg@chromium.org>, "kobedylan@gmail.com"
- <kobedylan@gmail.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Andrew
- Jeffery <andrew@aj.id.au>
-Subject: =?utf-8?B?5Zue6KaGOiBbUEFUQ0hdIG5ldDogZnRnbWFjMTAwOiBBZGQgQXNwZWVkIEFT?=
- =?utf-8?Q?T2700_support?=
-Thread-Topic: [PATCH] net: ftgmac100: Add Aspeed AST2700 support
-Thread-Index: AQHa0P0c+8pwJpOIYkmnapYF3U/pw7JRQaKAgAELSRA=
-Date: Wed, 11 Sep 2024 03:21:38 +0000
-Message-ID: <SEYPR06MB5134FC4DDDE3508168429FED9D9B2@SEYPR06MB5134.apcprd06.prod.outlook.com>
-References: <20240708060718.186075-1-jacky_chou@aspeedtech.com>
- <CACPK8XdVr8G7hBQ3QA2tXqbMwMiRjo2u0tZSa_2YjJEh4a8Cig@mail.gmail.com>
-In-Reply-To: <CACPK8XdVr8G7hBQ3QA2tXqbMwMiRjo2u0tZSa_2YjJEh4a8Cig@mail.gmail.com>
-Accept-Language: zh-TW, en-US
-Content-Language: zh-TW
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=aspeedtech.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SEYPR06MB5134:EE_|TYZPR06MB7169:EE_
-x-ms-office365-filtering-correlation-id: 37693de6-e238-441c-687b-08dcd210d96c
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|1800799024|366016|376014|38070700018;
-x-microsoft-antispam-message-info: =?utf-8?B?N3d3ZzNnN2dnQjNuKzBQd3N1VVcrZGxRc2dGVG1FWWVkc29BVHp0MExuNS95?=
- =?utf-8?B?UmVFeHZmcURUUlRGUVNNNjVEUWpXdTV5b3JhYkRLM0ozRGNOb3pGMC81SVBm?=
- =?utf-8?B?aUxON3NUOUd5b0pVSk56bnFOTmppNEtQTFV6eWF2Mjk4alFZMEtoUkh3bnc2?=
- =?utf-8?B?dTUwTUxMRGNxa3lmcTc5VkptZUNSRFhjQm1oR3FxZitZY29PS0UzMzY0M2tP?=
- =?utf-8?B?WVpPL0YxeE9sN1kvQTZhd2ZWS0xnRmVTVGhya1ZEaW8yTDJnSUlMZ2hPUDJk?=
- =?utf-8?B?d3hQdkR3UGhPNmJ3QldCaDQ5WXhZTi9DK1VIQUwvK3pQLy8zRkxtYmV6NGsv?=
- =?utf-8?B?V2RiejZYY0p4VG1YKzVDTHl0V3NJZ2dMRXR6c3hpbitjZzRkTkV3YyttK1dI?=
- =?utf-8?B?bjYwbVc3ZjV2V2F3cnMzRFhBa2g3YWdXcllnM0xSMEZvRkZpWFdONUJpeTBI?=
- =?utf-8?B?T0k1cnRQeUlaT1hqby9INkY1R3JmdUVSVzNleWRUdnZQZDdEZVFhbWM5Nkhs?=
- =?utf-8?B?WWEwSkVtZXQwMTJOSW82b2xsajUyZHBwcjc0MVJ2cXJzaExFRXJSZk1hMmNa?=
- =?utf-8?B?SUM5WG5OYXcvZEsvZlR0OGp4WUpXMFZYTFpqOHBwMncyWHJ6eHZWemNQMHBC?=
- =?utf-8?B?YWFFaDZrZ01mR3oydnJGSEk1akErYXh2ZDdSYkFRelFCNXlqTUZJMDVDZzFR?=
- =?utf-8?B?SUlRTE9QVEU3aURYRWxiM25SL1dZQXBxSkVsaW9LNEwvTGNpTElNYlNtakk4?=
- =?utf-8?B?REZSNXRXdTRMWVNCdFAvdnhPVTRDYjc0YU9QSHgrMG96WXIvSW9IRFowMnFT?=
- =?utf-8?B?SGxIMlh0cEJSczBuNloxYUFaYm4yaGh1S1l4RWtZYXpnZmtwbWE4ZWw2WDJU?=
- =?utf-8?B?cnlqMnkwWnJHa2QzaUkrWHBNclc0VlF6RHlLZ2hXYVduenRDR0l6Z0VXZFA0?=
- =?utf-8?B?cXpFNlI4Y3h4TFJkeDBHcCswd204eWRCQndzNjJUQ1R0am9EM0F4S2hwNHcx?=
- =?utf-8?B?c2h3WlpuMkVkL1lHdXZ5MlVkMnBQWWo5M2xOMnEzVmx3OVVNMVlWcG5mTUJG?=
- =?utf-8?B?cFMzUVo4NFMzSlBTWjAvK214MW5pdm90RGtNSDlQU1dLT1VUekRWWk1NVWtK?=
- =?utf-8?B?Tzc1MmtiTnVuS0kvUWtxY2VsZ2lNQzlta1BpSTIvSkU5Z3o0UEFUWjZrMFB0?=
- =?utf-8?B?bnJYN0Rlek1uZEhTVFUyWmlOVHdnSE9aMm5ZUHBJTkdWdFlBMzlXWExxbHhK?=
- =?utf-8?B?R1hiRHU0UkZEYm1IbTFhdzVZT0lLN1hWUSt3WDJtWlV3aUN3L0pGR3ZRNGx6?=
- =?utf-8?B?Z3BndXVrYmlNdEEzYlp5aDE1cTlQd2tnWGhGVllWUGFKK3NCNnZGdVloVDl6?=
- =?utf-8?B?c0QwelY0Y2l3aVl5ZENwZXp6UzFsczF0anZkMHBMSjQ1RVB0bXFGT3FtVnR5?=
- =?utf-8?B?Mjl2dXBYekg5WHlDSVlRaXFQMS81RVlNOHg0S0dFeEJHSmM5dVhYQjVJVlRZ?=
- =?utf-8?B?WjhOMThCMDUvbEhnL3l5N3BTc3ZZNzlUNWpqVzZxdGdqeGJGaURaRDBpZ28w?=
- =?utf-8?B?NWpzWnR6eGc5MXpVUVA2RUZla2VrWnY1aW8yUDQ1TWJzVGEzaHlPR21sQXoy?=
- =?utf-8?B?K0FSc21IMld1dEg4TnBkWkJTeTZoVjBIbjA5OUNvOWxuVmp4QzhrRXVwaXNB?=
- =?utf-8?B?cXFWKzJaaWZwQVg1b3d4eHJyUTErMU1na0gvbUxSbjcyUWxGdXkvR1Y0VGpV?=
- =?utf-8?B?aFJRMm53SmtjUXVZSVNqVmlOa0ttdFYzWXZnekdvdHZPeFc0TEcxSXJHY1dM?=
- =?utf-8?B?Y2tEYWlZQWo3ZEliNUVxTUsvRi9lL29FTWhhNnJqWktUUkFDQWc3MGJpbE9Q?=
- =?utf-8?B?Vzk1alJqTnVYemR0a20rOWhtUXdSWlpjYU5vdGhPcHpsS1E9PQ==?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:zh-tw; SCL:1;
- SRV:; IPV:NLI; SFV:NSPM; H:SEYPR06MB5134.apcprd06.prod.outlook.com; PTR:;
- CAT:NONE; SFS:(13230040)(1800799024)(366016)(376014)(38070700018); DIR:OUT;
- SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?UGZ3ck9ZQzJtYVlsdDFIdXlLZklrU3g5TUswc3FESXhkTVFjaXBYNndzV01j?=
- =?utf-8?B?V0cxM0xsQ3liOEpzbXZWQjJWRHpzbzBZVUpEcWM0MENrZ0htY3Rmb2RJVmtk?=
- =?utf-8?B?YmcyVW42dmpaV2Zzb05PcFB6SzlkMDVUdzh6NjcxUS9tSU5VSks4MmdJc1Uz?=
- =?utf-8?B?UWtIMGw5SU9PNG5DMExDazJJQ1p6TW1sVEYzRmZtVXZ3a3lqY0tOOHN5bFJZ?=
- =?utf-8?B?U2tBMmlvOUx1cTZZLzVEVXhwVytNMDNEdGU2UVl6OTN3Uk9FWnVFY2VOMW4y?=
- =?utf-8?B?V1hSVkpoNklHN2ltaXhJZkYwUkdGSWtZZGM1WVBjdGtkT2VOWTJjVElneGtG?=
- =?utf-8?B?V21wVmJBb3ppbUdJZi9xNlRkcUZsa2x2TGpvVHVCK1BNVVE0aEhvdEdOQ2R0?=
- =?utf-8?B?dkFtNk5rRkV1NW1RRzJWWXdBS1NJNmxxZWExZUViR1lEcXZGeUJxemFrclhD?=
- =?utf-8?B?S215ZUVSbXpnanllWENraFAyN2daN2JYdGp2Nm1YSElhS0pvTTJJOU9pNFV6?=
- =?utf-8?B?TnNzS3k2ZDNVWlRRQkt3a0xlZTd1M0ppSXM5MUJJNlJ1eWR0aGlzV0ZnWTlB?=
- =?utf-8?B?cE1qVGRBUHhEbU1sTm54OE01d082MTB0dlJMd2RtUkVSNjF3Q1doTmNuRC9K?=
- =?utf-8?B?NXJ5RjJMWTBpNDVKRldFVnBzd2RGQW9aSENnM0s0WGxlMkhISjArUmxjYWhm?=
- =?utf-8?B?UVBSUFJUQ3FmZXg1UUZZM2U5U2lhcnJMblhzdGgyTk9BQnU2ZXRzTWM0OFVT?=
- =?utf-8?B?Ukk1ZXozRFkyb1BvN2IxbWliWlVPKzRRNlhsV1k3K2JFa0lNWTZReVNuV2ox?=
- =?utf-8?B?RG1OQjRTS3pRSEJ2czdGSmdzN2ZmbFlMaDNkL3o5aWZ6WjRUVUhmN1hMY3Nw?=
- =?utf-8?B?RUxETFdvRytzQW1BenVDYkMvVGpsckRMcFhqbG5JN3hlOWRZeEZRcHFNN3ZN?=
- =?utf-8?B?WFNVeHBHbk93SHhldnJMa2hici80M256dk5iZEpZbW5Ob0lhaDlWaHFYdU1j?=
- =?utf-8?B?OGxlYjY5eVJtWmdyMGFHem9kR3o3OEZLaGg2RDlaVDlLQXlmK0h0T2pZV2Qv?=
- =?utf-8?B?ay9KYWxtWTNoMzY1WWxyemI4eGxmbWQ2aUtaSjZzV08zME1sTUx2dzBlbktU?=
- =?utf-8?B?TGZ1VVF5eXY5RGdNb0h3RERBdVFuVGpYck50d2YxbDRDYzR4MDk0WDR6c1pk?=
- =?utf-8?B?N1p2OU84eGw3b2lIdDZZaWJXTENNaXpUemN5c2tMQytwWVF3aUdaQmMxWWxj?=
- =?utf-8?B?eml6UVFwdnVTWStiaWdXbnNSVUtxcjNvMUlNVE1MNW03TWtZak1GQS9mRGJ4?=
- =?utf-8?B?b2JtNk1lVFhKTUVhRGNXdW05YWh5bExwbWVmdU0yQ3hMaGhBcjMvSUlFU000?=
- =?utf-8?B?S1ZXZkd0WVBPT1lWdXFVZklxYVVEVm10TnVqNm5WckNFTE9aU3ZrekplelRS?=
- =?utf-8?B?SEk1NG9TNTlSaU43MmdhVEtCNno3NjdqNUlSZ21pL0plZGdLcjJIcGxsSnQz?=
- =?utf-8?B?emx5VjlsQXN0cVZOZHN4RHVPZUIwYkxLVmVjd2dCUjJCNDdLYms0M2M2bVRy?=
- =?utf-8?B?QW1aTHdvTEdFSitvT3NLZFhha1lmNlFpazBiY21TeHRMRmxwK21hanpYRVpz?=
- =?utf-8?B?TGlvWHdoUTIzV1VqR1pLNmdSUGRieFo2Z0JTY3QyazMwVjdRQ1VaUjlibVVq?=
- =?utf-8?B?WHE5TU9rR1NRZE82NEJiRFRjdjhucVNXNkhhNUoxKzBQUUNydnZ4Yno4Zm5q?=
- =?utf-8?B?V0dsdXdKZUtuRHFxQWNUYytiK2NYcmxyQmc4TFlhNndzM1VKaXl6eUJmL2pT?=
- =?utf-8?B?a1Z2anJiSzZZZ0Y2VVBiTFB1T2UyQnRISGtPaXZGMTlyQ1JCOStvcFVVWmJM?=
- =?utf-8?B?NHdCVDRPSVhVSUVpSWRxdkRBYkc3OTMwSkhxejNMLzhmeXlVOUszQjNZejVl?=
- =?utf-8?B?Y3QzUlZhRHFJUUs2bjRMMGR4QW10MXFsWXEzOHBtUzd6Mlk5WXR1dko0dDB0?=
- =?utf-8?B?RXZoQXhGSEViWUxLV0prT3JGb2RaaGNMallYNHE0aDBQZjJMY21NU0FoZ3Fz?=
- =?utf-8?B?QzFzaS9TaStBNlpieUFmN1ljYVZQc0tLL2VsUjlqYk5GSzJqcWdVMkJCNHBQ?=
- =?utf-8?Q?WTl+EEXvVsjIGDvUVGcyAt9sp?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-374ca65cafdso3991531f8f.2
+ for <u-boot@lists.denx.de>; Tue, 10 Sep 2024 22:57:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1726034256; x=1726639056; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ci7Sh7Rbd+SVhhhd1ILEPS+FX7FpOkwS7zhU9KE2Rvg=;
+ b=XJlDQ1h5dLNAyJEbEKzBF56SPl8wDmEUOxbBnm/qQY5ux9WEfL1CVpHC24jwnc/hWA
+ 2VCLu4rsMINygnLTtIrszgmKCflx5cTigKoIjyw0sCr6cV2pvq198fXt3UioA7HZhOaN
+ aQ35PKLWJxalOGllcHGfOMQWmr/wqM0BvrLQFNHG8l34IMfqc5jEvK/Q7fZbkN2jt/1k
+ J06IZVJi2nSS4dsUQJMltxuVU5/0DYGfSPVj7ly4snQPkuyZWxbTCkRT3jqA6ZwxU6UY
+ Qi2/yZpPTAHMKsfO1cAfSfBGAgYofXN00hNHzikVxl+v1GxOe/4l8PN1AFQCI4JsHozK
+ KkoA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1726034256; x=1726639056;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ci7Sh7Rbd+SVhhhd1ILEPS+FX7FpOkwS7zhU9KE2Rvg=;
+ b=b40VX3ojMZbMso3tcUwOisSopkXtQSPOBgc/tFzOQ/IsEygCIpvuKXrRWbd+D8sNef
+ SmeVOWkuDl/jrJq0uDkPFhv1Ci+nuL3Slsi6oEwUFrn5g3aB72TrEqpJTrPaSKWOTkkv
+ L6ZPrA08yq3ApU75GcfcNEZiO3JfKi2WJ0pPsRu2x52E7s5s3OQoYe2LcCX9V99qPFXv
+ oteOn34HoSttF7gPCfkhhQMEqMnoruqaeLfzLGDQbQijQdR2kGkT+IqmIdlbywh8m4kx
+ eQpq33DXNu3wrlm25CLCQaqao/OUMfFF5KCtD+S3GM0g7eooS7ZD3FhoAn+67rKvI008
+ U7aw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXVWafUqrdJ7UVhaR9L3xhgibCMIOjJ/fc3Pea0AVOS7+Us6oIHKQ93MZWbLBWXEdavwIM6x/Y=@lists.denx.de
+X-Gm-Message-State: AOJu0YwsGVOkF5vnitUvm6ltBTrW78iBApMPFddlnvshPxQUBB3XgbnH
+ /WDHEfgMhxhO6Drz6Ti1zYQVPXnPyTWD+Mmfj4lSmPI3nukT2jyHgqjJMaxehpcmdkn9p22fHuC
+ A5H8MkgHFYjNvlkFrNNaKB/a1arqczJe8
+X-Google-Smtp-Source: AGHT+IFUaPdosA69uIGhkBmZFZfbdY1akrfVVyg0z117C+PYnGTjX2RNypXAyn5+wCduZ2DKDDuWx2QQe15xiH6uI6w=
+X-Received: by 2002:adf:f6c9:0:b0:374:c3f7:6af1 with SMTP id
+ ffacd0b85a97d-378949f7897mr7911355f8f.15.1726034255623; Tue, 10 Sep 2024
+ 22:57:35 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: aspeedtech.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SEYPR06MB5134.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 37693de6-e238-441c-687b-08dcd210d96c
-X-MS-Exchange-CrossTenant-originalarrivaltime: 11 Sep 2024 03:21:38.8254 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 43d4aa98-e35b-4575-8939-080e90d5a249
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: XA3T0WJDKYyNK8S2NI6B0ta1sadbympqGIe8YAdF+V/c9Y0yWGl1wc69Vx3vALggjqbeWMvCwfgo99vmdPNYMjO35PzE2P1qOx8peI2bZNM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYZPR06MB7169
-X-Mailman-Approved-At: Wed, 11 Sep 2024 06:59:37 +0200
+References: <20240626235717.272219-1-marex@denx.de>
+ <a73dffe5-87e3-4e96-965f-9d029f2af8ed@denx.de>
+ <CAPVz0n0C6TPdBRUEvJmgAUGAKoetuzr1j=0cMXweP2EqMTwn=g@mail.gmail.com>
+ <0910419d-e8ab-4bf9-a083-dc2783afaca1@denx.de>
+ <4D07A6E5-F156-44C3-A26D-0F2D913CE92D@gmail.com>
+ <18d84528-d2e5-41d6-ae1d-109ee30853b2@denx.de>
+ <CAPVz0n2Jzfih0Z85TSQbnz-8OrX4D6UN=anKGTJ=hckRt8f3xA@mail.gmail.com>
+ <a95f0d60-2883-4c3d-8a53-ee3ef414cc32@denx.de>
+ <CAPVz0n3Ji1sKQK+Lnq8rP3ZqwX3o-kXe2btj93UuVBa3T5C=qw@mail.gmail.com>
+ <eced1020-2157-44a4-98a9-845e218529d9@denx.de>
+ <45c74c58-98cf-43df-b837-c48b0341c551@denx.de>
+ <CAPVz0n2-DCKDcVrAi00kF6yDcE2bN1mtUhzBcw7JDiZoXgzu0w@mail.gmail.com>
+ <e5837ce4-0a14-4822-960d-6ab667a9f4b1@denx.de>
+ <CAPVz0n323ktF6kb3WHR9JcE+xOzQr9-aWOR47+ZvwQr=ib18rg@mail.gmail.com>
+ <f778366b-bdaf-415d-a94e-c995f62e8c71@denx.de>
+In-Reply-To: <f778366b-bdaf-415d-a94e-c995f62e8c71@denx.de>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Wed, 11 Sep 2024 08:57:24 +0300
+Message-ID: <CAPVz0n0ru1rPb9SNw515mkwfs4=nNSOPjZY74JVkqnGbEouSLQ@mail.gmail.com>
+Subject: Re: [PATCH 1/4] power: regulator: Trigger probe of regulators which
+ are always-on or boot-on
+To: Marek Vasut <marex@denx.de>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, uboot-stm32@st-md-mailman.stormreply.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -184,75 +112,133 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGVsbG8gSm9lbCwNCg0KVGhhbmtzIGZvciB5b3VyIHJlcGx5Lg0KDQo+ID4NCj4gPiBBZGQgc3Vw
-cG9ydCBvZiBBc3BlZWQgQVNUMjcwMCBTb0MuICBBU1QyNzAwIGlzIGJhc2VkIG9uIEFSTTY0IHNv
-DQo+ID4gbW9kaWZ5IHRoZSBETUEgYWRkcmVzcyByZWxhdGVkIGNvZGUgdG8gZml0IGJvdGggQVJN
-IGFuZCBBUk02NC4NCj4gPiBCZXNpZGVzLCB0aGUgUk1JSS9SR01JSSBtb2RlIGNvbnRyb2wgcmVn
-aXN0ZXIgaXMgbW92ZWQgZnJvbSBTQ1U1MDAgdG8NCj4gPiBNQUM1MCBzbyBpbml0aWFsaXplIHRo
-ZSByZWdpc3RlciBpbiBmdGdtYWMxMDBfc3RhcnQgY29ycmVzcG9uZGluZ2x5Lg0KPiANCj4gSXQg
-bG9va3MgbGlrZSB0aGVzZSBjaGFuZ2VzIHdpbGwgYWZmZWN0IHRoZSBvbGRlciBwbGF0Zm9ybXMu
-IEhhdmUgeW91IHRlc3RlZCBvbg0KPiBhbiBhc3QyNjAwPw0KDQpZZXMuIFdlIGhhdmUgdmVyaWZp
-ZWQgb24gQVNUMjYwMCBhbmQgQVNUMjcwMC4gVGhlc2UgY2hhbmdlcyBkbyBub3QgYWZmZWN0Lg0K
-DQo+IA0KPiBJcyBpdCBva2F5IHRvIGJlIHdyaXRpbmcgdG8gdGhlIG5ldyBtZW1vcnkgbG9jYXRp
-b25zIG9uIHRoZSBvbGQgcGxhdGZvcm1zPyBJZg0KPiB0aGlzIGlzIHRoZSBjYXNlLCBwbGVhc2Ug
-bWVudGlvbiBpdCBpbiB0aGUgY29tbWl0IG1lc3NhZ2UuDQoNClllcy4gSSB3aWxsIHJlZmluZSB0
-aGUgY29tbWl0IG1lc3NhZ2UgdG8gYWRkIG1vcmUgaW5mb3JtYXRpb24gaW4gdGhlIG5leHQgdmVy
-c2lvbi4NCg0KPiANCj4gPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9uZXQvZnRnbWFjMTAwLmMgYi9k
-cml2ZXJzL25ldC9mdGdtYWMxMDAuYyBpbmRleA0KPiA+IDlmYjhjMTI4MzguLmE5MDlhMGIzMDkg
-MTAwNjQ0DQo+ID4gLS0tIGEvZHJpdmVycy9uZXQvZnRnbWFjMTAwLmMNCj4gPiArKysgYi9kcml2
-ZXJzL25ldC9mdGdtYWMxMDAuYw0KPiANCj4gPiBAQCAtMzIxLDYgKzMzMyw3IEBAIHN0YXRpYyBp
-bnQgZnRnbWFjMTAwX3N0YXJ0KHN0cnVjdCB1ZGV2aWNlICpkZXYpDQo+ID4gICAgICAgICBzdHJ1
-Y3QgZXRoX3BkYXRhICpwbGF0ID0gZGV2X2dldF9wbGF0KGRldik7DQo+ID4gICAgICAgICBzdHJ1
-Y3QgZnRnbWFjMTAwX2RhdGEgKnByaXYgPSBkZXZfZ2V0X3ByaXYoZGV2KTsNCj4gPiAgICAgICAg
-IHN0cnVjdCBmdGdtYWMxMDAgKmZ0Z21hYzEwMCA9IHByaXYtPmlvYmFzZTsNCj4gPiArICAgICAg
-IHVuaW9uIGZ0Z21hYzEwMF9kbWFfYWRkciBkbWFfYWRkciA9IHsuaGkgPSAwLCAubG8gPSAwfTsN
-Cj4gDQo+IFlvdSBhbHdheXMgc2V0IGRtYV9hZGRyIGJlZm9yZSB1c2luZyBpdCwgc28gdGhpcyB6
-ZXJvLWluaXQgaXMgdW5uZWNlc3NhcnkuDQoNCkFncmVlLiBJIGNoZWNrZWQgdGhpcyBwYXJ0IGFn
-YWluLiBJdCBkb2VzIG5vdCBuZWVkIHRvIGluaXRpYWxpemUgdGhlIHZhcmlhYmxlIHRvIHplcm8u
-DQpJIHdpbGwgcmVtb3ZlIGl0IGluIHRoZSBuZXh0IHZlcnNpb24uIFRoYW5rcyBmb3IgeW91ciBr
-aW5kbHkgcmVtaW5kZXIuDQoNCj4gDQo+ID4gQEAgLTM1Miw3ICszNjYsMTQgQEAgc3RhdGljIGlu
-dCBmdGdtYWMxMDBfc3RhcnQoc3RydWN0IHVkZXZpY2UgKmRldikNCj4gPiAgICAgICAgIGZsdXNo
-X2RjYWNoZV9yYW5nZShzdGFydCwgZW5kKTsNCj4gPg0KPiA+ICAgICAgICAgZm9yIChpID0gMDsg
-aSA8IFBLVEJVRlNSWDsgaSsrKSB7DQo+ID4gLSAgICAgICAgICAgICAgIHByaXYtPnJ4ZGVzW2ld
-LnJ4ZGVzMyA9ICh1bnNpZ25lZCBpbnQpbmV0X3J4X3BhY2tldHNbaV07DQo+ID4gKyAgICAgICAg
-ICAgICAgIHVuc2lnbmVkIGludCBpcF9hbGlnbiA9IDA7DQo+ID4gKw0KPiA+ICsgICAgICAgICAg
-ICAgICBkbWFfYWRkci5hZGRyID0gKGRtYV9hZGRyX3QpbmV0X3J4X3BhY2tldHNbaV07DQo+ID4g
-KyAgICAgICAgICAgICAgIHByaXYtPnJ4ZGVzW2ldLnJ4ZGVzMiA9DQo+IEZJRUxEX1BSRVAoRlRH
-TUFDMTAwX1JYREVTMl9SWEJVRl9CQURSX0hJLCBkbWFfYWRkci5oaSk7DQo+ID4gKyAgICAgICAg
-ICAgICAgIC8qIEZvciBJUCBhbGlnbm1lbnQgKi8NCj4gPiArICAgICAgICAgICAgICAgaWYgKChk
-bWFfYWRkci5sbyAmIChQS1RBTElHTiAtIDEpKSA9PSAwKQ0KPiA+ICsgICAgICAgICAgICAgICAg
-ICAgICAgIGlwX2FsaWduID0gMjsNCj4gPiArICAgICAgICAgICAgICAgcHJpdi0+cnhkZXNbaV0u
-cnhkZXMzID0gZG1hX2FkZHIubG8gKyBpcF9hbGlnbjsNCj4gDQo+IFBsZWFzZSBleHBsYWluIHdo
-eSB0aGUgb2xkIGNvZGUgZGlkbid0IG5lZWQgYWxpZ25tZW50IGFkZGVkLCBhbmQgdGhlIG5ldw0K
-PiB2ZXJzaW9uIGRvZXMuDQoNClNvcnJ5LiBJIGZvcmdvdCB0aGUgZHJpdmVyIG5vIGxvbmdlciBu
-ZWVkIHRvIHN1cHBvcnQgSVAgYWxpZ25tZW4uDQpJUCBhbGlnbm1lbnQgd2FzIG9yaWdpbmFsbHkg
-c3VwcG9ydGVkIGJlY2F1c2UgdGhlIE5DU0kgUEhZIGRyaXZlciB3b3VsZCBjcmFzaC4NCkkgaGF2
-ZSBmaXhlZCB0aGUgTkNTSSBQSFkgZHJpdmVyIGFuZCBoYXZlIHN1Ym1pdHRlZCBmaXhlZCBwYXRj
-aCB0byBVLWJvb3QuDQpBbmQgaXQgaGFzIGFjY2VwdGVkLiBUaGVyZWZvcmUsIEkgd2lsbCByZW1v
-dmUgdGhpcyBwYXJ0IGluIHRoZSBuZXh0IHZlcnNpb24uDQoNCj4gDQo+ID4gQEAgLTM5NCw2ICs0
-MTksMTAgQEAgc3RhdGljIGludCBmdGdtYWMxMDBfc3RhcnQoc3RydWN0IHVkZXZpY2UgKmRldikN
-Cj4gPiAgICAgICAgICAgICAgICAgRlRHTUFDMTAwX01BQ0NSX1JYX1JVTlQgfA0KPiA+ICAgICAg
-ICAgICAgICAgICBGVEdNQUMxMDBfTUFDQ1JfUlhfQlJPQURQS1Q7DQo+ID4NCj4gPiArICAgICAg
-IGlmIChwcml2LT5pc19hc3QyNzAwICYmIChwcml2LT5waHlkZXYtPmludGVyZmFjZSA9PQ0KPiBQ
-SFlfSU5URVJGQUNFX01PREVfUk1JSSB8fA0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHByaXYtPnBoeWRldi0+aW50ZXJmYWNlID09DQo+ID4gKyBQSFlfSU5URVJGQUNFX01P
-REVfTkNTSSkpDQo+IA0KPiBVc2UgZGV2aWNlX2lzX2NvbXBhdGlibGUoZGV2LCAiYXNwZWVkLGFz
-dDI3MDAtbWFjIikgaW5zdGVhZCBvZiBhZGRpbmcNCj4gaXNfYXN0MjcwMC4NCg0KQWdyZWUuIEkg
-d2lsbCBhZGp1c3QgdGhpcyBjb2RlIHVzaW5nIGRldmljZV9pc19jb21wYXRpYmxlKCkgaW4gdGhl
-IG5leHQgdmVyc2lvbi4NCg0KPiANCj4gPiArICAgICAgICAgICAgICAgbWFjY3IgfD0gRlRHTUFD
-MTAwX01BQ0NSX1JNSUlfRU5BQkxFOw0KPiA+ICsNCj4gPiAgICAgICAgIHdyaXRlbChtYWNjciwg
-JmZ0Z21hYzEwMC0+bWFjY3IpOw0KPiA+DQo+ID4gICAgICAgICByZXQgPSBwaHlfc3RhcnR1cChw
-aHlkZXYpOw0KPiA+IEBAIC00NDMsOSArNDcyLDExIEBAIHN0YXRpYyBpbnQgZnRnbWFjMTAwX3Jl
-Y3Yoc3RydWN0IHVkZXZpY2UgKmRldiwgaW50DQo+IGZsYWdzLCB1Y2hhciAqKnBhY2tldHApDQo+
-ID4gICAgICAgICB1bG9uZyBkZXNfc3RhcnQgPSAoKHVsb25nKWN1cnJfZGVzKSAmIH4oQVJDSF9E
-TUFfTUlOQUxJR04gLQ0KPiAxKTsNCj4gPiAgICAgICAgIHVsb25nIGRlc19lbmQgPSBkZXNfc3Rh
-cnQgKw0KPiA+ICAgICAgICAgICAgICAgICByb3VuZHVwKHNpemVvZigqY3Vycl9kZXMpLCBBUkNI
-X0RNQV9NSU5BTElHTik7DQo+ID4gLSAgICAgICB1bG9uZyBkYXRhX3N0YXJ0ID0gY3Vycl9kZXMt
-PnJ4ZGVzMzsNCj4gPiArICAgICAgIHVuaW9uIGZ0Z21hYzEwMF9kbWFfYWRkciBkYXRhX3N0YXJ0
-ID0geyAubG8gPSAwLCAuaGkgPSAwIH07DQo+IA0KPiBTYW1lIGhlcmUuDQoNCkkgd2lsbCByZW1v
-dmUgaXQgaW4gdGhlIG5leHQgdmVyc2lvbi4gVGhhbmtzIGZvciB5b3VyIGtpbmRseSByZW1pbmRl
-ci4NCg0KPiANCj4gPiAgICAgICAgIHVsb25nIGRhdGFfZW5kOw0KPiA+DQo+ID4gKyAgICAgICBk
-YXRhX3N0YXJ0LmhpID0gRklFTERfR0VUKEZUR01BQzEwMF9SWERFUzJfUlhCVUZfQkFEUl9ISSwN
-Cj4gY3Vycl9kZXMtPnJ4ZGVzMik7DQo+ID4gKyAgICAgICBkYXRhX3N0YXJ0LmxvID0gY3Vycl9k
-ZXMtPnJ4ZGVzMzsNCj4gPiAgICAgICAgIGludmFsaWRhdGVfZGNhY2hlX3JhbmdlKGRlc19zdGFy
-dCwgZGVzX2VuZCk7DQoNClRoYW5rcywNCkphY2t5DQo=
+=D0=B2=D1=82, 10 =D0=B2=D0=B5=D1=80. 2024=E2=80=AF=D1=80. =D0=BE 13:18 Mare=
+k Vasut <marex@denx.de> =D0=BF=D0=B8=D1=88=D0=B5:
+>
+> On 9/10/24 11:05 AM, Svyatoslav Ryhel wrote:
+> > =D0=BF=D0=BD, 9 =D0=B2=D0=B5=D1=80. 2024=E2=80=AF=D1=80. =D0=BE 19:13 M=
+arek Vasut <marex@denx.de> =D0=BF=D0=B8=D1=88=D0=B5:
+> >>
+> >> On 8/20/24 9:08 AM, Svyatoslav Ryhel wrote:
+> >>> =D0=BF=D0=BD, 19 =D1=81=D0=B5=D1=80=D0=BF. 2024=E2=80=AF=D1=80. =D0=
+=BE 20:27 Marek Vasut <marex@denx.de> =D0=BF=D0=B8=D1=88=D0=B5:
+> >>>>
+> >>>> On 8/1/24 2:28 AM, Marek Vasut wrote:
+> >>>>> On 7/29/24 1:55 PM, Svyatoslav Ryhel wrote:
+> >>>>>
+> >>>>> [...]
+> >>>>>
+> >>>>>>>>> What is the problem you observe on tegra 3 ?
+> >>>>>>>> i2c line fails since it probes in spl with your patch, but it do=
+es not
+> >>>>>>>> relocate and then probes once more after relocation. Probe fails=
+ along
+> >>>>>>>> with all devices on same line.
+> >>>>>>>
+> >>>>>>> Could it be that you either have to:
+> >>>>>>> - Add DM_I2C to tegra 3 SPL
+> >>>>>>> - Remove bootph-* from DT to remove the regulator node from SPL
+> >>>>>>> - /delete-property/ regulator-always-on; and /delete-property/
+> >>>>>>> regulator-boot-on; in -u-boot.dtsi to prevent the regulator from =
+being
+> >>>>>>> enabled in SPL ?
+> >>>>>>>
+> >>>>>> Obviously NO, you propose nonsense. Same dts is used for both stag=
+es.
+> >>>>>
+> >>>>> DT source yes, DT blob likely no.
+> >>>>>
+> >>>>>> And I have to add hack-ish stuff just because you wanna introduce =
+code
+> >>>>>> which causes known regressions.
+> >>>>>
+> >>>>> I am trying to understand what problem there is on tegra 3, but it =
+is
+> >>>>> still not clear to me.
+> >>>>>
+> >>>>> Is the problem somehow related to PMICs (?) being probed in SPL (?)
+> >>>>> because they have regulators (?) which are marked as regulator-alwa=
+ys-on
+> >>>>> ? If so, then this is correct behavior, and if this is not desired =
+in
+> >>>>> SPL, then you can remove this property from SPL DT in -u-boot.dtsi =
+using
+> >>>>> /delete-property/ .
+> >>>>>
+> >>>>> [...]
+> >>>>>
+> >>>>>> "We must not probe things as we go. There might be other
+> >>>>>> dependencies not yet bound. It may also take some time. This is no=
+t
+> >>>>>> following driver model design, sorry.
+> >>>>>>
+> >>>>>> So please think of a way to do this properly."
+> >>>>>
+> >>>>> What is this quote about ? Where is this from ?
+> >>>>
+> >>>> What is the problem with Tegra 3 and this patchset ?
+> >>>>
+> >>>> Can you please explain that so this patchset can move forward ?
+> >>>>
+> >>>
+> >>> with your changes
+> >>>
+> >>> U-Boot 2024.07-00696-ge217e2769db9-dirty (Aug 20 2024 - 09:55:29 +030=
+0)
+> >>>
+> >>> SoC: tegra114
+> >>> Model: NVIDIA Tegra Note 7
+> >>> Board: NVIDIA TegraTab
+> >>> DRAM:  1 GiB
+> >>> tegra_i2c_probe: called
+> >>> i2c: controller bus 0 at 7000d000, speed 0: tegra_i2c_probe: exit
+> >>> i2c_init_controller: speed=3D400000
+> >>> i2c_init_controller: CLK_DIV_STD_FAST_MODE setting =3D 25
+> >>> i2c_xfer: 2 messages
+> >>> i2c_xfer: chip=3D0x58, len=3D0x1
+> >>> i2c_write_data: chip=3D0x58, len=3D0x1
+> >>> write_data:  0x37
+> >>> pkt header 1 sent (0x10010)
+> >>> pkt header 2 sent (0x0)
+> >>> pkt header 3 sent (0x100b0)
+> >>> pkt data sent (0x37)
+> >>> tegra_i2c_write_data: Error (-1) !!!
+> >>> i2c_write_data(): rc=3D-1
+> >>> i2c_write: error sending
+> >>> read error from device: bd26f8e0 register: 0x37!
+> >>
+> >> This seems like the PMIC driver (palmas?) is trying to read register
+> >> 0x37 PGOOD and the I2C transfer fails . Why does the I2C transfer fail=
+ ?
+> >
+> > You  are asking me? Because your patches break some important setup seq=
+uence.
+> > PMIC model does not matter, all behave same way.
+>
+> These regulator patches do not modify anything related to I2C and I
+> don't observe this kind of behavior on iMX8M or STM32 platforms, so I
+> suspect this is something specific to tegra.
+>
+> >> You did mention something regarding I2C/PMIC driver probe timing, but =
+it
+> >> seems the I2C driver and PMIC drivers probe roughly around the same ti=
+me
+> >> in both pass and fail cases ?
+> >
+> > Yes, here I agree that they both probe and probe passes, but I assume
+> > timing of i2c call is critical and there may be some dependency which
+> > is not ready.
+>
+> My guess would be pinmux or clock, maybe the i2c controller is marked as
+> bootph-* in DT and its pinmux/clock is not? Maybe the i2c on tegra works
+> by sheer coincidence right now? Can you have a look?
+
+Power i2c line (one that hosts PMIC) is configured extremely early in
+SPL since it is needed for cpu and core voltage setup so even if, as
+you say, tegra works by sheer coincidence, specifically this i2c line
+should work non the less, since it has all its pre-requisites (clock
+and pinmux) configured on early stage.
+
+As I have told, I was not able to determine exact reason why this
+happens, it should not and yet it does. This is why I have abandoned
+my attempt to implement same changes you are currently proposing.
