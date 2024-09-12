@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67F63EED615
-	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 15:54:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 908CBEED615
+	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 15:54:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C18689098;
+	by phobos.denx.de (Postfix) with ESMTP id CFB328909F;
 	Thu, 12 Sep 2024 17:51:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="NiH4RH2m";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="AXm3MIyg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A075589080; Thu, 12 Sep 2024 17:51:25 +0200 (CEST)
+ id B7D9C89031; Thu, 12 Sep 2024 17:51:25 +0200 (CEST)
 Received: from nyc.source.kernel.org (nyc.source.kernel.org
  [IPv6:2604:1380:45d1:ec00::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 59B5C8902C
+ by phobos.denx.de (Postfix) with ESMTPS id 5D49F8902F
  for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 17:51:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+Oliver.Gaskell.analog.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 219F4A45706;
+ by nyc.source.kernel.org (Postfix) with ESMTP id 387E2A45707;
  Thu, 12 Sep 2024 15:51:08 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 13E53C4CED2;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 651DDC4CEC4;
  Thu, 12 Sep 2024 15:51:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1726156275;
- bh=hxID9cwGEcs8ZFto39g+IaDq720lCXdthpOYPRIKO8w=;
+ bh=X73+WqjO9yVOVt8RFyZ/ecPkW1YuQSkeYlsCWKR5jcc=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=NiH4RH2mOTFPQ/waOPiwVUmc+UHKoy1GDVfFeRr0E6RbaM660Guictf6D7QWdZYDK
- Xw6cbmFLQs3EZ35CI+bGXkWeDcz+N62JATxQ+L78aCig5GGGlbHr7p/QPwljKRspO5
- e9GLuTLDqshcBLWXwoAPxsM9FW6rmOcfindnL/sjRhhuV7No+WjuoS3h9EQoTMnUzB
- 6zTM8zA7lWsLKpJQATNzl68g1ib1eRA4kFRvZQqTU0Gr+kkL7l1ggCsQF75Hk9qgwS
- mO/ufIr0/NF6OJxsP7LHCiU0IY3rspH97QrkaXXgxzyMZeUAz381asFH0IUZ6nQmeu
- ozbXbrNXvClLQ==
+ b=AXm3MIygqPZN/6e7ZKPpzkhFfGy6aoRi6KuiQAqzgy1dqIFXJcNCiZn3GL4iTkXHh
+ uemee1yb5IE8nAKR/lrZMaKb4HSSJqR0gs8msPrv7kEFLwBuzhwilG09iE5jnyL9vI
+ lbmStgiBIwHS/RFIOnarXcEtYb/EUfOkfNVpgoor7/HElWzFnfnm7WyJfQcSD1f6tt
+ FKbvHjoVemwBoQBCg9Kd+mf1UYwro29w1tLPnDdVbEpYKNJpebmJmrIVgwqMmCW4xk
+ bVr342rClxIWgHyAM8xBmVfVcWXPrbPGdP7TzdWJVuPb/sBxjLnlx6h6TWs/FDeSqM
+ vJpUjQKentcYg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 0D943EED618;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 606A1EED615;
  Thu, 12 Sep 2024 15:51:15 +0000 (UTC)
 From: Oliver Gaskell via B4 Relay
  <devnull+Oliver.Gaskell.analog.com@kernel.org>
-Date: Thu, 12 Sep 2024 16:50:55 +0100
-Subject: [PATCH v2 14/20] arm: SC598-SOM-EZLITE initial support
+Date: Thu, 12 Sep 2024 16:51:00 +0100
+Subject: [PATCH v2 19/20] arm: SC589-MINI initial support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240912-sc5xx-upstreaming-patches-v2-14-1185a80df79e@analog.com>
+Message-Id: <20240912-sc5xx-upstreaming-patches-v2-19-1185a80df79e@analog.com>
 References: <20240912-sc5xx-upstreaming-patches-v2-0-1185a80df79e@analog.com>
 In-Reply-To: <20240912-sc5xx-upstreaming-patches-v2-0-1185a80df79e@analog.com>
 To: Tom Rini <trini@konsulko.com>, 
@@ -66,11 +66,11 @@ To: Tom Rini <trini@konsulko.com>,
 Cc: u-boot@lists.denx.de, adsp-linux@analog.com, 
  Oliver Gaskell <Oliver.Gaskell@analog.com>
 X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1726156261; l=3357;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1726156261; l=4052;
  i=Oliver.Gaskell@analog.com; s=20240821; h=from:subject:message-id;
- bh=LIbJ4xU5u0+JhTg9c+FZMUjiLTWrXEID7qo27uALXrE=;
- b=vZMQvrGZXLos/E4d23vStEbPtdXfhf2wNyL7FsahNeGgtBja/QOVxafKiuCpuKeMf8+thl+Tu
- gFQCNf7Sn0ID5Lc3jMYO0X7RqouG2PikJ+zuoj218oao/xlSBtH8B1/
+ bh=ihM3ZQ8lKDj6GL8LYz5QBzkMM74PpGGSwXAMXfrRJu4=;
+ b=nv6oxlnrXjISZwjOinD/5685LPiaREF3phWLlTW/uYzYjYGCmQInWrSLd66LHcEW4XIG/OTNV
+ 07M9xP9aMPJD1PuDjxrNjipE2IY7qzIIvzNudTmKOC5SCv7ZeGj6SVK
 X-Developer-Key: i=Oliver.Gaskell@analog.com; a=ed25519;
  pk=Icq9TxwFJ6FePHS28YbBWMvtZpFWxpPQLhLA9cNvZ/Y=
 X-Endpoint-Received: by B4 Relay for Oliver.Gaskell@analog.com/20240821
@@ -95,74 +95,83 @@ X-Virus-Status: Clean
 
 From: Oliver Gaskell <Oliver.Gaskell@analog.com>
 
-Adds support for Analog Devices' SC598-SOM-EZLITE board. Includes:
+Adds support for Analog Devices' SC589-MINI board. Includes:
 - Board specific configs in mach-sc5xx/Kconfig
 - Board-specific Kconfig and environment in board/adi/
 
 Signed-off-by: Oliver Gaskell <Oliver.Gaskell@analog.com>
 ---
- arch/arm/mach-sc5xx/Kconfig                     |   6 ++
- board/adi/sc598-som-ezlite/Kconfig              | 100 ++++++++++++++++++++++++
- board/adi/sc598-som-ezlite/sc598-som-ezlite.env |  13 +++
- 3 files changed, 119 insertions(+)
+ Kconfig                             |   2 +-
+ arch/arm/mach-sc5xx/Kconfig         |   5 ++
+ board/adi/sc589-mini/Kconfig        | 116 ++++++++++++++++++++++++++++++++++++
+ board/adi/sc589-mini/sc589-mini.env |  13 ++++
+ 4 files changed, 135 insertions(+), 1 deletion(-)
 
+diff --git a/Kconfig b/Kconfig
+index bdae1b01d3..6853219dd5 100644
+--- a/Kconfig
++++ b/Kconfig
+@@ -648,7 +648,7 @@ config TEXT_BASE
+ 	default 0x96000000 if ARCH_SC5XX && SC59X_64
+ 	default 0xB2200000 if ARCH_SC5XX && SC59X
+ 	default 0x89200000 if ARCH_SC5XX && TARGET_SC584_EZKIT
+-	default 0xC2200000 if ARCH_SC5XX && TARGET_SC589_EZKIT
++	default 0xC2200000 if ARCH_SC5XX && (TARGET_SC589_EZKIT || TARGET_SC589_MINI)
+ 	hex "Text Base"
+ 	help
+ 	  The address in memory that U-Boot will be copied and executed from
 diff --git a/arch/arm/mach-sc5xx/Kconfig b/arch/arm/mach-sc5xx/Kconfig
-index 4e587eb0b3..e3d3a4c89e 100644
+index 408b943fd6..6f8ea453b0 100644
 --- a/arch/arm/mach-sc5xx/Kconfig
 +++ b/arch/arm/mach-sc5xx/Kconfig
-@@ -54,6 +54,11 @@ if SC59X_64
- choice
- 	prompt "SC59x 64-bit board select"
+@@ -59,6 +59,10 @@ config TARGET_SC584_EZKIT
+ 	prompt "SC584-EZKIT"
+ 	select ADI_USE_DDR2
  
-+config TARGET_SC598_SOM_EZLITE
++config TARGET_SC589_MINI
 +	bool
-+	prompt "SC598-SOM with SOMCRR-EZLITE"
-+	select ADI_CARRIER_SOMCRR_EZLITE
++	prompt "SC589-MINI"
 +
- config TARGET_SC598_SOM_EZKIT
+ config TARGET_SC589_EZKIT
  	bool
- 	prompt "SC598-SOM with SOMCRR-EZKIT"
-@@ -503,5 +508,6 @@ config PINCTRL_ADI
- 	default y
- 
- source "board/adi/sc598-som-ezkit/Kconfig"
-+source "board/adi/sc598-som-ezlite/Kconfig"
+ 	prompt "SC589-EZKIT"
+@@ -549,6 +553,7 @@ source "board/adi/sc598-som-ezlite/Kconfig"
+ source "board/adi/sc594-som-ezkit/Kconfig"
+ source "board/adi/sc594-som-ezlite/Kconfig"
+ source "board/adi/sc589-ezkit/Kconfig"
++source "board/adi/sc589-mini/Kconfig"
+ source "board/adi/sc584-ezkit/Kconfig"
  
  endif
-diff --git a/board/adi/sc598-som-ezlite/Kconfig b/board/adi/sc598-som-ezlite/Kconfig
+diff --git a/board/adi/sc589-mini/Kconfig b/board/adi/sc589-mini/Kconfig
 new file mode 100644
-index 0000000000..3312316ebd
+index 0000000000..8f723f30dd
 --- /dev/null
-+++ b/board/adi/sc598-som-ezlite/Kconfig
-@@ -0,0 +1,100 @@
++++ b/board/adi/sc589-mini/Kconfig
+@@ -0,0 +1,116 @@
 +# SPDX-License-Identifier: GPL-2.0-or-later
 +#
 +# (C) Copyright 2024 - Analog Devices, Inc.
 +
-+if TARGET_SC598_SOM_EZLITE
++if TARGET_SC589_MINI
 +
 +config LDR_CPU
-+	default "ADSP-SC598-0.0"
++	default	"ADSP-SC589-0.1"
 +
 +config SYS_BOARD
-+	default "sc598-som-ezlite"
++	default "sc589-mini"
 +
 +config SYS_CONFIG_NAME
-+	default "sc598-som"
++	default "sc589"
 +
 +config DEFAULT_DEVICE_TREE
-+	default "sc598-som-ezlite"
++	default "sc589-mini"
 +
 +config ADI_IMAGE
 +	default "minimal"
 +
 +config CUSTOM_SYS_INIT_SP_ADDR
-+	default 0x96000000
-+
-+# SPL
-+
-+config SPL_OF_LIBFDT_ASSUME_MASK
-+	default 0x0
++	default 0xC203f000
 +
 +# SPI Flash
 +
@@ -173,73 +182,94 @@ index 0000000000..3312316ebd
 +	default 1
 +
 +config SF_DEFAULT_SPEED
-+	default 10000000
++	default 5000000
 +
-+# Clock Configs
++# Clocks
 +
 +config CGU0_DF_DIV
 +	default 0
 +
 +config CGU0_VCO_MULT
-+	default 80
++	default 18
 +
 +config CGU0_CCLK_DIV
-+	default 2
++	default 1
 +
 +config CGU0_SCLK_DIV
-+	default 4
++	default 2
 +
 +config CGU0_SCLK0_DIV
-+	default 4
++	default 2
 +
 +config CGU0_SCLK1_DIV
 +	default 2
 +
 +config CGU0_DCLK_DIV
-+	default 3
++	default 1
 +
 +config CGU0_OCLK_DIV
-+	default 8
-+
-+config CGU0_DIV_S1SELEX
-+	default 6
++	default 3
 +
 +config CGU1_VCO_MULT
-+	default 72
++	default 5
 +
 +config CGU1_DF_DIV
 +	default 0
 +
 +config CGU1_CCLK_DIV
-+	default 16
++	default 1
 +
 +config CGU1_SCLK_DIV
-+	default 8
++	default 2
 +
 +config CGU1_SCLK0_DIV
-+	default 4
++	default 2
 +
 +config CGU1_SCLK1_DIV
 +	default 2
 +
 +config CGU1_DCLK_DIV
-+	default 18
++	default 2
 +
 +config CGU1_OCLK_DIV
-+	default 16
++	default 3
 +
-+config CGU1_DIV_S0SELEX
-+	default 36
++config CDU0_CLKO0
++	default 1
 +
-+config CGU1_DIV_S1SELEX
-+	default 90
++config CDU0_CLKO1
++	default 1
++
++config CDU0_CLKO2
++	default 1
++
++config CDU0_CLKO3
++	default 1
++
++config CDU0_CLKO4
++	default 1
++
++config CDU0_CLKO5
++	default 1
++
++config CDU0_CLKO6
++	default 1
++
++config CDU0_CLKO7
++	default 5
++
++config CDU0_CLKO8
++	default 1
++
++config CDU0_CLKO9
++	default 1
 +
 +endif
-diff --git a/board/adi/sc598-som-ezlite/sc598-som-ezlite.env b/board/adi/sc598-som-ezlite/sc598-som-ezlite.env
+diff --git a/board/adi/sc589-mini/sc589-mini.env b/board/adi/sc589-mini/sc589-mini.env
 new file mode 100644
-index 0000000000..036c9ae759
+index 0000000000..0f3f0bd28e
 --- /dev/null
-+++ b/board/adi/sc598-som-ezlite/sc598-som-ezlite.env
++++ b/board/adi/sc589-mini/sc589-mini.env
 @@ -0,0 +1,13 @@
 +/* SPDX-License-Identifier: GPL-2.0-or-later+ */
 +
@@ -249,11 +279,11 @@ index 0000000000..036c9ae759
 +
 +#include <env/adi/adi_boot.env>
 +
-+adi_stage2_offset=0x40000
-+adi_image_offset=0x01a0000
-+adi_rfs_offset=0x1020000
-+loadaddr=0x90000000
-+jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc598-som-ezlite.jffs2
++adi_stage2_offset=0x20000
++adi_image_offset=0xE0000
++adi_rfs_offset=0x8E0000
++loadaddr=0xC3000000
++jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc589-mini.jffs2
 
 -- 
 2.34.1
