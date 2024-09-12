@@ -4,66 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7006EE6456
-	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 07:06:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A267EEE6454
+	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 07:11:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E1C188D7E;
-	Thu, 12 Sep 2024 09:06:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 1B50B88E0D;
+	Thu, 12 Sep 2024 09:11:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1726124773;
-	bh=Uf7V9I9SkZOKShpijQIEuofKE5mgr+tbVop+5dfYSsc=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=iFNA32xBjJZOYVHXiS6Nxc+CLokUUKCurvpIkFxFjUs3gk8tTI9D1CqY97o1tHL9W
-	 jWm8PufFFv81ILlzjY+1fvDB1/MaCOvWChaODgrCNlNq/ddNVvPoo7G6Nntd2xIg8g
-	 6eOU00apU2sb9Dgz+qQBFvgwFxipUZD2QMmOsfQ9Fh7D2b91SffchTVM53eu6d9LQP
-	 IoV7CXsIVjFJLUpBbrSP1LIoC4XIlyeX4eq8i5McCfS+w6vqHoJ6q3pR0bopV9C+7C
-	 2b5Po4lnmyJjPdNzF9N+x1ir8FeX0wRist3PgVPbQrGnU/TTs8j4/VIyM+p3pIbqNA
-	 GSduLqndUMAtQ==
-Received: from wsk (85-222-111-42.dynamic.chello.pl [85.222.111.42])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="NMZKzNpD";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 6E31C88E78; Thu, 12 Sep 2024 09:11:17 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: lukma@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id A981888D09;
- Thu, 12 Sep 2024 09:06:11 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1726124772;
- bh=Uf7V9I9SkZOKShpijQIEuofKE5mgr+tbVop+5dfYSsc=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=XRqC/HC0Q1hzVaVe6bV2eJBXgXkJgdD+iI6B/fQehm5ZN8Snx/mTIRm1GHGE8DX+8
- SJ7qigezAmbQScxSv0wo0OTrzbFfvvCBS/RfF5FbnAm1RHWnAzea6/YpC48TAp2lKv
- jpCK1jKz3WnkZpMD1XPtVMfpmmvQP2X9sKTa3QwQohR+TkcbgtRj94IAfAiMby67mH
- O0HTPrJZWaoXrcVF+sQoQr/qrsDvyEMFyIGSjrnif4/SpumcFgPfDjXXvpIuR0pJ/H
- 9p6g70Pz52CkB3xz2M1eiQndynX7TE7e6wavPAy0wKxcvZRbqk/OPQGyTYv7qUsS/r
- SHjbqV3l3qHfw==
-Date: Thu, 12 Sep 2024 09:06:10 +0200
-From: Lukasz Majewski <lukma@denx.de>
-To: Simon Glass <sjg@chromium.org>
-Cc: Adam Ford <aford173@gmail.com>, Fabio Estevam <festevam@gmail.com>,
- Mamta Shukla <mamta.shukla@leica-geosystems.com>, u-boot@lists.denx.de,
- Marek Vasut <marex@denx.de>
-Subject: Re: [Binman] Question regarding SPL symbol offsets generation
-Message-ID: <20240912090610.28dc8d00@wsk>
-In-Reply-To: <CAFLszTi4pC9TrkB6hNcC1Vn493MkmC_PCn7m+Ajg=0Mrw_Ga9A@mail.gmail.com>
-References: <20240808110654.4215b129@wsk>
- <CAOMZO5A74MigLO0qkeXi04=7M70jaiEgk9zdFBjUV74vuZDP0g@mail.gmail.com>
- <20240815221421.61f64a17@wsk>
- <CAOMZO5B-fkLQsQx205mxXQdmk3ij6Hxx4ErM84DtEtBg3mYa7Q@mail.gmail.com>
- <CAFLszTggpR9aaDAH_Mx_zDNnKAb7r_O+sdyyVVG_xULqkrWnzg@mail.gmail.com>
- <20240828100452.2143873d@wsk>
- <CAHCN7xLY4FxB4HZLcE0pEZsx7V=dhVokh2Wcrn2Jjf+B+SLCJg@mail.gmail.com>
- <20240905155402.486a7110@wsk>
- <CAFLszTh65OkyXnG3L7XTJFK69EYdj4DZwYGxizu4877n-mCw-w@mail.gmail.com>
- <20240906095459.5565fe29@wsk>
- <CAFLszTi4pC9TrkB6hNcC1Vn493MkmC_PCn7m+Ajg=0Mrw_Ga9A@mail.gmail.com>
-Organization: denx.de
-X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+ by phobos.denx.de (Postfix) with ESMTPS id 4BF4E88E04
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 09:11:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=salutedevices.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ddrokosov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk02.sberdevices.ru (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id C6638120012;
+ Thu, 12 Sep 2024 10:10:54 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru C6638120012
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1726125054;
+ bh=dHY3HMM7ZEdU1d+ZUD+VCQZ2HCWXkJgc/eMn7VVO53E=;
+ h=Date:From:To:Subject:Message-ID:MIME-Version:Content-Type:From;
+ b=NMZKzNpDVPsbwvIzEdpuSxI/cwFSVeCaI9HlXy7B4ssVJQfurn9zPRBBKKdLbqyWL
+ 5NRQN4blpyJYt0U1MWql7g4LZNRSDEZKmdoGPmrzWzo28zZCE130Qgx3Vx6UBIZYRb
+ WDTZyX+4skYFsgStpO/AUUkvuy5MD+NX0qcwoGUlO4UNlHKA71YIBrTflP/pN3SrDZ
+ n1g1J3iD9XVpXwa5B9uswqtxr2X6n2gd4H+gBJBUPVaropG1hsNJtp6NDGYswFVF+H
+ 3ZtGhYQhbhPrC3z1gOxaCb0ncrip9NFaIQcZHVKK6SIk+aCVlfpS8NslyuC6bnv6VB
+ JIO0HBiPEkWwA==
+Received: from smtp.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
+ [172.16.192.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Thu, 12 Sep 2024 10:10:54 +0300 (MSK)
+Date: Thu, 12 Sep 2024 10:10:53 +0300
+From: Dmitry Rokosov <ddrokosov@salutedevices.com>
+To: <igor.opaniuk@gmail.com>, <mkorpershoek@baylibre.com>, <sjg@chromium.org>, 
+ <semen.protsenko@linaro.org>, <trini@konsulko.com>,
+ <colin.mcallister@garmin.com>, <4.shket@gmail.com>,
+ <avromanov@salutedevices.com>
+CC: <u-boot@lists.denx.de>, <kernel@salutedevices.com>, <rockosov@gmail.com>
+Subject: Re: [PATCH v2 0/6] android_ab: introduce bcb ab_dump command and
+ provide several bcb fixes
+Message-ID: <20240912071053.4cquqz5fcbhg6yzc@CAB-WSD-L081021>
+References: <20240911214945.15873-1-ddrokosov@salutedevices.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/D8WOX.jFxNkig3dsg_.hIWO";
- protocol="application/pgp-signature"; micalg=pgp-sha512
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20240911214945.15873-1-ddrokosov@salutedevices.com>
+User-Agent: NeoMutt/20220415
+X-Originating-IP: [176.99.198.29]
+X-ClientProxiedBy: p-i-exch-a-m1.sberdevices.ru (172.24.196.116) To
+ p-i-exch-a-m1.sberdevices.ru (172.24.196.116)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 187699 [Sep 12 2024]
+X-KSMG-AntiSpam-Version: 6.1.1.5
+X-KSMG-AntiSpam-Envelope-From: ddrokosov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 32 0.3.32
+ 766319f57b3d5e49f2c79a76e7d7087b621090df, {Tracking_uf_ne_domains},
+ {Track_E25351}, {Tracking_from_domain_doesnt_match_to}, github.com:7.1.1;
+ lore.kernel.org:7.1.1; salutedevices.com:7.1.1; 127.0.0.199:7.1.2;
+ smtp.sberdevices.ru:7.1.1,5.0.1;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1, FromAlignment: s
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean, bases: 2024/09/12 05:48:00
+X-KSMG-LinksScanning: Clean, bases: 2024/09/12 05:48:00
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2024/09/12 04:05:00 #26557625
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,160 +102,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---Sig_/D8WOX.jFxNkig3dsg_.hIWO
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+There are Pipeline results. One test was failed. I suppose it's not
+related to my patch series:
 
-Hi Simon,
+https://github.com/u-boot/u-boot/pull/625/checks?check_run_id=30029925059
 
-> Hi ,
->=20
-> On Fri, 6 Sept 2024 at 01:55, Lukasz Majewski <lukma@denx.de> wrote:
-> >
-> > Hi Simon,
-> > =20
-> > > Hi Lukasz,
-> > >
-> > > On Thu, 5 Sept 2024 at 07:54, Lukasz Majewski <lukma@denx.de>
-> > > wrote: =20
-> > > >
-> > > > Hi Adam,
-> > > > =20
-> > > > > On Wed, Aug 28, 2024 at 3:04=E2=80=AFAM Lukasz Majewski
-> > > > > <lukma@denx.de> wrote: =20
-> > > > > >
-> > > > > > Hi Simon,
-> > > > > > =20
-> > > > > > > Hi,
-> > > > > > >
-> > > > > > > On Tue, 27 Aug 2024 at 12:47, Fabio Estevam
-> > > > > > > <festevam@gmail.com> wrote: =20
-> > > > > > > >
-> > > > > > > > Hi Lukasz,
-> > > > > > > >
-> > > > > > > > On Thu, Aug 15, 2024 at 5:14=E2=80=AFPM Lukasz Majewski
-> > > > > > > > <lukma@denx.de> wrote: =20
-> > > > > > > > > Unfortunately not - this change is only for properly
-> > > > > > > > > setting start address of the u-boot.
-> > > > > > > > >
-> > > > > > > > > The _real_ problem here is the symbol placement
-> > > > > > > > > generated by binman when we try to define the image
-> > > > > > > > > as a single one.
-> > > > > > > > >
-> > > > > > > > > Moreover, this change follows other boards with imx8mm
-> > > > > > > > > processor - ./configs/imx8mm_beacon_fspi_defconfig to
-> > > > > > > > > be specific.
-> > > > > > > > >
-> > > > > > > > > The "fix" (for which I'd been now probably opt) for
-> > > > > > > > > this issue would be to generate two images with
-> > > > > > > > > binman - one for u-boot-spl-ddr.bin and the final
-> > > > > > > > > flash.bin with the former one included (as it was
-> > > > > > > > > before SHA1:
-> > > > > > > > > 37e50627efacd8dae18b564e9d8886a033e181bc) =20
-> > > > > > > >
-> > > > > > > > Is QSPI boot broken on i.MX8MM?
-> > > > > > > >
-> > > > > > > > I am adding Adam and Mamta who have tested QSPI booting
-> > > > > > > > on imx8mm_beacon and imx8mm_evk, respectively. =20
-> > > > > > >
-> > > > > > > Note also that I sent a series[1] which allows the
-> > > > > > > symbols-base to be adjusted, if that helps. =20
-> > > > > >
-> > > > > > I've seen them - but not yet tested.
-> > > > > >
-> > > > > > Thanks Simon for the patch series. =20
-> > > > >
-> > > > > Is it still broken with this patch series?  I have been
-> > > > > traveling and haven't had much time to test. =20
-> > > >
-> > > > Yes, I can confirm that it is still broken.
-> > > >
-> > > > I've applied:
-> > > > https://patchwork.ozlabs.org/project/uboot/cover/20240826191143.426=
-387-1-sjg@chromium.org/
-> > > >
-> > > > on top of mainline:
-> > > > SHA1: 1630ff26cc960439b5949b80cfc604a2c8aa47dd
-> > > >
-> > > > Adding symbols-base =3D <0>; to imx8mm-u-boot.dtsi did not help. =20
-> > >
-> > > Can you please point me to the tree? =20
-> >
-> > https://github.com/lmajewski/u-boot/commits/imx8mm-test-qspi-boot-binma=
-n-patches
-> > =20
-> > > I suspect that the symbols-base
-> > > is already 0, so setting it to 0 has no effect. I'm not sure
-> > > though,=20
-> >
-> > Ach... I see.
-> >
-> > Please correct me if I'm wrong, but isn't the "symbols-base" an
-> > absolute address?
-> >
-> > This is my impression from the descripion.
-> >
-> > However, in my case - I would need the "relative" modification -
-> > please see the required "hack":
-> > https://github.com/lmajewski/u-boot/commit/07c0057fcfd242fa791767aaf0ac=
-752d3d0545f7
-> > =20
->=20
-> From the mailing list it seems you found a solution?
+=================================== FAILURES ===================================
+_______________________ test_ut[ut_dm_dm_test_rtc_dual] ________________________
+test/py/tests/test_ut.py:590: in test_ut
+    assert output.endswith('Failures: 0')
+E   AssertionError: assert False
+E    +  where False = <built-in method endswith of str object at 0x7fb0835c50d0>('Failures: 0')
+E    +    where <built-in method endswith of str object at 0x7fb0835c50d0> = 'Test: dm_test_rtc_dual: rtc.c\r\r\nTest: dm_test_rtc_dual: rtc.c (flat tree)\r\r\ntest/dm/rtc.c:307, dm_test_rtc_dual...&now1, &cmp, false): Expected 0xffffffea (-22), got 0x0 (0)\r\r\nTest dm_test_rtc_dual failed 1 times\r\r\nFailures: 1'.endswith
+----------------------------- Captured stdout call -----------------------------
+=> ut dm dm_test_rtc_dual
 
-Nope, the "hack" is not for upstreaming...=20
+Test: dm_test_rtc_dual: rtc.c
 
-It just shows that some symbols were misplaced and shall be _properly_
-fixed by altering either imx8mm-u-boot.dtsi or binman itself.
+Test: dm_test_rtc_dual: rtc.c (flat tree)
 
->=20
-> >
-> > =20
-> > > Regards,
-> > > Simon =20
-> >
-> >
-> > Best regards,
-> >
-> > Lukasz Majewski
-> >
-> > --
-> >
-> > DENX Software Engineering GmbH,      Managing Director: Erika Unter
-> > HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell,
-> > Germany Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email:
-> > lukma@denx.de =20
->=20
-> Regards,
-> Simon
+test/dm/rtc.c:307, dm_test_rtc_dual(): -EINVAL == cmp_times(&now1, &cmp, false): Expected 0xffffffea (-22), got 0x0 (0)
 
+Test dm_test_rtc_dual failed 1 times
 
+Failures: 1
 
+=> 
+=================================== FAILURES ===================================
 
-Best regards,
+On Thu, Sep 12, 2024 at 12:49:08AM +0300, Dmitry Rokosov wrote:
+> The patch series include changes:
+>     - move ab_select_slot() documentation to @ notation
+>     - move ab_select command to bcb subcommands
+>     - introduce the ab_dump command to print the content of the BCB
+>       block; it's useful for debugging A/B logic on supported boards
+>     - fix the slot suffix format in the ABC block to align with official
+>       Android BCB specifications
+>     - add a test for the ab_dump command to verify the accuracy of each
+>       field within the ABC data displayed, it's also useful for testing
+>       slot_suffix problem code paths
+> 
+> Changes v2 since v1 at [1]:
+>     - move ab_select_slot() documentation to @ notation
+>     - move ab_select command to bcb subcommands per Simon and Mattijs
+>       suggestions
+>     - redesign ab_dump as bcb subcommand
+>     - use spaces instead of tabs in the ab_dump command output
+>     - print hex values in the lowercase
+>     - add RvB tags
+> 
+> Links:
+>     [1] https://lore.kernel.org/all/20240725194716.32232-1-ddrokosov@salutedevices.com/
+> 
+> Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
+> 
+> Dmitry Rokosov (6):
+>   include/android_ab: move ab_select_slot() documentation to @ notation
+>   treewide: bcb: move ab_select command to bcb subcommands
+>   cmd: bcb: change strcmp() usage style in the do_bcb_ab_select()
+>   cmd: bcb: introduce 'ab_dump' command to print BCB block content
+>   common: android_ab: fix slot suffix for abc block
+>   test/py: introduce test for ab_dump command
+> 
+>  MAINTAINERS                               |   1 -
+>  boot/android_ab.c                         | 116 ++++++++++++++++++----
+>  cmd/Kconfig                               |  15 +--
+>  cmd/Makefile                              |   1 -
+>  cmd/ab_select.c                           |  66 ------------
+>  cmd/bcb.c                                 | 108 ++++++++++++++++++--
+>  configs/am57xx_hs_evm_usb_defconfig       |   1 -
+>  configs/khadas-vim3_android_ab_defconfig  |   1 -
+>  configs/khadas-vim3l_android_ab_defconfig |   1 -
+>  configs/sandbox64_defconfig               |   4 +-
+>  configs/sandbox_defconfig                 |   4 +-
+>  doc/android/ab.rst                        |  12 +--
+>  include/android_ab.h                      |  17 +++-
+>  include/configs/khadas-vim3_android.h     |   2 +-
+>  include/configs/khadas-vim3l_android.h    |   2 +-
+>  include/configs/meson64_android.h         |   4 +-
+>  include/configs/ti_omap5_common.h         |   4 +-
+>  test/py/tests/test_android/test_ab.py     |  31 +++++-
+>  18 files changed, 251 insertions(+), 139 deletions(-)
+>  delete mode 100644 cmd/ab_select.c
+> 
+> -- 
+> 2.43.0
+> 
 
-Lukasz Majewski
-
---
-
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
-
---Sig_/D8WOX.jFxNkig3dsg_.hIWO
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAmbikuIACgkQAR8vZIA0
-zr25dggAg7BxhfJMOdIA5lCHxK3AesDhHYaGG2ydV1+pX2QUdd4v0n1DFLdI3Kod
-oONHKEUf2SiPji2u+YKmKJ5W8tUiyZdue3yg5l9bxQk1qrdULxmDhMVP1HWYKSgd
-Ihh5trlrpIjlL21GqOGzaIMKCMog2UM1tir76HDPJvfIAbeucKlOcUjBzDY4J5DF
-87x0h/iwSIKwQdZ17uEu6+JDQIW6fTIX9UwGMerH6yQQFPCFMJtLH2qH2saZi10b
-lOPx+/PToAv/j4IiMEfrbqC6kXC5hfkS+FRIukEfd24Dbmn5zFz0jOBXy+NSauc0
-1K5tLmVRewhfKHTT1o8J5SIE4+KJFQ==
-=CYYN
------END PGP SIGNATURE-----
-
---Sig_/D8WOX.jFxNkig3dsg_.hIWO--
+-- 
+Thank you,
+Dmitry
