@@ -4,77 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE6E2EE57F6
-	for <u-boot@archiver.kernel.org>; Wed, 11 Sep 2024 23:27:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41310EE57F9
+	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 00:58:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CBB7F886B1;
-	Thu, 12 Sep 2024 01:27:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8AE0E88C8F;
+	Thu, 12 Sep 2024 02:58:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="m49nTw5t";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Z3NJoWS2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A09AE886B1; Thu, 12 Sep 2024 01:27:36 +0200 (CEST)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
+ id 2432988CE8; Thu, 12 Sep 2024 02:58:28 +0200 (CEST)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B51F288009
- for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 01:27:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 04B0B88A43
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 02:58:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-5365aa568ceso430963e87.0
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 16:27:34 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6c34c2a7dc7so2316706d6.3
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 17:58:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1726097254; x=1726702054; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cDnjg6ckfHzPwb1Mk5iKmJtcd/3dCg6JiI6TwH9SsTo=;
- b=m49nTw5tm4OTvyGgvhnz2NtQzny8wKiYMb4F3/WMv6w673kmULQdCwdOksdRJ2nrOj
- 0QWgv7sVvLT0592cVe2OkAxikVuwqZcDjZlwaT9983Z/0Y5y5KJ74e3/tFtbLy7CoEUg
- uJKf2k0L/JdBOOFjJpFmpAI4Vj59EO62ndfzHCibCJ+KHcdASMXN8HZBF4azOEkhioiL
- dmaZkHRDMoC9q1ea+yZE/ZTzlS7gNhKUjI7Mwo3aw3Mg6OKiwEMMgvbjJyW9epjwAbST
- pLPb6h6qwzWuEHxyHbTMV8odfdGZEm/6k1UQ41Zpo1XAXoUWan0Ap1mU82qLVJ7SoghG
- DDpA==
+ d=chromium.org; s=google; t=1726102705; x=1726707505; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=IYfLwzB9pbpPERlMGyYvjTlmrA54ojrpO4UcrVsc9+0=;
+ b=Z3NJoWS2q7mfv47iLVWn0GO2Y+3Pg+8hYeNPWJV3HQzDCCoII24fVMBOBM+N48AVZ4
+ xoqtrkR0kOaHhBPbENRN3bojSYXBpOlcyXUI3MGH2D4se204M2/YYBPe1XgoDaOFd4mB
+ ZiaJvbYdFYuz4qbiG23mkWeHjnIxtKJfsp2W0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726097254; x=1726702054;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=cDnjg6ckfHzPwb1Mk5iKmJtcd/3dCg6JiI6TwH9SsTo=;
- b=Ty7Wf/+ezG/51vPp8z5d1baRaSMCg7EN9JWPxQNe4TrTv/mBXqgWdkHT5v8S8crJFR
- SDMTLblVBlEXzKsxdCxhHkJFWkaQUy3qvpVijuZQHsHj+4MiyvqOjtqXXKFMQLWRLogA
- 3KcEhvqQUv3Kakistg6jfIgvokM+Hf+txe/tdEVtXtQYMKsmZ5fS2NSnnwV2j6NTdVl7
- bg2tK6ny5vlgB3rPFNJ3qHnIcyRfWv73FGLSAPjq8JEbczHecglcIyBemblRqRy9/+wp
- cbHT3gobGUMcXsjr60lRlLiralEOYenaBy6wGgUCsWsDFTREAO/jwrutAfXp3DHd1JS2
- 10Dw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWu4oYjiOUi4I/WyOyu+RHfi1Z4x0kIJRilwwoRr/TWjmdb3cyBVJqEWnVKFH5krtwHZdWgk3M=@lists.denx.de
-X-Gm-Message-State: AOJu0YyPOb26MLfBtTlW2qOhzYM4fToGZyPJvIoFgDWpdHoUh6TUmj0u
- simJk8gwE2PCZes6BrxzTZcMZi/Q+YmTVPrBHgesKWwlMZOztHC4fLCMgTCveOAg9zxA2cTI7CQ
- DwF9+GRVzJQ04uidaXSmTQneaSc8=
-X-Google-Smtp-Source: AGHT+IGUuOUyN/tOHxrUogrbTR9Oppx2AuUuvn7KarRWKBJj68zzuB8MBLxRUUfJPK8mOx5CvjuOSyRbuMbM9L1EWKc=
-X-Received: by 2002:a05:6512:3c9f:b0:535:681d:34b0 with SMTP id
- 2adb3069b0e04-53678fe6a7emr752640e87.47.1726097253590; Wed, 11 Sep 2024
- 16:27:33 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1726102705; x=1726707505;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=IYfLwzB9pbpPERlMGyYvjTlmrA54ojrpO4UcrVsc9+0=;
+ b=Bji6yth/MfqvOqDh0X3X9rXzDEJk3bljmHsRIY7rVJ56ZYA/xck3b6ZAQti8fvqc9U
+ lCr9kJhvBQXvnys0uiGirZooDd+JUxbC/chsvBmlYkSIVKlpAX+M0qpLTcKhdfQFo+Oj
+ uTjlkDTIf/7Rq5jkIC6J/cWoNt3LKTztM5LMEzE43R3k/qTQsnRd/z7Kvf0GjOPLNIl5
+ /l6KNMfGBXUHTyexgRrMjrzHGJTCL5LXzM7/J5dwBpuTgSa8YrXNtYY5MaZYh4TRiYVD
+ VvHpWEBXqQbN9IOq8pPB85ypnmZVD/1Wuunm4bE7dO9RUs8GVpgT/GzFh1cK4mBW34/s
+ phPg==
+X-Gm-Message-State: AOJu0YycRU015H1cHgUQ42rfZjm5ZmzUdNG8fJegF0g/oSgxYfz/Pws6
+ Uf+e6SHTsSAAl2JOJwQjtVLnmRV+IPMVtA5gTn6lRA0BJfoW/sz9VNuQ+GcR4jJxVJDbZjNXAVT
+ RIHXwBqKEOmk8nZzrALed2i5MCqQ6UnbhSf/O
+X-Google-Smtp-Source: AGHT+IGQp/Ban+rdHLmuoE1GIKm8Sly780cNVcFpP4Ad6YIX3uOmlTEiYJ19EoNDoFtvgF9EEWFfnCG2f5yCswDGPgc=
+X-Received: by 2002:a05:6214:53c1:b0:6c3:5e2f:b43b with SMTP id
+ 6a1803df08f44-6c573537ea7mr20554736d6.25.1726102704873; Wed, 11 Sep 2024
+ 17:58:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240910091359.102121-1-miquel.raynal@bootlin.com>
-In-Reply-To: <20240910091359.102121-1-miquel.raynal@bootlin.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 11 Sep 2024 20:27:22 -0300
-Message-ID: <CAOMZO5Brpa547b-8NnSX0CKNBeAC1fxQTk=bTqi4p5mmr=qGfA@mail.gmail.com>
-Subject: Re: [PATCH] pwm: imx: Don't drop the enable bit once set
-To: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Ian Ray <ian.ray@gehealthcare.com>
+References: <20240911062511.494855-1-patrick.rudolph@9elements.com>
+ <20240911062511.494855-2-patrick.rudolph@9elements.com>
+In-Reply-To: <20240911062511.494855-2-patrick.rudolph@9elements.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 11 Sep 2024 18:58:14 -0600
+Message-ID: <CAFLszThbkZ74j1CWghM+hBovhABsFvs5XJEYh_JZTNg6+RgWFQ@mail.gmail.com>
+Subject: Re: [PATCH v3 01/30] acpi: x86: Move SPCR and DBG2 into common code
+To: Patrick Rudolph <patrick.rudolph@9elements.com>
+Cc: u-boot@lists.denx.de, Maximilian Brune <maximilian.brune@9elements.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,14 +83,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Sep 10, 2024 at 6:51=E2=80=AFAM Miquel Raynal <miquel.raynal@bootli=
-n.com> wrote:
+On Wed, 11 Sept 2024 at 00:25, Patrick Rudolph
+<patrick.rudolph@9elements.com> wrote:
 >
-> Changing the duty-cycle should not blindly override (and clear) the
-> enable (EN) bit if it has already been set. For instance, a PWM
-> backlight can be enabled and set to a specific intensity using two
-> operations. The order of these operations should not matter.
+> From: Maximilian Brune <maximilian.brune@9elements.com>
 >
-> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+> This moves the SPCR and DBG2 table generation into common code, so that
+> they can be used by architectures other than x86.
+>
+> Signed-off-by: Maximilian Brune <maximilian.brune@9elements.com>
+> Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Bin Meng <bmeng.cn@gmail.com>
+> ---
+> Changelog v2:
+> - Do not add new features, just move code and make it compile on 64bit.
+>
+> ---
+>  arch/x86/include/asm/acpi_table.h |  11 --
+>  arch/x86/lib/acpi_table.c         | 174 ----------------------------
+>  include/acpi/acpi_table.h         |  11 ++
+>  lib/acpi/acpi_table.c             | 184 ++++++++++++++++++++++++++++++
+>  4 files changed, 195 insertions(+), 185 deletions(-)
 
-Applied to u-boot-imx/next, thanks.
+Reviewed-by: Simon Glass <sjg@chromium.org>
