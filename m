@@ -4,49 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 383B7EE57C7
-	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 06:39:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F169DEE6451
+	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 06:52:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B921D88E1B;
-	Thu, 12 Sep 2024 08:39:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id 5B78388D9A;
+	Thu, 12 Sep 2024 08:52:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id D071588E5D; Thu, 12 Sep 2024 08:39:36 +0200 (CEST)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F77788AA4
- for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 08:39:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
-Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 48C6dQFQ094040
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Thu, 12 Sep 2024 14:39:26 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 12 Sep
- 2024 14:39:27 +0800
-Date: Thu, 12 Sep 2024 14:39:24 +0800
-From: Leo Liang <ycliang@andestech.com>
-To: <trini@konsulko.com>, <u-boot@lists.denx.de>
-CC: <ycliang@andestech.com>, <rick@andestech.com>
-Subject: [PULL] u-boot-riscv/next
-Message-ID: <ZuKMnMooFpwVVhy7@swlinux02>
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="MYvQ+EMw";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id BED8888D9F; Thu, 12 Sep 2024 08:52:39 +0200 (CEST)
+Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
+ [IPv6:2607:f8b0:4864:20::b30])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DE5B88B67
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 08:52:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=9elements.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
+Received: by mail-yb1-xb30.google.com with SMTP id
+ 3f1490d57ef6-e026a2238d8so608875276.0
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 23:52:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=9elements.com; s=google; t=1726123956; x=1726728756; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=hLkaK81iYIb9QbaQN9iKtEvGU7CisYacIxRKhgfyrlY=;
+ b=MYvQ+EMwBVgB76KNW2ratFgFRQih0nB2VLC/CVT3Y/nfaVGfGseT1BD9BmWcZhacfC
+ HvW5P1v1Nq9tz7PYZ4YIzhTnTfy/6wgjIKH19gHt90tFaAZjxK0Xb38JCJ2kxgM8X/3g
+ 6pup/GieAgFI9bjuaxJOBW1xrLf+0enpJmCvA+OBgMxtn1ev7RzFL0SFgVxsZcc7+7QZ
+ Y8WUSDrQr9vtwvDEB15GOa5G/Y5AZAZCHoyp9mG05FgAOG5OV2sNoFz7uCYuSRIPZ46A
+ Zk/0rvU4NJorKdeIAasblrlGqqVyZTOnSQu2WXTqzQqIa4L3kUDwzCTeiphP/eN5+zJ5
+ BgUQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1726123956; x=1726728756;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=hLkaK81iYIb9QbaQN9iKtEvGU7CisYacIxRKhgfyrlY=;
+ b=k0j7E7zuTADOMaTEORDkz5OiLvX7MioaHgZjyZ6Cfn91Zs3G1Kdu4bwMIyrzRXAIr/
+ ZSRREzZUxvtBJHkUkpNv1G22EtfG7vMB8SjcmfanybcIjvBZ4Mp+313bdoi12u2N8JwE
+ TN+aBQ0cy9bTwI6je++LFhP1RjB5ZD25Em5EmSvR2n/DIZaElytnyEiojtb0qUxE6EdD
+ GJUz7rn7M5c38/tvNp7LGp8q1uNq2GLNAK1b2c2u+XpF0ihUl+Z9BEuuaz9Z8eFn3j+t
+ zrjeaspZPsJcHo832E59uLS2sERCfujEu01zp17YGJcbzq9PeuCzLNn68pSGdyeaYncn
+ em+Q==
+X-Gm-Message-State: AOJu0Yz2akCpCQCOYp2NNnWaVsVVguzGMfb4buMj8tr8+evM9xu6xgxj
+ /f0nz4zYIvJytvNbqJt/W88WSlx3Sh9X2JAj86O9MAlqN4Rh7/nFhKJVY50LcqZ+iZnzL1FY/41
+ uQMsl7k8uCXcBbpRXzzx+iWbBljakKT7hIbsX1A==
+X-Google-Smtp-Source: AGHT+IE35bmn18N00hx7rFjKW30hUoh0ihgQXRO90TFwIR1WEYAfXyzLCcRLwfMKmqJQgXBekgI4jFhRlOUljN09S8E=
+X-Received: by 2002:a05:6902:cc1:b0:e1b:dc38:1a8c with SMTP id
+ 3f1490d57ef6-e1d9dc3cb25mr1371935276.43.1726123956429; Wed, 11 Sep 2024
+ 23:52:36 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
-X-Originating-IP: [10.0.15.183]
-X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
- ATCPCS34.andestech.com (10.0.1.134)
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 48C6dQFQ094040
+References: <20240911062511.494855-1-patrick.rudolph@9elements.com>
+ <20240911062511.494855-20-patrick.rudolph@9elements.com>
+ <CAFLszTj90Xm50hNCC0S3wn7nJyXp4R2JoMMg1+sCUabjJGhJTQ@mail.gmail.com>
+In-Reply-To: <CAFLszTj90Xm50hNCC0S3wn7nJyXp4R2JoMMg1+sCUabjJGhJTQ@mail.gmail.com>
+From: Patrick Rudolph <patrick.rudolph@9elements.com>
+Date: Thu, 12 Sep 2024 08:52:25 +0200
+Message-ID: <CALNFmy02rq76r6PJ6De1pavvAFOfUvB8XjY8Vydepcoi=G0Whw@mail.gmail.com>
+Subject: Re: [PATCH v3 19/30] arm: gic-v3-its: Rename objects
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, linux-kernel@vger.kernel.org, 
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,135 +90,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Thu, Sep 12, 2024 at 2:59=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
+e:
+>
+> Hi Patrick,
+>
+> On Wed, 11 Sept 2024 at 00:29, Patrick Rudolph
+> <patrick.rudolph@9elements.com> wrote:
+> >
+> > The code accesses the gic-v3 node, but not the gic-v3-its node,
+> > thus rename the objects to clarify which node it operates on.
+> >
+> > The following commit will make use of the gic-v3-its node for real.
+> >
+> > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+> > ---
+> >  arch/arm/lib/gic-v3-its.c | 10 +++++-----
+> >  1 file changed, 5 insertions(+), 5 deletions(-)
+>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+>
+> But how many interrupt controllers are there? Would
+> uclass_first_device_err(UCLASS_IRQ) work?
+On most GICv2 compatible SBCs there's just one.
+With GICv3+ you can have an additional GIC ITS as well, which would
+also use class UCLASS_IRQ.
+But on servers there even more than two...
 
-The following changes since commit 78d898eec080b02059c8dc09318b8761044fea85:
+I'd prefer the current code as it would work with the follow up commit
+that adds another
+UCLASS_IRQ driver.
 
-  Merge patch series "phycore-am62/4: Add more boot sources" (2024-09-10 14:56:12 -0600)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-riscv.git next
-
-for you to fetch changes up to 2db018d2ca5ebd7acc717f0b1959ee67fcd2b0a1:
-
-  configs: ibex-ast2700: Enable DRAM and timer driver (2024-09-11 20:35:04 +0800)
-
-CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot-riscv/-/pipelines/22315
-----------------------------------------------------------------
-- Aspeed: Add AST2700 board (Ibex RISC-V core) support
-	- Add timer, dram controller, network support
-- Sophgo: Add clock controller support for Milk-V Duo
-----------------------------------------------------------------
-Chia-Wei Wang (8):
-      riscv: Make A ISA extension selectable
-      riscv: Make stack size shift configurable
-      riscv: u-boot-spl.lds: Remove _image_binary_end alignment
-      riscv: Add AST2700 SoC initial platform support
-      timer: Add AST2700 IBEX timer support
-      board: ibex_ast2700: Add FMC header support
-      ram: ast2700: Add DRAM controller initialization
-      configs: ibex-ast2700: Enable DRAM and timer driver
-
-Jacky Chou (5):
-      net: ftgmac100: Fixed the cache coherency issues of rx memory
-      net: ftgmac100: Fixed NC-SI PHY device cannot get
-      net: ftgmac100: Modify desc. size to cache line
-      net: ftgmac100: Add Aspeed AST2700 support
-      driver: net: Add Aspeed AST2700 MDIO support
-
-Kongyang Liu (4):
-      dt-bindings: clk: import header for clock controller of sophgo CV1800B
-      clk: sophgo: cv1800b: Add clock controller driver for cv1800b SoC
-      configs: milkv_duo: Enable clock controller
-      riscv: dts: sophgo: Replace device clocks with real clocks.
-
- arch/riscv/Kconfig                                 |   12 +-
- arch/riscv/cpu/ast2700/Kconfig                     |    6 +
- arch/riscv/cpu/ast2700/Makefile                    |    1 +
- arch/riscv/cpu/ast2700/cpu.c                       |   23 +
- arch/riscv/cpu/u-boot-spl.lds                      |    2 -
- arch/riscv/dts/Makefile                            |    1 +
- arch/riscv/dts/ast2700-ibex.dts                    |   22 +
- arch/riscv/dts/ast2700-u-boot.dtsi                 |   40 +
- arch/riscv/dts/ast2700.dtsi                        |   76 +
- arch/riscv/dts/cv18xx.dtsi                         |   40 +-
- arch/riscv/include/asm/arch-ast2700/fmc_hdr.h      |   52 +
- arch/riscv/include/asm/arch-ast2700/scu.h          |  145 +
- arch/riscv/include/asm/arch-ast2700/sdram.h        |  137 +
- arch/riscv/include/asm/arch-ast2700/sli.h          |   82 +
- board/aspeed/ibex_ast2700/Kconfig                  |   21 +
- board/aspeed/ibex_ast2700/MAINTAINERS              |    7 +
- board/aspeed/ibex_ast2700/Makefile                 |    3 +
- board/aspeed/ibex_ast2700/fmc_hdr.c                |   64 +
- board/aspeed/ibex_ast2700/ibex_ast2700.c           |   85 +
- board/aspeed/ibex_ast2700/sli.c                    |   72 +
- configs/ibex-ast2700_defconfig                     |   94 +
- configs/milkv_duo_defconfig                        |    3 +-
- doc/board/aspeed/ibex-ast2700.rst                  |   26 +
- doc/board/aspeed/index.rst                         |    9 +
- doc/board/index.rst                                |    1 +
- drivers/clk/Kconfig                                |    1 +
- drivers/clk/Makefile                               |    1 +
- drivers/clk/sophgo/Kconfig                         |   14 +
- drivers/clk/sophgo/Makefile                        |    6 +
- drivers/clk/sophgo/clk-common.h                    |   74 +
- drivers/clk/sophgo/clk-cv1800b.c                   |  754 +++
- drivers/clk/sophgo/clk-cv1800b.h                   |  123 +
- drivers/clk/sophgo/clk-ip.c                        |  594 ++
- drivers/clk/sophgo/clk-ip.h                        |  288 +
- drivers/clk/sophgo/clk-pll.c                       |  275 +
- drivers/clk/sophgo/clk-pll.h                       |   74 +
- drivers/net/aspeed_mdio.c                          |    1 +
- drivers/net/ftgmac100.c                            |   89 +-
- drivers/net/ftgmac100.h                            |   17 +-
- drivers/ram/Makefile                               |    2 +-
- drivers/ram/aspeed/Kconfig                         |   27 +-
- drivers/ram/aspeed/Makefile                        |    1 +
- .../dwc_ddrphy_phyinit_ddr4-3200-nodimm-train2D.c  | 2700 ++++++++
- .../dwc_ddrphy_phyinit_ddr5-3200-nodimm-train2D.c  | 6930 ++++++++++++++++++++
- drivers/ram/aspeed/sdram_ast2700.c                 | 1036 +++
- drivers/timer/Kconfig                              |    6 +
- drivers/timer/Makefile                             |    1 +
- drivers/timer/ast_ibex_timer.c                     |   45 +
- include/configs/ibex_ast2700.h                     |   12 +
- include/dt-bindings/clock/sophgo,cv1800.h          |  176 +
- 50 files changed, 14220 insertions(+), 51 deletions(-)
- create mode 100644 arch/riscv/cpu/ast2700/Kconfig
- create mode 100644 arch/riscv/cpu/ast2700/Makefile
- create mode 100644 arch/riscv/cpu/ast2700/cpu.c
- create mode 100644 arch/riscv/dts/ast2700-ibex.dts
- create mode 100644 arch/riscv/dts/ast2700-u-boot.dtsi
- create mode 100644 arch/riscv/dts/ast2700.dtsi
- create mode 100644 arch/riscv/include/asm/arch-ast2700/fmc_hdr.h
- create mode 100644 arch/riscv/include/asm/arch-ast2700/scu.h
- create mode 100644 arch/riscv/include/asm/arch-ast2700/sdram.h
- create mode 100644 arch/riscv/include/asm/arch-ast2700/sli.h
- create mode 100644 board/aspeed/ibex_ast2700/Kconfig
- create mode 100644 board/aspeed/ibex_ast2700/MAINTAINERS
- create mode 100644 board/aspeed/ibex_ast2700/Makefile
- create mode 100644 board/aspeed/ibex_ast2700/fmc_hdr.c
- create mode 100644 board/aspeed/ibex_ast2700/ibex_ast2700.c
- create mode 100644 board/aspeed/ibex_ast2700/sli.c
- create mode 100644 configs/ibex-ast2700_defconfig
- create mode 100644 doc/board/aspeed/ibex-ast2700.rst
- create mode 100644 doc/board/aspeed/index.rst
- create mode 100644 drivers/clk/sophgo/Kconfig
- create mode 100644 drivers/clk/sophgo/Makefile
- create mode 100644 drivers/clk/sophgo/clk-common.h
- create mode 100644 drivers/clk/sophgo/clk-cv1800b.c
- create mode 100644 drivers/clk/sophgo/clk-cv1800b.h
- create mode 100644 drivers/clk/sophgo/clk-ip.c
- create mode 100644 drivers/clk/sophgo/clk-ip.h
- create mode 100644 drivers/clk/sophgo/clk-pll.c
- create mode 100644 drivers/clk/sophgo/clk-pll.h
- create mode 100644 drivers/ram/aspeed/dwc_ddrphy_phyinit_ddr4-3200-nodimm-train2D.c
- create mode 100644 drivers/ram/aspeed/dwc_ddrphy_phyinit_ddr5-3200-nodimm-train2D.c
- create mode 100644 drivers/ram/aspeed/sdram_ast2700.c
- create mode 100644 drivers/timer/ast_ibex_timer.c
- create mode 100644 include/configs/ibex_ast2700.h
- create mode 100644 include/dt-bindings/clock/sophgo,cv1800.h
-
-
-Best regards,
-Leo
+>
+> >
+> > diff --git a/arch/arm/lib/gic-v3-its.c b/arch/arm/lib/gic-v3-its.c
+> > index 2cc0a32f9d..22fa46a341 100644
+> > --- a/arch/arm/lib/gic-v3-its.c
+> > +++ b/arch/arm/lib/gic-v3-its.c
+> > @@ -35,10 +35,10 @@ static int gic_v3_its_get_gic_addr(struct gic_v3_it=
+s_priv *priv)
+> >         int ret;
+> >
+> >         ret =3D uclass_get_device_by_driver(UCLASS_IRQ,
+> > -                                         DM_DRIVER_GET(arm_gic_v3_its)=
+, &dev);
+> > +                                         DM_DRIVER_GET(arm_gic_v3), &d=
+ev);
+> >         if (ret) {
+> >                 pr_err("%s: failed to get %s irq device\n", __func__,
+> > -                      DM_DRIVER_GET(arm_gic_v3_its)->name);
+> > +                      DM_DRIVER_GET(arm_gic_v3)->name);
+> >                 return ret;
+> >         }
+> >
+> > @@ -158,13 +158,13 @@ int gic_lpi_tables_init(u64 base, u32 num_redist)
+> >         return 0;
+> >  }
+> >
+> > -static const struct udevice_id gic_v3_its_ids[] =3D {
+> > +static const struct udevice_id gic_v3_ids[] =3D {
+> >         { .compatible =3D "arm,gic-v3" },
+> >         {}
+> >  };
+> >
+> > -U_BOOT_DRIVER(arm_gic_v3_its) =3D {
+> > +U_BOOT_DRIVER(arm_gic_v3) =3D {
+> >         .name           =3D "gic-v3",
+> >         .id             =3D UCLASS_IRQ,
+> > -       .of_match       =3D gic_v3_its_ids,
+> > +       .of_match       =3D gic_v3_ids,
+> >  };
+> > --
+> > 2.46.0
+> >
+>
+> Regards,
+> Simon
