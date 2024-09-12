@@ -4,72 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFD0AEE57FB
-	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 01:04:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71E23EE57FB
+	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 01:04:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CEF8988E36;
-	Thu, 12 Sep 2024 03:01:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3367A88E0F;
+	Thu, 12 Sep 2024 03:01:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aiTTfYkr";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dAhoNqVY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E25B988E35; Thu, 12 Sep 2024 03:01:20 +0200 (CEST)
-Received: from mail-pg1-x536.google.com (mail-pg1-x536.google.com
- [IPv6:2607:f8b0:4864:20::536])
+ id C7B8188E04; Thu, 12 Sep 2024 03:01:22 +0200 (CEST)
+Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
+ [IPv6:2607:f8b0:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ACD1288DCF
- for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 03:01:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BBC388E0F
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 03:01:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x536.google.com with SMTP id
- 41be03b00d2f7-7cf5e179b68so298314a12.1
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 18:01:18 -0700 (PDT)
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-71781f42f75so294900b3a.1
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 18:01:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726102875; x=1726707675; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1726102879; x=1726707679; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=J2OC4Goc4SXwaOKVHCXQjvnrMZxN7RhutrTh1NKjbHM=;
- b=aiTTfYkrXbxW0nmwcdj1cP76u/mIK6RuCgHzpof+yxmLwpxJsbNEWaNSl/sU1du6ps
- 8Hk6ilCiaE3jCcAJYaJq8HQJfPYrRw0cQ/GsoyNz+qTluUfPra3r1r4APuUAEaR5FBZs
- IRWNnszbvzcsFBa05Nqdd4WlMr93TucPuJfEg=
+ bh=Gf5EQiCmriS8giBBP/T9/9IFh6MmSWA9BuRUM2f5VD8=;
+ b=dAhoNqVYB4aHDg43IQvr4z1DK7k/J1wgF1XCkt4TSZdPaDZD8yd9xfCPIR2OdYiKpa
+ GHas16EyaHElfaoop81FkTD8pJrRlfUX+LxcINYuWKa5pKdZ56JQX5+zqQ0/58fec9EQ
+ opuYMkaFBlEl0/br/PqKKQN5n6dHJSQfnP8bs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726102875; x=1726707675;
+ d=1e100.net; s=20230601; t=1726102879; x=1726707679;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=J2OC4Goc4SXwaOKVHCXQjvnrMZxN7RhutrTh1NKjbHM=;
- b=DnZicpQ+NWS2cobbXUUXfV7sX3MILOsrNkuGsGUjUOmtzfDVrB3uR/pepV80Fu3dSZ
- dkgyA9ry8obWzUnOZyJ3zmmmuaiVl7NcFqAAd0hg3M865DBifkbHZ+9lNZBUV/w4QYvl
- qc4LtOJnVUES4RGnhE6Y9jYXxKkikos1jAw19miinLOyCwSpCuqMsk0/n6QCXD5Q2E1+
- 3kj1+85r8egbbWGbYgKJaD+P7YxQlMGQxtqtIlNDWrxIvW2lpBsK+ibWS9c1wxP+vuEv
- 0rsu3P6qNYHr9QpWMwr7mkgfvzKlEey1+KRg+gzPuhE22yqbtU8tz0X79q9qxtMnGGBE
- c/Aw==
-X-Gm-Message-State: AOJu0Yw4pFjHhMo/JiYPHnxi3ftpmv5noWHmuIBMKS8Qz5cwcWcZSPHE
- 76HMGpKnWgoyp5ychon6fP5ttZoZMlHj1283XuBsI5PkA3wm7HK/052KjCUnTGIc5t7gbmFsaep
- W8OnSVUEDiN/E/yEKuYLpnBg/4PAhkF4sINr18u8ELX1XnhY=
-X-Google-Smtp-Source: AGHT+IFYS18tOVNq/lzbtcMUJHmFWjHnEyuQVNVlhkGwB7cdq/mRIAKYgkbaqeRjvDFf4f2aUZkdXisKJnTCD9jIcAc=
-X-Received: by 2002:a17:90b:1e05:b0:2c9:5a71:1500 with SMTP id
- 98e67ed59e1d1-2db9fb436femr1945238a91.0.1726102875561; Wed, 11 Sep 2024
- 18:01:15 -0700 (PDT)
+ bh=Gf5EQiCmriS8giBBP/T9/9IFh6MmSWA9BuRUM2f5VD8=;
+ b=IhwdY1/g7r+uKmy7ijKOpdTf0zciVmfkm+px2KiA5hFv0Yj+sojxhcHhUWdsEEz4xz
+ 8lxWc+aABCGBuvetIGO6BR/bB2qT77mxu5U9Jnyfit8v7qmBnbvvAgWcSxGFqM2J+Sue
+ AA8p8Rz2V4x7N12VHlhzbR4CRBBc8AU5zRsEo74eyj6/iYEqg652VuaJH8H1R1U+PPU7
+ d4SMqy4LVrzfO24gXd14LYuMdXIImQTT+UUtRVVeOc8d6etH+03Hi7GBTUh4uxUAF1Hv
+ sJwzfhZHvIKnlQcCpOnVUKqWUARChT3jycIGgFdeMJiW35uxCBF9oR4rukV8dMBOhAo1
+ 9Ppw==
+X-Gm-Message-State: AOJu0YyU/5dr6btHxvM7hB9J8SfEq0vlXUt41GZe+UDcTZ7mhdI74CKf
+ qfR+NrCAhZgavlq/IMCUFvQnks7H4KvxOcX7TdJa15kjLjFDIiAgLaK0pGudLXBQQ+PPFz1NMpr
+ A+eBIQu1JfFW0VFitrG88WDsorjZxUXAi+Wtj
+X-Google-Smtp-Source: AGHT+IEvXIuL2yhP5ER8fVkJrJHiW5Qcq2UCbHZCJ9RcknjbJ+tIZPSf0ytLHEf8SoqlZb6PRvW+JzlKZsqOF44FMZE=
+X-Received: by 2002:a05:6a00:4b16:b0:704:2563:5079 with SMTP id
+ d2e1a72fcca58-71926211ddemr1784956b3a.27.1726102878647; Wed, 11 Sep 2024
+ 18:01:18 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1726048404.git.jerome.forissier@linaro.org>
- <721993374cd63a2cddced7aff045fd0f23d9ecca.1726048404.git.jerome.forissier@linaro.org>
-In-Reply-To: <721993374cd63a2cddced7aff045fd0f23d9ecca.1726048404.git.jerome.forissier@linaro.org>
+ <b7c378d570e12b0d619e291953deb2b333b16966.1726048404.git.jerome.forissier@linaro.org>
+In-Reply-To: <b7c378d570e12b0d619e291953deb2b333b16966.1726048404.git.jerome.forissier@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 11 Sep 2024 19:01:01 -0600
-Message-ID: <CAFLszTio=nyY4NoDLNEa6v7n6HepBHKkJm1ioobTnHs2+wCOow@mail.gmail.com>
-Subject: Re: [PATCH v4 01/15] buildman/toolchain.py: do not set CROSS_COMPILE
- for sandbox
+Date: Wed, 11 Sep 2024 19:01:03 -0600
+Message-ID: <CAFLszTievnwczV9ULQNcgp=JAah0EQ3ng5_rYFJWLYhWZBRrOQ@mail.gmail.com>
+Subject: Re: [PATCH v4 05/15] net: fm: call dtsec_init_phy() only when it is
+ defined
 To: Jerome Forissier <jerome.forissier@linaro.org>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Brandon Maier <brandon.maier@collins.com>, 
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
+ Peter Robinson <pbrobinson@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,48 +87,52 @@ X-Virus-Status: Clean
 
 Hi Jerome,
 
-On Wed, 11 Sept 2024 at 03:58, Jerome Forissier
+On Wed, 11 Sept 2024 at 03:59, Jerome Forissier
 <jerome.forissier@linaro.org> wrote:
 >
-> When building for sandbox, self.cross is empty.
->
-> In MakeEnvironment(), CROSS_COMPILE is defined to be self.cross (with
-> or without a full path), optionally prefixed by the toolchain wrapper
-> defined in ~/.buildman. This is fine when self.cross is not empty, but
-> it doesn't make sense when it is:
-> - Either there is no wrapper and we end up with an empty CROSS_COMPILE
-> which is the same as not defining it (the host compiler will be used),
-> - Or there is a wrapper and CROSS_COMPILE will contain only the wrapper
-> which obviously is not a valid compiler, hence an error.
->
-> Test case:
->
->  $ sudo apt install ccache
->  $ grep -q toolchain-wrapper ~/.buildman || \
->      printf "[toolchain-wrapper]\nwrapper = ccache\n" >>~/.buildman
->  $ make mrproper
->  $ ./tools/buildman/buildman sandbox_noinst
->  $ ./tools/buildman/buildman sandbox_noinst
->  Building current source for 1 boards (1 thread, 24 jobs per thread)
->     sandbox:  +   sandbox_noinst
->  +arch/sandbox/lib/reloc_sandbox_efi.c:10:15: error: operator '==' has no left operand
->  +   10 | #if HOST_ARCH == HOST_ARCH_X86_64
->  +      |               ^~
-> [...]
->
-> The GetEnvArgs function is modified too, since the VAR_CROSS_COMPILE
-> case has the same issue.
->
-> In tools/buildman/test.py, testGetEnvArgs is extended and
-> testMakeEnvironment is added. They check the 'arm' and 'sandbox'
-> toolchains, with and without a wrapper.
+> dtsec_init_phy() is defined only with MII so add the proper conditional
+> in the caller code.
 >
 > Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 > ---
->  tools/buildman/test.py      | 46 +++++++++++++++++++++++++++++++++++++
->  tools/buildman/toolchain.py |  6 +++--
->  2 files changed, 50 insertions(+), 2 deletions(-)
+>  drivers/net/fm/eth.c | 6 +++++-
+>  1 file changed, 5 insertions(+), 1 deletion(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
-I did not expect to still get that same error now, but OK.
+>
+> diff --git a/drivers/net/fm/eth.c b/drivers/net/fm/eth.c
+> index 19f3f0fef07..63fe4b2d33c 100644
+> --- a/drivers/net/fm/eth.c
+> +++ b/drivers/net/fm/eth.c
+> @@ -26,7 +26,8 @@
+>
+>  #include "fm.h"
+>
+> -#if defined(CONFIG_MII) || defined(CONFIG_CMD_MII) && !defined(BITBANGMII)
+> +#if ((defined(CONFIG_MII) || defined(CONFIG_CMD_MII)) && \
+> +     !defined(CONFIG_BITBANGMII))
+>
+>  #define TBIANA_SETTINGS (TBIANA_ASYMMETRIC_PAUSE | TBIANA_SYMMETRIC_PAUSE | \
+>                          TBIANA_FULL_DUPLEX)
+> @@ -701,8 +702,11 @@ static int init_phy(struct fm_eth *fm_eth)
+>                 supported |= SUPPORTED_2500baseX_Full;
+>  #endif
+>
+> +#if (CONFIG_IS_ENABLED(MII) || CONFIG_IS_ENABLED(CMD_MII)) && \
+> +       !CONFIG_IS_ENABLED(BITBANGMII)
+>         if (fm_eth->type == FM_ETH_1G_E)
+>                 dtsec_init_phy(fm_eth);
+> +#endif
+
+Ugly! I wonder if we need a special Kconfig for this function?
+
+>
+>  #ifdef CONFIG_PHYLIB
+>  #ifdef CONFIG_DM_MDIO
+> --
+> 2.40.1
+>
+
+Regards,
+Simon
