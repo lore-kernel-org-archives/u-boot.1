@@ -4,55 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C73C0EED617
-	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 15:54:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 778B4EED617
+	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 15:54:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C4F138908B;
-	Thu, 12 Sep 2024 17:51:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 242CA89093;
+	Thu, 12 Sep 2024 17:51:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="CMejHZTX";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="b5ZDU81l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D2D789075; Thu, 12 Sep 2024 17:51:25 +0200 (CEST)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org
- [IPv6:2604:1380:45d1:ec00::3])
+ id 908BE89075; Thu, 12 Sep 2024 17:51:25 +0200 (CEST)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E0ACB8902B
+ by phobos.denx.de (Postfix) with ESMTPS id E944B89031
  for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 17:51:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+Oliver.Gaskell.analog.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id C62E5A45704;
- Thu, 12 Sep 2024 15:51:07 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 375CEC4CED1;
+ by nyc.source.kernel.org (Postfix) with ESMTP id 447CCA45708;
+ Thu, 12 Sep 2024 15:51:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 76A80C4CECC;
  Thu, 12 Sep 2024 15:51:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1726156275;
- bh=QjL840MjZmlFroZIMfcqgy+aUmpetyr/PPNPAZywnTk=;
+ bh=LvNz7mtk2d8GsJ1/dheJd0aRJgdmEDPZguEzo9i3Xa4=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=CMejHZTX6GNnFDZjXPjAVFo86O3N/mMgMvY7/OHGbvD34XTLswIkU6eu1C8/bjF3Q
- tQyej8wMtuZqPtkpadpTnAfNv9IGvRDzveFKgroHhujyn77Ex9e1MNP/13WjAuWw/J
- FP9ys/WMMDMDQOd9gbM/BoI7Iy2gLwGh0LK2LQo5QaFDLHtDATAnQGXKXuRCHZj3Bb
- 8LE5UD6bfQ1ogWjyrfX27pvjgzdznkV3HMojFAqf7NUZu+qs+qdsnd97ld4SeRWXRj
- N0WHeQ8ed1ZZOrsKg6/S4d1VIzmI8yHqg77vGW+IoGsedeJc2XODKR9TdqPxPo/xcM
- eMGZhn2WkavoQ==
+ b=b5ZDU81lnEmEv12dHAtAEXptxjY1y82EYxWLoOVvfNSQKK5nBJmMEeEGZLprbUpAX
+ XDlcLm000Nc/QB9iKmW5rlkN8J0EH1zOrS3PPov+4MGbRMB5B9h9A86pW2tSJVCh7N
+ 8+eBZAtG99oLaze2qrVdufKmS0Kqw6s4NwOIvSXnVt3ijNotIUue5jOsQMsmuCrA/b
+ JidGGqLJEy9U1rphu0o3T0YP4wa2zIPi7u2Hihyu7R5azf1vglZmE7FMtLR8BFg8NV
+ jhIWgv58FB0oz1FuwoFUZJZzE5Km+Rn1LW8oiljk4hiBfwTthxgMAHsypcOOO0TzF/
+ mLfaewty4lOhA==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 31125EED617;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 6FAD1EED618;
  Thu, 12 Sep 2024 15:51:15 +0000 (UTC)
 From: Oliver Gaskell via B4 Relay
  <devnull+Oliver.Gaskell.analog.com@kernel.org>
-Date: Thu, 12 Sep 2024 16:50:57 +0100
-Subject: [PATCH v2 16/20] arm: SC594-SOM-EZLITE initial support
+Date: Thu, 12 Sep 2024 16:51:01 +0100
+Subject: [PATCH v2 20/20] arm: SC573-EZKIT initial support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240912-sc5xx-upstreaming-patches-v2-16-1185a80df79e@analog.com>
+Message-Id: <20240912-sc5xx-upstreaming-patches-v2-20-1185a80df79e@analog.com>
 References: <20240912-sc5xx-upstreaming-patches-v2-0-1185a80df79e@analog.com>
 In-Reply-To: <20240912-sc5xx-upstreaming-patches-v2-0-1185a80df79e@analog.com>
 To: Tom Rini <trini@konsulko.com>, 
@@ -66,11 +65,11 @@ To: Tom Rini <trini@konsulko.com>,
 Cc: u-boot@lists.denx.de, adsp-linux@analog.com, 
  Oliver Gaskell <Oliver.Gaskell@analog.com>
 X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1726156261; l=4389;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1726156261; l=7536;
  i=Oliver.Gaskell@analog.com; s=20240821; h=from:subject:message-id;
- bh=/L8NMZm1pKklI8KZfDNeJIrU+vnx/Z5MLH1H53Arh/U=;
- b=S7EC4mG1vfzbH3/ozLxBuKDV5VsLUSN1JGgxyREbWq+NH79NBS6dmORWHnKnD+wv+aTVXQMwM
- UD6FtpUWkJEAb1BRDkMCNt5C86Un//ZibhSGzoq2g7mXJ9BkpNaK+1c
+ bh=qjQtLVVlQxUcOA2JnCboJVfD1xmRp3AG5KCmDv6yQCY=;
+ b=S1p9uNYVa875U8gGmquSyWGq4Ws2ZjFGKPEfnVO7QJJmkoEbPvh6qBT22Tdd8cgCsSt/X1GD8
+ SSzhntshOf7DM4NSFEaWDcSIeTnfXD9D1AY2oHwLmwT/Z90tq+cRYKB
 X-Developer-Key: i=Oliver.Gaskell@analog.com; a=ed25519;
  pk=Icq9TxwFJ6FePHS28YbBWMvtZpFWxpPQLhLA9cNvZ/Y=
 X-Endpoint-Received: by B4 Relay for Oliver.Gaskell@analog.com/20240821
@@ -95,75 +94,147 @@ X-Virus-Status: Clean
 
 From: Oliver Gaskell <Oliver.Gaskell@analog.com>
 
-Adds support for Analog Devices' SC594-SOM-EZLITE board. Includes:
-- Board specific configs in mach-sc5xx/Kconfig
+Adds support for Analog Devices' SC573-EZKIT board. Includes:
+- SoC specific configs in mach-sc5xx/Kconfig
+- Memory Map for SPL
+- Necessary board-specific init functions
 - Board-specific Kconfig and environment in board/adi/
+- Memory configuration
 
+Co-developed-by: Greg Malysa <greg.malysa@timesys.com>
+Signed-off-by: Greg Malysa <greg.malysa@timesys.com>
+Co-developed-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
 Signed-off-by: Oliver Gaskell <Oliver.Gaskell@analog.com>
 ---
- arch/arm/mach-sc5xx/Kconfig                     |   6 ++
- board/adi/sc594-som-ezlite/Kconfig              | 133 ++++++++++++++++++++++++
- board/adi/sc594-som-ezlite/sc594-som-ezlite.env |  13 +++
- common/spl/Kconfig                              |   1 +
- 4 files changed, 153 insertions(+)
+ Kconfig                               |   1 +
+ arch/arm/mach-sc5xx/Kconfig           |   9 +++
+ arch/arm/mach-sc5xx/Makefile          |   1 +
+ arch/arm/mach-sc5xx/sc57x-spl.c       |  26 ++++++++
+ board/adi/sc573-ezkit/Kconfig         | 116 ++++++++++++++++++++++++++++++++++
+ board/adi/sc573-ezkit/sc573-ezkit.env |  13 ++++
+ common/spl/Kconfig                    |   4 +-
+ include/configs/sc573-ezkit.h         |  18 ++++++
+ 8 files changed, 187 insertions(+), 1 deletion(-)
 
+diff --git a/Kconfig b/Kconfig
+index 6853219dd5..709271ef0b 100644
+--- a/Kconfig
++++ b/Kconfig
+@@ -649,6 +649,7 @@ config TEXT_BASE
+ 	default 0xB2200000 if ARCH_SC5XX && SC59X
+ 	default 0x89200000 if ARCH_SC5XX && TARGET_SC584_EZKIT
+ 	default 0xC2200000 if ARCH_SC5XX && (TARGET_SC589_EZKIT || TARGET_SC589_MINI)
++	default 0x82200000 if ARCH_SC5XX && SC57X
+ 	hex "Text Base"
+ 	help
+ 	  The address in memory that U-Boot will be copied and executed from
 diff --git a/arch/arm/mach-sc5xx/Kconfig b/arch/arm/mach-sc5xx/Kconfig
-index e93f214441..b57c21cf16 100644
+index 6f8ea453b0..30444f04fc 100644
 --- a/arch/arm/mach-sc5xx/Kconfig
 +++ b/arch/arm/mach-sc5xx/Kconfig
-@@ -54,6 +54,11 @@ if SC59X
- choice
- 	prompt "SC59x 32-bit board select"
+@@ -25,6 +25,7 @@ config SC57X
+ 	bool "SC57x series"
+ 	select COMMON_CLK_ADI_SC57X
+ 	select CPU_V7A
++	select TARGET_SC573_EZKIT
  
-+config TARGET_SC594_SOM_EZLITE
-+	bool
-+	prompt "SC594-SOM with SOMCRR-EZLITE"
-+	select ADI_CARRIER_SOMCRR_EZLITE
+ config SC58X
+ 	bool "SC58x series"
+@@ -49,6 +50,13 @@ config SC59X_64
+ 
+ endchoice
+ 
++if SC57X
 +
- config TARGET_SC594_SOM_EZKIT
- 	bool
- 	prompt "SC594-SOM with SOMCRR-EZKIT"
-@@ -524,5 +529,6 @@ config PINCTRL_ADI
- source "board/adi/sc598-som-ezkit/Kconfig"
- source "board/adi/sc598-som-ezlite/Kconfig"
- source "board/adi/sc594-som-ezkit/Kconfig"
-+source "board/adi/sc594-som-ezlite/Kconfig"
++config TARGET_SC573_EZKIT
++	bool "Support SC573-EZKIT"
++
++endif
++
+ if SC58X
+ 
+ choice
+@@ -555,5 +563,6 @@ source "board/adi/sc594-som-ezlite/Kconfig"
+ source "board/adi/sc589-ezkit/Kconfig"
+ source "board/adi/sc589-mini/Kconfig"
+ source "board/adi/sc584-ezkit/Kconfig"
++source "board/adi/sc573-ezkit/Kconfig"
  
  endif
-diff --git a/board/adi/sc594-som-ezlite/Kconfig b/board/adi/sc594-som-ezlite/Kconfig
+diff --git a/arch/arm/mach-sc5xx/Makefile b/arch/arm/mach-sc5xx/Makefile
+index 9a00a430b4..cac768ba56 100644
+--- a/arch/arm/mach-sc5xx/Makefile
++++ b/arch/arm/mach-sc5xx/Makefile
+@@ -11,6 +11,7 @@
+ obj-y += soc.o init/
+ 
+ obj-$(CONFIG_SC57X) += sc57x.o
++obj-$(CONFIG_SC57X) += sc57x-spl.o
+ obj-$(CONFIG_SC58X) += sc58x.o
+ obj-$(CONFIG_SC58X) += sc58x-spl.o
+ obj-$(CONFIG_SC59X) += sc59x.o
+diff --git a/arch/arm/mach-sc5xx/sc57x-spl.c b/arch/arm/mach-sc5xx/sc57x-spl.c
 new file mode 100644
-index 0000000000..70436955b6
+index 0000000000..28380b89b4
 --- /dev/null
-+++ b/board/adi/sc594-som-ezlite/Kconfig
-@@ -0,0 +1,133 @@
++++ b/arch/arm/mach-sc5xx/sc57x-spl.c
+@@ -0,0 +1,26 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * (C) Copyright 2024 - Analog Devices, Inc.
++ */
++
++#include <asm/arch-adi/sc5xx/spl.h>
++
++// Table 45-16 in SC573 HRM
++const struct adi_boot_args adi_rom_boot_args[] = {
++	// JTAG/no boot
++	[0] = {0, 0, 0},
++	// SPI master, used for qspi as well
++	[1] = {0x60020000, 0x00040000, 0x00010207},
++	// SPI slave
++	[2] = {0, 0, 0x00000212},
++	// UART slave
++	[3] = {0, 0, 0x00000013},
++	// Linkport slave
++	[4] = {0, 0, 0x00000014},
++	// reserved, no boot
++	[5] = {0, 0, 0},
++	// reserved, no boot
++	[6] = {0, 0, 0},
++	// reserved, also no boot
++	[7] = {0, 0, 0}
++};
+diff --git a/board/adi/sc573-ezkit/Kconfig b/board/adi/sc573-ezkit/Kconfig
+new file mode 100644
+index 0000000000..328563c129
+--- /dev/null
++++ b/board/adi/sc573-ezkit/Kconfig
+@@ -0,0 +1,116 @@
 +# SPDX-License-Identifier: GPL-2.0-or-later
 +#
 +# (C) Copyright 2024 - Analog Devices, Inc.
 +
-+if TARGET_SC594_SOM_EZLITE
-+
-+config LDR_CPU
-+	default "ADSP-SC594-0.0"
++if TARGET_SC573_EZKIT
 +
 +config SYS_BOARD
-+	default "sc594-som-ezlite"
++	default "sc573-ezkit"
 +
 +config SYS_CONFIG_NAME
-+	default "sc594-som"
++	default "sc573-ezkit"
++
++config LDR_CPU
++	default "ADSP-SC573-0.0"
 +
 +config DEFAULT_DEVICE_TREE
-+	default "sc594-som-ezlite"
++	default "sc573-ezkit"
 +
 +config ADI_IMAGE
-+	default "minimal"
++	default "tiny"
 +
 +config CUSTOM_SYS_INIT_SP_ADDR
 +	default 0x8203f000
-+
-+# SPL
-+
-+config SPL_OF_LIBFDT_ASSUME_MASK
-+	default 0x0
 +
 +# SPI Flash
 +
@@ -182,16 +253,16 @@ index 0000000000..70436955b6
 +	default 0
 +
 +config CGU0_VCO_MULT
-+	default 80
++	default 18
 +
 +config CGU0_CCLK_DIV
-+	default 2
++	default 1
 +
 +config CGU0_SCLK_DIV
-+	default 4
++	default 2
 +
 +config CGU0_SCLK0_DIV
-+	default 4
++	default 2
 +
 +config CGU0_SCLK1_DIV
 +	default 2
@@ -200,25 +271,22 @@ index 0000000000..70436955b6
 +	default 2
 +
 +config CGU0_OCLK_DIV
-+	default 16
-+
-+config CGU0_DIV_S1SELEX
-+	default 6
++	default 3
 +
 +config CGU1_VCO_MULT
-+	default 64
++	default 5
 +
 +config CGU1_DF_DIV
 +	default 0
 +
 +config CGU1_CCLK_DIV
-+	default 2
++	default 1
 +
 +config CGU1_SCLK_DIV
-+	default 4
++	default 2
 +
 +config CGU1_SCLK0_DIV
-+	default 4
++	default 2
 +
 +config CGU1_SCLK1_DIV
 +	default 2
@@ -227,10 +295,7 @@ index 0000000000..70436955b6
 +	default 2
 +
 +config CGU1_OCLK_DIV
-+	default 16
-+
-+config CGU1_DIV_S1SELEX
-+	default 6
++	default 3
 +
 +config CDU0_CLKO0
 +	default 1
@@ -242,10 +307,10 @@ index 0000000000..70436955b6
 +	default 1
 +
 +config CDU0_CLKO3
-+	default 3
++	default 1
 +
 +config CDU0_CLKO4
-+	default 3
++	default 1
 +
 +config CDU0_CLKO5
 +	default 1
@@ -254,26 +319,20 @@ index 0000000000..70436955b6
 +	default 1
 +
 +config CDU0_CLKO7
-+	default 1
++	default 5
 +
 +config CDU0_CLKO8
-+	default 3
++	default 1
 +
 +config CDU0_CLKO9
 +	default 1
 +
-+config CDU0_CLKO10
-+	default 1
-+
-+config CDU0_CLKO12
-+	default 1
-+
 +endif
-diff --git a/board/adi/sc594-som-ezlite/sc594-som-ezlite.env b/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
+diff --git a/board/adi/sc573-ezkit/sc573-ezkit.env b/board/adi/sc573-ezkit/sc573-ezkit.env
 new file mode 100644
-index 0000000000..152e1f14fd
+index 0000000000..26f7b6cb79
 --- /dev/null
-+++ b/board/adi/sc594-som-ezlite/sc594-som-ezlite.env
++++ b/board/adi/sc573-ezkit/sc573-ezkit.env
 @@ -0,0 +1,13 @@
 +/* SPDX-License-Identifier: GPL-2.0-or-later+ */
 +
@@ -283,23 +342,64 @@ index 0000000000..152e1f14fd
 +
 +#include <env/adi/adi_boot.env>
 +
-+adi_stage2_offset=0x40000
-+adi_image_offset=0x0120000
-+adi_rfs_offset=0x1020000
-+loadaddr=0xA2000000
-+jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc594-som-ezlite.jffs2
++adi_stage2_offset=0x20000
++adi_image_offset=0xE0000
++adi_rfs_offset=0x6E0000
++loadaddr=0x83000000
++jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc573-ezkit.jffs2
 diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index d46984b3ea..e723ff1996 100644
+index a7378bea8f..6dc0b6444c 100644
 --- a/common/spl/Kconfig
 +++ b/common/spl/Kconfig
-@@ -1131,6 +1131,7 @@ config SPL_PAYLOAD_ARGS_ADDR
- 	default 0x88000000 if ARCH_OMAP2PLUS
- 	default 0x99000000 if ARCH_SC5XX && SC59X_64
- 	default 0xA0000000 if ARCH_SC5XX && TARGET_SC594_SOM_EZKIT
-+	default 0x80000000 if ARCH_SC5XX && TARGET_SC594_SOM_EZLITE
+@@ -87,7 +87,7 @@ config SPL_MAX_SIZE
+ 	default 0x10000 if ASPEED_AST2600
+ 	default 0x27000 if IMX8MM && SPL_TEXT_BASE = 0x7E1000
+ 	default 0x30000 if ARCH_SC5XX && (SC59X_64 || SC59X)
+-	default 0x20000 if ARCH_SC5XX && SC58X
++	default 0x20000 if ARCH_SC5XX && (SC58X || SC57X)
+ 	default 0x0
  	help
- 	  Address in memory where the 'args' file, typically a device tree
- 	  will be loaded in to memory.
+ 	  Maximum size of the SPL image (text, data, rodata, and linker lists
+@@ -126,6 +126,7 @@ config SPL_BSS_START_ADDR
+ 	default 0x1000 if ARCH_ZYNQMP
+ 	default 0x200B0000 if ARCH_SC5XX && (SC59X_64 || SC59X)
+ 	default 0x20080000 if ARCH_SC5XX && SC58X
++	default 0x200A0000 if ARCH_SC5XX && SC57X
+ 
+ choice
+ 	prompt "Enforce SPL BSS limit"
+@@ -398,6 +399,7 @@ config SPL_STACK
+ 	default 0x8000 if ARCH_SUNXI
+ 	default 0x200E4000 if ARCH_SC5XX && (SC59X_64 || SC59X)
+ 	default 0x200B0000 if ARCH_SC5XX && SC58X
++	default 0x200D0000 if ARCH_SC5XX && SC57X
+ 	help
+ 	  Address of the start of the stack SPL will use before SDRAM is
+ 	  initialized.
+diff --git a/include/configs/sc573-ezkit.h b/include/configs/sc573-ezkit.h
+new file mode 100644
+index 0000000000..42e42f8150
+--- /dev/null
++++ b/include/configs/sc573-ezkit.h
+@@ -0,0 +1,18 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++/*
++ * (C) Copyright 2024 - Analog Devices, Inc.
++ */
++
++#ifndef __CONFIG_SC573_EZKIT_H
++#define __CONFIG_SC573_EZKIT_H
++
++/*
++ * Memory Settings
++ */
++#define MEM_MT41K128M16JT
++#define MEM_DMC0
++
++#define CFG_SYS_SDRAM_BASE	0x82000000
++#define CFG_SYS_SDRAM_SIZE	0xe000000
++
++#endif
 
 -- 
 2.34.1
