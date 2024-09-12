@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D3DCEED615
-	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 15:28:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E51AFEED617
+	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 15:51:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0E0A88E79;
-	Thu, 12 Sep 2024 17:28:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id AA7AF88FCC;
+	Thu, 12 Sep 2024 17:51:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="bp0l0jCK";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="BTeXTPz/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BBDF888FC4; Thu, 12 Sep 2024 17:28:06 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ id 88A0889032; Thu, 12 Sep 2024 17:51:17 +0200 (CEST)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org
+ [IPv6:2604:1380:45d1:ec00::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C52DA88DAF
- for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 17:28:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1726154883; x=1726759683; i=xypron.glpk@gmx.de;
- bh=r1d4HWJxjSE9D+9XkmdHdOKQtX3jtFIxMa5dQZeYR+8=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=bp0l0jCKwMqOOaMvoGqsQypUQ/hdMLUKEe8L+lMB44K8ykeyK6Pj3h54ofEW7rNh
- ei9XwrxdDYHdtcwiQMCukWsNa8ex4Nn//0myVTLGzpKkPRQlwFcKuyh0JEUHzB/dI
- wxhF7EgHLDeZ5u/gO9J1b0zoalfho1dYzqgC+pzHG4eR1N38YRw1aKcR3yMkpdHjk
- UUhhuYk/g8EvgqeaG9TJBokZg0+JcbvhRy5ERBr8yWYEcitDgzvjC4AS3hcJzMYk/
- uZYjsDSN9Iz5yJ1ZVlxw/o0ORxpGpJLbCU2kMO5H2pWac3FTgGZbq5+PLpd22H9JS
- lS9oSZicXjK0FSI5Bw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1M42nS-1soljn0kYC-00BMV9; Thu, 12
- Sep 2024 17:28:03 +0200
-Message-ID: <6a90f50f-ab7d-469c-9ebc-104d5e72bb6e@gmx.de>
-Date: Thu, 12 Sep 2024 17:28:02 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 79B0288FCC
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 17:51:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=devnull+Oliver.Gaskell.analog.com@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id D21D1A456F7;
+ Thu, 12 Sep 2024 15:51:06 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 2649AC4CECC;
+ Thu, 12 Sep 2024 15:51:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1726156274;
+ bh=02A7iy96DAfX3eVIUNI2NawTgoXcrWarIM3sLO+wDe8=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=BTeXTPz/xOvEn6TRWpboRwTT729uug+m9TgKs/4Q9x4IW82syFu1jNaRRCfo6ZRev
+ 80WQvcH+aSrnXxKOssiuSyAxJS7AEuExjUSZtmkqXv6GvFM3+NYTr+nimSaYS0+1QF
+ YnUBfJ8hbAtmwTlG7eVOvfV0NtJmgpk7/LdR2cv0NR4xjZJm5KUFCvmWHQS7p736k7
+ 35o7nWyLJPsWJLJdQhxrRlbZkXJgps7E7xoMhTRvWkFWtC0zrp1GUbRzKzq2iW//so
+ HH4z72e4MNQw8wor8gvYQ64Rb7xggkJBy4UWJ3yy3rk7Pzdk4W3lkev8rrKTwehiwo
+ i9D9ixANf3exQ==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 1E7E7EED619;
+ Thu, 12 Sep 2024 15:51:14 +0000 (UTC)
+From: Oliver Gaskell via B4 Relay
+ <devnull+Oliver.Gaskell.analog.com@kernel.org>
+Date: Thu, 12 Sep 2024 16:50:44 +0100
+Subject: [PATCH v2 03/20] arm: dts: Support SC589-MINI
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 09/14] bootstd: Add debugging for efi bootmeth
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-References: <20240902011825.746421-1-sjg@chromium.org>
- <20240902011825.746421-10-sjg@chromium.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240902011825.746421-10-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:JG9JSbyoGBIfnjsIWDb2nulgxGmRgfnH12z28KpSJc0HeFDoRNX
- d8CLiWJ834Ni/wHPvjyd+IpAdJA0PuyXjp+XYxi470FmDnfPd3wSD1tMEInsuQdaggvkxz6
- RiFwnP1NGtZoBQpBnNPzpbru1OpRfTGwLpEEbwlCBeV0Ecf/iWSjWRJxa+t/4FZQANUzqD9
- lxENQib6Wvm24XUb/YHNQ==
-UI-OutboundReport: notjunk:1;M01:P0:ZYNZGVgKsZY=;cnmtIooDM1y7Ycb5zxfRERAF7zD
- 1kRF/UGwjYMrItTweitbqxSpZQKqLotZArJjtbQk1FLycAJTBJD+PQavV3bZpEuDYA4TyCQTB
- tJ1nguc4/my+j9WTSLZY5UWGc4bgjIkY3PW680B1ypn52953xxyoQB0fKe7MjDrODyejhQU+M
- Ytg/o5pNOl5DFAleqJHKkhZCIFhvKPRAozBtU8E/o2239rb4P0QBoMPTn0GLhGo0DFhKtj4ou
- k2P4F9NVL4A8LdAt3y7wVNEivnYggGDP5FLV0MPGlRbD8iZklCMiuIPCKRYSVNagWIUEiub/f
- 1yY1TvrNE/KiaLRgxNdYXilPUsVHpWlvCEOrScoTyBGKkt1F9908cVsmWxUOBjaFfINX3x3gb
- EcICQDxBRV/4q9n15MIJKtM6+L3a812GcLX/BNKZjdOUryigjgD4rEsSlSJ4zGDB44LtNblRJ
- B8O6P2dEJmBfVtvgyudW7OCLxG7EVCQsKlXIKQDZU3Zrmtdg1DiH0wG3LtY0mVaZwC0oyB7WF
- Qhy2+Mip8L1nmtC/Om0WaWDgf+eyL/i1+9Lj1ULHWsvVtFxcLiXOCcHrAn95U+04W5BdOccRf
- PgfGMSrZbmKVpmA6/2Tbdi47mbvnc5TUFCPVvzOxLJ1/mPETMWsx8uixlc/kfC1Ss/N+frjI0
- zwXp4+zbGksyMTRSkhETmEt7kjezltp10TrsJ7weo8K3ptA4VR1Bhd5ZtuG6S+8iJiAP47CtX
- NihdRbEN8CdI38a4qGB5kLQmMporzBdSjsDhSkmJr6l7KOP0wzyJ1DXGzSxw65IPv/gR/3p7Z
- on9oTYj5lNpxRvVgtnLrZ3nA==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20240912-sc5xx-upstreaming-patches-v2-3-1185a80df79e@analog.com>
+References: <20240912-sc5xx-upstreaming-patches-v2-0-1185a80df79e@analog.com>
+In-Reply-To: <20240912-sc5xx-upstreaming-patches-v2-0-1185a80df79e@analog.com>
+To: Tom Rini <trini@konsulko.com>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
+ Greg Malysa <greg.malysa@timesys.com>, 
+ Ian Roberts <ian.roberts@timesys.com>, 
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
+ Utsav Agarwal <utsav.agarwal@analog.com>, 
+ Arturs Artamonovs <arturs.artamonovs@analog.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
+Cc: u-boot@lists.denx.de, adsp-linux@analog.com, 
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, 
+ Trevor Woerner <twoerner@gmail.com>
+X-Mailer: b4 0.14.1
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1726156261; l=1671;
+ i=Oliver.Gaskell@analog.com; s=20240821; h=from:subject:message-id;
+ bh=chBpoLo8eU0R4EP25W0vYqSAlJIWVVYySfAhkW2lJjw=;
+ b=Qrwtdv7vlOx3agIZpb3dPRd98bgOnaNecj/MB9dQVdHDJt5dUcL0EPOTRNJN1cpyhfA7XLNMt
+ 9Z9r6ROu9JNCp3arxs/BbYMHFKonaK5+VyDl5rpeb0GF7Tos50gxjU6
+X-Developer-Key: i=Oliver.Gaskell@analog.com; a=ed25519;
+ pk=Icq9TxwFJ6FePHS28YbBWMvtZpFWxpPQLhLA9cNvZ/Y=
+X-Endpoint-Received: by B4 Relay for Oliver.Gaskell@analog.com/20240821
+ with auth_id=197
+X-Original-From: Oliver Gaskell <Oliver.Gaskell@analog.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,83 +88,63 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Oliver.Gaskell@analog.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 02.09.24 03:18, Simon Glass wrote:
-> Add a little debugging so we can see what is happening.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
->
-> (no changes since v1)
->
->   boot/bootmeth_efi.c | 11 +++++++++--
->   1 file changed, 9 insertions(+), 2 deletions(-)
->
-> diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
-> index 6b41c0999f1..4d641d042ec 100644
-> --- a/boot/bootmeth_efi.c
-> +++ b/boot/bootmeth_efi.c
-> @@ -162,8 +162,10 @@ static int distro_efi_try_bootflow_files(struct ude=
-vice *dev,
->   	int ret, seq;
->
->   	/* We require a partition table */
-> -	if (!bflow->part)
-> +	if (!bflow->part) {
-> +		log_debug("no partitions\n");
->   		return -ENOENT;
-> +	}
->
->   	strcpy(fname, EFI_DIRNAME);
->   	strcat(fname, BOOTEFI_NAME);
-> @@ -171,8 +173,10 @@ static int distro_efi_try_bootflow_files(struct ude=
-vice *dev,
->   	if (bflow->blk)
->   		 desc =3D dev_get_uclass_plat(bflow->blk);
->   	ret =3D bootmeth_try_file(bflow, desc, NULL, fname);
-> -	if (ret)
-> +	if (ret) {
-> +		log_debug("no file\n");
+From: Oliver Gaskell <Oliver.Gaskell@analog.com>
 
-log_debug("File %s not found\n", fname);
+Add minimal device tree for Analog Devices' SC589-MINI board.
 
->   		return log_msg_ret("try", ret);
-> +	}
->
->   	/* Since we can access the file, let's call it ready */
->   	bflow->state =3D BOOTFLOWST_READY;
-> @@ -307,6 +311,8 @@ static int distro_efi_read_bootflow(struct udevice *=
-dev, struct bootflow *bflow)
->   {
->   	int ret;
->
-> +	log_debug("dev=3D'%s', part=3D%d\n", bflow->dev->name, bflow->part);
-> +
->   	/*
->   	 * bootmeth_efi doesn't allocate any buffer neither for blk nor net d=
-evice
->   	 * set flag to avoid freeing static buffer.
-> @@ -332,6 +338,7 @@ static int distro_efi_boot(struct udevice *dev, stru=
-ct bootflow *bflow)
->   	ulong kernel, fdt;
->   	int ret;
->
-> +	log_debug("boot\n");
+This patch depends on Patches 01 and 02, for sc5xx.dtsi and sc58x.dtsi.
 
-We should provide meaningful messages.
+Co-developed-by: Greg Malysa <greg.malysa@timesys.com>
+Signed-off-by: Greg Malysa <greg.malysa@timesys.com>
+Co-developed-by: Trevor Woerner <twoerner@gmail.com>
+Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+Co-developed-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+Signed-off-by: Oliver Gaskell <Oliver.Gaskell@analog.com>
+---
+ arch/arm/dts/Makefile       |  1 +
+ arch/arm/dts/sc589-mini.dts | 13 +++++++++++++
+ 2 files changed, 14 insertions(+)
 
-log_debug("distro EFI boot\n");
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index c827b5b4a4..4bac00d5e2 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -1260,6 +1260,7 @@ dtb-$(CONFIG_TARGET_IMX8MM_CL_IOT_GATE_OPTEE) += imx8mm-cl-iot-gate-optee.dtb \
+ 
+ dtb-$(CONFIG_TARGET_SC573_EZKIT) += sc573-ezkit.dtb
+ dtb-$(CONFIG_TARGET_SC584_EZKIT) += sc584-ezkit.dtb
++dtb-$(CONFIG_TARGET_SC589_MINI) += sc589-mini.dtb
+ 
+ ifneq ($(CONFIG_TARGET_IMX8MP_RSB3720A1_4G)$(CONFIG_TARGET_IMX8MP_RSB3720A1_6G),)
+ dtb-y += imx8mp-rsb3720-a1.dtb
+diff --git a/arch/arm/dts/sc589-mini.dts b/arch/arm/dts/sc589-mini.dts
+new file mode 100644
+index 0000000000..605f7a17bf
+--- /dev/null
++++ b/arch/arm/dts/sc589-mini.dts
+@@ -0,0 +1,13 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * (C) Copyright 2024 - Analog Devices, Inc.
++ */
++
++/dts-v1/;
++
++#include "sc58x.dtsi"
++
++/ {
++	model = "ADI SC598-MINI";
++	compatible = "adi,sc589-mini", "adi,sc58x";
++};
 
-Best regards
+-- 
+2.34.1
 
-Heinrich
-
->   	kernel =3D env_get_hex("kernel_addr_r", 0);
->   	if (!bootmeth_uses_network(bflow)) {
->   		ret =3D efiload_read_file(bflow, kernel);
 
