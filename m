@@ -4,81 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E050FEE57C7
-	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 06:15:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57A7AEE644D
+	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 06:17:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34A8C88E9C;
-	Thu, 12 Sep 2024 08:14:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C3C8388DDF;
+	Thu, 12 Sep 2024 08:17:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="J3eMrPPF";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="PT7yvfMA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E390A88E9C; Thu, 12 Sep 2024 08:14:01 +0200 (CEST)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
+ id 3992888DDF; Thu, 12 Sep 2024 08:17:26 +0200 (CEST)
+Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
+ [IPv6:2607:f8b0:4864:20::b2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ABB8E88DBC
- for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 08:13:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E95D588D85
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 08:17:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=9elements.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tkuw584924@gmail.com
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-2053f6b8201so5799195ad.2
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 23:13:59 -0700 (PDT)
+ spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
+Received: by mail-yb1-xb2e.google.com with SMTP id
+ 3f1490d57ef6-e1a7d43a226so590886276.3
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 23:17:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1726121638; x=1726726438; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=9elements.com; s=google; t=1726121843; x=1726726643; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oMHdzz9g+vOlTu95n8CRLgGumxkkUHve5vMt319tU3g=;
- b=J3eMrPPF+0Er4Lwj9pzav87laFFO0bNi/mowM7lGkEvrGKnZOs5nNlvvKzh/x/eaEn
- rU1gnNeJhJO+g1I8Ew3/esaY+YHGv9suykSeEEBS8QQ6/zq1RnswNutomg4DzmARmyBz
- xk5uToj7rCik8LcAizsm3G1n8Kpe4GiGpExKmkz4/S5Uip20YRQ3AlKvL/6BdtBBqLiV
- VA1DBOGmV/HV9vNESEJSGVRIfyXzxjGHWvj/1sV7KiPjlFvb7qBNxy/N4+uABc5HJiQi
- YZyokW7ic7/48cAkfEJvVmjk9zBzTNI6Ai9iJVnccYJ9Lw3UnP5+aLPhcaZSjUHFyRfr
- euAw==
+ bh=QNGTNojmxv5+U4EWjndLIRwNbTjheIoglKQ1X1BMKfo=;
+ b=PT7yvfMAEF0+eitiVrFg2ZYqitHAvqiblHnhpeq19mkhbDtJVTdtuB8hDOd8T2Ai+R
+ YHbT/68I7auuXfrx+x2LmnR7fxfQKV+fYtGbq6jhD28dHUwq9HXpSwWtwdSdtaHQpuvH
+ JkvYL5/ledj19HEyXMnMRRTGHLW2yHyPnagOteK6YDClRaJI1lR+fMd4zcMeesDdqALs
+ y5KPmWxxE2MCvv7UkP2QWoypH+YtvpNyT3SCNOIOPGUb5VIbB7ZOXQ78U4NO+Lx3Mohs
+ vyE/lB+Mhm85NTtJQhgqu4r959iJ0GzvsZnvkn8abBANw+yQ62v9ZKLUv0zlWy0g4puC
+ kRTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726121638; x=1726726438;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1726121843; x=1726726643;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oMHdzz9g+vOlTu95n8CRLgGumxkkUHve5vMt319tU3g=;
- b=t6KoytfEizqo3FUzECeu4BOjxlzYS5YvIPwcE/h8Cv9+GRUjt7uF0OaPctLvGQ73U3
- tLGGgJ22rxbEoPP6oO55IBLX5wxF/TYgpBQ7gaj5EvrHuPEc4wNt7UV+IPos+NXNNODq
- 7gVfLE7rWR0SrDgn+dMAdLVMSz+0Jn2/HxC+5nLHVMC83hB0HrjNQCsSjEd4ApfZs7fg
- Qo1rRHshZ/xvcjdhzROY3mfuqgM3ykY2ZOwed3/U1KnbKTj5FB9mqnOHC8soyQE6MUpJ
- pANdGAg7COm6BBduM1yrgtDGIzi6s4Lsop4jOLMtqE/3viqcbV6feHnAHEar74wEiqZC
- f07A==
-X-Gm-Message-State: AOJu0YwiDHv7ZsRXhYq4sfAqz5HY6TNdrN7drIKFwenlsdq5EMAiDUjK
- zxYwuud8ugWzR8sb4eKejNvYOp6hzqtxLibCHaU1JsSBaO5GGvShtWOFdg==
-X-Google-Smtp-Source: AGHT+IF6PMG2AVUmTd5lQV5t3OQ/lBbdC5MzBDS/OaDy2cpsid0dqNAwd+cQi6CNqlEbqcuajhF1qA==
-X-Received: by 2002:a17:902:f681:b0:206:d8c2:4a79 with SMTP id
- d9443c01a7336-2076e3366c9mr23390585ad.15.1726121638042; 
- Wed, 11 Sep 2024 23:13:58 -0700 (PDT)
-Received: from ISCN5CG2520RPD.infineon.com (KD106168128197.ppp-bb.dion.ne.jp.
- [106.168.128.197]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2076afdd046sm8214065ad.166.2024.09.11.23.13.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Sep 2024 23:13:57 -0700 (PDT)
-From: tkuw584924@gmail.com
-X-Google-Original-From: Takahiro.Kuwano@infineon.com
-To: u-boot@lists.denx.de
-Cc: jagan@amarulasolutions.com, vigneshr@ti.com, tudor.ambarus@linaro.org,
- pratyush@kernel.org, d-gole@ti.com, tkuw584924@gmail.com,
- Bacem.Daassi@infineon.com, Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
-Subject: [RESEND PATCH v2 3/3] mtd: spi-nor-id: Add S25FS064S, S25FS128S,
- S25FS256S IDs
-Date: Thu, 12 Sep 2024 15:13:01 +0900
-Message-Id: <bbeab9d3a52def2796162fb36c98d93027de742d.1726120686.git.Takahiro.Kuwano@infineon.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1726120686.git.Takahiro.Kuwano@infineon.com>
-References: <cover.1726120686.git.Takahiro.Kuwano@infineon.com>
+ bh=QNGTNojmxv5+U4EWjndLIRwNbTjheIoglKQ1X1BMKfo=;
+ b=WroPF8Eu3niPS/uAFCNYdVFhhq5+V9EYdwPhFzbDZdAd8+6Z7GOq5lWcvo84OBUqjF
+ 2AybS5nEszdVUxziuliUt/rCa7AlEaxk9vXsP4fnDhe4PHL3WicDsgCrDf2q8yG1Dsnx
+ GOYluaGwCMjXiJFcerlEGQdbbD0mMEIv9+GUc4v+yhwXCZsZC1ktXSBbt1RjyfRTxlaG
+ YqEuBhPkEbi4Y3PewGzl3dPSFKoPdYL1x6TcRgFdmsal0rMRaNMa5JMo70KqtBPJ8Lqi
+ yH1MSaG5IW2OUxF/rdwsAMCaTDB6QFx3qM62818jpDIvGiAxvf4jMcfQAi8zqyKNpp3E
+ LeVA==
+X-Gm-Message-State: AOJu0YwayYyZ1USmV9B6dHkffSoVmgq+v24H3c4AW2RnrEFa5zu4+8dh
+ Uy0ac2a6Uj9BRdENdGz9wPd4LfCUJ8vL7sJ1ljq6ETM598hg9ikCQfZ3wDqkpgcZteZtRaupUQB
+ yR2FMtz8dvk30UCJRdD4olkJNl/5sqIiR9/CFfQ==
+X-Google-Smtp-Source: AGHT+IGAfDSSH/WyLKMmt99Th6kuKVBL/cgBYFooOBOcbtUKrclcDQo9RL2fwWWvCE4VbP0mliVhfmOxyQQp9A2XX3k=
+X-Received: by 2002:a05:6902:cc1:b0:e1b:dc38:1a8c with SMTP id
+ 3f1490d57ef6-e1d9dc3cb25mr1339297276.43.1726121842741; Wed, 11 Sep 2024
+ 23:17:22 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240911062511.494855-1-patrick.rudolph@9elements.com>
+ <20240911062511.494855-14-patrick.rudolph@9elements.com>
+ <CALeDE9O6fbvfjyqcd32vo6SYBy9OUm+xfz9DV7akiGRS9jGNCg@mail.gmail.com>
+In-Reply-To: <CALeDE9O6fbvfjyqcd32vo6SYBy9OUm+xfz9DV7akiGRS9jGNCg@mail.gmail.com>
+From: Patrick Rudolph <patrick.rudolph@9elements.com>
+Date: Thu, 12 Sep 2024 08:17:11 +0200
+Message-ID: <CALNFmy1JyAgvrozo3Cw7i5a_0SitvOSyTxWeCNC4as3Ts1ZQQQ@mail.gmail.com>
+Subject: Re: [PATCH v3 13/30] acpi: acpi_table: Support ACPI 2.0 platforms
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,68 +90,163 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+On Wed, Sep 11, 2024 at 11:46=E2=80=AFAM Peter Robinson <pbrobinson@gmail.c=
+om> wrote:
+>
+> > On platforms that do not have usable DRAM below 4GiB, like QEMU sbsa,
+> > the RSDT cannot be used. Allow both RSDT and XSDT to be null and only
+> > fill those tables that are present in acpi_add_table().
+>
+> I'm not sure what ACPI 2.0 from the subject has to do with the above,
+> eg ACPI only started supporting aarch64 with ACPI 5.1
+>
+The change is unrelated to the architecture. ACPI 2.0 made XSDT mandatory a=
+nd
+RSDT optional. Since x86 is backwards compatible and always had memory belo=
+w
+4GiB, tables would always fit into RSDT and XSDT, but on platforms where ta=
+bles
+are stored above 4GiB the address would not fit into RSDT, only in XSDT.
 
-The S25FS064S, S25FS128S, and S25FS256S are the same family of SPI NOR
-Flash devices with S25FS512S. Some difference depending on the device
-densities are taken care in post SFDP fixup.
+I'll update the commit message to better explain why this change was done.
 
-Signed-off-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
-Reviewed-by: Pratyush Yadav <pratyush@kernel.org>
----
- drivers/mtd/spi/spi-nor-core.c | 24 ++++++++++++++++++------
- drivers/mtd/spi/spi-nor-ids.c  |  3 +++
- 2 files changed, 21 insertions(+), 6 deletions(-)
-
-diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
-index b633f3092b..e126fa37c1 100644
---- a/drivers/mtd/spi/spi-nor-core.c
-+++ b/drivers/mtd/spi/spi-nor-core.c
-@@ -3406,12 +3406,24 @@ static int s25fs_s_post_bfpt_fixup(struct spi_nor *nor,
- static void s25fs_s_post_sfdp_fixup(struct spi_nor *nor,
- 				    struct spi_nor_flash_parameter *params)
- {
--	/* READ_1_1_2 is not supported */
--	params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_2;
--	/* READ_1_1_4 is not supported */
--	params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_4;
--	/* PP_1_1_4 is not supported */
--	params->hwcaps.mask &= ~SNOR_HWCAPS_PP_1_1_4;
-+	/*
-+	 * The S25FS064S(8MB) supports 1-1-2 and 1-1-4 commands, but params for
-+	 * read ops in SFDP are wrong. The other density parts do not support
-+	 * 1-1-2 and 1-1-4 commands.
-+	 */
-+	if (params->size == SZ_8M) {
-+		spi_nor_set_read_settings(&params->reads[SNOR_CMD_READ_1_1_2],
-+					  0, 8, SPINOR_OP_READ_1_1_2,
-+					  SNOR_PROTO_1_1_2);
-+		spi_nor_set_read_settings(&params->reads[SNOR_CMD_READ_1_1_4],
-+					  0, 8, SPINOR_OP_READ_1_1_4,
-+					  SNOR_PROTO_1_1_4);
-+	} else {
-+		params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_2;
-+		params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_4;
-+		params->hwcaps.mask &= ~SNOR_HWCAPS_PP_1_1_4;
-+	}
-+
- 	/* Use volatile register to enable quad */
- 	params->quad_enable = s25fs_s_quad_enable;
- }
-diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-index 17e0f84e9e..9693c179b7 100644
---- a/drivers/mtd/spi/spi-nor-ids.c
-+++ b/drivers/mtd/spi/spi-nor-ids.c
-@@ -342,6 +342,9 @@ const struct flash_info spi_nor_ids[] = {
- 	{ INFO6("s25fl256s0", 0x010219, 0x4d0080, 256 * 1024, 128, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
- 	{ INFO6("s25fl256s1", 0x010219, 0x4d0180,  64 * 1024, 512, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
- 	{ INFO6("s25fl512s",  0x010220, 0x4d0080, 256 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
-+	{ INFO6("s25fs064s",  0x010217, 0x4d0181,  64 * 1024, 128, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
-+	{ INFO6("s25fs128s",  0x012018, 0x4d0181,  64 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
-+	{ INFO6("s25fs256s",  0x010219, 0x4d0181,  64 * 1024, 512, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
- 	{ INFO6("s25fs512s",  0x010220, 0x4d0081, 256 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
- 	{ INFO("s25fl512s_256k",  0x010220, 0x4d00, 256 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
- 	{ INFO("s25fl512s_64k",  0x010220, 0x4d01, 64 * 1024, 1024, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
--- 
-2.34.1
-
+> > Fixes a crash on QEMU sbsa.
+> >
+> > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+> > Cc: Simon Glass <sjg@chromium.org>
+> > Cc: Tom Rini <trini@konsulko.com>
+> > ---
+> >  lib/acpi/acpi_table.c | 95 ++++++++++++++++++++++++++-----------------
+> >  1 file changed, 57 insertions(+), 38 deletions(-)
+> >
+> > diff --git a/lib/acpi/acpi_table.c b/lib/acpi/acpi_table.c
+> > index 4f5cfe522c..8aab41212a 100644
+> > --- a/lib/acpi/acpi_table.c
+> > +++ b/lib/acpi/acpi_table.c
+> > @@ -157,51 +157,70 @@ int acpi_add_table(struct acpi_ctx *ctx, void *ta=
+ble)
+> >         struct acpi_rsdt *rsdt;
+> >         struct acpi_xsdt *xsdt;
+> >
+> > -       /* The RSDT is mandatory while the XSDT is not */
+> > -       rsdt =3D ctx->rsdt;
+> > -
+> > -       /* This should always be MAX_ACPI_TABLES */
+> > -       entries_num =3D ARRAY_SIZE(rsdt->entry);
+> > -
+> > -       for (i =3D 0; i < entries_num; i++) {
+> > -               if (rsdt->entry[i] =3D=3D 0)
+> > -                       break;
+> > -       }
+> > -
+> > -       if (i >=3D entries_num) {
+> > -               log_err("ACPI: Error: too many tables\n");
+> > -               return -E2BIG;
+> > -       }
+> > +       /* On legacy x86 platforms the RSDT is mandatory while the XSDT=
+ is not.
+> > +        * On other platforms there might be no memory below 4GiB, thus=
+ RSDT is NULL.
+> > +        */
+> > +       if (ctx->rsdt) {
+> > +               rsdt =3D ctx->rsdt;
+> >
+> > -       /* Add table to the RSDT */
+> > -       rsdt->entry[i] =3D nomap_to_sysmem(table);
+> > +               /* This should always be MAX_ACPI_TABLES */
+> > +               entries_num =3D ARRAY_SIZE(rsdt->entry);
+> >
+> > -       /* Fix RSDT length or the kernel will assume invalid entries */
+> > -       rsdt->header.length =3D sizeof(struct acpi_table_header) +
+> > -                               (sizeof(u32) * (i + 1));
+> > +               for (i =3D 0; i < entries_num; i++) {
+> > +                       if (rsdt->entry[i] =3D=3D 0)
+> > +                               break;
+> > +               }
+> >
+> > -       /* Re-calculate checksum */
+> > -       rsdt->header.checksum =3D 0;
+> > -       rsdt->header.checksum =3D table_compute_checksum((u8 *)rsdt,
+> > -                                                      rsdt->header.len=
+gth);
+> > +               if (i >=3D entries_num) {
+> > +                       log_err("ACPI: Error: too many tables\n");
+> > +                       return -E2BIG;
+> > +               }
+> >
+> > -       /*
+> > -        * And now the same thing for the XSDT. We use the same index a=
+s for
+> > -        * now we want the XSDT and RSDT to always be in sync in U-Boot
+> > -        */
+> > -       xsdt =3D ctx->xsdt;
+> > +               /* Add table to the RSDT */
+> > +               rsdt->entry[i] =3D nomap_to_sysmem(table);
+> >
+> > -       /* Add table to the XSDT */
+> > -       xsdt->entry[i] =3D nomap_to_sysmem(table);
+> > +               /* Fix RSDT length or the kernel will assume invalid en=
+tries */
+> > +               rsdt->header.length =3D sizeof(struct acpi_table_header=
+) +
+> > +                                       (sizeof(u32) * (i + 1));
+> >
+> > -       /* Fix XSDT length */
+> > -       xsdt->header.length =3D sizeof(struct acpi_table_header) +
+> > -                               (sizeof(u64) * (i + 1));
+> > +               /* Re-calculate checksum */
+> > +               rsdt->header.checksum =3D 0;
+> > +               rsdt->header.checksum =3D table_compute_checksum((u8 *)=
+rsdt,
+> > +                                                              rsdt->he=
+ader.length);
+> > +       }
+> >
+> > -       /* Re-calculate checksum */
+> > -       xsdt->header.checksum =3D 0;
+> > -       xsdt->header.checksum =3D table_compute_checksum((u8 *)xsdt,
+> > -                                                      xsdt->header.len=
+gth);
+> > +       if (ctx->xsdt) {
+> > +               /*
+> > +                * And now the same thing for the XSDT. We use the same=
+ index as for
+> > +                * now we want the XSDT and RSDT to always be in sync i=
+n U-Boot
+> > +                */
+> > +               xsdt =3D ctx->xsdt;
+> > +
+> > +               /* This should always be MAX_ACPI_TABLES */
+> > +               entries_num =3D ARRAY_SIZE(xsdt->entry);
+> > +
+> > +               for (i =3D 0; i < entries_num; i++) {
+> > +                       if (xsdt->entry[i] =3D=3D 0)
+> > +                               break;
+> > +               }
+> > +
+> > +               if (i >=3D entries_num) {
+> > +                       log_err("ACPI: Error: too many tables\n");
+> > +                       return -E2BIG;
+> > +               }
+> > +
+> > +               /* Add table to the XSDT */
+> > +               xsdt->entry[i] =3D nomap_to_sysmem(table);
+> > +
+> > +               /* Fix XSDT length */
+> > +               xsdt->header.length =3D sizeof(struct acpi_table_header=
+) +
+> > +                                       (sizeof(u64) * (i + 1));
+> > +
+> > +               /* Re-calculate checksum */
+> > +               xsdt->header.checksum =3D 0;
+> > +               xsdt->header.checksum =3D table_compute_checksum((u8 *)=
+xsdt,
+> > +                                                              xsdt->he=
+ader.length);
+> > +       }
+> >
+> >         return 0;
+> >  }
+> > --
+> > 2.46.0
+> >
