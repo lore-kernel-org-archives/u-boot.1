@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E2E7EE6457
-	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 07:30:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F5C1EE6457
+	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 07:30:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A011488E97;
-	Thu, 12 Sep 2024 09:30:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 03E7188EB9;
+	Thu, 12 Sep 2024 09:30:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="deHLcoT4";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="aIPlQuS5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 245EB88E9E; Thu, 12 Sep 2024 09:30:18 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 2A37B88EA2; Thu, 12 Sep 2024 09:30:19 +0200 (CEST)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A8A288E98
- for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 09:30:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E22A588E95
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 09:30:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=glaroque@baylibre.com
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-42cbaf9bfdbso4788035e9.0
- for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 00:30:15 -0700 (PDT)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-374b25263a3so430315f8f.0
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 00:30:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1726126214; x=1726731014;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=cZlGVGGm+H4X1C2NZFfTjYRXZPRA7EEe0migMMEmX5U=;
- b=deHLcoT4BRl5ylKH4UXHYJ0OJ/JPLUMFydIyquDYE4FJpzRi6HtsbNQJHg6QqfiZ2R
- qCyfbrM+e0TrYcOkxORIXA8iPIAnM2UfQ3oBATWFG/tRDoy/UVHgVp70akxpyNp7S+Vn
- jftftPSBsNPhwNdgqfa17EErSMT/Fk+h1hbSqU6/Xabhy0Hg+WZJA2m6I3QnneQLDWrh
- 4/BMIvHzmqX6dDe8OmF762lULEDzv/yZha4pY9vHpF4zfC96r6YOuh0YZIwewOgs/+ix
- 6jOc0PPIthLVsiPiL9Owon0H46zKcUm2Vw5F2kiEflphTID/pmibA1UKVnm627udS52w
- WWMg==
+ :reply-to; bh=pztbBW6jhyQi1hDI6OAYOqgoDHcf5DnOA6jVADXjB6g=;
+ b=aIPlQuS5Q2t+j3+tjLK40Qy1IiPTPwDCj2GnurZMspmQvvBU3qb2sNylFPgCSaX54F
+ OMJFnjPfI6a3siR5VT+vUMvmjItj2E88HYhocEBRCLHHWxBdaTDtCtHf9tCtk9/5oepo
+ nTbNG3Zvn3NKSPKcnSvXwFJWpRjz+4xHkusPv0A8u2hPh21SryXLFJz/zofLdIAxIjOT
+ mKVNJ2yi7reQKwF8cwRhQ8ReKBcVaCp5QJzUJpxaN9yBy8QzHBr9SmQW7YoHANKU/gV5
+ cC4xU+5cvtJRBLJfa1SRGq3aH3k5MoabnhlG03TjR3DAdkuAge5zcNY7KTLdCyJjy4oS
+ HDDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1726126214; x=1726731014;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cZlGVGGm+H4X1C2NZFfTjYRXZPRA7EEe0migMMEmX5U=;
- b=MGJ/saGN2ddZ+mi4ANkSs8TwXOqC8RYLFY/sT+oWaF2LWWKN/DaWy6JGdCh685INuW
- daawti9LU8eoDPxAvUf6B0XIL++yqm/Pj+1MU7BKZa4bl3kepG7bAP3wwR+tjJ0NicD7
- 2qpbCinrVVAQLqy9L8G9Ot1Vcu7X2VVKrlA9rcVa4p/+mIzgny5i7DOBJ7DMfceO8efB
- XhpMLfcTqXBxn6zZrhVr/DBLR/DhgCv6LOK50y4azhaBkCb1HNhGG3eZ/UPjCg8CAgSU
- M5bbLrZbXGtQEKT2C/R591dJEATaGqNrYpKCB4c72IZM1zUpSa8Oal3HoPkzjYk8R6Wa
- B65Q==
-X-Gm-Message-State: AOJu0YzXEoSWQ1hG62N6JjMtk5pcjOYxx0afV0miCJzbn2id1oHdIEex
- GS4Jjpg2XWVxuAvyoman0X8e+ABNZHg4OY1dvCb6z0fX+7vdbpLr2S6zcmzDDy8=
-X-Google-Smtp-Source: AGHT+IFev28kC691MeUaOOy6GJui3WMiGmvyvL4F2crLthSWFW+XXBtRdkyUoP0YGaSWr8MnVQlSRg==
-X-Received: by 2002:a05:600c:3581:b0:42c:ba0d:c766 with SMTP id
- 5b1f17b1804b1-42cdb531ce0mr12135435e9.6.1726126214324; 
- Thu, 12 Sep 2024 00:30:14 -0700 (PDT)
+ bh=pztbBW6jhyQi1hDI6OAYOqgoDHcf5DnOA6jVADXjB6g=;
+ b=Cqd5jBFjeRVZ5VPXWG4ZIE4gxq4PcM9OzK3N4yOOsUy94LL/mZX/W/SWviT/jT1Yje
+ p73h48IFdmrpEPZWWfDdtOdz+0L0TDEP6pXE5ORkKwYMSE8AmgcMDBssG0rMQK/b3xOq
+ m8z/Ql4qwwYyO9vQJIjXWZQA9MnMsnhAEVE4j1j4Z0fE6peEXhEavA4Bxb+J8dKqprP8
+ PFZwSY4rtRTMzlLPZHdHvCNgDOOB93y4MieK07Fs8svlp4R/oxTNYKR6bx1Ay8A/EA/c
+ 3n/2TbXA8IaEpO2Z2qiISw+02GXf66Owz1xdXnsHZ8iOuwd026enVyLKBeq4jrEqsvz7
+ 2+Kg==
+X-Gm-Message-State: AOJu0YzPX/i3q9ysyKkynyoP7lK8+hUVQpmi2auA+CnIi9luhQl+Msof
+ jmtLwC36p3SS+ARpoJap8I7+7+Q2GqzKgXv02BclT2PIpvZoqAChh0UValRiUw4=
+X-Google-Smtp-Source: AGHT+IHS7r2HpNsl02ceru3vU99b0Ca/KRnkfF78lWSQFuGS6X3lee/mjXOe1m9GA8acsr8Cog3GMw==
+X-Received: by 2002:a5d:6450:0:b0:374:c3f7:6af1 with SMTP id
+ ffacd0b85a97d-378c2cf3663mr949322f8f.15.1726126213712; 
+ Thu, 12 Sep 2024 00:30:13 -0700 (PDT)
 Received: from [127.0.1.1] ([2a05:6e02:10a5:e010:ce21:4d2b:8554:e76])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42caeb21a5csm164330065e9.6.2024.09.12.00.30.13
+ 5b1f17b1804b1-42caeb21a5csm164330065e9.6.2024.09.12.00.30.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Sep 2024 00:30:14 -0700 (PDT)
+ Thu, 12 Sep 2024 00:30:13 -0700 (PDT)
 From: Guillaume La Roque <glaroque@baylibre.com>
-Date: Thu, 12 Sep 2024 09:29:59 +0200
-Subject: [PATCH v2 3/3] board: ti: am62px: Add android bootflow support
+Date: Thu, 12 Sep 2024 09:29:58 +0200
+Subject: [PATCH v2 2/3] board: beagle: beagleplay: Add android bootflow support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240912-sitaraupstream-v2-3-2101323d3fa5@baylibre.com>
+Message-Id: <20240912-sitaraupstream-v2-2-2101323d3fa5@baylibre.com>
 References: <20240912-sitaraupstream-v2-0-2101323d3fa5@baylibre.com>
 In-Reply-To: <20240912-sitaraupstream-v2-0-2101323d3fa5@baylibre.com>
 To: Bryan Brattlof <bb@ti.com>, Tom Rini <trini@konsulko.com>, 
@@ -99,36 +99,67 @@ X-Virus-Status: Clean
 
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
-When CONFIG_BOOTMETH_ANDROID is set, enable Android boot flow support.
+Beagle Play has a different boot flow than the AM62x SK EVM.
 
-To build for AM62Px for Android, we can re-use
-the am62x_a53_android.config fragment when building A53 bootloaders:
+AM62x SK EVM:
+1. Boot rom reads UDA (User Data Area), looking for tiboot3
+2. Boot rom finds tiboot3 and loads it
 
-  $ make am62px_evm_a53_defconfig
-  $ make am62x_a53_android.config
-  $ make
+Beagle Play:
+1. Boot rom looks for tiboot3 in mmc0boot0
+2. Boot rom finds tiboot3 and loads it
+
+Because of this difference, we need to have a different
+partitioning table than the generic TI one.
+
+Include generic TI android support and override the partitioning table
+to boot Android.
 
 Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 Signed-off-by: Guillaume La Roque <glaroque@baylibre.com>
 ---
- board/ti/am62px/am62px.env | 5 +++++
- 1 file changed, 5 insertions(+)
+ board/beagle/beagleplay/beagleplay.env | 30 ++++++++++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
 
-diff --git a/board/ti/am62px/am62px.env b/board/ti/am62px/am62px.env
-index f8b6aff2c2fd..7ef54079aa8d 100644
---- a/board/ti/am62px/am62px.env
-+++ b/board/ti/am62px/am62px.env
-@@ -13,3 +13,8 @@ mmcdev=1
- bootpart=1:2
- bootdir=/boot
+diff --git a/board/beagle/beagleplay/beagleplay.env b/board/beagle/beagleplay/beagleplay.env
+index 354bc987d12b..fc29d49712db 100644
+--- a/board/beagle/beagleplay/beagleplay.env
++++ b/board/beagle/beagleplay/beagleplay.env
+@@ -17,3 +17,33 @@ bootdir=/boot
+ boot_targets=mmc1 mmc0
+ bootmeths=script extlinux efi pxe
  rd_spec=-
 +
 +#if CONFIG_BOOTMETH_ANDROID
 +#include <env/ti/android.env>
-+adtb_idx=3
++/* Override Android partitions
++ * Required because tiboot3 is in mmc0boot0, not in UDA
++ * note that += is needed because \n is converted by space in .env files */
++partitions=
++       name=bootloader,start=5M,size=8M,uuid=${uuid_gpt_bootloader};
++partitions+=name=misc,start=13824K,size=512K,uuid=${uuid_gpt_misc};
++partitions+=name=frp,size=512K,uuid=${uuid_gpt_frp};
++partitions+=name=boot_a,size=40M,uuid=${uuid_gpt_boot_a};
++partitions+=name=boot_b,size=40M,uuid=${uuid_gpt_boot_b};
++partitions+=name=vendor_boot_a,size=32M,uuid=${uuid_gpt_vendor_boot_a};
++partitions+=name=vendor_boot_b,size=32M,uuid=${uuid_gpt_vendor_boot_b};
++partitions+=name=init_boot_a,size=8M,uuid=${uuid_gpt_init_boot_a};
++partitions+=name=init_boot_b,size=8M,uuid=${uuid_gpt_init_boot_b};
++partitions+=name=dtbo_a,size=8M,uuid=${uuid_gpt_dtbo_a};
++partitions+=name=dtbo_b,size=8M,uuid=${uuid_gpt_dtbo_b};
++partitions+=name=vbmeta_a,size=64K,uuid=${uuid_gpt_vbmeta_a};
++partitions+=name=vbmeta_b,size=64K,uuid=${uuid_gpt_vbmeta_b};
++partitions+=name=vbmeta_vendor_dlkm_a,size=64K,uuid=${uuid_gpt_vbmeta_vendor_dlkm_a};
++partitions+=name=vbmeta_vendor_dlkm_b,size=64K,uuid=${uuid_gpt_vbmeta_vendor_dlkm_b};
++partitions+=name=super,size=4608M,uuid=${uuid_gpt_super};
++partitions+=name=metadata,size=64M,uuid=${uuid_gpt_metadata};
++partitions+=name=persist,size=32M,uuid=${uuid_gpt_persist};
++partitions+=name=userdata,size=-,uuid=${uuid_gpt_userdata}
++fastboot_raw_partition_tiboot3="0x0 0x800 mmcpart 1"
++
++adtb_idx=2
 +#endif
-\ No newline at end of file
 
 -- 
 2.34.1
