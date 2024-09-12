@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41310EE57F9
-	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 00:58:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 875D2EE57F6
+	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 00:58:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8AE0E88C8F;
-	Thu, 12 Sep 2024 02:58:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EAE5C88CFD;
+	Thu, 12 Sep 2024 02:58:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Z3NJoWS2";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Wq+ApHGU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2432988CE8; Thu, 12 Sep 2024 02:58:28 +0200 (CEST)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
+ id 2664688A43; Thu, 12 Sep 2024 02:58:29 +0200 (CEST)
+Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
+ [IPv6:2607:f8b0:4864:20::82f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04B0B88A43
- for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 02:58:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C14E88CBA
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 02:58:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-6c34c2a7dc7so2316706d6.3
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 17:58:25 -0700 (PDT)
+Received: by mail-qt1-x82f.google.com with SMTP id
+ d75a77b69052e-456757d8871so2004091cf.0
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 17:58:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726102705; x=1726707505; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1726102706; x=1726707506; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=IYfLwzB9pbpPERlMGyYvjTlmrA54ojrpO4UcrVsc9+0=;
- b=Z3NJoWS2q7mfv47iLVWn0GO2Y+3Pg+8hYeNPWJV3HQzDCCoII24fVMBOBM+N48AVZ4
- xoqtrkR0kOaHhBPbENRN3bojSYXBpOlcyXUI3MGH2D4se204M2/YYBPe1XgoDaOFd4mB
- ZiaJvbYdFYuz4qbiG23mkWeHjnIxtKJfsp2W0=
+ bh=LJthf9BDRaXo82QghtBTBGyxj6TEIHqAg6yfcr78bKo=;
+ b=Wq+ApHGUhhnaBLvIcXtNr0INrmIU3f7oy8joM+MLUzRUNUWyaQoryHq2ZWCQjx7v24
+ EctIvJwK+LKoOZ6QBE8mdsfOrFRiCcaywxClIq4FuMqU20FaCN0GZiFTh4TxOowGnmmF
+ qrAEWp+2N2Xcs3mYalAHF6ibG7a5LOOoHOWpE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726102705; x=1726707505;
+ d=1e100.net; s=20230601; t=1726102706; x=1726707506;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=IYfLwzB9pbpPERlMGyYvjTlmrA54ojrpO4UcrVsc9+0=;
- b=Bji6yth/MfqvOqDh0X3X9rXzDEJk3bljmHsRIY7rVJ56ZYA/xck3b6ZAQti8fvqc9U
- lCr9kJhvBQXvnys0uiGirZooDd+JUxbC/chsvBmlYkSIVKlpAX+M0qpLTcKhdfQFo+Oj
- uTjlkDTIf/7Rq5jkIC6J/cWoNt3LKTztM5LMEzE43R3k/qTQsnRd/z7Kvf0GjOPLNIl5
- /l6KNMfGBXUHTyexgRrMjrzHGJTCL5LXzM7/J5dwBpuTgSa8YrXNtYY5MaZYh4TRiYVD
- VvHpWEBXqQbN9IOq8pPB85ypnmZVD/1Wuunm4bE7dO9RUs8GVpgT/GzFh1cK4mBW34/s
- phPg==
-X-Gm-Message-State: AOJu0YycRU015H1cHgUQ42rfZjm5ZmzUdNG8fJegF0g/oSgxYfz/Pws6
- Uf+e6SHTsSAAl2JOJwQjtVLnmRV+IPMVtA5gTn6lRA0BJfoW/sz9VNuQ+GcR4jJxVJDbZjNXAVT
- RIHXwBqKEOmk8nZzrALed2i5MCqQ6UnbhSf/O
-X-Google-Smtp-Source: AGHT+IGQp/Ban+rdHLmuoE1GIKm8Sly780cNVcFpP4Ad6YIX3uOmlTEiYJ19EoNDoFtvgF9EEWFfnCG2f5yCswDGPgc=
-X-Received: by 2002:a05:6214:53c1:b0:6c3:5e2f:b43b with SMTP id
- 6a1803df08f44-6c573537ea7mr20554736d6.25.1726102704873; Wed, 11 Sep 2024
- 17:58:24 -0700 (PDT)
+ bh=LJthf9BDRaXo82QghtBTBGyxj6TEIHqAg6yfcr78bKo=;
+ b=TZLOOhhkplJ/pae1tiyXoj5R7Poej9VTJyCwD3jCRK7d0YlLoV/AA9medNcECCBC0D
+ DVGxe4YLGNJ381C5l0mL09n3+Bb3BN5okiazz2ceb3bu8KKzTu6Yk/PYKDMJtqmn3b8i
+ zyG9zCxhTmdwJcIHTsaPbUZjLJNJanHptvgFAP1s+mWw/wpP6i5nnxTowG23rscrxN3T
+ be1XZyRa4uTZS1SembpyikkCa52ReH3b4WnFKEylt+sV9c5/MmrqshiXWsYV6nLvzx4l
+ tGU+7bZZa85o+SCk6piPkOmednCJVn51+KJy7co3wCjmT3KkYoADgXWibQcoyIbwwSFk
+ a3kA==
+X-Gm-Message-State: AOJu0YyRxvVXclsXL1LkqqfLof2X5L0w9ca0nA7MEs1DBJEZvxWAWelN
+ j/5Thr2e2YXpQH6ik83X6VSuu6s63qTRLi7dhAqzG6l6VxbN2EV5lALeaT+Wrw672LshyIn8Jo/
+ 5ElYpkvONkMkFmF5tUfF9BGJD86I5N9IXiqPKDoXiy7EDJT8=
+X-Google-Smtp-Source: AGHT+IE+lz5q1LfpRuJgyv6hEgSxqkIRmz8aN7tT99eo8CPcu3QsJeKTuIq3kDzmght1PcfjwNJZRisFTQI6bXKmdyc=
+X-Received: by 2002:a05:6214:5406:b0:6c3:54fe:ebef with SMTP id
+ 6a1803df08f44-6c5736e3075mr20474476d6.43.1726102705786; Wed, 11 Sep 2024
+ 17:58:25 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240911062511.494855-1-patrick.rudolph@9elements.com>
- <20240911062511.494855-2-patrick.rudolph@9elements.com>
-In-Reply-To: <20240911062511.494855-2-patrick.rudolph@9elements.com>
+ <20240911062511.494855-3-patrick.rudolph@9elements.com>
+In-Reply-To: <20240911062511.494855-3-patrick.rudolph@9elements.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 11 Sep 2024 18:58:14 -0600
-Message-ID: <CAFLszThbkZ74j1CWghM+hBovhABsFvs5XJEYh_JZTNg6+RgWFQ@mail.gmail.com>
-Subject: Re: [PATCH v3 01/30] acpi: x86: Move SPCR and DBG2 into common code
+Date: Wed, 11 Sep 2024 18:58:15 -0600
+Message-ID: <CAFLszTjt64P_0J4Mi6odXNWeAsG4pbJHhzyJ++Q8aD78Xi_seA@mail.gmail.com>
+Subject: Re: [PATCH v3 02/30] acpi: x86: Write FADT in common code
 To: Patrick Rudolph <patrick.rudolph@9elements.com>
 Cc: u-boot@lists.denx.de, Maximilian Brune <maximilian.brune@9elements.com>, 
  Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>
@@ -83,27 +83,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Patrick,
+
 On Wed, 11 Sept 2024 at 00:25, Patrick Rudolph
 <patrick.rudolph@9elements.com> wrote:
 >
 > From: Maximilian Brune <maximilian.brune@9elements.com>
 >
-> This moves the SPCR and DBG2 table generation into common code, so that
-> they can be used by architectures other than x86.
+> Write the FADT in common code since it's used on all architectures.
+> Let the cpu code fill out the FADT body by introducing a new weak
+> function acpi_fill_fadt().
 >
-> Signed-off-by: Maximilian Brune <maximilian.brune@9elements.com>
 > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
 > Cc: Simon Glass <sjg@chromium.org>
 > Cc: Bin Meng <bmeng.cn@gmail.com>
 > ---
-> Changelog v2:
-> - Do not add new features, just move code and make it compile on 64bit.
->
-> ---
->  arch/x86/include/asm/acpi_table.h |  11 --
->  arch/x86/lib/acpi_table.c         | 174 ----------------------------
->  include/acpi/acpi_table.h         |  11 ++
->  lib/acpi/acpi_table.c             | 184 ++++++++++++++++++++++++++++++
->  4 files changed, 195 insertions(+), 185 deletions(-)
+>  arch/x86/cpu/apollolake/acpi.c    | 20 +++------------
+>  arch/x86/cpu/baytrail/acpi.c      | 17 +------------
+>  arch/x86/cpu/quark/acpi.c         | 19 +-------------
+>  arch/x86/cpu/tangier/acpi.c       | 25 ++----------------
+>  arch/x86/include/asm/acpi_table.h | 12 ---------
+>  arch/x86/lib/acpi_table.c         | 23 -----------------
+>  include/acpi/acpi_table.h         |  9 +++++++
+>  lib/acpi/acpi_table.c             | 42 +++++++++++++++++++++++++++++++
+>  8 files changed, 59 insertions(+), 108 deletions(-)
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+This seems the wrong way around to me. We should not need weak functions.
+
+The ACPI_WRITER() should be in each file, then each function should
+call your common function.
+
+Regards,
+Simon
