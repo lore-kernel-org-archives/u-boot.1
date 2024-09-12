@@ -4,74 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABDC4EEB561
-	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 08:27:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88C60EEB569
+	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 08:54:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B89288D1B;
-	Thu, 12 Sep 2024 10:27:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id AF0D788DF1;
+	Thu, 12 Sep 2024 10:54:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1726129637;
-	bh=hUWAUdTVdvvGcefmU3M4OCcNLcN/Gsf0pLwA6nNmSpw=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=RfqDqnqA7u53velFrpAK6TZNq8Nf9SXmA1ak9Y5UuELX+j99flYx26eWcKYgMa5X6
-	 4490eVlzzEKG9wn14zEJU3cHBT1pUUniSwkcHYjKLx9KA0s85dy+3IK8fdq6q+apu2
-	 aEW64nVIUox3SqJJHrD1EnRuctGfXE6W0JQqU1SEKw2mfkdZXTR/Z5+ldzSZh0VzK1
-	 V7LbbLDnZHG8XP+xVpdRwdAa5aTjuDPOlAZKR7Cq6hnjJQK3/FHARtMEv4N+lllyc4
-	 vte2KIg61shulWV3nwKZOZInkAUiBM30Hrt9Y4bkUtMIPchHGshLFpXkHm3ExQoDws
-	 NI6kc0oEi7a1g==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gSfhEX4/";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 3243288D85; Thu, 12 Sep 2024 10:54:52 +0200 (CEST)
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
+ [IPv6:2607:f8b0:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 36D4588936;
- Thu, 12 Sep 2024 10:27:15 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1726129636;
- bh=hUWAUdTVdvvGcefmU3M4OCcNLcN/Gsf0pLwA6nNmSpw=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=qRnlVwY+4G3nLGkG1TLrrY+oGGcdjZw6k/VZzVZAQg3vIrEtRc/6xbIUYbbwNz5Bb
- YpOeXUC9Zmy+hQDvhqOBbSjyqIXzyid69EuIeROLcnKn9Z2Us21js+HCykCyCkxB0S
- IXlfAnR7X/74palpUP8nsAQsoGvCwnATjp6+6PVAruz9+UKBXlWUSb1uz6kJKuVCTZ
- KqWXaDqdLDP6ZgOMScVEuDUY/6i5T9ePjibKxIVENlWidPVnlwwOYJGA6F3X7zW4Ed
- +Wu+diAyWoxlLs4CgIQ7k7726QzbzURaO0UbPXxc72RnfDebtmXMGFyLW1slDXxMWc
- A89tfVAkjW5YA==
-Message-ID: <72981923-1e46-4863-9277-3f094feec89c@denx.de>
-Date: Thu, 12 Sep 2024 10:05:26 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id BB7E688EFE
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 10:54:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=tkuw584924@gmail.com
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-2055f630934so6671985ad.1
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 01:54:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1726131288; x=1726736088; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=mBSJVqiSjBgt9wSTZXLa8QxNkqxXGP4AzKiQFPakxCc=;
+ b=gSfhEX4/Jm2nPxKJsATsfS4qL3Fu3dL3laT6ARXLkQohQRetan3gnmO9nifmznCk+c
+ fBAPA/NECYiOWcKF8Gaypf0pdqzQj7FtZsCznCVGAuUO5bA6HGFe3S3DxKMQLp7q1GF5
+ xZjem/J/cGhGicG3sP+ZzKRkVnpE0CHDES4IRnuncCJk9+in6IIe8zQ1pEpZ7GFZdpqj
+ j3O7lQkJzn8zcqyFLIWYYHcYsc2kC/JlVgaGy4s/V1ipA/MiOQxpunWx5glDCmuAWIxG
+ zTyid0mhXukGW0XhwEErfMQ7YIMne4vge+eoOZYjh+PM4YJI2SC2qOuEEICZ7N9w7CDp
+ PiSQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1726131288; x=1726736088;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=mBSJVqiSjBgt9wSTZXLa8QxNkqxXGP4AzKiQFPakxCc=;
+ b=GpTq+sMGJQCaOD7lnA6c4d56NMKpDkQKabYwrCgJWQbJew3OhZahYQ0kRrIMexcRUt
+ MEgP3IC7iYYjueCa3Ds4fA2rjk1ftJQy7A23fBIwVVox4FDZNhq/K2Dragwi/0c2YCbk
+ qoFDyxvVu8TWS5Jx6/6lw6iMQvfo/6Zx3ytPegyFvw4LVPLnHFzUKuhr+xZtJFkjhvO/
+ eJuW61Q5Z1Uu8UbpmGNSYaqxkIwYK80hlq7MFD/Hm9kqIoTj8D8V3R+g41ueDhtjjl/J
+ 8T+4gLz3QKPajZY4ot93vhTspsPd0YPKJ+tV/VUWyd1nWdex0maHb5P2KU1geNrwIwUp
+ iNPQ==
+X-Gm-Message-State: AOJu0YwclXSyBcb2/hCIjg4A03miq7kSkfUbPiNAJIQ6fzlv3TtG9ksq
+ hQpfeBXyMEuhCBVCHz3aCuqHk9tzow5HD0psT3oRMQOp+4anhHHndUA0ag==
+X-Google-Smtp-Source: AGHT+IGHAVMvlCh9OLjQVGVOc6MXuq4MY38zC5O0GhGFA7wOidBtGAs5BEtDNcneFCrvK+d9Ag4/MQ==
+X-Received: by 2002:a17:902:db03:b0:206:bdb7:7637 with SMTP id
+ d9443c01a7336-2076e3eaba3mr33280385ad.48.1726131288092; 
+ Thu, 12 Sep 2024 01:54:48 -0700 (PDT)
+Received: from ISCN5CG2520RPD.infineon.com (KD106168128197.ppp-bb.dion.ne.jp.
+ [106.168.128.197]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2076afe9ea2sm10629265ad.233.2024.09.12.01.54.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 12 Sep 2024 01:54:47 -0700 (PDT)
+From: tkuw584924@gmail.com
+X-Google-Original-From: Takahiro.Kuwano@infineon.com
+To: u-boot@lists.denx.de
+Cc: jagan@amarulasolutions.com, vigneshr@ti.com, tkuw584924@gmail.com,
+ Bacem.Daassi@infineon.com, Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
+ Pratyush Yadav <pratyush@kernel.org>,
+ Tudor Ambarus <tudor.ambarus@linaro.org>
+Subject: [RESEND PATCH] mtd: spi-nor-ids: Add support for S28HS256T
+Date: Thu, 12 Sep 2024 17:54:27 +0900
+Message-Id: <20240912085427.14636-1-Takahiro.Kuwano@infineon.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] power: regulator: Trigger probe of regulators which
- are always-on or boot-on
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Cc: Svyatoslav Ryhel <clamor95@gmail.com>, u-boot@lists.denx.de,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>, Sumit Garg
- <sumit.garg@linaro.org>, uboot-stm32@st-md-mailman.stormreply.com
-References: <CAPVz0n3Ji1sKQK+Lnq8rP3ZqwX3o-kXe2btj93UuVBa3T5C=qw@mail.gmail.com>
- <eced1020-2157-44a4-98a9-845e218529d9@denx.de>
- <45c74c58-98cf-43df-b837-c48b0341c551@denx.de>
- <CAPVz0n2-DCKDcVrAi00kF6yDcE2bN1mtUhzBcw7JDiZoXgzu0w@mail.gmail.com>
- <e5837ce4-0a14-4822-960d-6ab667a9f4b1@denx.de>
- <CAPVz0n323ktF6kb3WHR9JcE+xOzQr9-aWOR47+ZvwQr=ib18rg@mail.gmail.com>
- <f778366b-bdaf-415d-a94e-c995f62e8c71@denx.de>
- <CAPVz0n0ru1rPb9SNw515mkwfs4=nNSOPjZY74JVkqnGbEouSLQ@mail.gmail.com>
- <cfc1a158-6c35-4288-aed0-fcc78a8db832@denx.de>
- <CAPVz0n1Vh7Vgnt8_Lx6U8p42QvtVnHB9yvb=RmjYrS=w1G3u1A@mail.gmail.com>
- <20240911162503.GQ4252@bill-the-cat>
- <CAFLszTjsJFmdsTUEOC-uFKUMyQDJkLhzvcyrSTSFhLF4L=Cp6w@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAFLszTjsJFmdsTUEOC-uFKUMyQDJkLhzvcyrSTSFhLF4L=Cp6w@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,42 +92,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/12/24 2:59 AM, Simon Glass wrote:
-> Hi Tom,
+From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
 
-Hello Simon,
+Infineon S28HS256T is 256Mb Octal SPI device which has same
+functionalities with 512Mb and 1Gb parts.
 
->> How do you propose we resolve this then, Svyatoslav? I threw this patch
->> at some TI platforms as well and they're all fine. Are you unable to get
->> some early debuging information out like Marek was asking? Thanks.
-> 
-> At this point I would like to have an optional Kconfig to enable the
-> always-on regulators in the init sequence, perhaps as part of
-> initf_dm().
+Link:https://www.infineon.com/dgdl/Infineon-S28HS256T_S28HL256T_256Mb_SEMPER_Flash_Octal_interface_1_8V_3-DataSheet-v02_00-EN.pdf?fileId=8ac78c8c8fc2dd9c018fc66787aa0657
+Signed-off-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+Reviewed-by: Pratyush Yadav <pratyush@kernel.org>
+Reviewed-by: Tudor Ambarus <tudor.ambarus@linaro.org>
+---
+Resent after adding R-b and Lin tags
 
-That would only move the current regulators_enable_boot_on() elsewhere 
-without fixing the real issue which this series does address -- that the 
-regulators which are marked as always-on/boot-on should always be 
-enabled on boot, unconditionally. If there are regulators which should 
-not be enabled on boot, they should not be marked always-on/boot-on in 
-DT in the first place.
+Tested on Xilinx Zynq-7000 board and Infineon internal SPI controller.
+---
+ drivers/mtd/spi/spi-nor-ids.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-The regulators_enable_boot_on() is missing or forgotten in multiple 
-board files, which makes boards randomly misbehave due to disabled 
-always-on regulators. Adding a Kconfig option would convert this problem 
-to "new Kconfig option is missing in multiple configs" problem, which is 
-effectively identical problem, only moved elsewhere. It should be the 
-core code that handles this the same way for all boards and configs.
+diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
+index 4e7e89eb65..b1e3a08089 100644
+--- a/drivers/mtd/spi/spi-nor-ids.c
++++ b/drivers/mtd/spi/spi-nor-ids.c
+@@ -386,6 +386,7 @@ const struct flash_info spi_nor_ids[] = {
+ #ifdef CONFIG_SPI_FLASH_S28HX_T
+ 	{ INFO("s28hl512t",  0x345a1a,      0, 256 * 1024, 256, SPI_NOR_OCTAL_DTR_READ) },
+ 	{ INFO("s28hl01gt",  0x345a1b,      0, 256 * 1024, 512, SPI_NOR_OCTAL_DTR_READ) },
++	{ INFO("s28hs256t",  0x345b19,      0, 256 * 1024, 128, SPI_NOR_OCTAL_DTR_READ) },
+ 	{ INFO("s28hs512t",  0x345b1a,      0, 256 * 1024, 256, SPI_NOR_OCTAL_DTR_READ) },
+ 	{ INFO("s28hs01gt",  0x345b1b,      0, 256 * 1024, 512, SPI_NOR_OCTAL_DTR_READ) },
+ 	{ INFO("s28hs02gt",  0x345b1c,      0, 256 * 1024, 1024, SPI_NOR_OCTAL_DTR_READ | NO_CHIP_ERASE) },
+-- 
+2.34.1
 
-The core has the tools for it too, the DM_FLAG_PROBE_AFTER_BIND flag 
-which is already used for the same purpose for LEDs, pinctrl, PMICs, 
-etc., which makes regulators_enable_boot_on() unnecessary.
-
-The DM_FLAG_PROBE_AFTER_BIND should be used more instead of ad-hoc 
-callbacks in random places of the init sequence, those do not scale.
-
-> It should not be in DM core, sorry.
-This is in regulator uclass, not in DM core ?
-
-This discussion thread is about debugging tegra i2c, how is your comment 
-related to the discussion here ?
