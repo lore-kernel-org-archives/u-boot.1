@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CE79EEB58B
-	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 10:07:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03114EEB584
+	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 10:16:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC1EB88E98;
-	Thu, 12 Sep 2024 12:07:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sartura.hr
+	by phobos.denx.de (Postfix) with ESMTP id 667CE88F53;
+	Thu, 12 Sep 2024 12:15:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="H/unUg0i";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Ekmw1Y2X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 36E8B88E04; Thu, 12 Sep 2024 12:07:24 +0200 (CEST)
-Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
- [IPv6:2607:f8b0:4864:20::1029])
+ id 4C10C88F54; Thu, 12 Sep 2024 12:15:58 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E2D6988F53
- for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 12:07:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1130388F4E
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 12:15:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=sartura.hr
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=robert.marko@sartura.hr
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-2d89229ac81so662763a91.0
- for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 03:07:21 -0700 (PDT)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-42cb1758e41so6174085e9.1
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 03:15:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sartura.hr; s=sartura; t=1726135640; x=1726740440; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=yYZctlTNeC8u/5nOJk9ZAEG9fy4pgGfSokRy9EcWxZs=;
- b=H/unUg0iqG8YGZL738Jb+DPetUMHxZEgi2siYlb44pn8cv5nVGiCtvXFax887C9kcF
- j+gm+FdhoC5vXEqRNxqIbtOb5yIMso/1QAwRpfZDu6WGSjY4sjDYahFFQQv/I2axClka
- WMcZjAAOoUbxgywIe9QAtQ3Mrl4bBRtuWiJLGzHP1Gw4awp0KGC6cAyBYNjYM5hy4DrB
- vjzgp6jeOu3QHXh8W5dYIw4mh00c9VoYKKXuK0bDgKCN8UxVAGEQLl9hSKxU0NIqhuth
- bQJjyiWELwOqjD6pIl7qMo8kTr7sjXnyRgWdOpVWNi1ZKPh6q1B8W9Je83kN8TItA176
- c7Lg==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1726136155; x=1726740955;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=iYZ8NJRvRggdh4HlvjvHMKF5Pknq4Tw5HtCQTjgwkzs=;
+ b=Ekmw1Y2X3jj3BhQisuvg5bsFoQS/YuvWnfCN0SI380pAbppj2n+znrf1YVlAadYeGb
+ tVKeR3gG+E3xglPfq4gnd6oGdPW6Ok1yYd5MlQ/LS1YlXKGCGGkmQlagwOY7lmmZ56hV
+ qNCxlSbuvaIH1OtaWRAVzDuZOthqgUv7HpEAh/9FG7cOZhuxdQFTkZWGmcQeaplZLMof
+ MwlZFgKvcHYzRzzqHiD9mvWEyLRKx2tjoyBh00iXMF/mJpqMoOCgTercZsOrAvt5m4Jc
+ eSx25NQhIWdrAu1q+WjhjlKzn71dwP3qrmpDg4Mw8WCrCVOkBP7h6M9CYavX1JLOFm+f
+ aBRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726135640; x=1726740440;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=yYZctlTNeC8u/5nOJk9ZAEG9fy4pgGfSokRy9EcWxZs=;
- b=ZPv2EjDERN/xXFpqlRByeH8FGlpuJtov0+4K4gq3pfGP7UUrmmbPaB0Rh+AqqdcTUb
- /v3pK7ZAZq3av0tvc5piGMaGz5KQjfuuktnEkIvNMepR/Tls+gBcl1I0Pl3RPX0DggUs
- PjwPXXTXKBDgkPCO8s0248C2QgMXkjXYH4wJsXAHFSjFXRYwM8f4d07lmvT14OSm2lE8
- 7LTOG+LUYJwOZHIozgMgN32vEJ3Tdr/No24z5+zfcPHjfWo6pByr+jhguCUrsxH4X0Br
- AJR818iFuP+mSWkanic8E0i3We1MxrqDczMH1wElqkgFDnLk4GKXue6T8Zvlr/GOdq2G
- WXgg==
+ d=1e100.net; s=20230601; t=1726136155; x=1726740955;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=iYZ8NJRvRggdh4HlvjvHMKF5Pknq4Tw5HtCQTjgwkzs=;
+ b=N5+O6AgfFqbtvvpQa/nC5mZuQ/pdbykA/2HzcYDkePSHYo2lFuvcABrLu5CJhnJffz
+ gcyyecWQcrTjaAr0fEdFMWT6j7jvFJ+mBcgW5DL57/RABFcK3DEvA9dR2Wjd+Vi3rSPr
+ bxjbQRxCW9OTOlXQ9tRiik4TXghZ4ONQ+HstPlVgq3kL8ETt7Dx26ixOOC466hu6+CP4
+ 08lGCSx/1UQdcBMCUODRTqLpyP9c3gUUdyilBL6alNacMVZbuE5EXNjThsjeeBXFV/dc
+ FZsfR5+mnlFqiWjUvduAtULxx/XmAV2NmgpUkQbnukspRDg6tW1NmfZDppIVNdII4dtz
+ P88Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX0NDxrlPmR0g3SwkUeN9sezaBOAjy7H0xNUvBKqcoWhm0IqFvnUGltH1nhC5Blk/+QtnxNOZE=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw93jI4oyPImc8WzWbDe6sAz7ZeUjNL8cHsiRRrjsPlupAJ/3aT
- TKI/u0fQwGSuiURSC9+h1DlMbd0L6+5TDGp/b6KXwkrEnUEkZ1acpOIkdajGOESBxY3fbzqTWJS
- n8IQgGcKd1rX3uxD+qWblerXU9vKuGb6VhGyu3g==
-X-Google-Smtp-Source: AGHT+IGw6/XilpH1umsMZvTsLmCw5g2B+DaBpYZ2ayBatMb9Qp67y/lGEanwFK1Z/vGlavu9FYgpuOlINNH4aou7fNY=
-X-Received: by 2002:a17:90a:2d84:b0:2d8:ee39:465 with SMTP id
- 98e67ed59e1d1-2db9ff7401amr3118052a91.1.1726135640184; Thu, 12 Sep 2024
- 03:07:20 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240425143627.54648-1-robert.marko@sartura.hr>
- <c399216d-34d1-435e-96a7-6716f9f2c32c@gmail.com>
-In-Reply-To: <c399216d-34d1-435e-96a7-6716f9f2c32c@gmail.com>
-From: Robert Marko <robert.marko@sartura.hr>
-Date: Thu, 12 Sep 2024 12:07:09 +0200
-Message-ID: <CA+HBbNGSZ3enyCF9cT8_1qJYt7TndDKJ-OYYe4EaS6_BTPnbRw@mail.gmail.com>
-Subject: Re: [PATCH 1/2] mtd: spi-nor-core: allow overriding 4-byte OPCODE
- support
-To: Tudor Ambarus <tudor.ambarus@gmail.com>
-Cc: jagan@amarulasolutions.com, vigneshr@ti.com, trini@konsulko.com, 
+ AJvYcCU6+dzJQgc8dp+fy7IKOYNfXRU+zaWi4oLEclXPhTUJKbWgU9ZNLSZYA1wnfribrhto8iJvudE=@lists.denx.de
+X-Gm-Message-State: AOJu0YzdfvZe5kCeqz7EHVn/dDiggJObUfpIJ8K4w5bGZJloGnCaWQOj
+ q2IgPXTkydVogniAkRWBRi+d3kHNzA5WtdN9Vx/8aNCUZySuTyvIstW5PbO/fRI=
+X-Google-Smtp-Source: AGHT+IFGk8EH3GMltC2FdWlLQ6PYtT8SY7vErlvsrxguDv6eaZbMJGI3ZlFNy8RPbqmqOacn5zMoPA==
+X-Received: by 2002:a05:600c:4fd6:b0:426:62c5:4741 with SMTP id
+ 5b1f17b1804b1-42cdb509e19mr16947955e9.2.1726136154729; 
+ Thu, 12 Sep 2024 03:15:54 -0700 (PDT)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-42cc01a8ee7sm89274675e9.0.2024.09.12.03.15.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 12 Sep 2024 03:15:53 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Guillaume La Roque
+ <glaroque@baylibre.com>, Julien Masson <jmasson@baylibre.com>,
  u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH] bootstd: android: Add U-Boot version to cmdline
+In-Reply-To: <CAFLszTiKCbnqFv_nX4eH3n01LaHHwJstXLEpA3G6UXC7spZMxA@mail.gmail.com>
+References: <20240904-bootmeth-bootloader-version-v1-1-9979a8428566@baylibre.com>
+ <CAFLszTiKCbnqFv_nX4eH3n01LaHHwJstXLEpA3G6UXC7spZMxA@mail.gmail.com>
+Date: Thu, 12 Sep 2024 12:15:52 +0200
+Message-ID: <877cbhkwiv.fsf@baylibre.com>
+MIME-Version: 1.0
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,30 +94,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Sep 10, 2024 at 9:55=E2=80=AFAM Tudor Ambarus <tudor.ambarus@gmail.=
-com> wrote:
+Hi Simon,
+
+Thank you for your review.
+
+On mer., sept. 11, 2024 at 18:59, Simon Glass <sjg@chromium.org> wrote:
+
+> Hi Mattijs,
 >
-> Hiya,
+> On Wed, 4 Sept 2024 at 03:38, Mattijs Korpershoek
+> <mkorpershoek@baylibre.com> wrote:
+>>
+>> When booting into Android fastbootd (a subset of recovery), the default
+>> UI shows the bootloader version in the screen [1].
+>> This is done via the ro.bootloader property which should come from the
+>> bootloader.
+>>
+>> Provide the U-Boot version via a kernel commandline argument so that
+>> fastbootd can show it properly on the screen.
+>>
+>> [1] https://android.googlesource.com/platform/bootable/recovery/+/refs/heads/main/fastboot/fastboot.cpp#42
+>>
+>> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>> ---
+>>  boot/bootmeth_android.c | 9 +++++++++
+>>  1 file changed, 9 insertions(+)
+>>
+>> diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
+>> index 6e8d3e615db0..2fb82a5073de 100644
+>> --- a/boot/bootmeth_android.c
+>> +++ b/boot/bootmeth_android.c
+>> @@ -22,6 +22,7 @@
+>>  #include <malloc.h>
+>>  #include <mapmem.h>
+>>  #include <part.h>
+>> +#include <version.h>
+>>  #include "bootmeth_android.h"
+>>
+>>  #define BCB_FIELD_COMMAND_SZ 32
+>> @@ -171,6 +172,12 @@ static int configure_serialno(struct bootflow *bflow)
+>>         return bootflow_cmdline_set_arg(bflow, "androidboot.serialno", serialno, false);
+>>  }
+>>
+>> +static int configure_bootloader_version(struct bootflow *bflow)
+>> +{
+>> +       return bootflow_cmdline_set_arg(bflow, "androidboot.bootloader",
+>> +                                       PLAIN_VERSION, false);
+>> +}
+>> +
+>>  static int android_read_bootflow(struct udevice *dev, struct bootflow *bflow)
+>>  {
+>>         struct blk_desc *desc = dev_get_uclass_plat(bflow->blk);
+>> @@ -267,6 +274,8 @@ static int android_read_bootflow(struct udevice *dev, struct bootflow *bflow)
+>>         /* Ignoring return code: setting serial number is not mandatory for booting */
+>>         configure_serialno(bflow);
+>>
+>> +       configure_bootloader_version(bflow);
 >
-> Please specify which linux commit this patch follows. It helps reviewers
-> and gives credit to the linux author.
+> Error check? If for some reason you want to ignore the error, please
+> add a comment here.
 
-Hi,
-There isn't a specific Linux commit for this as far as I can tell.
+I indeed want to ignore the error. We don't want to block the boot if
+for some reason we cannot set the U-Boot version in the kernel
+commandline.
 
-Regards,
-Robert
+I will rework the above comment to be more generic about this.
+
+Thanks.
+Mattijs
+
 >
-> Thanks,
-> ta
-
-
-
---=20
-Robert Marko
-Staff Embedded Linux Engineer
-Sartura d.d.
-Lendavska ulica 16a
-10000 Zagreb, Croatia
-Email: robert.marko@sartura.hr
-Web: www.sartura.hr
+>> +
+>>         if (priv->boot_mode == ANDROID_BOOT_MODE_NORMAL) {
+>>                 ret = bootflow_cmdline_set_arg(bflow, "androidboot.force_normal_boot",
+>>                                                "1", false);
+>>
+>> ---
+>> base-commit: 360aaddd9cea8c256f50c576794415cadfb61819
+>> change-id: 20240904-bootmeth-bootloader-version-2a2b35fce4cf
+>>
+>> Best regards,
+>> --
+>> Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>>
+>
+> REgards,
+> Simon
