@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A445EEE57F9
-	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 01:00:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3335EE57F9
+	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 01:00:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B50D88D75;
-	Thu, 12 Sep 2024 02:59:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 72A6E88D5C;
+	Thu, 12 Sep 2024 02:59:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CoXNYGP1";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="W1Eu/p02";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C6BB88D68; Thu, 12 Sep 2024 02:59:09 +0200 (CEST)
-Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
- [IPv6:2607:f8b0:4864:20::42b])
+ id 4998888D70; Thu, 12 Sep 2024 02:59:09 +0200 (CEST)
+Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
+ [IPv6:2607:f8b0:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 633E188D7F
+ by phobos.denx.de (Postfix) with ESMTPS id 532A388D7E
  for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 02:59:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x42b.google.com with SMTP id
- d2e1a72fcca58-718d8d6af8fso255664b3a.3
+Received: by mail-pf1-x431.google.com with SMTP id
+ d2e1a72fcca58-718da0821cbso297826b3a.0
  for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 17:59:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1726102744; x=1726707544; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=77Q8lr9BKD7MyqNH9EI2s+lEVnPH+6P8Cx5LdmYRJHk=;
- b=CoXNYGP1FiOOwlJYs5AJuR1o7U2nVKPjbRngrY27VHsd8Xudjnpi28L4I8ieG84P20
- oKlWCSuyPW4OqWE/owojoEg4maZh1qx0oO0U3ZQm+HZ3Pr/J88qGoqA/GyvCVmVVBou5
- lT7wON0DiQ1kiaBXhMD3XyG3qgsSO5QMuVFJk=
+ bh=GlsiM+QMYPl220yJnswD7h/MBOmS0As1iDf/KGTcqPE=;
+ b=W1Eu/p0297tGBYW7N5w8pBKTEXNoFuiv81H8D+Iv9uGP4xo0zm1BmiUiuUitZSLNU4
+ TIGMJ28GpAVygX9pPWkdEkr8u3Mxw5AfrSQ1f3gzWfyK62igvqOakG/YEwJgUnjSDB+S
+ zdE1G8nQE7mmXfDZmMH1wkl7Rh3lvJsOTZZck=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1726102744; x=1726707544;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=77Q8lr9BKD7MyqNH9EI2s+lEVnPH+6P8Cx5LdmYRJHk=;
- b=CgQ86TrBOjpOFcLcpKeQZ/c/Zz3gjvKZbHvOPvnAx5zZLttr2WPV6A+sZskgBF0q9B
- UpUmD/r+uhANHsk5q0yWsgdaCqfxc9bW4tBSq3PNgHlc+lcl4PSBdqZKtvRegGHqfatT
- pdDuPSCYejKbhJOuF/rmn0Q2WkdjyKx99tcbYxjzW4jy2vVI+jveVzezrrBBNpk3eLLu
- aPMzj/TBWCRjYn6Rj12X3O+xtaW92Kqjnjs4V1B1+vCGMDr3T5PnBg89tT483BLtg2JK
- RXMwdBalQ0mToUHBYXlmZjHAfizvBDDJalul2sj+BwVtpBGUMMD9FELTQUZ5uGntspRS
- 6n2Q==
-X-Gm-Message-State: AOJu0YwUZ35G/6rjKeRGaAsTnbTh6THy3Y7Tk7+00WyDJ13F5sG11wdb
- zpsKz/eZpMjifusng3UXIevhnLMWibSloymjd0u8SvONgrUT56r2caqKCISIpwebP1Fb2rh5SrS
- VJnUngPt+vRqECb3WgcrFD3qpfcugK9TkzxnhSfi5YYDDYVo=
-X-Google-Smtp-Source: AGHT+IG9eR1TbOqBK9sGXWLyh8kekPaGioY88izzwvDG+5Pyd19EEQGzFq50UYXYWFx74CbBqxY1REtBlSoW5nLddMc=
-X-Received: by 2002:a05:6a00:1a86:b0:717:839c:6838 with SMTP id
- d2e1a72fcca58-71926095e9bmr1300204b3a.14.1726102743870; Wed, 11 Sep 2024
+ bh=GlsiM+QMYPl220yJnswD7h/MBOmS0As1iDf/KGTcqPE=;
+ b=e65OtcnCJ8k6gQdEtpXORIsfD7Ijznf1ZR66g0Hw/hLK8Z0D0zXLHwJ0yxX8YMCOE9
+ EdF/dV9MxXZALUfBqEf/6msHXi0tsW/ztt7cY95vEGba2Ng80d8cohK5g0596YshLGEo
+ pSNddngE5eeTCLm7B1EewhGWRojO2H9RtQSkC3FCOpuHfx8j1T261OxQxQ8zHF+KLY+V
+ UlaCUrovmw45RUpl3enrIBLv7QJ9tfYyi7jdhN/WpN+6pkFEn8/a4FLG6taAeTWmDRWH
+ R8yuXZMqhgL/lUIsfelpQvMH7emjNDiGdm7BTCKkYwu1c5lkIQXbiLFBhVfRAxLmB8ux
+ t5mw==
+X-Gm-Message-State: AOJu0Yx77rhjzsku43VcgBJotwXiMfcSkBBq8QdpqL/6oPyyrZ45l4wc
+ 8i+mWQmXThfyJ6rrdR+gPjF/bt2/c49uF4IHMv6EwJQ8fE9A7a6+iSd/RXVaZ/RJDIoqmQzd7PW
+ eBI3cNDrA4jnoG0H2aSKWAtvb5AFA20H0mCWB
+X-Google-Smtp-Source: AGHT+IGgyuc8cStdqIFS1AiWQ9dZTpWcaBs36SFscRSHfA+uhhFSC70BQnw4g0wd75T+KODqjrxsV9smz5nmMVg1cfE=
+X-Received: by 2002:a05:6a00:b83:b0:70b:a46:7db7 with SMTP id
+ d2e1a72fcca58-719260962c0mr1654760b3a.16.1726102743872; Wed, 11 Sep 2024
  17:59:03 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240911062511.494855-1-patrick.rudolph@9elements.com>
- <20240911062511.494855-20-patrick.rudolph@9elements.com>
-In-Reply-To: <20240911062511.494855-20-patrick.rudolph@9elements.com>
+ <20240911062511.494855-26-patrick.rudolph@9elements.com>
+In-Reply-To: <20240911062511.494855-26-patrick.rudolph@9elements.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 11 Sep 2024 18:58:26 -0600
-Message-ID: <CAFLszTj90Xm50hNCC0S3wn7nJyXp4R2JoMMg1+sCUabjJGhJTQ@mail.gmail.com>
-Subject: Re: [PATCH v3 19/30] arm: gic-v3-its: Rename objects
+Date: Wed, 11 Sep 2024 18:58:24 -0600
+Message-ID: <CAFLszTjAtOS+cr6=4vMEm9y7DGzLT6jZ9wJDQLM31BBWpf8+tA@mail.gmail.com>
+Subject: Re: [PATCH v3 25/30] arm: bcm283x: Generate ACPI tables
 To: Patrick Rudolph <patrick.rudolph@9elements.com>
-Cc: u-boot@lists.denx.de, linux-kernel@vger.kernel.org, 
- Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Matthias Brugger <mbrugger@suse.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,62 +85,79 @@ X-Virus-Status: Clean
 
 Hi Patrick,
 
-On Wed, 11 Sept 2024 at 00:29, Patrick Rudolph
+On Wed, 11 Sept 2024 at 00:26, Patrick Rudolph
 <patrick.rudolph@9elements.com> wrote:
 >
-> The code accesses the gic-v3 node, but not the gic-v3-its node,
-> thus rename the objects to clarify which node it operates on.
+> Generate SoC specific ACPI tables for BCM2711:
+> - MADT
+> - FADT
+> - PPTT
+> - GTDT
 >
-> The following commit will make use of the gic-v3-its node for real.
+> Board specific tables like DSDT and SSDT are added in a separate patch.
+>
+> When ACPI is enabled for a different SoC compliation will fail by
+> design, indicating the required functions that needs to be implemented.
+> When ACPI is not enabled the added code does nothing, keeping existing
+> behaviour.
+>
+> TEST: Booted on RPi4 with only ACPI enabled, providing no FDT to the OS.
 >
 > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Matthias Brugger <mbrugger@suse.com>
+> Cc: Peter Robinson <pbrobinson@gmail.com>
+> Cc: Tom Rini <trini@konsulko.com>
 > ---
->  arch/arm/lib/gic-v3-its.c | 10 +++++-----
->  1 file changed, 5 insertions(+), 5 deletions(-)
+> Changelog v2:
+> - Drop duplicated code to generate ACPI tables. Is now part of efi loader.
+>
+> ---
+>  arch/arm/mach-bcm283x/Makefile       |   4 +
+>  arch/arm/mach-bcm283x/bcm2711_acpi.c | 150 +++++++++++++++++++++++++++
+>  2 files changed, 154 insertions(+)
+>  create mode 100644 arch/arm/mach-bcm283x/bcm2711_acpi.c
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
-But how many interrupt controllers are there? Would
-uclass_first_device_err(UCLASS_IRQ) work?
+nit below
 
+> diff --git a/arch/arm/mach-bcm283x/Makefile b/arch/arm/mach-bcm283x/Makefile
+> index 7cd068832f..38e320307d 100644
+> --- a/arch/arm/mach-bcm283x/Makefile
+> +++ b/arch/arm/mach-bcm283x/Makefile
+> @@ -4,3 +4,7 @@
 >
-> diff --git a/arch/arm/lib/gic-v3-its.c b/arch/arm/lib/gic-v3-its.c
-> index 2cc0a32f9d..22fa46a341 100644
-> --- a/arch/arm/lib/gic-v3-its.c
-> +++ b/arch/arm/lib/gic-v3-its.c
-> @@ -35,10 +35,10 @@ static int gic_v3_its_get_gic_addr(struct gic_v3_its_priv *priv)
->         int ret;
->
->         ret = uclass_get_device_by_driver(UCLASS_IRQ,
-> -                                         DM_DRIVER_GET(arm_gic_v3_its), &dev);
-> +                                         DM_DRIVER_GET(arm_gic_v3), &dev);
->         if (ret) {
->                 pr_err("%s: failed to get %s irq device\n", __func__,
-> -                      DM_DRIVER_GET(arm_gic_v3_its)->name);
-> +                      DM_DRIVER_GET(arm_gic_v3)->name);
->                 return ret;
->         }
->
-> @@ -158,13 +158,13 @@ int gic_lpi_tables_init(u64 base, u32 num_redist)
->         return 0;
->  }
->
-> -static const struct udevice_id gic_v3_its_ids[] = {
-> +static const struct udevice_id gic_v3_ids[] = {
->         { .compatible = "arm,gic-v3" },
->         {}
->  };
->
-> -U_BOOT_DRIVER(arm_gic_v3_its) = {
-> +U_BOOT_DRIVER(arm_gic_v3) = {
->         .name           = "gic-v3",
->         .id             = UCLASS_IRQ,
-> -       .of_match       = gic_v3_its_ids,
-> +       .of_match       = gic_v3_ids,
->  };
-> --
-> 2.46.0
->
+>  obj-$(CONFIG_BCM2835) += lowlevel_init.o
+>  obj-y  += init.o reset.o mbox.o msg.o phys2bus.o
+> +
+> +ifeq ($(CONFIG_GENERATE_ACPI_TABLE),y)
+> +obj-$(CONFIG_BCM2711) += bcm2711_acpi.o
+> +endif
+> \ No newline at end of file
+> diff --git a/arch/arm/mach-bcm283x/bcm2711_acpi.c b/arch/arm/mach-bcm283x/bcm2711_acpi.c
+> new file mode 100644
+> index 0000000000..34adc0aa42
+> --- /dev/null
+> +++ b/arch/arm/mach-bcm283x/bcm2711_acpi.c
+> @@ -0,0 +1,150 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * (C) Copyright 2024 9elements GmbH
+> + *
+> + * See file CREDITS for list of people who contributed to this
+> + * project.
+> + */
+> +
+> +#include <acpi/acpi_table.h>
+> +#include <asm/acpi_table.h>
+> +#include <asm/armv8/sec_firmware.h>
+> +#include <asm/arch/acpi/bcm2711.h>
+> +#include <dm/uclass.h>
+> +#include <tables_csum.h>
+> +#include <string.h>
 
-Regards,
-Simon
+Please fix header order [1]
+
+[1] https://docs.u-boot.org/en/latest/develop/codingstyle.html#include-files
