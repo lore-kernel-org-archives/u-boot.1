@@ -4,79 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55B5EEE57FB
-	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 01:04:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15F8BEE57F6
+	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 01:05:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C8B588DCF;
-	Thu, 12 Sep 2024 03:01:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AF42E88E50;
+	Thu, 12 Sep 2024 03:01:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iMfa0ZCk";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="l+andF2L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65C1588E64; Thu, 12 Sep 2024 03:01:53 +0200 (CEST)
-Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
- [IPv6:2607:f8b0:4864:20::1035])
+ id 932D688E45; Thu, 12 Sep 2024 03:01:57 +0200 (CEST)
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
+ [IPv6:2607:f8b0:4864:20::1034])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2BF888E3F
- for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 03:01:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6EBC488D09
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 03:01:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1035.google.com with SMTP id
- 98e67ed59e1d1-2d8b96c18f0so339747a91.2
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 18:01:50 -0700 (PDT)
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-2d89229ac81so355600a91.0
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 18:01:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726102909; x=1726707709; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1726102914; x=1726707714; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=WZI8WXNRQFQIMa+UqlFs1cT8t+tQlg8vbekl9vEwKfA=;
- b=iMfa0ZCkxxcoSPkjr8sAV/iIEL8zt4AzVfbNtNh4PPsJvZM1eT9hA9xm/nGgk8ZN5H
- E5OcQuS0WsJXdUT6a/qf0HYIvckx9JOLsT+vKDnkFnRv2JJBwgE/3tu1mIl+7fCYbF8s
- e4/61avMk/XiGekTNSUrA/+sLqYq4b6ACzwdY=
+ bh=PylSVl+kN3wTQaC+Bwgq0gTCooV0FA4ICleB6rt8PHg=;
+ b=l+andF2Lcxz6FDawCPSDbJo4CUUV5RqSKJoRJ/1bCTHZ/XuSXaEF2f+NoThcuSpoHx
+ GYiJhWR54Biyxe0t0Z8VzH+lgCOKEwswcsgq1rUa/o4GW+QYh8oxQdcWjr62bAAQmuSu
+ EpUbU9bUlC9D2ABBKLsQvEbM9AC/hSlQ/7rCk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726102909; x=1726707709;
+ d=1e100.net; s=20230601; t=1726102914; x=1726707714;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=WZI8WXNRQFQIMa+UqlFs1cT8t+tQlg8vbekl9vEwKfA=;
- b=NqdM8IFkr1lUvY66WK2bxM4dnsuMmmE53deO63QUAsdYvG/H1QOG8JZCf1WyWbYXA8
- xCmU40dfy3UyTQVrr20RLYi2MLr6wiW17yKJoNeq7N2evAb/L8mAM9W0Z8pLbu65oZEz
- XLp+PZgfR3eMK5qSQ/zOrD//BeGRb2sH3lE7YkykD+hAnll2PtNf7/b2wMVKwOHhMk91
- iZm++aaipwFRmLXdZPlbzT3XHbie+kyQkAG6//CqXZFSYr6UbMdZXNYlXqdxobhkvqkJ
- 4LOur4bQHAdOyDuzuHqRZKlX/qYhw88gBbu0yI9tJ0jOE5a3h0uO0DLhKGAYdUURq7ps
- sjvw==
-X-Gm-Message-State: AOJu0YxbiX0wpmY37g8KqZW5/MD4T7R+Mr9tQfvwjggBjwDzHuiLMaqx
- CBTIXa8ez1BrGAS5IZup6JlBlpfR9s/A1/Ir/SIB8ClhRoM08gmZm26fT9fC8Ms2kKLRA5/kQD7
- 01jL1gtj5w4DTikLNFjiE13ixwYGD6+mt4K6F
-X-Google-Smtp-Source: AGHT+IGlqRb1VQd71826ZfrC8320UVZVTg2N6G0Tzxn5dOUXT87/ZGiezKCULATd3lAotoExEqX/IHVXS35CxtWNMMA=
-X-Received: by 2002:a17:90b:3888:b0:2d8:9f4c:ecb8 with SMTP id
- 98e67ed59e1d1-2db9ff90ca9mr1470347a91.13.1726102908921; Wed, 11 Sep 2024
- 18:01:48 -0700 (PDT)
+ bh=PylSVl+kN3wTQaC+Bwgq0gTCooV0FA4ICleB6rt8PHg=;
+ b=ghtu9X08ARrLSGOxGcnC4HYxYXbT/5fq5J0uFpmp5RH8bgsSx3KKAd+Z/02ZbZUgFU
+ nXJSgphgtbrSXNyhQxIKLbuHsx+Bo3cjnEqzOO79DGauUxFHa+RZgfJ3CgQP6QXQizOq
+ 9u7ZtVFEXddXMHp1JpZA+tNuP+Gf2SrKq+U8r2ZzT4da3wKjcd/c7ql5d8J71vELMCBW
+ cHMWmxKEHVBQBY0iI9cDVdPKeifGFw0Wu0YEHgwVRebddF4jEtjGTKM/eYndysw+Ty+J
+ JOvSt/ChL+y3LklQgnGPMr3NLATsxUvMvqZBIEqUK/H5Dt7a3mqhfnRf2f+8cWw5ZaP9
+ /j8g==
+X-Gm-Message-State: AOJu0YzS7lrOZFU+YFftH7bqmqDTsR8+OIsCV5Zj+QyWMB493WQoCtMN
+ XdW7svoH+SIWFMvWuByjNWJNKKWIUVOqx18ubWcrmVbc9++B5pm4L+d8EdPQ/0y2Ttzj/ILuZW9
+ r0h303zxpwa4R1LFO/qIlwWpjY/wAcQzjnVni7cx4AglPvCM=
+X-Google-Smtp-Source: AGHT+IGKeKSWbjjT6EXBvb1mivkpt0oVA0u2kY/sTgckIa1o7iP3zUPal4cEMjRGcO1qY9XJuLjiEO5fTQCZb5ZqJdI=
+X-Received: by 2002:a17:90a:ab0b:b0:2d8:97b7:449f with SMTP id
+ 98e67ed59e1d1-2dba0065e20mr1272008a91.38.1726102913823; Wed, 11 Sep 2024
+ 18:01:53 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAFLszTh1Nig-hs+Gtxzg8f-=vE1z4BvNSfEyUGtatZohj0pnuQ@mail.gmail.com>
- <CAFLszTgufCxvXjJupqDphcGwJ0gfvrYxQACK3kYRKaumpKgrYQ@mail.gmail.com>
- <20240822141013.GQ1626301@bill-the-cat>
- <CAFLszTiV8Nut06NeJFqT87y8qSTfzMYwxY6vc10+Q6NY6u2m-A@mail.gmail.com>
- <20240902153904.GX2479150@bill-the-cat>
- <CAFLszTi4_=n6SmfN8unNx6DgO+C4HQwpxG8gcWuOGUd4Lna_ug@mail.gmail.com>
- <20240910184242.GL4252@bill-the-cat>
- <CAFLszTjfU8m-dQyXXAHJ0FWGfAMdvF3yYDMOofN87qocY0mRyg@mail.gmail.com>
- <20240910185237.GM4252@bill-the-cat>
- <CAFLszTgNPmHD7t4k1BkB_eSVZz7ZgP9=vuoPykm2ZGV0PQxg3g@mail.gmail.com>
- <20240910220708.GN4252@bill-the-cat>
-In-Reply-To: <20240910220708.GN4252@bill-the-cat>
+References: <CAHWDVAm=nKWzKEa4nTc--ZZ-CAQaqso3MK48pGeK7_BUMvuqhg@mail.gmail.com>
+In-Reply-To: <CAHWDVAm=nKWzKEa4nTc--ZZ-CAQaqso3MK48pGeK7_BUMvuqhg@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 11 Sep 2024 19:01:37 -0600
-Message-ID: <CAFLszTj_TEO6K+SU76FHwxsk6awKTXkZ2hS1yJiB5wGA7LMm-A@mail.gmail.com>
-Subject: Re: [PATCH v3 2/3] buildman: Allow skipping the dtc build
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
- Brandon Maier <brandon.maier@collins.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
+Date: Wed, 11 Sep 2024 19:01:39 -0600
+Message-ID: <CAFLszTjhd=Aa=r64CJcaCGoGhQsFba0tuFvNoYr_9C-rUPOFRw@mail.gmail.com>
+Subject: Re: fit signing without access to private key
+To: Mikael Pahmp <mikael.pahmp@gmail.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,164 +81,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Mikael,
 
-On Tue, 10 Sept 2024 at 16:07, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 6 Sept 2024 at 11:06, Mikael Pahmp <mikael.pahmp@gmail.com> wrote:
 >
-> On Tue, Sep 10, 2024 at 02:14:35PM -0600, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Tue, 10 Sept 2024 at 12:52, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Tue, Sep 10, 2024 at 12:45:39PM -0600, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Tue, 10 Sept 2024 at 12:42, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Tue, Sep 10, 2024 at 12:41:11PM -0600, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Mon, 2 Sept 2024 at 09:39, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Sun, Sep 01, 2024 at 02:09:39PM -0600, Simon Glass wrote:
-> > > > > > > > Hi Tom,
-> > > > > > > >
-> > > > > > > > On Thu, 22 Aug 2024 at 08:10, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > >
-> > > > > > > > > On Wed, Aug 21, 2024 at 09:00:25PM -0600, Simon Glass wrote:
-> > > > > > > > > > Hi Tom,
-> > > > > > > > > >
-> > > > > > > > > > On Fri, 16 Aug 2024 at 17:53, Simon Glass <sjg@chromium.org> wrote:
-> > > > > > > > > > >
-> > > > > > > > > > > Hi Tom,
-> > > > > > > > > > >
-> > > > > > > > > > > On Fri, 16 Aug 2024 at 11:22, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > > > > >
-> > > > > > > > > > > > On Thu, Aug 15, 2024 at 01:57:45PM -0600, Simon Glass wrote:
-> > > > > > > > > > > >
-> > > > > > > > > > > > > For most boards, the device-tree compiler is built in-tree, ignoring the
-> > > > > > > > > > > > > system version. Add a special option to skip this build. This can be
-> > > > > > > > > > > > > useful when the system dtc is up-to-date, as it speeds up the build.
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > > > > > > ---
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > (no changes since v1)
-> > > > > > > > > > > > >
-> > > > > > > > > > > > >  tools/buildman/builder.py       | 27 ++++++++++++++++++++++++++-
-> > > > > > > > > > > > >  tools/buildman/builderthread.py |  4 ++--
-> > > > > > > > > > > > >  tools/buildman/buildman.rst     |  3 +++
-> > > > > > > > > > > > >  tools/buildman/cmdline.py       |  2 ++
-> > > > > > > > > > > > >  tools/buildman/control.py       |  3 ++-
-> > > > > > > > > > > > >  tools/buildman/test.py          | 31 +++++++++++++++++++++++++++++++
-> > > > > > > > > > > > >  6 files changed, 66 insertions(+), 4 deletions(-)
-> > > > > > > > > > > >
-> > > > > > > > > > > > We should probably do this more generically, outside of buildman. We
-> > > > > > > > > > > > have scripts/dtc-version.sh and if the system version isn't new enough
-> > > > > > > > > > > > (and we just need to define whatever the minimum version is), then we
-> > > > > > > > > > > > build our (not currently that new anymore) dtc instead.
-> > > > > > > > > > >
-> > > > > > > > > > > Yes I think I did a patch for that ages ago [1], but it was rejected.
-> > > > > > > > > > >
-> > > > > > > > > > > I'd be very happy for it to be applied as I think it is a better
-> > > > > > > > > > > solution than this one.
-> > > > > > > > > > >
-> > > > > > > > > > > I see that some poor sod tried to do this in Linux this morning.
-> > > > > > > > > >
-> > > > > > > > > > Any thoughts on that patch?
-> > > > > > > > >
-> > > > > > > > > I'm open to re-considering [1] again, but we need to handle the warning
-> > > > > > > > > problem first. That means...
-> > > > > > > > >
-> > > > > > > > > > Also I do see one problem. Newer dtc version produce a lot of
-> > > > > > > > > > warnings, which causes CI to fail. So if we always use the newest
-> > > > > > > > > > version, people are going to see a ton of warnings when they run
-> > > > > > > > > > locally. Am I missing something here?
-> > > > > > > > >
-> > > > > > > > > Well, it would be great to get our Kbuild logic anywhere close to
-> > > > > > > > > in-sync again with upstream. But syncing up the disabling warning flags
-> > > > > > > > > shouldn't be too hard.
-> > > > > > > >
-> > > > > > > > So, coming back to this patch, the nice thing about it is that it is
-> > > > > > > > deterministic. So people who build U-Boot and don't want funky
-> > > > > > > > behaviour will be happy. It will use the internal dtc by default. To
-> > > > > > > > use the external one, you must provide an option.
-> > > > > > > >
-> > > > > > > > This patch only affects buildman, but as you can see the mechanism it
-> > > > > > > > uses is to set the DTC variable, which people can do without buildman.
-> > > > > > > > It's just a convenience, but useful enough to have a flag, I believe.
-> > > > > > >
-> > > > > > > Wait, that's right, we have DTC as a thing that can be set in the
-> > > > > > > environment, so why do we need something for buildman at all?
-> > > > > >
-> > > > > > It's a convenience. I have found that it speeds things up quite a bit,
-> > > > > > so I want to enable it most of the time. But we can't do it by default
-> > > > > > and need it to be optional, I believe.
-> > > > >
-> > > > > I wasn't clear, sorry. Why is:
-> > > > > $ export DTC=/usr/local/bin/dtc
-> > > > > $ tools/buildman/buildman ...
-> > > > >
-> > > > > Enough?
-> > > >
-> > > > My patch is more equivalent to:
-> > > >
-> > > > DTC=`which dtc` buildman...
-> > > >
-> > > > As I said it is a convenience which I want to use all the time,
-> > > > including in CI. Are you worried about changing buildman? What is the
-> > > > issue here?
-> > >
-> > > My question / concern is why do we need:
-> > >
-> > > >  6 files changed, 66 insertions(+), 4 deletions(-)
-> > >
-> > > When we can do it with zero code changes?
-> >
-> > We don't need anything here...but this helps with my productivity as
-> > and can add this flag easily when doing large builds.
-> >
-> > Note that half of those lines are a test and another half are just
-> > plumbing it through all the layers. Any new flag will end up with
-> > this, even if it is a few lines of 'real' code.
-> >
-> > > And then similar to the
-> > > worries I set aside with the "venv" related changes,
-> >
-> > That change does fix a bug. Without the change, we cannot run code
-> > coverage in CI, which I very-much want to turn on once Marek can
-> > figure out the missing Binman tests.
-> >
-> > > you're making one
-> > > tool be clever and work as exactly as expected (but perhaps in a "do
-> > > what I meant, not what I said" manner?) way.
-> >
-> > The only magic is that it locates dtc on the path, but that is the
-> > thing that I find valuable.
-> >
-> > > If we have "set DTC in
-> > > environment, it's always obeyed, can be passed directly to make" but
-> > > also "pass buildman a flag to say where dtc is" why do we need the
-> > > latter if it should already be working, and I think already is working?
-> >
-> > The flag doesn't tell buildman where dtc is, though. It tells buildman
-> > to hunt for it and use that in preference to the internal build. I am
-> > not suggesting adding anything non-deterministics.
-> >
-> > A general point here...buildman is pretty stable but it is not perfect
-> > and we continue to tweak it to help make it a better tool. When it is
-> > perfect, I will certainly stop sending patches for it. I normally only
-> > send a patch when a bug is reported or something annoys me. The dtc
-> > thing annoys me *a lot* because it chews up ~20% of my CPU for no
-> > purpose. I had not realised how bad this problem was.
+> Hi. We want to sign fitImages but our company policies does not allow
+> access to the private signing key from our build machines. Is there a way
+> using e.g. mkimage to
 >
-> Thanks for explaining. Whenever you want to pick this one up, go ahead
-> and send it along then. And I guess at some point we should look at (a)
-> re-syncing our libfdt code and (b) switching to using system dtc by
-> default?
+>    1. Generate the hash of a fitImage configuration section?
+>    We will then request a signature for the hash from our enterprise PKI.
+>    2. Incorporate the signature in the fitImage?
 
-OK thank you. Perhaps we should file an issue for that? I am trying to
-do one issue a week, although I have failed the last few weeks.
+There is not, but it would be a useful feature. Let me know if you
+would like some pointers for how to implement this.
 
 Regards,
 Simon
+
+>
+> BR / Mikael
