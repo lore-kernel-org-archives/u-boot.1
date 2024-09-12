@@ -4,54 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DB9FEED617
-	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 15:51:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 497A2EED615
+	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 15:51:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BCEE18904B;
-	Thu, 12 Sep 2024 17:51:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 15A0B89051;
+	Thu, 12 Sep 2024 17:51:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ht1yydS3";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="RlwOgR4N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7945489042; Thu, 12 Sep 2024 17:51:19 +0200 (CEST)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ id 7F73189013; Thu, 12 Sep 2024 17:51:19 +0200 (CEST)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org
+ [IPv6:2604:1380:45d1:ec00::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0BCF8900C
+ by phobos.denx.de (Postfix) with ESMTPS id DC14889011
  for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 17:51:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+Oliver.Gaskell.analog.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id E5255A456F8;
- Thu, 12 Sep 2024 15:51:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 34BF4C4CED0;
+ by nyc.source.kernel.org (Postfix) with ESMTP id 18017A456F9;
+ Thu, 12 Sep 2024 15:51:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 43047C4CECF;
  Thu, 12 Sep 2024 15:51:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1726156274;
- bh=/Lr0E1bZjMkcbJU8+4stmx84OFGlycBOLESH21+w3No=;
+ bh=V4fHAkKLd+ko4QIQ5dy2w6zAfbTbF/vNvLDTq0Ibm2g=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=ht1yydS3JkeQffcUIp6XJme1RTTe5G+F5gQdZXx/dbiPNq5qSMUXAKcbymswjeeV+
- myEx5zpdR9Rh/0ZzGIqf3fykVwKopR3mApizs7iWZieIorzJbo0jIUGUDXaebfLiDW
- 2Kezdt1wTFNBkVOxx61oY9xmKW/PEAbEptCN3RwFET1P2ykhONljRSduKwIpAb/rYJ
- 7FQ0ml1ZHpmrPJhyfI3LzIOoTaWSKU7VMf5GFNTqUTgYweR4CkfV/17+csmH+kjlLD
- e3erggXfxQ1QpVUbjs2K1kfj8J43e9J1tvOEeQPf80tta1vIW/IbJSHs4ZXmytFwyn
- Fs56Sk06gK+XA==
+ b=RlwOgR4NT0oop5Kdb5OS9saka2N7SPMm4or4sY37e+hpcZYzJlb9/hsesM25Tm5RD
+ vN33zTNzmvGI6EArjp5jKMDB3b7wyd6s0WyfhFQpoQC2cd8h3QgJG39vaADIsCXsHG
+ bmltGTniofMVPbaXwcV+jgoKjYi4WJ6vvqrxhUkul6bS9megDWenQMG4hfXCFmy2IV
+ eJgCrpfYyFtcOUE2ufV7h0+heR1fufUBReZyOHe4sT1oB2M1mZ81gRJ9V8h/okbJcv
+ rw8h2SLRLtdXi1vJQ6S0N9jM2zGjv+ftM+02nYRHd2/NGNr75mI8qXVsBaF/Y/EQ4H
+ khnMznvhUEbwg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 2E29DEED61B;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 3E231EED617;
  Thu, 12 Sep 2024 15:51:14 +0000 (UTC)
 From: Oliver Gaskell via B4 Relay
  <devnull+Oliver.Gaskell.analog.com@kernel.org>
-Date: Thu, 12 Sep 2024 16:50:45 +0100
-Subject: [PATCH v2 04/20] arm: dts: Support SC589-EZKIT
+Date: Thu, 12 Sep 2024 16:50:46 +0100
+Subject: [PATCH v2 05/20] arm: dts: Support SC594-SOM-EZKIT
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240912-sc5xx-upstreaming-patches-v2-4-1185a80df79e@analog.com>
+Message-Id: <20240912-sc5xx-upstreaming-patches-v2-5-1185a80df79e@analog.com>
 References: <20240912-sc5xx-upstreaming-patches-v2-0-1185a80df79e@analog.com>
 In-Reply-To: <20240912-sc5xx-upstreaming-patches-v2-0-1185a80df79e@analog.com>
 To: Tom Rini <trini@konsulko.com>, 
@@ -63,14 +64,13 @@ To: Tom Rini <trini@konsulko.com>,
  Arturs Artamonovs <arturs.artamonovs@analog.com>, 
  Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
 Cc: u-boot@lists.denx.de, adsp-linux@analog.com, 
- Oliver Gaskell <Oliver.Gaskell@analog.com>, 
- Trevor Woerner <twoerner@gmail.com>
+ Oliver Gaskell <Oliver.Gaskell@analog.com>
 X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1726156261; l=1730;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1726156261; l=2244;
  i=Oliver.Gaskell@analog.com; s=20240821; h=from:subject:message-id;
- bh=NqPcXmL6KcS9CITC5K9sePO02dDnOFr5qBQFiJmdsKI=;
- b=kw2AVOQrQP3a94ew5z68rVkhbT4XYn11ytUnDLVYQcHUx9k6NetcmOYxKiU3PStwtQdskSKO4
- AHPxjYXallGBq6wJ3fW9BWpoU650R+WmPlbxOPczKeqXuvp9g91oVk7
+ bh=1kRWEBIFLXtQAQofIH7BuZdi6n1lwELAFIButun56do=;
+ b=E89LPaT8tIgkXYZZmT3LPI5WKhqTQK1Hna0Mgnd7jj3NhyPwcMsnlC5WCFa+OIEOsdPEsiTXX
+ M4p1XFOmpiNDeSIdqFYxkrglxRryAVonsDGxx1FFrMqB//Ba8KPcxou
 X-Developer-Key: i=Oliver.Gaskell@analog.com; a=ed25519;
  pk=Icq9TxwFJ6FePHS28YbBWMvtZpFWxpPQLhLA9cNvZ/Y=
 X-Endpoint-Received: by B4 Relay for Oliver.Gaskell@analog.com/20240821
@@ -95,39 +95,39 @@ X-Virus-Status: Clean
 
 From: Oliver Gaskell <Oliver.Gaskell@analog.com>
 
-Add minimal device tree for Analog Devices' SC589-EZKIT board.
+Add minimal device tree for Analog Devices' SC594-SOM-EZKIT board, and
+the SC594 SoM.
 
-This patch depends on Patches 01 and 02, for sc5xx.dtsi and sc58x.dtsi.
+This patch depends on patch 01, for sc5xx.dtsi.
 
 Co-developed-by: Greg Malysa <greg.malysa@timesys.com>
 Signed-off-by: Greg Malysa <greg.malysa@timesys.com>
-Co-developed-by: Trevor Woerner <twoerner@gmail.com>
-Signed-off-by: Trevor Woerner <twoerner@gmail.com>
 Co-developed-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
 Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
 Signed-off-by: Oliver Gaskell <Oliver.Gaskell@analog.com>
 ---
- arch/arm/dts/Makefile        |  1 +
- arch/arm/dts/sc589-ezkit.dts | 13 +++++++++++++
- 2 files changed, 14 insertions(+)
+ arch/arm/dts/Makefile            |  1 +
+ arch/arm/dts/sc594-som-ezkit.dts | 13 +++++++++++++
+ arch/arm/dts/sc594-som.dtsi      | 19 +++++++++++++++++++
+ 3 files changed, 33 insertions(+)
 
 diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index 4bac00d5e2..a1484c1eee 100644
+index a1484c1eee..a56867b3de 100644
 --- a/arch/arm/dts/Makefile
 +++ b/arch/arm/dts/Makefile
-@@ -1261,6 +1261,7 @@ dtb-$(CONFIG_TARGET_IMX8MM_CL_IOT_GATE_OPTEE) += imx8mm-cl-iot-gate-optee.dtb \
- dtb-$(CONFIG_TARGET_SC573_EZKIT) += sc573-ezkit.dtb
+@@ -1262,6 +1262,7 @@ dtb-$(CONFIG_TARGET_SC573_EZKIT) += sc573-ezkit.dtb
  dtb-$(CONFIG_TARGET_SC584_EZKIT) += sc584-ezkit.dtb
  dtb-$(CONFIG_TARGET_SC589_MINI) += sc589-mini.dtb
-+dtb-$(CONFIG_TARGET_SC589_EZKIT) += sc589-ezkit.dtb
+ dtb-$(CONFIG_TARGET_SC589_EZKIT) += sc589-ezkit.dtb
++dtb-$(CONFIG_TARGET_SC594_SOM_EZKIT) += sc594-som-ezkit.dtb
  
  ifneq ($(CONFIG_TARGET_IMX8MP_RSB3720A1_4G)$(CONFIG_TARGET_IMX8MP_RSB3720A1_6G),)
  dtb-y += imx8mp-rsb3720-a1.dtb
-diff --git a/arch/arm/dts/sc589-ezkit.dts b/arch/arm/dts/sc589-ezkit.dts
+diff --git a/arch/arm/dts/sc594-som-ezkit.dts b/arch/arm/dts/sc594-som-ezkit.dts
 new file mode 100644
-index 0000000000..8a1c0ce086
+index 0000000000..e744a3a4ed
 --- /dev/null
-+++ b/arch/arm/dts/sc589-ezkit.dts
++++ b/arch/arm/dts/sc594-som-ezkit.dts
 @@ -0,0 +1,13 @@
 +// SPDX-License-Identifier: GPL-2.0-or-later
 +/*
@@ -136,11 +136,36 @@ index 0000000000..8a1c0ce086
 +
 +/dts-v1/;
 +
-+#include "sc58x.dtsi"
++#include "sc594-som.dtsi"
 +
 +/ {
-+	model = "ADI SC589-EZKIT";
-+	compatible = "adi,sc589-ezkit", "adi,sc58x";
++	model = "ADI SC594-SOM-EZKIT";
++	compatible = "adi,sc594-som-ezkit", "adi,sc59x";
++};
+diff --git a/arch/arm/dts/sc594-som.dtsi b/arch/arm/dts/sc594-som.dtsi
+new file mode 100644
+index 0000000000..e15473f8e8
+--- /dev/null
++++ b/arch/arm/dts/sc594-som.dtsi
+@@ -0,0 +1,19 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * (C) Copyright 2024 - Analog Devices, Inc.
++ */
++
++/dts-v1/;
++
++#include "sc5xx.dtsi"
++
++&timer0 {
++	clocks = <&clk ADSP_SC594_CLK_CGU0_SCLK0>;
++};
++
++&clk {
++	compatible = "adi,sc594-clocks";
++	reg = <0x3108d000 0x1000>,
++	      <0x3108e000 0x1000>,
++	      <0x3108f000 0x1000>;
 +};
 
 -- 
