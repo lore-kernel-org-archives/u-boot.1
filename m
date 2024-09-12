@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25509EE6451
-	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 06:56:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 941C9EE6456
+	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 07:03:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D5BF88DF0;
-	Thu, 12 Sep 2024 08:56:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D174888DEC;
+	Thu, 12 Sep 2024 09:03:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZFXleyEt";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fZQSBlkx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B1A5B88E29; Thu, 12 Sep 2024 08:56:42 +0200 (CEST)
-Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
- [IPv6:2607:f8b0:4864:20::433])
+ id 56B5F88D7E; Thu, 12 Sep 2024 09:03:15 +0200 (CEST)
+Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
+ [IPv6:2607:f8b0:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F64D88B67
- for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 08:56:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AAB1788D09
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 09:03:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pf1-x433.google.com with SMTP id
- d2e1a72fcca58-71911585911so492283b3a.3
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 23:56:40 -0700 (PDT)
+Received: by mail-pf1-x42c.google.com with SMTP id
+ d2e1a72fcca58-71781f42f75so469296b3a.1
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 00:03:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726124198; x=1726728998; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1726124589; x=1726729389; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=+HfMsEfJxQDIodi+/lpYtwmOUSzNjsmHZizc8Ocy1/Y=;
- b=ZFXleyEtb2R0R4SkoQHBHEqFMgh3DFO76mrU31/N1vfJZ4yihh22N/YsgewDMr1kIj
- bha69NEc+LCjxL2n3XyjqOQrAeNKK5BSace4+GMQdBLpaz+EuL3AoWfBDVwQHaTTEkNM
- nem7UeZBuHDx6y5YlrUOLnNTdq6uC/j7C0qYnZyba2TbMB7HKdX7UPenykHup7W7EeLo
- KaPLSLs/T82EmcEmunOsVaKoEZ1vPGdf4KnmCFbMVY/F5AI2WoimMkBk5vs3NzvCmJ6Z
- mIghLAHu2vJTenkCUV5kZ7GEDqj+pkamQ72tgrRaez/UdJZwSqrimqGfzyTDqeRxraS0
- n8YQ==
+ bh=OvU2LXwAxnjtX35WcXTkcI2NnGkP5Qv/9HZoXYl1BnQ=;
+ b=fZQSBlkxH8zjjAFQb9h3ecXGrZdpf39MZciyEt4tmDHHMKL/b0yVD9FFiGKKaefj+b
+ oOxJK1lMveNFfZ7nszavshcu4TKDc5aLdunOFzTPzOQnUAw/h8MRfofp3pwtVRCX9cSH
+ lvmSsn3wMfJqwu+vTYhclzl7WA6AyJRRz1yCgVXpOafpOFj39P6Nu3q+jeFLHY1Sj08u
+ oWjNLFYAcePRtWr21CQTk9IIkFR/9I3qtBzFe4hTunc2v7XMHJCNShHop9Fb12Npux9X
+ uAZ9R8zA6p8mTCA3t6MGG1tXZmp/YHKA3yM1D3gVK7SL3c869INeP4xOaBKkQ8UDzhXH
+ R2dg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726124198; x=1726728998;
+ d=1e100.net; s=20230601; t=1726124589; x=1726729389;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=+HfMsEfJxQDIodi+/lpYtwmOUSzNjsmHZizc8Ocy1/Y=;
- b=LS7XnlDpyNgTSe/k7WVyScpU+t33/Ofj8VbyVw5nU7p3iMUdS/pEslX2K33vD4HnFm
- DVrQ+ZW+4HecmOayIWwFs9UdquVnA6OCu2v+duxhyP0YEEZmEKYCZ8mSHRTGf1xuRvPq
- Fnwzh5fs0dR/dZR03XjbXmszDLWEHR5vMXUE4/PhPwLS1imlSPpRmkecuKskKEBxWmBS
- ullpSj2545Qk6/Tuz0t9KNeTX5pgQaXEPuaa5rLn8BZ8cGTyJRLJjRq8T57HZufthozY
- V1+nrwbYeV0M6KB5VqZU2nXeZq2FV1xlHw9NGH64EVdUf8qoP0EzyI8a7hbGW8i9A67d
- 2Kdg==
-X-Gm-Message-State: AOJu0YxItl2l6ApmLdNd60KYHKbOmPx0sjeRvffV9N5RQw3YzcBs0yF7
- s7op+y8wBn0FEJLrZh/MhkgvZZQTyIl9mgfgkXJlVqojqL8DprxuPFpxow173RH+On4ur/ONCEz
- A/chDMTgX3Xar4wwi3g/t6BKjQnk2LVy0Xzzdbg==
-X-Google-Smtp-Source: AGHT+IHfGI7/9GDlfec7MMT2MxW+YPbUZSZGM/uzYzJ0yecEH7ALuHnlRsV3qnl2iFQhn9Eyh5wv2mS8hUKVClzqyE0=
-X-Received: by 2002:a05:6a00:148d:b0:70d:2fb5:f996 with SMTP id
- d2e1a72fcca58-7192606e357mr2968634b3a.11.1726124197894; Wed, 11 Sep 2024
- 23:56:37 -0700 (PDT)
+ bh=OvU2LXwAxnjtX35WcXTkcI2NnGkP5Qv/9HZoXYl1BnQ=;
+ b=tZNeSHTvL7YNwM17P7w6uo8mo7HvGTG8Ce6/zvPsZCvvUMBqN9rVmBzaUJBN/RohTJ
+ uOMmK1BMDWQ/r1UhVA+2FJ9Xy1A1B4CkVqaKECqxw8A8CIYkThWswIjC3xU2ZDdkw4Mm
+ AUMIOpnglivDZcgA6xjqVZMm2zclvXjPGNGIUIaGE/TqeM4KE+m7nywzB9zqolYE/Xu6
+ W4PE8FYRqsL3a+q1TRrra5jwwPuYt2hGt4CTKSjwnOmRvLz44guLoprK9gWkZmcDZjrv
+ 5HsEZy7r0vtX2q1cskPYNX9qxD60PZ3WZWjQcCgLcK1+/b/0gGtnEFj5TcEwIM4fbuU0
+ Jq9g==
+X-Gm-Message-State: AOJu0YxvhHV+nHjWYTbX4OZ4pRdTGy29TBjSuLLTzTQQYh/K8264SFty
+ C2cHql0pOdRe93EUGep1DQXfCSxcVoCACJxKjWMWMD0St2OSlp82fT1ro/9MXeXeX2XPurcpL66
+ N38GVts6dQeSdIeiqMRaDoEoljHanoHtKDdzQWA==
+X-Google-Smtp-Source: AGHT+IGCKq/AnmMNCGmanspwDNaID7nDmM39UBxk+0sgHkOrXrnpwV2Rs7Ao1+1/OMHyEXhcKnjcScxI3cL26Bb6dWA=
+X-Received: by 2002:a05:6a00:3e29:b0:70d:2b95:d9c0 with SMTP id
+ d2e1a72fcca58-71926090ecdmr2882607b3a.14.1726124589219; Thu, 12 Sep 2024
+ 00:03:09 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240911062511.494855-1-patrick.rudolph@9elements.com>
- <20240911062511.494855-15-patrick.rudolph@9elements.com>
- <CAC_iWjLfbXHFd7zs0xsVamXua8GXsAbhBstgTQEQN1+t8Fr2QA@mail.gmail.com>
-In-Reply-To: <CAC_iWjLfbXHFd7zs0xsVamXua8GXsAbhBstgTQEQN1+t8Fr2QA@mail.gmail.com>
+References: <20240902011825.746421-1-sjg@chromium.org>
+ <CAFLszThwBsy3FCgRpB5TZu+_m0k83-_stA1OqySRNyR_5kGxeQ@mail.gmail.com>
+In-Reply-To: <CAFLszThwBsy3FCgRpB5TZu+_m0k83-_stA1OqySRNyR_5kGxeQ@mail.gmail.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 12 Sep 2024 09:56:01 +0300
-Message-ID: <CAC_iWjJG9h=gcRG0+Y4HfYPSTzwduPzyeLcv7eU73YUF6+QMtQ@mail.gmail.com>
-Subject: Re: [PATCH v3 14/30] efi_loader: Allocate and write ACPI tables
-To: Patrick Rudolph <patrick.rudolph@9elements.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Date: Thu, 12 Sep 2024 10:02:32 +0300
+Message-ID: <CAC_iWjLBHyFqW9fLaA5qewEA1swV7H-KOqh8BiC52PVafte43g@mail.gmail.com>
+Subject: Re: [PATCH v5 00/14] efi: Add a test for EFI bootmeth
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Albert Aribaud <albert.u.boot@aribaud.net>, Bin Meng <bmeng.cn@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,191 +88,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Oh and can you please cc me on the entire series, it's overall very
-interesting to me
+Hi Simon,
 
-Thanks
-/Ilias
-
-On Thu, 12 Sept 2024 at 09:54, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+On Thu, 12 Sept 2024 at 04:01, Simon Glass <sjg@chromium.org> wrote:
 >
-> Hi Patrick
+> Hi,
 >
-> On Wed, 11 Sept 2024 at 09:25, Patrick Rudolph
-> <patrick.rudolph@9elements.com> wrote:
+> On Sun, 1 Sept 2024 at 19:18, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > Allocate memory for ACPI tables inside the efi_loader and write out
-> > the tables similar to SMBIOS tables. When ACPI is enabled and wasn't
-> > installed in other places, install the ACPI table in EFI. Since EFI
-> > is necessary to pass the ACPI table location when FDT isn't used,
-> > there's no need to install it separately.
+> > The test coverage for the EFI bootmeth is incomplete since it does not
+> > actually boot the application.
 > >
-> > When CONFIG_BLOBLIST_TABLES is set the tables will be stored in a
-> > bloblist. The tables are still passed to the OS using EFI.
+> > This series creates a simple test for this purpose. It includes a few
+> > patches to make this work:
 > >
-> > This allows non x86 platforms to boot using ACPI only in case the
-> > EFI loader is being used.
+> > - ANSI output from the EFI loader confusing the unit-testing checker
+> > - Hang in sandbox virtio due to EFI probing all block devices
 > >
-> > TEST: Booted QEMU SBSA (no QFW) using EFI and ACPI only.
+> > Other necessary fixes have been split out into two other series.
 > >
-> > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-> > Cc: Simon Glass <sjg@chromium.org>
-> > Cc: Tom Rini <trini@konsulko.com>
-> > ---
-> > Changelog v3:
-> > - Drop memalign and use efi_allocate_pages
-> > - Use log_debug instead of debug
-> > - Clarify commit message
-> > - Skip writing ACPI tables on sandbox
-> > - Rename function
-> > - Add function comment
-> > ---
-> >  lib/efi_loader/efi_acpi.c        | 80 +++++++++++++++++++++++++++++++-
-> >  test/py/tests/test_event_dump.py |  1 +
-> >  2 files changed, 79 insertions(+), 2 deletions(-)
+> > Changes in v5:
+> > - Drop Fixes tag
+> > - Drop the Fixes tag
+> > - Rebase on updated efif series
+> > - Deal with sandbox CONFIG_LOGF_FUNC
 > >
-> > diff --git a/lib/efi_loader/efi_acpi.c b/lib/efi_loader/efi_acpi.c
-> > index 67bd7f8ca2..9d38d0060c 100644
-> > --- a/lib/efi_loader/efi_acpi.c
-> > +++ b/lib/efi_loader/efi_acpi.c
-> > @@ -6,15 +6,23 @@
-> >   */
+> > Changes in v4:
+> > - Add efi_loader tag to some patches
+> > - Split out non-EFI patches into a different series
 > >
-> >  #include <efi_loader.h>
-> > -#include <log.h>
-> > -#include <mapmem.h>
-> >  #include <acpi/acpi_table.h>
-> >  #include <asm/global_data.h>
-> > +#include <asm/io.h>
-> > +#include <bloblist.h>
-> > +#include <linux/sizes.h>
-> > +#include <linux/log2.h>
-> > +#include <log.h>
-> > +#include <malloc.h>
-> > +#include <mapmem.h>
+> > Changes in v3:
+> > - Drop the extra- rules since scripts/Makefile.lib takes care of it
+> > - Add new patch to drop crt0/relocal extra- rules
+> > - Put back the Linaro copyright accidentally removed
+> > - Add a Fixes tag
+> > - Mention the issue created for this problem
 > >
-> >  DECLARE_GLOBAL_DATA_PTR;
+> > Changes in v2:
+> > - Fix 'use' typo
+> > - Reword commit message
+> > - Use 'Firmware vendor' instead of just 'Vendor'
+> > - Add many new patches to resolve all the outstanding test issues
 > >
-> >  static const efi_guid_t acpi_guid = EFI_ACPI_TABLE_GUID;
+> > Simon Glass (14):
+> >   efi_loader: Use puts() in cout so that console recording works
+> >   efi_loader: Put back copyright message
+> >   efi_loader: Rename and move CMD_BOOTEFI_HELLO_COMPILE
+> >   efi: arm: x86: riscv: Drop crt0/relocal extra- rules
+> >   efi_loader: Shorten the app rules
+> >   efi_loader: Shorten the app rules further
+> >   efi_loader: Show the vendor in helloworld
+> >   efi: Use the same filename for all sandbox builds
+> >   bootstd: Add debugging for efi bootmeth
+> >   efi_loader: Disable ANSI output for tests
+> >   efi_loader: Add a test app
+> >   efi_loader: Avoid using sandbox virtio devices
+> >   test: efi: boot: Set up an image suitable for EFI testing
+> >   test: efi: boot: Add a test for the efi bootmeth
 > >
-> > +enum {
-> > +       TABLE_SIZE      = SZ_64K,
-> > +};
-> >  /*
-> >   * Install the ACPI table as a configuration table.
-> >   *
-> > @@ -47,3 +55,71 @@ efi_status_t efi_acpi_register(void)
-> >         return efi_install_configuration_table(&acpi_guid,
-> >                                                (void *)(ulong)addr);
-> >  }
-> > +
-> > +/*
-> > + * Allocate memory for ACPI tables and write ACPI tables to the
-> > + * allocated buffer.
-> > + *
-> > + * Return:     status code
-> > + */
-> > +static int alloc_write_acpi_tables(void)
-> > +{
-> > +       u64 table_addr, table_end;
-> > +       u64 new_acpi_addr = 0;
-> > +       efi_uintn_t pages;
-> > +       efi_status_t ret;
-> > +       void *addr;
-> > +
-> > +       if (!IS_ENABLED(CONFIG_GENERATE_ACPI_TABLE))
-> > +               return 0;
-> > +
-> > +       if (IS_ENABLED(CONFIG_X86) ||
-> > +           IS_ENABLED(CONFIG_QFW_ACPI) ||
-> > +           IS_ENABLED(CONFIG_SANDBOX)) {
-> > +               log_debug("Skipping writing ACPI tables as already done\n");
-> > +               return 0;
-> > +       }
-> > +
-> > +       /* Align the table to a 4KB boundary to keep EFI happy */
-> > +       if (IS_ENABLED(CONFIG_BLOBLIST_TABLES)) {
-> > +               addr = bloblist_add(BLOBLISTT_ACPI_TABLES, TABLE_SIZE,
-> > +                                   ilog2(SZ_4K));
-> > +
-> > +               if (!addr)
-> > +                       return log_msg_ret("mem", -ENOMEM);
->
-> This addr is not in ACPI_RECLAIM_MEMORY now. It might work since
-> efi_acpi_register() adads it on the EFI memory map.
-> In the last version, Simon replied something along the lines of  "This
-> is how x86 works", but I don't understand why. U-Boot at this point is
-> the last bootloader you'll run and then jump to your EFI payload. Can
-> someone clearly explain what's going on here?
->
-> > +       } else {
-> > +               pages = efi_size_in_pages(TABLE_SIZE);
-> > +
-> > +               ret = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES,
-> > +                                        EFI_ACPI_RECLAIM_MEMORY,
-> > +                                        pages, &new_acpi_addr);
-> > +               if (ret != EFI_SUCCESS)
-> > +                       return log_msg_ret("mem", -ENOMEM);
-> > +
-> > +               addr = (void *)(uintptr_t)new_acpi_addr;
->
-> So this would be fine if we initialized the EFI subsystem early, but
-> we don't.  On top of that the efi_acpi_register() call is trying to
-> add the allocated memory to the efi memmap, so we don't need to do
-> that twice.
->
-> I think there's a cleaner approach overall to this which will allow us
-> to decouple the installation etc from EFI.
-> You could allocate a piece of memory, assign it to
-> arch.table_start/end and then tweak efi_acpi_register(). Instead of
-> marking the table_end - table_start as ACPI_RECLAIM_MEMORY, allocate
-> the pages there, where you know the EFI subsystem is up and copy it.
-> It would then be the callers responsibilty to free that memory.
->
-> Heinrich, do you see a problem with that?
->
-> Thanks
-> /Ilias
->
-> > +       }
-> > +
-> > +       table_addr = virt_to_phys(addr);
-> > +
-> > +       gd->arch.table_start_high = table_addr;
-> > +
-> > +       table_end = write_acpi_tables(table_addr);
-> > +       if (!table_end) {
-> > +               log_err("Can't create ACPI configuration table\n");
-> > +               return -EINTR;
-> > +       }
-> > +
-> > +       log_debug("- wrote 'acpi' to %llx, end %llx\n", table_addr, table_end);
-> > +       if (table_end - table_addr > TABLE_SIZE) {
-> > +               log_err("Out of space for configuration tables: need %llx, have %x\n",
-> > +                       table_end - table_addr, TABLE_SIZE);
-> > +               return log_msg_ret("acpi", -ENOSPC);
-> > +       }
-> > +       gd->arch.table_end_high = table_end;
-> > +
-> > +       log_debug("- done writing tables\n");
-> > +
-> > +       return 0;
-> > +}
-> > +
-> > +EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, alloc_write_acpi_tables);
-> > diff --git a/test/py/tests/test_event_dump.py b/test/py/tests/test_event_dump.py
-> > index e282c67335..459bfa26bb 100644
-> > --- a/test/py/tests/test_event_dump.py
-> > +++ b/test/py/tests/test_event_dump.py
-> > @@ -18,6 +18,7 @@ def test_event_dump(u_boot_console):
-> >  --------------------  ------------------------------  ------------------------------
-> >  EVT_FT_FIXUP          bootmeth_vbe_ft_fixup           .*boot/vbe_request.c:.*
-> >  EVT_FT_FIXUP          bootmeth_vbe_simple_ft_fixup    .*boot/vbe_simple_os.c:.*
-> > +EVT_LAST_STAGE_INIT   alloc_write_acpi_tables         .*lib/efi_loader/efi_acpi.c:.*
-> >  EVT_LAST_STAGE_INIT   install_smbios_table            .*lib/efi_loader/efi_smbios.c:.*
-> >  EVT_MISC_INIT_F       sandbox_early_getopt_check      .*arch/sandbox/cpu/start.c:.*
-> >  EVT_TEST              h_adder_simple                  .*test/common/event.c:'''
+> >  arch/arm/lib/Makefile               |   8 ----
+> >  arch/riscv/lib/Makefile             |   4 --
+> >  arch/sandbox/dts/test.dts           |   2 +-
+> >  arch/x86/lib/Makefile               |  16 -------
+> >  boot/bootmeth_efi.c                 |  11 ++++-
+> >  cmd/Kconfig                         |  14 +-----
+> >  configs/octeontx2_95xx_defconfig    |   2 +-
+> >  configs/octeontx2_96xx_defconfig    |   2 +-
+> >  configs/octeontx_81xx_defconfig     |   2 +-
+> >  configs/octeontx_83xx_defconfig     |   2 +-
+> >  doc/develop/uefi/uefi.rst           |   2 +-
+> >  include/efi_default_filename.h      |  24 +---------
+> >  include/efi_loader.h                |  21 ++++++++-
+> >  lib/efi_loader/Kconfig              |  22 +++++++++
+> >  lib/efi_loader/Makefile             |  47 ++++++-------------
+> >  lib/efi_loader/efi_console.c        |  28 ++++++++----
+> >  lib/efi_loader/efi_disk.c           |  14 +++++-
+> >  lib/efi_loader/helloworld.c         |   6 +++
+> >  lib/efi_loader/testapp.c            |  68 ++++++++++++++++++++++++++++
+> >  test/boot/bootdev.c                 |  18 +++++++-
+> >  test/boot/bootflow.c                |  66 ++++++++++++++++++++++++++-
+> >  test/py/tests/bootstd/flash1.img.xz | Bin 0 -> 5016 bytes
+> >  test/py/tests/test_efi_fit.py       |   2 +-
+> >  test/py/tests/test_efi_loader.py    |   2 +-
+> >  test/py/tests/test_ut.py            |  52 ++++++++++++++++++---
+> >  25 files changed, 310 insertions(+), 125 deletions(-)
+> >  create mode 100644 lib/efi_loader/testapp.c
+> >  create mode 100644 test/py/tests/bootstd/flash1.img.xz
+> >
 > > --
-> > 2.46.0
+> > 2.34.1
 > >
+>
+> ping on this series, please.
+
+Most of the patches have been reviewed.
+There were questions and feedback on v4 that haven't changed on v5 AFAICT [0]
+
+[0] https://lore.kernel.org/u-boot/20240826181826.GI2479150@bill-the-cat/
+
+Regards
+/Ilias
+>
+> Regards,
+> SImon
