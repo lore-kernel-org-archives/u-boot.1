@@ -4,81 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A920EEE57C7
-	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 06:37:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 383B7EE57C7
+	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 06:39:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 41F7888DAC;
-	Thu, 12 Sep 2024 08:37:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B921D88E1B;
+	Thu, 12 Sep 2024 08:39:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oaT+X57z";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFE5D88DAC; Thu, 12 Sep 2024 08:37:53 +0200 (CEST)
-Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
- [IPv6:2607:f8b0:4864:20::531])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D071588E5D; Thu, 12 Sep 2024 08:39:36 +0200 (CEST)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5190F88D93
- for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 08:37:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F77788AA4
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 08:39:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x531.google.com with SMTP id
- 41be03b00d2f7-70b2421471aso463884a12.0
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 23:37:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726123070; x=1726727870; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=emn80FGoQilutqgCW3SrkA6cweKio3Laq+hSqE0gv/A=;
- b=oaT+X57zY4QuDv0VBlIWC7y+JwWhj0PGpluepS0QA6SqmKqXZ20t51zCKlRUndZ7YZ
- 5ZlKxBioXtxUmEL1wQc8vmS2Wl043rpQs1jAciwOl1a1nvABWNcEAlOQ5QgP0KArgNDY
- o6tX7M3JkkJxiTXT+cluSdKLwqCGyy8/VhD3Vm7Txg1QzC1ZoBmu0V+iV0sW8WbcrkcW
- YH+leNeZKUWUaLofU9osTIBoWs3TwsRymbrpJni0bb8/7M65PqocLnw4+7kD8EYHrIMq
- 0U0MkbREuzfH9iKaABi0SYiLjtwjvqqEbn9p9pkfGx+yehh63+0rt5Du/xZjcO20iRQK
- aGIQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726123070; x=1726727870;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=emn80FGoQilutqgCW3SrkA6cweKio3Laq+hSqE0gv/A=;
- b=t3Xz720K31LVEBEaindVE0KVtNSzjfRej+ybVngnRYs9iSTgBuoF0G9rOzXxWY0fOf
- D8XWu6Ff1696OqEfQA85AAhmd4Y1kWQS+290mcHUQ5tqTGq7z5ZJdaKbDToJMM9zU0f4
- 5eztnEpke6KDCN43zrubnVR20ftu9diISHsBfT+oVylQdhby3HdlfLx12zXhfPe1yTjU
- QCm6wGJN6/nxdQVAI3XOh8hOZe0V4djy0cujAtuvrGLxBnPOy+0FUW+hK0vDMjqFaQDy
- UFRAYn6TbP4fXF3ORBg/iZADNao0tECgjfbgwVD8aEkhA3f654kcHxItuvk66Q/2Aefm
- Mx9Q==
-X-Gm-Message-State: AOJu0Yz/p1qlsAWrGij1y7hFQrX4dY6JCOxj8A5E5+KJz7VvYCdE0Mvi
- BTKGpVbZ/RNMLcgHud/iK1GiCIfTxs9Tu5BYjVrcPUgGUDrC0NGAhNJ0wUpg8AmOdXYeJxdx47f
- cMY3tTNoOe1+HPGUBRmHCALwC51PNvA8OiEf0UQ==
-X-Google-Smtp-Source: AGHT+IE926VMDNPdUkm0cviDL0j4nA1gya2OGu3LZUi45ROCPqWnw1bZfLhOXeT38RyP/6pHngaZ/HRWyrlxYNlAa98=
-X-Received: by 2002:a05:6a21:139b:b0:1cf:22d4:3832 with SMTP id
- adf61e73a8af0-1cf75ea23demr2732835637.5.1726123069534; Wed, 11 Sep 2024
- 23:37:49 -0700 (PDT)
+ spf=pass smtp.mailfrom=ycliang@andestech.com
+Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
+ by Atcsqr.andestech.com with ESMTPS id 48C6dQFQ094040
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
+ Thu, 12 Sep 2024 14:39:26 +0800 (+08)
+ (envelope-from ycliang@andestech.com)
+Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 12 Sep
+ 2024 14:39:27 +0800
+Date: Thu, 12 Sep 2024 14:39:24 +0800
+From: Leo Liang <ycliang@andestech.com>
+To: <trini@konsulko.com>, <u-boot@lists.denx.de>
+CC: <ycliang@andestech.com>, <rick@andestech.com>
+Subject: [PULL] u-boot-riscv/next
+Message-ID: <ZuKMnMooFpwVVhy7@swlinux02>
 MIME-Version: 1.0
-References: <20240901222259.456932-1-sjg@chromium.org>
- <20240901222259.456932-3-sjg@chromium.org>
- <CAC_iWjLwbeU2vO5-BdYz8gbpTH4Zq=7W_JeUVVURCnMtPg8DWg@mail.gmail.com>
- <CAFLszTicmXVmi45AVZgmxcT=gnxpUS4-UAyD5=_UC2LWDF2W1Q@mail.gmail.com>
-In-Reply-To: <CAFLszTicmXVmi45AVZgmxcT=gnxpUS4-UAyD5=_UC2LWDF2W1Q@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 12 Sep 2024 09:37:13 +0300
-Message-ID: <CAC_iWjL26e7rLtAkzNSGmqNsG9TJn=PE-4Z4GGz-Qt_8izWopg@mail.gmail.com>
-Subject: Re: [PATCH v3 2/3] efi: Allow use of malloc() for the EFI pool
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Eugene Uriev <eugeneuriev@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Richard Weinberger <richard@nod.at>, Sean Anderson <seanga2@gmail.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
+X-Originating-IP: [10.0.15.183]
+X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
+ ATCPCS34.andestech.com (10.0.1.134)
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 48C6dQFQ094040
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,281 +63,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi Tom,
 
-On Fri, 6 Sept 2024 at 16:01, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Ilias,
->
-> On Fri, 6 Sept 2024 at 01:13, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > Hi Simon,
-> >
-> > Apologies for the late reply, I was attending a conference.
-> >
-> > On Mon, 2 Sept 2024 at 01:23, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > This API call is intended for allocating small amounts of memory,
-> > > similar to malloc(). The current implementation rounds up to whole pages
-> > > which can waste large amounts of memory. It also implements its own
-> > > malloc()-style header on each block.
-> > >
-> > > For certain allocations (those of type EFI_BOOT_SERVICES_DATA) we can
-> > > use U-Boot's built-in malloc() instead, at least until the app starts.
-> > > This avoids poluting the memory space with blocks of data which may
-> > > interfere with boot scripts, etc.
+The following changes since commit 78d898eec080b02059c8dc09318b8761044fea85:
 
-This won't happen with LMB merged no?
+  Merge patch series "phycore-am62/4: Add more boot sources" (2024-09-10 14:56:12 -0600)
 
-> > >
-> > > Once the app has started, there is no advantage to using malloc(), since
-> > > it doesn't matter what memory is used: everything is under control of
-> > > the EFI subsystem. Also, using malloc() after the app starts might
-> > > result in running of memory, since U-Boot's malloc() space is typically
-> > > quite small.
-> > >
-> > > In fact, malloc() is already used for most EFI-related allocations, so
-> > > the impact of this change is fairly small.
+are available in the Git repository at:
 
-Where? We explained in the past that malloc is only used to handle
-internal EFI stuff which don't need the efi allocations and that's
-perfectly fine.
+  https://source.denx.de/u-boot/custodians/u-boot-riscv.git next
 
-> > >
-> > > One side effect is that this seems to be showing up some bugs in the
-> > > EFI code, since the malloc() pool becomes corrupted with some tests.
-> > > This has likely crept in due to the very large gaps between allocations
-> > > (around 4KB), which provides a lot of leeway when the allocation size is
-> > > too small. Work around this by increasing the size for now, until these
-> > > (presumed) bugs are located.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > ---
-> > >
-> > > (no changes since v1)
-> > >
-> > >  common/dlmalloc.c            |   7 +++
-> > >  include/efi_loader.h         |  18 ++++++
-> > >  include/malloc.h             |   7 +++
-> > >  lib/efi_loader/efi_bootbin.c |   2 +
-> > >  lib/efi_loader/efi_memory.c  | 110 ++++++++++++++++++++++++++---------
-> > >  5 files changed, 117 insertions(+), 27 deletions(-)
-> > >
-> > > diff --git a/common/dlmalloc.c b/common/dlmalloc.c
-> > > index 1ac7ce3f43c..48e9f3515f7 100644
-> > > --- a/common/dlmalloc.c
-> > > +++ b/common/dlmalloc.c
-> > > @@ -613,6 +613,13 @@ void mem_malloc_init(ulong start, ulong size)
-> > >  #endif
-> > >  }
-> > >
-> > > +bool malloc_check_in_range(void *ptr)
-> > > +{
-> > > +       ulong val = (ulong)ptr;
-> > > +
-> > > +       return val >= mem_malloc_start && val < mem_malloc_end;
-> > > +}
-> > > +
-> > >  /* field-extraction macros */
-> > >
-> > >  #define first(b) ((b)->fd)
-> > > diff --git a/include/efi_loader.h b/include/efi_loader.h
-> > > index 38971d01442..d07bc06bad4 100644
-> > > --- a/include/efi_loader.h
-> > > +++ b/include/efi_loader.h
-> > > @@ -805,6 +805,24 @@ int efi_disk_probe(void *ctx, struct event *event);
-> > >  int efi_disk_remove(void *ctx, struct event *event);
-> > >  /* Called by board init to initialize the EFI memory map */
-> > >  int efi_memory_init(void);
-> > > +
-> > > +/**
-> > > + * enum efi_alloc_flags - controls EFI memory allocation
-> > > + *
-> > > + * @EFIAF_USE_MALLOC: Use malloc() pool for pool allocations of type
-> > > + *     EFI_BOOT_SERVICES_DATA, otherwise use page allocation
-> > > + */
-> > > +enum efi_alloc_flags {
-> > > +       EFIAF_USE_MALLOC        = BIT(0),
-> > > +};
-> >
-> > Why do we need to handle cases differently? IOW can't all EFI
-> > allocations that need a pool gi via malloc?
->
-> Once the app boots, as Heinrich pointed out, it expects to be able to
-> malloc() very large amount of memory, but the malloc() pool is small.
->
+for you to fetch changes up to 2db018d2ca5ebd7acc717f0b1959ee67fcd2b0a1:
 
-Yes, it does.  My problem is that right now we have everything in the
-same pool, handled by LMB, but you are arguing it's 'cleaner' to split
-the allocations. I can't really understand what the problem with the
-current allocations is.
+  configs: ibex-ast2700: Enable DRAM and timer driver (2024-09-11 20:35:04 +0800)
 
-> >
-> > [...]
-> >
-> > > @@ -24,6 +24,14 @@ DECLARE_GLOBAL_DATA_PTR;
-> > >  /* Magic number identifying memory allocated from pool */
-> > >  #define EFI_ALLOC_POOL_MAGIC 0x1fe67ddf6491caa2
-> > >
-> > > +/* Flags controlling EFI memory-allocation - see enum efi_alloc_flags */
-> > > +static int alloc_flags;
-> > > +
-> > > +void efi_set_alloc(int flags)
-> > > +{
-> > > +       alloc_flags = flags;
-> > > +}
-> > > +
-> > >  efi_uintn_t efi_memory_map_key;
-> > >
-> > >  struct efi_mem_list {
-> > > @@ -57,8 +65,12 @@ void *efi_bounce_buffer;
-> > >   * The checksum calculated in function checksum() is used in FreePool() to avoid
-> > >   * freeing memory not allocated by AllocatePool() and duplicate freeing.
-> > >   *
-> > > - * EFI requires 8 byte alignment for pool allocations, so we can
-> > > - * prepend each allocation with these header fields.
-> > > + * EFI requires 8-byte alignment for pool allocations, so we can prepend each
-> > > + * allocation with these header fields.
-> > > + *
-> > > + * Note that before the EFI app is booted, EFI_BOOT_SERVICES_DATA allocations
-> > > + * are served using malloc(), bypassing this struct. This helps to avoid memory
-> > > + * fragmentation, since efi_allocate_pages() uses any pages it likes.
-> > >   */
-> > >  struct efi_pool_allocation {
-> > >         u64 num_pages;
-> > > @@ -631,18 +643,19 @@ void *efi_alloc_aligned_pages(u64 len, int memory_type, size_t align)
-> > >  /**
-> > >   * efi_allocate_pool - allocate memory from pool
-> > >   *
-> > > + * This uses malloc() for EFI_BOOT_SERVICES_DATA allocations if EFIAF_USE_MALLOC
-> > > + * is enabled
-> > > + *
-> > >   * @pool_type: type of the pool from which memory is to be allocated
-> > >   * @size:      number of bytes to be allocated
-> > >   * @buffer:    allocated memory
-> > >   * Return:     status code
-> > >   */
-> > > -efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size, void **buffer)
-> > > +efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size,
-> > > +                              void **buffer)
-> > >  {
-> > >         efi_status_t r;
-> > >         u64 addr;
-> > > -       struct efi_pool_allocation *alloc;
-> > > -       u64 num_pages = efi_size_in_pages(size +
-> > > -                                         sizeof(struct efi_pool_allocation));
-> > >
-> > >         if (!buffer)
-> > >                 return EFI_INVALID_PARAMETER;
-> > > @@ -652,13 +665,43 @@ efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size,
-> > >                 return EFI_SUCCESS;
-> > >         }
-> > >
-> > > -       r = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, pool_type, num_pages,
-> > > -                              &addr);
-> > > -       if (r == EFI_SUCCESS) {
-> > > -               alloc = (struct efi_pool_allocation *)(uintptr_t)addr;
-> > > -               alloc->num_pages = num_pages;
-> > > -               alloc->checksum = checksum(alloc);
-> > > -               *buffer = alloc->data;
-> > > +       if ((alloc_flags & EFIAF_USE_MALLOC) &&
-> > > +           pool_type == EFI_BOOT_SERVICES_DATA) {
-> > > +               void *ptr;
-> > > +
-> > > +               /*
-> > > +                * Some tests crash on qemu_arm etc. if the correct size is
-> > > +                * allocated.
-> > > +                * Adding 0x10 seems to fix test_efi_selftest_device_tree
-> > > +                * Increasing it to 0x20 seems to fix test_efi_selftest_base
-> > > +                * except * for riscv64 (in CI only). But 0x100 fixes CI too.
-> > > +                *
-> > > +                * This workaround can be dropped once these problems are
-> > > +                * resolved
-> > > +                */
-> > > +               ptr = memalign(8, size + 0x100);
-> >
-> > I don't think the explanation is enough here. On top of that adding
-> > random values to fix the problem doesn't sound right. Can we figure
-> > out why?
->
-> My guess is that an allocated pointer is going beyond its limits. The
-> newer upstream dlmalloc() has a checker which might help. I fiddled
-> around a bit but could not work one where the problem was.
+CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot-riscv/-/pipelines/22315
+----------------------------------------------------------------
+- Aspeed: Add AST2700 board (Ibex RISC-V core) support
+	- Add timer, dram controller, network support
+- Sophgo: Add clock controller support for Milk-V Duo
+----------------------------------------------------------------
+Chia-Wei Wang (8):
+      riscv: Make A ISA extension selectable
+      riscv: Make stack size shift configurable
+      riscv: u-boot-spl.lds: Remove _image_binary_end alignment
+      riscv: Add AST2700 SoC initial platform support
+      timer: Add AST2700 IBEX timer support
+      board: ibex_ast2700: Add FMC header support
+      ram: ast2700: Add DRAM controller initialization
+      configs: ibex-ast2700: Enable DRAM and timer driver
 
-Ok, but I don't want us to pull code with random values that happened
-to work during testing. We need to understand why
+Jacky Chou (5):
+      net: ftgmac100: Fixed the cache coherency issues of rx memory
+      net: ftgmac100: Fixed NC-SI PHY device cannot get
+      net: ftgmac100: Modify desc. size to cache line
+      net: ftgmac100: Add Aspeed AST2700 support
+      driver: net: Add Aspeed AST2700 MDIO support
 
->
-> >
-> > > +               if (!ptr)
-> > > +                       return EFI_OUT_OF_RESOURCES;
-> > > +
-> > > +               *buffer = ptr;
-> > > +               r = EFI_SUCCESS;
-> > > +               log_debug("EFI pool: malloc(%zx) = %p\n", size, ptr);
-> >
-> > So as I commented above, I think this is papering over whatever
-> > problem you are seeing. If you want to move the pool to use malloc()
-> > that's fine, but *all* of the pool allocations should use it. Not just
-> > boot services because its easier to retrofit it on the current code.
->
-> Please see above. Also, please see the commit message. This change
-> actually solves the problems I am seeing, quite well.
+Kongyang Liu (4):
+      dt-bindings: clk: import header for clock controller of sophgo CV1800B
+      clk: sophgo: cv1800b: Add clock controller driver for cv1800b SoC
+      configs: milkv_duo: Enable clock controller
+      riscv: dts: sophgo: Replace device clocks with real clocks.
 
-I did and the only 'problem' that is mentioned is polluting and
-overwriting memory of scripts etc. But that goes away with LMB AFAICT.
-So the only advantage is that you save a few kbs of space when
-requesting pool allocations?
+ arch/riscv/Kconfig                                 |   12 +-
+ arch/riscv/cpu/ast2700/Kconfig                     |    6 +
+ arch/riscv/cpu/ast2700/Makefile                    |    1 +
+ arch/riscv/cpu/ast2700/cpu.c                       |   23 +
+ arch/riscv/cpu/u-boot-spl.lds                      |    2 -
+ arch/riscv/dts/Makefile                            |    1 +
+ arch/riscv/dts/ast2700-ibex.dts                    |   22 +
+ arch/riscv/dts/ast2700-u-boot.dtsi                 |   40 +
+ arch/riscv/dts/ast2700.dtsi                        |   76 +
+ arch/riscv/dts/cv18xx.dtsi                         |   40 +-
+ arch/riscv/include/asm/arch-ast2700/fmc_hdr.h      |   52 +
+ arch/riscv/include/asm/arch-ast2700/scu.h          |  145 +
+ arch/riscv/include/asm/arch-ast2700/sdram.h        |  137 +
+ arch/riscv/include/asm/arch-ast2700/sli.h          |   82 +
+ board/aspeed/ibex_ast2700/Kconfig                  |   21 +
+ board/aspeed/ibex_ast2700/MAINTAINERS              |    7 +
+ board/aspeed/ibex_ast2700/Makefile                 |    3 +
+ board/aspeed/ibex_ast2700/fmc_hdr.c                |   64 +
+ board/aspeed/ibex_ast2700/ibex_ast2700.c           |   85 +
+ board/aspeed/ibex_ast2700/sli.c                    |   72 +
+ configs/ibex-ast2700_defconfig                     |   94 +
+ configs/milkv_duo_defconfig                        |    3 +-
+ doc/board/aspeed/ibex-ast2700.rst                  |   26 +
+ doc/board/aspeed/index.rst                         |    9 +
+ doc/board/index.rst                                |    1 +
+ drivers/clk/Kconfig                                |    1 +
+ drivers/clk/Makefile                               |    1 +
+ drivers/clk/sophgo/Kconfig                         |   14 +
+ drivers/clk/sophgo/Makefile                        |    6 +
+ drivers/clk/sophgo/clk-common.h                    |   74 +
+ drivers/clk/sophgo/clk-cv1800b.c                   |  754 +++
+ drivers/clk/sophgo/clk-cv1800b.h                   |  123 +
+ drivers/clk/sophgo/clk-ip.c                        |  594 ++
+ drivers/clk/sophgo/clk-ip.h                        |  288 +
+ drivers/clk/sophgo/clk-pll.c                       |  275 +
+ drivers/clk/sophgo/clk-pll.h                       |   74 +
+ drivers/net/aspeed_mdio.c                          |    1 +
+ drivers/net/ftgmac100.c                            |   89 +-
+ drivers/net/ftgmac100.h                            |   17 +-
+ drivers/ram/Makefile                               |    2 +-
+ drivers/ram/aspeed/Kconfig                         |   27 +-
+ drivers/ram/aspeed/Makefile                        |    1 +
+ .../dwc_ddrphy_phyinit_ddr4-3200-nodimm-train2D.c  | 2700 ++++++++
+ .../dwc_ddrphy_phyinit_ddr5-3200-nodimm-train2D.c  | 6930 ++++++++++++++++++++
+ drivers/ram/aspeed/sdram_ast2700.c                 | 1036 +++
+ drivers/timer/Kconfig                              |    6 +
+ drivers/timer/Makefile                             |    1 +
+ drivers/timer/ast_ibex_timer.c                     |   45 +
+ include/configs/ibex_ast2700.h                     |   12 +
+ include/dt-bindings/clock/sophgo,cv1800.h          |  176 +
+ 50 files changed, 14220 insertions(+), 51 deletions(-)
+ create mode 100644 arch/riscv/cpu/ast2700/Kconfig
+ create mode 100644 arch/riscv/cpu/ast2700/Makefile
+ create mode 100644 arch/riscv/cpu/ast2700/cpu.c
+ create mode 100644 arch/riscv/dts/ast2700-ibex.dts
+ create mode 100644 arch/riscv/dts/ast2700-u-boot.dtsi
+ create mode 100644 arch/riscv/dts/ast2700.dtsi
+ create mode 100644 arch/riscv/include/asm/arch-ast2700/fmc_hdr.h
+ create mode 100644 arch/riscv/include/asm/arch-ast2700/scu.h
+ create mode 100644 arch/riscv/include/asm/arch-ast2700/sdram.h
+ create mode 100644 arch/riscv/include/asm/arch-ast2700/sli.h
+ create mode 100644 board/aspeed/ibex_ast2700/Kconfig
+ create mode 100644 board/aspeed/ibex_ast2700/MAINTAINERS
+ create mode 100644 board/aspeed/ibex_ast2700/Makefile
+ create mode 100644 board/aspeed/ibex_ast2700/fmc_hdr.c
+ create mode 100644 board/aspeed/ibex_ast2700/ibex_ast2700.c
+ create mode 100644 board/aspeed/ibex_ast2700/sli.c
+ create mode 100644 configs/ibex-ast2700_defconfig
+ create mode 100644 doc/board/aspeed/ibex-ast2700.rst
+ create mode 100644 doc/board/aspeed/index.rst
+ create mode 100644 drivers/clk/sophgo/Kconfig
+ create mode 100644 drivers/clk/sophgo/Makefile
+ create mode 100644 drivers/clk/sophgo/clk-common.h
+ create mode 100644 drivers/clk/sophgo/clk-cv1800b.c
+ create mode 100644 drivers/clk/sophgo/clk-cv1800b.h
+ create mode 100644 drivers/clk/sophgo/clk-ip.c
+ create mode 100644 drivers/clk/sophgo/clk-ip.h
+ create mode 100644 drivers/clk/sophgo/clk-pll.c
+ create mode 100644 drivers/clk/sophgo/clk-pll.h
+ create mode 100644 drivers/ram/aspeed/dwc_ddrphy_phyinit_ddr4-3200-nodimm-train2D.c
+ create mode 100644 drivers/ram/aspeed/dwc_ddrphy_phyinit_ddr5-3200-nodimm-train2D.c
+ create mode 100644 drivers/ram/aspeed/sdram_ast2700.c
+ create mode 100644 drivers/timer/ast_ibex_timer.c
+ create mode 100644 include/configs/ibex_ast2700.h
+ create mode 100644 include/dt-bindings/clock/sophgo,cv1800.h
 
-Thanks
-/Ilias
->
-> >
-> > > +       } else {
-> > > +               u64 num_pages = efi_size_in_pages(size +
-> > > +                                       sizeof(struct efi_pool_allocation));
-> > > +
-> > > +               r = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, pool_type,
-> > > +                                      num_pages, &addr);
-> > > +               if (r == EFI_SUCCESS) {
-> > > +                       struct efi_pool_allocation *alloc;
-> > > +
-> > > +                       alloc = (struct efi_pool_allocation *)(uintptr_t)addr;
-> > > +                       alloc->num_pages = num_pages;
-> > > +                       alloc->checksum = checksum(alloc);
-> > > +                       *buffer = alloc->data;
-> > > +                       log_debug("EFI pool: pages alloc(%zx) type %d = %p\n",
-> > > +                                 size, pool_type, *buffer);
-> > > +               }
-> > >         }
-> > >
-> > >         return r;
-> > > @@ -686,27 +729,37 @@ void *efi_alloc(size_t size)
-> > >  efi_status_t efi_free_pool(void *buffer)
-> > >  {
-> > >         efi_status_t ret;
-> > > -       struct efi_pool_allocation *alloc;
-> > >
-> > >         if (!buffer)
-> > >                 return EFI_INVALID_PARAMETER;
-> > >
-> > > -       ret = efi_check_allocated((uintptr_t)buffer, true);
-> > > -       if (ret != EFI_SUCCESS)
-> > > -               return ret;
-> > > +       if (malloc_check_in_range(buffer)) {
-> > > +               log_debug("EFI pool: free(%p)\n", buffer);
-> > > +               free(buffer);
-> > > +               ret = EFI_SUCCESS;
-> > > +       } else {
-> > > +               struct efi_pool_allocation *alloc;
-> > >
-> > > -       alloc = container_of(buffer, struct efi_pool_allocation, data);
-> > > +               ret = efi_check_allocated((uintptr_t)buffer, true);
-> > > +               if (ret != EFI_SUCCESS)
-> > > +                       return ret;
-> > >
-> > [...]
->
-> Regards,
-> Simon
+
+Best regards,
+Leo
