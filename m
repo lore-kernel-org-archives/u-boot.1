@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82DB3EED611
-	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 15:07:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D3DCEED615
+	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 15:28:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D837588FEB;
-	Thu, 12 Sep 2024 17:07:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B0E0A88E79;
+	Thu, 12 Sep 2024 17:28:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="mje+M2s5";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="bp0l0jCK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CDA2E88FF7; Thu, 12 Sep 2024 17:07:30 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ id BBDF888FC4; Thu, 12 Sep 2024 17:28:06 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0DDD88FC4
- for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 17:07:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C52DA88DAF
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 17:28:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1726153647; x=1726758447; i=xypron.glpk@gmx.de;
- bh=AV5fp/spIB7U3r3l/mGth33dSJbkk/ZLlTInGPfryxk=;
+ s=s31663417; t=1726154883; x=1726759683; i=xypron.glpk@gmx.de;
+ bh=r1d4HWJxjSE9D+9XkmdHdOKQtX3jtFIxMa5dQZeYR+8=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=mje+M2s5Hzg36XQT3VNK8m2J7gX2D4CM1dUWhvplwL+YqSmNvs5mDo50dXVFL4ye
- bbvqKqu4H205fgonX/PKl4RPS/P8vgy9qkHdT1qyMbIG9ac4IiIj+TnvlwRPiKk9l
- R1/+TzMSV4Fu1ST50lF87p0lXGwYMWN+KIY29xgDk8cb0erw/4Tj5nMe7xqscgxC1
- fJlPLibL9jsGzJYOBtxQFjzq5yNo6mMUOSveMfSK8qCthPvVYfKOsHeamnUkVBqCu
- GbrG1HEHgVVdqOXZY5LzQWpuE/Trf6P2qakgmfRNzWbsdCMAHtv4PM5y50dyWSAwz
- 4xOwPhmiIxBLIqvEng==
+ b=bp0l0jCKwMqOOaMvoGqsQypUQ/hdMLUKEe8L+lMB44K8ykeyK6Pj3h54ofEW7rNh
+ ei9XwrxdDYHdtcwiQMCukWsNa8ex4Nn//0myVTLGzpKkPRQlwFcKuyh0JEUHzB/dI
+ wxhF7EgHLDeZ5u/gO9J1b0zoalfho1dYzqgC+pzHG4eR1N38YRw1aKcR3yMkpdHjk
+ UUhhuYk/g8EvgqeaG9TJBokZg0+JcbvhRy5ERBr8yWYEcitDgzvjC4AS3hcJzMYk/
+ uZYjsDSN9Iz5yJ1ZVlxw/o0ORxpGpJLbCU2kMO5H2pWac3FTgGZbq5+PLpd22H9JS
+ lS9oSZicXjK0FSI5Bw==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MWih0-1sV5te3Y08-00MKUk; Thu, 12
- Sep 2024 17:07:26 +0200
-Message-ID: <18f3b613-5191-4bfb-b6d1-f10d9c790853@gmx.de>
-Date: Thu, 12 Sep 2024 17:07:26 +0200
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1M42nS-1soljn0kYC-00BMV9; Thu, 12
+ Sep 2024 17:28:03 +0200
+Message-ID: <6a90f50f-ab7d-469c-9ebc-104d5e72bb6e@gmx.de>
+Date: Thu, 12 Sep 2024 17:28:02 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 14/14] test: efi: boot: Add a test for the efi bootmeth
+Subject: Re: [PATCH v5 09/14] bootstd: Add debugging for efi bootmeth
 To: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  U-Boot Mailing List <u-boot@lists.denx.de>
 References: <20240902011825.746421-1-sjg@chromium.org>
- <20240902011825.746421-15-sjg@chromium.org>
+ <20240902011825.746421-10-sjg@chromium.org>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240902011825.746421-15-sjg@chromium.org>
+In-Reply-To: <20240902011825.746421-10-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:sbTs4oBWB720zrIRaZ2wPUn0vczRHwjSYaj0q5LiR1WOSV3KEBH
- jeU48WPRubEAPiExaAto1NeUL0vVc5t5B7QSLS6c3htxOLVMiTmTHqLWwa5KUouRUs4oHZ9
- fCEZdz/mcL3fb92lzASU9zUuf/gkGJOWeBaMZVqAdRUbpwPIr93oyNf+Y0JAnnDbCD3e0IV
- gj3wzwoIK4yvcKnfdlvOA==
-UI-OutboundReport: notjunk:1;M01:P0:W+fTmxZsCtw=;ONY+Js9T34UBWBFUeIUaXWEzxFY
- TKmqcmxn4w3t7XisFYuevzaknUzmBYDeXfkidhYMcpDsvKApgvx/GRpZkxrfyLt1P8Q5P4vio
- eZ7mhjz19eQn5zBS0IC4jdlvh5nNsu75ZpvHNZVMpFyjBAn34ph9eva2VO4n6PRhZbA3x7ta6
- ThaIB59o9latLB2kJmUx+aUJ7YGW7e2LcBiJATmTJu2ilFyu+3BdIKmBnK3rvzQVdex9aQJLZ
- 5sUDvhKtan19BPu4mqLOudZcc3hP83f0G5tiGzbApa9a9BInZr3ypyd9pZ5PX2YqkLdKQvRBA
- IU/adSm8XROh5T8s5NLBRask7tRWMIbxaLuli+q39F5MV7FysguB8h0woqGVgheulZ6Cmo2VW
- iwg0w8TdNLM5j+EoVXt3ny8L8Hl0zFWta0BlDJO09m5Fkt5ZYcdefa3sHv1AFYxWPmfNVLO3F
- RKFdBjloCtgN60jlRfukv/5rWItg/SbPo7WSR76LKHQOBkJAA8E+GA38BiQiweBALcNMCMoyj
- 9YWwU1ZZxw+zYBequiZ8l2+/xLvbZKhqKvyMwh1RSdaL2uE+I6uLH5EVYFrUVxR53MYpfoF1B
- Q9fk0RP2kvc4bkttNZxpV0wCUsVZ7QuXcS0YIggkKO4FlZepmULcj7J0k72Rj/u/oZr//0L1b
- 55kx8ZZYZcuxq5xYleGJMlYcgH1mdbZpP4oxk4W+ZljT+fOdJtZrm0svhSEtVZBNcRFYt08n/
- vU7PZpmoVk7iacnildnAf66loQAMr/+SSxP9iO/vg5muxLXB2Tb35VnGajLvgRZirEJg/eTa8
- XyoNgpeEMm7A3s8lYSvyuMxw==
+X-Provags-ID: V03:K1:JG9JSbyoGBIfnjsIWDb2nulgxGmRgfnH12z28KpSJc0HeFDoRNX
+ d8CLiWJ834Ni/wHPvjyd+IpAdJA0PuyXjp+XYxi470FmDnfPd3wSD1tMEInsuQdaggvkxz6
+ RiFwnP1NGtZoBQpBnNPzpbru1OpRfTGwLpEEbwlCBeV0Ecf/iWSjWRJxa+t/4FZQANUzqD9
+ lxENQib6Wvm24XUb/YHNQ==
+UI-OutboundReport: notjunk:1;M01:P0:ZYNZGVgKsZY=;cnmtIooDM1y7Ycb5zxfRERAF7zD
+ 1kRF/UGwjYMrItTweitbqxSpZQKqLotZArJjtbQk1FLycAJTBJD+PQavV3bZpEuDYA4TyCQTB
+ tJ1nguc4/my+j9WTSLZY5UWGc4bgjIkY3PW680B1ypn52953xxyoQB0fKe7MjDrODyejhQU+M
+ Ytg/o5pNOl5DFAleqJHKkhZCIFhvKPRAozBtU8E/o2239rb4P0QBoMPTn0GLhGo0DFhKtj4ou
+ k2P4F9NVL4A8LdAt3y7wVNEivnYggGDP5FLV0MPGlRbD8iZklCMiuIPCKRYSVNagWIUEiub/f
+ 1yY1TvrNE/KiaLRgxNdYXilPUsVHpWlvCEOrScoTyBGKkt1F9908cVsmWxUOBjaFfINX3x3gb
+ EcICQDxBRV/4q9n15MIJKtM6+L3a812GcLX/BNKZjdOUryigjgD4rEsSlSJ4zGDB44LtNblRJ
+ B8O6P2dEJmBfVtvgyudW7OCLxG7EVCQsKlXIKQDZU3Zrmtdg1DiH0wG3LtY0mVaZwC0oyB7WF
+ Qhy2+Mip8L1nmtC/Om0WaWDgf+eyL/i1+9Lj1ULHWsvVtFxcLiXOCcHrAn95U+04W5BdOccRf
+ PgfGMSrZbmKVpmA6/2Tbdi47mbvnc5TUFCPVvzOxLJ1/mPETMWsx8uixlc/kfC1Ss/N+frjI0
+ zwXp4+zbGksyMTRSkhETmEt7kjezltp10TrsJ7weo8K3ptA4VR1Bhd5ZtuG6S+8iJiAP47CtX
+ NihdRbEN8CdI38a4qGB5kLQmMporzBdSjsDhSkmJr6l7KOP0wzyJ1DXGzSxw65IPv/gR/3p7Z
+ on9oTYj5lNpxRvVgtnLrZ3nA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,131 +93,77 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 02.09.24 03:18, Simon Glass wrote:
-> Add a simple test of booting with the EFI bootmeth, which runs the app
-> and checks that it can call 'exit boot-services' (to check that all the
-> device-removal code doesn't break anything) and then exit back to
-> U-Boot.
->
-> This uses a disk image containing the testapp, ready for execution by
-> sandbox when needed.
+> Add a little debugging so we can see what is happening.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
->
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 > ---
 >
-> Changes in v5:
-> - Rebase on updated efif series
-> - Deal with sandbox CONFIG_LOGF_FUNC
+> (no changes since v1)
 >
-> Changes in v4:
-> - Add efi_loader tag to some patches
-> - Split out non-EFI patches into a different series
+>   boot/bootmeth_efi.c | 11 +++++++++--
+>   1 file changed, 9 insertions(+), 2 deletions(-)
 >
-> Changes in v2:
-> - Add many new patches to resolve all the outstanding test issues
+> diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
+> index 6b41c0999f1..4d641d042ec 100644
+> --- a/boot/bootmeth_efi.c
+> +++ b/boot/bootmeth_efi.c
+> @@ -162,8 +162,10 @@ static int distro_efi_try_bootflow_files(struct ude=
+vice *dev,
+>   	int ret, seq;
 >
->   test/boot/bootflow.c | 64 ++++++++++++++++++++++++++++++++++++++++++++
->   1 file changed, 64 insertions(+)
+>   	/* We require a partition table */
+> -	if (!bflow->part)
+> +	if (!bflow->part) {
+> +		log_debug("no partitions\n");
+>   		return -ENOENT;
+> +	}
 >
-> diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-> index 37884dbd441..d8da3aac493 100644
-> --- a/test/boot/bootflow.c
-> +++ b/test/boot/bootflow.c
-> @@ -13,6 +13,7 @@
->   #include <cli.h>
->   #include <dm.h>
->   #include <efi_default_filename.h>
-> +#include <efi_loader.h>
->   #include <expo.h>
->   #ifdef CONFIG_SANDBOX
->   #include <asm/test.h>
-> @@ -31,6 +32,9 @@ extern U_BOOT_DRIVER(bootmeth_android);
->   extern U_BOOT_DRIVER(bootmeth_cros);
->   extern U_BOOT_DRIVER(bootmeth_2script);
+>   	strcpy(fname, EFI_DIRNAME);
+>   	strcat(fname, BOOTEFI_NAME);
+> @@ -171,8 +173,10 @@ static int distro_efi_try_bootflow_files(struct ude=
+vice *dev,
+>   	if (bflow->blk)
+>   		 desc =3D dev_get_uclass_plat(bflow->blk);
+>   	ret =3D bootmeth_try_file(bflow, desc, NULL, fname);
+> -	if (ret)
+> +	if (ret) {
+> +		log_debug("no file\n");
+
+log_debug("File %s not found\n", fname);
+
+>   		return log_msg_ret("try", ret);
+> +	}
 >
-> +/* Use this as the vendor for EFI to tell the app to exit boot services=
- */
-> +static u16 __efi_runtime_data test_vendor[] =3D u"U-Boot testing";
-> +
->   static int inject_response(struct unit_test_state *uts)
+>   	/* Since we can access the file, let's call it ready */
+>   	bflow->state =3D BOOTFLOWST_READY;
+> @@ -307,6 +311,8 @@ static int distro_efi_read_bootflow(struct udevice *=
+dev, struct bootflow *bflow)
 >   {
+>   	int ret;
+>
+> +	log_debug("dev=3D'%s', part=3D%d\n", bflow->dev->name, bflow->part);
+> +
 >   	/*
-> @@ -1205,3 +1209,63 @@ static int bootflow_android(struct unit_test_stat=
-e *uts)
->   	return 0;
->   }
->   BOOTSTD_TEST(bootflow_android, UTF_CONSOLE);
-> +
-> +/* Test EFI bootmeth */
-> +static int bootflow_efi(struct unit_test_state *uts)
-> +{
-> +	/* disable ethernet since the hunter will run dhcp */
-> +	test_set_eth_enable(false);
-> +
-> +	/* make USB scan without delays */
-> +	test_set_skip_delays(true);
-> +
-> +	bootstd_reset_usb();
-> +
-> +	/* Avoid outputting ANSI characters which mess with our asserts */
-> +	efi_console_set_ansi(false);
-> +
-> +	ut_assertok(bootstd_test_drop_bootdev_order(uts));
-> +	ut_assertok(run_command("bootflow scan", 0));
-> +	ut_assert_skip_to_line(
-> +		"Bus usb@1: scanning bus usb@1 for devices... 5 USB Device(s) found")=
-;
-> +
-> +	ut_assertok(run_command("bootflow list", 0));
-> +
-> +	ut_assert_nextlinen("Showing all");
-> +	ut_assert_nextlinen("Seq");
-> +	ut_assert_nextlinen("---");
-> +	ut_assert_nextlinen("  0  extlinux");
-> +	ut_assert_nextlinen(
-> +		"  1  efi          ready   usb_mass_    1  usb_mass_storage.lun0.boo =
-/EFI/BOOT/BOOTSBOX.EFI");
-> +	ut_assert_nextlinen("---");
-> +	ut_assert_skip_to_line("(2 bootflows, 2 valid)");
-> +	ut_assert_console_end();
-> +
-> +	ut_assertok(run_command("bootflow select 1", 0));
-> +	ut_assert_console_end();
-> +
-> +	/* signal to helloworld to exit boot services */
+>   	 * bootmeth_efi doesn't allocate any buffer neither for blk nor net d=
+evice
+>   	 * set flag to avoid freeing static buffer.
+> @@ -332,6 +338,7 @@ static int distro_efi_boot(struct udevice *dev, stru=
+ct bootflow *bflow)
+>   	ulong kernel, fdt;
+>   	int ret;
+>
+> +	log_debug("boot\n");
 
+We should provide meaningful messages.
 
-What 'helloworld' are you relating to?
+log_debug("distro EFI boot\n");
 
 Best regards
 
 Heinrich
 
-> +	systab.fw_vendor =3D test_vendor;
-> +
-> +	ut_asserteq(1, run_command("bootflow boot", 0));
-> +	ut_assert_nextline(
-> +		"** Booting bootflow 'usb_mass_storage.lun0.bootdev.part_1' with efi"=
-);
-> +	if (IS_ENABLED(CONFIG_LOGF_FUNC))
-> +		ut_assert_skip_to_line("       efi_run_image() Booting /\\EFI\\BOOT\\=
-BOOTSBOX.EFI");
-> +	else
-> +		ut_assert_skip_to_line("Booting /\\EFI\\BOOT\\BOOTSBOX.EFI");
-> +
-> +	/* TODO: Why the \r ? */
-> +	ut_assert_nextline("U-Boot test app for EFI_LOADER\r");
-> +	ut_assert_nextline("Exiting boot sevices");
-> +	if (IS_ENABLED(CONFIG_LOGF_FUNC))
-> +		ut_assert_nextline("     do_bootefi_exec() ## Application failed, r =
-=3D 5");
-> +	else
-> +		ut_assert_nextline("## Application failed, r =3D 5");
-> +	ut_assert_nextline("Boot failed (err=3D-22)");
-> +
-> +	ut_assert_console_end();
-> +
-> +	return 0;
-> +}
-> +BOOTSTD_TEST(bootflow_efi, UTF_CONSOLE);
+>   	kernel =3D env_get_hex("kernel_addr_r", 0);
+>   	if (!bootmeth_uses_network(bflow)) {
+>   		ret =3D efiload_read_file(bflow, kernel);
 
