@@ -4,66 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29936EE57F6
-	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 01:05:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36495EE57F6
+	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 01:05:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9148E88E03;
-	Thu, 12 Sep 2024 03:02:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1AD8C88E83;
+	Thu, 12 Sep 2024 03:02:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OFliqI9q";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UjqcSM9j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7302E88E7D; Thu, 12 Sep 2024 03:02:09 +0200 (CEST)
-Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
- [IPv6:2607:f8b0:4864:20::530])
+ id 6C77C88E7D; Thu, 12 Sep 2024 03:02:18 +0200 (CEST)
+Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
+ [IPv6:2607:f8b0:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E1B0088E6B
- for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 03:02:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4319D88E86
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 03:02:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x530.google.com with SMTP id
- 41be03b00d2f7-7d4fa972cbeso345707a12.2
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 18:02:06 -0700 (PDT)
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-718e11e4186so336805b3a.2
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 18:02:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726102925; x=1726707725; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1726102934; x=1726707734; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Tw2VNCHvRmEe1FztZEqp3ZpbCUozzuqM46T4vPYPd24=;
- b=OFliqI9qyMcJHDa2G2flke4t7ATsV0f4TxQsJwjTPDtfR3rkDJ9V2sZwhgJp0GxrNz
- ddG0etpz2TZuDU7cPbJOjok3X9wNW6JacR1ZGGH69O32s2FQI3J13FsBxtL3aAz89Z3B
- 2egUM+unjOxa9LqXemUkK33p72GR4dcLANgG8=
+ bh=djYLsEzjIOIjKkcu1FxvTF2ryQ4KVzB7kMzZfgv3Ekw=;
+ b=UjqcSM9jRsKGYR9vwzD9wMIN3ya0/o1V29VGnBgpAGvEn2rqBVRaaN75EzZ12TI/6S
+ wY1ipIker51tOzOPfLlYd+ATcgSUyve2c2O9lLixRHoo7NT7nvs+7BMim18w2KZdHj48
+ CKeXX24K2nrEhmxBfHQkwvoo7i7EOL6U4G2xg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726102925; x=1726707725;
+ d=1e100.net; s=20230601; t=1726102934; x=1726707734;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Tw2VNCHvRmEe1FztZEqp3ZpbCUozzuqM46T4vPYPd24=;
- b=AXgtyUmCMYzo1wcpO//OKKLx4XjnPwwuYox/1au5/6sITC4FMep/iyfIFVBrrVfNGK
- 0s35dYM+WDq32ngHKl52EFdz0Qjb1bhb8tAU9z7c8aqCLdgQGcE7qXkR2wZ6lxF8dH4R
- Jc8wsajWkyWioQojNNmrp4cyZHqVywqAiuoCX5T7YgecIGdIROAjqX5YBronE537fy9n
- DanzzatW+yht7cTHYNH4Uy5SLMcLaPwHAFSeeuGynFrHN9y0Qh2lWDYEnjKK1UnHMFgX
- 1jmpxR/x4E+pQMWAajHCMagGh8sc18oL5zPeJHKARW9OcNQJLVr39OCKh9oxGfOxaj4Y
- s37A==
-X-Gm-Message-State: AOJu0YwmdJJxDE55T+OQdmmw7P+rU7VgGzyv8B/9xTosDJSZ68mMub0P
- +QHhIaJVw4LWTKzI7zAva9j7prfaT3Bes/XjY9MsWmSXFP3d9WBJXC8ZkWy1N+44cjhF8gd5NHB
- Oy2zSErAGRl9vVU21ZlkI7GhXj1ILME1+bxf5veqm+VtsYSI=
-X-Google-Smtp-Source: AGHT+IH+m5LS+C0lqmu+Fg1sJunCcsjy8cg9UBaIW4HEumFk+zFmibHqhcoboMbykOKrp7jhiFVWqAKaBuFqA3ZE/Bc=
-X-Received: by 2002:a05:6a20:b2a8:b0:1cf:3677:1c4a with SMTP id
- adf61e73a8af0-1cf75eb94cfmr1157095637.16.1726102924873; Wed, 11 Sep 2024
- 18:02:04 -0700 (PDT)
+ bh=djYLsEzjIOIjKkcu1FxvTF2ryQ4KVzB7kMzZfgv3Ekw=;
+ b=mOPmI3piQVII6nrvbnWAYGXyinoXXS46+WKaPgoWYRDhOduaHZCUIi6vqD7ZxlokkB
+ +0EJbegII0rYdmykIdvpSzULBJVqALgx8FPE64/cJU2mHFD5Mh7cmZIX3J59212CwrlA
+ RUtLQ8ZKf4mCWHnAPI1dFbSqCGJg0zV+6NnLCcn+xfcd4d2nVl4eO12nN0CsmFlplTom
+ yQHUFS3mMfmYJWiUWJxbvEK75EvEmBbj0L+3m4WDSkJdWx5crYxMAXiiIN6E6YQJAboG
+ Mhncx6q/0tRbLesszZT4dtQcmuq0IKHB0I56Kl/ZeJmG4kjyYDns+HZoLuyfDApSVHeX
+ c6DQ==
+X-Gm-Message-State: AOJu0Yw5p8ieJJn15DALIPCWmUSDXrFBrX9MHybcf36qn4+JSsfnrutv
+ wEsCiLQswZBgnV6hfFeP/bzZPpdYmf6QdvgtlwW0Va9WsiHI26GKS0e3ymmBlqdh3My4bxG2ohN
+ 0tOh9huN/YJAZCqgIW3KO8mk7el6TX3l/U1OU
+X-Google-Smtp-Source: AGHT+IHKkoPiqAZFiZFkrePVaNpNYhJU1D/r4WxGgR0MlRXa/+llCgo67tEBNRapD4MSulqp/uc2ZZKFOBqou3xWxj8=
+X-Received: by 2002:a05:6a00:1a8b:b0:718:d942:3475 with SMTP id
+ d2e1a72fcca58-7192607f8aemr1922016b3a.7.1726102934327; Wed, 11 Sep 2024
+ 18:02:14 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAEwRq=qZSs9va2ztMQ2t_kfqHFAiMydyUHY13U_-AfKdSuhL-w@mail.gmail.com>
-In-Reply-To: <CAEwRq=qZSs9va2ztMQ2t_kfqHFAiMydyUHY13U_-AfKdSuhL-w@mail.gmail.com>
+References: <20240911062511.494855-1-patrick.rudolph@9elements.com>
+ <20240911062511.494855-31-patrick.rudolph@9elements.com>
+In-Reply-To: <20240911062511.494855-31-patrick.rudolph@9elements.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 11 Sep 2024 19:01:44 -0600
-Message-ID: <CAFLszTjSoLW769CAefgu9wzm5VBVZnvyPp87f2zi9ecUtPB4mg@mail.gmail.com>
-Subject: Re: persistent environment
-To: Vincent Legoll <vincent.legoll@gmail.com>
-Cc: u-boot@lists.denx.de
+Date: Wed, 11 Sep 2024 19:01:59 -0600
+Message-ID: <CAFLszTjPvK+2RMDro59DcyzZ-EzAK1vbQo3S_rUD8PHPD5wy5w@mail.gmail.com>
+Subject: Re: [PATCH v3 30/30] configs: Add RPI4 ACPI defconfig
+To: Patrick Rudolph <patrick.rudolph@9elements.com>
+Cc: u-boot@lists.denx.de, Matthias Brugger <mbrugger@suse.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,109 +83,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Vincent,
+On Wed, 11 Sept 2024 at 00:26, Patrick Rudolph
+<patrick.rudolph@9elements.com> wrote:
+>
+> Allows to build the RPi4 with ACPI enabled.
+>
+> TEST: - Boots on qemu-system-aarch64 -machine raspi4b
+>       - Boots on real hardware with arm_64bit=1 in config.txt
+>
+> Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Matthias Brugger <mbrugger@suse.com>
+> Cc: Peter Robinson <pbrobinson@gmail.com>
+> ---
+>  configs/rpi_4_acpi_defconfig | 72 ++++++++++++++++++++++++++++++++++++
+>  1 file changed, 72 insertions(+)
+>  create mode 100644 configs/rpi_4_acpi_defconfig
 
-On Sun, 8 Sept 2024 at 22:38, Vincent Legoll <vincent.legoll@gmail.com> wrote:
->
-> Hello,
->
-> I'm struggling to setup u-boot to be able to save the environment.
->
-> The board is Pine64 QuartzPro64.
->
-> ATF is collabora's:
-> https://gitlab.collabora.com/hardware-enablement/rockchip-3588/trusted-firmware-a.git
-> collabora-enablement-tfa/master
-> 44418fce30938ee483fbfc79cc32fde33753d1aa
->
-> rkbin is
-> https://github.com/rockchip-linux/rkbin.git
-> master
-> a2a0b89b6c8c612dca5ed9ed8a68db8a07f68bc0
->
-> U-boot is:
-> https://source.denx.de/u-boot/u-boot.git
-> master
-> 1630ff26cc960439b5949b80cfc604a2c8aa47dd
->
-> export BL31=../trusted-firmware-a/build/rk3588/release/bl31/bl31.elf
-> export ROCKCHIP_TPL=../rkbin/bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2736MHz_eyescan_v1.11.bin
-> make quartzpro64-rk3588_defconfig
-> make CROSS_COMPILE=aarch64-linux-gnu-
->
-> SD card is GPT partitionned:
-> Device           Start     End Sectors  Size Type
-> /dev/mmcblk1p1      64   16383   16320    8M Linux filesystem
-> /dev/mmcblk1p2   16384   32767   16384    8M Linux filesystem
-> /dev/mmcblk1p3   32768   65535   32768   16M Linux filesystem
-> /dev/mmcblk1p4   65536 1114111 1048576  512M EFI System
-> /dev/mmcblk1p5 1114112 8388607 7274496  3.5G Linux filesystem
->
-> I put on:
-> * mmcblk1p1: idbloader.img
-> * mmcblk1p2: u-boot.itb
->
-> environment should be on : mmcblk1p3
->
-> I tried to use:
-> CONFIG_ENV_IS_IN_MMC=y
-> CONFIG_SYS_MMC_ENV_DEV=1
-> CONFIG_SYS_MMC_ENV_PART=3
-> CONFIG_ENV_SIZE=0x1f000
-> CONFIG_ENV_OFFSET=0x3f8000
->
-> I tried to add:
-> * USE_ENV_MMC_PARTITION
->
-> I tried to change ENV_OFFSET to 0x0
->
-> I'm getting:
->
-> Loading Environment from MMC... MMC partition switch failed
-> *** Warning - MMC partition switch failed, using default environment
-> [...]
-> => env info
-> env_valid = valid
-> env_ready = true
-> env_use_default = true
-> => env erase
-> Erasing Environment on MMC... MMC partition switch failed
-> MMC partition switch failed
-> Failed (1)
-> => env select MMC
-> Select Environment on MMC: OK
-> => env select MMC 1:3
-> Select Environment on MMC: OK
-> => env erase
-> Erasing Environment on MMC... MMC partition switch failed
-> MMC partition switch failed
-> Failed (1)
->
-> I've attached the config and a more complete serial console log.
->
-> I'm probably doing something wrong, but I can't see it.
->
-> I'd like some hints about how to get further.
-> Thanks
-
-Looking at env_erase()
-It calls drv->erase() which for mmc is:
-.erase = ENV_ERASE_PTR(env_mmc_erase)
-
-I see this:
-
-if (IS_ENABLED(CONFIG_SYS_REDUNDAND_ENVIRONMENT)) {
-   copy = 1;
-
-   if (IS_ENABLED(ENV_MMC_HWPART_REDUND)) {
-      ret = mmc_set_env_part(mmc, copy + 1);
-      if (ret)
-         goto fini;
-   }
-
-which suggests that perhaps it is failing there as mmc_set_env_part()
-has that error message "MMC partition switch failed". Do you want a
-redundant environment?
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
