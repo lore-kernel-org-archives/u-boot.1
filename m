@@ -4,84 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D3CFEED606
-	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 14:00:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DC91EED606
+	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 14:03:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1129E88EC7;
-	Thu, 12 Sep 2024 16:00:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id B641988ECB;
+	Thu, 12 Sep 2024 16:03:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="BLCNpAeI";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="rDPYNTqP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2820E88FCE; Thu, 12 Sep 2024 16:00:17 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 26C1788EEC; Thu, 12 Sep 2024 16:03:14 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C695188D57
- for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 16:00:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2B92188E79
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 16:03:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-42ca4e0299eso8042015e9.2
- for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 07:00:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1726149614; x=1726754414;
- darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/l7SfMtwcV41khkbbYtMvqREAYomiCSewNmi/Ci7prU=;
- b=BLCNpAeIc0R3MiG3ns2Nm67qZTQQC6Vc/QhrJjvQV9aB8NqNpjWd5MwmPBNWa3x0zh
- kJdyHvFKizGf3PSZMGN/YfVC1jTdSfEimKo1rVdcK2DMM/pto6nhehxvJ1/RfhToR4ZX
- 6WFAB++gZwweikhYsc4pEF7GErFcr1NOsmZsJ9ppROYggtbWPt70ZGSSl1OjSFQzhj6w
- aLOtlSP+pzOBYQ8u00tS+SE/+Zaksz2LPSw9tb4GWe+i1NMAS2t9ktdWjamfbW+yUMgI
- uwdLHsrmlTDIq61/o6sbpZCFZs1v+3aP9kju/py6KBM1Q8G+G0kmVt0Md39FpSp6zqwr
- kJcg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726149614; x=1726754414;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/l7SfMtwcV41khkbbYtMvqREAYomiCSewNmi/Ci7prU=;
- b=QXjQdyibx608jUZofsKM5cl5ncV/BZ0j05BEUA43DCpoj2kD5q8mX35AMPYeLJhNZE
- gmvO/E6yh7g3jurgpdL622pVK77tcqaHCDg6SJGZXyoyyzo05XgDGtVgJ1n/oxRqHv44
- LE7IvH2w0CsSoIuN8nZCffA1uPZtrZN/9sWlnk71UpAnThELxfyIXNWtgzv2+2vQ5XUs
- yk0M6gaZyHbtPHxzOIiFqwdLe+YwBfhSXntQ1YUOPtd0GKtGwWdMVtAW/v5DQURbbMgT
- JkhVxyg0MvGjR/JjQ1DQJHqoaCmlbsy88S19k/pdoHglSNTeN/1IB7hIQMG/fDh9S4Xx
- EfIg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVLscsW0Lg2kLKM9SIWFsFt4kFZ51rshye01+IHVAtAmI2zOQDAhgut+JHqJz5JAK0x0lbmnoQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzi9+SyzrEBpfu/MP6Lx8GdGSAuTMwQQaesdAEZwc2s/eJDM6pd
- P9JNAtZlrS6Bc9XZnh64VDIIgiY+zGcJC2NAjAQllCVWaQv6K2VXgaUt2FSipUM=
-X-Google-Smtp-Source: AGHT+IH2f0MPBkwhC24pQFjAKYc3s7IFnvqA15xYQKo1xKQEdTPQhphiJv4Eb4vnObNAVoYU+9lCqQ==
-X-Received: by 2002:a05:600c:510f:b0:426:66e9:b844 with SMTP id
- 5b1f17b1804b1-42cdb529479mr23532565e9.8.1726149613902; 
- Thu, 12 Sep 2024 07:00:13 -0700 (PDT)
-Received: from groot.home ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42cb6db7ddbsm139726005e9.34.2024.09.12.07.00.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Sep 2024 07:00:13 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Date: Thu, 12 Sep 2024 16:00:01 +0200
-Subject: [PATCH v2] bootstd: android: Add U-Boot version to cmdline
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1726149789; x=1726754589; i=xypron.glpk@gmx.de;
+ bh=6XQ5xcUP6hngm5YL+plovBHgT8aRP2ZxpbCyB0hQdRY=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=rDPYNTqP7NE+EIqjMbANWg6CrOlO1jML1YNdo2vqa+vDb3vBuDG9SqZcn7NEDFNm
+ cInBZQBOZ1tIKjOvxuUiBFscHiWfmIDrMoFVTfnI+pyqHpmvovGbVFLAdnbw56MPk
+ pMfpuTxcWZ/8SE/QaL+4CtEKSjGIpjphSVekPwYOOVTSmIvPyrNFlCXz2CcbeRrJX
+ bTZ5tALItvIrIMOCh2ibwP1o6X18ZZHbrioaOgVAQlrIlIH2e1Vlo0K0TCbNyYZ92
+ O8VMq+VzxJS9n4h/plAdsTrcK5S9PKn26snK1Hj1DO5s3qkJ85CnqwUIggBZNHEAO
+ WFcBxbNMiFrCKMJq9A==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MHGCo-1skIRB2xxA-0070hS; Thu, 12
+ Sep 2024 16:03:09 +0200
+Message-ID: <ae1cf1fa-766e-46a0-8ef9-2c2c7af73d9e@gmx.de>
+Date: Thu, 12 Sep 2024 16:03:05 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240912-bootmeth-bootloader-version-v2-1-76d4c0b45024@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAODz4mYC/42NQQ6CMBBFr0JmbQ3UgtSV9zAs2jLIJEDNtGkkh
- LtbOIG7/37y398gIBMGeBQbMCYK5JcM8lKAG83yRkF9ZpClVKUulbDexxnjeIbJmx5ZJORjJ6S
- R9lYPDpUbIBs+jAN9T/uryzxSiJ7X8yxVR/ufN1WiElrftWmVbOumeVqzTmQZr87P0O37/gMTz
- byvyQAAAA==
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Cc: Guillaume La Roque <glaroque@baylibre.com>, 
- Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-X-Mailer: b4 0.14.2-dev-b7dec
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 08/14] efi: Use the same filename for all sandbox builds
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20240902011825.746421-1-sjg@chromium.org>
+ <20240902011825.746421-9-sjg@chromium.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240902011825.746421-9-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:zRM3aNinNlE9F281Df8qlw1Zvx3mRMNOeEL7+2v8B2jTMxwO/uF
+ aWr5maic3ZP4Ae0A91Yy1gWhg2suIMgOUoBPyzggO40wtCTOyKM67cEm7GVE6Rt0M/fmeXZ
+ IBKcJX06O7UwqdYstWEofnN6ncRBq3SkoBGbtzOlKwjm3ok3lTW6v4yTpJxOVeo9vZrs9G0
+ AA6VfuwqTw5gHy6QboRgA==
+UI-OutboundReport: notjunk:1;M01:P0:OCjFcbq8NtU=;MXqg+LBolBZ4hRtS1DIc62WMv7O
+ wiP+SH/Bs7eq89X4juV+rOxVM2exsySrnM4aT0ynxekrhxWNlueFio8IwsSlCAereXcfFZZ3e
+ VRShsTvyWHfIAFoUMur6Z1HRk4n5sBYbYImCRoBFGGm+Gv08BoT1nLP2J3m6gW4UDmXaxJhB3
+ aSudAckQMBusoveKwpJFhDw2A/kAbNOzv7vDItVjVI5FAyDajeLNKIk+CaOX13Lnqm58awmEl
+ TG6CDscB1f8nd8QVnp2mmc08AbzMOaAZDukVl49wa3jQqDutKbN/azbjovOH4II4rRWZOAkVB
+ h+qdN7AslMeNksSKvYja2XAc4f89Lwgqqae8tZquP0lM2/G4iXb6p2cpM0SaG4Ho9plil5xTi
+ IyICRjidrFpuNjvTbQRSBthNOAmLxP7PNFwlciHE4OMSRn3QDG1OdhVuoPFFT+6GAndSrLbwT
+ hpmeTissKLC4gI2tCqIdeqrJ7F/r3YPJFVu7oY0dVl6IdMAxemst1V6Fwp3dC21ve5z2mgEUe
+ M49i1pv99uCGEgRWv5FoNyI1JAkqOJK+FSY/VnFHl+AtkqJzdkQXPgty1hzw+28ndAzOoMjt+
+ O0oIBa8AJFzip3xv+PqeCZ1pvudKBXPbS5uPoVXHIs2vjcOvd/uDZGUGy0v+XCgPtrNTaad8C
+ UDW+3peWrDpWl9NKEGDllF2HMGqCtpDMicqCpsLqfMBKpN36wyeK1HO+f19eXMBw5Uge4PHM1
+ 2N9rFjuvv3zcI4vk117lucXZUbTJ/FQlMuOdI4O+ipvdhiuHnGAkhwUtnNgiSTw0o8NyVaN4K
+ 5IlUP9vTrXCGjjB1LpwSkJww==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,72 +92,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When booting into Android fastbootd (a subset of recovery), the default
-UI shows the bootloader version in the screen [1].
-This is done via the ro.bootloader property which should come from the
-bootloader.
+On 02.09.24 03:18, Simon Glass wrote:
+> Sandbox is not a real architecture, but within U-Boot it is real enough.
+> We should not need to pretend it is x86 or ARM anywhere in the code.
+>
+> Also we want to be able to locate the sandbox app using a single
+> filename, 'bootsbox.efi', to avoid needing tests to produce different
+> files on each host architecture.
 
-Provide the U-Boot version via a kernel commandline argument so that
-fastbootd can show it properly on the screen.
+The changed include is not meant to set anything for the sandbox app
+which you run on top of an UEFI firmware. The sandbox app probably
+should be called depending on the architecture sandboxaa64.efi,
+sandobxriscv64.efi, etc.
 
-[1] https://android.googlesource.com/platform/bootable/recovery/+/refs/heads/main/fastboot/fastboot.cpp#42
+This include is defining which file the EFI boot manager loads by
+default. This value must conform to the EFI specification. When I have
+built the sandbox on riscv64 I expect that it will load bootriscv64.efi
+from a distro installer image.
 
-Reviewed-by: Julien Masson <jmasson@baylibre.com>
-Reviewed-by: Guillaume La Roque <glaroque@baylibre.com>
-Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
----
-Changes in v2:
-- Clarify by a comment that we intentionally ignore return (Simon)
-- Link to v1: https://lore.kernel.org/r/20240904-bootmeth-bootloader-version-v1-1-9979a8428566@baylibre.com
----
- boot/bootmeth_android.c | 13 ++++++++++++-
- 1 file changed, 12 insertions(+), 1 deletion(-)
+Best regards
 
-diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
-index 6e8d3e615db0..19b1f2c377b9 100644
---- a/boot/bootmeth_android.c
-+++ b/boot/bootmeth_android.c
-@@ -22,6 +22,7 @@
- #include <malloc.h>
- #include <mapmem.h>
- #include <part.h>
-+#include <version.h>
- #include "bootmeth_android.h"
- 
- #define BCB_FIELD_COMMAND_SZ 32
-@@ -171,6 +172,12 @@ static int configure_serialno(struct bootflow *bflow)
- 	return bootflow_cmdline_set_arg(bflow, "androidboot.serialno", serialno, false);
- }
- 
-+static int configure_bootloader_version(struct bootflow *bflow)
-+{
-+	return bootflow_cmdline_set_arg(bflow, "androidboot.bootloader",
-+					PLAIN_VERSION, false);
-+}
-+
- static int android_read_bootflow(struct udevice *dev, struct bootflow *bflow)
- {
- 	struct blk_desc *desc = dev_get_uclass_plat(bflow->blk);
-@@ -264,8 +271,12 @@ static int android_read_bootflow(struct udevice *dev, struct bootflow *bflow)
- 		goto free_priv;
- 	}
- 
--	/* Ignoring return code: setting serial number is not mandatory for booting */
-+	/*
-+	 * Ignoring return code for the following configurations:
-+	 * these are not mandatory for booting.
-+	 */
- 	configure_serialno(bflow);
-+	configure_bootloader_version(bflow);
- 
- 	if (priv->boot_mode == ANDROID_BOOT_MODE_NORMAL) {
- 		ret = bootflow_cmdline_set_arg(bflow, "androidboot.force_normal_boot",
+Heinrich
 
----
-base-commit: 360aaddd9cea8c256f50c576794415cadfb61819
-change-id: 20240904-bootmeth-bootloader-version-2a2b35fce4cf
-
-Best regards,
--- 
-Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>
+> Drop the confusing use of host architecture and just let sandbox be
+> sandbox.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> ---
+>
+> Changes in v5:
+> - Drop the Fixes tag
+>
+> Changes in v3:
+> - Put back the Linaro copyright accidentally removed
+>
+>   include/efi_default_filename.h | 24 ++----------------------
+>   1 file changed, 2 insertions(+), 22 deletions(-)
+>
+> diff --git a/include/efi_default_filename.h b/include/efi_default_filena=
+me.h
+> index 77932984b55..06ca8735002 100644
+> --- a/include/efi_default_filename.h
+> +++ b/include/efi_default_filename.h
+> @@ -16,26 +16,8 @@
+>   #undef BOOTEFI_NAME
+>
+>   #ifdef CONFIG_SANDBOX
+> -
+> -#if HOST_ARCH =3D=3D HOST_ARCH_X86_64
+> -#define BOOTEFI_NAME "BOOTX64.EFI"
+> -#elif HOST_ARCH =3D=3D HOST_ARCH_X86
+> -#define BOOTEFI_NAME "BOOTIA32.EFI"
+> -#elif HOST_ARCH =3D=3D HOST_ARCH_AARCH64
+> -#define BOOTEFI_NAME "BOOTAA64.EFI"
+> -#elif HOST_ARCH =3D=3D HOST_ARCH_ARM
+> -#define BOOTEFI_NAME "BOOTARM.EFI"
+> -#elif HOST_ARCH =3D=3D HOST_ARCH_RISCV32
+> -#define BOOTEFI_NAME "BOOTRISCV32.EFI"
+> -#elif HOST_ARCH =3D=3D HOST_ARCH_RISCV64
+> -#define BOOTEFI_NAME "BOOTRISCV64.EFI"
+> -#else
+> -#error Unsupported UEFI architecture
+> -#endif
+> -
+> -#else
+> -
+> -#if defined(CONFIG_ARM64)
+> +#define BOOTEFI_NAME "BOOTSBOX.EFI"
+> +#elif defined(CONFIG_ARM64)
+>   #define BOOTEFI_NAME "BOOTAA64.EFI"
+>   #elif defined(CONFIG_ARM)
+>   #define BOOTEFI_NAME "BOOTARM.EFI"
+> @@ -52,5 +34,3 @@
+>   #endif
+>
+>   #endif
+> -
+> -#endif
 
