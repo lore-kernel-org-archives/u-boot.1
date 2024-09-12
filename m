@@ -4,78 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46262EE6454
-	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 07:30:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E2E7EE6457
+	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 07:30:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3BA0988E9B;
-	Thu, 12 Sep 2024 09:30:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A011488E97;
+	Thu, 12 Sep 2024 09:30:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="E/y0VL6B";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="deHLcoT4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D1A488E6B; Thu, 12 Sep 2024 09:30:16 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 245EB88E9E; Thu, 12 Sep 2024 09:30:18 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E59988DF1
- for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 09:30:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A8A288E98
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 09:30:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=glaroque@baylibre.com
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-42cae4eb026so5601255e9.0
- for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 00:30:14 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-42cbaf9bfdbso4788035e9.0
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 00:30:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1726126212; x=1726731012;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1726126214; x=1726731014;
  darn=lists.denx.de; 
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=pKSxveBp8uKERJDKPUw3kbNibw9JDA3vPq3VlPcRg0s=;
- b=E/y0VL6Bz4KWIaEydilNUOsg+6lcTKUg8EgSyEI3ocTyQ3DWk1SHCnaFpLSE+Oddqj
- Kr4wavD/WEqWn7jBPuBS2se2Xdkyhh6ucmYdqA+cWAshPgM852jR1T6gLU+VG+M6UX19
- XpTQlCfO0mZyXGVxrQrsN4Jb5efYNAaBMRhgNj6E0dq44Lw30G+3NCF6NBhwbfL81ztg
- CSYW4RpfpA7kscYctK6KE3i9modA7JlyDMZR7RYerY1BWYuC7mOxN5IKNPjVthf1WwPZ
- e4rIRYUNdzejtSmVSDGQwGn/vUU95tnEjQZBa9hJAWCz3OzKncmdSv1m/MEwqxGwgLRn
- haEQ==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=cZlGVGGm+H4X1C2NZFfTjYRXZPRA7EEe0migMMEmX5U=;
+ b=deHLcoT4BRl5ylKH4UXHYJ0OJ/JPLUMFydIyquDYE4FJpzRi6HtsbNQJHg6QqfiZ2R
+ qCyfbrM+e0TrYcOkxORIXA8iPIAnM2UfQ3oBATWFG/tRDoy/UVHgVp70akxpyNp7S+Vn
+ jftftPSBsNPhwNdgqfa17EErSMT/Fk+h1hbSqU6/Xabhy0Hg+WZJA2m6I3QnneQLDWrh
+ 4/BMIvHzmqX6dDe8OmF762lULEDzv/yZha4pY9vHpF4zfC96r6YOuh0YZIwewOgs/+ix
+ 6jOc0PPIthLVsiPiL9Owon0H46zKcUm2Vw5F2kiEflphTID/pmibA1UKVnm627udS52w
+ WWMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726126212; x=1726731012;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=pKSxveBp8uKERJDKPUw3kbNibw9JDA3vPq3VlPcRg0s=;
- b=tUUSA1tRW16boHkvwv5tlRrrNrOEX5VbXhzeqHFJJV5//GvEG1mjmTa7z0kNpgVXsO
- E3xku8RR74vHVukY/pIbfbu2MoEreUtNa+W4g8dGvTOkyA05NdPH7plqs54xQO5GeDLT
- b+7UVx+pxQY7RW8OyriW7yZtabQzTABC5FTPlhbFGQSuhN4nDETLLV+5tEco5moIM7K7
- +7y/KSNfd6+VQ2yqSK3EtIRvCBHj7S7U5LX5nzmKZYPKIxTNWGFiWGR4YQPaHcUVgcqD
- GYbLuuSw7k/yrEcco2sCs/fnFmwIjY6opuf1V+b4vtzyQATYBB7Qo+NwbKcBNNyGyVId
- x5dQ==
-X-Gm-Message-State: AOJu0YxXtfSPLIjvJ5RX/M4/yIaNW1f/xERNGS+RpGsuiB2lzYwvcKLy
- mSHFY8qvT922j/811OXN3afmYw/RuADR6UwdEryrz2A9st9j+o2c1Gps02dmi5k=
-X-Google-Smtp-Source: AGHT+IGlFOYRQD+o6OTK3CpbHx9BeMwNYJboSo/hI0SB4B29COoE353LfQQ2Jmk0VlcCQ1wJ5HKOcQ==
-X-Received: by 2002:a05:600c:4d06:b0:42c:acb0:ddb6 with SMTP id
- 5b1f17b1804b1-42cdb531b66mr15494865e9.9.1726126212065; 
- Thu, 12 Sep 2024 00:30:12 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1726126214; x=1726731014;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=cZlGVGGm+H4X1C2NZFfTjYRXZPRA7EEe0migMMEmX5U=;
+ b=MGJ/saGN2ddZ+mi4ANkSs8TwXOqC8RYLFY/sT+oWaF2LWWKN/DaWy6JGdCh685INuW
+ daawti9LU8eoDPxAvUf6B0XIL++yqm/Pj+1MU7BKZa4bl3kepG7bAP3wwR+tjJ0NicD7
+ 2qpbCinrVVAQLqy9L8G9Ot1Vcu7X2VVKrlA9rcVa4p/+mIzgny5i7DOBJ7DMfceO8efB
+ XhpMLfcTqXBxn6zZrhVr/DBLR/DhgCv6LOK50y4azhaBkCb1HNhGG3eZ/UPjCg8CAgSU
+ M5bbLrZbXGtQEKT2C/R591dJEATaGqNrYpKCB4c72IZM1zUpSa8Oal3HoPkzjYk8R6Wa
+ B65Q==
+X-Gm-Message-State: AOJu0YzXEoSWQ1hG62N6JjMtk5pcjOYxx0afV0miCJzbn2id1oHdIEex
+ GS4Jjpg2XWVxuAvyoman0X8e+ABNZHg4OY1dvCb6z0fX+7vdbpLr2S6zcmzDDy8=
+X-Google-Smtp-Source: AGHT+IFev28kC691MeUaOOy6GJui3WMiGmvyvL4F2crLthSWFW+XXBtRdkyUoP0YGaSWr8MnVQlSRg==
+X-Received: by 2002:a05:600c:3581:b0:42c:ba0d:c766 with SMTP id
+ 5b1f17b1804b1-42cdb531ce0mr12135435e9.6.1726126214324; 
+ Thu, 12 Sep 2024 00:30:14 -0700 (PDT)
 Received: from [127.0.1.1] ([2a05:6e02:10a5:e010:ce21:4d2b:8554:e76])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42caeb21a5csm164330065e9.6.2024.09.12.00.30.11
+ 5b1f17b1804b1-42caeb21a5csm164330065e9.6.2024.09.12.00.30.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Sep 2024 00:30:11 -0700 (PDT)
+ Thu, 12 Sep 2024 00:30:14 -0700 (PDT)
 From: Guillaume La Roque <glaroque@baylibre.com>
-Subject: [PATCH v2 0/3] Add Android 14 bootflow support for AM62X and AM62P
- board
-Date: Thu, 12 Sep 2024 09:29:56 +0200
-Message-Id: <20240912-sitaraupstream-v2-0-2101323d3fa5@baylibre.com>
+Date: Thu, 12 Sep 2024 09:29:59 +0200
+Subject: [PATCH v2 3/3] board: ti: am62px: Add android bootflow support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAHSY4mYC/13Myw6CMBCF4Vchs7ZmaDEWV76HYdHWQSaRS6aVS
- AjvbsWdy/8k51shkjBFuBQrCM0ceRxy6EMBoXPDgxTfc4NGXaE1qCInJ+41xSTkenXypW2Nr62
- uWsinSajl9w7emtwdxzTKsvtz+V1/VI36n5pLhQpDdbbBmIDWX71bnuyFjmHsodm27QM7aDvrr
- wAAAA==
+Message-Id: <20240912-sitaraupstream-v2-3-2101323d3fa5@baylibre.com>
+References: <20240912-sitaraupstream-v2-0-2101323d3fa5@baylibre.com>
+In-Reply-To: <20240912-sitaraupstream-v2-0-2101323d3fa5@baylibre.com>
 To: Bryan Brattlof <bb@ti.com>, Tom Rini <trini@konsulko.com>, 
  Joe Hershberger <joe.hershberger@ni.com>, Nishanth Menon <nm@ti.com>, 
  Robert Nelson <robertcnelson@gmail.com>, 
@@ -100,43 +97,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Ths patchset add support of Android 14 with boot image version 4
-for :
-- AM62X-SK EVM: https://www.ti.com/tool/SK-AM62B
-- BeaglePlay: https://beagleplay.org/
-- AM62PX-SK EVM: https://www.ti.com/tool/SK-AM62P-LP
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
-Android Images use to test this series are on the Official TI website:
-- AM62x/BeaglePlay: https://www.ti.com/tool/PROCESSOR-SDK-AM62X
-- AM62PX: https://www.ti.com/tool/PROCESSOR-SDK-AM62P
+When CONFIG_BOOTMETH_ANDROID is set, enable Android boot flow support.
 
+To build for AM62Px for Android, we can re-use
+the am62x_a53_android.config fragment when building A53 bootloaders:
+
+  $ make am62px_evm_a53_defconfig
+  $ make am62x_a53_android.config
+  $ make
+
+Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 Signed-off-by: Guillaume La Roque <glaroque@baylibre.com>
 ---
-Changes in v2:
-- Remove uneeded part in android fragment
-- Update commit message.
-- Link to v1: https://lore.kernel.org/r/20240902-sitaraupstream-v1-0-0c478c33c08b@baylibre.com
+ board/ti/am62px/am62px.env | 5 +++++
+ 1 file changed, 5 insertions(+)
 
----
-Guillaume La Roque (1):
-      board: ti: am62x_evm: Add android bootflow
+diff --git a/board/ti/am62px/am62px.env b/board/ti/am62px/am62px.env
+index f8b6aff2c2fd..7ef54079aa8d 100644
+--- a/board/ti/am62px/am62px.env
++++ b/board/ti/am62px/am62px.env
+@@ -13,3 +13,8 @@ mmcdev=1
+ bootpart=1:2
+ bootdir=/boot
+ rd_spec=-
++
++#if CONFIG_BOOTMETH_ANDROID
++#include <env/ti/android.env>
++adtb_idx=3
++#endif
+\ No newline at end of file
 
-Mattijs Korpershoek (2):
-      board: beagle: beagleplay: Add android bootflow support
-      board: ti: am62px: Add android bootflow support
-
- board/beagle/beagleplay/beagleplay.env | 30 ++++++++++++++++++++++++++++++
- board/ti/am62px/am62px.env             |  5 +++++
- board/ti/am62x/am62x.env               |  5 +++++
- configs/am62x_a53_android.config       | 21 +++++++++++++++++++++
- doc/board/ti/am62x_sk.rst              | 14 ++++++++++++++
- include/env/ti/android.env             | 31 +++++++++++++++++++++++++++++++
- 6 files changed, 106 insertions(+)
----
-base-commit: 57949a99b7bd0aa21abbde1ffa7e50e5d9e10a4e
-change-id: 20240830-sitaraupstream-5b18f3b9824f
-
-Best regards,
 -- 
-Guillaume La Roque <glaroque@baylibre.com>
+2.34.1
 
