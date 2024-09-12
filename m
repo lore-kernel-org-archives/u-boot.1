@@ -4,88 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A267EEE6454
-	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 07:11:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3B4DEE6457
+	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 07:30:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B50B88E0D;
-	Thu, 12 Sep 2024 09:11:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id B7F1C88E6B;
+	Thu, 12 Sep 2024 09:30:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="NMZKzNpD";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Kzmn0sS/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E31C88E78; Thu, 12 Sep 2024 09:11:17 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 3B74188E9D; Thu, 12 Sep 2024 09:30:16 +0200 (CEST)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BF4E88E04
- for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 09:11:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id 28AFD88E6B
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 09:30:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ddrokosov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id C6638120012;
- Thu, 12 Sep 2024 10:10:54 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru C6638120012
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1726125054;
- bh=dHY3HMM7ZEdU1d+ZUD+VCQZ2HCWXkJgc/eMn7VVO53E=;
- h=Date:From:To:Subject:Message-ID:MIME-Version:Content-Type:From;
- b=NMZKzNpDVPsbwvIzEdpuSxI/cwFSVeCaI9HlXy7B4ssVJQfurn9zPRBBKKdLbqyWL
- 5NRQN4blpyJYt0U1MWql7g4LZNRSDEZKmdoGPmrzWzo28zZCE130Qgx3Vx6UBIZYRb
- WDTZyX+4skYFsgStpO/AUUkvuy5MD+NX0qcwoGUlO4UNlHKA71YIBrTflP/pN3SrDZ
- n1g1J3iD9XVpXwa5B9uswqtxr2X6n2gd4H+gBJBUPVaropG1hsNJtp6NDGYswFVF+H
- 3ZtGhYQhbhPrC3z1gOxaCb0ncrip9NFaIQcZHVKK6SIk+aCVlfpS8NslyuC6bnv6VB
- JIO0HBiPEkWwA==
-Received: from smtp.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
- [172.16.192.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Thu, 12 Sep 2024 10:10:54 +0300 (MSK)
-Date: Thu, 12 Sep 2024 10:10:53 +0300
-From: Dmitry Rokosov <ddrokosov@salutedevices.com>
-To: <igor.opaniuk@gmail.com>, <mkorpershoek@baylibre.com>, <sjg@chromium.org>, 
- <semen.protsenko@linaro.org>, <trini@konsulko.com>,
- <colin.mcallister@garmin.com>, <4.shket@gmail.com>,
- <avromanov@salutedevices.com>
-CC: <u-boot@lists.denx.de>, <kernel@salutedevices.com>, <rockosov@gmail.com>
-Subject: Re: [PATCH v2 0/6] android_ab: introduce bcb ab_dump command and
- provide several bcb fixes
-Message-ID: <20240912071053.4cquqz5fcbhg6yzc@CAB-WSD-L081021>
-References: <20240911214945.15873-1-ddrokosov@salutedevices.com>
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=glaroque@baylibre.com
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-374c8cef906so518448f8f.2
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 00:30:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1726126213; x=1726731013;
+ darn=lists.denx.de; 
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=rvbNzhrdoOAiTlqEu0HaHAtRLiZmjinxXAKTaWf2Iss=;
+ b=Kzmn0sS/CVz0ayOXUTf8JvP6Li8pj8gbm3nAqcwfzfGRK1eI0t+By5ZQf4YBssfZBO
+ OHIuDwp0efFuwazm7F6xyiNLKsC1ox+NZ5wKBH39huevfPoCCYKAz2e5Axxv9EzkSbLv
+ /fgW6fyI98dDm/b7xN4zyy3210yKQsKp4IWMGhTgBU92LOmy9O67JV3FHNMq3Lr8OCtj
+ 2WgfVbzANf0sUWebohnZ+rE4L9uSnUtCk/44GgnUxupOwk9PE/nhPD1dJ5Vb/jyyit2/
+ YjdC5Yt1ZdzEKKLsFodYzBuy3xHIk38cu0ns0okXXKlYWXzra28zJGTJZg7tRT5oIYoD
+ CY/A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1726126213; x=1726731013;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=rvbNzhrdoOAiTlqEu0HaHAtRLiZmjinxXAKTaWf2Iss=;
+ b=O69XfnmRi9pESq1pSajriKyYyhVPiiYoMsqeoGXtaDh9aHnj3gdZDV8dPq6XooYrNN
+ jSzKcvNPAjCoRHH0xI4OyS/QfrYXEzB6o/pxFHv+W7ZPguqIfZol5Q+BZRAYeHHVcLLS
+ 73g7K+02Iyf698czuEjukiZlI3KHnYfjJlD6e42DhDAKQvBtaygWo+0oABvPeC24o2lH
+ UGZ6ikJhF+0Ib5bY4Y0zgNc3WBF27mx4Fr0gcrtsAIjawT9SOfLeLwboaLiNQieP7z1o
+ drdDddLuGLG+4bEi5f6LDAKyoKN44TdHkuK6O+doNoKnAoVpYsH7RG8Uk5cQGeTBm5pL
+ jUFA==
+X-Gm-Message-State: AOJu0Yw9/eZDjj+5q/Iqc+H13eRwiLYoa/s4wZGsp61UyhDbRud1hjCl
+ 0oNg7f4lay+I0vuNPJpjlRzSNv8ekol772kZXVFPFs2Xf1De5uUI2RZNtgfQ2ys=
+X-Google-Smtp-Source: AGHT+IEQgYYUBY/rK810SXIpqrHTRiF7XkJEl17FXumsXGTzaWS4GQi9yty0eF9PKc8p+o0Vi661WQ==
+X-Received: by 2002:adf:e342:0:b0:374:c671:2324 with SMTP id
+ ffacd0b85a97d-378c2d699e3mr933741f8f.44.1726126212736; 
+ Thu, 12 Sep 2024 00:30:12 -0700 (PDT)
+Received: from [127.0.1.1] ([2a05:6e02:10a5:e010:ce21:4d2b:8554:e76])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-42caeb21a5csm164330065e9.6.2024.09.12.00.30.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 12 Sep 2024 00:30:12 -0700 (PDT)
+From: Guillaume La Roque <glaroque@baylibre.com>
+Date: Thu, 12 Sep 2024 09:29:57 +0200
+Subject: [PATCH v2 1/3] board: ti: am62x_evm: Add android bootflow
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20240911214945.15873-1-ddrokosov@salutedevices.com>
-User-Agent: NeoMutt/20220415
-X-Originating-IP: [176.99.198.29]
-X-ClientProxiedBy: p-i-exch-a-m1.sberdevices.ru (172.24.196.116) To
- p-i-exch-a-m1.sberdevices.ru (172.24.196.116)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 187699 [Sep 12 2024]
-X-KSMG-AntiSpam-Version: 6.1.1.5
-X-KSMG-AntiSpam-Envelope-From: ddrokosov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 32 0.3.32
- 766319f57b3d5e49f2c79a76e7d7087b621090df, {Tracking_uf_ne_domains},
- {Track_E25351}, {Tracking_from_domain_doesnt_match_to}, github.com:7.1.1;
- lore.kernel.org:7.1.1; salutedevices.com:7.1.1; 127.0.0.199:7.1.2;
- smtp.sberdevices.ru:7.1.1,5.0.1;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1, FromAlignment: s
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean, bases: 2024/09/12 05:48:00
-X-KSMG-LinksScanning: Clean, bases: 2024/09/12 05:48:00
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2024/09/12 04:05:00 #26557625
-X-KSMG-AntiVirus-Status: Clean, skipped
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20240912-sitaraupstream-v2-1-2101323d3fa5@baylibre.com>
+References: <20240912-sitaraupstream-v2-0-2101323d3fa5@baylibre.com>
+In-Reply-To: <20240912-sitaraupstream-v2-0-2101323d3fa5@baylibre.com>
+To: Bryan Brattlof <bb@ti.com>, Tom Rini <trini@konsulko.com>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Nishanth Menon <nm@ti.com>, 
+ Robert Nelson <robertcnelson@gmail.com>, 
+ Vignesh Raghavendra <vigneshr@ti.com>
+Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Vishal Mahaveer <vishalm@ti.com>, 
+ Guillaume La Roque <glaroque@baylibre.com>
+X-Mailer: b4 0.14.1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,93 +97,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There are Pipeline results. One test was failed. I suppose it's not
-related to my patch series:
+Add Android bootflow support for AM62X SK EVM board with
+new android boot method.
 
-https://github.com/u-boot/u-boot/pull/625/checks?check_run_id=30029925059
+To build for AM62x for Android, we use the
+am62x_a53_android.config fragment when building A53 bootloaders:
 
-=================================== FAILURES ===================================
-_______________________ test_ut[ut_dm_dm_test_rtc_dual] ________________________
-test/py/tests/test_ut.py:590: in test_ut
-    assert output.endswith('Failures: 0')
-E   AssertionError: assert False
-E    +  where False = <built-in method endswith of str object at 0x7fb0835c50d0>('Failures: 0')
-E    +    where <built-in method endswith of str object at 0x7fb0835c50d0> = 'Test: dm_test_rtc_dual: rtc.c\r\r\nTest: dm_test_rtc_dual: rtc.c (flat tree)\r\r\ntest/dm/rtc.c:307, dm_test_rtc_dual...&now1, &cmp, false): Expected 0xffffffea (-22), got 0x0 (0)\r\r\nTest dm_test_rtc_dual failed 1 times\r\r\nFailures: 1'.endswith
------------------------------ Captured stdout call -----------------------------
-=> ut dm dm_test_rtc_dual
+  $ make am62x_evm_a53_defconfig
+  $ make am62x_a53_android.config
+  $ make
 
-Test: dm_test_rtc_dual: rtc.c
+Co-developed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Signed-off-by: Guillaume La Roque <glaroque@baylibre.com>
+---
+ board/ti/am62x/am62x.env         |  5 +++++
+ configs/am62x_a53_android.config | 21 +++++++++++++++++++++
+ doc/board/ti/am62x_sk.rst        | 14 ++++++++++++++
+ include/env/ti/android.env       | 31 +++++++++++++++++++++++++++++++
+ 4 files changed, 71 insertions(+)
 
-Test: dm_test_rtc_dual: rtc.c (flat tree)
-
-test/dm/rtc.c:307, dm_test_rtc_dual(): -EINVAL == cmp_times(&now1, &cmp, false): Expected 0xffffffea (-22), got 0x0 (0)
-
-Test dm_test_rtc_dual failed 1 times
-
-Failures: 1
-
-=> 
-=================================== FAILURES ===================================
-
-On Thu, Sep 12, 2024 at 12:49:08AM +0300, Dmitry Rokosov wrote:
-> The patch series include changes:
->     - move ab_select_slot() documentation to @ notation
->     - move ab_select command to bcb subcommands
->     - introduce the ab_dump command to print the content of the BCB
->       block; it's useful for debugging A/B logic on supported boards
->     - fix the slot suffix format in the ABC block to align with official
->       Android BCB specifications
->     - add a test for the ab_dump command to verify the accuracy of each
->       field within the ABC data displayed, it's also useful for testing
->       slot_suffix problem code paths
-> 
-> Changes v2 since v1 at [1]:
->     - move ab_select_slot() documentation to @ notation
->     - move ab_select command to bcb subcommands per Simon and Mattijs
->       suggestions
->     - redesign ab_dump as bcb subcommand
->     - use spaces instead of tabs in the ab_dump command output
->     - print hex values in the lowercase
->     - add RvB tags
-> 
-> Links:
->     [1] https://lore.kernel.org/all/20240725194716.32232-1-ddrokosov@salutedevices.com/
-> 
-> Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
-> 
-> Dmitry Rokosov (6):
->   include/android_ab: move ab_select_slot() documentation to @ notation
->   treewide: bcb: move ab_select command to bcb subcommands
->   cmd: bcb: change strcmp() usage style in the do_bcb_ab_select()
->   cmd: bcb: introduce 'ab_dump' command to print BCB block content
->   common: android_ab: fix slot suffix for abc block
->   test/py: introduce test for ab_dump command
-> 
->  MAINTAINERS                               |   1 -
->  boot/android_ab.c                         | 116 ++++++++++++++++++----
->  cmd/Kconfig                               |  15 +--
->  cmd/Makefile                              |   1 -
->  cmd/ab_select.c                           |  66 ------------
->  cmd/bcb.c                                 | 108 ++++++++++++++++++--
->  configs/am57xx_hs_evm_usb_defconfig       |   1 -
->  configs/khadas-vim3_android_ab_defconfig  |   1 -
->  configs/khadas-vim3l_android_ab_defconfig |   1 -
->  configs/sandbox64_defconfig               |   4 +-
->  configs/sandbox_defconfig                 |   4 +-
->  doc/android/ab.rst                        |  12 +--
->  include/android_ab.h                      |  17 +++-
->  include/configs/khadas-vim3_android.h     |   2 +-
->  include/configs/khadas-vim3l_android.h    |   2 +-
->  include/configs/meson64_android.h         |   4 +-
->  include/configs/ti_omap5_common.h         |   4 +-
->  test/py/tests/test_android/test_ab.py     |  31 +++++-
->  18 files changed, 251 insertions(+), 139 deletions(-)
->  delete mode 100644 cmd/ab_select.c
-> 
-> -- 
-> 2.43.0
-> 
+diff --git a/board/ti/am62x/am62x.env b/board/ti/am62x/am62x.env
+index 09b9b16a3e58..078cc4b5ac96 100644
+--- a/board/ti/am62x/am62x.env
++++ b/board/ti/am62x/am62x.env
+@@ -19,3 +19,8 @@ splashfile=ti_logo_414x97_32bpp.bmp.gz
+ splashimage=0x80200000
+ splashpos=m,m
+ splashsource=sf
++
++#if CONFIG_BOOTMETH_ANDROID
++#include <env/ti/android.env>
++adtb_idx=0
++#endif
+\ No newline at end of file
+diff --git a/configs/am62x_a53_android.config b/configs/am62x_a53_android.config
+new file mode 100644
+index 000000000000..adbe2b8e126f
+--- /dev/null
++++ b/configs/am62x_a53_android.config
+@@ -0,0 +1,21 @@
++# Defconfig fragment for enabling Android boot flow
++# to apply on top of am62x_evm_a53_defconfig or am62x_lpsk_a53_defconfig
++# Enable fastboot
++CONFIG_USB_FUNCTION_FASTBOOT=y
++CONFIG_FASTBOOT_BUF_ADDR=0xC0000000
++CONFIG_FASTBOOT_BUF_SIZE=0x2F000000
++CONFIG_FASTBOOT_FLASH=y
++CONFIG_FASTBOOT_FLASH_MMC_DEV=0
++CONFIG_CMD_GPT=y # Needed for FASTBOOT_CMD_OEM_FORMAT
++CONFIG_RANDOM_UUID=y # Needed for FASTBOOT_CMD_OEM_FORMAT
++CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
++# Enable Android boot flow
++CONFIG_BOOTMETH_ANDROID=y
++CONFIG_SYS_BOOTM_LEN=0x4000000
++CONFIG_SYS_MALLOC_LEN=0x08000000
++CONFIG_AVB_VERIFY=y
++CONFIG_LIBAVB=y
++CONFIG_CMD_ADTIMG=y
++CONFIG_CMD_ABOOTIMG=y
++CONFIG_CMD_AB_SELECT=y
++CONFIG_CMD_AVB=y
+diff --git a/doc/board/ti/am62x_sk.rst b/doc/board/ti/am62x_sk.rst
+index b9d35244d446..51dab839ddd9 100644
+--- a/doc/board/ti/am62x_sk.rst
++++ b/doc/board/ti/am62x_sk.rst
+@@ -132,6 +132,20 @@ DFU support (and disable storage support)
+ .. include::  ../ti/k3.rst
+     :start-after: .. k3_rst_include_start_build_steps_uboot
+     :end-before: .. k3_rst_include_end_build_steps_uboot
++
++* 3.2.1 Alternative build of A53 for Android bootflow:
++
++Since the Android requires many more dependencies, it is disabled by default.
++An extra config fragment should be used to enable Android bootflow support.
++
++.. prompt:: bash $
++
++  export UBOOT_CFG_CORTEXR="${UBOOT_CFG_CORTEXA} am62x_a53_android.config"
++
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_build_steps_uboot
++    :end-before: .. k3_rst_include_end_build_steps_uboot
++
+ .. am62x_evm_rst_include_end_build_steps
+ 
+ Target Images
+diff --git a/include/env/ti/android.env b/include/env/ti/android.env
+new file mode 100644
+index 000000000000..a058beb7fc42
+--- /dev/null
++++ b/include/env/ti/android.env
+@@ -0,0 +1,31 @@
++/* Android partitions
++ * += is needed because \n is converted by space in .env files */
++partitions=name=bootloader,start=5M,size=8M,uuid=${uuid_gpt_bootloader};
++partitions+=name=tiboot3,start=4M,size=1M,uuid=${uuid_gpt_tiboot3};
++partitions+=name=misc,start=13824K,size=512K,uuid=${uuid_gpt_misc};
++partitions+=name=frp,size=512K,uuid=${uuid_gpt_frp};
++partitions+=name=boot_a,size=40M,uuid=${uuid_gpt_boot_a};
++partitions+=name=boot_b,size=40M,uuid=${uuid_gpt_boot_b};
++partitions+=name=vendor_boot_a,size=32M,uuid=${uuid_gpt_vendor_boot_a};
++partitions+=name=vendor_boot_b,size=32M,uuid=${uuid_gpt_vendor_boot_b};
++partitions+=name=init_boot_a,size=8M,uuid=${uuid_gpt_init_boot_a};
++partitions+=name=init_boot_b,size=8M,uuid=${uuid_gpt_init_boot_b};
++partitions+=name=dtbo_a,size=8M,uuid=${uuid_gpt_dtbo_a};
++partitions+=name=dtbo_b,size=8M,uuid=${uuid_gpt_dtbo_b};
++partitions+=name=vbmeta_a,size=64K,uuid=${uuid_gpt_vbmeta_a};
++partitions+=name=vbmeta_b,size=64K,uuid=${uuid_gpt_vbmeta_b};
++partitions+=name=vbmeta_vendor_dlkm_a,size=64K,uuid=${uuid_gpt_vbmeta_vendor_dlkm_a};
++partitions+=name=vbmeta_vendor_dlkm_b,size=64K,uuid=${uuid_gpt_vbmeta_vendor_dlkm_b};
++partitions+=name=super,size=4608M,uuid=${uuid_gpt_super};
++partitions+=name=metadata,size=64M,uuid=${uuid_gpt_metadata};
++partitions+=name=persist,size=32M,uuid=${uuid_gpt_persist};
++partitions+=name=userdata,size=-,uuid=${uuid_gpt_userdata}
++
++fastboot_raw_partition_bootenv=0x800 0x400 mmcpart 1
++fastboot.partition-type:metadata=f2fs
++
++boot_targets=mmc0
++mmcdev=0
++bootmeths=android
++vendor_boot_comp_addr_r=0xd0000000
++bootcmd=bootflow scan -lb
 
 -- 
-Thank you,
-Dmitry
+2.34.1
+
