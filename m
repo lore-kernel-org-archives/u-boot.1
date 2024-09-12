@@ -4,81 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D21DEEED617
-	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 16:00:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FBD9EED631
+	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 17:44:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64AA38904C;
-	Thu, 12 Sep 2024 18:00:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id BD35689090;
+	Thu, 12 Sep 2024 19:44:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="XCPHraLV";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Jwr7FkH2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F81B890C4; Thu, 12 Sep 2024 18:00:56 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id AC147890A1; Thu, 12 Sep 2024 19:44:45 +0200 (CEST)
+Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
+ [IPv6:2607:f8b0:4864:20::f36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C9ED8904C
- for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 18:00:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 4BCCC88D7B
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 19:44:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-5c4146c7d5dso1303347a12.3
- for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 09:00:54 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf36.google.com with SMTP id
+ 6a1803df08f44-6c3f12d3930so9772126d6.3
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 10:44:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1726156853; x=1726761653;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=e9oEq/eYPcb9l3Z9/k7FehnAwr6KHb7fhEIGuawtpLc=;
- b=XCPHraLVtK/aLPGjaA2mTipGiiSMbiV/LdUYBPLDLrpeHBFDi5OpiOR174qAYla/Yf
- rtZ5EJN8Px7LZrFBxRH3SaHcFDsyHGu/Agynqm6VKHPWPsaLkkrVpQcIOxlc4Bb4bxFG
- SNMkLymdf8toqUEdxkq6uIc8JPTl/TNDQ8438=
+ d=konsulko.com; s=google; t=1726163082; x=1726767882; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=wWbNOuiCLihl7n/A7q/BQSMwxEQDFCEnRPq5J8riP8s=;
+ b=Jwr7FkH2SjeF0eiQPAwhkHWHt3S670pann0szNERgOIJQ8lWAoy0vSH9H5v/mxWHTi
+ VSIkzzfMDRg/6u8L56QZ8xotoKnbULJ71bda4vJIi2EvDlfRzTgP4GkUZwRn0FlkLHWc
+ Wy29HQW1ouqkBdOzOKje9JGNHcl0jkvyz3fH4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726156853; x=1726761653;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=e9oEq/eYPcb9l3Z9/k7FehnAwr6KHb7fhEIGuawtpLc=;
- b=L9g27u6mC39VnE4QRNt5Y8yFSSIT3Qa0X+cL4IGpVMr1N1+ZnsCypAmNEwpmJZdtZO
- 5JV55E0nb63RJZ6Ua/JXnMLvrSRM/tpGGGQztN58ItRaVIx3kqegJTmS+MkO7YtiLRD9
- IrW5hPInlz3kAaQHR0pDP4Y7pPdsdWK5Y11uMgIWJXcaOuoSv5Yy5IFK98jRoHZVlTWk
- xZpx8ZV86nvKuxpRH0m4LYUmI5xFr4Fxl6BfzH+53TtA/QDeeosWyeZNijFJCHwaslew
- 0uBjIEW/MvQ8A9tjeKNDhte21IbQ//Npm48SEkNRc1WSRw4F79nvhDh/fv7qgGlqowj0
- 9DoQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXU+W88A/qaW4eqHFKfBpcFVqG6/5lre5VymtDl68INXSMrihH3lMf+bSFwG/kQsgz/om7opnk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yya1moLhgvbXFVYUtFcxYP4rfHHiYYJfd+QLQqOg9OdmIrq0VkN
- qGZ6Jv47u2pvfrQH6/IL5Mn+iwR0/uCfsKOllB4heEZo00wLUR+224SBW2bVQ8OI3N7iandYNr/
- /C0XsRVR6ESKDLcnbOp0yaW+hY+tlRhvy0ha2bA==
-X-Google-Smtp-Source: AGHT+IErSCFHYrBE1//tdQXOHpj4fQQ8pNo3uVAkvZGFaqBxbeEE+ye9NAp9DbG9duSfPk+HC7/G6b46kbrCdj1qAoQ=
-X-Received: by 2002:a17:907:e21b:b0:a86:842a:104a with SMTP id
- a640c23a62f3a-a9029636efbmr317075266b.57.1726156852978; Thu, 12 Sep 2024
- 09:00:52 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240910101344.110633-1-miquel.raynal@bootlin.com>
- <20240910101344.110633-4-miquel.raynal@bootlin.com>
- <CAOMZO5DxLh24w4owJ63z-aEfRtu0gct+DzGPbZQdyFBt7NO1uA@mail.gmail.com>
- <CAOMZO5D_-49AdXCe-O5NRqw91oJ4WwpHqEomKBAd_hn9qxYPeQ@mail.gmail.com>
-In-Reply-To: <CAOMZO5D_-49AdXCe-O5NRqw91oJ4WwpHqEomKBAd_hn9qxYPeQ@mail.gmail.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Thu, 12 Sep 2024 18:00:40 +0200
-Message-ID: <CAOf5uwmJf+eu9ViS5zEzvfRSXUe=iP5rL=KBoOTBD7vqMCrPiA@mail.gmail.com>
-Subject: Re: [PATCH 3/8] clk: imx8mp: Add media related clocks
+ d=1e100.net; s=20230601; t=1726163082; x=1726767882;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=wWbNOuiCLihl7n/A7q/BQSMwxEQDFCEnRPq5J8riP8s=;
+ b=Fctasch2uN8EyKSOldf4gig3PUL4rtppwqOK9LcpYYdMKDMIuGzEz2DFv1UEDJoln/
+ IjwydGHHYcWQYP/Imrd31o00aZkroAR8rTjfnFNli9gtp/v9F/n/y35QRrhA9nucOk2L
+ /QU3uTV/N8Mmlf+U+kQuiFPrVt3almQ27EjY/xy1dbWXx4rYUBKWKK2kABspgPtWvzPI
+ 24Yx4M2HdHYU6XgoVjucrMvrfU7A4J+LggWf8idHJRgsepO2r3b3VPyTNeM1ZJ8roXOb
+ 3ssurp6RcgeBSwdgqoREmkdZEIw4GCxiI705OQD5pg2EDx4i0bSRXwOchI0sG124CmED
+ tDrg==
+X-Gm-Message-State: AOJu0YyHm6biAbOQ/98z6PpYQYui3S1OGY7CzFULQ+6hRKPekxtVWDqm
+ pD1OOpgDsgmFP+t1GAeKbScG7apCO/7iBpUF5NuKTyNeRDZ2Fp25xwXhSgrgpS+ZR1E4o2FjVJB
+ my94=
+X-Google-Smtp-Source: AGHT+IEq8zT5Mj1areKYYChrG9HzhmbDHoF9rPQboZSe7wEE685QIr3l2ga7eok/4UdrBATJZW3YwA==
+X-Received: by 2002:a05:6214:2b96:b0:6c3:668b:b0e4 with SMTP id
+ 6a1803df08f44-6c5736cba60mr57244486d6.39.1726163081989; 
+ Thu, 12 Sep 2024 10:44:41 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6c534786f4csm56272276d6.145.2024.09.12.10.44.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 12 Sep 2024 10:44:41 -0700 (PDT)
+Date: Thu, 12 Sep 2024 11:44:38 -0600
+From: Tom Rini <trini@konsulko.com>
 To: Fabio Estevam <festevam@gmail.com>
-Cc: Miquel Raynal <miquel.raynal@bootlin.com>, Tom Rini <trini@konsulko.com>, 
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Simon Glass <sjg@chromium.org>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Anatolij Gustschin <agust@denx.de>,
- u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Ian Ray <ian.ray@gehealthcare.com>, Marek Vasut <marek.vasut@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Cc: u-boot@lists.denx.de
+Subject: Re: [GIT PULL] Please pull u-boot-imx-next-20240911
+Message-ID: <20240912174438.GR4252@bill-the-cat>
+References: <20240911232521.1124639-1-festevam@gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="JDPmPH9R392rVYHR"
+Content-Disposition: inline
+In-Reply-To: <20240911232521.1124639-1-festevam@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,56 +90,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Fabio
 
-On Thu, Sep 12, 2024 at 2:30=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
-wrote:
->
-> Hi Miquel,
->
-> On Wed, Sep 11, 2024 at 4:48=E2=80=AFPM Fabio Estevam <festevam@gmail.com=
-> wrote:
-> >
-> > Hi Miquel,
-> >
-> > On Tue, Sep 10, 2024 at 7:14=E2=80=AFAM Miquel Raynal <miquel.raynal@bo=
-otlin.com> wrote:
-> > >
-> > > These are all the clocks needed to get an LCD panel working, going
-> > > through one of the LCDIF and the LDB. The media AXI and APB clocks ar=
-e
-> > > also described.
-> > >
-> > > Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
-> >
-> > This one does not apply. Please rebase it against the next branch.
->
-> Also, shouldn't we restrict registering these clocks only if DM_VIDEO
-> is selected?
->
-> clk-imx8mm.c and drivers/clk/imx/clk-imx8mn.c guard some clocks with
-> their respective CONFIG_ options.
->
-> We should do the same here to avoid unnecessary code growth for those
-> who don't need
-> splash screen on i.MX8MP.
+--JDPmPH9R392rVYHR
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I think that we can wait a bit on those patches, I will send my video serie=
-s
-and try to arrange it back and rebase and work together with Miquel
+On Wed, Sep 11, 2024 at 08:25:21PM -0300, Fabio Estevam wrote:
 
-Michael
+> Hi Tom,
+>=20
+> Please pull from u-boot-imx/next, thanks.
+>=20
+> The following changes since commit 78d898eec080b02059c8dc09318b8761044fea=
+85:
+>=20
+>   Merge patch series "phycore-am62/4: Add more boot sources" (2024-09-10 =
+14:56:12 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx=
+-next-20240911
+>=20
+> for you to fetch changes up to 5748aa1e372d2db3db6bf3e863f4571bf2ffedb9:
+>=20
+>   pwm: imx: Don't drop the enable bit once set (2024-09-11 17:02:36 -0300)
+>=20
+> u-boot-imx-next-20240911
 
+Applied to u-boot/next, thanks!
 
 --=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
+Tom
 
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+--JDPmPH9R392rVYHR
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbjKH8ACgkQFHw5/5Y0
+tywPsQv+JrZU3Wa99Nzs4UUMnNlLrR2QpSQFtVRLDbCVV1Ljlp+m8SQG664oMx5X
+ZS6LS25WH7YezFz7M9YzMYcGnUKeSvYlRbjj83haWDaTdh3IDyawpUzW6ZZgbmsB
+8pAxSsRysk9zDGtHA+w8k50Wygvjqgj/aF8Yn2SuJpa+rLWWEEyVW9AjhGEbl5qu
+lBsU4J0wAgrpX3LEqyqElB1j1T3qH3ELkt/yTcRpeMUG2M9yPyPoVcR7a1w7mSn5
+tP+HYJsyDS88ZHzjw/hgxrhdMa9+4PaqvT63LOfr4IH8RI9IfnpTUgUa6LEgb+Jx
+4/l+wxzKSLl7uaoLnZxxGUc/Bfedf8HLvuPuYQqHNfFCVQeiO+V75sO/7y3wXdXV
+FLwEMwPqSYXsklpkDzxPGynLlFrlEUBkBaUBXhs1q6ruXi6LDzAsTAP6rDFgjwUJ
+mhXnjvSJxhu8luC1O2lvhhdzhxVJnf+ORBSr2lWvJIPyi3/qScIKq7CIarqUcfIR
+0tN2sQ54
+=JzrZ
+-----END PGP SIGNATURE-----
+
+--JDPmPH9R392rVYHR--
