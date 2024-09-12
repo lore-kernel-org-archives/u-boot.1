@@ -4,70 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71E23EE57FB
-	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 01:04:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D81F3EE57F6
+	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 01:04:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3367A88E0F;
-	Thu, 12 Sep 2024 03:01:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9D6BB88E4A;
+	Thu, 12 Sep 2024 03:01:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dAhoNqVY";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nYf04HvN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C7B8188E04; Thu, 12 Sep 2024 03:01:22 +0200 (CEST)
-Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
- [IPv6:2607:f8b0:4864:20::436])
+ id 0217D88D09; Thu, 12 Sep 2024 03:01:25 +0200 (CEST)
+Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
+ [IPv6:2607:f8b0:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9BBC388E0F
- for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 03:01:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BAF0E88DF0
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 03:01:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-71781f42f75so294900b3a.1
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 18:01:20 -0700 (PDT)
+Received: by mail-pg1-x533.google.com with SMTP id
+ 41be03b00d2f7-7d4fbe62bf5so324225a12.0
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 18:01:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726102879; x=1726707679; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1726102881; x=1726707681; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Gf5EQiCmriS8giBBP/T9/9IFh6MmSWA9BuRUM2f5VD8=;
- b=dAhoNqVYB4aHDg43IQvr4z1DK7k/J1wgF1XCkt4TSZdPaDZD8yd9xfCPIR2OdYiKpa
- GHas16EyaHElfaoop81FkTD8pJrRlfUX+LxcINYuWKa5pKdZ56JQX5+zqQ0/58fec9EQ
- opuYMkaFBlEl0/br/PqKKQN5n6dHJSQfnP8bs=
+ bh=JlQjW4KCY1QuP+STMYQVDmqQfNoDpNzJE4k0ZUEm7iM=;
+ b=nYf04HvNVFUUqxVCoO0LWZX1iifZfPHMksmvGnyzCyMvs5MUjh40fsi+TYbhjkwjmM
+ JNJNJqDFwNVYy2XyK4qcxf1D06Ha1hW/tWxT1PS4IdpGuLoyepEo1rAMYMYOrc38c2i6
+ GuvDWem+I1BqzchbAwdk/r/SjSUQhqCDk/EmY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726102879; x=1726707679;
+ d=1e100.net; s=20230601; t=1726102881; x=1726707681;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Gf5EQiCmriS8giBBP/T9/9IFh6MmSWA9BuRUM2f5VD8=;
- b=IhwdY1/g7r+uKmy7ijKOpdTf0zciVmfkm+px2KiA5hFv0Yj+sojxhcHhUWdsEEz4xz
- 8lxWc+aABCGBuvetIGO6BR/bB2qT77mxu5U9Jnyfit8v7qmBnbvvAgWcSxGFqM2J+Sue
- AA8p8Rz2V4x7N12VHlhzbR4CRBBc8AU5zRsEo74eyj6/iYEqg652VuaJH8H1R1U+PPU7
- d4SMqy4LVrzfO24gXd14LYuMdXIImQTT+UUtRVVeOc8d6etH+03Hi7GBTUh4uxUAF1Hv
- sJwzfhZHvIKnlQcCpOnVUKqWUARChT3jycIGgFdeMJiW35uxCBF9oR4rukV8dMBOhAo1
- 9Ppw==
-X-Gm-Message-State: AOJu0YyU/5dr6btHxvM7hB9J8SfEq0vlXUt41GZe+UDcTZ7mhdI74CKf
- qfR+NrCAhZgavlq/IMCUFvQnks7H4KvxOcX7TdJa15kjLjFDIiAgLaK0pGudLXBQQ+PPFz1NMpr
- A+eBIQu1JfFW0VFitrG88WDsorjZxUXAi+Wtj
-X-Google-Smtp-Source: AGHT+IEvXIuL2yhP5ER8fVkJrJHiW5Qcq2UCbHZCJ9RcknjbJ+tIZPSf0ytLHEf8SoqlZb6PRvW+JzlKZsqOF44FMZE=
-X-Received: by 2002:a05:6a00:4b16:b0:704:2563:5079 with SMTP id
- d2e1a72fcca58-71926211ddemr1784956b3a.27.1726102878647; Wed, 11 Sep 2024
- 18:01:18 -0700 (PDT)
+ bh=JlQjW4KCY1QuP+STMYQVDmqQfNoDpNzJE4k0ZUEm7iM=;
+ b=RaPZFIdNpMBeMpO3xyO+KFydpauLXx5jZORvvEHPJ5fiWSN912i5SquIQ3pnfaXjOk
+ ARn2t2P+24mgEziZIs/uv33G1WL1k2YLS+B+hIXKDUFI/8bByk3B/zYkCK7iAevFVwNs
+ im+0XhSXAM0xkwddbD/sXK67lRlnPWLfWAVVM2siA6ekeEc/yO7XvFibe4ctuPG4CP1q
+ cPOLUodOisOEPfHrZFrUEffO47dUn7brciw0RYcfQV3+q3BCatEybMeIqg7KzhahCwCW
+ /zcItdoNpUbrK+MSxoIFmRkiie5uWy1JU9VRZ9QbaEvvotQXjXtYz8d166W+NJI53Gu2
+ pFsw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXzBWmbsuBEg7+IMcBQwaPP0//vnqy34JUMmL/AvEoGoZiGFiN73moIZSmQA+R4AI/IXYqdd3k=@lists.denx.de
+X-Gm-Message-State: AOJu0YzYqCH5TLa70GiwWuLBL1tIe3tW9BNGkC6ylw0D01rD14WKVxpd
+ pkvU4qyPSq6AxDilmb0j7LbIOeWEP8XSud8mYZ3RWqlgcqub7V6z/Ci8j+F5MgzHbPBzZWLDABD
+ rZUQVAdaMu92qBGwWR6m9qvZ+GhVALxj9RvHi
+X-Google-Smtp-Source: AGHT+IFp+mByppLcWyDccKYsoZlGMgfbxbW8xwdN3eGCRKU5YEr1Q1sRiE0NKTvGSULy6KNcFS1JqhxxacrncblSCKI=
+X-Received: by 2002:a05:6a20:c70b:b0:1cf:44ac:7144 with SMTP id
+ adf61e73a8af0-1cf7620c0eemr1280033637.31.1726102880672; Wed, 11 Sep 2024
+ 18:01:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1726048404.git.jerome.forissier@linaro.org>
- <b7c378d570e12b0d619e291953deb2b333b16966.1726048404.git.jerome.forissier@linaro.org>
-In-Reply-To: <b7c378d570e12b0d619e291953deb2b333b16966.1726048404.git.jerome.forissier@linaro.org>
+References: <20240911214945.15873-1-ddrokosov@salutedevices.com>
+ <20240911214945.15873-4-ddrokosov@salutedevices.com>
+In-Reply-To: <20240911214945.15873-4-ddrokosov@salutedevices.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 11 Sep 2024 19:01:03 -0600
-Message-ID: <CAFLszTievnwczV9ULQNcgp=JAah0EQ3ng5_rYFJWLYhWZBRrOQ@mail.gmail.com>
-Subject: Re: [PATCH v4 05/15] net: fm: call dtsec_init_phy() only when it is
- defined
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Peter Robinson <pbrobinson@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Date: Wed, 11 Sep 2024 19:00:59 -0600
+Message-ID: <CAFLszTioqS8tS4a8iexdbLJ710nwxJrDMS6MpeN6i6hD7iQk2w@mail.gmail.com>
+Subject: Re: [PATCH v2 3/6] cmd: bcb: change strcmp() usage style in the
+ do_bcb_ab_select()
+To: Dmitry Rokosov <ddrokosov@salutedevices.com>
+Cc: igor.opaniuk@gmail.com, mkorpershoek@baylibre.com, 
+ semen.protsenko@linaro.org, trini@konsulko.com, colin.mcallister@garmin.com, 
+ 4.shket@gmail.com, avromanov@salutedevices.com, u-boot@lists.denx.de, 
+ kernel@salutedevices.com, rockosov@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,54 +88,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jerome,
-
-On Wed, 11 Sept 2024 at 03:59, Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
+On Wed, 11 Sept 2024 at 15:49, Dmitry Rokosov
+<ddrokosov@salutedevices.com> wrote:
 >
-> dtsec_init_phy() is defined only with MII so add the proper conditional
-> in the caller code.
+> In the entire cmd/bcb.c file, the return value of strcmp() is not
+> directly compared to 0. Therefore, it would be better to maintain this
+> style in the new do_bcb_ab_select() function as well.
 >
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
 > ---
->  drivers/net/fm/eth.c | 6 +++++-
->  1 file changed, 5 insertions(+), 1 deletion(-)
+>  cmd/bcb.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
->
-> diff --git a/drivers/net/fm/eth.c b/drivers/net/fm/eth.c
-> index 19f3f0fef07..63fe4b2d33c 100644
-> --- a/drivers/net/fm/eth.c
-> +++ b/drivers/net/fm/eth.c
-> @@ -26,7 +26,8 @@
->
->  #include "fm.h"
->
-> -#if defined(CONFIG_MII) || defined(CONFIG_CMD_MII) && !defined(BITBANGMII)
-> +#if ((defined(CONFIG_MII) || defined(CONFIG_CMD_MII)) && \
-> +     !defined(CONFIG_BITBANGMII))
->
->  #define TBIANA_SETTINGS (TBIANA_ASYMMETRIC_PAUSE | TBIANA_SYMMETRIC_PAUSE | \
->                          TBIANA_FULL_DUPLEX)
-> @@ -701,8 +702,11 @@ static int init_phy(struct fm_eth *fm_eth)
->                 supported |= SUPPORTED_2500baseX_Full;
->  #endif
->
-> +#if (CONFIG_IS_ENABLED(MII) || CONFIG_IS_ENABLED(CMD_MII)) && \
-> +       !CONFIG_IS_ENABLED(BITBANGMII)
->         if (fm_eth->type == FM_ETH_1G_E)
->                 dtsec_init_phy(fm_eth);
-> +#endif
+And throughout U-Boot
 
-Ugly! I wonder if we need a special Kconfig for this function?
 
 >
->  #ifdef CONFIG_PHYLIB
->  #ifdef CONFIG_DM_MDIO
+> diff --git a/cmd/bcb.c b/cmd/bcb.c
+> index a56535a743c0..a888549eed3a 100644
+> --- a/cmd/bcb.c
+> +++ b/cmd/bcb.c
+> @@ -432,7 +432,7 @@ static int do_bcb_ab_select(struct cmd_tbl *cmdtp, int flag, int argc,
+>         bool dec_tries = true;
+>
+>         for (int i = 4; i < argc; i++) {
+> -               if (strcmp(argv[i], "--no-dec") == 0)
+> +               if (!strcmp(argv[i], "--no-dec"))
+>                         dec_tries = false;
+>                 else
+>                         return CMD_RET_USAGE;
 > --
-> 2.40.1
+> 2.43.0
 >
-
-Regards,
-Simon
