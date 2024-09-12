@@ -4,57 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A5D1EEB574
-	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 09:24:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CE79EEB58B
+	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 10:07:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A493688F56;
-	Thu, 12 Sep 2024 11:24:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id EC1EB88E98;
+	Thu, 12 Sep 2024 12:07:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sartura.hr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1726133082;
-	bh=/C0LuO+d7YEGJMCp3OY/SZVXJChlPcqWdE7lHkjutPw=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Asufy56MNd+f1mIUnmdAvofyzfytDCNo6ejGCoETUGdT9yx/VKdzTaLhG2RluFOuc
-	 yncpTCj+nQB/e8OREs/+NLPBRrgFt232SVx02xyKaBHfHnGgmlWEnknuk0fNibrpK5
-	 qu6f8G7ToZM8duhE51doKxgXlpYenHUeFBBUZZQ91ZEsznbhFIFB/pUaina8q9RnjM
-	 aE94gMw8qcCa2u17YzfYXgikE2pI3I/4fYDCtVydhaGZTTSCb4RBj24AyjOgHIDw3K
-	 GSUQuOQgwL0fXeZ/KlQuXCSrcro+RynYRpfk1fYr1WuekrguwwYH2cf3K4r2Q5lHIS
-	 cU8V7NH4y0dIA==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="H/unUg0i";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 36E8B88E04; Thu, 12 Sep 2024 12:07:24 +0200 (CEST)
+Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
+ [IPv6:2607:f8b0:4864:20::1029])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 236D688F3E;
- Thu, 12 Sep 2024 11:24:40 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1726133080;
- bh=/C0LuO+d7YEGJMCp3OY/SZVXJChlPcqWdE7lHkjutPw=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=XI5Nb5Wl0Symw/kEzYTIV9PlEySyd0xHM3bim0atE3xEc5pehi55SikzwrVB92t18
- Rxcz+jtUFNnW3FKbMtUoHmncW5sqVxzJwEi6FRzuEV/CMyyner/6NYnlAKF8vZOw51
- vGQLg+qQYxBoDeoUUoUtllzZ7ZUtO9+EOw7M9veEKXfa+X/H5iDdfjBxHv3DIZ77yS
- Eq9Tf/PL5ZFDCfIbzcb/ZiHidGvdCi3TG1tUopcitpRO0TJiucD5YB5u45i3OGH+mB
- GsvUjJqSAL67dU+68FgmgSezM21R4mveApa32wC+98/lBmExaUtKQ1SkrDtn2adQy4
- 13exdnBbrp/vQ==
-Message-ID: <8c9f8dce-2455-468e-be42-6a53d7e48c9e@denx.de>
-Date: Thu, 12 Sep 2024 11:23:50 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id E2D6988F53
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 12:07:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=sartura.hr
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=robert.marko@sartura.hr
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-2d89229ac81so662763a91.0
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 03:07:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sartura.hr; s=sartura; t=1726135640; x=1726740440; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=yYZctlTNeC8u/5nOJk9ZAEG9fy4pgGfSokRy9EcWxZs=;
+ b=H/unUg0iqG8YGZL738Jb+DPetUMHxZEgi2siYlb44pn8cv5nVGiCtvXFax887C9kcF
+ j+gm+FdhoC5vXEqRNxqIbtOb5yIMso/1QAwRpfZDu6WGSjY4sjDYahFFQQv/I2axClka
+ WMcZjAAOoUbxgywIe9QAtQ3Mrl4bBRtuWiJLGzHP1Gw4awp0KGC6cAyBYNjYM5hy4DrB
+ vjzgp6jeOu3QHXh8W5dYIw4mh00c9VoYKKXuK0bDgKCN8UxVAGEQLl9hSKxU0NIqhuth
+ bQJjyiWELwOqjD6pIl7qMo8kTr7sjXnyRgWdOpVWNi1ZKPh6q1B8W9Je83kN8TItA176
+ c7Lg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1726135640; x=1726740440;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=yYZctlTNeC8u/5nOJk9ZAEG9fy4pgGfSokRy9EcWxZs=;
+ b=ZPv2EjDERN/xXFpqlRByeH8FGlpuJtov0+4K4gq3pfGP7UUrmmbPaB0Rh+AqqdcTUb
+ /v3pK7ZAZq3av0tvc5piGMaGz5KQjfuuktnEkIvNMepR/Tls+gBcl1I0Pl3RPX0DggUs
+ PjwPXXTXKBDgkPCO8s0248C2QgMXkjXYH4wJsXAHFSjFXRYwM8f4d07lmvT14OSm2lE8
+ 7LTOG+LUYJwOZHIozgMgN32vEJ3Tdr/No24z5+zfcPHjfWo6pByr+jhguCUrsxH4X0Br
+ AJR818iFuP+mSWkanic8E0i3We1MxrqDczMH1wElqkgFDnLk4GKXue6T8Zvlr/GOdq2G
+ WXgg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX0NDxrlPmR0g3SwkUeN9sezaBOAjy7H0xNUvBKqcoWhm0IqFvnUGltH1nhC5Blk/+QtnxNOZE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw93jI4oyPImc8WzWbDe6sAz7ZeUjNL8cHsiRRrjsPlupAJ/3aT
+ TKI/u0fQwGSuiURSC9+h1DlMbd0L6+5TDGp/b6KXwkrEnUEkZ1acpOIkdajGOESBxY3fbzqTWJS
+ n8IQgGcKd1rX3uxD+qWblerXU9vKuGb6VhGyu3g==
+X-Google-Smtp-Source: AGHT+IGw6/XilpH1umsMZvTsLmCw5g2B+DaBpYZ2ayBatMb9Qp67y/lGEanwFK1Z/vGlavu9FYgpuOlINNH4aou7fNY=
+X-Received: by 2002:a17:90a:2d84:b0:2d8:ee39:465 with SMTP id
+ 98e67ed59e1d1-2db9ff7401amr3118052a91.1.1726135640184; Thu, 12 Sep 2024
+ 03:07:20 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mtd: spi-nor: Fix chip erase timeout issue
-To: Ye Li <ye.li@oss.nxp.com>, Ye Li <ye.li@nxp.com>,
- jagan@amarulasolutions.com, u-boot@lists.denx.de
-Cc: uboot-imx@nxp.com
-References: <1726051530-56280-1-git-send-email-ye.li@nxp.com>
- <6c353eaa-1609-4a72-a557-0b81ee337c5f@denx.de>
- <45629459-5e0d-468a-ac6c-789dc11d44b3@oss.nxp.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <45629459-5e0d-468a-ac6c-789dc11d44b3@oss.nxp.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <20240425143627.54648-1-robert.marko@sartura.hr>
+ <c399216d-34d1-435e-96a7-6716f9f2c32c@gmail.com>
+In-Reply-To: <c399216d-34d1-435e-96a7-6716f9f2c32c@gmail.com>
+From: Robert Marko <robert.marko@sartura.hr>
+Date: Thu, 12 Sep 2024 12:07:09 +0200
+Message-ID: <CA+HBbNGSZ3enyCF9cT8_1qJYt7TndDKJ-OYYe4EaS6_BTPnbRw@mail.gmail.com>
+Subject: Re: [PATCH 1/2] mtd: spi-nor-core: allow overriding 4-byte OPCODE
+ support
+To: Tudor Ambarus <tudor.ambarus@gmail.com>
+Cc: jagan@amarulasolutions.com, vigneshr@ti.com, trini@konsulko.com, 
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,32 +92,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/12/24 10:48 AM, Ye Li wrote:
+On Tue, Sep 10, 2024 at 9:55=E2=80=AFAM Tudor Ambarus <tudor.ambarus@gmail.=
+com> wrote:
+>
+> Hiya,
+>
+> Please specify which linux commit this patch follows. It helps reviewers
+> and gives credit to the linux author.
 
-[...]
+Hi,
+There isn't a specific Linux commit for this as far as I can tell.
 
->>> +            timeout = max(CHIP_ERASE_2MB_READY_WAIT_JIFFIES,
->>> +                      CHIP_ERASE_2MB_READY_WAIT_JIFFIES *
->>> +                      (unsigned long)(mtd->size / SZ_2M));
->> Is the type cast needed ?
-> 
-> Yes. otherwise get below warning
-> 
-> 
-> In file included from include/linux/bitops.h:22,
->                   from include/log.h:15,
->                   from drivers/mtd/spi/spi-nor-core.c:13:
-> drivers/mtd/spi/spi-nor-core.c: In function ‘spi_nor_erase’:
-> include/linux/kernel.h:190:24: warning: comparison of distinct pointer 
-> types lacks a cast
->    190 |         (void) (&_max1 == &_max2);              \
->        |                        ^~
-> drivers/mtd/spi/spi-nor-core.c:1042:35: note: in expansion of macro ‘max’
->   1042 |                         timeout = 
-> max(CHIP_ERASE_2MB_READY_WAIT_JIFFIES,
->        |
-mtd->size is uint64 , so you need to use do_div() :
+Regards,
+Robert
+>
+> Thanks,
+> ta
 
-u64 sz = mtd->size;
-do_div(sz, SZ_2M);
-timeout = CHIP_ERASE_2MB_READY_WAIT_JIFFIES * max(1ULL, sz);
+
+
+--=20
+Robert Marko
+Staff Embedded Linux Engineer
+Sartura d.d.
+Lendavska ulica 16a
+10000 Zagreb, Croatia
+Email: robert.marko@sartura.hr
+Web: www.sartura.hr
