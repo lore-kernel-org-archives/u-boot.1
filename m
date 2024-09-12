@@ -4,75 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC512EED631
-	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 17:45:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59F56EED632
+	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 17:45:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 765A5890E9;
-	Thu, 12 Sep 2024 19:45:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C9524890D8;
+	Thu, 12 Sep 2024 19:45:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tHaYClhx";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HjZOKuPf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B35B88D7B; Thu, 12 Sep 2024 19:45:02 +0200 (CEST)
-Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
- [IPv6:2607:f8b0:4864:20::72b])
+ id 007DD890D9; Thu, 12 Sep 2024 19:45:09 +0200 (CEST)
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
+ [IPv6:2607:f8b0:4864:20::112d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1FBED88D7B
- for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 19:45:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 91BAB890D8
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 19:45:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72b.google.com with SMTP id
- af79cd13be357-7a99de9beb2so76649685a.3
- for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 10:45:00 -0700 (PDT)
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-6d49cec2a5dso366327b3.3
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 10:45:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1726163099; x=1726767899; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1726163105; x=1726767905; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Wbj5it9R/YDh7k8RY8R56VSmW3GMgjTNW5k2UqxTBKo=;
- b=tHaYClhxSJZi3Iu/PXTBViqRIYunOj4sWKqLvyijAwHqD2HrRpC4qaCR+pT3QCvgYU
- XAX+GAZQfxKfgS6RXwGdEJPOgtds/se71UIzbQ+BsKCoeUOOXZY1RGxlfkpygHwhhfT3
- Gz0XQgCNvkj4usvaeNnj20+7vXw7I9FOgxepc=
+ bh=CjNi9IdWNU/ajItHp/2c/v1BKHDncUOkEu2OM37U2mY=;
+ b=HjZOKuPfSZODr83JE0WfgN0Kix1W5VskcnmCtk0blbYTH1UyQPBT7crmQlN8XXjXp2
+ l3v8+loJvRe4AWWTrP/7vMfjupztBG9vskA8d4kTHN43kdCnPzJzEWpag6uNtnTZKisz
+ bxh8BUYLwJY/SuYmrwFBN3Zku704hUTCUkiW8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726163099; x=1726767899;
+ d=1e100.net; s=20230601; t=1726163105; x=1726767905;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Wbj5it9R/YDh7k8RY8R56VSmW3GMgjTNW5k2UqxTBKo=;
- b=ScTrgjC9nNE/r66pvLEDQSDChkYcCJ1d/p4DUTRcHWlNy50Z4iXbtVCwb4tLpsKvVM
- SIDg+C4P5Y7/oBTgL/e+YG5hxnb/I+n/MAmvWRp08wuQAmk3hq+dQDtpxCsuGrT0MaT6
- Q3Ff6Er4WSn7DtBTBQHJCCELNVhYoPoc/MzNoq2yVlQE9F7OotnW60x7JwWlGAK6Z6JH
- aee9YPAmXxZbMZ2qwF4dcAnTCOR4t1uor1UxfifR4oEtV5gD0DtykO639+u1lITXpok2
- xZLU8ij9tRpNRrwiPxVISJyxUuTpbR+EYqOYc8ThNpkccxOVNfUy7ZFUM50YLkWAq3lg
- EWhQ==
-X-Gm-Message-State: AOJu0YyBWr71wWLb/GvIEZWhZ567OyZfwtN7mWTgzYd3Grs9mdtqY+DH
- Lgza+3tRlXZLsQ3F7tWLEw25hLTdWrigKoPG6rhHI/HgQeoE8zNNzsLDcHleJ+Ngw4scuv1CrUI
- Kxgo=
-X-Google-Smtp-Source: AGHT+IGDpGpgwI4Uo5WM462sSLMkUC2xS9oftmV757FiPOXShbYzozhN6JYyL+/Bf1rEXAELNG9DzA==
-X-Received: by 2002:a05:620a:198e:b0:79e:fb23:1eea with SMTP id
- af79cd13be357-7a9e5f1a2bcmr428567685a.31.1726163098827; 
- Thu, 12 Sep 2024 10:44:58 -0700 (PDT)
+ bh=CjNi9IdWNU/ajItHp/2c/v1BKHDncUOkEu2OM37U2mY=;
+ b=YUis8fMvncW1rHVWkUqmDcUlswU8kIPl2s5PvpTS72ZiDO0aC655TpxcoxEfWGo00n
+ +ZEsNIaP8WZYSW9Ks6gEF2p7YKe3N9bhVK2rsew7UYjyUVW6beSRhdyuM5zVv+3fg2PJ
+ 3n3fElkhuf5T2hidw1G46db1bMPMPwuzhTG0STbMyjjXKYs2p1I0naL84zbkyqjFtBzY
+ vNGesrIplO0KbjRbrO7zb4FUPg1wNv3IjfKA94jZkXDWcfUuKqbOATQrnSVJT0Rs+hmW
+ vKZ+McagbHHLtQLazaIUsaU/bxflpDx+aRUlF16I+QKw9RHJNqSjJkErAYMLIEIGowET
+ 9isg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUr98EhPfjBpj24cZEBhHZ/THc2nh7KQPEfhyIbxWXNXUmYsli5XZOe3JslzWlsGdMG6VmL3gc=@lists.denx.de
+X-Gm-Message-State: AOJu0YyKuxZNePU9NBn8jk6CtNuEay1+BCqAll/opiIe/jQezRfUuCYr
+ 29nH0nE7BIZae1sU2rEGAOn2rchWtiae7OGLGhzlxjLKsNgIPnd3/KPMN5soY+w=
+X-Google-Smtp-Source: AGHT+IHtVKfIIF6d6Qm3f0FIs4fWtuK+9xWGszl5bOFvZARoC0i7T2DTLNPcxulLrMXQjvyUEUzkow==
+X-Received: by 2002:a05:690c:6ac2:b0:64a:d5fd:f19f with SMTP id
+ 00721157ae682-6dbcc399ab7mr2096987b3.18.1726163105363; 
+ Thu, 12 Sep 2024 10:45:05 -0700 (PDT)
 Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7a9a7946633sm564113985a.13.2024.09.12.10.44.57
+ af79cd13be357-7a9a7968ed5sm565731585a.42.2024.09.12.10.45.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Sep 2024 10:44:58 -0700 (PDT)
-Date: Thu, 12 Sep 2024 11:44:55 -0600
+ Thu, 12 Sep 2024 10:45:04 -0700 (PDT)
+Date: Thu, 12 Sep 2024 11:45:01 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Leo Liang <ycliang@andestech.com>
-Cc: u-boot@lists.denx.de, rick@andestech.com
-Subject: Re: [PULL] u-boot-riscv/next
-Message-ID: <20240912174455.GT4252@bill-the-cat>
-References: <ZuKMnMooFpwVVhy7@swlinux02>
+To: Dmitry Rokosov <ddrokosov@salutedevices.com>
+Cc: igor.opaniuk@gmail.com, mkorpershoek@baylibre.com, sjg@chromium.org,
+ semen.protsenko@linaro.org, colin.mcallister@garmin.com,
+ 4.shket@gmail.com, avromanov@salutedevices.com,
+ u-boot@lists.denx.de, kernel@salutedevices.com, rockosov@gmail.com
+Subject: Re: [PATCH v2 0/6] android_ab: introduce bcb ab_dump command and
+ provide several bcb fixes
+Message-ID: <20240912174501.GU4252@bill-the-cat>
+References: <20240911214945.15873-1-ddrokosov@salutedevices.com>
+ <20240912071053.4cquqz5fcbhg6yzc@CAB-WSD-L081021>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="KNfi8AzIRBXU5THP"
+ protocol="application/pgp-signature"; boundary="1zj83KOR5UYGI9lH"
 Content-Disposition: inline
-In-Reply-To: <ZuKMnMooFpwVVhy7@swlinux02>
+In-Reply-To: <20240912071053.4cquqz5fcbhg6yzc@CAB-WSD-L081021>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,54 +97,76 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---KNfi8AzIRBXU5THP
+--1zj83KOR5UYGI9lH
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Sep 12, 2024 at 02:39:24PM +0800, Leo Liang wrote:
+On Thu, Sep 12, 2024 at 10:10:53AM +0300, Dmitry Rokosov wrote:
+> There are Pipeline results. One test was failed. I suppose it's not
+> related to my patch series:
+>=20
+> https://github.com/u-boot/u-boot/pull/625/checks?check_run_id=3D300299250=
+59
+>=20
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D FAILURES =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> _______________________ test_ut[ut_dm_dm_test_rtc_dual] _________________=
+_______
+> test/py/tests/test_ut.py:590: in test_ut
+>     assert output.endswith('Failures: 0')
+> E   AssertionError: assert False
+> E    +  where False =3D <built-in method endswith of str object at 0x7fb0=
+835c50d0>('Failures: 0')
+> E    +    where <built-in method endswith of str object at 0x7fb0835c50d0=
+> =3D 'Test: dm_test_rtc_dual: rtc.c\r\r\nTest: dm_test_rtc_dual: rtc.c (fl=
+at tree)\r\r\ntest/dm/rtc.c:307, dm_test_rtc_dual...&now1, &cmp, false): Ex=
+pected 0xffffffea (-22), got 0x0 (0)\r\r\nTest dm_test_rtc_dual failed 1 ti=
+mes\r\r\nFailures: 1'.endswith
+> ----------------------------- Captured stdout call ----------------------=
+-------
+> =3D> ut dm dm_test_rtc_dual
+>=20
+> Test: dm_test_rtc_dual: rtc.c
+>=20
+> Test: dm_test_rtc_dual: rtc.c (flat tree)
+>=20
+> test/dm/rtc.c:307, dm_test_rtc_dual(): -EINVAL =3D=3D cmp_times(&now1, &c=
+mp, false): Expected 0xffffffea (-22), got 0x0 (0)
+>=20
+> Test dm_test_rtc_dual failed 1 times
+>=20
+> Failures: 1
+>=20
+> =3D>=20
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D FAILURES =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-> Hi Tom,
->=20
-> The following changes since commit 78d898eec080b02059c8dc09318b8761044fea=
-85:
->=20
->   Merge patch series "phycore-am62/4: Add more boot sources" (2024-09-10 =
-14:56:12 -0600)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-riscv.git next
->=20
-> for you to fetch changes up to 2db018d2ca5ebd7acc717f0b1959ee67fcd2b0a1:
->=20
->   configs: ibex-ast2700: Enable DRAM and timer driver (2024-09-11 20:35:0=
-4 +0800)
->=20
-> CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot=
--riscv/-/pipelines/22315
-
-Applied to u-boot/next, thanks!
+Yes, sometimes that just fails due to the underlying hardware (even with
+retries). Please tell it to try again so that the world build tests run.
+Sorry for the noise here.
 
 --=20
 Tom
 
---KNfi8AzIRBXU5THP
+--1zj83KOR5UYGI9lH
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbjKJcACgkQFHw5/5Y0
-tyz54gv/UuWmAsx8DKr3dZkY1c+qa9jOVUpoUfmaprFM5gRzI/2oR5dzhPdzXo6T
-t0zeA0FfH+ZdntOIOauu/Cj9oIhWGyD8PWYseN9Cy3iwp7hqw1LXr7kYpRWQUKLw
-ZMBBb8wcyYv1l/FO0jv6Cc7Mo9Xc+XAvJDHJ+6aJNLvMID7orhlacb7I2uP2Kvao
-sEdvvL8ICt43uFx9x/EeRpF1wJvQuec5OVnnu3braHH5FW5yG6WqV/gfch5yPgif
-zLVcaMt8NOgb0UldXgT6D/41Porm4upzv/Q5K3iVklvitlp/xUVdZ/AU7G17R1ks
-HmvXzlhZ8b9r9dw8C2U1ADaLEIq3zJHV+ayWCOVkZsOUpeWltNjdwm0vZNUDp1d0
-Ov5j4A3lJVHXxlwrnT7wNjDx+ylZemwb7xERoiOn979j8zRFPySlKbhrUdqpY7yp
-Jvv6+SziH6N41HFFF8ynzgNDD82FfhAzGUkesmmC+0vBCX8QVBd7eIe/RQhxpp8o
-z+LiIZX9
-=qRfN
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbjKJ0ACgkQFHw5/5Y0
+tyyYjQv/Q7nHGM0sasH/Icpnb7HByS0GsLOPhe+MtthMW5KFeiHBsskh6JHPMbjz
+hZZsa+UXFUVVzHScPDy5kNBFclYPaTAyCdpYK7mbesMZ9Sx7+F+W9VN81A8Z6zft
+xQwJERyGjPVGHtgc8XWa1P2J3n4Qb69++80rZKdKYsGONGo0ZPgA45ZZOBxLBDUe
+3dT3xUKo2cFpQVatHmsWg4rZMUZUGHRrvcnMcFJcMpI3yM3iAAglINqT67qTGcqg
+csRC7688JEAWMWKMUxnoxo3Vik3RSLiTG5t15kgUSr0wcSjsjLgfx4QwgV5YLLdW
+oxgSYzKoWxESkTB1LEzv0yhN6YjTg3M7Y+gCl4UJKWbrs7D4C8qd5JETm1iL9Qe3
+oohjgnQy1WRLuWAfyYKblND11lh3mnwnwk8o4P1Q2WKR99jMZ9S8AG+QAAUcQmj3
+LlL9q97D/0MjqLh9elIsrOzkLEvbje2ntYES26gUy9F97PkgPfeEX/y4RNsaaHBz
+PjyjiINg
+=qMui
 -----END PGP SIGNATURE-----
 
---KNfi8AzIRBXU5THP--
+--1zj83KOR5UYGI9lH--
