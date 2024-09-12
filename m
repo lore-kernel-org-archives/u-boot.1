@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66F8BEE57F9
-	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 00:58:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63372EE57F6
+	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 00:59:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 564A388D06;
-	Thu, 12 Sep 2024 02:58:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B279388CFC;
+	Thu, 12 Sep 2024 02:58:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="G7mm304t";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eWKfzCOt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15E7888D06; Thu, 12 Sep 2024 02:58:32 +0200 (CEST)
-Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
- [IPv6:2607:f8b0:4864:20::f33])
+ id 0308688D1B; Thu, 12 Sep 2024 02:58:38 +0200 (CEST)
+Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
+ [IPv6:2607:f8b0:4864:20::102f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0289288CE8
- for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 02:58:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B422D88D28
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 02:58:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf33.google.com with SMTP id
- 6a1803df08f44-6c53bc6f9faso3352046d6.1
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 17:58:29 -0700 (PDT)
+Received: by mail-pj1-x102f.google.com with SMTP id
+ 98e67ed59e1d1-2d8f06c2459so287425a91.0
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 17:58:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726102709; x=1726707509; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1726102713; x=1726707513; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0NxRBiQ8oWrU3/bDnjUHCQ1vXLI9vKGrUiwcT6d3Um8=;
- b=G7mm304t8+/hgh/zwlaEy/YwxJiRHK5dQzE66J8exHk7YtLeFMuBNkUVSsuCmGcumR
- Qizp9hBrrjNqtuzy2MRqgVeEb1gXw7bHdV42p03Sm/IEkLQTHW+oUvlhnACCI75Ktqpd
- H6KgWI62bu5bFi/HoKqlav+H7xz1V+G1VO2lY=
+ bh=FJ3fVP6Uic6lPVFcKM8nwOgQnoHlTFDIo3L9EHbLgc4=;
+ b=eWKfzCOth6uxdWUjrGt+yWFkVSjinNwYywIcGzUtaRPaOWuxf0PC6/VuUboaTnTGd3
+ n9MZ29i3IHRDFuD14kv4FmyCE0fRFqOSOuiLpAOkRYnRD7S+aSHsfr1h3QZKVRkDxzRb
+ lpcvQAnQ5OjAE0LUd14WvomVGsaYLBGkldqzA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726102709; x=1726707509;
+ d=1e100.net; s=20230601; t=1726102713; x=1726707513;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=0NxRBiQ8oWrU3/bDnjUHCQ1vXLI9vKGrUiwcT6d3Um8=;
- b=ipkcUaMvR5qOauXItbpPQW7dIHMK6Dl93/WMZ2miW1cQfZru/saFyp8+TOg81nmP6R
- t80g96lFnPTmGssI+CEX24sWNn0XdmPfEwxX7uNs9jkB3cjQMalHbZxXMIV9kfjFsUeE
- RV1ej8evhGsll12hnYC2r1UAdg6reHQefr956sHssKhLky8pGdKHmmi+SKuiOEcGHrLB
- 4o2Xwldbq8HaRrAnACL4ESqR3mvFW4Xki4ppPPnVRoUjtt0h9/XHutoSiQqDnGgvjdFG
- 8L+At3PRgkWCm43ecfCnO3FkV4iA2xZqlBeMRsLQzO4GbPPUMy6qV6YAbvx/hLFCVg2h
- dgsg==
-X-Gm-Message-State: AOJu0Yx9sXcpCcpNSZJcKNIM9YYugMh+dQixhTroR1UNpluM6KHCU/4D
- /xD6mUKrqtbfJHepja8PpWnN3vcMM56Hva4YAoBRooz4Vesoj3YFrclLsPjr82A5cbSAIjz6lJV
- qq+DNGGZfeFknST759+0AGfwxFgl3aRcleAdg
-X-Google-Smtp-Source: AGHT+IFq/IjNlm73GCEWlW47ds8fbixaCHkv1nC07xUTEQUxjPtJeuxBIrqm0wkyYhluIk1lURRD7v3nFs71Azl4HeQ=
-X-Received: by 2002:a05:6214:3205:b0:6c3:463b:e1e1 with SMTP id
- 6a1803df08f44-6c573530733mr26271336d6.26.1726102708928; Wed, 11 Sep 2024
- 17:58:28 -0700 (PDT)
+ bh=FJ3fVP6Uic6lPVFcKM8nwOgQnoHlTFDIo3L9EHbLgc4=;
+ b=qkDzPxgOxqdyAn0DULkiuaj1hj8TEbFpJNE+zIj8bKlMFJXSzbmUG3yqzOtekOci+j
+ pM8EoT4CqD6OB3TjYU3JW65U8j2IzEx6LeTEddkbprDvdzO4LcL33fHhnI2P7E8+Nkfv
+ PjcLG32OOEW/trPmSKlzNgVj9fA3kPT/23EtAKcrKyaXcbhzXKhsU9vEhcher2I+PFcW
+ y0Ok98Llv3Rt/EImCveYkjG8jhRYGQTgTxkFNgVZiR3OegYGZuBSpbq6GTTYgQb0TRjJ
+ vxnKbRKA20ODbF0soy8/xf33tiFbmFjuzaZ/pYeOUdoSW1Nc7yw7m42tYROlGDfSx2tw
+ ZyDw==
+X-Gm-Message-State: AOJu0Yy4tom8gAQQa4k9zdEbldzs89dYgnPcph3PMNUbeYa07/1fhH3j
+ VqUf1HXfKpgS5YIT06RBJx6mMWpWShrnkDaqK3keHovD5N5uQD7ErdceQynQFT44pCIOdrxmeXc
+ 1d7k3tjA+iEIzw+/xzidFlv+suanQVBwboiQGKnmqUZfQZoc=
+X-Google-Smtp-Source: AGHT+IGg6kOLOm9AN2S69cf73K+9C9G0A8Pg+OuS9jFp2cJ8IqVyt9RScWKkqbGHEt2x+/ffEbzH5+3HBKNEpVmG+oA=
+X-Received: by 2002:a17:90b:4b45:b0:2d8:ee39:47d with SMTP id
+ 98e67ed59e1d1-2db9ffa3bc1mr1176796a91.2.1726102713224; Wed, 11 Sep 2024
+ 17:58:33 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240911062511.494855-1-patrick.rudolph@9elements.com>
- <20240911062511.494855-4-patrick.rudolph@9elements.com>
-In-Reply-To: <20240911062511.494855-4-patrick.rudolph@9elements.com>
+ <20240911062511.494855-12-patrick.rudolph@9elements.com>
+In-Reply-To: <20240911062511.494855-12-patrick.rudolph@9elements.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 11 Sep 2024 18:58:17 -0600
-Message-ID: <CAFLszTgVJhx9aWK+1L-ieVfQcZnZq7_jBrR4vw8Hui+RySxDHA@mail.gmail.com>
-Subject: Re: [PATCH v3 03/30] acpi: x86: Move MADT to common code
+Date: Wed, 11 Sep 2024 18:58:18 -0600
+Message-ID: <CAFLszTjZAyPnm1o=G-7enP48pZ-D6BPb0t=EAK73KsS6jM7juA@mail.gmail.com>
+Subject: Re: [PATCH v3 11/30] acpi: acpi_table: Add IORT support
 To: Patrick Rudolph <patrick.rudolph@9elements.com>
-Cc: u-boot@lists.denx.de, Bin Meng <bmeng.cn@gmail.com>,
- Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,29 +82,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Patrick,
+
 On Wed, 11 Sept 2024 at 00:25, Patrick Rudolph
 <patrick.rudolph@9elements.com> wrote:
 >
-> Write MADT in common code and let the SoC fill out the body by
-> calling acpi_fill_madt() which must be implemented at SoC level.
+> The SoC can implement acpi_fill_iort to update the IORT table.
+> Add a helper function to fill out the NAMED_COMPONENT node.
+>
+> TEST=Run FWTS V24.03.00 on RPi4 and round no problems.
 >
 > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
 > Cc: Simon Glass <sjg@chromium.org>
-> Cc: Bin Meng <bmeng.cn@gmail.com>
 > ---
-> Changelog v3:
-> - Pass ACPI context to acpi_fill_madt
+>  include/acpi/acpi_table.h | 213 ++++++++++++++++++++++++++++++++++++++
+>  lib/acpi/acpi_table.c     | 213 ++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 426 insertions(+)
 >
-> ---
->  arch/sandbox/lib/Makefile         |  9 +++---
->  arch/sandbox/lib/acpi_table.c     |  7 +++++
->  arch/x86/cpu/intel_common/acpi.c  | 21 +++++++++-----
->  arch/x86/cpu/tangier/acpi.c       |  7 ++++-
->  arch/x86/include/asm/acpi_table.h |  3 +-
->  arch/x86/lib/acpi_table.c         | 47 ++++++-------------------------
->  include/acpi/acpi_table.h         | 11 ++++++++
->  lib/acpi/acpi_table.c             | 31 ++++++++++++++++++++
->  8 files changed, 84 insertions(+), 52 deletions(-)
->  create mode 100644 arch/sandbox/lib/acpi_table.c
+
+IMO the 'const' on scalar params just clutters the code, but I suppose it is OK.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Regards,
+Simon
