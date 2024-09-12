@@ -4,74 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7C1EEE57FB
-	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 01:04:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FE3BEE57FB
+	for <u-boot@archiver.kernel.org>; Thu, 12 Sep 2024 01:04:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 16C6088E56;
-	Thu, 12 Sep 2024 03:01:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8975C88DE4;
+	Thu, 12 Sep 2024 03:01:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CZXiCW41";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="m2WPMCyV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 006BB88DE4; Thu, 12 Sep 2024 03:01:31 +0200 (CEST)
-Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
- [IPv6:2607:f8b0:4864:20::52d])
+ id 5FE2B88DE4; Thu, 12 Sep 2024 03:01:49 +0200 (CEST)
+Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
+ [IPv6:2607:f8b0:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B405C88DCF
- for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 03:01:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E756B88D09
+ for <u-boot@lists.denx.de>; Thu, 12 Sep 2024 03:01:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-7db1f13b14aso397930a12.1
- for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 18:01:29 -0700 (PDT)
+Received: by mail-pf1-x430.google.com with SMTP id
+ d2e1a72fcca58-7191901abd6so234389b3a.3
+ for <u-boot@lists.denx.de>; Wed, 11 Sep 2024 18:01:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726102888; x=1726707688; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1726102904; x=1726707704; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0l9E6HqXMbnQ+VPbP7IHNu1nhXkBzzdLCsSYSohGiCQ=;
- b=CZXiCW4165hK89/5bxe9xx8QHGZierGz9IcyqLVGHAQHtCD6/hwBuxwYrQ3IUncSAU
- 9QAAZXta82yQ/IYdgeCp3QzsENXG1++qs5cKvRJXfdBQJl6ZPQRD7+jJ+T6yOaoN406s
- O48bMFNdp8Hw9JqTqsIvw1EouuANiwdN2l72o=
+ bh=cmingIA5oOiuKDTR6KPOvmgPUtAoAzTPuPV4+BqTz7Y=;
+ b=m2WPMCyVzuYQOB9A3F3JmZ2+kie7WlJWz7rDVd9kPx1vhOryLNqzJo3ubFQ2g8OM4c
+ a/P756X3vifgFAvUNtcOV4L4Mw3DLHb7nAc/AyeuvgETh+t5PUGoCTdzx/3bIqSA/u7f
+ 7A10LUvE6vHgvmIvlByLs4Cu9Jy4gkwIrq95w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726102888; x=1726707688;
+ d=1e100.net; s=20230601; t=1726102904; x=1726707704;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=0l9E6HqXMbnQ+VPbP7IHNu1nhXkBzzdLCsSYSohGiCQ=;
- b=doiYBl5plsbP83P9suUrL3n/eeKoq7dDh7K6XL3KdOsnhE9k/q65ymoyx3eS2Dj1HO
- DOB6Ph3YhwYhosiOkEBGcgxut9lhrqYcEVkepwvKrNsvg9FNkM9Rhe3MtXFI73EMONMu
- wBIvblUfoSyRztZkxUuTutOuSjGuledhtLToGSW3HvvGSGntMF1S0A4ThS2v1FzJkJLR
- FZFTFyH38Qd2WVe0+3OaXMzpuG7gRmIltazkBaxSK8QdPW4KiNvsi0zMDg6pcP5UzRe1
- xDVrvH3WKMUN8JiM8eg7Qbo8ORSh3xtrOpSXv7abjIZIs2bYczYo3q7J/HiWXTe2zAue
- MQCA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW/WbCEJQr1Wj7y0qtdLnMMBE+h1kjmlhexdWFwAPYf4mKms1CxDFa07jbMGFy1YZQJWairidw=@lists.denx.de
-X-Gm-Message-State: AOJu0YwFkxSqrR8PhEHCmkKXpUBGgYrHTn8VnMQW79orkFft15ia59dl
- v0pzNgldQxeCmstzUCzu0zrbZaKjP/UvEXq7fBBkBJSDEQT+kG80gGf9SrmTQFcDXhMZzk6nnTP
- y/omp4nacUlBE7x21r0WUSE21zlLDBUj+yeYR
-X-Google-Smtp-Source: AGHT+IEyWkXtdry7qSeZAzuu0gVCMCeDpxQQbA38Rbu2uGJsnkAyBaFlJNKN0s6s++B8ksx308M9YxIWu3K3a7+DrHg=
-X-Received: by 2002:a05:6a21:2d8b:b0:1cf:4569:ffb0 with SMTP id
- adf61e73a8af0-1cf756c9c09mr1699026637.0.1726102887934; Wed, 11 Sep 2024
- 18:01:27 -0700 (PDT)
+ bh=cmingIA5oOiuKDTR6KPOvmgPUtAoAzTPuPV4+BqTz7Y=;
+ b=C73Gj3BjSMZOAZFlZmt/nLizJsrj8KnB9bY/cB5CScWY3Yn+oBEzNCusA0fM+R0Ah2
+ Km/1jOKzIybhu/qlDzMlRR+gg8rlM5xMP7CfDvtH0KDTC24ki7qVQPPmA2MiZhA10P1+
+ EPQqcnBNrwCiCMadF7pDxPBm89BzpjH+8ax356kKwNpETitHhFzaGhYB9PJdtM33pJCL
+ rvGgmo64GP+0s11rTRJrDJygbHPXwvsRxQ8U7NFhR63UQpOEUMgSuHpLG0InapJKZ1gZ
+ PvxCOY3QfuqY2ydWf7k/tMkbMp91TYtM0b56y6O/s//Y3vV2HlpNVgX+JFWJTy6wzOrG
+ KlWw==
+X-Gm-Message-State: AOJu0Yy3053zk6Zq1jcvzCjb1JTsv+kj7NdyYczKzRyxDtWSAYmVYH2p
+ mwFsCyszBpIvpmIikwykgBoXbLaq+JAuwr/Ai3mvihW3GtoW82FoIaPBhC9eu0oQANdk5oPXb0V
+ U72gc8Cxrr6SozO4buOvxWTqQn+LfsmtSjvcyGXrQp6ysWxg=
+X-Google-Smtp-Source: AGHT+IFLhG98U60MkLwg6awVhiQLoGCuFKys/bglJEZZrGKMIYV/WPslEXHutANkAHFwEQc40UzFzz3k8Ovx/stfHxA=
+X-Received: by 2002:a05:6a20:43a0:b0:1c4:9ef6:499b with SMTP id
+ adf61e73a8af0-1cf75f676cemr1438117637.29.1726102904314; Wed, 11 Sep 2024
+ 18:01:44 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240910101344.110633-1-miquel.raynal@bootlin.com>
- <20240910101344.110633-2-miquel.raynal@bootlin.com>
-In-Reply-To: <20240910101344.110633-2-miquel.raynal@bootlin.com>
+References: <20240902011825.746421-1-sjg@chromium.org>
+In-Reply-To: <20240902011825.746421-1-sjg@chromium.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 11 Sep 2024 19:01:07 -0600
-Message-ID: <CAFLszTgVY2+6NHucq5GdHmTQe5uArZf8RAJWPYFoo3A90GECpw@mail.gmail.com>
-Subject: Re: [PATCH 1/8] dm: core: Add a helper to retrieve devices through
- graph endpoints
-To: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Anatolij Gustschin <agust@denx.de>,
- u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Ian Ray <ian.ray@gehealthcare.com>, Marek Vasut <marek.vasut@gmail.com>
+Date: Wed, 11 Sep 2024 19:01:32 -0600
+Message-ID: <CAFLszThwBsy3FCgRpB5TZu+_m0k83-_stA1OqySRNyR_5kGxeQ@mail.gmail.com>
+Subject: Re: [PATCH v5 00/14] efi: Add a test for EFI bootmeth
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Albert Aribaud <albert.u.boot@aribaud.net>, Bin Meng <bmeng.cn@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,143 +83,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Miquel,
+Hi,
 
-On Tue, 10 Sept 2024 at 04:13, Miquel Raynal <miquel.raynal@bootlin.com> wrote:
+On Sun, 1 Sept 2024 at 19:18, Simon Glass <sjg@chromium.org> wrote:
 >
-> There are already several helpers to find a udevice based on its
-> position in a device tree, like getting a child or a node pointed by a
-> phandle, but there was no support for graph endpoints, which are very
-> common in display pipelines.
+> The test coverage for the EFI bootmeth is incomplete since it does not
+> actually boot the application.
 >
-> Add a new helper, named uclass_get_device_by_endpoint() which enters the
-> child graph reprensentation, looks for a specific port, then follows the
-> remote endpoint, and finally retrieves the first parent of the given
-> uclass_id.
+> This series creates a simple test for this purpose. It includes a few
+> patches to make this work:
 >
-> This is a very handy and straightforward way to get a bridge or a panel
-> handle.
+> - ANSI output from the EFI loader confusing the unit-testing checker
+> - Hang in sandbox virtio due to EFI probing all block devices
 >
-> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
-> ---
->  drivers/core/uclass.c | 62 +++++++++++++++++++++++++++++++++++++++++++
->  include/dm/uclass.h   | 21 +++++++++++++++
->  2 files changed, 83 insertions(+)
-
-This is fine, but please add a test when changing driver model.
-
-Perhaps it is in another patch? I don't seem to have the series so I
-wonder if I have been unsubscribed again...
-
+> Other necessary fixes have been split out into two other series.
 >
-> diff --git a/drivers/core/uclass.c b/drivers/core/uclass.c
-> index e46d5717aa6..5803fd51986 100644
-> --- a/drivers/core/uclass.c
-> +++ b/drivers/core/uclass.c
-> @@ -572,6 +572,68 @@ int uclass_get_device_by_phandle(enum uclass_id id, struct udevice *parent,
->         ret = uclass_find_device_by_phandle(id, parent, name, &dev);
->         return uclass_get_device_tail(dev, ret, devp);
->  }
-> +
-> +int uclass_get_device_by_endpoint(enum uclass_id class_id, struct udevice *dev,
-> +                                 u32 ep_idx, struct udevice **devp)
-> +{
-> +       ofnode port = ofnode_null(), ep, remote_ep;
-> +       struct udevice **target;
-> +       u32 remote_phandle;
-> +       int ret;
-> +
-> +       if (!ep_idx)
-> +               port = dev_read_subnode(dev, "port");
-> +
-> +       if (!ofnode_valid(port)) {
-> +               char port_name[32];
-> +
-> +               port = dev_read_subnode(dev, "ports");
-> +               if (!ofnode_valid(port)) {
-> +                       debug("%s: no 'port'/'ports' subnode\n",
-> +                             dev_read_name(dev));
-> +                       return -EINVAL;
-> +               }
-> +
-> +               snprintf(port_name, sizeof(port_name), "port@%x", ep_idx);
-> +               port = ofnode_find_subnode(port, port_name);
-> +               if (!ofnode_valid(port)) {
-> +                       debug("%s: no 'port@%x' subnode\n",
-> +                             dev_read_name(dev), ep_idx);
-> +                       return -EINVAL;
-> +               }
-> +       }
-> +
-> +       ep = ofnode_find_subnode(port, "endpoint");
-> +       if (!ofnode_valid(ep)) {
-> +               debug("%s: no 'endpoint' in %s subnode\n",
-> +                     ofnode_get_name(port), dev_read_name(dev));
-> +               return -EINVAL;
-> +       }
-> +
-> +       ret = ofnode_read_u32(ep, "remote-endpoint", &remote_phandle);
-> +       if (ret)
-> +               return ret;
-> +
-> +       remote_ep = ofnode_get_by_phandle(remote_phandle);
-> +       if (!ofnode_valid(remote_ep))
-> +               return -EINVAL;
-> +
-> +       while (ofnode_valid(remote_ep)) {
-> +               remote_ep = ofnode_get_parent(remote_ep);
-> +               debug("trying subnode: %s\n", ofnode_get_name(remote_ep));
-> +               if (!ofnode_valid(remote_ep)) {
-> +                       debug("%s: no more remote devices\n",
-> +                             ofnode_get_name(remote_ep));
-> +                       return -EINVAL;
-> +               }
-> +
-> +               ret = uclass_find_device_by_ofnode(class_id, remote_ep, target);
-> +               if (!ret)
-> +                       break;
-> +       };
-> +
-> +       return uclass_get_device_tail(*target, ret, devp);
-> +}
->  #endif
+> Changes in v5:
+> - Drop Fixes tag
+> - Drop the Fixes tag
+> - Rebase on updated efif series
+> - Deal with sandbox CONFIG_LOGF_FUNC
 >
->  /*
-> diff --git a/include/dm/uclass.h b/include/dm/uclass.h
-> index 456eef7f2f3..1194174ca9b 100644
-> --- a/include/dm/uclass.h
-> +++ b/include/dm/uclass.h
-> @@ -333,6 +333,27 @@ int uclass_get_device_by_phandle(enum uclass_id id, struct udevice *parent,
->  int uclass_get_device_by_driver(enum uclass_id id, const struct driver *drv,
->                                 struct udevice **devp);
+> Changes in v4:
+> - Add efi_loader tag to some patches
+> - Split out non-EFI patches into a different series
 >
-> +/**
-> + * uclass_get_device_by_endpoint() - Get a uclass device for a remote endpoint
-> + *
-> + * This searches through the parents of the specified remote endpoint
-> + * for the first device matching the uclass. Said otherwise, this helper
-> + * goes through the graph (endpoint) representation and searches for
-> + * matching devices. Endpoints can be subnodes of the "port" node or
-> + * subnodes of ports identified with a reg property, themselves in a
-> + * "ports" container.
-> + *
-> + * The device is probed to activate it ready for use.
-> + *
-> + * @class_id: uclass ID to look up
-> + * @dev: Device to start from
-> + * @ep_idx: Index of the endpoint to follow, 0 if there is none.
-> + * @target: Returns pointer to the first device matching the expected uclass.
-> + * Return: 0 if OK, -ve on error
-> + */
-> +int uclass_get_device_by_endpoint(enum uclass_id class_id, struct udevice *dev,
-> +                                 u32 ep_idx, struct udevice **target);
-> +
->  /**
->   * uclass_first_device() - Get the first device in a uclass
->   *
+> Changes in v3:
+> - Drop the extra- rules since scripts/Makefile.lib takes care of it
+> - Add new patch to drop crt0/relocal extra- rules
+> - Put back the Linaro copyright accidentally removed
+> - Add a Fixes tag
+> - Mention the issue created for this problem
+>
+> Changes in v2:
+> - Fix 'use' typo
+> - Reword commit message
+> - Use 'Firmware vendor' instead of just 'Vendor'
+> - Add many new patches to resolve all the outstanding test issues
+>
+> Simon Glass (14):
+>   efi_loader: Use puts() in cout so that console recording works
+>   efi_loader: Put back copyright message
+>   efi_loader: Rename and move CMD_BOOTEFI_HELLO_COMPILE
+>   efi: arm: x86: riscv: Drop crt0/relocal extra- rules
+>   efi_loader: Shorten the app rules
+>   efi_loader: Shorten the app rules further
+>   efi_loader: Show the vendor in helloworld
+>   efi: Use the same filename for all sandbox builds
+>   bootstd: Add debugging for efi bootmeth
+>   efi_loader: Disable ANSI output for tests
+>   efi_loader: Add a test app
+>   efi_loader: Avoid using sandbox virtio devices
+>   test: efi: boot: Set up an image suitable for EFI testing
+>   test: efi: boot: Add a test for the efi bootmeth
+>
+>  arch/arm/lib/Makefile               |   8 ----
+>  arch/riscv/lib/Makefile             |   4 --
+>  arch/sandbox/dts/test.dts           |   2 +-
+>  arch/x86/lib/Makefile               |  16 -------
+>  boot/bootmeth_efi.c                 |  11 ++++-
+>  cmd/Kconfig                         |  14 +-----
+>  configs/octeontx2_95xx_defconfig    |   2 +-
+>  configs/octeontx2_96xx_defconfig    |   2 +-
+>  configs/octeontx_81xx_defconfig     |   2 +-
+>  configs/octeontx_83xx_defconfig     |   2 +-
+>  doc/develop/uefi/uefi.rst           |   2 +-
+>  include/efi_default_filename.h      |  24 +---------
+>  include/efi_loader.h                |  21 ++++++++-
+>  lib/efi_loader/Kconfig              |  22 +++++++++
+>  lib/efi_loader/Makefile             |  47 ++++++-------------
+>  lib/efi_loader/efi_console.c        |  28 ++++++++----
+>  lib/efi_loader/efi_disk.c           |  14 +++++-
+>  lib/efi_loader/helloworld.c         |   6 +++
+>  lib/efi_loader/testapp.c            |  68 ++++++++++++++++++++++++++++
+>  test/boot/bootdev.c                 |  18 +++++++-
+>  test/boot/bootflow.c                |  66 ++++++++++++++++++++++++++-
+>  test/py/tests/bootstd/flash1.img.xz | Bin 0 -> 5016 bytes
+>  test/py/tests/test_efi_fit.py       |   2 +-
+>  test/py/tests/test_efi_loader.py    |   2 +-
+>  test/py/tests/test_ut.py            |  52 ++++++++++++++++++---
+>  25 files changed, 310 insertions(+), 125 deletions(-)
+>  create mode 100644 lib/efi_loader/testapp.c
+>  create mode 100644 test/py/tests/bootstd/flash1.img.xz
+>
 > --
-> 2.43.0
+> 2.34.1
 >
+
+ping on this series, please.
 
 Regards,
 SImon
