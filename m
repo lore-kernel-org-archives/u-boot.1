@@ -4,132 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2728FA374B
-	for <u-boot@archiver.kernel.org>; Fri, 13 Sep 2024 12:37:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FB84FA374A
+	for <u-boot@archiver.kernel.org>; Fri, 13 Sep 2024 12:37:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A518388D4D;
-	Fri, 13 Sep 2024 14:37:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0CEA688D63;
+	Fri, 13 Sep 2024 14:37:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="xBjA30A4";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="3UZrntAz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 652F4889B8; Fri, 13 Sep 2024 11:32:19 +0200 (CEST)
-Received: from NAM04-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam04on2062d.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:240a::62d])
+ id 40183889EF; Fri, 13 Sep 2024 11:32:49 +0200 (CEST)
+Received: from NAM04-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam04on2060a.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2409::60a])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1DB6988883
- for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 11:32:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 270E888936
+ for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 11:32:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=Padmarao.Begari@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=q4WLIyd4NYafjJ88INSF9pG98ONCBTp+5tJl/T/uCU5pgpKJ5iJ0V5XdP26LIgAUMvrI0OxE4FtQAk22I7ZhgxhQV3DtS46+oq1SA2GNkdU2hKjKzCiXOeUy5mMR1NVtHqjupS+R7Q7t95MHYvq2MIgqrTMMEau/2LVo5tc4YRTmv3GZVzv1fB+nPpRggj/g4Ow1GtYkdYDgT9Q2gnwTiAaf1JZ0LmNMrmu9jaV2BdqHOeujg0fuWAlc/QPlgTF9mum6gYD7Dvdo/6Hpg5wU6DFOem9vWreDmI8PG0JG6Tg3dxP8C5inKCIv4Q83V7VXI4DzRMktsL3fSScCRpqFmQ==
+ b=USha22tsiCMr8vV2wSoYz7rHBa+LAMM1QkP0px5cVr+HBRmNRaGhStfklpSll/s9bSC4tEbIlvjqJ13tNBg1loyxVxvaBdTzT7rsE5b1CvIoecz5CAq/bRXCqPu2/k9Y1VlexN6587u3XhW7I63Rm8pjrnW8jMAcDe0SHCDGRACH8WvnNiIuoa5BVgFshJRjjRCA+H3Endtjr05ywEqnZS1zkmJwuXDrOmTWXa4wzJ2b9blhQKheGSZDoSB62GADtqUdGUOXTaaAr8eXV+jtYrh956Rgaui+0j6iu6DSTh+CQIEFr/gunZlGO7aJnMwrRQvjeSWVHcViUJXCUaXaYw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=U26EjolZYunfiz2q9ELRmIh/KMscV2+0V1KOY3M0vyg=;
- b=OW5RcSc/Mtpol6UnMafpAOUBwhqGvxa0VeyePeOwA9LNQ72EBZdZh0qxNOAq0VLZPm3R5o0OVL9oeQWS/XBJR7PQvusbvhLcjZE6XOSdHbxeGGjeRuF5rU1XRhJ7co4vNxRZWl9+Ditv37LwTleuXNkLPEyaGBCsAQJ+5+SD3x4vyg9ku2pIA12PZKolcMAUcwl78eA7sO0JoARMeLVulQpL9uZRrt9NmpjMmcv7YrUp7WmNhlzdjGHdB0bIqd9Zxvd5PC87oH5ekOh8SDhs0dZjE0J8pUjtksdXnJnEEA6LG9CE4jQVelVEhNFL5On84PeS9rxyg6q3guZ5urxfNw==
+ bh=WODwaUrH1xjDvaGD5Wtjd0I6PN3i4o2Vjys8RZKixoE=;
+ b=uqBZG+2VUNJSy0R+ifsPlBsAMcZuRA+vjNgWhDwnSk76+9e46UM0gfcV1MiPr5wDnG0kwEAGFhKH6hMHZA3Tl6jTcDyFe/Mp0IDsWmdAp25g08C+bl7tuAKDmAlnOGTxTRoGBYcgwh7jscsNowpvkNyrT1aXtHC+tjphmrIMQHo+GSPA2Xtgu5JHnxti+Qo4ookhGaiV2EFfGTmvKRM9v+SWWj5rmMKC1nlOc4MZQgCXmAHy04jb84eSliAklMsVosF+Vd5bhcrpxkfQSV4rSIDubhoPx90RusgHR92wRBOe3Qcv5Z9wyNvJYOLKyycQVUd9xEOMSURgZ9mXnK9UiA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=U26EjolZYunfiz2q9ELRmIh/KMscV2+0V1KOY3M0vyg=;
- b=xBjA30A49BwwaZfyIeE2Iywt3a1khVmhOS+THgqAXuxBGxKPTvQ+Tw5xRZOGkRimPIELnSugv6rL41KDdDeEWPSs9trXgcqb7Hwx6ebIQHW0ZMecF8BdMrQFrix4GMcLeLqTwN3k7bDXvYTqY0Rb2NaRspYYSBYhoNu3qcif2UM=
-Received: from BN9PR03CA0901.namprd03.prod.outlook.com (2603:10b6:408:107::6)
- by DS0PR12MB8415.namprd12.prod.outlook.com (2603:10b6:8:fc::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7962.17; Fri, 13 Sep
- 2024 09:32:09 +0000
-Received: from BN3PEPF0000B36D.namprd21.prod.outlook.com
- (2603:10b6:408:107:cafe::a7) by BN9PR03CA0901.outlook.office365.com
- (2603:10b6:408:107::6) with Microsoft SMTP Server (version=TLS1_2,
+ bh=WODwaUrH1xjDvaGD5Wtjd0I6PN3i4o2Vjys8RZKixoE=;
+ b=3UZrntAzrr2TJmMm2clagBAb4e+HPRw8ftp3XR4JrHJ20R8J66rz2vljhOl1QycsyUmLRZgjUd8+PZU/MviPJiXQzKqrkhhIi/GOdcNT3nmjRRjgz6n8n+O3Xse2XEKgxoO+kXDVZHpsej8ALinYSrWgJef3KGh7SABpz6BgxFw=
+Received: from SJ0PR03CA0115.namprd03.prod.outlook.com (2603:10b6:a03:333::30)
+ by IA1PR12MB8537.namprd12.prod.outlook.com (2603:10b6:208:453::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.27; Fri, 13 Sep
+ 2024 09:32:43 +0000
+Received: from SJ5PEPF000001D0.namprd05.prod.outlook.com
+ (2603:10b6:a03:333:cafe::50) by SJ0PR03CA0115.outlook.office365.com
+ (2603:10b6:a03:333::30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7939.25 via Frontend
- Transport; Fri, 13 Sep 2024 09:32:08 +0000
+ Transport; Fri, 13 Sep 2024 09:32:43 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BN3PEPF0000B36D.mail.protection.outlook.com (10.167.243.164) with Microsoft
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ SJ5PEPF000001D0.mail.protection.outlook.com (10.167.242.52) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7982.0 via Frontend Transport; Fri, 13 Sep 2024 09:32:08 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.7918.13 via Frontend Transport; Fri, 13 Sep 2024 09:32:42 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 13 Sep
- 2024 04:32:06 -0500
+ 2024 04:32:41 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 13 Sep
+ 2024 04:32:39 -0500
 Received: from xhdkummari40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Fri, 13 Sep 2024 04:32:04 -0500
+ Transport; Fri, 13 Sep 2024 04:32:38 -0500
 From: Padmarao Begari <padmarao.begari@amd.com>
 To: <u-boot@lists.denx.de>, <git-dev@amd.com>
 CC: <michal.simek@amd.com>, <venkatesh.abbarapu@amd.com>,
  <Prasad.Kummari@amd.com>
-Subject: [PATCH] mmc: zynq_sdhci: Remove device_is_compatible() function
-Date: Fri, 13 Sep 2024 15:01:57 +0530
-Message-ID: <20240913093157.2343476-1-padmarao.begari@amd.com>
+Subject: [PATCH] board: xilinx: Remove conditional check for Microblaze
+Date: Fri, 13 Sep 2024 15:02:31 +0530
+Message-ID: <20240913093231.2343528-1-padmarao.begari@amd.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: padmarao.begari@amd.com does not
- designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B36D:EE_|DS0PR12MB8415:EE_
-X-MS-Office365-Filtering-Correlation-Id: 424af2ee-c1a5-4185-8f36-08dcd3d6f034
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001D0:EE_|IA1PR12MB8537:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6da60990-6cca-4dce-671b-08dcd3d7048e
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|376014|82310400026|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?vPp+gkZlKLjfqrknVx2W0zoz7tmywLLFDeW94ynWXedIGeNXxJkhGaZPXDON?=
- =?us-ascii?Q?cJALIPFYtPLrRNPn6UXcu7DLKmVzEOQUr+KUKLq5wOIkOPFJ5Gg/G8kuj7Fr?=
- =?us-ascii?Q?bnK5ZWlDh/GQag1NLVJkZdNyC0KCoMBiBL74muGL22Af4YKdKlTTqdCMWx8x?=
- =?us-ascii?Q?3XxEIyPaPwMlY4QU4MMxet3Xf7CTCT47W/4yGVnw7nHeB3eOiA2EMkhQ8v3V?=
- =?us-ascii?Q?lRbGYIHyFdUjeOioc5+cF/sA5tyIIjhpxkOIEc65bxeW9tNUKbSUoviMV5dL?=
- =?us-ascii?Q?8LjMBy67SQ4Y+/58GV6qQd10KLHJJXO2hXIiXsj3M8WwJFN/+DZQ8t0T8PBU?=
- =?us-ascii?Q?/HIqnFMa1UxkseRyqReOoMl0kplai3JQYzd3keiFxjxQEyEP96aHgsCKWWLS?=
- =?us-ascii?Q?LxfY99LONPrgU09+7/3/YpPD/wQmxtodsMciHftjv6iz9gaAr8J24Zv0XxTj?=
- =?us-ascii?Q?W63pCkyRXZbxK52IjxPQE3at0EtDxKiZ6c0ULpJLa+wQSxEpWk0czpG9J40X?=
- =?us-ascii?Q?/2vdBW3RypzuE/cU82YTL5FoLl5HSUVyvuVrmW+/qFtLKoqZvKxjdZ3Hz6tx?=
- =?us-ascii?Q?gLHCejbXUc/chX4gQbipVOr4ZdQgxOWgJK90yzS+M4g1Y7DOkTZqMNJuFC00?=
- =?us-ascii?Q?C/a2ZGLz/+nKaEdTMeRtEZ2CTUXLY1n71EgFwG/eAtlXmQSrDwQ+ywOA5ImS?=
- =?us-ascii?Q?iS/RL+oQuzVeLRyi0T9tSxS3mUgJVfThJxW3jEpCAKUJzkxsuvDUnFa1UXM+?=
- =?us-ascii?Q?0cNPY+ph+QlHdtHSpFfFjPym0tLGgvf8JeY6X/hwhrh5tEfIPLcU/7cxsL+N?=
- =?us-ascii?Q?gqVbrB7hVMC3OqjWi8bqoeEKO6x4TIR2lsZej3UWBnv18RtA3ZYk2RUq5qIa?=
- =?us-ascii?Q?5r+as97thwMRDGkn2AIH1dznm1jit6aqhRr18XE9XRNCaa/zJnyCM3MmDq7S?=
- =?us-ascii?Q?sfS5G+BKRpGh2BrMSTPebZ7I2tno3XDOVGyhZ+MmcsEOCo9ey6vK9jQ8vtln?=
- =?us-ascii?Q?W/kP6HQlht9AlO2EE2PXdCFNZygqm4wTBR4KhGnWljEePQ4LW5Elo36pkskX?=
- =?us-ascii?Q?zKUWFAuJXMYSoRRuIJP+EJxncsunaOd4yOnhBXIABqed8CKSzHCTmdWMCqhR?=
- =?us-ascii?Q?sa7MLjhrWBsekFC4lMM+6hy335x6hq5wRZewdmTG1CT1eidkxjd1yLSgVqtm?=
- =?us-ascii?Q?/RMtrWEg829aO8XDY7ipK7BhmCYydFG1Db+5H0iJ+1qEUKL6/OxWWKlsFuX6?=
- =?us-ascii?Q?GqdjRtqBZRrmaD7qUAquwagRivZPnfDzZpGsIQPGMKp/xPSnecFASj9jTSqq?=
- =?us-ascii?Q?NpLvKnJcg85bRikcxx2LFxP/vNwuZWuPY0X5fzKv73bmGbSWKp5APyqvlz4i?=
- =?us-ascii?Q?2BMb6wkMw2XaOWycbvzsSBuE3axruhaJGbQatu05oSPVM4EZCnQW4Y8lSNrN?=
- =?us-ascii?Q?7PZZ+FM+afe81OGJAOx8kDMSNuj65ssJ?=
+ ARA:13230040|36860700013|82310400026|376014|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?aMIZ+7n0QCBD4GD1Gp7XZvWHDg/vdoaGV6fTUYqkydgw0R9WwT3pdRb5HRHm?=
+ =?us-ascii?Q?6hoX6qhtS/xzCsz5dy5IIKrDVHwmxVr/GQifaUBWMQRJ+8Z168tPxJRn0o7X?=
+ =?us-ascii?Q?qfBKvoMURJ37Lvnr3AwsM0C1hgvSgI7uyjRG+o1Tm6Hs3GgNTzXtDEuL25YV?=
+ =?us-ascii?Q?rvRGxFon0V3riT4Z82XBgx6KKGsGj5ppjmDQk1VO4t0M53dddfJy7QnFzTRD?=
+ =?us-ascii?Q?IbseGgMlA6fE+2k5XNs18PM1LSpTDtFRY33Yikmw81SGZRnRElxr75PajYmp?=
+ =?us-ascii?Q?4SDLDi7h40Vyq2upTBBfTF0/5tBX2uS3zuRCtAtvHbI5E4m4sUMtG/5cZPzd?=
+ =?us-ascii?Q?2MPjU4q36GXj8vnRsgDuwd92C5uyY1SfnaXnqNdhRw5Y1xT/9N+TrsBDJ9in?=
+ =?us-ascii?Q?0XLgrTY/ONZB6lP6fdIvQyUYTAw9nDIuF3cpBxsJRXuB0zPCZTlQruuLK3K2?=
+ =?us-ascii?Q?NH4/gExZFUAMz7aCQYDwAAZoebOJG6o/3KcJ1azR+C2XW8J0F6KJ9HYpdflv?=
+ =?us-ascii?Q?6a9QAZISoeHM/l42PojiHBAL/q06NeTjt7L251WNlhhC3ROltDPm59/hbdCk?=
+ =?us-ascii?Q?meMtuOGgzE0rE2ytWYFoIMEL8yITNi5SLTYGjho5WTsnb1Gw9cc/6Afz241M?=
+ =?us-ascii?Q?RR3jHFwC7WVll7UaiiSn9DqT6FlYocFMqcMHg1o/pWAXLQ7QsxrpGBgLXrjq?=
+ =?us-ascii?Q?+53asgZlymmfCxniSbjb963Awf2TbfqWKKU8cM7niQP2b3zqloZTO5PkXG4W?=
+ =?us-ascii?Q?mkyRv+pPcNCZy7D1dKYem5nGMx55DGCUNNqVawREVHkYR4s0oY2kn+xF0ixr?=
+ =?us-ascii?Q?weDOgfrApTRh3v4q8u3TF5tQ7+S3QNYJxqrcI06+8423WYo+n/LVuhDFtmQI?=
+ =?us-ascii?Q?li93s64RLWrNrzUWwl0UP0NacrPTY6NF7+qbxjjZLDLpE/DzSuqzC9zTjmSJ?=
+ =?us-ascii?Q?CwL69KoX8y3w39yByGwGU8QC+GFwiHo1Hnn8zJOWaYkjjD+7gb94ZfcFjVRB?=
+ =?us-ascii?Q?apD66hZHTC9th0mwDf3Z9C0lMJXgcbOtIF7nI3bYrl1ojuhdPTznC5xr5Z31?=
+ =?us-ascii?Q?HdQ6AWVp/W2IaRmJPYs9IehJNtJ01zttTX6Vf/Q2yuFcuzoLvaA7KgmpZIpO?=
+ =?us-ascii?Q?kJDqEpFCJcI4zGl9f6mQ7Rc2bfZwE2W3vqkDJj0Vy+HDdqMGWi6bXRwc974o?=
+ =?us-ascii?Q?5Ie4WUIVwCnDmUdpxUXpdrBqpMYBfAVS7N5KOp9wIwOwcpd8V54XhEzXgZPn?=
+ =?us-ascii?Q?IGm4wNovfDCzVSnbxaNJ2VPOvfWTqQdN0odUyYfqjgcanQASDu/ubYisNdOW?=
+ =?us-ascii?Q?nhQL2NvzII34KgTdx7RbmZ56TJ7tNLKbMnWOfD9nPDJXQWEQsKS/d3VkeJDk?=
+ =?us-ascii?Q?Noi8ekPkcYOKK0dH6jEo2vk5jcsNVRtuPDsjANw1xJeqSDlsmdtRvvANSzQ3?=
+ =?us-ascii?Q?y1++nQ1TSZo/Rrxu2ByYHWv7BRd1BwCt?=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024); DIR:OUT;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(82310400026)(376014)(1800799024); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Sep 2024 09:32:08.5581 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 424af2ee-c1a5-4185-8f36-08dcd3d6f034
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Sep 2024 09:32:42.6076 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6da60990-6cca-4dce-671b-08dcd3d7048e
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B36D.namprd21.prod.outlook.com
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001D0.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB8415
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB8537
 X-Mailman-Approved-At: Fri, 13 Sep 2024 14:37:34 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -147,150 +149,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There are lot of device_is_compatible() present in the driver.
-Remove them and replace with a variables "SDHCI_COMPATIBLE_SDHCI_89A"
-and "SDHCI_COMPATIBLE_VERSAL_NET_EMMC" with match data.
-This change saves the space and reduce the execution time.
+U-Boot is not picking boot.scr script address from device tree
+rather it's using default address for Microblaze platform,
+and it's picking for other platforms. Remove conditional check
+for Microblaze platform, so that u-boot pick up boot.scr script
+address for all platforms from device tree.
 
 Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
 ---
- drivers/mmc/zynq_sdhci.c | 39 ++++++++++++++++++++++++++-------------
- 1 file changed, 26 insertions(+), 13 deletions(-)
+ board/xilinx/common/board.c | 39 +++++++++++++++++--------------------
+ 1 file changed, 18 insertions(+), 21 deletions(-)
 
-diff --git a/drivers/mmc/zynq_sdhci.c b/drivers/mmc/zynq_sdhci.c
-index 28d2b456fb..24d0556cd3 100644
---- a/drivers/mmc/zynq_sdhci.c
-+++ b/drivers/mmc/zynq_sdhci.c
-@@ -105,6 +105,19 @@ struct arasan_sdhci_priv {
- 	struct reset_ctl_bulk resets;
- };
- 
-+enum arasan_sdhci_compatible {
-+	SDHCI_COMPATIBLE_SDHCI_89A,
-+	SDHCI_COMPATIBLE_VERSAL_NET_EMMC,
-+};
+diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
+index 0b43407b9e..a217b39df6 100644
+--- a/board/xilinx/common/board.c
++++ b/board/xilinx/common/board.c
+@@ -426,28 +426,25 @@ int board_late_init_xilinx(void)
+ 	struct xilinx_board_description *desc;
+ 	phys_size_t bootm_size = gd->ram_top - gd->ram_base;
+ 	u64 bootscr_flash_offset, bootscr_flash_size;
+-
+-	if (!IS_ENABLED(CONFIG_MICROBLAZE)) {
+-		ulong scriptaddr;
+-		u64 bootscr_address;
+-		u64 bootscr_offset;
+-
+-		/* Fetch bootscr_address/bootscr_offset from DT and update */
+-		if (!ofnode_read_bootscript_address(&bootscr_address,
+-						    &bootscr_offset)) {
+-			if (bootscr_offset)
+-				ret |= env_set_hex("scriptaddr",
+-						   gd->ram_base +
+-						   bootscr_offset);
+-			else
+-				ret |= env_set_hex("scriptaddr",
+-						   bootscr_address);
+-		} else {
+-			/* Update scriptaddr(bootscr offset) from env */
+-			scriptaddr = env_get_hex("scriptaddr", 0);
++	ulong scriptaddr;
++	u64 bootscr_address;
++	u64 bootscr_offset;
 +
-+static bool arasan_sdhci_is_compatible(struct udevice *dev,
-+				       enum arasan_sdhci_compatible family)
-+{
-+	enum arasan_sdhci_compatible compat = dev_get_driver_data(dev);
-+
-+	return compat == family;
-+}
-+
- /* For Versal platforms zynqmp_mmio_write() won't be available */
- __weak int zynqmp_mmio_write(const u32 address, const u32 mask, const u32 value)
- {
-@@ -422,7 +435,7 @@ static int arasan_sdhci_execute_tuning(struct mmc *mmc, u8 opcode)
- 
- 	mdelay(1);
- 
--	if (device_is_compatible(mmc->dev, "xlnx,zynqmp-8.9a"))
-+	if (arasan_sdhci_is_compatible(mmc->dev, SDHCI_COMPATIBLE_SDHCI_89A))
- 		arasan_zynqmp_dll_reset(host, priv->node_id);
- 
- 	sdhci_writel(host, SDHCI_INT_DATA_AVAIL, SDHCI_INT_ENABLE);
-@@ -470,7 +483,7 @@ static int arasan_sdhci_execute_tuning(struct mmc *mmc, u8 opcode)
- 
- 	udelay(1);
- 
--	if (device_is_compatible(mmc->dev, "xlnx,zynqmp-8.9a"))
-+	if (arasan_sdhci_is_compatible(mmc->dev, SDHCI_COMPATIBLE_SDHCI_89A))
- 		arasan_zynqmp_dll_reset(host, priv->node_id);
- 
- 	/* Enable only interrupts served by the SD controller */
-@@ -858,7 +871,7 @@ static int arasan_sdhci_set_tapdelay(struct sdhci_host *host)
- 	dev_dbg(dev, "%s, host:%s, mode:%d\n", __func__, host->name, timing);
- 
- 	if (IS_ENABLED(CONFIG_ARCH_ZYNQMP) &&
--	    device_is_compatible(dev, "xlnx,zynqmp-8.9a")) {
-+	    arasan_sdhci_is_compatible(dev, SDHCI_COMPATIBLE_SDHCI_89A)) {
- 		ret = sdhci_zynqmp_sampleclk_set_phase(host, iclk_phase);
- 		if (ret)
- 			return ret;
-@@ -869,7 +882,7 @@ static int arasan_sdhci_set_tapdelay(struct sdhci_host *host)
- 	} else if ((IS_ENABLED(CONFIG_ARCH_VERSAL) ||
- 		    IS_ENABLED(CONFIG_ARCH_VERSAL_NET) ||
- 		    IS_ENABLED(CONFIG_ARCH_VERSAL2)) &&
--		   device_is_compatible(dev, "xlnx,versal-8.9a")) {
-+		   arasan_sdhci_is_compatible(dev, SDHCI_COMPATIBLE_SDHCI_89A)) {
- 		ret = sdhci_versal_sampleclk_set_phase(host, iclk_phase);
- 		if (ret)
- 			return ret;
-@@ -879,7 +892,7 @@ static int arasan_sdhci_set_tapdelay(struct sdhci_host *host)
- 			return ret;
- 	} else if ((IS_ENABLED(CONFIG_ARCH_VERSAL_NET) ||
- 		    IS_ENABLED(CONFIG_ARCH_VERSAL2)) &&
--		   device_is_compatible(dev, "xlnx,versal-net-emmc")) {
-+		   arasan_sdhci_is_compatible(dev, SDHCI_COMPATIBLE_VERSAL_NET_EMMC)) {
- 		if (mmc->clock >= MIN_PHY_CLK_HZ)
- 			if (iclk_phase == VERSAL_NET_EMMC_ICLK_PHASE_DDR52_DLY_CHAIN)
- 				iclk_phase = VERSAL_NET_EMMC_ICLK_PHASE_DDR52_DLL;
-@@ -933,7 +946,7 @@ static void arasan_dt_parse_clk_phases(struct udevice *dev)
- 	int i;
- 
- 	if (IS_ENABLED(CONFIG_ARCH_ZYNQMP) &&
--	    device_is_compatible(dev, "xlnx,zynqmp-8.9a")) {
-+	    arasan_sdhci_is_compatible(dev, SDHCI_COMPATIBLE_SDHCI_89A)) {
- 		for (i = 0; i <= MMC_TIMING_MMC_HS400; i++) {
- 			clk_data->clk_phase_in[i] = zynqmp_iclk_phases[i];
- 			clk_data->clk_phase_out[i] = zynqmp_oclk_phases[i];
-@@ -948,7 +961,7 @@ static void arasan_dt_parse_clk_phases(struct udevice *dev)
- 	if ((IS_ENABLED(CONFIG_ARCH_VERSAL) ||
- 	     IS_ENABLED(CONFIG_ARCH_VERSAL_NET) ||
- 	     IS_ENABLED(CONFIG_ARCH_VERSAL2)) &&
--	    device_is_compatible(dev, "xlnx,versal-8.9a")) {
-+	    arasan_sdhci_is_compatible(dev, SDHCI_COMPATIBLE_SDHCI_89A)) {
- 		for (i = 0; i <= MMC_TIMING_MMC_HS400; i++) {
- 			clk_data->clk_phase_in[i] = versal_iclk_phases[i];
- 			clk_data->clk_phase_out[i] = versal_oclk_phases[i];
-@@ -957,7 +970,7 @@ static void arasan_dt_parse_clk_phases(struct udevice *dev)
- 
- 	if ((IS_ENABLED(CONFIG_ARCH_VERSAL_NET) ||
- 	     IS_ENABLED(CONFIG_ARCH_VERSAL2)) &&
--	    device_is_compatible(dev, "xlnx,versal-net-emmc")) {
-+	    arasan_sdhci_is_compatible(dev, SDHCI_COMPATIBLE_VERSAL_NET_EMMC)) {
- 		for (i = 0; i <= MMC_TIMING_MMC_HS400; i++) {
- 			clk_data->clk_phase_in[i] = versal_net_emmc_iclk_phases[i];
- 			clk_data->clk_phase_out[i] = versal_net_emmc_oclk_phases[i];
-@@ -1101,7 +1114,7 @@ static int arasan_sdhci_probe(struct udevice *dev)
- 	host = priv->host;
- 
- #if defined(CONFIG_ARCH_ZYNQMP) && defined(CONFIG_ZYNQMP_FIRMWARE)
--	if (device_is_compatible(dev, "xlnx,zynqmp-8.9a")) {
-+	if (arasan_sdhci_is_compatible(dev, SDHCI_COMPATIBLE_SDHCI_89A)) {
- 		ret = zynqmp_pm_is_function_supported(PM_IOCTL,
- 						      IOCTL_SET_SD_CONFIG);
- 		if (!ret) {
-@@ -1111,7 +1124,7 @@ static int arasan_sdhci_probe(struct udevice *dev)
- 		}
++	/* Fetch bootscr_address/bootscr_offset from DT and update */
++	if (!ofnode_read_bootscript_address(&bootscr_address,
++					    &bootscr_offset)) {
++		if (bootscr_offset)
+ 			ret |= env_set_hex("scriptaddr",
+-					   gd->ram_base + scriptaddr);
+-		}
++					   gd->ram_base +
++					   bootscr_offset);
++		else
++			ret |= env_set_hex("scriptaddr",
++					   bootscr_address);
++	} else {
++		/* Update scriptaddr(bootscr offset) from env */
++		scriptaddr = env_get_hex("scriptaddr", 0);
++		ret |= env_set_hex("scriptaddr",
++				   gd->ram_base + scriptaddr);
  	}
- #endif
--	if (device_is_compatible(dev, "xlnx,versal-net-emmc"))
-+	if (arasan_sdhci_is_compatible(dev, SDHCI_COMPATIBLE_VERSAL_NET_EMMC))
- 		priv->internal_phy_reg = true;
  
- 	ret = clk_get_by_index(dev, 0, &clk);
-@@ -1145,7 +1158,7 @@ static int arasan_sdhci_probe(struct udevice *dev)
- 		host->quirks |= SDHCI_QUIRK_NO_1_8_V;
- 
- 	if (CONFIG_IS_ENABLED(ARCH_VERSAL_NET) &&
--	    device_is_compatible(dev, "xlnx,versal-net-emmc"))
-+	    arasan_sdhci_is_compatible(dev, SDHCI_COMPATIBLE_VERSAL_NET_EMMC))
- 		host->quirks |= SDHCI_QUIRK_CAPS_BIT63_FOR_HS400;
- 
- 	plat->cfg.f_max = CONFIG_ZYNQ_SDHCI_MAX_FREQ;
-@@ -1228,8 +1241,8 @@ static int arasan_sdhci_bind(struct udevice *dev)
- }
- 
- static const struct udevice_id arasan_sdhci_ids[] = {
--	{ .compatible = "arasan,sdhci-8.9a" },
--	{ .compatible = "xlnx,versal-net-emmc" },
-+	{ .compatible = "arasan,sdhci-8.9a", .data = SDHCI_COMPATIBLE_SDHCI_89A },
-+	{ .compatible = "xlnx,versal-net-emmc", .data = SDHCI_COMPATIBLE_VERSAL_NET_EMMC },
- 	{ }
- };
- 
+ 	if (!ofnode_read_bootscript_flash(&bootscr_flash_offset,
 -- 
 2.25.1
 
