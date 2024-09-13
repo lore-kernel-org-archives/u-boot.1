@@ -4,86 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9A2FFA3737
-	for <u-boot@archiver.kernel.org>; Fri, 13 Sep 2024 09:33:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94F63FA3737
+	for <u-boot@archiver.kernel.org>; Fri, 13 Sep 2024 09:53:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61FF7889B8;
-	Fri, 13 Sep 2024 11:33:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 27510889EF;
+	Fri, 13 Sep 2024 11:53:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eQMeCXpV";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RIS1/xQp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F3F4889EF; Fri, 13 Sep 2024 11:33:36 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id E3A2D88A30; Fri, 13 Sep 2024 11:53:25 +0200 (CEST)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3259C88936
- for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 11:33:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E05088965
+ for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 11:53:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-374b5f27cf2so1372479f8f.1
- for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 02:33:34 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-374c4c6cb29so706293f8f.3
+ for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 02:53:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726220014; x=1726824814; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=c57AeCEqklFAskexxIbqD9KpRV+wParv6AN/xjIlnt8=;
- b=eQMeCXpVUfshwula1rLOS05bHhTccUjuj3XKMEv56nYD7PEJH+FKBQWo6vqVoN4Udc
- hOB1Uk1sWDkG7kR+IsbN1hykKZuO+Jewjj3yPnEZ5bcsW31QGH2obDOrQ3trbSJmiOIh
- gfO5icv+elvw14wi2H768l6bbo/tQ7Hfjb3kbh1GQM70uAvzdJMe4jQn841LyTaRLr1J
- hJToAhM0LcW2Gwh1XZCAhzCnNQ18Gfx2fcPipbVFdaiot9AEhgBzI1hoAfhSVqGmGwLj
- uGPTv3uypZyMlwZZZ9RTZxlwjNB5WxxAZ7Ff5pK4HCouZh5Y8yZ9g+CaVy05I35Pnuvd
- HEmw==
+ d=linaro.org; s=google; t=1726221202; x=1726826002; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=St/D9eB3s62FTU0MD6XmDnjrniDSiu28jiUvu6W/CGE=;
+ b=RIS1/xQpoHPZadnBWuU6OHxX7VlpvUcNlfK0xmBaP/T6n6VF1BcGIkhCL8COUfBnN5
+ CephgjqtaV5aCjBPzwPyRMYLXg+EM7tQSJ+fVPhHQqup+9K5tJ2IQGIO//f2ASk2gMs7
+ 63lp2LJvj8Kxm6rtUS6G7MtQHm+RTMs7Ii3hvy3SH2Zl3MpOwo6uLqigmpf1L0jWzRAX
+ VNI6FJkmZy5FfPMQhBlx6bqS8NbaknvaDeO54sCs8/gBjqitFoGTR/qIE6yaZ1f9trnv
+ KwRffpRJ+cjkuQWRKCW9OaX1RNz2CpRKwR0YhSeVYOs/hi2ioNuTB41lOEuGR5f3l7Sx
+ KE5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726220014; x=1726824814;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=c57AeCEqklFAskexxIbqD9KpRV+wParv6AN/xjIlnt8=;
- b=fT0FypUcr5bq+0Yp+ezXyIxyTiUcQUokm0y5cj/OAKVLvr2yZO+mlsjgSs7U6ogWPG
- hpsCsnXnbjyrqscQYC77mVpzftVBGzmPX+x+BKKjfPk21j13fD74lQK875tthR5MhRPf
- b9lVTRmfc9wKfFIQY9QusgPfMfenGRouup+L01vcAyGPT8zs8n6HFvV0dUKOr0dqp/df
- G7jJ+5LLkOYKRX7ibM6P31Tdemav4a2NoTh28rRns1WhxDabZaZx9DtXemhHSM1P8LMO
- OAxHfUw09/u5pLKMg/613knJg2gMMNuRr6ZHiLLWVxnSyWYLogMQFCbgLslL1efNg6Hq
- 2fdw==
-X-Gm-Message-State: AOJu0YzXFNiMWECuSYBHF3b3GEILFzot74iQ0UD07uvfwWcrMSjtI5kY
- 6w72Y/5R9JoSZxwjhZpQehQAk5he+kcnYv0bTuvPVoE4LVbhaFTWvv16wUkLwB0=
-X-Google-Smtp-Source: AGHT+IE2v+SAZFwZeLn+ComtrhB/HlE4KxEOHJwPQ1swsUHUMGWBkG2M2XZJGgO8njTUnF/ZsHt01A==
-X-Received: by 2002:a5d:5582:0:b0:374:cb17:c62f with SMTP id
- ffacd0b85a97d-378c2cd542emr3241294f8f.11.1726220013462; 
- Fri, 13 Sep 2024 02:33:33 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:edd9:2a6c:c786:3e44?
- ([2a01:e0a:3cb:7bb0:edd9:2a6c:c786:3e44])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-378956d3687sm16358473f8f.71.2024.09.13.02.33.32
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 13 Sep 2024 02:33:33 -0700 (PDT)
-Message-ID: <ecf381f7-d48a-48a5-9395-c12b301108d0@linaro.org>
-Date: Fri, 13 Sep 2024 11:33:31 +0200
+ d=1e100.net; s=20230601; t=1726221202; x=1726826002;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=St/D9eB3s62FTU0MD6XmDnjrniDSiu28jiUvu6W/CGE=;
+ b=vqV5Hj2fiIJHEQZ87JEOoWewf1B5W73oe4QN8YjzZ8L90URI1tLpk2XMABQPBj6Pw3
+ dGWF3o881RvZZCcuQzEHUy9pQil5JpCVmbv6uifyi0RBvgHtzB+uVEHQugmwgIrv0w2L
+ N5JIdX76UrVawe9vDt3SNjkAdNGQvmZJOM+5hxI0ta/fvLmRdNWen8m9nDHexmzlqOYo
+ 2pltMxEVggbW/EELebqwuE0nSivv2xvEQpokTy/yFS1NUMUNvc/v4tSG5/56UeO0YTuf
+ ZsnDi7NeRls+9T7CPJaKkH1bsjGuwUiDf4fy3v5W+6d9rax52Yj3i0clvHreY9s5BCSG
+ rzMg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWqUWYcZXUFq9jZiPeTCYobFTVXYa+51YM/uC46uMkBBK74Y/lbnmvlLlKj55pEuOCHkyNO+hE=@lists.denx.de
+X-Gm-Message-State: AOJu0YzI+QdWH21fYB3y/WjznnhSF2413ZVxtnV2R8w5hBmS/bVRGymU
+ xkq7iMSS+klGMyaf1ZBjrWczUqlB2SpryeTmNjxV54UFWoSBbrKixXCr/QsCMq4=
+X-Google-Smtp-Source: AGHT+IEByCqG+q2HN2lnaw+z1RRDV6x+L2Q6zTcb6mJam+Dl4nRGFAX0DilK9yWY9n46Pp+CM56yAw==
+X-Received: by 2002:adf:a39b:0:b0:368:3f6a:1dea with SMTP id
+ ffacd0b85a97d-378d61d4f40mr2151615f8f.6.1726221201323; 
+ Fri, 13 Sep 2024 02:53:21 -0700 (PDT)
+Received: from localhost.localdomain (ppp176092143132.access.hol.gr.
+ [176.92.143.132]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a8d2583384asm863947066b.17.2024.09.13.02.53.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 13 Sep 2024 02:53:20 -0700 (PDT)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: pbrobinson@gmail.com,
+	mbrugger@suse.com
+Cc: sughosh.ganu@linaro.org, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, "Ivan T. Ivanov" <iivanov@suse.de>,
+ u-boot@lists.denx.de
+Subject: [PATCH v3] board: rpi: Enable capsule updates
+Date: Fri, 13 Sep 2024 12:53:15 +0300
+Message-ID: <20240913095317.1490035-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v10 00/25] Introduce the lwIP network stack
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
- Anton Antonov <Anton.Antonov@arm.com>
-References: <cover.1725625913.git.jerome.forissier@linaro.org>
- <20240906175433.GE3879073@bill-the-cat>
- <4b66d045-5410-4991-96e5-1d9cd98cbdf9@linaro.org>
- <20240909161932.GC4252@bill-the-cat>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20240909161932.GC4252@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,97 +93,177 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Since RPI works well using EFI and has no size limitations with regards
+to U-Boot, add the needed structures to support capsule updates.
 
+While at it update the most commonly used defconfigs and include capsule
+support and U-Boot commands needed by EFI
 
-On 9/9/24 18:19, Tom Rini wrote:
-> On Mon, Sep 09, 2024 at 04:11:37PM +0200, Jerome Forissier wrote:
->>
->>
->> On 9/6/24 19:54, Tom Rini wrote:
->>> On Fri, Sep 06, 2024 at 02:33:16PM +0200, Jerome Forissier wrote:
->>>
->>>> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
->>>> library for the network stack" [1]. The goal is to introduce the lwIP TCP/IP
->>>> stack [2] [3] as an alternative to the current implementation in net/,
->>>> selectable with Kconfig, and ultimately keep only lwIP if possible. Some
->>>> reasons for doing so are:
->>>> - Make the support of HTTPS in the wget command easier. Javier T. and
->>>> Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
->>>> so. With that it becomes possible to fetch and launch a distro installer
->>>> such as Debian etc. using a secure, authenticated connection directly
->>>> from the U-Boot shell. Several use cases:
->>>>   * Authentication: prevent MITM attack (third party replacing the
->>>> binary with a different one)
->>>>   * Confidentiality: prevent third parties from grabbing a copy of the
->>>> image as it is being downloaded
->>>>   * Allow connection to servers that do not support plain HTTP anymore
->>>> (this is becoming more and more common on the Internet these days)
->>>> - Possibly benefit from additional features implemented in lwIP
->>>> - Less code to maintain in U-Boot
->>>
->>> On am64x-sk (am64x_evm_a53_defconfig) I'm seeing:
->>> => tftpboot 80200000 EFI/arm64/grubaa64.efi
->>> Using ethernet@8000000port@1 device
->>> TFTP from server 192.168.116.10; our IP address is 192.168.116.23
->>> Filename 'EFI/arm64/grubaa64.efi'.
->>> Load address: 0x80200000
->>> Loading:
->>> ... silent hang ...
->>>
->>> Which I didn't see with v9. I can test other TI K3 platforms if it would
->>> help.
->>
->> Weird. I compared v9 and v10 (rebased onto the same commit as v9) but
->> I saw nothing obvious. Would you mind running the test again with these
->> traces added?
->>
->> diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
->> index 1948fc1c309..9bbfd8ee5a7 100644
->> --- a/net/lwip/net-lwip.c
->> +++ b/net/lwip/net-lwip.c
->> @@ -35,6 +35,7 @@ static err_t linkoutput(struct netif *netif, struct pbuf *p)
->>  	void *pp = NULL;
->>  	int err;
->>  
->> +	printf("[OUT|%d]", p->len);
->>  	if ((unsigned long)p->payload % PKTALIGN) {
->>  		/*
->>  		 * Some net drivers have strict alignment requirements and may
->> @@ -252,12 +253,16 @@ int net_lwip_rx(struct udevice *udev, struct netif *netif)
->>  	int len;
->>  	int i;
->>  
->> -	if (!eth_is_active(udev))
->> +	printf("[IN]");
->> +	if (!eth_is_active(udev)) {
->> +		printf("ERR: !eth_is_active()\n");
->>  		return -EINVAL;
->> +	}
->>  
->>  	flags = ETH_RECV_CHECK_DEVICE;
->>  	for (i = 0; i < ETH_PACKETS_BATCH_RECV; i++) {
->>  		len = eth_get_ops(udev)->recv(udev, flags, &packet);
->> +		printf("[IN|%d]", len);
->>  		flags = 0;
->>  
->>  		if (len > 0) {
-> 
-> I have the log, if it helps. However, with debug prints added, now it
-> completes.
+Tested-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+This needs to be applied *after*
+https://lore.kernel.org/u-boot/20240830-b4-dynamic-uuid-v8-0-79b31b199bee@linaro.org/
 
-Duh! :-/
+I managed to test this on rpi5 and works
+Changes since v2:
+- Add missing DFU options for rpi3 and rpi defconfigs
 
-> And I can see (as part of trimming down my test setup) that
-> without the prints, some tests are OK. The much smaller "helloworld.efi"
-> file and test is fine.
+Changes since v1:
+- Remove a redundant function definition
+- Add the required Kconfig options in more defconfigs
+- add my SoB which was missing...
 
-I suspect we might be hitting the test framework timeout, because TFTP
-with lwIP is slower than with the legacy stack as mentioned in [1] (lack
-of window size support). Although it seems weird that you don't see the
-hash signs at all, as if no data were received?
+ board/raspberrypi/rpi/rpi.c    | 13 +++++++++++++
+ configs/rpi_3_b_plus_defconfig |  8 ++++++++
+ configs/rpi_3_defconfig        |  8 ++++++++
+ configs/rpi_4_defconfig        |  5 +++++
+ configs/rpi_arm64_defconfig    |  8 ++++++++
+ 5 files changed, 42 insertions(+)
 
-[1] http://patchwork.ozlabs.org/project/uboot/patch/318048700dfb511c4634505adb1e95ce8be189c0.1725625913.git.jerome.forissier@linaro.org/
+diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
+index d996eb0cf695..02800615a25a 100644
+--- a/board/raspberrypi/rpi/rpi.c
++++ b/board/raspberrypi/rpi/rpi.c
+@@ -63,6 +63,19 @@ struct msg_get_clock_rate {
+ 	u32 end_tag;
+ };
 
-Regards,
--- 
-Jerome
++struct efi_fw_image fw_images[] = {
++	{
++		.fw_name = u"RPI_UBOOT",
++		.image_index = 1,
++	},
++};
++
++struct efi_capsule_update_info update_info = {
++	.dfu_string = "mmc 0=u-boot.bin fat 0 1",
++	.num_images = ARRAY_SIZE(fw_images),
++	.images = fw_images,
++};
++
+ #ifdef CONFIG_ARM64
+ #define DTB_DIR "broadcom/"
+ #else
+diff --git a/configs/rpi_3_b_plus_defconfig b/configs/rpi_3_b_plus_defconfig
+index 3c8f8fc1bb75..a6a8431c8ff4 100644
+--- a/configs/rpi_3_b_plus_defconfig
++++ b/configs/rpi_3_b_plus_defconfig
+@@ -19,14 +19,19 @@ CONFIG_SYS_PBSIZE=1049
+ # CONFIG_DISPLAY_BOARDINFO is not set
+ CONFIG_MISC_INIT_R=y
+ CONFIG_SYS_PROMPT="U-Boot> "
++CONFIG_CMD_NVEDIT_EFI=y
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_USB=y
++CONFIG_CMD_EFIDEBUG=y
+ CONFIG_CMD_FS_UUID=y
+ CONFIG_ENV_FAT_DEVICE_AND_PART="0:1"
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_TFTP_TSIZE=y
++CONFIG_DFU_MMC=y
++CONFIG_SYS_DFU_DATA_BUF_SIZE=0x100000
++CONFIG_SYS_DFU_MAX_FILE_SIZE=0x200000
+ CONFIG_BCM2835_GPIO=y
+ CONFIG_MMC_SDHCI=y
+ CONFIG_MMC_SDHCI_BCM2835=y
+@@ -49,3 +54,6 @@ CONFIG_SYS_WHITE_ON_BLACK=y
+ CONFIG_VIDEO_BCM2835=y
+ CONFIG_CONSOLE_SCROLL_LINES=10
+ CONFIG_PHYS_TO_BUS=y
++# CONFIG_HEXDUMP is not set
++CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
++CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+diff --git a/configs/rpi_3_defconfig b/configs/rpi_3_defconfig
+index 9853c448809a..358096f3d1c5 100644
+--- a/configs/rpi_3_defconfig
++++ b/configs/rpi_3_defconfig
+@@ -19,14 +19,19 @@ CONFIG_SYS_PBSIZE=1049
+ # CONFIG_DISPLAY_BOARDINFO is not set
+ CONFIG_MISC_INIT_R=y
+ CONFIG_SYS_PROMPT="U-Boot> "
++CONFIG_CMD_NVEDIT_EFI=y
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_USB=y
++CONFIG_CMD_EFIDEBUG=y
+ CONFIG_CMD_FS_UUID=y
+ CONFIG_ENV_FAT_DEVICE_AND_PART="0:1"
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_TFTP_TSIZE=y
++CONFIG_DFU_MMC=y
++CONFIG_SYS_DFU_DATA_BUF_SIZE=0x100000
++CONFIG_SYS_DFU_MAX_FILE_SIZE=0x200000
+ CONFIG_BCM2835_GPIO=y
+ CONFIG_MMC_SDHCI=y
+ CONFIG_MMC_SDHCI_BCM2835=y
+@@ -49,3 +54,6 @@ CONFIG_SYS_WHITE_ON_BLACK=y
+ CONFIG_VIDEO_BCM2835=y
+ CONFIG_CONSOLE_SCROLL_LINES=10
+ CONFIG_PHYS_TO_BUS=y
++# CONFIG_HEXDUMP is not set
++CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
++CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+diff --git a/configs/rpi_4_defconfig b/configs/rpi_4_defconfig
+index f5fb322aa8fc..17b6688e75c5 100644
+--- a/configs/rpi_4_defconfig
++++ b/configs/rpi_4_defconfig
+@@ -20,11 +20,13 @@ CONFIG_SYS_PBSIZE=1049
+ # CONFIG_DISPLAY_BOARDINFO is not set
+ CONFIG_MISC_INIT_R=y
+ CONFIG_SYS_PROMPT="U-Boot> "
++CONFIG_CMD_NVEDIT_EFI=y
+ CONFIG_CMD_DFU=y
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_PCI=y
+ CONFIG_CMD_USB=y
++CONFIG_CMD_EFIDEBUG=y
+ CONFIG_CMD_FS_UUID=y
+ CONFIG_ENV_FAT_DEVICE_AND_PART="0:1"
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+@@ -65,3 +67,6 @@ CONFIG_SYS_WHITE_ON_BLACK=y
+ CONFIG_VIDEO_BCM2835=y
+ CONFIG_CONSOLE_SCROLL_LINES=10
+ CONFIG_PHYS_TO_BUS=y
++# CONFIG_HEXDUMP is not set
++CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
++CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+diff --git a/configs/rpi_arm64_defconfig b/configs/rpi_arm64_defconfig
+index 02f942cf3442..a8723ea24e1c 100644
+--- a/configs/rpi_arm64_defconfig
++++ b/configs/rpi_arm64_defconfig
+@@ -18,15 +18,20 @@ CONFIG_SYS_PBSIZE=1049
+ # CONFIG_DISPLAY_BOARDINFO is not set
+ CONFIG_MISC_INIT_R=y
+ CONFIG_SYS_PROMPT="U-Boot> "
++CONFIG_CMD_NVEDIT_EFI=y
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_PCI=y
+ CONFIG_CMD_USB=y
++CONFIG_CMD_EFIDEBUG=y
+ CONFIG_CMD_FS_UUID=y
+ CONFIG_ENV_FAT_DEVICE_AND_PART="0:1"
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_TFTP_TSIZE=y
+ CONFIG_DM_DMA=y
++CONFIG_DFU_MMC=y
++CONFIG_SYS_DFU_DATA_BUF_SIZE=0x100000
++CONFIG_SYS_DFU_MAX_FILE_SIZE=0x200000
+ CONFIG_BCM2835_GPIO=y
+ CONFIG_MMC_SDHCI=y
+ CONFIG_MMC_SDHCI_SDMA=y
+@@ -56,3 +61,6 @@ CONFIG_SYS_WHITE_ON_BLACK=y
+ CONFIG_VIDEO_BCM2835=y
+ CONFIG_CONSOLE_SCROLL_LINES=10
+ CONFIG_PHYS_TO_BUS=y
++# CONFIG_HEXDUMP is not set
++CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
++CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+--
+2.45.2
+
