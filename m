@@ -4,88 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD866FA3755
-	for <u-boot@archiver.kernel.org>; Fri, 13 Sep 2024 14:37:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75C6DFA3755
+	for <u-boot@archiver.kernel.org>; Fri, 13 Sep 2024 15:04:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C18988D8F;
-	Fri, 13 Sep 2024 16:37:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A178488CCA;
+	Fri, 13 Sep 2024 17:04:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="z0tAsDvZ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="V8ZC+4xL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 18FA988D8D; Fri, 13 Sep 2024 16:37:31 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 7F2EC88D95; Fri, 13 Sep 2024 17:04:39 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2EFE988D97
- for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 16:37:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D408E88BFB
+ for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 17:04:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a8d4979b843so301602466b.3
- for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 07:37:24 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-a7a81bd549eso263104466b.3
+ for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 08:04:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726238243; x=1726843043; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=o7p6IYkeMUOG/d30Jz0jcAeJf+fDfMPbjIwINMiUugE=;
- b=z0tAsDvZdCs0CmHfWGZFU2J6wDencUZx+pApcsqDHOdvI982EhKRINt/aUbwOCZK3g
- oWGOrM47YIHPNEKJeLXOiH/D8B76V3ooECJnGeKRtAwtkb1VEgav0DJ16MjHo0V91f6M
- xEQYfw+d4GwhCT0xpoU8Dxx7D3SgeELOr/MUZVwLJFYPgicTZnTl0ZDBMdpa7OdKoa1a
- f5YUSMKPSm4jLjpDgfTlSeYZ2arxSOmwPMaMIn6cJkg2l4yJJZ+MZ2aHOgUo0xJwJfxJ
- NZAP7VVTAxl5YpYiBkmfWqVQABUdrdwP02BjjmyGIHXfxaVqEzVxA9lHyksY4mF6giv4
- VV/w==
+ d=linaro.org; s=google; t=1726239874; x=1726844674; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=lUseUpAr0seGxAsn+IFrAjXs+vKvf4b4gAX3A7S2V0Y=;
+ b=V8ZC+4xLaIPe57RZCkCl8SaGFaq/Jbd2usuG+AziIAnRvjByKN9O7dERpLtZ4/RCHP
+ VaGK4k53DNRxKc5GWO70E8XgFwMq4nOAjRzJJeXRnBp+kl/rWFSGTp1O/c4reqS6has9
+ zzDKzgvo5xvEMEGPsqADGzEn9aCuKzkuXl6hjZkVS51VHycn+Ekf9ec4ceqqW/eZs43U
+ msjQTAiwSMOHeIe4riF4nS5qYSS9KtygLN8hcyXO4bEQALBBfXCGZY72g3FseM8677eP
+ Ary2g3d9fNSPKN/uf2dmlHM8Sed+v12LBsPW5jYKpk18uNR4YbXzLu1euK6FBYLOVkWS
+ R2Nw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726238243; x=1726843043;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=o7p6IYkeMUOG/d30Jz0jcAeJf+fDfMPbjIwINMiUugE=;
- b=JWGLkAhW4m12FXfvvkSFStfPRYW+HjbL/Gq1bdnQI6FpaBD8YHfyJnTiAes+CicGIS
- 89oZA8Y3wPutJRS6shMAQhBgs1OxM0B0LbNGWc47msU5oYTwr3Co529Uqa3G+hPnQgUC
- nuu4slVlcmN/TBGMoL4usN71t4PX0GLJsoDnZDFuQbDP3L6N4klpc9nhj5qMaD5EiJhK
- H8bLu8t7MoSGYSbPAEC7SwnPUYcTq55rTngtwnmPcztCM43p63sou9agNEUANspGSdXq
- OVwqNNfPN7pP6MXGl9g0+U9BiM2wxab+hyhxUh627t12bcfcXNJONlNrPf4hD7mAYqFp
- A0Xg==
-X-Gm-Message-State: AOJu0YyHP00lQ4KoernCNzfMwcZigQBzUDe+85vuf9Y3R4agl0sJ99sj
- 1KI9A3hDyVUs9GiyuEZq5XXhZfSLeYOsvcyTsJSqwd05cfxkkm0VJhZT8EDWjOU=
-X-Google-Smtp-Source: AGHT+IG8WQQCaxIMovV6qTQ7FKPohTlIEM8C2iox2nc2idjkvuP61opt7nydbmsyesfBW5IWUBO+gw==
-X-Received: by 2002:a17:907:efc5:b0:a8a:93d4:ac21 with SMTP id
- a640c23a62f3a-a90294bf2d3mr624832166b.28.1726238243330; 
- Fri, 13 Sep 2024 07:37:23 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:edd9:2a6c:c786:3e44?
- ([2a01:e0a:3cb:7bb0:edd9:2a6c:c786:3e44])
+ d=1e100.net; s=20230601; t=1726239874; x=1726844674;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lUseUpAr0seGxAsn+IFrAjXs+vKvf4b4gAX3A7S2V0Y=;
+ b=SiAKiBraQsGzz2UXTy72J96ubwc7sHMAG4Cyj1jPRqbbPkuL/t3BE+zgtel1PGOv31
+ knUhN1/SBuY0wAXA9GRmaOkA38ez6RufZMjqNAhHAgSOkTn80EmyHoN5vUzS3xfBYOrn
+ 7PfbAm6ZAqwFwBBTuEC0YBrdjKxcUmr6l1ChS7uxHViPHY50SIGlVA0nxsq6ttac+bIZ
+ XIMTMfLOr+UVNWYK17QQ8xc1F04Djus7e5Q1BlodHG3vcvVA4b0blhsgOR7zqjKWoDrf
+ B34iyfOXvNYg54bzhDLyV5sPR9dJnghuUdcqD3BtEtSaO3GcnX3cuiGmqLOUuuLEDB/s
+ +7WA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXjvrv804Mverg5oxb7dbRQE5BJb28yBi4vvYYZjIIuoxnEqyY1ZHV02fd/96pgKJVvU9+yPsc=@lists.denx.de
+X-Gm-Message-State: AOJu0YxxtDR5c534n8cpOK4M6Fm+g81ThHkLXD3d5P835YtXcbv4BWpl
+ biBqAUTzP/EMoMGLbwFEChL4CGcmsAkqSqR5YQJmjW0he6wm3l3vQdAxyRVIFIo=
+X-Google-Smtp-Source: AGHT+IELlmUN2boJxaLAHOU+k+ms4TH1+ZE7jad0HL62MxR76C79FxYWJL6xAhBiy1wkEQXSwc3uLw==
+X-Received: by 2002:a17:907:f766:b0:a8a:8d81:97b1 with SMTP id
+ a640c23a62f3a-a90295a2171mr631894766b.27.1726239873149; 
+ Fri, 13 Sep 2024 08:04:33 -0700 (PDT)
+Received: from hera (ppp176092143132.access.hol.gr. [176.92.143.132])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a8d25831875sm891770066b.11.2024.09.13.07.37.22
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 13 Sep 2024 07:37:22 -0700 (PDT)
-Message-ID: <25a3591c-0c5e-4294-9e06-f9b3ca954338@linaro.org>
-Date: Fri, 13 Sep 2024 16:37:21 +0200
+ a640c23a62f3a-a8d2592647esm880479366b.48.2024.09.13.08.04.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 13 Sep 2024 08:04:32 -0700 (PDT)
+Date: Fri, 13 Sep 2024 18:04:28 +0300
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: Simon Glass <sjg@chromium.org>
+Cc: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de,
+ manish.pandey2@arm.com, Tom Rini <trini@konsulko.com>,
+ Stefan Bosch <stefan_b@posteo.net>, Mario Six <mario.six@gdsys.cc>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>, Andrew Davis <afd@ti.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Sumit Garg <sumit.garg@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
+ "Leon M. Busch-George" <leon@georgemail.eu>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Alexander Gendin <agendin@matrox.com>,
+ Jonathan Humphreys <j-humphreys@ti.com>,
+ Eddie James <eajames@linux.ibm.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+Subject: Re: [PATCH v6 07/28] hash: integrate hash on mbedtls
+Message-ID: <ZuRUfI6RoPiTAiva@hera>
+References: <20240816214436.1877263-1-raymond.mao@linaro.org>
+ <20240816214436.1877263-8-raymond.mao@linaro.org>
+ <CAFLszTiWFD2dpb6z_5cibDe0aOpuPYug-mrC-ZiZ7v+SEDFhdQ@mail.gmail.com>
+ <CAC_iWjJpfrK+-o_0x8ZJbWxhG4O-tprf1-oQvWmLZWOf=5qZMA@mail.gmail.com>
+ <CAFLszThL=Z_=Qome2ZzwdqcUxX4bVg7MsMKMgk05TkrV2wcMGg@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v10 00/25] Introduce the lwIP network stack
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
- Anton Antonov <Anton.Antonov@arm.com>
-References: <cover.1725625913.git.jerome.forissier@linaro.org>
- <20240906175433.GE3879073@bill-the-cat>
- <4b66d045-5410-4991-96e5-1d9cd98cbdf9@linaro.org>
- <20240909161932.GC4252@bill-the-cat>
- <ecf381f7-d48a-48a5-9395-c12b301108d0@linaro.org>
- <20240913135947.GW4252@bill-the-cat>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20240913135947.GW4252@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAFLszThL=Z_=Qome2ZzwdqcUxX4bVg7MsMKMgk05TkrV2wcMGg@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,132 +119,121 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+Hi Simon,
 
-On 9/13/24 15:59, Tom Rini wrote:
-> On Fri, Sep 13, 2024 at 11:33:31AM +0200, Jerome Forissier wrote:
->>
->>
->> On 9/9/24 18:19, Tom Rini wrote:
->>> On Mon, Sep 09, 2024 at 04:11:37PM +0200, Jerome Forissier wrote:
->>>>
->>>>
->>>> On 9/6/24 19:54, Tom Rini wrote:
->>>>> On Fri, Sep 06, 2024 at 02:33:16PM +0200, Jerome Forissier wrote:
->>>>>
->>>>>> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
->>>>>> library for the network stack" [1]. The goal is to introduce the lwIP TCP/IP
->>>>>> stack [2] [3] as an alternative to the current implementation in net/,
->>>>>> selectable with Kconfig, and ultimately keep only lwIP if possible. Some
->>>>>> reasons for doing so are:
->>>>>> - Make the support of HTTPS in the wget command easier. Javier T. and
->>>>>> Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
->>>>>> so. With that it becomes possible to fetch and launch a distro installer
->>>>>> such as Debian etc. using a secure, authenticated connection directly
->>>>>> from the U-Boot shell. Several use cases:
->>>>>>   * Authentication: prevent MITM attack (third party replacing the
->>>>>> binary with a different one)
->>>>>>   * Confidentiality: prevent third parties from grabbing a copy of the
->>>>>> image as it is being downloaded
->>>>>>   * Allow connection to servers that do not support plain HTTP anymore
->>>>>> (this is becoming more and more common on the Internet these days)
->>>>>> - Possibly benefit from additional features implemented in lwIP
->>>>>> - Less code to maintain in U-Boot
->>>>>
->>>>> On am64x-sk (am64x_evm_a53_defconfig) I'm seeing:
->>>>> => tftpboot 80200000 EFI/arm64/grubaa64.efi
->>>>> Using ethernet@8000000port@1 device
->>>>> TFTP from server 192.168.116.10; our IP address is 192.168.116.23
->>>>> Filename 'EFI/arm64/grubaa64.efi'.
->>>>> Load address: 0x80200000
->>>>> Loading:
->>>>> ... silent hang ...
->>>>>
->>>>> Which I didn't see with v9. I can test other TI K3 platforms if it would
->>>>> help.
->>>>
->>>> Weird. I compared v9 and v10 (rebased onto the same commit as v9) but
->>>> I saw nothing obvious. Would you mind running the test again with these
->>>> traces added?
->>>>
->>>> diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
->>>> index 1948fc1c309..9bbfd8ee5a7 100644
->>>> --- a/net/lwip/net-lwip.c
->>>> +++ b/net/lwip/net-lwip.c
->>>> @@ -35,6 +35,7 @@ static err_t linkoutput(struct netif *netif, struct pbuf *p)
->>>>  	void *pp = NULL;
->>>>  	int err;
->>>>  
->>>> +	printf("[OUT|%d]", p->len);
->>>>  	if ((unsigned long)p->payload % PKTALIGN) {
->>>>  		/*
->>>>  		 * Some net drivers have strict alignment requirements and may
->>>> @@ -252,12 +253,16 @@ int net_lwip_rx(struct udevice *udev, struct netif *netif)
->>>>  	int len;
->>>>  	int i;
->>>>  
->>>> -	if (!eth_is_active(udev))
->>>> +	printf("[IN]");
->>>> +	if (!eth_is_active(udev)) {
->>>> +		printf("ERR: !eth_is_active()\n");
->>>>  		return -EINVAL;
->>>> +	}
->>>>  
->>>>  	flags = ETH_RECV_CHECK_DEVICE;
->>>>  	for (i = 0; i < ETH_PACKETS_BATCH_RECV; i++) {
->>>>  		len = eth_get_ops(udev)->recv(udev, flags, &packet);
->>>> +		printf("[IN|%d]", len);
->>>>  		flags = 0;
->>>>  
->>>>  		if (len > 0) {
->>>
->>> I have the log, if it helps. However, with debug prints added, now it
->>> completes.
->>
->> Duh! :-/
->>
->>> And I can see (as part of trimming down my test setup) that
->>> without the prints, some tests are OK. The much smaller "helloworld.efi"
->>> file and test is fine.
->>
->> I suspect we might be hitting the test framework timeout, because TFTP
->> with lwIP is slower than with the legacy stack as mentioned in [1] (lack
->> of window size support). Although it seems weird that you don't see the
->> hash signs at all, as if no data were received?
-> 
-> Yeah, it's acting like no data was received or otherwise just locked up.
+Apologies lost that email
 
-OK
+> On Sun, Sep 01, 2024 at 02:09:44PM -0600, Simon Glass wrote:
+> Hi Ilias,
+>
+> On Fri, 30 Aug 2024 at 03:37, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > Hi Simon,
+> >
+> > On Thu, 29 Aug 2024 at 18:01, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > Hi Raymond,
+> > >
+> > > On Fri, 16 Aug 2024 at 15:47, Raymond Mao <raymond.mao@linaro.org> wrote:
+> > > >
+> > > > Integrate common/hash.c on the hash shim layer so that hash APIs
+> > > > from mbedtls can be leveraged by boot/image and efi_loader.
+> > > >
+> > > > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > > > ---
+> > > > Changes in v2
+> > > > - Use the original head files instead of creating new ones.
+> > > > Changes in v3
+> > > > - Add handle checkers for malloc.
+> > > > Changes in v4
+> > > > - None.
+> > > > Changes in v5
+> > > > - Add __maybe_unused to solve linker errors in some platforms.
+> > > > - replace malloc with calloc.
+> > > > Changes in v6
+> > > > - None.
+> > > >
+> > > >  common/hash.c | 146 ++++++++++++++++++++++++++++++++++++++++++++++++++
+> > > >  1 file changed, 146 insertions(+)
+> > >
+> > > I am not seeing the benefit of replacing U-Boot's hashing algorithms.
+> > > They work well and don't change. Also it seems to be making the code a
+> > > lot uglier, with an uncertain timeline for clean-up.
+> >
+> > A lot uglier where? It adds a few wrappers that fit into the current
+> > design and callbacks.
+> > I don't think what you are asking is possible. To do assymetric
+> > crypto, signatures  etc -- and in the future add TLS support in wget
+> > mbedTLS relies on its internal hashing functions for the cipher suites
+> > it supports. So what you are asking would just make the code even
+> > larger. Raymond can you please double check?
+>
+> It's really just a case of dropping the hash calls. It should not
+> cause any other problems, so far as I can see, but I have not dug in
+> in detail.
+>
+> Re TLS is relying on its internal hashing functions, is this what you
+> are talking about?
+>
+> $ git grep mbedtls_sha1_free
+> common/hash.c:          mbedtls_sha1_free(ctx);
+> common/hash.c:          mbedtls_sha1_free((mbedtls_sha1_context *)ctx);
+> lib/mbedtls/external/mbedtls/include/mbedtls/sha1.h:void
+> mbedtls_sha1_free(mbedtls_sha1_context *ctx);
+> lib/mbedtls/external/mbedtls/library/md.c:
+> mbedtls_sha1_free(ctx->md_ctx);
+> lib/mbedtls/external/mbedtls/library/psa_crypto_hash.c:
+> mbedtls_sha1_free(&operation->ctx.sha1);
+> lib/mbedtls/external/mbedtls/library/sha1.c:void
+> mbedtls_sha1_free(mbedtls_sha1_context *ctx)
+> lib/mbedtls/external/mbedtls/library/sha1.c:    mbedtls_sha1_free(ctx);
+> lib/mbedtls/external/mbedtls/library/sha1.c:    mbedtls_sha1_free(&ctx);
+> lib/mbedtls/external/mbedtls/library/sha1.c:    mbedtls_sha1_free(&ctx);
+> lib/mbedtls/sha1.c:     mbedtls_sha1_free(ctx);
+>
+> I see this in psa_crypto_hash.c (not sure what that is though).
+PSA is Platform Security Architecture for Arm. They define APIs etc and
+some crypto ops can move to the Secure World.
 
-> If you have a beagleplay it should also show the problem.
+As I responded later down the thread, mbedTLS config.h file allows you to define
+alternative implementations. The benefit that I see by using mbedTLS hashing,
+is that we can switch on new algorithms by enabling an option in mbedTLS.
+OTOH some work will be needed to plug new algorithms in U-Boot and as you
+point out HW accel will not work -- Unless we define the accelerator
+functions in the config file above. But that doesn't solve your problem of
+having one extra ifdef in hash.c
 
-Unfortunately no, I don't have the hardware.
+>
+> > > Can you do the rest of the integration first?
+>
+> I believe this is the best approach. We need to permit using crypto
+> acceleration too (via driver model), which is obviously impossible if
+> mbed algorithms are using built-in hashing.
+>
 
-> I can try and
-> find some time to check it out, outside the test framework, but also the> Pi platforms pass this test fine (same binary, same physical network).
+Look on the response above, we can, but I don't love the solution.
 
+> The biggest challenge here is that common/hash.c needs some love, as I
+> mentioned in an earlier version.
 
-That would be great because I don't have any better suggestion...
+Fair enough. So the way I see it we got three options.
+- We pull in the current one and explicitly state that mbedTLS != HW accel
+  for now and plan for a wider refactoring.
+- we write a few wrappers to adjust the u-boot functions and define
+  those in the mbedTLS config file. We could then go back and try to make
+  mbedTLS work with the existing hw accels. This is doable but
+- we treat mbedTLS as a 'hardware accelerator', define hw_sha_init etc and
+  make wrappers for that. This does solve the extra ifdefery, but OTOH
+  mbedTLS will never work with hw accelerators so I'd say no.
 
+Raymond, can you take a look at (2) and see if it works? You basically have
+to rip out all the hashing code and define wrappers on top of
+hash_block() that mbedTLS can use
 
-In the meantime I do have v11 ready, with one minor fix, patches removed
-(posted separately) and more importantly a change to enable CMD_PXE. From
-the upcoming changelog:
+Thanks
+/Ilias
 
-===
-- Add (some) support for CMD_PXE and therefore drop patch "[TESTING]
-configs: set CONFIG_NET=y when PXE is enabled". This is build-tested
-only and it is very likely that some work is needed to make it useful.
-For example, adding the code for DHCP option 209 to lwIP so that
-BOOTP_PXE_DHCP_OPTION can be supported.
-===
-
-Would you like me to post this v11 today, or do you prefer we sort out
-the TFTP issue with TI K3 first?
-
-Thanks again for you support on this series!
-
-Regards,
--- 
-Jerome
-
-
+>
+> Regards,
+> Simon
