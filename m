@@ -4,83 +4,142 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34129FA3748
-	for <u-boot@archiver.kernel.org>; Fri, 13 Sep 2024 11:55:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA2BCFA374A
+	for <u-boot@archiver.kernel.org>; Fri, 13 Sep 2024 12:37:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31A9788A1C;
-	Fri, 13 Sep 2024 13:55:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2BD4688D07;
+	Fri, 13 Sep 2024 14:37:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="krbc0Qs0";
+	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="daG5hD/+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DEC688CCF; Fri, 13 Sep 2024 13:55:28 +0200 (CEST)
-Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
- [IPv6:2607:f8b0:4864:20::52b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CAA0988D78; Fri, 13 Sep 2024 08:29:54 +0200 (CEST)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100000.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8ACA6889B3
- for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 13:55:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D93A688706
+ for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 08:29:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x52b.google.com with SMTP id
- 41be03b00d2f7-7d4f8a1626cso612820a12.3
- for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 04:55:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726228524; x=1726833324; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=2yp2L3x328u6f0Zsa2JYnkvmpCXXhnafO8K5ZSZLudY=;
- b=krbc0Qs0sE5uEQTVIWg8vsnheVzsTrVlfUwiiqFkKWnSTCBbbhXOqCY1JRKf8gxifp
- dKxT443H1C3RE/Qs1mYzi1cBLIOYoH2h9hC273D/3QXJXaXsmIAJxhGKAvF6EYcwnsK4
- 0EJsqcXl/C7qbxJyj7jB8Rk5sS/dWTCr6bQDcFEPKnncDk7jXSBHnBrrHtETI1xoX7WJ
- FTNoKyHCubJbHVbkqZu3jXqeShNAF466boCP2yi5rpNCTZzzFKot9jKG5qdo2mSCPwPQ
- LNl9q27ce2wlsR+aQmZY/ngVmoTYeVhMmDlm38ntpaIp1K1FEixdCjiayyFB8pKRgvcK
- PXNg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726228524; x=1726833324;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=2yp2L3x328u6f0Zsa2JYnkvmpCXXhnafO8K5ZSZLudY=;
- b=esStRjfVt9caKgrz3N6eMhfu7tCilcrSJc8eBU9hbxvuob0hoSqRIjYInlPn2dvEJq
- vhM72j39acyUlKEmqaU0CFm+JUa0wlmSMT3vnLC7AYV1ZChQtEGlmcGs42gs/DeWgXFR
- 6l91xp/put/T2IPtzqrgj7wCJt3aICOjyD4J5GUFnPcVVUa1mJzMNyGhNegCI2HcFuq+
- oJOFZVBBDDA/gy835php+AuFUhOSWYjvFv6J16nAgS5sjRvheL07Qw3tZGwUFVOcWeFN
- an1sko2IS6mlZjKPZOIy+OjayCgE8Vi/yKK/kaA4v02Qym6V4Q0FnfcDg3nBLnMewzcP
- 8H2w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWMeJU7ChhJ2i1YJkc7C34BvvRD8DyvUi32z1sBJZfa3I1ipMdwneBWBAp/ixspi5pLYK4kmww=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx5cGNAhQgJZojsKepQhnsqd9fD2avlt6CMJ06csgbD8S7DU1No
- NjGx7h1lRfZvCpUCdyFFJwlaDwPrTGyrQeRq6mUM7+zwMz9KWWC7y/6C/DBxxrlHRgFE2GNyjFZ
- gmjOOngLk51VM0OH72sEWKSf36AzdgBmVUMrmHg==
-X-Google-Smtp-Source: AGHT+IGj24B64l4wDsrPy7d6bONivMNj8o+34gsPHCfmqlc0d16C8nxPceuLE/XTM5SlKUz55xT99nxrzWP1W+WfdQk=
-X-Received: by 2002:a05:6a20:7b26:b0:1d1:17c6:7a38 with SMTP id
- adf61e73a8af0-1d117c67a9emr1742719637.9.1726228523722; Fri, 13 Sep 2024
- 04:55:23 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ye.li@nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=JCeBvd5D7UowZgAMoAMc1RGoftVNpwnW4UDrk2/qGErmgcfFJM1vZxSutd61wKay9NUFjQEPVp0PIa+dvuUFEMpukl5Abr6otktgWqzbOuQ7SnVGK8WdTF7ebC/pW+O/iN3yaMAAGX6GunIQ0SVKESRQPAv1Uq7MmsBB25+YR6iZgCZPkYkghtrjyd/RRO8Tx0mrO64sCPrVUCyPVcwd4WDzGo8X9KtjI+m+YbuN/TZtCWb6CG27a0GCuWwZWy3mNKA/tcVlaQNzhia9WskpYA8ThU/XwWPPPNtBvw5i7t7H1HgztNTZyHtVQ1xkEtdiAb8sbdpRvB5k5MDFW5xoFQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=lpE33KFXfDCWVPFMzdSdylWr2sGxgO9RgGuiKQwBUuc=;
+ b=mgCUQ8kwf8059memAeAF7ev8GxGMRKdWAtimfHg3Bm0zt98PL3cS8/OqvzPbTcCtXzjGT/6Df5RqROQ9mwwj9xtzf1TQtSG/95ZEcY/wVccfDyKnPNXnCZ3TQ/p72zguUKVqktGBmbrfD69pPFaIM+fG18BOqCJlTVffxcnaAqg6HAA0/HLCMDJwlUbJDEoLnxBG1KYveuOmtmaUhe5QZZin9ipHrer3duuizdwYvz/ExQMyPKc2yUzvE8jwnjx4zVmeNoFYkxCy5Wnuh0KDRZwROns7w9xP1PYnjqC9w7LBbJF2RMZSjHeu7ZSb7YYPwc+Howi3EpBwuS6YZh0uzQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=lpE33KFXfDCWVPFMzdSdylWr2sGxgO9RgGuiKQwBUuc=;
+ b=daG5hD/+OPW6K3GeV4L4jYE26el0PYueo4rW1Ach1dmBRLMRhZS+ZFntGhgedy7PGS9+2PgqGxJYuXI/OKo2PSpmubu/Xk5uCn0gSTI97OxrdGE8GewK+k0cxDAABb0JLxeHaXZfGmdBPHCe2dNVSAmzUqDFj9AATGH2Za02/t8hfJ/UFN+EtgpGPrreHtHyHrcQi1822IIOPU69fY/BHk2bbOQ0n2zfDLcWzx8NRjANgf2whsfUVFhSsWG8Jeq18wWLq4LImnK0ZbxWj9G2WJ+E379n2Ey51eKI604zV0GLs0aOoPhIaoCd8KNhn6YQbdri8c6gpCJf8dnNe+omfg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+Received: from AS4PR04MB9436.eurprd04.prod.outlook.com (2603:10a6:20b:4ec::5)
+ by AM9PR04MB8292.eurprd04.prod.outlook.com (2603:10a6:20b:3ef::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7962.18; Fri, 13 Sep
+ 2024 06:29:48 +0000
+Received: from AS4PR04MB9436.eurprd04.prod.outlook.com
+ ([fe80::afae:fb35:fc8:5c90]) by AS4PR04MB9436.eurprd04.prod.outlook.com
+ ([fe80::afae:fb35:fc8:5c90%7]) with mapi id 15.20.7962.016; Fri, 13 Sep 2024
+ 06:29:48 +0000
+From: Ye Li <ye.li@nxp.com>
+To: jagan@amarulasolutions.com,
+	u-boot@lists.denx.de,
+	marex@denx.de
+Cc: uboot-imx@nxp.com,
+	ye.li@oss.nxp.com
+Subject: [PATCH v2] mtd: spi-nor: Fix chip erase timeout issue
+Date: Fri, 13 Sep 2024 14:29:26 +0800
+Message-Id: <1726208966-126298-1-git-send-email-ye.li@nxp.com>
+X-Mailer: git-send-email 2.7.4
+Content-Type: text/plain
+X-ClientProxiedBy: TY2PR01CA0023.jpnprd01.prod.outlook.com
+ (2603:1096:404:a::35) To AS4PR04MB9436.eurprd04.prod.outlook.com
+ (2603:10a6:20b:4ec::5)
 MIME-Version: 1.0
-References: <20240910063933.141283-1-ilias.apalodimas@linaro.org>
- <CADg8p94ZnxVCc0VJ9hkAQ1Ka2Y9=Yt995KisJpFDXboMMfT3Yw@mail.gmail.com>
- <CALeDE9OyUBQFmrwqfrM+A7K+pcvS0Bd6GzzvEFpxh8w2Qms2TQ@mail.gmail.com>
- <CAC_iWjKVxSf-RX+4msP=SE+LO6zD++CBu25VQy0o=fiB9CvPug@mail.gmail.com>
- <71204d13-164c-4b5c-805f-436fcc66d456@suse.com>
- <CAC_iWjKcmCixF5ZbYajerJyHeV82u5e0nHdBg-ruCqb76YR2Rw@mail.gmail.com>
-In-Reply-To: <CAC_iWjKcmCixF5ZbYajerJyHeV82u5e0nHdBg-ruCqb76YR2Rw@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 13 Sep 2024 14:54:47 +0300
-Message-ID: <CAC_iWjJspjWFamv1iH5JaT6xDkWYZZ5ybxX9VsTrZejSxf7U1w@mail.gmail.com>
-Subject: Re: [PATCH] board: rpi: Enable capsule updates
-To: Matthias Brugger <mbrugger@suse.com>
-Cc: Peter Robinson <pbrobinson@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Tom Rini <trini@konsulko.com>, Stefan Roese <sr@denx.de>,
- "Ivan T. Ivanov" <iivanov@suse.de>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Francois Berder <fberder@outlook.fr>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS4PR04MB9436:EE_|AM9PR04MB8292:EE_
+X-MS-Office365-Filtering-Correlation-Id: d9b2b793-f844-4716-1834-08dcd3bd76f0
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|1800799024|52116014|376014|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Q9LbS1e1lNDS6Q9TbpES//wNTj/rVMlKC0GpkvV23UAMAGj/8g3J58ESCJhb?=
+ =?us-ascii?Q?6A8TcW2CgKnALe4AsFbKHB/gMNysoWQcQhhGm00F35KOybrHP3UjYTX7+Ok2?=
+ =?us-ascii?Q?oHZqUexfvgXbrfc+4wicEW8S0389kwOSV2IbfY0FEPDIyFXsqwZ32GB5R2hg?=
+ =?us-ascii?Q?VGqEpxL0C32TbHsQA5KHPImt7bbBm9dqC4f/TKM1DfEsdwAzghneE2Rol4KU?=
+ =?us-ascii?Q?PW0XVlck42CQwu0GuETOcD3Eh7nDoZ33XzGIngbWGv1qcmOlDgeIF3uXPMo1?=
+ =?us-ascii?Q?xAhZOu92au/9OhAM2UpAYbMxeriUN9QakgwPBpQ/U4mNVbgEmBQ1iacLG44Q?=
+ =?us-ascii?Q?CRycxrErW9wAGftBvmqQPP3YC965T5EXPNa/kdDWhitPjkjCFBPVwZq85QhV?=
+ =?us-ascii?Q?HRtqF9OqI8MleeR3ZBbTCEmu2jwo2fbE4p6/8zqDnAFjX++u2/1ADzdJilnq?=
+ =?us-ascii?Q?2dguwe89Cum5O1rRth+VQ0gB+HTu4DhCY38F/kSXtQBCOvyxyP0PYHAyFsmq?=
+ =?us-ascii?Q?KH5VIjLGjqmJNZjusAK7okv49d0yo+YJSWWcgai3vWyq1eUHk7Y5o4W1j+gF?=
+ =?us-ascii?Q?a3T906Eb9bijyG4KKYJhwfnIFZf0PtIMH1FCyVdf9t6i4sB7yEwjvlqHtnVr?=
+ =?us-ascii?Q?iqQO4yAQqVjBfn0eAMq+1amBgRLLIGcYcQIbTdcoD9eunvjkaDoCLPu6asuX?=
+ =?us-ascii?Q?zdQngMvFcBL1i6t7aA+QTWtlPY/tVee+XCd86ecn3KHv7Q/oGneYYmCNvpJ6?=
+ =?us-ascii?Q?T2iwWkSK4JJ1Y/uJ1yD0clLJyBMzocX4ckVJ6PWMqGT5GoJIUK7Jjyo5XouM?=
+ =?us-ascii?Q?Bp+LCZc85FGhwi99ajO4qLiXcZCsAoG21vaAGjuAun8Ys3ZUiAt2bW2KvwGo?=
+ =?us-ascii?Q?ot1QvrdYFe97OTazSaBKECcEBKRDXyDaPcfnIL/3vzSn/MmkoA7OI1GE2DoV?=
+ =?us-ascii?Q?57ToIy327votwpXhFw59Xu0Bzwn4elDPM83FhJHFCgQKJcjYn0qk0XpjzJQT?=
+ =?us-ascii?Q?tstkd5N4OSDQVqkObxCPcHg9iNq0KUt4y2Eoe5JfHDSx8t64ILEyKmMbe5pT?=
+ =?us-ascii?Q?LDG5Vhufg9asYc6ZpdtPvqAsBInL0EKsmO3lGFsTYj+rFcVj7aVmlZ5hpByG?=
+ =?us-ascii?Q?hKoPnxUCUg+T8tAh2L5hKkZMPIRubv/1YAuxn7fHDPW1wgaYXH97MknN8UOD?=
+ =?us-ascii?Q?zBDhTLDkvD0/Uirt7LcQsljaQjSb3XvExfkxDd7LJwLXcT2EgXKAQkJ5s4km?=
+ =?us-ascii?Q?/+SI5iUo1w5/iVi1R3opNK/9tfrW41gTIUL3NhJvgI+xTChL+TCEEm6xbFi3?=
+ =?us-ascii?Q?weTlKN0qj9TpyPk7exdWVPzlm2aALB6yQDR+TD/JdCEytGegROCe4tXixSpi?=
+ =?us-ascii?Q?A2NGpPJFNJX/+od11N1oNlzQZ2ewmZuZ1TpFC1JHOF4CSVnpIw=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS4PR04MB9436.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(52116014)(376014)(38350700014); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?EXO0O9i2VSc8mCqyTEP+isoboPmDPdOCvNxrxPhUylXf0FHUOcNEiKb6JL1f?=
+ =?us-ascii?Q?pPSMUnBoDGU1kIsPCyrqc9uruXaQ2LjqUyFUV/RZPHdacKsyIYoz6/d7QwIn?=
+ =?us-ascii?Q?b+5Xc9Mv4uRAbSjHNlwl0MCNnUHxeodRh43HU9XQIBvGdqlnN4n+ebs58VAL?=
+ =?us-ascii?Q?MOuHVkHuQqTQmkC1g705mvsIEiATolyZxh68ZCJHbj9QwW0q4IDgojkxR6jy?=
+ =?us-ascii?Q?nuhCXqhfl3xp+cdRKWSaYdRkqnN+JPkzsBljAJzsvqgLbeXoojz0jO4bix5T?=
+ =?us-ascii?Q?bnP/yYzXGNKWEmsgFLxyrvmvO0NjDBmyNAynep87yK+w0kiOGs++Qndioi0Y?=
+ =?us-ascii?Q?Pa83etp31WIDvKfWr7cktBwLDBd6ZI4pE4dLUD5Vgjm4I6VUI3aPcedUZTjR?=
+ =?us-ascii?Q?/3VWkuUG30utWEA5OvKQwu0HO3KdfW3W8EuJ+R9q+nO04UwewF/Ub8XwJA3r?=
+ =?us-ascii?Q?6JlA1maXPI8v3desOhksHuon8fvj2A3OP4cfUvIJ5QH8o1k4yUbyIKj1pKq1?=
+ =?us-ascii?Q?9B2ozyBeNqFSH39MAAeJqq3l+E1aSaKdWdWqccClG3LBgjR4AJlmel//mA7V?=
+ =?us-ascii?Q?ijdO8nXTZyri9WDpdawh9d+99XsQEZ32JujSVisPNVZWcimoCx62IWDyrqr1?=
+ =?us-ascii?Q?+58n7fP/zPbxt22EDBnyhX6OjRoqGO1BWKJhnw5S3RGl7u9pmi9kiMaqJ9B3?=
+ =?us-ascii?Q?acvC/Jbqirf6ZLPgBmFWX2+1nogataK51TRRAoyTGliI28DtUs3RngRvxCEo?=
+ =?us-ascii?Q?7w3QqMd0g4gf9irS3Zvu7Z92IoEofJ463VeMVJS1jASFBHAd27V6kZEYxPAI?=
+ =?us-ascii?Q?OAjCAQTwbalOfBOlHpgPd4hqdM2lSP/qTAZ70O9NnBbVERjARYn3bQXkoy7Q?=
+ =?us-ascii?Q?TiGWg30U4/4T4YMOOPQu8HC2vhRlvKHoZp4au7MOkjV6VTiCrOxpGQ8rKxRN?=
+ =?us-ascii?Q?pPtUDWWiLlX605qaBDuJ3nYCzWAGTtrmiEOVt5TtDCHaVZp1GG/Ie83QieYG?=
+ =?us-ascii?Q?Loxk1OU5fEwJcHoGdB9zvZFusktFkWwc+9X65/8+0QIr3BL6PHobpdm/J9pm?=
+ =?us-ascii?Q?ohvkwgibOpa3Gcxue0kTczjihcFpoi/5ZAFNvcyJFlButm2uxxS5pDfg8981?=
+ =?us-ascii?Q?5ZHQg0OEGagR1NQVAX4YLK+homdGeDdRsDIO0mZdcMPPviQK/AnWeezauLcA?=
+ =?us-ascii?Q?8vjB3Te3SegzB+PH9R3yeydJL+FExYoH6YJ1550ABtZsp+XBMcXSDEOEDPjI?=
+ =?us-ascii?Q?F5KWRm/HcPcshZ6uqCOLDmrW5mmJXylzoJwOA0YJq12bybiteaX/o7wo55+s?=
+ =?us-ascii?Q?1aQo83tewtB93tYdIagq/xcUdisjCAg1agfUG7Ox5VoyqZDynvyknKONX/bw?=
+ =?us-ascii?Q?aDKllBoP4vEDhBXR0uXt5MObHmIyr3lUUWlkV9CbXo+PUkTC9u49po5ZWC7+?=
+ =?us-ascii?Q?woTZ2jUPHr3qIyiFgIutbDajrtAnJfKheLQiC4mVF0PlLfPW2gZI5yAIwvn6?=
+ =?us-ascii?Q?H+AqtcVy+yeUjuwibOX5YIbobz4FolbTeCAx63RdEXJlMqyUcJSWYf6gtFcf?=
+ =?us-ascii?Q?xUlBYp57XCi/YlwqV1k=3D?=
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d9b2b793-f844-4716-1834-08dcd3bd76f0
+X-MS-Exchange-CrossTenant-AuthSource: AS4PR04MB9436.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Sep 2024 06:29:48.1314 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 2W2Ex3exXnsMMI70suq1gReeOhr0tO9PKvzV7r5aqJyAjga2bJdFA+i4jbBB6tWv
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8292
+X-Mailman-Approved-At: Fri, 13 Sep 2024 14:37:34 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,154 +156,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Apologies for responding to myself here, but clarifying things a bit more...
+Chip erase support was added to spi_nor_erase, but the timeout
+for polling SR ready is not updated and still for sector erase.
+So the timeout value is not enough for chip erase on some NOR flash.
+Follow kernel implementation 09b6a377687b ("mtd: spi-nor: scale up
+timeout for full-chip erase") to set new timeout for chip erase.
 
-On Fri, 13 Sept 2024 at 14:15, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hi Matthias
->
-> On Fri, 13 Sept 2024 at 13:40, Matthias Brugger <mbrugger@suse.com> wrote:
-> >
-> >
-> >
-> > On 11/09/2024 12:05, Ilias Apalodimas wrote:
-> > > On Wed, 11 Sept 2024 at 12:50, Peter Robinson <pbrobinson@gmail.com> wrote:
-> > >>
-> > >> On Tue, 10 Sept 2024 at 08:29, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> > >>>
-> > >>> On Tue, 10 Sept 2024 at 12:09, Ilias Apalodimas
-> > >>> <ilias.apalodimas@linaro.org> wrote:
-> > >>>>
-> > >>>> Since RPI works well using EFI and has no size limitations with regards
-> > >>>> to U-Boot, add the needed structures and Kconfig options needed to
-> > >>>> enable capsule updates
-> > >>>> ---
-> > >>>>   board/raspberrypi/rpi/rpi.c | 22 ++++++++++++++++++++++
-> > >>>>   configs/rpi_4_defconfig     |  2 ++
-> > >>>>   2 files changed, 24 insertions(+)
-> > >>>
-> > >>> Tested-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > >>>
-> > >>> A couple of nits below.
-> > >>>
-> > >>>>
-> > >>>> diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
-> > >>>> index ab5ea85cf9f8..1f342eee12b2 100644
-> > >>>> --- a/board/raspberrypi/rpi/rpi.c
-> > >>>> +++ b/board/raspberrypi/rpi/rpi.c
-> > >>>> @@ -63,6 +63,28 @@ struct msg_get_clock_rate {
-> > >>>>          u32 end_tag;
-> > >>>>   };
-> > >>>>
-> > >>>> +struct efi_fw_image fw_images[] = {
-> > >>>> +       {
-> > >>>> +               .fw_name = u"RPI_UBOOT",
-> > >>>> +               .image_index = 1,
-> > >>>> +       },
-> > >>>> +};
-> > >>>> +
-> > >>>> +struct efi_capsule_update_info update_info = {
-> > >>>> +       .dfu_string = "mmc 0=u-boot.bin fat 0 1",
-> > >>>> +       .num_images = ARRAY_SIZE(fw_images),
-> > >>>> +       .images = fw_images,
-> > >>>> +};
-> > >>>> +
-> > >>>> +#if IS_ENABLED(CONFIG_SET_DFU_ALT_INFO)
-> > >>>> +void set_dfu_alt_info(char *interface, char *devstr)
-> > >>>> +{
-> > >>>> +       if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
-> > >>>> +               env_set("dfu_alt_info", update_info.dfu_string);
-> > >>>> +}
-> > >>>> +#endif
-> > >>>
-> > >>> Is this really needed? We have a weak function in efi_firrmware.c
-> > >>> which is doing exactly this.
-> > >>>
-> > >>>> +
-> > >>>> +
-> > >>>>   #ifdef CONFIG_ARM64
-> > >>>>   #define DTB_DIR "broadcom/"
-> > >>>>   #else
-> > >>>> diff --git a/configs/rpi_4_defconfig b/configs/rpi_4_defconfig
-> > >>>> index f5fb322aa8fc..c70414e6fcaf 100644
-> > >>>> --- a/configs/rpi_4_defconfig
-> > >>>> +++ b/configs/rpi_4_defconfig
-> > >>>> @@ -65,3 +65,5 @@ CONFIG_SYS_WHITE_ON_BLACK=y
-> > >>>>   CONFIG_VIDEO_BCM2835=y
-> > >>>>   CONFIG_CONSOLE_SCROLL_LINES=10
-> > >>>>   CONFIG_PHYS_TO_BUS=y
-> > >>>> +CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
-> > >>>> +CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
-> > >>>
-> > >>> Can we also add the efidebug and efi nvedit commands here. They are
-> > >>> pretty handy especially when it comes to capsule updates. Thanks.
-> > >>
-> > >> Are they pretty handy for capsule updates for general users when
-> > >> things should "just work", as a user applies them from Linux with
-> > >> fwupdmgr and reboots, or for firmwre developers trying to debug
-> > >> things? If it's the later I don't think we should be enabling them by
-> > >> default :)
-> > >
-> > > nvedit lets you print and see EFI variables, which is pretty basic if
-> > > you want to boot with efi.
-> > > efidebug is supposed to be a debug tool mostly, but unfortunately, we
-> > > havent plugged in EFI HTTP boot into the 'eficonfig' command yet. So
-> > > the only way you can add a boot option for HTTP is via efidebug
-> > >
-> >
-> > I don't really understand why you are mentioning EFI HTTP. >
->
-> Because I misread Peters's question and assumed he was asking if it
-> was for capsules only or useful overall as a tool.
->
-> > From what I can see
-> > we need efidebug to be able to do capsule updates from U-Boot command line.
->
-> Updating via the command line is for debugging only. The capsule
-> updates execute automatically after a reboot if a variable
-> (OsIndications) is set properly or you enable
-> CONFIG_EFI_IGNORE_OSINDICATIONS and have a boot entry pointing to the
-> same ESP where the capsule is located. But that's a bit complicated
-> atm, look below.
+Fixes: b91a0822d752 ("mtd: spi-nor: Add CHIP_ERASE optimization")
 
-The above is only true if CONFIG_EFI_CAPSULE_ON_DISK, which I've
-intentionally left out. Only runtime capsule update is selected, which
-requires efidebug or an EFI app.
+Signed-off-by: Ye Li <ye.li@nxp.com>
+---
+Changes in v2:
+ - use do_div for u64
+ - Keep the variables in reverse xmas-tree
+ - Add kernel commit info
+ 
+ drivers/mtd/spi/spi-nor-core.c | 21 ++++++++++++++++++++-
+ 1 file changed, 20 insertions(+), 1 deletion(-)
 
->
-> > It is also needed for EFI HTTP boot but this needs CONFIG_EFI_HTTP_BOOT which we
-> > don't enable (and I think is out-of-scope for capsule update).
-> >
-> > /me is puzzled :)
->
-> Fair enough. We could make it default tbh. It depends on how much
-> 'efi' you prefer in the defconfig. But that belongs on a different
-> patchset.
->
-> Something completely irrelevant to efidebug, but related to capsule updates.
-> Capsule updates,  in order to work with tools like fwupd etc, either
-> need commits 00da8d65a3ba and bc3dd2493ef8 and c28d32f946f0 and
-> https://github.com/rhboot/efivar/pull/267 or enable
-> CONFIG_EFI_IGNORE_OSINDICATIONS. Since the latter is a hack I was
-> going to enable SetVariable at Runtime once the userspace patches get
-> merged and sorted. Keep in mind there's a v3 out which I managed to
-> test with rpi5. FWIW still think efidebug is useful and needs to be
-> around regardless of capsules or not.
-> What we could do in v4 is enable CONFIG_EFI_IGNORE_OSINDICATIONS, but
-> I would prefer to wait for the efivar pathes to merge and just enable
-> setvariable at runtime.
->
+diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
+index ce01d42cfe0f..83335b235605 100644
+--- a/drivers/mtd/spi/spi-nor-core.c
++++ b/drivers/mtd/spi/spi-nor-core.c
+@@ -45,6 +45,12 @@
+ 
+ #define DEFAULT_READY_WAIT_JIFFIES		(40UL * HZ)
+ 
++/*
++ * For full-chip erase, calibrated to a 2MB flash (M25P16); should be scaled up
++ * for larger flash
++ */
++#define CHIP_ERASE_2MB_READY_WAIT_JIFFIES	(40UL * HZ)
++
+ #define ROUND_UP_TO(x, y)	(((x) + (y) - 1) / (y) * (y))
+ 
+ struct sfdp_parameter_header {
+@@ -990,7 +996,9 @@ static int spi_nor_erase_sector(struct spi_nor *nor, u32 addr)
+ static int spi_nor_erase(struct mtd_info *mtd, struct erase_info *instr)
+ {
+ 	struct spi_nor *nor = mtd_to_spi_nor(mtd);
++	unsigned long timeout = 0;
+ 	bool addr_known = false;
++	u64 sz = mtd->size;
+ 	u32 addr, len, rem;
+ 	int ret, err;
+ 
+@@ -1028,6 +1036,14 @@ static int spi_nor_erase(struct mtd_info *mtd, struct erase_info *instr)
+ 		if (len == mtd->size &&
+ 		    !(nor->flags & SNOR_F_NO_OP_CHIP_ERASE)) {
+ 			ret = spi_nor_erase_chip(nor);
++			/*
++			 * Scale the timeout linearly with the size of the flash, with
++			 * a minimum calibrated to an old 2MB flash. We could try to
++			 * pull these from CFI/SFDP, but these values should be good
++			 * enough for now.
++			 */
++			do_div(sz, SZ_2M);
++			timeout = CHIP_ERASE_2MB_READY_WAIT_JIFFIES * max(1ULL, sz);
+ 		} else {
+ 			ret = spi_nor_erase_sector(nor, addr);
+ 		}
+@@ -1037,7 +1053,10 @@ static int spi_nor_erase(struct mtd_info *mtd, struct erase_info *instr)
+ 		addr += ret;
+ 		len -= ret;
+ 
+-		ret = spi_nor_wait_till_ready(nor);
++		if (timeout)
++			ret = spi_nor_wait_till_ready_with_timeout(nor, timeout);
++		else
++			ret = spi_nor_wait_till_ready(nor);
+ 		if (ret)
+ 			goto erase_err;
+ 	}
+-- 
+2.7.4
 
-Also, all these apply to CONFIG_EFI_CAPSULE_ON_DISK only, which I will
-enable once the efivar are merged
-
-Sorry for the confusion!
-/Ilias
-
-> Thanks
-> /Ilias
->
-> >
-> > Regards,
-> > Matthias
