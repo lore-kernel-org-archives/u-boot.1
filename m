@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96D10FA3736
-	for <u-boot@archiver.kernel.org>; Fri, 13 Sep 2024 09:57:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54AF0FA373A
+	for <u-boot@archiver.kernel.org>; Fri, 13 Sep 2024 09:57:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D51688C10;
-	Fri, 13 Sep 2024 11:57:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A0B8E88C37;
+	Fri, 13 Sep 2024 11:57:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="AE1p+oh4";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="mYkWdXtg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53B3488CAE; Fri, 13 Sep 2024 11:57:07 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 36A1E88BC0; Fri, 13 Sep 2024 11:57:09 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C49C388C30
- for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 11:57:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 371E588C59
+ for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 11:57:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a8d2daa2262so73638566b.1
- for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 02:57:02 -0700 (PDT)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-5c241feb80dso5836538a12.0
+ for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 02:57:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1726221422; x=1726826222;
+ d=amarulasolutions.com; s=google; t=1726221424; x=1726826224;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YX5eqLwY3E1X9i2vX7+YausFj30i2Y01yBnLyTg+prA=;
- b=AE1p+oh4vYXgSfbTAZPLHWm8xZQFOziIsUpEdmWqggLoq3uCzngSU6Iy/mA41WmSz7
- 65Dia2TzQqb9obfWfk0Wfu8rHwQ2Q4mqSGRU9w9rSNGxFmATK+RfovUU7hFppO7ua6OI
- AAxX0vc5SNllw791UOajfU4bK8YDFzM+FIto8=
+ bh=o+wxQULqTeVZWboi9dNaAJm4xPm5Im/JzcL1kgm415c=;
+ b=mYkWdXtg+mjslVVuFUwGUDQW5oP2CJ/piLLFbVxfr+H52YoL3y1eJhiLBLTL9OlJgn
+ 4w7IfVi1hUKqi0mK0heAvS1m9RM6/tJgmHH3LrO7zWZNP7ZcAX0ulpkbxB2Eo2CWu1i3
+ 7ib7SIDqwx6BwAF2Aj20kU+/oK26eJPegL4e0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726221422; x=1726826222;
+ d=1e100.net; s=20230601; t=1726221424; x=1726826224;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YX5eqLwY3E1X9i2vX7+YausFj30i2Y01yBnLyTg+prA=;
- b=ruvK2/CpovyiIdqOz7sY2GP+Oi9HL7W0aT7b/igk/dAYIL7FVd5Fs/40pdj/N5gmp+
- igxLgbjZArfodzyoHoygPRvh5zl5HNZLSTd1RLh0+0vEcALMMBW/mskRSBqkVV+yPKE9
- VU7oZkPIdq/GiHelq6xyxj5Ld5Q2pyKndPJrTC0eSpoW5RrIBeII14xVJ0w6nXbpQZG2
- I6MqMBdzEEOoPXgch9gLa7HoeUm+tyGi1EanXnzSJGfeMpZXDaUudtWSrJ+NzmH/JtpJ
- W7qh6KipY3jGUJgAJ9kQRfp2uA6bUQMJaER7HjkIHlo0NfDsjmfyVsAUDnjTZJw6tFAs
- Lyug==
-X-Gm-Message-State: AOJu0YzmTLeFKGbxkGfvaTkIpAhQEgTYEVXP5qVPmIiBjnibEAiBLYN0
- EbE6hgpJTHGG4E/akb19DLpbhoVE5VBHFYyV8x05crMF1P7njLnYlMBkZvUoOf98/S59l5LRhnD
- yjDQ=
-X-Google-Smtp-Source: AGHT+IEPLtzawOYeqKAfKEPdhaJXaMHnCmggooUE9darZu/TZjOX5E+evKTPdAV+olVTJY6XpRiKFQ==
-X-Received: by 2002:a17:907:7f8a:b0:a8a:572c:709f with SMTP id
- a640c23a62f3a-a9047b4815emr154574166b.5.1726221421922; 
- Fri, 13 Sep 2024 02:57:01 -0700 (PDT)
+ bh=o+wxQULqTeVZWboi9dNaAJm4xPm5Im/JzcL1kgm415c=;
+ b=CXfl5O2wrgDDCpqnwTlQtwSVyAcbbvrHLVTDQoQR9Q5OoBeMj1pxNQ5D4JLz/jvOfo
+ /hvcV7rbxzPcZJJSLnD7bdd6m0ZouphRWi96cNaJhiV00J8wxLdufOsgWuZSKLmhu5Nr
+ 9IsHiJXVX70tYQU5y1wE3kGqiKWOStpJTMWUqM3wrzgY7pApxGavBpUhXr0CL8XmKbOP
+ a85kat/IX+gEHqer8iK4jWcSlY7f53G6Y2iwF9PaCNcA7kK2KlN/qz70l0ifUG543u38
+ VDCv0B0E5ADlJbknwgIAMOi2IW521ea+HEtNsVmhgDgZ5WB2giY6kWUII5RIxc5Yh+D8
+ 8Cww==
+X-Gm-Message-State: AOJu0YxLBdE7g0P8FTcbmBqh6NtHS2R5L3Y5tl8sr1ehvK2+Loy5kNI+
+ fy7PVxfyL2G8+bUNxKHODxs9aLYoo2GkvmT6yrO5ylrTll95u/nC4JG3n3EZDub8aVpXCdDvn4N
+ CJpw=
+X-Google-Smtp-Source: AGHT+IH3+YuzeG6jwlrgdPU2vP17jIezHu3xUvue/ahkwFNpwa4sboJmwN9DbNFz7ViuyzrYIvmPcw==
+X-Received: by 2002:a17:907:1c1b:b0:a8d:4e69:4030 with SMTP id
+ a640c23a62f3a-a8ffabc2359mr1172142966b.19.1726221424382; 
+ Fri, 13 Sep 2024 02:57:04 -0700 (PDT)
 Received: from dario-ThinkPad-T14s-Gen-2i.homenet.telecomitalia.it
  (host-87-4-102-18.retail.telecomitalia.it. [87.4.102.18])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a8d25cee72bsm863224766b.173.2024.09.13.02.57.01
+ a640c23a62f3a-a8d25cee72bsm863224766b.173.2024.09.13.02.57.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Sep 2024 02:57:01 -0700 (PDT)
+ Fri, 13 Sep 2024 02:57:04 -0700 (PDT)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: Fabio Estevam <festevam@denx.de>, linux-amarula@amarulasolutions.com,
  michael@amarulasolutions.com, Miquel Raynal <miquel.raynal@bootlin.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Fabio Estevam <festevam@gmail.com>, Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
- Lukasz Majewski <lukma@denx.de>,
- Nicolas Heemeryck <nicolas.heemeryck@devialet.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Julien Masson <jmasson@baylibre.com>, Lukasz Majewski <lukma@denx.de>,
+ Maksim Kiselev <bigunclemax@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
  Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 02/26] clk: imx8mn: Prevent clock critical path from disabling
- during reparent and set_rate
-Date: Fri, 13 Sep 2024 11:55:44 +0200
-Message-ID: <20240913095622.72377-3-dario.binacchi@amarulasolutions.com>
+Subject: [PATCH 04/26] clk: clk-uclass: Implement CLK_OPS_PARENT_ENABLE
+Date: Fri, 13 Sep 2024 11:55:46 +0200
+Message-ID: <20240913095622.72377-5-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240913095622.72377-1-dario.binacchi@amarulasolutions.com>
 References: <20240913095622.72377-1-dario.binacchi@amarulasolutions.com>
@@ -100,84 +102,101 @@ X-Virus-Status: Clean
 
 From: Michael Trimarchi <michael@amarulasolutions.com>
 
-This commit ensures that critical clock paths are not disabled during
-reparent and set_rate operations within the clock framework, paving the
-way for the inclusion of new features.
+There are scenario that we need to enable the new parent clock
+before reparent, or we need to do the same with clk_set_rate. The
+patch cover those scenario
 
 Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 ---
 
- drivers/clk/imx/clk-imx8mn.c | 26 +++++++++++++++++++++-----
- 1 file changed, 21 insertions(+), 5 deletions(-)
+ drivers/clk/clk-uclass.c | 47 +++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 46 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/clk/imx/clk-imx8mn.c b/drivers/clk/imx/clk-imx8mn.c
-index 125215e84f41..c96a2ebaa19a 100644
---- a/drivers/clk/imx/clk-imx8mn.c
-+++ b/drivers/clk/imx/clk-imx8mn.c
-@@ -29,10 +29,19 @@ static const char * const imx8mn_a53_sels[] = {"clock-osc-24m", "arm_pll_out", "
- 					       "sys_pll2_1000m", "sys_pll1_800m", "sys_pll1_400m",
- 					       "audio_pll1_out", "sys_pll3_out", };
+diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
+index e8db9b0ff2fd..b571a3620222 100644
+--- a/drivers/clk/clk-uclass.c
++++ b/drivers/clk/clk-uclass.c
+@@ -582,7 +582,9 @@ static void clk_clean_rate_cache(struct clk *clk)
+ ulong clk_set_rate(struct clk *clk, ulong rate)
+ {
+ 	const struct clk_ops *ops;
++	struct clk *pclk;
+ 	struct clk *clkp;
++	ulong ret;
  
-+static const char * const imx8mn_noc_sels[] = {"osc_24m", "sys_pll1_800m", "sys_pll3_out",
-+					       "sys_pll2_1000m", "sys_pll2_500m", "audio_pll1_out",
-+					       "video_pll_out", "audio_pll2_out", };
+ 	debug("%s(clk=%p, rate=%lu)\n", __func__, clk, rate);
+ 	if (!clk_valid(clk))
+@@ -597,11 +599,37 @@ ulong clk_set_rate(struct clk *clk, ulong rate)
+ 	/* Clean up cached rates for us and all child clocks */
+ 	clk_clean_rate_cache(clkp);
+ 
+-	return ops->set_rate(clk, rate);
++	if (clk->flags & CLK_SET_RATE_UNGATE) {
++		ret = clk_enable(clk);
++		if (ret)
++			return ret;
++	}
 +
- static const char * const imx8mn_ahb_sels[] = {"clock-osc-24m", "sys_pll1_133m", "sys_pll1_800m",
- 					       "sys_pll1_400m", "sys_pll2_125m", "sys_pll3_out",
- 					       "audio_pll1_out", "video_pll_out", };
- 
-+static const char * const imx8mn_main_axi_sels[] = {"osc_24m", "sys_pll2_333m", "sys_pll1_800m",
-+						    "sys_pll2_250m", "sys_pll2_1000m",
-+						    "audio_pll1_out", "video_pll_out",
-+						    "sys_pll1_100m",};
++	pclk = clk_get_parent(clk);
++	if (pclk) {
++		if (clk->flags & CLK_OPS_PARENT_ENABLE) {
++			ret = clk_enable(pclk);
++			if (ret)
++				goto out;
++		}
++	}
 +
- static const char * const imx8mn_enet_axi_sels[] = {"clock-osc-24m", "sys_pll1_266m", "sys_pll1_800m",
- 						    "sys_pll2_250m", "sys_pll2_200m", "audio_pll1_out",
- 						    "video_pll_out", "sys_pll3_out", };
-@@ -67,6 +76,9 @@ static const char * const imx8mn_usdhc2_sels[] = {"clock-osc-24m", "sys_pll1_400
- 						  "sys_pll2_500m", "sys_pll3_out", "sys_pll1_266m",
- 						  "audio_pll2_out", "sys_pll1_100m", };
++	ret = ops->set_rate(clk, rate);
++
++	if (pclk && clk->flags & CLK_OPS_PARENT_ENABLE)
++		clk_disable(pclk);
++
++out:
++	if (clk->flags & CLK_SET_RATE_UNGATE)
++		clk_disable(clk);
++
++	return ret;
+ }
  
-+static const char * const imx8mn_gic_sels[] = {"clock-osc-24m", "sys_pll2_200m", "sys_pll1_40m",
-+					       "sys_pll2_100m", "sys_pll1_800m", "clk_ext2",
-+					       "clk_ext4", "audio_pll2_out" };
- #if CONFIG_IS_ENABLED(DM_SPI)
- static const char * const imx8mn_ecspi1_sels[] = {"clock-osc-24m", "sys_pll2_200m", "sys_pll1_40m",
- 						  "sys_pll1_160m", "sys_pll1_800m", "sys_pll3_out",
-@@ -286,15 +298,18 @@ static int imx8mn_clk_probe(struct udevice *dev)
- 	clk_dm(IMX8MN_CLK_IPG_ROOT,
- 	       imx_clk_divider2("ipg_root", "ahb", base + 0x9080, 0, 1));
+ int clk_set_parent(struct clk *clk, struct clk *parent)
+ {
++	struct clk *old_parent;
++
+ 	const struct clk_ops *ops;
+ 	int ret;
  
-+	/* BUS */
-+	clk_dm(IMX8MN_CLK_MAIN_AXI,
-+	       imx8m_clk_composite_critical("main_axi", imx8mn_main_axi_sels, base + 0x8800));
- 	clk_dm(IMX8MN_CLK_ENET_AXI,
--	       imx8m_clk_composite("enet_axi", imx8mn_enet_axi_sels,
--				   base + 0x8880));
-+	       imx8m_clk_composite("enet_axi", imx8mn_enet_axi_sels, base + 0x8880));
- 	clk_dm(IMX8MN_CLK_NAND_USDHC_BUS,
--	       imx8m_clk_composite_critical("nand_usdhc_bus",
--					    imx8mn_nand_usdhc_sels,
-+	       imx8m_clk_composite_critical("nand_usdhc_bus", imx8mn_nand_usdhc_sels,
- 					    base + 0x8900));
- 	clk_dm(IMX8MN_CLK_USB_BUS,
- 		imx8m_clk_composite("usb_bus", imx8mn_usb_bus_sels, base + 0x8b80));
-+	clk_dm(IMX8MN_CLK_NOC,
-+	       imx8m_clk_composite_critical("noc", imx8mn_noc_sels, base + 0x8d00));
+@@ -613,6 +641,15 @@ int clk_set_parent(struct clk *clk, struct clk *parent)
+ 	if (!ops->set_parent)
+ 		return -ENOSYS;
  
- 	/* IP */
- 	clk_dm(IMX8MN_CLK_USDHC1,
-@@ -389,7 +404,8 @@ static int imx8mn_clk_probe(struct udevice *dev)
- 	clk_dm(IMX8MN_CLK_PWM4_ROOT,
- 	       imx_clk_gate4("pwm4_root_clk", "pwm4", base + 0x42b0, 0));
- #endif
--
-+	clk_dm(IMX8MN_CLK_GIC,
-+	       imx8m_clk_composite_critical("gic", imx8mn_gic_sels, base + 0xb200));
- #if CONFIG_IS_ENABLED(DM_SPI)
- 	clk_dm(IMX8MN_CLK_ECSPI1,
- 	       imx8m_clk_composite("ecspi1", imx8mn_ecspi1_sels, base + 0xb280));
++	if (clk->enable_count)
++		clk_enable(parent);
++
++	old_parent = clk_get_parent(clk);
++	if (clk->flags & CLK_OPS_PARENT_ENABLE) {
++		clk_enable(old_parent);
++		clk_enable(parent);
++	}
++
+ 	ret = ops->set_parent(clk, parent);
+ 	if (ret)
+ 		return ret;
+@@ -620,6 +657,14 @@ int clk_set_parent(struct clk *clk, struct clk *parent)
+ 	if (CONFIG_IS_ENABLED(CLK_CCF))
+ 		ret = device_reparent(clk->dev, parent->dev);
+ 
++	if (clk->flags & CLK_OPS_PARENT_ENABLE) {
++		clk_disable(parent);
++		clk_disable(old_parent);
++	}
++
++	if (clk->enable_count)
++		clk_disable(old_parent);
++
+ 	return ret;
+ }
+ 
 -- 
 2.43.0
 
