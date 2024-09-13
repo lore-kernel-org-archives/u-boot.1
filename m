@@ -4,97 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 093A2FC6186
-	for <u-boot@archiver.kernel.org>; Sat, 14 Sep 2024 01:08:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4347DFC6185
+	for <u-boot@archiver.kernel.org>; Sat, 14 Sep 2024 01:08:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1136488E41;
+	by phobos.denx.de (Postfix) with ESMTP id 7564F88E49;
 	Sat, 14 Sep 2024 03:04:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="D7ctFR4g";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mMqeKXaT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86B9288706; Fri, 13 Sep 2024 18:14:35 +0200 (CEST)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
+ id 6AE3488706; Fri, 13 Sep 2024 18:15:03 +0200 (CEST)
+Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
+ [IPv6:2607:f8b0:4864:20::b35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D43788B27
- for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 18:14:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 179CF88B55
+ for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 18:15:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-6c3f12d3930so18592026d6.3
- for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 09:14:33 -0700 (PDT)
+Received: by mail-yb1-xb35.google.com with SMTP id
+ 3f1490d57ef6-e1a74ee4c0cso2138421276.2
+ for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 09:15:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726244072; x=1726848872; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1726244100; x=1726848900; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=B9LygqglF0ThxTYqVdMNTM1skkdSKM9+b3v5KJ+3abY=;
- b=D7ctFR4gm7z6fgWf3JIpLp6SMskpAUlD76lNOK9HoRabh8uAOCKo+ma7w4nnd4gN1r
- ntQbZTMafRjGTpxTWPe26JcMu3ISUBIIqizz5cWJvfpuzW+es2HouBCepxtWCYrJV0GU
- 6AAWWRaEV/UCYP9gPb0h0KVxvJIC4vzm05eufwnoiZ7Tg22eXIF64jDJk8RXOzwN3Z2V
- NDmBsm8R2ltO++a2OAijQgbD+eHnaJweu2N0IWDIoU0SFshRmBjynmV0AFBi9x6BJz5B
- DVh41MTEMXUqr37vX3bMN5OBmtPx4xL5GrTyRmVhcLUJLmVB9arqo6sSeINlRludfU+N
- ax1g==
+ bh=jE2jnGuKbjiAx7qdIx88k8xG0grZjOZvSDgjRmw59lY=;
+ b=mMqeKXaTnU7WctPb8bB7j0PKFd1uw687FvUrU+5Qm+DhAPFqFGgvSUJY9+pTaSn1jc
+ YPn9ZmCxRGoADGbxg+eCb2jwkD5ite2v1aWWtNv44wFm78GiXOfyo1OZhr9YD6AR8lbs
+ d9JOWVyANcPRWWyqrCEoE7XTJrjd7HfNjC/LDdQaQ2ItpZbfkpkL/cKzaOs1vorbPXoU
+ sP35sWp4MhQnSHiWmjkCPJ/+vFJrs3hzeua6bt7+oQEVMY5L7j+aEdm7ygnlJLhQi5si
+ 5uDxc6gryI797TVAp+qVp45YRrDcw+Yq2U+WSc+90LUvgMZbqylQNZPI+M/Ghrho0YQa
+ OEmA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726244072; x=1726848872;
+ d=1e100.net; s=20230601; t=1726244100; x=1726848900;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=B9LygqglF0ThxTYqVdMNTM1skkdSKM9+b3v5KJ+3abY=;
- b=apuwEtnp9SrXy6CfTeTV+zKqSHMrXSp/TZJ/waLapAe1GjuVI2Wj7cLpSobayMFJ+A
- q7Sr8lRrWw91a6+CM9nwCgyVnhNKkrMva5zOXXM6SKG7vwbCjrEd+tlX3kf6nGSbfBWq
- pKXwfoutMnOXFYxGXSMuBwRsUFYFBk+TETJoR7wzURb6D5q9atncTzSo0CxCzZt2cp80
- DDPUjfnEgTPVAM9csFBraS4/YtUYzUsZZSkuZC+7Tm3MuX5cTgHpWkrWTxuNrOU/YE06
- GPmykYtztTb0zMv1gaptE9OhLvwqd/xyMuvvrynFy3f92MvhCZefiKgSzEgF35xvvjbi
- l+YA==
-X-Gm-Message-State: AOJu0YyezbfZlY7Ags/dmLRTUfSN5Iiz3iRlkTpVgyqnPG1/Lvs+4+gh
- w3kbIBbOCA/cG90Y85/78xcpQzCX3v4EMBiZy/CGvfeZkc62RCSbCNUx/mh9Xu+LI7DdGEcx+W7
- m
-X-Google-Smtp-Source: AGHT+IGNR6Tdi94z7VRB4EItqygjktzsk/On1+72aZv6Iq/yQenxiuYfUSdCBW/87yUPtTEkZVzy5g==
-X-Received: by 2002:a0c:f40e:0:b0:6c5:3b71:c7b4 with SMTP id
- 6a1803df08f44-6c573803c2amr80519886d6.53.1726244072105; 
- Fri, 13 Sep 2024 09:14:32 -0700 (PDT)
+ bh=jE2jnGuKbjiAx7qdIx88k8xG0grZjOZvSDgjRmw59lY=;
+ b=KNqcyWvLkzbpcX8GzUF4jocuxWk4U4pwesJWpoMhGfa395kF4yZWu1VHsUBtHF6mhR
+ 5lywkkiFEjqiAmsaGUStF7iLCryMcgv7FPhFqGCHvfHm181lvnY2M8uIlOn+DV5ypKSS
+ HNSf0wxJWz7InOk2/rYxxZgriy1NI/f75fwc7zEw+h6LUwvc2K9spzbJiGmQWXWRAFml
+ K6+OXlyn0f+TInlaT2i6hS5b4It6jnmDokUTC1yBn8Y8c66xd2vduAb8y5Sp22RonJOR
+ WcDyk4fsk6CUJYV/CfXMyFmVyCXOEXucHpOCUMM+qBzZNvb5/f2e1DwYgwPJ+NZr2z5u
+ 570w==
+X-Gm-Message-State: AOJu0YwISMW0rNg6kJkMd+5dV98Ij849dIu4GjckR/iFHQlmadzOXk5W
+ G/4X4wlv+Tk4qPWctsgEj2V2Po2fzRN9pNaIwshY9fvhUArU+1YHu9vfPBphHts+26IQ5AcH4+4
+ W
+X-Google-Smtp-Source: AGHT+IFr/68PcaCjxqNiknermyWS6jV8Zxa7uanLICmOSgnarcrU6GI5NMJMZ0fpVbbUsBpp/Xl+rg==
+X-Received: by 2002:a05:6902:70a:b0:e1d:ad2d:1a70 with SMTP id
+ 3f1490d57ef6-e1dad2d1c4dmr4375536276.35.1726244099619; 
+ Fri, 13 Sep 2024 09:14:59 -0700 (PDT)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6c534774908sm67697286d6.118.2024.09.13.09.14.30
+ 6a1803df08f44-6c534774908sm67697286d6.118.2024.09.13.09.14.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Sep 2024 09:14:31 -0700 (PDT)
+ Fri, 13 Sep 2024 09:14:59 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: manish.pandey2@arm.com, Raymond Mao <raymond.mao@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
  Mario Six <mario.six@gdsys.cc>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
  Michal Simek <michal.simek@amd.com>,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
  Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Sean Anderson <seanga2@gmail.com>,
  Leo Yu-Chi Liang <ycliang@andestech.com>,
- Sumit Garg <sumit.garg@linaro.org>, Sean Anderson <seanga2@gmail.com>,
- Andrew Davis <afd@ti.com>, Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Sumit Garg <sumit.garg@linaro.org>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Andrew Davis <afd@ti.com>,
  Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
  "Leon M. Busch-George" <leon@georgemail.eu>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Marek Vasut <marex@denx.de>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Marek Vasut <marex@denx.de>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
  Alexander Gendin <agendin@matrox.com>,
  Jonathan Humphreys <j-humphreys@ti.com>,
  Paul Barker <paul.barker.ct@bp.renesas.com>,
- Jonas Karlman <jonas@kwiboo.se>, Kongyang Liu <seashell11234455@gmail.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Ian Roberts <ian.roberts@timesys.com>,
+ Linus Walleij <linus.walleij@linaro.org>,
  Greg Malysa <greg.malysa@timesys.com>,
+ Kongyang Liu <seashell11234455@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Bin Meng <bmeng.cn@gmail.com>
-Subject: [PATCH v7 22/27] lib/crypto: Adapt mscode_parser to MbedTLS
-Date: Fri, 13 Sep 2024 09:03:39 -0700
-Message-Id: <20240913160408.2199558-23-raymond.mao@linaro.org>
+Subject: [PATCH v7 23/27] mbedtls: add RSA helper layer on MbedTLS
+Date: Fri, 13 Sep 2024 09:03:40 -0700
+Message-Id: <20240913160408.2199558-24-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240913160408.2199558-1-raymond.mao@linaro.org>
 References: <20240913160408.2199558-1-raymond.mao@linaro.org>
@@ -117,86 +121,251 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Previous patch has introduced MbedTLS porting layer for mscode parser,
-here to adjust the header and makefiles accordingly.
-Adding _LEGACY Kconfig for legacy mscode implementation.
+Add RSA helper layer on top on MbedTLS PK and RSA library.
+Introduce _LEGACY and _MBEDTLS kconfigs for RSA helper legacy and
+MbedTLS implementations respectively.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 Changes in v2
-- Move the porting layer to MbedTLS dir.
+- Initial patch.
 Changes in v3
-- Update commit message.
+- None.
 Changes in v4
-- Control building legacy library via '_LEGACY' Kconfig.
+- Introduce _LEGACY and _MBEDTLS kconfigs for RSA helper legacy and
+  MbedTLS implementations respectively.
+- Remove unnecessary type casting.
 Changes in v5
-- Add kconfig for legacy mscode parser.
 - Correct header file include directories.
+- Correct kconfig dependence.
+- Kconfig rename.
+- Refactored MbedTLS makefile.
 Changes in v6
 - None.
 Changes in v7
 - None.
 
- include/crypto/mscode.h | 4 ++++
- lib/crypto/Makefile     | 2 +-
- lib/mbedtls/Kconfig     | 9 +++++++++
- 3 files changed, 14 insertions(+), 1 deletion(-)
+ lib/mbedtls/Kconfig      | 36 +++++++++++++++
+ lib/mbedtls/Makefile     |  3 +-
+ lib/mbedtls/rsa_helper.c | 95 ++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 133 insertions(+), 1 deletion(-)
+ create mode 100644 lib/mbedtls/rsa_helper.c
 
-diff --git a/include/crypto/mscode.h b/include/crypto/mscode.h
-index 551058b96e6..678e69001b9 100644
---- a/include/crypto/mscode.h
-+++ b/include/crypto/mscode.h
-@@ -9,6 +9,10 @@
- #ifndef __UBOOT__
- #include <crypto/hash_info.h>
- #endif
-+#if CONFIG_IS_ENABLED(MBEDTLS_LIB_X509)
-+#include <mbedtls/asn1.h>
-+#include <mbedtls/oid.h>
-+#endif
- 
- struct pefile_context {
- #ifndef __UBOOT__
-diff --git a/lib/crypto/Makefile b/lib/crypto/Makefile
-index 7129315393f..3caa45dc2a8 100644
---- a/lib/crypto/Makefile
-+++ b/lib/crypto/Makefile
-@@ -63,7 +63,7 @@ obj-$(CONFIG_$(SPL_)PKCS7_VERIFY) += pkcs7_verify.o
- #
- # Signed PE binary-wrapped key handling
- #
--obj-$(CONFIG_$(SPL_)MSCODE_PARSER) += mscode.o
-+obj-$(CONFIG_$(SPL_)MSCODE_PARSER_LEGACY) += mscode.o
- 
- mscode-y := \
- 	mscode_parser.o \
 diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
-index e6139eb8f8b..f60bb140bd9 100644
+index f60bb140bd9..77959f01fdd 100644
 --- a/lib/mbedtls/Kconfig
 +++ b/lib/mbedtls/Kconfig
-@@ -121,6 +121,7 @@ config LEGACY_CRYPTO_CERT
+@@ -119,11 +119,13 @@ config LEGACY_CRYPTO_CERT
+ 	bool "legacy certificate libraries"
+ 	select ASYMMETRIC_PUBLIC_KEY_LEGACY if \
  		ASYMMETRIC_PUBLIC_KEY_SUBTYPE
++	select RSA_PUBLIC_KEY_PARSER_LEGACY if RSA_PUBLIC_KEY_PARSER
  	select X509_CERTIFICATE_PARSER_LEGACY if X509_CERTIFICATE_PARSER
  	select PKCS7_MESSAGE_PARSER_LEGACY if PKCS7_MESSAGE_PARSER
-+	select MSCODE_PARSER_LEGACY if MSCODE_PARSER
+ 	select MSCODE_PARSER_LEGACY if MSCODE_PARSER
  	select SPL_ASYMMETRIC_PUBLIC_KEY_LEGACY if \
  		SPL_ASYMMETRIC_PUBLIC_KEY_SUBTYPE
++	select SPL_RSA_PUBLIC_KEY_PARSER_LEGACY if SPL_RSA_PUBLIC_KEY_PARSER
  	help
-@@ -151,6 +152,14 @@ config PKCS7_MESSAGE_PARSER_LEGACY
- 	  This option chooses legacy certificate library for PKCS7 message
- 	  parser.
+ 	  Enable legacy certificate libraries.
  
-+config MSCODE_PARSER_LEGACY
-+	bool "MS authenticode parser with legacy certificate library"
-+	depends on LEGACY_CRYPTO_CERT && MSCODE_PARSER
+@@ -136,6 +138,14 @@ config ASYMMETRIC_PUBLIC_KEY_LEGACY
+ 	  This option chooses legacy certificate library for asymmetric public
+ 	  key crypto algorithm.
+ 
++config RSA_PUBLIC_KEY_PARSER_LEGACY
++	bool "RSA public key parser with legacy certificate library"
++	depends on ASYMMETRIC_PUBLIC_KEY_LEGACY
 +	select ASN1_DECODER_LEGACY
 +	help
-+	  This option chooses legacy certificate library for MS authenticode
++	  This option chooses legacy certificate library for RSA public key
 +	  parser.
 +
- if SPL
+ config X509_CERTIFICATE_PARSER_LEGACY
+ 	bool "X.509 certificate parser with legacy certificate library"
+ 	depends on ASYMMETRIC_PUBLIC_KEY_LEGACY
+@@ -169,6 +179,14 @@ config SPL_ASYMMETRIC_PUBLIC_KEY_LEGACY
+ 	  This option chooses legacy certificate library for asymmetric public
+ 	  key crypto algorithm in SPL.
  
- config SPL_ASYMMETRIC_PUBLIC_KEY_LEGACY
++config SPL_RSA_PUBLIC_KEY_PARSER_LEGACY
++	bool "RSA public key parser with legacy certificate library in SPL"
++	depends on SPL_ASYMMETRIC_PUBLIC_KEY_LEGACY
++	select SPL_ASN1_DECODER_LEGACY
++	help
++	  This option chooses legacy certificate library for RSA public key
++	  parser in SPL.
++
+ endif # SPL
+ 
+ endif # LEGACY_CRYPTO_CERT
+@@ -301,11 +319,13 @@ config MBEDTLS_LIB_X509
+ 	bool "MbedTLS certificate libraries"
+ 	select ASYMMETRIC_PUBLIC_KEY_MBEDTLS if \
+ 		ASYMMETRIC_PUBLIC_KEY_SUBTYPE
++	select RSA_PUBLIC_KEY_PARSER_MBEDTLS if RSA_PUBLIC_KEY_PARSER
+ 	select X509_CERTIFICATE_PARSER_MBEDTLS if X509_CERTIFICATE_PARSER
+ 	select PKCS7_MESSAGE_PARSER_MBEDTLS if PKCS7_MESSAGE_PARSER
+ 	select MSCODE_PARSER_MBEDTLS if MSCODE_PARSER
+ 	select SPL_ASYMMETRIC_PUBLIC_KEY_MBEDTLS if \
+ 		SPL_ASYMMETRIC_PUBLIC_KEY_SUBTYPE
++	select SPL_RSA_PUBLIC_KEY_PARSER_MBEDTLS if SPL_RSA_PUBLIC_KEY_PARSER
+ 	help
+ 	  Enable MbedTLS certificate libraries.
+ 
+@@ -318,6 +338,14 @@ config ASYMMETRIC_PUBLIC_KEY_MBEDTLS
+ 	  This option chooses MbedTLS certificate library for asymmetric public
+ 	  key crypto algorithm.
+ 
++config RSA_PUBLIC_KEY_PARSER_MBEDTLS
++	bool "RSA public key parser with MbedTLS certificate library"
++	depends on ASYMMETRIC_PUBLIC_KEY_MBEDTLS
++	select ASN1_DECODER_MBEDTLS
++	help
++	  This option chooses MbedTLS certificate library for RSA public key
++	  parser.
++
+ config X509_CERTIFICATE_PARSER_MBEDTLS
+ 	bool "X.509 certificate parser with MbedTLS certificate library"
+ 	depends on ASYMMETRIC_PUBLIC_KEY_MBEDTLS
+@@ -351,6 +379,14 @@ config SPL_ASYMMETRIC_PUBLIC_KEY_MBEDTLS
+ 	  This option chooses MbedTLS certificate library for asymmetric public
+ 	  key crypto algorithm in SPL.
+ 
++config SPL_RSA_PUBLIC_KEY_PARSER_MBEDTLS
++	bool "RSA public key parser with MbedTLS certificate library in SPL"
++	depends on SPL_ASYMMETRIC_PUBLIC_KEY_MBEDTLS
++	select SPL_ASN1_DECODER_MBEDTLS
++	help
++	  This option chooses MbedTLS certificate library for RSA public key
++	  parser in SPL.
++
+ endif # SPL
+ 
+ endif # MBEDTLS_LIB_X509
+diff --git a/lib/mbedtls/Makefile b/lib/mbedtls/Makefile
+index 83333b1b6a5..40031994708 100644
+--- a/lib/mbedtls/Makefile
++++ b/lib/mbedtls/Makefile
+@@ -18,6 +18,7 @@ obj-$(CONFIG_$(SPL_)X509_CERTIFICATE_PARSER_MBEDTLS) += \
+ 	x509_cert_parser.o
+ obj-$(CONFIG_$(SPL_)PKCS7_MESSAGE_PARSER_MBEDTLS) += pkcs7_parser.o
+ obj-$(CONFIG_$(SPL_)MSCODE_PARSER_MBEDTLS) += mscode_parser.o
++obj-$(CONFIG_$(SPL_)RSA_PUBLIC_KEY_PARSER_MBEDTLS) += rsa_helper.o
+ 
+ # MbedTLS crypto library
+ obj-$(CONFIG_MBEDTLS_LIB_CRYPTO) += mbedtls_lib_crypto.o
+@@ -39,7 +40,7 @@ mbedtls_lib_x509-$(CONFIG_$(SPL_)ASN1_DECODER) += \
+ 	$(MBEDTLS_LIB_DIR)/asn1parse.o \
+ 	$(MBEDTLS_LIB_DIR)/asn1write.o \
+ 	$(MBEDTLS_LIB_DIR)/oid.o
+-mbedtls_lib_x509-$(CONFIG_$(SPL_)RSA_PUBLIC_KEY_PARSER) += \
++mbedtls_lib_x509-$(CONFIG_$(SPL_)RSA_PUBLIC_KEY_PARSER_MBEDTLS) += \
+ 	$(MBEDTLS_LIB_DIR)/bignum.o \
+ 	$(MBEDTLS_LIB_DIR)/bignum_core.o \
+ 	$(MBEDTLS_LIB_DIR)/rsa.o \
+diff --git a/lib/mbedtls/rsa_helper.c b/lib/mbedtls/rsa_helper.c
+new file mode 100644
+index 00000000000..3d94eee9954
+--- /dev/null
++++ b/lib/mbedtls/rsa_helper.c
+@@ -0,0 +1,95 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * RSA helper functions using MbedTLS
++ *
++ * Copyright (c) 2024 Linaro Limited
++ * Author: Raymond Mao <raymond.mao@linaro.org>
++ */
++
++#include <linux/err.h>
++#include <crypto/internal/rsa.h>
++#include <library/common.h>
++#include <mbedtls/pk.h>
++#include <mbedtls/rsa.h>
++#include <mbedtls/asn1.h>
++
++/**
++ * rsa_parse_pub_key() - decodes the BER encoded buffer and stores in the
++ *                       provided struct rsa_key, pointers to the raw key as is,
++ *                       so that the caller can copy it or MPI parse it, etc.
++ *
++ * @rsa_key:	struct rsa_key key representation
++ * @key:	key in BER format
++ * @key_len:	length of key
++ *
++ * Return:	0 on success or error code in case of error
++ */
++int rsa_parse_pub_key(struct rsa_key *rsa_key, const void *key,
++		      unsigned int key_len)
++{
++	int ret = 0;
++	mbedtls_pk_context pk;
++	mbedtls_rsa_context *rsa;
++
++	mbedtls_pk_init(&pk);
++
++	ret = mbedtls_pk_parse_public_key(&pk, (const unsigned char *)key,
++					  key_len);
++	if (ret) {
++		pr_err("Failed to parse public key, ret:-0x%04x\n", -ret);
++		ret = -EINVAL;
++		goto clean_pubkey;
++	}
++
++	/* Ensure that it is a RSA key */
++	if (mbedtls_pk_get_type(&pk) != MBEDTLS_PK_RSA) {
++		pr_err("Non-RSA keys are not supported\n");
++		ret = -EKEYREJECTED;
++		goto clean_pubkey;
++	}
++
++	/* Get RSA key context */
++	rsa = mbedtls_pk_rsa(pk);
++	if (!rsa) {
++		pr_err("Failed to get RSA key context, ret:-0x%04x\n", -ret);
++		ret = -EINVAL;
++		goto clean_pubkey;
++	}
++
++	/* Parse modulus (n) */
++	rsa_key->n_sz = mbedtls_mpi_size(&rsa->N);
++	rsa_key->n = kzalloc(rsa_key->n_sz, GFP_KERNEL);
++	if (!rsa_key->n) {
++		ret = -ENOMEM;
++		goto clean_pubkey;
++	}
++	ret = mbedtls_mpi_write_binary(&rsa->N, (unsigned char *)rsa_key->n,
++				       rsa_key->n_sz);
++	if (ret) {
++		pr_err("Failed to parse modulus (n), ret:-0x%04x\n", -ret);
++		ret = -EINVAL;
++		goto clean_modulus;
++	}
++
++	/* Parse public exponent (e) */
++	rsa_key->e_sz = mbedtls_mpi_size(&rsa->E);
++	rsa_key->e = kzalloc(rsa_key->e_sz, GFP_KERNEL);
++	if (!rsa_key->e) {
++		ret = -ENOMEM;
++		goto clean_modulus;
++	}
++	ret = mbedtls_mpi_write_binary(&rsa->E, (unsigned char *)rsa_key->e,
++				       rsa_key->e_sz);
++	if (!ret)
++		return 0;
++
++	pr_err("Failed to parse public exponent (e), ret:-0x%04x\n", -ret);
++	ret = -EINVAL;
++
++	kfree(rsa_key->e);
++clean_modulus:
++	kfree(rsa_key->n);
++clean_pubkey:
++	mbedtls_pk_free(&pk);
++	return ret;
++}
 -- 
 2.25.1
 
