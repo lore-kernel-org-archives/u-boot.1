@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0103DFA3737
-	for <u-boot@archiver.kernel.org>; Fri, 13 Sep 2024 09:57:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E038FA3738
+	for <u-boot@archiver.kernel.org>; Fri, 13 Sep 2024 09:58:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A0C288CA2;
-	Fri, 13 Sep 2024 11:57:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B8E4C88D29;
+	Fri, 13 Sep 2024 11:57:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="LRlZI45H";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="VlDabCed";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7746788CEB; Fri, 13 Sep 2024 11:57:11 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id 40F9C88C30; Fri, 13 Sep 2024 11:57:13 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6EBEC88C70
- for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 11:57:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D15788BBE
+ for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 11:57:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-5c3ed267a7bso2165562a12.3
- for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 02:57:06 -0700 (PDT)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a8d4093722bso258914266b.0
+ for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 02:57:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1726221426; x=1726826226;
+ d=amarulasolutions.com; s=google; t=1726221427; x=1726826227;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DayMO+BG8fGqGpPxigAvYP6Gde782r5ZKw0Wsq4LiYs=;
- b=LRlZI45HC8Klht/Zpta5BfATOSVxz2egQwrNFT8oi2bCS9L/WhRWPHVVzqNjCF9Pe9
- zT7hn4y1eTaC89c7DYcSwh3764M8s3htphDnQcatR45L4JDJym8UkwJlyCl+q76uWsVt
- WnPs1Q7za+R5I33TfcCeJ9m4P/8rQXRrSqPis=
+ bh=uD1BzqlMGtRVMj1ZQ9GmxLP+c5TtzKKgaOSr/TKj2SA=;
+ b=VlDabCedvvmKfOE5C8ui6XB7sS4V+FJp2Z+3LPcaArAMKT6hZvkPT/zyF091FdZ+zP
+ tc82rJnTKDlXZQZPmVJyxAcg4szSEND6G9W2UNLdjVDqekYgV+dokqHdhAH4H4j5JqY2
+ k1o18Vnp5YmuZHOCn8GJoQOONcMllvUaajKng=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726221426; x=1726826226;
+ d=1e100.net; s=20230601; t=1726221427; x=1726826227;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DayMO+BG8fGqGpPxigAvYP6Gde782r5ZKw0Wsq4LiYs=;
- b=sIY+4iaPNMr2t6K53mpATN5xBQqvs20aPnBirQ4rkQoVN9m7y/U4PVkNK2u+pXe0OF
- RjLwX+naqejZRXevrQ9r/PcAOpA24bYinwEL4YacLrqGgLofYSO1mt56oNBeCaRVmFz9
- Y5DMKWgzQmoLL8o5O9m3lAdI7XQT23dQZD4Iao+NouyctX5E5vdQonTG4czRMWxOvdG5
- BOI1q4+22qt2Jnylz2a2kn23cAJV5qn3LZ7W9mw6LOuNif/k1yMqSAxe4ZDHB87QSlSw
- or1kgRcc+ukb9yU6O5xElBqXOPIvi1Kz4pCsEv68fQSnlzFyTVpiItEsOSrk5rcfR5N2
- +MYA==
-X-Gm-Message-State: AOJu0Yx7E+26yVg5gUH4/fGTPz8Ewnio/B9Wlt5o8g8K3EKt13DK1xJE
- d2JXCJ/CN90wgXrYDRhQYf4LTlTaoIWPyarl9Mp+RVb8YSzuNzXFudF5Smce6JyriFeqLDCI/wZ
- WuNk=
-X-Google-Smtp-Source: AGHT+IHcRiC9nWDABlPykP905y4RAPCghraZ9tK/U2Gmq25uBVJ3Lzi6ZuQRA2OOPGoBHX8+GnkAIA==
-X-Received: by 2002:a17:907:f747:b0:a8d:6921:e181 with SMTP id
- a640c23a62f3a-a902943273bmr496515866b.16.1726221425488; 
- Fri, 13 Sep 2024 02:57:05 -0700 (PDT)
+ bh=uD1BzqlMGtRVMj1ZQ9GmxLP+c5TtzKKgaOSr/TKj2SA=;
+ b=iNE6XJS6XfQksRzuf7Jqy9l7na3UtonMSLJLQk4jgqGP7+h27HaNCVuZ9qLfSwvAZv
+ V485tU6SJpahFhr3d7l/oY3HfO+o2/RWMKS6s04PhIUY8KlR0suHEL7a3iWjPVg0BWEd
+ QkQWUVJCLF4lrk55iX2DfK/iRcxQESvNjiE86KdrV53ZFREz7wHUcP2m2TsBUjeWp48B
+ 9QaRoJTSEtr+FX8P+yDOtXl9369tzv827gVWbCZ/LWXR7kD3sCYnVDeOQoLjseB0xwbi
+ psYmlSs1zAcEBrbIZ/9pDC0LCNsWrIvDhMzREb8rLzDdrYw2SBb0ZjZLc+hxchMQ13i3
+ R+sQ==
+X-Gm-Message-State: AOJu0YyZEH0OQiZXF+IIWTWDeMU8djTGst8L1Yj9Sr5wYfff642ubBWd
+ 5wGn9SPGzuY2ix032dN/Uk5rhy37Fd+cDNLPK2ylnEor4WmK4rmzqMKrlotYvGUa9OAkyVUjVEe
+ GNuk=
+X-Google-Smtp-Source: AGHT+IH4Oxuy3mRFjWtH2rsuG9W247L38vB0lO+0DILZGaXo4mw0DpATrvf5zrFM+Kbn/0C1HEF12w==
+X-Received: by 2002:a17:906:c151:b0:a90:1ed4:dec6 with SMTP id
+ a640c23a62f3a-a902961bf01mr683128166b.43.1726221426636; 
+ Fri, 13 Sep 2024 02:57:06 -0700 (PDT)
 Received: from dario-ThinkPad-T14s-Gen-2i.homenet.telecomitalia.it
  (host-87-4-102-18.retail.telecomitalia.it. [87.4.102.18])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a8d25cee72bsm863224766b.173.2024.09.13.02.57.04
+ a640c23a62f3a-a8d25cee72bsm863224766b.173.2024.09.13.02.57.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Sep 2024 02:57:05 -0700 (PDT)
+ Fri, 13 Sep 2024 02:57:06 -0700 (PDT)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: Fabio Estevam <festevam@denx.de>, linux-amarula@amarulasolutions.com,
  michael@amarulasolutions.com, Miquel Raynal <miquel.raynal@bootlin.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, Lukasz Majewski <lukma@denx.de>,
- Marek Vasut <marex@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 05/26] clk: imx8mm: Mark IMX8MM_SYS_PLL2 and IMX8MM_SYS_PLL3
+ Fabio Estevam <festevam@gmail.com>, Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
+ Lukasz Majewski <lukma@denx.de>,
+ Nicolas Heemeryck <nicolas.heemeryck@devialet.com>,
+ Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 06/26] clk: imx8mn: Mark IMX8MN_SYS_PLL2 and IMX8MN_SYS_PLL3
  as enabled
-Date: Fri, 13 Sep 2024 11:55:47 +0200
-Message-ID: <20240913095622.72377-6-dario.binacchi@amarulasolutions.com>
+Date: Fri, 13 Sep 2024 11:55:48 +0200
+Message-ID: <20240913095622.72377-7-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240913095622.72377-1-dario.binacchi@amarulasolutions.com>
 References: <20240913095622.72377-1-dario.binacchi@amarulasolutions.com>
@@ -106,35 +107,34 @@ Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 ---
 
- drivers/clk/imx/clk-imx8mm.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ drivers/clk/imx/clk-imx8mn.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/drivers/clk/imx/clk-imx8mm.c b/drivers/clk/imx/clk-imx8mm.c
-index 432348a15cad..0e71ceefe96c 100644
---- a/drivers/clk/imx/clk-imx8mm.c
-+++ b/drivers/clk/imx/clk-imx8mm.c
-@@ -176,6 +176,8 @@ static const char * const imx8mm_ecspi3_sels[] = {"clock-osc-24m", "sys_pll2_200
- static int imx8mm_clk_probe(struct udevice *dev)
+diff --git a/drivers/clk/imx/clk-imx8mn.c b/drivers/clk/imx/clk-imx8mn.c
+index c96a2ebaa19a..449ebf2d0733 100644
+--- a/drivers/clk/imx/clk-imx8mn.c
++++ b/drivers/clk/imx/clk-imx8mn.c
+@@ -154,6 +154,7 @@ static const char * const imx8mn_usb_phy_sels[] = {"clock-osc-24m", "sys_pll1_10
+ static int imx8mn_clk_probe(struct udevice *dev)
  {
- 	void __iomem *base;
+ 	struct clk osc_24m_clk;
 +	struct clk *clk;
-+	int ret;
+ 	void __iomem *base;
+ 	int ret;
  
- 	base = (void *)ANATOP_BASE_ADDR;
- 
-@@ -458,6 +460,13 @@ static int imx8mm_clk_probe(struct udevice *dev)
- 	clk_dm(IMX8MM_CLK_QSPI_ROOT,
- 	       imx_clk_gate4("qspi_root_clk", "qspi", base + 0x42f0, 0));
+@@ -420,6 +421,13 @@ static int imx8mn_clk_probe(struct udevice *dev)
+ 	clk_dm(IMX8MN_CLK_ECSPI3_ROOT,
+ 	       imx_clk_gate4("ecspi3_root_clk", "ecspi3", base + 0x4090, 0));
  #endif
-+	ret = clk_get_by_id(IMX8MM_SYS_PLL2, &clk);
++	ret = clk_get_by_id(IMX8MN_SYS_PLL2, &clk);
 +	if (!ret)
 +		clk_enable(clk);
 +
-+	ret = clk_get_by_id(IMX8MM_SYS_PLL3, &clk);
++	ret = clk_get_by_id(IMX8MN_SYS_PLL3, &clk);
 +	if (!ret)
 +		clk_enable(clk);
  
- 	clk_dm(IMX8MM_CLK_ARM,
+ 	clk_dm(IMX8MN_CLK_ARM,
  	       imx_clk_mux2_flags("arm_core", base + 0x9880, 24, 1,
 -- 
 2.43.0
