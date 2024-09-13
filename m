@@ -4,79 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C31C8FA3738
-	for <u-boot@archiver.kernel.org>; Fri, 13 Sep 2024 10:00:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6690DFA3737
+	for <u-boot@archiver.kernel.org>; Fri, 13 Sep 2024 10:00:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 738B088BFC;
-	Fri, 13 Sep 2024 11:57:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C273588C63;
+	Fri, 13 Sep 2024 11:57:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="TU4aDv78";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="a18ZQJhu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4155A88DBB; Fri, 13 Sep 2024 11:57:31 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id E79F388D16; Fri, 13 Sep 2024 11:57:33 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B94A88D16
- for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 11:57:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CDD8D88C3E
+ for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 11:57:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a8d0d82e76aso281322366b.3
- for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 02:57:23 -0700 (PDT)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-42cb6f3a5bcso9469435e9.2
+ for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 02:57:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1726221443; x=1726826243;
+ d=amarulasolutions.com; s=google; t=1726221444; x=1726826244;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2GgTThR+n11+skGn4WqROLHbBMugAuPOtEXUsD/jtyU=;
- b=TU4aDv786gIP/eDfaZv3zptSRaK3s7akoMNAF2ULxZzx4R4Tzf5uCr929aULXB7JTh
- QkHEEpNLJaiIZbemw/05+g59FrwihCnS6bKldgZ4JHd8skaxXbkRcVDiT8D4q11mm8YW
- bG0aOpl6lrOTorrA8/157K34mkxQh/NqqgYUo=
+ bh=dBwSq5ZmOlgcVv1nfYy6SQy98WXEHyPhDxPXNiUuXhY=;
+ b=a18ZQJhuiKTvqg7OXMdhQwd4SNPs/CBUAoAKjdgAaejlU16ZXvpPj/OOElrZLo5wYQ
+ ntmorgDxKTklW4mCFBpcAeN6uHrQ6IPLzhYUR5OfipOGyk3sO2Z5+quqVxLDiR09QWiJ
+ PXiZzhUOPemgql/127174WY2MWfpq7qyqxIHw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726221443; x=1726826243;
+ d=1e100.net; s=20230601; t=1726221444; x=1726826244;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2GgTThR+n11+skGn4WqROLHbBMugAuPOtEXUsD/jtyU=;
- b=po/u4ZbWF1s3Yihc/YYSfo6hjWItLEb3ROc8xZ7UeLXQjBcZAKKwJRSisCRGPBPvn0
- m0R26gZPh0oyw3OexFBUm/tgj4qL3O6WraHviyy6FpJrfST9S0ZDD6PV31VsAlKwrgZB
- E82Q2MxBZgTbcWHE1bwYk9dLbqacyt251wuaHewdVnCcKp3i4LI1dcZZ3KE+XAelMnuD
- EZmxYXNDRCyi4t+c4QObJahevYYVOSYX4+7Ou0067e54ONLE6qsDZ/irqei9pLcgi1BM
- eRmALTidpKatC7RKBWNq2bpZ30T+ZfaC5nv0nnLzL5DGg6HvQ+ac4/JZDml6pFRrOh52
- fx6g==
-X-Gm-Message-State: AOJu0Yzd5xrehcHd6yq8WvxavmvX+bqQPXkDxwjl5NN2u9+5BJexWnOg
- bA9QwQGU+FVixhrLh4fXWREAgnIbjFJf9IBaUha1R5CcdOg+7C5rdDl8fuICgYXQFuvvwIOE8P3
- rmJw=
-X-Google-Smtp-Source: AGHT+IF4nSFft/821pOhnYmxXoOePFDyE6EWNUnobBo7gAitYhyszBr36PrDO5xdsKRcCe5aTsLpmQ==
-X-Received: by 2002:a17:907:2da3:b0:a7d:9f92:9107 with SMTP id
- a640c23a62f3a-a9029690793mr628556066b.58.1726221442620; 
- Fri, 13 Sep 2024 02:57:22 -0700 (PDT)
+ bh=dBwSq5ZmOlgcVv1nfYy6SQy98WXEHyPhDxPXNiUuXhY=;
+ b=sKIpWLSNQEhIYK1dwXTavVpQ2v30WsZkui99HbK73pat9/03y4d/nAKthitay8sb4d
+ Vx8Y2V0r9vZCNkjbDMTwv8E3TFR7TaTN25otnD7KwsBpsgIktzJyqM+aeGpHvaabwDtx
+ WuJp25iX3Z1z9q8a8NoTmNLFGAxY5req2j6TRdTcKXT3qzw6MVbTn/mFgTg3dEwl3lXF
+ BERfbyqh/knfZWKC9okwGIe1WbayCyu89Ya7k2QJctzRPIhL213fSzZ/iUoNffpzNWxu
+ blkZfhIZRpN6OX/tEqsYKBKkEX9CD64XL3Hn6PwZ0eHV7h7iSPQxxGAwiCgBlC0J89Wl
+ nLug==
+X-Gm-Message-State: AOJu0YxJxCd//2q0AYwGneYfU4nDOYh4puDgA8CaRUuuaO1md6+8y1pM
+ 4d9PBQHM78gHaqLaH0QLxjjQrACI/oD/wXxZR/MyUVlXXU89PI9KDaZzpGqYBWjiQxDkzfua356
+ WOEU=
+X-Google-Smtp-Source: AGHT+IHtSfUm4V+2WQvYyqxfMrXkyd2fbmqwiRABZmcy0xISG2i6C/1YyU/gBZK68bBtW7cExKBGyQ==
+X-Received: by 2002:a05:6000:1862:b0:374:cc4b:596e with SMTP id
+ ffacd0b85a97d-378d6235e10mr1875542f8f.37.1726221443935; 
+ Fri, 13 Sep 2024 02:57:23 -0700 (PDT)
 Received: from dario-ThinkPad-T14s-Gen-2i.homenet.telecomitalia.it
  (host-87-4-102-18.retail.telecomitalia.it. [87.4.102.18])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a8d25cee72bsm863224766b.173.2024.09.13.02.57.21
+ a640c23a62f3a-a8d25cee72bsm863224766b.173.2024.09.13.02.57.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Sep 2024 02:57:22 -0700 (PDT)
+ Fri, 13 Sep 2024 02:57:23 -0700 (PDT)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: Fabio Estevam <festevam@denx.de>, linux-amarula@amarulasolutions.com,
  michael@amarulasolutions.com, Miquel Raynal <miquel.raynal@bootlin.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Anatolij Gustschin <agust@denx.de>,
- Anton Bambura <jenneron@protonmail.com>,
- =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
- Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>
-Subject: [PATCH 19/26] video: Add Synaptics R63353 panel driver
-Date: Fri, 13 Sep 2024 11:56:01 +0200
-Message-ID: <20240913095622.72377-20-dario.binacchi@amarulasolutions.com>
+ Fabio Estevam <festevam@gmail.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Patrick Barsanti <patrick.barsanti@amarulasolutions.com>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Stefano Babic <sbabic@denx.de>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 20/26] imx8mn_bsh_smm_s2/pro: Enable display on reference
+ design
+Date: Fri, 13 Sep 2024 11:56:02 +0200
+Message-ID: <20240913095622.72377-21-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240913095622.72377-1-dario.binacchi@amarulasolutions.com>
 References: <20240913095622.72377-1-dario.binacchi@amarulasolutions.com>
@@ -100,284 +103,161 @@ X-Virus-Status: Clean
 
 From: Michael Trimarchi <michael@amarulasolutions.com>
 
-The LS068B3SX02 panel is based on the Synaptics R63353 Controller.
-Add a driver for it.
-
-Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
+Co-developed-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
 ---
 
- drivers/video/Kconfig            |   8 ++
- drivers/video/Makefile           |   1 +
- drivers/video/synaptics-r63353.c | 228 +++++++++++++++++++++++++++++++
- 3 files changed, 237 insertions(+)
- create mode 100644 drivers/video/synaptics-r63353.c
+ .../dts/imx8mn-bsh-smm-s2-u-boot-common.dtsi  | 23 +++++++++++++++++++
+ configs/imx8mn_bsh_smm_s2_defconfig           | 15 ++++++++++++
+ configs/imx8mn_bsh_smm_s2pro_defconfig        | 15 ++++++++++++
+ 3 files changed, 53 insertions(+)
 
-diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
-index cafdc15f9fe2..520577976571 100644
---- a/drivers/video/Kconfig
-+++ b/drivers/video/Kconfig
-@@ -627,6 +627,14 @@ config VIDEO_LCD_SSD2828_RESET
- 	The reset pin of SSD2828 chip. This takes a string in the format
- 	understood by 'sunxi_name_to_gpio' function, e.g. PH1 for pin 1 of port H.
+diff --git a/arch/arm/dts/imx8mn-bsh-smm-s2-u-boot-common.dtsi b/arch/arm/dts/imx8mn-bsh-smm-s2-u-boot-common.dtsi
+index 19b0d8977539..8cae580e2851 100644
+--- a/arch/arm/dts/imx8mn-bsh-smm-s2-u-boot-common.dtsi
++++ b/arch/arm/dts/imx8mn-bsh-smm-s2-u-boot-common.dtsi
+@@ -6,6 +6,19 @@
  
-+config VIDEO_LCD_SYNAPTICS_R63353
-+	tristate "Synaptics R63353-based DSI LCD panels support"
-+	select VIDEO_MIPI_DSI
-+	default n
-+	help
-+	  Say Y if you want to enable support for panels based on the
-+	  Synaptics R63353 controller.
+ #include "imx8mn-u-boot.dtsi"
+ 
++/ {
++	aliases {
++		display0 = &lcdif;
++	};
 +
- config VIDEO_LCD_TDO_TL070WSH30
- 	bool "TDO TL070WSH30 DSI LCD panel support"
- 	select VIDEO_MIPI_DSI
-diff --git a/drivers/video/Makefile b/drivers/video/Makefile
-index 9fd3645994f1..4d836efcfa41 100644
---- a/drivers/video/Makefile
-+++ b/drivers/video/Makefile
-@@ -66,6 +66,7 @@ obj-$(CONFIG_VIDEO_LCD_RENESAS_R61307) += renesas-r61307.o
- obj-$(CONFIG_VIDEO_LCD_RENESAS_R69328) += renesas-r69328.o
- obj-$(CONFIG_VIDEO_LCD_SAMSUNG_LTL106HL02) += samsung-ltl106hl02.o
- obj-$(CONFIG_VIDEO_LCD_SSD2828) += ssd2828.o
-+obj-$(CONFIG_VIDEO_LCD_SYNAPTICS_R63353) += synaptics-r63353.o
- obj-$(CONFIG_VIDEO_LCD_TDO_TL070WSH30) += tdo-tl070wsh30.o
- obj-$(CONFIG_VIDEO_MCDE_SIMPLE) += mcde_simple.o
- obj-${CONFIG_VIDEO_MESON} += meson/
-diff --git a/drivers/video/synaptics-r63353.c b/drivers/video/synaptics-r63353.c
-new file mode 100644
-index 000000000000..86d2aea346b2
---- /dev/null
-+++ b/drivers/video/synaptics-r63353.c
-@@ -0,0 +1,228 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Synaptics R63353 Controller driver
-+ *
-+ * Copyright (C) 2020 BSH Hausgerate GmbH
-+ */
-+
-+#include <backlight.h>
-+#include <dm.h>
-+#include <dm/device_compat.h>
-+#include <mipi_dsi.h>
-+#include <panel.h>
-+#include <asm/gpio.h>
-+#include <linux/delay.h>
-+#include <power/regulator.h>
-+
-+#define R63353_INSTR(...) { \
-+		.len = ARRAY_SIZE(((u8[]) {__VA_ARGS__})), \
-+		.data = (const u8 *)&(const u8 []){__VA_ARGS__} \
-+	}
-+
-+struct r63353_instr {
-+	size_t len;
-+	const u8 * const data;
++	samsung_dsi_host: dsi-host {
++		compatible = "samsung,sec-mipi-dsi";
++		clocks = <&clk IMX8MN_CLK_DSI_PHY_REF>;
++		clock-names = "sclk_mipi";
++		status = "okay";
++	};
 +};
 +
-+static const struct r63353_instr init_sequence[] = {
-+	R63353_INSTR(0x51, 0xff),
-+	R63353_INSTR(0x53, 0x0c),
-+	R63353_INSTR(0x55, 0x00),
-+	R63353_INSTR(0x84, 0x00),
-+	R63353_INSTR(0x29),
-+	R63353_INSTR(0x11),
+ &{/soc@0/bus@30800000/i2c@30a20000/pmic@4b} {
+ 	bootph-pre-ram;
+ };
+@@ -30,6 +43,16 @@
+ 	bootph-pre-ram;
+ };
+ 
++&lcdif {
++	display = <&display0>;
++
++	/* panel is r8g8b8 */
++	display0: display@0 {
++		bits-per-pixel = <24>;
++		bits-per-color = <8>;
++	};
 +};
 +
-+struct r63353_panel_priv {
-+	struct udevice *dvdd;
-+	struct udevice *avdd;
-+	struct udevice *backlight;
-+	struct gpio_desc reset_gpio;
-+};
-+
-+static const struct display_timing default_timing = {
-+	.pixelclock.typ		= 70000000,
-+	.hactive.typ		= 640,
-+	.hfront_porch.typ	= 35,
-+	.hsync_len.typ		= 2,
-+	.hback_porch.typ	= 150,
-+	.vactive.typ		= 1280,
-+	.vfront_porch.typ	= 2,
-+	.vsync_len.typ		= 4,
-+	.vback_porch.typ	= 1,
-+	.flags = DISPLAY_FLAGS_DE_LOW,
-+};
-+
-+static int r63353_panel_enable_backlight(struct udevice *dev)
-+{
-+	struct r63353_panel_priv *priv = dev_get_priv(dev);
-+	struct mipi_dsi_panel_plat *plat = dev_get_plat(dev);
-+	struct mipi_dsi_device *dsi = plat->device;
-+	int i, ret;
-+
-+	ret = mipi_dsi_attach(dsi);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = mipi_dsi_dcs_soft_reset(dsi);
-+	if (ret < 0) {
-+		dev_err(dev, "Failed to do Software Reset (%d)\n", ret);
-+		goto fail;
-+	}
-+
-+	mdelay(20);
-+
-+	ret = mipi_dsi_dcs_enter_sleep_mode(dsi);
-+	if (ret < 0) {
-+		dev_err(dev, "Failed to enter sleep mode (%d)\n", ret);
-+		goto fail;
-+	}
-+
-+	for (i = 0; i < ARRAY_SIZE(init_sequence); i++) {
-+		const struct r63353_instr *instr = &init_sequence[i];
-+
-+		ret = mipi_dsi_dcs_write_buffer(dsi, instr->data, instr->len);
-+		if (ret < 0)
-+			goto fail;
-+	}
-+
-+	mdelay(120);
-+
-+	ret = mipi_dsi_dcs_exit_sleep_mode(dsi);
-+	if (ret < 0) {
-+		dev_err(dev, "Failed to exit sleep mode (%d)\n", ret);
-+		goto fail;
-+	}
-+
-+	mdelay(10);
-+
-+	/* This call starts sending the data on the display (LINUX LOGO) */
-+	ret = mipi_dsi_dcs_set_display_on(dsi);
-+	if (ret < 0) {
-+		dev_err(dev, "Failed to set display ON (%d)\n", ret);
-+		goto fail;
-+	}
-+
-+	ret = backlight_enable(priv->backlight);
-+	if (ret)
-+		return ret;
-+
-+	return 0;
-+
-+fail:
-+	dm_gpio_set_value(&priv->reset_gpio, 0);
-+
-+	return ret;
-+}
-+
-+static int r63353_panel_get_display_timing(struct udevice *dev,
-+					   struct display_timing *timing)
-+{
-+	struct mipi_dsi_panel_plat *plat = dev_get_plat(dev);
-+	struct mipi_dsi_device *device = plat->device;
-+
-+	memcpy(timing, &default_timing, sizeof(*timing));
-+
-+	/* fill characteristics of DSI data link */
-+	if (device) {
-+		device->lanes = plat->lanes;
-+		device->format = plat->format;
-+		device->mode_flags = plat->mode_flags;
-+	}
-+
-+	return 0;
-+}
-+
-+static int r63353_panel_of_to_plat(struct udevice *dev)
-+{
-+	struct r63353_panel_priv *priv = dev_get_priv(dev);
-+	int ret;
-+
-+	ret = device_get_supply_regulator(dev, "dvdd-supply", &priv->dvdd);
-+	if (ret) {
-+		dev_err(dev, "failed to get power dvdd supply\n");
-+		return ret;
-+	}
-+
-+	ret = device_get_supply_regulator(dev, "avdd-supply", &priv->avdd);
-+	if (ret) {
-+		dev_err(dev, "failed to get power avdd supply\n");
-+		return ret;
-+	}
-+
-+	ret = gpio_request_by_name(dev, "reset-gpios", 0, &priv->reset_gpio,
-+				   GPIOD_IS_OUT);
-+	if (ret) {
-+		dev_err(dev, "failed to get RESET GPIO\n");
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static int r63353_panel_probe(struct udevice *dev)
-+{
-+	struct r63353_panel_priv *priv = dev_get_priv(dev);
-+	struct mipi_dsi_panel_plat *plat = dev_get_plat(dev);
-+	int ret;
-+
-+	ret = regulator_set_enable(priv->avdd, true);
-+	if (ret) {
-+		dev_err(dev, "Failed to enable avdd regulator (%d)\n", ret);
-+		return ret;
-+	}
-+
-+	mdelay(25);
-+
-+	ret = regulator_set_enable(priv->dvdd, true);
-+	if (ret) {
-+		dev_err(dev, "Failed to enable dvdd regulator (%d)\n", ret);
-+		regulator_set_enable(priv->avdd, false);
-+		return ret;
-+	}
-+
-+	dm_gpio_set_value(&priv->reset_gpio, 0);
-+	mdelay(10);
-+	dm_gpio_set_value(&priv->reset_gpio, 1);
-+	mdelay(120);
-+
-+	/* fill characteristics of DSI data link */
-+	plat->lanes = 2;
-+	plat->format = MIPI_DSI_FMT_RGB888;
-+	plat->mode_flags = MIPI_DSI_MODE_VIDEO_HSE | MIPI_DSI_MODE_VIDEO |
-+		MIPI_DSI_CLOCK_NON_CONTINUOUS | MIPI_DSI_MODE_LPM |
-+		MIPI_DSI_MODE_VIDEO_SYNC_PULSE | MIPI_DSI_MODE_EOT_PACKET;
-+
-+	ret = uclass_get_device_by_phandle(UCLASS_PANEL_BACKLIGHT, dev,
-+					   "backlight", &priv->backlight);
-+	if (ret) {
-+		dev_err(dev, "%s: Warning: cannot get backlight: ret=%d\n",
-+			__func__, ret);
-+		if (ret != -ENOENT)
-+			return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static const struct panel_ops r63353_panel_ops = {
-+	.enable_backlight = r63353_panel_enable_backlight,
-+	.get_display_timing = r63353_panel_get_display_timing,
-+};
-+
-+static const struct udevice_id r63353_panel_ids[] = {
-+	{ .compatible = "syna,r63353" },
-+	{ .compatible = "sharp,ls068b3sx02" },
-+	{ } /* sentinel */
-+};
-+
-+U_BOOT_DRIVER(r63353_panel) = {
-+	.name = "r63353_panel",
-+	.id = UCLASS_PANEL,
-+	.of_match = r63353_panel_ids,
-+	.ops = &r63353_panel_ops,
-+	.of_to_plat = r63353_panel_of_to_plat,
-+	.probe = r63353_panel_probe,
-+	.plat_auto = sizeof(struct mipi_dsi_panel_plat),
-+	.priv_auto = sizeof(struct r63353_panel_priv),
-+};
+ &pinctrl_i2c1 {
+ 	bootph-pre-ram;
+ };
+diff --git a/configs/imx8mn_bsh_smm_s2_defconfig b/configs/imx8mn_bsh_smm_s2_defconfig
+index b4351a392eff..2fa8bc22747e 100644
+--- a/configs/imx8mn_bsh_smm_s2_defconfig
++++ b/configs/imx8mn_bsh_smm_s2_defconfig
+@@ -56,6 +56,7 @@ CONFIG_SYS_PROMPT="> "
+ CONFIG_CMD_FUSE=y
+ CONFIG_CMD_USB=y
+ CONFIG_CMD_USB_MASS_STORAGE=y
++CONFIG_CMD_BMP=y
+ CONFIG_CMD_MTDPARTS=y
+ CONFIG_MTDIDS_DEFAULT="nand0=gpmi-nand"
+ CONFIG_MTDPARTS_DEFAULT="gpmi-nand:64m(nandboot),16m(nandfit),32m(nandkernel),1m(nanddtb),8m(nandtee),-(nandrootfs)"
+@@ -74,6 +75,8 @@ CONFIG_FASTBOOT_BUF_ADDR=0x40480000
+ CONFIG_FASTBOOT_BUF_SIZE=0x20000000
+ CONFIG_FASTBOOT_FLASH=y
+ CONFIG_FASTBOOT_UUU_SUPPORT=y
++CONFIG_DM_GPIO_LOOKUP_LABEL=y
++CONFIG_SPL_DM_GPIO_LOOKUP_LABEL=y
+ CONFIG_MXC_GPIO=y
+ CONFIG_DM_I2C=y
+ # CONFIG_MMC is not set
+@@ -94,12 +97,17 @@ CONFIG_MII=y
+ CONFIG_PINCTRL=y
+ CONFIG_SPL_PINCTRL=y
+ CONFIG_PINCTRL_IMX8M=y
++CONFIG_POWER_DOMAIN=y
++CONFIG_IMX8M_POWER_DOMAIN=y
++CONFIG_IMX8M_BLK_CTRL=y
+ CONFIG_DM_PMIC=y
+ CONFIG_DM_PMIC_BD71837=y
+ CONFIG_SPL_DM_PMIC_BD71837=y
+ CONFIG_DM_REGULATOR=y
+ CONFIG_DM_REGULATOR_FIXED=y
+ CONFIG_DM_REGULATOR_GPIO=y
++CONFIG_DM_PWM=y
++CONFIG_PWM_IMX=y
+ CONFIG_DM_SERIAL=y
+ CONFIG_MXC_UART=y
+ CONFIG_SYSRESET=y
+@@ -112,5 +120,12 @@ CONFIG_USB_GADGET_MANUFACTURER="FSL"
+ CONFIG_USB_GADGET_VENDOR_NUM=0x0525
+ CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
+ CONFIG_CI_UDC=y
++CONFIG_VIDEO=y
++CONFIG_VIDEO_LCD_SYNAPTICS_R63353=y
++CONFIG_VIDEO_BRIDGE_SAMSUNG_DSIM=y
++CONFIG_VIDEO_MXS=y
++CONFIG_BMP_16BPP=y
++CONFIG_BMP_24BPP=y
++CONFIG_BMP_32BPP=y
+ CONFIG_IMX_WATCHDOG=y
+ # CONFIG_FAT_WRITE is not set
+diff --git a/configs/imx8mn_bsh_smm_s2pro_defconfig b/configs/imx8mn_bsh_smm_s2pro_defconfig
+index 0faa3376fd3d..b6b62b9d53f9 100644
+--- a/configs/imx8mn_bsh_smm_s2pro_defconfig
++++ b/configs/imx8mn_bsh_smm_s2pro_defconfig
+@@ -53,6 +53,7 @@ CONFIG_CMD_FUSE=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_USB=y
+ CONFIG_CMD_USB_MASS_STORAGE=y
++CONFIG_CMD_BMP=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+@@ -68,6 +69,8 @@ CONFIG_FASTBOOT_BUF_SIZE=0x20000000
+ CONFIG_FASTBOOT_FLASH=y
+ CONFIG_FASTBOOT_UUU_SUPPORT=y
+ CONFIG_FASTBOOT_FLASH_MMC_DEV=0
++CONFIG_DM_GPIO_LOOKUP_LABEL=y
++CONFIG_SPL_DM_GPIO_LOOKUP_LABEL=y
+ CONFIG_MXC_GPIO=y
+ CONFIG_DM_I2C=y
+ CONFIG_SUPPORT_EMMC_BOOT=y
+@@ -83,12 +86,17 @@ CONFIG_MII=y
+ CONFIG_PINCTRL=y
+ CONFIG_SPL_PINCTRL=y
+ CONFIG_PINCTRL_IMX8M=y
++CONFIG_POWER_DOMAIN=y
++CONFIG_IMX8M_POWER_DOMAIN=y
++CONFIG_IMX8M_BLK_CTRL=y
+ CONFIG_DM_PMIC=y
+ CONFIG_DM_PMIC_BD71837=y
+ CONFIG_SPL_DM_PMIC_BD71837=y
+ CONFIG_DM_REGULATOR=y
+ CONFIG_DM_REGULATOR_FIXED=y
+ CONFIG_DM_REGULATOR_GPIO=y
++CONFIG_DM_PWM=y
++CONFIG_PWM_IMX=y
+ CONFIG_DM_SERIAL=y
+ CONFIG_MXC_UART=y
+ CONFIG_SYSRESET=y
+@@ -101,5 +109,12 @@ CONFIG_USB_GADGET_MANUFACTURER="FSL"
+ CONFIG_USB_GADGET_VENDOR_NUM=0x0525
+ CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
+ CONFIG_CI_UDC=y
++CONFIG_VIDEO=y
++CONFIG_VIDEO_LCD_SYNAPTICS_R63353=y
++CONFIG_VIDEO_BRIDGE_SAMSUNG_DSIM=y
++CONFIG_VIDEO_MXS=y
++CONFIG_BMP_16BPP=y
++CONFIG_BMP_24BPP=y
++CONFIG_BMP_32BPP=y
+ CONFIG_IMX_WATCHDOG=y
+ # CONFIG_FAT_WRITE is not set
 -- 
 2.43.0
 
