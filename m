@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E57CFA3738
-	for <u-boot@archiver.kernel.org>; Fri, 13 Sep 2024 10:00:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0981FA3738
+	for <u-boot@archiver.kernel.org>; Fri, 13 Sep 2024 10:01:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7EA1B88C3E;
-	Fri, 13 Sep 2024 11:57:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 887C788CC1;
+	Fri, 13 Sep 2024 11:57:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Hinl+xU7";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="BF7my6NE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E0BB8855C; Fri, 13 Sep 2024 11:57:36 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id C7CCB88D7C; Fri, 13 Sep 2024 11:57:37 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8EE688965
- for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 11:57:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 04A0488D97
+ for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 11:57:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a8d0d0aea3cso233669966b.3
- for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 02:57:26 -0700 (PDT)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-a8d2b4a5bf1so253489066b.2
+ for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 02:57:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1726221446; x=1726826246;
+ d=amarulasolutions.com; s=google; t=1726221447; x=1726826247;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XyZMgmVmdG4fiZHCiw9uZQLu6FufQEMaaUVl/Ul2c4M=;
- b=Hinl+xU7rMJZpsrnZDsLvo4o30jR7/nAtxSFMM3yERNj43fbz4U+zPj2bIuQWCB3rS
- 1W7/JLHl09m8WDJ7a26IKqYKMZRMdirLaXanm+Wp/IlckBXZsuMqAeZHXBmKQk+UEgWr
- LbDbTlPUqtcZqBMG+71U1ZsmjK3hLSezwMMDI=
+ bh=uMqrX/ueWFxmHIyE51MucJPFAAWhhqGdobRjvQZoM2o=;
+ b=BF7my6NE/DdZLQZA7z1yQW3uQlrW5nkqev8R2AZPdgDy7o38zcsxdiwMqzF1+aeCsx
+ +gQYpjdzi+D/HiCLRfCecraEh/0WuQjxzV/cnxjEOgUhUA8r7oI3anLDhxxLleTznsHb
+ /9h2ms/7yIngkUBhwHCF6sHCusQtUkzhNSh58=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726221446; x=1726826246;
+ d=1e100.net; s=20230601; t=1726221447; x=1726826247;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XyZMgmVmdG4fiZHCiw9uZQLu6FufQEMaaUVl/Ul2c4M=;
- b=SXBH2NhgffN4V69Et//dG7Q92JrSlxLPy96zsR46ZDdrh3Z5TN2kMgM8x0Z0vUhHxa
- H39ZCJMV9JTlK6QkFOsZ/qTwaluW+caLNQRX0zfybz9sHzTK0FgUceUtQLVc1efIwkz9
- YqzB+x2mYXhb6xPibehK5q4Oj0UDc6o9frb+a5DcJa41TF/Kob36hc0ZI79Q6yvXJaqC
- tnYdumzYNrnkVZqZ2Na89fWxT70V4l/C/xoqpyNnW+EEz8eUWcoa/qpTCBmKdmKaqAV6
- WIBO5f3E0cpXAXAjQo/SSDnWPe3OxEaJ2RwDhA5ho0H/a5JJr3acn9Qb0jAQLxlHi4YB
- zAgg==
-X-Gm-Message-State: AOJu0Yziq6gp1OJozZzVAmch7Dzb7N4BK0QPl5bRTtwVmy0pIZxxg0cv
- RZvyVlp4CkBXt1HFK00iMthlfJNw7G9CR1rfi0JKAiJC7Xtli77CcaWMTFskTr2jZbjgzkO6ujP
- Oweo=
-X-Google-Smtp-Source: AGHT+IG0Czi0LmJj3dy0YYZHDEX/5oqiJFTFpX3m0uGqky2KRToMVPuU4UslRz325va17AolnXMLkg==
-X-Received: by 2002:a17:906:d7ce:b0:a8d:4e13:55f9 with SMTP id
- a640c23a62f3a-a9029438220mr553279966b.19.1726221446083; 
- Fri, 13 Sep 2024 02:57:26 -0700 (PDT)
+ bh=uMqrX/ueWFxmHIyE51MucJPFAAWhhqGdobRjvQZoM2o=;
+ b=ngAdSfek9FtiZqtg5DJpQft0KS33RSvjmdVjTbNsv0YIBqm/TcVzmpalOMQ7u0Xxb+
+ cfX65EAlk0u0zUxWE1+RDrrnKSti6mqbuwjUrXLyWG6tawQzl8Utbu1wIZ0TX56J5Q9Y
+ SX7k4o2p+XwsG76Jdvwe0iuRfVu05RlEkL7VtuCXVqACcxM7ljsLkSwHJ+azNozjs78Z
+ iQ3r+LZL+o6VUqq1IVt0h+1CARE3GybUqaVYrcP3A+es7314JbbO1OXTiwdaLdXOab6S
+ VufRxoNaPy7pGMI7Z2E3jVVEWVzWLbqHY1biezfI+eTd4OFjw6F9aOM+AGsQ0gj3AOh+
+ wDHQ==
+X-Gm-Message-State: AOJu0YzqTATCsjkdBcBHkOZLRYWAwfNCkTI6Z7vBf5HD9mPtYVWYM6nK
+ /MP2Em2ba4BnkRAYWNlPCJQpSvqP20Udic5/h76TzoL/RmHtmUEl1BPxekTolI5uZWVDpBg9/8O
+ kSco=
+X-Google-Smtp-Source: AGHT+IF81BEZ+dPAcVN6E8N0UNF8DJjXuSFKCGg4X9rhVoAZQ74agL+4vo8uB4PYCuIFBjeZjwt8Bg==
+X-Received: by 2002:a17:907:e6e8:b0:a86:7ddf:2909 with SMTP id
+ a640c23a62f3a-a90294fcf3bmr574413166b.14.1726221447125; 
+ Fri, 13 Sep 2024 02:57:27 -0700 (PDT)
 Received: from dario-ThinkPad-T14s-Gen-2i.homenet.telecomitalia.it
  (host-87-4-102-18.retail.telecomitalia.it. [87.4.102.18])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a8d25cee72bsm863224766b.173.2024.09.13.02.57.25
+ a640c23a62f3a-a8d25cee72bsm863224766b.173.2024.09.13.02.57.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Sep 2024 02:57:25 -0700 (PDT)
+ Fri, 13 Sep 2024 02:57:26 -0700 (PDT)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: Fabio Estevam <festevam@denx.de>, linux-amarula@amarulasolutions.com,
  michael@amarulasolutions.com, Miquel Raynal <miquel.raynal@bootlin.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Anatolij Gustschin <agust@denx.de>, Peter Robinson <pbrobinson@gmail.com>,
- =?UTF-8?q?S=C3=A9bastien=20Szymanski?= <sebastien.szymanski@armadeus.com>,
- Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>
-Subject: [PATCH 22/26] video: mxsfb: support simple frame-buffer
-Date: Fri, 13 Sep 2024 11:56:04 +0200
-Message-ID: <20240913095622.72377-23-dario.binacchi@amarulasolutions.com>
+ Anatolij Gustschin <agust@denx.de>, Minkyu Kang <mk7.kang@samsung.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 23/26] video: bridge: samsung: support simple frame-buffer
+Date: Fri, 13 Sep 2024 11:56:05 +0200
+Message-ID: <20240913095622.72377-24-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240913095622.72377-1-dario.binacchi@amarulasolutions.com>
 References: <20240913095622.72377-1-dario.binacchi@amarulasolutions.com>
@@ -98,7 +97,7 @@ X-Virus-Status: Clean
 
 If you want to pass the frame-buffer to the kernel, the video output is
 initialized by U-Boot, and kept by the kernel. The patch does not turn
-off the power domains or reset the peripheral if you want to support
+off the power domains or disable the peripheral if you want to support
 such feature.
 
 Co-developed-by: Michael Trimarchi <michael@amarulasolutions.com>
@@ -106,33 +105,63 @@ Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 ---
 
- drivers/video/mxsfb.c | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+ drivers/video/bridge/samsung-dsi-host.c | 9 +++++++++
+ drivers/video/bridge/samsung-dsim.c     | 3 +++
+ 2 files changed, 12 insertions(+)
 
-diff --git a/drivers/video/mxsfb.c b/drivers/video/mxsfb.c
-index 45431f0a1047..06b2a2461246 100644
---- a/drivers/video/mxsfb.c
-+++ b/drivers/video/mxsfb.c
-@@ -422,7 +422,8 @@ static int mxs_video_remove(struct udevice *dev)
- 	if (priv->disp_dev)
- 		device_remove(priv->disp_dev, DM_REMOVE_NORMAL);
+diff --git a/drivers/video/bridge/samsung-dsi-host.c b/drivers/video/bridge/samsung-dsi-host.c
+index dd3e33c4edc7..2d0e8f71a756 100644
+--- a/drivers/video/bridge/samsung-dsi-host.c
++++ b/drivers/video/bridge/samsung-dsi-host.c
+@@ -1281,6 +1281,7 @@ static void samsung_dsi_set_standby(struct samsung_dsi *dsim, bool standby)
+ 	samsung_dsim_write(dsim, DSIM_MDRESOL_REG, mdresol);
+ }
  
--	mxs_remove_common(priv->reg_base, plat->base);
-+	if (!IS_ENABLED(CONFIG_VIDEO_DT_SIMPLEFB))
-+		mxs_remove_common(priv->reg_base, plat->base);
++#if (!IS_ENABLED(CONFIG_VIDEO_DT_SIMPLEFB))
+ static void samsung_dsi_disable_clock(struct samsung_dsi *dsim)
+ {
+ 	u32 reg;
+@@ -1294,6 +1295,7 @@ static void samsung_dsi_disable_clock(struct samsung_dsi *dsim)
+ 	reg &= ~DSIM_PLL_EN;
+ 	samsung_dsim_write(dsim, DSIM_PLLCTRL_REG, reg);
+ }
++#endif
+ 
+ static inline struct samsung_dsi *host_to_dsi(struct mipi_dsi_host *host)
+ {
+@@ -1515,6 +1517,12 @@ static int samsung_dsi_enable(struct udevice *dev)
+ 	return 0;
+ }
+ 
++#if IS_ENABLED(CONFIG_VIDEO_DT_SIMPLEFB)
++static int samsung_dsi_disable(struct udevice *dev)
++{
++	return 0;
++}
++#else
+ static int samsung_dsi_disable(struct udevice *dev)
+ {
+ 	u32 intsrc;
+@@ -1532,6 +1540,7 @@ static int samsung_dsi_disable(struct udevice *dev)
  
  	return 0;
  }
-@@ -445,6 +446,10 @@ U_BOOT_DRIVER(mxs_video) = {
- 	.bind	= mxs_video_bind,
- 	.probe	= mxs_video_probe,
- 	.remove = mxs_video_remove,
-+#if !IS_ENABLED(CONFIG_VIDEO_DT_SIMPLEFB)
- 	.flags	= DM_FLAG_PRE_RELOC | DM_FLAG_OS_PREPARE,
-+#else
-+	.flags	= DM_FLAG_PRE_RELOC | DM_FLAG_OS_PREPARE | DM_FLAG_LEAVE_PD_ON,
 +#endif
- 	.priv_auto   = sizeof(struct mxsfb_priv),
+ 
+ struct dsi_host_ops samsung_dsi_ops = {
+ 	.init = samsung_dsi_init,
+diff --git a/drivers/video/bridge/samsung-dsim.c b/drivers/video/bridge/samsung-dsim.c
+index 986f1d830844..36e45abb3009 100644
+--- a/drivers/video/bridge/samsung-dsim.c
++++ b/drivers/video/bridge/samsung-dsim.c
+@@ -144,5 +144,8 @@ U_BOOT_DRIVER(samsung_dsim) = {
+ 	.remove				= samsung_dsim_remove,
+ 	.probe				= samsung_dsim_probe,
+ 	.ops				= &samsung_dsim_ops,
++#if IS_ENABLED(CONFIG_VIDEO_DT_SIMPLEFB)
++	.flags				= DM_FLAG_LEAVE_PD_ON,
++#endif
+ 	.priv_auto		= sizeof(struct samsung_dsim_priv),
  };
 -- 
 2.43.0
