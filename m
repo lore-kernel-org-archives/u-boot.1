@@ -4,134 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FB84FA374A
-	for <u-boot@archiver.kernel.org>; Fri, 13 Sep 2024 12:37:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADC12EEE26C
+	for <u-boot@archiver.kernel.org>; Fri, 13 Sep 2024 12:38:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CEA688D63;
+	by phobos.denx.de (Postfix) with ESMTP id 6CF2588D6B;
 	Fri, 13 Sep 2024 14:37:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="3UZrntAz";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="o6Z6oaw6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 40183889EF; Fri, 13 Sep 2024 11:32:49 +0200 (CEST)
-Received: from NAM04-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam04on2060a.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2409::60a])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id BEAD288C6F; Fri, 13 Sep 2024 11:57:06 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 270E888936
- for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 11:32:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Padmarao.Begari@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=USha22tsiCMr8vV2wSoYz7rHBa+LAMM1QkP0px5cVr+HBRmNRaGhStfklpSll/s9bSC4tEbIlvjqJ13tNBg1loyxVxvaBdTzT7rsE5b1CvIoecz5CAq/bRXCqPu2/k9Y1VlexN6587u3XhW7I63Rm8pjrnW8jMAcDe0SHCDGRACH8WvnNiIuoa5BVgFshJRjjRCA+H3Endtjr05ywEqnZS1zkmJwuXDrOmTWXa4wzJ2b9blhQKheGSZDoSB62GADtqUdGUOXTaaAr8eXV+jtYrh956Rgaui+0j6iu6DSTh+CQIEFr/gunZlGO7aJnMwrRQvjeSWVHcViUJXCUaXaYw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=WODwaUrH1xjDvaGD5Wtjd0I6PN3i4o2Vjys8RZKixoE=;
- b=uqBZG+2VUNJSy0R+ifsPlBsAMcZuRA+vjNgWhDwnSk76+9e46UM0gfcV1MiPr5wDnG0kwEAGFhKH6hMHZA3Tl6jTcDyFe/Mp0IDsWmdAp25g08C+bl7tuAKDmAlnOGTxTRoGBYcgwh7jscsNowpvkNyrT1aXtHC+tjphmrIMQHo+GSPA2Xtgu5JHnxti+Qo4ookhGaiV2EFfGTmvKRM9v+SWWj5rmMKC1nlOc4MZQgCXmAHy04jb84eSliAklMsVosF+Vd5bhcrpxkfQSV4rSIDubhoPx90RusgHR92wRBOe3Qcv5Z9wyNvJYOLKyycQVUd9xEOMSURgZ9mXnK9UiA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=WODwaUrH1xjDvaGD5Wtjd0I6PN3i4o2Vjys8RZKixoE=;
- b=3UZrntAzrr2TJmMm2clagBAb4e+HPRw8ftp3XR4JrHJ20R8J66rz2vljhOl1QycsyUmLRZgjUd8+PZU/MviPJiXQzKqrkhhIi/GOdcNT3nmjRRjgz6n8n+O3Xse2XEKgxoO+kXDVZHpsej8ALinYSrWgJef3KGh7SABpz6BgxFw=
-Received: from SJ0PR03CA0115.namprd03.prod.outlook.com (2603:10b6:a03:333::30)
- by IA1PR12MB8537.namprd12.prod.outlook.com (2603:10b6:208:453::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.27; Fri, 13 Sep
- 2024 09:32:43 +0000
-Received: from SJ5PEPF000001D0.namprd05.prod.outlook.com
- (2603:10b6:a03:333:cafe::50) by SJ0PR03CA0115.outlook.office365.com
- (2603:10b6:a03:333::30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7939.25 via Frontend
- Transport; Fri, 13 Sep 2024 09:32:43 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- SJ5PEPF000001D0.mail.protection.outlook.com (10.167.242.52) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7918.13 via Frontend Transport; Fri, 13 Sep 2024 09:32:42 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 13 Sep
- 2024 04:32:41 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 13 Sep
- 2024 04:32:39 -0500
-Received: from xhdkummari40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Fri, 13 Sep 2024 04:32:38 -0500
-From: Padmarao Begari <padmarao.begari@amd.com>
-To: <u-boot@lists.denx.de>, <git-dev@amd.com>
-CC: <michal.simek@amd.com>, <venkatesh.abbarapu@amd.com>,
- <Prasad.Kummari@amd.com>
-Subject: [PATCH] board: xilinx: Remove conditional check for Microblaze
-Date: Fri, 13 Sep 2024 15:02:31 +0530
-Message-ID: <20240913093231.2343528-1-padmarao.begari@amd.com>
-X-Mailer: git-send-email 2.25.1
+ by phobos.denx.de (Postfix) with ESMTPS id F3FBB88BCF
+ for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 11:57:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=dario.binacchi@amarulasolutions.com
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a8d56155f51so231441666b.2
+ for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 02:57:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1726221420; x=1726826220;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=swiTdlXpxz7ztsvlYK79VGvCm12s6t/1zlzaJmhbPu8=;
+ b=o6Z6oaw6csVkSQpsSwr+lRfNmQDO2kqyCCE6X6Ogg35ZMDF9rkD3rgK0qpu7OQp+I2
+ 5EYcMcziGInVQDNF/FFkEJy9Hg2BIsJj8Iq4UOR08/VQ64c9gkkHPSaerZIWmUxVSA9L
+ HoQjOLEF/LKGoYlGvTiYqO3NM+5df2dQHQ9No=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1726221420; x=1726826220;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=swiTdlXpxz7ztsvlYK79VGvCm12s6t/1zlzaJmhbPu8=;
+ b=iypWRAPZpd6rcvbPmex8lWLlHbyw6qHWPlhJVekqvS2+VqDUPXoN4+XSCkXmipJd9i
+ jXT8CK41NvGnPW7nG54V0uInbU/3JBZ1o46u0RZN5O7AQqLXqOMrRFvd0rEEeNYzh/W4
+ 9ZtIpI+RS7VGs5Y/LP07fjclXsC5Qt/uqPSdy2YOFC8ZlVeWBhES5xv42ZhdDD1pUuPX
+ vsoOa2NiSahqHr8xKgF5GwgumLuXYewGUIx3OIl1Js21rjTMmsI1TCgEon0LI3h0hkoq
+ KSUB6DEXOH1PWPMJpEFqlpcqQ6df5GAZP0f1USVeNx0p7T5FV+XTE/7O4kpKl7qjUvr5
+ aRDA==
+X-Gm-Message-State: AOJu0YzyK7YwBp5f8EV8R9S4+GcihdezDXjGjf253ot6vEU69Tpk6H+a
+ NMNYMAF1w0CKs5u9C4t5tP0IoTa3zaJIJ+u0eIMxD20+OpBYo+l43H/P1vpVJuMDhW8oAQbQSRz
+ zQpI=
+X-Google-Smtp-Source: AGHT+IGLl12s3eWwNMQAnqBHvSe8OPkRJojHZeHEtacQm0VkuqPbz2JNV3Wa01/dbRiAwJV9HtJReg==
+X-Received: by 2002:a17:907:940e:b0:a8d:2ab2:c9b1 with SMTP id
+ a640c23a62f3a-a90296716efmr520301166b.56.1726221419343; 
+ Fri, 13 Sep 2024 02:56:59 -0700 (PDT)
+Received: from dario-ThinkPad-T14s-Gen-2i.homenet.telecomitalia.it
+ (host-87-4-102-18.retail.telecomitalia.it. [87.4.102.18])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a8d25cee72bsm863224766b.173.2024.09.13.02.56.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 13 Sep 2024 02:56:59 -0700 (PDT)
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+To: u-boot@lists.denx.de
+Cc: Fabio Estevam <festevam@denx.de>, linux-amarula@amarulasolutions.com,
+ michael@amarulasolutions.com, Miquel Raynal <miquel.raynal@bootlin.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, Alexander Dahl <ada@thorsis.com>,
+ Anatolij Gustschin <agust@denx.de>,
+ Andrzej Hajda <andrzej.hajda@intel.com>,
+ Anton Bambura <jenneron@protonmail.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
+ Devarsh Thakkar <devarsht@ti.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Fabio Estevam <festevam@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
+ Igor Prusov <ivprusov@salutedevices.com>,
+ Igor Prusov <ivprusov@sberdevices.ru>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
+ Julien Masson <jmasson@baylibre.com>, Liu Ying <victor.liu@nxp.com>,
+ Lukasz Majewski <lukma@denx.de>, Maksim Kiselev <bigunclemax@gmail.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Marco Felsch <m.felsch@pengutronix.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Minkyu Kang <mk7.kang@samsung.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Nicolas Heemeryck <nicolas.heemeryck@devialet.com>,
+ Nikhil M Jain <n-jain1@ti.com>,
+ Patrick Barsanti <patrick.barsanti@amarulasolutions.com>,
+ Peng Fan <peng.fan@nxp.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Sakari Ailus <sakari.ailus@linux.intel.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Stefan Bosch <stefan_b@posteo.net>, Stefano Babic <sbabic@denx.de>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ =?UTF-8?q?S=C3=A9bastien=20Szymanski?= <sebastien.szymanski@armadeus.com>,
+ Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>,
+ Vinod Koul <vkoul@kernel.org>, Yang Xiwen <forbidden405@outlook.com>,
+ Ye Li <ye.li@nxp.com>, u-boot-amlogic@groups.io
+Subject: [PATCH 00/26] Support display (and even more) on the BSH SMM S2/PRO
+ boards
+Date: Fri, 13 Sep 2024 11:55:42 +0200
+Message-ID: <20240913095622.72377-1-dario.binacchi@amarulasolutions.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001D0:EE_|IA1PR12MB8537:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6da60990-6cca-4dce-671b-08dcd3d7048e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|82310400026|376014|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?aMIZ+7n0QCBD4GD1Gp7XZvWHDg/vdoaGV6fTUYqkydgw0R9WwT3pdRb5HRHm?=
- =?us-ascii?Q?6hoX6qhtS/xzCsz5dy5IIKrDVHwmxVr/GQifaUBWMQRJ+8Z168tPxJRn0o7X?=
- =?us-ascii?Q?qfBKvoMURJ37Lvnr3AwsM0C1hgvSgI7uyjRG+o1Tm6Hs3GgNTzXtDEuL25YV?=
- =?us-ascii?Q?rvRGxFon0V3riT4Z82XBgx6KKGsGj5ppjmDQk1VO4t0M53dddfJy7QnFzTRD?=
- =?us-ascii?Q?IbseGgMlA6fE+2k5XNs18PM1LSpTDtFRY33Yikmw81SGZRnRElxr75PajYmp?=
- =?us-ascii?Q?4SDLDi7h40Vyq2upTBBfTF0/5tBX2uS3zuRCtAtvHbI5E4m4sUMtG/5cZPzd?=
- =?us-ascii?Q?2MPjU4q36GXj8vnRsgDuwd92C5uyY1SfnaXnqNdhRw5Y1xT/9N+TrsBDJ9in?=
- =?us-ascii?Q?0XLgrTY/ONZB6lP6fdIvQyUYTAw9nDIuF3cpBxsJRXuB0zPCZTlQruuLK3K2?=
- =?us-ascii?Q?NH4/gExZFUAMz7aCQYDwAAZoebOJG6o/3KcJ1azR+C2XW8J0F6KJ9HYpdflv?=
- =?us-ascii?Q?6a9QAZISoeHM/l42PojiHBAL/q06NeTjt7L251WNlhhC3ROltDPm59/hbdCk?=
- =?us-ascii?Q?meMtuOGgzE0rE2ytWYFoIMEL8yITNi5SLTYGjho5WTsnb1Gw9cc/6Afz241M?=
- =?us-ascii?Q?RR3jHFwC7WVll7UaiiSn9DqT6FlYocFMqcMHg1o/pWAXLQ7QsxrpGBgLXrjq?=
- =?us-ascii?Q?+53asgZlymmfCxniSbjb963Awf2TbfqWKKU8cM7niQP2b3zqloZTO5PkXG4W?=
- =?us-ascii?Q?mkyRv+pPcNCZy7D1dKYem5nGMx55DGCUNNqVawREVHkYR4s0oY2kn+xF0ixr?=
- =?us-ascii?Q?weDOgfrApTRh3v4q8u3TF5tQ7+S3QNYJxqrcI06+8423WYo+n/LVuhDFtmQI?=
- =?us-ascii?Q?li93s64RLWrNrzUWwl0UP0NacrPTY6NF7+qbxjjZLDLpE/DzSuqzC9zTjmSJ?=
- =?us-ascii?Q?CwL69KoX8y3w39yByGwGU8QC+GFwiHo1Hnn8zJOWaYkjjD+7gb94ZfcFjVRB?=
- =?us-ascii?Q?apD66hZHTC9th0mwDf3Z9C0lMJXgcbOtIF7nI3bYrl1ojuhdPTznC5xr5Z31?=
- =?us-ascii?Q?HdQ6AWVp/W2IaRmJPYs9IehJNtJ01zttTX6Vf/Q2yuFcuzoLvaA7KgmpZIpO?=
- =?us-ascii?Q?kJDqEpFCJcI4zGl9f6mQ7Rc2bfZwE2W3vqkDJj0Vy+HDdqMGWi6bXRwc974o?=
- =?us-ascii?Q?5Ie4WUIVwCnDmUdpxUXpdrBqpMYBfAVS7N5KOp9wIwOwcpd8V54XhEzXgZPn?=
- =?us-ascii?Q?IGm4wNovfDCzVSnbxaNJ2VPOvfWTqQdN0odUyYfqjgcanQASDu/ubYisNdOW?=
- =?us-ascii?Q?nhQL2NvzII34KgTdx7RbmZ56TJ7tNLKbMnWOfD9nPDJXQWEQsKS/d3VkeJDk?=
- =?us-ascii?Q?Noi8ekPkcYOKK0dH6jEo2vk5jcsNVRtuPDsjANw1xJeqSDlsmdtRvvANSzQ3?=
- =?us-ascii?Q?y1++nQ1TSZo/Rrxu2ByYHWv7BRd1BwCt?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(82310400026)(376014)(1800799024); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Sep 2024 09:32:42.6076 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6da60990-6cca-4dce-671b-08dcd3d7048e
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001D0.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB8537
 X-Mailman-Approved-At: Fri, 13 Sep 2024 14:37:34 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -149,68 +132,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-Boot is not picking boot.scr script address from device tree
-rather it's using default address for Microblaze platform,
-and it's picking for other platforms. Remove conditional check
-for Microblaze platform, so that u-boot pick up boot.scr script
-address for all platforms from device tree.
 
-Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
----
- board/xilinx/common/board.c | 39 +++++++++++++++++--------------------
- 1 file changed, 18 insertions(+), 21 deletions(-)
+This series was created out of the need to supportsimple-framebuffer for
+BSH boards SMM_S2 and SMM_S2PRO. To achieve this goal, it was necessary
+to develop additional code and/or drivers for all the required components
+(i. e. clock, power domain, video, etc.). This series has a Linux
+counterpart that will also be submitted upstream as soon as possible.
+Furthermore, given the overlap in topics with the recent series [1], we
+are open to collaborate on the common parts to ensure proper development.
 
-diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
-index 0b43407b9e..a217b39df6 100644
---- a/board/xilinx/common/board.c
-+++ b/board/xilinx/common/board.c
-@@ -426,28 +426,25 @@ int board_late_init_xilinx(void)
- 	struct xilinx_board_description *desc;
- 	phys_size_t bootm_size = gd->ram_top - gd->ram_base;
- 	u64 bootscr_flash_offset, bootscr_flash_size;
--
--	if (!IS_ENABLED(CONFIG_MICROBLAZE)) {
--		ulong scriptaddr;
--		u64 bootscr_address;
--		u64 bootscr_offset;
--
--		/* Fetch bootscr_address/bootscr_offset from DT and update */
--		if (!ofnode_read_bootscript_address(&bootscr_address,
--						    &bootscr_offset)) {
--			if (bootscr_offset)
--				ret |= env_set_hex("scriptaddr",
--						   gd->ram_base +
--						   bootscr_offset);
--			else
--				ret |= env_set_hex("scriptaddr",
--						   bootscr_address);
--		} else {
--			/* Update scriptaddr(bootscr offset) from env */
--			scriptaddr = env_get_hex("scriptaddr", 0);
-+	ulong scriptaddr;
-+	u64 bootscr_address;
-+	u64 bootscr_offset;
-+
-+	/* Fetch bootscr_address/bootscr_offset from DT and update */
-+	if (!ofnode_read_bootscript_address(&bootscr_address,
-+					    &bootscr_offset)) {
-+		if (bootscr_offset)
- 			ret |= env_set_hex("scriptaddr",
--					   gd->ram_base + scriptaddr);
--		}
-+					   gd->ram_base +
-+					   bootscr_offset);
-+		else
-+			ret |= env_set_hex("scriptaddr",
-+					   bootscr_address);
-+	} else {
-+		/* Update scriptaddr(bootscr offset) from env */
-+		scriptaddr = env_get_hex("scriptaddr", 0);
-+		ret |= env_set_hex("scriptaddr",
-+				   gd->ram_base + scriptaddr);
- 	}
- 
- 	if (!ofnode_read_bootscript_flash(&bootscr_flash_offset,
+[1] https://lore.kernel.org/all/20240910101344.110633-1-miquel.raynal@bootlin.com/T/#mb7cd440abc6fcc0de205f577eb3225e1c1c76823
+
+
+Dario Binacchi (6):
+  boot: fdt_simplefb: add a debug message
+  video: mxsfb: support simple frame-buffer
+  video: bridge: samsung: support simple frame-buffer
+  imx8mn_bsh_smm_s2/pro: support simple frame-buffer
+  imx8mn_bsh_smm_s2/pro: enable simple frame-buffer
+  imx8mn_bsh_smm_s2/pro: add splash screen with BSH logo
+
+Michael Trimarchi (20):
+  clk: Propagate clk_set_rate() if CLK_SET_PARENT_RATE present for gate
+    and mux
+  clk: imx8mn: Prevent clock critical path from disabling during
+    reparent and set_rate
+  clk: imx8mm: Prevent clock critical path from disabling during
+    reparent and set_rate
+  clk: clk-uclass: Implement CLK_OPS_PARENT_ENABLE
+  clk: imx8mm: Mark IMX8MM_SYS_PLL2 and IMX8MM_SYS_PLL3 as enabled
+  clk: imx8mn: Mark IMX8MN_SYS_PLL2 and IMX8MN_SYS_PLL3 as enabled
+  clk: imx8mn: add video clocks support
+  power: Add iMX8M block ctrl driver for dispmix
+  video: Add video link framework
+  video: bridge: Add check_timing interface
+  video: dsi_host: add disable host interface
+  video: Update mxsfb video drivers for iMX8MM/iMX8MN display
+  video: Enable DM_UC_FLAG_SEQ_ALIAS for display and bridge
+  phy: dphy: add support to calculate the timing based on hs_clk_rate
+  phy: dphy: Correct lpx parameter and its derivatives(ta_{get,go,sure})
+  phy: dphy: Correct clk_pre parameter
+  lib: div64: sync with Linux
+  video: bridge: Add Samsung DSIM bridge
+  video: Add Synaptics R63353 panel driver
+  imx8mn_bsh_smm_s2/pro: Enable display on reference design
+
+ .../dts/imx8mn-bsh-smm-s2-u-boot-common.dtsi  |   23 +
+ board/bsh/imx8mn_smm_s2/imx8mn_smm_s2.c       |   99 ++
+ boot/fdt_simplefb.c                           |    2 +
+ common/stdio.c                                |    4 +
+ configs/imx8mn_bsh_smm_s2_defconfig           |   21 +
+ configs/imx8mn_bsh_smm_s2pro_defconfig        |   21 +
+ drivers/clk/clk-gate.c                        |    1 +
+ drivers/clk/clk-mux.c                         |    2 +-
+ drivers/clk/clk-uclass.c                      |   67 +-
+ drivers/clk/clk.c                             |    9 +
+ drivers/clk/imx/clk-imx8mm.c                  |   73 +-
+ drivers/clk/imx/clk-imx8mn.c                  |  131 +-
+ drivers/phy/meson-axg-mipi-dphy.c             |    2 +-
+ drivers/phy/phy-core-mipi-dphy.c              |   36 +-
+ drivers/power/domain/Kconfig                  |    6 +
+ drivers/power/domain/Makefile                 |    1 +
+ drivers/power/domain/imx8m-blk-ctrl.c         |  438 +++++
+ drivers/power/domain/imx8m-power-domain.c     |  213 ++-
+ drivers/video/Kconfig                         |   14 +
+ drivers/video/Makefile                        |    2 +
+ drivers/video/bridge/Kconfig                  |   13 +
+ drivers/video/bridge/Makefile                 |    1 +
+ drivers/video/bridge/samsung-dsi-host.c       | 1576 +++++++++++++++++
+ drivers/video/bridge/samsung-dsim.c           |  151 ++
+ drivers/video/bridge/samsung-dsim.h           |   20 +
+ drivers/video/bridge/video-bridge-uclass.c    |   11 +
+ drivers/video/display-uclass.c                |    1 +
+ drivers/video/dsi-host-uclass.c               |   10 +
+ drivers/video/mxsfb.c                         |  144 +-
+ drivers/video/synaptics-r63353.c              |  228 +++
+ drivers/video/video_link.c                    |  529 ++++++
+ include/clk.h                                 |    9 +
+ include/configs/imx8mn_bsh_smm_s2.h           |    1 +
+ include/configs/imx8mn_bsh_smm_s2_common.h    |    4 +
+ include/configs/imx8mn_bsh_smm_s2pro.h        |    1 +
+ include/dsi_host.h                            |    8 +
+ include/linux/clk-provider.h                  |    1 +
+ include/linux/math64.h                        |  110 ++
+ include/phy-mipi-dphy.h                       |    3 +
+ include/video_bridge.h                        |   20 +
+ include/video_link.h                          |   19 +
+ tools/logos/bsh.bmp                           |  Bin 0 -> 10644 bytes
+ 42 files changed, 3942 insertions(+), 83 deletions(-)
+ create mode 100644 drivers/power/domain/imx8m-blk-ctrl.c
+ create mode 100644 drivers/video/bridge/samsung-dsi-host.c
+ create mode 100644 drivers/video/bridge/samsung-dsim.c
+ create mode 100644 drivers/video/bridge/samsung-dsim.h
+ create mode 100644 drivers/video/synaptics-r63353.c
+ create mode 100644 drivers/video/video_link.c
+ create mode 100644 include/video_link.h
+ create mode 100644 tools/logos/bsh.bmp
+
 -- 
-2.25.1
+2.43.0
 
