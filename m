@@ -4,77 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94F63FA3737
-	for <u-boot@archiver.kernel.org>; Fri, 13 Sep 2024 09:53:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48583FA3736
+	for <u-boot@archiver.kernel.org>; Fri, 13 Sep 2024 09:57:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27510889EF;
-	Fri, 13 Sep 2024 11:53:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C03BE88BCF;
+	Fri, 13 Sep 2024 11:57:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RIS1/xQp";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="DJmgR0Qq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3A2D88A30; Fri, 13 Sep 2024 11:53:25 +0200 (CEST)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
+ id E199288B6D; Fri, 13 Sep 2024 11:57:05 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E05088965
- for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 11:53:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-374c4c6cb29so706293f8f.3
- for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 02:53:22 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A2A2886AF
+ for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 11:57:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=dario.binacchi@amarulasolutions.com
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-a90349aa7e5so193038166b.0
+ for <u-boot@lists.denx.de>; Fri, 13 Sep 2024 02:57:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726221202; x=1726826002; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=St/D9eB3s62FTU0MD6XmDnjrniDSiu28jiUvu6W/CGE=;
- b=RIS1/xQpoHPZadnBWuU6OHxX7VlpvUcNlfK0xmBaP/T6n6VF1BcGIkhCL8COUfBnN5
- CephgjqtaV5aCjBPzwPyRMYLXg+EM7tQSJ+fVPhHQqup+9K5tJ2IQGIO//f2ASk2gMs7
- 63lp2LJvj8Kxm6rtUS6G7MtQHm+RTMs7Ii3hvy3SH2Zl3MpOwo6uLqigmpf1L0jWzRAX
- VNI6FJkmZy5FfPMQhBlx6bqS8NbaknvaDeO54sCs8/gBjqitFoGTR/qIE6yaZ1f9trnv
- KwRffpRJ+cjkuQWRKCW9OaX1RNz2CpRKwR0YhSeVYOs/hi2ioNuTB41lOEuGR5f3l7Sx
- KE5Q==
+ d=amarulasolutions.com; s=google; t=1726221421; x=1726826221;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=jE25Jwvxv1lQqd9B0PMvAa/3bguXHPwmlQrK/A2JMtE=;
+ b=DJmgR0QqUQr7P/kO8hNP7Zjp+IPS8Pg2UGqVhz1V3g4YiqUnyzLn+EH8XXmo0JONnk
+ TDhAvobRb9yTTWRWz//Uu1MHuvL6P+mU9tamc00edsIc+ipj6NQu83Kibcs6mm5+yRDt
+ Bpfe31aF32FujmXA8dhY6hOJpBp/Y/PqyH38s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726221202; x=1726826002;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=St/D9eB3s62FTU0MD6XmDnjrniDSiu28jiUvu6W/CGE=;
- b=vqV5Hj2fiIJHEQZ87JEOoWewf1B5W73oe4QN8YjzZ8L90URI1tLpk2XMABQPBj6Pw3
- dGWF3o881RvZZCcuQzEHUy9pQil5JpCVmbv6uifyi0RBvgHtzB+uVEHQugmwgIrv0w2L
- N5JIdX76UrVawe9vDt3SNjkAdNGQvmZJOM+5hxI0ta/fvLmRdNWen8m9nDHexmzlqOYo
- 2pltMxEVggbW/EELebqwuE0nSivv2xvEQpokTy/yFS1NUMUNvc/v4tSG5/56UeO0YTuf
- ZsnDi7NeRls+9T7CPJaKkH1bsjGuwUiDf4fy3v5W+6d9rax52Yj3i0clvHreY9s5BCSG
- rzMg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWqUWYcZXUFq9jZiPeTCYobFTVXYa+51YM/uC46uMkBBK74Y/lbnmvlLlKj55pEuOCHkyNO+hE=@lists.denx.de
-X-Gm-Message-State: AOJu0YzI+QdWH21fYB3y/WjznnhSF2413ZVxtnV2R8w5hBmS/bVRGymU
- xkq7iMSS+klGMyaf1ZBjrWczUqlB2SpryeTmNjxV54UFWoSBbrKixXCr/QsCMq4=
-X-Google-Smtp-Source: AGHT+IEByCqG+q2HN2lnaw+z1RRDV6x+L2Q6zTcb6mJam+Dl4nRGFAX0DilK9yWY9n46Pp+CM56yAw==
-X-Received: by 2002:adf:a39b:0:b0:368:3f6a:1dea with SMTP id
- ffacd0b85a97d-378d61d4f40mr2151615f8f.6.1726221201323; 
- Fri, 13 Sep 2024 02:53:21 -0700 (PDT)
-Received: from localhost.localdomain (ppp176092143132.access.hol.gr.
- [176.92.143.132]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a8d2583384asm863947066b.17.2024.09.13.02.53.19
+ d=1e100.net; s=20230601; t=1726221421; x=1726826221;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=jE25Jwvxv1lQqd9B0PMvAa/3bguXHPwmlQrK/A2JMtE=;
+ b=uoNs9DzUtKxr+fU0rDTo2QxxeIkefhtkB6ij+Tr5b/cBCHYKeo+zcT9DXqkNnnibnx
+ Pke07QLUSsrPBxZPU3hN4qeNS9POt+0r6QUE56sjfgUkMVjCUH25vHShQf1x3QqIf2B+
+ 4HtGZG3gWx+3B3Z2KRTy/8L8V0LOxGWHlU29dECqhb7KB3F9SGgP9A2/3aWe6CtH73Sj
+ WbIL9ASbnysAFBxKhu1duJe8TMJqa4dQbA3bdInPw8Vb+kVo41sBumXpTNqxaE6D3ODO
+ tSjlUkuSQ3wF+S1Ja6dvo/XYwABpjixD2Qs8jhMHLkcZqjlUALGJAO8pi7LuzJrxVcxf
+ B7Zw==
+X-Gm-Message-State: AOJu0Yw1czXYi7KshxGLmx1Zq5wTnAQKLYEwtTibsf61Ln4EsrrxJ3ye
+ hq7xqss7uey5unK8IjVGjl8P/PCBngGc9RWBv5cPj1PybsHe6/S0B60DRh6twznnbgBSHPgU6Sf
+ 776s=
+X-Google-Smtp-Source: AGHT+IEPpLhVmMIWTxLRQeZXcejBGD3W2M6KqHuRFO9q/SlH4LThwRNMFy3/YeomVhgiHvGTiRmzJw==
+X-Received: by 2002:a17:906:bc26:b0:a8d:2ec3:94f4 with SMTP id
+ a640c23a62f3a-a902964d007mr497794666b.54.1726221420786; 
+ Fri, 13 Sep 2024 02:57:00 -0700 (PDT)
+Received: from dario-ThinkPad-T14s-Gen-2i.homenet.telecomitalia.it
+ (host-87-4-102-18.retail.telecomitalia.it. [87.4.102.18])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a8d25cee72bsm863224766b.173.2024.09.13.02.56.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Sep 2024 02:53:20 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: pbrobinson@gmail.com,
-	mbrugger@suse.com
-Cc: sughosh.ganu@linaro.org, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, "Ivan T. Ivanov" <iivanov@suse.de>,
- u-boot@lists.denx.de
-Subject: [PATCH v3] board: rpi: Enable capsule updates
-Date: Fri, 13 Sep 2024 12:53:15 +0300
-Message-ID: <20240913095317.1490035-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.45.2
+ Fri, 13 Sep 2024 02:57:00 -0700 (PDT)
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+To: u-boot@lists.denx.de
+Cc: Fabio Estevam <festevam@denx.de>, linux-amarula@amarulasolutions.com,
+ michael@amarulasolutions.com, Miquel Raynal <miquel.raynal@bootlin.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Alexander Dahl <ada@thorsis.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Igor Prusov <ivprusov@sberdevices.ru>, Jan Kiszka <jan.kiszka@siemens.com>,
+ Julien Masson <jmasson@baylibre.com>, Lukasz Majewski <lukma@denx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, Yang Xiwen <forbidden405@outlook.com>
+Subject: [PATCH 01/26] clk: Propagate clk_set_rate() if CLK_SET_PARENT_RATE
+ present for gate and mux
+Date: Fri, 13 Sep 2024 11:55:43 +0200
+Message-ID: <20240913095622.72377-2-dario.binacchi@amarulasolutions.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240913095622.72377-1-dario.binacchi@amarulasolutions.com>
+References: <20240913095622.72377-1-dario.binacchi@amarulasolutions.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -93,177 +103,146 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since RPI works well using EFI and has no size limitations with regards
-to U-Boot, add the needed structures to support capsule updates.
+From: Michael Trimarchi <michael@amarulasolutions.com>
 
-While at it update the most commonly used defconfigs and include capsule
-support and U-Boot commands needed by EFI
+Gate and mux does not have .set_rate operation, but they could have
+CLK_SET_PARENT_RATE flag set. In that case it's usually possible to find a
+parent up the tree which is capable of setting the rate (div, pll, etc).
+Add clk_generic_set_rate to allow them to trasverse the clock tree.
 
-Tested-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
+Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 ---
-This needs to be applied *after*
-https://lore.kernel.org/u-boot/20240830-b4-dynamic-uuid-v8-0-79b31b199bee@linaro.org/
 
-I managed to test this on rpi5 and works
-Changes since v2:
-- Add missing DFU options for rpi3 and rpi defconfigs
+ drivers/clk/clk-gate.c       |  1 +
+ drivers/clk/clk-mux.c        |  2 +-
+ drivers/clk/clk-uclass.c     | 20 ++++++++++++++++++++
+ drivers/clk/clk.c            |  9 +++++++++
+ include/clk.h                |  9 +++++++++
+ include/linux/clk-provider.h |  1 +
+ 6 files changed, 41 insertions(+), 1 deletion(-)
 
-Changes since v1:
-- Remove a redundant function definition
-- Add the required Kconfig options in more defconfigs
-- add my SoB which was missing...
-
- board/raspberrypi/rpi/rpi.c    | 13 +++++++++++++
- configs/rpi_3_b_plus_defconfig |  8 ++++++++
- configs/rpi_3_defconfig        |  8 ++++++++
- configs/rpi_4_defconfig        |  5 +++++
- configs/rpi_arm64_defconfig    |  8 ++++++++
- 5 files changed, 42 insertions(+)
-
-diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
-index d996eb0cf695..02800615a25a 100644
---- a/board/raspberrypi/rpi/rpi.c
-+++ b/board/raspberrypi/rpi/rpi.c
-@@ -63,6 +63,19 @@ struct msg_get_clock_rate {
- 	u32 end_tag;
+diff --git a/drivers/clk/clk-gate.c b/drivers/clk/clk-gate.c
+index bf1c6a93b468..bd0d3d44ac8c 100644
+--- a/drivers/clk/clk-gate.c
++++ b/drivers/clk/clk-gate.c
+@@ -115,6 +115,7 @@ const struct clk_ops clk_gate_ops = {
+ 	.enable = clk_gate_enable,
+ 	.disable = clk_gate_disable,
+ 	.get_rate = clk_generic_get_rate,
++	.set_rate = clk_generic_set_rate,
  };
-
-+struct efi_fw_image fw_images[] = {
-+	{
-+		.fw_name = u"RPI_UBOOT",
-+		.image_index = 1,
-+	},
-+};
-+
-+struct efi_capsule_update_info update_info = {
-+	.dfu_string = "mmc 0=u-boot.bin fat 0 1",
-+	.num_images = ARRAY_SIZE(fw_images),
-+	.images = fw_images,
-+};
-+
- #ifdef CONFIG_ARM64
- #define DTB_DIR "broadcom/"
+ 
+ struct clk *clk_register_gate(struct device *dev, const char *name,
+diff --git a/drivers/clk/clk-mux.c b/drivers/clk/clk-mux.c
+index 62477e15d27a..4feb8e8c821d 100644
+--- a/drivers/clk/clk-mux.c
++++ b/drivers/clk/clk-mux.c
+@@ -150,13 +150,13 @@ static int clk_mux_set_parent(struct clk *clk, struct clk *parent)
  #else
-diff --git a/configs/rpi_3_b_plus_defconfig b/configs/rpi_3_b_plus_defconfig
-index 3c8f8fc1bb75..a6a8431c8ff4 100644
---- a/configs/rpi_3_b_plus_defconfig
-+++ b/configs/rpi_3_b_plus_defconfig
-@@ -19,14 +19,19 @@ CONFIG_SYS_PBSIZE=1049
- # CONFIG_DISPLAY_BOARDINFO is not set
- CONFIG_MISC_INIT_R=y
- CONFIG_SYS_PROMPT="U-Boot> "
-+CONFIG_CMD_NVEDIT_EFI=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_USB=y
-+CONFIG_CMD_EFIDEBUG=y
- CONFIG_CMD_FS_UUID=y
- CONFIG_ENV_FAT_DEVICE_AND_PART="0:1"
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
- CONFIG_TFTP_TSIZE=y
-+CONFIG_DFU_MMC=y
-+CONFIG_SYS_DFU_DATA_BUF_SIZE=0x100000
-+CONFIG_SYS_DFU_MAX_FILE_SIZE=0x200000
- CONFIG_BCM2835_GPIO=y
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_BCM2835=y
-@@ -49,3 +54,6 @@ CONFIG_SYS_WHITE_ON_BLACK=y
- CONFIG_VIDEO_BCM2835=y
- CONFIG_CONSOLE_SCROLL_LINES=10
- CONFIG_PHYS_TO_BUS=y
-+# CONFIG_HEXDUMP is not set
-+CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
-+CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
-diff --git a/configs/rpi_3_defconfig b/configs/rpi_3_defconfig
-index 9853c448809a..358096f3d1c5 100644
---- a/configs/rpi_3_defconfig
-+++ b/configs/rpi_3_defconfig
-@@ -19,14 +19,19 @@ CONFIG_SYS_PBSIZE=1049
- # CONFIG_DISPLAY_BOARDINFO is not set
- CONFIG_MISC_INIT_R=y
- CONFIG_SYS_PROMPT="U-Boot> "
-+CONFIG_CMD_NVEDIT_EFI=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_USB=y
-+CONFIG_CMD_EFIDEBUG=y
- CONFIG_CMD_FS_UUID=y
- CONFIG_ENV_FAT_DEVICE_AND_PART="0:1"
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
- CONFIG_TFTP_TSIZE=y
-+CONFIG_DFU_MMC=y
-+CONFIG_SYS_DFU_DATA_BUF_SIZE=0x100000
-+CONFIG_SYS_DFU_MAX_FILE_SIZE=0x200000
- CONFIG_BCM2835_GPIO=y
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_BCM2835=y
-@@ -49,3 +54,6 @@ CONFIG_SYS_WHITE_ON_BLACK=y
- CONFIG_VIDEO_BCM2835=y
- CONFIG_CONSOLE_SCROLL_LINES=10
- CONFIG_PHYS_TO_BUS=y
-+# CONFIG_HEXDUMP is not set
-+CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
-+CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
-diff --git a/configs/rpi_4_defconfig b/configs/rpi_4_defconfig
-index f5fb322aa8fc..17b6688e75c5 100644
---- a/configs/rpi_4_defconfig
-+++ b/configs/rpi_4_defconfig
-@@ -20,11 +20,13 @@ CONFIG_SYS_PBSIZE=1049
- # CONFIG_DISPLAY_BOARDINFO is not set
- CONFIG_MISC_INIT_R=y
- CONFIG_SYS_PROMPT="U-Boot> "
-+CONFIG_CMD_NVEDIT_EFI=y
- CONFIG_CMD_DFU=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_PCI=y
- CONFIG_CMD_USB=y
-+CONFIG_CMD_EFIDEBUG=y
- CONFIG_CMD_FS_UUID=y
- CONFIG_ENV_FAT_DEVICE_AND_PART="0:1"
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-@@ -65,3 +67,6 @@ CONFIG_SYS_WHITE_ON_BLACK=y
- CONFIG_VIDEO_BCM2835=y
- CONFIG_CONSOLE_SCROLL_LINES=10
- CONFIG_PHYS_TO_BUS=y
-+# CONFIG_HEXDUMP is not set
-+CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
-+CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
-diff --git a/configs/rpi_arm64_defconfig b/configs/rpi_arm64_defconfig
-index 02f942cf3442..a8723ea24e1c 100644
---- a/configs/rpi_arm64_defconfig
-+++ b/configs/rpi_arm64_defconfig
-@@ -18,15 +18,20 @@ CONFIG_SYS_PBSIZE=1049
- # CONFIG_DISPLAY_BOARDINFO is not set
- CONFIG_MISC_INIT_R=y
- CONFIG_SYS_PROMPT="U-Boot> "
-+CONFIG_CMD_NVEDIT_EFI=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_PCI=y
- CONFIG_CMD_USB=y
-+CONFIG_CMD_EFIDEBUG=y
- CONFIG_CMD_FS_UUID=y
- CONFIG_ENV_FAT_DEVICE_AND_PART="0:1"
- CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
- CONFIG_TFTP_TSIZE=y
- CONFIG_DM_DMA=y
-+CONFIG_DFU_MMC=y
-+CONFIG_SYS_DFU_DATA_BUF_SIZE=0x100000
-+CONFIG_SYS_DFU_MAX_FILE_SIZE=0x200000
- CONFIG_BCM2835_GPIO=y
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_SDMA=y
-@@ -56,3 +61,6 @@ CONFIG_SYS_WHITE_ON_BLACK=y
- CONFIG_VIDEO_BCM2835=y
- CONFIG_CONSOLE_SCROLL_LINES=10
- CONFIG_PHYS_TO_BUS=y
-+# CONFIG_HEXDUMP is not set
-+CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
-+CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
---
-2.45.2
+ 	writel(reg, mux->reg);
+ #endif
+-
+ 	return 0;
+ }
+ 
+ const struct clk_ops clk_mux_ops = {
+ 	.get_rate = clk_generic_get_rate,
+ 	.set_parent = clk_mux_set_parent,
++	.set_rate = clk_generic_set_rate,
+ };
+ 
+ struct clk *clk_hw_register_mux_table(struct device *dev, const char *name,
+diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
+index 16169dac2340..e8db9b0ff2fd 100644
+--- a/drivers/clk/clk-uclass.c
++++ b/drivers/clk/clk-uclass.c
+@@ -515,6 +515,26 @@ ulong clk_get_parent_rate(struct clk *clk)
+ 	return pclk->rate;
+ }
+ 
++ulong clk_set_parent_rate(struct clk *clk, ulong rate)
++{
++	const struct clk_ops *ops;
++	struct clk *pclk;
++
++	debug("%s(clk=%p)\n", __func__, clk);
++	if (!clk_valid(clk))
++		return 0;
++
++	pclk = clk_get_parent(clk);
++	if (IS_ERR(pclk))
++		return -ENODEV;
++
++	ops = clk_dev_ops(pclk->dev);
++	if (!ops->set_rate)
++		return -ENOSYS;
++
++	return clk_set_rate(pclk, rate);
++}
++
+ ulong clk_round_rate(struct clk *clk, ulong rate)
+ {
+ 	const struct clk_ops *ops;
+diff --git a/drivers/clk/clk.c b/drivers/clk/clk.c
+index b8c2e8d531b9..67c6b23231ff 100644
+--- a/drivers/clk/clk.c
++++ b/drivers/clk/clk.c
+@@ -13,6 +13,7 @@
+ #include <dm/uclass.h>
+ #include <dm/lists.h>
+ #include <dm/device-internal.h>
++#include <linux/clk-provider.h>
+ 
+ int clk_register(struct clk *clk, const char *drv_name,
+ 		 const char *name, const char *parent_name)
+@@ -60,6 +61,14 @@ ulong clk_generic_get_rate(struct clk *clk)
+ 	return clk_get_parent_rate(clk);
+ }
+ 
++ulong clk_generic_set_rate(struct clk *clk, ulong rate)
++{
++	if (clk->flags & CLK_SET_RATE_PARENT)
++		return clk_set_parent_rate(clk, rate);
++
++	return clk_get_parent_rate(clk);
++}
++
+ const char *clk_hw_get_name(const struct clk *hw)
+ {
+ 	assert(hw);
+diff --git a/include/clk.h b/include/clk.h
+index 045e923a529b..f0fd524ee519 100644
+--- a/include/clk.h
++++ b/include/clk.h
+@@ -452,6 +452,15 @@ struct clk *clk_get_parent(struct clk *clk);
+  */
+ ulong clk_get_parent_rate(struct clk *clk);
+ 
++/**
++ * clk_set_parent_rate() - Set parent of current clock rate.
++ * @clk:	A clock struct that was previously successfully requested by
++ *		clk_request/get_by_*().
++ *
++ * Return: clock rate in Hz, or -ve error code.
++ */
++ulong clk_set_parent_rate(struct clk *clk, ulong rate);
++
+ /**
+  * clk_round_rate() - Adjust a rate to the exact rate a clock can provide
+  * @clk: A clock struct that was previously successfully requested by
+diff --git a/include/linux/clk-provider.h b/include/linux/clk-provider.h
+index 59f9c241b846..459fa2d15ceb 100644
+--- a/include/linux/clk-provider.h
++++ b/include/linux/clk-provider.h
+@@ -253,6 +253,7 @@ struct clk *clk_register_fixed_rate(struct device *dev, const char *name,
+ 
+ const char *clk_hw_get_name(const struct clk *hw);
+ ulong clk_generic_get_rate(struct clk *clk);
++ulong clk_generic_set_rate(struct clk *clk, ulong rate);
+ 
+ struct clk *dev_get_clk_ptr(struct udevice *dev);
+ 
+-- 
+2.43.0
 
