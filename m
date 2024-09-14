@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35663C35FE7
-	for <u-boot@archiver.kernel.org>; Sun, 15 Sep 2024 05:28:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57B57C35FE7
+	for <u-boot@archiver.kernel.org>; Sun, 15 Sep 2024 05:28:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32C0E88BF2;
+	by phobos.denx.de (Postfix) with ESMTP id 90E6B88D78;
 	Sun, 15 Sep 2024 07:28:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gGyACv5m";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aaR+mxRa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A2D688B55; Sat, 14 Sep 2024 22:06:34 +0200 (CEST)
-Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
- [IPv6:2607:f8b0:4864:20::b30])
+ id 50D1A88C7D; Sat, 14 Sep 2024 22:09:05 +0200 (CEST)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DDE97886F3
- for <u-boot@lists.denx.de>; Sat, 14 Sep 2024 22:06:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D8B8B88CD1
+ for <u-boot@lists.denx.de>; Sat, 14 Sep 2024 22:09:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=l.rubusch@gmail.com
-Received: by mail-yb1-xb30.google.com with SMTP id
- 3f1490d57ef6-e1a7fa52bacso471770276.1
- for <u-boot@lists.denx.de>; Sat, 14 Sep 2024 13:06:30 -0700 (PDT)
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-6dc7280e238so436967b3.3
+ for <u-boot@lists.denx.de>; Sat, 14 Sep 2024 13:09:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1726344390; x=1726949190; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1726344541; x=1726949341; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fC/lwERf3QJ0x4fU+H0czlxuz66WmLnb68qmGw9n2oo=;
- b=gGyACv5mSadMBVX8Ab3pGXk8/QmDezh9HqTOq4m5ub8hXcOrZqdFdvaOmnQVQPJ0j4
- xknIwlSEHJglH1iRPQmA01U8C1pCOcY288/Cy7jHZR9p8Ov290yL6HVn6HyMHueIW/kR
- lLKREcMazjOM7vm5ujcKpUhudfXLaB6vwLIg+XcX468ySvs/GwKK79SCdgelEJkRJ+pQ
- wLVPa3GjI+FlkhfHgeDbm00gcNIQRF/PPH+LbjBWQ0OvCnGBLpWFmq/JZxUeKNUXtsDT
- 9PosssSjYiBraYoc8HcpB+uAPwwqAGe5pelxiCwvEXO57isegIXRvOHY+mwYG+mQhx76
- Qlvg==
+ bh=bGNq/5QDOkGOhbzqZdbVwe3Va+H2WaUr6rMehGCglQs=;
+ b=aaR+mxRaJpX3M+IssNpSzB2JdS38AOTZLsTMVh9n4cNJUwRBEWN9ZuRT+fZ/xFbDT7
+ To4GTKfMkCtZ7IhWiFS+l6W0othxlnx0YawofLrF9s9YZ9EJYIx9KwfkTwH2WcygIv1E
+ 4OvgMvvlfyoQer2/PWdbOI2n0F4DaQA3mYLJJnzT98rDJHcTGyNuFoabRFUo542OXSXS
+ TCZvdnuUL7N3RpyI6Pfq3TEWX/bWOfHUMKeDAvLUPsZadeA09QYsHOoDgvJq0H/QzFxg
+ xewPHfcF3lGZYI3vmglM0Sk8AiXxLFMgeK3l3Lr8ZQacX2TJTWOHcMCthkyJzmXLrup1
+ fMoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726344390; x=1726949190;
+ d=1e100.net; s=20230601; t=1726344541; x=1726949341;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fC/lwERf3QJ0x4fU+H0czlxuz66WmLnb68qmGw9n2oo=;
- b=wXbu4cf3bYQKbq9PbkLKAu/Ci7qd0tV7kmRT6mqn7NI022+CmXPRGbljpAPgMN1U1c
- MIxXKFawCHfuWZWp4GajSnnGkkqa7T+0ry5ZN4jM1eDhM3T5s5A25Q/xOf5e+dXaJZ8K
- 3YSenKdivUKMASFsZbBjYbbJ25RQyGVVbUjDEOyEj0qBHhT7Y0ZD16gtIWf14AdSnosk
- r6vkCoHmMvtlo18WEWC36Jj6a19rC2OAYUQ6Kz75Fm2bLMlZaps00gv3gveLqt85ImeV
- qCkr5CHrnpw3zW2hAUlCWYUb2D7S2VRuGB6A5bB8MX0rr9CgabmhdMumVz8rZj4JsDN4
- zQ7A==
-X-Gm-Message-State: AOJu0Yxr3Sff8iOvd0+qYwZGY4tKCsytRlZOxMJirr3m69YkeBUjRqh1
- 5fNN3LNcx5biB5DEt75GfXT2gimlO9YxptDUcb4HmXNP9yAbhRtXiaQRVGQWoUwf5Z+8N8yOKsS
- JTJcd1fzvqMj5J5GtZ2kS0gZMow4JDQ==
-X-Google-Smtp-Source: AGHT+IFy9LeSX4ED4kD0/6mbjZhT2mfQW9QeVyEMGQw9WdmUqzs4nWAKM5AsNSAIfZDrOnX0gU3jmOnA68e2DSf3PPo=
-X-Received: by 2002:a05:6902:2589:b0:e11:65fa:b97f with SMTP id
- 3f1490d57ef6-e1d9db9b755mr4135012276.2.1726344389600; Sat, 14 Sep 2024
- 13:06:29 -0700 (PDT)
+ bh=bGNq/5QDOkGOhbzqZdbVwe3Va+H2WaUr6rMehGCglQs=;
+ b=mxfUmBLFpGAhb9WliysVoMNeCFCm3y/sQwWD5xpMKW1/LKqCZmQqmfKRWQDpfFNLCI
+ Zg5QJ3Gy/AEIbEsOsTLZfslFFv8E014CvQhcw5WA9/zZ3sLbN6IZbBCGboKf7E6ZrreE
+ T8A9iknd2xMVum+/Rm153NAeXGfMNc9LrlcPEgvRol/jOOdpZQ1CfpK58yVzBIYu6B70
+ fc4Q0TTUmzfSPvUNq/Z5s8052ANVDaWsbIbXkPjSJW59tc/kMaBI+xJqM++ziFYFhFz2
+ e/9BU4QIU3CfXgOkjy6yvsHwBlsJ41rX3unxEPwobTWKYv+W0XIW+U59lZs4IuIAehKG
+ A4ww==
+X-Gm-Message-State: AOJu0YyxMCH+yi6h+SibjImraFFjy2gi+ZDYLR3CK11bsspBk8Vl7bUy
+ l9LPppDAaAMsRhT1VC8pNiKQa7vhrfNH65tmCHuzrM7OFdJJQOoamBdexP8BjuHnT8nPd/fLnHR
+ Hc4HWbflinZzbe9Do9iA267Q5bW652g==
+X-Google-Smtp-Source: AGHT+IFIEPaFFw9NC0i/2pJb8nqx8gc1QOd8eaw2dKBlNo6aJmmPsxye3tobRGTyEfWgbryn8HgBckShIeX9/IBjCvA=
+X-Received: by 2002:a05:690c:385:b0:6d3:c7d:5eaa with SMTP id
+ 00721157ae682-6dbb6b9d317mr40105877b3.8.1726344541253; Sat, 14 Sep 2024
+ 13:09:01 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240912060649.190-1-l.rubusch@gmail.com>
- <20240912060649.190-9-l.rubusch@gmail.com>
- <c0861d70-afd8-4235-86ad-dee1d8bec79e@denx.de>
-In-Reply-To: <c0861d70-afd8-4235-86ad-dee1d8bec79e@denx.de>
+ <20240912060649.190-2-l.rubusch@gmail.com>
+ <960222cf-03dc-4fbb-98b1-1d38f9956636@denx.de>
+In-Reply-To: <960222cf-03dc-4fbb-98b1-1d38f9956636@denx.de>
 From: Lothar Rubusch <l.rubusch@gmail.com>
-Date: Sat, 14 Sep 2024 22:05:53 +0200
-Message-ID: <CAFXKEHaDrr3zJFjFUhcRfVJ-LSD1psTXkyTKuUktjc3+O2Z7rw@mail.gmail.com>
-Subject: Re: [PATCH 8/9] ARM: socfpga: add si5338 clock generator support
+Date: Sat, 14 Sep 2024 22:08:25 +0200
+Message-ID: <CAFXKEHYs6=ZfmoOzVOkGq7VJ_sz4vxRSfZJCgveUuWtgPRNCww@mail.gmail.com>
+Subject: Re: [PATCH 1/9] doc: board: enclustra: add Enclustra Intel AA1 SoM
 To: Marek Vasut <marex@denx.de>
 Cc: u-boot@lists.denx.de, trini@konsulko.com, simon.k.r.goldschmidt@gmail.com, 
  tien.fong.chee@intel.com
@@ -91,25 +91,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Sep 13, 2024 at 1:12=E2=80=AFAM Marek Vasut <marex@denx.de> wrote:
+On Fri, Sep 13, 2024 at 1:11=E2=80=AFAM Marek Vasut <marex@denx.de> wrote:
 >
 > On 9/12/24 8:06 AM, Lothar Rubusch wrote:
-> > The si5338 clock generator is needed on some Enclustra Socfpga SoMs.
-> > Introduce minimal support of this device.
-> >
-> > Signed-off-by: Lothar Rubusch <l.rubusch@gmail.com>
-> > ---
-> >   drivers/clk/Kconfig                          |   1 +
-> >   drivers/clk/Makefile                         |   1 +
-> >   drivers/clk/skyworks/Kconfig                 |  10 +
-> >   drivers/clk/skyworks/Makefile                |   3 +
-> >   drivers/clk/skyworks/Si5338-RevB-Registers.h | 441 ++++++++++++++++++=
-+
+> [...]
 >
-> Is there a matching Linux driver which could be imported instead ?
+> > +Mercury AA1 Module (Arria1 10)
+> > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+> > +
+> > +- SoM: https://www.enclustra.com/en/products/system-on-chip-modules/me=
+rcury-aa1/
+> > +- Carrier board Mercury+ ST1: https://www.enclustra.com/en/products/ba=
+se-boards/mercury-st1/
+> > +- Carrier board Mercury+ PE1: https://www.enclustra.com/en/products/ba=
+se-boards/mercury-pe1-200-300-400/
+> > +- Carrier board Mercury+ PE3: https://www.enclustra.com/en/products/ba=
+se-boards/mercury-pe3/
+> > +
+> > +There are slightly different variants of the AA1 SoM, going by the ide=
+ntifier.
+> > +
+> > +- Me-aa1-270-2i2-d11e-nfx3
+> > +- Me-aa1-270-3e4-d11e-nfx3
+> > +- Me-aa1-480-2i3-d12e-nfx3
+> > +
+> > +The u-boot setup is specific to a quartus design. Generate handoff fil=
+es from
+> > +the design. Pass them to a python script to produce a handoff.h file. =
+This is
+> > +needed as input for building the device-tree for u-boot. Eventually, b=
+uilding
+> > +the final u-boot depends on the particular Quartus design, the particu=
+lar
+> > +carrier board, the selected boot media and boot mode.
+> > +
+> > +Enclustra provides reference design examples which can be built with y=
+octo
+> > +using their meta-layer.
+> > +
+> > +- Reference Design AA1 on ST1: https://github.com/enclustra/Mercury_AA=
+1_ST1_Reference_Design
+> > +- Reference Design AA1 on PE1: https://github.com/enclustra/Mercury_AA=
+1_PE1_Reference_Design
+> > +- Reference Design AA1 on PE3: https://github.com/enclustra/Mercury_AA=
+1_PE3_Reference_Design
+> > +- Yocto meta-layer: https://github.com/enclustra/meta-enclustra-socfpg=
+a
+>
+> OpenEmbedded .
+>
 
-Well, not that I'm aware of. To be honest, I removed the si5338
-related patches. I'm unsure about the approach. The idea is to
-initialize the clock generator. This is supposed to be done as early
-as possible. So, at Enclustra u-boot/spl or similar would be
-preferable. In case I'll present this separately.
+Ok
+
+> > +Quick Start
+> > +-----------
+> > +
+> > +- Setup and build a Quartus design project
+> > +- Obtain the hps.xml file from the Quartus design project
+> > +- Generate the handoff.h file for u-boot
+> > +- Adjust the device-tree file according to your setup
+> > +- Build u-boot
+> > +- Flash u-boot
+> > +
+> > +Build U-Boot
+> > +------------
+> > +
+> > +The Quartus design produces a design specific ``hps.xml``, an ``emif.x=
+ml`` and
+> > +a corresponding ``id`` file contained in a folder ``handoff``.
+>
+> s@folder@directory@ on unix systems.
+>
+
+Ok
+
+> [...]
+>
+> > +.. code-block:: bash
+> > +
+> > +    $ sudo fdisk /dev/sda
+> > +        n,p,1,2048,+20M
+> > +        t,1,c
+> > +        n,p,2,409600,+1M
+> > +        t,2,a2
+> > +        n,p,3,425984,<REST>
+> > +        t,3,83
+> > +        w
+>
+> Have a look at 'sfdisk' tool, scriptable fdisk , that is preferable .
+>
+
+Ok, ich changed it using sfdisk
+
+> [...]
+>
+> > +Boot Media
+> > +----------
+> > +
+> > +Alternative boot media are possible as officially documented by Enclus=
+tra.
+> > +
+> > +* Micro-SD card
+> > +* eMMC
+> > +* QSPI
+> > +
+> > +NB: eMMC and QSPI can be flashed from off the u-boot shell. Usually af=
+ter
+>
+> What does 'NB:' stand for ?
+>
+
+I'll change this for "Note:"
+
+> > +flashing, the coorect boot mode needs to be set by a BSEL switch. Appr=
+oaches
+> > +are described consistently in the offical Enclustra documentation acco=
+rding to
+>
+> "official", typo, run the docs through e.g. aspell to catch those typos.
+>
+
+Thank you for the review and the hints. I'll apply the changes in the
+next version of this set.
+
+> [...]
