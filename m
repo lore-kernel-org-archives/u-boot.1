@@ -4,73 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18613C02180
-	for <u-boot@archiver.kernel.org>; Sat, 14 Sep 2024 07:34:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F9CDC02180
+	for <u-boot@archiver.kernel.org>; Sat, 14 Sep 2024 07:35:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4CBE688CC8;
-	Sat, 14 Sep 2024 09:34:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A97B388D74;
+	Sat, 14 Sep 2024 09:35:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ne1BRZuS";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="JXFV6E6b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5F5C88D03; Sat, 14 Sep 2024 09:34:52 +0200 (CEST)
-Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
- [IPv6:2607:f8b0:4864:20::630])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C68A288D78; Sat, 14 Sep 2024 09:35:10 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3793F88C71
- for <u-boot@lists.denx.de>; Sat, 14 Sep 2024 09:34:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 94A4B88C71
+ for <u-boot@lists.denx.de>; Sat, 14 Sep 2024 09:35:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=vincent.legoll@gmail.com
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-207397d1000so30493865ad.0
- for <u-boot@lists.denx.de>; Sat, 14 Sep 2024 00:34:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1726299289; x=1726904089; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=oP1D49I8YoHmlyIJt4hXDB6YHInctm/wDwSpasb/MpA=;
- b=ne1BRZuSrrHn/sNVnyfTwzyxH0wKiVjq4Im8pX+lRPSkgOtqjACq7IcHdyF1nbAK8U
- rTNkVmJaT+JVE+SAQWxAIiN1Nl+R5Hkn2Ydw9it1BKQoRR7NFMGk6XnpocBJT0Dg9wmG
- mzCxz6TXP+dLHxhmTh8kHQNIG/9wEX936RnviP2GiXYhRWkby0cqWtYwh6ZE2D7mLP9Z
- rcJUp/plug6lIu6b1zgo1mviSP6A/yG1ZzZosrsdEYh2Lzc73q5ygd+byElVWOEfSvyQ
- egbz2+Sjh/N3Y8/xV9iUXfjcAqy1xBwmQPmAI3nMaWmVrni99S5nxv5ci2VqM3kRSxfj
- oUog==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726299289; x=1726904089;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=oP1D49I8YoHmlyIJt4hXDB6YHInctm/wDwSpasb/MpA=;
- b=l5Yhrbokt57I93/DR8EV+M3pe20i5Qn8VEUwDB2G8k+LQWp8z7sVngivytkkhLJ8wX
- s5Wj73sPKWtwP+3ek043ourdCdOoNak7VMPlC/AusVIhbuYJtsLhE8GkCba0ndVMyy1j
- IeBKGVs8cVJJVHLSVGgt9zmN8kKOS44O8UFDqKIlEtpWqxLjOmHr+OfC96uw3aWWifkG
- ulbc0mUptAdmIz9zkKoqODSw6m3SafmWPZK7IyNfvpDfYiYpZtVSxI46s3Aub8c8qZqn
- EHvrPt4EPg6UM6+c1J1FVoST9MC18Yk8Tx8nbZX5tc/ASCPKID7wlLrx9BkP4+JOmRtB
- uSgQ==
-X-Gm-Message-State: AOJu0YwJfsNvCnJDdwyP5V/T1eSt/B/7DKKD8GgZxNioDWz+FoRO4NlR
- OIAZF9e6PHSUDnHAGvEyFguK+u8SVpHcD8AOiYHDgvbu2kLMJX19IU57NjXGPgaG7wuC8j++cjZ
- 2eJ3NU9SmQC7ZaraM1X78p3PvRhI=
-X-Google-Smtp-Source: AGHT+IF/HdTN3pVx12dgkOfyM42qXvFTKsBuck7vjR5wzgKXrcFl5TAx/Ua8D/LAALlgwJkvoXiQECrv9t+dNJDpwJw=
-X-Received: by 2002:a17:90b:906:b0:2da:82d4:c63c with SMTP id
- 98e67ed59e1d1-2db6717819bmr24544564a91.4.1726299288526; Sat, 14 Sep 2024
- 00:34:48 -0700 (PDT)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1726299298; x=1726904098; i=xypron.glpk@gmx.de;
+ bh=jUJamyFb6a1AgJgu4xwS//axZQhLApdbe1MeDLVD+Pg=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=JXFV6E6bupG8yeJwjM4CLKcBZ4GG+ynjDjic1CviZ/IF8Rni0+NtVgV74TPSGeao
+ zD96aFojPvCctMZVdQSPSuaPgKx+mYw52HHnDe+mYBky2j7YBjXLkwh3IHw8xzcF+
+ wZLSxvd4HESN9koFyB4kGZ8RhJ8ZaFoi7hS8Kfxk2sU2ApYagUZgF65kbCsckgVq3
+ X9K+jLyURjk6bkadk57T/5ckoXK4VOkx2CiXAjcBGXWc/q8JrYA93ImMJOGOc53/A
+ w638Zx06RGCm3YZ6RA17+NtRtQfhNeGBjIrMwwGs8KZRW0QULWw+5wz7IXEmkaGTI
+ nG0DiABj1SAmTgnwHg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MIdeR-1sjXsd2X7F-007pWC; Sat, 14
+ Sep 2024 09:34:58 +0200
+Message-ID: <52f2da9e-924c-44b4-8390-7d604d07ab33@gmx.de>
+Date: Sat, 14 Sep 2024 09:34:53 +0200
 MIME-Version: 1.0
-References: <CAEwRq=qZSs9va2ztMQ2t_kfqHFAiMydyUHY13U_-AfKdSuhL-w@mail.gmail.com>
- <CAFLszTjSoLW769CAefgu9wzm5VBVZnvyPp87f2zi9ecUtPB4mg@mail.gmail.com>
- <CAEwRq=q8WT9jPouwu8RMNjgQYkDeRoFzBDhiLOTMgyUXJPNTQA@mail.gmail.com>
-In-Reply-To: <CAEwRq=q8WT9jPouwu8RMNjgQYkDeRoFzBDhiLOTMgyUXJPNTQA@mail.gmail.com>
-From: Vincent Legoll <vincent.legoll@gmail.com>
-Date: Sat, 14 Sep 2024 07:34:37 +0000
-Message-ID: <CAEwRq=o86NuhHzbXcAhPXxvE1hK5zJXrphmmCfe=_PuepnPYGQ@mail.gmail.com>
-Subject: Re: persistent environment
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/3] efi: Drop the memset() from efi_alloc()
 To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20240901222259.456932-1-sjg@chromium.org>
+ <20240901222259.456932-2-sjg@chromium.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240901222259.456932-2-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:u4VCQ28hKN8waAUhgAg3m0oN9Xb5SGB5TSsoI5L5a2Jo26WAUKD
+ yey3wlGSk0MlRyKXRxRBt+06vS6i1lzD79pZ+g72p5HZthstfLMInpC9blLa6BCplxJ3MpE
+ nufuuHU4ixBkF9JphC4f1EcHE+PYGUMq9p9aG0ixLE1gbXlNBEa4a3sbMbhAR6/+cwq+g3t
+ DBoqw/gz/XED8GSrxl7Nw==
+UI-OutboundReport: notjunk:1;M01:P0:mFuhDTnKqf4=;/TnBTZTEpDg7wx0jVlb8rvQJA9Y
+ ewd0BLUEGcPNscKc8bE9hEJVh9ORwwW36Plv7DZxZdbKK65gnvTJslR62bSNRKGcRjeHIohTM
+ wl1u+O4r2Vt7V+q1CjYXyHJsql0LDPhcC/so1c1V4fOBm2vD2OwCCDDP/n5bWofZ78AwcVxKj
+ x8LHszvGweJDag9eJvSMRPro6xVm+sQrv5+Mdlsjg77TpfvupK6ld5lvhoYFdSoaD51goUCAN
+ OYBBHuqPmWFEjAe5rwe11Dtyty/o2YNattzGGbfOl++txZ7U8/7wwWre3qYMvxxdcjXO6SJjN
+ +51+4lWfWityTu1jxawA1vo4K7AklD892UwjEnQJiW5I3VQyb7iacXTABTuJS5sJemRD62ZXN
+ L4FZ8v7CMlTJ/xuYSCtRFyPw/I6uGouv/66WVls4MrTpkjSKluG2bcurIvTamnDlfkxFRx0Sa
+ wsMyaCbxFkznXR4ndeQmCOOLuHM2ej+GU/3ssnN2XEfY6pxhhF9HtN7vxz9Fcouqo+Rpcfplg
+ EUfwXN2uDghK26pdDpStMR59qUGGUWtRoN09NY5wQmfqG31hjyUmrrfaumcNwA5lCY6tv4E7/
+ beVtG5s+DhrUD2G2r0SvGdOGW93qNdTwiIlL9KfIViQ+2r1PS0BFh8fiJY3f7wkapgHEFP7Mj
+ i1CiUXyEAIiZiHje+r1XHgcRi4WCNlFtprAM9yuU5SHcKklJf0KqUtKVIrpmw1uWEAkE1r6fH
+ KmDGCd07Ki91beAs9ji5ul0Vw7PUhSy8Y65vq3VJl0VJIR4tgqMSYQLYRrp8vw3ZqCWszqOHn
+ uGr+i5YKm0RvnU/y30bpaivQ==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,30 +95,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello again,
+On 02.09.24 00:22, Simon Glass wrote:
+>  From my inspection none of the users need the memory to be zeroed. It
+> is somewhat unexpected that it does so, since the name gives no clue to
+> this.
 
-just after sending the last message I continued testing, and went have
-a look at the various CONFIG options I used, especially their help text...
+Though the UEFI specification does not require it, EDK II uses
+AllocateZeroPool() to implement
+EFI_DEVICE_PATH_UTILITIES_PROTOCOL.CreateDeviceNode(). We should not
+deviate from it.
 
-The problem was PEBKAC, I RTFM'ed myself with:
+>
+> Drop the memset() so that it effectively becomes a wrapper around the
+> normal EFI-pool allocator.
+>
+> Another option would be to drop this function and call
+> efi_allocate_pool() directly, but that increase code size a little.
+>
+> Move the function comment to the header file like most other exported
+> functions in U-Boot.
 
-CONFIG_SYS_MMC_ENV_PART:
+Yes, we should move all non-static EFI function descriptions to headers.
+But it makes no sense to move the comments of a single function and
+leave the other functions unchanged. Have a look at doc/api/efi.rst.
 
-MMC hardware partition device number on the platform where the
-environment is stored.  Note that this is not related to any software
-defined partition table but instead if we are in the user area, which is
-partition 0 or the first boot partition, which is 1 or some other defined
-partition.
+Best regards
 
-I had it set to "3" instead of "0".
+Heinrich
 
-I now works.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+> Changes in v3:
+> - Add new patch to drop the memset() from efi_alloc()
+> - Drop patch to convert device_path allocation to use malloc()
+>
+>   include/efi_loader.h        | 11 ++++++++++-
+>   lib/efi_loader/efi_memory.c |  9 ---------
+>   2 files changed, 10 insertions(+), 10 deletions(-)
+>
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index f84852e384f..38971d01442 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -758,8 +758,17 @@ efi_status_t efi_next_variable_name(efi_uintn_t *si=
+ze, u16 **buf,
+>    * Return:	size in pages
+>    */
+>   #define efi_size_in_pages(size) (((size) + EFI_PAGE_MASK) >> EFI_PAGE_=
+SHIFT)
+> -/* Allocate boot service data pool memory */
+> +
+> +/**
+> + * efi_alloc() - allocate boot services data pool memory
+> + *
+> + * Allocate memory from pool with type EFI_BOOT_SERVICES_DATA
+> + *
+> + * @size:	number of bytes to allocate
+> + * Return:	pointer to allocated memory, or NULL if out of memory
+> + */
+>   void *efi_alloc(size_t len);
+> +
+>   /* Allocate pages on the specified alignment */
+>   void *efi_alloc_aligned_pages(u64 len, int memory_type, size_t align);
+>   /* More specific EFI memory allocator, called by EFI payloads */
+> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> index c6f1dd09456..50cb2f3898b 100644
+> --- a/lib/efi_loader/efi_memory.c
+> +++ b/lib/efi_loader/efi_memory.c
+> @@ -664,14 +664,6 @@ efi_status_t efi_allocate_pool(enum efi_memory_type=
+ pool_type, efi_uintn_t size,
+>   	return r;
+>   }
+>
+> -/**
+> - * efi_alloc() - allocate boot services data pool memory
+> - *
+> - * Allocate memory from pool and zero it out.
+> - *
+> - * @size:	number of bytes to allocate
+> - * Return:	pointer to allocated memory or NULL
+> - */
+>   void *efi_alloc(size_t size)
+>   {
+>   	void *buf;
+> @@ -681,7 +673,6 @@ void *efi_alloc(size_t size)
+>   		log_err("out of memory");
+>   		return NULL;
+>   	}
+> -	memset(buf, 0, size);
+>
+>   	return buf;
+>   }
 
-BTW, I though recent Rasmus series [1] was related, but it also works
-without, so I dunno if I actually tested it or not.
-
-Thanks for the hints
-
-[1] https://patchwork.ozlabs.org/project/uboot/list/?series=423625
--- 
-Vincent Legoll
