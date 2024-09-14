@@ -4,81 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F9CDC02180
-	for <u-boot@archiver.kernel.org>; Sat, 14 Sep 2024 07:35:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A09EC0218C
+	for <u-boot@archiver.kernel.org>; Sat, 14 Sep 2024 10:01:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A97B388D74;
-	Sat, 14 Sep 2024 09:35:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 4E6C888CE2;
+	Sat, 14 Sep 2024 12:01:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="JXFV6E6b";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="LPq/AE6b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C68A288D78; Sat, 14 Sep 2024 09:35:10 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ id 7ED3788D10; Sat, 14 Sep 2024 12:00:59 +0200 (CEST)
+Received: from mail-m17234.xmail.ntesmail.com (mail-m17234.xmail.ntesmail.com
+ [45.195.17.234])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94A4B88C71
- for <u-boot@lists.denx.de>; Sat, 14 Sep 2024 09:35:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2BA28889E2
+ for <u-boot@lists.denx.de>; Sat, 14 Sep 2024 12:00:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1726299298; x=1726904098; i=xypron.glpk@gmx.de;
- bh=jUJamyFb6a1AgJgu4xwS//axZQhLApdbe1MeDLVD+Pg=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=JXFV6E6bupG8yeJwjM4CLKcBZ4GG+ynjDjic1CviZ/IF8Rni0+NtVgV74TPSGeao
- zD96aFojPvCctMZVdQSPSuaPgKx+mYw52HHnDe+mYBky2j7YBjXLkwh3IHw8xzcF+
- wZLSxvd4HESN9koFyB4kGZ8RhJ8ZaFoi7hS8Kfxk2sU2ApYagUZgF65kbCsckgVq3
- X9K+jLyURjk6bkadk57T/5ckoXK4VOkx2CiXAjcBGXWc/q8JrYA93ImMJOGOc53/A
- w638Zx06RGCm3YZ6RA17+NtRtQfhNeGBjIrMwwGs8KZRW0QULWw+5wz7IXEmkaGTI
- nG0DiABj1SAmTgnwHg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MIdeR-1sjXsd2X7F-007pWC; Sat, 14
- Sep 2024 09:34:58 +0200
-Message-ID: <52f2da9e-924c-44b4-8390-7d604d07ab33@gmx.de>
-Date: Sat, 14 Sep 2024 09:34:53 +0200
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=LPq/AE6bUujZp4ZBd4vL8V3mWYB53yRtaQa/hUKX9jIkUL2+siO4131a9A9FZSmRst8MjR0ccw87ocL9/n2vGv6PkVR2IsdvlkPWa1Tq3jmi120GdOy3jkhZe9AC/xDQda1j96zvBnQKD950FeIDmd5Tj2icwNomHb1Ky/66gzM=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
+ bh=9UWApNnFEkrtoDaDx5ODXyzYuJSFk2vA1Bc8zGX8Xe4=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.12.67] (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTPA id A97759008B1;
+ Sat, 14 Sep 2024 18:00:43 +0800 (CST)
+Message-ID: <5deea5f5-de08-473b-9f80-170c8126ba30@rock-chips.com>
+Date: Sat, 14 Sep 2024 18:00:43 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/3] efi: Drop the memset() from efi_alloc()
-To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-References: <20240901222259.456932-1-sjg@chromium.org>
- <20240901222259.456932-2-sjg@chromium.org>
+Subject: Re: [PATCH v1 00/12] Bind Syscon driver with OF_REAL
+To: Anand Moon <linux.amoon@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>,
+ Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+References: <20240806043849.3607-1-linux.amoon@gmail.com>
 Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240901222259.456932-2-sjg@chromium.org>
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <20240806043849.3607-1-linux.amoon@gmail.com>
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQxkdH1YZTB4dTBhDHUhKTU9WFRQJFh
+ oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
+ hVSktLVUpCS0tZBg++
+X-HM-Tid: 0a91effa4cd203a3kunma97759008b1
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NUk6Chw5CzI1ShMNCzwcTyw4
+ LBRPFApVSlVKTElNSEtDS09PT0hKVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFNS0lONwY+
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:u4VCQ28hKN8waAUhgAg3m0oN9Xb5SGB5TSsoI5L5a2Jo26WAUKD
- yey3wlGSk0MlRyKXRxRBt+06vS6i1lzD79pZ+g72p5HZthstfLMInpC9blLa6BCplxJ3MpE
- nufuuHU4ixBkF9JphC4f1EcHE+PYGUMq9p9aG0ixLE1gbXlNBEa4a3sbMbhAR6/+cwq+g3t
- DBoqw/gz/XED8GSrxl7Nw==
-UI-OutboundReport: notjunk:1;M01:P0:mFuhDTnKqf4=;/TnBTZTEpDg7wx0jVlb8rvQJA9Y
- ewd0BLUEGcPNscKc8bE9hEJVh9ORwwW36Plv7DZxZdbKK65gnvTJslR62bSNRKGcRjeHIohTM
- wl1u+O4r2Vt7V+q1CjYXyHJsql0LDPhcC/so1c1V4fOBm2vD2OwCCDDP/n5bWofZ78AwcVxKj
- x8LHszvGweJDag9eJvSMRPro6xVm+sQrv5+Mdlsjg77TpfvupK6ld5lvhoYFdSoaD51goUCAN
- OYBBHuqPmWFEjAe5rwe11Dtyty/o2YNattzGGbfOl++txZ7U8/7wwWre3qYMvxxdcjXO6SJjN
- +51+4lWfWityTu1jxawA1vo4K7AklD892UwjEnQJiW5I3VQyb7iacXTABTuJS5sJemRD62ZXN
- L4FZ8v7CMlTJ/xuYSCtRFyPw/I6uGouv/66WVls4MrTpkjSKluG2bcurIvTamnDlfkxFRx0Sa
- wsMyaCbxFkznXR4ndeQmCOOLuHM2ej+GU/3ssnN2XEfY6pxhhF9HtN7vxz9Fcouqo+Rpcfplg
- EUfwXN2uDghK26pdDpStMR59qUGGUWtRoN09NY5wQmfqG31hjyUmrrfaumcNwA5lCY6tv4E7/
- beVtG5s+DhrUD2G2r0SvGdOGW93qNdTwiIlL9KfIViQ+2r1PS0BFh8fiJY3f7wkapgHEFP7Mj
- i1CiUXyEAIiZiHje+r1XHgcRi4WCNlFtprAM9yuU5SHcKklJf0KqUtKVIrpmw1uWEAkE1r6fH
- KmDGCd07Ki91beAs9ji5ul0Vw7PUhSy8Y65vq3VJl0VJIR4tgqMSYQLYRrp8vw3ZqCWszqOHn
- uGr+i5YKm0RvnU/y30bpaivQ==
+Content-Transfer-Encoding: 7bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,97 +74,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 02.09.24 00:22, Simon Glass wrote:
->  From my inspection none of the users need the memory to be zeroed. It
-> is somewhat unexpected that it does so, since the name gives no clue to
-> this.
+Hi Anand,
 
-Though the UEFI specification does not require it, EDK II uses
-AllocateZeroPool() to implement
-EFI_DEVICE_PATH_UTILITIES_PROTOCOL.CreateDeviceNode(). We should not
-deviate from it.
+On 2024/8/6 12:38, Anand Moon wrote:
+> Bind syscon driver with dm_scan_fdt_dev
+> As OF_PLATDATA is no longer enabled, the related
+> code is removed.
 
->
-> Drop the memset() so that it effectively becomes a wrapper around the
-> normal EFI-pool allocator.
->
-> Another option would be to drop this function and call
-> efi_allocate_pool() directly, but that increase code size a little.
->
-> Move the function comment to the header file like most other exported
-> functions in U-Boot.
+The OF_PLATDATA is no removed, basically it's use in TPL/SPL for code size,
 
-Yes, we should move all non-static EFI function descriptions to headers.
-But it makes no sense to move the comments of a single function and
-leave the other functions unchanged. Have a look at doc/api/efi.rst.
+and the SPL_OF_PLATDATA and TPL_PLATDAT still available,
 
-Best regards
+The OF_REAL is only to replace "OF_CONTROL && !OF_PLATDATA."
 
-Heinrich
-
+Thanks,
+- Kever
 >
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
+> Compiled and tested on RK3399 and RV1126 board.
 >
-> Changes in v3:
-> - Add new patch to drop the memset() from efi_alloc()
-> - Drop patch to convert device_path allocation to use malloc()
+> Thanks
+> -Anand
 >
->   include/efi_loader.h        | 11 ++++++++++-
->   lib/efi_loader/efi_memory.c |  9 ---------
->   2 files changed, 10 insertions(+), 10 deletions(-)
+> Anand Moon (12):
+>    arm: rockchip: rk3399: Remove unused syscon drivers code
+>    arch: rockchip: rv1126: Update syscon driver binding method
+>    arm: rockchip: rv1126: Remove unused syscon drivers code
+>    arm: rockchip: px30: Remove unused syscon drivers code
+>    arch: rockchip: rk3066: Update syscon driver binding method
+>    arm: rockchip: rk3066: Remove unused syscon drivers code
+>    arch: rockchip: rk3368: Update syscon driver binding method
+>    arm: rockchip: rk3368: Remove unused syscon drivers code
+>    arch: rockchip: rk3188: Update syscon driver binding method
+>    arm: rockchip: rk3188: Remove unused syscon drivers code
+>    arch: rockchip: rk3288: Update syscon driver binding method
+>    arm: rockchip: rk3288: Remove unused syscon drivers code
 >
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index f84852e384f..38971d01442 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -758,8 +758,17 @@ efi_status_t efi_next_variable_name(efi_uintn_t *si=
-ze, u16 **buf,
->    * Return:	size in pages
->    */
->   #define efi_size_in_pages(size) (((size) + EFI_PAGE_MASK) >> EFI_PAGE_=
-SHIFT)
-> -/* Allocate boot service data pool memory */
-> +
-> +/**
-> + * efi_alloc() - allocate boot services data pool memory
-> + *
-> + * Allocate memory from pool with type EFI_BOOT_SERVICES_DATA
-> + *
-> + * @size:	number of bytes to allocate
-> + * Return:	pointer to allocated memory, or NULL if out of memory
-> + */
->   void *efi_alloc(size_t len);
-> +
->   /* Allocate pages on the specified alignment */
->   void *efi_alloc_aligned_pages(u64 len, int memory_type, size_t align);
->   /* More specific EFI memory allocator, called by EFI payloads */
-> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> index c6f1dd09456..50cb2f3898b 100644
-> --- a/lib/efi_loader/efi_memory.c
-> +++ b/lib/efi_loader/efi_memory.c
-> @@ -664,14 +664,6 @@ efi_status_t efi_allocate_pool(enum efi_memory_type=
- pool_type, efi_uintn_t size,
->   	return r;
->   }
+>   arch/arm/mach-rockchip/px30/syscon_px30.c     |  31 ----
+>   arch/arm/mach-rockchip/rk3066/syscon_rk3066.c |  34 +---
+>   arch/arm/mach-rockchip/rk3188/syscon_rk3188.c |  34 +---
+>   arch/arm/mach-rockchip/rk3288/syscon_rk3288.c | 157 +-----------------
+>   arch/arm/mach-rockchip/rk3368/syscon_rk3368.c |  41 +----
+>   arch/arm/mach-rockchip/rk3399/syscon_rk3399.c |  45 -----
+>   arch/arm/mach-rockchip/rv1126/syscon_rv1126.c |  27 +--
+>   7 files changed, 14 insertions(+), 355 deletions(-)
 >
-> -/**
-> - * efi_alloc() - allocate boot services data pool memory
-> - *
-> - * Allocate memory from pool and zero it out.
-> - *
-> - * @size:	number of bytes to allocate
-> - * Return:	pointer to allocated memory or NULL
-> - */
->   void *efi_alloc(size_t size)
->   {
->   	void *buf;
-> @@ -681,7 +673,6 @@ void *efi_alloc(size_t size)
->   		log_err("out of memory");
->   		return NULL;
->   	}
-> -	memset(buf, 0, size);
 >
->   	return buf;
->   }
-
+> base-commit: 6becf9ba1ab82af6f4fcf9f4d0da38f9c75212d2
