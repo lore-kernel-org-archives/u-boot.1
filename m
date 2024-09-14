@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57B57C35FE7
-	for <u-boot@archiver.kernel.org>; Sun, 15 Sep 2024 05:28:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AE3CC35FE5
+	for <u-boot@archiver.kernel.org>; Sun, 15 Sep 2024 05:28:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90E6B88D78;
+	by phobos.denx.de (Postfix) with ESMTP id EE4F088D8D;
 	Sun, 15 Sep 2024 07:28:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aaR+mxRa";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GBQT5xiF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 50D1A88C7D; Sat, 14 Sep 2024 22:09:05 +0200 (CEST)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
+ id 987F888C7D; Sat, 14 Sep 2024 22:15:07 +0200 (CEST)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8B8B88CD1
- for <u-boot@lists.denx.de>; Sat, 14 Sep 2024 22:09:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7992488B55
+ for <u-boot@lists.denx.de>; Sat, 14 Sep 2024 22:15:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=l.rubusch@gmail.com
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-6dc7280e238so436967b3.3
- for <u-boot@lists.denx.de>; Sat, 14 Sep 2024 13:09:02 -0700 (PDT)
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-6db8f7e52eeso1498867b3.3
+ for <u-boot@lists.denx.de>; Sat, 14 Sep 2024 13:15:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1726344541; x=1726949341; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1726344904; x=1726949704; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bGNq/5QDOkGOhbzqZdbVwe3Va+H2WaUr6rMehGCglQs=;
- b=aaR+mxRaJpX3M+IssNpSzB2JdS38AOTZLsTMVh9n4cNJUwRBEWN9ZuRT+fZ/xFbDT7
- To4GTKfMkCtZ7IhWiFS+l6W0othxlnx0YawofLrF9s9YZ9EJYIx9KwfkTwH2WcygIv1E
- 4OvgMvvlfyoQer2/PWdbOI2n0F4DaQA3mYLJJnzT98rDJHcTGyNuFoabRFUo542OXSXS
- TCZvdnuUL7N3RpyI6Pfq3TEWX/bWOfHUMKeDAvLUPsZadeA09QYsHOoDgvJq0H/QzFxg
- xewPHfcF3lGZYI3vmglM0Sk8AiXxLFMgeK3l3Lr8ZQacX2TJTWOHcMCthkyJzmXLrup1
- fMoQ==
+ bh=Pdvbi869NE/IHxK1o+GZkuPOJxJEGLIhLwTGl06+xDw=;
+ b=GBQT5xiFiBcR2FZ5StK8Sd25egiBrMg81iwVuPo+4d/4ol0wJHwNVeP0aOP9F4/ljf
+ ncuEXqyo7NeNUWMxWMIzBZDokhGqA2o6mlXzI6ZPCMzszDPdr0s9nT8pdXDnFzdNPsOw
+ dPSVfYEODtIXy3A3CIsALNVo2Ww3zeKtglT71Mnzar5r1/qd5Cn5L4Tfxwl3te4z6f4C
+ QoiiufG6aKcHBjn6RbDIuDEJ0+Q/noA4dm8ViUmLjdcSt+LFK17KYrn27QV71UDonvYF
+ LThvX/qEXL4VAsgBPbCsFncWqiDtVBBlUYd6MBWoUy6kU6WF4pf2Zg0rt+J5GXZRtYTx
+ VP2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726344541; x=1726949341;
+ d=1e100.net; s=20230601; t=1726344904; x=1726949704;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bGNq/5QDOkGOhbzqZdbVwe3Va+H2WaUr6rMehGCglQs=;
- b=mxfUmBLFpGAhb9WliysVoMNeCFCm3y/sQwWD5xpMKW1/LKqCZmQqmfKRWQDpfFNLCI
- Zg5QJ3Gy/AEIbEsOsTLZfslFFv8E014CvQhcw5WA9/zZ3sLbN6IZbBCGboKf7E6ZrreE
- T8A9iknd2xMVum+/Rm153NAeXGfMNc9LrlcPEgvRol/jOOdpZQ1CfpK58yVzBIYu6B70
- fc4Q0TTUmzfSPvUNq/Z5s8052ANVDaWsbIbXkPjSJW59tc/kMaBI+xJqM++ziFYFhFz2
- e/9BU4QIU3CfXgOkjy6yvsHwBlsJ41rX3unxEPwobTWKYv+W0XIW+U59lZs4IuIAehKG
- A4ww==
-X-Gm-Message-State: AOJu0YyxMCH+yi6h+SibjImraFFjy2gi+ZDYLR3CK11bsspBk8Vl7bUy
- l9LPppDAaAMsRhT1VC8pNiKQa7vhrfNH65tmCHuzrM7OFdJJQOoamBdexP8BjuHnT8nPd/fLnHR
- Hc4HWbflinZzbe9Do9iA267Q5bW652g==
-X-Google-Smtp-Source: AGHT+IFIEPaFFw9NC0i/2pJb8nqx8gc1QOd8eaw2dKBlNo6aJmmPsxye3tobRGTyEfWgbryn8HgBckShIeX9/IBjCvA=
-X-Received: by 2002:a05:690c:385:b0:6d3:c7d:5eaa with SMTP id
- 00721157ae682-6dbb6b9d317mr40105877b3.8.1726344541253; Sat, 14 Sep 2024
- 13:09:01 -0700 (PDT)
+ bh=Pdvbi869NE/IHxK1o+GZkuPOJxJEGLIhLwTGl06+xDw=;
+ b=DZt9i9YXkWBcHMbg3A0QBJ+2bVkzN6LV507eUkjorPjbaSSbPg2mLvGIM9OeuUoYBb
+ nWWksTIbSfysv106CoXGx1F6nbsKhhLqtsHHuWNDBu7mKM3qQyNj9gmNczR+s7cRFnBp
+ jE4BX9QmkGoBJJjjJvE3fiJwFvgUFStdb55OE82yUyUKdR6l7x0mvD037L0pkOiLEZzm
+ 88MNUlauoMl9U7u/n9fOIgf/ESOMCsebfMR4C/wUhNw+IOfomNYzNZHYQ1w3th3qEm/M
+ u2ZAT+KHJjyUxjaAr6MTIMWj/jljZEafex9T1QdJUR6eapymDOi+lQy8DeqOT62KD2oe
+ 6RMQ==
+X-Gm-Message-State: AOJu0YyRkDo+NTtYcfe0EGFP0g9obP0ttsDSnmcatd0OQrE96c775Elj
+ jxkI6jkSAydT8p9/MRwbWrnL6jQYj4FxrWM7ltwHdwiIxwTV32qOtCk/isfX1bzM4sTgqb+HGSF
+ XuzgcYkSubjgPbHtMAM7HftozEYJu2w==
+X-Google-Smtp-Source: AGHT+IH3yyVxsZdcASImo5UpwZCxSHtr4FmkMK4iM0RPyZ/HHcl0ejYkhIpgNUTd7OdUZ7yKiWRKCePRHBARcAtrqCM=
+X-Received: by 2002:a05:690c:2016:b0:630:ed11:e751 with SMTP id
+ 00721157ae682-6dbb6b06ac3mr35936677b3.3.1726344904218; Sat, 14 Sep 2024
+ 13:15:04 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240912060649.190-1-l.rubusch@gmail.com>
- <20240912060649.190-2-l.rubusch@gmail.com>
- <960222cf-03dc-4fbb-98b1-1d38f9956636@denx.de>
-In-Reply-To: <960222cf-03dc-4fbb-98b1-1d38f9956636@denx.de>
+ <20240912060649.190-3-l.rubusch@gmail.com>
+ <bf99c2bd-f43c-4041-907f-f60b42163cce@denx.de>
+In-Reply-To: <bf99c2bd-f43c-4041-907f-f60b42163cce@denx.de>
 From: Lothar Rubusch <l.rubusch@gmail.com>
-Date: Sat, 14 Sep 2024 22:08:25 +0200
-Message-ID: <CAFXKEHYs6=ZfmoOzVOkGq7VJ_sz4vxRSfZJCgveUuWtgPRNCww@mail.gmail.com>
-Subject: Re: [PATCH 1/9] doc: board: enclustra: add Enclustra Intel AA1 SoM
+Date: Sat, 14 Sep 2024 22:14:28 +0200
+Message-ID: <CAFXKEHZL+Stv2zWmNYTBexHUatVqi9rn5fhEe9v7VUik3-_aQw@mail.gmail.com>
+Subject: Re: [PATCH 2/9] ARM: dts: socfpga: add Enclustra Intel AA1
 To: Marek Vasut <marex@denx.de>
 Cc: u-boot@lists.denx.de, trini@konsulko.com, simon.k.r.goldschmidt@gmail.com, 
  tien.fong.chee@intel.com
@@ -94,125 +94,54 @@ X-Virus-Status: Clean
 On Fri, Sep 13, 2024 at 1:11=E2=80=AFAM Marek Vasut <marex@denx.de> wrote:
 >
 > On 9/12/24 8:06 AM, Lothar Rubusch wrote:
-> [...]
->
-> > +Mercury AA1 Module (Arria1 10)
-> > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D
-> > +
-> > +- SoM: https://www.enclustra.com/en/products/system-on-chip-modules/me=
-rcury-aa1/
-> > +- Carrier board Mercury+ ST1: https://www.enclustra.com/en/products/ba=
-se-boards/mercury-st1/
-> > +- Carrier board Mercury+ PE1: https://www.enclustra.com/en/products/ba=
-se-boards/mercury-pe1-200-300-400/
-> > +- Carrier board Mercury+ PE3: https://www.enclustra.com/en/products/ba=
-se-boards/mercury-pe3/
-> > +
-> > +There are slightly different variants of the AA1 SoM, going by the ide=
-ntifier.
-> > +
-> > +- Me-aa1-270-2i2-d11e-nfx3
-> > +- Me-aa1-270-3e4-d11e-nfx3
-> > +- Me-aa1-480-2i3-d12e-nfx3
-> > +
-> > +The u-boot setup is specific to a quartus design. Generate handoff fil=
-es from
-> > +the design. Pass them to a python script to produce a handoff.h file. =
-This is
-> > +needed as input for building the device-tree for u-boot. Eventually, b=
-uilding
-> > +the final u-boot depends on the particular Quartus design, the particu=
-lar
-> > +carrier board, the selected boot media and boot mode.
-> > +
-> > +Enclustra provides reference design examples which can be built with y=
-octo
-> > +using their meta-layer.
-> > +
-> > +- Reference Design AA1 on ST1: https://github.com/enclustra/Mercury_AA=
-1_ST1_Reference_Design
-> > +- Reference Design AA1 on PE1: https://github.com/enclustra/Mercury_AA=
-1_PE1_Reference_Design
-> > +- Reference Design AA1 on PE3: https://github.com/enclustra/Mercury_AA=
-1_PE3_Reference_Design
-> > +- Yocto meta-layer: https://github.com/enclustra/meta-enclustra-socfpg=
-a
->
-> OpenEmbedded .
->
+> > Introduce device-tree files for Enclustra Intel AA1 SoMs and related
+> > support.
+> >
+> > - Mercury AA1
+> >
+> > The setup depends on a selected boot mode. Various fragments for SD/MMC
+> > and QSPI flash boot are provided.
+> >
+> > In combination, the following Enclustra carrier boards are supported:
+> >
+> > - ST1
+> > - PE1
+> > - PE3
+> >
+> > Signed-off-by: Andreas Buerkler <andreas.buerkler@enclustra.com>
+> > Signed-off-by: Lothar Rubusch <l.rubusch@gmail.com>
+> > ---
+> >   arch/arm/dts/ME-AA1-270-2I2-D11E-NFX3.dtsi    |  14 +
+> >   arch/arm/dts/ME-AA1-270-3E4-D11E-NFX3.dtsi    |  14 +
+> >   arch/arm/dts/ME-AA1-480-2I3-D12E-NFX3.dtsi    |  15 +
+> >   arch/arm/dts/Makefile                         |   2 +
+> >   arch/arm/dts/enclustra-aa1.dts                |  32 ++
+> >   .../dts/socfpga_arria10_mercury_aa1_handoff.h | 307 +++++++++++++++++=
++
+> >   .../dts/socfpga_enclustra_mercury_aa1.dtsi    | 179 ++++++++++
+> >   ...cfpga_enclustra_mercury_aa1_qspi_boot.dtsi |  18 +
+> >   ...fpga_enclustra_mercury_aa1_sdmmc_boot.dtsi |  18 +
+> >   .../dts/socfpga_enclustra_mercury_pe1.dtsi    |   7 +
+> >   .../dts/socfpga_enclustra_mercury_pe3.dtsi    |   8 +
+> >   .../dts/socfpga_enclustra_mercury_st1.dtsi    |   8 +
+> Is there any chance to upstream these DTs to Linux first , and then let
+> them all trickle into U-Boot through dts/upstream/ ?
 
-Ok
+This is the tricky one. In principle, as it is supposed to be build on
+our side this is not the case. For the kernel, we prefer to work with
+DT overlays (.dtbo) where on the u-boot side we only need some basic
+functionality and not everything declared. So, currently there are
+differences.
 
-> > +Quick Start
-> > +-----------
-> > +
-> > +- Setup and build a Quartus design project
-> > +- Obtain the hps.xml file from the Quartus design project
-> > +- Generate the handoff.h file for u-boot
-> > +- Adjust the device-tree file according to your setup
-> > +- Build u-boot
-> > +- Flash u-boot
-> > +
-> > +Build U-Boot
-> > +------------
-> > +
-> > +The Quartus design produces a design specific ``hps.xml``, an ``emif.x=
-ml`` and
-> > +a corresponding ``id`` file contained in a folder ``handoff``.
->
-> s@folder@directory@ on unix systems.
->
+Another point here for me to understand would be the following. If I
+upstream some DT files to  the kernel it might take time until they go
+to anything released there. So, upstreaming u-boot would wait on that
+kernel release, right? In such case, I really prefer to upstream the
+DT files as is to u-boot first. Then / In parallel try  to upstream
+the files to the kernel. And update the u-boot DT set to point to the
+kernel DT files when they are released. Could this be an approach?
 
-Ok
-
-> [...]
->
-> > +.. code-block:: bash
-> > +
-> > +    $ sudo fdisk /dev/sda
-> > +        n,p,1,2048,+20M
-> > +        t,1,c
-> > +        n,p,2,409600,+1M
-> > +        t,2,a2
-> > +        n,p,3,425984,<REST>
-> > +        t,3,83
-> > +        w
->
-> Have a look at 'sfdisk' tool, scriptable fdisk , that is preferable .
->
-
-Ok, ich changed it using sfdisk
-
-> [...]
->
-> > +Boot Media
-> > +----------
-> > +
-> > +Alternative boot media are possible as officially documented by Enclus=
-tra.
-> > +
-> > +* Micro-SD card
-> > +* eMMC
-> > +* QSPI
-> > +
-> > +NB: eMMC and QSPI can be flashed from off the u-boot shell. Usually af=
-ter
->
-> What does 'NB:' stand for ?
->
-
-I'll change this for "Note:"
-
-> > +flashing, the coorect boot mode needs to be set by a BSEL switch. Appr=
-oaches
-> > +are described consistently in the offical Enclustra documentation acco=
-rding to
->
-> "official", typo, run the docs through e.g. aspell to catch those typos.
->
-
-Thank you for the review and the hints. I'll apply the changes in the
-next version of this set.
-
-> [...]
+Anyway, it might be that next week, I might discuss that directly in
+person to get a better idea what could be a way for me with those
+u-boot files. I'm coming back to this topic then. If you find some
+time, please let me know what you think about it.
