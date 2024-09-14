@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A6FDC021A1
-	for <u-boot@archiver.kernel.org>; Sat, 14 Sep 2024 15:05:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B4E0C021A1
+	for <u-boot@archiver.kernel.org>; Sat, 14 Sep 2024 15:08:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4626088906;
-	Sat, 14 Sep 2024 17:05:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D788B88A30;
+	Sat, 14 Sep 2024 17:08:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="VisaWBaC";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="m3De782d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E40D889E2; Sat, 14 Sep 2024 17:05:06 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ id C6F0088ABF; Sat, 14 Sep 2024 17:08:56 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C52488881
- for <u-boot@lists.denx.de>; Sat, 14 Sep 2024 17:05:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C8028889E2
+ for <u-boot@lists.denx.de>; Sat, 14 Sep 2024 17:08:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1726326299; x=1726931099; i=xypron.glpk@gmx.de;
- bh=JqQu+2s5bxAM3dp0KY5QYxN2seZQBGcvaLfAIGwZB9c=;
+ s=s31663417; t=1726326532; x=1726931332; i=xypron.glpk@gmx.de;
+ bh=/4GJNsO4UlK1NkhkNgRsxnklM+gad9tm2ab1xZLoU8E=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=VisaWBaCvDpkAGbyRyx4LZ6a8H/ZX52zm1fgAQyO27jMCkIZfZ7CbLoquL1RMALC
- zaTWoXcRuqVBLAYpQzIzzTeSRLuUJV3mkwO157QJUpWtz55g2/bgLNsiNOZhWH+Wr
- KV6l+OQdaaKNRTAUZXZSu79QLq9xihjlOu6Go6YZYRVskUCPsmSx1Cx2tKdLwdZZo
- qiVdqYL5/Zgh9m0Abs4h4VdFyGdRi+NpifCZtJ8YH3eszdiAxV6hEhzotFx3g8L+k
- XtNBg0FoWS18k9an5Y2xGEOXT03Q5ZWxiy0k1AqMYEcCaDYj98PzTwieDGhRR0UCr
- tjIzbP1d3drShEc9/A==
+ b=m3De782dBSPRTMjTj2i97UZXu3kImhpUlE4ep7w80gesxTHn6ksA2DzdIv5ZNgLn
+ 9zUeVs1+7L3cix4cDmvOqgeJjn6EHoT42vYWG930Gdhw9AD8KjqZXj0qFmo+FtvaY
+ TWyZQmtFQpO7mbyuUOQsTEsW+R0/qdYkspg5g3Sj2PUkVszdu9UuVSt9jIagIeixt
+ PC1ep7cGRW/qztx+AimKMjMZQflv8/LN/7fJAS82CCylJisdX/sx37zrSsxkTiSBe
+ djL9XHUI471E5/jGkc10YOx1hnz3wp7ohWpyQryHM7XdNha/M7jrRtJTsrQ/Uf8vy
+ EnLuuHQeLbPIJiDzEA==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MJE6L-1saRNo2cyx-00WjnT; Sat, 14
- Sep 2024 17:04:59 +0200
-Message-ID: <78cbfbf1-91b9-49ad-9b14-962183ee52be@gmx.de>
-Date: Sat, 14 Sep 2024 17:04:59 +0200
+Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mxm3Q-1s4h4M3DBO-0164dy; Sat, 14
+ Sep 2024 17:08:52 +0200
+Message-ID: <0291efc6-86a2-437c-938a-707c46c34f91@gmx.de>
+Date: Sat, 14 Sep 2024 17:08:52 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 03/16] efi: memory: use the lmb API's for allocating and
- freeing memory
+Subject: Re: [PATCH 04/16] event: add event to notify lmb memory map changes
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de
 References: <20240905082811.1585467-1-sughosh.ganu@linaro.org>
- <20240905082811.1585467-4-sughosh.ganu@linaro.org>
+ <20240905082811.1585467-5-sughosh.ganu@linaro.org>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240905082811.1585467-4-sughosh.ganu@linaro.org>
+In-Reply-To: <20240905082811.1585467-5-sughosh.ganu@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:lrbty/d/bUjPKFPheCLoNxhvyyn3YDSHaIPsJ2/Xdy6FxPZj6/L
- H2LBkOWtaH/ys9ptyNWPvBH6qUHbD6LkVinq1yOMfi6DNsICyGzvMTVzTmvqGR09/o4KCDB
- gzGpvfzcTrbIWNUEbLT57hlcSwKQHmv2aU4GJ6+s6S0wfZCkOCqTVG+O25QZHSziPhn47Jx
- O1+cBWFssYIw2ZmqhZT3g==
-UI-OutboundReport: notjunk:1;M01:P0:nihPe3DI6Xc=;icvcVY/Nsh4n49DPZiQxeV5Symd
- 1tgXaglXgNe0btwJLj5tlazkCbCMXbhXfZ9n5GtqwBIfWLtX97B9cjcn01qjbshBqq/rAeVby
- dpBr91Op3xGDx52gkFXMjZvrlwT1GV3dQwnNKat1TUpCHXtd3qPijjGpXVjQFN+zFMjm1Cwx9
- JvpD0vP9v7GkmV0Lyj+2PUd1GSVLfex7j5y/PlfjY8eqeyeOuxkFl5KIkZrZOuoh+tBXbBbnb
- D6ffCR/SiUXu4ei13v5gwcWO6qN/43vLBcPkpRxdfKT2CBVtFcRfZSOlHIY5P/BRg8C7GrFSC
- HDaTYX31g8MTTAbahP66h8gF3/4m6sm3L2f7ncDTek8lBNgvCEBtcOF5aNUzozdPnOd6kWjKI
- pMLo+tvGLFkVuNCF0X6WnuaLjQmEBNx9kau0gtKXKLyWggOGDjXFDsfs34IN+/YcH3t5SJ85i
- MuhYYm1v+E71kFKTr7YQdAOcEBD5jp+6TfY7QNcnwcE9SqX85+0XkmPB/a9C6AEdKsax0nzEK
- lWdt3d6PpEluR5XFan92nX+2jmVwowVN5KN3kKfCgsdrsNQScn5VQyW/vI23kFsD+a3CIoFK9
- sTjDV1W3tNGyTQa8KW2dr4mBl14NYzeokbw7uWEUQM3ZP57+PGJr1ywQ+cQQVB3v3IHPLgy/t
- HxjHxUZaPEHgILOMT79vimhOXgDHhGoiiQAMSE2qrTcJjx4DhOSAoycgz12sN3rjiPWI4ZlHx
- 2jkJOowNpPbP/wmRBg2+fmpZJyZwZUz+5S6NCEz89X7Rvcel9bKTz1azC34CtDI7Dtj/ygDjv
- qRQNF9P3QtJwurc/p/PqMLZg==
+X-Provags-ID: V03:K1:rhyLlHuWAXx0rZQI5suo0pBOlVbKPf8bLeyK/ZV/rJkjf5sr10l
+ 4ftBSzT3C7dTlEK6Miw/2pILHoWINyDSDIP+hRhfMQAYBaKmXrG5TrXemwdD8tTfbgXnBQc
+ N3uQel9dnAUH81yO/ojBfC/kZMc5H6QyAB/nGrZQBhfZyo2OfVyIJkvWTKbaFN6uIRcNcCa
+ srdlk1CfqWbOAOb0NfegA==
+UI-OutboundReport: notjunk:1;M01:P0:svhAelkeeiQ=;psuyPD+D5BLGVkS16ngkKfZvXNu
+ Lg8vfxEGxmqp/wh6g+m+JTNrKKw81BcWcSt3Br95G/0+uQw5VL74BiW1hewmNeT0Ny1OHwApy
+ q/BALeiEF3lKYCY617j4HAuUBXIZb2E6HosoPAHjmzUgvo1IoQb87rjyAozZN+bVUzXr50NCN
+ xYklf+2Mg5xBp8JlF1PXirwcA/ywrbKu4uq83d8HfB9czrsNpb8Hyx+pKvrtff7k5YpksZnnI
+ jnSFGwP4bwuJkSXc4eGBbJpWD+wtaDt3aJ5sRcx30a+49Zq82LCzWe2lQ/3hqTeiVnZyBpbl1
+ atziPaEhH6NrJd3qAOPdyy6uRKilTS/BYkJOR9wZlDimT8JbeqZlyp2ni/WOloZcIfPEbhIo5
+ cmhuBrtcXvaWHaPH1rkYEZIIzlnCYaaVFXVa0qvIxBE1cJ6hDvyn2Ok47/3wHoksJhQVBL6Jn
+ IKcdfMfXcqflzuQPywMHNJv2gD1VHWFyC4JJmKvJ4RT69WX5w+GDdj3EWNc1Nq3AmaZL5yX+g
+ Tncv7d28nRlJzNh/PE6cHm3TaxEJm/RU/f/6YZPMKiQKZklc7K8it2NrfUgJDaNSbpy8+PZQn
+ LLCUjO941oLGx3GQEeogQDIIagLTLZOjB1/Ac2qbtKNbcu5Wd+9imkWjd5aIjJ8lWHhhDC/u8
+ yPtEaAbjcdi38K/Hi8pqf8j7VYFiYFhBHZWMrRdj7otVxnkcpAaZ4ZTA3NnSsWxlSb/I/Z2nx
+ 005I9BhSjIEwGS+i1N6+KwHlv4H58vgbmPaH3WJN0+Oyh3ZqtzBPWR7ih2lgMrUm+uHCengyw
+ YWn9bd2czPDz89y/nQrRGmEA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,193 +93,71 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 9/5/24 10:27, Sughosh Ganu wrote:
-> Use the LMB API's for allocating and freeing up memory. With this, the
-> LMB module becomes the common backend for managing non U-Boot image
-> memory that might be requested by other modules.
->
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> ---
->   lib/efi_loader/Kconfig      |  1 +
->   lib/efi_loader/efi_memory.c | 74 ++++++++++---------------------------
->   2 files changed, 21 insertions(+), 54 deletions(-)
->
-> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> index 6ffefa9103..911d4c6bbe 100644
-> --- a/lib/efi_loader/Kconfig
-> +++ b/lib/efi_loader/Kconfig
-> @@ -18,6 +18,7 @@ config EFI_LOADER
->   	select DM_EVENT
->   	select EVENT_DYNAMIC
->   	select LIB_UUID
-> +	select LMB
->   	imply PARTITION_UUIDS
->   	select REGEX
->   	imply FAT
-> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> index c6f1dd0945..90e07ed6a2 100644
-> --- a/lib/efi_loader/efi_memory.c
-> +++ b/lib/efi_loader/efi_memory.c
-> @@ -9,6 +9,7 @@
->
->   #include <efi_loader.h>
->   #include <init.h>
-> +#include <lmb.h>
->   #include <log.h>
->   #include <malloc.h>
->   #include <mapmem.h>
-> @@ -432,53 +433,6 @@ static efi_status_t efi_check_allocated(u64 addr, b=
-ool must_be_allocated)
->   	return EFI_NOT_FOUND;
->   }
->
-> -/**
-> - * efi_find_free_memory() - find free memory pages
-> - *
-> - * @len:	size of memory area needed
-> - * @max_addr:	highest address to allocate
-> - * Return:	pointer to free memory area or 0
-> - */
-> -static uint64_t efi_find_free_memory(uint64_t len, uint64_t max_addr)
-> -{
-> -	struct efi_mem_list *lmem;
-> -
-> -	/*
-> -	 * Prealign input max address, so we simplify our matching
-> -	 * logic below and can just reuse it as return pointer.
-> -	 */
-> -	max_addr &=3D ~EFI_PAGE_MASK;
-> -
-> -	list_for_each_entry(lmem, &efi_mem, link) {
-> -		struct efi_mem_desc *desc =3D &lmem->desc;
-> -		uint64_t desc_len =3D desc->num_pages << EFI_PAGE_SHIFT;
-> -		uint64_t desc_end =3D desc->physical_start + desc_len;
-> -		uint64_t curmax =3D min(max_addr, desc_end);
-> -		uint64_t ret =3D curmax - len;
-> -
-> -		/* We only take memory from free RAM */
-> -		if (desc->type !=3D EFI_CONVENTIONAL_MEMORY)
-> -			continue;
-> -
-> -		/* Out of bounds for max_addr */
-> -		if ((ret + len) > max_addr)
-> -			continue;
-> -
-> -		/* Out of bounds for upper map limit */
-> -		if ((ret + len) > desc_end)
-> -			continue;
-> -
-> -		/* Out of bounds for lower map limit */
-> -		if (ret < desc->physical_start)
-> -			continue;
-> -
-> -		/* Return the highest address in this map within bounds */
-> -		return ret;
-> -	}
-> -
-> -	return 0;
-> -}
-> -
->   /**
->    * efi_allocate_pages - allocate memory pages
->    *
-> @@ -493,6 +447,7 @@ efi_status_t efi_allocate_pages(enum efi_allocate_ty=
-pe type,
->   				efi_uintn_t pages, uint64_t *memory)
->   {
->   	u64 len;
-> +	uint flags;
->   	efi_status_t ret;
->   	uint64_t addr;
->
-> @@ -508,33 +463,35 @@ efi_status_t efi_allocate_pages(enum efi_allocate_=
-type type,
->   	    (len >> EFI_PAGE_SHIFT) !=3D (u64)pages)
->   		return EFI_OUT_OF_RESOURCES;
->
-> +	flags =3D LMB_NOOVERWRITE | LMB_NONOTIFY;
+> Add an event which would be used for notifying changes in the
+> LMB modules' memory map. This is to be used for having a
+> synchronous view of the memory that is currently in use, and that is
+> available for allocations.
 
-In the EFI context we should use LMB notification to notify the
-EFI_EVENT_GROUP_MEMORY_MAP_CHANGE event and update the memory map.
+The synchronous view problem only exists because we are duplicating
+data. Store the EFI memory type in LMB and the problem vanishes.
 
-See chapter 7.1.2 EFI_BOOT_SERVICES.CreateEventEx() in the UEFI
-specification.
-
->   	switch (type) {
->   	case EFI_ALLOCATE_ANY_PAGES:
->   		/* Any page */
-> -		addr =3D efi_find_free_memory(len, -1ULL);
-> +		addr =3D (u64)lmb_alloc_flags(len, EFI_PAGE_SIZE, flags);
-
-On ARM64 we must ensure that "all 4KiB pages in the 64KiB page ... use
-identical ARM Memory Page Attributes". I cannot see how LMB implements thi=
-s.
-
-See chapter 2.3.6 AArch64 Platforms in the UEFI specification.
-
-If you pass the EFI memory type to LMB and store it there, we can avoid
-duplication of the memory map and we can implement the 64 KiB pages
-logic in LMB.
+The event is only needed to notify EFI_EVENT_GROUP_MEMORY_MAP_CHANGE.
 
 Best regards
 
 Heinrich
 
->   		if (!addr)
->   			return EFI_OUT_OF_RESOURCES;
->   		break;
->   	case EFI_ALLOCATE_MAX_ADDRESS:
->   		/* Max address */
-> -		addr =3D efi_find_free_memory(len, *memory);
-> +		addr =3D (u64)lmb_alloc_base_flags(len, EFI_PAGE_SIZE, *memory,
-> +						 flags);
->   		if (!addr)
->   			return EFI_OUT_OF_RESOURCES;
->   		break;
->   	case EFI_ALLOCATE_ADDRESS:
->   		if (*memory & EFI_PAGE_MASK)
->   			return EFI_NOT_FOUND;
-> -		/* Exact address, reserve it. The addr is already in *memory. */
-> -		ret =3D efi_check_allocated(*memory, false);
-> -		if (ret !=3D EFI_SUCCESS)
-> -			return EFI_NOT_FOUND;
-> -		addr =3D *memory;
+>
+> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> ---
+>   common/event.c  |  2 ++
+>   include/event.h | 14 ++++++++++++++
+>   2 files changed, 16 insertions(+)
+>
+> diff --git a/common/event.c b/common/event.c
+> index dda569d447..fc8002603c 100644
+> --- a/common/event.c
+> +++ b/common/event.c
+> @@ -48,6 +48,8 @@ const char *const type_name[] =3D {
+>
+>   	/* main loop events */
+>   	"main_loop",
 > +
-> +		addr =3D (u64)lmb_alloc_addr_flags(*memory, len, flags);
-> +		if (!addr)
-> +			return EFI_OUT_OF_RESOURCES;
->   		break;
->   	default:
->   		/* UEFI doesn't specify other allocation types */
->   		return EFI_INVALID_PARAMETER;
->   	}
+> +	"lmb_map_update",
+>   };
 >
-> +	addr =3D (u64)(uintptr_t)map_sysmem(addr, 0);
->   	/* Reserve that map in our memory maps */
->   	ret =3D efi_add_memory_map_pg(addr, pages, memory_type, true);
->   	if (ret !=3D EFI_SUCCESS)
-> @@ -555,6 +512,9 @@ efi_status_t efi_allocate_pages(enum efi_allocate_ty=
-pe type,
->    */
->   efi_status_t efi_free_pages(uint64_t memory, efi_uintn_t pages)
->   {
-> +	u64 len;
-> +	uint flags;
-> +	long status;
->   	efi_status_t ret;
+>   _Static_assert(ARRAY_SIZE(type_name) =3D=3D EVT_COUNT, "event type_nam=
+e size");
+> diff --git a/include/event.h b/include/event.h
+> index fb353ad623..fce7e96170 100644
+> --- a/include/event.h
+> +++ b/include/event.h
+> @@ -153,6 +153,14 @@ enum event_t {
+>   	 */
+>   	EVT_MAIN_LOOP,
 >
->   	ret =3D efi_check_allocated(memory, true);
-> @@ -568,6 +528,12 @@ efi_status_t efi_free_pages(uint64_t memory, efi_ui=
-ntn_t pages)
->   		return EFI_INVALID_PARAMETER;
->   	}
->
-> +	flags =3D LMB_NOOVERWRITE | LMB_NONOTIFY;
-> +	len =3D (u64)pages << EFI_PAGE_SHIFT;
-> +	status =3D lmb_free_flags(memory, len, flags);
-> +	if (status)
-> +		return EFI_NOT_FOUND;
+> +	/**
+> +	 * @EVT_LMB_MAP_UPDATE:
+> +	 * This event is triggered on an update to the LMB reserved memory
+> +	 * region. This can be used to notify about any LMB memory allocation
+> +	 * or freeing of memory having occurred.
+> +	 */
+> +	EVT_LMB_MAP_UPDATE,
 > +
->   	ret =3D efi_add_memory_map_pg(memory, pages, EFI_CONVENTIONAL_MEMORY,
->   				    false);
->   	if (ret !=3D EFI_SUCCESS)
+>   	/**
+>   	 * @EVT_COUNT:
+>   	 * This constants holds the maximum event number + 1 and is used when
+> @@ -203,6 +211,12 @@ union event_data {
+>   		oftree tree;
+>   		struct bootm_headers *images;
+>   	} ft_fixup;
+> +
+> +	struct event_lmb_map_update {
+> +		u64 base;
+> +		u64 size;
+> +		u8 op;
+> +	} lmb_map;
+>   };
+>
+>   /**
 
