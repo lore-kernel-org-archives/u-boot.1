@@ -4,95 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CFD1C3ABA0
-	for <u-boot@archiver.kernel.org>; Sun, 15 Sep 2024 17:57:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9662AC3ABA0
+	for <u-boot@archiver.kernel.org>; Sun, 15 Sep 2024 18:19:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C112E8852A;
-	Sun, 15 Sep 2024 19:57:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 00A9788E0A;
+	Sun, 15 Sep 2024 20:19:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="KwZHEmmK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jPPqvlO0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C303588E18; Sun, 15 Sep 2024 19:57:54 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E2BEC88E26; Sun, 15 Sep 2024 20:19:36 +0200 (CEST)
+Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
+ [IPv6:2607:f8b0:4864:20::72d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6B4D8843A
- for <u-boot@lists.denx.de>; Sun, 15 Sep 2024 19:57:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C493388E04
+ for <u-boot@lists.denx.de>; Sun, 15 Sep 2024 20:19:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1726423043; x=1727027843; i=xypron.glpk@gmx.de;
- bh=uhKzKesWHGwJIOiL3SqibzT2TRz09vefvmz5VUEU918=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=KwZHEmmKkV77gHdfxi46Gd/k3e4J6U4aoQI6KCpBhkf+KRd0P1Or6bftP0GsskmZ
- AbPNapJBCa/M14JNgPCbTaBuSj8StufuVm48qPwYieW92GsaoPoMXBS8GA3qnVlEo
- s0CfSol1phEejLJAKlliGrjfF8Q1R7FN5KJsjJdY3lI6dyYbCO4uGIDCkfFaHTUgn
- Jnow/6+pLG3KlwnwUZCfgoRe+WT+n2QIwbQXr2QjEWD/vi1n7Dc1P/wVxsA/Uy9dv
- O67H/MVYZjUPUcUTMAYgNiMb9ANuEnjX6iRimulz7ZZBkbZj74S8/T+Dcfu5zjVl+
- 1feONKeXR9LqwEFiXQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.143.105] ([46.114.105.113]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MZkpR-1sS1w544AR-00Pt68; Sun, 15
- Sep 2024 19:57:23 +0200
-Message-ID: <93c2ab53-aa9a-4403-80da-7bd6d8872b3c@gmx.de>
-Date: Sun, 15 Sep 2024 19:57:19 +0200
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x72d.google.com with SMTP id
+ af79cd13be357-7a99fd4ea26so344637785a.1
+ for <u-boot@lists.denx.de>; Sun, 15 Sep 2024 11:19:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1726424373; x=1727029173; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=8dWc8f5kUkSFN6a43x8gxB8qjCWOiGubLmMuCj6VltE=;
+ b=jPPqvlO0PEkrjICWt1JzaY1Vr+eQ+VAfdIYBK4YZtk0x8YsPzFq4d6irbUqCeZtlo1
+ LR8e2LGqNcP9oRBobv4C9C1ixFL5FjZSy5gf51MA8xmKqC9wLcBJA4BtgOMelZA7F/u3
+ EExgnpbb3pCSuByrSQIsc7tN596HTupKlC4UY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1726424373; x=1727029173;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8dWc8f5kUkSFN6a43x8gxB8qjCWOiGubLmMuCj6VltE=;
+ b=JF9SlnKO5k4sm2W9GVQJbONZI6ptvRUeO6lW/7pWJ5bhLocicoiCwRSGG9C1kgeUUW
+ mhr7T4KaGECYWAPR2kc5gZy3warQjANw+9XSs8rLHADbfW+gctaMpeJjeH3b0zo6L2Id
+ TdoKywPGNXLUGh0IZWGupiA00vhUmc9vb7TabTRhCzQCAuqpS/91kkEgB1iZ/pSevsCK
+ XU+2/GhocNBBVa00mnULxWPJMctF4QVIXgK4KJM9i9+8EvtFraNau+cM+Gzm23RwsXq+
+ 8THufm/enjxGiJAAbBwjIz3NPjBdZpO4NIe4CrfWorQNG7zgJ8JEOyTaCm3FEXLo4/6O
+ pTAg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX007TthxjDfYusNMXFM8/W6V4y6A1/F3qLz4tNmfm6n1ZAHy8l+jr4diwE4TOJnaIvu8Ms514=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyb8AY7LugFH/y/r9sCevq/nVvqQ9ndvS041zxJlTCACgxljyw9
+ QblC+doRkElJg93gX8wCGFqI1/iJ6IJeouZd1xgEIDyC7A4QCQK8wtKVgnZuGII=
+X-Google-Smtp-Source: AGHT+IFohJQDWH2kSHVDDhNR5squ1lzbXBUzN9C8kZvyswX1QiCAYnMy/4ZV3oE57eEiY8H1tXG1zA==
+X-Received: by 2002:a05:620a:1a23:b0:7a3:7889:4af0 with SMTP id
+ af79cd13be357-7a9e5f1d8c3mr2114607085a.28.1726424373377; 
+ Sun, 15 Sep 2024 11:19:33 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7ab3eb62d72sm178022385a.107.2024.09.15.11.19.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 15 Sep 2024 11:19:32 -0700 (PDT)
+Date: Sun, 15 Sep 2024 12:19:29 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH] doc/develop/sending_patches.rst: Clarify when to use
+ which branch
+Message-ID: <20240915181929.GA4252@bill-the-cat>
+References: <20240826163917.2786791-1-trini@konsulko.com>
+ <4b1be536-86d8-4a43-9060-35e8c989e258@gmx.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/10] SMBIOS improvements
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>,
- Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Bin Meng
- <bmeng@tinylab.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
- Stefan Roese <sr@denx.de>, =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>,
- Wan Yee Lau <wan.yee.lau@intel.com>, Alexander Gendin <agendin@matrox.com>,
- Michal Simek <michal.simek@amd.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Max Krummenacher <max.krummenacher@toradex.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Sean Anderson <seanga2@gmail.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Peter Robinson <pbrobinson@gmail.com>
-References: <20240816154658.1866186-1-raymond.mao@linaro.org>
- <CAFLszTjE+8BmdmtFXER94LmEYshNDEA4x_MDTqvyGhHYed2OCw@mail.gmail.com>
- <ffeb90f8-4f3b-4455-83db-d7b03b872c84@linaro.org>
- <CAFLszTg8gM53pcbHGj-LoA9GDSU-X294_q6ZRnP_QjYFppG0sw@mail.gmail.com>
- <20240826182345.GJ2479150@bill-the-cat>
- <CAFLszTiD4A2eCMfnnKvrbm__urLu+vdi_L1T1iiwU-qOY-yYJQ@mail.gmail.com>
- <20240826195924.GM2479150@bill-the-cat>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240826195924.GM2479150@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:Bw4ONsTCzMvPtOhz55glRTMPx0I9cvDWj/yet7aOz9Cryhvf8Hb
- wcPqfmLm+KhV7V2lxNWGOV4I5dTf4+dcL6Fly0n68GF9XWZUeLgawcGUcWxHyQJu9KwFZFN
- Yrw2DIO7qHywj2t44yF0Tie3x1CdRHgYTkcBW0iYJMXEXIIodo1ne2wiNYXer7Hu/L8pN+9
- k/ld38B9e/kNxMfc8CZ4g==
-UI-OutboundReport: notjunk:1;M01:P0:DVcemOt1wOI=;maqBOPwMBQJcoxarIjIlSo9ItaZ
- eGoYzt6cfMx+C8Gw0GRQEIj6XpSM/Vug68eRzc3DUqGs62SWnvXsJF3iqNewUC8RJcX/X2lS+
- TZY4oeq5yFDLGuK/BQ3zD/VCROHDq0L4zDof0EJLSsVThsSQyyUbKNeDafmT+zvIN8jSYyErT
- QudG40PCuyfld50dTQRb2n1DoqCOErKe9w04ejXx9DO2XALZUxPoJrc9QGywakE4zy4HTBUkV
- o4BQTFn0AwByzfCfOjqZ7UweTrwCXGOAM89n0aZJxxF6HExD0wzI4bSPpWQwqWmneppffWFrk
- n/LNo0F+PVLrsMLzGjzI7zKa+tn01HDP1dSr+O0xhU2/QjDEFANt3lm3LKrjEYX0a2/VDiWM/
- 6kLTNQVKwD2y9FsPSf2dytvNFYBU9joJcpM2qoW8uJX4QvcHSygssEIRfsD76pgzdhPzHebMz
- 0lG6N2gdfLh0COyrWP8gNkvAFrZ5AHJvFJMF+8zpk8jrfWyzNwN6SKrj8wFDpIoD4+hZnyRcQ
- mkZR1/kK9Uh2xl22Q7AzEPT7NhhN6XODMN4eOItu5dj8dQ97YZVmPZMve5a7bvBOCN6UzteFw
- Djeyf6p+88sz2CpLNjNZwU5wV1sUx+k1DOPhB95Csyzwh25qp9vUpKtt6IaxzgZSsGeYmK9yu
- L+jbMZpOgDzEc7O3pwu9KCZUyN3kmwaN7cVw6ca5nyPtdIEIxV32Wa/bqMHU/SGNZ8lU5yXCh
- YMwfmfGc37AuZkgz9/vVABeZ4LLnxbG3zi+r8yQQh2ULa9ORwcAaJnfMqpcVucKm26GcWF4xX
- vbsY3gZljqJ+5KRwwNUZNZhQ==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="do2vHd8xhnxsG7la"
+Content-Disposition: inline
+In-Reply-To: <4b1be536-86d8-4a43-9060-35e8c989e258@gmx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,92 +93,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/26/24 21:59, Tom Rini wrote:
-> On Mon, Aug 26, 2024 at 01:12:16PM -0600, Simon Glass wrote:
->> Hi Tom,
->>
->> On Mon, 26 Aug 2024 at 12:23, Tom Rini <trini@konsulko.com> wrote:
->>>
->>> On Mon, Aug 26, 2024 at 11:58:54AM -0600, Simon Glass wrote:
->>>> Hi Caleb,
->>>>
->>>> On Mon, 19 Aug 2024 at 17:03, Caleb Connolly <caleb.connolly@linaro.o=
-rg> wrote:
->>>>>
->>>>> Hi Simon,
->>>>>
->>>>>> As a general comment, this is adding a load of code which is used b=
-y a
->>>>>> lot of platforms. As more and more aarch64 platforms are created, t=
-his
->>>>>> data grows. Why not use the devicetree for this hardware informatio=
-n?
->>>>>> That is what it is for.
->>>>>
->>>>> This data does not belong in devicetree, the various system register=
-s
->>>>> exist to describe this information... Putting it in DT would be
->>>>> duplicating it.
->>>>
->>>> I am not wanting to duplicate info which can be read from system regi=
-sters.
->>>>
->>>>>
->>>>> Using DT for this would additionally require having bindings accepte=
-d
->>>>> upstream and for all SoCs to add them. To what end?
->>>>
->>>> To get the correct information in there. How are boards supposed to
->>>> add SMBIOS info? Do we end up creating a whole infra in U-Boot just
->>>> for the driver to read it out? It just doesn't make any sense to me..=
-.
->>>>
->>>> Let's put hardware info in the DT where it belongs.
->>>
->>> I'm a little confused here because of some older threads on this overa=
-ll
->>> topic. Part of the issue here is that in user space, "everyone" has
->>> SMBIOS-based tooling today, and wants to have that work, rather than
->>> inventing new tooling or modify existing tooling. And you were concern=
-ed
->>> I thought that we had tied SMBIOS too much to EFI being present when
->>> indeed it should be possible to pass the location along to the OS
->>> without EFI, but at the time Linux at least only supported that notion
->>> on MIPS I think?
->>
->> That is a whole other concern I have, that we are perpetuating this
->> legacy format which is a real pain to work with, when we already have
->> devicetree. Let's leave that issue aside as I have not detected any
->> interest in solving that problem, or even any agreement that it is a
->> problem.
->
-> OK, yes, lets set that aside.
->
->> But for this particular series, I am just wanting to get the correct
->> info in there. Having the CPU-detection code provide an opinion about
->> what type of chassis is in use (just to take an example, the patch
->> pieces I highlighted have been dropped from the email I am replying
->> to) just seems a bit daft to me. Only the board vendor would know that
->> info.
->
-> Yes, I agree the detection should be reworked a good bit as some
-> information will be board design specific while others SoC specific. And
-> we should avoid adding many unused at run time strings to all platforms
-> that enable this too (looking at all the CPU vendor related stuff).
->
 
-I doubt on productive machines there will be much use of U-Boot's smbios
-command use. It is more a developer tool.
+--do2vHd8xhnxsG7la
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-For reading all the details we currently have
-lib/efi_loader/smbiosdump.efi which can dump the SMBIOS table to a file
-that dmidecode can read.
+On Sun, Sep 15, 2024 at 07:00:08PM +0200, Heinrich Schuchardt wrote:
+> On 8/26/24 18:39, Tom Rini wrote:
+> > The previous wording on the paragraph about what branch to use when
+> > submitting patches did not reflect how / when the next branch is
+> > currently used. Reword this to note that master should be used for bug
+> > and regression fixes, always, and that next should be used once it
+> > opens, with -rc2.
+> >=20
+> > Reported-by: Jerome Forissier <jerome.forissier@linaro.org>
+> > Signed-off-by: Tom Rini <trini@konsulko.com>
+>=20
+> Hello Tom,
+>=20
+> I missed that patch in my recent documentation pull-request.
+>=20
+> Maybe you just want to add it to master with whatever comes next.
+>=20
+> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
-Maybe instead of adding more and more decoding logic into the U-Boot
-smbios command we should add an smbios sub-command to dump to a file.
-This would be less of a hassle than running an EFI program for the same
-purpose.
+Will do, thanks.
 
-Best regards
+--=20
+Tom
 
-Heinrich
+--do2vHd8xhnxsG7la
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbnJS4ACgkQFHw5/5Y0
+tyzvfQwAggizDyH+GZ3LKeVVGdkUWeJG5OXYPg2P4lLwTCdAIcquZN+uTNnaGP44
+Tsms1oa4MIHVUp5YZsLwUs+oNZ697sWI04J97hftSZ42LTBRCfcpmgazQcWghHEk
+g0aHF+okPCA1BJvJs38FnGgZIFVX1+Mp/Aq4E84t7W6RiutGIuRGCRy67EYfF3Gc
+1bajEkYPL8Pmq/xkiapUNpEQqquyEea+9DekXA2JWm/9aoPvgJDt6RFNs3SXu5hd
+HxeHBQwuDkr5mNkFESwJ/jX9NT1PMsBxEa/tNxTSbHegllAvR2WDa8+tDzNb1oOr
+0cj44aeuJOeuSJNQPwpqmSFDy5KuYs1D9uLuu03aIbaIFVIxa3FszcEZilrlfbat
+uW9x1meOMZ5YAI2vOST1of6rbekqNuEFwTlPlRv9NFdNf7wxNCScZvZqZx/piZsY
+SR0QxM1f+YPi2a7GkEa1nLD/hC3uxCqAwYJVNuTKTfPyBC6AyRCDcqjJxFa91oUE
+FyQq6EXG
+=SXtI
+-----END PGP SIGNATURE-----
+
+--do2vHd8xhnxsG7la--
