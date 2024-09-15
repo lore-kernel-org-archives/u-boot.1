@@ -4,99 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DACDC3ABA3
-	for <u-boot@archiver.kernel.org>; Sun, 15 Sep 2024 18:28:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26A6BC3ABA8
+	for <u-boot@archiver.kernel.org>; Sun, 15 Sep 2024 20:47:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B32AF88E18;
-	Sun, 15 Sep 2024 20:28:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2F23E88DFF;
+	Sun, 15 Sep 2024 22:47:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mGI79ASQ";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="vao03XaW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D52288C9C; Sun, 15 Sep 2024 20:28:39 +0200 (CEST)
-Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
- [IPv6:2607:f8b0:4864:20::830])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 331E78880B; Sun, 15 Sep 2024 22:47:24 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1DFC888E18
- for <u-boot@lists.denx.de>; Sun, 15 Sep 2024 20:28:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 64C3B88706
+ for <u-boot@lists.denx.de>; Sun, 15 Sep 2024 22:47:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x830.google.com with SMTP id
- d75a77b69052e-4583209a17dso31756271cf.1
- for <u-boot@lists.denx.de>; Sun, 15 Sep 2024 11:28:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1726424916; x=1727029716; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=+nGE+6CyS10j4VwozObrXCDpc/27cZr/3E6EsUpuPE0=;
- b=mGI79ASQs3fRWDEqglB1zsrbpZcQ9wkiQDtBtx0lxPi7W0tShkVLioJw1ROJ+kbrWG
- klItH23sttVwewYnHXx3ZFhAWFbdCp3cb9Y3JPBNsHitqwNQ38DFgeO2Aj1qf4ljlVtO
- rHJne4pybcwVyNp/shttu/Jj/hE0oOYuxuZmE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726424916; x=1727029716;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=+nGE+6CyS10j4VwozObrXCDpc/27cZr/3E6EsUpuPE0=;
- b=RL8dyFNdYf3YAfmzdaCfHQWXW2lVX3r5+wct3UiaGOw1GHweDHOBYeTNvRuvf59OSF
- 8//o6Ra8a/MNmJcoLqQ3n2/TF7T29u9yVDLezgb8lzYcCQ+lwe7ue84CyvQWRPm9rHTn
- dlREme6s5D2BOnFQWXvMsL4CPfVrHX3srUzngMYRqbDsTeyX/T0ipLxNMudYKIYk1dvs
- oxchw9/7dOeGRBqH/z9/TeMnKvPm5XUGCEX++2zIbmNbY90FKGifftXaB4EEByuwL+gf
- Z8HbHCfvWw6UKH0UOBm3RfX5ZoglxY8LNHuUfW+K1haoo/WrOX4pkqACWnQD3sCC2lka
- jqGg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUJXXFj7wsK/5SUUjxkTiTC3yP2bIdhxjUVw7pplfHHwqsMznaDhPU4PgQT9Xa2uXPBBE2pLPo=@lists.denx.de
-X-Gm-Message-State: AOJu0YwWRotLaFaswVbJB+mmobZ6X5AonT4sUMXDRNVWMllw4iMxxoLa
- BmWvh/a6JhgWnFaCN/UYWZfewPfBdSF8CL8sMQKrFzjYS6JGWBLlyFOTMPfMtxY=
-X-Google-Smtp-Source: AGHT+IEc4CNCkT4L3mHK5Z5rs79P7AErrMO6ZJufOwuStIA2DzYj5U38IKJRjhG6FFQp6nNdjdSzbA==
-X-Received: by 2002:ac8:5803:0:b0:456:77c3:c0f0 with SMTP id
- d75a77b69052e-4599d23c4dfmr143895181cf.17.1726424915727; 
- Sun, 15 Sep 2024 11:28:35 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-459aad24937sm19596651cf.96.2024.09.15.11.28.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 15 Sep 2024 11:28:35 -0700 (PDT)
-Date: Sun, 15 Sep 2024 12:28:31 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Simon Glass <sjg@chromium.org>, Caleb Connolly <caleb.connolly@linaro.org>,
- Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Bin Meng <bmeng@tinylab.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Jonas Karlman <jonas@kwiboo.se>, Stefan Roese <sr@denx.de>,
- Marek =?iso-8859-1?Q?Beh=FAn?= <kabel@kernel.org>,
- Wan Yee Lau <wan.yee.lau@intel.com>, Alexander Gendin <agendin@matrox.com>,
- Michal Simek <michal.simek@amd.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Max Krummenacher <max.krummenacher@toradex.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Sean Anderson <seanga2@gmail.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Peter Robinson <pbrobinson@gmail.com>
-Subject: Re: [PATCH 00/10] SMBIOS improvements
-Message-ID: <20240915182831.GD4252@bill-the-cat>
-References: <20240816154658.1866186-1-raymond.mao@linaro.org>
- <CAFLszTjE+8BmdmtFXER94LmEYshNDEA4x_MDTqvyGhHYed2OCw@mail.gmail.com>
- <ffeb90f8-4f3b-4455-83db-d7b03b872c84@linaro.org>
- <CAFLszTg8gM53pcbHGj-LoA9GDSU-X294_q6ZRnP_QjYFppG0sw@mail.gmail.com>
- <20240826182345.GJ2479150@bill-the-cat>
- <CAFLszTiD4A2eCMfnnKvrbm__urLu+vdi_L1T1iiwU-qOY-yYJQ@mail.gmail.com>
- <20240826195924.GM2479150@bill-the-cat>
- <93c2ab53-aa9a-4403-80da-7bd6d8872b3c@gmx.de>
+ spf=pass smtp.mailfrom=vaishnav.a@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 48FKlI6Z084669;
+ Sun, 15 Sep 2024 15:47:18 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1726433238;
+ bh=fJQjUrQD6Ut9Ag+4+OVFI6jvL/pDxKkGCiFqBHHy5yg=;
+ h=From:To:CC:Subject:Date;
+ b=vao03XaWRsuSZGV4vkPOR2DL1DyCh+rB8DBFDC5ZibLFA6FXUIXwGh4P/LIcjRYWN
+ ePk2aFaEdZD5VG02xCIwlcXIz4kJ/IM7Z/sxlPLOORX4+f7wq4rn3kKRLyfntWF7CU
+ XLCRk5c4GIdOvzuW0Zl/uuqWnXlhRyQyL8wiguHg=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 48FKlIjh095678;
+ Sun, 15 Sep 2024 15:47:18 -0500
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sun, 15
+ Sep 2024 15:47:18 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Sun, 15 Sep 2024 15:47:18 -0500
+Received: from uda0490681.. ([10.24.69.142])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 48FKlFMx063264;
+ Sun, 15 Sep 2024 15:47:15 -0500
+From: Vaishnav Achath <vaishnav.a@ti.com>
+To: <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <bb@ti.com>, <hnagalla@ti.com>, <n-francis@ti.com>,
+ <vishalm@ti.com>, <j-choudhary@ti.com>, <vaishnav.a@ti.com>,
+ <u-kumar1@ti.com>
+Subject: [PATCH] board: ti: j722s: Update Resource Management configs
+Date: Mon, 16 Sep 2024 02:17:14 +0530
+Message-ID: <20240915204714.1051646-1-vaishnav.a@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="phHv1mWwZ3HUWgiT"
-Content-Disposition: inline
-In-Reply-To: <93c2ab53-aa9a-4403-80da-7bd6d8872b3c@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,123 +78,198 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Update J722S Resource Management configs to the latest output
+generated by K3 Resource Partitioning tool. Main change includes
+allocating more BCDMA channels to A53 for CSI2RX to support
+4 x CSIRX capture instance simultaneously.
 
---phHv1mWwZ3HUWgiT
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Vaishnav Achath <vaishnav.a@ti.com>
+---
 
-On Sun, Sep 15, 2024 at 07:57:19PM +0200, Heinrich Schuchardt wrote:
-> On 8/26/24 21:59, Tom Rini wrote:
-> > On Mon, Aug 26, 2024 at 01:12:16PM -0600, Simon Glass wrote:
-> > > Hi Tom,
-> > >=20
-> > > On Mon, 26 Aug 2024 at 12:23, Tom Rini <trini@konsulko.com> wrote:
-> > > >=20
-> > > > On Mon, Aug 26, 2024 at 11:58:54AM -0600, Simon Glass wrote:
-> > > > > Hi Caleb,
-> > > > >=20
-> > > > > On Mon, 19 Aug 2024 at 17:03, Caleb Connolly <caleb.connolly@lina=
-ro.org> wrote:
-> > > > > >=20
-> > > > > > Hi Simon,
-> > > > > >=20
-> > > > > > > As a general comment, this is adding a load of code which is =
-used by a
-> > > > > > > lot of platforms. As more and more aarch64 platforms are crea=
-ted, this
-> > > > > > > data grows. Why not use the devicetree for this hardware info=
-rmation?
-> > > > > > > That is what it is for.
-> > > > > >=20
-> > > > > > This data does not belong in devicetree, the various system reg=
-isters
-> > > > > > exist to describe this information... Putting it in DT would be
-> > > > > > duplicating it.
-> > > > >=20
-> > > > > I am not wanting to duplicate info which can be read from system =
-registers.
-> > > > >=20
-> > > > > >=20
-> > > > > > Using DT for this would additionally require having bindings ac=
-cepted
-> > > > > > upstream and for all SoCs to add them. To what end?
-> > > > >=20
-> > > > > To get the correct information in there. How are boards supposed =
-to
-> > > > > add SMBIOS info? Do we end up creating a whole infra in U-Boot ju=
-st
-> > > > > for the driver to read it out? It just doesn't make any sense to =
-me...
-> > > > >=20
-> > > > > Let's put hardware info in the DT where it belongs.
-> > > >=20
-> > > > I'm a little confused here because of some older threads on this ov=
-erall
-> > > > topic. Part of the issue here is that in user space, "everyone" has
-> > > > SMBIOS-based tooling today, and wants to have that work, rather than
-> > > > inventing new tooling or modify existing tooling. And you were conc=
-erned
-> > > > I thought that we had tied SMBIOS too much to EFI being present when
-> > > > indeed it should be possible to pass the location along to the OS
-> > > > without EFI, but at the time Linux at least only supported that not=
-ion
-> > > > on MIPS I think?
-> > >=20
-> > > That is a whole other concern I have, that we are perpetuating this
-> > > legacy format which is a real pain to work with, when we already have
-> > > devicetree. Let's leave that issue aside as I have not detected any
-> > > interest in solving that problem, or even any agreement that it is a
-> > > problem.
-> >=20
-> > OK, yes, lets set that aside.
-> >=20
-> > > But for this particular series, I am just wanting to get the correct
-> > > info in there. Having the CPU-detection code provide an opinion about
-> > > what type of chassis is in use (just to take an example, the patch
-> > > pieces I highlighted have been dropped from the email I am replying
-> > > to) just seems a bit daft to me. Only the board vendor would know that
-> > > info.
-> >=20
-> > Yes, I agree the detection should be reworked a good bit as some
-> > information will be board design specific while others SoC specific. And
-> > we should avoid adding many unused at run time strings to all platforms
-> > that enable this too (looking at all the CPU vendor related stuff).
-> >=20
->=20
-> I doubt on productive machines there will be much use of U-Boot's smbios
-> command use. It is more a developer tool.
->=20
-> For reading all the details we currently have
-> lib/efi_loader/smbiosdump.efi which can dump the SMBIOS table to a file
-> that dmidecode can read.
->=20
-> Maybe instead of adding more and more decoding logic into the U-Boot
-> smbios command we should add an smbios sub-command to dump to a file.
-> This would be less of a hassle than running an EFI program for the same
-> purpose.
+Test logs (CSI capture + RM config dump):
+https://gist.github.com/vachath/7b37cd288ef16ad8a2ac6ff5710d1e9a
 
-Sounds like a good idea to me.
+ board/ti/j722s/rm-cfg.yaml      | 48 ++++++++++++++++++++++-----------
+ board/ti/j722s/tifs-rm-cfg.yaml | 28 +++++++++++++------
+ 2 files changed, 53 insertions(+), 23 deletions(-)
 
---=20
-Tom
+diff --git a/board/ti/j722s/rm-cfg.yaml b/board/ti/j722s/rm-cfg.yaml
+index 21ca30104c..e32beb8479 100644
+--- a/board/ti/j722s/rm-cfg.yaml
++++ b/board/ti/j722s/rm-cfg.yaml
+@@ -244,7 +244,7 @@ rm-cfg:
+             subhdr:
+                 magic: 0x7B25
+                 size: 8
+-            resasg_entries_size: 1160
++            resasg_entries_size: 1184
+             reserved: 0
+     resasg_entries:
+         -
+@@ -1017,13 +1017,13 @@ rm-cfg:
+             reserved: 0
+         -
+             start_resource: 8
+-            num_resource: 12
++            num_resource: 32
+             type: 12750
+             host_id: 12
+             reserved: 0
+         -
+-            start_resource: 20
+-            num_resource: 20
++            start_resource: 8
++            num_resource: 32
+             type: 12750
+             host_id: 38
+             reserved: 0
+@@ -1035,13 +1035,13 @@ rm-cfg:
+             reserved: 0
+         -
+             start_resource: 0
+-            num_resource: 12
++            num_resource: 32
+             type: 12769
+             host_id: 12
+             reserved: 0
+         -
+-            start_resource: 12
+-            num_resource: 20
++            start_resource: 0
++            num_resource: 32
+             type: 12769
+             host_id: 38
+             reserved: 0
+@@ -1053,10 +1053,22 @@ rm-cfg:
+             reserved: 0
+         -
+             start_resource: 0
+-            num_resource: 8
++            num_resource: 2
+             type: 12810
+             host_id: 12
+             reserved: 0
++        -
++            start_resource: 2
++            num_resource: 2
++            type: 12810
++            host_id: 20
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 2
++            type: 12810
++            host_id: 22
++            reserved: 0
+         -
+             start_resource: 22
+             num_resource: 18
+@@ -1065,21 +1077,27 @@ rm-cfg:
+             reserved: 0
+         -
+             start_resource: 12288
+-            num_resource: 64
++            num_resource: 56
+             type: 12813
+             host_id: 12
+             reserved: 0
+         -
+-            start_resource: 12352
+-            num_resource: 64
++            start_resource: 12344
++            num_resource: 48
+             type: 12813
+-            host_id: 38
++            host_id: 20
+             reserved: 0
+         -
+-            start_resource: 12416
+-            num_resource: 88
++            start_resource: 12392
++            num_resource: 48
+             type: 12813
+-            host_id: 128
++            host_id: 22
++            reserved: 0
++        -
++            start_resource: 12440
++            num_resource: 64
++            type: 12813
++            host_id: 38
+             reserved: 0
+         -
+             start_resource: 1536
+diff --git a/board/ti/j722s/tifs-rm-cfg.yaml b/board/ti/j722s/tifs-rm-cfg.yaml
+index 5e8d7e0444..4a2af0ebca 100644
+--- a/board/ti/j722s/tifs-rm-cfg.yaml
++++ b/board/ti/j722s/tifs-rm-cfg.yaml
+@@ -244,7 +244,7 @@ tifs-rm-cfg:
+             subhdr:
+                 magic: 0x7B25
+                 size: 8
+-            resasg_entries_size: 976
++            resasg_entries_size: 992
+             reserved: 0
+     resasg_entries:
+         -
+@@ -897,13 +897,13 @@ tifs-rm-cfg:
+                 reserved: 0
+         -
+                 start_resource: 8
+-                num_resource: 12
++                num_resource: 32
+                 type: 12750
+                 host_id: 12
+                 reserved: 0
+         -
+-                start_resource: 20
+-                num_resource: 20
++                start_resource: 8
++                num_resource: 32
+                 type: 12750
+                 host_id: 38
+                 reserved: 0
+@@ -915,13 +915,13 @@ tifs-rm-cfg:
+                 reserved: 0
+         -
+                 start_resource: 0
+-                num_resource: 12
++                num_resource: 32
+                 type: 12769
+                 host_id: 12
+                 reserved: 0
+         -
+-                start_resource: 12
+-                num_resource: 20
++                start_resource: 0
++                num_resource: 32
+                 type: 12769
+                 host_id: 38
+                 reserved: 0
+@@ -933,10 +933,22 @@ tifs-rm-cfg:
+                 reserved: 0
+         -
+                 start_resource: 0
+-                num_resource: 8
++                num_resource: 2
+                 type: 12810
+                 host_id: 12
+                 reserved: 0
++        -
++                start_resource: 2
++                num_resource: 2
++                type: 12810
++                host_id: 20
++                reserved: 0
++        -
++                start_resource: 4
++                num_resource: 2
++                type: 12810
++                host_id: 22
++                reserved: 0
+         -
+                 start_resource: 22
+                 num_resource: 18
+-- 
+2.34.1
 
---phHv1mWwZ3HUWgiT
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbnJ04ACgkQFHw5/5Y0
-tyxMPwwAuBYiRyf1+hm/Zl2o9r0XFoA+HJczRrE2sx5FxvhCmBkMx6Qa6PnURCL7
-jmqB6hWcJbCWr+AH3XYt9PB5WZYrT1lIMIDwjdXXKlsP9y1Sr28jbHjdA6RHznFk
-ChmjBYHjWNdfmTser+RNnYVP/djNgWa3+qS26JmmGAMMJn41PKuYHssaHdEWG1JG
-Gh/EsmJRwDKQ6xjG6wCsGy2zTzJpoJ2G89rUz3QRJfmpiHuMR0wqmhD8IPO0R/2Z
-YRjwvVik/ipNrezkCo0HUPwuJVENq+vLtc5FZebquD3T8f+0or3X/meG45/VPX8B
-iYGwwDwc9JA9uCHg4h7GtT4Ht9S8eKqrnk8hGqBjC8jbTuahKQMG+3jnyGEdzbJM
-tIDmxGPqM9b1swGoIUBSuVDqFUGrRLwdRsT0UlYZ7X8N5AgWjodUK+ntgMGRIsj5
-ndJPeMjQif8GcZahR46JpFjkZyhcXhCTZxJ5GmTBC55tP7tMO/KYLaexErmC1fE0
-EB/m/vfK
-=lAGI
------END PGP SIGNATURE-----
-
---phHv1mWwZ3HUWgiT--
