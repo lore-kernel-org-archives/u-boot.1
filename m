@@ -4,75 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 521CBC3ABCB
-	for <u-boot@archiver.kernel.org>; Mon, 16 Sep 2024 20:41:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AED5AC3ABB2
+	for <u-boot@archiver.kernel.org>; Mon, 16 Sep 2024 20:42:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A953188EF5;
-	Mon, 16 Sep 2024 22:41:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1224988EA8;
+	Mon, 16 Sep 2024 22:42:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VYNJfgW2";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GpMX8l3r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3224088F16; Mon, 16 Sep 2024 22:41:44 +0200 (CEST)
-Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
- [IPv6:2607:f8b0:4864:20::f2a])
+ id A2BFE88F15; Mon, 16 Sep 2024 22:42:13 +0200 (CEST)
+Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
+ [IPv6:2607:f8b0:4864:20::829])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A4AF88ED0
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 22:41:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 95D5D87873
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 22:42:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2a.google.com with SMTP id
- 6a1803df08f44-6c35427935eso26152466d6.3
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 13:41:42 -0700 (PDT)
+Received: by mail-qt1-x829.google.com with SMTP id
+ d75a77b69052e-458320b30e7so34761481cf.0
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 13:42:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1726519301; x=1727124101; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=901bdAVYOwN4DQvphWB5Bt6b6+L0Aj0othqSnpE2FhQ=;
- b=VYNJfgW2Femm3SWCm2ubzsWSfRdItlZRlj8C8UxTAGZJXuYCq5sBLKhW2cLupUXJb4
- IszPEZiod5u6WrKPfLOSu3uVIWWRQJGl6t5qCXYv77Ugy9qX68NVvKBCfQmJH3BI2msN
- 1g5cyNgNhUq9T9IISRdoEqiox+LC0teJmb/9s=
+ d=konsulko.com; s=google; t=1726519330; x=1727124130; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=YLmettxYdCPAeeZHymqi630CybuHVwDfbc/fd0My6XI=;
+ b=GpMX8l3rgxMhIkqhWZKrUAbNpQWV8gZDDwxCa+7bCfyYzBaxMjcUSWV57LAdInKspd
+ fWzPXP+D3kMwt4V5XdlJYVqlvIrXgEVIOQ2Ki5Ad5hRjBlImV15wGQMs2gnzYQOuEQ48
+ R5YrvMUQGZI7l1HHYy8gt9Jo4KP0P9YTBB6VU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726519301; x=1727124101;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=901bdAVYOwN4DQvphWB5Bt6b6+L0Aj0othqSnpE2FhQ=;
- b=c7F4pAAOCBGq8gSHJbveaf0nN9AKsZ9mSaj1XXDEhHkQiBRMLQCDcf8ssFseGzMJ20
- Wv512npbZZUtqLrBnHebJZbJNMDtQkmIW6gU+1pLqVmiEIzUiA0bDuvYfNRzp0p+ygWQ
- 02beyY3gx2CO9+Z8bOwi/ulpAteAmwhH0tgyi7vZ2idQsbN8DHm4OG8bV5aYj9nP0/Fu
- J1bidvruyD/8Zy2ahCW7b90pQtsgocrG0H/BKN5j9BzHycuhD8erHHS098D4sw2j+Vtm
- FK6YGhYDJCML8cA2c+SD6solNUFa0OoT16peS2qMLtaHbI2Jrx+FXDsKdAObHO+kGk8q
- 9VHg==
-X-Gm-Message-State: AOJu0YweF1HO/iKBlFU9+RD8TDIugzE+3U1W3SIuZ+oA94bHTKsBfMSX
- ex+y6+ygjGSyXXigqPwp52YCK1nx9Xxu/Qqyv+rmWOyO0VQVYuXrzD5Ggnx+c64=
-X-Google-Smtp-Source: AGHT+IFnAhcK/3mw72Kmp0U/efaTn7IkOsUZ1gz5o+2H1r/YSDI6BlEuNJJrN+AJ+S/jaIrBbVGpIQ==
-X-Received: by 2002:a05:6214:2b82:b0:6c3:5d9f:cea6 with SMTP id
- 6a1803df08f44-6c5735832eamr263948726d6.27.1726519300820; 
- Mon, 16 Sep 2024 13:41:40 -0700 (PDT)
-Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6c58c645df1sm28000266d6.70.2024.09.16.13.41.39
+ d=1e100.net; s=20230601; t=1726519330; x=1727124130;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YLmettxYdCPAeeZHymqi630CybuHVwDfbc/fd0My6XI=;
+ b=Ljw04mE+VT2TPHTbMGLcEUq1S58SUeeS0+BpjOz6QdmSOqHsyGpEap0PgNngvan/YW
+ F8Rfcui7VcvozgYrmoPcRIk7bOWubd5+JoDBe1WsagFaW337MJbIAXYE6phNLvRIVuCW
+ C80N00PxRgUP4wEJ83POBmFAooqvGSwUfoHCJdyFuxmY/ZpBe5+ML84KbqoGiFQCCA8P
+ O3mLJymm8Yw39exCCxKqkSrQdiuwDUkKv/8rsM5o1w/ypEK6jS0KvKLvoyla3c3jg0Ys
+ bsImIMgpI/wpV0Loh749Mdu2oQJSUu2KJTgow2ZTMqmGgGSX+brmNoI3WcO87jnsbL9c
+ K0EQ==
+X-Gm-Message-State: AOJu0Yz5oxObeGERBoS9N3lgXOYHMUFKUQB2tOmhhg9zqvO41pBHrgw1
+ AQdyp66li+dzAXV1c+Z7JdUHz5VDspdG6vt/ZDzXUehSN+E8LZPJPqbsvlxmJUU=
+X-Google-Smtp-Source: AGHT+IGbGi4pi9uqc4f+qi+uREkmu3NVAFFCJiFyZci8S4qW+bdEVmhk67SArOvzcYYgq3G8UIgxZg==
+X-Received: by 2002:ac8:5994:0:b0:456:7d6b:7605 with SMTP id
+ d75a77b69052e-458603fbdc0mr251304231cf.41.1726519330303; 
+ Mon, 16 Sep 2024 13:42:10 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-459aaca55absm31114831cf.54.2024.09.16.13.42.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Sep 2024 13:41:40 -0700 (PDT)
+ Mon, 16 Sep 2024 13:42:09 -0700 (PDT)
+Date: Mon, 16 Sep 2024 14:42:06 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20240826163917.2786791-1-trini@konsulko.com>
-References: <20240826163917.2786791-1-trini@konsulko.com>
-Subject: Re: (subset) [PATCH] doc/develop/sending_patches.rst: Clarify when
- to use which branch
-Message-Id: <172651929972.1958144.16416991374297367976.b4-ty@konsulko.com>
-Date: Mon, 16 Sep 2024 14:41:39 -0600
+To: Lothar Rubusch <l.rubusch@gmail.com>
+Cc: u-boot@lists.denx.de, marex@denx.de, simon.k.r.goldschmidt@gmail.com,
+ tien.fong.chee@intel.com
+Subject: Re: [PATCH 3/9] ARM: socfpga: add Enclustra AA1 SoM support
+Message-ID: <20240916204206.GI4252@bill-the-cat>
+References: <20240912060649.190-1-l.rubusch@gmail.com>
+ <20240912060649.190-4-l.rubusch@gmail.com>
+ <20240912174507.GV4252@bill-the-cat>
+ <CAFXKEHYQ+Z1nQ5-=ZLH1Nd+Yv43tv=S-5bzUzBLhYEQNe4X81w@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="zupEddcSUlUfodZZ"
+Content-Disposition: inline
+In-Reply-To: <CAFXKEHYQ+Z1nQ5-=ZLH1Nd+Yv43tv=S-5bzUzBLhYEQNe4X81w@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,20 +93,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 26 Aug 2024 10:39:17 -0600, Tom Rini wrote:
 
-> The previous wording on the paragraph about what branch to use when
-> submitting patches did not reflect how / when the next branch is
-> currently used. Reword this to note that master should be used for bug
-> and regression fixes, always, and that next should be used once it
-> opens, with -rc2.
-> 
-> 
-> [...]
+--zupEddcSUlUfodZZ
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Applied to u-boot/master, thanks!
+On Sat, Sep 14, 2024 at 10:03:02PM +0200, Lothar Rubusch wrote:
+> On Thu, Sep 12, 2024 at 7:45=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
+te:
+> >
+> > On Thu, Sep 12, 2024 at 06:06:43AM +0000, Lothar Rubusch wrote:
+> >
+> > > Introduce initial support for the Enclustra SoMs:
+> > >
+> > > - Mercury AA1
+> > >
+> > > Cover general board files for SD/MMC and QSPI boot modes. Integrate t=
+he
+> > > boards to kconfig. All build variants will depend on Quartus handoff
+> > > files, thus they depend on the particular Quartus design. The approac=
+h is
+> > > covered in the according documentation part.
+> > >
+> > > Additionally add configuration for SD/MMC boot and QSPI bootmodes. Re=
+gister
+> > > additional targets in kconfig.
+> > >
+> > > Signed-off-by: Andreas Buerkler <andreas.buerkler@enclustra.com>
+> > > Signed-off-by: Lothar Rubusch <l.rubusch@gmail.com>
+> > [snip]
+[snip]
+> > > +U_BOOT_CMD(altera_set_storage, 2, 0, altera_set_storage_cmd,
+> > > +        "Set non volatile memory access",
+> > > +        "<MMC|QSPI|EMMC> - Set access for the selected memory device=
+");
+> > > +
+> > > +#endif
+> >
+> > The entire file seems to be for just adding the cmd. Perhaps rename this
+> > file to reflect that and have the Makefile only even build this when
+> > CONFIG_SPL_BUILD is not set.
+>=20
+> Agree. It looks cleaner now. I prepare this in the next version of
+> this patch set. Thank you for the hint. I would name it as
+> aa1_set_storage_cmd() is this ok?
 
--- 
+Yes, the name sounds fine. Thanks!
+
+--=20
 Tom
 
+--zupEddcSUlUfodZZ
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbomB4ACgkQFHw5/5Y0
+tyxGkgwAhq5C1x5YNRaRT3JUyIihvpgQdioq7JyitFQMdSAzzZkQewwe31+r7k7F
+QIaXk5qUIJvOvWzJqjrZ40zKtrW+NOIG4LZ+P+s9H5CQLQc2F/MoNJEoRVCcp5l+
+nek/E6LurefOz5pajQxbpL4yIR5mFSrs6cNdvSOLOmo/WTyINkA+1TG+5aFJex6d
+Hsj8+Sifm9h/NRaZQyJ9wb0+hNWTlxz2hndTOOn+8K6y6Ua4r11/mS8r1gt+rfLP
+GPg4lDx54zkJ84lty1DbQLRWbVohpxwE10rCgVzTw4025EByTeRNYt+Ji7yZSf91
++BAeLUB5eU/343hobm7F9/ExL37i22ZsoDLzkdg4YXDUv9T2iuLbwSVt+VU2Jh+y
+9befDWUnYd0irvHaYgembRG/H9CBXj3eytnPV4/2SVreRsDpjvxdWSZ9gwZIgPom
+QST2lHI9xT+GNUCWpkUk2mbnbnVFtGKNA0AaqKjZb9TD4FfSpRqhLTukxDm+LfA5
+hAT7kI/R
+=VUbt
+-----END PGP SIGNATURE-----
+
+--zupEddcSUlUfodZZ--
