@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5287FC3ABB2
-	for <u-boot@archiver.kernel.org>; Mon, 16 Sep 2024 21:04:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09BD0C3ABB2
+	for <u-boot@archiver.kernel.org>; Mon, 16 Sep 2024 21:04:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34F4B88F3A;
-	Mon, 16 Sep 2024 23:04:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9139388F57;
+	Mon, 16 Sep 2024 23:04:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OydwkZS3";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ws2Yq9Zs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24AB288F0B; Mon, 16 Sep 2024 23:04:05 +0200 (CEST)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
+ id 48B0288A4C; Mon, 16 Sep 2024 23:04:05 +0200 (CEST)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 053B588F20
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 23:04:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AB39E88F16
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 23:04:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=macroalpha82@gmail.com
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-277f35c01f5so2340134fac.0
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-277f5c7bdecso2541031fac.3
  for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 14:04:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=gmail.com; s=20230601; t=1726520641; x=1727125441; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pO+ITt5tznvQb2RP7JyZvQNe0Z2DkBEU84LbgQ6fzII=;
- b=OydwkZS3Kw8mbDvKtdkiWJJe2/7SpdVjIfGOxm6/2+eeo1RmnXiaL14ZX/wmr9b3AC
- dDEwTgY222k6j+Zzr4sYWWedw1hiJlN1Vn50GjhW9PgRzkh64K9USBk9DMEvXuqjRjGH
- UdoVpylAQd9XT9a4a1Bu76YZSgSmaMXv6f3V7SfCUToi45ZiQjL5ENdbMfBXPkfQukdy
- 1el7oG7cTh2iVKy2sOHSFoM8CuDKh04pLRYLn+98jF7h6ZQER58uNaYM/3Qg1Ay0cSVm
- wl+3hZKpSmUUPzA8X3+gVBmNTBLqsGC40oWQS2eC5h45bcvO5h48vDb08ynM7dIe7y6/
- 6gPQ==
+ bh=SKMjPURdEtWNa5Gti+b79b1aDzWqBs4TGyj61h+J8+c=;
+ b=Ws2Yq9ZszffTEaPuRVkH3PyNg9nd/6iF4KA0zxgTPet5a4T3FKh1rRyBMd2ZNsAv1j
+ yKQ/MAp8iH3E3f/3pLoaUXcmIdCumBPOlR+MKCJWUow5g/Rx7Av66tfLGq9xQffi06Ri
+ zmGpnLpEmaUn4/ls3YFdNAvlDxRgHyca+ZY2HfmmrQgDG2Jb9D17pXRa2Jk2Z6T0jOVI
+ kXPxotyOH+u5GgMJXxfP9XXYsOxe1ZSbBF3INZQg/GgIcPR/rYktus+nogKm+OxdblTb
+ shhgpgFg0ZlwVDowwfp4MvB3rRhXIt/QIT+ryBBlocDtgeY6cWFUby8dUbNRmU02YtqN
+ Wa3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1726520641; x=1727125441;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pO+ITt5tznvQb2RP7JyZvQNe0Z2DkBEU84LbgQ6fzII=;
- b=hmmhn0Qcc/TS6i+PgVbNG2qdxVaNYCRPwaNGQRoRCnOewyjuSH5YpSgj0RXP2uDPHK
- OavH8jMYV8XnC6Ppca78EWSbyh1sKo/RgWC1pH7EGK55UOMO2P2jxI82bLAAbOoXDDSr
- JtWG5ukU90GAKCJDKsO5QaI7do/kR2L7ZEj9Zm9Vql9VnI3ajhFhbjOrTMjuGB/jqFG6
- SgWGikgFDuvM5lWQ0VD0ZK3Vu2eQs+NlGyiVOomnoM9nZDVdMlX/kvppjz0Zat+IGn8c
- HvH1XOxwi42vHKyryEL+/j2MbWkvcC1oxzDjve8WdY+r71Kx++Gts6dXYnJtya4k5oXO
- WrAw==
-X-Gm-Message-State: AOJu0YwARp/pCNnTR3IDoor4dhn9EXBnRXW0iqbYyAI8fouV90mq5WTW
- RfMUPlfUsWrJZT1ttyW2KNxPDy769+RHXjUsGxdC7rPWknPOaL4/3b3HlBsn
-X-Google-Smtp-Source: AGHT+IEBKzbym0Owemp0e1AuCX42i1n2cXwofIBgF7XGszpCW6ME+ywbf3Bys6SUVNgzC/wAwnQpqQ==
-X-Received: by 2002:a05:6871:8f8b:b0:27c:df1d:85c6 with SMTP id
- 586e51a60fabf-27cdf1d99a1mr138437fac.8.1726520641704; 
+ bh=SKMjPURdEtWNa5Gti+b79b1aDzWqBs4TGyj61h+J8+c=;
+ b=PqHkm6SkwCSTWI0ogymtQlF9fiWhS1JpaO6g0FqVE6uPD5c15Hx2FVpup60Igd0Nzh
+ MgSDdXoxkW65chJNdhLxUvPYLSPzZo52sE65DUS8qyJhx8UqupyFn8c/9V/ZCtv2rE5Z
+ kImhO58ZO+Tl3T0LxVnyrrEBMZ+5kUFuSONqEVd/D+1/mUNR+dno2cxwbPaLd/qmwevz
+ XsJi5B0G0h3ScGufBYtg9JmetonuEIrrr2jhmq2eIwmM+a4bUvcE76AdeMoPspAT+/2k
+ Mv6aWOJO0XFiXja+EYsDROMDk7cPAgZHyBZ23hlipv5Ac79ULmElQNmlh+kiI/SwXK28
+ XLPg==
+X-Gm-Message-State: AOJu0YzcJNbDl3Vddb/K2o4pg7vlS/GkBo6q2BzQimQ3vONfNGxkovAo
+ rA9VE1P039M5BukdSdwjjoHYMCsfrxkwWH3XoN1/aIFeWHCtwx74+cxVPTkw
+X-Google-Smtp-Source: AGHT+IEEJBNA1HxkpC4Q97Ed9NbrGNoy591OY+7dbsFfORpBg2/mcHbH8yZ6AVhW7OtsuOyodFZgTA==
+X-Received: by 2002:a05:6870:b14a:b0:270:50f7:50c1 with SMTP id
+ 586e51a60fabf-27c3f0edf01mr9835290fac.1.1726520641033; 
  Mon, 16 Sep 2024 14:04:01 -0700 (PDT)
 Received: from localhost.localdomain ([2600:1700:fb0:1bcf:a919:5ae5:ea0e:c71])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-27c95990905sm1745300fac.58.2024.09.16.14.04.01
+ 586e51a60fabf-27c95990905sm1745300fac.58.2024.09.16.14.04.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Sep 2024 14:04:01 -0700 (PDT)
+ Mon, 16 Sep 2024 14:04:00 -0700 (PDT)
 From: Chris Morgan <macroalpha82@gmail.com>
 To: u-boot@lists.denx.de
 Cc: jonas@kwiboo.se, trini@konsulko.com, kever.yang@rock-chips.com,
  philipp.tomsich@vrull.eu, sjg@chromium.org, dsimic@manjaro.org,
  quentin.schulz@cherry.de, Chris Morgan <macromorgan@hotmail.com>
-Subject: [PATCH 3/3] board: rockchip: Fix panel detection for mainline A-TF
-Date: Mon, 16 Sep 2024 16:01:37 -0500
-Message-Id: <20240916210137.182493-4-macroalpha82@gmail.com>
+Subject: [PATCH 2/3] board: rockchip: Add vdd_cpu reg fixup for RGXX3 Series
+Date: Mon, 16 Sep 2024 16:01:36 -0500
+Message-Id: <20240916210137.182493-3-macroalpha82@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240916210137.182493-1-macroalpha82@gmail.com>
 References: <20240916210137.182493-1-macroalpha82@gmail.com>
@@ -95,63 +95,288 @@ X-Virus-Status: Clean
 
 From: Chris Morgan <macromorgan@hotmail.com>
 
-The current panel detection logic crashes when the device boots with
-mainline A-TF, causing a reboot loop. It turns out mainline A-TF
-doesn't enable the VO power domain like the BSP A-TF did.
+Some of the Powkiddy devices switched to using a different vendor for
+the vdd_cpu regulator. Unfortunately the device does not have a new
+revision to denote this, so users have no way of knowing in advance.
 
-Set the VO domain on and use a memory barrier to ensure it is powered
-up before we attempt to do the panel detection.
+Add code to detect if a device is present at addresses 0x1c or 0x40 on
+the i2c0 bus and update the devicetree if needed.
 
 Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
 ---
- board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c | 13 +++++++++++++
- configs/anbernic-rgxx3-rk3566_defconfig    |  2 --
- 2 files changed, 13 insertions(+), 2 deletions(-)
+ board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c | 147 +++++++++++++++++++++
+ 1 file changed, 147 insertions(+)
 
 diff --git a/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c b/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
-index c1d1826fd14..f4e7c1ab360 100644
+index 224019f9ba3..c1d1826fd14 100644
 --- a/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
 +++ b/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
-@@ -22,6 +22,10 @@
+@@ -43,6 +43,7 @@ struct rg3xx_model {
+ 	const char *board_name;
+ 	const char *fdtfile;
+ 	const bool detect_panel;
++	const bool detect_regulator;
+ 	const bool uart_con;
+ };
  
- DECLARE_GLOBAL_DATA_PTR;
+@@ -69,6 +70,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+ 		/* Device is identical to RG353P. */
+ 		.fdtfile = DTB_DIR "rk3566-anbernic-rg353p.dtb",
+ 		.detect_panel = 1,
++		.detect_regulator = 0,
+ 		.uart_con = 1,
+ 	},
+ 	[RG353P] = {
+@@ -77,6 +79,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+ 		.board_name = "Anbernic RG353P",
+ 		.fdtfile = DTB_DIR "rk3566-anbernic-rg353p.dtb",
+ 		.detect_panel = 1,
++		.detect_regulator = 0,
+ 		.uart_con = 1,
+ 	},
+ 	[RG353V] = {
+@@ -85,6 +88,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+ 		.board_name = "Anbernic RG353V",
+ 		.fdtfile = DTB_DIR "rk3566-anbernic-rg353v.dtb",
+ 		.detect_panel = 1,
++		.detect_regulator = 0,
+ 		.uart_con = 1,
+ 	},
+ 	[RG503] = {
+@@ -93,6 +97,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+ 		.board_name = "Anbernic RG503",
+ 		.fdtfile = DTB_DIR "rk3566-anbernic-rg503.dtb",
+ 		.detect_panel = 0,
++		.detect_regulator = 0,
+ 		.uart_con = 1,
+ 	},
+ 	[RGB30] = {
+@@ -101,6 +106,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+ 		.board_name = "Powkiddy RGB30",
+ 		.fdtfile = DTB_DIR "rk3566-powkiddy-rgb30.dtb",
+ 		.detect_panel = 0,
++		.detect_regulator = 1,
+ 		.uart_con = 0,
+ 	},
+ 	[RK2023] = {
+@@ -109,6 +115,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+ 		.board_name = "Powkiddy RK2023",
+ 		.fdtfile = DTB_DIR "rk3566-powkiddy-rk2023.dtb",
+ 		.detect_panel = 0,
++		.detect_regulator = 1,
+ 		.uart_con = 0,
+ 	},
+ 	[RGARCD] = {
+@@ -117,6 +124,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+ 		.board_name = "Anbernic RG ARC-D",
+ 		.fdtfile = DTB_DIR "rk3566-anbernic-rg-arc-d.dtb",
+ 		.detect_panel = 0,
++		.detect_regulator = 0,
+ 		.uart_con = 1,
+ 	},
+ 	[RGB10MAX3] = {
+@@ -125,6 +133,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+ 		.board_name = "Powkiddy RGB10MAX3",
+ 		.fdtfile = DTB_DIR "rk3566-powkiddy-rgb10max3.dtb",
+ 		.detect_panel = 0,
++		.detect_regulator = 1,
+ 		.uart_con = 0,
+ 	},
+ 	/* Devices with duplicate ADC value */
+@@ -134,6 +143,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+ 		.board_name = "Anbernic RG353PS",
+ 		.fdtfile = DTB_DIR "rk3566-anbernic-rg353ps.dtb",
+ 		.detect_panel = 1,
++		.detect_regulator = 0,
+ 		.uart_con = 1,
+ 	},
+ 	[RG353VS] = {
+@@ -142,6 +152,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+ 		.board_name = "Anbernic RG353VS",
+ 		.fdtfile = DTB_DIR "rk3566-anbernic-rg353vs.dtb",
+ 		.detect_panel = 1,
++		.detect_regulator = 0,
+ 		.uart_con = 1,
+ 	},
+ 	[RGARCS] = {
+@@ -150,6 +161,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+ 		.board_name = "Anbernic RG ARC-S",
+ 		.fdtfile = DTB_DIR "rk3566-anbernic-rg-arc-s.dtb",
+ 		.detect_panel = 0,
++		.detect_regulator = 0,
+ 		.uart_con = 1,
+ 	},
+ };
+@@ -172,6 +184,22 @@ static const struct rg353_panel rg353_panel_details[] = {
+ 	},
+ };
  
-+#define PMU_BASE_ADDR		0xfdd90000
-+#define PMU_PWR_GATE_SFTCON	0xa0
-+#define PMU_PD_VO_DWN_ENA	BIT(7)
++struct powkiddy_regulators {
++	const u8 addr;
++	const char *regulator_compat;
++};
 +
- #define GPIO0_BASE		0xfdd60000
- #define GPIO4_BASE		0xfe770000
- #define GPIO_SWPORT_DR_L	0x0000
-@@ -311,6 +315,15 @@ int rgxx3_detect_display(void)
- 	int i;
- 	u8 panel_id[2];
++static const struct powkiddy_regulators regulator_details[] = {
++	{
++		.addr = 0x1c,
++		.regulator_compat = "tcs,tcs4525",
++	},
++	{
++		.addr = 0x40,
++		.regulator_compat = "fcs,fan53555",
++	},
++};
++
+ /*
+  * Start LED very early so user knows device is on. Set color
+  * to red.
+@@ -361,6 +389,44 @@ int rgxx3_detect_display(void)
+ 	return 0;
+ }
  
-+	/* Disable VO power domain power-down */
-+	writel((PMU_PD_VO_DWN_ENA << 16),
-+	       PMU_BASE_ADDR + PMU_PWR_GATE_SFTCON);
++/*
++ * Some of the Powkiddy devices switched the CPU regulator, but users
++ * are not able to determine this by looking at their hardware.
++ * Attempt to auto-detect this situation and fixup the device-tree.
++ */
++int rgxx3_detect_regulator(void)
++{
++	struct udevice *bus;
++	struct udevice *chip;
++	u8 val;
++	int ret;
++
++	/* Get the correct i2c bus (i2c0). */
++	ret = uclass_get_device_by_name(UCLASS_I2C,
++					"i2c@fdd40000", &bus);
++	if (ret)
++		return ret;
++
 +	/*
-+	 * System will crash if the power domain isn't enabled before
-+	 * we start trying to talk to the DSI panel.
++	 * Check for all vdd_cpu regulators and read an arbitrary
++	 * register to confirm it's present.
 +	 */
-+	wmb();
++	for (int i = 0; i < ARRAY_SIZE(regulator_details); i++) {
++		ret = i2c_get_chip(bus, regulator_details[i].addr,
++				   1, &chip);
++		if (ret)
++			return ret;
 +
- 	/*
- 	 * Take panel out of reset status.
- 	 * Set GPIO4_A0 to output.
-diff --git a/configs/anbernic-rgxx3-rk3566_defconfig b/configs/anbernic-rgxx3-rk3566_defconfig
-index f5e5470df8c..49d3766613e 100644
---- a/configs/anbernic-rgxx3-rk3566_defconfig
-+++ b/configs/anbernic-rgxx3-rk3566_defconfig
-@@ -49,8 +49,6 @@ CONFIG_SPL_REGMAP=y
- CONFIG_SPL_SYSCON=y
- CONFIG_SPL_ADC=y
- CONFIG_SPL_CLK=y
--CONFIG_ARM_SMCCC_FEATURES=y
--CONFIG_SCMI_FIRMWARE=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
- CONFIG_MISC=y
++		ret = dm_i2c_read(chip, 0, &val, 1);
++		if (!ret) {
++			env_set("vdd_cpu", regulator_details[i].regulator_compat);
++			break;
++		}
++	}
++
++	return 0;
++}
++
+ int rgxx3_read_board_id(void)
+ {
+ 	u32 adc_info;
+@@ -485,6 +551,16 @@ int rk_board_late_init(void)
+ 			printf("Failed to detect panel type\n");
+ 	}
+ 
++	/*
++	 * Skip vdd_cpu regulator detection if not needed. Warn but
++	 * don't fail for errors in auto-detection of regulator.
++	 */
++	if (rg3xx_model_details[gd->board_type].detect_regulator) {
++		ret = rgxx3_detect_regulator();
++		if (ret)
++			printf("Unable to detect vdd_cpu regulator\n");
++	}
++
+ end:
+ 	/* Turn off red LED and turn on orange LED. */
+ 	writel(GPIO_WRITEMASK(GPIO_C7 | GPIO_C6 | GPIO_C5) | GPIO_C6,
+@@ -547,6 +623,71 @@ int rgxx3_panel_fixup(void *blob)
+ 	return 0;
+ }
+ 
++int rgxx3_regulator_fixup(void *blob)
++{
++	const struct powkiddy_regulators *vdd_cpu = NULL;
++	int node, ret, i;
++	char path[] = "/i2c@fdd40000/regulator@00";
++	char name[] = "regulator@00";
++	char *env;
++
++	env = env_get("vdd_cpu");
++	if (!env) {
++		printf("Can't get vdd_cpu env\n");
++		return -EINVAL;
++	}
++
++	/*
++	 * Find the device we have in our tree, which may or may not
++	 * be present.
++	 */
++	for (i = 0; i < ARRAY_SIZE(regulator_details); i++) {
++		sprintf(path, "/i2c@fdd40000/regulator@%02x",
++			regulator_details[i].addr);
++		node = fdt_path_offset(blob, path);
++		if (node > 0)
++			break;
++
++		printf("Unable to find vdd_cpu\n");
++		return -ENODEV;
++	}
++
++	node = fdt_path_offset(blob, path);
++	if (!(node > 0)) {
++		printf("Can't find the vdd_cpu node\n");
++		return -ENODEV;
++	}
++
++	ret = fdt_node_check_compatible(blob, node, env);
++	if (ret < 0)
++		return -ENODEV;
++
++	/* vdd_cpu regulators match, return 0. */
++	if (!ret)
++		return 0;
++
++	/* Regulators don't match, search by first compatible value. */
++	for (i = 0; i < ARRAY_SIZE(regulator_details); i++) {
++		if (!strcmp(env, regulator_details[i].regulator_compat)) {
++			vdd_cpu = &regulator_details[i];
++			break;
++		}
++	}
++
++	if (!vdd_cpu) {
++		printf("Unable to identify vdd_cpu by compat string\n");
++		return -ENODEV;
++	}
++
++	/* Set the compatible and reg with the auto-detected values */
++	fdt_setprop_string(blob, node, "compatible", vdd_cpu->regulator_compat);
++	fdt_setprop_u32(blob, node, "reg", vdd_cpu->addr);
++	sprintf(name, "regulator@%02x", vdd_cpu->addr);
++	fdt_set_name(blob, node, name);
++
++	return 0;
++}
++
+ int ft_board_setup(void *blob, struct bd_info *bd)
+ {
+ 	int ret;
+@@ -562,6 +703,12 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+ 			printf("Unable to update panel compat\n");
+ 	}
+ 
++	if (rg3xx_model_details[gd->board_type].detect_regulator) {
++		ret = rgxx3_regulator_fixup(blob);
++		if (ret)
++			printf("Unable to update vdd_cpu compat\n");
++	}
++
+ 	return 0;
+ }
+ 
 -- 
 2.34.1
 
