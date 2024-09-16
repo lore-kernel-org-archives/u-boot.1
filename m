@@ -4,78 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B55FDC3ABB2
-	for <u-boot@archiver.kernel.org>; Mon, 16 Sep 2024 09:24:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B051EC3ABA2
+	for <u-boot@archiver.kernel.org>; Mon, 16 Sep 2024 09:29:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3970988EA7;
-	Mon, 16 Sep 2024 11:24:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F2FF788EB2;
+	Mon, 16 Sep 2024 11:29:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FdjkgqWK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="phdb8u55";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B9CB288EA9; Mon, 16 Sep 2024 11:24:07 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 2575888EA4; Mon, 16 Sep 2024 11:29:26 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5250388EA4
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 11:24:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 32A7788EB2
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 11:29:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5c260b19f71so4811961a12.1
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 02:24:05 -0700 (PDT)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-5c3d209db94so5249149a12.3
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 02:29:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726478645; x=1727083445; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1726478961; x=1727083761; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=p9c5gcFZeZivlN7C64xhH9LcaBoq+DWkXXD1evcaEVU=;
- b=FdjkgqWKb8x+kObS+fR/rdXZrVSDDSCQaoxK1FaZuRUDseKdRcsQVZFIAgcRJh/bYG
- uvDGqk3uqw+bw8HzYE/nENZgbbuP9wiXeTLnXvB+IDjS8pQUFmZIGXsio1h42ZF8ZcqF
- 7TZ1MLD/jYJxbe9aeM0lTfBstwS1+7WH6Q17QtUju0QhaGNmcmGIJi1235RnzYcj862u
- BS2Ji9W6dkkl4KoepSR0//5DucdDZ2JGt9Hmx4St/v1sAcVwBqTnL72N6vmfAWYQyoFc
- f3+YWaGYcJrrkcdO1wvn1gI4fZOPk14Ql1VOZLfiSpU6kTd9w9h6OZeKIIJlm/s1BY2C
- OySw==
+ bh=ZUUQy5MKgPpVlVGrKvsRx681veJfHkhbfrHQW8N+BA8=;
+ b=phdb8u55XAPQQWxas/JrV2A9rfiQQxHRqzpM6L4VbDutVTfrOr52+XQcCf/0QqfDYk
+ C8zlTiuTgQrzxxFCNlsy6KHmyL+XcV/ArNsqmwT1G8eglQ3EiyuEgj2hA3KORsRBlTHb
+ hsXHe4o4KyxLEzluP2OJ/T3vKCjAv7vPijg09XonerZ8wZC1ZuFyXmqfAW/SU6h/s9Iy
+ yU1H9V89hlQgxxzMZtVc9vYqOUKhT2HaxaWRDpgrTGQjgIzqvJ/UrerYCZvdUrdasJMN
+ ZUseFxgvayvqb/2YJve6TfRHFh9kB0hIoVzt9tK+RuARQcmT017H9FG1R+Mb3SH+kelz
+ QyAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726478645; x=1727083445;
+ d=1e100.net; s=20230601; t=1726478961; x=1727083761;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=p9c5gcFZeZivlN7C64xhH9LcaBoq+DWkXXD1evcaEVU=;
- b=U7/mqDf/Z1BRmW4kyBhcTlRJKTC87iR0semvRgFzFmatGslCZWnND8rn3q8/zqAjw6
- jad3ZCH7xpxAqnSC3MXF2689laJeLDvmvCbUCdLUh2gUTE1vwOO7ucsGlbbYyxpe2UHS
- MWKS+iHCT2F+HXTMQBjg/JY7CZi+rujHAXjcYxGE7wjd3ipXTbGMUqxCoyYEzzW9YSM1
- beTP7YpOl2lqw6GNfiwvOAhAn/h2ARxXqOOc5SH6mSlB3G9BU5HIiDxJtr4bPgz1NQUQ
- 4xeGRGnSKkHovTUQLnDzKdyPNG2Z3r/ceRelrShJRc2Y9GpqyNGAQV8+mR8oQY5w/GMJ
- TLow==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWlZ9f0x//1mJignbEr30a5hcx7jcJM7qhbG9w7yn1zY/J6u7X1EOd3axZ8OkYYo/m/Em5zxyg=@lists.denx.de
-X-Gm-Message-State: AOJu0YzskIpARjf0o9ZEukugy8mNbJrlk3Jxsp/4d/WPzFJYuohcQ55F
- tlsnxEBC2zLbBaAp1ARy/efb+vSS7h6/XnmL1/wWIr7GqstIGpq3jJspmjqiZewudpwYAQtezOK
- CecGnpTgXSz5GTApVNW+lFUvIrxMtji27Yi7y5w==
-X-Google-Smtp-Source: AGHT+IFknqgJ5/VLm6JOHWx7bVL0MGUHv64YyWAwM0ZOOQfiJ3G+UQjeUTUWOSZd4NwdTXnbIFlVI8F6q+fT5KbJwXA=
-X-Received: by 2002:a05:6402:13cb:b0:5c3:c3f5:592e with SMTP id
- 4fb4d7f45d1cf-5c413e12400mr13714669a12.12.1726478644556; Mon, 16 Sep 2024
- 02:24:04 -0700 (PDT)
+ bh=ZUUQy5MKgPpVlVGrKvsRx681veJfHkhbfrHQW8N+BA8=;
+ b=xTqNyew7y/LcY6YGvpU45JkBhsw0tQEYozKRyDxUn6yzTyfXKtdfuEIzQlvKLp35bB
+ MuZFRzKGEesffwDjeW0FFZ2qUidF582aKYUSy8nXgHcgGpPMPftmSK3id+QGtNFZ0F85
+ F42jKZrWZGHYNFpoyochf+CXlJ+Us7NK3wS3W012T8BkH/tIw1xCVKxBrH8VH+baAfaL
+ q5dyBEkZlWNSptamUjb8PKgf/C/VHXJ20943Gj8xMMIuwdQh7Q0FolnJYFKkad5M1cP6
+ nOfohSFICgt9uPf23I0fhVJkBNSnEdWpCaeOy7eSlAVD7d5Iia0mjw6uOShqx8ireQ+V
+ U/7w==
+X-Gm-Message-State: AOJu0YwOm0iQr/kFDurifHjb98IDkz97NLThd1BU0bstnWHOVzKQHAdw
+ DHYMUtUTkIV09kwBqSbNkIRKNM55pm8ExoXHymQ3nZQXdgo//VJcgpOHIlxAMVdqSqPb26wH/yM
+ XEfpQy3TBFp2vKEgyYOoBQpPgiopNLl6LoupyNw==
+X-Google-Smtp-Source: AGHT+IF0lfQ1o0Sq9WRQzpothKn9Iz5LVU+LVntlhrb3+h2lViJ1Fj9kQ3IHZa/6knhKbk0WRQmpGFWxV06Sol+BDrk=
+X-Received: by 2002:a05:6402:2108:b0:5c4:2396:d990 with SMTP id
+ 4fb4d7f45d1cf-5c42396da70mr8137826a12.17.1726478961422; Mon, 16 Sep 2024
+ 02:29:21 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240913073251.2286529-2-prasad.kummari@amd.com>
- <c9e22782-8645-420c-9017-18f3aafcbb12@ti.com>
- <CADg8p95RA_iOUYmjLaED52C7ebGPuor=Zd+16zmVvDiEV3aesw@mail.gmail.com>
- <acca0730-1bb5-4ea5-9666-9271110ddb43@ti.com>
-In-Reply-To: <acca0730-1bb5-4ea5-9666-9271110ddb43@ti.com>
+References: <20240826115940.3233167-1-sughosh.ganu@linaro.org>
+ <20240826115940.3233167-6-sughosh.ganu@linaro.org>
+ <65996987-dda0-4396-8624-1fbe1307facf@ti.com>
+ <CADg8p94_sZcvNdJbKkzvb-NWyrAghsPEDdmac-0+K_gPdM6-CQ@mail.gmail.com>
+ <cf5284c4-fb79-46cf-ae3d-52624e054e49@ti.com>
+In-Reply-To: <cf5284c4-fb79-46cf-ae3d-52624e054e49@ti.com>
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 16 Sep 2024 14:53:53 +0530
-Message-ID: <CADg8p94qiashAzNvLJHxgf-msMDNhOiSPyVA_JOAtesO96sYdA@mail.gmail.com>
-Subject: Re: [PATCH v4] cmd: sf: prevent overwriting the reserved memory
+Date: Mon, 16 Sep 2024 14:59:10 +0530
+Message-ID: <CADg8p95NbtGgRu5JazAyAEjDoS6G3-UPK=ABQyTt9RGnsAiCWg@mail.gmail.com>
+Subject: Re: [PATCH v4 05/27] lmb: make LMB memory map persistent and global
 To: Vaishnav Achath <vaishnav.a@ti.com>
-Cc: Prasad Kummari <prasad.kummari@amd.com>, u-boot@lists.denx.de, git@amd.com,
- michal.simek@amd.com, venkatesh.abbarapu@amd.com, padmarao.begari@amd.com, 
- git@xilinx.com, jagan@amarulasolutions.com, n-francis@ti.com, d-gole@ti.com, 
- Vignesh Raghavendra <vigneshr@ti.com>, "Kumar, Udit" <u-kumar1@ti.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>, 
+ Michal Simek <michal.simek@amd.com>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
+ Patrice CHOTARD <patrice.chotard@foss.st.com>,
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,189 +97,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 16 Sept 2024 at 14:22, Vaishnav Achath <vaishnav.a@ti.com> wrote:
+On Mon, 16 Sept 2024 at 14:09, Vaishnav Achath <vaishnav.a@ti.com> wrote:
 >
 > Hi Sughosh,
 >
-> On 16/09/24 12:13, Sughosh Ganu wrote:
-> > On Mon, 16 Sept 2024 at 11:47, Vaishnav Achath <vaishnav.a@ti.com> wrote:
+> On 16/09/24 11:59, Sughosh Ganu wrote:
+> > On Mon, 16 Sept 2024 at 11:22, Vaishnav Achath <vaishnav.a@ti.com> wrote:
 > >>
-> >> Hi Prasad,
+> >> Hi Sughosh,
 > >>
-> >> On 13/09/24 13:02, Prasad Kummari wrote:
-> >>> Added LMB API to prevent SF command from overwriting reserved
-> >>> memory areas. The current SPI code does not use LMB APIs for
-> >>> loading data into memory addresses. To resolve this, LMB APIs
-> >>> were added to check the load address of an SF command and ensure it
-> >>> does not overwrite reserved memory addresses. Similar checks are
-> >>> used in TFTP, serial load, and boot code to prevent overwriting
-> >>> reserved memory.
+> >> On 26/08/24 17:29, Sughosh Ganu wrote:
+> >>> The current LMB API's for allocating and reserving memory use a
+> >>> per-caller based memory view. Memory allocated by a caller can then be
+> >>> overwritten by another caller. Make these allocations and reservations
+> >>> persistent using the alloced list data structure.
 > >>>
-> >>> Signed-off-by: Prasad Kummari <prasad.kummari@amd.com>
+> >>> Two alloced lists are declared -- one for the available(free) memory,
+> >>> and one for the used memory. Once full, the list can then be extended
+> >>> at runtime.
+> >>>
+> >>> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> >>> Signed-off-by: Simon Glass <sjg@chromium.org>
+> >>> [sjg: Optimise the logic to add a region in lmb_add_region_flags()]
+> >>> [sjg: Use a stack to store pointer of lmb struct when running lmb tests]
 > >>> ---
-> >>> Changes in V4:
-> >>> - Removed do_spi_read_lmb_check().
-> >>> - Added the lmb_read_check() function in lmb.c, making it reusable for
-> >>>     NAND, MMC, etc.
-> >>> - Addressed review comments.
+> >>> Changes since V3:
+> >>> * Fix checkpatch warnings of spaces between function name and
+> >>>     open parantheses.
+> >>> * s/uint64_t/u64 as suggested by checkpatch.
+> >>> * Remove unneccessary parantheses in lmb.c as suggested by checkpatch.
+> >>> * Fix alignment in test/cmd/bdinfo.c as suggested by checkpatch.
 > >>>
-> >>> Changes in V3:
-> >>> - Removed lmb_init_and_reserve() as part of latest LMB series.
-> >>> - Error message moved to one place.
-> >>> - lmb_alloc_addr() is not required because the given memory address is
-> >>>     being checked to ensure it is free or not.
-> >>>
-> >>> Changes in V2:
-> >>> - Rebased the code changes on top of the next branch.
-> >>>
-> >>> UT:
-> >>> Tested on Versal NET board.
-> >>>
-> >>> relocaddr   = 0x000000007febc000
-> >>>
-> >>> Versal NET> sf read 0x000000007febc000 0x0 0x40
-> >>> device 0 offset 0x0, size 0x40
-> >>> ERROR: trying to overwrite reserved memory...
-> >>> Versal NET> sf write 0x000000007febc000 0x0 0x40
-> >>> device 0 offset 0x0, size 0x40
-> >>> ERROR: trying to overwrite reserved memory...
-> >>>
-> >>> Versal NET> fdt print /reserved-memory
-> >>> reserved-memory {
-> >>>        ranges;
-> >>>        #size-cells = <0x00000002>;
-> >>>        #address-cells = <0x00000002>;
-> >>>        tf-a {
-> >>>                reg = <0x00000000 0x70000000 0x00000000 0x00050000>;
-> >>>                no-map;
-> >>>        };
-> >>> };
-> >>> Versal NET> sf read 0x70000000 0x0 0x40
-> >>> device 0 offset 0x0, size 0x40
-> >>> ERROR: trying to overwrite reserved memory...
-> >>> Versal NET> sf write 0x70000000 0x0 0x40
-> >>> device 0 offset 0x0, size 0x40
-> >>> ERROR: trying to overwrite reserved memory...
-> >>> Versal NET> sf erase 0x0 0x1000000;mw.b 0x8000 aabbccdd 0x1000000;sf
-> >>> write 0x8000 0x0 0x1000000;mw.b 0x8008000 0x0 0x1000000;sf read
-> >>> 0x8008000 0x0 0x1000000;cmp.b 0x8000 0x8008000 0x01000000
-> >>> SF: 16777216 bytes @ 0x0 Erased: OK
-> >>> device 0 offset 0x0, size 0x1000000
-> >>> SF: 16777216 bytes @ 0x0 Written: OK
-> >>> device 0 offset 0x0, size 0x1000000
-> >>> SF: 16777216 bytes @ 0x0 Read: OK
-> >>> Total of 16777216 byte(s) were the same
-> >>>
-> >>>    cmd/sf.c      | 8 ++++++++
-> >>>    include/lmb.h | 5 +++++
-> >>>    2 files changed, 13 insertions(+)
-> >>>
-> >>> diff --git a/cmd/sf.c b/cmd/sf.c
-> >>> index f43a2e08b3..08e364e191 100644
-> >>> --- a/cmd/sf.c
-> >>> +++ b/cmd/sf.c
-> >>> @@ -10,6 +10,7 @@
-> >>>    #include <div64.h>
-> >>>    #include <dm.h>
-> >>>    #include <log.h>
-> >>> +#include <lmb.h>
-> >>>    #include <malloc.h>
-> >>>    #include <mapmem.h>
-> >>>    #include <spi.h>
-> >>> @@ -317,6 +318,13 @@ static int do_spi_flash_read_write(int argc, char *const argv[])
-> >>>                        strncmp(argv[0], "write", 5) == 0) {
-> >>>                int read;
-> >>>
-> >>> +             if (CONFIG_IS_ENABLED(LMB)) {
-> >>> +                     if (lmb_read_check(addr, len)) {
+> >>>    arch/arc/lib/cache.c                 |   4 +-
+> >>>    arch/arm/lib/stack.c                 |   4 +-
+> >>>    arch/arm/mach-apple/board.c          |  17 +-
+> >>>    arch/arm/mach-snapdragon/board.c     |  17 +-
+> >>>    arch/arm/mach-stm32mp/dram_init.c    |   8 +-
+> >>>    arch/arm/mach-stm32mp/stm32mp1/cpu.c |   6 +-
+> >>>    arch/m68k/lib/bootm.c                |   7 +-
+> >>>    arch/microblaze/lib/bootm.c          |   4 +-
+> >>>    arch/mips/lib/bootm.c                |  11 +-
+> >>>    arch/nios2/lib/bootm.c               |   4 +-
+> >>>    arch/powerpc/cpu/mpc85xx/mp.c        |   4 +-
+> >>>    arch/powerpc/include/asm/mp.h        |   4 +-
+> >>>    arch/powerpc/lib/bootm.c             |  14 +-
+> >>>    arch/riscv/lib/bootm.c               |   4 +-
+> >>>    arch/sh/lib/bootm.c                  |   4 +-
+> >>>    arch/x86/lib/bootm.c                 |   4 +-
+> >>>    arch/xtensa/lib/bootm.c              |   4 +-
+> >>>    board/xilinx/common/board.c          |   8 +-
+> >>>    boot/bootm.c                         |  26 +-
+> >>>    boot/bootm_os.c                      |   5 +-
+> >>>    boot/image-board.c                   |  34 +-
+> >>>    boot/image-fdt.c                     |  35 +-
+> >>>    cmd/bdinfo.c                         |   6 +-
+> >>>    cmd/booti.c                          |   2 +-
+> >>>    cmd/bootz.c                          |   2 +-
+> >>>    cmd/elf.c                            |   2 +-
+> >>>    cmd/load.c                           |   7 +-
+> >>>    drivers/iommu/apple_dart.c           |   8 +-
+> >>>    drivers/iommu/sandbox_iommu.c        |  16 +-
+> >>>    fs/fs.c                              |   7 +-
 > >>
-> >> Even though the function is named lmb_read_check(), it performs an alloc
-> >> which is never freed, thus it makes it difficult for other callers to
-> >> use the same region for other purposes (some callers use
-> >> lmb_get_free_size() ), as mentioned in the commit message the check is
-> >> only to prevent sf from overwriting reserved region, but it looks like
-> >> this patch makes the load region also as reserved, is this necessary?
+> >> In fs the reserved region is not being freed after read, while
+> >> other loaders free them (cmd/load.c), this patch uncovers the issue
+> >> since now other loaders cannot use the same memory location for load.
 > >
-> > Like I mentioned in my other reply, using a check for lmb_alloc_addr()
-> > allows for memory re-use, which is the behaviour that a large number
-> > of use cases rely on -- if you go through the test scripts, it is
-> > assumed that memory re-use is allowed. That there is no need to
-> > explicitly free up memory, and that has been how the LMB memory has
-> > been used historically. So it is allowed to use some address to load
-> > an image to that address, and then use the same address to load a
-> > different image. The LMB rework series does keep this behaviour
-> > consistent. So it would be better to change the behaviour of the tftp
-> > command to use the same API. I was planning on working on this
-> > cleanup. If you want, you can take it up.
+> > The idea with the LMB memory is that it is not really an allocation,
+> > but setting aside memory for use. Now there was a discussion earlier
+> > on the mailing list if this is actually an allocation or not, but this
+> > is what the functions have been called from it's early days. But the
+> > way the code is designed now, even with the global and persistent
+> > memory map, we have the LMB_NONE flag which is used to allow for the
+> > same memory region to be re-allocated/re-reserved.
 > >
 >
-> Please let me know if you are planning to work on this in the coming few
-> days, otherwise I can pick it up as we have platforms failing due to this.
-
-I can take this up. Will keep you on Cc so that you can test the
-patches on your boards.
-
+> Understood, thanks for explaining, since the LMB memory map is now
+> global, anytime you run these commands a region is marked reserved and
+> it shows up in lmb_dump_all(), while it is not necessary to free them,
+> there are callers which may error out without reclaiming the region,
+> as long as these callers exist systems can break due to this change so a
+> cleanup is needed.
 >
+> >> For example now someone cannot do:
 > >>
-> >>
-> >>> +                             printf("ERROR: trying to overwrite reserved memory...\n");
-> >>> +                             return CMD_RET_FAILURE;
-> >>> +                     }
-> >>> +             }
-> >>> +
-> >>>                read = strncmp(argv[0], "read", 4) == 0;
-> >>>                if (read)
-> >>>                        ret = spi_flash_read(flash, offset, len, buf);
-> >>> diff --git a/include/lmb.h b/include/lmb.h
-> >>> index fc2daaa7bf..aee2f9fcda 100644
-> >>> --- a/include/lmb.h
-> >>> +++ b/include/lmb.h
-> >>> @@ -111,6 +111,11 @@ struct lmb *lmb_get(void);
-> >>>    int lmb_push(struct lmb *store);
-> >>>    void lmb_pop(struct lmb *store);
-> >>>
-> >>> +static inline int lmb_read_check(phys_addr_t addr, phys_size_t len)
-> >>> +{
-> >>> +     return lmb_alloc_addr(addr, len) == addr ? 0 : -1;
-> >>
-> >> who frees this? can we free this right after checking?
+> >> mmc load .. $loadaddr ...
+> >> <do something with above contents>
+> >> tftp $loadaddr ..
 > >
-> > It is not required to explicitly free up this memory, as it is not an
-> > actual allocation per-se. Why were these functions called alloc
-> > something, I am not sure. But the point is, if you change the tftp
-> > command code to use this API instead, and then use it after a previous
-> > load, it would not fail.
-> >
-> > -sughosh
+> > The issue above is what I mentioned to Prasad in one of my earlier
+> > replies to the patch that he had sent [1]. What can be done is to
+> > unify the manner in which callers ask for LMB memory -- that would
+> > mean changing the behaviour of the tftp code to use the logic used in
+> > the fs_read_lmb_check() function. I believe this method of loading to
+> > an address is more beneficial as it allows memory re-use.
 > >
 >
-> Agreed, but the commit message says to "ensure it does not overwrite
-> reserved memory addresses" but the implementation marks the region as
-> reserved in the global memory map and is visible in lmb_dump_all() ,
-> which is not expected, is there really a need to mark the region as
-> reserved.
+> As per my understanding, these checks were added in tftp/wget/fs loaders
+> due to CVE-2018-18440, the intent is to only ensure that there is no
+> overwrite to existing reserved regions, there is no need to reserve the
+> current load buffer region, what fs_read_lmb_check() does not seem to be
+> the right approach and scaling that does not seem right even though it
+> fixes the problem being discussed.
 
-What can be overwritten, and what cannot be can now be determined from
-the flags. If you check the LMB memory map from the bdinfo command,
-you will see that the regions which cannot be overwritten are now
-being marked with the "no-overwrite" flag. The other LMB memory which
-can be re-used to load multiple different images is being marked with
-the "none" flag. One issue with all this is that currently there is no
-document which explains all these concepts. I will work on adding such
-a document. Thanks.
+The approach taken by fs_read_lmb_check() is inline with the current
+expectation of how a memory region for loading an image is supposed to
+behave. There was a long discussion on the mailing list [1] about
+whether the LMB memory allocations are to be perceived as actual
+allocations (one where an alloc is supposed to have a corresponding
+free), and it was pointed out [2] that historically, that is not how a
+LMB memory behaves. Hence this needs to be looked at a little
+differently than the usual construct of "an allocation needs to have a
+corresponding free".
 
 -sughosh
 
->
-> Thanks and Regards,
-> Vaishnav
->
-> >>
-> >> Thanks and Regards,
-> >> Vaishnav
-> >>
-> >>> +}
-> >>> +
-> >>>    #endif /* __KERNEL__ */
-> >>>
-> >>>    #endif /* _LINUX_LMB_H */
+[1] - https://lore.kernel.org/u-boot/CAFLszTicT2yzsm+KAjRyqzV3bt1_W2XYJaCExX-LHNZ6+tFUkA@mail.gmail.com/
+[2] - https://lore.kernel.org/u-boot/20231229154307.GS2652760@bill-the-cat/
