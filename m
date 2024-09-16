@@ -4,87 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACA6BC3ABB2
-	for <u-boot@archiver.kernel.org>; Mon, 16 Sep 2024 18:11:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2034AC3ABCB
+	for <u-boot@archiver.kernel.org>; Mon, 16 Sep 2024 20:20:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B93E88E7A;
-	Mon, 16 Sep 2024 20:11:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 49DC888E63;
+	Mon, 16 Sep 2024 22:20:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xo10Ezfb";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TWYx3lzL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DEBA688F15; Mon, 16 Sep 2024 20:11:15 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 053E488EDB; Mon, 16 Sep 2024 18:28:10 +0200 (CEST)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F74D88E7A
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 20:11:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A941288EBA
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 18:28:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-5c42f406fa5so1488181a12.0
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 11:11:12 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-710fe5c3b44so1948396a34.0
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 09:28:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726510272; x=1727115072; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=QbuV108AcrM4tn6A0WZzybjIG/pnv6i/U6F46tC03FY=;
- b=xo10EzfbO/zcYcJ9tLh3mJCI1byip080XFhFOk9iqpbHyWExVXCHASls40sP7sXEkg
- x/szz6YWAWusan9tRVKkhlgAGqudC0FDZGDdPsEoccTNO8Q6nKe666KhpANU1J8SnyA3
- x+O6HXU7Os17OXQsEJZmvgbeb8UFi2WNpnXwsZoftVUKmbFyzs+KAtZvHh1OSiY0w7KV
- /nc26TMaoI0IjITWusuExg4Cr8ZzstTFPKVJxUbe4/X6I9pGe6qHY6gs+Sa2w65sN04e
- SHhcw68+cakq0rgWjAuBGwWIaYitT8DpsHSvonMDoxQIPHeTkhVEnS9V9GNy7/bwaseJ
- JhOg==
+ d=konsulko.com; s=google; t=1726504086; x=1727108886; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=EF0G2jQNMJy6viIsTcTH6P2KkptSEkkmUDZfppdy6k4=;
+ b=TWYx3lzLxfIDNUrkRsr2iYRR1HBoTFHqz+Xjn3K2pZ/DlL3L3z1TO1oPOzAqeeggxs
+ qcEcGMrejCqXvwA6zLWO4Ne93qMqkbBBoLr4TQzSlk6/rh5UcX40bEayK8l42j/JTv1D
+ +sUsDkDpXmsJteJk07Snhka48TxYP2HhvmqEE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726510272; x=1727115072;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=QbuV108AcrM4tn6A0WZzybjIG/pnv6i/U6F46tC03FY=;
- b=Ryf36591+3McVLJtoZfaxEg9T5r7PInVuOjyWBHUQeVeTvw31o5J5I5TgHrb/0WuZ8
- u9gMAgCUCXbnDD+AV5w2QVIY8w1yKelrlpRKI2qhWBTgfVUm1G3lHD3zboVIGx56lRMD
- lXXKfXRKMh+zv1O7aQmAn6zzjfj3105Gi4o4tX1ecrcywZPKfWoTREdbFKgG/E8FVnhe
- zKI0Uw2KothesC+AJpaygSf+ltKsgD0w11aZ4lMHkiubbUtImls2zxhX001e3XprN0Mh
- I1RcCVOvpbjcoW1BJ/07TLXNhMAB5rBPjXQlZTKv5N15p1CKkb4ScJXYJchbENi1iGW5
- xHQA==
-X-Gm-Message-State: AOJu0Yz2XF34xeuKfiSLoS6Z0ZbdFpiCb/l11x/qbmsP6JWbBWFtERAl
- +25A8iBvpmMuJlHFFqOlauV3zk1jcWkHxzmfEIY78NQdOqedyaUAYU75I+k41TyCzrVqnplaEFC
- E/8MnqNhjf5Gz0KWZHiDNjEnramyTE3GpFbZ+Eg==
-X-Google-Smtp-Source: AGHT+IGXeeNh7egEm9KENbogZt5u92kiNFCmtxAmETQbklZhk7f2FsBQcNIlT+IH+MtKyn2xUPAGcW1vrichxDFi5ug=
-X-Received: by 2002:a05:6402:3607:b0:5c2:6bb8:1859 with SMTP id
- 4fb4d7f45d1cf-5c41e193913mr18227531a12.19.1726510271424; Mon, 16 Sep 2024
- 11:11:11 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1726504086; x=1727108886;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=EF0G2jQNMJy6viIsTcTH6P2KkptSEkkmUDZfppdy6k4=;
+ b=UbwixrZjFk8mulS8P4uiCX3sQ3SMU+vdR/lE6DZ0rqtPIhQwd6anYy+Hf4ZazyKqeS
+ dKl+IhElH27CUi9EismLsbOpn7gTOZ4x2sBhckzNOipBwbfXkNFoIid0Zp7OisQetyPQ
+ 9TEdWy01y82NtCB7wXi3md5aI1SMso86VSsBq33i25VOrWp2E3vTm62YjikaUpdFwDgi
+ keouk8sg1iYi3YkxPnSi7x30gZ0nfBq8jsJSawpWEkAmBBEpLKfPcEVQhKSQMvCALnDA
+ 7LqsRlpeU/c0vjrOXT6SdhjCOv4+CUIf7ikmVrKmSffzdrHa0RU8hisTXMnV2WuAdxHP
+ Ub1g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWL+m7zPVzO9/uN6B0jwIdUd6UoUcLypsTctPOmQFCiaIi3vEBztdAiQcNdsbNFrxNXyw51ves=@lists.denx.de
+X-Gm-Message-State: AOJu0YxWA+HGqzfmi2N9FaW0+QF/A8+TRFbZFvuzghayITVRKc7jR3W5
+ bHodCin5Mjs1m+RW35vz2Qzuk8BteWUU5CzwimWHkPmaLw737fEQfXGDgiJ5S0Y=
+X-Google-Smtp-Source: AGHT+IEGGoKrkeYZTDx6+y8aLlMeNnu3/sLcIrs3HtPAPlkPWVWoTR7nkC5JxQreu3BBrQ0Jr7LRIg==
+X-Received: by 2002:a05:6358:430c:b0:1b8:33b2:1482 with SMTP id
+ e5c5f4694b2df-1bc3941ab52mr261652355d.1.1726504085991; 
+ Mon, 16 Sep 2024 09:28:05 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-459aac61237sm28776961cf.16.2024.09.16.09.28.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 16 Sep 2024 09:28:04 -0700 (PDT)
+Date: Mon, 16 Sep 2024 10:27:58 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
+ Ben Wolsieffer <benwolsieffer@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Chris Morgan <macromorgan@hotmail.com>, Dragan Simic <dsimic@manjaro.org>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Kostya Porotchkin <kostap@marvell.com>,
+ Matteo Lisi <matteo.lisi@engicam.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Max Krummenacher <max.krummenacher@toradex.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Sam Day <me@samcday.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Thierry Reding <treding@nvidia.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ u-boot-amlogic@groups.io, u-boot-qcom@groups.io,
+ u-boot@dh-electronics.com, uboot-stm32@st-md-mailman.stormreply.com
+Subject: Re: [PATCH 1/4] power: regulator: Trigger probe of regulators which
+ are always-on or boot-on
+Message-ID: <20240916162758.GE4252@bill-the-cat>
+References: <20240626235717.272219-1-marex@denx.de>
+ <CAFLszTjwbWdKqs_UBqXvr2F2ahoGd0-BFE-XLNr3-uq73ZLFHg@mail.gmail.com>
+ <6abad4ba-b29a-47a3-addb-91e8f46ee425@denx.de>
+ <CAFLszTgAqOXbkcJxYKxM4gn6_oOg7+nyaBK-Y34r_zVaPBScvA@mail.gmail.com>
+ <616b231b-0291-4bb3-93d9-85970419ed62@denx.de>
+ <CAFLszTiHy7yn0Z18GdkSLgykH0s=z8tJ=-QGf+knXPggKwyk9Q@mail.gmail.com>
 MIME-Version: 1.0
-References: <20240826115940.3233167-1-sughosh.ganu@linaro.org>
- <20240826115940.3233167-6-sughosh.ganu@linaro.org>
- <65996987-dda0-4396-8624-1fbe1307facf@ti.com>
- <CADg8p94_sZcvNdJbKkzvb-NWyrAghsPEDdmac-0+K_gPdM6-CQ@mail.gmail.com>
- <cf5284c4-fb79-46cf-ae3d-52624e054e49@ti.com>
- <CADg8p95dt6k1etOXmsjorbs_YDu1wB1z7M4oFBhWBfTwqFuomw@mail.gmail.com>
- <f3046c90-036e-4baf-96e3-9f47ded0e933@ti.com>
-In-Reply-To: <f3046c90-036e-4baf-96e3-9f47ded0e933@ti.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 16 Sep 2024 23:41:00 +0530
-Message-ID: <CADg8p97ddyOkA343sZ5w=YCu0wpuODSs7SC-8fJcPtAt4xmhnQ@mail.gmail.com>
-Subject: Re: [PATCH v4 05/27] lmb: make LMB memory map persistent and global
-To: Vaishnav Achath <vaishnav.a@ti.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>, 
- Michal Simek <michal.simek@amd.com>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
- Patrice CHOTARD <patrice.chotard@foss.st.com>,
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Vignesh Raghavendra <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, "Kumar,
- Udit" <u-kumar1@ti.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="T6cII7xq/+DvBuQn"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTiHy7yn0Z18GdkSLgykH0s=z8tJ=-QGf+knXPggKwyk9Q@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+X-Mailman-Approved-At: Mon, 16 Sep 2024 22:20:49 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,151 +121,145 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 16 Sept 2024 at 22:19, Vaishnav Achath <vaishnav.a@ti.com> wrote:
->
-> Hi Sughosh,
->
-> Requesting clarification for one more point,
->
-> On 16/09/24 14:46, Sughosh Ganu wrote:
-> > On Mon, 16 Sept 2024 at 14:09, Vaishnav Achath <vaishnav.a@ti.com> wrote:
-> >>
-> >> Hi Sughosh,
-> >>
-> >> On 16/09/24 11:59, Sughosh Ganu wrote:
-> >>> On Mon, 16 Sept 2024 at 11:22, Vaishnav Achath <vaishnav.a@ti.com> wrote:
-> >>>>
-> >>>> Hi Sughosh,
-> >>>>
-> >>>> On 26/08/24 17:29, Sughosh Ganu wrote:
-> >>>>> The current LMB API's for allocating and reserving memory use a
-> >>>>> per-caller based memory view. Memory allocated by a caller can then be
-> >>>>> overwritten by another caller. Make these allocations and reservations
-> >>>>> persistent using the alloced list data structure.
-> >>>>>
-> >>>>> Two alloced lists are declared -- one for the available(free) memory,
-> >>>>> and one for the used memory. Once full, the list can then be extended
-> >>>>> at runtime.
-> >>>>>
-> >>>>> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> >>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
-> >>>>> [sjg: Optimise the logic to add a region in lmb_add_region_flags()]
-> >>>>> [sjg: Use a stack to store pointer of lmb struct when running lmb tests]
-> >>>>> ---
-> >>>>> Changes since V3:
-> >>>>> * Fix checkpatch warnings of spaces between function name and
-> >>>>>      open parantheses.
-> >>>>> * s/uint64_t/u64 as suggested by checkpatch.
-> >>>>> * Remove unneccessary parantheses in lmb.c as suggested by checkpatch.
-> >>>>> * Fix alignment in test/cmd/bdinfo.c as suggested by checkpatch.
-> >>>>>
-> >>>>>     arch/arc/lib/cache.c                 |   4 +-
-> >>>>>     arch/arm/lib/stack.c                 |   4 +-
-> >>>>>     arch/arm/mach-apple/board.c          |  17 +-
-> >>>>>     arch/arm/mach-snapdragon/board.c     |  17 +-
-> >>>>>     arch/arm/mach-stm32mp/dram_init.c    |   8 +-
-> >>>>>     arch/arm/mach-stm32mp/stm32mp1/cpu.c |   6 +-
-> >>>>>     arch/m68k/lib/bootm.c                |   7 +-
-> >>>>>     arch/microblaze/lib/bootm.c          |   4 +-
-> >>>>>     arch/mips/lib/bootm.c                |  11 +-
-> >>>>>     arch/nios2/lib/bootm.c               |   4 +-
-> >>>>>     arch/powerpc/cpu/mpc85xx/mp.c        |   4 +-
-> >>>>>     arch/powerpc/include/asm/mp.h        |   4 +-
-> >>>>>     arch/powerpc/lib/bootm.c             |  14 +-
-> >>>>>     arch/riscv/lib/bootm.c               |   4 +-
-> >>>>>     arch/sh/lib/bootm.c                  |   4 +-
-> >>>>>     arch/x86/lib/bootm.c                 |   4 +-
-> >>>>>     arch/xtensa/lib/bootm.c              |   4 +-
-> >>>>>     board/xilinx/common/board.c          |   8 +-
-> >>>>>     boot/bootm.c                         |  26 +-
-> >>>>>     boot/bootm_os.c                      |   5 +-
-> >>>>>     boot/image-board.c                   |  34 +-
-> >>>>>     boot/image-fdt.c                     |  35 +-
-> >>>>>     cmd/bdinfo.c                         |   6 +-
-> >>>>>     cmd/booti.c                          |   2 +-
-> >>>>>     cmd/bootz.c                          |   2 +-
-> >>>>>     cmd/elf.c                            |   2 +-
-> >>>>>     cmd/load.c                           |   7 +-
-> >>>>>     drivers/iommu/apple_dart.c           |   8 +-
-> >>>>>     drivers/iommu/sandbox_iommu.c        |  16 +-
-> >>>>>     fs/fs.c                              |   7 +-
-> >>>>
-> >>>> In fs the reserved region is not being freed after read, while
-> >>>> other loaders free them (cmd/load.c), this patch uncovers the issue
-> >>>> since now other loaders cannot use the same memory location for load.
-> >>>
-> >>> The idea with the LMB memory is that it is not really an allocation,
-> >>> but setting aside memory for use. Now there was a discussion earlier
-> >>> on the mailing list if this is actually an allocation or not, but this
-> >>> is what the functions have been called from it's early days. But the
-> >>> way the code is designed now, even with the global and persistent
-> >>> memory map, we have the LMB_NONE flag which is used to allow for the
-> >>> same memory region to be re-allocated/re-reserved.
-> >>>
-> >>
-> >> Understood, thanks for explaining, since the LMB memory map is now
-> >> global, anytime you run these commands a region is marked reserved and
-> >> it shows up in lmb_dump_all(), while it is not necessary to free them,
-> >> there are callers which may error out without reclaiming the region,
-> >> as long as these callers exist systems can break due to this change so a
-> >> cleanup is needed.
-> >>
-> >>>> For example now someone cannot do:
-> >>>>
-> >>>> mmc load .. $loadaddr ...
-> >>>> <do something with above contents>
-> >>>> tftp $loadaddr ..
-> >>>
-> >>> The issue above is what I mentioned to Prasad in one of my earlier
-> >>> replies to the patch that he had sent [1]. What can be done is to
-> >>> unify the manner in which callers ask for LMB memory -- that would
-> >>> mean changing the behaviour of the tftp code to use the logic used in
-> >>> the fs_read_lmb_check() function. I believe this method of loading to
-> >>> an address is more beneficial as it allows memory re-use.
-> >>>
-> >>
-> >> As per my understanding, these checks were added in tftp/wget/fs loaders
-> >> due to CVE-2018-18440, the intent is to only ensure that there is no
-> >> overwrite to existing reserved regions, there is no need to reserve the
-> >> current load buffer region, what fs_read_lmb_check() does not seem to be
-> >> the right approach and scaling that does not seem right even though it
-> >> fixes the problem being discussed.
-> >
-> > The approach taken by fs_read_lmb_check() is inline with the current
-> > expectation of how a memory region for loading an image is supposed to
-> > behave. There was a long discussion on the mailing list [1] about
-> > whether the LMB memory allocations are to be perceived as actual
-> > allocations (one where an alloc is supposed to have a corresponding
-> > free), and it was pointed out [2] that historically, that is not how a
-> > LMB memory behaves. Hence this needs to be looked at a little
-> > differently than the usual construct of "an allocation needs to have a
-> > corresponding free".
-> >
->
-> Generally for the reserved memory allocations coming from device tree
-> the no-overwrite flag is not present, but the expectation is that these
-> are important regions that are expected to be reserved (Example ATF,
-> OPTEE, Remote core FW regions in DDR), but now each consumer is able to
-> rewrite/re-allocate the region again by these loaders (previously most
-> could not rewrite since they used lmb_get_free_size() which only
-> performs a check), isn't this a valid case where all the consumers
-> should not have privilege to overwrite these allocations? Or should all
-> regions from DT be marked as no-overwrite?
 
-Yes, these regions need to be marked as no-overwrite to ensure that we
-get an error if an address in that region is being used as a
-load-address. Do you want to send a patch ?
+--T6cII7xq/+DvBuQn
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
--sughosh
+On Wed, Sep 11, 2024 at 07:00:56PM -0600, Simon Glass wrote:
+> Hi Marek,
+>=20
+> On Fri, 28 Jun 2024 at 07:26, Marek Vasut <marex@denx.de> wrote:
+> >
+> > On 6/28/24 9:32 AM, Simon Glass wrote:
+> > > Hi Marek,
+> >
+> > Hi,
+> >
+> > [...]
+> >
+> > >>>> @@ -473,8 +483,6 @@ static int regulator_pre_probe(struct udevice =
+*dev)
+> > >>>>                                                   -ENODATA);
+> > >>>>           uc_pdata->max_uA =3D dev_read_u32_default(dev, "regulato=
+r-max-microamp",
+> > >>>>                                                   -ENODATA);
+> > >>>> -       uc_pdata->always_on =3D dev_read_bool(dev, "regulator-alwa=
+ys-on");
+> > >>>> -       uc_pdata->boot_on =3D dev_read_bool(dev, "regulator-boot-o=
+n");
+> > >>>>           uc_pdata->ramp_delay =3D dev_read_u32_default(dev, "regu=
+lator-ramp-delay",
+> > >>>>                                                       0);
+> > >>>>           uc_pdata->force_off =3D dev_read_bool(dev, "regulator-fo=
+rce-boot-off");
+> > >>>> --
+> > >>>> 2.43.0
+> > >>>>
+> > >>>
+> > >>> This is reading a lot of DT stuff very early, which may be slow. It=
+ is
+> > >>> also reading from the DT in the bind() step which we sometimes have=
+ to
+> > >>> do, but try to avoid.
+> > >>
+> > >> Actually, it is reading only the bare minimum very early in bind, the
+> > >> always-on and boot-on, the rest is in pre_probe, i.e. later.
+> > >
+> > > Yes, I see that. Also it is inevitable that these properties need to
+> > > be read before probe(), since they control whether to probe().
+> > >
+> > >>
+> > >>> Also this seems to happen in SPL and again pre-reloc and again in
+> > >>> U-Boot post-reloc?
+> > >>
+> > >> What does, the uclass post_bind ?
+> > >
+> > > I mean that this code will be called in SPL (if the regulators are in
+> > > the DT there), U-Boot pre-reloc and post-reloc, each time turning on
+> > > the regulators. We need a way to control that, don't we?
+> >
+> > I would assume that if those regulators are turned on once in the
+> > earliest stage , turning them on again in the follow up stage would be a
+> > noop ? This is the point of regulator-*-on, to keep the regulators on.
+>=20
+> No, there is sometimes a particular sequence needed.
+>=20
+> >
+> > >>> Should we have a step in the init sequence where we set up the
+> > >>> regulators, by calling regulators_enable_boot_on() ?
+> > >>
+> > >> Let's not do this , the entire point of this series is to get rid of
+> > >> those functions and do the regulator configuration the same way LED
+> > >> subsystem does it -- by probing always-on/boot-on regulators and
+> > >> configuring them correctly on probe.
+> > >>
+> > >> To me regulators_enable_boot_on() and the like was always an
+> > >> inconsistently applied workaround for missing DM_FLAG_PROBE_AFTER_BI=
+ND ,
+> > >> which is now implemented, so such workarounds can be removed.
+> > >
+> > > That patch seemed to slip under the radar, sent and applied on the
+> > > same day! We really need to add a test for it, BTW.
+> >
+> > Which patch ? My recollection of DM_FLAG_PROBE_AFTER_BIND was that it
+> > took a while to get in.
+>=20
+> [1]
+>=20
+> >
+> > > My concern is that this might cause us ordering problems. We perhaps
+> > > want the regulators to be done first. If drivers are probed which use
+> > > regulators, then presumably they will enable them. Consider this:
+> > >
+> > > - LED driver auto-probes
+> > >     - probes I2C bus 2
+> > >     - probes LDO1 which is autoset so turns on
+> > > - LDO1 probes, but is already running
+> > > - LDO2 probes, which is autoset so turns on
+> > >
+> > > So long as it is OK to enable the regulators in any order, then this
+> > > seems fine. But is it? How do we handle the case where are particular
+> > > sequence is needed?
+> >
+> > Did we finally arrive at the point where we need -EPROBE_DEFER alike
+> > mechanism ?
+>=20
+> Nope. But I am concerned that this patch is leading us there. bind()
+> really needs to be as clean as possible. It is one of the design
+> elements of driver model which Linux should adopt.
+>=20
+> There is always a race to be the first to init something, move the
+> init earlier, etc... I don't see any general need to init the
+> regulators right at the start. It should be done in a separate
+> function and be optional. I am happy to send a patch if you like.
 
->
->
-> Thanks and Regards,
-> Vaishnav
->
-> > -sughosh
-> >
-> > [1] - https://lore.kernel.org/u-boot/CAFLszTicT2yzsm+KAjRyqzV3bt1_W2XYJaCExX-LHNZ6+tFUkA@mail.gmail.com/
-> > [2] - https://lore.kernel.org/u-boot/20231229154307.GS2652760@bill-the-cat/
-> >
-> >
+Since we're currently stuck on the point where Marek has patches that
+fix a real problem, and Svyatoslav has a problem with them, but isn't
+currently able to debug it, yes, please put forward your patch that
+might address both sets of problems so we can all figure out how to
+resolve the problems, thanks!
+
+--=20
+Tom
+
+--T6cII7xq/+DvBuQn
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmboXIsACgkQFHw5/5Y0
+tyxNjQv+MMGXX9xIKCbeFdYltaw7eLEqMQFyig/4VOgf1x82FcxpYrfFMa4gopjM
+j3I111hWh4tO69F8O+j2guT2Sr08pa0rO7JL+vaJY1iukXFHMtNJrL3WgIL3EpS9
+cqgRLEe7e5YbPibKqXPKconEfjXwcjXVOSwwFXFfNFnJJ+0IWLUUxd/pgWXpTziK
+2CwoDLICFx/OE2EXTWIC9gQZPrIeK24jOjMJbKur953KBIYOxNcYFLJML7k78kQc
+swjPNXeQZMq4PwmUZpsvO9Aq0O1iBAx8ly9rMQYtCYD9/dx2N0qplie0M/IHI0O1
+IO0WtlHPNpOTdJzcgEYpDqLUE2rced+GjE6piuxkr/zepocm4MXm03fFc5Kh3Ltf
+cfryRrBotyqYLH5ldXbtrKSSSSps0NeDO4e9uDCN1vEq4QSMdXGSEhKFD0jIa5f6
+LgUcniXI4IzWxHPCfCCmcIKtN6wF7o7xEXA/HCHv8T+sJmxZDi6SdVWOBgtfxAlq
+z2sx3b6p
+=JwHe
+-----END PGP SIGNATURE-----
+
+--T6cII7xq/+DvBuQn--
