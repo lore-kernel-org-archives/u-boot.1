@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89234C3ABA2
-	for <u-boot@archiver.kernel.org>; Mon, 16 Sep 2024 09:58:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A4BCC3ABA2
+	for <u-boot@archiver.kernel.org>; Mon, 16 Sep 2024 09:59:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C50A188ED1;
-	Mon, 16 Sep 2024 11:58:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2D5F388EC4;
+	Mon, 16 Sep 2024 11:58:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="v9vsFZq6";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gfxXizCd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 33A6288EC4; Mon, 16 Sep 2024 11:58:50 +0200 (CEST)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
+ id CA84888EEB; Mon, 16 Sep 2024 11:58:52 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1A378899C
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 11:58:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9244F8899C
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 11:58:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=linus.walleij@linaro.org
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-2f761461150so38974421fa.0
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 02:58:47 -0700 (PDT)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-a8d6ac24a3bso772172966b.1
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 02:58:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726480727; x=1727085527; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=dkUKt3UdwEitX0O61G7N5qJz6iQqsTpeb/1nStpbrCw=;
- b=v9vsFZq6fqy5vrkpJopt0aHVU5AdHA+tlzMdnM+wiVgJWm6t9/f5QKqBladCtPXWoP
- hc1S2iLsG6WU6BNTDY+/PoSGF4fRZFLjqkWsuoPq8BWqdqtlpxcbEOuT6KRWnpzCTwiZ
- XE5FiLUM17prBFpckxXCkgANZOz5AlgLA77z8TE9Akw0uLYFZsHvUVD/cdKBiSCGWFC5
- C32t2snZMCR0w1zVjXNPJaXM1SSTaxAMZpS6mbAa4iSfI5NYoamEjB0SkEL+wwifoY2J
- im9uAUb7YoSDU3Q5o84a6ZvS5pgpt96H7U0ClmHjiECtjydi6Drg50FCnVP7m4tMLbnn
- Rc5A==
+ d=linaro.org; s=google; t=1726480730; x=1727085530; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=cy0AelE8X6/ImwZyMOvnLyspFv+MmXcjl2xKIRLZjow=;
+ b=gfxXizCdUnIT1RtnVQANWiWdHBZBVu9owU/8mB0NInBemf9bxJLq1x4KU3mV84+GrD
+ oI4+CeIkQ3P4rp62C6SUJQzsW5Uzp8C7Bsn2ZNKJku8SMEkYGf7RZyAfZNlkMHmaEnRv
+ TlcZgDpLLHLxtGT5gJiHqdpNPHggwbE6cRkxXb4lSzyPDBfg1K/EL35EJyZJcJ581Yoz
+ t6I9W/l40JE4tfnVkWzBLgO3zlC6gLZhXhLin5EQlI4HIZRUswKFqHR7uqKkL2rPgLr9
+ Xqc3vBAoT/LgTfMP4tAxmdk0GIXekgvwQqTJkSY8VE83r9K9u287JqlbqAl2Xy/poH55
+ qzOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726480727; x=1727085527;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=dkUKt3UdwEitX0O61G7N5qJz6iQqsTpeb/1nStpbrCw=;
- b=JHza9AmIS39t/41T4piz/VF0+jsQyjPYtE3Lldo2mAeSrYpPAqsTZL9o0ufbXjfy30
- Tj2eS41knWMKekQCfi/2+tNtPV6/yzMEf17awDSg/QIG0otcHTzvWYz1AotBz685Yi36
- tIQAsMF64ZBwdZl8VTYjhiQdSIgoFFn2jv4PREjdgSbX58w6A5kZebUM7i5HidTfSjAY
- Q4n/AtZi0AWWsDU1ltsc6EoW8oAsZuKW4vodfxGPHkgNp+AzCMFBKusrgNEDz4DxFfJV
- o4PTN/j52yJomILlNdnmBO2SVoeetCMSFvIFhLRS6B9LZxX8zlBrb8RJ6lwfPkIIyEBn
- ytnA==
-X-Gm-Message-State: AOJu0Yw0bwIUo6ZhPLDUYT6zKg66ZMhfiLg/zF7BourIvEkQ2xFi/wKp
- AIQvO1JvOjH6EYzIRl7SVNWAuXTyTni0K3ACcD2UBdA5zDEtF49j6uLtW0tIedE=
-X-Google-Smtp-Source: AGHT+IFc5wutDEqLQVRyyPSzxnqVtuBmkubR2hZBIOnCtazuqL5RRyMQ+SXU/Qv6OoZwQqBGg71Euw==
-X-Received: by 2002:a2e:84a:0:b0:2f7:5777:cf14 with SMTP id
- 38308e7fff4ca-2f7935c342bmr44304471fa.35.1726480726654; 
- Mon, 16 Sep 2024 02:58:46 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1726480730; x=1727085530;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=cy0AelE8X6/ImwZyMOvnLyspFv+MmXcjl2xKIRLZjow=;
+ b=byfyrc4kayu+nWhIVm99yHW+vmYtAkrx+DHPjGSbOIbS+1J/30ZI5pl+CSnMGMoyQU
+ vlXXDgeZAtNb8d3Bo0VAbiSP2Qn3YSJDaYg8Enr6YKczKl42WidQ7FcnoUcqK6wJuWuo
+ uzbGviLg7KZk99xtjnJh9BC/3s82XghzUvmNLf3T5N7fEMCDeMIdSjIKR331wSfhQHJH
+ FoE8nVdyNNQYgEEX+ElkoBt4O8PNFVwok/gJunLRRvy9xraU+xAteW5a6YOgvk90SMjb
+ VVIHFOKj+bOLRd3qfai15unuwzTZRL/q9Zol0Mp29uclL9D3/J8FK8RLWylbG0+dyZXj
+ tw+g==
+X-Gm-Message-State: AOJu0YxBwnAq4cx8PcQQQqSZiLq1M004V/tGxN7C8i85Gfy678fxd9+f
+ lww9oYfS/dNzBn96OH1wZpU9IMPd8ui9ZFn8jNBcUD+EFwTdJOd46+fyHeFyRJQ=
+X-Google-Smtp-Source: AGHT+IEoGg7wHslqMsEwXWFvqafC3VFQIgCrvDu1FCptKqL/WqIdf+MwEqvNjnOJKY/EK7RoiLYMOA==
+X-Received: by 2002:a17:907:2da3:b0:a8d:63b5:e795 with SMTP id
+ a640c23a62f3a-a8ffaadad47mr2175007666b.3.1726480729350; 
+ Mon, 16 Sep 2024 02:58:49 -0700 (PDT)
 Received: from lino.lan ([85.235.12.238]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a906109662fsm292862966b.38.2024.09.16.02.58.45
+ a640c23a62f3a-a906109662fsm292862966b.38.2024.09.16.02.58.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Sep 2024 02:58:46 -0700 (PDT)
+ Mon, 16 Sep 2024 02:58:49 -0700 (PDT)
 From: Linus Walleij <linus.walleij@linaro.org>
-Subject: [PATCH v2 0/7] mtd: nand: brcmnand: Backported fixes from Linux
-Date: Mon, 16 Sep 2024 11:58:42 +0200
-Message-Id: <20240916-brcmnand-fixes-v2-0-08632f64c8ec@linaro.org>
+Date: Mon, 16 Sep 2024 11:58:44 +0200
+Subject: [PATCH v2 2/7] mtd: rawnand: brcmnand: Fix potential false time
+ out warning
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAFMB6GYC/3WMSw7CMAwFr1J5TVCc8hGsuAfqwmnc1hIklYMqU
- JW7E7pnOe9pZoXMKpzh2qygvEiWFCu4XQP9RHFkI6EyOOsO9oJovPbPSDGYQd6cTSAfzkfXWjq
- 1UKVZeTuqc+8qT5JfST9bf8Hf+je1oLHGM6IjZ4kGvD0kkqZ90hG6UsoXJTDSs60AAAA=
+Message-Id: <20240916-brcmnand-fixes-v2-2-08632f64c8ec@linaro.org>
+References: <20240916-brcmnand-fixes-v2-0-08632f64c8ec@linaro.org>
+In-Reply-To: <20240916-brcmnand-fixes-v2-0-08632f64c8ec@linaro.org>
 To: u-boot@lists.denx.de, 
  Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
  Michael Trimarchi <michael@amarulasolutions.com>, 
@@ -81,8 +81,7 @@ To: u-boot@lists.denx.de,
  Philippe Reynes <philippe.reynes@softathome.com>
 Cc: Linus Walleij <linus.walleij@linaro.org>, 
  Florian Fainelli <florian.fainelli@broadcom.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Kamal Dasu <kamal.dasu@broadcom.com>, David Regan <dregan@broadcom.com>
+ Miquel Raynal <miquel.raynal@bootlin.com>
 X-Mailer: b4 0.14.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,63 +99,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These are a number of assorted upstream Linux fixes to the
-BRCMNAND driver that I have backported in an attempt to get
-BRCMBCA working with U-Boot (still not there).
+From: William Zhang <william.zhang@broadcom.com>
 
-This patch set lowers the hamming distance between the Linux
-and U-Boot drivers a bit as well, while we deviate quite
-a bit it is still possible to bring fixes over thanks to
-exercises like this.
+Backport from the Linux kernel:
+commit 9cc0a598b944816f2968baf2631757f22721b996
+"mtd: rawnand: brcmnand: Fix potential false time out warning"
 
-On top of this I have a BCMBCA driver which works fine
-albeit with some complaints about ONFI:
+If system is busy during the command status polling function, the driver
+may not get the chance to poll the status register till the end of time
+out and return the premature status.  Do a final check after time out
+happens to ensure reading the correct status.
 
-NAND:  Could not find valid ONFI parameter page; aborting
-256 MiB
-(...)
-=> nand info
-
-Device 0: nand0, sector size 128 KiB
-  Page size         2048 b
-  OOB size            64 b
-  Erase size      131072 b
-  ecc strength         4 bits
-  ecc step size      512 b
-  subpagesize       2048 b
-  options       0x00104200
-  bbt options   0x00060000
-
+Signed-off-by: William Zhang <william.zhang@broadcom.com>
+Reviewed-by: Florian Fainelli <florian.fainelli@broadcom.com>
+Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+Link: https://lore.kernel.org/linux-mtd/20230706182909.79151-3-william.zhang@broadcom.com
 Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
 ---
-Changes in v2:
-- Augment the write protect handling to also support the bool
-  "write-protect" property in legacy DTS files.
-- Fix a mistake in the use_strap DTS property parsing.
-- Tested successfully with BCMBCA driver (will be submitted
-  once this is merged).
-- Link to v1: https://patchwork.ozlabs.org/project/uboot/list/?series=423357
+ drivers/mtd/nand/raw/brcmnand/brcmnand.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
----
-Linus Walleij (1):
-      mtd: rawnand: brcmnand: Add read data bus interface
+diff --git a/drivers/mtd/nand/raw/brcmnand/brcmnand.c b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
+index 700d1122639f..46a4107a83a9 100644
+--- a/drivers/mtd/nand/raw/brcmnand/brcmnand.c
++++ b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
+@@ -1011,6 +1011,14 @@ static int bcmnand_ctrl_poll_status(struct brcmnand_controller *ctrl,
+ 	} while (get_timer(base) < limit);
+ #endif /* __UBOOT__ */
+ 
++	/*
++	 * do a final check after time out in case the CPU was busy and the driver
++	 * did not get enough time to perform the polling to avoid false alarms
++	 */
++	val = brcmnand_read_reg(ctrl, BRCMNAND_INTFC_STATUS);
++	if ((val & mask) == expected_val)
++		return 0;
++
+ 	dev_warn(ctrl->dev, "timeout on status poll (expected %x got %x)\n",
+ 		 expected_val, val & mask);
+ 
 
-William Zhang (6):
-      mtd: rawnand: brcmnand: Fix ECC level field setting for v7.2 controller
-      mtd: rawnand: brcmnand: Fix potential false time out warning
-      mtd: rawnand: brcmnand: Fix potential out-of-bounds access in oob write
-      mtd: rawnand: brcmnand: Fix mtd oobsize
-      mtd: rawnand: brcmnand: Support write protection setting from dts
-      mtd: rawnand: brcmnand: Add support for getting ecc setting from strap
-
- drivers/mtd/nand/raw/brcmnand/brcmnand.c | 209 ++++++++++++++++++++++++-------
- drivers/mtd/nand/raw/brcmnand/brcmnand.h |   2 +
- 2 files changed, 166 insertions(+), 45 deletions(-)
----
-base-commit: a7b83ade98e0f567c82d168022e12d3ebef1f318
-change-id: 20240911-brcmnand-fixes-dabd75230a63
-
-Best regards,
 -- 
-Linus Walleij <linus.walleij@linaro.org>
+2.46.0
 
