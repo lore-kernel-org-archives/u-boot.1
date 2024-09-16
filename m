@@ -4,85 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82BE6C3ABB2
-	for <u-boot@archiver.kernel.org>; Mon, 16 Sep 2024 10:00:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BBB3C3ABD1
+	for <u-boot@archiver.kernel.org>; Mon, 16 Sep 2024 10:02:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78DD588EFF;
-	Mon, 16 Sep 2024 11:59:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1276F8857C;
+	Mon, 16 Sep 2024 12:02:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="A5lpU3Qj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="T35iEyjU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4B8888EF4; Mon, 16 Sep 2024 11:59:00 +0200 (CEST)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 59B1B8857C; Mon, 16 Sep 2024 12:02:36 +0200 (CEST)
+Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
+ [IPv6:2607:f8b0:4864:20::102a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 90BE888F18
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 11:58:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0286D8857C
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 12:02:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=linus.walleij@linaro.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-a8d446adf6eso451342266b.2
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 02:58:57 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pj1-x102a.google.com with SMTP id
+ 98e67ed59e1d1-2d86f713557so2785984a91.2
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 03:02:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726480737; x=1727085537; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=qkiBDX/+saVsGPGZuKtDqACV/GhwNNMijBezP/1HGZI=;
- b=A5lpU3Qj8Q8l/pGBg2sZhn2CeUqQvP+d3N750ttLv43saYazOKTPQB8rVHYBLz9yfh
- gH0Vl80U5LQ2H0e0ub2uN7PBYygnckGEmUHWGfD13cqRr64+ji+gKUpqj/+HzzYZftGt
- uzkl0IYVny+m5wUHps0gr5wqGuM5Q4+VRwdQVCE8K6w5jQ77vOjj7ZsVVuFq+pWGGpsl
- iQDgpOLoPyLcRc2l/mQ9iu5+p9UeoaiLHe35USFcMQiUUX9fEB4A2xx3f7F8b4cn6DGZ
- KpFlf9ZcINN0uOZXSDNmkt4vrd0HU2wcwk0b5pnNaFf2b0NgXH53FJW3CitNaTrlc4In
- j6/Q==
+ d=linaro.org; s=google; t=1726480921; x=1727085721; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=FUNCq/Bym/5pya1wBmlxBtW7izxYsMhCT+/QGvBsK0Y=;
+ b=T35iEyjUxTFEEZR+vszg7KE4AVakcNFbBXaMTg6VSRTVJ4vWlkjpGVkSUFiST9b4tA
+ dnfiBlD9ljcqkH9JNMrLe+/F+sl8BZkWfTbo3fPWn+eju7tEiC2zFAPS8Rk4svruGgO1
+ RyGWo9InwK1U7wR/Yq7gKmzyl+viNSxULGz5ay0SwJGMjZBXboSC13Z2/2Msm4Xyfler
+ yQdnuq1qE3H0ZHjdIelbl7l+fw2qwvGp26aZhBEN59GAcftyF6UlXBiJfUwAALhD2iGd
+ 9i0Fg8dWHB+CzI90O4VZrHVNf2/TAZgVRJljoyUkadE9L8IDSr09GEnLfvcC8csy88qn
+ xe7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726480737; x=1727085537;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=qkiBDX/+saVsGPGZuKtDqACV/GhwNNMijBezP/1HGZI=;
- b=WQGrH4qJ0b8D2RrUGo0jv4Rhu936A+0bevy2R1uIX7WdNPRIaX9BMr0aU2IZGbBoSs
- o2ZlsbqwpOZnf4YmdegD1bAz4bHgDx5PbXQxQb8gtHgDr2cYhUAn7RnhV/Kd3o0mX+mZ
- NwUeM0ldlI1EP/tZNA2FKYQJd0l8tDnvQyNtwTXDJzBjFrsvNHp67fIOvjn2W0Sn2epP
- 46jIOZZRJLCvHPgljFCY2yXco9y1KcXbtxHElJIZRLgw+U2TT19V+6GF+PQ/YZ/SmOrI
- v0J5Vi2DKcJUNYr1QFXkh9mF5sWjYh75cgcpukteOj5FS4kBAfDVu1E6iRX9nJLvFsGT
- 0ICA==
-X-Gm-Message-State: AOJu0Yzt3+k44WvF3OMciRYGCIVeywuLKrJYeg/5Vgk2NWtgVHnIbKjg
- 6HztwBhK2ofkKOsGzvIBxygvs6ItNf30763cwc5n/5HW+mJV1q+ztVH4zyZYyLk=
-X-Google-Smtp-Source: AGHT+IG7h+kdaU8uGjJ8mQ40IvAMjAvR2DdnhsTUgziRgdekuW0OK4ILuhskSGM8bX19nv1Amg8jhQ==
-X-Received: by 2002:a17:907:60d1:b0:a77:c30c:341 with SMTP id
- a640c23a62f3a-a904758f269mr1141033566b.0.1726480736850; 
- Mon, 16 Sep 2024 02:58:56 -0700 (PDT)
-Received: from lino.lan ([85.235.12.238]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a906109662fsm292862966b.38.2024.09.16.02.58.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Sep 2024 02:58:56 -0700 (PDT)
-From: Linus Walleij <linus.walleij@linaro.org>
-Date: Mon, 16 Sep 2024 11:58:49 +0200
-Subject: [PATCH v2 7/7] mtd: rawnand: brcmnand: Add support for getting ecc
- setting from strap
+ d=1e100.net; s=20230601; t=1726480921; x=1727085721;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=FUNCq/Bym/5pya1wBmlxBtW7izxYsMhCT+/QGvBsK0Y=;
+ b=KdKw3TooZNNho3hdzqnuXTOGBaM+XnvozyM/nuIm6i0AEKFo+bQJZDyzJdoTAekisb
+ 8lStJfiyD8KvqLVzbD9HSzAF60W8BluMcl1GVcO23FSu/zEDAZCzdPhmL2LIMsMy3R77
+ kDBKNJIUGu/Jj4Hvm87mHe6EKSUs5MsjEsVLb4GokRB8OHiBbIc1C+1GcTtFU/duLkXN
+ QgRoblLBm0eaMpvpyzXiqQbLMMHg/5zVitHOjoHGSUzDSb/T87gpc3rmEKGsmWj3w2lK
+ Qh5kOBS41hTk9aYOJSN6WLo0HM3NB0eoFFSf7Rz/xI4fuuz1vK/l6QyyiDI4RQ+M1Gcz
+ ouGg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVAdT0a599Uap+nVMLDFE8LYKB6jUxme4XVzM3judC53x69Dl5AVhvzTKy1Fl1OOWcSO6NQImg=@lists.denx.de
+X-Gm-Message-State: AOJu0YzHTIlGXmjZGxmi8kEkjOY82mSdfIBiLiHpgmQqy9Gkgc94D83s
+ z+YEPtw9gwwaK9Dt2LSgkD3mXx9YExWE0PXuZyrcSRVxWkbRNySaWKuYrOzQETSINqgKbfsnYYJ
+ CS4UU2fM2sr5zXEPz9WcgVCF5dbnLo/TrwhFX4IwzWyvNlxcfNIM=
+X-Google-Smtp-Source: AGHT+IFI/NIjPOYkJHDsBH99WqZFOUC66wqvtzLeCntW55cBlLranQhWHIKOYkB2a3CZLqO8kEeFrVrg8on1XnysCv4=
+X-Received: by 2002:a17:90a:890d:b0:2cb:50fa:b01e with SMTP id
+ 98e67ed59e1d1-2dba0093514mr15158197a91.41.1726480921169; Mon, 16 Sep 2024
+ 03:02:01 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240916-brcmnand-fixes-v2-7-08632f64c8ec@linaro.org>
-References: <20240916-brcmnand-fixes-v2-0-08632f64c8ec@linaro.org>
-In-Reply-To: <20240916-brcmnand-fixes-v2-0-08632f64c8ec@linaro.org>
-To: u-boot@lists.denx.de, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>, 
- Anand Gore <anand.gore@broadcom.com>, 
- William Zhang <william.zhang@broadcom.com>, 
- Kursad Oney <kursad.oney@broadcom.com>, 
- Philippe Reynes <philippe.reynes@softathome.com>
-Cc: Linus Walleij <linus.walleij@linaro.org>, 
- David Regan <dregan@broadcom.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>
-X-Mailer: b4 0.14.0
+References: <20240916-u-boot-topic-dynamic-uuid-v1-0-7e4f48542a0f@linaro.org>
+ <20240916-u-boot-topic-dynamic-uuid-v1-2-7e4f48542a0f@linaro.org>
+In-Reply-To: <20240916-u-boot-topic-dynamic-uuid-v1-2-7e4f48542a0f@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 16 Sep 2024 13:01:25 +0300
+Message-ID: <CAC_iWjLY3V=CGFDzXv38r0_oZjhMC5T=hzxHNDCEbULw0Q_FuA@mail.gmail.com>
+Subject: Re: [PATCH 2/2] board: libre-computer: aml-s805-cc: Enable capsule
+ updates
+To: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, u-boot-amlogic@groups.io,
+ u-boot@lists.denx.de, Da Xue <da@libre.computer>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,135 +90,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: William Zhang <william.zhang@broadcom.com>
+Thanks Neil!
 
-Backport from the upstream Linux kernel
-commit c2cf7e25eb2a3c915a420fb8ceed8912add7f36c
-"mtd: rawnand: brcmnand: Add support for getting ecc setting from strap"
+On Mon, 16 Sept 2024 at 12:41, Neil Armstrong <neil.armstrong@linaro.org> wrote:
+>
+> Since the aml-s805-cc works well using EFI, and now the capsule updates
+> backend has been merged, let's enable the missing configs and add
+> the required structures to support it.
+>
+> The GUID is dynamically generated for the board, to get it:
+> => efidebug capsule esrt
+> ========================================
+> ESRT: fw_resource_count=1
+> ESRT: fw_resource_count_max=1
+> ESRT: fw_resource_version=1
+> [entry 0]==============================
+> ESRT: fw_class=B8079027-9B2C-57D4-86AA-CC782ADA598C
+> ESRT: fw_type=unknown
+> ESRT: fw_version=0
+> ESRT: lowest_supported_fw_version=0
+> ESRT: capsule_flags=0
+> ESRT: last_attempt_version=0
+> ESRT: last_attempt_status=success
+> ========================================
+>
+> On the host (with the aml_encrypt_gxl result binary):
+> $ eficapsule --guid B8079027-9B2C-57D4-86AA-CC782ADA598C -i 1 u-boot.bin u-boot.cap
+>
+> On the board (from USB disk containing u-boot.cap at root):
+> => load usb 0:1 $kernel_addr_r u-boot.cap
+> => efidebug capsule update $kernel_addr_r
+>
+> The binary will then be flashed on the SPI.
+>
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+> ---
+>  board/libre-computer/aml-s805x-ac/aml-s805x-ac.c | 14 ++++++++++++++
+>  configs/libretech-ac_defconfig                   |  5 +++++
+>  2 files changed, 19 insertions(+)
+>
+> diff --git a/board/libre-computer/aml-s805x-ac/aml-s805x-ac.c b/board/libre-computer/aml-s805x-ac/aml-s805x-ac.c
+> index ae9834c0bf8..ba14df54967 100644
+> --- a/board/libre-computer/aml-s805x-ac/aml-s805x-ac.c
+> +++ b/board/libre-computer/aml-s805x-ac/aml-s805x-ac.c
+> @@ -8,6 +8,7 @@
+>  #include <env.h>
+>  #include <init.h>
+>  #include <net.h>
+> +#include <efi_loader.h>
+>  #include <asm/io.h>
+>  #include <asm/arch/gx.h>
+>  #include <asm/arch/sm.h>
+> @@ -19,6 +20,19 @@
+>  #define EFUSE_MAC_OFFSET       52
+>  #define EFUSE_MAC_SIZE         6
+>
+> +struct efi_fw_image fw_images[] = {
+> +       {
+> +               .fw_name = u"AML_S805X_AC_BOOT",
+> +               .image_index = 1,
+> +       },
+> +};
+> +
+> +struct efi_capsule_update_info update_info = {
+> +       .dfu_string = "sf 0:0=u-boot-bin raw 0 0x10000",
+> +       .num_images = ARRAY_SIZE(fw_images),
+> +       .images = fw_images,
+> +};
+> +
+>  int misc_init_r(void)
+>  {
+>         u8 mac_addr[EFUSE_MAC_SIZE + 1];
+> diff --git a/configs/libretech-ac_defconfig b/configs/libretech-ac_defconfig
+> index 11d9795e05d..f146a495654 100644
+> --- a/configs/libretech-ac_defconfig
+> +++ b/configs/libretech-ac_defconfig
+> @@ -35,6 +35,7 @@ CONFIG_SYS_MAXARGS=32
+>  # CONFIG_CMD_IMI is not set
+>  CONFIG_CMD_ADC=y
+>  CONFIG_CMD_DFU=y
+> +CONFIG_CMD_NVEDIT_EFI=y
+>  CONFIG_CMD_GPIO=y
+>  # CONFIG_CMD_LOADS is not set
+>  CONFIG_CMD_MMC=y
+> @@ -42,6 +43,7 @@ CONFIG_CMD_SF_TEST=y
+>  CONFIG_CMD_SPI=y
+>  CONFIG_CMD_USB=y
+>  CONFIG_CMD_USB_MASS_STORAGE=y
+> +CONFIG_CMD_EFIDEBUG=y
+>  # CONFIG_CMD_SETEXPR is not set
+>  CONFIG_CMD_REGULATOR=y
+>  CONFIG_OF_CONTROL=y
+> @@ -49,6 +51,7 @@ CONFIG_ENV_IS_IN_SPI_FLASH=y
+>  CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+>  CONFIG_SARADC_MESON=y
+>  CONFIG_DFU_RAM=y
+> +CONFIG_DFU_SF=y
+>  CONFIG_MMC_MESON_GX=y
+>  CONFIG_MTD=y
+>  CONFIG_DM_MTD=y
+> @@ -98,3 +101,5 @@ CONFIG_VIDEO_BMP_RLE8=y
+>  CONFIG_BMP_16BPP=y
+>  CONFIG_BMP_24BPP=y
+>  CONFIG_BMP_32BPP=y
+> +CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
+> +CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+>
+> --
+> 2.34.1
+>
 
-Note: the upstream kernel introduces a new
-bool brcmnand_get_sector_size_1k() function because the int
-version in U-Boot has been removed in Linux. I kept the old
-int-returning version that is already in U-Boot as we depend
-on that in other code.
-
-BCMBCA broadband SoC based board design does not specify ecc setting in
-dts but rather use the SoC NAND strap info to obtain the ecc strength
-and spare area size setting. Add brcm,nand-ecc-use-strap dts propety for
-this purpose and update driver to support this option. However these two
-options can not be used at the same time.
-
-Signed-off-by: William Zhang <william.zhang@broadcom.com>
-Reviewed-by: David Regan <dregan@broadcom.com>
-Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
-Link: https://lore.kernel.org/linux-mtd/20240301173308.226004-1-william.zhang@broadcom.com
-Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
----
- drivers/mtd/nand/raw/brcmnand/brcmnand.c | 70 ++++++++++++++++++++++++++++++--
- 1 file changed, 66 insertions(+), 4 deletions(-)
-
-diff --git a/drivers/mtd/nand/raw/brcmnand/brcmnand.c b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
-index 071b33951648..749553c9df90 100644
---- a/drivers/mtd/nand/raw/brcmnand/brcmnand.c
-+++ b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
-@@ -980,6 +980,43 @@ static void brcmnand_set_sector_size_1k(struct brcmnand_host *host, int val)
- 	nand_writereg(ctrl, acc_control_offs, tmp);
- }
- 
-+static int brcmnand_get_spare_size(struct brcmnand_host *host)
-+{
-+	struct brcmnand_controller *ctrl = host->ctrl;
-+	u16 acc_control_offs = brcmnand_cs_offset(ctrl, host->cs,
-+						  BRCMNAND_CS_ACC_CONTROL);
-+	u32 acc = nand_readreg(ctrl, acc_control_offs);
-+
-+	return (acc & brcmnand_spare_area_mask(ctrl));
-+}
-+
-+static void brcmnand_get_ecc_settings(struct brcmnand_host *host, struct nand_chip *chip)
-+{
-+	struct brcmnand_controller *ctrl = host->ctrl;
-+	u16 acc_control_offs = brcmnand_cs_offset(ctrl, host->cs,
-+						  BRCMNAND_CS_ACC_CONTROL);
-+	bool sector_size_1k = brcmnand_get_sector_size_1k(host);
-+	int spare_area_size, ecc_level;
-+	u32 acc;
-+
-+	spare_area_size = brcmnand_get_spare_size(host);
-+	acc = nand_readreg(ctrl, acc_control_offs);
-+	ecc_level = (acc & brcmnand_ecc_level_mask(ctrl)) >> ctrl->ecc_level_shift;
-+	if (sector_size_1k)
-+		chip->ecc.strength = ecc_level * 2;
-+	else if (spare_area_size == 16 && ecc_level == 15)
-+		chip->ecc.strength = 1; /* hamming */
-+	else
-+		chip->ecc.strength = ecc_level;
-+
-+	if (chip->ecc.size == 0) {
-+		if (sector_size_1k)
-+			chip->ecc.size = 1024;
-+		else
-+			chip->ecc.size = 512;
-+	}
-+}
-+
- /***********************************************************************
-  * CS_NAND_SELECT
-  ***********************************************************************/
-@@ -2323,12 +2360,33 @@ static int brcmnand_setup_dev(struct brcmnand_host *host)
- 	struct nand_memory_organization *memorg = nanddev_get_memorg(nanddev);
- 	struct brcmnand_controller *ctrl = host->ctrl;
- 	struct brcmnand_cfg *cfg = &host->hwcfg;
--	char msg[128];
- 	u32 offs, tmp, oob_sector;
-+	bool use_strap = false;
-+	char msg[128];
- 	int ret;
- 
- 	memset(cfg, 0, sizeof(*cfg));
- 
-+#ifndef __UBOOT__
-+	use_strap = of_property_read_bool(nand_get_flash_node(chip),
-+					  "brcm,nand-ecc-use-strap"):
-+#else
-+	use_strap = ofnode_read_bool(nand_get_flash_node(chip),
-+				     "brcm,nand-ecc-use-strap");
-+#endif /* __UBOOT__ */
-+	/*
-+	 * Either nand-ecc-xxx or brcm,nand-ecc-use-strap can be set. Error out
-+	 * if both exist.
-+	 */
-+	if (chip->ecc.strength && use_strap) {
-+		dev_err(ctrl->dev,
-+			"ECC strap and DT ECC configuration properties are mutually exclusive\n");
-+		return -EINVAL;
-+	}
-+
-+	if (use_strap)
-+		brcmnand_get_ecc_settings(host, chip);
-+
- #ifndef __UBOOT__
- 	ret = of_property_read_u32(nand_get_flash_node(chip),
- 				   "brcm,nand-oob-sector-size",
-@@ -2338,10 +2396,14 @@ static int brcmnand_setup_dev(struct brcmnand_host *host)
- 			      "brcm,nand-oob-sector-size",
- 			      &oob_sector);
- #endif /* __UBOOT__ */
-+
- 	if (ret) {
--		/* Use detected size */
--		cfg->spare_area_size = mtd->oobsize /
--					(mtd->writesize >> FC_SHIFT);
-+		if (use_strap)
-+			cfg->spare_area_size = brcmnand_get_spare_size(host);
-+		else
-+			/* Use detected size */
-+			cfg->spare_area_size = mtd->oobsize /
-+						(mtd->writesize >> FC_SHIFT);
- 	} else {
- 		cfg->spare_area_size = oob_sector;
- 	}
-
--- 
-2.46.0
-
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
