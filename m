@@ -4,78 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD78EC3ABB2
-	for <u-boot@archiver.kernel.org>; Mon, 16 Sep 2024 14:07:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C241CC3ABB2
+	for <u-boot@archiver.kernel.org>; Mon, 16 Sep 2024 14:17:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E5DD88C41;
-	Mon, 16 Sep 2024 16:07:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
+	by phobos.denx.de (Postfix) with ESMTP id D1ABA88AE8;
+	Mon, 16 Sep 2024 16:17:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="bqnmOivB";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="llgwMvfM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA0D688CD9; Mon, 16 Sep 2024 16:07:51 +0200 (CEST)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6FB1C88327; Mon, 16 Sep 2024 16:17:06 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A17488AAC
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 16:07:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=9elements.com
+ by phobos.denx.de (Postfix) with ESMTPS id 82BD188AAC
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 16:17:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-6d5893cd721so24332797b3.0
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 07:07:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1726495666; x=1727100466; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=B0hh5A0jEmMqVx0H3F4pcFUEX0mxEvgbbMRmFmA44Ys=;
- b=bqnmOivBC0rbmoIkBxKPxDDrbSF4cFrL64tH5CiALlEpiBl52rXstpK10DoGKUC+uq
- vnauGxby6WPoJnt8PVvIgj4gNoPYAztqa9egdj/+wCxqJq2vgG3tbLHZbse+S1Wt1uzi
- dY6OnA4zxjI2BS7elO8qjZvKqaaH6ri5WQyKglmUd7N+RSiCnKOr9KyCsFioeIxtyIKg
- RVlGrKMLujMlzW2QY+AvEn39pQv6zMdkQSQeDFBEhmTKR/1POydZ1S+COaGcg1cD5KA2
- dhPYIg7w3TUqRMRDz5JdxbqvaRXvMXS3BvIBcHjlGBZBDyM2zznAgst7+pcsjvxx0kjM
- 5qkA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726495666; x=1727100466;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=B0hh5A0jEmMqVx0H3F4pcFUEX0mxEvgbbMRmFmA44Ys=;
- b=eLzP0ZgE5e5ZONwW9sfesVrLxj2rU6NicCzh36HlGNOvLHkHe4nidzqZSWwrJhoWy/
- c2Xc+qlfLvltlhW+pGgZ0jA6E3nuE7kM8thhHTqi+ivFurOXDeTFyqPFusbvv1PdOYw6
- /ht0gAhA0ZRb8Jp4A8EAjTPp+z7yssZYmU852BS5O6BuJHIOSGxWkg1FCxnjx5dgivpp
- liJRiWvvKWDqHHPymkeTCgw5gFwWNgJz5bz6BtsMotVReT3ywaUAUPsbHOHOqBOz0Y0U
- 1uEM6SjG2R9El7rP3VddFFxq8n6VXknr1v26njd52WIT2rc1b0lACqeaA9cSqHbvfYd0
- cXqA==
-X-Gm-Message-State: AOJu0YxAl/0pSuiB4c9/LUGwoaTkRgBI2mfNbzCFq/77SQfa7W5hsXr0
- Th8hgknLZWrpDDCTUoLDvVCHF25SXw5ijg3KJJj+Z+loNe91QMbRKUBx3+U9NioBKibxJIRHgaj
- Q75pHYeCqGMaxS1dZr9ia1JhtAPSAirsXLezxXQ==
-X-Google-Smtp-Source: AGHT+IE90aJ1zDWVWeob0xFwe6VF1at1ZC6cl5Fq55NyMBanY+hYlEjW2/QUHwALCmebCDH7GtLoeN8jFZP50Cl5XQo=
-X-Received: by 2002:a05:690c:b8e:b0:6c7:a120:e0ec with SMTP id
- 00721157ae682-6dbcc4bef4emr89296267b3.22.1726495665847; Mon, 16 Sep 2024
- 07:07:45 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=vaishnav.a@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 48GEGx7O055269;
+ Mon, 16 Sep 2024 09:16:59 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1726496219;
+ bh=odUiuyhH61xR0FlDVqKb0Vaj4EZvKIUoRMZPvY1mQTE=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=llgwMvfMqX7UBID1gE2RT/WqUSd4Mif1KTHesYCHZH0/7rvaLxhvq6vIaeeg+1QEg
+ 8LmaDMSeOy4emnJvejl7DeA1F5F/tK0hqYuMrIP3Hvyn0c1Oa3nFZK+80gSp9K3SKD
+ e4dZBcmCrCZxW8QIB1WnqizL+bt5yTtZKhgiJXxM=
+Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 48GEGxmP020944;
+ Mon, 16 Sep 2024 09:16:59 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 16
+ Sep 2024 09:16:58 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 16 Sep 2024 09:16:58 -0500
+Received: from [10.24.69.142] ([10.24.69.142])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 48GEGsqM114380;
+ Mon, 16 Sep 2024 09:16:55 -0500
+Message-ID: <24a01e64-a6ef-49eb-8e10-d28161002468@ti.com>
+Date: Mon, 16 Sep 2024 19:46:54 +0530
 MIME-Version: 1.0
-References: <20240911062511.494855-1-patrick.rudolph@9elements.com>
- <20240911062511.494855-29-patrick.rudolph@9elements.com>
- <CAFLszTj668HSpJL_9=38SjGw=NbUP+iqrmeMY4-bho9_BSdUKw@mail.gmail.com>
-In-Reply-To: <CAFLszTj668HSpJL_9=38SjGw=NbUP+iqrmeMY4-bho9_BSdUKw@mail.gmail.com>
-From: Patrick Rudolph <patrick.rudolph@9elements.com>
-Date: Mon, 16 Sep 2024 16:07:34 +0200
-Message-ID: <CALNFmy2num2rT=J6dFoodRCWdCh+zve3Wy=Ds2rQY0g3neu0Tg@mail.gmail.com>
-Subject: Re: [PATCH v3 28/30] arm: mach-bcm283x: Add ARMV8_MULTIENTRY support
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tom Rini <trini@konsulko.com>, 
- Matthias Brugger <mbrugger@suse.com>, Peter Robinson <pbrobinson@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4] cmd: sf: prevent overwriting the reserved memory
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+CC: Prasad Kummari <prasad.kummari@amd.com>, <u-boot@lists.denx.de>,
+ <git@amd.com>, <michal.simek@amd.com>, <venkatesh.abbarapu@amd.com>,
+ <padmarao.begari@amd.com>, <git@xilinx.com>,
+ <jagan@amarulasolutions.com>, <n-francis@ti.com>, <d-gole@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, "Kumar, Udit" <u-kumar1@ti.com>
+References: <20240913073251.2286529-2-prasad.kummari@amd.com>
+ <c9e22782-8645-420c-9017-18f3aafcbb12@ti.com>
+ <CADg8p95RA_iOUYmjLaED52C7ebGPuor=Zd+16zmVvDiEV3aesw@mail.gmail.com>
+ <acca0730-1bb5-4ea5-9666-9271110ddb43@ti.com>
+ <CADg8p94qiashAzNvLJHxgf-msMDNhOiSPyVA_JOAtesO96sYdA@mail.gmail.com>
+ <7b55c50d-49d1-493f-8ab2-a554f99e265c@ti.com>
+ <CADg8p94bEoyr1wOLa4onQBEd-wTGNqFcgR8XD1vGQHf3HNYrGg@mail.gmail.com>
+Content-Language: en-US
+From: Vaishnav Achath <vaishnav.a@ti.com>
+In-Reply-To: <CADg8p94bEoyr1wOLa4onQBEd-wTGNqFcgR8XD1vGQHf3HNYrGg@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,414 +89,227 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Sep 12, 2024 at 2:59=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
-e:
->
-> Hi Patrick,
->
-> On Wed, 11 Sept 2024 at 00:31, Patrick Rudolph
-> <patrick.rudolph@9elements.com> wrote:
-> >
-> > When ACPI is enabled over FDT the APs cannot be brought out of reset
-> > by the OS using the "FDT spin-table" mechanism, as no FDT is provided
-> > to the OS. The APs must be released out of reset in u-boot and then
-> > brought up in an ACPI compliant fashion.
-> >
-> > When ARMV8_MULTIENTRY is specified the APs are released from reset
-> > and will enter U-Boot after it has been relocated as well.
-> >
-> > By default ARMV8_MULTIENTRY is not selected, keeping existing behaviour=
-.
-> >
-> > TEST: All APs enter U-Boot when run on qemu-system-aarch64 and on
-> >       real hardware.
-> >
-> > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-> > Cc: Matthias Brugger <mbrugger@suse.com>
-> > Cc: Peter Robinson <pbrobinson@gmail.com>
-> > Cc: Tom Rini <trini@konsulko.com>
-> > ---
-> > Changelog v2:
-> > - Drop CPU code from board
-> > - Add CPU driver to release APs from reset
-> >
-> > ---
-> >  arch/arm/Kconfig              |   1 +
-> >  arch/arm/mach-bcm283x/Kconfig |   2 +
-> >  arch/arm/mach-bcm283x/init.c  |   8 ++
-> >  drivers/cpu/Makefile          |   1 +
-> >  drivers/cpu/bcm283x_cpu.c     | 194 ++++++++++++++++++++++++++++++++++
-> >  5 files changed, 206 insertions(+)
-> >  create mode 100644 drivers/cpu/bcm283x_cpu.c
-> >
-> > diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> > index 588e293bf2..17cd3d44b6 100644
-> > --- a/arch/arm/Kconfig
-> > +++ b/arch/arm/Kconfig
-> > @@ -644,6 +644,7 @@ config ARCH_ORION5X
-> >
-> >  config ARCH_BCM283X
-> >         bool "Broadcom BCM283X family"
-> > +       select CPU
-> >         select DM
-> >         select DM_GPIO
-> >         select DM_SERIAL
-> > diff --git a/arch/arm/mach-bcm283x/Kconfig b/arch/arm/mach-bcm283x/Kcon=
-fig
-> > index b3287ce8bc..de783aa8f5 100644
-> > --- a/arch/arm/mach-bcm283x/Kconfig
-> > +++ b/arch/arm/mach-bcm283x/Kconfig
-> > @@ -12,6 +12,7 @@ config BCM2836
-> >  config BCM2837
-> >         bool "Broadcom BCM2837 SoC support"
-> >         depends on ARCH_BCM283X
-> > +       select ARCH_EARLY_INIT_R
-> >
-> >  config BCM2837_32B
-> >         bool "Broadcom BCM2837 SoC 32-bit support"
-> > @@ -29,6 +30,7 @@ config BCM2837_64B
-> >  config BCM2711
-> >         bool "Broadcom BCM2711 SoC support"
-> >         depends on ARCH_BCM283X
-> > +       select ARCH_EARLY_INIT_R
-> >
-> >  config BCM2711_32B
-> >         bool "Broadcom BCM2711 SoC 32-bit support"
-> > diff --git a/arch/arm/mach-bcm283x/init.c b/arch/arm/mach-bcm283x/init.=
-c
-> > index 7a1de22e0a..e6946c6e94 100644
-> > --- a/arch/arm/mach-bcm283x/init.c
-> > +++ b/arch/arm/mach-bcm283x/init.c
-> > @@ -9,6 +9,7 @@
-> >  #include <cpu_func.h>
-> >  #include <init.h>
-> >  #include <dm/device.h>
-> > +#include <dm/uclass.h>
-> >  #include <fdt_support.h>
-> >  #include <asm/global_data.h>
-> >
-> > @@ -199,7 +200,14 @@ int mach_cpu_init(void)
-> >                                                "brcm,bcm2712-pm");
-> >         if (offset > soc)
-> >                 rpi_wdog_base =3D fdt_get_base_address(gd->fdt_blob, of=
-fset);
-> > +       return 0;
-> > +}
-> > +
-> > +int arch_early_init_r(void)
-> > +{
-> > +       struct udevice *dev;
-> >
-> > +       uclass_first_device(UCLASS_CPU, &dev);
->
-> blank line before final return
->
-> >         return 0;
->
-> This is fine, but you should check for an error, right?
->
-> Also there is print_cpuinfo() which should be called if CONFIG_CPU is
-> enabled...it is a little later in the init sequence. Is it too late
-> for your purposes?
-print_cpuinfo() is called before relocation, so cannot be used to
-invoke the CPU driver.
-It would release the secondary CPUs and they would keep spinning in
-the non relocated U-Boot code.
+Hi Sughosh,
 
->
-> >  }
-> >
-> > diff --git a/drivers/cpu/Makefile b/drivers/cpu/Makefile
-> > index 773395693a..5230408cc0 100644
-> > --- a/drivers/cpu/Makefile
-> > +++ b/drivers/cpu/Makefile
-> > @@ -7,6 +7,7 @@
-> >  obj-$(CONFIG_CPU) +=3D cpu-uclass.o
-> >
-> >
-> > +obj-$(CONFIG_ARCH_BCM283X) +=3D bcm283x_cpu.o
-> >  obj-$(CONFIG_ARCH_BMIPS) +=3D bmips_cpu.o
-> >  obj-$(CONFIG_ARCH_IMX8) +=3D imx8_cpu.o
-> >  obj-$(CONFIG_ARCH_AT91) +=3D at91_cpu.o
-> > diff --git a/drivers/cpu/bcm283x_cpu.c b/drivers/cpu/bcm283x_cpu.c
-> > new file mode 100644
-> > index 0000000000..11dd3008cc
-> > --- /dev/null
-> > +++ b/drivers/cpu/bcm283x_cpu.c
-> > @@ -0,0 +1,194 @@
-> > +// SPDX-License-Identifier: GPL-2.0+
-> > +/*
-> > + * Copyright 2024 9elements GmbH
-> > + */
-> > +
-> > +#include <asm/cache.h>
-> > +#include <asm/io.h>
-> > +#include <asm/global_data.h>
-> > +#include <asm/system.h>
-> > +#include <asm/armv8/cpu.h>
-> > +#include <asm-generic/sections.h>
-> > +#include <cpu.h>
-> > +#include <cpu_func.h>
-> > +#include <dm.h>
-> > +#include <fdt_support.h>
-> > +#include <linux/bitops.h>
-> > +#include <linux/clk-provider.h>
-> > +#include <linux/delay.h>
-> > +
-> > +DECLARE_GLOBAL_DATA_PTR;
-> > +
-> > +static int cpu_bcm_get_desc(const struct udevice *dev, char *buf, int =
-size)
-> > +{
-> > +       struct cpu_plat *plat =3D dev_get_parent_plat(dev);
-> > +       const char *name;
-> > +       int ret;
-> > +
-> > +       if (size < 32)
-> > +               return -ENOSPC;
-> > +
-> > +       if (device_is_compatible(dev, "arm,cortex-a53"))
-> > +               name =3D "A53";
-> > +       else if (device_is_compatible(dev, "arm,cortex-a72"))
-> > +               name =3D "A72";
-> > +       else
-> > +               name =3D "?";
-> > +
-> > +       ret =3D snprintf(buf, size, "Broadcom Cortex-%s at %u MHz",
-> > +                      name, plat->timebase_freq);
-> > +
-> > +       snprintf(buf + ret, size - ret, "\n");
->
-> Can you put the \n at the end of the previous statement?
->
-> > +
-> > +       return 0;
-> > +}
-> > +
-> > +static int cpu_bcm_get_info(const struct udevice *dev, struct cpu_info=
- *info)
-> > +{
-> > +       struct cpu_plat *plat =3D dev_get_parent_plat(dev);
-> > +
-> > +       info->cpu_freq =3D plat->timebase_freq * 1000;
-> > +       info->features =3D BIT(CPU_FEAT_L1_CACHE) | BIT(CPU_FEAT_MMU);
->
-> blank line
->
-> > +       return 0;
-> > +}
-> > +
-> > +static int cpu_bcm_get_count(const struct udevice *dev)
-> > +{
-> > +       ofnode node;
-> > +       int num =3D 0;
-> > +
-> > +       ofnode_for_each_subnode(node, dev_ofnode(dev->parent)) {
-> > +               const char *device_type;
-> > +
-> > +               if (!ofnode_is_enabled(node))
-> > +                       continue;
-> > +
-> > +               device_type =3D ofnode_read_string(node, "device_type")=
-;
-> > +               if (!device_type)
-> > +                       continue;
-> > +
-> > +               if (!strcmp(device_type, "cpu"))
-> > +                       num++;
-> > +       }
->
-> This should really be done in the of_to_plat() method. Store it
-> somewhere so this function can just return it.
->
-Will add it.
+On 16/09/24 16:40, Sughosh Ganu wrote:
+> On Mon, 16 Sept 2024 at 16:07, Vaishnav Achath <vaishnav.a@ti.com> wrote:
+>>
+>> Hi Sughosh,
+>>
+>> On 16/09/24 14:53, Sughosh Ganu wrote:
+>>> On Mon, 16 Sept 2024 at 14:22, Vaishnav Achath <vaishnav.a@ti.com> wrote:
+>>>>
+>>>> Hi Sughosh,
+>>>>
+>>>> On 16/09/24 12:13, Sughosh Ganu wrote:
+>>>>> On Mon, 16 Sept 2024 at 11:47, Vaishnav Achath <vaishnav.a@ti.com> wrote:
+>>>>>>
+>>>>>> Hi Prasad,
+>>>>>>
+>>>>>> On 13/09/24 13:02, Prasad Kummari wrote:
+>>>>>>> Added LMB API to prevent SF command from overwriting reserved
+>>>>>>> memory areas. The current SPI code does not use LMB APIs for
+>>>>>>> loading data into memory addresses. To resolve this, LMB APIs
+>>>>>>> were added to check the load address of an SF command and ensure it
+>>>>>>> does not overwrite reserved memory addresses. Similar checks are
+>>>>>>> used in TFTP, serial load, and boot code to prevent overwriting
+>>>>>>> reserved memory.
+>>>>>>>
+>>>>>>> Signed-off-by: Prasad Kummari <prasad.kummari@amd.com>
+>>>>>>> ---
+>>>>>>> Changes in V4:
+>>>>>>> - Removed do_spi_read_lmb_check().
+>>>>>>> - Added the lmb_read_check() function in lmb.c, making it reusable for
+>>>>>>>       NAND, MMC, etc.
+>>>>>>> - Addressed review comments.
+>>>>>>>
+>>>>>>> Changes in V3:
+>>>>>>> - Removed lmb_init_and_reserve() as part of latest LMB series.
+>>>>>>> - Error message moved to one place.
+>>>>>>> - lmb_alloc_addr() is not required because the given memory address is
+>>>>>>>       being checked to ensure it is free or not.
+>>>>>>>
+>>>>>>> Changes in V2:
+>>>>>>> - Rebased the code changes on top of the next branch.
+>>>>>>>
+>>>>>>> UT:
+>>>>>>> Tested on Versal NET board.
+>>>>>>>
+>>>>>>> relocaddr   = 0x000000007febc000
+>>>>>>>
+>>>>>>> Versal NET> sf read 0x000000007febc000 0x0 0x40
+>>>>>>> device 0 offset 0x0, size 0x40
+>>>>>>> ERROR: trying to overwrite reserved memory...
+>>>>>>> Versal NET> sf write 0x000000007febc000 0x0 0x40
+>>>>>>> device 0 offset 0x0, size 0x40
+>>>>>>> ERROR: trying to overwrite reserved memory...
+>>>>>>>
+>>>>>>> Versal NET> fdt print /reserved-memory
+>>>>>>> reserved-memory {
+>>>>>>>          ranges;
+>>>>>>>          #size-cells = <0x00000002>;
+>>>>>>>          #address-cells = <0x00000002>;
+>>>>>>>          tf-a {
+>>>>>>>                  reg = <0x00000000 0x70000000 0x00000000 0x00050000>;
+>>>>>>>                  no-map;
+>>>>>>>          };
+>>>>>>> };
+>>>>>>> Versal NET> sf read 0x70000000 0x0 0x40
+>>>>>>> device 0 offset 0x0, size 0x40
+>>>>>>> ERROR: trying to overwrite reserved memory...
+>>>>>>> Versal NET> sf write 0x70000000 0x0 0x40
+>>>>>>> device 0 offset 0x0, size 0x40
+>>>>>>> ERROR: trying to overwrite reserved memory...
+>>>>>>> Versal NET> sf erase 0x0 0x1000000;mw.b 0x8000 aabbccdd 0x1000000;sf
+>>>>>>> write 0x8000 0x0 0x1000000;mw.b 0x8008000 0x0 0x1000000;sf read
+>>>>>>> 0x8008000 0x0 0x1000000;cmp.b 0x8000 0x8008000 0x01000000
+>>>>>>> SF: 16777216 bytes @ 0x0 Erased: OK
+>>>>>>> device 0 offset 0x0, size 0x1000000
+>>>>>>> SF: 16777216 bytes @ 0x0 Written: OK
+>>>>>>> device 0 offset 0x0, size 0x1000000
+>>>>>>> SF: 16777216 bytes @ 0x0 Read: OK
+>>>>>>> Total of 16777216 byte(s) were the same
+>>>>>>>
+>>>>>>>      cmd/sf.c      | 8 ++++++++
+>>>>>>>      include/lmb.h | 5 +++++
+>>>>>>>      2 files changed, 13 insertions(+)
+>>>>>>>
+>>>>>>> diff --git a/cmd/sf.c b/cmd/sf.c
+>>>>>>> index f43a2e08b3..08e364e191 100644
+>>>>>>> --- a/cmd/sf.c
+>>>>>>> +++ b/cmd/sf.c
+>>>>>>> @@ -10,6 +10,7 @@
+>>>>>>>      #include <div64.h>
+>>>>>>>      #include <dm.h>
+>>>>>>>      #include <log.h>
+>>>>>>> +#include <lmb.h>
+>>>>>>>      #include <malloc.h>
+>>>>>>>      #include <mapmem.h>
+>>>>>>>      #include <spi.h>
+>>>>>>> @@ -317,6 +318,13 @@ static int do_spi_flash_read_write(int argc, char *const argv[])
+>>>>>>>                          strncmp(argv[0], "write", 5) == 0) {
+>>>>>>>                  int read;
+>>>>>>>
+>>>>>>> +             if (CONFIG_IS_ENABLED(LMB)) {
+>>>>>>> +                     if (lmb_read_check(addr, len)) {
+>>>>>>
+>>>>>> Even though the function is named lmb_read_check(), it performs an alloc
+>>>>>> which is never freed, thus it makes it difficult for other callers to
+>>>>>> use the same region for other purposes (some callers use
+>>>>>> lmb_get_free_size() ), as mentioned in the commit message the check is
+>>>>>> only to prevent sf from overwriting reserved region, but it looks like
+>>>>>> this patch makes the load region also as reserved, is this necessary?
+>>>>>
+>>>>> Like I mentioned in my other reply, using a check for lmb_alloc_addr()
+>>>>> allows for memory re-use, which is the behaviour that a large number
+>>>>> of use cases rely on -- if you go through the test scripts, it is
+>>>>> assumed that memory re-use is allowed. That there is no need to
+>>>>> explicitly free up memory, and that has been how the LMB memory has
+>>>>> been used historically. So it is allowed to use some address to load
+>>>>> an image to that address, and then use the same address to load a
+>>>>> different image. The LMB rework series does keep this behaviour
+>>>>> consistent. So it would be better to change the behaviour of the tftp
+>>>>> command to use the same API. I was planning on working on this
+>>>>> cleanup. If you want, you can take it up.
+>>>>>
+>>>>
+>>>> Please let me know if you are planning to work on this in the coming few
+>>>> days, otherwise I can pick it up as we have platforms failing due to this.
+>>>
+>>> I can take this up. Will keep you on Cc so that you can test the
+>>> patches on your boards.
+>>>
+>>
+>> Thanks, I will test and report the results once you post the patches.
+> 
+> I have pushed a couple of patches to my github branch [1]. Can you
+> please try these on your platforms and check if this fixes the issues
+> that you see. I will also set up a board with network access on my end
+> and try it out. Thanks.
+> 
+> -sughosh
+> 
+> [1] - https://github.com/sughoshg/u-boot/tree/tftp_wget_lmb_changes
+> 
 
-> > +
-> > +       return num;
-> > +}
-> > +
-> > +static int cpu_bcm_get_vendor(const struct udevice *dev,  char *buf, i=
-nt size)
-> > +{
-> > +       snprintf(buf, size, "Broadcom");
->
-> blank line here (please fix globally)
->
-> > +       return 0;
-> > +}
-> > +
-> > +#ifdef CONFIG_ARM64
-> > +static int cpu_bcm_is_current(struct udevice *dev)
-> > +{
-> > +       struct cpu_plat *plat =3D dev_get_parent_plat(dev);
-> > +
-> > +       if (plat->cpu_id =3D=3D (read_mpidr() & 0xffff))
-> > +               return 1;
-> > +
-> > +       return 0;
-> > +}
-> > +#endif
-> > +
-> > +static int bcm_cpu_on(struct udevice *dev)
->
-> What does this do? Does it turn on the CPU? Perhaps add a comment?
->
-> Also, please return 0 for success, -ve error code otherwise
->
-> > +{
-> > +       ofnode node =3D dev_ofnode(dev);
-> > +       uintptr_t *start_address;
->
-> ulong start_address
->
-> > +       u64 release_addr64;
->
-> release_addr
->
-> > +       const char *prop;
-> > +
-> > +       if (!ofnode_is_enabled(node))
-> > +               return 0;
->
-> Hmm, but if it isn't enabled, how would this device be bound?
->
-> > +
-> > +       prop =3D ofnode_read_string(node, "enable-method");
-> > +       if (!prop || strcmp(prop, "spin-table"))
-> > +               return 1;
-> > +
-> > +       release_addr64 =3D ofnode_read_u64_default(node, "cpu-release-a=
-ddr", ~0ULL);
-> > +       if (release_addr64 =3D=3D ~0ULL)
-> > +               return 1;
->
-> if (ofnode_read_u64(node, "cpu-release-addr"), &release_addr))
->    return -EINVAL;
->
-> > +
-> > +       start_address =3D map_physmem(release_addr64, sizeof(uintptr_t)=
-, MAP_NOCACHE);
-> > +
-> > +       /* Point to U-Boot start */
-> > +       *start_address =3D (uintptr_t)_start;
-> > +       flush_dcache_all();
->
-> dcache always enabled? Which is fine...just asking
->
-> > +
-> > +       /* Send an event to wake up the secondary CPU. */
-> > +       asm("dsb        ishst\n"
-> > +           "sev");
-> > +       udelay(10000);
-> > +
-> > +       unmap_physmem(start_address, MAP_NOCACHE);
-> > +       return 0;
-> > +}
-> > +
-> > +static int bcm_init(struct udevice *dev)
-> > +{
-> > +       int ret =3D 0;
-> > +
-> > +       /* The armstub holds the secondary CPUs in a spinloop. When
->
-> /*
->  * The
->
-> > +        * ARMV8_MULTIENTRY is enabled release the secondary CPUs and
-> > +        * let them enter U-Boot as well.
-> > +        */
-> > +       if (CONFIG_IS_ENABLED(ARMV8_MULTIENTRY))
-> > +               ret =3D bcm_cpu_on(dev);
-> > +       return ret;
->
-> More U-Boot-esk:
->
->        if (CONFIG_IS_ENABLED(ARMV8_MULTIENTRY)) {
->                int ret;
->
->                ret =3D bcm_cpu_on(dev);
->                if (ret)
->                  return ret;
->       }
->
->    return 0;
-> }
->
-> > +}
-> > +
-> > +static const struct cpu_ops cpu_bcm_ops =3D {
-> > +       .get_desc       =3D cpu_bcm_get_desc,
-> > +       .get_info       =3D cpu_bcm_get_info,
-> > +       .get_count      =3D cpu_bcm_get_count,
-> > +       .get_vendor     =3D cpu_bcm_get_vendor,
-> > +#ifdef CONFIG_ARM64
->
-> Can just check this in the function, to avoid an #ifdef
->
-> > +       .is_current     =3D cpu_bcm_is_current,
-> > +#endif
-> > +};
-> > +
-> > +static const struct udevice_id cpu_bcm_ids[] =3D {
-> > +       { .compatible =3D "arm,cortex-a53" },     /* RPi 3 */
-> > +       { .compatible =3D "arm,cortex-a72" },     /* RPi 4 */
-> > +       { }
-> > +};
-> > +
-> > +static int cpu_bcm_bind(struct udevice *dev)
-> > +{
-> > +       struct cpu_plat *plat =3D dev_get_parent_plat(dev);
-> > +
-> > +       plat->cpu_id =3D dev_read_addr(dev);
->
-> You should not bring up the CPUs so early. The bind() method is just
-> for binding. Can this move to probe() ?
-This took me a while.
-The main issue here was that  uclass_first_device(UCLASS_CPU, &dev); only p=
-robes
-the first CPU, but not the others. That's why I used bind() in the first pl=
-ace.
+I tested with your patches on our failing platforms and it is working, 
+Thanks, In the logs, initially a mmc load of remoteproc firmware happens
+and then Kernel/DTB load through TFTP which was failing, now it is fixed 
+with your patches:
 
->
-> > +
-> > +       return bcm_init(dev);
-> > +}
-> > +
-> > +static int bcm_cpu_probe(struct udevice *dev)
-> > +{
-> > +       struct cpu_plat *plat =3D dev_get_parent_plat(dev);
-> > +       struct clk clk;
-> > +       int ret;
-> > +
-> > +       /* Get a clock if it exists */
-> > +       ret =3D clk_get_by_index(dev, 0, &clk);
-> > +       if (!ret) {
-> > +               ret =3D clk_enable(&clk);
-> > +               if (ret && (ret !=3D -ENOSYS || ret !=3D -EOPNOTSUPP))
-> > +                       return ret;
-> > +               ret =3D clk_get_rate(&clk);
-> > +               if (!IS_ERR_VALUE(ret))
-> > +                       plat->timebase_freq =3D ret;
->
-> If you get an error, you must return it
->
-> > +       }
-> > +
-> > +       return ret;
-> > +}
-> > +
-> > +U_BOOT_DRIVER(cpu_bcm_drv) =3D {
-> > +       .name           =3D "bcm283x_cpu",
-> > +       .id             =3D UCLASS_CPU,
-> > +       .of_match       =3D cpu_bcm_ids,
-> > +       .ops            =3D &cpu_bcm_ops,
-> > +       .probe          =3D bcm_cpu_probe,
-> > +       .bind           =3D cpu_bcm_bind,
-> > +       .flags          =3D 0,
-> > +};
-> > --
-> > 2.46.0
-> >
->
-> Regards,
-> Simon
+https://gist.github.com/vachath/bb7c8c7b5a38a58298026b831db58424
+
+Thanks and Regards,
+Vaishnav
+
+>>
+>>>>
+>>>>>>
+>>>>>>
+>>>>>>> +                             printf("ERROR: trying to overwrite reserved memory...\n");
+>>>>>>> +                             return CMD_RET_FAILURE;
+>>>>>>> +                     }
+>>>>>>> +             }
+>>>>>>> +
+>>>>>>>                  read = strncmp(argv[0], "read", 4) == 0;
+>>>>>>>                  if (read)
+>>>>>>>                          ret = spi_flash_read(flash, offset, len, buf);
+>>>>>>> diff --git a/include/lmb.h b/include/lmb.h
+>>>>>>> index fc2daaa7bf..aee2f9fcda 100644
+>>>>>>> --- a/include/lmb.h
+>>>>>>> +++ b/include/lmb.h
+>>>>>>> @@ -111,6 +111,11 @@ struct lmb *lmb_get(void);
+>>>>>>>      int lmb_push(struct lmb *store);
+>>>>>>>      void lmb_pop(struct lmb *store);
+>>>>>>>
+>>>>>>> +static inline int lmb_read_check(phys_addr_t addr, phys_size_t len)
+>>>>>>> +{
+>>>>>>> +     return lmb_alloc_addr(addr, len) == addr ? 0 : -1;
+>>>>>>
+>>>>>> who frees this? can we free this right after checking?
+>>>>>
+>>>>> It is not required to explicitly free up this memory, as it is not an
+>>>>> actual allocation per-se. Why were these functions called alloc
+>>>>> something, I am not sure. But the point is, if you change the tftp
+>>>>> command code to use this API instead, and then use it after a previous
+>>>>> load, it would not fail.
+>>>>>
+>>>>> -sughosh
+>>>>>
+>>>>
+>>>> Agreed, but the commit message says to "ensure it does not overwrite
+>>>> reserved memory addresses" but the implementation marks the region as
+>>>> reserved in the global memory map and is visible in lmb_dump_all() ,
+>>>> which is not expected, is there really a need to mark the region as
+>>>> reserved.
+>>>
+>>> What can be overwritten, and what cannot be can now be determined from
+>>> the flags. If you check the LMB memory map from the bdinfo command,
+>>> you will see that the regions which cannot be overwritten are now
+>>> being marked with the "no-overwrite" flag. The other LMB memory which
+>>> can be re-used to load multiple different images is being marked with
+>>> the "none" flag. One issue with all this is that currently there is no
+>>> document which explains all these concepts. I will work on adding such
+>>> a document. Thanks.
+>>>
+>>
+>> Yes, documenting the behavior will clear the confusion.
+>>
+>> Thanks and Regards,
+>> Vaishnav
+>>
+>>> -sughosh
+>>>
+>>>>
+>>>> Thanks and Regards,
+>>>> Vaishnav
+>>>>
+>>>>>>
+>>>>>> Thanks and Regards,
+>>>>>> Vaishnav
+>>>>>>
+>>>>>>> +}
+>>>>>>> +
+>>>>>>>      #endif /* __KERNEL__ */
+>>>>>>>
+>>>>>>>      #endif /* _LINUX_LMB_H */
