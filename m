@@ -4,73 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD08FC3ABB2
-	for <u-boot@archiver.kernel.org>; Mon, 16 Sep 2024 09:59:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F176C3ABB2
+	for <u-boot@archiver.kernel.org>; Mon, 16 Sep 2024 09:59:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E91DE88F01;
-	Mon, 16 Sep 2024 11:58:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 46EC588F12;
+	Mon, 16 Sep 2024 11:58:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GNE6+d0O";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ODJGwLeH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3BD1A88EF8; Mon, 16 Sep 2024 11:58:55 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id BD88B8899C; Mon, 16 Sep 2024 11:58:55 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D9D4988EDB
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 11:58:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 65D8488EE1
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 11:58:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=linus.walleij@linaro.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a8d446adf6eso451331266b.2
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 02:58:51 -0700 (PDT)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-378c16a4d3eso3143126f8f.1
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 02:58:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726480731; x=1727085531; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1726480732; x=1727085532; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=EvEkZF2r2AqggnLWTgwzPhL/JoYelLUDEL1aq/7CH+o=;
- b=GNE6+d0OvUvq1QIEWPCNzG7UXgfCVWP4ycbLz2k7uY3D0v3BLCNDm1RxCIOHBrQ6zj
- rk2eFd5Gj1me41X2rXfokeiWJETX49+DZpsvkh9bCuTFkcpP+b5XMcR8/frPOggFFPbi
- 5XNcrYsWFagHBeT7Xo9XDgtSU6ODlDGeXYa3CazBB9NBor/11SywqIdv8kiWM0jwlXtd
- R5NzZHstc79HFXXUjAfURsAtBJ74R6oYNBD0ObPVBezMgp0IXXuBbn/CXIkPBgpjCty3
- RRSR5K1B5kiQvLcgPi3c4M7Spy6Df5FF3evkAbHFD84wPFN9U8gDulhiJ6qwFTV8cesq
- y2Ag==
+ :reply-to; bh=yKuLdsLuyes8mnBA3MrU0R/rfIaNO+BeT5q0k2EEnh0=;
+ b=ODJGwLeH2GhZHvTvHoqHC18ZsTeKGxrCGLKb7H3znKE56zxTHkY/mjaz8WHPDtWCT1
+ j1RZa/P80F3T3/KwRj/Rg/WWV10aPPo2CKVLKdawyLhkBSZvMq7rCWvSBcB0Wp8fFIpT
+ bZW4xclBd6f5fU7zCyxC0BYx/1zZPYR0wYltjrDWdOTXKMLTdk+IqeolUgtLnmo5emHO
+ ldwAu4LDGtipyBJoCS+n2TQZszcyC8mX/hIseVMcT1bOigamfEimEYS59un4zYfPaHLT
+ dgL6P9pswaLs6Df6l/IVwYh2iUg/CAG7E/eUXZ3uhAZYt9hL1OW8WJ3iQ6s+igf4/xxY
+ Ly9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726480731; x=1727085531;
+ d=1e100.net; s=20230601; t=1726480732; x=1727085532;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=EvEkZF2r2AqggnLWTgwzPhL/JoYelLUDEL1aq/7CH+o=;
- b=Xe3Q087agOWyIm2TU2g5ChxwUTlaP6imN7Xsr0y3zeoXTa3nC8of6/dxuHn9caGNC7
- Ipa7COHHHyBa/+VJQk5hT6C/9Wu5VVYap7DjFLHRy4HCedUX844C8UAXsv3Z83peQzaW
- S1GlE7OQPl5yQrg5rgDl23SYPdlVAMoSfo6xmmXGLDT9ygRaW63P+UiYB8lP4s+H0/SX
- NVCnboQxi/WjwbUL1IGPvYyEA3MIf4d9lZ+lHDi1ATE+m0N1nUYtwd4zuQil7HY7uO5P
- Kk4yCx905I8OoytdctIxFYBkAG69IkCKoWT0K0Tu9Qwzt04F9SFjyfWyZjDVuLr6NabD
- +SYg==
-X-Gm-Message-State: AOJu0YyDb5sN/PdB6oOBfkQatO8x3PQX83s2XgmU61icyEGrzN/bA7Jy
- ZjoSh0MN3rolMJv7BBHFVi9CpjKxk0kaOgh3jtdOUft5gSmyLqs4EfripgtcQE5pGIr5XT/bxOH
- b
-X-Google-Smtp-Source: AGHT+IGOIgggKsf+aOs7KjkhXp77teuPvqK31HHa2MU2HkT08WVwPxbFCPd5m8Mw5FKpjJuyJ7fWJA==
-X-Received: by 2002:a17:907:f75a:b0:a86:a90f:3025 with SMTP id
- a640c23a62f3a-a90480ce2a2mr1108324766b.59.1726480730636; 
- Mon, 16 Sep 2024 02:58:50 -0700 (PDT)
+ bh=yKuLdsLuyes8mnBA3MrU0R/rfIaNO+BeT5q0k2EEnh0=;
+ b=YLSSDxambd5CmLIqBH95q0yPvDtz61iGQ+ap+HKh5R5/almKNkKkPiE0iLZw3kAqo5
+ itt2ZxoH7pik1o9In2788nIgDMGnAHaAJP/GxZeLeKmkLuc6I8RjRF/wjO9IW+hCXZMl
+ pzxxKcNXAssBma/PBbBs/XfU129Qn24zvC9HC9h37jGV8gGsZ4UlNXGD7Sjks986ogrx
+ ZZDyiCEuF+OoTmH/q/g45cG9z/IvXIFFxYSbdV2GvCnB7zTt9ARE19tTlWcSIKj/+zdV
+ 61KjJAdpXqmqR4kB6ol/YRCHKcybXyb/nsASXu/6wQ295mTQYqP1m2JKUCgkppZfKwhz
+ 5/Iw==
+X-Gm-Message-State: AOJu0YwreoNUDd0hddzFmsh+YaNMUXW3u+kMSlT7VhK6VQpBye56Q72M
+ nT8d/8xJvM9CzR0ICVgsRFQ3oisLtYTTJ2jx3XMYZQ4debep1UA/MooyJzjIyxQ=
+X-Google-Smtp-Source: AGHT+IG6VnM81aZCJJVkL37Z/u4QU8F37kA4V3wgXKbeGYnaETwn7ABnifGOJiLutBThcoIQJMpmyA==
+X-Received: by 2002:a5d:4585:0:b0:368:7f53:6b57 with SMTP id
+ ffacd0b85a97d-378d61e282dmr8636146f8f.18.1726480731616; 
+ Mon, 16 Sep 2024 02:58:51 -0700 (PDT)
 Received: from lino.lan ([85.235.12.238]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a906109662fsm292862966b.38.2024.09.16.02.58.49
+ a640c23a62f3a-a906109662fsm292862966b.38.2024.09.16.02.58.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Sep 2024 02:58:49 -0700 (PDT)
+ Mon, 16 Sep 2024 02:58:51 -0700 (PDT)
 From: Linus Walleij <linus.walleij@linaro.org>
-Date: Mon, 16 Sep 2024 11:58:45 +0200
-Subject: [PATCH v2 3/7] mtd: rawnand: brcmnand: Fix potential out-of-bounds
- access in oob write
+Date: Mon, 16 Sep 2024 11:58:46 +0200
+Subject: [PATCH v2 4/7] mtd: rawnand: brcmnand: Fix mtd oobsize
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240916-brcmnand-fixes-v2-3-08632f64c8ec@linaro.org>
+Message-Id: <20240916-brcmnand-fixes-v2-4-08632f64c8ec@linaro.org>
 References: <20240916-brcmnand-fixes-v2-0-08632f64c8ec@linaro.org>
 In-Reply-To: <20240916-brcmnand-fixes-v2-0-08632f64c8ec@linaro.org>
 To: u-boot@lists.denx.de, 
@@ -81,7 +79,6 @@ To: u-boot@lists.denx.de,
  Kursad Oney <kursad.oney@broadcom.com>, 
  Philippe Reynes <philippe.reynes@softathome.com>
 Cc: Linus Walleij <linus.walleij@linaro.org>, 
- Florian Fainelli <florian.fainelli@broadcom.com>, 
  Miquel Raynal <miquel.raynal@bootlin.com>
 X-Mailer: b4 0.14.0
 X-BeenThere: u-boot@lists.denx.de
@@ -102,65 +99,68 @@ X-Virus-Status: Clean
 
 From: William Zhang <william.zhang@broadcom.com>
 
-Backport of upstream Linux
-commit 5d53244186c9ac58cb88d76a0958ca55b83a15cd
-"mtd: rawnand: brcmnand: Fix potential out-of-bounds access in oob write"
+Backport from upstream Linux
+commit 60177390fa061c62d156f4a546e3efd90df3c183
+"mtd: rawnand: brcmnand: Fix mtd oobsize"
 
-When the oob buffer length is not in multiple of words, the oob write
-function does out-of-bounds read on the oob source buffer at the last
-iteration. Fix that by always checking length limit on the oob buffer
-read and fill with 0xff when reaching the end of the buffer to the oob
-registers.
+brcmnand controller can only access the flash spare area up to certain
+bytes based on the ECC level. It can be less than the actual flash spare
+area size. For example, for many NAND chip supporting ECC BCH-8, it has
+226 bytes spare area. But controller can only uses 218 bytes. So brcmand
+driver overrides the mtd oobsize with the controller's accessible spare
+area size. When the nand base driver utilizes the nand_device object, it
+resets the oobsize back to the actual flash spare aprea size from
+nand_memory_organization structure and controller may not able to access
+all the oob area as mtd advises.
 
+This change fixes the issue by overriding the oobsize in the
+nand_memory_organization structure to the controller's accessible spare
+area size.
+
+Fixes: a7ab085d7c16 ("mtd: rawnand: Initialize the nand_device object")
 Signed-off-by: William Zhang <william.zhang@broadcom.com>
-Reviewed-by: Florian Fainelli <florian.fainelli@broadcom.com>
 Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
-Link: https://lore.kernel.org/linux-mtd/20230706182909.79151-5-william.zhang@broadcom.com
+Link: https://lore.kernel.org/linux-mtd/20230706182909.79151-6-william.zhang@broadcom.com
 Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
 ---
- drivers/mtd/nand/raw/brcmnand/brcmnand.c | 18 ++++++++++++++++--
- 1 file changed, 16 insertions(+), 2 deletions(-)
+ drivers/mtd/nand/raw/brcmnand/brcmnand.c | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/mtd/nand/raw/brcmnand/brcmnand.c b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
-index 46a4107a83a9..60d34bd21f53 100644
+index 60d34bd21f53..552b239b95ae 100644
 --- a/drivers/mtd/nand/raw/brcmnand/brcmnand.c
 +++ b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
-@@ -1334,19 +1334,33 @@ static int write_oob_to_regs(struct brcmnand_controller *ctrl, int i,
- 			     const u8 *oob, int sas, int sector_1k)
+@@ -25,6 +25,7 @@
+ #include <linux/completion.h>
+ #include <linux/errno.h>
+ #include <linux/log2.h>
++#include <linux/mtd/nand.h>
+ #include <linux/mtd/rawnand.h>
+ #include <asm/processor.h>
+ #include <dm.h>
+@@ -2304,6 +2305,8 @@ static int brcmnand_setup_dev(struct brcmnand_host *host)
  {
- 	int tbytes = sas << sector_1k;
--	int j;
-+	int j, k = 0;
-+	u32 last = 0xffffffff;
-+	u8 *plast = (u8 *)&last;
+ 	struct mtd_info *mtd = nand_to_mtd(&host->chip);
+ 	struct nand_chip *chip = &host->chip;
++	struct nand_device *nanddev = mtd_to_nanddev(mtd);
++	struct nand_memory_organization *memorg = nanddev_get_memorg(nanddev);
+ 	struct brcmnand_controller *ctrl = host->ctrl;
+ 	struct brcmnand_cfg *cfg = &host->hwcfg;
+ 	char msg[128];
+@@ -2331,10 +2334,11 @@ static int brcmnand_setup_dev(struct brcmnand_host *host)
+ 	if (cfg->spare_area_size > ctrl->max_oob)
+ 		cfg->spare_area_size = ctrl->max_oob;
+ 	/*
+-	 * Set oobsize to be consistent with controller's spare_area_size, as
+-	 * the rest is inaccessible.
++	 * Set mtd and memorg oobsize to be consistent with controller's
++	 * spare_area_size, as the rest is inaccessible.
+ 	 */
+ 	mtd->oobsize = cfg->spare_area_size * (mtd->writesize >> FC_SHIFT);
++	memorg->oobsize = mtd->oobsize;
  
- 	/* Adjust OOB values for 1K sector size */
- 	if (sector_1k && (i & 0x01))
- 		tbytes = max(0, tbytes - (int)ctrl->max_oob);
- 	tbytes = min_t(int, tbytes, ctrl->max_oob);
- 
--	for (j = 0; j < tbytes; j += 4)
-+	/*
-+	 * tbytes may not be multiple of words. Make sure we don't read out of
-+	 * the boundary and stop at last word.
-+	 */
-+	for (j = 0; (j + 3) < tbytes; j += 4)
- 		oob_reg_write(ctrl, j,
- 				(oob[j + 0] << 24) |
- 				(oob[j + 1] << 16) |
- 				(oob[j + 2] <<  8) |
- 				(oob[j + 3] <<  0));
-+
-+	/* handle the remaing bytes */
-+	while (j < tbytes)
-+		plast[k++] = oob[j++];
-+
-+	if (tbytes & 0x3)
-+		oob_reg_write(ctrl, (tbytes & ~0x3), (__force u32)cpu_to_be32(last));
-+
- 	return tbytes;
- }
- 
+ 	cfg->device_size = mtd->size;
+ 	cfg->block_size = mtd->erasesize;
 
 -- 
 2.46.0
