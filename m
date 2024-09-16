@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9318CC3ABA2
-	for <u-boot@archiver.kernel.org>; Mon, 16 Sep 2024 14:02:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD78EC3ABB2
+	for <u-boot@archiver.kernel.org>; Mon, 16 Sep 2024 14:07:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 864F588A34;
-	Mon, 16 Sep 2024 16:02:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3E5DD88C41;
+	Mon, 16 Sep 2024 16:07:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OdNY9Wad";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="bqnmOivB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F96B88AE8; Mon, 16 Sep 2024 16:02:35 +0200 (CEST)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
+ id EA0D688CD9; Mon, 16 Sep 2024 16:07:51 +0200 (CEST)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C9CA188A34
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 16:02:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A17488AAC
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 16:07:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=9elements.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-206f9b872b2so40308055ad.3
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 07:02:32 -0700 (PDT)
+ spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-6d5893cd721so24332797b3.0
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 07:07:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1726495351; x=1727100151; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=UYveoKTdz1KtUiQI3yBbyvAfylWrzGk+WlpxpAbuRrE=;
- b=OdNY9Wadsl/q4HzU+Kpv8nCUy706RK+MjivmlmDRNCa21SXV42vMFCsRJHaF7w2ogD
- FZ8lZdnV8QFUe6qQMmPHX5gWTTb5YxUKmGRm42hiM+IHd2TTntvYdNIGmhZg9OySTt9j
- qsNb1/oxUbMnDD1XeDBSAjHMD9oDLmN38sD+xhfW1V/B2I0PwLPG8K5isEH0X7kqc/G8
- 3PMoWmGlogLY6pv8yixpdvH9HHAUpp+lJ4RnqEYHGfp3dvr5gjWRHO0Cdz5xjlKqWzY4
- 3cU2+qyaYZOaSXTiybw+gggzZ3bTy31PHvnfSh8pb/MeAFPj0JTM0o8SJ8ymdkstoLQK
- Il0Q==
+ d=9elements.com; s=google; t=1726495666; x=1727100466; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=B0hh5A0jEmMqVx0H3F4pcFUEX0mxEvgbbMRmFmA44Ys=;
+ b=bqnmOivBC0rbmoIkBxKPxDDrbSF4cFrL64tH5CiALlEpiBl52rXstpK10DoGKUC+uq
+ vnauGxby6WPoJnt8PVvIgj4gNoPYAztqa9egdj/+wCxqJq2vgG3tbLHZbse+S1Wt1uzi
+ dY6OnA4zxjI2BS7elO8qjZvKqaaH6ri5WQyKglmUd7N+RSiCnKOr9KyCsFioeIxtyIKg
+ RVlGrKMLujMlzW2QY+AvEn39pQv6zMdkQSQeDFBEhmTKR/1POydZ1S+COaGcg1cD5KA2
+ dhPYIg7w3TUqRMRDz5JdxbqvaRXvMXS3BvIBcHjlGBZBDyM2zznAgst7+pcsjvxx0kjM
+ 5qkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726495351; x=1727100151;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=UYveoKTdz1KtUiQI3yBbyvAfylWrzGk+WlpxpAbuRrE=;
- b=J8gxSGH56hsbLHbbLnP8Axe9Z7bsIslJeYxSVH+fZxNnYtomylJWNgKOsngGH5QBcO
- F3NDJfRSZMuTR2U0JBdTxcKTJjQKpJysnfDNFDM/M9lB0lNTp2H+tsG8OUcMkJCNjs6a
- NuezGURAuJ8pH7bq4//7FMfxZBQ1W1n1AsaNLmDn1NVR9G+kuI4A83kY7z1Ycn+cRvHc
- LrVEG2EsENgmkPDC9+QhakoNLUr2pJX5euVwyuxQxdYN0uiAqSueZpTjmPd9fVKkJYHm
- bm1yz5/jEug7o225lrbx3fNDA9N6TAfdTSROh//Bbd4NheJ5LC4j/xJZVGgqxeShsRhV
- 0vtQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXOnaflKI7y7XsWzi/mpt1XDaGxWT79v33qi9eiycinUffO0TCcx/RTvDVkgRjdr3sMSU9P2zs=@lists.denx.de
-X-Gm-Message-State: AOJu0YzpnQgzHPVlKb5Do1BtjwnXd93vlkbr0ByDBSKgO7Bdekgarxgy
- arIuwbpyoXQYCkLnTo/FPFYgm0u5R4Z/Ayz2IWrItMrlaHaYcuP1
-X-Google-Smtp-Source: AGHT+IEqN96iD9J/K+daEn5+kmb16qXp4C22vJM8FXmDyVboTzuZ5Q62LVmYdXFbCGU9wWfHGlI0KA==
-X-Received: by 2002:a17:902:d2cf:b0:202:4a35:a803 with SMTP id
- d9443c01a7336-2076e3f1f14mr225846255ad.31.1726495351030; 
- Mon, 16 Sep 2024 07:02:31 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:fe76:c192:884b:c40f])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2079460574esm36201015ad.109.2024.09.16.07.02.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Sep 2024 07:02:30 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: sr@denx.de
-Cc: jh80.chung@samsung.com, u-boot@lists.denx.de,
- Fabio Estevam <festevam@denx.de>
-Subject: [PATCH] da9063: Add watchdog support
-Date: Mon, 16 Sep 2024 11:02:25 -0300
-Message-Id: <20240916140225.2780402-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20230601; t=1726495666; x=1727100466;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=B0hh5A0jEmMqVx0H3F4pcFUEX0mxEvgbbMRmFmA44Ys=;
+ b=eLzP0ZgE5e5ZONwW9sfesVrLxj2rU6NicCzh36HlGNOvLHkHe4nidzqZSWwrJhoWy/
+ c2Xc+qlfLvltlhW+pGgZ0jA6E3nuE7kM8thhHTqi+ivFurOXDeTFyqPFusbvv1PdOYw6
+ /ht0gAhA0ZRb8Jp4A8EAjTPp+z7yssZYmU852BS5O6BuJHIOSGxWkg1FCxnjx5dgivpp
+ liJRiWvvKWDqHHPymkeTCgw5gFwWNgJz5bz6BtsMotVReT3ywaUAUPsbHOHOqBOz0Y0U
+ 1uEM6SjG2R9El7rP3VddFFxq8n6VXknr1v26njd52WIT2rc1b0lACqeaA9cSqHbvfYd0
+ cXqA==
+X-Gm-Message-State: AOJu0YxAl/0pSuiB4c9/LUGwoaTkRgBI2mfNbzCFq/77SQfa7W5hsXr0
+ Th8hgknLZWrpDDCTUoLDvVCHF25SXw5ijg3KJJj+Z+loNe91QMbRKUBx3+U9NioBKibxJIRHgaj
+ Q75pHYeCqGMaxS1dZr9ia1JhtAPSAirsXLezxXQ==
+X-Google-Smtp-Source: AGHT+IE90aJ1zDWVWeob0xFwe6VF1at1ZC6cl5Fq55NyMBanY+hYlEjW2/QUHwALCmebCDH7GtLoeN8jFZP50Cl5XQo=
+X-Received: by 2002:a05:690c:b8e:b0:6c7:a120:e0ec with SMTP id
+ 00721157ae682-6dbcc4bef4emr89296267b3.22.1726495665847; Mon, 16 Sep 2024
+ 07:07:45 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240911062511.494855-1-patrick.rudolph@9elements.com>
+ <20240911062511.494855-29-patrick.rudolph@9elements.com>
+ <CAFLszTj668HSpJL_9=38SjGw=NbUP+iqrmeMY4-bho9_BSdUKw@mail.gmail.com>
+In-Reply-To: <CAFLszTj668HSpJL_9=38SjGw=NbUP+iqrmeMY4-bho9_BSdUKw@mail.gmail.com>
+From: Patrick Rudolph <patrick.rudolph@9elements.com>
+Date: Mon, 16 Sep 2024 16:07:34 +0200
+Message-ID: <CALNFmy2num2rT=J6dFoodRCWdCh+zve3Wy=Ds2rQY0g3neu0Tg@mail.gmail.com>
+Subject: Re: [PATCH v3 28/30] arm: mach-bcm283x: Add ARMV8_MULTIENTRY support
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Tom Rini <trini@konsulko.com>, 
+ Matthias Brugger <mbrugger@suse.com>, Peter Robinson <pbrobinson@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,238 +92,414 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Fabio Estevam <festevam@denx.de>
+On Thu, Sep 12, 2024 at 2:59=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
+e:
+>
+> Hi Patrick,
+>
+> On Wed, 11 Sept 2024 at 00:31, Patrick Rudolph
+> <patrick.rudolph@9elements.com> wrote:
+> >
+> > When ACPI is enabled over FDT the APs cannot be brought out of reset
+> > by the OS using the "FDT spin-table" mechanism, as no FDT is provided
+> > to the OS. The APs must be released out of reset in u-boot and then
+> > brought up in an ACPI compliant fashion.
+> >
+> > When ARMV8_MULTIENTRY is specified the APs are released from reset
+> > and will enter U-Boot after it has been relocated as well.
+> >
+> > By default ARMV8_MULTIENTRY is not selected, keeping existing behaviour=
+.
+> >
+> > TEST: All APs enter U-Boot when run on qemu-system-aarch64 and on
+> >       real hardware.
+> >
+> > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+> > Cc: Matthias Brugger <mbrugger@suse.com>
+> > Cc: Peter Robinson <pbrobinson@gmail.com>
+> > Cc: Tom Rini <trini@konsulko.com>
+> > ---
+> > Changelog v2:
+> > - Drop CPU code from board
+> > - Add CPU driver to release APs from reset
+> >
+> > ---
+> >  arch/arm/Kconfig              |   1 +
+> >  arch/arm/mach-bcm283x/Kconfig |   2 +
+> >  arch/arm/mach-bcm283x/init.c  |   8 ++
+> >  drivers/cpu/Makefile          |   1 +
+> >  drivers/cpu/bcm283x_cpu.c     | 194 ++++++++++++++++++++++++++++++++++
+> >  5 files changed, 206 insertions(+)
+> >  create mode 100644 drivers/cpu/bcm283x_cpu.c
+> >
+> > diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> > index 588e293bf2..17cd3d44b6 100644
+> > --- a/arch/arm/Kconfig
+> > +++ b/arch/arm/Kconfig
+> > @@ -644,6 +644,7 @@ config ARCH_ORION5X
+> >
+> >  config ARCH_BCM283X
+> >         bool "Broadcom BCM283X family"
+> > +       select CPU
+> >         select DM
+> >         select DM_GPIO
+> >         select DM_SERIAL
+> > diff --git a/arch/arm/mach-bcm283x/Kconfig b/arch/arm/mach-bcm283x/Kcon=
+fig
+> > index b3287ce8bc..de783aa8f5 100644
+> > --- a/arch/arm/mach-bcm283x/Kconfig
+> > +++ b/arch/arm/mach-bcm283x/Kconfig
+> > @@ -12,6 +12,7 @@ config BCM2836
+> >  config BCM2837
+> >         bool "Broadcom BCM2837 SoC support"
+> >         depends on ARCH_BCM283X
+> > +       select ARCH_EARLY_INIT_R
+> >
+> >  config BCM2837_32B
+> >         bool "Broadcom BCM2837 SoC 32-bit support"
+> > @@ -29,6 +30,7 @@ config BCM2837_64B
+> >  config BCM2711
+> >         bool "Broadcom BCM2711 SoC support"
+> >         depends on ARCH_BCM283X
+> > +       select ARCH_EARLY_INIT_R
+> >
+> >  config BCM2711_32B
+> >         bool "Broadcom BCM2711 SoC 32-bit support"
+> > diff --git a/arch/arm/mach-bcm283x/init.c b/arch/arm/mach-bcm283x/init.=
+c
+> > index 7a1de22e0a..e6946c6e94 100644
+> > --- a/arch/arm/mach-bcm283x/init.c
+> > +++ b/arch/arm/mach-bcm283x/init.c
+> > @@ -9,6 +9,7 @@
+> >  #include <cpu_func.h>
+> >  #include <init.h>
+> >  #include <dm/device.h>
+> > +#include <dm/uclass.h>
+> >  #include <fdt_support.h>
+> >  #include <asm/global_data.h>
+> >
+> > @@ -199,7 +200,14 @@ int mach_cpu_init(void)
+> >                                                "brcm,bcm2712-pm");
+> >         if (offset > soc)
+> >                 rpi_wdog_base =3D fdt_get_base_address(gd->fdt_blob, of=
+fset);
+> > +       return 0;
+> > +}
+> > +
+> > +int arch_early_init_r(void)
+> > +{
+> > +       struct udevice *dev;
+> >
+> > +       uclass_first_device(UCLASS_CPU, &dev);
+>
+> blank line before final return
+>
+> >         return 0;
+>
+> This is fine, but you should check for an error, right?
+>
+> Also there is print_cpuinfo() which should be called if CONFIG_CPU is
+> enabled...it is a little later in the init sequence. Is it too late
+> for your purposes?
+print_cpuinfo() is called before relocation, so cannot be used to
+invoke the CPU driver.
+It would release the secondary CPUs and they would keep spinning in
+the non relocated U-Boot code.
 
-The DA9063 PMIC is a multi-function device that provides
-regulator, watchdog, RTC, and ON key functionalities.
+>
+> >  }
+> >
+> > diff --git a/drivers/cpu/Makefile b/drivers/cpu/Makefile
+> > index 773395693a..5230408cc0 100644
+> > --- a/drivers/cpu/Makefile
+> > +++ b/drivers/cpu/Makefile
+> > @@ -7,6 +7,7 @@
+> >  obj-$(CONFIG_CPU) +=3D cpu-uclass.o
+> >
+> >
+> > +obj-$(CONFIG_ARCH_BCM283X) +=3D bcm283x_cpu.o
+> >  obj-$(CONFIG_ARCH_BMIPS) +=3D bmips_cpu.o
+> >  obj-$(CONFIG_ARCH_IMX8) +=3D imx8_cpu.o
+> >  obj-$(CONFIG_ARCH_AT91) +=3D at91_cpu.o
+> > diff --git a/drivers/cpu/bcm283x_cpu.c b/drivers/cpu/bcm283x_cpu.c
+> > new file mode 100644
+> > index 0000000000..11dd3008cc
+> > --- /dev/null
+> > +++ b/drivers/cpu/bcm283x_cpu.c
+> > @@ -0,0 +1,194 @@
+> > +// SPDX-License-Identifier: GPL-2.0+
+> > +/*
+> > + * Copyright 2024 9elements GmbH
+> > + */
+> > +
+> > +#include <asm/cache.h>
+> > +#include <asm/io.h>
+> > +#include <asm/global_data.h>
+> > +#include <asm/system.h>
+> > +#include <asm/armv8/cpu.h>
+> > +#include <asm-generic/sections.h>
+> > +#include <cpu.h>
+> > +#include <cpu_func.h>
+> > +#include <dm.h>
+> > +#include <fdt_support.h>
+> > +#include <linux/bitops.h>
+> > +#include <linux/clk-provider.h>
+> > +#include <linux/delay.h>
+> > +
+> > +DECLARE_GLOBAL_DATA_PTR;
+> > +
+> > +static int cpu_bcm_get_desc(const struct udevice *dev, char *buf, int =
+size)
+> > +{
+> > +       struct cpu_plat *plat =3D dev_get_parent_plat(dev);
+> > +       const char *name;
+> > +       int ret;
+> > +
+> > +       if (size < 32)
+> > +               return -ENOSPC;
+> > +
+> > +       if (device_is_compatible(dev, "arm,cortex-a53"))
+> > +               name =3D "A53";
+> > +       else if (device_is_compatible(dev, "arm,cortex-a72"))
+> > +               name =3D "A72";
+> > +       else
+> > +               name =3D "?";
+> > +
+> > +       ret =3D snprintf(buf, size, "Broadcom Cortex-%s at %u MHz",
+> > +                      name, plat->timebase_freq);
+> > +
+> > +       snprintf(buf + ret, size - ret, "\n");
+>
+> Can you put the \n at the end of the previous statement?
+>
+> > +
+> > +       return 0;
+> > +}
+> > +
+> > +static int cpu_bcm_get_info(const struct udevice *dev, struct cpu_info=
+ *info)
+> > +{
+> > +       struct cpu_plat *plat =3D dev_get_parent_plat(dev);
+> > +
+> > +       info->cpu_freq =3D plat->timebase_freq * 1000;
+> > +       info->features =3D BIT(CPU_FEAT_L1_CACHE) | BIT(CPU_FEAT_MMU);
+>
+> blank line
+>
+> > +       return 0;
+> > +}
+> > +
+> > +static int cpu_bcm_get_count(const struct udevice *dev)
+> > +{
+> > +       ofnode node;
+> > +       int num =3D 0;
+> > +
+> > +       ofnode_for_each_subnode(node, dev_ofnode(dev->parent)) {
+> > +               const char *device_type;
+> > +
+> > +               if (!ofnode_is_enabled(node))
+> > +                       continue;
+> > +
+> > +               device_type =3D ofnode_read_string(node, "device_type")=
+;
+> > +               if (!device_type)
+> > +                       continue;
+> > +
+> > +               if (!strcmp(device_type, "cpu"))
+> > +                       num++;
+> > +       }
+>
+> This should really be done in the of_to_plat() method. Store it
+> somewhere so this function can just return it.
+>
+Will add it.
 
-Add support for the DA9063 PMIC RTC functionality.
+> > +
+> > +       return num;
+> > +}
+> > +
+> > +static int cpu_bcm_get_vendor(const struct udevice *dev,  char *buf, i=
+nt size)
+> > +{
+> > +       snprintf(buf, size, "Broadcom");
+>
+> blank line here (please fix globally)
+>
+> > +       return 0;
+> > +}
+> > +
+> > +#ifdef CONFIG_ARM64
+> > +static int cpu_bcm_is_current(struct udevice *dev)
+> > +{
+> > +       struct cpu_plat *plat =3D dev_get_parent_plat(dev);
+> > +
+> > +       if (plat->cpu_id =3D=3D (read_mpidr() & 0xffff))
+> > +               return 1;
+> > +
+> > +       return 0;
+> > +}
+> > +#endif
+> > +
+> > +static int bcm_cpu_on(struct udevice *dev)
+>
+> What does this do? Does it turn on the CPU? Perhaps add a comment?
+>
+> Also, please return 0 for success, -ve error code otherwise
+>
+> > +{
+> > +       ofnode node =3D dev_ofnode(dev);
+> > +       uintptr_t *start_address;
+>
+> ulong start_address
+>
+> > +       u64 release_addr64;
+>
+> release_addr
+>
+> > +       const char *prop;
+> > +
+> > +       if (!ofnode_is_enabled(node))
+> > +               return 0;
+>
+> Hmm, but if it isn't enabled, how would this device be bound?
+>
+> > +
+> > +       prop =3D ofnode_read_string(node, "enable-method");
+> > +       if (!prop || strcmp(prop, "spin-table"))
+> > +               return 1;
+> > +
+> > +       release_addr64 =3D ofnode_read_u64_default(node, "cpu-release-a=
+ddr", ~0ULL);
+> > +       if (release_addr64 =3D=3D ~0ULL)
+> > +               return 1;
+>
+> if (ofnode_read_u64(node, "cpu-release-addr"), &release_addr))
+>    return -EINVAL;
+>
+> > +
+> > +       start_address =3D map_physmem(release_addr64, sizeof(uintptr_t)=
+, MAP_NOCACHE);
+> > +
+> > +       /* Point to U-Boot start */
+> > +       *start_address =3D (uintptr_t)_start;
+> > +       flush_dcache_all();
+>
+> dcache always enabled? Which is fine...just asking
+>
+> > +
+> > +       /* Send an event to wake up the secondary CPU. */
+> > +       asm("dsb        ishst\n"
+> > +           "sev");
+> > +       udelay(10000);
+> > +
+> > +       unmap_physmem(start_address, MAP_NOCACHE);
+> > +       return 0;
+> > +}
+> > +
+> > +static int bcm_init(struct udevice *dev)
+> > +{
+> > +       int ret =3D 0;
+> > +
+> > +       /* The armstub holds the secondary CPUs in a spinloop. When
+>
+> /*
+>  * The
+>
+> > +        * ARMV8_MULTIENTRY is enabled release the secondary CPUs and
+> > +        * let them enter U-Boot as well.
+> > +        */
+> > +       if (CONFIG_IS_ENABLED(ARMV8_MULTIENTRY))
+> > +               ret =3D bcm_cpu_on(dev);
+> > +       return ret;
+>
+> More U-Boot-esk:
+>
+>        if (CONFIG_IS_ENABLED(ARMV8_MULTIENTRY)) {
+>                int ret;
+>
+>                ret =3D bcm_cpu_on(dev);
+>                if (ret)
+>                  return ret;
+>       }
+>
+>    return 0;
+> }
+>
+> > +}
+> > +
+> > +static const struct cpu_ops cpu_bcm_ops =3D {
+> > +       .get_desc       =3D cpu_bcm_get_desc,
+> > +       .get_info       =3D cpu_bcm_get_info,
+> > +       .get_count      =3D cpu_bcm_get_count,
+> > +       .get_vendor     =3D cpu_bcm_get_vendor,
+> > +#ifdef CONFIG_ARM64
+>
+> Can just check this in the function, to avoid an #ifdef
+>
+> > +       .is_current     =3D cpu_bcm_is_current,
+> > +#endif
+> > +};
+> > +
+> > +static const struct udevice_id cpu_bcm_ids[] =3D {
+> > +       { .compatible =3D "arm,cortex-a53" },     /* RPi 3 */
+> > +       { .compatible =3D "arm,cortex-a72" },     /* RPi 4 */
+> > +       { }
+> > +};
+> > +
+> > +static int cpu_bcm_bind(struct udevice *dev)
+> > +{
+> > +       struct cpu_plat *plat =3D dev_get_parent_plat(dev);
+> > +
+> > +       plat->cpu_id =3D dev_read_addr(dev);
+>
+> You should not bring up the CPUs so early. The bind() method is just
+> for binding. Can this move to probe() ?
+This took me a while.
+The main issue here was that  uclass_first_device(UCLASS_CPU, &dev); only p=
+robes
+the first CPU, but not the others. That's why I used bind() in the first pl=
+ace.
 
-Based on the 6.11 kernel drivers/watchdog/da9063_wdt.c driver.
-
-Signed-off-by: Fabio Estevam <festevam@denx.de>
----
- drivers/power/pmic/da9063.c   |  12 ++-
- drivers/watchdog/Kconfig      |   6 ++
- drivers/watchdog/Makefile     |   1 +
- drivers/watchdog/da9063-wdt.c | 142 ++++++++++++++++++++++++++++++++++
- 4 files changed, 159 insertions(+), 2 deletions(-)
- create mode 100644 drivers/watchdog/da9063-wdt.c
-
-diff --git a/drivers/power/pmic/da9063.c b/drivers/power/pmic/da9063.c
-index 7bd3df39142..59c65702863 100644
---- a/drivers/power/pmic/da9063.c
-+++ b/drivers/power/pmic/da9063.c
-@@ -7,6 +7,9 @@
- #include <fdtdec.h>
- #include <errno.h>
- #include <dm.h>
-+#include <dm/device-internal.h>
-+#include <dm/device_compat.h>
-+#include <dm/lists.h>
- #include <i2c.h>
- #include <log.h>
- #include <linux/printk.h>
-@@ -86,6 +89,7 @@ static int da9063_read(struct udevice *dev, uint reg, uint8_t *buff, int len)
- static int da9063_bind(struct udevice *dev)
- {
- 	ofnode regulators_node;
-+	struct driver *drv;
- 	int children;
- 
- 	regulators_node = dev_read_subnode(dev, "regulators");
-@@ -101,8 +105,12 @@ static int da9063_bind(struct udevice *dev)
- 	if (!children)
- 		debug("%s: %s - no child found\n", __func__, dev->name);
- 
--	/* Always return success for this device */
--	return 0;
-+	drv = lists_driver_lookup_name("da9063-wdt");
-+	if (!drv)
-+		return 0;
-+
-+	return device_bind_with_driver_data(dev, drv, "da9063-wdt", dev->driver_data,
-+					    dev_ofnode(dev), &dev);
- }
- 
- static int da9063_probe(struct udevice *dev)
-diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
-index 0c3e9913318..90bc5653ee3 100644
---- a/drivers/watchdog/Kconfig
-+++ b/drivers/watchdog/Kconfig
-@@ -169,6 +169,12 @@ config WDT_CORTINA
- 	  This driver support all CPU ISAs supported by Cortina
- 	  Access CAxxxx SoCs.
- 
-+config WDT_DA9063
-+	bool "DA9063 watchdog timer support"
-+	depends on WDT && DM_PMIC_DA9063
-+	help
-+	  Enable support for the watchdog timer in Dialog DA9063.
-+
- config WDT_GPIO
- 	bool "External gpio watchdog support"
- 	depends on WDT
-diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
-index 7b39adcf0ff..6b564b7f96d 100644
---- a/drivers/watchdog/Makefile
-+++ b/drivers/watchdog/Makefile
-@@ -29,6 +29,7 @@ obj-$(CONFIG_WDT_BOOKE) += booke_wdt.o
- obj-$(CONFIG_WDT_CORTINA) += cortina_wdt.o
- obj-$(CONFIG_WDT_ORION) += orion_wdt.o
- obj-$(CONFIG_WDT_CDNS) += cdns_wdt.o
-+obj-$(CONFIG_WDT_DA9063) += da9063-wdt.o
- obj-$(CONFIG_WDT_FTWDT010) += ftwdt010_wdt.o
- obj-$(CONFIG_WDT_GPIO) += gpio_wdt.o
- obj-$(CONFIG_WDT_MAX6370) += max6370_wdt.o
-diff --git a/drivers/watchdog/da9063-wdt.c b/drivers/watchdog/da9063-wdt.c
-new file mode 100644
-index 00000000000..c9210a106d3
---- /dev/null
-+++ b/drivers/watchdog/da9063-wdt.c
-@@ -0,0 +1,142 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+//
-+// DA9063 watchdog driver
-+//
-+// Copyright (c) 2024 Fabio Estevam <festevam@denx.de>
-+//
-+
-+#include <dm.h>
-+#include <dm/device-internal.h>
-+#include <dm/device_compat.h>
-+#include <dm/lists.h>
-+#include <i2c.h>
-+#include <linux/delay.h>
-+#include <wdt.h>
-+
-+#define	DA9063_REG_CONTROL_D		0x11
-+/* DA9063_REG_CONTROL_D (addr=0x11) */
-+#define	DA9063_TWDSCALE_MASK		0x0
-+#define DA9063_TWDSCALE_DISABLE		0
-+#define	DA9063_REG_CONTROL_F		0x13
-+/* DA9063_REG_CONTROL_F (addr=0x13) */
-+#define	DA9063_WATCHDOG			0x01
-+#define	DA9063_SHUTDOWN			0x02
-+
-+/*
-+ * Watchdog selector to timeout in seconds.
-+ *   0: WDT disabled;
-+ *   others: timeout = 2048 ms * 2^(TWDSCALE-1).
-+ */
-+static const unsigned int wdt_timeout[] = { 0, 2, 4, 8, 16, 32, 65, 131 };
-+
-+#define DA9063_TWDSCALE_DISABLE		0
-+#define DA9063_TWDSCALE_MIN		1
-+#define DA9063_TWDSCALE_MAX		(ARRAY_SIZE(wdt_timeout) - 1)
-+
-+static unsigned int da9063_wdt_timeout_to_sel(unsigned int secs)
-+{
-+	unsigned int i;
-+
-+	for (i = DA9063_TWDSCALE_MIN; i <= DA9063_TWDSCALE_MAX; i++) {
-+		if (wdt_timeout[i] >= secs)
-+			return i;
-+	}
-+
-+	return DA9063_TWDSCALE_MAX;
-+}
-+
-+static int da9063_read(struct udevice *dev, uint reg, uint8_t *buff, int len)
-+{
-+	return dm_i2c_read(dev->parent, reg, buff, len);
-+}
-+
-+static int da9063_write(struct udevice *dev, uint reg, const u8 *buff, int len)
-+{
-+	return dm_i2c_write(dev->parent, reg, buff, len);
-+}
-+
-+static int da9063_wdt_disable_timer(struct udevice *dev)
-+{
-+	char val;
-+
-+	da9063_read(dev, DA9063_REG_CONTROL_D, &val, 1);
-+	val &= ~DA9063_TWDSCALE_MASK;
-+	val |= DA9063_TWDSCALE_DISABLE;
-+	da9063_write(dev, DA9063_REG_CONTROL_D, &val, 1);
-+
-+	return 0;
-+}
-+
-+static int da9063_wdt_update_timeout(struct udevice *dev, unsigned int timeout)
-+{
-+	unsigned int regval;
-+	char val;
-+	int ret;
-+
-+	/*
-+	 * The watchdog triggers a reboot if a timeout value is already
-+	 * programmed because the timeout value combines two functions
-+	 * in one: indicating the counter limit and starting the watchdog.
-+	 * The watchdog must be disabled to be able to change the timeout
-+	 * value if the watchdog is already running. Then we can set the
-+	 * new timeout value which enables the watchdog again.
-+	 */
-+	ret = da9063_wdt_disable_timer(dev);
-+	if (ret)
-+		return ret;
-+
-+	udelay(300);
-+
-+	regval = da9063_wdt_timeout_to_sel(timeout);
-+
-+	da9063_read(dev, DA9063_REG_CONTROL_D, &val, 1);
-+	val &= ~DA9063_TWDSCALE_MASK;
-+	val |= regval;
-+	da9063_write(dev, DA9063_REG_CONTROL_D, &val, 1);
-+
-+	return 0;
-+}
-+
-+static int da9063_wdt_start(struct udevice *dev, u64 timeout, ulong flags)
-+{
-+	return da9063_wdt_update_timeout(dev, timeout);
-+}
-+
-+static int da9063_wdt_stop(struct udevice *dev)
-+{
-+	return da9063_wdt_disable_timer(dev);
-+}
-+
-+static int da9063_wdt_reset(struct udevice *dev)
-+{
-+	char val = DA9063_WATCHDOG;
-+
-+	return da9063_write(dev, DA9063_REG_CONTROL_F, &val, 1);
-+}
-+
-+static int da9063_wdt_expire_now(struct udevice *dev, ulong flags)
-+{
-+	char val = DA9063_SHUTDOWN;
-+
-+	return da9063_write(dev, DA9063_REG_CONTROL_F, &val, 1);
-+}
-+
-+static const struct wdt_ops da9063_wdt_ops = {
-+	.start = da9063_wdt_start,
-+	.stop = da9063_wdt_stop,
-+	.reset = da9063_wdt_reset,
-+	.expire_now = da9063_wdt_expire_now,
-+};
-+
-+static const struct udevice_id da9063_wdt_ids[] = {
-+	{ .compatible = "dlg,da9063-watchdog", },
-+	{}
-+};
-+
-+U_BOOT_DRIVER(da9063_wdt) = {
-+	.name = "da9063-wdt",
-+	.id = UCLASS_WDT,
-+	.of_match = da9063_wdt_ids,
-+	.ops = &da9063_wdt_ops,
-+	.flags = DM_FLAG_PROBE_AFTER_BIND,
-+};
--- 
-2.34.1
-
+>
+> > +
+> > +       return bcm_init(dev);
+> > +}
+> > +
+> > +static int bcm_cpu_probe(struct udevice *dev)
+> > +{
+> > +       struct cpu_plat *plat =3D dev_get_parent_plat(dev);
+> > +       struct clk clk;
+> > +       int ret;
+> > +
+> > +       /* Get a clock if it exists */
+> > +       ret =3D clk_get_by_index(dev, 0, &clk);
+> > +       if (!ret) {
+> > +               ret =3D clk_enable(&clk);
+> > +               if (ret && (ret !=3D -ENOSYS || ret !=3D -EOPNOTSUPP))
+> > +                       return ret;
+> > +               ret =3D clk_get_rate(&clk);
+> > +               if (!IS_ERR_VALUE(ret))
+> > +                       plat->timebase_freq =3D ret;
+>
+> If you get an error, you must return it
+>
+> > +       }
+> > +
+> > +       return ret;
+> > +}
+> > +
+> > +U_BOOT_DRIVER(cpu_bcm_drv) =3D {
+> > +       .name           =3D "bcm283x_cpu",
+> > +       .id             =3D UCLASS_CPU,
+> > +       .of_match       =3D cpu_bcm_ids,
+> > +       .ops            =3D &cpu_bcm_ops,
+> > +       .probe          =3D bcm_cpu_probe,
+> > +       .bind           =3D cpu_bcm_bind,
+> > +       .flags          =3D 0,
+> > +};
+> > --
+> > 2.46.0
+> >
+>
+> Regards,
+> Simon
