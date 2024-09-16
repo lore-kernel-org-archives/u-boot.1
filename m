@@ -4,83 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8197AC3ABB2
-	for <u-boot@archiver.kernel.org>; Mon, 16 Sep 2024 09:23:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B55FDC3ABB2
+	for <u-boot@archiver.kernel.org>; Mon, 16 Sep 2024 09:24:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69B1188413;
-	Mon, 16 Sep 2024 11:23:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3970988EA7;
+	Mon, 16 Sep 2024 11:24:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xPa05KvE";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FdjkgqWK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 145A788DEB; Mon, 16 Sep 2024 11:22:57 +0200 (CEST)
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [IPv6:2a00:1450:4864:20::232])
+ id B9CB288EA9; Mon, 16 Sep 2024 11:24:07 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA17188356
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 11:22:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5250388EA4
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 11:24:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=linus.walleij@linaro.org
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-2f760f7e25bso40040771fa.2
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 02:22:51 -0700 (PDT)
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-5c260b19f71so4811961a12.1
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 02:24:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726478571; x=1727083371; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jHW5iWR+K6+n3fW5PlYgzXBOHYi9fX1kl5Qhxy52i0g=;
- b=xPa05KvEqpQCnGX0dGZEBBuCkuzTBU18DvUlwDGwpbCQAyZu4Ef30wrdir//lK4BI7
- MaB0NWbMxYnWW9Lp6r8jwJgAZ0uvzcgRUJvbCDfPh2EqU3bdVjWtfBHOl47a4t/4CW3W
- nrH+imGBVqxPA4EDWTKbNqZXlPMFXfWw7J3Omge3RmiCDNlKAcBFTbJ8KoD1M4Jl84dg
- c+S0gl7r/FR7y5V7NrzOVdIpY7B36pwlcOlAMiwZGSQ2I70MTQ2huYDZeJoW8mBqNnKp
- DGKS+RLniMu0igLEH5n7jjzTDJ24avTLppnql20YUvSQ0bbLOn73Ypwi7njDWDVQM7qv
- hPpA==
+ d=linaro.org; s=google; t=1726478645; x=1727083445; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=p9c5gcFZeZivlN7C64xhH9LcaBoq+DWkXXD1evcaEVU=;
+ b=FdjkgqWKb8x+kObS+fR/rdXZrVSDDSCQaoxK1FaZuRUDseKdRcsQVZFIAgcRJh/bYG
+ uvDGqk3uqw+bw8HzYE/nENZgbbuP9wiXeTLnXvB+IDjS8pQUFmZIGXsio1h42ZF8ZcqF
+ 7TZ1MLD/jYJxbe9aeM0lTfBstwS1+7WH6Q17QtUju0QhaGNmcmGIJi1235RnzYcj862u
+ BS2Ji9W6dkkl4KoepSR0//5DucdDZ2JGt9Hmx4St/v1sAcVwBqTnL72N6vmfAWYQyoFc
+ f3+YWaGYcJrrkcdO1wvn1gI4fZOPk14Ql1VOZLfiSpU6kTd9w9h6OZeKIIJlm/s1BY2C
+ OySw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726478571; x=1727083371;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=jHW5iWR+K6+n3fW5PlYgzXBOHYi9fX1kl5Qhxy52i0g=;
- b=EI6wBh0mq28OG7dsOUBaBqzJlvTcaIAuZxpaaPpfCSqgHsNdlIzJQd0ctDM9ukx3fK
- iPj0PwtxmL3YvTVuDSXU4UdfDOavxkDedK5Y7hoq4XhJIIN/CzyzRWs2A+eCay2ELE73
- hA9eh3WxOWEgA1yBhBKfIjODl5/nXsRT6wUVpqsLAvb3mRrNuyBF0znmGG/h/FE+wu+G
- 8I0ZnH4gMZIT6vx3573K4yd3h190cAqqbF3Qs/hJ0GxfsIVj12IzsRKsEehr6xOBLOxM
- g5Oqm7Lw0eFUCa4xclsTpf4SEa8VH6VIqWOBLrSbDBg8A6XMYB8zdvMfSNbqPSBFaPKb
- cw6g==
-X-Gm-Message-State: AOJu0YyAP8Vka/WgnWKF3ss8VxkdyEiP2iHQDJ5CryTREFgJ7W0DWhuK
- ho3QViKqDe4gwTfAKabY3GSEryaJP9rXqhiXLNVxEAB+9jQvipxMwipAd4Zex1XdpmZqnwfQyN8
- vymR1Rol6nAEqiqJ+Cpjm8KnP5tULO2eD2Ez1Rw==
-X-Google-Smtp-Source: AGHT+IGxE0zG+gFOHYS1/tOKWBZJOVqQ7sTyWkK/2fBvL77j9x+g/cNhp3luNZX7heng15cLaCH39pjVnAvoLgpkwy8=
-X-Received: by 2002:a2e:f19:0:b0:2f6:6029:c63e with SMTP id
- 38308e7fff4ca-2f787ed4d92mr56873931fa.23.1726478570023; Mon, 16 Sep 2024
- 02:22:50 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1726478645; x=1727083445;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=p9c5gcFZeZivlN7C64xhH9LcaBoq+DWkXXD1evcaEVU=;
+ b=U7/mqDf/Z1BRmW4kyBhcTlRJKTC87iR0semvRgFzFmatGslCZWnND8rn3q8/zqAjw6
+ jad3ZCH7xpxAqnSC3MXF2689laJeLDvmvCbUCdLUh2gUTE1vwOO7ucsGlbbYyxpe2UHS
+ MWKS+iHCT2F+HXTMQBjg/JY7CZi+rujHAXjcYxGE7wjd3ipXTbGMUqxCoyYEzzW9YSM1
+ beTP7YpOl2lqw6GNfiwvOAhAn/h2ARxXqOOc5SH6mSlB3G9BU5HIiDxJtr4bPgz1NQUQ
+ 4xeGRGnSKkHovTUQLnDzKdyPNG2Z3r/ceRelrShJRc2Y9GpqyNGAQV8+mR8oQY5w/GMJ
+ TLow==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWlZ9f0x//1mJignbEr30a5hcx7jcJM7qhbG9w7yn1zY/J6u7X1EOd3axZ8OkYYo/m/Em5zxyg=@lists.denx.de
+X-Gm-Message-State: AOJu0YzskIpARjf0o9ZEukugy8mNbJrlk3Jxsp/4d/WPzFJYuohcQ55F
+ tlsnxEBC2zLbBaAp1ARy/efb+vSS7h6/XnmL1/wWIr7GqstIGpq3jJspmjqiZewudpwYAQtezOK
+ CecGnpTgXSz5GTApVNW+lFUvIrxMtji27Yi7y5w==
+X-Google-Smtp-Source: AGHT+IFknqgJ5/VLm6JOHWx7bVL0MGUHv64YyWAwM0ZOOQfiJ3G+UQjeUTUWOSZd4NwdTXnbIFlVI8F6q+fT5KbJwXA=
+X-Received: by 2002:a05:6402:13cb:b0:5c3:c3f5:592e with SMTP id
+ 4fb4d7f45d1cf-5c413e12400mr13714669a12.12.1726478644556; Mon, 16 Sep 2024
+ 02:24:04 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240911-brcmnand-fixes-v1-0-be112a20aaf1@linaro.org>
- <d27e92a5ccecc302a1b2ca7ff55b8c3b@mail.gmail.com>
- <CACRpkdYxecZsgoUipPR8DgcNPKp-3o-h=Qseq71W8vceV4eXsQ@mail.gmail.com>
- <4aa2c921dddb69a5a4964d5446f37695@mail.gmail.com>
-In-Reply-To: <4aa2c921dddb69a5a4964d5446f37695@mail.gmail.com>
-From: Linus Walleij <linus.walleij@linaro.org>
-Date: Mon, 16 Sep 2024 11:22:38 +0200
-Message-ID: <CACRpkdYBFAhNaMVSQDCiMsVpBA3tZOu7nJd2kaTSPHKX8bTTbw@mail.gmail.com>
-Subject: Re: [PATCH 0/7] mtd: nand: brcmnand: Backported fixes from Linux
-To: William Zhang <william.zhang@broadcom.com>
-Cc: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Anand Gore <anand.gore@broadcom.com>, 
- Kursad Oney <kursad.oney@broadcom.com>,
- Philippe Reynes <philippe.reynes@softathome.com>, 
- Florian Fainelli <florian.fainelli@broadcom.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Kamal Dasu <kamal.dasu@broadcom.com>, David Regan <dregan@broadcom.com>
+References: <20240913073251.2286529-2-prasad.kummari@amd.com>
+ <c9e22782-8645-420c-9017-18f3aafcbb12@ti.com>
+ <CADg8p95RA_iOUYmjLaED52C7ebGPuor=Zd+16zmVvDiEV3aesw@mail.gmail.com>
+ <acca0730-1bb5-4ea5-9666-9271110ddb43@ti.com>
+In-Reply-To: <acca0730-1bb5-4ea5-9666-9271110ddb43@ti.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Mon, 16 Sep 2024 14:53:53 +0530
+Message-ID: <CADg8p94qiashAzNvLJHxgf-msMDNhOiSPyVA_JOAtesO96sYdA@mail.gmail.com>
+Subject: Re: [PATCH v4] cmd: sf: prevent overwriting the reserved memory
+To: Vaishnav Achath <vaishnav.a@ti.com>
+Cc: Prasad Kummari <prasad.kummari@amd.com>, u-boot@lists.denx.de, git@amd.com,
+ michal.simek@amd.com, venkatesh.abbarapu@amd.com, padmarao.begari@amd.com, 
+ git@xilinx.com, jagan@amarulasolutions.com, n-francis@ti.com, d-gole@ti.com, 
+ Vignesh Raghavendra <vigneshr@ti.com>, "Kumar, Udit" <u-kumar1@ti.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,30 +93,189 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Sep 16, 2024 at 6:45=E2=80=AFAM William Zhang
-<william.zhang@broadcom.com> wrote:
+On Mon, 16 Sept 2024 at 14:22, Vaishnav Achath <vaishnav.a@ti.com> wrote:
+>
+> Hi Sughosh,
+>
+> On 16/09/24 12:13, Sughosh Ganu wrote:
+> > On Mon, 16 Sept 2024 at 11:47, Vaishnav Achath <vaishnav.a@ti.com> wrote:
+> >>
+> >> Hi Prasad,
+> >>
+> >> On 13/09/24 13:02, Prasad Kummari wrote:
+> >>> Added LMB API to prevent SF command from overwriting reserved
+> >>> memory areas. The current SPI code does not use LMB APIs for
+> >>> loading data into memory addresses. To resolve this, LMB APIs
+> >>> were added to check the load address of an SF command and ensure it
+> >>> does not overwrite reserved memory addresses. Similar checks are
+> >>> used in TFTP, serial load, and boot code to prevent overwriting
+> >>> reserved memory.
+> >>>
+> >>> Signed-off-by: Prasad Kummari <prasad.kummari@amd.com>
+> >>> ---
+> >>> Changes in V4:
+> >>> - Removed do_spi_read_lmb_check().
+> >>> - Added the lmb_read_check() function in lmb.c, making it reusable for
+> >>>     NAND, MMC, etc.
+> >>> - Addressed review comments.
+> >>>
+> >>> Changes in V3:
+> >>> - Removed lmb_init_and_reserve() as part of latest LMB series.
+> >>> - Error message moved to one place.
+> >>> - lmb_alloc_addr() is not required because the given memory address is
+> >>>     being checked to ensure it is free or not.
+> >>>
+> >>> Changes in V2:
+> >>> - Rebased the code changes on top of the next branch.
+> >>>
+> >>> UT:
+> >>> Tested on Versal NET board.
+> >>>
+> >>> relocaddr   = 0x000000007febc000
+> >>>
+> >>> Versal NET> sf read 0x000000007febc000 0x0 0x40
+> >>> device 0 offset 0x0, size 0x40
+> >>> ERROR: trying to overwrite reserved memory...
+> >>> Versal NET> sf write 0x000000007febc000 0x0 0x40
+> >>> device 0 offset 0x0, size 0x40
+> >>> ERROR: trying to overwrite reserved memory...
+> >>>
+> >>> Versal NET> fdt print /reserved-memory
+> >>> reserved-memory {
+> >>>        ranges;
+> >>>        #size-cells = <0x00000002>;
+> >>>        #address-cells = <0x00000002>;
+> >>>        tf-a {
+> >>>                reg = <0x00000000 0x70000000 0x00000000 0x00050000>;
+> >>>                no-map;
+> >>>        };
+> >>> };
+> >>> Versal NET> sf read 0x70000000 0x0 0x40
+> >>> device 0 offset 0x0, size 0x40
+> >>> ERROR: trying to overwrite reserved memory...
+> >>> Versal NET> sf write 0x70000000 0x0 0x40
+> >>> device 0 offset 0x0, size 0x40
+> >>> ERROR: trying to overwrite reserved memory...
+> >>> Versal NET> sf erase 0x0 0x1000000;mw.b 0x8000 aabbccdd 0x1000000;sf
+> >>> write 0x8000 0x0 0x1000000;mw.b 0x8008000 0x0 0x1000000;sf read
+> >>> 0x8008000 0x0 0x1000000;cmp.b 0x8000 0x8008000 0x01000000
+> >>> SF: 16777216 bytes @ 0x0 Erased: OK
+> >>> device 0 offset 0x0, size 0x1000000
+> >>> SF: 16777216 bytes @ 0x0 Written: OK
+> >>> device 0 offset 0x0, size 0x1000000
+> >>> SF: 16777216 bytes @ 0x0 Read: OK
+> >>> Total of 16777216 byte(s) were the same
+> >>>
+> >>>    cmd/sf.c      | 8 ++++++++
+> >>>    include/lmb.h | 5 +++++
+> >>>    2 files changed, 13 insertions(+)
+> >>>
+> >>> diff --git a/cmd/sf.c b/cmd/sf.c
+> >>> index f43a2e08b3..08e364e191 100644
+> >>> --- a/cmd/sf.c
+> >>> +++ b/cmd/sf.c
+> >>> @@ -10,6 +10,7 @@
+> >>>    #include <div64.h>
+> >>>    #include <dm.h>
+> >>>    #include <log.h>
+> >>> +#include <lmb.h>
+> >>>    #include <malloc.h>
+> >>>    #include <mapmem.h>
+> >>>    #include <spi.h>
+> >>> @@ -317,6 +318,13 @@ static int do_spi_flash_read_write(int argc, char *const argv[])
+> >>>                        strncmp(argv[0], "write", 5) == 0) {
+> >>>                int read;
+> >>>
+> >>> +             if (CONFIG_IS_ENABLED(LMB)) {
+> >>> +                     if (lmb_read_check(addr, len)) {
+> >>
+> >> Even though the function is named lmb_read_check(), it performs an alloc
+> >> which is never freed, thus it makes it difficult for other callers to
+> >> use the same region for other purposes (some callers use
+> >> lmb_get_free_size() ), as mentioned in the commit message the check is
+> >> only to prevent sf from overwriting reserved region, but it looks like
+> >> this patch makes the load region also as reserved, is this necessary?
+> >
+> > Like I mentioned in my other reply, using a check for lmb_alloc_addr()
+> > allows for memory re-use, which is the behaviour that a large number
+> > of use cases rely on -- if you go through the test scripts, it is
+> > assumed that memory re-use is allowed. That there is no need to
+> > explicitly free up memory, and that has been how the LMB memory has
+> > been used historically. So it is allowed to use some address to load
+> > an image to that address, and then use the same address to load a
+> > different image. The LMB rework series does keep this behaviour
+> > consistent. So it would be better to change the behaviour of the tftp
+> > command to use the same API. I was planning on working on this
+> > cleanup. If you want, you can take it up.
+> >
+>
+> Please let me know if you are planning to work on this in the coming few
+> days, otherwise I can pick it up as we have platforms failing due to this.
 
-> Yes we have it working.  And your patches works too after fixing two
-> Issues that I will comment on the specific patch.
+I can take this up. Will keep you on Cc so that you can test the
+patches on your boards.
 
-Yay!
+>
+> >>
+> >>
+> >>> +                             printf("ERROR: trying to overwrite reserved memory...\n");
+> >>> +                             return CMD_RET_FAILURE;
+> >>> +                     }
+> >>> +             }
+> >>> +
+> >>>                read = strncmp(argv[0], "read", 4) == 0;
+> >>>                if (read)
+> >>>                        ret = spi_flash_read(flash, offset, len, buf);
+> >>> diff --git a/include/lmb.h b/include/lmb.h
+> >>> index fc2daaa7bf..aee2f9fcda 100644
+> >>> --- a/include/lmb.h
+> >>> +++ b/include/lmb.h
+> >>> @@ -111,6 +111,11 @@ struct lmb *lmb_get(void);
+> >>>    int lmb_push(struct lmb *store);
+> >>>    void lmb_pop(struct lmb *store);
+> >>>
+> >>> +static inline int lmb_read_check(phys_addr_t addr, phys_size_t len)
+> >>> +{
+> >>> +     return lmb_alloc_addr(addr, len) == addr ? 0 : -1;
+> >>
+> >> who frees this? can we free this right after checking?
+> >
+> > It is not required to explicitly free up this memory, as it is not an
+> > actual allocation per-se. Why were these functions called alloc
+> > something, I am not sure. But the point is, if you change the tftp
+> > command code to use this API instead, and then use it after a previous
+> > load, it would not fail.
+> >
+> > -sughosh
+> >
+>
+> Agreed, but the commit message says to "ensure it does not overwrite
+> reserved memory addresses" but the implementation marks the region as
+> reserved in the global memory map and is visible in lmb_dump_all() ,
+> which is not expected, is there really a need to mark the region as
+> reserved.
 
->  You will need to
-> enable the  NAND related configurations and the nand dts node.
+What can be overwritten, and what cannot be can now be determined from
+the flags. If you check the LMB memory map from the bdinfo command,
+you will see that the regions which cannot be overwritten are now
+being marked with the "no-overwrite" flag. The other LMB memory which
+can be re-used to load multiple different images is being marked with
+the "none" flag. One issue with all this is that currently there is no
+document which explains all these concepts. I will work on adding such
+a document. Thanks.
 
-Aha maybe I simply missed the DTS node...
+-sughosh
 
-> You can use existing dts node to set the specific ecc level, oob size and
-> ecc step size.  Or use the new automatically detection from the strap
-> property brcm,nand-ecc-use-strap that I upstreamed to linux.
-
-I was planning to used the strap, which is ... what we should have been
-doing all the time. Oh well, no turning back time I guess. Maybe we
-can fix a lot of DTS:es to use the strap though?
-
-> What SoC do you use?
-
-This is on BCM6846.
-
-Thanks William!
-Linus
+>
+> Thanks and Regards,
+> Vaishnav
+>
+> >>
+> >> Thanks and Regards,
+> >> Vaishnav
+> >>
+> >>> +}
+> >>> +
+> >>>    #endif /* __KERNEL__ */
+> >>>
+> >>>    #endif /* _LINUX_LMB_H */
