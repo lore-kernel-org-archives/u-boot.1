@@ -4,74 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C31A4C3ABA2
-	for <u-boot@archiver.kernel.org>; Mon, 16 Sep 2024 15:41:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B680C3ABB2
+	for <u-boot@archiver.kernel.org>; Mon, 16 Sep 2024 15:41:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8C0F88D33;
-	Mon, 16 Sep 2024 17:41:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5C72288EEB;
+	Mon, 16 Sep 2024 17:41:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CwCfdqZ8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="F9gUZSdd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F6D487DC7; Mon, 16 Sep 2024 17:41:32 +0200 (CEST)
-Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
- [IPv6:2607:f8b0:4864:20::f2e])
+ id 8961388ED9; Mon, 16 Sep 2024 17:41:36 +0200 (CEST)
+Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
+ [IPv6:2607:f8b0:4864:20::72f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA9AD88DDE
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 17:41:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6347A87DC7
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 17:41:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2e.google.com with SMTP id
- 6a1803df08f44-6bf92f96f83so30200346d6.3
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 08:41:29 -0700 (PDT)
+Received: by mail-qk1-x72f.google.com with SMTP id
+ af79cd13be357-7a9c3a4e809so316638985a.2
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 08:41:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726501288; x=1727106088; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1726501292; x=1727106092; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mYulyooZWDfCbK+WWaeH+Q20XCMAlcO3BFE1xBWRWDc=;
- b=CwCfdqZ8UoHiEMdMSCUymEmjErdfL8WGZzPL7TRjpquot2MCkC6zLR6PxytXmmwMZh
- OASPVeJZANG//Lxe6BU3bHfRkV1N8yTWsWTOLcByFsGSkcgSKL/csPrBLn5p49X3ociy
- /oUg0cV/yvSmef8P+dwBuvJ8CPrSBs6uIwxlg=
+ bh=UD0LyiDwxju/GX0u4ElVAJ/9aIhwrpfl8zDCEnggOb4=;
+ b=F9gUZSdd5PAjjrwJbt4usazZ2Ez1R7xio/+7Ak6pb5Wcj5BQs0c6UaKv+gztNf8/dK
+ OaA/OL8IKbAs1qyDF98piK8s+rvjdzr3R3KiHflCrv5YxCbBX2u+GSO8eEtJZFDtCTh0
+ JFNaOMDDDl0cKNesNKev9mP3vY2KmyfVFdz6I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726501288; x=1727106088;
+ d=1e100.net; s=20230601; t=1726501292; x=1727106092;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mYulyooZWDfCbK+WWaeH+Q20XCMAlcO3BFE1xBWRWDc=;
- b=IBE+T3EqofS3pKOGWRwmgGDtXC5wJldVowJyDKJ6Wpfqe7aQ3Cwv1MPN6LGuDYCQjO
- a3KSFdiZAYceOG8WvX2+lXJvrwCOiQpiRaz1Djd0nfmlIYPZnCAo6s8RqIPBSY2uLgqg
- DmPjsTc9P3q76HO1LjLyVVLXE54YZ6WpWZtn2IkJ5FbaBfSZH6eUJiIYVy0nJRRverQN
- LB0BFlse6RQJmY+k3dXIaWQLESF5JJI27tmK0sGsJt/pS5puAmKwZpqx6y6omjuTY0Gj
- AAMvzS0YxevtkhBivzQr/UGasXM3p5ooCWxNGJiND9v6jGRK6lqVyAmd4BFW/7bOwEfY
- GiEw==
-X-Gm-Message-State: AOJu0YwpoPkLXMO16t6ZokirSXWljuD2UhC79glwW0u2oUw35uY5xKjq
- qR/9Jrqtp53WB/Q6uQ77nNOSqvbqfPCNNTkxMYjbOVYvaaz9SZDP+eFkPvRg9jEpAWcNV+ByQU9
- djInt4xiWYu0s4yzJAfglNUl6xSR4gpUU2zhf
-X-Google-Smtp-Source: AGHT+IEq1G1I1ZzDz3JQl5zzO8CDbPAGy1qs77OtWplB3Dqv3utLqr6IjD3xG8W1VEwEdiU2J+aJfCBxY/RS6mYUAzg=
-X-Received: by 2002:a05:6214:3a83:b0:6c3:463b:e1e1 with SMTP id
- 6a1803df08f44-6c57dfbffcamr199712576d6.26.1726501288539; Mon, 16 Sep 2024
- 08:41:28 -0700 (PDT)
+ bh=UD0LyiDwxju/GX0u4ElVAJ/9aIhwrpfl8zDCEnggOb4=;
+ b=qQ2OQUgt8TWG7YJFylWMpfK40fbYZP7pI+mZkpEdz5dseWGoztqxNPhskHsmjWmWrk
+ P3ycHCs+51V41ceI/1GUvMQIFbhAWEtPRV8Pe9c/YYlC9RfVw7WPKaI+HUgNMIgdzCpa
+ +qGZmUlCyOWltd1GiBtd3/AsVCi75ji9ABYTDk01xhpL/LgkqC/TmzYPDTVweu+XjGws
+ mQxCyz2wRcMsDaTXs7T7M4IWvE7tw+sRQwbWGzlBg5104+7ToGnjnhh0kdByOKPWhatt
+ bsfDpRcqVyNNmfQDp5NCupOI8jw94plVZNVrEIgiIso3WxGF/N0uuAQyaClk8vCCutu9
+ iyfQ==
+X-Gm-Message-State: AOJu0YzGnoSSmfesSagt08QS369OxrHunNfgQ4fdysECuYFWT1mEApuu
+ 2LP6fO7FO7eSdEm/bVyclMJIQKmmc7a02TCPsUnQY/eaAzlB7CN1IlBpc53e5HSEbTzGEQIo0zK
+ jsN3WILJkYD3V6wDISBgea1cB+dxcYqrNAoIw
+X-Google-Smtp-Source: AGHT+IGPEwUoQ9WWbFS8dEcNdcUnY4d9P4LGm5tr83ZyUVCI+aQdfOeuk/HKmgqIpR2YVITCmtjbJozyDabb5i0eeIg=
+X-Received: by 2002:a0c:fbcf:0:b0:6c5:8125:d7c2 with SMTP id
+ 6a1803df08f44-6c58125e162mr147413046d6.26.1726501292174; Mon, 16 Sep 2024
+ 08:41:32 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240911062511.494855-1-patrick.rudolph@9elements.com>
- <20240911062511.494855-23-patrick.rudolph@9elements.com>
- <CAFLszTg0cf_1ojqhO8ZXpkX+MoQYgX_-AFVzUDCyD2yE8U=rcQ@mail.gmail.com>
- <CALNFmy0QJ4HNHhSKzx94dJ6jS_F0i9VoDqUwwVpe2SCeLB=pmg@mail.gmail.com>
-In-Reply-To: <CALNFmy0QJ4HNHhSKzx94dJ6jS_F0i9VoDqUwwVpe2SCeLB=pmg@mail.gmail.com>
+ <20240911062511.494855-21-patrick.rudolph@9elements.com>
+ <CAFLszTgYrEk=UBd6zgesphC+rLPtkOG4fjBOYaGRQXYLNUomyA@mail.gmail.com>
+ <CALNFmy3cDCTzppfr5y=sAjKn0eBKsHPq9LD4zGg0KC9HT3qNMA@mail.gmail.com>
+In-Reply-To: <CALNFmy3cDCTzppfr5y=sAjKn0eBKsHPq9LD4zGg0KC9HT3qNMA@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 16 Sep 2024 17:41:11 +0200
-Message-ID: <CAFLszTgf=_jJkfyXhxXDZSieMmM_cm7pss3ysM5yz1EphMYVpw@mail.gmail.com>
-Subject: Re: [PATCH v3 22/30] board: emulation: Add QEMU sbsa support
+Date: Mon, 16 Sep 2024 17:41:15 +0200
+Message-ID: <CAFLszTj+S-d64cx0O1SqPjq_OTePr5Z4Cq-Z92xRqs7_rbWStQ@mail.gmail.com>
+Subject: Re: [PATCH v3 20/30] drivers/arm: Implement acpi_fill_madt
 To: Patrick Rudolph <patrick.rudolph@9elements.com>
-Cc: u-boot@lists.denx.de, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tom Rini <trini@konsulko.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>, 
- Peter Robinson <pbrobinson@gmail.com>
+Cc: u-boot@lists.denx.de, linux-kernel@vger.kernel.org, 
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -92,7 +89,7 @@ X-Virus-Status: Clean
 
 Hi Patrick,
 
-On Thu, 12 Sept 2024 at 00:23, Patrick Rudolph
+On Thu, 12 Sept 2024 at 00:31, Patrick Rudolph
 <patrick.rudolph@9elements.com> wrote:
 >
 > On Thu, Sep 12, 2024 at 2:58=E2=80=AFAM Simon Glass <sjg@chromium.org> wr=
@@ -100,116 +97,51 @@ ote:
 > >
 > > Hi Patrick,
 > >
-> > On Wed, 11 Sept 2024 at 00:26, Patrick Rudolph
+> > On Wed, 11 Sept 2024 at 00:25, Patrick Rudolph
 > > <patrick.rudolph@9elements.com> wrote:
 > > >
-> > > Add support for Arm sbsa [1] v0.3+ that is supported by QEMU [2].
+> > > Fill the MADT table in the GIC driver and armv8 CPU driver to
+> > > drop SoC specific code. While the GIC only needs devicetree
+> > > data, the CPU driver needs additional information stored in
+> > > the cpu_plat struct.
 > > >
-> > > Unlike other Arm based platforms the machine only provides a minimal
-> > > FDT that contains number of CPUs, ammount of memory and machine-versi=
-on.
-> > > The boot firmware has to provide ACPI tables to the OS.
+> > > While on it update the only board making use of the existing
+> > > drivers and writing ACPI MADT in mainboard code.
 > > >
-> > > Add a minimal amount of devicetree nodes to make the board useable wi=
-thin
-> > > U-Boot, provide documentation how to use, enable binman to fabricate =
-both
-> > > ROMs that are required to boot and add ACPI tables to make it full co=
-mpatible
-> > > to the EDK2 reference implementation.
-> > >
-> > > The board was tested using Fedora 40 Aarch64 Workstation. It's able
-> > > to boot from USB and AHCI or network.
-> > >
-> > > Tested and found working:
-> > > - serial
-> > > - PCI
-> > > - xHCI
-> > > - Bochs display
-> > > - AHCI
-> > > - network using e1000e
-> > > - CPU init
-> > > - Booting Fedora 40
-> > >
-> > > 1: Server Base System Architecture (SBSA)
-> > > 2: https://www.qemu.org/docs/master/system/arm/sbsa.html
-> > >
+> > > TEST: Booted on QEMU sbsa using driver model generated MADT.
 > > > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-> > > Cc: Peter Robinson <pbrobinson@gmail.com>
 > > > Cc: Simon Glass <sjg@chromium.org>
-> > > Cc: Tom Rini <trini@konsulko.com>
 > > > ---
-> > > Changelog v3:
-> > > - Add GIC and GIC-ITS to devicetree
-> > > - Select GICv3 driver
-> > > - Drop acpi_fill_madt and use driver model instead
-> > >
-> > > ---
-> > >  arch/arm/Kconfig                            |   1 +
-> > >  arch/arm/dts/qemu-sbsa.dts                  |  49 ++
-> > >  arch/arm/include/asm/arch-qemu-sbsa/boot0.h |  33 ++
-> > >  arch/arm/mach-qemu/Kconfig                  |  36 +-
-> > >  board/emulation/qemu-arm/MAINTAINERS        |   2 +
-> > >  board/emulation/qemu-sbsa/Kconfig           |  58 +++
-> > >  board/emulation/qemu-sbsa/Makefile          |   8 +
-> > >  board/emulation/qemu-sbsa/acpi.c            | 235 ++++++++++
-> > >  board/emulation/qemu-sbsa/dsdt.asl          | 483 ++++++++++++++++++=
-++
-> > >  board/emulation/qemu-sbsa/lowlevel_init.S   |  22 +
-> > >  board/emulation/qemu-sbsa/qemu-sbsa.c       | 481 ++++++++++++++++++=
-+
-> > >  board/emulation/qemu-sbsa/qemu-sbsa.env     |  14 +
-> > >  board/emulation/qemu-sbsa/qemu-sbsa.h       |  38 ++
-> > >  board/emulation/qemu-sbsa/smc.c             |  72 +++
-> > >  configs/qemu-arm-sbsa_defconfig             |  10 +
-> > >  doc/board/emulation/index.rst               |   1 +
-> > >  doc/board/emulation/qemu-sbsa.rst           |  98 ++++
-> > >  doc/develop/driver-model/virtio.rst         |   1 +
-> > >  include/configs/qemu-sbsa.h                 |  98 ++++
-> > >  19 files changed, 1734 insertions(+), 6 deletions(-)
-> > >  create mode 100644 arch/arm/dts/qemu-sbsa.dts
-> > >  create mode 100644 arch/arm/include/asm/arch-qemu-sbsa/boot0.h
-> > >  create mode 100644 board/emulation/qemu-sbsa/Kconfig
-> > >  create mode 100644 board/emulation/qemu-sbsa/Makefile
-> > >  create mode 100644 board/emulation/qemu-sbsa/acpi.c
-> > >  create mode 100644 board/emulation/qemu-sbsa/dsdt.asl
-> > >  create mode 100644 board/emulation/qemu-sbsa/lowlevel_init.S
-> > >  create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.c
-> > >  create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.env
-> > >  create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.h
-> > >  create mode 100644 board/emulation/qemu-sbsa/smc.c
-> > >  create mode 100644 configs/qemu-arm-sbsa_defconfig
-> > >  create mode 100644 doc/board/emulation/qemu-sbsa.rst
-> > >  create mode 100644 include/configs/qemu-sbsa.h
+> > >  arch/arm/lib/acpi_table.c |  1 +
+> > >  arch/arm/lib/gic-v3-its.c | 89 +++++++++++++++++++++++++++++++++++++=
++-
+> > >  drivers/cpu/armv8_cpu.c   | 27 ++++++++++++
+> > >  include/cpu.h             | 27 +++++++++++-
+> > >  4 files changed, 141 insertions(+), 3 deletions(-)
 > >
-> > Wow there is a lot in this patch!
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
 > >
-> > I don't think this should be in a separate subdir, just using
-> > board/emulation/qemu-arm should be OK?
-> Why would it share the code base with qemu-arm, as it's a completely
-> different board?
-
-Perhaps I misunderstand this...what kind of board is it? How do you
-run qemu for this board?
-
+> > Are the GIC values available by probing, or are they just 'known', and
+> > dependent on the compatible string?
+> Sorry I don't get that question.
 >
-> >
-> > I see you are setting plat data in the board file...is there not a CPU
-> > driver which can read it from the devicetree or set it based on the
-> > compatible string?
-> The CPU driver could read the data from devicetree, but that would requir=
-e a new
-> DT binding. Is that the preferred method over using plat data?
-
-It is fine to use plat data...but it should be set up in the driver
-where possible. In this case if you don't have a binding you can check
-the compatible string of the device (or even the root
-compatible-string) and add your plat data if it matches.
-
-
+> The "arm_gic_v3_its" and "arm_gic_v3" driver uses existing DT
+> properties and should work with all existing boards.
 >
-> >
-> > For FDT fixup, can you please use the event and the ofnode interface?
-> > See EVT_FT_FIXUP and bootmeth_vbe_ft_fixup() as an example.
+> The madt_gicc entries are board specific. Besides the mpidr all of
+> them can be 0.
+> Those entries currently do not have matching DT properties in the CPU
+> node that could be used.
+> Some of those entries are present in the GIC node, but there's no
+> direct association between CPU nodes and GIC nodes.
+
+If they are board-specific then they should depend on the board
+compatible-string, assuming they cannot be read from the devicetree.
+The properties should be set in the driver, though.
+
+This might be the sort of situation where the GIC binding leaves out
+stuff and Linux fills it in from internal data? Or perhaps Linux just
+doesn't care about these features of the GIC?
+
 Regards,
 Simon
