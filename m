@@ -4,77 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 825A6C3ABB2
-	for <u-boot@archiver.kernel.org>; Mon, 16 Sep 2024 06:43:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FF35C3ABB2
+	for <u-boot@archiver.kernel.org>; Mon, 16 Sep 2024 08:24:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D73EB88E5F;
-	Mon, 16 Sep 2024 08:43:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E7B9988E2D;
+	Mon, 16 Sep 2024 10:24:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YqeWotFc";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aTWpvdAI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 046AF88DC6; Mon, 16 Sep 2024 08:43:29 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id BD28A88E88; Mon, 16 Sep 2024 10:24:52 +0200 (CEST)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D72B288E7C
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 08:43:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C6BA488E26
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 10:24:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-5c4226a5af8so3507736a12.1
- for <u-boot@lists.denx.de>; Sun, 15 Sep 2024 23:43:26 -0700 (PDT)
+ spf=pass smtp.mailfrom=al.kochet@gmail.com
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-535694d67eeso4017783e87.0
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 01:24:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726469006; x=1727073806; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=z48yVjzdGSmchCcXTy+CP6lhZsGTgrw8FcFNctZ59GA=;
- b=YqeWotFcn23r2y3CR8eTuL3d/fDK/yj7hHXrZSclEIoEvZNwwt708SMn30wZafgklM
- pAHjRjTl34BsHv1lwROF4HbwxsIBitkpVf4LVCFM60dSkvtTDlbVKqUnGsd01tqTLKXR
- GFxY5npkmK9fAh0FGUL7hJKswL2Fb2rXzMieWZiRkJlc729GZmqp00TBzoVrRDNYJ4rU
- 09IR9bhEqnHYD0KVNst2yBUILJ6oZEzGWKlQLXYPm7QnBjB5/iCYKenWjUTmFWwLwH0q
- JjER/YZxXpyw6ZzuJhJxsKeXR7Reyds86ynp0Q2mjnHI0lyVP1OEfcxW6dYpGrSLlgAI
- x+pw==
+ d=gmail.com; s=20230601; t=1726475090; x=1727079890; darn=lists.denx.de;
+ h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=sSCD+KHJ7RdVHQ0DFkbK0MLVMu1Ghfv0CzdSykDT47A=;
+ b=aTWpvdAIPV2lGLCelcevhLOeW2SKhUYo6iqSGRj5+ZLJTlMpsK0RGI6cgvT4nWYFGM
+ TDE/G+11uVn55gEnHmHrPcsuKBeWTiAJKed865bPoOXTOUUffIrlE5bS5t6vd1tRPl7L
+ DDOZgxAunufh/IGdh6q0RoTj8Vkc3c3b6ar3oB+O7v0Km9y5zp3p3gM8Himgw+NzejJQ
+ XLRHcqoel2rLPvIdvTH+lDEbaIpOOgU+QL4OdrFAqwhUY3WjXT8Istj2/3INk8/jRRo+
+ XlmtoZWXX9zCmtZT2Y/4auNjr9I3UmFedQ+lKJ32NJ4MxwszKF0UcDHsRZi4yxUPvsyr
+ W60g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726469006; x=1727073806;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=z48yVjzdGSmchCcXTy+CP6lhZsGTgrw8FcFNctZ59GA=;
- b=uMGxQKoCq0KHLskJh7B6fMHKvyhcL1gurmXgqUeiZ6L5618d/AKxcl6UJSBAbDSULS
- iJLI5LkH176OnpjL8nzg8iBtXAPgcrJvxOOh+ttZ4fnUons039KmsyGD1rOwZRWBpckN
- 81KFCmohd4/eWJ/rZexCJ15VD0lm5Om+RTvrP3d/CCPRlGpVfH+ANEyyLhP11RJk9zxq
- HFvhcbWLQfDumaqZML4yhM2c5YiheHqUOPIB+doCRXirMVZPFO4SYAaJCxhtDm0m9o0N
- 0VDgLQtRD0w4egl+HQVXblpAU/2iqyV0RPmzArY7YTNT6kXQAh90i/e5f9SaHCBee95I
- KMZQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVCwibjY2K6Xke8cPNFvdTKLsyu/pFaF331ewhNONPzv0ailZhmn4xxSVM9f2Ov3pDcdUuRkXc=@lists.denx.de
-X-Gm-Message-State: AOJu0YyY979Ws0TqVVvwwbS/h/fY5U3B9c1exgG4Yksb5kjG5NW+cp1l
- OIxsLzqiJORT1A/GVW5T8ffZFkIgQYwNOWTAV/aEd9JLvgrbFi92erTppi7LlNYKfvXNY0bM+kn
- AQyIqnJ7uNwMgrLKz5Jx5a/Mhuc4WORM4YxR8gw==
-X-Google-Smtp-Source: AGHT+IHUGHXlfjLJhjPOhOwtAZEK21UC1HsQC2w49wXLHBs/Qhz1vs94rfvw6vk/ShlAGCyvS85jTIMCQdC32J1SZC0=
-X-Received: by 2002:a05:6402:4310:b0:5c4:2c97:bcb with SMTP id
- 4fb4d7f45d1cf-5c42c970de0mr6715373a12.1.1726469006007; Sun, 15 Sep 2024
- 23:43:26 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240913073251.2286529-2-prasad.kummari@amd.com>
- <c9e22782-8645-420c-9017-18f3aafcbb12@ti.com>
-In-Reply-To: <c9e22782-8645-420c-9017-18f3aafcbb12@ti.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 16 Sep 2024 12:13:15 +0530
-Message-ID: <CADg8p95RA_iOUYmjLaED52C7ebGPuor=Zd+16zmVvDiEV3aesw@mail.gmail.com>
-Subject: Re: [PATCH v4] cmd: sf: prevent overwriting the reserved memory
-To: Vaishnav Achath <vaishnav.a@ti.com>
-Cc: Prasad Kummari <prasad.kummari@amd.com>, u-boot@lists.denx.de, git@amd.com,
- michal.simek@amd.com, venkatesh.abbarapu@amd.com, padmarao.begari@amd.com, 
- git@xilinx.com, jagan@amarulasolutions.com, n-francis@ti.com, d-gole@ti.com, 
- Vignesh Raghavendra <vigneshr@ti.com>, "Kumar, Udit" <u-kumar1@ti.com>
-Content-Type: text/plain; charset="UTF-8"
+ d=1e100.net; s=20230601; t=1726475090; x=1727079890;
+ h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=sSCD+KHJ7RdVHQ0DFkbK0MLVMu1Ghfv0CzdSykDT47A=;
+ b=WJzungJ1RxUJOiVrL+tjhL9fvmcblAGJeytHZ2H0Qm/5EK/SexYIqY/Nx+Sdo7EHFL
+ u0sEJhzSSWGk9ZEug/+maEYr2y9IipFbMbcweXnpWvlgkdZCnq/QIbx2Y2A76GuUwg9Q
+ ebfC636kXu5kVXGlLKlb0zCumLQ5/N7wWvU0c5b7ayAjZb3Y6V6RrxJ4mCsGuNGTmVdF
+ MWyfV8huhAt3o7TuOnEzwevRlQz2jCLvgXe8cLiBftsyklG5jsEBt5vKQgwl1h6ijUMk
+ nHh2DRkxXH2PsbZCwp1DNAYb0ktLQcFaPUusZcuGn8EUYwOVhdjv8Hc1K9XN1PV7QLen
+ 8gpA==
+X-Gm-Message-State: AOJu0YwfPG4YXYucqxveAgxGPT9tAEVNM0j+5sl1RqnNVo7WGGS+3Jg0
+ 3ZobU43YSlYm22FiIXnoK+3qkFKdTSQoDL9tEY9cbwl+7tSSTkVz1fP9kg==
+X-Google-Smtp-Source: AGHT+IGB36SHpV4Rhs9BfH0oYIcTQgUsUUv7kQ82cOru0+ytr+kzVBfA9iluePj2fBLBTOBu7pmMkg==
+X-Received: by 2002:a05:6512:3188:b0:52c:dc06:d4ad with SMTP id
+ 2adb3069b0e04-5367906db3cmr4184361e87.6.1726475089230; 
+ Mon, 16 Sep 2024 01:24:49 -0700 (PDT)
+Received: from localhost.localdomain ([80.87.144.137])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-5368704dca5sm804367e87.111.2024.09.16.01.24.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 16 Sep 2024 01:24:48 -0700 (PDT)
+From: al.kochet@gmail.com
+To: u-boot@lists.denx.de
+Cc: Alexander Kochetkov <al.kochet@gmail.com>
+Subject: [PATCH 0/3] Implement signing FIT images during image build
+Date: Mon, 16 Sep 2024 11:24:43 +0300
+Message-Id: <20240916082446.32082-1-al.kochet@gmail.com>
+X-Mailer: git-send-email 2.17.1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,154 +85,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 16 Sept 2024 at 11:47, Vaishnav Achath <vaishnav.a@ti.com> wrote:
->
-> Hi Prasad,
->
-> On 13/09/24 13:02, Prasad Kummari wrote:
-> > Added LMB API to prevent SF command from overwriting reserved
-> > memory areas. The current SPI code does not use LMB APIs for
-> > loading data into memory addresses. To resolve this, LMB APIs
-> > were added to check the load address of an SF command and ensure it
-> > does not overwrite reserved memory addresses. Similar checks are
-> > used in TFTP, serial load, and boot code to prevent overwriting
-> > reserved memory.
-> >
-> > Signed-off-by: Prasad Kummari <prasad.kummari@amd.com>
-> > ---
-> > Changes in V4:
-> > - Removed do_spi_read_lmb_check().
-> > - Added the lmb_read_check() function in lmb.c, making it reusable for
-> >    NAND, MMC, etc.
-> > - Addressed review comments.
-> >
-> > Changes in V3:
-> > - Removed lmb_init_and_reserve() as part of latest LMB series.
-> > - Error message moved to one place.
-> > - lmb_alloc_addr() is not required because the given memory address is
-> >    being checked to ensure it is free or not.
-> >
-> > Changes in V2:
-> > - Rebased the code changes on top of the next branch.
-> >
-> > UT:
-> > Tested on Versal NET board.
-> >
-> > relocaddr   = 0x000000007febc000
-> >
-> > Versal NET> sf read 0x000000007febc000 0x0 0x40
-> > device 0 offset 0x0, size 0x40
-> > ERROR: trying to overwrite reserved memory...
-> > Versal NET> sf write 0x000000007febc000 0x0 0x40
-> > device 0 offset 0x0, size 0x40
-> > ERROR: trying to overwrite reserved memory...
-> >
-> > Versal NET> fdt print /reserved-memory
-> > reserved-memory {
-> >       ranges;
-> >       #size-cells = <0x00000002>;
-> >       #address-cells = <0x00000002>;
-> >       tf-a {
-> >               reg = <0x00000000 0x70000000 0x00000000 0x00050000>;
-> >               no-map;
-> >       };
-> > };
-> > Versal NET> sf read 0x70000000 0x0 0x40
-> > device 0 offset 0x0, size 0x40
-> > ERROR: trying to overwrite reserved memory...
-> > Versal NET> sf write 0x70000000 0x0 0x40
-> > device 0 offset 0x0, size 0x40
-> > ERROR: trying to overwrite reserved memory...
-> > Versal NET> sf erase 0x0 0x1000000;mw.b 0x8000 aabbccdd 0x1000000;sf
-> > write 0x8000 0x0 0x1000000;mw.b 0x8008000 0x0 0x1000000;sf read
-> > 0x8008000 0x0 0x1000000;cmp.b 0x8000 0x8008000 0x01000000
-> > SF: 16777216 bytes @ 0x0 Erased: OK
-> > device 0 offset 0x0, size 0x1000000
-> > SF: 16777216 bytes @ 0x0 Written: OK
-> > device 0 offset 0x0, size 0x1000000
-> > SF: 16777216 bytes @ 0x0 Read: OK
-> > Total of 16777216 byte(s) were the same
-> >
-> >   cmd/sf.c      | 8 ++++++++
-> >   include/lmb.h | 5 +++++
-> >   2 files changed, 13 insertions(+)
-> >
-> > diff --git a/cmd/sf.c b/cmd/sf.c
-> > index f43a2e08b3..08e364e191 100644
-> > --- a/cmd/sf.c
-> > +++ b/cmd/sf.c
-> > @@ -10,6 +10,7 @@
-> >   #include <div64.h>
-> >   #include <dm.h>
-> >   #include <log.h>
-> > +#include <lmb.h>
-> >   #include <malloc.h>
-> >   #include <mapmem.h>
-> >   #include <spi.h>
-> > @@ -317,6 +318,13 @@ static int do_spi_flash_read_write(int argc, char *const argv[])
-> >                       strncmp(argv[0], "write", 5) == 0) {
-> >               int read;
-> >
-> > +             if (CONFIG_IS_ENABLED(LMB)) {
-> > +                     if (lmb_read_check(addr, len)) {
->
-> Even though the function is named lmb_read_check(), it performs an alloc
-> which is never freed, thus it makes it difficult for other callers to
-> use the same region for other purposes (some callers use
-> lmb_get_free_size() ), as mentioned in the commit message the check is
-> only to prevent sf from overwriting reserved region, but it looks like
-> this patch makes the load region also as reserved, is this necessary?
+From: Alexander Kochetkov <al.kochet@gmail.com>
 
-Like I mentioned in my other reply, using a check for lmb_alloc_addr()
-allows for memory re-use, which is the behaviour that a large number
-of use cases rely on -- if you go through the test scripts, it is
-assumed that memory re-use is allowed. That there is no need to
-explicitly free up memory, and that has been how the LMB memory has
-been used historically. So it is allowed to use some address to load
-an image to that address, and then use the same address to load a
-different image. The LMB rework series does keep this behaviour
-consistent. So it would be better to change the behaviour of the tftp
-command to use the same API. I was planning on working on this
-cleanup. If you want, you can take it up.
+Hello!
 
->
->
-> > +                             printf("ERROR: trying to overwrite reserved memory...\n");
-> > +                             return CMD_RET_FAILURE;
-> > +                     }
-> > +             }
-> > +
-> >               read = strncmp(argv[0], "read", 4) == 0;
-> >               if (read)
-> >                       ret = spi_flash_read(flash, offset, len, buf);
-> > diff --git a/include/lmb.h b/include/lmb.h
-> > index fc2daaa7bf..aee2f9fcda 100644
-> > --- a/include/lmb.h
-> > +++ b/include/lmb.h
-> > @@ -111,6 +111,11 @@ struct lmb *lmb_get(void);
-> >   int lmb_push(struct lmb *store);
-> >   void lmb_pop(struct lmb *store);
-> >
-> > +static inline int lmb_read_check(phys_addr_t addr, phys_size_t len)
-> > +{
-> > +     return lmb_alloc_addr(addr, len) == addr ? 0 : -1;
->
-> who frees this? can we free this right after checking?
+I've done verified boot on Radxa Rock 3A. I've embedded public key in U-Boot
+SPL and signed FIT image configuration. All the work was done during U-Boot
+image build. For some use cases building and signing images in one go will be
+much simple, than building unsigned images and signing later. For example
+SPL-image for rk3568 called idbloader.img consist of TPL, U-boot SPL and
+U-boot SPL DTB with public key. So in order to assemble signed idbloader.img
+lately we have to keep all the intermediate files used during build.
 
-It is not required to explicitly free up this memory, as it is not an
-actual allocation per-se. Why were these functions called alloc
-something, I am not sure. But the point is, if you change the tftp
-command code to use this API instead, and then use it after a previous
-load, it would not fail.
+To embed public key, I've replaced u-boot-spl node with blob-ext and generated
+u-boot-spl-with-pubkey-dtb blob using u-boot-spl-pubkey-dtb entry.
 
--sughosh
+To sign FIT image I've used newly implemented fit property 'fit,sign'.
 
->
-> Thanks and Regards,
-> Vaishnav
->
-> > +}
-> > +
-> >   #endif /* __KERNEL__ */
-> >
-> >   #endif /* _LINUX_LMB_H */
+I haven't sign FIT image nodes, because I had realized that signing
+configuration is safe and sufficient for verified boot. But I doubt.
+So I've left that signing scheme in the test.
+
+What do you think, is using signed configuration and signed images at the same
+time is much safer or doesn't provide any benefits?
+
+Now I thinking about implementing configuration option, something like
+FIT_SIGNATURE_KEYDIR. The value of the option will be passed to binman
+using -I.
+
+Alsi I want to embed another public key in the configuration DTB, so
+it will be used to verify kernel FIT. But I couldn't figure out how to
+do it using binman.
+
+&binman {
+    u-boot-spl-with-pubkey-dtb {
+        filename = "u-boot-spl-with-pubkey-dtb.bin";
+
+        u-boot-spl-nodtb {
+        };
+
+        u-boot-spl-pubkey-dtb {
+            algo = "sha256,rsa2048";
+            required = "conf";
+            key-name-hint = "uboot-spl";
+        };
+    };
+
+    simple-bin {
+        ...
+        mkimage {
+            ...
+
+#ifdef CONFIG_ROCKCHIP_EXTERNAL_TPL
+            rockchip-tpl {
+            };
+#elif defined(CONFIG_TPL)
+            u-boot-tpl {
+            };
+#endif
+            blob-ext {
+                filename = "u-boot-spl-with-pubkey-dtb.bin";
+            };
+        };
+
+        fit: fit {
+            ...
+            fit,sign;
+            ...
+
+            configurations {
+                default = "@config-DEFAULT-SEQ";
+                @config-SEQ {
+                    ...
+#ifdef CONFIG_SPL_FIT_SIGNATURE
+                    signature {
+                        algo = "sha256,rsa2048";
+                        key-name-hint = "uboot-spl";
+                        sign-images = "firmware", "loadables", "fdt";
+                    };
+#endif
+                };
+            };
+        };
+    };
+}
+
+
+Alexander Kochetkov (3):
+  binman: fix passing loadables to mkimage on first run
+  image-host: fix 'unknown error' error message
+  binman: implement signing FIT images during image build
+
+ tools/binman/btool/mkimage.py           |  5 +-
+ tools/binman/entries.rst                |  7 ++
+ tools/binman/etype/fit.py               | 57 +++++++++++++-
+ tools/binman/ftest.py                   | 95 ++++++++++++++++++++++++
+ tools/binman/test/326_fit_signature.dts | 98 +++++++++++++++++++++++++
+ tools/binman/test/326_rsa2048.key       | 28 +++++++
+ tools/binman/test/327_fit_signature.dts | 98 +++++++++++++++++++++++++
+ tools/binman/test/328_fit_signature.dts | 61 +++++++++++++++
+ tools/image-host.c                      |  2 +-
+ 9 files changed, 446 insertions(+), 5 deletions(-)
+ create mode 100644 tools/binman/test/326_fit_signature.dts
+ create mode 100644 tools/binman/test/326_rsa2048.key
+ create mode 100644 tools/binman/test/327_fit_signature.dts
+ create mode 100644 tools/binman/test/328_fit_signature.dts
+
+-- 
+2.17.1
+
