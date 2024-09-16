@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D1CAC3ABB2
-	for <u-boot@archiver.kernel.org>; Mon, 16 Sep 2024 09:59:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD08FC3ABB2
+	for <u-boot@archiver.kernel.org>; Mon, 16 Sep 2024 09:59:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8894388EE3;
-	Mon, 16 Sep 2024 11:58:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E91DE88F01;
+	Mon, 16 Sep 2024 11:58:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FdwSN/Lr";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GNE6+d0O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 87F9988EEB; Mon, 16 Sep 2024 11:58:53 +0200 (CEST)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
+ id 3BD1A88EF8; Mon, 16 Sep 2024 11:58:55 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2797B88EC2
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 11:58:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D9D4988EDB
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 11:58:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=linus.walleij@linaro.org
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-53568ffc525so4829051e87.0
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 02:58:50 -0700 (PDT)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-a8d446adf6eso451331266b.2
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 02:58:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726480729; x=1727085529; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1726480731; x=1727085531; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ej78Q2+PYKVgEy5EEJLNV3zuVL9MfHwoOkA0nh6pcxE=;
- b=FdwSN/Lrw+OgL0QXoK7ytOQoUhj+sPabaDF6VKwEgCI3GVbprDKdFJaeBkdGXHySkf
- dH6NhKXBJE8MUsaDY9uxkjQ38TvjNJO/wtf9oZiFg4aikF/RiimW2wuH6T/zpTtgmucS
- I85eDrZku4U6Z/1HTdGH41Mqn+Wx/8m9wzds3HH5hl+3m9+l4b49hWwuUjSeVwCHVw1r
- une43BG60XpSnBcSVngc45cPIwR886XgE/faMUSVx82G8NixfKf/9aRtDzUiA5zXNQC4
- WMi+QLZO8LY/x/02u8Ge5d43cEIqTCsH7d1z+W3u9euYF58+caqb9DuHy4Lrjgl4Vx4X
- F5sg==
+ :reply-to; bh=EvEkZF2r2AqggnLWTgwzPhL/JoYelLUDEL1aq/7CH+o=;
+ b=GNE6+d0OvUvq1QIEWPCNzG7UXgfCVWP4ycbLz2k7uY3D0v3BLCNDm1RxCIOHBrQ6zj
+ rk2eFd5Gj1me41X2rXfokeiWJETX49+DZpsvkh9bCuTFkcpP+b5XMcR8/frPOggFFPbi
+ 5XNcrYsWFagHBeT7Xo9XDgtSU6ODlDGeXYa3CazBB9NBor/11SywqIdv8kiWM0jwlXtd
+ R5NzZHstc79HFXXUjAfURsAtBJ74R6oYNBD0ObPVBezMgp0IXXuBbn/CXIkPBgpjCty3
+ RRSR5K1B5kiQvLcgPi3c4M7Spy6Df5FF3evkAbHFD84wPFN9U8gDulhiJ6qwFTV8cesq
+ y2Ag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726480729; x=1727085529;
+ d=1e100.net; s=20230601; t=1726480731; x=1727085531;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ej78Q2+PYKVgEy5EEJLNV3zuVL9MfHwoOkA0nh6pcxE=;
- b=kq//d8mRymdMppZVQz9Geq6PQSoCvcgdPN/HjifagDxlt0EJINggWusaV8Iq0LcABB
- VbEbkFxNnikV1/eKBdT9wJLX8pW0wAcpvF4iG2ZfnEBRDBKKh1OXCnjL4z4fV4PGmJq8
- pPywwmZFdQtrzUVdvdZDNOCviKm+ytZGgpRVIf9Z8b8Q9NF8zSDAEeBQfkpQOT9qP10V
- eHow+/sWPSm9dXvEKR1W79todSWDyFBsp6NNGKX/VaaU2lNSIKxTQWNoTWh/CsG+lPEQ
- 5yA5McoU4KvxC1MUVRjP22Ozhf35rHLKstwFYUYEkyJ1A0pu124MbdNo5wGSRgayPxJP
- HusA==
-X-Gm-Message-State: AOJu0YxiUjOwM2vgpuJcC3u2Wh8IEqq5fOGlDdIWpzzsP7tqCU7qIh6f
- Zw2QpiQ1XMnEaaVUWioYmLp5vsmTvuty3jXyBpjti2m/7BKf8asglNtjCxfGpco=
-X-Google-Smtp-Source: AGHT+IEXPLgC2r0ooLEsant3mdshdbiVCPePocWi8PszOs+Cpd550DmhDj8LYfhZ0Ev45bw+FTFOuA==
-X-Received: by 2002:a05:6512:2208:b0:52e:7656:a0f4 with SMTP id
- 2adb3069b0e04-53678feb138mr7455275e87.41.1726480728323; 
- Mon, 16 Sep 2024 02:58:48 -0700 (PDT)
+ bh=EvEkZF2r2AqggnLWTgwzPhL/JoYelLUDEL1aq/7CH+o=;
+ b=Xe3Q087agOWyIm2TU2g5ChxwUTlaP6imN7Xsr0y3zeoXTa3nC8of6/dxuHn9caGNC7
+ Ipa7COHHHyBa/+VJQk5hT6C/9Wu5VVYap7DjFLHRy4HCedUX844C8UAXsv3Z83peQzaW
+ S1GlE7OQPl5yQrg5rgDl23SYPdlVAMoSfo6xmmXGLDT9ygRaW63P+UiYB8lP4s+H0/SX
+ NVCnboQxi/WjwbUL1IGPvYyEA3MIf4d9lZ+lHDi1ATE+m0N1nUYtwd4zuQil7HY7uO5P
+ Kk4yCx905I8OoytdctIxFYBkAG69IkCKoWT0K0Tu9Qwzt04F9SFjyfWyZjDVuLr6NabD
+ +SYg==
+X-Gm-Message-State: AOJu0YyDb5sN/PdB6oOBfkQatO8x3PQX83s2XgmU61icyEGrzN/bA7Jy
+ ZjoSh0MN3rolMJv7BBHFVi9CpjKxk0kaOgh3jtdOUft5gSmyLqs4EfripgtcQE5pGIr5XT/bxOH
+ b
+X-Google-Smtp-Source: AGHT+IGOIgggKsf+aOs7KjkhXp77teuPvqK31HHa2MU2HkT08WVwPxbFCPd5m8Mw5FKpjJuyJ7fWJA==
+X-Received: by 2002:a17:907:f75a:b0:a86:a90f:3025 with SMTP id
+ a640c23a62f3a-a90480ce2a2mr1108324766b.59.1726480730636; 
+ Mon, 16 Sep 2024 02:58:50 -0700 (PDT)
 Received: from lino.lan ([85.235.12.238]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a906109662fsm292862966b.38.2024.09.16.02.58.46
+ a640c23a62f3a-a906109662fsm292862966b.38.2024.09.16.02.58.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Sep 2024 02:58:47 -0700 (PDT)
+ Mon, 16 Sep 2024 02:58:49 -0700 (PDT)
 From: Linus Walleij <linus.walleij@linaro.org>
-Date: Mon, 16 Sep 2024 11:58:43 +0200
-Subject: [PATCH v2 1/7] mtd: rawnand: brcmnand: Fix ECC level field setting
- for v7.2 controller
+Date: Mon, 16 Sep 2024 11:58:45 +0200
+Subject: [PATCH v2 3/7] mtd: rawnand: brcmnand: Fix potential out-of-bounds
+ access in oob write
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240916-brcmnand-fixes-v2-1-08632f64c8ec@linaro.org>
+Message-Id: <20240916-brcmnand-fixes-v2-3-08632f64c8ec@linaro.org>
 References: <20240916-brcmnand-fixes-v2-0-08632f64c8ec@linaro.org>
 In-Reply-To: <20240916-brcmnand-fixes-v2-0-08632f64c8ec@linaro.org>
 To: u-boot@lists.denx.de, 
@@ -101,156 +102,65 @@ X-Virus-Status: Clean
 
 From: William Zhang <william.zhang@broadcom.com>
 
-Backport from the Linux kernel
-commit 2ec2839a9062db8a592525a3fdabd42dcd9a3a9b
-"mtd: rawnand: brcmnand: Fix ECC level field setting for v7.2 controller"
+Backport of upstream Linux
+commit 5d53244186c9ac58cb88d76a0958ca55b83a15cd
+"mtd: rawnand: brcmnand: Fix potential out-of-bounds access in oob write"
 
-v7.2 controller has different ECC level field size and shift in the acc
-control register than its predecessor and successor controller. It needs
-to be set specifically.
+When the oob buffer length is not in multiple of words, the oob write
+function does out-of-bounds read on the oob source buffer at the last
+iteration. Fix that by always checking length limit on the oob buffer
+read and fill with 0xff when reaching the end of the buffer to the oob
+registers.
 
 Signed-off-by: William Zhang <william.zhang@broadcom.com>
 Reviewed-by: Florian Fainelli <florian.fainelli@broadcom.com>
 Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
-Link: https://lore.kernel.org/linux-mtd/20230706182909.79151-2-william.zhang@broadcom.com
+Link: https://lore.kernel.org/linux-mtd/20230706182909.79151-5-william.zhang@broadcom.com
 Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
 ---
- drivers/mtd/nand/raw/brcmnand/brcmnand.c | 74 ++++++++++++++++++--------------
- 1 file changed, 41 insertions(+), 33 deletions(-)
+ drivers/mtd/nand/raw/brcmnand/brcmnand.c | 18 ++++++++++++++++--
+ 1 file changed, 16 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/mtd/nand/raw/brcmnand/brcmnand.c b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
-index b1af3f717d43..700d1122639f 100644
+index 46a4107a83a9..60d34bd21f53 100644
 --- a/drivers/mtd/nand/raw/brcmnand/brcmnand.c
 +++ b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
-@@ -218,6 +218,7 @@ struct brcmnand_controller {
- 	const unsigned int	*page_sizes;
- 	unsigned int		page_size_shift;
- 	unsigned int		max_oob;
-+	u32			ecc_level_shift;
- 	u32			features;
- 
- 	/* for low-power standby/resume only */
-@@ -544,6 +545,34 @@ enum {
- 	INTFC_CTLR_READY		= BIT(31),
- };
- 
-+/***********************************************************************
-+ * NAND ACC CONTROL bitfield
-+ *
-+ * Some bits have remained constant throughout hardware revision, while
-+ * others have shifted around.
-+ ***********************************************************************/
-+
-+/* Constant for all versions (where supported) */
-+enum {
-+	/* See BRCMNAND_HAS_CACHE_MODE */
-+	ACC_CONTROL_CACHE_MODE				= BIT(22),
-+
-+	/* See BRCMNAND_HAS_PREFETCH */
-+	ACC_CONTROL_PREFETCH				= BIT(23),
-+
-+	ACC_CONTROL_PAGE_HIT				= BIT(24),
-+	ACC_CONTROL_WR_PREEMPT				= BIT(25),
-+	ACC_CONTROL_PARTIAL_PAGE			= BIT(26),
-+	ACC_CONTROL_RD_ERASED				= BIT(27),
-+	ACC_CONTROL_FAST_PGM_RDIN			= BIT(28),
-+	ACC_CONTROL_WR_ECC				= BIT(30),
-+	ACC_CONTROL_RD_ECC				= BIT(31),
-+};
-+
-+#define	ACC_CONTROL_ECC_SHIFT			16
-+/* Only for v7.2 */
-+#define	ACC_CONTROL_ECC_EXT_SHIFT		13
-+
- static inline u32 nand_readreg(struct brcmnand_controller *ctrl, u32 offs)
+@@ -1334,19 +1334,33 @@ static int write_oob_to_regs(struct brcmnand_controller *ctrl, int i,
+ 			     const u8 *oob, int sas, int sector_1k)
  {
- 	return brcmnand_readl(ctrl->nand_base + offs);
-@@ -675,6 +704,12 @@ static int brcmnand_revision_init(struct brcmnand_controller *ctrl)
- #endif /* __UBOOT__ */
- 		ctrl->features |= BRCMNAND_HAS_WP;
+ 	int tbytes = sas << sector_1k;
+-	int j;
++	int j, k = 0;
++	u32 last = 0xffffffff;
++	u8 *plast = (u8 *)&last;
  
-+	/* v7.2 has different ecc level shift in the acc register */
-+	if (ctrl->nand_version == 0x0702)
-+		ctrl->ecc_level_shift = ACC_CONTROL_ECC_EXT_SHIFT;
-+	else
-+		ctrl->ecc_level_shift = ACC_CONTROL_ECC_SHIFT;
+ 	/* Adjust OOB values for 1K sector size */
+ 	if (sector_1k && (i & 0x01))
+ 		tbytes = max(0, tbytes - (int)ctrl->max_oob);
+ 	tbytes = min_t(int, tbytes, ctrl->max_oob);
+ 
+-	for (j = 0; j < tbytes; j += 4)
++	/*
++	 * tbytes may not be multiple of words. Make sure we don't read out of
++	 * the boundary and stop at last word.
++	 */
++	for (j = 0; (j + 3) < tbytes; j += 4)
+ 		oob_reg_write(ctrl, j,
+ 				(oob[j + 0] << 24) |
+ 				(oob[j + 1] << 16) |
+ 				(oob[j + 2] <<  8) |
+ 				(oob[j + 3] <<  0));
 +
- 	return 0;
++	/* handle the remaing bytes */
++	while (j < tbytes)
++		plast[k++] = oob[j++];
++
++	if (tbytes & 0x3)
++		oob_reg_write(ctrl, (tbytes & ~0x3), (__force u32)cpu_to_be32(last));
++
+ 	return tbytes;
  }
  
-@@ -844,30 +879,6 @@ static inline int brcmnand_cmd_shift(struct brcmnand_controller *ctrl)
- 	return 0;
- }
- 
--/***********************************************************************
-- * NAND ACC CONTROL bitfield
-- *
-- * Some bits have remained constant throughout hardware revision, while
-- * others have shifted around.
-- ***********************************************************************/
--
--/* Constant for all versions (where supported) */
--enum {
--	/* See BRCMNAND_HAS_CACHE_MODE */
--	ACC_CONTROL_CACHE_MODE				= BIT(22),
--
--	/* See BRCMNAND_HAS_PREFETCH */
--	ACC_CONTROL_PREFETCH				= BIT(23),
--
--	ACC_CONTROL_PAGE_HIT				= BIT(24),
--	ACC_CONTROL_WR_PREEMPT				= BIT(25),
--	ACC_CONTROL_PARTIAL_PAGE			= BIT(26),
--	ACC_CONTROL_RD_ERASED				= BIT(27),
--	ACC_CONTROL_FAST_PGM_RDIN			= BIT(28),
--	ACC_CONTROL_WR_ECC				= BIT(30),
--	ACC_CONTROL_RD_ECC				= BIT(31),
--};
--
- static inline u32 brcmnand_spare_area_mask(struct brcmnand_controller *ctrl)
- {
- 	if (ctrl->nand_version == 0x0702)
-@@ -880,18 +891,15 @@ static inline u32 brcmnand_spare_area_mask(struct brcmnand_controller *ctrl)
- 		return GENMASK(4, 0);
- }
- 
--#define NAND_ACC_CONTROL_ECC_SHIFT	16
--#define NAND_ACC_CONTROL_ECC_EXT_SHIFT	13
--
- static inline u32 brcmnand_ecc_level_mask(struct brcmnand_controller *ctrl)
- {
- 	u32 mask = (ctrl->nand_version >= 0x0600) ? 0x1f : 0x0f;
- 
--	mask <<= NAND_ACC_CONTROL_ECC_SHIFT;
-+	mask <<= ACC_CONTROL_ECC_SHIFT;
- 
- 	/* v7.2 includes additional ECC levels */
--	if (ctrl->nand_version >= 0x0702)
--		mask |= 0x7 << NAND_ACC_CONTROL_ECC_EXT_SHIFT;
-+	if (ctrl->nand_version == 0x0702)
-+		mask |= 0x7 << ACC_CONTROL_ECC_EXT_SHIFT;
- 
- 	return mask;
- }
-@@ -905,8 +913,8 @@ static void brcmnand_set_ecc_enabled(struct brcmnand_host *host, int en)
- 
- 	if (en) {
- 		acc_control |= ecc_flags; /* enable RD/WR ECC */
--		acc_control |= host->hwcfg.ecc_level
--			       << NAND_ACC_CONTROL_ECC_SHIFT;
-+		acc_control &= ~brcmnand_ecc_level_mask(ctrl);
-+		acc_control |= host->hwcfg.ecc_level << ctrl->ecc_level_shift;
- 	} else {
- 		acc_control &= ~ecc_flags; /* disable RD/WR ECC */
- 		acc_control &= ~brcmnand_ecc_level_mask(ctrl);
-@@ -2225,7 +2233,7 @@ static int brcmnand_set_cfg(struct brcmnand_host *host,
- 	tmp &= ~brcmnand_ecc_level_mask(ctrl);
- 	tmp &= ~brcmnand_spare_area_mask(ctrl);
- 	if (ctrl->nand_version >= 0x0302) {
--		tmp |= cfg->ecc_level << NAND_ACC_CONTROL_ECC_SHIFT;
-+		tmp |= cfg->ecc_level << ctrl->ecc_level_shift;
- 		tmp |= cfg->spare_area_size;
- 	}
- 	nand_writereg(ctrl, acc_control_offs, tmp);
 
 -- 
 2.46.0
