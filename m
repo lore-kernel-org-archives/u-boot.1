@@ -4,80 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55739C3ABCE
-	for <u-boot@archiver.kernel.org>; Mon, 16 Sep 2024 04:45:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B278C3ABCB
+	for <u-boot@archiver.kernel.org>; Mon, 16 Sep 2024 04:51:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5253788E52;
-	Mon, 16 Sep 2024 06:45:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0EFF188E4F;
+	Mon, 16 Sep 2024 06:51:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=broadcom.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="GKDv259W";
+	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="bh13jKoj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E84E88E58; Mon, 16 Sep 2024 06:45:35 +0200 (CEST)
+ id 8491588E5C; Mon, 16 Sep 2024 06:51:55 +0200 (CEST)
 Received: from mail-vk1-xa34.google.com (mail-vk1-xa34.google.com
  [IPv6:2607:f8b0:4864:20::a34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 120A088E4F
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 06:45:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E14D988327
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 06:51:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=broadcom.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=william.zhang@broadcom.com
 Received: by mail-vk1-xa34.google.com with SMTP id
- 71dfb90a1353d-502bb7cc965so836858e0c.0
- for <u-boot@lists.denx.de>; Sun, 15 Sep 2024 21:45:31 -0700 (PDT)
+ 71dfb90a1353d-501213e5ad4so3052114e0c.0
+ for <u-boot@lists.denx.de>; Sun, 15 Sep 2024 21:51:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=broadcom.com; s=google; t=1726461931; x=1727066731; darn=lists.denx.de;
+ d=broadcom.com; s=google; t=1726462311; x=1727067111; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:thread-index:mime-version:in-reply-to
  :references:from:from:to:cc:subject:date:message-id:reply-to;
- bh=1PL9i61fPsnwGTOnOlEsDENhpKyInP6aT1B+u1+JEjQ=;
- b=GKDv259W5UXeZ0LKlCwJ3CXwFzkfAIPlVPSb9L5ubEObYxRCaZeSSNN07jubCqAwuX
- CmMl8NAc4lG3pHmZy5H5A/HBVEo4DfRKSJ+Do9co6us1F1sS69RIooOjCDVRQChuTMeU
- Vb0EXJ4uh4nttMDF03jn3QG4sNMRng+3AdQYY=
+ bh=GJGpzaJXxFCTQIMQs3FGypCYg0o9XAViItIED2rGkEY=;
+ b=bh13jKojwh+/AWlz/Ggyz5cPXGNVpkewJrBGwaqbkU4zwXJkcsge7ENbCY/zOsWg+4
+ IgoLH0BMn48yk57Z3H7pvQ1R1/YQihzKeFJL7Pk9Qo5ZRcwCBhWNZZ+0M4uRwsm4dZe5
+ l7e2QP6Ov5MHIXrWNwrOB3YsToOQOduozuTII=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726461931; x=1727066731;
+ d=1e100.net; s=20230601; t=1726462311; x=1727067111;
  h=cc:to:subject:message-id:date:thread-index:mime-version:in-reply-to
  :references:from:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1PL9i61fPsnwGTOnOlEsDENhpKyInP6aT1B+u1+JEjQ=;
- b=Hvj8MZAdNlfzlh5N2Jcqo2SCCdn2cQHdrUZjeKiRMW7Ts6tHbQ13BPgVgSh0DnROJD
- ddphOWH2dQ5d4MOQARt454/Ax8xw6mIRUhiCeDUMxCo4VE2Js2Uah/Ep/jnAKOURWMaS
- C05fE8uKISLcuOvClP4LccP8ffc2Jm3jVkESV0seCndFsXujmw0uWaKTUkmsriNFa4NV
- csKUaO5aF/sGf7cOoy3LdyETcw9zRswe7qwKieMFYJJWNY9T6VrwybNcdQFBAX4sGeEf
- yhGKpbt9XKVZld7hYT/1NSwkQZP+XU6e7LyNJJioC6FPprX4MDPiStsHV6kHLxKBD6ZH
- ataA==
-X-Gm-Message-State: AOJu0Yxe4V4oxFWkHlLVApIivt+D0hLVuBf0NFwMywW02OXFQ4CWTTjT
- pxsjhDtDL4SHSydIBa/W2zHHJuxrOjt+zhHu9XQrx+wEeQAiN+koj8427/Ror2uMgg0y6TROuOX
- ALmKXNSMNQy3IDLuDmoXTcq7VSGhtevNgfFHV
-X-Google-Smtp-Source: AGHT+IHnf/yEwjGsSTjCdDE0Wq7zsRR0VPoPRsW9oV4TX5MWzsZgqbQzS8ibjry2w38rZZaI/xdIbAC6tF0XhCWD6q0=
-X-Received: by 2002:a05:6122:1d04:b0:4f5:2c0c:8528 with SMTP id
- 71dfb90a1353d-5032d54dfb9mr9143064e0c.11.1726461930789; Sun, 15 Sep 2024
- 21:45:30 -0700 (PDT)
+ bh=GJGpzaJXxFCTQIMQs3FGypCYg0o9XAViItIED2rGkEY=;
+ b=uBDhNCOyZLIF74/1jeU2r4dugwBQOEhTBBIpxUITPElQIzgsgOkUCqH1rjkPfOhnZi
+ 72fJg1x4nJIEP+XKcgP1R3kuzZ858vQRj7NRua1Jjfjoevrbvl96LdAzqYyqFDZEjM9n
+ ao7oTwzis6tzpDOQz7I5O3Ps1fKFGFSOr7ywCcqoykk8HDYK70YdthkyQEJvnLwSv7ev
+ NXsLVg041Ux4RZIeR2q+0ZZUV+MFka+MAhN/unm9ClCFdhUGrNfEyHdGJT7sqYwViiWw
+ MX3DEotdiPqWKvWEOfOMHd16awvIq6FCIZwh2R0J9rS2LFCEGZirgDXuC3Ju3wNgy22k
+ IT2Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUz4hJerZdbnOwjdXqtk8VVeryFlitZu+qJk0IrhenCwV6vmaQAhboTiYvev6SOVwNtlCrU2Is=@lists.denx.de
+X-Gm-Message-State: AOJu0YzGrt3aqlkWpiW2/b1zoXfndgMY5YCrvTGiaG+trnvSj06m57jQ
+ yXeygWUavplR9bp9P+QeuBySkA/jaMkoUIET2o54jCASTS9trTiDAqMT3MWzzQ3h0xz1UGZlF8r
+ f4jHj1LKmRLxNwzD+YOkSA20x8FYJ5Hlsj06v
+X-Google-Smtp-Source: AGHT+IFnNXsHaCIwCmbTCbmdpNdeDJrZUZ7JW7ixU/cMlz2GlEZXoZQGCgwLuLT2azHT8GbbGNoKmngxVWk4wgPYFqM=
+X-Received: by 2002:a05:6122:3694:b0:502:c93c:7489 with SMTP id
+ 71dfb90a1353d-502f76ba86bmr16511612e0c.3.1726462310630; Sun, 15 Sep 2024
+ 21:51:50 -0700 (PDT)
 From: William Zhang <william.zhang@broadcom.com>
 References: <20240911-brcmnand-fixes-v1-0-be112a20aaf1@linaro.org>
- <d27e92a5ccecc302a1b2ca7ff55b8c3b@mail.gmail.com>
- <CACRpkdYxecZsgoUipPR8DgcNPKp-3o-h=Qseq71W8vceV4eXsQ@mail.gmail.com>
-In-Reply-To: <CACRpkdYxecZsgoUipPR8DgcNPKp-3o-h=Qseq71W8vceV4eXsQ@mail.gmail.com>
+ <20240911-brcmnand-fixes-v1-6-be112a20aaf1@linaro.org>
+In-Reply-To: <20240911-brcmnand-fixes-v1-6-be112a20aaf1@linaro.org>
 MIME-Version: 1.0
 X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQGk0aZcPU5All9ASVJP8xH8NxMfIgIV6CG1AbRf1OCyp+2DQA==
-Date: Sun, 15 Sep 2024 21:45:29 -0700
-Message-ID: <4aa2c921dddb69a5a4964d5446f37695@mail.gmail.com>
-Subject: RE: [PATCH 0/7] mtd: nand: brcmnand: Backported fixes from Linux
-To: Linus Walleij <linus.walleij@linaro.org>
-Cc: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+Thread-Index: AQGk0aZcPU5All9ASVJP8xH8NxMfIgIWnNXQsrWOfyA=
+Date: Sun, 15 Sep 2024 21:51:49 -0700
+Message-ID: <65a0eb82233ddce2b7eb08cf6b0c25ea@mail.gmail.com>
+Subject: RE: [PATCH 6/7] mtd: rawnand: brcmnand: Support write protection
+ setting from dts
+To: Linus Walleij <linus.walleij@linaro.org>, u-boot@lists.denx.de, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
  Michael Trimarchi <michael@amarulasolutions.com>,
  Anand Gore <anand.gore@broadcom.com>, 
  Kursad Oney <kursad.oney@broadcom.com>,
- Philippe Reynes <philippe.reynes@softathome.com>, 
- Florian Fainelli <florian.fainelli@broadcom.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Kamal Dasu <kamal.dasu@broadcom.com>, David Regan <dregan@broadcom.com>
+ Philippe Reynes <philippe.reynes@softathome.com>
+Cc: Florian Fainelli <florian.fainelli@broadcom.com>,
+ Kamal Dasu <kamal.dasu@broadcom.com>, 
+ David Regan <dregan@broadcom.com>, Miquel Raynal <miquel.raynal@bootlin.com>
 Content-Type: multipart/signed; protocol="application/pkcs7-signature";
- micalg=sha-256; boundary="0000000000002073660622353e6a"
+ micalg=sha-256; boundary="000000000000c4d5db06223554f4"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,55 +96,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---0000000000002073660622353e6a
+--000000000000c4d5db06223554f4
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
 > -----Original Message-----
 > From: Linus Walleij <linus.walleij@linaro.org>
-> Sent: Thursday, September 12, 2024 1:16 AM
-> To: William Zhang <william.zhang@broadcom.com>
-> Cc: u-boot@lists.denx.de; Dario Binacchi
+> Sent: Wednesday, September 11, 2024 12:11 AM
+> To: u-boot@lists.denx.de; Dario Binacchi
 > <dario.binacchi@amarulasolutions.com>; Michael Trimarchi
 > <michael@amarulasolutions.com>; Anand Gore
-> <anand.gore@broadcom.com>; Kursad Oney
+> <anand.gore@broadcom.com>; William Zhang
+> <william.zhang@broadcom.com>; Kursad Oney
 > <kursad.oney@broadcom.com>; Philippe Reynes
-> <philippe.reynes@softathome.com>; Florian Fainelli
-> <florian.fainelli@broadcom.com>; Miquel Raynal
-> <miquel.raynal@bootlin.com>; Kamal Dasu <kamal.dasu@broadcom.com>;
-> David Regan <dregan@broadcom.com>
-> Subject: Re: [PATCH 0/7] mtd: nand: brcmnand: Backported fixes from
-> Linux
+> <philippe.reynes@softathome.com>
+> Cc: Linus Walleij <linus.walleij@linaro.org>; Florian Fainelli
+> <florian.fainelli@broadcom.com>; Kamal Dasu
+> <kamal.dasu@broadcom.com>; David Regan <dregan@broadcom.com>;
+> Miquel Raynal <miquel.raynal@bootlin.com>
+> Subject: [PATCH 6/7] mtd: rawnand: brcmnand: Support write protection
+> setting from dts
 >
-> On Thu, Sep 12, 2024 at 3:32=E2=80=AFAM William Zhang
-> <william.zhang@broadcom.com> wrote:
+> From: William Zhang <william.zhang@broadcom.com>
 >
-> > Thanks for merging the patches to u-boot.   We actually had something
-> > similar
-> > here locally but just didn't get the chance to upstream yet.
-> >
-> > We will review and compare your patches to ours and get back to you.
+> Backport of upstream Linux
+> commit 8e7daa85641c9559c113f6b217bdc923397de77c
+> "mtd: rawnand: brcmnand: Support write protection setting from dts"
 >
-> Ah, excellent, I guess you guys know the stuff better than me
-> so I prefer if your patches are used.
+> The write protection feature is controlled by the module parameter wp_on
+> with default set to enabled. But not all the board use this feature
+> especially in BCMBCA broadband board. And module parameter is not
+> sufficient as different board can have different option.  Add a device
+> tree property and allow this feature to be configured through the board
+> dts on per board basis.
 >
-> Do you even have U-Boot working on BCMBCA? I didn't get the
-> NAND to detect properly yet despite all the backported patches. :/
+> Signed-off-by: William Zhang <william.zhang@broadcom.com>
+> Reviewed-by: Florian Fainelli <florian.fainelli@broadcom.com>
+> Reviewed-by: Kamal Dasu <kamal.dasu@broadcom.com>
+> Reviewed-by: David Regan <dregan@broadcom.com>
+> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+> Link: https://lore.kernel.org/linux-mtd/20240223034758.13753-14-
+> william.zhang@broadcom.com
+> Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
+> ---
+>  drivers/mtd/nand/raw/brcmnand/brcmnand.c | 8 ++++++++
+>  1 file changed, 8 insertions(+)
 >
-Yes we have it working.  And your patches works too after fixing two
-Issues that I will comment on the specific patch.  You will need to
-enable the  NAND related configurations and the nand dts node.
+> diff --git a/drivers/mtd/nand/raw/brcmnand/brcmnand.c
+> b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
+> index 2f786584a1ae..55d5d27438a8 100644
+> --- a/drivers/mtd/nand/raw/brcmnand/brcmnand.c
+> +++ b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
+> @@ -2847,6 +2847,14 @@ int brcmnand_probe(struct udevice *dev,
+> struct brcmnand_soc *soc)
+>  	/* Read the write-protect configuration in the device tree */
+>  	wp_on = dev_read_u32_default(dev, "write-protect", wp_on);
+>
+There is some dts file using this "write-protect" property. I believe
+Phiippe
+originally added but it was not upstreamed to linux.  The new one in the
+line
+below is upstreamed and documented in brcmnand.yaml.   For new dts,
+we should use this new property.  But we should still honor the old
+flag to make sure old dtb still works instead of overriding it here.
+> +	/* Check if the board connects the WP pin */
+> +#ifndef __UBOOT__
+> +	if (of_property_read_bool(dn, "brcm,wp-not-connected"))
+> +#else
+> +	if (dev_read_bool(ctrl->dev, "brcm,wp-not-connected"))
+> +#endif /* __UBOOT__ */
+> +		wp_on = 0;
+> +
+>  	if (ctrl->features & BRCMNAND_HAS_WP) {
+>  		/* Permanently disable write protection */
+>  		if (wp_on == 2)
+>
+> --
+> 2.46.0
 
-You can use existing dts node to set the specific ecc level, oob size and
-ecc step size.  Or use the new automatically detection from the strap
-property brcm,nand-ecc-use-strap that I upstreamed to linux.
-
-What SoC do you use?
-
-> Yours,
-> Linus Walleij
-
---0000000000002073660622353e6a
+--000000000000c4d5db06223554f4
 Content-Type: application/pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -213,13 +244,13 @@ VhYAxZlzj7tSjUIM7G7IhyfqPC46GKJ/4x+Amz1Z6YxNGy71L68kYD6hIbBcA5AM42QBUufly6Oa
 urb/KlmDGfVrIRYDbL0ckhGQIP5c6L+kSQZ2sHnQK0e0WgIaZYxaPYeY5u0GLCOze+3vyRMxggJt
 MIICaQIBATBrMFsxCzAJBgNVBAYTAkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52LXNhMTEwLwYD
 VQQDEyhHbG9iYWxTaWduIEdDQyBSMyBQZXJzb25hbFNpZ24gMiBDQSAyMDIwAgwxuh2XG3FXRL1W
-JOEwDQYJYIZIAWUDBAIBBQCggdQwLwYJKoZIhvcNAQkEMSIEIKeDNWS79LihDSjn0gbRuD8fC7eb
-UxybHDWU4nbfB3ZHMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTI0
-MDkxNjA0NDUzMVowaQYJKoZIhvcNAQkPMVwwWjALBglghkgBZQMEASowCwYJYIZIAWUDBAEWMAsG
+JOEwDQYJYIZIAWUDBAIBBQCggdQwLwYJKoZIhvcNAQkEMSIEIKzWWDKnxZjtbnFDwzC4c35Emyyr
+NVrDsYSpmukxPxVEMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTI0
+MDkxNjA0NTE1MVowaQYJKoZIhvcNAQkPMVwwWjALBglghkgBZQMEASowCwYJYIZIAWUDBAEWMAsG
 CWCGSAFlAwQBAjAKBggqhkiG9w0DBzALBgkqhkiG9w0BAQowCwYJKoZIhvcNAQEHMAsGCWCGSAFl
-AwQCATANBgkqhkiG9w0BAQEFAASCAQBOgqZ65V7J1Co4ioDNc3JuknQ4GD1uD/Pere9dAxHam9I4
-2wMnFK3MBcPQl1/3q0rjPQlAyhL/FKay6sC3GDC88BYJiiyHpmO1oy6W0fbQVpPV7oOy5uyXDW6L
-73fs3OZLXEBukmtVJdd/pfEVQPmbOLB4mEuvdM3Fk4gHLqqXb/Gpq2zbcJVzkQY17buwDNP6m9mb
-ah8ley5vZxRxWQfEQlJedGo+QniW/LWitReLygWc8vEpwi0ebU5X/vbA4Xx3kSkE1TBKrRmCobhm
-gvy4BcCVhUKJjc0n88BdWtfItodi3v9n8+5UkpSlANSrkxt9whrV/JOnQabUnqTACIHb
---0000000000002073660622353e6a--
+AwQCATANBgkqhkiG9w0BAQEFAASCAQAekMMJcUpSnM/ASQHsC2NGfvXWjrC1cRL/75AHrffMrBMT
+3k4cAP7PuFkj8C4h2DbBKWghQ2mSB3h9hhi1tGPenUUspKf9zBKmTOV00gF6l1x797/Qn7Ud/2GW
+RWpn0peOT/AEhxvGFqlWkQFvaOflooqrUSisEZxclBGR00jRXaQUWbqnB7Xe0PJsvQJxe8yJSU/+
+NQ3JKDjxrh5GNmbxUhJdl0CFryvhbeP2OqAHseb9HLBMh1xyD0c4nZsbbtGyILQgv7q4wJYbuaQR
+TiU9d72a3lenpMtU4wxyz6CNWK681W3OGZgxJ2foN7z0OE9HprKZflRUqTY0T1k57UvQ
+--000000000000c4d5db06223554f4--
