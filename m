@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 014D0C3ABCB
-	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 00:21:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D91C7C3ABB2
+	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 00:22:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4718588CC7;
-	Tue, 17 Sep 2024 02:21:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B0E3088B88;
+	Tue, 17 Sep 2024 02:22:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=broadcom.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="HwC6lguB";
+	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="Gke32ojM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A0CF88CC7; Tue, 17 Sep 2024 02:21:22 +0200 (CEST)
-Received: from mail-vs1-xe2f.google.com (mail-vs1-xe2f.google.com
- [IPv6:2607:f8b0:4864:20::e2f])
+ id E436588CAF; Tue, 17 Sep 2024 02:22:24 +0200 (CEST)
+Received: from mail-vk1-xa36.google.com (mail-vk1-xa36.google.com
+ [IPv6:2607:f8b0:4864:20::a36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEFCE88B88
- for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 02:21:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 400FB880D8
+ for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 02:22:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=broadcom.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=william.zhang@broadcom.com
-Received: by mail-vs1-xe2f.google.com with SMTP id
- ada2fe7eead31-49bd27b3507so1579753137.2
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 17:21:19 -0700 (PDT)
+Received: by mail-vk1-xa36.google.com with SMTP id
+ 71dfb90a1353d-502b405aa6dso1429729e0c.2
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 17:22:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=broadcom.com; s=google; t=1726532479; x=1727137279; darn=lists.denx.de;
+ d=broadcom.com; s=google; t=1726532541; x=1727137341; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:thread-index:mime-version:in-reply-to
  :references:from:from:to:cc:subject:date:message-id:reply-to;
- bh=qYVtQnecU/F5+DxSXn4/k4RZ2FVBNnENizopno9J3dI=;
- b=HwC6lguByK0u638bnjN+3KDHZ+k2lCOwZuNqcBEYYJVvJP7AVtQgnpsjKXXMPz5+K2
- 8XwlArDZizvu0gmfOajpZy4fv/Rv6ue5BM6s3nkwDvu7vSHmF61uDaoOfBhWpHKLdu5f
- RfR1k9MUyE6qwmoKQOGsxsQNBF+1ldz6+99bg=
+ bh=T1gypSnBbvouQ5lR1cIoeDPQvFsJqUdLSq5oe1l53R4=;
+ b=Gke32ojMYoaAPmUsWVbCRpD0745phj9CfOTW3jnWfwocL+pQYAbauCq6xXllsd8MWt
+ MHK//lWfMjxxGhlmr1uJORBzqBxBtfKH9JQJEGLL1ufxeowrfPGNu5BF7knSzF20J32M
+ L8C8YW3HFRO0IwUevlOB2EQRHHDK7uYpTjSco=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726532479; x=1727137279;
+ d=1e100.net; s=20230601; t=1726532541; x=1727137341;
  h=cc:to:subject:message-id:date:thread-index:mime-version:in-reply-to
  :references:from:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qYVtQnecU/F5+DxSXn4/k4RZ2FVBNnENizopno9J3dI=;
- b=EbVuvnirC+0xf3nhD3k3sfYkFTvNYkwP1iWZxDbN+Bh80Q9FWEaMIDwbpGh+pgjYTk
- p4n7MI1xe43zesai57boxCQ+SlcT2xBRUWEcjTFj14s1HJ7GkFXpqy4baym6+Ew3dLfY
- aObyUgj0FOwPQFoYnAHKjhhHxu5RsIdH8D6e50KpwLH22W8/Off08VXmRMgELCVOpTO9
- kTsmvEjXCd4zWRouNtOLS6ldsrFtfG2IV1wxHfBYx3pwd7ZcARwa5IQPWq1nj8QyX3y2
- whb/nI9TlIr/YTyO2pilhJZTvqsTzbtELRkaamu/EGcIJdhv7olzd5iz/8iWqW71Y82z
- H9rQ==
+ bh=T1gypSnBbvouQ5lR1cIoeDPQvFsJqUdLSq5oe1l53R4=;
+ b=kDRaJA9t81O0egwOC7nfFIXtYaj97Wa2TMNG86vcukfiuVseYULPnQhADfN6NCJico
+ V+3/gXcai/NOZytBkMUXNDU0dIeJG6j+v1S/rUurATAM25ALCcAj+RwJu8wKw4+n0SUM
+ Q8Cz+NQtctuYBezXQLNOl7NBORkYbDN3wyk2nzhKcVMdVHSE5zsdG5xgvCee7/+k3WJ8
+ hQpDRRyKaDNM72cQOGEXQ2Qhkiqe29GaqUWZLbfD3W4b8YmUkl+5Ulw7LdBb6JyZmJZJ
+ 63Fw4LbkNCngRWDhgwFZnRpdGvn7nLQ6QSNTDCZe2qPkLKIKSQHtcssSkpfQHF0H90Pu
+ R13A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWYT4bGZDiSR8EIis73l6eH+jfklLWaBKqXjOtjoeOQZbuzKsbGgQjDFlVkpw3990qxhXCAQrs=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzu9Mb7cveipFjDrpXJYO4zNbhT8OvhzrY5TlmIHrSZhdwUCDzw
- 3p/nXhZMZGpxXTBkCF/it+o4eYmrvwQnt74srv1LFUkGG2JzDV0odSWRMfEvgZ2yJ3QqJAUbFui
- kMYIZztQY0fGp7KdS/+9HqfQO93jebnveGMy2
-X-Google-Smtp-Source: AGHT+IFZmBp3Q0ziN19/tCj8YIXsUVpSayYTkclX5xvy5q7oLe90bwXZ3YJ5im7iQaYBQZsWv6uFbm7PDi7onv3nUjo=
-X-Received: by 2002:a05:6102:418e:b0:48f:42c8:e0a9 with SMTP id
- ada2fe7eead31-49d4157f636mr11916410137.26.1726532478734; Mon, 16 Sep 2024
- 17:21:18 -0700 (PDT)
+ AJvYcCVRlmhNgzziPApDq+Qe7TUhU4VgeXHxhTqszZV3zKnd3GCXFb1gqmECVb5PI6wog/DYlvKSgao=@lists.denx.de
+X-Gm-Message-State: AOJu0YzSt3k3Kar2H/RSym/q0UPKs7Xmjh6lTEfSWw+yb3YlAPCLNxFn
+ AwTbLu69xfy0M3WuCmfG13xcFz1/dxzyHZAEn/0CBaMLiN9t716H2WicjqTRp74UD0IzxqXJ/iY
+ zXDMQbiJzh30cqbuR3mgzxFR0lpTwiT8pru1m
+X-Google-Smtp-Source: AGHT+IFXeXlyOtYvKGPg/+pI9WZR3KyizqrVq+Hc9oaD+xD6rkejhF2hySNvKMQLlMK9jS+NH0GOr9Lj0rIoNA1VuE0=
+X-Received: by 2002:a05:6122:3128:b0:4fd:18e1:ab0b with SMTP id
+ 71dfb90a1353d-5032d3cd07cmr12585494e0c.4.1726532541039; Mon, 16 Sep 2024
+ 17:22:21 -0700 (PDT)
 From: William Zhang <william.zhang@broadcom.com>
 References: <20240916-brcmnand-fixes-v2-0-08632f64c8ec@linaro.org>
- <20240916-brcmnand-fixes-v2-1-08632f64c8ec@linaro.org>
-In-Reply-To: <20240916-brcmnand-fixes-v2-1-08632f64c8ec@linaro.org>
+ <20240916-brcmnand-fixes-v2-4-08632f64c8ec@linaro.org>
+In-Reply-To: <20240916-brcmnand-fixes-v2-4-08632f64c8ec@linaro.org>
 MIME-Version: 1.0
 X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQES+R/HTbMR/ti/GhYZxlIU8W7clgLih3C+s9QoV/A=
-Date: Mon, 16 Sep 2024 17:21:17 -0700
-Message-ID: <09d4a91fa25bae6d22f31f66878d1545@mail.gmail.com>
-Subject: RE: [PATCH v2 1/7] mtd: rawnand: brcmnand: Fix ECC level field
- setting for v7.2 controller
+Thread-Index: AQES+R/HTbMR/ti/GhYZxlIU8W7clgK2Q3jOs9WK7CA=
+Date: Mon, 16 Sep 2024 17:22:20 -0700
+Message-ID: <0022a906d32c2c623ce5a7ec97855490@mail.gmail.com>
+Subject: RE: [PATCH v2 4/7] mtd: rawnand: brcmnand: Fix mtd oobsize
 To: Linus Walleij <linus.walleij@linaro.org>, u-boot@lists.denx.de, 
  Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
  Michael Trimarchi <michael@amarulasolutions.com>,
  Anand Gore <anand.gore@broadcom.com>, 
  Kursad Oney <kursad.oney@broadcom.com>,
  Philippe Reynes <philippe.reynes@softathome.com>
-Cc: Florian Fainelli <florian.fainelli@broadcom.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: Miquel Raynal <miquel.raynal@bootlin.com>
 Content-Type: multipart/signed; protocol="application/pkcs7-signature";
- micalg=sha-256; boundary="0000000000001cbf9f062245ab90"
+ micalg=sha-256; boundary="000000000000d306fc062245ae6f"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,7 +93,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---0000000000001cbf9f062245ab90
+--000000000000d306fc062245ae6f
 Content-Type: text/plain; charset="UTF-8"
 
 > -----Original Message-----
@@ -108,189 +106,88 @@ Content-Type: text/plain; charset="UTF-8"
 > <william.zhang@broadcom.com>; Kursad Oney
 > <kursad.oney@broadcom.com>; Philippe Reynes
 > <philippe.reynes@softathome.com>
-> Cc: Linus Walleij <linus.walleij@linaro.org>; Florian Fainelli
-> <florian.fainelli@broadcom.com>; Miquel Raynal
+> Cc: Linus Walleij <linus.walleij@linaro.org>; Miquel Raynal
 > <miquel.raynal@bootlin.com>
-> Subject: [PATCH v2 1/7] mtd: rawnand: brcmnand: Fix ECC level field
-> setting for v7.2 controller
+> Subject: [PATCH v2 4/7] mtd: rawnand: brcmnand: Fix mtd oobsize
 >
 > From: William Zhang <william.zhang@broadcom.com>
 >
-> Backport from the Linux kernel
-> commit 2ec2839a9062db8a592525a3fdabd42dcd9a3a9b
-> "mtd: rawnand: brcmnand: Fix ECC level field setting for v7.2 controller"
+> Backport from upstream Linux
+> commit 60177390fa061c62d156f4a546e3efd90df3c183
+> "mtd: rawnand: brcmnand: Fix mtd oobsize"
 >
-> v7.2 controller has different ECC level field size and shift in the acc
-> control register than its predecessor and successor controller. It needs
-> to be set specifically.
+> brcmnand controller can only access the flash spare area up to certain
+> bytes based on the ECC level. It can be less than the actual flash spare
+> area size. For example, for many NAND chip supporting ECC BCH-8, it has
+> 226 bytes spare area. But controller can only uses 218 bytes. So brcmand
+> driver overrides the mtd oobsize with the controller's accessible spare
+> area size. When the nand base driver utilizes the nand_device object, it
+> resets the oobsize back to the actual flash spare aprea size from
+> nand_memory_organization structure and controller may not able to
+> access
+> all the oob area as mtd advises.
 >
+> This change fixes the issue by overriding the oobsize in the
+> nand_memory_organization structure to the controller's accessible spare
+> area size.
+>
+> Fixes: a7ab085d7c16 ("mtd: rawnand: Initialize the nand_device object")
 > Signed-off-by: William Zhang <william.zhang@broadcom.com>
-> Reviewed-by: Florian Fainelli <florian.fainelli@broadcom.com>
 > Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
-> Link: https://lore.kernel.org/linux-mtd/20230706182909.79151-2-
+> Link: https://lore.kernel.org/linux-mtd/20230706182909.79151-6-
 > william.zhang@broadcom.com
 > Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
 > ---
->  drivers/mtd/nand/raw/brcmnand/brcmnand.c | 74
-> ++++++++++++++++++--------------
->  1 file changed, 41 insertions(+), 33 deletions(-)
+>  drivers/mtd/nand/raw/brcmnand/brcmnand.c | 8 ++++++--
+>  1 file changed, 6 insertions(+), 2 deletions(-)
 >
 > diff --git a/drivers/mtd/nand/raw/brcmnand/brcmnand.c
 > b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
-> index b1af3f717d43..700d1122639f 100644
+> index 60d34bd21f53..552b239b95ae 100644
 > --- a/drivers/mtd/nand/raw/brcmnand/brcmnand.c
 > +++ b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
-> @@ -218,6 +218,7 @@ struct brcmnand_controller {
->  	const unsigned int	*page_sizes;
->  	unsigned int		page_size_shift;
->  	unsigned int		max_oob;
-> +	u32			ecc_level_shift;
->  	u32			features;
->
->  	/* for low-power standby/resume only */
-> @@ -544,6 +545,34 @@ enum {
->  	INTFC_CTLR_READY		= BIT(31),
->  };
->
-> +/*********************************************************
-> **************
-> + * NAND ACC CONTROL bitfield
-> + *
-> + * Some bits have remained constant throughout hardware revision, while
-> + * others have shifted around.
-> +
-> **********************************************************
-> *************/
-> +
-> +/* Constant for all versions (where supported) */
-> +enum {
-> +	/* See BRCMNAND_HAS_CACHE_MODE */
-> +	ACC_CONTROL_CACHE_MODE				= BIT(22),
-> +
-> +	/* See BRCMNAND_HAS_PREFETCH */
-> +	ACC_CONTROL_PREFETCH				= BIT(23),
-> +
-> +	ACC_CONTROL_PAGE_HIT				= BIT(24),
-> +	ACC_CONTROL_WR_PREEMPT				= BIT(25),
-> +	ACC_CONTROL_PARTIAL_PAGE			= BIT(26),
-> +	ACC_CONTROL_RD_ERASED				= BIT(27),
-> +	ACC_CONTROL_FAST_PGM_RDIN			= BIT(28),
-> +	ACC_CONTROL_WR_ECC				= BIT(30),
-> +	ACC_CONTROL_RD_ECC				= BIT(31),
-> +};
-> +
-> +#define	ACC_CONTROL_ECC_SHIFT			16
-> +/* Only for v7.2 */
-> +#define	ACC_CONTROL_ECC_EXT_SHIFT		13
-> +
->  static inline u32 nand_readreg(struct brcmnand_controller *ctrl, u32
-> offs)
+> @@ -25,6 +25,7 @@
+>  #include <linux/completion.h>
+>  #include <linux/errno.h>
+>  #include <linux/log2.h>
+> +#include <linux/mtd/nand.h>
+>  #include <linux/mtd/rawnand.h>
+>  #include <asm/processor.h>
+>  #include <dm.h>
+> @@ -2304,6 +2305,8 @@ static int brcmnand_setup_dev(struct
+> brcmnand_host *host)
 >  {
->  	return brcmnand_readl(ctrl->nand_base + offs);
-> @@ -675,6 +704,12 @@ static int brcmnand_revision_init(struct
-> brcmnand_controller *ctrl)
->  #endif /* __UBOOT__ */
->  		ctrl->features |= BRCMNAND_HAS_WP;
+>  	struct mtd_info *mtd = nand_to_mtd(&host->chip);
+>  	struct nand_chip *chip = &host->chip;
+> +	struct nand_device *nanddev = mtd_to_nanddev(mtd);
+> +	struct nand_memory_organization *memorg =
+> nanddev_get_memorg(nanddev);
+>  	struct brcmnand_controller *ctrl = host->ctrl;
+>  	struct brcmnand_cfg *cfg = &host->hwcfg;
+>  	char msg[128];
+> @@ -2331,10 +2334,11 @@ static int brcmnand_setup_dev(struct
+> brcmnand_host *host)
+>  	if (cfg->spare_area_size > ctrl->max_oob)
+>  		cfg->spare_area_size = ctrl->max_oob;
+>  	/*
+> -	 * Set oobsize to be consistent with controller's spare_area_size, as
+> -	 * the rest is inaccessible.
+> +	 * Set mtd and memorg oobsize to be consistent with controller's
+> +	 * spare_area_size, as the rest is inaccessible.
+>  	 */
+>  	mtd->oobsize = cfg->spare_area_size * (mtd->writesize >>
+> FC_SHIFT);
+> +	memorg->oobsize = mtd->oobsize;
 >
-> +	/* v7.2 has different ecc level shift in the acc register */
-> +	if (ctrl->nand_version == 0x0702)
-> +		ctrl->ecc_level_shift = ACC_CONTROL_ECC_EXT_SHIFT;
-> +	else
-> +		ctrl->ecc_level_shift = ACC_CONTROL_ECC_SHIFT;
-> +
->  	return 0;
->  }
->
-> @@ -844,30 +879,6 @@ static inline int brcmnand_cmd_shift(struct
-> brcmnand_controller *ctrl)
->  	return 0;
->  }
->
-> -
-> /**********************************************************
-> *************
-> - * NAND ACC CONTROL bitfield
-> - *
-> - * Some bits have remained constant throughout hardware revision, while
-> - * others have shifted around.
-> -
-> **********************************************************
-> *************/
-> -
-> -/* Constant for all versions (where supported) */
-> -enum {
-> -	/* See BRCMNAND_HAS_CACHE_MODE */
-> -	ACC_CONTROL_CACHE_MODE				= BIT(22),
-> -
-> -	/* See BRCMNAND_HAS_PREFETCH */
-> -	ACC_CONTROL_PREFETCH				= BIT(23),
-> -
-> -	ACC_CONTROL_PAGE_HIT				= BIT(24),
-> -	ACC_CONTROL_WR_PREEMPT				= BIT(25),
-> -	ACC_CONTROL_PARTIAL_PAGE			= BIT(26),
-> -	ACC_CONTROL_RD_ERASED				= BIT(27),
-> -	ACC_CONTROL_FAST_PGM_RDIN			= BIT(28),
-> -	ACC_CONTROL_WR_ECC				= BIT(30),
-> -	ACC_CONTROL_RD_ECC				= BIT(31),
-> -};
-> -
->  static inline u32 brcmnand_spare_area_mask(struct brcmnand_controller
-> *ctrl)
->  {
->  	if (ctrl->nand_version == 0x0702)
-> @@ -880,18 +891,15 @@ static inline u32
-> brcmnand_spare_area_mask(struct brcmnand_controller *ctrl)
->  		return GENMASK(4, 0);
->  }
->
-> -#define NAND_ACC_CONTROL_ECC_SHIFT	16
-> -#define NAND_ACC_CONTROL_ECC_EXT_SHIFT	13
-> -
->  static inline u32 brcmnand_ecc_level_mask(struct brcmnand_controller
-> *ctrl)
->  {
->  	u32 mask = (ctrl->nand_version >= 0x0600) ? 0x1f : 0x0f;
->
-> -	mask <<= NAND_ACC_CONTROL_ECC_SHIFT;
-> +	mask <<= ACC_CONTROL_ECC_SHIFT;
->
->  	/* v7.2 includes additional ECC levels */
-> -	if (ctrl->nand_version >= 0x0702)
-> -		mask |= 0x7 << NAND_ACC_CONTROL_ECC_EXT_SHIFT;
-> +	if (ctrl->nand_version == 0x0702)
-> +		mask |= 0x7 << ACC_CONTROL_ECC_EXT_SHIFT;
->
->  	return mask;
->  }
-> @@ -905,8 +913,8 @@ static void brcmnand_set_ecc_enabled(struct
-> brcmnand_host *host, int en)
->
->  	if (en) {
->  		acc_control |= ecc_flags; /* enable RD/WR ECC */
-> -		acc_control |= host->hwcfg.ecc_level
-> -			       << NAND_ACC_CONTROL_ECC_SHIFT;
-> +		acc_control &= ~brcmnand_ecc_level_mask(ctrl);
-> +		acc_control |= host->hwcfg.ecc_level << ctrl->ecc_level_shift;
->  	} else {
->  		acc_control &= ~ecc_flags; /* disable RD/WR ECC */
->  		acc_control &= ~brcmnand_ecc_level_mask(ctrl);
-> @@ -2225,7 +2233,7 @@ static int brcmnand_set_cfg(struct
-> brcmnand_host *host,
->  	tmp &= ~brcmnand_ecc_level_mask(ctrl);
->  	tmp &= ~brcmnand_spare_area_mask(ctrl);
->  	if (ctrl->nand_version >= 0x0302) {
-> -		tmp |= cfg->ecc_level << NAND_ACC_CONTROL_ECC_SHIFT;
-> +		tmp |= cfg->ecc_level << ctrl->ecc_level_shift;
->  		tmp |= cfg->spare_area_size;
->  	}
->  	nand_writereg(ctrl, acc_control_offs, tmp);
+>  	cfg->device_size = mtd->size;
+>  	cfg->block_size = mtd->erasesize;
 >
 > --
 > 2.46.0
 
 Reviewed-by: William Zhang <william.zhang@broadcom.com>
 
---0000000000001cbf9f062245ab90
+--000000000000d306fc062245ae6f
 Content-Type: application/pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -361,13 +258,13 @@ VhYAxZlzj7tSjUIM7G7IhyfqPC46GKJ/4x+Amz1Z6YxNGy71L68kYD6hIbBcA5AM42QBUufly6Oa
 urb/KlmDGfVrIRYDbL0ckhGQIP5c6L+kSQZ2sHnQK0e0WgIaZYxaPYeY5u0GLCOze+3vyRMxggJt
 MIICaQIBATBrMFsxCzAJBgNVBAYTAkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52LXNhMTEwLwYD
 VQQDEyhHbG9iYWxTaWduIEdDQyBSMyBQZXJzb25hbFNpZ24gMiBDQSAyMDIwAgwxuh2XG3FXRL1W
-JOEwDQYJYIZIAWUDBAIBBQCggdQwLwYJKoZIhvcNAQkEMSIEIMaUYvZTCysH9hqoNetSCyUABtpC
-cW3ltXNNPRx4cc5dMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTI0
-MDkxNzAwMjExOVowaQYJKoZIhvcNAQkPMVwwWjALBglghkgBZQMEASowCwYJYIZIAWUDBAEWMAsG
+JOEwDQYJYIZIAWUDBAIBBQCggdQwLwYJKoZIhvcNAQkEMSIEII59oTsCnleTm8jpHY4YhV54ua5J
+r+GS3kxGpNl8BRYWMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTI0
+MDkxNzAwMjIyMVowaQYJKoZIhvcNAQkPMVwwWjALBglghkgBZQMEASowCwYJYIZIAWUDBAEWMAsG
 CWCGSAFlAwQBAjAKBggqhkiG9w0DBzALBgkqhkiG9w0BAQowCwYJKoZIhvcNAQEHMAsGCWCGSAFl
-AwQCATANBgkqhkiG9w0BAQEFAASCAQBD6ny0x+r0TT49p8Mp6LYmruB3cdAoSDJRMU5rsF6T4DrB
-TIHB8QfZMJmNRWcFI4Kfq/hQ8Q4REuV4OL7La5mErLu97n23bgFiJ5hT336qGh8edb1MU6cTbfFZ
-RoXqTwpK6YksQaX7nPJJAuNPWO7KqMp7cqJozMjUqXaB8K8eR4kB++V/1H6OmbNsnSPmig6U9RlN
-r9C1ZVKNPNtY5gJG82K0+hBnCy8YZu0q3mGThkIMDD2KD8pmZzFUoXF+O7WG6xo1CuttTUV2+oy6
-RypJ+XRhY/ZZww7t/iEr5cAfw8h1T7Oz3RcpXzrKxncH4LEUT9+Lb8xgWPNv6722rNwQ
---0000000000001cbf9f062245ab90--
+AwQCATANBgkqhkiG9w0BAQEFAASCAQCtSFUBNwkxr4hHRdlRbrzYbwl4xOoCnP4oyxjusz/YVWTY
+qoCUI4rVEVXvkaDpu5rF5eeh9k1kHljxgiZCiSe2WjbQc0udQ+QNDzT5Ls5B5VaYz3/2ZuDUBWxy
+M79m3KxW64pziZmPjWtjTSmqn5NRCkXmYgzsaOKSUz/l/atkCNepwdk/1sBjq1fVY1xfLElJdgpm
++vL5I9MABi9QNOE0oRAG9jFDBK5LF/OVTprjWDUMn0bzzMUkOaooxkjLl9vBO60HwAPX6m+ZP1CD
+UA8HTRfrvTS1rXY8jDKRp03EW8kE+qA91n0fDd8EUlJnPj2t7scFsSyKqekJsob2ekxJ
+--000000000000d306fc062245ae6f--
