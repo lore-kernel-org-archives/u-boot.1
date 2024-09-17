@@ -4,87 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43629CAC591
-	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 17:24:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC5E7CAC596
+	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 19:08:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9073F88B2D;
-	Tue, 17 Sep 2024 19:24:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id DCDA588D31;
+	Tue, 17 Sep 2024 21:08:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bO9O5ZHe";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LcWaxTX/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DBFA488B4B; Tue, 17 Sep 2024 19:24:36 +0200 (CEST)
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
- [IPv6:2607:f8b0:4864:20::f29])
+ id B3E5188D27; Tue, 17 Sep 2024 21:08:06 +0200 (CEST)
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [IPv6:2a00:1450:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE0F688969
- for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 19:24:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B8FA88DAE
+ for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 21:08:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-6c34dd6c21aso43453266d6.2
- for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 10:24:34 -0700 (PDT)
+ spf=pass smtp.mailfrom=linus.walleij@linaro.org
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-2f74b6e1810so53471351fa.2
+ for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 12:08:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1726593873; x=1727198673; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=PIxT12hHi+6FPn/GJfyMmhUgq97eBiAgwY3cxA24agw=;
- b=bO9O5ZHehXo1bdpUBJv0gV8JHKn/IIvIdXGnpK85VUi9mv/FOsGBL1cFedDxB8B6zj
- GEp2x5jIslZ+IKBV5qpNZTBmU7zeV1mxh2+Crlz/a6+kjx2c0+z4R4QB992m2LYuPpkT
- 3fUcHvHZiXuGMAOy+RHKR28ye+NcRZdphr840=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726593873; x=1727198673;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1726600082; x=1727204882; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PIxT12hHi+6FPn/GJfyMmhUgq97eBiAgwY3cxA24agw=;
- b=ozP+zgBh68TVxVrQhRkW4lrmfQGIAL8U7f14/kCrQKW9mZh6AkEbmY6METlTnMggeP
- ZghW6GLlpGymqef73h4O1vM922OYgMQ/rvncpYv5oqhOee4PMN9X0VWWyvK7cZGjyoO/
- 6/rBohXO7Wve2+YKnmppTdBhGnuozAiCXsjgsBNFbDqbiA5bHcwNO4ruHjP8lR/uhSdd
- Y8AxwD3vFRQeouHmKdSU395mKASqzcNTeY5KfEXwZyJiPsKSJC7812roSw58nSiWT1x4
- xjqDOzVVi5/GsTHOD6mxm2tfImcyLHC8FNXZ0yCy89SjvxJ+w1KAtsxbE5XFL1cK0mHa
- UCNQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVMvb4hSZBlQkMRmSJTaPrQezxYr82gv87854YGByFD/WBUlzZ0SygKoVDdz04qHUXLsl/9m4s=@lists.denx.de
-X-Gm-Message-State: AOJu0YwZjpsbxYcQxFqE7h1gz4N8nRHD297HUp72+T9mnhzO3L3i3Fvq
- hYC9DCXawJcVAmc4cYQQ7tfC+XYZp/ylxJqLk69/BUXcTJsL2+TZubUqoKU8tmEmHoAI59VtNhG
- 94Y0=
-X-Google-Smtp-Source: AGHT+IEXTjkYZOEHA+EXl5X21BmJD7+xQ60dX6uT3lYcb3cmgjCqrfiTwLcFr8p1onGSCHA7htpAlQ==
-X-Received: by 2002:a05:6214:3c9c:b0:6c5:dc7:577c with SMTP id
- 6a1803df08f44-6c57350b8f6mr316974796d6.2.1726593873501; 
- Tue, 17 Sep 2024 10:24:33 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6c58c625877sm36478156d6.8.2024.09.17.10.24.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Sep 2024 10:24:32 -0700 (PDT)
-Date: Tue, 17 Sep 2024 11:24:29 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Richard Weinberger <richard@sigma-star.at>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Richard Weinberger <richard@nod.at>, upstream+uboot@sigma-star.at,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Christian Taedcke <christian.taedcke@weidmueller.com>
-Subject: Re: [PATCH 1/3] test_fs: Allow running unprivileged
-Message-ID: <20240917172429.GO4252@bill-the-cat>
-References: <20240802093322.15240-1-richard@nod.at>
- <3292219.QWXsJ6tzlI@somecomputer>
- <CAFLszThXOBKECTPy9nCLR5VYHVz6iauOVFYK9ZCai5CJZa2U3g@mail.gmail.com>
- <2685504.bgRvk7e4E5@somecomputer>
- <20240819171136.GF1626301@bill-the-cat>
+ bh=IV5QNcVAhvLAYFHOCETofcC/G29PIP/rs9paWN9HMCc=;
+ b=LcWaxTX/lF9utAVhqrx2J1xCE9U8ybtyM/qCYqMbtJAz5dpmg4h4L7yOOaqQ0z4wlv
+ GwS8kY3vREg4wIJVsYCmNrmZ9WvlF9Fum6xk41WroZzkpo6FtJRi29iaCqCGP4STPYaw
+ 7VYjvpAZQc/v8NcTB45P0i9I17XoOucdPbPIqK3KJr1NTUajhthcT+hYubQT3aXzPVZU
+ 0Kxj6floMnycZOtCDLWFH7c7EFi7nD8hoHvAqKHaDNdaHBAYXbahTxQHKRznoU5Eelnd
+ ZbataPrAuhgceM8++ZypHax7MISBKLfgU4G3KIsU7Ksw7hm0ivi0rcxryMqB4KMySKXS
+ SYtQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1726600082; x=1727204882;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=IV5QNcVAhvLAYFHOCETofcC/G29PIP/rs9paWN9HMCc=;
+ b=H2YaY8zpC7Uq9PatxQQec3WZH0wEeVce0YG2IntAfUt7EiQDlRqqxqZnCEKKo0Yk/p
+ BALZLV2dFqVFTGr0r5Tchd/CxXPvlw0tTWAcKbiy28YsH2eisUslRa/hHZOpy1B5b40R
+ S6OLseiLbNxJLCMkefgp/ifQuX41ApuO8MxMsL6K9TyuN28rfO8Wb+bKimEt5D2WendG
+ 9nkiLhj8trrroO5bzorO9oPsyXQlu7glI0yAN9oGlZBAukVxd06HsZc1+2Oha6qw7h8L
+ NnpVQxdmxx2H0Vcu77/JaoGVOMQZL3uVoSq6sHqvetLRjk01adAbd4njLw6+SfXnCCdC
+ ZkFw==
+X-Gm-Message-State: AOJu0YxNaqG4cqm4PWYE3tsFKikMJHuE2FymWwkF6OZz4xRbXD0RmfAO
+ BUGFLO29T6DhWOfSq1+ib3pe0y/6/vYDEBEIRnaUkXok9x3b41pPbeCzOP7apN7D8uijmtA0h96
+ Xf5DLrsujCDCcpBtQ4XVE4huHzr7DhoraEWjzFw==
+X-Google-Smtp-Source: AGHT+IGVFMnIGzpaDIEtZiQZ2grfG12eFvjm2EEGhqe2DagX2Km7x5+kqDNpuhqe0tuh1WqkCXMznTTBfQ1WewhRA/E=
+X-Received: by 2002:a2e:be08:0:b0:2f7:5cf9:46dd with SMTP id
+ 38308e7fff4ca-2f787f4ca04mr93102781fa.45.1726600081423; Tue, 17 Sep 2024
+ 12:08:01 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="T66k29sjCJUDUbTI"
-Content-Disposition: inline
-In-Reply-To: <20240819171136.GF1626301@bill-the-cat>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20240911-brcmnand-fixes-v1-0-be112a20aaf1@linaro.org>
+ <d27e92a5ccecc302a1b2ca7ff55b8c3b@mail.gmail.com>
+ <CACRpkdYxecZsgoUipPR8DgcNPKp-3o-h=Qseq71W8vceV4eXsQ@mail.gmail.com>
+ <4aa2c921dddb69a5a4964d5446f37695@mail.gmail.com>
+ <CACRpkdYBFAhNaMVSQDCiMsVpBA3tZOu7nJd2kaTSPHKX8bTTbw@mail.gmail.com>
+ <bdbc43d3c66eb3c7bbf45ab95294ddf1@mail.gmail.com>
+In-Reply-To: <bdbc43d3c66eb3c7bbf45ab95294ddf1@mail.gmail.com>
+From: Linus Walleij <linus.walleij@linaro.org>
+Date: Tue, 17 Sep 2024 21:07:49 +0200
+Message-ID: <CACRpkdavn1GC6Y2TY_xJuM59kDF13-8-jRs=LPJG+ZHtHvMZEw@mail.gmail.com>
+Subject: Re: [PATCH 0/7] mtd: nand: brcmnand: Backported fixes from Linux
+To: William Zhang <william.zhang@broadcom.com>
+Cc: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Anand Gore <anand.gore@broadcom.com>, 
+ Kursad Oney <kursad.oney@broadcom.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>, 
+ Florian Fainelli <florian.fainelli@broadcom.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Kamal Dasu <kamal.dasu@broadcom.com>, David Regan <dregan@broadcom.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,54 +99,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, Sep 17, 2024 at 2:19=E2=80=AFAM William Zhang
+<william.zhang@broadcom.com> wrote:
 
---T66k29sjCJUDUbTI
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> > > What SoC do you use?
+> >
+> > This is on BCM6846.
+> >
+> 6846 will work.  Let me know if it still does not work after dts fix.
 
-On Mon, Aug 19, 2024 at 11:11:36AM -0600, Tom Rini wrote:
-> On Sun, Aug 18, 2024 at 10:06:05PM +0200, Richard Weinberger wrote:
-> > Simon,
-> >=20
-> > Am Sonntag, 18. August 2024, 17:47:01 CEST schrieb Simon Glass:
-> > > In that file, this is the line that builds the tools:
-> > >=20
-> > >           ./tools/buildman/buildman -T0 -o ${UBOOT_TRAVIS_BUILD_DIR}
-> > > -w --board tools-only
-> > >=20
-> > > and this adds the built scripts/dtc to the path, but you could just as
-> > > easily add tools/
-> > >=20
-> > >           export PATH=3D${UBOOT_TRAVIS_BUILD_DIR}/scripts/dtc:${PATH}
-> >=20
-> > Sounds good. I guess this needs to go into master first before it shows
-> > an effect on my branch?
->=20
-> Can you please just work that in to your series here? Thanks again for
-> cleaning all this up!
+Yes it work just fine! I dropped
+CONFIG_SYS_NAND_ONFI_DETECTION and then it detects
+and works fine on Genexis XG6846B, see here for a full
+session where I do some ubifs inspection:
+https://dflund.se/~triad/krad/genexis-xg6846b/ubi-info.txt
 
-Have you had a chance to get back to this series? Thanks!
-
---=20
-Tom
-
---T66k29sjCJUDUbTI
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbpu0YACgkQFHw5/5Y0
-tyzLigwAk5py6uCWNzzPwjGzV6H/ZPXOxktjve0FAuPnc0yztpIE6IkrRIHhGmKW
-cQEVOwl/nxwi+7MXn1HSP6TdxIdJTw6E+aUvqSIKzZvp467Wl/wcwsrAHBzh2doY
-5ZGBnT/IpGCzCF5d3GBxJ4ct0ztp8U8neJ5Hx2acT8R4c4Mt/CGpuig+qcSy3xPf
-wxvFbL3QDSl928FAlCJz65osXSD9LnUquqw00hXtryYLFOFtKVvfNocCnk+q6Lfp
-gckCc8GVK8B+tIvq1qOJgP3bKt5QvmEJv2onnQjWH42XoGBe3HpPWVzzQq+czzuW
-fzSYYjv9Z/3qhdeC+W2kfCn2ITKhGCu2nD1V7qYj96hTrknNTgv/IMOR65YOvhcd
-2w5l+re9rmbGl+iSAiH7Svi7/jMpy7iW8BXLQF3R89SsA57EghyDU/ccrHecw3BY
-nBgwydHh4Y+KWajEgXYSA/iyS6CTpyXvdNKaQddpQfp5msWPsMwJicBTMwNeVH9F
-vpc4SY/x
-=mk6R
------END PGP SIGNATURE-----
-
---T66k29sjCJUDUbTI--
+Yours,
+Linus Walleij
