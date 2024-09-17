@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89914C3ABB2
-	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 00:23:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC591C3ABCB
+	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 00:24:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2682C88785;
-	Tue, 17 Sep 2024 02:23:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 88EB288E42;
+	Tue, 17 Sep 2024 02:24:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=broadcom.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="KLyABXea";
+	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="WZY5Tgav";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C026988785; Tue, 17 Sep 2024 02:23:37 +0200 (CEST)
-Received: from mail-vk1-xa32.google.com (mail-vk1-xa32.google.com
- [IPv6:2607:f8b0:4864:20::a32])
+ id 8020788E61; Tue, 17 Sep 2024 02:24:16 +0200 (CEST)
+Received: from mail-vk1-xa2d.google.com (mail-vk1-xa2d.google.com
+ [IPv6:2607:f8b0:4864:20::a2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E07C88E6F
- for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 02:22:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6FD2A87BF4
+ for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 02:22:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=broadcom.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=william.zhang@broadcom.com
-Received: by mail-vk1-xa32.google.com with SMTP id
- 71dfb90a1353d-50108a42fa9so1068731e0c.3
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 17:22:32 -0700 (PDT)
+Received: by mail-vk1-xa2d.google.com with SMTP id
+ 71dfb90a1353d-502b408a381so1126244e0c.3
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 17:22:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=broadcom.com; s=google; t=1726532551; x=1727137351; darn=lists.denx.de;
- h=to:subject:message-id:date:thread-index:mime-version:in-reply-to
+ d=broadcom.com; s=google; t=1726532524; x=1727137324; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:thread-index:mime-version:in-reply-to
  :references:from:from:to:cc:subject:date:message-id:reply-to;
- bh=56QALE1tMN0/W3ih0cEQKzFNzx3eTujFxoEAjtih5PU=;
- b=KLyABXeaOLJc6DUzSsMpurN2VvT4cpTFUetj4GORi12aOycrReUQ4Y6jYeFqayg399
- UKSbjBy0FXY0UPQglFufVxA9g+R4ys31fNrWDn6goeL6jExOvqS50OmEaiWgNCc0s7SQ
- kLPhutfGr6ZEnkC3L/Kyz1Kmc+goUdWNWL/wQ=
+ bh=vgLXiaSclXdeJ1Tmm1D9UqOYXpvrfrvonv2QFsxkr6E=;
+ b=WZY5TgavAI4G4q6Hq7IEFYzKWSLKK7lX1GApRzU1IJrBrnnycE7QeBxsSv1R+EPORR
+ 3abBEQK+pVkQgUJLYhxkqxqHYXPcxN6zkXyf//TOn95YXH/JY9gcTQ52US5w1y9t1xFD
+ e+NhP0z4HftdROp6cEwFmMu6gXCu3u9RYEIV4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726532551; x=1727137351;
- h=to:subject:message-id:date:thread-index:mime-version:in-reply-to
+ d=1e100.net; s=20230601; t=1726532524; x=1727137324;
+ h=cc:to:subject:message-id:date:thread-index:mime-version:in-reply-to
  :references:from:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=56QALE1tMN0/W3ih0cEQKzFNzx3eTujFxoEAjtih5PU=;
- b=kB8kozYUmeh4FNoG1tRufY2s3VGe9kI8+NY3NgSW4BeGmIIRPF4cZCDMXrh5NDGkFY
- 9ciBVpHDcZi8tHolXKODPDqP7on/WwSb06TbjkVpxF8A8T+TX/+nSkvi2KzQOHlPvFHR
- qYOaMWxLzjhUBMZpqLVIbApflJnwyO/1V1DVgHiVUZGmvllApYv43c+MX1XZY0EGuC/C
- MAB/fz4FO3xI1xcyXdIiBlHzAk8asDC8hu9QB2L0cM4AQmkFir9QSXz7NwQR4j/yBOqI
- XvMYuJL0JapU3ZKfjitm4G5WGek7ofJZ6CSmzGXcjYrVtbXgF+K+v0DfpV5CAUB40Vbh
- cRlw==
+ bh=vgLXiaSclXdeJ1Tmm1D9UqOYXpvrfrvonv2QFsxkr6E=;
+ b=fIvCcLveNZSUdnEKYJePNjzANPGMUL73F0EtzYDu1dhCpfo4buWgtt1cl+rP4ia/6a
+ drYrry1VHNLXIZ0/sgvOjH562b+o1sLU6LGMWvMub82w28bQ9MIikkotm/Q8VBn/l35E
+ sjZpkhWm94f8loO6Ur1Dqt6QVPbC2XLY2gSBZPhCnYa0V8lZLdyAOME006Vdjl+/WFgr
+ ebQ4hvJqqZyIUVIMDzCJAwaWUKieElJ4qmUb/aK2+fByCO/PAyN7Pi91nDOvdwNCv8fw
+ XzHSTqLkoZ6X8eh3yZoLZ/jwXWX+kPHLVYMmRsJdb4hLvz8q9+tO52smyT4rQRuWKJgH
+ XtOA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWcb/2aIbnwi9bXPSS6qrlhRCBGvNM9fEBUw6w7sM+GFiGnvpDpSWHDUgOHz66ZcmlKRASRcVY=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywsbvq6v+RrSR4rGjr/yJL6axx6OqAX5gmDEJgzGpp9NQoz8JiW
- bKdNf2qOHMIrbyGwN5aYd0gpeOeSRN09uXZhujxG/jlRb9UFtZov7kvtCgymAScWdHZQNuD7GFE
- Ezj+3Ggm5cevxbJKEroauho3NltG7bIQMyA4w
-X-Google-Smtp-Source: AGHT+IESG5H+FARHem2RThaMBO7KTDpLCGfkLgNy7v8VkZK3o2VA23tr5+M0cHdbOla03/LRfAQTjRQ0MJFtjLGTjTw=
-X-Received: by 2002:a05:6122:2517:b0:4fc:e4f5:7f83 with SMTP id
- 71dfb90a1353d-5032d4bb92dmr12154047e0c.9.1726532550954; Mon, 16 Sep 2024
- 17:22:30 -0700 (PDT)
+ AJvYcCUQRYrWuN649T88lq3gHc+T3uuDa9xe33FBh6RmkFDRbLmLYgrYJnSzCaF3PSPDDgiyYHJouNs=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy4rzmlyQcUecZrxb1ltjEMiDBS4ef/7ow08RoKKiGQic3C1AF6
+ XGrv6XzSEVNefeMNg6S0Jn/LpgEw71wUaDsI7iM0ZKn1zF+HYrUZWNR/eX8U3Tsf5L0T7KJcSAg
+ 2FrU3pgsE8tJthO2oNmrJ9i6hZlQ3iSB20FEY
+X-Google-Smtp-Source: AGHT+IHCTbL882Cmch2Fv4uKvJLrLq6r57ymfmWa64exqhdkuxyorw9iUOxweB/wP7wOc5tHWxfUKgOfX1Z7IlrMCWQ=
+X-Received: by 2002:a05:6122:3687:b0:4fc:eda5:634f with SMTP id
+ 71dfb90a1353d-5032d3a664dmr12137598e0c.4.1726532524323; Mon, 16 Sep 2024
+ 17:22:04 -0700 (PDT)
 From: William Zhang <william.zhang@broadcom.com>
 References: <20240916-brcmnand-fixes-v2-0-08632f64c8ec@linaro.org>
- <20240916-brcmnand-fixes-v2-5-08632f64c8ec@linaro.org>
-In-Reply-To: <20240916-brcmnand-fixes-v2-5-08632f64c8ec@linaro.org>
+ <20240916-brcmnand-fixes-v2-3-08632f64c8ec@linaro.org>
+In-Reply-To: <20240916-brcmnand-fixes-v2-3-08632f64c8ec@linaro.org>
 MIME-Version: 1.0
 X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQES+R/HTbMR/ti/GhYZxlIU8W7clgE+Hqhls+FMIlA=
-Date: Mon, 16 Sep 2024 17:22:29 -0700
-Message-ID: <852cddc291181376d193ece84aecd066@mail.gmail.com>
-Subject: RE: [PATCH v2 5/7] mtd: rawnand: brcmnand: Add read data bus interface
+Thread-Index: AQES+R/HTbMR/ti/GhYZxlIU8W7clgIxd6hvs9mxEhA=
+Date: Mon, 16 Sep 2024 17:22:02 -0700
+Message-ID: <f75b41253f3f3677d11827d8b6c306d3@mail.gmail.com>
+Subject: RE: [PATCH v2 3/7] mtd: rawnand: brcmnand: Fix potential
+ out-of-bounds access in oob write
 To: Linus Walleij <linus.walleij@linaro.org>, u-boot@lists.denx.de, 
  Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
  Michael Trimarchi <michael@amarulasolutions.com>,
  Anand Gore <anand.gore@broadcom.com>, 
  Kursad Oney <kursad.oney@broadcom.com>,
  Philippe Reynes <philippe.reynes@softathome.com>
+Cc: Florian Fainelli <florian.fainelli@broadcom.com>, 
+ Miquel Raynal <miquel.raynal@bootlin.com>
 Content-Type: multipart/signed; protocol="application/pkcs7-signature";
- micalg=sha-256; boundary="00000000000069aa21062245afc9"
+ micalg=sha-256; boundary="000000000000d2904a062245ad6b"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,7 +95,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---00000000000069aa21062245afc9
+--000000000000d2904a062245ad6b
 Content-Type: text/plain; charset="UTF-8"
 
 > -----Original Message-----
@@ -105,91 +108,77 @@ Content-Type: text/plain; charset="UTF-8"
 > <william.zhang@broadcom.com>; Kursad Oney
 > <kursad.oney@broadcom.com>; Philippe Reynes
 > <philippe.reynes@softathome.com>
-> Cc: Linus Walleij <linus.walleij@linaro.org>
-> Subject: [PATCH v2 5/7] mtd: rawnand: brcmnand: Add read data bus
-> interface
+> Cc: Linus Walleij <linus.walleij@linaro.org>; Florian Fainelli
+> <florian.fainelli@broadcom.com>; Miquel Raynal
+> <miquel.raynal@bootlin.com>
+> Subject: [PATCH v2 3/7] mtd: rawnand: brcmnand: Fix potential out-of-
+> bounds access in oob write
 >
-> This is a port of the read data bus interface from the Linux
-> brcmnand driver, commit
-> 546e425991205f59281e160a0d0daed47b7ca9b3
-> "mtd: rawnand: brcmnand: Add BCMBCA read data bus interface"
+> From: William Zhang <william.zhang@broadcom.com>
 >
-> This is needed for the BCMBCA RAW NAND driver.
+> Backport of upstream Linux
+> commit 5d53244186c9ac58cb88d76a0958ca55b83a15cd
+> "mtd: rawnand: brcmnand: Fix potential out-of-bounds access in oob write"
+>
+> When the oob buffer length is not in multiple of words, the oob write
+> function does out-of-bounds read on the oob source buffer at the last
+> iteration. Fix that by always checking length limit on the oob buffer
+> read and fill with 0xff when reaching the end of the buffer to the oob
+> registers.
 >
 > Signed-off-by: William Zhang <william.zhang@broadcom.com>
+> Reviewed-by: Florian Fainelli <florian.fainelli@broadcom.com>
+> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+> Link: https://lore.kernel.org/linux-mtd/20230706182909.79151-5-
+> william.zhang@broadcom.com
 > Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
 > ---
->  drivers/mtd/nand/raw/brcmnand/brcmnand.c | 20 +++++++++++++++++-
-> --
->  drivers/mtd/nand/raw/brcmnand/brcmnand.h |  2 ++
->  2 files changed, 19 insertions(+), 3 deletions(-)
+>  drivers/mtd/nand/raw/brcmnand/brcmnand.c | 18 ++++++++++++++++--
+>  1 file changed, 16 insertions(+), 2 deletions(-)
 >
 > diff --git a/drivers/mtd/nand/raw/brcmnand/brcmnand.c
 > b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
-> index 552b239b95ae..2f786584a1ae 100644
+> index 46a4107a83a9..60d34bd21f53 100644
 > --- a/drivers/mtd/nand/raw/brcmnand/brcmnand.c
 > +++ b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
-> @@ -769,6 +769,20 @@ static inline void brcmnand_write_fc(struct
-> brcmnand_controller *ctrl,
->  	__raw_writel(val, ctrl->nand_fc + word * 4);
+> @@ -1334,19 +1334,33 @@ static int write_oob_to_regs(struct
+> brcmnand_controller *ctrl, int i,
+>  			     const u8 *oob, int sas, int sector_1k)
+>  {
+>  	int tbytes = sas << sector_1k;
+> -	int j;
+> +	int j, k = 0;
+> +	u32 last = 0xffffffff;
+> +	u8 *plast = (u8 *)&last;
+>
+>  	/* Adjust OOB values for 1K sector size */
+>  	if (sector_1k && (i & 0x01))
+>  		tbytes = max(0, tbytes - (int)ctrl->max_oob);
+>  	tbytes = min_t(int, tbytes, ctrl->max_oob);
+>
+> -	for (j = 0; j < tbytes; j += 4)
+> +	/*
+> +	 * tbytes may not be multiple of words. Make sure we don't read
+> out of
+> +	 * the boundary and stop at last word.
+> +	 */
+> +	for (j = 0; (j + 3) < tbytes; j += 4)
+>  		oob_reg_write(ctrl, j,
+>  				(oob[j + 0] << 24) |
+>  				(oob[j + 1] << 16) |
+>  				(oob[j + 2] <<  8) |
+>  				(oob[j + 3] <<  0));
+> +
+> +	/* handle the remaing bytes */
+> +	while (j < tbytes)
+> +		plast[k++] = oob[j++];
+> +
+> +	if (tbytes & 0x3)
+> +		oob_reg_write(ctrl, (tbytes & ~0x3), (__force
+> u32)cpu_to_be32(last));
+> +
+>  	return tbytes;
 >  }
->
-> +static inline void brcmnand_read_data_bus(struct brcmnand_controller
-> *ctrl,
-> +					  void __iomem *flash_cache, u32
-> *buffer, int fc_words)
-> +{
-> +	struct brcmnand_soc *soc = ctrl->soc;
-> +	int i;
-> +
-> +	if (soc && soc->read_data_bus) {
-> +		soc->read_data_bus(soc, flash_cache, buffer, fc_words);
-> +	} else {
-> +		for (i = 0; i < fc_words; i++)
-> +			buffer[i] = brcmnand_read_fc(ctrl, i);
-> +	}
-> +}
-> +
->  static void brcmnand_clear_ecc_addr(struct brcmnand_controller *ctrl)
->  {
->
-> @@ -1812,7 +1826,7 @@ static int brcmnand_read_by_pio(struct
-> mtd_info *mtd, struct nand_chip *chip,
->  {
->  	struct brcmnand_host *host = nand_get_controller_data(chip);
->  	struct brcmnand_controller *ctrl = host->ctrl;
-> -	int i, j, ret = 0;
-> +	int i, ret = 0;
->
->  	brcmnand_clear_ecc_addr(ctrl);
->
-> @@ -1825,8 +1839,8 @@ static int brcmnand_read_by_pio(struct
-> mtd_info *mtd, struct nand_chip *chip,
->  		if (likely(buf)) {
->  			brcmnand_soc_data_bus_prepare(ctrl->soc, false);
->
-> -			for (j = 0; j < FC_WORDS; j++, buf++)
-> -				*buf = brcmnand_read_fc(ctrl, j);
-> +			brcmnand_read_data_bus(ctrl, ctrl->nand_fc, buf,
-> FC_WORDS);
-> +			buf += FC_WORDS;
->
->  			brcmnand_soc_data_bus_unprepare(ctrl->soc, false);
->  		}
-> diff --git a/drivers/mtd/nand/raw/brcmnand/brcmnand.h
-> b/drivers/mtd/nand/raw/brcmnand/brcmnand.h
-> index 6946a62b0679..3a1d60471361 100644
-> --- a/drivers/mtd/nand/raw/brcmnand/brcmnand.h
-> +++ b/drivers/mtd/nand/raw/brcmnand/brcmnand.h
-> @@ -11,6 +11,8 @@ struct brcmnand_soc {
->  	void (*ctlrdy_set_enabled)(struct brcmnand_soc *soc, bool en);
->  	void (*prepare_data_bus)(struct brcmnand_soc *soc, bool prepare,
->  				 bool is_param);
-> +	void (*read_data_bus)(struct brcmnand_soc *soc, void __iomem
-> *flash_cache,
-> +			      u32 *buffer, int fc_words);
->  	void *ctrl;
->  };
 >
 >
 > --
@@ -197,7 +186,7 @@ Content-Type: text/plain; charset="UTF-8"
 
 Reviewed-by: William Zhang <william.zhang@broadcom.com>
 
---00000000000069aa21062245afc9
+--000000000000d2904a062245ad6b
 Content-Type: application/pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -268,13 +257,13 @@ VhYAxZlzj7tSjUIM7G7IhyfqPC46GKJ/4x+Amz1Z6YxNGy71L68kYD6hIbBcA5AM42QBUufly6Oa
 urb/KlmDGfVrIRYDbL0ckhGQIP5c6L+kSQZ2sHnQK0e0WgIaZYxaPYeY5u0GLCOze+3vyRMxggJt
 MIICaQIBATBrMFsxCzAJBgNVBAYTAkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52LXNhMTEwLwYD
 VQQDEyhHbG9iYWxTaWduIEdDQyBSMyBQZXJzb25hbFNpZ24gMiBDQSAyMDIwAgwxuh2XG3FXRL1W
-JOEwDQYJYIZIAWUDBAIBBQCggdQwLwYJKoZIhvcNAQkEMSIEICjlL13GvUZ2zi6JyVaGTXXHddJG
-OZsyhZOZIhIqVg93MBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTI0
-MDkxNzAwMjIzMVowaQYJKoZIhvcNAQkPMVwwWjALBglghkgBZQMEASowCwYJYIZIAWUDBAEWMAsG
+JOEwDQYJYIZIAWUDBAIBBQCggdQwLwYJKoZIhvcNAQkEMSIEIKfkkns10btPFbeAZoFbAIpfKELq
+lh4RLU4Vat1hxgZdMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTI0
+MDkxNzAwMjIwNFowaQYJKoZIhvcNAQkPMVwwWjALBglghkgBZQMEASowCwYJYIZIAWUDBAEWMAsG
 CWCGSAFlAwQBAjAKBggqhkiG9w0DBzALBgkqhkiG9w0BAQowCwYJKoZIhvcNAQEHMAsGCWCGSAFl
-AwQCATANBgkqhkiG9w0BAQEFAASCAQDCTWUc9mI31/RcAT+qFJDj1/yfOrVz2vVt0GlsCIjxIJwD
-plrwMsryZn7dFkLRMCUXHAaFsB66sj9WCexB/d9oeq72DOcIFW15QM7HGxaZqqT00oXf3D/PXaf6
-37nnkU+S/LCgNcFm1MjvmxYTipHET1cvAnQIKUXsQHrJVdAvHjHVo/CIFKBy5po4Y1tMUAGTD7Od
-uPPD311eI2G9mKprPuAfcHRZC/J9hlxS7J38WgRvAXdKenVehlKbd3fppdg80XQulJxkYK4QuLG3
-pDcgwLZwoQCTkEEH59+k2/ywR1YuJ1wHwe5jJkcQUhj20DdXOvNffXQh81flLJjq23fF
---00000000000069aa21062245afc9--
+AwQCATANBgkqhkiG9w0BAQEFAASCAQBfPJPL9gkL4XENSwCMN3SPExcX54Zyh519LvWxBHqVFvFJ
+8HDZntoiJsMGZo8gcGOubWU2GCzce8qBifHd0E+jsFVs9D2seqtGX2uwTAeEooVRVgKVpGLJqQnx
+C7pM6DDFMw62vDKE7P38gAv9gk9Eg37UbHbjN10wLnXYi8+8LEb7NJ08Uc3a0GYi5mORChO9CW+6
+o9eVRNpFlKLnRQDfkzwXU/k2EgNBA/+9TrZln43rHI8TuE+c2NvQv2E4ZA4T6P+fpI9yGlHPv0tx
+mSbHIZKAtwLJaM2j0VOB70o3i3rXtrrU1md+8FNb8/teX9iiVfwC5JWpOKPQpxXSTrLq
+--000000000000d2904a062245ad6b--
