@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CDD9C3ABCB
-	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 00:27:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5D8EC3ABB2
+	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 00:31:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 16DE988C90;
-	Tue, 17 Sep 2024 02:26:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6347888C7B;
+	Tue, 17 Sep 2024 02:31:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=broadcom.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="SrD9n1sQ";
+	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="KXdpszkc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 000D588DF9; Tue, 17 Sep 2024 02:26:57 +0200 (CEST)
-Received: from mail-vk1-xa32.google.com (mail-vk1-xa32.google.com
- [IPv6:2607:f8b0:4864:20::a32])
+ id 7C7BE88CBB; Tue, 17 Sep 2024 02:31:10 +0200 (CEST)
+Received: from mail-vk1-xa29.google.com (mail-vk1-xa29.google.com
+ [IPv6:2607:f8b0:4864:20::a29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6AA6587BF4
- for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 02:26:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E9E9888B0A
+ for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 02:31:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=broadcom.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=william.zhang@broadcom.com
-Received: by mail-vk1-xa32.google.com with SMTP id
- 71dfb90a1353d-502adfff6fdso1585597e0c.1
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 17:26:54 -0700 (PDT)
+Received: by mail-vk1-xa29.google.com with SMTP id
+ 71dfb90a1353d-5011af337d4so791608e0c.2
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 17:31:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=broadcom.com; s=google; t=1726532813; x=1727137613; darn=lists.denx.de;
+ d=broadcom.com; s=google; t=1726533066; x=1727137866; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:thread-index:mime-version:in-reply-to
  :references:from:from:to:cc:subject:date:message-id:reply-to;
- bh=kgdaoo741m7MwMLSNgYRMlsmpBOdX/ElAa9JQ2TRumA=;
- b=SrD9n1sQsN+f/5bGETxvLI3ixOx+jV+0gfQpWbGqJ5USwio6EIlYakhhJL4AkQ017e
- k5s8xgs3oFwDaf0k4v1gvaVfaKfvNRik022Uo2HtrsBh28GnoK+u8nyeqBwJVdfmQTgu
- WHiQDnxww6umzQaFmVB7aKvp84FgsP+Dc6//E=
+ bh=IJ268ielcEh2JR00Mdk9kOiPOYM1T94p5rIDN6GEQsE=;
+ b=KXdpszkcYt4wh9myoWp8vWtKU5nGfexRRWv6HoKY0b8bVt/QcpQppRk2HHYZKE+7WJ
+ +nfeWF0J+GkzwgywXdRH2+LreozkJ6EK4ctKrVr6xHDhLTC4ygn36hUAuJnpDdgZaSu0
+ KIni0HlTRhv+E+CfFjHB2x0IQv7oZNjwFRaVo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726532813; x=1727137613;
+ d=1e100.net; s=20230601; t=1726533066; x=1727137866;
  h=cc:to:subject:message-id:date:thread-index:mime-version:in-reply-to
  :references:from:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kgdaoo741m7MwMLSNgYRMlsmpBOdX/ElAa9JQ2TRumA=;
- b=aXdKdEu9uZoSQMdC1mF1wsC7YLsqVN1CchAvldsKjjMoL1cMnyYKl/oDh65mT8TWLS
- sT7y9r5fiuRd52cdZYmIT7MfiQfAtWjNhx9axvrim17TlNadIMM81lGa2so9XYVFPIV6
- /gtpTQN2xslmQnBeWDgJNPLWX9J/bcaX6vQY9tP9yKoYBd8UJCCjP94aN7JKwohRWQzR
- +GqqIZQlCtfriZOqLyc9CysJkoREYcE0gx84jsX9wWZcRONASg6dxVIyXB312VUl9k0e
- hYVInpsbS1vi56MOPDF4bU3ZFvMikW+5zrm2wJIqfha0RgReegbm9CEaxgRSfB0mWS72
- hMyQ==
+ bh=IJ268ielcEh2JR00Mdk9kOiPOYM1T94p5rIDN6GEQsE=;
+ b=YHzfhnEAzCdGKayr/y1S6J1eHPbV4NM7Jkraf+Gde/LmTCTamrVc6T4E673u+E8/6e
+ hYN0TDhyT1n/7r27EeQPJz0gXIgydEZwauJu97rBkboRKcsf5gV4pZiwmk9oQicwnQbQ
+ 96GiiM4Jszakf0ts7ppZDOigrlCJlzcCROqIuR82ecib8JzRkfCz7qgWVSoJq+/PFa/Z
+ jJaUOhKHMCS17ztz0iREfwOfaI65trmOeELzayj7GM3p6aClLS9h6tDLjuFKAlCEeZfq
+ oHx645QYFcRwZLneEPUydnwXTxUvdAqz7uEjM8OvsfJUJr6e+Ku41D64S8jjoPnTHIWs
+ 2m9w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX95dvkMhgtyI2B5TmIAR7B/gnlENGWmq82uavF2lv0ha9/FJMtGec5/14TjCo//KSvoB6FiAs=@lists.denx.de
-X-Gm-Message-State: AOJu0YxyTEcHvXyfpoAltHTdow6Tw/HAv9vqiTaWSghE0xBjswHddmTY
- 0PMtrbGDvbWDLYfwkeNFMPf31XqiF8wMwpmdiVGZo9E3ISqtssNj8XMDmBwR+8wf68htR8nLVew
- uJj43i69jQ+urB+Qw78t89Rk1ot7WR1AaZ6fZ
-X-Google-Smtp-Source: AGHT+IEJO7/isbAKip/tpGgQ3F7fgftDK8jLpVaYbteDcr1r/XVqhu7a4cBi9+IUD3DMHe1Hiv7qBqZaZomLs1rrhGc=
-X-Received: by 2002:a05:6122:3094:b0:4ef:65fe:7ee3 with SMTP id
- 71dfb90a1353d-5032d3ab6c0mr13052213e0c.5.1726532813204; Mon, 16 Sep 2024
- 17:26:53 -0700 (PDT)
+ AJvYcCU/hRn2BjJI1k8yuOCjkBQJ/LbIlnxLpZl2pi28XzZ1H9UKLgaFj5jdC+QE+yXgCHG5L+4J//k=@lists.denx.de
+X-Gm-Message-State: AOJu0YxvHo7bmEHYcVXRSWbhkodDGUfWIpdEIyHnKyfCQjwdtLG54HVH
+ M3HXVhw0m5XcA486vZkI/a2VbnV/bzLNV3L66FDkBIt824jC/OCGlBrKXa6p27vUEQYAoO9GdYS
+ rlVDesvZp8j/rVcsnqstCn6hyE5MxLOfwc1jN
+X-Google-Smtp-Source: AGHT+IG52kQpLyb3H9kTd4o7AJDpK3gE+sqCzWx3PAYRUIxiWZ5nazAjTWhS25ME1atQxj413JWPZZk7h1Pe82th7XU=
+X-Received: by 2002:a05:6122:2a4f:b0:502:873f:13c2 with SMTP id
+ 71dfb90a1353d-5032d73c3a9mr10308463e0c.13.1726533065703; Mon, 16 Sep 2024
+ 17:31:05 -0700 (PDT)
 From: William Zhang <william.zhang@broadcom.com>
 References: <20240916-brcmnand-fixes-v2-0-08632f64c8ec@linaro.org>
- <20240916-brcmnand-fixes-v2-6-08632f64c8ec@linaro.org>
-In-Reply-To: <20240916-brcmnand-fixes-v2-6-08632f64c8ec@linaro.org>
+ <20240916-brcmnand-fixes-v2-7-08632f64c8ec@linaro.org>
+In-Reply-To: <20240916-brcmnand-fixes-v2-7-08632f64c8ec@linaro.org>
 MIME-Version: 1.0
 X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQES+R/HTbMR/ti/GhYZxlIU8W7clgHvgu7Fs9vBDCA=
-Date: Mon, 16 Sep 2024 17:26:52 -0700
-Message-ID: <2bcf98d182f80ec41d714ce04e6af910@mail.gmail.com>
-Subject: RE: [PATCH v2 6/7] mtd: rawnand: brcmnand: Support write protection
- setting from dts
+Thread-Index: AQES+R/HTbMR/ti/GhYZxlIU8W7clgHTwgyks9yhB6A=
+Date: Mon, 16 Sep 2024 17:31:04 -0700
+Message-ID: <93de047a13ec9ca18ca3ceea1f25ab2f@mail.gmail.com>
+Subject: RE: [PATCH v2 7/7] mtd: rawnand: brcmnand: Add support for getting
+ ecc setting from strap
 To: Linus Walleij <linus.walleij@linaro.org>, u-boot@lists.denx.de, 
  Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
  Michael Trimarchi <michael@amarulasolutions.com>,
  Anand Gore <anand.gore@broadcom.com>, 
  Kursad Oney <kursad.oney@broadcom.com>,
  Philippe Reynes <philippe.reynes@softathome.com>
-Cc: Florian Fainelli <florian.fainelli@broadcom.com>,
- Kamal Dasu <kamal.dasu@broadcom.com>, 
- David Regan <dregan@broadcom.com>, Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: David Regan <dregan@broadcom.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>
 Content-Type: multipart/signed; protocol="application/pkcs7-signature";
- micalg=sha-256; boundary="0000000000000bf10e062245bf4a"
+ micalg=sha-256; boundary="00000000000018ed97062245ce33"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,7 +95,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---0000000000000bf10e062245bf4a
+--00000000000018ed97062245ce33
 Content-Type: text/plain; charset="UTF-8"
 
 > -----Original Message-----
@@ -109,75 +108,165 @@ Content-Type: text/plain; charset="UTF-8"
 > <william.zhang@broadcom.com>; Kursad Oney
 > <kursad.oney@broadcom.com>; Philippe Reynes
 > <philippe.reynes@softathome.com>
-> Cc: Linus Walleij <linus.walleij@linaro.org>; Florian Fainelli
-> <florian.fainelli@broadcom.com>; Kamal Dasu
-> <kamal.dasu@broadcom.com>; David Regan <dregan@broadcom.com>;
-> Miquel Raynal <miquel.raynal@bootlin.com>
-> Subject: [PATCH v2 6/7] mtd: rawnand: brcmnand: Support write
-> protection setting from dts
+> Cc: Linus Walleij <linus.walleij@linaro.org>; David Regan
+> <dregan@broadcom.com>; Miquel Raynal <miquel.raynal@bootlin.com>
+> Subject: [PATCH v2 7/7] mtd: rawnand: brcmnand: Add support for getting
+> ecc setting from strap
 >
 > From: William Zhang <william.zhang@broadcom.com>
 >
-> Backport of upstream Linux
-> commit 8e7daa85641c9559c113f6b217bdc923397de77c
-> "mtd: rawnand: brcmnand: Support write protection setting from dts"
+> Backport from the upstream Linux kernel
+> commit c2cf7e25eb2a3c915a420fb8ceed8912add7f36c
+> "mtd: rawnand: brcmnand: Add support for getting ecc setting from strap"
 >
-> Augmented to also support the "write-protect" boolean property.
+> Note: the upstream kernel introduces a new
+> bool brcmnand_get_sector_size_1k() function because the int
+> version in U-Boot has been removed in Linux. I kept the old
+> int-returning version that is already in U-Boot as we depend
+> on that in other code.
 >
-> The write protection feature is controlled by the module parameter wp_on
-> with default set to enabled. But not all the board use this feature
-> especially in BCMBCA broadband board. And module parameter is not
-> sufficient as different board can have different option.  Add a device
-> tree property and allow this feature to be configured through the board
-> dts on per board basis.
+> BCMBCA broadband SoC based board design does not specify ecc setting in
+> dts but rather use the SoC NAND strap info to obtain the ecc strength
+> and spare area size setting. Add brcm,nand-ecc-use-strap dts propety for
+> this purpose and update driver to support this option. However these two
+> options can not be used at the same time.
 >
 > Signed-off-by: William Zhang <william.zhang@broadcom.com>
-> Reviewed-by: Florian Fainelli <florian.fainelli@broadcom.com>
-> Reviewed-by: Kamal Dasu <kamal.dasu@broadcom.com>
 > Reviewed-by: David Regan <dregan@broadcom.com>
 > Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
-> Link: https://lore.kernel.org/linux-mtd/20240223034758.13753-14-
+> Link: https://lore.kernel.org/linux-mtd/20240301173308.226004-1-
 > william.zhang@broadcom.com
 > Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
 > ---
->  drivers/mtd/nand/raw/brcmnand/brcmnand.c | 11 ++++++++++-
->  1 file changed, 10 insertions(+), 1 deletion(-)
+>  drivers/mtd/nand/raw/brcmnand/brcmnand.c | 70
+> ++++++++++++++++++++++++++++++--
+>  1 file changed, 66 insertions(+), 4 deletions(-)
 >
 > diff --git a/drivers/mtd/nand/raw/brcmnand/brcmnand.c
 > b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
-> index 2f786584a1ae..071b33951648 100644
+> index 071b33951648..749553c9df90 100644
 > --- a/drivers/mtd/nand/raw/brcmnand/brcmnand.c
 > +++ b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
-> @@ -2844,8 +2844,17 @@ int brcmnand_probe(struct udevice *dev,
-> struct brcmnand_soc *soc)
->  	/* Disable XOR addressing */
->  	brcmnand_rmw_reg(ctrl, BRCMNAND_CS_XOR, 0xff, 0, 0);
+> @@ -980,6 +980,43 @@ static void brcmnand_set_sector_size_1k(struct
+> brcmnand_host *host, int val)
+>  	nand_writereg(ctrl, acc_control_offs, tmp);
+>  }
 >
-> +	/* Check if the board connects the WP pin */
-> +#ifndef __UBOOT__
-> +	if (of_property_read_bool(dn, "brcm,wp-not-connected"))
-> +#else
-> +	if (dev_read_bool(ctrl->dev, "brcm,wp-not-connected"))
-> +#endif /* __UBOOT__ */
-> +		wp_on = 0;
+> +static int brcmnand_get_spare_size(struct brcmnand_host *host)
+> +{
+> +	struct brcmnand_controller *ctrl = host->ctrl;
+> +	u16 acc_control_offs = brcmnand_cs_offset(ctrl, host->cs,
 > +
->  	/* Read the write-protect configuration in the device tree */
-> -	wp_on = dev_read_u32_default(dev, "write-protect", wp_on);
-> +	if (dev_read_bool(ctrl->dev, "write-protect"))
-write-protect is a u32 property. Should use dev_read_u32 and check return
-code to see if the property exist or not.
-
-> +		wp_on = dev_read_u32_default(dev, "write-protect", wp_on);
+> BRCMNAND_CS_ACC_CONTROL);
+> +	u32 acc = nand_readreg(ctrl, acc_control_offs);
+> +
+> +	return (acc & brcmnand_spare_area_mask(ctrl));
+> +}
+> +
+> +static void brcmnand_get_ecc_settings(struct brcmnand_host *host,
+> struct nand_chip *chip)
+> +{
+> +	struct brcmnand_controller *ctrl = host->ctrl;
+> +	u16 acc_control_offs = brcmnand_cs_offset(ctrl, host->cs,
+> +
+> BRCMNAND_CS_ACC_CONTROL);
+> +	bool sector_size_1k = brcmnand_get_sector_size_1k(host);
+> +	int spare_area_size, ecc_level;
+> +	u32 acc;
+> +
+> +	spare_area_size = brcmnand_get_spare_size(host);
+> +	acc = nand_readreg(ctrl, acc_control_offs);
+> +	ecc_level = (acc & brcmnand_ecc_level_mask(ctrl)) >> ctrl-
+> >ecc_level_shift;
+> +	if (sector_size_1k)
+> +		chip->ecc.strength = ecc_level * 2;
+> +	else if (spare_area_size == 16 && ecc_level == 15)
+> +		chip->ecc.strength = 1; /* hamming */
+> +	else
+> +		chip->ecc.strength = ecc_level;
+> +
+> +	if (chip->ecc.size == 0) {
+> +		if (sector_size_1k)
+> +			chip->ecc.size = 1024;
+> +		else
+> +			chip->ecc.size = 512;
+> +	}
+> +}
+> +
 >
->  	if (ctrl->features & BRCMNAND_HAS_WP) {
->  		/* Permanently disable write protection */
+> /**********************************************************
+> *************
+>   * CS_NAND_SELECT
+>
+> **********************************************************
+> *************/
+> @@ -2323,12 +2360,33 @@ static int brcmnand_setup_dev(struct
+> brcmnand_host *host)
+>  	struct nand_memory_organization *memorg =
+> nanddev_get_memorg(nanddev);
+>  	struct brcmnand_controller *ctrl = host->ctrl;
+>  	struct brcmnand_cfg *cfg = &host->hwcfg;
+> -	char msg[128];
+>  	u32 offs, tmp, oob_sector;
+> +	bool use_strap = false;
+> +	char msg[128];
+>  	int ret;
+>
+>  	memset(cfg, 0, sizeof(*cfg));
+>
+> +#ifndef __UBOOT__
+> +	use_strap = of_property_read_bool(nand_get_flash_node(chip),
+> +					  "brcm,nand-ecc-use-strap"):
+> +#else
+> +	use_strap = ofnode_read_bool(nand_get_flash_node(chip),
+> +				     "brcm,nand-ecc-use-strap");
+> +#endif /* __UBOOT__ */
+> +	/*
+> +	 * Either nand-ecc-xxx or brcm,nand-ecc-use-strap can be set. Error
+> out
+> +	 * if both exist.
+> +	 */
+> +	if (chip->ecc.strength && use_strap) {
+> +		dev_err(ctrl->dev,
+> +			"ECC strap and DT ECC configuration properties are
+> mutually exclusive\n");
+> +		return -EINVAL;
+> +	}
+> +
+> +	if (use_strap)
+> +		brcmnand_get_ecc_settings(host, chip);
+> +
+>  #ifndef __UBOOT__
+>  	ret = of_property_read_u32(nand_get_flash_node(chip),
+>  				   "brcm,nand-oob-sector-size",
+> @@ -2338,10 +2396,14 @@ static int brcmnand_setup_dev(struct
+> brcmnand_host *host)
+>  			      "brcm,nand-oob-sector-size",
+>  			      &oob_sector);
+>  #endif /* __UBOOT__ */
+> +
+>  	if (ret) {
+> -		/* Use detected size */
+> -		cfg->spare_area_size = mtd->oobsize /
+> -					(mtd->writesize >> FC_SHIFT);
+> +		if (use_strap)
+> +			cfg->spare_area_size =
+> brcmnand_get_spare_size(host);
+> +		else
+> +			/* Use detected size */
+> +			cfg->spare_area_size = mtd->oobsize /
+> +						(mtd->writesize >> FC_SHIFT);
+>  	} else {
+>  		cfg->spare_area_size = oob_sector;
+>  	}
 >
 > --
 > 2.46.0
 
 Reviewed-by: William Zhang <william.zhang@broadcom.com>
+Tested-by: William Zhang <william.zhang@broadcom.com>
 
---0000000000000bf10e062245bf4a
+--00000000000018ed97062245ce33
 Content-Type: application/pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -248,13 +337,13 @@ VhYAxZlzj7tSjUIM7G7IhyfqPC46GKJ/4x+Amz1Z6YxNGy71L68kYD6hIbBcA5AM42QBUufly6Oa
 urb/KlmDGfVrIRYDbL0ckhGQIP5c6L+kSQZ2sHnQK0e0WgIaZYxaPYeY5u0GLCOze+3vyRMxggJt
 MIICaQIBATBrMFsxCzAJBgNVBAYTAkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52LXNhMTEwLwYD
 VQQDEyhHbG9iYWxTaWduIEdDQyBSMyBQZXJzb25hbFNpZ24gMiBDQSAyMDIwAgwxuh2XG3FXRL1W
-JOEwDQYJYIZIAWUDBAIBBQCggdQwLwYJKoZIhvcNAQkEMSIEIIOA03pcp9D7sNY6GKsLB/L8VMWZ
-/OXfl5JmSAFdW0gAMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTI0
-MDkxNzAwMjY1M1owaQYJKoZIhvcNAQkPMVwwWjALBglghkgBZQMEASowCwYJYIZIAWUDBAEWMAsG
+JOEwDQYJYIZIAWUDBAIBBQCggdQwLwYJKoZIhvcNAQkEMSIEII6Hp6WakAifr7IjEaqybtSuqnsI
+0nlCDxN35Q+Z4+N5MBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTI0
+MDkxNzAwMzEwNlowaQYJKoZIhvcNAQkPMVwwWjALBglghkgBZQMEASowCwYJYIZIAWUDBAEWMAsG
 CWCGSAFlAwQBAjAKBggqhkiG9w0DBzALBgkqhkiG9w0BAQowCwYJKoZIhvcNAQEHMAsGCWCGSAFl
-AwQCATANBgkqhkiG9w0BAQEFAASCAQBwsE4xhhWoB/7s2edg2ZEoZ0sfj4WabqXeSUilNg8+BToD
-VV7RE3PMyMByaHRnsnT5Mp5qR9qxmSMCVPuyYNIqdI2/vkeORAQvsCm40UntSPGhKSEL8QTlszrh
-HBZrzR00tnqqZDAm7UTo9eEQF7KRDWKBx2qt4c/+7Qh8BNTdTG9ARMbdKupTEjOXOop/gR7pr00i
-xHy3dDNEwT0MMWG9hb6rfYahLG52TjmY2EWjs0ROVbUqkbYdFAcHNq90A3wXkBWzJEEFoBgrmBCk
-BdgZXtCcyx9hZyUhva8PKm47IV6M+AGWs7OMbwbFrmzYHA6R5Gz8i7CUKPbcxUlI2zo4
---0000000000000bf10e062245bf4a--
+AwQCATANBgkqhkiG9w0BAQEFAASCAQC3UgWBTDpA7gLFOdPxiyPu/6MaIc3cfyc2fmONUa2LhKhX
+TTV8GhVLDskUkJm2APapNoDfGalOOb5XCpKvXmjoLiyyzNLurADAeDKF2jrsXXIphP5QWHtAyWua
+zn9RsgM4RmUhXDGZc5blT8iSYLLudaE8uFagCXlb/9RZP3ZgthREtdSDenzb7Zp5D1bw9uWMK8dy
+nD7qLpoTxsUPest/FRdYWYIwyr0MkvHJhhy4SvTI0jhpHrWGQweD7cH5xi0/KYFhCzII6DmkiMXi
+/+T9Qzd2nTaK/v4IdX3Ab9B5G+g+NGsckFJV7rSwL6E7X1sYgu/BE8joTL+n47vQDCq1
+--00000000000018ed97062245ce33--
