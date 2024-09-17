@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC591C3ABCB
-	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 00:24:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CDD9C3ABCB
+	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 00:27:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 88EB288E42;
-	Tue, 17 Sep 2024 02:24:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 16DE988C90;
+	Tue, 17 Sep 2024 02:26:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=broadcom.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="WZY5Tgav";
+	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="SrD9n1sQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8020788E61; Tue, 17 Sep 2024 02:24:16 +0200 (CEST)
-Received: from mail-vk1-xa2d.google.com (mail-vk1-xa2d.google.com
- [IPv6:2607:f8b0:4864:20::a2d])
+ id 000D588DF9; Tue, 17 Sep 2024 02:26:57 +0200 (CEST)
+Received: from mail-vk1-xa32.google.com (mail-vk1-xa32.google.com
+ [IPv6:2607:f8b0:4864:20::a32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6FD2A87BF4
- for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 02:22:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6AA6587BF4
+ for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 02:26:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=broadcom.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=william.zhang@broadcom.com
-Received: by mail-vk1-xa2d.google.com with SMTP id
- 71dfb90a1353d-502b408a381so1126244e0c.3
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 17:22:05 -0700 (PDT)
+Received: by mail-vk1-xa32.google.com with SMTP id
+ 71dfb90a1353d-502adfff6fdso1585597e0c.1
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 17:26:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=broadcom.com; s=google; t=1726532524; x=1727137324; darn=lists.denx.de;
+ d=broadcom.com; s=google; t=1726532813; x=1727137613; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:thread-index:mime-version:in-reply-to
  :references:from:from:to:cc:subject:date:message-id:reply-to;
- bh=vgLXiaSclXdeJ1Tmm1D9UqOYXpvrfrvonv2QFsxkr6E=;
- b=WZY5TgavAI4G4q6Hq7IEFYzKWSLKK7lX1GApRzU1IJrBrnnycE7QeBxsSv1R+EPORR
- 3abBEQK+pVkQgUJLYhxkqxqHYXPcxN6zkXyf//TOn95YXH/JY9gcTQ52US5w1y9t1xFD
- e+NhP0z4HftdROp6cEwFmMu6gXCu3u9RYEIV4=
+ bh=kgdaoo741m7MwMLSNgYRMlsmpBOdX/ElAa9JQ2TRumA=;
+ b=SrD9n1sQsN+f/5bGETxvLI3ixOx+jV+0gfQpWbGqJ5USwio6EIlYakhhJL4AkQ017e
+ k5s8xgs3oFwDaf0k4v1gvaVfaKfvNRik022Uo2HtrsBh28GnoK+u8nyeqBwJVdfmQTgu
+ WHiQDnxww6umzQaFmVB7aKvp84FgsP+Dc6//E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726532524; x=1727137324;
+ d=1e100.net; s=20230601; t=1726532813; x=1727137613;
  h=cc:to:subject:message-id:date:thread-index:mime-version:in-reply-to
  :references:from:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vgLXiaSclXdeJ1Tmm1D9UqOYXpvrfrvonv2QFsxkr6E=;
- b=fIvCcLveNZSUdnEKYJePNjzANPGMUL73F0EtzYDu1dhCpfo4buWgtt1cl+rP4ia/6a
- drYrry1VHNLXIZ0/sgvOjH562b+o1sLU6LGMWvMub82w28bQ9MIikkotm/Q8VBn/l35E
- sjZpkhWm94f8loO6Ur1Dqt6QVPbC2XLY2gSBZPhCnYa0V8lZLdyAOME006Vdjl+/WFgr
- ebQ4hvJqqZyIUVIMDzCJAwaWUKieElJ4qmUb/aK2+fByCO/PAyN7Pi91nDOvdwNCv8fw
- XzHSTqLkoZ6X8eh3yZoLZ/jwXWX+kPHLVYMmRsJdb4hLvz8q9+tO52smyT4rQRuWKJgH
- XtOA==
+ bh=kgdaoo741m7MwMLSNgYRMlsmpBOdX/ElAa9JQ2TRumA=;
+ b=aXdKdEu9uZoSQMdC1mF1wsC7YLsqVN1CchAvldsKjjMoL1cMnyYKl/oDh65mT8TWLS
+ sT7y9r5fiuRd52cdZYmIT7MfiQfAtWjNhx9axvrim17TlNadIMM81lGa2so9XYVFPIV6
+ /gtpTQN2xslmQnBeWDgJNPLWX9J/bcaX6vQY9tP9yKoYBd8UJCCjP94aN7JKwohRWQzR
+ +GqqIZQlCtfriZOqLyc9CysJkoREYcE0gx84jsX9wWZcRONASg6dxVIyXB312VUl9k0e
+ hYVInpsbS1vi56MOPDF4bU3ZFvMikW+5zrm2wJIqfha0RgReegbm9CEaxgRSfB0mWS72
+ hMyQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUQRYrWuN649T88lq3gHc+T3uuDa9xe33FBh6RmkFDRbLmLYgrYJnSzCaF3PSPDDgiyYHJouNs=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy4rzmlyQcUecZrxb1ltjEMiDBS4ef/7ow08RoKKiGQic3C1AF6
- XGrv6XzSEVNefeMNg6S0Jn/LpgEw71wUaDsI7iM0ZKn1zF+HYrUZWNR/eX8U3Tsf5L0T7KJcSAg
- 2FrU3pgsE8tJthO2oNmrJ9i6hZlQ3iSB20FEY
-X-Google-Smtp-Source: AGHT+IHCTbL882Cmch2Fv4uKvJLrLq6r57ymfmWa64exqhdkuxyorw9iUOxweB/wP7wOc5tHWxfUKgOfX1Z7IlrMCWQ=
-X-Received: by 2002:a05:6122:3687:b0:4fc:eda5:634f with SMTP id
- 71dfb90a1353d-5032d3a664dmr12137598e0c.4.1726532524323; Mon, 16 Sep 2024
- 17:22:04 -0700 (PDT)
+ AJvYcCX95dvkMhgtyI2B5TmIAR7B/gnlENGWmq82uavF2lv0ha9/FJMtGec5/14TjCo//KSvoB6FiAs=@lists.denx.de
+X-Gm-Message-State: AOJu0YxyTEcHvXyfpoAltHTdow6Tw/HAv9vqiTaWSghE0xBjswHddmTY
+ 0PMtrbGDvbWDLYfwkeNFMPf31XqiF8wMwpmdiVGZo9E3ISqtssNj8XMDmBwR+8wf68htR8nLVew
+ uJj43i69jQ+urB+Qw78t89Rk1ot7WR1AaZ6fZ
+X-Google-Smtp-Source: AGHT+IEJO7/isbAKip/tpGgQ3F7fgftDK8jLpVaYbteDcr1r/XVqhu7a4cBi9+IUD3DMHe1Hiv7qBqZaZomLs1rrhGc=
+X-Received: by 2002:a05:6122:3094:b0:4ef:65fe:7ee3 with SMTP id
+ 71dfb90a1353d-5032d3ab6c0mr13052213e0c.5.1726532813204; Mon, 16 Sep 2024
+ 17:26:53 -0700 (PDT)
 From: William Zhang <william.zhang@broadcom.com>
 References: <20240916-brcmnand-fixes-v2-0-08632f64c8ec@linaro.org>
- <20240916-brcmnand-fixes-v2-3-08632f64c8ec@linaro.org>
-In-Reply-To: <20240916-brcmnand-fixes-v2-3-08632f64c8ec@linaro.org>
+ <20240916-brcmnand-fixes-v2-6-08632f64c8ec@linaro.org>
+In-Reply-To: <20240916-brcmnand-fixes-v2-6-08632f64c8ec@linaro.org>
 MIME-Version: 1.0
 X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQES+R/HTbMR/ti/GhYZxlIU8W7clgIxd6hvs9mxEhA=
-Date: Mon, 16 Sep 2024 17:22:02 -0700
-Message-ID: <f75b41253f3f3677d11827d8b6c306d3@mail.gmail.com>
-Subject: RE: [PATCH v2 3/7] mtd: rawnand: brcmnand: Fix potential
- out-of-bounds access in oob write
+Thread-Index: AQES+R/HTbMR/ti/GhYZxlIU8W7clgHvgu7Fs9vBDCA=
+Date: Mon, 16 Sep 2024 17:26:52 -0700
+Message-ID: <2bcf98d182f80ec41d714ce04e6af910@mail.gmail.com>
+Subject: RE: [PATCH v2 6/7] mtd: rawnand: brcmnand: Support write protection
+ setting from dts
 To: Linus Walleij <linus.walleij@linaro.org>, u-boot@lists.denx.de, 
  Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
  Michael Trimarchi <michael@amarulasolutions.com>,
  Anand Gore <anand.gore@broadcom.com>, 
  Kursad Oney <kursad.oney@broadcom.com>,
  Philippe Reynes <philippe.reynes@softathome.com>
-Cc: Florian Fainelli <florian.fainelli@broadcom.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: Florian Fainelli <florian.fainelli@broadcom.com>,
+ Kamal Dasu <kamal.dasu@broadcom.com>, 
+ David Regan <dregan@broadcom.com>, Miquel Raynal <miquel.raynal@bootlin.com>
 Content-Type: multipart/signed; protocol="application/pkcs7-signature";
- micalg=sha-256; boundary="000000000000d2904a062245ad6b"
+ micalg=sha-256; boundary="0000000000000bf10e062245bf4a"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,7 +96,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---000000000000d2904a062245ad6b
+--0000000000000bf10e062245bf4a
 Content-Type: text/plain; charset="UTF-8"
 
 > -----Original Message-----
@@ -109,84 +110,74 @@ Content-Type: text/plain; charset="UTF-8"
 > <kursad.oney@broadcom.com>; Philippe Reynes
 > <philippe.reynes@softathome.com>
 > Cc: Linus Walleij <linus.walleij@linaro.org>; Florian Fainelli
-> <florian.fainelli@broadcom.com>; Miquel Raynal
-> <miquel.raynal@bootlin.com>
-> Subject: [PATCH v2 3/7] mtd: rawnand: brcmnand: Fix potential out-of-
-> bounds access in oob write
+> <florian.fainelli@broadcom.com>; Kamal Dasu
+> <kamal.dasu@broadcom.com>; David Regan <dregan@broadcom.com>;
+> Miquel Raynal <miquel.raynal@bootlin.com>
+> Subject: [PATCH v2 6/7] mtd: rawnand: brcmnand: Support write
+> protection setting from dts
 >
 > From: William Zhang <william.zhang@broadcom.com>
 >
 > Backport of upstream Linux
-> commit 5d53244186c9ac58cb88d76a0958ca55b83a15cd
-> "mtd: rawnand: brcmnand: Fix potential out-of-bounds access in oob write"
+> commit 8e7daa85641c9559c113f6b217bdc923397de77c
+> "mtd: rawnand: brcmnand: Support write protection setting from dts"
 >
-> When the oob buffer length is not in multiple of words, the oob write
-> function does out-of-bounds read on the oob source buffer at the last
-> iteration. Fix that by always checking length limit on the oob buffer
-> read and fill with 0xff when reaching the end of the buffer to the oob
-> registers.
+> Augmented to also support the "write-protect" boolean property.
+>
+> The write protection feature is controlled by the module parameter wp_on
+> with default set to enabled. But not all the board use this feature
+> especially in BCMBCA broadband board. And module parameter is not
+> sufficient as different board can have different option.  Add a device
+> tree property and allow this feature to be configured through the board
+> dts on per board basis.
 >
 > Signed-off-by: William Zhang <william.zhang@broadcom.com>
 > Reviewed-by: Florian Fainelli <florian.fainelli@broadcom.com>
+> Reviewed-by: Kamal Dasu <kamal.dasu@broadcom.com>
+> Reviewed-by: David Regan <dregan@broadcom.com>
 > Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
-> Link: https://lore.kernel.org/linux-mtd/20230706182909.79151-5-
+> Link: https://lore.kernel.org/linux-mtd/20240223034758.13753-14-
 > william.zhang@broadcom.com
 > Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
 > ---
->  drivers/mtd/nand/raw/brcmnand/brcmnand.c | 18 ++++++++++++++++--
->  1 file changed, 16 insertions(+), 2 deletions(-)
+>  drivers/mtd/nand/raw/brcmnand/brcmnand.c | 11 ++++++++++-
+>  1 file changed, 10 insertions(+), 1 deletion(-)
 >
 > diff --git a/drivers/mtd/nand/raw/brcmnand/brcmnand.c
 > b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
-> index 46a4107a83a9..60d34bd21f53 100644
+> index 2f786584a1ae..071b33951648 100644
 > --- a/drivers/mtd/nand/raw/brcmnand/brcmnand.c
 > +++ b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
-> @@ -1334,19 +1334,33 @@ static int write_oob_to_regs(struct
-> brcmnand_controller *ctrl, int i,
->  			     const u8 *oob, int sas, int sector_1k)
->  {
->  	int tbytes = sas << sector_1k;
-> -	int j;
-> +	int j, k = 0;
-> +	u32 last = 0xffffffff;
-> +	u8 *plast = (u8 *)&last;
+> @@ -2844,8 +2844,17 @@ int brcmnand_probe(struct udevice *dev,
+> struct brcmnand_soc *soc)
+>  	/* Disable XOR addressing */
+>  	brcmnand_rmw_reg(ctrl, BRCMNAND_CS_XOR, 0xff, 0, 0);
 >
->  	/* Adjust OOB values for 1K sector size */
->  	if (sector_1k && (i & 0x01))
->  		tbytes = max(0, tbytes - (int)ctrl->max_oob);
->  	tbytes = min_t(int, tbytes, ctrl->max_oob);
+> +	/* Check if the board connects the WP pin */
+> +#ifndef __UBOOT__
+> +	if (of_property_read_bool(dn, "brcm,wp-not-connected"))
+> +#else
+> +	if (dev_read_bool(ctrl->dev, "brcm,wp-not-connected"))
+> +#endif /* __UBOOT__ */
+> +		wp_on = 0;
+> +
+>  	/* Read the write-protect configuration in the device tree */
+> -	wp_on = dev_read_u32_default(dev, "write-protect", wp_on);
+> +	if (dev_read_bool(ctrl->dev, "write-protect"))
+write-protect is a u32 property. Should use dev_read_u32 and check return
+code to see if the property exist or not.
+
+> +		wp_on = dev_read_u32_default(dev, "write-protect", wp_on);
 >
-> -	for (j = 0; j < tbytes; j += 4)
-> +	/*
-> +	 * tbytes may not be multiple of words. Make sure we don't read
-> out of
-> +	 * the boundary and stop at last word.
-> +	 */
-> +	for (j = 0; (j + 3) < tbytes; j += 4)
->  		oob_reg_write(ctrl, j,
->  				(oob[j + 0] << 24) |
->  				(oob[j + 1] << 16) |
->  				(oob[j + 2] <<  8) |
->  				(oob[j + 3] <<  0));
-> +
-> +	/* handle the remaing bytes */
-> +	while (j < tbytes)
-> +		plast[k++] = oob[j++];
-> +
-> +	if (tbytes & 0x3)
-> +		oob_reg_write(ctrl, (tbytes & ~0x3), (__force
-> u32)cpu_to_be32(last));
-> +
->  	return tbytes;
->  }
->
+>  	if (ctrl->features & BRCMNAND_HAS_WP) {
+>  		/* Permanently disable write protection */
 >
 > --
 > 2.46.0
 
 Reviewed-by: William Zhang <william.zhang@broadcom.com>
 
---000000000000d2904a062245ad6b
+--0000000000000bf10e062245bf4a
 Content-Type: application/pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -257,13 +248,13 @@ VhYAxZlzj7tSjUIM7G7IhyfqPC46GKJ/4x+Amz1Z6YxNGy71L68kYD6hIbBcA5AM42QBUufly6Oa
 urb/KlmDGfVrIRYDbL0ckhGQIP5c6L+kSQZ2sHnQK0e0WgIaZYxaPYeY5u0GLCOze+3vyRMxggJt
 MIICaQIBATBrMFsxCzAJBgNVBAYTAkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52LXNhMTEwLwYD
 VQQDEyhHbG9iYWxTaWduIEdDQyBSMyBQZXJzb25hbFNpZ24gMiBDQSAyMDIwAgwxuh2XG3FXRL1W
-JOEwDQYJYIZIAWUDBAIBBQCggdQwLwYJKoZIhvcNAQkEMSIEIKfkkns10btPFbeAZoFbAIpfKELq
-lh4RLU4Vat1hxgZdMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTI0
-MDkxNzAwMjIwNFowaQYJKoZIhvcNAQkPMVwwWjALBglghkgBZQMEASowCwYJYIZIAWUDBAEWMAsG
+JOEwDQYJYIZIAWUDBAIBBQCggdQwLwYJKoZIhvcNAQkEMSIEIIOA03pcp9D7sNY6GKsLB/L8VMWZ
+/OXfl5JmSAFdW0gAMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTI0
+MDkxNzAwMjY1M1owaQYJKoZIhvcNAQkPMVwwWjALBglghkgBZQMEASowCwYJYIZIAWUDBAEWMAsG
 CWCGSAFlAwQBAjAKBggqhkiG9w0DBzALBgkqhkiG9w0BAQowCwYJKoZIhvcNAQEHMAsGCWCGSAFl
-AwQCATANBgkqhkiG9w0BAQEFAASCAQBfPJPL9gkL4XENSwCMN3SPExcX54Zyh519LvWxBHqVFvFJ
-8HDZntoiJsMGZo8gcGOubWU2GCzce8qBifHd0E+jsFVs9D2seqtGX2uwTAeEooVRVgKVpGLJqQnx
-C7pM6DDFMw62vDKE7P38gAv9gk9Eg37UbHbjN10wLnXYi8+8LEb7NJ08Uc3a0GYi5mORChO9CW+6
-o9eVRNpFlKLnRQDfkzwXU/k2EgNBA/+9TrZln43rHI8TuE+c2NvQv2E4ZA4T6P+fpI9yGlHPv0tx
-mSbHIZKAtwLJaM2j0VOB70o3i3rXtrrU1md+8FNb8/teX9iiVfwC5JWpOKPQpxXSTrLq
---000000000000d2904a062245ad6b--
+AwQCATANBgkqhkiG9w0BAQEFAASCAQBwsE4xhhWoB/7s2edg2ZEoZ0sfj4WabqXeSUilNg8+BToD
+VV7RE3PMyMByaHRnsnT5Mp5qR9qxmSMCVPuyYNIqdI2/vkeORAQvsCm40UntSPGhKSEL8QTlszrh
+HBZrzR00tnqqZDAm7UTo9eEQF7KRDWKBx2qt4c/+7Qh8BNTdTG9ARMbdKupTEjOXOop/gR7pr00i
+xHy3dDNEwT0MMWG9hb6rfYahLG52TjmY2EWjs0ROVbUqkbYdFAcHNq90A3wXkBWzJEEFoBgrmBCk
+BdgZXtCcyx9hZyUhva8PKm47IV6M+AGWs7OMbwbFrmzYHA6R5Gz8i7CUKPbcxUlI2zo4
+--0000000000000bf10e062245bf4a--
