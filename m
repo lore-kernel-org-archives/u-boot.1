@@ -4,164 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3AABC3ABB2
-	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 02:34:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 736BBC3ABCB
+	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 03:52:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0829088EAF;
-	Tue, 17 Sep 2024 04:31:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 6C9D088CBA;
+	Tue, 17 Sep 2024 05:52:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="mBTEv8Z/";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="doNBGhP9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC69288F2C; Tue, 17 Sep 2024 04:31:28 +0200 (CEST)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170130004.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::4])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 07E7188CFD; Tue, 17 Sep 2024 05:52:25 +0200 (CEST)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C2F2B88EF0
- for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 04:31:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6BC9288C78
+ for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 05:52:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=de8bohU6acJKVpwNPdHAPnIwlTr1dwm318J4KInNDccgZlf1CRIR5YEyqAO4/4dZ7OEiHeaXmydvR4c8GQIjQyoWWY15LP3VOkIvx9EBix0bc97AL4dKYQwut7A/B9qpyaamHE9Z+YMeBrXMgRA7LgjB+wJY/XeMgQcz3p7l1/XBk5svTpEkwkzaXCXXXatGkOvXqAkHhqHnSc1IF5JgB0jXE1wr9R4RYbw1URzf98K8Y8g86ke6qxRpgd5YQ3+O1my4Z0PO1zE7Zylby9bjqpVCum2dr33yy9Q/4xCDZaG0/ikpP3gq2hAx3KaEMLceYDtVsG533NYBzAf8kLmoZw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8lH7JSyCGCmH0QKwaSKzyOtmeuF3GrkCqxmkhuU7GBU=;
- b=T2khT9Bzhwc8+jiSD+2mn9KbtosWrxEo5ivtHromSEjFXOR+2CQ7Bqr1m/cLbwCXxzAkwgRYFYLXoEYbKpSVINE0Y0z5kSwURwqPAW4umkustMHhTsWpv75eKabQGPzx5GHyZ14JchcMV0VpwJzZTHcolRlZ9BsNKfhOU6LLpn+uKbDlEQVp7kq0zGHvlALTvcQigvFa2lsV3nTEgBuPAxl3ekc0yFOpiL2eOygIuRJeCKGYaH0RM0l+NOLDOCKP04oHr4SRCjl6r5ZxMs9gG0uomlzLiYiwv2FLJzirkZuli/0N9CeSqAp3XVe+76O2kVxRQddiDd3qHOtTxGQeZg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8lH7JSyCGCmH0QKwaSKzyOtmeuF3GrkCqxmkhuU7GBU=;
- b=mBTEv8Z/HS3srEsGv/J00UQg5auiwS6eMrJs9cBE2ZrcvtEaeCcLSSideqMPNXihXwOeRU5E7R1pDAB3fFVLgFLkSIAeU2cok2lJBLg8vtVx5hFOd15ZpP181ifIDwZyCVDN++In1wvC2mYYObePjT8M4/d5Fh00jY0u1lOQ+1IaVlNwuHudcsmI7ILt7/eObYGFsUUMDQ/iQbgV673nUbnQH+rIdHZ9hrpXlhpYwfOJ7bF1v0jvPNqXt1FnF6p509W27Qwa1c3L9gmrF6NdSsAkK+8g3njN8+VvMf4ZKCSyP00AZ/Kh6XKbVND7ZPdhNX/hNRBu1X/QujJrN4ihhg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by DU0PR04MB9420.eurprd04.prod.outlook.com (2603:10a6:10:35b::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7962.23; Tue, 17 Sep
- 2024 02:31:24 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%6]) with mapi id 15.20.7962.022; Tue, 17 Sep 2024
- 02:31:24 +0000
-From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Date: Tue, 17 Sep 2024 11:34:13 +0800
-Subject: [PATCH 21/21] imx93_evk: Enable M.2 VPCIe_3V3 and deassert
- SD3_nRST
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240917-imx9-update-v1-21-4fe8effc937e@nxp.com>
-References: <20240917-imx9-update-v1-0-4fe8effc937e@nxp.com>
-In-Reply-To: <20240917-imx9-update-v1-0-4fe8effc937e@nxp.com>
-To: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>
-X-Mailer: b4 0.14.1
-X-ClientProxiedBy: SI2PR01CA0009.apcprd01.prod.exchangelabs.com
- (2603:1096:4:191::18) To PAXPR04MB8459.eurprd04.prod.outlook.com
- (2603:10a6:102:1da::15)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-6c36ff6e981so39296446d6.1
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 20:52:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1726545140; x=1727149940; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=HzuqlV/wSAaJGC0KV2PWNMqug5x2KKVBCEbIDvr3FCw=;
+ b=doNBGhP9MIIUgUmt18wlP3VycAnPZrqxhv7FUqcJZ+fLrnBiyginwEKaWX8xFAC8tZ
+ SM2zgEeykBo3KR78YhHiUFmaxQgZ9SonYx6zoX99GjJdp4vVSuFP4VIEhAXPV6hy+Pk0
+ g5IGLiQCUPwBoNaw8t/u4eO9TCLRg3jA2/CG0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1726545140; x=1727149940;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=HzuqlV/wSAaJGC0KV2PWNMqug5x2KKVBCEbIDvr3FCw=;
+ b=u4q/jTA7ykQzZGJzni/Hdexr8hW+DQiD3W0gJ1PZl9ZN6ZtPb2Eu72peFVnmht7VBO
+ b9urFTZpDd5n5EqXmgMuTTCKx7Iqt/JoPzNb01PK4XbRNiCuWRZCJ/C6ldFCfVXiq7tQ
+ 3diCF7GJu3h+d+szyKbcnbFAZVJ46106uIIQKv6CW8OZpB5KrXpoMbKAljt82VjuJEmG
+ wyO7xMc1XPrN3EDgu/deE6YZFDMZlxwOzQ92QGpoZ67D2HwN6Wk9wr7qLqiZowf0a5jN
+ NChJGY7xfVcOibaGY1Ol80V/VkTL4b/fZY8OK9cR6g2FAlVc/DrZdrJUaLB+wOh+LjfP
+ b2Lg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVRF/3eO3MGvVReQ2jDGBoWJeXmcsgpzraeZ9mD+qE1WE8wYRhI1cEKVodeMu/WVCAzvjh7+D4=@lists.denx.de
+X-Gm-Message-State: AOJu0YwZMByCqTasD3wCGxCZsAlX0RoQsDVyCChXIsHyQ2R6xzFY8i8h
+ yENz8apjGTAR8P/ri7AMWiyvvIYyrt2uHYGh75UOfKu8eUTCvXOE59cIlm49zSMvqWW3XH6PdML
+ 8JxSlI/n3/1jxJl3fxQf87O5emMNU0a9VVoGfg439rlLV+I3n2TxyAI4=
+X-Google-Smtp-Source: AGHT+IGxUDSjp6bAsx+tLJbEwzdCWU4xOgv6LaLFsseOkkgA1PsyyTnTp9o7AjpWUZgPxSwWTMLQw3Kym4sRUs4FA7A=
+X-Received: by 2002:a05:6214:5547:b0:6c5:1652:523a with SMTP id
+ 6a1803df08f44-6c5736f4b3bmr263791506d6.45.1726545140201; Mon, 16 Sep 2024
+ 20:52:20 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|DU0PR04MB9420:EE_
-X-MS-Office365-Filtering-Correlation-Id: 60f28892-f3e8-4fb4-a692-08dcd6c0d2eb
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|52116014|366016|1800799024|38350700014; 
-X-Microsoft-Antispam-Message-Info: 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
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(52116014)(366016)(1800799024)(38350700014); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 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
- =?utf-8?Q?IYqkTg/QGyBJfWLEnwcME13Li?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 60f28892-f3e8-4fb4-a692-08dcd6c0d2eb
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Sep 2024 02:31:24.1540 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: UbolKzIoTxr6GkeWSCuCH6T7rIop/cH3MGHA9QGtrN3KI9zp6WOICAuLDEUCth/PzEtYR1hp1h35wDZkd6xTag==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR04MB9420
+References: <20240902011825.746421-1-sjg@chromium.org>
+ <20240902011825.746421-14-sjg@chromium.org>
+ <0d5f0f87-3469-4ad4-9663-b01985117eb6@gmx.de>
+ <CAFLszThVnydvrV_vPmsWPPZOV1Dc6wzDbw2jV5ywLj-XA3J5Pg@mail.gmail.com>
+ <20240916163453.GH4252@bill-the-cat>
+In-Reply-To: <20240916163453.GH4252@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 17 Sep 2024 05:52:09 +0200
+Message-ID: <CAFLszTjf5RzjbrV5NXanQSQSeBL-RB=cPN+e42GWXF5FioWS2Q@mail.gmail.com>
+Subject: Re: [PATCH v5 13/14] test: efi: boot: Set up an image suitable for
+ EFI testing
+To: Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -178,77 +90,229 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ye Li <ye.li@nxp.com>
+Hi Tom,
 
-VPCIe_3V3 is used to supply the power to M.2 card, we must enable it
-before using the flash.
-The SD3_nRST is connected to reset pin of flash, must deassert
-(pull up) it.
+On Mon, 16 Sept 2024 at 18:34, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Mon, Sep 16, 2024 at 05:42:42PM +0200, Simon Glass wrote:
+> > Hi Heinrich,
+> >
+> > On Thu, 12 Sept 2024 at 09:09, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> > >
+> > > On 02.09.24 03:18, Simon Glass wrote:
+> > > > Create a new disk for use with tests, which contains the new 'testapp'
+> > > > EFI app specifically intended for testing the EFI loader.
+> > > >
+> > > > Attach it to the USB device, since most testing is currently done with
+> > > > mmc.
+> > > >
+> > > > Initially this image will be used to test the EFI bootmeth.
+> > > >
+> > > > Fix a stale comment in prep_mmc_bootdev() while we are here.
+> > > >
+> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > ---
+> > > >
+> > > > (no changes since v1)
+> > > >
+> > > >   arch/sandbox/dts/test.dts           |   2 +-
+> > > >   test/boot/bootdev.c                 |  18 +++++++++-
+> > > >   test/boot/bootflow.c                |   2 +-
+> > > >   test/py/tests/bootstd/flash1.img.xz | Bin 0 -> 5016 bytes
+> > > >   test/py/tests/test_ut.py            |  52 ++++++++++++++++++++++++----
+> > > >   5 files changed, 65 insertions(+), 9 deletions(-)
+> > > >   create mode 100644 test/py/tests/bootstd/flash1.img.xz
+> > > >
+> > > > diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+> > > > index 5fb5eac862e..a99de6e62ce 100644
+> > > > --- a/arch/sandbox/dts/test.dts
+> > > > +++ b/arch/sandbox/dts/test.dts
+> > > > @@ -1507,7 +1507,7 @@
+> > > >                               flash-stick@1 {
+> > > >                                       reg = <1>;
+> > > >                                       compatible = "sandbox,usb-flash";
+> > > > -                                     sandbox,filepath = "testflash1.bin";
+> > > > +                                     sandbox,filepath = "flash1.img";
+> > > >                               };
+> > > >
+> > > >                               flash-stick@2 {
+> > > > diff --git a/test/boot/bootdev.c b/test/boot/bootdev.c
+> > > > index c635d06ec25..269bcd693a6 100644
+> > > > --- a/test/boot/bootdev.c
+> > > > +++ b/test/boot/bootdev.c
+> > > > @@ -212,6 +212,10 @@ static int bootdev_test_order(struct unit_test_state *uts)
+> > > >       /* Use the environment variable to override it */
+> > > >       ut_assertok(env_set("boot_targets", "mmc1 mmc2 usb"));
+> > > >       ut_assertok(bootflow_scan_first(NULL, NULL, &iter, 0, &bflow));
+> > > > +
+> > > > +     /* get the usb device which has a backing file (flash1.img) */
+> > > > +     ut_asserteq(0, bootflow_scan_next(&iter, &bflow));
+> > > > +
+> > > >       ut_asserteq(-ENODEV, bootflow_scan_next(&iter, &bflow));
+> > > >       ut_asserteq(5, iter.num_devs);
+> > > >       ut_asserteq_str("mmc1.bootdev", iter.dev_used[0]->name);
+> > > > @@ -251,7 +255,11 @@ static int bootdev_test_order(struct unit_test_state *uts)
+> > > >       ut_assertok(bootflow_scan_first(NULL, NULL, &iter, 0, &bflow));
+> > > >       ut_asserteq(2, iter.num_devs);
+> > > >
+> > > > -     /* Now scan past mmc1 and make sure that the 3 USB devices show up */
+> > > > +     /*
+> > > > +      * Now scan past mmc1 and make sure that the 3 USB devices show up. The
+> > > > +      * first one has a backing file so returns success
+> > > > +      */
+> > > > +     ut_asserteq(0, bootflow_scan_next(&iter, &bflow));
+> > > >       ut_asserteq(-ENODEV, bootflow_scan_next(&iter, &bflow));
+> > > >       ut_asserteq(6, iter.num_devs);
+> > > >       ut_asserteq_str("mmc2.bootdev", iter.dev_used[0]->name);
+> > > > @@ -313,6 +321,10 @@ static int bootdev_test_prio(struct unit_test_state *uts)
+> > > >
+> > > >       /* 3 MMC and 3 USB bootdevs: MMC should come before USB */
+> > > >       ut_assertok(bootflow_scan_first(NULL, NULL, &iter, 0, &bflow));
+> > > > +
+> > > > +     /* get the usb device which has a backing file (flash1.img) */
+> > > > +     ut_asserteq(0, bootflow_scan_next(&iter, &bflow));
+> > > > +
+> > > >       ut_asserteq(-ENODEV, bootflow_scan_next(&iter, &bflow));
+> > > >       ut_asserteq(6, iter.num_devs);
+> > > >       ut_asserteq_str("mmc2.bootdev", iter.dev_used[0]->name);
+> > > > @@ -330,6 +342,10 @@ static int bootdev_test_prio(struct unit_test_state *uts)
+> > > >       bootflow_iter_uninit(&iter);
+> > > >       ut_assertok(bootflow_scan_first(NULL, NULL, &iter, BOOTFLOWIF_HUNT,
+> > > >                                       &bflow));
+> > > > +
+> > > > +     /* get the usb device which has a backing file (flash1.img) */
+> > > > +     ut_asserteq(0, bootflow_scan_next(&iter, &bflow));
+> > > > +
+> > > >       ut_asserteq(-ENODEV, bootflow_scan_next(&iter, &bflow));
+> > > >       ut_asserteq(7, iter.num_devs);
+> > > >       ut_asserteq_str("usb_mass_storage.lun0.bootdev",
+> > > > diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
+> > > > index da55d5cfe69..37884dbd441 100644
+> > > > --- a/test/boot/bootflow.c
+> > > > +++ b/test/boot/bootflow.c
+> > > > @@ -525,7 +525,7 @@ static int prep_mmc_bootdev(struct unit_test_state *uts, const char *mmc_dev,
+> > > >
+> > > >       order[2] = mmc_dev;
+> > > >
+> > > > -     /* Enable the mmc4 node since we need a second bootflow */
+> > > > +     /* Enable the requested mmc node since we need a second bootflow */
+> > > >       root = oftree_root(oftree_default());
+> > > >       node = ofnode_find_subnode(root, mmc_dev);
+> > > >       ut_assert(ofnode_valid(node));
+> > > > diff --git a/test/py/tests/bootstd/flash1.img.xz b/test/py/tests/bootstd/flash1.img.xz
+> > > > new file mode 100644
+> > > > index 0000000000000000000000000000000000000000..9148b91a20c1f0acb54449b124d1408961e92507
+> > > > GIT binary patch
+> > > > literal 5016
+> > > > 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
+> > > >
+> > > > literal 0
+> > > > HcmV?d00001
+> > >
+> > > This reminds me of the xy hack. We should not add binary files. Please,
+> > > create it on the fly.
+> >
+> > All the other tests work the same way.
+> >
+> > >
+> > > >
+> > > > diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
+> > > > index 39aa1035e34..f647e2f0af2 100644
+> > > > --- a/test/py/tests/test_ut.py
+> > > > +++ b/test/py/tests/test_ut.py
+> > > > @@ -28,21 +28,22 @@ def mkdir_cond(dirname):
+> > > >       if not os.path.exists(dirname):
+> > > >           os.mkdir(dirname)
+> > > >
+> > > > -def setup_image(cons, mmc_dev, part_type, second_part=False):
+> > > > +def setup_image(cons, devnum, part_type, second_part=False, basename='mmc'):
+> > > >       """Create a 20MB disk image with a single partition
+> > > >
+> > > >       Args:
+> > > >           cons (ConsoleBase): Console to use
+> > > > -        mmc_dev (int): MMC device number to use, e.g. 1
+> > > > +        devnum (int): Device number to use, e.g. 1
+> > > >           part_type (int): Partition type, e.g. 0xc for FAT32
+> > > >           second_part (bool): True to contain a small second partition
+> > > > +        basename (str): Base name to use in the filename, e.g. 'mmc'
+> > > >
+> > > >       Returns:
+> > > >           tuple:
+> > > >               str: Filename of MMC image
+> > > >               str: Directory name of 'mnt' directory
+> > > >       """
+> > > > -    fname = os.path.join(cons.config.source_dir, f'mmc{mmc_dev}.img')
+> > > > +    fname = os.path.join(cons.config.source_dir, f'{basename}{devnum}.img')
+> > > >       mnt = os.path.join(cons.config.persistent_data_dir, 'mnt')
+> > > >       mkdir_cond(mnt)
+> > > >
+> > > > @@ -78,16 +79,17 @@ def mount_image(cons, fname, mnt, fstype):
+> > > >       u_boot_utils.run_and_log(cons, f'sudo chown {getpass.getuser()} {mnt}')
+> > >
+> > > Please, do not use sudo in tests.
+> >
+> > All the other test setup uses sudo, as do the fs-tests
+>
+> We're actively removing the use of sudo in the fs-tests, as noted in
+> previous iterations of this series (I believe it was this series) and
+> asked that you rebase this part at least on top of that series or wait
+> for it to be merged.
 
-Reviewed-by: Peng Fan <peng.fan@nxp.com>
-Signed-off-by: Ye Li <ye.li@nxp.com>
-Signed-off-by: Peng Fan <peng.fan@nxp.com>
----
- board/freescale/imx93_evk/imx93_evk.c | 33 +++++++++++++++++++++++++++++++++
- 1 file changed, 33 insertions(+)
+Well I don't believe there is actually an updated patch for this. So I
+don't believe it can be merged?
 
-diff --git a/board/freescale/imx93_evk/imx93_evk.c b/board/freescale/imx93_evk/imx93_evk.c
-index 341831a7d30..08da1563f03 100644
---- a/board/freescale/imx93_evk/imx93_evk.c
-+++ b/board/freescale/imx93_evk/imx93_evk.c
-@@ -17,6 +17,7 @@
- #include <dm/uclass.h>
- #include <usb.h>
- #include <dwc3-uboot.h>
-+#include <asm/gpio.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -48,11 +49,43 @@ int board_phy_config(struct phy_device *phydev)
- 	return 0;
- }
- 
-+static void board_gpio_init(void)
-+{
-+	struct gpio_desc desc;
-+	int ret;
-+
-+	/* Enable EXT1_PWREN for PCIE_3.3V */
-+	ret = dm_gpio_lookup_name("gpio@22_13", &desc);
-+	if (ret)
-+		return;
-+
-+	ret = dm_gpio_request(&desc, "EXT1_PWREN");
-+	if (ret)
-+		return;
-+
-+	dm_gpio_set_dir_flags(&desc, GPIOD_IS_OUT);
-+	dm_gpio_set_value(&desc, 1);
-+
-+	/* Deassert SD3_nRST */
-+	ret = dm_gpio_lookup_name("gpio@22_12", &desc);
-+	if (ret)
-+		return;
-+
-+	ret = dm_gpio_request(&desc, "SD3_nRST");
-+	if (ret)
-+		return;
-+
-+	dm_gpio_set_dir_flags(&desc, GPIOD_IS_OUT);
-+	dm_gpio_set_value(&desc, 1);
-+}
-+
- int board_init(void)
- {
- 	if (IS_ENABLED(CONFIG_FEC_MXC))
- 		setup_fec();
- 
-+	board_gpio_init();
-+
- 	return 0;
- }
- 
+If I missed it, please can you send the patchwork link?
 
--- 
-2.35.3
+If and when it is merged, it is a trivial patch to update this to
+conform, as I noted before when this was raised.
 
+Regards,
+Simon
