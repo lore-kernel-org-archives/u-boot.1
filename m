@@ -4,83 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79039CAC58F
-	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 17:00:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE1B9CAC58E
+	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 17:03:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9BDCA88CB8;
-	Tue, 17 Sep 2024 19:00:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 49ACA88B14;
+	Tue, 17 Sep 2024 19:03:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JBsg23eu";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="de/Q+v5u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A54388C6D; Tue, 17 Sep 2024 19:00:06 +0200 (CEST)
-Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
- [IPv6:2607:f8b0:4864:20::836])
+ id 6668788BEF; Tue, 17 Sep 2024 19:03:54 +0200 (CEST)
+Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
+ [IPv6:2607:f8b0:4864:20::72a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DF2A988ADC
- for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 19:00:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E27E388B0C
+ for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 19:03:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x836.google.com with SMTP id
- d75a77b69052e-45816db2939so43100431cf.3
- for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 10:00:03 -0700 (PDT)
+Received: by mail-qk1-x72a.google.com with SMTP id
+ af79cd13be357-7a9a7bea3cfso378612085a.1
+ for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 10:03:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1726592403; x=1727197203; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1726592631; x=1727197431; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=CkWsIjTPGNtVTcMJCr+YjxxdiEpT6GoDCa9VmXXEICc=;
- b=JBsg23eu2jXSGFhH8D92F2YRBX6fKQpe2HEiokc4k5/kfnkhofp0xnn/bt9udndsfN
- ou6bSwZjk5iqOM66D/FIMWvyoRmf2YowdpV1HTVWj/26pVgR/A8U7x25iZmQmAGhr78y
- WC3ZPjwgUSz5hcJLD624npexmNdCmQtoFY8tY=
+ bh=pW69Dd/ZWDLGkRpJjqa1BRCxaZfgA2DDKrZsl8v3UyA=;
+ b=de/Q+v5uIBzjwL8SqepfCqybNxBcMT+GYhKktnZR+1PtK1f8pKtgDLcHZ/4v38eBWa
+ PW5d/10wT3XAjdqNKNk411K38x2Cq3XQmsoQvvqvWXk+4IrMYxS4M+Zgea29ObXpViaE
+ m3V1JsbxYvxo0joMCfbWTIyapqEAfWzp2FLic=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726592403; x=1727197203;
+ d=1e100.net; s=20230601; t=1726592631; x=1727197431;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CkWsIjTPGNtVTcMJCr+YjxxdiEpT6GoDCa9VmXXEICc=;
- b=dCUopesU2mGmIzPbNyd4wJ1GsnwP3cZplfnyMfWInjmvJC53VozPxFIAej0w5IqFd3
- 11i2HKC+OrwjLtAWOxn9CyMaT3IpRbFZSiBfH+Hcwr97I6DVmxR/6Hu8IGARMBax2mwI
- WUOWcxb9EUsQubASRvSfCsQkzqppEpIf3yxREQcO7FeCIdET/0SRew6fHic0OqFivSxk
- lANg3XeLTIi3Esf2N1om3MFPeECGUPZ9Q4NinVzOrNcTf0n2KfSZo21CfVPJBaZ+KKU/
- j4Fwo52HCqy1lahgUVB/0rt5+kf7yDRy2zvxW3ojEVDqmMWNIVccp9urBhDUlialAHz5
- ZJAQ==
+ bh=pW69Dd/ZWDLGkRpJjqa1BRCxaZfgA2DDKrZsl8v3UyA=;
+ b=OqEPswPt/bCTJ9lwVIeJgW/oc+QK5BGdotM2vHISwHpIatDfYJNAjLH1JqsXJcoEQt
+ JkGQqqpaJMY0swad1DbyIjptHSS39tq0qrnPjkYlg6WvUUIMe15HynFyLbuMxIlw2kmx
+ 4FX1dD+Ks+sUbAkuHi1CwOwVXxEzzeo+ktsxhbXkJo+/gx15inLZgKGcPEMyC1Swi1Z7
+ jHxJzrg4IMHMyhJZOLeq8gki04FeIRATJVQFawvMIlpIxF0ypsvnZqktY37uJ6aRuDtt
+ jSFl3ZxBaV2gHsoczI7hTbWXye3EgZauMxPcZU7ZwjQHQZ+ZEvqQcbmTwkHxO6d2bTJq
+ +qQQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUvOeijRMeOMTaxVKJCPtsSNQzLjW224r7gW3UOQFx4XAksnnrGjIw6n+eV1y4Kga+Qlqsipxg=@lists.denx.de
-X-Gm-Message-State: AOJu0YzeZ3B4b+VtRTH6Htd6Ed2sU68d7xws9eFiM7nV4uQuVITRrRPV
- M4ihtohJcoaLOVwuf1sVYlI03EfWL9LxFKodYBzEZbyVKzfq8LZlf3ag8bE5tmQ=
-X-Google-Smtp-Source: AGHT+IGa9JDR51tHK5D/PO4plhlAu7erX2OnO5LBDsl8tA5lVKjHdyb6N92bActJri085weXJmwbAw==
-X-Received: by 2002:ac8:5792:0:b0:458:4a2a:402d with SMTP id
- d75a77b69052e-458603368bbmr312989111cf.25.1726592402539; 
- Tue, 17 Sep 2024 10:00:02 -0700 (PDT)
+ AJvYcCWRicmemP6Q0omxfPFLE8LdfG6IJSCYMgbzfRyONMQCcEVT6ZytTRdGXCtGaXxdLXU2p2RzyLU=@lists.denx.de
+X-Gm-Message-State: AOJu0YynASbYWV+ZSVQpcIHf3aKmja6zQX6A/AqwRWG06nQsIlCUurV6
+ rUThVpy/posa01x2KRIT/6iGyiUC3pO6LXD9Um79g9obylxttKoKJ+hnflFtfSw=
+X-Google-Smtp-Source: AGHT+IEx4FpJwyjSwIHz6iURcWNfzWqo4L/6plvDg2nHna+KtKCfRL0UERupbOXGObmddFbixfeRzA==
+X-Received: by 2002:a05:620a:1a94:b0:7a9:b268:3647 with SMTP id
+ af79cd13be357-7a9e5f60e5dmr3248931185a.41.1726592630435; 
+ Tue, 17 Sep 2024 10:03:50 -0700 (PDT)
 Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-459aad04446sm40126201cf.66.2024.09.17.10.00.00
+ af79cd13be357-7ab3e98bd55sm377651385a.31.2024.09.17.10.03.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Sep 2024 10:00:01 -0700 (PDT)
-Date: Tue, 17 Sep 2024 10:59:58 -0600
+ Tue, 17 Sep 2024 10:03:49 -0700 (PDT)
+Date: Tue, 17 Sep 2024 11:03:46 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH v5 10/14] efi_loader: Disable ANSI output for tests
-Message-ID: <20240917165958.GM4252@bill-the-cat>
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH v5 12/14] efi_loader: Avoid using sandbox virtio devices
+Message-ID: <20240917170346.GN4252@bill-the-cat>
 References: <20240902011825.746421-1-sjg@chromium.org>
- <20240902011825.746421-11-sjg@chromium.org>
- <d421b72a-eb0a-4aa8-be6e-3825c8b08da6@gmx.de>
- <CAFLszTjRSoWr0uncOdMY=6Oc4dnLP7gH2hj0BgDF67ukQEmmdw@mail.gmail.com>
- <20240916163319.GG4252@bill-the-cat>
- <CAFLszTgVi7nzE2AxBb_u73r+dSWny_geSpXmNKG8NR1SQWhXJQ@mail.gmail.com>
+ <20240902011825.746421-13-sjg@chromium.org>
+ <95edb150-f53d-415a-8176-56e0fc66c822@gmx.de>
+ <CAFLszTj47fa7m2Xa4yi5NkcWNUGr4kiM1z4sAnrbd5rFUKq1Zw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="GXK01VJ/ym6Khe9o"
+ protocol="application/pgp-signature"; boundary="Nw+qOvp3LPclOrIy"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTgVi7nzE2AxBb_u73r+dSWny_geSpXmNKG8NR1SQWhXJQ@mail.gmail.com>
+In-Reply-To: <CAFLszTj47fa7m2Xa4yi5NkcWNUGr4kiM1z4sAnrbd5rFUKq1Zw@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,91 +97,136 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---GXK01VJ/ym6Khe9o
+--Nw+qOvp3LPclOrIy
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Sep 17, 2024 at 05:54:36AM +0200, Simon Glass wrote:
-> Hi Tom,
+On Mon, Sep 16, 2024 at 05:42:31PM +0200, Simon Glass wrote:
+> Hi Heinrich,
 >=20
-> On Mon, 16 Sept 2024 at 18:33, Tom Rini <trini@konsulko.com> wrote:
+> On Thu, 12 Sept 2024 at 09:12, Heinrich Schuchardt <xypron.glpk@gmx.de> w=
+rote:
 > >
-> > On Mon, Sep 16, 2024 at 05:42:12PM +0200, Simon Glass wrote:
-> > > Hi Heinrich,
+> > On 02.09.24 03:18, Simon Glass wrote:
+> > > While sandbox supports virtio it cannot support actually using the bl=
+ock
+> > > devices to read files, since there is nothing on the other end of the
+> > > 'virtqueue'.
 > > >
-> > > On Thu, 12 Sept 2024 at 08:58, Heinrich Schuchardt <xypron.glpk@gmx.d=
-e> wrote:
-> > > >
-> > > > On 02.09.24 03:18, Simon Glass wrote:
-> > > > > We don't want ANSI characters written in tests since it is a pain=
- to
-> > > > > check the output with ut_assert_nextline() et al.
-> > > > >
-> > > > > Provide a way to tests to request that ANSI characters not be sen=
+> > > A recent change makes EFI probe all block devices, whether used or no=
 t.
-> > > > >
-> > > > > Add a proper function comment while we are here, to encourage oth=
-ers.
-> > > > >
-> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > >
-> > > >
-> > > > This patch was already NAKed in the last version.
-> > > >
-> > > > Please, adjust the test framework if you need filtering.
-> > >
-> > > In what way should it be adjusted? I hope you are not suggesting that
-> > > sandbox should try to filter out ANSI characters in its assertions?
+> > > This is apparently required by EFI, although it violates U-Boot's
+> > > lazy-init principle.
 > >
-> > Well, perhaps the pytest framework should be filtering it out? And
-> > again and to be clear, I can't reliably run these tests on _hardware_
-> > because of the ANSI characters tripping things up, this is not a
-> > "sandbox" problem.
+> > We always did this.
 >=20
-> Honestly, this approach (creating a problem and then dealing with it
-> downstream) is just not the way things should be.
+> Commit d5391bf02b9 dates from 2022, so I don't think that is correct.
 
-I don't follow, sorry.
+Yes, but I also could have sworn that was fixing the behavior having
+been changed again previous to that.
 
-> As an alternative, I can send a patch to remove the code which blindly
-> sends commands to a terminal which may or may not be there. That would
-> be more correct than what we have today. We can then discuss how to
-> add ANSI back, with due thought to its downstream impact.
+> > What problem do you want to fix? I have not seen any issues in our CI.
+>=20
+> The EFI test in this series hangs trying to probe a virtio block
+> device. If you drop this patch and try the rest of the series in CI,
+> you will see the failure. Or you could just accept that I investigated
+> this, root-caused it and produced a suitable fix. This is a v5 patch
+> which has had quite a bit of discussion.
 
-I admit I only get as far as "Oh, selftest failed and look at all that
-escape sequence and such in the log" which I take as pytest choked on
-the output. Maybe we have different issues?
+And as I noted an iteration or two back, it's entirely unclear if the
+problem is "sandbox virtio is broken" or "this code is wrong here".
+Which in fact gets us back to ...
 
-> It's not great that  this discussion is still happening on a v5 patch.
-> There has been plenty of opportunity to provide an alternative option.
-> I doubt any exists.
+> > > We cannot just drop the virtio devices as they are used in sandbox te=
+sts.
+> > >
+> > > So for now just add a special case to work around this.
+> > >
+> > > The eventual fix is likely adding an implementation of
+> > > virtio_sandbox_notify() to actually do the block read. That is tracked
+> > > in [1].
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > Fixes: d5391bf02b9 ("efi_loader: ensure all block devices are probed")
+> > > Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > > [1] https://source.denx.de/u-boot/u-boot/-/issues/37
+> > > ---
+> > >
+> > > (no changes since v3)
+> > >
+> > > Changes in v3:
+> > > - Add a Fixes tag
+> > > - Mention the issue created for this problem
+> > >
+> > >   lib/efi_loader/efi_disk.c | 14 +++++++++++++-
+> > >   1 file changed, 13 insertions(+), 1 deletion(-)
+> > >
+> > > diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
+> > > index 93a9a5ac025..2e1d37848fc 100644
+> > > --- a/lib/efi_loader/efi_disk.c
+> > > +++ b/lib/efi_loader/efi_disk.c
+> > > @@ -838,8 +838,20 @@ efi_status_t efi_disk_get_device_name(const efi_=
+handle_t handle, char *buf, int
+> > >   efi_status_t efi_disks_register(void)
+> > >   {
+> > >       struct udevice *dev;
+> > > +     struct uclass *uc;
+> > >
+> > > -     uclass_foreach_dev_probe(UCLASS_BLK, dev) {
+> > > +     uclass_id_foreach_dev(UCLASS_BLK, dev, uc) {
+> > > +             /*
+> > > +              * The virtio block-device hangs on sandbox when access=
+ed since
+> > > +              * there is nothing listening to the mailbox
+> > > +              */
+> > > +             if (IS_ENABLED(CONFIG_SANDBOX)) {
+> > > +                     struct blk_desc *desc =3D dev_get_uclass_plat(d=
+ev);
+> > > +
+> > > +                     if (desc->uclass_id =3D=3D UCLASS_VIRTIO)
+> > > +                             continue;
+> > > +             }
+> > > +             device_probe(dev);
+> > >       }
+> > >
+> > >       return EFI_SUCCESS;
+> >
+> > Please, do not spray sandbox tweaks all over the place.
+> >
+> > Can't you just return an error from the sandbox-virtio driver when an
+> > attempt to read a queue is made?
+> >
+> > We are using virtio on QEMU. Why do we need sandbox virtio devices? Just
+> > run the relevant tests on the real thing.
+>=20
+> Please go ahead with whatever approach to testing you wish. But
+> sandbox testing is an important component of U-Boot.
 
-Well, it's _also_ true that people have been providing feedback earlier
-in the series and requesting changes and I don't know if it's missed
-because you were dropped from the list again or buried in your inbox or
-what. But you repost and don't drop / change patches that there's not
-yet agreement on.
+Yes, but is sandbox implementing the "just be a state machine" part here
+correctly, or not? It keeps feeling like "not" and that the reasonable
+course of action would be to stop testing this on sandbox until that is
+fixed especially since we can test this reliably on qemu.
 
 --=20
 Tom
 
---GXK01VJ/ym6Khe9o
+--Nw+qOvp3LPclOrIy
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbptY4ACgkQFHw5/5Y0
-tyyFIAwAjU4moSpNl8TIbjNBXoTQBvlVpvhjpU8Yw0FtWsKDw/HHW+jb60NpeRJK
-kTMpbEyKG3KKtm1R32OQhz9LAi6jt58JTmDBSITLF3aGzQb2LniFxcXy47BgYl3v
-oKzWGSPLxa0hhD0nNRAnr6YiL5SzRUlbl09X8dwwKwNAsoGgzcz8CKdUdVRLZxaH
-WZYdrvar3AevHsHWarI9nrDzpwggqTgvMKGIhuhAoqjb7FqM3Pyg8UfoAx4SbOxQ
-+TFo9WWlLgbL3pvm1y/VDF618k23hFKWb1dPqooz+uJfpSLjMhsbqeSlHF19Udzi
-1XLh7dyE9q6U3pm3S1e/RPfJh8f9Rv88oQtJpQ+Ssq476A5AswLf6SgSyfTf3kcC
-Pn3r5h6VB7wP+tKsx5wfxYhqsVFv4U4S89h7ybm010QAjfK7b6l64/QSS6uEPM+f
-5napwk7SYtgHDTkUpe/BbDxFw/ej5bahHnIcyAjGAc8iwZo+tgfUZvOsUVyNIVe8
-C1T06Fnu
-=LR7T
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbptnIACgkQFHw5/5Y0
+tyxqBgv5ATspj0FaoKcdKq4ulBdi6L7J7AHOmFfM55GHbzuDeT6oxrxe8WmjfRNB
+E4/XcTkEb8NMqbUKaBjGCHSgZ5Owii4mmAjLr9tneojXHScFaH8OKMUL2cjLZpyS
+6wCLxopRGGNjoWiATxbu/4rDP5qSQvZzNdOkGGsy4iCTQdt8xJWRR0ohsHbQzB7T
+IaQX7iOKvKUBdqF3iSalLMcmVcQHbyqSM/5c2GtGodFv0Lm9G6jGhv0rzUwhxjgt
+ML+Tjw3b4WUMGkLFgw1scqHno6sHG79XT2Bx+xQB13XP3b7tw/HI4Ob+MDHFMGuy
+PMSvLnQfX/rE0tIVX11Q7aPQ/FJwM0hKS4yKhINxCgAm0DGbvAzLJWdFo8mA5MuE
+9K4FKdtgJFHY7k0x9QRixj38sx2n42eOaFeADDTA79r/XJ95bYs5Y0ePFe4lIosB
+vPFV2Xl/y7+blacb8BuCk+NmhOVXNQcCx0tT9oXzu9HyS2HPJcoGmCWLjQxWzOHC
++06ztZuo
+=xdgy
 -----END PGP SIGNATURE-----
 
---GXK01VJ/ym6Khe9o--
+--Nw+qOvp3LPclOrIy--
