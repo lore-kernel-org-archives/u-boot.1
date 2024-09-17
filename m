@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6871BC3ABB2
-	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 02:33:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD91BC3ABCB
+	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 02:33:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D00A88F32;
-	Tue, 17 Sep 2024 04:31:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D5B7F88F45;
+	Tue, 17 Sep 2024 04:31:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="U0FhU2Ob";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="sFlUvKxw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E040488EAD; Tue, 17 Sep 2024 04:31:22 +0200 (CEST)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170120003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
+ id A9B2188F45; Tue, 17 Sep 2024 04:31:24 +0200 (CEST)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100000.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1664988E9F
- for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 04:31:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A37B88F0A
+ for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 04:31:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=VNYztpv5ajMJ7Roj115R8aTBC8lDk+5/IrjvsaLPxDZPTzh87cmL8Wok8WQMXZAYcZE/DKuGiaEMPrbtPmsJVE05HoKuBbhrpxiOjNsYT/uLusiQ++ThqZVIdsv/sYyW2tUjXq4XeXOxI+dopvfMhECvt7FObjQqn86a3Ef/Ve538zQx1UkLdpg0jzE3WidmDeczb27jVVYrbmLy4+/qVL3xdllo3jdU0ytb61IBr4HWB83l9Sj1sPj12gg4bqnRUKNsJXDW+VjJolXa/Mm5pvH3NJbvsZM5+8so7mm1YXrZe1XchIZcEKGZMqMJT4aCbsqUNANdygsSjf7jEuTdhA==
+ b=mdQoHjh3FIpJGvGi+P5oGS1J0h405ozSEe7bkrWxY0kd+eVmLZ3vHF3U9ZUgicRFvExUtf3Tyj5tTlZsZbG+zd5+JbOPmcmgbLCB/Ss3/C6hLKNdHNPxjM5e4QawOqjK49aT1Z8Vh6xfTxjV4MsWG6tg3CFnXY/WL3NSqJBZyHIazoXDnQPCGtIqyeZMaP1ELXmaCU/AOlgQ/bLtEo6dsqbnrjsAkYVSr7vZA9krbecvlL7KJO35KOaKkGMXojKZT33cc63vL1cACzuMljigXUhGZUphwUBCUyd05YjaBoGIKl9ciDUa5+nGl6v94dPfCGWVW4wlecleE2URfk3+7g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=k12xFh5xt3MrKOQtPN3dyioJpnWSfiWM3lrFmEutnkI=;
- b=GxBy2wBsMMXt9gnwQHlRPHIDxPnx3s3F3mSnuTF3mBp4yRxdPN6hoDcs58a9ZN0VXWYP1F2/0kuc32AOZbICBz+aebLkqElWHwjwL9PBHlkl2SRKKkpBTNs413QdFQKPyVi6DUW/NTHN/U4b4CAobR0xUmjP5HPn2ByWc3VONkPm0v+sXseGvV03co/IGjwcIdDmC+o33PcO83otBgVp9XAHUhB8rW2zt/ne16B0YuVmVLVA+fReSC0XFFL00hId/p6LozM6I9DR+Es+hHGfDpBAGYglFSYl3xRkwa7e3mcuVt5NfsopR4bj7WBDq0DHh16kkMOJ54FL69MFkyXMiA==
+ bh=bOzEUvo7I/DFtxEp4b+VsMBd1oJzXLTq02ZgJXwZ6KM=;
+ b=XHhlB07l4qcDYYw1lEA7hhNXnRu67N3GOIKGNilZIQdxkw/KtSBQxR5GFltQxQawulXbhRMnEr07528dr5NF1N0rAjko5uhjIDVZELzA5uxLcqKvatPlFHxhknX2tyfreDu3cyv0/8hW4LAtz3/guk/MJKkHsCvKY9amrIBx7M29mxbwMqOtakLsua5R7AWx2Sw7SDrfKRqyRAc2i6+IEz3S0dNoIf1DZwpIOUjMSGEavmtbXhq06pCuR0Gbgu2IVZP5Rk4H85L/FhP5YyVy0Gg6YtheM4n+I6sLD93ctX/PUm32wPRigTItlyYBlymRTZV8G/VoFGHV9zR1PWZ9PQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=k12xFh5xt3MrKOQtPN3dyioJpnWSfiWM3lrFmEutnkI=;
- b=U0FhU2Obhkhfw81to9imHeIWtCechXpwefpsdIwicG7twwMcnZ0hKukOTgTghUNn2z/pw5YZjZLFumgIaOyNFHCB7ADT0rkEPwMyw3meK43cTBwtYFkvA+Q5RjjVFlam0kG0LQuWtzRH3lFke3OVCrOfapbW/mZDXWuCx2vwe+sY6P27xP2JdxYCnuepLMLU+nPQtvb+4chU7cXIZDW3aEj2KqAUPIkLXfoxY0VIx2dSMwlumxMXu8IIg7qRigfn23C75RmMzQZXj54LZBh1ZwL49lhjrKJGUjllxsUNweyw5sL2BzhBiOFX4bxuEf1bzGpo/OX4bG+O8UPRY9pMAQ==
+ bh=bOzEUvo7I/DFtxEp4b+VsMBd1oJzXLTq02ZgJXwZ6KM=;
+ b=sFlUvKxwiPGmNs8tu0idpP4V7cJBK2VaU2hK46aflcT50wys51ZzjDLaUebUQIxEvMJmuxhmfd82e4kpLTL3CgMNHmzMEDMUeg+cKKxj5l4yjossoV/sZgsub2L4RPnaWKqxK82D8O0PLH6iwK9MilPKjvloS8C25SDhoW4JO94raAs/sAg4chVo4xzmyBlOi9Epe7OZD16BA0sYReM5AyLA/5tHuzqTmGu2ttNjH3Y38hOPbzoEL4qcFKP6tODESPLjtzU7Y/nYnqM7Lv+QcQZhpCeT94MKe8Idq6x/MJXEbhzG0PkD2fcd+4r/DU9p+fEoTVh0DW1FTBR8JmF10A==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by GVXPR04MB10451.eurprd04.prod.outlook.com (2603:10a6:150:1ea::15)
+ by DU0PR04MB9420.eurprd04.prod.outlook.com (2603:10a6:10:35b::15)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7962.24; Tue, 17 Sep
- 2024 02:31:13 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7962.23; Tue, 17 Sep
+ 2024 02:31:17 +0000
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::165a:30a2:5835:9630%6]) with mapi id 15.20.7962.022; Tue, 17 Sep 2024
- 02:31:13 +0000
+ 02:31:17 +0000
 From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Date: Tue, 17 Sep 2024 11:34:08 +0800
-Subject: [PATCH 16/21] imx9: trdc: cleanup code
+Date: Tue, 17 Sep 2024 11:34:10 +0800
+Subject: [PATCH 18/21] imx93_evk: spl: update pmic settings
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240917-imx9-update-v1-16-4fe8effc937e@nxp.com>
+Message-Id: <20240917-imx9-update-v1-18-4fe8effc937e@nxp.com>
 References: <20240917-imx9-update-v1-0-4fe8effc937e@nxp.com>
 In-Reply-To: <20240917-imx9-update-v1-0-4fe8effc937e@nxp.com>
 To: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>, 
@@ -71,96 +71,96 @@ X-ClientProxiedBy: SI2PR01CA0009.apcprd01.prod.exchangelabs.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|GVXPR04MB10451:EE_
-X-MS-Office365-Filtering-Correlation-Id: 11b4b9f4-5475-46ba-476a-08dcd6c0cc68
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|DU0PR04MB9420:EE_
+X-MS-Office365-Filtering-Correlation-Id: 54e69501-ecc0-4368-6a79-08dcd6c0cee7
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|52116014|376014|1800799024|366016|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?KzE3dVpUNTNqQjN5a1JBaW1FVC8wSVRYWTlNdHJwakZ1Y2VWOVJtMmkzRHps?=
- =?utf-8?B?MHF2MW5Wakd0dVpXZTFidm9MZlQ5TW1IWU9HV3JpU3RGL2pqU1piUEsvSkVW?=
- =?utf-8?B?SnlzK0pGbDBBNE1pWjZCNHJWVmViQTF1czIxZFZuT2RBVTBycHBvWFVQZEF6?=
- =?utf-8?B?djlvWTdYLzk1L3FjU1o3c3MvdWVwMWdzU0xFMnpLckh3enNvdHJLOXl0TzBT?=
- =?utf-8?B?NkN2NlF4a0VITWJrb1V0T2Y1S0V2V08zV3JNSGt6RTdsNXBXMTNQSXpaZ2Rj?=
- =?utf-8?B?TWthL2N5akRpZ0FXR1o4VFU1ekJsRzFYQURJL3RQYWRMTERscEs4ejJpUmp4?=
- =?utf-8?B?Z2c1MjY4eit0bFdHc2oxRGdVNDNtTFBZeThKZVI3ME1lbVJWZWp3SjhFVFU1?=
- =?utf-8?B?ajJqVDI3YzBEdjNwd2Z6cnhWWll4SUFoTkI1Yng3Z09CU0dnVWdkVXRVb2hC?=
- =?utf-8?B?UW9wY25rNHR5QVdDbkRFVVFhWktTQ2tnUncwNkJkZXUrUENsblhMb2ZhTVRw?=
- =?utf-8?B?THdyVFhNM1dXMnZhU2NZdzJVOUhEVmFyZ2sxNE5JOEVtQWJMcUN6Zk9uQ3Za?=
- =?utf-8?B?WjJmVmlrSkJBYjF2TmoxVkI1Z2k0bXV1eTA5ZEVzOS9SWVd0cUhUbndKOVl4?=
- =?utf-8?B?U0I4eFl1RERWUE1DdjM5bDhxOHFOcXVJSnlnd2p2WjNKNzVhWnNkTnMvbU1K?=
- =?utf-8?B?ZlNlekE1TEh3ZlV6aENXVGZ6ZTlXVkUzWUp2dDlpYUVJL25vVWxSYnprWUQ0?=
- =?utf-8?B?Q20xMXlBWFdHamRVTkpMTEgrSmZIcHhmTTFhQU81UWVqMy96SlhvM3h0VHNr?=
- =?utf-8?B?SkdZcENRRW0zVm5pK0RBU25heFFDWjJ4cEIwaFZ2S2NUZjNKb2lXYnhGNVA2?=
- =?utf-8?B?d3hwdUxaME4yUlZ2MkdjT0dWRlJGTEk1K2NPV0MrYlAxNVJicFNHYjZib3JJ?=
- =?utf-8?B?QmpCQVg4bm10NUIxa3FoNks2bG15ekk2YTlUcWRMWTExaDJYaUxYOEJ3YVBT?=
- =?utf-8?B?Yy9PQ0hVWWNpMjhIYzVteVFPeEY2M2hySDBHRDQzQUdkUkRDZ2ZHMmdtTHI2?=
- =?utf-8?B?LzdJbFFQSUU1YitBdWduU3E3aFZRRTU5Mkl5bU5QcmRWR0Y2VDZWNVVRQkIx?=
- =?utf-8?B?VFJadkVpRDdQZ3FLVU1Bc09lUGNOZnRoWXhIcU01OVZWYzdiR043TDBzaXdm?=
- =?utf-8?B?aTZ5ZU9Hckx5NEJFWXhSdWdhUXg0TFlXQzN3K05IUTZyNkxpNHhuNEY3Q1Ez?=
- =?utf-8?B?QjArVW51UStWcWo2M3ozK093aTliN0NTOTVYZUZ1Y1BlaTJaMUxPcGZvZzJH?=
- =?utf-8?B?am0xVGdnQVQ3WC96WVlONlloMGprLzJzRUp4UncrRlNCdHptWnQ0TDRFT0xn?=
- =?utf-8?B?NHlZNHBmN2k3RGZvUmRycmZWc2k3TE9OUnVXS0krd0JrZ3ZrZGZrWUkrcG1M?=
- =?utf-8?B?bHF0clFhcy9sUzRTRkdNT2Z3alBNWVVmNkRxWCtPdHlHT1p0OFFqVENnUFFo?=
- =?utf-8?B?ZEhCVVdUS3VBM050NUZSWU1lempTZVRiZzRpb2J6WXlkQ2lsazVCcmUvc1cz?=
- =?utf-8?B?WHJWUUh4UTJ5OHREVkc4V0pablY1ODlxc2Z1djUvUmR5d0poWnVFMm5ZMVVk?=
- =?utf-8?B?M2Y3VmJwS0pDamYrdURweWN0VDYwWEMzd3VkRXFycGhEb2V0WXRPamJxRDFt?=
- =?utf-8?B?SVM2UlhkaVJTRnEzTG01NXNvOWpsdEVWOThxQVpUdFZoaEw2ZGJId0FjVmkz?=
- =?utf-8?B?cENyWTY2U05VWFBZc29IV3VoYTg1ZWxib21ubW1zQUJnMG12ZjFmeThteFRM?=
- =?utf-8?B?YVJ2Z3p5T1B1MWdhNzF5UmtWcGwwMWpXVTNBMGR5SElwRnZPelFQSU9UQ2Vk?=
- =?utf-8?B?cEgwbDIwc2ZmdDJUbzFPWDJ6aGpZR3BRZTNvWXEvN3NCVUE9PQ==?=
+ ARA:13230040|376014|52116014|366016|1800799024|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?SStuYnZ3Rno5bUtLWDViTWl1dkdxUWQvK1ZzQ3c4NDJNYmR6QTR0U2FJNzdk?=
+ =?utf-8?B?aW9PTFhZdTJwMk9ZK3JzWFVVQ1pYNjNWU25DK1hHZndubTU5WVBvSnp1Y0xl?=
+ =?utf-8?B?YnBQMGtuaitVZXRxMkVzVGZOSHRDNC9ZbTExU21SWGh1YTBqaVBYL2VTRUo0?=
+ =?utf-8?B?ZnBkdXVweGlJSk1pRmtxZHQ4UkRwdFRvNWhWZldIT0lJUzdaTW5tbEQrNElX?=
+ =?utf-8?B?RXJHOEpVQkdWYTVWZVNueWFzVlZ5K2U0T2x1V2RodlJZeE91SG16SERoTEt1?=
+ =?utf-8?B?Zys4aEZwcUFrWDdLYlhYbGU0bUJXeUtCcm9JSjV2SXArTVRVcVVvbXVXSnl6?=
+ =?utf-8?B?V1lMOVl3TCtmTm4rL1BWVm1rOVpEMlVXdGQvQUtVWGR6bUpMUVdxUjZUQ3c3?=
+ =?utf-8?B?T0hpUWlpK2VPaHRFWHRuZUJLSzU4S0llbVlYZGcvcVhwZVdVMWFMbFVhc09X?=
+ =?utf-8?B?eHFXb0VCQTlPdGpLWHgxZ29RL1dXOEt1SWVCUEtEUzd4MzFsRWFjdmxmKzNn?=
+ =?utf-8?B?SDJLVmo3L2J1VFJHT3IvNDNwVW1KaS9QcWZabURIMG1keDBEWGQxR1Y1L083?=
+ =?utf-8?B?dC9NZkJjaXdMbDN4OHhsWWVLVkU1NWhEL3U2aXNSWkh4M3p0UTB3YWlFRVJQ?=
+ =?utf-8?B?dVdWWDJXaUF1b1ZOamx5THJRcGNJSHhkTVNlbzNUVzV4azg3VFdsYnJockxC?=
+ =?utf-8?B?SmZWUHZ3VmVxSDlBYngyTnBqMW44SlQ5ZytkeG1rcHNvUW1FbkNKaVl3dWF2?=
+ =?utf-8?B?eS9NQzQ0dzFwZXRnM2l3Nm9NYnIxT0dsdHlNMHVQL0J0dkdWdXo5N1BTNEFl?=
+ =?utf-8?B?RkFkaGNWTUZzYW5CbHRDckpxc0owRzlCcHlkaDdJR3dLdytIOCtMZU44ZkFy?=
+ =?utf-8?B?aE1aVVcxZkVPcW02YlllTC93RGRqUHk0U0xKcVo4VE1sVGlXSlBGalNkUGk2?=
+ =?utf-8?B?REVZTEViV0Y0c1hyWFdocjVmNlRuMTIvekQ1VFBoa0NpV3hteFE0VHdCc3FR?=
+ =?utf-8?B?NTZBMlV2Q0k3Q0VjU2dWRncxaUdjcCtWbUY4Y25UU1hKK1BnY2tNTWljamhs?=
+ =?utf-8?B?L1B6VmFmeHJuTzZZZ2F2cEpQQnRqNXNxSDFmYkZzZFdTak9BVzNqYW5PNElW?=
+ =?utf-8?B?NzFBWGs0d05BL0psb1BqMTVJZ3dkTWRsM2lLUkR4ZXdld2dNaTRnVDNNL2dN?=
+ =?utf-8?B?NGlGSE9QeVBGSW5tT1o2WjJNcnB0RmMwMEFMV0V5Wi92QWRvY2lnQUM5OFg3?=
+ =?utf-8?B?MEpod3pHZ0hJQWtFNVlxRm10YWZkL00yWFAzVkJWdWpaQ3N3VzlPalJrWmRM?=
+ =?utf-8?B?TzlSOWtmRnZxaGVzQmZtMVpLYnAralJoRlFGTmNyK0swRjhjWVFJN0hiK3FM?=
+ =?utf-8?B?aVlFZFJDOE5XSUdXL2xPRnJoMTdEbEV5QnFuWWhGcnJ4R1J5c3pWbkVQOWdO?=
+ =?utf-8?B?cXVnZGFQRktuMXdRYW5ERm9ZNjRlb0lCYmRaVTNUVzVBWUNjZHBiTlArOElt?=
+ =?utf-8?B?K3hmcWE2bDBCL0xHU0NVeXJvbDBINnBJclNCWTBQUmdseUNveXU4amdZaFdt?=
+ =?utf-8?B?YTJQcDhvSjdVWFlnRVFqWkxQTmVUdlBrSjExS08xVE5JeTF2SmJ5dVVFQzly?=
+ =?utf-8?B?WlZyM0Yvd1RvUzZ2ZFYweEQ0VjNMRnBYRUZ0KzlxMEhNOEtSZzQzOFFLUERq?=
+ =?utf-8?B?bXNDcDV2c01iSnJnS1BWNXM1TGE3NGxzQlVZVGVGYzBWamIwYlRJcisvMVBh?=
+ =?utf-8?B?MGZScU4vTHlMS0pDak5LYUM4LzdWQ2VYdGRpSTNYU1h4T3MxWTVsUGEvaDYy?=
+ =?utf-8?B?U2Qza3VsVWZRa0RvQ2Zkcks2TG42UllZSGc4NnJaOUpRQ1ZCNnNXUUhRbTdU?=
+ =?utf-8?B?Q2IyOXZQUDJWcUpnUDh5djNnbi9OTWJNSDNRd1lKRVNnMFE9PQ==?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(52116014)(376014)(1800799024)(366016)(38350700014); DIR:OUT;
+ SFS:(13230040)(376014)(52116014)(366016)(1800799024)(38350700014); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YzVNM2ZNb1h0RlZkK0JxYzlVUUk2Q2xwcU9GSGxzNG1IUG1mR3cvMGhIUkZz?=
- =?utf-8?B?c1ZDb1NSVUttM2hsaGx2eHYyN0ljc0lMYkRvOTNDc1lia0dyR3pkUlByd1h2?=
- =?utf-8?B?bm53QmlCL0s5L0Q1cXFSdFBXczdqWnVDbE95NFo0NTBML0NORWVoS3NWU0la?=
- =?utf-8?B?QUdYdHFPVEJYT3NSMmk0UjVaU25rUEh0VFZqemdDa1BwcXJoNkZPV1JpcTZO?=
- =?utf-8?B?cXJBbGsxaHUweTdseExWeC9pV2U3eVhzcWY3Z2pKS0k2Q3RGYnpQOWhSZ0hl?=
- =?utf-8?B?ak85MDJxUjJkNE50NExNRkVncFlWa1ZwK3pjMm0rLzRDOTg2L3kzNC9pR1J2?=
- =?utf-8?B?Si9PNXJPVEphRjI0cFdkT09BTFl0Qzk2YndOblBwaGcwSUtGaHMrWCtmZUJu?=
- =?utf-8?B?N0szeHYrTXhpcHNlWXVRRjB2S2lqeSszQTBEV3c1bzdITjlVM3JUMGpVK3Zz?=
- =?utf-8?B?YWpLaVdidlN5dFkyWmhDVVpvenp4T3g4TDVkQXo1UHAvYzZKbTN0WkdQTS8z?=
- =?utf-8?B?OWcyNVJJaVg1OFVTSVh5ZXA4UVVlWWRWSnIwNmpxaVZpVWYySVREdmNDMWlX?=
- =?utf-8?B?cU1VbWVGV05uWVY0WE1HTnVhR2lCL0dOUmtvVEVNYlZYeHNyTkJQNFFmS1Er?=
- =?utf-8?B?Q0cxaUxNU2RBejVKdHBRNkc1R0w3VFlSMDBscS9VOEM5WGJKNTFYamJXcjFt?=
- =?utf-8?B?ZFFYV0RRdytzS2pCdkFhM1pTanRNckVLWnNIeEhaYnJNTjNtVnpnb3dQOC9r?=
- =?utf-8?B?cTVnVUNZUjl4WXFOaFdMeU8wdUhBL1NhQ29reUlCaGd6Vit0ZkJvQkZ4WkFL?=
- =?utf-8?B?NXVmenJqcm8rZ3hJczF3OTZBWHdwQUp2eGJLYVlqaXBJNmFGYTJuNHBpREEz?=
- =?utf-8?B?S3FEa2syTm5yNnBla3dyZytRQ3QyV3o5UmlPTEt5dWlxcWtQUFRnZFhQTHhU?=
- =?utf-8?B?SHU5OENNcTJZZ2t1L1M2dHR3QkpEMHdXVWZ0Y1VldjE3VzkwMlNkUDVCUWth?=
- =?utf-8?B?RGdINE9pc2grT3VEbnlqMHFDK29TU3VTUmRDZi8wb21hclBUUmoxQXkvNnpS?=
- =?utf-8?B?MUpWM0QyZXdVQ2JFd0JxUktmSU5PR01oc0NtNFY2ZDc2MzN3dUxDUlllRzFx?=
- =?utf-8?B?VEgveDdhdXd5RTlZR28yT1FrZldUd3UzYTFwMnN1aS96NnM0blFPR2pEcjVq?=
- =?utf-8?B?VEptMXZqNHRnSDJCRjBHS2x5TUU1Uk5HSkNPTkNVV3I0Z2hNS1N3U2NvWmQ1?=
- =?utf-8?B?T0Y3L01WMEdhK0xHelVNM3BFZmRIM0xReG9yVTJ6QmtqNlJCTXQwUG9xT3o3?=
- =?utf-8?B?VUp4K2ZnN0k4dTZCTERDb29uL2pRTnNjUW92VjlXWGpKS2hmZTZuU2N4QzBj?=
- =?utf-8?B?VnlhUUJsd3c4YkcvYjZPM2JhY3RkOVptZzRuVXMrU0J0dHZXZ0pUWElGZ0N0?=
- =?utf-8?B?UEM4bS9KN1dMMmtkaXU2aTVkbWdaN0FFU0JEcTE4c2hQcTdTWlEvV3VZOHJr?=
- =?utf-8?B?cGtxVUczMk9rVENrUGZPTnNycTZBQkJPNzZDeitGOTJjdWtnWXBkQ2k0WHF2?=
- =?utf-8?B?dURIZGttN1I1cFE4eUE1cnUvZ0EyL2Fvc29hRzhsWnppVlVQT2lFanp2ekdw?=
- =?utf-8?B?RG9YWkhlZUVxbGNuengyUC9JMXdJVjdhOTVlYmhEd2swZlRXNDZicStCRnha?=
- =?utf-8?B?ZW9GcVZFek5KTjZKWFo5a3MyTjhXRGJURXlHZmpFdjlKak9oZC8vb2pwU2NB?=
- =?utf-8?B?NFBxbWswTkhEeXpJbitiS21TYm1KYXBkcEJmOVB2MFlFY1duMTRwWndmaWgv?=
- =?utf-8?B?VDB6cTRpcEh2SVE2akZwK1VqeWltaktPRXVWMlNaR0RNbS9aanJwM1NRU3ly?=
- =?utf-8?B?T1JwdW5RTEc4M0J6K2tWYTkvY1RVMTRPdkJNbHEvN1U3dllOS1hqVis1dCtC?=
- =?utf-8?B?dkxtbUs0c01sNVJOaTN3Nk82NWw2RTdMYTA0d0Z1NG1Zc1dUTEJYZkpSVW4r?=
- =?utf-8?B?Smo3RUJ1eDFlMTlWNC9DQVV5dDVLbXRsb0FpYWNYdUNrZ2NweFZXZGQ5YlZn?=
- =?utf-8?B?cVhGeUFab3pLWjJ3cHZMbU41cStZUjhKa01pSkpNYXRlR2ZGcTM0VldlRFlR?=
- =?utf-8?Q?Afblx2zh6Fc7AeGnXgbMQbU5M?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?N2JJSU96ZktzZG5aQTE4elYwNUV2aE5jSE5vNWFWL3VUTlJsZmp1aDBpRk0v?=
+ =?utf-8?B?WG1WL3FrR2xsRm5keVhuYXQ2VVBWSFBpZElxc3RVY3E5QWc1SnhiN09nN0dW?=
+ =?utf-8?B?K2pNWHE2dFI4S09kZUh3VHhoU2ZvcktoalVLaGxDalRQdyt1R3ViTjlGRVhH?=
+ =?utf-8?B?TTZSR21UV2NxWlJQYkVQWHk1bkU4WHRMM2ZjcW95dW9iampMc1c4QkJmVkRy?=
+ =?utf-8?B?eU5vZkNiM3lUR1FYTzBrWlFrS0ZLR3JBaVNMS3hoS2lKaVNyNmFWekNIQnpQ?=
+ =?utf-8?B?WDNRUXgzcHBMNTd5TVlQTmNLNklhYldtazhYbzM4aWo3MkNCS2hxVnNLOS9w?=
+ =?utf-8?B?aDFWazhnQUFVREJ2Rld0cjJ6dFdBUVRuWTJLNGNKT0tjWnJ6My9SSFN4aHNv?=
+ =?utf-8?B?RHk1OU1HTGJoTjM1SVdaYmJqWU9WWGFnRnZHVHZ3OFh1ZFRSZDVjanVJT1hD?=
+ =?utf-8?B?K2pXRVFZZStFb2E0NTdZelBpZFdrVmRVLzBQUzRNODVzYy9yZjg2aEZDWEVQ?=
+ =?utf-8?B?R3JFRFFNTnNPTFdaT3lIMll2UmYyTmU3cEFxV08zaFl5L3JjVnZRNWFxeTA3?=
+ =?utf-8?B?cXY0cWxGb1dTV1FPSVFCanRMVG5DRHlVSzdrbElHY0N1a05IQ3dxUGUxTzdQ?=
+ =?utf-8?B?M1p4ZkZZL2s2WTU1WHNaRlpaczZFRzUwS24weEF3MDZweG1HQmdlSk5JcDYr?=
+ =?utf-8?B?YlliUjdSMkczWDBhcU5lWVp3azZuSklBT3gzdzJHVVRHZWcxSTVLVG5WTVY0?=
+ =?utf-8?B?RDB6ZWZFNW9tWWJob0l6cno3S2duc1ZCOS95V0lNSDNRNDlCUlJLWTVoSEF3?=
+ =?utf-8?B?OTVTTGlGaFRXU0pmeFQ4VHR2dWI0NEgxSHhySnhLdnFOWkJkRkpNVGZLdXk4?=
+ =?utf-8?B?V082TnNWQ0hkOWJJMnZWT3VEQ3UyaC9VSEYzK28ySE9iY2pBclNYQzVkdUVZ?=
+ =?utf-8?B?SjZvL3NWSmVzbVJUTTJhZ1o5Q2VXM3Y3SFd4VHpPTXoxekozd1VVZHVjUFJj?=
+ =?utf-8?B?MFlWenczeXdKSHFvV2ZPa0ZMMDdMQUZiSVd5TGNDS0x0QStTQjFOdHBSbjNx?=
+ =?utf-8?B?ZjJRR3NNUXJIQXZvTnVtR04vTTUvNHd1blc2T3Z2dmpObGpRaEFEYW82bk5l?=
+ =?utf-8?B?UmoxVFQ5TWZuOWY2WDVxYTRqQ2pDQm11cFM2OWk0S1NKbFJ4YjZBZmtlWWNX?=
+ =?utf-8?B?a0JRUEFKTTA3YUxaVHVxVHpBUENVc2VQby81b3c5QU9IV2liR2p6UVVBQ2sr?=
+ =?utf-8?B?NzNaeXNPWE52L2p1dzVybFlmUkxlNXQ5RW9lRnhiVXh4Unh3WVAvWTNjdGNU?=
+ =?utf-8?B?R0tiR2gzSWZNb1BOL1YxemltQzh0VFRuWis5YTd3ci83MzZKWWlXdnIxUFNy?=
+ =?utf-8?B?czhsR09DMVpHME4xNE9QM2FMN1QyUnBsODNscW43cVJFUyt1N254NTJTNnlw?=
+ =?utf-8?B?eGJkVC9sdmorc2dLbHlUYzNjQ0IyalZCOGlvcW82QzRiTFJYTlFLS0NSM2s0?=
+ =?utf-8?B?cjNBL1JlclloWW1vZ20yTU9ZZk9Yby9kTXdYWGVvRWFjaUFqRnpkRjdRbmYw?=
+ =?utf-8?B?d1l3dWJtckVrNEhWQW9xZ2xzSVZPZWxaaHIvem1hUmlnaVZac1dDdnVZajV2?=
+ =?utf-8?B?MUdOWTdwQ1F6V3h0K09CR0dndVplWWdGemZNWkJlclZ5V0NlQzgxdE9vbXJG?=
+ =?utf-8?B?Ym9tbEw2bDdRWVZ2QWNPY1FXUUpZbXBIUVJTdjB4ays4UzFQcytVU2E5V2Y5?=
+ =?utf-8?B?RlpheStzMUNHVGVDdjZDcFRLSEwvLzhndE1ZS2tDbmFwTzM2V2c5d3N0aXNH?=
+ =?utf-8?B?VndRbWtUNjYyL2Z1NDBSMWc0NVFYc3pzdk53V3J4U3VxNTV3a0ZaeUtnNTdl?=
+ =?utf-8?B?dXYybjNQWnhEWDBzV0F2QlZ1d2x6ZlRGSWo1UHNYRlNCTFRnbEJMb3BuTHl4?=
+ =?utf-8?B?NjZqYzhrVEN2anRYOVRIaElyV0F5elgxS2I2VjVjc3AxV3hZRWgyQUtyeDZD?=
+ =?utf-8?B?ejBVRTJVUCtsdTQxdkR1VmkrREdlS2g1R1Jwd1J2UTFjZG9iTTA4TkR6blZk?=
+ =?utf-8?B?a09ScThRVjJYTENUU3ZPOTBYQkFIZW1UOXRpN0JFY2gyOU53K1hiYXdPcGF4?=
+ =?utf-8?Q?b1PQkvjvEr61MMczbGe85Lts0?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 11b4b9f4-5475-46ba-476a-08dcd6c0cc68
+X-MS-Exchange-CrossTenant-Network-Message-Id: 54e69501-ecc0-4368-6a79-08dcd6c0cee7
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Sep 2024 02:31:13.1927 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Sep 2024 02:31:17.3733 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 2agIDSS6B//uQkIbR8L73HlyTTywQY9BqVBgj0lv2b0uYvkPVTxVzU70ej8+VKSEyPAkiLW0ZGjiI4o4eIB/1w==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR04MB10451
+X-MS-Exchange-CrossTenant-UserPrincipalName: BcabYFOofDCh6YOZpJ/c3K2+0LIv0YbG178J1Cu/psr3GHKg3Yd051ElZ5Dg4TmkfG8A91maFBJHNCLNZhY7hA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR04MB9420
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -179,298 +179,95 @@ X-Virus-Status: Clean
 
 From: Peng Fan <peng.fan@nxp.com>
 
-Replace magic number with meaningful macros.
+1. Use runtime voltage selection for LD/OD/ND mode.
+2. According to latest PE/TE report, the voltages of VDD_SOC for
+   LD and ND mode need add 50mv margin, so LD voltage is 0.75v->0.8v,
+   ND voltage is 0.8v->0.85v.
+3. Use TOFF_DEB to differentiate new trimmed pmic and old pmic
 
 Signed-off-by: Peng Fan <peng.fan@nxp.com>
 ---
- arch/arm/include/asm/arch-imx9/imx-regs.h |   5 +
- arch/arm/mach-imx/imx9/trdc.c             | 156 ++++++++++++++++++------------
- 2 files changed, 101 insertions(+), 60 deletions(-)
+ board/freescale/imx93_evk/spl.c | 42 +++++++++++++++++++++++++++++++----------
+ include/power/pca9450.h         |  2 ++
+ 2 files changed, 34 insertions(+), 10 deletions(-)
 
-diff --git a/arch/arm/include/asm/arch-imx9/imx-regs.h b/arch/arm/include/asm/arch-imx9/imx-regs.h
-index fb6de533d12..44f6a95f23b 100644
---- a/arch/arm/include/asm/arch-imx9/imx-regs.h
-+++ b/arch/arm/include/asm/arch-imx9/imx-regs.h
-@@ -50,6 +50,11 @@
- #define BCTRL_GPR_ENET_QOS_INTF_SEL_RGMII        (0x1 << 1)
- #define BCTRL_GPR_ENET_QOS_CLK_GEN_EN            (0x1 << 0)
- 
-+#define TRDC_AON_BASE		(0x44270000UL)
-+#define TRDC_WAKEUP_BASE	(0x42460000UL)
-+#define TRDC_MEGA_BASE		(0x42810000UL)
-+#define TRDC_NIC_BASE		(0x49010000UL)
-+
- #define MARKETING_GRADING_MASK	GENMASK(5, 4)
- #define SPEED_GRADING_MASK	GENMASK(11, 6)
- 
-diff --git a/arch/arm/mach-imx/imx9/trdc.c b/arch/arm/mach-imx/imx9/trdc.c
-index 8cdb28459a3..ae1a46d1331 100644
---- a/arch/arm/mach-imx/imx9/trdc.c
-+++ b/arch/arm/mach-imx/imx9/trdc.c
-@@ -4,12 +4,13 @@
-  */
- 
- #include <log.h>
-+#include <div64.h>
-+#include <hang.h>
- #include <linux/errno.h>
- #include <asm/io.h>
- #include <asm/types.h>
- #include <asm/arch/imx-regs.h>
- #include <asm/arch/sys_proto.h>
--#include <div64.h>
- #include <asm/mach-imx/ele_api.h>
- #include <asm/mach-imx/mu_hal.h>
- 
-@@ -19,6 +20,25 @@
- #define MBC_NUM(HWCFG) (((HWCFG) >> 16) & 0xF)
- #define MRC_NUM(HWCFG) (((HWCFG) >> 24) & 0x1F)
- 
-+enum {
-+	/* Order following ELE API Spec, not change */
-+	TRDC_A,
-+	TRDC_W,
-+	TRDC_M,
-+	TRDC_N,
-+};
-+
-+/* Just make it easier to know what the parameter is */
-+#define MBC(X)			(X)
-+#define MRC(X)			(X)
-+#define GLOBAL_ID(X)		(X)
-+#define MEM(X)			(X)
-+#define DOM(X)			(X)
-+/*
-+ *0|SPR|SPW|SPX,0|SUR|SUW|SWX, 0|NPR|NPW|NPX, 0|NUR|NUW|NUX
-+ */
-+#define PERM(X)			(X)
-+
- struct mbc_mem_dom {
- 	u32 mem_glbcfg[4];
- 	u32 nse_blk_index;
-@@ -364,68 +384,84 @@ void trdc_early_init(void)
+diff --git a/board/freescale/imx93_evk/spl.c b/board/freescale/imx93_evk/spl.c
+index 2ad7489ada7..503286ce3af 100644
+--- a/board/freescale/imx93_evk/spl.c
++++ b/board/freescale/imx93_evk/spl.c
+@@ -62,6 +62,7 @@ int power_init_board(void)
  {
- 	int ret = 0, i;
+ 	struct udevice *dev;
+ 	int ret;
++	unsigned int val = 0, buck_val;
  
--	ret |= release_rdc(0);
--	ret |= release_rdc(2);
--	ret |= release_rdc(1);
--	ret |= release_rdc(3);
-+	ret |= release_rdc(TRDC_A);
-+	ret |= release_rdc(TRDC_M);
-+	ret |= release_rdc(TRDC_W);
-+	ret |= release_rdc(TRDC_N);
+ 	ret = pmic_get("pmic@25", &dev);
+ 	if (ret == -ENODEV) {
+@@ -77,20 +78,41 @@ int power_init_board(void)
+ 	/* enable DVS control through PMIC_STBY_REQ */
+ 	pmic_reg_write(dev, PCA9450_BUCK1CTRL, 0x59);
  
--	if (!ret) {
--		/* Set OCRAM to RWX for secure, when OEM_CLOSE, the image is RX only */
--		trdc_mbc_set_control(0x49010000, 3, 0, 0x7700);
-+	if (ret) {
-+		hang();
-+		return;
+-	if (is_voltage_mode(VOLT_LOW_DRIVE))
+-		/* 0.75v for Low drive mode
+-		 */
+-		pmic_reg_write(dev, PCA9450_BUCK1OUT_DVS0, 0x0c);
+-		pmic_reg_write(dev, PCA9450_BUCK3OUT_DVS0, 0x0c);
++	ret = pmic_reg_read(dev, PCA9450_PWR_CTRL);
++	if (ret < 0)
++		return ret;
++
++	val = ret;
++
++	if (is_voltage_mode(VOLT_LOW_DRIVE)) {
++		buck_val = 0x0c; /* 0.8v for Low drive mode */
++		printf("PMIC: Low Drive Voltage Mode\n");
++	} else if (is_voltage_mode(VOLT_NOMINAL_DRIVE)) {
++		buck_val = 0x10; /* 0.85v for Nominal drive mode */
++		printf("PMIC: Nominal Voltage Mode\n");
++	} else {
++		buck_val = 0x14; /* 0.9v for Over drive mode */
++		printf("PMIC: Over Drive Voltage Mode\n");
 +	}
 +
-+	/* Set OCRAM to RWX for secure, when OEM_CLOSE, the image is RX only */
-+	trdc_mbc_set_control(TRDC_NIC_BASE, MBC(3), GLOBAL_ID(0), PERM(0x7700));
- 
--		for (i = 0; i < 40; i++)
--			trdc_mbc_blk_config(0x49010000, 3, 3, 0, i, true, 0);
-+	for (i = 0; i < 40; i++) {
-+		trdc_mbc_blk_config(TRDC_NIC_BASE, MBC(3), DOM(3), MEM(0), i,
-+				    true, GLOBAL_ID(0));
- 
--		for (i = 0; i < 40; i++)
--			trdc_mbc_blk_config(0x49010000, 3, 3, 1, i, true, 0);
-+		trdc_mbc_blk_config(TRDC_NIC_BASE, MBC(3), DOM(3), MEM(1), i,
-+				    true, GLOBAL_ID(0));
- 
--		for (i = 0; i < 40; i++)
--			trdc_mbc_blk_config(0x49010000, 3, 0, 0, i, true, 0);
-+		trdc_mbc_blk_config(TRDC_NIC_BASE, MBC(3), DOM(0), MEM(0), i,
-+				    true, GLOBAL_ID(0));
- 
--		for (i = 0; i < 40; i++)
--			trdc_mbc_blk_config(0x49010000, 3, 0, 1, i, true, 0);
-+		trdc_mbc_blk_config(TRDC_NIC_BASE, MBC(3), DOM(0), MEM(1), i,
-+				    true, GLOBAL_ID(0));
++	if (val & PCA9450_REG_PWRCTRL_TOFF_DEB) {
++		pmic_reg_write(dev, PCA9450_BUCK1OUT_DVS0, buck_val);
++		pmic_reg_write(dev, PCA9450_BUCK3OUT_DVS0, buck_val);
+ 	} else {
+-		/* 0.9v for Over drive mode
+-		 */
+-		pmic_reg_write(dev, PCA9450_BUCK1OUT_DVS0, 0x18);
+-		pmic_reg_write(dev, PCA9450_BUCK3OUT_DVS0, 0x18);
++		pmic_reg_write(dev, PCA9450_BUCK1OUT_DVS0, buck_val + 0x4);
++		pmic_reg_write(dev, PCA9450_BUCK3OUT_DVS0, buck_val + 0x4);
++	}
++
++	if (IS_ENABLED(CONFIG_IMX93_EVK_LPDDR4X)) {
++		/* Set VDDQ to 1.1V from buck2 */
++		pmic_reg_write(dev, PCA9450_BUCK2OUT_DVS0, 0x28);
  	}
- }
  
- void trdc_init(void)
- {
- 	/* TRDC mega */
--	if (trdc_mrc_enabled(0x49010000)) {
-+	if (trdc_mrc_enabled(TRDC_NIC_BASE)) {
- 		/* DDR */
--		trdc_mrc_set_control(0x49010000, 0, 0, 0x7777);
-+		trdc_mrc_set_control(TRDC_NIC_BASE, MRC(0), GLOBAL_ID(0), PERM(0x7777));
+ 	/* set standby voltage to 0.65v */
+-	pmic_reg_write(dev, PCA9450_BUCK1OUT_DVS1, 0x4);
++	if (val & PCA9450_REG_PWRCTRL_TOFF_DEB)
++		pmic_reg_write(dev, PCA9450_BUCK1OUT_DVS1, 0x0);
++	else
++		pmic_reg_write(dev, PCA9450_BUCK1OUT_DVS1, 0x4);
  
- 		/* ELE */
--		trdc_mrc_region_config(0x49010000, 0, 0, 0x80000000, 0xFFFFFFFF, false, 0);
-+		trdc_mrc_region_config(TRDC_NIC_BASE, MRC(0), DOM(0), 0x80000000,
-+				       0xFFFFFFFF, false, GLOBAL_ID(0));
+ 	/* I2C_LT_EN*/
+ 	pmic_reg_write(dev, 0xa, 0x3);
+diff --git a/include/power/pca9450.h b/include/power/pca9450.h
+index b8219d535ad..f896d829d37 100644
+--- a/include/power/pca9450.h
++++ b/include/power/pca9450.h
+@@ -54,6 +54,8 @@ enum {
+ 	PCA9450_REG_NUM,
+ };
  
- 		/* MTR */
--		trdc_mrc_region_config(0x49010000, 0, 1, 0x80000000, 0xFFFFFFFF, false, 0);
-+		trdc_mrc_region_config(TRDC_NIC_BASE, MRC(0), DOM(1), 0x80000000,
-+				       0xFFFFFFFF, false, GLOBAL_ID(0));
++#define PCA9450_REG_PWRCTRL_TOFF_DEB    BIT(5)
++
+ int power_pca9450_init(unsigned char bus, unsigned char addr);
  
- 		/* M33 */
--		trdc_mrc_region_config(0x49010000, 0, 2, 0x80000000, 0xFFFFFFFF, false, 0);
-+		trdc_mrc_region_config(TRDC_NIC_BASE, MRC(0), DOM(2), 0x80000000,
-+				       0xFFFFFFFF, false, GLOBAL_ID(0));
- 
- 		/* A55*/
--		trdc_mrc_region_config(0x49010000, 0, 3, 0x80000000, 0xFFFFFFFF, false, 0);
-+		trdc_mrc_region_config(TRDC_NIC_BASE, MRC(0), DOM(3), 0x80000000,
-+				       0xFFFFFFFF, false, GLOBAL_ID(0));
- 
- 		/* For USDHC1 to DDR, USDHC1 is default force to non-secure */
--		trdc_mrc_region_config(0x49010000, 0, 5, 0x80000000, 0xFFFFFFFF, false, 0);
-+		trdc_mrc_region_config(TRDC_NIC_BASE, MRC(0), DOM(5), 0x80000000,
-+				       0xFFFFFFFF, false, GLOBAL_ID(0));
- 
- 		/* For USDHC2 to DDR, USDHC2 is default force to non-secure */
--		trdc_mrc_region_config(0x49010000, 0, 6, 0x80000000, 0xFFFFFFFF, false, 0);
-+		trdc_mrc_region_config(TRDC_NIC_BASE, MRC(0), DOM(6), 0x80000000,
-+				       0xFFFFFFFF, false, GLOBAL_ID(0));
- 
- 		/* eDMA */
--		trdc_mrc_region_config(0x49010000, 0, 7, 0x80000000, 0xFFFFFFFF, false, 0);
-+		trdc_mrc_region_config(TRDC_NIC_BASE, MRC(0), DOM(7), 0x80000000,
-+				       0xFFFFFFFF, false, GLOBAL_ID(0));
- 
- 		/*CoreSight, TestPort*/
--		trdc_mrc_region_config(0x49010000, 0, 8, 0x80000000, 0xFFFFFFFF, false, 0);
-+		trdc_mrc_region_config(TRDC_NIC_BASE, MRC(0), DOM(8), 0x80000000,
-+				       0xFFFFFFFF, false, GLOBAL_ID(0));
- 
- 		/* DAP */
--		trdc_mrc_region_config(0x49010000, 0, 9, 0x80000000, 0xFFFFFFFF, false, 0);
-+		trdc_mrc_region_config(TRDC_NIC_BASE, MRC(0), DOM(9), 0x80000000,
-+				       0xFFFFFFFF, false, GLOBAL_ID(0));
- 
- 		/*SoC masters */
--		trdc_mrc_region_config(0x49010000, 0, 10, 0x80000000, 0xFFFFFFFF, false, 0);
-+		trdc_mrc_region_config(TRDC_NIC_BASE, MRC(0), DOM(10), 0x80000000,
-+				       0xFFFFFFFF, false, GLOBAL_ID(0));
- 
- 		/*USB*/
--		trdc_mrc_region_config(0x49010000, 0, 11, 0x80000000, 0xFFFFFFFF, false, 0);
-+		trdc_mrc_region_config(TRDC_NIC_BASE, MRC(0), DOM(11), 0x80000000,
-+				       0xFFFFFFFF, false, GLOBAL_ID(0));
- 	}
- }
- 
-@@ -504,78 +540,78 @@ void trdc_dump(void)
- 
- 	printf("TRDC AONMIX MBC\n");
- 
--	trdc_mbc_control_dump(0x44270000, 0, 0);
--	trdc_mbc_control_dump(0x44270000, 1, 0);
-+	trdc_mbc_control_dump(TRDC_AON_BASE, MBC(0), GLOBAL_ID(0));
-+	trdc_mbc_control_dump(TRDC_AON_BASE, MBC(1), GLOBAL_ID(0));
- 
- 	for (i = 0; i < 11; i++)
--		trdc_mbc_mem_dump(0x44270000, 0, 3, 0, i);
-+		trdc_mbc_mem_dump(TRDC_AON_BASE, MBC(0), DOM(3), MEM(0), i);
- 	for (i = 0; i < 1; i++)
--		trdc_mbc_mem_dump(0x44270000, 0, 3, 1, i);
-+		trdc_mbc_mem_dump(TRDC_AON_BASE, MBC(0), DOM(3), MEM(1), i);
- 
- 	for (i = 0; i < 4; i++)
--		trdc_mbc_mem_dump(0x44270000, 1, 3, 0, i);
-+		trdc_mbc_mem_dump(TRDC_AON_BASE, MBC(1), DOM(3), MEM(0), i);
- 	for (i = 0; i < 4; i++)
--		trdc_mbc_mem_dump(0x44270000, 1, 3, 1, i);
-+		trdc_mbc_mem_dump(TRDC_AON_BASE, MBC(1), DOM(3), MEM(1), i);
- 
- 	printf("TRDC WAKEUP MBC\n");
- 
--	trdc_mbc_control_dump(0x42460000, 0, 0);
--	trdc_mbc_control_dump(0x42460000, 1, 0);
-+	trdc_mbc_control_dump(TRDC_WAKEUP_BASE, MBC(0), GLOBAL_ID(0));
-+	trdc_mbc_control_dump(TRDC_WAKEUP_BASE, MBC(1), GLOBAL_ID(0));
- 
- 	for (i = 0; i < 15; i++)
--		trdc_mbc_mem_dump(0x42460000, 0, 3, 0, i);
-+		trdc_mbc_mem_dump(TRDC_WAKEUP_BASE, MBC(0), DOM(3), MEM(0), i);
- 
--	trdc_mbc_mem_dump(0x42460000, 0, 3, 1, 0);
--	trdc_mbc_mem_dump(0x42460000, 0, 3, 2, 0);
-+	trdc_mbc_mem_dump(TRDC_WAKEUP_BASE, MBC(0), DOM(3), MEM(1), 0);
-+	trdc_mbc_mem_dump(TRDC_WAKEUP_BASE, 0, 3, 2, 0);
- 
- 	for (i = 0; i < 2; i++)
--		trdc_mbc_mem_dump(0x42460000, 1, 3, 0, i);
-+		trdc_mbc_mem_dump(TRDC_WAKEUP_BASE, MBC(1), DOM(3), MEM(0), i);
- 
--	trdc_mbc_mem_dump(0x42460000, 1, 3, 1, 0);
--	trdc_mbc_mem_dump(0x42460000, 1, 3, 2, 0);
--	trdc_mbc_mem_dump(0x42460000, 1, 3, 3, 0);
-+	trdc_mbc_mem_dump(TRDC_WAKEUP_BASE, MBC(1), DOM(3), MEM(1), 0);
-+	trdc_mbc_mem_dump(TRDC_WAKEUP_BASE, 1, 3, 2, 0);
-+	trdc_mbc_mem_dump(TRDC_WAKEUP_BASE, MBC(1), DOM(3), MEM(3), 0);
- 
- 	printf("TRDC NICMIX MBC\n");
- 
--	trdc_mbc_control_dump(0x49010000, 0, 0);
--	trdc_mbc_control_dump(0x49010000, 1, 0);
--	trdc_mbc_control_dump(0x49010000, 2, 0);
--	trdc_mbc_control_dump(0x49010000, 3, 0);
-+	trdc_mbc_control_dump(TRDC_NIC_BASE, MBC(0), GLOBAL_ID(0));
-+	trdc_mbc_control_dump(TRDC_NIC_BASE, MBC(1), GLOBAL_ID(0));
-+	trdc_mbc_control_dump(TRDC_NIC_BASE, MBC(2), GLOBAL_ID(0));
-+	trdc_mbc_control_dump(TRDC_NIC_BASE, MBC(3), GLOBAL_ID(0));
- 
- 	for (i = 0; i < 7; i++)
--		trdc_mbc_mem_dump(0x49010000, 0, 3, 0, i);
-+		trdc_mbc_mem_dump(TRDC_NIC_BASE, MBC(0), DOM(3), MEM(0), i);
- 
- 	for (i = 0; i < 2; i++)
--		trdc_mbc_mem_dump(0x49010000, 0, 3, 1, i);
-+		trdc_mbc_mem_dump(TRDC_NIC_BASE, MBC(0), DOM(3), MEM(1), i);
- 
- 	for (i = 0; i < 5; i++)
--		trdc_mbc_mem_dump(0x49010000, 0, 3, 2, i);
-+		trdc_mbc_mem_dump(TRDC_NIC_BASE, MBC(0), DOM(3), MEM(2), i);
- 
- 	for (i = 0; i < 6; i++)
--		trdc_mbc_mem_dump(0x49010000, 0, 3, 3, i);
-+		trdc_mbc_mem_dump(TRDC_NIC_BASE, MBC(0), DOM(3), MEM(3), i);
- 
- 	for (i = 0; i < 1; i++)
--		trdc_mbc_mem_dump(0x49010000, 1, 3, 0, i);
-+		trdc_mbc_mem_dump(TRDC_NIC_BASE, MBC(1), DOM(3), MEM(0), i);
- 
- 	for (i = 0; i < 1; i++)
--		trdc_mbc_mem_dump(0x49010000, 1, 3, 1, i);
-+		trdc_mbc_mem_dump(TRDC_NIC_BASE, MBC(1), DOM(3), MEM(1), i);
- 
- 	for (i = 0; i < 3; i++)
--		trdc_mbc_mem_dump(0x49010000, 1, 3, 2, i);
-+		trdc_mbc_mem_dump(TRDC_NIC_BASE, MBC(1), DOM(3), MEM(2), i);
- 
- 	for (i = 0; i < 3; i++)
--		trdc_mbc_mem_dump(0x49010000, 1, 3, 3, i);
-+		trdc_mbc_mem_dump(TRDC_NIC_BASE, MBC(1), DOM(3), MEM(3), i);
- 
- 	for (i = 0; i < 2; i++)
--		trdc_mbc_mem_dump(0x49010000, 2, 3, 0, i);
-+		trdc_mbc_mem_dump(TRDC_NIC_BASE, MBC(2), DOM(3), MEM(0), i);
- 
- 	for (i = 0; i < 2; i++)
--		trdc_mbc_mem_dump(0x49010000, 2, 3, 1, i);
-+		trdc_mbc_mem_dump(TRDC_NIC_BASE, MBC(2), DOM(3), MEM(1), i);
- 
- 	for (i = 0; i < 5; i++)
--		trdc_mbc_mem_dump(0x49010000, 3, 3, 0, i);
-+		trdc_mbc_mem_dump(TRDC_NIC_BASE, MBC(3), DOM(3), MEM(0), i);
- 
- 	for (i = 0; i < 5; i++)
--		trdc_mbc_mem_dump(0x49010000, 3, 3, 1, i);
-+		trdc_mbc_mem_dump(TRDC_NIC_BASE, MBC(3), DOM(3), MEM(1), i);
- }
- #endif
+ enum {
 
 -- 
 2.35.3
