@@ -4,56 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC25FC35FF1
-	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 08:10:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AA20C35FF0
+	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 08:14:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E6D6888D02;
-	Tue, 17 Sep 2024 10:10:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id A5BEF88B0A;
+	Tue, 17 Sep 2024 10:14:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="k/6LNWPI";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="tnbRDbDd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C98288D31; Tue, 17 Sep 2024 10:10:55 +0200 (CEST)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 65FA088D54; Tue, 17 Sep 2024 10:14:00 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4769E881E7
- for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 10:10:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B642388ADC
+ for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 10:13:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.. (dynamic-046-114-106-243.46.114.pool.telefonica.de
- [46.114.106.243])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 26BDD3F14D; 
- Tue, 17 Sep 2024 08:10:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1726560652;
- bh=leA46HAtJBj9NlCWG3lljhrmhGSyHc+OLvq9OlVNGQ4=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=k/6LNWPI4o78J25i3mw7ikRPQbhhiEdi2DlGmbNtLJ748Pq8np0xhQS40/r+ajGNQ
- 8NGm1n5RRA9Y33K/m8DI2xPExheGwWYZXJ+ImICEl14zHXrbnXGR0IsUscTXm6dO9T
- FRTmRNo+U9Lk3vpHQE9U+zp+pj3JlRGlj6zx/MkdaIo1j78c28+PkUgiumpfzCCkFm
- JlWNXc8tQysBuJLuHWiPn4TdVvx0yqULL38zjgN13+TWXxW7HkKP+lPNVpvJMt3Pp5
- jwoklyaM9Y7wG7rizJyLLGhz67W7AZy9/q3yIdVksDIfWrV4Am7fu1xCSME+/C2xMN
- ThPUr2OrGV0tA==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Rick Chen <rick@andestech.com>,
-	Leo <ycliang@andestech.com>
-Cc: u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] cmd: sbi: Add FWFT, MPXY extensions
-Date: Tue, 17 Sep 2024 10:10:36 +0200
-Message-ID: <20240917081036.24943-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.45.2
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 48H8DfTw124578;
+ Tue, 17 Sep 2024 03:13:41 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1726560821;
+ bh=uR8g2YJI07x8cJmFzIZoz357EDF2OnQdfEqlnSPlMWE=;
+ h=From:To:CC:Subject:Date;
+ b=tnbRDbDd47sDj0gx28wWfQ6Ud2vdOoWl/1MJytY+SAmMCQXKN41gmE55AkS6cZ28l
+ F2l87dBDKy3EwuMjjtUVRQnxa/MSIPhTQE/DB4iKmQ+210b3dZpRodMO7Tr2loHw50
+ C/GdQqv4eLkPJHyyBCzRn7Cio46IxXWRCGkWKdXg=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 48H8DfwE115044
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 17 Sep 2024 03:13:41 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 17
+ Sep 2024 03:13:41 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 17 Sep 2024 03:13:41 -0500
+Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (udit-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.18])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 48H8Dbs5093869;
+ Tue, 17 Sep 2024 03:13:38 -0500
+From: Udit Kumar <u-kumar1@ti.com>
+To: <trini@konsulko.com>
+CC: <nm@ti.com>, <u-boot@lists.denx.de>, <n-francis@ti.com>,
+ <rogerq@kernel.org>, <afd@ti.com>, <bb@ti.com>, <j-humphreys@ti.com>,
+ <sumit.garg@linaro.org>, Udit Kumar <u-kumar1@ti.com>, Robert Nelson
+ <robertcnelson@gmail.com>
+Subject: [PATCH] dts: beagleboneai64: Add boothph in chipid node
+Date: Tue, 17 Sep 2024 13:43:29 +0530
+Message-ID: <20240917081329.370288-1-u-kumar1@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,58 +80,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The SBI 3.0 specification [1] adds the following extensions:
+beagleboneai64 boot was broken after OF_UPSTREAM support for
+J721E SOC.
+So add bootph in chipid node similar to other boards of
+this SOC.
 
-* Firmware Features Extension
-* Message Proxy Extension
-
-Let the sbi command detect their availability.
-
-The Firmware Features Extension is already implemented in OpenSBI.
-
-Correct the text for the DBTR extension and move it to the same position
-as in the specification.
-
-[1] https://github.com/riscv-non-isa/riscv-sbi-doc/releases/download/vv3.0-rc1/riscv-sbi.pdf
-
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Fixes: 46bb1405b461 ("arm: dts: k3-j721e: Move to OF_UPSTREAM")
+Reported-by: Robert Nelson <robertcnelson@gmail.com>
+Signed-off-by: Udit Kumar <u-kumar1@ti.com>
 ---
- arch/riscv/include/asm/sbi.h | 4 +++-
- cmd/riscv/sbi.c              | 4 +++-
- 2 files changed, 6 insertions(+), 2 deletions(-)
+Boot logs
+https://gist.github.com/uditkumarti/32604960dec65401cde8979e51160ba7
 
-diff --git a/arch/riscv/include/asm/sbi.h b/arch/riscv/include/asm/sbi.h
-index ad32dedb589..47124dbaac8 100644
---- a/arch/riscv/include/asm/sbi.h
-+++ b/arch/riscv/include/asm/sbi.h
-@@ -33,8 +33,10 @@ enum sbi_ext_id {
- 	SBI_EXT_CPPC = 0x43505043,
- 	SBI_EXT_NACL = 0x4E41434C,
- 	SBI_EXT_STA = 0x535441,
--	SBI_EXT_DBTR = 0x44425452,
- 	SBI_EXT_SSE = 0x535345,
-+	SBI_EXT_FWFT = 0x46574654,
-+	SBI_EXT_DBTR = 0x44425452,
-+	SBI_EXT_MPXY = 0x4D505859,
+ arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi b/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
+index 884f44239e..27851b7d08 100644
+--- a/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
++++ b/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
+@@ -64,6 +64,10 @@
+ 	bootph-all;
  };
  
- enum sbi_ext_base_fid {
-diff --git a/cmd/riscv/sbi.c b/cmd/riscv/sbi.c
-index a231604e492..5ecf56781c1 100644
---- a/cmd/riscv/sbi.c
-+++ b/cmd/riscv/sbi.c
-@@ -54,8 +54,10 @@ static struct sbi_ext extensions[] = {
- 	{ SBI_EXT_CPPC,			      "Collaborative Processor Performance Control Extension" },
- 	{ SBI_EXT_NACL,			      "Nested Acceleration Extension" },
- 	{ SBI_EXT_STA,			      "Steal-time Accounting Extension" },
--	{ SBI_EXT_DBTR,			      "Debug Trigger Extension" },
- 	{ SBI_EXT_SSE,			      "Supervisor Software Events" },
-+	{ SBI_EXT_FWFT,			      "Firmware Features Extension" },
-+	{ SBI_EXT_DBTR,			      "Debug Triggers Extension" },
-+	{ SBI_EXT_MPXY,			      "Message Proxy Extension" },
- };
- 
- static int do_sbi(struct cmd_tbl *cmdtp, int flag, int argc,
++&chipid {
++	bootph-all;
++};
++
+ &mcu_ringacc {
+ 	reg = <0x0 0x2b800000 0x0 0x400000>,
+ 		<0x0 0x2b000000 0x0 0x400000>,
 -- 
-2.45.2
+2.34.1
 
