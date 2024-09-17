@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 860C2C3ABB2
-	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 00:20:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 014D0C3ABCB
+	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 00:21:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AEAAA88C7E;
-	Tue, 17 Sep 2024 02:20:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4718588CC7;
+	Tue, 17 Sep 2024 02:21:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=broadcom.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="Hae4pbF3";
+	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="HwC6lguB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A3E6488CBB; Tue, 17 Sep 2024 02:20:25 +0200 (CEST)
-Received: from mail-ua1-x931.google.com (mail-ua1-x931.google.com
- [IPv6:2607:f8b0:4864:20::931])
+ id 9A0CF88CC7; Tue, 17 Sep 2024 02:21:22 +0200 (CEST)
+Received: from mail-vs1-xe2f.google.com (mail-vs1-xe2f.google.com
+ [IPv6:2607:f8b0:4864:20::e2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C00A88B88
- for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 02:20:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EEFCE88B88
+ for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 02:21:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=broadcom.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=william.zhang@broadcom.com
-Received: by mail-ua1-x931.google.com with SMTP id
- a1e0cc1a2514c-846c36009d5so1206702241.2
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 17:20:22 -0700 (PDT)
+Received: by mail-vs1-xe2f.google.com with SMTP id
+ ada2fe7eead31-49bd27b3507so1579753137.2
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 17:21:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=broadcom.com; s=google; t=1726532422; x=1727137222; darn=lists.denx.de;
+ d=broadcom.com; s=google; t=1726532479; x=1727137279; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:thread-index:mime-version:in-reply-to
  :references:from:from:to:cc:subject:date:message-id:reply-to;
- bh=7di5tNKRPBYPpCerVisOYWWEdtoSxDrdhb2ZgZZSSvg=;
- b=Hae4pbF3QvfWutpJV11o17X5LEVdx9uCtF4setKqHrfp1u2m8qWx0/ayfqNBJ6E7kw
- ceKKfYLtWrBO3rcEunBzz7IcxR+dbUws5B+5ieyo2t3Nf+fSZUp3WNCBlguOS+8XAhkw
- ZKCr2qcC00Ucz+e8Pw/N/VOLC5cZiep8BAX4o=
+ bh=qYVtQnecU/F5+DxSXn4/k4RZ2FVBNnENizopno9J3dI=;
+ b=HwC6lguByK0u638bnjN+3KDHZ+k2lCOwZuNqcBEYYJVvJP7AVtQgnpsjKXXMPz5+K2
+ 8XwlArDZizvu0gmfOajpZy4fv/Rv6ue5BM6s3nkwDvu7vSHmF61uDaoOfBhWpHKLdu5f
+ RfR1k9MUyE6qwmoKQOGsxsQNBF+1ldz6+99bg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726532422; x=1727137222;
+ d=1e100.net; s=20230601; t=1726532479; x=1727137279;
  h=cc:to:subject:message-id:date:thread-index:mime-version:in-reply-to
  :references:from:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7di5tNKRPBYPpCerVisOYWWEdtoSxDrdhb2ZgZZSSvg=;
- b=Bb+AOQF5wXalfMnv5/SbiERUl0IE+4629ai7YT0y6mMPSKo6IKg1nj658xjeE4p7+O
- 1FR0juMUoVfCtaesdFLwG9F1PuBVJy5NUk6AX/wobAtN2VI7IOG8OcYDaqCnMHcz1B8w
- PxJchly+Wl/Ghef6PfmPbM2GWOB5Fe9C3B1DuNummLjMd0uVdqlkorOibki9zjsvBxHQ
- 0dKENiTU622ze07OYJYyLF9o6nUkv/dbY/pjJrjR1ICzvE3WYXFv2N+qcvC3JTQ2WCHM
- Rys0uZoLB3x//DJqK4CYI2v/W/o+50BQp5SGOrqLEarbYs5pKp5HPW9FFJmhD7vu0vxH
- iUCA==
+ bh=qYVtQnecU/F5+DxSXn4/k4RZ2FVBNnENizopno9J3dI=;
+ b=EbVuvnirC+0xf3nhD3k3sfYkFTvNYkwP1iWZxDbN+Bh80Q9FWEaMIDwbpGh+pgjYTk
+ p4n7MI1xe43zesai57boxCQ+SlcT2xBRUWEcjTFj14s1HJ7GkFXpqy4baym6+Ew3dLfY
+ aObyUgj0FOwPQFoYnAHKjhhHxu5RsIdH8D6e50KpwLH22W8/Off08VXmRMgELCVOpTO9
+ kTsmvEjXCd4zWRouNtOLS6ldsrFtfG2IV1wxHfBYx3pwd7ZcARwa5IQPWq1nj8QyX3y2
+ whb/nI9TlIr/YTyO2pilhJZTvqsTzbtELRkaamu/EGcIJdhv7olzd5iz/8iWqW71Y82z
+ H9rQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWqsiovEclELXWDm+ta69dQxIFeSULxQs5bYrSeBAgFHdAbUrn3rZmjWaM0Il4wmeVGXNzEQIM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzsN2WU5nnkpD9XuCLq25YzDLSDWzrOZxXLuYMi4FSBhbEsvIxa
- XOA8nT/pXNMhuhHABDKJ2zH9x4WvZx8RmpoOUqia5z9BlNT1amEILqrFU3jEWNbjhkeO0N6Y1UD
- qXg/MqJ/RNXhlcNa1PMdZmwT0F2ipfeJOXNW8/zB13zGdEVI=
-X-Google-Smtp-Source: AGHT+IFFzT1+TP0qwD8+SAogui/6d001Uv023ri7syKpVqKsFnbsYXfAWO9PTgbt2a9a6hjCavsXpkyVhq5xY1A2g+M=
-X-Received: by 2002:a05:6102:1627:b0:493:b3d8:bd8d with SMTP id
- ada2fe7eead31-49d415b9425mr12342392137.26.1726532421927; Mon, 16 Sep 2024
- 17:20:21 -0700 (PDT)
+ AJvYcCWYT4bGZDiSR8EIis73l6eH+jfklLWaBKqXjOtjoeOQZbuzKsbGgQjDFlVkpw3990qxhXCAQrs=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzu9Mb7cveipFjDrpXJYO4zNbhT8OvhzrY5TlmIHrSZhdwUCDzw
+ 3p/nXhZMZGpxXTBkCF/it+o4eYmrvwQnt74srv1LFUkGG2JzDV0odSWRMfEvgZ2yJ3QqJAUbFui
+ kMYIZztQY0fGp7KdS/+9HqfQO93jebnveGMy2
+X-Google-Smtp-Source: AGHT+IFZmBp3Q0ziN19/tCj8YIXsUVpSayYTkclX5xvy5q7oLe90bwXZ3YJ5im7iQaYBQZsWv6uFbm7PDi7onv3nUjo=
+X-Received: by 2002:a05:6102:418e:b0:48f:42c8:e0a9 with SMTP id
+ ada2fe7eead31-49d4157f636mr11916410137.26.1726532478734; Mon, 16 Sep 2024
+ 17:21:18 -0700 (PDT)
 From: William Zhang <william.zhang@broadcom.com>
 References: <20240916-brcmnand-fixes-v2-0-08632f64c8ec@linaro.org>
- <20240916-brcmnand-fixes-v2-2-08632f64c8ec@linaro.org>
-In-Reply-To: <20240916-brcmnand-fixes-v2-2-08632f64c8ec@linaro.org>
+ <20240916-brcmnand-fixes-v2-1-08632f64c8ec@linaro.org>
+In-Reply-To: <20240916-brcmnand-fixes-v2-1-08632f64c8ec@linaro.org>
 MIME-Version: 1.0
 X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQES+R/HTbMR/ti/GhYZxlIU8W7clgHnfWX/s9wAgzA=
-Date: Mon, 16 Sep 2024 17:20:20 -0700
-Message-ID: <6baede77753d570d539f9995d960955c@mail.gmail.com>
-Subject: RE: [PATCH v2 2/7] mtd: rawnand: brcmnand: Fix potential false time
- out warning
+Thread-Index: AQES+R/HTbMR/ti/GhYZxlIU8W7clgLih3C+s9QoV/A=
+Date: Mon, 16 Sep 2024 17:21:17 -0700
+Message-ID: <09d4a91fa25bae6d22f31f66878d1545@mail.gmail.com>
+Subject: RE: [PATCH v2 1/7] mtd: rawnand: brcmnand: Fix ECC level field
+ setting for v7.2 controller
 To: Linus Walleij <linus.walleij@linaro.org>, u-boot@lists.denx.de, 
  Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
  Michael Trimarchi <michael@amarulasolutions.com>,
@@ -78,7 +78,7 @@ To: Linus Walleij <linus.walleij@linaro.org>, u-boot@lists.denx.de,
 Cc: Florian Fainelli <florian.fainelli@broadcom.com>, 
  Miquel Raynal <miquel.raynal@bootlin.com>
 Content-Type: multipart/signed; protocol="application/pkcs7-signature";
- micalg=sha-256; boundary="000000000000b7c693062245a72b"
+ micalg=sha-256; boundary="0000000000001cbf9f062245ab90"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,7 +95,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---000000000000b7c693062245a72b
+--0000000000001cbf9f062245ab90
 Content-Type: text/plain; charset="UTF-8"
 
 > -----Original Message-----
@@ -111,60 +111,186 @@ Content-Type: text/plain; charset="UTF-8"
 > Cc: Linus Walleij <linus.walleij@linaro.org>; Florian Fainelli
 > <florian.fainelli@broadcom.com>; Miquel Raynal
 > <miquel.raynal@bootlin.com>
-> Subject: [PATCH v2 2/7] mtd: rawnand: brcmnand: Fix potential false time
-> out warning
+> Subject: [PATCH v2 1/7] mtd: rawnand: brcmnand: Fix ECC level field
+> setting for v7.2 controller
 >
 > From: William Zhang <william.zhang@broadcom.com>
 >
-> Backport from the Linux kernel:
-> commit 9cc0a598b944816f2968baf2631757f22721b996
-> "mtd: rawnand: brcmnand: Fix potential false time out warning"
+> Backport from the Linux kernel
+> commit 2ec2839a9062db8a592525a3fdabd42dcd9a3a9b
+> "mtd: rawnand: brcmnand: Fix ECC level field setting for v7.2 controller"
 >
-> If system is busy during the command status polling function, the driver
-> may not get the chance to poll the status register till the end of time
-> out and return the premature status.  Do a final check after time out
-> happens to ensure reading the correct status.
+> v7.2 controller has different ECC level field size and shift in the acc
+> control register than its predecessor and successor controller. It needs
+> to be set specifically.
 >
 > Signed-off-by: William Zhang <william.zhang@broadcom.com>
 > Reviewed-by: Florian Fainelli <florian.fainelli@broadcom.com>
 > Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
-> Link: https://lore.kernel.org/linux-mtd/20230706182909.79151-3-
+> Link: https://lore.kernel.org/linux-mtd/20230706182909.79151-2-
 > william.zhang@broadcom.com
 > Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
 > ---
->  drivers/mtd/nand/raw/brcmnand/brcmnand.c | 8 ++++++++
->  1 file changed, 8 insertions(+)
+>  drivers/mtd/nand/raw/brcmnand/brcmnand.c | 74
+> ++++++++++++++++++--------------
+>  1 file changed, 41 insertions(+), 33 deletions(-)
 >
 > diff --git a/drivers/mtd/nand/raw/brcmnand/brcmnand.c
 > b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
-> index 700d1122639f..46a4107a83a9 100644
+> index b1af3f717d43..700d1122639f 100644
 > --- a/drivers/mtd/nand/raw/brcmnand/brcmnand.c
 > +++ b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
-> @@ -1011,6 +1011,14 @@ static int bcmnand_ctrl_poll_status(struct
-> brcmnand_controller *ctrl,
->  	} while (get_timer(base) < limit);
->  #endif /* __UBOOT__ */
+> @@ -218,6 +218,7 @@ struct brcmnand_controller {
+>  	const unsigned int	*page_sizes;
+>  	unsigned int		page_size_shift;
+>  	unsigned int		max_oob;
+> +	u32			ecc_level_shift;
+>  	u32			features;
 >
-> +	/*
-> +	 * do a final check after time out in case the CPU was busy and the
-> driver
-> +	 * did not get enough time to perform the polling to avoid false
-> alarms
-> +	 */
-> +	val = brcmnand_read_reg(ctrl, BRCMNAND_INTFC_STATUS);
-> +	if ((val & mask) == expected_val)
-> +		return 0;
+>  	/* for low-power standby/resume only */
+> @@ -544,6 +545,34 @@ enum {
+>  	INTFC_CTLR_READY		= BIT(31),
+>  };
+>
+> +/*********************************************************
+> **************
+> + * NAND ACC CONTROL bitfield
+> + *
+> + * Some bits have remained constant throughout hardware revision, while
+> + * others have shifted around.
 > +
->  	dev_warn(ctrl->dev, "timeout on status poll (expected %x got %x)\n",
->  		 expected_val, val & mask);
+> **********************************************************
+> *************/
+> +
+> +/* Constant for all versions (where supported) */
+> +enum {
+> +	/* See BRCMNAND_HAS_CACHE_MODE */
+> +	ACC_CONTROL_CACHE_MODE				= BIT(22),
+> +
+> +	/* See BRCMNAND_HAS_PREFETCH */
+> +	ACC_CONTROL_PREFETCH				= BIT(23),
+> +
+> +	ACC_CONTROL_PAGE_HIT				= BIT(24),
+> +	ACC_CONTROL_WR_PREEMPT				= BIT(25),
+> +	ACC_CONTROL_PARTIAL_PAGE			= BIT(26),
+> +	ACC_CONTROL_RD_ERASED				= BIT(27),
+> +	ACC_CONTROL_FAST_PGM_RDIN			= BIT(28),
+> +	ACC_CONTROL_WR_ECC				= BIT(30),
+> +	ACC_CONTROL_RD_ECC				= BIT(31),
+> +};
+> +
+> +#define	ACC_CONTROL_ECC_SHIFT			16
+> +/* Only for v7.2 */
+> +#define	ACC_CONTROL_ECC_EXT_SHIFT		13
+> +
+>  static inline u32 nand_readreg(struct brcmnand_controller *ctrl, u32
+> offs)
+>  {
+>  	return brcmnand_readl(ctrl->nand_base + offs);
+> @@ -675,6 +704,12 @@ static int brcmnand_revision_init(struct
+> brcmnand_controller *ctrl)
+>  #endif /* __UBOOT__ */
+>  		ctrl->features |= BRCMNAND_HAS_WP;
 >
+> +	/* v7.2 has different ecc level shift in the acc register */
+> +	if (ctrl->nand_version == 0x0702)
+> +		ctrl->ecc_level_shift = ACC_CONTROL_ECC_EXT_SHIFT;
+> +	else
+> +		ctrl->ecc_level_shift = ACC_CONTROL_ECC_SHIFT;
+> +
+>  	return 0;
+>  }
+>
+> @@ -844,30 +879,6 @@ static inline int brcmnand_cmd_shift(struct
+> brcmnand_controller *ctrl)
+>  	return 0;
+>  }
+>
+> -
+> /**********************************************************
+> *************
+> - * NAND ACC CONTROL bitfield
+> - *
+> - * Some bits have remained constant throughout hardware revision, while
+> - * others have shifted around.
+> -
+> **********************************************************
+> *************/
+> -
+> -/* Constant for all versions (where supported) */
+> -enum {
+> -	/* See BRCMNAND_HAS_CACHE_MODE */
+> -	ACC_CONTROL_CACHE_MODE				= BIT(22),
+> -
+> -	/* See BRCMNAND_HAS_PREFETCH */
+> -	ACC_CONTROL_PREFETCH				= BIT(23),
+> -
+> -	ACC_CONTROL_PAGE_HIT				= BIT(24),
+> -	ACC_CONTROL_WR_PREEMPT				= BIT(25),
+> -	ACC_CONTROL_PARTIAL_PAGE			= BIT(26),
+> -	ACC_CONTROL_RD_ERASED				= BIT(27),
+> -	ACC_CONTROL_FAST_PGM_RDIN			= BIT(28),
+> -	ACC_CONTROL_WR_ECC				= BIT(30),
+> -	ACC_CONTROL_RD_ECC				= BIT(31),
+> -};
+> -
+>  static inline u32 brcmnand_spare_area_mask(struct brcmnand_controller
+> *ctrl)
+>  {
+>  	if (ctrl->nand_version == 0x0702)
+> @@ -880,18 +891,15 @@ static inline u32
+> brcmnand_spare_area_mask(struct brcmnand_controller *ctrl)
+>  		return GENMASK(4, 0);
+>  }
+>
+> -#define NAND_ACC_CONTROL_ECC_SHIFT	16
+> -#define NAND_ACC_CONTROL_ECC_EXT_SHIFT	13
+> -
+>  static inline u32 brcmnand_ecc_level_mask(struct brcmnand_controller
+> *ctrl)
+>  {
+>  	u32 mask = (ctrl->nand_version >= 0x0600) ? 0x1f : 0x0f;
+>
+> -	mask <<= NAND_ACC_CONTROL_ECC_SHIFT;
+> +	mask <<= ACC_CONTROL_ECC_SHIFT;
+>
+>  	/* v7.2 includes additional ECC levels */
+> -	if (ctrl->nand_version >= 0x0702)
+> -		mask |= 0x7 << NAND_ACC_CONTROL_ECC_EXT_SHIFT;
+> +	if (ctrl->nand_version == 0x0702)
+> +		mask |= 0x7 << ACC_CONTROL_ECC_EXT_SHIFT;
+>
+>  	return mask;
+>  }
+> @@ -905,8 +913,8 @@ static void brcmnand_set_ecc_enabled(struct
+> brcmnand_host *host, int en)
+>
+>  	if (en) {
+>  		acc_control |= ecc_flags; /* enable RD/WR ECC */
+> -		acc_control |= host->hwcfg.ecc_level
+> -			       << NAND_ACC_CONTROL_ECC_SHIFT;
+> +		acc_control &= ~brcmnand_ecc_level_mask(ctrl);
+> +		acc_control |= host->hwcfg.ecc_level << ctrl->ecc_level_shift;
+>  	} else {
+>  		acc_control &= ~ecc_flags; /* disable RD/WR ECC */
+>  		acc_control &= ~brcmnand_ecc_level_mask(ctrl);
+> @@ -2225,7 +2233,7 @@ static int brcmnand_set_cfg(struct
+> brcmnand_host *host,
+>  	tmp &= ~brcmnand_ecc_level_mask(ctrl);
+>  	tmp &= ~brcmnand_spare_area_mask(ctrl);
+>  	if (ctrl->nand_version >= 0x0302) {
+> -		tmp |= cfg->ecc_level << NAND_ACC_CONTROL_ECC_SHIFT;
+> +		tmp |= cfg->ecc_level << ctrl->ecc_level_shift;
+>  		tmp |= cfg->spare_area_size;
+>  	}
+>  	nand_writereg(ctrl, acc_control_offs, tmp);
 >
 > --
 > 2.46.0
 
 Reviewed-by: William Zhang <william.zhang@broadcom.com>
 
---000000000000b7c693062245a72b
+--0000000000001cbf9f062245ab90
 Content-Type: application/pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -235,13 +361,13 @@ VhYAxZlzj7tSjUIM7G7IhyfqPC46GKJ/4x+Amz1Z6YxNGy71L68kYD6hIbBcA5AM42QBUufly6Oa
 urb/KlmDGfVrIRYDbL0ckhGQIP5c6L+kSQZ2sHnQK0e0WgIaZYxaPYeY5u0GLCOze+3vyRMxggJt
 MIICaQIBATBrMFsxCzAJBgNVBAYTAkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52LXNhMTEwLwYD
 VQQDEyhHbG9iYWxTaWduIEdDQyBSMyBQZXJzb25hbFNpZ24gMiBDQSAyMDIwAgwxuh2XG3FXRL1W
-JOEwDQYJYIZIAWUDBAIBBQCggdQwLwYJKoZIhvcNAQkEMSIEIEtXDPimmdoz0xifHYHkq0L2F2Ts
-LshseIgnPonw3xfNMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTI0
-MDkxNzAwMjAyMlowaQYJKoZIhvcNAQkPMVwwWjALBglghkgBZQMEASowCwYJYIZIAWUDBAEWMAsG
+JOEwDQYJYIZIAWUDBAIBBQCggdQwLwYJKoZIhvcNAQkEMSIEIMaUYvZTCysH9hqoNetSCyUABtpC
+cW3ltXNNPRx4cc5dMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTI0
+MDkxNzAwMjExOVowaQYJKoZIhvcNAQkPMVwwWjALBglghkgBZQMEASowCwYJYIZIAWUDBAEWMAsG
 CWCGSAFlAwQBAjAKBggqhkiG9w0DBzALBgkqhkiG9w0BAQowCwYJKoZIhvcNAQEHMAsGCWCGSAFl
-AwQCATANBgkqhkiG9w0BAQEFAASCAQC/I6pazNJTeYYZR9iw5AU1Bp0VWFRN4dcY1fC6vuy5tf3h
-3AMyg7uAuRowEi0/kcVKI/VvoQgv9XFjri0/kKQ82pO6MDq9KFam2fbCBPfY/ZyEzHW7qNjcWmgs
-Y5p5jbueDl040nrH+hQOTBPu6PsCGYxYeynA4P6CTQwh9pUm53KU44/BK1J92EeC62WoSxu9hxIw
-yAY60cJlBPebyAvsx9OLA4AnqbAnX5j3AiGJ9On2YtZdYrfC7rs9aYKSJCfWABYYnRJiBCsqqD9z
-qdC/5vujrKNjy7amKGAq1WBHoA2E+BQ/CW4DBWazr8SLMLz3WAovHo+Lt4zzfmzrP7Y9
---000000000000b7c693062245a72b--
+AwQCATANBgkqhkiG9w0BAQEFAASCAQBD6ny0x+r0TT49p8Mp6LYmruB3cdAoSDJRMU5rsF6T4DrB
+TIHB8QfZMJmNRWcFI4Kfq/hQ8Q4REuV4OL7La5mErLu97n23bgFiJ5hT336qGh8edb1MU6cTbfFZ
+RoXqTwpK6YksQaX7nPJJAuNPWO7KqMp7cqJozMjUqXaB8K8eR4kB++V/1H6OmbNsnSPmig6U9RlN
+r9C1ZVKNPNtY5gJG82K0+hBnCy8YZu0q3mGThkIMDD2KD8pmZzFUoXF+O7WG6xo1CuttTUV2+oy6
+RypJ+XRhY/ZZww7t/iEr5cAfw8h1T7Oz3RcpXzrKxncH4LEUT9+Lb8xgWPNv6722rNwQ
+--0000000000001cbf9f062245ab90--
