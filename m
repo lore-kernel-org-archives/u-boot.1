@@ -4,69 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6919ACAC591
-	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 17:16:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43629CAC591
+	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 17:24:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B332C88AB9;
-	Tue, 17 Sep 2024 19:16:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 9073F88B2D;
+	Tue, 17 Sep 2024 19:24:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="QBrlMPMj";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bO9O5ZHe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 23B8D88ADC; Tue, 17 Sep 2024 19:16:36 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id DBFA488B4B; Tue, 17 Sep 2024 19:24:36 +0200 (CEST)
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [IPv6:2607:f8b0:4864:20::f29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 68008889FC
- for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 19:16:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CE0F688969
+ for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 19:24:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 48HHGPjI097955;
- Tue, 17 Sep 2024 12:16:25 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1726593385;
- bh=TslkD2V0I9t90YxYMYvHOioYTZg/6zTZMQ6ThmnzLII=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=QBrlMPMj50rNNHlrI+mICksVwlbMt9s7Y0RXjSFVJPuKY4Rd0z3NxY798rrOVGyUt
- Orn08U95DaFgcFLdYZo1bw3NQ17Uokt620GJkK6bB2xMOCIi40023IhnjWMY4fnraw
- q19c+cWfdzznFjAyEIb0fRrx6GRmLP1yPrpuGD2k=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 48HHGPR5039299
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 17 Sep 2024 12:16:25 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 17
- Sep 2024 12:16:25 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 17 Sep 2024 12:16:25 -0500
-Received: from [10.249.141.75] ([10.249.141.75])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 48HHGKUT036662;
- Tue, 17 Sep 2024 12:16:21 -0500
-Message-ID: <217c590c-8dce-4684-82c6-dff920b6d4eb@ti.com>
-Date: Tue, 17 Sep 2024 22:46:20 +0530
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-6c34dd6c21aso43453266d6.2
+ for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 10:24:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1726593873; x=1727198673; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=PIxT12hHi+6FPn/GJfyMmhUgq97eBiAgwY3cxA24agw=;
+ b=bO9O5ZHehXo1bdpUBJv0gV8JHKn/IIvIdXGnpK85VUi9mv/FOsGBL1cFedDxB8B6zj
+ GEp2x5jIslZ+IKBV5qpNZTBmU7zeV1mxh2+Crlz/a6+kjx2c0+z4R4QB992m2LYuPpkT
+ 3fUcHvHZiXuGMAOy+RHKR28ye+NcRZdphr840=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1726593873; x=1727198673;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PIxT12hHi+6FPn/GJfyMmhUgq97eBiAgwY3cxA24agw=;
+ b=ozP+zgBh68TVxVrQhRkW4lrmfQGIAL8U7f14/kCrQKW9mZh6AkEbmY6METlTnMggeP
+ ZghW6GLlpGymqef73h4O1vM922OYgMQ/rvncpYv5oqhOee4PMN9X0VWWyvK7cZGjyoO/
+ 6/rBohXO7Wve2+YKnmppTdBhGnuozAiCXsjgsBNFbDqbiA5bHcwNO4ruHjP8lR/uhSdd
+ Y8AxwD3vFRQeouHmKdSU395mKASqzcNTeY5KfEXwZyJiPsKSJC7812roSw58nSiWT1x4
+ xjqDOzVVi5/GsTHOD6mxm2tfImcyLHC8FNXZ0yCy89SjvxJ+w1KAtsxbE5XFL1cK0mHa
+ UCNQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVMvb4hSZBlQkMRmSJTaPrQezxYr82gv87854YGByFD/WBUlzZ0SygKoVDdz04qHUXLsl/9m4s=@lists.denx.de
+X-Gm-Message-State: AOJu0YwZjpsbxYcQxFqE7h1gz4N8nRHD297HUp72+T9mnhzO3L3i3Fvq
+ hYC9DCXawJcVAmc4cYQQ7tfC+XYZp/ylxJqLk69/BUXcTJsL2+TZubUqoKU8tmEmHoAI59VtNhG
+ 94Y0=
+X-Google-Smtp-Source: AGHT+IEXTjkYZOEHA+EXl5X21BmJD7+xQ60dX6uT3lYcb3cmgjCqrfiTwLcFr8p1onGSCHA7htpAlQ==
+X-Received: by 2002:a05:6214:3c9c:b0:6c5:dc7:577c with SMTP id
+ 6a1803df08f44-6c57350b8f6mr316974796d6.2.1726593873501; 
+ Tue, 17 Sep 2024 10:24:33 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6c58c625877sm36478156d6.8.2024.09.17.10.24.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 17 Sep 2024 10:24:32 -0700 (PDT)
+Date: Tue, 17 Sep 2024 11:24:29 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Richard Weinberger <richard@sigma-star.at>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Richard Weinberger <richard@nod.at>, upstream+uboot@sigma-star.at,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Christian Taedcke <christian.taedcke@weidmueller.com>
+Subject: Re: [PATCH 1/3] test_fs: Allow running unprivileged
+Message-ID: <20240917172429.GO4252@bill-the-cat>
+References: <20240802093322.15240-1-richard@nod.at>
+ <3292219.QWXsJ6tzlI@somecomputer>
+ <CAFLszThXOBKECTPy9nCLR5VYHVz6iauOVFYK9ZCai5CJZa2U3g@mail.gmail.com>
+ <2685504.bgRvk7e4E5@somecomputer>
+ <20240819171136.GF1626301@bill-the-cat>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] dts: beagleboneai64: Add boothph in chipid node
-To: Tom Rini <trini@konsulko.com>
-CC: <nm@ti.com>, <u-boot@lists.denx.de>, <n-francis@ti.com>,
- <rogerq@kernel.org>, <afd@ti.com>, <bb@ti.com>, <j-humphreys@ti.com>,
- <sumit.garg@linaro.org>, Robert Nelson <robertcnelson@gmail.com>, Manorit
- Chawdhry <m-chawdhry@ti.com>
-References: <20240917081329.370288-1-u-kumar1@ti.com>
- <20240917165420.GL4252@bill-the-cat>
-Content-Language: en-US
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20240917165420.GL4252@bill-the-cat>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="T66k29sjCJUDUbTI"
+Content-Disposition: inline
+In-Reply-To: <20240819171136.GF1626301@bill-the-cat>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,47 +102,53 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 9/17/2024 10:24 PM, Tom Rini wrote:
-> On Tue, Sep 17, 2024 at 01:43:29PM +0530, Udit Kumar wrote:
->> beagleboneai64 boot was broken after OF_UPSTREAM support for
->> J721E SOC.
->> So add bootph in chipid node similar to other boards of
->> this SOC.
->>
->> Fixes: 46bb1405b461 ("arm: dts: k3-j721e: Move to OF_UPSTREAM")
->> Reported-by: Robert Nelson <robertcnelson@gmail.com>
->> Signed-off-by: Udit Kumar <u-kumar1@ti.com>
->> ---
->> Boot logs
->> https://gist.github.com/uditkumarti/32604960dec65401cde8979e51160ba7
->>
->>   arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi | 4 ++++
->>   1 file changed, 4 insertions(+)
->>
->> diff --git a/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi b/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
->> index 884f44239e..27851b7d08 100644
->> --- a/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
->> +++ b/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
->> @@ -64,6 +64,10 @@
->>   	bootph-all;
->>   };
->>   
->> +&chipid {
->> +	bootph-all;
->> +};
->> +
-> Someone is upstreaming both of these, right?
+--T66k29sjCJUDUbTI
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Yes, patch posted for kernel by Manorit,
+On Mon, Aug 19, 2024 at 11:11:36AM -0600, Tom Rini wrote:
+> On Sun, Aug 18, 2024 at 10:06:05PM +0200, Richard Weinberger wrote:
+> > Simon,
+> >=20
+> > Am Sonntag, 18. August 2024, 17:47:01 CEST schrieb Simon Glass:
+> > > In that file, this is the line that builds the tools:
+> > >=20
+> > >           ./tools/buildman/buildman -T0 -o ${UBOOT_TRAVIS_BUILD_DIR}
+> > > -w --board tools-only
+> > >=20
+> > > and this adds the built scripts/dtc to the path, but you could just as
+> > > easily add tools/
+> > >=20
+> > >           export PATH=3D${UBOOT_TRAVIS_BUILD_DIR}/scripts/dtc:${PATH}
+> >=20
+> > Sounds good. I guess this needs to go into master first before it shows
+> > an effect on my branch?
+>=20
+> Can you please just work that in to your series here? Thanks again for
+> cleaning all this up!
 
-Please see
+Have you had a chance to get back to this series? Thanks!
 
-https://lore.kernel.org/all/20240814-b4-upstream-bootph-all-v4-4-f2b462000f25@ti.com/
+--=20
+Tom
 
-But as of now, this node is defined as bootph-all for other J721E boards
+--T66k29sjCJUDUbTI
+Content-Type: application/pgp-signature; name="signature.asc"
 
-arch/arm/dts/k3-j721e-common-proc-board-u-boot.dtsi:&chipid {
-arch/arm/dts/k3-j721e-sk-u-boot.dtsi:&chipid {
+-----BEGIN PGP SIGNATURE-----
 
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbpu0YACgkQFHw5/5Y0
+tyzLigwAk5py6uCWNzzPwjGzV6H/ZPXOxktjve0FAuPnc0yztpIE6IkrRIHhGmKW
+cQEVOwl/nxwi+7MXn1HSP6TdxIdJTw6E+aUvqSIKzZvp467Wl/wcwsrAHBzh2doY
+5ZGBnT/IpGCzCF5d3GBxJ4ct0ztp8U8neJ5Hx2acT8R4c4Mt/CGpuig+qcSy3xPf
+wxvFbL3QDSl928FAlCJz65osXSD9LnUquqw00hXtryYLFOFtKVvfNocCnk+q6Lfp
+gckCc8GVK8B+tIvq1qOJgP3bKt5QvmEJv2onnQjWH42XoGBe3HpPWVzzQq+czzuW
+fzSYYjv9Z/3qhdeC+W2kfCn2ITKhGCu2nD1V7qYj96hTrknNTgv/IMOR65YOvhcd
+2w5l+re9rmbGl+iSAiH7Svi7/jMpy7iW8BXLQF3R89SsA57EghyDU/ccrHecw3BY
+nBgwydHh4Y+KWajEgXYSA/iyS6CTpyXvdNKaQddpQfp5msWPsMwJicBTMwNeVH9F
+vpc4SY/x
+=mk6R
+-----END PGP SIGNATURE-----
 
->
+--T66k29sjCJUDUbTI--
