@@ -4,85 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC5E7CAC596
-	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 19:08:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 110E6CAC5A2
+	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 20:59:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCDA588D31;
-	Tue, 17 Sep 2024 21:08:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 454EE88DC6;
+	Tue, 17 Sep 2024 22:59:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LcWaxTX/";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="R9TZN+lr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B3E5188D27; Tue, 17 Sep 2024 21:08:06 +0200 (CEST)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4AA6688DDF; Tue, 17 Sep 2024 22:59:47 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B8FA88DAE
- for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 21:08:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AA5BB88DAE
+ for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 22:59:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=linus.walleij@linaro.org
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2f74b6e1810so53471351fa.2
- for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 12:08:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726600082; x=1727204882; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=IV5QNcVAhvLAYFHOCETofcC/G29PIP/rs9paWN9HMCc=;
- b=LcWaxTX/lF9utAVhqrx2J1xCE9U8ybtyM/qCYqMbtJAz5dpmg4h4L7yOOaqQ0z4wlv
- GwS8kY3vREg4wIJVsYCmNrmZ9WvlF9Fum6xk41WroZzkpo6FtJRi29iaCqCGP4STPYaw
- 7VYjvpAZQc/v8NcTB45P0i9I17XoOucdPbPIqK3KJr1NTUajhthcT+hYubQT3aXzPVZU
- 0Kxj6floMnycZOtCDLWFH7c7EFi7nD8hoHvAqKHaDNdaHBAYXbahTxQHKRznoU5Eelnd
- ZbataPrAuhgceM8++ZypHax7MISBKLfgU4G3KIsU7Ksw7hm0ivi0rcxryMqB4KMySKXS
- SYtQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726600082; x=1727204882;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=IV5QNcVAhvLAYFHOCETofcC/G29PIP/rs9paWN9HMCc=;
- b=H2YaY8zpC7Uq9PatxQQec3WZH0wEeVce0YG2IntAfUt7EiQDlRqqxqZnCEKKo0Yk/p
- BALZLV2dFqVFTGr0r5Tchd/CxXPvlw0tTWAcKbiy28YsH2eisUslRa/hHZOpy1B5b40R
- S6OLseiLbNxJLCMkefgp/ifQuX41ApuO8MxMsL6K9TyuN28rfO8Wb+bKimEt5D2WendG
- 9nkiLhj8trrroO5bzorO9oPsyXQlu7glI0yAN9oGlZBAukVxd06HsZc1+2Oha6qw7h8L
- NnpVQxdmxx2H0Vcu77/JaoGVOMQZL3uVoSq6sHqvetLRjk01adAbd4njLw6+SfXnCCdC
- ZkFw==
-X-Gm-Message-State: AOJu0YxNaqG4cqm4PWYE3tsFKikMJHuE2FymWwkF6OZz4xRbXD0RmfAO
- BUGFLO29T6DhWOfSq1+ib3pe0y/6/vYDEBEIRnaUkXok9x3b41pPbeCzOP7apN7D8uijmtA0h96
- Xf5DLrsujCDCcpBtQ4XVE4huHzr7DhoraEWjzFw==
-X-Google-Smtp-Source: AGHT+IGVFMnIGzpaDIEtZiQZ2grfG12eFvjm2EEGhqe2DagX2Km7x5+kqDNpuhqe0tuh1WqkCXMznTTBfQ1WewhRA/E=
-X-Received: by 2002:a2e:be08:0:b0:2f7:5cf9:46dd with SMTP id
- 38308e7fff4ca-2f787f4ca04mr93102781fa.45.1726600081423; Tue, 17 Sep 2024
- 12:08:01 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=2cee=QQ=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1726606774;
+ bh=pTNybO2oM+NnRCZbvVrWKp7JLrCmyT9rOwn02BAo/fE=;
+ b=R9TZN+lrTqzzvfeH3UMVn0wxWOVZWNBp2d+CPtZXR4qcO7pYWtoJy2tG4aZtiPaAN0Xb5ozXQ
+ vaWbR3wAtCImcpQRlc6g7jw3iUIqgWGaKfmfoL2br7apV9KitMDv8eDJ4hhoIjm1U5iYuXPHEBb
+ wiuXTDbUmYmXSl0Y5Xlhcvy9gCRFzlSXp7JOc0oJNSqpNOvWiXdQjENmsIyfsheDmWld5AlPdst
+ uF0DKPmZ2T55ZMWmhsFi3xrtiB5QuAGUsScfMTO+irtsm+CHMyK58aLszxiC4PLk7Ot23HdCerP
+ zs2I+rN+pZ2IIgzpaBcrYZZ/pbpZyEdsGJXZPjf4a4bw==
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+Cc: u-boot@lists.denx.de,
+	Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH v2 1/2] regulator: rk8xx: Fix buck get and set enabled state
+ on RK806
+Date: Tue, 17 Sep 2024 20:59:17 +0000
+Message-ID: <20240917205922.648088-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.46.1
 MIME-Version: 1.0
-References: <20240911-brcmnand-fixes-v1-0-be112a20aaf1@linaro.org>
- <d27e92a5ccecc302a1b2ca7ff55b8c3b@mail.gmail.com>
- <CACRpkdYxecZsgoUipPR8DgcNPKp-3o-h=Qseq71W8vceV4eXsQ@mail.gmail.com>
- <4aa2c921dddb69a5a4964d5446f37695@mail.gmail.com>
- <CACRpkdYBFAhNaMVSQDCiMsVpBA3tZOu7nJd2kaTSPHKX8bTTbw@mail.gmail.com>
- <bdbc43d3c66eb3c7bbf45ab95294ddf1@mail.gmail.com>
-In-Reply-To: <bdbc43d3c66eb3c7bbf45ab95294ddf1@mail.gmail.com>
-From: Linus Walleij <linus.walleij@linaro.org>
-Date: Tue, 17 Sep 2024 21:07:49 +0200
-Message-ID: <CACRpkdavn1GC6Y2TY_xJuM59kDF13-8-jRs=LPJG+ZHtHvMZEw@mail.gmail.com>
-Subject: Re: [PATCH 0/7] mtd: nand: brcmnand: Backported fixes from Linux
-To: William Zhang <william.zhang@broadcom.com>
-Cc: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Anand Gore <anand.gore@broadcom.com>, 
- Kursad Oney <kursad.oney@broadcom.com>,
- Philippe Reynes <philippe.reynes@softathome.com>, 
- Florian Fainelli <florian.fainelli@broadcom.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Kamal Dasu <kamal.dasu@broadcom.com>, David Regan <dregan@broadcom.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 207.246.76.47
+X-ForwardEmail-ID: 66e9edb1d8ca6c13c64ed531
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,20 +70,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Sep 17, 2024 at 2:19=E2=80=AFAM William Zhang
-<william.zhang@broadcom.com> wrote:
+Wrong POWER_EN reg is used to get and set enabled state for the RK806
+buck 4 and 8 regulators, also wrong POWER_SLP_EN0 bit is used for
+suspend state for the RK806 buck 1-8 regulators.
 
-> > > What SoC do you use?
-> >
-> > This is on BCM6846.
-> >
-> 6846 will work.  Let me know if it still does not work after dts fix.
+Fix this by not adding one to the zero based buck variable.
 
-Yes it work just fine! I dropped
-CONFIG_SYS_NAND_ONFI_DETECTION and then it detects
-and works fine on Genexis XG6846B, see here for a full
-session where I do some ubifs inspection:
-https://dflund.se/~triad/krad/genexis-xg6846b/ubi-info.txt
+Fixes: f172575d92cd ("power: rk8xx: add support for RK806")
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+---
+v2:
+- Move buck + 1 related changes into a separate patch
+- Collect r-b tags
+---
+ drivers/power/regulator/rk8xx.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-Yours,
-Linus Walleij
+diff --git a/drivers/power/regulator/rk8xx.c b/drivers/power/regulator/rk8xx.c
+index 34e61511d884..b910943c2c46 100644
+--- a/drivers/power/regulator/rk8xx.c
++++ b/drivers/power/regulator/rk8xx.c
+@@ -415,7 +415,7 @@ static int _buck_set_enable(struct udevice *pmic, int buck, bool enable)
+ 		break;
+ 	case RK806_ID:
+ 		value = RK806_POWER_EN_CLRSETBITS(buck % 4, enable);
+-		en_reg = RK806_POWER_EN((buck + 1) / 4);
++		en_reg = RK806_POWER_EN(buck / 4);
+ 		ret = pmic_reg_write(pmic, en_reg, value);
+ 		break;
+ 	case RK808_ID:
+@@ -494,7 +494,7 @@ static int _buck_get_enable(struct udevice *pmic, int buck)
+ 		break;
+ 	case RK806_ID:
+ 		mask = BIT(buck % 4);
+-		ret = pmic_reg_read(pmic, RK806_POWER_EN((buck + 1) / 4));
++		ret = pmic_reg_read(pmic, RK806_POWER_EN(buck / 4));
+ 		break;
+ 	case RK808_ID:
+ 	case RK818_ID:
+@@ -544,7 +544,7 @@ static int _buck_set_suspend_enable(struct udevice *pmic, int buck, bool enable)
+ 				mask = BIT(buck + 1 - 3);
+ 			} else {
+ 				reg = RK806_POWER_SLP_EN0;
+-				mask = BIT(buck + 1);
++				mask = BIT(buck);
+ 			}
+ 			ret = pmic_clrsetbits(pmic, reg, mask, enable ? mask : 0);
+ 		}
+@@ -595,7 +595,7 @@ static int _buck_get_suspend_enable(struct udevice *pmic, int buck)
+ 				mask = BIT(buck + 1 - 3);
+ 			} else {
+ 				reg = RK806_POWER_SLP_EN0;
+-				mask = BIT(buck + 1);
++				mask = BIT(buck);
+ 			}
+ 			val = pmic_reg_read(pmic, reg);
+ 		}
+-- 
+2.46.1
+
