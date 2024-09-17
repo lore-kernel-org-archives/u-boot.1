@@ -4,78 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C550CAC589
-	for <u-boot@archiver.kernel.org>; Wed, 18 Sep 2024 06:16:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3B15CAC589
+	for <u-boot@archiver.kernel.org>; Wed, 18 Sep 2024 06:16:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE4AA88EFE;
-	Wed, 18 Sep 2024 08:14:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 226DF88F14;
+	Wed, 18 Sep 2024 08:14:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TARFpRba";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gIemKb9h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E022A88CBB; Tue, 17 Sep 2024 08:22:08 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 001E288D06; Tue, 17 Sep 2024 08:41:54 +0200 (CEST)
+Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
+ [IPv6:2607:f8b0:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF4C288D5C
- for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 08:22:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C4EE88D06
+ for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 08:41:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=l.rubusch@gmail.com
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-5c42bad4eb9so273823a12.2
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 23:22:05 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pg1-x52f.google.com with SMTP id
+ 41be03b00d2f7-7d82b0ebd51so1377035a12.2
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 23:41:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1726554125; x=1727158925; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8JttTZz4Ql1M90z5DqNOjEGdjkFPqgzN7mWbBzn6EaA=;
- b=TARFpRbaZTNVoyKbupefQhwC+aTK6oZxkixyVSwjveGj8iLx02lRwwXPsZqynPtVfC
- 7di8EIN4OQlMFpoEmYRt7iTIBUTDx+xYHb9/xDHLau+46eJxIu4+LmaZuIqt+q8Bw9oD
- 8/+IHI8b2ZWI7rUe2tbHFRmyC4i9DsbXM36qv95XZ3XWewO4mCxioaI8rPIGjRe3161u
- H0mxbWKN58ZXnTdx/I66b59YBbUvDaOmiwhLKS8IrLnQESHvn3ZrxGwEg3VM4L2cVOpp
- FkQFq8DzCRCR1dHlzvqtU1CcERoIPLp25uH4A+MDhJXEKnOhSerNYLCAZyxUxgGA4YGj
- tBWQ==
+ d=linaro.org; s=google; t=1726555302; x=1727160102; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=60TFH7q+Y0bDSp0E9XkKStLM0Ye1Wo/I9/DHn6VAPxs=;
+ b=gIemKb9ha794P1kLh09AMgVSWyS4MoUcw0EPLvPESDJXgfkXpuS8ha/8wmxuxV75Ei
+ tBEhnDk9LqiMfXP976/lU7OlD0zskfzplRkVkSNtvvQbvej4qImbCjmcPblI2L67Q86g
+ e/sPszLQ4XZ7vpPWJUQzKu5HTltPzPHntncbxYCGJSDmpOvdlDkh2rY4YUg/a/PFiVfw
+ piWBvf63zxGB/fxQmr0DgZBc4hwysrLGa5aDirKqIPvaI71otQUbajHutW96xFSciTL5
+ Uj2R+ZzN8rTkY2ScKHC3c9IKsA+MbOPtDO6EJTYJV4TaYVrXJ+AHfKsqc2cElNDMPoH+
+ 9cSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726554125; x=1727158925;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=8JttTZz4Ql1M90z5DqNOjEGdjkFPqgzN7mWbBzn6EaA=;
- b=qqexD0MHH1cs9bOwGQuAStNC+XDlNBCVVQsYK74zTjTLlda89VUaZ3t8zwsBO8sbwB
- XVfPzoc2IowG4tshQoGyHcQodQWi9gnxVnjP7i/tsacpOq6XG0c9Fa7yVL66unO36IrE
- h9LRrRuqVs7kZKI+oA+2/6+YzwOEuTAp+wSkshnNjlXDjiqoMY+flMofOfPxwxyyUhT+
- C7NV6YW1dqF0HcaWuZMJKT9z4WzZ1oH7Tho69yxVIeicNuWUZFNtl3099ha49bBfijat
- Tnp1pjSncCKhhLjep2sdMeYT6Gj0Vh8N/7JKquEvukNim4CVQnFhEHI52Y82YthtC39u
- aGyA==
-X-Gm-Message-State: AOJu0Yw8jJ7gheaYZRbT4RU+HlVe1XvKrEw8fPCTZbJMAU3QolNK2i7s
- utzlvg4k6DiF3TLXVkeiGnkGgZBVU42IptArvMOsIMEiKEX8KVpMxMqrR+bX
-X-Google-Smtp-Source: AGHT+IHE0OTecpMP6WhbDQrj09/bo8Gs3aViRTJhslBSjODTtDyfnKcDDr/zcdYyyQp73DykHFqE8w==
-X-Received: by 2002:a17:906:f5aa:b0:a8d:2624:1a86 with SMTP id
- a640c23a62f3a-a9029645b74mr782926466b.13.1726554125147; 
- Mon, 16 Sep 2024 23:22:05 -0700 (PDT)
-Received: from fc8b2ad344cc.pool3007.local ([83.68.141.146])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9061328e61sm403556366b.196.2024.09.16.23.22.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Sep 2024 23:22:04 -0700 (PDT)
-From: Lothar Rubusch <l.rubusch@gmail.com>
-To: u-boot@lists.denx.de, trini@konsulko.com, marex@denx.de,
- simon.k.r.goldschmidt@gmail.com, tien.fong.chee@intel.com
-Cc: l.rubusch@gmail.com
-Subject: [PATCH v2 7/7] ARM: socfpga: AA1: support MAC from secure eeprom
-Date: Tue, 17 Sep 2024 06:21:57 +0000
-Message-Id: <20240917062157.3181-8-l.rubusch@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240917062157.3181-1-l.rubusch@gmail.com>
-References: <20240917062157.3181-1-l.rubusch@gmail.com>
+ d=1e100.net; s=20230601; t=1726555302; x=1727160102;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=60TFH7q+Y0bDSp0E9XkKStLM0Ye1Wo/I9/DHn6VAPxs=;
+ b=Hg1c7Iq5EIv7Kzu+BT6aNbe5Eq2wUD5ET2b6cj7fcT8nfS0RxlUy+DLABNBGVkT6as
+ 9AcXoai3v+He4lrzAez40V4w6B4pYCC4IUEZotN1JLjM4qTjMMvp4L7OrqjGTPgKbRiB
+ pUtBt97vSLRChqC85wWhsA/pQUanJ4z6Lwn05A1Kja3GMxluBjqnDVeDhaoA6V9Kw2n3
+ XnPMz2V4MBwWoEn0CTjwUK2MvSIFEmyqv6iujjZrHJA9DPdT8ISGxqgrVMUqDtt0vG7x
+ lHZwPZH9UUl3KUCClGcc+CYOcsj0BMClRnZAiyHLPirmtVIUbvHpj9kltdyMD8cGZeU3
+ 79IQ==
+X-Gm-Message-State: AOJu0YwAz/NWVrrltnc8QygwnhS9ujeQYl72Hq3r263SK8G5ajWeX/FQ
+ t6SLCpKsshYYNnF2wXbZzTuNUhHVyCAumElgHu5xuC3TjtgDApX8/kCJPDD30MgCmUlbEE0I8MX
+ eddYQjfJ6fYfnttxTEZKV3EDxUtiKcBzTzluEkg==
+X-Google-Smtp-Source: AGHT+IH93HVdi2t4f0MzJJdr9qtI2VA23LixBwAPrCjq0fRnXYXVtzzvVz/wDXI2ByYJtHd/5YDk86IDF6YVnWPtzqA=
+X-Received: by 2002:a05:6a20:438c:b0:1d2:e987:c343 with SMTP id
+ adf61e73a8af0-1d2e987c39fmr254056637.24.1726555301665; Mon, 16 Sep 2024
+ 23:41:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240913160408.2199558-1-raymond.mao@linaro.org>
+ <20240913160408.2199558-7-raymond.mao@linaro.org>
+In-Reply-To: <20240913160408.2199558-7-raymond.mao@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 17 Sep 2024 09:41:05 +0300
+Message-ID: <CAC_iWjKF5d2905AL8kvuMK8CMCiKnCmezHADr2hH9ihRu-J9Cg@mail.gmail.com>
+Subject: Re: [PATCH v7 06/27] mbedtls: add digest shim layer for MbedTLS
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, manish.pandey2@arm.com, 
+ Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
+ Mario Six <mario.six@gdsys.cc>, 
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
+ Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>, Sumit Garg <sumit.garg@linaro.org>, 
+ Sean Anderson <seanga2@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Andrew Davis <afd@ti.com>, Jesse Taube <mr.bossman075@gmail.com>,
+ Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Marek Vasut <marex@denx.de>, 
+ Alexander Gendin <agendin@matrox.com>, Jonathan Humphreys <j-humphreys@ti.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Greg Malysa <greg.malysa@timesys.com>, 
+ Kongyang Liu <seashell11234455@gmail.com>, 
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Jonas Karlman <jonas@kwiboo.se>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Bin Meng <bmeng.cn@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Wed, 18 Sep 2024 08:14:47 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,439 +111,540 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Several Enclustra devices store MAC address in a secure eeprom device. In
-most cases this is the atsha204a (alternatively DS28). The atsha204a device
-is preconfigured accordingly. Reading then is based on u-boot's atsha204a
-driver. Add such support for Enclustra's AA1 SoMs.
+Hi Raymond,
 
-Signed-off-by: Lothar Rubusch <l.rubusch@gmail.com>
----
- board/enclustra/common/Kconfig                | 23 +++++
- board/enclustra/common/Makefile               |  3 +
- board/enclustra/common/enclustra_mac.h        | 48 +++++++++
- board/enclustra/common/mac_atsha204.c         | 97 +++++++++++++++++++
- board/enclustra/common/mac_common.c           | 54 +++++++++++
- board/enclustra/common/mac_ds28.c             | 88 +++++++++++++++++
- board/enclustra/mercury_aa1/Makefile          |  2 +
- .../mercury_aa1/aa1_board_late_init.c         | 17 ++++
- .../socfpga_enclustra_mercury_aa1_defconfig   |  1 +
- drivers/misc/Kconfig                          |  2 +-
- 10 files changed, 334 insertions(+), 1 deletion(-)
- create mode 100644 board/enclustra/common/enclustra_mac.h
- create mode 100644 board/enclustra/common/mac_atsha204.c
- create mode 100644 board/enclustra/common/mac_common.c
- create mode 100644 board/enclustra/common/mac_ds28.c
- create mode 100644 board/enclustra/mercury_aa1/aa1_board_late_init.c
+This looks correct, but as we discussed please drop this and use the
+internal U-Boot hashing for now.
+I still think we should enable mbedTLS hashing in the future, since we
+can use new hash algorithms with minimal coding, but integrating this
+with the existing U-Boot hardware offloading driver model needs a bit
+more thought
 
-diff --git a/board/enclustra/common/Kconfig b/board/enclustra/common/Kconfig
-index 51169bada3..51991f7882 100644
---- a/board/enclustra/common/Kconfig
-+++ b/board/enclustra/common/Kconfig
-@@ -1 +1,24 @@
-+config ENCLUSTRA_EEPROM_MAC
-+	bool "Enclustra MAC address"
-+	select ATSHA204A
-+	default y if TARGET_SOCFPGA_ENCLUSTRA_MERCURY_AA1
-+	help
-+	  Reads the MAC address out of the EEPROM and configures the MAC
-+	  addresses in the environment.
-+
-+choice
-+	prompt "Enclustra EEPROM device"
-+	depends on ENCLUSTRA_EEPROM_MAC
-+	default ENCLUSTRA_EEPROM_MAC_ATSHA204 if TARGET_SOCFPGA_ENCLUSTRA_MERCURY_AA1
-+	help
-+	  Specify the device where the MAC is stored.
-+
-+config ENCLUSTRA_EEPROM_MAC_ATSHA204
-+	bool "MAC stored in 'ATSHA204'"
-+
-+config ENCLUSTRA_EEPROM_MAC_DS28
-+	bool "MAC stored in 'DS28'"
-+
-+endchoice
-+
- source "board/enclustra/mercury_aa1/Kconfig"
-diff --git a/board/enclustra/common/Makefile b/board/enclustra/common/Makefile
-index 16c8531d74..c83743abe7 100644
---- a/board/enclustra/common/Makefile
-+++ b/board/enclustra/common/Makefile
-@@ -2,3 +2,6 @@
- # Copyright (c) 2024 Enclustra GmbH
- 
- # Common for several Enclustra modules
-+obj-$(CONFIG_ENCLUSTRA_EEPROM_MAC) += mac_common.o
-+obj-$(CONFIG_ENCLUSTRA_EEPROM_MAC_ATSHA204) += mac_atsha204.o
-+obj-$(CONFIG_ENCLUSTRA_EEPROM_MAC_DS28) += mac_ds28.o
-diff --git a/board/enclustra/common/enclustra_mac.h b/board/enclustra/common/enclustra_mac.h
-new file mode 100644
-index 0000000000..9631e9d458
---- /dev/null
-+++ b/board/enclustra/common/enclustra_mac.h
-@@ -0,0 +1,48 @@
-+/* SPDX-License-Identifier: GPL-2.0+
-+ *
-+ * Copyright 2024 Enclustra GmbH, <info@enclustra.com>
-+ */
-+
-+#ifndef ENCLUSTRA_MAC
-+# define ENCLUSTRA_MAC               0xF7B020
-+#endif
-+
-+/*
-+ * enclustra_mac_is_in_env - Check if MAC address is already set
-+ *
-+ * @env: name of the environment variable
-+ * Return: true if MAC is set, false otherwise
-+ */
-+bool enclustra_mac_is_in_env(const char *env);
-+
-+/*
-+ * enclustra_get_mac_is_enabled - Test if ethernet MAC is enabled in DT
-+ *
-+ * @alias: alias for ethernet MAC device tree node
-+ * Return: 0 if OK, other value on error
-+ */
-+int enclustra_get_mac_is_enabled(const char *alias);
-+
-+/*
-+ * enclustra_get_mac_from_eeprom - Get MAC address from eeprom and write it to enetaddr
-+ *
-+ * @enetaddr: buffer where address is to be stored
-+ * @alias: alias for EEPROM device tree node
-+ * Return: 0 if OK, other value on error
-+ */
-+int enclustra_get_mac_from_eeprom(unsigned char *enetaddr, const char *alias);
-+
-+/*
-+ * enclustra_get_mac1_from_mac - Get MAC1 address from MAC and write it to enetaddr
-+ *
-+ * @enetaddr: buffer where MAC is passed, MAC will be modified to MAC1
-+ * Return: 0 if OK, else error value
-+ */
-+int enclustra_get_mac1_from_mac(unsigned char *enetaddr);
-+
-+/*
-+ * enclustra_setup_mac_address - Try to get MAC address from various locations and write it to env
-+ *
-+ * Return: 0 if OK, other value on error
-+ */
-+int enclustra_setup_mac_address(void);
-diff --git a/board/enclustra/common/mac_atsha204.c b/board/enclustra/common/mac_atsha204.c
-new file mode 100644
-index 0000000000..4bd25505d6
---- /dev/null
-+++ b/board/enclustra/common/mac_atsha204.c
-@@ -0,0 +1,97 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (c) 2024 Enclustra GmbH
-+ */
-+
-+#include <dm.h>
-+#include <atsha204a-i2c.h>
-+#include <net.h>
-+
-+#include "enclustra_mac.h"
-+
-+int enclustra_get_mac_from_eeprom(unsigned char *enetaddr, const char *alias)
-+{
-+	struct udevice *dev;
-+	u32 hwaddr_h;
-+	u8 data[4];
-+	int i, j, eeprom_addr, mac_len, ret;
-+
-+	ret = uclass_get_device_by_name(UCLASS_MISC, alias, &dev);
-+	if (ret) {
-+		printf("%s: Failed, cannot find EEPROM! ret = %d\n", __func__, ret);
-+		return ret;
-+	}
-+
-+	/* Make sure atsha204a is in a defined state (part of protocol) */
-+	if (atsha204a_sleep(dev)) {
-+		printf("%s(): Failed to bring EEPROM in defined state\n", __func__);
-+		return -ENODEV;
-+	}
-+
-+	if (atsha204a_wakeup(dev)) {
-+		printf("%s(): Failed to wakeup EEPROM\n", __func__);
-+		return -ENODEV;
-+	}
-+
-+	/* Read twice portions of 4 bytes (atsha204 protocol). One from address 4
-+	 * the other from address 5 of the OTP zone. Then convert the data to
-+	 * the 6 elements of the MAC address.
-+	 */
-+	eeprom_addr = 4;
-+	mac_len = 6;
-+	for (i = 0; i < 2; i++) {
-+		eeprom_addr += i;
-+		if (atsha204a_read(dev, ATSHA204A_ZONE_OTP, false, eeprom_addr, data)) {
-+			printf("%s(): Failed to parse ATSHA204A_ZONE_OTP of EEPROM\n",
-+			       __func__);
-+			return -EFAULT;
-+		}
-+
-+		for (j = 0; j < 4 && j + i * 4 < mac_len; j++)
-+			enetaddr[j + i * 4] = data[j];
-+	}
-+
-+	/* Check if the value is a valid mac registered for
-+	 * Enclustra  GmbH
-+	 */
-+	hwaddr_h = enetaddr[0] | enetaddr[1] << 8 | enetaddr[2] << 16;
-+	if ((hwaddr_h & 0xFFFFFF) != ENCLUSTRA_MAC) {
-+		printf("%s(): Failed, parsed MAC is no Enclustra MAC\n", __func__);
-+		return -ENOENT;
-+	}
-+
-+	if (!is_valid_ethaddr(enetaddr)) {
-+		printf("%s(): Failed, address read from EEPROM is invalid!\n",
-+		       __func__);
-+		return -EINVAL;
-+	}
-+
-+	printf("ethaddr set to %02X:%02X:%02X:%02X:%02X:%02X\n",
-+	       enetaddr[0], enetaddr[1], enetaddr[2],
-+	       enetaddr[3], enetaddr[4], enetaddr[5]);
-+
-+	return 0;
-+}
-+
-+__weak int enclustra_setup_mac_address(void)
-+{
-+	unsigned char enetaddr[6];
-+
-+	if (enclustra_mac_is_in_env("ethaddr"))
-+		return 0;
-+
-+	if (enclustra_get_mac_is_enabled("ethernet0"))
-+		return 0;
-+
-+	if (enclustra_get_mac_from_eeprom(enetaddr, "atsha204a@64"))
-+		return -ENXIO;
-+
-+	if (eth_env_set_enetaddr("ethaddr", enetaddr))
-+		return -ENXIO;
-+
-+	if (!enclustra_get_mac1_from_mac(enetaddr))
-+		return eth_env_set_enetaddr("eth1addr", enetaddr);
-+
-+	printf("%s(): Failed, unable to set mac address!\n", __func__);
-+	return -ENXIO;
-+}
-diff --git a/board/enclustra/common/mac_common.c b/board/enclustra/common/mac_common.c
-new file mode 100644
-index 0000000000..cf5dac0e0e
---- /dev/null
-+++ b/board/enclustra/common/mac_common.c
-@@ -0,0 +1,54 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (c) 2024 Enclustra GmbH
-+ */
-+
-+#include <dm.h>
-+#include <atsha204a-i2c.h>
-+#include <net.h>
-+
-+#include "enclustra_mac.h"
-+
-+bool enclustra_mac_is_in_env(const char *env)
-+{
-+	unsigned char enetaddr[6];
-+
-+	return eth_env_get_enetaddr(env, enetaddr);
-+}
-+
-+int enclustra_get_mac_is_enabled(const char *alias)
-+{
-+	ofnode node =   ofnode_path(alias);
-+
-+	if (!ofnode_valid(node))
-+		return -EINVAL;
-+
-+	if (!ofnode_is_enabled(node))
-+		return -EINVAL;
-+
-+	return 0;
-+}
-+
-+int enclustra_get_mac1_from_mac(unsigned char *enetaddr)
-+{
-+	u32 hwaddr_h;
-+
-+	/* Increment MAC addr */
-+	hwaddr_h = (enetaddr[3] << 16) | (enetaddr[4] << 8) | enetaddr[5];
-+	hwaddr_h = (hwaddr_h + 1) & 0xFFFFFF;
-+	enetaddr[3] = (hwaddr_h >> 16) & 0xFF;
-+	enetaddr[4] = (hwaddr_h >> 8) & 0xFF;
-+	enetaddr[5] = hwaddr_h & 0xFF;
-+
-+	if (!is_valid_ethaddr(enetaddr)) {
-+		printf("%s(): Failed, address computed from enetaddr is invalid!\n",
-+		       __func__);
-+		return -EINVAL;
-+	}
-+
-+	printf("eth1addr set to %02X:%02X:%02X:%02X:%02X:%02X\n",
-+	       enetaddr[0], enetaddr[1], enetaddr[2],
-+	       enetaddr[3], enetaddr[4], enetaddr[5]);
-+
-+	return 0;
-+}
-diff --git a/board/enclustra/common/mac_ds28.c b/board/enclustra/common/mac_ds28.c
-new file mode 100644
-index 0000000000..9aed4f1de1
---- /dev/null
-+++ b/board/enclustra/common/mac_ds28.c
-@@ -0,0 +1,88 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (c) 2024 Enclustra GmbH
-+ */
-+
-+#include <linux/compat.h>
-+#include <dm.h>
-+#include <i2c.h>
-+#include <net.h>
-+
-+#include "enclustra_mac.h"
-+
-+#define DS28_I2C_ADDR 0x5C
-+#define DS28_SYS_I2C_EEPROM_BUS 0
-+
-+int enclustra_get_mac_from_eeprom(unsigned char *enetaddr, const char *alias)
-+{
-+	struct udevice *dev;
-+	u32 hwaddr_h;
-+	struct dm_i2c_chip *chip;
-+	uint chip_addr = DS28_I2C_ADDR;
-+	int alen = 1;
-+	int ret;
-+
-+	if (i2c_get_chip_for_busnum(DS28_SYS_I2C_EEPROM_BUS, chip_addr,
-+				    alen, &dev))
-+		return -ENODEV;
-+
-+	chip = dev_get_parent_plat(dev);
-+	if (chip->offset_len != alen) {
-+		debug("I2C chip %x: alen %d does not match offset_len %d\n",
-+		      chip_addr, alen, chip->offset_len);
-+		return -EADDRNOTAVAIL;
-+	}
-+
-+	ret = dm_i2c_read(dev, 0x10, enetaddr, 6);
-+	if (ret) {
-+		printf("%s(): Failed reading EEPROM! ret = %d\n", __func__, ret);
-+		return ret;
-+	}
-+
-+	/* Check if the value is a valid mac registered for
-+	 * Enclustra  GmbH
-+	 */
-+	hwaddr_h = enetaddr[0] | enetaddr[1] << 8 | enetaddr[2] << 16;
-+	if ((hwaddr_h & 0xFFFFFF) != ENCLUSTRA_MAC) {
-+		printf("%s(): Failed, parsed MAC is no Enclustra MAC\n", __func__);
-+		return -ENOENT;
-+	}
-+
-+	if (!is_valid_ethaddr(enetaddr)) {
-+		printf("%s(): Failed, address read from EEPROM is invalid!\n",
-+		       __func__);
-+		return -EINVAL;
-+	}
-+
-+	printf("ethaddr set to %02X:%02X:%02X:%02X:%02X:%02X\n",
-+	       enetaddr[0], enetaddr[1], enetaddr[2],
-+	       enetaddr[3], enetaddr[4], enetaddr[5]);
-+
-+	return 0;
-+}
-+
-+__weak int enclustra_setup_mac_address(void)
-+{
-+	unsigned char enetaddr[6];
-+
-+	if (enclustra_mac_is_in_env("ethaddr"))
-+		return 0;
-+
-+	if (enclustra_get_mac_is_enabled("ethernet0"))
-+		return 0;
-+
-+	// NB: DS28 is still not available in official DT, so referencing
-+	// here by i2c busnumber and address directly
-+	// preparation for DT access here, though
-+	if (enclustra_get_mac_from_eeprom(enetaddr, ""))
-+		return -ENXIO;
-+
-+	if (eth_env_set_enetaddr("ethaddr", enetaddr))
-+		return -ENXIO;
-+
-+	if (!enclustra_get_mac1_from_mac(enetaddr))
-+		return eth_env_set_enetaddr("eth1addr", enetaddr);
-+
-+	printf("%s(): Failed, unable to set mac address!\n", __func__);
-+	return -ENXIO;
-+}
-diff --git a/board/enclustra/mercury_aa1/Makefile b/board/enclustra/mercury_aa1/Makefile
-index 53c84d8156..b145254466 100644
---- a/board/enclustra/mercury_aa1/Makefile
-+++ b/board/enclustra/mercury_aa1/Makefile
-@@ -6,3 +6,5 @@ ifeq ($(CONFIG_SPL_BUILD),)
- obj-y += aa1_set_storage_cmd.o
- 
- endif
-+
-+obj-y += aa1_board_late_init.o
-diff --git a/board/enclustra/mercury_aa1/aa1_board_late_init.c b/board/enclustra/mercury_aa1/aa1_board_late_init.c
-new file mode 100644
-index 0000000000..2e8f8459e3
---- /dev/null
-+++ b/board/enclustra/mercury_aa1/aa1_board_late_init.c
-@@ -0,0 +1,17 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2024 Enclustra GmbH
-+ * <info@enclustra.com>
-+ */
-+
-+#include <env.h>
-+#include <init.h>
-+#include <dm/uclass.h>
-+#include <dm.h>
-+
-+#include "../common/enclustra_mac.h"
-+
-+int board_late_init(void)
-+{
-+	return enclustra_setup_mac_address();
-+}
-diff --git a/configs/socfpga_enclustra_mercury_aa1_defconfig b/configs/socfpga_enclustra_mercury_aa1_defconfig
-index b475bd916d..58c718864b 100644
---- a/configs/socfpga_enclustra_mercury_aa1_defconfig
-+++ b/configs/socfpga_enclustra_mercury_aa1_defconfig
-@@ -26,6 +26,7 @@ CONFIG_SYS_CONSOLE_IS_IN_ENV=y
- CONFIG_SYS_CONSOLE_OVERWRITE_ROUTINE=y
- CONFIG_SYS_CONSOLE_ENV_OVERWRITE=y
- CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_BOARD_LATE_INIT=y
- CONFIG_CLOCKS=y
- CONFIG_SPL_PAD_TO=0x40000
- CONFIG_SPL_NO_BSS_LIMIT=y
-diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-index 6009d55f40..90fa8c9eae 100644
---- a/drivers/misc/Kconfig
-+++ b/drivers/misc/Kconfig
-@@ -73,7 +73,7 @@ config ATSHA204A
- 	help
- 	   Enable support for I2C connected Atmel's ATSHA204A
- 	   CryptoAuthentication module found for example on the Turris Omnia
--	   board.
-+	   board and Enclustra SoC FPGA boards.
- 
- config GATEWORKS_SC
- 	bool "Gateworks System Controller Support"
--- 
-2.25.1
+Thanks
+/Ilias
 
+On Fri, 13 Sept 2024 at 19:07, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> Implement digest shim layer on top of MbedTLS crypto library.
+> Introduce <alg>_MBEDTLS kconfig for MbedTLS crypto implementations.
+>
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> ---
+> Changes in v2
+> - Split the shim layer into separated files and use the original head
+>   files instead of creating new ones.
+> Changes in v3
+> - Refactored sha1_hmac and removed non-watchdog md5 function.
+> Changes in v4
+> - Refactored hash _wd functions.
+> - Introduce <alg>_MBEDTLS kconfig for MbedTLS crypto implementations.
+> Changes in v5
+> - Correct kconfig dependence.
+> - Refactored MbedTLS makefile.
+> Changes in v6
+> - None.
+> Changes in v7
+> - None.
+>
+>  include/u-boot/sha1.h |  4 ++
+>  lib/mbedtls/Kconfig   | 90 +++++++++++++++++++++++++++++++++++++++
+>  lib/mbedtls/Makefile  | 14 ++++--
+>  lib/mbedtls/md5.c     | 57 +++++++++++++++++++++++++
+>  lib/mbedtls/sha1.c    | 99 +++++++++++++++++++++++++++++++++++++++++++
+>  lib/mbedtls/sha256.c  | 62 +++++++++++++++++++++++++++
+>  lib/mbedtls/sha512.c  | 93 ++++++++++++++++++++++++++++++++++++++++
+>  7 files changed, 415 insertions(+), 4 deletions(-)
+>  create mode 100644 lib/mbedtls/md5.c
+>  create mode 100644 lib/mbedtls/sha1.c
+>  create mode 100644 lib/mbedtls/sha256.c
+>  create mode 100644 lib/mbedtls/sha512.c
+>
+> diff --git a/include/u-boot/sha1.h b/include/u-boot/sha1.h
+> index 36c3db15e22..2fca7f1be16 100644
+> --- a/include/u-boot/sha1.h
+> +++ b/include/u-boot/sha1.h
+> @@ -41,6 +41,10 @@ extern "C" {
+>
+>  #define SHA1_DEF_CHUNK_SZ 0x10000
+>
+> +#define K_IPAD_VAL 0x36
+> +#define K_OPAD_VAL 0x5C
+> +#define K_PAD_LEN 64
+> +
+>  extern const uint8_t sha1_der_prefix[];
+>
+>  #if defined(CONFIG_MBEDTLS_LIB_CRYPTO)
+> diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
+> index efae2c4fd72..12f8c965f5a 100644
+> --- a/lib/mbedtls/Kconfig
+> +++ b/lib/mbedtls/Kconfig
+> @@ -126,9 +126,99 @@ if MBEDTLS_LIB
+>
+>  config MBEDTLS_LIB_CRYPTO
+>         bool "MbedTLS crypto libraries"
+> +       select MD5_MBEDTLS if MD5
+> +       select SHA1_MBEDTLS if SHA1
+> +       select SHA256_MBEDTLS if SHA256
+> +       select SHA512_MBEDTLS if SHA512
+> +       select SHA384_MBEDTLS if SHA384
+> +       select SPL_MD5_MBEDTLS if SPL_MD5
+> +       select SPL_SHA1_MBEDTLS if SPL_SHA1
+> +       select SPL_SHA256_MBEDTLS if SPL_SHA256
+> +       select SPL_SHA512_MBEDTLS if SPL_SHA512
+> +       select SPL_SHA384_MBEDTLS if SPL_SHA384
+>         help
+>           Enable MbedTLS crypto libraries.
+>
+> +if MBEDTLS_LIB_CRYPTO
+> +
+> +config SHA1_MBEDTLS
+> +       bool "Enable SHA1 support with MbedTLS crypto library"
+> +       depends on MBEDTLS_LIB_CRYPTO && SHA1
+> +       help
+> +         This option enables support of hashing using SHA1 algorithm
+> +         with MbedTLS crypto library.
+> +
+> +config SHA256_MBEDTLS
+> +       bool "Enable SHA256 support with MbedTLS crypto library"
+> +       depends on MBEDTLS_LIB_CRYPTO && SHA256
+> +       help
+> +         This option enables support of hashing using SHA256 algorithm
+> +         with MbedTLS crypto library.
+> +
+> +config SHA512_MBEDTLS
+> +       bool "Enable SHA512 support with MbedTLS crypto library"
+> +       depends on MBEDTLS_LIB_CRYPTO && SHA512
+> +       default y if TI_SECURE_DEVICE && FIT_SIGNATURE
+> +       help
+> +         This option enables support of hashing using SHA512 algorithm
+> +         with MbedTLS crypto library.
+> +
+> +config SHA384_MBEDTLS
+> +       bool "Enable SHA384 support with MbedTLS crypto library"
+> +       depends on MBEDTLS_LIB_CRYPTO && SHA384
+> +       select SHA512_MBEDTLS
+> +       help
+> +         This option enables support of hashing using SHA384 algorithm
+> +         with MbedTLS crypto library.
+> +
+> +config MD5_MBEDTLS
+> +       bool "Enable MD5 support with MbedTLS crypto library"
+> +       depends on MBEDTLS_LIB_CRYPTO && MD5
+> +       help
+> +         This option enables support of hashing using MD5 algorithm
+> +         with MbedTLS crypto library.
+> +
+> +if SPL
+> +
+> +config SPL_SHA1_MBEDTLS
+> +       bool "Enable SHA1 support in SPL with MbedTLS crypto library"
+> +       depends on MBEDTLS_LIB_CRYPTO && SPL_SHA1
+> +       help
+> +         This option enables support of hashing using SHA1 algorithm
+> +         with MbedTLS crypto library.
+> +
+> +config SPL_SHA256_MBEDTLS
+> +       bool "Enable SHA256 support in SPL with MbedTLS crypto library"
+> +       depends on MBEDTLS_LIB_CRYPTO && SPL_SHA256
+> +       help
+> +         This option enables support of hashing using SHA256 algorithm
+> +         with MbedTLS crypto library.
+> +
+> +config SPL_SHA512_MBEDTLS
+> +       bool "Enable SHA512 support in SPL with MbedTLS crypto library"
+> +       depends on MBEDTLS_LIB_CRYPTO && SPL_SHA512
+> +       help
+> +         This option enables support of hashing using SHA512 algorithm
+> +         with MbedTLS crypto library.
+> +
+> +config SPL_SHA384_MBEDTLS
+> +       bool "Enable SHA384 support in SPL with MbedTLS crypto library"
+> +       depends on MBEDTLS_LIB_CRYPTO && SPL_SHA384
+> +       select SPL_SHA512
+> +       help
+> +         This option enables support of hashing using SHA384 algorithm
+> +         with MbedTLS crypto library.
+> +
+> +config SPL_MD5_MBEDTLS
+> +       bool "Enable MD5 support in SPL with MbedTLS crypto library"
+> +       depends on MBEDTLS_LIB_CRYPTO && SPL_MD5
+> +       help
+> +         This option enables support of hashing using MD5 algorithm
+> +         with MbedTLS crypto library.
+> +
+> +endif # SPL
+> +
+> +endif # MBEDTLS_LIB_CRYPTO
+>
+>  config MBEDTLS_LIB_X509
+>         bool "MbedTLS certificate libraries"
+> diff --git a/lib/mbedtls/Makefile b/lib/mbedtls/Makefile
+> index e98241b46ab..50c1ba5f88e 100644
+> --- a/lib/mbedtls/Makefile
+> +++ b/lib/mbedtls/Makefile
+> @@ -5,17 +5,23 @@
+>
+>  MBEDTLS_LIB_DIR = external/mbedtls/library
+>
+> +# shim layer for hash
+> +obj-$(CONFIG_$(SPL_)MD5_MBEDTLS) += md5.o
+> +obj-$(CONFIG_$(SPL_)SHA1_MBEDTLS) += sha1.o
+> +obj-$(CONFIG_$(SPL_)SHA256_MBEDTLS) += sha256.o
+> +obj-$(CONFIG_$(SPL_)SHA512_MBEDTLS) += sha512.o
+> +
+>  # MbedTLS crypto library
+>  obj-$(CONFIG_MBEDTLS_LIB_CRYPTO) += mbedtls_lib_crypto.o
+>  mbedtls_lib_crypto-y := \
+>         $(MBEDTLS_LIB_DIR)/platform_util.o \
+>         $(MBEDTLS_LIB_DIR)/constant_time.o \
+>         $(MBEDTLS_LIB_DIR)/md.o
+> -mbedtls_lib_crypto-$(CONFIG_$(SPL_)MD5) += $(MBEDTLS_LIB_DIR)/md5.o
+> -mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA1) += $(MBEDTLS_LIB_DIR)/sha1.o
+> -mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA256) += \
+> +mbedtls_lib_crypto-$(CONFIG_$(SPL_)MD5_MBEDTLS) += $(MBEDTLS_LIB_DIR)/md5.o
+> +mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA1_MBEDTLS) += $(MBEDTLS_LIB_DIR)/sha1.o
+> +mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA256_MBEDTLS) += \
+>         $(MBEDTLS_LIB_DIR)/sha256.o
+> -mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA512) += \
+> +mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA512_MBEDTLS) += \
+>         $(MBEDTLS_LIB_DIR)/sha512.o
+>
+>  # MbedTLS X509 library
+> diff --git a/lib/mbedtls/md5.c b/lib/mbedtls/md5.c
+> new file mode 100644
+> index 00000000000..04388fce249
+> --- /dev/null
+> +++ b/lib/mbedtls/md5.c
+> @@ -0,0 +1,57 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Hash shim layer on MbedTLS Crypto library
+> + *
+> + * Copyright (c) 2024 Linaro Limited
+> + * Author: Raymond Mao <raymond.mao@linaro.org>
+> + */
+> +#include "compiler.h"
+> +
+> +#ifndef USE_HOSTCC
+> +#include <watchdog.h>
+> +#endif /* USE_HOSTCC */
+> +#include <u-boot/md5.h>
+> +
+> +void MD5Init(MD5Context *ctx)
+> +{
+> +       mbedtls_md5_init(ctx);
+> +       mbedtls_md5_starts(ctx);
+> +}
+> +
+> +void MD5Update(MD5Context *ctx, unsigned char const *buf, unsigned int len)
+> +{
+> +       mbedtls_md5_update(ctx, buf, len);
+> +}
+> +
+> +void MD5Final(unsigned char digest[16], MD5Context *ctx)
+> +{
+> +       mbedtls_md5_finish(ctx, digest);
+> +       mbedtls_md5_free(ctx);
+> +}
+> +
+> +void md5_wd(const unsigned char *input, unsigned int len,
+> +           unsigned char output[16], unsigned int chunk_sz)
+> +{
+> +       MD5Context context;
+> +
+> +       MD5Init(&context);
+> +
+> +       if (IS_ENABLED(CONFIG_HW_WATCHDOG) || IS_ENABLED(CONFIG_WATCHDOG)) {
+> +               const unsigned char *curr = input;
+> +               const unsigned char *end = input + len;
+> +               int chunk;
+> +
+> +               while (curr < end) {
+> +                       chunk = end - curr;
+> +                       if (chunk > chunk_sz)
+> +                               chunk = chunk_sz;
+> +                       MD5Update(&context, curr, chunk);
+> +                       curr += chunk;
+> +                       schedule();
+> +               }
+> +       } else {
+> +               MD5Update(&context, input, len);
+> +       }
+> +
+> +       MD5Final(output, &context);
+> +}
+> diff --git a/lib/mbedtls/sha1.c b/lib/mbedtls/sha1.c
+> new file mode 100644
+> index 00000000000..2aee5037795
+> --- /dev/null
+> +++ b/lib/mbedtls/sha1.c
+> @@ -0,0 +1,99 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Hash shim layer on MbedTLS Crypto library
+> + *
+> + * Copyright (c) 2024 Linaro Limited
+> + * Author: Raymond Mao <raymond.mao@linaro.org>
+> + */
+> +#ifndef USE_HOSTCC
+> +#include <cyclic.h>
+> +#endif /* USE_HOSTCC */
+> +#include <string.h>
+> +#include <u-boot/sha1.h>
+> +
+> +const u8 sha1_der_prefix[SHA1_DER_LEN] = {
+> +       0x30, 0x21, 0x30, 0x09, 0x06, 0x05, 0x2b, 0x0e,
+> +       0x03, 0x02, 0x1a, 0x05, 0x00, 0x04, 0x14
+> +};
+> +
+> +void sha1_starts(sha1_context *ctx)
+> +{
+> +       mbedtls_sha1_init(ctx);
+> +       mbedtls_sha1_starts(ctx);
+> +}
+> +
+> +void sha1_update(sha1_context *ctx, const unsigned char *input,
+> +                unsigned int length)
+> +{
+> +       mbedtls_sha1_update(ctx, input, length);
+> +}
+> +
+> +void sha1_finish(sha1_context *ctx, unsigned char output[SHA1_SUM_LEN])
+> +{
+> +       mbedtls_sha1_finish(ctx, output);
+> +       mbedtls_sha1_free(ctx);
+> +}
+> +
+> +void sha1_csum_wd(const unsigned char *input, unsigned int ilen,
+> +                 unsigned char *output, unsigned int chunk_sz)
+> +{
+> +       sha1_context ctx;
+> +
+> +       sha1_starts(&ctx);
+> +
+> +       if (IS_ENABLED(CONFIG_HW_WATCHDOG) || IS_ENABLED(CONFIG_WATCHDOG)) {
+> +               const unsigned char *curr = input;
+> +               const unsigned char *end = input + ilen;
+> +               int chunk;
+> +
+> +               while (curr < end) {
+> +                       chunk = end - curr;
+> +                       if (chunk > chunk_sz)
+> +                               chunk = chunk_sz;
+> +                       sha1_update(&ctx, curr, chunk);
+> +                       curr += chunk;
+> +                       schedule();
+> +               }
+> +       } else {
+> +               sha1_update(&ctx, input, ilen);
+> +       }
+> +
+> +       sha1_finish(&ctx, output);
+> +}
+> +
+> +void sha1_hmac(const unsigned char *key, int keylen,
+> +              const unsigned char *input, unsigned int ilen,
+> +              unsigned char *output)
+> +{
+> +       int i;
+> +       sha1_context ctx;
+> +       unsigned char k_ipad[K_PAD_LEN];
+> +       unsigned char k_opad[K_PAD_LEN];
+> +       unsigned char tmpbuf[20];
+> +
+> +       if (keylen > K_PAD_LEN)
+> +               return;
+> +
+> +       memset(k_ipad, K_IPAD_VAL, sizeof(k_ipad));
+> +       memset(k_opad, K_OPAD_VAL, sizeof(k_opad));
+> +
+> +       for (i = 0; i < keylen; i++) {
+> +               k_ipad[i] ^= key[i];
+> +               k_opad[i] ^= key[i];
+> +       }
+> +
+> +       sha1_starts(&ctx);
+> +       sha1_update(&ctx, k_ipad, sizeof(k_ipad));
+> +       sha1_update(&ctx, input, ilen);
+> +       sha1_finish(&ctx, tmpbuf);
+> +
+> +       sha1_starts(&ctx);
+> +       sha1_update(&ctx, k_opad, sizeof(k_opad));
+> +       sha1_update(&ctx, tmpbuf, sizeof(tmpbuf));
+> +       sha1_finish(&ctx, output);
+> +
+> +       memset(k_ipad, 0, sizeof(k_ipad));
+> +       memset(k_opad, 0, sizeof(k_opad));
+> +       memset(tmpbuf, 0, sizeof(tmpbuf));
+> +       memset(&ctx, 0, sizeof(sha1_context));
+> +}
+> diff --git a/lib/mbedtls/sha256.c b/lib/mbedtls/sha256.c
+> new file mode 100644
+> index 00000000000..24aa58fa674
+> --- /dev/null
+> +++ b/lib/mbedtls/sha256.c
+> @@ -0,0 +1,62 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Hash shim layer on MbedTLS Crypto library
+> + *
+> + * Copyright (c) 2024 Linaro Limited
+> + * Author: Raymond Mao <raymond.mao@linaro.org>
+> + */
+> +#ifndef USE_HOSTCC
+> +#include <cyclic.h>
+> +#endif /* USE_HOSTCC */
+> +#include <u-boot/sha256.h>
+> +
+> +const u8 sha256_der_prefix[SHA256_DER_LEN] = {
+> +       0x30, 0x31, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86,
+> +       0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x01, 0x05,
+> +       0x00, 0x04, 0x20
+> +};
+> +
+> +void sha256_starts(sha256_context *ctx)
+> +{
+> +       mbedtls_sha256_init(ctx);
+> +       mbedtls_sha256_starts(ctx, 0);
+> +}
+> +
+> +void
+> +sha256_update(sha256_context *ctx, const uint8_t *input, uint32_t length)
+> +{
+> +       mbedtls_sha256_update(ctx, input, length);
+> +}
+> +
+> +void sha256_finish(sha256_context *ctx, uint8_t digest[SHA256_SUM_LEN])
+> +{
+> +       mbedtls_sha256_finish(ctx, digest);
+> +       mbedtls_sha256_free(ctx);
+> +}
+> +
+> +void sha256_csum_wd(const unsigned char *input, unsigned int ilen,
+> +                   unsigned char *output, unsigned int chunk_sz)
+> +{
+> +       sha256_context ctx;
+> +
+> +       sha256_starts(&ctx);
+> +
+> +       if (IS_ENABLED(CONFIG_HW_WATCHDOG) || IS_ENABLED(CONFIG_WATCHDOG)) {
+> +               const unsigned char *curr = input;
+> +               const unsigned char *end = input + ilen;
+> +               int chunk;
+> +
+> +               while (curr < end) {
+> +                       chunk = end - curr;
+> +                       if (chunk > chunk_sz)
+> +                               chunk = chunk_sz;
+> +                       sha256_update(&ctx, curr, chunk);
+> +                       curr += chunk;
+> +                       schedule();
+> +               }
+> +       } else {
+> +               sha256_update(&ctx, input, ilen);
+> +       }
+> +
+> +       sha256_finish(&ctx, output);
+> +}
+> diff --git a/lib/mbedtls/sha512.c b/lib/mbedtls/sha512.c
+> new file mode 100644
+> index 00000000000..5615248cb91
+> --- /dev/null
+> +++ b/lib/mbedtls/sha512.c
+> @@ -0,0 +1,93 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Hash shim layer on MbedTLS Crypto library
+> + *
+> + * Copyright (c) 2024 Linaro Limited
+> + * Author: Raymond Mao <raymond.mao@linaro.org>
+> + */
+> +#ifndef USE_HOSTCC
+> +#include <cyclic.h>
+> +#endif /* USE_HOSTCC */
+> +#include <compiler.h>
+> +#include <u-boot/sha512.h>
+> +
+> +const u8 sha384_der_prefix[SHA384_DER_LEN] = {
+> +       0x30, 0x41, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86,
+> +       0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x02, 0x05,
+> +       0x00, 0x04, 0x30
+> +};
+> +
+> +const u8 sha512_der_prefix[SHA512_DER_LEN] = {
+> +       0x30, 0x51, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86,
+> +       0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x03, 0x05,
+> +       0x00, 0x04, 0x40
+> +};
+> +
+> +void sha384_starts(sha512_context *ctx)
+> +{
+> +       mbedtls_sha512_init(ctx);
+> +       mbedtls_sha512_starts(ctx, 1);
+> +}
+> +
+> +void
+> +sha384_update(sha512_context *ctx, const uint8_t *input, uint32_t length)
+> +{
+> +       mbedtls_sha512_update(ctx, input, length);
+> +}
+> +
+> +void sha384_finish(sha512_context *ctx, uint8_t digest[SHA384_SUM_LEN])
+> +{
+> +       mbedtls_sha512_finish(ctx, digest);
+> +       mbedtls_sha512_free(ctx);
+> +}
+> +
+> +void sha384_csum_wd(const unsigned char *input, unsigned int length,
+> +                   unsigned char *output, unsigned int chunk_sz)
+> +{
+> +       mbedtls_sha512(input, length, output, 1);
+> +}
+> +
+> +void sha512_starts(sha512_context *ctx)
+> +{
+> +       mbedtls_sha512_init(ctx);
+> +       mbedtls_sha512_starts(ctx, 0);
+> +}
+> +
+> +void
+> +sha512_update(sha512_context *ctx, const uint8_t *input, uint32_t length)
+> +{
+> +       mbedtls_sha512_update(ctx, input, length);
+> +}
+> +
+> +void sha512_finish(sha512_context *ctx, uint8_t digest[SHA512_SUM_LEN])
+> +{
+> +       mbedtls_sha512_finish(ctx, digest);
+> +       mbedtls_sha512_free(ctx);
+> +}
+> +
+> +void sha512_csum_wd(const unsigned char *input, unsigned int ilen,
+> +                   unsigned char *output, unsigned int chunk_sz)
+> +{
+> +       sha512_context ctx;
+> +
+> +       sha512_starts(&ctx);
+> +
+> +       if (IS_ENABLED(CONFIG_HW_WATCHDOG) || IS_ENABLED(CONFIG_WATCHDOG)) {
+> +               const unsigned char *curr = input;
+> +               const unsigned char *end = input + ilen;
+> +               int chunk;
+> +
+> +               while (curr < end) {
+> +                       chunk = end - curr;
+> +                       if (chunk > chunk_sz)
+> +                               chunk = chunk_sz;
+> +                       sha512_update(&ctx, curr, chunk);
+> +                       curr += chunk;
+> +                       schedule();
+> +               }
+> +       } else {
+> +               sha512_update(&ctx, input, ilen);
+> +       }
+> +
+> +       sha512_finish(&ctx, output);
+> +}
+> --
+> 2.25.1
+>
