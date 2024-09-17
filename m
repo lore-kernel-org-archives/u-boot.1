@@ -4,64 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E090EC35FF1
-	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 08:08:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2D59C35FF0
+	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 08:08:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0462E88CDC;
-	Tue, 17 Sep 2024 10:08:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6428188D52;
+	Tue, 17 Sep 2024 10:08:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="r+x5rPuo";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="G02xymGh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7EE2E88D0F; Tue, 17 Sep 2024 10:08:21 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 366B888D52; Tue, 17 Sep 2024 10:08:57 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C5BBB881E7
- for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 10:08:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C332588D54
+ for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 10:08:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=vaishnav.a@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 48H88E98073648;
- Tue, 17 Sep 2024 03:08:14 -0500
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 48H88Zg5087070;
+ Tue, 17 Sep 2024 03:08:35 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1726560494;
- bh=H9KI+XbIOVQ5EW16uCZkiKT6aZle1yJEeUCPDToumqg=;
+ s=ti-com-17Q1; t=1726560515;
+ bh=kcbCAP3bp1Ra5lrUSsEwVRSxBXhuaMR+1Nt/Ggrbqgo=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=r+x5rPuorcsxg1CWk0dpes1Ca54B63MbU8mPDzFQ77OmFUftr7P/jSu5biVHdS24F
- grW2Lj/DQr2rwCprucyGMcnLmKKU9vC0Ao/JM27uR0cA5sXcHTtL/UZLfgnf+NqVIS
- odkjbHcKDY6uyRX2qqLc2bDO4ceMKcZKKOw4nfQI=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 48H88EZK105239;
- Tue, 17 Sep 2024 03:08:14 -0500
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ b=G02xymGhe+XkdjHYd1devXxoHfaYQ9CwmMd44SMO/Sia6gMxwZT5qavVE3/j3CGwI
+ SzIbAivr5Ny42WBFpEb5wmTeAx8QDvviHzHT0gyjVqJqu2OQJjAVi6GoP0L42wZ8hj
+ iWmtT+yW1m5pfftwIMVQThX21cE7bsOvrBj6GAkc=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 48H88ZIP022274
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 17 Sep 2024 03:08:35 -0500
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 17
- Sep 2024 03:08:14 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2024 03:08:35 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 17 Sep 2024 03:08:14 -0500
+ Frontend Transport; Tue, 17 Sep 2024 03:08:35 -0500
 Received: from [10.24.69.142] ([10.24.69.142])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 48H88BfP087258;
- Tue, 17 Sep 2024 03:08:12 -0500
-Message-ID: <a5e8da60-7980-4a99-b0eb-b67fe45edc20@ti.com>
-Date: Tue, 17 Sep 2024 13:38:11 +0530
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 48H88XwQ075537;
+ Tue, 17 Sep 2024 03:08:33 -0500
+Message-ID: <9b62de2e-2a30-4ff3-889a-23b64a9ed866@ti.com>
+Date: Tue, 17 Sep 2024 13:38:32 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] wget: rework the logic to validate the load address
+Subject: Re: [PATCH 1/2] tftp: rework the logic to validate the load address
 To: Sughosh Ganu <sughosh.ganu@linaro.org>, <u-boot@lists.denx.de>
 CC: Tom Rini <trini@konsulko.com>, Ramon Fried <rfried.dev@gmail.com>, Joe
  Hershberger <joe.hershberger@ni.com>
 References: <20240916152025.75789-1-sughosh.ganu@linaro.org>
- <20240916152025.75789-3-sughosh.ganu@linaro.org>
+ <20240916152025.75789-2-sughosh.ganu@linaro.org>
 Content-Language: en-US
 From: Vaishnav Achath <vaishnav.a@ti.com>
-In-Reply-To: <20240916152025.75789-3-sughosh.ganu@linaro.org>
+In-Reply-To: <20240916152025.75789-2-sughosh.ganu@linaro.org>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -85,7 +86,7 @@ X-Virus-Status: Clean
 
 On 16/09/24 20:50, Sughosh Ganu wrote:
 > Use the lmb_read_check() function to verify if it is safe to use a
-> region of memory to load data from the wget command. The current logic
+> region of memory to load data from a tftp command. The current logic
 > checks the amount of free memory available, starting from the 'load
 > address'. This call fails if the same region of memory has been used
 > earlier. This used to work earlier as the LMB memory map had a local
@@ -102,68 +103,53 @@ On 16/09/24 20:50, Sughosh Ganu wrote:
 
 Tested-by: Vaishnav Achath <vaishnav.a@ti.com>
 
->   net/wget.c | 36 +-----------------------------------
->   1 file changed, 1 insertion(+), 35 deletions(-)
+>   net/tftp.c | 19 +------------------
+>   1 file changed, 1 insertion(+), 18 deletions(-)
 > 
-> diff --git a/net/wget.c b/net/wget.c
-> index 4a168641c6..a88c31f236 100644
-> --- a/net/wget.c
-> +++ b/net/wget.c
-> @@ -64,26 +64,6 @@ static unsigned int retry_tcp_ack_num;	/* TCP retry acknowledge number*/
->   static unsigned int retry_tcp_seq_num;	/* TCP retry sequence number */
->   static int retry_len;			/* TCP retry length */
->   
-> -static ulong wget_load_size;
-> -
-> -/**
-> - * wget_init_max_size() - initialize maximum load size
-> - *
-> - * Return:	0 if success, -1 if fails
-> - */
-> -static int wget_init_load_size(void)
-> -{
-> -	phys_size_t max_size;
-> -
-> -	max_size = lmb_get_free_size(image_load_addr);
-> -	if (!max_size)
-> -		return -1;
-> -
-> -	wget_load_size = max_size;
-> -
-> -	return 0;
-> -}
-> -
->   /**
->    * store_block() - store block in memory
->    * @src: source of data
-> @@ -97,13 +77,8 @@ static inline int store_block(uchar *src, unsigned int offset, unsigned int len)
->   	uchar *ptr;
+> diff --git a/net/tftp.c b/net/tftp.c
+> index b5d227d8bc..d6744bc24e 100644
+> --- a/net/tftp.c
+> +++ b/net/tftp.c
+> @@ -82,7 +82,6 @@ static ulong	tftp_block_wrap;
+>   static ulong	tftp_block_wrap_offset;
+>   static int	tftp_state;
+>   static ulong	tftp_load_addr;
+> -static ulong	tftp_load_size;
+>   #ifdef CONFIG_TFTP_TSIZE
+>   /* The file size reported by the server */
+>   static int	tftp_tsize;
+> @@ -159,13 +158,8 @@ static inline int store_block(int block, uchar *src, unsigned int len)
+>   	void *ptr;
 >   
 >   	if (CONFIG_IS_ENABLED(LMB)) {
-> -		ulong end_addr = image_load_addr + wget_load_size;
+> -		ulong end_addr = tftp_load_addr + tftp_load_size;
 > -
 > -		if (!end_addr)
 > -			end_addr = ULONG_MAX;
 > -
->   		if (store_addr < image_load_addr ||
+>   		if (store_addr < tftp_load_addr ||
 > -		    store_addr + len > end_addr) {
 > +		    lmb_read_check(store_addr, len)) {
->   			printf("\nwget error: ");
->   			printf("trying to overwrite reserved memory...\n");
+>   			puts("\nTFTP error: ");
+>   			puts("trying to overwrite reserved memory...\n");
 >   			return -1;
-> @@ -493,15 +468,6 @@ void wget_start(void)
->   	debug_cond(DEBUG_WGET,
->   		   "\nwget:Load address: 0x%lx\nLoading: *\b", image_load_addr);
+> @@ -712,19 +706,8 @@ static void tftp_timeout_handler(void)
+>   	}
+>   }
 >   
+> -/* Initialize tftp_load_addr and tftp_load_size from image_load_addr and lmb */
+>   static int tftp_init_load_addr(void)
+>   {
 > -	if (CONFIG_IS_ENABLED(LMB)) {
-> -		if (wget_init_load_size()) {
-> -			printf("\nwget error: ");
-> -			printf("trying to overwrite reserved memory...\n");
-> -			net_set_state(NETLOOP_FAIL);
-> -			return;
-> -		}
+> -		phys_size_t max_size;
+> -
+> -		max_size = lmb_get_free_size(image_load_addr);
+> -		if (!max_size)
+> -			return -1;
+> -
+> -		tftp_load_size = max_size;
 > -	}
 > -
->   	net_set_timeout_handler(wget_timeout, wget_timeout_handler);
->   	tcp_set_tcp_handler(wget_handler);
->   
+>   	tftp_load_addr = image_load_addr;
+>   	return 0;
+>   }
