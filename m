@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1981C36015
-	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 11:41:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6680BC36018
+	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 11:47:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BBAAA88D06;
-	Tue, 17 Sep 2024 13:41:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 91D9F88AB2;
+	Tue, 17 Sep 2024 13:47:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="R96ceALm";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BqtbII5E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D180E88D06; Tue, 17 Sep 2024 13:41:52 +0200 (CEST)
-Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
- [IPv6:2607:f8b0:4864:20::52d])
+ id 4B36B88AB9; Tue, 17 Sep 2024 13:47:28 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 93DDF88CC9
- for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 13:41:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 38C1287AB9
+ for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 13:47:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-7db4c1a54easo1645599a12.1
- for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 04:41:47 -0700 (PDT)
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-5c43003a667so3154016a12.3
+ for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 04:47:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726573306; x=1727178106; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1726573646; x=1727178446; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=N4JpJMfaxBdATSlGM3HrDSXuJ66VVcJsTMBA2WGkSnY=;
- b=R96ceALmwV5TzHFhXPNWIiR4PCIBLZ9nF6iJZeuCq/UGVgxPJxB+dLcp77ucsxzm2H
- 9ZTBHhTHLa6BV8nAxswt3C6fF3jDQrLvcd0sAghqUfD50wvFKo/rpppDo4kKJmjQANgo
- 0R5GsThGAmEQ1bBEkc9ZGLGCn6ph+mdoVibv5/zBo7RLu6IMt+mp5Puv5UMo9IIaC1Pz
- Mq4etnbA6UVQPblYRnAfd40Gp/MQGmkPin1DX9dfu7b9mNyY5HvFCl7K+CdXPnmgGFDc
- dpQ0E5xfIjmh/snI0RqLDEU8dgwVhpPuXwyWMKfuNJnJgt5erFhkE1F7Rk/PwPXhSxvx
- kacg==
+ bh=8ThkdZ5FgsRxD/SHPqUOoXEoHpyvyatQ590SEMngCKw=;
+ b=BqtbII5EPFf2LwmzqhpkFNTH2Id4v3GL3HGox1kgweoqHBVkWb1XVtP2nYFgY1uI8l
+ wkuoS7Yd0NzfI33u/lJVgs4uDYcpT4Jn1WQrQ11ru62jM2/10gQiZQu22ipL9MSTwBuL
+ I8LzPiRTUNIRhsBZBxT0g134M8AJ+cwLl+kh3bvsEYsgYdu0Ze69qtD546xm5I7GwjAI
+ tRj7OoTpdP28ZV43Sc6AD1bn5tPhC52uG+DXH94fAEW0nXb2Yc5ZPIEgI3vdjx+4j/ZD
+ Ek167+KOuH+PWIs/vyGGRrueunaXBZqHNZL7/eSwinLJdW2vrZCouw0NPoc51tucZ3SC
+ 7ETA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726573306; x=1727178106;
+ d=1e100.net; s=20230601; t=1726573646; x=1727178446;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=N4JpJMfaxBdATSlGM3HrDSXuJ66VVcJsTMBA2WGkSnY=;
- b=jZBO5RfK2nVTq5E1Hek9bhWZH75YudQEQ5+DNuob8GyTeIjp9IRv1vjFQicMo2CprI
- hwKJGqM1gVz+O1oZoVS079yeyHR9vVap7ukurrnAuonjpAigcvxo6iq9d8MZbUoCDd0f
- u9x0OpqJSEF12oteQE8EXNMJKc4b/v5wp8IgwIfNwv7+kTwG75fkE7nqP3N9zwYPhe0q
- hFzmIwVu3dy4GVqus0LK+skmUcAE37aKMgwTM4jk2hQMziSMC0chbpqmkP85S+zy55YK
- cWT7H8v2dZkpVhxHSGh5Q9Q8yAdC3bk85n98+m+41F2GMs9at5Wmn8bmWR2hi18LHsRe
- Glqw==
+ bh=8ThkdZ5FgsRxD/SHPqUOoXEoHpyvyatQ590SEMngCKw=;
+ b=aDJDauxZCYbSeo/uUi3IfcKrMHBoJZ87MuTQfr5bpt6b5B3nOcPCg+8oTgoKhxfGlq
+ gL4uafyw7suoqLkIEN7mNJFohfqGWR/tP5DrBU6pPgQlT6Zq7ZiKUNxW0BFryPo12IA2
+ Eck0HLD1E/H84LbPgMCeTNMXqqPDMGYYIqz806Q3z/3KAzmUorwQ8p+ySYUYxtlhQIPL
+ rFaRgidTJjHacij7eaSFGyTNf7pA+nSsdLNHs9jbX1O2FvKevSSbH+JpOtM6V7bFaMI0
+ uY3bqnjdmCd2dK4wj78YyCOxZpvih+sHrRT8HAi/8WXerW1FhQcmjBLa3DzsOVFzYCd0
+ Tq+Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXIE64NEHn3P2vGSRQ0GB25JEZ96jvyjbVYd3Ya3hac482Dz52yBXmngqDoLWHNakDNwAADc2s=@lists.denx.de
-X-Gm-Message-State: AOJu0YxZKJ19+rTTswA87/5RAe22HE5pZSOhkKMHbi3qJIHPqQ8+Atwk
- KNGpyFuzB406BCoV7q+Zb/U6T9iqhCcepni/dhBqa207y7gbOjUCbjqtiFFX1gR0A+jtNB7VxAE
- CeXJOkCO6EwVGviTS9ao4Azn3EeEitrYzinZEKw==
-X-Google-Smtp-Source: AGHT+IFEdG/iNeZ1P4+kVxI/PYH9J2iAkc/sjrIUIZn61kVzwUwa3wZq0P/CrO8+OZtEgfonREU1AsPfNMmKue4nSLE=
-X-Received: by 2002:a05:6a20:c888:b0:1cf:4102:9762 with SMTP id
- adf61e73a8af0-1cf76244cbemr22438142637.42.1726573305893; Tue, 17 Sep 2024
- 04:41:45 -0700 (PDT)
+ AJvYcCVSuCRUBsMDszBCB9/QVbW8bpDXhWEvXF1chg+PujuK6QJNHoClGi2VfNrmpiPF5AfTfhe9QQE=@lists.denx.de
+X-Gm-Message-State: AOJu0YxCEeITZ6pg3zbK1gkeQx2aJMUDfphrY9etVvGWDEa2BPI4UMjw
+ FF4DN0R8TIg7UyUmxPYoFGQpm/arq70z9wwH3+9rCR2G5u2O/HiS10KtKixj721X9XAx+5rS/2Z
+ oKyE5gNRTh45+FeBpZp7qPfEAImw+kkNqQu5x3A==
+X-Google-Smtp-Source: AGHT+IE66TagtR5Wt9ONWdRlP13s1pzknfdHHEyukno83Y3rg9oDMuy4/iJbJ738AAm3CDIrM1OdMFKYTCCX0CfWlx0=
+X-Received: by 2002:a05:6402:2546:b0:5c4:a6f:9be7 with SMTP id
+ 4fb4d7f45d1cf-5c41e18dcb3mr12022510a12.8.1726573645492; Tue, 17 Sep 2024
+ 04:47:25 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240917090218.77246-1-ilias.apalodimas@linaro.org>
  <CADg8p968=pmYLm-b+Q+zJhjXJRguyyH-XazPo5pH_hxY8Kbijg@mail.gmail.com>
-In-Reply-To: <CADg8p968=pmYLm-b+Q+zJhjXJRguyyH-XazPo5pH_hxY8Kbijg@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 17 Sep 2024 14:41:09 +0300
-Message-ID: <CAC_iWjLzxVovnqqv8M6EU2ct+BAK6KD0y9g=Y6K9Y9J9NqZcKw@mail.gmail.com>
+ <CAC_iWjLzxVovnqqv8M6EU2ct+BAK6KD0y9g=Y6K9Y9J9NqZcKw@mail.gmail.com>
+In-Reply-To: <CAC_iWjLzxVovnqqv8M6EU2ct+BAK6KD0y9g=Y6K9Y9J9NqZcKw@mail.gmail.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Tue, 17 Sep 2024 17:17:14 +0530
+Message-ID: <CADg8p94CRQ30_jxJfFFB2X9CUwMkMnDkmbNRUtd=LdztnHo7oA@mail.gmail.com>
 Subject: Re: [PATCH] efi_loader: Don't allocate from Special purpose memory
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: xypron.glpk@gmx.de, Tom Rini <trini@konsulko.com>,
  Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -91,77 +92,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 17 Sept 2024 at 13:05, Sughosh Ganu <sughosh.ganu@linaro.org> wrote=
-:
+On Tue, 17 Sept 2024 at 17:11, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> On Tue, 17 Sept 2024 at 14:32, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
+> On Tue, 17 Sept 2024 at 13:05, Sughosh Ganu <sughosh.ganu@linaro.org> wro=
+te:
 > >
-> > The EFI spec defines special-purpose memory in =C2=A77.2. That memory
-> > serves as a hint to the OS to avoid allocating this memory for core
-> > OS data or code that can not be relocated. So let's ignore it when
-> > allocating from conventional memory.
+> > On Tue, 17 Sept 2024 at 14:32, Ilias Apalodimas
+> > <ilias.apalodimas@linaro.org> wrote:
+> > >
+> > > The EFI spec defines special-purpose memory in =C2=A77.2. That memory
+> > > serves as a hint to the OS to avoid allocating this memory for core
+> > > OS data or code that can not be relocated. So let's ignore it when
+> > > allocating from conventional memory.
+> > >
+> > > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > > ---
 > >
-> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > ---
+> > Can we rebase this patch on top of the LMB/EFI series patches that are
+> > currently under review. I believe if we consider the direction that
+> > the EFI allocation functionality is going to take, that of relying on
+> > LMB for allocating conventional memory, we will have to take a
+> > different route to this problem, whereby 1) the LMB module needs to be
+> > intimated that the region of memory is reserved so that it does not
+> > get allocated by LMB and 2) then adding this region of memory as
+> > special-purpose in the EFI memory map.
 >
-> Can we rebase this patch on top of the LMB/EFI series patches that are
-> currently under review. I believe if we consider the direction that
-> the EFI allocation functionality is going to take, that of relying on
-> LMB for allocating conventional memory, we will have to take a
-> different route to this problem, whereby 1) the LMB module needs to be
-> intimated that the region of memory is reserved so that it does not
-> get allocated by LMB and 2) then adding this region of memory as
-> special-purpose in the EFI memory map.
+> So, the problem here is LMB (outside EFI) trying to allocate a piece
+> of memory right?
 
-So, the problem here is LMB (outside EFI) trying to allocate a piece
-of memory right? Because the EFI subsystem should do this check an
-exit before it allocates memory.
-I don't mind waiting, since I discovered the problem while working on
-a patch series for persistent memory. I can send it then.
-The EFI memory attributes can change at any point in time. So we will
-need to augment the notification to the LMB subsystem that marks that
-memory as reserved for LMB whenever memory attributes change.
+Yes. Since there could be a request to the LMB module to allocate
+memory, and the memory region that gets allocated could be the
+special-purpose memory.
 
-Thanks
-/Ilias
+>  Because the EFI subsystem should do this check an
+> exit before it allocates memory.
+> I don't mind waiting, since I discovered the problem while working on
+> a patch series for persistent memory. I can send it then.
+> The EFI memory attributes can change at any point in time. So we will
+> need to augment the notification to the LMB subsystem that marks that
+> memory as reserved for LMB whenever memory attributes change.
 
+Yes, we can see if the lmb_reserve_flags() API can be a good fit for
+this purpose. But it will be good to base this on top of the EFI
+series that I have posted. Thanks.
+
+-sughosh
 
 >
-> -sughosh
+> Thanks
+> /Ilias
 >
 >
-> >  lib/efi_loader/efi_memory.c | 6 +++++-
-> >  1 file changed, 5 insertions(+), 1 deletion(-)
 > >
-> > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> > index c6f1dd09456e..74732e37f8aa 100644
-> > --- a/lib/efi_loader/efi_memory.c
-> > +++ b/lib/efi_loader/efi_memory.c
-> > @@ -422,7 +422,8 @@ static efi_status_t efi_check_allocated(u64 addr, b=
-ool must_be_allocated)
+> > -sughosh
 > >
-> >                 if (addr >=3D start && addr < end) {
-> >                         if (must_be_allocated ^
-> > -                           (item->desc.type =3D=3D EFI_CONVENTIONAL_ME=
-MORY))
-> > +                           (item->desc.type =3D=3D EFI_CONVENTIONAL_ME=
-MORY) &&
-> > +                           !(item->desc.attribute & EFI_MEMORY_SP))
-> >                                 return EFI_SUCCESS;
-> >                         else
-> >                                 return EFI_NOT_FOUND;
-> > @@ -460,6 +461,9 @@ static uint64_t efi_find_free_memory(uint64_t len, =
-uint64_t max_addr)
-> >                 if (desc->type !=3D EFI_CONVENTIONAL_MEMORY)
-> >                         continue;
 > >
-> > +               if (desc->attribute & EFI_MEMORY_SP)
-> > +                       continue;
-> > +
-> >                 /* Out of bounds for max_addr */
-> >                 if ((ret + len) > max_addr)
-> >                         continue;
-> > --
-> > 2.45.2
-> >
+> > >  lib/efi_loader/efi_memory.c | 6 +++++-
+> > >  1 file changed, 5 insertions(+), 1 deletion(-)
+> > >
+> > > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.=
+c
+> > > index c6f1dd09456e..74732e37f8aa 100644
+> > > --- a/lib/efi_loader/efi_memory.c
+> > > +++ b/lib/efi_loader/efi_memory.c
+> > > @@ -422,7 +422,8 @@ static efi_status_t efi_check_allocated(u64 addr,=
+ bool must_be_allocated)
+> > >
+> > >                 if (addr >=3D start && addr < end) {
+> > >                         if (must_be_allocated ^
+> > > -                           (item->desc.type =3D=3D EFI_CONVENTIONAL_=
+MEMORY))
+> > > +                           (item->desc.type =3D=3D EFI_CONVENTIONAL_=
+MEMORY) &&
+> > > +                           !(item->desc.attribute & EFI_MEMORY_SP))
+> > >                                 return EFI_SUCCESS;
+> > >                         else
+> > >                                 return EFI_NOT_FOUND;
+> > > @@ -460,6 +461,9 @@ static uint64_t efi_find_free_memory(uint64_t len=
+, uint64_t max_addr)
+> > >                 if (desc->type !=3D EFI_CONVENTIONAL_MEMORY)
+> > >                         continue;
+> > >
+> > > +               if (desc->attribute & EFI_MEMORY_SP)
+> > > +                       continue;
+> > > +
+> > >                 /* Out of bounds for max_addr */
+> > >                 if ((ret + len) > max_addr)
+> > >                         continue;
+> > > --
+> > > 2.45.2
+> > >
