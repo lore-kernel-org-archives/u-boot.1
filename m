@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3752C3ABCB
-	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 00:19:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 860C2C3ABB2
+	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 00:20:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D32188C53;
-	Tue, 17 Sep 2024 02:19:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AEAAA88C7E;
+	Tue, 17 Sep 2024 02:20:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=broadcom.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="GuPA39Fe";
+	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="Hae4pbF3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7984188C53; Tue, 17 Sep 2024 02:19:53 +0200 (CEST)
-Received: from mail-vs1-xe32.google.com (mail-vs1-xe32.google.com
- [IPv6:2607:f8b0:4864:20::e32])
+ id A3E6488CBB; Tue, 17 Sep 2024 02:20:25 +0200 (CEST)
+Received: from mail-ua1-x931.google.com (mail-ua1-x931.google.com
+ [IPv6:2607:f8b0:4864:20::931])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1D7088C7B
- for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 02:19:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C00A88B88
+ for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 02:20:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=broadcom.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=william.zhang@broadcom.com
-Received: by mail-vs1-xe32.google.com with SMTP id
- ada2fe7eead31-49bd32f6a11so1529346137.1
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 17:19:49 -0700 (PDT)
+Received: by mail-ua1-x931.google.com with SMTP id
+ a1e0cc1a2514c-846c36009d5so1206702241.2
+ for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 17:20:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=broadcom.com; s=google; t=1726532388; x=1727137188; darn=lists.denx.de;
+ d=broadcom.com; s=google; t=1726532422; x=1727137222; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:thread-index:mime-version:in-reply-to
  :references:from:from:to:cc:subject:date:message-id:reply-to;
- bh=iXWsaLyvPYCFYscrxWFjmU3Xy5e9XTS0eRF6+mvSYOU=;
- b=GuPA39FeKOZFxlcYy1hjE/0YFqbnG1tOq2gdui18t7/9OdvbCG04jpnZvHEMOXJ4Oi
- ZLljs+Q/t3ul1u0R20caPRimRwEyvLBYrHNoTggm26vReQaa/mqCfgUw7sRg7JHeJUwv
- 8r7nQ6jEa1uzfwncUoqcij7y+LcfnMKAsRZ94=
+ bh=7di5tNKRPBYPpCerVisOYWWEdtoSxDrdhb2ZgZZSSvg=;
+ b=Hae4pbF3QvfWutpJV11o17X5LEVdx9uCtF4setKqHrfp1u2m8qWx0/ayfqNBJ6E7kw
+ ceKKfYLtWrBO3rcEunBzz7IcxR+dbUws5B+5ieyo2t3Nf+fSZUp3WNCBlguOS+8XAhkw
+ ZKCr2qcC00Ucz+e8Pw/N/VOLC5cZiep8BAX4o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726532388; x=1727137188;
+ d=1e100.net; s=20230601; t=1726532422; x=1727137222;
  h=cc:to:subject:message-id:date:thread-index:mime-version:in-reply-to
  :references:from:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iXWsaLyvPYCFYscrxWFjmU3Xy5e9XTS0eRF6+mvSYOU=;
- b=OxZgs+s4s18I7Y14AUcVhF3NbciU7dgm6pw/X66hj25/zA5tpYzrHCP7zov97FclMu
- HcpACDavfdGIiRridL/YHrWBnGq78izxeFQDG+TOrQmi9jOPPcjquLVLgB8b4esNXEC2
- UTfYfwxIXLD1oF3stZftov3LRmV4RYJzl18PLpPrOw6j7z1VccR1YjzTZ/aWaGvepYOu
- IS5WM54kkB9mQxdSfz305FdvkEBWCHTsnXDrtW+cWRPT5tPCgNw+eCB2httISCBDFLjw
- xboOZkQ+WNEYRjNJtTe0WLVv0NbVnVD2ddFzhFo0hS4mze5kBC3xUassI0+2ZgMPHxtj
- PgLQ==
-X-Gm-Message-State: AOJu0YztTI+zq0y/26d0J0xk8xJ5Iw3faItLx4V3IBd3U6+67PuId1Pd
- qvYtXTg5zJYTkrxVODhORO3C4HvwiZby8JAgeCVWzUh71AHbAtfIXix/hy2gdKXD3RJETFnlPoO
- wysxaazkymhCwpRj4yRwghZo2I1y7aI7yP/xm
-X-Google-Smtp-Source: AGHT+IFA4N+X7IstIpyTEfOQW7y0xeEBb7l25UuGlXRQyLGwCclgC0Sn/H0O7czPgqEccGGkVf0LAOVfeb8aJ0KgyX8=
-X-Received: by 2002:a05:6102:162b:b0:493:3cde:e46 with SMTP id
- ada2fe7eead31-49d414c13femr11301724137.13.1726532388612; Mon, 16 Sep 2024
- 17:19:48 -0700 (PDT)
+ bh=7di5tNKRPBYPpCerVisOYWWEdtoSxDrdhb2ZgZZSSvg=;
+ b=Bb+AOQF5wXalfMnv5/SbiERUl0IE+4629ai7YT0y6mMPSKo6IKg1nj658xjeE4p7+O
+ 1FR0juMUoVfCtaesdFLwG9F1PuBVJy5NUk6AX/wobAtN2VI7IOG8OcYDaqCnMHcz1B8w
+ PxJchly+Wl/Ghef6PfmPbM2GWOB5Fe9C3B1DuNummLjMd0uVdqlkorOibki9zjsvBxHQ
+ 0dKENiTU622ze07OYJYyLF9o6nUkv/dbY/pjJrjR1ICzvE3WYXFv2N+qcvC3JTQ2WCHM
+ Rys0uZoLB3x//DJqK4CYI2v/W/o+50BQp5SGOrqLEarbYs5pKp5HPW9FFJmhD7vu0vxH
+ iUCA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWqsiovEclELXWDm+ta69dQxIFeSULxQs5bYrSeBAgFHdAbUrn3rZmjWaM0Il4wmeVGXNzEQIM=@lists.denx.de
+X-Gm-Message-State: AOJu0YzsN2WU5nnkpD9XuCLq25YzDLSDWzrOZxXLuYMi4FSBhbEsvIxa
+ XOA8nT/pXNMhuhHABDKJ2zH9x4WvZx8RmpoOUqia5z9BlNT1amEILqrFU3jEWNbjhkeO0N6Y1UD
+ qXg/MqJ/RNXhlcNa1PMdZmwT0F2ipfeJOXNW8/zB13zGdEVI=
+X-Google-Smtp-Source: AGHT+IFFzT1+TP0qwD8+SAogui/6d001Uv023ri7syKpVqKsFnbsYXfAWO9PTgbt2a9a6hjCavsXpkyVhq5xY1A2g+M=
+X-Received: by 2002:a05:6102:1627:b0:493:b3d8:bd8d with SMTP id
+ ada2fe7eead31-49d415b9425mr12342392137.26.1726532421927; Mon, 16 Sep 2024
+ 17:20:21 -0700 (PDT)
 From: William Zhang <william.zhang@broadcom.com>
-References: <20240911-brcmnand-fixes-v1-0-be112a20aaf1@linaro.org>
- <d27e92a5ccecc302a1b2ca7ff55b8c3b@mail.gmail.com>
- <CACRpkdYxecZsgoUipPR8DgcNPKp-3o-h=Qseq71W8vceV4eXsQ@mail.gmail.com>
- <4aa2c921dddb69a5a4964d5446f37695@mail.gmail.com>
- <CACRpkdYBFAhNaMVSQDCiMsVpBA3tZOu7nJd2kaTSPHKX8bTTbw@mail.gmail.com>
-In-Reply-To: <CACRpkdYBFAhNaMVSQDCiMsVpBA3tZOu7nJd2kaTSPHKX8bTTbw@mail.gmail.com>
+References: <20240916-brcmnand-fixes-v2-0-08632f64c8ec@linaro.org>
+ <20240916-brcmnand-fixes-v2-2-08632f64c8ec@linaro.org>
+In-Reply-To: <20240916-brcmnand-fixes-v2-2-08632f64c8ec@linaro.org>
 MIME-Version: 1.0
 X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQGk0aZcPU5All9ASVJP8xH8NxMfIgIV6CG1AbRf1OABWIr3qQJ8jHrysoqOfuA=
-Date: Mon, 16 Sep 2024 17:19:47 -0700
-Message-ID: <bdbc43d3c66eb3c7bbf45ab95294ddf1@mail.gmail.com>
-Subject: RE: [PATCH 0/7] mtd: nand: brcmnand: Backported fixes from Linux
-To: Linus Walleij <linus.walleij@linaro.org>
-Cc: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+Thread-Index: AQES+R/HTbMR/ti/GhYZxlIU8W7clgHnfWX/s9wAgzA=
+Date: Mon, 16 Sep 2024 17:20:20 -0700
+Message-ID: <6baede77753d570d539f9995d960955c@mail.gmail.com>
+Subject: RE: [PATCH v2 2/7] mtd: rawnand: brcmnand: Fix potential false time
+ out warning
+To: Linus Walleij <linus.walleij@linaro.org>, u-boot@lists.denx.de, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
  Michael Trimarchi <michael@amarulasolutions.com>,
  Anand Gore <anand.gore@broadcom.com>, 
  Kursad Oney <kursad.oney@broadcom.com>,
- Philippe Reynes <philippe.reynes@softathome.com>, 
- Florian Fainelli <florian.fainelli@broadcom.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Kamal Dasu <kamal.dasu@broadcom.com>, David Regan <dregan@broadcom.com>
+ Philippe Reynes <philippe.reynes@softathome.com>
+Cc: Florian Fainelli <florian.fainelli@broadcom.com>, 
+ Miquel Raynal <miquel.raynal@bootlin.com>
 Content-Type: multipart/signed; protocol="application/pkcs7-signature";
- micalg=sha-256; boundary="000000000000bbc0a1062245a55b"
+ micalg=sha-256; boundary="000000000000b7c693062245a72b"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,61 +95,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---000000000000bbc0a1062245a55b
+--000000000000b7c693062245a72b
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
 > -----Original Message-----
 > From: Linus Walleij <linus.walleij@linaro.org>
-> Sent: Monday, September 16, 2024 2:23 AM
-> To: William Zhang <william.zhang@broadcom.com>
-> Cc: u-boot@lists.denx.de; Dario Binacchi
+> Sent: Monday, September 16, 2024 2:59 AM
+> To: u-boot@lists.denx.de; Dario Binacchi
 > <dario.binacchi@amarulasolutions.com>; Michael Trimarchi
 > <michael@amarulasolutions.com>; Anand Gore
-> <anand.gore@broadcom.com>; Kursad Oney
+> <anand.gore@broadcom.com>; William Zhang
+> <william.zhang@broadcom.com>; Kursad Oney
 > <kursad.oney@broadcom.com>; Philippe Reynes
-> <philippe.reynes@softathome.com>; Florian Fainelli
+> <philippe.reynes@softathome.com>
+> Cc: Linus Walleij <linus.walleij@linaro.org>; Florian Fainelli
 > <florian.fainelli@broadcom.com>; Miquel Raynal
-> <miquel.raynal@bootlin.com>; Kamal Dasu <kamal.dasu@broadcom.com>;
-> David Regan <dregan@broadcom.com>
-> Subject: Re: [PATCH 0/7] mtd: nand: brcmnand: Backported fixes from
-> Linux
+> <miquel.raynal@bootlin.com>
+> Subject: [PATCH v2 2/7] mtd: rawnand: brcmnand: Fix potential false time
+> out warning
 >
-> On Mon, Sep 16, 2024 at 6:45=E2=80=AFAM William Zhang
-> <william.zhang@broadcom.com> wrote:
+> From: William Zhang <william.zhang@broadcom.com>
 >
-> > Yes we have it working.  And your patches works too after fixing two
-> > Issues that I will comment on the specific patch.
+> Backport from the Linux kernel:
+> commit 9cc0a598b944816f2968baf2631757f22721b996
+> "mtd: rawnand: brcmnand: Fix potential false time out warning"
 >
-> Yay!
+> If system is busy during the command status polling function, the driver
+> may not get the chance to poll the status register till the end of time
+> out and return the premature status.  Do a final check after time out
+> happens to ensure reading the correct status.
 >
-> >  You will need to
-> > enable the  NAND related configurations and the nand dts node.
+> Signed-off-by: William Zhang <william.zhang@broadcom.com>
+> Reviewed-by: Florian Fainelli <florian.fainelli@broadcom.com>
+> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+> Link: https://lore.kernel.org/linux-mtd/20230706182909.79151-3-
+> william.zhang@broadcom.com
+> Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
+> ---
+>  drivers/mtd/nand/raw/brcmnand/brcmnand.c | 8 ++++++++
+>  1 file changed, 8 insertions(+)
 >
-> Aha maybe I simply missed the DTS node...
+> diff --git a/drivers/mtd/nand/raw/brcmnand/brcmnand.c
+> b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
+> index 700d1122639f..46a4107a83a9 100644
+> --- a/drivers/mtd/nand/raw/brcmnand/brcmnand.c
+> +++ b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
+> @@ -1011,6 +1011,14 @@ static int bcmnand_ctrl_poll_status(struct
+> brcmnand_controller *ctrl,
+>  	} while (get_timer(base) < limit);
+>  #endif /* __UBOOT__ */
 >
-> > You can use existing dts node to set the specific ecc level, oob size
-> > and
-> > ecc step size.  Or use the new automatically detection from the strap
-> > property brcm,nand-ecc-use-strap that I upstreamed to linux.
+> +	/*
+> +	 * do a final check after time out in case the CPU was busy and the
+> driver
+> +	 * did not get enough time to perform the polling to avoid false
+> alarms
+> +	 */
+> +	val = brcmnand_read_reg(ctrl, BRCMNAND_INTFC_STATUS);
+> +	if ((val & mask) == expected_val)
+> +		return 0;
+> +
+>  	dev_warn(ctrl->dev, "timeout on status poll (expected %x got %x)\n",
+>  		 expected_val, val & mask);
 >
-> I was planning to used the strap, which is ... what we should have been
-> doing all the time. Oh well, no turning back time I guess. Maybe we
-> can fix a lot of DTS:es to use the strap though?
 >
-Yes we will upstream the dts including the binding document and other
-related patches.   Your series can go in first.
+> --
+> 2.46.0
 
-> > What SoC do you use?
->
-> This is on BCM6846.
->
-6846 will work.  Let me know if it still does not work after dts fix.
+Reviewed-by: William Zhang <william.zhang@broadcom.com>
 
-> Thanks William!
-> Linus
-
---000000000000bbc0a1062245a55b
+--000000000000b7c693062245a72b
 Content-Type: application/pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -221,13 +235,13 @@ VhYAxZlzj7tSjUIM7G7IhyfqPC46GKJ/4x+Amz1Z6YxNGy71L68kYD6hIbBcA5AM42QBUufly6Oa
 urb/KlmDGfVrIRYDbL0ckhGQIP5c6L+kSQZ2sHnQK0e0WgIaZYxaPYeY5u0GLCOze+3vyRMxggJt
 MIICaQIBATBrMFsxCzAJBgNVBAYTAkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52LXNhMTEwLwYD
 VQQDEyhHbG9iYWxTaWduIEdDQyBSMyBQZXJzb25hbFNpZ24gMiBDQSAyMDIwAgwxuh2XG3FXRL1W
-JOEwDQYJYIZIAWUDBAIBBQCggdQwLwYJKoZIhvcNAQkEMSIEIHoTyJ+7JqsM3mOyMyVMAD95NEus
-DuIR6KFP3Wrg5rIGMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTI0
-MDkxNzAwMTk0OFowaQYJKoZIhvcNAQkPMVwwWjALBglghkgBZQMEASowCwYJYIZIAWUDBAEWMAsG
+JOEwDQYJYIZIAWUDBAIBBQCggdQwLwYJKoZIhvcNAQkEMSIEIEtXDPimmdoz0xifHYHkq0L2F2Ts
+LshseIgnPonw3xfNMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTI0
+MDkxNzAwMjAyMlowaQYJKoZIhvcNAQkPMVwwWjALBglghkgBZQMEASowCwYJYIZIAWUDBAEWMAsG
 CWCGSAFlAwQBAjAKBggqhkiG9w0DBzALBgkqhkiG9w0BAQowCwYJKoZIhvcNAQEHMAsGCWCGSAFl
-AwQCATANBgkqhkiG9w0BAQEFAASCAQAjc+GLjNr3DyMke5C3k4faX8Hj5v3sBsNoyXrX+ryOioq6
-S50IuB/kSPk21xHuxWUOby/OT/LpcQcKWnglK2DXHnL3k593Kw9/L8Iid9aHDCCg9aF3qMEAhd6U
-SmFBq05K3Do3/Ci5rcgySO5K7JZmPKXBmzxrfpGjfGh3Hb6HQWR6yMEjsM862ZgkEal2eS4gGe4I
-BT+W5ZqfYwS4BW7q1GCFsxMi1kY5cpb5I2E0MVjVEbTG3TNgl6I2XgjVOFCB1C6DAtaqnCrjVNxB
-bO2HuZ4DNNQo4Vd61NfcD1x1WkXX/dGStnkMSjdeWXZYEN/7sO5D2zKV/le9fiYOxG14
---000000000000bbc0a1062245a55b--
+AwQCATANBgkqhkiG9w0BAQEFAASCAQC/I6pazNJTeYYZR9iw5AU1Bp0VWFRN4dcY1fC6vuy5tf3h
+3AMyg7uAuRowEi0/kcVKI/VvoQgv9XFjri0/kKQ82pO6MDq9KFam2fbCBPfY/ZyEzHW7qNjcWmgs
+Y5p5jbueDl040nrH+hQOTBPu6PsCGYxYeynA4P6CTQwh9pUm53KU44/BK1J92EeC62WoSxu9hxIw
+yAY60cJlBPebyAvsx9OLA4AnqbAnX5j3AiGJ9On2YtZdYrfC7rs9aYKSJCfWABYYnRJiBCsqqD9z
+qdC/5vujrKNjy7amKGAq1WBHoA2E+BQ/CW4DBWazr8SLMLz3WAovHo+Lt4zzfmzrP7Y9
+--000000000000b7c693062245a72b--
