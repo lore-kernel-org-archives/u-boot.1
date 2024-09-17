@@ -4,79 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8979DC35FE4
-	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 06:38:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E090EC35FF1
+	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 08:08:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 995E188D22;
-	Tue, 17 Sep 2024 08:38:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0462E88CDC;
+	Tue, 17 Sep 2024 10:08:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="w34pGwnU";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="r+x5rPuo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65E3188D0F; Tue, 17 Sep 2024 08:38:36 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7EE2E88D0F; Tue, 17 Sep 2024 10:08:21 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4AF4188AB9
- for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 08:38:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C5BBB881E7
+ for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 10:08:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a8a6d1766a7so674168266b.3
- for <u-boot@lists.denx.de>; Mon, 16 Sep 2024 23:38:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726555104; x=1727159904; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=WglgPxMz0sewTIEvNBe3SKrgg8sx/M9l8y9pgko2QkU=;
- b=w34pGwnUdNp2el2QTZXqVafbyl/9RTu5lgc07mB3TX3dyw8Mk5ROG6eX5bdIxoxi0z
- WD8l+78iDl9BWynEkYcGb0k8JknnOZwARdr6vUwm4d6KczZVEzrCMdDNMkjCy0EEMr8M
- 0FvDJf98NNocMtgXfwkmvIdJcL//tKoN3z82FzkXPDtZHAyzdWODyBSORC/TdVyyLmKa
- pC/EnsBOD83f9q18tF/cLjzv7hFpjhjKlV5mzEiC+YjIdFqQ87mfYLDPyQVDFRtDw5Kk
- KUg+fTv4FFw2ztklR7u1yGVdQwHFybioh3ztVnr6P8/tvt+mN8A0mn5Lhl6inHZouP1A
- f7sg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726555104; x=1727159904;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WglgPxMz0sewTIEvNBe3SKrgg8sx/M9l8y9pgko2QkU=;
- b=EdR2lRKc/pRRQ35OpbjKPJjzWa4eYcKiz6nmpq9Xqi6lFVKzJ27OGvY4P8LrQTF8LN
- /lRNXgD7BtnnskDyCTcej88Um1vXZuJzJwVej2aqZbTK0/g0vppDYNHn0anLd6/O4WWC
- rJa6bWEMVF96EtvD7XqmY/NMynhb0EN04ZS+fGAKUjjoxGgzOZHbvKcZdU9r7QUlTwtY
- amjZfgjJIIFFz9G8msnKoeLfZNc626wx2SPIx+7cTPDKGemuiqPWVPuDGdnhRD/nK473
- yuDJo2ikUo+AOYckwKS3Vc13W0XS/lp2IchpT+tl+ZwIUTRi9SfEtmq8VsNegQx7xTrL
- +2Gw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUMNGJqCXtRtof9Vpnetn6YFRsDlxFs34tgWIqa7CT6jbEwHSMhfiwAvCq38R6LaRUmJkZ+CRU=@lists.denx.de
-X-Gm-Message-State: AOJu0YxFuhxumBWEzgzFZpvxWRlMNDCd2azP9PXQbcQxMg8HSD/iqGO6
- Q9H+O0+Imcl+iHQ+6P5J2P1/CZpZWyx2NadslNp9J3UEP68Kc6gtSwwN/QhFQkU=
-X-Google-Smtp-Source: AGHT+IHkCuAcfvwyq7iicpvldyneU5hngXsvyHgs/IPfoh/eqSeU0lCFN0ov7okyC67VQsILfhMCZQ==
-X-Received: by 2002:a17:907:60d5:b0:a8a:cc5a:7f3c with SMTP id
- a640c23a62f3a-a90296715f7mr1739081866b.58.1726555103825; 
- Mon, 16 Sep 2024 23:38:23 -0700 (PDT)
-Received: from hera (ppp176092143132.access.hol.gr. [176.92.143.132])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a90612df770sm409687466b.145.2024.09.16.23.38.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Sep 2024 23:38:12 -0700 (PDT)
-Date: Tue, 17 Sep 2024 09:38:02 +0300
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 1/1] efi_leader: delete rng-seed if having EFI RNG
- protocol
-Message-ID: <ZukjyhHgzQB3SCvf@hera>
-References: <20240914160812.43632-1-heinrich.schuchardt@canonical.com>
+ spf=pass smtp.mailfrom=vaishnav.a@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 48H88E98073648;
+ Tue, 17 Sep 2024 03:08:14 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1726560494;
+ bh=H9KI+XbIOVQ5EW16uCZkiKT6aZle1yJEeUCPDToumqg=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=r+x5rPuorcsxg1CWk0dpes1Ca54B63MbU8mPDzFQ77OmFUftr7P/jSu5biVHdS24F
+ grW2Lj/DQr2rwCprucyGMcnLmKKU9vC0Ao/JM27uR0cA5sXcHTtL/UZLfgnf+NqVIS
+ odkjbHcKDY6uyRX2qqLc2bDO4ceMKcZKKOw4nfQI=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 48H88EZK105239;
+ Tue, 17 Sep 2024 03:08:14 -0500
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 17
+ Sep 2024 03:08:14 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 17 Sep 2024 03:08:14 -0500
+Received: from [10.24.69.142] ([10.24.69.142])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 48H88BfP087258;
+ Tue, 17 Sep 2024 03:08:12 -0500
+Message-ID: <a5e8da60-7980-4a99-b0eb-b67fe45edc20@ti.com>
+Date: Tue, 17 Sep 2024 13:38:11 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240914160812.43632-1-heinrich.schuchardt@canonical.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] wget: rework the logic to validate the load address
+To: Sughosh Ganu <sughosh.ganu@linaro.org>, <u-boot@lists.denx.de>
+CC: Tom Rini <trini@konsulko.com>, Ramon Fried <rfried.dev@gmail.com>, Joe
+ Hershberger <joe.hershberger@ni.com>
+References: <20240916152025.75789-1-sughosh.ganu@linaro.org>
+ <20240916152025.75789-3-sughosh.ganu@linaro.org>
+Content-Language: en-US
+From: Vaishnav Achath <vaishnav.a@ti.com>
+In-Reply-To: <20240916152025.75789-3-sughosh.ganu@linaro.org>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,104 +81,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
 
-On Sat, Sep 14, 2024 at 06:08:12PM +0200, Heinrich Schuchardt wrote:
-> For measured be boot we must avoid any volatile values in the device-tree.
-> We already delete /chosen/kaslr-seed if we provide and EFI RNG protocol.
->
-> Additionally remove /chosen/rng-seed provided by QEMU or U-Boot.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+
+On 16/09/24 20:50, Sughosh Ganu wrote:
+> Use the lmb_read_check() function to verify if it is safe to use a
+> region of memory to load data from the wget command. The current logic
+> checks the amount of free memory available, starting from the 'load
+> address'. This call fails if the same region of memory has been used
+> earlier. This used to work earlier as the LMB memory map had a local
+> scope and was not persistent. Fix this issue by using the
+> lmb_read_check() call instead which only returns an error in case the
+> memory region has been marked for not allowing re-use.
+> 
+> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > ---
-> v2:
-> 	put log_debug() in else branch
-> ---
->  include/efi_loader.h          |  2 +-
->  lib/efi_loader/efi_dt_fixup.c | 16 +++++++++++-----
->  lib/efi_loader/efi_helper.c   |  2 +-
->  3 files changed, 13 insertions(+), 7 deletions(-)
->
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index f84852e384f..511281e150e 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -567,7 +567,7 @@ efi_status_t EFIAPI efi_convert_pointer(efi_uintn_t debug_disposition,
->  /* Carve out DT reserved memory ranges */
->  void efi_carve_out_dt_rsv(void *fdt);
->  /* Purge unused kaslr-seed */
-> -void efi_try_purge_kaslr_seed(void *fdt);
-> +void efi_try_purge_rng_seed(void *fdt);
->  /* Called by bootefi to make console interface available */
->  efi_status_t efi_console_register(void);
->  /* Called by efi_init_obj_list() to proble all block devices */
-> diff --git a/lib/efi_loader/efi_dt_fixup.c b/lib/efi_loader/efi_dt_fixup.c
-> index 9d017804eea..b97758d1305 100644
-> --- a/lib/efi_loader/efi_dt_fixup.c
-> +++ b/lib/efi_loader/efi_dt_fixup.c
-> @@ -41,7 +41,7 @@ static void efi_reserve_memory(u64 addr, u64 size, bool nomap)
->  }
->
->  /**
-> - * efi_try_purge_kaslr_seed() - Remove unused kaslr-seed
-> + * efi_try_purge_rng_seed() - Remove unused kaslr-seed, rng-seed
->   *
->   * Kernel's EFI STUB only relies on EFI_RNG_PROTOCOL for randomization
->   * and completely ignores the kaslr-seed for its own randomness needs
-> @@ -51,8 +51,9 @@ static void efi_reserve_memory(u64 addr, u64 size, bool nomap)
->   *
->   * @fdt: Pointer to device tree
->   */
-> -void efi_try_purge_kaslr_seed(void *fdt)
-> +void efi_try_purge_rng_seed(void *fdt)
->  {
-> +	const char * const prop[] = {"kaslr-seed", "rng-seed"};
->  	const efi_guid_t efi_guid_rng_protocol = EFI_RNG_PROTOCOL_GUID;
->  	struct efi_handler *handler;
->  	efi_status_t ret;
-> @@ -67,9 +68,14 @@ void efi_try_purge_kaslr_seed(void *fdt)
->  	if (nodeoff < 0)
->  		return;
->
-> -	err = fdt_delprop(fdt, nodeoff, "kaslr-seed");
-> -	if (err < 0 && err != -FDT_ERR_NOTFOUND)
-> -		log_err("Error deleting kaslr-seed\n");
-> +	for (const char * const *pos = prop; pos < &prop[ARRAY_SIZE(prop)];
+> 
+> Note: To be applied on next, on top of
+> https://patchwork.ozlabs.org/project/uboot/patch/20240913073251.2286529-2-prasad.kummari@amd.com/
+> 
 
-I think
-for (int i = 0; i < ARRAY_SIZE(prop); i++)
-    fdt_delprop(fdt, nodeoff, prop[i]);
+Tested-by: Vaishnav Achath <vaishnav.a@ti.com>
 
-is a lot easier to read
-
-Other than that, the patch looks fine
-
-Thanks
-/Ilias
-
-> +	     ++pos) {
-> +		err = fdt_delprop(fdt, nodeoff, *pos);
-> +		if (err < 0 && err != -FDT_ERR_NOTFOUND)
-> +			log_err("Error deleting %s\n", *pos);
-> +		else
-> +			log_debug("Deleted /chosen/%s\n", *pos);
-> +	}
->  }
->
->  /**
-> diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
-> index 96f847652ec..a481eb4b7e3 100644
-> --- a/lib/efi_loader/efi_helper.c
-> +++ b/lib/efi_loader/efi_helper.c
-> @@ -522,7 +522,7 @@ efi_status_t efi_install_fdt(void *fdt)
->  	/* Create memory reservations as indicated by the device tree */
->  	efi_carve_out_dt_rsv(fdt);
->
-> -	efi_try_purge_kaslr_seed(fdt);
-> +	efi_try_purge_rng_seed(fdt);
->
->  	if (CONFIG_IS_ENABLED(EFI_TCG2_PROTOCOL_MEASURE_DTB)) {
->  		ret = efi_tcg2_measure_dtb(fdt);
-> --
-> 2.45.2
->
+>   net/wget.c | 36 +-----------------------------------
+>   1 file changed, 1 insertion(+), 35 deletions(-)
+> 
+> diff --git a/net/wget.c b/net/wget.c
+> index 4a168641c6..a88c31f236 100644
+> --- a/net/wget.c
+> +++ b/net/wget.c
+> @@ -64,26 +64,6 @@ static unsigned int retry_tcp_ack_num;	/* TCP retry acknowledge number*/
+>   static unsigned int retry_tcp_seq_num;	/* TCP retry sequence number */
+>   static int retry_len;			/* TCP retry length */
+>   
+> -static ulong wget_load_size;
+> -
+> -/**
+> - * wget_init_max_size() - initialize maximum load size
+> - *
+> - * Return:	0 if success, -1 if fails
+> - */
+> -static int wget_init_load_size(void)
+> -{
+> -	phys_size_t max_size;
+> -
+> -	max_size = lmb_get_free_size(image_load_addr);
+> -	if (!max_size)
+> -		return -1;
+> -
+> -	wget_load_size = max_size;
+> -
+> -	return 0;
+> -}
+> -
+>   /**
+>    * store_block() - store block in memory
+>    * @src: source of data
+> @@ -97,13 +77,8 @@ static inline int store_block(uchar *src, unsigned int offset, unsigned int len)
+>   	uchar *ptr;
+>   
+>   	if (CONFIG_IS_ENABLED(LMB)) {
+> -		ulong end_addr = image_load_addr + wget_load_size;
+> -
+> -		if (!end_addr)
+> -			end_addr = ULONG_MAX;
+> -
+>   		if (store_addr < image_load_addr ||
+> -		    store_addr + len > end_addr) {
+> +		    lmb_read_check(store_addr, len)) {
+>   			printf("\nwget error: ");
+>   			printf("trying to overwrite reserved memory...\n");
+>   			return -1;
+> @@ -493,15 +468,6 @@ void wget_start(void)
+>   	debug_cond(DEBUG_WGET,
+>   		   "\nwget:Load address: 0x%lx\nLoading: *\b", image_load_addr);
+>   
+> -	if (CONFIG_IS_ENABLED(LMB)) {
+> -		if (wget_init_load_size()) {
+> -			printf("\nwget error: ");
+> -			printf("trying to overwrite reserved memory...\n");
+> -			net_set_state(NETLOOP_FAIL);
+> -			return;
+> -		}
+> -	}
+> -
+>   	net_set_timeout_handler(wget_timeout, wget_timeout_handler);
+>   	tcp_set_tcp_handler(wget_handler);
+>   
