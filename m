@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1087DC35FFF
-	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 13:41:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FE56C3601E
+	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 13:56:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7622488E6F;
-	Tue, 17 Sep 2024 15:41:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0F75A88E56;
+	Tue, 17 Sep 2024 15:56:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DYuNbAIh";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EsvHB/5q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 612C288E64; Tue, 17 Sep 2024 15:41:41 +0200 (CEST)
-Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
- [IPv6:2607:f8b0:4864:20::22f])
+ id 1A93888BEF; Tue, 17 Sep 2024 15:56:03 +0200 (CEST)
+Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
+ [IPv6:2607:f8b0:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D3BD88D45
- for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 15:41:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ACEAC879C1
+ for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 15:56:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-oi1-x22f.google.com with SMTP id
- 5614622812f47-3e03d17365bso3121971b6e.1
- for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 06:41:39 -0700 (PDT)
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-71790ed8c2dso5109143b3a.3
+ for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 06:56:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1726580498; x=1727185298; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1726581359; x=1727186159; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=5Y5VFqgiqt7n86HTupL9lLFwqcP/3u2+duxmVG7OrBc=;
- b=DYuNbAIhFxEZ7ZTXK7/kpmiWy0BACqUKmA/llnG/JhkxUusQifATOagFZoWkGXas7r
- hjaY8QQQHPotUXf8fGAMG44N+BnLBa0n8w/V9g15YHGkAFv6CJ0wSsVKwB3wGqU7elbp
- 0p9jmqVlcDHTci8wUweuf9+8b4FSBQfhZ4MLVaVJqnfmcat3LE/MuK2GNm56wcxMsJ+m
- U9lkqxCu4tarWgZa4HpN8f23MfDnhpmApml+EgImCEmFr4eb0ZZhf68gd3Szy949fX0d
- dyBdl+ZoGniJFPQ3GyLAqtJgjZhnnk4j7MuLoT1NGQntFR+EDSc6tqapDrHAjFSUXXzH
- 8wAw==
+ bh=/dRkwbUGcWeupcI9oDXNMJ1ooJvn3g9S6dgJo+eO4Q0=;
+ b=EsvHB/5qtpod7dXcVmgmQQ0HI4Gf0/VW6g/YC2H7oIzp5xSmW/EB6DK1A3q+Oyco7R
+ Df8nh9aLVYKb3l+0pP25zGOWO18bWGwym3GXLulO0svJvB3Nc1PHemetA737P+oUL3T4
+ DCI80Q1TWoD/QqefktYG/pHJZfi1XvXdw4empmw/6nspIecLWQjcFS8X1VY8AB/WIqFV
+ /aQAsi5cmLCywlrtqFcTgau/DInWRMifSN+hwpOxI3udXSJlHWFkizadM1CvU+H+nTCV
+ VXsxjD5jfXX8wnybnjy+/O/I7x4JgH7peFbneoXwbP9sB9/hM2V/v9GVMyX45oVZopJK
+ +BkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726580498; x=1727185298;
+ d=1e100.net; s=20230601; t=1726581359; x=1727186159;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=5Y5VFqgiqt7n86HTupL9lLFwqcP/3u2+duxmVG7OrBc=;
- b=HdZ8flF67U2AsdjRk6Ez/MJUgddYpXtF0nXcOwnoSs6O/DQddFXJ09jo1ffh6qmKgs
- 0ci7XaDUyWz4vWL8/HSkAgkoYSB+WPoifQrHt1X6WoTPZJ0/Dsmu22eylNlNkwAwKDuk
- WaiZtwl6JHoUZBgqIjME6siY5FIbg/UUw7oHqmC6YTUOErHN9+ds3jZBri/tPtvOOh5c
- tP0/2oqJdFpcJ+G2pRgLkcxyTl60cs3brO6wEvnY3CkOeWxY18xa4ui/rJv7mxY86tyc
- RB1ZSJ/K3eP33lYmpTPHSi8zmNAllj3qZzFe9hqdvBnbFPinvvmc+jq7biCFj3quqgif
- GO+Q==
+ bh=/dRkwbUGcWeupcI9oDXNMJ1ooJvn3g9S6dgJo+eO4Q0=;
+ b=bHttYMWVFBtJ+5lkV91HLb9a1yXUuLrhayJ8T9NwGCdgg9DEIvMSHJSt75QLf4SELx
+ EvCHX8RRepXbbAq3MjoSsqyWilTAUeQ03ZTjqYtViTCah93G9Ez+hcvJ2dHiAHFjUzD8
+ 8mfvwmjUNqMD8XxCXY1PU5sUNJi5PE+HbKRuRPcMHGs40GXBD4zGNZcHyALjKRZH3vs2
+ /JoeRWZ2BhdaiXEiTiyPzva8+ATVEWulb2zyhkdZGTgp8A7FznqpaYxrwIejxr525OBj
+ WBNSDINuP5K5+HGXknCa9VSKHvVl7DgxX0SJMH7dPNUJlNSbDSl0z+U3oGaoXPFWlnw0
+ c30A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV5HxoE6hKn2uztW2sfc3LeqMNSNih8HBg38pq19eqljJfuu0qxdl22AU1j4fnwNex9sYp5jz4=@lists.denx.de
-X-Gm-Message-State: AOJu0YwerSdZCquDFn5MKGwSPFdBoAfAHSt4glGKGH5Z+IiDVGPqrJwH
- 809A/rHBWlPmxNqMoRx2ei7JeggxvTpgu8L5imCw6XB26pvFPekLXAdM7Q==
-X-Google-Smtp-Source: AGHT+IGKdGVzUYZDUdjAOrk22056sif2MG2QTkxbZiAdHxcbceMm/rku/4SKd9+7gHMArJvOQPurbQ==
-X-Received: by 2002:a05:6808:4493:b0:3e0:5c8b:59be with SMTP id
- 5614622812f47-3e071acb0e3mr12974435b6e.24.1726580497640; 
- Tue, 17 Sep 2024 06:41:37 -0700 (PDT)
+ AJvYcCXzgWRAJQsI6/n4463bkANBoI5H3KjMETru2uEKXTK+Bf7PEPzhSrakqxoiC6uJSWUjrm40cgQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YxF156FeBHaAbezseczlrdtWCNCdM8no66eb/xmeWkf1QZMHNwf
+ Q1ZTciju8hmGD6gpPdBxITW1bUws1vHn2UJCk4mJtT+h4QSCbmkA
+X-Google-Smtp-Source: AGHT+IEH9bKn6LVzbt3T+knbxjIsjpfg1y9v5a4IuxX1ulIo1VL1Sjq+NEHPUzS81r11jw5y/tl/8w==
+X-Received: by 2002:a05:6a00:1ac6:b0:714:2198:26bd with SMTP id
+ d2e1a72fcca58-71926081831mr30598195b3a.11.1726581359004; 
+ Tue, 17 Sep 2024 06:55:59 -0700 (PDT)
 Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:18f6:4e29:3360:ce8d])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-7db498e05dbsm5809087a12.19.2024.09.17.06.41.35
+ 41be03b00d2f7-7db4999fd82sm4975653a12.90.2024.09.17.06.55.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Sep 2024 06:41:37 -0700 (PDT)
+ Tue, 17 Sep 2024 06:55:58 -0700 (PDT)
 From: Fabio Estevam <festevam@gmail.com>
 To: sr@denx.de
 Cc: jh80.chung@samsung.com, u-boot@lists.denx.de,
  Fabio Estevam <festevam@denx.de>
-Subject: [PATCH v2] da9063: Add watchdog support
-Date: Tue, 17 Sep 2024 10:41:27 -0300
-Message-Id: <20240917134127.3152578-1-festevam@gmail.com>
+Subject: [PATCH v3] da9063: Add watchdog support
+Date: Tue, 17 Sep 2024 10:55:50 -0300
+Message-Id: <20240917135550.3164425-1-festevam@gmail.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -102,18 +102,19 @@ Based on the 6.11 kernel drivers/watchdog/da9063_wdt.c driver.
 
 Signed-off-by: Fabio Estevam <festevam@denx.de>
 ---
-Changes since v1:
-- Fixed a typo in commit log: RTC -> watchdog.
+Changes since v2:
+- Use u8 instead of char. (Stefan)
+- Keep the Copyright header from Linux. (Stfan)
 
  drivers/power/pmic/da9063.c   |  12 ++-
  drivers/watchdog/Kconfig      |   6 ++
  drivers/watchdog/Makefile     |   1 +
- drivers/watchdog/da9063-wdt.c | 142 ++++++++++++++++++++++++++++++++++
- 4 files changed, 159 insertions(+), 2 deletions(-)
+ drivers/watchdog/da9063-wdt.c | 149 ++++++++++++++++++++++++++++++++++
+ 4 files changed, 166 insertions(+), 2 deletions(-)
  create mode 100644 drivers/watchdog/da9063-wdt.c
 
 diff --git a/drivers/power/pmic/da9063.c b/drivers/power/pmic/da9063.c
-index 7bd3df39142..59c65702863 100644
+index 7bd3df391421..59c65702863c 100644
 --- a/drivers/power/pmic/da9063.c
 +++ b/drivers/power/pmic/da9063.c
 @@ -7,6 +7,9 @@
@@ -150,7 +151,7 @@ index 7bd3df39142..59c65702863 100644
  
  static int da9063_probe(struct udevice *dev)
 diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
-index 0c3e9913318..90bc5653ee3 100644
+index 0c3e99133186..90bc5653ee33 100644
 --- a/drivers/watchdog/Kconfig
 +++ b/drivers/watchdog/Kconfig
 @@ -169,6 +169,12 @@ config WDT_CORTINA
@@ -167,7 +168,7 @@ index 0c3e9913318..90bc5653ee3 100644
  	bool "External gpio watchdog support"
  	depends on WDT
 diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
-index 7b39adcf0ff..6b564b7f96d 100644
+index 7b39adcf0ff4..6b564b7f96d2 100644
 --- a/drivers/watchdog/Makefile
 +++ b/drivers/watchdog/Makefile
 @@ -29,6 +29,7 @@ obj-$(CONFIG_WDT_BOOKE) += booke_wdt.o
@@ -180,16 +181,23 @@ index 7b39adcf0ff..6b564b7f96d 100644
  obj-$(CONFIG_WDT_MAX6370) += max6370_wdt.o
 diff --git a/drivers/watchdog/da9063-wdt.c b/drivers/watchdog/da9063-wdt.c
 new file mode 100644
-index 00000000000..c9210a106d3
+index 000000000000..b7216b578630
 --- /dev/null
 +++ b/drivers/watchdog/da9063-wdt.c
-@@ -0,0 +1,142 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+//
-+// DA9063 watchdog driver
-+//
-+// Copyright (c) 2024 Fabio Estevam <festevam@denx.de>
-+//
+@@ -0,0 +1,149 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Based on the Linux drivers/watchdog/da9063_wdt.c file.
++ *
++ * Watchdog driver for DA9063 PMICs.
++ *
++ * Copyright(c) 2012 Dialog Semiconductor Ltd.
++ *
++ * Author: Mariusz Wojtasik <mariusz.wojtasik@diasemi.com>
++ *
++ * Ported to U-Boot by Fabio Estevam <festevam@denx.de>
++ *
++ */
 +
 +#include <dm.h>
 +#include <dm/device-internal.h>
@@ -243,7 +251,7 @@ index 00000000000..c9210a106d3
 +
 +static int da9063_wdt_disable_timer(struct udevice *dev)
 +{
-+	char val;
++	u8 val;
 +
 +	da9063_read(dev, DA9063_REG_CONTROL_D, &val, 1);
 +	val &= ~DA9063_TWDSCALE_MASK;
@@ -256,8 +264,8 @@ index 00000000000..c9210a106d3
 +static int da9063_wdt_update_timeout(struct udevice *dev, unsigned int timeout)
 +{
 +	unsigned int regval;
-+	char val;
 +	int ret;
++	u8 val;
 +
 +	/*
 +	 * The watchdog triggers a reboot if a timeout value is already
@@ -295,14 +303,14 @@ index 00000000000..c9210a106d3
 +
 +static int da9063_wdt_reset(struct udevice *dev)
 +{
-+	char val = DA9063_WATCHDOG;
++	u8 val = DA9063_WATCHDOG;
 +
 +	return da9063_write(dev, DA9063_REG_CONTROL_F, &val, 1);
 +}
 +
 +static int da9063_wdt_expire_now(struct udevice *dev, ulong flags)
 +{
-+	char val = DA9063_SHUTDOWN;
++	u8 val = DA9063_SHUTDOWN;
 +
 +	return da9063_write(dev, DA9063_REG_CONTROL_F, &val, 1);
 +}
