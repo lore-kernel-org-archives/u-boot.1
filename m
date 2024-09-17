@@ -4,78 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC319C35FFF
-	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 12:33:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 569FDC35FFF
+	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 12:34:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD6C888E16;
-	Tue, 17 Sep 2024 14:33:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7344C88E46;
+	Tue, 17 Sep 2024 14:34:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SyTtHPrr";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pu3Uvv5p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC74E88E08; Tue, 17 Sep 2024 14:33:40 +0200 (CEST)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id 2DAEF88E64; Tue, 17 Sep 2024 14:34:53 +0200 (CEST)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2FD7F88E3B
- for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 14:33:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C5B2588E08
+ for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 14:34:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-5c3cdba33b0so7096577a12.1
- for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 05:33:37 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-374c4d4f219so3644018f8f.1
+ for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 05:34:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726576416; x=1727181216; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=7YoVWjvoSSf16FWPmMwwlqRvetWNMxA7Ic9l+PLx60w=;
- b=SyTtHPrrAYM9cScZLg7dhv/sGj4liYKU4Z4cSAYnHsNN8QhZZCLnj8Du7dSrLDuf6Y
- 4XHUxdyZwRmwBANA+pZKOsqxIUTXxRYyfX8loBWVSAUyUY+PxENElJNZTn1o+qquAUzf
- 2Yxd+4KUho8JqC1bewida0Vla/V7R4pZ5a5PdpB3EHGt6pazZlyK+sVmAeaWFSeKvv3/
- loLLSicD0TCH4qjkL8/yVxFdTSBVJAMnvE45VpnsA6dasf9uNIRkIKM0yD4jgRtbMNGW
- E5oYYMWDymjJeon2NgB0wxiOmSflEJTEH6ul/3hkm2sBj7OTVT+QH7kDsRQ8N53QRt43
- 1Xfw==
+ d=linaro.org; s=google; t=1726576490; x=1727181290; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=YfrbN8vASUjkWF2dEM56z/vKD6459G2JSploWPqdNow=;
+ b=pu3Uvv5pff6box3b57vt3kW/14JqkDebzFk5gi4T3fW49u0kVjIoos+RkL7bgkRt0s
+ mL9SGeOH81hiVh/zRIVfgszVZA8X23GE5FRJR/Hh3i9DCSbB57HIpzv+Dlmnub32kmZ+
+ ajjfNiq9Sdpz4c0yKlhzz0eI+FKQL+tWWE7vg77+kAYHygU+t4MyLHDvKidzbie6WkcP
+ u2Xu8wWsg8aAStjNWrvtrS9g/HQg99JZ0GiM2E9UeZ35mVHaWaTDwKjzI+lMmfLIbTdd
+ IOWwBbLleHsVHKVhPF5CUXUClWf1BAwBWfcjay1UOSMc838CEybxU3Dv9EjWDRc/tU2+
+ 1ESw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726576416; x=1727181216;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1726576490; x=1727181290;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=7YoVWjvoSSf16FWPmMwwlqRvetWNMxA7Ic9l+PLx60w=;
- b=QcA0i5LaUmCfUTtkzaPYOiRaMmlYHUhMUQ7Q7YC58desNVuqplm0sJCOLdStvH+Rgh
- FmrtYTSM/rAlrCnfrX8g9DvBdcIqILKGzMOZ/NE3bn4e2fA3pB2KdgApaDxFIJ0TxZ5w
- M8CpkcXjAV2g6+UtxmNnVOrEfjcYyWAHb/xO237N7HIXj9m2FkQwy0CSvNtfbYJFVmIR
- 1ye6WcRvTJEifit/La6hOKEZEYzjDEq0nw5ypozVi1hS2d18PTW1dRhFX6n0Jb6W5otx
- HpYnxLbWj38BagjuYhRA2xsxIWg6/h4h1WJOY3kpFWoe5kSwzC1+bbB4j+ig8q53ATDU
- 4FlA==
+ bh=YfrbN8vASUjkWF2dEM56z/vKD6459G2JSploWPqdNow=;
+ b=MfMBMUFQzfW+l00iVO/ERv4cLXhh//hdE9tDhpz8wgpbImq/KVcR5psqywcmFOMHul
+ geNxGwyAVZ/xoct9VOjjzk5ydF5Bb+U9MpatgC1tXhX1ZNMgyosFR3I5JHxK5U+zXoPY
+ zZ/KDybV+neEhmM9PaocrupEfQOMY3ZMvVRRtgrj5vejMODPvAfjSPdWVgRdZiio1Cmi
+ BIWt3mtoyfjqWyFt8iI39wJyutu8wDPusJ6MayDDcQkUJMPBBILoqtde/tIKBof1bwNW
+ qw5oiOKEZVnjpDR0DWNV1cfXQFuY4UyY5ek6E2Q+74nB6simyKxFSoznCHClFwfrJ8mQ
+ mFHg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXAC1xxxh3iCb0bWzhk1ziFEZXV6iskLNqismtPAtCEUKo77Z3vwfZuidpwk1hBs9x99cI+dZc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx0KDNcozdGeZFH0YknkJ6VH8JTJTrKzqpEj0n6RGq6UUE8jE3o
- ys4BQxFdgNYVxDs9nD/fYC+RToLrNlknfqsXjQE9AzJ75neJCXqJUQccx8JS32ZJe9Adddh3uNX
- 8z594+IwGwHf8kT0S4LDRjntk6mThXtN8sOiobQ==
-X-Google-Smtp-Source: AGHT+IGjSLPT88YODJGio7SWGuaAdTmVHTu/1cQd3KfYOHZuJqYdkb2isiMkjOQHRIII+mzk6HpwqGHtrVpzc2+zkg0=
-X-Received: by 2002:aa7:d5c4:0:b0:5c2:6918:71cb with SMTP id
- 4fb4d7f45d1cf-5c413e4faf7mr14861721a12.23.1726576416448; Tue, 17 Sep 2024
- 05:33:36 -0700 (PDT)
+ AJvYcCW0HBEVMpTaSSG4aEpBB2BgvboqpIpW8yU4KXLhkrRjbkoEtfTOpuNc7Rlv6kN99uAt2BVBFkk=@lists.denx.de
+X-Gm-Message-State: AOJu0YxGoKFXG4WnSKnJ/PFsbVbHjegI5UlrqtXq4Y+1HW9F/n05htN8
+ 7T7ITMdyip6fIJlc5AVkYZK0eDYkbKvxYvW5vRbvniLCayc5NwRzrHHbJhTchOA=
+X-Google-Smtp-Source: AGHT+IFMuFng77D/cZfPmSyNuXa4G6MQpGK+33/1CywKPuvq1zJ4rvZBzvFxj8y+bzKRVxl+9xttYA==
+X-Received: by 2002:a5d:6189:0:b0:36b:a2bb:b374 with SMTP id
+ ffacd0b85a97d-378c2d61762mr10938211f8f.52.1726576489865; 
+ Tue, 17 Sep 2024 05:34:49 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-378e73e80eesm9381772f8f.30.2024.09.17.05.34.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 17 Sep 2024 05:34:48 -0700 (PDT)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [PATCH v2 0/2] ARM: meson: libretech-ac: add support for EFI
+ Capsules Update
+Date: Tue, 17 Sep 2024 14:34:44 +0200
+Message-Id: <20240917-u-boot-topic-dynamic-uuid-v2-0-416e39c6e271@linaro.org>
 MIME-Version: 1.0
-References: <20240905082811.1585467-1-sughosh.ganu@linaro.org>
- <20240905082811.1585467-5-sughosh.ganu@linaro.org>
- <0291efc6-86a2-437c-938a-707c46c34f91@gmx.de>
-In-Reply-To: <0291efc6-86a2-437c-938a-707c46c34f91@gmx.de>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Tue, 17 Sep 2024 18:03:25 +0530
-Message-ID: <CADg8p94TakJXkLs=m6RbvO2T_OmYagf68e4JV655TtQ5DnxtZg@mail.gmail.com>
-Subject: Re: [PATCH 04/16] event: add event to notify lmb memory map changes
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAGR36WYC/42NTQ6CMBCFr0Jm7Zi2lh9deQ/DokKBSbRDWkokp
+ He3cgJXL99L3vd2CNaTDXArdvB2pUDsMqhTAd1k3GiR+syghNLiKiuM+GRecOGZOuw3Z945Y6Q
+ eTVPLTpXqUhkNeT97O9DncD/azBOFhf12XK3y1/5jXSUKrK0edFNqZcRwf5Ezns/sR2hTSl9Sz
+ lFlwwAAAA==
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Da Xue <da@libre.computer>, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.14.1
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1318;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=vGG/LVK+m0FKjCCckEJIYd6d4ixfOd/bhBYuFa9jBc8=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBm6XdnllfzrUrSFt71eboFPj1eTHUNlvc5s1Co3mdU
+ KaftkZWJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZul3ZwAKCRB33NvayMhJ0TCVD/
+ 0bFw5XlwQUj76AAHTZlRUaVEcbpdRZ1FJ9+hgscBU6f+NTNcukEta3/umLaiNjssM3LBp6zB6XCCN7
+ 7v0gIBEX6HJ4OO/rJQOkZmEZoP9oo8CHuZ6nNBZp5XwzgFxV1/TfBL5OJl9jrhKi5zlhiTR3WRClMh
+ 2OTI2g0ysv31FDtGsjMjnFzWapYU4eSZuSPK3igGZ5u8BBi84aItPuiYHtPTefUZcXhltZi57WASIk
+ Ld6sFDR4qGvLQM8XIBDfEmBZ4/68TJGLD4JWiWUmgx8Y6sBAWpvmfQ/vA9CifTHS9g4maTO4bvP92A
+ WR21WBpcFygva2OoGGm/P9IRMOq7AB4PTvOCOZiRYLnfLZD5/KI28wR2WGvQwoWezkTtmLrAntDnC6
+ +qq7IlpuIGQAkZrjDM8hUB2T12DGJjx3WJLbFbNaniGDm0XUEhnceSUf7/B3uZDzxfWVEW2i07hAnS
+ oQS5eMgvh4DCIJQCTbJEXzHMWxvQlq+GDzH9gvulBf9WMEzeveZFL1HVO97csSrKN2iHbm/YHTo69I
+ lVGlpv+Zz9qGY8iDiOVTwQMA9oZ75PFkMvYENjjQVW/DDg73jYQRNQrMAOXIXX84vm0+/sH/mQ5J9D
+ 5ELL2QTXKqdmNmpDXzrxFv2uk35hM65JwX1ztyDdx8quiMNsZ4DIaAlIc/Xg==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,81 +114,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 14 Sept 2024 at 20:38, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> On 9/5/24 10:27, Sughosh Ganu wrote:
-> > Add an event which would be used for notifying changes in the
-> > LMB modules' memory map. This is to be used for having a
-> > synchronous view of the memory that is currently in use, and that is
-> > available for allocations.
->
-> The synchronous view problem only exists because we are duplicating
-> data. Store the EFI memory type in LMB and the problem vanishes.
+The necessary changes were made in U-Boot to easily support
+EFI Capsules Update and be compliant with Arm SystemReady IR.
 
-The LMB module only concerns itself with RAM memory. If I understand
-correctly, you are proposing maintaining the EFI memory map within the
-LMB module ? That would mean handling memory types other than
-conventional memory in LMB.
+Let's add support for the libretech-ac/AML-S805X-CC since
+it's an easy well-supported target having a dedicated SPI
+Flash to store U-Boot.
 
--sughosh
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
+Changes in v2:
+- Add set_dfu_alt_info() + CONFIG_SET_DFU_ALT_INFO to support both RAM and SF DFU backend
+- Fix typo in cover letter and commit message
+- Link to v1: https://lore.kernel.org/r/20240916-u-boot-topic-dynamic-uuid-v1-0-7e4f48542a0f@linaro.org
 
->
-> The event is only needed to notify EFI_EVENT_GROUP_MEMORY_MAP_CHANGE.
->
-> Best regards
->
-> Heinrich
->
-> >
-> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > ---
-> >   common/event.c  |  2 ++
-> >   include/event.h | 14 ++++++++++++++
-> >   2 files changed, 16 insertions(+)
-> >
-> > diff --git a/common/event.c b/common/event.c
-> > index dda569d447..fc8002603c 100644
-> > --- a/common/event.c
-> > +++ b/common/event.c
-> > @@ -48,6 +48,8 @@ const char *const type_name[] = {
-> >
-> >       /* main loop events */
-> >       "main_loop",
-> > +
-> > +     "lmb_map_update",
-> >   };
-> >
-> >   _Static_assert(ARRAY_SIZE(type_name) == EVT_COUNT, "event type_name size");
-> > diff --git a/include/event.h b/include/event.h
-> > index fb353ad623..fce7e96170 100644
-> > --- a/include/event.h
-> > +++ b/include/event.h
-> > @@ -153,6 +153,14 @@ enum event_t {
-> >        */
-> >       EVT_MAIN_LOOP,
-> >
-> > +     /**
-> > +      * @EVT_LMB_MAP_UPDATE:
-> > +      * This event is triggered on an update to the LMB reserved memory
-> > +      * region. This can be used to notify about any LMB memory allocation
-> > +      * or freeing of memory having occurred.
-> > +      */
-> > +     EVT_LMB_MAP_UPDATE,
-> > +
-> >       /**
-> >        * @EVT_COUNT:
-> >        * This constants holds the maximum event number + 1 and is used when
-> > @@ -203,6 +211,12 @@ union event_data {
-> >               oftree tree;
-> >               struct bootm_headers *images;
-> >       } ft_fixup;
-> > +
-> > +     struct event_lmb_map_update {
-> > +             u64 base;
-> > +             u64 size;
-> > +             u8 op;
-> > +     } lmb_map;
-> >   };
-> >
-> >   /**
->
+---
+Neil Armstrong (2):
+      board: libretech-ac: move board support into dedicated directory
+      board: libre-computer: aml-s805x-cc: Enable capsule updates
+
+ board/amlogic/p212/MAINTAINERS                   |  2 -
+ board/libre-computer/aml-s805x-ac/MAINTAINERS    |  8 +++
+ board/libre-computer/aml-s805x-ac/Makefile       |  6 ++
+ board/libre-computer/aml-s805x-ac/aml-s805x-ac.c | 71 ++++++++++++++++++++++++
+ configs/libretech-ac_defconfig                   |  8 +++
+ 5 files changed, 93 insertions(+), 2 deletions(-)
+---
+base-commit: df84c019c46e6833cc79385bdb23efba4882c09d
+change-id: 20240916-u-boot-topic-dynamic-uuid-a871c25236a4
+
+Best regards,
+-- 
+Neil Armstrong <neil.armstrong@linaro.org>
+
