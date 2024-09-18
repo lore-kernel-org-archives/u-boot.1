@@ -4,81 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97802CDD541
-	for <u-boot@archiver.kernel.org>; Wed, 18 Sep 2024 15:28:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AE5CCDD548
+	for <u-boot@archiver.kernel.org>; Wed, 18 Sep 2024 16:02:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E24788FD9;
-	Wed, 18 Sep 2024 17:23:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
+	by phobos.denx.de (Postfix) with ESMTP id 5AC5188B59;
+	Wed, 18 Sep 2024 18:02:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="TK0PMrIh";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HwDBlGDV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7010688FC9; Wed, 18 Sep 2024 17:23:11 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id C7B0888B59; Wed, 18 Sep 2024 18:02:34 +0200 (CEST)
+Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
+ [IPv6:2607:f8b0:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8BB7388FAD
- for <u-boot@lists.denx.de>; Wed, 18 Sep 2024 17:23:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=9elements.com
+ by phobos.denx.de (Postfix) with ESMTPS id 15ED3871C7
+ for <u-boot@lists.denx.de>; Wed, 18 Sep 2024 18:02:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a8d3cde1103so924904466b.2
- for <u-boot@lists.denx.de>; Wed, 18 Sep 2024 08:23:09 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pg1-x531.google.com with SMTP id
+ 41be03b00d2f7-7b0c9bbddb4so4731082a12.3
+ for <u-boot@lists.denx.de>; Wed, 18 Sep 2024 09:02:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1726672989; x=1727277789; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=iGOp1WYpVGAek6COsD0CKXOglHY3nnFaASfQE7qdlkg=;
- b=TK0PMrIhZ7UETtN8PrUeE//JYF82ggXk7im2KvjFLxfBxMAJRKpI8vCzzI2moeWrK5
- CAz5SveO13h5kInnQiUOoTisbncOHQqq4h4moRQswmHY5IbjKf7lQht6vZV1EXRTj0xp
- ZTCaOEK0326e2iC53/ZAonmYAEPReRX+h/pJcIiYKS30Jwdh6oHUFtZJoE29Bns8b3ZJ
- s6WPFv/MpAon9E2vWa9Tsa3DFsLDz07K0iX0CJuvwKzCDeGLUTFH94LJ3RD7odtzsge8
- +RYbrDXW1elkQnDCv7XTQVpiSaOuk3s4ysGWJb2fwdvnlrYv9BjMy3fhGDz5TedoTTB0
- DV/w==
+ d=linaro.org; s=google; t=1726675350; x=1727280150; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=LeONlCAEI9T8kxMhfKIDbDy+8XSg4++Epw3pZGjhtwA=;
+ b=HwDBlGDVtaVIspFipw+VP02T2+eTtb2Ze/GVwM5/1U26g2junAjyPKdFB/KW/m6s57
+ 7/d5Y+UobUKMP67GutjPic02QZR5nxrIdE9bISjgSte0eZKGFs4W333ZU2hagVJearkk
+ BajUYTAi41ERPM8TWhiVYFLSdTBheN4fEBaUX/Ulax57vlHQOgMwhLwEd/PlhFkq0Evt
+ XdIzArWtsa/LGF8rBpSvnfgRVzzZBowPXBXCucYmUDHR9Ki1xWBdWJTcmsQBRXOfv30R
+ BjXLooJY7lpBLWZDo5HAcXpn9eqoyUi74NGJiiI9xtTglzVe/fiO481ggAAXWpuli1O/
+ d0eQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726672989; x=1727277789;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=iGOp1WYpVGAek6COsD0CKXOglHY3nnFaASfQE7qdlkg=;
- b=wWa0f35LIjHz93EHGz2RfYQ8auL1JY885b4swrckFtmcr1BCycIMXCA/P8LjW+N0HH
- X9Is67PjEBZoc2xN0eBfMDRtelBOvsPGRFsGbPCQOrT1Cn5K0LNURcdjUYBKf2cl/Pl6
- d4geQFi0nT7FkGHt1b0MbLwxmkYLTbFX4CJWp75kDGvyUwxGjB+N9Vx7MZWD6Ig8e/VQ
- XxzV+PWc1E/S8fcIOMI2wM+QORM+r1ub6HK2FgDaw+TO0TQnZEUr9moordr8HzvdV6gi
- lNcTXuom3ZrWejR+nmlJo9wY76qlLkgUpXGUAxdbbzjy1hIEaAaINg9N3YhaMBSlpeUC
- jkRw==
-X-Gm-Message-State: AOJu0YypYJ3iadh5L5w5B+elDEYeA+KN26hG1peWRDBdhkDH18DTgXW3
- apAQacx9mZMFYDQsDSd4xEUnT2qv4NcfYffRrd0SxsnGNP7Q5dSxfeuZmTRWkTX7WJwruC5z0wi
- u
-X-Google-Smtp-Source: AGHT+IHnWD3gRnX4sOyhj5t28ffm9U7X3ygAxUpVWMC+AvBD7jGpYf/52HTUmCui1Cq2EpmXvd3+/A==
-X-Received: by 2002:a17:907:e262:b0:a8d:caa:7fee with SMTP id
- a640c23a62f3a-a90293c5449mr2324400766b.7.1726672988793; 
- Wed, 18 Sep 2024 08:23:08 -0700 (PDT)
-Received: from fedora.sec.9e.network
- (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a90610967b0sm599791266b.42.2024.09.18.08.23.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Sep 2024 08:23:08 -0700 (PDT)
-From: Patrick Rudolph <patrick.rudolph@9elements.com>
-To: u-boot@lists.denx.de, Matthias Brugger <mbrugger@suse.com>,
- Peter Robinson <pbrobinson@gmail.com>
-Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 35/35] configs: Add RPI4 ACPI defconfig
-Date: Wed, 18 Sep 2024 17:20:39 +0200
-Message-ID: <20240918152136.3395170-36-patrick.rudolph@9elements.com>
-X-Mailer: git-send-email 2.46.0
-In-Reply-To: <20240918152136.3395170-1-patrick.rudolph@9elements.com>
-References: <20240918152136.3395170-1-patrick.rudolph@9elements.com>
+ d=1e100.net; s=20230601; t=1726675350; x=1727280150;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=LeONlCAEI9T8kxMhfKIDbDy+8XSg4++Epw3pZGjhtwA=;
+ b=joLk6Ok+xOEZ8SnA9Yz4/Y3IKiBaB5RTXHwfyDPeyS97DK0UdpFOjOtxARIeNfjDds
+ eLtIHIwhx0OGsIbWLr+BYQU3ibitV/67kO30vyF3iXSSk0qoEyKTnr26Dio4mk/3L8Kn
+ rEAhwN8h4CKjCGlfWljEl9WjKQS++W+Nt6U0g2jHSWBh/KJZaIYW9P1SbezzDTeeSPGo
+ NrRCPREDfV7JqUXRmA5Di2kxMe7HJTUXYAybURgLCtuaThBy9ngYWTXHGHcYUqS5QXVd
+ MaY0MeE5mux20+SNaxMylQBHZ+fQ/R6abk12garCefmzOBD8RS606+0+Pll+wcpR2WLD
+ 2jpQ==
+X-Gm-Message-State: AOJu0YzWlldBe6E+HlVF9g64VQkwx8vcJWn4fS95O0lJKMPbb8zJ37RC
+ j7fwmJjNe0vKw9l27pW0jntY30w5jAENt12WfytiR7z1tbXlhWx//fPLOAuWLbwNWLViBE7ViHJ
+ FPEq1YW2x5PN8K3KiKRUx5JZPsvXpyqsNJpRJ7A==
+X-Google-Smtp-Source: AGHT+IH49Dd+mh5CVRitNjCOnko3gKIuc34SG0FlsFu4RxBjpQsHWdpYb5zH6lEZNPu1C5vgWJHi+Jj6Hc203pOyjZk=
+X-Received: by 2002:a05:6a20:2d0a:b0:1cf:2513:8a01 with SMTP id
+ adf61e73a8af0-1cf75f0f0cfmr29906449637.26.1726675350204; Wed, 18 Sep 2024
+ 09:02:30 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240918152136.3395170-1-patrick.rudolph@9elements.com>
+ <20240918152136.3395170-15-patrick.rudolph@9elements.com>
+In-Reply-To: <20240918152136.3395170-15-patrick.rudolph@9elements.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 18 Sep 2024 19:01:53 +0300
+Message-ID: <CAC_iWj+WmwK--1UTpEg4AhTzmNhz1+bHTXeXHuuEEM0BtQ9qUQ@mail.gmail.com>
+Subject: Re: [PATCH v4 14/35] efi_loader: Allocate and write ACPI tables
+To: Patrick Rudolph <patrick.rudolph@9elements.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,99 +87,163 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Allows to build the RPi4 with ACPI enabled.
+Hi Partick,
 
-TEST: - Boots on qemu-system-aarch64 -machine raspi4b
-      - Boots on real hardware with arm_64bit=1 in config.txt
+I haven't seen any replies in [0]. The same comments apply to this version.
+Also, the changelog seems like it's the v2 one?
 
-Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Matthias Brugger <mbrugger@suse.com>
-Cc: Peter Robinson <pbrobinson@gmail.com>
----
-Changelog v4:
-- Enable BLOBLISTS
----
- configs/rpi_4_acpi_defconfig | 70 ++++++++++++++++++++++++++++++++++++
- 1 file changed, 70 insertions(+)
- create mode 100644 configs/rpi_4_acpi_defconfig
+On Wed, 18 Sept 2024 at 18:22, Patrick Rudolph
+<patrick.rudolph@9elements.com> wrote:
+>
+> Allocate memory for ACPI tables inside the efi_loader and write out
+> the tables similar to SMBIOS tables. When ACPI is enabled and wasn't
+> installed in other places, install the ACPI table in EFI. Since EFI
+> is necessary to pass the ACPI table location when FDT isn't used,
+> there's no need to install it separately.
+>
+> When CONFIG_BLOBLIST_TABLES is set the tables will be stored in a
+> bloblist. The tables are still passed to the OS using EFI.
+>
+> This allows non x86 platforms to boot using ACPI only in case the
+> EFI loader is being used.
+>
+> TEST: Booted QEMU SBSA (no QFW) using EFI and ACPI only.
+>
+> Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> ---
+> Changelog v3:
+> - Drop memalign and use efi_allocate_pages
+> - Use log_debug instead of debug
+> - Clarify commit message
+> - Skip writing ACPI tables on sandbox
+> - Rename function
+> - Add function comment
+> ---
+>  lib/efi_loader/efi_acpi.c        | 80 +++++++++++++++++++++++++++++++-
+>  test/py/tests/test_event_dump.py |  1 +
+>  2 files changed, 79 insertions(+), 2 deletions(-)
+>
+> diff --git a/lib/efi_loader/efi_acpi.c b/lib/efi_loader/efi_acpi.c
+> index 67bd7f8ca2..9d38d0060c 100644
+> --- a/lib/efi_loader/efi_acpi.c
+> +++ b/lib/efi_loader/efi_acpi.c
+> @@ -6,15 +6,23 @@
+>   */
+>
+>  #include <efi_loader.h>
+> -#include <log.h>
+> -#include <mapmem.h>
+>  #include <acpi/acpi_table.h>
+>  #include <asm/global_data.h>
+> +#include <asm/io.h>
+> +#include <bloblist.h>
+> +#include <linux/sizes.h>
+> +#include <linux/log2.h>
+> +#include <log.h>
+> +#include <malloc.h>
+> +#include <mapmem.h>
+>
+>  DECLARE_GLOBAL_DATA_PTR;
+>
+>  static const efi_guid_t acpi_guid = EFI_ACPI_TABLE_GUID;
+>
+> +enum {
+> +       TABLE_SIZE      = SZ_64K,
+> +};
+>  /*
+>   * Install the ACPI table as a configuration table.
+>   *
+> @@ -47,3 +55,71 @@ efi_status_t efi_acpi_register(void)
+>         return efi_install_configuration_table(&acpi_guid,
+>                                                (void *)(ulong)addr);
+>  }
+> +
+> +/*
+> + * Allocate memory for ACPI tables and write ACPI tables to the
+> + * allocated buffer.
+> + *
+> + * Return:     status code
+> + */
+> +static int alloc_write_acpi_tables(void)
+> +{
+> +       u64 table_addr, table_end;
+> +       u64 new_acpi_addr = 0;
+> +       efi_uintn_t pages;
+> +       efi_status_t ret;
+> +       void *addr;
+> +
+> +       if (!IS_ENABLED(CONFIG_GENERATE_ACPI_TABLE))
+> +               return 0;
+> +
+> +       if (IS_ENABLED(CONFIG_X86) ||
+> +           IS_ENABLED(CONFIG_QFW_ACPI) ||
+> +           IS_ENABLED(CONFIG_SANDBOX)) {
+> +               log_debug("Skipping writing ACPI tables as already done\n");
+> +               return 0;
+> +       }
+> +
+> +       /* Align the table to a 4KB boundary to keep EFI happy */
+> +       if (IS_ENABLED(CONFIG_BLOBLIST_TABLES)) {
+> +               addr = bloblist_add(BLOBLISTT_ACPI_TABLES, TABLE_SIZE,
+> +                                   ilog2(SZ_4K));
+> +
+> +               if (!addr)
+> +                       return log_msg_ret("mem", -ENOMEM);
+> +       } else {
+> +               pages = efi_size_in_pages(TABLE_SIZE);
+> +
+> +               ret = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES,
+> +                                        EFI_ACPI_RECLAIM_MEMORY,
+> +                                        pages, &new_acpi_addr);
+> +               if (ret != EFI_SUCCESS)
+> +                       return log_msg_ret("mem", -ENOMEM);
+> +
+> +               addr = (void *)(uintptr_t)new_acpi_addr;
+> +       }
+> +
+> +       table_addr = virt_to_phys(addr);
+> +
+> +       gd->arch.table_start_high = table_addr;
+> +
+> +       table_end = write_acpi_tables(table_addr);
+> +       if (!table_end) {
+> +               log_err("Can't create ACPI configuration table\n");
+> +               return -EINTR;
+> +       }
+> +
+> +       log_debug("- wrote 'acpi' to %llx, end %llx\n", table_addr, table_end);
+> +       if (table_end - table_addr > TABLE_SIZE) {
+> +               log_err("Out of space for configuration tables: need %llx, have %x\n",
+> +                       table_end - table_addr, TABLE_SIZE);
+> +               return log_msg_ret("acpi", -ENOSPC);
+> +       }
+> +       gd->arch.table_end_high = table_end;
+> +
+> +       log_debug("- done writing tables\n");
+> +
+> +       return 0;
+> +}
+> +
+> +EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, alloc_write_acpi_tables);
+> diff --git a/test/py/tests/test_event_dump.py b/test/py/tests/test_event_dump.py
+> index e282c67335..459bfa26bb 100644
+> --- a/test/py/tests/test_event_dump.py
+> +++ b/test/py/tests/test_event_dump.py
+> @@ -18,6 +18,7 @@ def test_event_dump(u_boot_console):
+>  --------------------  ------------------------------  ------------------------------
+>  EVT_FT_FIXUP          bootmeth_vbe_ft_fixup           .*boot/vbe_request.c:.*
+>  EVT_FT_FIXUP          bootmeth_vbe_simple_ft_fixup    .*boot/vbe_simple_os.c:.*
+> +EVT_LAST_STAGE_INIT   alloc_write_acpi_tables         .*lib/efi_loader/efi_acpi.c:.*
+>  EVT_LAST_STAGE_INIT   install_smbios_table            .*lib/efi_loader/efi_smbios.c:.*
+>  EVT_MISC_INIT_F       sandbox_early_getopt_check      .*arch/sandbox/cpu/start.c:.*
+>  EVT_TEST              h_adder_simple                  .*test/common/event.c:'''
+> --
+> 2.46.0
+>
 
-diff --git a/configs/rpi_4_acpi_defconfig b/configs/rpi_4_acpi_defconfig
-new file mode 100644
-index 0000000000..552c5eb8ee
---- /dev/null
-+++ b/configs/rpi_4_acpi_defconfig
-@@ -0,0 +1,70 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_BCM283X=y
-+CONFIG_TEXT_BASE=0x00080000
-+CONFIG_TARGET_RPI_4=y
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x7fffe30
-+CONFIG_ENV_SIZE=0x4000
-+CONFIG_DEFAULT_DEVICE_TREE="bcm2711-rpi-4-b"
-+CONFIG_OF_LIBFDT_OVERLAY=y
-+CONFIG_DM_RESET=y
-+CONFIG_SYS_LOAD_ADDR=0x1000000
-+CONFIG_PCI=y
-+CONFIG_BOOTSTD_DEFAULTS=y
-+CONFIG_OF_BOARD_SETUP=y
-+CONFIG_FDT_SIMPLEFB=y
-+CONFIG_USE_PREBOOT=y
-+CONFIG_PREBOOT="pci enum; usb start;"
-+CONFIG_SYS_PBSIZE=1049
-+# CONFIG_DISPLAY_CPUINFO is not set
-+# CONFIG_DISPLAY_BOARDINFO is not set
-+CONFIG_MISC_INIT_R=y
-+CONFIG_BLOBLIST_ALLOC=y
-+CONFIG_SYS_PROMPT="U-Boot> "
-+CONFIG_CMD_DFU=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PCI=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_FS_UUID=y
-+CONFIG_ENV_FAT_DEVICE_AND_PART="0:1"
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
-+CONFIG_TFTP_TSIZE=y
-+CONFIG_DM_DMA=y
-+CONFIG_DFU_MMC=y
-+CONFIG_SYS_DFU_DATA_BUF_SIZE=0x100000
-+CONFIG_SYS_DFU_MAX_FILE_SIZE=0x200000
-+CONFIG_BCM2835_GPIO=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SDMA=y
-+CONFIG_MMC_SDHCI_BCM2835=y
-+CONFIG_BCMGENET=y
-+CONFIG_PCI_BRCMSTB=y
-+CONFIG_PINCTRL=y
-+# CONFIG_PINCTRL_GENERIC is not set
-+CONFIG_DM_RNG=y
-+CONFIG_RNG_IPROC200=y
-+# CONFIG_REQUIRE_SERIAL_CONSOLE is not set
-+CONFIG_SYSINFO=y
-+CONFIG_SYSINFO_SMBIOS=y
-+CONFIG_USB=y
-+CONFIG_DM_USB_GADGET=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_XHCI_PCI=y
-+CONFIG_USB_KEYBOARD=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_MANUFACTURER="FSL"
-+CONFIG_USB_GADGET_VENDOR_NUM=0x0525
-+CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
-+CONFIG_USB_GADGET_DWC2_OTG=y
-+CONFIG_USB_GADGET_DOWNLOAD=y
-+CONFIG_VIDEO=y
-+# CONFIG_VIDEO_BPP8 is not set
-+# CONFIG_VIDEO_BPP16 is not set
-+CONFIG_SYS_WHITE_ON_BLACK=y
-+CONFIG_VIDEO_BCM2835=y
-+CONFIG_CONSOLE_SCROLL_LINES=10
-+CONFIG_PHYS_TO_BUS=y
-+CONFIG_ACPI=y
-+CONFIG_GENERATE_ACPI_TABLE=y
--- 
-2.46.0
+[0] https://lore.kernel.org/u-boot/CAC_iWjLfbXHFd7zs0xsVamXua8GXsAbhBstgTQEQN1+t8Fr2QA@mail.gmail.com/
 
+Thanks
+/Ilias
