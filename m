@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC736CDD55C
-	for <u-boot@archiver.kernel.org>; Wed, 18 Sep 2024 21:43:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95CFBCDD55C
+	for <u-boot@archiver.kernel.org>; Wed, 18 Sep 2024 21:49:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3AFF388FD6;
-	Wed, 18 Sep 2024 23:43:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EAD7788FDA;
+	Wed, 18 Sep 2024 23:49:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="ePlz0xZP";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="K6yedjSn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 18A5B88DC1; Wed, 18 Sep 2024 23:43:47 +0200 (CEST)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ id 3173088FDC; Wed, 18 Sep 2024 23:49:45 +0200 (CEST)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 43D4688FF6
- for <u-boot@lists.denx.de>; Wed, 18 Sep 2024 23:43:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3118688FC7
+ for <u-boot@lists.denx.de>; Wed, 18 Sep 2024 23:49:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,25 +31,25 @@ Received: from LT2ubnt.. (dynamic-046-114-110-162.46.114.pool.telefonica.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id AD47F3F384; 
- Wed, 18 Sep 2024 21:43:44 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 8582A3F298; 
+ Wed, 18 Sep 2024 21:49:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1726695824;
- bh=YrNf9DsKfkUcQTpz0WI9m4nSC/65pv9++lQZQHbmY2I=;
+ s=20210705; t=1726696182;
+ bh=FnCAvIFXDo2lKVAIIAfG+Mn40uZZe1fkxtshy+0eoBU=;
  h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=ePlz0xZPQbSrU2CUjHSrn6M9sJXv7H5wkyumjXPVARKeEweoMq+CHS1ANfz2EKhg6
- pS8P/2RzyqFkY6tQGw6gJwL/8o9cqzF8K1olVdfEZExGsE0FpXh4Pk2OnD5Ych8r+k
- PlwE3FhGh8IjhbsTMyW/BwzP6O9fKYq7Qj5beL1cM+E0Zzk9Ke6q2480rqU6rTJ0RE
- wnnoWA3rt7q+vS5CGu9jQII/hK/MnsOgqSuDKTGez6Kl7GFM6BxgJ9w2PCskCdMtSt
- N+tZrtOa0mVdFCebNmEZK19s2yD2h6T6rBuzHysr6deCr52J8iB7KEgMTS+J02jqfP
- lkSGVySv1a2pw==
+ b=K6yedjSnAx6ql5f9o/8P9nibq15kTr8YfCXOXvRU+15g2pvTwcP0ECzJMakruXi+m
+ 7zgmlTcrvAfbrJ6CvRIBOiFXaE/CtJ/oM5S4SQiAjYlu4mZu44hoGG9C2SuFMfDWlH
+ 7PPpv9yvM+HWNTeS6OajLi7igt68asQI/t1kqYvRWRNAljQepNL/NGfHtnkrMJZ6q+
+ inN/2gAvAPGtIV6j+k019B2kNNZiiajAac8uJUCAf3T7oxoi+bTw1J+bmlQiDronAD
+ QqUQFiIK6jAH4Z27wc0rqH6m5z4aYa4OshK3SPbIV5vcQ/Ehv+gVDU654YyGS2QRKA
+ FazuE90tJY0Mw==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de,
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] cmd/efidebug: fix some function descriptions
-Date: Wed, 18 Sep 2024 23:43:42 +0200
-Message-ID: <20240918214342.20197-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] doc: include/getopt.h: remove comments confusing Sphinx
+Date: Wed, 18 Sep 2024 23:49:40 +0200
+Message-ID: <20240918214940.20854-1-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -69,35 +69,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The function name must match the name used in the description.
+The Sphinx documentation build process cannot handle the interspersed
+'private:' and 'public:' comments. Remove them.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- cmd/efidebug.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ include/getopt.h | 3 ---
+ 1 file changed, 3 deletions(-)
 
-diff --git a/cmd/efidebug.c b/cmd/efidebug.c
-index 1a191eb9994..e040fe75fa1 100644
---- a/cmd/efidebug.c
-+++ b/cmd/efidebug.c
-@@ -665,7 +665,7 @@ enum efi_lo_dp_part {
+diff --git a/include/getopt.h b/include/getopt.h
+index 8645082da2a..0cf7ee84d6f 100644
+--- a/include/getopt.h
++++ b/include/getopt.h
+@@ -20,11 +20,9 @@ struct getopt_state {
+ 	 * parsed all of @argv, then @index will equal @argc.
+ 	 */
+ 	int index;
+-	/* private: */
+ 	/** @arg_index: Index within the current argument */
+ 	int arg_index;
+ 	union {
+-		/* public: */
+ 		/**
+ 		 * @opt: Option being parsed when an error occurs. @opt is only
+ 		 * valid when getopt() returns ``?`` or ``:``.
+@@ -35,7 +33,6 @@ struct getopt_state {
+ 		 * is only valid when getopt() returns an option character.
+ 		 */
+ 		char *arg;
+-	/* private: */
+ 	};
  };
  
- /**
-- * create_lo_dp() - create a special device path for our Boot### option
-+ * create_lo_dp_part() - create a special device path for our Boot### option
-  *
-  * @dev:	device
-  * @part:	disk partition
-@@ -1127,7 +1127,7 @@ static void show_efi_boot_opt(u16 *varname16)
- }
- 
- /**
-- * show_efi_boot_dump() - dump all UEFI load options
-+ * do_efi_boot_dump() - dump all UEFI load options
-  *
-  * @cmdtp:	Command table
-  * @flag:	Command flag
 -- 
 2.45.2
 
