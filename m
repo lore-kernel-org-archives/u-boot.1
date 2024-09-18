@@ -4,81 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCEB8C3ABCD
-	for <u-boot@archiver.kernel.org>; Wed, 18 Sep 2024 06:29:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11925CCD18B
+	for <u-boot@archiver.kernel.org>; Wed, 18 Sep 2024 07:56:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 482B488BB6;
-	Wed, 18 Sep 2024 08:29:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
+	by phobos.denx.de (Postfix) with ESMTP id 3204788EDE;
+	Wed, 18 Sep 2024 09:56:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="QZ9rmUVa";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="RdzyB6iX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 874D088E22; Wed, 18 Sep 2024 08:29:43 +0200 (CEST)
-Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
- [IPv6:2607:f8b0:4864:20::b36])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A3A3E88EDE; Wed, 18 Sep 2024 09:56:49 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F227580245
- for <u-boot@lists.denx.de>; Wed, 18 Sep 2024 08:29:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=9elements.com
+ by phobos.denx.de (Postfix) with ESMTPS id 28B0088B0C
+ for <u-boot@lists.denx.de>; Wed, 18 Sep 2024 09:56:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-yb1-xb36.google.com with SMTP id
- 3f1490d57ef6-e1f139b9767so3106189276.3
- for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 23:29:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1726640980; x=1727245780; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Dwgh0KpvcCdPlTo9dLZypNRfFoby6/tq9vTeoiH/CcU=;
- b=QZ9rmUVa2sGoC+R/1GKjkmVj7Rz66vzr7rBk9BXBsabgaCi5Mt3bA69BgzMrNtaG78
- U6jEp2ijNUaglqOBOiXD3O9xEG2Cpo23F6ejZSu+C2KdvqaIZxvLO4iy9eHe4qQ+89Jc
- kpqPwbI+5Ck4UPliW0l24DUIzcnTPN3+V40m2VwlXalL8/Wq+CycbJos6n9w5qfRDzhm
- eyLJJZyKOQ8qifpL0YKPfkERpv5ChdupD12eL9RqPgMjbwUIhAbGwvn3PCyICODYIei5
- DDVk5ACfnhfdUyCOzmi76sdui4Ng6DiE5WnJs1mTW8l93Zn/zV5DqR5tyKPUGLXn9bR3
- eVGQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726640980; x=1727245780;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Dwgh0KpvcCdPlTo9dLZypNRfFoby6/tq9vTeoiH/CcU=;
- b=sAv8nom0tj+NLNSPhvLlGhUKRTsNEYSE8OXn+Buol1PI6MA0tYmJfMTYw9YIMjU8Hq
- tElb+GU4vngVfhSfY1z95zPTmTjF6Q47UP5No9CPnUra0minBwQXn8cHYp6mm1BqQs+4
- t/Xiq1NggG9FuG7ZMXQAwOq54rcvscbefoOZv8QaPsGkepW3LlQ8ln7XQvqJ32l9fU6g
- o8JYet9OtCssd5Lb6OiUdp+2o8oX1PE7WWAc5YzV15KsDo6I+Dht0NMx0CiA+2lYUoOx
- syeVJBmVzVo8tFoWekTyVugdrj2MopiG1mpJWPGemiMvnEjQ0dHcE68YUnQcMeVg5bW7
- CM6g==
-X-Gm-Message-State: AOJu0YzY7Gu+m1p8EOvSwFZ1fg+sn9RQg5/Vdpo7A0V0tNKhTfjyj0LL
- bB+weil8ibR7Nsa8Cp/BVdejA7EEeN45HjI8nP7W9hiGXcegn2YQFmeqyuJGwhb0AnkuUSJj2YG
- KqUdY3bETUx/C72K9s4CYkcPtB4uIsvBEtLvHnaj1Lfv1rbLQ
-X-Google-Smtp-Source: AGHT+IH1f2wh0d9G4SLnscy49JZ7sW1btfeRabZg14osBFJgPdvoBT9KsLaSke1ItKJDBbCaE4bUZtIfeJ5pZldur/M=
-X-Received: by 2002:a05:6902:1b05:b0:e1f:ee79:26ae with SMTP id
- 3f1490d57ef6-e1fee79280cmr9014196276.51.1726640979783; Tue, 17 Sep 2024
- 23:29:39 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=2cee=QQ=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1726646202;
+ bh=yZHwu8xDYXVQbKimI4jzypuSKJoBtvdqO9MhK/HBHyc=;
+ b=RdzyB6iXSaCCwsZPw1tG0QGdoIdq1UsiV8ONYdOCVoVdnXD1I+hL1qEV79oStA90kV6NlvRCE
+ rQpoK+kCt/D78oP8CrZTGMQPkb82V0c0B23/z3wtbaf0tW3mOjQTzk8hu2aF3N+hce14jxfwc/J
+ BpzRuOb+u7fP5VnFkdpLHgRqozjWb2wsG/f/YvvovnL+l2n/rgtTz4E+v5BGNpAJC1LHOq85ccQ
+ ClTYfATR55AgsVTjFpFAymwOuRS01531T+MzVooJB1tKCrhEbR2WsV158+IHO3rybrbbldK159H
+ zfhwYrT0etXyXDJQj/6FusvhiMDhEzcvduDe1j/IAuMw==
+Message-ID: <c208f28d-86e0-41b2-9d37-45de423e30b3@kwiboo.se>
+Date: Wed, 18 Sep 2024 09:56:35 +0200
 MIME-Version: 1.0
-References: <20240911062511.494855-1-patrick.rudolph@9elements.com>
- <20240911062511.494855-23-patrick.rudolph@9elements.com>
- <CAFLszTg0cf_1ojqhO8ZXpkX+MoQYgX_-AFVzUDCyD2yE8U=rcQ@mail.gmail.com>
- <CALNFmy0QJ4HNHhSKzx94dJ6jS_F0i9VoDqUwwVpe2SCeLB=pmg@mail.gmail.com>
- <CAFLszTgf=_jJkfyXhxXDZSieMmM_cm7pss3ysM5yz1EphMYVpw@mail.gmail.com>
-In-Reply-To: <CAFLszTgf=_jJkfyXhxXDZSieMmM_cm7pss3ysM5yz1EphMYVpw@mail.gmail.com>
-From: Patrick Rudolph <patrick.rudolph@9elements.com>
-Date: Wed, 18 Sep 2024 08:29:28 +0200
-Message-ID: <CALNFmy1oOCNr3Kp8gt6RsjkJT=ShkOpJnQuSwvq2+ftwWtoyOw@mail.gmail.com>
-Subject: Re: [PATCH v3 22/30] board: emulation: Add QEMU sbsa support
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tom Rini <trini@konsulko.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>, 
- Peter Robinson <pbrobinson@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 0/6] FUSB302 USB-C controller support
+To: Sebastian Reichel <sebastian.reichel@collabora.com>,
+ Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, Soeren Moch <smoch@web.de>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Tim Harvey <tharvey@gateworks.com>, Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>
+References: <20240905151707.59101-1-sebastian.reichel@collabora.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20240905151707.59101-1-sebastian.reichel@collabora.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 66ea87b81c5e7a0ed30c4b12
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,154 +75,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Sep 16, 2024 at 5:41=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
-e:
->
-> Hi Patrick,
->
-> On Thu, 12 Sept 2024 at 00:23, Patrick Rudolph
-> <patrick.rudolph@9elements.com> wrote:
-> >
-> > On Thu, Sep 12, 2024 at 2:58=E2=80=AFAM Simon Glass <sjg@chromium.org> =
-wrote:
-> > >
-> > > Hi Patrick,
-> > >
-> > > On Wed, 11 Sept 2024 at 00:26, Patrick Rudolph
-> > > <patrick.rudolph@9elements.com> wrote:
-> > > >
-> > > > Add support for Arm sbsa [1] v0.3+ that is supported by QEMU [2].
-> > > >
-> > > > Unlike other Arm based platforms the machine only provides a minima=
-l
-> > > > FDT that contains number of CPUs, ammount of memory and machine-ver=
-sion.
-> > > > The boot firmware has to provide ACPI tables to the OS.
-> > > >
-> > > > Add a minimal amount of devicetree nodes to make the board useable =
-within
-> > > > U-Boot, provide documentation how to use, enable binman to fabricat=
-e both
-> > > > ROMs that are required to boot and add ACPI tables to make it full =
-compatible
-> > > > to the EDK2 reference implementation.
-> > > >
-> > > > The board was tested using Fedora 40 Aarch64 Workstation. It's able
-> > > > to boot from USB and AHCI or network.
-> > > >
-> > > > Tested and found working:
-> > > > - serial
-> > > > - PCI
-> > > > - xHCI
-> > > > - Bochs display
-> > > > - AHCI
-> > > > - network using e1000e
-> > > > - CPU init
-> > > > - Booting Fedora 40
-> > > >
-> > > > 1: Server Base System Architecture (SBSA)
-> > > > 2: https://www.qemu.org/docs/master/system/arm/sbsa.html
-> > > >
-> > > > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-> > > > Cc: Peter Robinson <pbrobinson@gmail.com>
-> > > > Cc: Simon Glass <sjg@chromium.org>
-> > > > Cc: Tom Rini <trini@konsulko.com>
-> > > > ---
-> > > > Changelog v3:
-> > > > - Add GIC and GIC-ITS to devicetree
-> > > > - Select GICv3 driver
-> > > > - Drop acpi_fill_madt and use driver model instead
-> > > >
-> > > > ---
-> > > >  arch/arm/Kconfig                            |   1 +
-> > > >  arch/arm/dts/qemu-sbsa.dts                  |  49 ++
-> > > >  arch/arm/include/asm/arch-qemu-sbsa/boot0.h |  33 ++
-> > > >  arch/arm/mach-qemu/Kconfig                  |  36 +-
-> > > >  board/emulation/qemu-arm/MAINTAINERS        |   2 +
-> > > >  board/emulation/qemu-sbsa/Kconfig           |  58 +++
-> > > >  board/emulation/qemu-sbsa/Makefile          |   8 +
-> > > >  board/emulation/qemu-sbsa/acpi.c            | 235 ++++++++++
-> > > >  board/emulation/qemu-sbsa/dsdt.asl          | 483 ++++++++++++++++=
-++++
-> > > >  board/emulation/qemu-sbsa/lowlevel_init.S   |  22 +
-> > > >  board/emulation/qemu-sbsa/qemu-sbsa.c       | 481 ++++++++++++++++=
-+++
-> > > >  board/emulation/qemu-sbsa/qemu-sbsa.env     |  14 +
-> > > >  board/emulation/qemu-sbsa/qemu-sbsa.h       |  38 ++
-> > > >  board/emulation/qemu-sbsa/smc.c             |  72 +++
-> > > >  configs/qemu-arm-sbsa_defconfig             |  10 +
-> > > >  doc/board/emulation/index.rst               |   1 +
-> > > >  doc/board/emulation/qemu-sbsa.rst           |  98 ++++
-> > > >  doc/develop/driver-model/virtio.rst         |   1 +
-> > > >  include/configs/qemu-sbsa.h                 |  98 ++++
-> > > >  19 files changed, 1734 insertions(+), 6 deletions(-)
-> > > >  create mode 100644 arch/arm/dts/qemu-sbsa.dts
-> > > >  create mode 100644 arch/arm/include/asm/arch-qemu-sbsa/boot0.h
-> > > >  create mode 100644 board/emulation/qemu-sbsa/Kconfig
-> > > >  create mode 100644 board/emulation/qemu-sbsa/Makefile
-> > > >  create mode 100644 board/emulation/qemu-sbsa/acpi.c
-> > > >  create mode 100644 board/emulation/qemu-sbsa/dsdt.asl
-> > > >  create mode 100644 board/emulation/qemu-sbsa/lowlevel_init.S
-> > > >  create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.c
-> > > >  create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.env
-> > > >  create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.h
-> > > >  create mode 100644 board/emulation/qemu-sbsa/smc.c
-> > > >  create mode 100644 configs/qemu-arm-sbsa_defconfig
-> > > >  create mode 100644 doc/board/emulation/qemu-sbsa.rst
-> > > >  create mode 100644 include/configs/qemu-sbsa.h
-> > >
-> > > Wow there is a lot in this patch!
-> > >
-> > > I don't think this should be in a separate subdir, just using
-> > > board/emulation/qemu-arm should be OK?
-> > Why would it share the code base with qemu-arm, as it's a completely
-> > different board?
->
-> Perhaps I misunderstand this...what kind of board is it? How do you
-> run qemu for this board?
->
-For QEMU SBSA you use -machine sbsa-ref, but for qemu-arm you use -machine =
-virt.
+On 2024-09-05 17:08, Sebastian Reichel wrote:
+> Hi,
+> 
+> On ROCK 5B power is usually supplied via it's USB-C port. This port has the
+> data lines connected to RK3588, VBUS connected to the input regulator and
+> CC pins connected to FUSB302. FUSB302 is a USB-C controller, which can be
+> accessed via I2C from RK3588. The USB-C controller is needed to figure out
+> the USB-C cable orientation, but also to do USB PD communication. Thus it
+> would be great to enable support for it in the operating system.
+> 
+> But the USB-PD specification requires, that a device reacts to USB-PD messages
+> send by the power-supply within around 5 seconds. If that does not happen the
+> power-supply assumes, that the device does not support USB-PD. If a device
+> later starts sending USB-PD messages it is considered an error, which is solved
+> by doing a hard reset. A USB-PD hard reset means, that all supply voltages are
+> removed for a short period of time. For boards, which are solely powered
+> through their USB-C port, like the Radxa Rock 5B, this results in an machine
+> reset. This is currently worked around by not describing the FUSB302 in the
+> kernel DT, so nothing will ever speak USB-PD on the Rock 5B. This means
+> 
+> 1. the USB-C port cannot be used at all
+> 2. the board will be running via fallback supply, which provides limited
+>    power capabilities
+> 
+> In order to avoid the hard reset, this adds FUSB302 support to U-Boot, so
+> that we react to the power-supply's queries in time. The code, which is
+> originally from the Linux kernel, consists of two parts:
+> 
+> 1. the tcpm state machine, which implements the Type C port manager state
+>    machine as described in the USB PD specification
+> 2. the fusb302 driver, which knows about specific registers
+> 
+> Especially the first part has been heavily modified compared to the
+> kernel, which makes use of multiple delayed works and threads. For this
+> I used a priorly ported version from Rockchip, removed their hacks and
+> any states not necessary in U-Boot (e.g. audio accessory support).
+> 
+> This version has been tested on Radxa Rock 5B using the open source TF-A
+> (patches recently got merged into master branch) using the following power
+> supplies:
+> 
+>  * non PD capable (reports 5V 0A)
+>  * RavPower 90W
+>  * UGREEN 100W
+>  * Anker 45W
+>  * RavPower PB
+> 
 
-Both can use a cortex-a57 as CPU, but that's all those boards share. They h=
-ave a
-different memory layout, virt provides a complete FDT, while sbsa-ref doesn=
-'t.
-sbsa-ref needs an Arm-TF and nonsecure boot firmware, while virt works
-without a firmware.
+[snip]
 
-> >
-> > >
-> > > I see you are setting plat data in the board file...is there not a CP=
-U
-> > > driver which can read it from the devicetree or set it based on the
-> > > compatible string?
-> > The CPU driver could read the data from devicetree, but that would requ=
-ire a new
-> > DT binding. Is that the preferred method over using plat data?
->
-> It is fine to use plat data...but it should be set up in the driver
-> where possible. In this case if you don't have a binding you can check
-> the compatible string of the device (or even the root
-> compatible-string) and add your plat data if it matches.
+This series look good and works great on my ROCK 5B, tested using two
+different PD capable power supplies, so this entire series is:
 
-I was able to parse everything from the DT, except for PMU IRQs. Those
-aren't needed to
-boot the platform and can be added later on.
-Will send out a new revision soon.
+Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
 
->
->
-> >
-> > >
-> > > For FDT fixup, can you please use the event and the ofnode interface?
-> > > See EVT_FT_FIXUP and bootmeth_vbe_ft_fixup() as an example.
+I did notice that trying to hook up the ROCK 5B from my computer to use
+UMS in U-Boot there is a slight delay at boot and following is shown:
 
-It looks like EVT_FT_FIXUP is run rather late in the bootflow, used to
-updated the FDT for OS usage,
-but it must be run early to update the minimal FDT passed by QEMU and
-add the missing nodes
-for U-Boot drivers.
+  fusb302 usb-typec@22: TCPM: PD transmit data failed: -110
 
-> Regards,
-> Simon
+I suspect this work as intended, so nothing blocking.
+
+Regards,
+Jonas
