@@ -4,86 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E15FCAC5AC
-	for <u-boot@archiver.kernel.org>; Tue, 17 Sep 2024 23:49:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9932CAC5AC
+	for <u-boot@archiver.kernel.org>; Wed, 18 Sep 2024 00:13:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F1E288E8A;
-	Wed, 18 Sep 2024 01:48:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3A37188D6A;
+	Wed, 18 Sep 2024 02:13:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TtIh8TIE";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="isKu2Ho8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47C6488E6B; Wed, 18 Sep 2024 01:48:31 +0200 (CEST)
-Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
- [IPv6:2607:f8b0:4864:20::830])
+ id 1D42188BB6; Wed, 18 Sep 2024 02:13:21 +0200 (CEST)
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [IPv6:2a00:1450:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 595D888E9F
- for <u-boot@lists.denx.de>; Wed, 18 Sep 2024 01:48:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D72988D6A
+ for <u-boot@lists.denx.de>; Wed, 18 Sep 2024 02:13:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x830.google.com with SMTP id
- d75a77b69052e-45aeef3ce92so18710921cf.2
- for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 16:48:28 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-53567b4c3f4so6138845e87.2
+ for <u-boot@lists.denx.de>; Tue, 17 Sep 2024 17:13:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1726616907; x=1727221707; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=9lhVQCuEvzHXLqJxST+n3ko9SElNfWsZy41wH5Boqfk=;
- b=TtIh8TIEHpv/iaCV/EUtg/TMneOx6xD7yeXpent89c9JaVD1RZbgIJ6nNyzOw/1gDc
- fHy9dRkF7KctGlVxzpR2Cm4Ntl3htBHixOoMClmhI+8hjYv0eua9/XAsFfaHTQOCtEfL
- HtQdlweEVfG41pQUAx0NdEyEq1JkA88jEiCDk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726616907; x=1727221707;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1726618398; x=1727223198; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9lhVQCuEvzHXLqJxST+n3ko9SElNfWsZy41wH5Boqfk=;
- b=usVYu6VUIaXS0CVfOXRZmLSuanIwKYvuECtHUk+OYyE5KI48IW0Kq8M2yQSX9RYjZT
- xlq75MuCbypq5nLAf69cIbLQN76uKyavqcapWBJ5dT3X13SdMYdi9liW756bq3tdg35d
- aHaowZUyDfGANzB/k1hSXHOnRQJuCpPokgZ7YQH/6MB4QPoikZZ7MFFD40xendpSjE7m
- 9OlVbV1enk+pqtZhwDGP9ztkBF53Xb77JHb8nqbdYxC0aBSo6llOlapqsMR3iBq/cgaB
- T5HppPwx1OLptd8r7jMvXt+X7lnBo8U/lDshpR8CdETBT03YMMD6Ah4XD95U9b6uIRMw
- kBkw==
+ bh=5k4P26UGBSdpw4iwazbN3wzlINO4r/d3um8zYkC0RIs=;
+ b=isKu2Ho8zXmRKWCXmnhKCqp+2CumWI0Rk9CdwYeW8NQZEwjSVhpgMtWp1+we2vNQc7
+ Yr7RbwzyjSLq6qHB/o94LOepKXgCN7ws1ViDt7i7RDZuRuMVgjC8DoOC5N4UekKHAuGN
+ CSfskUKkvcAgY87Yry06DHwQ1u3VvpEWyWCA0XqlsJthcJsdm4MDdIOnArEfaxEkptxu
+ yGeCCLQVIvyRQ5BrIVm72fUvINIVudSk3sVhGuxmsy5sMGyd5zUMZCPs8HYrxvRGRYG0
+ 6p0phNnd8R8alYOFV+iFDng/IVvkA3WhxkUxmb9KueMCTwXeLT+TDb7BQxwKAHhh3ywk
+ Tg/w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1726618398; x=1727223198;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=5k4P26UGBSdpw4iwazbN3wzlINO4r/d3um8zYkC0RIs=;
+ b=v0lK25ARN9RQbwjhC/AbPLcAmiqxOfydzdS60mhyATft4XfnLxaUERKfS0H30add+t
+ O9j/gVpGbAWBeQsKHsaZEnD+wC18qTpqUjkxpxispHPHTr1KKv6qRP1RbPl41cSZLM7S
+ QpVepGvopArBAsWadXrD0jSY5EV5aQ4vlr5XdrvjSZKQhoDAKw5CF10cHreR51XLS4dz
+ mB246p96ov2L5KhJhp+9tf/vwtyGy2MXbqLtZ5rbSDX17URpY7dHUlAs2XHcmLx2Jbj/
+ 0y7voATCrrt5qraMmHisE+ekb/lywL450YzqgpKgioSBa7QpUoNbNh/fwddsrsPidzj2
+ +qOA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV9WuB4HFe3DBnrD0KqPa66gDRvD6Z2tfrOyw2lTOzQXYjAR0AaZzaAJoCI97Q6p+XsEObQUhY=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywh2Vvg0Y+AtY/swp9rzEJUBduYTDKHqBV2x0pPyTm6KyaR+QRM
- sHwqa+ka0XphQRra2yfuhpyWkhXwqTCJNWfKLGRTWCJsJ9c66bjiGoPtTb0+D9c=
-X-Google-Smtp-Source: AGHT+IFkS8un/ln9XwP6vh4nOq6ittfLTWswXWWHSLf2fRpkUJy0EANxUu9ZbQIipBcXF6Cvf9QmKg==
-X-Received: by 2002:ac8:5907:0:b0:458:5011:6671 with SMTP id
- d75a77b69052e-458603de430mr331793971cf.39.1726616907170; 
- Tue, 17 Sep 2024 16:48:27 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-459aad2497asm43429901cf.95.2024.09.17.16.48.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Sep 2024 16:48:26 -0700 (PDT)
-Date: Tue, 17 Sep 2024 17:48:23 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Oliver.Gaskell@analog.com
-Cc: Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Greg Malysa <greg.malysa@timesys.com>,
- Ian Roberts <ian.roberts@timesys.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- u-boot@lists.denx.de, adsp-linux@analog.com,
- Trevor Woerner <twoerner@gmail.com>
-Subject: Re: [PATCH v2 00/20] arm: Initial support for Analog Devices SC5xx
- boards
-Message-ID: <20240917234823.GR4252@bill-the-cat>
-References: <20240912-sc5xx-upstreaming-patches-v2-0-1185a80df79e@analog.com>
+ AJvYcCUhM5uOvUDgVsdEkv+2jao3Pxc8+2Swo4cnLCLs0O/Kt/0ye8KoggBITRfEImMiPxOE8GwwTqI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz1oGSB+A4KBk5K2kSv4EkrlNLxKWMzCsqkosnDfyo+XPAW3v4x
+ vsJPD/KMmUBwZSqEzYdtNg890QXLkmQtQ+ooSTfi7CsSEvHzkZs1yhUKy3vxOyNx8yM+SXBLVRl
+ IU5r7ca0FlsrPKhQD1T3+zV1hj9nwMQ==
+X-Google-Smtp-Source: AGHT+IHVKmBbLjnuXSVU+H73rQtipZn+vFdUZuksGO6auxGl59cN0XE2Y0FKFDEOeWxpIjMSZDJLtKRN7pi51pbRWic=
+X-Received: by 2002:a05:6512:1254:b0:533:483f:957b with SMTP id
+ 2adb3069b0e04-53678ff88e8mr8924767e87.61.1726618397079; Tue, 17 Sep 2024
+ 17:13:17 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="7zf6pe5lNwz066mz"
-Content-Disposition: inline
-In-Reply-To: <20240912-sc5xx-upstreaming-patches-v2-0-1185a80df79e@analog.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20240917-imx9-update-v1-0-4fe8effc937e@nxp.com>
+ <20240917-imx9-update-v1-21-4fe8effc937e@nxp.com>
+In-Reply-To: <20240917-imx9-update-v1-21-4fe8effc937e@nxp.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 17 Sep 2024 21:13:05 -0300
+Message-ID: <CAOMZO5BzLSCTOpOz7vvp-uGfPQAjViuoCP-fyV3BZ3KnxeZm9Q@mail.gmail.com>
+Subject: Re: [PATCH 21/21] imx93_evk: Enable M.2 VPCIe_3V3 and deassert
+ SD3_nRST
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Cc: Stefano Babic <sbabic@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,54 +92,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Peng,
 
---7zf6pe5lNwz066mz
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, Sep 16, 2024 at 11:31=E2=80=AFPM Peng Fan (OSS) <peng.fan@oss.nxp.c=
+om> wrote:
 
-On Thu, Sep 12, 2024 at 04:50:41PM +0100, Oliver Gaskell via B4 Relay wrote:
+> +       /* Enable EXT1_PWREN for PCIE_3.3V */
+> +       ret =3D dm_gpio_lookup_name("gpio@22_13", &desc);
+> +       if (ret)
+> +               return;
+> +
+> +       ret =3D dm_gpio_request(&desc, "EXT1_PWREN");
+> +       if (ret)
+> +               return;
+> +
+> +       dm_gpio_set_dir_flags(&desc, GPIOD_IS_OUT);
+> +       dm_gpio_set_value(&desc, 1);
+> +
+> +       /* Deassert SD3_nRST */
+> +       ret =3D dm_gpio_lookup_name("gpio@22_12", &desc);
+> +       if (ret)
+> +               return;
+> +
+> +       ret =3D dm_gpio_request(&desc, "SD3_nRST");
+> +       if (ret)
+> +               return;
+> +
+> +       dm_gpio_set_dir_flags(&desc, GPIOD_IS_OUT);
+> +       dm_gpio_set_value(&desc, 1);
 
-> ADSP-SC5xx is a series of ARM-based DSPs.
-> This comprises the armv7 based SC57x, SC58x and SC594 series, and the
-> armv8 based SC598.
->=20
-> This patch series includes configurations, init code, and minimal DTs
-> to enable Analog Devices' evaluation boards for these SoCs to boot
-> through SPL and into U-Boot Proper, as well as devicetree schemas for
-> the added DTs.
->=20
-> This patch series depends on ("arm: Add Analog Devices SC5xx Machine
-> Type") (https://lists.denx.de/pipermail/u-boot/2024-April/552043.html)
->=20
-> Signed-off-by: Oliver Gaskell <Oliver.Gaskell@analog.com>
+Why do we need all this board code? This should be properly described
+in the devicetree.
 
-This generally seems fine, and barring feedback from others, I'll take
-this in to -next in due course. But I want to stress now that I will be
-expecting bindings to be updated / reworked as needed to match what's
-accepted in the Linux kernel and I would prefer no (but will accept
-transition window time limited) support for old bindings once new ones
-are accepted upstream. Thanks!
-
---=20
-Tom
-
---7zf6pe5lNwz066mz
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbqFUcACgkQFHw5/5Y0
-tyzvvAwAlje0D8VmRcNu2vsUCbM4+rPZCOv3nxY/AKzojZueibe1KTpTmQU4MXqU
-64blQE23OwFTE3KAElniFIJhWKrpoc/DwRlwqLHGLAMekm1j4cJU6/Uy3PvdIugg
-t+jpydwUZMtzBE97eXumpAMKN4RPntTys4ug9n/aoY+yERRXfRdXF4TGL6bZRTAB
-hrSPi+sKBePTKhBZvWSj6g9A1a14f1w1BbYHjOLtXOk7ljdox8pctAutzSn/gRK5
-/9QOjm5l2PU+5i+8M5wB/Ib3XjZnUdp7WgGtIdfif0PgcRWlXXd2o6Y1uzURQJs6
-cRFRLGhC0mF/aqDAzw9OC2WnXVKk057oINP+dY7kAa8kOdV76P5gQ8yH1+KORILQ
-rzjMPdUGlBCtK9X2YGUobPV4giE+GvkjVHSFuTZx8CYhsUpx1WQyFxw+PISyW557
-KLi+9Lok+UpQcLgGWDbPHlxWLAREPqmGuoXf/EyjhhFj4OUCx/O30I2IHWRKAHHS
-BOAWuRvz
-=+E70
------END PGP SIGNATURE-----
-
---7zf6pe5lNwz066mz--
+How does Linux deal with it?
