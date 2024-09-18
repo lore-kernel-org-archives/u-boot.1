@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06BF0CDD55C
-	for <u-boot@archiver.kernel.org>; Wed, 18 Sep 2024 21:51:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CA79CDD55C
+	for <u-boot@archiver.kernel.org>; Wed, 18 Sep 2024 21:54:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8375B88FFD;
-	Wed, 18 Sep 2024 23:51:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1425388641;
+	Wed, 18 Sep 2024 23:54:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="AYnaHXI+";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="gxCcm6tm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06FCD8900B; Wed, 18 Sep 2024 23:51:39 +0200 (CEST)
+ id A2AF688CCA; Wed, 18 Sep 2024 23:54:17 +0200 (CEST)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F27D88FC7
- for <u-boot@lists.denx.de>; Wed, 18 Sep 2024 23:51:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BFB11880A5
+ for <u-boot@lists.denx.de>; Wed, 18 Sep 2024 23:54:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,25 +31,26 @@ Received: from LT2ubnt.. (dynamic-046-114-110-162.46.114.pool.telefonica.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 85EA33F1C6; 
- Wed, 18 Sep 2024 21:51:36 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 0A5CB3F1C6; 
+ Wed, 18 Sep 2024 21:54:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1726696296;
- bh=qb+8RIKMSRUBLoWfmJgO/TMaPdgz5HJeOJmG6hRy27c=;
+ s=20210705; t=1726696455;
+ bh=t56utOHDLZPbXYiTupZcOtf6ErdV/G0nGMUsGnZURfk=;
  h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=AYnaHXI+dzFo6kI8GkaWgyBS2rxOQIp7tTj3hH0w71/ZjdosDE0ATNPiTzGVHy90f
- XiVvbxypttbLU/Oh4KjWn+3PqiNP4tdOX8iDT6MCR7lM6e8Rg7L9f8Uzc9S0/Zxje2
- GprGou0MDUtc5f3EEbOetUr/uOYsp9JZH3Nu1vyezh7qYi1oveusIoQYmQQt/qhb7L
- 7SYwzwdpjNWX5dYqS69W5ZgzmwYhAxDgeF0lZCRqtkd+P/mM8wf5XV19bRMo3asrUU
- oEAooHO7Fp7nnYxmvaaHzyBsRZTepDG9kd/S5fhyD00Pelrv6Cn6mzt+2OwoJAKfSm
- 8x/Z+vzpt3O5w==
+ b=gxCcm6tmWnW8u/OA3gH0Ozwy4mnr/rAxIlIlDn1g5Xer3fyDftQbV7CUlhLdNnCvy
+ 7haB6AuKltjtLHvmBpsptlOOEytP0cWvTaljFOz/z2i6GRResOffNDQdArtuuqOJ3x
+ k/om9M75GjEviXoUEx1bk0TGiZooFCg+KuJmVklAcW4jLe5FgIdpeSUMY/o2fL0/Qp
+ y8HFuDTxStgDh1pv3tKdguA7HWXQ1e8n7BpviVopanbzuQb0ESAg2xq4RA8vDoWIP6
+ YSliwHT59wguUB6U0m3fVQ3yuRB1n6+SQk/tAwgySVsKmL3rixJzfgryHYAvKP/tgy
+ id9W8Zd02/6ag==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de,
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Sean Anderson <seanga2@gmail.com>,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] efi_loader: correct efi_set_variable_int() description
-Date: Wed, 18 Sep 2024 23:51:34 +0200
-Message-ID: <20240918215134.21110-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] sandbox: fix OS function descriptions
+Date: Wed, 18 Sep 2024 23:54:08 +0200
+Message-ID: <20240918215408.21385-1-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -69,26 +70,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The name used in the function description must match the function.
+* Add missing function names.
+* Align names used in descriptions with function names.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- include/efi_variable.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ include/os.h | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
 
-diff --git a/include/efi_variable.h b/include/efi_variable.h
-index 223bb9a4a5b..4065cf45eca 100644
---- a/include/efi_variable.h
-+++ b/include/efi_variable.h
-@@ -38,7 +38,7 @@ efi_status_t efi_get_variable_int(const u16 *variable_name,
- 				  void *data, u64 *timep);
+diff --git a/include/os.h b/include/os.h
+index 4371270a1ee..ae3ca6d42a2 100644
+--- a/include/os.h
++++ b/include/os.h
+@@ -24,7 +24,7 @@ struct sandbox_state;
+ int os_printf(const char *format, ...);
  
  /**
-- * efi_set_variable() - set value of a UEFI variable
-+ * efi_set_variable_int() - set value of a UEFI variable
+- * Access to the OS read() system call
++ * os_read() - access the OS read() system call
   *
-  * @variable_name:	name of the variable
-  * @vendor:		vendor GUID
+  * @fd:		File descriptor as returned by os_open()
+  * @buf:	Buffer to place data
+@@ -34,7 +34,7 @@ int os_printf(const char *format, ...);
+ ssize_t os_read(int fd, void *buf, size_t count);
+ 
+ /**
+- * Access to the OS write() system call
++ * os_write() - access the OS write() system call
+  *
+  * @fd:		File descriptor as returned by os_open()
+  * @buf:	Buffer containing data to write
+@@ -44,7 +44,7 @@ ssize_t os_read(int fd, void *buf, size_t count);
+ ssize_t os_write(int fd, const void *buf, size_t count);
+ 
+ /**
+- * Access to the OS lseek() system call
++ * os_lseek() - access the OS lseek() system call
+  *
+  * @fd:		File descriptor as returned by os_open()
+  * @offset:	File offset (based on whence)
+@@ -67,7 +67,7 @@ off_t os_lseek(int fd, off_t offset, int whence);
+ off_t os_filesize(int fd);
+ 
+ /**
+- * Access to the OS open() system call
++ * os_open() - access the OS open() system call
+  *
+  * @pathname:	Pathname of file to open
+  * @flags:	Flags, like OS_O_RDONLY, OS_O_RDWR
+@@ -162,7 +162,7 @@ void os_raise_sigalrm(void);
+ void os_tty_raw(int fd, bool allow_sigs);
+ 
+ /**
+- * os_fs_restore() - restore the tty to its original mode
++ * os_fd_restore() - restore the tty to its original mode
+  *
+  * Call this to restore the original terminal mode, after it has been changed
+  * by os_tty_raw(). This is an internal function.
+@@ -207,14 +207,14 @@ void *os_realloc(void *ptr, size_t length);
+ void os_usleep(unsigned long usec);
+ 
+ /**
+- * Gets a monotonic increasing number of nano seconds from the OS
++ * os_get_nsec() - get monotonically increasing number of nano seconds from OS
+  *
+- * Return:	a monotonic increasing time scaled in nano seconds
++ * Return:	a monotoniccally increasing time scaled in nano seconds
+  */
+ uint64_t os_get_nsec(void);
+ 
+ /**
+- * Parse arguments and update sandbox state.
++ * os_parse_args() - parse arguments and update sandbox state.
+  *
+  * @state:	sandbox state to update
+  * @argc:	argument count
 -- 
 2.45.2
 
