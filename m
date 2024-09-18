@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FE78CCD1A3
-	for <u-boot@archiver.kernel.org>; Wed, 18 Sep 2024 13:04:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F06FFCCD1A3
+	for <u-boot@archiver.kernel.org>; Wed, 18 Sep 2024 13:04:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61FA088C10;
+	by phobos.denx.de (Postfix) with ESMTP id B0C7688CA2;
 	Wed, 18 Sep 2024 15:03:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=thaumatec.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thaumatec-com.20230601.gappssmtp.com header.i=@thaumatec-com.20230601.gappssmtp.com header.b="A57vUSTV";
+	dkim=pass (2048-bit key; unprotected) header.d=thaumatec-com.20230601.gappssmtp.com header.i=@thaumatec-com.20230601.gappssmtp.com header.b="Vws9kuKy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1440188C6F; Wed, 18 Sep 2024 15:03:43 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 71D7088C10; Wed, 18 Sep 2024 15:03:44 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E8A388BEF
- for <u-boot@lists.denx.de>; Wed, 18 Sep 2024 15:03:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A1EA88BCF
+ for <u-boot@lists.denx.de>; Wed, 18 Sep 2024 15:03:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=thaumatec.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=lukasz.czechowski@thaumatec.com
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-a8a7903cb7dso433191966b.3
- for <u-boot@lists.denx.de>; Wed, 18 Sep 2024 06:03:41 -0700 (PDT)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-5c4146c7d5dso7570630a12.3
+ for <u-boot@lists.denx.de>; Wed, 18 Sep 2024 06:03:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=thaumatec-com.20230601.gappssmtp.com; s=20230601; t=1726664620; x=1727269420;
+ d=thaumatec-com.20230601.gappssmtp.com; s=20230601; t=1726664622; x=1727269422;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hQJL+4s3ShF0e6LkxYyPSXum1bmqe8k1LZ9ow4crmr0=;
- b=A57vUSTVevwdoI6kjM6/ORWxJg+Qbo94kUKGdBwtI2BRInT2i1ZVI6CN41BwDNBXkr
- 5srf6NUIHjf6Qdvi0IiiHeh5NLIp64ldp5yC2LusEYJ7D/iADvr+8HZa3QBr3hzlebX9
- vN5qbNAOxpv/woVlJmXQxm8DywK26MYUc4p/DpTMGsSfJXHIGwwExvpXEaW2+8i81+Sw
- 0GqC0gZ+MU4pocE0/zZ9OYgPw6oQhWAoZPwibtHlyBdYVaZgmX8xwqU2rbqnyaiit7Q4
- AHR1WyiyObyaVMG32aoiv+Up9IYcppGOahzUXsd69QIkWq2Eg2/uFhxqNLNT7E5AMu3v
- ZqvA==
+ bh=DZ0LcukNClzxY082kwgtPA4hPtir00Kxl1vAfHhyCmA=;
+ b=Vws9kuKyKp4HCK5IQqvJfQdLwlrcrmBwvEm1s1BrOQ9Y8UkKve02fgCCf+Tnu0LzTP
+ b2GXvAFZsYBvCUxmduGf0db9Ze4kdayBxLUSwaVJS6PYNg15kWOHY9n1M6wAIdSi3Hjf
+ y+IKUvUcUf/eW5i8Hcn5hYyZ2FyO8rnsGA1JSy1pkzLjhOot2lJOtMW51Zm+3x9uQvK9
+ k+/J1CMEG1ndPxTGdvOpgjTaEmyzCflYAkzGH4qi+EANxixtp1YADI6CB+sVfU1KMfBJ
+ vijBoxCFKYdr8P6UbMyvpgS0HfdmbT4EZlf89eFhFFxqGLX6lLB4LtVdHGGNrck3OxRq
+ nwSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726664620; x=1727269420;
+ d=1e100.net; s=20230601; t=1726664622; x=1727269422;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hQJL+4s3ShF0e6LkxYyPSXum1bmqe8k1LZ9ow4crmr0=;
- b=I/kZt2ttcA8TLzt81k4WQGr7UaaWlxHacmBafAuktaWW+/OCu4/1oRI8t60aEO4qbX
- eTc5Qur6q0P4Y76fRtjMukd4b6nRMuej4t4EYAfJrZ8ESbuabnsJZr3kgWci8s2GsXQt
- DJDsULiT1/C8qM0j4ryzk7GEx/l5f2LMXCbxIs5DgOgR3yF7xlAexhFaMTO0XE/KnFy3
- 1HzzWtlUZ/oNWZMuxewDN85CsgxUXbTy1OCcQYcI5Kf7y6hpfUa5ZJjORMuVnZj5RdQ9
- KJa0ycL3S9KyCa3xLLiRcddC31TrsGCekcmXITQl1E/aOxnUpBlp1FihjUJOJIFJNgg/
- ni0g==
-X-Gm-Message-State: AOJu0Yy0Bah7O2qjhchgBhdfuYkh7N4ZNIyqSgB520zaKszfrHVorJGJ
- 0EfzwuP4T3ruv8fG1h4OSPnrpqkO2uwBvlNL+OLF+Ki1UuU9T6f/iOv5ih8PtZJrsCYyMvy0Ciy
+ bh=DZ0LcukNClzxY082kwgtPA4hPtir00Kxl1vAfHhyCmA=;
+ b=W2QvJFtECiFoxCrl1XsA38EySew1yZqM4Bm+7VYC6oF2ESB2dJqyxMpWjTk39btmUC
+ MnsyNeztkiZ3W8rTzo5YyyVV/iBNwpQcgBCgqt6WaCk1scRWGRh0SJbKfbjd2zHWFBFP
+ oq+o2gEkwzfSMJt8R+KtVJ3wyPFmuvZUO4OMxWcfBLbawF/E7G5hKzO5Bh6SffLl9rNl
+ GO2KVXB5CEndZnt1cGmwBdJdU8Di5pCKX1j2PU4BG94fvtlBrAi8UjplwhEXDPgGoVO2
+ LEPQGpuNdidZQwFcmKnCC4s2DOk2ItT6JzMrDeIEVw/bVtRC6Ms5CbZlLZuGWtTkWEiY
+ H/Mw==
+X-Gm-Message-State: AOJu0Yysap6ZkIkUl9upV4+WvXGXQTxF1xcRE6OsFDpxPxVz9VVUF8Q+
+ YTl7BpjqUR0mtFqQRd+Xb4jLXxpBhqZ+MzWucZ71T1MBQOym7/jyXZWziKJa62jIU/gMIPTeuBm
  2
-X-Google-Smtp-Source: AGHT+IGCJfwIlrooTOlzjHxsaUlvq9Qvm59/3jYz4DgrcqZmLvxHuu+V0NCEmk0vZTb0J/J7rkNd9g==
-X-Received: by 2002:a05:6402:51d4:b0:5c3:c296:1bc9 with SMTP id
- 4fb4d7f45d1cf-5c41e2aede9mr22509187a12.29.1726664620343; 
- Wed, 18 Sep 2024 06:03:40 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IF1VYV4iw695jNV5Gyq1HbejG/SMnfRErLRzcHjLbktfwRuycOK6LRZCyJMqrVMh8WX8m+nBQ==
+X-Received: by 2002:a05:6402:34ca:b0:5c4:2be3:dc74 with SMTP id
+ 4fb4d7f45d1cf-5c42be3dffcmr10368051a12.36.1726664621643; 
+ Wed, 18 Sep 2024 06:03:41 -0700 (PDT)
 Received: from localhost.localdomain (83-238-227-197.dynamic.inetia.pl.
  [83.238.227.197]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c42bb495a8sm4885576a12.11.2024.09.18.06.03.39
+ 4fb4d7f45d1cf-5c42bb495a8sm4885576a12.11.2024.09.18.06.03.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Sep 2024 06:03:40 -0700 (PDT)
+ Wed, 18 Sep 2024 06:03:41 -0700 (PDT)
 From: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
 To: u-boot@lists.denx.de
 Cc: trini@konsulko.com, sjg@chromium.org, philipp.tomsich@vrull.eu,
  kever.yang@rock-chips.com, quentin.schulz@cherry.de,
  Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
-Subject: [PATCH v3 3/4] rockchip: px30: Weaken dependency TPL/SPL serial
-Date: Wed, 18 Sep 2024 15:01:54 +0200
-Message-ID: <20240918130155.299353-4-lukasz.czechowski@thaumatec.com>
+Subject: [PATCH v3 4/4] rockchip: px30: Fix hard dependency to
+ DEBUG_UART_BOARD_INIT
+Date: Wed, 18 Sep 2024 15:01:55 +0200
+Message-ID: <20240918130155.299353-5-lukasz.czechowski@thaumatec.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240918130155.299353-1-lukasz.czechowski@thaumatec.com>
 References: <20240918130155.299353-1-lukasz.czechowski@thaumatec.com>
@@ -95,32 +96,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Allow to disable serial console in TPL and SPL. Weak dependency
-to SPL_SERIAL and TPL_SERIAL is also used in other Rockchip boards.
+Because DEBUG_UART_BOARD_INIT depends on DEBUG_UART, hard dependency
+to DEBUG_UART_BOARD_INIT in ROCKCHIP_PX30 can cause warnings if
+DEBUG_UART is disabled.
+The DEBUG_UART_BOARD_INIT is already implied by ARCH_ROCKCHIP entry.
+Remove hard dependency from ROCKCHIP_PX30, so that it will be
+consistent with other rockchip boards.
 
 Signed-off-by: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
 
 Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 ---
- arch/arm/mach-rockchip/Kconfig | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ arch/arm/mach-rockchip/Kconfig | 1 -
+ 1 file changed, 1 deletion(-)
 
 diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-index fc1b638ff01..47a6275d45f 100644
+index 47a6275d45f..c9aaf6d3476 100644
 --- a/arch/arm/mach-rockchip/Kconfig
 +++ b/arch/arm/mach-rockchip/Kconfig
-@@ -11,8 +11,8 @@ config ROCKCHIP_PX30
- 	select TPL_TINY_FRAMEWORK if TPL
- 	select TPL_NEEDS_SEPARATE_STACK if TPL
+@@ -13,7 +13,6 @@ config ROCKCHIP_PX30
  	imply SPL_SEPARATE_BSS
--	select SPL_SERIAL
--	select TPL_SERIAL
-+	imply SPL_SERIAL
-+	imply TPL_SERIAL
- 	select DEBUG_UART_BOARD_INIT
+ 	imply SPL_SERIAL
+ 	imply TPL_SERIAL
+-	select DEBUG_UART_BOARD_INIT
  	imply ROCKCHIP_COMMON_BOARD
  	imply SPL_ROCKCHIP_COMMON_BOARD
+ 	imply ARMV8_CRYPTO
 -- 
 2.43.0
 
