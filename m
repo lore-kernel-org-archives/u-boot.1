@@ -4,77 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16391CCD197
-	for <u-boot@archiver.kernel.org>; Wed, 18 Sep 2024 10:40:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E930CCD19A
+	for <u-boot@archiver.kernel.org>; Wed, 18 Sep 2024 10:47:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E5B488B49;
-	Wed, 18 Sep 2024 12:40:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 14D6B88A0A;
+	Wed, 18 Sep 2024 12:47:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GdR5wsDD";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="tcmm3BD3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A05688B49; Wed, 18 Sep 2024 12:40:35 +0200 (CEST)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 21E5188B93; Wed, 18 Sep 2024 12:47:37 +0200 (CEST)
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on20615.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2412::615])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 008F588DBA
- for <u-boot@lists.denx.de>; Wed, 18 Sep 2024 12:40:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 89E2788A74
+ for <u-boot@lists.denx.de>; Wed, 18 Sep 2024 12:47:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-3780c8d689aso4838191f8f.0
- for <u-boot@lists.denx.de>; Wed, 18 Sep 2024 03:40:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726656032; x=1727260832; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=/YftGR5akPSnbShux19TfK7C1vu5vMDSi9Y4aNS6h7M=;
- b=GdR5wsDDbNySA07L8u/cWcSdNsYZH+FpwcuE2w800P/Tg5CnflmvD1RNDa1m1+FK98
- DWSXHsot35j71QLaqGdBDsB+i+gcE+QQcKf5giRx78VgAYduDqtiMsz/5/SBKfW7f6w0
- BxAqSGjPRrBPbYLPIs4zXczwY0dR6WxEtQPyvBt+gZL9Isw8nJckSQ+2vuN6DkfP2tZg
- KETlzgrp/nqILZkWLJfYN/tGBJt2huAQ4GeXgmGJfbxUXAo0+OIjZDI4elWGN/H4W5T9
- 8iTxzBqct6d+IQWzG/Sz8KUbunx1BxohVUTIa3gI2HLNo/P9h4ZyK5zizYhHEXMz/irs
- pi/g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726656032; x=1727260832;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=/YftGR5akPSnbShux19TfK7C1vu5vMDSi9Y4aNS6h7M=;
- b=LSCymhdS7UxUsTmYKk7LVXfz0RsfWxCwnunOx6OrOtYVbEwoK2NtYYTRIe2Z2T7KY2
- oQQlvcJuQZkz5M5JrWJl7q783Zv9d4Ir5/8IOsXjtzr1bG1VPvhsNcw+tbWdn/1twzZZ
- tFTMTFI9ET4adCt3mkLNo+7Vw/EQWo98EKy8JGkITPHur1nTwjCR8cK7GhuDn+Par9aJ
- nnO7/4jHgzcBw+zcEqS/qwnKyfLmlD+rqL3BsnmtDOkIk/5QT+N4grTNlH+RJzjo8riK
- Spg81ICuyxM2BasGhRLglfqCp6CR/2kj7g50ZXv/IwrQjvUU6M5xyV7sU+pUT0mu8Rlw
- rHqg==
-X-Gm-Message-State: AOJu0YxrcRcxj4P8krCH5GzhDF4wU3oHFzKZ2aPT0Mptyc6jyMlu9UJh
- bT15ceF9tzRLG/DuBT0dOkR3Qteg9IMnCZz3msxlfQ6dI6ofyVCy0yhGosHI73Y=
-X-Google-Smtp-Source: AGHT+IEn2LELLI7HXj9p8wBYfWzaKUxHpDTdthSTkYaLH72FGxrw+21WLgsbbaxmTYoSnpeXSBb6KA==
-X-Received: by 2002:adf:f801:0:b0:374:c1de:5525 with SMTP id
- ffacd0b85a97d-378c2cfecefmr13959231f8f.6.1726656032158; 
- Wed, 18 Sep 2024 03:40:32 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:982:cbb0:2782:e782:f1c:dcad?
- ([2a01:e0a:982:cbb0:2782:e782:f1c:dcad])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-378e780519esm11951749f8f.103.2024.09.18.03.40.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 18 Sep 2024 03:40:31 -0700 (PDT)
-Message-ID: <79c51777-fbe0-4a02-9f81-bd468740ac6b@linaro.org>
-Date: Wed, 18 Sep 2024 12:40:30 +0200
-MIME-Version: 1.0
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=CZa/OSgJjMa9vBmVq/HZswZOMUNXfHFyE3KqBwD9mj3NcR3WCkZ48qslnxlkBSHM2SbL94bEoX649wxBTV8I3Jd2QwoxDx21MDNKVcceWFRy88D2HjdgIsCV6ao5+tZGBT0RGemjhh2vozb2AHpeNrcqmLlzr9HP/J+j+WhtiWWvqj3pMep3F1R3tiaV/xfA3+9RvCArHvztnuxZvtadQ5hvkxOnc3IFLexQmFypTgNp7vKHvaMIh6sPs7pKm+59bt84VYd9Euryo81YNcK8RyNyptfASaMYqJ4wIIlOvb3LlIr0LOyfxSayF9FicE6w5npKZd0e4TkBPdytBRdGeA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=O+LIbA9sju3j7w1dI6CVzOrUTSIijghmjDH+CKPJVt0=;
+ b=t9YD+8hXz1PNi1qjUKdCCefRRNpBurrB9xQUjlDxCSMF2k80/W0cv4b6dvLmOXRC+6513kutBfvYHb5R/azufFnD0S/mATxRsmsWrofvYtD45+7T9q9bM494/49LD1W8LNIbg8BMuBXTB6BMLAID/hAMw7dBJlixmPiX9bgXCoZ5ZkowYKlbSR5MvR+GYtCkkbsCQbL5Yn5oXIF/wWoqCts498Ix/g6ahve9LdpQX7aXRI01gBAA1vJvORoooWoWwcqCon2HaeFLWwp2SB8Xml73xtFs6cTalllBLu7/5R//eeq87kqDRaWH5k68pwe3Z8WFvqO5FslB1RDrU63F5g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=O+LIbA9sju3j7w1dI6CVzOrUTSIijghmjDH+CKPJVt0=;
+ b=tcmm3BD3ze7f8F3qV4WcfUriNPVyeci5qGGDrJhSuzdMOS9+qJpRqsNpMHukt9PSKWrE3ln38kchxCwWiWxDCJufEF9eEy9864zvw+OWRZDAvZqeAckZRhPuasnPuh4Co9R1mIRs7CYACsJOd0nQMw7Eo9XV9ut8lAV9pxwKJnI=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
+ by DS7PR12MB5861.namprd12.prod.outlook.com (2603:10b6:8:78::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7962.24; Wed, 18 Sep
+ 2024 10:47:30 +0000
+Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
+ ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
+ ([fe80::7f35:efe7:5e82:5e30%4]) with mapi id 15.20.7962.022; Wed, 18 Sep 2024
+ 10:47:30 +0000
+Message-ID: <69b3b92d-b263-40b1-8d39-66a5fb445015@amd.com>
+Date: Wed, 18 Sep 2024 12:47:15 +0200
 User-Agent: Mozilla Thunderbird
-From: neil.armstrong@linaro.org
 Subject: Re: [PATCH 00/13] ufs: enhancements to support Qualcomm UFS
  controllers
-To: Michal Simek <michal.simek@amd.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
+To: neil.armstrong@linaro.org, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
  Neha Malcom Francis <n-francis@ti.com>, Manorit Chawdhry
  <m-chawdhry@ti.com>, Tom Rini <trini@konsulko.com>, bmeng.cn@gmail.com,
  "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>
@@ -83,35 +66,147 @@ Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io,
 References: <20240910-topic-ufs-enhancements-v1-0-3ee0bffacc64@linaro.org>
  <bff9ce50-b5a6-45d8-9969-f116d91f75dd@linaro.org>
  <49932fef-c37a-4736-a2ac-829d5c39081d@amd.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <49932fef-c37a-4736-a2ac-829d5c39081d@amd.com>
+ <79c51777-fbe0-4a02-9f81-bd468740ac6b@linaro.org>
+Content-Language: en-US
+From: Michal Simek <michal.simek@amd.com>
+Autocrypt: addr=michal.simek@amd.com; keydata=
+ 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
+ 3i3l5DA=
+In-Reply-To: <79c51777-fbe0-4a02-9f81-bd468740ac6b@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1PR03CA0078.eurprd03.prod.outlook.com
+ (2603:10a6:803:50::49) To SJ2PR12MB8109.namprd12.prod.outlook.com
+ (2603:10b6:a03:4f5::8)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|DS7PR12MB5861:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7b10cf17-2da0-4601-98cd-08dcd7cf4b56
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?S1BEQ1k2elZkMVQxSDFhOUV2eTdyS0EvZEdrc0JESGFoOEliN2lSZmMrcWpR?=
+ =?utf-8?B?UTdndklWMjhkZzhjZkFJenorN3RtRkxmaEk4WlFWM1R3clIzMXRncFl5S3B6?=
+ =?utf-8?B?N1pDUGR2M2RmK2Fmb1Q1M2d5WkhDMHhBNzVOZ1JhSFhBeFhPTEVTWHdNaWtN?=
+ =?utf-8?B?alQ1ajdHT1MzdEI1MjExd0JuOHFyWmtvTkRWSDk1VTVlbCtyWERXVk5tTUxE?=
+ =?utf-8?B?SmI4dXpFODBETlNjK2JvL29sbXl6TDlhZjlmRDUzRFdJcC9OVEc4azFQVmM5?=
+ =?utf-8?B?SUVjcXVvaFl2TG1VZ3RpSnZDdk43aFU0dCt0a1pBc1BLMkpWM3NDeS9Hd2Zn?=
+ =?utf-8?B?aG1SRElRUEdzdmc3cHZFSC9naURpanh4K2FaTnZhZE5tTXFWdGNRUzhlVlZK?=
+ =?utf-8?B?VVBNZlBSNGNqVE8vVEkvaFM3eHFYRUp5Vm9LZEJxaUoybDAveCsrSVVpcXNW?=
+ =?utf-8?B?NjVjTVNHMi94czhNdEJtRUJQWnh6VkdPRnpWRFdsR3RZdmNSbzZNdDdOZklY?=
+ =?utf-8?B?bUsyRzFVNTd0em1wSXZUWHNNcjFJM2NDWmFJTmVidjZlWkRYc2J0K1FJYzBT?=
+ =?utf-8?B?VGY0eWZMRE5pUmVGbFdoQTZYWEhCUXhxRGJ3dnpnRHJkcDAvQko5U3AyaUFp?=
+ =?utf-8?B?WEtWaTRzbkFUaFZXWis2TFd4YzBDZEZMQVJKd25MVVk0VFVudlFtazBiKzlK?=
+ =?utf-8?B?b1FJQzh5RkRRUFExYUw5U2NqZkZ4Ykk0ZmV4WFNFRGRhSDQzSFI3ME9mTVBm?=
+ =?utf-8?B?MzJmME5lOTN3RHdhT21FM1A0c2d0Sm1zT1IrUlJuTHdUdzRoR3RQZE9WNHBM?=
+ =?utf-8?B?ME9lVm8rbEhQSGpHYlhTSTBDN0JJc211Y3F2bEdZK0JLRHNRM3poSlR1OGoy?=
+ =?utf-8?B?dWNxcEhxd1d1YjQwVTZ6ZGMvdVlPR2lLYjJTZE43VDREQmkwZktvTXE2UW1l?=
+ =?utf-8?B?bG9TbUlrdTJ2RjR1OWVKdFAzZU5vWFRNT1J2RDREckYzbDdoMEJlMjVoRnc3?=
+ =?utf-8?B?cXFpSzgyT1RTR1R1YVNFZi9lM2t6QzhMeEZjNDN0eVJGQVI3NUlEVHErL0wy?=
+ =?utf-8?B?SjJGQTRsZklFb0psR3phZnJJNzFNbVBzYTREbnFLNE5EMUs3Q0dObXhiQVZ2?=
+ =?utf-8?B?WXZ6dEJ1c3ZDbVNIN0pLb2cyWlBsWHJhUHZhN2xSUkpMbklSVEx0cElrbDZ1?=
+ =?utf-8?B?a3NuNVJDWEJIZm9ySkg4SXVMcFF3MFBoeWpYcUJwVnN1YU56V2tsRGx5d3o1?=
+ =?utf-8?B?SlBjRnFHaHd1R3BjNk1wYS93YXAzSlNNWDhYT1cxSEYxSGE4ejFmWUg2ZW5n?=
+ =?utf-8?B?cDN4dFltaHRBUGpZdXBwNTRKMEhaZlZwdDlHakhqSUthK2ttZVpTWndiTEpq?=
+ =?utf-8?B?TjI4QU5qbGZKUjdMd3g5c1dnUXFNL3ViK3BFT1JZZ2VhaXpSbG1VbHd3UnF4?=
+ =?utf-8?B?c2lKVWUrN2tSTjRuYmVET1VQMnNRNGU3V2RTTmMyMDBXRjNRajFoekpZcGdC?=
+ =?utf-8?B?Q3daei9jdGFGaTBuWDcyWHBwNC9hOWdlYy9oNmFhQmF4c0tWa3BlMUxVRTFy?=
+ =?utf-8?B?N3dja1NQSzg2bFFVSTRwQlBCMFhONWZJNmcrLzduclBBdkxIa3hzQi82NFhs?=
+ =?utf-8?B?TjRIanpnd1NwNTkyQmdkVWRPVnAzN0EzOUhvM2xZVzRubjZQSnBxNHQwRFR5?=
+ =?utf-8?B?YmpzOEZtTVJjc3F6NDl4L1phdmVvUUJtV2hYRlFDbHVSekF2T3NmRFlqemNL?=
+ =?utf-8?B?TmxEYSt2YXAybWRkc0xBREIxdTZoN3E1L0Iwb1FueGVCcWNNcEYrYmtJVkFS?=
+ =?utf-8?B?R09xMXZhMEV6bVNKM3NuZz09?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Q2pqMVJXUHpnRWZva3lrTDg3YTRQM3IvZnd1ZUhRRzRGRUoyUFZOV2tFYTBV?=
+ =?utf-8?B?ZUR5NGVkQjBrU2ZYNTgrQU1RRlUzdkROZnA1RWdMcFZGbVhUbjBuNDlyZGIw?=
+ =?utf-8?B?UTZsVjlzYkxtdG1kRXdMOVZhWDJuQ1NLS0F6enZkOGRMS0UrbHl3SDJTdWw5?=
+ =?utf-8?B?QXRKYVFEamhRUTlISmRvQ0wvOGkzS0RObUVXMHIrVjdUVlVrNWRGWGs3cm9B?=
+ =?utf-8?B?REJlMS9WbEYySjdWbGJYemxGSUZobGVXMWFyM2xlWUVQL3ZFLzB6STJHVCtF?=
+ =?utf-8?B?ZzgyWG9TN0NNSTBrM3l4eFhlUWpLZFZwZng1OVc5S0h6d1FvMG1WcUFIeUZw?=
+ =?utf-8?B?bkwzY3Rqb0tmdFo5cFhPR1hIM3VaRFNkMXAxamt6Q3B2TFcrTzJ3cmxIRnNL?=
+ =?utf-8?B?ZUJXK1FKSUxiUWV4Qy84RHNBNGdBaDJ3bmo4ckFXaDZDR3FrbTArOE05YWFY?=
+ =?utf-8?B?THJHVmd0ZlJsQXVBVzVYVnFaaDY3U2tPaVdidXluREdZTWRwbzBWbkMrbXJB?=
+ =?utf-8?B?ZjRSYXd6U3R2SGM2WFZyZ1lRTVB3VnM3WUZvQk44bTJoQWpFQzk5alFDSnhW?=
+ =?utf-8?B?OUtnTmF1RzMwQkV6ZGNQajNZcVVHMFQ1OTdoUXcvSnhGUWYrSXovT0V3NDlR?=
+ =?utf-8?B?V051d0hwZzRQTW9wYlNwczNNcHB5NVBxZDNpUmIvWkZTcFJoVDEwTFRqZHU1?=
+ =?utf-8?B?ZlJaMDNGY3plM28zd2xYbkFpazJHMDB0RlQvL1hvVVRnelNJcjIxaGszaXdw?=
+ =?utf-8?B?eHVUVy9VV0ZVc1owWUllRjdZUWg5Z0E3NXA2WlRzWjVwTUF2dHp1QUNndGNP?=
+ =?utf-8?B?RjJYVzZKSmdnYWIrYmZHMWMrR0RkVi9COXJ6VFpOUGJPR1N3NUNHUW9nUEhY?=
+ =?utf-8?B?d21LdG9MdjBUN2lJUDQvaG5ITkpPTVlZSjZLQWJ3bFhuVStxcEVPK0xVc1V3?=
+ =?utf-8?B?UjBEVk9GOVY5bFNSTnc5WGU3M3JiZFdQNGdTRW5hNEFOV0dERGZmaktyY0Vp?=
+ =?utf-8?B?Snp3MmJyREltV3hTYTMxM2g4RzFldjNoalJtRFNFNVJWbEt0VzZZMlhKMHF2?=
+ =?utf-8?B?QUkxMGc5SzV4SURkZkk3WkpLOWtFL1NoNWZXdTg1K25kQTBlS2hhZGgvOWgw?=
+ =?utf-8?B?VE1wTmNnQUJhbzltVUJONk04a1NEUDhYM3RQM0ZWcmlUY20rczJRcmNKcmJ3?=
+ =?utf-8?B?YWxQbTFjSDdEaXp1QUtzTTJuV0VweVdzclNwQ1Y2N3J1R0ZTWThDRnhoWTVW?=
+ =?utf-8?B?d1paZjJRdVd1VVp0SG1rRnJSZ0UvUFEveDlrMmpXVVdUTCtIR3FjdGt2T0I4?=
+ =?utf-8?B?aU9waE9MWDFZY2c3amxPRHovT1FaOUY3TTh3NGl5ZjlPU0Eza1lVczBUUkZp?=
+ =?utf-8?B?ZzdjNXIrQlhGaGVtQklzamozMnBmUFByTWkweElhS3RqUjUvRHFQRlIxR3Ey?=
+ =?utf-8?B?dFJKaG5mK0Nyai9hSXRCanFScXJ5L3BWYWdzWXk4VDI4M3Q0UU5nUkpSSFNq?=
+ =?utf-8?B?QXExRUJ5UUM1MkJtcDgwSnZRbXpZSEl6U3oxSkFBM3F2LzJLVlNQWmpsZnpD?=
+ =?utf-8?B?SmNlWVJmQ0hKY3pVdm1uREJGQWh2QkJuMmpUd3pYMHBPbXM2bytJT0dLTS9a?=
+ =?utf-8?B?TXU0NzJoWmpIWXNuUjBFdEpybm1FamR0WW9HRWxJODlYQStNekdQdE9SWG9Q?=
+ =?utf-8?B?bUo1aWVWeWFnbE92MGhoZm9qRGV5WVpzV0xOVDN0UllwVXJIbTEwb3d3QXRK?=
+ =?utf-8?B?NWVTUzJYWk9nZlkyMFMrRW9iZDNhRlVRTDdBbm1mTzQ1NnlFQnEzd2NBbk5Y?=
+ =?utf-8?B?RUpTYUIrNGlta214V21LaFFWVVd4bisvR2o1bnRIMTlsNWxYWkswK2hDY3Rh?=
+ =?utf-8?B?ejJocXloQWxDV2JoK1J2OHU1VENiMG5kd2xzZEhMVzR4ZHZwdUdTbHpWUFVI?=
+ =?utf-8?B?cHFkVi9GbDdlRHY0U1MrYmNoRENjWHRIVDRicU1xSGcrVkZsWU1CeDJiUHFT?=
+ =?utf-8?B?SnJ5bXRTSk93aE9RbkphQ01NeDAzWDVoUUFYRFlseS8vL0UyMVJuNndHRUtu?=
+ =?utf-8?B?bEJNMm5Jdys5dUZUOXhETkpuVlJOREo5dzIzZDIydzBCaE50eCtjRHhaZFc3?=
+ =?utf-8?Q?TpHD3WyLSqMcb24Om1XboAMC1?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7b10cf17-2da0-4601-98cd-08dcd7cf4b56
+X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Sep 2024 10:47:30.4587 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 9JCyAuuCVdRZTVCDvhvOiXmvw7N7VuDPVsDLk4Ju+HKTefaG2xV2StPqE9fy2KmF
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB5861
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,66 +218,65 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-On 18/09/2024 11:03, Michal Simek wrote:
-> Hi Neil,
+
+On 9/18/24 12:40, neil.armstrong@linaro.org wrote:
+> Hi,
 > 
-> On 9/18/24 10:06, Neil Armstrong wrote:
->> Hi Marek, Manorit, Tom, Michal,
+> On 18/09/2024 11:03, Michal Simek wrote:
+>> Hi Neil,
 >>
->> On 10/09/2024 11:20, Neil Armstrong wrote:
->>> This serie regroups all the fixes and base enhancements required to
->>> support the Qualcomm UFS controllers in U-Boot.
+>> On 9/18/24 10:06, Neil Armstrong wrote:
+>>> Hi Marek, Manorit, Tom, Michal,
 >>>
->>> This syncs headers & defines from Linux, and includes 2 set of
->>> fixes that were sent separately:
->>> - ufs: core: remove link_startup_again logic
->>> - ufs: properly fix cache operations
+>>> On 10/09/2024 11:20, Neil Armstrong wrote:
+>>>> This serie regroups all the fixes and base enhancements required to
+>>>> support the Qualcomm UFS controllers in U-Boot.
+>>>>
+>>>> This syncs headers & defines from Linux, and includes 2 set of
+>>>> fixes that were sent separately:
+>>>> - ufs: core: remove link_startup_again logic
+>>>> - ufs: properly fix cache operations
+>>>>
+>>>> Without those 2 sets, UFS cannot initialize on Qualcomm controlers
+>>>> since v5, and a numerous of Cache issues makes any UFS controller
+>>>> fail to initialize.
+>>>>
+>>>> Since UFS core hasn't changed for a while, and since UFS is core
+>>>> technology for the Qualcomm SoCs, I volunteer maintaininig the
+>>>> UFS subsystem if Bhupesh & Neha Malcom Francis are ok with that.
 >>>
->>> Without those 2 sets, UFS cannot initialize on Qualcomm controlers
->>> since v5, and a numerous of Cache issues makes any UFS controller
->>> fail to initialize.
+>>> Could you run this serie on the r8a779f0_spider, j721s2_evm_a72, j721e_evm_a72,
+>>> j7200_evm_a72, amd_versal2_virt and qemu-riscv and check for possible 
+>>> regressions ?
 >>>
->>> Since UFS core hasn't changed for a while, and since UFS is core
->>> technology for the Qualcomm SoCs, I volunteer maintaininig the
->>> UFS subsystem if Bhupesh & Neha Malcom Francis are ok with that.
+>>> It seems the only user of UFS_PCI is qemu-riscv, is there other users ?
 >>
->> Could you run this serie on the r8a779f0_spider, j721s2_evm_a72, j721e_evm_a72,
->> j7200_evm_a72, amd_versal2_virt and qemu-riscv and check for possible regressions ?
 >>
->> It seems the only user of UFS_PCI is qemu-riscv, is there other users ?
+>> Good timing. We are close to send some updates to UFS which we require to get 
+>> DWC version to work inside U-Boot.
+>>
+>> How far are that core changes from Linux? I see 9/13 is sync with Linux but 
+>> when this is done you should also say which Linux version was used for sync.
 > 
+> I think we are still quite far from Linux, we just took the basic required bits 
+> and pieces
+> to at least make the Qcom UFS controller driver build work, but Linux driver is 
+> overly complicated
+> with power management code we do not really need in U-Boot, so it's quite hard 
+> to sync honestly.
 > 
-> Good timing. We are close to send some updates to UFS which we require to get DWC version to work inside U-Boot.
-> 
-> How far are that core changes from Linux? I see 9/13 is sync with Linux but when this is done you should also say which Linux version was used for sync.
+> But the plan is to align as much as possible once we get the basic Qcom UFS 
+> mainline.
 
-I think we are still quite far from Linux, we just took the basic required bits and pieces
-to at least make the Qcom UFS controller driver build work, but Linux driver is overly complicated
-with power management code we do not really need in U-Boot, so it's quite hard to sync honestly.
-
-But the plan is to align as much as possible once we get the basic Qcom UFS mainline.
-
-> 
-> I see that there are definitely some kernel-doc issues
-> 
-> Also s/U-boot/U-Boot/g
-
-Ack, will check
-
-> 
-> Venkatesh: Can you please look at this patch series and validate it on our platform? Also make sense to send our changes to make sure that they won't break others.
-> 
-> Thanks,
-> Michal
+That's understandable. But even when you say sync with Linux for some headers, 
+etc it is good to say that it is sync with 6.11 for example.
 
 Thanks,
-Neil
+Michal
 
