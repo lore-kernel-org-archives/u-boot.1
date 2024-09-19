@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 461D7CF3941
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 14:10:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDC9FCF3941
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 14:10:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C41E8891CF;
-	Thu, 19 Sep 2024 16:10:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 32874891B5;
+	Thu, 19 Sep 2024 16:10:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cYShX9qX";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IowxnJ/I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E3B2891C7; Thu, 19 Sep 2024 16:10:00 +0200 (CEST)
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
- [IPv6:2607:f8b0:4864:20::f29])
+ id 83799891BD; Thu, 19 Sep 2024 16:10:03 +0200 (CEST)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9445689178
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:09:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 70B09891CA
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:10:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-6c54b1f52f7so5479426d6.3
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 07:09:58 -0700 (PDT)
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-6c34dd6c21aso5443006d6.2
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 07:10:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726754997; x=1727359797; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1726755000; x=1727359800; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=k/hrPY9yIk9SNq5dowTPJC/MQxyHV/pmBS7RiR312VU=;
- b=cYShX9qXxHwH6b7fZd4c2Ztr62xbVi14jJLB5aJm+RVjTBykvy2yvZ0qHtF+f0reyP
- 3N7Hn1bD+Q0IImyAVyW+upMh4e/im2J4g4TM1z71YGIi7+D4AGJuJWJiBk0F0h2TrNTg
- eAHklKJ71IWBklLcK9/0oVlBr69ABSRK3ElGw=
+ bh=/XwMXPfmGjMXreSyn++r3+CsNg6EihddpKOod/8z7aY=;
+ b=IowxnJ/IefQsRF5s4EfhXObhKS7visA4gw9zEPlF1Rvy5X9wMj20OonB8VSq1cR9bX
+ qKIlFN+7uVphmqS7mZqZ0WZVTOibrQ6RgRl28ujEJHT4TqTXNDKlkbOFfC0tjoMxge/R
+ bbLyra60HS3pXWcBBn/f8QmaeGfKzm47RVYsc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726754997; x=1727359797;
+ d=1e100.net; s=20230601; t=1726755000; x=1727359800;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=k/hrPY9yIk9SNq5dowTPJC/MQxyHV/pmBS7RiR312VU=;
- b=C0l5KkMKY5mSZZOPBg3Dh1vaU/ppDtJYdZy+lBOGpZJwgOsgdq/R66srvbhgy3T7hj
- 5jiMuxeG0RjPgZ42nRJnjvjZDlcajztOiy7yFaJ2UV1n+NPEJrkWdIqMX+nEawNp4+wh
- m65vaDd/utGjGDOSrIkvZg0tuoIiQo8DXmXTsn09uuSacfTrT2fKxSo38iCnTz/JLcdD
- iabxubQel8o6gG/Nv5RhYJsMYLDVRlb7VKpzqwOP+Gn3fkIhRaSiLO2kRLp22x23BVH0
- w727eGpGQ+WCF3DxPJcC/AKigUs93FfKQ9NSkDX1BsXCMqPrNdHuO+w+k5cZ65XUIwNe
- 05bw==
-X-Gm-Message-State: AOJu0Yy8+zAkgJZwW08d1Z6WJTn4dN4Bu06QKxAwuAdBZf2+Ky4EUME5
- BJ46tydKTQwoXOFfuSZdld5rnUgW7ukqiaKiXU8a2mZMQXrQjHVErqokORv0z3YjS1aSXDoVfLZ
- XfYEjUE6xn/BKskTSJeIlaghPq5ygXEimHQw5
-X-Google-Smtp-Source: AGHT+IFT5TGHBvMvezVKDdma1ISd6v8+1/bjzvA0SsPItCZ/rvXNx+l1in6TiULgkMCIfDF1sCJdDPD6+vu6dMwdleU=
-X-Received: by 2002:a05:6214:5d92:b0:6c5:688a:63b4 with SMTP id
- 6a1803df08f44-6c57359256emr369349236d6.50.1726754997214; Thu, 19 Sep 2024
- 07:09:57 -0700 (PDT)
+ bh=/XwMXPfmGjMXreSyn++r3+CsNg6EihddpKOod/8z7aY=;
+ b=ucSbHxfjMz+/ireRjwiCfeBbZGWGzISmgIC3sXtrPmKYa3wbGbS6XUl5fabYlBSszB
+ 1OQoIk8y4ATalOhEu0V8+SCshA8L8oXB5QdoKKkxr5EgexSVnBSkEkXk235KEdcwbVOp
+ 7WAFKZDG7oMb16dzXGV7g4AeugZOkzXI2EzqarHYI9Q2nUGgFZCxkbGdZ49BA7BhTb+V
+ 0OZN2JhLRv8034khzNqWwpfaurPxoo6CxNhVRnKZlTEWgQIsGMi0eRokLIXadResZIKz
+ 9Jbo6lw8dXMX6PjOKJ5+Bk3AIFbK35qzrwQ1bLnZsqeHe3YZAGQxxDGsfhh5h9TDg+f2
+ Azgw==
+X-Gm-Message-State: AOJu0YzFLEQmKMqXqD0k/qhZ9fgizM/2Klh9qeASavVMMrVwPgjFyyZg
+ l4f9xtEuuvZi33tiKRU6f/DPeZ5KnXLvBDL8FHu/Q+fsPrLNQfqr9glWyMsnSE3/T9VzRDXzeA0
+ 3CqSOhK4V4nOWy1+chlGrI/ES4t26uY9YtvmE
+X-Google-Smtp-Source: AGHT+IGN47wvtUMqG6TmWurPc+pxLUOHND0JwFncLJ7mtd+cD5z92catn5fTSrBAbwTEd9ZWgQh0ydpyT6J2Ep40BZ4=
+X-Received: by 2002:a05:6214:434a:b0:6c5:a3d9:1bc5 with SMTP id
+ 6a1803df08f44-6c5a3d91d54mr189822696d6.32.1726755000264; Thu, 19 Sep 2024
+ 07:10:00 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240918152136.3395170-1-patrick.rudolph@9elements.com>
- <20240918152136.3395170-36-patrick.rudolph@9elements.com>
-In-Reply-To: <20240918152136.3395170-36-patrick.rudolph@9elements.com>
+ <20240918152136.3395170-21-patrick.rudolph@9elements.com>
+In-Reply-To: <20240918152136.3395170-21-patrick.rudolph@9elements.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 19 Sep 2024 16:09:46 +0200
-Message-ID: <CAFLszTjUWHPF4jYBJDJBzyDFm7N8mQurdq=2eesayJS7yqi+6A@mail.gmail.com>
-Subject: Re: [PATCH v4 35/35] configs: Add RPI4 ACPI defconfig
+Date: Thu, 19 Sep 2024 16:09:48 +0200
+Message-ID: <CAFLszThP0ABDm6fV6rBS9Uwc4h9w0k8oijA379cw5XzpbW=nAg@mail.gmail.com>
+Subject: Re: [PATCH v4 20/35] arm: gic-v3-its: Implement of_xlate
 To: Patrick Rudolph <patrick.rudolph@9elements.com>
-Cc: u-boot@lists.denx.de, Matthias Brugger <mbrugger@suse.com>, 
- Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, linux-kernel@vger.kernel.org, 
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,24 +83,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 18 Sept 2024 at 17:23, Patrick Rudolph
+On Wed, 18 Sept 2024 at 17:25, Patrick Rudolph
 <patrick.rudolph@9elements.com> wrote:
 >
-> Allows to build the RPi4 with ACPI enabled.
+> Translate IRQs by implementing of_xlate() as required by
+> irq_get_by_index() to parse interrupt properties.
 >
-> TEST: - Boots on qemu-system-aarch64 -machine raspi4b
->       - Boots on real hardware with arm_64bit=1 in config.txt
+> TEST: Booted on qemu sbsa-ref that has a GICV3.
 >
 > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Matthias Brugger <mbrugger@suse.com>
-> Cc: Peter Robinson <pbrobinson@gmail.com>
 > ---
-> Changelog v4:
-> - Enable BLOBLISTS
-> ---
->  configs/rpi_4_acpi_defconfig | 70 ++++++++++++++++++++++++++++++++++++
->  1 file changed, 70 insertions(+)
->  create mode 100644 configs/rpi_4_acpi_defconfig
+>  arch/arm/lib/gic-v3-its.c | 21 +++++++++++++++++++++
+>  1 file changed, 21 insertions(+)
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
