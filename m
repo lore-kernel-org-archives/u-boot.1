@@ -4,77 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2E27CF3943
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 14:14:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73680CF3944
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 14:14:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F083D89228;
-	Thu, 19 Sep 2024 16:12:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5775889231;
+	Thu, 19 Sep 2024 16:12:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HuqkgNgj";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="X1jeYWmv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CCFBC891DD; Thu, 19 Sep 2024 16:12:10 +0200 (CEST)
+ id 236CE891F7; Thu, 19 Sep 2024 16:12:14 +0200 (CEST)
 Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
  [IPv6:2607:f8b0:4864:20::1030])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4D0589206
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:12:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 01F7589229
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:12:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-2d8fa2ca5b1so797374a91.3
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 07:12:08 -0700 (PDT)
+ 98e67ed59e1d1-2d88690837eso842420a91.2
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 07:12:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726755127; x=1727359927; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1726755130; x=1727359930; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9McRdc3ycibwNax0yBHgpHqVxjnf1Cm8ia1n5I/tgII=;
- b=HuqkgNgjtTZ1h4CwlJIJ78wj5bpRGYcw3v5hUQ0d4+j32Jrku1iue8fcImtFSzgz7J
- qoLzkbV43J3oMVFVEpkCZBRPTtJkB+d3MlmNm3uLMSxoScK2cPm1TCo3KQM+KOKaqDHQ
- vSSNrAjkPFmtSny5IVDF8qrJ5xYMmG6VguO/A=
+ bh=dj331A630Qr+hMwO8MMoADRiJH76fH4VSfzmBoZOz1U=;
+ b=X1jeYWmvGG4iXfb37YaMdhafhIarwWAsUHaOxYKg2pmV7UzipjtOeayLEXNIAxT1Rt
+ EUYjbqjUCC+3b0in7wM2za8T4DnbpCIYXouPhE7zBDWAGpR6GvDyDKS56EQHqTOF1l10
+ 2lxxBSWynDUuGZE/nMXkPXMkWb55ZQXaf8jvc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726755127; x=1727359927;
+ d=1e100.net; s=20230601; t=1726755130; x=1727359930;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=9McRdc3ycibwNax0yBHgpHqVxjnf1Cm8ia1n5I/tgII=;
- b=wdC9R5Bx6652JpdqjJq9+FYvgbuerJBVA7UJvcQfxnOJmpaf/CWKx4+RyO/hSO5PVF
- GKt6uH67v2dnLEfxTOIsROG3ziaEj2cB5VKKrk8zWjwZmJxgS4IxmTZt7wdJMldi04qb
- tsNRKOEC/2wgv040bM5RnBHPCyxWBcrzHQ93bf5LHAwhmj6XIafEKkBQ7vH3fJQv2Q9O
- qba7e2JWEP0CDUMw7nS5M1r6bIJaNv7EZe4fdXz7eB19N3+CSJgws7nU+qM6r1cbWKTU
- 6qHH2jAmlQt0I6V8FYe3ehlQa9jCuSr+re7UN4maMlHmUgJB3vuQcy2xJs3hAHgAHJF6
- PhIw==
-X-Gm-Message-State: AOJu0YzbUlrRiKtjykOLxLTK1zKPwFW01CLpV7OgioPpU0LWWswTKgDH
- K0XAp3bRh25ITBFNStVD2khzjBuEOpFjGmEf8tzGzBlynviNy+mTYsxKtAYT7CbcNJyWYRaWvuy
- DlXnTP8wgyDZJ0N3GTmaiBG9S1fQgNAGHO9K91m200uvd/pDLxXrdfOg=
-X-Google-Smtp-Source: AGHT+IFM9dLueDmkixub73uxYMzbm6m1dt+Jgw7JwzJpuCU19+SponYclXwkgjONMyWHrZtWdE/v1pd/xf3HfEWWQk0=
-X-Received: by 2002:a17:90b:1292:b0:2d3:bd6f:a31e with SMTP id
- 98e67ed59e1d1-2dbb9f3a24cmr30089534a91.28.1726755127254; Thu, 19 Sep 2024
- 07:12:07 -0700 (PDT)
+ bh=dj331A630Qr+hMwO8MMoADRiJH76fH4VSfzmBoZOz1U=;
+ b=eb3lx/uDvS/xm7J1lsInQzjEP1YdDOAey6QMd8Z/zTo0Hw/4hX3+N1wZ2XGvshcZMc
+ gr8xoFt/IFqH5T+qpjv7rs94znjwJP81IB5sgLAOMWUbSZBEggR+nmo+mqbzporf1WI9
+ Yjkv1m1u4IvKm6r/V5jOqYonXWrqiXzPte/RERgbyrnftL7n+jrsqgS43/0izQN6Os99
+ dMrwKf9uZoQ0sBHP8l1GVw5ooF2/A3xuUCpkaGKo28ezjeeDYBuppNQwSfJ9NubEL9mv
+ 7LhSFFhNM9WK1SVAoxnV4YRktCBVFUQ/3vSKz8MuJyokxp8ZWsAEYdyJmYdO1IDknO1j
+ oY5A==
+X-Gm-Message-State: AOJu0Yw+xjLWvNVx+7bQDPJaO/ZH3ROxRZxGb8h4TJ2HQYEW/bRpZ+ta
+ 3zvm8bwL+YddcTVwJHpyZMMXN4L1d99WOfCZKZVtyKtTz2bOZe/qhdgasF0FgPi9a1uEfy0KApb
+ hHCK+xfe8mg624zJN9XB6m1h4bt6GpMgnW9di
+X-Google-Smtp-Source: AGHT+IHxxjQd5XtJtShA+a8yV4Dr2L23Zz4GN9d/1lvow2mROHaZjevSCvSj+bpBPt1oOmNon4R8jLmGsQneKpVKwPg=
+X-Received: by 2002:a17:90b:524c:b0:2da:5edd:c165 with SMTP id
+ 98e67ed59e1d1-2dba0060fb3mr28308439a91.30.1726755130568; Thu, 19 Sep 2024
+ 07:12:10 -0700 (PDT)
 MIME-Version: 1.0
-References: <CALeDE9Ptr0Ln4H24yMqxuw1+E_Wt5qBGdQabUH54PaYUTPf9Yg@mail.gmail.com>
- <CAFLszThK_t5EwL28vnzmSp5UZQrSEpBRsaXhnNudMQRe8-7Ejw@mail.gmail.com>
- <CALeDE9O-kmnqkosThf8xQpLZ2tEebiHvrUEzVJNDjiEff2-t2Q@mail.gmail.com>
- <CAFLszThD=Haj4M5rUYfpjPDjr9JEOPygQb9tV36frcAM5Ey9tw@mail.gmail.com>
- <c63147f4-d364-4568-8f6e-c0348914446a@linaro.org>
- <CAFLszTgzM-FT64AYTy6FXwUw3FQg-3MQ7x0TZc6xBhX5c+bXEg@mail.gmail.com>
- <20240829152052.GE2479150@bill-the-cat>
- <CAFLszTjqVsZ1owvpCaOer7U-k0ZvtDfLC9g+kFPW8gJJeQ1Ktw@mail.gmail.com>
- <20240830151327.GU2479150@bill-the-cat>
- <CAFLszTiMTRenX_g6jBr3snv5mC50gK2HwCHHgWVjQU-4Dwfiuw@mail.gmail.com>
- <20240903185356.GL2479150@bill-the-cat>
-In-Reply-To: <20240903185356.GL2479150@bill-the-cat>
+References: <20240918152136.3395170-1-patrick.rudolph@9elements.com>
+ <20240918152136.3395170-9-patrick.rudolph@9elements.com>
+In-Reply-To: <20240918152136.3395170-9-patrick.rudolph@9elements.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 19 Sep 2024 16:11:45 +0200
-Message-ID: <CAFLszThWwEUU78vF44=jU0vybKrCnTKWbCq_mzWUZU_mOba7bw@mail.gmail.com>
-Subject: Re: [u-boot-test-hooks PATCH v4 3/3] Provide some basic scripts for
- Labgrid integration
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Thu, 19 Sep 2024 16:11:47 +0200
+Message-ID: <CAFLszTjsWGBv-apAn-sRQGDqc1t3ii+YCwEH6NToZGz-vif4dA@mail.gmail.com>
+Subject: Re: [PATCH v4 08/35] acpi: Add fill_madt to acpi_ops
+To: Patrick Rudolph <patrick.rudolph@9elements.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,33 +82,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-On Tue, 3 Sept 2024 at 20:54, Tom Rini <trini@konsulko.com> wrote:
+On Wed, 18 Sept 2024 at 17:22, Patrick Rudolph
+<patrick.rudolph@9elements.com> wrote:
 >
-> On Sun, Sep 01, 2024 at 02:09:47PM -0600, Simon Glass wrote:
+> Add a new method to acpi_ops to let drivers fill out ACPI MADT.
+> The code is unused for now until drivers implement the new ops.
 >
-> [snip]
-> > > As an aside, please review the ti,am625 stuff with some TI folks, that's
-> > > both far too specific (you're going to need to add different am62 and
-> > > am64 and am69 and j7... and on and on cases) and I forget if there's
-> > > some work to have a slightly easier way to know what file to use going
-> > > on.
-> >
-> > Well, perhaps they can take it over and get everything working? I have
-> > done the hard yards, e.g. supporting two builds together.
+> TEST: Booted on QEMU sbsa using driver model generated MADT.
 >
-> While I'm still hopeful about getting TI to run our pytests in their
-> lab, currently there's not much hope in getting them augment their
-> kernelci lab (which I think does use labgrid not LAVA) to also do
-> U-Boot, so no, I don't think they're likely to pick up and work on this
-> part. Given that things are described for binman I thought you might be
-> wanting to look harder at things there.
+> Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> ---
+> Changelog v4:
+> - Drop __weak attribute and make driver model mandatory on Arm
+>
+> ---
+>  arch/arm/lib/acpi_table.c | 13 ++++++++++++
+>  drivers/core/acpi.c       | 16 +++++++++++++++
+>  include/dm/acpi.h         | 26 +++++++++++++++++++++++
+>  lib/acpi/acpi_table.c     |  2 +-
+>  test/dm/acpi.c            | 43 +++++++++++++++++++++++++++++++++++++++
+>  5 files changed, 99 insertions(+), 1 deletion(-)
 
-I only have that one board (Beagleplay) in my lab so I haven't looked
-at anything else. If I end up getting a different board then I will
-probably add that as well. But for now I have quite a lot of
-outstanding patches and PRs so some things need to land, first.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
