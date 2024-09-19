@@ -4,133 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7379CE8D5F
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 09:17:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD1F6CE8D61
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 09:18:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3AF3F890F4;
+	by phobos.denx.de (Postfix) with ESMTP id A752A89109;
 	Thu, 19 Sep 2024 11:17:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="TOtZCvly";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="inuojjHr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D6644890FC; Thu, 19 Sep 2024 11:17:50 +0200 (CEST)
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on20623.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2417::623])
+ id 2E09788B3F; Thu, 19 Sep 2024 11:17:51 +0200 (CEST)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on20625.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2415::625])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E31889100
+ by phobos.denx.de (Postfix) with ESMTPS id CF05E89103
  for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 11:17:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=BRQOy8/5ZQFJ0+KN9J1dig+FXkHAUNXSi/RCEcVS0gWNwDfeZo2HlM3GCgp0Q24zBxsJRSQq+vZB3UM6obWYkjtEKAEmqV+XAahXgzY+oSdJ+2wQYE72nxAbQQiz2HwHXLud1vx/MMLnzx2EzeiA5OoOdf77iODHlMMIrcAtH/kUlzQElmr1mnnM6lR6ltNfaiDCcLm7FS+t1hMOYiIH2NJHzGuIX8d/U88F61gNXDp3lkkXW/xclbwGbzm7RUFcbHoLdk30sQYEk0v+mkfzU0iUIxlbqFrEt9aVgMX6roJSwx3KPFvXwVYBi12YKkQR+97Ineg/+b40JOlCHoZGfw==
+ b=vXbFSrviyB4VSmiZLPfud10ele+eXN0E98IPlchB3pHOl2yoyjH/M0PIbA0IcHNYBNKy79Fa1HWeeF+eb8NkZ/IzDkg//VQgL59cS4BCWzpf1BXuSna1YlXWhITnePX6HKTcxwGvds4PnHJIoHyqOnguE6drHVlbm61eHhhaE9q0/VJeR6mH0w2DCEI0QHM4UwJ6tS74fcX5npFJ/4ZNK0GPpEXTAVNXmjlvio/nBWGzp7L+UDLvQiqSSXNmG/VDBvGTRUTyamwTuh+s9cjxlQu3xv0/sgiqStheh8m6k4dIjZBxbH7i1pTTBle4fUtMN2Qi4Jip/ByKqBy6NA4Xbg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jHtDvXqhnGQyVSyKWD1X3D4FIofR35YaZpiwWzoXYwE=;
- b=MVmu83HWj+hwtY2H7zNwuKfIPpi+rrOXHFnfUw/OFARx+ClFHShsu6bDAPxX1Bc9gwjWYkNbXDPoYKrTqKB0UWa8ZcZCo1eD8GOgeaMS0BKaGrIkzp5comUD8USxyP/I++0fHXxe0oeZWUENuGDVbAHqR5+c0j7iK3tIzZuX93AIFbZn+R51LJUXYAAcU9Ilsv24v07SVXqFT7XkloE49hIdwmXaMTOrL0copxuISbPSOvPWowjvjAnWZECFiik+j1ryIfNlI1amPIYTLFGunZJjLrUymjII09qY/iOgRLmT1wUp9nBUU81AAUanBHZUKQZB6GKvoWJhIJjs/n0W6g==
+ bh=e4NQzLmLA9Jug/NJurpoZ7Yh3R2nvsEHeeLmBE4WE7U=;
+ b=lzbqbvi4m2cukXv6Mm8h0YV4RrOax4J21vuMazhLLK3P8plDGoSo2iPjji6XYF6RjRm/lJUgigtNHGzej4hw2KsjwFxKDvmbOf/hoywZCSkk4OpiBnC784bt5bfyDS1XqdtxUcFcBGtA9qwFjZYuRF5cg9jqzqaW04QJIums/Fs6jZylXmylMPCGhVCETTOIbf+RUMBIPMpAXLLL6gn5Uu9qYeebpaTE3W4uTe5HX4vAqkJ+nGekn8cRdFxpVtEarsX20xyID529r9dIYPTK3zqbrfglFhTkAMiWFVMdAdNjFB9LK8D8xEeR1aCouWgab9OsHH/PlMlrlxThy7sVaw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jHtDvXqhnGQyVSyKWD1X3D4FIofR35YaZpiwWzoXYwE=;
- b=TOtZCvlyZeqO0raD+V38cNaezaGe3NUnr4Sm01tGV8R4RsLDff7uAFshodf8HArM8sfsWMbSDZgCHuvxg0FsfBfP3gHiSuG5d4xNtzA/diUwrSo6cJ7HNkoT7wuU9e6RBSobF3auiM4EtHWl2PcTnTbDIHBOPAJE+znFlw/OK6w=
-Received: from BN0PR10CA0019.namprd10.prod.outlook.com (2603:10b6:408:143::8)
- by SA1PR12MB5658.namprd12.prod.outlook.com (2603:10b6:806:235::5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7982.21; Thu, 19 Sep
- 2024 09:17:44 +0000
-Received: from BN1PEPF00006001.namprd05.prod.outlook.com
- (2603:10b6:408:143:cafe::e5) by BN0PR10CA0019.outlook.office365.com
- (2603:10b6:408:143::8) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7939.30 via Frontend
- Transport; Thu, 19 Sep 2024 09:17:44 +0000
+ bh=e4NQzLmLA9Jug/NJurpoZ7Yh3R2nvsEHeeLmBE4WE7U=;
+ b=inuojjHrWgZlfvz5oQuXr0GLl12ZDeZ8UYFUJrlPM1kH3Zs5DcVxAvdsGtqvz+mTQIi6e63pG9IJV2I4QTSldXZfmhX1V4wIQPzVc3BeAuFPnhb5bA/TSwWmyw2HnxaiQXc+AXp/c9tbKgBpuQzlQ08PxCutxXEPBWouesxMqzQ=
+Received: from BL1PR13CA0415.namprd13.prod.outlook.com (2603:10b6:208:2c2::30)
+ by DM4PR12MB6541.namprd12.prod.outlook.com (2603:10b6:8:88::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7962.28; Thu, 19 Sep
+ 2024 09:17:45 +0000
+Received: from BN3PEPF0000B36D.namprd21.prod.outlook.com
+ (2603:10b6:208:2c2:cafe::4) by BL1PR13CA0415.outlook.office365.com
+ (2603:10b6:208:2c2::30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7982.16 via Frontend
+ Transport; Thu, 19 Sep 2024 09:17:45 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- BN1PEPF00006001.mail.protection.outlook.com (10.167.243.233) with Microsoft
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BN3PEPF0000B36D.mail.protection.outlook.com (10.167.243.164) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7918.13 via Frontend Transport; Thu, 19 Sep 2024 09:17:43 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.8005.1 via Frontend Transport; Thu, 19 Sep 2024 09:17:45 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 19 Sep
- 2024 04:17:42 -0500
+ 2024 04:17:44 -0500
 Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB06.amd.com
  (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 19 Sep
- 2024 04:17:40 -0500
+ 2024 04:17:43 -0500
 Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Thu, 19 Sep 2024 04:17:38 -0500
+ Transport; Thu, 19 Sep 2024 04:17:41 -0500
 From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 To: <u-boot@lists.denx.de>
 CC: <michal.simek@amd.com>, <neil.armstrong@linaro.org>,
  <bhupesh.linux@gmail.com>, <n-francis@ti.com>, <git@amd.com>
-Subject: [PATCH 0/3] Add AMD UFS platfrom driver support
-Date: Thu, 19 Sep 2024 14:47:28 +0530
-Message-ID: <20240919091731.26338-1-venkatesh.abbarapu@amd.com>
+Subject: [PATCH 1/3] ufs: add support for DesignWare Controller
+Date: Thu, 19 Sep 2024 14:47:29 +0530
+Message-ID: <20240919091731.26338-2-venkatesh.abbarapu@amd.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20240919091731.26338-1-venkatesh.abbarapu@amd.com>
+References: <20240919091731.26338-1-venkatesh.abbarapu@amd.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN1PEPF00006001:EE_|SA1PR12MB5658:EE_
-X-MS-Office365-Filtering-Correlation-Id: fc66d4ed-2789-4fca-9f4c-08dcd88beb46
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B36D:EE_|DM4PR12MB6541:EE_
+X-MS-Office365-Filtering-Correlation-Id: d0e336d3-f4ec-4290-61ec-08dcd88bec42
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|36860700013|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?2bgLrRqwW+s2L6QR9PQp6PwyvCyoxkwkzUjAf19PyGDBGsy1oBD9x5uLy57I?=
- =?us-ascii?Q?U3QbvdgIbuxAN+gikBymp+SaZW3+Gy/6Cp3b1uLJDP+dPGDr4L9eXJMoRzbW?=
- =?us-ascii?Q?PnYvyzrGMIO6ekqtoWYnM+CiAi9XEmsjkckl2/zlD9p9l0xtVW26CCgz0Ncd?=
- =?us-ascii?Q?NSjH2ZFcg/F7Qxn+7fU/Gbjg+KR3hURtLJ7FWdk9OOyGu6BLQaBJx8BUvpHm?=
- =?us-ascii?Q?mJ7YwTSML740hF2jDCzKlJ9M3cgT7XhRZNvqHYDO8nfLaloJmQ+EkjP0qov5?=
- =?us-ascii?Q?wQ4sr7h9oDAls6FP779CbQWQwfUtVLkKyxmd6iLLtkTJYyDcCVrmrez8A3W1?=
- =?us-ascii?Q?kxq3i9ERTIz5lJizkWEAGYhmyd/lVjUsGljB2vcx6yo9ksmGEyqpBKUgQpTw?=
- =?us-ascii?Q?9ugQEOawupP0i4Odj9ppD+Z+B3axvybiuJwdpuVFRNPGNJBWe0iSQvyWv3w9?=
- =?us-ascii?Q?+s80FBedX+qmdiIsdE9nOO1U/YWhmbwVddhg5HsskO2TLRRxnmgb94zU2TCk?=
- =?us-ascii?Q?ItZ/rafvyaBKxmzM0JVwrHGeytgUXCh348W/8WscLtqWWtjVlwcmOGOsJlSg?=
- =?us-ascii?Q?ucY1HYivM8G5YcomPkgcXpxaOYC+6vjdfhl+ggop7pcvuOJeqjLWahgPhpou?=
- =?us-ascii?Q?yfOcAPciHlv2voty0e/dYpUBqzB60jrdZSf/Rhw/wp7L6t/PqavKQy1opOyL?=
- =?us-ascii?Q?y4PK0xUnNWgQiy5x4X/hHsQPo90uOTQ3WAPLRqYfZjLKNnp1IwmGNzdJlk8u?=
- =?us-ascii?Q?QHuRwsk8pzWMiuM35vDqwtDDHkOnSVIDgUM/v/xcgMlLEv+DFAzwE9JS9Tf5?=
- =?us-ascii?Q?i+RRmgzrhbQvsqMVqCUNAqlSNY5dn6yI+kyGDi98BOEFdGBLlYXuGXnZh/tF?=
- =?us-ascii?Q?9vO/wwt8G3qEl6JSnHMOWLt+cok+mZNcx0uRvB/XEOby1tIimCH6MkO0jgu8?=
- =?us-ascii?Q?xV5l90ABhd8h9hM5ukzDqGolYxMGBYJ256/yZsWIGl0ocmaG+yn9HKdtalui?=
- =?us-ascii?Q?KzwvnNgzP2ze8fiawRqePe/OG7TrpVo30WcfbFXgce5OSQv/MqtdznzqNCTk?=
- =?us-ascii?Q?7eiV8GT5JLTCh6fdTmSdPcJ4nKbExTLYexXUomhAon7Bgzsnuva+/prV84U5?=
- =?us-ascii?Q?ilF24xl2aLHWG0fCEHS6v0Y1bQr41xYxK7bn0x2z588+XBAL1ee36Lkw1DAO?=
- =?us-ascii?Q?kNCn1xSOdmdYYRarrH8B/6AUQ8yZflcwXc3aOUhTmD7cBPjxsULy9NgSulCd?=
- =?us-ascii?Q?S62fk2q/TRGu4t6BU4CUyG8Tan9EebJkyBin2VI1BBgFcB7R8+CXLPWKtmpg?=
- =?us-ascii?Q?79pvjyWRGvsa4F7kUtWJdWiJJ+iU69HOB1a5wmFPNnaGM7d+TAMjMR/mFJWr?=
- =?us-ascii?Q?S2lVp5o2aeUMiqnfNBHRc+6alMXVD2kXfluxMxLzfDeRwcRuoBp9jbQBY3Qk?=
- =?us-ascii?Q?Oe4N5mzKKgE4hwT/PXlLDphQ0PD5c5WV?=
+ ARA:13230040|1800799024|376014|36860700013|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?i8Th9Kqn9SwZMpMdURB3DqAEVyCDEl9P5jXeSJbz5kEJvQISFcrWaa/Cz9vF?=
+ =?us-ascii?Q?a+NXROGKAc3/6WDeb5xR9iC5uERzwWFySfUeRO8Hfl/4ONAd9DGVkN+rvf0p?=
+ =?us-ascii?Q?xT8cKQyzRkbsy2veCPCBy0whTa+cF6DctkUvbOLgcpC19mRfH5CTjs28VMsH?=
+ =?us-ascii?Q?KOJ+E1Q5b1piCd1sk0pzqLAQmtVx+XevPriJV/6MRz8hnqLYYvuiUDoanudp?=
+ =?us-ascii?Q?SNuf+NwvacLRnjdXq3MZuJZCPFKmDcQllZccMtx3MjMBpxysTgo0iBfC6WR0?=
+ =?us-ascii?Q?MppjWfLI7vboaF1Lz92OOEOELpM/BMC3QIeyeFNBzdIp3AhWmGsT2hM/81v7?=
+ =?us-ascii?Q?+TNbqR/CWOnZw4onpbH/2o4vc+sbzgLpPCUcGcPGpLiZk3GYiLrsPNRe0tPf?=
+ =?us-ascii?Q?jWDExEWfczjdMYKRFPZI1TNxcqdFm2stoNVPRrc7mEBMRYMoGt6WbkFqx4s0?=
+ =?us-ascii?Q?Yt1UOrq0+xFnqq4Xi6LKTHQ71LWWzvn+iuxn/aDXyWd0TRVzqjPtqesuWa7E?=
+ =?us-ascii?Q?Q03ZsycFCfTYEyd1JL+j9TSZtx3Yfd7rVCmO0cY5+gYbTSsW+Tkr/pb+PvoP?=
+ =?us-ascii?Q?SJILg0dmO/uwIO7lhZUZAZH//iq6CeMvIOyPw1LFfmQ60Gk4ZkWMI0XI5R+F?=
+ =?us-ascii?Q?qIQPQCbd3Mc9QqaCxIux3zdw/fpZZ5BFp7vRjgk2bkkSV5360eMKPdZ+EgWn?=
+ =?us-ascii?Q?gXRpV72YT2rsgKI+tLq3zksBSPU8DTi3kst1xntlzObVvPjIaqIq9Vbkalpt?=
+ =?us-ascii?Q?TwVPD+3a0Y4dR2PO4ldL2XLw20esS+dLW856fItiXMS9rx89DFtq2GMyv7Ht?=
+ =?us-ascii?Q?TvOtFE0FNXGqOfUKaWgix/deS+ZsEZORtFmf2Xn/0fiKO81NdMeUR5/t1JK1?=
+ =?us-ascii?Q?2VTzk23RP/qnZbX1gDXOQSEk12ag/oqcHbz4mFXV+UW644MnkEnvsE+KzS3S?=
+ =?us-ascii?Q?EHdkvJkgavDezG8GjiFvwh85K7PiW7LbZL6A/AZgofrFBKw3XoKgNFyoFT7W?=
+ =?us-ascii?Q?CpAKPcKxljCTpOyu+cUvt1o0D581afs3KfFaPKxbvOecII0aKyKjnUYsut6Y?=
+ =?us-ascii?Q?jdxlp2wFxRjGNL7a3zXDIkEXIFo/QB7hyeeOCHjmJ5PqmWRgO5TcWZZnmvCN?=
+ =?us-ascii?Q?Qg/7Mh4FEP1nGiTdAP6nHEri+07if0kp4RYmrvFm3AiZ5k8UwTiph2rPC27m?=
+ =?us-ascii?Q?8DiKLquTjft5r1kwZP4isLpKV3/JU3UndwDa70v5KLkZz3uUY3JSLDX6cPfb?=
+ =?us-ascii?Q?xmN9KDT5x2KpoegWOvrlAl7FXCf4Q4q3XJcxnyXZWIOgvEmKmwybYo6HKkAx?=
+ =?us-ascii?Q?A4iPfft7Bf46/FyJBXUE25NeXmn3hrvOIGXdoRPEctDJFsEwwqb2ubYGlQ29?=
+ =?us-ascii?Q?4YcmmDGY7HODQNYxtI2uoR1IDD7V?=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(36860700013)(82310400026); DIR:OUT;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(36860700013)(82310400026); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Sep 2024 09:17:43.8470 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: fc66d4ed-2789-4fca-9f4c-08dcd88beb46
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Sep 2024 09:17:45.4813 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d0e336d3-f4ec-4290-61ec-08dcd88bec42
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF00006001.namprd05.prod.outlook.com
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B36D.namprd21.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB5658
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6541
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -147,32 +148,275 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable UFS DWC controller driver support and add AMD UFS
-platform driver support.
+This patch has the goal to add support for DesignWare UFS Controller
+specific operations.
 
-NOTE: These changes are rebased on top of this series
-[PATCH 00/13] ufs: enhancements to support Qualcomm UFS controllers
+This is based on linux kernel commit:
+"drivers/scsi/ufs/ufshcd-dwc.c: ufs: add support for DesignWare
+Controller" (sha1: 4b9ffb5a353bdee49f1f477ffe2b95ab3f9cbc0c)
+It is ported from linux kernel 6.11-rc1.
 
-Venkatesh Yadav Abbarapu (3):
-  ufs: add support for DesignWare Controller
-  ufs: ufs-amd-versal2: Add support for AMD UFS controller
-  configs: versal2: Add support for AMD UFS platform driver
-
- configs/amd_versal2_virt_defconfig |   2 +-
- drivers/ufs/Kconfig                |   8 +
- drivers/ufs/Makefile               |   1 +
- drivers/ufs/ufs-amd-versal2.c      | 501 +++++++++++++++++++++++++++++
- drivers/ufs/ufs.h                  |  11 +
- drivers/ufs/ufshcd-dwc.c           | 141 ++++++++
- drivers/ufs/ufshcd-dwc.h           |  69 ++++
- drivers/ufs/ufshci-dwc.h           |  32 ++
- drivers/ufs/unipro.h               |   1 +
- 9 files changed, 765 insertions(+), 1 deletion(-)
- create mode 100644 drivers/ufs/ufs-amd-versal2.c
+Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+---
+ drivers/ufs/ufs.h        |  11 +++
+ drivers/ufs/ufshcd-dwc.c | 141 +++++++++++++++++++++++++++++++++++++++
+ drivers/ufs/ufshcd-dwc.h |  23 +++++++
+ drivers/ufs/ufshci-dwc.h |  32 +++++++++
+ 4 files changed, 207 insertions(+)
  create mode 100644 drivers/ufs/ufshcd-dwc.c
  create mode 100644 drivers/ufs/ufshcd-dwc.h
  create mode 100644 drivers/ufs/ufshci-dwc.h
 
+diff --git a/drivers/ufs/ufs.h b/drivers/ufs/ufs.h
+index e8a1441156..83837d5817 100644
+--- a/drivers/ufs/ufs.h
++++ b/drivers/ufs/ufs.h
+@@ -850,6 +850,7 @@ struct ufs_hba {
+ 	struct ufs_pwr_mode_info max_pwr_info;
+ 
+ 	struct ufs_dev_cmd dev_cmd;
++	enum uic_link_state uic_link_state;
+ };
+ 
+ static inline int ufshcd_ops_init(struct ufs_hba *hba)
+@@ -878,6 +879,14 @@ static inline int ufshcd_ops_link_startup_notify(struct ufs_hba *hba,
+ 	return 0;
+ }
+ 
++static inline int ufshcd_vops_phy_initialization(struct ufs_hba *hba)
++{
++	if (hba->ops && hba->ops->phy_initialization)
++		return hba->ops->phy_initialization(hba);
++
++	return 0;
++}
++
+ /* Controller UFSHCI version */
+ enum {
+ 	UFSHCI_VERSION_10 = 0x00010000, /* 1.0 */
+@@ -1022,6 +1031,8 @@ enum {
+ 	writel((val), (hba)->mmio_base + (reg))
+ #define ufshcd_readl(hba, reg) \
+ 	readl((hba)->mmio_base + (reg))
++#define ufshcd_set_link_active(hba) ((hba)->uic_link_state = \
++				    UIC_LINK_ACTIVE_STATE)
+ 
+ /**
+  * ufshcd_rmwl - perform read/modify/write for a controller register
+diff --git a/drivers/ufs/ufshcd-dwc.c b/drivers/ufs/ufshcd-dwc.c
+new file mode 100644
+index 0000000000..db51a3b807
+--- /dev/null
++++ b/drivers/ufs/ufshcd-dwc.c
+@@ -0,0 +1,141 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * UFS Host driver for Synopsys Designware Core
++ *
++ * Copyright (C) 2015-2016 Synopsys, Inc. (www.synopsys.com)
++ *
++ */
++#include <clk.h>
++#include <dm.h>
++#include <ufs.h>
++#include <asm/io.h>
++#include <dm/device_compat.h>
++#include <linux/bitops.h>
++#include <linux/delay.h>
++#include <linux/err.h>
++#include <linux/time.h>
++
++#include "ufs.h"
++#include "ufshci-dwc.h"
++#include "ufshcd-dwc.h"
++
++int ufshcd_dwc_dme_set_attrs(struct ufs_hba *hba,
++			     const struct ufshcd_dme_attr_val *v, int n)
++{
++	int ret = 0;
++	int attr_node = 0;
++
++	for (attr_node = 0; attr_node < n; attr_node++) {
++		ret = ufshcd_dme_set_attr(hba, v[attr_node].attr_sel,
++					  ATTR_SET_NOR, v[attr_node].mib_val, v[attr_node].peer);
++		if (ret)
++			return ret;
++	}
++
++	return 0;
++}
++
++/**
++ * ufshcd_dwc_program_clk_div() - program clock divider.
++ * @hba: Private Structure pointer
++ * @divider_val: clock divider value to be programmed
++ *
++ */
++static void ufshcd_dwc_program_clk_div(struct ufs_hba *hba, u32 divider_val)
++{
++	ufshcd_writel(hba, divider_val, DWC_UFS_REG_HCLKDIV);
++}
++
++/**
++ * ufshcd_dwc_link_is_up() - check if link is up.
++ * @hba: private structure pointer
++ *
++ * Return: 0 on success, non-zero value on failure.
++ */
++static int ufshcd_dwc_link_is_up(struct ufs_hba *hba)
++{
++	int dme_result = 0;
++
++	ufshcd_dme_get(hba, UIC_ARG_MIB(VS_POWERSTATE), &dme_result);
++
++	if (dme_result == UFSHCD_LINK_IS_UP) {
++		ufshcd_set_link_active(hba);
++		return 0;
++	}
++
++	return 1;
++}
++
++/**
++ * ufshcd_dwc_connection_setup() - configure unipro attributes.
++ * @hba: pointer to drivers private data
++ *
++ * This function configures both the local side (host) and the peer side
++ * (device) unipro attributes to establish the connection to application/
++ * cport.
++ * This function is not required if the hardware is properly configured to
++ * have this connection setup on reset. But invoking this function does no
++ * harm and should be fine even working with any ufs device.
++ *
++ * Return: 0 on success non-zero value on failure.
++ */
++static int ufshcd_dwc_connection_setup(struct ufs_hba *hba)
++{
++	static const struct ufshcd_dme_attr_val setup_attrs[] = {
++		{ UIC_ARG_MIB(T_CONNECTIONSTATE), 0, DME_LOCAL },
++		{ UIC_ARG_MIB(N_DEVICEID), 0, DME_LOCAL },
++		{ UIC_ARG_MIB(N_DEVICEID_VALID), 0, DME_LOCAL },
++		{ UIC_ARG_MIB(T_PEERDEVICEID), 1, DME_LOCAL },
++		{ UIC_ARG_MIB(T_PEERCPORTID), 0, DME_LOCAL },
++		{ UIC_ARG_MIB(T_TRAFFICCLASS), 0, DME_LOCAL },
++		{ UIC_ARG_MIB(T_CPORTFLAGS), 0x6, DME_LOCAL },
++		{ UIC_ARG_MIB(T_CPORTMODE), 1, DME_LOCAL },
++		{ UIC_ARG_MIB(T_CONNECTIONSTATE), 1, DME_LOCAL },
++		{ UIC_ARG_MIB(T_CONNECTIONSTATE), 0, DME_PEER },
++		{ UIC_ARG_MIB(N_DEVICEID), 1, DME_PEER },
++		{ UIC_ARG_MIB(N_DEVICEID_VALID), 1, DME_PEER },
++		{ UIC_ARG_MIB(T_PEERDEVICEID), 1, DME_PEER },
++		{ UIC_ARG_MIB(T_PEERCPORTID), 0, DME_PEER },
++		{ UIC_ARG_MIB(T_TRAFFICCLASS), 0, DME_PEER },
++		{ UIC_ARG_MIB(T_CPORTFLAGS), 0x6, DME_PEER },
++		{ UIC_ARG_MIB(T_CPORTMODE), 1, DME_PEER },
++		{ UIC_ARG_MIB(T_CONNECTIONSTATE), 1, DME_PEER }
++	};
++	return ufshcd_dwc_dme_set_attrs(hba, setup_attrs, ARRAY_SIZE(setup_attrs));
++}
++
++/**
++ * ufshcd_dwc_link_startup_notify() - program clock divider.
++ * @hba: private structure pointer
++ * @status: Callback notify status
++ *
++ * Return: 0 on success, non-zero value on failure.
++ */
++int ufshcd_dwc_link_startup_notify(struct ufs_hba *hba,
++				   enum ufs_notify_change_status status)
++{
++	int err = 0;
++
++	if (status == PRE_CHANGE) {
++		ufshcd_dwc_program_clk_div(hba, DWC_UFS_REG_HCLKDIV_DIV_125);
++
++		err = ufshcd_vops_phy_initialization(hba);
++		if (err) {
++			dev_err(hba->dev, "Phy setup failed (%d)\n", err);
++			return err;
++		}
++	} else { /* POST_CHANGE */
++		err = ufshcd_dwc_link_is_up(hba);
++		if (err) {
++			dev_err(hba->dev, "Link is not up\n");
++			return err;
++		}
++
++		err = ufshcd_dwc_connection_setup(hba);
++		if (err)
++			dev_err(hba->dev, "Connection setup failed (%d)\n",
++				err);
++	}
++
++	return err;
++}
+diff --git a/drivers/ufs/ufshcd-dwc.h b/drivers/ufs/ufshcd-dwc.h
+new file mode 100644
+index 0000000000..d997045d3c
+--- /dev/null
++++ b/drivers/ufs/ufshcd-dwc.h
+@@ -0,0 +1,23 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * UFS Host driver for Synopsys Designware Core
++ *
++ * Copyright (C) 2015-2016 Synopsys, Inc. (www.synopsys.com)
++ *
++ * Authors: Joao Pinto <jpinto@synopsys.com>
++ */
++
++#ifndef _UFSHCD_DWC_H
++#define _UFSHCD_DWC_H
++
++struct ufshcd_dme_attr_val {
++	u32 attr_sel;
++	u32 mib_val;
++	u8 peer;
++};
++
++int ufshcd_dwc_link_startup_notify(struct ufs_hba *hba,
++				   enum ufs_notify_change_status status);
++int ufshcd_dwc_dme_set_attrs(struct ufs_hba *hba,
++			     const struct ufshcd_dme_attr_val *v, int n);
++#endif /* End of Header */
+diff --git a/drivers/ufs/ufshci-dwc.h b/drivers/ufs/ufshci-dwc.h
+new file mode 100644
+index 0000000000..9e24c230c6
+--- /dev/null
++++ b/drivers/ufs/ufshci-dwc.h
+@@ -0,0 +1,32 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * UFS Host driver for Synopsys Designware Core
++ *
++ * Copyright (C) 2015-2016 Synopsys, Inc. (www.synopsys.com)
++ *
++ * Authors: Joao Pinto <jpinto@synopsys.com>
++ */
++
++#ifndef _UFSHCI_DWC_H
++#define _UFSHCI_DWC_H
++
++/* DWC HC UFSHCI specific Registers */
++enum dwc_specific_registers {
++	DWC_UFS_REG_HCLKDIV	= 0xFC,
++};
++
++/* Clock Divider Values: Hex equivalent of frequency in MHz */
++enum clk_div_values {
++	DWC_UFS_REG_HCLKDIV_DIV_62_5	= 0x3e,
++	DWC_UFS_REG_HCLKDIV_DIV_125	= 0x7d,
++	DWC_UFS_REG_HCLKDIV_DIV_200	= 0xc8,
++};
++
++/* Selector Index */
++enum selector_index {
++	SELIND_LN0_TX	= 0x00,
++	SELIND_LN1_TX	= 0x01,
++	SELIND_LN0_RX	= 0x04,
++	SELIND_LN1_RX	= 0x05,
++};
++#endif
 -- 
 2.17.1
 
