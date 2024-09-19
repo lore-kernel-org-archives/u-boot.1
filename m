@@ -4,75 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8F56CDD578
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 13:25:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7651FCF3942
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 13:48:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C34128918C;
-	Thu, 19 Sep 2024 15:25:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id A72E789171;
+	Thu, 19 Sep 2024 15:48:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=infinera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CiRNLwa5";
+	dkim=pass (2048-bit key; unprotected) header.d=infinera.com header.i=@infinera.com header.b="Fnqnc7UG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85B6189111; Thu, 19 Sep 2024 15:25:40 +0200 (CEST)
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
- [IPv6:2607:f8b0:4864:20::72e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4BB7D89178; Thu, 19 Sep 2024 15:48:47 +0200 (CEST)
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on20624.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2412::624])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 464B38917E
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 15:25:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 03DA189175
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 15:48:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=infinera.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x72e.google.com with SMTP id
- af79cd13be357-7a9ae8fc076so87850985a.2
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 06:25:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726752337; x=1727357137; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=SG2Jdd01M6/EewgMOQLKy68v4a2jIQ50NC/3b/rClDE=;
- b=CiRNLwa5qd743/uzeQQrq7iRtkq8TGZNJgcdSQLKulul0JXxj1q5sX7kgn6w+5iggM
- B5dkMekywZ3NURN+IBFUfye0cAfG8Ivz8F9Gb5DrTbRZ1sjD/9PyX8QwSMxRyCCV2DEa
- O6GUrOYRC2ZvVEE2kt1zX4JnGZP9B0c4VkeBs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726752337; x=1727357137;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=SG2Jdd01M6/EewgMOQLKy68v4a2jIQ50NC/3b/rClDE=;
- b=sW/ayklxIdNKfJaHwLB8hMIfsPxKc2BWrwtL/zk1fxq1LZdvAXkVt5Juni6KP1B3XY
- 7bfFvbSB96yCFBfvzvH2sIyOtYt7wHI2356GkGLlzjVkmao1VwQ4ILU8pDazEVqNhUT4
- jI2wgy6QWtegFJwMbuC2R3/vt6HuhjbdKNdJbI1ICslxg4KS6QG7KIbQL7d7ahxFRYWe
- EQ9zRTNKSp4wnYkCqI5gL1emsf8NtuhlQywS7DI7Xe5XmrMYYB/l0tP6QjPTkx8xPn9J
- iqg02CRHVDpZA4EATDxgN8zlV93JII1eGkdxq/LIgmM7bodnkRcOxP2l6PzjccTldvFN
- JBsw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWK/2312+Gud13pTV+VS3H24mJRggzJ2fzvue8u5i6UOHWE5VMj1Ji7RpFJEclMQMRYW4/fdG4=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywztj/5Q3hcnlKdaHexFmdUcjXkLm7NA/4aL+xKFwQlB+AljQ7U
- 7g01V4k/jgc7RTOgcrCl3h3VdK2Povu00H49flD/PkbhC/pBy7QQppP7WxjWwV5aOwrU3No+4MG
- LsiInybFlMEUhNwzo0t+VS9Yc79JmvLllAUeX
-X-Google-Smtp-Source: AGHT+IE6h0lNKu1erTIOL/3ExA5lVE84EqFt4pRM2b8FDbBZHKc2sdNmvEckEznu6RLRSHbAB9j02bU6TnYlKUlIQvo=
-X-Received: by 2002:a05:6214:3d9e:b0:6c3:4c75:f0fe with SMTP id
- 6a1803df08f44-6c57358350cmr367368976d6.47.1726752337054; Thu, 19 Sep 2024
- 06:25:37 -0700 (PDT)
+ spf=pass smtp.mailfrom=Joakim.Tjernlund@infinera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=lDXsfZwF7qdbroyQBHLfxfJ0iEDBomLJw7vbmhnPxYlfreBAaUqgHLuNKp+AaB1YYUYf3I7wIGo8TjLIXZk0I5S3HUuB6tfS/sNybnG2jkX1Qcc27Ja+++idfk1wTt2PXccMPHRzZ8Q4wYBIWHaAtqAmT+3399HBmKmdVv9i6wm5oXRP1UJ8bhVXxaPkpUaCIMqpJO02izfcCd0D3F3ev/PV/41jZJT3qu4NqvT9CQlIq+fTl36qInTD9+S87/qGTHERGCypSSk4wpcytyefbtuJACc1o3rwatZZLE96HPyoncwiNPUMo57auP7D9wLBdLIEX3hStrmgQ0+pYyvWwQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=9FkWU76eGsX86muAg0xOiDdBZH3osPGAyP/Up7dD4xo=;
+ b=rDiwPvWPELx1D+Fos5TyTMk8REjnSZgW+4x0jsI0VWcVZxppFWJw0wWYfvkJUKAO+K/9UhppZmw5GtlIQ1CNzFxVXfBFHbxxwXNE+wpxqNolmYwfYzoiwQImNLxQWrpxl8+1I3QMxXZ9qSfY8ZMxbco0hsTNYIXNLULxJ/wVY9rmhjg7gnqEzP5puLuJYF6e9pJ9nRjSbRZtFBpJ8Gqc7zjBggGSufdPtmOfoYOepev3fo5OzuPsauYIdHUR/nOSt12ngEwNM4gae6B0LfLH3IZy5DiBumKjpePBM4TTNz34pewTT7PlBf1xgRh2eB+3WIZ+s+4kFnXke54JNR6H5Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 8.4.225.30) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=infinera.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=infinera.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=infinera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=9FkWU76eGsX86muAg0xOiDdBZH3osPGAyP/Up7dD4xo=;
+ b=Fnqnc7UGY0B58twQZCkrcBcTsSeM/M1T4VdtkuK9jid0ZkgEApdj3X1aSZkEBxaXXFOQrKbjC6eYZmhyiHouU94o3EZHFV5uxhmt7P+FG630H1KFK1jBZKqpcfFY8Lqs8dupDvP6rdpxAUv6E0TAXBzDJcq7sAiKK3paDFyRvQq5wyyANl+j51s0fKV7pJ3gA6HE+mUQaprFxody1Ov5Z116p9kyTq9E/gC8528oovthWYdrCa4jLfb3A4R4Ncd5vv6wLyB9JkO9ELXxC8eMBz6P8g4GI6dEVcFUBshF8aZUNGDm7IdgZbbesCaMLy6QLKaIOoOHcNbGpWBK2ODejw==
+Received: from BYAPR21CA0024.namprd21.prod.outlook.com (2603:10b6:a03:114::34)
+ by SJ2PR10MB7619.namprd10.prod.outlook.com (2603:10b6:a03:549::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7982.15; Thu, 19 Sep
+ 2024 13:48:41 +0000
+Received: from SJ5PEPF000001EE.namprd05.prod.outlook.com
+ (2603:10b6:a03:114:cafe::f) by BYAPR21CA0024.outlook.office365.com
+ (2603:10b6:a03:114::34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7982.5 via Frontend
+ Transport; Thu, 19 Sep 2024 13:48:41 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 8.4.225.30)
+ smtp.mailfrom=infinera.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=infinera.com;
+Received-SPF: Pass (protection.outlook.com: domain of infinera.com designates
+ 8.4.225.30 as permitted sender) receiver=protection.outlook.com; 
+ client-ip=8.4.225.30; helo=owa.infinera.com; pr=C
+Received: from owa.infinera.com (8.4.225.30) by
+ SJ5PEPF000001EE.mail.protection.outlook.com (10.167.242.202) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7918.13 via Frontend Transport; Thu, 19 Sep 2024 13:48:40 +0000
+Received: from sv-ex16-prd.infinera.com (10.100.96.229) by
+ sv-ex16-prd.infinera.com (10.100.96.229) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2507.39; Thu, 19 Sep 2024 06:48:40 -0700
+Received: from sv-smtp-pd1.infinera.com (10.100.98.81) by
+ sv-ex16-prd.infinera.com (10.100.96.229) with Microsoft SMTP Server id
+ 15.1.2507.39 via Frontend Transport; Thu, 19 Sep 2024 06:48:40 -0700
+Received: from se-metroit-prd1.infinera.com ([10.210.32.58]) by
+ sv-smtp-pd1.infinera.com with Microsoft SMTPSVC(10.0.17763.1697); 
+ Thu, 19 Sep 2024 06:48:40 -0700
+Received: from se-jocke-lx.infinera.com (se-jocke-lx.infinera.com
+ [10.210.73.28])
+ by se-metroit-prd1.infinera.com (Postfix) with ESMTP id ADAAFF402C4
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 15:48:39 +0200 (CEST)
+Received: by se-jocke-lx.infinera.com (Postfix, from userid 1001)
+ id A3DD74012B1B; Thu, 19 Sep 2024 15:48:39 +0200 (CEST)
+From: Joakim Tjernlund <joakim.tjernlund@infinera.com>
+To: <u-boot@lists.denx.de>
+CC: Joakim Tjernlund <joakim.tjernlund@infinera.com>
+Subject: [PATCH] Add mkimage secp521r1 ECDSA curve support
+Date: Thu, 19 Sep 2024 15:48:22 +0200
+Message-ID: <20240919134835.377572-1-joakim.tjernlund@infinera.com>
+X-Mailer: git-send-email 2.44.2
 MIME-Version: 1.0
-References: <20240911062511.494855-1-patrick.rudolph@9elements.com>
- <20240911062511.494855-15-patrick.rudolph@9elements.com>
- <CAC_iWjLfbXHFd7zs0xsVamXua8GXsAbhBstgTQEQN1+t8Fr2QA@mail.gmail.com>
- <CALNFmy1b-tdn1DpJ2TpMV+2UU9u4chFcfzMq+-FCxL1VYx05-g@mail.gmail.com>
-In-Reply-To: <CALNFmy1b-tdn1DpJ2TpMV+2UU9u4chFcfzMq+-FCxL1VYx05-g@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 19 Sep 2024 15:25:25 +0200
-Message-ID: <CAFLszThUSaW-G3imntEPsKiAjUNjiwR5mF9=qfy0-vgxYBDy5A@mail.gmail.com>
-Subject: Re: [PATCH v3 14/30] efi_loader: Allocate and write ACPI tables
-To: Patrick Rudolph <patrick.rudolph@9elements.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-OriginalArrivalTime: 19 Sep 2024 13:48:40.0712 (UTC)
+ FILETIME=[A29ED080:01DB0A9A]
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001EE:EE_|SJ2PR10MB7619:EE_
+X-MS-Office365-Filtering-Correlation-Id: abcc027e-8326-428c-998b-08dcd8b1c53c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|36860700013|376014|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?I2UgcRVXspXNw5yO/PZ0Nh4nOKE2W8UZrEs6pAaGy45Pk7j2eYV3KQoTTR3V?=
+ =?us-ascii?Q?E3bdR8NGbeg3KzR+EakfuuJgGbNC/Vkos/IF5kR4obfdqnpLQ5z8BbcuXLRi?=
+ =?us-ascii?Q?O6AHfLRnplXscnMpeESlDJGUIabt2GXM4QC1Q/1gJABOw55CS4s51l/4oCnb?=
+ =?us-ascii?Q?4fdR+pVPUGLKmEQPL4OeKDtGhPk+jpDwghl+qk6esrZsbUzS/beA2Tc4CQOH?=
+ =?us-ascii?Q?DtAl2mi3UgUTMKCiQMAosRCNXKr94+apmaB1YGxkMdkQNe8zJt0ve+PNwuhQ?=
+ =?us-ascii?Q?NEMCsvJJ0R/yOR+zOryg5GhkoHicgS0KvUmHg8k0fy0M9duqWHwGzZMJ/qLR?=
+ =?us-ascii?Q?5b3m24Hq8E+J3uX40u++5JX9Y5Ik9p0JGb0AYQ+Vh7SS6dtopu2MornCunLy?=
+ =?us-ascii?Q?RXY7PpX2Bucwis3meBTrW6bNrHJrp9nNDwSwjsAP2iBtYCJe5X6duu2I6Bax?=
+ =?us-ascii?Q?zPMjS1NY591VGJLOivueU803tKMZx/dxKph9mlOZG1LUxBNJ4qGjqqzejVqQ?=
+ =?us-ascii?Q?cpv9dKAQwsA/xizJ86bSjmuUH0ClYfGwf3dIzi/+XwrZHoKBkBAy3eu7MBJS?=
+ =?us-ascii?Q?hme1CHF3cao8dz34MSIB9yFSnx+rZO6F4+6LQVbyts0HG4qCvz5yP+byBbhC?=
+ =?us-ascii?Q?mXCMioPAS/kzyuZKvnQ1sq40544fLv/zG94Wir3dxe4yzsvxzMjsRtzqKups?=
+ =?us-ascii?Q?50+7x8OG/ms5FmGVECChiW5zlc6VJINJQHyf+YzJqGxXqJAifC2zGSPOQvdZ?=
+ =?us-ascii?Q?mkgd9rrJK3INM6bPMXq5fBYJUT6n+Zf/24xR9uOByid+b+xMoSVE0gRD0dDv?=
+ =?us-ascii?Q?WFI88ZFUFzdrxw1LIK+ofFoTzYKPdyrXqrpVXpLQTfp9gEI+ZizwvnBIRVVT?=
+ =?us-ascii?Q?qc2w2pz7LQLbTNxFImpCp/dldc80wzsyYC7lBaZewV311PvrwwcmCgpZTj3A?=
+ =?us-ascii?Q?C0C9tY3bp8O93JA3V4KcuP/SALn2M+43YVXn7MK8ktuSqSC0gxROy5dZWrV1?=
+ =?us-ascii?Q?R4qOlPGul7uV1Lpa/fqpOvAkV7bo1A9cbJTgMc4cKbYT99ymuYE53tH8ZGL7?=
+ =?us-ascii?Q?/pcOps6ibNEelaB1yOjSJuiO3K+CEsQTUSpU/ytYhIZUTwc1mKHf96TU3axF?=
+ =?us-ascii?Q?gqrZZJZjItaDIycXhwu9HJUnuu/rg0ul9xr+1WoYPkjSfJwxpBUegZvHOaun?=
+ =?us-ascii?Q?zX0iM+ck4rUYqLqLjfUfkSbRTZH5JY3fO/Gx3EKgtm9QgMA6B7hG8JF1BLbe?=
+ =?us-ascii?Q?zM1KAfEAZ4JHxWxTkOChC0HfJCSKBqS+Pq5+efLC53WN8E9LGxBvJL8zpVqX?=
+ =?us-ascii?Q?jEixBn11Du2DRi2I3wKCG4iglH0sWzfOJXh0zMPSrV5uUROc1EU2iv5K1WcX?=
+ =?us-ascii?Q?39ujLmPULh4eTusbnlfVZD0Hmx/cRm4DqUNM6xJGoI2IUkfs2+405C435oKn?=
+ =?us-ascii?Q?NS1kkfcqPca4hEMOydcFJbUuTEfzP+Om?=
+X-Forefront-Antispam-Report: CIP:8.4.225.30; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:owa.infinera.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(36860700013)(376014)(82310400026); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: infinera.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Sep 2024 13:48:40.9505 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: abcc027e-8326-428c-998b-08dcd8b1c53c
+X-MS-Exchange-CrossTenant-Id: 285643de-5f5b-4b03-a153-0ae2dc8aaf77
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=285643de-5f5b-4b03-a153-0ae2dc8aaf77; Ip=[8.4.225.30];
+ Helo=[owa.infinera.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001EE.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR10MB7619
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,226 +154,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Patrick,
+Signed-off-by: Joakim Tjernlund <joakim.tjernlund@infinera.com>
+---
+ include/u-boot/ecdsa.h      | 1 +
+ lib/ecdsa/ecdsa-libcrypto.c | 2 +-
+ tools/image-sig-host.c      | 7 +++++++
+ 3 files changed, 9 insertions(+), 1 deletion(-)
 
-On Thu, 19 Sept 2024 at 08:41, Patrick Rudolph
-<patrick.rudolph@9elements.com> wrote:
->
-> On Thu, Sep 12, 2024 at 8:55=E2=80=AFAM Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > Hi Patrick
-> >
-> > On Wed, 11 Sept 2024 at 09:25, Patrick Rudolph
-> > <patrick.rudolph@9elements.com> wrote:
-> > >
-> > > Allocate memory for ACPI tables inside the efi_loader and write out
-> > > the tables similar to SMBIOS tables. When ACPI is enabled and wasn't
-> > > installed in other places, install the ACPI table in EFI. Since EFI
-> > > is necessary to pass the ACPI table location when FDT isn't used,
-> > > there's no need to install it separately.
-> > >
-> > > When CONFIG_BLOBLIST_TABLES is set the tables will be stored in a
-> > > bloblist. The tables are still passed to the OS using EFI.
-> > >
-> > > This allows non x86 platforms to boot using ACPI only in case the
-> > > EFI loader is being used.
-> > >
-> > > TEST: Booted QEMU SBSA (no QFW) using EFI and ACPI only.
-> > >
-> > > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-> > > Cc: Simon Glass <sjg@chromium.org>
-> > > Cc: Tom Rini <trini@konsulko.com>
-> > > ---
-> > > Changelog v3:
-> > > - Drop memalign and use efi_allocate_pages
-> > > - Use log_debug instead of debug
-> > > - Clarify commit message
-> > > - Skip writing ACPI tables on sandbox
-> > > - Rename function
-> > > - Add function comment
-> > > ---
-> > >  lib/efi_loader/efi_acpi.c        | 80 ++++++++++++++++++++++++++++++=
-+-
-> > >  test/py/tests/test_event_dump.py |  1 +
-> > >  2 files changed, 79 insertions(+), 2 deletions(-)
-> > >
-> > > diff --git a/lib/efi_loader/efi_acpi.c b/lib/efi_loader/efi_acpi.c
-> > > index 67bd7f8ca2..9d38d0060c 100644
-> > > --- a/lib/efi_loader/efi_acpi.c
-> > > +++ b/lib/efi_loader/efi_acpi.c
-> > > @@ -6,15 +6,23 @@
-> > >   */
-> > >
-> > >  #include <efi_loader.h>
-> > > -#include <log.h>
-> > > -#include <mapmem.h>
-> > >  #include <acpi/acpi_table.h>
-> > >  #include <asm/global_data.h>
-> > > +#include <asm/io.h>
-> > > +#include <bloblist.h>
-> > > +#include <linux/sizes.h>
-> > > +#include <linux/log2.h>
-> > > +#include <log.h>
-> > > +#include <malloc.h>
-> > > +#include <mapmem.h>
-> > >
-> > >  DECLARE_GLOBAL_DATA_PTR;
-> > >
-> > >  static const efi_guid_t acpi_guid =3D EFI_ACPI_TABLE_GUID;
-> > >
-> > > +enum {
-> > > +       TABLE_SIZE      =3D SZ_64K,
-> > > +};
-> > >  /*
-> > >   * Install the ACPI table as a configuration table.
-> > >   *
-> > > @@ -47,3 +55,71 @@ efi_status_t efi_acpi_register(void)
-> > >         return efi_install_configuration_table(&acpi_guid,
-> > >                                                (void *)(ulong)addr);
-> > >  }
-> > > +
-> > > +/*
-> > > + * Allocate memory for ACPI tables and write ACPI tables to the
-> > > + * allocated buffer.
-> > > + *
-> > > + * Return:     status code
-> > > + */
-> > > +static int alloc_write_acpi_tables(void)
-> > > +{
-> > > +       u64 table_addr, table_end;
-> > > +       u64 new_acpi_addr =3D 0;
-> > > +       efi_uintn_t pages;
-> > > +       efi_status_t ret;
-> > > +       void *addr;
-> > > +
-> > > +       if (!IS_ENABLED(CONFIG_GENERATE_ACPI_TABLE))
-> > > +               return 0;
-> > > +
-> > > +       if (IS_ENABLED(CONFIG_X86) ||
-> > > +           IS_ENABLED(CONFIG_QFW_ACPI) ||
-> > > +           IS_ENABLED(CONFIG_SANDBOX)) {
-> > > +               log_debug("Skipping writing ACPI tables as already do=
-ne\n");
-> > > +               return 0;
-> > > +       }
-> > > +
-> > > +       /* Align the table to a 4KB boundary to keep EFI happy */
-> > > +       if (IS_ENABLED(CONFIG_BLOBLIST_TABLES)) {
-> > > +               addr =3D bloblist_add(BLOBLISTT_ACPI_TABLES, TABLE_SI=
-ZE,
-> > > +                                   ilog2(SZ_4K));
-> > > +
-> > > +               if (!addr)
-> > > +                       return log_msg_ret("mem", -ENOMEM);
-> >
-> > This addr is not in ACPI_RECLAIM_MEMORY now. It might work since
-> > efi_acpi_register() adads it on the EFI memory map.
-> > In the last version, Simon replied something along the lines of  "This
-> > is how x86 works", but I don't understand why. U-Boot at this point is
-> > the last bootloader you'll run and then jump to your EFI payload. Can
-> > someone clearly explain what's going on here?
-> >
-> > > +       } else {
-> > > +               pages =3D efi_size_in_pages(TABLE_SIZE);
-> > > +
-> > > +               ret =3D efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES,
-> > > +                                        EFI_ACPI_RECLAIM_MEMORY,
-> > > +                                        pages, &new_acpi_addr);
-> > > +               if (ret !=3D EFI_SUCCESS)
-> > > +                       return log_msg_ret("mem", -ENOMEM);
-> > > +
-> > > +               addr =3D (void *)(uintptr_t)new_acpi_addr;
-> >
-> > So this would be fine if we initialized the EFI subsystem early, but
-> > we don't.  On top of that the efi_acpi_register() call is trying to
-> > add the allocated memory to the efi memmap, so we don't need to do
-> > that twice.
->
-> Sounds like always using BLOBLIST would fix this issue. It would decouple
-> memory allocation and installation.
+diff --git a/include/u-boot/ecdsa.h b/include/u-boot/ecdsa.h
+index 53490c6b287..8f9f5e7d6e7 100644
+--- a/include/u-boot/ecdsa.h
++++ b/include/u-boot/ecdsa.h
+@@ -65,5 +65,6 @@ int ecdsa_verify(struct image_sign_info *info,
+ /** @} */
+ 
+ #define ECDSA256_BYTES	(256 / 8)
++#define ECDSA521_BYTES	((521 + 7) / 8)
+ 
+ #endif
+diff --git a/lib/ecdsa/ecdsa-libcrypto.c b/lib/ecdsa/ecdsa-libcrypto.c
+index 5fa9be10b4b..403dfe0b97c 100644
+--- a/lib/ecdsa/ecdsa-libcrypto.c
++++ b/lib/ecdsa/ecdsa-libcrypto.c
+@@ -108,7 +108,7 @@ static size_t ecdsa_key_size_bytes(const EC_KEY *key)
+ 	const EC_GROUP *group;
+ 
+ 	group = EC_KEY_get0_group(key);
+-	return EC_GROUP_order_bits(group) / 8;
++	return (EC_GROUP_order_bits(group) + 7) / 8;
+ }
+ 
+ static int default_password(char *buf, int size, int rwflag, void *u)
+diff --git a/tools/image-sig-host.c b/tools/image-sig-host.c
+index d0133aec4c8..21b4fa5d39d 100644
+--- a/tools/image-sig-host.c
++++ b/tools/image-sig-host.c
+@@ -76,6 +76,13 @@ struct crypto_algo crypto_algos[] = {
+ 		.add_verify_data = ecdsa_add_verify_data,
+ 		.verify = ecdsa_verify,
+ 	},
++	{
++		.name = "secp521r1",
++		.key_len = ECDSA521_BYTES,
++		.sign = ecdsa_sign,
++		.add_verify_data = ecdsa_add_verify_data,
++		.verify = ecdsa_verify,
++	},
+ };
+ 
+ struct padding_algo padding_algos[] = {
+-- 
+2.44.2
 
-Yes.
-
->
-> >
-> > I think there's a cleaner approach overall to this which will allow us
-> > to decouple the installation etc from EFI.
-> > You could allocate a piece of memory, assign it to
-> > arch.table_start/end and then tweak efi_acpi_register(). Instead of
-> > marking the table_end - table_start as ACPI_RECLAIM_MEMORY, allocate
-> > the pages there, where you know the EFI subsystem is up and copy it.
-> > It would then be the callers responsibilty to free that memory.
-> >
-> We cannot memcpy ACPI tables to a new location. For example the RSDT and =
-XSDT
-> contain physical addresses to memory within the ACPI reclaim window,
-> which must be tweaked
-> when you copy tables. On x86 there's also the GNVS which is patched
-> into the DSDT, which points
-> to memory within the ACPI reclaim memory window.
-> There might be more places I'm not aware of as of now.
-
-Right, there should be no need to copy. EFI can point to the tables in
-the bloblist.
-
->
-> > Heinrich, do you see a problem with that?
-> >
-> > Thanks
-> > /Ilias
-> >
-> > > +       }
-> > > +
-> > > +       table_addr =3D virt_to_phys(addr);
-> > > +
-> > > +       gd->arch.table_start_high =3D table_addr;
-> > > +
-> > > +       table_end =3D write_acpi_tables(table_addr);
-> > > +       if (!table_end) {
-> > > +               log_err("Can't create ACPI configuration table\n");
-> > > +               return -EINTR;
-> > > +       }
-> > > +
-> > > +       log_debug("- wrote 'acpi' to %llx, end %llx\n", table_addr, t=
-able_end);
-> > > +       if (table_end - table_addr > TABLE_SIZE) {
-> > > +               log_err("Out of space for configuration tables: need =
-%llx, have %x\n",
-> > > +                       table_end - table_addr, TABLE_SIZE);
-> > > +               return log_msg_ret("acpi", -ENOSPC);
-> > > +       }
-> > > +       gd->arch.table_end_high =3D table_end;
-> > > +
-> > > +       log_debug("- done writing tables\n");
-> > > +
-> > > +       return 0;
-> > > +}
-> > > +
-> > > +EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, alloc_write_acpi_tables);
-> > > diff --git a/test/py/tests/test_event_dump.py b/test/py/tests/test_ev=
-ent_dump.py
-> > > index e282c67335..459bfa26bb 100644
-> > > --- a/test/py/tests/test_event_dump.py
-> > > +++ b/test/py/tests/test_event_dump.py
-> > > @@ -18,6 +18,7 @@ def test_event_dump(u_boot_console):
-> > >  --------------------  ------------------------------  --------------=
-----------------
-> > >  EVT_FT_FIXUP          bootmeth_vbe_ft_fixup           .*boot/vbe_req=
-uest.c:.*
-> > >  EVT_FT_FIXUP          bootmeth_vbe_simple_ft_fixup    .*boot/vbe_sim=
-ple_os.c:.*
-> > > +EVT_LAST_STAGE_INIT   alloc_write_acpi_tables         .*lib/efi_load=
-er/efi_acpi.c:.*
-> > >  EVT_LAST_STAGE_INIT   install_smbios_table            .*lib/efi_load=
-er/efi_smbios.c:.*
-> > >  EVT_MISC_INIT_F       sandbox_early_getopt_check      .*arch/sandbox=
-/cpu/start.c:.*
-> > >  EVT_TEST              h_adder_simple                  .*test/common/=
-event.c:'''
-> > > --
-> > > 2.46.0
-> > >
-
-Regards,
-Simon
