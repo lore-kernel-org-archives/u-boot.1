@@ -4,78 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCB9ECF3943
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 14:11:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16074CF3941
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 14:12:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF4CE891BD;
-	Thu, 19 Sep 2024 16:10:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2F1CA891E7;
+	Thu, 19 Sep 2024 16:10:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nYthKQqE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Dq2dnQQ4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5961891DC; Thu, 19 Sep 2024 16:10:30 +0200 (CEST)
-Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
- [IPv6:2607:f8b0:4864:20::1029])
+ id DC8E48919B; Thu, 19 Sep 2024 16:10:30 +0200 (CEST)
+Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
+ [IPv6:2607:f8b0:4864:20::102e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 419F78919B
+ by phobos.denx.de (Postfix) with ESMTPS id 42693891BD
  for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:10:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-2d8a744aa9bso667016a91.3
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-2d87f34a650so663357a91.1
  for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 07:10:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1726755027; x=1727359827; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=f9iC+lU558Y47tGaycAM/ORyk9CNgkL4C7wB+Vy+lTM=;
- b=nYthKQqEHaUBLOfDnTIhc8pw37prVejLX2bkivBu28/+oHmr+/ziD5l5X2Ayj6LpRl
- 8Wli9BxLHKzRYDWZTCy2CggXt84eEtf5AMabrLfiiI5neLs8aR9hS1XsbtfV54Ry7giS
- bvp7m1gBN4FR7E5LMVJCmFPMEUs4SS27u3Vhs=
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=oF3BXJQjcJ9Z/msYxPy8Qkfeka5LPcvQit+2je/gWy0=;
+ b=Dq2dnQQ4nH8pttR1ILhGkQntbN8eUwhTeNu5WBmb5ZU9rY9VCJj108N8YO0s4hk1SH
+ qfHguksDpREM+mClTnTEW6nix8Dqc6EP99KW2dQf46qFqHxSVpfdaoD7vDlW4ihPC6fJ
+ +qP/fJcMaumFktH14ML17mwCcqPveWdcCLcS4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1726755027; x=1727359827;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=f9iC+lU558Y47tGaycAM/ORyk9CNgkL4C7wB+Vy+lTM=;
- b=ZgmtQHxjjtbnmYltvjUlkv5WGo2o2zFbIjBO3xo9OwAsS8JT0XGgG8pSJEdxGisgkl
- mFLzhY/XMrMJrAMOAK2oNANd5pq5IsUd/Ft0RhbyhX4EwgAdCQlsUO270Aek/7Mfxo4D
- CdWXKrRn5BUABDsiUK8PPl+ZqooRlSfXj0vUEqWMy1clzP6O8dl3bS03UB14qIzhqddK
- 1a7pS9Gd2tosGbISlvGfeBQglB6x311JUre4Xd3iNsZpWvvHHgU5eDf2USq9cvFHIEGg
- F8L29XEn/nXRbsJQLORHP9eUkENyoYA4lE/OG9MLzcTwg6mttJMcfm5B4SChjook25Tp
- MGbQ==
-X-Gm-Message-State: AOJu0Ywz4P1QC620Gr77WLlMNudfpNgNfTt1bQXa8+me9KDrscVe3wSV
- C0rnooDz5WV5fXOY9MTKgzYqyl7KDh1J2Ga69n/eYPHhv901y2jCvf2BYeBwEwN8tS4U3NA8GXm
- zERltfZzXU3uhtsrDTRcfK7jH/ockfhDPzZqf
-X-Google-Smtp-Source: AGHT+IHGJcdDRL2IDp6z0qlHZR0LSKzXepIfTd/NYRnsC2oO7H78f7w50j1FSUGEldzm60p7E1oiHCpptAZIiKswX7I=
-X-Received: by 2002:a17:90a:c784:b0:2c8:e888:26a2 with SMTP id
- 98e67ed59e1d1-2dbb9df174dmr26686099a91.13.1726755026750; Thu, 19 Sep 2024
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=oF3BXJQjcJ9Z/msYxPy8Qkfeka5LPcvQit+2je/gWy0=;
+ b=cjms/tjQcAd6zw4fRzBN6LoXscKVr972CAQL8hpFZdnhODpSmRBTr66TsXSi3uwlPt
+ 3vYy9+5nB5pMfQwtHxpvo4FktJQeH2kI5XgIHMPkonnfkHMphGoC0B/pOZSEC6bync3L
+ F7DWiuvRR4oyS29KQwYKMTj2zX4vStDbElqMbDyS534Vxno1KAPiHh1eOhsxNQfImwT8
+ a5G+XnO9SAL1WhlXKncRtWW7T9UP4qLpENMLU3Xoy0GWKhOtrHTX5dPSEGmIxZidGd5K
+ KRJMYs4qsRws63JgR+3l0GNc/TIGc1IMxC/zO0HrYkEKRb5T7Wh/WrhqulgeSb1JXm07
+ yylQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW8wE8F6pQhIW5Ie69PPar57hs3eobp3wfH14b5cHlb1kiSsed/Wr9vGq/woiBiSLVC/NeN7m0=@lists.denx.de
+X-Gm-Message-State: AOJu0YwzM8qlVDgTRf7RKQnbTPyhf+lhboz9dcb4JDyIfrBIhYzf296K
+ eyZ8c7IYWL2dKi4xkh05mXVhGhkoeD7dhDY9JkUKrMCJGFwQj08ryD/wJ6BX8KLDWbgNlje+th6
+ jjx/ouhgMXXqHP/J9aiW2JfHv/3sqoYArA559
+X-Google-Smtp-Source: AGHT+IG98EDN5f0Pkyx8kwniSZdbrV0JearGqlQMFsuURs6s4bNLT2FRKD0fJMTT5ZOqpuv9VVBS9mIzSKBA2y4Wvr8=
+X-Received: by 2002:a17:90b:1286:b0:2d8:7a63:f9c8 with SMTP id
+ 98e67ed59e1d1-2dd6ce9b501mr5366950a91.14.1726755026735; Thu, 19 Sep 2024
  07:10:26 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240911062511.494855-1-patrick.rudolph@9elements.com>
- <20240911062511.494855-23-patrick.rudolph@9elements.com>
- <CAFLszTg0cf_1ojqhO8ZXpkX+MoQYgX_-AFVzUDCyD2yE8U=rcQ@mail.gmail.com>
- <CALNFmy0QJ4HNHhSKzx94dJ6jS_F0i9VoDqUwwVpe2SCeLB=pmg@mail.gmail.com>
- <CAFLszTgf=_jJkfyXhxXDZSieMmM_cm7pss3ysM5yz1EphMYVpw@mail.gmail.com>
- <CALNFmy1oOCNr3Kp8gt6RsjkJT=ShkOpJnQuSwvq2+ftwWtoyOw@mail.gmail.com>
-In-Reply-To: <CALNFmy1oOCNr3Kp8gt6RsjkJT=ShkOpJnQuSwvq2+ftwWtoyOw@mail.gmail.com>
+References: <20240902011825.746421-1-sjg@chromium.org>
+ <20240902011825.746421-13-sjg@chromium.org>
+ <95edb150-f53d-415a-8176-56e0fc66c822@gmx.de>
+ <CAFLszTj47fa7m2Xa4yi5NkcWNUGr4kiM1z4sAnrbd5rFUKq1Zw@mail.gmail.com>
+ <20240917170346.GN4252@bill-the-cat>
+In-Reply-To: <20240917170346.GN4252@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 19 Sep 2024 16:10:10 +0200
-Message-ID: <CAFLszTi4Jf2QZZqWd2pA35J1HPEZay=tkbbs94_eyFLJMuYOdA@mail.gmail.com>
-Subject: Re: [PATCH v3 22/30] board: emulation: Add QEMU sbsa support
-To: Patrick Rudolph <patrick.rudolph@9elements.com>
-Cc: u-boot@lists.denx.de, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tom Rini <trini@konsulko.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>, 
- Peter Robinson <pbrobinson@gmail.com>
+Date: Thu, 19 Sep 2024 16:10:12 +0200
+Message-ID: <CAFLszThMhNzvW=OTgsAA0Hikv+uxLaVn7bwTGM0=htf=BbzmcA@mail.gmail.com>
+Subject: Re: [PATCH v5 12/14] efi_loader: Avoid using sandbox virtio devices
+To: Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,170 +89,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Patrick,
+Hi Tom,
 
-On Wed, 18 Sept 2024 at 08:29, Patrick Rudolph
-<patrick.rudolph@9elements.com> wrote:
+On Tue, 17 Sept 2024 at 19:03, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Mon, Sep 16, 2024 at 5:41=E2=80=AFPM Simon Glass <sjg@chromium.org> wr=
-ote:
+> On Mon, Sep 16, 2024 at 05:42:31PM +0200, Simon Glass wrote:
+> > Hi Heinrich,
 > >
-> > Hi Patrick,
-> >
-> > On Thu, 12 Sept 2024 at 00:23, Patrick Rudolph
-> > <patrick.rudolph@9elements.com> wrote:
+> > On Thu, 12 Sept 2024 at 09:12, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 > > >
-> > > On Thu, Sep 12, 2024 at 2:58=E2=80=AFAM Simon Glass <sjg@chromium.org=
-> wrote:
+> > > On 02.09.24 03:18, Simon Glass wrote:
+> > > > While sandbox supports virtio it cannot support actually using the block
+> > > > devices to read files, since there is nothing on the other end of the
+> > > > 'virtqueue'.
 > > > >
-> > > > Hi Patrick,
-> > > >
-> > > > On Wed, 11 Sept 2024 at 00:26, Patrick Rudolph
-> > > > <patrick.rudolph@9elements.com> wrote:
-> > > > >
-> > > > > Add support for Arm sbsa [1] v0.3+ that is supported by QEMU [2].
-> > > > >
-> > > > > Unlike other Arm based platforms the machine only provides a mini=
-mal
-> > > > > FDT that contains number of CPUs, ammount of memory and machine-v=
-ersion.
-> > > > > The boot firmware has to provide ACPI tables to the OS.
-> > > > >
-> > > > > Add a minimal amount of devicetree nodes to make the board useabl=
-e within
-> > > > > U-Boot, provide documentation how to use, enable binman to fabric=
-ate both
-> > > > > ROMs that are required to boot and add ACPI tables to make it ful=
-l compatible
-> > > > > to the EDK2 reference implementation.
-> > > > >
-> > > > > The board was tested using Fedora 40 Aarch64 Workstation. It's ab=
-le
-> > > > > to boot from USB and AHCI or network.
-> > > > >
-> > > > > Tested and found working:
-> > > > > - serial
-> > > > > - PCI
-> > > > > - xHCI
-> > > > > - Bochs display
-> > > > > - AHCI
-> > > > > - network using e1000e
-> > > > > - CPU init
-> > > > > - Booting Fedora 40
-> > > > >
-> > > > > 1: Server Base System Architecture (SBSA)
-> > > > > 2: https://www.qemu.org/docs/master/system/arm/sbsa.html
-> > > > >
-> > > > > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-> > > > > Cc: Peter Robinson <pbrobinson@gmail.com>
-> > > > > Cc: Simon Glass <sjg@chromium.org>
-> > > > > Cc: Tom Rini <trini@konsulko.com>
-> > > > > ---
-> > > > > Changelog v3:
-> > > > > - Add GIC and GIC-ITS to devicetree
-> > > > > - Select GICv3 driver
-> > > > > - Drop acpi_fill_madt and use driver model instead
-> > > > >
-> > > > > ---
-> > > > >  arch/arm/Kconfig                            |   1 +
-> > > > >  arch/arm/dts/qemu-sbsa.dts                  |  49 ++
-> > > > >  arch/arm/include/asm/arch-qemu-sbsa/boot0.h |  33 ++
-> > > > >  arch/arm/mach-qemu/Kconfig                  |  36 +-
-> > > > >  board/emulation/qemu-arm/MAINTAINERS        |   2 +
-> > > > >  board/emulation/qemu-sbsa/Kconfig           |  58 +++
-> > > > >  board/emulation/qemu-sbsa/Makefile          |   8 +
-> > > > >  board/emulation/qemu-sbsa/acpi.c            | 235 ++++++++++
-> > > > >  board/emulation/qemu-sbsa/dsdt.asl          | 483 ++++++++++++++=
-++++++
-> > > > >  board/emulation/qemu-sbsa/lowlevel_init.S   |  22 +
-> > > > >  board/emulation/qemu-sbsa/qemu-sbsa.c       | 481 ++++++++++++++=
-+++++
-> > > > >  board/emulation/qemu-sbsa/qemu-sbsa.env     |  14 +
-> > > > >  board/emulation/qemu-sbsa/qemu-sbsa.h       |  38 ++
-> > > > >  board/emulation/qemu-sbsa/smc.c             |  72 +++
-> > > > >  configs/qemu-arm-sbsa_defconfig             |  10 +
-> > > > >  doc/board/emulation/index.rst               |   1 +
-> > > > >  doc/board/emulation/qemu-sbsa.rst           |  98 ++++
-> > > > >  doc/develop/driver-model/virtio.rst         |   1 +
-> > > > >  include/configs/qemu-sbsa.h                 |  98 ++++
-> > > > >  19 files changed, 1734 insertions(+), 6 deletions(-)
-> > > > >  create mode 100644 arch/arm/dts/qemu-sbsa.dts
-> > > > >  create mode 100644 arch/arm/include/asm/arch-qemu-sbsa/boot0.h
-> > > > >  create mode 100644 board/emulation/qemu-sbsa/Kconfig
-> > > > >  create mode 100644 board/emulation/qemu-sbsa/Makefile
-> > > > >  create mode 100644 board/emulation/qemu-sbsa/acpi.c
-> > > > >  create mode 100644 board/emulation/qemu-sbsa/dsdt.asl
-> > > > >  create mode 100644 board/emulation/qemu-sbsa/lowlevel_init.S
-> > > > >  create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.c
-> > > > >  create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.env
-> > > > >  create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.h
-> > > > >  create mode 100644 board/emulation/qemu-sbsa/smc.c
-> > > > >  create mode 100644 configs/qemu-arm-sbsa_defconfig
-> > > > >  create mode 100644 doc/board/emulation/qemu-sbsa.rst
-> > > > >  create mode 100644 include/configs/qemu-sbsa.h
-> > > >
-> > > > Wow there is a lot in this patch!
-> > > >
-> > > > I don't think this should be in a separate subdir, just using
-> > > > board/emulation/qemu-arm should be OK?
-> > > Why would it share the code base with qemu-arm, as it's a completely
-> > > different board?
-> >
-> > Perhaps I misunderstand this...what kind of board is it? How do you
-> > run qemu for this board?
-> >
-> For QEMU SBSA you use -machine sbsa-ref, but for qemu-arm you use -machin=
-e virt.
->
-> Both can use a cortex-a57 as CPU, but that's all those boards share. They=
- have a
-> different memory layout, virt provides a complete FDT, while sbsa-ref doe=
-sn't.
-> sbsa-ref needs an Arm-TF and nonsecure boot firmware, while virt works
-> without a firmware.
-
-OK I see
-
->
+> > > > A recent change makes EFI probe all block devices, whether used or not.
+> > > > This is apparently required by EFI, although it violates U-Boot's
+> > > > lazy-init principle.
 > > >
+> > > We always did this.
+> >
+> > Commit d5391bf02b9 dates from 2022, so I don't think that is correct.
+>
+> Yes, but I also could have sworn that was fixing the behavior having
+> been changed again previous to that.
+
+I don't see any evidence of that, though.
+
+>
+> > > What problem do you want to fix? I have not seen any issues in our CI.
+> >
+> > The EFI test in this series hangs trying to probe a virtio block
+> > device. If you drop this patch and try the rest of the series in CI,
+> > you will see the failure. Or you could just accept that I investigated
+> > this, root-caused it and produced a suitable fix. This is a v5 patch
+> > which has had quite a bit of discussion.
+>
+> And as I noted an iteration or two back, it's entirely unclear if the
+> problem is "sandbox virtio is broken" or "this code is wrong here".
+> Which in fact gets us back to ...
+
+sandbox virtio does not support a functioning block device
+
+>
+> > > > We cannot just drop the virtio devices as they are used in sandbox tests.
 > > > >
-> > > > I see you are setting plat data in the board file...is there not a =
-CPU
-> > > > driver which can read it from the devicetree or set it based on the
-> > > > compatible string?
-> > > The CPU driver could read the data from devicetree, but that would re=
-quire a new
-> > > DT binding. Is that the preferred method over using plat data?
-> >
-> > It is fine to use plat data...but it should be set up in the driver
-> > where possible. In this case if you don't have a binding you can check
-> > the compatible string of the device (or even the root
-> > compatible-string) and add your plat data if it matches.
->
-> I was able to parse everything from the DT, except for PMU IRQs. Those
-> aren't needed to
-> boot the platform and can be added later on.
-> Will send out a new revision soon.
-
-OK
-
->
-> >
-> >
+> > > > So for now just add a special case to work around this.
+> > > >
+> > > > The eventual fix is likely adding an implementation of
+> > > > virtio_sandbox_notify() to actually do the block read. That is tracked
+> > > > in [1].
+> > > >
+> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > Fixes: d5391bf02b9 ("efi_loader: ensure all block devices are probed")
+> > > > Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > > > [1] https://source.denx.de/u-boot/u-boot/-/issues/37
+> > > > ---
+> > > >
+> > > > (no changes since v3)
+> > > >
+> > > > Changes in v3:
+> > > > - Add a Fixes tag
+> > > > - Mention the issue created for this problem
+> > > >
+> > > >   lib/efi_loader/efi_disk.c | 14 +++++++++++++-
+> > > >   1 file changed, 13 insertions(+), 1 deletion(-)
+> > > >
+> > > > diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
+> > > > index 93a9a5ac025..2e1d37848fc 100644
+> > > > --- a/lib/efi_loader/efi_disk.c
+> > > > +++ b/lib/efi_loader/efi_disk.c
+> > > > @@ -838,8 +838,20 @@ efi_status_t efi_disk_get_device_name(const efi_handle_t handle, char *buf, int
+> > > >   efi_status_t efi_disks_register(void)
+> > > >   {
+> > > >       struct udevice *dev;
+> > > > +     struct uclass *uc;
+> > > >
+> > > > -     uclass_foreach_dev_probe(UCLASS_BLK, dev) {
+> > > > +     uclass_id_foreach_dev(UCLASS_BLK, dev, uc) {
+> > > > +             /*
+> > > > +              * The virtio block-device hangs on sandbox when accessed since
+> > > > +              * there is nothing listening to the mailbox
+> > > > +              */
+> > > > +             if (IS_ENABLED(CONFIG_SANDBOX)) {
+> > > > +                     struct blk_desc *desc = dev_get_uclass_plat(dev);
+> > > > +
+> > > > +                     if (desc->uclass_id == UCLASS_VIRTIO)
+> > > > +                             continue;
+> > > > +             }
+> > > > +             device_probe(dev);
+> > > >       }
+> > > >
+> > > >       return EFI_SUCCESS;
 > > >
-> > > >
-> > > > For FDT fixup, can you please use the event and the ofnode interfac=
-e?
-> > > > See EVT_FT_FIXUP and bootmeth_vbe_ft_fixup() as an example.
+> > > Please, do not spray sandbox tweaks all over the place.
+> > >
+> > > Can't you just return an error from the sandbox-virtio driver when an
+> > > attempt to read a queue is made?
+> > >
+> > > We are using virtio on QEMU. Why do we need sandbox virtio devices? Just
+> > > run the relevant tests on the real thing.
+> >
+> > Please go ahead with whatever approach to testing you wish. But
+> > sandbox testing is an important component of U-Boot.
 >
-> It looks like EVT_FT_FIXUP is run rather late in the bootflow, used to
-> updated the FDT for OS usage,
-> but it must be run early to update the minimal FDT passed by QEMU and
-> add the missing nodes
-> for U-Boot drivers.
+> Yes, but is sandbox implementing the "just be a state machine" part here
+> correctly, or not? It keeps feeling like "not" and that the reasonable
+> course of action would be to stop testing this on sandbox until that is
+> fixed especially since we can test this reliably on qemu.
 
-If the QEMU FDT is not suitable, shouldn't we use the U-Boot/Linux
-one? Do we have to use the one passed in by QEMU?
+We have to move things forward a piece at a time. Not having a proper
+test for the EFI bootmeth is a significant gap and is what I am trying
+to fix with this series. It isn't perfect, but it is a step forward
+and will prevent regressions. It can also be built on later.
+
+Happy-path testing with QEMU is all very well, but it only goes so far.
 
 Regards,
 Simon
