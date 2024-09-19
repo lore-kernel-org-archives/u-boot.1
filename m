@@ -4,74 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A4DBCF395D
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 16:10:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FBF5CF395D
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 16:26:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E17A89296;
-	Thu, 19 Sep 2024 18:10:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8052D89257;
+	Thu, 19 Sep 2024 18:26:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jZsym5Go";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AYLaaoSF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 80E2B892A5; Thu, 19 Sep 2024 18:10:48 +0200 (CEST)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
+ id EDB15891B0; Thu, 19 Sep 2024 18:26:54 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 90C8489291
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 18:10:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 157F589257
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 18:26:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=al.kochet@gmail.com
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-2f75129b3a3so11392631fa.2
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 09:10:46 -0700 (PDT)
+ spf=pass smtp.mailfrom=ansuelsmth@gmail.com
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-42cba8340beso13825975e9.1
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 09:26:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1726762246; x=1727367046; darn=lists.denx.de;
- h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
- :cc:subject:date:message-id:reply-to;
- bh=PdLMAi67HRfcWCA3cPpmeiAbSBht8YJFi8+8nMgmEO0=;
- b=jZsym5Go3XHmsPJ13FfM187kqwqzXBsTHcT4arBWhMNGN14gOybzor1LyxTmriv8FJ
- I8yA3/Uswx+J6YTGApo7J+LPH3njf6QdTu9Evcgi4uA23xft6To1kjpiYtA3JGsJdVkt
- rVp5NA5TjIexfC7eZ0y/pK3eEBOyhpvWeF7spQcEC9a1NMZEbiRkK0PX7POR0mKXzNIh
- jj3zBsZqnzdmukfZiqRM9+tG7WTscE7xMOGvs8A/n80JoMa1+0qvgfMDBRCxcYxez4gr
- XdsQrE6Uye0Qrst2m4yhqfXVDVRlxDJR/I+buiJqVrKaMG3fM1pvDFNczz+teamlxJ0T
- BfJg==
+ d=gmail.com; s=20230601; t=1726763211; x=1727368011; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:subject:cc
+ :to:from:date:message-id:from:to:cc:subject:date:message-id:reply-to;
+ bh=I4OmWOKwQnaaI26Gppoek4wt1Muvi5gG63vKqD7Bfi4=;
+ b=AYLaaoSFUrApOfhU5mwSZMb6wDxbWTaYphIhpJPMMPYlcI3/owBF7h3tS20LrdR/O2
+ eX9BCUh9rMEKV+Rd8eS5KCMmt6cA9LOzHHYG3E4qstsxXwSJ4Uvn26Ei/0g3iBriBfwC
+ nM5LBDfMipS7QYFiLyObp50aoNILcV30r62YwDalSyTsRWjOj62JKa9D8X4S2NLdRUfo
+ j965K0cJC3lOrdp3egg6T/6ECImieyUu/zgGZkedvuaTGgxa5zuTSSXEwi2xK6VcgH43
+ OkTyucBdT7sTLOC0scxT2ewkqUysz2tuGwHTJcbjdNcaXquUxnc5NnxkUyKp7QE1f2Fy
+ j5pQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726762246; x=1727367046;
- h=references:in-reply-to:message-id:date:subject:cc:to:from
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=PdLMAi67HRfcWCA3cPpmeiAbSBht8YJFi8+8nMgmEO0=;
- b=SpIKvKBxoRHuYXvLwYP2EXHcoO1qFvKz4VFfRLYtU8oGMvOLDLQFwVpfIbyoXyo/tU
- 6gJAJ1oswgaUOGcFsXgRoj8m62X9RrEMioPtSXDd/U6rF6mri1nT2M+DKajysfc7ghqJ
- CpkNtZc+bN4p1uTKWYdE0+m7KrAo/GYTMrI7HBVmHVeICFTJAkdc6VsE3PXRjTzMItAQ
- pU+fisA5MWUyPEdgwIiGv0AO4Pjuu+uWfcQzMJriNC6VeqxFRnx+KDcAZ5IeJcFf818P
- +PtzV6w+wxewSsKPgChzkmc9r0BdjXvTANHkZWgbzlGSTtBWllW/UcSK92GkMoCr3MD3
- bzMg==
-X-Gm-Message-State: AOJu0YwCWal67ixxot6XcKmVQDbyVsg0A4Lswwq/BiAQaiOLS6VKIwgB
- /nXFklY3QV6Ot3/9sKBcQ7pzQMsrrgB+FsBZ9ZrfKmftVstqyFvxu/KILA==
-X-Google-Smtp-Source: AGHT+IGoyRgSLMv0AVsiksnLQJezaQTO6i12vlN88JJToZn7V5ivZjxmQW/cRxiyEYFc24rYhCZqxg==
-X-Received: by 2002:a05:651c:1545:b0:2f7:6664:f295 with SMTP id
- 38308e7fff4ca-2f7cb30cb17mr683681fa.27.1726762245324; 
- Thu, 19 Sep 2024 09:10:45 -0700 (PDT)
-Received: from localhost.localdomain ([80.87.144.137])
+ d=1e100.net; s=20230601; t=1726763211; x=1727368011;
+ h=in-reply-to:content-disposition:mime-version:references:subject:cc
+ :to:from:date:message-id:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=I4OmWOKwQnaaI26Gppoek4wt1Muvi5gG63vKqD7Bfi4=;
+ b=oxPFQr2WbNZEbuVp6C80n7RsYq5CS8sW/STXtffx1kDtk7z2JODG3KLG36KSijc/uV
+ X+reyuAGwnmEEk7agATdf46ocBxOdeRK9Jwz5Oy2ymHjsGHxb35DP58TaWzbK9gDcoUC
+ 89uI3b8bYJZws9faqyquaZNM/vUPh7fo14HZse1jKYhm4I62vwvkD9UU5T45ai150xTO
+ TCieE+y8r0kKBMEWrvGGpZtkTSJevSSRZNQR/OMH9KDbpuDimBUPhlALwGfMlpWfdROj
+ b1qHxdOj5kt1dbUHzW432pVpPouVmiW8enJr1UP7lKHLQ8e2cNB33iAKpqGjy4B7UMed
+ cBLQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUKYMqXxEcwm4pOVCEwIb/WKfw6p8WEWGph+rtSk8H1a7rBUz13i+EltTyvvK1frUqq4rcd4P0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxDhmREMncbCE6DdERSINzfsBxCVNSsBoTg4q5fvlvrR1Fhdobk
+ FHBINjiFaY/csKdEm4rgCYPvvqPoChxqz6l/7cWjdFcmKoeuGzC6
+X-Google-Smtp-Source: AGHT+IFAISyQ65kSW51dMGQ3IMz2GWOH7+sy2CagssKOFS67gPxaPFVdEXv8Q4bCwqs7pkHOjzPVng==
+X-Received: by 2002:a05:600c:4f53:b0:42c:bd4d:e8d6 with SMTP id
+ 5b1f17b1804b1-42e7a8c1d04mr1390445e9.3.1726763211065; 
+ Thu, 19 Sep 2024 09:26:51 -0700 (PDT)
+Received: from Ansuel-XPS. (93-34-90-105.ip49.fastwebnet.it. [93.34.90.105])
  by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-2f79d2e1c56sm16278361fa.20.2024.09.19.09.10.44
+ 5b1f17b1804b1-42e754a7aedsm26260325e9.31.2024.09.19.09.26.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Sep 2024 09:10:44 -0700 (PDT)
-From: al.kochet@gmail.com
-To: u-boot@lists.denx.de
-Cc: Alexander Kochetkov <al.kochet@gmail.com>
-Subject: [PATCHv2 1/1] Makefile: pass external DTB provided by make variable
- EXT_DTB to binman
-Date: Thu, 19 Sep 2024 19:10:42 +0300
-Message-Id: <20240919161042.3423-2-al.kochet@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20240919161042.3423-1-al.kochet@gmail.com>
-References: <20240919161042.3423-1-al.kochet@gmail.com>
+ Thu, 19 Sep 2024 09:26:50 -0700 (PDT)
+Message-ID: <66ec50ca.050a0220.eee78.a0d3@mx.google.com>
+X-Google-Original-Message-ID: <ZuxQx4sItXsq3EmO@Ansuel-XPS.>
+Date: Thu, 19 Sep 2024 18:26:47 +0200
+From: Christian Marangi <ansuelsmth@gmail.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Arseniy Krasnov <avkrasnov@salutedevices.com>, Heiko Schocher <hs@denx.de>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Martin Kurbanov <mmkurbanov@salutedevices.com>,
+ Alexey Romanov <avromanov@salutedevices.com>,
+ Dmitry Dunaev <dunaev@tecon.ru>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <sean.anderson@seco.com>, Artur Rojek <artur@conclusive.pl>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Vasileios Amoiridis <vassilisamir@gmail.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>,
+ Doug Zobel <douglas.zobel@climate.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v3 1/9] led: turn LED ON on initial SW blink
+References: <20240812103254.26972-1-ansuelsmth@gmail.com>
+ <20240812103254.26972-2-ansuelsmth@gmail.com>
+ <CAFLszTib_uLiGHRo2Gh5V4p8e3TMx=zWzHWQ5YdeW_yh2gWxoA@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAFLszTib_uLiGHRo2Gh5V4p8e3TMx=zWzHWQ5YdeW_yh2gWxoA@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,58 +112,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alexander Kochetkov <al.kochet@gmail.com>
+On Thu, Sep 19, 2024 at 04:13:44PM +0200, Simon Glass wrote:
+> Hi Christian,
+> 
+> On Mon, 12 Aug 2024 at 12:33, Christian Marangi <ansuelsmth@gmail.com> wrote:
+> >
+> > We currently init the LED OFF when SW blink is triggered when
+> > on_state_change() is called. This can be problematic for very short
+> > period as the ON/OFF blink might never trigger.
+> >
+> > Turn LED ON on initial SW blink to handle this corner case and better
+> > display a LED blink from the user.
+> >
+> > Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+> > ---
+> >  drivers/led/led_sw_blink.c | 5 ++++-
+> >  1 file changed, 4 insertions(+), 1 deletion(-)
+> 
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> 
+> nit below
+> 
+> >
+> > diff --git a/drivers/led/led_sw_blink.c b/drivers/led/led_sw_blink.c
+> > index 9e36edbee47..853278670b9 100644
+> > --- a/drivers/led/led_sw_blink.c
+> > +++ b/drivers/led/led_sw_blink.c
+> > @@ -103,8 +103,11 @@ bool led_sw_on_state_change(struct udevice *dev, enum led_state_t state)
+> >                 return false;
+> >
+> >         if (state == LEDST_BLINK) {
+> > +               struct led_ops *ops = led_get_ops(dev);
+> > +
+> > +               ops->set_state(dev, LEDST_ON);
+> 
+> Normally in drivers we define functions like led_set_state() in the
+> uclass, rather than calling things directly like this.
+> 
 
-Yocto build is using EXT_DTB to repack U-Boot during signed
-FIT kernel creation. First, it takes the DTB from U-Boot, then
-it creates signed FIT kernel image and places kernel key into
-the DTB. After that it executes:
-    make EXT_DTB=/path/to/dtb/with/kernel/key
+I used ops directly as I'm following how it's done in led_sw_blink and
+because the support for these ops is already validated and we don't need
+to check for the -ENOSYS condition.
 
-Despite the fact that in the documentation all examples with EXT_DTB
-use only single DTB, the patch allows pass many DTB files separated
-by spaces, e.g.:
-    make EXT_DTB="/path1/to/1.dtb /path2/to/2.dtb"
+Hope it's ok. Also as suggested I changed the function to toggle the LED
+as suggested. I added the review tag. Tell me if I have to drop it in
+the next revision.
 
-The first DTB from the list become default configuration.
+> >                 /* start blinking on next led_sw_blink() call */
+> > -               sw_blink->state = LED_SW_BLINK_ST_OFF;
+> > +               sw_blink->state = LED_SW_BLINK_ST_ON;
+> >                 return true;
+> >         }
+> >
+> > --
+> > 2.45.2
+> >
+> 
+> Regards,
+> Simon
 
-Signed-off-by: Alexander Kochetkov <al.kochet@gmail.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
----
- Makefile | 12 +++++++++++-
- 1 file changed, 11 insertions(+), 1 deletion(-)
-
-diff --git a/Makefile b/Makefile
-index 1c754ceb595..6dea0345f50 100644
---- a/Makefile
-+++ b/Makefile
-@@ -1367,7 +1367,17 @@ u-boot.ldr:	u-boot
- # ---------------------------------------------------------------------------
- # Use 'make BINMAN_DEBUG=1' to enable debugging
- # Use 'make BINMAN_VERBOSE=3' to set vebosity level
-+
-+ifneq ($(EXT_DTB),)
-+ext_dtb_list := $(basename $(notdir $(EXT_DTB)))
-+default_dt := $(firstword $(ext_dtb_list))
-+of_list := "$(ext_dtb_list)"
-+of_list_dirs := $(dir $(EXT_DTB))
-+else
-+of_list := $(CONFIG_OF_LIST)
-+of_list_dirs := $(dt_dir)
- default_dt := $(if $(DEVICE_TREE),$(DEVICE_TREE),$(CONFIG_DEFAULT_DEVICE_TREE))
-+endif
- 
- quiet_cmd_binman = BINMAN  $@
- cmd_binman = $(srctree)/tools/binman/binman $(if $(BINMAN_DEBUG),-D) \
-@@ -1377,7 +1387,7 @@ cmd_binman = $(srctree)/tools/binman/binman $(if $(BINMAN_DEBUG),-D) \
- 		build -u -d u-boot.dtb -O . -m \
- 		--allow-missing $(if $(BINMAN_ALLOW_MISSING),--ignore-missing) \
- 		-I . -I $(srctree) -I $(srctree)/board/$(BOARDDIR) \
--		-I $(dt_dir) -a of-list=$(CONFIG_OF_LIST) \
-+		$(foreach f,$(of_list_dirs),-I $(f)) -a of-list=$(of_list) \
- 		$(foreach f,$(BINMAN_INDIRS),-I $(f)) \
- 		-a atf-bl31-path=${BL31} \
- 		-a tee-os-path=${TEE} \
 -- 
-2.17.1
-
+	Ansuel
