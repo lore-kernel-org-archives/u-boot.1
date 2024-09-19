@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 698AECF3944
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 14:14:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD6A3CF3944
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 14:15:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B2DD189229;
-	Thu, 19 Sep 2024 16:12:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 64C8189232;
+	Thu, 19 Sep 2024 16:12:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UVBtzQST";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YTkKEqwC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E9E0891F7; Thu, 19 Sep 2024 16:12:20 +0200 (CEST)
-Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
- [IPv6:2607:f8b0:4864:20::42c])
+ id AE207891DD; Thu, 19 Sep 2024 16:12:21 +0200 (CEST)
+Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
+ [IPv6:2607:f8b0:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0BBCA89229
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:12:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F16818921A
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:12:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x42c.google.com with SMTP id
- d2e1a72fcca58-7191df6b5f5so641363b3a.0
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-71923d87be4so656535b3a.0
  for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 07:12:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1726755136; x=1727359936; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xFIZiu1sb50Hbu3DGjuHeiukNHEC0OWMePQLB5+Qbuk=;
- b=UVBtzQSTd+7Q3tHN/Bs5eVe6Yj17m9pwv9CWh5bst1VSlrbbbk6wLfGo0LsCQqYJJS
- t2POEh2G5KE+EJSRhF0CUMLZRofH8C43kUJXAeiPXIiQOB56NGs2KErOT3QsePrziIQa
- Npa4DlIiGhDhHdG5/4KzHqJCYnunD2lfszXWQ=
+ bh=8pCE5+oRpoBemw81XFrnN/m9o0DPWaXGmYgVC9viNBQ=;
+ b=YTkKEqwCvmQdx4jtVvhPq3CbDO7iBEAvpd24C9Iy4vU3ea/DrMnpkzQZrS6MJ3DeQc
+ RPVwkY6uhzLU0JPn7mDZzSA0UbE2NaR4QbDJAvxaM8fEUl4qAFeuvlfSCl/t/vO2fjm7
+ 7xbo8XsGi5n827Z8QiCKX8UblKeFlpC9y+S1w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1726755136; x=1727359936;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=xFIZiu1sb50Hbu3DGjuHeiukNHEC0OWMePQLB5+Qbuk=;
- b=mrqNLtPO3wFqYw06O5i9FtHPvuGAv0mrsdY4RkYKq3j8RKpQKhHZK9WtBEgH50Wvlw
- tv/9fbqY91TL3PiJ1ch07gWr3i4L0ODmyH/ucsCepNrlRFs9vp61UXilKgc3dcU4RIB4
- KGr+Dgv/VbPbULY2RDme+xyCQBP2so9wxT51Plugqe2WvOyZcug9SHFEqNHoek6+jGTP
- ypk8h6m+arUHCLqZsN9Zdur6qVG16bfh6Md3b+RtkZQjwK/d+9pp0EZEXjmSFwFy4IT0
- UVVDMEDOr9ILNpBop5oDSoeAyJQbRZbaoDhvVuGQoI39OsE7MquBo4MRz8LQ9bePK07a
- hbmA==
-X-Gm-Message-State: AOJu0Yzej9vULABgcPbyl8/AHc438UmnpB4rn+wYUQq7OF6/oeUAYaIj
- S8JURYn7ZmQtD3PWOP4cM/1oeGv1U+z8goPp04mvhM2oxFKS9+IdSKoDs3IZp1L9suNrAJGc1lE
- rcBeLf0sTQA6CdiZT3JWcaODXqjlvAKJog2Ip
-X-Google-Smtp-Source: AGHT+IHi3h8nkgewOmL9EThNc6Ua+K8uhF3/NmaTMOdnTIdVNreIwUrwPJkjJA9lZ3rTWfyL8KVEOM3TVLVBg+lsIxI=
-X-Received: by 2002:a05:6a00:1ac9:b0:714:2dc9:fbaf with SMTP id
- d2e1a72fcca58-719261e73c0mr35498586b3a.18.1726755136577; Thu, 19 Sep 2024
+ bh=8pCE5+oRpoBemw81XFrnN/m9o0DPWaXGmYgVC9viNBQ=;
+ b=MW20oIcmuLM7tyS72Z932ITKNIgkI3ouZcNLSbVu0BlYn+oxUmTdDPN4wfBT+hyUEh
+ v1AWmnUAn1e9Q2ytkaFS4Q3Gi3gseueqFKLwX2G4UkSqzOai/hokLoZCpmgPjVAlPTpi
+ jS+5b3nXZ3cHYzFItG6gYcV6p+sp7/XRsL/p+uMNFWNvkamy/7awNb5x2zFuemEqVYip
+ ofWzZBxSoMj9OVJYBB6GCYs7AQgb+AA1WzHBpXINFSsSCQqHKF6kk7b4bvZHoHwnjWZ4
+ icniUy9QelL5wqdnW7862Lrb6OyPkedRxdG7LD8rG21XfLVSocCjzsonlTFiqOombqId
+ 2FvA==
+X-Gm-Message-State: AOJu0YyHyljkc0+7t3fKTl+bZ3fT1icxKf5hpyoxAtjW9mPQZci5BuLh
+ IHtoRMFqk12iBXuS2XPyw4eyo1sqCayZzKfBicHka8ccqGMDGaMIZc2ILVXg3PdBCqHlRWuRDus
+ +Huw2CAhAr4nejYw4sAHB+vpEEbnWf8hQrGyu
+X-Google-Smtp-Source: AGHT+IE6Qb4N2RWq4fO0vjW+fhVjhc5WDCiH+LNda/EkHudyixUbAIezS89x44wc/sLa5kj47f1rJoS+J2pyJ0muATc=
+X-Received: by 2002:a05:6a20:c908:b0:1cf:3c60:b8dc with SMTP id
+ adf61e73a8af0-1d112e8bf6bmr33562453637.34.1726755136571; Thu, 19 Sep 2024
  07:12:16 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240918152136.3395170-1-patrick.rudolph@9elements.com>
- <20240918152136.3395170-24-patrick.rudolph@9elements.com>
-In-Reply-To: <20240918152136.3395170-24-patrick.rudolph@9elements.com>
+ <20240918152136.3395170-29-patrick.rudolph@9elements.com>
+In-Reply-To: <20240918152136.3395170-29-patrick.rudolph@9elements.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 19 Sep 2024 16:11:49 +0200
-Message-ID: <CAFLszTiPO5zb6F7j2YiJgRj0BiKwoqmNik1irTXaBy5KHzZz+Q@mail.gmail.com>
-Subject: Re: [PATCH v4 23/35] drivers/arm: Implement acpi_fill_madt
+Date: Thu, 19 Sep 2024 16:11:52 +0200
+Message-ID: <CAFLszTiwmZhAK+xGFTT-3nDeDHmv5tqA5_ZVc61NYa9-M-VsNQ@mail.gmail.com>
+Subject: Re: [PATCH v4 28/35] arm: bcm283x: Generate ACPI tables
 To: Patrick Rudolph <patrick.rudolph@9elements.com>
-Cc: u-boot@lists.denx.de, linux-kernel@vger.kernel.org, 
- Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Matthias Brugger <mbrugger@suse.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,33 +86,36 @@ X-Virus-Status: Clean
 On Wed, 18 Sept 2024 at 17:22, Patrick Rudolph
 <patrick.rudolph@9elements.com> wrote:
 >
-> Fill the MADT table in the GICV3 driver and armv8 CPU driver to
-> drop SoC specific code. While the GIC only needs devicetree
-> data, the CPU driver needs additional information stored in
-> the cpu_plat struct.
+> Generate SoC specific ACPI tables for BCM2711:
+> - FADT
+> - PPTT
+> - GTDT
 >
-> While on it update the only board making use of the existing
-> drivers and writing ACPI MADT in mainboard code.
+> Board specific tables like DSDT and SSDT are added in a separate patch.
 >
-> TEST: Booted on QEMU sbsa-ref using GICV3 driver model generated MADT.
->       Booted on QEMU raspb4 using GICV2 driver model generated MADT.
+> MADT is already properly generated from the FDT.
+>
+> When ACPI is enabled for a different SoC compliation will fail by
+> design, indicating the required functions that needs to be implemented.
+> When ACPI is not enabled the added code does nothing, keeping existing
+> behaviour.
+>
+> TEST: Booted on RPi4 with only ACPI enabled, providing no FDT to the OS.
 >
 > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
 > Cc: Simon Glass <sjg@chromium.org>
+> Cc: Matthias Brugger <mbrugger@suse.com>
+> Cc: Peter Robinson <pbrobinson@gmail.com>
+> Cc: Tom Rini <trini@konsulko.com>
 > ---
+> Changelog v2:
+> - Drop duplicated code to generate ACPI tables. Is now part of efi loader.
 > Changelog v4:
-> - Read everything from the DT
-> - Export armv8_cpu_fill_madt() to use it in other CPU drivers
-> - Depend on IRQ
->
+> - Drop acpi_fill_madt() as it's now generated by drivers
 > ---
->  arch/arm/lib/gic-v3-its.c | 89 ++++++++++++++++++++++++++++++++++++++-
->  drivers/cpu/Kconfig       |  1 +
->  drivers/cpu/armv8_cpu.c   | 80 ++++++++++++++++++++++++++++++++++-
->  drivers/cpu/armv8_cpu.h   | 10 +++++
->  4 files changed, 178 insertions(+), 2 deletions(-)
->
+>  arch/arm/mach-bcm283x/Makefile       |   4 +
+>  arch/arm/mach-bcm283x/bcm2711_acpi.c | 128 +++++++++++++++++++++++++++
+>  2 files changed, 132 insertions(+)
+>  create mode 100644 arch/arm/mach-bcm283x/bcm2711_acpi.c
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-I'm still not sure why you are using u64 instead of ulong?
