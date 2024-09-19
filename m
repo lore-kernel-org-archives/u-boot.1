@@ -4,72 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 776EECF3944
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 14:16:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C95ECCF3944
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 14:16:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 158938925C;
-	Thu, 19 Sep 2024 16:13:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6A2D08923A;
+	Thu, 19 Sep 2024 16:13:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AOLkzmAB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lTbX2NkE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4BCCE8924F; Thu, 19 Sep 2024 16:13:29 +0200 (CEST)
-Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
- [IPv6:2607:f8b0:4864:20::430])
+ id 931D089262; Thu, 19 Sep 2024 16:13:31 +0200 (CEST)
+Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
+ [IPv6:2607:f8b0:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 287368921D
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:13:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2151F891B3
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:13:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-71971d20a95so694458b3a.3
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 07:13:27 -0700 (PDT)
+Received: by mail-pg1-x52f.google.com with SMTP id
+ 41be03b00d2f7-7db12af2f31so768131a12.1
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 07:13:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726755206; x=1727360006; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1726755207; x=1727360007; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=E1oBMa9ynpVftwLgwo/P2arziHzgNKc5TmcSzR8Qlhk=;
- b=AOLkzmAB45O3sfvbvSSU5omhkGO9/w/7D1UJtakujtgyYN/NAgKIfUFB2U8eEJtmJu
- UzeUM2Nq1hbDvt8p/ymOgJ4J0f5FXvIpNP9FbelvlaD/0Co133vE8ZM+pi1f8WynVzNf
- 5cCMvA6oGj7spI5MDr6r60xfrODyKagr8CCpI=
+ bh=DZocjLEBIGQRxxx8Ez2GyvZCHxR8E5oND9j8Dag6Vjk=;
+ b=lTbX2NkEgVxvLgsY/EQ9xJZY4mRl/SK7kiZ4e855J/OB/bPNzD/hp2bjSvQOrVGrjb
+ cuQt5j6UJwsERGljuJnV3B8WXVaHnz8h9GG2WvbwtSDgmWKEAJgZSQq1zPoarbvauQ7H
+ xhPuue7tgVgjGUu1t5QGNgsSwBWSEoAuNZA94=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726755206; x=1727360006;
+ d=1e100.net; s=20230601; t=1726755207; x=1727360007;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=E1oBMa9ynpVftwLgwo/P2arziHzgNKc5TmcSzR8Qlhk=;
- b=uOS9pxvSH6xEJs3HPk0KyCYYqV3cgpQ2JRSNBdGAS9VL02pCHp0aSFoL+VtbW9SxlC
- 9Zf5WiYvWhKdpSyj2KEmbk+TwDrZIkh2YEKRGFireMuvknGaIBDHW8CIfhdiWxC09hLz
- SV2Jo7x49Zr+acOF+sr88llBrIuNyfibo/CXNNHJ91FFzVx6pMGUK9tiBw1xp8i0dcQO
- K6m/819M1mbWfsirHjpxPYp+n/tJcBhpYeZ4ymc95LYzWPbOOsZfHJi5DBwfHlb2wxt2
- Cp6LkjBwhZvNXX7PUhPo4Dz/2GUvlRciyF26d2thj/TqpN6mavxCzrtJFw5Y+P8LYqw2
- B+jQ==
+ bh=DZocjLEBIGQRxxx8Ez2GyvZCHxR8E5oND9j8Dag6Vjk=;
+ b=G8ie/oLHIlgrgsh20Vsl6j3A2QST76PVUO4/pl5Y8nmZO0VcvuhtSD+F/8TOp7XOm+
+ fi3luEHQ9e8Ve0T5DwqXN81AMkj/ddHiM1uxfSlmKPwIfENWAiRvKrUMO6UFA9W0S3c5
+ yIJCqd7vVF8RR0+whLNgtU94OoX5NX0iAK3VHl1ct4/RsV8WP1/H06cLOtNqye30Ir2S
+ X+O76lt4HdodP1dCVJAnYXJ0Irt+Fcm2bOoSSfDvjdjsCH6j0/BmiDFL/28KEj20ylYf
+ mIAwAaeqLuGOOYcX54x2z/Kb31FmPijF5yGtYGejqJSAfo4BpPlzBG4FejLi0pbfOmmF
+ 6iVA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUGSjJACPFyJ1T56XfGAJ5NckT7E0Yxgm8diLcGfhJ+ll7Dld7iy/LhsDhkDXGSuyuBdt1u+dU=@lists.denx.de
-X-Gm-Message-State: AOJu0YzxWZqMVfZ16Am0lO67epipJ1s1emaCbfAzPKW8TMWRKZbhfBYb
- CXfuNgePZFx9XbLCVLmNPBWhboVkxaYiX/RVXTnYdbEHluIaRRQSq4LD8yW587ZjlROZcfifCJj
- st7YRTlDoTdu4pcMVu/tLZYN2i9rsMJfUsVSF
-X-Google-Smtp-Source: AGHT+IESLZmMb4o+nfGIEnES8MH6rGW600f/2jlKIQTogvPsL0BguFpIZen25VQtzSWJdHlyB2aTP0Hl2s8m175ZGgw=
-X-Received: by 2002:a05:6a00:23c3:b0:70d:3337:7820 with SMTP id
- d2e1a72fcca58-71936a4d269mr32269170b3a.8.1726755205691; Thu, 19 Sep 2024
- 07:13:25 -0700 (PDT)
+ AJvYcCXzxVU6G+I/47M1bCX9YxBCb30d50ya5xbuMSABLpzXWSuoHDaJok+UQ0eqUcUvk149yCX8XaM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx27qRtwfQJ0Xf3U+MFciqlO/MhwAYZszE7MykJsVCxv3VwJNZY
+ OekfpSK16h721Z/4G/tlq7gfHF1KYIqQMRo/M0aFy8Jwl639IFVEMFSrnmuTdKNMZOiW9+2IyF9
+ 69YSNHzsx46xIE60pqP+LlhmHsDmMs981UMoG
+X-Google-Smtp-Source: AGHT+IEldh8RkXjMpycQTKLDsqaTqFMf1FbSuT06wb2wN2AyAtBO4FOeN16D4dFRnorloE1bdtei3bzNFB1uahZ4Iug=
+X-Received: by 2002:a05:6a20:d523:b0:1d2:bbf2:4c0e with SMTP id
+ adf61e73a8af0-1d2bbf24c8fmr26432959637.43.1726755207700; Thu, 19 Sep 2024
+ 07:13:27 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240902011825.746421-1-sjg@chromium.org>
- <eb5c045c-194a-4c0c-8617-4833e174db8c@gmx.de>
-In-Reply-To: <eb5c045c-194a-4c0c-8617-4833e174db8c@gmx.de>
+References: <20240912-bootmeth-bootloader-version-v2-1-76d4c0b45024@baylibre.com>
+In-Reply-To: <20240912-bootmeth-bootloader-version-v2-1-76d4c0b45024@baylibre.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 19 Sep 2024 16:13:08 +0200
-Message-ID: <CAFLszThWLmpfsdEk0JnhDQm+j=Xj8zs01Uu1UTC5Cf8h1QGs7w@mail.gmail.com>
-Subject: Re: [PATCH v5 00/14] efi: Add a test for EFI bootmeth
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Albert Aribaud <albert.u.boot@aribaud.net>, Bin Meng <bmeng.cn@gmail.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Thu, 19 Sep 2024 16:13:05 +0200
+Message-ID: <CAFLszTie3Jzkdb4GUUsOmChVjPthKMHivm3M9fkVqzLEwhkKeg@mail.gmail.com>
+Subject: Re: [PATCH v2] bootstd: android: Add U-Boot version to cmdline
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: Tom Rini <trini@konsulko.com>, Guillaume La Roque <glaroque@baylibre.com>, 
+ Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,29 +84,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+On Thu, 12 Sept 2024 at 16:00, Mattijs Korpershoek
+<mkorpershoek@baylibre.com> wrote:
+>
+> When booting into Android fastbootd (a subset of recovery), the default
+> UI shows the bootloader version in the screen [1].
+> This is done via the ro.bootloader property which should come from the
+> bootloader.
+>
+> Provide the U-Boot version via a kernel commandline argument so that
+> fastbootd can show it properly on the screen.
+>
+> [1] https://android.googlesource.com/platform/bootable/recovery/+/refs/heads/main/fastboot/fastboot.cpp#42
+>
+> Reviewed-by: Julien Masson <jmasson@baylibre.com>
+> Reviewed-by: Guillaume La Roque <glaroque@baylibre.com>
+> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> ---
+> Changes in v2:
+> - Clarify by a comment that we intentionally ignore return (Simon)
+> - Link to v1: https://lore.kernel.org/r/20240904-bootmeth-bootloader-version-v1-1-9979a8428566@baylibre.com
+> ---
+>  boot/bootmeth_android.c | 13 ++++++++++++-
+>  1 file changed, 12 insertions(+), 1 deletion(-)
 
-On Fri, 13 Sept 2024 at 15:55, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> On 02.09.24 03:18, Simon Glass wrote:
-> > The test coverage for the EFI bootmeth is incomplete since it does not
-> > actually boot the application.
-> >
-> > This series creates a simple test for this purpose. It includes a few
-> > patches to make this work:
-> >
-> > - ANSI output from the EFI loader confusing the unit-testing checker
-> > - Hang in sandbox virtio due to EFI probing all block devices
-> >
-> > Other necessary fixes have been split out into two other series.
->
-> Hello Simon,
->
-> Patches 1 and 2 are in my pull-request for the next branch.
->
-> The rest needs to be rebased after considering the review comments.
-
-OK thanks, I will give it another pass.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
