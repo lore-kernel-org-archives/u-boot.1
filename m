@@ -4,72 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAA9FCF3943
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 14:13:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D001CF3943
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 14:14:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D592089202;
-	Thu, 19 Sep 2024 16:11:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4AA9B89215;
+	Thu, 19 Sep 2024 16:12:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="O2A2N1Ve";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XxcW3eam";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 780FE89202; Thu, 19 Sep 2024 16:11:58 +0200 (CEST)
-Received: from mail-pg1-x535.google.com (mail-pg1-x535.google.com
- [IPv6:2607:f8b0:4864:20::535])
+ id 39F00891B3; Thu, 19 Sep 2024 16:12:05 +0200 (CEST)
+Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
+ [IPv6:2607:f8b0:4864:20::102e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 377488920F
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:11:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C062891F7
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:12:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x535.google.com with SMTP id
- 41be03b00d2f7-7cd8803fe0aso626686a12.0
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 07:11:56 -0700 (PDT)
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-2d8fa2ca5b1so797254a91.3
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 07:12:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726755115; x=1727359915; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1726755121; x=1727359921; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=84xmllLzcNWq6sR2aesI/kmuvgMCEaVimg6P8MHvCbk=;
- b=O2A2N1VeeTwCNti6Wpv2/w9CYyF3B94wm9Sloe6Y2OqXojPesI+siykZG6dHv4VpPJ
- y5knmgEj0Qhz4KkhjYF1W300Q0pAYo0bmWBrADwLwxCwzf1ewMjfr7szyy04IvU6YV+x
- oUmkn0mXLr+CT/euFfrOfSwGKeNv9e3qRFj4g=
+ bh=Dvw6GNoWXo3xgsZIMbb8b7PaFCxKuEuRhTZCBrOcx9Q=;
+ b=XxcW3eamyFlzZSjXIbuvjlg1EQWY6gnD6y5+ddp1+lys21y9BXktUr3O4zZCwM9vjv
+ xvZQDBHcoDl+5GF8ogNQU0eftwHfvvqGO/8DPr0TmxZbBvOhi/QKfPvPgpWq0HUcGQC5
+ SapDltLjWIGKbqi1Qzdi6QJm/Rkq3po3PSKc0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726755115; x=1727359915;
+ d=1e100.net; s=20230601; t=1726755121; x=1727359921;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=84xmllLzcNWq6sR2aesI/kmuvgMCEaVimg6P8MHvCbk=;
- b=e5E2cPzdJovpyvc1B529RAQapL+Qrbx702Z2axDwWLRPwHOwyT9JZzIvhQVNmHiOGA
- eCrgzlba28daefkhfrNucDAreF62zVXqdabZLSLDcQGTVKjM6PyjVLNo0EEvpZHTe6MZ
- 0qstG+sfnc+jIfkDAUVZ2Qikeb9ymjN5jwSMpc6RtE/f79Y4XnvnAT/w6cNJ5xtbbbp8
- D+Rp/EtTLvIkEmtJu16H0LXAkTUu/Qg14cvJNK+hSiWtW3g3ZE6rPgCFWiRQuz9Cr2or
- YGCVbPCAw4Wd4uAgs3MlHi09X1TW2/Aml3HtwrTONw02F7Z5RimAG1mUx6WbJKnnN9I/
- nxaQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWRA4cOjZwfIUIs2mR0qGbulnVcDriwMTpOutv5riK6yr3HB7fnuvviljeJ8oGw6ivaCLYpQ9I=@lists.denx.de
-X-Gm-Message-State: AOJu0YxpcEBZ7JoCRQYJXEWrQp1HYTl0haHxVDlCfk1zNGx8ohcEmWCk
- /ViLGUP3x3G/e1yKlNKwiVbwVrtq/CVjFT9D3qJx6++aP6Hw4iQEKQsdusiZn/0pZSFdEsgIRTe
- Fzy+8IJGgiC/8ky9VPNOW1hFr4ii6Qr+52nwe
-X-Google-Smtp-Source: AGHT+IEmM4wOwPpFxmcNa5dtidH1h/ByC5Gba+xKb2hg+x+dgofAM6uRLeZO7bc0jjcsu9Fseh65hWKh6uWpl2TnFEw=
-X-Received: by 2002:a05:6a20:c888:b0:1cf:4102:9762 with SMTP id
- adf61e73a8af0-1cf76244cbemr31981253637.42.1726755114820; Thu, 19 Sep 2024
- 07:11:54 -0700 (PDT)
+ bh=Dvw6GNoWXo3xgsZIMbb8b7PaFCxKuEuRhTZCBrOcx9Q=;
+ b=Fr475ht//il3cwSWOVFJxGJig6j3d3Cw5t01d4cOuI0VlMPruaYJ9TyANXursg69UY
+ 9uPPg3awhCXk4sMH+xG0LwJ+eFN61oygq02GcyZXkvt6UoiXXUwYhO/lRei84euRqdZE
+ HLFFqNxWzS+/Y1Sy3jd3V6a4HCZA3J930O60oaC5wXF+jso26r2v005RWIgTtqzkCYuL
+ CIiuNxElahCkSZeKiTgz6ap4aWxzODvanHoYmm0cBHjmteme7rL9Pu4MVoS4CQcN7Qco
+ xHILhAPTwi3dEZ84GdmXT+vVVlu8dWrVf2lNrF8267RVkVrADe6UhDsR0VkGHXa2O+wF
+ MmwQ==
+X-Gm-Message-State: AOJu0YxOJnS6HCpVN51f1+WYnhy9RAbTSRMni02nzHb49aN/KE2xaQuS
+ YnqE5Tb/+w9vRu4FLV/Qo/NIAmuDodoV8KDhvHwdm2VGcExvy3TVMwyLu8qW/Ry0aCUrGkFDT2z
+ VuxtcvjrjdQg+pWDfqIA36I++uClA1KIr9d+W
+X-Google-Smtp-Source: AGHT+IFPkralzFVn+KwtWhT0VQU9jcp3Su0esZKZQWWNCZ0q75jE9tylo8Qng68/8jgzhatZVoMkCP9keL6BT37tGDQ=
+X-Received: by 2002:a17:90a:9a7:b0:2d3:c8e5:e548 with SMTP id
+ 98e67ed59e1d1-2dbb9dfbddcmr29148227a91.13.1726755121587; Thu, 19 Sep 2024
+ 07:12:01 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240902190459.13783-1-herman@rimm.ee>
- <c56191d9f088cc52844d3cb1c7eec0f413745b2d.1726507300.git.herman@rimm.ee>
- <87jzfbl371.fsf@wireframe>
-In-Reply-To: <87jzfbl371.fsf@wireframe>
+References: <20240918152136.3395170-1-patrick.rudolph@9elements.com>
+ <20240918152136.3395170-3-patrick.rudolph@9elements.com>
+In-Reply-To: <20240918152136.3395170-3-patrick.rudolph@9elements.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 19 Sep 2024 16:11:43 +0200
-Message-ID: <CAFLszTgMRRFiLVMq8YAHFc355LoT-Jmk77E1CweYUzoJffd4vw@mail.gmail.com>
-Subject: Re: u-boot: rpi: Enlarge space available for kernel.
-To: Vagrant Cascadian <vagrant@debian.org>
-Cc: Herman Rimm <herman@rimm.ee>, 72987@debbugs.gnu.org, 
- Efraim Flashner <efraim@flashner.co.il>, u-boot@lists.denx.de, 
- Matthias Brugger <mbrugger@suse.com>, Peter Robinson <pbrobinson@gmail.com>
+Date: Thu, 19 Sep 2024 16:11:46 +0200
+Message-ID: <CAFLszTjpi1VZSYKzi1es83hw-JUTsA9Jd_gjmmZVbOsR+84_4g@mail.gmail.com>
+Subject: Re: [PATCH v4 02/35] acpi: x86: Write FADT in common code
+To: Patrick Rudolph <patrick.rudolph@9elements.com>
+Cc: u-boot@lists.denx.de, Maximilian Brune <maximilian.brune@9elements.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,71 +83,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Patrick,
 
-On Mon, 16 Sept 2024 at 23:06, Vagrant Cascadian <vagrant@debian.org> wrote:
+On Wed, 18 Sept 2024 at 17:22, Patrick Rudolph
+<patrick.rudolph@9elements.com> wrote:
 >
-> On 2024-09-16, Herman Rimm wrote:
-> > --- /dev/null
-> > +++ b/gnu/packages/patches/u-boot-50M-kernel.patch
-> > @@ -0,0 +1,51 @@
-> > +This patch configures the U-Boot for Raspberry Pis to reserve 50 MB for
-> > +linux kernels, because the 6.9 and newer linux-libre-arm64-generic
-> > +kernels can be larger than 36 MB.  It was created by Herman Rimm
-> > +<herman@rimm.ee> in August 2024 and is not submitted upstream yet.
-> > +diff --git a/board/raspberrypi/rpi/rpi.env b/board/raspberrypi/rpi/rpi.env
-> > +index 30228285ed..54a8e9e5ae 100644
-> > +--- a/board/raspberrypi/rpi/rpi.env
-> > ++++ b/board/raspberrypi/rpi/rpi.env
-> > +@@ -43,22 +43,22 @@ dfu_alt_info+=zImage fat 0 1
-> > +  *   text_offset bytes (specified in the header of the Image) into a 2MB
-> > +  *   boundary. The 'booti' command relocates the image if necessary. Linux uses
-> > +  *   a default text_offset of 0x80000.  In summary, loading at 0x80000
-> > +- *   satisfies all these constraints and reserving memory up to 0x02400000
-> > +- *   permits fairly large (roughly 36M) kernels.
-> > ++ *   satisfies all these constraints and reserving memory up to 0x03400000
-> > ++ *   permits fairly large (roughly 50M) kernels.
-> > +  *
-> > +  * scriptaddr and pxefile_addr_r can be pretty much anywhere that doesn't
-> > +  * conflict with something else. Reserving 1M for each of them at
-> > +- * 0x02400000-0x02500000 and 0x02500000-0x02600000 should be plenty.
-> > ++ * 0x03200000-0x03300000 and 0x03300000-0x03400000 should be plenty.
-> > +  *
-> > +  * On ARM, both the DTB and any possible initrd must be loaded such that they
-> > +  * fit inside the lowmem mapping in Linux. In practice, this usually means not
-> > +  * more than ~700M away from the start of the kernel image but this number can
-> > +  * be larger OR smaller depending on e.g. the 'vmalloc=xxxM' command line
-> > +  * parameter given to the kernel. So reserving memory from low to high
-> > +- * satisfies this constraint again. Reserving 1M at 0x02600000-0x02700000 for
-> > +- * the DTB leaves rest of the free RAM to the initrd starting at 0x02700000.
-> > ++ * satisfies this constraint again. Reserving 1M at 0x03400000-0x03500000 for
-> > ++ * the DTB leaves rest of the free RAM to the initrd starting at 0x03500000.
-> > +  * Even with the smallest possible CPU-GPU memory split of the CPU getting
-> > +- * only 64M, the remaining 25M starting at 0x02700000 should allow quite
-> > ++ * only 64M, the remaining 11M starting at 0x03500000 should allow quite
-> > +  * large initrds before they start colliding with U-Boot.
-> > +  */
-> > + #ifdef CONFIG_ARM64
-> > +@@ -69,9 +69,9 @@ fdt_high=ffffffff
-> > + initrd_high=ffffffff
-> > + #endif
-> > + kernel_addr_r=0x00080000
-> > +-scriptaddr=0x02400000
-> > +-pxefile_addr_r=0x02500000
-> > +-fdt_addr_r=0x02600000
-> > +-ramdisk_addr_r=0x02700000
-> > ++scriptaddr=0x03200000
-> > ++pxefile_addr_r=0x03300000
-> > ++fdt_addr_r=0x03400000
-> > ++ramdisk_addr_r=0x03500000
-> > +
-> > + boot_targets=mmc usb pxe dhcp
+> From: Maximilian Brune <maximilian.brune@9elements.com>
 >
-> I would really like to hear comments from the upstream u-boot
-> maintainers on adjusting these values...
+> Write the FADT in common code since it's used on all architectures.
+> Since the FADT is mandatory all SoCs or mainboards must implement the
+> introduced function acpi_fill_fadt() and properly update the FADT.
+>
+> Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Bin Meng <bmeng.cn@gmail.com>
+> ---
+> Changelog v4:
+> - Drop __weak attribute
+>
+> ---
+>  arch/sandbox/lib/acpi_table.c     |  6 +++++
+>  arch/x86/cpu/apollolake/acpi.c    | 20 ++++------------
+>  arch/x86/cpu/baytrail/acpi.c      | 17 +-------------
+>  arch/x86/cpu/quark/acpi.c         | 19 +---------------
+>  arch/x86/cpu/tangier/acpi.c       | 25 ++------------------
+>  arch/x86/include/asm/acpi_table.h | 12 ----------
+>  arch/x86/lib/acpi_table.c         | 23 -------------------
+>  include/acpi/acpi_table.h         |  9 ++++++++
+>  lib/acpi/acpi_table.c             | 38 +++++++++++++++++++++++++++++++
+>  9 files changed, 61 insertions(+), 108 deletions(-)
+>  create mode 100644 arch/sandbox/lib/acpi_table.c
+>
 
-It is fine to adjust them, so long as the memory is actually there. I
-don't know of anything special about the current values.
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
+I was really expecting each file to have its own ACPI_WRITER() decl
+and then call into common code for the common part. But I suppose this
+way around is OK.
 
 Regards,
 Simon
