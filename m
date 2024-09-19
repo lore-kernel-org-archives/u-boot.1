@@ -4,88 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2A3FCF395D
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 15:36:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 853A7CF395D
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 15:37:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 823F78926B;
-	Thu, 19 Sep 2024 17:36:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id E54C389117;
+	Thu, 19 Sep 2024 17:37:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="o3BzbiKZ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xhyJ9rTQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E0C788927A; Thu, 19 Sep 2024 17:36:41 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AEA65891AD; Thu, 19 Sep 2024 17:37:45 +0200 (CEST)
+Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
+ [IPv6:2607:f8b0:4864:20::42f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C66B589117
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 17:36:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 577D1887EB
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 17:37:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id D6D713F460
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 15:36:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1726760198;
- bh=4JPBZA1x04yNUxkWMa0nx0gwI6ruQlNfAtc16nSBq1s=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=o3BzbiKZV0nOnOcyevkYHNO3Cg3NkBJ1NSJWPJUSK2ap26vTC3YfEUazWI1EoLjPf
- o5E3H2MHlLBiPCzSDD0pPz3xHbVQbPPDshvLEfx/JdwroPEor7SH9n+wRKB+VMJ0oJ
- yYrlAjl/C3eN9mACgxKV5eeTxZibYnlPl195OiCXT/HOAh18KRpcnZVe5u/ZC2+rTH
- LhXH4RKWCYnDxXlPU0E116V0FOCBxLV3V4en4Gj+V2V7WaT9MZntTed1KrOjDE2kDm
- BbPMMq+TYzn2SUpr+UrHRVbVnbacq2qwHl3Oc67orPkykp3iQaK9rKewfBOhEr+zKM
- 1n413X+89xwNw==
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-42cb374f0cdso5384355e9.0
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 08:36:38 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-71957eb256bso864322b3a.3
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 08:37:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1726760262; x=1727365062; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Bon3ir54wF0sT38Lv/poZ/dQCHoQ4EXU7t4yhf1yh1w=;
+ b=xhyJ9rTQRvYQ75AXL+TAv+s9i46Vzh86PD3hPB+FDmwfQIjb8Tu0DgKyQyWmRFiux6
+ jD4AAR5n6M+LYMtyVEis2sCAPeulX5btw6ak6RajtTuZ62m0K6NOSkEpvgaeF3PB7VCK
+ jzTEFr2m4D6/rA5V9k7rfZeI28YEeQ8rwEY4zujgWjsvVZ/dlGK9gchq0pJIb4UYc8xQ
+ /HyttxofF5lch+TC8IilbtnU3rS30qXYSCXGsll3PtIrJVWK2MXOGpxNHhYouIcax2cp
+ EAWBziuFEOIB+E08lE2nCy/t03GNJlnJTtEelyRJHrD9zS6/H4JZsEKEDjgP0xxRv0Vb
+ LS0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726760198; x=1727364998;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=4JPBZA1x04yNUxkWMa0nx0gwI6ruQlNfAtc16nSBq1s=;
- b=h+p2UggtabTv3/0des2ELN8Z0b2hBdh4Ssduq3DsDRQ5v0YYJyLOFywFxmkUBeZro2
- KDtul2i/HtCdWod7Z94a5SxFvaM+o0h6xayDrhTf6TvT6qCQo9y3kiLDB/aATceZJqER
- Nw9r+hl6W/KiXKp4321tLiKH9gZZWsRIQ7aZqrAM87vXBsHcbfpMe1/A0IEMP+pzz5cD
- HeTfH9PcuxPKZgRln+zZYqSTI7MsGn3iDrWIC2wHfQgMDz22wjYM4+96NzywHYS8KJ98
- KE1eH8hBB0jUwECskak9SmyJEHAhaX6rOLLm//rtBLUh1Aa2rrPTr+s0RZke6xDMdGON
- 56jA==
+ d=1e100.net; s=20230601; t=1726760262; x=1727365062;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Bon3ir54wF0sT38Lv/poZ/dQCHoQ4EXU7t4yhf1yh1w=;
+ b=PMYigrAQzCsVl1vqIMof5ctlBK67i9nCgyEP0gupT5VqkEPrdrTnep8IZYcfMgRjT9
+ OjE2rYCm39m+RcOR9UMNSEM3GTG3moDZNK0eAV/d3xau60WIUjQbdnwwpEbA0708J2SX
+ 4l5kn2y0bwqTBJOaB9juK821BIBOd1w3/hfSf254c/GSpcXUMkVtlsnky3j+Gq3s7YDa
+ EB47/1FbFeg/r7XoWdBeOIisj3GdXyp6QqRcF2XHw662yOI/HuCZ5kyKN+YupyHwy01S
+ y9yQ9K7lVboHPoF9enLXXy2V6O0tr1ZOatNf9CARBYoUVpbJXcJX3l58bicfUb/9XME7
+ CLJQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW9ZA4LgtPGOqlSfmt+EVrgRKTs7WkI6D9teSz1thb4ckK21So8ZxFeLq6vvr5sFYBGX/0RMLM=@lists.denx.de
-X-Gm-Message-State: AOJu0YyCjGj8nUTPV1liBLFSopjbi3GI2z5/0lozvt71XHFhvTUueJPI
- oCoSG4m65SpDdPCD2hu7A4ZV3odOzBXl6yfKRUGqKBqfwUN7SgIOfwlmWjpB83vlUwG8n92IcFd
- 4+Zz1Z0qrUUG0l1DJyrEoudAhKTf/1fOpsn6TJiJy1RJA/4wm6NJsCzyOVba639gX32E=
-X-Received: by 2002:a05:600c:4f96:b0:42c:b7ae:4c97 with SMTP id
- 5b1f17b1804b1-42e7446a877mr20144375e9.11.1726760197906; 
- Thu, 19 Sep 2024 08:36:37 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHrxkxH1d4B6jIjRqI2dW9YXO/FV9BeQCFBv1eYbW6p8kNc5H1h5Z0VcFkZ3cbgwUUbvPRVRw==
-X-Received: by 2002:a05:600c:4f96:b0:42c:b7ae:4c97 with SMTP id
- 5b1f17b1804b1-42e7446a877mr20144265e9.11.1726760197469; 
- Thu, 19 Sep 2024 08:36:37 -0700 (PDT)
-Received: from [192.168.103.101]
- (dynamic-046-114-110-162.46.114.pool.telefonica.de. [46.114.110.162])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-378e73e844dsm15104058f8f.40.2024.09.19.08.36.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 19 Sep 2024 08:36:36 -0700 (PDT)
-Message-ID: <c884a948-95d6-4c03-b609-6f8e850a6bd5@canonical.com>
-Date: Thu, 19 Sep 2024 17:36:35 +0200
+ AJvYcCV43RV0dvgtL4TKDXotHhl7Rl+JfdVNgyLGhMdieQxxxlL6+s1UHtBEU5RQyWjYanqfWP1K25k=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxx2Furpx3tLCbReMKt2PqzeItTIp/5WHttz51wtW+BfQAeTy4c
+ 4HHsFG5t9V8n6QoRc2HqrAHzRGE9223k1lcXMZS3oy42eEzLfGZXj5nKRErN5n06fyJbakCM1Us
+ 9ANGqvKGum4GLRrfvSHPzA3e5pWHMsODgW2HtWg==
+X-Google-Smtp-Source: AGHT+IGPOoWGdtCrbwpC+8gHy+rxiiroHaSyV36OFxl09a31TGbyxst/JQj5DXfPmrZX5a4P6x+ThrufmMoYTdk/oXE=
+X-Received: by 2002:aa7:88d4:0:b0:70d:2693:d215 with SMTP id
+ d2e1a72fcca58-71936a5e771mr34953733b3a.16.1726760261809; Thu, 19 Sep 2024
+ 08:37:41 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] efi_leader: delete rng-seed if having EFI RNG protocol
-To: Simon Glass <sjg@chromium.org>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
 References: <20240914160548.42551-1-heinrich.schuchardt@canonical.com>
  <CAFLszTjL46Gb03MS7znLujAKC0VkgOrUaZMy7XPw-jpw3TELTA@mail.gmail.com>
  <d95b95d2-7afb-42f2-9a01-75d601368be9@canonical.com>
@@ -94,11 +70,16 @@ References: <20240914160548.42551-1-heinrich.schuchardt@canonical.com>
  <b8d1cef7-4e56-49c6-aeca-b471a82870cd@canonical.com>
  <CAC_iWjLY9Oea-AryLyrQJ3zXX+Bihza5B8R5UpXh58K3+Ff=Xw@mail.gmail.com>
  <CAFLszTgASXx5t7=T+yLtC0W9dwo=FkQPF5T6eYD2uyFUWE6D_A@mail.gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 In-Reply-To: <CAFLszTgASXx5t7=T+yLtC0W9dwo=FkQPF5T6eYD2uyFUWE6D_A@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 19 Sep 2024 18:37:05 +0300
+Message-ID: <CAC_iWjJL2tHTe84iqOkzDxANed-TdOObDYoW2jUwe3T=x=cyqA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] efi_leader: delete rng-seed if having EFI RNG protocol
+To: Simon Glass <sjg@chromium.org>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,69 +96,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 19.09.24 17:19, Simon Glass wrote:
+On Thu, 19 Sept 2024 at 18:19, Simon Glass <sjg@chromium.org> wrote:
+>
 > Hi,
-> 
+>
 > On Thu, 19 Sept 2024 at 17:13, Ilias Apalodimas
 > <ilias.apalodimas@linaro.org> wrote:
->>
->>
->>
->> On Thu, Sep 19, 2024, 18:05 Heinrich Schuchardt <heinrich.schuchardt@canonical.com> wrote:
->>>
->>> On 19.09.24 17:00, Simon Glass wrote:
->>>> Hi,
->>>>
->>>> On Thu, 19 Sept 2024 at 16:32, Ilias Apalodimas
->>>> <ilias.apalodimas@linaro.org> wrote:
->>>>>
->>>>> Hi all,
->>>>>
->>>>> On Thu, 19 Sept 2024 at 17:20, Heinrich Schuchardt
->>>>> <heinrich.schuchardt@canonical.com> wrote:
->>>>>>
->>>>>> On 19.09.24 16:10, Simon Glass wrote:
->>>>>>> Hi Heinrich,
->>>>>>>
->>>>>>> On Sat, 14 Sept 2024 at 18:06, Heinrich Schuchardt
->>>>>>> <heinrich.schuchardt@canonical.com> wrote:
->>>>>>>>
->>>>>>>> For measured be boot we must avoid any volatile values in the device-tree.
->>>>>>>> We already delete /chosen/kaslr-seed if we provide and EFI RNG protocol.
->>>>>>>
->>>>>>> Could you explain a bit why this is, and where this is checked?
->>>>>>>>
->>>>>>>> Additionally remove /chosen/rng-seed provided by QEMU or U-Boot.
->>>>>>
->>>>>> Measured boot relies on creating hashes of artifacts and writing these
->>>>>> to TPM. If the hashes don't match the OS will either warn or refuse to
->>>>>> boot. The device-tree is one of the artifacts that are measured.
->>>>>>
->>>>>> If we have random values in /chosen, measured boot will fail.
->>>>>>
->>>>>> When an EFI RNG protocol is provided by the firmware, GRUB and the
->>>>>> kernel will use it instead of /chosen/rng-seed and /chosen/kaslr-seed.
->>>>>
->>>>> There's a comment on top of that function that explains what happens as well.
->>>>> In short the EFI stub does not even look at the KASLR seed and never
->>>>> randomizes the physical placement of the kernel. It only does that
->>>>> when the EFI_RNG protocol is there.
->>>>
->>>> OK thank you. I suppose I am more just wondering why it got added in
->>>> the first place?
->>>
->>> For booting via the legacy Linux entry point adding kaslr-seed allows to
->>> randomize addresses. QEMU adds rng-seed instead of kaslr-seed.
->>
->>
->> Not the kernel physical placement. It randomizes only the virtual placement
-> 
+> >
+> >
+> >
+> > On Thu, Sep 19, 2024, 18:05 Heinrich Schuchardt <heinrich.schuchardt@canonical.com> wrote:
+> >>
+> >> On 19.09.24 17:00, Simon Glass wrote:
+> >> > Hi,
+> >> >
+> >> > On Thu, 19 Sept 2024 at 16:32, Ilias Apalodimas
+> >> > <ilias.apalodimas@linaro.org> wrote:
+> >> >>
+> >> >> Hi all,
+> >> >>
+> >> >> On Thu, 19 Sept 2024 at 17:20, Heinrich Schuchardt
+> >> >> <heinrich.schuchardt@canonical.com> wrote:
+> >> >>>
+> >> >>> On 19.09.24 16:10, Simon Glass wrote:
+> >> >>>> Hi Heinrich,
+> >> >>>>
+> >> >>>> On Sat, 14 Sept 2024 at 18:06, Heinrich Schuchardt
+> >> >>>> <heinrich.schuchardt@canonical.com> wrote:
+> >> >>>>>
+> >> >>>>> For measured be boot we must avoid any volatile values in the device-tree.
+> >> >>>>> We already delete /chosen/kaslr-seed if we provide and EFI RNG protocol.
+> >> >>>>
+> >> >>>> Could you explain a bit why this is, and where this is checked?
+> >> >>>>>
+> >> >>>>> Additionally remove /chosen/rng-seed provided by QEMU or U-Boot.
+> >> >>>
+> >> >>> Measured boot relies on creating hashes of artifacts and writing these
+> >> >>> to TPM. If the hashes don't match the OS will either warn or refuse to
+> >> >>> boot. The device-tree is one of the artifacts that are measured.
+> >> >>>
+> >> >>> If we have random values in /chosen, measured boot will fail.
+> >> >>>
+> >> >>> When an EFI RNG protocol is provided by the firmware, GRUB and the
+> >> >>> kernel will use it instead of /chosen/rng-seed and /chosen/kaslr-seed.
+> >> >>
+> >> >> There's a comment on top of that function that explains what happens as well.
+> >> >> In short the EFI stub does not even look at the KASLR seed and never
+> >> >> randomizes the physical placement of the kernel. It only does that
+> >> >> when the EFI_RNG protocol is there.
+> >> >
+> >> > OK thank you. I suppose I am more just wondering why it got added in
+> >> > the first place?
+> >>
+> >> For booting via the legacy Linux entry point adding kaslr-seed allows to
+> >> randomize addresses. QEMU adds rng-seed instead of kaslr-seed.
+> >
+> >
+> > Not the kernel physical placement. It randomizes only the virtual placement
+>
 > So, are you saying that U-Boot adds this field into the FDT and then removes it?
 
-kaslr-seed can be added via cmd/kaslrseed.c and 
-arch/arm/cpu/armv8/sec_firmware.c. Both is before the user decides if he 
-wants to boot via EFI or via legacy boot.
+Yes. As Heinrich said, the rng seed is still usable for some
+randomization. If we boot with EFI and have an RNG protocol, we dont
+need it and it also messes up the TPM measurements, so we remove it.
+But the code that injects it to u-boot, or the prior bootloader that
+handed you over a DT,  does not know if you plan to boot with EFI.
 
-Best regards
+Regards
+/Ilias
 
-Heinrich
+>
+> Regards,
+> Simon
