@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD824CF3959
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 15:31:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0696CF395D
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 15:36:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E6F7C89260;
-	Thu, 19 Sep 2024 17:31:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2A6DB891FB;
+	Thu, 19 Sep 2024 17:36:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="i+v12D+b";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="W50nOUVN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DCB6A8926E; Thu, 19 Sep 2024 17:31:10 +0200 (CEST)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
+ id 5D6A78927D; Thu, 19 Sep 2024 17:36:25 +0200 (CEST)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 019B5889CD
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 17:31:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B43D891FB
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 17:36:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2f75aaaade6so11222211fa.1
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 08:31:08 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6c54b1f52f7so6090076d6.3
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 08:36:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1726759868; x=1727364668; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FabW0iTgMz68uQGRAVLGdfLA1/sTKngblQUGDVqJrD8=;
- b=i+v12D+bji5NuNXmvIJsfJWe/MXsDoJ0Ray6+u/xGmnNeS3RadS4mTWpvkHIdpXYPE
- 5JgOr6sNPc4p/YuzvDf5jVgGiSCLDrVwsiwxV77E+MWyi8BlBzn/lCtFCxnnF4EiL7fR
- 9AT/LTGhafthLfwVweAlwJ0u1MMw1cvrRJ6DPu29t/wXOK5Om+BMwoB6SWuN6TPK2oPN
- 2MgOZ0FEAnQTcsvtImNHy4kwH34PhsfyFbpCm3N29+42Cs2ZmFulwyI1JaCKtl54wnYT
- nZc/le6bks1FkdOJ+LDd/sEVki7doLvBStipBJj14S4OgHMWugaGpdPhtVT/RssGpSIB
- ApHg==
+ d=chromium.org; s=google; t=1726760182; x=1727364982; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=9Yi63NK3PzUHhOCnPvq+9jLkTdhdJpivMI4mS+qhjCI=;
+ b=W50nOUVNZSE9QoncV2CK/sgopOT4l7tvKvnQjFXOdUR0+C2Lbx6vFxXA6p0pMx+m04
+ 1G0QwArbJ8H3wu9iuk2oLrgwwcDBlQNgPBEfY69sHwi0RbG2ZyPTz5Fp+LWjPgihUgen
+ mqtpoa96WgToY+Bi77yOjQSsvd56qNkmu4ycc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726759868; x=1727364668;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=FabW0iTgMz68uQGRAVLGdfLA1/sTKngblQUGDVqJrD8=;
- b=kCJKlba2DEBedDXbtz3E47bSq67WO+tyNDj+9lAQf4ABx1oYqUyGpJGaYRradPOVvX
- sCGr2FK3GHnEGWpU9oP8dx+Aj0SIOJVUvrCGEpwSXKtOXikU7R64cNGwc7aHDTQ3Qldm
- s29Gpm9ic+/K+2G8klKA2ciQvlFefQ+OwYihddEqvqt76BMwmPp7uxhj8GgJsHsfZl9+
- 2l8eyBwangXyBkjJpymMuuyeB8ulUnhIEO6jfTgZ6hKwGvryi03rxa6FynQITRoBI2I1
- 0l2wGo3qjlXwZcsossLGpMSvuoAZ7QbTeQ0rx8CZvSFTgcWjWLu71bPN8f0X/UDG075b
- 4m6g==
-X-Gm-Message-State: AOJu0Yy0AecVtGTPXhZYO77NJZYiM4WogRxRULdFkGJWV01/IURY8oOu
- 5r7n6d2bAIZZ83t9L4ngG90CuS37nV9iQ2Nm+qbkiKZTJ2b4I78KuSuKtfwFpRfE7BXvUE7d5qo
- +98HW8MckzDgIRnMt4BVAkfrVgpk=
-X-Google-Smtp-Source: AGHT+IHWy0MQcBOqxd0Dh2TdWi4up09uo2Qm6CyIu0m4PGLlTM3NxEmCZafp8UNAiUiIiBBD3BPbedFN+hqWSKy2LNg=
-X-Received: by 2002:a05:651c:b28:b0:2f7:7ef7:7434 with SMTP id
- 38308e7fff4ca-2f787f4f47dmr151221661fa.37.1726759867994; Thu, 19 Sep 2024
- 08:31:07 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1726760182; x=1727364982;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9Yi63NK3PzUHhOCnPvq+9jLkTdhdJpivMI4mS+qhjCI=;
+ b=DNr4ZCzARAGh06tYBAPZjhDK5eaOSrwzV+j3pyMc2Rj092gWtdILB0Ee5D0QjyP4X7
+ LM0Kk0sIimJjJUYI3NP5FO6EUz5eImb43WDfdqx7Pls8XAoEZVGtE1F6oJf0AqPeVUMF
+ BgWHRAuY+/B8W4K9IOD+LvzVFa1N0sP1vm9xtZn6YkRifCMuGXQVEFjHfUqr1lVavtJx
+ n2I7e/o7491/xzgZ0lLqwJPZdSZaiwJJf4JWjFkZrGuutOHXudq4TmeySquUfGXfoXwB
+ 53rL9AbKVRgrOyTVQYKCaVIBE8PKg0Z6onfZZbtZXLl+70FyEf1Ed8DxXVJq+hm9thb4
+ ZhbQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUmtdBd2Pzt+gNy516nxazVh82911BrTf7oApZtPPzb0fCLFXSMj9WPLvbaTQ09fjjrs4VYJZg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz/WazyPxehshTGRGm+s6t8Blm/dLcpCzfDa8EoPOv+2yn+tfOi
+ cXoOjox7Vy3P/2gJF/kvdyVwX4LPoHhUt8bg6GXFumNsdB7t04EK4O3j8MfGY8qxeKvb9EdgEg0
+ IsuQqoWcCjAXaI1JF0jYWBEZBmlMEd1qYrR0l
+X-Google-Smtp-Source: AGHT+IF4ryLywuREX2cOaPe5YqEJ/AutqphwLT5wHbfCLvQ9OshDPld1xaVW56mpRIjcYgBzj/ryuqOkUAvNaAfqijY=
+X-Received: by 2002:a05:6214:5992:b0:6c7:5e91:bf7 with SMTP id
+ 6a1803df08f44-6c75e910c0cmr45068926d6.4.1726760181792; Thu, 19 Sep 2024
+ 08:36:21 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240919144507.249682-1-konnorrigby@gmail.com>
-In-Reply-To: <20240919144507.249682-1-konnorrigby@gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 19 Sep 2024 12:30:56 -0300
-Message-ID: <CAOMZO5DKD0ZziHb8YmKdz_yxCx--vLyydC4wFK5MEQVvB8mddg@mail.gmail.com>
-Subject: Re: [PATCH] arm: imx: fix board_mmc_init for google coral
-To: Connor Rigby <konnorrigby@gmail.com>
-Cc: u-boot@lists.denx.de, Alifer Moraes <alifer.wsdm@gmail.com>, 
- Marco Franchi <marcofrk@gmail.com>, Stefano Babic <sbabic@denx.de>,
- Tom Rini <trini@konsulko.com>
+References: <20240918152136.3395170-1-patrick.rudolph@9elements.com>
+ <20240918152136.3395170-15-patrick.rudolph@9elements.com>
+ <CAFLszTimAFGocvqbnT=JVsA2bjNa=ZfxP6Sy46a9e6VkhtdojQ@mail.gmail.com>
+ <CAC_iWjLASm6U8kC68MJ0uZ14MGFS_SSL3Pcd8hcEH=a=W8gvBQ@mail.gmail.com>
+ <CAFLszTgYHO7FgbCgfRwqT_yj4KBm31xKdEUrn0pZkhtLzOh=HQ@mail.gmail.com>
+ <CAC_iWjKv+Z4K5xPW6MZhBZ67-rDy9iRVaoqfLKmJRwSG9nKnfA@mail.gmail.com>
+In-Reply-To: <CAC_iWjKv+Z4K5xPW6MZhBZ67-rDy9iRVaoqfLKmJRwSG9nKnfA@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 19 Sep 2024 17:36:10 +0200
+Message-ID: <CAFLszThA5eOM_xiMgDu=B4wAcP7wV9bzfc565rES8z6d1F8fjg@mail.gmail.com>
+Subject: Re: [PATCH v4 14/35] efi_loader: Allocate and write ACPI tables
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Patrick Rudolph <patrick.rudolph@9elements.com>, u-boot@lists.denx.de, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,39 +89,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Connor,
+Hi Ilias,
 
-On Thu, Sep 19, 2024 at 11:45=E2=80=AFAM Connor Rigby <konnorrigby@gmail.co=
-m> wrote:
+On Thu, 19 Sept 2024 at 17:20, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> This fixes a typo in the mxc_get_clock function preventing SPL
-> from initializing USDHC1 and USDHC2.
+> Hi Simon,
+>
+> On Thu, 19 Sept 2024 at 18:00, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Hi Ilias,
+> >
+>
+> [...]
+>
+> > > > > +
+> > > > > +               if (!addr)
+> > > > > +                       return log_msg_ret("mem", -ENOMEM);
+> > > > > +       } else {
+> > > > > +               pages = efi_size_in_pages(TABLE_SIZE);
+> > > > > +
+> > > > > +               ret = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES,
+> > > > > +                                        EFI_ACPI_RECLAIM_MEMORY,
+> > > > > +                                        pages, &new_acpi_addr);
+> > > > > +               if (ret != EFI_SUCCESS)
+> > > > > +                       return log_msg_ret("mem", -ENOMEM);
+> > > > > +
+> > > > > +               addr = (void *)(uintptr_t)new_acpi_addr;
+> > > > > +       }
+> > > > > +
+> > > >
+> > > > The tables should be written regardless of whether EFI_LOADER is enabled.
+> > >
+> > > *Why*? How do you expect to hand them over to the OS?
+> >
+> > Why - because boards which need ACPI tables to boot should generate
+> > them;
+>
+> Noone argued that.
+>
+> > also this happens when U-Boot starts up, in last_stage_init()
+> > How - it isn't possible, but eventually I suppose it will be, once we
+> > have a use case for booting with ACPI but without EFI
+>
+> Are you aware of such an OS? If not, we can accept the patches when we
+> have a reason.
 
-I am not able to reproduce the problem with the top of tree U-Boot:
+Which patches? This is how it works today. We set up the tables in
+last_stage_init(), so they can be examined while in U-Boot.
 
-U-Boot SPL 2024.10-rc4-00034-ga7b83ade98e0 (Sep 19 2024 - 12:24:44 -0300)
-Normal Boot
-Trying to boot from MMC2
+It is the patches to change this which I object to.
 
+> I remember patches being hard NAK'ed on using DTs to pass the ACPI
+> table address in the past.
 
-U-Boot 2024.10-rc4-00034-ga7b83ade98e0 (Sep 19 2024 - 12:24:44 -0300)
+Yes, I believe Bytedance carries a patch locally for that :-)
 
-CPU:   Freescale i.MX8MQ rev2.0 at 1000 MHz
-Reset cause: POR
-Model: Google i.MX8MQ Phanbell
-DRAM:  1 GiB
-Core:  67 devices, 18 uclasses, devicetree: separate
-MMC:   FSL_SDHC: 0, FSL_SDHC: 1
-Loading Environment from MMC... Reading from MMC(1)... OK
-In:    serial@30860000
-Out:   serial@30860000
-Err:   serial@30860000
-Net:   eth0: ethernet@30be0000
-Hit any key to stop autoboot:  0
-=3D> saveenv
-Saving Environment to MMC... Writing to MMC(1)... OK
-=3D>
+>
+> >
+> > >
+> > > >
+> > > > Can we drop this else clause? We should always use the bloblist.
+> > >
+> > > Both Heinrich and I said the exact opposite. Unless there's a
+> > > perfectly good reason why we should keep them in bloblist memory, I'd
+> > > like us to do that
+> >
+> > The main reason is that we should not be putting things in memory
+> > between the start of RAM and the bottom of the U-Boot area. That
+> > region of memory is supposed to be for loading images. Most boards
+> > hard-code the image-load addresses in environment variables. But even
+> > if they didn't, we should not be using that memory for U-Boot data.
+>
+> EFI allows you to request a specific address to use. We can choose one
+> that fits the requirements
 
-imx8mq_evk also uses the same mxc_get_clock() parameter and also boot.
+So long as it is in U-Boot's space, that is fine. I just sent a patch
+about relocation which covers this. It occured to me that this feature
+of U-Boot, which I have always assumed was common knowledge, may have
+not been noticed.
 
-Which TF-A version you are using?
+> >
+> > Another reason is that the bloblist is designed for this, for keeping
+> > tables in a small, contiguous area of memory, so that when passed to
+> > Linux they are not spread all over the place.
+>
+> Linux does not and will not read tables from a bloblist though
+
+Indeed. There really isn't any point, anyway, since there are other
+ways of passing the tables along...except for ACPI with FDT but that
+isn't a valid use case for Linux so far.
+
+Regards,
+Simon
+
+[..]
