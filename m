@@ -4,78 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57CD0CF395D
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 16:09:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EF8ACF3959
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 16:10:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69FEC88C0F;
-	Thu, 19 Sep 2024 18:09:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E18E789281;
+	Thu, 19 Sep 2024 18:10:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="d1dqDYhp";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TMOmLE+a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F1F9A88C0F; Thu, 19 Sep 2024 18:09:20 +0200 (CEST)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
+ id 526C1892A1; Thu, 19 Sep 2024 18:10:47 +0200 (CEST)
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [IPv6:2a00:1450:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0404488BBF
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 18:09:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6DA3E88BBF
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 18:10:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bigunclemax@gmail.com
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-5365b6bd901so1195684e87.2
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 09:09:18 -0700 (PDT)
+ spf=pass smtp.mailfrom=al.kochet@gmail.com
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-2f7657f9f62so12114641fa.3
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 09:10:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1726762158; x=1727366958; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ccksuvHqUa9N9ALwz1qR4pNHUdNqjveGl+CcTJz4jwM=;
- b=d1dqDYhprBj5Kw5Ptupi2xNTLX0qziLpKnVKt/9gQNNMstLQwtst+fBbI/SQzFhbYH
- Ej5rces9tjgENV3HPWyoGdNre0ldi4HIEh68b8ptaonrMtuO0zCFocM+pCv0xthOksLa
- RPXyaafbwFpJy6MPyX/H3V4gGRMIIR83/w3+pmZ+BXV7xJxh9mXpchAqrKo6L1l4qoLf
- HDyI+k7RUqpKMKD27A3WQh5DIaKC4yBVGscKV+WsGwqRnSjV2/Ro+S4ZN1Bo/SYWbBWf
- 6H0EWBcoG3XJZ28e7/PqoxYrlBNW/ZpvLL10Sn78hyggkN/0X4wLrzzHFDothFARuY5G
- rbgw==
+ d=gmail.com; s=20230601; t=1726762244; x=1727367044; darn=lists.denx.de;
+ h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=fTn4+RsDg3JIE8Hl6RFbxPYRm/RSEqjXTsMGBG3iVW0=;
+ b=TMOmLE+aHggsp8tVfM+l7Ky+uPc3KaYEaL3G9sPSVU2irVsNVLmH0Llcs0mMJN5j5T
+ dU4vR7gbzUsVYvBWpdUgq8P5Q/ZgnLEMQbUa+YwSs4FFpDkQ04nznYmlYZtfKc7oiB4a
+ 4o796q1sP3bzAtWiLCWi1gnjrX53O1ZUYvQlTnfMCUXIZLUDZ9DuIvbD3Uc0eKSxLCkc
+ Mo4Ve2yHO3VCuxWANIdlehQZ/oYdjUIME+onaT+j7DDT7TTvi/FE2gCX9su9VtkMz2dF
+ 7Sou2KG6tADL2WyorDS/TkTAeO9C1Uq5T0e0VriZSsxeaxkR2uIgDpK7SkTpZNX4F67X
+ c00Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726762158; x=1727366958;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ccksuvHqUa9N9ALwz1qR4pNHUdNqjveGl+CcTJz4jwM=;
- b=a3HYl+ea7ETPx9aghfkwVJ9Q1SrU46ksIrP8njDZQnsUAo7mT0Nj8bR/rWwEKHIG1E
- /8DsxZvmMwOIN3+zc/9BoTbqr36AX7FPh+k1NbJ864z1GWE0IsiB0p/Xom74+7Z8xXv1
- rDX5MbutWV9BRwJQMq4y0N4ZDeZHGe0+Rr3csePO1a+grMbEiFdOPadKS9MNpSKdGQZb
- KbmAsLhbRxcAV5VZpGtlSZR2GV9QGsi5+YYMQ1DXb0NKyY5JJm2Mn2aB4ouy2zkD5OTr
- iBIsjrMuE0za1guRT0SQCu2OuXzMjVMvO40cNitJSk+N3cv1kbuJNVpnduGCnZcNHRRa
- jQmg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXnuxH9icQHDgKM3aMDbK3PKjLgEsi5nVyQPXZzeI3p5J2rz7WPYgnYs3tktfk+4Y+Q3/Ely+U=@lists.denx.de
-X-Gm-Message-State: AOJu0YzOtUh/BFgoCGzdOgMkJnR0KPLIfEK3UOhmtTF6HIxLNC1Ls12T
- lsRdI8RrUT0ObJrlTEAcBCDzyldGiCJVFWTjxCIUqCwsfGY6r/uE
-X-Google-Smtp-Source: AGHT+IF3Ejwm6shaim9pRazJE7Q6TPaE2WrDc7n4/M1O1s/E+aP6n3JiMt746o8YSC9VaGv8gJ0cCQ==
-X-Received: by 2002:a05:6512:3195:b0:530:aa4b:81c7 with SMTP id
- 2adb3069b0e04-53678ff4d82mr15978326e87.59.1726762157845; 
- Thu, 19 Sep 2024 09:09:17 -0700 (PDT)
-Received: from wpc.. (host-95-152-62-174.dsl.sura.ru. [95.152.62.174])
+ d=1e100.net; s=20230601; t=1726762244; x=1727367044;
+ h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=fTn4+RsDg3JIE8Hl6RFbxPYRm/RSEqjXTsMGBG3iVW0=;
+ b=FH7/UVQ6RcROOsPeHIQYvIFa5w7npIhlcMLvoh8IALzoJcVnpLNOhW5JsO9XyKUIoF
+ 2bw5CF0f+laRZZNQEjton90VmTziC4YMA2fH7uDh4PGY5mN1Wj5W764027Xk+4/mOVmK
+ ysS0jK4BKQG5W0xvNdRQ99SqQ6VQRZNn+8HCJX1KnLLbTBbznqvm+NkB1mHMPo4etDF3
+ PgBkBUo3xz983S9ZhQrGthz8GKMUShxP80Y7BGsgkaegdb9D9eoh+JTIWJmAiTn3j2JN
+ 6wtmoBtidh4uGa36f+EjEuuxLsTtYTwIKRnNBL9iVei9OZVCSUq+M8mVI/WUWaJEJGSE
+ 499Q==
+X-Gm-Message-State: AOJu0Yx4019nsxgArIjLXNiXeSpto4VwrN1aKrVKfSKcgmIX2tIbdKc+
+ fyE5byYCRXROsYEQvstwImAaigLvOMDsC9bFrQ2M2izCfrb436TCpudIoA==
+X-Google-Smtp-Source: AGHT+IHflDCk2EbxZfYSOVDXA803q6BvSlHEI+b+/sUdhwMj0R9GHiAgynpc124V0RoobwIphvU1xA==
+X-Received: by 2002:a2e:e09:0:b0:2f7:6519:9a01 with SMTP id
+ 38308e7fff4ca-2f7cb2f910amr736501fa.24.1726762244237; 
+ Thu, 19 Sep 2024 09:10:44 -0700 (PDT)
+Received: from localhost.localdomain ([80.87.144.137])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-536870b402asm1900929e87.243.2024.09.19.09.09.17
+ 38308e7fff4ca-2f79d2e1c56sm16278361fa.20.2024.09.19.09.10.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Sep 2024 09:09:17 -0700 (PDT)
-From: bigunclemax@gmail.com
-To: 
-Cc: bigunclemax@gmail.com, Heiko Schocher <hs@denx.de>,
- Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>,
- u-boot@lists.denx.de
-Subject: [PATCH v1] i2c: muxes: pca954x: Add MAX735x/MAX736x support
-Date: Thu, 19 Sep 2024 19:06:56 +0300
-Message-ID: <20240919160658.197534-1-bigunclemax@gmail.com>
-X-Mailer: git-send-email 2.45.2
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+ Thu, 19 Sep 2024 09:10:43 -0700 (PDT)
+From: al.kochet@gmail.com
+To: u-boot@lists.denx.de
+Cc: Alexander Kochetkov <al.kochet@gmail.com>
+Subject: [PATCHv2 0/1] Makefile: pass external DTB provided by make variable
+ EXT_DTB to binman
+Date: Thu, 19 Sep 2024 19:10:41 +0300
+Message-Id: <20240919161042.3423-1-al.kochet@gmail.com>
+X-Mailer: git-send-email 2.17.1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,114 +86,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Maksim Kiselev <bigunclemax@gmail.com>
+From: Alexander Kochetkov <al.kochet@gmail.com>
 
-Add support for the following Maxim chips using the existing PCA954x
-driver:
-- MAX7356
-- MAX7357
-- MAX7358
-- MAX7367
-- MAX7368
-- MAX7369
+Changes in v2:    
+- fix syntax errors in the description
+- impelement handling multiple DTB files in the EXT_DTB
 
-All added Maxim chips behave like the PCA954x, where a single SMBUS byte
-write selects up to 8 channels to be bridged to the primary bus.
 
-Tested using the MAX7358.
+Alexander Kochetkov (1):
+  Makefile: pass external DTB provided by make variable EXT_DTB to
+    binman
 
-Signed-off-by: Maksim Kiselev <bigunclemax@gmail.com>
----
-Hi, friends!
+ Makefile | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
 
-I have a custom board with MAX7358 GPIO expander.
-This patch is the port of Linux commit:
- > 81694437b6eb i2c: muxes: pca954x: Add MAX735x/MAX736x support
-
-Best wishes, Maksim.
-
- drivers/i2c/muxes/Kconfig   |  5 +++++
- drivers/i2c/muxes/pca954x.c | 37 +++++++++++++++++++++++++++++++++++++
- 2 files changed, 42 insertions(+)
-
-diff --git a/drivers/i2c/muxes/Kconfig b/drivers/i2c/muxes/Kconfig
-index 323c4fbe9c..cd5579aa55 100644
---- a/drivers/i2c/muxes/Kconfig
-+++ b/drivers/i2c/muxes/Kconfig
-@@ -36,6 +36,11 @@ config I2C_MUX_PCA954x
- 	  device. Supported chips are PCA9543, PCA9544, PCA9546, PCA9547,
- 	  PCA9548 and PCA9646.
- 
-+	  It's also compatible to Maxims MAX735x I2C switch chips, which are controlled
-+	  as the NXP PCA9548 and the MAX736x chips that act like the PCA9544.
-+	  This includes the:
-+		MAX7356, MAX7357, MAX7358, MAX7367, MAX7368 and MAX7369
-+
- config I2C_MUX_GPIO
-         tristate "GPIO-based I2C multiplexer"
- 	depends on I2C_MUX && DM_GPIO
-diff --git a/drivers/i2c/muxes/pca954x.c b/drivers/i2c/muxes/pca954x.c
-index 795288fe2e..9dd2697270 100644
---- a/drivers/i2c/muxes/pca954x.c
-+++ b/drivers/i2c/muxes/pca954x.c
-@@ -14,6 +14,12 @@
- #include <asm-generic/gpio.h>
- 
- enum pca_type {
-+	MAX7356,
-+	MAX7357,
-+	MAX7358,
-+	MAX7367,
-+	MAX7368,
-+	MAX7369,
- 	PCA9543,
- 	PCA9544,
- 	PCA9546,
-@@ -39,6 +45,31 @@ struct pca954x_priv {
- };
- 
- static const struct chip_desc chips[] = {
-+	[MAX7356] = {
-+		.muxtype = pca954x_isswi,
-+		.width = 8,
-+	},
-+	[MAX7357] = {
-+		.muxtype = pca954x_isswi,
-+		.width = 8,
-+	},
-+	[MAX7358] = {
-+		.muxtype = pca954x_isswi,
-+		.width = 8,
-+	},
-+	[MAX7367] = {
-+		.muxtype = pca954x_isswi,
-+		.width = 4,
-+	},
-+	[MAX7368] = {
-+		.muxtype = pca954x_isswi,
-+		.width = 4,
-+	},
-+	[MAX7369] = {
-+		.enable = 0x4,
-+		.muxtype = pca954x_ismux,
-+		.width = 4,
-+	},
- 	[PCA9543] = {
- 		.muxtype = pca954x_isswi,
- 		.width = 2,
-@@ -102,6 +133,12 @@ static const struct i2c_mux_ops pca954x_ops = {
- };
- 
- static const struct udevice_id pca954x_ids[] = {
-+	{ .compatible = "maxim,max7356", .data = MAX7356 },
-+	{ .compatible = "maxim,max7357", .data = MAX7357 },
-+	{ .compatible = "maxim,max7358", .data = MAX7358 },
-+	{ .compatible = "maxim,max7367", .data = MAX7367 },
-+	{ .compatible = "maxim,max7368", .data = MAX7368 },
-+	{ .compatible = "maxim,max7369", .data = MAX7369 },
- 	{ .compatible = "nxp,pca9543", .data = PCA9543 },
- 	{ .compatible = "nxp,pca9544", .data = PCA9544 },
- 	{ .compatible = "nxp,pca9546", .data = PCA9546 },
 -- 
-2.45.2
+2.17.1
 
