@@ -4,128 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E06DCE8D67
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 09:53:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAB55CE8D78
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 10:55:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F6868910F;
-	Thu, 19 Sep 2024 11:53:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=suse.de
+	by phobos.denx.de (Postfix) with ESMTP id 3045B89133;
+	Thu, 19 Sep 2024 12:55:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="eB9JfzsP";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="9R0mCRR7";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="V/EPfYR1";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="ouvEqVoA";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="WBg81gW2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65AB78912E; Thu, 19 Sep 2024 11:53:17 +0200 (CEST)
-Received: from smtp-out2.suse.de (smtp-out2.suse.de
- [IPv6:2a07:de40:b251:101:10:150:64:2])
+ id D69178913A; Thu, 19 Sep 2024 12:55:33 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4685E8910F
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 11:53:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DD73889127
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 12:55:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=suse.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=iivanov@suse.de
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 81D282088C;
- Thu, 19 Sep 2024 09:53:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1726739594; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=axYEzYi1JchMOgQ+7Nbxj60o25xupQVAg67sn/bJQYs=;
- b=eB9JfzsPMUPKmG2mHWWYL60H4RYVca+p7ejFq96r6oJhu/HiXkgk4BeGstFG3ErP8dwpYL
- eBQIvuJvMCGw1T7SKArT5zZ8fjSqXNa2L1bB4oSkbLewYFZ66hr2Fbnivvvs+AjHFLN+tS
- 0LUwkBOH1MGKzcpKbSS/t6n66Tl8Wrg=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1726739594;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=axYEzYi1JchMOgQ+7Nbxj60o25xupQVAg67sn/bJQYs=;
- b=9R0mCRR7tmC3xR7TwGX5ubEuVHfxmG88WpDQaou00OG4ktXbxw5Ta9nByeqYlv9u7tB8Xp
- nzuQNlD1SRcIm9BA==
-Authentication-Results: smtp-out2.suse.de;
- dkim=pass header.d=suse.de header.s=susede2_rsa header.b="V/EPfYR1";
- dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=ouvEqVoA
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1726739593; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=axYEzYi1JchMOgQ+7Nbxj60o25xupQVAg67sn/bJQYs=;
- b=V/EPfYR1XCPQLtx0V99Yoth+VqY6D7uZce+NEFZHuwQN2fYKda3RIi10EEx/TYofWkRY6e
- /HLTKXwnjJiInVoNcFDn8xZ9a8/az3driKA2MnH+eCAGGEY9n0mGye2N0pqK/wVl4ybZgE
- w5ZixkO8qg+e/Bk24khfGy+Qh2isd18=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1726739593;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=axYEzYi1JchMOgQ+7Nbxj60o25xupQVAg67sn/bJQYs=;
- b=ouvEqVoAHwSdAAWkRFh+KIuqdh9a8fRrYNjFfWqJ9wPTjTSsqkNbACz9ucW5gEBHORMLbj
- BCp/oXLt1aK1FnCQ==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id EF0D513A5F;
- Thu, 19 Sep 2024 09:53:12 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id 8kJmN4j062bieQAAD6G6ig
- (envelope-from <iivanov@suse.de>); Thu, 19 Sep 2024 09:53:12 +0000
-Content-Type: text/plain;
-	charset=utf-8
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3776.700.51.11.1\))
-Subject: Re: [PATCH v4 0/6] rpi5: initial support
-From: "Ivan T. Ivanov" <iivanov@suse.de>
-In-Reply-To: <9943877347134e40cee8c0d9cc7f641c@agner.ch>
-Date: Thu, 19 Sep 2024 12:52:58 +0300
-Cc: Matthias Brugger <mbrugger@suse.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Dmitry Malkin <dmitry@bedrocksystems.com>,
- Thomas Fitzsimmons <fitzsim@fitzsim.org>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Anatolij Gustschin <agust@denx.de>,
- wahrenst@gmx.net, florian.fainelli@broadcom.com, u-boot@lists.denx.de,
- =?utf-8?B?SmFuIMSMZXJtw6Fr?= <sairon@sairon.cz>
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <B1136352-B9D3-4990-B5E5-7C318809C957@suse.de>
-References: <20240110122908.31612-1-iivanov@suse.de>
- <9943877347134e40cee8c0d9cc7f641c@agner.ch>
-To: Stefan Agner <stefan@agner.ch>
-X-Mailer: Apple Mail (2.3776.700.51.11.1)
-X-Rspamd-Queue-Id: 81D282088C
-X-Spamd-Result: default: False [-6.01 / 50.00]; BAYES_HAM(-3.00)[99.99%];
- DWL_DNSWL_MED(-2.00)[suse.de:dkim];
- NEURAL_HAM_LONG(-1.00)[-1.000]; MV_CASE(0.50)[];
- R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- NEURAL_HAM_SHORT(-0.20)[-0.999]; MIME_GOOD(-0.10)[text/plain];
- MX_GOOD(-0.01)[];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- FREEMAIL_ENVRCPT(0.00)[gmail.com,gmx.net]; ARC_NA(0.00)[];
- RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from]; 
- FUZZY_BLOCKED(0.00)[rspamd.com]; RCPT_COUNT_TWELVE(0.00)[12];
- MIME_TRACE(0.00)[0:+]; TO_MATCH_ENVRCPT_ALL(0.00)[];
- FREEMAIL_CC(0.00)[suse.com,gmail.com,bedrocksystems.com,fitzsim.org,nxp.com,samsung.com,denx.de,gmx.net,broadcom.com,lists.denx.de,sairon.cz];
- RCVD_TLS_ALL(0.00)[]; RCVD_COUNT_TWO(0.00)[2];
- FROM_EQ_ENVFROM(0.00)[]; FROM_HAS_DN(0.00)[];
- TO_DN_SOME(0.00)[]; MID_RHS_MATCH_FROM(0.00)[];
- RCVD_VIA_SMTP_AUTH(0.00)[];
- RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
- DKIM_TRACE(0.00)[suse.de:+];
- DBL_BLOCKED_OPENRESOLVER(0.00)[agner.ch:email, imap1.dmz-prg2.suse.org:helo,
- imap1.dmz-prg2.suse.org:rdns, suse.de:dkim, suse.de:mid]
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Rspamd-Action: no action
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 3EA9E3F2B9
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 10:55:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1726743331;
+ bh=IDCuXNyRn+8eP8NAzxLAa7L1IRKHyaovhQvNtqIRauo=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=WBg81gW24A70MfgBW0LbRYa5TMMOBRYLhqykIekBxyXN/1BW5VyBpCzqJ7hzdzFtS
+ 46FYHmE9/21LzYCJDnz6n9M6MBhm2cLc1SntbbrzUZRJqU9sdvic6OJmypi7OUyxYM
+ DJL5nnTg6/XXAz+hP853W0O+9yDr4nmhELtl3akltFwsEhKMv5ALA4Pi/f1hIHBTC8
+ 3bdEqAYKsYx2CvNn73Y4usdfbul98ovQWB9OFpR3ximM/DBm3p88MqwRHcR61moARw
+ ecVyIigq7R+EYO3FH19/IHJOet2wciLMDAAtpOd/0N2GT2qeKS9sU18gcjYIuAlkWL
+ tICV5ER4mq36A==
+Received: by mail-wr1-f72.google.com with SMTP id
+ ffacd0b85a97d-374c581ce35so287105f8f.3
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 03:55:31 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1726743330; x=1727348130;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=IDCuXNyRn+8eP8NAzxLAa7L1IRKHyaovhQvNtqIRauo=;
+ b=fr0Ux79XYGeXnpOOgcO+8uqWkMHZCf3ULk7NH5wB3dJQZSmlbvwP2r7q7b0xq2Tz4N
+ vTOotecHfi+y46GFEgkja17U0+wvzsnIFOxUJUSp1yO47uzvnusy6wwWSw2/6cSxgeS6
+ tYU5hMv9RPWFjUzF2o/WZQ+LfnPg01XZrolk9/jNbq0cCHGzyo01aDBJhbFYOjM4uAlL
+ dzUg1T4CPiCHmECrXteVagEJO1Hp2T1rmScGGEKcUVjD7/QdnW7gbxHH1Aga8Q3nmMwj
+ IlyoEfpz8FYtpSYaZ1o2+ZnvXs1nZSMNrt1BmFjFycn9gsf1BqVtUCZwnnw8dHbOPgA7
+ ouww==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWTYGzAKpx4AQn0/v5/EkY4Yssth1zGAAZbv3sDIufXozwJirL+SWopZkzBx4DOomt6NMA8yIg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxhds7+WHJ4AIk/ONPl9fiAgmswLpOMtTzjK4pam8KkFBF6sL5l
+ urSTMk6j70tMJ8snfeKUXa80AhT1SU87RtCqy9Mt3nAud0Rc5DIsA1XF3PY7w1ujXbqQCaRU9Rl
+ 8adqq6MsZJml3RO5g6M2onGQMF+VY2C2RuVlJI/q8BatGItbYDiAzbo+YXJuyU6ZBkJs=
+X-Received: by 2002:adf:ff83:0:b0:374:ba7b:42af with SMTP id
+ ffacd0b85a97d-378c2d11778mr13735957f8f.26.1726743329808; 
+ Thu, 19 Sep 2024 03:55:29 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IE1VKu8jjqjBw1jPDw5bJOorN05f2S9Dct0S29LszQPoKgu711Yv9mXI0qtlNSxJY/Oto8bEQ==
+X-Received: by 2002:adf:ff83:0:b0:374:ba7b:42af with SMTP id
+ ffacd0b85a97d-378c2d11778mr13735945f8f.26.1726743329409; 
+ Thu, 19 Sep 2024 03:55:29 -0700 (PDT)
+Received: from localhost.localdomain
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-378e71f0622sm14804706f8f.18.2024.09.19.03.55.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Sep 2024 03:55:28 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
+ Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 1/1] lmb: add missing LMB_NOOVERWRITE description
+Date: Thu, 19 Sep 2024 12:55:22 +0200
+Message-ID: <20240919105523.179497-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.45.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -142,49 +104,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Without a LMB_NOOVERWRITE description building the HTML documentation leads
+to a warning which should be treated as an error.
 
-Hi Stefan,
+Fixes: 5e9553cc72b8 ("lmb: allow for resizing lmb regions")
+Reported-by: Tom Rini <trini@konsulko.com>
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+v2:
+	change description text: %s/resized/overwritten/
+---
+ include/lmb.h | 1 +
+ 1 file changed, 1 insertion(+)
 
-> On 19 Sep 2024, at 12:36, Stefan Agner <stefan@agner.ch> wrote:
->=20
-> Hi Ivan,
->=20
-> I am looking into enabling NVMe boot support using U-Boot on Raspberry
-> Pi 5. Which brings me to some questions wrt PCIe support (see below).
->=20
-> On 2024-01-10 13:29, Ivan T. Ivanov wrote:
->>=20
-
-
->> * I am dropping PCIe patch for now. I made some progress on porting =
-changes
->>  from vendor Linux tree to U-Boot. Unfortunatly testing it is little =
-bit
->>  tricky. They are many devices behind PCIe, but more or less all of =
-them
->>  requires missing either "reset-controller" or "clock-controller" or
->>  "pin-controller" drivers. I was able to probe "cdns,macb" device, =
-but
->>  access to ethernet PHY over MDIO bus is stucking. Then I ported
->>  "raspberrypi,rp1-adc" driver from vendor Linux tree, but it requires
->>  missing clock. And on top of that machine that I used for developing =
-this
->>  crashed and I lost my PCIe changes :-|. Anyway.
->=20
-> Have you tried using a M.2 HAT? This likely won't require much in =
-terms
-> of enabling the device.
->=20
-> You write that you made some progress, is that compared to v3? Do you
-> mind sharing the latest version of your patches?
-
-
-No further progress on PCIe for U-Boot from my side was made, sorry.
-
-Stan is working on adding support for 2712 PCIe in Linux [1]. Perhaps
-once this is complete we can work on adding U-Boot support for the same,
-unless someone don=E2=80=99t beat us, of course.=20
-
-Regards,
-Ivan
+diff --git a/include/lmb.h b/include/lmb.h
+index fc2daaa7bfc..97fc9764c13 100644
+--- a/include/lmb.h
++++ b/include/lmb.h
+@@ -18,6 +18,7 @@
+  * enum lmb_flags - definition of memory region attributes
+  * @LMB_NONE: no special request
+  * @LMB_NOMAP: don't add to mmu configuration
++ * @LMB_NOOVERWRITE: region cannot be overwritten
+  */
+ enum lmb_flags {
+ 	LMB_NONE		= 0,
+-- 
+2.45.2
 
