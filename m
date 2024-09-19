@@ -4,70 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34DACCDD573
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 13:23:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35418CDD578
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 13:23:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E36589165;
-	Thu, 19 Sep 2024 15:23:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id DB81789179;
+	Thu, 19 Sep 2024 15:23:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="P2P930FW";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PTKH0mxA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CCAB38916B; Thu, 19 Sep 2024 15:23:16 +0200 (CEST)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id 948E289181; Thu, 19 Sep 2024 15:23:23 +0200 (CEST)
+Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
+ [IPv6:2607:f8b0:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8559789128
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 15:23:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3DCD989128
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 15:23:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6c3567a143eso6280396d6.2
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 06:23:14 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-7178df70f28so651773b3a.2
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 06:23:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726752193; x=1727356993; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1726752200; x=1727357000; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=B6aJZwKyZHqR88AEvbkM61IAi2H7XUqSNinIvj6LCdM=;
- b=P2P930FWcUMKlMDEdcLNqNjHPPT5yHuITbm27919qSmAkPXcHk8G0Zj4EoaMsXnBRd
- GRzpdWm25L7md0aiqXgh5wuidyKEVqSeFrfiMmKmO4+qqHqJn0X7eEVbUCSBgfblUt0O
- L/fun9SdHnnTX8Wjzn/mmWjn0lRGjwGkStCZc=
+ bh=SfL91N5lTGuSJmv4BMNOT0kwHW2KO49Jr7usolawaTo=;
+ b=PTKH0mxApM8rhv8ODhAgKAMLK6QSdm/FJclpWBWquszULIzvKYZIP7Fn6qxx46+2wY
+ uI83Fvzd/z9ifOZcAnT4HSs9QcSxtlmQaIOy/cgnjjps9htRBcTb5B5GRcORSQqcUV9L
+ rbhQEZtdToIjMeoMED9IfoW28LsilXreoTI68FTJ0QL2nfftb+S4ghhBePpyWHcb7sZt
+ f0J5nZ0eSX+IER1lAGUrhhrWNB67/1Uvt2EXDuaxlghlFpmmn65w8xTOYR/nIn11i0Bx
+ VaHSpUnX1l7p70aGFx25UgGBYGITExDocrsqNtw6ADhSloDOur+xskBnbaoR8COewNTu
+ webg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726752193; x=1727356993;
+ d=1e100.net; s=20230601; t=1726752200; x=1727357000;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=B6aJZwKyZHqR88AEvbkM61IAi2H7XUqSNinIvj6LCdM=;
- b=N1i+cHATuFBJoCOBnBeg+KxERjHelsoqqr3SFXZ8E8DaUysH6Tw7vRW2aD3+GanoGZ
- AZpPeOCqxgzWQBp8w1YV7wYvRJlGZRjx+CPL7ke2DxG59jCmnIEkoaWlfFowZJkFMJSa
- Wq1IUwzkxpucByJKXiZSvFOTLRxJVCwBbk545uwb9Mz+CrVHFzLd3m1dRRNugUlkcca1
- jE6VuI5CQLZg0Ip5VcIAzKzfrN4SEUdwjl0splePXwrO84EiObxKb8NaKuzkd8s+l/oE
- WSTVhOshd1CbiwgwRRs1lYw/7NBQ294D07B3mCKW1VnB5XpegLOJePQ0fYWSLTY5ZQOc
- fdHA==
-X-Gm-Message-State: AOJu0YzeO2NhUcJBNqgbcOE3LIiAS0IPO39Wf5eYLkmsRfssWSE3VM2U
- h/HvMs8m8P6/s+s8CzhKWZqxf/LWTB5v2Pe7byiW1/GvPEFA43WfeVDX/+MwTVibkoMTUJGA/4N
- 1RQi1EmP35P/GEiusl/BUKi8UTMCQpaFKoTbi
-X-Google-Smtp-Source: AGHT+IEztKZSRNAZMSIN6V7y7jUF497Mp6azGUiNMCZ7wi2u0/frCeV8ySpt5slerQTU7j1iYM4VuOroGLJJa6FapO8=
-X-Received: by 2002:a05:6214:390a:b0:6bf:7d3c:a64d with SMTP id
- 6a1803df08f44-6c573570b31mr363971196d6.32.1726752193263; Thu, 19 Sep 2024
- 06:23:13 -0700 (PDT)
+ bh=SfL91N5lTGuSJmv4BMNOT0kwHW2KO49Jr7usolawaTo=;
+ b=Ak88+tzTB+b/zHhFDLDziT/fcEWFqC0fhGDyCfXFsTxFXdk885zT7RiXuvhU+XhYXc
+ zVGqcNlhsa1fJ8xP/TMa/0W3YEyrgaKg3BZmL56elnvixRewT6Tw8JGYIORBP56fUyaC
+ xzbKFuTx45aO4Rpdp2U/aYR0rUdHO+VTLbhSux0lROWdCp+aXvt49WAYrM5GXP7r8+hz
+ nTNzcYH3Uqq0rFp0SjaatuPVzH3LTGGXeHK4qU/xXv/XmLpSOu6okGjLrV3x+AHQXnzb
+ IyFSAWKljm6M/geJ+R7s11Vn4K8FMvZbWCzCnclgm8d05ZBZF1FnpKnCTRD4gRlZVSFs
+ uuew==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV5f72OES9/x7QoreSUVdToq+8xLvwGdDqBs8Dfh6qSGkt0JTdKKDgKHZAc5mEwvTY7hMyO+Tw=@lists.denx.de
+X-Gm-Message-State: AOJu0YzvlFGYJlOKedUVwtMMHqaiOFtnxs69OoZ4Jwxqi+OZSKWTTxH1
+ ApP445PEMQDP/rjCuvuJqFre1z8zBQNfeGoOGFbn4+4d7lMgMnMkbVnh58gMKUt8Ve/ARaH48Ti
+ FLvLIRmyGA4Fb8IuoME/BpHxCwto2NHAd93dZog==
+X-Google-Smtp-Source: AGHT+IGPfGms1Z54oqb/O8Y09Wr7Dsp7vbe8gQxCbXdr4DYL1WCNdwXvPBuxm/S/sDCwHpty+Tuj6IfsMSU6LJVHMgg=
+X-Received: by 2002:a05:6a00:2381:b0:706:700c:7864 with SMTP id
+ d2e1a72fcca58-7192605a15emr44502304b3a.4.1726752199679; Thu, 19 Sep 2024
+ 06:23:19 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240911062511.494855-1-patrick.rudolph@9elements.com>
  <20240911062511.494855-15-patrick.rudolph@9elements.com>
  <CAFLszTiaaP9goTUQiVJ3MQkzegDAmac-AWmtip38eLhMoC15xg@mail.gmail.com>
  <d33b38d1-830e-46f0-939d-c5f662bf4193@gmx.de>
 In-Reply-To: <d33b38d1-830e-46f0-939d-c5f662bf4193@gmx.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 19 Sep 2024 15:23:02 +0200
-Message-ID: <CAFLszTjztGL1GLEyLjjW0D3amp6sNHBOoiw8a28cHLwhSXj4MA@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 19 Sep 2024 16:22:43 +0300
+Message-ID: <CAC_iWjKfJbopOn4b7=9F7h0WHWXJ=Vafq8A-aK_4FR2MPWFLEg@mail.gmail.com>
 Subject: Re: [PATCH v3 14/30] efi_loader: Allocate and write ACPI tables
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Tom Rini <trini@konsulko.com>, Patrick Rudolph <patrick.rudolph@9elements.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,9 +92,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
-
-On Thu, 19 Sept 2024 at 14:58, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Thu, 19 Sept 2024 at 15:51, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
 > On 12.09.24 02:58, Simon Glass wrote:
 > > Hi Patrick,
@@ -122,90 +127,9 @@ On Thu, 19 Sept 2024 at 14:58, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 > >> - Add function comment
 > >> ---
 > >>   lib/efi_loader/efi_acpi.c        | 80 +++++++++++++++++++++++++++++++-
-> >>   test/py/tests/test_event_dump.py |  1 +
-> >>   2 files changed, 79 insertions(+), 2 deletions(-)
-> >>
-> >> diff --git a/lib/efi_loader/efi_acpi.c b/lib/efi_loader/efi_acpi.c
-> >> index 67bd7f8ca2..9d38d0060c 100644
-> >> --- a/lib/efi_loader/efi_acpi.c
-> >> +++ b/lib/efi_loader/efi_acpi.c
-> >> @@ -6,15 +6,23 @@
-> >>    */
-> >>
-> >>   #include <efi_loader.h>
-> >> -#include <log.h>
-> >> -#include <mapmem.h>
-> >>   #include <acpi/acpi_table.h>
-> >>   #include <asm/global_data.h>
-> >> +#include <asm/io.h>
-> >> +#include <bloblist.h>
-> >> +#include <linux/sizes.h>
-> >> +#include <linux/log2.h>
-> >> +#include <log.h>
-> >> +#include <malloc.h>
-> >> +#include <mapmem.h>
-> >>
-> >>   DECLARE_GLOBAL_DATA_PTR;
-> >>
-> >>   static const efi_guid_t acpi_guid = EFI_ACPI_TABLE_GUID;
-> >>
-> >> +enum {
-> >> +       TABLE_SIZE      = SZ_64K,
-> >> +};
-> >>   /*
-> >>    * Install the ACPI table as a configuration table.
-> >>    *
-> >> @@ -47,3 +55,71 @@ efi_status_t efi_acpi_register(void)
-> >>          return efi_install_configuration_table(&acpi_guid,
-> >>                                                 (void *)(ulong)addr);
-> >>   }
-> >> +
-> >> +/*
-> >> + * Allocate memory for ACPI tables and write ACPI tables to the
-> >> + * allocated buffer.
-> >> + *
-> >> + * Return:     status code
-> >> + */
-> >> +static int alloc_write_acpi_tables(void)
-> >> +{
-> >> +       u64 table_addr, table_end;
-> >> +       u64 new_acpi_addr = 0;
-> >> +       efi_uintn_t pages;
-> >> +       efi_status_t ret;
-> >> +       void *addr;
-> >> +
-> >> +       if (!IS_ENABLED(CONFIG_GENERATE_ACPI_TABLE))
-> >> +               return 0;
-> >> +
-> >> +       if (IS_ENABLED(CONFIG_X86) ||
-> >> +           IS_ENABLED(CONFIG_QFW_ACPI) ||
-> >> +           IS_ENABLED(CONFIG_SANDBOX)) {
-> >> +               log_debug("Skipping writing ACPI tables as already done\n");
-> >> +               return 0;
-> >> +       }
-> >> +
-> >> +       /* Align the table to a 4KB boundary to keep EFI happy */
-> >> +       if (IS_ENABLED(CONFIG_BLOBLIST_TABLES)) {
-> >> +               addr = bloblist_add(BLOBLISTT_ACPI_TABLES, TABLE_SIZE,
-> >> +                                   ilog2(SZ_4K));
-> >> +
-> >> +               if (!addr)
-> >> +                       return log_msg_ret("mem", -ENOMEM);
-> >> +       } else {
-> >> +               pages = efi_size_in_pages(TABLE_SIZE);
-> >> +
-> >> +               ret = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES,
-> >> +                                        EFI_ACPI_RECLAIM_MEMORY,
-> >> +                                        pages, &new_acpi_addr);
-> >
-> > I know we are going to have a problem here since EFI memory-allocation
-> > is a bit of a mess, and you got conflicting advice on the previous
-> > version....
-> >
-> > But we cannot call efi_allocate_pages() during U-Boot init. EFI may
-> > not even be enabled. The allocation ends up being in the area between
-> > the bottom of memory at the bottom of the stack, which is not supposed
-> > to be used, at least until images are loaded.
+
+[...]
+
 >
 > Please, have a look at init_sequence_r[].
 >
@@ -214,21 +138,16 @@ On Thu, 19 Sept 2024 at 14:58, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
 > So for sure we can and should use efi_allocate_pages() here.
 
-No, no. We need to keep the memory free for loading images. I am
-working to drop all EFI allocations until an EFI app is actually
-booted.
+Ah thanks Heinrich. Yes we should, I wrongly remembered we init the
+memory subsystem when we init the EFI one.
+
+
+Thanks
+/Ilias
 
 >
 > We must not use bloblist_add() as the memory allocation would not be
 > reported as AcpiReclaimMemory.
-
-That is the purpose of the efi_add_memory_map() call in
-lib/efi_loader/efi_acpi.c
-
-Regards,
-Simon
-
-
 >
 > Best regards
 >
