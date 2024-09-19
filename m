@@ -4,75 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B277ACF3944
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 14:16:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C77DCF3943
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 14:16:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4750089240;
-	Thu, 19 Sep 2024 16:13:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A10A089248;
+	Thu, 19 Sep 2024 16:13:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="K2Sa3vmK";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZNfOzQqU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DE0B8921D; Thu, 19 Sep 2024 16:13:22 +0200 (CEST)
-Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
- [IPv6:2607:f8b0:4864:20::52c])
+ id AC22489248; Thu, 19 Sep 2024 16:13:26 +0200 (CEST)
+Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
+ [IPv6:2607:f8b0:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F1EF89244
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:13:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 06E3F8921D
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:13:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x52c.google.com with SMTP id
- 41be03b00d2f7-7cf5e179b68so819606a12.1
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 07:13:19 -0700 (PDT)
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-718d91eef2eso594241b3a.1
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 07:13:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726755198; x=1727359998; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1726755202; x=1727360002; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0GJud7mwZZn+sICrYG4GA7wBCnSM++D1VM23I9IhfvI=;
- b=K2Sa3vmKbV/YpTRC8RROVEB4mck1pGxC6roumCTeTfvLAMfPHCMjnF27lV2ZSOsHYX
- izFn7xuTlnTfUgM6TQdwfAZhYLQ9up3exGZSC6ZwNuswjAffp8e7ZP6eKAIcXluaB3Kp
- 2r3APlr1g/Wq1z3+gTV6u0Qmuh5ytDAhA8yDE=
+ bh=TtXMUcEYAYqd9swFPL8SCfCRbml91zhkaxsNCodotN0=;
+ b=ZNfOzQqUkku9cu72UcyEOQbq65GVBcOYEdcSMSZn0WxsRh7nB61rMsxGPPa2N+1+Ym
+ tTjIaNsAHHNGP8R71DfUVTpQu+rIrYloQqEFtjtLnT97NJDvLQhpZ9cpWrsV5i0UYZBx
+ zB9z7dDGSa0FcCOp19iV33Lqby9/hPfVYY64U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726755198; x=1727359998;
+ d=1e100.net; s=20230601; t=1726755202; x=1727360002;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=0GJud7mwZZn+sICrYG4GA7wBCnSM++D1VM23I9IhfvI=;
- b=QdI+P31c2l2g5Y87hUSBNaUmohajv8H+2coQfJSTVqPFH3aZxnNPiCn2xYREkvuDi8
- HLQX+FpOlVl+/x1Mu/LM2fi+rj+IA2nc6nQbbnqaIvh8BL1ncwAfFiPOhQhzx+amGHTw
- 1w63dMm+d5b9t+Cru0K6Ff/N7IbTF4qh86x9ga4M5rg5nrZI/rafafec63Cw4+W1uPDw
- aIw8nf/PBXVtet/lmhbI2X2shVohfv/o+J9S40c2O84z2DqCO01hwQKI6vGb6VgxEc4F
- nbKh7/FkW5Y3jn8QrG1nDNnrBhmaAjtScUin7GQ0Q+iqta+VOmkvjBci34I6HXY7Q6n2
- CgxA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWGoktYdDsF1ozsMf9Iu4PcvuEyfVtNUrMQTw0fmn7AlwzoqcXwlvZgQ+IciiS5l4rFqfE0q70=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyx95AnzCInRvduDu6oW4vijua069NlxmTraiV290duSHt1LUNB
- aDfyJpCjVCo+jiFS0aHqesN4nIApXgp8zGKKShI76XcrsXzVS9QocbRZ6K5v9DBwaRo6qXHaWAN
- nlN2vIBOLbRd0Pa8fr/51IxpavvZcsgkRgRDs
-X-Google-Smtp-Source: AGHT+IGtZ2xY0wbIutV/Ust9RlZt3HDrbefYQqouY25kC0+4X/2Qv/VOgbhJ4+yDbs5gdQA/pizHxw4y1SJY4/57Bjs=
-X-Received: by 2002:a05:6a21:38a:b0:1ce:f6dc:2ba8 with SMTP id
- adf61e73a8af0-1d2fcadad94mr5185316637.24.1726755198489; Thu, 19 Sep 2024
- 07:13:18 -0700 (PDT)
+ bh=TtXMUcEYAYqd9swFPL8SCfCRbml91zhkaxsNCodotN0=;
+ b=UreXRrGYn2rNAdURyGPy0le0xi1Iu6d2iXfSd8h8BKHVaFLINmCxA/y3GWWHhXHi3w
+ srpZUNUBOwXxyo201CK7r1SNBicwmjPnZHP71Q5GT79Mo69z88tsQRDvBqlwaWUqN6yT
+ FJ4pdagFrR9EW0vIiKH6IwD3zV9Z1QcQbYHK/T9OtWABTssCDs0HFYHm4TwsX5vy3z2v
+ 2yIUahFRy1ha9pU3wibc9nutHm4rLHp5Mvb1R03OiNiDrkHlL5rB1apuA0FWy3aG99Zc
+ 159m4yez2HMLviA8bcv7KSGHEy5If3NhfUr+atPAqXSg3HhkRFSKO6czR8E0waFd7F3z
+ O9/A==
+X-Gm-Message-State: AOJu0YwqlG1gAcRe3wO3jAXvrK3sRM5nXcKKY2RlWe3DbxWzft2+OcpS
+ GFQotyP87tvY5i9KzPR/onYk1ObpxE6KZBDUgvSJfN5eeI8ScVb45/4oki8Mgum4/GNIAw/aEaR
+ 1BALiLL52rZNiFwe1pgd7rLqlW+pA/PSIUsqg
+X-Google-Smtp-Source: AGHT+IG5pjfjoT2jmEz5Bn1H8Wuj3Z/QEvcLJFyEAqNh4NdxlKqUel2gUbyX6yXemi9ksDEephk6NZYYvvYAAjFIORk=
+X-Received: by 2002:a05:6a00:8610:b0:712:7195:265d with SMTP id
+ d2e1a72fcca58-7198e148eb0mr3684077b3a.0.1726755202453; Thu, 19 Sep 2024
+ 07:13:22 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240901222259.456932-1-sjg@chromium.org>
- <20240901222259.456932-2-sjg@chromium.org>
- <52f2da9e-924c-44b4-8390-7d604d07ab33@gmx.de>
-In-Reply-To: <52f2da9e-924c-44b4-8390-7d604d07ab33@gmx.de>
+References: <20240822141013.GQ1626301@bill-the-cat>
+ <CAFLszTiV8Nut06NeJFqT87y8qSTfzMYwxY6vc10+Q6NY6u2m-A@mail.gmail.com>
+ <20240902153904.GX2479150@bill-the-cat>
+ <CAFLszTi4_=n6SmfN8unNx6DgO+C4HQwpxG8gcWuOGUd4Lna_ug@mail.gmail.com>
+ <20240910184242.GL4252@bill-the-cat>
+ <CAFLszTjfU8m-dQyXXAHJ0FWGfAMdvF3yYDMOofN87qocY0mRyg@mail.gmail.com>
+ <20240910185237.GM4252@bill-the-cat>
+ <CAFLszTgNPmHD7t4k1BkB_eSVZz7ZgP9=vuoPykm2ZGV0PQxg3g@mail.gmail.com>
+ <20240910220708.GN4252@bill-the-cat>
+ <CAFLszTj_TEO6K+SU76FHwxsk6awKTXkZ2hS1yJiB5wGA7LMm-A@mail.gmail.com>
+ <20240912174448.GS4252@bill-the-cat>
+In-Reply-To: <20240912174448.GS4252@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 19 Sep 2024 16:13:04 +0200
-Message-ID: <CAFLszTj9hhNfC8QvRaQnb3HDyJ_+e9uExVo2rvy+K=_1xQOoqg@mail.gmail.com>
-Subject: Re: [PATCH v3 1/3] efi: Drop the memset() from efi_alloc()
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Thu, 19 Sep 2024 16:13:07 +0200
+Message-ID: <CAFLszThz=vvpnz+mwzFmiUm+SgjsdwrTAbOceyDWRbFY-zL3aw@mail.gmail.com>
+Subject: Re: [PATCH v3 2/3] buildman: Allow skipping the dtc build
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Brandon Maier <brandon.maier@collins.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,110 +94,174 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Tom,
 
-On Sat, 14 Sept 2024 at 09:40, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Thu, 12 Sept 2024 at 19:44, Tom Rini <trini@konsulko.com> wrote:
 >
-> On 02.09.24 00:22, Simon Glass wrote:
-> >  From my inspection none of the users need the memory to be zeroed. It
-> > is somewhat unexpected that it does so, since the name gives no clue to
-> > this.
+> On Wed, Sep 11, 2024 at 07:01:37PM -0600, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Tue, 10 Sept 2024 at 16:07, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Tue, Sep 10, 2024 at 02:14:35PM -0600, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Tue, 10 Sept 2024 at 12:52, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Tue, Sep 10, 2024 at 12:45:39PM -0600, Simon Glass wrote:
+> > > > > > Hi Tom,
+> > > > > >
+> > > > > > On Tue, 10 Sept 2024 at 12:42, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > >
+> > > > > > > On Tue, Sep 10, 2024 at 12:41:11PM -0600, Simon Glass wrote:
+> > > > > > > > Hi Tom,
+> > > > > > > >
+> > > > > > > > On Mon, 2 Sept 2024 at 09:39, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > >
+> > > > > > > > > On Sun, Sep 01, 2024 at 02:09:39PM -0600, Simon Glass wrote:
+> > > > > > > > > > Hi Tom,
+> > > > > > > > > >
+> > > > > > > > > > On Thu, 22 Aug 2024 at 08:10, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > > > >
+> > > > > > > > > > > On Wed, Aug 21, 2024 at 09:00:25PM -0600, Simon Glass wrote:
+> > > > > > > > > > > > Hi Tom,
+> > > > > > > > > > > >
+> > > > > > > > > > > > On Fri, 16 Aug 2024 at 17:53, Simon Glass <sjg@chromium.org> wrote:
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > Hi Tom,
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > On Fri, 16 Aug 2024 at 11:22, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > On Thu, Aug 15, 2024 at 01:57:45PM -0600, Simon Glass wrote:
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > For most boards, the device-tree compiler is built in-tree, ignoring the
+> > > > > > > > > > > > > > > system version. Add a special option to skip this build. This can be
+> > > > > > > > > > > > > > > useful when the system dtc is up-to-date, as it speeds up the build.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > > > > > > > > > ---
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > (no changes since v1)
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > >  tools/buildman/builder.py       | 27 ++++++++++++++++++++++++++-
+> > > > > > > > > > > > > > >  tools/buildman/builderthread.py |  4 ++--
+> > > > > > > > > > > > > > >  tools/buildman/buildman.rst     |  3 +++
+> > > > > > > > > > > > > > >  tools/buildman/cmdline.py       |  2 ++
+> > > > > > > > > > > > > > >  tools/buildman/control.py       |  3 ++-
+> > > > > > > > > > > > > > >  tools/buildman/test.py          | 31 +++++++++++++++++++++++++++++++
+> > > > > > > > > > > > > > >  6 files changed, 66 insertions(+), 4 deletions(-)
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > We should probably do this more generically, outside of buildman. We
+> > > > > > > > > > > > > > have scripts/dtc-version.sh and if the system version isn't new enough
+> > > > > > > > > > > > > > (and we just need to define whatever the minimum version is), then we
+> > > > > > > > > > > > > > build our (not currently that new anymore) dtc instead.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > Yes I think I did a patch for that ages ago [1], but it was rejected.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > I'd be very happy for it to be applied as I think it is a better
+> > > > > > > > > > > > > solution than this one.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > I see that some poor sod tried to do this in Linux this morning.
+> > > > > > > > > > > >
+> > > > > > > > > > > > Any thoughts on that patch?
+> > > > > > > > > > >
+> > > > > > > > > > > I'm open to re-considering [1] again, but we need to handle the warning
+> > > > > > > > > > > problem first. That means...
+> > > > > > > > > > >
+> > > > > > > > > > > > Also I do see one problem. Newer dtc version produce a lot of
+> > > > > > > > > > > > warnings, which causes CI to fail. So if we always use the newest
+> > > > > > > > > > > > version, people are going to see a ton of warnings when they run
+> > > > > > > > > > > > locally. Am I missing something here?
+> > > > > > > > > > >
+> > > > > > > > > > > Well, it would be great to get our Kbuild logic anywhere close to
+> > > > > > > > > > > in-sync again with upstream. But syncing up the disabling warning flags
+> > > > > > > > > > > shouldn't be too hard.
+> > > > > > > > > >
+> > > > > > > > > > So, coming back to this patch, the nice thing about it is that it is
+> > > > > > > > > > deterministic. So people who build U-Boot and don't want funky
+> > > > > > > > > > behaviour will be happy. It will use the internal dtc by default. To
+> > > > > > > > > > use the external one, you must provide an option.
+> > > > > > > > > >
+> > > > > > > > > > This patch only affects buildman, but as you can see the mechanism it
+> > > > > > > > > > uses is to set the DTC variable, which people can do without buildman.
+> > > > > > > > > > It's just a convenience, but useful enough to have a flag, I believe.
+> > > > > > > > >
+> > > > > > > > > Wait, that's right, we have DTC as a thing that can be set in the
+> > > > > > > > > environment, so why do we need something for buildman at all?
+> > > > > > > >
+> > > > > > > > It's a convenience. I have found that it speeds things up quite a bit,
+> > > > > > > > so I want to enable it most of the time. But we can't do it by default
+> > > > > > > > and need it to be optional, I believe.
+> > > > > > >
+> > > > > > > I wasn't clear, sorry. Why is:
+> > > > > > > $ export DTC=/usr/local/bin/dtc
+> > > > > > > $ tools/buildman/buildman ...
+> > > > > > >
+> > > > > > > Enough?
+> > > > > >
+> > > > > > My patch is more equivalent to:
+> > > > > >
+> > > > > > DTC=`which dtc` buildman...
+> > > > > >
+> > > > > > As I said it is a convenience which I want to use all the time,
+> > > > > > including in CI. Are you worried about changing buildman? What is the
+> > > > > > issue here?
+> > > > >
+> > > > > My question / concern is why do we need:
+> > > > >
+> > > > > >  6 files changed, 66 insertions(+), 4 deletions(-)
+> > > > >
+> > > > > When we can do it with zero code changes?
+> > > >
+> > > > We don't need anything here...but this helps with my productivity as
+> > > > and can add this flag easily when doing large builds.
+> > > >
+> > > > Note that half of those lines are a test and another half are just
+> > > > plumbing it through all the layers. Any new flag will end up with
+> > > > this, even if it is a few lines of 'real' code.
+> > > >
+> > > > > And then similar to the
+> > > > > worries I set aside with the "venv" related changes,
+> > > >
+> > > > That change does fix a bug. Without the change, we cannot run code
+> > > > coverage in CI, which I very-much want to turn on once Marek can
+> > > > figure out the missing Binman tests.
+> > > >
+> > > > > you're making one
+> > > > > tool be clever and work as exactly as expected (but perhaps in a "do
+> > > > > what I meant, not what I said" manner?) way.
+> > > >
+> > > > The only magic is that it locates dtc on the path, but that is the
+> > > > thing that I find valuable.
+> > > >
+> > > > > If we have "set DTC in
+> > > > > environment, it's always obeyed, can be passed directly to make" but
+> > > > > also "pass buildman a flag to say where dtc is" why do we need the
+> > > > > latter if it should already be working, and I think already is working?
+> > > >
+> > > > The flag doesn't tell buildman where dtc is, though. It tells buildman
+> > > > to hunt for it and use that in preference to the internal build. I am
+> > > > not suggesting adding anything non-deterministics.
+> > > >
+> > > > A general point here...buildman is pretty stable but it is not perfect
+> > > > and we continue to tweak it to help make it a better tool. When it is
+> > > > perfect, I will certainly stop sending patches for it. I normally only
+> > > > send a patch when a bug is reported or something annoys me. The dtc
+> > > > thing annoys me *a lot* because it chews up ~20% of my CPU for no
+> > > > purpose. I had not realised how bad this problem was.
+> > >
+> > > Thanks for explaining. Whenever you want to pick this one up, go ahead
+> > > and send it along then. And I guess at some point we should look at (a)
+> > > re-syncing our libfdt code and (b) switching to using system dtc by
+> > > default?
+> >
+> > OK thank you. Perhaps we should file an issue for that? I am trying to
+> > do one issue a week, although I have failed the last few weeks.
 >
-> Though the UEFI specification does not require it, EDK II uses
-> AllocateZeroPool() to implement
-> EFI_DEVICE_PATH_UTILITIES_PROTOCOL.CreateDeviceNode(). We should not
-> deviate from it.
+> Can't hurt, yeah.
 
-Are you saying that there is an unwritten convention in the spec? My
-inspection of the code leads me to believe that all of the bytes which
-are allocated are written to, within that code, so that zeroing the
-bytes serves no purpose.
-
-My goal here is to allow use of malloc(), instead of calloc(), for example.
-
->
-> >
-> > Drop the memset() so that it effectively becomes a wrapper around the
-> > normal EFI-pool allocator.
-> >
-> > Another option would be to drop this function and call
-> > efi_allocate_pool() directly, but that increase code size a little.
-> >
-> > Move the function comment to the header file like most other exported
-> > functions in U-Boot.
->
-> Yes, we should move all non-static EFI function descriptions to headers.
-> But it makes no sense to move the comments of a single function and
-> leave the other functions unchanged. Have a look at doc/api/efi.rst.
-
-I normally like to do these things one at a time, when changes are
-needed, to avoid massive wholesale changes with no other purpose. That
-is what has happened with image.h over time. But OK I can drop that
-part of the patch, once we sort out the zeroring.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > Changes in v3:
-> > - Add new patch to drop the memset() from efi_alloc()
-> > - Drop patch to convert device_path allocation to use malloc()
-> >
-> >   include/efi_loader.h        | 11 ++++++++++-
-> >   lib/efi_loader/efi_memory.c |  9 ---------
-> >   2 files changed, 10 insertions(+), 10 deletions(-)
-> >
-> > diff --git a/include/efi_loader.h b/include/efi_loader.h
-> > index f84852e384f..38971d01442 100644
-> > --- a/include/efi_loader.h
-> > +++ b/include/efi_loader.h
-> > @@ -758,8 +758,17 @@ efi_status_t efi_next_variable_name(efi_uintn_t *size, u16 **buf,
-> >    * Return:  size in pages
-> >    */
-> >   #define efi_size_in_pages(size) (((size) + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT)
-> > -/* Allocate boot service data pool memory */
-> > +
-> > +/**
-> > + * efi_alloc() - allocate boot services data pool memory
-> > + *
-> > + * Allocate memory from pool with type EFI_BOOT_SERVICES_DATA
-> > + *
-> > + * @size:    number of bytes to allocate
-> > + * Return:   pointer to allocated memory, or NULL if out of memory
-> > + */
-> >   void *efi_alloc(size_t len);
-> > +
-> >   /* Allocate pages on the specified alignment */
-> >   void *efi_alloc_aligned_pages(u64 len, int memory_type, size_t align);
-> >   /* More specific EFI memory allocator, called by EFI payloads */
-> > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> > index c6f1dd09456..50cb2f3898b 100644
-> > --- a/lib/efi_loader/efi_memory.c
-> > +++ b/lib/efi_loader/efi_memory.c
-> > @@ -664,14 +664,6 @@ efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size,
-> >       return r;
-> >   }
-> >
-> > -/**
-> > - * efi_alloc() - allocate boot services data pool memory
-> > - *
-> > - * Allocate memory from pool and zero it out.
-> > - *
-> > - * @size:    number of bytes to allocate
-> > - * Return:   pointer to allocated memory or NULL
-> > - */
-> >   void *efi_alloc(size_t size)
-> >   {
-> >       void *buf;
-> > @@ -681,7 +673,6 @@ void *efi_alloc(size_t size)
-> >               log_err("out of memory");
-> >               return NULL;
-> >       }
-> > -     memset(buf, 0, size);
-> >
-> >       return buf;
-> >   }
->
-
+https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/24
+https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/25
 
 Regards,
 Simon
