@@ -4,83 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44991CF3944
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 14:13:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B769CF3943
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 14:13:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E18789209;
-	Thu, 19 Sep 2024 16:10:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 700AD89208;
+	Thu, 19 Sep 2024 16:10:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="V/cV84iF";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Gf+2r6Ym";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A1C58919B; Thu, 19 Sep 2024 16:10:42 +0200 (CEST)
-Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
- [IPv6:2607:f8b0:4864:20::529])
+ id A5BC189206; Thu, 19 Sep 2024 16:10:45 +0200 (CEST)
+Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
+ [IPv6:2607:f8b0:4864:20::1030])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB67C891FA
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:10:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 512D18919B
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:10:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x529.google.com with SMTP id
- 41be03b00d2f7-7db4f323b12so485160a12.1
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 07:10:38 -0700 (PDT)
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-2d8881850d9so839048a91.3
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 07:10:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726755037; x=1727359837; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1726755042; x=1727359842; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=d+pfqLDFmYVwUQzZLI+NVzEfWt7+Mcv0hdjkz1XIaNI=;
- b=V/cV84iFPQiieLktr+c0tSh8q8vu89fg0hA3yBozIJ9o8ITvhTRN2UEXJy9f3QTNng
- 4WsRE3o38rZggKz8oz9y2IFziJzB+G9QY5ypcXEz9ayUAXdIpaGMgHExEYWDLSQuPKwn
- XmankkZYJ6Fz5zQoRc0HBJZWWEsa/csNvUpXw=
+ bh=IGvhBZ0Rh1jYHkp5wUtnt1RlMJmuRyHpxk6ukCd9O8E=;
+ b=Gf+2r6Ym28SE5QEbnzJ63Eaanva3rJkZYvrBUx2t7hBoUfb7B7INxlM3+Mn6h3mSh/
+ giog5BUAh+WUT6ET0JVetHrCYWH3HC/4p18t/EvKUQLjFljLDxL84XXXPgE5tf7M39UZ
+ 8LSc+jQtwtlLEWDUlDdomSYotg5ZDdBQj8BgY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726755037; x=1727359837;
+ d=1e100.net; s=20230601; t=1726755042; x=1727359842;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=d+pfqLDFmYVwUQzZLI+NVzEfWt7+Mcv0hdjkz1XIaNI=;
- b=Id2EGpO3wk5HL7NzAiRsEpBi2e/WrFplNVzs39O9CC6kAbgWSbc0g83CL+N1rH3uw/
- SPUTY4eTlqOZNtOp0dkZd0xb/VQ3U9y3hyHSh1DMsHwf/1Jjt/ljdzf574Aio8DgbLuG
- apBeFI+cJcAfnU8MOciyLjBpNW1d+5FYrDordQwTeYQ1ZGjY6qymQ7RnxI3jnFFnUSjP
- 2PlODQ6INcX595Q+xa20VDIy8L1TfCKk3x5Rml0cTgHr/YEPQhxNKvMzftrdByIqkQTT
- bNqNAgdu1bKr2KgELoUeyf2fLfKoQcfsJNsdCAX7PX81XyX3Yw4Mqs3wQwhHCbowGk9P
- XtZg==
+ bh=IGvhBZ0Rh1jYHkp5wUtnt1RlMJmuRyHpxk6ukCd9O8E=;
+ b=rnIm8+zIzrfqJI+vtyZWCPguLZLFLZsuZvSRTebxgYBUdPklfSatZRTxD48pWRjQgZ
+ rREBO2JcFWotgftAATdjnW3+JbXRnOLmKd60Eycfvd43LWT3ddcFD7XWyPU7k4+55XS+
+ sg36/qq23RincRPsAXIYlKtpcED3prvKNU0SxZ5jKI4h8js0hspk77tMImRD2q+27rBp
+ cR7ghWjC4FQAmFkpLh+EF3WbA7/5DNZ4kapYwSxwlxKDKXP1YGOkFzolcrhasrdlWY6e
+ rTl4LzYtLfcmtdxFzPv+7+/L6HlR7WubMVlPbIVVO8QGcbMHToutlSaOTMwCExqIIzxz
+ 6l+g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVz3MyX+6ZzBaEf3nUQfCea7O0xKQwJ4Jo9erXaxhnJafjzBdTY3N70Oyw99HGxhwgqYgO/Mo4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw+o/KTQ4bYcMxyCtuUFOUt8VCMjOr76FtMIJZOnKVpfbj9B8TN
- rjSu/eZDEIwia7bWiR1WtQxmqg7ygUUGRNL5VvLMBiCSETvUdu3Ib2pgjocsO8m41wP5IEetUcz
- fLzyqZ6UkIHUH2a2tErKXya8G7X65Cp4/o4dK
-X-Google-Smtp-Source: AGHT+IEeosko2aYveIhDgPp/fSdvygSv9cjwGeMw/N1oM4vMen66M2fypfeAZDljMlu10my4l18lkrXUFqt2/tQqJsw=
-X-Received: by 2002:a17:90a:e20a:b0:2dd:66a8:8ab6 with SMTP id
- 98e67ed59e1d1-2dd66a89a1dmr5038628a91.13.1726755037392; Thu, 19 Sep 2024
- 07:10:37 -0700 (PDT)
+ AJvYcCWbMo1P9r8koQB87ixMxW9jApQUYXuLFIKxrfn/ohuCQ1HFUwgJUvl+ZdS6gNWIJdSmuTcrzHY=@lists.denx.de
+X-Gm-Message-State: AOJu0YxhGHzf9vp2Lwgfn+axIE6WBDXlzgtMKk0Btx2joVcUb/TvbpFT
+ 0d1GJlnVogzuGOmjrlEd8JcUf+ljYInCge/47LCVAr2H4dhuGc4d0xmjVhnesO8qZAZfRIQRe+K
+ SI6biD6lfnAIrtatYgJKJVRizYgadLqAnU8agcjL0+17cqkbpSyKWKcg=
+X-Google-Smtp-Source: AGHT+IHP7j72WDIHbLr73e2CmcFX90XPi9Lihm/pf28boyzAzWn7BVNxHJz/A/2/lQT6L8A4wUiK2cJ09R8gk0ij7jQ=
+X-Received: by 2002:a17:90a:f2cd:b0:2d3:ca3f:7f2a with SMTP id
+ 98e67ed59e1d1-2db9ffdcdcbmr31298945a91.22.1726755041723; Thu, 19 Sep 2024
+ 07:10:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240909222720.2563118-1-mikhail.kshevetskiy@iopsys.eu>
- <20240909222720.2563118-11-mikhail.kshevetskiy@iopsys.eu>
- <CAFLszThqbdJ6XuivxXBvc6N1rFX=oZsp-Tt-2N_c11y2Aj1JOA@mail.gmail.com>
- <680515ee-58fe-49dc-b7f3-53478d23b9c2@genexis.eu>
-In-Reply-To: <680515ee-58fe-49dc-b7f3-53478d23b9c2@genexis.eu>
+References: <20240816214436.1877263-1-raymond.mao@linaro.org>
+ <20240816214436.1877263-8-raymond.mao@linaro.org>
+ <CAFLszTiWFD2dpb6z_5cibDe0aOpuPYug-mrC-ZiZ7v+SEDFhdQ@mail.gmail.com>
+ <CAC_iWjJpfrK+-o_0x8ZJbWxhG4O-tprf1-oQvWmLZWOf=5qZMA@mail.gmail.com>
+ <CAFLszThL=Z_=Qome2ZzwdqcUxX4bVg7MsMKMgk05TkrV2wcMGg@mail.gmail.com>
+ <ZuRUfI6RoPiTAiva@hera>
+ <CAFLszTjXtQ8ruFMspmE-FYN+cazDT97L+7uEVeGryotVSBC4=Q@mail.gmail.com>
+ <CAC_iWj+DU93s7=75K+O7VSVfXK-UH8TfMBgsVtXfSsKarA58QA@mail.gmail.com>
+In-Reply-To: <CAC_iWj+DU93s7=75K+O7VSVfXK-UH8TfMBgsVtXfSsKarA58QA@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 19 Sep 2024 16:10:15 +0200
-Message-ID: <CAFLszTiZMkxCGdDwxG5YeSmmHDYRPVeF0FaFagra9imSno_PPw@mail.gmail.com>
-Subject: Re: [PATCH v6 10/12] net/netcat: add netcat over tcp support
-To: Mikhail Kshevetskiy <mikhail.kshevetskiy@genexis.eu>
-Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Tom Rini <trini@konsulko.com>, 
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Michal Simek <michal.simek@amd.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Anand Moon <linux.amoon@gmail.com>, 
- Marek Vasut <marex@denx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>,
+Date: Thu, 19 Sep 2024 16:10:13 +0200
+Message-ID: <CAFLszTgb0P4BHadGtnXqkdq+vu_nApjsehC9y2KZ58m2cUZP-Q@mail.gmail.com>
+Subject: Re: [PATCH v6 07/28] hash: integrate hash on mbedtls
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de,
+ manish.pandey2@arm.com, 
+ Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
+ Mario Six <mario.six@gdsys.cc>, 
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sean Anderson <seanga2@gmail.com>, 
- Baruch Siach <baruch@tkos.co.il>, Yasuharu Shibata <yasuharu.shibata@gmail.com>,
- Richard Weinberger <richard@nod.at>, u-boot@lists.denx.de
+ Andrew Davis <afd@ti.com>, Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Sumit Garg <sumit.garg@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>, 
+ "Leon M. Busch-George" <leon@georgemail.eu>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Alexander Gendin <agendin@matrox.com>, Jonathan Humphreys <j-humphreys@ti.com>,
+ Eddie James <eajames@linux.ibm.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,270 +111,147 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mikhail,
+Hi Ilias,
 
-On Sun, 15 Sept 2024 at 09:06, Mikhail Kshevetskiy
-<mikhail.kshevetskiy@genexis.eu> wrote:
+On Tue, 17 Sept 2024 at 15:02, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
+> Hi Simon,
 >
-> On 12.09.2024 03:59, Simon Glass wrote:
-> > Hi Mikhail,
+> On Mon, 16 Sept 2024 at 18:43, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > On Mon, 9 Sept 2024 at 16:27, Mikhail Kshevetskiy
-> > <mikhail.kshevetskiy@iopsys.eu> wrote:
-> >> This patch adds downloading/uploading of data with netcat.
-> >> Client/server mode both supported.
-> >>
-> >> How to test:
-> >> ============
-> >>   netcat-openbsd=1.219-1 from debian were used for a tests
-> >>
-> >>   a) Load data from remote host.
-> >>        * U-Boot listen on tcp port 3456
-> >>        * PC connects
-> >>
-> >>      u-boot: netcat load ${loadaddr} 3456
-> >>      PC:     netcat -q1 ${UBOOT_IP} 3456 < image.itb
-> >>
-> >>   b) Load data from remote host.
-> >>        * PC listen on tcp port 3456
-> >>        * U-Boot connects
-> >>
-> >>      PC:     netcat -q1 -l -p 3456 < image.itb
-> >>      u-boot: netcat load ${loadaddr} ${PC_IP}:3456
-> >>
-> >>   c) Save data to remote host
-> >>        * U-Boot listen on tcp port 3456
-> >>        * PC connects
-> >>
-> >>      u-boot: netcat save ${loadaddr} ${data_size_in_hex} 3456
-> >>      PC:     netcat -w1 ${UBOOT_IP} 3456 >image.itb
-> >>
-> >>   d) Save data to remote host
-> >>        * PC listen on tcp port 3456
-> >>        * U-Boot connects
-> >>
-> >>      PC:     netcat -w1 -l -p 3456 >image.itb
-> >>      u-boot: netcat save ${loadaddr} ${data_size_in_hex} ${PC_IP}:3456
-> >>
-> >> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-> >> ---
-> >>  cmd/Kconfig          |   7 ++
-> >>  cmd/net.c            |  34 ++++++--
-> >>  include/net.h        |   2 +-
-> >>  include/net/netcat.h |  20 +++++
-> >>  net/Makefile         |   1 +
-> >>  net/net.c            |   9 +++
-> >>  net/netcat.c         | 181 +++++++++++++++++++++++++++++++++++++++++++
-> >>  7 files changed, 248 insertions(+), 6 deletions(-)
-> >>  create mode 100644 include/net/netcat.h
-> >>  create mode 100644 net/netcat.c
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
->
-> Can/should I add this "Reviewed-by" to the next patch version?
-
-Yes
-
->
+> > Hi Ilias,
 > >
-> > nits below
+> > On Fri, 13 Sept 2024 at 09:04, Ilias Apalodimas
+> > <ilias.apalodimas@linaro.org> wrote:
+> > >
+> > >
+> > > Hi Simon,
+> > >
+> > > Apologies lost that email
+> > >
+> > > > On Sun, Sep 01, 2024 at 02:09:44PM -0600, Simon Glass wrote:
+> > > > Hi Ilias,
+> > > >
+> > > > On Fri, 30 Aug 2024 at 03:37, Ilias Apalodimas
+> > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > >
+> > > > > Hi Simon,
+> > > > >
+> > > > > On Thu, 29 Aug 2024 at 18:01, Simon Glass <sjg@chromium.org> wrote:
+> > > > > >
+> > > > > > Hi Raymond,
+> > > > > >
+> > > > > > On Fri, 16 Aug 2024 at 15:47, Raymond Mao <raymond.mao@linaro.org> wrote:
+> > > > > > >
+> > > > > > > Integrate common/hash.c on the hash shim layer so that hash APIs
+> > > > > > > from mbedtls can be leveraged by boot/image and efi_loader.
+> > > > > > >
+> > > > > > > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > > > > > > ---
+> > > > > > > Changes in v2
+> > > > > > > - Use the original head files instead of creating new ones.
+> > > > > > > Changes in v3
+> > > > > > > - Add handle checkers for malloc.
+> > > > > > > Changes in v4
+> > > > > > > - None.
+> > > > > > > Changes in v5
+> > > > > > > - Add __maybe_unused to solve linker errors in some platforms.
+> > > > > > > - replace malloc with calloc.
+> > > > > > > Changes in v6
+> > > > > > > - None.
+> > > > > > >
+> > > > > > >  common/hash.c | 146 ++++++++++++++++++++++++++++++++++++++++++++++++++
+> > > > > > >  1 file changed, 146 insertions(+)
+> > > > > >
+> > > > > > I am not seeing the benefit of replacing U-Boot's hashing algorithms.
+> > > > > > They work well and don't change. Also it seems to be making the code a
+> > > > > > lot uglier, with an uncertain timeline for clean-up.
+> > > > >
+> > > > > A lot uglier where? It adds a few wrappers that fit into the current
+> > > > > design and callbacks.
+> > > > > I don't think what you are asking is possible. To do assymetric
+> > > > > crypto, signatures  etc -- and in the future add TLS support in wget
+> > > > > mbedTLS relies on its internal hashing functions for the cipher suites
+> > > > > it supports. So what you are asking would just make the code even
+> > > > > larger. Raymond can you please double check?
+> > > >
+> > > > It's really just a case of dropping the hash calls. It should not
+> > > > cause any other problems, so far as I can see, but I have not dug in
+> > > > in detail.
+> > > >
+> > > > Re TLS is relying on its internal hashing functions, is this what you
+> > > > are talking about?
+> > > >
+> > > > $ git grep mbedtls_sha1_free
+> > > > common/hash.c:          mbedtls_sha1_free(ctx);
+> > > > common/hash.c:          mbedtls_sha1_free((mbedtls_sha1_context *)ctx);
+> > > > lib/mbedtls/external/mbedtls/include/mbedtls/sha1.h:void
+> > > > mbedtls_sha1_free(mbedtls_sha1_context *ctx);
+> > > > lib/mbedtls/external/mbedtls/library/md.c:
+> > > > mbedtls_sha1_free(ctx->md_ctx);
+> > > > lib/mbedtls/external/mbedtls/library/psa_crypto_hash.c:
+> > > > mbedtls_sha1_free(&operation->ctx.sha1);
+> > > > lib/mbedtls/external/mbedtls/library/sha1.c:void
+> > > > mbedtls_sha1_free(mbedtls_sha1_context *ctx)
+> > > > lib/mbedtls/external/mbedtls/library/sha1.c:    mbedtls_sha1_free(ctx);
+> > > > lib/mbedtls/external/mbedtls/library/sha1.c:    mbedtls_sha1_free(&ctx);
+> > > > lib/mbedtls/external/mbedtls/library/sha1.c:    mbedtls_sha1_free(&ctx);
+> > > > lib/mbedtls/sha1.c:     mbedtls_sha1_free(ctx);
+> > > >
+> > > > I see this in psa_crypto_hash.c (not sure what that is though).
+> > > PSA is Platform Security Architecture for Arm. They define APIs etc and
+> > > some crypto ops can move to the Secure World.
+> > >
+> > > As I responded later down the thread, mbedTLS config.h file allows you to define
+> > > alternative implementations. The benefit that I see by using mbedTLS hashing,
+> > > is that we can switch on new algorithms by enabling an option in mbedTLS.
+> > > OTOH some work will be needed to plug new algorithms in U-Boot and as you
+> > > point out HW accel will not work -- Unless we define the accelerator
+> > > functions in the config file above. But that doesn't solve your problem of
+> > > having one extra ifdef in hash.c
+> > >
+> > > >
+> > > > > > Can you do the rest of the integration first?
+> > > >
+> > > > I believe this is the best approach. We need to permit using crypto
+> > > > acceleration too (via driver model), which is obviously impossible if
+> > > > mbed algorithms are using built-in hashing.
+> > > >
+> > >
+> > > Look on the response above, we can, but I don't love the solution.
+> > >
+> > > > The biggest challenge here is that common/hash.c needs some love, as I
+> > > > mentioned in an earlier version.
+> > >
+> > > Fair enough. So the way I see it we got three options.
+> > > - We pull in the current one and explicitly state that mbedTLS != HW accel
+> > >   for now and plan for a wider refactoring.
+> > > - we write a few wrappers to adjust the u-boot functions and define
+> > >   those in the mbedTLS config file. We could then go back and try to make
+> > >   mbedTLS work with the existing hw accels. This is doable but
+> > > - we treat mbedTLS as a 'hardware accelerator', define hw_sha_init etc and
+> > >   make wrappers for that. This does solve the extra ifdefery, but OTOH
+> > >   mbedTLS will never work with hw accelerators so I'd say no.
+> > >
+> > > Raymond, can you take a look at (2) and see if it works? You basically have
+> > > to rip out all the hashing code and define wrappers on top of
+> > > hash_block() that mbedTLS can use
 > >
-> >> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> >> index 978f44eda42..abcd003f7f1 100644
-> >> --- a/cmd/Kconfig
-> >> +++ b/cmd/Kconfig
-> >> @@ -2007,6 +2007,13 @@ config CMD_WGET
-> >>           wget is a simple command to download kernel, or other files,
-> >>           from a http server over TCP.
-> >>
-> >> +config CMD_NETCAT
-> >> +       bool "netcat"
-> >> +       select PROT_TCP
-> >> +       help
-> >> +         netcat is a simple command to load/store kernel, or other files,
-> >> +         using netcat like manner over TCP.
-> > netcat-like
+> > That sounds like a good solution to me. Will you be able to complete
+> > the pending migrations at some point? It would be great to unify the
+> > interfaces, if we can live with a small code-size increase.
 > >
-> > Please add a reference to the protocol or the 'netcat' tool or both.
-> > Help must be at least 3 lines.
 >
-> Netcat (https://en.wikipedia.org/wiki/Netcat)  uses plain TCP/UDP for
-> data delivery. In the TCP case, TCP by itself provides reliable,
-> ordered, and error-checked data delivery, so no additional protocols are
-> required.
->
-> Is it enough to write the following description?
->
-> netcat is a simple command to load/store kernel, or other files,
-> using well-known netcat (nc) utility. Unlike classic netcat utility
-> this command supports TCP-based data transfer only, thus no data
-> will be lost or reordered. Any netcat implementation should work,
-> but openbsd one was tested only.
+> Our plan there is to do (2) on the next version. After the patches get
+> merged, we can try to find a way to have the hashing configurable. So
+> a user could actually select
+> - existing U-Boot hashing
+> - Mix & match hash functions from mbedTLS and hardware accelerators--
+> in case u-boot has no support yet while being able to use any existing
+> offloading
 
-Yes, thanks
-
->
->
-> >> +
-> >>  config CMD_MII
-> >>         bool "mii"
-> >>         imply CMD_MDIO
-> >> diff --git a/cmd/net.c b/cmd/net.c
-> >> index 53ce2bc5d0c..364139ec5b9 100644
-> >> --- a/cmd/net.c
-> >> +++ b/cmd/net.c
-> >> @@ -206,6 +206,28 @@ U_BOOT_CMD(
-> >>  );
-> >>  #endif
-> >>
-> >> +#if defined(CONFIG_CMD_NETCAT)
-> >> +static int do_netcat(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-> >> +{
-> >> +       if (argc < 2)
-> >> +               return 1;
-> >> +
-> >> +       if (!strcmp(argv[1], "load"))
-> >> +               return netboot_common(NETCAT_LOAD, cmdtp, argc - 1, argv + 1);
-> >> +       else if (!strcmp(argv[1], "save"))
-> >> +               return netboot_common(NETCAT_SAVE, cmdtp, argc - 1, argv + 1);
-> >> +       else
-> >> +               return 1;
-> >> +}
-> >> +
-> > Needs longhelp
-> Could you explain? Usage examples?
-
-I just mean something like this:
-
-U_BOOT_LONGHELP(bootmeth,
-        "list [-a]     - list available bootmeths (-a all)\n"
-        "bootmeth order [<bd> ...]  - select bootmeth order / subset to use");
-
-That example is from bootmeth.c
-
-> >
-> >> +U_BOOT_CMD(
-> >> +       netcat,   5,      1,      do_netcat,
-> >> +       "load/store data via tcp netcat utility",
-> >> +       "load [loadAddress] [[hostIPaddr:]port]\n"
-> >> +       "save Address Size [[hostIPaddr:]port]\n"
-> >> +);
-> >> +#endif
-> >> +
-> >>  static void netboot_update_env(void)
-> >>  {
-> >>         char tmp[46];
-> >> @@ -323,16 +345,17 @@ static int parse_args(enum proto_t proto, int argc, char *const argv[])
-> >>
-> >>         switch (argc) {
-> >>         case 1:
-> >> -               if (IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto == TFTPPUT)
-> >> +               if ((IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto == TFTPPUT) ||
-> >> +                   (IS_ENABLED(CONFIG_CMD_NETCAT) && proto == NETCAT_SAVE))
-> >>                         return 1;
-> >> -
-> >>                 /* refresh bootfile name from env */
-> >>                 copy_filename(net_boot_file_name, env_get("bootfile"),
-> >>                               sizeof(net_boot_file_name));
-> >>                 break;
-> >>
-> >>         case 2:
-> >> -               if (IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto == TFTPPUT)
-> >> +               if ((IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto == TFTPPUT) ||
-> >> +                   (IS_ENABLED(CONFIG_CMD_NETCAT) && proto == NETCAT_SAVE))
-> >>                         return 1;
-> >>                 /*
-> >>                  * Only one arg - accept two forms:
-> >> @@ -354,7 +377,8 @@ static int parse_args(enum proto_t proto, int argc, char *const argv[])
-> >>                 break;
-> >>
-> >>         case 3:
-> >> -               if (IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto == TFTPPUT) {
-> >> +               if ((IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto == TFTPPUT) ||
-> >> +                   (IS_ENABLED(CONFIG_CMD_NETCAT) && proto == NETCAT_SAVE)) {
-> >>                         if (parse_addr_size(argv))
-> >>                                 return 1;
-> >>                 } else {
-> >> @@ -365,7 +389,7 @@ static int parse_args(enum proto_t proto, int argc, char *const argv[])
-> >>                 }
-> >>                 break;
-> >>
-> >> -#ifdef CONFIG_CMD_TFTPPUT
-> >> +#if defined(CONFIG_CMD_TFTPPUT) || defined(CONFIG_CMD_NETCAT)
-> >>         case 4:
-> >>                 if (parse_addr_size(argv))
-> >>                         return 1;
-> >> diff --git a/include/net.h b/include/net.h
-> >> index b0ce13e0a9d..0af6493788a 100644
-> >> --- a/include/net.h
-> >> +++ b/include/net.h
-> >> @@ -515,7 +515,7 @@ extern int          net_restart_wrap;       /* Tried all network devices */
-> >>  enum proto_t {
-> >>         BOOTP, RARP, ARP, TFTPGET, DHCP, DHCP6, PING, PING6, DNS, NFS, CDP,
-> >>         NETCONS, SNTP, TFTPSRV, TFTPPUT, LINKLOCAL, FASTBOOT_UDP, FASTBOOT_TCP,
-> >> -       WOL, UDP, NCSI, WGET, RS
-> >> +       WOL, UDP, NCSI, WGET, NETCAT_LOAD, NETCAT_SAVE, RS
-> >>  };
-> >>
-> >>  extern char    net_boot_file_name[1024];/* Boot File name */
-> >> diff --git a/include/net/netcat.h b/include/net/netcat.h
-> >> new file mode 100644
-> >> index 00000000000..d8e09aaaa55
-> >> --- /dev/null
-> >> +++ b/include/net/netcat.h
-> >> @@ -0,0 +1,20 @@
-> >> +/* SPDX-License-Identifier: BSD-2-Clause
-> >> + *
-> >> + * netcat include file
-> >> + * Copyright (C) 2024 IOPSYS Software Solutions AB
-> >> + * Author: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-> >> + */
-> >> +#ifndef __NET_NETCAT_TCP_H__
-> >> +#define __NET_NETCAT_TCP_H__
-> >> +
-> >> +/**
-> >> + * netcat_load_start() - begin netcat in loading mode
-> >> + */
-> >> +void netcat_load_start(void);
-> >> +
-> >> +/**
-> >> + * netcat_save_start() - begin netcat in data saving mode
-> >> + */
-> >> +void netcat_save_start(void);
-> >> +
-> >> +#endif /* __NET_NETCAT_TCP_H__ */
-> >> diff --git a/net/Makefile b/net/Makefile
-> >> index 64ab7ec740a..dac7b4859fb 100644
-> >> --- a/net/Makefile
-> >> +++ b/net/Makefile
-> >> @@ -33,6 +33,7 @@ obj-$(CONFIG_CMD_WOL)  += wol.o
-> >>  obj-$(CONFIG_PROT_UDP) += udp.o
-> >>  obj-$(CONFIG_PROT_TCP) += tcp.o
-> >>  obj-$(CONFIG_CMD_WGET) += wget.o
-> >> +obj-$(CONFIG_CMD_NETCAT) += netcat.o
-> >>
-> >>  # Disable this warning as it is triggered by:
-> >>  # sprintf(buf, index ? "foo%d" : "foo", index)
-> >> diff --git a/net/net.c b/net/net.c
-> >> index 86182cc504e..d81604a57ce 100644
-> >> --- a/net/net.c
-> >> +++ b/net/net.c
-> >> @@ -108,6 +108,7 @@
-> >>  #include <test/test.h>
-> >>  #include <net/tcp.h>
-> >>  #include <net/wget.h>
-> >> +#include <net/netcat.h>
-> > That should be above net/tcp
->
-> Is there any reasons?
->
-> Should I move <net/wget.h> as well?
-
-Oh, yes, net/xxx should be before test/xxx
-
-See here: https://docs.u-boot.org/en/latest/develop/codingstyle.html#include-files
-
-[..]
+OK. The main thing from my side is to tidy up common/hash.c
 
 Regards,
 Simon
