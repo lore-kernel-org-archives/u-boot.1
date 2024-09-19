@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E63DECE8D49
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 03:55:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80DEECE8D4C
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 03:56:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE10D88FB3;
-	Thu, 19 Sep 2024 05:55:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 495CF889C3;
+	Thu, 19 Sep 2024 05:55:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="HTac3Bnc";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="OVY27GSR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F4D188FB7; Thu, 19 Sep 2024 05:55:35 +0200 (CEST)
+ id 3563C88FE3; Thu, 19 Sep 2024 05:55:41 +0200 (CEST)
 Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0AC13889C3
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 05:55:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D0173889C3
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 05:55:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dinesh.maniyam@intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1726718133; x=1758254133;
+ t=1726718139; x=1758254139;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=/IJZjXeowvXBwk0Q1jeKtidUQE4iFi0LOE55LwTHJZc=;
- b=HTac3Bnc6RpwUZdUm8DvfIk2veHV5ghXjYNSYViS5VNOrpWOvpivJ2NK
- vFCFAOdcQoP8aULjneYcUaQ1nVal5wjljZ1qgeNtpw3Qx0oqmfTf4JHCD
- TaiqXcPd4IvWlDwDWqZ3/2L6qHHiADznY1rRfOcDldGUhC7Xx73XVTFvy
- R4twiGUJ0U0F7UUClJl4sfSqu/wx5z1nHWBMyL69knOQ4s+wyCFnONOLJ
- 1VnSbW9VzlbJ+oGIg76ySHGOKhpI+7cFsJKQyR5wR7gTQBjW0AVbsUAQK
- hDnp+MaDX+fAKDZgVnmcjlv7a6AZoe1vKkRDpXbLDpCjt1RmSvx2sOR0s A==;
-X-CSE-ConnectionGUID: hwmdHX95To2iUo3sOPNWcA==
-X-CSE-MsgGUID: w5VyRTIIR/msShuSozeobg==
-X-IronPort-AV: E=McAfee;i="6700,10204,11199"; a="43177941"
-X-IronPort-AV: E=Sophos;i="6.10,240,1719903600"; d="scan'208";a="43177941"
+ bh=dWH5fJ0t+kiDp4pa9iJCA8R1q255KOEO/Ty4YdbmxmY=;
+ b=OVY27GSRbx8CI5upEjQXo8IkrB9mIDY1rlJv30gaAhLeiYl2zeSOoNuY
+ I6OVIpUdH75PgvVDwP59s6jcc+Lbi+1TVyyBQmxrPOEBkuprTeYQ7D6T2
+ t05fIq3SEvGoW8kocohC+TnTZWDdecJdC3NaUkH5lUJPQa5jZ+cF3dquc
+ 2gmwJ3RzfskEU751sL0rN/Eo89suq8Yl3As4lmhR/nTJ8dNrhg5vy8OIe
+ 0eDy8cSoXoSYdUZKAmc/bX6v5uRoKqpaIyWajdET0XvSHZqGJpQGMV0OS
+ 3cV0z90wpMh7CzfkMtbKp5FHBWWU8u09ENmsMVPgra6kAKoDtj5h1BUaC A==;
+X-CSE-ConnectionGUID: yiVz07KmQpuMrE0vI9Sl3A==
+X-CSE-MsgGUID: UEtfnMZ5SlK1FTvef2Me4g==
+X-IronPort-AV: E=McAfee;i="6700,10204,11199"; a="43177964"
+X-IronPort-AV: E=Sophos;i="6.10,240,1719903600"; d="scan'208";a="43177964"
 Received: from orviesa007.jf.intel.com ([10.64.159.147])
  by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 18 Sep 2024 20:55:32 -0700
-X-CSE-ConnectionGUID: SeSAzsmFQe+iiVZTSZ25MA==
-X-CSE-MsgGUID: Yn/YjNdzSF2yIzvkqpx/EQ==
+ 18 Sep 2024 20:55:38 -0700
+X-CSE-ConnectionGUID: 6TGAehuvTPucxM3lCMRN6w==
+X-CSE-MsgGUID: NwrkFq2RR5usBo3YqLa9ng==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.10,240,1719903600"; d="scan'208";a="70253705"
+X-IronPort-AV: E=Sophos;i="6.10,240,1719903600"; d="scan'208";a="70253715"
 Received: from pglc00481.png.intel.com ([10.221.239.164])
- by orviesa007.jf.intel.com with ESMTP; 18 Sep 2024 20:55:27 -0700
+ by orviesa007.jf.intel.com with ESMTP; 18 Sep 2024 20:55:33 -0700
 From: dinesh.maniyam@intel.com
 To: u-boot@lists.denx.de
 Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
@@ -69,9 +69,9 @@ Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
  Tingting Meng <tingting.meng@intel.com>,
  Jit Loon Lim <jit.loon.lim@intel.com>,
  Sieu Mun Tang <sieu.mun.tang@intel.com>
-Subject: [PATCH 02/19] arm: dts: agilex5: Enabled cdns-nand dts setting
-Date: Thu, 19 Sep 2024 11:54:55 +0800
-Message-Id: <20240919035512.13854-3-dinesh.maniyam@intel.com>
+Subject: [PATCH 03/19] include: asm: Add support to read/write 64-bit
+Date: Thu, 19 Sep 2024 11:54:56 +0800
+Message-Id: <20240919035512.13854-4-dinesh.maniyam@intel.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20240919035512.13854-1-dinesh.maniyam@intel.com>
 References: <20240919035512.13854-1-dinesh.maniyam@intel.com>
@@ -95,90 +95,53 @@ X-Virus-Status: Clean
 
 From: Dinesh Maniyam <dinesh.maniyam@intel.com>
 
-This patch is to enable cdns-nand dts setting for the socfpga_agilex5
-family device.
+The patch is to extend support read and write 64-bits of buffer.
+This is required for Cadence NAND Driver to
+read/write ONFI parameter page. The parameter page is mapped to 64-bit.
+With only read/write 32 bits of buffer,there is an issue of overwriting
+last 4 bits of buffer which failed the NAND identification.
 
 Signed-off-by: Dinesh Maniyam <dinesh.maniyam@intel.com>
 ---
- arch/arm/dts/socfpga_agilex5.dtsi             | 14 ++++++++++
- .../arm/dts/socfpga_agilex5_socdk-u-boot.dtsi | 28 +++++++++++++++++++
- 2 files changed, 42 insertions(+)
+ arch/arm/include/asm/io.h | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
 
-diff --git a/arch/arm/dts/socfpga_agilex5.dtsi b/arch/arm/dts/socfpga_agilex5.dtsi
-index 03b5504049..64665e499e 100644
---- a/arch/arm/dts/socfpga_agilex5.dtsi
-+++ b/arch/arm/dts/socfpga_agilex5.dtsi
-@@ -330,6 +330,20 @@
- 			status = "disabled";
- 		};
+diff --git a/arch/arm/include/asm/io.h b/arch/arm/include/asm/io.h
+index 89b1015bc4..e3ea5f0eb2 100644
+--- a/arch/arm/include/asm/io.h
++++ b/arch/arm/include/asm/io.h
+@@ -391,6 +391,31 @@ void __memset_io(volatile void __iomem *dst, int c, size_t count)
+ 		count--;
+ 	}
+ }
++
++static inline void readsq(const void __iomem *addr, void *buffer,
++			  unsigned int count)
++{
++	if (count) {
++		u64 *buf = buffer;
++
++		do {
++			u64 x = __raw_readq(addr);
++			*buf++ = x;
++		} while (--count);
++	}
++}
++
++static inline void writesq(void __iomem *addr, const void *buffer,
++			   unsigned int count)
++{
++	if (count) {
++		const u64 *buf = buffer;
++
++		do {
++			__raw_writeq(*buf++, addr);
++		} while (--count);
++	}
++}
+ #endif /* CONFIG_ARM64 */
  
-+		nand: nand@10b80000 {
-+			compatible = "cdns,nand";
-+			reg = <0x10b80000 0x10000>,
-+				<0x10840000 0x1000>;
-+			reg-names = "reg", "sdma";
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			interrupts = <0 97 4>;
-+			clocks = <&clkmgr AGILEX5_NAND_CLK>;
-+			resets = <&rst NAND_RESET>, <&rst COMBOPHY_RESET>;
-+			cdns,board-delay-ps = <4830>;
-+			status = "disabled";
-+		};
-+
- 		ocram: sram@00000000 {
- 			compatible = "mmio-sram";
- 			reg = <0x00000000 0x200000>;
-diff --git a/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi b/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi
-index 9eb21d6542..f9cca84ee3 100644
---- a/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi
-+++ b/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi
-@@ -41,6 +41,10 @@
- 	/delete-property/ cdns,read-delay;
- };
- 
-+&flash1 {
-+	bootph-all;
-+};
-+
- &i3c0 {
- 	bootph-all;
- };
-@@ -102,6 +106,10 @@
- 	status = "okay";
- };
- 
-+&nand {
-+	bootph-all;
-+};
-+
- &timer0 {
- 	bootph-all;
- };
-@@ -122,3 +130,23 @@
- 	bootph-all;
- };
- 
-+&nand {
-+	status = "okay";
-+
-+	flash1: flash@0 {
-+		reg = <0>;
-+		#address-cells = <1>;
-+		#size-cells = <1>;
-+
-+		partition@0 {
-+			label = "u-boot";
-+			reg = <0 0x200000>;
-+		};
-+		partition@200000 {
-+			label = "root";
-+			reg = <0x200000 0x3fe00000>;
-+		};
-+	};
-+};
-+
-+
+ #ifdef CONFIG_ARM64
 -- 
 2.26.2
 
