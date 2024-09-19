@@ -4,57 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7840BCF3941
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 14:01:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D094FCF3941
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 14:02:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6C3489196;
-	Thu, 19 Sep 2024 16:01:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=agner.ch
+	by phobos.denx.de (Postfix) with ESMTP id 46587891A3;
+	Thu, 19 Sep 2024 16:02:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=agner.ch header.i=@agner.ch header.b="MVstqjId";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NhoVUnqp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 01AEE89189; Thu, 19 Sep 2024 16:01:48 +0200 (CEST)
-Received: from mail.kmu-office.ch (mail.kmu-office.ch [IPv6:2a02:418:6a02::a2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 063F28919F; Thu, 19 Sep 2024 16:02:49 +0200 (CEST)
+Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
+ [IPv6:2607:f8b0:4864:20::c2a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 154BD89197
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:01:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E9C1889104
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:02:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=agner.ch
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=stefan@agner.ch
-Received: from webmail.kmu-office.ch (unknown [IPv6:2a02:418:6a02::a3])
- by mail.kmu-office.ch (Postfix) with ESMTPSA id 555FA5CA5D7;
- Thu, 19 Sep 2024 16:01:44 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
- t=1726754504;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=mp2WfBSR6Rh1lJBK9Ye6zJH/hRDYmsnmUR0RC4cQQ6U=;
- b=MVstqjIdpEaRQ5DcJk6m/UbJlZne5Yj8V0T/M/OqULyD1gfD2bpigwD3D1glsMU1TFCBos
- FcVulrH9v4aJddfWQl1A19qCfBETmL92eOot3UGSyRKKlKlFoSjgvquZywTDQB8h4nGy2k
- N2FXNLeNdUWMmvo/a/5nTzHJExXOezs=
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=macroalpha82@gmail.com
+Received: by mail-oo1-xc2a.google.com with SMTP id
+ 006d021491bc7-5e1c65eb68aso500369eaf.2
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 07:02:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1726754565; x=1727359365; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=5vjOLJoj42rhuKKkT3Qsxm9Wd1S0nmqziAOZ5yv4lSo=;
+ b=NhoVUnqpfoEigxO8PPc1A6fVFQ9vtimaTZI75xEQ0RLhOQLxaHpODA4ob4gMl/KUOa
+ 150fnZ1PUy5+JuVOyHyTRqJzcGeZhxWwTXrfSn4ul2GiS201DgeW2ocJb9mCNcZKSXgo
+ k7nT6jzDk5xLTkb3oVOOyWNpRY+5XIHOiBFCCRH1BiWDmDKg4GYrvEbEHqnZA0qQWwEv
+ ohHXlLSNivYRTA3SBRD7XIWZEo0EbTepqZvgZ97Dypq4j4VQMHGe/35Iqp9/qRgwJjOB
+ dHvamyZ6tV+iT7J/0DwAoRg1AP1O5S1saPYgqBmRudGzbrOd2tskTqRF99EBdzy+sPEd
+ EjyQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1726754565; x=1727359365;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=5vjOLJoj42rhuKKkT3Qsxm9Wd1S0nmqziAOZ5yv4lSo=;
+ b=JiKxKpvxHfkEr6HNHY2icxLGL+4C3/VCiOr1rY5FC2eRIAMaDhTm8EJ6+IQPjyI0C9
+ t/NZf41SCjEoVZnaDcYGpB+jYb4MS00njct+0yfuhT5dR+E1jxpsA3QV17VEpGjMPvuU
+ wXeM/sXNQ23VPpOkmUaiEbi1dx9bz3dkjdP/ipvbcC9XSxizmnv6xkErOBuCLfM3Eeey
+ vdz61f8Js1iHBROo5fe2AzRbpLDhZncI0bd3erfwI/9emYpF9mlicWKjn5zT42Vfjr8M
+ 3+5RxBlvVvDSKf6plLKVSvPNn8BlM38Vg11HXE2g8m+744PLZqL2Ws49svUpKUr6SiOb
+ vVsQ==
+X-Gm-Message-State: AOJu0YzF82i7M8tSFBo8pHZTgUdII5HEkQiJIRz3bZCS1e+o+88j5Ib9
+ vQhyZeTsOzIdzjOWo8pKSwiL/QHzI/UYZNFXYQ7Ccfky8KlM3hs1KK4dTAUh
+X-Google-Smtp-Source: AGHT+IELczSWASJBjopLt9Bf0/TgmEtQOZswu3BJW1HUgZUdzNSk8gPTevMo1E+AYiFJQ9cbQDvJDA==
+X-Received: by 2002:a05:6820:2226:b0:5e1:bc6e:52e8 with SMTP id
+ 006d021491bc7-5e2012b96f4mr13299841eaf.1.1726754565159; 
+ Thu, 19 Sep 2024 07:02:45 -0700 (PDT)
+Received: from localhost.localdomain ([2600:1700:fb0:1bcf::54])
+ by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-5e3b0d6ae98sm1941649eaf.5.2024.09.19.07.02.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Sep 2024 07:02:44 -0700 (PDT)
+From: Chris Morgan <macroalpha82@gmail.com>
+To: u-boot@lists.denx.de
+Cc: jonas@kwiboo.se, trini@konsulko.com, kever.yang@rock-chips.com,
+ philipp.tomsich@vrull.eu, sjg@chromium.org, dsimic@manjaro.org,
+ quentin.schulz@cherry.de, Chris Morgan <macromorgan@hotmail.com>
+Subject: [PATCH V2 0/4] Anbernic RGxx3 Bootloader Fixes
+Date: Thu, 19 Sep 2024 09:00:18 -0500
+Message-Id: <20240919140022.511067-1-macroalpha82@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Date: Thu, 19 Sep 2024 16:01:44 +0200
-From: Stefan Agner <stefan@agner.ch>
-To: "Ivan T. Ivanov" <iivanov@suse.de>
-Cc: Matthias Brugger <mbrugger@suse.com>, Peter Robinson
- <pbrobinson@gmail.com>, Dmitry Malkin <dmitry@bedrocksystems.com>, Thomas
- Fitzsimmons <fitzsim@fitzsim.org>, Peng Fan <peng.fan@nxp.com>, Jaehoon
- Chung <jh80.chung@samsung.com>, Anatolij Gustschin <agust@denx.de>,
- wahrenst@gmx.net, florian.fainelli@broadcom.com, u-boot@lists.denx.de,
- =?UTF-8?Q?Jan_=C4=8Cerm=C3=A1k?= <sairon@sairon.cz>
-Subject: Re: [PATCH v4 0/6] rpi5: initial support
-In-Reply-To: <B1136352-B9D3-4990-B5E5-7C318809C957@suse.de>
-References: <20240110122908.31612-1-iivanov@suse.de>
- <9943877347134e40cee8c0d9cc7f641c@agner.ch>
- <B1136352-B9D3-4990-B5E5-7C318809C957@suse.de>
-Message-ID: <1c9ebab90accb47abbd7ef2205c6b409@agner.ch>
-X-Sender: stefan@agner.ch
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -72,63 +90,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ivan,
+From: Chris Morgan <macromorgan@hotmail.com>
 
-Thanks for the quick response!
+Update the Anbernic RGxx3 "device" to use upstream device-trees,
+add logic to detect a different vdd_cpu regulator, and implement a
+fix to allow the panel auto-detection to run when using mainline
+A-TF.
 
-On 2024-09-19 11:52, Ivan T. Ivanov wrote:
-> Hi Stefan,
-> 
->> On 19 Sep 2024, at 12:36, Stefan Agner <stefan@agner.ch> wrote:
->> 
->> Hi Ivan,
->> 
->> I am looking into enabling NVMe boot support using U-Boot on Raspberry
->> Pi 5. Which brings me to some questions wrt PCIe support (see below).
->> 
->> On 2024-01-10 13:29, Ivan T. Ivanov wrote:
->>> 
-> 
-> 
->>> * I am dropping PCIe patch for now. I made some progress on porting changes
->>>  from vendor Linux tree to U-Boot. Unfortunatly testing it is little bit
->>>  tricky. They are many devices behind PCIe, but more or less all of them
->>>  requires missing either "reset-controller" or "clock-controller" or
->>>  "pin-controller" drivers. I was able to probe "cdns,macb" device, but
->>>  access to ethernet PHY over MDIO bus is stucking. Then I ported
->>>  "raspberrypi,rp1-adc" driver from vendor Linux tree, but it requires
->>>  missing clock. And on top of that machine that I used for developing this
->>>  crashed and I lost my PCIe changes :-|. Anyway.
->> 
->> Have you tried using a M.2 HAT? This likely won't require much in terms
->> of enabling the device.
->> 
->> You write that you made some progress, is that compared to v3? Do you
->> mind sharing the latest version of your patches?
-> 
-> 
-> No further progress on PCIe for U-Boot from my side was made, sorry.
-> 
+Note that *Linux* still cannot use mainline A-TF because of the missing
+SCMI clock and reset functionality, but this patch series at least
+ensures that this board can boot once Linux is ready.
 
-So v3 the patch you've shared in v3 is your latest state? I was
-wondering since you wrote in this v4 patch set "I made some progress on
-porting changes
- from vendor Linux tree to U-Boot."...
+Chris Morgan (4):
+  board: rockchip: Convert Anbernic RGxx3 to OF_UPSTREAM
+  board: rockchip: Add vdd_cpu reg fixup for RGXX3 Series
+  board: rockchip: Remove ARM SCMI Support from RGxx3
+  board: rockchip: Enable PD_VO before driver access
 
+ .../dts/rk3566-anbernic-rg353p-u-boot.dtsi    |  34 ++
+ .../arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi |  52 ---
+ arch/arm/dts/rk3566-anbernic-rgxx3.dts        |  28 --
+ arch/arm/mach-rockchip/rk3568/rk3568.c        |   6 +
+ board/anbernic/rgxx3_rk3566/MAINTAINERS       |   4 +-
+ board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c    | 359 +++++++++++++++---
+ configs/anbernic-rgxx3-rk3566_defconfig       |  12 +-
+ 7 files changed, 347 insertions(+), 148 deletions(-)
+ create mode 100644 arch/arm/dts/rk3566-anbernic-rg353p-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/rk3566-anbernic-rgxx3.dts
 
-> Stan is working on adding support for 2712 PCIe in Linux [1]. Perhaps
-> once this is complete we can work on adding U-Boot support for the same,
-> unless someone don’t beat us, of course. 
+-- 
+2.34.1
 
-Hm, it seems the link did not make it. I guess you meant to link this
-patch set [1]
-
---
-Stefan
-
-[1]
-https://lore.kernel.org/lkml/20240910151845.17308-1-svarbanov@suse.de/T/
-
-> 
-> Regards,
-> Ivan
