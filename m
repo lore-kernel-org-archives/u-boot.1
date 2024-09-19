@@ -4,81 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8932DCF3962
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 17:00:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0717CF3962
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 17:21:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A77089247;
-	Thu, 19 Sep 2024 19:00:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 23D27892A2;
+	Thu, 19 Sep 2024 19:21:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aZZ+6S0B";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="snZgum/a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4EAB089247; Thu, 19 Sep 2024 19:00:50 +0200 (CEST)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 959BC892B4; Thu, 19 Sep 2024 19:21:17 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50D83871C7
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 19:00:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AB0228863E
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 19:21:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bigunclemax@gmail.com
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-5356aa9a0afso1901587e87.2
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 10:00:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1726765247; x=1727370047; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=dBUB+e1NGedzZukQh5fxm+7IflBBtPOBVTiKdAwHo2s=;
- b=aZZ+6S0B5tqbGEb9u+tmr4G6zRXdNGSMVNAyJRuayu+62iPSkVXermdozbsWysy+7p
- sAWTooQ76BAFXD742JJllc8vPnqam/3rOFbkcNQj3HxhbnrOpckeibiTl6dXRA3fnVyn
- eK8V+42Rwt11Jc2qQwxC/UjnBWaakdL47KRCeSnX/ADKAfW2ykytT+71bzRlmTnw0iY2
- dRs7Rmff62coiBDo1qsjbw5uinwWA6tUu9ywqDxcSKycVKAPhxilxJzlVU1ZkUqQq7gJ
- SwlJBqJPndSMgJqdXNSJkPi80GzeV9GKMYRmKUDpNPzwP3kxOEVdHnJh5q0HuzHneXcT
- h74Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726765247; x=1727370047;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=dBUB+e1NGedzZukQh5fxm+7IflBBtPOBVTiKdAwHo2s=;
- b=LtyB6vB1an+lzB6g5Gg8nmYPPEHbONkz+/ET7PDgNt3c5gAGT7uJqwWMm37AaCMRMQ
- qvmzdNUCqGN5JKbQiPUV7k9rz6FENjcgBe/cPXOLlP8s0JhNDAhrDWJNJaoziD6UiY4D
- GxqdQHjt7IW5/mSuxevhSprXR+m3gRWYHsCh2i8yVuRYpL+QUqM5VckLbz9sPZl6hakM
- hmqIaJn4bQJAkNtRsaXuj6y4nZO5QfggQC6gEV8fBWjq/1xH2U2ODq1RXfCxJasoBxil
- cnA2QSME4NpsVzoo4/2XJzHeBf1Zo1qfNV5TgH8YjFH0aGNyodpjS5rvZypHM+ZtO5e8
- ytsg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVL9mwcwlJ+MIeu9NKVudAFxQeRK4XzXaACzE1VoCtOYGMAPIGjhAGD90QA+Ss/VtgjMSvu1dY=@lists.denx.de
-X-Gm-Message-State: AOJu0YxpH5DGcQAt2YWproT6lNcETc6n5+T7FFkfQ6U4msw5/sAcZeSi
- G1vEpKKrTb9IGDQ2DDUgxUFrJvmqwgwckSVMJKxIle9gH44w10vc
-X-Google-Smtp-Source: AGHT+IHwP5H12yKKLT0e8JQx1gN61OhNXHjvGxtYZ0DdSTvNqfO4lpgbxUfzlzhTaakPIl3thN3ZOA==
-X-Received: by 2002:ac2:4c4a:0:b0:52c:76ac:329b with SMTP id
- 2adb3069b0e04-5367fef1b91mr16801521e87.35.1726765247204; 
- Thu, 19 Sep 2024 10:00:47 -0700 (PDT)
-Received: from wpc.. (host-95-152-62-174.dsl.sura.ru. [95.152.62.174])
- by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-536870967b0sm1874450e87.169.2024.09.19.10.00.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Sep 2024 10:00:46 -0700 (PDT)
-From: bigunclemax@gmail.com
-To: 
-Cc: bigunclemax@gmail.com, Alexander Razinkov <amrazinkov@ya.ru>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Michal Simek <michal.simek@amd.com>,
- Tom Rini <trini@konsulko.com>, Maxim Kochetkov <fido_max@inbox.ru>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Subject: [PATCH v1] net: xilinx: axi_emac: DMA transfer termination fix
-Date: Thu, 19 Sep 2024 20:00:12 +0300
-Message-ID: <20240919170022.203450-1-bigunclemax@gmail.com>
-X-Mailer: git-send-email 2.45.2
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1726766449; x=1727371249; i=xypron.glpk@gmx.de;
+ bh=pVJASUexzH8R5WB9+9FMuBPkw9dUmg7hfU04IarAzx4=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=snZgum/agqeoZC1sJvuYnzgBYzcTsFZQc8pMQiJWxegdrcgcV4k9U9E//vBWfqBn
+ MHJscb3QyAG7wg/Y5PT9Eyt8x7cZ1Hh/YnbbPlEnfNzCAdzJp2Mrcn8TQz7qp4Ptk
+ pWM3pdtRm/ZBpZdEkVWXeMm3vQczIGOGyCQdTgwwc+dyJ5tx1CgX3N1hjrKf1075i
+ crEFMUebAvMqre6NBolC7uQK6n4A3pY8dU+GZ+PiQj+uLJMvNyzX9v4KEJr3N4tqF
+ QdaJehJBuZQPPAh6QXJKfOTV6v5A+FTzr6tv3eDeltNizCuHvuheTWKGHp+oLsByy
+ 2lK/K/LzYsLGtLbjrQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1M4JmN-1srboe1g1Z-00B5Dv; Thu, 19
+ Sep 2024 19:20:49 +0200
+Message-ID: <c73e6496-9b16-4ab0-ac6a-d6a075d5d38a@gmx.de>
+Date: Thu, 19 Sep 2024 19:20:40 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/9] led: turn LED ON on initial SW blink
+To: Christian Marangi <ansuelsmth@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Simon Glass <sjg@chromium.org>, Miquel Raynal <miquel.raynal@bootlin.com>,
+ Arseniy Krasnov <avkrasnov@salutedevices.com>, Heiko Schocher <hs@denx.de>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Martin Kurbanov <mmkurbanov@salutedevices.com>,
+ Alexey Romanov <avromanov@salutedevices.com>, Dmitry Dunaev
+ <dunaev@tecon.ru>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <sean.anderson@seco.com>, Artur Rojek <artur@conclusive.pl>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Vasileios Amoiridis <vassilisamir@gmail.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>,
+ Doug Zobel <douglas.zobel@climate.com>, u-boot@lists.denx.de
+References: <20240812103254.26972-1-ansuelsmth@gmail.com>
+ <20240812103254.26972-2-ansuelsmth@gmail.com>
+ <BD52390C-A644-44EF-B691-2816E0F56770@gmx.de>
+ <66c71efa.050a0220.1f7dd.ecb2@mx.google.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <66c71efa.050a0220.1f7dd.ecb2@mx.google.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:lSTXUse0DaPbK74Y2P1Yy1se6UebVo7PE6g7NnRzbqWNyTL+CeQ
+ 0PoHtaRvogzyJ/RCC3UAsRTQArck6AfzfuW+Mmy0+DOsuET6GnV+NINSLAYxGKRD2CNnm5v
+ 5tmCb4/gjJax+0kiQk6xGopEKftLsfJW209ky+GrasucWb0DkHgQ4bXc45bnH0CKbPeht2P
+ LPcIcaSRHXtGajPAV/0Ew==
+UI-OutboundReport: notjunk:1;M01:P0:1yG2zU7rL/k=;xnYPDvYYjePv0gE1S2XpRfFEfdv
+ 3nuZWz/JwfJZvvytJfWlsKF+T2cULjGU2KAuZ7PispVxK4hfXVWtkSiiZ3/aU6mJ/aKWf97zr
+ Ny9ym8t14ZUYPJv7YcAXGd/3LGAwikqUsRnmAbyCx5VL0Nv9NbclBQoiPYsd5RDq4B/WKdtU9
+ tl33495Mtx87uT85ICx/4CC1GIV/MrLOJF3QHEtt3KkPPRzKBcaS5T6v3f6AfFTnylfgQip5o
+ 7G3K+/VpmhBJBeEN2EVnNBtGWIByrOQFCyep8udyqHlnfpGs7AdxYnp5AXZQ6Svmx8lFDca1X
+ a8Lugk/mpg3OqyzKfrn690dfycOobU8YL4yv5yS1vvCn+W3BKa1ZK8fSoT/EEhatFEKu7LtW0
+ dhhahg+364ZqVPN1afRNSLOeNh86w5VO4Hdcltopz9KL2DmH+FxyZ3mZm9e5YD/jg5k68mZ0m
+ G4zbUWUetO8ZQAS5DtThikYKFrXIZIiwHW+sypurGQNp0mcxkhtnDgKriRmvFtGjOc3LPJxhE
+ 9RylSH4JzqVAG6iJ70iQrEbppgSlVQO+lnwS07iFnR1uNBYfOxDd7GXqIAN/+3m0Yzuln+DEc
+ D861pGjPZgVajdEdnVCwPzhwmWsaL/7ZaC+rdkh1Q/7hpdZ4fKvnk3w3nLJc7yUj4JdOn2zFE
+ 9am/iL2dZWyDv5d4UbGtfN+ttpl9ZZazMe0cCmluDiiXYRsb9IXYfUkpUOIpObTzV9+m1xdAV
+ 75MLX7a9Eb7VXL4p0/Xo/dBiU81TVyv+qpKy+vV8bnXOfkRufNXjtnTKWfvii7yeD9c/C8mKm
+ GwMpToV9pFkFCczd6YI2u02A==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,124 +107,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Maksim Kiselev <bigunclemax@gmail.com>
+On 22.08.24 12:47, Christian Marangi wrote:
+> On Tue, Aug 13, 2024 at 12:00:59AM +0200, Heinrich Schuchardt wrote:
+>>
+>>
+>> Am 12. August 2024 12:32:43 MESZ schrieb Christian Marangi <ansuelsmth@=
+gmail.com>:
+>>> We currently init the LED OFF when SW blink is triggered when
+>>> on_state_change() is called. This can be problematic for very short
+>>> period as the ON/OFF blink might never trigger.
+>>>
+>>> Turn LED ON on initial SW blink to handle this corner case and better
+>>> display a LED blink from the user.
+>>
+>> If the the prior state is on, blinking should start with off.
+>>
+>> If the prior state is off, blinking should start with on.
+>>
+>
+> A bit confused. You mean I should improve the commit description or the
+> code needs to he changed to reflect this and check the LED status before
+> applying the BLINK?
 
-According to Xilinx AXI DMA Spec:
-"There can be a lag of time between when DMACR.RS = 0 and when
-DMASR.Halted = 1"
+The code should take the prior state of the LED into account. When
+enabling blinking the on/off state of the LED should change immediately.
 
-So to ensure that DMA transfer is really terminated we need to wait
-for DMASR.Halted status, which was missed in the Xilinx AXI EMAC driver.
+Best regards
 
-This issue resulted in Linux kernel vmalloc area corruption by AXI Rx DMA
-Buffer Descriptor caused by the occasional Ethernet packet arrival in case
-the Linux image was loaded via tftp and then immediately launched.
+Heinrich
 
-Signed-off-by: Alexander Razinkov <amrazinkov@ya.ru>
-Signed-off-by: Maksim Kiselev <bigunclemax@gmail.com>
----
- drivers/net/xilinx_axi_emac.c | 62 +++++++++++++++++++++--------------
- 1 file changed, 38 insertions(+), 24 deletions(-)
-
-diff --git a/drivers/net/xilinx_axi_emac.c b/drivers/net/xilinx_axi_emac.c
-index 4d87e2d1f3..62af64b1eb 100644
---- a/drivers/net/xilinx_axi_emac.c
-+++ b/drivers/net/xilinx_axi_emac.c
-@@ -453,11 +453,33 @@ static int setup_phy(struct udevice *dev)
- 	return 1;
- }
- 
-+/* Reset DMA engine */
-+static void axi_dma_reset(struct axidma_priv *priv)
-+{
-+	u32 timeout = 500;
-+
-+	/* Reset the engine so the hardware starts from a known state */
-+	writel(XAXIDMA_CR_RESET_MASK, &priv->dmatx->control);
-+	writel(XAXIDMA_CR_RESET_MASK, &priv->dmarx->control);
-+
-+	/* At the initialization time, hardware should finish reset quickly */
-+	while (timeout--) {
-+		/* Check transmit/receive channel */
-+		/* Reset is done when the reset bit is low */
-+		if (!((readl(&priv->dmatx->control) |
-+		    readl(&priv->dmarx->control)) & XAXIDMA_CR_RESET_MASK))
-+			break;
-+	}
-+	if (!timeout)
-+		printf("%s: DMA reset timeout!\n", __func__);
-+}
-+
- /* STOP DMA transfers */
- static void axiemac_stop(struct udevice *dev)
- {
- 	struct axidma_priv *priv = dev_get_priv(dev);
- 	u32 temp;
-+	int count;
- 
- 	/* Stop the hardware */
- 	temp = readl(&priv->dmatx->control);
-@@ -468,6 +490,21 @@ static void axiemac_stop(struct udevice *dev)
- 	temp &= ~XAXIDMA_CR_RUNSTOP_MASK;
- 	writel(temp, &priv->dmarx->control);
- 
-+	/* Give DMAs a chance to halt gracefully */
-+	temp = readl(&priv->dmarx->status);
-+	for (count = 0; !(temp & XAXIDMA_HALTED_MASK) && count < 5; ++count) {
-+		mdelay(20);
-+		temp = readl(&priv->dmarx->status);
-+	}
-+
-+	temp = readl(&priv->dmatx->status);
-+	for (count = 0; !(temp & XAXIDMA_HALTED_MASK) && count < 5; ++count) {
-+		mdelay(20);
-+		temp = readl(&priv->dmatx->status);
-+	}
-+
-+	axi_dma_reset(priv);
-+
- 	debug("axiemac: Halted\n");
- }
- 
-@@ -552,29 +589,6 @@ static int axiemac_write_hwaddr(struct udevice *dev)
- 	return 0;
- }
- 
--/* Reset DMA engine */
--static void axi_dma_init(struct axidma_priv *priv)
--{
--	u32 timeout = 500;
--
--	/* Reset the engine so the hardware starts from a known state */
--	writel(XAXIDMA_CR_RESET_MASK, &priv->dmatx->control);
--	writel(XAXIDMA_CR_RESET_MASK, &priv->dmarx->control);
--
--	/* At the initialization time, hardware should finish reset quickly */
--	while (timeout--) {
--		/* Check transmit/receive channel */
--		/* Reset is done when the reset bit is low */
--		if (!((readl(&priv->dmatx->control) |
--				readl(&priv->dmarx->control))
--						& XAXIDMA_CR_RESET_MASK)) {
--			break;
--		}
--	}
--	if (!timeout)
--		printf("%s: Timeout\n", __func__);
--}
--
- static int axiemac_start(struct udevice *dev)
- {
- 	struct axidma_priv *priv = dev_get_priv(dev);
-@@ -587,7 +601,7 @@ static int axiemac_start(struct udevice *dev)
- 	 * reset, and since AXIDMA reset line is connected to AxiEthernet, this
- 	 * would ensure a reset of AxiEthernet.
- 	 */
--	axi_dma_init(priv);
-+	axi_dma_reset(priv);
- 
- 	/* Initialize AxiEthernet hardware. */
- 	if (priv->mactype == EMAC_1G) {
--- 
-2.45.2
+>
+>>
+>>
+>>>
+>>> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+>>> ---
+>>> drivers/led/led_sw_blink.c | 5 ++++-
+>>> 1 file changed, 4 insertions(+), 1 deletion(-)
+>>>
+>>> diff --git a/drivers/led/led_sw_blink.c b/drivers/led/led_sw_blink.c
+>>> index 9e36edbee47..853278670b9 100644
+>>> --- a/drivers/led/led_sw_blink.c
+>>> +++ b/drivers/led/led_sw_blink.c
+>>> @@ -103,8 +103,11 @@ bool led_sw_on_state_change(struct udevice *dev, =
+enum led_state_t state)
+>>> 		return false;
+>>>
+>>> 	if (state =3D=3D LEDST_BLINK) {
+>>> +		struct led_ops *ops =3D led_get_ops(dev);
+>>> +
+>>> +		ops->set_state(dev, LEDST_ON);
+>>> 		/* start blinking on next led_sw_blink() call */
+>>> -		sw_blink->state =3D LED_SW_BLINK_ST_OFF;
+>>> +		sw_blink->state =3D LED_SW_BLINK_ST_ON;
+>>> 		return true;
+>>> 	}
+>>>
+>
 
