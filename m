@@ -4,84 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68713CF395D
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 15:51:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57CD0CF395D
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 16:09:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA13F8918F;
-	Thu, 19 Sep 2024 17:51:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 69FEC88C0F;
+	Thu, 19 Sep 2024 18:09:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wf0VnXpm";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="d1dqDYhp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C2F138919B; Thu, 19 Sep 2024 17:51:30 +0200 (CEST)
-Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
- [IPv6:2607:f8b0:4864:20::429])
+ id F1F9A88C0F; Thu, 19 Sep 2024 18:09:20 +0200 (CEST)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 53AFF88A24
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 17:51:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0404488BBF
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 18:09:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-71798661a52so868735b3a.0
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 08:51:28 -0700 (PDT)
+ spf=pass smtp.mailfrom=bigunclemax@gmail.com
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-5365b6bd901so1195684e87.2
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 09:09:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726761087; x=1727365887; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9K+DRgzJC0AHWWxB0o3I1feKxNMj3cRZAvYDM6X/a2g=;
- b=wf0VnXpmS3KGRGHdcOUKkgYRq4M4CMz1Rnd/xoFJ0KlObySBa5wqhDTb7UdmkPhZpj
- m5jMcLE0n58aysmijh+31yaLcuE6snn2uiFLdBA2gRAnnwVqct8STVk/OQOSLxVL8aYG
- we4QVoN69KVlWU5iKqRDptRBt80DD3o6t1qTbzJe2kbWX4vinhWNDgDjVKqqfRFPhnRS
- wVwcWUTR3gQ5MCpu5WDEn1Tx93VBC5PqmEWb2F+9EYA4t2l0Htm0k07kukChcaT0khnM
- FHgOaeWE8wpKReKvsdgxdxI4cRkegKGEYe+20TiiX9QJ3D37wPoW+3tFY3z9ZvY9Aipu
- OseA==
+ d=gmail.com; s=20230601; t=1726762158; x=1727366958; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ccksuvHqUa9N9ALwz1qR4pNHUdNqjveGl+CcTJz4jwM=;
+ b=d1dqDYhprBj5Kw5Ptupi2xNTLX0qziLpKnVKt/9gQNNMstLQwtst+fBbI/SQzFhbYH
+ Ej5rces9tjgENV3HPWyoGdNre0ldi4HIEh68b8ptaonrMtuO0zCFocM+pCv0xthOksLa
+ RPXyaafbwFpJy6MPyX/H3V4gGRMIIR83/w3+pmZ+BXV7xJxh9mXpchAqrKo6L1l4qoLf
+ HDyI+k7RUqpKMKD27A3WQh5DIaKC4yBVGscKV+WsGwqRnSjV2/Ro+S4ZN1Bo/SYWbBWf
+ 6H0EWBcoG3XJZ28e7/PqoxYrlBNW/ZpvLL10Sn78hyggkN/0X4wLrzzHFDothFARuY5G
+ rbgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726761087; x=1727365887;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1726762158; x=1727366958;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=9K+DRgzJC0AHWWxB0o3I1feKxNMj3cRZAvYDM6X/a2g=;
- b=RxHdXt+SZIDULgIXpH5OnPLLnAZR/5i5dEocrSyczvxpeXPHBaQLYGBDDBJm8Ig1zB
- XGcfp7AsEKuq9BpPHmu66cK9ljUIlxkl/vTyUNX98j8O3V3nTIdLkQLvfsIMtCvumEWK
- KmMzCwcJLFFz6oOCl2u/LghqlWo10Vvu6rNOYQvTUFh1ZGbh1na83BIlkRgTUFOHhlzW
- uXomMsZGs92zGbZEPhm9KSG+DVjYlJPBAfK+2MiDpQYI5bnAxHVG1mvbRUfuTAaGGkpR
- 8/RqW8G2HsXVz4eNJ0oO+Ry1V4iOQa6D3kGzjUn7uWgjCLGpG1oCc1diW3kioRwZRXiJ
- Mh6Q==
+ bh=ccksuvHqUa9N9ALwz1qR4pNHUdNqjveGl+CcTJz4jwM=;
+ b=a3HYl+ea7ETPx9aghfkwVJ9Q1SrU46ksIrP8njDZQnsUAo7mT0Nj8bR/rWwEKHIG1E
+ /8DsxZvmMwOIN3+zc/9BoTbqr36AX7FPh+k1NbJ864z1GWE0IsiB0p/Xom74+7Z8xXv1
+ rDX5MbutWV9BRwJQMq4y0N4ZDeZHGe0+Rr3csePO1a+grMbEiFdOPadKS9MNpSKdGQZb
+ KbmAsLhbRxcAV5VZpGtlSZR2GV9QGsi5+YYMQ1DXb0NKyY5JJm2Mn2aB4ouy2zkD5OTr
+ iBIsjrMuE0za1guRT0SQCu2OuXzMjVMvO40cNitJSk+N3cv1kbuJNVpnduGCnZcNHRRa
+ jQmg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXwlQp7yBBn/46O8TF8RGkOXqS2MnXG9vUNzekj5pKjhiR7bAAUTJCMDqt4TtbRDPHIe8Wa5jo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx1gPUhl4apEZjO1yO7WxvyQdcdZpKr3X4lY8d92P2rQ8yhCA5g
- J+cme5X/yJwUabvpM72d/rz50o95nNMa5t86Th91hoP6P3uY7F6gM8u5ysJWCbePYARa/YILtrw
- xqF7RFKpAlTvLp0AFroDB4ZpicwH5maxmdhBkVA==
-X-Google-Smtp-Source: AGHT+IHcwKrIbxgoK4Yxl9wnwMFum2Gdy1TiFvWPzWGlypdIG2qW/Wpu1DNwwltkOMJsAs7P5T/ITgQ0pQ7uOgIwJ00=
-X-Received: by 2002:a05:6a00:893:b0:712:7512:add9 with SMTP id
- d2e1a72fcca58-7199b14d47emr27599b3a.13.1726761086786; Thu, 19 Sep 2024
- 08:51:26 -0700 (PDT)
+ AJvYcCXnuxH9icQHDgKM3aMDbK3PKjLgEsi5nVyQPXZzeI3p5J2rz7WPYgnYs3tktfk+4Y+Q3/Ely+U=@lists.denx.de
+X-Gm-Message-State: AOJu0YzOtUh/BFgoCGzdOgMkJnR0KPLIfEK3UOhmtTF6HIxLNC1Ls12T
+ lsRdI8RrUT0ObJrlTEAcBCDzyldGiCJVFWTjxCIUqCwsfGY6r/uE
+X-Google-Smtp-Source: AGHT+IF3Ejwm6shaim9pRazJE7Q6TPaE2WrDc7n4/M1O1s/E+aP6n3JiMt746o8YSC9VaGv8gJ0cCQ==
+X-Received: by 2002:a05:6512:3195:b0:530:aa4b:81c7 with SMTP id
+ 2adb3069b0e04-53678ff4d82mr15978326e87.59.1726762157845; 
+ Thu, 19 Sep 2024 09:09:17 -0700 (PDT)
+Received: from wpc.. (host-95-152-62-174.dsl.sura.ru. [95.152.62.174])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-536870b402asm1900929e87.243.2024.09.19.09.09.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Sep 2024 09:09:17 -0700 (PDT)
+From: bigunclemax@gmail.com
+To: 
+Cc: bigunclemax@gmail.com, Heiko Schocher <hs@denx.de>,
+ Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>,
+ u-boot@lists.denx.de
+Subject: [PATCH v1] i2c: muxes: pca954x: Add MAX735x/MAX736x support
+Date: Thu, 19 Sep 2024 19:06:56 +0300
+Message-ID: <20240919160658.197534-1-bigunclemax@gmail.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-References: <20240914160548.42551-1-heinrich.schuchardt@canonical.com>
- <CAFLszTjL46Gb03MS7znLujAKC0VkgOrUaZMy7XPw-jpw3TELTA@mail.gmail.com>
- <d95b95d2-7afb-42f2-9a01-75d601368be9@canonical.com>
- <CAC_iWjLCnUpnVGuVYnhzo4EaUmKMSZPws3hSzOOvQqirC71hfQ@mail.gmail.com>
- <CAFLszTimJuwFKp6DaRDJ22=0tbNPYbcLMT9hcFrC9Rca6vzAyg@mail.gmail.com>
- <b8d1cef7-4e56-49c6-aeca-b471a82870cd@canonical.com>
- <CAC_iWjLY9Oea-AryLyrQJ3zXX+Bihza5B8R5UpXh58K3+Ff=Xw@mail.gmail.com>
- <CAFLszTgASXx5t7=T+yLtC0W9dwo=FkQPF5T6eYD2uyFUWE6D_A@mail.gmail.com>
- <CAC_iWjJL2tHTe84iqOkzDxANed-TdOObDYoW2jUwe3T=x=cyqA@mail.gmail.com>
- <CAFLszTghAmCGoiHq+iBwBRC99ucBOUGG+mjq8HEjUVkPAJu-ZQ@mail.gmail.com>
-In-Reply-To: <CAFLszTghAmCGoiHq+iBwBRC99ucBOUGG+mjq8HEjUVkPAJu-ZQ@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 19 Sep 2024 18:50:50 +0300
-Message-ID: <CAC_iWjKLODdFV701vo-ECEo+_U6NQoLS=HsrgmS+RyDHd5pi0A@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi_leader: delete rng-seed if having EFI RNG protocol
-To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,94 +92,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 19 Sept 2024 at 18:39, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi,
->
-> On Thu, 19 Sept 2024 at 17:37, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > On Thu, 19 Sept 2024 at 18:19, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Hi,
-> > >
-> > > On Thu, 19 Sept 2024 at 17:13, Ilias Apalodimas
-> > > <ilias.apalodimas@linaro.org> wrote:
-> > > >
-> > > >
-> > > >
-> > > > On Thu, Sep 19, 2024, 18:05 Heinrich Schuchardt <heinrich.schuchardt@canonical.com> wrote:
-> > > >>
-> > > >> On 19.09.24 17:00, Simon Glass wrote:
-> > > >> > Hi,
-> > > >> >
-> > > >> > On Thu, 19 Sept 2024 at 16:32, Ilias Apalodimas
-> > > >> > <ilias.apalodimas@linaro.org> wrote:
-> > > >> >>
-> > > >> >> Hi all,
-> > > >> >>
-> > > >> >> On Thu, 19 Sept 2024 at 17:20, Heinrich Schuchardt
-> > > >> >> <heinrich.schuchardt@canonical.com> wrote:
-> > > >> >>>
-> > > >> >>> On 19.09.24 16:10, Simon Glass wrote:
-> > > >> >>>> Hi Heinrich,
-> > > >> >>>>
-> > > >> >>>> On Sat, 14 Sept 2024 at 18:06, Heinrich Schuchardt
-> > > >> >>>> <heinrich.schuchardt@canonical.com> wrote:
-> > > >> >>>>>
-> > > >> >>>>> For measured be boot we must avoid any volatile values in the device-tree.
-> > > >> >>>>> We already delete /chosen/kaslr-seed if we provide and EFI RNG protocol.
-> > > >> >>>>
-> > > >> >>>> Could you explain a bit why this is, and where this is checked?
-> > > >> >>>>>
-> > > >> >>>>> Additionally remove /chosen/rng-seed provided by QEMU or U-Boot.
-> > > >> >>>
-> > > >> >>> Measured boot relies on creating hashes of artifacts and writing these
-> > > >> >>> to TPM. If the hashes don't match the OS will either warn or refuse to
-> > > >> >>> boot. The device-tree is one of the artifacts that are measured.
-> > > >> >>>
-> > > >> >>> If we have random values in /chosen, measured boot will fail.
-> > > >> >>>
-> > > >> >>> When an EFI RNG protocol is provided by the firmware, GRUB and the
-> > > >> >>> kernel will use it instead of /chosen/rng-seed and /chosen/kaslr-seed.
-> > > >> >>
-> > > >> >> There's a comment on top of that function that explains what happens as well.
-> > > >> >> In short the EFI stub does not even look at the KASLR seed and never
-> > > >> >> randomizes the physical placement of the kernel. It only does that
-> > > >> >> when the EFI_RNG protocol is there.
-> > > >> >
-> > > >> > OK thank you. I suppose I am more just wondering why it got added in
-> > > >> > the first place?
-> > > >>
-> > > >> For booting via the legacy Linux entry point adding kaslr-seed allows to
-> > > >> randomize addresses. QEMU adds rng-seed instead of kaslr-seed.
-> > > >
-> > > >
-> > > > Not the kernel physical placement. It randomizes only the virtual placement
-> > >
-> > > So, are you saying that U-Boot adds this field into the FDT and then removes it?
-> >
-> > Yes. As Heinrich said, the rng seed is still usable for some
-> > randomization. If we boot with EFI and have an RNG protocol, we dont
-> > need it and it also messes up the TPM measurements, so we remove it.
-> > But the code that injects it to u-boot, or the prior bootloader that
-> > handed you over a DT,  does not know if you plan to boot with EFI.
->
-> I'm actually surprised that this works. Normally, removing a property
-> does not drop that property from the string table, so adding a
-> property and deleting it is not normally the same as never adding it.
-> But perhaps that has changed?
->
-> Anyway, I think we should add the property when we know it is OK to do
-> so, which is just before we boot. If you agree I can take a look at
-> that.
+From: Maksim Kiselev <bigunclemax@gmail.com>
 
-Sure, but we won't be able to remove this code. There are still
-first-stage boot loaders that might send you a DT over a bloblist,
-that has a kaslr-seed
+Add support for the following Maxim chips using the existing PCA954x
+driver:
+- MAX7356
+- MAX7357
+- MAX7358
+- MAX7367
+- MAX7368
+- MAX7369
 
-Thanks
-/Ilias
->
-> Regards,
-> Simon
+All added Maxim chips behave like the PCA954x, where a single SMBUS byte
+write selects up to 8 channels to be bridged to the primary bus.
+
+Tested using the MAX7358.
+
+Signed-off-by: Maksim Kiselev <bigunclemax@gmail.com>
+---
+Hi, friends!
+
+I have a custom board with MAX7358 GPIO expander.
+This patch is the port of Linux commit:
+ > 81694437b6eb i2c: muxes: pca954x: Add MAX735x/MAX736x support
+
+Best wishes, Maksim.
+
+ drivers/i2c/muxes/Kconfig   |  5 +++++
+ drivers/i2c/muxes/pca954x.c | 37 +++++++++++++++++++++++++++++++++++++
+ 2 files changed, 42 insertions(+)
+
+diff --git a/drivers/i2c/muxes/Kconfig b/drivers/i2c/muxes/Kconfig
+index 323c4fbe9c..cd5579aa55 100644
+--- a/drivers/i2c/muxes/Kconfig
++++ b/drivers/i2c/muxes/Kconfig
+@@ -36,6 +36,11 @@ config I2C_MUX_PCA954x
+ 	  device. Supported chips are PCA9543, PCA9544, PCA9546, PCA9547,
+ 	  PCA9548 and PCA9646.
+ 
++	  It's also compatible to Maxims MAX735x I2C switch chips, which are controlled
++	  as the NXP PCA9548 and the MAX736x chips that act like the PCA9544.
++	  This includes the:
++		MAX7356, MAX7357, MAX7358, MAX7367, MAX7368 and MAX7369
++
+ config I2C_MUX_GPIO
+         tristate "GPIO-based I2C multiplexer"
+ 	depends on I2C_MUX && DM_GPIO
+diff --git a/drivers/i2c/muxes/pca954x.c b/drivers/i2c/muxes/pca954x.c
+index 795288fe2e..9dd2697270 100644
+--- a/drivers/i2c/muxes/pca954x.c
++++ b/drivers/i2c/muxes/pca954x.c
+@@ -14,6 +14,12 @@
+ #include <asm-generic/gpio.h>
+ 
+ enum pca_type {
++	MAX7356,
++	MAX7357,
++	MAX7358,
++	MAX7367,
++	MAX7368,
++	MAX7369,
+ 	PCA9543,
+ 	PCA9544,
+ 	PCA9546,
+@@ -39,6 +45,31 @@ struct pca954x_priv {
+ };
+ 
+ static const struct chip_desc chips[] = {
++	[MAX7356] = {
++		.muxtype = pca954x_isswi,
++		.width = 8,
++	},
++	[MAX7357] = {
++		.muxtype = pca954x_isswi,
++		.width = 8,
++	},
++	[MAX7358] = {
++		.muxtype = pca954x_isswi,
++		.width = 8,
++	},
++	[MAX7367] = {
++		.muxtype = pca954x_isswi,
++		.width = 4,
++	},
++	[MAX7368] = {
++		.muxtype = pca954x_isswi,
++		.width = 4,
++	},
++	[MAX7369] = {
++		.enable = 0x4,
++		.muxtype = pca954x_ismux,
++		.width = 4,
++	},
+ 	[PCA9543] = {
+ 		.muxtype = pca954x_isswi,
+ 		.width = 2,
+@@ -102,6 +133,12 @@ static const struct i2c_mux_ops pca954x_ops = {
+ };
+ 
+ static const struct udevice_id pca954x_ids[] = {
++	{ .compatible = "maxim,max7356", .data = MAX7356 },
++	{ .compatible = "maxim,max7357", .data = MAX7357 },
++	{ .compatible = "maxim,max7358", .data = MAX7358 },
++	{ .compatible = "maxim,max7367", .data = MAX7367 },
++	{ .compatible = "maxim,max7368", .data = MAX7368 },
++	{ .compatible = "maxim,max7369", .data = MAX7369 },
+ 	{ .compatible = "nxp,pca9543", .data = PCA9543 },
+ 	{ .compatible = "nxp,pca9544", .data = PCA9544 },
+ 	{ .compatible = "nxp,pca9546", .data = PCA9546 },
+-- 
+2.45.2
+
