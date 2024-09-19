@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C474CE8D49
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 03:55:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E63DECE8D49
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 03:55:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5720088D7D;
-	Thu, 19 Sep 2024 05:55:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DE10D88FB3;
+	Thu, 19 Sep 2024 05:55:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="gKnZxTtg";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="HTac3Bnc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5427088FC1; Thu, 19 Sep 2024 05:55:30 +0200 (CEST)
+ id 6F4D188FB7; Thu, 19 Sep 2024 05:55:35 +0200 (CEST)
 Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CC9A88D7D
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 05:55:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0AC13889C3
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 05:55:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dinesh.maniyam@intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1726718128; x=1758254128;
+ t=1726718133; x=1758254133;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=TAVk2geLTEyuZSHmps6+LFcIiSu5yG8HfynUluWMStI=;
- b=gKnZxTtgXDnsL2/y9PAOFXc+p795xZUXcITsOQ5LMufayLu8e/pxNR1D
- ALEfyksdplxf/wdd4/UufOC2D6fCr73CMJIN6A8iyWYmgQiDk8RVTMUXe
- j41P7uL5r/NNeJkni9kPib3TTQEpJrhU/gfoljAP6QNaL18o7wl0AGHEW
- +yZDkIcBo/wy18ou2eYPttZK6CCYyzUJQOF0NRqcBeQVFPSGoEc/K0WSR
- suvSgy0Bt7kGvlGRQuLSRLnIh+TydmW9amAMCx3r9FflS31F4rv+1mRgC
- HcFBGdwthrkXgcq71WmPUz5ECOQ76mNx9d6PKm+04GNwZNqw9kjkWMLo5 A==;
-X-CSE-ConnectionGUID: HYasjP1RQQmGTpDtM9xBzg==
-X-CSE-MsgGUID: 1gEVwexURJmduuaPuVJ5Tg==
-X-IronPort-AV: E=McAfee;i="6700,10204,11199"; a="43177924"
-X-IronPort-AV: E=Sophos;i="6.10,240,1719903600"; d="scan'208";a="43177924"
+ bh=/IJZjXeowvXBwk0Q1jeKtidUQE4iFi0LOE55LwTHJZc=;
+ b=HTac3Bnc6RpwUZdUm8DvfIk2veHV5ghXjYNSYViS5VNOrpWOvpivJ2NK
+ vFCFAOdcQoP8aULjneYcUaQ1nVal5wjljZ1qgeNtpw3Qx0oqmfTf4JHCD
+ TaiqXcPd4IvWlDwDWqZ3/2L6qHHiADznY1rRfOcDldGUhC7Xx73XVTFvy
+ R4twiGUJ0U0F7UUClJl4sfSqu/wx5z1nHWBMyL69knOQ4s+wyCFnONOLJ
+ 1VnSbW9VzlbJ+oGIg76ySHGOKhpI+7cFsJKQyR5wR7gTQBjW0AVbsUAQK
+ hDnp+MaDX+fAKDZgVnmcjlv7a6AZoe1vKkRDpXbLDpCjt1RmSvx2sOR0s A==;
+X-CSE-ConnectionGUID: hwmdHX95To2iUo3sOPNWcA==
+X-CSE-MsgGUID: w5VyRTIIR/msShuSozeobg==
+X-IronPort-AV: E=McAfee;i="6700,10204,11199"; a="43177941"
+X-IronPort-AV: E=Sophos;i="6.10,240,1719903600"; d="scan'208";a="43177941"
 Received: from orviesa007.jf.intel.com ([10.64.159.147])
  by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 18 Sep 2024 20:55:27 -0700
-X-CSE-ConnectionGUID: Sh2/onytQsel1whuGlEA7Q==
-X-CSE-MsgGUID: pS+q1rk5TwerDkwtbkryPA==
+ 18 Sep 2024 20:55:32 -0700
+X-CSE-ConnectionGUID: SeSAzsmFQe+iiVZTSZ25MA==
+X-CSE-MsgGUID: Yn/YjNdzSF2yIzvkqpx/EQ==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.10,240,1719903600"; d="scan'208";a="70253698"
+X-IronPort-AV: E=Sophos;i="6.10,240,1719903600"; d="scan'208";a="70253705"
 Received: from pglc00481.png.intel.com ([10.221.239.164])
- by orviesa007.jf.intel.com with ESMTP; 18 Sep 2024 20:55:22 -0700
+ by orviesa007.jf.intel.com with ESMTP; 18 Sep 2024 20:55:27 -0700
 From: dinesh.maniyam@intel.com
 To: u-boot@lists.denx.de
 Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
@@ -69,9 +69,9 @@ Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
  Tingting Meng <tingting.meng@intel.com>,
  Jit Loon Lim <jit.loon.lim@intel.com>,
  Sieu Mun Tang <sieu.mun.tang@intel.com>
-Subject: [PATCH 01/19] dt: nand: add cadence nand dt-bindings
-Date: Thu, 19 Sep 2024 11:54:54 +0800
-Message-Id: <20240919035512.13854-2-dinesh.maniyam@intel.com>
+Subject: [PATCH 02/19] arm: dts: agilex5: Enabled cdns-nand dts setting
+Date: Thu, 19 Sep 2024 11:54:55 +0800
+Message-Id: <20240919035512.13854-3-dinesh.maniyam@intel.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20240919035512.13854-1-dinesh.maniyam@intel.com>
 References: <20240919035512.13854-1-dinesh.maniyam@intel.com>
@@ -95,120 +95,90 @@ X-Virus-Status: Clean
 
 From: Dinesh Maniyam <dinesh.maniyam@intel.com>
 
-The Cadence NAND is a configurable mtd raw block which
-supports multiple options for chipsets, clocking and reset structure, and
-feature list.
+This patch is to enable cdns-nand dts setting for the socfpga_agilex5
+family device.
 
 Signed-off-by: Dinesh Maniyam <dinesh.maniyam@intel.com>
 ---
- .../mtd/cadence,nand.yaml                     | 98 +++++++++++++++++++
- 1 file changed, 98 insertions(+)
- create mode 100644 doc/device-tree-bindings/mtd/cadence,nand.yaml
+ arch/arm/dts/socfpga_agilex5.dtsi             | 14 ++++++++++
+ .../arm/dts/socfpga_agilex5_socdk-u-boot.dtsi | 28 +++++++++++++++++++
+ 2 files changed, 42 insertions(+)
 
-diff --git a/doc/device-tree-bindings/mtd/cadence,nand.yaml b/doc/device-tree-bindings/mtd/cadence,nand.yaml
-new file mode 100644
-index 0000000000..11ce023ec6
---- /dev/null
-+++ b/doc/device-tree-bindings/mtd/cadence,nand.yaml
-@@ -0,0 +1,98 @@
-+# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/mtd/cadence,nand.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
+diff --git a/arch/arm/dts/socfpga_agilex5.dtsi b/arch/arm/dts/socfpga_agilex5.dtsi
+index 03b5504049..64665e499e 100644
+--- a/arch/arm/dts/socfpga_agilex5.dtsi
++++ b/arch/arm/dts/socfpga_agilex5.dtsi
+@@ -330,6 +330,20 @@
+ 			status = "disabled";
+ 		};
+ 
++		nand: nand@10b80000 {
++			compatible = "cdns,nand";
++			reg = <0x10b80000 0x10000>,
++				<0x10840000 0x1000>;
++			reg-names = "reg", "sdma";
++			#address-cells = <1>;
++			#size-cells = <0>;
++			interrupts = <0 97 4>;
++			clocks = <&clkmgr AGILEX5_NAND_CLK>;
++			resets = <&rst NAND_RESET>, <&rst COMBOPHY_RESET>;
++			cdns,board-delay-ps = <4830>;
++			status = "disabled";
++		};
 +
-+title: Cadence NAND controller
+ 		ocram: sram@00000000 {
+ 			compatible = "mmio-sram";
+ 			reg = <0x00000000 0x200000>;
+diff --git a/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi b/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi
+index 9eb21d6542..f9cca84ee3 100644
+--- a/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi
++++ b/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi
+@@ -41,6 +41,10 @@
+ 	/delete-property/ cdns,read-delay;
+ };
+ 
++&flash1 {
++	bootph-all;
++};
 +
-+maintainers:
-+  - Dinesh Maniyam <dinesh.maniyam@intel.com>
+ &i3c0 {
+ 	bootph-all;
+ };
+@@ -102,6 +106,10 @@
+ 	status = "okay";
+ };
+ 
++&nand {
++	bootph-all;
++};
 +
-+properties:
-+  compatible:
-+    enum:
-+      - cdns,nand
+ &timer0 {
+ 	bootph-all;
+ };
+@@ -122,3 +130,23 @@
+ 	bootph-all;
+ };
+ 
++&nand {
++	status = "okay";
 +
-+  reg-names:
-+    description: |
-+      There are two register regions:
-+        reg:  register interface
-+        sdma: host data/command interface
-+    items:
-+      - const: reg
-+      - const: sdma
++	flash1: flash@0 {
++		reg = <0>;
++		#address-cells = <1>;
++		#size-cells = <1>;
 +
-+  reg:
-+    minItems: 2
-+    maxItems: 2
++		partition@0 {
++			label = "u-boot";
++			reg = <0 0x200000>;
++		};
++		partition@200000 {
++			label = "root";
++			reg = <0x200000 0x3fe00000>;
++		};
++	};
++};
 +
-+  interrupts:
-+    maxItems: 1
 +
-+  clocks:
-+    description: |
-+      There is one controller core clock
-+    maxItems: 1
-+
-+  resets:
-+    description: |
-+      There are two resets:
-+        controller core reset
-+        combo-phy register reset
-+    minItems: 1
-+    maxItems: 2
-+
-+  cdns,board-delay-ps:
-+     description: |
-+        Estimated Board delay. The value includes the total
-+        round trip delay for the signals and is used for deciding on values
-+        associated with data read capture. The example formula for SDR mode is
-+        the following:
-+        board delay = RE#PAD delay + PCB trace to device + PCB trace from device
-+        + DQ PAD delay
-+     enum:
-+       - 4830
-+
-+patternProperties:
-+  "^nand@[a-f0-9]$":
-+    type: object
-+    properties:
-+      compatible:
-+        const: cdns,nand
-+
-+      reg:
-+        maxItems: 1
-+
-+      label:
-+        maxItems: 1
-+
-+required:
-+  - compatible
-+  - reg
-+  - interrupts
-+  - clocks
-+  - cdns,board-delay-ps
-+
-+unevaluatedProperties: false
-+
-+examples:
-+  - |
-+    nand-controller@60000000 {
-+        compatible = "cdns,nand";
-+        reg = <0x60000000 0x10000>, <0x80000000 0x1000>;
-+        reg-names = "reg", "sdma";
-+        #address-cells = <1>;
-+        #size-cells = <0>;
-+        clocks = <&clk>;
-+        cdns,board-delay-ps = <4830>;
-+        interrupts = <2 0>;
-+        nand@0 {
-+            label = "nand-0";
-+            reg = <0>;
-+        };
-+        nand@1 {
-+            label = "nand-1";
-+            reg = <1>;
-+        };
-+    };
 -- 
 2.26.2
 
