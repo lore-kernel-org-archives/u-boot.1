@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AA06CF3943
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 14:18:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 194C1CF3944
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 14:18:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F36689274;
-	Thu, 19 Sep 2024 16:14:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A65028927F;
+	Thu, 19 Sep 2024 16:14:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oR1Fv8zV";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="i0yqhBWF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 252DC8926B; Thu, 19 Sep 2024 16:14:26 +0200 (CEST)
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
- [IPv6:2607:f8b0:4864:20::634])
+ id F41638927D; Thu, 19 Sep 2024 16:14:27 +0200 (CEST)
+Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
+ [IPv6:2607:f8b0:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 14CF189266
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:14:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B6888891B3
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:14:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-2053525bd90so9756595ad.0
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 07:14:22 -0700 (PDT)
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-7198de684a7so620398b3a.2
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 07:14:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726755260; x=1727360060; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1726755264; x=1727360064; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=oWwKK31zBEOVCmzpSGxikkca1n+YRcTLvmG1ZFG8dJI=;
- b=oR1Fv8zVPOCGatx9hfsrVVRmfjBsV+k/pWbCaTBDlEbfaPfsXopsTtBnxeDw43qGrV
- rRQzJE7G6bBs/UR7BuTgQu6DANpd1LVdfPASSL/x4vuFK+5wAv9rCRD0lGDO57KSmGve
- kwEh+Gz46iKceEYNeX4qomWUkR1OlVUCv/w38=
+ bh=IQlCDOE8CN89Irbt1tKwKYGG49FHAjXUnA3S/UarS0w=;
+ b=i0yqhBWFjmHk6uaXBB0bsEg2YcN04t353AztWuvprRaksb/Ubp4I9R7DJxgjRq72gT
+ K4d0TivbvuaSF6QpMIjFKMqTThcoRn62baWcHbi0vV/sEQdflfIQiHTXwfBYX1c9mxEy
+ D8LKeBbJIHgAp49YIqJ3pKlWbSQaSWHE94r5I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726755260; x=1727360060;
+ d=1e100.net; s=20230601; t=1726755264; x=1727360064;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=oWwKK31zBEOVCmzpSGxikkca1n+YRcTLvmG1ZFG8dJI=;
- b=GbHN1Q+a++XdAhqX899VndzQQ+gf4gia/ZAdzcmDGVkmyiIr2uZnzxw8ZGpAy8uJlV
- 5wkf8IuAXiYgwcbJN3Y3Ij2/t7IKAFjqIxFv3qp81lV4YLiO5xFMouca53RD/bO/4K50
- A5ILpEh6VN4CUVlCczIBmRWBHehhmrvUOc2llBEgEUwEa/ywA05ZkuNMoNJP6TT1XpLV
- ER/w/w23WiyePFSEvL6uqCKRbpLOZrlBGPu+sBJKn0LcM0FkYRKwO/2yHdqdj+FfdY/H
- O9WU65K6224KrJUJtVDwyKd+QpiXIn37kDPfVJatpfllkc7shmdKnGGtDEvkezJ8GtRV
- eZQQ==
+ bh=IQlCDOE8CN89Irbt1tKwKYGG49FHAjXUnA3S/UarS0w=;
+ b=B0giuzgPVrGrI5Px0lOc3wl10bXTKlafO6RXQ5TRXIA+dSaBEDbYOmZHjwOuvMCdUs
+ /TmPSjizmZqqF9hUenfVB6fjSiKC8lamgjUseem17MVJt2Uk9/qGi+HkLsyKxk6UNe65
+ UcR/0G6LtRwkPrbb/pv7W1DdNzkzEu5VSbUS7oGUrBhSpm6dcmLFZwsBk/qvsKjN34L4
+ nvDT+PDdo7ngpy0aJBWkidwMWyGNPEreZ5owwbLUsVO0xAFemxer0bgZqCekwbrPxGpT
+ iCGend55ubftB1PtnE+Ymi8JNLoPsWq8M2XdCDTkML9CcjLjLVg8ITNsbmHoL1rnsini
+ vX1A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUmMwMB6R+Jp3KQcJ2c/OGYdKs2YVP1oYWMlQHMUcnQJ2beIrDBkl+OODbOZy3uaER4jj5qQVQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy1364qE5BjZ+n1S6eLZo5gFC9EfMSEwWjQC72ca0MwrglOg5T2
- GAPXbkMAl2z8NxEsClNo0g1+zeQB6r5Dgx/t283tdOUeJfn6GNiKAhq88XXG4LyiATfH7kD4cNe
- rGBJy2svj1kL3IZEFPPnlT2WV1p0M1/3ZykvB
-X-Google-Smtp-Source: AGHT+IFTd/Hffgi1gZdj7Py5rgcp9g/fH3MW1BFaitpfulkJQqfXweP5nVhfdY9G8IBQ9hQmGqg0XUwF0v0NWq1vg9w=
-X-Received: by 2002:a17:90a:b781:b0:2c4:b0f0:8013 with SMTP id
- 98e67ed59e1d1-2dbb9def9e4mr25848695a91.11.1726755260604; Thu, 19 Sep 2024
- 07:14:20 -0700 (PDT)
+ AJvYcCWaSP4gqirJ/j47SdXTZ/25dqO8lYNhffd+K9MGYfIANmr9YkLhga0XpYQru7Cl9kw+1GVNlKM=@lists.denx.de
+X-Gm-Message-State: AOJu0YySUBihFRgMyg5pd13rSM6o1ZZeWp/+vZ0i6tptbl0PknsLTXUV
+ Oca+N/FXP2GrLyRyMQtJKNYAZLlosiSBVreOWscXvYIoH3RLZ0+/KsRekeZAODcuh5Wv2yThfeo
+ lvEivIrnznuYbOkl+3r3ZCP8WGBSTZ6Edcvsd
+X-Google-Smtp-Source: AGHT+IEHmikCRT9YVMTnUQ0bk1TF9iw0Uy9+gwwbMnCk0/nh8wM5G8oONdrs2CVAy5l7RQyfvaHbpBwwbuYA4ohoJv4=
+X-Received: by 2002:a05:6a20:8428:b0:1cf:ff65:3680 with SMTP id
+ adf61e73a8af0-1cfff653b08mr41270727637.6.1726755264307; Thu, 19 Sep 2024
+ 07:14:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAFLszThRq1MmeAukYW+uwe5nBiku94qXALLMZ4S9ySFfbW0AkA@mail.gmail.com>
- <20240827165025.GN2479150@bill-the-cat>
- <CAFLszTgD6aeYziHHJrsbYgP+eWTR6GJ+BJNvoitPZCyJpyV-8Q@mail.gmail.com>
- <20240827214330.GP2479150@bill-the-cat>
- <CAFLszTiywgEjTB2s4Zmz4vcmqLhRXLcbTnJGyig3b38c9Y2KUw@mail.gmail.com>
- <dd2e2ce8-9825-4bce-90f6-7e08fe7e3da0@cherry.de>
-In-Reply-To: <dd2e2ce8-9825-4bce-90f6-7e08fe7e3da0@cherry.de>
+References: <20240902011825.746421-1-sjg@chromium.org>
+ <20240902011825.746421-11-sjg@chromium.org>
+ <d421b72a-eb0a-4aa8-be6e-3825c8b08da6@gmx.de>
+ <CAFLszTjRSoWr0uncOdMY=6Oc4dnLP7gH2hj0BgDF67ukQEmmdw@mail.gmail.com>
+ <20240916163319.GG4252@bill-the-cat>
+ <CAFLszTgVi7nzE2AxBb_u73r+dSWny_geSpXmNKG8NR1SQWhXJQ@mail.gmail.com>
+ <20240917165958.GM4252@bill-the-cat>
+In-Reply-To: <20240917165958.GM4252@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 19 Sep 2024 16:13:59 +0200
-Message-ID: <CAFLszThdqdUyr4dsH2ms32r3ux1c+exFh1Vrk7bY1XiDQR9eJQ@mail.gmail.com>
-Subject: Re: xPL terminology
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- U-Boot Custodians <u-boot-custodians@lists.denx.de>
+Date: Thu, 19 Sep 2024 16:14:00 +0200
+Message-ID: <CAFLszTjoA-=wSh2qbqHHnhp9taHoVXzamiCNFDFdMvYY7K7j2A@mail.gmail.com>
+Subject: Re: [PATCH v5 10/14] efi_loader: Disable ANSI output for tests
+To: Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,103 +91,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-HI Quentin,
+Hi Tom,
 
-On Mon, 2 Sept 2024 at 10:57, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+On Tue, 17 Sept 2024 at 19:00, Tom Rini <trini@konsulko.com> wrote:
 >
-> Hi Simon,
->
-> On 8/30/24 3:06 AM, Simon Glass wrote:
+> On Tue, Sep 17, 2024 at 05:54:36AM +0200, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Tue, 27 Aug 2024 at 15:43, Tom Rini <trini@konsulko.com> wrote:
-> >>
-> >> On Tue, Aug 27, 2024 at 01:24:59PM -0600, Simon Glass wrote:
-> >>> Hi Tom,
-> >>>
-> >>> On Tue, 27 Aug 2024 at 10:50, Tom Rini <trini@konsulko.com> wrote:
-> >>>>
-> >>>> On Sun, Aug 25, 2024 at 07:07:23AM -0600, Simon Glass wrote:
-> >>>>
-> >>>>> Hi,
-> >>>>>
-> >>>>> We have the term 'SPL', which has a dual meaning. It is both a
-> >>>>> particular phase of U-Boot (the one that loads U-Boot proper) and a
-> >>>>> generic name for any pre-proper phase.
-> >>>>>
-> >>>>> You can see that in a few areas, but for example CONFIG_SPL_BUILD is
-> >>>>> enabled for TPL and VPL builds, not just SPL.
-> >>>>>
-> >>>>> I propose to rename the generic term from SPL to xPL (meaning any PL
-> >>>>> phase), leaving SPL to just refer to the phase before U-Boot proper.
-> >>>>>
-> >>>>> The symbol would be CONFIG_XPL but in documentation we would talk of
-> >>>>> xPL, with a lower-case X, so it is more obvious that it refers to any
-> >>>>> phase.
-> >>>>>
-> >>>>> What do you think?
-> >>>>
-> >>>> I still worry this is just another part of the long symptom of needing
-> >>>> to re-work how we configure / build as we have 1 case of "build things
-> >>>> this way" (full U-Boot) and N cases of "build things another way" (SPL,
-> >>>> TPL, VPL, UPL?). And really we need a way to short-hand
-> >>>> "fooboard_defconfig" means "fooboard_spl_defconfig +
-> >>>> fooboard_tpl_defconfig + fooboard_SOMETHING_defconfig".
-> >>>
-> >>> IMO my XPL series does this, at least for some definition of this. I'd
-> >>> really like to get that in as it would make all of this much easier.
-> >>
-> >> Yeah, what I recall of your XPL series was that it made a lot of changes
-> >> I didn't like and highlighted what I thought was that yes, really
-> >> Yamada-san was right all along and we need a different way of
-> >> configuring + building.
-> >>
-> >> I had even today thought that we could possibly
-> >> get away with some shorthand where if for "fooboard_defconfig" we _also_
-> >> had "fooboard_spl_defconfig" we knew to build in ${O}/spl/ the spl
-> >> variant. It would be harder for cases where we have "fooboard_defconfig"
-> >> and "fooboard_hs_defconfig" that both need "fooboard_spl_defconfig", but
-> >> it would cover many cases at least. Anyhow...
+> > On Mon, 16 Sept 2024 at 18:33, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Mon, Sep 16, 2024 at 05:42:12PM +0200, Simon Glass wrote:
+> > > > Hi Heinrich,
+> > > >
+> > > > On Thu, 12 Sept 2024 at 08:58, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> > > > >
+> > > > > On 02.09.24 03:18, Simon Glass wrote:
+> > > > > > We don't want ANSI characters written in tests since it is a pain to
+> > > > > > check the output with ut_assert_nextline() et al.
+> > > > > >
+> > > > > > Provide a way to tests to request that ANSI characters not be sent.
+> > > > > >
+> > > > > > Add a proper function comment while we are here, to encourage others.
+> > > > > >
+> > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > >
+> > > > >
+> > > > > This patch was already NAKed in the last version.
+> > > > >
+> > > > > Please, adjust the test framework if you need filtering.
+> > > >
+> > > > In what way should it be adjusted? I hope you are not suggesting that
+> > > > sandbox should try to filter out ANSI characters in its assertions?
+> > >
+> > > Well, perhaps the pytest framework should be filtering it out? And
+> > > again and to be clear, I can't reliably run these tests on _hardware_
+> > > because of the ANSI characters tripping things up, this is not a
+> > > "sandbox" problem.
 > >
-> > We should discuss this sometime as it has come up once or twice
-> > before. Given the dependencies between XPL and proper and don't think
-> > we can sensible split into separate files, let alone separate the
-> > Kconfig. In fact I still believe that we need a small Kconfig-language
-> > addition to support this sort of thing and avoid duplicating the rules
-> > everywhere*. I believe I might have even done a patch for it. We got
+> > Honestly, this approach (creating a problem and then dealing with it
+> > downstream) is just not the way things should be.
 >
-> I thought about this already, one of the issues being that it is not
-> guaranteed that the dependencies for a symbol for xPL will be the same
-> for yPL nor for proper, so we still need a way to override those from a
-> redefinition of the symbol (or any other mechanism). I may misremember
-> but I think one of the most straightforward issue was that most (all)
-> proper have DM support while xPL do not necessarily have to (and there
-> usually is the xPL loaded by BootROM, limited by SRAM size, that does
-> not have DM support).
+> I don't follow, sorry.
 
-Indeed, they can have different values in TPL and SPL, for example.
+I'm not sure I do either. I thought you were saying that the ANSI
+characters should be generated and then some other feature should
+filter them out, so that tests can pass.
 
-My idea for the Kconfig-language addition was [1]
+My point then was that it doesn't make any sense to generate something
+which causes a problem...just fix the issue at its source and don't
+generate the characters.
 
 >
-> But this has been a big pain of mine, with proper symbols usually being
-> properly configured wrt dependencies and Makefile, but a lot of corner
-> cases missed for xPL, especially wrt Make rules.
-
-Yes...well, my series actually simplified all the rules and got rid of
-$(SPL_TPL) etc.
-
+> > As an alternative, I can send a patch to remove the code which blindly
+> > sends commands to a terminal which may or may not be there. That would
+> > be more correct than what we have today. We can then discuss how to
+> > add ANSI back, with due thought to its downstream impact.
 >
-> FWIW, I've always been confused by CONFIG_SPL_BUILD not being for SPL
-> but anything !proper (to the point I always have to check whenever I see
-> this symbol).
+> I admit I only get as far as "Oh, selftest failed and look at all that
+> escape sequence and such in the log" which I take as pytest choked on
+> the output. Maybe we have different issues?
+>
+> > It's not great that  this discussion is still happening on a v5 patch.
+> > There has been plenty of opportunity to provide an alternative option.
+> > I doubt any exists.
+>
+> Well, it's _also_ true that people have been providing feedback earlier
+> in the series and requesting changes and I don't know if it's missed
+> because you were dropped from the list again or buried in your inbox or
+> what. But you repost and don't drop / change patches that there's not
+> yet agreement on.
 
-Yes, it is really not what you would expect.
+I do seem to miss emails every now and then, as I regularly get
+dropped from the list and have to re-subscribe.
 
-I added an issue at [2]
+But in this case the suggestion to add filtering does not make any
+sense, so I have rejected it. The solution I have here is the best
+approach I can think of.
 
 Regards,
 Simon
-
-[1] https://patchwork.ozlabs.org/project/uboot/patch/20230219145453.1.Idaaf79c3e768b85750d5a7eb732052576c5e07e5@changeid/
-[2] https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/26
