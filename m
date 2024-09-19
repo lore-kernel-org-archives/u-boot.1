@@ -4,75 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10248CF3959
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 14:40:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5706ACF395A
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 15:00:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C98C89211;
-	Thu, 19 Sep 2024 16:40:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 588E989198;
+	Thu, 19 Sep 2024 17:00:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="k7lklHa5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AcTTjmHz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81AC289217; Thu, 19 Sep 2024 16:40:07 +0200 (CEST)
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
- [IPv6:2607:f8b0:4864:20::62c])
+ id B13B089198; Thu, 19 Sep 2024 17:00:27 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CAC6788BBC
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:40:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 85615891C5
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 17:00:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-206aee40676so9339185ad.0
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 07:40:04 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-710d2cf2955so585183a34.1
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 08:00:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726756803; x=1727361603; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1726758024; x=1727362824; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6u7/Vnr4a/mp7aHAQFitBwfXpLqhjDhL6qKVbOWw4jM=;
- b=k7lklHa517BnDiFuoGRgBlW81JsaBQLHp+dZf3okaFN0Dy4kNSIS3nFWYQFoeag07N
- tesUumPJ9E7/H9VcM1QiOUErRAAGlu5U+sogdCSVA5BxJ0fsykmUOCjb1vbmPEfPXQDz
- /zADxN/Z73PjSTBZx8iVnGETSA3s688JucApb53I+LZh5ncm1a2PR2Yh7rMWyiBm08Mc
- w28meYI4OFdF6E/l6TtntSkj5iSom71FNh1FocdGAHGKSAmmZSAAYitg4EJGnsOo20il
- v8Oj6PCDQRICwQnS2SByCScEIztx9szNJtGrleD4hAwZ2TRm1EgO+Nfd7+NFG2I63xXH
- ETgg==
+ bh=3DvaNs0WE6AdX4opbQ4I6dDd04VWYtX1gxlmqMeV6dU=;
+ b=AcTTjmHzY6HqK4cvIARrSMPb6INE8E3nwueaxA4zeIdITHjOaP/j6azy7+hJjhUNZf
+ eQHz8FhkvVmb9Zh7zu2EKnO+TzIIN19UBAS3fVqov6teXlinxIAMlswR4NzcvIwdsXvN
+ pE6rgUz8qctspiJtV5J2q1GomyCfDdPt2cBTI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726756803; x=1727361603;
+ d=1e100.net; s=20230601; t=1726758024; x=1727362824;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=6u7/Vnr4a/mp7aHAQFitBwfXpLqhjDhL6qKVbOWw4jM=;
- b=MLdj+QPgC+PXHDEmiFLINCA0m7PblBp9MmAQzm5AiPPYWvpfCfABUj6bA6F2zAGwXR
- Ki1DUENMDxH6kSxz8/axRTWlzgkpTWA7ykFCxVG0nIoKEHSbxN4zpKOUDdTjAIOqBzS2
- g5LOiU6CR1/ZaJF+iGEExcSeUkij0ojxN3F8mpD/8z6Bcv7ZH8TXq1LAk4Jqd8nuxM2p
- s2C+i9C+XC61t1LNcGCOKaPWGw8aKdBgtCQS7+0i/uMwgjao5SPAh+HKyGkaPYAUIDvD
- xAJU3v3NhjbzzLcln36JUr63co4NCXNbKWhMcsXcwHXQzW09Oo34wmcZn81dF1OREkIC
- P6BQ==
+ bh=3DvaNs0WE6AdX4opbQ4I6dDd04VWYtX1gxlmqMeV6dU=;
+ b=Ws/bZaU/ecRnRyuUrLW212Z3KwIRsXWeJKrWNpUJ/ihkKSPs9ZCKTgiMhGdjCZJHOQ
+ 4J2ZDaSV94LHAbvCzG2qOGckkAV3A2W8EzUorEx4aSyd+O044ctam4l/ZAKcDPl5Ehkm
+ hR9RkP74YbZbvKUufptJvV79qWSEzcm2uZ0dVfgIplvseQcKLprt9fDagZv3b6bmVfA+
+ iiZ+UwxqzCaLSqyTDNQae0Y58ZL1u4JZPb6pinnBUu/u6wDt8hDz9iUltoNb0j371U7+
+ PkJeGuV/wSmTeNXQ7n8um9NNb3hRa8s9RmrRVxCEOm8fxQmBP92mMwzkwiuC6dI/6Ml0
+ 1U5g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUba7qOMIneM6EzoJG7f1ztEzk82C4677DFgyOdsE1g8h7FnknYfT8bMI8OgFE1z77Wi60f+2o=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz/njxgLx+N92I2FoENgHaeLTsvUJR8ODDqUYg05ODbmlOFd0At
- na1Dw33FPbCswuypdYNCO7i0wD7zHzzXL7j2jQrKXggchX1BVgAWnrFCCuP6RUyao67Jnq7odjT
- yg5l8eVM2E4TCb2zTt7oyrRX+h/skiOr1YFa0M0Jv2xoshdQe
-X-Google-Smtp-Source: AGHT+IFqZ/6wqLGuGU/4nPiNsTAky9qTo77XP5ct0dnExEQA07Lf9lj/kEEu3SGUeHbAFz3oaVbdXDyQRT2gkr6zLnc=
-X-Received: by 2002:a17:902:ccd1:b0:205:8275:768 with SMTP id
- d9443c01a7336-20782943d29mr314356385ad.21.1726756803218; Thu, 19 Sep 2024
- 07:40:03 -0700 (PDT)
+ AJvYcCWe4BHudoug52GqOmbcUhf/Y2bFgC5yrHFKby0UN2dASciRA7aeThWnVI+tPLyieXHy+1XL1dg=@lists.denx.de
+X-Gm-Message-State: AOJu0YyupvzL1mpr8Ie2DBuwuJoJa+lFvscTsKcgTy8q2Z1GX1ZsoqxI
+ 5LUqFFhsnBvBjm2RmLsdFjIj7Vp4r9Q3qvTNdcaYIGi39PMnOqLNobjSjsz2YmQLaWSQ3Gp2x4X
+ tldLznXJgV4uHRi2BwYo9zY28VUhCRYAISDbX
+X-Google-Smtp-Source: AGHT+IFDfeuRtbtB/KCv+GFee/GGqzg9gr/w8QvNjYzV4sjZHolLUwScLgA22Z3U8E2UqvkNpdL73K7UL2s2HOHZSvA=
+X-Received: by 2002:a05:6358:71c6:b0:1b8:34fb:9696 with SMTP id
+ e5c5f4694b2df-1bb14e3ee1amr745845455d.14.1726758024210; Thu, 19 Sep 2024
+ 08:00:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240918152136.3395170-1-patrick.rudolph@9elements.com>
- <20240918152136.3395170-15-patrick.rudolph@9elements.com>
- <CAFLszTimAFGocvqbnT=JVsA2bjNa=ZfxP6Sy46a9e6VkhtdojQ@mail.gmail.com>
-In-Reply-To: <CAFLszTimAFGocvqbnT=JVsA2bjNa=ZfxP6Sy46a9e6VkhtdojQ@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 19 Sep 2024 17:39:26 +0300
-Message-ID: <CAC_iWjLASm6U8kC68MJ0uZ14MGFS_SSL3Pcd8hcEH=a=W8gvBQ@mail.gmail.com>
-Subject: Re: [PATCH v4 14/35] efi_loader: Allocate and write ACPI tables
-To: Simon Glass <sjg@chromium.org>
-Cc: Patrick Rudolph <patrick.rudolph@9elements.com>, u-boot@lists.denx.de, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
+References: <20240914160548.42551-1-heinrich.schuchardt@canonical.com>
+ <CAFLszTjL46Gb03MS7znLujAKC0VkgOrUaZMy7XPw-jpw3TELTA@mail.gmail.com>
+ <d95b95d2-7afb-42f2-9a01-75d601368be9@canonical.com>
+ <CAC_iWjLCnUpnVGuVYnhzo4EaUmKMSZPws3hSzOOvQqirC71hfQ@mail.gmail.com>
+In-Reply-To: <CAC_iWjLCnUpnVGuVYnhzo4EaUmKMSZPws3hSzOOvQqirC71hfQ@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 19 Sep 2024 17:00:13 +0200
+Message-ID: <CAFLszTimJuwFKp6DaRDJ22=0tbNPYbcLMT9hcFrC9Rca6vzAyg@mail.gmail.com>
+Subject: Re: [PATCH 1/1] efi_leader: delete rng-seed if having EFI RNG protocol
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,180 +87,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi,
+
+On Thu, 19 Sept 2024 at 16:32, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> Hi all,
+>
+> On Thu, 19 Sept 2024 at 17:20, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+> >
+> > On 19.09.24 16:10, Simon Glass wrote:
+> > > Hi Heinrich,
+> > >
+> > > On Sat, 14 Sept 2024 at 18:06, Heinrich Schuchardt
+> > > <heinrich.schuchardt@canonical.com> wrote:
+> > >>
+> > >> For measured be boot we must avoid any volatile values in the device-tree.
+> > >> We already delete /chosen/kaslr-seed if we provide and EFI RNG protocol.
+> > >
+> > > Could you explain a bit why this is, and where this is checked?
+> > >>
+> > >> Additionally remove /chosen/rng-seed provided by QEMU or U-Boot.
+> >
+> > Measured boot relies on creating hashes of artifacts and writing these
+> > to TPM. If the hashes don't match the OS will either warn or refuse to
+> > boot. The device-tree is one of the artifacts that are measured.
+> >
+> > If we have random values in /chosen, measured boot will fail.
+> >
+> > When an EFI RNG protocol is provided by the firmware, GRUB and the
+> > kernel will use it instead of /chosen/rng-seed and /chosen/kaslr-seed.
+>
+> There's a comment on top of that function that explains what happens as well.
+> In short the EFI stub does not even look at the KASLR seed and never
+> randomizes the physical placement of the kernel. It only does that
+> when the EFI_RNG protocol is there.
+
+OK thank you. I suppose I am more just wondering why it got added in
+the first place?
+
+Regards,
+Simon
 
 
-On Thu, 19 Sept 2024 at 17:10, Simon Glass <sjg@chromium.org> wrote:
 >
-> Hi Patrick,
->
-> On Wed, 18 Sept 2024 at 17:22, Patrick Rudolph
-> <patrick.rudolph@9elements.com> wrote:
+> Regards
+> /Ilias
 > >
-> > Allocate memory for ACPI tables inside the efi_loader and write out
-> > the tables similar to SMBIOS tables. When ACPI is enabled and wasn't
-> > installed in other places, install the ACPI table in EFI. Since EFI
-> > is necessary to pass the ACPI table location when FDT isn't used,
-> > there's no need to install it separately.
+> > Best regards
 > >
-> > When CONFIG_BLOBLIST_TABLES is set the tables will be stored in a
-> > bloblist. The tables are still passed to the OS using EFI.
+> > Heinrich
 > >
-> > This allows non x86 platforms to boot using ACPI only in case the
-> > EFI loader is being used.
+> > >>
+> > >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > >> ---
+> > >>   include/efi_loader.h          |  2 +-
+> > >>   lib/efi_loader/efi_dt_fixup.c | 15 ++++++++++-----
+> > >>   lib/efi_loader/efi_helper.c   |  2 +-
+> > >>   3 files changed, 12 insertions(+), 7 deletions(-)
+> > >
+> > > [..]
+> > >
+> > > Regards,
+> > > Simon
 > >
-> > TEST: Booted QEMU SBSA (no QFW) using EFI and ACPI only.
-> >
-> > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-> > Cc: Simon Glass <sjg@chromium.org>
-> > Cc: Tom Rini <trini@konsulko.com>
-> > ---
-> > Changelog v3:
-> > - Drop memalign and use efi_allocate_pages
-> > - Use log_debug instead of debug
-> > - Clarify commit message
-> > - Skip writing ACPI tables on sandbox
-> > - Rename function
-> > - Add function comment
-> > ---
-> >  lib/efi_loader/efi_acpi.c        | 80 +++++++++++++++++++++++++++++++-
-> >  test/py/tests/test_event_dump.py |  1 +
-> >  2 files changed, 79 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/lib/efi_loader/efi_acpi.c b/lib/efi_loader/efi_acpi.c
-> > index 67bd7f8ca2..9d38d0060c 100644
-> > --- a/lib/efi_loader/efi_acpi.c
-> > +++ b/lib/efi_loader/efi_acpi.c
-> > @@ -6,15 +6,23 @@
-> >   */
-> >
-> >  #include <efi_loader.h>
-> > -#include <log.h>
-> > -#include <mapmem.h>
-> >  #include <acpi/acpi_table.h>
-> >  #include <asm/global_data.h>
-> > +#include <asm/io.h>
-> > +#include <bloblist.h>
-> > +#include <linux/sizes.h>
-> > +#include <linux/log2.h>
-> > +#include <log.h>
-> > +#include <malloc.h>
-> > +#include <mapmem.h>
-> >
-> >  DECLARE_GLOBAL_DATA_PTR;
-> >
-> >  static const efi_guid_t acpi_guid = EFI_ACPI_TABLE_GUID;
-> >
-> > +enum {
-> > +       TABLE_SIZE      = SZ_64K,
-> > +};
-> >  /*
-> >   * Install the ACPI table as a configuration table.
-> >   *
-> > @@ -47,3 +55,71 @@ efi_status_t efi_acpi_register(void)
-> >         return efi_install_configuration_table(&acpi_guid,
-> >                                                (void *)(ulong)addr);
-> >  }
-> > +
-> > +/*
-> > + * Allocate memory for ACPI tables and write ACPI tables to the
-> > + * allocated buffer.
-> > + *
-> > + * Return:     status code
-> > + */
-> > +static int alloc_write_acpi_tables(void)
-> > +{
-> > +       u64 table_addr, table_end;
-> > +       u64 new_acpi_addr = 0;
-> > +       efi_uintn_t pages;
-> > +       efi_status_t ret;
-> > +       void *addr;
-> > +
-> > +       if (!IS_ENABLED(CONFIG_GENERATE_ACPI_TABLE))
-> > +               return 0;
-> > +
-> > +       if (IS_ENABLED(CONFIG_X86) ||
-> > +           IS_ENABLED(CONFIG_QFW_ACPI) ||
-> > +           IS_ENABLED(CONFIG_SANDBOX)) {
-> > +               log_debug("Skipping writing ACPI tables as already done\n");
-> > +               return 0;
-> > +       }
-> > +
-> > +       /* Align the table to a 4KB boundary to keep EFI happy */
-> > +       if (IS_ENABLED(CONFIG_BLOBLIST_TABLES)) {
-> > +               addr = bloblist_add(BLOBLISTT_ACPI_TABLES, TABLE_SIZE,
-> > +                                   ilog2(SZ_4K));
-> > +
-> > +               if (!addr)
-> > +                       return log_msg_ret("mem", -ENOMEM);
-> > +       } else {
-> > +               pages = efi_size_in_pages(TABLE_SIZE);
-> > +
-> > +               ret = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES,
-> > +                                        EFI_ACPI_RECLAIM_MEMORY,
-> > +                                        pages, &new_acpi_addr);
-> > +               if (ret != EFI_SUCCESS)
-> > +                       return log_msg_ret("mem", -ENOMEM);
-> > +
-> > +               addr = (void *)(uintptr_t)new_acpi_addr;
-> > +       }
-> > +
->
-> The tables should be written regardless of whether EFI_LOADER is enabled.
-
-*Why*? How do you expect to hand them over to the OS?
-
->
-> Can we drop this else clause? We should always use the bloblist.
-
-Both Heinrich and I said the exact opposite. Unless there's a
-perfectly good reason why we should keep them in bloblist memory, I'd
-like us to do that
-
-Thanks
-/Ilias
->
-> We should use efi_add_memory_map() to add to the memory map.
->
-> > +       table_addr = virt_to_phys(addr);
-> > +
-> > +       gd->arch.table_start_high = table_addr;
-> > +
-> > +       table_end = write_acpi_tables(table_addr);
-> > +       if (!table_end) {
-> > +               log_err("Can't create ACPI configuration table\n");
-> > +               return -EINTR;
-> > +       }
-> > +
-> > +       log_debug("- wrote 'acpi' to %llx, end %llx\n", table_addr, table_end);
-> > +       if (table_end - table_addr > TABLE_SIZE) {
-> > +               log_err("Out of space for configuration tables: need %llx, have %x\n",
-> > +                       table_end - table_addr, TABLE_SIZE);
-> > +               return log_msg_ret("acpi", -ENOSPC);
-> > +       }
-> > +       gd->arch.table_end_high = table_end;
-> > +
-> > +       log_debug("- done writing tables\n");
-> > +
-> > +       return 0;
-> > +}
-> > +
-> > +EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, alloc_write_acpi_tables);
-> > diff --git a/test/py/tests/test_event_dump.py b/test/py/tests/test_event_dump.py
-> > index e282c67335..459bfa26bb 100644
-> > --- a/test/py/tests/test_event_dump.py
-> > +++ b/test/py/tests/test_event_dump.py
-> > @@ -18,6 +18,7 @@ def test_event_dump(u_boot_console):
-> >  --------------------  ------------------------------  ------------------------------
-> >  EVT_FT_FIXUP          bootmeth_vbe_ft_fixup           .*boot/vbe_request.c:.*
-> >  EVT_FT_FIXUP          bootmeth_vbe_simple_ft_fixup    .*boot/vbe_simple_os.c:.*
-> > +EVT_LAST_STAGE_INIT   alloc_write_acpi_tables         .*lib/efi_loader/efi_acpi.c:.*
-> >  EVT_LAST_STAGE_INIT   install_smbios_table            .*lib/efi_loader/efi_smbios.c:.*
-> >  EVT_MISC_INIT_F       sandbox_early_getopt_check      .*arch/sandbox/cpu/start.c:.*
-> >  EVT_TEST              h_adder_simple                  .*test/common/event.c:'''
-> > --
-> > 2.46.0
-> >
->
-> REgards,
-> Simon
