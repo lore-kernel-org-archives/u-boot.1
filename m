@@ -4,94 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65E1ECF395D
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 17:29:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69530CF3962
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 17:29:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29799892B9;
+	by phobos.denx.de (Postfix) with ESMTP id 86023892C5;
 	Thu, 19 Sep 2024 19:29:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aESNq109";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SjQT2Ajq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 26132891F7; Thu, 19 Sep 2024 16:12:02 +0200 (CEST)
-Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
- [IPv6:2607:f8b0:4864:20::42c])
+ id 4F08A89219; Thu, 19 Sep 2024 16:45:21 +0200 (CEST)
+Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
+ [IPv6:2607:f8b0:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A038089216
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:11:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 425E789205
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:45:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x42c.google.com with SMTP id
- d2e1a72fcca58-718d91eef2eso593016b3a.1
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 07:11:59 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=konnorrigby@gmail.com
+Received: by mail-il1-x12b.google.com with SMTP id
+ e9e14a558f8ab-39f51934f61so3581415ab.2
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 07:45:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726755118; x=1727359918; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=gPW+Poi1FJhbuFAYgw5+8pjlGSE8C4GCCFye7URGxWo=;
- b=aESNq109x7xutP0f77cKsRFpmcoHz/73t0vZRkmTAT3MuwJvvHO5voO5AYpzmqUtfh
- GG25afinoXlW/VdV6nItVBoaghbY76cCbBKlM5JnQkXmGSjo5Rmqd4ZCdnQjo4J6S0xE
- opwh1xN3G1fluqJO3dGSpTH2GLCYH39W/4c4A=
+ d=gmail.com; s=20230601; t=1726757118; x=1727361918; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=XmgcboKqjwVvcT4k8lid1BzjtMvSWQERJjFm1cYeYdg=;
+ b=SjQT2AjqWuosq0hlwSR1lNVjvfS1zps4wl5uFUnDFNg9WR7fW9DChLz2GRr9BmSD3I
+ 5+xZbcMklVRiNcgzJuyH6IjvFFjBt5WCS/pa7+xZs48G2sHcYrB1sUOfhrJXlkCsuO7e
+ MGCmN5L4iJgMszF9s2c6m9ldZcuxp9EZiMTOHRlZKvn8T2wginaW1mF1haCmAEyHBjUd
+ 7WxKrHikzH1aktB7w1dcn+FMvkFs0VguipSkGvWH07sf5cQMfeLy/Gr4l3Hqw3yRTX1m
+ 5mXbBdZrwaBbsHb683tx1g/7L2EWh6eKojgoZNiuVpsFG0XrFguQMRQ+JUwdiR8reHdn
+ t1sw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726755118; x=1727359918;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1726757118; x=1727361918;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=gPW+Poi1FJhbuFAYgw5+8pjlGSE8C4GCCFye7URGxWo=;
- b=lx27C4UKntaMmOxeXmswSkLrR2/4vF5TJfST/sWflZEbUr4M/JJMNEhl/+e6WpNOiX
- H0Tgu0KFTXAyrmX6tPyxyru+mO4G+q14YVhc7jotr9yX2KRY0Oup1LMERIeQyJ/rLM5X
- /PkHpFeECSLx4K/i3uddE5Hd5kcsN1hm+JW9+9zki3zcUdLG/+pHdPF3bRrYCT6x/I8c
- 9xBUUf754IHqDbH+LtB4etF/AezsyHa7BWBVai8yA8L1rrKquJSBGemEc6fleQX62lvr
- GbApKBw8mOm1GRuRaS57V1/yWF3wejhhUDLdoUA0cpM1q4Cm1f6KNvOVgdUSQZVY4MYO
- Iqxg==
-X-Gm-Message-State: AOJu0Yz2rAiRJYwpB1JEVUTNqtODOLC/AbwrugeBjTSWae33YGViKxQF
- PV/iHsfpOBG5lEWGf8sTNJkEK8dIHS1ear2mOsIP+d3wB/gWHRlxmVhEDTQWtNr2baOixM6pvJ2
- dkXmoHN2nWcktkAHrc57PiwTFSsEVntlo5+U5
-X-Google-Smtp-Source: AGHT+IFzaXSEILjm/X26Ji3RG2+Gx0cxw/6eDlu9UaaI8w3vqmLGc8JMwnbiz2ZUqkGe7OzeGc2xB2tZ9Kh0O5e4/6k=
-X-Received: by 2002:a05:6a00:2287:b0:714:228d:e9f2 with SMTP id
- d2e1a72fcca58-7198e25e649mr5369428b3a.3.1726755117868; Thu, 19 Sep 2024
- 07:11:57 -0700 (PDT)
+ bh=XmgcboKqjwVvcT4k8lid1BzjtMvSWQERJjFm1cYeYdg=;
+ b=RDBA9Xrs3ALMzbw/vQgWpQTdZMu71gBn4slDj2wqlj21yRGGN340BtXl0pvwl8xHj6
+ 2c/pCCCVqnhiFLgK5187jqoe4P4RXKGw8btM0VatF3krNox0VQqT5PFBlGkCo852rmWv
+ jsuiS3rTMb5PxFT7CykYIoIK+0TIbOghYEAs+4gWgy8BF0gvd9Gz/LBDTbMPWdEhbMfV
+ ssfbC+nNCB89PPxBJba1ZLMKscophexhYtUBBu4qiAIyC2rQ1q3xMMbiMjbUMeHgHgiw
+ tX88V+i3ay95cyzkRK1QcNGnldCmgnn+WXmPy4aGpQJ4chyOIHZodzgTR4gPtWOKZscn
+ rL/g==
+X-Gm-Message-State: AOJu0YxYMlR11QQAKVG+FvU0egy/wzC28pfUSFlLus/SFqK0rE75KtIR
+ 3zmn/+KUdbTB5LKwSNl6zkNUk+MaiVd23cCop7a+qvltrZjJqNrf76ML4wSN
+X-Google-Smtp-Source: AGHT+IFzoQi0EuoFEGUoFSB3zXGZOTPbp4+YbXzT8tNKAHRR41cI2rNdWEmG9HSpIqSnMXIUkprXrg==
+X-Received: by 2002:a05:6e02:1543:b0:39f:36f3:1957 with SMTP id
+ e9e14a558f8ab-3a08b6f7e96mr206683655ab.3.1726757117741; 
+ Thu, 19 Sep 2024 07:45:17 -0700 (PDT)
+Received: from connor-server.. (syn-068-189-053-090.res.spectrum.com.
+ [68.189.53.90]) by smtp.gmail.com with ESMTPSA id
+ e9e14a558f8ab-3a092e8fecasm34876145ab.80.2024.09.19.07.45.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Sep 2024 07:45:16 -0700 (PDT)
+From: Connor Rigby <konnorrigby@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Connor Rigby <konnorrigby@gmail.com>,
+ Alifer Moraes <alifer.wsdm@gmail.com>, Fabio Estevam <festevam@gmail.com>,
+ Marco Franchi <marcofrk@gmail.com>, Stefano Babic <sbabic@denx.de>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] arm: imx: fix board_mmc_init for google coral
+Date: Thu, 19 Sep 2024 08:45:07 -0600
+Message-Id: <20240919144507.249682-1-konnorrigby@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20240829145802.1827952-1-sjg@chromium.org>
- <58cd740a-da83-4ce2-91de-5fc228977e75@linaro.org>
-In-Reply-To: <58cd740a-da83-4ce2-91de-5fc228977e75@linaro.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 19 Sep 2024 16:11:44 +0200
-Message-ID: <CAFLszTjQ7Xxsq9GXJs4+v87e4SU8M_nZwjAikVH2sw8ziVeaiQ@mail.gmail.com>
-Subject: Re: [PATCH 00/19] vbe: Series part E
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Chanho Park <chanho61.park@samsung.com>, 
- Devarsh Thakkar <devarsht@ti.com>, Eddie James <eajames@linux.ibm.com>, 
- Gary Bisson <bisson.gary@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Joe Hershberger <joe.hershberger@ni.com>, Julien Masson <jmasson@baylibre.com>,
- Kever Yang <kever.yang@rock-chips.com>, 
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
- Manoj Sai <abbaraju.manojsai@amarulasolutions.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
- Mathieu Othacehe <m.othacehe@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Maxim Moskalets <maximmosk4@gmail.com>, Michal Simek <michal.simek@amd.com>, 
- Nam Cao <namcao@linutronix.de>, Paul-Erwan Rio <paulerwan.rio@gmail.com>, 
- Peng Fan <peng.fan@nxp.com>, Peter Robinson <pbrobinson@gmail.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Raymond Mao <raymond.mao@linaro.org>,
- Roman Stratiienko <r.stratiienko@gmail.com>, 
- Sean Anderson <sean.anderson@seco.com>, Sean Anderson <seanga2@gmail.com>,
- Stefan Roese <sr@denx.de>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Suniel Mahesh <sunil@amarulasolutions.com>, 
- =?UTF-8?Q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>, 
- Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>, 
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Thu, 19 Sep 2024 19:29:35 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,79 +92,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Caleb,
+This fixes a typo in the mxc_get_clock function preventing SPL
+from initializing USDHC1 and USDHC2.
 
-On Fri, 30 Aug 2024 at 14:18, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->
-> Hi Simon,
->
-> On 29/08/2024 15:57, Simon Glass wrote:
-> >
-> > This includes various patches towards implementing the VBE abrec
-> > bootmeth in U-Boot. It mostly focuses on SPL tweaks and adjusting what
-> > fatures are available in VPL.
->
-> It would be helpful if you could include some context as to what VBE is,
-> how this series fits in to previous ones, etc... If this is part of some
-> overarching changes then having some common background justification /
-> context which is copy-pasted to all the relevant patch series would make
-> sense imo.
+Signed-off-by: Connor Rigby <konnorrigby@gmail.com>
+---
 
-Yes, please see [1]. It is essentially an effort to replace UEFI with
-something simpler, more efficient, better-specified and easier to
-test.
+ board/google/imx8mq_phanbell/spl.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Regards,
-Simon
+diff --git a/board/google/imx8mq_phanbell/spl.c b/board/google/imx8mq_phanbell/spl.c
+index cfba9300dc..2786584eed 100644
+--- a/board/google/imx8mq_phanbell/spl.c
++++ b/board/google/imx8mq_phanbell/spl.c
+@@ -101,7 +101,7 @@ int board_mmc_init(struct bd_info *bis)
+ 		switch (i) {
+ 		case 0:
+ 			init_clk_usdhc(0);
+-			usdhc_cfg[0].sdhc_clk = mxc_get_clock(USDHC1_CLK_ROOT);
++			usdhc_cfg[0].sdhc_clk = mxc_get_clock(MXC_ESDHC_CLK);
+ 			usdhc_cfg[0].max_bus_width = 8;
+ 			imx_iomux_v3_setup_multiple_pads(usdhc1_pads,
+ 							 ARRAY_SIZE(usdhc1_pads));
+@@ -112,7 +112,7 @@ int board_mmc_init(struct bd_info *bis)
+ 			break;
+ 		case 1:
+ 			init_clk_usdhc(1);
+-			usdhc_cfg[1].sdhc_clk = mxc_get_clock(USDHC2_CLK_ROOT);
++			usdhc_cfg[1].sdhc_clk = mxc_get_clock(MXC_ESDHC2_CLK);
+ 			usdhc_cfg[1].max_bus_width = 4;
+ 			imx_iomux_v3_setup_multiple_pads(usdhc2_pads,
+ 							 ARRAY_SIZE(usdhc2_pads));
+-- 
+2.34.1
 
->
-> Thanks and regards,
-> >
-> >
-> > Simon Glass (19):
-> >    image: Add a prototype for fit_image_get_phase()
-> >    serial: ns16550: Allow clocks to be missing
-> >    boot: Allow FIT to fall back from best-match option
-> >    bootstd: Avoid sprintf() in SPL when creating bootdevs
-> >    boot: Respect the load_op in fit_image_load()
-> >    malloc: Show amount of used space when memory runs out
-> >    malloc: Provide a simple malloc for VPL
-> >    Support setting a maximum size for the VPL image
-> >    spl: Report a loader failure
-> >    spl: Allow serial to be disabled in any XPL phase
-> >    spl: Support a relocated stack in any XPL phase
-> >    spl: Drop use of uintptr_t
-> >    spl: Drop a duplicate variable in boot_from_devices()
-> >    spl: Add some more debugging to load_simple_fit()
-> >    spl: lib: Allow for decompression in any SPL build
-> >    boot: Allow use of FIT in TPL and VPL
-> >    lib: Allow crc8 in TPL and VPL
-> >    boot: Imply CRC8 with VBE
-> >    hash: Plumb crc8 into the hash functions
-> >
-> >   boot/Kconfig                  | 71 ++++++++++++++++++++++++++++++++++-
-> >   boot/Makefile                 |  4 +-
-> >   boot/bootdev-uclass.c         | 10 ++++-
-> >   boot/image-fit.c              | 29 ++++++++------
-> >   common/hash.c                 |  8 ++++
-> >   common/malloc_simple.c        |  3 +-
-> >   common/spl/Kconfig.vpl        | 17 +++++++++
-> >   common/spl/spl.c              | 15 +++++---
-> >   common/spl/spl_atf.c          | 36 +++++++++---------
-> >   common/spl/spl_fit.c          | 12 +++++-
-> >   common/spl/spl_legacy.c       |  8 ++--
-> >   configs/sandbox_vpl_defconfig |  3 +-
-> >   drivers/serial/ns16550.c      |  2 +-
-> >   include/image.h               | 16 +++++++-
-> >   include/spl.h                 | 28 +++++++-------
-> >   include/u-boot/crc.h          |  3 ++
-> >   lib/Kconfig                   | 53 ++++++++++++++++++++++++++
-> >   lib/Makefile                  |  8 ++--
-> >   lib/crc8.c                    |  6 +++
-> >   19 files changed, 263 insertions(+), 69 deletions(-)
-> >
->
-> --
-> // Caleb (they/them)
-
-[1] https://docs.u-boot.org/en/latest/develop/vbe.html
