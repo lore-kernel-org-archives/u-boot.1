@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45C5BCF3944
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 14:17:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A424ECF3944
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 14:17:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2EE048923F;
-	Thu, 19 Sep 2024 16:14:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8837589269;
+	Thu, 19 Sep 2024 16:14:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VR3KjFAd";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YwfHUazl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99A6F8923F; Thu, 19 Sep 2024 16:14:09 +0200 (CEST)
-Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
- [IPv6:2607:f8b0:4864:20::534])
+ id F228189269; Thu, 19 Sep 2024 16:14:13 +0200 (CEST)
+Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
+ [IPv6:2607:f8b0:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28BE589256
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:14:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B5F7989265
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:14:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x534.google.com with SMTP id
- 41be03b00d2f7-7db174f9050so206168a12.3
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 07:14:07 -0700 (PDT)
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-71790ed8c2dso745955b3a.3
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 07:14:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726755246; x=1727360046; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1726755250; x=1727360050; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=k1V+ilz5fQvxHgta0zYyIXZ1FurEj1j0XAL4ozEOyV8=;
- b=VR3KjFAdxn0EpjD6Z2eobA4vGEvdhetX/nJGqyg4dFuBRAzoVeL9IuIHvP7QmZRY21
- +b0Orqzx5ZF68TvTNX7ZfSHjOmV7mn9bXE+PAMYEUdPlsUCRM6klIKrJQZogCzHWmisW
- AJOwzhjWnvxVo2kRe00JwyJUxSLn8jtEi9+84=
+ bh=CjtUWFckn7AfjdNHWir9FOPx05njDKN50SOkIDiXUv8=;
+ b=YwfHUazlsXm6+5SzSi8Gs1uRyeBU/AZ+p4YxVG7ZvBF8pX82MMA2AGYtW1SNT57jJQ
+ uw7GL8raoOOKvjuBtIMdV8GIHPW7XvdqzzL86WcIAbOFH/sT4LAoswwMHD906l5X5u3F
+ I23rHbi2hEQ79+ScrridJlRA2LfzL3RJxKkkM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726755246; x=1727360046;
+ d=1e100.net; s=20230601; t=1726755250; x=1727360050;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=k1V+ilz5fQvxHgta0zYyIXZ1FurEj1j0XAL4ozEOyV8=;
- b=TYlXK/7dae4k37QesJo5fop2D9eO/7njW20/TAVNUuqvR6FF/hy+qtlgAoxvccUQav
- WFwCSN49i8gla6bKbstlXGNFSOCexypeYnnOs/2SQd5BElcI8M4kxLJlwwodWwLeKd/5
- AnyNRWd2Tl73TFenoP70kMLST5/SSS6pW0eV3GZHbAPPob+aRzmQKTuwY7ZX8VZzB2BN
- z+PbfKDdtISpYbOVaFwL4TdZMXdAJEE/lzY/nJ2QUanRrb3VaY22VsryWqVPgx7OC1lT
- leypDTyxDJ23gCy0EBES+TLjUDJNyn9vqVJSyMz+aZ5qwujCLLrvBG/t96N9THi0hrbd
- k5uw==
+ bh=CjtUWFckn7AfjdNHWir9FOPx05njDKN50SOkIDiXUv8=;
+ b=j9jGjnDt7XfW/4mg37SnkBTTeopCy+XEsHuguIEKugVuxgnEXO61mBfCKLyjxys91o
+ uVr1d8Wa3i11JmhLS5G/uPb/49ZsYqXDXFRgY73s7fJiUdwEw928FscyIHV5edcCwFrF
+ eL3AjqG/If+PjjmDUKNjThKLYOR82M/qGfqJ9ROKUkprtBqm+fMiSnhCYQVAf+CEpQoJ
+ nSnfAj1KyShOljKvA5mSnOeDe9ZHJzxRuGauDtY2tDniKtaFO5Geuk+zjdmRJf6Mh39+
+ uQb1+eYXWZ8LmzVjUOWxHPXO7OOz654AuxanC/D9DJ3Mx6PwikJVf5y25OIJk8XDfBXz
+ j1lw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXQokiNkHueGkkmC5kmfDSyv1cAo4qlMDrpDj05CX3gfM33Ps3zz6dSKmRRxHLCjoo9CZHLfuo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyi1kecyCFiIlt3w/rLnGwHtKOq72vfssAMQuh1QcZC3mqozmto
- vxo907SJyu5NFgYh86ddRdIHmPrK+bIAbHJteYqKn058vIUbLN5pelGhThzBbhBhq3VKwoXwiX8
- wUVeEscD4SYKiqikqG0LYpPGpM7Tm0GuMTSaq
-X-Google-Smtp-Source: AGHT+IHNKQ9IQzzhvM9wnNkiqCHWo8XFGN4QEcidxQOr4UZRGlnE69pUbkj3wNcsMsl7bE2luODZ7PmPacvmzTD3LU8=
-X-Received: by 2002:a05:6a21:a4c4:b0:1d2:e793:9fa with SMTP id
- adf61e73a8af0-1d2e7930c98mr13981840637.47.1726755245732; Thu, 19 Sep 2024
- 07:14:05 -0700 (PDT)
+ AJvYcCXQfmJC2gLipCwWDpBynuYYO1nWVmp2L5qbMzSa3Hyo7rWV58u/LjO1j0M8JPDOkEuiC8bcZI4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz9xbf0tCZTO6Mglc6szm7+60i6g+14kBPKcg1grc462rx2LxQh
+ gO2V/F5vdR2XM07e64rf1mIRa/n7IPnmp3mYdeW9yW72dgB7LrjWFqnX2q4aPutHgySJoRBTrMk
+ xP+sjqLgKOPzi9vH18kGGyHEXJT669Sm/vL0f
+X-Google-Smtp-Source: AGHT+IELtx1d4tS7tYAdlJ/oRZNwLQpFMsEbXYv8VRI1q6QBhUqUszjERrA6Lou8WYioYXR8NS1iQSSJutCSO0v3Zgo=
+X-Received: by 2002:a05:6a00:3993:b0:717:950e:b589 with SMTP id
+ d2e1a72fcca58-719261ead3bmr43050370b3a.19.1726755250210; Thu, 19 Sep 2024
+ 07:14:10 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240812103254.26972-1-ansuelsmth@gmail.com>
- <20240812103254.26972-5-ansuelsmth@gmail.com>
-In-Reply-To: <20240812103254.26972-5-ansuelsmth@gmail.com>
+ <20240812103254.26972-6-ansuelsmth@gmail.com>
+In-Reply-To: <20240812103254.26972-6-ansuelsmth@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 19 Sep 2024 16:13:53 +0200
-Message-ID: <CAFLszTiKqo0mgkHmNYUP7Af3n2Kc94ZyJuZ8BXb1kEJW-jPuxg@mail.gmail.com>
-Subject: Re: [PATCH v3 4/9] common: board_r: rework BOOT LED handling
+Date: Thu, 19 Sep 2024 16:13:55 +0200
+Message-ID: <CAFLszTgetgVByWGeNwzKs+L7k5QJUAK4XpoZ8KTzpcmgRt+FmQ@mail.gmail.com>
+Subject: Re: [PATCH v3 5/9] led: implement LED activity API
 To: Christian Marangi <ansuelsmth@gmail.com>
 Cc: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>, 
  Ramon Fried <rfried.dev@gmail.com>,
@@ -104,95 +104,167 @@ Hi Christian,
 
 On Mon, 12 Aug 2024 at 12:33, Christian Marangi <ansuelsmth@gmail.com> wrote:
 >
-> Rework BOOT LED handling. There is currently one legacy implementation
-> for BOOT LED from Status Led API.
+> Implement LED activity API similar to BOOT LED API.
 >
-> This work on ancient implementation wused by BOOTP by setting the LED
-
-used
-
-> to Blink on boot and to turn it OFF when the firmware was correctly
-> received by network.
+> Usual activity might be a file transfer with TFTP, a flash write...
 >
-> Now that we new LED implementation have support for LED boot, rework
-> this by also set the new BOOT LED to blink and also set it to ON before
-> entering main loop to confirm successful boot.
+> User of this API will call led_activity_on/off/blink() to signal these
+> kind of activity.
+>
+> New Kconfig are implemented similar to BOOT LED, LED_ACTIVITY_ENABLE to
+> enable support for it.
+>
+> It's introduced a new /config property "u-boot,activity-led" and
+> "u-boot,activity-led-period" to define the activity LED label and the
+> default period when the activity LED is set to blink mode.
+>
+> If "u-boot,activity-led-period" is not defined, the value of 250 (ms) is
+> used by default.
+>
+> If CONFIG_LED_BLINK or CONFIG_LED_SW_BLINK is not enabled,
+> led_boot_blink call will fallback to simple LED ON.
 >
 > Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 > ---
->  common/board_r.c | 25 ++++++++++++++++++++++---
->  1 file changed, 22 insertions(+), 3 deletions(-)
+>  doc/device-tree-bindings/config.txt |  4 ++
+>  drivers/led/Kconfig                 | 21 ++++++++++
+>  include/led.h                       | 63 +++++++++++++++++++++++++++++
+>  3 files changed, 88 insertions(+)
+
+Please see comments about /options on the other patch.
+
+This is a nice feature to have!
+
 >
-> diff --git a/common/board_r.c b/common/board_r.c
-> index d4ba245ac69..57957b4e99b 100644
-> --- a/common/board_r.c
-> +++ b/common/board_r.c
-> @@ -39,6 +39,7 @@
->  #include <initcall.h>
->  #include <kgdb.h>
->  #include <irq_func.h>
-> +#include <led.h>
->  #include <malloc.h>
->  #include <mapmem.h>
->  #include <miiphy.h>
-> @@ -462,14 +463,30 @@ static int initr_malloc_bootparams(void)
->  #if defined(CONFIG_LED_STATUS)
->  static int initr_status_led(void)
->  {
-> -#if defined(CONFIG_LED_STATUS_BOOT)
-> -       status_led_set(CONFIG_LED_STATUS_BOOT, CONFIG_LED_STATUS_BLINKING);
-> -#else
->         status_led_init();
+> diff --git a/doc/device-tree-bindings/config.txt b/doc/device-tree-bindings/config.txt
+> index 68edd177040..cd9ec88909b 100644
+> --- a/doc/device-tree-bindings/config.txt
+> +++ b/doc/device-tree-bindings/config.txt
+> @@ -30,8 +30,12 @@ u-boot,boot-led (string)
+>  u-boot,error-led (string)
+>         This is used to specify the label for an LED to indicate an error and
+>         a successful boot, on supported hardware.
+> +u-boot,activity-led (string)
+> +       This is used to specify the label for an LED to indicate an activity
+> +       if supported by the operation.
+>
+>  u-boot,boot-led-period (int)
+> +u-boot,activity-led-period (int)
+>         This is used to specify the default period for an LED in blink mode.
+>
+>  bootsecure (int)
+> diff --git a/drivers/led/Kconfig b/drivers/led/Kconfig
+> index fd9442edaf3..1336f943dab 100644
+> --- a/drivers/led/Kconfig
+> +++ b/drivers/led/Kconfig
+> @@ -29,6 +29,27 @@ config LED_BOOT_PERIOD
+>         help
+>           LED boot blink period in ms.
+>
+> +config LED_ACTIVITY_ENABLE
+> +       bool "Enable LED activity support"
+> +       help
+> +         Enable LED activity support.
 > +
-
-Please can you rework this to avoid the #ifdefs in this C file? You
-can make empty static inlines if needed... probably here you can move
-this code to led.h and have the #ifdef there.
-
-> +       return 0;
+> +         LED activity is a specific LED assigned to signal activity operation
+> +         like file trasnfer, flash write/erase...
+> +
+> +config LED_ACTIVITY_LABEL
+> +       string "LED activity label"
+> +       depends on LED_ACTIVITY_ENABLE
+> +       help
+> +         LED label defined in DT to assign for LED activity usage.
+> +
+> +config LED_ACTIVITY_PERIOD
+> +       int "LED activity period"
+> +       depends on LED_ACTIVITY_ENABLE && (LED_BLINK || LED_SW_BLINK)
+> +       default 2
+> +       help
+> +         LED activity blink period in ms.
+> +
+>  config LED_BCM6328
+>         bool "LED Support for BCM6328"
+>         depends on LED && ARCH_BMIPS
+> diff --git a/include/led.h b/include/led.h
+> index 2d3b89674e2..6a1471dae85 100644
+> --- a/include/led.h
+> +++ b/include/led.h
+> @@ -223,4 +223,67 @@ static inline int led_boot_blink(void)
+>  #endif
+>  #endif
+>
+> +#ifdef CONFIG_LED_ACTIVITY_ENABLE
+> +
+> +/**
+> + * led_activity_on() - turn ON the designated LED for activity
+> + *
+> + * Return: 0 if OK, -ve on error
+> + */
+> +static inline int led_activity_on(void)
+> +{
+> +       const char *led_name;
+> +
+> +       led_name = ofnode_conf_read_str("u-boot,activity-led");
+> +       if (!led_name)
+> +               return -ENOENT;
+> +
+> +       return led_set_state_by_label(led_name, LEDST_ON);
 > +}
+> +
+> +/**
+> + * led_activity_off() - turn OFF the designated LED for activity
+> + *
+> + * Return: 0 if OK, -ve on error
+> + */
+> +static inline int led_activity_off(void)
+> +{
+> +       const char *led_name;
+> +
+> +       led_name = ofnode_conf_read_str("u-boot,activity-led");
+> +       if (!led_name)
+> +               return -ENOENT;
+
+-EINVAL for devicetree things that are missing. Also, please read the
+config in of_to_plat() rather than doing it when the driver is
+actually being used.
+
+> +
+> +       return led_set_state_by_label(led_name, LEDST_OFF);
+> +}
+> +
+> +#if defined(CONFIG_LED_BLINK) || defined(CONFIG_LED_SW_BLINK)
+> +/**
+> + * led_activity_blink() - turn ON the designated LED for activity
+> + *
+> + * Return: 0 if OK, -ve on error
+> + */
+> +static inline int led_activity_blink(void)
+
+Hmm again this code should be in a C file and in of_to_plat method..
+
+> +{
+> +       const char *led_name;
+> +       int led_period, ret;
+> +
+> +       led_name = ofnode_conf_read_str("u-boot,activity-led");
+> +       if (!led_name)
+> +               return -ENOENT;
+> +
+> +       led_period = ofnode_conf_read_int("u-boot,activity-led-period", 250);
+> +
+> +       ret = led_set_period_by_label(led_name, led_period);
+> +       if (ret)
+> +               return ret;
+> +
+> +       return led_set_state_by_label(led_name, LEDST_BLINK);
+> +}
+> +#else
+> +/* If LED BLINK is not supported/enabled, fallback to LED ON */
+> +#define led_activity_blink led_activity_on
+> +#endif
 > +#endif
 > +
-> +static int initr_boot_led_blink(void)
-> +{
-> +#ifdef CONFIG_LED_STATUS_BOOT
-> +       status_led_set(CONFIG_LED_STATUS_BOOT, CONFIG_LED_STATUS_BLINKING);
-> +#endif
-> +#ifdef CONFIG_LED_BOOT_ENABLE
-> +       led_boot_blink();
 >  #endif
-
-Same here. Note it is OK to use if (IS_ENABLED(...))  - just not the #ifdef
-
->         return 0;
->  }
-> +
-> +static int initr_boot_led_on(void)
-> +{
-> +#ifdef CONFIG_LED_BOOT_ENABLE
-> +       led_boot_on();
->  #endif
-> +       return 0;
-> +}
->
->  #ifdef CONFIG_CMD_NET
->  static int initr_net(void)
-> @@ -716,6 +733,7 @@ static init_fnc_t init_sequence_r[] = {
->  #if defined(CONFIG_LED_STATUS)
->         initr_status_led,
->  #endif
-> +       initr_boot_led_blink,
->         /* PPC has a udelay(20) here dating from 2002. Why? */
->  #ifdef CONFIG_BOARD_LATE_INIT
->         board_late_init,
-> @@ -738,6 +756,7 @@ static init_fnc_t init_sequence_r[] = {
->  #if defined(CFG_PRAM)
->         initr_mem,
->  #endif
-> +       initr_boot_led_on,
->         run_main_loop,
->  };
->
 > --
 > 2.45.2
 >
