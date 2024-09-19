@@ -4,80 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1D5FCE8D46
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 03:59:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4359CE8D4C
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 05:28:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 00869890EE;
-	Thu, 19 Sep 2024 05:57:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
+	by phobos.denx.de (Postfix) with ESMTP id D1EF389094;
+	Thu, 19 Sep 2024 07:28:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="Np7NojgB";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B4E0C88D94; Thu, 19 Sep 2024 05:57:09 +0200 (CEST)
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 69C1289095; Thu, 19 Sep 2024 07:28:44 +0200 (CEST)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56D0C89021
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 05:57:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E1DC68901A
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 07:28:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dinesh.maniyam@intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1726718227; x=1758254227;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=nZTKi2lb+fHILrVJAenDnHyQ13RJ6uU939mS0TMhKgk=;
- b=Np7NojgBG9XomrGMvQH6WtxXL7cNTQHoleGsSXVQLjlpiYEmdsGaJ2xT
- LXo0nBrHN/a7XvRFqEZ7iBxlfy6DHJ3Hh3n7kgSPZGkRVBcIzPo7/aDgB
- 3sVcIJ9JeQFzfnAHzhkyN1lyU5XX4zGJdKVEaoQq+JnUrwlDhECUlSZtW
- SDGsHY78nUiCNTBcBbBOmPbx/2pEFnt9l/rIdcvhWu0mcz6WEAxIGmdef
- 9lAkA9krje9L6EIu/lud8UthXpMJDf7SJSVj9ARh6ejjncw0waCsIosOD
- MfDIPLoVvu7YItH29aw6y7GIHKyJ6hqcQWHoho3yDS2luotad+Cevb8AZ Q==;
-X-CSE-ConnectionGUID: xAZn5d1BRT2KmQtTY00ZIw==
-X-CSE-MsgGUID: Q+LFlRqcSq+W6xX+l7gvUg==
-X-IronPort-AV: E=McAfee;i="6700,10204,11199"; a="43178149"
-X-IronPort-AV: E=Sophos;i="6.10,240,1719903600"; d="scan'208";a="43178149"
-Received: from orviesa007.jf.intel.com ([10.64.159.147])
- by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 18 Sep 2024 20:57:07 -0700
-X-CSE-ConnectionGUID: HJa05JgVR6uBIg751ycJ/w==
-X-CSE-MsgGUID: v/tr2HoPR7OGEbD0MusXqQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.10,240,1719903600"; d="scan'208";a="70253969"
-Received: from pglc00481.png.intel.com ([10.221.239.164])
- by orviesa007.jf.intel.com with ESMTP; 18 Sep 2024 20:57:02 -0700
-From: dinesh.maniyam@intel.com
-To: u-boot@lists.denx.de
-Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
- Tom Rini <trini@konsulko.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Johan Jonker <jbx6244@gmail.com>, Michal Simek <michal.simek@amd.com>,
- Arseniy Krasnov <avkrasnov@salutedevices.com>,
- Alexander Dahl <ada@thorsis.com>,
- William Zhang <william.zhang@broadcom.com>,
- Igor Prusov <ivprusov@salutedevices.com>,
- Tien Fong <tien.fong.chee@intel.com>, Kok Kiang <kok.kiang.hea@intel.com>,
- Dinesh <dinesh.maniyam@intel.com>, Boon Khai <boon.khai.ng@intel.com>,
- Alif <alif.zakuan.yuslaimi@intel.com>,
- Teik Heng <teik.heng.chong@intel.com>,
- Hazim <muhammad.hazim.izzat.zamri@intel.com>,
- Tingting Meng <tingting.meng@intel.com>,
- Jit Loon Lim <jit.loon.lim@intel.com>,
- Sieu Mun Tang <sieu.mun.tang@intel.com>
-Subject: [PATCH 19/19] drivers: mtd: nand: Kconfig: Enabled self-init for
- cdns-nand SPL
-Date: Thu, 19 Sep 2024 11:55:12 +0800
-Message-Id: <20240919035512.13854-20-dinesh.maniyam@intel.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20240919035512.13854-1-dinesh.maniyam@intel.com>
-References: <20240919035512.13854-1-dinesh.maniyam@intel.com>
+ spf=pass smtp.mailfrom=ycliang@andestech.com
+Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
+ by Atcsqr.andestech.com with ESMTPS id 48J5SR74084416
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
+ Thu, 19 Sep 2024 13:28:27 +0800 (+08)
+ (envelope-from ycliang@andestech.com)
+Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 19 Sep
+ 2024 13:28:27 +0800
+Date: Thu, 19 Sep 2024 13:28:24 +0800
+From: Leo Liang <ycliang@andestech.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+CC: Rick Chen <rick@andestech.com>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH 1/1] cmd: sbi: Add FWFT, MPXY extensions
+Message-ID: <Zuu2eDQEIHgpaszz@swlinux02>
+References: <20240917081036.24943-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20240917081036.24943-1-heinrich.schuchardt@canonical.com>
+User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
+X-Originating-IP: [10.0.15.183]
+X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
+ ATCPCS34.andestech.com (10.0.1.134)
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 48J5SR74084416
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,27 +65,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Dinesh Maniyam <dinesh.maniyam@intel.com>
+On Tue, Sep 17, 2024 at 10:10:36AM +0200, Heinrich Schuchardt wrote:
+> The SBI 3.0 specification [1] adds the following extensions:
+> 
+> * Firmware Features Extension
+> * Message Proxy Extension
+> 
+> Let the sbi command detect their availability.
+> 
+> The Firmware Features Extension is already implemented in OpenSBI.
+> 
+> Correct the text for the DBTR extension and move it to the same position
+> as in the specification.
+> 
+> [1] https://github.com/riscv-non-isa/riscv-sbi-doc/releases/download/vv3.0-rc1/riscv-sbi.pdf
+> 
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  arch/riscv/include/asm/sbi.h | 4 +++-
+>  cmd/riscv/sbi.c              | 4 +++-
+>  2 files changed, 6 insertions(+), 2 deletions(-)
 
-This patch is to enable SPL_SYS_NAND_SELF_INIT for Cadence NAND SPL.
-
-Signed-off-by: Dinesh Maniyam <dinesh.maniyam@intel.com>
----
- drivers/mtd/nand/raw/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
-index 90f8f4b688..32444c2468 100644
---- a/drivers/mtd/nand/raw/Kconfig
-+++ b/drivers/mtd/nand/raw/Kconfig
-@@ -211,6 +211,7 @@ config NAND_CADENCE
- 	bool "Support Cadence NAND controller as a DT device"
- 	depends on OF_CONTROL && DM_MTD
- 	select SYS_NAND_SELF_INIT
-+	select SPL_SYS_NAND_SELF_INIT
- 	imply CMD_NAND
- 	help
- 	  Enable the driver for NAND flash on platforms using a Cadence NAND
--- 
-2.26.2
-
+Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
