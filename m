@@ -4,72 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EF8ACF3959
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 16:10:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A4DBCF395D
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 16:10:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E18E789281;
-	Thu, 19 Sep 2024 18:10:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4E17A89296;
+	Thu, 19 Sep 2024 18:10:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TMOmLE+a";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jZsym5Go";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 526C1892A1; Thu, 19 Sep 2024 18:10:47 +0200 (CEST)
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
- [IPv6:2a00:1450:4864:20::22e])
+ id 80E2B892A5; Thu, 19 Sep 2024 18:10:48 +0200 (CEST)
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [IPv6:2a00:1450:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6DA3E88BBF
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 18:10:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 90C8489291
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 18:10:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=al.kochet@gmail.com
-Received: by mail-lj1-x22e.google.com with SMTP id
- 38308e7fff4ca-2f7657f9f62so12114641fa.3
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 09:10:45 -0700 (PDT)
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-2f75129b3a3so11392631fa.2
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 09:10:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1726762244; x=1727367044; darn=lists.denx.de;
- h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=fTn4+RsDg3JIE8Hl6RFbxPYRm/RSEqjXTsMGBG3iVW0=;
- b=TMOmLE+aHggsp8tVfM+l7Ky+uPc3KaYEaL3G9sPSVU2irVsNVLmH0Llcs0mMJN5j5T
- dU4vR7gbzUsVYvBWpdUgq8P5Q/ZgnLEMQbUa+YwSs4FFpDkQ04nznYmlYZtfKc7oiB4a
- 4o796q1sP3bzAtWiLCWi1gnjrX53O1ZUYvQlTnfMCUXIZLUDZ9DuIvbD3Uc0eKSxLCkc
- Mo4Ve2yHO3VCuxWANIdlehQZ/oYdjUIME+onaT+j7DDT7TTvi/FE2gCX9su9VtkMz2dF
- 7Sou2KG6tADL2WyorDS/TkTAeO9C1Uq5T0e0VriZSsxeaxkR2uIgDpK7SkTpZNX4F67X
- c00Q==
+ d=gmail.com; s=20230601; t=1726762246; x=1727367046; darn=lists.denx.de;
+ h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=PdLMAi67HRfcWCA3cPpmeiAbSBht8YJFi8+8nMgmEO0=;
+ b=jZsym5Go3XHmsPJ13FfM187kqwqzXBsTHcT4arBWhMNGN14gOybzor1LyxTmriv8FJ
+ I8yA3/Uswx+J6YTGApo7J+LPH3njf6QdTu9Evcgi4uA23xft6To1kjpiYtA3JGsJdVkt
+ rVp5NA5TjIexfC7eZ0y/pK3eEBOyhpvWeF7spQcEC9a1NMZEbiRkK0PX7POR0mKXzNIh
+ jj3zBsZqnzdmukfZiqRM9+tG7WTscE7xMOGvs8A/n80JoMa1+0qvgfMDBRCxcYxez4gr
+ XdsQrE6Uye0Qrst2m4yhqfXVDVRlxDJR/I+buiJqVrKaMG3fM1pvDFNczz+teamlxJ0T
+ BfJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726762244; x=1727367044;
- h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=fTn4+RsDg3JIE8Hl6RFbxPYRm/RSEqjXTsMGBG3iVW0=;
- b=FH7/UVQ6RcROOsPeHIQYvIFa5w7npIhlcMLvoh8IALzoJcVnpLNOhW5JsO9XyKUIoF
- 2bw5CF0f+laRZZNQEjton90VmTziC4YMA2fH7uDh4PGY5mN1Wj5W764027Xk+4/mOVmK
- ysS0jK4BKQG5W0xvNdRQ99SqQ6VQRZNn+8HCJX1KnLLbTBbznqvm+NkB1mHMPo4etDF3
- PgBkBUo3xz983S9ZhQrGthz8GKMUShxP80Y7BGsgkaegdb9D9eoh+JTIWJmAiTn3j2JN
- 6wtmoBtidh4uGa36f+EjEuuxLsTtYTwIKRnNBL9iVei9OZVCSUq+M8mVI/WUWaJEJGSE
- 499Q==
-X-Gm-Message-State: AOJu0Yx4019nsxgArIjLXNiXeSpto4VwrN1aKrVKfSKcgmIX2tIbdKc+
- fyE5byYCRXROsYEQvstwImAaigLvOMDsC9bFrQ2M2izCfrb436TCpudIoA==
-X-Google-Smtp-Source: AGHT+IHflDCk2EbxZfYSOVDXA803q6BvSlHEI+b+/sUdhwMj0R9GHiAgynpc124V0RoobwIphvU1xA==
-X-Received: by 2002:a2e:e09:0:b0:2f7:6519:9a01 with SMTP id
- 38308e7fff4ca-2f7cb2f910amr736501fa.24.1726762244237; 
- Thu, 19 Sep 2024 09:10:44 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1726762246; x=1727367046;
+ h=references:in-reply-to:message-id:date:subject:cc:to:from
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=PdLMAi67HRfcWCA3cPpmeiAbSBht8YJFi8+8nMgmEO0=;
+ b=SpIKvKBxoRHuYXvLwYP2EXHcoO1qFvKz4VFfRLYtU8oGMvOLDLQFwVpfIbyoXyo/tU
+ 6gJAJ1oswgaUOGcFsXgRoj8m62X9RrEMioPtSXDd/U6rF6mri1nT2M+DKajysfc7ghqJ
+ CpkNtZc+bN4p1uTKWYdE0+m7KrAo/GYTMrI7HBVmHVeICFTJAkdc6VsE3PXRjTzMItAQ
+ pU+fisA5MWUyPEdgwIiGv0AO4Pjuu+uWfcQzMJriNC6VeqxFRnx+KDcAZ5IeJcFf818P
+ +PtzV6w+wxewSsKPgChzkmc9r0BdjXvTANHkZWgbzlGSTtBWllW/UcSK92GkMoCr3MD3
+ bzMg==
+X-Gm-Message-State: AOJu0YwCWal67ixxot6XcKmVQDbyVsg0A4Lswwq/BiAQaiOLS6VKIwgB
+ /nXFklY3QV6Ot3/9sKBcQ7pzQMsrrgB+FsBZ9ZrfKmftVstqyFvxu/KILA==
+X-Google-Smtp-Source: AGHT+IGoyRgSLMv0AVsiksnLQJezaQTO6i12vlN88JJToZn7V5ivZjxmQW/cRxiyEYFc24rYhCZqxg==
+X-Received: by 2002:a05:651c:1545:b0:2f7:6664:f295 with SMTP id
+ 38308e7fff4ca-2f7cb30cb17mr683681fa.27.1726762245324; 
+ Thu, 19 Sep 2024 09:10:45 -0700 (PDT)
 Received: from localhost.localdomain ([80.87.144.137])
  by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-2f79d2e1c56sm16278361fa.20.2024.09.19.09.10.43
+ 38308e7fff4ca-2f79d2e1c56sm16278361fa.20.2024.09.19.09.10.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Sep 2024 09:10:43 -0700 (PDT)
+ Thu, 19 Sep 2024 09:10:44 -0700 (PDT)
 From: al.kochet@gmail.com
 To: u-boot@lists.denx.de
 Cc: Alexander Kochetkov <al.kochet@gmail.com>
-Subject: [PATCHv2 0/1] Makefile: pass external DTB provided by make variable
+Subject: [PATCHv2 1/1] Makefile: pass external DTB provided by make variable
  EXT_DTB to binman
-Date: Thu, 19 Sep 2024 19:10:41 +0300
-Message-Id: <20240919161042.3423-1-al.kochet@gmail.com>
+Date: Thu, 19 Sep 2024 19:10:42 +0300
+Message-Id: <20240919161042.3423-2-al.kochet@gmail.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20240919161042.3423-1-al.kochet@gmail.com>
+References: <20240919161042.3423-1-al.kochet@gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,18 +90,56 @@ X-Virus-Status: Clean
 
 From: Alexander Kochetkov <al.kochet@gmail.com>
 
-Changes in v2:    
-- fix syntax errors in the description
-- impelement handling multiple DTB files in the EXT_DTB
+Yocto build is using EXT_DTB to repack U-Boot during signed
+FIT kernel creation. First, it takes the DTB from U-Boot, then
+it creates signed FIT kernel image and places kernel key into
+the DTB. After that it executes:
+    make EXT_DTB=/path/to/dtb/with/kernel/key
 
+Despite the fact that in the documentation all examples with EXT_DTB
+use only single DTB, the patch allows pass many DTB files separated
+by spaces, e.g.:
+    make EXT_DTB="/path1/to/1.dtb /path2/to/2.dtb"
 
-Alexander Kochetkov (1):
-  Makefile: pass external DTB provided by make variable EXT_DTB to
-    binman
+The first DTB from the list become default configuration.
 
+Signed-off-by: Alexander Kochetkov <al.kochet@gmail.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+---
  Makefile | 12 +++++++++++-
  1 file changed, 11 insertions(+), 1 deletion(-)
 
+diff --git a/Makefile b/Makefile
+index 1c754ceb595..6dea0345f50 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1367,7 +1367,17 @@ u-boot.ldr:	u-boot
+ # ---------------------------------------------------------------------------
+ # Use 'make BINMAN_DEBUG=1' to enable debugging
+ # Use 'make BINMAN_VERBOSE=3' to set vebosity level
++
++ifneq ($(EXT_DTB),)
++ext_dtb_list := $(basename $(notdir $(EXT_DTB)))
++default_dt := $(firstword $(ext_dtb_list))
++of_list := "$(ext_dtb_list)"
++of_list_dirs := $(dir $(EXT_DTB))
++else
++of_list := $(CONFIG_OF_LIST)
++of_list_dirs := $(dt_dir)
+ default_dt := $(if $(DEVICE_TREE),$(DEVICE_TREE),$(CONFIG_DEFAULT_DEVICE_TREE))
++endif
+ 
+ quiet_cmd_binman = BINMAN  $@
+ cmd_binman = $(srctree)/tools/binman/binman $(if $(BINMAN_DEBUG),-D) \
+@@ -1377,7 +1387,7 @@ cmd_binman = $(srctree)/tools/binman/binman $(if $(BINMAN_DEBUG),-D) \
+ 		build -u -d u-boot.dtb -O . -m \
+ 		--allow-missing $(if $(BINMAN_ALLOW_MISSING),--ignore-missing) \
+ 		-I . -I $(srctree) -I $(srctree)/board/$(BOARDDIR) \
+-		-I $(dt_dir) -a of-list=$(CONFIG_OF_LIST) \
++		$(foreach f,$(of_list_dirs),-I $(f)) -a of-list=$(of_list) \
+ 		$(foreach f,$(BINMAN_INDIRS),-I $(f)) \
+ 		-a atf-bl31-path=${BL31} \
+ 		-a tee-os-path=${TEE} \
 -- 
 2.17.1
 
