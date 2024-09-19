@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73680CF3944
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 14:14:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 698AECF3944
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 14:14:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5775889231;
-	Thu, 19 Sep 2024 16:12:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B2DD189229;
+	Thu, 19 Sep 2024 16:12:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="X1jeYWmv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UVBtzQST";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 236CE891F7; Thu, 19 Sep 2024 16:12:14 +0200 (CEST)
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
+ id 4E9E0891F7; Thu, 19 Sep 2024 16:12:20 +0200 (CEST)
+Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
+ [IPv6:2607:f8b0:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01F7589229
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:12:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0BBCA89229
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:12:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-2d88690837eso842420a91.2
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 07:12:11 -0700 (PDT)
+Received: by mail-pf1-x42c.google.com with SMTP id
+ d2e1a72fcca58-7191df6b5f5so641363b3a.0
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 07:12:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726755130; x=1727359930; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1726755136; x=1727359936; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=dj331A630Qr+hMwO8MMoADRiJH76fH4VSfzmBoZOz1U=;
- b=X1jeYWmvGG4iXfb37YaMdhafhIarwWAsUHaOxYKg2pmV7UzipjtOeayLEXNIAxT1Rt
- EUYjbqjUCC+3b0in7wM2za8T4DnbpCIYXouPhE7zBDWAGpR6GvDyDKS56EQHqTOF1l10
- 2lxxBSWynDUuGZE/nMXkPXMkWb55ZQXaf8jvc=
+ bh=xFIZiu1sb50Hbu3DGjuHeiukNHEC0OWMePQLB5+Qbuk=;
+ b=UVBtzQSTd+7Q3tHN/Bs5eVe6Yj17m9pwv9CWh5bst1VSlrbbbk6wLfGo0LsCQqYJJS
+ t2POEh2G5KE+EJSRhF0CUMLZRofH8C43kUJXAeiPXIiQOB56NGs2KErOT3QsePrziIQa
+ Npa4DlIiGhDhHdG5/4KzHqJCYnunD2lfszXWQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726755130; x=1727359930;
+ d=1e100.net; s=20230601; t=1726755136; x=1727359936;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=dj331A630Qr+hMwO8MMoADRiJH76fH4VSfzmBoZOz1U=;
- b=eb3lx/uDvS/xm7J1lsInQzjEP1YdDOAey6QMd8Z/zTo0Hw/4hX3+N1wZ2XGvshcZMc
- gr8xoFt/IFqH5T+qpjv7rs94znjwJP81IB5sgLAOMWUbSZBEggR+nmo+mqbzporf1WI9
- Yjkv1m1u4IvKm6r/V5jOqYonXWrqiXzPte/RERgbyrnftL7n+jrsqgS43/0izQN6Os99
- dMrwKf9uZoQ0sBHP8l1GVw5ooF2/A3xuUCpkaGKo28ezjeeDYBuppNQwSfJ9NubEL9mv
- 7LhSFFhNM9WK1SVAoxnV4YRktCBVFUQ/3vSKz8MuJyokxp8ZWsAEYdyJmYdO1IDknO1j
- oY5A==
-X-Gm-Message-State: AOJu0Yw+xjLWvNVx+7bQDPJaO/ZH3ROxRZxGb8h4TJ2HQYEW/bRpZ+ta
- 3zvm8bwL+YddcTVwJHpyZMMXN4L1d99WOfCZKZVtyKtTz2bOZe/qhdgasF0FgPi9a1uEfy0KApb
- hHCK+xfe8mg624zJN9XB6m1h4bt6GpMgnW9di
-X-Google-Smtp-Source: AGHT+IHxxjQd5XtJtShA+a8yV4Dr2L23Zz4GN9d/1lvow2mROHaZjevSCvSj+bpBPt1oOmNon4R8jLmGsQneKpVKwPg=
-X-Received: by 2002:a17:90b:524c:b0:2da:5edd:c165 with SMTP id
- 98e67ed59e1d1-2dba0060fb3mr28308439a91.30.1726755130568; Thu, 19 Sep 2024
- 07:12:10 -0700 (PDT)
+ bh=xFIZiu1sb50Hbu3DGjuHeiukNHEC0OWMePQLB5+Qbuk=;
+ b=mrqNLtPO3wFqYw06O5i9FtHPvuGAv0mrsdY4RkYKq3j8RKpQKhHZK9WtBEgH50Wvlw
+ tv/9fbqY91TL3PiJ1ch07gWr3i4L0ODmyH/ucsCepNrlRFs9vp61UXilKgc3dcU4RIB4
+ KGr+Dgv/VbPbULY2RDme+xyCQBP2so9wxT51Plugqe2WvOyZcug9SHFEqNHoek6+jGTP
+ ypk8h6m+arUHCLqZsN9Zdur6qVG16bfh6Md3b+RtkZQjwK/d+9pp0EZEXjmSFwFy4IT0
+ UVVDMEDOr9ILNpBop5oDSoeAyJQbRZbaoDhvVuGQoI39OsE7MquBo4MRz8LQ9bePK07a
+ hbmA==
+X-Gm-Message-State: AOJu0Yzej9vULABgcPbyl8/AHc438UmnpB4rn+wYUQq7OF6/oeUAYaIj
+ S8JURYn7ZmQtD3PWOP4cM/1oeGv1U+z8goPp04mvhM2oxFKS9+IdSKoDs3IZp1L9suNrAJGc1lE
+ rcBeLf0sTQA6CdiZT3JWcaODXqjlvAKJog2Ip
+X-Google-Smtp-Source: AGHT+IHi3h8nkgewOmL9EThNc6Ua+K8uhF3/NmaTMOdnTIdVNreIwUrwPJkjJA9lZ3rTWfyL8KVEOM3TVLVBg+lsIxI=
+X-Received: by 2002:a05:6a00:1ac9:b0:714:2dc9:fbaf with SMTP id
+ d2e1a72fcca58-719261e73c0mr35498586b3a.18.1726755136577; Thu, 19 Sep 2024
+ 07:12:16 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240918152136.3395170-1-patrick.rudolph@9elements.com>
- <20240918152136.3395170-9-patrick.rudolph@9elements.com>
-In-Reply-To: <20240918152136.3395170-9-patrick.rudolph@9elements.com>
+ <20240918152136.3395170-24-patrick.rudolph@9elements.com>
+In-Reply-To: <20240918152136.3395170-24-patrick.rudolph@9elements.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 19 Sep 2024 16:11:47 +0200
-Message-ID: <CAFLszTjsWGBv-apAn-sRQGDqc1t3ii+YCwEH6NToZGz-vif4dA@mail.gmail.com>
-Subject: Re: [PATCH v4 08/35] acpi: Add fill_madt to acpi_ops
+Date: Thu, 19 Sep 2024 16:11:49 +0200
+Message-ID: <CAFLszTiPO5zb6F7j2YiJgRj0BiKwoqmNik1irTXaBy5KHzZz+Q@mail.gmail.com>
+Subject: Re: [PATCH v4 23/35] drivers/arm: Implement acpi_fill_madt
 To: Patrick Rudolph <patrick.rudolph@9elements.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, linux-kernel@vger.kernel.org, 
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,23 +86,33 @@ X-Virus-Status: Clean
 On Wed, 18 Sept 2024 at 17:22, Patrick Rudolph
 <patrick.rudolph@9elements.com> wrote:
 >
-> Add a new method to acpi_ops to let drivers fill out ACPI MADT.
-> The code is unused for now until drivers implement the new ops.
+> Fill the MADT table in the GICV3 driver and armv8 CPU driver to
+> drop SoC specific code. While the GIC only needs devicetree
+> data, the CPU driver needs additional information stored in
+> the cpu_plat struct.
 >
-> TEST: Booted on QEMU sbsa using driver model generated MADT.
+> While on it update the only board making use of the existing
+> drivers and writing ACPI MADT in mainboard code.
+>
+> TEST: Booted on QEMU sbsa-ref using GICV3 driver model generated MADT.
+>       Booted on QEMU raspb4 using GICV2 driver model generated MADT.
 >
 > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
 > Cc: Simon Glass <sjg@chromium.org>
 > ---
 > Changelog v4:
-> - Drop __weak attribute and make driver model mandatory on Arm
+> - Read everything from the DT
+> - Export armv8_cpu_fill_madt() to use it in other CPU drivers
+> - Depend on IRQ
 >
 > ---
->  arch/arm/lib/acpi_table.c | 13 ++++++++++++
->  drivers/core/acpi.c       | 16 +++++++++++++++
->  include/dm/acpi.h         | 26 +++++++++++++++++++++++
->  lib/acpi/acpi_table.c     |  2 +-
->  test/dm/acpi.c            | 43 +++++++++++++++++++++++++++++++++++++++
->  5 files changed, 99 insertions(+), 1 deletion(-)
+>  arch/arm/lib/gic-v3-its.c | 89 ++++++++++++++++++++++++++++++++++++++-
+>  drivers/cpu/Kconfig       |  1 +
+>  drivers/cpu/armv8_cpu.c   | 80 ++++++++++++++++++++++++++++++++++-
+>  drivers/cpu/armv8_cpu.h   | 10 +++++
+>  4 files changed, 178 insertions(+), 2 deletions(-)
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+I'm still not sure why you are using u64 instead of ulong?
