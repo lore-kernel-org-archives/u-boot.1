@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E30CCF3959
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 15:13:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86DF9CF395C
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 15:14:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 948E4891D3;
-	Thu, 19 Sep 2024 17:13:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1A6BD891F3;
+	Thu, 19 Sep 2024 17:14:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XbT+yIUU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Bj/67aX3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8BFF5891DD; Thu, 19 Sep 2024 17:13:52 +0200 (CEST)
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [IPv6:2607:f8b0:4864:20::102e])
+ id B2DEF884DB; Thu, 19 Sep 2024 17:14:31 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B74E891C3
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 17:13:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BC24389230
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 17:14:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-2d87a1f0791so734195a91.2
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 08:13:49 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-42cb5b3c57eso9025925e9.2
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 08:14:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726758828; x=1727363628; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=rJ9sji4Wjtapm3GiFFQ5l+9o8uhPBU1ae3rEFsX+iaw=;
- b=XbT+yIUUX2IFJElPV31WI+4J9Ue0WWKlLjjYy6gcY+McxW6z/dcTKHhJHmrfYuyg0p
- GvSWOD8yx/wwWhGD99pMG1Uq0qFH2eKJ6AhZ8lfm+NuJlIEcvM6pDYzSfhKwVEOsp9z2
- fiZNnvKIEG052dzxFBApSbLZpzFwyebbzjv8Un9xzTVRP4MiSTiPOf1KxilyiydEzIWC
- Nebg6n0B5zDARbwt7dADDFj9DAkpuDEXRxH8qmQjf8AbSfnU1WJxI1muBNj9LI2UOXF8
- i+J6gWH7Kf40CmiG9/AyfILNF5lW7/EpyTpEZ08ZYcwhwulL9dDerMv5JHDfJzvodGIL
- u4ig==
+ d=chromium.org; s=google; t=1726758869; x=1727363669; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=cFWQJLdURE0qsc9NPj6MZmnsg8gkXI50GFdI5pU+D2I=;
+ b=Bj/67aX33JajIF9JScvgo3HiCQjn2ZGpg82ilJdcXw/eicjV+6yEbZ6mjkcO3hJT+R
+ fR18eP/3nWYVofh4k6U+u7dUSkuqfrmGxkPIgGUV6fu69nkuBT1DlY2j1L4FTWzbjg4s
+ 7jibVzVDnqltjQYq15/4TPCBsNYAeP9ZfU5IU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726758828; x=1727363628;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1726758869; x=1727363669;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=rJ9sji4Wjtapm3GiFFQ5l+9o8uhPBU1ae3rEFsX+iaw=;
- b=HDYWOxGp0z20i0xkTpg6N/z8fx4N3PI40tX6tsikakR5ZUKiMncBV3ctaWE8Mz0RI9
- 8knjtNOaZUuCEqhM+/IbbSS5OxuWOTG/qumKch76VzpxvHycN2eRt7g9LBu45yV8/rmy
- qNqJyxMLFdUwmPVr3um5NcDjfQacf1jtCh/3pi4NAYbYwSK22MjSJj3r8s4U/jpdXhQt
- JPIpDz++xTqOicDlPCphC4CuU334lUWEm7AARRKXPQhYnhd/hWXw+M+mS69cf6E5OdA7
- F2T7jkCGKvKMXQY4rRMg6+GCVZhJl6r/jt+xk1mvP9YlXsl9rE2foTZzrMIqBVSWO6tE
- yugw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWSdWJLJe8Jyxi7sXjRVQlvDooDAjlriKcI+QUjFP8HBuiSbx7srlVNznXjClNLUyb8ZyVZnl8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwaAG7Dtjj5mfhsTayTQsJfrnEE+BiaeRPwVgJyDSFMu6tcrZns
- +rcgh2HoQPL0PM9X7TF91nIvhV+0Pgu27u0rH0NGKDYJnkmc9jWar7P2dMEHLOTNDUH8ZXhzKZm
- JjXS9RUgSvnTn73Oz9OEjxDqFmbJHuqCiXDrrww==
-X-Google-Smtp-Source: AGHT+IGJC4q/mSlI7JBI6Lv0TmcXlYGC6iW9AymANCAj9a+UsxId1ewABc8Aj1zk6qdoyip66iNLGU8LrH1+NpsDo48=
-X-Received: by 2002:a17:90b:4c05:b0:2d3:cf20:80bd with SMTP id
- 98e67ed59e1d1-2dbb9e1cf4amr25155804a91.17.1726758828560; Thu, 19 Sep 2024
- 08:13:48 -0700 (PDT)
+ bh=cFWQJLdURE0qsc9NPj6MZmnsg8gkXI50GFdI5pU+D2I=;
+ b=b+LU/f75CrPQdJuyUBJZr9TuwCHh1NYPQNJSBV//ZzqfzPeJ33/uMe8lYY7p0U7KFW
+ 9WXQWTUjhZYBPvcui0uiZ8pOIPep9ibNNssFOfVWkj35ZqWFyvsq+p+YS4Bl8oGCL4Wd
+ Am4+hSCz5WxF9MLXWNPmqyYfBapN7EohOu7BM/Ox8I//BpBGcDbs/Kwb2z/xvs8M0QDx
+ /EcPm3pf4bnhl8PL7InlVksqHtD5NQijhyT39JFF2WNu/3t3mCJV7goPVh3r3IwZCHyv
+ cjs7Jtc6mav/7G6hDbqzEZhxfJHjIY27R++P/Drf5dtoO4hnl2n50FskHpcd9cNcpqa6
+ f12Q==
+X-Gm-Message-State: AOJu0YzhJVZjOf9znDRNRmX+HjZfIqWF4UCQO5sT9lwPFOHLZoBjiuwD
+ IO69qhrzezB6U4UXL0HLuy/UxDPk6xqUoKw0b4pzowbe7W0Bw3eM7M3Li34lK1S26WC58dHNbGk
+ u/QQJsA8=
+X-Google-Smtp-Source: AGHT+IFTdh5o38DHG20eZ0Fi2GtO3sdzsjuO8C/d+05+LM5YkcPTLfG/Yj4RGRVC6P3zRavvLjt8GQ==
+X-Received: by 2002:a05:600c:314e:b0:42c:bf94:f9ad with SMTP id
+ 5b1f17b1804b1-42cdb5919fbmr188304875e9.34.1726758868695; 
+ Thu, 19 Sep 2024 08:14:28 -0700 (PDT)
+Received: from chromium.org ([185.44.53.103]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-378e73f9cd3sm15457790f8f.62.2024.09.19.08.14.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Sep 2024 08:14:28 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Alexander Dahl <ada@thorsis.com>, Heiko Schocher <hs@denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Joao Marcos Costa <jmcosta944@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Sean Anderson <seanga2@gmail.com>, Svyatoslav Ryhel <clamor95@gmail.com>
+Subject: [PATCH] doc: Move the generic memory-documentation to doc/
+Date: Thu, 19 Sep 2024 17:14:22 +0200
+Message-ID: <20240919151424.57663-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20240914160548.42551-1-heinrich.schuchardt@canonical.com>
- <CAFLszTjL46Gb03MS7znLujAKC0VkgOrUaZMy7XPw-jpw3TELTA@mail.gmail.com>
- <d95b95d2-7afb-42f2-9a01-75d601368be9@canonical.com>
- <CAC_iWjLCnUpnVGuVYnhzo4EaUmKMSZPws3hSzOOvQqirC71hfQ@mail.gmail.com>
- <CAFLszTimJuwFKp6DaRDJ22=0tbNPYbcLMT9hcFrC9Rca6vzAyg@mail.gmail.com>
- <b8d1cef7-4e56-49c6-aeca-b471a82870cd@canonical.com>
-In-Reply-To: <b8d1cef7-4e56-49c6-aeca-b471a82870cd@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 19 Sep 2024 18:13:37 +0300
-Message-ID: <CAC_iWjLY9Oea-AryLyrQJ3zXX+Bihza5B8R5UpXh58K3+Ff=Xw@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi_leader: delete rng-seed if having EFI RNG protocol
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,93 +91,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Sep 19, 2024, 18:05 Heinrich Schuchardt <
-heinrich.schuchardt@canonical.com> wrote:
+Move this section of the README into doc/ with some minor updates to
+mention SPL and user lower-case hex.
 
-> On 19.09.24 17:00, Simon Glass wrote:
-> > Hi,
-> >
-> > On Thu, 19 Sept 2024 at 16:32, Ilias Apalodimas
-> > <ilias.apalodimas@linaro.org> wrote:
-> >>
-> >> Hi all,
-> >>
-> >> On Thu, 19 Sept 2024 at 17:20, Heinrich Schuchardt
-> >> <heinrich.schuchardt@canonical.com> wrote:
-> >>>
-> >>> On 19.09.24 16:10, Simon Glass wrote:
-> >>>> Hi Heinrich,
-> >>>>
-> >>>> On Sat, 14 Sept 2024 at 18:06, Heinrich Schuchardt
-> >>>> <heinrich.schuchardt@canonical.com> wrote:
-> >>>>>
-> >>>>> For measured be boot we must avoid any volatile values in the
-> device-tree.
-> >>>>> We already delete /chosen/kaslr-seed if we provide and EFI RNG
-> protocol.
-> >>>>
-> >>>> Could you explain a bit why this is, and where this is checked?
-> >>>>>
-> >>>>> Additionally remove /chosen/rng-seed provided by QEMU or U-Boot.
-> >>>
-> >>> Measured boot relies on creating hashes of artifacts and writing these
-> >>> to TPM. If the hashes don't match the OS will either warn or refuse to
-> >>> boot. The device-tree is one of the artifacts that are measured.
-> >>>
-> >>> If we have random values in /chosen, measured boot will fail.
-> >>>
-> >>> When an EFI RNG protocol is provided by the firmware, GRUB and the
-> >>> kernel will use it instead of /chosen/rng-seed and /chosen/kaslr-seed.
-> >>
-> >> There's a comment on top of that function that explains what happens as
-> well.
-> >> In short the EFI stub does not even look at the KASLR seed and never
-> >> randomizes the physical placement of the kernel. It only does that
-> >> when the EFI_RNG protocol is there.
-> >
-> > OK thank you. I suppose I am more just wondering why it got added in
-> > the first place?
->
-> For booting via the legacy Linux entry point adding kaslr-seed allows to
-> randomize addresses. QEMU adds rng-seed instead of kaslr-seed.
->
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-Not the kernel physical placement. It randomizes only the virtual placement
+ README                 | 45 ------------------------------------------
+ doc/develop/index.rst  |  1 +
+ doc/develop/memory.rst | 45 ++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 46 insertions(+), 45 deletions(-)
+ create mode 100644 doc/develop/memory.rst
 
-Thanks
-Ilias
+diff --git a/README b/README
+index 4be1e8c22a0..d73042406b6 100644
+--- a/README
++++ b/README
+@@ -2516,51 +2516,6 @@ On RISC-V, the following registers are used:
+ 
+     ==> U-Boot will use gp to hold a pointer to the global data
+ 
+-Memory Management:
+-------------------
+-
+-U-Boot runs in system state and uses physical addresses, i.e. the
+-MMU is not used either for address mapping nor for memory protection.
+-
+-The available memory is mapped to fixed addresses using the memory
+-controller. In this process, a contiguous block is formed for each
+-memory type (Flash, SDRAM, SRAM), even when it consists of several
+-physical memory banks.
+-
+-U-Boot is installed in the first 128 kB of the first Flash bank (on
+-TQM8xxL modules this is the range 0x40000000 ... 0x4001FFFF). After
+-booting and sizing and initializing DRAM, the code relocates itself
+-to the upper end of DRAM. Immediately below the U-Boot code some
+-memory is reserved for use by malloc() [see CONFIG_SYS_MALLOC_LEN
+-configuration setting]. Below that, a structure with global Board
+-Info data is placed, followed by the stack (growing downward).
+-
+-Additionally, some exception handler code is copied to the low 8 kB
+-of DRAM (0x00000000 ... 0x00001FFF).
+-
+-So a typical memory configuration with 16 MB of DRAM could look like
+-this:
+-
+-	0x0000 0000	Exception Vector code
+-	      :
+-	0x0000 1FFF
+-	0x0000 2000	Free for Application Use
+-	      :
+-	      :
+-
+-	      :
+-	      :
+-	0x00FB FF20	Monitor Stack (Growing downward)
+-	0x00FB FFAC	Board Info Data and permanent copy of global data
+-	0x00FC 0000	Malloc Arena
+-	      :
+-	0x00FD FFFF
+-	0x00FE 0000	RAM Copy of Monitor Code
+-	...		eventually: LCD or video framebuffer
+-	...		eventually: pRAM (Protected RAM - unchanged by reset)
+-	0x00FF FFFF	[End of RAM]
+-
+-
+ System Initialization:
+ ----------------------
+ 
+diff --git a/doc/develop/index.rst b/doc/develop/index.rst
+index 0d0e60ab56c..cbea38d4323 100644
+--- a/doc/develop/index.rst
++++ b/doc/develop/index.rst
+@@ -13,6 +13,7 @@ General
+    codingstyle
+    designprinciples
+    docstyle
++   memory
+    patman
+    process
+    release_cycle
+diff --git a/doc/develop/memory.rst b/doc/develop/memory.rst
+new file mode 100644
+index 00000000000..fa1ae5e97ed
+--- /dev/null
++++ b/doc/develop/memory.rst
+@@ -0,0 +1,45 @@
++.. SPDX-License-Identifier: GPL-2.0+:
++
++Memory Management
++-----------------
++
++U-Boot runs in system state and uses physical addresses, i.e. the
++MMU is not used either for address mapping nor for memory protection.
++
++The available memory is mapped to fixed addresses using the
++memory-controller. In this process, a contiguous block is formed for each
++memory type (Flash, SDRAM, SRAM), even when it consists of several
++physical-memory banks.
++
++U-Boot is installed in XIP flash memory, or may be loaded into a lower region of
++RAM by a secondary program loader (SPL). After
++booting and sizing and initialising DRAM, the code relocates itself
++to the upper end of DRAM. Immediately below the U-Boot code some
++memory is reserved for use by malloc() [see CONFIG_SYS_MALLOC_LEN
++configuration setting]. Below that, a structure with global Board-Info
++data is placed, followed by the stack (growing downward).
++
++Additionally, some exception handler code may be copied to the low 8 kB
++of DRAM (0x00000000 ... 0x00001fff).
++
++So a typical memory configuration with 16 MB of DRAM could look like
++this::
++
++	0x0000 0000	Exception Vector code
++	      :
++	0x0000 1fff
++	0x0000 2000	Free for Application Use
++	      :
++	      :
++
++	      :
++	      :
++	0x00fb ff20	Monitor Stack (Growing downward)
++	0x00fb ffac	Board Info Data and permanent copy of global data
++	0x00fc 0000	Malloc Arena
++	      :
++	0x00fd ffff
++	0x00fe 0000	RAM Copy of Monitor Code
++	...		eventually: LCD or video framebuffer
++	...		eventually: pRAM (Protected RAM - unchanged by reset)
++	0x00ff ffff	[End of RAM]
+-- 
+2.43.0
 
->
-> Best regards
->
-> Heinrich
->
-> >
-> > Regards,
-> > Simon
-> >
-> >
-> >>
-> >> Regards
-> >> /Ilias
-> >>>
-> >>> Best regards
-> >>>
-> >>> Heinrich
-> >>>
-> >>>>>
-> >>>>> Signed-off-by: Heinrich Schuchardt <
-> heinrich.schuchardt@canonical.com>
-> >>>>> ---
-> >>>>>    include/efi_loader.h          |  2 +-
-> >>>>>    lib/efi_loader/efi_dt_fixup.c | 15 ++++++++++-----
-> >>>>>    lib/efi_loader/efi_helper.c   |  2 +-
-> >>>>>    3 files changed, 12 insertions(+), 7 deletions(-)
-> >>>>
-> >>>> [..]
-> >>>>
-> >>>> Regards,
-> >>>> Simon
-> >>>
->
->
