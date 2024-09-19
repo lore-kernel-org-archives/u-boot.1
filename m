@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 745B2CF3943
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 14:10:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 461D7CF3941
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 14:10:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5CC1A891C8;
+	by phobos.denx.de (Postfix) with ESMTP id C41E8891CF;
 	Thu, 19 Sep 2024 16:10:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hZ9aBSrE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cYShX9qX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3899E891B5; Thu, 19 Sep 2024 16:10:00 +0200 (CEST)
-Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
- [IPv6:2607:f8b0:4864:20::f2e])
+ id 9E3B2891C7; Thu, 19 Sep 2024 16:10:00 +0200 (CEST)
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [IPv6:2607:f8b0:4864:20::f29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DBC77891B5
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:09:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9445689178
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:09:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2e.google.com with SMTP id
- 6a1803df08f44-6c35334dfb1so4949096d6.0
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 07:09:56 -0700 (PDT)
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-6c54b1f52f7so5479426d6.3
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 07:09:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726754996; x=1727359796; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1726754997; x=1727359797; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Ls64rPHq4YMWdS5F4T9ZBo4QlTnF+LxNudm5oNyebCM=;
- b=hZ9aBSrE22iWdtkp85p00RJyD0RJKqX/zXIa8PEUzdq1qjUTOQrzYX4rBJCK9SNYs7
- j8p1WK0Liq0JWYqH72F5zt9psh9PCufiQdEuqbrHuY9h8hM8NeMMOMT8qVp7tdKWgAp9
- 18axJeVfrUu7G1Cb88PFcCoe/FZbjC+/bHZ7Q=
+ bh=k/hrPY9yIk9SNq5dowTPJC/MQxyHV/pmBS7RiR312VU=;
+ b=cYShX9qXxHwH6b7fZd4c2Ztr62xbVi14jJLB5aJm+RVjTBykvy2yvZ0qHtF+f0reyP
+ 3N7Hn1bD+Q0IImyAVyW+upMh4e/im2J4g4TM1z71YGIi7+D4AGJuJWJiBk0F0h2TrNTg
+ eAHklKJ71IWBklLcK9/0oVlBr69ABSRK3ElGw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726754996; x=1727359796;
+ d=1e100.net; s=20230601; t=1726754997; x=1727359797;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Ls64rPHq4YMWdS5F4T9ZBo4QlTnF+LxNudm5oNyebCM=;
- b=Fy7kB813quetamxZXxrM8NN3LuPqqh8/OhUPWgLM5qRQn3oO+W0DvBZlbQWk39UlqO
- 6zRRshtDRIgd+gW8OhfC8jm02BOkLKpMPyATD+klB19+9QXasHmf8tE/6lWi9FWkPHFJ
- QqVQzcuxphILmxW7GODrGXEr7tPZfUSQopGfLeP8uv0G/k3/F7EwpLguyEdaktgZpOkL
- KJq9/56y+NCvGgM3OuO9AlUkC4awqoDI2vuxZ9MNOkkoH7tpo4Xi9bVKzuCKpqB1t/9t
- RWc3MQKiPggPKtMXekMrOBrNwezWoSy1GyrQsNZ2s+PY9CLSlrFlHkDJ7WGzyFLM3dBC
- 432g==
-X-Gm-Message-State: AOJu0Yw7Bbtd7jtYLeNrmsaRV5xejBAU+04mG1Jif2KvzAKPgZ7m7t0T
- ooJ/TG9u1vYI0mMSYISFTgdzoFfONLyKDxtYMO1njqV94WbJBCW1cepGwN7qN8fKiPDWZm89R3U
- 7TS7ox/XnmEttL2pdprsOMzE4R6TV50qYg6tM
-X-Google-Smtp-Source: AGHT+IGwDa1XMhEkPB7FXm9ylHiTihlUz6O/YQl8F3QiSbviRdNUdLZamE6HABu/g0wyr2uPR15S4AYwvB+OL0md2SQ=
-X-Received: by 2002:a05:6214:460a:b0:6c5:a2ca:38b7 with SMTP id
- 6a1803df08f44-6c5a2ca39a4mr208503916d6.27.1726754995083; Thu, 19 Sep 2024
- 07:09:55 -0700 (PDT)
+ bh=k/hrPY9yIk9SNq5dowTPJC/MQxyHV/pmBS7RiR312VU=;
+ b=C0l5KkMKY5mSZZOPBg3Dh1vaU/ppDtJYdZy+lBOGpZJwgOsgdq/R66srvbhgy3T7hj
+ 5jiMuxeG0RjPgZ42nRJnjvjZDlcajztOiy7yFaJ2UV1n+NPEJrkWdIqMX+nEawNp4+wh
+ m65vaDd/utGjGDOSrIkvZg0tuoIiQo8DXmXTsn09uuSacfTrT2fKxSo38iCnTz/JLcdD
+ iabxubQel8o6gG/Nv5RhYJsMYLDVRlb7VKpzqwOP+Gn3fkIhRaSiLO2kRLp22x23BVH0
+ w727eGpGQ+WCF3DxPJcC/AKigUs93FfKQ9NSkDX1BsXCMqPrNdHuO+w+k5cZ65XUIwNe
+ 05bw==
+X-Gm-Message-State: AOJu0Yy8+zAkgJZwW08d1Z6WJTn4dN4Bu06QKxAwuAdBZf2+Ky4EUME5
+ BJ46tydKTQwoXOFfuSZdld5rnUgW7ukqiaKiXU8a2mZMQXrQjHVErqokORv0z3YjS1aSXDoVfLZ
+ XfYEjUE6xn/BKskTSJeIlaghPq5ygXEimHQw5
+X-Google-Smtp-Source: AGHT+IFT5TGHBvMvezVKDdma1ISd6v8+1/bjzvA0SsPItCZ/rvXNx+l1in6TiULgkMCIfDF1sCJdDPD6+vu6dMwdleU=
+X-Received: by 2002:a05:6214:5d92:b0:6c5:688a:63b4 with SMTP id
+ 6a1803df08f44-6c57359256emr369349236d6.50.1726754997214; Thu, 19 Sep 2024
+ 07:09:57 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240918152136.3395170-1-patrick.rudolph@9elements.com>
- <20240918152136.3395170-31-patrick.rudolph@9elements.com>
-In-Reply-To: <20240918152136.3395170-31-patrick.rudolph@9elements.com>
+ <20240918152136.3395170-36-patrick.rudolph@9elements.com>
+In-Reply-To: <20240918152136.3395170-36-patrick.rudolph@9elements.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 19 Sep 2024 16:09:44 +0200
-Message-ID: <CAFLszTgQstN5GvJtMf0vXLzvBFxqZFmFRXRGprG-ZcSEAXy=+Q@mail.gmail.com>
-Subject: Re: [PATCH v4 30/35] arm: cpu: Add ACPI parking protocol support
+Date: Thu, 19 Sep 2024 16:09:46 +0200
+Message-ID: <CAFLszTjUWHPF4jYBJDJBzyDFm7N8mQurdq=2eesayJS7yqi+6A@mail.gmail.com>
+Subject: Re: [PATCH v4 35/35] configs: Add RPI4 ACPI defconfig
 To: Patrick Rudolph <patrick.rudolph@9elements.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Matthias Brugger <mbrugger@suse.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,48 +86,21 @@ X-Virus-Status: Clean
 On Wed, 18 Sept 2024 at 17:23, Patrick Rudolph
 <patrick.rudolph@9elements.com> wrote:
 >
-> On Arm platforms that use ACPI they cannot rely on the "spin-table"
-> CPU bringup usually defined in the FDT. Thus implement the
-> 'ACPI Multi-processor Startup for ARM Platforms', also referred to as
-> 'ACPI parking protocol'.
+> Allows to build the RPi4 with ACPI enabled.
 >
-> The ACPI parking protocol works similar to the spin-table mechanism, but
-> the specification also covers lots of shortcomings of the spin-table
-> implementations.
->
-> Every CPU defined in the ACPI MADT table has it's own 4K page where the
-> spinloop code and the OS mailbox resides. When selected the U-Boot board
-> code must make sure that the secondary CPUs enter u-boot after relocation
-> as well, so that they can enter the spinloop code residing in the ACPI
-> parking protocol pages.
->
-> The OS will then write to the mailbox and generate an IPI to release the
-> CPUs from the spinloop code.
->
-> For now it's only implemented on ARMv8, but can easily be extended to
-> other platforms, like ARMv7.
->
-> TEST: Boots all CPUs on qemu-system-aarch64 -machine raspi4b
+> TEST: - Boots on qemu-system-aarch64 -machine raspi4b
+>       - Boots on real hardware with arm_64bit=1 in config.txt
 >
 > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
 > Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Matthias Brugger <mbrugger@suse.com>
+> Cc: Peter Robinson <pbrobinson@gmail.com>
 > ---
-> Changelog v2:
-> - Use shorter function names
-> - Drop the use of atomics, they do not work on real hardware
-> - Rewrite code and verify on real hardware that CPUs are spinning
->   inside their parking protocol spin-loop code
 > Changelog v4:
-> - Shorten names
-> - Fix coding style
-> - Drop extern from the headers
+> - Enable BLOBLISTS
 > ---
->  arch/arm/cpu/armv8/Makefile       |   1 +
->  arch/arm/cpu/armv8/acpi_park_v8.S | 113 ++++++++++++++++++++++
->  arch/arm/include/asm/acpi_table.h |  32 +++++++
->  arch/arm/lib/acpi_table.c         | 149 ++++++++++++++++++++++++++++++
->  include/acpi/acpi_table.h         |  10 ++
->  include/bloblist.h                |   1 +
->  lib/Kconfig                       |  16 ++++
->  lib/acpi/acpi_table.c             |   4 +
+>  configs/rpi_4_acpi_defconfig | 70 ++++++++++++++++++++++++++++++++++++
+>  1 file changed, 70 insertions(+)
+>  create mode 100644 configs/rpi_4_acpi_defconfig
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
