@@ -4,69 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C95ECCF3944
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 14:16:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A4EECF3944
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 14:17:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A2D08923A;
-	Thu, 19 Sep 2024 16:13:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CE3FE8921D;
+	Thu, 19 Sep 2024 16:14:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lTbX2NkE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Btjap+WH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 931D089262; Thu, 19 Sep 2024 16:13:31 +0200 (CEST)
-Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
- [IPv6:2607:f8b0:4864:20::52f])
+ id 2DC3B89269; Thu, 19 Sep 2024 16:14:06 +0200 (CEST)
+Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
+ [IPv6:2607:f8b0:4864:20::102f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2151F891B3
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:13:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3106D8923F
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:13:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x52f.google.com with SMTP id
- 41be03b00d2f7-7db12af2f31so768131a12.1
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 07:13:29 -0700 (PDT)
+Received: by mail-pj1-x102f.google.com with SMTP id
+ 98e67ed59e1d1-2da55ea8163so642257a91.1
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 07:13:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726755207; x=1727360007; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1726755237; x=1727360037; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DZocjLEBIGQRxxx8Ez2GyvZCHxR8E5oND9j8Dag6Vjk=;
- b=lTbX2NkEgVxvLgsY/EQ9xJZY4mRl/SK7kiZ4e855J/OB/bPNzD/hp2bjSvQOrVGrjb
- cuQt5j6UJwsERGljuJnV3B8WXVaHnz8h9GG2WvbwtSDgmWKEAJgZSQq1zPoarbvauQ7H
- xhPuue7tgVgjGUu1t5QGNgsSwBWSEoAuNZA94=
+ bh=hMspWoc6R91Xwu/f7H9DRF4FWwYyRXab00ZnsjcWVBA=;
+ b=Btjap+WHN4P7rDUvmGZrPFGobCEkCAtaPyH9ugMpUXKMoZ6RhZAsqk3Uo+BlKPWmoA
+ t9SAvMjFxCQFZkBSd3NCYVgKVbE97ndIrajKQ2eSeueHrvWOElvbT7esUiC6P/8kKnqB
+ tdeXLDINzRgftFnXGbtdPWA51KClfbCenB1L4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726755207; x=1727360007;
+ d=1e100.net; s=20230601; t=1726755237; x=1727360037;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=DZocjLEBIGQRxxx8Ez2GyvZCHxR8E5oND9j8Dag6Vjk=;
- b=G8ie/oLHIlgrgsh20Vsl6j3A2QST76PVUO4/pl5Y8nmZO0VcvuhtSD+F/8TOp7XOm+
- fi3luEHQ9e8Ve0T5DwqXN81AMkj/ddHiM1uxfSlmKPwIfENWAiRvKrUMO6UFA9W0S3c5
- yIJCqd7vVF8RR0+whLNgtU94OoX5NX0iAK3VHl1ct4/RsV8WP1/H06cLOtNqye30Ir2S
- X+O76lt4HdodP1dCVJAnYXJ0Irt+Fcm2bOoSSfDvjdjsCH6j0/BmiDFL/28KEj20ylYf
- mIAwAaeqLuGOOYcX54x2z/Kb31FmPijF5yGtYGejqJSAfo4BpPlzBG4FejLi0pbfOmmF
- 6iVA==
+ bh=hMspWoc6R91Xwu/f7H9DRF4FWwYyRXab00ZnsjcWVBA=;
+ b=xP14b5NzbZDT5OF6aJhmQYJP0Rn7t+22iyp3PF9ZuJf0V2QnjUpb96JGybcxeOIO/Q
+ DqmOS/OKsHosr8SEqyNLowU7FWCYJseM9xOkaxD3X8R8cNV2nAmWsw3VEvvLQbK1IYHL
+ T9VRdJw6JmqOlIdV8rvjvfJpXc9WGi7sH1zOrxe5hVb7xFgxD/GNXM/s9Og7SDbQVP/N
+ tP45ESZosC75AGHMuVt3U0H4iGYbN5YEl6WAUSbgXbL+HtEhwF5QB+C9Upscm/OL0xWU
+ 0X49t8WuyHKc/zyM+0LXZMeJVMHAR4g0FCUn51Ksbf8CyF2aEyHfBHmr8bnWWTSUOO+3
+ Hm1w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXzxVU6G+I/47M1bCX9YxBCb30d50ya5xbuMSABLpzXWSuoHDaJok+UQ0eqUcUvk149yCX8XaM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx27qRtwfQJ0Xf3U+MFciqlO/MhwAYZszE7MykJsVCxv3VwJNZY
- OekfpSK16h721Z/4G/tlq7gfHF1KYIqQMRo/M0aFy8Jwl639IFVEMFSrnmuTdKNMZOiW9+2IyF9
- 69YSNHzsx46xIE60pqP+LlhmHsDmMs981UMoG
-X-Google-Smtp-Source: AGHT+IEldh8RkXjMpycQTKLDsqaTqFMf1FbSuT06wb2wN2AyAtBO4FOeN16D4dFRnorloE1bdtei3bzNFB1uahZ4Iug=
-X-Received: by 2002:a05:6a20:d523:b0:1d2:bbf2:4c0e with SMTP id
- adf61e73a8af0-1d2bbf24c8fmr26432959637.43.1726755207700; Thu, 19 Sep 2024
- 07:13:27 -0700 (PDT)
+ AJvYcCUEecdTcaLlIfIXJUgHNk45sv+iacwYOkVJSW9CCTMnZfmL4d/4XPv8fNEvJxlYM1OlXGRHChk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzka4WLTSzrtlgUxITTEe7x6kyQbBoKDGt5zpsJAoJF7J6S2GoV
+ uLkcQapfcj3ByRadUkTGh1IT9azovQ1nJobPnV82LPkJD/Aden4FJM0R/YuMeM98gdlc+QSb+I9
+ QyZOGETk/46KmAdqDvv7Pkx5lKuHjICXuLr3c
+X-Google-Smtp-Source: AGHT+IFTvNOYKFai6zF4lk06XERn1RxIp7x2Qlxh25aNQ+KrAMe0MW7qOGbj9h2RnmH5e73LQTwMoMmlW5T7a1p/S3U=
+X-Received: by 2002:a17:90b:4a4a:b0:2d3:d398:3c1e with SMTP id
+ 98e67ed59e1d1-2dba0082fb8mr32000860a91.36.1726755236678; Thu, 19 Sep 2024
+ 07:13:56 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240912-bootmeth-bootloader-version-v2-1-76d4c0b45024@baylibre.com>
-In-Reply-To: <20240912-bootmeth-bootloader-version-v2-1-76d4c0b45024@baylibre.com>
+References: <20240812103254.26972-1-ansuelsmth@gmail.com>
+ <20240812103254.26972-2-ansuelsmth@gmail.com>
+In-Reply-To: <20240812103254.26972-2-ansuelsmth@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 19 Sep 2024 16:13:05 +0200
-Message-ID: <CAFLszTie3Jzkdb4GUUsOmChVjPthKMHivm3M9fkVqzLEwhkKeg@mail.gmail.com>
-Subject: Re: [PATCH v2] bootstd: android: Add U-Boot version to cmdline
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: Tom Rini <trini@konsulko.com>, Guillaume La Roque <glaroque@baylibre.com>, 
- Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de
+Date: Thu, 19 Sep 2024 16:13:44 +0200
+Message-ID: <CAFLszTib_uLiGHRo2Gh5V4p8e3TMx=zWzHWQ5YdeW_yh2gWxoA@mail.gmail.com>
+Subject: Re: [PATCH v3 1/9] led: turn LED ON on initial SW blink
+To: Christian Marangi <ansuelsmth@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Arseniy Krasnov <avkrasnov@salutedevices.com>, Heiko Schocher <hs@denx.de>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Martin Kurbanov <mmkurbanov@salutedevices.com>,
+ Alexey Romanov <avromanov@salutedevices.com>, 
+ Dmitry Dunaev <dunaev@tecon.ru>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <sean.anderson@seco.com>, Artur Rojek <artur@conclusive.pl>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Vasileios Amoiridis <vassilisamir@gmail.com>, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>,
+ Doug Zobel <douglas.zobel@climate.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,28 +100,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 12 Sept 2024 at 16:00, Mattijs Korpershoek
-<mkorpershoek@baylibre.com> wrote:
+Hi Christian,
+
+On Mon, 12 Aug 2024 at 12:33, Christian Marangi <ansuelsmth@gmail.com> wrote:
 >
-> When booting into Android fastbootd (a subset of recovery), the default
-> UI shows the bootloader version in the screen [1].
-> This is done via the ro.bootloader property which should come from the
-> bootloader.
+> We currently init the LED OFF when SW blink is triggered when
+> on_state_change() is called. This can be problematic for very short
+> period as the ON/OFF blink might never trigger.
 >
-> Provide the U-Boot version via a kernel commandline argument so that
-> fastbootd can show it properly on the screen.
+> Turn LED ON on initial SW blink to handle this corner case and better
+> display a LED blink from the user.
 >
-> [1] https://android.googlesource.com/platform/bootable/recovery/+/refs/heads/main/fastboot/fastboot.cpp#42
->
-> Reviewed-by: Julien Masson <jmasson@baylibre.com>
-> Reviewed-by: Guillaume La Roque <glaroque@baylibre.com>
-> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 > ---
-> Changes in v2:
-> - Clarify by a comment that we intentionally ignore return (Simon)
-> - Link to v1: https://lore.kernel.org/r/20240904-bootmeth-bootloader-version-v1-1-9979a8428566@baylibre.com
-> ---
->  boot/bootmeth_android.c | 13 ++++++++++++-
->  1 file changed, 12 insertions(+), 1 deletion(-)
+>  drivers/led/led_sw_blink.c | 5 ++++-
+>  1 file changed, 4 insertions(+), 1 deletion(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+nit below
+
+>
+> diff --git a/drivers/led/led_sw_blink.c b/drivers/led/led_sw_blink.c
+> index 9e36edbee47..853278670b9 100644
+> --- a/drivers/led/led_sw_blink.c
+> +++ b/drivers/led/led_sw_blink.c
+> @@ -103,8 +103,11 @@ bool led_sw_on_state_change(struct udevice *dev, enum led_state_t state)
+>                 return false;
+>
+>         if (state == LEDST_BLINK) {
+> +               struct led_ops *ops = led_get_ops(dev);
+> +
+> +               ops->set_state(dev, LEDST_ON);
+
+Normally in drivers we define functions like led_set_state() in the
+uclass, rather than calling things directly like this.
+
+>                 /* start blinking on next led_sw_blink() call */
+> -               sw_blink->state = LED_SW_BLINK_ST_OFF;
+> +               sw_blink->state = LED_SW_BLINK_ST_ON;
+>                 return true;
+>         }
+>
+> --
+> 2.45.2
+>
+
+Regards,
+Simon
