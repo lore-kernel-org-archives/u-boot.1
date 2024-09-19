@@ -4,85 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A424ECF3944
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 14:17:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8943CF3943
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 14:17:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8837589269;
-	Thu, 19 Sep 2024 16:14:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E44E589276;
+	Thu, 19 Sep 2024 16:14:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YwfHUazl";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZTuA3roY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F228189269; Thu, 19 Sep 2024 16:14:13 +0200 (CEST)
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [IPv6:2607:f8b0:4864:20::435])
+ id 94B5E891B3; Thu, 19 Sep 2024 16:14:17 +0200 (CEST)
+Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
+ [IPv6:2607:f8b0:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5F7989265
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:14:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E1CD8926B
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 16:14:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-71790ed8c2dso745955b3a.3
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 07:14:11 -0700 (PDT)
+Received: by mail-pg1-x52f.google.com with SMTP id
+ 41be03b00d2f7-7c3d9a5e050so17720a12.2
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 07:14:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726755250; x=1727360050; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1726755254; x=1727360054; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=CjtUWFckn7AfjdNHWir9FOPx05njDKN50SOkIDiXUv8=;
- b=YwfHUazlsXm6+5SzSi8Gs1uRyeBU/AZ+p4YxVG7ZvBF8pX82MMA2AGYtW1SNT57jJQ
- uw7GL8raoOOKvjuBtIMdV8GIHPW7XvdqzzL86WcIAbOFH/sT4LAoswwMHD906l5X5u3F
- I23rHbi2hEQ79+ScrridJlRA2LfzL3RJxKkkM=
+ bh=shSMQn/BWdqI62pddUOIpPOFXDYmYl7zDMiRHx1YEow=;
+ b=ZTuA3roYZ9lhD15VEdkJc9g2AhPI/rYI6h3P4S14H4IBAeygtGp4vp79g7iRTxYluU
+ 4rZ0HsQ+DFqmbIhuIM2njv1qputyJR4MiZcYFu11zmJ4GQie07kxtsW9k2n16JgjXUia
+ Uh8wgw2Ws8E2F6Iy906EPFd+4QXfTqTnH/5/8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726755250; x=1727360050;
+ d=1e100.net; s=20230601; t=1726755254; x=1727360054;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=CjtUWFckn7AfjdNHWir9FOPx05njDKN50SOkIDiXUv8=;
- b=j9jGjnDt7XfW/4mg37SnkBTTeopCy+XEsHuguIEKugVuxgnEXO61mBfCKLyjxys91o
- uVr1d8Wa3i11JmhLS5G/uPb/49ZsYqXDXFRgY73s7fJiUdwEw928FscyIHV5edcCwFrF
- eL3AjqG/If+PjjmDUKNjThKLYOR82M/qGfqJ9ROKUkprtBqm+fMiSnhCYQVAf+CEpQoJ
- nSnfAj1KyShOljKvA5mSnOeDe9ZHJzxRuGauDtY2tDniKtaFO5Geuk+zjdmRJf6Mh39+
- uQb1+eYXWZ8LmzVjUOWxHPXO7OOz654AuxanC/D9DJ3Mx6PwikJVf5y25OIJk8XDfBXz
- j1lw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXQfmJC2gLipCwWDpBynuYYO1nWVmp2L5qbMzSa3Hyo7rWV58u/LjO1j0M8JPDOkEuiC8bcZI4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz9xbf0tCZTO6Mglc6szm7+60i6g+14kBPKcg1grc462rx2LxQh
- gO2V/F5vdR2XM07e64rf1mIRa/n7IPnmp3mYdeW9yW72dgB7LrjWFqnX2q4aPutHgySJoRBTrMk
- xP+sjqLgKOPzi9vH18kGGyHEXJT669Sm/vL0f
-X-Google-Smtp-Source: AGHT+IELtx1d4tS7tYAdlJ/oRZNwLQpFMsEbXYv8VRI1q6QBhUqUszjERrA6Lou8WYioYXR8NS1iQSSJutCSO0v3Zgo=
-X-Received: by 2002:a05:6a00:3993:b0:717:950e:b589 with SMTP id
- d2e1a72fcca58-719261ead3bmr43050370b3a.19.1726755250210; Thu, 19 Sep 2024
- 07:14:10 -0700 (PDT)
+ bh=shSMQn/BWdqI62pddUOIpPOFXDYmYl7zDMiRHx1YEow=;
+ b=aouNUTEujRAhX5yCFQPtR1xDY8x0LfS6NFbVq+4Nu3es30JzIzfTkO3tX1oRppYCUs
+ Bo5wRblzUsO/IL2RMFollMCIL+RP6H3qISEUYRF1ecpEDwIXYviDxbdFLnOpxosUZTD3
+ S7E1ZnzT29F8LBM2+e7fmYsheMmH7jA7oMZ7pGcRdVuXTMoeRabsktMmJQjNlda77hqs
+ BqTcYc0XDjmT/Jz7h9v6DqZLO0foz/SHKe/ZlNGJKxKgNXXQsO8HbdhradLG0vt4lJ02
+ 3q2B0aDrFEiLkf3qLJP8GcsStzo2ZQSWMYkTGmZ+pcHT5GUqDD+uXjDCJbBvx+dk3RmX
+ /Sxg==
+X-Gm-Message-State: AOJu0YxHz+tBofhRNByz+5szbBth6/4FvUB+9Mgo6YChmhch7Spq3K/g
+ CMMRvgSOtrV9LBapDBrjw0hS5vLWt4M7i6hy/gVfAlruXZDt1EEXnvLe+NjyviiPEpUq5CJRf97
+ L+VBGg8pU5jkspLzwS9yqpKSFc83wI0pvfQ8wc/cMK2kPbK1e6Yyq9Rk=
+X-Google-Smtp-Source: AGHT+IGb/CKbNOp9KbdfZPMSgCwCgEfnjDqy7rmXSz4oKpx5XlXeiNvZi2CtB0bOuHcVaj70MputP7vrfaLK5xmEkhg=
+X-Received: by 2002:a05:6a21:6816:b0:1cf:6953:2889 with SMTP id
+ adf61e73a8af0-1cf75eeef69mr36094162637.16.1726755253802; Thu, 19 Sep 2024
+ 07:14:13 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240812103254.26972-1-ansuelsmth@gmail.com>
- <20240812103254.26972-6-ansuelsmth@gmail.com>
-In-Reply-To: <20240812103254.26972-6-ansuelsmth@gmail.com>
+References: <CAFLszTguTkc1m2JYb=5+yW_8uY+J0AsQZ_L0hFJHDfEXNeb0wQ@mail.gmail.com>
+ <20240625141427.GO38804@bill-the-cat>
+ <CAFLszTi1i+OrAyoyqRLZAuKzGTmAgNQ9Gwtn01XxVLvGmzZLcQ@mail.gmail.com>
+ <20240626140752.GV38804@bill-the-cat>
+ <CAFLszTj0h5w+sz796LokxgcfyRTGmHnQJ3OTDdoaoC61Ob=akw@mail.gmail.com>
+ <20240627144214.GC38804@bill-the-cat>
+ <CAFLszTixbMxDq7TvjPzc+Xup6biMmPvLP5CVPJLp7w94e0dd4Q@mail.gmail.com>
+ <CAFLszThFL4BnoprJJ8qdSo8g_5Umo36yGp0ba4w=cAexgH9cNA@mail.gmail.com>
+ <20240729181719.GP989285@bill-the-cat>
+ <CAFLszTi-ajf+wbwxyK3Xq3Efnwz9y+8U7nL7MgLrNY2h=V7faw@mail.gmail.com>
+ <20240731171719.GE3794063@bill-the-cat>
+In-Reply-To: <20240731171719.GE3794063@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 19 Sep 2024 16:13:55 +0200
-Message-ID: <CAFLszTgetgVByWGeNwzKs+L7k5QJUAK4XpoZ8KTzpcmgRt+FmQ@mail.gmail.com>
-Subject: Re: [PATCH v3 5/9] led: implement LED activity API
-To: Christian Marangi <ansuelsmth@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Arseniy Krasnov <avkrasnov@salutedevices.com>, Heiko Schocher <hs@denx.de>, 
- Michael Trimarchi <michael@amarulasolutions.com>, 
- Martin Kurbanov <mmkurbanov@salutedevices.com>,
- Alexey Romanov <avromanov@salutedevices.com>, 
- Dmitry Dunaev <dunaev@tecon.ru>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <sean.anderson@seco.com>, Artur Rojek <artur@conclusive.pl>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Vasileios Amoiridis <vassilisamir@gmail.com>, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
- Michael Polyntsov <michael.polyntsov@iopsys.eu>,
- Doug Zobel <douglas.zobel@climate.com>, u-boot@lists.denx.de
+Date: Thu, 19 Sep 2024 16:13:57 +0200
+Message-ID: <CAFLszTiSngoo_6-t7u+uPCsELHGkoRy4-5J_i_1v8rWfFpvMRA@mail.gmail.com>
+Subject: Re: [PATCH 13/14] Update u-boot.cfg to include CFG also
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,174 +91,140 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Christian,
+Hi Tom,
 
-On Mon, 12 Aug 2024 at 12:33, Christian Marangi <ansuelsmth@gmail.com> wrote:
+On Wed, 31 Jul 2024 at 19:17, Tom Rini <trini@konsulko.com> wrote:
 >
-> Implement LED activity API similar to BOOT LED API.
+> On Wed, Jul 31, 2024 at 08:39:30AM -0600, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Mon, 29 Jul 2024 at 12:17, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Sun, Jul 28, 2024 at 01:36:09PM -0600, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Fri, 28 Jun 2024 at 01:33, Simon Glass <sjg@chromium.org> wrote:
+> > > > >
+> > > > > Hi Tom,
+> > > > >
+> > > > > On Thu, 27 Jun 2024 at 15:42, Tom Rini <trini@konsulko.com> wrote:
+> > > > > >
+> > > > > > On Thu, Jun 27, 2024 at 09:37:15AM +0100, Simon Glass wrote:
+> > > > > > > Hi Tom,
+> > > > > > >
+> > > > > > > On Wed, 26 Jun 2024 at 15:07, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > >
+> > > > > > > > On Wed, Jun 26, 2024 at 09:00:41AM +0100, Simon Glass wrote:
+> > > > > > > > > Hi Tom,
+> > > > > > > > >
+> > > > > > > > > On Tue, 25 Jun 2024 at 15:14, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > > >
+> > > > > > > > > > On Tue, Jun 25, 2024 at 01:38:04PM +0100, Simon Glass wrote:
+> > > > > > > > > > > Hi Tom,
+> > > > > > > > > > >
+> > > > > > > > > > > On Mon, 24 Jun 2024 at 19:29, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > > > > >
+> > > > > > > > > > > > On Sun, Jun 23, 2024 at 02:30:32PM -0600, Simon Glass wrote:
+> > > > > > > > > > > >
+> > > > > > > > > > > > > Some configuration is now in variables with a CFG_ prefix. Add these to
+> > > > > > > > > > > > > the .cfg file so that we can see everything in one place. Sort the
+> > > > > > > > > > > > > options so they are easier to find and compare.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > > > > > > > ---
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > Changes in v2:
+> > > > > > > > > > > > > - Add new patch to update u-boot.cfg with CFG_... options
+> > > > > > > > > > > > >
+> > > > > > > > > > > > >  scripts/Makefile.autoconf | 2 +-
+> > > > > > > > > > > > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > diff --git a/scripts/Makefile.autoconf b/scripts/Makefile.autoconf
+> > > > > > > > > > > > > index b42f9b525fe..65ff11ea508 100644
+> > > > > > > > > > > > > --- a/scripts/Makefile.autoconf
+> > > > > > > > > > > > > +++ b/scripts/Makefile.autoconf
+> > > > > > > > > > > > > @@ -71,7 +71,7 @@ quiet_cmd_autoconf = GEN     $@
+> > > > > > > > > > > > >  quiet_cmd_u_boot_cfg = CFG     $@
+> > > > > > > > > > > > >        cmd_u_boot_cfg = \
+> > > > > > > > > > > > >       $(CPP) $(c_flags) $2 -DDO_DEPS_ONLY -dM include/config.h > $@.tmp && { \
+> > > > > > > > > > > > > -             grep 'define CONFIG_' $@.tmp | \
+> > > > > > > > > > > > > +             egrep 'define (CONFIG_|CFG_)' $@.tmp | sort | \
+> > > > > > > > > > > > >                       sed '/define CONFIG_IS_ENABLED(/d;/define CONFIG_IF_ENABLED_INT(/d;/define CONFIG_VAL(/d;' > $@; \
+> > > > > > > > > > > > >               rm $@.tmp;                                              \
+> > > > > > > > > > > > >       } || {                                                          \
+> > > > > > > > > > > >
+> > > > > > > > > > > > I don't like this because whereas "CONFIG_" is enforced to be set only
+> > > > > > > > > > > > by Kconfig and so always all reliably set and found via a single header,
+> > > > > > > > > > > > CFG_ stuff is not.
+> > > > > > > > > > >
+> > > > > > > > > > > OK, so how are CFG_ options found? I hit this when trying to find the
+> > > > > > > > > > > SDRAM size on rockchip 3399 and I could not find any way of figuring
+> > > > > > > > > > > it out.
+> > > > > > > > > >
+> > > > > > > > > > It's just another define, there's no uniformity to it. For some of the
+> > > > > > > > > > SDRAM values really we need some build time way to grab some information
+> > > > > > > > > > out of the default device tree.
+> > > > > > > > >
+> > > > > > > > > Can you give an example of a board that could use this? I looked at
+> > > > > > > > > the devicetree for chromebook_kevin and don't see a memory range in
+> > > > > > > > > ther.
+> > > > > > > >
+> > > > > > > > OK, wow, I didn't realize /memory was optional now. But indeed, I don't
+> > > > > > > > see it in the dtb file. That removes that option then, sadly.
+> > > > > > >
+> > > > > > > Well, we can still require it, so long as an error is produced if the
+> > > > > > > property is needed but does not exist.
+> > > > > >
+> > > > > > "We" who? I don't feel like we'll have a lot of traction with linux
+> > > > > > kernel folks in requiring /memory to be added to the dts files on
+> > > > > > however many platforms don't have it today because I'm going to guess
+> > > > > > it's added at run time, possibly by us, with the correct size and we'd
+> > > > > > be asking for statically adding things half-wrong like a lot of
+> > > > > > platforms used to do (and in turn rely on U-Boot to correct the size).
+> > > > >
+> > > > > Hmm yes of course, the firmware is supposed to add these
+> > > > > properties...that's how it gets in there. So we need to stick with CFG
+> > > > > (and perhaps the RAM-size prober) for now.
+> > > >
+> > > > Coming back to this patch, can we apply it? It provides a way to find
+> > > > out the value of these CFG options, which otherwise involves chasing
+> > > > around header files.
+> > >
+> > > No, because it implies that there's a consistent way to know what a
+> > > given CFG value will be when there is not. There is no equivalent header
+> > > to include like for CONFIG symbols to know that you got them. You're
+> > > likely better off trying out "ripgrep" which I have found to be much
+> > > faster than "git grep".
+> >
+> > Hmm it is really hard to know which files to grep!
 >
-> Usual activity might be a file transfer with TFTP, a flash write...
->
-> User of this API will call led_activity_on/off/blink() to signal these
-> kind of activity.
->
-> New Kconfig are implemented similar to BOOT LED, LED_ACTIVITY_ENABLE to
-> enable support for it.
->
-> It's introduced a new /config property "u-boot,activity-led" and
-> "u-boot,activity-led-period" to define the activity LED label and the
-> default period when the activity LED is set to blink mode.
->
-> If "u-boot,activity-led-period" is not defined, the value of 250 (ms) is
-> used by default.
->
-> If CONFIG_LED_BLINK or CONFIG_LED_SW_BLINK is not enabled,
-> led_boot_blink call will fallback to simple LED ON.
->
-> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
-> ---
->  doc/device-tree-bindings/config.txt |  4 ++
->  drivers/led/Kconfig                 | 21 ++++++++++
->  include/led.h                       | 63 +++++++++++++++++++++++++++++
->  3 files changed, 88 insertions(+)
+> It's super easy with ripgrep:
+> $ rg -g *.h CFG_SYS_SDRAM_SIZE
 
-Please see comments about /options on the other patch.
-
-This is a nice feature to have!
+All that does is show me lots of matches. I'm not sure which board
+they relate to. Some of them are obvious, but quite a few have header
+files common to many boards.
 
 >
-> diff --git a/doc/device-tree-bindings/config.txt b/doc/device-tree-bindings/config.txt
-> index 68edd177040..cd9ec88909b 100644
-> --- a/doc/device-tree-bindings/config.txt
-> +++ b/doc/device-tree-bindings/config.txt
-> @@ -30,8 +30,12 @@ u-boot,boot-led (string)
->  u-boot,error-led (string)
->         This is used to specify the label for an LED to indicate an error and
->         a successful boot, on supported hardware.
-> +u-boot,activity-led (string)
-> +       This is used to specify the label for an LED to indicate an activity
-> +       if supported by the operation.
+> > Could we require that config.h includes all the CFG values? I'm just
+> > trying to find a way to bring a bit more order to this area.
 >
->  u-boot,boot-led-period (int)
-> +u-boot,activity-led-period (int)
->         This is used to specify the default period for an LED in blink mode.
->
->  bootsecure (int)
-> diff --git a/drivers/led/Kconfig b/drivers/led/Kconfig
-> index fd9442edaf3..1336f943dab 100644
-> --- a/drivers/led/Kconfig
-> +++ b/drivers/led/Kconfig
-> @@ -29,6 +29,27 @@ config LED_BOOT_PERIOD
->         help
->           LED boot blink period in ms.
->
-> +config LED_ACTIVITY_ENABLE
-> +       bool "Enable LED activity support"
-> +       help
-> +         Enable LED activity support.
-> +
-> +         LED activity is a specific LED assigned to signal activity operation
-> +         like file trasnfer, flash write/erase...
-> +
-> +config LED_ACTIVITY_LABEL
-> +       string "LED activity label"
-> +       depends on LED_ACTIVITY_ENABLE
-> +       help
-> +         LED label defined in DT to assign for LED activity usage.
-> +
-> +config LED_ACTIVITY_PERIOD
-> +       int "LED activity period"
-> +       depends on LED_ACTIVITY_ENABLE && (LED_BLINK || LED_SW_BLINK)
-> +       default 2
-> +       help
-> +         LED activity blink period in ms.
-> +
->  config LED_BCM6328
->         bool "LED Support for BCM6328"
->         depends on LED && ARCH_BMIPS
-> diff --git a/include/led.h b/include/led.h
-> index 2d3b89674e2..6a1471dae85 100644
-> --- a/include/led.h
-> +++ b/include/led.h
-> @@ -223,4 +223,67 @@ static inline int led_boot_blink(void)
->  #endif
->  #endif
->
-> +#ifdef CONFIG_LED_ACTIVITY_ENABLE
-> +
-> +/**
-> + * led_activity_on() - turn ON the designated LED for activity
-> + *
-> + * Return: 0 if OK, -ve on error
-> + */
-> +static inline int led_activity_on(void)
-> +{
-> +       const char *led_name;
-> +
-> +       led_name = ofnode_conf_read_str("u-boot,activity-led");
-> +       if (!led_name)
-> +               return -ENOENT;
-> +
-> +       return led_set_state_by_label(led_name, LEDST_ON);
-> +}
-> +
-> +/**
-> + * led_activity_off() - turn OFF the designated LED for activity
-> + *
-> + * Return: 0 if OK, -ve on error
-> + */
-> +static inline int led_activity_off(void)
-> +{
-> +       const char *led_name;
-> +
-> +       led_name = ofnode_conf_read_str("u-boot,activity-led");
-> +       if (!led_name)
-> +               return -ENOENT;
+> Well, some of them could perhaps be Kconfig symbols instead, it just got
+> too tedious to untangle some of them. For others (not
+> CFG_SYS_SDRAM_SIZE/BASE, sadly) it goes back to my idea about seeing
+> what can be pulled at build time from the default device tree.
 
--EINVAL for devicetree things that are missing. Also, please read the
-config in of_to_plat() rather than doing it when the driver is
-actually being used.
+Hmm, yes. I am not sure how many are in that category. Linux often
+seems to use tables of data in the code, since it doesn't care so much
+about code size. So finding bindings for some of this data may be
+tricky.
 
-> +
-> +       return led_set_state_by_label(led_name, LEDST_OFF);
-> +}
-> +
-> +#if defined(CONFIG_LED_BLINK) || defined(CONFIG_LED_SW_BLINK)
-> +/**
-> + * led_activity_blink() - turn ON the designated LED for activity
-> + *
-> + * Return: 0 if OK, -ve on error
-> + */
-> +static inline int led_activity_blink(void)
+I suppose the SDRAM base/size could go in the DT if it had its own
+binding, e.g. in /options/u-boot - but still many boards would want to
+determine the size at runtime.
 
-Hmm again this code should be in a C file and in of_to_plat method..
-
-> +{
-> +       const char *led_name;
-> +       int led_period, ret;
-> +
-> +       led_name = ofnode_conf_read_str("u-boot,activity-led");
-> +       if (!led_name)
-> +               return -ENOENT;
-> +
-> +       led_period = ofnode_conf_read_int("u-boot,activity-led-period", 250);
-> +
-> +       ret = led_set_period_by_label(led_name, led_period);
-> +       if (ret)
-> +               return ret;
-> +
-> +       return led_set_state_by_label(led_name, LEDST_BLINK);
-> +}
-> +#else
-> +/* If LED BLINK is not supported/enabled, fallback to LED ON */
-> +#define led_activity_blink led_activity_on
-> +#endif
-> +#endif
-> +
->  #endif
-> --
-> 2.45.2
->
+With text environment and a solution to SDRAM, perhaps we can require
+that new boards not use CFG_...?
 
 Regards,
 Simon
