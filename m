@@ -4,72 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A925CE8D60
-	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 08:57:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D02B4CE8D60
+	for <u-boot@archiver.kernel.org>; Thu, 19 Sep 2024 09:00:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5BCE788B16;
-	Thu, 19 Sep 2024 10:57:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 3BE14890F6;
+	Thu, 19 Sep 2024 11:00:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="OH2VTIK7";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KQW6aGl+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD9F288B16; Thu, 19 Sep 2024 10:57:07 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 41AD8890F4; Thu, 19 Sep 2024 11:00:26 +0200 (CEST)
+Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
+ [IPv6:2607:f8b0:4864:20::c2d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BEE8988F62
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 10:57:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2074B890FC
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 11:00:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 48J8uxUh024860;
- Thu, 19 Sep 2024 03:56:59 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1726736219;
- bh=G4MqpOk2Vm8Sppyo4A+sl3aBBbKzG5SKmQHKC3ud3k4=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=OH2VTIK7uMkpNXxVJoPdtL/wdC3gB/MfNvgu05n44VCF2Gzm1b+fAs0O0K+yWEemx
- VtsU7IRgZN9i2/roqKgonvLfgWs2vjy72xucvpPSsVIhPmYnPZuyyRnlf5ssyHtI1F
- TuV5MFoVQIVxX8vwKH2kKMz5erryeAAx+g6WuRWw=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 48J8uxZ0013275
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 19 Sep 2024 03:56:59 -0500
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 19
- Sep 2024 03:56:58 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 19 Sep 2024 03:56:58 -0500
-Received: from [172.24.227.36]
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36]
- (may be forged))
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 48J8ut94039006;
- Thu, 19 Sep 2024 03:56:56 -0500
-Message-ID: <38f599a8-7094-4a04-8ff6-96fc8b9d168a@ti.com>
-Date: Thu, 19 Sep 2024 14:26:54 +0530
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=linux.amoon@gmail.com
+Received: by mail-oo1-xc2d.google.com with SMTP id
+ 006d021491bc7-5e1ba0adcb0so332276eaf.0
+ for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 02:00:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1726736422; x=1727341222; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=hBJ88n6oqJhzY2Fcq3R3D6zfRt4LkFwrsxwCbpNg7Bk=;
+ b=KQW6aGl+Wb4F4Pg+jN2brHwQcH/EAHFCiOOsXzxtZdMmULF8ihQsa2PL4KOxzsCq5d
+ ZP6FWvcncHH21nkuwuawCBuXCp5hlFmOwOA4T3OVyBXol4nFWgpBQs5nLzxUvBoLQFuA
+ thKiIAwgeQLRCmUUkJjrYKRz5icARdpRJZcc6br6ubxssF2eJBqtsdbG14BNSR6uWI5F
+ vCd4+BH+anLfqX4TTW2jIsGzhDKqsq2JvKMcxB3ef/SYYUsdn2jpiASToUA8/kBXc77v
+ jpT13HBEEBNj9DInfO4J+JiHmJFfgY17b5E3//JoWm7v0ZED+kQJLCe/3Fbj9r40msXP
+ AUnQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1726736422; x=1727341222;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=hBJ88n6oqJhzY2Fcq3R3D6zfRt4LkFwrsxwCbpNg7Bk=;
+ b=qxv83FlOpOftuI7fugykmwjVxja6EfyhiDyWUTxc+9Lltnpgn3rCB/jdqwHifZZCcv
+ wbEU3sQpjZin1XM2TQr/misblej7kZ3D5L7cny1FjCWLP+9PwhSJd3Uv3nfcIP/6IV8a
+ SU4Zwi+HuXnoVBs7zKYitDWBSPNx49GpikdCnkpdCKUr1inEVeCKB/PeqOuQTk9jFDIa
+ Nueh5t1c47i+K1QAi2bqRoXurzdHyKwnXWt5JAw8zKw+5TEDwX7l9Dsub2EW2BCeKTSC
+ D+xWXXc2dpogLNKBwvfmkcDVBwWiebUHJ2NH1KVUUmVSrpX6FNO764I09hy+Dh8y0J4W
+ lm9A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX2CVTLneicUXiLR4QaEn1WNue2kxWN/pjGwr4InRC87ZXcdIxT9HIEhIbZljT6/lyzf1ncQ8c=@lists.denx.de
+X-Gm-Message-State: AOJu0YwtTdwbBNSuKEWdPNA1Cy55Io6adrgzIeMO28Wk/i2CENrRdw/X
+ qRe3sAJ9a2xu0FJ+bYi9Ai5I5YvVahIKlFBxNyEkhBTTIzSMoVpQ3/sO7I9WIfPWP8fy2j1hVVU
+ 1ElA0VBlN+NoaA2IITspQF/0Rkos=
+X-Google-Smtp-Source: AGHT+IFqc5pHFlhqC4xw5ksHZDiMF0Dq6t/LYISkoVV3S8sd0+sFx4F5z5FSnwG0msDpwWpS4lkVmhkdATydHGz1yo0=
+X-Received: by 2002:a05:6870:4722:b0:260:e611:c09 with SMTP id
+ 586e51a60fabf-27c3f6cdbc5mr14107176fac.47.1726736422521; Thu, 19 Sep 2024
+ 02:00:22 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/13] ufs: enhancements to support Qualcomm UFS
- controllers
-To: <neil.armstrong@linaro.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Tom Rini <trini@konsulko.com>,
- Michal Simek <michal.simek@amd.com>, <bmeng.cn@gmail.com>
-CC: <u-boot@lists.denx.de>, <u-boot-qcom@groups.io>, Bhupesh Sharma
- <bhupesh.linux@gmail.com>
-References: <20240910-topic-ufs-enhancements-v1-0-3ee0bffacc64@linaro.org>
- <bff9ce50-b5a6-45d8-9969-f116d91f75dd@linaro.org>
-Content-Language: en-US
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <bff9ce50-b5a6-45d8-9969-f116d91f75dd@linaro.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20240806043849.3607-1-linux.amoon@gmail.com>
+ <5deea5f5-de08-473b-9f80-170c8126ba30@rock-chips.com>
+In-Reply-To: <5deea5f5-de08-473b-9f80-170c8126ba30@rock-chips.com>
+From: Anand Moon <linux.amoon@gmail.com>
+Date: Thu, 19 Sep 2024 14:30:07 +0530
+Message-ID: <CANAwSgTbph1FSqCkxdhyfY=Rx3LxCCc_PzC54=AbTT9dmPAwMw@mail.gmail.com>
+Subject: Re: [PATCH v1 00/12] Bind Syscon driver with OF_REAL
+To: Kever Yang <kever.yang@rock-chips.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Jonas Karlman <jonas@kwiboo.se>, Quentin Schulz <quentin.schulz@cherry.de>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,73 +90,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Neil
+Hi Kever,
 
-On 18/09/24 13:36, Neil Armstrong wrote:
-> Hi Marek, Manorit, Tom, Michal,
-> 
-> On 10/09/2024 11:20, Neil Armstrong wrote:
->> This serie regroups all the fixes and base enhancements required to
->> support the Qualcomm UFS controllers in U-Boot.
->>
->> This syncs headers & defines from Linux, and includes 2 set of
->> fixes that were sent separately:
->> - ufs: core: remove link_startup_again logic
->> - ufs: properly fix cache operations
->>
->> Without those 2 sets, UFS cannot initialize on Qualcomm controlers
->> since v5, and a numerous of Cache issues makes any UFS controller
->> fail to initialize.
->>
->> Since UFS core hasn't changed for a while, and since UFS is core
->> technology for the Qualcomm SoCs, I volunteer maintaininig the
->> UFS subsystem if Bhupesh & Neha Malcom Francis are ok with that.
-> 
-> Could you run this serie on the r8a779f0_spider, j721s2_evm_a72, j721e_evm_a72,
-> j7200_evm_a72, amd_versal2_virt and qemu-riscv and check for possible regressions ?
-> 
+On Sat, 14 Sept 2024 at 15:30, Kever Yang <kever.yang@rock-chips.com> wrote:
+>
+> Hi Anand,
+>
+> On 2024/8/6 12:38, Anand Moon wrote:
+>
+> Bind syscon driver with dm_scan_fdt_dev
+> As OF_PLATDATA is no longer enabled, the related
+> code is removed.
+>
+> The OF_PLATDATA is no removed, basically it's use in TPL/SPL for code size,
+>
+> and the SPL_OF_PLATDATA and TPL_PLATDAT still available,
+>
+> The OF_REAL is only to replace "OF_CONTROL && !OF_PLATDATA."
+>
 
-For the K3 platforms (j721s2, j721e, j7200, j784s4) I have already done a sanity 
-test with this series on j784s4 with no regressions seen, so should be fine.
-
-> It seems the only user of UFS_PCI is qemu-riscv, is there other users ?
-> 
+Thanks, for this update.
+.
 > Thanks,
-> Neil
-> 
->>
->> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
->> ---
->> Bhupesh Sharma (5):
->>        ufs/ufs.h: Add definition of 'ufshcd_rmwl()'
->>        ufs: Clear UECPA once due to LINERESET has happened during LINK_STARTUP
->>        ufs: Sync possible UFS Quirks with Linux UFS driver
->>        ufs: Add missing memory barriers
->>        ufs: Fix debug message in 'ufs_start'
->>
->> Marek Vasut (2):
->>        ufs: Add UFSHCD_QUIRK_BROKEN_64BIT_ADDRESS
->>        ufs: Add UFSHCD_QUIRK_HIBERN_FASTAUTO
->>
->> Neil Armstrong (6):
->>        ufs: allocate descriptors with size aligned with DMA_MINALIGN
->>        ufs: fix dcache flush and invalidate range calculation
->>        ufs: split flush and invalidate to only invalidate when required
->>        ufs: use dcache helpers for scsi_cmd data and only invalidate if necessary
->>        ufs: core: remove link_startup_again logic
->>        MAINTAINERS: Add myself to the list of UFS maintainers
->>
->>   MAINTAINERS       |   1 +
->>   drivers/ufs/ufs.c |  98 ++++++++++++++++++++--------------
->>   drivers/ufs/ufs.h | 157 +++++++++++++++++++++++++++++++++++++++++++++++-------
->>   3 files changed, 197 insertions(+), 59 deletions(-)
->> ---
->> base-commit: ca55cf8104c0dd78aae45fa66dd8400ef1b3d0ac
->> change-id: 20240910-topic-ufs-enhancements-fe8ef9ce39d8
->>
->> Best regards,
-> 
+> - Kever
+>
 
--- 
-Thanking You
-Neha Malcom Francis
+Thanks
+
+-Anand
+
+> Compiled and tested on RK3399 and RV1126 board.
+>
+> Thanks
+> -Anand
+>
+> Anand Moon (12):
+>   arm: rockchip: rk3399: Remove unused syscon drivers code
+>   arch: rockchip: rv1126: Update syscon driver binding method
+>   arm: rockchip: rv1126: Remove unused syscon drivers code
+>   arm: rockchip: px30: Remove unused syscon drivers code
+>   arch: rockchip: rk3066: Update syscon driver binding method
+>   arm: rockchip: rk3066: Remove unused syscon drivers code
+>   arch: rockchip: rk3368: Update syscon driver binding method
+>   arm: rockchip: rk3368: Remove unused syscon drivers code
+>   arch: rockchip: rk3188: Update syscon driver binding method
+>   arm: rockchip: rk3188: Remove unused syscon drivers code
+>   arch: rockchip: rk3288: Update syscon driver binding method
+>   arm: rockchip: rk3288: Remove unused syscon drivers code
+>
+>  arch/arm/mach-rockchip/px30/syscon_px30.c     |  31 ----
+>  arch/arm/mach-rockchip/rk3066/syscon_rk3066.c |  34 +---
+>  arch/arm/mach-rockchip/rk3188/syscon_rk3188.c |  34 +---
+>  arch/arm/mach-rockchip/rk3288/syscon_rk3288.c | 157 +-----------------
+>  arch/arm/mach-rockchip/rk3368/syscon_rk3368.c |  41 +----
+>  arch/arm/mach-rockchip/rk3399/syscon_rk3399.c |  45 -----
+>  arch/arm/mach-rockchip/rv1126/syscon_rv1126.c |  27 +--
+>  7 files changed, 14 insertions(+), 355 deletions(-)
+>
+>
+> base-commit: 6becf9ba1ab82af6f4fcf9f4d0da38f9c75212d2
