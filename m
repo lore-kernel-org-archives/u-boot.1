@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F705CF58E8
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 08:01:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D4B5CF58E5
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 08:01:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 516F08940C;
-	Fri, 20 Sep 2024 10:00:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B4218893E9;
+	Fri, 20 Sep 2024 10:00:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zEJgR7v2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="m+lskhUH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0146893D7; Fri, 20 Sep 2024 10:00:39 +0200 (CEST)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id C3E6089415; Fri, 20 Sep 2024 10:00:41 +0200 (CEST)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C573B893D7
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 10:00:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C0502893E5
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 10:00:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-378c16a4d3eso1792431f8f.1
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 01:00:34 -0700 (PDT)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-374bd0da617so1149872f8f.3
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 01:00:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726819234; x=1727424034; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1726819238; x=1727424038; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=VIDqema31vmCtP5+5Elm3la8qvd99hg1gL/4Bcd9PXU=;
- b=zEJgR7v2msSSDKn8FBPMqZtHFqUpDCteH9F0jmNNwOqIYuu5aFAT3lRqg9qf4PgLSU
- Q6klSyjWIHEfaAFMr/Rp8R8ueExvBFhTr3zn/FBWDnOtxE2eEmhjF8Gr8Y0CIjIJ4+BL
- lUCwfLsN8vlKRAtpQzu/SAXtO3Z5yPH7D0r/g8w557zVgyp7Zqjt0H2JG3s6JClxcX+G
- S4KCPD6/eY2sCNHXjotLbBFv0stNLRMBS/edwHBz62egbkWEuLH4Ax/KxrYlgCzQxuOJ
- 77rYXBO2MGmtwzZFDQlPjhwZpqCOP5MC2QiNQFPylRLKATWEWuMB9uTAC5Tec0+xjccd
- KH9Q==
+ :reply-to; bh=ITsepdkflPSwXBnKePx11i3APLsx3e7/kiaw75Qv7/0=;
+ b=m+lskhUHqvZXw6ILvNEEskoXxzQOWLa1oNJI7MzeQHMEBS0jvaIPA+WgYB9NXaStVO
+ 6dD1kPqxwe8tShmdaDXZBfR0lOY0jQ/Ns6wvEt67sh04uLgfFIOLC0Ee7H9AI/t6twIJ
+ JUZGiJE5R3N/iyqHi+gAkNb0eiS0VHBIkhctSf6vQSxrCo7QH3r7PMPJpt+jwMKosamK
+ Rg8fxlcGzgWZAWZQTNFa4/FUMDPOip9rG7XNGQA9S/qXDNVxZmjnNTeu6IiuZRALbN5d
+ Q18HEzGjH6MhEIrm0B5bJPFFYWHM0qNfcx9DzfY7gUUlvpazW8QrY1ufzu9OE8X7+XJU
+ fHbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726819234; x=1727424034;
+ d=1e100.net; s=20230601; t=1726819238; x=1727424038;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=VIDqema31vmCtP5+5Elm3la8qvd99hg1gL/4Bcd9PXU=;
- b=YFsIxZNdFo+JCQjp9LMMYOCgfr5cBwpi5HuKR4NrIAh+z3zWaCPeE83pOMPkoMwsA6
- nei/AnjOua9tGN1wv/d+IphyuSY+hwyqc/AywT20SjGXB08e2kk3Ty5Q85K3iAim4EjD
- dib2zIaS2+9KdpU3HOy38SPiQC5q5cVYSbLNB5lkUeUHY5fF0qhhs2ifYbeQHmSQeUuF
- Bc135tWNad22/ZGr1I84ZjS7hAWJp5fWTNeZaphKkklfT6ZVGzDo3QWgSNdjBv4YZKcp
- gJvdL+oEWjn5NbHPHK/CteYSSUQ2G8FgMUJUCbZUb/RuMopxs5zcNipY3Ltz38r5T8aO
- c81g==
+ bh=ITsepdkflPSwXBnKePx11i3APLsx3e7/kiaw75Qv7/0=;
+ b=E85KGYsRvMshoD1iQk2+pU13D7tqkEJ83tuCCGuU15oasFYZL1EM8fgXFFQuUxyuFH
+ GlU9wRnerx9+uZcazfExz1XExf5oNMizFuf/4D4BmxvQoHSCNgOiY1FFWe21TuKA2kRQ
+ 0aNE144TjM8rPPX0hsExr3RlCPyUTTcPibVpelPTQTqkxCyoe9ZFNATpeDBXPXCNHpAX
+ B0MNM9nb9plnbeE1GrwpvZ0x1g//LWz2hubwLr949347RDrm8/+LMpiimJmqZmdTLTtC
+ K/Fgo8vT7ZqxSfXfejbG+T0EGhuuXiErX9EFY4AMdO/Q5Qcl07terUvDLO298u0UyEv7
+ 6/2Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV1ALbHTxMson6Sh1X0K6rsCY4M0GUKOUvdjxk9MJcoGRZpCh3Dnvq9DbWY9NkdNio6y5UuVWM=@lists.denx.de
-X-Gm-Message-State: AOJu0YxjDznjpKklqqMzks72MEnosyyAs31ZhvaIPLx0WC9gd2OMCfnK
- aGQiHJ5wiOtga2pt77jlRZHO9B+OSG7x20qO/n7DbKtn4gT1JwpPDXYPj8yPOo4=
-X-Google-Smtp-Source: AGHT+IErGRNHUxezUh+NGQj7VQ/zS2QVPQZ6sLIxJET+Q478Asu1BJTaiEc+bvAf8fxoiC1sTtyWKg==
-X-Received: by 2002:adf:e74c:0:b0:374:bde8:66af with SMTP id
- ffacd0b85a97d-37a4238cb41mr1358621f8f.57.1726819234225; 
- Fri, 20 Sep 2024 01:00:34 -0700 (PDT)
+ AJvYcCVv0hodW0Gc0yifK3YAEk48Y++JNb3kNJUBkFryAzR0CQJrNrOBSLY/+BdVPiGBQspgncTHbAY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw8N2PHSSb6snfwxk0dE8Ts3hLfvSDsxdtexVtl2g/HZCysHXf2
+ 0v2HIt/wwsPbSBA+Ruaq7xeLMzSARGWnKlASk2UV9O9BDqka06PcDXZIKTyOtNw=
+X-Google-Smtp-Source: AGHT+IEvV1BhAGFWFd49EvcO4qfG7fpipAIZZga+y5tGzPusjl+XjaDrsZ7Ty4CLRdvsigzgZzkuBA==
+X-Received: by 2002:a05:6000:151:b0:374:b71f:72c0 with SMTP id
+ ffacd0b85a97d-37a4227805bmr1122397f8f.21.1726819238151; 
+ Fri, 20 Sep 2024 01:00:38 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-378e7800313sm17059497f8f.88.2024.09.20.01.00.33
+ ffacd0b85a97d-378e7800313sm17059497f8f.88.2024.09.20.01.00.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Sep 2024 01:00:33 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Fri, 20 Sep 2024 10:00:23 +0200
-Subject: [PATCH v2 02/13] ufs: fix dcache flush and invalidate range
- calculation
+ Fri, 20 Sep 2024 01:00:37 -0700 (PDT)
+From: neil.armstrong@linaro.org
+Date: Fri, 20 Sep 2024 10:00:27 +0200
+Subject: [PATCH v2 06/13] ufs: Add UFSHCD_QUIRK_HIBERN_FASTAUTO
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240920-topic-ufs-enhancements-v2-2-65ae61e73eaa@linaro.org>
+Message-Id: <20240920-topic-ufs-enhancements-v2-6-65ae61e73eaa@linaro.org>
 References: <20240920-topic-ufs-enhancements-v2-0-65ae61e73eaa@linaro.org>
 In-Reply-To: <20240920-topic-ufs-enhancements-v2-0-65ae61e73eaa@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Bhupesh Sharma <bhupesh.linux@gmail.com>, 
@@ -83,20 +82,20 @@ Cc: Michal Simek <michal.simek@amd.com>,
  Neil Armstrong <neil.armstrong@linaro.org>, 
  Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1993;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=979;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=1UTsvGfPS+P9xfQFHCxXJNZU4eiTF4UOb0MRc89nBcg=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBm7SuZ8KwTuWc1kckVDvrJL/eSOHEntELey+qcDzCn
- S0BxEs2JAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZu0rmQAKCRB33NvayMhJ0XqtD/
- 9nm9DbSyPKzQ+rDVj7tAAvVylHnh1V4ihk11yhTbE68w+zbgk8b4ikIDxlR67KqicZFnsBKCSwRdLG
- wAzBfNKxjc01G0M0ZUHCJhxwgPuIJiiYr7fKfkt7hcJKi1Q7QCOeMqIgohiSfS8d383jufoSmYpFVW
- YGaD7/vDM6U/76QKsDvJgKyOkHJjM08jjlVRp0j76m3jAIVEMfAtb+Gw6rJ7EiSxIJ+BU4cyCEJSZP
- tnJqHiEOrbvMDvJMHhECLo7L9DcVPkpzIuk5jxFYzBj+r4u+xxIam0b4/wgkul3hJW8g87XAi9tbNK
- z59bhzpQNItfLSV6mS/A3ldb2KlXRvMY9euIGBUK2xJ07Q8S48PEh1Oo95xTbsgur5VrQk3ldSkLK3
- Kq8ENINxOJ/R2Yq4Pc9D7CWKzQNUi6+A1A39p7FJpUQ5cuG7KFr5fwD3goa6PYk9l+d5KFgk6+kKbj
- G/K3kxdZsdMhKfXsWp4B1AIx38+1RXoygkqaj2Ruax4YKFffygt96iQAKoHVAUaUbac/LAKLd1nP7A
- RHYp2+SYpRMDl+m+KVxtK1nQB/Ip8xlzBLWp8DtHZU+cBDZ0pzPLCu/WBBBUgjcPxXTVAjAvjElAO7
- oHQUR16CIJS5wExK7nT0FnopHFa86PkFI2BfVb5I0vo44cjvgHR1VOkJOGGw==
+ bh=U5rWDVmk+KTojaFG4mSUB4p+9RPDWzL77dGyGCosTrE=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBm7SubcCG070qhp8vQGZTAAUTcEfUGJCtmpn2j7sTa
+ Cez5C/GJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZu0rmwAKCRB33NvayMhJ0Xl7EA
+ CtutMS+8cwbyPQsXuzXSHMM6CQyttMKtoEi2iFs8klNy417WyaT25bCVZjR8/TVPaIigD+0wFm1ARv
+ HkcoI1y1MJLsoZ4IsrQ4JCQtwS9/MAuH0E0B39yXehHgPl1/9V5yEIy3sVnzMnKWk/4F0AeLEoOUHp
+ lLF5RqbtcU3NfkFPH+gfoDXOYJJkTv6qYO1CTln4iZBxIZEtUjciMLh8hwqkrkv+5qUp9BPoqnfDjJ
+ sLkQnJtaGy5x+we4rMip/DwFYD4cuf6p+M8G2n25lAiNWEaNvV8zaR7Npe2Otbgc2OH1yRMwUSmS6U
+ iMdwKsQxx974dqfqA5lGOOQg3DX9OCVJxT+oeUnAPggjRU4EgJdxwmgAmz7MymO/MVl85S3MHNBlbF
+ hlqX28lMZ9Ppf3M7gGLYHs2+gbLyUky/+EHyMEPsfCVdM+t6+ueFxysDl4qRVTSEPLwVcj2/QUb4mC
+ TFg0JdOHt+ow9O8m6jc5yBFSKyY3uwxgPwyOSMmyKP0AoatatheWI5t/W+xD+6nUalGJ7/PFVI4kZw
+ GIa4faLhzGe0eBMesaqptkEdWfOo1ZU8LChhKIIYap5nZ3uiRnrIG2ODkXqW/WU11fbRETfuRgXgpA
+ WLF//MKq/ub6N2Zq6TzSsyc2uyTSJYEG9l1m8+CLjVWnOHkHFQrHXkldFFcw==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
@@ -115,57 +114,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The current calculation will omit doing a flush/invalidate on the last
-cacheline if the base address is not aligned with DMA_MINALIGN.
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
-This causes commands failures and write corruptions on Qualcomm
-platforms.
+Add UFSHCD_QUIRK_HIBERN_FASTAUTO quirk for host controllers which supports
+auto-hibernate the capability but only FASTAUTO mode.
 
-Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
+Ported from Linux kernel commit
+2f11bbc2c7f3 ("scsi: ufs: core: Add UFSHCD_QUIRK_HIBERN_FASTAUTO")
+
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 Tested-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- drivers/ufs/ufs.c | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
+ drivers/ufs/ufs.h | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/drivers/ufs/ufs.c b/drivers/ufs/ufs.c
-index e005cc90608..3d9a7d7ee12 100644
---- a/drivers/ufs/ufs.c
-+++ b/drivers/ufs/ufs.c
-@@ -703,11 +703,11 @@ static inline u8 ufshcd_get_upmcrs(struct ufs_hba *hba)
+diff --git a/drivers/ufs/ufs.h b/drivers/ufs/ufs.h
+index c92f47d82b5..b55c4a9e996 100644
+--- a/drivers/ufs/ufs.h
++++ b/drivers/ufs/ufs.h
+@@ -738,6 +738,12 @@ struct ufs_hba {
   */
- static void ufshcd_cache_flush_and_invalidate(void *addr, unsigned long size)
- {
--	uintptr_t aaddr = (uintptr_t)addr & ~(ARCH_DMA_MINALIGN - 1);
--	unsigned long asize = ALIGN(size, ARCH_DMA_MINALIGN);
-+	uintptr_t start_addr = (uintptr_t)addr & ~(ARCH_DMA_MINALIGN - 1);
-+	uintptr_t end_addr = ALIGN((uintptr_t)addr + size, ARCH_DMA_MINALIGN);
+ #define UFSHCD_QUIRK_BROKEN_64BIT_ADDRESS		0x2
  
--	flush_dcache_range(aaddr, aaddr + asize);
--	invalidate_dcache_range(aaddr, aaddr + asize);
-+	flush_dcache_range(start_addr, end_addr);
-+	invalidate_dcache_range(start_addr, end_addr);
- }
- 
- /**
-@@ -1466,13 +1466,13 @@ static void prepare_prdt_table(struct ufs_hba *hba, struct scsi_cmd *pccb)
- 	}
- 
- 	if (pccb->dma_dir == DMA_TO_DEVICE) {	/* Write to device */
--		flush_dcache_range(aaddr, aaddr +
--				   ALIGN(datalen, ARCH_DMA_MINALIGN));
-+		flush_dcache_range(aaddr,
-+				   ALIGN((uintptr_t)pccb->pdata + datalen, ARCH_DMA_MINALIGN));
- 	}
- 
- 	/* In any case, invalidate cache to avoid stale data in it. */
--	invalidate_dcache_range(aaddr, aaddr +
--				ALIGN(datalen, ARCH_DMA_MINALIGN));
-+	invalidate_dcache_range(aaddr,
-+				ALIGN((uintptr_t)pccb->pdata + datalen, ARCH_DMA_MINALIGN));
- 
- 	table_length = DIV_ROUND_UP(pccb->datalen, MAX_PRDT_ENTRY);
- 	buf = pccb->pdata;
++/*
++ * This quirk needs to be enabled if the host controller has
++ * auto-hibernate capability but it's FASTAUTO only.
++ */
++#define UFSHCD_QUIRK_HIBERN_FASTAUTO			0x4
++
+ 	/* Virtual memory reference */
+ 	struct utp_transfer_cmd_desc *ucdl;
+ 	struct utp_transfer_req_desc *utrdl;
 
 -- 
 2.34.1
