@@ -4,205 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31FE2C7883B
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 13:33:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B175AC7883F
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 13:33:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 911DA89431;
-	Fri, 20 Sep 2024 15:33:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 01F8B89464;
+	Fri, 20 Sep 2024 15:33:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="5lSd+sQQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TvPjPsyX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB84889434; Fri, 20 Sep 2024 15:33:30 +0200 (CEST)
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2060f.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2415::60f])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id DDEFF8945C; Fri, 20 Sep 2024 15:33:38 +0200 (CEST)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE32B8942A
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 15:33:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 901AC8942A
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 15:33:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NLmVM4eAgHRCUIW0F05iRYTVlrRhQls7zW7qBy5UlFmCRDaZc8SI/i0mLrKTqfKvXz8FqgtligyJXsVaGzKkWF8XdnGkOzXPQv7rz41RGARjL2xCjcbZe2hPvesqtAZ22o3LOHeAP+cPvuRpjk65DeNjSzaMUM7lV/xR500HPZQoVIqh+C6rSWpBTMVTwj2h0w9cBsnm89uZoinhUv6XMLb2kflpKHTdm+wVnQH6ACuXYb9By+nymIeoboWTdMA20VKjE7rGoxJjOo/8orzP9BgOPHFHRYeAmhw18rP/jCp19Yxk/LlY6zyt5hMtSiS6KW6EAUfOzZkU07m+cyh4OA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=iryOGM1bH1H0Vsaug/6tU/17iU/C44SqDGDm4Idm6e0=;
- b=JNLjWnE3HGbhytTedcGHuvSBBU/KEshXMD9Tb9vwBGecWayDcHKTayQvREHYve/cIWpkuFVIuBEAMVIXQHmlzyFhSTxGFpQs8SFlvkAwpS0Vu9ilVtu7BgR8A1FJhxYqQkApSYSo2coQ90Ry3rTTQOeP1Yym1rAfTwrzgyl4BrdqcL7Neh4uQBPIym3niEh6sgPnwlLMP60+hnnwoqfRDKWTqibzm78LnvgPt16UPzu3BWjE8rEDUbmzIy7sQcSziwHoZietCQ0Eq19AdJr3jhCGmqMunWpeG0TPrYnckbpfOQNBgH31wA44umWVrjBt/M1OsV/i5kLd77/p1Ho52g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=iryOGM1bH1H0Vsaug/6tU/17iU/C44SqDGDm4Idm6e0=;
- b=5lSd+sQQByrr8yjaWnt7Z07VDX/1UrP4fATbiUKz2zrQdzkbTieBouMKfLAQHB/MBq+qfS1xyRQQyXrWqX4uxklyLGvP+GNa1kJlYsp2sRm9+gXg7FF4xCMrCmvW7n+XXF7OrUdxdw7GkBa5eiQmK6tGPmbfbHTWUozvSLkTwJA=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by CY5PR12MB6575.namprd12.prod.outlook.com (2603:10b6:930:41::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7982.22; Fri, 20 Sep
- 2024 13:33:24 +0000
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30%5]) with mapi id 15.20.7982.018; Fri, 20 Sep 2024
- 13:33:24 +0000
-Message-ID: <910a6dec-c683-41a5-973b-afc94066739f@amd.com>
-Date: Fri, 20 Sep 2024 15:33:11 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xilinx: zynqmp: Add bootmenu support
-From: Michal Simek <michal.simek@amd.com>
-To: u-boot@lists.denx.de, git@xilinx.com
-Cc: John Vicky Vykuntapu <johnvicky.vykuntapu@amd.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Shubhangi Shrikrushna Mahalle <shubhangi.shrikrushna-mahalle@amd.com>,
- Tom Rini <trini@konsulko.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-References: <6193d95a9c0f3ae319a900b46d6212f7ab16aba4.1726041851.git.michal.simek@amd.com>
-Content-Language: en-US
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <6193d95a9c0f3ae319a900b46d6212f7ab16aba4.1726041851.git.michal.simek@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR10CA0113.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:803:28::42) To SJ2PR12MB8109.namprd12.prod.outlook.com
- (2603:10b6:a03:4f5::8)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-378c16a4d3eso2101607f8f.1
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 06:33:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1726839216; x=1727444016; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=3CQmp5rTf5JfydKUrzy5y9iSMm/1Tp3tWu6uADAXtA4=;
+ b=TvPjPsyXaTRkSQCcKI4aFF02dySWe8t21s7a0mQYjST2c1k8zyotBYg806QN+oT/8q
+ AYq6Rc/zxtn1r80Qc3Qdq5cXvHMI+gHxTV/urOFmblMQffmtD88vZh1bh5R/GXdtBaGI
+ CcpZ5+/WcEJUWTxVdz1dxZb2hH9X8hJdXDW8BpfQWX+mP7e2hAjaG2p8FYIFHu6KaPzu
+ 81MhzUBNMXE+x99dwU68OsbtKauWJXz7rLc4ZxFL36zrsB1vct4df0C2GaNithYGugFx
+ Cfgd1muRLqs0ZzTQe9LYiCKvaZF1ZKWQP4GPA0Be6SRKPy/CtT42dzslumAqhLTRcDNg
+ uqxw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1726839216; x=1727444016;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=3CQmp5rTf5JfydKUrzy5y9iSMm/1Tp3tWu6uADAXtA4=;
+ b=XUqgpmY+dN9O4vUHUwpVYFwNmOx9Scmhqg2TpgCvN8P/1nrA0Sb69abYrx9F+J5Wp+
+ UwnVjDVfz9T0CcNAghDId2c3866JIgpa/YqXb9ljU2p9FRs4s5H/nuUpOvkacFvw0JoQ
+ EmrdipnFTq3O09WsBi5n9bcE9jXGePvGhGaUHFsFJ0svTc2zLgnJ3pWeo96Nqf5ox3ch
+ N/oR7BsKgqfzEPxT8cIy4Uln2vItlL0ZnxSJDUImOOsi1PX+j2Zx4GvNayiyZ0VwVNNs
+ VwtkUUnumzv6CKAcUcIuLVz9Q7fk+5MAbr8mU6JxSlUnpggUZJ1KNLGjKoZCUSkwTqd2
+ tvgA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWjb6dH/+es4dg7gTpyiUWNjiAQ4mBdD4Qemg9wFzSAYC6T3IkDPAbnWjFuy98MHgdWxU1338U=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy8wAj7b3RgqCqszRQ3k6k79UPSjkHWEhB9IHrlDFonjIJb3CCv
+ Ti0rZDdTls9G4CCrB/d2pPjlZFY2JJTNOSAOYsALgGcAkOkxR3ASuH0066wwTgo=
+X-Google-Smtp-Source: AGHT+IELL5PH0PqziF5qaol1CTjQ7Li2h9il2aCOJGaxVbXB5PI+gXYe0q4UOlGnjsyeomHv1sHf9A==
+X-Received: by 2002:adf:f64e:0:b0:371:8dd3:27c8 with SMTP id
+ ffacd0b85a97d-37a42279eb8mr2553295f8f.23.1726839215966; 
+ Fri, 20 Sep 2024 06:33:35 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-378e780df0bsm17557466f8f.113.2024.09.20.06.33.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 20 Sep 2024 06:33:35 -0700 (PDT)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [PATCH 0/2] board: libre-computer: Add support for Libre Computer
+ aml-a311d-cc & aml-s905d3-cc boards
+Date: Fri, 20 Sep 2024 15:33:32 +0200
+Message-Id: <20240920-u-boot-topic-libre-computer-solitude-alta-v1-0-8915b108840b@linaro.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|CY5PR12MB6575:EE_
-X-MS-Office365-Filtering-Correlation-Id: 85b70361-34a1-4ba2-c6ca-08dcd978cd32
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?MEFJSmtTRjBPdzNLdnE4Q3Y1YURidzFzWTBGeURYL3JjdU91bTRkeW03M01r?=
- =?utf-8?B?WjFBaFA4ZnREdFhHc213dnorRzBzS2VRY1RQSFpqVnlqelhHUGpLQ0ZmV2xT?=
- =?utf-8?B?azRZSXpiWElwOERCS2tiMWU5UEgrTWx1QzdPdkx0ck5UT0VYL3pvWjdaS3g2?=
- =?utf-8?B?VEhKd0lvTW5NOFBvd1NLOEVlT2FIWG4rNjl4SXFXUmU0YzBydExjNDhDMDRp?=
- =?utf-8?B?RkRqVTFpajNQaitCL0IwQ1J1aWVLNUM4N1hSSHhySXBOb2J5TlRJamtEdy9h?=
- =?utf-8?B?KzMxb0EzQm8vSWJCZmZDRDg1SnRYaytyOE1YektrRldJNFZ2MmdWbDd6enpO?=
- =?utf-8?B?Z2tNTm1sMVBMamdHc2o1M1pRd0hQZlRraldxMUpBaXQxKzRaMm5ZM2lINytF?=
- =?utf-8?B?ZUtnZmFHc0cxd1RDdHdhSU5kbGdMRkF3alRBNXlZRXlZSkEzV09nUFZWTVQw?=
- =?utf-8?B?K0tpR2ZrWGlBTExYZzk0MHI5RXNPYkFGbDRjQmRuRlFNbThVVnM5dW9DZ3lT?=
- =?utf-8?B?Y2xoZFg3cWJ6a212TFZFNzNTb3NON2N5TUdWdjBzbHQ5TGtZck8zNEN1cEo5?=
- =?utf-8?B?YklKMFEwY3JXT1RFMUJjVkRGYlBYUjJDM3BHNU1UVVg2dHlrN0cwQmQzYlBy?=
- =?utf-8?B?YnVtRUtlVW15QVJtelBIdTBrYUJMT2tJbjdmcmdzVnZXQldVM1QxdXFIVXdI?=
- =?utf-8?B?SDJ0Z3piLzV2cVYwYWlOWHlhU1VtbzBYbFk3K1pXNzEyZnVsREZ6TVNISW03?=
- =?utf-8?B?aUFwZEJ4TlA2NnZiNnMzRmFkMjFvS1IwQkI5bk5NeFB2WXNlRUZZL1NrT1dj?=
- =?utf-8?B?SjFoSVpJeUs2NXpZR0tsNkZ6TkdaZG9ESmx0WU1ERmZ6ZTlMZlNzTGNBL210?=
- =?utf-8?B?LzR3OEZpS08xMExyYWtqenNrVGJyV2dTSWhsMENaRVFTRWFRMmNlNVVIbGpI?=
- =?utf-8?B?bEo4Tkk4NElkZ0FLSVRmY2NaZjZWUFVnLzJPSFFHWmgrQUJEamFsbE8zOHRN?=
- =?utf-8?B?cWpES2pub282Mlg4bUNYQlNMVkx2QituMEtpUjF3cmdDanBiNkVKcVJrd1R4?=
- =?utf-8?B?YWduMm1ISEtVV3l0SkQrZnAzeW5sZDNzZTJQV0h6UjJzOEZTQjVLK1pZN1cw?=
- =?utf-8?B?VEdnczBPTlZjTUFYZ2xqQW0zTkJ3OXYzVUljNU00bXhHbG1WdnQzYzV4SDdX?=
- =?utf-8?B?UndLZnNXc2VRL0plTHdFU0hUTVlkU2VaR1VnaE5ZY2p3OXFCczdDdTFqcDR4?=
- =?utf-8?B?eHFyMGRFcFMyRkljSzVkR0dGYlF1eGVPNysyVTNoSEtsbFNMQk9hMFAwWHIz?=
- =?utf-8?B?YVowdStmLzk2QU9WbC9OdWxJbzU4T1ZHeGdQOGFaZHlXMUpvbGdWTzJjY1FH?=
- =?utf-8?B?RWZaREpBcEtDYjJaK3N5bmJxaVhyTXByZXlxaGlmMG9VSUJqZ29WYTZzRk9t?=
- =?utf-8?B?RVJJcjZKOFJkd2RPa3ZjQjg2dG1iUkt4Tzg2b2dJQmliZXdXbXM3SUo5SUZn?=
- =?utf-8?B?enhqVVpXSnJ6aTR5eUg2OHJFVTFrUXlFVjJLcDZXbkh4L2U4Zm80aXZsNzRj?=
- =?utf-8?B?UHFJRWJiYUZrT3J1VVNrcExMeFFKczhFbkFtZjlBYWZtd1VnSE5GT0J6MTA0?=
- =?utf-8?B?QlUwU2lJVE8zcWxLeVh0WmtlaTRZZzMzbzBDK3NsY2hkWjZNOFlaYUsyVWd5?=
- =?utf-8?B?YnZOTFlrWE00dC9IS0hnM0NKSUdmSDRHK3RweUV4YUlUd1NSK2FybWVlNHhX?=
- =?utf-8?B?d29LY0kyVHFXN0xCYWtjMyswMldId1BvbWR3dURzNkQvNUUyRVJ1R3JFOVVm?=
- =?utf-8?B?UGhkRFJMaGFEUzEwemNXdz09?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZUIxWnRWdmVWRXF6UE05TTkzSmdsVXdRZXRPZEhVSS9OWU9mMytyWlhNdFF6?=
- =?utf-8?B?ZEY4Q3ZjQ0NtY2I1OE16S1A1UkxSRDhwTVBmLzZ3Y24xWmZmRCtnY0pqb05M?=
- =?utf-8?B?QjFUWkh4RjliSzRVcnNLSkc3ZGQwV1JxckJ3aDNCelBSdmFSUnp1ODNyaU42?=
- =?utf-8?B?OFpJTzJ5UWc0RUV0eHVFK3FMcS9OTDVkeFFGdFRFRm1iNWYwVUM0Zy9PM04r?=
- =?utf-8?B?eWxYY2Ewd2FXMDlueU11ZTR1d01ubklUOElYQVRjdlNZeVBwUVFNUzFTbTNV?=
- =?utf-8?B?YTFpR3NrNHhVQng5OSs4d2NQUzdOUkV3dmZGRlUvcXJ2RmR2cE9QdXRCWWh1?=
- =?utf-8?B?UUpvbndBZlVBM0svM3RrQVlLci9aTGZqczhKU3B5OHpiUzl4K1pZaS9BaVJl?=
- =?utf-8?B?Z2VWVFBrcVUyTFJRNlNDbXM2T0dic05RVFdqTnNPWmM2M2M3eWtydjZJK2oz?=
- =?utf-8?B?cklnbW5penVoT3RKQnhVbHBWSytob0xjUVNnWnRETTg0L1ZFdmUxbFZnKzJS?=
- =?utf-8?B?OEpVcDRwUGJ5cW5TK2llNDJkVkpjeUo2NUZxclJhY1NmWllWSzNnd2l4ZGpO?=
- =?utf-8?B?b3RWeWUwNnZnQU13RWZnN0ZlUnUzNERVS0FrWWNvZ09SOUdRMnAxc0ppNWxs?=
- =?utf-8?B?S0l1K3B0SDAyOStsdHEySmZUUWZZSUVDU3pEYmwvbkwrVGdoWjFhR3ovOW1a?=
- =?utf-8?B?Ti84UWEzTUlMc2p6S29EeHB0Z2ZzaGhxVXova3dMZE9zMUNTb0E3VDF3SjdV?=
- =?utf-8?B?dk0zWktnazV3MTJhY3RvS3lidWdaRWdiT3RaN3EvdHBGTW15S1Fzak1od3d6?=
- =?utf-8?B?MHRTaTF6dEZ2amMydit2MUZJU3ptc0VmNlorT3A0bDFpd09hTS9Sc013WFZk?=
- =?utf-8?B?SUNTV2xPRTV6U1gwN2JrQnVHNU1OUEltdXFBMTk0YzRobE92S2NrR2RyNnlK?=
- =?utf-8?B?d1dtc0ZRaWdoZXdCZDI1bnVRdm5HbjY2YWsyN1RkRDhxMTEwMDB1cWM2Sms1?=
- =?utf-8?B?T2JxNE1ZQWhoWHJ6YzMvd1UvWFdWcDl6cjBKM0k4OXltem02RWxuU3BubU5Z?=
- =?utf-8?B?Rlk2OEZHK3F5bDFMUTVLZXdkWDBYeEQ3em1BTi9yd3Jkd2I2cHlXRnUrL01h?=
- =?utf-8?B?MytEUUd6Z0IrUmdFMFM5MC9OTGZINnB2UEZpUG95UndTZlR5WndjRWZuWFpS?=
- =?utf-8?B?clAxbjl6ZTQ3eHN2K2o1UENycktLZjBjWXFGa3ltKzF1MXY4cDRJWlo1a0Nh?=
- =?utf-8?B?VXMrSE9lRUwwNmdLaW1meStlMFZMSVBYV0g1bXppZGV2ZVZKa0kwRHNScGdi?=
- =?utf-8?B?a25zSC8rTnVHWENsWHQ0WFE0TW1VMnQxdk5EMVBFUjF2a1E5M0phczRiVXAw?=
- =?utf-8?B?TitINVBNeStyd0xhYTF3clY5eURXT0tCNnlQUlF0aHE3bWVsWk5jSFRUVDdZ?=
- =?utf-8?B?c0pFenhaK1ByMzgydlRYQ1FOWVh3R0kwd1lYVlpvT2pzRndScndSWFpJd3FM?=
- =?utf-8?B?TnljWGRLbmhLN1BiUTBvWTU2M2ZOTnQvL0kvNmhXTy9wRm5sYzNMWVFuOEJH?=
- =?utf-8?B?K2o3WXZvNFNvQWRTNFBpSGR0bE1hVjRsY2JCSUZpQ21VeWg5MjVqUVQwczBx?=
- =?utf-8?B?RktaMVZERVVHaWJyTS96Y2wwRXNhVTYrcDZ4ZHk0a3FtYS9zK2trUFlSNzBC?=
- =?utf-8?B?cDBVb2l5WXJBaEpQL2VHTDJ6TDYxOERrKzhDaDNQazQwOHdCL2JuT0F5RUlk?=
- =?utf-8?B?a1RqKzFmVWt6cTlpWkhjY1VEcWRlZ1AwaWVYZXkvdldxZzdlZG55cVNmdDFL?=
- =?utf-8?B?ODVKN1RldHJQUS9QcXNicjcyalZ5Ry9pcS9XMHU1QmRpRHRUbXUxZVNoYW1I?=
- =?utf-8?B?b05GS2wyT1lrU1RrQXVwTXdtS241VXQ4bFY2eStpb1dhOHhYMnp3NzJvNGNG?=
- =?utf-8?B?aXJQb3RkRy8xdlREdlBUTEpaTVRuZDNZTEVraFpoYkFXODEwbGdHL2dUamxU?=
- =?utf-8?B?dlRmRnFiYWYxdnh3dFRRZnB4Rmd5RkZZTXNzTnVEZHVMS0J4ZDg3RnMxcG5P?=
- =?utf-8?B?b2taWHNRdEswZ2hvL1lBb2hEeHdSK1dJaFNUT1ZvMGhYOEkvMUJEblMyU1pC?=
- =?utf-8?Q?s1xfEJiFUpB7V4RoC1VodFPWA?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 85b70361-34a1-4ba2-c6ca-08dcd978cd32
-X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Sep 2024 13:33:24.4313 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: r2Jk6xcML7R0KSuNgqAqgFLC5GyY/Fohh3Hm5ydECoy8fO2SMnWiZvlvug9kckyI
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6575
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAKx57WYC/x3NTQoCMQxA4asMWRvoRBH0KuKiPxkN1Elp00EY5
+ u4Wl9/mvR0aV+EG92mHyps00XVgPk0Q3359MUoaBnJ0cTdy2DGoGpoWiZglVMaon9KNKzbNYj0
+ x+mwe4zkQxZDma1pg9ErlRb7/1+N5HD9pwPCqewAAAA==
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, da@libre.computer, 
+ ilias.apalodimas@linaro.org, Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.14.1
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1876;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=gVVDXiJfDUHHjtzCGVBdK/yhT7uyR5jH1lyx3aGkQY0=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBm7XmtXNU6dECUh6p1DX/JjgUYfejmtORjt5ZBUxXh
+ 2NarrEuJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZu15rQAKCRB33NvayMhJ0c2JEA
+ DJL4vVfgQe5qQXeBeheddd1/OAErNutHE0bHkNCmCTooEZVbtqeY2ERN44hRH+UsZVy1hOEiKMEelU
+ YctU3Ypof52EOlhHJbpxyq+haLtZdvy5lWl5zS/cePJCBkXfnTO+ZCHRqEBkU2yabcBslnVYGHzrIx
+ TaspPaTZyVyHrVNdjWbqNT4JEsK3BPllp7JSevhQ1Nm7GvU2aqVtpddSu5wvFYJqL+UWljLFTcBqTy
+ erT0lbQXvSpuXFuosuBN0ZV+V/o5pOjbhtkmTAh1wGD3IqeiHQqblRuWBp3G4v3Awo43/S6lWgynku
+ l3RXQf2VE+qeiG9VS5QK3BBdzdYZ9jSFSl1lt68RkJRQAzzQiUf3toJ3IVOo/PubfUPe/RsloWSN6r
+ 67mXp2/yzOEe7gQpXqs4sf7UhSDuyufns9qk6133plTJ+AUuFRDi+WAZ/opuUNfAz2rwUjl+cGT7OX
+ czTvGa064NHukLMLnhhw/ZnfVrVdT8stD52ioR0NMZSny3R0X1lLqitr48aiM5L9WdGacPN5tVN7dL
+ pN5knylN3h0TB8MctvmUfgULK/61BdBbi5nob8HgV5bHTOzNcQXXNfOLv2hlzIOOhWR5G1Wq+c/3DH
+ j/7caCB1apoHPDC88ZglKa3mIjfkjVnCj+b3+juebna/eZGZlIfUNVM3idVA==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -219,55 +112,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Add support for the Libre Computer aml-a311d-cc "Alta" & aml-s905d3-cc
+"Solitude" boards:
+https://libre.computer/products/aml-a311d-cc/
+https://libre.computer/products/aml-s905d3-cc/
 
+The Alta & Solitude boards have a Credit Card form factor, similar to the
+the previous "Le Potato" card, but with the Amlogic A311D or S903D3 SoCS,
+MIPI DSI and CSI connectors. PoE header and a single USB2 Type-C
+connector replacing the microUSB one for power and USB 2.0.
 
-On 9/11/24 10:04, Michal Simek wrote:
-> From: John Vicky Vykuntapu <johnvicky.vykuntapu@amd.com>
-> 
-> Popup the bootmenu for 5 sec with default boot options to CC on AMD CCs and
-> default to SOM on others.
-> Users can anytime disable the bootmenu by setting the variable
-> enable_bootmenu=0 in zynqmp_kria.env or setup it up at run time and save
-> variables to NV memory.
-> 
-> The patch is also fixing issue created by commit 4c7363068651 ("cmd:
-> setexpr: fix no matching string in gsub return empty value") which has
-> changed return value from setexpr command (Before this commit when
-> matching string wasn't found command return 1 that's why was possible to
-> use with if).
-> 
-> Signed-off-by: John Vicky Vykuntapu <johnvicky.vykuntapu@amd.com>
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> ---
-> 
->   board/xilinx/zynqmp/zynqmp_kria.env | 12 +++++++++++-
->   1 file changed, 11 insertions(+), 1 deletion(-)
-> 
-> diff --git a/board/xilinx/zynqmp/zynqmp_kria.env b/board/xilinx/zynqmp/zynqmp_kria.env
-> index 49ef3e7d7532..d0e431ebb46f 100644
-> --- a/board/xilinx/zynqmp/zynqmp_kria.env
-> +++ b/board/xilinx/zynqmp/zynqmp_kria.env
-> @@ -49,9 +49,19 @@ usb_boot_devices='usb0 usb1 usb2 usb3 usb4'
->   som_cc_boot=if test ${card1_name} = SCK-KV-G; then setenv boot_targets mmc1 ${usb_boot_devices} pxe dhcp jtag && run distro_bootcmd; elif test ${card1_name} = SCK-KR-G; then setenv boot_targets ${usb_boot_devices} pxe dhcp jtag && run distro_bootcmd; else test ${card1_name} = SCK-KD-G; setenv boot_targets ${usb_boot_devices} pxe dhcp jtag && run distro_bootcmd; fi;"
->   som_mmc_boot=setenv boot_targets mmc0 && run distro_bootcmd
->   
-> +# To disable bootmenu set enable_bootmenu=0
-> +enable_bootmenu=1
-> +check_cc_for_default_boot=if test ${card1_name} = SCK-KV-G || test ${card1_name} = SCK-KR-G || test ${card1_name} = SCK-KD-G; then setenv bootmenu_default 1; else setenv bootmenu_default 0; fi
-> +som_bootmenu=if test ${enable_bootmenu} = 1; then run check_cc_for_default_boot; bootmenu; else run som_mmc_boot; fi
-> +
->   k26_starter=SMK-K26-XCL2G
->   k24_starter=SMK-K24-XCL2G
-> -bootcmd=setenv model $board_name && if setexpr model gsub .*$k24_starter* $k24_starter || setexpr model gsub .*$k26_starter* $k26_starter; then run som_cc_boot; else run som_mmc_boot; run som_cc_boot; fi
-> +bootcmd=setenv model $board_name; setexpr model gsub ".*${k24_starter}.*" starter; setexpr model gsub ".*${k26_starter}.*" starter; if test ${model} = "starter"; then run som_cc_boot; else run som_bootmenu; fi
-> +
-> +# Boot menu
-> +bootmenu_0=eMMC Boot=run som_mmc_boot
-> +bootmenu_1=SD Boot=run som_cc_boot
-> +bootmenu_delay=5
->   
->   usb_hub_init=mw 1000 0056 && sleep 1 && i2c write 1000 2d aa 2 -s
->   
+The boards have an embedded SPI NOR flash, and EFI Capsule support
+is added.
 
-Applied.
-M
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
+Neil Armstrong (2):
+      ARM: meson: add support for Libre Computer aml-a311d-cc
+      ARM: meson: add support for Libre Computer aml-s905d3-cc
+
+ .../dts/meson-g12b-a311d-libretech-cc-u-boot.dtsi  |  15 +++
+ .../dts/meson-sm1-s905d3-libretech-cc-u-boot.dtsi  |  15 +++
+ board/libre-computer/aml-a311d-cc/MAINTAINERS      |   7 ++
+ board/libre-computer/aml-a311d-cc/Makefile         |   6 ++
+ board/libre-computer/aml-a311d-cc/aml-a311d-cc.c   |  44 +++++++++
+ board/libre-computer/aml-s905d3-cc/MAINTAINERS     |   7 ++
+ board/libre-computer/aml-s905d3-cc/Makefile        |   6 ++
+ board/libre-computer/aml-s905d3-cc/aml-s905d3-cc.c |  44 +++++++++
+ configs/aml-a311d-cc_defconfig                     | 108 +++++++++++++++++++++
+ configs/aml-s905d3-cc_defconfig                    | 108 +++++++++++++++++++++
+ doc/board/amlogic/aml-a311d-cc.rst                 |  46 +++++++++
+ doc/board/amlogic/aml-s905d3-cc.rst                |  46 +++++++++
+ doc/board/amlogic/index.rst                        |   2 +
+ 13 files changed, 454 insertions(+)
+---
+base-commit: 13fd7a17858e5f2555a1d68e4afa75fceda0dac0
+change-id: 20240920-u-boot-topic-libre-computer-solitude-alta-c3b22cbd16df
+
+Best regards,
+-- 
+Neil Armstrong <neil.armstrong@linaro.org>
+
