@@ -4,89 +4,203 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF6A6C7882E
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 12:11:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27C56C7883B
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 13:00:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8ECD88AE7;
-	Fri, 20 Sep 2024 14:10:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4A2518919A;
+	Fri, 20 Sep 2024 15:00:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cNYrQ/8x";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="QeMnX5i6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 189EB88B1A; Fri, 20 Sep 2024 14:10:57 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 04B5F891B9; Fri, 20 Sep 2024 15:00:04 +0200 (CEST)
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on2062c.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2412::62c])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 75FD688953
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 14:10:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AE8BE89163
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 14:59:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a8d0d82e76aso256806466b.3
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 05:10:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726834254; x=1727439054; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=7UCD9U3GTzAjKQdMRhmEr0GTl4LMhOklXCFUE06cu9k=;
- b=cNYrQ/8xJyfmiyYJUlm6AI4nRzkSgZg2/DsUIsODT1j58mof+J+HJNRtq88Vyr3GvT
- dZA3CNoK+Rbadh4M8C1GB4yGs4ZyknINUYws7N1IqKWVRURmglLzIEohhUNn28IeFksc
- miuTT4Nw8R2Xub0pLmkAopf5mTgoJKIF/qESIRo5kICWNkS40tVp7IGvMkSDJxogs1/K
- RRQu38xf9HQyDztmLmWni5aEAT33kKNsiBvUfcKpgQN62zYsLsoVuWIS2WTOtimosnaz
- j+yH3F110yXulToBObd+S2HSUgpLOb1YkP2jiZsBMnFNBia7XUkCT+0+2VXh2orNdLOQ
- y1Ng==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726834254; x=1727439054;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7UCD9U3GTzAjKQdMRhmEr0GTl4LMhOklXCFUE06cu9k=;
- b=JC+iZ+Tv46gLBWg8K0PEt5jk7BWTujszB86o0wgQZrkhKZ4kyy70Kq7twBra9OOAaq
- 2TWBkEaNkgHf2claIFPYYEXeYTdi9hXdFczB+VxabpA2YD74aSaZ5twfrB2/SWS0xVMS
- Fihl8lT78s7wS6dBVoaJhjH2ai8MDnDJgcA4rnQWZsEY2QngloI1dWnq5Mk4W2fR+sdP
- +Gz23F+YJtBRRorqJPx2m8WTb+TUdL61J1mvrd3yyFEJMEjBfBs6ujTJ27A94ljBHDj9
- jeOwfpCyR8DrqUfjIroYItakK3UwdpG0jxDF1OZ7ngVjzy+yDA/uwpT2LHKy3YtUBXlu
- zzvw==
-X-Gm-Message-State: AOJu0YzoxXQ/4QSPWG0yV6UkCLGUeSaT/b2t+RYQc215EW9y4QPiL1f4
- TjSKqQnwy0k/jBzBe4KmMJq3n2fGDMJKrXL8Qz72gmOMS5628Ct3ICEWl7Hskmg=
-X-Google-Smtp-Source: AGHT+IHTQ9kThJsmm0b3viDxQGe96IUXodFPeR0f2TdQtbF1TSfpeo4qUrmVlzX9duyhGoji4wGQZg==
-X-Received: by 2002:a17:907:e25b:b0:a8a:91d1:5262 with SMTP id
- a640c23a62f3a-a90d56afa53mr202338066b.28.1726834253776; 
- Fri, 20 Sep 2024 05:10:53 -0700 (PDT)
-Received: from hera (ppp176092143132.access.hol.gr. [176.92.143.132])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a906109676esm840572266b.33.2024.09.20.05.10.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Sep 2024 05:10:52 -0700 (PDT)
-Date: Fri, 20 Sep 2024 15:10:50 +0300
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Eugene Uriev <eugeneuriev@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Richard Weinberger <richard@nod.at>, Sean Anderson <seanga2@gmail.com>,
- Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>
-Subject: Re: [PATCH v3 2/3] efi: Allow use of malloc() for the EFI pool
-Message-ID: <Zu1mSkoCuB8PKhBi@hera>
-References: <20240901222259.456932-1-sjg@chromium.org>
- <20240901222259.456932-3-sjg@chromium.org>
- <CAC_iWjLwbeU2vO5-BdYz8gbpTH4Zq=7W_JeUVVURCnMtPg8DWg@mail.gmail.com>
- <CAFLszTicmXVmi45AVZgmxcT=gnxpUS4-UAyD5=_UC2LWDF2W1Q@mail.gmail.com>
- <CAC_iWjL26e7rLtAkzNSGmqNsG9TJn=PE-4Z4GGz-Qt_8izWopg@mail.gmail.com>
- <CAFLszTjWn9dwvfBT6sPMvgWNAF5Q7KLq1_o2b4=zao9fx1mhdw@mail.gmail.com>
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=UaXA7xRz/ECCQITHh9r0T5h3n5r1zDAsdD+3ewz4au1rEigKyxa+bX9VCOgu8OlVP+HQdbHlyEmwtowBbDoqGBdDGlzBTssrbxux/oa+q0S2HXNmyRzUWxBXyOniEBZOnLjD090Zf4r5+nHkaQ75amsy/a640sHVYiB3ucDRYm9kkanjKJZYsQfy80Jqu1ooumlmQfAo9ooW3sU/9WYAkhQIGdf69PTSJ5oW+rVYXqppCdFrhsOacClAzkfGr3tWZGunln1bMwU90DqFyMrxnbId8m0q9Qnl7UCEVV507ZFcCB3qLvAa71zPlBesp9cCG9anWvpJQTVUWULfZVD/vA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=jOP7U1ov7t7niVBYhilsXWBJ7sSCB0tYs2y/aOyak6Q=;
+ b=T61q6Vz9ClqfiLFcTuKqa1jANaQMP3dSaq9xCguHBdD6PhS3JmmNuGwkHvkYj0stFbSMinKLTWzx/Eu4qPkVhrofjjTwO+Yww8svcTvH5awpASjSH6CEG/1kEFMLfyjxFQ6TDQC/ijnCzzy85de2QpSPiuPPA5Y3oaRj4QvTaABzQ6ZodlaiRQohEu/VenhWpx0i2gOrzOdCSEHAVrKvjZE2sTLlKN0CIdRcrqItADDbzKBgYciNRfr3PR5kXW5foTN55EsQiTj9tGp747E8/f0PRlofdBSAelo8y4De7VO1trhD/nUxKlO4u5NNgikXILPfD+ivoV+KWdbylEXQag==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=jOP7U1ov7t7niVBYhilsXWBJ7sSCB0tYs2y/aOyak6Q=;
+ b=QeMnX5i6LmnHEVTYfcjVIRZ7srQHK+B+TmrJq/cl6I3TyQzm3+Yb0wJYx8GBmWIe9C0oCfFiJWQDZeh5nAYE5HZ3ryjWdV1FGvJknWh0BmeyvTNrWNp3K9dxMDfeuy7UWDvgIp+cDxTh/sf22wy85S6+6jzfubo1ppOGkkZvNR0=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
+ by MW4PR12MB5625.namprd12.prod.outlook.com (2603:10b6:303:168::6)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7982.21; Fri, 20 Sep
+ 2024 12:59:53 +0000
+Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
+ ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
+ ([fe80::7f35:efe7:5e82:5e30%5]) with mapi id 15.20.7982.018; Fri, 20 Sep 2024
+ 12:59:53 +0000
+Message-ID: <c06e3326-54c5-486a-b1d9-10e68af6284a@amd.com>
+Date: Fri, 20 Sep 2024 14:59:38 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 0/2] fdtoverlay related changes
+To: Prasad Kummari <prasad.kummari@amd.com>, u-boot@lists.denx.de, git@amd.com
+Cc: venkatesh.abbarapu@amd.com, padmarao.begari@amd.com, git@xilinx.com,
+ jagan@amarulasolutions.com, n-francis@ti.com, d-gole@ti.com
+References: <20240906070808.1045991-1-prasad.kummari@amd.com>
+Content-Language: en-US
+From: Michal Simek <michal.simek@amd.com>
+Autocrypt: addr=michal.simek@amd.com; keydata=
+ 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
+ 3i3l5DA=
+In-Reply-To: <20240906070808.1045991-1-prasad.kummari@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1PR0902CA0047.eurprd09.prod.outlook.com
+ (2603:10a6:802:1::36) To SJ2PR12MB8109.namprd12.prod.outlook.com
+ (2603:10b6:a03:4f5::8)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAFLszTjWn9dwvfBT6sPMvgWNAF5Q7KLq1_o2b4=zao9fx1mhdw@mail.gmail.com>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|MW4PR12MB5625:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8309bc87-943a-4ce0-8f8e-08dcd9741e4c
+X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?QXBDaWJ1WjlLVVpOYjZXcnBxQm1LTVdUVjlvTnhnUnduQ2Y1eVNtV1FVbm95?=
+ =?utf-8?B?cmREY1ZGUlU0K3gyTWJ0UEdvWUVkcHNIN0grT2pqbDJvWlJXU2U3bGhGM3JW?=
+ =?utf-8?B?RWdqZy9JZEJ3NUFKNTRQclhMUjBuMkJTNlExYjBoQ0RIVXdpSVVsN05hdnBS?=
+ =?utf-8?B?czI5WjIxZnRYd3Z5akVYeER5bTZrWlpSVzlibFhwa3VBVG1lU3pnQysvNVFI?=
+ =?utf-8?B?aXRyU0IvWkQ0U2FvQ01wYmtkQWJtbkxUVUFDL3RWTlU0bmc3UWFxc0g5L0Ri?=
+ =?utf-8?B?VmltRnBzNVo3R2FITFZ5bG1MK1ZVU0tIS0hPbEJtMEpJbnR0OS8yeC9nNWNo?=
+ =?utf-8?B?ZEhGMHNCM0RBbk5FcU82Y2VUWmMyeDlpRHZ2UGliZzI1L2xhMUtLakVxdjFN?=
+ =?utf-8?B?WWR0cjg1amtuOTI1TlF6c2xJV0dnZ1RkLzRxVzk4WjVWb1hSM1hialY0ZTRC?=
+ =?utf-8?B?NFV1SVJ0WXpHSG5pRHQvVjFQKzFxdUo3emRPUFVSdDJzN3pIcW5iZDJwYUdo?=
+ =?utf-8?B?M2RQdFdmaDdhaENRcjJVUmgxRG1IeEMveVJXVDcxWnNNWHFkN0V4RkV4MlJn?=
+ =?utf-8?B?R2lFalFhU1pzK0xZT3pvalJSN0w4UDRvSDNscjBDSnEzQTVyS1crTTI3bHdw?=
+ =?utf-8?B?OURZVlg2REVFUEtSaVpoWTNaeXJkemlNdG1ianc2RUxUQ1pLVVE3L3o2QmR0?=
+ =?utf-8?B?QkZMVGJ6WDlmVGtBSXp1SVVNbC9vZFpxaW9vVG9PNk1rYm8yRnVId1QwRTNk?=
+ =?utf-8?B?czJvb0NSS2RUaG9sZ0xqVy9DNDlXWWhzSEI2a3VjampSNzFYY0NKVE9PRlh5?=
+ =?utf-8?B?WHdtVjkzOU41c2QwbGdqbEtEY2c3ai9aOTNhOVhjOWpVdXBXdVVhN1l2c2hH?=
+ =?utf-8?B?N1BCM2RWOUFxQkMzV2cvb0VQQXZvbWxDN3RaZWxPMTduSnQzdU5obmdsNGtv?=
+ =?utf-8?B?Nmx6bnI0RzZ2SUVUQTRBd21GSG5tZEh3aFZOTDN6ZTlrM3RTa0NiL2szZU9u?=
+ =?utf-8?B?b1hQUmFBM2ZweWZsbTBySFBDcTRxRU5nYlNQODFieVc1L244aGJvSCtkYUxL?=
+ =?utf-8?B?RFhJUHI0aTh1aGNJK3dNYTlPMkNLTjAzOEFHVzlJOUtuTDMyb1RMQTl5OEUz?=
+ =?utf-8?B?dmxJbGVEVFArSnlKZUpuZlB4dnlJZ25kdXFuei83WjFSR2ZMUkM4amp2THpK?=
+ =?utf-8?B?QVN0YXl0OXEyRkpMaUhDa3pkaUxEc0pQUTNDRHJoWTBUVmNVUWFJK3ZLQUQ4?=
+ =?utf-8?B?bU5JL2NXckYvMEFCaTJhamhNdm9aSE4rYmZYWXVJQ2xUempiV3hrV2tLdkRC?=
+ =?utf-8?B?WDJVSEFhL2VKUU11WlJlRStHT01LTHpKdWVLc1dObHRGNDBqN0NlWCtvVlpp?=
+ =?utf-8?B?VGVaOG1xVUFHU1pNNThGRSs4N2hyRmU0TmpEODVWUzY3MmVqVmlpWUhhNm5M?=
+ =?utf-8?B?dWdFeTBuNURjM3pkM0RWNFFUMHBEZHpGQTRZQk1xcUMyR2VCZnNKWEZzVktw?=
+ =?utf-8?B?WXBwU2lSbDZFWnZBaVhtTFFoZThkdTdCKzNXdnl5cnJNMVQ3Ky8yUk0wYUli?=
+ =?utf-8?B?MFhZcGhqNmJudnFLVWIvdGl1am5VeGd0ZnllaWJHK3luVlF3d1VOMEJGRXl5?=
+ =?utf-8?B?aUlvVExGQUJEcHdhRzZWb0xKT3EycmNMdDE5UE1CdWJEeWllQmduc1VaRmUy?=
+ =?utf-8?B?RnA4MkFYTXJnNnNQeGgyQ0cvRmxTRkMvOWg0d2RoSnNxY05ML1dMUjhOd2Z6?=
+ =?utf-8?B?MDVrNXdPOVpCVkRQNDBZeW1iNWpaMCtIUUkwNlZJTzk3T3h5d3E0V0xlaEVU?=
+ =?utf-8?B?U3p2VUMyMVhONEt1MWl4UT09?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WWtsWEJubjFqd0tEN1M2UmNZRkNzMFhKRk96L0FNMHdZTnBRV0h6aWI3NHVE?=
+ =?utf-8?B?T2Zrbk42UVNVT3Y5NlhTWjhZb2prY3pPTGZhV1NzbnpYZEtVQVQxWWtOc0h3?=
+ =?utf-8?B?Ylova1c5YWJYV1Z5ODIzUkJyQ3k5ay9IR21EbEZFcmF0ZDQrT09ZQ0RCWlhi?=
+ =?utf-8?B?TUhLSEljN3hpdC9VdGJoK1FqRGdKNk5tL3VWcUFsL2M3WTZrdjNnbWRhcXhB?=
+ =?utf-8?B?MlFPR1JhNmRjS0t4a1BjTnM0M3JEVmJnVFpPUTdpUlJ2MWhKenByM1d2enJr?=
+ =?utf-8?B?SC9WT0p5OTY0ZkZjR1BqNGVwZUF3M0Q2Y0hiUmRCMm1HUTQ2bVlRS2NqRkJC?=
+ =?utf-8?B?bTByOGFKcXN2TW5zd1RvcnREdmtaWFZqc2t6Z1hvYlk2ekZ6dlNQdjR6Rmhv?=
+ =?utf-8?B?ck1TY2VyQ1RDRmh5ODk3eURpaFNORVVDVzdNT2VabE1MNDBGbUlnTUEyZ2hC?=
+ =?utf-8?B?VTRadkNMdk4wQlBwTmdLNXBNR0ZiV0tCVGU3QjdNMzNvYjBsZVRuRnV5VTRR?=
+ =?utf-8?B?TnFFWmRMU2tFOHM4ZnRMRElUT1VxK2JqdEZralJYZTZ0YXBGMXVKMnZIcTg4?=
+ =?utf-8?B?TzE0VFpyaUFaRVZ2TTd0d2taTFJpT3c4d0VsUzc5QUdqTDdSZndRdXIrdytm?=
+ =?utf-8?B?d2JrTXdFN2pwSmxRSmFjM2hUV0FjeFduREdLVU93dzZoaXhqSHIzdkVtUE03?=
+ =?utf-8?B?YW1MZmxhemdjMFRsdDNhaDJ0d1QwR1BoQ2Qrb01ncWhSOUZSL2gxV0doRWN1?=
+ =?utf-8?B?U0xGNUNkVEF1Yk5hTnRRQVBHSHZNMjVDOWJkbVRHSGJ2RzBJaklYVmNZUCtm?=
+ =?utf-8?B?QkUrL0JyUjlVR29YVEIyVkp2MFdNV0lUbGNGMTRzQXV0bER1YjNDWVRSZ3hB?=
+ =?utf-8?B?T1ZaRzNmSGQreG9SWUZlOEFvMmFmZVJIdTU1ZU1sU2F0dWlMN0FuTkZwSk1D?=
+ =?utf-8?B?QnQ1T2tRd0FHbTlGY3ZuNzRnNWZHWXE2bGtrdk1Vck5lNzk2elFZcS85emlh?=
+ =?utf-8?B?RzBlOFdaTWdSb1RUdS9KKytRdUNhNDM4YkxtZjlCK1VyREpvLzFyLzdkWVVU?=
+ =?utf-8?B?Y3B6a0NmdW91MitxczJya0VyK0JCQVpnT1JsNS9IcjBBWHlTOW81cWlYbEl4?=
+ =?utf-8?B?R1JVWCtlV2hyYVRYOGpYQTEyM0NtcmY1WUZldFBxblVPMzlBUHlvUFZRVFZ2?=
+ =?utf-8?B?d2V2ZDNNcUUvMFJFSjdpT1VEQytQMy9HRXJxVnd0YmV1OWNoRE1BMzdSdVNC?=
+ =?utf-8?B?WlRDQmJML3l2QlpJRHZCRkk3SFRyazB5S1BQOVVBNDBQTWJIQXNmQW4wZ3BL?=
+ =?utf-8?B?UXRRSlJMUWlKUzVRcCtGQ0FjSWhrcWN0a0xnOXV0T3o3cjhOZ2NGaGtjWTE4?=
+ =?utf-8?B?UVpWcWQxa3RHdkxoUVhTUXRmOGdneUxKLy9FSGJyWi90dzRiQVZrUnhlMDVh?=
+ =?utf-8?B?RGNraFI3T3VlK08rMmF1WnRrN0djN0V5cHZiTGVFaFc5bmNXSklxME1lZndj?=
+ =?utf-8?B?cnRSUDM3M2FSZkM4eUhSY09vWTJQSzJxVjMwYmhsV1lOWHNDMGxlQkd4Z2Fo?=
+ =?utf-8?B?c25JUGhESVF2NTRXaS9wRmVnMW9MU2dVY3R0STlIQlN4ejhOZTMwM3UrcTVJ?=
+ =?utf-8?B?RENsVW5TZWduWlY4N1dKV1FMUDRwaFp0OFZjdnl5bkpraVA1MEkzNW80UmFq?=
+ =?utf-8?B?WjNWS05ValJZQTJML3N0RWdaYzUrVis1UmthNkhqdjd6TXZWalZIaG5mRXdq?=
+ =?utf-8?B?RGtQUWxmV2dSTDFzUWF1V3NBcy90M05ialpraU8yM0Rzc1pmdGNUTTdxMyto?=
+ =?utf-8?B?MklXNCtGQ3AxdlBHWTFseDBoUm1peDViZ2FiL2VrRlRab010U08wdXlPR0Mx?=
+ =?utf-8?B?aEVBdUtoTnJubG9YNEwrT2hpRE93Yi9uOUN2OHdMSzRXdVV3TktVUVZJSVdZ?=
+ =?utf-8?B?MG0yMkNGcWxzVFh6b3lRT1BzNFlKR3Q1U3JRVnlnRkhJMVBFWWpjM0FWY2pU?=
+ =?utf-8?B?MEhtV3NpUTZZeHJScUYrdWF3NGdBYUFYQXNzNEFtWVk1Rzg4TUs2bmFhWlFh?=
+ =?utf-8?B?T0ZJakxOTmZhcG5pQWh6ejA5RHBMeWFMRWJUQ090cWp3czhXK2dKQ3V3Qklh?=
+ =?utf-8?Q?kKzxyEi5EH9ps5ztFA3/lQUH/?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8309bc87-943a-4ce0-8f8e-08dcd9741e4c
+X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Sep 2024 12:59:52.9962 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: mr6UUHSd7ltCApfRKTX/+aH0Ud7D/bFwv0at/gu0YDdXHu7BpZ9ajc1KbC57RAqS
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB5625
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,366 +217,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon
 
-A few more comments after looking into this a bit more
 
-On Mon, Sep 16, 2024 at 05:42:59PM +0200, Simon Glass wrote:
-> Hi Ilias,
->
-> On Thu, 12 Sept 2024 at 08:37, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > Hi Simon,
-> >
-> > On Fri, 6 Sept 2024 at 16:01, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Hi Ilias,
-> > >
-> > > On Fri, 6 Sept 2024 at 01:13, Ilias Apalodimas
-> > > <ilias.apalodimas@linaro.org> wrote:
-> > > >
-> > > > Hi Simon,
-> > > >
-> > > > Apologies for the late reply, I was attending a conference.
-> > > >
-> > > > On Mon, 2 Sept 2024 at 01:23, Simon Glass <sjg@chromium.org> wrote:
-> > > > >
-> > > > > This API call is intended for allocating small amounts of memory,
+On 9/6/24 09:08, Prasad Kummari wrote:
+> Changes in v2:
+> - Corrected commit description.
+> 
+> Prasad Kummari (2):
+>    kbuild: cherry-pick kbuild fdtoverlay changes from linux
+>    arm64: zynqmp: Remove overlays and add new dtb entries for ZynqMP
+> 
+>   arch/arm/dts/Makefile  | 78 +++++++++++++++++++++++++++++++++---------
+>   scripts/Kbuild.include |  4 +++
+>   scripts/Makefile.build |  1 +
+>   scripts/Makefile.lib   | 27 +++++++++++++++
+>   4 files changed, 93 insertions(+), 17 deletions(-)
+> 
 
-Well it's not only for small memory. Look below.
-
-> > > > > similar to malloc(). The current implementation rounds up to whole pages
-> > > > > which can waste large amounts of memory. It also implements its own
-> > > > > malloc()-style header on each block.
-
-Yes and there is a reason for that. The EFI spec description is
-
-"The AllocatePool() function allocates a memory region of Size bytes
- from memory of type PoolType and returns the address of the allocated
- memory in the location referenced by Buffer. This function allocates
- *pages* from EfiConventionalMemory as needed to grow the requested pool
- type. All allocations are eight-byte aligned. The allocated pool memory
- is returned to the available pool with the EFI_BOOT_SERVICES.FreePool()
- function"
-
-The current implementation of efi_allocate_pool kind of does that, but is
-indeed very inefficient, since it allocates a single page and pool every time.
-A proper implementation would be to allocate a page and return the size
-needed. Then for every subsequent request to the same pooltype, you look up
-the existing pool, and return the requested memory. If the pool is depleted
-you allocate another *page* and so on and so forth. That's where the
-metadata is actually useful.
-
-So the suggested solution here is trying to fix an existing hack, by
-papering over the problem with *another* hack that will basically make the
-process of fixing efi_allocate_pool() properly impossible.
-
-> > > > >
-> > > > > For certain allocations (those of type EFI_BOOT_SERVICES_DATA) we can
-> > > > > use U-Boot's built-in malloc() instead, at least until the app starts.
-> > > > > This avoids poluting the memory space with blocks of data which may
-> > > > > interfere with boot scripts, etc.
-> >
-> > This won't happen with LMB merged no?
->
-> It still happens with LMB merged. As I covered in the cover letter,
-> this is orthogonal to all of that. In fact, I think a lot of the
-> effort there is actually missing the point, unfortunately.
-
-So why isn't this an LMB problem since we plan to use it for EFI
-allocations? LMB is trying to fix similar issues for efi_allocate_pages().
-Once that's done efi_allocate_pool() which calls efi_allocate_pages() is
-automatically sorted. So the only problem is efficiency, no ?
-
->
-> >
-> > > > >
-> > > > > Once the app has started, there is no advantage to using malloc(), since
-> > > > > it doesn't matter what memory is used: everything is under control of
-> > > > > the EFI subsystem. Also, using malloc() after the app starts might
-> > > > > result in running of memory, since U-Boot's malloc() space is typically
-> > > > > quite small.
-> > > > >
-> > > > > In fact, malloc() is already used for most EFI-related allocations, so
-> > > > > the impact of this change is fairly small.
-> >
-> > Where? We explained in the past that malloc is only used to handle
-> > internal EFI stuff which don't need the efi allocations and that's
-> > perfectly fine.
->
-> I see only about 5 allocations affected by this change, when booting from EFI.
-
-What we can do, is go over the usage of efi_allocate_pool(). A quick grep
-showed a few uses, but I am pretty certain those can be replaced by
-efi_allocate_pages().
-
-Thanks
-/Ilias
-
->
-> >
-> > > > >
-> > > > > One side effect is that this seems to be showing up some bugs in the
-> > > > > EFI code, since the malloc() pool becomes corrupted with some tests.
-> > > > > This has likely crept in due to the very large gaps between allocations
-> > > > > (around 4KB), which provides a lot of leeway when the allocation size is
-> > > > > too small. Work around this by increasing the size for now, until these
-> > > > > (presumed) bugs are located.
-> > > > >
-> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > ---
-> > > > >
-> > > > > (no changes since v1)
-> > > > >
-> > > > >  common/dlmalloc.c            |   7 +++
-> > > > >  include/efi_loader.h         |  18 ++++++
-> > > > >  include/malloc.h             |   7 +++
-> > > > >  lib/efi_loader/efi_bootbin.c |   2 +
-> > > > >  lib/efi_loader/efi_memory.c  | 110 ++++++++++++++++++++++++++---------
-> > > > >  5 files changed, 117 insertions(+), 27 deletions(-)
-> > > > >
-> > > > > diff --git a/common/dlmalloc.c b/common/dlmalloc.c
-> > > > > index 1ac7ce3f43c..48e9f3515f7 100644
-> > > > > --- a/common/dlmalloc.c
-> > > > > +++ b/common/dlmalloc.c
-> > > > > @@ -613,6 +613,13 @@ void mem_malloc_init(ulong start, ulong size)
-> > > > >  #endif
-> > > > >  }
-> > > > >
-> > > > > +bool malloc_check_in_range(void *ptr)
-> > > > > +{
-> > > > > +       ulong val = (ulong)ptr;
-> > > > > +
-> > > > > +       return val >= mem_malloc_start && val < mem_malloc_end;
-> > > > > +}
-> > > > > +
-> > > > >  /* field-extraction macros */
-> > > > >
-> > > > >  #define first(b) ((b)->fd)
-> > > > > diff --git a/include/efi_loader.h b/include/efi_loader.h
-> > > > > index 38971d01442..d07bc06bad4 100644
-> > > > > --- a/include/efi_loader.h
-> > > > > +++ b/include/efi_loader.h
-> > > > > @@ -805,6 +805,24 @@ int efi_disk_probe(void *ctx, struct event *event);
-> > > > >  int efi_disk_remove(void *ctx, struct event *event);
-> > > > >  /* Called by board init to initialize the EFI memory map */
-> > > > >  int efi_memory_init(void);
-> > > > > +
-> > > > > +/**
-> > > > > + * enum efi_alloc_flags - controls EFI memory allocation
-> > > > > + *
-> > > > > + * @EFIAF_USE_MALLOC: Use malloc() pool for pool allocations of type
-> > > > > + *     EFI_BOOT_SERVICES_DATA, otherwise use page allocation
-> > > > > + */
-> > > > > +enum efi_alloc_flags {
-> > > > > +       EFIAF_USE_MALLOC        = BIT(0),
-> > > > > +};
-> > > >
-> > > > Why do we need to handle cases differently? IOW can't all EFI
-> > > > allocations that need a pool gi via malloc?
-> > >
-> > > Once the app boots, as Heinrich pointed out, it expects to be able to
-> > > malloc() very large amount of memory, but the malloc() pool is small.
-> > >
-> >
-> > Yes, it does.  My problem is that right now we have everything in the
-> > same pool, handled by LMB, but you are arguing it's 'cleaner' to split
-> > the allocations. I can't really understand what the problem with the
-> > current allocations is.
->
-> The problem is that they happen in space, between the bottom of memory
-> and the bottom of the stack. That is the area which is supposed to not
-> be used by U-Boot.
-> >
-> > > >
-> > > > [...]
-> > > >
-> > > > > @@ -24,6 +24,14 @@ DECLARE_GLOBAL_DATA_PTR;
-> > > > >  /* Magic number identifying memory allocated from pool */
-> > > > >  #define EFI_ALLOC_POOL_MAGIC 0x1fe67ddf6491caa2
-> > > > >
-> > > > > +/* Flags controlling EFI memory-allocation - see enum efi_alloc_flags */
-> > > > > +static int alloc_flags;
-> > > > > +
-> > > > > +void efi_set_alloc(int flags)
-> > > > > +{
-> > > > > +       alloc_flags = flags;
-> > > > > +}
-> > > > > +
-> > > > >  efi_uintn_t efi_memory_map_key;
-> > > > >
-> > > > >  struct efi_mem_list {
-> > > > > @@ -57,8 +65,12 @@ void *efi_bounce_buffer;
-> > > > >   * The checksum calculated in function checksum() is used in FreePool() to avoid
-> > > > >   * freeing memory not allocated by AllocatePool() and duplicate freeing.
-> > > > >   *
-> > > > > - * EFI requires 8 byte alignment for pool allocations, so we can
-> > > > > - * prepend each allocation with these header fields.
-> > > > > + * EFI requires 8-byte alignment for pool allocations, so we can prepend each
-> > > > > + * allocation with these header fields.
-> > > > > + *
-> > > > > + * Note that before the EFI app is booted, EFI_BOOT_SERVICES_DATA allocations
-> > > > > + * are served using malloc(), bypassing this struct. This helps to avoid memory
-> > > > > + * fragmentation, since efi_allocate_pages() uses any pages it likes.
-> > > > >   */
-> > > > >  struct efi_pool_allocation {
-> > > > >         u64 num_pages;
-> > > > > @@ -631,18 +643,19 @@ void *efi_alloc_aligned_pages(u64 len, int memory_type, size_t align)
-> > > > >  /**
-> > > > >   * efi_allocate_pool - allocate memory from pool
-> > > > >   *
-> > > > > + * This uses malloc() for EFI_BOOT_SERVICES_DATA allocations if EFIAF_USE_MALLOC
-> > > > > + * is enabled
-> > > > > + *
-> > > > >   * @pool_type: type of the pool from which memory is to be allocated
-> > > > >   * @size:      number of bytes to be allocated
-> > > > >   * @buffer:    allocated memory
-> > > > >   * Return:     status code
-> > > > >   */
-> > > > > -efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size, void **buffer)
-> > > > > +efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size,
-> > > > > +                              void **buffer)
-> > > > >  {
-> > > > >         efi_status_t r;
-> > > > >         u64 addr;
-> > > > > -       struct efi_pool_allocation *alloc;
-> > > > > -       u64 num_pages = efi_size_in_pages(size +
-> > > > > -                                         sizeof(struct efi_pool_allocation));
-> > > > >
-> > > > >         if (!buffer)
-> > > > >                 return EFI_INVALID_PARAMETER;
-> > > > > @@ -652,13 +665,43 @@ efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size,
-> > > > >                 return EFI_SUCCESS;
-> > > > >         }
-> > > > >
-> > > > > -       r = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, pool_type, num_pages,
-> > > > > -                              &addr);
-> > > > > -       if (r == EFI_SUCCESS) {
-> > > > > -               alloc = (struct efi_pool_allocation *)(uintptr_t)addr;
-> > > > > -               alloc->num_pages = num_pages;
-> > > > > -               alloc->checksum = checksum(alloc);
-> > > > > -               *buffer = alloc->data;
-> > > > > +       if ((alloc_flags & EFIAF_USE_MALLOC) &&
-> > > > > +           pool_type == EFI_BOOT_SERVICES_DATA) {
-> > > > > +               void *ptr;
-> > > > > +
-> > > > > +               /*
-> > > > > +                * Some tests crash on qemu_arm etc. if the correct size is
-> > > > > +                * allocated.
-> > > > > +                * Adding 0x10 seems to fix test_efi_selftest_device_tree
-> > > > > +                * Increasing it to 0x20 seems to fix test_efi_selftest_base
-> > > > > +                * except * for riscv64 (in CI only). But 0x100 fixes CI too.
-> > > > > +                *
-> > > > > +                * This workaround can be dropped once these problems are
-> > > > > +                * resolved
-> > > > > +                */
-> > > > > +               ptr = memalign(8, size + 0x100);
-> > > >
-> > > > I don't think the explanation is enough here. On top of that adding
-> > > > random values to fix the problem doesn't sound right. Can we figure
-> > > > out why?
-> > >
-> > > My guess is that an allocated pointer is going beyond its limits. The
-> > > newer upstream dlmalloc() has a checker which might help. I fiddled
-> > > around a bit but could not work one where the problem was.
-> >
-> > Ok, but I don't want us to pull code with random values that happened
-> > to work during testing. We need to understand why
->
-> It is presumably because of bugs in the EFI code. The current code
-> adds about 4KB to the size of each allocation, so adding 100 bytes is
-> at least an improvement. I did do some digging but couldn't
-> immediately locate any bugs. To be honest I am not sure what is going
-> on.
->
-> But once I have these two EFI series in, I will spend some time
-> digging into it and help fix these (presumed) bugs.
->
-> >
-> > >
-> > > >
-> > > > > +               if (!ptr)
-> > > > > +                       return EFI_OUT_OF_RESOURCES;
-> > > > > +
-> > > > > +               *buffer = ptr;
-> > > > > +               r = EFI_SUCCESS;
-> > > > > +               log_debug("EFI pool: malloc(%zx) = %p\n", size, ptr);
-> > > >
-> > > > So as I commented above, I think this is papering over whatever
-> > > > problem you are seeing. If you want to move the pool to use malloc()
-> > > > that's fine, but *all* of the pool allocations should use it. Not just
-> > > > boot services because its easier to retrofit it on the current code.
-> > >
-> > > Please see above. Also, please see the commit message. This change
-> > > actually solves the problems I am seeing, quite well.
-> >
-> > I did and the only 'problem' that is mentioned is polluting and
-> > overwriting memory of scripts etc. But that goes away with LMB AFAICT.
-> > So the only advantage is that you save a few kbs of space when
-> > requesting pool allocations?
->
-> No, you misunderstand. I am happy to arrange a call to go through this
-> if it is still unclear from my comment above. When I say this is
-> orthogonal to the lmb series, I really do mean that.
->
-> Regards,
-> Simon
->
->
->
-> >
-> > Thanks
-> > /Ilias
-> > >
-> > > >
-> > > > > +       } else {
-> > > > > +               u64 num_pages = efi_size_in_pages(size +
-> > > > > +                                       sizeof(struct efi_pool_allocation));
-> > > > > +
-> > > > > +               r = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, pool_type,
-> > > > > +                                      num_pages, &addr);
-> > > > > +               if (r == EFI_SUCCESS) {
-> > > > > +                       struct efi_pool_allocation *alloc;
-> > > > > +
-> > > > > +                       alloc = (struct efi_pool_allocation *)(uintptr_t)addr;
-> > > > > +                       alloc->num_pages = num_pages;
-> > > > > +                       alloc->checksum = checksum(alloc);
-> > > > > +                       *buffer = alloc->data;
-> > > > > +                       log_debug("EFI pool: pages alloc(%zx) type %d = %p\n",
-> > > > > +                                 size, pool_type, *buffer);
-> > > > > +               }
-> > > > >         }
-> > > > >
-> > > > >         return r;
-> > > > > @@ -686,27 +729,37 @@ void *efi_alloc(size_t size)
-> > > > >  efi_status_t efi_free_pool(void *buffer)
-> > > > >  {
-> > > > >         efi_status_t ret;
-> > > > > -       struct efi_pool_allocation *alloc;
-> > > > >
-> > > > >         if (!buffer)
-> > > > >                 return EFI_INVALID_PARAMETER;
-> > > > >
-> > > > > -       ret = efi_check_allocated((uintptr_t)buffer, true);
-> > > > > -       if (ret != EFI_SUCCESS)
-> > > > > -               return ret;
-> > > > > +       if (malloc_check_in_range(buffer)) {
-> > > > > +               log_debug("EFI pool: free(%p)\n", buffer);
-> > > > > +               free(buffer);
-> > > > > +               ret = EFI_SUCCESS;
-> > > > > +       } else {
-> > > > > +               struct efi_pool_allocation *alloc;
-> > > > >
-> > > > > -       alloc = container_of(buffer, struct efi_pool_allocation, data);
-> > > > > +               ret = efi_check_allocated((uintptr_t)buffer, true);
-> > > > > +               if (ret != EFI_SUCCESS)
-> > > > > +                       return ret;
-> > > > >
-> > > > [...]
-> > >
-> > > Regards,
-> > > Simon
-
-Thanks
-/Ilias
+Applied.
+M
