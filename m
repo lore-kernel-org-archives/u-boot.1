@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67275CF58E5
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 08:02:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43861CF58E5
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 08:02:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 23AC2893E5;
+	by phobos.denx.de (Postfix) with ESMTP id 7DF4D89412;
 	Fri, 20 Sep 2024 10:00:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="R+VhYfrX";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gFDezDRn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C9C989430; Fri, 20 Sep 2024 10:00:47 +0200 (CEST)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id E7D1C89431; Fri, 20 Sep 2024 10:00:47 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6BC9489420
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 10:00:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6278189425
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 10:00:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-3780c8d689aso1122141f8f.0
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 01:00:43 -0700 (PDT)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-378c16a4d3eso1792621f8f.1
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 01:00:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726819243; x=1727424043; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1726819244; x=1727424044; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=P7Qr1NvpSFK4CMfmW1KI1czUdn/vUv6eeDSFFf91Vf0=;
- b=R+VhYfrXT6JGKwI3mRFkYPJIQq2cDkWAaM9OmbKcxNjBA/ZRV/i1KC7uJcsowIz00F
- VQmNzL7cZVS1n8eoGw0Wh/Sf8InR8IgqvPbGxsUnN1n49mof812fhEJwwGzYdKK8KC0S
- Rbf115bQMpD8AZb0zYeRkcUiVyxKgoXEY3gBw1O277HlW+Mz9JL5CX4J9tKfIEnV/s7E
- m9kjFxFMpZrcwohA+ofU/JAp6Chu39kRuypC1I/CZKhyVxYmH1rTXBpGYh+gOUPecQZN
- 1V7fW6gZcMxL6eMbaSkzTeWvUc7b94dsmtuu/kP/mCHhtQpVcrhOtKewfT7zS3EZUaft
- P1FA==
+ :reply-to; bh=rRQw9hErepV7DnPqqgrdzAG1cgOdyL90LsW9f/pFcaU=;
+ b=gFDezDRnWGY2609P6BmYFZw3srmliwgeh25IsmT1UKAkeHU5dzQwmSHmP4QUJjlwEC
+ /nlr04T2XLsbSxK2cZ7cUJhfvtLVBltvDM7PVRT1844d1NiYEA07soh5lGoExkytXAic
+ zkcKVxZzxKxi/NWQ+YF6xsr+yAyLH55DaUEpXQEiwgnU++opC5UXZ7s0ZO8iNRChsDYr
+ wXd+diAeyObtdT+R+1UYM3r8odsry/g4s0V4nA5Aiz2dPqd7PBor9msAueR97cDKjklo
+ x467k5fG8hIHRpv04f5zIRAsvEJ60j8HOJLWBhrZ5/W5pWGI3Z3lHbH8Nru6KWhltOmO
+ JnEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726819243; x=1727424043;
+ d=1e100.net; s=20230601; t=1726819244; x=1727424044;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=P7Qr1NvpSFK4CMfmW1KI1czUdn/vUv6eeDSFFf91Vf0=;
- b=te4H585VDy4Ky8rxL9NaLikPE+J6J8BI/7V46mmFeO+Qv+rZHBiGsUyVR8RrkJiG/5
- BOQcxUPJVpq9QDEz+W0IVNQafLLYhQjsLoh3dlX+0dlXCnb+GUUZ/a6y1pWpmz308S+/
- VMWH/Vsm/6/IsEfRZjbqg7Qn393H6cCJqLR5TnBbbMwsDFGrOZ6SeyuhEe9+zfW0qkqb
- ZeyZNESEsKR86QBD8jA3ibx833+2yJt+8+u9opbAYXuHrSxiRi80iseiEGhjz9KKeEMf
- lsN4KTelIvceItlZnAXehox1djsfQr8p3CibPuNXcWQErPREOfwoG59JZ4EmFg6dJjob
- iGaw==
+ bh=rRQw9hErepV7DnPqqgrdzAG1cgOdyL90LsW9f/pFcaU=;
+ b=dxk99bqOdHx1/scv7jqcD7sUsm1Ew08vSE0eTXD2A0D1GjtmApYq/3/ZEVQmxiDs7E
+ rDhMh/c8FKA8gwMq7ZwfmqBPAelTCb8hSAmAYvG74Sy/bxIf78Ibo1ZU3FFzg5uimiMs
+ f6UL1Q+0utROBVmrkbnZ/wwp4ehBwcGyPJkycnUMFNICHhOL2itvGDvf/EKOVfBWIFB3
+ Rv4jdx4uF9vAorw3zk8NWBluUqG8O+ZrQgCyD5d8w1UEKyePrpW30XN9hMSeE0TJScxv
+ 2/oIBxBtQEzuMWCiE2cr7SAo/9ldqq02gBLp9IoDn1P8nrRhzPK62LdFa9OJEzB/0Zdf
+ pyOw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWLYHnuemOIunqMSsy83qpys0lsykqKKrH+h5N8zB0TbgW9HNHtq6QrZVbnb/y5Gflb0mQOuMc=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywh/XG2j2cY/ZURdZnokbRxRVB+OwNNiMFmyEjcPocg08XaP7di
- h+m/scP/aL+DGT8K1BCTEr/2AEUt66fjqngdjdP3MUVqtQD0ywTw3BF/0UuV6Vw=
-X-Google-Smtp-Source: AGHT+IEbn095IUoy7FBN+M3hyUp0A7Aj8LhzJqD5tQ91rLa1xN5kjWBPw1suVzTbJwWFbPD4uBD2HQ==
-X-Received: by 2002:a5d:4f11:0:b0:37a:33d5:91a8 with SMTP id
- ffacd0b85a97d-37a4318a40emr915144f8f.40.1726819242780; 
- Fri, 20 Sep 2024 01:00:42 -0700 (PDT)
+ AJvYcCUpbs6GuN4IUOMnz55fZnN0CNpAnoo1UNYt8oJ7CFnQYjzUwt+NyS+EROroandg8CcUGk2oIWM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx6I/sfV+Qeku99zap82z1dzOAkwWYKaB6/YL+UUgi2VOn1NEf9
+ lmIFj5LgYQHuUwAEeDSlh4Y9IQEiaFPknQk6+SyLBRkz0te/inp4WGm1bIUNAmI=
+X-Google-Smtp-Source: AGHT+IGDBMf//KPU2enupkrHm47ZlcFKJ14C6O+cOxzxC6jKMOjaaGBZHDUvtJYHVkaT/dE2SdiU7w==
+X-Received: by 2002:a05:6000:1fa4:b0:378:8b84:4de9 with SMTP id
+ ffacd0b85a97d-37a4225334cmr2130157f8f.12.1726819243716; 
+ Fri, 20 Sep 2024 01:00:43 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
  by smtp.gmail.com with ESMTPSA id
  ffacd0b85a97d-378e7800313sm17059497f8f.88.2024.09.20.01.00.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Sep 2024 01:00:42 -0700 (PDT)
-From: neil.armstrong@linaro.org
-Date: Fri, 20 Sep 2024 10:00:32 +0200
-Subject: [PATCH v2 11/13] ufs: Fix debug message in 'ufs_start'
+ Fri, 20 Sep 2024 01:00:43 -0700 (PDT)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Date: Fri, 20 Sep 2024 10:00:33 +0200
+Subject: [PATCH v2 12/13] ufs: core: remove link_startup_again logic
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240920-topic-ufs-enhancements-v2-11-65ae61e73eaa@linaro.org>
+Message-Id: <20240920-topic-ufs-enhancements-v2-12-65ae61e73eaa@linaro.org>
 References: <20240920-topic-ufs-enhancements-v2-0-65ae61e73eaa@linaro.org>
 In-Reply-To: <20240920-topic-ufs-enhancements-v2-0-65ae61e73eaa@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Bhupesh Sharma <bhupesh.linux@gmail.com>, 
@@ -80,23 +80,22 @@ Cc: Michal Simek <michal.simek@amd.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>, bmeng.cn@gmail.com, 
  u-boot@lists.denx.de, u-boot-qcom@groups.io, 
  Neil Armstrong <neil.armstrong@linaro.org>, 
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, 
- Bhupesh Sharma <bhupesh.linux@gmail.com>
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=714;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1781;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=/e+BvndSe0yhkT9enKL8SNJ/+EUFBp5cMPXLsBJleUc=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBm7SudEiqDuF+S2LZ91DOYzQEt7bet9jL7d3eRKYwx
- JS0HH0CJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZu0rnQAKCRB33NvayMhJ0RHAD/
- 0Q0j8vdohh1UthjnYGZS0eVQig4ei3+FCpJ3pUvYUIG59eA9fEPu5XyA+lJx8cEev0WoMU4bqWhfdJ
- AGTbFcK+3hAhgXbCVhxTCX41wMu+9WYlPA4Apz4fz1GjG6eKahechpfvGvq5eF4+1M5ticvOkmE5zt
- X76gYmdzOLkQ7VvR2YZ26/B7nvxloB/F2QMBairZFkiuES3/jExVOzKDi4zQvl60qTUWY/C6Nz5quN
- B/pOYGMPVEBJ7AV7ExBT3iRQ8gv4l0RVwAR4WqxDM8SHeC5PctEHC+LOKbm2tmS7t7yxKOGnHZvpTl
- WoYd4jqRquksMp/JSmjB5ffqPo6mSUf7tsBMuI9S/3F2mxZXmlPbCixkQiGanieUqplTuAOVjolnaA
- 6q7ZUM9+U/6G/7hYkOwk91JrQHTy2XlkyVAEhaLD01Lb8oepoodO28Jo95+hp6bZLj6e2uLz0pI6MD
- 4kTbJxYXde/2J40JZGkDGlVjMxEzN8z3xrqxP8qb6/7Ca0GS3fr9kPBZWV11rhklHxBxiJ1ipTtIQu
- fQojmuLzZ4moORJg8z0abpqzeQ60MMnB9oQy5kmmYFOFcnRVDPbWnrVAn0A3JFuHs+Qv4Cqz/IVhar
- ElUEO/Aay22yyms5C7+9ozJabfx6TBGgB/aWS7xaxP3ePLsY5RHOHRvCGkyw==
+ bh=JhT/11URXvkq7wQRb8O38oqRy3fHS9dhagU2llSpbGo=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBm7SueZL6EO0YXTUlMm0/5tsgHdFBj+ayWVGVaoBim
+ w87ueRCJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZu0rngAKCRB33NvayMhJ0QAjD/
+ 0X67FrVLPtmz4FhrbmK/ux622rbQTLSREbUzpk2FZIqA5ZO89UotM4ZVypDPRpvv5+34FF3Rf+a7NX
+ 6psEtWf1H8ReqXRJboIpBTYOhsehQSnvpAZbEnlv7Lkiw1XHQ5+bZcWfw0YFg1VT9X+gttlvbNksmB
+ OIDj4Pd98pTq5JhSinxHSL604SdTBplZaF6RXG3RRrfLNz8QR94mkdjTM65zG7Qq8gVx4sZyDjY/l0
+ 9YuQUqnOWTjM1Wc56d9cSFvybsvK9j2VJon3nwivPXoUYB7Bf6Fu11kM8v9vgkjEDOkqFjO966gSGD
+ bt0ttieeo6i11TSbAfot+037ArGnTJPwH8jK/QYCKiGGuf8DZUwYmc1n+fsI/dPbbE/5r7xzl4JDc6
+ e0gjPIKsFwgJHk68k+AV8HSuDpDyI16YgYHRr+bedKkzysyASZWwJ0nItFPS/OJEFi15meQNT58ODo
+ jC8rDMpCj8pgmN1x7rFIA0W40yJb50Xl/Zx+iMj88/203s4cC/vy786A5oxQdgRPI4p/xp/c1EjaER
+ 1Q2QLmi8mJv4KnKUbgzS3Tj+UC33OtzRCUEJLJxxispS5BjN+/vq4r3CiHZ27wXtXzMzGy/8nkeWky
+ OdfpGLUxdVJOtvT4LhveUvCmikEw/O0YCl6iGZNUlCISKVm5OWNo17DUnFNg==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
@@ -115,30 +114,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Bhupesh Sharma <bhupesh.linux@gmail.com>
+The link_startup_again logic was added in Linux to handle device
+that were set in LinkDown state, which should not be the case since U-boot
+doesn't set LinkDown state are init, and Linux sets the device active
+in ufshcd_init() for the first link startup.
 
-Minor typo fix and rewording of printf message
-inside 'ufs_start' which announces the availability
-of the UFS device.
+ufshcd_set_ufs_dev_active(hba) is called at ufshcd_init() right before
+scheduling an ufshcd_async_scan that will call ufshcd_device_init() then ufshcd_link_startup().
 
-Signed-off-by: Bhupesh Sharma <bhupesh.sharma@linaro.org>
+The comment in probe says:
+    /*
+     * We are assuming that device wasn't put in sleep/power-down
+     * state exclusively during the boot stage before kernel.
+     * This assumption helps avoid doing link startup twice during
+     * ufshcd_probe_hba().
+     */
+we can assume the same from U-Boot.
+
+While it worked to far, it breaks link startup for Qualcomm Controllers v5,
+let's just remove the logic.
+
 Tested-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- drivers/ufs/ufs.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/ufs/ufs.c | 8 --------
+ 1 file changed, 8 deletions(-)
 
 diff --git a/drivers/ufs/ufs.c b/drivers/ufs/ufs.c
-index 5d4e5424358..d2df5c26f76 100644
+index d2df5c26f76..e34e4586224 100644
 --- a/drivers/ufs/ufs.c
 +++ b/drivers/ufs/ufs.c
-@@ -1925,7 +1925,7 @@ int ufs_start(struct ufs_hba *hba)
- 			return ret;
- 		}
+@@ -462,9 +462,7 @@ static int ufshcd_link_startup(struct ufs_hba *hba)
+ {
+ 	int ret;
+ 	int retries = DME_LINKSTARTUP_RETRIES;
+-	bool link_startup_again = true;
  
--		printf("Device at %s up at:", hba->dev->name);
-+		debug("UFS Device %s is up!\n", hba->dev->name);
- 		ufshcd_print_pwr_info(hba);
- 	}
+-link_startup:
+ 	do {
+ 		ufshcd_ops_link_startup_notify(hba, PRE_CHANGE);
+ 
+@@ -490,12 +488,6 @@ link_startup:
+ 		/* failed to get the link up... retire */
+ 		goto out;
+ 
+-	if (link_startup_again) {
+-		link_startup_again = false;
+-		retries = DME_LINKSTARTUP_RETRIES;
+-		goto link_startup;
+-	}
+-
+ 	/* Mark that link is up in PWM-G1, 1-lane, SLOW-AUTO mode */
+ 	ufshcd_init_pwr_info(hba);
  
 
 -- 
