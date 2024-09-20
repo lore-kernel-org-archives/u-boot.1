@@ -4,66 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 103EACF9C55
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 16:05:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5A18CF9C55
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 16:05:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D089488D66;
-	Fri, 20 Sep 2024 18:04:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 381E588D99;
+	Fri, 20 Sep 2024 18:04:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Uhnb5rk3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZiF63rHl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C549188C1C; Fri, 20 Sep 2024 18:04:16 +0200 (CEST)
-Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
- [IPv6:2607:f8b0:4864:20::436])
+ id 11024889ED; Fri, 20 Sep 2024 18:04:17 +0200 (CEST)
+Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
+ [IPv6:2607:f8b0:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CBCC889ED
+ by phobos.denx.de (Postfix) with ESMTPS id 2131688D02
  for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 18:04:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-71923d87be4so1698732b3a.0
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-7197970e2aeso1635378b3a.2
  for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 09:04:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1726848253; x=1727453053; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5VWE081EGRfh6Ay7gmPFfJKvf87eeKKJN+nA1XTphlU=;
- b=Uhnb5rk3ojEdXGYQImfhgmC23J3TqH7IgRcvqndcXy6cqxuTuPS5Dca+MwlFEd0+p/
- zJe6t07nYh1uBzwNEabxSEL1JtWrW7uzz2EhPJn1dWsfYBSzJ2Li6qpstZOv7ZUAmDoY
- /KyruwpvPuwEKn0S775JxQavcylEhBikm8uXQ=
+ bh=l5Q7ky89n436DaiASmhIKftqT1CWcc/Ng3j/sB4mf8E=;
+ b=ZiF63rHlD472H/vzpsJPDkLZXKPNY/FXB4JI0Bg3susj/8EF18vmnnIzH+6yx8MCm6
+ wujO7gBl4tVNGxszozghAXzCAVBZPNsD/dhm0ZT/B64JthZZpHbD78BSFzCI2Z+mW2qD
+ zehkBNFflQmN2HNpE7OCG58feV+2tBEACDSqE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1726848253; x=1727453053;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=5VWE081EGRfh6Ay7gmPFfJKvf87eeKKJN+nA1XTphlU=;
- b=nl80tehhYdFe3Q9BDxBpj/x/BknDqva3NwYu69tJ5588SBJPkF5AXsJWvJkyR5aLbF
- e5EKt8SWic2vJFpPsW+QXXOS5/SsZl6s3Vpd+zCQCF81+noOX0wj5uXts2I53iCE3Boh
- vqPutyhCwq8bO16j798Wp2z/ppDMUK+SfbC2xVOtzFcFvXWMOszTSUJeU20a7Bj0tfle
- o1AMOowhfrwR0596+mzLlMLiINg9WeexGoUARBLoPDZj+0j4mD6QfYqZ2u3+AF2Wn6RW
- IMlA/j6EOkgx7Ib4TkyCDYJkR0xD3ZsAA14PAOendg/DZPFcCtjG5pb9Xz0bYA+lN9qq
- 8IPQ==
-X-Gm-Message-State: AOJu0YzTPVNVm3k/9jbqXtDiuK+wvUOIR3GyaVDIrDVp0aQm15OEGF1+
- o62EzREv64sUOIiWdraINiv2AhXadfurMY3FyslAtauDgDUvwsXD8VZz8Quv4Kd5ADJz2qKKPB8
- pSZM+dyeVH5zspv7IP0rm2Vj6KB/PSz9e9Scq
-X-Google-Smtp-Source: AGHT+IG7xRuWk959XNMlWVsFvtIqWAxDqIw/3hGJMeyBH17pW0MAxnC2O+1q9+q2sojRvqe/WH8vy7z9doMNCbXAZRA=
-X-Received: by 2002:a05:6a00:179f:b0:714:20a8:d79f with SMTP id
- d2e1a72fcca58-7199c96e1efmr4411907b3a.14.1726848252689; Fri, 20 Sep 2024
+ bh=l5Q7ky89n436DaiASmhIKftqT1CWcc/Ng3j/sB4mf8E=;
+ b=LYuWyx7L6GVaEkfr2cajfW3meZp2F6//12E0f53dIUbfJPFfxDnIkT1D/LwIT3bKs6
+ O8rXbqDZx9dDDCfhZ6Rkhk4MUMyc4L6JpWQM9kjkpe4uoeA8Mt5THKMf8aVIya5FLW18
+ wCWgWirB9XijSbzAPXDzEn0hu/0E58Eqa1fnO1olf49EyDQ/INYAIcDhfUP/MaK7raGf
+ trZazDhrVGprSmsXQSRYHGnrNSlKqUCJQeEP3ezYmyjRwIML07wwi8a5F36HdFwlPwU0
+ KIBP5LURxOv/rRStgOgGmJOr7CsCcjjTcKyD+bxHMfJbR1ZI5R4YllGJ8qlFbKYVMNez
+ DR9Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVLSvKxEvs2whuwwuEb3Rz+7BkeLaDzmKU1+csLrdqdPhPr2vaCGPfR4o/RixuV3Q0PMOFqts0=@lists.denx.de
+X-Gm-Message-State: AOJu0YwGqv62YKlgUDBNazUsnnwYdCkvzN9sCQCW/wJic2D/QU3vpYIx
+ 9E7btmP/wbvoAoeoO2/YsLXuCr4hXBNbqzWtmBvTipZbL5fTQX3u7KT9u6h8oSXd8glrw6WpDaO
+ 7OmKA7U8WLComYlcTQvEUqkiiafa4TFCndSm9
+X-Google-Smtp-Source: AGHT+IFThfwgU0OfkQ1VeVBKHpqcStaNYFuZI2Q3za3yuvJmSy8y5gfV9iCZq+Gc22Z+Ad2wk7XBomonFSqWE5bu5QE=
+X-Received: by 2002:a05:6a20:9f4b:b0:1cf:3e99:d7a5 with SMTP id
+ adf61e73a8af0-1d30a9b1a68mr5396645637.31.1726848252692; Fri, 20 Sep 2024
  09:04:12 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240919134835.377572-1-joakim.tjernlund@infinera.com>
-In-Reply-To: <20240919134835.377572-1-joakim.tjernlund@infinera.com>
+References: <20240824092716.1042696-1-mikhail.kshevetskiy@iopsys.eu>
+ <20240824092716.1042696-12-mikhail.kshevetskiy@iopsys.eu>
+In-Reply-To: <20240824092716.1042696-12-mikhail.kshevetskiy@iopsys.eu>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 20 Sep 2024 18:03:55 +0200
-Message-ID: <CAFLszTj0HNbEy7VSaDA=Vd05+EWT1rxcDOBxu6e=BY1aQ54ZPg@mail.gmail.com>
-Subject: Re: [PATCH] Add mkimage secp521r1 ECDSA curve support
-To: Joakim Tjernlund <joakim.tjernlund@infinera.com>
-Cc: u-boot@lists.denx.de
+Date: Fri, 20 Sep 2024 18:03:53 +0200
+Message-ID: <CAFLszTiFen6i7CUW3x8dLE8qSaZfrAjv=rUK+38ABiDSwC+dVg@mail.gmail.com>
+Subject: Re: [PATCH v5 11/11] net/httpd-upload: an example web-server
+ implementation for file uploading
+To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Cc: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Michal Simek <michal.simek@amd.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Anand Moon <linux.amoon@gmail.com>, Marek Vasut <marex@denx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Baruch Siach <baruch@tkos.co.il>, Yasuharu Shibata <yasuharu.shibata@gmail.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,67 +97,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 19 Sept 2024 at 15:48, Joakim Tjernlund
-<joakim.tjernlund@infinera.com> wrote:
+On Sat, 24 Aug 2024 at 11:27, Mikhail Kshevetskiy
+<mikhail.kshevetskiy@iopsys.eu> wrote:
 >
-
-commit message?
-
-> Signed-off-by: Joakim Tjernlund <joakim.tjernlund@infinera.com>
+> This is an example web-server implementation. It can be used for files
+> uploading to u-boot using a web-browser. It acts much like tftpget, but no
+> special servers needs to be installed by the user.
+>
+> This code can be used as a base for other implementations like firmware
+> upgrade web-server used by some vendors.
+>
+> Usage:
+>   u-boot: start the we-server using the "httpd_upload" command
+>   PC:     open the "http://your_uboot_ip" link in the browser
+>
+> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 > ---
->  include/u-boot/ecdsa.h      | 1 +
->  lib/ecdsa/ecdsa-libcrypto.c | 2 +-
->  tools/image-sig-host.c      | 7 +++++++
->  3 files changed, 9 insertions(+), 1 deletion(-)
+>  cmd/Kconfig                     |  14 ++++
+>  cmd/net.c                       |  20 ++++++
+>  include/net/httpd-upload.h      |  12 ++++
+>  net/Makefile                    |  19 +++++
+>  net/httpd-upload.c              | 123 ++++++++++++++++++++++++++++++++
+>  net/httpd_upload/error_400.html |   9 +++
+>  net/httpd_upload/error_404.html |  10 +++
+>  net/httpd_upload/index.html     |  14 ++++
+>  net/httpd_upload/upload_ok.html |   7 ++
+>  9 files changed, 228 insertions(+)
+>  create mode 100644 include/net/httpd-upload.h
+>  create mode 100644 net/httpd-upload.c
+>  create mode 100644 net/httpd_upload/error_400.html
+>  create mode 100644 net/httpd_upload/error_404.html
+>  create mode 100644 net/httpd_upload/index.html
+>  create mode 100644 net/httpd_upload/upload_ok.html
 >
-
-With above fixed:
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-
-> diff --git a/include/u-boot/ecdsa.h b/include/u-boot/ecdsa.h
-> index 53490c6b287..8f9f5e7d6e7 100644
-> --- a/include/u-boot/ecdsa.h
-> +++ b/include/u-boot/ecdsa.h
-> @@ -65,5 +65,6 @@ int ecdsa_verify(struct image_sign_info *info,
->  /** @} */
->
->  #define ECDSA256_BYTES (256 / 8)
-> +#define ECDSA521_BYTES ((521 + 7) / 8)
->
->  #endif
-> diff --git a/lib/ecdsa/ecdsa-libcrypto.c b/lib/ecdsa/ecdsa-libcrypto.c
-> index 5fa9be10b4b..403dfe0b97c 100644
-> --- a/lib/ecdsa/ecdsa-libcrypto.c
-> +++ b/lib/ecdsa/ecdsa-libcrypto.c
-> @@ -108,7 +108,7 @@ static size_t ecdsa_key_size_bytes(const EC_KEY *key)
->         const EC_GROUP *group;
->
->         group = EC_KEY_get0_group(key);
-> -       return EC_GROUP_order_bits(group) / 8;
-> +       return (EC_GROUP_order_bits(group) + 7) / 8;
->  }
->
->  static int default_password(char *buf, int size, int rwflag, void *u)
-> diff --git a/tools/image-sig-host.c b/tools/image-sig-host.c
-> index d0133aec4c8..21b4fa5d39d 100644
-> --- a/tools/image-sig-host.c
-> +++ b/tools/image-sig-host.c
-> @@ -76,6 +76,13 @@ struct crypto_algo crypto_algos[] = {
->                 .add_verify_data = ecdsa_add_verify_data,
->                 .verify = ecdsa_verify,
->         },
-> +       {
-> +               .name = "secp521r1",
-> +               .key_len = ECDSA521_BYTES,
-> +               .sign = ecdsa_sign,
-> +               .add_verify_data = ecdsa_add_verify_data,
-> +               .verify = ecdsa_verify,
-> +       },
->  };
->
->  struct padding_algo padding_algos[] = {
-> --
-> 2.44.2
->
