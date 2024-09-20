@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2551ECF58DF
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 07:05:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E742CF58DD
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 07:06:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B754B893A1;
-	Fri, 20 Sep 2024 09:03:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1FB9389398;
+	Fri, 20 Sep 2024 09:03:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="GiJBg9nq";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="HSwc+mb3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A203089335; Fri, 20 Sep 2024 09:03:46 +0200 (CEST)
+ id 667F3893A0; Fri, 20 Sep 2024 09:03:48 +0200 (CEST)
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.17])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00F59891A4
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 09:03:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C69289394
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 09:03:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tien.fong.chee@intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1726815807; x=1758351807;
+ t=1726815827; x=1758351827;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=0oVevuWKR5esSpQxLz/5DYqQijhyfJ1Btmpsr35o/ss=;
- b=GiJBg9nqtroDsraWDZafdqNNUt+Ay4CCpordWJRI7Tr0w8C5ajOLN4fB
- 9ep/LdxPbZBVfPCm0FPxSgTsKDJkfb2RjTQOeYKcEe4MewaPd+d5aGc5M
- fw8zhmfz46yWruf5HN37tfXyFTmZVMR+bi2IJcgM0jVxOpX4YwPQxUiEe
- 3YV6VoIMh/Ml0vLa/AiTagA1iYfHK+fs346xy4QJJbqKl5J/R9oG37MUh
- ZHe7DO/mY3ECnAAutWcSZEnzsJR4UrLrxPGWX/yPC18AeRySJs94cDz9n
- GQUPuJhnf0fFO3ZTCdjNCoNFajkQbCiVKqmhtXBGlKR7tJiFHBtxmZ095 g==;
-X-CSE-ConnectionGUID: 2AXMzwajStWHJsLe7GIcFA==
-X-CSE-MsgGUID: enEH/0OlTuqVS9OQv4sEVA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11200"; a="25961043"
-X-IronPort-AV: E=Sophos;i="6.10,243,1719903600"; d="scan'208";a="25961043"
+ bh=BCBe+N5WRh5SmVzCtd/poysuRUMIbYh8AH6JpKtCzEM=;
+ b=HSwc+mb37UggA4K0sCAPc8BHIc6YmoTDJIX/62/doH3fZTO87dzBHKwR
+ L+1+NvOTFIcsSmgHbng4/UQrAYbzqS9HdQopKCWILAIRlf1huyzFrsiiR
+ 1ASmyn0HDgNp4dVcZ96np18O4SvFJwtD1VWl5PT3MNZnunYKNmJZSup0C
+ H8X2b+FSCWfvD9YY1Wi3pcyGiAHMDKVDsCu3fdsWoD5pbWODVSIi8TR+T
+ oO3a6YgCUL2vNezeQ0HtIgtlPuFIWvPpLhdyul3iPbT04RGXTROXitRrL
+ BTDdig0Pp8vfwKiKYyypSmrkiX82NuGk+KctGY6FdfGkaQZ3ud9+zV8i9 w==;
+X-CSE-ConnectionGUID: EL+iePQFRAeWXLTpiofBIw==
+X-CSE-MsgGUID: xpRECENWREyoCm3wL8tupw==
+X-IronPort-AV: E=McAfee;i="6700,10204,11200"; a="25961096"
+X-IronPort-AV: E=Sophos;i="6.10,243,1719903600"; d="scan'208";a="25961096"
 Received: from orviesa009.jf.intel.com ([10.64.159.149])
  by orvoesa109.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 20 Sep 2024 00:03:26 -0700
-X-CSE-ConnectionGUID: E0HV17rUSS6RiWJwKtGhkg==
-X-CSE-MsgGUID: Vhpsx5wCTy+Si3j4HVve4w==
+ 20 Sep 2024 00:03:46 -0700
+X-CSE-ConnectionGUID: G7f9pX2uTE6RQ7eC/tBapg==
+X-CSE-MsgGUID: NWInAH4bRQmnKL+lLFmRLQ==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.10,243,1719903600"; d="scan'208";a="70235079"
+X-IronPort-AV: E=Sophos;i="6.10,243,1719903600"; d="scan'208";a="70235242"
 Received: from pglc00502.png.intel.com ([10.221.239.194])
- by orviesa009.jf.intel.com with ESMTP; 20 Sep 2024 00:03:24 -0700
+ by orviesa009.jf.intel.com with ESMTP; 20 Sep 2024 00:03:43 -0700
 From: tien.fong.chee@intel.com
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>,
@@ -57,11 +57,12 @@ Cc: Marek Vasut <marex@denx.de>,
  Meng Tingting <tingting.meng@intel.com>,
  Yuslaimi Alif Zakuan <alif.zakuan.yuslaimi@intel.com>,
  Hea Kok Kiang <kok.kiang.hea@intel.com>,
- Tien Fong Chee <tien.fong.chee@intel.com>
-Subject: [PATCH v1 06/20] arm: dts: agilex5: Add HPS cache coherency unit
- configuration settings
-Date: Fri, 20 Sep 2024 15:02:28 +0800
-Message-Id: <20240920070242.20884-7-tien.fong.chee@intel.com>
+ Tien Fong Chee <tien.fong.chee@intel.com>,
+ Mahesh Rao <mahesh.rao@intel.com>
+Subject: [PATCH v1 15/20] arm: socfpga: smc: Add memory coherency support to
+ mailbox command
+Date: Fri, 20 Sep 2024 15:02:37 +0800
+Message-Id: <20240920070242.20884-16-tien.fong.chee@intel.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240920070242.20884-1-tien.fong.chee@intel.com>
 References: <20240920070242.20884-1-tien.fong.chee@intel.com>
@@ -85,234 +86,51 @@ X-Virus-Status: Clean
 
 From: Tien Fong Chee <tien.fong.chee@intel.com>
 
-These configuration settings are required to enable cache maintenance and
-access between initiators and targets.
+As cache is enabled in U-Boot and disabled in ATF(BL31). We need to
+perform cache flush of buffers that are shared between U-Boot and
+ATF using secure monitor calls.
 
+Signed-off-by: Mahesh Rao <mahesh.rao@intel.com>
 Signed-off-by: Tien Fong Chee <tien.fong.chee@intel.com>
 ---
- arch/arm/dts/socfpga_agilex5-u-boot.dtsi | 209 +++++++++++++++++++++++
- 1 file changed, 209 insertions(+)
+ arch/arm/mach-socfpga/smc_api.c | 13 ++++++++++---
+ 1 file changed, 10 insertions(+), 3 deletions(-)
 
-diff --git a/arch/arm/dts/socfpga_agilex5-u-boot.dtsi b/arch/arm/dts/socfpga_agilex5-u-boot.dtsi
-index a8167e5c14a..ec42fd01a9c 100644
---- a/arch/arm/dts/socfpga_agilex5-u-boot.dtsi
-+++ b/arch/arm/dts/socfpga_agilex5-u-boot.dtsi
-@@ -13,6 +13,215 @@
- 		#size-cells = <2>;
- 		bootph-all;
- 	};
-+
-+	soc {
-+		bootph-all;
-+
-+		socfpga_ccu_config: socfpga-ccu-config {
-+			compatible = "intel,socfpga-dtreg";
-+			#address-cells = <1>;
-+			#size-cells = <1>;
-+			bootph-all;
-+
-+			/* DSU */
-+			i_ccu_caiu0@1c000000 {
-+				reg = <0x1c000000 0x00001000>;
-+				intel,offset-settings =
-+					/* CAIUMIFSR */
-+					<0x000003c4 0x00000000 0x07070777>,
-+					/* DII1_MPFEREGS */
-+					<0x00000414 0x00018000 0xffffffff>,
-+					<0x00000418 0x00000000 0x000000ff>,
-+					<0x00000410 0xc0e00200 0xc1f03e1f>,
-+					/* DII2_GICREGS */
-+					<0x00000424 0x0001d000 0xffffffff>,
-+					<0x00000428 0x00000000 0x000000ff>,
-+					<0x00000420 0xc0800400 0xc1f03e1f>,
-+					/* NCAIU0_LWSOC2FPGA */
-+					<0x00000444 0x00020000 0xffffffff>,
-+					<0x00000448 0x00000000 0x000000ff>,
-+					<0x00000440 0xc1100006 0xc1f03e1f>,
-+					/* NCAIU0_SOC2FPGA_1G */
-+					<0x00000454 0x00040000 0xffffffff>,
-+					<0x00000458 0x00000000 0x000000ff>,
-+					<0x00000450 0xc1200006 0xc1f03e1f>,
-+					/* DMI_SDRAM_2G */
-+					<0x00000464 0x00080000 0xffffffff>,
-+					<0x00000468 0x00000000 0x000000ff>,
-+					/* NCAIU0_SOC2FPGA_16G */
-+					<0x00000474 0x00400000 0xffffffff>,
-+					<0x00000478 0x00000000 0x000000ff>,
-+					<0x00000470 0xc1600006 0xc1f03e1f>,
-+					/* DMI_SDRAM_30G */
-+					<0x00000484 0x00800000 0xffffffff>,
-+					<0x00000488 0x00000000 0x000000ff>,
-+					/* NCAIU0_SOC2FPGA_256G */
-+					<0x00000494 0x04000000 0xffffffff>,
-+					<0x00000498 0x00000000 0x000000ff>,
-+					<0x00000490 0xc1a00006 0xc1f03e1f>,
-+					/* DMI_SDRAM_480G */
-+					<0x000004a4 0x08000000 0xffffffff>,
-+					<0x000004a8 0x00000000 0x000000ff>;
-+				bootph-all;
-+			};
-+
-+			/* FPGA2SOC */
-+			i_ccu_ncaiu0@1c001000 {
-+				reg = <0x1c001000 0x00001000>;
-+				intel,offset-settings =
-+					/* NCAIU0MIFSR */
-+					<0x000003c4 0x00000000 0x07070777>,
-+					/* PSS */
-+					<0x00000404 0x00010000 0xffffffff>,
-+					<0x00000408 0x00000000 0x000000ff>,
-+					<0x00000400 0xC0F00000 0xc1f03e1f>,
-+					/* DII1_MPFEREGS */
-+					<0x00000414 0x00018000 0xffffffff>,
-+					<0x00000418 0x00000000 0x000000ff>,
-+					<0x00000410 0xc0e00200 0xc1f03e1f>,
-+					/* NCAIU0_LWSOC2FPGA */
-+					<0x00000444 0x00020000 0xffffffff>,
-+					<0x00000448 0x00000000 0x000000ff>,
-+					<0x00000440 0xc1100006 0xc1f03e1f>,
-+					/* NCAIU0_SOC2FPGA_1G */
-+					<0x00000454 0x00040000 0xffffffff>,
-+					<0x00000458 0x00000000 0x000000ff>,
-+					<0x00000450 0xc1200006 0xc1f03e1f>,
-+					/* DMI_SDRAM_2G */
-+					<0x00000464 0x00080000 0xffffffff>,
-+					<0x00000468 0x00000000 0x000000ff>,
-+					/* NCAIU0_SOC2FPGA_16G */
-+					<0x00000474 0x00400000 0xffffffff>,
-+					<0x00000478 0x00000000 0x000000ff>,
-+					<0x00000470 0xc1600006 0xc1f03e1f>,
-+					/* DMI_SDRAM_30G */
-+					<0x00000484 0x00800000 0xffffffff>,
-+					<0x00000488 0x00000000 0x000000ff>,
-+					/* NCAIU0_SOC2FPGA_256G */
-+					<0x00000494 0x04000000 0xffffffff>,
-+					<0x00000498 0x00000000 0x000000ff>,
-+					<0x00000490 0xc1a00006 0xc1f03e1f>,
-+					/* DMI_SDRAM_480G */
-+					<0x000004a4 0x08000000 0xffffffff>,
-+					<0x000004a8 0x00000000 0x000000ff>;
-+				bootph-all;
-+			};
-+
-+			/* GIC_M */
-+			i_ccu_ncaiu1@1c002000 {
-+				reg = <0x1c002000 0x00001000>;
-+				intel,offset-settings =
-+					/* NCAIU1MIFSR */
-+					<0x000003c4 0x00000000 0x07070777>,
-+					/* DMI_SDRAM_2G */
-+					<0x00000464 0x00080000 0xffffffff>,
-+					<0x00000468 0x00000000 0x000000ff>,
-+					/* DMI_SDRAM_30G */
-+					<0x00000484 0x00800000 0xffffffff>,
-+					<0x00000488 0x00000000 0x000000ff>,
-+					/* DMI_SDRAM_480G */
-+					<0x000004a4 0x08000000 0xffffffff>,
-+					<0x000004a8 0x00000000 0x000000ff>;
-+				bootph-all;
-+			};
-+
-+			/* SMMU */
-+			i_ccu_ncaiu2@1c003000 {
-+				reg = <0x1c003000 0x00001000>;
-+				intel,offset-settings =
-+					/* NCAIU2MIFSR */
-+					<0x000003c4 0x00000000 0x07070777>,
-+					/* DMI_SDRAM_2G */
-+					<0x00000464 0x00080000 0xffffffff>,
-+					<0x00000468 0x00000000 0x000000ff>,
-+					/* DMI_SDRAM_30G */
-+					<0x00000484 0x00800000 0xffffffff>,
-+					<0x00000488 0x00000000 0x000000ff>,
-+					/* DMI_SDRAM_480G */
-+					<0x000004a4 0x08000000 0xffffffff>,
-+					<0x000004a8 0x00000000 0x000000ff>;
-+				bootph-all;
-+			};
-+
-+			/* PSS NOC */
-+			i_ccu_ncaiu3@1c004000 {
-+				reg = <0x1c004000 0x00001000>;
-+				intel,offset-settings =
-+					/* NCAIU3MIFSR */
-+					<0x000003c4 0x00000000 0x07070777>,
-+					/* DII1_MPFEREGS */
-+					<0x00000414 0x00018000 0xffffffff>,
-+					<0x00000418 0x00000000 0x000000ff>,
-+					<0x00000410 0xc0e00200 0xc1f03e1f>,
-+					/* DMI_SDRAM_2G */
-+					<0x00000464 0x00080000 0xffffffff>,
-+					<0x00000468 0x00000000 0x000000ff>,
-+					/* DMI_SDRAM_30G */
-+					<0x00000484 0x00800000 0xffffffff>,
-+					<0x00000488 0x00000000 0x000000ff>,
-+					/* DMI_SDRAM_480G */
-+					<0x000004a4 0x08000000 0xffffffff>,
-+					<0x000004a8 0x00000000 0x000000ff>;
-+				bootph-all;
-+			};
-+
-+			/* DCE0 */
-+			i_ccu_dce0@1c005000 {
-+				reg = <0x1c005000 0x00001000>;
-+				intel,offset-settings =
-+					/* DCEUMIFSR0 */
-+					<0x000003c4 0x00000000 0x07070777>,
-+					/* DMI_SDRAM_2G */
-+					<0x00000464 0x00080000 0xffffffff>,
-+					<0x00000468 0x00000000 0x000000ff>,
-+					/* DMI_SDRAM_30G */
-+					<0x00000484 0x00800000 0xffffffff>,
-+					<0x00000488 0x00000000 0x000000ff>,
-+					/* DMI_SDRAM_480G */
-+					<0x000004a4 0x08000000 0xffffffff>,
-+					<0x000004a8 0x00000000 0x000000ff>;
-+				bootph-all;
-+			};
-+
-+			/* DCE1 */
-+			i_ccu_dce1@1c006000 {
-+				reg = <0x1c006000 0x00001000>;
-+				intel,offset-settings =
-+					/* DCEUMIFSR1 */
-+					<0x000003c4 0x00000000 0x07070777>,
-+					/* DMI_SDRAM_2G */
-+					<0x00000464 0x00080000 0xffffffff>,
-+					<0x00000468 0x00000000 0x000000ff>,
-+					/* DMI_SDRAM_30G */
-+					<0x00000484 0x00800000 0xffffffff>,
-+					<0x00000488 0x00000000 0x000000ff>,
-+					/* DMI_SDRAM_480G */
-+					<0x000004a4 0x08000000 0xffffffff>,
-+					<0x000004a8 0x00000000 0x000000ff>;
-+				bootph-all;
-+			};
-+
-+			/* DMI0 */
-+			i_ccu_dmi0@1c007000 {
-+				reg = <0x1c007000 0x00001000>;
-+				intel,offset-settings =
-+					/* DMIUSMCTCR */
-+					<0x00000300 0x00000001 0x00000003>,
-+					<0x00000300 0x00000003 0x00000003>;
-+				bootph-all;
-+			};
-+
-+			/* DMI1 */
-+			i_ccu_dmi0@1c008000 {
-+				reg = <0x1c008000 0x00001000>;
-+				intel,offset-settings =
-+					/* DMIUSMCTCR */
-+					<0x00000300 0x00000001 0x00000003>,
-+					<0x00000300 0x00000003 0x00000003>;
-+				bootph-all;
-+			};
-+		};
-+	};
- };
+diff --git a/arch/arm/mach-socfpga/smc_api.c b/arch/arm/mach-socfpga/smc_api.c
+index ebaa0b8fa17..dac888c399f 100644
+--- a/arch/arm/mach-socfpga/smc_api.c
++++ b/arch/arm/mach-socfpga/smc_api.c
+@@ -1,9 +1,10 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ /*
+- * Copyright (C) 2020 Intel Corporation <www.intel.com>
++ * Copyright (C) 2020-2024 Intel Corporation <www.intel.com>
+  *
+  */
  
- &clkmgr {
++#include <cpu_func.h>
+ #include <asm/ptrace.h>
+ #include <asm/system.h>
+ #include <linux/errno.h>
+@@ -40,10 +41,16 @@ int smc_send_mailbox(u32 cmd, u32 len, u32 *arg, u8 urgent, u32 *resp_buf_len,
+ 	args[2] = len;
+ 	args[3] = urgent;
+ 	args[4] = (u64)resp_buf;
+-	if (resp_buf_len)
++
++	if (arg && len > 0)
++		flush_dcache_range((u64)arg, (u64)arg + len);
++
++	if (resp_buf && resp_buf_len && *resp_buf_len > 0) {
+ 		args[5] = *resp_buf_len;
+-	else
++		flush_dcache_range((u64)resp_buf, (u64)resp_buf + *resp_buf_len);
++	} else {
+ 		args[5] = 0;
++	}
+ 
+ 	ret = invoke_smc(INTEL_SIP_SMC_MBOX_SEND_CMD, args, ARRAY_SIZE(args),
+ 			 resp, ARRAY_SIZE(resp));
 -- 
 2.25.1
 
