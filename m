@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAD8FCF58F4
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 09:21:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0240CCF58F9
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 09:37:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D67B893C4;
-	Fri, 20 Sep 2024 11:21:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E55808897C;
+	Fri, 20 Sep 2024 11:37:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MDPh47Bc";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nuhFjv80";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67AAB893E0; Fri, 20 Sep 2024 11:21:27 +0200 (CEST)
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
+ id D274F8817C; Fri, 20 Sep 2024 11:37:30 +0200 (CEST)
+Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
+ [IPv6:2607:f8b0:4864:20::72b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8DF9D893B8
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 11:21:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 185EB89363
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 11:37:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-2d8a7c50607so1300528a91.1
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 02:21:23 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qk1-x72b.google.com with SMTP id
+ af79cd13be357-7a99fde9f1dso159041385a.2
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 02:37:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726824082; x=1727428882; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=KZ0ksgWCH5XaMRHfU2JFRW1dG8sGMOiNqrz54f7JLJM=;
- b=MDPh47BcotublAZf4SubCOYBrI47dzjRD1DeRyXwmxuxYzlKoeeQNBgPvn/3MKTMky
- aJ8+tXmJ/2iWycHSxuLYS7ZvjmVGvDbAodyrGffoQOyM/ydRf2wkdTI/JXyCQYiuB5WP
- PLoTDnyjqsuKIvnp/IH/mO/dzmbKXZgTBebRYPzUOXh/6PiUe59n1ozKSR2ukW2XMu5s
- 4zwgTVoxZioOOLuEyqj+SeMPhDt6pe/u5DYpzMsBbttHwzoQTsi7WDriBpvkxirWLsoD
- 8QrFMwNz0CR9GA/HEeC5eFiLILCNPXablzLde8zyY93UPWjxKVgt40Qgk/q2Ne5bo6mz
- MQFA==
+ d=chromium.org; s=google; t=1726825032; x=1727429832; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=k0M9o8aY8L7+z3orhPVgjE1IFjav4D8YYmun4YjcjnY=;
+ b=nuhFjv806i84vSxGmRDcnlO6agz3Wv+9rXkC2POfKEovqjc4gwSI3pYrUgoOk3SZ8R
+ 4gDApw+lPJg0LfidPVPw/3rcP4McOurDlYkyFFUEwnBBCTbRq+T2O2JaZWAqn10l1QuA
+ KMtiJNOdTk9A7sE19Mre2UNz7xlSs9GniWFUk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726824082; x=1727428882;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=KZ0ksgWCH5XaMRHfU2JFRW1dG8sGMOiNqrz54f7JLJM=;
- b=Tc3wz4xvVCaRLSB7PmvSslCQ1ong1EVXo5AnFDAlIyTb4dDmvmOo3uJhYKVtt7EVVW
- 2pJMmZtVZee7OqaCQiOT0FSYvhqO6S/KRn+7PDawsCaCi+AtYwGq2sCbhBgZXpN17Sz4
- Qh8W9LD4bvFwTr+VO7JcAl9aLL8h713Lp0rfkeo9CIIz2dJfSy3QYXcfKt6CJyWDvoy3
- J9fZPAGBnTSwt1WR4ar/khgouNADkvxNQpBKFUluv9js/4AINI7wHRyGNLTBz4ZIOca+
- +4Q1l6pl/VNpF3rzCvBVxqO/phpwXoZyWJVkVcdV+KMOnsDTvOt89THprZvlBYqu+P0H
- w5sg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXNYvkODzyYyfBdpGQxKy/OeXv4bCdIOkF1NMpEudwpJTyE4u4Q5zV/GlosX9vUk/ciyT2Caw8=@lists.denx.de
-X-Gm-Message-State: AOJu0YyBC9tifTX+5mDQV1pLxQaijh8YAAhaZl/n/WopeGkqtyO8s0Xn
- hZpb/XD4mMyzmj4Hs9XMhr8o5mFZrsai7C6Pz0fObgbgj3K12j/PPcHlZuv1iRRTIRbKXVptGPA
- Urk8LLJn0GxTG5lTkEqXsCRtE397qfqWy07qf9g==
-X-Google-Smtp-Source: AGHT+IE8gyHwCGoOhX3K4qPriZQTFKu9QFmEjsfDzahh/x8oAKc08BSMkdLDXL4SZaI9VmorhVUTOaN6yY3fdUefrAg=
-X-Received: by 2002:a17:90b:384a:b0:2d3:c664:e253 with SMTP id
- 98e67ed59e1d1-2dd80c15c04mr2456781a91.10.1726824082041; Fri, 20 Sep 2024
- 02:21:22 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1726825032; x=1727429832;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=k0M9o8aY8L7+z3orhPVgjE1IFjav4D8YYmun4YjcjnY=;
+ b=PS+TJfK5BolM45DQy02sEZhY83bYxO/ZeoH5uB5YXbzXdato+Qapq+1zuL0y6s3Mrt
+ wPwm9C6D6CaWEGJ00fHyO2c2qSu3fjC7xKRo5IYq0mjNvH95Y4yHGKMYv1l7qZ0r52Vh
+ yVPNrph5QiEugY5TELIzlsg2GbOwaVfywZLoCnUPBXCwnSxwmqjEiAKd4OzdiifjYrBa
+ j4yi3DsweQPOpSnQtbjQklqWXDTn9mTvXp2HFO8P8sWZobrDp94PtxOkkLH/pJArkEjG
+ tQYchW1zT+S0R5Ou+q+kBXYMVR52aHKBZBmwK4rDy3eTR4InclCr3M4tN+NkjacFgn/0
+ 8h4Q==
+X-Gm-Message-State: AOJu0Yw8lP86K2p1S0smJhYcTmeJdccB9ECjo8DFI9ncQsX8ihnCo3MO
+ YcVUVNLEo5mApS/6lVONHocB1+3yYeMTiDijSfKytbN9qLz1Y87VOUbfcSZQZD9UF5tMAiYpo3+
+ bpd5zHv8CTVhzDJcPjldf5t4iQm96VDiblpIy
+X-Google-Smtp-Source: AGHT+IFWQoTOxUwGcgiWfs2P1SDLwtINsg4Itb/PxGzrCst0a70qfKkSrPukgZ36KYXfmM39s5W4kRVUBcm1iuTs10A=
+X-Received: by 2002:a05:620a:d8c:b0:79f:12fb:ed1 with SMTP id
+ af79cd13be357-7acb80aac43mr373532485a.16.1726825031867; Fri, 20 Sep 2024
+ 02:37:11 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240905082811.1585467-1-sughosh.ganu@linaro.org>
- <20240905082811.1585467-5-sughosh.ganu@linaro.org>
- <0291efc6-86a2-437c-938a-707c46c34f91@gmx.de>
- <CADg8p94TakJXkLs=m6RbvO2T_OmYagf68e4JV655TtQ5DnxtZg@mail.gmail.com>
-In-Reply-To: <CADg8p94TakJXkLs=m6RbvO2T_OmYagf68e4JV655TtQ5DnxtZg@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 20 Sep 2024 12:20:46 +0300
-Message-ID: <CAC_iWjKFh+g1k=HHKeApJp8OO5G78p0kruz59UUX-yfZcynJyg@mail.gmail.com>
-Subject: Re: [PATCH 04/16] event: add event to notify lmb memory map changes
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+References: <20240911062511.494855-1-patrick.rudolph@9elements.com>
+ <20240911062511.494855-23-patrick.rudolph@9elements.com>
+ <CAFLszTg0cf_1ojqhO8ZXpkX+MoQYgX_-AFVzUDCyD2yE8U=rcQ@mail.gmail.com>
+ <CALNFmy0QJ4HNHhSKzx94dJ6jS_F0i9VoDqUwwVpe2SCeLB=pmg@mail.gmail.com>
+ <CAFLszTgf=_jJkfyXhxXDZSieMmM_cm7pss3ysM5yz1EphMYVpw@mail.gmail.com>
+ <CALNFmy1oOCNr3Kp8gt6RsjkJT=ShkOpJnQuSwvq2+ftwWtoyOw@mail.gmail.com>
+ <CAFLszTi4Jf2QZZqWd2pA35J1HPEZay=tkbbs94_eyFLJMuYOdA@mail.gmail.com>
+ <CALNFmy3fyS2+Xw4OUv92jfbP_hCBwY6Fi_79fKV+aJOqSm7jVA@mail.gmail.com>
+In-Reply-To: <CALNFmy3fyS2+Xw4OUv92jfbP_hCBwY6Fi_79fKV+aJOqSm7jVA@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 20 Sep 2024 11:36:59 +0200
+Message-ID: <CAFLszThay6_ZixyHXW=1yhKkK_N4Q2QbmF+i=__p26t+LmiddA@mail.gmail.com>
+Subject: Re: [PATCH v3 22/30] board: emulation: Add QEMU sbsa support
+To: Patrick Rudolph <patrick.rudolph@9elements.com>
+Cc: u-boot@lists.denx.de, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Tom Rini <trini@konsulko.com>, 
- Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, Peter Maydell <peter.maydell@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,96 +94,209 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sughosh,
++Peter Maydell for comment on the below
 
-On Tue, 17 Sept 2024 at 15:33, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
->
-> On Sat, 14 Sept 2024 at 20:38, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> >
-> > On 9/5/24 10:27, Sughosh Ganu wrote:
-> > > Add an event which would be used for notifying changes in the
-> > > LMB modules' memory map. This is to be used for having a
-> > > synchronous view of the memory that is currently in use, and that is
-> > > available for allocations.
-> >
-> > The synchronous view problem only exists because we are duplicating
-> > data. Store the EFI memory type in LMB and the problem vanishes.
->
-> The LMB module only concerns itself with RAM memory. If I understand
-> correctly, you are proposing maintaining the EFI memory map within the
-> LMB module ? That would mean handling memory types other than
-> conventional memory in LMB.
+Hi Patrick,
 
-I am pretty sure I've asked this before, but do these *always* need to
-be in sync?
-
-The efi allocators will call LMB now. So when we allocate something
-gtom EFI, even if any potential changes from LMB haven't been
-published to EFI, we won't have any memory corruptions. Can't we just
-opportunistically update the memory map once someone requests it?
-
-Thanks
-/Ilias
+On Fri, 20 Sept 2024 at 09:54, Patrick Rudolph
+<patrick.rudolph@9elements.com> wrote:
 >
-> -sughosh
+> On Thu, Sep 19, 2024 at 4:10=E2=80=AFPM Simon Glass <sjg@chromium.org> wr=
+ote:
+> >
+> > Hi Patrick,
+> >
+> > On Wed, 18 Sept 2024 at 08:29, Patrick Rudolph
+> > <patrick.rudolph@9elements.com> wrote:
+> > >
+> > > On Mon, Sep 16, 2024 at 5:41=E2=80=AFPM Simon Glass <sjg@chromium.org=
+> wrote:
+> > > >
+> > > > Hi Patrick,
+> > > >
+> > > > On Thu, 12 Sept 2024 at 00:23, Patrick Rudolph
+> > > > <patrick.rudolph@9elements.com> wrote:
+> > > > >
+> > > > > On Thu, Sep 12, 2024 at 2:58=E2=80=AFAM Simon Glass <sjg@chromium=
+.org> wrote:
+> > > > > >
+> > > > > > Hi Patrick,
+> > > > > >
+> > > > > > On Wed, 11 Sept 2024 at 00:26, Patrick Rudolph
+> > > > > > <patrick.rudolph@9elements.com> wrote:
+> > > > > > >
+> > > > > > > Add support for Arm sbsa [1] v0.3+ that is supported by QEMU =
+[2].
+> > > > > > >
+> > > > > > > Unlike other Arm based platforms the machine only provides a =
+minimal
+> > > > > > > FDT that contains number of CPUs, ammount of memory and machi=
+ne-version.
+> > > > > > > The boot firmware has to provide ACPI tables to the OS.
+> > > > > > >
+> > > > > > > Add a minimal amount of devicetree nodes to make the board us=
+eable within
+> > > > > > > U-Boot, provide documentation how to use, enable binman to fa=
+bricate both
+> > > > > > > ROMs that are required to boot and add ACPI tables to make it=
+ full compatible
+> > > > > > > to the EDK2 reference implementation.
+> > > > > > >
+> > > > > > > The board was tested using Fedora 40 Aarch64 Workstation. It'=
+s able
+> > > > > > > to boot from USB and AHCI or network.
+> > > > > > >
+> > > > > > > Tested and found working:
+> > > > > > > - serial
+> > > > > > > - PCI
+> > > > > > > - xHCI
+> > > > > > > - Bochs display
+> > > > > > > - AHCI
+> > > > > > > - network using e1000e
+> > > > > > > - CPU init
+> > > > > > > - Booting Fedora 40
+> > > > > > >
+> > > > > > > 1: Server Base System Architecture (SBSA)
+> > > > > > > 2: https://www.qemu.org/docs/master/system/arm/sbsa.html
+> > > > > > >
+> > > > > > > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com=
 >
+> > > > > > > Cc: Peter Robinson <pbrobinson@gmail.com>
+> > > > > > > Cc: Simon Glass <sjg@chromium.org>
+> > > > > > > Cc: Tom Rini <trini@konsulko.com>
+> > > > > > > ---
+> > > > > > > Changelog v3:
+> > > > > > > - Add GIC and GIC-ITS to devicetree
+> > > > > > > - Select GICv3 driver
+> > > > > > > - Drop acpi_fill_madt and use driver model instead
+> > > > > > >
+> > > > > > > ---
+> > > > > > >  arch/arm/Kconfig                            |   1 +
+> > > > > > >  arch/arm/dts/qemu-sbsa.dts                  |  49 ++
+> > > > > > >  arch/arm/include/asm/arch-qemu-sbsa/boot0.h |  33 ++
+> > > > > > >  arch/arm/mach-qemu/Kconfig                  |  36 +-
+> > > > > > >  board/emulation/qemu-arm/MAINTAINERS        |   2 +
+> > > > > > >  board/emulation/qemu-sbsa/Kconfig           |  58 +++
+> > > > > > >  board/emulation/qemu-sbsa/Makefile          |   8 +
+> > > > > > >  board/emulation/qemu-sbsa/acpi.c            | 235 ++++++++++
+> > > > > > >  board/emulation/qemu-sbsa/dsdt.asl          | 483 ++++++++++=
+++++++++++
+> > > > > > >  board/emulation/qemu-sbsa/lowlevel_init.S   |  22 +
+> > > > > > >  board/emulation/qemu-sbsa/qemu-sbsa.c       | 481 ++++++++++=
++++++++++
+> > > > > > >  board/emulation/qemu-sbsa/qemu-sbsa.env     |  14 +
+> > > > > > >  board/emulation/qemu-sbsa/qemu-sbsa.h       |  38 ++
+> > > > > > >  board/emulation/qemu-sbsa/smc.c             |  72 +++
+> > > > > > >  configs/qemu-arm-sbsa_defconfig             |  10 +
+> > > > > > >  doc/board/emulation/index.rst               |   1 +
+> > > > > > >  doc/board/emulation/qemu-sbsa.rst           |  98 ++++
+> > > > > > >  doc/develop/driver-model/virtio.rst         |   1 +
+> > > > > > >  include/configs/qemu-sbsa.h                 |  98 ++++
+> > > > > > >  19 files changed, 1734 insertions(+), 6 deletions(-)
+> > > > > > >  create mode 100644 arch/arm/dts/qemu-sbsa.dts
+> > > > > > >  create mode 100644 arch/arm/include/asm/arch-qemu-sbsa/boot0=
+.h
+> > > > > > >  create mode 100644 board/emulation/qemu-sbsa/Kconfig
+> > > > > > >  create mode 100644 board/emulation/qemu-sbsa/Makefile
+> > > > > > >  create mode 100644 board/emulation/qemu-sbsa/acpi.c
+> > > > > > >  create mode 100644 board/emulation/qemu-sbsa/dsdt.asl
+> > > > > > >  create mode 100644 board/emulation/qemu-sbsa/lowlevel_init.S
+> > > > > > >  create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.c
+> > > > > > >  create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.env
+> > > > > > >  create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.h
+> > > > > > >  create mode 100644 board/emulation/qemu-sbsa/smc.c
+> > > > > > >  create mode 100644 configs/qemu-arm-sbsa_defconfig
+> > > > > > >  create mode 100644 doc/board/emulation/qemu-sbsa.rst
+> > > > > > >  create mode 100644 include/configs/qemu-sbsa.h
+> > > > > >
+> > > > > > Wow there is a lot in this patch!
+> > > > > >
+> > > > > > I don't think this should be in a separate subdir, just using
+> > > > > > board/emulation/qemu-arm should be OK?
+> > > > > Why would it share the code base with qemu-arm, as it's a complet=
+ely
+> > > > > different board?
+> > > >
+> > > > Perhaps I misunderstand this...what kind of board is it? How do you
+> > > > run qemu for this board?
+> > > >
+> > > For QEMU SBSA you use -machine sbsa-ref, but for qemu-arm you use -ma=
+chine virt.
+> > >
+> > > Both can use a cortex-a57 as CPU, but that's all those boards share. =
+They have a
+> > > different memory layout, virt provides a complete FDT, while sbsa-ref=
+ doesn't.
+> > > sbsa-ref needs an Arm-TF and nonsecure boot firmware, while virt work=
+s
+> > > without a firmware.
 > >
-> > The event is only needed to notify EFI_EVENT_GROUP_MEMORY_MAP_CHANGE.
-> >
-> > Best regards
-> >
-> > Heinrich
+> > OK I see
 > >
 > > >
-> > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > ---
-> > >   common/event.c  |  2 ++
-> > >   include/event.h | 14 ++++++++++++++
-> > >   2 files changed, 16 insertions(+)
+> > > > >
+> > > > > >
+> > > > > > I see you are setting plat data in the board file...is there no=
+t a CPU
+> > > > > > driver which can read it from the devicetree or set it based on=
+ the
+> > > > > > compatible string?
+> > > > > The CPU driver could read the data from devicetree, but that woul=
+d require a new
+> > > > > DT binding. Is that the preferred method over using plat data?
+> > > >
+> > > > It is fine to use plat data...but it should be set up in the driver
+> > > > where possible. In this case if you don't have a binding you can ch=
+eck
+> > > > the compatible string of the device (or even the root
+> > > > compatible-string) and add your plat data if it matches.
 > > >
-> > > diff --git a/common/event.c b/common/event.c
-> > > index dda569d447..fc8002603c 100644
-> > > --- a/common/event.c
-> > > +++ b/common/event.c
-> > > @@ -48,6 +48,8 @@ const char *const type_name[] = {
-> > >
-> > >       /* main loop events */
-> > >       "main_loop",
-> > > +
-> > > +     "lmb_map_update",
-> > >   };
-> > >
-> > >   _Static_assert(ARRAY_SIZE(type_name) == EVT_COUNT, "event type_name size");
-> > > diff --git a/include/event.h b/include/event.h
-> > > index fb353ad623..fce7e96170 100644
-> > > --- a/include/event.h
-> > > +++ b/include/event.h
-> > > @@ -153,6 +153,14 @@ enum event_t {
-> > >        */
-> > >       EVT_MAIN_LOOP,
-> > >
-> > > +     /**
-> > > +      * @EVT_LMB_MAP_UPDATE:
-> > > +      * This event is triggered on an update to the LMB reserved memory
-> > > +      * region. This can be used to notify about any LMB memory allocation
-> > > +      * or freeing of memory having occurred.
-> > > +      */
-> > > +     EVT_LMB_MAP_UPDATE,
-> > > +
-> > >       /**
-> > >        * @EVT_COUNT:
-> > >        * This constants holds the maximum event number + 1 and is used when
-> > > @@ -203,6 +211,12 @@ union event_data {
-> > >               oftree tree;
-> > >               struct bootm_headers *images;
-> > >       } ft_fixup;
-> > > +
-> > > +     struct event_lmb_map_update {
-> > > +             u64 base;
-> > > +             u64 size;
-> > > +             u8 op;
-> > > +     } lmb_map;
-> > >   };
-> > >
-> > >   /**
+> > > I was able to parse everything from the DT, except for PMU IRQs. Thos=
+e
+> > > aren't needed to
+> > > boot the platform and can be added later on.
+> > > Will send out a new revision soon.
 > >
+> > OK
+> >
+> > >
+> > > >
+> > > >
+> > > > >
+> > > > > >
+> > > > > > For FDT fixup, can you please use the event and the ofnode inte=
+rface?
+> > > > > > See EVT_FT_FIXUP and bootmeth_vbe_ft_fixup() as an example.
+> > >
+> > > It looks like EVT_FT_FIXUP is run rather late in the bootflow, used t=
+o
+> > > updated the FDT for OS usage,
+> > > but it must be run early to update the minimal FDT passed by QEMU and
+> > > add the missing nodes
+> > > for U-Boot drivers.
+> >
+> > If the QEMU FDT is not suitable, shouldn't we use the U-Boot/Linux
+> > one? Do we have to use the one passed in by QEMU?
+> >
+> There's no U-Boot/Linux FDT, since this is an "ACPI only" platform.
+> In EDK2 firmware there's everything hard-coded as well to generate
+> proper ACPI code, but since
+> U-Boot relies on FDT, I decided to "fix" it and add the required
+> missing nodes. This allows to make
+> use of U-Boot existing infrastructure around FDT.
+>
+
+So wouldn't it be better to pass in a u-boot.bin with the DT attached?
+Adding the thing in code seems pretty ugly.
+
+> The QEMU generated FDT contains a bare minimum of nodes and isn't
+> suitable to boot an OS.
+
+Yes, I am not very pleased about that, particularly as my patch to
+allow passing a proper FDT to QEMU[1] has still not been accepted.
+
+Regards,
+Simon
+
+[1] https://patchwork.kernel.org/project/qemu-devel/patch/20210926183410.25=
+6484-1-sjg@chromium.org/#24481799
