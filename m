@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BDBCCF9C59
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 16:04:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05FD3CF9C55
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 16:04:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45C2188C41;
-	Fri, 20 Sep 2024 18:04:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BE67388CDC;
+	Fri, 20 Sep 2024 18:04:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XUO+xxQc";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aBkDd7vn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5381888641; Fri, 20 Sep 2024 18:04:04 +0200 (CEST)
-Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
- [IPv6:2607:f8b0:4864:20::434])
+ id 48F3188B16; Fri, 20 Sep 2024 18:04:07 +0200 (CEST)
+Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
+ [IPv6:2607:f8b0:4864:20::1036])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22E34889BD
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 18:04:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 215F788B16
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 18:04:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-7198de684a7so1681471b3a.2
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 09:04:02 -0700 (PDT)
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-2d88c5d76eeso1657814a91.2
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 09:04:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726848241; x=1727453041; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1726848244; x=1727453044; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=S359CLMDesKs+m/DolBtc++Z9B1QnSAdtQsSADCFjZk=;
- b=XUO+xxQcwM37mHeyyvV+Sql6YqQzk8HPjKp7uOhL0FonmJVImN9bfGB4qSeCVfo1x/
- dwsjIr9B35pipsGZ5igsuS7U2gX2gRclI5mZd2o0ZNK2A8debpKPjNIyPDtElLvyPR4i
- MvZIGW77g6apFM0LRZ1AOmi08XFUuviBTilis=
+ bh=2nXbsdcftVyKv3ggijxIesZBSkQaOQbjrek7WBhCtDA=;
+ b=aBkDd7vnvCndAKA26iao4JoRk2sJE74GSwDR4BERPMhGm6q7nm8eafFiWiNtwTuchX
+ 6Yt6vDozGNmfdsYaCb6q6WkdF9s9yLzEYsaRksYY5TS1/ow0o6vlybNYDZT7QQCy6eoB
+ EFKQMNtSXpMR/yuDDjzDm40o/ToDO36Ok1zkg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726848241; x=1727453041;
+ d=1e100.net; s=20230601; t=1726848244; x=1727453044;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=S359CLMDesKs+m/DolBtc++Z9B1QnSAdtQsSADCFjZk=;
- b=Y28T9TwnmjrUGbwxfeLyIlVDXqZmEqHWiBOPhuIrkBJL6pWWqBkbUKb57Zw0SIizGC
- MPhS5h2IWT8TOYasQlZPW/x5PDyy4BEc9rREPXfKMn8Q2ZBoVj90dobJtrKi74FD4/Sc
- RWmYCd7CzD2LnEnzGdWZPZOb4RlMOLNe9IpINQEvw/8ixC1QiJG77xmPs9SFhxNJCFQM
- 1jx+JzlgVX78ioC4I3a8zagkjv1ss2XFGbpIUr6179+20GnuzlJl9HimKXVuzf6hMPk6
- POKCgjEQp+LtDKp+GcgM52uCCoYC6NhHBDpEvi3unUCZo0Trk+PHho2jbyUaaesEpNcw
- iJYg==
+ bh=2nXbsdcftVyKv3ggijxIesZBSkQaOQbjrek7WBhCtDA=;
+ b=xDdI1Jgw6X3Pm7FsohoUStyEkNRWURqfh4bAVqb8raeNbpatr/aNw/PKirUCfe68ct
+ nCk4lMwqIps9a1tgXHUpkhbAum/I3+zhZZ4G5Iw/8cwEMokqbwG4lLomOx/hFQDTt1xX
+ 3j0AHagiTHAbt5yKGK7n1+xLmYqseaOSrRTjntJyXwzLXUhnT5e99CuGcM2vwExiaFlS
+ 9gkVDi8P8wQXOob47DTYdXZeXoIEGDelqDtKdX05erNoroyvrRzJHagR/snEukRdCa/A
+ QVhnxAt8XjK7sOJU3HbxoYDaD5p5UYnVIGJzKUENm344Erbzyc9F1pHKCjITeW6QnR7t
+ 0XKQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVNexmkLz4AZ7HN2pmHT059M5Uv+qIAk7bGdKh1WCla+5if+hVpWp+8q4uKcSHtcLC0KWMQFUw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz0V+hcXduEpNLJEloQBKheblcis8x5PaWzbPp38cnV06bELxk7
- UPjvcILga+LGhBZ9aH5PjUrROQVhnj6fC0V7wpMcpQOH+pZLMlKBG/ZRCCDhaCrZFm2mISRFIh1
- 3YdXBgOTXIrkyEyZhCxpUBhGxrIcufi3NooPA
-X-Google-Smtp-Source: AGHT+IFr5bQT0AHrpZOSrKQwf/tXn9saimnrUGdmAMaGaUfcmoHt1MwyYxwDeW8Sk+G1lBz7NMt0wU6n8xJFWJYuoFQ=
-X-Received: by 2002:a05:6a00:2e07:b0:70d:2a4d:2eeb with SMTP id
- d2e1a72fcca58-7199cd792e4mr3858352b3a.3.1726848240620; Fri, 20 Sep 2024
- 09:04:00 -0700 (PDT)
+ AJvYcCVl5zFXPXJmq3hS4k45B8HC+81vIroezYiMOLCWiEfhILayJJ2yMuszTR+NDS88YhvpD1UWUL0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw9YwPGTSkp2axYx7wwOCoIYLZd0I6Rf8Z8zrN4Y1QcehFcY4h0
+ q+7Qn9dGx4LfcqlEERtjcg9z8UFaAPbBii3qS1rvgJKVCQ+/TrCQ/YlHzQyiPjr9VELxcMT1cQN
+ HMrqnnzFNaDimVrdR498lOmj01F1MHevNK2kU
+X-Google-Smtp-Source: AGHT+IFwSkYZP99jLWlobj9kIbKnHI4V25yxdKCvzBQwwbEf0E8EnOkJpEAZ7/Q+5BpfNnjPtErChsLJmkMqO4NZo54=
+X-Received: by 2002:a17:90b:4a92:b0:2d8:e5a3:f6a5 with SMTP id
+ 98e67ed59e1d1-2dd7f3f8034mr4560032a91.13.1726848243321; Fri, 20 Sep 2024
+ 09:04:03 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240824092716.1042696-1-mikhail.kshevetskiy@iopsys.eu>
- <20240824092716.1042696-7-mikhail.kshevetskiy@iopsys.eu>
-In-Reply-To: <20240824092716.1042696-7-mikhail.kshevetskiy@iopsys.eu>
+ <20240824092716.1042696-8-mikhail.kshevetskiy@iopsys.eu>
+In-Reply-To: <20240824092716.1042696-8-mikhail.kshevetskiy@iopsys.eu>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 20 Sep 2024 18:03:47 +0200
-Message-ID: <CAFLszTjwLE0xZqhmgrOkgf7KXu5UkktP6T1WoYVniNTvqDZufw@mail.gmail.com>
-Subject: Re: [PATCH v5 06/11] net/tcp: improve tcp framework,
- use better state machine
+Date: Fri, 20 Sep 2024 18:03:49 +0200
+Message-ID: <CAFLszTjv+Un242rwYO-m24S1Q8OKCsPUQ5vjXT53jam_P3sJEQ@mail.gmail.com>
+Subject: Re: [PATCH v5 07/11] net/tcp: simplify tcp header filling code
 To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 Cc: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>, 
  Ramon Fried <rfried.dev@gmail.com>,
@@ -97,51 +96,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mikhail,
-
 On Sat, 24 Aug 2024 at 11:27, Mikhail Kshevetskiy
 <mikhail.kshevetskiy@iopsys.eu> wrote:
 >
-> Changes:
->  * Fix initial send sequence always zero issue
->  * Use state machine close to RFC 9293. This should make TCP
->    transfers more reliable (now we can upload a huge array
->    of data from the board to external server)
->  * Improve TCP framework a lot. This should make tcp client
->    code much more simple.
->  * rewrite wget with new tcp stack
->  * rewrite fastboot_tcp with new tcp stack
->
-> It's quite hard to fix the initial send sequence (ISS) issue
-> with the separate patch. A naive attempt to fix an issue
-> inside the tcp_set_tcp_header() function will break tcp packet
-> retransmit logic in wget and other clients.
->
-> Example:
->   Wget stores tcp_seq_num value before tcp_set_tcp_header() will
->   be called and (on failure) retransmit the packet with the stored
->   tcp_seq_num value. Thus:
->     * the same ISS must allways be used (current case)
->     * or tcp clients needs to generate a proper ISS when
->       required.
->
-> A proper ISS fix will require a big redesing comparable with
-> a this one.
->
+
+Missing commit message
+
 > Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 > ---
->  include/net/tcp.h  | 179 ++++++++--
->  include/net/wget.h |   8 -
->  net/fastboot_tcp.c | 190 +++++-----
->  net/net.c          |   4 +
->  net/tcp.c          | 845 ++++++++++++++++++++++++++++++++++-----------
->  net/wget.c         | 460 +++++++-----------------
->  6 files changed, 1008 insertions(+), 678 deletions(-)
->
+>  net/tcp.c | 74 ++++++++++++++++++++++++++++++-------------------------
+>  1 file changed, 41 insertions(+), 33 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-I see quite a lot of extra brackets and comparisons against NULL / 0 / '\0', BTW
-
-Regards,
-Simon
