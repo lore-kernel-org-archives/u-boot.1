@@ -4,108 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DABBBCF9C5F
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 20:05:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F9D3CF9C68
+	for <u-boot@archiver.kernel.org>; Sat, 21 Sep 2024 02:37:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9827088A6C;
-	Fri, 20 Sep 2024 22:04:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 268C9880A5;
+	Sat, 21 Sep 2024 04:37:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FCH7xt1i";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="M63XEOBm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE68D889E2; Fri, 20 Sep 2024 18:49:05 +0200 (CEST)
-Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
- [IPv6:2607:f8b0:4864:20::72a])
+ id C5FB68785E; Sat, 21 Sep 2024 00:51:39 +0200 (CEST)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F557889AE
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 18:49:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CE98987E30
+ for <u-boot@lists.denx.de>; Sat, 21 Sep 2024 00:51:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72a.google.com with SMTP id
- af79cd13be357-7a9ae0e116cso225638185a.1
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 09:49:03 -0700 (PDT)
+ spf=pass smtp.mailfrom=ansuelsmth@gmail.com
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-3787f30d892so1525782f8f.0
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 15:51:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1726850942; x=1727455742; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=n5mnlKp0YXkkmN8wV6HNdGcFRI0bd/y2EXv4WFH0iwo=;
- b=FCH7xt1iVGvUuER18e2YvLDOp/So1HCfpncPEBzt/KqPmcHk8qZd5pnXFo0sn5pPGU
- Xipxf/Eb8UEBBKuDkohi6uKfDaH2SeldAwWQ0b2IugnohwU20vmljNXVChpY/oLh1xJm
- nt6nIMsehRMMGqbZ1iIxYkT+cEAiEUoaeVfuU=
+ d=gmail.com; s=20230601; t=1726872697; x=1727477497; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Gtjja0gaK9bMQ2q4lwt49Q2We2QuAEI0ObqB0jEI96Q=;
+ b=M63XEOBmkCp4m4uR4LP0Yqit+bpbIE2b5zHaQF3Rq9YtI0FxRUijPBMRjhnA7I0cea
+ phZ60+rJnkYtDDKu4tCK88VvfWUnXrGjLyb/aJkKvyx4heeUhCfJWNZJoQS556EUZPo0
+ ueZKt03p1lhQd3srxnSp9sJsHB4JWQYa5RrcBHu1P+oKvFFAxKFDMGUicqqUxfrws9nO
+ ANMLSDw/zCbrXjkYya68wZRZJ0DSyJSaisJXZTVzL0N8WIXsCT95Sy7+vClgFGqLmFts
+ l0sJJaDEnVuztkMx1u6CuK6EF7ucHLUCxojhrVktoWQ/1D/lAQQH0dJ1a8ulQFEqlV4I
+ 9wTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726850942; x=1727455742;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=n5mnlKp0YXkkmN8wV6HNdGcFRI0bd/y2EXv4WFH0iwo=;
- b=FHhTBkEASS7vNye6LC8o+DGp3wUbRwpmWQxk/UVy82zy5RRuUsk+jyabLrFXnYOUE5
- BQJb6UMOZdi4IEHQdbkvI3WXEX8LSLsu4Ngz5DYh1tBtfxMuFqmidrcpCT9nvFg2wcw1
- CTta/hyUQcyVgxmc9JRY2TG1fn1rnmAuzvOtb7WgALrhAH+YjO9EDuEsDgqzVT86Iysn
- bdoGaSgtfCFCXDJLgi076GeniuiyeYnhF4qmoTgWhg1iYhmHbBby82Y3fu0P997n18lW
- zSWghMzVNhwG22zbxYnpHv8MlGz2rCFYCnoF0ogpKYgjmZf1ibZXaZ5Ag6pneijCNcRj
- cKow==
+ d=1e100.net; s=20230601; t=1726872697; x=1727477497;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Gtjja0gaK9bMQ2q4lwt49Q2We2QuAEI0ObqB0jEI96Q=;
+ b=A/TvIHrjgYqTYl0O/MRRCG8We9Q+ehgWsWtp24EJaEzy+dCKFwIvZkR+bD3pQDaLm2
+ /z7uqvPDWb+JbKdU3r8m1m0DCAVB67x0DtbG+Yh6EuHp2SjLJpup21QI78mSsEs4iTDP
+ leQD1gQ4T50J3V1gt8sPWEPg6XfMsVLrHH0YWddho2TWUzxOz4dwd/z/yaXX4RdK1P7h
+ D4LrAcNa3SO+3B/+6OzN0hoBqtjywyK+W2dB8PAuSEXQejzN510FVEahpctYOIK+UqRB
+ 97yhjCWlZuYbpKeup6cVsjj1MmT2oLGfZBTOyWj6HOqlW1+F4tB015B+cdTV3tK52vqN
+ tUXQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV98AUAQIQ596mkXPcD+DII7Zjo0NZY4dcaTCPERs1PzneI2SKidTnGhSCRNDxsrVj21d6AM0A=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywqm9bEmzQtcgx3PN/A6sRxoFmtuI76rDJCW9+SS1fWVQggssnb
- GBbOa9G90wE2v9tS7ewftoWxr+QArf0j5idDMChBatOTdwWwaddaelDd6wJ8K8Y=
-X-Google-Smtp-Source: AGHT+IGkcRRBUMv8IFlMMi/L5HW0d/LCyTD9yZAxI7oF9GA5uAAdbpB8A22XGp4tAjzmlyo7apfyig==
-X-Received: by 2002:a05:6214:3293:b0:6c7:c753:d2d8 with SMTP id
- 6a1803df08f44-6c7c753d4bcmr8147636d6.42.1726850942066; 
- Fri, 20 Sep 2024 09:49:02 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6c75e586d10sm19445536d6.141.2024.09.20.09.48.58
+ AJvYcCUqZnnDQZp+1SsRm4sVE4bzlbNeb2DaZwK3gfuYpiXNnkDfpxCmROjR58edEcZcS6Ol3LOV6Bg=@lists.denx.de
+X-Gm-Message-State: AOJu0YyYZOTlUa0Jy2A3e57HGxsClkCm051B3GDzDif9ZxE+yhVz5o0k
+ TUTMWiurQMFATndN8FgmG2iLscXJhIQZSO0OtllRZ3LQFGHPEP4/
+X-Google-Smtp-Source: AGHT+IG04avbyPwgpVmL0qmxlJUWXiIJrFsT3Z1h+h0kEDN74qUf76x5U1x5JIBRkIQfsXb16QQ+5g==
+X-Received: by 2002:adf:cd0f:0:b0:368:5b0c:7d34 with SMTP id
+ ffacd0b85a97d-37a422781fdmr2777162f8f.22.1726872696892; 
+ Fri, 20 Sep 2024 15:51:36 -0700 (PDT)
+Received: from localhost.localdomain (93-34-90-105.ip49.fastwebnet.it.
+ [93.34.90.105]) by smtp.googlemail.com with ESMTPSA id
+ ffacd0b85a97d-378e73e837csm18850516f8f.27.2024.09.20.15.51.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Sep 2024 09:49:01 -0700 (PDT)
-Date: Fri, 20 Sep 2024 10:48:56 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Marek Vasut <marex@denx.de>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de, Ben Wolsieffer <benwolsieffer@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Chris Morgan <macromorgan@hotmail.com>, Dragan Simic <dsimic@manjaro.org>,
- Eugen Hristev <eugen.hristev@collabora.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Jonas Karlman <jonas@kwiboo.se>,
- Kever Yang <kever.yang@rock-chips.com>,
- Kostya Porotchkin <kostap@marvell.com>,
- Matteo Lisi <matteo.lisi@engicam.com>,
+ Fri, 20 Sep 2024 15:51:35 -0700 (PDT)
+From: Christian Marangi <ansuelsmth@gmail.com>
+To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Sean Anderson <seanga2@gmail.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
+ Eddie James <eajames@linux.ibm.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Max Krummenacher <max.krummenacher@toradex.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>, Sam Day <me@samcday.com>,
- Sumit Garg <sumit.garg@linaro.org>, Thierry Reding <treding@nvidia.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- u-boot-amlogic@groups.io, u-boot-qcom@groups.io,
- u-boot@dh-electronics.com, uboot-stm32@st-md-mailman.stormreply.com
-Subject: Re: [PATCH 1/4] power: regulator: Trigger probe of regulators which
- are always-on or boot-on
-Message-ID: <20240920164856.GI4252@bill-the-cat>
-References: <20240626235717.272219-1-marex@denx.de>
- <CAFLszTjwbWdKqs_UBqXvr2F2ahoGd0-BFE-XLNr3-uq73ZLFHg@mail.gmail.com>
- <6abad4ba-b29a-47a3-addb-91e8f46ee425@denx.de>
- <CAFLszTgAqOXbkcJxYKxM4gn6_oOg7+nyaBK-Y34r_zVaPBScvA@mail.gmail.com>
- <616b231b-0291-4bb3-93d9-85970419ed62@denx.de>
- <CAFLszTiHy7yn0Z18GdkSLgykH0s=z8tJ=-QGf+knXPggKwyk9Q@mail.gmail.com>
- <20240916162758.GE4252@bill-the-cat>
- <CAPVz0n1krz0GxwEXA+FFr1DHVz-c4R4zm++Ji1KhmBTab9m_2g@mail.gmail.com>
+ Yang Xiwen <forbidden405@outlook.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Arseniy Krasnov <avkrasnov@salutedevices.com>, Heiko Schocher <hs@denx.de>,
+ Alexey Romanov <avromanov@salutedevices.com>,
+ Martin Kurbanov <mmkurbanov@salutedevices.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Artur Rojek <artur@conclusive.pl>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Vasileios Amoiridis <vassilisamir@gmail.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>,
+ Doug Zobel <douglas.zobel@climate.com>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de, John Crispin <john@phrozen.org>
+Subject: [PATCH v4 00/11] led: introduce LED boot and activity function
+Date: Sat, 21 Sep 2024 00:49:53 +0200
+Message-ID: <20240920225101.2008-1-ansuelsmth@gmail.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="dqOtJzLmOffRWHzq"
-Content-Disposition: inline
-In-Reply-To: <CAPVz0n1krz0GxwEXA+FFr1DHVz-c4R4zm++Ji1KhmBTab9m_2g@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-X-Mailman-Approved-At: Fri, 20 Sep 2024 22:04:43 +0200
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 21 Sep 2024 04:37:11 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,171 +115,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series is a reworked version of the previous seried: 
+misc: introduce STATUS LED activity function
 
---dqOtJzLmOffRWHzq
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This series port and expand the legacy concept of LED boot from
+the legacy Status LED API to new LED API.
 
-On Fri, Sep 20, 2024 at 07:40:35PM +0300, Svyatoslav Ryhel wrote:
-> =D0=BF=D0=BD, 16 =D0=B2=D0=B5=D1=80. 2024=E2=80=AF=D1=80. =D0=BE 19:28 To=
-m Rini <trini@konsulko.com> =D0=BF=D0=B8=D1=88=D0=B5:
-> >
-> > On Wed, Sep 11, 2024 at 07:00:56PM -0600, Simon Glass wrote:
-> > > Hi Marek,
-> > >
-> > > On Fri, 28 Jun 2024 at 07:26, Marek Vasut <marex@denx.de> wrote:
-> > > >
-> > > > On 6/28/24 9:32 AM, Simon Glass wrote:
-> > > > > Hi Marek,
-> > > >
-> > > > Hi,
-> > > >
-> > > > [...]
-> > > >
-> > > > >>>> @@ -473,8 +483,6 @@ static int regulator_pre_probe(struct udev=
-ice *dev)
-> > > > >>>>                                                   -ENODATA);
-> > > > >>>>           uc_pdata->max_uA =3D dev_read_u32_default(dev, "regu=
-lator-max-microamp",
-> > > > >>>>                                                   -ENODATA);
-> > > > >>>> -       uc_pdata->always_on =3D dev_read_bool(dev, "regulator-=
-always-on");
-> > > > >>>> -       uc_pdata->boot_on =3D dev_read_bool(dev, "regulator-bo=
-ot-on");
-> > > > >>>>           uc_pdata->ramp_delay =3D dev_read_u32_default(dev, "=
-regulator-ramp-delay",
-> > > > >>>>                                                       0);
-> > > > >>>>           uc_pdata->force_off =3D dev_read_bool(dev, "regulato=
-r-force-boot-off");
-> > > > >>>> --
-> > > > >>>> 2.43.0
-> > > > >>>>
-> > > > >>>
-> > > > >>> This is reading a lot of DT stuff very early, which may be slow=
-=2E It is
-> > > > >>> also reading from the DT in the bind() step which we sometimes =
-have to
-> > > > >>> do, but try to avoid.
-> > > > >>
-> > > > >> Actually, it is reading only the bare minimum very early in bind=
-, the
-> > > > >> always-on and boot-on, the rest is in pre_probe, i.e. later.
-> > > > >
-> > > > > Yes, I see that. Also it is inevitable that these properties need=
- to
-> > > > > be read before probe(), since they control whether to probe().
-> > > > >
-> > > > >>
-> > > > >>> Also this seems to happen in SPL and again pre-reloc and again =
-in
-> > > > >>> U-Boot post-reloc?
-> > > > >>
-> > > > >> What does, the uclass post_bind ?
-> > > > >
-> > > > > I mean that this code will be called in SPL (if the regulators ar=
-e in
-> > > > > the DT there), U-Boot pre-reloc and post-reloc, each time turning=
- on
-> > > > > the regulators. We need a way to control that, don't we?
-> > > >
-> > > > I would assume that if those regulators are turned on once in the
-> > > > earliest stage , turning them on again in the follow up stage would=
- be a
-> > > > noop ? This is the point of regulator-*-on, to keep the regulators =
-on.
-> > >
-> > > No, there is sometimes a particular sequence needed.
-> > >
-> > > >
-> > > > >>> Should we have a step in the init sequence where we set up the
-> > > > >>> regulators, by calling regulators_enable_boot_on() ?
-> > > > >>
-> > > > >> Let's not do this , the entire point of this series is to get ri=
-d of
-> > > > >> those functions and do the regulator configuration the same way =
-LED
-> > > > >> subsystem does it -- by probing always-on/boot-on regulators and
-> > > > >> configuring them correctly on probe.
-> > > > >>
-> > > > >> To me regulators_enable_boot_on() and the like was always an
-> > > > >> inconsistently applied workaround for missing DM_FLAG_PROBE_AFTE=
-R_BIND ,
-> > > > >> which is now implemented, so such workarounds can be removed.
-> > > > >
-> > > > > That patch seemed to slip under the radar, sent and applied on the
-> > > > > same day! We really need to add a test for it, BTW.
-> > > >
-> > > > Which patch ? My recollection of DM_FLAG_PROBE_AFTER_BIND was that =
-it
-> > > > took a while to get in.
-> > >
-> > > [1]
-> > >
-> > > >
-> > > > > My concern is that this might cause us ordering problems. We perh=
-aps
-> > > > > want the regulators to be done first. If drivers are probed which=
- use
-> > > > > regulators, then presumably they will enable them. Consider this:
-> > > > >
-> > > > > - LED driver auto-probes
-> > > > >     - probes I2C bus 2
-> > > > >     - probes LDO1 which is autoset so turns on
-> > > > > - LDO1 probes, but is already running
-> > > > > - LDO2 probes, which is autoset so turns on
-> > > > >
-> > > > > So long as it is OK to enable the regulators in any order, then t=
-his
-> > > > > seems fine. But is it? How do we handle the case where are partic=
-ular
-> > > > > sequence is needed?
-> > > >
-> > > > Did we finally arrive at the point where we need -EPROBE_DEFER alike
-> > > > mechanism ?
-> > >
-> > > Nope. But I am concerned that this patch is leading us there. bind()
-> > > really needs to be as clean as possible. It is one of the design
-> > > elements of driver model which Linux should adopt.
-> > >
-> > > There is always a race to be the first to init something, move the
-> > > init earlier, etc... I don't see any general need to init the
-> > > regulators right at the start. It should be done in a separate
-> > > function and be optional. I am happy to send a patch if you like.
-> >
-> > Since we're currently stuck on the point where Marek has patches that
-> > fix a real problem, and Svyatoslav has a problem with them, but isn't
-> > currently able to debug it, yes, please put forward your patch that
-> > might address both sets of problems so we can all figure out how to
-> > resolve the problems, thanks!
->=20
-> With patches from Marek there is no i2c chip probe of PMIC, while
-> without i2c chip probe is called (probe_chip function). How this is
-> even possible?
+One thing that many device need is a way to communicate to the
+user that the device is actually doing something.
 
-Yes, it's very puzzling. Do you have the ability to get some debug
-console type information out so you can sprinkle in some prints and
-figure it out?
+This is especially useful for recovery steps where an
+user (for example) insert an USB drive, keep a button pressed
+and the device autorecover.
 
---=20
-Tom
+There is currently no way to signal the user externally that
+the bootloader is processing/recoverying aside from setting
+a LED on.
 
---dqOtJzLmOffRWHzq
-Content-Type: application/pgp-signature; name="signature.asc"
+A solid LED on is not enough and won't actually signal any
+kind of progress.
+Solution is the good old blinking LED but uboot doesn't
+suggest (and support) interrupts and almost all the LED
+are usually GPIO LED that doesn't support HW blink.
 
------BEGIN PGP SIGNATURE-----
+Additional Kconfg are also introduced to set the LED boot and
+activity. Those are referenced by label.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbtp3gACgkQFHw5/5Y0
-tywr6Av/XI9hPV+8aqFzHxVis9rqKhD8iGfdD7dHTHckrlHyLh+JPPda2flYbKMS
-EIH6lPxHAsNhVwZ0BS/1qLDlicaUoI4Dg6bi1ffkux0gCk0GOg0K1SLUUHczOjPE
-8p7OygaFVS08w0AiLE25LP8B6d+HKBITMWOgGiOdY5ZP9uMOfLWFT98MVJDfna1R
-h2bGW/u9JwXqK2eCsyrt5uGZ5o+nbyqmLGHmu0SCzNEKvfkoJSVGI7lEfho5Ljwv
-2i/cvUyNBSXFaCdKUBhIKFPPu0sF22GXjwF1q50582bkJ08QxprpxpxHDvPGGCiD
-mp5FmlbxuAfkmNMZ+VLKitvHOhsD35oxq4jfwgJ1FDewDRKCpipo+WsG3StHirau
-q9H71Z7l+JR0FRyAYSS1mvRASiHDEgVjuEAkajmc2r4lCrxPWke5vSjr0d/8Zr7Q
-Jw88u2J+n8iSfm8+r7ShCxbV2OHzzijb2JwQviEQP9tXBF7IIXmYXI+a2s9J1k4s
-PuhveSmr
-=LQhm
------END PGP SIGNATURE-----
+A documentation for old and these new LED API is created.
 
---dqOtJzLmOffRWHzq--
+(world tested with the azure pipeline)
+
+Changes v4:
+- Drop led_set_state/period_by_label
+- Switch to /options/u-boot
+- Rework to cache label and dev in led uclass
+- Add multiple patch for additional helper
+- Rework patches to limit ifdef in some place
+Changes v3:
+- Switch to /config property
+Changes v2:
+- Drop GPIO SW implementation
+- Add fix for new LED SW BLINK
+
+Christian Marangi (11):
+  led: toggle LED on initial SW blink
+  dm: core: implement ofnode_options helpers
+  led: implement LED boot API
+  common: board_r: rework BOOT LED handling
+  led: implement LED activity API
+  tftp: implement support for LED activity
+  mtd: implement support for LED activity
+  ubi: implement support for LED activity
+  doc: introduce led.rst documentation
+  test: dm: Add tests for LED boot and activity
+  test: dm: Expand ofnode options test with new helper
+
+ arch/sandbox/dts/test.dts  |   5 +
+ cmd/mtd.c                  |  11 +++
+ cmd/ubi.c                  |  13 ++-
+ common/board_r.c           |  28 ++++--
+ doc/api/index.rst          |   1 +
+ doc/api/led.rst            |  10 ++
+ drivers/core/ofnode.c      |  33 +++++++
+ drivers/led/Kconfig        |  15 +++
+ drivers/led/led-uclass.c   | 188 +++++++++++++++++++++++++++++++++++++
+ drivers/led/led_sw_blink.c |  10 +-
+ include/dm/ofnode.h        |  41 ++++++++
+ include/led.h              | 149 ++++++++++++++++++++++++++++-
+ include/status_led.h       |  13 +++
+ net/net.c                  |   4 +
+ net/tftp.c                 |   5 +
+ test/dm/led.c              |  72 ++++++++++++++
+ test/dm/ofnode.c           |   9 ++
+ 17 files changed, 594 insertions(+), 13 deletions(-)
+ create mode 100644 doc/api/led.rst
+
+-- 
+2.45.2
+
