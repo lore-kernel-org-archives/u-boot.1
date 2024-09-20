@@ -4,56 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29808CF58F4
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 09:16:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1C1FCF58F4
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 09:16:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A9AC89434;
+	by phobos.denx.de (Postfix) with ESMTP id D0F028943E;
 	Fri, 20 Sep 2024 11:15:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=thaumatec.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="DzUqEHAi";
+	dkim=pass (2048-bit key; unprotected) header.d=thaumatec-com.20230601.gappssmtp.com header.i=@thaumatec-com.20230601.gappssmtp.com header.b="zq+s3aEL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E2D8789386; Fri, 20 Sep 2024 10:28:11 +0200 (CEST)
-Received: from relay1-d.mail.gandi.net (relay1-d.mail.gandi.net
- [217.70.183.193])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 02BF6893C2; Fri, 20 Sep 2024 11:06:20 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6DED89379
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 10:28:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EC8D9893A6
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 11:06:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=fail (p=none dis=none) header.from=thaumatec.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bastien.curutchet@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPA id ED4C0240002;
- Fri, 20 Sep 2024 08:28:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1726820889;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=dtNGLU35uHqRhtq2T6AsPJ/PHc3n6SHvQJud6Vas9vs=;
- b=DzUqEHAiCxeijt8htt711eG9uh9+tWTT9daLBcX8K/K/+yrGxFy9/RoY/IXN33x6Ucautq
- +Gwa1/6Se17dQ0M8lnhUxQFUq+iNS11qHyoT/Zgb6zt520f/COh7sDDlqoRap4gCq9n2pR
- ZKdcJo6gIni3EC6yeMQkMPX5a77jsuqdhvXxg4QmdTrJQVISdxooaHdpCzCYAzk8wq2jTS
- LJR4bADBO21Duh+xoBm5xlLet8iQzr/oLqhsC9Q4yfz8NgwLQvZE0ue+kGeW0FEo0Ju9q7
- TSn3nrd6knqKahWgTAn1RwGc8Jls6cWXaQabUeqyjk02xSEUIEXSQqEjT8tFSg==
-From: Bastien Curutchet <bastien.curutchet@bootlin.com>
-To: Jagan Teki <jagan@amarulasolutions.com>,
-	Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Herve Codina <herve.codina@bootlin.com>,
- Christopher Cordahi <christophercordahi@nanometrics.ca>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>
-Subject: [PATCH] spi: davinci: Drop the preload of TX buffer before
- read/writes operations
-Date: Fri, 20 Sep 2024 10:28:06 +0200
-Message-ID: <20240920082806.74253-1-bastien.curutchet@bootlin.com>
-X-Mailer: git-send-email 2.46.0
+ spf=pass smtp.mailfrom=dse@thaumatec.com
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a8d56155f51so198171266b.2
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 02:06:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=thaumatec-com.20230601.gappssmtp.com; s=20230601; t=1726823177; x=1727427977;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=WS1yCRQJdAzHO3UdJBVN6ySnJfMQxCBEzF9pq3vTXIc=;
+ b=zq+s3aELHHXrv+Yjrhc3gvKNfPCbktywMC+7OzZlNjzubypR8WfMuQ2iGHNoNK/95n
+ LbSjqPdaveS8i3YFnGVlBCrVbUzPkYUpPKcVZ4zJPScC73h6L1sL46/KURVP/u6QTY6S
+ U7fR3jiIr1WWHJGF3vFGGwz8FGfIbVyAganIrlRMqfIN9bZP2Hye5HZFvcpIGBrwWxG8
+ RjbmMcF1/GeAE2r6sWDsceRA+y9d6Z3BtnX48BhVr75HDCsQMActprfAZXg5+KHaTFwV
+ kD3M2zG6sZ86zk6nbFgwrzciSp7oDYJ3aNL2TfYvDxVNamL4WZrgb4h8cTkdXUMBiF8S
+ 2B2Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1726823177; x=1727427977;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=WS1yCRQJdAzHO3UdJBVN6ySnJfMQxCBEzF9pq3vTXIc=;
+ b=bjE34S0Xq9ogckFug5NRu8fotfOyL9CPX6CDfbb+TdFvqmSexHl/yV/u9DKSJvwNXy
+ pboFwqTrKjzaN1n87uncLGAyv/tvza6dVeENGnlREpKkOOYCI2ExzhHrFXIRcwHcBvtU
+ duSRInfsQ7uwLCQkxx3neRPabcQYiEvGv+iDKaVcKlc76OggPGntGLZQ2SXn3MGi5wHx
+ Z646IB1QMlzmZ/I31qIkUwj4Q7dqNOgAtrfecaPD5HlxPT2dtj8jGG/lCt7CdGJ9UWF7
+ X8E9BpuIZ/E2NWFU3/o9KtysECJZVgPz56PdKY1N6bvuF7HkgODmKK1gBHBCOCk2GFWq
+ 8T6w==
+X-Gm-Message-State: AOJu0Yw9yDk2C7aRskVpaOryl643+2a4IYsCzI/78x9kWjUdjMv/Lrgb
+ URNhORoxrDQcBpZsyohb/rnBS6YxZ7i/5SbIs8JukAxRjqKs8nbpAkcE+cOrJ+PirU/SryjVQJI
+ z
+X-Google-Smtp-Source: AGHT+IGzrW8Fh2zQqmTF8MMWochYVtQByXZBkvn8lw9+8eeVtHv3vOn9XfBaU8CYDwE8BP/TlZlbfQ==
+X-Received: by 2002:a17:907:868d:b0:a8a:cc5a:7f3c with SMTP id
+ a640c23a62f3a-a90d5126c2emr167191266b.58.1726823177334; 
+ Fri, 20 Sep 2024 02:06:17 -0700 (PDT)
+Received: from fedora.home ([185.186.39.206]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a90612b3833sm818977566b.128.2024.09.20.02.06.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 20 Sep 2024 02:06:17 -0700 (PDT)
+From: Daniel Semkowicz <dse@thaumatec.com>
+To: u-boot@lists.denx.de
+Cc: Daniel Semkowicz <dse@thaumatec.com>, Dragan Simic <dsimic@manjaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] rockchip: rk3399: Weaken dependency on SPL serial
+Date: Fri, 20 Sep 2024 11:06:01 +0200
+Message-ID: <20240920090613.76154-1-dse@thaumatec.com>
+X-Mailer: git-send-email 2.46.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-GND-Sasl: bastien.curutchet@bootlin.com
 X-Mailman-Approved-At: Fri, 20 Sep 2024 11:15:35 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -71,50 +95,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A write to the TX buffer is performed before entering the loop to "avoid
-clock starvation". This sometimes results in subsequent writes in
-davinci_spi_xfer_data() to occur while the TXFULL bit is asserted,
-leading to write failures.
+Allow to disable serial console in SPL. Weak dependency is already used
+with TPL serial.
 
-Remove the preload of the TX buffer.
-
-Signed-off-by: Bastien Curutchet <bastien.curutchet@bootlin.com>
+Signed-off-by: Daniel Semkowicz <dse@thaumatec.com>
 ---
-Hi all,
 
-I've ran into write failures to flash on my platform based on the
-DAVINCI/OMAP L138. This patch fixes it.
+ arch/arm/mach-rockchip/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- drivers/spi/davinci_spi.c | 9 ---------
- 1 file changed, 9 deletions(-)
-
-diff --git a/drivers/spi/davinci_spi.c b/drivers/spi/davinci_spi.c
-index 25f5e9fdeb..07c46b8b66 100644
---- a/drivers/spi/davinci_spi.c
-+++ b/drivers/spi/davinci_spi.c
-@@ -129,9 +129,6 @@ static int davinci_spi_read(struct davinci_spi_slave *ds, unsigned int len,
- 	while (readl(&ds->regs->buf) & SPIBUF_TXFULL_MASK)
- 		;
- 
--	/* preload the TX buffer to avoid clock starvation */
--	writel(data1_reg_val, &ds->regs->dat1);
--
- 	/* keep reading 1 byte until only 1 byte left */
- 	while ((len--) > 1)
- 		*rxp++ = davinci_spi_xfer_data(ds, data1_reg_val);
-@@ -159,12 +156,6 @@ static int davinci_spi_write(struct davinci_spi_slave *ds, unsigned int len,
- 	while (readl(&ds->regs->buf) & SPIBUF_TXFULL_MASK)
- 		;
- 
--	/* preload the TX buffer to avoid clock starvation */
--	if (len > 2) {
--		writel(data1_reg_val | *txp++, &ds->regs->dat1);
--		len--;
--	}
--
- 	/* keep writing 1 byte until only 1 byte left */
- 	while ((len--) > 1)
- 		davinci_spi_xfer_data(ds, data1_reg_val | *txp++);
+diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
+index fc1b638ff01..269c219a6f8 100644
+--- a/arch/arm/mach-rockchip/Kconfig
++++ b/arch/arm/mach-rockchip/Kconfig
+@@ -257,7 +257,6 @@ config ROCKCHIP_RK3399
+ 	select SPL_SYSCON if SPL
+ 	select TPL_NEEDS_SEPARATE_STACK if TPL
+ 	select SPL_SEPARATE_BSS
+-	select SPL_SERIAL
+ 	select CLK
+ 	select FIT
+ 	select PINCTRL
+@@ -288,6 +287,7 @@ config ROCKCHIP_RK3399
+ 	imply SPL_DM_SEQ_ALIAS
+ 	imply SPL_FIT_SIGNATURE
+ 	imply SPL_ROCKCHIP_COMMON_BOARD
++	imply SPL_SERIAL
+ 	imply SYS_BOOTCOUNT_SINGLEWORD if BOOTCOUNT_LIMIT
+ 	imply TPL_CLK
+ 	imply TPL_DM
 -- 
-2.46.0
+2.46.1
+
 
