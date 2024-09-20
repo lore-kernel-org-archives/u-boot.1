@@ -4,86 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0A12CF58E4
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 07:37:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F0C0CF58E5
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 07:54:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35C7F89357;
-	Fri, 20 Sep 2024 09:37:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D5536893CB;
+	Fri, 20 Sep 2024 09:54:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Rgui2Vnf";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="aj2twjlo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BBB0289381; Fri, 20 Sep 2024 09:37:43 +0200 (CEST)
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
+ id E75E6893BE; Fri, 20 Sep 2024 09:54:16 +0200 (CEST)
+Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
+ [IPv6:2607:f8b0:4864:20::b2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4DC1589351
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 09:37:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8021288D91
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 09:54:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=9elements.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-206aee40676so16068775ad.0
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 00:37:40 -0700 (PDT)
+ spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
+Received: by mail-yb1-xb2d.google.com with SMTP id
+ 3f1490d57ef6-e1da3677ca7so1593105276.0
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 00:54:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726817859; x=1727422659; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=R8CZ6tdFrtblPr+fuTAxjNn95+xnPmwTSatxNFn0Khc=;
- b=Rgui2Vnf04SSeThuRnfSxxFJ7dldJmFEq28BCuGnRRNF0WNTYFRRlygEd2/TFWpToa
- gOR/OGWYYczB+JDiJx8GGWZfIOGEw++0jV4/qUYyn0db0I5TkzHfvO+NkQ4a2yo0AiAT
- ZCRb/JI75Og0QqnivpDh/kMinjGywn6CFJhcVhJLrfNhT/DXJ3opLWy2yvPrDKBts2ba
- 4OAjrbSsHjVBq5AIgyQccsV2V5e0eTc62utTPZPF6flAvfCcKtQR1luIgfI3cTgOrS+U
- aPbJa37B/IoSi3ob3zlQUiGrVp5XC9mK0dMoW79yMQVvjHK3RQk8VPExWruJDxwbEYeI
- ankQ==
+ d=9elements.com; s=google; t=1726818851; x=1727423651; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YM9piinAL2oB1Pv1vbAHX3m7e3wQtJWrFfNrMQ4bDDY=;
+ b=aj2twjlowwgJnoJ+LgueQ9e8ecBtD7nf8OgZpLIBF3zhYDhoS9K0EoUVCiIeeM6uOp
+ Mj9qIp4FURyxbp7ROWed3rqXOllNxm7H3GYptNuyC/J0p9EDi+1aIbJXfkct88E4Aoyb
+ +/ZASLNoP7XgnMK0rjXalcWpc66/FEGeKDpi00YingyBnuL7EGL1U8Q+xKRb2kdIAqtm
+ aHpipQMewL75KBQdqOdeUPw5STuM5R2GP8eYvoBkQ2OuvYYJ/YDS5W+pYoLuBwjiyUiS
+ OgU9NRrkM6GOyg4PG27t+aBOrpuZ/FbYjY0lBBRvHJs9g5MPyOvliCUkFcFKFDXchDk7
+ Qx2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726817859; x=1727422659;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=R8CZ6tdFrtblPr+fuTAxjNn95+xnPmwTSatxNFn0Khc=;
- b=dGPV4LhC0N7ZSdODYiqCP4fhgqBX8FpSRkPnfeaq9kVqNv7jRC8lLhHW7ge3jNnFD9
- m9zy4ecoARN3Npd9Nbxy7eiWEUF7LS77EZigPnrI40VABjo3WFle6f09COFHQzSIOSic
- eJJyU9Jqu/0/cSTClEWK6jxBAzp+Dca+d9aDUVFaJptZR7JTcqumUonOD+YPsKm694PC
- Dg8/Fpfjs+hAF9w2qGfn71qGbhRR2v0EAGwBOc80MshfpzB9WaK+ySDHa6CbHW0Y4/qv
- aV9f4H0/zFid+vnZrk2OhhJF23IDnFCH5iGrJFJO07HxkwemyoyWxxGqhE+iGlQuT/MN
- XwjA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVu4iO96WaLpvZl94ttRQgwGudcuaoU0e7TBcfTJho64n+c/CIGgCvebbFSygCMlWMITGuyCD4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy4dsm/VDva7xeEMHfuRXIGGvYKXBASuB9CXPUZ9ntCMlzd2oGR
- FolwzTZpVBloI97z6Y2ZRy8Maxa8i7I7Zjssi9b8wIjw4Pyumh62BHFkHE4EunHztQq9LOasDF7
- /rflNdLV4nKONVs9MA9iNiPEqo4xkHsM5R/VvMtflfwbL+5ja
-X-Google-Smtp-Source: AGHT+IG/UNBbhpfMiqXRtwogrbo6Ee7WaOY8jRKNra7vKscUqxZqb9vaMzf7ljeFW3wZLgBC/ZAOGqpvjAsTqpe50OY=
-X-Received: by 2002:a17:903:230e:b0:202:4640:cc68 with SMTP id
- d9443c01a7336-208d843c1a7mr27871115ad.59.1726817858592; Fri, 20 Sep 2024
- 00:37:38 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1726818851; x=1727423651;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=YM9piinAL2oB1Pv1vbAHX3m7e3wQtJWrFfNrMQ4bDDY=;
+ b=rPIJHKEqybazc+QuL+S6Z3y2hiP30f8o9VZQynOkO2m6OsrcGfYuSzKM6m0j9GNSYa
+ 4+/TAtCtq1N1vuxnSs+1gCfSlzGiISAU2eeoNGHWDFuHQTf5L6PCOhaHW+ZQiTNRiCJA
+ tK0Qu5gmZJl1e9fD54aQDH/yYLR0AXQVTRsvODxN8F8hirYXCmDIdkGM2CfqFdLG4e0w
+ 1LOvu4chpdwcLLvrtM2cpEpg2XP+J22TrxW9TpH6NY3UUIfTJNcmsYDtMMbtzbxlzl4Y
+ AG5xtERYQi4SehMlV91HVJ77N7sd69JiVoEqmPBXuYOOx9u7N/I1plDs7CynjhUd0Yky
+ tTmQ==
+X-Gm-Message-State: AOJu0Yzf7uSk7NzNHZ6ZOJFAEXuiWU76MXg8l02CDXPuQI38RDZgIjOt
+ h3pas1fEI7PJhBQRfr2UjlDa73/Z3xND6g/7jDyE6bIXNi3ST2rhgQ1e/BN/tf9ptElrIG9DgOU
+ kIm6d60zyKCqaezryu/A/8XaOLbbbm9kXeBuxLQ==
+X-Google-Smtp-Source: AGHT+IGF7z11SE98ZLDUlV3pLwIVU2oq1qhi9obAUdLYPh4SKzWgpxkfBYBd15IfUSXCRKNoS0sBwX/kJVdHwOmniEA=
+X-Received: by 2002:a05:6902:20c7:b0:e1d:c3ea:da14 with SMTP id
+ 3f1490d57ef6-e2252f56105mr1071959276.32.1726818851320; Fri, 20 Sep 2024
+ 00:54:11 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240914160548.42551-1-heinrich.schuchardt@canonical.com>
- <CAFLszTjL46Gb03MS7znLujAKC0VkgOrUaZMy7XPw-jpw3TELTA@mail.gmail.com>
- <d95b95d2-7afb-42f2-9a01-75d601368be9@canonical.com>
- <CAC_iWjLCnUpnVGuVYnhzo4EaUmKMSZPws3hSzOOvQqirC71hfQ@mail.gmail.com>
- <CAFLszTimJuwFKp6DaRDJ22=0tbNPYbcLMT9hcFrC9Rca6vzAyg@mail.gmail.com>
- <b8d1cef7-4e56-49c6-aeca-b471a82870cd@canonical.com>
- <CAC_iWjLY9Oea-AryLyrQJ3zXX+Bihza5B8R5UpXh58K3+Ff=Xw@mail.gmail.com>
- <CAFLszTgASXx5t7=T+yLtC0W9dwo=FkQPF5T6eYD2uyFUWE6D_A@mail.gmail.com>
- <CAC_iWjJL2tHTe84iqOkzDxANed-TdOObDYoW2jUwe3T=x=cyqA@mail.gmail.com>
- <CAFLszTghAmCGoiHq+iBwBRC99ucBOUGG+mjq8HEjUVkPAJu-ZQ@mail.gmail.com>
- <CAC_iWjKLODdFV701vo-ECEo+_U6NQoLS=HsrgmS+RyDHd5pi0A@mail.gmail.com>
- <CAFLszTits7gXaCfCzwvOOwLcYOtHSPBTh8H+5o5jgZ2wh4eNuQ@mail.gmail.com>
-In-Reply-To: <CAFLszTits7gXaCfCzwvOOwLcYOtHSPBTh8H+5o5jgZ2wh4eNuQ@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 20 Sep 2024 10:37:01 +0300
-Message-ID: <CAC_iWjKetz0BUriZ__khwQaPshadFFNsdZXyN8rtPe8VpkkVwg@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi_leader: delete rng-seed if having EFI RNG protocol
+References: <20240911062511.494855-1-patrick.rudolph@9elements.com>
+ <20240911062511.494855-23-patrick.rudolph@9elements.com>
+ <CAFLszTg0cf_1ojqhO8ZXpkX+MoQYgX_-AFVzUDCyD2yE8U=rcQ@mail.gmail.com>
+ <CALNFmy0QJ4HNHhSKzx94dJ6jS_F0i9VoDqUwwVpe2SCeLB=pmg@mail.gmail.com>
+ <CAFLszTgf=_jJkfyXhxXDZSieMmM_cm7pss3ysM5yz1EphMYVpw@mail.gmail.com>
+ <CALNFmy1oOCNr3Kp8gt6RsjkJT=ShkOpJnQuSwvq2+ftwWtoyOw@mail.gmail.com>
+ <CAFLszTi4Jf2QZZqWd2pA35J1HPEZay=tkbbs94_eyFLJMuYOdA@mail.gmail.com>
+In-Reply-To: <CAFLszTi4Jf2QZZqWd2pA35J1HPEZay=tkbbs94_eyFLJMuYOdA@mail.gmail.com>
+From: Patrick Rudolph <patrick.rudolph@9elements.com>
+Date: Fri, 20 Sep 2024 09:54:00 +0200
+Message-ID: <CALNFmy3fyS2+Xw4OUv92jfbP_hCBwY6Fi_79fKV+aJOqSm7jVA@mail.gmail.com>
+Subject: Re: [PATCH v3 22/30] board: emulation: Add QEMU sbsa support
 To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: u-boot@lists.denx.de, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Tom Rini <trini@konsulko.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>, 
+ Peter Robinson <pbrobinson@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,125 +97,187 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
-
-On Fri, 20 Sept 2024 at 10:25, Simon Glass <sjg@chromium.org> wrote:
+On Thu, Sep 19, 2024 at 4:10=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
+e:
 >
-> Hi Ilias,
+> Hi Patrick,
 >
-> On Thu, 19 Sept 2024 at 17:51, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
+> On Wed, 18 Sept 2024 at 08:29, Patrick Rudolph
+> <patrick.rudolph@9elements.com> wrote:
 > >
-> > On Thu, 19 Sept 2024 at 18:39, Simon Glass <sjg@chromium.org> wrote:
+> > On Mon, Sep 16, 2024 at 5:41=E2=80=AFPM Simon Glass <sjg@chromium.org> =
+wrote:
 > > >
-> > > Hi,
+> > > Hi Patrick,
 > > >
-> > > On Thu, 19 Sept 2024 at 17:37, Ilias Apalodimas
-> > > <ilias.apalodimas@linaro.org> wrote:
+> > > On Thu, 12 Sept 2024 at 00:23, Patrick Rudolph
+> > > <patrick.rudolph@9elements.com> wrote:
 > > > >
-> > > > On Thu, 19 Sept 2024 at 18:19, Simon Glass <sjg@chromium.org> wrote:
+> > > > On Thu, Sep 12, 2024 at 2:58=E2=80=AFAM Simon Glass <sjg@chromium.o=
+rg> wrote:
 > > > > >
-> > > > > Hi,
+> > > > > Hi Patrick,
 > > > > >
-> > > > > On Thu, 19 Sept 2024 at 17:13, Ilias Apalodimas
-> > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > On Wed, 11 Sept 2024 at 00:26, Patrick Rudolph
+> > > > > <patrick.rudolph@9elements.com> wrote:
 > > > > > >
+> > > > > > Add support for Arm sbsa [1] v0.3+ that is supported by QEMU [2=
+].
 > > > > > >
+> > > > > > Unlike other Arm based platforms the machine only provides a mi=
+nimal
+> > > > > > FDT that contains number of CPUs, ammount of memory and machine=
+-version.
+> > > > > > The boot firmware has to provide ACPI tables to the OS.
 > > > > > >
-> > > > > > On Thu, Sep 19, 2024, 18:05 Heinrich Schuchardt <heinrich.schuchardt@canonical.com> wrote:
-> > > > > >>
-> > > > > >> On 19.09.24 17:00, Simon Glass wrote:
-> > > > > >> > Hi,
-> > > > > >> >
-> > > > > >> > On Thu, 19 Sept 2024 at 16:32, Ilias Apalodimas
-> > > > > >> > <ilias.apalodimas@linaro.org> wrote:
-> > > > > >> >>
-> > > > > >> >> Hi all,
-> > > > > >> >>
-> > > > > >> >> On Thu, 19 Sept 2024 at 17:20, Heinrich Schuchardt
-> > > > > >> >> <heinrich.schuchardt@canonical.com> wrote:
-> > > > > >> >>>
-> > > > > >> >>> On 19.09.24 16:10, Simon Glass wrote:
-> > > > > >> >>>> Hi Heinrich,
-> > > > > >> >>>>
-> > > > > >> >>>> On Sat, 14 Sept 2024 at 18:06, Heinrich Schuchardt
-> > > > > >> >>>> <heinrich.schuchardt@canonical.com> wrote:
-> > > > > >> >>>>>
-> > > > > >> >>>>> For measured be boot we must avoid any volatile values in the device-tree.
-> > > > > >> >>>>> We already delete /chosen/kaslr-seed if we provide and EFI RNG protocol.
-> > > > > >> >>>>
-> > > > > >> >>>> Could you explain a bit why this is, and where this is checked?
-> > > > > >> >>>>>
-> > > > > >> >>>>> Additionally remove /chosen/rng-seed provided by QEMU or U-Boot.
-> > > > > >> >>>
-> > > > > >> >>> Measured boot relies on creating hashes of artifacts and writing these
-> > > > > >> >>> to TPM. If the hashes don't match the OS will either warn or refuse to
-> > > > > >> >>> boot. The device-tree is one of the artifacts that are measured.
-> > > > > >> >>>
-> > > > > >> >>> If we have random values in /chosen, measured boot will fail.
-> > > > > >> >>>
-> > > > > >> >>> When an EFI RNG protocol is provided by the firmware, GRUB and the
-> > > > > >> >>> kernel will use it instead of /chosen/rng-seed and /chosen/kaslr-seed.
-> > > > > >> >>
-> > > > > >> >> There's a comment on top of that function that explains what happens as well.
-> > > > > >> >> In short the EFI stub does not even look at the KASLR seed and never
-> > > > > >> >> randomizes the physical placement of the kernel. It only does that
-> > > > > >> >> when the EFI_RNG protocol is there.
-> > > > > >> >
-> > > > > >> > OK thank you. I suppose I am more just wondering why it got added in
-> > > > > >> > the first place?
-> > > > > >>
-> > > > > >> For booting via the legacy Linux entry point adding kaslr-seed allows to
-> > > > > >> randomize addresses. QEMU adds rng-seed instead of kaslr-seed.
+> > > > > > Add a minimal amount of devicetree nodes to make the board usea=
+ble within
+> > > > > > U-Boot, provide documentation how to use, enable binman to fabr=
+icate both
+> > > > > > ROMs that are required to boot and add ACPI tables to make it f=
+ull compatible
+> > > > > > to the EDK2 reference implementation.
 > > > > > >
+> > > > > > The board was tested using Fedora 40 Aarch64 Workstation. It's =
+able
+> > > > > > to boot from USB and AHCI or network.
 > > > > > >
-> > > > > > Not the kernel physical placement. It randomizes only the virtual placement
+> > > > > > Tested and found working:
+> > > > > > - serial
+> > > > > > - PCI
+> > > > > > - xHCI
+> > > > > > - Bochs display
+> > > > > > - AHCI
+> > > > > > - network using e1000e
+> > > > > > - CPU init
+> > > > > > - Booting Fedora 40
+> > > > > >
+> > > > > > 1: Server Base System Architecture (SBSA)
+> > > > > > 2: https://www.qemu.org/docs/master/system/arm/sbsa.html
+> > > > > >
+> > > > > > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+> > > > > > Cc: Peter Robinson <pbrobinson@gmail.com>
+> > > > > > Cc: Simon Glass <sjg@chromium.org>
+> > > > > > Cc: Tom Rini <trini@konsulko.com>
+> > > > > > ---
+> > > > > > Changelog v3:
+> > > > > > - Add GIC and GIC-ITS to devicetree
+> > > > > > - Select GICv3 driver
+> > > > > > - Drop acpi_fill_madt and use driver model instead
+> > > > > >
+> > > > > > ---
+> > > > > >  arch/arm/Kconfig                            |   1 +
+> > > > > >  arch/arm/dts/qemu-sbsa.dts                  |  49 ++
+> > > > > >  arch/arm/include/asm/arch-qemu-sbsa/boot0.h |  33 ++
+> > > > > >  arch/arm/mach-qemu/Kconfig                  |  36 +-
+> > > > > >  board/emulation/qemu-arm/MAINTAINERS        |   2 +
+> > > > > >  board/emulation/qemu-sbsa/Kconfig           |  58 +++
+> > > > > >  board/emulation/qemu-sbsa/Makefile          |   8 +
+> > > > > >  board/emulation/qemu-sbsa/acpi.c            | 235 ++++++++++
+> > > > > >  board/emulation/qemu-sbsa/dsdt.asl          | 483 ++++++++++++=
+++++++++
+> > > > > >  board/emulation/qemu-sbsa/lowlevel_init.S   |  22 +
+> > > > > >  board/emulation/qemu-sbsa/qemu-sbsa.c       | 481 ++++++++++++=
++++++++
+> > > > > >  board/emulation/qemu-sbsa/qemu-sbsa.env     |  14 +
+> > > > > >  board/emulation/qemu-sbsa/qemu-sbsa.h       |  38 ++
+> > > > > >  board/emulation/qemu-sbsa/smc.c             |  72 +++
+> > > > > >  configs/qemu-arm-sbsa_defconfig             |  10 +
+> > > > > >  doc/board/emulation/index.rst               |   1 +
+> > > > > >  doc/board/emulation/qemu-sbsa.rst           |  98 ++++
+> > > > > >  doc/develop/driver-model/virtio.rst         |   1 +
+> > > > > >  include/configs/qemu-sbsa.h                 |  98 ++++
+> > > > > >  19 files changed, 1734 insertions(+), 6 deletions(-)
+> > > > > >  create mode 100644 arch/arm/dts/qemu-sbsa.dts
+> > > > > >  create mode 100644 arch/arm/include/asm/arch-qemu-sbsa/boot0.h
+> > > > > >  create mode 100644 board/emulation/qemu-sbsa/Kconfig
+> > > > > >  create mode 100644 board/emulation/qemu-sbsa/Makefile
+> > > > > >  create mode 100644 board/emulation/qemu-sbsa/acpi.c
+> > > > > >  create mode 100644 board/emulation/qemu-sbsa/dsdt.asl
+> > > > > >  create mode 100644 board/emulation/qemu-sbsa/lowlevel_init.S
+> > > > > >  create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.c
+> > > > > >  create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.env
+> > > > > >  create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.h
+> > > > > >  create mode 100644 board/emulation/qemu-sbsa/smc.c
+> > > > > >  create mode 100644 configs/qemu-arm-sbsa_defconfig
+> > > > > >  create mode 100644 doc/board/emulation/qemu-sbsa.rst
+> > > > > >  create mode 100644 include/configs/qemu-sbsa.h
 > > > > >
-> > > > > So, are you saying that U-Boot adds this field into the FDT and then removes it?
-> > > >
-> > > > Yes. As Heinrich said, the rng seed is still usable for some
-> > > > randomization. If we boot with EFI and have an RNG protocol, we dont
-> > > > need it and it also messes up the TPM measurements, so we remove it.
-> > > > But the code that injects it to u-boot, or the prior bootloader that
-> > > > handed you over a DT,  does not know if you plan to boot with EFI.
+> > > > > Wow there is a lot in this patch!
+> > > > >
+> > > > > I don't think this should be in a separate subdir, just using
+> > > > > board/emulation/qemu-arm should be OK?
+> > > > Why would it share the code base with qemu-arm, as it's a completel=
+y
+> > > > different board?
 > > >
-> > > I'm actually surprised that this works. Normally, removing a property
-> > > does not drop that property from the string table, so adding a
-> > > property and deleting it is not normally the same as never adding it.
-> > > But perhaps that has changed?
+> > > Perhaps I misunderstand this...what kind of board is it? How do you
+> > > run qemu for this board?
 > > >
-> > > Anyway, I think we should add the property when we know it is OK to do
-> > > so, which is just before we boot. If you agree I can take a look at
-> > > that.
+> > For QEMU SBSA you use -machine sbsa-ref, but for qemu-arm you use -mach=
+ine virt.
 > >
-> > Sure, but we won't be able to remove this code. There are still
-> > first-stage boot loaders that might send you a DT over a bloblist,
-> > that has a kaslr-seed
+> > Both can use a cortex-a57 as CPU, but that's all those boards share. Th=
+ey have a
+> > different memory layout, virt provides a complete FDT, while sbsa-ref d=
+oesn't.
+> > sbsa-ref needs an Arm-TF and nonsecure boot firmware, while virt works
+> > without a firmware.
 >
-> But then I don't see what problem that causes...I'm just going to
-> leave this madness to you :-)
+> OK I see
 >
+> >
+> > > >
+> > > > >
+> > > > > I see you are setting plat data in the board file...is there not =
+a CPU
+> > > > > driver which can read it from the devicetree or set it based on t=
+he
+> > > > > compatible string?
+> > > > The CPU driver could read the data from devicetree, but that would =
+require a new
+> > > > DT binding. Is that the preferred method over using plat data?
+> > >
+> > > It is fine to use plat data...but it should be set up in the driver
+> > > where possible. In this case if you don't have a binding you can chec=
+k
+> > > the compatible string of the device (or even the root
+> > > compatible-string) and add your plat data if it matches.
+> >
+> > I was able to parse everything from the DT, except for PMU IRQs. Those
+> > aren't needed to
+> > boot the platform and can be added later on.
+> > Will send out a new revision soon.
+>
+> OK
+>
+> >
+> > >
+> > >
+> > > >
+> > > > >
+> > > > > For FDT fixup, can you please use the event and the ofnode interf=
+ace?
+> > > > > See EVT_FT_FIXUP and bootmeth_vbe_ft_fixup() as an example.
+> >
+> > It looks like EVT_FT_FIXUP is run rather late in the bootflow, used to
+> > updated the FDT for OS usage,
+> > but it must be run early to update the minimal FDT passed by QEMU and
+> > add the missing nodes
+> > for U-Boot drivers.
+>
+> If the QEMU FDT is not suitable, shouldn't we use the U-Boot/Linux
+> one? Do we have to use the one passed in by QEMU?
+>
+There's no U-Boot/Linux FDT, since this is an "ACPI only" platform.
+In EDK2 firmware there's everything hard-coded as well to generate
+proper ACPI code, but since
+U-Boot relies on FDT, I decided to "fix" it and add the required
+missing nodes. This allows to make
+use of U-Boot existing infrastructure around FDT.
 
-The problem is that in theory, we need to measure a DT as early as
-possible, but that's not doable in U-Boot yet. The TCG specs have no
-guidance on measuring DTs, but do have on ACPI tables and we basically
-copy what's done for ACPI.
+The QEMU generated FDT contains a bare minimum of nodes and isn't
+suitable to boot an OS.
 
-The DT is more fragile though. As Heinrich said if you decide to
-measure it, you can't have random values -- whether that comes from
-U-Boot injecting those or a previous loader is irrelevant. The result
-is the same, if you have random values in the measured DT, e.g a mac
-address or a kaslr-seed the measurements we take on PCR1 will be
-different and as a result kind of useless.
-
-For the reasons above, measuring a DT is not in any default config.
-It's up to the user whether he wants to measure it or not. But for the
-kaslr-seed, since the kernel does not use it when booting via EFI and
-the EFI_RNG protocol is installed, we remove it.
-
-Hope that clarifies things a bit
-
-Regards
-/Ilias
 > Regards,
 > Simon
