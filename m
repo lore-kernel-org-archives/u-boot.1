@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E87CCF9C5E
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 16:53:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED8B7CF9C5D
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 17:33:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B224288970;
-	Fri, 20 Sep 2024 18:53:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 39FC788875;
+	Fri, 20 Sep 2024 19:33:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AyaBkEdX";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HMU4e5hE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 26EA0889E2; Fri, 20 Sep 2024 18:53:27 +0200 (CEST)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
+ id C90C288883; Fri, 20 Sep 2024 19:33:22 +0200 (CEST)
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38BDC8880F
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 18:53:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BC7E48880F
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 19:33:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-5365b71a6bdso2744991e87.2
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 09:53:25 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-7a9b3cd75e5so218199585a.0
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 10:33:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1726851204; x=1727456004; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1726853599; x=1727458399; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hSefCrOqjlED6bGYbK/Daj8dKrIZuEk8D+E/euMaijo=;
- b=AyaBkEdXO0ppmfOigipw+v0UkU1v7/zvaq04eJZvpFAb27Fafy5mjTcgynZVLdC6J4
- h95Zx1iLUU61ntQMj1ZOiUzwm6cn4Lh0YNEdZmSKpg0LuOsM77+C8WEqyoKcOTujijCK
- nVZRDdSA+FQBaiPHXh6GlshYcgEvtmj4ZmOO6ldJaAreKnF7bCJb+O59JGRiq1YEcWUI
- bdleDZQieS2NEy8Mx9aOVZ14pJSPZSHihFsIYVBHJa1SzOs6plPVjwlbtAl4RG1k+rFz
- GTEm2znjosS9bwzKY1Ab2V9nA+1P4cidQBl9GZo+XFwtAnYaeQSFnCHeSPiP0KRUMC2u
- Ro5Q==
+ bh=OQnfJN4HraHQCcOW/2+OgDG5hja/TnuI5woTozGJhYA=;
+ b=HMU4e5hEO/2xX1GUDJftJMzFZAyEOw51Qohdlg4gK2NBzVyXgStpVKE81ZhxzvtYx/
+ Bxt1fQKzELGEJ3DCZyS1v6E8o7Zxc9fNyOfbkD6LLUPJYN6Y/NgeVtrLDVA7pu+FLfbY
+ oc0c1UFrFL24W/LbEVyrpOOff+W72aPzRfHJM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726851204; x=1727456004;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1726853599; x=1727458399;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hSefCrOqjlED6bGYbK/Daj8dKrIZuEk8D+E/euMaijo=;
- b=X0Q1Qhq3bdJK+b/V5lxwnLjdW6XDqy4BWorPPeFzdXXJ8/tOoKmcQHX0BZpl73+rVX
- Q7bsUAnjwwOdz8HsBuQP5+MB7eBEc77gxz+SztIMXyqIk+xmwJ5yLtCR52IZTDY1d+sw
- xJsabtWA3W/ZaDTkYOl2lx5y+ISyDP5oUpCsWXdwcSQhxWEZXKHicWJiV13nYROkWMlx
- 5rgnAlbLFPSSpC8CKGDdsVsu8bMidF73Lp2ehopepjlZG3QSO87rmy++Sz07+9scWeba
- KiZ6BxST0CF2AVIj7/C/2H+kfscfeGSXtTqouP3UFA7jJ5m0ypaiR909rgbsImEob8U5
- QVtA==
-X-Gm-Message-State: AOJu0Yy9XCQPRM/tKKXCMfwNoxtJIUcrYu9WztkCxxqubOks/Br2QDGw
- 5mcJ5bWuJFZ8UADgDPv11EZOPuylsmyynLWiYFMGow0n3YVF9nP2X7DyqziKKEgSmc5ShWbwG51
- fTvy+NWpbg43a1ma+Tq4vZw3Rj7A=
-X-Google-Smtp-Source: AGHT+IHpkETsRyCigRYr1dE9glxM4wDNWyRZtAKYVWa4eR6pM5vSLSM+oF6/7u7nYZsOR8jBsM6Da4+9nFv2a4KKNhI=
-X-Received: by 2002:a05:6512:220b:b0:536:54fd:275b with SMTP id
- 2adb3069b0e04-536ac33f61emr2714177e87.54.1726851204085; Fri, 20 Sep 2024
- 09:53:24 -0700 (PDT)
+ bh=OQnfJN4HraHQCcOW/2+OgDG5hja/TnuI5woTozGJhYA=;
+ b=wnGsvf88N009VgTuzuMnAN1DL49Xjw2WUovpgjNzxNLC8P10YJz2Jx8TPkDZezj4YM
+ CqcXu2rcIUcLoq/E/XEj4VTOpDqE6FODICEibkW9EQXacJBe0Zwf92Y7X+V5EZSOLotN
+ L2MnuzFliXR52yUkpRhwqGJ6exyggLaKKz8c0Q6DOrJBgE2vsfqsAGw58slnYpKWBD79
+ nVlJw/HGJnVmLdL9XYm0jY1fN7eaS2t7Jpqi0NuljGcXE+/j0Em6hxchgcpKde2f9WcP
+ LBTkTztmxfMdUtXVIxAw59S4MRlulcX7fip5PWFZNGPaunCtow54oe3RjRjDy9Sdju/P
+ N0JA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXOZZgADalwNazvdMdldUP3haTwNqgwJ8/+cXAMMYo7Ckl+YpT6JDqG7xxSwpWAlV/tdvQ1an8=@lists.denx.de
+X-Gm-Message-State: AOJu0YwN1Ep17iLPHmTVgK8eHOlV9yGs+2G7ErxyealyiOLxcShz9qOg
+ yt4TUBnDtfo4g4oqXb4RkziAOcEG1ZlHGzthOzGAQnNacMcLI7NfLjzV1iYZaeg=
+X-Google-Smtp-Source: AGHT+IENyki2KeBB9xpMiLgy8iofnFYUbtcCYeuYdEv1ygqkNCj9Tg43lBrd22yZHhN4nS8f2lj8gQ==
+X-Received: by 2002:a05:620a:2983:b0:7a9:af5b:6921 with SMTP id
+ af79cd13be357-7acb8d8ae15mr479097085a.21.1726853599484; 
+ Fri, 20 Sep 2024 10:33:19 -0700 (PDT)
+Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7acb082a025sm203613685a.62.2024.09.20.10.33.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 20 Sep 2024 10:33:19 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Roger Quadros <rogerq@kernel.org>
+Cc: "Andrew F. Davis" <afd@ti.com>, Neha Malcom Francis <n-francis@ti.com>, 
+ Vignesh Raghavendra <vigneshr@ti.com>, 
+ Siddharth Vadapalli <s-vadapalli@ti.com>, u-boot@lists.denx.de
+In-Reply-To: <20240918-j721e-ums-v1-0-62f295dce6aa@kernel.org>
+References: <20240918-j721e-ums-v1-0-62f295dce6aa@kernel.org>
+Subject: Re: [PATCH 0/2] mux: mmio: support "reg-mux" compatible
+Message-Id: <172685359825.2413155.7189031595413828983.b4-ty@konsulko.com>
+Date: Fri, 20 Sep 2024 11:33:18 -0600
 MIME-Version: 1.0
-References: <CAFLszTj0HNbEy7VSaDA=Vd05+EWT1rxcDOBxu6e=BY1aQ54ZPg@mail.gmail.com>
- <20240920161114.916381-1-joakim.tjernlund@infinera.com>
-In-Reply-To: <20240920161114.916381-1-joakim.tjernlund@infinera.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 20 Sep 2024 13:53:12 -0300
-Message-ID: <CAOMZO5AMpO4yQwu2d3NGYaeBAhYYZW7aH8gOjX20DBgGB5+9xg@mail.gmail.com>
-Subject: Re: [PATCH] ICEXMSW-2822: Add mkimage secp521r1 ECDSA curve support
-To: Joakim Tjernlund <joakim.tjernlund@infinera.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, 
- Mykyta Iziumtsev <miziumtsev@infinera.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,17 +92,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Joakim,
+On Wed, 18 Sep 2024 16:49:20 +0300, Roger Quadros wrote:
 
-Please replace ICEXMSW-2822 with ecdsa-libcrypto in the Subject line.
+> TI upstream has moved from "mmio-mux" to "reg-mux" that doesn't
+> require the Mux device node's parent to be a syscon type.
+> 
+> Add support for "reg-mux" compatible.
+> 
+> 
 
-On Fri, Sep 20, 2024 at 1:11=E2=80=AFPM Joakim Tjernlund
-<joakim.tjernlund@infinera.com> wrote:
->
-> From: Mykyta Iziumtsev <miziumtsev@infinera.com>
->
-> Adds support for secp521r1 ECDSA in mkimgage
+Applied to u-boot/master, thanks!
 
-Mykyta and your Signed-off-by are missing.
+-- 
+Tom
 
-checkpatch should have warned you about it.
+
