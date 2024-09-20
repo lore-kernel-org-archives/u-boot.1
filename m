@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A3E0CF58E7
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 08:00:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F705CF58E8
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 08:01:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D198B893FF;
-	Fri, 20 Sep 2024 10:00:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 516F08940C;
+	Fri, 20 Sep 2024 10:00:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sVflAtDU";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zEJgR7v2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C34E893E5; Fri, 20 Sep 2024 10:00:38 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id C0146893D7; Fri, 20 Sep 2024 10:00:39 +0200 (CEST)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94ACE893E5
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 10:00:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C573B893D7
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 10:00:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-42cbbb1727eso14480725e9.2
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 01:00:36 -0700 (PDT)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-378c16a4d3eso1792431f8f.1
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 01:00:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726819236; x=1727424036; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1726819234; x=1727424034; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=YpZtPiiI1e1/Vf29ZneRtJ6KxyBl81TQ0/WopswlWtA=;
- b=sVflAtDUgk1F5rFkubM21Qs2Fwv/Wt0ifsxyoI2pqQXHfepcgWxifKpNVe6qWAv4OW
- TTeNVb73BPGBGmC3ngVVQNm8kO95cCydrcl1amf0oXcTa4DVg2r3ytNKuiki+hHrjWLo
- h84y+O9uaL3m/b4M56quWuh71auhkB8Py97TnsXA1o2suZcXnWS78h/Uq00eAGnv3oJD
- cVhV6sZQNDJccMcgajpkeWVe26tJkt00BAxn1zM2uGWRAi1jGStIdtFCYXACOB+NQoEF
- 3rrCR43MmVoRaCWGmGj19tYKJseJtevRVj8j3ggsti8vZmamMSaFxNEUgY8ooixyQ0++
- yCQA==
+ :reply-to; bh=VIDqema31vmCtP5+5Elm3la8qvd99hg1gL/4Bcd9PXU=;
+ b=zEJgR7v2msSSDKn8FBPMqZtHFqUpDCteH9F0jmNNwOqIYuu5aFAT3lRqg9qf4PgLSU
+ Q6klSyjWIHEfaAFMr/Rp8R8ueExvBFhTr3zn/FBWDnOtxE2eEmhjF8Gr8Y0CIjIJ4+BL
+ lUCwfLsN8vlKRAtpQzu/SAXtO3Z5yPH7D0r/g8w557zVgyp7Zqjt0H2JG3s6JClxcX+G
+ S4KCPD6/eY2sCNHXjotLbBFv0stNLRMBS/edwHBz62egbkWEuLH4Ax/KxrYlgCzQxuOJ
+ 77rYXBO2MGmtwzZFDQlPjhwZpqCOP5MC2QiNQFPylRLKATWEWuMB9uTAC5Tec0+xjccd
+ KH9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726819236; x=1727424036;
+ d=1e100.net; s=20230601; t=1726819234; x=1727424034;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YpZtPiiI1e1/Vf29ZneRtJ6KxyBl81TQ0/WopswlWtA=;
- b=Th1DqFodpNVMUQrUas13Lq6oN6WRZVt84p9J63/MK9CafcQzreeuWlc1zbGUL8tMCn
- aFAhK/9K4k/j62GpJ9Py2PDt5HjW8zxnBf35JMkGnyidVEO0Ko7vgPczD2z4yqq3ykfh
- VlkYz+dX8LzKzb4V/V/GbtoDsXQCcCeqStupnfxu18IQ5+X7wJOBVC56+R2sRIob/4Uo
- 0pbPipUt2Ny+1Bgx9drkqtyyfq1jMd+EYa3Mvu+XorZolsurpkwj/PkmkujlJM3Om7RR
- 3+KwQFEcy37W6qweL7LNkBiO5A9UhxbGVe2Ce05Y9CijD2Oh8z6jANKieZzzBeR1cH3b
- sLhg==
+ bh=VIDqema31vmCtP5+5Elm3la8qvd99hg1gL/4Bcd9PXU=;
+ b=YFsIxZNdFo+JCQjp9LMMYOCgfr5cBwpi5HuKR4NrIAh+z3zWaCPeE83pOMPkoMwsA6
+ nei/AnjOua9tGN1wv/d+IphyuSY+hwyqc/AywT20SjGXB08e2kk3Ty5Q85K3iAim4EjD
+ dib2zIaS2+9KdpU3HOy38SPiQC5q5cVYSbLNB5lkUeUHY5fF0qhhs2ifYbeQHmSQeUuF
+ Bc135tWNad22/ZGr1I84ZjS7hAWJp5fWTNeZaphKkklfT6ZVGzDo3QWgSNdjBv4YZKcp
+ gJvdL+oEWjn5NbHPHK/CteYSSUQ2G8FgMUJUCbZUb/RuMopxs5zcNipY3Ltz38r5T8aO
+ c81g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXBotkgVWc2oFC8vZiE6R21Eb11OJ4/8a/8otlVKOifLP8BjbK6LBZ+sakdPjRXAZuJ7noek5Y=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywaxvx5VjBfska5tyc7RPog8mOlW+YsdiTewNxKjNL7xE33d1Eq
- rkPieyOh9D3URPY6Y/kzZl4t+2Md9StZKInK24F8+k0kWQY0lOatO127uVt+mqQ=
-X-Google-Smtp-Source: AGHT+IGQ6guk1bKSaqtpDfatZlUsw2LW5EnhnuuYsu93sZm2it2rrnMnA4Wy8c5qgS5KuSw6AgIqbw==
-X-Received: by 2002:a05:6000:154d:b0:374:c481:3f7 with SMTP id
- ffacd0b85a97d-37a422521b5mr1301077f8f.6.1726819236009; 
- Fri, 20 Sep 2024 01:00:36 -0700 (PDT)
+ AJvYcCV1ALbHTxMson6Sh1X0K6rsCY4M0GUKOUvdjxk9MJcoGRZpCh3Dnvq9DbWY9NkdNio6y5UuVWM=@lists.denx.de
+X-Gm-Message-State: AOJu0YxjDznjpKklqqMzks72MEnosyyAs31ZhvaIPLx0WC9gd2OMCfnK
+ aGQiHJ5wiOtga2pt77jlRZHO9B+OSG7x20qO/n7DbKtn4gT1JwpPDXYPj8yPOo4=
+X-Google-Smtp-Source: AGHT+IErGRNHUxezUh+NGQj7VQ/zS2QVPQZ6sLIxJET+Q478Asu1BJTaiEc+bvAf8fxoiC1sTtyWKg==
+X-Received: by 2002:adf:e74c:0:b0:374:bde8:66af with SMTP id
+ ffacd0b85a97d-37a4238cb41mr1358621f8f.57.1726819234225; 
+ Fri, 20 Sep 2024 01:00:34 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-378e7800313sm17059497f8f.88.2024.09.20.01.00.35
+ ffacd0b85a97d-378e7800313sm17059497f8f.88.2024.09.20.01.00.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Sep 2024 01:00:35 -0700 (PDT)
+ Fri, 20 Sep 2024 01:00:33 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Fri, 20 Sep 2024 10:00:25 +0200
-Subject: [PATCH v2 04/13] ufs: use dcache helpers for scsi_cmd data and
- only invalidate if necessary
+Date: Fri, 20 Sep 2024 10:00:23 +0200
+Subject: [PATCH v2 02/13] ufs: fix dcache flush and invalidate range
+ calculation
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240920-topic-ufs-enhancements-v2-4-65ae61e73eaa@linaro.org>
+Message-Id: <20240920-topic-ufs-enhancements-v2-2-65ae61e73eaa@linaro.org>
 References: <20240920-topic-ufs-enhancements-v2-0-65ae61e73eaa@linaro.org>
 In-Reply-To: <20240920-topic-ufs-enhancements-v2-0-65ae61e73eaa@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Bhupesh Sharma <bhupesh.linux@gmail.com>, 
@@ -83,20 +83,20 @@ Cc: Michal Simek <michal.simek@amd.com>,
  Neil Armstrong <neil.armstrong@linaro.org>, 
  Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2003;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1993;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=nXKi+mna7x+TCnF1EoWcP2ONpBRzk5a7DC+33DXHFa8=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBm7SuaqyP/6l4HWpzKDcS1g+bRhvbnzgNtC1VsNrX6
- Q6rnR0WJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZu0rmgAKCRB33NvayMhJ0eEuEA
- CQ16t5N/4dkudxHcfbaVKBxvyDV9T5tUJXk2bGjcK6omQl5/f9xYabwjsu1btykvcTAppGkewi/BWK
- Ydku+ALiYuVNIGLuSnMnmYIUd6E3QbtqIpsmIWQmktwTy1ZfqVbhsHtNmFiCCbv3UyPaOfrcZGg+b7
- Gf1ZITIUmePar0t+MoTAljfMke4j4jjPUikmw78la6Wijx8XN6LsnI9UsIRjAfBCsRFjGY/hG6qJU/
- Nrt9Ogd6/VAE2EiOcXKd9IoZG4pMMT6nERQmQ2/mVQdTnPD89V54OWkbrVjaumz7eViy8a6M8AquWO
- EtfWg6qH4wTfO4ttl/+pzhRdhC8FH47HjNtlyk+x2R4WYT8OQsirvy1/cy6RC77Nxub5txFhoMMHRV
- uoGgGcc5WHwJCdqMz2CPtHZ08HuO7//qMQI4ildpgfQjKZwzA/AJm8gYRGyNVREFKf4nnZ8+MX0bRc
- PBCdSl1Vn9CZEu9Qaf8ZIGvaFoVk4HcQR7nIw4f1FoGoGJwA3sqswlVQdPuBpc4YABXa7w92RhXyjZ
- /Hl8N6WiR8+O53aL61Po3BUvFfCBxNLeCFJz2RFsHxg/fj2+339oZlKgDi48mGR1xMsHb5/hLSXJKU
- JJpT/k3i8AkN73s2FrVOuuHjIRkrF9+aV9BBUFwUN7Uitx6PWkv7dn+ZUa2A==
+ bh=1UTsvGfPS+P9xfQFHCxXJNZU4eiTF4UOb0MRc89nBcg=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBm7SuZ8KwTuWc1kckVDvrJL/eSOHEntELey+qcDzCn
+ S0BxEs2JAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZu0rmQAKCRB33NvayMhJ0XqtD/
+ 9nm9DbSyPKzQ+rDVj7tAAvVylHnh1V4ihk11yhTbE68w+zbgk8b4ikIDxlR67KqicZFnsBKCSwRdLG
+ wAzBfNKxjc01G0M0ZUHCJhxwgPuIJiiYr7fKfkt7hcJKi1Q7QCOeMqIgohiSfS8d383jufoSmYpFVW
+ YGaD7/vDM6U/76QKsDvJgKyOkHJjM08jjlVRp0j76m3jAIVEMfAtb+Gw6rJ7EiSxIJ+BU4cyCEJSZP
+ tnJqHiEOrbvMDvJMHhECLo7L9DcVPkpzIuk5jxFYzBj+r4u+xxIam0b4/wgkul3hJW8g87XAi9tbNK
+ z59bhzpQNItfLSV6mS/A3ldb2KlXRvMY9euIGBUK2xJ07Q8S48PEh1Oo95xTbsgur5VrQk3ldSkLK3
+ Kq8ENINxOJ/R2Yq4Pc9D7CWKzQNUi6+A1A39p7FJpUQ5cuG7KFr5fwD3goa6PYk9l+d5KFgk6+kKbj
+ G/K3kxdZsdMhKfXsWp4B1AIx38+1RXoygkqaj2Ruax4YKFffygt96iQAKoHVAUaUbac/LAKLd1nP7A
+ RHYp2+SYpRMDl+m+KVxtK1nQB/Ip8xlzBLWp8DtHZU+cBDZ0pzPLCu/WBBBUgjcPxXTVAjAvjElAO7
+ oHQUR16CIJS5wExK7nT0FnopHFa86PkFI2BfVb5I0vo44cjvgHR1VOkJOGGw==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
@@ -115,60 +115,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now we have proper flush and invalidate helpers, we can use them
-directly to operate on the scsi_cmd data.
+The current calculation will omit doing a flush/invalidate on the last
+cacheline if the base address is not aligned with DMA_MINALIGN.
 
-Likewise, we do not need to flush then invalidate, just flush _or_
-invalidate depending on the data direction.
+This causes commands failures and write corruptions on Qualcomm
+platforms.
 
 Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
 Tested-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- drivers/ufs/ufs.c | 14 ++++----------
- 1 file changed, 4 insertions(+), 10 deletions(-)
+ drivers/ufs/ufs.c | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
 
 diff --git a/drivers/ufs/ufs.c b/drivers/ufs/ufs.c
-index 5845fd694d3..d99dcdef7d0 100644
+index e005cc90608..3d9a7d7ee12 100644
 --- a/drivers/ufs/ufs.c
 +++ b/drivers/ufs/ufs.c
-@@ -1468,7 +1468,6 @@ static void prepare_prdt_table(struct ufs_hba *hba, struct scsi_cmd *pccb)
+@@ -703,11 +703,11 @@ static inline u8 ufshcd_get_upmcrs(struct ufs_hba *hba)
+  */
+ static void ufshcd_cache_flush_and_invalidate(void *addr, unsigned long size)
  {
- 	struct utp_transfer_req_desc *req_desc = hba->utrdl;
- 	struct ufshcd_sg_entry *prd_table = hba->ucd_prdt_ptr;
--	uintptr_t aaddr = (uintptr_t)(pccb->pdata) & ~(ARCH_DMA_MINALIGN - 1);
- 	ulong datalen = pccb->datalen;
- 	int table_length;
- 	u8 *buf;
-@@ -1480,15 +1479,6 @@ static void prepare_prdt_table(struct ufs_hba *hba, struct scsi_cmd *pccb)
- 		return;
+-	uintptr_t aaddr = (uintptr_t)addr & ~(ARCH_DMA_MINALIGN - 1);
+-	unsigned long asize = ALIGN(size, ARCH_DMA_MINALIGN);
++	uintptr_t start_addr = (uintptr_t)addr & ~(ARCH_DMA_MINALIGN - 1);
++	uintptr_t end_addr = ALIGN((uintptr_t)addr + size, ARCH_DMA_MINALIGN);
+ 
+-	flush_dcache_range(aaddr, aaddr + asize);
+-	invalidate_dcache_range(aaddr, aaddr + asize);
++	flush_dcache_range(start_addr, end_addr);
++	invalidate_dcache_range(start_addr, end_addr);
+ }
+ 
+ /**
+@@ -1466,13 +1466,13 @@ static void prepare_prdt_table(struct ufs_hba *hba, struct scsi_cmd *pccb)
  	}
  
--	if (pccb->dma_dir == DMA_TO_DEVICE) {	/* Write to device */
--		flush_dcache_range(aaddr,
--				   ALIGN((uintptr_t)pccb->pdata + datalen, ARCH_DMA_MINALIGN));
--	}
--
--	/* In any case, invalidate cache to avoid stale data in it. */
--	invalidate_dcache_range(aaddr,
--				ALIGN((uintptr_t)pccb->pdata + datalen, ARCH_DMA_MINALIGN));
--
+ 	if (pccb->dma_dir == DMA_TO_DEVICE) {	/* Write to device */
+-		flush_dcache_range(aaddr, aaddr +
+-				   ALIGN(datalen, ARCH_DMA_MINALIGN));
++		flush_dcache_range(aaddr,
++				   ALIGN((uintptr_t)pccb->pdata + datalen, ARCH_DMA_MINALIGN));
+ 	}
+ 
+ 	/* In any case, invalidate cache to avoid stale data in it. */
+-	invalidate_dcache_range(aaddr, aaddr +
+-				ALIGN(datalen, ARCH_DMA_MINALIGN));
++	invalidate_dcache_range(aaddr,
++				ALIGN((uintptr_t)pccb->pdata + datalen, ARCH_DMA_MINALIGN));
+ 
  	table_length = DIV_ROUND_UP(pccb->datalen, MAX_PRDT_ENTRY);
  	buf = pccb->pdata;
- 	i = table_length;
-@@ -1517,8 +1507,12 @@ static int ufs_scsi_exec(struct udevice *scsi_dev, struct scsi_cmd *pccb)
- 	ufshcd_prepare_utp_scsi_cmd_upiu(hba, pccb, upiu_flags);
- 	prepare_prdt_table(hba, pccb);
- 
-+	ufshcd_cache_flush(pccb->pdata, pccb->datalen);
-+
- 	ufshcd_send_command(hba, TASK_TAG);
- 
-+	ufshcd_cache_invalidate(pccb->pdata, pccb->datalen);
-+
- 	ocs = ufshcd_get_tr_ocs(hba);
- 	switch (ocs) {
- 	case OCS_SUCCESS:
 
 -- 
 2.34.1
