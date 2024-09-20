@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1498CF9C55
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 16:03:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC74BCF9C55
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 16:03:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6175188D28;
-	Fri, 20 Sep 2024 18:01:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E815C88C41;
+	Fri, 20 Sep 2024 18:01:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="h3EtXyFe";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mEsGbBrG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A7AA888D28; Fri, 20 Sep 2024 18:01:55 +0200 (CEST)
-Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
- [IPv6:2607:f8b0:4864:20::42a])
+ id 9BB7D88D36; Fri, 20 Sep 2024 18:01:56 +0200 (CEST)
+Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
+ [IPv6:2607:f8b0:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 70C7F88C41
+ by phobos.denx.de (Postfix) with ESMTPS id 6D1CF88B49
  for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 18:01:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x42a.google.com with SMTP id
- d2e1a72fcca58-7197970e2aeso1631954b3a.2
+Received: by mail-pf1-x42c.google.com with SMTP id
+ d2e1a72fcca58-7191df6b5f5so1490787b3a.0
  for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 09:01:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1726848112; x=1727452912; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=SOWFlKy/AzWsqeuHSxbVrscX6/qJdktMDa0AHgHh3PU=;
- b=h3EtXyFesgp5Y841Me6+z/UiPcNyUn86qCxEEwMZhipyiXE0EeiYjy4r+3a+O5qvXm
- fdpkptrv0zlShJLfKImaQ+fg6hYGvNnOnkMwkFgOEzhCiIcz9G+DQArc+ksdOrmXOeeO
- 9j8l+vuCTjNroSDvY0cYPj90DLzokGk2FMjAU=
+ bh=By/pb6vXPQEDkQHOkVgemgN4O4XnXkSdWLDTAyAwNO0=;
+ b=mEsGbBrG7oPGZfDQe1twBrllqxy3XmBA/fzQXFs/LtOe5R1wpcptkWLSd+v4Sa+Rd8
+ fNEb98Go/YMSgpTCvX/kRIxE97Ie1c6P64k0LCXZJNtecAby8OoCipN7qb5MvhMpuMMH
+ IDTXn369pzNxlYVbv7Pif7dYfKLW/NeJj/w94=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1726848112; x=1727452912;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=SOWFlKy/AzWsqeuHSxbVrscX6/qJdktMDa0AHgHh3PU=;
- b=fEdlXMjYSi1NUFiCjj8RzdCmIPZMrBOttuW/36Xnwlas5svSMtTACC+o5P4x7IC3Qz
- VjYN9kh1XBJlO2Y6nTZp1/ANOMy2iqOq+/zf+jg1E99D1ZenZHKHoFz38k66pOAK4V7j
- X5R6Jge8F+LaN7McYIZltahZt0WV2Hj/Lb4C5sIRSE5vR7kslHEkUrjJZ3206a8Dy7Mf
- 9sDJRsAdTvmkJzUoUFpDrLHckO3W0z9tmOEzNQs2RQdoGNnOSGkjg+Khw/I0zDD4Jzgt
- hK/6yd3L+Oa/HWnJ7BTVtl5VNbE2Kjr6TPOV0iJcRg2C0mdLSEFGkTogh8UaKLIxQaH3
- sKxA==
+ bh=By/pb6vXPQEDkQHOkVgemgN4O4XnXkSdWLDTAyAwNO0=;
+ b=J1C6DsQpGHv7Ws8WFn6E3iQSjgyv5xtQYvE8BSary+d+BjAX1PGenf2HzYZDSqkkd7
+ x75rZzJrGxyc956oArRZ9vss8Yt1P7wymptChbAdKu2oCU/deUorCVRQI0mE6RT9DKdC
+ mjs7I9Qd1q3OAjAjHs9JfvcPu3wHfMFQjOMBKnFH2xNktvwjxstu1+OK4dTL3qLvATRb
+ R0/kPJReX0ERg9TIQ2KIRFw1abBnu97WP0YnDLNxejMVHvFKivlmjoQyGNfTOnNfK1SR
+ sFyr7xnYhwG6zCLe71D63sByx/rx0GNTT9RACtx1TpMvcBeF7NusLTKgJ8QhLtPZBWJe
+ MCZA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWvM2k9Vn4w1Im0f6v3Qsr1jf1rn7PcrD4SK6qCZdTHpTyskUEMGLq+D5ri3gBT7sPCxgQL+vU=@lists.denx.de
-X-Gm-Message-State: AOJu0YzycbywWyOKlcitDvYBYlkkWXx5/399I1sDXhbnMc+C7Kape+XJ
- 6UcxZatHXnj4LhObqndjZ1FTzoGReh3VuoidE+k53Av3D+aO4tphDb3bR4hUHOuiNdwsCKj1mfx
- dCSnYM3PL8oJzVy5bWnNhMVdzZVrkBwoS4GEDbacLftnaUf7ESTFu
-X-Google-Smtp-Source: AGHT+IECxpYlA+wuG7UelwRo9nuUVeGJ8lrBLaLYZqY+yH6VW9EGGaYOMM/9vYQr3Bg95tiXob4721bv1s/ABJSwjpw=
-X-Received: by 2002:a05:6a00:1823:b0:718:d5f4:6e95 with SMTP id
- d2e1a72fcca58-7199c97ce0dmr4456913b3a.3.1726848111968; Fri, 20 Sep 2024
+ AJvYcCUwANnYCN12RU7qc/OVIX1Rqag1ZxaKFn2U9vFWI5hWJUbS5h0WAaAfAmhxwpIWSmcOCQjuXKM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzrwpk7nSGx6xRmZIEB6TMun/NCjPv3TiM1ttyXeNnRrqTblrFo
+ tnW7k4Tivgc23yNcbgqpF8rFJDSTEo2fumQG5w5YhjO4yvzJDYl50h0ngla2KsimoWXX23HtF4t
+ bODJ8+5kFkDmaBcanwzf/jlSaROLQcIeeimf2
+X-Google-Smtp-Source: AGHT+IHLNCyVD7P47ktKBpvdG5ati+QPGJU5KeGWVYAq5j0uX5v7NXmqJ+rqXd3kR5ZIPFYZMsr5oAGpHNuPhtL3/JU=
+X-Received: by 2002:a05:6a00:4fcf:b0:718:d573:25b9 with SMTP id
+ d2e1a72fcca58-7199cdb4595mr4981588b3a.16.1726848111809; Fri, 20 Sep 2024
  09:01:51 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240902053326.3273410-1-chiawei_wang@aspeedtech.com>
- <20240902053326.3273410-3-chiawei_wang@aspeedtech.com>
-In-Reply-To: <20240902053326.3273410-3-chiawei_wang@aspeedtech.com>
+ <20240902053326.3273410-2-chiawei_wang@aspeedtech.com>
+In-Reply-To: <20240902053326.3273410-2-chiawei_wang@aspeedtech.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 20 Sep 2024 18:01:40 +0200
-Message-ID: <CAFLszThedscRNb8+X2pw0aLAjUQC8iof238GFQTOVVxOqXdhAA@mail.gmail.com>
-Subject: Re: [PATCH 2/4] lib: ecdsa: Create device tree node automatically
+Date: Fri, 20 Sep 2024 18:01:39 +0200
+Message-ID: <CAFLszThB8hq=C++AXKTV0Aa_NHUvOA=DVY93E3ChYhtZRLkcVg@mail.gmail.com>
+Subject: Re: [PATCH 1/4] lib: ecdsa: Add ECDSA384 support
 To: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
 Cc: trini@konsulko.com, bob.wolff68@gmail.com, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -86,62 +86,85 @@ X-Virus-Status: Clean
 
 On Mon, 2 Sept 2024 at 07:33, Chia-Wei Wang <chiawei_wang@aspeedtech.com> wrote:
 >
-> Both the signature and the public key are stored as DTS nodes
-> in the FIT image and SPL/U-Boot DTBs.
->
-> Like the RSA signing & verification do, this patch either creates
-> the nodes or overwirte the content automatically.
+> Add ECDSA384 algorithm support for image signing and verification.
 >
 > Signed-off-by: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
 > ---
->  lib/ecdsa/ecdsa-libcrypto.c | 25 ++++++++++++++++++-------
->  1 file changed, 18 insertions(+), 7 deletions(-)
+>  include/u-boot/ecdsa.h   |  1 +
+>  lib/ecdsa/ecdsa-verify.c | 14 +++++++++++---
+>  tools/image-sig-host.c   |  7 +++++++
+>  3 files changed, 19 insertions(+), 3 deletions(-)
 >
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
-> diff --git a/lib/ecdsa/ecdsa-libcrypto.c b/lib/ecdsa/ecdsa-libcrypto.c
-> index 5fa9be10b4b..cd0c09ca6e4 100644
-> --- a/lib/ecdsa/ecdsa-libcrypto.c
-> +++ b/lib/ecdsa/ecdsa-libcrypto.c
-> @@ -281,15 +281,26 @@ static int do_add(struct signer *ctx, void *fdt, const char *key_node_name)
->         BIGNUM *x, *y;
+
+> diff --git a/include/u-boot/ecdsa.h b/include/u-boot/ecdsa.h
+> index 53490c6b287..0d4df9887e6 100644
+> --- a/include/u-boot/ecdsa.h
+> +++ b/include/u-boot/ecdsa.h
+> @@ -65,5 +65,6 @@ int ecdsa_verify(struct image_sign_info *info,
+>  /** @} */
 >
->         signature_node = fdt_subnode_offset(fdt, 0, FIT_SIG_NODENAME);
-> -       if (signature_node < 0) {
-> -               fprintf(stderr, "Could not find 'signature node: %s\n",
-> -                       fdt_strerror(signature_node));
-> -               return signature_node;
-> +       if (signature_node == -FDT_ERR_NOTFOUND) {
-> +               signature_node = fdt_add_subnode(fdt, 0, FIT_SIG_NODENAME);
-> +               if (signature_node < 0) {
-> +                       fprintf(stderr, "Could not find 'signature node: %s\n",
-
-s/find/add/ ?
-
-
-> +                               fdt_strerror(signature_node));
-> +                       return signature_node;
-> +               }
->         }
+>  #define ECDSA256_BYTES (256 / 8)
+> +#define ECDSA384_BYTES (384 / 8)
 >
-> -       key_node = fdt_add_subnode(fdt, signature_node, key_node_name);
-> -       if (key_node < 0) {
-> -               fprintf(stderr, "Could not create '%s' node: %s\n",
-> +       /* Either create or overwrite the named key node */
-> +       key_node = fdt_subnode_offset(fdt, signature_node, key_node_name);
-> +       if (key_node == -FDT_ERR_NOTFOUND) {
-> +               key_node = fdt_add_subnode(fdt, signature_node, key_node_name);
-> +               if (key_node < 0) {
-> +                       fprintf(stderr, "Could not create '%s' node: %s\n",
-> +                               key_node_name, fdt_strerror(key_node));
-> +                       return key_node;
-> +               }
-> +       } else if (key_node < 0) {
-> +               fprintf(stderr, "cannot select '%s' node: %s\n",
->                         key_node_name, fdt_strerror(key_node));
->                 return key_node;
->         }
+>  #endif
+> diff --git a/lib/ecdsa/ecdsa-verify.c b/lib/ecdsa/ecdsa-verify.c
+> index 4d1835b598a..629b662cf6c 100644
+> --- a/lib/ecdsa/ecdsa-verify.c
+> +++ b/lib/ecdsa/ecdsa-verify.c
+> @@ -22,8 +22,10 @@ static int ecdsa_key_size(const char *curve_name)
+>  {
+>         if (!strcmp(curve_name, "prime256v1"))
+>                 return 256;
+> -       else
+> -               return 0;
+> +       else if (!strcmp(curve_name, "secp384r1"))
+> +               return 384;
+> +
+> +       return 0;
+>  }
+>
+>  static int fdt_get_key(struct ecdsa_public_key *key, const void *fdt, int node)
+> @@ -121,12 +123,18 @@ int ecdsa_verify(struct image_sign_info *info,
+>         return ecdsa_verify_hash(dev, info, hash, sig, sig_len);
+>  }
+>
+> -U_BOOT_CRYPTO_ALGO(ecdsa) = {
+> +U_BOOT_CRYPTO_ALGO(ecdsa256) = {
+>         .name = "ecdsa256",
+>         .key_len = ECDSA256_BYTES,
+>         .verify = ecdsa_verify,
+>  };
+>
+> +U_BOOT_CRYPTO_ALGO(ecdsa384) = {
+> +       .name = "ecdsa384",
+> +       .key_len = ECDSA384_BYTES,
+> +       .verify = ecdsa_verify,
+> +};
+> +
+>  /*
+>   * uclass definition for ECDSA API
+>   *
+> diff --git a/tools/image-sig-host.c b/tools/image-sig-host.c
+> index d0133aec4c8..22253502065 100644
+> --- a/tools/image-sig-host.c
+> +++ b/tools/image-sig-host.c
+> @@ -76,6 +76,13 @@ struct crypto_algo crypto_algos[] = {
+>                 .add_verify_data = ecdsa_add_verify_data,
+>                 .verify = ecdsa_verify,
+>         },
+> +       {
+> +               .name = "ecdsa384",
+> +               .key_len = ECDSA384_BYTES,
+> +               .sign = ecdsa_sign,
+> +               .add_verify_data = ecdsa_add_verify_data,
+> +               .verify = ecdsa_verify,
+> +       },
+>  };
+>
+>  struct padding_algo padding_algos[] = {
 > --
 > 2.25.1
 >
