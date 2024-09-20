@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E65CCF58DF
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 07:06:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C1C3CF58DD
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 07:06:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 83F88893B3;
+	by phobos.denx.de (Postfix) with ESMTP id F323F893AC;
 	Fri, 20 Sep 2024 09:03:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="Ils8l6Am";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="n4Mz/pph";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E9D52893A4; Fri, 20 Sep 2024 09:03:48 +0200 (CEST)
+ id 1CDB1893A5; Fri, 20 Sep 2024 09:03:49 +0200 (CEST)
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.17])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92AFB89391
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 09:03:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A0D2C89390
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 09:03:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tien.fong.chee@intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1726815824; x=1758351824;
+ t=1726815823; x=1758351823;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=D013z8FWmJPvOnvaG82jSMXNAXKh3OHHToPv17LCfXM=;
- b=Ils8l6AmV7ddxoqyNA9Ae8pOih4jP+Hm1cyUMxW39eRaAINeW4GJa0op
- hR9o2iinrXYkoYK7UcspicRoSUv5AZq/4UIk0JdyFsIPmcnsN2xNe2qt4
- zRoyllFuMd7fuYK6IxHzSGbyXhqCczNpHgnilQfEH75IVQPEJZ0bdbSiU
- loVE4z5sYm2w3HHR29mZaawk4garbrFdeHBZjIxleWZaswsjLUjxc3Q45
- T7taEeto3PXBIYjsdYGF1ITO+axCdYP6z6TebN4eaxh7muvC112QTn28r
- v8byR4jOseTRk41MXi3B30dHJ3HWwzHNwtjy7UBYTmktoJBzV/cLfncGW w==;
-X-CSE-ConnectionGUID: Oi/waYTIS6OfsGo1iZXEzw==
-X-CSE-MsgGUID: rdK6duFJRRutUHJ9GAZUbw==
-X-IronPort-AV: E=McAfee;i="6700,10204,11200"; a="25961086"
-X-IronPort-AV: E=Sophos;i="6.10,243,1719903600"; d="scan'208";a="25961086"
+ bh=eFef632lV/6w++PpMvECWwr7mE9Ep3UAwPOCUyRuyHc=;
+ b=n4Mz/pphELp2/x6+/Jf5/7CajgW+R99CSUQ65fIMP4YYteyuDWuHHSMO
+ UgXJtQXoUGRbVG/2mtDtC8qZdFnd7p2pipdrkz7fEKrq0iNgK4lVloJpg
+ KtSgiiTeCz/4X8/ln62zCQd2wxWmBfbs5BAde4RZCFVvEzNtBGra/qJzc
+ QLGmQNnqQGeBDOsQQtuygx9fqd/OmVLsiZuEr27GPe5i5A5YARnYpoIql
+ qrAnXzJVRCMskY/47ivsgM1GAae+ZeMF8U8LKWlp1P0TkWlU+r5WFVfCy
+ uWI4WH+FqeNQVxi8C/w5+36V6+2QAdrgk8rCgQod3t+DGtIlubTCU04/k w==;
+X-CSE-ConnectionGUID: O4wvN1z2QVmZ8M2n6IC+/Q==
+X-CSE-MsgGUID: k4G8sNSvQJ+WAaL6dLBlNw==
+X-IronPort-AV: E=McAfee;i="6700,10204,11200"; a="25961081"
+X-IronPort-AV: E=Sophos;i="6.10,243,1719903600"; d="scan'208";a="25961081"
 Received: from orviesa009.jf.intel.com ([10.64.159.149])
  by orvoesa109.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 20 Sep 2024 00:03:43 -0700
-X-CSE-ConnectionGUID: rKz4UdBlSlGkta/RhWbBcg==
-X-CSE-MsgGUID: 7zNdzsQHRHyOPnWJRZlXMQ==
+ 20 Sep 2024 00:03:41 -0700
+X-CSE-ConnectionGUID: +WQ5RlXcQQScu72cn7hLuQ==
+X-CSE-MsgGUID: zkhQqpdMQ6aEXQUkGsLxAA==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.10,243,1719903600"; d="scan'208";a="70235221"
+X-IronPort-AV: E=Sophos;i="6.10,243,1719903600"; d="scan'208";a="70235204"
 Received: from pglc00502.png.intel.com ([10.221.239.194])
- by orviesa009.jf.intel.com with ESMTP; 20 Sep 2024 00:03:41 -0700
+ by orviesa009.jf.intel.com with ESMTP; 20 Sep 2024 00:03:39 -0700
 From: tien.fong.chee@intel.com
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>,
@@ -58,9 +58,10 @@ Cc: Marek Vasut <marex@denx.de>,
  Yuslaimi Alif Zakuan <alif.zakuan.yuslaimi@intel.com>,
  Hea Kok Kiang <kok.kiang.hea@intel.com>,
  Tien Fong Chee <tien.fong.chee@intel.com>
-Subject: [PATCH v1 14/20] configs: agilex5: Add configuration for malloc pool
-Date: Fri, 20 Sep 2024 15:02:36 +0800
-Message-Id: <20240920070242.20884-15-tien.fong.chee@intel.com>
+Subject: [PATCH v1 13/20] arm: socfpga: Export board ID as U-Boot environment
+ variable
+Date: Fri, 20 Sep 2024 15:02:35 +0800
+Message-Id: <20240920070242.20884-14-tien.fong.chee@intel.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240920070242.20884-1-tien.fong.chee@intel.com>
 References: <20240920070242.20884-1-tien.fong.chee@intel.com>
@@ -84,28 +85,46 @@ X-Virus-Status: Clean
 
 From: Tien Fong Chee <tien.fong.chee@intel.com>
 
-Adding configuration for SPL malloc pool.
+Board ID is exported as environment variable for use to boot Linux with FIT
+configuration.
 
 Signed-off-by: Tien Fong Chee <tien.fong.chee@intel.com>
 ---
- configs/socfpga_agilex5_defconfig | 4 ++++
- 1 file changed, 4 insertions(+)
+ arch/arm/mach-socfpga/include/mach/misc.h | 1 +
+ arch/arm/mach-socfpga/misc_soc64.c        | 5 +++++
+ 2 files changed, 6 insertions(+)
 
-diff --git a/configs/socfpga_agilex5_defconfig b/configs/socfpga_agilex5_defconfig
-index dc1cef3754e..81bbe967dcf 100644
---- a/configs/socfpga_agilex5_defconfig
-+++ b/configs/socfpga_agilex5_defconfig
-@@ -29,6 +29,10 @@ CONFIG_BOOTDELAY=5
- CONFIG_USE_BOOTARGS=y
- CONFIG_BOOTARGS="console=ttyS0,115200 initrd=0x90000000 root=/dev/ram0 rw init=/sbin/init ramdisk_size=10000000 earlycon panic=-1 nosmp kvm-arm.mode=nvhe"
- CONFIG_SPL_MAX_SIZE=0x40000
-+CONFIG_SPL_SYS_MALLOC=y
-+CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
-+CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0xbfa00000
-+CONFIG_SPL_SYS_MALLOC_SIZE=0x500000
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
- CONFIG_SPL_CACHE=y
+diff --git a/arch/arm/mach-socfpga/include/mach/misc.h b/arch/arm/mach-socfpga/include/mach/misc.h
+index 8460acb00d9..e62bea017b0 100644
+--- a/arch/arm/mach-socfpga/include/mach/misc.h
++++ b/arch/arm/mach-socfpga/include/mach/misc.h
+@@ -52,5 +52,6 @@ void set_regular_boot(unsigned int status);
+ void socfpga_pl310_clear(void);
+ void socfpga_get_managers_addr(void);
+ int qspi_flash_software_reset(void);
++u8 socfpga_get_board_id(void);
+ 
+ #endif /* _SOCFPGA_MISC_H_ */
+diff --git a/arch/arm/mach-socfpga/misc_soc64.c b/arch/arm/mach-socfpga/misc_soc64.c
+index 95e1c07e39f..e34c54518a3 100644
+--- a/arch/arm/mach-socfpga/misc_soc64.c
++++ b/arch/arm/mach-socfpga/misc_soc64.c
+@@ -60,10 +60,15 @@ int print_cpuinfo(void)
+ int arch_misc_init(void)
+ {
+ 	char qspi_string[13];
++	char id[3];
+ 
+ 	sprintf(qspi_string, "<0x%08x>", cm_get_qspi_controller_clk_hz());
+ 	env_set("qspi_clock", qspi_string);
+ 
++	/* Export board_id as environment variable */
++	sprintf(id, "%u", socfpga_get_board_id());
++	env_set("board_id", id);
++
+ 	return 0;
+ }
+ #endif
 -- 
 2.25.1
 
