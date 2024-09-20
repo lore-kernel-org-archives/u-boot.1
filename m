@@ -4,111 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCE39CF58E5
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 08:10:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B7A5CF58E5
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 08:13:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E3FA1893C5;
-	Fri, 20 Sep 2024 10:10:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=suse.de
+	by phobos.denx.de (Postfix) with ESMTP id 9E9F3893EC;
+	Fri, 20 Sep 2024 10:13:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="ufPeDFpp";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="IrnUMxfw";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="ufPeDFpp";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="IrnUMxfw";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WXPoPn8+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EACAD892E1; Fri, 20 Sep 2024 10:10:36 +0200 (CEST)
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DBC5B893BE; Fri, 20 Sep 2024 10:13:25 +0200 (CEST)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 151C2893BE
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 10:10:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DD883893C5
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 10:13:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=suse.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=iivanov@suse.de
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id A7DB333A11;
- Fri, 20 Sep 2024 08:10:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1726819831; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=92mZTBpOniPPPuvKDm8gpfx5NWALlVlNHaXwuSic4P4=;
- b=ufPeDFppiQsPsi9UGd6BpX7PvT1mcMprUlVPeMv0IeSWi99XYjkqB52LxZQHvgffP/Fm9G
- kK4C85uGmCV5gcyleLyBgnVkon5sUWEhJkc+zyaXOVAc6NMZ1PjxjlhFkf5cq5djwnNmjz
- 4fO9K0IoHXjXOzBDGr+VSQZ5XlNbUwU=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1726819831;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=92mZTBpOniPPPuvKDm8gpfx5NWALlVlNHaXwuSic4P4=;
- b=IrnUMxfwEpJaG+MhDv/q5sJtxexUnSGgr5ury/4Hq5v+xQ+i9oO58isQRKsDDf12YU9e/G
- esvTyO2RKRgYadDw==
-Authentication-Results: smtp-out1.suse.de;
-	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1726819831; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=92mZTBpOniPPPuvKDm8gpfx5NWALlVlNHaXwuSic4P4=;
- b=ufPeDFppiQsPsi9UGd6BpX7PvT1mcMprUlVPeMv0IeSWi99XYjkqB52LxZQHvgffP/Fm9G
- kK4C85uGmCV5gcyleLyBgnVkon5sUWEhJkc+zyaXOVAc6NMZ1PjxjlhFkf5cq5djwnNmjz
- 4fO9K0IoHXjXOzBDGr+VSQZ5XlNbUwU=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1726819831;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=92mZTBpOniPPPuvKDm8gpfx5NWALlVlNHaXwuSic4P4=;
- b=IrnUMxfwEpJaG+MhDv/q5sJtxexUnSGgr5ury/4Hq5v+xQ+i9oO58isQRKsDDf12YU9e/G
- esvTyO2RKRgYadDw==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 860D013AA7;
- Fri, 20 Sep 2024 08:10:31 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id 2iVrHvct7WYaXAAAD6G6ig
- (envelope-from <iivanov@suse.de>); Fri, 20 Sep 2024 08:10:31 +0000
-Date: Fri, 20 Sep 2024 11:16:25 +0300
-From: "Ivan T. Ivanov" <iivanov@suse.de>
-To: Martin Stolpe <martinstolpe@gmail.com>
-Cc: u-boot@lists.denx.de, Martin Stolpe <martin.stolpe@gmail.com>,
- Devarsh Thakkar <devarsht@ti.com>, Francois Berder <fberder@outlook.fr>,
- Matthias Brugger <mbrugger@suse.com>, Nikhil M Jain <n-jain1@ti.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 1/1] rpi: Fix build error when CONFIG_VIDEO is disabled
- for Raspberry Pi
-Message-ID: <20240920081625.z3fwz6n7o2zxd4gf@localhost.localdomain>
-References: <20240920063204.1049202-1-martin.stolpe@gmail.com>
- <20240920063204.1049202-2-martin.stolpe@gmail.com>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-535be093a43so2270425e87.3
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 01:13:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1726820003; x=1727424803; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0SVQLx15FN6YcUVrnEKqeznpC7TKhyJucaP2+ar0imA=;
+ b=WXPoPn8+rtu+0HMcSRQiTf4mN8qJEze4VxrcTnf26is2C3TjmOUe/obpN6i4/wUlE7
+ Z40aR+20mIJOOjSJ+QAEpgN7ngeT0QkucZLrQjiTG/PGtjxMmy4YBrTNDzGLSuD0XhqF
+ IBFFniaVmGPpjgRkTsdsqJyTN50DRcgD2BdCM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1726820003; x=1727424803;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=0SVQLx15FN6YcUVrnEKqeznpC7TKhyJucaP2+ar0imA=;
+ b=SFs7p0pP0f9Ry16bAWn+7n0cENfg/DT35hW5Gjp6Cyi5UpB3i4F5YxCRh9YfwehmtK
+ vSC3NwKyaav3YCv0O4V7zuxFAtnnB3duWCiljcp1MvI5yNBklYk+q6Knh2wSKrxRzG44
+ g6Kpr3jfm3+aikmLxnzUgr18a69Bw1zDqfyf33fwId0Xp8hCvbkgimVQ3Fwk9vNNHhfB
+ VrUY9CLpThqI2Ngp9ociLqGDjcVsiUeZxAIj91YgiUvDiHEkuctpdIltNzSn9UXhrjBj
+ SWR82FKWX1vjtVLXxmdVIvOD/d746ssZ+jk1hDZbYrwu42SXLPBmamnA8RklAgOD6WsN
+ EJVQ==
+X-Gm-Message-State: AOJu0YxIFBjPaf/0Fc0NJelfWc3fJFmf794lJWlBpxc83M4mB2aTZD2S
+ o9S9T6iuj5he1fqR6fz4IuUImvh1ChAq31+y9//UoivewWBUjj6jc4FbhsRh+7Tp8+qTdVJNv3E
+ 12Dl7
+X-Google-Smtp-Source: AGHT+IGTNJdxbNV87pvWNLyiq0sS//F6JekjsJXWCyU7U4f5mf/uJi3I2RxGStnMyL5HV9l2uxhiVg==
+X-Received: by 2002:a05:6512:398f:b0:535:63a9:9d8c with SMTP id
+ 2adb3069b0e04-536ac2e511cmr793414e87.17.1726820002850; 
+ Fri, 20 Sep 2024 01:13:22 -0700 (PDT)
+Received: from chromium.org ([83.68.141.146]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5c42bc88cf7sm6804447a12.90.2024.09.20.01.13.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 20 Sep 2024 01:13:21 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>, Michael Walle <mwalle@kernel.org>,
+ Paul-Erwan Rio <paulerwan.rio@gmail.com>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 02/18] boot: Allow FIT to fall back from best-match option
+Date: Fri, 20 Sep 2024 10:12:41 +0200
+Message-ID: <20240920081309.140426-3-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240920081309.140426-1-sjg@chromium.org>
+References: <20240920081309.140426-1-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240920063204.1049202-2-martin.stolpe@gmail.com>
-X-Spamd-Result: default: False [0.16 / 50.00]; SUSPICIOUS_RECIPS(1.50)[];
- NEURAL_HAM_LONG(-1.00)[-1.000];
- NEURAL_HAM_SHORT(-0.20)[-0.999]; MIME_GOOD(-0.10)[text/plain];
- BAYES_HAM(-0.04)[58.75%]; FREEMAIL_TO(0.00)[gmail.com];
- TAGGED_RCPT(0.00)[]; ARC_NA(0.00)[]; MISSING_XM_UA(0.00)[];
- RCVD_VIA_SMTP_AUTH(0.00)[]; MIME_TRACE(0.00)[0:+];
- RCPT_COUNT_SEVEN(0.00)[10];
- FREEMAIL_ENVRCPT(0.00)[gmail.com,outlook.fr];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- FROM_EQ_ENVFROM(0.00)[]; FROM_HAS_DN(0.00)[];
- FREEMAIL_CC(0.00)[lists.denx.de,gmail.com,ti.com,outlook.fr,suse.com,prevas.dk,konsulko.com];
- TO_DN_SOME(0.00)[]; TO_MATCH_ENVRCPT_SOME(0.00)[];
- RCVD_COUNT_TWO(0.00)[2]; RCVD_TLS_ALL(0.00)[];
- FUZZY_BLOCKED(0.00)[rspamd.com];
- DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo]
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,63 +94,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+When the best-match feature fails to find something, use the provided
+config name as a fallback. The allows SPL to select a suitable config
+when best-match is enabled.
 
-On 09-20 08:32, Martin Stolpe wrote:
-> 
-> When the CONFIG_VIDEO option is set to disabled for Raspberry Pi devices
-> the build will fail with the following error message:
-> "undefined reference to `fdt_simplefb_enable_and_mem_rsv'."
-> 
-> Signed-off-by: Martin Stolpe <martin.stolpe@gmail.com>
-> ---
-> 
->  board/raspberrypi/rpi/rpi.c | 2 +-
->  boot/fdt_simplefb.c         | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
-> index ab5ea85cf9..bc49708f85 100644
-> --- a/board/raspberrypi/rpi/rpi.c
-> +++ b/board/raspberrypi/rpi/rpi.c
-> @@ -572,7 +572,7 @@ int ft_board_setup(void *blob, struct bd_info *bd)
->  	node = fdt_node_offset_by_compatible(blob, -1, "simple-framebuffer");
->  	if (node < 0)
->  		fdt_simplefb_add_node(blob);
-> -	else
-> +	else if (IS_ENABLED(CONFIG_VIDEO))
->  		fdt_simplefb_enable_and_mem_rsv(blob);
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-I think there is one more user of this function which end of same
-situation stm32mp1.
+(no changes since v1)
 
->  
->  #ifdef CONFIG_EFI_LOADER
-> diff --git a/boot/fdt_simplefb.c b/boot/fdt_simplefb.c
-> index 5341554845..b6e916ff7d 100644
-> --- a/boot/fdt_simplefb.c
-> +++ b/boot/fdt_simplefb.c
-> @@ -86,6 +86,7 @@ int fdt_simplefb_add_node(void *blob)
->  	return fdt_simplefb_configure_node(blob, off);
->  }
->  
-> +#if IS_ENABLED(CONFIG_VIDEO)
->  /**
->   * fdt_simplefb_enable_existing_node() - enable simple-framebuffer DT node
->   *
-> @@ -103,7 +104,6 @@ static int fdt_simplefb_enable_existing_node(void *blob)
->  	return fdt_simplefb_configure_node(blob, off);
->  }
->  
-> -#if IS_ENABLED(CONFIG_VIDEO)
->  int fdt_simplefb_enable_and_mem_rsv(void *blob)
->  {
+ boot/image-fit.c | 19 ++++++++++---------
+ include/image.h  |  4 +++-
+ 2 files changed, 13 insertions(+), 10 deletions(-)
 
-Perhaps it will be better if above check is moved inside this function
-making it empty in case of CONFIG_VIDEO is not set. This way you will
-not need to modify it users.
-
-Regards,
-Ivan
-
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index 7d56f0b5e6e..439ff51edf6 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -1729,13 +1729,13 @@ int fit_conf_find_compat(const void *fit, const void *fdt)
+ 	images_noffset = fdt_path_offset(fit, FIT_IMAGES_PATH);
+ 	if (confs_noffset < 0 || images_noffset < 0) {
+ 		debug("Can't find configurations or images nodes.\n");
+-		return -1;
++		return -EINVAL;
+ 	}
+ 
+ 	fdt_compat = fdt_getprop(fdt, 0, "compatible", &fdt_compat_len);
+ 	if (!fdt_compat) {
+ 		debug("Fdt for comparison has no \"compatible\" property.\n");
+-		return -1;
++		return -ENXIO;
+ 	}
+ 
+ 	/*
+@@ -1812,7 +1812,7 @@ int fit_conf_find_compat(const void *fit, const void *fdt)
+ 	}
+ 	if (!best_match_offset) {
+ 		debug("No match found.\n");
+-		return -1;
++		return -ENOENT;
+ 	}
+ 
+ 	return best_match_offset;
+@@ -2095,17 +2095,18 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+ 		 * fit_conf_get_node() will try to find default config node
+ 		 */
+ 		bootstage_mark(bootstage_id + BOOTSTAGE_SUB_NO_UNIT_NAME);
+-		if (IS_ENABLED(CONFIG_FIT_BEST_MATCH) && !fit_uname_config) {
+-			cfg_noffset = fit_conf_find_compat(fit, gd_fdt_blob());
+-		} else {
+-			cfg_noffset = fit_conf_get_node(fit, fit_uname_config);
+-		}
+-		if (cfg_noffset < 0) {
++		ret = -ENXIO;
++		if (IS_ENABLED(CONFIG_FIT_BEST_MATCH) && !fit_uname_config)
++			ret = fit_conf_find_compat(fit, gd_fdt_blob());
++		if (ret < 0 && ret != -EINVAL)
++			ret = fit_conf_get_node(fit, fit_uname_config);
++		if (ret < 0) {
+ 			puts("Could not find configuration node\n");
+ 			bootstage_error(bootstage_id +
+ 					BOOTSTAGE_SUB_NO_UNIT_NAME);
+ 			return -ENOENT;
+ 		}
++		cfg_noffset = ret;
+ 
+ 		fit_base_uname_config = fdt_get_name(fit, cfg_noffset, NULL);
+ 		printf("   Using '%s' configuration\n", fit_base_uname_config);
+diff --git a/include/image.h b/include/image.h
+index 9da55fe23c2..5d8bee80053 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -1411,7 +1411,9 @@ int fit_check_format(const void *fit, ulong size);
+  * copied into the configuration node in the FIT image. This is required to
+  * match configurations with compressed FDTs.
+  *
+- * Returns: offset to the configuration to use if one was found, -1 otherwise
++ * Returns: offset to the configuration to use if one was found, -EINVAL if
++ * there a /configurations or /images node is missing, -ENOENT if no match was
++ * found, -ENXIO if the FDT node has no compatible string
+  */
+ int fit_conf_find_compat(const void *fit, const void *fdt);
+ 
+-- 
+2.43.0
 
