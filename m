@@ -4,75 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61879CF58DD
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 08:13:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7682CCF58E7
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 08:14:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AED228942D;
-	Fri, 20 Sep 2024 10:13:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2726289444;
+	Fri, 20 Sep 2024 10:13:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TUZop3Hc";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ck6JrXtA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A4EF89382; Fri, 20 Sep 2024 10:13:30 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 0CCC789436; Fri, 20 Sep 2024 10:13:33 +0200 (CEST)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D488389382
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 10:13:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EDF50893BE
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 10:13:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-5c44e1cde53so2088194a12.0
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 01:13:20 -0700 (PDT)
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-5c260b19f71so2057312a12.1
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 01:13:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726820000; x=1727424800; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1726820009; x=1727424809; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=foPS6tB3S6Bm4uKwaA2l/pXxZfKHgADzo5rV+ccL1nQ=;
- b=TUZop3Hc2kVOyU2xMKrQGOP5YwY2N7OKmOTXjT3mbISG/5nvsZB58sJ0JwqCEg99xX
- 51q97sAm7clixuj+No44DLe0T/SZWsgmfgDMhRg+wMM4Ai8X159AuRHinKOBMcecAJjC
- Rf2wGcAAzI9FWFdXB5Wd0v5RBtp1vmOb1RWAY=
+ bh=t75nPGp+HLjNQNLqqcJwJNLYwVOhsfQyUkV50PcqKzk=;
+ b=ck6JrXtAiR91pLEQ/Ag675CHp8btMVGNz+QlDRdk12jeypPf69XMYUJk+kNusmS9/F
+ Ss5je9zQ3T5lPdYOgIU6Fd/cAq47IxG3lgOkVIqlALwIzaZde+2nZKSYzi959Y2Ppd2w
+ GTuNV6WSCAD4ruhO/85YaUUcLKs/OsW0wjdIc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726820000; x=1727424800;
+ d=1e100.net; s=20230601; t=1726820009; x=1727424809;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=foPS6tB3S6Bm4uKwaA2l/pXxZfKHgADzo5rV+ccL1nQ=;
- b=MDCl1pPnRTqKCEWK092gaubiRdXdyFpbDX2gX8Jf3K7ucHoQbIa3B0sMREbZfHb8Vv
- 5Du2QfqOJl8mRbAqB0/txTtNM64N38CCd7zChicJhjlVvjEiGxgHMbNsU87Mm+qAp/Y3
- 1kDCg9qXS6T1RuAzT4tbfKLNxQk/rbyJHPhdY2+5Fkp2d+iFb/m/6FQnMO94AMjmQx5N
- UDAm/YaRhdBUtfK4H/SwxxAwW6nEhugF+lcJLfhXoLcCDDOTPMOI15zhJYCwxGMuy9Zt
- 6JAfq7fJCe+Rekhyavb1XUjYZ/JQLAStxu9Izh+Z1aJg1jSRyYDdHUJSMv2BwM6Q6Lyr
- O4Zg==
-X-Gm-Message-State: AOJu0YzCBod5LdBuKUHQDX99m+CpD7Ywrqy2D00ILgnkRNIJw0KxzHoU
- 45zFvfjazftreF0936W/Oh1fKTDdBMqccdVo7AIt4ORm7kARNBDP28c+kdvU/Ns+EnxDgBIPyHc
- QDQii
-X-Google-Smtp-Source: AGHT+IEqwogJEFRpcivNeXITMPHBcv6y0iCj0GtPMYaFjo7nGUsEGVlCvx0tmy07Hp0lS37W8ow0VA==
-X-Received: by 2002:a05:6402:51c9:b0:5c4:1320:e5a3 with SMTP id
- 4fb4d7f45d1cf-5c464a3f71emr1146298a12.16.1726819999906; 
- Fri, 20 Sep 2024 01:13:19 -0700 (PDT)
+ bh=t75nPGp+HLjNQNLqqcJwJNLYwVOhsfQyUkV50PcqKzk=;
+ b=ttJuv6IWyhGT2Y1VNpLot32MOfo6IPXir0MU2W353Cc4MzweO3JVstGveI20o6SdP5
+ XwakPB4PPWIKEfjOQGkmq+mZQEz3Gv0Z3jdb1MKViN7wg8YYrRTWxSGsU9w8aQ3uXsV4
+ LS0XdoFOnXUwb8DKbU5/i3xu2oO+acTCTd6FgF8FWZqCtxeEaiocEnTW3PnH3eQZNkqm
+ WpaQc1JpW0QfVk3JpJFwM94x3Yp4VKGVaHmwMtbrJliRYROMMx7O1ca8gLf3mvS89wCG
+ F/+Z1LPhtGackDurrV+JH/7+cTgb5/USz+tZJVug3Upn4OEv6j5lbmIwTbd9vgVo/8SS
+ u1/Q==
+X-Gm-Message-State: AOJu0Yyfs0a99hkRi/nuDiH76X/cMHzKHj82Hf3VQW5JjtFxA3fk2Dhu
+ ST/0I5AKJMiKaWXLtlmeUJo6ZCHAwsXCQs1vBxxqEA3sWpY462RQbY/N6xdjKXNEd4wZ8z9KUMB
+ eAt+H
+X-Google-Smtp-Source: AGHT+IFVe9orNGMjqxD2J3rwnq0cgjSbUrxqGOXM7ooZMe5F9uVXjnT7IjZ8OHckeKi1S7IkGPfguQ==
+X-Received: by 2002:a05:6402:2347:b0:5c2:6343:8ddf with SMTP id
+ 4fb4d7f45d1cf-5c464df2910mr1247381a12.33.1726820009167; 
+ Fri, 20 Sep 2024 01:13:29 -0700 (PDT)
 Received: from chromium.org ([83.68.141.146]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c42bc88cf7sm6804447a12.90.2024.09.20.01.13.17
+ 4fb4d7f45d1cf-5c42bc88cf7sm6804447a12.90.2024.09.20.01.13.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Sep 2024 01:13:18 -0700 (PDT)
+ Fri, 20 Sep 2024 01:13:28 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Eddie James <eajames@linux.ibm.com>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Julien Masson <jmasson@baylibre.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Paul-Erwan Rio <paulerwan.rio@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 01/18] image: Add a prototype for fit_image_get_phase()
-Date: Fri, 20 Sep 2024 10:12:40 +0200
-Message-ID: <20240920081309.140426-2-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Gary Bisson <bisson.gary@gmail.com>,
+ Mathieu Othacehe <m.othacehe@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 06/18] malloc: Provide a simple malloc for VPL
+Date: Fri, 20 Sep 2024 10:12:45 +0200
+Message-ID: <20240920081309.140426-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240920081309.140426-1-sjg@chromium.org>
 References: <20240920081309.140426-1-sjg@chromium.org>
@@ -94,40 +89,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This function exists but is not exported. Add a prototype so it can be
-used elsewhere.
+The VPL phase may want to use the smaller malloc() implementation, so
+add an option for this.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- include/image.h | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ common/spl/Kconfig.vpl | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/include/image.h b/include/image.h
-index c52fced9b40..9da55fe23c2 100644
---- a/include/image.h
-+++ b/include/image.h
-@@ -1171,6 +1171,18 @@ int fit_image_get_data_size_unciphered(const void *fit, int noffset,
- int fit_image_get_data_and_size(const void *fit, int noffset,
- 				const void **data, size_t *size);
+diff --git a/common/spl/Kconfig.vpl b/common/spl/Kconfig.vpl
+index d06f36d4ee4..3dc0e95e09f 100644
+--- a/common/spl/Kconfig.vpl
++++ b/common/spl/Kconfig.vpl
+@@ -222,6 +222,15 @@ config VPL_SPI_FLASH_SUPPORT
+ 	  lines). This enables the drivers in drivers/mtd/spi as part of a
+ 	  VPL build. This normally requires VPL_SPI_SUPPORT.
  
-+/**
-+ * fit_image_get_phase() - Get the phase from a FIT image
-+ *
-+ * @fit: FIT to read from
-+ * @offset: offset node to read
-+ * @phasep: Returns phase, if any
-+ * Return: 0 if read OK and *phasep is value, -ENOENT if there was no phase
-+ * property in the node, other -ve value on other error
-+ */
-+int fit_image_get_phase(const void *fit, int offset,
-+			enum image_phase_t *phasep);
++config VPL_SYS_MALLOC_SIMPLE
++	bool "Only use malloc_simple functions in the VPL"
++	default y
++	help
++	  Say Y here to only use the *_simple malloc functions from
++	  malloc_simple.c, rather then using the versions from dlmalloc.c;
++	  this will make the VPL binary smaller at the cost of more heap
++	  usage as the *_simple malloc functions do not re-use free-ed mem.
 +
- /**
-  * fit_get_data_node() - Get verified image data for an image
-  * @fit: Pointer to the FIT format image header
+ config VPL_TEXT_BASE
+ 	hex "VPL Text Base"
+ 	default 0x0
 -- 
 2.43.0
 
