@@ -4,76 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A28E4CF58E7
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 08:15:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5561CCF58E7
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 08:15:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4115C893C5;
-	Fri, 20 Sep 2024 10:13:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9B78D89466;
+	Fri, 20 Sep 2024 10:13:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cxO/otw1";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DdhknYP0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C3F189448; Fri, 20 Sep 2024 10:13:48 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id 1EC208945A; Fri, 20 Sep 2024 10:13:52 +0200 (CEST)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E74189382
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 10:13:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 24A5D89452
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 10:13:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5c44e1cde53so2088638a12.0
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 01:13:46 -0700 (PDT)
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-536a2759f0eso2317639e87.3
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 01:13:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726820025; x=1727424825; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1726820029; x=1727424829; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+6FBUOoyMCwX1WqvoSOMxqamLObA4Msus+qAPD9t0YU=;
- b=cxO/otw1nkitZiZfSdBWzlU6S3fQyyi93CDceYcZfrdaqaIcfRGOf82hSSeA4nFBbp
- s7UI8CENHmDizNklqicW9X1pdSxrLJq9fV9nfKS38eK1Lsu06L7Ecv5wf4m9z+a5IUU9
- I3iD/XJ8SBR4sRj8ZiOPuw70Z9MUG+DEoQ3Ks=
+ bh=OcOfvCyO/5N3kjPO2omuLXBUuqkVueXoyg9VgaloaBE=;
+ b=DdhknYP0hL3Iak/eXNavH/dhGuP7s1FuUHIprHwtQf+Roi4Ewi9NduQNzQmTpnXOaw
+ QH0toaSAj4JKLzqE1nrqfgAbPHIFgC+nKLF231fxsXQq2nILnm4TB6urtDxiSwxLy+72
+ KpMuNG12dpFlHPJ57c07eL2w9QFkr8BNZ1SOI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726820025; x=1727424825;
+ d=1e100.net; s=20230601; t=1726820029; x=1727424829;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+6FBUOoyMCwX1WqvoSOMxqamLObA4Msus+qAPD9t0YU=;
- b=rfnVKEMyTGJ39GBP8xEIm3YeQZFNLz/TGAQJVoDIbrIpyIsbYZdfcRPACo6OvR1MkU
- ILDZliuQwATVNZsjW/FKK0fBouKP8dqPpFO9Q5DCglf5poA3NPvgF8kmqSKGrofL8Ia1
- k+0ZVHhyVKMO9QkB2/duW5/lwj2kwEtKfjVXaSYamWER9BYugTplTQrTO9eiORQl7fLd
- Jqf5OUPpoUl8pCcRtcxFwS2+6533J4+0Ntuonb+R97yXsuXOtPdDpeJgYej57CigqUwn
- 6/IngYEkMWU7gKqjiTv/0avrdBEx5MsUIr+AquPiJzqiwHYCED3Yd5qolSZdS6u/QAFh
- Wzhw==
-X-Gm-Message-State: AOJu0Yyh3OqNY5pXhFauX1S+v8dNC+oQqCx2frKNuV0xXhNdvjOh5Pcs
- uKTyBkeD9/iqJZOo2jYZAoORBodrFDPqKSkf/FdXcHTbaoW8rjYx5TUaQB4A0JQ6UPcH7Z6DNEE
- +GUwm
-X-Google-Smtp-Source: AGHT+IHhZPIfaWL+L/2IVqXgjR1xss1mfXmpVSyYwOYiYjwdHBPRSupD8ieNNflaujuN0nh//1Bb5g==
-X-Received: by 2002:a05:6402:2101:b0:5c4:2d7d:9759 with SMTP id
- 4fb4d7f45d1cf-5c464a3a1e4mr1628101a12.10.1726820025223; 
- Fri, 20 Sep 2024 01:13:45 -0700 (PDT)
+ bh=OcOfvCyO/5N3kjPO2omuLXBUuqkVueXoyg9VgaloaBE=;
+ b=sBZbPu1AHbIbxmcazhoaC9ERGYwEEef2UJ4gFMMyKi1kZ++bg2p9nvXqmo2aSwevcC
+ OLHf7EylbhXo9dBEQE3/MGsykgOh7IZo67QAyGHZUncLyHt2mpSg8MY2PAIBUDOqSVJ4
+ WZrNw2v2dvesEe7stS92hMd6xv1/NjneY8j4WD/HJBJ9ObdTDm/VAyBYBMTkzed0ClZ9
+ LC7R4NsGEg7kmd/q+jrCtCmhzm8YIrCowtjWovdyBPF7uSTy3yFk6VEtTDE9Rz/eOvha
+ 9pM0O6UN8ak1NI+ayQbOnrIr7xD6acwspi+C8j14caKWQVI3hv1h0WefShvn+/D7EcrT
+ p3ZQ==
+X-Gm-Message-State: AOJu0Yz0/qKQ9lV1t7y2Y5KiDTmoXTb65/OtmGD0OTBGqT1gor/RP3Js
+ y2Qv85UNNj8ozh7/YwbxHeVpsDCLfm413X3LMYXk3yefJr2Ml3vgr2E0OfJP+llDWw3wjmZhJlA
+ 0e4Ha
+X-Google-Smtp-Source: AGHT+IEj8cX5pb6yTj0NFgznZPLAFbntYwVHDPpAhjsiO13K6bglb5suFJ5dGLJmSF495ElS3aQzMw==
+X-Received: by 2002:a05:6512:12c2:b0:52e:f99e:5dd1 with SMTP id
+ 2adb3069b0e04-536ad3c9abfmr747069e87.47.1726820029111; 
+ Fri, 20 Sep 2024 01:13:49 -0700 (PDT)
 Received: from chromium.org ([83.68.141.146]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c42bc88cf7sm6804447a12.90.2024.09.20.01.13.43
+ 4fb4d7f45d1cf-5c42bc88cf7sm6804447a12.90.2024.09.20.01.13.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Sep 2024 01:13:44 -0700 (PDT)
+ Fri, 20 Sep 2024 01:13:48 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Eddie James <eajames@linux.ibm.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Julien Masson <jmasson@baylibre.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+Cc: Simon Glass <sjg@chromium.org>, Igor Opaniuk <igor.opaniuk@gmail.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 15/18] boot: Allow use of FIT in TPL and VPL
-Date: Fri, 20 Sep 2024 10:12:54 +0200
-Message-ID: <20240920081309.140426-16-sjg@chromium.org>
+Subject: [PATCH v2 18/18] hash: Plumb crc8 into the hash functions
+Date: Fri, 20 Sep 2024 10:12:57 +0200
+Message-ID: <20240920081309.140426-19-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240920081309.140426-1-sjg@chromium.org>
 References: <20240920081309.140426-1-sjg@chromium.org>
@@ -95,160 +88,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With VBE we want to use FIT in all phases of the boot. Add Kconfig
-options to support this.
-
-Disable the options for sandbox_vpl for now.
+Add an entry for crc8, with watchdog handling.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+Changes in v2:
+- Drop patch 'serial: ns16550: Allow clocks to be missing'
 
- boot/Kconfig                  | 69 ++++++++++++++++++++++++++++++++++-
- boot/Makefile                 |  4 +-
- configs/sandbox_vpl_defconfig |  3 +-
- 3 files changed, 71 insertions(+), 5 deletions(-)
+ common/hash.c        | 8 ++++++++
+ include/u-boot/crc.h | 3 +++
+ lib/crc8.c           | 6 ++++++
+ 3 files changed, 17 insertions(+)
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 925afe06a19..9fd1424cd1f 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -163,6 +163,18 @@ config SPL_FIT
- 	select SPL_HASH
- 	select SPL_OF_LIBFDT
+diff --git a/common/hash.c b/common/hash.c
+index ac63803fed9..43c4e185750 100644
+--- a/common/hash.c
++++ b/common/hash.c
+@@ -304,6 +304,14 @@ static struct hash_algo hash_algo[] = {
+ 		.hash_update	= hash_update_crc16_ccitt,
+ 		.hash_finish	= hash_finish_crc16_ccitt,
+ 	},
++#if CONFIG_IS_ENABLED(CRC8)
++	{
++		.name		= "crc8",
++		.digest_size	= 1,
++		.chunk_size	= CHUNKSZ_CRC32,
++		.hash_func_ws	= crc8_wd_buf,
++	},
++#endif
+ #if CONFIG_IS_ENABLED(CRC32)
+ 	{
+ 		.name		= "crc32",
+diff --git a/include/u-boot/crc.h b/include/u-boot/crc.h
+index 5174bd7ac41..b2badaf6a97 100644
+--- a/include/u-boot/crc.h
++++ b/include/u-boot/crc.h
+@@ -25,6 +25,9 @@
+  */
+ unsigned int crc8(unsigned int crc_start, const unsigned char *vptr, int len);
  
-+config VPL_FIT
-+	bool "Support Flattened Image Tree within VPL"
-+	depends on VPL
-+	select VPL_HASH
-+	select VPL_OF_LIBFDT
++void crc8_wd_buf(const unsigned char *input, unsigned int len,
++		 unsigned char output[1], unsigned int chunk_sz);
 +
-+config TPL_FIT
-+	bool "Support Flattened Image Tree within TPL"
-+	depends on TPL
-+	select TPL_HASH
-+	select TPL_OF_LIBFDT
+ /* lib/crc16.c - 16 bit CRC with polynomial x^16 + x^15 + x^2 + 1 */
+ uint16_t crc16(uint16_t crc, const unsigned char *buffer, size_t len);
+ 
+diff --git a/lib/crc8.c b/lib/crc8.c
+index 20d46d16147..811e19917b4 100644
+--- a/lib/crc8.c
++++ b/lib/crc8.c
+@@ -32,3 +32,9 @@ unsigned int crc8(unsigned int crc, const unsigned char *vptr, int len)
+ 
+ 	return crc;
+ }
 +
- config SPL_FIT_PRINT
- 	bool "Support FIT printing within SPL"
- 	depends on SPL_FIT
-@@ -267,6 +279,28 @@ config SPL_LOAD_FIT_FULL
- 	  particular it can handle selecting from multiple device tree
- 	  and passing the correct one to U-Boot.
- 
-+config TPL_LOAD_FIT
-+	bool "Enable TPL loading U-Boot as a FIT (basic fitImage features)"
-+	depends on TPL
-+	select TPL_FIT
-+	help
-+	  Normally with the SPL framework a legacy image is generated as part
-+	  of the build. This contains U-Boot along with information as to
-+	  where it should be loaded. This option instead enables generation
-+	  of a FIT (Flat Image Tree) which provides more flexibility. In
-+	  particular it can handle selecting from multiple device tree
-+	  and passing the correct one to U-Boot.
-+
-+	  This path has the following limitations:
-+
-+	  1. "loadables" images, other than FDTs, which do not have a "load"
-+	     property will not be loaded. This limitation also applies to FPGA
-+	     images with the correct "compatible" string.
-+	  2. For FPGA images, the supported "compatible" list is in the
-+	     doc/uImage.FIT/source_file_format.txt.
-+	  3. FDTs are only loaded for images with an "os" property of "u-boot".
-+	     "linux" images are also supported with Falcon boot mode.
-+
- config SPL_FIT_IMAGE_POST_PROCESS
- 	bool "Enable post-processing of FIT artifacts after loading by the SPL"
- 	depends on SPL_LOAD_FIT
-@@ -314,6 +348,22 @@ config VPL_FIT
- 	select VPL_HASH
- 	select VPL_OF_LIBFDT
- 
-+config VPL_LOAD_FIT
-+	bool "Enable VPL loading U-Boot as a FIT (basic fitImage features)"
-+	select VPL_FIT
-+	default y
-+
-+config VPL_LOAD_FIT_FULL
-+	bool "Enable SPL loading U-Boot as a FIT (full fitImage features)"
-+	select VPL_FIT
-+	help
-+	  Normally with the SPL framework a legacy image is generated as part
-+	  of the build. This contains U-Boot along with information as to
-+	  where it should be loaded. This option instead enables generation
-+	  of a FIT (Flat Image Tree) which provides more flexibility. In
-+	  particular it can handle selecting from multiple device tree
-+	  and passing the correct one to U-Boot.
-+
- config VPL_FIT_PRINT
- 	bool "Support FIT printing within VPL"
- 	depends on VPL_FIT
-@@ -634,6 +684,15 @@ config VPL_BOOTMETH_VBE
- 	  supports selection of various firmware components, selection of an OS to
- 	  boot as well as updating these using fwupd.
- 
-+config TPL_BOOTMETH_VBE
-+	bool "Bootdev support for Verified Boot for Embedded (TPL)"
-+	depends on TPL
-+	default y
-+	help
-+	  Enables support for VBE boot. This is a standard boot method which
-+	  supports selection of various firmware components, seleciton of an OS to
-+	  boot as well as updating these using fwupd.
-+
- if BOOTMETH_VBE
- 
- config BOOTMETH_VBE_REQUEST
-@@ -712,7 +771,15 @@ config VPL_BOOTMETH_VBE_SIMPLE_FW
- 	  This option enabled for VPL, since it is the phase where the SPL
- 	  decision is made.
- 
--endif # BOOTMETH_VBE
-+config TPL_BOOTMETH_VBE_SIMPLE_FW
-+	bool "Bootdev support for VBE 'simple' method firmware phase (TPL)"
-+	depends on VPL
-+	default y
-+	help
-+	  Enables support for the firmware parts of VBE 'simple' boot, in TPL.
-+	  TPL loads a FIT containing the VPL binary and a suitable devicetree.
-+
-+endif # BOOTMETH_VBE_SIMPLE
- 
- config EXPO
- 	bool "Support for expos - groups of scenes displaying a UI"
-diff --git a/boot/Makefile b/boot/Makefile
-index f4675d6ffd5..40e2337de0f 100644
---- a/boot/Makefile
-+++ b/boot/Makefile
-@@ -58,9 +58,7 @@ obj-$(CONFIG_$(SPL_TPL_)FIT_CIPHER) += image-cipher.o
- 
- obj-$(CONFIG_CMD_ADTIMG) += image-android-dt.o
- 
--ifdef CONFIG_SPL_BUILD
--obj-$(CONFIG_SPL_LOAD_FIT) += common_fit.o
--endif
-+obj-$(CONFIG_$(SPL_TPL_)LOAD_FIT) += common_fit.o
- 
- obj-$(CONFIG_$(SPL_TPL_)EXPO) += expo.o scene.o expo_build.o
- obj-$(CONFIG_$(SPL_TPL_)EXPO) += scene_menu.o scene_textline.o
-diff --git a/configs/sandbox_vpl_defconfig b/configs/sandbox_vpl_defconfig
-index 96e9211bd19..d18bb7a0353 100644
---- a/configs/sandbox_vpl_defconfig
-+++ b/configs/sandbox_vpl_defconfig
-@@ -27,9 +27,10 @@ CONFIG_FIT=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_FIT_BEST_MATCH=y
- CONFIG_SPL_LOAD_FIT=y
-+# CONFIG_TPL_BOOTMETH_VBE is not set
-+# CONFIG_TPL_BOOTMETH_VBE_SIMPLE_FW is not set
- CONFIG_UPL=y
- CONFIG_UPL_IN=y
--CONFIG_SPL_UPL_OUT=y
- CONFIG_BOOTSTAGE=y
- CONFIG_BOOTSTAGE_REPORT=y
- CONFIG_BOOTSTAGE_FDT=y
++void crc8_wd_buf(const unsigned char *input, unsigned int len,
++		 unsigned char output[1], unsigned int chunk_sz)
++{
++	*output = crc8(0, input, len);
++}
 -- 
 2.43.0
 
