@@ -4,78 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED8B7CF9C5D
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 17:33:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADBBCCF9C62
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 20:04:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39FC788875;
-	Fri, 20 Sep 2024 19:33:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9F51B8891E;
+	Fri, 20 Sep 2024 22:04:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HMU4e5hE";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CJ4hANq1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C90C288883; Fri, 20 Sep 2024 19:33:22 +0200 (CEST)
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
+ id 40EFD8919A; Fri, 20 Sep 2024 15:01:23 +0200 (CEST)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC7E48880F
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 19:33:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 579838930A
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 15:01:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-7a9b3cd75e5so218199585a.0
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 10:33:20 -0700 (PDT)
+ spf=pass smtp.mailfrom=ysf.kya34@gmail.com
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-5365c060f47so2661713e87.2
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 06:01:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1726853599; x=1727458399; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=OQnfJN4HraHQCcOW/2+OgDG5hja/TnuI5woTozGJhYA=;
- b=HMU4e5hEO/2xX1GUDJftJMzFZAyEOw51Qohdlg4gK2NBzVyXgStpVKE81ZhxzvtYx/
- Bxt1fQKzELGEJ3DCZyS1v6E8o7Zxc9fNyOfbkD6LLUPJYN6Y/NgeVtrLDVA7pu+FLfbY
- oc0c1UFrFL24W/LbEVyrpOOff+W72aPzRfHJM=
+ d=gmail.com; s=20230601; t=1726837280; x=1727442080; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=mPYXqkZ8qqMW+TaLpTKm/FoeEQlX7sK/Jhm+MmGwMDg=;
+ b=CJ4hANq1Psg9ODRGrtXJDVoy4NdnEcE4NNpWulRpu2HHxL2AsJNACV2efxdFZp/fAg
+ Qd4euWjp/1ZwU28i567Zl0Bw1UAteZNvhwmcnW8sEji9EBt1O1eLiO4x27D2Egqb9GK3
+ DXb8FIZ0/7ayWY5qRuqIaiZ3S1rKnAyji9MeYTXoXtnRAPC/D6/CmnNnxeqmoWpzmyzW
+ lzbx+IFcymSqW11Ymk3iODAIUIqOjJ7bSkWA7SAKYuiHCSwLdhYGfXLso2nunudLZFto
+ EjnOqMteXe0OwwnlE7vxCM30uOHt3UyqZ3V5Qg65wv7WyPrdEKAGBwa+ZCd5Wadd4XkQ
+ GmUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726853599; x=1727458399;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=OQnfJN4HraHQCcOW/2+OgDG5hja/TnuI5woTozGJhYA=;
- b=wnGsvf88N009VgTuzuMnAN1DL49Xjw2WUovpgjNzxNLC8P10YJz2Jx8TPkDZezj4YM
- CqcXu2rcIUcLoq/E/XEj4VTOpDqE6FODICEibkW9EQXacJBe0Zwf92Y7X+V5EZSOLotN
- L2MnuzFliXR52yUkpRhwqGJ6exyggLaKKz8c0Q6DOrJBgE2vsfqsAGw58slnYpKWBD79
- nVlJw/HGJnVmLdL9XYm0jY1fN7eaS2t7Jpqi0NuljGcXE+/j0Em6hxchgcpKde2f9WcP
- LBTkTztmxfMdUtXVIxAw59S4MRlulcX7fip5PWFZNGPaunCtow54oe3RjRjDy9Sdju/P
- N0JA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXOZZgADalwNazvdMdldUP3haTwNqgwJ8/+cXAMMYo7Ckl+YpT6JDqG7xxSwpWAlV/tdvQ1an8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwN1Ep17iLPHmTVgK8eHOlV9yGs+2G7ErxyealyiOLxcShz9qOg
- yt4TUBnDtfo4g4oqXb4RkziAOcEG1ZlHGzthOzGAQnNacMcLI7NfLjzV1iYZaeg=
-X-Google-Smtp-Source: AGHT+IENyki2KeBB9xpMiLgy8iofnFYUbtcCYeuYdEv1ygqkNCj9Tg43lBrd22yZHhN4nS8f2lj8gQ==
-X-Received: by 2002:a05:620a:2983:b0:7a9:af5b:6921 with SMTP id
- af79cd13be357-7acb8d8ae15mr479097085a.21.1726853599484; 
- Fri, 20 Sep 2024 10:33:19 -0700 (PDT)
-Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7acb082a025sm203613685a.62.2024.09.20.10.33.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Sep 2024 10:33:19 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Roger Quadros <rogerq@kernel.org>
-Cc: "Andrew F. Davis" <afd@ti.com>, Neha Malcom Francis <n-francis@ti.com>, 
- Vignesh Raghavendra <vigneshr@ti.com>, 
- Siddharth Vadapalli <s-vadapalli@ti.com>, u-boot@lists.denx.de
-In-Reply-To: <20240918-j721e-ums-v1-0-62f295dce6aa@kernel.org>
-References: <20240918-j721e-ums-v1-0-62f295dce6aa@kernel.org>
-Subject: Re: [PATCH 0/2] mux: mmio: support "reg-mux" compatible
-Message-Id: <172685359825.2413155.7189031595413828983.b4-ty@konsulko.com>
-Date: Fri, 20 Sep 2024 11:33:18 -0600
+ d=1e100.net; s=20230601; t=1726837280; x=1727442080;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=mPYXqkZ8qqMW+TaLpTKm/FoeEQlX7sK/Jhm+MmGwMDg=;
+ b=m9H/LPJwKLT8Cs/wj1nkUTjQlqlMJIM2q7YH3K41TQq7TpFaUwZ2vSaL50q527nJ8u
+ 5Cgr6yqJl8gFr+awDm+CeLKXJJZxomY/3kIMm0naAtiMXn+FTFAJh3TEjroH8mBhsm3E
+ 9DAKzBOC2xtSpxZukIUfxY2SjOesyoDj1UxtwKiGSOtKujQoNSFQEt6KWOJAmIJ6neYm
+ 2hdavQeJGgZThhsSNzwtBZEKVGOVdrobGA4H5Y2laa54jMJQiGhSQRsD3Yaa36lEe7O+
+ snqEDQ9HLJRK6vOyPTvAoZUekuPbmQ3jf0dqOESqjRZ2NuaoHhf096OF5tSbbZEE5F/b
+ Ks1g==
+X-Gm-Message-State: AOJu0YzHVzRsMuQq8txU/dX/PodOeHtFqtCz4GVkjPQHntILA5TjnNTp
+ JpGW5UdPEo/JWpyDCdv5yWgIR1nrBV2aT8YWjYp6k0bF5QfAIGPsLsn8faigosAlKP8Xto7MhCj
+ ltgzJpO1Iluz+/SWz4CV3meN4mpW5Eg==
+X-Google-Smtp-Source: AGHT+IGnU+Y3nx54Bzs6UXlf4X4cRyy/7PvOXkOvj+wY5gHZlI1usi6VDODSIVoFDIynz7uxY0lateUJNoDnKnP8/40=
+X-Received: by 2002:a05:6512:1088:b0:536:7c0d:e554 with SMTP id
+ 2adb3069b0e04-536ac32f16amr1632699e87.45.1726837279259; Fri, 20 Sep 2024
+ 06:01:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+From: Yusuf Kaya <ysf.kya34@gmail.com>
+Date: Fri, 20 Sep 2024 16:01:08 +0300
+Message-ID: <CAHd9c1pO1RYrkm=nzQ=EW5OpyxvRCmdbrB=TvL8fbaH-TBVSdQ@mail.gmail.com>
+Subject: About fsl-espi driver
+To: u-boot@lists.denx.de
+X-Mailman-Approved-At: Fri, 20 Sep 2024 22:04:43 +0200
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,18 +84,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 18 Sep 2024 16:49:20 +0300, Roger Quadros wrote:
+Hello,
 
-> TI upstream has moved from "mmio-mux" to "reg-mux" that doesn't
-> require the Mux device node's parent to be a syscon type.
-> 
-> Add support for "reg-mux" compatible.
-> 
-> 
+Firstly thanks for your contribution to u-boot.
 
-Applied to u-boot/master, thanks!
+When i look at the driver(fsl_espi.c), it has some flaws ? Because when =C4=
+=B1
+want to receive 6-bytes from the slave device, spi master also sends
+6-bytes to the spi slave. This is happening in espi_xfer functionality. I
+just wonder it is a mistake or not ?
 
--- 
-Tom
-
-
+Thanks in advance.
