@@ -4,73 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CC39CF58E2
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 07:26:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98DF2CF58E2
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 07:26:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 09041893B8;
-	Fri, 20 Sep 2024 09:25:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 69FEA893C8;
+	Fri, 20 Sep 2024 09:25:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kL3X8ev5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mK8Es3x0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C523893C0; Fri, 20 Sep 2024 09:25:11 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 7F989893C8; Fri, 20 Sep 2024 09:25:12 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 748C0893CA
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 09:25:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E7D5A893D5
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 09:25:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-42cbbb1727eso14197715e9.2
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 00:25:06 -0700 (PDT)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-42cb5b3c57eso15798835e9.2
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 00:25:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726817106; x=1727421906; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1726817107; x=1727421907; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1cAqMOdVkPXMZkqYPqQrvePRcBkZSMjsPsIe0sheqGs=;
- b=kL3X8ev5ixtlnbuvKaK2wz2Z9J2DhPHy3HngtopcARL/ra6Z9lKDU/FuRvxHOwk+Qv
- +RjoCoybIYOQqdJi85yZlv552RsufQnsBwDvuXIcKTKpJu1bO7P5gmV6s8yWzEZE+gi+
- mcvxPdvzTfHRZ7uBfaiAhUxUYwNIusBmYpV+g=
+ bh=UY+wRxRfvVmR2T6YEMz0afy8CnUDEOnhWpYjiXZ1CCs=;
+ b=mK8Es3x0Or6tDhdELEPaf7uNFRYOOzF1MME5BtrVfJAwYA2BA6+iP4uUfye/jgu7TI
+ DEVnv58Se/L21/6qiGfkF/A9VH27Q5cfbBDi+yWJNKxyJ8Zlvh6hZRCd6x/CxcmebhXq
+ ltRsHSDR5BdUt0pVgRKZzATL8ruhlOswWkX+w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726817106; x=1727421906;
+ d=1e100.net; s=20230601; t=1726817107; x=1727421907;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1cAqMOdVkPXMZkqYPqQrvePRcBkZSMjsPsIe0sheqGs=;
- b=QoWQqUd6dLngsl9+aeegQ4Kxw1rtUG9wf/qMtXNV2Te4ktdvMxtvlCRZfwWf051zR/
- fTFTjIprY6FwhzA/umn0ylxv5LUQa/w9vQIBbFqm3MsFbVmV2dOi8/xo+F3NVdGVR2DI
- QLtqRLlnl5zYUBgJatWDzdyaJUgetxLwrusTZV79N1mbQ41BBgy/1E2vYeg2hR+0weKW
- o2Q99bkX534JvKG3ruh3qorXCLBfcXxzgbiwzb9PO8wFPc+4dFkv1z3WHek9D0QYjbfN
- prpT8b5qfTfJmaWvy+mO8bzZD0mVzdSgIMLoE+NbnMcXPFwv3BjcgkS6FWkaKum0LL2N
- OShw==
-X-Gm-Message-State: AOJu0YxjnPz+F4SDB5Xb8W5uKczXZOeowTWHnK7bsKbKkU7yHVtVbs/0
- nHol91kGyYODP8XMfirVeAhGlDh/K1P1e+DOmD9Aj4enpDvj/Ru7xNbL/+8lqWih/OfNTRNPq3P
- uG78u
-X-Google-Smtp-Source: AGHT+IGh1dWRCgI04WrehEA/F1XtqLR9EO0q2CpDCvotJHea0gbZV0apLA5+xQWJn2/y9mel3VYkBw==
-X-Received: by 2002:a05:600c:548e:b0:42c:b7e2:3bc3 with SMTP id
- 5b1f17b1804b1-42e7ac244f3mr11714665e9.19.1726817105361; 
- Fri, 20 Sep 2024 00:25:05 -0700 (PDT)
+ bh=UY+wRxRfvVmR2T6YEMz0afy8CnUDEOnhWpYjiXZ1CCs=;
+ b=Yvmi3HouVqe/rPPKDwzvn2TFy4YGmO5FuhsyqWxKKmpmothaGortJoIxg4oOnq3LNm
+ /3fdjdCGuAUuOSZ1Kglo8Z6XEcBfT7L5jxit5QqswOD41WtjCyetxqH1J7kleVzPjBhl
+ GTjRswF8XNkZBz550IG4/R/Jqu7lITHIXaVTAwsaZyRdCvAgHqo9VIclnmZRlSuHjNi1
+ E4sV9iEUI46P5BXrGOYFDDfpbdJV1tJs8cR9iwYSkXZ3jG0XIzmMJA4b3ibh+uxRZnL/
+ 8GQwxMvw5iDbAgMOBy0xCgoDsOQdgH89TZyl0sZ10LhOYKKTZoP7nUqHv96CWzH+zwMo
+ XVxg==
+X-Gm-Message-State: AOJu0YyKQbkCNnTGZnDOjduNJnmlZVOAZZJKxvvlIEv+Hl0a33MgWXIf
+ PYI51QHSOsSxcsiasjbcyN9tC1mwvxhXGtBInmwZKNWqffdwMcY3GXar9RXMWlgmJeO3ykPzo1Y
+ /v0Kb
+X-Google-Smtp-Source: AGHT+IFBt0sEPodkAJXUV6yCE+tt8X8PmBeInvrsXB0d6J8KtPzXfL5Kjw9fXQ5J5lQ2+74fn1i87g==
+X-Received: by 2002:a05:600c:1c87:b0:42c:b7f9:4bbd with SMTP id
+ 5b1f17b1804b1-42e7c19bb93mr10571395e9.26.1726817107070; 
+ Fri, 20 Sep 2024 00:25:07 -0700 (PDT)
 Received: from chromium.org ([185.44.53.103]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42e7540e32fsm41504535e9.9.2024.09.20.00.25.03
+ 5b1f17b1804b1-42e7540e32fsm41504535e9.9.2024.09.20.00.25.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Sep 2024 00:25:04 -0700 (PDT)
+ Fri, 20 Sep 2024 00:25:06 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>,
- "Gaskell, Oliver" <Oliver.Gaskell@analog.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 06/18] tpl: Support numbered aliases in device tree
-Date: Fri, 20 Sep 2024 09:24:30 +0200
-Message-ID: <20240920072444.134997-7-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Andre Przywara <andre.przywara@arm.com>,
+ Apurva Nandan <a-nandan@ti.com>, Bryan Brattlof <bb@ti.com>,
+ Dasnavis Sabiya <sabiya.d@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 07/18] ram: Support driver model in VPL
+Date: Fri, 20 Sep 2024 09:24:31 +0200
+Message-ID: <20240920072444.134997-8-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240920072444.134997-1-sjg@chromium.org>
 References: <20240920072444.134997-1-sjg@chromium.org>
@@ -92,36 +90,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add an option so that this feature can be enabled in TPL for boards
-which need it.
+Some boards want to use RAM in VPL so add an option for that.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+Changes in v2:
+- Update this to say VPL instead of TPL
 
- drivers/core/Kconfig | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ drivers/ram/Kconfig | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/drivers/core/Kconfig b/drivers/core/Kconfig
-index c39abe3bc94..6b4330fe4ea 100644
---- a/drivers/core/Kconfig
-+++ b/drivers/core/Kconfig
-@@ -152,6 +152,14 @@ config SPL_DM_SEQ_ALIAS
- 	  numbered devices (e.g. serial0 = &serial0). This feature can be
- 	  disabled if it is not required, to save code space in SPL.
+diff --git a/drivers/ram/Kconfig b/drivers/ram/Kconfig
+index a64d2dff68d..f7e357f24da 100644
+--- a/drivers/ram/Kconfig
++++ b/drivers/ram/Kconfig
+@@ -26,6 +26,15 @@ config TPL_RAM
+ 	  TPL, enable this option. It might provide a cleaner interface to
+ 	  setting up RAM (e.g. SDRAM / DDR) within TPL.
  
-+config TPL_DM_SEQ_ALIAS
-+	bool "Support numbered aliases in device tree in TPL"
-+	depends on TPL_DM
++config VPL_RAM
++	bool "Enable RAM support in VPL"
++	depends on RAM && VPL
 +	help
-+	  Most boards will have a '/aliases' node containing the path to
-+	  numbered devices (e.g. serial0 = &serial0). This feature can be
-+	  disabled if it is not required, to save code space in SPL.
++	  The RAM subsystem adds a small amount of overhead to the image.
++	  If this is acceptable and you have a need to use RAM drivers in
++	  VPL, enable this option. It might provide a cleaner interface to
++	  setting up RAM (e.g. SDRAM / DDR) within VPL.
 +
- config VPL_DM_SEQ_ALIAS
- 	bool "Support numbered aliases in device tree in VPL"
- 	depends on VPL_DM
+ config STM32_SDRAM
+ 	bool "Enable STM32 SDRAM support"
+ 	depends on RAM
 -- 
 2.43.0
 
