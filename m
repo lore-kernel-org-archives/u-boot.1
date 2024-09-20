@@ -4,75 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79261CF58E3
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 07:28:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06D47CF58E0
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 07:28:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 218D1893A0;
-	Fri, 20 Sep 2024 09:25:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 885848940F;
+	Fri, 20 Sep 2024 09:25:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VQ3FQl/N";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hMwzvKAL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27B0D893A0; Fri, 20 Sep 2024 09:25:44 +0200 (CEST)
-Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
- [IPv6:2607:f8b0:4864:20::734])
+ id 41B118940B; Fri, 20 Sep 2024 09:25:55 +0200 (CEST)
+Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
+ [IPv6:2607:f8b0:4864:20::f31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 925FB893AC
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 09:25:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EFF9B89403
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 09:25:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x734.google.com with SMTP id
- af79cd13be357-7a99de9beb2so115292785a.3
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 00:25:41 -0700 (PDT)
+Received: by mail-qv1-xf31.google.com with SMTP id
+ 6a1803df08f44-6c34dd6c21aso10839666d6.2
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 00:25:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726817140; x=1727421940; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1726817149; x=1727421949; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=+Rfzahg6GtefshNF45Qi93KekZecZ4Mx6BfzWApkYTo=;
- b=VQ3FQl/ND2rg6eh8+NrgB2AdGRbFpusMGLdp/rbMT0dgTzzl/tu7sI0mpSj9dxaEI4
- 7SUXyAVuBOWQIGuYn/LsnwxZk65woLnvYQ0ZCrhOR8po3MyeOZx9nwgPhGrZaPyIIfLG
- BP5aO1DRrefGapNmnWgavqFg3GEk0fQK8f4Rg=
+ bh=HP31Kr48H5zcgx9WOQ+Ro5K7dDk//3uGUCKmnOsAcz0=;
+ b=hMwzvKALyWtmfl2DzsbRTw/qcwSPoWigxtL9yz4Cza0qy0g3GpwYyH1woMzxjFB28j
+ a8do/EoEZuOBykoyOHsrVQxLqQ1IVbsasWfK7mua7iLD+0HSsaIcw0ij8ZPH6CfuBrF5
+ Bz2CNAzZcxuhJWiUS9ZcUkbvmDnJbl4PwnLSk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726817140; x=1727421940;
+ d=1e100.net; s=20230601; t=1726817149; x=1727421949;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=+Rfzahg6GtefshNF45Qi93KekZecZ4Mx6BfzWApkYTo=;
- b=YtkUEnZXoqI/RyV9fJgFokiKs70ECTzQawlTV4f3nLedy6JX0KddxIWUxU1NOcil2B
- K4KdSekxwj3HfcPwTNatxFhVVb0CEC4NvL5CuwGNR2MVGJB3kf/1sRRZYLlwr6t/iLVT
- dPDjO0JA+K1KdV7rZt9o1nd9+jVL4eSP/+NSsZNnvgtwDEA2z6XKH2LfPmJhMc89tlfU
- wxFPOx65KFnqCPYusSk+9/UDhtV3EEzbskSvEK0eXnxQydOSLzWYqw/EI6lpKsSJV0t9
- wYq8+94PliDXt0PQe9b/6gHa12c64p8rXE68XvTS58xUm/A8MY5q3Z6r6vCJHRPzrWCa
- olUQ==
+ bh=HP31Kr48H5zcgx9WOQ+Ro5K7dDk//3uGUCKmnOsAcz0=;
+ b=J9E1xvMOLvEQQDBxoRFGJ+J6aQBMIZeuE+oi11VY6kx+T0tgxCM1PFCvi2iHRfwmPU
+ Q0zBxhB6PtA2kNw+bMi+Fglnk8juVwe2c1QDR/cwTLqxjSzjtKnM3wgOUM0SZtWErKvn
+ 8g+RDo8lNUKkTbQ5drhPcpMuAm8X7qKBw9Hau3FReHmBa6f7EA/A0fEOs+8Y/2AwbyKc
+ URgbJiCdoyWFfDkud++SZBIGj45JQ35YdcXxftnRJTT0nusRIhUggYVg7zN9/L+BdEWP
+ W4u5gmv7fBMfPOa0EXNRQbDs3x/b5TrrBPH2R1iib58FSFZnWU3EB4hOTS7OU1XotK8y
+ yC0w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUBt72M5BADfGq7V7/RAwhtbgohDp8lmFbcN6Ee7pwM/iG1S5+rkqZYb9N5SxeprAmAI6E+H4U=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz+u7h1Z5vsM2V9GTm1bIJvbtl/A9Ohq738WX6Kw97fM1wdcAsI
- MeRAY15/M/vEi2TMZPtLlSD3+RRAYVkcDSSLD6GbYwlHvawV+kv//D0MIVS2b5HAVJdUeNV3Mbf
- PV8+WA3eU5VNYiyeTdvisUmFb/9oc/Xn/uAWV
-X-Google-Smtp-Source: AGHT+IGRAROdAT9GALjQdCXEWA4qa3cwD3eBOg1uCnZjrRSvw5NcIv2bBEZTXN9RsiJmUW6AYxENjLPPPwErfIaJ7PU=
-X-Received: by 2002:a05:6214:3992:b0:6c5:2fc7:a623 with SMTP id
- 6a1803df08f44-6c7bd4866acmr23311216d6.11.1726817140358; Fri, 20 Sep 2024
- 00:25:40 -0700 (PDT)
+ AJvYcCWMtemFRdfjm37OyNbsmwQBFPhj00ivJBuxdfkhtz0QqfrKbfY5L+XJ9jxD+eOe0sXk1BLaSJk=@lists.denx.de
+X-Gm-Message-State: AOJu0YzDpzWO7EPB3seH91RgSjj2ZIOf2BgZp1vwdzrBvivn4jBHTMLY
+ Qbkavhs1q2CYO7hqu4bgFyS0hqCys43LD779V5fkjVlU5YnIrfps1Bqe8mDIou1dd6lkcf7oZh/
+ Quv10GVcW5HPnzxdf+S4YXlTWedTozS+3Mmki
+X-Google-Smtp-Source: AGHT+IEadAdcWntUWDJgfKjYBTbnmh3tLWiDjhn58UjpnOBIlK6XcHGE4mUtXRuUdFB8kV0VmnpsTstsa89kzYqz69s=
+X-Received: by 2002:a0c:f411:0:b0:6c5:1f00:502e with SMTP id
+ 6a1803df08f44-6c7bc7ec661mr25766816d6.36.1726817148875; Fri, 20 Sep 2024
+ 00:25:48 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240902011825.746421-1-sjg@chromium.org>
- <20240902011825.746421-13-sjg@chromium.org>
- <95edb150-f53d-415a-8176-56e0fc66c822@gmx.de>
- <CAFLszTj47fa7m2Xa4yi5NkcWNUGr4kiM1z4sAnrbd5rFUKq1Zw@mail.gmail.com>
- <20240917170346.GN4252@bill-the-cat>
- <CAFLszThMhNzvW=OTgsAA0Hikv+uxLaVn7bwTGM0=htf=BbzmcA@mail.gmail.com>
- <20240919174554.GT4252@bill-the-cat>
-In-Reply-To: <20240919174554.GT4252@bill-the-cat>
+References: <20240914160548.42551-1-heinrich.schuchardt@canonical.com>
+ <CAFLszTjL46Gb03MS7znLujAKC0VkgOrUaZMy7XPw-jpw3TELTA@mail.gmail.com>
+ <d95b95d2-7afb-42f2-9a01-75d601368be9@canonical.com>
+ <CAC_iWjLCnUpnVGuVYnhzo4EaUmKMSZPws3hSzOOvQqirC71hfQ@mail.gmail.com>
+ <CAFLszTimJuwFKp6DaRDJ22=0tbNPYbcLMT9hcFrC9Rca6vzAyg@mail.gmail.com>
+ <b8d1cef7-4e56-49c6-aeca-b471a82870cd@canonical.com>
+ <CAC_iWjLY9Oea-AryLyrQJ3zXX+Bihza5B8R5UpXh58K3+Ff=Xw@mail.gmail.com>
+ <CAFLszTgASXx5t7=T+yLtC0W9dwo=FkQPF5T6eYD2uyFUWE6D_A@mail.gmail.com>
+ <CAC_iWjJL2tHTe84iqOkzDxANed-TdOObDYoW2jUwe3T=x=cyqA@mail.gmail.com>
+ <CAFLszTghAmCGoiHq+iBwBRC99ucBOUGG+mjq8HEjUVkPAJu-ZQ@mail.gmail.com>
+ <CAC_iWjKLODdFV701vo-ECEo+_U6NQoLS=HsrgmS+RyDHd5pi0A@mail.gmail.com>
+In-Reply-To: <CAC_iWjKLODdFV701vo-ECEo+_U6NQoLS=HsrgmS+RyDHd5pi0A@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 20 Sep 2024 09:25:29 +0200
-Message-ID: <CAFLszThvd4HSz6n+3OPVcQ4sv-pKD5rPfvJ_2gy_aLnPMG40hQ@mail.gmail.com>
-Subject: Re: [PATCH v5 12/14] efi_loader: Avoid using sandbox virtio devices
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+Date: Fri, 20 Sep 2024 09:25:37 +0200
+Message-ID: <CAFLszTits7gXaCfCzwvOOwLcYOtHSPBTh8H+5o5jgZ2wh4eNuQ@mail.gmail.com>
+Subject: Re: [PATCH 1/1] efi_leader: delete rng-seed if having EFI RNG protocol
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
  U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -91,169 +95,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Ilias,
 
-On Thu, 19 Sept 2024 at 19:45, Tom Rini <trini@konsulko.com> wrote:
+On Thu, 19 Sept 2024 at 17:51, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> On Thu, Sep 19, 2024 at 04:10:12PM +0200, Simon Glass wrote:
-> > Hi Tom,
+> On Thu, 19 Sept 2024 at 18:39, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > On Tue, 17 Sept 2024 at 19:03, Tom Rini <trini@konsulko.com> wrote:
+> > Hi,
+> >
+> > On Thu, 19 Sept 2024 at 17:37, Ilias Apalodimas
+> > <ilias.apalodimas@linaro.org> wrote:
 > > >
-> > > On Mon, Sep 16, 2024 at 05:42:31PM +0200, Simon Glass wrote:
-> > > > Hi Heinrich,
+> > > On Thu, 19 Sept 2024 at 18:19, Simon Glass <sjg@chromium.org> wrote:
 > > > >
-> > > > On Thu, 12 Sept 2024 at 09:12, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> > > > >
-> > > > > On 02.09.24 03:18, Simon Glass wrote:
-> > > > > > While sandbox supports virtio it cannot support actually using the block
-> > > > > > devices to read files, since there is nothing on the other end of the
-> > > > > > 'virtqueue'.
-> > > > > >
-> > > > > > A recent change makes EFI probe all block devices, whether used or not.
-> > > > > > This is apparently required by EFI, although it violates U-Boot's
-> > > > > > lazy-init principle.
-> > > > >
-> > > > > We always did this.
+> > > > Hi,
 > > > >
-> > > > Commit d5391bf02b9 dates from 2022, so I don't think that is correct.
-> > >
-> > > Yes, but I also could have sworn that was fixing the behavior having
-> > > been changed again previous to that.
-> >
-> > I don't see any evidence of that, though.
->
-> Yes, it's just my recollection of the time and I could be misremembering
-> it as one of the other times we've had this discussion.
->
-> > > > > What problem do you want to fix? I have not seen any issues in our CI.
+> > > > On Thu, 19 Sept 2024 at 17:13, Ilias Apalodimas
+> > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > >
+> > > > >
+> > > > >
+> > > > > On Thu, Sep 19, 2024, 18:05 Heinrich Schuchardt <heinrich.schuchardt@canonical.com> wrote:
+> > > > >>
+> > > > >> On 19.09.24 17:00, Simon Glass wrote:
+> > > > >> > Hi,
+> > > > >> >
+> > > > >> > On Thu, 19 Sept 2024 at 16:32, Ilias Apalodimas
+> > > > >> > <ilias.apalodimas@linaro.org> wrote:
+> > > > >> >>
+> > > > >> >> Hi all,
+> > > > >> >>
+> > > > >> >> On Thu, 19 Sept 2024 at 17:20, Heinrich Schuchardt
+> > > > >> >> <heinrich.schuchardt@canonical.com> wrote:
+> > > > >> >>>
+> > > > >> >>> On 19.09.24 16:10, Simon Glass wrote:
+> > > > >> >>>> Hi Heinrich,
+> > > > >> >>>>
+> > > > >> >>>> On Sat, 14 Sept 2024 at 18:06, Heinrich Schuchardt
+> > > > >> >>>> <heinrich.schuchardt@canonical.com> wrote:
+> > > > >> >>>>>
+> > > > >> >>>>> For measured be boot we must avoid any volatile values in the device-tree.
+> > > > >> >>>>> We already delete /chosen/kaslr-seed if we provide and EFI RNG protocol.
+> > > > >> >>>>
+> > > > >> >>>> Could you explain a bit why this is, and where this is checked?
+> > > > >> >>>>>
+> > > > >> >>>>> Additionally remove /chosen/rng-seed provided by QEMU or U-Boot.
+> > > > >> >>>
+> > > > >> >>> Measured boot relies on creating hashes of artifacts and writing these
+> > > > >> >>> to TPM. If the hashes don't match the OS will either warn or refuse to
+> > > > >> >>> boot. The device-tree is one of the artifacts that are measured.
+> > > > >> >>>
+> > > > >> >>> If we have random values in /chosen, measured boot will fail.
+> > > > >> >>>
+> > > > >> >>> When an EFI RNG protocol is provided by the firmware, GRUB and the
+> > > > >> >>> kernel will use it instead of /chosen/rng-seed and /chosen/kaslr-seed.
+> > > > >> >>
+> > > > >> >> There's a comment on top of that function that explains what happens as well.
+> > > > >> >> In short the EFI stub does not even look at the KASLR seed and never
+> > > > >> >> randomizes the physical placement of the kernel. It only does that
+> > > > >> >> when the EFI_RNG protocol is there.
+> > > > >> >
+> > > > >> > OK thank you. I suppose I am more just wondering why it got added in
+> > > > >> > the first place?
+> > > > >>
+> > > > >> For booting via the legacy Linux entry point adding kaslr-seed allows to
+> > > > >> randomize addresses. QEMU adds rng-seed instead of kaslr-seed.
+> > > > >
+> > > > >
+> > > > > Not the kernel physical placement. It randomizes only the virtual placement
 > > > >
-> > > > The EFI test in this series hangs trying to probe a virtio block
-> > > > device. If you drop this patch and try the rest of the series in CI,
-> > > > you will see the failure. Or you could just accept that I investigated
-> > > > this, root-caused it and produced a suitable fix. This is a v5 patch
-> > > > which has had quite a bit of discussion.
+> > > > So, are you saying that U-Boot adds this field into the FDT and then removes it?
 > > >
-> > > And as I noted an iteration or two back, it's entirely unclear if the
-> > > problem is "sandbox virtio is broken" or "this code is wrong here".
-> > > Which in fact gets us back to ...
+> > > Yes. As Heinrich said, the rng seed is still usable for some
+> > > randomization. If we boot with EFI and have an RNG protocol, we dont
+> > > need it and it also messes up the TPM measurements, so we remove it.
+> > > But the code that injects it to u-boot, or the prior bootloader that
+> > > handed you over a DT,  does not know if you plan to boot with EFI.
 > >
-> > sandbox virtio does not support a functioning block device
+> > I'm actually surprised that this works. Normally, removing a property
+> > does not drop that property from the string table, so adding a
+> > property and deleting it is not normally the same as never adding it.
+> > But perhaps that has changed?
 > >
-> > >
-> > > > > > We cannot just drop the virtio devices as they are used in sandbox tests.
-> > > > > >
-> > > > > > So for now just add a special case to work around this.
-> > > > > >
-> > > > > > The eventual fix is likely adding an implementation of
-> > > > > > virtio_sandbox_notify() to actually do the block read. That is tracked
-> > > > > > in [1].
-> > > > > >
-> > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > Fixes: d5391bf02b9 ("efi_loader: ensure all block devices are probed")
-> > > > > > Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > > > > > [1] https://source.denx.de/u-boot/u-boot/-/issues/37
-> > > > > > ---
-> > > > > >
-> > > > > > (no changes since v3)
-> > > > > >
-> > > > > > Changes in v3:
-> > > > > > - Add a Fixes tag
-> > > > > > - Mention the issue created for this problem
-> > > > > >
-> > > > > >   lib/efi_loader/efi_disk.c | 14 +++++++++++++-
-> > > > > >   1 file changed, 13 insertions(+), 1 deletion(-)
-> > > > > >
-> > > > > > diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
-> > > > > > index 93a9a5ac025..2e1d37848fc 100644
-> > > > > > --- a/lib/efi_loader/efi_disk.c
-> > > > > > +++ b/lib/efi_loader/efi_disk.c
-> > > > > > @@ -838,8 +838,20 @@ efi_status_t efi_disk_get_device_name(const efi_handle_t handle, char *buf, int
-> > > > > >   efi_status_t efi_disks_register(void)
-> > > > > >   {
-> > > > > >       struct udevice *dev;
-> > > > > > +     struct uclass *uc;
-> > > > > >
-> > > > > > -     uclass_foreach_dev_probe(UCLASS_BLK, dev) {
-> > > > > > +     uclass_id_foreach_dev(UCLASS_BLK, dev, uc) {
-> > > > > > +             /*
-> > > > > > +              * The virtio block-device hangs on sandbox when accessed since
-> > > > > > +              * there is nothing listening to the mailbox
-> > > > > > +              */
-> > > > > > +             if (IS_ENABLED(CONFIG_SANDBOX)) {
-> > > > > > +                     struct blk_desc *desc = dev_get_uclass_plat(dev);
-> > > > > > +
-> > > > > > +                     if (desc->uclass_id == UCLASS_VIRTIO)
-> > > > > > +                             continue;
-> > > > > > +             }
-> > > > > > +             device_probe(dev);
-> > > > > >       }
-> > > > > >
-> > > > > >       return EFI_SUCCESS;
-> > > > >
-> > > > > Please, do not spray sandbox tweaks all over the place.
-> > > > >
-> > > > > Can't you just return an error from the sandbox-virtio driver when an
-> > > > > attempt to read a queue is made?
-> > > > >
-> > > > > We are using virtio on QEMU. Why do we need sandbox virtio devices? Just
-> > > > > run the relevant tests on the real thing.
-> > > >
-> > > > Please go ahead with whatever approach to testing you wish. But
-> > > > sandbox testing is an important component of U-Boot.
-> > >
-> > > Yes, but is sandbox implementing the "just be a state machine" part here
-> > > correctly, or not? It keeps feeling like "not" and that the reasonable
-> > > course of action would be to stop testing this on sandbox until that is
-> > > fixed especially since we can test this reliably on qemu.
+> > Anyway, I think we should add the property when we know it is OK to do
+> > so, which is just before we boot. If you agree I can take a look at
+> > that.
 >
-> OK, but I can't tell if your answer to my point here is:
-> - Yes, sandbox virtio is broken / incomplete
-> - No, sandbox virtio is fine, there's some other mismatch between how
->   it's used for sandbox and how it's used for QEMU. This will get
->   resolved later.
+> Sure, but we won't be able to remove this code. There are still
+> first-stage boot loaders that might send you a DT over a bloblist,
+> that has a kaslr-seed
 
-It is incomplete, in that the block device is not fully implemented.
-No other test enables it, but EFI does, since it blinding tries to
-access all block devices without any control.
-
->
-> > We have to move things forward a piece at a time. Not having a proper
-> > test for the EFI bootmeth is a significant gap and is what I am trying
-> > to fix with this series. It isn't perfect, but it is a step forward
-> > and will prevent regressions. It can also be built on later.
-> >
-> > Happy-path testing with QEMU is all very well, but it only goes so far.
->
-> I frankly get really puzzled about why testing all of this, in QEMU,
-> where we could actually design the test to see if the OS has booted (and
-> if we leave things configurable well enough, do this on real hardware)
-> is wrong but sandbox, where we can't boot the OS, is good. Especially
-> for the device that's only present in an emulator. We're emulating an
-> emulator and not getting matching behavior in our emulator.
-
-There are many reasons:
-- with sandbox we can test the operation of the bootmeth, including
-under failure conditions
-- we can test what happens within U-Boot itself when
-exit-boot-services is called, which is the bug that provoked me to
-write the test
-- we can build on this test to cover other bootmeths without needing
-to install a full OS just to run a test
-
-Just the sheer number of bugs found and fixed by this test should show
-its value. One of the bugs was an access at location 0 which many
-boards happily accept, but sandbox catches.
-
-Also, someone should keep track of all the bugs we never see, because
-a test covers them. For example, driver model is well-covered by tests
-and we seldom see a bug. If all we had was QEMU, then all our tests
-would be 'happy path' and we would be in a very different position.
-
-One lesson I see here is that I should have pushed for a proper block
-device with virtio at the time. But who could have foreseen that EFI
-would throw away the 'lazy init' approach of U-Boot and just scan all
-the devices?
+But then I don't see what problem that causes...I'm just going to
+leave this madness to you :-)
 
 Regards,
 Simon
