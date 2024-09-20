@@ -4,142 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A537CF9C55
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 16:15:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14867CF9C5A
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 16:34:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 16EF188902;
-	Fri, 20 Sep 2024 18:15:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=infinera.com
+	by phobos.denx.de (Postfix) with ESMTP id 3EF9588753;
+	Fri, 20 Sep 2024 18:34:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=infinera.com header.i=@infinera.com header.b="lsNXYTnU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lSROUIQD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 869B288965; Fri, 20 Sep 2024 18:15:32 +0200 (CEST)
-Received: from NAM02-DM3-obe.outbound.protection.outlook.com
- (mail-dm3nam02on2061f.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2405::61f])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 09496887D1; Fri, 20 Sep 2024 18:34:20 +0200 (CEST)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F76D8888F
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 18:15:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=infinera.com
+ by phobos.denx.de (Postfix) with ESMTPS id D894F886DF
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 18:34:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Joakim.Tjernlund@infinera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Y/wmbfARwvdH45Ga6War90RcZP+eBwenNPW8+jbd5iSTh4eZ0aI6FRoQR6XeMwoUh/+QhWonpxJe/ezgy7y94iq5I0zfrKe62p3WQ0XwzpXZyNanhcx7ztdmVVUgl1DTHHLdyAMenuUnC3x2Ng5MfpV3SyPD8syWGjPM5W/VlbRia8QLm/Z9xHXRBHVppP6lGWfuFSx7E3AqP3Q4HMqqKLYXFK97IVzo3Dr+cdHy1xYgHXADcR9RirLazC29Npnq6RDmNC34Wht5BceD0izu/C7ARTvVy+5kFSrAY8F7oqxayFUsdokEFizAv8KIdGX6DxCtbeObFvzTXGMB7fCEfA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=SatAa9hhOk8UySM1Hhg9uJcjuP/j4PfpgwGQt3pzS3w=;
- b=j8uCO2BFrHv65xFUaofwRY30Gxd3l3uKuz8On2oHCDX9IhBz67NP3sghwRq6v7jn+zbcHJIDKxDzz+2+Qs3WWdLEXlx7bocDi+h7YLwoNMwTbsjLMZokYOcqz2fXAOeT1kPRw0Setnblxv5TNnJ1Tw4YQCH7mq0PXSq0nLRxqVYgrZCtCYpjdtpUfnAnoqbdQ5Y7RhuFZe0GRH4t73AafH62/aI2FUkTTeKUw7NhE/wBjvwwK2eazj5cx9JMmvgtUqqy2aiJ4nowzKpvBwaxl5vFzyoo5gR1hr6034ZWvbVGqczB2nDcEQOPqgM/ixMiyA7e05nbfxvec5sd/kPSgQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 8.4.225.30) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=infinera.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=infinera.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=infinera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SatAa9hhOk8UySM1Hhg9uJcjuP/j4PfpgwGQt3pzS3w=;
- b=lsNXYTnUVUZl8ElbVDZ68iJDNo0zMb/cVjhINx2U4jcsvjhZeW6oCOh1EW+TblD4kZFovSQjut0/jErzaMIR/z99sKupVAJ1H918NWswJiPiRIDkRQZEumIKHPMgjC8PlvV4bX+XehLAArxp+Uyc+gD7JhnyS2fmk55Ptjqp4UhLZa/FVK4UcDRpmutM8XTFkTwKIRU0hDuXbEI4xS+2+c/2++IOdZHXfXoxZarIU7hb6GXjNLj0hdKPOaKrv7Q3J89w91yNKbxxx9sqMUN9DGHuMls1uu/2wL8RG8ogaYn8S736tWWLReIpnyFoG/oq+xu4Yevyl5Bh7dvA/yG1eQ==
-Received: from BN7PR02CA0031.namprd02.prod.outlook.com (2603:10b6:408:20::44)
- by BL3PR10MB6212.namprd10.prod.outlook.com (2603:10b6:208:38c::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7982.17; Fri, 20 Sep
- 2024 16:15:27 +0000
-Received: from BN1PEPF00006001.namprd05.prod.outlook.com
- (2603:10b6:408:20:cafe::ee) by BN7PR02CA0031.outlook.office365.com
- (2603:10b6:408:20::44) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7939.30 via Frontend
- Transport; Fri, 20 Sep 2024 16:15:26 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 8.4.225.30)
- smtp.mailfrom=infinera.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=infinera.com;
-Received-SPF: Pass (protection.outlook.com: domain of infinera.com designates
- 8.4.225.30 as permitted sender) receiver=protection.outlook.com; 
- client-ip=8.4.225.30; helo=owa.infinera.com; pr=C
-Received: from owa.infinera.com (8.4.225.30) by
- BN1PEPF00006001.mail.protection.outlook.com (10.167.243.233) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7918.13 via Frontend Transport; Fri, 20 Sep 2024 16:15:25 +0000
-Received: from sv-ex16-prd.infinera.com (10.100.96.229) by
- sv-ex16-prd.infinera.com (10.100.96.229) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2507.39; Fri, 20 Sep 2024 09:15:24 -0700
-Received: from sv-smtp-pd1.infinera.com (10.100.98.81) by
- sv-ex16-prd.infinera.com (10.100.96.229) with Microsoft SMTP Server id
- 15.1.2507.39 via Frontend Transport; Fri, 20 Sep 2024 09:15:24 -0700
-Received: from se-metroit-prd1.infinera.com ([10.210.32.58]) by
- sv-smtp-pd1.infinera.com with Microsoft SMTPSVC(10.0.17763.1697); 
- Fri, 20 Sep 2024 09:15:24 -0700
-Received: from se-jocke-lx.infinera.com (se-jocke-lx.infinera.com
- [10.210.73.28])
- by se-metroit-prd1.infinera.com (Postfix) with ESMTP id B9B51F40077;
- Fri, 20 Sep 2024 18:15:23 +0200 (CEST)
-Received: by se-jocke-lx.infinera.com (Postfix, from userid 1001)
- id B319F4D3ED9C; Fri, 20 Sep 2024 18:15:23 +0200 (CEST)
-From: Joakim Tjernlund <joakim.tjernlund@infinera.com>
-To: <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
-CC: Joakim Tjernlund <joakim.tjernlund@infinera.com>
-Subject: [PATCH] Add mkimage secp521r1 ECDSA curve support
-Date: Fri, 20 Sep 2024 18:14:35 +0200
-Message-ID: <20240920161521.917955-1-joakim.tjernlund@infinera.com>
-X-Mailer: git-send-email 2.44.2
-In-Reply-To: <CAFLszTj0HNbEy7VSaDA=Vd05+EWT1rxcDOBxu6e=BY1aQ54ZPg@mail.gmail.com>
-References: <CAFLszTj0HNbEy7VSaDA=Vd05+EWT1rxcDOBxu6e=BY1aQ54ZPg@mail.gmail.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-6c358b725feso15117376d6.1
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 09:34:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1726850057; x=1727454857; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Fvo0TY2birhXxxpc7EHY/nU7G2BaiMeEzsYYmds/D0E=;
+ b=lSROUIQD+OacMJxd5kbDmVCCV+wQw62OOdVuNhuJOexE/pgs19ucJMSYGTIV6RmcSh
+ YPFS73bvo6Sw9VJ2p6GZYtWY7A1EmdE89VCoqS0MSVXeDmSXEyKf/smo2lTPYJW59Nul
+ EgaPN+SbSNHCUUDOielO7g0nVl2flEt0kbegk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1726850057; x=1727454857;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Fvo0TY2birhXxxpc7EHY/nU7G2BaiMeEzsYYmds/D0E=;
+ b=el4ne1W1Its8Wni74ZJ73joJZr9Jm3jJy1hB3e4zgCuR4v9i0Qm10ai2UXbjWo8G1f
+ PfVOF2eHSXjCNWTGHb0YMcuZ9pfybaOmOSfLg7s0LB9ZIrOtAoh487mIS4cTvtUnmyJu
+ lveyJJVgbeUtBh4Mq8Df7E4PIfNpBsRFfakzojpgZAVJ9ewPrhxIBieNwLITBNSlnkvt
+ n04DPksIr8htwzDYXmphNc+3AT9CBaXpTxmzdvZGfOCKRhEF1FshfgooD2ucuoJhun7x
+ b8h5Rhk/IDDKCUefzt8qK+3cRuMn4qG7pLJ5twOhz3h98tLzXxLNmZTWwesBWcJe/yK4
+ tuaQ==
+X-Gm-Message-State: AOJu0YxBSXTOpw2P2ttf1hZ1t2zKiylueIG/iQWQECj2pCBN5svHWzOJ
+ gaU9JqScMH0N4p7VoY2A9hsWGVTV4nAj0rDqU1PkhLUybqhSLf6Ve66LF130wOE=
+X-Google-Smtp-Source: AGHT+IEE/iazq2Vfx77/y0Oc3KF7WP3OLDbIdjR9unrRQHaFB50legPkETE8NfxcZBBx5VEABhXAGA==
+X-Received: by 2002:a05:6214:2d41:b0:6c5:9df9:58f9 with SMTP id
+ 6a1803df08f44-6c7bc6a627amr52400306d6.7.1726850056581; 
+ Fri, 20 Sep 2024 09:34:16 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6c75e44bf85sm19641236d6.13.2024.09.20.09.34.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 20 Sep 2024 09:34:14 -0700 (PDT)
+Date: Fri, 20 Sep 2024 10:34:10 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Eddie James <eajames@linux.ibm.com>, Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>,
+ Paul-Erwan Rio <paulerwan.rio@gmail.com>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Roman Stratiienko <r.stratiienko@gmail.com>
+Subject: Re: [PATCH 03/19] boot: Allow FIT to fall back from best-match option
+Message-ID: <20240920163410.GF4252@bill-the-cat>
+References: <20240829145802.1827952-1-sjg@chromium.org>
+ <20240829145802.1827952-4-sjg@chromium.org>
+ <20240904222531.GA2479150@bill-the-cat>
+ <CAFLszTieSjNrzT4i8pbjDXza==+VhHOG8sSHmU8aDykR3ypZzQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-OriginalArrivalTime: 20 Sep 2024 16:15:24.0769 (UTC)
- FILETIME=[4CA90D10:01DB0B78]
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN1PEPF00006001:EE_|BL3PR10MB6212:EE_
-X-MS-Office365-Filtering-Correlation-Id: 47db67a5-f640-452c-13d0-08dcd98f6fbb
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|36860700013|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?w6oG/UxBBfTNWm5CtfGzvpmXOI81iszo+3yVNph3KeqodKYL7MGdjba8YvHP?=
- =?us-ascii?Q?vhJgoAu13rQ9eruktyRJg9HbBTmrKqdwjTn+QRO838ppSlZ5wDn+yseyDBBs?=
- =?us-ascii?Q?bt+zBOW96hLatF3blBZLEW0BqjDJ1uPeLN54LFczCAtnCcn9oAcqXMX5WH4W?=
- =?us-ascii?Q?PEhS3BobpfISnpItiWhempcZMZltdiQ3+xrd2Jo8LlztvMkBAcTSfLo6FbXG?=
- =?us-ascii?Q?2X7BtresXAxYKPaT1Jan7XIxcOVdxV6Sg+8WO0ruqbjjVP1eHaFzoEW5Qmhb?=
- =?us-ascii?Q?OtxebJ4F0zS2VXjNgiPJMwgoYcSjk3WGlyB7RF5+/bGbb6xgfzuLm9gdZsok?=
- =?us-ascii?Q?2o66XwCuwdmNehAb2sp13e9HM0CmmftYM6ntQU+ex63aZ3GmnKYypt9isSKz?=
- =?us-ascii?Q?0yhf+7vn2gAih2mbJNFdnALC/lDguCAIblbSe4uWiEsWEZJKIxx/hH5GompU?=
- =?us-ascii?Q?GVMdP9/pAOfHODC2vZx3MLnuG2uPC6UbzpF/rBsoaGKFqoRlifTWG9t5LLNh?=
- =?us-ascii?Q?O5EJJv/zeBKFnfy75cVaB8yVL5fM0WadfKegm3bslEvHh6duAiGK7MxJt6JY?=
- =?us-ascii?Q?UJ6IT7BPmOC/kJVAfimx4W4fgaMKnpu1Pzzddyo04j8YBqvkUdk5hfecE+yO?=
- =?us-ascii?Q?Pay8GcNtNXKBB/aITFS2ZOaAmafJlChLcZOLXtiYN69aLvtJJGPItQTttOmw?=
- =?us-ascii?Q?VzVCQC8/NC28RiaFe13HZkP7o+OYTUyDyNl/y+hbtF00tQSPWukywRlHl7lc?=
- =?us-ascii?Q?y1IP4pt4Yo5wKuvPtwT3aUAQ/q/MOexzoTxttrFLyyr/J+tzGNoQjQrXlIsC?=
- =?us-ascii?Q?QAoBnkdFRNgCjQH/vkIrvdES1xM4lJSN5DH/LMQNuyeg5k36QlOJzEVHgVrq?=
- =?us-ascii?Q?+nFkG20OlkRcnxDTEtSw75xsVCgSGEVqYP+Bvgd8UJY/HCHK9tthgSB94IMq?=
- =?us-ascii?Q?NTM26afh63ytFOPyk+WesFMJ/pkfd0AP6IjP1DyKt+Aof2hM5nhfdz1ysy3O?=
- =?us-ascii?Q?p89XEa3euiwoaYBw77yYWbrGEc4BwcC1CyFbFkDucPYG7bj6l9WCB53sGg2Z?=
- =?us-ascii?Q?yq4igx39lmcaVZR3zTLaL4HRe3TcPPBRKV9hRWCpLziIOpOZcaUdSzRbyhUm?=
- =?us-ascii?Q?dGNsVUkzRcNhl8iEY45qcFe/Ciewufa+JdOZsBYRmj4DYLM/l0CkV40tQ/Nh?=
- =?us-ascii?Q?aRV+o8WmaiYMUXqai/wQw89f8gjn7tF590MkkUXp8Yq+hY38gVXnhmkvGwpf?=
- =?us-ascii?Q?LV7cmatkwRj3Ng51mRwX0hWLDOyVsLpet4IBX27106biXcIo6DEca45nrvV0?=
- =?us-ascii?Q?lnCrvTmRdHFdVchvNvOaaS0CeGKeNaha7QbeVl2TZpr46Aqmohsp2BOZbxMT?=
- =?us-ascii?Q?jL/Yet5eQBwkNJZlntOynftdOtUoG+nzOafn1MHurHtS6pky2COJ34yme14i?=
- =?us-ascii?Q?syXxzISbzksyKZ/TJgYlpaNC5vzZfCnM?=
-X-Forefront-Antispam-Report: CIP:8.4.225.30; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:owa.infinera.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(36860700013)(82310400026); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: infinera.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Sep 2024 16:15:25.6287 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 47db67a5-f640-452c-13d0-08dcd98f6fbb
-X-MS-Exchange-CrossTenant-Id: 285643de-5f5b-4b03-a153-0ae2dc8aaf77
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=285643de-5f5b-4b03-a153-0ae2dc8aaf77; Ip=[8.4.225.30];
- Helo=[owa.infinera.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF00006001.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL3PR10MB6212
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="doQDuVUr3BI1xGLU"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTieSjNrzT4i8pbjDXza==+VhHOG8sSHmU8aDykR3ypZzQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -156,57 +101,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adds support for secp521r1 ECDSA in mkimage
 
-Signed-off-by: Joakim Tjernlund <joakim.tjernlund@infinera.com>
----
- include/u-boot/ecdsa.h      | 1 +
- lib/ecdsa/ecdsa-libcrypto.c | 2 +-
- tools/image-sig-host.c      | 7 +++++++
- 3 files changed, 9 insertions(+), 1 deletion(-)
+--doQDuVUr3BI1xGLU
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/include/u-boot/ecdsa.h b/include/u-boot/ecdsa.h
-index 53490c6b287..8f9f5e7d6e7 100644
---- a/include/u-boot/ecdsa.h
-+++ b/include/u-boot/ecdsa.h
-@@ -65,5 +65,6 @@ int ecdsa_verify(struct image_sign_info *info,
- /** @} */
- 
- #define ECDSA256_BYTES	(256 / 8)
-+#define ECDSA521_BYTES	((521 + 7) / 8)
- 
- #endif
-diff --git a/lib/ecdsa/ecdsa-libcrypto.c b/lib/ecdsa/ecdsa-libcrypto.c
-index 5fa9be10b4b..403dfe0b97c 100644
---- a/lib/ecdsa/ecdsa-libcrypto.c
-+++ b/lib/ecdsa/ecdsa-libcrypto.c
-@@ -108,7 +108,7 @@ static size_t ecdsa_key_size_bytes(const EC_KEY *key)
- 	const EC_GROUP *group;
- 
- 	group = EC_KEY_get0_group(key);
--	return EC_GROUP_order_bits(group) / 8;
-+	return (EC_GROUP_order_bits(group) + 7) / 8;
- }
- 
- static int default_password(char *buf, int size, int rwflag, void *u)
-diff --git a/tools/image-sig-host.c b/tools/image-sig-host.c
-index d0133aec4c8..21b4fa5d39d 100644
---- a/tools/image-sig-host.c
-+++ b/tools/image-sig-host.c
-@@ -76,6 +76,13 @@ struct crypto_algo crypto_algos[] = {
- 		.add_verify_data = ecdsa_add_verify_data,
- 		.verify = ecdsa_verify,
- 	},
-+	{
-+		.name = "secp521r1",
-+		.key_len = ECDSA521_BYTES,
-+		.sign = ecdsa_sign,
-+		.add_verify_data = ecdsa_add_verify_data,
-+		.verify = ecdsa_verify,
-+	},
- };
- 
- struct padding_algo padding_algos[] = {
--- 
-2.44.2
+On Fri, Sep 20, 2024 at 05:59:00PM +0200, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Thu, 5 Sept 2024 at 00:25, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Thu, Aug 29, 2024 at 08:57:46AM -0600, Simon Glass wrote:
+> > > When the best-match feature fails to find something, use the provided
+> > > config name as a fallback. The allows SPL to select a suitable config
+> > > when best-match is enabled.
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > ---
+> > >
+> > >  boot/image-fit.c | 19 ++++++++++---------
+> > >  include/image.h  |  4 +++-
+> > >  2 files changed, 13 insertions(+), 10 deletions(-)
+> >
+> > Don't we need a documentation update? If no, because this mechanism
+> > isn't well documented, can you please follow up with that? Thanks.
+>=20
+> CONFIG_FIT_BEST_MATCH is mentioned in the spec [1]
+>=20
+> But re the fallback, I'm not sure where that should be documented.
+> Perhaps add a note at [2]?
 
+Should we be using the mechanism that I'd swear the documentation build
+process has, to fetch an external document? I think we would have a
+better user/developer experience if our documentation explained how to
+use a feature, as that's where people will tend to look first.
+
+--=20
+Tom
+
+--doQDuVUr3BI1xGLU
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbto/8ACgkQFHw5/5Y0
+tyz7dQv9EGE2ZE52C07jVhXNxmsMjIwMorTMZGehf4E6KWVrc+OSjc4ueWkaTh/U
+sGqm6Ni0UWtTPhomdpHDbYvyJrVQIUzHujY1kdEAyloIdTEoWeCWb+j7Zby1ksjE
+zSWRw2z2RGTlELJrM2QXVnYy8kOSrGdbJZqjKF6V/Nx36WOcmcgp8ackblWHkBSy
+IiS2V/jCQihRIaFdqcIMwScuBSlk3jJjqj4SseaSuGtHg1zEzqQA0fxGTmnSc8I6
+67RTyb7CVQ/GGxpvNX38q211U4HH/vOPAAZE2BMI85ETqcGGUZZq+pp6ZEq475qr
+nm8jC4/eJ35cMmHmKby09nnCYmSk3F/0ndI24JkeKedHyEggu98tueO2umeSsAkf
+Nkx8Ivm5gF2/4ojNNj8vxglU6cH9PfHAU4jTiWw01j1gen/gT7tjE15gsSlzsJlN
+FpYasXzmsuNkWv0uhgpGGHumHIGkuYjXw/GkKfevITxVy1hbcNb2hdnwd33iDVFN
+rInIhNlZ
+=/pt8
+-----END PGP SIGNATURE-----
+
+--doQDuVUr3BI1xGLU--
