@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C919FCF58DF
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 07:05:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 471AFCF58DF
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 07:05:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8CB7089357;
-	Fri, 20 Sep 2024 09:03:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0296889335;
+	Fri, 20 Sep 2024 09:03:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="F+/jJwBP";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="Ydra71Eb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F6B689391; Fri, 20 Sep 2024 09:03:43 +0200 (CEST)
+ id 687C589357; Fri, 20 Sep 2024 09:03:44 +0200 (CEST)
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.17])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1BB1189398
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 09:03:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C334F8937B
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 09:03:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tien.fong.chee@intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1726815819; x=1758351819;
+ t=1726815815; x=1758351815;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=uuqAwsohccYWza6uga4J7ZGK9u6uHq6zwMVSh8rlnuE=;
- b=F+/jJwBPTXSRBuyC8NemK6sqX+Axm/i3TVSOVpzMIaJ8ZndW05yVcHa9
- QWoG4gBKWwjhrlP8UVYJb7TAtcq5i7+zEIh9oo1dWIIJ/YIf/7t2M/2X5
- EzVhmoCMHNUhCVU8fQwfrOViNr+LAOki59DmdLxR4V0rNa9stq46TixR6
- ElUdGo0cf4cRVqfbLZNNALqHEJUT7q4U2TzgS+6jCrmNzIeT/zS+ItEbF
- 8+nHFt33WnxVrwDRAF6vYctlJqI8MyuqJtuSN7Q9EeHENwLjDe55SF/fQ
- mRKTJSbj76DBz1gTRRGF1ggJ8rGSBSBFjaOUxgvC7RpP7Djdc587f0sm8 A==;
-X-CSE-ConnectionGUID: UtR3rbSsQSW3aYWNSQzWjA==
-X-CSE-MsgGUID: 7hX+7IOCSrSV3/rbJH4/Tw==
-X-IronPort-AV: E=McAfee;i="6700,10204,11200"; a="25961067"
-X-IronPort-AV: E=Sophos;i="6.10,243,1719903600"; d="scan'208";a="25961067"
+ bh=8Fkc+LC652OlNLLIAj65gculo9hnLmfHHMof5OCtiJE=;
+ b=Ydra71Ebt8YfsdwR+xsSE4merT5GuNYT4zaKVG2LlP+mpveLReQgxvKK
+ VWRQ+hLWdZhL6P+85KcyB/rTbRAOj/KTmIPzIBN+vN2AZ4KS4LSPSHQnU
+ ohN5QR+vuhEwXC9N16+97G3+WrYKqC8aibMAn+2SeH+kcpiLp+db0OcF0
+ Xp161/VEOdtg6dVZvEtHToOTuoDtNuihZ1T8g728VIeD2XdEa58bd/6w7
+ 7HikqnJ1u8OLX0XBdgx02vW1EHKPpi7QsX2VX5LXUvAsRss+WIHNsQqGH
+ tFRQ2PzzxYHcyoUecGmslXZdy9ODj8sKZtFtMlQrfDP1ysbSLVT2u9BDA w==;
+X-CSE-ConnectionGUID: sbmepBVNR9GVER0lvs78cA==
+X-CSE-MsgGUID: VXft35PJSOyYBOeKhIw5VA==
+X-IronPort-AV: E=McAfee;i="6700,10204,11200"; a="25961061"
+X-IronPort-AV: E=Sophos;i="6.10,243,1719903600"; d="scan'208";a="25961061"
 Received: from orviesa009.jf.intel.com ([10.64.159.149])
  by orvoesa109.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 20 Sep 2024 00:03:37 -0700
-X-CSE-ConnectionGUID: uRBULuiORC+jUspAswoKiw==
-X-CSE-MsgGUID: UJyBzes5QcequSa8VBagfw==
+ 20 Sep 2024 00:03:35 -0700
+X-CSE-ConnectionGUID: IX135KbcRGW7snQE3oPsZQ==
+X-CSE-MsgGUID: WGwNCN8PR5uRzd8tgbW9+w==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.10,243,1719903600"; d="scan'208";a="70235158"
+X-IronPort-AV: E=Sophos;i="6.10,243,1719903600"; d="scan'208";a="70235137"
 Received: from pglc00502.png.intel.com ([10.221.239.194])
- by orviesa009.jf.intel.com with ESMTP; 20 Sep 2024 00:03:34 -0700
+ by orviesa009.jf.intel.com with ESMTP; 20 Sep 2024 00:03:32 -0700
 From: tien.fong.chee@intel.com
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>,
@@ -58,9 +58,10 @@ Cc: Marek Vasut <marex@denx.de>,
  Yuslaimi Alif Zakuan <alif.zakuan.yuslaimi@intel.com>,
  Hea Kok Kiang <kok.kiang.hea@intel.com>,
  Tien Fong Chee <tien.fong.chee@intel.com>
-Subject: [PATCH v1 11/20] arm: socfpga: agilex5: Add SMMU initialization
-Date: Fri, 20 Sep 2024 15:02:33 +0800
-Message-Id: <20240920070242.20884-12-tien.fong.chee@intel.com>
+Subject: [PATCH v1 10/20] arm: socfpga: agilex5: Enable cache flush for system
+ memory cache in CCU
+Date: Fri, 20 Sep 2024 15:02:32 +0800
+Message-Id: <20240920070242.20884-11-tien.fong.chee@intel.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240920070242.20884-1-tien.fong.chee@intel.com>
 References: <20240920070242.20884-1-tien.fong.chee@intel.com>
@@ -84,95 +85,99 @@ X-Virus-Status: Clean
 
 From: Tien Fong Chee <tien.fong.chee@intel.com>
 
-Allow non-secure accesses only with SMMU peripherals. This would protect
-the content in DDR secure region from accidentally modified by SMMU
-peripherals.
+set/way instructions "dc cisw" ehich is used by the "dcache flush" command
+only flushing CPU data caches from L1 -> L2 -> L3 to system memory cache in
+cache coherency unit, hence this patch enables data flush from system
+memory cache of CCU into DDR memory.
 
 Signed-off-by: Tien Fong Chee <tien.fong.chee@intel.com>
 ---
- arch/arm/dts/socfpga_agilex5-u-boot.dtsi | 34 ++++++++++++++++++++++++
- arch/arm/mach-socfpga/spl_soc64.c        | 17 +++++++++++-
- 2 files changed, 50 insertions(+), 1 deletion(-)
+ arch/arm/mach-socfpga/Makefile     |  1 +
+ arch/arm/mach-socfpga/ccu_ncore3.c | 64 ++++++++++++++++++++++++++++++
+ 2 files changed, 65 insertions(+)
+ create mode 100644 arch/arm/mach-socfpga/ccu_ncore3.c
 
-diff --git a/arch/arm/dts/socfpga_agilex5-u-boot.dtsi b/arch/arm/dts/socfpga_agilex5-u-boot.dtsi
-index bf30b3b8858..9baf2cbc525 100644
---- a/arch/arm/dts/socfpga_agilex5-u-boot.dtsi
-+++ b/arch/arm/dts/socfpga_agilex5-u-boot.dtsi
-@@ -387,6 +387,40 @@
- 				bootph-all;
- 			};
- 		};
+diff --git a/arch/arm/mach-socfpga/Makefile b/arch/arm/mach-socfpga/Makefile
+index e0ada69dd5a..32b3e7a57e2 100644
+--- a/arch/arm/mach-socfpga/Makefile
++++ b/arch/arm/mach-socfpga/Makefile
+@@ -65,6 +65,7 @@ obj-y	+= mmu-arm64_s10.o
+ obj-y	+= reset_manager_s10.o
+ obj-y	+= wrap_handoff_soc64.o
+ obj-y	+= wrap_pll_config_soc64.o
++obj-y	+= ccu_ncore3.o
+ endif
+ 
+ ifdef CONFIG_TARGET_SOCFPGA_N5X
+diff --git a/arch/arm/mach-socfpga/ccu_ncore3.c b/arch/arm/mach-socfpga/ccu_ncore3.c
+new file mode 100644
+index 00000000000..18667131eb9
+--- /dev/null
++++ b/arch/arm/mach-socfpga/ccu_ncore3.c
+@@ -0,0 +1,64 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (C) 2024 Intel Corporation <www.intel.com>
++ *
++ */
++#include <wait_bit.h>
++#include <asm/arch/base_addr_soc64.h>
++#include <linux/bitfield.h>
 +
-+		socfpga_smmu_secure_config: socfpga-smmu-secure-config {
-+			compatible = "intel,socfpga-dtreg";
-+			#address-cells = <1>;
-+			#size-cells = <1>;
-+			bootph-all;
++#define CCU_DMI0_DMIUSMCTCR				SOCFPGA_CCU_ADDRESS + 0x7300
++#define CCU_DMI0_DMIUSMCMCR				SOCFPGA_CCU_ADDRESS + 0x7340
++#define CCU_DMI0_DMIUSMCMAR				SOCFPGA_CCU_ADDRESS + 0x7344
++#define CCU_DMI0_DMIUSMCMCR_MNTOP		GENMASK(3, 0)
++#define MAX_DISTRIBUTED_MEM_INTERFACE	2
++#define FLUSH_ALL_ENTRIES				0x4
++#define CCU_DMI0_DMIUSMCMCR_ARRAY_ID	GENMASK(21, 16)
++#define ARRAY_ID_TAG					0x0
++#define ARRAY_ID_DATA					0x1
++#define CACHE_OPERATION_DONE			BIT(0)
++#define TIMEOUT_200MS					200
 +
-+			/* System manager */
-+			i_sys_mgt_sysmgr_csr@10d12000 {
-+				reg = <0x10d12000 0x00000500>;
-+				intel,offset-settings =
-+					/* dma_tbu_stream_ctrl_reg_0_dma0 */
-+					<0x0000017c 0x00000000 0x0000003f>,
-+					/* dma_tbu_stream_ctrl_reg_0_dma1 */
-+					<0x00000180 0x00000000 0x0000003f>,
-+					/* sdm_tbu_stream_ctrl_reg_1_sdm */
-+					<0x00000184 0x00000000 0x0000003f>,
-+					/* io_tbu_stream_ctrl_reg_2_usb2 */
-+					<0x00000188 0x00000000 0x0000003f>,
-+					/* io_tbu_stream_ctrl_reg_2_sdmmc */
-+					<0x00000190 0x00000000 0x0000003f>,
-+					/* io_tbu_stream_ctrl_reg_2_nand */
-+					<0x00000194 0x00000000 0x0000003f>,
-+					/* io_tbu_stream_ctrl_reg_2_etr */
-+					<0x00000198 0x00000000 0x0000003f>,
-+					/* tsn_tbu_stream_ctrl_reg_3_tsn0 */
-+					<0x0000019c 0x00000000 0x0000003f>,
-+					/* tsn_tbu_stream_ctrl_reg_3_tsn1 */
-+					<0x000001a0 0x00000000 0x0000003f>,
-+					/* tsn_tbu_stream_ctrl_reg_3_tsn2 */
-+					<0x000001a4 0x00000000 0x0000003f>;
-+				bootph-all;
-+			};
-+		};
- 	};
- };
- 
-diff --git a/arch/arm/mach-socfpga/spl_soc64.c b/arch/arm/mach-socfpga/spl_soc64.c
-index 4fe67ea0811..3bfe4bb9dd3 100644
---- a/arch/arm/mach-socfpga/spl_soc64.c
-+++ b/arch/arm/mach-socfpga/spl_soc64.c
-@@ -1,10 +1,12 @@
- // SPDX-License-Identifier: GPL-2.0
- /*
-- *  Copyright (C) 2020 Intel Corporation. All rights reserved
-+ *  Copyright (C) 2020-2024 Intel Corporation. All rights reserved
-  *
-  */
- 
-+#include <hang.h>
- #include <spl.h>
-+#include <dm/uclass.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -22,3 +24,16 @@ u32 spl_boot_mode(const u32 boot_device)
- 		return MMCSD_MODE_RAW;
- }
- #endif
-+
-+/* board specific function prior loading SSBL / U-Boot */
-+void spl_perform_fixups(struct spl_image_info *spl_image)
++int __asm_flush_l3_dcache(void)
 +{
-+	int ret;
-+	struct udevice *dev;
++	int i;
++	int ret = 0;
 +
-+	ret = uclass_get_device_by_name(UCLASS_NOP, "socfpga-smmu-secure-config", &dev);
-+	if (ret) {
-+		printf("HPS SMMU secure settings init failed: %d\n", ret);
-+		hang();
++	/* Flushing all entries in CCU system memory cache */
++	for (i = 0; i < MAX_DISTRIBUTED_MEM_INTERFACE; i++) {
++		/*
++		 * Skipping if the system memory cache is not enabled for
++		 * particular DMI
++		 */
++		if (!readl((uintptr_t)(CCU_DMI0_DMIUSMCTCR + (i * 0x1000))))
++			continue;
++
++		writel(FIELD_PREP(CCU_DMI0_DMIUSMCMCR_MNTOP, FLUSH_ALL_ENTRIES) |
++			   FIELD_PREP(CCU_DMI0_DMIUSMCMCR_ARRAY_ID, ARRAY_ID_TAG),
++			   (uintptr_t)(CCU_DMI0_DMIUSMCMCR + (i * 0x1000)));
++
++		/* Wait for cache maintenance operation done */
++		ret = wait_for_bit_le32((const void *)(uintptr_t)(CCU_DMI0_DMIUSMCMAR +
++				(i * 0x1000)), CACHE_OPERATION_DONE, false, TIMEOUT_200MS,
++				false);
++		if (ret) {
++			debug("%s: Timeout while waiting for flushing tag in DMI%d done\n",
++			      __func__, i);
++			return ret;
++		}
++
++		writel(FIELD_PREP(CCU_DMI0_DMIUSMCMCR_MNTOP, FLUSH_ALL_ENTRIES) |
++			   FIELD_PREP(CCU_DMI0_DMIUSMCMCR_ARRAY_ID, ARRAY_ID_DATA),
++			   (uintptr_t)(CCU_DMI0_DMIUSMCMCR + (i * 0x1000)));
++
++		/* Wait for cache maintenance operation done */
++		ret = wait_for_bit_le32((const void *)(uintptr_t)(CCU_DMI0_DMIUSMCMAR +
++				(i * 0x1000)), CACHE_OPERATION_DONE, false, TIMEOUT_200MS,
++				false);
++		if (ret)
++			debug("%s: Timeout waiting for flushing data in DMI%d done\n",
++			      __func__, i);
 +	}
++
++	return ret;
 +}
 -- 
 2.25.1
