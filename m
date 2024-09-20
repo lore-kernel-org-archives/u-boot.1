@@ -4,82 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D7DACF58F4
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 09:16:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF0CECF58F4
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 09:16:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 96C7989406;
-	Fri, 20 Sep 2024 11:15:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 091688942A;
+	Fri, 20 Sep 2024 11:15:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KiHsTSYu";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VmPl2egd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B4CB89316; Fri, 20 Sep 2024 08:33:23 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 95E3F89382; Fri, 20 Sep 2024 10:13:19 +0200 (CEST)
+Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
+ [IPv6:2a00:1450:4864:20::230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 267A289105
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 08:33:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 97794893C5
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 10:13:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=martinstolpe@gmail.com
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-42cb9a0c300so14032975e9.0
- for <u-boot@lists.denx.de>; Thu, 19 Sep 2024 23:33:21 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-lj1-x230.google.com with SMTP id
+ 38308e7fff4ca-2f762de00fbso18903281fa.2
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 01:13:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1726814000; x=1727418800; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=CQb/Z9c8aesGp0Nx+CovKQmFe9Z3KcvaskqGGySvL+E=;
- b=KiHsTSYupeEYAFRqJA8epDdhk0bff1lQ97MlZbEIjtMWIUhamEh+FqXdY4522gXpEh
- iJbB+TATBMh2jTfZNndKE8UoHwGhPOeYjQh24HjM7tQfW1wc6t+VNFjcJIV8s2R2Q7KC
- L/WMGqsvNLin7xfNb5z730189NxITkPGJm/IwYwOpVdXotB6zaYHcw/W8c/P9Afd3RXl
- MEVeAyGprkd9NnmDOrKdJ7CKmfGNYaycZ0sijL3uIXndd4poSELvg6x/kXkP1EH6xfJA
- o6Z+iVNk9Gj8XFipw2m8zahW+AkYzZFo9Pr6A3a490CzZC5cuFvfQXP1rqR9zPxlTbk5
- 9jQA==
+ d=chromium.org; s=google; t=1726819997; x=1727424797; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=iBRj7O5oBCuLWQNgBjl0fjiqhZYykqWjnKm8wd7W+Yw=;
+ b=VmPl2egdjlKBOMSNQlRSdS0EM8DefvtY7Uv8h1U2voOh8q+UnUiigb4+JCnYkL5shu
+ pXcauzeOQAaQ6XZbBA7vpynTihDIC5AK2nhjGRoR4WMQBAJxRIu4U9UbKZ9Pms2YJ4A8
+ p+frA1Oy92YhbVt58FtBQKEBX5O/Q0nLxjZ3s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726814000; x=1727418800;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=CQb/Z9c8aesGp0Nx+CovKQmFe9Z3KcvaskqGGySvL+E=;
- b=JgL9qhXng6HBaEMD9SKLNJJIhvArtv1UovGiR04OEfeZ7PNx5GYAtPrt8lhEbiGXQE
- z6KVDEjV1czZBals4CAq3aRIrI4+JAuxmVvwfLul6j8p/YGH4qHLs+KJFVSkxJEQKfGJ
- g0bShpf1y+wpQqkPaF7+0TkJbLa+KBPPuWmv9k3rExu+37D9U3ZKUxMo1VBWiNXfARiB
- hNBw9m23W19Esuitj3r6EagtyA6aoES4rjlwK82guZS2XsstDjcshymjqnE7HvhmQryn
- bcwGup3sEp5Go4786kmxcGLgUkzrncskBCrU+/I9IEabTEYzMXG+6wxoo8oTWOW73yDd
- SUEw==
-X-Gm-Message-State: AOJu0YxAIDi3u/FiBZy5t0XFti0bgFwtaTQCoIzLjtOjnaTwoppisB+y
- ik1/ydztoO9W+f6tYAGB3P7ddJ6tK1xljhtl8PuYNgbw8UGz5yGEL5c1X3E/
-X-Google-Smtp-Source: AGHT+IGJ/wvGACTRevoUKFoLq+6Yu9uritWIMtkj2LzWdCCtT+1iZLTMpvmg8TVTu51yCigXm3vgjw==
-X-Received: by 2002:a05:6000:1544:b0:36b:a2bb:b374 with SMTP id
- ffacd0b85a97d-37a4239878dmr1193589f8f.52.1726814000190; 
- Thu, 19 Sep 2024 23:33:20 -0700 (PDT)
-Received: from NLOOP11.neuroloop.local ([213.164.76.146])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42e754a69a7sm39998075e9.34.2024.09.19.23.33.18
+ d=1e100.net; s=20230601; t=1726819997; x=1727424797;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=iBRj7O5oBCuLWQNgBjl0fjiqhZYykqWjnKm8wd7W+Yw=;
+ b=LrcU39CRaDk7GB8KI5pyQjuBwh3t6t2oO6pXoZJM/a/lIFF6uGimfWNFs8ilPZwlmP
+ wZGrB3dQoSKB3sNqOMKny8JaroezZR2raTYq6SB7ZEzjpZvgL9S+diiAyYTqD3nEF0OL
+ 9pPduKc7giL+xCiY43AqWzyz1iLMsoTf5Ox3Mo88wSu5/sEO508+LHSV4dNnvp6pGy7J
+ B+2h+nuOxAVmKvIyCRhXKnCBvBdbxYzSlj6VqfqfGbfZ2jRY2crHPVrM8xxQVbOHwKXL
+ Rb49ktQ7sXQPGLGZP+AZFayB9dqUL9zoCLByc3A16N92p2BNCPZHfw36HVxZNwGfZg+O
+ lKyw==
+X-Gm-Message-State: AOJu0YwcpfLnLy0mO9Gz1U20E7UU+1L2UnhrSh6zbVf2OHuPuB/AzKJB
+ sndAJteeEaJ8IP4jGCoW4CQn2CVb2Kyz0NhuwuyDcMfAUFYcShqN6ldMfz51XaO/kht1NFnXQk1
+ o4Idb
+X-Google-Smtp-Source: AGHT+IHdNEA0Y6OABTMEdSDPzGKZCXc4THkYy2UB6WLbN7a+TZM05XjYxBoCXNsmz8+Iy/25FE9AEw==
+X-Received: by 2002:a05:6512:3a88:b0:536:52ec:2870 with SMTP id
+ 2adb3069b0e04-536ac2f50ccmr1162600e87.28.1726819996428; 
+ Fri, 20 Sep 2024 01:13:16 -0700 (PDT)
+Received: from chromium.org ([83.68.141.146]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5c42bc88cf7sm6804447a12.90.2024.09.20.01.13.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Sep 2024 23:33:18 -0700 (PDT)
-From: Martin Stolpe <martinstolpe@gmail.com>
-X-Google-Original-From: Martin Stolpe <martin.stolpe@gmail.com>
+ Fri, 20 Sep 2024 01:13:16 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
-Cc: Martin Stolpe <martin.stolpe@gmail.com>, Devarsh Thakkar <devarsht@ti.com>,
- Francois Berder <fberder@outlook.fr>, "Ivan T. Ivanov" <iivanov@suse.de>,
- Matthias Brugger <mbrugger@suse.com>, Nikhil M Jain <n-jain1@ti.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/1] rpi: Fix build error when CONFIG_VIDEO is disabled for
- Raspberry Pi
-Date: Fri, 20 Sep 2024 08:32:01 +0200
-Message-ID: <20240920063204.1049202-2-martin.stolpe@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Chanho Park <chanho61.park@samsung.com>, Devarsh Thakkar <devarsht@ti.com>,
+ Eddie James <eajames@linux.ibm.com>, Gary Bisson <bisson.gary@gmail.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Julien Masson <jmasson@baylibre.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
+ Mathieu Othacehe <m.othacehe@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>, Michael Walle <mwalle@kernel.org>,
+ Michal Simek <michal.simek@amd.com>, Nam Cao <namcao@linutronix.de>,
+ Paul-Erwan Rio <paulerwan.rio@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Sean Anderson <sean.anderson@seco.com>, Sean Anderson <seanga2@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Suniel Mahesh <sunil@amarulasolutions.com>,
+ =?UTF-8?q?Thomas=20Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>,
+ Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>
+Subject: [PATCH v2 00/18] vbe: Series part E
+Date: Fri, 20 Sep 2024 10:12:39 +0200
+Message-ID: <20240920081309.140426-1-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240920063204.1049202-1-martin.stolpe@gmail.com>
-References: <20240920063204.1049202-1-martin.stolpe@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Fri, 20 Sep 2024 11:15:35 +0200
@@ -99,50 +109,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When the CONFIG_VIDEO option is set to disabled for Raspberry Pi devices
-the build will fail with the following error message:
-"undefined reference to `fdt_simplefb_enable_and_mem_rsv'."
 
-Signed-off-by: Martin Stolpe <martin.stolpe@gmail.com>
----
+This includes various patches towards implementing the VBE abrec
+bootmeth in U-Boot. It mostly focuses on SPL tweaks and adjusting what
+fatures are available in VPL.
 
- board/raspberrypi/rpi/rpi.c | 2 +-
- boot/fdt_simplefb.c         | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+Changes in v2:
+- Add field names into the message
+- Fix 'depends on SPL' to depend on TPL
+- Depend on TPL/VPL as well
+- Drop patch 'serial: ns16550: Allow clocks to be missing'
 
-diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
-index ab5ea85cf9..bc49708f85 100644
---- a/board/raspberrypi/rpi/rpi.c
-+++ b/board/raspberrypi/rpi/rpi.c
-@@ -572,7 +572,7 @@ int ft_board_setup(void *blob, struct bd_info *bd)
- 	node = fdt_node_offset_by_compatible(blob, -1, "simple-framebuffer");
- 	if (node < 0)
- 		fdt_simplefb_add_node(blob);
--	else
-+	else if (IS_ENABLED(CONFIG_VIDEO))
- 		fdt_simplefb_enable_and_mem_rsv(blob);
- 
- #ifdef CONFIG_EFI_LOADER
-diff --git a/boot/fdt_simplefb.c b/boot/fdt_simplefb.c
-index 5341554845..b6e916ff7d 100644
---- a/boot/fdt_simplefb.c
-+++ b/boot/fdt_simplefb.c
-@@ -86,6 +86,7 @@ int fdt_simplefb_add_node(void *blob)
- 	return fdt_simplefb_configure_node(blob, off);
- }
- 
-+#if IS_ENABLED(CONFIG_VIDEO)
- /**
-  * fdt_simplefb_enable_existing_node() - enable simple-framebuffer DT node
-  *
-@@ -103,7 +104,6 @@ static int fdt_simplefb_enable_existing_node(void *blob)
- 	return fdt_simplefb_configure_node(blob, off);
- }
- 
--#if IS_ENABLED(CONFIG_VIDEO)
- int fdt_simplefb_enable_and_mem_rsv(void *blob)
- {
- 	int ret;
+Simon Glass (18):
+  image: Add a prototype for fit_image_get_phase()
+  boot: Allow FIT to fall back from best-match option
+  bootstd: Avoid sprintf() in SPL when creating bootdevs
+  boot: Respect the load_op in fit_image_load()
+  malloc: Show amount of used space when memory runs out
+  malloc: Provide a simple malloc for VPL
+  Support setting a maximum size for the VPL image
+  spl: Report a loader failure
+  spl: Allow serial to be disabled in any XPL phase
+  spl: Support a relocated stack in any XPL phase
+  spl: Drop use of uintptr_t
+  spl: Drop a duplicate variable in boot_from_devices()
+  spl: Add some more debugging to load_simple_fit()
+  spl: lib: Allow for decompression in any SPL build
+  boot: Allow use of FIT in TPL and VPL
+  lib: Allow crc8 in TPL and VPL
+  boot: Imply CRC8 with VBE
+  hash: Plumb crc8 into the hash functions
+
+ boot/Kconfig                  | 71 ++++++++++++++++++++++++++++++++++-
+ boot/Makefile                 |  4 +-
+ boot/bootdev-uclass.c         | 10 ++++-
+ boot/image-fit.c              | 29 ++++++++------
+ common/hash.c                 |  8 ++++
+ common/malloc_simple.c        |  3 +-
+ common/spl/Kconfig.vpl        | 17 +++++++++
+ common/spl/spl.c              | 15 +++++---
+ common/spl/spl_atf.c          | 36 +++++++++---------
+ common/spl/spl_fit.c          | 12 +++++-
+ common/spl/spl_legacy.c       |  8 ++--
+ configs/sandbox_vpl_defconfig |  3 +-
+ include/image.h               | 16 +++++++-
+ include/spl.h                 | 28 +++++++-------
+ include/u-boot/crc.h          |  3 ++
+ lib/Kconfig                   | 53 ++++++++++++++++++++++++++
+ lib/Makefile                  |  8 ++--
+ lib/crc8.c                    |  6 +++
+ 18 files changed, 262 insertions(+), 68 deletions(-)
+
 -- 
 2.43.0
 
