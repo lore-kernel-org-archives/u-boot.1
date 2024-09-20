@@ -4,94 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF0CECF58F4
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 09:16:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29808CF58F4
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 09:16:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 091688942A;
+	by phobos.denx.de (Postfix) with ESMTP id 7A9AC89434;
 	Fri, 20 Sep 2024 11:15:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VmPl2egd";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="DzUqEHAi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 95E3F89382; Fri, 20 Sep 2024 10:13:19 +0200 (CEST)
-Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
- [IPv6:2a00:1450:4864:20::230])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E2D8789386; Fri, 20 Sep 2024 10:28:11 +0200 (CEST)
+Received: from relay1-d.mail.gandi.net (relay1-d.mail.gandi.net
+ [217.70.183.193])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97794893C5
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 10:13:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C6DED89379
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 10:28:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-lj1-x230.google.com with SMTP id
- 38308e7fff4ca-2f762de00fbso18903281fa.2
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 01:13:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726819997; x=1727424797; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=iBRj7O5oBCuLWQNgBjl0fjiqhZYykqWjnKm8wd7W+Yw=;
- b=VmPl2egdjlKBOMSNQlRSdS0EM8DefvtY7Uv8h1U2voOh8q+UnUiigb4+JCnYkL5shu
- pXcauzeOQAaQ6XZbBA7vpynTihDIC5AK2nhjGRoR4WMQBAJxRIu4U9UbKZ9Pms2YJ4A8
- p+frA1Oy92YhbVt58FtBQKEBX5O/Q0nLxjZ3s=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726819997; x=1727424797;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=iBRj7O5oBCuLWQNgBjl0fjiqhZYykqWjnKm8wd7W+Yw=;
- b=LrcU39CRaDk7GB8KI5pyQjuBwh3t6t2oO6pXoZJM/a/lIFF6uGimfWNFs8ilPZwlmP
- wZGrB3dQoSKB3sNqOMKny8JaroezZR2raTYq6SB7ZEzjpZvgL9S+diiAyYTqD3nEF0OL
- 9pPduKc7giL+xCiY43AqWzyz1iLMsoTf5Ox3Mo88wSu5/sEO508+LHSV4dNnvp6pGy7J
- B+2h+nuOxAVmKvIyCRhXKnCBvBdbxYzSlj6VqfqfGbfZ2jRY2crHPVrM8xxQVbOHwKXL
- Rb49ktQ7sXQPGLGZP+AZFayB9dqUL9zoCLByc3A16N92p2BNCPZHfw36HVxZNwGfZg+O
- lKyw==
-X-Gm-Message-State: AOJu0YwcpfLnLy0mO9Gz1U20E7UU+1L2UnhrSh6zbVf2OHuPuB/AzKJB
- sndAJteeEaJ8IP4jGCoW4CQn2CVb2Kyz0NhuwuyDcMfAUFYcShqN6ldMfz51XaO/kht1NFnXQk1
- o4Idb
-X-Google-Smtp-Source: AGHT+IHdNEA0Y6OABTMEdSDPzGKZCXc4THkYy2UB6WLbN7a+TZM05XjYxBoCXNsmz8+Iy/25FE9AEw==
-X-Received: by 2002:a05:6512:3a88:b0:536:52ec:2870 with SMTP id
- 2adb3069b0e04-536ac2f50ccmr1162600e87.28.1726819996428; 
- Fri, 20 Sep 2024 01:13:16 -0700 (PDT)
-Received: from chromium.org ([83.68.141.146]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c42bc88cf7sm6804447a12.90.2024.09.20.01.13.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Sep 2024 01:13:16 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Chanho Park <chanho61.park@samsung.com>, Devarsh Thakkar <devarsht@ti.com>,
- Eddie James <eajames@linux.ibm.com>, Gary Bisson <bisson.gary@gmail.com>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Julien Masson <jmasson@baylibre.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
- Mathieu Othacehe <m.othacehe@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maxim Moskalets <maximmosk4@gmail.com>, Michael Walle <mwalle@kernel.org>,
- Michal Simek <michal.simek@amd.com>, Nam Cao <namcao@linutronix.de>,
- Paul-Erwan Rio <paulerwan.rio@gmail.com>, Peng Fan <peng.fan@nxp.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Raymond Mao <raymond.mao@linaro.org>,
- Sean Anderson <sean.anderson@seco.com>, Sean Anderson <seanga2@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Suniel Mahesh <sunil@amarulasolutions.com>,
- =?UTF-8?q?Thomas=20Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>,
- Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>
-Subject: [PATCH v2 00/18] vbe: Series part E
-Date: Fri, 20 Sep 2024 10:12:39 +0200
-Message-ID: <20240920081309.140426-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=bastien.curutchet@bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPA id ED4C0240002;
+ Fri, 20 Sep 2024 08:28:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+ t=1726820889;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=dtNGLU35uHqRhtq2T6AsPJ/PHc3n6SHvQJud6Vas9vs=;
+ b=DzUqEHAiCxeijt8htt711eG9uh9+tWTT9daLBcX8K/K/+yrGxFy9/RoY/IXN33x6Ucautq
+ +Gwa1/6Se17dQ0M8lnhUxQFUq+iNS11qHyoT/Zgb6zt520f/COh7sDDlqoRap4gCq9n2pR
+ ZKdcJo6gIni3EC6yeMQkMPX5a77jsuqdhvXxg4QmdTrJQVISdxooaHdpCzCYAzk8wq2jTS
+ LJR4bADBO21Duh+xoBm5xlLet8iQzr/oLqhsC9Q4yfz8NgwLQvZE0ue+kGeW0FEo0Ju9q7
+ TSn3nrd6knqKahWgTAn1RwGc8Jls6cWXaQabUeqyjk02xSEUIEXSQqEjT8tFSg==
+From: Bastien Curutchet <bastien.curutchet@bootlin.com>
+To: Jagan Teki <jagan@amarulasolutions.com>,
+	Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Herve Codina <herve.codina@bootlin.com>,
+ Christopher Cordahi <christophercordahi@nanometrics.ca>,
+ Bastien Curutchet <bastien.curutchet@bootlin.com>
+Subject: [PATCH] spi: davinci: Drop the preload of TX buffer before
+ read/writes operations
+Date: Fri, 20 Sep 2024 10:28:06 +0200
+Message-ID: <20240920082806.74253-1-bastien.curutchet@bootlin.com>
+X-Mailer: git-send-email 2.46.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-GND-Sasl: bastien.curutchet@bootlin.com
 X-Mailman-Approved-At: Fri, 20 Sep 2024 11:15:35 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,57 +71,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+A write to the TX buffer is performed before entering the loop to "avoid
+clock starvation". This sometimes results in subsequent writes in
+davinci_spi_xfer_data() to occur while the TXFULL bit is asserted,
+leading to write failures.
 
-This includes various patches towards implementing the VBE abrec
-bootmeth in U-Boot. It mostly focuses on SPL tweaks and adjusting what
-fatures are available in VPL.
+Remove the preload of the TX buffer.
 
-Changes in v2:
-- Add field names into the message
-- Fix 'depends on SPL' to depend on TPL
-- Depend on TPL/VPL as well
-- Drop patch 'serial: ns16550: Allow clocks to be missing'
+Signed-off-by: Bastien Curutchet <bastien.curutchet@bootlin.com>
+---
+Hi all,
 
-Simon Glass (18):
-  image: Add a prototype for fit_image_get_phase()
-  boot: Allow FIT to fall back from best-match option
-  bootstd: Avoid sprintf() in SPL when creating bootdevs
-  boot: Respect the load_op in fit_image_load()
-  malloc: Show amount of used space when memory runs out
-  malloc: Provide a simple malloc for VPL
-  Support setting a maximum size for the VPL image
-  spl: Report a loader failure
-  spl: Allow serial to be disabled in any XPL phase
-  spl: Support a relocated stack in any XPL phase
-  spl: Drop use of uintptr_t
-  spl: Drop a duplicate variable in boot_from_devices()
-  spl: Add some more debugging to load_simple_fit()
-  spl: lib: Allow for decompression in any SPL build
-  boot: Allow use of FIT in TPL and VPL
-  lib: Allow crc8 in TPL and VPL
-  boot: Imply CRC8 with VBE
-  hash: Plumb crc8 into the hash functions
+I've ran into write failures to flash on my platform based on the
+DAVINCI/OMAP L138. This patch fixes it.
 
- boot/Kconfig                  | 71 ++++++++++++++++++++++++++++++++++-
- boot/Makefile                 |  4 +-
- boot/bootdev-uclass.c         | 10 ++++-
- boot/image-fit.c              | 29 ++++++++------
- common/hash.c                 |  8 ++++
- common/malloc_simple.c        |  3 +-
- common/spl/Kconfig.vpl        | 17 +++++++++
- common/spl/spl.c              | 15 +++++---
- common/spl/spl_atf.c          | 36 +++++++++---------
- common/spl/spl_fit.c          | 12 +++++-
- common/spl/spl_legacy.c       |  8 ++--
- configs/sandbox_vpl_defconfig |  3 +-
- include/image.h               | 16 +++++++-
- include/spl.h                 | 28 +++++++-------
- include/u-boot/crc.h          |  3 ++
- lib/Kconfig                   | 53 ++++++++++++++++++++++++++
- lib/Makefile                  |  8 ++--
- lib/crc8.c                    |  6 +++
- 18 files changed, 262 insertions(+), 68 deletions(-)
+ drivers/spi/davinci_spi.c | 9 ---------
+ 1 file changed, 9 deletions(-)
 
+diff --git a/drivers/spi/davinci_spi.c b/drivers/spi/davinci_spi.c
+index 25f5e9fdeb..07c46b8b66 100644
+--- a/drivers/spi/davinci_spi.c
++++ b/drivers/spi/davinci_spi.c
+@@ -129,9 +129,6 @@ static int davinci_spi_read(struct davinci_spi_slave *ds, unsigned int len,
+ 	while (readl(&ds->regs->buf) & SPIBUF_TXFULL_MASK)
+ 		;
+ 
+-	/* preload the TX buffer to avoid clock starvation */
+-	writel(data1_reg_val, &ds->regs->dat1);
+-
+ 	/* keep reading 1 byte until only 1 byte left */
+ 	while ((len--) > 1)
+ 		*rxp++ = davinci_spi_xfer_data(ds, data1_reg_val);
+@@ -159,12 +156,6 @@ static int davinci_spi_write(struct davinci_spi_slave *ds, unsigned int len,
+ 	while (readl(&ds->regs->buf) & SPIBUF_TXFULL_MASK)
+ 		;
+ 
+-	/* preload the TX buffer to avoid clock starvation */
+-	if (len > 2) {
+-		writel(data1_reg_val | *txp++, &ds->regs->dat1);
+-		len--;
+-	}
+-
+ 	/* keep writing 1 byte until only 1 byte left */
+ 	while ((len--) > 1)
+ 		davinci_spi_xfer_data(ds, data1_reg_val | *txp++);
 -- 
-2.43.0
+2.46.0
 
