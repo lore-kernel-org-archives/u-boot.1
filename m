@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E807CF58E9
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 08:16:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C14DCF58F1
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 09:06:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34A1789382;
-	Fri, 20 Sep 2024 10:14:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id CDC4489335;
+	Fri, 20 Sep 2024 11:06:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XJ1v3cF4";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BRUaqmnC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B41A87D1A; Fri, 20 Sep 2024 10:14:07 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 6ED8589357; Fri, 20 Sep 2024 11:06:15 +0200 (CEST)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F229489382
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 10:13:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D73289329
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 11:06:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5c413cf5de5so2363087a12.0
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 01:13:48 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=bigunclemax@gmail.com
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-536584f6c84so2434284e87.0
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 02:06:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726820028; x=1727424828; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6qEJrGnsgLTlE+u/F3aUcEDpzp+/XSfEN73udjDdDls=;
- b=XJ1v3cF4wCpcTHlSHRi+w3pTRgJpKP7V5b603h1sSaF8D81eVoFiFPvBK7AzynJ0a9
- BBMHx4IFEy8MwdX0B1THp/CHPxVq8uyp6nTzUC8IMTjtZuIwHfcRw/aq3/OdVCt8g/2U
- 2s9xg8r37CsBPdJ4yWWKI3VJHaJzgFoSng+8Q=
+ d=gmail.com; s=20230601; t=1726823173; x=1727427973; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=eauz3hm6CkVrf+MXMuXwCVdJCze6jJ4Fh53QZGnCk5E=;
+ b=BRUaqmnCeHs8qUnuxEj8oX1ml0ER2eAH6glqxl+1+KCZR2OKo0iLl/zeP5xSeg8zDn
+ stLtcYMscUTrzu92btOCQgxPyOasGY6GNRNHKZ3IgxiwNx1NdrHxeg3oaKkGeCvEJ9aH
+ U2R5Hez77x5kDfz0XZa83AyPeXzCu63Lg9kY3b2I6kzNySK8w0naPpEHTC1eAAl+O5aF
+ J9QEfAVSVMskqg91lKGfzkdATRRybrc2YFlizwt2UegdnN12NcjNIPcd+i3TPgMbSZLh
+ i3i+jBgUk8EF5HJYtYN1j6Mq2DowFPsc0ZGhqbsZUfbmXLSz8G3bD8GgZMiD1dEh5Jio
+ UXGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726820028; x=1727424828;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=6qEJrGnsgLTlE+u/F3aUcEDpzp+/XSfEN73udjDdDls=;
- b=YjaV1kKoD48OdBgcCgAHRhDxJdRgh7USCiAbfF8rNXFj67FPxlJhgCP6B2zoBPJu9o
- 3VtJcx1y4B5UkY0iM7Z2nQDWajFbt9UE6P7zLACysFadh3M93HwMd975iUU7fL+GJuPp
- q7e7r+bjdPkoA7Maq47nZjFzoH0IYhw8GtHHXnVf26Q2ZlLPyEz3pYZ6n8z3eJcdhlpi
- YqkzN/Z4CQEZWCVXhbN/iviFyWALl823xw/OFbri2lqu724x0Hurrgf6EuAzfIkoMHty
- bbeF8K91ZetTHLEuyxLdph8zCnhPwZNClq6BLq0lWc34/p0ucmb0iT3BnLfEAkWIor1s
- Qerw==
-X-Gm-Message-State: AOJu0YytADsuHwrKcCog2UTulIY7f/4R5xGe587YNpdEBV+/eHGzRMkE
- MaUjP7RJq/aSYlmbtgAdlcTHGAe8YRRv9aKxM4LfPwXsLksGXS/5YvuHdH73W/JMeBXnJJtom6+
- hWYN/
-X-Google-Smtp-Source: AGHT+IH+hhS9nFbDwgUXkVRjvhNZJOPWR+TdQSh47auZl+aZdWjymcVjC8CXZ7gMGyDEux12KiMGaw==
-X-Received: by 2002:a05:6402:1e8b:b0:5a2:5bd2:ca50 with SMTP id
- 4fb4d7f45d1cf-5c464a5ad55mr1640439a12.25.1726820028123; 
- Fri, 20 Sep 2024 01:13:48 -0700 (PDT)
-Received: from chromium.org ([83.68.141.146]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c42bc88cf7sm6804447a12.90.2024.09.20.01.13.47
+ d=1e100.net; s=20230601; t=1726823173; x=1727427973;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=eauz3hm6CkVrf+MXMuXwCVdJCze6jJ4Fh53QZGnCk5E=;
+ b=fYP6mT2xZOO4KXtvvmL6knFRTLg5Mt89HtuWqiY0GQqm9gz++SZQU0lI2krMzpsT9T
+ yQ7Fn2NIZBXUt2To2P0i0pLxmIBtT+qLa9UynMrNTwHd1i2DPyz5ifl3w+S2i3DQtxVn
+ 1gKSDRntmGFBfhzFobqJdnnkx/cgkkaOBCH4bdiPaYSILYLNO9Xke8nxhtxFKvpzV4iv
+ QGGOMuuZLJ+9t+PC5xVeOqUVBsnwfVXKXGGX2M/6dg404GeK7+XifStADCnrpxd7OtsO
+ l5FtA6h04iJmm0Af0iWoMAMxYDR0TOr/TXGzSUIzHI3ksAfioAvPQykirqRsLkqe7n8q
+ KGsQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV/25OXkWH3dRCthMAk5pIjt6DUwXWxXoO5JBjFddjZnfnlNqOEMG3A1fXLMwczg0UmdHB7g20=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzvs8L2+eqR5+ttJVL+sQyycPXwo0BoGKgKPE0bHXXTV8shva77
+ 6F152+K/vuQ/Np6D4dxuVNwMRaRajaoMam5I47rGRq1VoH92Plmu
+X-Google-Smtp-Source: AGHT+IHSzUWrqeCQnuea26tZeGsbiC7I/z5Ls5um4LyTGGmKkcZMUnKdWBwWr9YBsREFz5FuTpnv1Q==
+X-Received: by 2002:a05:6512:6d2:b0:535:69ee:9717 with SMTP id
+ 2adb3069b0e04-536ac2d675emr1379240e87.3.1726823172492; 
+ Fri, 20 Sep 2024 02:06:12 -0700 (PDT)
+Received: from wpc.. (host-95-152-62-174.dsl.sura.ru. [95.152.62.174])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-536870a88cbsm2088682e87.222.2024.09.20.02.06.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Sep 2024 01:13:47 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Eddie James <eajames@linux.ibm.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Fri, 20 Sep 2024 02:06:12 -0700 (PDT)
+From: bigunclemax@gmail.com
+To: 
+Cc: bigunclemax@gmail.com, Wei Fu <wefu@redhat.com>,
+ Yixun Lan <dlan@gentoo.org>, Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 17/18] boot: Imply CRC8 with VBE
-Date: Fri, 20 Sep 2024 10:12:56 +0200
-Message-ID: <20240920081309.140426-18-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240920081309.140426-1-sjg@chromium.org>
-References: <20240920081309.140426-1-sjg@chromium.org>
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
+Subject: [PATCH v1 0/2] riscv: add GPIO support for the LicheePi4A
+Date: Fri, 20 Sep 2024 12:05:22 +0300
+Message-ID: <20240920090532.280504-1-bigunclemax@gmail.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,31 +94,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-VBE uses a crc8 checksum to verify that the nvdata is valid, so make
-sure it is available if VBE is enabled.
+From: Maksim Kiselev <bigunclemax@gmail.com>
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+This series adds GPIO support for the LicheePi4A board.
+It's based on Alibaba TH1520 SoC that has DesignWare APB GPIO controller.
 
-Changes in v2:
-- Depend on TPL/VPL as well
+Best regards,
+Maksim
 
- boot/Kconfig | 2 ++
- 1 file changed, 2 insertions(+)
+Maksim Kiselev (2):
+  gpio: dw: Add ngpios DT-property support
+  configs: th1520_lpi4a: Enable CMD_GPIO, DM_GPIO and DWAPB_GPIO driver
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 9fd1424cd1f..48ed86bf13a 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -718,6 +718,8 @@ config SPL_BOOTMETH_VBE_REQUEST
- config BOOTMETH_VBE_SIMPLE
- 	bool "Bootdev support for VBE 'simple' method"
- 	default y
-+	imply SPL_CRC8 if SPL
-+	imply VPL_CRC8 if VPL
- 	help
- 	  Enables support for VBE 'simple' boot. This allows updating a single
- 	  firmware image in boot media such as MMC. It does not support any sort
+ configs/th1520_lpi4a_defconfig | 4 +++-
+ drivers/gpio/dwapb_gpio.c      | 4 +++-
+ 2 files changed, 6 insertions(+), 2 deletions(-)
+
 -- 
-2.43.0
+2.45.2
 
