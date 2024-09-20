@@ -4,73 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0340ACF58E0
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 07:28:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EF81CF58E0
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 07:28:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3C03893F8;
-	Fri, 20 Sep 2024 09:25:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 378B989412;
+	Fri, 20 Sep 2024 09:26:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BQq7Lsjd";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DOnsJcKY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24FE98941A; Fri, 20 Sep 2024 09:25:57 +0200 (CEST)
-Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
- [IPv6:2607:f8b0:4864:20::f32])
+ id 5CACF8940D; Fri, 20 Sep 2024 09:25:57 +0200 (CEST)
+Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
+ [IPv6:2607:f8b0:4864:20::f33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 24E13893F8
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 09:25:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 185B589378
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 09:25:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf32.google.com with SMTP id
- 6a1803df08f44-6c51d1df755so12970436d6.1
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 00:25:53 -0700 (PDT)
+Received: by mail-qv1-xf33.google.com with SMTP id
+ 6a1803df08f44-6c51d1df755so12970536d6.1
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 00:25:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726817152; x=1727421952; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1726817153; x=1727421953; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6M5d/pLcZx0ERz4WcjECfM4uS1DyU/bfCbdzA3kLT40=;
- b=BQq7LsjdBsksPlE2DWMZ1pYeenkLoEQqnmTkGsa/glS9wq1WU9xGkt84Z04yoVmvYl
- ZDq5DAft2ywk8YdDjugaxwnSshFoCBuM/BRZBMUTubSiRcmfJTwJnaEok0tfaNNFHFDp
- t8qWZfQ7EQlmLD6oyon6sBP5yE+Y2a/MFBAEE=
+ bh=x7sMSs1GsN39n7bzAk/r5023ircoAtDWJOHNybFzPKc=;
+ b=DOnsJcKYDVQ6rJ37E1I0mtHeaW2Glqc2QZHsVVuY/vCM76+JdhCDUxfKJTOEuYDAGH
+ 3s9IvrSUh/58VJRBhROFTugAEuO8Oa3cR6hz+b+ROIK3g6AHcVrFPK8e+yJ/UjZXRp6w
+ IvSxMlGVCjjJgL2L6In8xpwTw3G6w0qtFMB7Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726817152; x=1727421952;
+ d=1e100.net; s=20230601; t=1726817153; x=1727421953;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=6M5d/pLcZx0ERz4WcjECfM4uS1DyU/bfCbdzA3kLT40=;
- b=tYxCuCLrmFwY3Thc7pith5dLcGYW52Lrn1rFA4iibWLQvAh6/RZiPWkkSKhhe7LzZe
- USmC/YgZpklX/GsmLtMhZCml/NrOzy+s4B4dhZfapod5EVuUOEskhrlT+R8wg0LKFFFH
- JMjnHzKRtS9QrhcyRQE33KccR9As3PZj050AOiSDECtDo3QpvGQwNzi6XRSaRtbDWN7o
- DaCaZHLjI2wApjZv/HWLslrI66G1xm7YKSn8z/0O3WhQNwECoAtCZoWRtrDS7qelMyLu
- 0br6644RC7d8t8GnLl+lzDzWl5Ae6STpCjNX2hIkjxuLpd/8vHZtbDAhpvo66IhJjB2N
- p5FA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUe4zKphxKbI/6LdF/au1FtqyT5BBYqjvXxEq4p6yl04MAh6iqu9WvLqHEJrHeo8VY897BispU=@lists.denx.de
-X-Gm-Message-State: AOJu0YwFzOR5DqQpaGG5o+Qoiu/D3wkKRv/6dp0C1rrBMYgRHUcoMXKo
- QSfAqkWmT0wWGiLES5WphiWHvq/nVYv9lOn42UyyPJxnYcO6jsF9iDYv6tVg+YXM1BCkjL9cV0S
- sAXiiOMugXeWVrYVfh8K/xs9bDlpScAfUjXyd
-X-Google-Smtp-Source: AGHT+IFo2TnoRYhAPbzieOcREKrfA6OHcVBYkoxGgXZxezwzk6WMR9Wb2c90m/51rK+906EEaax2pB48HC6GqC67tus=
-X-Received: by 2002:a05:6214:2f0d:b0:6c5:317a:a664 with SMTP id
- 6a1803df08f44-6c7bd46c895mr29351776d6.3.1726817151640; Fri, 20 Sep 2024
- 00:25:51 -0700 (PDT)
+ bh=x7sMSs1GsN39n7bzAk/r5023ircoAtDWJOHNybFzPKc=;
+ b=S1yOcWt+KfYAnypLkchAfx4Au/FoOdX4MVbtwY8C5XLyHKFwHayx8thy7NBaMneYcc
+ isWTVh53CFhyoW1S6xcOHbjIExWYZVRpbkf55cBd1/gM3Wnv7f++kju4xGYQJUhS4w/y
+ Y3sXDFpPMupfeoOr1l/VEgqe/X4cgIZFcjiD1X+Fh5BJqF2hLkVThnwalzx/NMt5BZ19
+ WwRSwgADEnD7hG7MBhNcOayINhrjcH5hYJGKqV1nL+PT7nOQmjyMtCrwVRR3ZfkpRTyi
+ am8G/isAd1XOZ0qQKwqOzFlZcUxsx9M4eFxxa0ZM8uE+Avl3WZMfnzuXDRW7keGF91vl
+ 3YVA==
+X-Gm-Message-State: AOJu0Yw18WlVLmudQd+mp5wMXdu2yBzEiR+O2zYX3AjXbb5jBMul9jjq
+ 1jvD0JfzpmcRLlRoQw2x8CwttQMRne+rE956vnaeerXdTHfWJg73aKzMOjjPr9S/sNkCRBHLBrq
+ nefGq57cW7+BkHEmr3gFwI3+lgynmO9FHrIsrZMyYzk3thSboMgro
+X-Google-Smtp-Source: AGHT+IHVRD1VuRuiIMmqYKFa5us/osK3NMGX3WS9uiCkSHt2BqdtZPA+W28eBuXizvm+1Lli3pB0u92HaeBj9m4eBv0=
+X-Received: by 2002:a05:6214:4520:b0:6c5:9307:ef6a with SMTP id
+ 6a1803df08f44-6c7bd4eb5e5mr24864636d6.18.1726817152993; Fri, 20 Sep 2024
+ 00:25:52 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240804150955.3521296-1-jonas@kwiboo.se>
- <b96a6544-05a9-46a0-8be0-379835a9c175@cherry.de>
- <5e9cd0ac-bc0b-4c82-aa3e-93339d43b1f1@kwiboo.se>
- <5131e98c-3a6a-49da-ab03-2e61038f9de7@cherry.de>
-In-Reply-To: <5131e98c-3a6a-49da-ab03-2e61038f9de7@cherry.de>
+References: <20240829145802.1827952-1-sjg@chromium.org>
+ <20240829145802.1827952-3-sjg@chromium.org>
+ <20240829172433.GJ2479150@bill-the-cat>
+In-Reply-To: <20240829172433.GJ2479150@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 20 Sep 2024 09:25:40 +0200
-Message-ID: <CAFLszTh=VG09edfCndXi1jX03D1Rt7SLMQG68CD5koCTph6yDQ@mail.gmail.com>
-Subject: Re: [PATCH] serial: ns16550: Try get serial clock rate from DT before
- CLK
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Jonas Karlman <jonas@kwiboo.se>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
+Date: Fri, 20 Sep 2024 09:25:42 +0200
+Message-ID: <CAFLszThymX0x9y28MwAcRVBE38NL4+tKBjD0a4C8SnQXu0s6-g@mail.gmail.com>
+Subject: Re: [PATCH 02/19] serial: ns16550: Allow clocks to be missing
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Stefan Roese <sr@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,58 +85,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 5 Aug 2024 at 12:05, Quentin Schulz <quentin.schulz@cherry.de> wrote:
->
-> Hi Jonas,
->
-> On 8/5/24 11:02 AM, Jonas Karlman wrote:
-> > Hi Quentin,
-> >
-> > On 2024-08-05 09:19, Quentin Schulz wrote:
-> >> Hi Jonas,
-> >>
-> >> On 8/4/24 5:09 PM, Jonas Karlman wrote:
-> >>> Initializing a clock driver to read a known static clock rate can take
-> >>> some time at U-Boot proper pre-reloc phase.
-> >>>
-> >>> Change to first try and read clock rate from DT to speed up boot time,
-> >>> fall back to getting the clock rate from clock driver.
-> >>>
-> >>> This help reduce boot time by around:
-> >>> - ~35ms on a Radxa ROCK Pi 4 (RK3399)
-> >>> - ~15ms on a Radxa ZERO 3W (RK3566)
-> >>> Time that is wasted getting a static rate known at compile time.
-> >>>
-> >>
-> >> I guess this also makes some board perform worse as well, the ones
-> >> without a clock-frequency set?
-> >
-> > I do not expect that this change will add anything to existing boot
-> > time, however in some circumstances it may reduce the boot time.
-> >
-> > Before this change the rate was retrieved using first successful of:
-> >
-> > 1. clk_get_rate()
-> > 2. clock-frequency prop from DT
-> > 3. CFG_SYS_NS16550_CLK
-> >
-> > This patch swap 1. and 2. so driver first will try to use any rate that
-> > may have been defined in DT, thus possible skip a probe of the clock.
-> >
-> > Boot time is only saved/reduced if the serial driver was the only device
-> > that needed something from clock device in current phase.
-> >
-> > As long as the DT contain correct rate in clock-frequency prop or no
-> > such prop this patch is not expected to change anything.
-> >
->
-> Well yes, that's what I meant. If there's a board without DT or without
-> clock-frequency in the DT, then this board's boot would be slowed down.
->
-> The ns16550 being used for many many different SoCs, I don't think we
-> can necessarily assume everyone is using DM.
->
-> All of this is merely me highlighting this fact, not arguing whether
-> this patch should be merged or not :)
+Hi Tom,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Thu, 29 Aug 2024 at 19:24, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Thu, Aug 29, 2024 at 08:57:45AM -0600, Simon Glass wrote:
+> > Allow serial init when clock support is not enabled in a particular phase.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >  drivers/serial/ns16550.c | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/drivers/serial/ns16550.c b/drivers/serial/ns16550.c
+> > index 6fcb5b523ac..5cda273623d 100644
+> > --- a/drivers/serial/ns16550.c
+> > +++ b/drivers/serial/ns16550.c
+> > @@ -570,7 +570,7 @@ int ns16550_serial_of_to_plat(struct udevice *dev)
+> >               err = clk_get_rate(&clk);
+> >               if (!IS_ERR_VALUE(err))
+> >                       plat->clock = err;
+> > -     } else if (err != -ENOENT && err != -ENODEV && err != -ENOSYS) {
+> > +     } else if (err != -ENOENT && err != -ENODEV && err != -ENOSYS && err != -EALREADY) {
+> >               debug("ns16550 failed to get clock\n");
+> >               return err;
+> >       }
+>
+> Your patch and
+> https://patchwork.ozlabs.org/project/uboot/patch/20240804150955.3521296-1-jonas@kwiboo.se/
+> would seem to be in conflict and I'm not sure what's the best thing
+> moving forward.
+
+That patch seems good to me. For this one, I will drop it from the
+next version. The existing conditions should be enough for the case I
+have (clocks in the previous phase but not in this one) so long as
+-ENOSYS is returned.
+
+Regards,
+Simon
