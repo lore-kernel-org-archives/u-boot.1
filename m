@@ -4,86 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14867CF9C5A
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 16:34:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66BACCF9C5A
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 16:35:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3EF9588753;
-	Fri, 20 Sep 2024 18:34:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C3F2E88753;
+	Fri, 20 Sep 2024 18:35:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lSROUIQD";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RZODKlkb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 09496887D1; Fri, 20 Sep 2024 18:34:20 +0200 (CEST)
-Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
- [IPv6:2607:f8b0:4864:20::f2e])
+ id 0DCB6886DF; Fri, 20 Sep 2024 18:35:17 +0200 (CEST)
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
+ [IPv6:2607:f8b0:4864:20::734])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D894F886DF
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 18:34:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ED05B8891B
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 18:35:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2e.google.com with SMTP id
- 6a1803df08f44-6c358b725feso15117376d6.1
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 09:34:17 -0700 (PDT)
+Received: by mail-qk1-x734.google.com with SMTP id
+ af79cd13be357-7a9ae0e116cso223938285a.1
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 09:35:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1726850057; x=1727454857; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1726850114; x=1727454914; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Fvo0TY2birhXxxpc7EHY/nU7G2BaiMeEzsYYmds/D0E=;
- b=lSROUIQD+OacMJxd5kbDmVCCV+wQw62OOdVuNhuJOexE/pgs19ucJMSYGTIV6RmcSh
- YPFS73bvo6Sw9VJ2p6GZYtWY7A1EmdE89VCoqS0MSVXeDmSXEyKf/smo2lTPYJW59Nul
- EgaPN+SbSNHCUUDOielO7g0nVl2flEt0kbegk=
+ bh=/Qko8wVpI5sy0x3m3sRCPcEIB+BQ1uuZhZ/cpoA76ic=;
+ b=RZODKlkbQJCcxD5sg0bVUcyqyf7NLZNnyQLCZyL70Q6cUpclBkP2UB7jHqtmDLMO0r
+ AGa4+XI4ASa1BujM28d6IknoLB3VEbJKv+8sGwl6YspI9tql2UaLajv32v8MaHc77Wt7
+ CcEEvH0t5w5A8FdmPO3A5iJOBA4xtsD1DEFrA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726850057; x=1727454857;
+ d=1e100.net; s=20230601; t=1726850114; x=1727454914;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Fvo0TY2birhXxxpc7EHY/nU7G2BaiMeEzsYYmds/D0E=;
- b=el4ne1W1Its8Wni74ZJ73joJZr9Jm3jJy1hB3e4zgCuR4v9i0Qm10ai2UXbjWo8G1f
- PfVOF2eHSXjCNWTGHb0YMcuZ9pfybaOmOSfLg7s0LB9ZIrOtAoh487mIS4cTvtUnmyJu
- lveyJJVgbeUtBh4Mq8Df7E4PIfNpBsRFfakzojpgZAVJ9ewPrhxIBieNwLITBNSlnkvt
- n04DPksIr8htwzDYXmphNc+3AT9CBaXpTxmzdvZGfOCKRhEF1FshfgooD2ucuoJhun7x
- b8h5Rhk/IDDKCUefzt8qK+3cRuMn4qG7pLJ5twOhz3h98tLzXxLNmZTWwesBWcJe/yK4
- tuaQ==
-X-Gm-Message-State: AOJu0YxBSXTOpw2P2ttf1hZ1t2zKiylueIG/iQWQECj2pCBN5svHWzOJ
- gaU9JqScMH0N4p7VoY2A9hsWGVTV4nAj0rDqU1PkhLUybqhSLf6Ve66LF130wOE=
-X-Google-Smtp-Source: AGHT+IEE/iazq2Vfx77/y0Oc3KF7WP3OLDbIdjR9unrRQHaFB50legPkETE8NfxcZBBx5VEABhXAGA==
-X-Received: by 2002:a05:6214:2d41:b0:6c5:9df9:58f9 with SMTP id
- 6a1803df08f44-6c7bc6a627amr52400306d6.7.1726850056581; 
- Fri, 20 Sep 2024 09:34:16 -0700 (PDT)
+ bh=/Qko8wVpI5sy0x3m3sRCPcEIB+BQ1uuZhZ/cpoA76ic=;
+ b=S9y/RwtBB8g5bi9ihTsWHLQgUQBBcrfnBz9Lgsm6pb/CrPMG1veT+G87/J8aTynkRF
+ ql7PT8UjnG9aDrgkrUS2ITiPK+dZTa+P5YsyQR3wH9YkeiGP9hpUvClfjnEO7A73rGgj
+ 7uzmFlo0eKkqqwuFwmV/QTneZczCDZqUqPe9BAIYcazOkWdWa0JsGpUOqvn6OiTp/22R
+ WcYbTlBqLj8E3zZp+8f8wg3/GFfSFiikkWv1NwPg+CYWuRQ8ta8bSkeERFzPIGspgKAE
+ FIWnhDdRjqv8XIi0LwKtkMxWTuT5lt6ol4XLJWarZfl5Fo3XfjUWPzPueCCDaRvxvAss
+ LUpw==
+X-Gm-Message-State: AOJu0YxCvopbP+AlGtTkRz0NDvobqNNWd3BzP00rB+n+aSOPaq7h+d/m
+ 7AZ8b3dWABw9qQhHMvhvYZpE0HSjibHa67uGvdZDnFwQNMDpC7mjKXg/LrDOkWU=
+X-Google-Smtp-Source: AGHT+IFnylby2ZKxaHsDQsLa+1Kqq4sdJZi1IcZ6oTZalCzVnxhwbn9EJcz7hcM+Oqmi8kSrtnRx0Q==
+X-Received: by 2002:a05:6214:4b0c:b0:6c5:2fce:4904 with SMTP id
+ 6a1803df08f44-6c7bc6d3235mr54331026d6.12.1726850113780; 
+ Fri, 20 Sep 2024 09:35:13 -0700 (PDT)
 Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6c75e44bf85sm19641236d6.13.2024.09.20.09.34.12
+ 6a1803df08f44-6c75e461464sm19609036d6.38.2024.09.20.09.35.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Sep 2024 09:34:14 -0700 (PDT)
-Date: Fri, 20 Sep 2024 10:34:10 -0600
+ Fri, 20 Sep 2024 09:35:13 -0700 (PDT)
+Date: Fri, 20 Sep 2024 10:35:10 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Eddie James <eajames@linux.ibm.com>, Igor Opaniuk <igor.opaniuk@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maxim Moskalets <maximmosk4@gmail.com>,
- Paul-Erwan Rio <paulerwan.rio@gmail.com>,
- Raymond Mao <raymond.mao@linaro.org>,
- Roman Stratiienko <r.stratiienko@gmail.com>
-Subject: Re: [PATCH 03/19] boot: Allow FIT to fall back from best-match option
-Message-ID: <20240920163410.GF4252@bill-the-cat>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH 06/19] malloc: Show amount of used space when memory runs
+ out
+Message-ID: <20240920163510.GG4252@bill-the-cat>
 References: <20240829145802.1827952-1-sjg@chromium.org>
- <20240829145802.1827952-4-sjg@chromium.org>
- <20240904222531.GA2479150@bill-the-cat>
- <CAFLszTieSjNrzT4i8pbjDXza==+VhHOG8sSHmU8aDykR3ypZzQ@mail.gmail.com>
+ <20240829145802.1827952-7-sjg@chromium.org>
+ <20240829172626.GK2479150@bill-the-cat>
+ <CAFLszThacdwBNMP8Rq3uEXd=MT-8NpVXHOjhcMrdvLR-KrNPXg@mail.gmail.com>
+ <20240920145942.GC4252@bill-the-cat>
+ <CAFLszThSLXLOxMVQBCwpuLEOm6CPx0N-p2taz9Z6NEw1-P86Gg@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="doQDuVUr3BI1xGLU"
+ protocol="application/pgp-signature"; boundary="NDgfQoXeKQNsibpX"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTieSjNrzT4i8pbjDXza==+VhHOG8sSHmU8aDykR3ypZzQ@mail.gmail.com>
+In-Reply-To: <CAFLszThSLXLOxMVQBCwpuLEOm6CPx0N-p2taz9Z6NEw1-P86Gg@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,60 +96,80 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---doQDuVUr3BI1xGLU
+--NDgfQoXeKQNsibpX
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Sep 20, 2024 at 05:59:00PM +0200, Simon Glass wrote:
+On Fri, Sep 20, 2024 at 06:04:01PM +0200, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Thu, 5 Sept 2024 at 00:25, Tom Rini <trini@konsulko.com> wrote:
+> On Fri, 20 Sept 2024 at 16:59, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Thu, Aug 29, 2024 at 08:57:46AM -0600, Simon Glass wrote:
-> > > When the best-match feature fails to find something, use the provided
-> > > config name as a fallback. The allows SPL to select a suitable config
-> > > when best-match is enabled.
+> > On Fri, Sep 20, 2024 at 09:25:44AM +0200, Simon Glass wrote:
+> > > Hi Tom,
 > > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > ---
+> > > On Thu, 29 Aug 2024 at 19:26, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Thu, Aug 29, 2024 at 08:57:49AM -0600, Simon Glass wrote:
+> > > > > Show a bit more information when malloc() space is exhausted and
+> > > > > debugging is enabled.
+> > > > >
+> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > ---
+> > > > >
+> > > > >  common/malloc_simple.c | 3 ++-
+> > > > >  1 file changed, 2 insertions(+), 1 deletion(-)
+> > > > >
+> > > > > diff --git a/common/malloc_simple.c b/common/malloc_simple.c
+> > > > > index 5a8ec538f8f..f2b3dc53689 100644
+> > > > > --- a/common/malloc_simple.c
+> > > > > +++ b/common/malloc_simple.c
+> > > > > @@ -26,7 +26,8 @@ static void *alloc_simple(size_t bytes, int ali=
+gn)
+> > > > >       log_debug("size=3D%lx, ptr=3D%lx, limit=3D%x: ", (ulong)byt=
+es, new_ptr,
+> > > > >                 gd->malloc_limit);
+> > > > >       if (new_ptr > gd->malloc_limit) {
+> > > > > -             log_err("alloc space exhausted\n");
+> > > > > +             log_err("alloc space exhausted %lx %x\n", new_ptr,
+> > > > > +                     gd->malloc_limit);
+> > > > >               return NULL;
+> > > > >       }
+> > > >
+> > > > Since debugging is enabled you should update the error message to s=
+ay
+> > > > what the values mean...
 > > >
-> > >  boot/image-fit.c | 19 ++++++++++---------
-> > >  include/image.h  |  4 +++-
-> > >  2 files changed, 13 insertions(+), 10 deletions(-)
+> > > OK, will do. This message is shown without debugging enabled, so I do
+> > > want to keep it short.
 > >
-> > Don't we need a documentation update? If no, because this mechanism
-> > isn't well documented, can you please follow up with that? Thanks.
+> > The commit message says "and debugging is enabled", so is that the case
+> > or not?
 >=20
-> CONFIG_FIT_BEST_MATCH is mentioned in the spec [1]
->=20
-> But re the fallback, I'm not sure where that should be documented.
-> Perhaps add a note at [2]?
+> Oh, I see. It should say 'not' :-) I will send a new patch.
 
-Should we be using the mechanism that I'd swear the documentation build
-process has, to fetch an external document? I think we would have a
-better user/developer experience if our documentation explained how to
-use a feature, as that's where people will tend to look first.
+Thanks!
 
 --=20
 Tom
 
---doQDuVUr3BI1xGLU
+--NDgfQoXeKQNsibpX
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbto/8ACgkQFHw5/5Y0
-tyz7dQv9EGE2ZE52C07jVhXNxmsMjIwMorTMZGehf4E6KWVrc+OSjc4ueWkaTh/U
-sGqm6Ni0UWtTPhomdpHDbYvyJrVQIUzHujY1kdEAyloIdTEoWeCWb+j7Zby1ksjE
-zSWRw2z2RGTlELJrM2QXVnYy8kOSrGdbJZqjKF6V/Nx36WOcmcgp8ackblWHkBSy
-IiS2V/jCQihRIaFdqcIMwScuBSlk3jJjqj4SseaSuGtHg1zEzqQA0fxGTmnSc8I6
-67RTyb7CVQ/GGxpvNX38q211U4HH/vOPAAZE2BMI85ETqcGGUZZq+pp6ZEq475qr
-nm8jC4/eJ35cMmHmKby09nnCYmSk3F/0ndI24JkeKedHyEggu98tueO2umeSsAkf
-Nkx8Ivm5gF2/4ojNNj8vxglU6cH9PfHAU4jTiWw01j1gen/gT7tjE15gsSlzsJlN
-FpYasXzmsuNkWv0uhgpGGHumHIGkuYjXw/GkKfevITxVy1hbcNb2hdnwd33iDVFN
-rInIhNlZ
-=/pt8
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbtpD4ACgkQFHw5/5Y0
+tyx6ywv9GdHC3BiGNw0h3/z2D2+bRWjQqInQ07ab/5TaSJIWAu7H7N5+DCFtIkDO
+XC48b0c+rJ6oWD4YTRvbcvfOzmBPMz4+dULgtZ81+CZVNkY/lobOrVWsGR+TkGH9
+PYjeYwB0Bm418lGUnkOahafl52bhiOt0voiWyO0ciZpVpjgSupt103Mp9rdIZCkL
+LJyZNDPaHlhB0IHtkyPf3/Bpwvgj9ZeOB4qm4XIXvH1ioNYAUgvzpAOvcSU3L5+v
+oMKTfQWDO/25yOXM0Mv+uDZ7wDG1yjhJXdcOklxeBLJt2glW+jmapKFOCp9aqpOr
+Fc8RCaR0Rt795T2TG4k3gi0/WYHhTgRx6EZBfiRc0WahsOZYgAqrgbRAcf0yQecp
+FhgVPhoPFQ4cnks3Vo/OaWZJdEur6ww4wB3soQGX+JgBw/WaxcDF5r24A2S5yKUW
+YM4rX/L8wrQzEOEVF9Ajo2QM6QPwuzGntzsUYINHF/oBdDWbdHeZlDBbr/yhDK0k
+8FLwMaVw
+=00S/
 -----END PGP SIGNATURE-----
 
---doQDuVUr3BI1xGLU--
+--NDgfQoXeKQNsibpX--
