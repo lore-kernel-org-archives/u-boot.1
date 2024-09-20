@@ -4,72 +4,142 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4E4CCF9C59
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 16:05:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66F00CF9C59
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 16:11:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EFF9788CED;
-	Fri, 20 Sep 2024 18:04:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id D95D48880F;
+	Fri, 20 Sep 2024 18:11:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=infinera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SspqEAC3";
+	dkim=pass (2048-bit key; unprotected) header.d=infinera.com header.i=@infinera.com header.b="UNaxoHY/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46C4E88CED; Fri, 20 Sep 2024 18:04:27 +0200 (CEST)
-Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
- [IPv6:2607:f8b0:4864:20::42f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CA4F08884F; Fri, 20 Sep 2024 18:11:26 +0200 (CEST)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on2062a.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:200a::62a])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A13688D6A
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 18:04:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 787A48852D
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 18:11:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=infinera.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x42f.google.com with SMTP id
- d2e1a72fcca58-71971d20ad9so1588164b3a.3
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 09:04:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726848256; x=1727453056; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=wsLhQEY1zMw6PbYBYPTVi3zYZf/HKnDbqjBUk03XZvg=;
- b=SspqEAC3HdtAydpOB0Kx4oK57XG9VKClnJnvMhWqESRU2F8PT/OOAsLggPRhdjsCzZ
- 4JIpxqAJ7GVo6n329n/iOHwJdvmgwFFBLisdYsrX4a6B+wQtFhOl0iU5tiVuIfEX/sXa
- stL49h34R3P14F8qm8sPnQD8uxCANSq6h9ryw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726848256; x=1727453056;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=wsLhQEY1zMw6PbYBYPTVi3zYZf/HKnDbqjBUk03XZvg=;
- b=XwurRUYLae0YquAa3sDeT+UF546CkzLOEUC5ZFa/LcvVrMhpEG3DOamDG3kg0jRxSD
- 8B+tD9d8u8N4W0v4dANUZIQnf6SUVkRNZXZDYT22EDj0GShecoMST+AmYuwtyuRvCoLu
- HJhlFsbAdCa1AMWS+TvfiCfxFbY6G/AjLvK4NO2N5/AXrPAxSeBpBE839U3ewLwDHCQa
- MZtfT/GpN1UwNjj5ghpS/UGzR3Z9X8Swvm04ss6up51hYZIH4bgZeHY4WCrXTSRI1dJc
- rQmCGd6cf5id59vOR/Cd+6IKg9gmese0/1G9Abg3FHbjFyJEuXjYrggNVRc4kLyRh+MB
- +img==
-X-Gm-Message-State: AOJu0Ywg5uBOvecAxCnA2LIqdKr+e4Zjc4ZYx+bDko8OILZok72g/D5+
- UwGHtxM60ohk7jHIB8n1C1j+3F7a1J+KL6hnGW53fo3WLlL3wQAk2zYlS2bTo8E7aEPeMldqQNg
- LdhHPJrftjEzuDwXmKUyLnuyF5CHZc+btgFtgz+9XKnp/jq76gDLc
-X-Google-Smtp-Source: AGHT+IFTnVfyxFDTe9PgR7T7dOokJ/YyeQjqIJnpTVQr5V0ejjM4FS0mYB6l7xgFVsbMB2Cmw8683IzfowSzPumXwng=
-X-Received: by 2002:a05:6a00:2da7:b0:714:2069:d917 with SMTP id
- d2e1a72fcca58-7199cab1965mr4785151b3a.25.1726848256594; Fri, 20 Sep 2024
- 09:04:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=Joakim.Tjernlund@infinera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=YSah1tocyHE3cIg3BbIVjaVbZWMASaDYN+peMitIjoVwiTI0mnGMfaTiiH2+iLy/vc6LSLjciEkXEX5khAHBw2bsQrfHNK7rMtcyEtCnAHCCAU7JXZ2FXiBZwkojIZ1DB/2UI4AWUJs97K5RKsYIUB3bJB8O0I8nbFzrEL69S5R8L/ynXkHoRK3NEeD54Q/I9RAnSM3vikOrZ3KybmtpwujxRrP3zBzPOfSIizZCXOm1cV6lvgkta7g8D8+FBtKFZorJirk9AyGwHrDV+IClxPM4nYwpNAnlmUvtozexbiJq0y/Y6GvfkpANyLAJNRUJ/1MKBHIrD2Hg5Fk2QaicfQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=zidr86wTp7U86DIliEs0SpLZbJIDwCIqLABS3k54ClA=;
+ b=c43HmZ1N1Bwjp2EMvt0DRMyvdBMkxkWOjjHS1v+nS1Q8vPNdZB8zrCXIG9BZ+1kC9o2ACISd41K/C81ZtGdkQYQnAqzK3S/jp7vFpStSlxlb2OspvApBrXcz+1cSiDT3Fuu3mL3WEYthr6Aac7G3Meq9Gl9liM52caC/EA9mSwjCW3jxNZZAK/QeD5+y4vA9/Xzo/a9Bvkt/m8PLIfyGS4+BU8BD/5oFCV/JVV7T4SCLhIShMuaJQp2OZ3q0N3pFeQtPaTVWjuNhKC88fvVAhXs9ZoWUYKtz1Sv8J1XNxY9t1tzmsXt2Y2FpkRKDdwaC/ijtr1lFGR2d+Auir+hTWw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 8.4.225.30) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=infinera.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=infinera.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=infinera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=zidr86wTp7U86DIliEs0SpLZbJIDwCIqLABS3k54ClA=;
+ b=UNaxoHY/sFlk25N74e6kwGaKOyaYW4zucBFZwIPDNqEQjj+YI/UBVfBKjAqw1/58tFSoafnb80qjjTUS35p7//tsXXBTSxTl0jFrtyvZTqdSN4TXLUNwG2xmsd/QzLA1N9MgYaQjl8do8OK8Tn51UmzShHMkZpvwNC+8OuW4wJLXsBmu0RrB0WM9CgB13nsn/NExCNYFbj6eWJH4iL5sfaURnaSaD/Wm8lCYS3mIxyE8aJm5+rTOCnR5LWJtwQb1cyeevvkqGApkmHWFJ90jdgKefP/5UyGYqHI4pBCRKhdcTYe4ULLK3wanNNtsnYr/7J0+RTENFu3CYivpCcRBNg==
+Received: from BN9PR03CA0490.namprd03.prod.outlook.com (2603:10b6:408:130::15)
+ by SA0PR10MB6426.namprd10.prod.outlook.com (2603:10b6:806:2c0::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8005.7; Fri, 20 Sep
+ 2024 16:11:20 +0000
+Received: from BN1PEPF00006000.namprd05.prod.outlook.com
+ (2603:10b6:408:130:cafe::f4) by BN9PR03CA0490.outlook.office365.com
+ (2603:10b6:408:130::15) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7939.30 via Frontend
+ Transport; Fri, 20 Sep 2024 16:11:20 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 8.4.225.30)
+ smtp.mailfrom=infinera.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=infinera.com;
+Received-SPF: Pass (protection.outlook.com: domain of infinera.com designates
+ 8.4.225.30 as permitted sender) receiver=protection.outlook.com; 
+ client-ip=8.4.225.30; helo=owa.infinera.com; pr=C
+Received: from owa.infinera.com (8.4.225.30) by
+ BN1PEPF00006000.mail.protection.outlook.com (10.167.243.232) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7918.13 via Frontend Transport; Fri, 20 Sep 2024 16:11:20 +0000
+Received: from sv-ex16-prd.infinera.com (10.100.96.229) by
+ sv-ex16-prd.infinera.com (10.100.96.229) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2507.39; Fri, 20 Sep 2024 09:11:18 -0700
+Received: from sv-smtp-pd1.infinera.com (10.100.98.81) by
+ sv-ex16-prd.infinera.com (10.100.96.229) with Microsoft SMTP Server id
+ 15.1.2507.39 via Frontend Transport; Fri, 20 Sep 2024 09:11:18 -0700
+Received: from se-metroit-prd1.infinera.com ([10.210.32.58]) by
+ sv-smtp-pd1.infinera.com with Microsoft SMTPSVC(10.0.17763.1697); 
+ Fri, 20 Sep 2024 09:11:17 -0700
+Received: from se-jocke-lx.infinera.com (se-jocke-lx.infinera.com
+ [10.210.73.28])
+ by se-metroit-prd1.infinera.com (Postfix) with ESMTP id 50F70F40077;
+ Fri, 20 Sep 2024 18:11:17 +0200 (CEST)
+Received: by se-jocke-lx.infinera.com (Postfix, from userid 1001)
+ id 470F74D3ED9C; Fri, 20 Sep 2024 18:11:17 +0200 (CEST)
+From: Joakim Tjernlund <joakim.tjernlund@infinera.com>
+To: <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
+CC: Mykyta Iziumtsev <miziumtsev@infinera.com>
+Subject: [PATCH] ICEXMSW-2822: Add mkimage secp521r1 ECDSA curve support
+Date: Fri, 20 Sep 2024 18:10:18 +0200
+Message-ID: <20240920161114.916381-1-joakim.tjernlund@infinera.com>
+X-Mailer: git-send-email 2.44.2
+In-Reply-To: <CAFLszTj0HNbEy7VSaDA=Vd05+EWT1rxcDOBxu6e=BY1aQ54ZPg@mail.gmail.com>
+References: <CAFLszTj0HNbEy7VSaDA=Vd05+EWT1rxcDOBxu6e=BY1aQ54ZPg@mail.gmail.com>
 MIME-Version: 1.0
-References: <20240829145802.1827952-1-sjg@chromium.org>
- <20240829145802.1827952-7-sjg@chromium.org>
- <20240829172626.GK2479150@bill-the-cat>
- <CAFLszThacdwBNMP8Rq3uEXd=MT-8NpVXHOjhcMrdvLR-KrNPXg@mail.gmail.com>
- <20240920145942.GC4252@bill-the-cat>
-In-Reply-To: <20240920145942.GC4252@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 20 Sep 2024 18:04:01 +0200
-Message-ID: <CAFLszThSLXLOxMVQBCwpuLEOm6CPx0N-p2taz9Z6NEw1-P86Gg@mail.gmail.com>
-Subject: Re: [PATCH 06/19] malloc: Show amount of used space when memory runs
- out
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-OriginalArrivalTime: 20 Sep 2024 16:11:18.0280 (UTC)
+ FILETIME=[B9BDD080:01DB0B77]
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN1PEPF00006000:EE_|SA0PR10MB6426:EE_
+X-MS-Office365-Filtering-Correlation-Id: c34804cb-3d3a-4704-7611-08dcd98edd89
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|36860700013|376014|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?aMCoYMAssqtp32V1hLk8EngbipCchDGXtAtk/rF4xUlU8hjEzyW50iRIyqjb?=
+ =?us-ascii?Q?1IMjuf56G6q6r72tWLMdx8IRoYVCurXiwGpMp5ZNjdOk8je4IcQQu9S2gwqt?=
+ =?us-ascii?Q?TYPjotnwYL4p7moX8AtNP3SNj0boDVsqLOEzxHEI+hCCIibm1zGn98iCWLoB?=
+ =?us-ascii?Q?V3L2XTy/MmXWuqebUv4KDvPK+g05VzimkvptogVwVtMZepDSO5lxQYq2y0RK?=
+ =?us-ascii?Q?hu1oYd3NTXKPEzPtDYjgJPszv/qIYrf9sBsj5qMIMKyFiqN53ZhafLV1sjgM?=
+ =?us-ascii?Q?c6xDmoiVvzR0EwSEcRS1DW7xR2I1ZBrjpELyfpDagflkjKrN/QOlvL0M0ttH?=
+ =?us-ascii?Q?2R159LZhdT7Z6tLvEkc+kFX0HwS5cKEuRk+aXQyMWy3R8mrySWxwhWoGkRB/?=
+ =?us-ascii?Q?RKPXelrUKdfjuhRM7mnvE4ge4Yk7RAv5vZtgJC0aARig3lopctaV573V9csq?=
+ =?us-ascii?Q?0xmlQcEZW7imB4lCe9Bt4h/0+nu9pzQpBtHjPEt6CXcIwpdjXb6EpQKFwITm?=
+ =?us-ascii?Q?IBwjJQwuSAMlPX6HSR+GpRFK0SkEWN6YqrrJp9b2vjrV6g24HNhj5AXZwjhg?=
+ =?us-ascii?Q?mfHaIhyG50W0z+8bIfRpOvYBJk17V9c6kNlor3wqxk0+RmGQjYL80+Ut7+4W?=
+ =?us-ascii?Q?rkAY4fZ9aPkHQbl4EdSYggDT/g3rXlviF2BhLaaHVtLBfvJciVj40mpOI3wd?=
+ =?us-ascii?Q?4YvKgs5anGN+wXl6sqyBlxb27LvW5DNCIL/mgwxaVkz3brpq01GvJEFC5QrX?=
+ =?us-ascii?Q?9/e7OmcfuXIdDXj13BQnsv+sbokTnGkaIXSiaTWOobux52xAasHFMEfKtMoZ?=
+ =?us-ascii?Q?3+/7oWxR1gqgVNh1T9HIlmVsdIZf/KK7OfZgM6doFc80Zy1nO8YA3Wl9nudz?=
+ =?us-ascii?Q?TT6eEEEzFp9kmn/vEeHds+0S+X7YvHfUD91wGgkRjG6CVO2gF2455rFffWzp?=
+ =?us-ascii?Q?b1FOdVW03od1r5efjALocC17Sm0qTyb7tnmG0v/zHGntzw6VJFC4MD0SrRH+?=
+ =?us-ascii?Q?JhRgpjhcXxrEty6xwL4LhaQDq0GCEt0wcUJhDjdckzt7BtPwlWvUzlikE1mY?=
+ =?us-ascii?Q?gk/wHg/2CNsUTfH22nf8ic7HEydweozW7Jm/04VTaz3msBfVunJ1AED7ij0p?=
+ =?us-ascii?Q?ae8LfPClfvHe72oU7SO6xw7BZbl/y/ov8N+EgC4qySVEMB6m1KxMycPyJO0d?=
+ =?us-ascii?Q?wDAE3ZOy170jZExdTb9IKZE1GYDVzdHTn5KpjF5yUdFsBWrvB2FYiAE+1PZB?=
+ =?us-ascii?Q?p8iZNHs2kFPBn8f85whJbhrqURQ8l52VeTU/Xw5DfdCH2hJLs+zT/gbNmDOB?=
+ =?us-ascii?Q?xA1glfO6jHcxKTPEpRymME3Veq5UF6UUzFrrqOIJFCjx/1PdWW17Uk6frdoQ?=
+ =?us-ascii?Q?EnM0crgD57OUxe51j7t4ltgk8X8SHJ4HJr/txNQ+pnJ1Ycm8xUaWrQWIB9F4?=
+ =?us-ascii?Q?XhfPilnIs/5IEiQNYbsYUDjXpFQarC5W?=
+X-Forefront-Antispam-Report: CIP:8.4.225.30; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:owa.infinera.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(36860700013)(376014)(82310400026); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: infinera.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Sep 2024 16:11:20.3562 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: c34804cb-3d3a-4704-7611-08dcd98edd89
+X-MS-Exchange-CrossTenant-Id: 285643de-5f5b-4b03-a153-0ae2dc8aaf77
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=285643de-5f5b-4b03-a153-0ae2dc8aaf77; Ip=[8.4.225.30];
+ Helo=[owa.infinera.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF00006000.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR10MB6426
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,49 +156,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+From: Mykyta Iziumtsev <miziumtsev@infinera.com>
 
-On Fri, 20 Sept 2024 at 16:59, Tom Rini <trini@konsulko.com> wrote:
->
-> On Fri, Sep 20, 2024 at 09:25:44AM +0200, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Thu, 29 Aug 2024 at 19:26, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Thu, Aug 29, 2024 at 08:57:49AM -0600, Simon Glass wrote:
-> > > > Show a bit more information when malloc() space is exhausted and
-> > > > debugging is enabled.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > ---
-> > > >
-> > > >  common/malloc_simple.c | 3 ++-
-> > > >  1 file changed, 2 insertions(+), 1 deletion(-)
-> > > >
-> > > > diff --git a/common/malloc_simple.c b/common/malloc_simple.c
-> > > > index 5a8ec538f8f..f2b3dc53689 100644
-> > > > --- a/common/malloc_simple.c
-> > > > +++ b/common/malloc_simple.c
-> > > > @@ -26,7 +26,8 @@ static void *alloc_simple(size_t bytes, int align)
-> > > >       log_debug("size=%lx, ptr=%lx, limit=%x: ", (ulong)bytes, new_ptr,
-> > > >                 gd->malloc_limit);
-> > > >       if (new_ptr > gd->malloc_limit) {
-> > > > -             log_err("alloc space exhausted\n");
-> > > > +             log_err("alloc space exhausted %lx %x\n", new_ptr,
-> > > > +                     gd->malloc_limit);
-> > > >               return NULL;
-> > > >       }
-> > >
-> > > Since debugging is enabled you should update the error message to say
-> > > what the values mean...
-> >
-> > OK, will do. This message is shown without debugging enabled, so I do
-> > want to keep it short.
->
-> The commit message says "and debugging is enabled", so is that the case
-> or not?
+Adds support for secp521r1 ECDSA in mkimgage
+---
+ include/u-boot/ecdsa.h      | 1 +
+ lib/ecdsa/ecdsa-libcrypto.c | 2 +-
+ tools/image-sig-host.c      | 7 +++++++
+ 3 files changed, 9 insertions(+), 1 deletion(-)
 
-Oh, I see. It should say 'not' :-) I will send a new patch.
+diff --git a/include/u-boot/ecdsa.h b/include/u-boot/ecdsa.h
+index 6e0269e3ae..ea37217d86 100644
+--- a/include/u-boot/ecdsa.h
++++ b/include/u-boot/ecdsa.h
+@@ -66,5 +66,6 @@ int ecdsa_verify(struct image_sign_info *info,
+ /** @} */
+ 
+ #define ECDSA256_BYTES	(256 / 8)
++#define ECDSA521_BYTES	((521 + 7) / 8)
+ 
+ #endif
+diff --git a/lib/ecdsa/ecdsa-libcrypto.c b/lib/ecdsa/ecdsa-libcrypto.c
+index d5939af2c5..6cbbdb6680 100644
+--- a/lib/ecdsa/ecdsa-libcrypto.c
++++ b/lib/ecdsa/ecdsa-libcrypto.c
+@@ -108,7 +108,7 @@ static size_t ecdsa_key_size_bytes(const EC_KEY *key)
+ 	const EC_GROUP *group;
+ 
+ 	group = EC_KEY_get0_group(key);
+-	return EC_GROUP_order_bits(group) / 8;
++	return (EC_GROUP_order_bits(group) + 7) / 8;
+ }
+ 
+ static int read_key(struct signer *ctx, const char *key_name)
+diff --git a/tools/image-sig-host.c b/tools/image-sig-host.c
+index d0133aec4c..21b4fa5d39 100644
+--- a/tools/image-sig-host.c
++++ b/tools/image-sig-host.c
+@@ -76,6 +76,13 @@ struct crypto_algo crypto_algos[] = {
+ 		.add_verify_data = ecdsa_add_verify_data,
+ 		.verify = ecdsa_verify,
+ 	},
++	{
++		.name = "secp521r1",
++		.key_len = ECDSA521_BYTES,
++		.sign = ecdsa_sign,
++		.add_verify_data = ecdsa_add_verify_data,
++		.verify = ecdsa_verify,
++	},
+ };
+ 
+ struct padding_algo padding_algos[] = {
+-- 
+2.44.2
 
-
-- Simon
