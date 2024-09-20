@@ -4,75 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D384CF58E0
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 07:26:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A24FCF58E3
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 07:27:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4FBAE893DE;
-	Fri, 20 Sep 2024 09:25:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AC262893E3;
+	Fri, 20 Sep 2024 09:25:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Nss5sCwX";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g/BDjMc8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CCC3893EF; Fri, 20 Sep 2024 09:25:17 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 98EDB893E8; Fri, 20 Sep 2024 09:25:19 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ABD82893BF
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 09:25:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 803F0893E1
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 09:25:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-42e5e1e6d37so15783305e9.3
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 00:25:15 -0700 (PDT)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-42cb806623eso14235385e9.2
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 00:25:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726817115; x=1727421915; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1726817110; x=1727421910; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LwBkOs9bDu7Hw+se9VudOUbKN6FDGhNYn8RcAN9fPrA=;
- b=Nss5sCwXfewB6ZzqOaqk18pWfy03GJqbnO5A0QKd4mTtCf+BC9bDJStQ4XnJkVVEmt
- SmCRkAU/bDkYDnoHkjQCF8/seTGUwbRajzHjjHIZV1LXZ5ttUgbV2yHpo+v8st68JGs3
- H7qYLBLq0sG5+fn1QfKlK4liYJiu4habTdjZ4=
+ bh=3OwixvFz10aZ8S3Ea9+iNARHXLqM7Ve08vWOKPqm+9o=;
+ b=g/BDjMc88M1C5R3gOHcdPHSZophT/lBgGmYocIL0VyvNAhT3vwJTRR60XQgjUV5fBt
+ 5bJ88Q6nMiwCvlu0aa+NFIxWJQBhyShAKkAYL4sASzmBfGxnhHtxibikTBMluf/8npd3
+ Agq2yOp02Ak6Cpiwn34+hy7wAQm1QLoJDDSRs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726817115; x=1727421915;
+ d=1e100.net; s=20230601; t=1726817110; x=1727421910;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LwBkOs9bDu7Hw+se9VudOUbKN6FDGhNYn8RcAN9fPrA=;
- b=Xsf2HU1x7k8sSB5njX/ZJtoFnNbWyYtsZOaEBjAb3skFV9SG9+Or2LZNUi5FIYXBVe
- 6NYbnRJz2xARyrcu8KbfbY1mD+lFZejBXtnotOlmlwyIUardDkDKMzMWDIVTIeaZsEvY
- 0Lrpxe9/3s8UQZx9BP056ud8LquHeKitHmYkp4AsHyvzd8/6JanyPcehOVO5Lp0Rkjjy
- 5kenxz+4ELqhWQfh4b9DpyNA2ARM94Es/sJTZwctQ7NWFO15k+CB9agQzVIHF2Dif8px
- xmDyebBMlM4S+EyIC8rXnENlIpF7tFdgwESwLVk3EWK7fruaEpM8Bl8umG9eP6oSGDQ8
- aJng==
-X-Gm-Message-State: AOJu0Yw3mvxAHoTXPv/oqEHyXMhqFb+5agUJxLj6ZvHoQhOAC8r1QKRb
- WtG7CTah+pLko39mkOTd2JSRZLMw0aC0VnYXlfzORwVHV92Hz9fqKPfL94sqQ5siDAX+eVgJvfP
- Sy15t
-X-Google-Smtp-Source: AGHT+IEqVRGSqLhKpTFXa/8QCRa7IJvjIHcx7eYbem8/4kJIslChMffvqghWFSSCE2jnvHYKIw2g5A==
-X-Received: by 2002:a05:600c:5359:b0:42b:af52:2525 with SMTP id
- 5b1f17b1804b1-42e7d143601mr7533315e9.16.1726817114841; 
- Fri, 20 Sep 2024 00:25:14 -0700 (PDT)
+ bh=3OwixvFz10aZ8S3Ea9+iNARHXLqM7Ve08vWOKPqm+9o=;
+ b=RA+mQH7copZ0SUGJc9+PHrLGJkp59eu5IwrGPca7OP1pm4WaBfN0BMr2PJCYvr3Bnh
+ 3xAr6nlBaM9LK2lYDd5ED/1U52vd14flTKLJqhFl4kc+JA8jcfbuBIHe1wb7PamuWxe2
+ 67sgeuqxSrZtqb2B2aLnUOcMxng9s6ZcMPfTUFhMVcsLGPjPDVGTg8/6I+/MFPTKq205
+ wIMGXPfs1dD2ObOhuTbk2huLG0bEsscs3/acCKyuSaaEzAESeqX3KgnfYWSUHHrAdgCG
+ 8jCk63cmx/ZAI5/dNGcvGz4Ye+QrzPv3tqYhZbFCRPBVw+vUKltEvssLDsJds76hhxvU
+ PrFA==
+X-Gm-Message-State: AOJu0YyAC0mYw6hgihGlqp0312WmRp8kNlH64YFGcGU9Pl6LrkuQFaiV
+ cIasSLwuKVgqUdaK3Rj1PKCEKF5UzAJINnLT8n97smHOcMYYbGFP69W1IYkBVa783u8K1HRXXYe
+ eW1sL
+X-Google-Smtp-Source: AGHT+IGMStWQc6w7dVjiFrGlLeiWPMRnm9Ike/ZhBunBcil/zuJ1g+VshNUH4d5nW+I8lp3FwoZU3g==
+X-Received: by 2002:a05:600c:35ce:b0:42c:bfd6:9d4d with SMTP id
+ 5b1f17b1804b1-42e7abe03cdmr12529375e9.2.1726817109606; 
+ Fri, 20 Sep 2024 00:25:09 -0700 (PDT)
 Received: from chromium.org ([185.44.53.103]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42e7540e32fsm41504535e9.9.2024.09.20.00.25.13
+ 5b1f17b1804b1-42e7540e32fsm41504535e9.9.2024.09.20.00.25.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Sep 2024 00:25:14 -0700 (PDT)
+ Fri, 20 Sep 2024 00:25:09 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Greg Malysa <greg.malysa@timesys.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jaehoon Chung <jh80.chung@samsung.com>, Jonas Karlman <jonas@kwiboo.se>,
- Kongyang Liu <seashell11234455@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Paul Barker <paul.barker.ct@bp.renesas.com>, Peng Fan <peng.fan@nxp.com>,
+Cc: Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 12/18] mmc: Support driver model in TPL
-Date: Fri, 20 Sep 2024 09:24:36 +0200
-Message-ID: <20240920072444.134997-13-sjg@chromium.org>
+Subject: [PATCH v2 09/18] armv8: Support not having separate BSS
+Date: Fri, 20 Sep 2024 09:24:33 +0200
+Message-ID: <20240920072444.134997-10-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240920072444.134997-1-sjg@chromium.org>
 References: <20240920072444.134997-1-sjg@chromium.org>
@@ -94,39 +90,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some boards want to use DM_MMC in TPL so add an option for that.
+Separate BSS is current mandatory on armv8 but this is not useful for
+early boot phases. Add support for the combined BSS.
+
+Use an #ifdef to avoid using CONFIG_SPL_BSS_START_ADDR which is not
+valid in this case.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v2:
-- Default this option to off to avoid TPL-code-size increases
+(no changes since v1)
 
- drivers/mmc/Kconfig | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+ arch/arm/cpu/armv8/u-boot-spl.lds | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
-index 982e84dc3bc..22c65681f0a 100644
---- a/drivers/mmc/Kconfig
-+++ b/drivers/mmc/Kconfig
-@@ -61,6 +61,17 @@ config SPL_DM_MMC
- 	  appear as block devices in U-Boot and can support filesystems such
- 	  as EXT4 and FAT.
+diff --git a/arch/arm/cpu/armv8/u-boot-spl.lds b/arch/arm/cpu/armv8/u-boot-spl.lds
+index 215cedd69a8..fed69644b55 100644
+--- a/arch/arm/cpu/armv8/u-boot-spl.lds
++++ b/arch/arm/cpu/armv8/u-boot-spl.lds
+@@ -13,8 +13,10 @@
  
-+config TPL_DM_MMC
-+	bool "Enable MMC controllers using Driver Model in TPL"
-+	depends on TPL_DM && DM_MMC
-+	select TPL_BLK
-+	help
-+	  This enables the MultiMediaCard (MMC) uclass which supports MMC and
-+	  Secure Digital I/O (SDIO) cards. Both removable (SD, micro-SD, etc.)
-+	  and non-removable (e.g. eMMC chip) devices are supported. These
-+	  appear as block devices in U-Boot and can support filesystems such
-+	  as EXT4 and FAT.
-+
- if MMC
+ MEMORY { .sram : ORIGIN = IMAGE_TEXT_BASE,
+ 		LENGTH = IMAGE_MAX_SIZE }
++#ifdef CONFIG_SPL_SEPARATE_BSS
+ MEMORY { .sdram : ORIGIN = CONFIG_SPL_BSS_START_ADDR,
+ 		LENGTH = CONFIG_SPL_BSS_MAX_SIZE }
++#endif
  
- config MMC_SDHCI_ADMA_HELPERS
+ OUTPUT_FORMAT("elf64-littleaarch64", "elf64-littleaarch64", "elf64-littleaarch64")
+ OUTPUT_ARCH(aarch64)
+@@ -56,12 +58,22 @@ SECTIONS
+ 	_end = .;
+ 	_image_binary_end = .;
+ 
++#ifdef CONFIG_SPL_SEPARATE_BSS
+ 	.bss : {
+ 		__bss_start = .;
+ 		*(.bss*)
+ 		. = ALIGN(8);
+ 		__bss_end = .;
+ 	} >.sdram
++#else
++	.bss (NOLOAD) : {
++		__bss_start = .;
++		*(.bss*)
++		 . = ALIGN(8);
++		__bss_end = .;
++	} >.sram
++#endif
++	__bss_size = __bss_end - __bss_start;
+ 
+ 	/DISCARD/ : { *(.rela*) }
+ 	/DISCARD/ : { *(.dynsym) }
 -- 
 2.43.0
 
