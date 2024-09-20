@@ -4,79 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C6AAC78828
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 11:38:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF6A6C7882E
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 12:11:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 13BB089323;
-	Fri, 20 Sep 2024 13:38:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D8ECD88AE7;
+	Fri, 20 Sep 2024 14:10:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wOEvwd//";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cNYrQ/8x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B21289325; Fri, 20 Sep 2024 13:38:10 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 189EB88B1A; Fri, 20 Sep 2024 14:10:57 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9FFE8910D
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 13:38:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 75FD688953
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 14:10:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5c241feb80dso5839636a12.0
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 04:38:06 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-a8d0d82e76aso256806466b.3
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 05:10:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726832286; x=1727437086; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=rfNMQhm50PB96sNDXB1SRlqgkPfVxPgptcFHVnuY9lg=;
- b=wOEvwd//KYSrrRovNteb9DMUlkMATqFV8Zs96ls+sL+ELJ8d1tWbaxdwmY5d17fzGz
- LVuP/ZWbBxlJBkAUydcDZqUBAa7K+JGY2T3fmoBmcDe5ISM+brnfFg5ZDXzQusjrB6vp
- CK4AxhqJDzj0Pbm1A1bxuimOq7ubVz2Rw5inJqWbMFQJg9lRnxdzZv9iMmCObg79+3sr
- fWhsodemjzHxCU/qObQmCUXeYlgFJpFJLHzxI2auaRHA5AFEHulKrh/PaGyBcy1MeDIX
- ddtBtv1uhlolCl5VfcX51J7pTw9QgZA3En01ZjyXF0tBkixk0p3buGmBQs2jOvInFrd3
- qT2g==
+ d=linaro.org; s=google; t=1726834254; x=1727439054; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=7UCD9U3GTzAjKQdMRhmEr0GTl4LMhOklXCFUE06cu9k=;
+ b=cNYrQ/8xJyfmiyYJUlm6AI4nRzkSgZg2/DsUIsODT1j58mof+J+HJNRtq88Vyr3GvT
+ dZA3CNoK+Rbadh4M8C1GB4yGs4ZyknINUYws7N1IqKWVRURmglLzIEohhUNn28IeFksc
+ miuTT4Nw8R2Xub0pLmkAopf5mTgoJKIF/qESIRo5kICWNkS40tVp7IGvMkSDJxogs1/K
+ RRQu38xf9HQyDztmLmWni5aEAT33kKNsiBvUfcKpgQN62zYsLsoVuWIS2WTOtimosnaz
+ j+yH3F110yXulToBObd+S2HSUgpLOb1YkP2jiZsBMnFNBia7XUkCT+0+2VXh2orNdLOQ
+ y1Ng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726832286; x=1727437086;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=rfNMQhm50PB96sNDXB1SRlqgkPfVxPgptcFHVnuY9lg=;
- b=N5xenad6eE2U3C+JT26okAsbbR1WsQXTI+pYWoDkvqAQ9Gt7TxWFv3bwz9/GkfHgqN
- +ntcIhp3J09C7zdcx6fIkbQmbQM7VX8c+0zD7Q2qowG4u1yp/nf+1Qcz1PtoAlUvxQxy
- B/oKDkCagD93tYtokzs3XVcIu4waEiGsKyI1fT50b/N1qYXISSs55o9Q9cMMjUe4eXgo
- dKdKwdie/dro228a+RAJ9A4ac1GOjkQMiH+gauZdWXsAOYwXlwDeOCYL4V8EjFk8wN8x
- heetLq4rfFe8PrDucFd6oDr5QYWaQNx//PBvh6mhqR/HsdFWqxgJxopqlZK1YN8rA5Gw
- Wv/Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWlXY9SZMtkE8cSLEKSQCvuyvTA9VIabY4LVhyelmEV7uOSLzaB8s4Q2j4YQqXDMk6xiOXrCEo=@lists.denx.de
-X-Gm-Message-State: AOJu0YzxT77mv7EZE3oH4mbJ9ITHKICvlFJu8DB+UuyZz1L9Muw4v4O8
- zu4iJayda49WGWSspIWQ+8ExZ0lDMMRJCBQ8dN/+Ea6gdT9kquFX7euX9kYBhM59Zo3mAsEvkka
- DLMSSMyZDvegRZDL2dVgEo8xdzquomeAWbiMC1w==
-X-Google-Smtp-Source: AGHT+IHAaywNM16dVF+7GBHySeMvj13h9MbP/YIiLWUza0TmfqDJn5uVYlefAdYBB0vfZi/fgKKxNUmMfJauor8nb8E=
-X-Received: by 2002:a05:6402:5194:b0:5c2:1014:295a with SMTP id
- 4fb4d7f45d1cf-5c459203469mr6580690a12.2.1726832286062; Fri, 20 Sep 2024
- 04:38:06 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1726834254; x=1727439054;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7UCD9U3GTzAjKQdMRhmEr0GTl4LMhOklXCFUE06cu9k=;
+ b=JC+iZ+Tv46gLBWg8K0PEt5jk7BWTujszB86o0wgQZrkhKZ4kyy70Kq7twBra9OOAaq
+ 2TWBkEaNkgHf2claIFPYYEXeYTdi9hXdFczB+VxabpA2YD74aSaZ5twfrB2/SWS0xVMS
+ Fihl8lT78s7wS6dBVoaJhjH2ai8MDnDJgcA4rnQWZsEY2QngloI1dWnq5Mk4W2fR+sdP
+ +Gz23F+YJtBRRorqJPx2m8WTb+TUdL61J1mvrd3yyFEJMEjBfBs6ujTJ27A94ljBHDj9
+ jeOwfpCyR8DrqUfjIroYItakK3UwdpG0jxDF1OZ7ngVjzy+yDA/uwpT2LHKy3YtUBXlu
+ zzvw==
+X-Gm-Message-State: AOJu0YzoxXQ/4QSPWG0yV6UkCLGUeSaT/b2t+RYQc215EW9y4QPiL1f4
+ TjSKqQnwy0k/jBzBe4KmMJq3n2fGDMJKrXL8Qz72gmOMS5628Ct3ICEWl7Hskmg=
+X-Google-Smtp-Source: AGHT+IHTQ9kThJsmm0b3viDxQGe96IUXodFPeR0f2TdQtbF1TSfpeo4qUrmVlzX9duyhGoji4wGQZg==
+X-Received: by 2002:a17:907:e25b:b0:a8a:91d1:5262 with SMTP id
+ a640c23a62f3a-a90d56afa53mr202338066b.28.1726834253776; 
+ Fri, 20 Sep 2024 05:10:53 -0700 (PDT)
+Received: from hera (ppp176092143132.access.hol.gr. [176.92.143.132])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a906109676esm840572266b.33.2024.09.20.05.10.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 20 Sep 2024 05:10:52 -0700 (PDT)
+Date: Fri, 20 Sep 2024 15:10:50 +0300
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Eugene Uriev <eugeneuriev@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Richard Weinberger <richard@nod.at>, Sean Anderson <seanga2@gmail.com>,
+ Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>
+Subject: Re: [PATCH v3 2/3] efi: Allow use of malloc() for the EFI pool
+Message-ID: <Zu1mSkoCuB8PKhBi@hera>
+References: <20240901222259.456932-1-sjg@chromium.org>
+ <20240901222259.456932-3-sjg@chromium.org>
+ <CAC_iWjLwbeU2vO5-BdYz8gbpTH4Zq=7W_JeUVVURCnMtPg8DWg@mail.gmail.com>
+ <CAFLszTicmXVmi45AVZgmxcT=gnxpUS4-UAyD5=_UC2LWDF2W1Q@mail.gmail.com>
+ <CAC_iWjL26e7rLtAkzNSGmqNsG9TJn=PE-4Z4GGz-Qt_8izWopg@mail.gmail.com>
+ <CAFLszTjWn9dwvfBT6sPMvgWNAF5Q7KLq1_o2b4=zao9fx1mhdw@mail.gmail.com>
 MIME-Version: 1.0
-References: <20240905082811.1585467-1-sughosh.ganu@linaro.org>
- <20240905082811.1585467-5-sughosh.ganu@linaro.org>
- <0291efc6-86a2-437c-938a-707c46c34f91@gmx.de>
- <CADg8p94TakJXkLs=m6RbvO2T_OmYagf68e4JV655TtQ5DnxtZg@mail.gmail.com>
- <CAC_iWjKFh+g1k=HHKeApJp8OO5G78p0kruz59UUX-yfZcynJyg@mail.gmail.com>
-In-Reply-To: <CAC_iWjKFh+g1k=HHKeApJp8OO5G78p0kruz59UUX-yfZcynJyg@mail.gmail.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Fri, 20 Sep 2024 17:07:54 +0530
-Message-ID: <CADg8p96-kG4jEd5d_7ah3s2kOzgW4_uvDOJL+wOSzdrDjoMqZg@mail.gmail.com>
-Subject: Re: [PATCH 04/16] event: add event to notify lmb memory map changes
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, 
- Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAFLszTjWn9dwvfBT6sPMvgWNAF5Q7KLq1_o2b4=zao9fx1mhdw@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,113 +103,366 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 20 Sept 2024 at 14:51, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hi Sughosh,
->
-> On Tue, 17 Sept 2024 at 15:33, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> >
-> > On Sat, 14 Sept 2024 at 20:38, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> > >
-> > > On 9/5/24 10:27, Sughosh Ganu wrote:
-> > > > Add an event which would be used for notifying changes in the
-> > > > LMB modules' memory map. This is to be used for having a
-> > > > synchronous view of the memory that is currently in use, and that is
-> > > > available for allocations.
-> > >
-> > > The synchronous view problem only exists because we are duplicating
-> > > data. Store the EFI memory type in LMB and the problem vanishes.
-> >
-> > The LMB module only concerns itself with RAM memory. If I understand
-> > correctly, you are proposing maintaining the EFI memory map within the
-> > LMB module ? That would mean handling memory types other than
-> > conventional memory in LMB.
->
-> I am pretty sure I've asked this before, but do these *always* need to
-> be in sync?
->
-> The efi allocators will call LMB now. So when we allocate something
-> gtom EFI, even if any potential changes from LMB haven't been
-> published to EFI, we won't have any memory corruptions. Can't we just
-> opportunistically update the memory map once someone requests it?
+Hi Simon
 
-I have given this a thought. Because what you mention, Simon has a
-similar comment. But to achieve this, it would require generating a
-new efi memory map afresh every time such a requirement comes up. This
-would mean, create a new memory map, put in the conventional memory,
-and add other memory types that were part of the existing memory map.
-And then remove the older memory map. This would need to be done every
-time a memory map is needed to be generated. And that would also
-include instances when a user enters a command to get the current
-memory map. I think notifying any changes to the lmb memory map to the
-efi memory module is easier, and less error prone.
+A few more comments after looking into this a bit more
 
--sughosh
+On Mon, Sep 16, 2024 at 05:42:59PM +0200, Simon Glass wrote:
+> Hi Ilias,
+>
+> On Thu, 12 Sept 2024 at 08:37, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > Hi Simon,
+> >
+> > On Fri, 6 Sept 2024 at 16:01, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > Hi Ilias,
+> > >
+> > > On Fri, 6 Sept 2024 at 01:13, Ilias Apalodimas
+> > > <ilias.apalodimas@linaro.org> wrote:
+> > > >
+> > > > Hi Simon,
+> > > >
+> > > > Apologies for the late reply, I was attending a conference.
+> > > >
+> > > > On Mon, 2 Sept 2024 at 01:23, Simon Glass <sjg@chromium.org> wrote:
+> > > > >
+> > > > > This API call is intended for allocating small amounts of memory,
+
+Well it's not only for small memory. Look below.
+
+> > > > > similar to malloc(). The current implementation rounds up to whole pages
+> > > > > which can waste large amounts of memory. It also implements its own
+> > > > > malloc()-style header on each block.
+
+Yes and there is a reason for that. The EFI spec description is
+
+"The AllocatePool() function allocates a memory region of Size bytes
+ from memory of type PoolType and returns the address of the allocated
+ memory in the location referenced by Buffer. This function allocates
+ *pages* from EfiConventionalMemory as needed to grow the requested pool
+ type. All allocations are eight-byte aligned. The allocated pool memory
+ is returned to the available pool with the EFI_BOOT_SERVICES.FreePool()
+ function"
+
+The current implementation of efi_allocate_pool kind of does that, but is
+indeed very inefficient, since it allocates a single page and pool every time.
+A proper implementation would be to allocate a page and return the size
+needed. Then for every subsequent request to the same pooltype, you look up
+the existing pool, and return the requested memory. If the pool is depleted
+you allocate another *page* and so on and so forth. That's where the
+metadata is actually useful.
+
+So the suggested solution here is trying to fix an existing hack, by
+papering over the problem with *another* hack that will basically make the
+process of fixing efi_allocate_pool() properly impossible.
+
+> > > > >
+> > > > > For certain allocations (those of type EFI_BOOT_SERVICES_DATA) we can
+> > > > > use U-Boot's built-in malloc() instead, at least until the app starts.
+> > > > > This avoids poluting the memory space with blocks of data which may
+> > > > > interfere with boot scripts, etc.
+> >
+> > This won't happen with LMB merged no?
+>
+> It still happens with LMB merged. As I covered in the cover letter,
+> this is orthogonal to all of that. In fact, I think a lot of the
+> effort there is actually missing the point, unfortunately.
+
+So why isn't this an LMB problem since we plan to use it for EFI
+allocations? LMB is trying to fix similar issues for efi_allocate_pages().
+Once that's done efi_allocate_pool() which calls efi_allocate_pages() is
+automatically sorted. So the only problem is efficiency, no ?
 
 >
-> Thanks
-> /Ilias
 > >
-> > -sughosh
+> > > > >
+> > > > > Once the app has started, there is no advantage to using malloc(), since
+> > > > > it doesn't matter what memory is used: everything is under control of
+> > > > > the EFI subsystem. Also, using malloc() after the app starts might
+> > > > > result in running of memory, since U-Boot's malloc() space is typically
+> > > > > quite small.
+> > > > >
+> > > > > In fact, malloc() is already used for most EFI-related allocations, so
+> > > > > the impact of this change is fairly small.
+> >
+> > Where? We explained in the past that malloc is only used to handle
+> > internal EFI stuff which don't need the efi allocations and that's
+> > perfectly fine.
+>
+> I see only about 5 allocations affected by this change, when booting from EFI.
+
+What we can do, is go over the usage of efi_allocate_pool(). A quick grep
+showed a few uses, but I am pretty certain those can be replaced by
+efi_allocate_pages().
+
+Thanks
+/Ilias
+
+>
+> >
+> > > > >
+> > > > > One side effect is that this seems to be showing up some bugs in the
+> > > > > EFI code, since the malloc() pool becomes corrupted with some tests.
+> > > > > This has likely crept in due to the very large gaps between allocations
+> > > > > (around 4KB), which provides a lot of leeway when the allocation size is
+> > > > > too small. Work around this by increasing the size for now, until these
+> > > > > (presumed) bugs are located.
+> > > > >
+> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > ---
+> > > > >
+> > > > > (no changes since v1)
+> > > > >
+> > > > >  common/dlmalloc.c            |   7 +++
+> > > > >  include/efi_loader.h         |  18 ++++++
+> > > > >  include/malloc.h             |   7 +++
+> > > > >  lib/efi_loader/efi_bootbin.c |   2 +
+> > > > >  lib/efi_loader/efi_memory.c  | 110 ++++++++++++++++++++++++++---------
+> > > > >  5 files changed, 117 insertions(+), 27 deletions(-)
+> > > > >
+> > > > > diff --git a/common/dlmalloc.c b/common/dlmalloc.c
+> > > > > index 1ac7ce3f43c..48e9f3515f7 100644
+> > > > > --- a/common/dlmalloc.c
+> > > > > +++ b/common/dlmalloc.c
+> > > > > @@ -613,6 +613,13 @@ void mem_malloc_init(ulong start, ulong size)
+> > > > >  #endif
+> > > > >  }
+> > > > >
+> > > > > +bool malloc_check_in_range(void *ptr)
+> > > > > +{
+> > > > > +       ulong val = (ulong)ptr;
+> > > > > +
+> > > > > +       return val >= mem_malloc_start && val < mem_malloc_end;
+> > > > > +}
+> > > > > +
+> > > > >  /* field-extraction macros */
+> > > > >
+> > > > >  #define first(b) ((b)->fd)
+> > > > > diff --git a/include/efi_loader.h b/include/efi_loader.h
+> > > > > index 38971d01442..d07bc06bad4 100644
+> > > > > --- a/include/efi_loader.h
+> > > > > +++ b/include/efi_loader.h
+> > > > > @@ -805,6 +805,24 @@ int efi_disk_probe(void *ctx, struct event *event);
+> > > > >  int efi_disk_remove(void *ctx, struct event *event);
+> > > > >  /* Called by board init to initialize the EFI memory map */
+> > > > >  int efi_memory_init(void);
+> > > > > +
+> > > > > +/**
+> > > > > + * enum efi_alloc_flags - controls EFI memory allocation
+> > > > > + *
+> > > > > + * @EFIAF_USE_MALLOC: Use malloc() pool for pool allocations of type
+> > > > > + *     EFI_BOOT_SERVICES_DATA, otherwise use page allocation
+> > > > > + */
+> > > > > +enum efi_alloc_flags {
+> > > > > +       EFIAF_USE_MALLOC        = BIT(0),
+> > > > > +};
+> > > >
+> > > > Why do we need to handle cases differently? IOW can't all EFI
+> > > > allocations that need a pool gi via malloc?
+> > >
+> > > Once the app boots, as Heinrich pointed out, it expects to be able to
+> > > malloc() very large amount of memory, but the malloc() pool is small.
+> > >
+> >
+> > Yes, it does.  My problem is that right now we have everything in the
+> > same pool, handled by LMB, but you are arguing it's 'cleaner' to split
+> > the allocations. I can't really understand what the problem with the
+> > current allocations is.
+>
+> The problem is that they happen in space, between the bottom of memory
+> and the bottom of the stack. That is the area which is supposed to not
+> be used by U-Boot.
+> >
+> > > >
+> > > > [...]
+> > > >
+> > > > > @@ -24,6 +24,14 @@ DECLARE_GLOBAL_DATA_PTR;
+> > > > >  /* Magic number identifying memory allocated from pool */
+> > > > >  #define EFI_ALLOC_POOL_MAGIC 0x1fe67ddf6491caa2
+> > > > >
+> > > > > +/* Flags controlling EFI memory-allocation - see enum efi_alloc_flags */
+> > > > > +static int alloc_flags;
+> > > > > +
+> > > > > +void efi_set_alloc(int flags)
+> > > > > +{
+> > > > > +       alloc_flags = flags;
+> > > > > +}
+> > > > > +
+> > > > >  efi_uintn_t efi_memory_map_key;
+> > > > >
+> > > > >  struct efi_mem_list {
+> > > > > @@ -57,8 +65,12 @@ void *efi_bounce_buffer;
+> > > > >   * The checksum calculated in function checksum() is used in FreePool() to avoid
+> > > > >   * freeing memory not allocated by AllocatePool() and duplicate freeing.
+> > > > >   *
+> > > > > - * EFI requires 8 byte alignment for pool allocations, so we can
+> > > > > - * prepend each allocation with these header fields.
+> > > > > + * EFI requires 8-byte alignment for pool allocations, so we can prepend each
+> > > > > + * allocation with these header fields.
+> > > > > + *
+> > > > > + * Note that before the EFI app is booted, EFI_BOOT_SERVICES_DATA allocations
+> > > > > + * are served using malloc(), bypassing this struct. This helps to avoid memory
+> > > > > + * fragmentation, since efi_allocate_pages() uses any pages it likes.
+> > > > >   */
+> > > > >  struct efi_pool_allocation {
+> > > > >         u64 num_pages;
+> > > > > @@ -631,18 +643,19 @@ void *efi_alloc_aligned_pages(u64 len, int memory_type, size_t align)
+> > > > >  /**
+> > > > >   * efi_allocate_pool - allocate memory from pool
+> > > > >   *
+> > > > > + * This uses malloc() for EFI_BOOT_SERVICES_DATA allocations if EFIAF_USE_MALLOC
+> > > > > + * is enabled
+> > > > > + *
+> > > > >   * @pool_type: type of the pool from which memory is to be allocated
+> > > > >   * @size:      number of bytes to be allocated
+> > > > >   * @buffer:    allocated memory
+> > > > >   * Return:     status code
+> > > > >   */
+> > > > > -efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size, void **buffer)
+> > > > > +efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size,
+> > > > > +                              void **buffer)
+> > > > >  {
+> > > > >         efi_status_t r;
+> > > > >         u64 addr;
+> > > > > -       struct efi_pool_allocation *alloc;
+> > > > > -       u64 num_pages = efi_size_in_pages(size +
+> > > > > -                                         sizeof(struct efi_pool_allocation));
+> > > > >
+> > > > >         if (!buffer)
+> > > > >                 return EFI_INVALID_PARAMETER;
+> > > > > @@ -652,13 +665,43 @@ efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size,
+> > > > >                 return EFI_SUCCESS;
+> > > > >         }
+> > > > >
+> > > > > -       r = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, pool_type, num_pages,
+> > > > > -                              &addr);
+> > > > > -       if (r == EFI_SUCCESS) {
+> > > > > -               alloc = (struct efi_pool_allocation *)(uintptr_t)addr;
+> > > > > -               alloc->num_pages = num_pages;
+> > > > > -               alloc->checksum = checksum(alloc);
+> > > > > -               *buffer = alloc->data;
+> > > > > +       if ((alloc_flags & EFIAF_USE_MALLOC) &&
+> > > > > +           pool_type == EFI_BOOT_SERVICES_DATA) {
+> > > > > +               void *ptr;
+> > > > > +
+> > > > > +               /*
+> > > > > +                * Some tests crash on qemu_arm etc. if the correct size is
+> > > > > +                * allocated.
+> > > > > +                * Adding 0x10 seems to fix test_efi_selftest_device_tree
+> > > > > +                * Increasing it to 0x20 seems to fix test_efi_selftest_base
+> > > > > +                * except * for riscv64 (in CI only). But 0x100 fixes CI too.
+> > > > > +                *
+> > > > > +                * This workaround can be dropped once these problems are
+> > > > > +                * resolved
+> > > > > +                */
+> > > > > +               ptr = memalign(8, size + 0x100);
+> > > >
+> > > > I don't think the explanation is enough here. On top of that adding
+> > > > random values to fix the problem doesn't sound right. Can we figure
+> > > > out why?
+> > >
+> > > My guess is that an allocated pointer is going beyond its limits. The
+> > > newer upstream dlmalloc() has a checker which might help. I fiddled
+> > > around a bit but could not work one where the problem was.
+> >
+> > Ok, but I don't want us to pull code with random values that happened
+> > to work during testing. We need to understand why
+>
+> It is presumably because of bugs in the EFI code. The current code
+> adds about 4KB to the size of each allocation, so adding 100 bytes is
+> at least an improvement. I did do some digging but couldn't
+> immediately locate any bugs. To be honest I am not sure what is going
+> on.
+>
+> But once I have these two EFI series in, I will spend some time
+> digging into it and help fix these (presumed) bugs.
+>
 > >
 > > >
-> > > The event is only needed to notify EFI_EVENT_GROUP_MEMORY_MAP_CHANGE.
+> > > >
+> > > > > +               if (!ptr)
+> > > > > +                       return EFI_OUT_OF_RESOURCES;
+> > > > > +
+> > > > > +               *buffer = ptr;
+> > > > > +               r = EFI_SUCCESS;
+> > > > > +               log_debug("EFI pool: malloc(%zx) = %p\n", size, ptr);
+> > > >
+> > > > So as I commented above, I think this is papering over whatever
+> > > > problem you are seeing. If you want to move the pool to use malloc()
+> > > > that's fine, but *all* of the pool allocations should use it. Not just
+> > > > boot services because its easier to retrofit it on the current code.
 > > >
-> > > Best regards
+> > > Please see above. Also, please see the commit message. This change
+> > > actually solves the problems I am seeing, quite well.
+> >
+> > I did and the only 'problem' that is mentioned is polluting and
+> > overwriting memory of scripts etc. But that goes away with LMB AFAICT.
+> > So the only advantage is that you save a few kbs of space when
+> > requesting pool allocations?
+>
+> No, you misunderstand. I am happy to arrange a call to go through this
+> if it is still unclear from my comment above. When I say this is
+> orthogonal to the lmb series, I really do mean that.
+>
+> Regards,
+> Simon
+>
+>
+>
+> >
+> > Thanks
+> > /Ilias
 > > >
-> > > Heinrich
+> > > >
+> > > > > +       } else {
+> > > > > +               u64 num_pages = efi_size_in_pages(size +
+> > > > > +                                       sizeof(struct efi_pool_allocation));
+> > > > > +
+> > > > > +               r = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, pool_type,
+> > > > > +                                      num_pages, &addr);
+> > > > > +               if (r == EFI_SUCCESS) {
+> > > > > +                       struct efi_pool_allocation *alloc;
+> > > > > +
+> > > > > +                       alloc = (struct efi_pool_allocation *)(uintptr_t)addr;
+> > > > > +                       alloc->num_pages = num_pages;
+> > > > > +                       alloc->checksum = checksum(alloc);
+> > > > > +                       *buffer = alloc->data;
+> > > > > +                       log_debug("EFI pool: pages alloc(%zx) type %d = %p\n",
+> > > > > +                                 size, pool_type, *buffer);
+> > > > > +               }
+> > > > >         }
+> > > > >
+> > > > >         return r;
+> > > > > @@ -686,27 +729,37 @@ void *efi_alloc(size_t size)
+> > > > >  efi_status_t efi_free_pool(void *buffer)
+> > > > >  {
+> > > > >         efi_status_t ret;
+> > > > > -       struct efi_pool_allocation *alloc;
+> > > > >
+> > > > >         if (!buffer)
+> > > > >                 return EFI_INVALID_PARAMETER;
+> > > > >
+> > > > > -       ret = efi_check_allocated((uintptr_t)buffer, true);
+> > > > > -       if (ret != EFI_SUCCESS)
+> > > > > -               return ret;
+> > > > > +       if (malloc_check_in_range(buffer)) {
+> > > > > +               log_debug("EFI pool: free(%p)\n", buffer);
+> > > > > +               free(buffer);
+> > > > > +               ret = EFI_SUCCESS;
+> > > > > +       } else {
+> > > > > +               struct efi_pool_allocation *alloc;
+> > > > >
+> > > > > -       alloc = container_of(buffer, struct efi_pool_allocation, data);
+> > > > > +               ret = efi_check_allocated((uintptr_t)buffer, true);
+> > > > > +               if (ret != EFI_SUCCESS)
+> > > > > +                       return ret;
+> > > > >
+> > > > [...]
 > > >
-> > > >
-> > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > > ---
-> > > >   common/event.c  |  2 ++
-> > > >   include/event.h | 14 ++++++++++++++
-> > > >   2 files changed, 16 insertions(+)
-> > > >
-> > > > diff --git a/common/event.c b/common/event.c
-> > > > index dda569d447..fc8002603c 100644
-> > > > --- a/common/event.c
-> > > > +++ b/common/event.c
-> > > > @@ -48,6 +48,8 @@ const char *const type_name[] = {
-> > > >
-> > > >       /* main loop events */
-> > > >       "main_loop",
-> > > > +
-> > > > +     "lmb_map_update",
-> > > >   };
-> > > >
-> > > >   _Static_assert(ARRAY_SIZE(type_name) == EVT_COUNT, "event type_name size");
-> > > > diff --git a/include/event.h b/include/event.h
-> > > > index fb353ad623..fce7e96170 100644
-> > > > --- a/include/event.h
-> > > > +++ b/include/event.h
-> > > > @@ -153,6 +153,14 @@ enum event_t {
-> > > >        */
-> > > >       EVT_MAIN_LOOP,
-> > > >
-> > > > +     /**
-> > > > +      * @EVT_LMB_MAP_UPDATE:
-> > > > +      * This event is triggered on an update to the LMB reserved memory
-> > > > +      * region. This can be used to notify about any LMB memory allocation
-> > > > +      * or freeing of memory having occurred.
-> > > > +      */
-> > > > +     EVT_LMB_MAP_UPDATE,
-> > > > +
-> > > >       /**
-> > > >        * @EVT_COUNT:
-> > > >        * This constants holds the maximum event number + 1 and is used when
-> > > > @@ -203,6 +211,12 @@ union event_data {
-> > > >               oftree tree;
-> > > >               struct bootm_headers *images;
-> > > >       } ft_fixup;
-> > > > +
-> > > > +     struct event_lmb_map_update {
-> > > > +             u64 base;
-> > > > +             u64 size;
-> > > > +             u8 op;
-> > > > +     } lmb_map;
-> > > >   };
-> > > >
-> > > >   /**
-> > >
+> > > Regards,
+> > > Simon
+
+Thanks
+/Ilias
