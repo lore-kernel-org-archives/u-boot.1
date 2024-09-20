@@ -4,79 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DE94C78853
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 14:59:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6304C78853
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 15:01:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF31888C90;
-	Fri, 20 Sep 2024 16:59:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5C59688AA7;
+	Fri, 20 Sep 2024 17:01:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XDZxciV3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="T6JcMgq8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C7BA88BD2; Fri, 20 Sep 2024 16:59:49 +0200 (CEST)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
+ id 1125A88BD2; Fri, 20 Sep 2024 17:01:46 +0200 (CEST)
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C1D488AA7
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 16:59:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D352788498
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 17:01:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-3e03974b6a5so1069680b6e.3
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 07:59:47 -0700 (PDT)
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-7a9ac2d50ffso180791085a.1
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 08:01:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1726844386; x=1727449186; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1726844503; x=1727449303; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=PXpZgCTsXO6+95SFNgINXXQiw1AiECMuje9QVR5GtCY=;
- b=XDZxciV3iZu4BNDd0sg+/3vOAlrfB+RfUmMjqM8KV+AAIiROw9EOJ/CSv8zBQY2GLT
- KSXyB/6eK5yo1AlWbr5cYiiZbbBCi4xnCGwkZnXXQE0FxrNjFvRQsp2XRh5qXMJ9rjA0
- z4afwezMRx581/LpFJyLvr5vW58XGFinOl7LE=
+ bh=/w4tYNLucMgJgUfvn3thsYrICF+0CRNRDEsbdT66tw4=;
+ b=T6JcMgq8sQ0Q+XyX4ioQE4zVG7y0hO28n6qAQxEzVT3Jq4Nk1EX8CnYhtBlLZH2KNO
+ NA+4aXx/hwnp+KcukxDgoktWbYqD0e8OPe+1PB8gAd/YdhbUxAIPPcVl0zuIjPFbRqAr
+ YXuZfpBHDySYd73iHMx/ueWrbB4DYVKDSpZE8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726844386; x=1727449186;
+ d=1e100.net; s=20230601; t=1726844503; x=1727449303;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PXpZgCTsXO6+95SFNgINXXQiw1AiECMuje9QVR5GtCY=;
- b=ZNjzgVn228nxd5+ceIiR/HW2EygKDMxGu9Z+gmiQr9PJg5gYZ8s17xqcdSzRTHZs+z
- c3BMqSNShcN38uQDPg47wmw/zUOdsdUQZREivfyAqay9+nEuSnK0jxtlcnBSUE1VwX1l
- sHTQU9VIcJhd2wOooH86FfrgoTsRzRxM5PCh+UvbTNPl1xiZKp5lt6s7j4ELGI71GdnC
- glFOvXvGuzIQ2xtK9GVsE226bJytg8+PNXdUWriG6b0P6x4B6RnavzQptAGC20Ch9yPC
- 18W50xrQ2S6q6znKpqglA2rzjmLJjjiV8NP8C2CsB9OUXqhWkw2AQ91p44kDo6QpXKiw
- Zzyw==
-X-Gm-Message-State: AOJu0YxPCsVjzBKEElqGAkEXf8IoUi4unXGlPqnxZ5WvXksEpZe+S4dj
- GXFPXkCMVtogt1KpYRG3rX/YGk2IohwQnqsUYIOmX+vtta9tS81z/3HLhlnNcCkUn8DZILbvBOb
- C
-X-Google-Smtp-Source: AGHT+IG9uqWfGFCCG95W5KcojYq6rzBMFZrGXM9mITmtwGcBVAg2Z6RtnTqd4YcU/n2PF54dPyxQBg==
-X-Received: by 2002:a05:6808:f07:b0:3e0:4722:cf8 with SMTP id
- 5614622812f47-3e27293de3fmr1969709b6e.25.1726844385969; 
- Fri, 20 Sep 2024 07:59:45 -0700 (PDT)
+ bh=/w4tYNLucMgJgUfvn3thsYrICF+0CRNRDEsbdT66tw4=;
+ b=emI7Ddx58YIcxQByWYCEyNF21fyXGmZaoU0/9PPD9nUyvea9xisdnLYwTtSSewxr3K
+ +YRGKTRBKNKSkwDDdbvP62zyi/oLhyUV9ZjYjKNqFiGiR9cL8p43iRQUgtCRTTBBwtQW
+ M290RbLxCv0pXNeLJhFx8dECANgh2IsLQhqY1jjs8dnwAk+DTmHJu9ZyhnAOpNgOEG8t
+ YtMtWzZ5jTC6FeRDvm86b/hARncyOhLjoqG247FEQqygT5aw/4dq3hM2GxDS3W+Gg7Fq
+ eC+dlVzKDncjaxDOpypb+45xYhwuv9yjpw8r+65qWqTp3/9+lNBGC0Fj175RHwLEb3L/
+ Xnhg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXcjka1EnW5J0ZHH8uag1+FdRjjAfAoNC67u3oJOT4jwMrZsEud0AopRBcVvcO2W1Cg3XlNtjU=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywgupyj2NWy5O/SOwlgOje0ilXrj0ahUtwbsx933p7TfFB7zxpm
+ Rm7AlwmO/S4e42URkSgUFRJimpBPKLt1oTZB5ziS1JiCFC8BgrdqFAxl5AXfb8M=
+X-Google-Smtp-Source: AGHT+IE0rtgKqyZlnsZOBlCQeXJfuNJV8dFHSoj1bLOqLxDNnISjLlrHFK7j5PLajLT/n7+HggQoSg==
+X-Received: by 2002:a05:620a:45a4:b0:7a9:ad0b:6d61 with SMTP id
+ af79cd13be357-7acaf54b841mr1048024885a.9.1726844502506; 
+ Fri, 20 Sep 2024 08:01:42 -0700 (PDT)
 Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-45b17867eddsm18386291cf.13.2024.09.20.07.59.44
+ af79cd13be357-7acb0829f1dsm187094085a.60.2024.09.20.08.01.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Sep 2024 07:59:45 -0700 (PDT)
-Date: Fri, 20 Sep 2024 08:59:42 -0600
+ Fri, 20 Sep 2024 08:01:40 -0700 (PDT)
+Date: Fri, 20 Sep 2024 09:01:36 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH 06/19] malloc: Show amount of used space when memory runs
- out
-Message-ID: <20240920145942.GC4252@bill-the-cat>
-References: <20240829145802.1827952-1-sjg@chromium.org>
- <20240829145802.1827952-7-sjg@chromium.org>
- <20240829172626.GK2479150@bill-the-cat>
- <CAFLszThacdwBNMP8Rq3uEXd=MT-8NpVXHOjhcMrdvLR-KrNPXg@mail.gmail.com>
+Cc: Peter Robinson <pbrobinson@gmail.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Apurva Nandan <a-nandan@ti.com>, Bryan Brattlof <bb@ti.com>,
+ Greg Malysa <greg.malysa@timesys.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jayesh Choudhary <j-choudhary@ti.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Kongyang Liu <seashell11234455@gmail.com>,
+ Minkyu Kang <mk7.kang@samsung.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Stefan Roese <sr@denx.de>, Tony Dinh <mibodhi@gmail.com>,
+ Vaishnav Achath <vaishnav.a@ti.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ huang lin <hl@rock-chips.com>
+Subject: Re: [PATCH 00/18] vbe: Series part D
+Message-ID: <20240920150136.GD4252@bill-the-cat>
+References: <20240828014538.3322013-1-sjg@chromium.org>
+ <CALeDE9MX6MMECX+vNCjMs8Z2_G3+gSio4BxFHgez-H_a4f2Uyg@mail.gmail.com>
+ <CAFLszTgrCGhvhO0GDSLABu1D10H97dBWFSnEf8gSJujq6iUduw@mail.gmail.com>
+ <20240830004936.GP2479150@bill-the-cat>
+ <CAFLszTjjni839jghOpforB-4+MnqRh7JXw575VtP_UO-SzfnKg@mail.gmail.com>
+ <20240830014622.GQ2479150@bill-the-cat>
+ <CAFLszThE7mrnOyGCzPcC01soCvoT++SgvUp4WpHiJZH4CXhWQw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="+SkH9UsMNUbRaomL"
+ protocol="application/pgp-signature"; boundary="9jryl7ZT6rqmUUsb"
 Content-Disposition: inline
-In-Reply-To: <CAFLszThacdwBNMP8Rq3uEXd=MT-8NpVXHOjhcMrdvLR-KrNPXg@mail.gmail.com>
+In-Reply-To: <CAFLszThE7mrnOyGCzPcC01soCvoT++SgvUp4WpHiJZH4CXhWQw@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,69 +114,160 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---+SkH9UsMNUbRaomL
+--9jryl7ZT6rqmUUsb
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Sep 20, 2024 at 09:25:44AM +0200, Simon Glass wrote:
+On Fri, Sep 20, 2024 at 09:25:53AM +0200, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Thu, 29 Aug 2024 at 19:26, Tom Rini <trini@konsulko.com> wrote:
+> On Fri, 30 Aug 2024 at 03:46, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Thu, Aug 29, 2024 at 08:57:49AM -0600, Simon Glass wrote:
-> > > Show a bit more information when malloc() space is exhausted and
-> > > debugging is enabled.
+> > On Thu, Aug 29, 2024 at 07:06:32PM -0600, Simon Glass wrote:
+> > > Hi Tom,
 > > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > ---
+> > > On Thu, 29 Aug 2024 at 18:49, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Wed, Aug 28, 2024 at 04:16:55PM -0600, Simon Glass wrote:
+> > > > > Hi Peter,
+> > > > >
+> > > > > On Wed, 28 Aug 2024 at 03:59, Peter Robinson <pbrobinson@gmail.co=
+m> wrote:
+> > > > > >
+> > > > > > Hi Simon,
+> > > > > >
+> > > > > > > This includes various patches towards implementing the VBE ab=
+rec
+> > > > > >
+> > > > > > What is abrec?
+> > > > >
+> > > > > It's a VBE method which supports A, B and recovery images and per=
+mits
+> > > > > updating from SPL onwards. The idea is that you can safely update
+> > > > > without bricking a device.
+> > > > >
+> > > > > >
+> > > > > > > bootmeth in U-Boot.
+> > > > > > >
+> > > > > > >
+> > > > > > > Simon Glass (18):
+> > > > > > >   sandbox: Add missing header file
+> > > > > > >   bootstd: Add stub for bootdev_setup_for_sibling_blk()
+> > > > > > >   gzip: Correct function comment for gunzip()
+> > > > > >
+> > > > > > Is this from upstream gzip code somewher?
+> > > > >
+> > > > > I'm not sure, actually.
+> > > > >
+> > > > > >
+> > > > > > >   fdtdec: Support separate BSS for all XPL builds
+> > > > >
+> > > > > Needed so that VPL can use DDT
+> > > > >
+> > > > > > >   tiny-printf: Correct return values
+> > > > >
+> > > > > I can't remember, sorry.
+> > > > >
+> > > > > > >   tpl: Support numbered aliases in device tree
+> > > > >
+> > > > > The MMC needs to be accessed using its sequence number
+> > > > >
+> > > > > > >   ram: Support driver model in TPL
+> > > > >
+> > > > > That should say VPL...but again I'm not quite sure
+> > > > >
+> > > > > > >   serial: Support debug UART in TPL
+> > > > >
+> > > > > This allows debugging of the jump from TPL to VPL
+> > > > >
+> > > > > > >   armv8: Support not having separate BSS
+> > > > >
+> > > > > VPL doesn't want a separate BSS since SDRAM isn't available that =
+early
+> > > > >
+> > > > > > >   arm: cache: Drop a stale comment
+> > > > >
+> > > > > Just something I noticed
+> > > > >
+> > > > > > >   arm: Fix up a stale comment in sections.c
+> > > > >
+> > > > > Another thing I noticed
+> > > > >
+> > > > > > >   mmc: Support driver model in TPL
+> > > > >
+> > > > > TPL needs to read VPL from MMC
+> > > > >
+> > > > > > >   mmc: Add more debugging for SPL
+> > > > > > >   mmc: Log the error when init fails
+> > > > > > >   mmc: rockchip: Log some error returns
+> > > > > > >   mmc: rockchip: Allow clocks to be missing
+> > > > >
+> > > > > These all help with debugging reading of VPL from the correct MMC=
+ device
+> > > > >
+> > > > > > >   rockchip: mmc: Fix a missing colon
+> > > > >
+> > > > > Just something I noticed
+> > > > >
+> > > > > > >   rockchip: Provided SPL control over efuse presence
+> > > > >
+> > > > > We don't want this driver in TPL or VPL
+> > > > >
+> > > > > >
+> > > > > > I'm not sure what most of these patches have to do with VBE?
+> > > > >
+> > > > > Basically there are a lot of little tweaks needed.
+> > > >
+> > > > Well, I think this gets back to some common feedback. You have a lo=
+t of
+> > > > little bugfixes, which is good, but they get sprinkled in to the ne=
+xt
+> > > > big series you post, which is bad and hard to review. And that lead=
+s to
+> > > > fixes not getting merged / reviewed timely because nominally simple=
+ fix
+> > > > A is in part 3 of a series to introduce something larger and to whi=
+ch
+> > > > there is feedback to work through.
 > > >
-> > >  common/malloc_simple.c | 3 ++-
-> > >  1 file changed, 2 insertions(+), 1 deletion(-)
-> > >
-> > > diff --git a/common/malloc_simple.c b/common/malloc_simple.c
-> > > index 5a8ec538f8f..f2b3dc53689 100644
-> > > --- a/common/malloc_simple.c
-> > > +++ b/common/malloc_simple.c
-> > > @@ -26,7 +26,8 @@ static void *alloc_simple(size_t bytes, int align)
-> > >       log_debug("size=3D%lx, ptr=3D%lx, limit=3D%x: ", (ulong)bytes, =
-new_ptr,
-> > >                 gd->malloc_limit);
-> > >       if (new_ptr > gd->malloc_limit) {
-> > > -             log_err("alloc space exhausted\n");
-> > > +             log_err("alloc space exhausted %lx %x\n", new_ptr,
-> > > +                     gd->malloc_limit);
-> > >               return NULL;
-> > >       }
+> > > I actually thought I was splitting them up quite nicely. What do you =
+suggest?
 > >
-> > Since debugging is enabled you should update the error message to say
-> > what the values mean...
+> > I would refer back to your own comments about what some of the patches
+> > do and say that "Just something I noticed" should be a one off, and
+> > little fixes for this-and-that should be a 1-2 part series and so on.
 >=20
-> OK, will do. This message is shown without debugging enabled, so I do
-> want to keep it short.
+> I really don't have a great workflow for keeping track of more than
+> 6-8 pending series and even that is sometimes a struggle. For testing
+> I need everything applied so I have every series in a sequence applied
+> locally.
+>=20
+> I will have a think about what can be done. I wonder how others do it?
 
-The commit message says "and debugging is enabled", so is that the case
-or not?
+I believe the answer is multiple branches and merging them as needed. Or
+what I do is make each subsequent series a branch off the previous one
+(and set the upstream appropriately) and then rebase as needed.
 
 --=20
 Tom
 
---+SkH9UsMNUbRaomL
+--9jryl7ZT6rqmUUsb
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbtjd4ACgkQFHw5/5Y0
-tyyrgAv/dh8Wu3pgVDIULnF6IBOtXwUNtGB+IRb5lm+P1feiq4qFuJDFJDzY2M7p
-lKUmKmWiIouNG9MMJmt8KZwQ3zFRn1Oa8g8gdV2McNT2PtUfz42MTW8hU9UcTnCO
-0ZPexMarNlGsFB9QhxQSVev36kp3cWbF9/d5HyuuZQAeTrABf9GSRW6bzCWavofC
-AhDZsCKmKP4R9yq3NQ36UuppDqH0IZrNZhTWjKKQ+Eao291rUz7McrOLtT3ktC8K
-syEVwRDnXOyMkc5jc4v6Ql9FAZCRQjwPjPbhUZSysRL9mal/c7ijlja8O/VHxCsD
-E2sna6FF6gSfT7RvzXdjs5XcbOCSX6GM1nozf2zsTyPeY95ecN8PapuDQGlDGH/q
-5UIHMo18ngttilzdPuej1dPGCpZlkIcvZ8CAcc+c7urtFc8opEAvMnmenNtckHR8
-lPBdXMSBpm/0bYNJhTtMNEHL92iZV6sCJ4mLGlurwz0+DkDs5mGDa1uNOZPE7Oag
-OQsTMjex
-=gxmT
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbtjlAACgkQFHw5/5Y0
+tyyV4QwAh5uU7ecBeG5QKrg75xjdgQf3XQjB7dUypfdclfeYBFzrc/D2NJZBxjk1
+Ho+WEcWRtmJe9vEt6mq2ExMz44OfmKCJQfmXBXTGz3xZzJ9EhrlU7alO9/2nclo7
+k1oKlwlhZ56O8m9j/8NYRU7Jq9YBtKP0AfXVZpQKLY4yqAjDRNtBuudxwRAxJOy9
+EelGF5aV97d3+pDKb3mNAEZjpr14hxuArNeae0CS/+hKGSnv+GjlVWzzyKaEVRGW
+HeG1WDFDHJ7JYSUXEm7iKSTI4xkZqYPFrDAeKUCK00WJ3tsKZTtEVIpbHqDt7NWU
+p+g6FWvanlnvYriMwLgd48y8jCa/ejojJpOtZM1EZiRzfYuD4/CtLIQK+ofFoA0W
+F8rViV06G07B71o8d1ZF/INjKtmJiRWCgSQHMXBQCCsyC3c1cqPO66OwkhdUF6NW
+moYBSnmio+K2REpwYDCmoSULYIrcjmZDfYkktr8B+J8qBHlMdB39RZCy5TpHx6P5
+xn4qZDPk
+=8yjX
 -----END PGP SIGNATURE-----
 
---+SkH9UsMNUbRaomL--
+--9jryl7ZT6rqmUUsb--
