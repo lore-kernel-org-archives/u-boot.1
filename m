@@ -4,73 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BB45CF58E7
-	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 08:15:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88713CF58E7
+	for <u-boot@archiver.kernel.org>; Fri, 20 Sep 2024 08:15:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 085C88946B;
-	Fri, 20 Sep 2024 10:13:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 616B289445;
+	Fri, 20 Sep 2024 10:13:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TtV4ahxX";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KHDAdulm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F03EB89463; Fri, 20 Sep 2024 10:13:52 +0200 (CEST)
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [IPv6:2a00:1450:4864:20::12b])
+ id AB82089445; Fri, 20 Sep 2024 10:13:56 +0200 (CEST)
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [IPv6:2a00:1450:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C76089445
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 10:13:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BE260893BE
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 10:13:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-536584f6c84so2372809e87.0
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 01:13:48 -0700 (PDT)
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-2f75c6ed397so19603921fa.2
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 01:13:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726820027; x=1727424827; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1726820019; x=1727424819; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BQPA2oNB9PirJfGQvYQXRZyYTRomUj/E2bnlK+2Zh+k=;
- b=TtV4ahxXXc8H5mCfl9Hjg1IZrTPxLXS5QbeBAqvw7L+3Lj1ApmdScE/iRi09jVISVb
- NCccxv59VzJtsWnybjbmuTDRsaEvLXOlNkq6UkcIPe1tverlsZn+QZ7FSFWSenClqb2R
- 1zi+a45ItziVtGZXe1afD9nnRpaI8Y0Did5Qw=
+ bh=Sngx/D9F4PwcGCUI+gO0BlU+bHlIHERBjQcnW0FsO6I=;
+ b=KHDAdulmozqgndPbeocrvl+VEoQQTbm+BzwIT3GQqIwpXmi7yeCRED+JZYSMvy5LA5
+ ox+BSkCKAkGtWdFyjRcBYVV7MzkHxmnTPkB4wPnAoUhn/GuNkGSpM7aHZaMWY2EcmT0N
+ GbsH75OkySFgUJDafQK4rZnlC3ggFvq6zgwAQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726820027; x=1727424827;
+ d=1e100.net; s=20230601; t=1726820019; x=1727424819;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BQPA2oNB9PirJfGQvYQXRZyYTRomUj/E2bnlK+2Zh+k=;
- b=itPkPs3mT7AEZOXvI47A52vDr4GqZpycRwkHOritIQGgry4zyG/qGK7SsHTDrFiILq
- GmlQi1XlnQjwsTKnliE7eD8XdaDjLy7QoE0bUrId+g3HCBrJHer1GZ8lMwYJMo7YpmUU
- GFtvQMqTUNtkUltjPzqGJQcHUgzTt8kPlXbQHNcDUef+ty6me7O2Fj7VfQ9oNIa9bnNt
- Ht+2LgQmKfFcWjzU1LIfHHvwXsvEIvvPsf8w9zC2gBa68fjsryq10esPwMOYUgFPBAme
- zyTf6DOTYuiXUMhiKrDNhbCdNcRYpGerQXX/l6R7wXpec/NODA45Df79cLPYQFbHQqAG
- v0Cw==
-X-Gm-Message-State: AOJu0Yx5CXCDchHcj2lR5owCmloTNXIz1+sg8vvITtBTuaVeebfkLySC
- 9uPalWz4Kl7gS3Po18LkQM01oomry+r6t+t/inMlhSPlRfCbr2rgO2fY6fMVhAA5jkn8GEZbthq
- EIfgt
-X-Google-Smtp-Source: AGHT+IE5Ogq1iiDE9nIzOrwLFmm00tIzmCzzUX2apCGzlktHvkADzR7U2sWXfLqa0V4MFH8QtMlvzw==
-X-Received: by 2002:a05:6512:3089:b0:536:9ef3:3b0d with SMTP id
- 2adb3069b0e04-536ac2d64abmr1187325e87.2.1726820027101; 
- Fri, 20 Sep 2024 01:13:47 -0700 (PDT)
+ bh=Sngx/D9F4PwcGCUI+gO0BlU+bHlIHERBjQcnW0FsO6I=;
+ b=DDYVusjbPgCJ5jELriCV5H1cCxJhaxeBRdugxfMgIGEOuSK+H3I9/c6K/uOdnVNd6S
+ +CmitXEk1N50b9VrODxyAI9f+DhyqwT1frRslJthc3XY8Huy6R4gda33Lxv9chIRyqfh
+ ny9OFn7C2qkxDArmdKmZE/TEPLVvTfO9Twp3m5BFrcWd2YZJynBoKnPcOMPmjKT3SIIw
+ HPWDgors1ykigbD3A6sL+ZkuCeE8kGJe1QHUFQTdaurT7Q/SVYTBalofTKkhUlSFvSAB
+ kBtu6Izv6xVVcO3nb25zpfKLU0QWIokWiEmvpNK1wI6OkmTjVLrtk+BoE6GFNqYZJG4Z
+ avEQ==
+X-Gm-Message-State: AOJu0YxSlIEMDUjSn2LvO/B43dAMTNwKM+dblabYBp4xpvB68CVfSiSl
+ PJHkB8rgeg3c5wbmPsoRkdba8N+5WcIk5UlIjl/FgN1kMXv1IzlJxyyj/AVk2DrgXeBxRl5diNn
+ GRzG9
+X-Google-Smtp-Source: AGHT+IHQaIUWwWnexHV22Im24HO817Elk1zuVDHP895rgYBk/T5cm5L6RsvUWo5rACmOuwxYlwRN7g==
+X-Received: by 2002:a2e:bc06:0:b0:2f7:939f:a49d with SMTP id
+ 38308e7fff4ca-2f7cc375d60mr9379661fa.24.1726820018782; 
+ Fri, 20 Sep 2024 01:13:38 -0700 (PDT)
 Received: from chromium.org ([83.68.141.146]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c42bc88cf7sm6804447a12.90.2024.09.20.01.13.45
+ 4fb4d7f45d1cf-5c42bc88cf7sm6804447a12.90.2024.09.20.01.13.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Sep 2024 01:13:46 -0700 (PDT)
+ Fri, 20 Sep 2024 01:13:38 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Michal Simek <michal.simek@amd.com>,
- Sean Anderson <sean.anderson@seco.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 16/18] lib: Allow crc8 in TPL and VPL
-Date: Fri, 20 Sep 2024 10:12:55 +0200
-Message-ID: <20240920081309.140426-17-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Devarsh Thakkar <devarsht@ti.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 12/18] spl: Drop a duplicate variable in boot_from_devices()
+Date: Fri, 20 Sep 2024 10:12:51 +0200
+Message-ID: <20240920081309.140426-13-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240920081309.140426-1-sjg@chromium.org>
 References: <20240920081309.140426-1-sjg@chromium.org>
@@ -92,46 +90,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Provide options to enable the CRC8 feature in TPL and VPL builds.
+The variable 'ret' is defined twice, which is not intended. This may
+have been a local merge error.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Fixes: 2eefeb6d893 ("spl: Report a loader failure")
 ---
 
-Changes in v2:
-- Fix 'depends on SPL' to depend on TPL
+(no changes since v1)
 
- lib/Kconfig | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
+ common/spl/spl.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/lib/Kconfig b/lib/Kconfig
-index 4f754c255e8..eca5f8ecb39 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -699,6 +699,24 @@ config SPL_CRC8
- 	  checksum with feedback to produce an 8-bit result. The code is small
- 	  and it does not require a lookup table (unlike CRC32).
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index 3f432d0fa7a..75938aa63cc 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -613,7 +613,6 @@ static int boot_from_devices(struct spl_image_info *spl_image,
+ 	for (i = 0; i < count && spl_boot_list[i] != BOOT_DEVICE_NONE; i++) {
+ 		struct spl_image_loader *loader;
+ 		int bootdev = spl_boot_list[i];
+-		int ret;
  
-+config TPL_CRC8
-+	bool "Support CRC8 in TPL"
-+	depends on TPL
-+	help
-+	  Enables CRC8 support in TPL. This is not normally required. CRC8 is
-+	  a simple and fast checksumming algorithm which does a bytewise
-+	  checksum with feedback to produce an 8-bit result. The code is small
-+	  and it does not require a lookup table (unlike CRC32).
-+
-+config VPL_CRC8
-+	bool "Support CRC8 in VPL"
-+	depends on VPL
-+	help
-+	  Enables CRC8 support in VPL. This is not normally required. CRC8 is
-+	  a simple and fast checksumming algorithm which does a bytewise
-+	  checksum with feedback to produce an 8-bit result. The code is small
-+	  and it does not require a lookup table (unlike CRC32).
-+
- config SPL_CRC16
- 	bool "Support CRC16 in SPL"
- 	depends on SPL
+ 		if (CONFIG_IS_ENABLED(SHOW_ERRORS))
+ 			ret = -ENXIO;
 -- 
 2.43.0
 
