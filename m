@@ -4,81 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09156CF9C5B
-	for <u-boot@archiver.kernel.org>; Sat, 21 Sep 2024 17:49:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A8E0CF9C5B
+	for <u-boot@archiver.kernel.org>; Sat, 21 Sep 2024 17:58:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7EAB88B23;
-	Sat, 21 Sep 2024 19:49:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D22C3889C5;
+	Sat, 21 Sep 2024 19:58:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="I2HXJ7Ex";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LrZbwB/q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B9EC188AB6; Sat, 21 Sep 2024 19:49:09 +0200 (CEST)
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
+ id 4E7A0889CD; Sat, 21 Sep 2024 19:58:25 +0200 (CEST)
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
+ [IPv6:2607:f8b0:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E3E488AB2
- for <u-boot@lists.denx.de>; Sat, 21 Sep 2024 19:49:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 01E74889AE
+ for <u-boot@lists.denx.de>; Sat, 21 Sep 2024 19:58:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-7a9acc6f22dso297047085a.0
- for <u-boot@lists.denx.de>; Sat, 21 Sep 2024 10:49:07 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-2068a7c9286so32023485ad.1
+ for <u-boot@lists.denx.de>; Sat, 21 Sep 2024 10:58:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1726940946; x=1727545746; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=PDcMVcyAANDE/fsYVaLHbhnVBdAWiJhZZ1oUCe+Hxvg=;
- b=I2HXJ7ExQWfoHeDyhDarNMQXMnUfpfFa5/NgbQ+ynCQX3G3C3M9FoB7cHYiSjjNMJL
- rjGZ2h7tBf4ndF0Z+x+lLStK+9Ydi6gGEjxzLtQOm4W6vQsJOsXXQ4ytGwX0bS21ftQT
- 8vlzIdRqEfv8A4Kaq9fg7/yvsy1gU3Za9M+JQ=
+ d=chromium.org; s=google; t=1726941501; x=1727546301; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=oWEC7Bj18Cy01PSv9znaSIhwAsCGJnjk4HQyu9k4jZo=;
+ b=LrZbwB/q/YgfUNkptNIHKJeF/6hO+VCX3YVQyVknNCzJKdLFEs1Nl0+kd4D163L5HI
+ Spa9JyrZbfhyxkg3B/Bd5N3ecCAOVdTjdugogIX33qiMFJgHYRszeyqzIfJkM6+3S2/h
+ TSoT7k49gIyCTGt2kbn9GIpHfGrz6GTk8TEEo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726940946; x=1727545746;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PDcMVcyAANDE/fsYVaLHbhnVBdAWiJhZZ1oUCe+Hxvg=;
- b=S0py6S4vfhDgMaK23l7HzqliM2mpeqATwAUkcoAR1ZVSwInw+9a8l0VV9+u+HB7VMv
- WEJj+iGaw7Qf4X1CzsxmC7wp9O0QJRxXJz+HImOJVSDN8HFFuKSB0M2WI24mxuQbPXiA
- ck8qrjbfcUNbh2N/XGU1CVwDbA83cPKk1yaO5vwvpOy0D1i/YEfQ/XhsftPINIczJkBl
- sQ1W/1KyHp/vLRoWKCcHlaNioRi8ZTKKxPgb+SCvUWo1yyK0UR679AK7bOcj5MFXZVJR
- WBbQ3Mx/F2kRngfJ6NvZnOhpbz/ITswD6RpP5YTWTe27hpCS107ybM3MLif76wEuqDlQ
- UehA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWUzhvXNBPeINRuvewRFLWpWbzWAY0KX6ldu/32CQ6ThMwHio39/tTsusVWFlsLjK0i40cYSXo=@lists.denx.de
-X-Gm-Message-State: AOJu0YxIV29swPXdSe0F+2dTjfOfws7VG9iDq26LThFhr+yVZFyK08RO
- HC0QYfRWKmo7O9MQjGTG+ONdIEtOkvLktdQADVJxUb0nnxiTdyRN1aHcsOSaIZs=
-X-Google-Smtp-Source: AGHT+IFuf+GWtdE1CQ11nVopSNkCc/Iom5/mrdBwt5e8ZB8cL63yP7fyVTqV1QHXIDgAqzIec5hzvg==
-X-Received: by 2002:a05:620a:2945:b0:7a9:bafd:635b with SMTP id
- af79cd13be357-7acb821f64bmr1006448385a.60.1726940946475; 
- Sat, 21 Sep 2024 10:49:06 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7acb08d9552sm310040485a.120.2024.09.21.10.49.04
+ d=1e100.net; s=20230601; t=1726941501; x=1727546301;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=oWEC7Bj18Cy01PSv9znaSIhwAsCGJnjk4HQyu9k4jZo=;
+ b=IHlwsk9skthv9XLuBO86QdJLVhudaq9+sZAL3CbHOJGNbZInKL+r2NdWyGHJb57Vfe
+ DgH3nfc0OigezhRNpCPx5ugPcJHU8YkuHXK9xRghPItVzVMQmQDRYT7ErpGk1CJlGwuN
+ 5pTPmB53ZpkklIXLcWxmLL1zO5iWrm4+tkISoDd5hsarfGV380nh7uJ29zxMMDx+yeRx
+ RyDI2FVlIFjYc1Fs8HAzjqqS39R3nB4efXQfeOR+PbNZw2Gd0FPzQjDitvVjLnLprz7S
+ gSt8g5XVZBqvPcjLwft/u9F3qoNSRvnm5vkKHQ9FUi6Ezd65+fDEjIybSgVVCWHA5m7I
+ oDxQ==
+X-Gm-Message-State: AOJu0YwV9/NZHRt5qiWGDaWIZc9nlWc8z/fP38MjVvFX3SPx0VcUlcDl
+ h17/RGQ90kSpFWdUraOYM0Bwote4hPt/iUbwoMWGLQQPVrNIpZ6USq5bmBDvDCIqmdoN2MJtD20
+ EkODg8H4=
+X-Google-Smtp-Source: AGHT+IF4oqwaPcRkOt/ePSWVs4Z8SUVx12ZHuVizgbpeTsbqagRyzumSDlHHcxhWMVusGnKBzq2jrw==
+X-Received: by 2002:a17:902:f54e:b0:205:721f:ec6f with SMTP id
+ d9443c01a7336-208d83ca200mr104619635ad.35.1726941501283; 
+ Sat, 21 Sep 2024 10:58:21 -0700 (PDT)
+Received: from chromium.org ([172.58.27.60]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2079460138fsm111329645ad.77.2024.09.21.10.58.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 21 Sep 2024 10:49:05 -0700 (PDT)
-Date: Sat, 21 Sep 2024 11:49:02 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+ Sat, 21 Sep 2024 10:58:20 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>
-Subject: Re: [PATCH v6] mmc: Poll CD in case cyclic framework is enabled
-Message-ID: <20240921174902.GM4252@bill-the-cat>
-References: <20240906171110.91195-1-marek.vasut+renesas@mailbox.org>
- <87wmjli59e.fsf@prevas.dk> <20240909143236.GB4252@bill-the-cat>
- <87ikv3j1ik.fsf@prevas.dk>
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] buildman: Correct some warnings about regex strings
+Date: Sat, 21 Sep 2024 19:57:57 +0200
+Message-ID: <20240921175800.437341-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="CzUVkt1mqbpW34/f"
-Content-Disposition: inline
-In-Reply-To: <87ikv3j1ik.fsf@prevas.dk>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,94 +86,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+With Python 3.12 some warnings have cropped up. Fix them.
 
---CzUVkt1mqbpW34/f
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-On Tue, Sep 10, 2024 at 11:34:11AM +0200, Rasmus Villemoes wrote:
-> Tom Rini <trini@konsulko.com> writes:
->=20
-> > On Mon, Sep 09, 2024 at 10:46:21AM +0200, Rasmus Villemoes wrote:
-> >>=20
-> >>=20
-> >> Again, just do cyclic_unregister() unconditionally.
-> >
-> > The challenge here is that Simon asked for all of this as part of
-> > feedback for v3. What are your thoughts here, Simon?
->=20
-> No, AFAICT he asked for not adding new ifdefs to C code. But if the
-> existence of the cyclic member of struct mmc is conditional (whether via
-> an ifdef or via the CONFIG_IS_ENABLED(FOO, (), ()) construction), one is
-> forced to have ifdefs or that very same CONFIG_IS_ENABLED(FOO, (), ())
-> in C code. Which makes the whole thing rather unreadble IMO.
->=20
-> Which is why I did the series to convert the cyclic_info to something
-> that you embed in your client struct, and which goes away (has size 0)
-> when !CYCLIC, but still syntactically exists, so C code can still just
-> do &mmc->cyclic and everything works. No ifdefs or nested uses of
-> CONFIG_IS_ENABLED() anywhere, and no need to guard the callback function
-> or mark it maybe_unused.
->=20
-> So I tried fetching this patch, build with and without CYCLIC, then do
-> all the simplifications I suggest above, and build again with and
-> without cyclic. No build errors or warning as I expected, but, comparing
-> the object code does reveal something that I need to ask about.
->=20
-> Assuming CONFIG_CYCLIC and unwrapping all the CONFIG_IS_ENABLED stuff,
-> mmc_init() does
->=20
->   if (!mmc->cyclic.func)
->      cyclic_register()
->=20
-> while mmc_deinit() does
->=20
->   if (mmc->cyclic.func)
->     cyclic_unregister()
->=20
-> There are some lifetime issues here that I think are pretty
-> non-obvious. mmc_deinit() can get called from the cyclic callback
-> itself, but nothing ever clears ->cyclic.func, so can't mmc_deinit()
-> also later be called from, say, mmc_blk_remove() ?
->=20
-> I also find it a bit odd that cyclic_register() is done regardless of
-> whether mmc->has_init got set to 0 or 1 (i.e. whether
-> mmc_complete_init() has failed). So can mmc_init() end up returning
-> failure, yet still have registered the cyclic function?
->=20
-> And what if mmc_init() is succesfully called, later mmc_deinit()
-> succesfully called, and then mmc_init() again and finally mmc_deinit()
-> once more. The first will set ->cyclic.func via the register call, the
-> second will unregister because ->cyclic.func is set, the third will
-> _not_ register again because ->cyclic.func is (still) set, and then the
-> fourth will crash because ->cyclic.func is set so cyclic_unregister() is
-> called on something which is not in the list. But maybe that simply
-> can't happen at all because mmc_init() is called at most once? But then
-> why the conditional on ->cyclic.func in the first place?
+ tools/buildman/builder.py   | 6 +++---
+ tools/buildman/toolchain.py | 8 ++++----
+ 2 files changed, 7 insertions(+), 7 deletions(-)
 
-That's all a very good question that I don't think anyone can answer
-without going through the cases, unfortunately.
+diff --git a/tools/buildman/builder.py b/tools/buildman/builder.py
+index 4090d328b30..cbf1345281b 100644
+--- a/tools/buildman/builder.py
++++ b/tools/buildman/builder.py
+@@ -34,7 +34,7 @@ from u_boot_pylib.terminal import tprint
+ # Error in reading or end of file.
+ # <<
+ # which indicates that BREAK_ME has an empty default
+-RE_NO_DEFAULT = re.compile(b'\((\w+)\) \[] \(NEW\)')
++RE_NO_DEFAULT = re.compile(br'\((\w+)\) \[] \(NEW\)')
+ 
+ # Symbol types which appear in the bloat feature (-B). Others are silently
+ # dropped when reading in the 'nm' output
+@@ -374,9 +374,9 @@ class Builder:
+ 
+         self._re_function = re.compile('(.*): In function.*')
+         self._re_files = re.compile('In file included from.*')
+-        self._re_warning = re.compile('(.*):(\d*):(\d*): warning: .*')
++        self._re_warning = re.compile(r'(.*):(\d*):(\d*): warning: .*')
+         self._re_dtb_warning = re.compile('(.*): Warning .*')
+-        self._re_note = re.compile('(.*):(\d*):(\d*): note: this is the location of the previous.*')
++        self._re_note = re.compile(r'(.*):(\d*):(\d*): note: this is the location of the previous.*')
+         self._re_migration_warning = re.compile(r'^={21} WARNING ={22}\n.*\n=+\n',
+                                                 re.MULTILINE | re.DOTALL)
+ 
+diff --git a/tools/buildman/toolchain.py b/tools/buildman/toolchain.py
+index 6ca79c2c0f9..da8fd1b072c 100644
+--- a/tools/buildman/toolchain.py
++++ b/tools/buildman/toolchain.py
+@@ -438,12 +438,12 @@ class Toolchains:
+         This converts ${blah} within the string to the value of blah.
+         This function works recursively.
+ 
++            Resolved string
++
+         Args:
+             var_dict: Dictionary containing variables and their values
+             args: String containing make arguments
+         Returns:
+-            Resolved string
+-
+         >>> bsettings.setup(None)
+         >>> tcs = Toolchains()
+         >>> tcs.Add('fred', False)
+@@ -454,7 +454,7 @@ class Toolchains:
+         >>> tcs.ResolveReferences(var_dict, 'this=${oblique}_set${first}nd')
+         'this=OBLIQUE_setfi2ndrstnd'
+         """
+-        re_var = re.compile('(\$\{[-_a-z0-9A-Z]{1,}\})')
++        re_var = re.compile(r'(\$\{[-_a-z0-9A-Z]{1,}\})')
+ 
+         while True:
+             m = re_var.search(args)
+@@ -493,7 +493,7 @@ class Toolchains:
+         self._make_flags['target'] = brd.target
+         arg_str = self.ResolveReferences(self._make_flags,
+                            self._make_flags.get(brd.target, ''))
+-        args = re.findall("(?:\".*?\"|\S)+", arg_str)
++        args = re.findall(r"(?:\".*?\"|\S)+", arg_str)
+         i = 0
+         while i < len(args):
+             args[i] = args[i].replace('"', '')
+-- 
+2.43.0
 
---=20
-Tom
-
---CzUVkt1mqbpW34/f
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbvBw4ACgkQFHw5/5Y0
-tyxpYAwAqoLT9KxZyiSMqYn/kYEKFjdPsX+XLCd4QrwITrRoh3huEJ1LGVBbApcp
-eWqnQcjp4iE8qovt8d6lCz/sX2OuLSsnD1fkZf8ZcC1DlWYJcySQl84Gc5JMm7Ao
-Dt0itGb9bkYebq4bYEvZXnRm9HM5/fNJzhFz7ht7RRwCX72SWo881xA392g5r/+9
-WjZQAD179FFIQwOIdiw6oo/YpOOFf050RJNqmcoG/LSUSZ93MDT8uvwXlqfpqCT+
-GfXh42KPekcHUuoiz/Gzqz0I4HtHgbhyXUapVPJiBXBXwNHdO+SDR4FJ/dAxZk1E
-bNgcdnlih6u4CpVPdzG8/hKvV8sBCi57walT46WC4M8KEhtzHpZpaicuYMIGkuO/
-ofwoBcRzvLhmwDBBIBPlgjmT/PTrCsF9Sd5nka7qoYUac4waCHISGN60UiFHYuZQ
-voA8LF2W4FFCOe6WG9aaPg8L+IcXTxZLAa82HekOQ+sts+W9YSaMXwOuLyO4f7lk
-vZegM9nn
-=+F27
------END PGP SIGNATURE-----
-
---CzUVkt1mqbpW34/f--
