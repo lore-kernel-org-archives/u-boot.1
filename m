@@ -4,98 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AA40CF9C5B
-	for <u-boot@archiver.kernel.org>; Sat, 21 Sep 2024 11:14:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B70DACF9C5B
+	for <u-boot@archiver.kernel.org>; Sat, 21 Sep 2024 11:35:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45A3F88413;
-	Sat, 21 Sep 2024 13:14:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 216A488413;
+	Sat, 21 Sep 2024 13:35:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="JeYxpIfx";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HozzNdvO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 235A58839A; Sat, 21 Sep 2024 13:14:52 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 9C48088646; Sat, 21 Sep 2024 13:35:22 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A28E88646
- for <u-boot@lists.denx.de>; Sat, 21 Sep 2024 13:14:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 6E2F38839A
+ for <u-boot@lists.denx.de>; Sat, 21 Sep 2024 13:35:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-5c44e1cde53so3578685a12.0
- for <u-boot@lists.denx.de>; Sat, 21 Sep 2024 04:14:48 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-42cc43454d5so22686165e9.3
+ for <u-boot@lists.denx.de>; Sat, 21 Sep 2024 04:35:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1726917288; x=1727522088;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RSrKZ6gunJR4O/nUI8kXvl5zy0tLfkDX5/intyCYe7Q=;
- b=JeYxpIfxY/1u8WOlHXQC149/2gpKAkw93k986w7Z9VhOxVhlWkUuwWSWw1+uNvuWFa
- 5GBHuSVhd7jchW4H3kEdgYfcSJke41aMi0ui8uzW9XQKJ721+rdFbcpSUr1ASt7722Me
- Zt8vGJU3E7tPwkVvjdeBeQXR31+X62v57zlPY=
+ d=chromium.org; s=google; t=1726918519; x=1727523319; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=pYnvKvnMobjCfMamjr2yAUbqdYEIJX8aFuLMJy3s7hs=;
+ b=HozzNdvOwPhdQ6Q3cBdfhGL+DtPAXhOgiesW7nq0oaOdJ4DopqT+VUA5WDsifxiykb
+ QGRcU0+ZKdxyimFS5xE8yHkviaxgo1J80bX/uxJBusRpICFzbk6fV3gZa8wUfFASz3/O
+ XFexcAkv5etS5N8rei7qtAT7WB/nugRXRM2iw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726917288; x=1727522088;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=RSrKZ6gunJR4O/nUI8kXvl5zy0tLfkDX5/intyCYe7Q=;
- b=MnhJa/vHWasq2RkQ8Ylfab2ZBg16nhahNtLZuPcX0uNo4QjlWNz+cL15b3f6dSgGoB
- ud5D5BFbsCYfxsRMtBVN6TLNdiMtPWwj9quKtSaxhsWddavTErbSoAH00WePeC18SSMO
- 2BaEFtvAoAnaBbHH7+chV8FX5hjj4PyfBGFKmaD2ubpsmNT0SyUMpcsjqEWtfglTtHQG
- HkUvtK9F6Cwq7QfY5WmNg/U3YvKuk8SMmsdeUXzlql87fx9/MAHACOIAQ+C94O+0dr3/
- +yQqrnqG17wuHx8bg7jNJ+/YbJCFPToKqQJYgzC+KG0a8kFOIJuZoialKu/pcYCXujOQ
- iWsw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWN6xXt8IwT2mdR/3NQjHQGwW+HKi/b7xb0Gjg7AbrEF+ZlwnCiy/sqKUiLASQKZ6sLdLuAx0E=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxm/t8awDc5PSsJ+dkfmPLA4jP03r0LfayNEyls9l+Qu6fUNR/L
- drxZzULYdFih7rr4aJwnuTHT51O7UIhwK2lG/r6KK7MImSSPjV9DDwHMau4WCCWrMAWOVyOdiqL
- mDQs04BxM4JzJO15UpBaSvSAke4bYRGajp7spNQ==
-X-Google-Smtp-Source: AGHT+IGYbQlj1lFv1KhCIEawy1UIUXrw5bfjz8t/gPjtcd9xDUvv5LhiHoh5WFbxTdBYMfWq7uMnKKlwY0qltpRNz9I=
-X-Received: by 2002:a17:907:c7e8:b0:a8d:2faf:d329 with SMTP id
- a640c23a62f3a-a90d4fe01d6mr543007066b.2.1726917287582; Sat, 21 Sep 2024
- 04:14:47 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1726918519; x=1727523319;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=pYnvKvnMobjCfMamjr2yAUbqdYEIJX8aFuLMJy3s7hs=;
+ b=uoSVeYiQVhnXqas1ghdmIVJ2U54nYF+9I/NzGbNdYhsfHkLQxkiR5Ie5HbA/kgYtr9
+ w46fIdBRBZ5+U58fzFttJFIrrtwnbnf51ie2ixN7Aa8/oisfL5iWhieRot+Ffl6Rlg2c
+ AJsJtgqWYuQ55hwXXOw3nTj9gTBEhn/2qinfy9MvmSl7nDLk6tUzK6qx0Z2EEKgqKv8n
+ Cz6UHd/cbh50wmoz+Am5ylefEvoNY1AW6KGcfZmCv0kGXrSw/PhGkTPeut1oafWgJA5b
+ HKtquqo6ZtwXld/n73VnjXAlQ32WWDLDIaOI7Kh3rTXCAlUDmjJWPuivxgVue9wx0pHJ
+ 27AQ==
+X-Gm-Message-State: AOJu0YyOKBcqV+kJDakA6k7Wanu21Ci0wERMHYiJskzPyHGcwPfIpH56
+ oqZKhxHa37YLpdCckKsDAN3tGdUqq4p4LvPhkK5avohkLWa5ynng+KLFMZhfMihG21HlWZfzGtQ
+ xKlEz
+X-Google-Smtp-Source: AGHT+IGMJm9tehTqlM8IcnwEX8L6oX2iEh6UA+8p+uFCw+83p7w7Cs0vtQAQu4OqPD0ZXzi4e0HP4w==
+X-Received: by 2002:a05:600c:1550:b0:42b:af5a:109 with SMTP id
+ 5b1f17b1804b1-42e7ad8b143mr34236765e9.24.1726918519258; 
+ Sat, 21 Sep 2024 04:35:19 -0700 (PDT)
+Received: from chromium.org (82-132-231-226.dab.02.net. [82.132.231.226])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-42e7afec0c3sm47667425e9.37.2024.09.21.04.35.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 21 Sep 2024 04:35:18 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>,
+	Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 05/18] malloc: Show amount of used space when memory runs
+ out
+Date: Sat, 21 Sep 2024 13:34:33 +0200
+Message-ID: <20240921113450.319072-6-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20240920225101.2008-1-ansuelsmth@gmail.com>
- <20240920225101.2008-2-ansuelsmth@gmail.com>
-In-Reply-To: <20240920225101.2008-2-ansuelsmth@gmail.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Sat, 21 Sep 2024 13:14:36 +0200
-Message-ID: <CAOf5uwm=tNC_avNj8U_AfxqMq3BJsSrsW=wfO4TnvjcTmA1MRQ@mail.gmail.com>
-Subject: Re: [PATCH v4 01/11] led: toggle LED on initial SW blink
-To: Christian Marangi <ansuelsmth@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
- Michal Simek <michal.simek@amd.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Sean Anderson <seanga2@gmail.com>, 
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
- Eddie James <eajames@linux.ibm.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Yang Xiwen <forbidden405@outlook.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Arseniy Krasnov <avkrasnov@salutedevices.com>, Heiko Schocher <hs@denx.de>, 
- Alexey Romanov <avromanov@salutedevices.com>, 
- Martin Kurbanov <mmkurbanov@salutedevices.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Artur Rojek <artur@conclusive.pl>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Vasileios Amoiridis <vassilisamir@gmail.com>, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
- Michael Polyntsov <michael.polyntsov@iopsys.eu>,
- Doug Zobel <douglas.zobel@climate.com>, 
- Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
- John Crispin <john@phrozen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,92 +87,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+Show a bit more information when malloc() space is exhausted and
+debugging is not enabled.
 
-On Sat, Sep 21, 2024 at 12:51=E2=80=AFAM Christian Marangi <ansuelsmth@gmai=
-l.com> wrote:
->
-> We currently init the LED OFF when SW blink is triggered when
-> on_state_change() is called. This can be problematic for very short
-> period as the ON/OFF blink might never trigger.
->
-> Toggle the LED (ON if OFF, OFF if ON) on initial SW blink to handle this
-> corner case and better display a LED blink from the user.
->
-> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> ---
->  drivers/led/led_sw_blink.c | 10 +++++++++-
->  1 file changed, 9 insertions(+), 1 deletion(-)
->
-> diff --git a/drivers/led/led_sw_blink.c b/drivers/led/led_sw_blink.c
-> index 9e36edbee47..9d9820720c6 100644
-> --- a/drivers/led/led_sw_blink.c
-> +++ b/drivers/led/led_sw_blink.c
-> @@ -103,8 +103,16 @@ bool led_sw_on_state_change(struct udevice *dev, enu=
-m led_state_t state)
->                 return false;
->
->         if (state =3D=3D LEDST_BLINK) {
-> +               struct led_ops *ops =3D led_get_ops(dev);
-> +               enum led_state_t curr_state =3D led_get_state(dev);
-> +
-> +               curr_state =3D ops->get_state(dev);
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
+Changes in v3:
+- Add the missing word 'not' into the commit message
 
-The led_get_state return  curr_state. You need to use a) led_set/get
-state or them from ops
+Changes in v2:
+- Add field names into the message
 
-if (state =3D=3D LEDST_BLINK) {
-        const struct led_ops *ops =3D led_get_ops(dev);
-        enum led_state_t curr_state =3D ops->get_state(dev);
-        enun led_state_t next_state;
+ common/malloc_simple.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-        switch (curr_state) {
-        case LEDST_ON:
-                sw_blink->state =3D LED_SW_BLINK_ST_OFF;
-                next_state =3D LEDST_OFF;
-               break;
-        case LEDST_OFF:
-                sw_blink->state =3D LED_SW_BLINK_ST_ON;
-                next_state =3D LEDST_ON;
-                break;
-        }
+diff --git a/common/malloc_simple.c b/common/malloc_simple.c
+index 5a8ec538f8f..f0f90a095bd 100644
+--- a/common/malloc_simple.c
++++ b/common/malloc_simple.c
+@@ -26,7 +26,8 @@ static void *alloc_simple(size_t bytes, int align)
+ 	log_debug("size=%lx, ptr=%lx, limit=%x: ", (ulong)bytes, new_ptr,
+ 		  gd->malloc_limit);
+ 	if (new_ptr > gd->malloc_limit) {
+-		log_err("alloc space exhausted\n");
++		log_err("alloc space exhausted ptr %lx limit %x\n", new_ptr,
++			gd->malloc_limit);
+ 		return NULL;
+ 	}
+ 
+-- 
+2.43.0
 
-        ops->set_state(dev, next_state);
-        return true;
-}
-
-Michael
-
-> +               /* toggle led initially */
-> +               ops->set_state(dev, curr_state =3D=3D LEDST_ON ? LEDST_OF=
-F :
-> +                              LEDST_ON);
->                 /* start blinking on next led_sw_blink() call */
-> -               sw_blink->state =3D LED_SW_BLINK_ST_OFF;
-> +               sw_blink->state =3D curr_state =3D=3D LEDST_ON ? LED_SW_B=
-LINK_ST_OFF :
-> +                                 LED_SW_BLINK_ST_ON;
-
-
->                 return true;
->         }
->
-> --
-> 2.45.2
->
-
-
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
