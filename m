@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D5F2CF9C69
-	for <u-boot@archiver.kernel.org>; Sat, 21 Sep 2024 02:39:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26738CF9C68
+	for <u-boot@archiver.kernel.org>; Sat, 21 Sep 2024 02:39:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6263F8839A;
-	Sat, 21 Sep 2024 04:39:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F37928884F;
+	Sat, 21 Sep 2024 04:39:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rhG1BpK8";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aLbqbGlT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E3DE88356; Sat, 21 Sep 2024 04:39:21 +0200 (CEST)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+ id 7463488753; Sat, 21 Sep 2024 04:39:37 +0200 (CEST)
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [IPv6:2607:f8b0:4864:20::f29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD4208841E
- for <u-boot@lists.denx.de>; Sat, 21 Sep 2024 04:39:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1104D87E30
+ for <u-boot@lists.denx.de>; Sat, 21 Sep 2024 04:39:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-7a99e8c32c0so258806285a.3
- for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 19:39:18 -0700 (PDT)
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-6c7b57e2b17so16746246d6.3
+ for <u-boot@lists.denx.de>; Fri, 20 Sep 2024 19:39:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1726886358; x=1727491158; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1726886374; x=1727491174; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=B0g6d5QUietbvmIPZy0r3p+1GjnLbs/+WORfRdNB0G0=;
- b=rhG1BpK8zXUSSSf4HiBQuPvZdLOp2Tdm+UjB0ZMCp9Dz62VaPLqh14KHA4VqCulaof
- X7VCjhPAv7YnypWiMqHgM93TqjCcVkSaGqdsklyjP7u+F+egHB345+9IwSd8y0a9dXEB
- MMxhbFQFBZwn3LplCrIJ/9ABuI/znNwjxVAC4=
+ bh=ineV/GfhJJwm/TptQCJyoYgQtQrgSSpTKof0nIXxnv8=;
+ b=aLbqbGlT7nWFIZMSpJYx4ysZm5u+ovTvWsuNT9EA/VKiYCXKl9VqkZNeRiNzluECDZ
+ k7ZtRSbTYTM9g2KvzOJGP5IZdc+P0oYMci0niU7ZM1gkHEw9aO5/xjJ9AJtrYAy0dXeg
+ 79jo+3lpE4vbqSzdd415tnbBSiZD2lgEeQosk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726886358; x=1727491158;
+ d=1e100.net; s=20230601; t=1726886374; x=1727491174;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=B0g6d5QUietbvmIPZy0r3p+1GjnLbs/+WORfRdNB0G0=;
- b=sRwTXarj7DxMSyoQFWhW4J4vIwUuSgocMLBLclu6U0jZ+gRULCkrCU3OErPf056YsH
- extECJKZ01CzjYfhVryTEVH8Z6wHBenqKff4UxjpasAm3AOtPMNxbo0FBYMKkFPL6TBK
- +ZGrXl9ikpZ2SV6bXNl8Q5Fx+l7xxHxa+0ltJ4wpeVKK1ExcmEX1uuUgsxg4Ds0FpGfZ
- KWeM2WvFJozEg58KvgEdadya3OQkT6eIxViPlHGsTincTxfPpmL5XEqNgBcTVvGSvmQs
- vu/25ckiAYqPJW5Jw2n3em4nu1HVX4RpYeovXQgpJIwHcNnY3Zh8oi7mYejfU8R+NLAY
- +stw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUZBlKU7spDHFG71fgzEXHhYh2T6bZApHw7tr9khv4SKKx4XB/UI+TyVZEum7aSAOpf9OsYBQw=@lists.denx.de
-X-Gm-Message-State: AOJu0YzPBsn3ZDbZbRSW/x3mGT3mPBvvMIi01ie0RSJmSEX6j+UL+RPS
- 56kpgBNjwfoxzjTK+4P815IZnEfhL6nkIpgARn14lSvbR+GdR+CGMF6fUfJ0rdc=
-X-Google-Smtp-Source: AGHT+IH81E/I6TX4kq4EpbkniejdOS0QOtI/x7hCI95Dg6VHqspYWMw+Lsdr0/JQi3HrhlRSxqByKw==
-X-Received: by 2002:a05:620a:400b:b0:7a9:d044:e83e with SMTP id
- af79cd13be357-7acb8e0fc19mr644258385a.57.1726886357623; 
- Fri, 20 Sep 2024 19:39:17 -0700 (PDT)
+ bh=ineV/GfhJJwm/TptQCJyoYgQtQrgSSpTKof0nIXxnv8=;
+ b=uoLHl6D/LDwjbA4hs34gjmlZ+CKM1tXeFyjyLtlsrOEmPMn8SVfU49v7mqE4gypb+j
+ 4xyzOFeSvp695yGHLDcCltKoKyq7fCudBfFR7xfiiyskISErjVu89LBKIB4BrhrtFw0k
+ e6JmAQj/LDuEZPd1CzqgRdFpCfWA5MHKpNviaXxSLqxRPdzT3YNYYWxTcLQaHFdxossf
+ gT+3fgTtuZijFLfJs1f4lCphN2y7lFqWJZfIWujEpG2pgPHHTdionUXhE94u+KUH8ITf
+ dzqYaw8iA0CnqPCkmVQ1GiHZonEoqNG3QgVndLPU/BdjAcIGfzaQFMtgXJuf2Ncgnxg5
+ HySQ==
+X-Gm-Message-State: AOJu0Yy3OwbsIN0ucd8xfk1LVtbjxueijWivNSjJxREYnqGfsW11o/Eq
+ N4ZiNcQ0sUqNvIN9Wv3iBM89d7JQBYUw+el26KvHW4lGl+T96QGLZF8AjRQnJ7k=
+X-Google-Smtp-Source: AGHT+IF4SYmfn3hAWzMV0Pdzi5tbxOR+E+75OEN7max0i2TNEOJtA4ngk5ZuNCY2YuRtTE9w5+nbnw==
+X-Received: by 2002:a05:620a:f10:b0:7a1:c40c:b1f1 with SMTP id
+ af79cd13be357-7acb82255c2mr791665185a.58.1726886373820; 
+ Fri, 20 Sep 2024 19:39:33 -0700 (PDT)
 Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7acb07dfebasm250227985a.17.2024.09.20.19.39.15
+ af79cd13be357-7acb082a3cfsm251414885a.70.2024.09.20.19.39.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Sep 2024 19:39:16 -0700 (PDT)
+ Fri, 20 Sep 2024 19:39:32 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Udit Kumar <u-kumar1@ti.com>
-Cc: nm@ti.com, u-boot@lists.denx.de, n-francis@ti.com, rogerq@kernel.org, 
- afd@ti.com, bb@ti.com, j-humphreys@ti.com, sumit.garg@linaro.org, 
- Robert Nelson <robertcnelson@gmail.com>
-In-Reply-To: <20240917081329.370288-1-u-kumar1@ti.com>
-References: <20240917081329.370288-1-u-kumar1@ti.com>
-Subject: Re: [PATCH] dts: beagleboneai64: Add boothph in chipid node
-Message-Id: <172688635501.2451723.15227577386354920986.b4-ty@konsulko.com>
-Date: Fri, 20 Sep 2024 20:39:15 -0600
+To: u-boot@lists.denx.de, Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Ramon Fried <rfried.dev@gmail.com>, 
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Vaishnav Achath <vaishnav.a@ti.com>
+In-Reply-To: <20240916152025.75789-1-sughosh.ganu@linaro.org>
+References: <20240916152025.75789-1-sughosh.ganu@linaro.org>
+Subject: Re: [PATCH 0/2] lmb: rework logic to validate load address for
+ network commands
+Message-Id: <172688637179.2451825.4736403690225486599.b4-ty@konsulko.com>
+Date: Fri, 20 Sep 2024 20:39:31 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -92,16 +91,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 17 Sep 2024 13:43:29 +0530, Udit Kumar wrote:
+On Mon, 16 Sep 2024 20:50:23 +0530, Sughosh Ganu wrote:
 
-> beagleboneai64 boot was broken after OF_UPSTREAM support for
-> J721E SOC.
-> So add bootph in chipid node similar to other boards of
-> this SOC.
+> Rework the logic to verify the load address so that address re-use is
+> not an issue.
 > 
 > 
+> Note: To be applied on next, on top of
+> https://patchwork.ozlabs.org/project/uboot/patch/20240913073251.2286529-2-prasad.kummari@amd.com/
+> 
+> [...]
 
-Applied to u-boot/master, thanks!
+Applied to u-boot/next, thanks!
 
 -- 
 Tom
