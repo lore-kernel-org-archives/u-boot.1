@@ -4,75 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC07DCF9C5B
-	for <u-boot@archiver.kernel.org>; Sat, 21 Sep 2024 17:49:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09156CF9C5B
+	for <u-boot@archiver.kernel.org>; Sat, 21 Sep 2024 17:49:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6513D889AE;
-	Sat, 21 Sep 2024 19:49:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D7EAB88B23;
+	Sat, 21 Sep 2024 19:49:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FADWK1jn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="I2HXJ7Ex";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65BAD88A43; Sat, 21 Sep 2024 19:49:01 +0200 (CEST)
-Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
- [IPv6:2607:f8b0:4864:20::72b])
+ id B9EC188AB6; Sat, 21 Sep 2024 19:49:09 +0200 (CEST)
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 046308868E
- for <u-boot@lists.denx.de>; Sat, 21 Sep 2024 19:48:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E3E488AB2
+ for <u-boot@lists.denx.de>; Sat, 21 Sep 2024 19:49:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72b.google.com with SMTP id
- af79cd13be357-7ac83a98e5eso264506085a.0
- for <u-boot@lists.denx.de>; Sat, 21 Sep 2024 10:48:58 -0700 (PDT)
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-7a9acc6f22dso297047085a.0
+ for <u-boot@lists.denx.de>; Sat, 21 Sep 2024 10:49:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1726940938; x=1727545738; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1726940946; x=1727545746; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=XuVnDqBS/QvCpJ99FedED9FNrzO0JtkBgXRmbPcfMxw=;
- b=FADWK1jnS5CjrBKvs+GpgnIE8BbBsXJBakNYcgmaalNsD1CxRD1NWy+lvMELxWmF9V
- 1qfbgWfg0z6yXYNAnv6zwkzMJeecp4Pt9dnoqamX9EM6+U5JBrq1TPcbuvqMBf1jqYi0
- /kZNpIvUzDrJwXDHisAfoKd8ats2uhp59+kn4=
+ bh=PDcMVcyAANDE/fsYVaLHbhnVBdAWiJhZZ1oUCe+Hxvg=;
+ b=I2HXJ7ExQWfoHeDyhDarNMQXMnUfpfFa5/NgbQ+ynCQX3G3C3M9FoB7cHYiSjjNMJL
+ rjGZ2h7tBf4ndF0Z+x+lLStK+9Ydi6gGEjxzLtQOm4W6vQsJOsXXQ4ytGwX0bS21ftQT
+ 8vlzIdRqEfv8A4Kaq9fg7/yvsy1gU3Za9M+JQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726940938; x=1727545738;
+ d=1e100.net; s=20230601; t=1726940946; x=1727545746;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XuVnDqBS/QvCpJ99FedED9FNrzO0JtkBgXRmbPcfMxw=;
- b=SWl9ohh6b3/qHv/KBBnJS1wZVktQbn5e6tCTTJQhKInnyFK2lfeA98TwQPKbM+InH8
- p5NhHApaeCY+yLOV9sc+8nCLvgn9kNbitysEeg8ZB/jfxWETHvup6TNtIvOe2lALWhnS
- SchrehG53cmHQicxo2BCC6+l2clfYH4E2wgiEWMaKUDN8xMBm6tfhdJrtC1Ick9cx+gV
- +m2DTdNT3qFJo1HV7xVDknaQX1frH3xV1gmBd6h5c83ulsCdWN4DyaIoK2juamcinSoq
- uwY6c/Tmz7qxwnR+m9XxXQn/qvULP2JrL4jRyGeS0c6lZ3im4OYIpFaMyvmWO+Ltj4XJ
- 571w==
-X-Gm-Message-State: AOJu0Yzn7Ft2mF0aSjYpa952X4toihCYmtUROx4Pk+Be/ut2BbQ5jpsO
- P6fwEBlv15C4XgzjRJYknTkFScgkVsdoXsM8xrXuw97YwH4KGXel0RJ9uKyOlKY=
-X-Google-Smtp-Source: AGHT+IGIWlYgoNJ0NkFURxS2e8irAlA7rRuade8CEnvqGogTAqkB8KFEJeNbO4p41TDsqjMc3DZuTg==
-X-Received: by 2002:a05:620a:1a89:b0:7a9:aaef:305e with SMTP id
- af79cd13be357-7acb7d76e7cmr1256073985a.12.1726940937839; 
- Sat, 21 Sep 2024 10:48:57 -0700 (PDT)
+ bh=PDcMVcyAANDE/fsYVaLHbhnVBdAWiJhZZ1oUCe+Hxvg=;
+ b=S0py6S4vfhDgMaK23l7HzqliM2mpeqATwAUkcoAR1ZVSwInw+9a8l0VV9+u+HB7VMv
+ WEJj+iGaw7Qf4X1CzsxmC7wp9O0QJRxXJz+HImOJVSDN8HFFuKSB0M2WI24mxuQbPXiA
+ ck8qrjbfcUNbh2N/XGU1CVwDbA83cPKk1yaO5vwvpOy0D1i/YEfQ/XhsftPINIczJkBl
+ sQ1W/1KyHp/vLRoWKCcHlaNioRi8ZTKKxPgb+SCvUWo1yyK0UR679AK7bOcj5MFXZVJR
+ WBbQ3Mx/F2kRngfJ6NvZnOhpbz/ITswD6RpP5YTWTe27hpCS107ybM3MLif76wEuqDlQ
+ UehA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWUzhvXNBPeINRuvewRFLWpWbzWAY0KX6ldu/32CQ6ThMwHio39/tTsusVWFlsLjK0i40cYSXo=@lists.denx.de
+X-Gm-Message-State: AOJu0YxIV29swPXdSe0F+2dTjfOfws7VG9iDq26LThFhr+yVZFyK08RO
+ HC0QYfRWKmo7O9MQjGTG+ONdIEtOkvLktdQADVJxUb0nnxiTdyRN1aHcsOSaIZs=
+X-Google-Smtp-Source: AGHT+IFuf+GWtdE1CQ11nVopSNkCc/Iom5/mrdBwt5e8ZB8cL63yP7fyVTqV1QHXIDgAqzIec5hzvg==
+X-Received: by 2002:a05:620a:2945:b0:7a9:bafd:635b with SMTP id
+ af79cd13be357-7acb821f64bmr1006448385a.60.1726940946475; 
+ Sat, 21 Sep 2024 10:49:06 -0700 (PDT)
 Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7acb07ddd1dsm309736785a.25.2024.09.21.10.48.55
+ af79cd13be357-7acb08d9552sm310040485a.120.2024.09.21.10.49.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 21 Sep 2024 10:48:56 -0700 (PDT)
-Date: Sat, 21 Sep 2024 11:48:53 -0600
+ Sat, 21 Sep 2024 10:49:05 -0700 (PDT)
+Date: Sat, 21 Sep 2024 11:49:02 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Thomas Perrot <thomas.perrot@bootlin.com>
-Subject: Re: [MASTER] Pull request doc-2024-10-rc6
-Message-ID: <20240921174853.GL4252@bill-the-cat>
-References: <00131229-9bdd-45ba-b4a5-c674e1340eab@gmx.de>
+To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Cc: Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>
+Subject: Re: [PATCH v6] mmc: Poll CD in case cyclic framework is enabled
+Message-ID: <20240921174902.GM4252@bill-the-cat>
+References: <20240906171110.91195-1-marek.vasut+renesas@mailbox.org>
+ <87wmjli59e.fsf@prevas.dk> <20240909143236.GB4252@bill-the-cat>
+ <87ikv3j1ik.fsf@prevas.dk>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="YCfNKwAwo7s8x3fC"
+ protocol="application/pgp-signature"; boundary="CzUVkt1mqbpW34/f"
 Content-Disposition: inline
-In-Reply-To: <00131229-9bdd-45ba-b4a5-c674e1340eab@gmx.de>
+In-Reply-To: <87ikv3j1ik.fsf@prevas.dk>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,56 +96,93 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---YCfNKwAwo7s8x3fC
+--CzUVkt1mqbpW34/f
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Sep 21, 2024 at 11:35:19AM +0200, Heinrich Schuchardt wrote:
+On Tue, Sep 10, 2024 at 11:34:11AM +0200, Rasmus Villemoes wrote:
+> Tom Rini <trini@konsulko.com> writes:
+>=20
+> > On Mon, Sep 09, 2024 at 10:46:21AM +0200, Rasmus Villemoes wrote:
+> >>=20
+> >>=20
+> >> Again, just do cyclic_unregister() unconditionally.
+> >
+> > The challenge here is that Simon asked for all of this as part of
+> > feedback for v3. What are your thoughts here, Simon?
+>=20
+> No, AFAICT he asked for not adding new ifdefs to C code. But if the
+> existence of the cyclic member of struct mmc is conditional (whether via
+> an ifdef or via the CONFIG_IS_ENABLED(FOO, (), ()) construction), one is
+> forced to have ifdefs or that very same CONFIG_IS_ENABLED(FOO, (), ())
+> in C code. Which makes the whole thing rather unreadble IMO.
+>=20
+> Which is why I did the series to convert the cyclic_info to something
+> that you embed in your client struct, and which goes away (has size 0)
+> when !CYCLIC, but still syntactically exists, so C code can still just
+> do &mmc->cyclic and everything works. No ifdefs or nested uses of
+> CONFIG_IS_ENABLED() anywhere, and no need to guard the callback function
+> or mark it maybe_unused.
+>=20
+> So I tried fetching this patch, build with and without CYCLIC, then do
+> all the simplifications I suggest above, and build again with and
+> without cyclic. No build errors or warning as I expected, but, comparing
+> the object code does reveal something that I need to ask about.
+>=20
+> Assuming CONFIG_CYCLIC and unwrapping all the CONFIG_IS_ENABLED stuff,
+> mmc_init() does
+>=20
+>   if (!mmc->cyclic.func)
+>      cyclic_register()
+>=20
+> while mmc_deinit() does
+>=20
+>   if (mmc->cyclic.func)
+>     cyclic_unregister()
+>=20
+> There are some lifetime issues here that I think are pretty
+> non-obvious. mmc_deinit() can get called from the cyclic callback
+> itself, but nothing ever clears ->cyclic.func, so can't mmc_deinit()
+> also later be called from, say, mmc_blk_remove() ?
+>=20
+> I also find it a bit odd that cyclic_register() is done regardless of
+> whether mmc->has_init got set to 0 or 1 (i.e. whether
+> mmc_complete_init() has failed). So can mmc_init() end up returning
+> failure, yet still have registered the cyclic function?
+>=20
+> And what if mmc_init() is succesfully called, later mmc_deinit()
+> succesfully called, and then mmc_init() again and finally mmc_deinit()
+> once more. The first will set ->cyclic.func via the register call, the
+> second will unregister because ->cyclic.func is set, the third will
+> _not_ register again because ->cyclic.func is (still) set, and then the
+> fourth will crash because ->cyclic.func is set so cyclic_unregister() is
+> called on something which is not in the list. But maybe that simply
+> can't happen at all because mmc_init() is called at most once? But then
+> why the conditional on ->cyclic.func in the first place?
 
-> Dear Tom,
->=20
-> The following changes since commit 91a7927aa6679d1a3ea30ed9dfe17002d11bca=
-c4:
->=20
->   dts: beagleboneai64: Add boothph in chipid node (2024-09-20 18:08:34
-> -0600)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-> tags/doc-2024-10-rc6
->=20
-> for you to fetch changes up to 7803a66399381570dae5cea030b01b26cd5ca676:
->=20
->   doc: usage: cmd: ums: fix dependencies (2024-09-21 11:22:42 +0200)
->=20
-> Gitlab CI showed not issues building the documentation:
-> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/22388
-> https://source.denx.de/u-boot/custodians/u-boot-efi/-/jobs/904189/raw
->=20
-
-Applied to u-boot/master, thanks!
+That's all a very good question that I don't think anyone can answer
+without going through the cases, unfortunately.
 
 --=20
 Tom
 
---YCfNKwAwo7s8x3fC
+--CzUVkt1mqbpW34/f
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbvBv0ACgkQFHw5/5Y0
-tyxQWwwAj+gKZIoyF/vvMiykCkr8qvfuq6G5c+cHiTdWnYLHC71rpn2E2B8dNrPQ
-JmcKeJz7wdhCcJ3TIrcZ8NfBxGJIkntbR3kjYMTBWCLBhXCYWjKpTsKIkKMaJw3G
-YQqwcujS7sT4nHKLgLmqvnDg8HYCWklhZtCfPnIxJBo1b5tvGSnjVwAIYXpif60j
-KaBPop+sQ33bXxZUPfo+RiBW4Q05AM3cp3uHsseh2z2RBGHOnuseJcaV+Z+N7gDV
-91dOvIud4ZljRAO/wRjjnU7Vuxo+KIGNO+FWXI8m0nTFEeqqbNWKd1+TO5koYyKw
-5Syt3OdktUITWDpCuH54Du4JxjeAhHNJrNMqp3ZN+6SMCZq8LTDEilQGj5+tq4Dl
-eDPmUGS41PVIZm1Lj6nW2eJxCMOHmuTsBRWH2he41nNprfxfbnSQcnc8UUgd2bus
-EpodlVnPcL6Sy3SLIW0z3+ekRKPrNejiqPqQWhPk8tvJva4chJ9l1ykBSPhxG/x7
-TSg3QZtx
-=Qr1P
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbvBw4ACgkQFHw5/5Y0
+tyxpYAwAqoLT9KxZyiSMqYn/kYEKFjdPsX+XLCd4QrwITrRoh3huEJ1LGVBbApcp
+eWqnQcjp4iE8qovt8d6lCz/sX2OuLSsnD1fkZf8ZcC1DlWYJcySQl84Gc5JMm7Ao
+Dt0itGb9bkYebq4bYEvZXnRm9HM5/fNJzhFz7ht7RRwCX72SWo881xA392g5r/+9
+WjZQAD179FFIQwOIdiw6oo/YpOOFf050RJNqmcoG/LSUSZ93MDT8uvwXlqfpqCT+
+GfXh42KPekcHUuoiz/Gzqz0I4HtHgbhyXUapVPJiBXBXwNHdO+SDR4FJ/dAxZk1E
+bNgcdnlih6u4CpVPdzG8/hKvV8sBCi57walT46WC4M8KEhtzHpZpaicuYMIGkuO/
+ofwoBcRzvLhmwDBBIBPlgjmT/PTrCsF9Sd5nka7qoYUac4waCHISGN60UiFHYuZQ
+voA8LF2W4FFCOe6WG9aaPg8L+IcXTxZLAa82HekOQ+sts+W9YSaMXwOuLyO4f7lk
+vZegM9nn
+=+F27
 -----END PGP SIGNATURE-----
 
---YCfNKwAwo7s8x3fC--
+--CzUVkt1mqbpW34/f--
