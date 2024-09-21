@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 229BBCF9C6E
-	for <u-boot@archiver.kernel.org>; Sat, 21 Sep 2024 03:45:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAEFECF9C6E
+	for <u-boot@archiver.kernel.org>; Sat, 21 Sep 2024 03:45:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D4B2A88AE8;
-	Sat, 21 Sep 2024 05:44:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 513B688B1A;
+	Sat, 21 Sep 2024 05:44:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="jT9HudSh";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="OFPaRQ1D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 828C3889AA; Sat, 21 Sep 2024 05:44:14 +0200 (CEST)
+ id F3AC4887D1; Sat, 21 Sep 2024 05:44:16 +0200 (CEST)
 Received: from EUR05-DB8-obe.outbound.protection.outlook.com
  (mail-db8eur05on20701.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:2614::701])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 808788863E
- for <u-boot@lists.denx.de>; Sat, 21 Sep 2024 05:44:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EF953889C5
+ for <u-boot@lists.denx.de>; Sat, 21 Sep 2024 05:44:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=V+mCtN9IrNL2nX5BWA8fjd1sbDMDr7hi73JU32idAMcdR95aMgd9fKrTDhzA96QPXZSOteZkQGUnbbrOyYQAOcRGGTtmzSeaWSXh1XdMrY4ztlm00uTRnFRnDOeYNwkH6l2ckszzQOLWWQUbFwHgBapxS/EvrRbOfjJmtBbDb80RR8HE7WDb5fRo0C/rNkTAHNMsGnIiIIIHZO2pQSyR1Bs67bfBKp5mW8tHMfOZ5z/8AmxEH9DshhOjh3cFU/qphE8yczqw/zPPQnqTzXuQFCMhQ+TrsBAPAb0kO+mFxUj1XJgTbEMeR63B1WZXVm22vlbaHh2/z8hCqgxpoZHXUA==
+ b=VfcBaE1TXLLyLvuejpRO9tQmeRi0auFH3EcTMpNTdGnyIFHV+Qsriwj7jFtBpKZy/IMezFiZ0c++ewiRgy/dTEveZA/oQ+nvmv3asCjacDt5UcpdcbM448meDSK2ybhFZNiKp/Lx2PHU3Uk+9yysP2xW+rwwmIjcB/ZZNwrSARgh62x7Ve3CMiiD44f9gd8QIUjwj2fVILobOXDc9xfmL81BMkLFmXIX5khTaBLjvsv6PB5HAx0o6tToAzG3q3sZg/QjZV5HEgG2/VruS/gqUP13/vbjMekq9lBDPwDH3Ufx6U0C9qIcHThCpweHfPSW5b83tUbDIBzi3micuC6Wjg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=V1W/OM+rApXuK7t+R9S3YJe3h+F7fm++LQERW7aZmpA=;
- b=edFn3VJaSwPviA9g/GKxxGxOA46a3J0CLuSEUvbf75J4FJgFzuT8YAyiey9gLcsIpr4l0FKZhh5D2IRbGSiGBXazt2xGQQBWED4toLTtUg27e9ZUAbsgvHdc/l7xaclm1Lqu+FE0xOSpOR/MhZCsNHcvZYFGW6uAJiiYVV7PFsfEp/+UWTDX1dPGApJui8Sg4eglxwb5xnzp1Pt3n/QqVLDSxpoHef+hxyg5HhTSutsFZY9JhPZRhI9GJHejAVQRRFVrctbKopoWVHMfcCDkfISKfZ54/2p+TI/byGrQYkZIKELWJvmf4EdYAapWS31q1/DQqh7cePUzNwFxdT3JIg==
+ bh=ZyvxhXWrviJZtOFOZEFqwcZmjyBhsKNwF7Exenqg8GE=;
+ b=EbXT/IOSsOhSuTh01rREcT9tLpqdOAatXg77c7fIK9OgtqF4JiPbHLbdkk+Me3JhnhiMFlhdso5hxNZBhHqZgYGotFrLkyQHmNTVb9sEpIyiSUjUTE7dxYgGh7YPvfcjaEeE8mBWN0ih0d3qD3UZwRtFQtePAnODFkfLlCFpulcm/idAK584AcuYRTgMSgCdoU1xO9pnr1ohcDslwcl49evYdrmljLcX8z3YvcacH/S15cP7s7fRc0dcn/+9VpHhBU3MjZre13iuL0fKrgm0o7UZmXINOOnHUF7LAHM/Cj02aPBeJQyflyru0g4Szpo+1IFwqLBiOcKJCOmgBC4hSQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=V1W/OM+rApXuK7t+R9S3YJe3h+F7fm++LQERW7aZmpA=;
- b=jT9HudShzBfHuCcGYrP3rW5bEHGbTAz/nAiReXxKFMKldvtVIoC7d0nLrDTi/BI5c6DbOgKnGe5+ndtT52a9xRD9w9Ei9r846hwL6MkmtpaGnk9PAQVzWYg+dQySzVxbWVDEkrcBAowULGh+tNi+uLsie+Qe0djN+CA/NOQW+L6EPIamc7bCm4yw7j4r25S2prYBhxWC8XnTINe88k7dNCQ8Fj7JtRzlfrYD7tqXjETJLbsz0VLZMxBfddZaiL4aiwbIaHLIrt6k9ADnAZILHlBBwmX1Z0M5riNzeTZixkdJu4eKLd5BsLvdrxE62uVTA6cUPnQbKHfrUETUB2HNxg==
+ bh=ZyvxhXWrviJZtOFOZEFqwcZmjyBhsKNwF7Exenqg8GE=;
+ b=OFPaRQ1DRGTgId2QMfICO8iyJ6W/XL0EysNK0l6oS8HWCdLqydDPtu8z7UAsyxdZpqMQ0MF2NzBE53FDJboavt7fSk7WMBYzMppVC4ke3XMJ/rKbh+F6gxZtX+E/I76ViUvuvpywTPt1MQPF5Aev/AbUO4MsY64nKEkAemBoHqWmFIREXrKulyE3i9IBheCn6umndoaPHitetX9+j7ka8RbCeNeou2aMrnSdQsT6r/38WIe40n2pKnCj3lB4xS9DJsnD6XrAudpB7NRQqdKD1fSza3kF+PwYppklme0N7sVL64MXquqXlnlnBp/vess481+vjFsY/gJ+99UbbY0T0Q==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
  by DU0PR08MB9418.eurprd08.prod.outlook.com (2603:10a6:10:421::17)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8005.7; Sat, 21 Sep
- 2024 03:44:09 +0000
+ 2024 03:44:13 +0000
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0%2]) with mapi id 15.20.8005.010; Sat, 21 Sep 2024
- 03:44:09 +0000
+ 03:44:12 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Joe Hershberger <joe.hershberger@ni.com>,
@@ -67,10 +67,9 @@ To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Sean Anderson <seanga2@gmail.com>, Baruch Siach <baruch@tkos.co.il>,
  Yasuharu Shibata <yasuharu.shibata@gmail.com>,
  Richard Weinberger <richard@nod.at>, u-boot@lists.denx.de
-Subject: [PATCH v7 05/13] net/tcp: rename ack_edge and seq_init to more common
- rcv_nxt and irs
-Date: Sat, 21 Sep 2024 06:43:45 +0300
-Message-ID: <20240921034353.1298452-6-mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH v7 07/13] test/cmd/wget: fix the test
+Date: Sat, 21 Sep 2024 06:43:47 +0300
+Message-ID: <20240921034353.1298452-8-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240921034353.1298452-1-mikhail.kshevetskiy@iopsys.eu>
 References: <20240921034353.1298452-1-mikhail.kshevetskiy@iopsys.eu>
@@ -82,76 +81,77 @@ X-ClientProxiedBy: GV2PEPF00004595.SWEP280.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|DU0PR08MB9418:EE_
-X-MS-Office365-Filtering-Correlation-Id: ae0dc4ef-4598-4697-f441-08dcd9efa646
+X-MS-Office365-Filtering-Correlation-Id: e893033c-836e-4cb5-0331-08dcd9efa7fe
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|7416014|52116014|376014|1800799024|366016|38350700014|921020; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?AldNpYfWwJty35uigZeCiTuRJ5C3FIkjQvLVCFO1Kj0p1soHyvNBjBx25NBp?=
- =?us-ascii?Q?SGszMpQoRaZpOLK19vILwKAhmYNYwJsgCwzganwu9Xls5cXecvtimsUshM4E?=
- =?us-ascii?Q?bpshrw5VVv0RTdCCKNa5w7LBO8m8h2fABIPJ8bRyjmyLeTOyLvQj9NFfRYFs?=
- =?us-ascii?Q?Cng8MKSRGwHtx3Wrj9c6uaSAla2ML8T7iH/ctOxlJdb4/KgMcyo/ZxT78U1y?=
- =?us-ascii?Q?PFvMSyJaL/voZ42D7ZyY/9aJ+Dgu0RWQyYLMc9+MMWmYdiRaAOv5r/nh/dYe?=
- =?us-ascii?Q?/OGRtOqqcZCMLEgh1vHp36Et3X0q8sf01DgV6k0bWItSyDPhj+wP1sBOJ/rY?=
- =?us-ascii?Q?uZmANVgnm70nX60WgVJDTpv1NnFrMCGmg33ze6e7ZeXlFYJO3Q3vzvuGJe/F?=
- =?us-ascii?Q?MyJ4XRlQvGGGJw7VJsybtVYb3FdA//305jjgeZ6BHTQx7nBARlpplajh1Bzk?=
- =?us-ascii?Q?PiPvFcVkSJOvb8tYLClRcUp+ETOSVnrFZEnEGQtpaubX53qH1C3rr7Rti1dg?=
- =?us-ascii?Q?pAwjYyekNnxhEKTnJiClnNzI9QV8uaU5lZ+HytbTUkbB0vVmc8hMy2vZT7+4?=
- =?us-ascii?Q?VacFoY7XSYd736IwtFJHljZtfsBLmZMjjvvU+COtG0uHFTfoXAmcmpg/d6k9?=
- =?us-ascii?Q?tDMQ9IdeKjREWQBTigQFRbu4elGFgp/HJl2iPXIg5qbqtWquJQqxxc7ZX42e?=
- =?us-ascii?Q?iPDiRvaSUfv0YabIlIqedctR6GfpBEMKrOlCRPa8lKAEsEPnV8pOvUK8vo5v?=
- =?us-ascii?Q?nVyI29ozao+1A5DUbdLg6GsYJIIDF458JmFbB82w+ovnA1zsU+fvbnFog76M?=
- =?us-ascii?Q?6zoNGa/4jwuCFjbwPwx5EHaqyiY1dD1aPVL7gKjoNKPclxJchR5AtwTy/wHe?=
- =?us-ascii?Q?si2sgsE0+mItAYOhB7QDcgBSpLvioPAlm46Aq+BxWeyubvE9b0ljI2i1XZi2?=
- =?us-ascii?Q?iNC3t/jscWA8RhEmTBXiMJiQjc2Cg7PjBx33hngI+UoQypUTBaXQfVKbQEsJ?=
- =?us-ascii?Q?pxHbzlyP+VaubWXfxvh7YrTl5XWmZkVL9Tmjb59Jda5lV/AW7SAgjLv/o9gq?=
- =?us-ascii?Q?aBvzWabMzGSalTJ6i4pJAIKWIZncXnYAPhNfewDD2kkwzryaAJeObV/GRa2A?=
- =?us-ascii?Q?a3n6npOKiEu2pNft4OFxPY2lgL1bGKS/Q3LBIaaLjVgQCgP5rvX+AIrrI9by?=
- =?us-ascii?Q?5eLxY7QK8T70BaNn4bQKTGeZRBopttPIXvivq2fqcAKEclOcHDzcJqOKEiOB?=
- =?us-ascii?Q?cn0yxg35/CoPNT93unyI3hR8EYo2XUyqX+qwPQHsGBjn5pSqKTTW6man8jKB?=
- =?us-ascii?Q?EH817mFF/2VA//byBcuiv7lWzZGdP+5/WBqhu4UST76ldg=3D=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?q1857N4tql0bXSOP+gD2qUIY4O0Mj9FtCYKypHtfhKCDWxTaxkYHUUf7sZDW?=
+ =?us-ascii?Q?BI//PPX0um9zjlaWQiysus8sgtLC3VM6FYnZFDPblGlaqOb7MorFZkhCDVec?=
+ =?us-ascii?Q?x/UhAazO159uhRTLYMg4MIDNJkCALYnDghrrciroEKr7tfCAHyzyoMq5u5IX?=
+ =?us-ascii?Q?GtaDv6ROSNo2oy3O5l8+MJ10wEbZenaBvXvLDnKQ1Ap1acLr8ot135y7Z14/?=
+ =?us-ascii?Q?WapFeigyDGSXBZc+z7qE6/QrrTXWHeKzg2yPvBXsauwhmUEoUmVNsDlm5foD?=
+ =?us-ascii?Q?+hj7GC3JDvASNrXfEae32PPHf09T7RTfd3mbVxSqkW4seLkxVnbce8WLbi7B?=
+ =?us-ascii?Q?hiSp7Ig3uF6tdmC8oEwtclE8v0jdSC31IefxhnshtAbDw4QKWFgWqrjk6uOm?=
+ =?us-ascii?Q?GgmvESbAJVTUWl++PSQ6KqBXPyyL3NKqPbou8ReMaWakrfNCsb5w8scMEx16?=
+ =?us-ascii?Q?tP6eQkzRwF8Eu6bgqaZkVMMRofks1Caz0s3fd2R8O6PId5XgkspbmynDrUDc?=
+ =?us-ascii?Q?M1pMZImdVrn2chmfL3UuGtaqX9+tc0BD09XE4f+OGNAnPMfxqHOKAE8i65ul?=
+ =?us-ascii?Q?l1LLYV9KdGysxNHtNPRf/3XCGl5LvTboRQZgv63Fugc6EfchDWrTErbshfyW?=
+ =?us-ascii?Q?KDgTOCrakMoc2K6x53Y0637p4UGpqHaRbVjAIAxHzoKg523gbjWDm+rw7zPa?=
+ =?us-ascii?Q?1/fMO+y0GRxHOsxv+zScrO8KmhNH7uOa1NP8p65fW7Kja8nIPmncj34Mdui5?=
+ =?us-ascii?Q?SDHQqb4FguZD/p9Bko6YT/j/jSpJSaXO3S0ADpNCktGAvyiEkZ3z5rjoBYhu?=
+ =?us-ascii?Q?YHtfCGaFg5byxT+1oDm2Z4pXxXMDrzLPTCSodkFHRdNI9s8uU3bvtzMfqmlx?=
+ =?us-ascii?Q?4bHh5NR6vM68IcToNfF2ZT2pOOw5DZmJoVakrWLo8jCXaYoN2R4Yg0Xbdvdl?=
+ =?us-ascii?Q?BrGX5qBBTHn9emgcDyvO9w/si2NJT3jiWwQoePYRITzP+c+Ab1O5y7mfU6yQ?=
+ =?us-ascii?Q?6zuaCEXLvrVbIznN7/G2qsHXRu3FKnRod8qS0hBzPB5Pj1MBlq1dCkfEpxou?=
+ =?us-ascii?Q?DMYLCmx0YAn5OEwdfk1SKfV2vT4zDgjbLsfyYPILqzrNDOHii9lBm+lutY0T?=
+ =?us-ascii?Q?0DNnt/PTyvqtzyPLFZL7Bqg0mZg6RhGxQCmpG7EN+tE01qmo7jZygydJMFea?=
+ =?us-ascii?Q?CWsd7XDqphSzDgEKwTVKMeuzbkmIYcpDOU1a5TdNWvbx5MLRGM7NW4N3cQCY?=
+ =?us-ascii?Q?x0DnxTzrkNpjdYrknPUzuJZjddUEGkSqjr6vN7UzN9OtM5X3BVUX+tYoMXxM?=
+ =?us-ascii?Q?9kM+knufH3GL9HPzt//fHUUJsnO2eRc7mJCXj/jrXT/GSLnZjxrzcpR7CIZn?=
+ =?us-ascii?Q?fdcgJW8=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(7416014)(52116014)(376014)(1800799024)(366016)(38350700014)(921020);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?PUlwgQ1EV2peo4J4zmDSn5eLJVyYOt/hsfqRoFr2pfp1zV218e8yNhTQH+yv?=
- =?us-ascii?Q?DegaKZteYhLKTn5ZFkQJAdnJHi4/hTeblgudJ87PTGiN5NVWg/8mUFWCvMMm?=
- =?us-ascii?Q?6EjtCWnkU7l14O1iipYNUwr14QfsoZUs1yr6G+qzEfU7rRQHTZ/u2Pm6L10C?=
- =?us-ascii?Q?xmTJoVq5bK795SIDofio57hIKAq6D1JUnvd9f4MO4ySj/P9FCvzAcG0rIAEW?=
- =?us-ascii?Q?ooyyFckN16wz3RZwG9NHiJGNLAQmGUAfpbCzjK5xn6tnWoZ+vfXGZc8t585F?=
- =?us-ascii?Q?xYss9Ug7dk3qQr0VRIBJTR/1uT3DHzotNh+pc2NwnlkmN2O8ScQi+L2oERzR?=
- =?us-ascii?Q?a7xKm7fnZ1pzL1tGl65Vtq4k/1TEapFcnPL185EuC9Xyskyv/yRbUUle/9K+?=
- =?us-ascii?Q?S29tNRP9HC+W0zBy3PYEZN2fkad/t9VXv44kG+GOLjx04pc9LnHccDQgBGTz?=
- =?us-ascii?Q?MpQ9SzdeyW3adubzExX0rson8xsIUdSr2qyaB3DgDIL2ZnCdNOPLNLa1ujV2?=
- =?us-ascii?Q?P3apzmUIoOf8BzZwmAz56a32eBG8Bo+29V4EyXbRTzewzhX18c53fCdhJI2K?=
- =?us-ascii?Q?anl08qlhUxzREIOTcRfEzt4jHqtQtY7r6sA5FDmqOXKTR/G9utG3W6QYTddw?=
- =?us-ascii?Q?W/aFOm71jL9L84Z6NRVWGHVKc0Y7jxR4u7WRMY3rNmbAIs/p2+pFxtqt0v1C?=
- =?us-ascii?Q?gXfCAEzwufi+CoUFtAjKSHaWY8+ljo74XZ57wk3GNT1YnWXKHopF9LLh4Z2X?=
- =?us-ascii?Q?qo0lpS4sVP0KzhZiHLRLnyLoH5aQp1SOVPdh35vUitC7ChcSfeawSFZUxjWn?=
- =?us-ascii?Q?w1ZrCpzqcGTuMQRdWjXi+S7moZnM+mFgr/Sv/10YdLo+nYksWnZO++kOTKhO?=
- =?us-ascii?Q?Dgl6Tx5KdV7O1lqfu3DUD5QUpFn1r1YwqQMLUG0080ENgEF7+fc06feJga+/?=
- =?us-ascii?Q?pJo/o+fhpPeugXqVv9ujnk18FU8UII9vkf9FcBNYGu/cmbAyBcMwDlwiXdpW?=
- =?us-ascii?Q?NtGel3mAIPRDyWG1QR3KB9Ef1UHSijsu4/KFC+YzcmwgO76AbSlyqfz+rR0n?=
- =?us-ascii?Q?+vOBshnV/Deq8TvVQ3ybNSy5vgeczgDalKRM49xjz7fgwUK9ZuHwmcXevZwP?=
- =?us-ascii?Q?oo7fhWNgbZ+IyqEn+R7uceu+muSExEL3uvha7uKscQbOJxFWcqE/kczb+1dQ?=
- =?us-ascii?Q?hymlznY5woZ+PPLIa/2Z9L3+K6v6hQxHmsMQ3RCtALJJC4zNYKufMvS5cHZE?=
- =?us-ascii?Q?NzBGElX+DP1cJJ8lxCoqQa0MO1ra2Yrg048WI+Ifo7d4vUWHNPvrPQV3S3V4?=
- =?us-ascii?Q?k5UggJ1EixCM71/0XgmXg1bvK8A7AAf181LgkyhCKRV3gdrvtWyjd5ZvjjlE?=
- =?us-ascii?Q?SBjZF/h8hYxph0HQrbCJeYl2xQ5eWg1SHYyyHpIf2MQZxQZCZg/xGlgNLAfQ?=
- =?us-ascii?Q?6jldl0uPTZRKHGMIYYpQIoZTNoIDSx/DLMedhYxkJMRBvQ0mXI/Mm211qQNa?=
- =?us-ascii?Q?tC1XTRXLq78KZS5Do7j3zkDiTgbljODQy5GqwX1KVJHU5Ii49bcyfK/h/09B?=
- =?us-ascii?Q?dBXdxV3nb4OxIe5ogut9dYnvaDkQjgjHZVy9wG/k+hN+P9Umonth78KjABgi?=
- =?us-ascii?Q?HjrPR4ey25F/9S1aYJHnzd8=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?NM1EhPWmyU1m6ppmyVascfYOuPLWhrqcxUZqqc/c6tZwX5Q+fV+cemabxc2E?=
+ =?us-ascii?Q?ffiLBIfbeoUCXquRJt+FxkylaeAaa9LRAUtyHbOeI5We7DarLwRfbZ7YT2Tt?=
+ =?us-ascii?Q?9tc03zuYnjrS80tLv4mosGQawp+HEVWBN9gCL0PM+YC0E9cX+OygAe45GS0W?=
+ =?us-ascii?Q?A9moJVNuH6diELQSFuH7QIP+ZTDfpDYcQBnSgK9gK0Gx9BuL5N3SacXQzPTn?=
+ =?us-ascii?Q?dfQZNSDQvXDka+1ey0L0Iuq21vpmV01Nvh3f60tV89W7oBN5r9oEVSLh+ns/?=
+ =?us-ascii?Q?IYYbqWgqaEoSN7gM53EBoYe/u1GSZRqfxhG/39Fz90qLGJ2zsrWjv6O3kb3I?=
+ =?us-ascii?Q?vvuHcE2OeIsOmpyKdnWZy1Q4Dz1Tzbeo6NH0O1aI4xZZPdHJFIC8o8Xpy8k4?=
+ =?us-ascii?Q?XSq2M6pqedxezOSJQfdLuaD0x7FhDW0H6zCzxyxeRKU1vykOp16WTTMIaz3p?=
+ =?us-ascii?Q?BRmSx5fpVafmuyjmK72xQIOwkCumlNQ7bjEdmovU7wWnQRBM3uN/8Xfni9xp?=
+ =?us-ascii?Q?+qB2fHk9FdjGoVFrgavkwipa7LL9sym+NMOSig+8A4Zy0fcYjG7cPDCf7BBk?=
+ =?us-ascii?Q?xxcxz7DbUy/yXp0pIdXBA+vqzj7XB2ihr7uj2NSAijepL7LYAvi7Qgbb6hW2?=
+ =?us-ascii?Q?K0lsuWBV+fvh7IEQENxxvujmmp/goe9NeEZOlyG33RrKU04jpYjhv2uneIrY?=
+ =?us-ascii?Q?dbiluoEzz+leNd7IZkbv5/8QRvYndcUVtjYBxNpKs1GnJXOLM8glBkSZ24oK?=
+ =?us-ascii?Q?sRCWohdSalCcCeRJGpgRR15VgNCtjlA7FLMPWI/B4HLlwR6ijz2U/uwT/hXu?=
+ =?us-ascii?Q?xW1CCQU8Vdl0CIQGbbuJDrnjhi0guBkP5cx+baAvRxB7TNOQhZzmALuunFF2?=
+ =?us-ascii?Q?cXVYy40o7T9C3X8GIHlDYgNDWWdX4yWLM1BJxqBAph8TncT/tCe0ImGCbHcx?=
+ =?us-ascii?Q?/NPqvbkKf30r+ZUtYFpZivcX6epS2RJSZyszCpEE9nzPh/EBfActd0jAPK1y?=
+ =?us-ascii?Q?4FJmywIuIom4KXX5KZZpv4XU1PWF339Bs4miyEgrgzktoR2Xi3jBrcMf2dzq?=
+ =?us-ascii?Q?Vd7j5lvJz/v6kQUxlIBP5JpvVN92XZ8rLBqQN+0SmJmSmJwS/x5P5CFNjciB?=
+ =?us-ascii?Q?zpXrKNziGENK59JxEDHswCA9efsdYW83oMY36hLou4oI8tHEqtqJnptmLCmp?=
+ =?us-ascii?Q?3mbwbe0ozCnMouYim7B8ZEpMP4wHYNoCUx9ebjtve58bWxZil6hcVNTSGQcm?=
+ =?us-ascii?Q?E5F4fyVyytUFXTY//3wjuGQ5KcjYQAREhist9gtc7AB/OFl9VyTCu8cEZ5Dg?=
+ =?us-ascii?Q?17cbX1A63BF7ghOjxJp9BIqwx7virdFjcweRL89bogVFhU+Xfj/T93n3454V?=
+ =?us-ascii?Q?P1bLIC/aVT1a3zY0RxJBDtyIVZfn7w7FqS0wCUvhYcyriN4NjbM375Y1o3Cg?=
+ =?us-ascii?Q?ObD8QYsui6J9yBIiLLBdD8qNLlhFoUtsymrhcOGgGZoROPgvjVR3lC/u9Xn3?=
+ =?us-ascii?Q?HVxkobjCUEUw08VXMrOl+Hurkr/9AqF0W7F4uWK92s3rgTCuHL16CaebgWPb?=
+ =?us-ascii?Q?y2+vF24gpeEOi6pL+OebIAZzx7ZA91z745qPpRfTtPFBLmCGHNOrI/qEq1Ee?=
+ =?us-ascii?Q?s0rS1S1eR/IRiS6eFnRKzHE=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: ae0dc4ef-4598-4697-f441-08dcd9efa646
+X-MS-Exchange-CrossTenant-Network-Message-Id: e893033c-836e-4cb5-0331-08dcd9efa7fe
 X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Sep 2024 03:44:09.1211 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Sep 2024 03:44:11.9977 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: TcAmHuC6BFyIUEYo9iDwa/mC+AtuZ3vtm0rnc4dnZmuubvs1MTfhSW3SRbWQqM8Dyw2wL4hxZHcR6k7V9m6gq6SF48YF0SGJQ+i+nEX+qcc=
+X-MS-Exchange-CrossTenant-UserPrincipalName: Nk1nTY/e59i/HfY2h+NGfsNC2yuF7EvD5FOpcnApcJGLLXbw30eAtSu6WCp80Bd5FQv8BE4KvGqbe9glEmzjO72F18qm8b5/YnvPYfc3WCA=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR08MB9418
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -169,153 +169,138 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use the names from RFC 9293
+The wget test seriously broken:
+ * Uses zero values for ISS and IRS values (see RFC 9293).
+ * Writes incorrect values to Sequence and Acknowledgment numbers fields
+   of tcp packets. In the real life such packets will break the tcp stream.
+ * The test should fail (see above), but due to buggy old tcp implementation
+   it passes.
+
+This patch fix all bugs mentioned above, so the test passes with new
+and better tcp implementation.
 
 Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- include/net/tcp.h |  8 ++++----
- net/tcp.c         | 32 ++++++++++++++++----------------
- 2 files changed, 20 insertions(+), 20 deletions(-)
+ arch/sandbox/include/asm/eth.h |  4 +++
+ test/cmd/wget.c                | 45 ++++++++++++++++++++++++----------
+ 2 files changed, 36 insertions(+), 13 deletions(-)
 
-diff --git a/include/net/tcp.h b/include/net/tcp.h
-index f224d0cae2f..0694af9d5b1 100644
---- a/include/net/tcp.h
-+++ b/include/net/tcp.h
-@@ -285,8 +285,8 @@ enum tcp_state {
-  *
-  * @state:		TCP connection state
-  *
-- * @seq_init:		Initial receive sequence number
-- * @ack_edge:		Receive next
-+ * @irs:		Initial receive sequence number
-+ * @rcv_nxt:		Receive next
-  *
-  * @loc_timestamp:	Local timestamp
-  * @rmt_timestamp:	Remote timestamp
-@@ -301,8 +301,8 @@ struct tcp_stream {
- 	/* TCP connection state */
- 	enum tcp_state	state;
+diff --git a/arch/sandbox/include/asm/eth.h b/arch/sandbox/include/asm/eth.h
+index f042a5f3b92..083a7371a3f 100644
+--- a/arch/sandbox/include/asm/eth.h
++++ b/arch/sandbox/include/asm/eth.h
+@@ -77,6 +77,8 @@ typedef int sandbox_eth_tx_hand_f(struct udevice *dev, void *pkt,
+  * fake_host_hwaddr - MAC address of mocked machine
+  * fake_host_ipaddr - IP address of mocked machine
+  * disabled - Will not respond
++ * irs - tcp initial receive sequence
++ * iss - tcp initial send sequence
+  * recv_packet_buffer - buffers of the packet returned as received
+  * recv_packet_length - lengths of the packet returned as received
+  * recv_packets - number of packets returned
+@@ -87,6 +89,8 @@ struct eth_sandbox_priv {
+ 	uchar fake_host_hwaddr[ARP_HLEN];
+ 	struct in_addr fake_host_ipaddr;
+ 	bool disabled;
++	u32 irs;
++	u32 iss;
+ 	uchar * recv_packet_buffer[PKTBUFSRX];
+ 	int recv_packet_length[PKTBUFSRX];
+ 	int recv_packets;
+diff --git a/test/cmd/wget.c b/test/cmd/wget.c
+index 356a4dcd8fa..3e9a5f354fc 100644
+--- a/test/cmd/wget.c
++++ b/test/cmd/wget.c
+@@ -26,6 +26,8 @@
+ #define SHIFT_TO_TCPHDRLEN_FIELD(x) ((x) << 4)
+ #define LEN_B_TO_DW(x) ((x) >> 2)
  
--	u32		seq_init;
--	u32		ack_edge;
-+	u32		irs;
-+	u32		rcv_nxt;
- 
- 	/* TCP option timestamp */
- 	u32		loc_timestamp;
-diff --git a/net/tcp.c b/net/tcp.c
-index 0c32c5d7c92..7e445eaffd6 100644
---- a/net/tcp.c
-+++ b/net/tcp.c
-@@ -360,9 +360,9 @@ int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int payload_len,
- 	pkt_len	= pkt_hdr_len + payload_len;
- 	tcp_len	= pkt_len - IP_HDR_SIZE;
- 
--	tcp->ack_edge = tcp_ack_num;
-+	tcp->rcv_nxt = tcp_ack_num;
- 	/* TCP Header */
--	b->ip.hdr.tcp_ack = htonl(tcp->ack_edge);
-+	b->ip.hdr.tcp_ack = htonl(tcp->rcv_nxt);
- 	b->ip.hdr.tcp_src = htons(tcp->lport);
- 	b->ip.hdr.tcp_dst = htons(tcp->rport);
- 	b->ip.hdr.tcp_seq = htonl(tcp_seq_num);
-@@ -396,10 +396,10 @@ int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int payload_len,
- 	return pkt_hdr_len;
- }
- 
--static void tcp_update_ack_edge(struct tcp_stream *tcp)
-+static void tcp_update_rcv_nxt(struct tcp_stream *tcp)
++#define GET_TCP_HDR_LEN_IN_BYTES(x) ((x) >> 2)
++
+ static int sb_arp_handler(struct udevice *dev, void *packet,
+ 			  unsigned int len)
  {
--	if (tcp_seq_cmp(tcp->ack_edge, tcp->lost.hill[0].l) >= 0) {
--		tcp->ack_edge = tcp->lost.hill[0].r;
-+	if (tcp_seq_cmp(tcp->rcv_nxt, tcp->lost.hill[0].l) >= 0) {
-+		tcp->rcv_nxt = tcp->lost.hill[0].r;
+@@ -62,12 +64,14 @@ static int sb_syn_handler(struct udevice *dev, void *packet,
+ 	eth_send = (void *)priv->recv_packet_buffer[priv->recv_packets];
+ 	memcpy(eth_send->et_dest, eth->et_src, ARP_HLEN);
+ 	memcpy(eth_send->et_src, priv->fake_host_hwaddr, ARP_HLEN);
++	priv->irs = ntohl(tcp->tcp_seq);
++	priv->iss = ~priv->irs; /* just to differ from irs */
+ 	eth_send->et_protlen = htons(PROT_IP);
+ 	tcp_send = (void *)eth_send + ETHER_HDR_SIZE;
+ 	tcp_send->tcp_src = tcp->tcp_dst;
+ 	tcp_send->tcp_dst = tcp->tcp_src;
+-	tcp_send->tcp_seq = htonl(0);
+-	tcp_send->tcp_ack = htonl(ntohl(tcp->tcp_seq) + 1);
++	tcp_send->tcp_seq = htonl(priv->iss);
++	tcp_send->tcp_ack = htonl(priv->irs + 1);
+ 	tcp_send->tcp_hlen = SHIFT_TO_TCPHDRLEN_FIELD(LEN_B_TO_DW(TCP_HDR_SIZE));
+ 	tcp_send->tcp_flags = TCP_SYN | TCP_ACK;
+ 	tcp_send->tcp_win = htons(PKTBUFSRX * TCP_MSS >> TCP_SCALE);
+@@ -102,6 +106,8 @@ static int sb_ack_handler(struct udevice *dev, void *packet,
+ 	void *data;
+ 	int pkt_len;
+ 	int payload_len = 0;
++	u32 tcp_seq, tcp_ack;
++	int tcp_data_len;
+ 	const char *payload1 = "HTTP/1.1 200 OK\r\n"
+ 		"Content-Length: 30\r\n\r\n\r\n"
+ 		"<html><body>Hi</body></html>\r\n";
+@@ -119,17 +125,32 @@ static int sb_ack_handler(struct udevice *dev, void *packet,
+ 	tcp_send->tcp_dst = tcp->tcp_src;
+ 	data = (void *)tcp_send + IP_TCP_HDR_SIZE;
  
- 		memmove(&tcp->lost.hill[0], &tcp->lost.hill[1],
- 			(TCP_SACK_HILLS - 1) * sizeof(struct sack_edges));
-@@ -434,7 +434,7 @@ void tcp_hole(struct tcp_stream *tcp, u32 tcp_seq_num, u32 len)
- 			tcp_seq_num = tcp->lost.hill[i].l;
- 		}
- 		if (tcp_seq_cmp(tcp->lost.hill[i].r, tcp_seq_num + len) >= 0) {
--			tcp_update_ack_edge(tcp);
-+			tcp_update_rcv_nxt(tcp);
- 			return;
- 		}
- 
-@@ -463,12 +463,12 @@ void tcp_hole(struct tcp_stream *tcp, u32 tcp_seq_num, u32 len)
- 			}
- 		}
- 
--		tcp_update_ack_edge(tcp);
-+		tcp_update_rcv_nxt(tcp);
- 		return;
+-	if (ntohl(tcp->tcp_seq) == 1 && ntohl(tcp->tcp_ack) == 1) {
+-		tcp_send->tcp_seq = htonl(ntohl(tcp->tcp_ack));
+-		tcp_send->tcp_ack = htonl(ntohl(tcp->tcp_seq) + 1);
++	tcp_seq = ntohl(tcp->tcp_seq) - priv->irs;
++	tcp_ack = ntohl(tcp->tcp_ack) - priv->iss;
++	tcp_data_len = len - ETHER_HDR_SIZE - IP_HDR_SIZE - GET_TCP_HDR_LEN_IN_BYTES(tcp->tcp_hlen);
++
++	if (tcp->tcp_flags & TCP_FIN)
++	    tcp_data_len++;
++
++	tcp_send->tcp_seq = htonl(ntohl(tcp->tcp_ack));
++	tcp_send->tcp_ack = htonl(ntohl(tcp->tcp_seq) + tcp_data_len);
++
++	if (tcp_seq == 1 && tcp_ack == 1) {
++		if (tcp_data_len == 0) {
++			/* no data, wait for GET request */
++			return -1;
++		}
++
++		/* reply to GET request */
+ 		payload_len = strlen(payload1);
+ 		memcpy(data, payload1, payload_len);
+ 		tcp_send->tcp_flags = TCP_ACK;
+-	} else if (ntohl(tcp->tcp_seq) == 2) {
+-		tcp_send->tcp_seq = htonl(ntohl(tcp->tcp_ack));
+-		tcp_send->tcp_ack = htonl(ntohl(tcp->tcp_seq) + 1);
++	} else if (tcp_ack == 1 + strlen(payload1)) {
+ 		payload_len = 0;
+ 		tcp_send->tcp_flags = TCP_ACK | TCP_FIN;
++	} else if (tcp_ack == 2 + strlen(payload1)) {
++		payload_len = 0;
++		tcp_send->tcp_flags = TCP_ACK;
  	}
  
- 	if (i == TCP_SACK_HILLS) {
--		tcp_update_ack_edge(tcp);
-+		tcp_update_rcv_nxt(tcp);
- 		return;
- 	}
+ 	tcp_send->tcp_hlen = SHIFT_TO_TCPHDRLEN_FIELD(LEN_B_TO_DW(TCP_HDR_SIZE));
+@@ -148,11 +169,9 @@ static int sb_ack_handler(struct udevice *dev, void *packet,
+ 			  pkt_len,
+ 			  IPPROTO_TCP);
  
-@@ -489,7 +489,7 @@ void tcp_hole(struct tcp_stream *tcp, u32 tcp_seq_num, u32 len)
- 	tcp->lost.hill[i].r = tcp_seq_num + len;
- 	tcp->lost.len = TCP_OPT_LEN_2 + cnt * TCP_OPT_LEN_8;
+-	if (ntohl(tcp->tcp_seq) == 1 || ntohl(tcp->tcp_seq) == 2) {
+-		priv->recv_packet_length[priv->recv_packets] =
+-			ETHER_HDR_SIZE + IP_TCP_HDR_SIZE + payload_len;
+-		++priv->recv_packets;
+-	}
++	priv->recv_packet_length[priv->recv_packets] =
++		ETHER_HDR_SIZE + IP_TCP_HDR_SIZE + payload_len;
++	++priv->recv_packets;
  
--	tcp_update_ack_edge(tcp);
-+	tcp_update_rcv_nxt(tcp);
- };
- 
- /**
-@@ -566,8 +566,8 @@ static u8 tcp_state_machine(struct tcp_stream *tcp, u8 tcp_flags,
- 		debug_cond(DEBUG_INT_STATE, "TCP CLOSED %x\n", tcp_flags);
- 		if (tcp_syn) {
- 			action = TCP_SYN | TCP_ACK;
--			tcp->seq_init = tcp_seq_num;
--			tcp->ack_edge = tcp_seq_num + 1;
-+			tcp->irs = tcp_seq_num;
-+			tcp->rcv_nxt = tcp_seq_num + 1;
- 			tcp->lost.len = TCP_OPT_LEN_2;
- 			tcp->state = TCP_SYN_RECEIVED;
- 		} else if (tcp_ack || tcp_fin) {
-@@ -583,8 +583,8 @@ static u8 tcp_state_machine(struct tcp_stream *tcp, u8 tcp_flags,
- 			tcp->state = TCP_CLOSE_WAIT;
- 		} else if (tcp_ack || (tcp_syn && tcp_ack)) {
- 			action |= TCP_ACK;
--			tcp->seq_init = tcp_seq_num;
--			tcp->ack_edge = tcp_seq_num + 1;
-+			tcp->irs = tcp_seq_num;
-+			tcp->rcv_nxt = tcp_seq_num + 1;
- 			tcp->state = TCP_ESTABLISHED;
- 
- 			if (tcp_syn && tcp_ack)
-@@ -633,7 +633,7 @@ static u8 tcp_state_machine(struct tcp_stream *tcp, u8 tcp_flags,
- 	case TCP_FIN_WAIT_1:
- 		debug_cond(DEBUG_INT_STATE, "TCP_FIN_WAIT_1 (%x)\n", tcp_flags);
- 		if (tcp_fin) {
--			tcp->ack_edge++;
-+			tcp->rcv_nxt++;
- 			action = TCP_ACK | TCP_FIN;
- 			tcp->state = TCP_FIN_WAIT_2;
- 		}
-@@ -748,7 +748,7 @@ void rxhand_tcp_f(union tcp_build_pkt *b, unsigned int pkt_len)
- 	} else if (tcp_action != TCP_DATA) {
- 		debug_cond(DEBUG_DEV_PKT,
- 			   "TCP Action (action=%x,Seq=%u,Ack=%u,Pay=%d)\n",
--			   tcp_action, tcp_ack_num, tcp->ack_edge, payload_len);
-+			   tcp_action, tcp_ack_num, tcp->rcv_nxt, payload_len);
- 
- 		/*
- 		 * Warning: Incoming Ack & Seq sequence numbers are transposed
-@@ -756,7 +756,7 @@ void rxhand_tcp_f(union tcp_build_pkt *b, unsigned int pkt_len)
- 		 */
- 		net_send_tcp_packet(0, tcp->rhost, tcp->rport, tcp->lport,
- 				    (tcp_action & (~TCP_PUSH)),
--				    tcp_ack_num, tcp->ack_edge);
-+				    tcp_ack_num, tcp->rcv_nxt);
- 	}
+ 	return 0;
  }
- 
 -- 
 2.45.2
 
