@@ -4,57 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63CCECF9C69
-	for <u-boot@archiver.kernel.org>; Sat, 21 Sep 2024 14:05:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A028CF9C5B
+	for <u-boot@archiver.kernel.org>; Sat, 21 Sep 2024 14:06:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31FD788B1C;
+	by phobos.denx.de (Postfix) with ESMTP id 9DF2388B58;
 	Sat, 21 Sep 2024 16:05:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1726927522;
-	bh=gLc6wAHrrB2oHrpGzYrSZhAgtKFmFg43fq+C6U9CyFI=;
+	bh=z4BuUrwpNBCyNHfkPlCQ8lxpo50e3qqHLYo6e7hCsPQ=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=n1ZuJITF0mnVd04dyB9PwSk8f7jLT2GZLWW4aV+B+Gc5JJ9U4CtRecdKOerZHLDsv
-	 evtCEXdm4hkMcONrtWAZ3TPUeN5s5yEcIwEJIC7smGscTfX/osI7cfG9lzcqhDLdq6
-	 ML24KgP70CQxGdDW47CQswJ4gMVv//53687BWHr55C8EYiI+jpBjTWxu7K73f+A0K8
-	 RkD+4y8YCD+2y8BSdJzBYnzG5/Ioi5K4Ebwo/64cF1HddJ7jdlQWBnCWdgJ5Q2SZuq
-	 9UWMaCLpLKhg1nCZEq2mMGTgtqPoyVACbYksedGZpJcshqniyds3OKa4573QH/1Awo
-	 7Rw4ndNrGILZw==
+	b=rYdAxSjBocgUhlontu5rHBwNnQEC2ruE3PT3SNOrIuhfoDtGkYWArrBZrCCXcKJ/d
+	 yU8OqWY86Xb5gUQYvIfj9OWAvrHjwUqS/FteS0XGnEBUSUo1PE7nMcJyhp48ecfxRy
+	 R8ykZ8JJwZbWHH27yfUL87Xoa6wc8B6BlPoxQHB9DvbfLjAsOicttR5oOsrfAbJJrC
+	 iHnfv4+FF4v880tbi0rIO0tdBFKBzrQJKPBT3ngIU7dHXhRDGXZgwbxrePinQMMNDx
+	 /iUTiOYiU2ac+PaGWxPFoRHJXQJGDqW5yf0QmzrBJMlYAXTTh769e8sq+o1mNbn2jV
+	 IPC/uHHjvYcnA==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 9BC4A88A9D;
- Sat, 21 Sep 2024 16:05:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 4313488AA7;
+ Sat, 21 Sep 2024 16:05:20 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1726927520;
- bh=gLc6wAHrrB2oHrpGzYrSZhAgtKFmFg43fq+C6U9CyFI=;
+ bh=z4BuUrwpNBCyNHfkPlCQ8lxpo50e3qqHLYo6e7hCsPQ=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=ZOd6lv2fuOkVPRjdwGbB2zjAgUaPTzKV1vzyDy8xC1SRrQtn9zwbzFuE7GepVqp33
- yY6quc4ubt1MV2Olyg2cTrdjbkNDNDyBq+rMrHC+Pk+nEh1+Z2hO9mtHZoutH8rKnm
- n2DycRTf7c1AIJFzWJgHtj3LVHjRTX0kM9oJYybmXVEw8DHRUzj01o0800BUNhw2mB
- Btctyaok+c0a6/BG3EBKeXIab/G5XCob+jXPP+7Vy0jLijtykETRCZB0eJv3Rb4k/n
- DTeE1z119ktE7cWMVrz42S6UOekaX1rcEfNoVq+H0Y4Xpnw6i3uurAlMCKTq8d8c8q
- K+4Ego4XMDi0g==
-Message-ID: <9cc437c8-59dc-4e78-82d4-8ef479ca9ba1@denx.de>
-Date: Sat, 21 Sep 2024 15:49:18 +0200
+ b=CqlSPgzyQSINlViIBfyv/HmviXMtXcb0Var8MSs3frBaTSUP5FYijQWSorV4ZMvwg
+ fret4DoLKMaO8UkKeLYXESYz4nHXGjDMQwoFYEyIZMkULk4SVyvTyMt6SeABCpc0Vr
+ H9vneriYqN8GNbZ9JOKh6gvE+4J9xe9GShj7+qqVlOe3yjG9FV6ntQOETeXMY1sPR7
+ yfex9eUm7tZVKDPjhFwLyCaOKAyv6Z85SkDjV3XI5kYtfgQjtOJ9Nc7/2g+abkHfyO
+ DHCmsTHBlZ+I4saomhgXsT6mJa9tl3f9S6stVrjrh+HTJ6PqpDKf6mHJeSeGWRf/sY
+ k4wfMLn4/FpGA==
+Message-ID: <92fa9c17-bbf4-49b5-8d7c-4b7d06f60736@denx.de>
+Date: Sat, 21 Sep 2024 15:50:41 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 04/20] arm: socfpga: agilex5: Add low level
- initialization
+Subject: Re: [PATCH v1 08/20] arm: dts: agilex5: Enable XGMAC
 To: tien.fong.chee@intel.com, u-boot@lists.denx.de
 Cc: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
  Meng Tingting <tingting.meng@intel.com>,
  Yuslaimi Alif Zakuan <alif.zakuan.yuslaimi@intel.com>,
  Hea Kok Kiang <kok.kiang.hea@intel.com>
 References: <20240920070242.20884-1-tien.fong.chee@intel.com>
- <20240920070242.20884-5-tien.fong.chee@intel.com>
+ <20240920070242.20884-9-tien.fong.chee@intel.com>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240920070242.20884-5-tien.fong.chee@intel.com>
+In-Reply-To: <20240920070242.20884-9-tien.fong.chee@intel.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -76,27 +75,23 @@ X-Virus-Status: Clean
 On 9/20/24 9:02 AM, tien.fong.chee@intel.com wrote:
 > From: Tien Fong Chee <tien.fong.chee@intel.com>
 > 
-> Create new low level initialization for Agile5 due to the new ARM core
-> composition and warm reset behavior.
+> Enable XGMAC for SoCFPGA Agilex5 devkit.
 > 
 > Signed-off-by: Tien Fong Chee <tien.fong.chee@intel.com>
 > ---
->   arch/arm/mach-socfpga/Makefile                |  1 +
->   .../include/mach/reset_manager_soc64.h        | 12 +++-
->   arch/arm/mach-socfpga/lowlevel_init_agilex5.S | 57 +++++++++++++++++++
->   3 files changed, 68 insertions(+), 2 deletions(-)
->   create mode 100644 arch/arm/mach-socfpga/lowlevel_init_agilex5.S
+>   .../arm/dts/socfpga_agilex5_socdk-u-boot.dtsi | 33 +++++++++++++++++++
+>   1 file changed, 33 insertions(+)
 > 
-> diff --git a/arch/arm/mach-socfpga/Makefile b/arch/arm/mach-socfpga/Makefile
-> index 67c6a8dfec5..53c91d1d2a5 100644
-> --- a/arch/arm/mach-socfpga/Makefile
-> +++ b/arch/arm/mach-socfpga/Makefile
-> @@ -58,6 +58,7 @@ endif
+> diff --git a/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi b/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi
+> index 9eb21d65428..75ab05031bc 100644
+> --- a/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi
+> +++ b/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi
+> @@ -122,3 +122,36 @@
+>   	bootph-all;
+>   };
 >   
->   ifdef CONFIG_TARGET_SOCFPGA_AGILEX5
->   obj-y	+= clock_manager_agilex5.o
-> +obj-y	+= lowlevel_init_agilex5.o
->   obj-y	+= mailbox_s10.o
->   obj-y	+= misc_soc64.o
->   obj-y	+= mmu-arm64_s10.o
-Can this be wired into existing early hook function, like s_init or so ?
+> +&gmac0 {
+> +	status = "okay";
+> +	phy-mode = "rgmii";
+> +	phy-handle = <&emac0_phy0>;
+Shouldn't this be part of Linux DT already ?
