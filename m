@@ -4,81 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E493CF9C69
-	for <u-boot@archiver.kernel.org>; Sun, 22 Sep 2024 09:03:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86D78CF9C64
+	for <u-boot@archiver.kernel.org>; Sun, 22 Sep 2024 13:42:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8270788AE8;
-	Sun, 22 Sep 2024 11:03:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 99D2288C0F;
+	Sun, 22 Sep 2024 15:42:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="cqXWXqzm";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OwDrMksF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B459588B58; Sun, 22 Sep 2024 11:02:58 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id F301E88C10; Sun, 22 Sep 2024 15:42:44 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 98833887FA
- for <u-boot@lists.denx.de>; Sun, 22 Sep 2024 11:02:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A12F88B58
+ for <u-boot@lists.denx.de>; Sun, 22 Sep 2024 15:42:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1726995768; x=1727600568; i=xypron.glpk@gmx.de;
- bh=lyrcP1Zi/k7CJOq8be2HHpc9wPCwezrE/qXxNT+Mux0=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=cqXWXqzm8aWNEpTv/z6UkaWPoa7ZxU3IW8onftT0NS8zw4fe/3OkOnoGdjfuCaRL
- o8Wi4Rqi0KRYHWDW8tSk42I8sfrPtooAwEIir0dGagBMHq3Z/2jnpkU1JDHYKVh1q
- 6a+qobu8lRjgLMENgr6ssHQo1r6hDzGPGEV6KQaL6Xw9PQ23f69sTD16IYHF2DlG7
- qprfDxm275BSdU1uMwUVFJlfhv/Y8/MuOpCa4OkDL1BjNawc4xNUpVJ8Muen04SRi
- k2PNUOkOipgYIkOz14mnMDx2070cyi/ZpZNtf+AODcsnV/oGkyJEZ/WHis9fZbIHj
- iCxl7/OLHjHVahoFcA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.143.105] ([46.114.108.39]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MHXFx-1snde50EOf-00DbrQ; Sun, 22
- Sep 2024 11:02:48 +0200
-Message-ID: <7969171f-e3e2-4492-8eda-b2cba7376dcb@gmx.de>
-Date: Sun, 22 Sep 2024 11:02:40 +0200
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-5c5bca6603aso475069a12.1
+ for <u-boot@lists.denx.de>; Sun, 22 Sep 2024 06:42:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1727012562; x=1727617362; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=jovu5pQtAUeV723A9hIYuYDITCjG6fwu+CvbOOH0Btk=;
+ b=OwDrMksFBtCqQWfqQYw3AEfg/8A7gFaixaSpUFsjCQC2MQjyRv/7e+R2gs8m8+rUK/
+ PoH2HPDmS2r3wkGx2pzF8n3UgpyERtDU6cHNcLk/SX830Tcl6LiqPe1DzhsjYm2aU3D6
+ Fkhcur6EQr6Q2mqZFQlps/sbU8v5ETu4WmIEbdNbMFdWMAzwjWp8q1fZ4N4S1cnYueE4
+ YTRtQ0+vhMR6h3gAMa2O3DLvZWOdKkvMj6X079dX4l0C1rd0+QFbTT+JPScXQx7Dh7Pq
+ mxmECtTh/OoS66L/Kmk6VTm+O0VYTvK4+RoZyXApTZIVGDs61ck2mQoDcNl0lPmPEJFn
+ TOMg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727012562; x=1727617362;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=jovu5pQtAUeV723A9hIYuYDITCjG6fwu+CvbOOH0Btk=;
+ b=wyYCDMPNijtHjYX+ZU75gOg0nJw92Z6UBdnN8EaLRu95CmOkTW8d+El+u4jbSyjnPw
+ eRxQ9YW+bLYestRQxsNgPk/llb+8dKi5xRdSTTpO/VX1EQ9BM4ile8vlsusgeLpmb9J5
+ pwKeshRFB2LUAxpUaHxSO8vGT4yB2B4jyCsXpoGcem4+OAC2u2e5H1A3xy1KEJK0D0Uf
+ doom+rmiCSKJBVOswcCsutGFREskV6qC9qvW95IL4CPeL0Mq3ew0YCjrIggY+8ja5ddW
+ 4gV7OmUr2Uk0GNVGcgX92NZ1kTAa53DTQDLkMap86t8e6Xrk9VY+atRmdDyOLu/qxIMR
+ +nlw==
+X-Gm-Message-State: AOJu0YxfPQsvFVQylClUNz4CIAUPEfof9bFsqQtnUcJhpfF/jeJ+aelN
+ roZf3yNwKyx3XeNiiezg5Cbq7HrqOtdZjqp5679LcgFc2Fz/q/E47QMgab2l96MTLuTnZTzaCAK
+ h38nvaZ6ND45ib/GGb1y3Xe0tLTo=
+X-Google-Smtp-Source: AGHT+IF4voQtPl3s0Eb6PmBu9UaxMPjI0wM5LpALRDVVtlr+XlFgMnnVenNfyFfRaraFqa3m3ugWL3YxW7bbRcynGXY=
+X-Received: by 2002:a05:6402:5483:b0:5be:eb19:ee56 with SMTP id
+ 4fb4d7f45d1cf-5c464dea205mr7196964a12.24.1727012562302; Sun, 22 Sep 2024
+ 06:42:42 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] doc: Move the generic memory-documentation to doc/
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Alexander Dahl <ada@thorsis.com>,
- Heiko Schocher <hs@denx.de>, Joao Marcos Costa <jmcosta944@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Sean Anderson <seanga2@gmail.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
- u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <20240919151424.57663-1-sjg@chromium.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240919151424.57663-1-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:bKoMyr8lYMLPj7xYjJUXOLH/zeV1VDKwdAB1nMIfUraitUjjAqN
- 9mimXYHlZkZ4zpOoMRZHBEZb889OK7a+YnBvu3dh07UdKOht753yZ9RBsdYAWHGvjukxp7W
- VqH/GT40dLKauFcdJb+INiBf+LU0l2UknpjBTT8thAN4I7WW5VfUOMbZ35hXWegV/twbzEO
- sbGPl8abpoTz+yLbLmPPA==
-UI-OutboundReport: notjunk:1;M01:P0:BGiDUM/oJwU=;FNtN6xCYfdCln+BpvwFkrt5akXP
- wpli8z0wxMg0cscBqCdYXBu3Y7K5T2HuA6FkdJgUcEKnFqTAZ76qFfe3KE/qcrEaMSNpiIjz9
- JD/OXJgAPtIbF8iCPgYMwEnzXPPzTKYAk52QvTPQO0UX7JmIpshxaR52gLzit1PMGMozUPujJ
- g7PlxG15cx2+MxKVKI+wmE/w7oQKDchCx0ZxENbYnCaHhtJkoFBDa/3whPgDFaa52hYwz2X5o
- VNHws5zZMox2UhtrjS8TTPmBYIrP5lFVtQpIy7Kd3fQ2AtEa3+NLtn+j/NS2KJbBwZQVuwvEt
- u2t3mFO488/y98uyPN69x1ypDSfFNUCSweOXyNjEFwhGYrqjMqQxthn1j1ajjM7dYHNNQkrPP
- xF9UEeQBTFBLQnfQNLI4B+H9ywqpx400gtq7j+UxnW8Pyp/IshrZIoqddHrqebvn2jHyOA7VD
- 1RBu8K3iCm8f/WdtDGh789aZovEQjqQ/tkQw7ccf1DMQ1tsZLDyU7NS1a9AAj27DiNtXhQrON
- JP9mnO8vJBNw/S473Kz2sC2oPPZ9dYFiGE/1YPPsNICDCKxFN3rTaIhAObI6InRtQBbFvTg27
- WDVRYpPhKwozq3+p2p4/V8t2gSvMXACXsKcCu4U07IC4F8NMQd7bPfTUhpEihID07g/jvPFPp
- yO6bm/Y10jVsTFaEvc089tK8NEqXvOKR2alUuxsjLXtnRx47s+rv5mXGAlAUA9WsbrVGTY/gl
- ngWYFyi2mP+HMZ7HEYMKVaqFgIuBdWfbfaMe68su5zzBf029SZrCNMHJeNWmZhQVm6bMSKbR8
- AGwc2JomfcdW0yswfUCTzngQ==
+References: <20240919140022.511067-1-macroalpha82@gmail.com>
+In-Reply-To: <20240919140022.511067-1-macroalpha82@gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Sun, 22 Sep 2024 14:43:11 +0100
+Message-ID: <CALeDE9Oz==j74RngXeHsCp5FWsGO14hP2RSbnFLB=a2bz6h1tw@mail.gmail.com>
+Subject: Re: [PATCH V2 0/4] Anbernic RGxx3 Bootloader Fixes
+To: Chris Morgan <macroalpha82@gmail.com>
+Cc: u-boot@lists.denx.de, jonas@kwiboo.se, trini@konsulko.com, 
+ kever.yang@rock-chips.com, philipp.tomsich@vrull.eu, sjg@chromium.org, 
+ dsimic@manjaro.org, quentin.schulz@cherry.de, 
+ Chris Morgan <macromorgan@hotmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,184 +88,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/19/24 17:14, Simon Glass wrote:
-> Move this section of the README into doc/ with some minor updates to
-> mention SPL and user lower-case hex.
+Hi Chris,
+
+> Update the Anbernic RGxx3 "device" to use upstream device-trees,
+> add logic to detect a different vdd_cpu regulator, and implement a
+> fix to allow the panel auto-detection to run when using mainline
+> A-TF.
 >
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
+> Note that *Linux* still cannot use mainline A-TF because of the missing
+> SCMI clock and reset functionality, but this patch series at least
+> ensures that this board can boot once Linux is ready.
+
+Have you got a link to this upstream in the kernel lists? Is there
+patches posted? I think I have seen a similar issue when playing with
+mainline TF-A the other day on the Quartz64.
+
+Peter
+
+> Chris Morgan (4):
+>   board: rockchip: Convert Anbernic RGxx3 to OF_UPSTREAM
+>   board: rockchip: Add vdd_cpu reg fixup for RGXX3 Series
+>   board: rockchip: Remove ARM SCMI Support from RGxx3
+>   board: rockchip: Enable PD_VO before driver access
 >
->   README                 | 45 ------------------------------------------
->   doc/develop/index.rst  |  1 +
->   doc/develop/memory.rst | 45 ++++++++++++++++++++++++++++++++++++++++++
->   3 files changed, 46 insertions(+), 45 deletions(-)
->   create mode 100644 doc/develop/memory.rst
+>  .../dts/rk3566-anbernic-rg353p-u-boot.dtsi    |  34 ++
+>  .../arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi |  52 ---
+>  arch/arm/dts/rk3566-anbernic-rgxx3.dts        |  28 --
+>  arch/arm/mach-rockchip/rk3568/rk3568.c        |   6 +
+>  board/anbernic/rgxx3_rk3566/MAINTAINERS       |   4 +-
+>  board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c    | 359 +++++++++++++++---
+>  configs/anbernic-rgxx3-rk3566_defconfig       |  12 +-
+>  7 files changed, 347 insertions(+), 148 deletions(-)
+>  create mode 100644 arch/arm/dts/rk3566-anbernic-rg353p-u-boot.dtsi
+>  delete mode 100644 arch/arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi
+>  delete mode 100644 arch/arm/dts/rk3566-anbernic-rgxx3.dts
 >
-> diff --git a/README b/README
-> index 4be1e8c22a0..d73042406b6 100644
-> --- a/README
-> +++ b/README
-> @@ -2516,51 +2516,6 @@ On RISC-V, the following registers are used:
+> --
+> 2.34.1
 >
->       =3D=3D> U-Boot will use gp to hold a pointer to the global data
->
-> -Memory Management:
-> -------------------
-> -
-> -U-Boot runs in system state and uses physical addresses, i.e. the
-> -MMU is not used either for address mapping nor for memory protection.
-> -
-> -The available memory is mapped to fixed addresses using the memory
-> -controller. In this process, a contiguous block is formed for each
-> -memory type (Flash, SDRAM, SRAM), even when it consists of several
-> -physical memory banks.
-> -
-> -U-Boot is installed in the first 128 kB of the first Flash bank (on
-> -TQM8xxL modules this is the range 0x40000000 ... 0x4001FFFF). After
-> -booting and sizing and initializing DRAM, the code relocates itself
-> -to the upper end of DRAM. Immediately below the U-Boot code some
-> -memory is reserved for use by malloc() [see CONFIG_SYS_MALLOC_LEN
-> -configuration setting]. Below that, a structure with global Board
-> -Info data is placed, followed by the stack (growing downward).
-> -
-> -Additionally, some exception handler code is copied to the low 8 kB
-> -of DRAM (0x00000000 ... 0x00001FFF).
-> -
-> -So a typical memory configuration with 16 MB of DRAM could look like
-> -this:
-> -
-> -	0x0000 0000	Exception Vector code
-> -	      :
-> -	0x0000 1FFF
-> -	0x0000 2000	Free for Application Use
-> -	      :
-> -	      :
-> -
-> -	      :
-> -	      :
-> -	0x00FB FF20	Monitor Stack (Growing downward)
-> -	0x00FB FFAC	Board Info Data and permanent copy of global data
-> -	0x00FC 0000	Malloc Arena
-> -	      :
-> -	0x00FD FFFF
-> -	0x00FE 0000	RAM Copy of Monitor Code
-> -	...		eventually: LCD or video framebuffer
-> -	...		eventually: pRAM (Protected RAM - unchanged by reset)
-> -	0x00FF FFFF	[End of RAM]
-> -
-> -
->   System Initialization:
->   ----------------------
->
-> diff --git a/doc/develop/index.rst b/doc/develop/index.rst
-> index 0d0e60ab56c..cbea38d4323 100644
-> --- a/doc/develop/index.rst
-> +++ b/doc/develop/index.rst
-> @@ -13,6 +13,7 @@ General
->      codingstyle
->      designprinciples
->      docstyle
-> +   memory
->      patman
->      process
->      release_cycle
-> diff --git a/doc/develop/memory.rst b/doc/develop/memory.rst
-> new file mode 100644
-> index 00000000000..fa1ae5e97ed
-> --- /dev/null
-> +++ b/doc/develop/memory.rst
-> @@ -0,0 +1,45 @@
-> +.. SPDX-License-Identifier: GPL-2.0+:
-> +
-> +Memory Management
-> +-----------------
-> +
-> +U-Boot runs in system state and uses physical addresses, i.e. the
-> +MMU is not used either for address mapping nor for memory protection.
-
-Hello Simon,
-
-Thanks for getting the description moved.
-
-The text that you are copying dates back to 2004 when U-Boot was
-focusing on the Power architecture. It needs some rework.
-
-On RISC-V there is a physical memory protection (PMP) which is typically
-set up to guard against overwriting OpenSBI sitting at the lower end of RA=
-M.
-
-There is some ongoing work to implement NX protection via the MMU for ARM.
-
-> +
-> +The available memory is mapped to fixed addresses using the
-> +memory-controller. In this process, a contiguous block is formed for ea=
-ch
-> +memory type (Flash, SDRAM, SRAM), even when it consists of several
-> +physical-memory banks.
-
-Can we simply say DRAM instead of SDRAM. We always refer to DRAM below.
-Whether the RAM frequency is synchronous or not is irrelevant here.
-
-> +
-> +U-Boot is installed in XIP flash memory, or may be loaded into a lower =
-region of
-> +RAM by a secondary program loader (SPL). After
-
-This does not describe U-Boot SPL as being a part of U-Boot.
-
-> +booting and sizing and initialising DRAM, the code relocates itself
-
-Initialization of DRAM can be done in code running before U-Boot.
-
-> +to the upper end of DRAM. Immediately below the U-Boot code some
- > +memory is reserved for use by malloc() [see CONFIG_SYS_MALLOC_LEN>
-+configuration setting]. Below that, a structure with global Board-Info
-> +data is placed, followed by the stack (growing downward).
-> +
-> +Additionally, some exception handler code may be copied to the low 8 kB
-> +of DRAM (0x00000000 ... 0x00001fff).
-
-The exception handler code for RISC-V and ARMv8 is typically not located
-at 0x0.
-
-On RISC-V stvec, the Supervisor Trap Vector Base Address Register,
-defines where the exception vectors are located in S-Mode.
-
-On ARMv8 VBAR_EL2, the Vector Base Address Register (EL2), sets the
-location of the EL2 vector base.
-
-> +
-> +So a typical memory configuration with 16 MB of DRAM could look like
-
-%s/MB/MiB/
-
-> +this::
-> +
-> +	0x0000 0000	Exception Vector code
-
-On RISC-V the lowest memory addresses in RAM are typically used by
-OpenSBI. On ARM you may have TF-A sitting there.
-
-> +	      :
-> +	0x0000 1fff
-> +	0x0000 2000	Free for Application Use
-> +	      :
-> +	      :
-> +
-> +	      :
-> +	      :
-> +	0x00fb ff20	Monitor Stack (Growing downward)
-> +	0x00fb ffac	Board Info Data and permanent copy of global data
-> +	0x00fc 0000	Malloc Arena
-> +	      :
-> +	0x00fd ffff
-> +	0x00fe 0000	RAM Copy of Monitor Code
-> +	...		eventually: LCD or video framebuffer
-> +	...		eventually: pRAM (Protected RAM - unchanged by reset)
-> +	0x00ff ffff	[End of RAM]
-
-A description of the LMB and EFI should be added in a future patch.
-
-Best regards
-
-Heinrich
