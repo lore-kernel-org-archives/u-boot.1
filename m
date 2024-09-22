@@ -4,45 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FB97CF9C69
-	for <u-boot@archiver.kernel.org>; Sun, 22 Sep 2024 20:14:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C031CF9C64
+	for <u-boot@archiver.kernel.org>; Sun, 22 Sep 2024 20:14:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7630488BF9;
+	by phobos.denx.de (Postfix) with ESMTP id D202188C86;
 	Sun, 22 Sep 2024 22:14:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=at.encryp.ch
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=at.encryp.ch header.i=@at.encryp.ch header.b="RtipnWT4";
+	dkim=pass (2048-bit key; secure) header.d=at.encryp.ch header.i=@at.encryp.ch header.b="AhwXFmWj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8A9F889B3; Sun, 22 Sep 2024 12:11:12 +0200 (CEST)
+ id 4DD4C889B3; Sun, 22 Sep 2024 12:11:15 +0200 (CEST)
 Received: from cheems.de.box.skhron.com.ua (cheems.de.box.skhron.com.ua
- [IPv6:2a01:4f8:231:76a::2])
+ [195.201.247.11])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 10D5188279
- for <u-boot@lists.denx.de>; Sun, 22 Sep 2024 12:11:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 774A288279
+ for <u-boot@lists.denx.de>; Sun, 22 Sep 2024 12:11:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=at.encryp.ch
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=lekkit@at.encryp.ch
 From: lekkit@at.encryp.ch
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=at.encryp.ch;
- s=20240721-cheems-de-box-skhron-com-ua; t=1726999870;
+ s=20240721-cheems-de-box-skhron-com-ua; t=1726999873;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=Zhc5AYN4Zv4vIhutze8A0EUJ4ZXIsBnJmLm3i6aHAkw=;
- b=RtipnWT4OkIG2LXDuyF2oKhPXTVzbxe6v9zJpI260hyNIGL7L5b3ufljIx+2rd4HCkwX2g
- fGtZFJYatA3Pety3osL5pSuTV8rjFvSLNlR2iV8EQB0einzQjUi56fXfx5B6rL7SRC7yOL
- iPHxFNCDx3179CmF++Smtz50tpg/tIaQQxf+gTv5mY7AaG1TFmvpkYHTz/m7I8TobUI34Q
- OkYc7+fzOS5CTT5zI/mm+02XwCYp3HY3icreBVCDXBnnbFWNARBtfGfyZ8gBbQ2OtwTpVw
- +gRSrk7+z/KqASWwiQYCkNrXsswPcc35qBk/gisXq7X5Xof1TikDthR7T/8FGA==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=kAGBoRsU/9pR3O1RCFF9oSuFeM35Pz1dZ4iNpqfltVo=;
+ b=AhwXFmWjPEsOPVszXc7tsfL8OWIwDG89Vy/wppIBwJcbkwJ0Xdbo1c5rkC1spf3Le3svx7
+ ddOw/HEWQf7YV6rxhaBjcJLfLyXza7qmqUYqDD2isQ5LKYNEI1wP0QpQn9TqcjSDSqc6fd
+ bez1WwjGR60Xmpfh84reKMk6gyleQr3WA0axx02E6B6IL4wAUnMFVmVjKaDAwL/DSM8+SW
+ ukjBccfIVMfbUiaXMjEZ9jG+Fq3oguA/jr5SezClJ2AoTUOPtef5N8b96Cyeu/nv97JuJL
+ dE8un5+5NAjvV2r+cofEDC9dqYxwAQI7Bl+ZEeEFL+yeChN7J1ebjnqXi/Itzw==
 To: u-boot@lists.denx.de
 Cc: nyandarknessgirl@gmail.com
-Subject: [PATCH 1/3] riscv: qemu: Enable booting from NVMe
-Date: Sun, 22 Sep 2024 13:11:00 +0300
-Message-ID: <20240922101102.7010-1-lekkit@cheems.de.box.skhron.com.ua>
+Subject: [PATCH 2/3] riscv: qemu: Enable EFI framebuffer
+Date: Sun, 22 Sep 2024 13:11:01 +0300
+Message-ID: <20240922101102.7010-2-lekkit@cheems.de.box.skhron.com.ua>
+In-Reply-To: <20240922101102.7010-1-lekkit@at.encryp.ch>
+References: <20240922101102.7010-1-lekkit@at.encryp.ch>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sun, 22 Sep 2024 22:14:37 +0200
@@ -64,27 +67,25 @@ X-Virus-Status: Clean
 
 From: LekKit <50500857+LekKit@users.noreply.github.com>
 
-QEMU supports NVMe devices, but U-Boot only tries to boot from Virtio.
-This is problematic when explicitly using NVMe, so fix that.
-
-Additionally, RVVM virtual machine is almost fully compatible with QEMU,
-except it only implements NVMe drives instead of VirtIO.
+Enable framebuffer for better virtual machine integration.
+Some guests need EFI FB to work properly.
 ---
- include/configs/qemu-riscv.h | 1 +
- 1 file changed, 1 insertion(+)
+ board/emulation/qemu-riscv/Kconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/include/configs/qemu-riscv.h b/include/configs/qemu-riscv.h
-index 2f594bfc..cf4fcb90 100644
---- a/include/configs/qemu-riscv.h
-+++ b/include/configs/qemu-riscv.h
-@@ -22,6 +22,7 @@
- 					"stderr=serial,vidconsole\0"
- 
- #define BOOT_TARGET_DEVICES(func) \
-+	func(NVME, nvme, 0) \
- 	func(VIRTIO, virtio, 0) \
- 	func(VIRTIO, virtio, 1) \
- 	func(SCSI, scsi, 0) \
+diff --git a/board/emulation/qemu-riscv/Kconfig b/board/emulation/qemu-riscv/Kconfig
+index 9538c66e..012ac14a 100644
+--- a/board/emulation/qemu-riscv/Kconfig
++++ b/board/emulation/qemu-riscv/Kconfig
+@@ -58,6 +58,8 @@ config BOARD_SPECIFIC_OPTIONS # dummy
+ 	imply E1000
+ 	imply PCI
+ 	imply NVME_PCI
++	imply VIDEO
++	imply VIDEO_SIMPLE
+ 	imply PCIE_ECAM_GENERIC
+ 	imply DM_RNG
+ 	imply DM_RTC
 -- 
 2.46.0
 
