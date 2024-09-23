@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96B28CF9C71
-	for <u-boot@archiver.kernel.org>; Mon, 23 Sep 2024 20:35:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6582CF9C71
+	for <u-boot@archiver.kernel.org>; Mon, 23 Sep 2024 20:35:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A8D1488BCF;
-	Mon, 23 Sep 2024 22:35:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 12F6188C6F;
+	Mon, 23 Sep 2024 22:35:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lYwH7RFk";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kJnOCoTj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 91A0D88B86; Mon, 23 Sep 2024 22:35:18 +0200 (CEST)
-Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
- [IPv6:2607:f8b0:4864:20::833])
+ id 8FEAB88BAE; Mon, 23 Sep 2024 22:35:27 +0200 (CEST)
+Received: from mail-vs1-xe2e.google.com (mail-vs1-xe2e.google.com
+ [IPv6:2607:f8b0:4864:20::e2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8584588BCF
- for <u-boot@lists.denx.de>; Mon, 23 Sep 2024 22:35:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 88D42889C9
+ for <u-boot@lists.denx.de>; Mon, 23 Sep 2024 22:35:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x833.google.com with SMTP id
- d75a77b69052e-458362e898aso40274371cf.0
- for <u-boot@lists.denx.de>; Mon, 23 Sep 2024 13:35:16 -0700 (PDT)
+Received: by mail-vs1-xe2e.google.com with SMTP id
+ ada2fe7eead31-49bdc6e2e3dso1554969137.3
+ for <u-boot@lists.denx.de>; Mon, 23 Sep 2024 13:35:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1727123715; x=1727728515; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1727123724; x=1727728524; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Ua7u+c00IR8WWbSiTuVceFP/KqhvPiE6x2qQv0x1HrI=;
- b=lYwH7RFkajvorZZ5Qd+9TmrVvr1yJobOt/hVMf3I/lsd4rA8K83Nvp3DYGJzfCwGIu
- lPhqClCY0EoEGxbVb+FMLPA0LVDp0UEPqthJ0ey5dh1ueSNdYIyVJ+yP8GbCog0Cek5m
- zKkqwz+qLyIhcS/0+Zgov+LUjIaoULhdqCviU=
+ bh=635pzpa+rkujLJh4FLj4jU6IFrCi73my6N1B9I1KbW4=;
+ b=kJnOCoTj2LumnJpjxdPVlrciNKM5SfezNNSR2VzKnNbEuyzsvz54ctOEpNPH92U3dT
+ saumEfvs5QpdR8VyvVLPyPktfm1tjywsakpZEsiHL7Zjgu2MpyIIDNRVMYiFE4qcVgG0
+ ET9HOZmFgzsvADKYWM38AwhT2PsRjeXjzX7cE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727123715; x=1727728515;
+ d=1e100.net; s=20230601; t=1727123724; x=1727728524;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Ua7u+c00IR8WWbSiTuVceFP/KqhvPiE6x2qQv0x1HrI=;
- b=jDVe7bw162CgNpjYyTIgIEUf33Un4paHvW9PXkSbMYCjIk1XObz10JKMRbB9tlgAIg
- QvgXbpMhl1PkHUXbGmDjUyj2hYPMugoUshG/D9xIf0PtIuAiOzC4XT8ivYiQVM6+eXaI
- L00/m1eYSugQBNFsFgTn0F35+K3hEqgtMISFlsRx+hRB3Nd/KWzMFG53kJzPtHN1DZOY
- IA6raT1f38yfKo0VFQkMudmOy0vQQ9+o3CyMEX6j+erww0ZXHT4GaaQSxOsgZ0/wD5YF
- xXK9DcLyuw6DFygqMkV814OlwCTcySuRGngKDlYRhWL8UY8eWsxNWX9c1Es0WXQzh28q
- atCw==
-X-Gm-Message-State: AOJu0YyWtw1S2cDHt1Whlu5R7QCauLzgqHAeCzzV3gEEgDg3ScDsHq5a
- oJ0ogGduy0cJQFJbdBpIZ+5lGatehN0Tmeb5lt6eRVNPhu/pX/AUgUhDJrmuXR0=
-X-Google-Smtp-Source: AGHT+IHpm1esveNGSt7DXz806Rz90jh3tgPU9c57i8gLqdIVCb5Hs8opnFhPR19XOdUFmgRrU/3zGA==
-X-Received: by 2002:a05:622a:1992:b0:458:611b:ad0d with SMTP id
- d75a77b69052e-45b204eb5femr228489241cf.15.1727123715422; 
- Mon, 23 Sep 2024 13:35:15 -0700 (PDT)
+ bh=635pzpa+rkujLJh4FLj4jU6IFrCi73my6N1B9I1KbW4=;
+ b=jLGrmMnJeiKmwRsCOrEIxe0A8cRPodSMC72/G+w0CeMnXBbTAy0AXepOwvjfUV64Cc
+ DOUr3F7lqNgBzN9j20J0/f9Nn/COe3fPcBBHw60PNeawR8dpJlBYLrjrr0OfH7fkUvJ+
+ pLmOHxaKGR6yNUPoTviuaFDVwXLGnG4x89Xvrnwc19ylPu6j8EQW9zg8lmxescRfTT/E
+ pCaxUjKlGxhLm3gqCijHrCIzqrKcslXoWFcFL2+NTCcasXLVnpEt5GrjDe22F8J0N6QV
+ PYFGiajUaRn7zigYSTRaDdNqWJwUAjJfBV9mnYSt4ecd5HASY52RXyS4Fwk4cG7NDzG/
+ i82g==
+X-Gm-Message-State: AOJu0YwSOSZ+JxU4LD9Qtic2cwEQprhIDGuvsIAi1cZI4CGaNqvLRheO
+ CxjrZVE3m0nLC2CF/Uy4UFwVraNGW22rz9VKsiQ+fQPtskoBmm0daKVlnk89goA=
+X-Google-Smtp-Source: AGHT+IEKi8HMm8/8TfsgDDh7Dtdwsdj8n4GOozzMPfPg1UNRFklN7wXZ3HNKczo6fbo5Gu1I6KrXdA==
+X-Received: by 2002:a05:6102:94f:b0:49d:433b:a603 with SMTP id
+ ada2fe7eead31-49fc952a198mr8129175137.1.1727123724357; 
+ Mon, 23 Sep 2024 13:35:24 -0700 (PDT)
 Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-45b5253ad3fsm99901cf.8.2024.09.23.13.35.14
+ d75a77b69052e-45b52544854sm97051cf.6.2024.09.23.13.35.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Sep 2024 13:35:14 -0700 (PDT)
-Date: Mon, 23 Sep 2024 14:35:12 -0600
+ Mon, 23 Sep 2024 13:35:23 -0700 (PDT)
+Date: Mon, 23 Sep 2024 14:35:21 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v6 01/19] test: Allow signaling that U-Boot is ready
-Message-ID: <20240923203512.GQ4252@bill-the-cat>
+Subject: Re: [PATCH v6 02/19] test: Use a constant for the test timeout
+Message-ID: <20240923203521.GR4252@bill-the-cat>
 References: <20240920060158.106612-1-sjg@chromium.org>
- <20240920060158.106612-2-sjg@chromium.org>
+ <20240920060158.106612-3-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ZZ92sU2uVl6uQOef"
+ protocol="application/pgp-signature"; boundary="fO+t2T7yXfthMTK6"
 Content-Disposition: inline
-In-Reply-To: <20240920060158.106612-2-sjg@chromium.org>
+In-Reply-To: <20240920060158.106612-3-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,52 +91,38 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---ZZ92sU2uVl6uQOef
+--fO+t2T7yXfthMTK6
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Sep 20, 2024 at 08:01:36AM +0200, Simon Glass wrote:
+On Fri, Sep 20, 2024 at 08:01:37AM +0200, Simon Glass wrote:
 
-
-> When Labgrid is used, it can get U-Boot ready for running tests. It
-> prints a message when it has done so.
->=20
-> Add logic to detect this message and accept it.
+> Declare a constant rather than open-coding the same value twice.
 >=20
 > Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->=20
-> (no changes since v1)
->=20
->  test/py/u_boot_console_base.py | 9 +++++----
->  1 file changed, 5 insertions(+), 4 deletions(-)
 
-What happens is that labgrid can also be told to look for and then
-interrupt autoboot, just like our pytests can do, and the system is at
-the prompt. But this is also what it's like for a system with autoboot
-disabled. Do we actually need this patch to achieve the functionality
-you want? Doesn't that already just happen?
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---ZZ92sU2uVl6uQOef
+--fO+t2T7yXfthMTK6
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbx0QAACgkQFHw5/5Y0
-tywySgwAp0mQPBA+DbT28kAPXFn81dsPKQx7gNye+FHjvLeprNwZwfKFoTj/bycv
-/TwnwCZgE/Qu/XfUz9ArvDlf/etraqcsa0iy5SbAlBwo77B4SuT9PX/2DIMo2fMc
-uu8D9CEAntqe6SudJ6DITR2xyj0vnRUp7sBJt9J2cJ3OVswpS47bozThVL5EEVm1
-1VHzQwOEDXFoYNu8jfyVaZLnpN/qfNJqaql/3HTHfQPAFYZlNh73ZKqcvq+PzDAc
-lGKykzRzix2FPMaVJOBMRGbokFr3qjAZx+SnlrfGsE/7yXdYm61Bq9VWTjIxCmDb
-/EzV4Pvabb/1dxzveQyViTao7494P/Qu0yyUl0jQKgqtTVU0a6+wu1OysMWTbZ0v
-xe2y9hh1WoaEXeekNjNExAm5SxTgLOozHlo0RmJ69QJfYhh7qVNh4RsDVS1o8V4k
-Om9QXerPk5Ew8vsDStjM/+Qn5E/8E1XHyz6kfifOVYAqDIvdvQp7QwJ0kvTkf20Z
-tvftfAd3
-=/7Is
+iQGyBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbx0QkACgkQFHw5/5Y0
+tyxB+gv3YZunf1vPuYsbEfXC9EJIp2GlLl8U4bkesSGrRGK5SG7n5azVerAzllAB
+ewaPSrXZRidWCUncsTppFxG5IS2u63JMLa4Y7kHGFEForVNJcCMX9vbpCcR5P2Wp
+95DBsnjE7+T6abiljeorQ71ErbBjyjhiTAU7kK101ioQ5d6jnPCgA4zX4xe9z+TR
+DEXei/cM8N1FBE1OGlk03GFibXv4mg7koB0BcM6MUaPSwhzeLHjH56VxgoRfvNbr
+CJUaABxmVbsMnC0vgomgSENZ9b7sZHOPi/enhVXJjz1Su8dgYTJPdRIu+vI4DpCK
+l7HfqD+vLm9ogLWgqNy/keUvwpoIOuOy7WgYF41yCg10kTF9nFWUgYGOCY3E0AE2
+vJKjyeO59hmm/Q4evXVfMPFmsy8n815T9ElzAW7x+qeAGmrxw7xPqpq/n44CJ9I5
+NFwLEuz8MOd8f3t6ZNlNf4NLRX37f0UGYhZFScwaRFmDGbUjD9NAZGOO8oyHr/+Z
+5IM0eLU=
+=0VTu
 -----END PGP SIGNATURE-----
 
---ZZ92sU2uVl6uQOef--
+--fO+t2T7yXfthMTK6--
