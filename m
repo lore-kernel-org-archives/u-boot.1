@@ -4,159 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AA3ACF9C6E
-	for <u-boot@archiver.kernel.org>; Mon, 23 Sep 2024 11:24:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9512BCF9C69
+	for <u-boot@archiver.kernel.org>; Mon, 23 Sep 2024 11:54:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D43A88CA3;
-	Mon, 23 Sep 2024 13:24:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id CF96888CA3;
+	Mon, 23 Sep 2024 13:54:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="bhuzNClm";
+	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="y7tOr7jw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68D5D88B79; Mon, 23 Sep 2024 13:24:49 +0200 (CEST)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100000.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id DBF3F88CBA; Mon, 23 Sep 2024 13:54:33 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7AD1F88A0E
- for <u-boot@lists.denx.de>; Mon, 23 Sep 2024 13:24:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id A1C6E88C91
+ for <u-boot@lists.denx.de>; Mon, 23 Sep 2024 13:54:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=orqOxgZABahK8oJW26PM1E5SPJtN3y9x7CG0tV/IBKlQtbFCheljZgMOasXn3SM5HD6XnEK4QBm9ecsOfqf8/feo218nae4eYDDKjIs5iGqra5cagcDHa8oFRwNbBrtHFct6unpwnkexSI+jmTdjy+u0BCZIRFAlLKzuW1V0GiPtOlKafEFyANXURXT8T1rwaICL3L3nohrz2FCPWW2Cf4/NcZu+8rX+RrfFGk8lO0L91i7O+Sb0EVAQyNy2/r4x41xBI5eMJYG3gQyFhyF4NvKM+YZhd712KqOacNK1fTyjrrq9feO6cgrdglwuLmHl5i5eS9WCEFUWAebFiTKtCw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=LiU8YAH/Ws7kw32os1PhE4okHOCZwFO3dvlonb/3Rvo=;
- b=YyYHNcl0jAnJJuzt61FUbTXeVtjPpyruTBrf9NGGIhR1hnu+j1s1mnQo7YO5kqrEe2dP67y+mJCjbCo99jSoyKTb6JNapsd+TFS2Qb7j24YUYcGdgfWuKuXD80jtvrI7xYqZzkf8hrSinSBW0mLQDo3QVokUbbjJEnESTDiA8mLew1t9NQcm+BVm++zGxIX2wIS45WOCudeRYhZuxZhgJHRLSuVL0ZQ9wEDay+bLraXHzOXli0opUCVF4dan/tDkYZ55hSIHIdbDsxsljBrXahNu4laIrM5X79m7Eh3PGAJoELdHf4983UsuPfUXAS4iwYWrGvntJ9AFLWyFnotKYA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LiU8YAH/Ws7kw32os1PhE4okHOCZwFO3dvlonb/3Rvo=;
- b=bhuzNClmINwD9zfk6xyMQyKVYgOGrjBBqDMUpc0ZJ87NlfiVC/Yubnr963u+fPQtY6sdNqz67J4uW2saOVP9DVlwOFJZ+H7Knxkv4aWmo6kV7yBIaylSP0irVIikIvoJQNwb8s44I3VrnKErTGoiikmUzaiuJOdxM3/SADIMaqc=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AM9PR04MB8906.eurprd04.prod.outlook.com (2603:10a6:20b:409::9)
- by PAXPR04MB8492.eurprd04.prod.outlook.com (2603:10a6:102:201::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7962.24; Mon, 23 Sep
- 2024 11:24:36 +0000
-Received: from AM9PR04MB8906.eurprd04.prod.outlook.com
- ([fe80::d379:5378:b1:cea]) by AM9PR04MB8906.eurprd04.prod.outlook.com
- ([fe80::d379:5378:b1:cea%2]) with mapi id 15.20.7918.024; Mon, 23 Sep 2024
- 11:24:35 +0000
-Message-ID: <da41ca54-871e-4e40-b7c8-626a3c4a3f1a@cherry.de>
-Date: Mon, 23 Sep 2024 13:24:34 +0200
+ dmarc=none (p=none dis=none) header.from=monstr.eu
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-a8a6d1766a7so600580666b.3
+ for <u-boot@lists.denx.de>; Mon, 23 Sep 2024 04:54:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1727092471; x=1727697271;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=WeLK2FQ9r5nSHjtGiNBiIkYFGi9NKjAWSx9v9GovrDg=;
+ b=y7tOr7jwQ7UJk27rZID+2E+5OLK+7ZkIjPoUhVVEF3UmfrOkziP3KQCbs6Qc5fwouO
+ qb4WG6+2v+x80a9le8ZV/C/v8zqISEPd6cLl5KmDQImV7bBrnxmfVUO7Z9PKpj0V0/YV
+ bJfCNbG7YrUBPHdIF7nohViFSGGLQLoZWQbeC5K2qz2Kn2UIBMHR7NDr2aDxjf/XG/AP
+ XPStlwR+ipOvjWUezDdHr5b0+hwufL/dpiGS0jtk4KRtoITzUNSLcw3qGk/zUQ2Mi1pK
+ qBO6m+vUhlwY+kxxrghwaRP9EMZj5i0SxPtlO8LPqlCZuQz6elLfPrwZ1T2Ka75B9Ds2
+ H8pg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727092471; x=1727697271;
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=WeLK2FQ9r5nSHjtGiNBiIkYFGi9NKjAWSx9v9GovrDg=;
+ b=C2LczrC/KwvvzVgNv4qPH064IatbQM5jK+mXuLbPCpnpMEmu7oGODAEUestMCpvy+j
+ JBi7278oyZnimS7hXbfpmsiGLmLrXu9M7gwrxZ9hP0Eo/sPKr4acOVAX/UzjAzrBj1JE
+ FbcEXfR5APJYHiGrLrEW17HYoHZGMWCG5GzBkhK1yqmFdMUa8CLeYM8urImL02cePbIz
+ cFW+cBT7x37khw4pehlAJVr6dKEwaI+P69Du07EwBPcroyw4fa8Ix9XznbLIULiq07Kh
+ ekT5yP3CmURZGYYN2lFdqAqZlH5IGihNJoDrMJNt3+LCErtxgm9S7DJ/Tz0cHiCdFNQt
+ UJSA==
+X-Gm-Message-State: AOJu0YznMs4ZohacI+Zo2aJHWlcXvhd8jzEa0f2YtXIEIuVLsVUufT1H
+ PBeJc+uLJ69nSkq2v8vcB6mdknW+sggKARGPsy4UTdb/sjrI5r38WJwnwOponJjiQjGiZFvKEhY
+ I6lyo
+X-Google-Smtp-Source: AGHT+IFQH91II1AOoByvTDooZCYoAraZYc0y9x3OVZOioLy3v54c/EmJAToLjuwbppylYemeGf07Hw==
+X-Received: by 2002:a17:907:f786:b0:a8a:7897:c043 with SMTP id
+ a640c23a62f3a-a90d50ee840mr1057151466b.43.1727092470787; 
+ Mon, 23 Sep 2024 04:54:30 -0700 (PDT)
+Received: from [192.168.0.105] (nat-35.starnet.cz. [178.255.168.35])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a90612e5675sm1210911866b.169.2024.09.23.04.54.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 23 Sep 2024 04:54:30 -0700 (PDT)
+Message-ID: <2a5d1c10-f5ed-4d13-aacb-280c7a3a6180@monstr.eu>
+Date: Mon, 23 Sep 2024 13:54:30 +0200
+MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH V2 4/4] board: rockchip: Enable PD_VO before driver access
-To: Chris Morgan <macroalpha82@gmail.com>, u-boot@lists.denx.de
-Cc: jonas@kwiboo.se, trini@konsulko.com, kever.yang@rock-chips.com,
- philipp.tomsich@vrull.eu, sjg@chromium.org, dsimic@manjaro.org,
- Chris Morgan <macromorgan@hotmail.com>
-References: <20240919140022.511067-1-macroalpha82@gmail.com>
- <20240919140022.511067-5-macroalpha82@gmail.com>
 Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20240919140022.511067-5-macroalpha82@gmail.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+From: Michal Simek <monstr@monstr.eu>
+Subject: [GIT PULL] xilinx patches for v2025.01-rc1
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: WA1P291CA0013.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:19::16) To AM9PR04MB8906.eurprd04.prod.outlook.com
- (2603:10a6:20b:409::9)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM9PR04MB8906:EE_|PAXPR04MB8492:EE_
-X-MS-Office365-Filtering-Correlation-Id: 422e6b9f-e5f7-45b5-c3f2-08dcdbc24df8
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?MWk5UVIwdVFWN3BoUHgrc0twNk94Z0Jnb25IM2RXaHlKMVI0eWNTU25JaHFJ?=
- =?utf-8?B?REtoMWZrS2QwbnhOWWRteFNrWTVkcnRzeTdPais2WHVyUW52YTNFaVpadlUz?=
- =?utf-8?B?a1JtdXR5UmFTVVp0SjVudkRwb1ZxcjlVVFhJMWlsY2tYbUVzVkZXOWFiNzhn?=
- =?utf-8?B?SFl1ODF3cDNPN0svQnY3VW9HOC8xR0ZSZUIvWHJCL2xRM2x2WXRMTFY2ZW1J?=
- =?utf-8?B?aXIzU2F3VndyZWFXQzhScyszSE5vV3lBUlFwNHlTdHRmdmoyMUpFZldkazZr?=
- =?utf-8?B?K0Q3OGxIbWhLZHk3K3I4bjcrcGI0MnllT21pbXRXcitZV0MyTklEQ2FPemx1?=
- =?utf-8?B?dkpQL0sveGZHc204cFh2ZnlsVXJQaDBUUm1OS1B2MWozcnJNQVB3N2svT2hx?=
- =?utf-8?B?emlJWG8wQmc3dDlQM3AwNytrc1N4QlcyWTl0NnpGb2xqZVgycnVkTlRGbVRP?=
- =?utf-8?B?RnZnenlpbTRQeWs0V2NrNnNESjc0UDlDaXJBeVhlSHRUOVNPY25nSzJhaGVo?=
- =?utf-8?B?WWZ2ZnhsaUpiZ2ZhZkd5allkTThOTXBpdENNYlpjOExYSGZuWitWMXJJWDlz?=
- =?utf-8?B?VWVpYkQxZkRWNCtoeHgzdTFQd1c0N1BINnhEN3gxQ0hONW1icWorSjZ2WU1T?=
- =?utf-8?B?YVdEdHpXSFdtcWV0OTZmL1F0ZnhDNzVOYm52aUErbjl4QTJkZjhWbkFOSWhz?=
- =?utf-8?B?OUE0dDlKS2JFa0p6NWxadUNYTVovbEppNng2K2tzQUtlT2l0UjVnTjFFTTk5?=
- =?utf-8?B?NEI2VVlqelVqK2NRWmlGWGlmWUlZeVFFQjJXTUxaVkJacUtjRWNqZHdKcFlF?=
- =?utf-8?B?cFlzczMrRituN081cmpVUXJaRmFzRGtLUktHMkp6TmF5UkdmREt1M3p0aGJ5?=
- =?utf-8?B?ZDZSWnRMOEhUZms4OWxFRXM2TVg2bk1udUdtMytKckpVS0lqMzZXblJBV0FO?=
- =?utf-8?B?VkxEcGpWQ2M2bkFvMFA1U21HWkZMK3JHY2cvcHQxTS90K2dCRGhDckh0bkti?=
- =?utf-8?B?QnFyNkVudkFVbjl1VjlNVGJzcGVaMVU2a2Zlck52ZWhlMWRWTHFoT0FKekpt?=
- =?utf-8?B?MWxIcG9pYXpsUGxha2JQRmVEQnhxc1dOd3J1VGJOU2gzK0dINS9hYXUwMlZT?=
- =?utf-8?B?UEdEQzJwSTZkQ0pwblpUSmRxdXpJbit4R2lOZWN6RnQzd1daSjdJYUR0QXds?=
- =?utf-8?B?MExlZjNIMmtPQkJCbGRsMkNNdGtoeGJ0ODlVeXZ5SG5aQ01MQzNRRm5UNGhv?=
- =?utf-8?B?NzhOV0RFQ2NMdVpXaFNyM0t6cU5xSWN4U2JGR1F3ejJwNkM1YVFST29kWXlZ?=
- =?utf-8?B?MXJwUFp3T1FGWUxYMzYyUGNuajVyWmxMRjJoNFA2YWlhK1dkT0x4NUhTeUg1?=
- =?utf-8?B?YWZxK2xtL29oT25TTmFxcmlBcUVYQkRKRm5tbEhOUkZlQ1NOenpSTFFPODVN?=
- =?utf-8?B?TlRFcEZ1V0J2QkxCQTExMkhDSUpXZEpCWjNSVzhHQWxseHoxWWhtZTZyMkpD?=
- =?utf-8?B?a2ErSlYzaVJwVkp0d2lUb3NJVXZIcTlLWVUwOUZqQWQvejZFSWJPelY1TUtj?=
- =?utf-8?B?bmx1YmFVV2J5MkdZWW1URGN1ZkJ5MC9kcFlFdWxsWDh0NS9WQ3JQcmRCbTdS?=
- =?utf-8?B?WGhoaUNxOUZtMHBwRm0rb2FFYUhQRk9HQjlyM1BPTDZUbDBzWTdldVRUSFQv?=
- =?utf-8?B?TjVTTXZLbjVET3V4QmlSOEdyUFk1MUNaVzFXMDc4TlQ0NWZhdHBYd2RBPT0=?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM9PR04MB8906.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Zjc4cDYyYk95Yis0U1M3YVFtZk83TUNhN3BEQ1piMi9QN3BzN3paS2ZTbE5F?=
- =?utf-8?B?M2pucG9ua2o1MUVHWjZ2dXpUYlg4aXBjQlNFcDIyUWMwUXM0YXYvOVBYcHh5?=
- =?utf-8?B?ZUpNZG51TE9tdHhFNmw5T3F0WGpMYjdGcUYwM2dDdUVkMFQyRmlrRnJJa29j?=
- =?utf-8?B?WW1rSXRFWUIzR1E3SXJhQVJqNzFndys4cENhSmtFdkJrSDdIUXFjVzNtb29p?=
- =?utf-8?B?STFlVmd1VzhpdTNrQ2Y2cnZRUTRFYzM2RCttY0o2Q3BBK29aTTJCU21GeW9U?=
- =?utf-8?B?YWV2eW9Oclk5TVJMZGtFN3JRem9wQjd2SUFNWmR1U3FXa21KaXZuQ2pSR2VK?=
- =?utf-8?B?SmNOL1dtYmRmRVNUOHpWWUMwNklsK2g0NmhQNndxZ1IvSGJ2dm1mWEduN0FD?=
- =?utf-8?B?WHRCdGhJMWVSY1ZvMU05bFVaU2xadmZsbC9wdzlHb2dQTmY4WUJjTEl4V1FY?=
- =?utf-8?B?QjRNdm5DUDVIcmgzSjJmNHlmc3BuRUpnWHhZYktsVTlBcXZKTXgreTZLZXJm?=
- =?utf-8?B?cVBWTWRkNVFWQUlIUk9qUE55ZlM2QkgxcitiZWxaQkxLWkhKNmRHdFlSQzFk?=
- =?utf-8?B?QjNvWGdoeVJYMFdnK0NXdFlXZm5JUjMvaHErdjFwZDJVOEV5Y2MydC9reFAz?=
- =?utf-8?B?aFJGaHd6ZFV0Q1RmY3VkOHB2a2pxU2Foanl3RFJHbkV3aC9NYkNDUWhhQ3la?=
- =?utf-8?B?MW1IR3FvazNOM3BIdmx2bkJrc2lteEx2VzVKa0VMMjV4eHg5M1B2Z3BpRE9z?=
- =?utf-8?B?V1l0SnpWelZ4RWdjc0ZIaS9IZ1FiL2ZWY2llZ2pxeFM1bHlsQ2JoUGw3Y1RE?=
- =?utf-8?B?VjBKYXV5SWFDdTlpR1o1OFRGTnJ5YU12RFUydEpHYUs5bUVrbm94MVZpNDhp?=
- =?utf-8?B?YS90ZFk5NUZnc1hmUmlUT25ScTV6V1VNNlVzZjJYYWtXbE9EMG05clNRUEps?=
- =?utf-8?B?dGs4ck9vMFhtYXZPemp3cDd2MXdmNXE5TDZsS2lETFEvQ1JzVnNKQnlCbUlH?=
- =?utf-8?B?TTZ4TDRZQVN6ejhoWSs1WXVWV2Yzb3M1ZSsvRjNzSmZzSjJxbmtwbFNpaGEw?=
- =?utf-8?B?OGRSckNOOHNrVzNVRVlxbzM1cFg5V3NtT3FNbThHTTZTdWxXckZ6RXZFVU13?=
- =?utf-8?B?Wnl1WVhTNHo5SWNmaXhPVCtzbGFsUXZIMlF6T3hPbUNHMzRpby9OSUxPRURr?=
- =?utf-8?B?NlhGdk9peDhITHpjam9JRDdBSUI1bDNjNjMxLy90NWRLbTAxR3dZVi9DYlRn?=
- =?utf-8?B?SDIzcEpESEtUNHNnL21zcG1VZ3ZPanlKTWxrNEpLZGYyejg4KzlNRFdVNzZo?=
- =?utf-8?B?aHo1b2lIMG92UkVXMVFzeHAvZittdWtwV1AwTVRTZ0J2TkQzRVhHbWp2ZCtz?=
- =?utf-8?B?Unp4c3lsLzJEV3cyYnFrVkFENGFqNkFVNHFabWJCUkdhbkdDczFFL1N0dU1i?=
- =?utf-8?B?NzFIUkNiZzk0OWRVUkEwb2FhYytuTTcvTzNWbER4S3BPYS9jeFc3SG1PSitW?=
- =?utf-8?B?UWRYMzlWbGhRdHlKK20zWkFEcHV1S3A4ZVpGRGdFYUpEZ3dZSlZhQkkzempV?=
- =?utf-8?B?YlFGWGxIQWNzMXM1NEc5UEdQeGxZWXRCcFBJS0RoZVFQVFdyY3pCZ1oreEVU?=
- =?utf-8?B?NWZ5cmszWVhrOGtPbSszeGFzdWVMV0ozM2pCdnBoK1p3VnJ6ZTNGMkhPV2Fl?=
- =?utf-8?B?b2QzZzRodklOTThGczJMTm94bk9Wb1hHMnh2WGZNd1RnQzBiQ0VqRStRa1Vr?=
- =?utf-8?B?QSt0Mnl5ZldGWGF2eWZPSm9JRDBCeTlVaytSN1VUdmxRNkJrV1dMTkdlZXZ3?=
- =?utf-8?B?VHcvaElEOEt2M3pycTAzY2hCQmtCV0tDL1huUnZBWE1Obm8yMUIwQUt4OVJI?=
- =?utf-8?B?amdkN2xOS1Y4a2JMYWltTmtNYW80RytmMlBFbzlMbFhvRUlsOTFRVkFUcDZx?=
- =?utf-8?B?TXd4YVRmRlhDZSt4SFVISEhoYmRZQlZQMW1OSVJIOTFrWVJmVXA2NS95RjMx?=
- =?utf-8?B?Z0s2blpySEZqSkMreGdRT2t0bkJrM0lHbnlFdnYrN2loWDZpSlp5SHRtbUZ4?=
- =?utf-8?B?TjBPaVFYVXR0cTcvUTAxWTBqKzZ4MjVmUk8wSlFZbGJ6cEh2U3d6V01HQkNr?=
- =?utf-8?B?b2kvMXFpRDNUUnFON0lveUR0eUVUM3NtVmxaeTBwancwam10a3JicXRBc240?=
- =?utf-8?B?Q1E9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 422e6b9f-e5f7-45b5-c3f2-08dcdbc24df8
-X-MS-Exchange-CrossTenant-AuthSource: AM9PR04MB8906.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Sep 2024 11:24:35.9228 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: a+5xOVY0qzdgjN+U8Jk7ItyBg40TSdCqgG53UxFp0i4Yct1KooPPRYtpRKZPmZln2auVGYxvL9w3Z53QKBc9fM3Gs1gNi/EfkYkCLZlwd0c=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8492
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -173,47 +92,156 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Chris,
+Hi Tom,
 
-On 9/19/24 4:00 PM, Chris Morgan wrote:
-> From: Chris Morgan <macromorgan@hotmail.com>
-> 
-> Enable the PD_VO power domain before driver access on the rk3568 SoC.
-> 
-> Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
-> ---
->   arch/arm/mach-rockchip/rk3568/rk3568.c | 6 ++++++
->   1 file changed, 6 insertions(+)
-> 
-> diff --git a/arch/arm/mach-rockchip/rk3568/rk3568.c b/arch/arm/mach-rockchip/rk3568/rk3568.c
-> index 1b3e40074e3..d5742b68d68 100644
-> --- a/arch/arm/mach-rockchip/rk3568/rk3568.c
-> +++ b/arch/arm/mach-rockchip/rk3568/rk3568.c
-> @@ -26,6 +26,8 @@
->   #define PMU_BASE_ADDR		0xfdd90000
->   #define PMU_NOC_AUTO_CON0	(0x70)
->   #define PMU_NOC_AUTO_CON1	(0x74)
-> +#define PMU_PWR_GATE_SFTCON	(0xa0)
-> +#define PMU_PD_VO_DWN_ENA	BIT(7)
->   #define EDP_PHY_GRF_BASE	0xfdcb0000
->   #define EDP_PHY_GRF_CON0	(EDP_PHY_GRF_BASE + 0x00)
->   #define EDP_PHY_GRF_CON10	(EDP_PHY_GRF_BASE + 0x28)
-> @@ -130,6 +132,10 @@ int arch_cpu_init(void)
->   	writel(0x3f3f0707, GRF_BASE + GRF_GPIO1C_DS_1);
->   	writel(0x3f3f0707, GRF_BASE + GRF_GPIO1C_DS_2);
->   	writel(0x3f3f0707, GRF_BASE + GRF_GPIO1C_DS_3);
-> +
-> +	/* Enable VO power domain for display */
-> +	writel((PMU_PD_VO_DWN_ENA << 16),
-> +	       PMU_BASE_ADDR + PMU_PWR_GATE_SFTCON);
+please pull these patches to your tree. Most of them are related to dt-schema 
+and it's alignment.
+But the most useful one is work done Prasad for being able to apply DT overlays 
+via Makefile rules. The rest are just small fixes.
 
-Maybe we want to guard this with a symbol for video stuff in U-Boot? I 
-assume Linux is capable of handling this just fine without U-Boot's 
-intervention?
+Thanks,
+Michal
 
-At the very least have #if CONFIG_IS_ENABLED(VIDEO) ?
+The following changes since commit 948616894c6d3316a5ac8f2a891783e3e7ff3516:
 
-What do you think?
+   mtd: spi-nor: scale up timeout for full-chip erase (2024-09-19 16:42:31 -0600)
 
-Cheers,
-Quentin
+are available in the Git repository at:
+
+   git@source.denx.de:u-boot/custodians/u-boot-microblaze.git 
+tags/xilinx-for-v2025.01-rc1
+
+for you to fetch changes up to 61bf0fa8663d85c5d4088a9f82c9244181f3adce:
+
+   xilinx: zynqmp: Add bootmenu support (2024-09-20 15:33:01 +0200)
+
+----------------------------------------------------------------
+AMD/Xilinx changes for v2025.01-rc1
+
+kbuild:
+- Add rules for automatically applying DT overlays
+
+Microblaze:
+- Enable bootscript location via DT
+
+AMD/Xilinx
+- Enable SIMPLE_PM_BUS by default
+
+ZynqMP:
+- DT updates and alignments with dt-schema
+- Call fdtoverlay via make directly
+- Enable non-invasive CCI-400 PMU debug
+- Disable secure access for boot devices
+- Add new zynqmp reboot command
+
+Versal NET:
+- Cleanup spi_get_env_dev()
+
+Kria:
+- Add bootmenu support
+
+sdhci:
+- Do not call device_is_compatible everywhere
+
+net:
+- Remove is-internal-pcspma DT flag
+
+----------------------------------------------------------------
+John Vicky Vykuntapu (1):
+       xilinx: zynqmp: Add bootmenu support
+
+Michal Simek (14):
+       xilinx: Enable SIMPLE_PM_BUS
+       arm64: zynqmp: Add missing vc7_xin fixed clock to sc-vpk180-revA
+       net: gem: Remove undocumented is-internal-pcspma dt flag
+       arm64: zynqmp: Define only one revision in zcu106-rev1.0
+       arm64: zynqmp: Fix status property for m-a2197 boards
+       arm64: zynqmp: Align gpio hogs with dt-schema
+       xilinx: Fix axi and mmc node names in mini configuration
+       arm64: zynqmp: Fix gpio-line-name size for m-a2197 platforms
+       arm64: zynqmp: Fix comment style around gpio line-names
+       arm64: zynqmp: fix i2c mux bus description for m-a2197 platforms
+       arm64: zynqmp: Align mini-qspi DT with dt-schema
+       arm64: zynqmp: Define phy-mode in zcu1275-revB
+       arm64: zynqmp: Use generic spi@ name in zcu111-revA
+       arm64: zynqmp: Rename ina226-vccint-io-bram-ps nodes
+
+Padmarao Begari (2):
+       mmc: zynq_sdhci: Remove device_is_compatible() function
+       board: xilinx: Remove conditional check for Microblaze
+
+Prasad Kummari (4):
+       xilinx: versal-net: fix no previous prototype for function warning.
+       arm64: zynqmp: Add u-boot command to boot into recovery image
+       kbuild: cherry-pick kbuild fdtoverlay changes from linux
+       arm64: zynqmp: Remove overlays and add new dtb entries for ZynqMP
+
+Sean Anderson (2):
+       zynqmp: Disable secure access for boot devices
+       arm: zynqmp: Enable non-invasive CCI-400 PMU debug
+
+  arch/arm/dts/Makefile                                  | 78 +++++++++++++++-----
+  arch/arm/dts/versal-mini-emmc0.dts                     |  2 +-
+  arch/arm/dts/versal-mini-emmc1.dts                     |  2 +-
+  arch/arm/dts/versal-mini-ospi.dtsi                     |  2 +-
+  arch/arm/dts/versal-mini-qspi.dtsi                     |  2 +-
+  arch/arm/dts/zynq-cse-nand.dts                         |  2 +-
+  arch/arm/dts/zynq-cse-nor.dts                          |  2 +-
+  arch/arm/dts/zynq-cse-qspi.dtsi                        |  2 +-
+  arch/arm/dts/zynqmp-dlc21-revA.dts                     |  3 +-
+  arch/arm/dts/zynqmp-e-a2197-00-revA.dts                |  1 -
+  arch/arm/dts/zynqmp-g-a2197-00-revA.dts                |  3 +-
+  arch/arm/dts/zynqmp-m-a2197-01-revA.dts                | 16 ++--
+  arch/arm/dts/zynqmp-m-a2197-02-revA.dts                | 16 ++--
+  arch/arm/dts/zynqmp-m-a2197-03-revA.dts                | 16 ++--
+  arch/arm/dts/zynqmp-mini-emmc0.dts                     |  4 +-
+  arch/arm/dts/zynqmp-mini-emmc1.dts                     |  4 +-
+  arch/arm/dts/zynqmp-mini-nand.dts                      |  2 +-
+  arch/arm/dts/zynqmp-mini-qspi.dts                      | 16 ++--
+  arch/arm/dts/zynqmp-p-a2197-00-revA-x-prc-01-revA.dtso |  8 +-
+  arch/arm/dts/zynqmp-p-a2197-00-revA-x-prc-02-revA.dtso |  8 +-
+  arch/arm/dts/zynqmp-p-a2197-00-revA-x-prc-03-revA.dtso |  8 +-
+  arch/arm/dts/zynqmp-p-a2197-00-revA-x-prc-04-revA.dtso |  8 +-
+  arch/arm/dts/zynqmp-p-a2197-00-revA-x-prc-05-revA.dtso |  8 +-
+  arch/arm/dts/zynqmp-p-a2197-00-revA.dts                | 11 ++-
+  arch/arm/dts/zynqmp-sc-revB.dts                        |  2 +-
+  arch/arm/dts/zynqmp-sc-vn-p-b2197-00-revA.dtso         |  8 +-
+  arch/arm/dts/zynqmp-sc-vpk180-revA.dtso                |  6 ++
+  arch/arm/dts/zynqmp-sck-kr-g-revA.dtso                 |  1 -
+  arch/arm/dts/zynqmp-sck-kr-g-revB.dtso                 |  1 -
+  arch/arm/dts/zynqmp-vp-x-a2785-00-revA.dts             |  1 -
+  arch/arm/dts/zynqmp-vpk120-revA.dts                    |  1 -
+  arch/arm/dts/zynqmp-zcu106-rev1.0.dts                  |  2 +-
+  arch/arm/dts/zynqmp-zcu111-revA.dts                    |  2 +-
+  arch/arm/dts/zynqmp-zcu1275-revB.dts                   |  1 +
+  arch/arm/dts/zynqmp-zcu208-revA.dts                    |  4 +-
+  arch/arm/dts/zynqmp-zcu216-revA.dts                    |  4 +-
+  arch/arm/dts/zynqmp-zcu670-revA.dts                    |  2 +-
+  arch/arm/dts/zynqmp-zcu670-revB.dts                    |  2 +-
+  arch/arm/mach-zynqmp/include/mach/hardware.h           | 11 ++-
+  arch/arm/mach-zynqmp/zynqmp.c                          | 26 +++++++
+  board/xilinx/common/board.c                            | 39 +++++-----
+  board/xilinx/versal-net/board.c                        |  5 +-
+  board/xilinx/zynqmp/zynqmp.c                           |  8 ++
+  board/xilinx/zynqmp/zynqmp_kria.env                    | 12 ++-
+  configs/amd_versal2_virt_defconfig                     |  1 +
+  configs/xilinx_versal_net_virt_defconfig               |  1 +
+  configs/xilinx_versal_virt_defconfig                   |  1 +
+  configs/xilinx_zynq_virt_defconfig                     |  2 +
+  configs/xilinx_zynqmp_kria_defconfig                   |  1 +
+  configs/xilinx_zynqmp_virt_defconfig                   |  1 +
+  drivers/mmc/zynq_sdhci.c                               | 39 ++++++----
+  drivers/net/zynq_gem.c                                 |  9 +--
+  scripts/Kbuild.include                                 |  4 +
+  scripts/Makefile.build                                 |  1 +
+  scripts/Makefile.lib                                   | 27 +++++++
+  55 files changed, 293 insertions(+), 156 deletions(-)
+
+
+-- 
+Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
+w: www.monstr.eu p: +42-0-721842854
+Maintainer of Linux kernel - Xilinx Microblaze
+Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
+U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
+TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
