@@ -4,146 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30DEDCF9C73
-	for <u-boot@archiver.kernel.org>; Tue, 24 Sep 2024 02:13:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC0C4CF9C5B
+	for <u-boot@archiver.kernel.org>; Tue, 24 Sep 2024 02:13:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 784978890D;
-	Tue, 24 Sep 2024 04:13:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=digi.com
+	by phobos.denx.de (Postfix) with ESMTP id CF2E588AFF;
+	Tue, 24 Sep 2024 04:13:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=hotmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=digi.com header.i=@digi.com header.b="srxtco71";
+	dkim=pass (2048-bit key; unprotected) header.d=hotmail.com header.i=@hotmail.com header.b="XFIcZ0dO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F6FF88001; Mon, 23 Sep 2024 10:25:53 +0200 (CEST)
-Received: from outbound-ip24a.ess.barracuda.com
- (outbound-ip24a.ess.barracuda.com [209.222.82.206])
+ id A388288A74; Mon, 23 Sep 2024 19:36:46 +0200 (CEST)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12olkn20809.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2805::809])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 819F488CBF
- for <u-boot@lists.denx.de>; Mon, 23 Sep 2024 10:25:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 06C7188A0E
+ for <u-boot@lists.denx.de>; Mon, 23 Sep 2024 19:36:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=digi.com
+ dmarc=pass (p=none dis=none) header.from=hotmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Arturo.Buzarra@digi.com
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11lp2168.outbound.protection.outlook.com [104.47.56.168]) by
- mx-outbound13-149.us-east-2a.ess.aws.cudaops.com (version=TLSv1.2
- cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Mon, 23 Sep 2024 08:25:45 +0000
+ spf=pass smtp.mailfrom=macromorgan@hotmail.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ANrmEPEY2gXqGcmEZ1hIhs2BSSbs96s+9pkERc68ox58L9Us8+igntWPe21Mt/TD2GAtVs91Z2sPhJNsAwTlEbUfqZF50aBOberInPqo9Jf+vmsusagVuIMT3cdkb0p2AZpxZDrNyXpBWacJJXflCCR4Uu+DZuWlH2y0aBljLk7LK146xmb3ON0xkLDmToiLEPAVHDXtjoO32zb1qVArC8LuwYc42mytuTe2E2pWxxF85obmctWJpqHD5NpL16k94UgyehDPWQ2RowCeICOn0kmVEhxLfWg1FBTHtpTcO+pM+kw1XGT8cm6W/P266H3MJ/pFDyL0Dzb/dTyHNAhhmQ==
+ b=GGJYnPacrZmjPtXsohgDyNcQnLOjPzniSRB0Z001rFTe7fX3T8eECBxZ9ZqgU7JH7MDq97Yqq407xBxFjdErnLL9D7Xzm8BHgyBsgVHVspC0UEUla4ehwdXVnxLSE6PfanBR241NmcJXJyshVD50MrUWvQIY08JkAS7w+WkjT0pGBgla/I87WMvBFKhDD11bvWlih7weoAipnrPqui+8Si/sQSqrSIuwwtU0t6P0KPHJkhr2OI62CxHn82DL0/vkqZ5ejR5YmvQcYNwqmma+UKuDa9ogtxh+FkMYFO+BsyNEkAIuCshM2C6z8YVAIK8dcpOPUZRMp0SgNbpzxVw5Mg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6E+hImf12Z8Icykx0AWoM2OwxkJemg7urKsU47ZW/Wc=;
- b=Uwz81sdbUjr+OwO2g6lmU86mQs4niYWjKttEQm2zJybEAYQAUriJiQd1dKouGj4I+pVSRrrfrvZwfqPFIK/uBE0OLmp1IZDuUrsdFYnqG6HtAJEVF/hQIoU/17VxCfe3s5SXO52VOGVeweRk9TP6jqgIBJtjv4FeH9LJR59HvQS/gyryI3bIQ3mhbkOCdtB7BntgArWbMT/udf6VmVEoZgIvuJhsLYMDt2xJMKH1vWydAVzRizG2GHvZ8YrXQ3IpKmhMPELnv7PuTOEU/KoS6Zul960qkQiFTPV3PTVGxEWyjEo6tidx+iN3MqO9SHqjqRuaeFQDg65P3tqox3RjEw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 198.51.192.30) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=digi.com;
- dmarc=fail (p=reject sp=reject pct=100) action=oreject header.from=digi.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=digi.com; s=selector1; 
+ bh=gaUfc/Nj48BDm67+yetxXHfa9z2dcTzOP61a5k4Hh38=;
+ b=BgPA6S6kOgRLYTlVqIjNqxNzuqQzIZUefXS2XI+Y6LgNIeEl6QKNs5u5J1CXdsRwPRfiDDytXqpcAyK+pbgX7zHTjR+zkIP4bpjsTRhAqkKEpxtm0y88J56NatDHrJ6NW1br0lOYRt/kl6fYImylIY837QdMEab3BfgoNbex5z+tG1h43rD7pQbsr43evO6dqQKjm5594iOU5+YaorzJrd3+66YuhsSIPTxs7obvYlnWEetx9fX0DWyIQ/bHEgv/Gk/vNpDTcaGIuPvtbLbq2nydwx9Zf/enueq0r3gk4LciXE7lpxrR25hZxyc+Q4bnpeHjKqXCfd4QbmvISeqe1Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6E+hImf12Z8Icykx0AWoM2OwxkJemg7urKsU47ZW/Wc=;
- b=srxtco71tk/zqdItLmHT3QHs3338YGIv+Uh8S4ujs4b7ZMqxD6EMZ9hcXxg8DqUP8mTk3TMWb8aMaUFUf5bp/laQF6YapjMjKxv0QM9B9hjBsDWVx5lmlhEDz2zHre6xMzVoeZ9XrZqMmL3dIdEWK6DVhUPh8yzEVlNgm+aar1ueszDXf9K0M9zS+T1HndY8vDz93o20ZwR/rYC4ieaCdN3aygZ7kh0qAjGQDNSdwniBnpI9UhmKOdV1ryfqrfqzuGHX9kYpLEkoMFFv0odlucQcvYKHNQb6dF5rDrvI8MyyP/ii5nCCp7ZmyM5+YhG2w8kx1ejuUp2LLIjaeh1/cQ==
-Received: from SJ0PR03CA0234.namprd03.prod.outlook.com (2603:10b6:a03:39f::29)
- by CO1PR10MB4514.namprd10.prod.outlook.com (2603:10b6:303:9d::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8005.13; Mon, 23 Sep
- 2024 08:25:40 +0000
-Received: from SJ1PEPF00002324.namprd03.prod.outlook.com
- (2603:10b6:a03:39f:cafe::87) by SJ0PR03CA0234.outlook.office365.com
- (2603:10b6:a03:39f::29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7962.26 via Frontend
- Transport; Mon, 23 Sep 2024 08:25:40 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is
- 198.51.192.30) smtp.mailfrom=digi.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=oreject header.from=digi.com;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- digi.com discourages use of 198.51.192.30 as permitted sender)
-Received: from HPK-MSS-XCH19.digi.com (198.51.192.30) by
- SJ1PEPF00002324.mail.protection.outlook.com (10.167.242.87) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7918.13 via Frontend Transport; Mon, 23 Sep 2024 08:25:39 +0000
-Received: from LOG-CLN-ABUZARRA3.digi.com (172.26.105.9) by
- HPK-MSS-XCH19.digi.com (10.10.8.195) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.7; Mon, 23 Sep 2024 03:25:37 -0500
-From: <arturo.buzarra@digi.com>
-To: <u-boot@lists.denx.de>
-Subject: [PATCH] rtc: rv3028: add support to manage VDD regulator
-Date: Mon, 23 Sep 2024 10:25:18 +0200
-Message-ID: <20240923082518.29507-1-arturo.buzarra@digi.com>
-X-Mailer: git-send-email 2.46.0
+ bh=gaUfc/Nj48BDm67+yetxXHfa9z2dcTzOP61a5k4Hh38=;
+ b=XFIcZ0dOGORv9b0Ql/NJS+r4kkCOfJpk7+ogpNP17UVs5G5ofpXbDFNmCWQsSSPoUfAoe0XC6MBim8mbxU4VWvoDAM5GmTs1MjCnLcPQuTSPZi/3gcXFn49EvX7IA2vrwdE27zO1MDOHQRzIB4Gl9xRcQ0Ih4FasxmJ/FhPOmZH8e4ZIdJw5Bz5jeIUrvyRg5r0UZ92uiqalOSQ8VlFKWsNDB+uBPTHNPIml2UWHS7lGumMx2b4UH3s10HJClBfbVFcDgfyn7bwYcPcN+eO+hc9mqSajqgdrpKYhgFyH3qyPaUwQBZJZCah3aOaE/ARpGRXqC7u2SGMuVCjOGdPoVA==
+Received: from MN2PR16MB2941.namprd16.prod.outlook.com (2603:10b6:208:e1::15)
+ by SJ0PR16MB5082.namprd16.prod.outlook.com (2603:10b6:a03:418::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7982.25; Mon, 23 Sep
+ 2024 17:36:40 +0000
+Received: from MN2PR16MB2941.namprd16.prod.outlook.com
+ ([fe80::9d62:95ae:c373:c490]) by MN2PR16MB2941.namprd16.prod.outlook.com
+ ([fe80::9d62:95ae:c373:c490%5]) with mapi id 15.20.7982.022; Mon, 23 Sep 2024
+ 17:36:40 +0000
+Date: Mon, 23 Sep 2024 12:36:33 -0500
+From: Chris Morgan <macromorgan@hotmail.com>
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Chris Morgan <macroalpha82@gmail.com>, u-boot@lists.denx.de,
+ jonas@kwiboo.se, trini@konsulko.com, kever.yang@rock-chips.com,
+ philipp.tomsich@vrull.eu, sjg@chromium.org, dsimic@manjaro.org
+Subject: Re: [PATCH V2 2/4] board: rockchip: Add vdd_cpu reg fixup for RGXX3
+ Series
+Message-ID: <MN2PR16MB2941DA215E7CDBFD7E3AF730A56F2@MN2PR16MB2941.namprd16.prod.outlook.com>
+References: <20240919140022.511067-1-macroalpha82@gmail.com>
+ <20240919140022.511067-3-macroalpha82@gmail.com>
+ <2a207719-e37c-4289-9470-2324928e24bc@cherry.de>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <2a207719-e37c-4289-9470-2324928e24bc@cherry.de>
+X-ClientProxiedBy: SA9PR13CA0043.namprd13.prod.outlook.com
+ (2603:10b6:806:22::18) To MN2PR16MB2941.namprd16.prod.outlook.com
+ (2603:10b6:208:e1::15)
+X-Microsoft-Original-Message-ID: <ZvGnITzpkqkypaRO@wintermute.localhost.fail>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [172.26.105.9]
-X-ClientProxiedBy: HPK-MSS-XCH19.digi.com (10.10.8.195) To
- HPK-MSS-XCH19.digi.com (10.10.8.195)
-X-EOPAttributedMessage: 0
+X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF00002324:EE_|CO1PR10MB4514:EE_
-X-MS-Office365-Filtering-Correlation-Id: 89cda916-94ea-4941-e4cd-08dcdba94e8e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
+X-MS-TrafficTypeDiagnostic: MN2PR16MB2941:EE_|SJ0PR16MB5082:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8e173448-1ee8-45fc-95ef-08dcdbf647ab
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700013|82310400026|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?or5Zx5mHd0/C3oEG/yFXwGWHIABfgjmLwNCWmKWiNbYn/SLxC+L3PhNpIc9N?=
- =?us-ascii?Q?bn75OJWWKQIwG+4+9QTSpvTgv7xGGXxxbtzyBSTwlV/6N9DnQas8Df5C6R3N?=
- =?us-ascii?Q?VI+AgLn5I20EQlqDWy4PGc3BVi6Q3tfxoeo5QDZ9AQUkiZUtdydrbSZ2KPjW?=
- =?us-ascii?Q?2pPWYwDdZ8pv1ZEUzMsRyhjBDP6VXIDDI+FQNIWxTN4OQ9cnA19Kj14Ic+8o?=
- =?us-ascii?Q?4DPxOWM5nCLggitj75uq+BDt+dKTLNd0NIqtBFrFZJ0Fg/IwI/nyazxyLAwX?=
- =?us-ascii?Q?IQA6UYLwrcc4JmdMGilbfM1Td3TUL+Y6GCONmlS3vEt7dQTUmnUOYE4wkyGH?=
- =?us-ascii?Q?rCS+ePBVutb5TfqJ9cFkYmUiRi7mPZQXi5NVM/zjsZZKCCUxJhCkbhCbsOF8?=
- =?us-ascii?Q?56jrlqbS3cpZlUXMRznsBTROTQP62P3GVE2qBd6s5XthQzIMZg+46mGr2KIc?=
- =?us-ascii?Q?1+1G/CGreRlVZ6rVNJUM3ht/ec8nYkqM8Yz/jYnDw6LBfHsWj2ir5NKOPOe0?=
- =?us-ascii?Q?ZmX1jYVvuKo2MXoVpMFCH7wxgEDU3LW6n2XIh4bpRURy8rxtk2lDl+MCc1Fh?=
- =?us-ascii?Q?wou+w7xBePptvVl3SahejQwwAyDNSu8EE9T7bO8xa9NQfGd3zDSGKsYT13W2?=
- =?us-ascii?Q?Ge0t3OEV844F6HhhUyCt2aPCCHCyqLDk0U/3QcnvOjYCpt2LGM/njyOm7HWt?=
- =?us-ascii?Q?7YRr/Q03Rt476twCE+Je99haNL3+ETcplJVVqTFoN+DK252J8rfeitQcLwYQ?=
- =?us-ascii?Q?inru6mfy3XMuLmnoabMXfl7wMgYT7bbADlD90RtGOZXB1+PaWjQIedzaKuUL?=
- =?us-ascii?Q?AOjE5/L445SmqsfApDp55dz1HqnzW5N61vVJLSWMzA8ovE8NAfJK1vtdPK/s?=
- =?us-ascii?Q?gTvyqay/siLMwrrjBtZbOFp9iFdt41WqLplNGHXa3JSAKVbbOP0wjgFjkDMM?=
- =?us-ascii?Q?ak/6FiJoQtbBtN/Bd5HCpNeRdxrn2Ft4zmXjEcfFz9P4YsImAzDG8aY5xjDr?=
- =?us-ascii?Q?D+acxuuk2RHKPXGABXzBBcwNFrQkhSl9bpwFM3IWIIoaH7VmZ6SHh8MAAFHu?=
- =?us-ascii?Q?Rm74oo8QOaHCHUbVHX+XD3lo9GZScFBGv7qouaa2aAt4lubQrdJ4Cd2Ryq68?=
- =?us-ascii?Q?enGaM1AjS27g3J0g9sxMutxUzJPvsbkPV1wAyM9QOjTcE4/2KEld2Ple8d7l?=
- =?us-ascii?Q?RhimU7SlY2CCisU+HNVNMzGwK2YUDpD/MOmFumL7tRdrRGvNWIWsgryJOLrN?=
- =?us-ascii?Q?RLpWN2XOJ7FBHzRMKO3Pyej7Az6/FFgTpN+fLX4zJAD+jyiEw83iNBJxiI/Y?=
- =?us-ascii?Q?y9IsKYFTsbCJs3ggBs1FkuMoMgRB7u08G/es5dwZj0LGs6pW8DA8AgNSFBD+?=
- =?us-ascii?Q?5+PgRqs=3D?=
-X-Forefront-Antispam-Report: CIP:198.51.192.30; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:HPK-MSS-XCH19.digi.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024); DIR:OUT;
- SFP:1102; 
-X-OriginatorOrg: digi.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Sep 2024 08:25:39.2617 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 89cda916-94ea-4941-e4cd-08dcdba94e8e
-X-MS-Exchange-CrossTenant-Id: abb4cdb7-1b7e-483e-a143-7ebfd1184b9e
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=abb4cdb7-1b7e-483e-a143-7ebfd1184b9e; Ip=[198.51.192.30];
- Helo=[HPK-MSS-XCH19.digi.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF00002324.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR10MB4514
-X-BESS-ID: 1727079945-103477-12692-38373-1
-X-BESS-VER: 2019.1_20240917.2338
-X-BESS-Apparent-Source-IP: 104.47.56.168
-X-BESS-Parts: H4sIAAAAAAACA4uuVkqtKFGyUioBkjpK+cVKVoYW5iZAVgZQ0NwgKc3U2DDNIN
- XELNk80cQ4xcwwydIwydwo1dLYODFJqTYWAPWi1MxBAAAA
-X-BESS-Outbound-Spam-Score: 0.00
-X-BESS-Outbound-Spam-Report: Code version 3.2,
- rules version 3.2.2.259241 [from 
- cloudscan10-187.us-east-2a.ess.aws.cudaops.com]
- Rule breakdown below
- pts rule name              description
- ---- ---------------------- --------------------------------
- 0.00 BSF_BESS_OUTBOUND      META: BESS Outbound 
- 0.00 NO_REAL_NAME           HEADER: From: does not include a real name 
-X-BESS-Outbound-Spam-Status: SCORE=0.00 using account:ESS112744 scores of
- KILL_LEVEL=7.0 tests=BSF_BESS_OUTBOUND, NO_REAL_NAME
-X-BESS-BRTS-Status: 1
+ ARA:14566002|8060799006|15080799006|7092599003|461199028|19110799003|5072599009|6090799003|440099028|3412199025;
+X-Microsoft-Antispam-Message-Info: HNYXrIIgBwFs9Q38z+gJesjjMaia7y1qFT+8jpnylo3/KnsejJcOMGOyQstxwzn3e8af4StHXUHmLiQJqFI9S/XuplnrpWMB1AYFFt1mglEH/NTETtcgUDZb8Ib53livHnYcOgq5BEY4ES0LFUaNh685hayy1pxMRwQWJtwCmlUYGSHnecnUvv5csmzlUiP952ht0aBov7Y0n/rZ64oxuo4YFvQ0yZiHDyNkl3zyL9K4SsTlVZGNtSx1avnhhfIf2NRJ/9+lZ60FuMLH1EVBjC3aZ9IrIe8nL3//PhSnluIkt1YqG3xd0hZ8AusBkLtZljWGvXiLpND+ZK9hp70LTXxYZvlbrZf2gai1xsTo4goaRCmwcCI6ig8ajCm4cE4dMyTNOeMH9GbdXv1mHoUhHAf1bUDYoI64azJ4qkviysPhrH9Jn8Qk9D8Vx3AO5F3QO/YVGB06gqiLxeaMFrFFqAKgpDqj/OmsxK1oRIf6ZzKUJZhSxBZJdUsH/W9C9PNf7zKMe1bIF8P4p/DKE2OBFwQygOZ1kxzsGzDrixlwHFjHqzfWhh5PR+N5tOKkPZ60uxaUdrQxedG1fdB82T1l3/WVmeejZgKzYr4KW9ik1JX+tCXSujlHtozACmJcId7D1S61FB1K++QQy4xGp5spWeH2Tg1oc2/pse1fEoVRCe3uswrQr6aq8BCXZoVAPTgIYx8IT4EZBI4CJvcG4J3hR7zLxP25ukZ4//Pkw1uOQ1GA8sZTOrxfAO3VhUNcmNV/4tMbX2FfgiNeeELIT5PpDw==
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?45eimOCUg0vc/A/xs4SR1A52wFk5O8b5h3YD2s8rWGRtJsEbTYpDfnTK+BHN?=
+ =?us-ascii?Q?+mtSlFjt1Y1AmIufu5F3nsFmJoW+VJdPrDPZorWJcEl7hbN9slNx4AXWn20U?=
+ =?us-ascii?Q?U1VcMlB4XCdLp2O1Uzgl7Gop1DfeewyP29PbOCkfyGHELRW1PjNMe+Rfk5U1?=
+ =?us-ascii?Q?H8KLvCNNh+jR4pGHSs4p++qF2KCRb5gbjqvvgbsFqDHUpl8D/SR8fDumwSyL?=
+ =?us-ascii?Q?fVnFCR2HgJSQae8fNZa17sQnO07vuLlVN7bEomyYLJh1bzpRsWeR+rSGJjKA?=
+ =?us-ascii?Q?bFXfyng8hXw2VzgpeUoBRzJxQD+R9RBlsNt2aaGP8xjTmQZYSegaeklqn5JO?=
+ =?us-ascii?Q?c2qn42g+Fr75fDcxaLUo68lWh10KF/vo9e0SyjH6swoeI5WL0MF/DQRQ09mo?=
+ =?us-ascii?Q?ga113CkMEf/xhn/wQ5wPsr0dR/i4u4u5UtbUX3t4U4mOoybPCG/mG7Qvg1yv?=
+ =?us-ascii?Q?gVSkEEMshoQc10Z/BBXRO0kn1Ju+ThgJUIGDCKaXFZ8hQDhstYgayvNopc2i?=
+ =?us-ascii?Q?p6FsdE6sqInGmWFJFVQ4dH9BCDU4JdATeArrgooC2EjyA3lxgj9MAMMn3Zt8?=
+ =?us-ascii?Q?TlrOl9hQcSPGR17xxCSVpij5eIcfSHeY7MsXfbcDvprpCLdY8Jf9Z8e7jsE3?=
+ =?us-ascii?Q?6ncLLFC2siUTu8dKhWY6l5hyKrETtWoIfDWMu49KYZnbcaG3XOtTEic4HWyy?=
+ =?us-ascii?Q?jlgZOIgIBb1OdkP0k6NeWXh5zLUh55yXafJguX/lwrHpPthilWrGK/Hjynga?=
+ =?us-ascii?Q?/77yKOZDHQmFTpLcEwXhpFyrsGonPczCdb0OlhPJSuxxPEyXeelivsir4EJ7?=
+ =?us-ascii?Q?UPr/a8sMqUiA3Qz1r8r4capY93nfJIPQnmtznN2VjtMLTRvuS6FCum+Dwh9F?=
+ =?us-ascii?Q?f3iNIRhKC8xnBLeo2bb2QGAftbrmOSLNfKEK7trXvJsk60Pv65Ffr1NG+BBK?=
+ =?us-ascii?Q?s6X0fxN/WJH46jVaEuDGQWYI/h4qAdA7pTh9R1SJTYQNwvd+3J79CfcDvPEy?=
+ =?us-ascii?Q?MqkIyz+T2xHl4sQWxpFwiSeg60mNnjfwotp3tp4nxFoAVDmvgmGpGzzoSh+B?=
+ =?us-ascii?Q?enzhU1GjxMGDECYppssfqDwTmArOS11P+jNF2SuTHoSiLpjdag3NfNfwfRHZ?=
+ =?us-ascii?Q?KQUkoq2m7Ozgzi1Px4qAE1ua8VhZgvgHMWGwWTpg1x1mJKIsES1XBJQhh/54?=
+ =?us-ascii?Q?kLRC8h6iSAMCionsizTafJNJhhAv78ZVehMgmrKWoKHZHfLlmrOaXOB5gJ0B?=
+ =?us-ascii?Q?6efaA1JSLZ4kC13p3Ii5nC1UOPb/Z3OUiKjYXjxXnw=3D=3D?=
+X-OriginatorOrg: sct-15-20-7719-20-msonline-outlook-559fc.templateTenant
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8e173448-1ee8-45fc-95ef-08dcdbf647ab
+X-MS-Exchange-CrossTenant-AuthSource: MN2PR16MB2941.namprd16.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Sep 2024 17:36:40.2218 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR16MB5082
 X-Mailman-Approved-At: Tue, 24 Sep 2024 04:13:40 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -161,78 +126,314 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Arturo Buzarra <arturo.buzarra@digi.com>
+On Mon, Sep 23, 2024 at 01:21:01PM +0200, Quentin Schulz wrote:
+> Hi Chris,
+> 
+> On 9/19/24 4:00 PM, Chris Morgan wrote:
+> > From: Chris Morgan <macromorgan@hotmail.com>
+> > 
+> > Some of the Powkiddy devices switched to using a different vendor for
+> > the vdd_cpu regulator. Unfortunately the device does not have a new
+> > revision to denote this, so users have no way of knowing in advance.
+> > 
+> > Add code to detect if a device is present at addresses 0x1c or 0x40 on
+> > the i2c0 bus and update the devicetree if needed.
+> > 
+> > Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
+> > ---
+> >   board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c | 147 +++++++++++++++++++++
+> >   1 file changed, 147 insertions(+)
+> > 
+> > diff --git a/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c b/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
+> > index 224019f9ba3..c1d1826fd14 100644
+> > --- a/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
+> > +++ b/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
+> > @@ -43,6 +43,7 @@ struct rg3xx_model {
+> >   	const char *board_name;
+> >   	const char *fdtfile;
+> >   	const bool detect_panel;
+> > +	const bool detect_regulator;
+> >   	const bool uart_con;
+> >   };
+> > @@ -69,6 +70,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+> >   		/* Device is identical to RG353P. */
+> >   		.fdtfile = DTB_DIR "rk3566-anbernic-rg353p.dtb",
+> >   		.detect_panel = 1,
+> > +		.detect_regulator = 0,
+> >   		.uart_con = 1,
+> >   	},
+> >   	[RG353P] = {
+> > @@ -77,6 +79,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+> >   		.board_name = "Anbernic RG353P",
+> >   		.fdtfile = DTB_DIR "rk3566-anbernic-rg353p.dtb",
+> >   		.detect_panel = 1,
+> > +		.detect_regulator = 0,
+> >   		.uart_con = 1,
+> >   	},
+> >   	[RG353V] = {
+> > @@ -85,6 +88,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+> >   		.board_name = "Anbernic RG353V",
+> >   		.fdtfile = DTB_DIR "rk3566-anbernic-rg353v.dtb",
+> >   		.detect_panel = 1,
+> > +		.detect_regulator = 0,
+> >   		.uart_con = 1,
+> >   	},
+> >   	[RG503] = {
+> > @@ -93,6 +97,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+> >   		.board_name = "Anbernic RG503",
+> >   		.fdtfile = DTB_DIR "rk3566-anbernic-rg503.dtb",
+> >   		.detect_panel = 0,
+> > +		.detect_regulator = 0,
+> >   		.uart_con = 1,
+> >   	},
+> >   	[RGB30] = {
+> > @@ -101,6 +106,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+> >   		.board_name = "Powkiddy RGB30",
+> >   		.fdtfile = DTB_DIR "rk3566-powkiddy-rgb30.dtb",
+> >   		.detect_panel = 0,
+> > +		.detect_regulator = 1,
+> >   		.uart_con = 0,
+> >   	},
+> >   	[RK2023] = {
+> > @@ -109,6 +115,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+> >   		.board_name = "Powkiddy RK2023",
+> >   		.fdtfile = DTB_DIR "rk3566-powkiddy-rk2023.dtb",
+> >   		.detect_panel = 0,
+> > +		.detect_regulator = 1,
+> >   		.uart_con = 0,
+> >   	},
+> >   	[RGARCD] = {
+> > @@ -117,6 +124,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+> >   		.board_name = "Anbernic RG ARC-D",
+> >   		.fdtfile = DTB_DIR "rk3566-anbernic-rg-arc-d.dtb",
+> >   		.detect_panel = 0,
+> > +		.detect_regulator = 0,
+> >   		.uart_con = 1,
+> >   	},
+> >   	[RGB10MAX3] = {
+> > @@ -125,6 +133,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+> >   		.board_name = "Powkiddy RGB10MAX3",
+> >   		.fdtfile = DTB_DIR "rk3566-powkiddy-rgb10max3.dtb",
+> >   		.detect_panel = 0,
+> > +		.detect_regulator = 1,
+> >   		.uart_con = 0,
+> >   	},
+> >   	/* Devices with duplicate ADC value */
+> > @@ -134,6 +143,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+> >   		.board_name = "Anbernic RG353PS",
+> >   		.fdtfile = DTB_DIR "rk3566-anbernic-rg353ps.dtb",
+> >   		.detect_panel = 1,
+> > +		.detect_regulator = 0,
+> >   		.uart_con = 1,
+> >   	},
+> >   	[RG353VS] = {
+> > @@ -142,6 +152,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+> >   		.board_name = "Anbernic RG353VS",
+> >   		.fdtfile = DTB_DIR "rk3566-anbernic-rg353vs.dtb",
+> >   		.detect_panel = 1,
+> > +		.detect_regulator = 0,
+> >   		.uart_con = 1,
+> >   	},
+> >   	[RGARCS] = {
+> > @@ -150,6 +161,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+> >   		.board_name = "Anbernic RG ARC-S",
+> >   		.fdtfile = DTB_DIR "rk3566-anbernic-rg-arc-s.dtb",
+> >   		.detect_panel = 0,
+> > +		.detect_regulator = 0,
+> >   		.uart_con = 1,
+> >   	},
+> >   };
+> > @@ -172,6 +184,22 @@ static const struct rg353_panel rg353_panel_details[] = {
+> >   	},
+> >   };
+> > +struct powkiddy_regulators {
+> > +	const u8 addr;
+> > +	const char *regulator_compat;
+> > +};
+> > +
+> > +static const struct powkiddy_regulators regulator_details[] = {
+> > +	{
+> > +		.addr = 0x1c,
+> > +		.regulator_compat = "tcs,tcs4525",
+> > +	},
+> > +	{
+> > +		.addr = 0x40,
+> > +		.regulator_compat = "fcs,fan53555",
+> > +	},
+> > +};
+> > +
+> >   /*
+> >    * Start LED very early so user knows device is on. Set color
+> >    * to red.
+> > @@ -361,6 +389,44 @@ int rgxx3_detect_display(void)
+> >   	return 0;
+> >   }
+> > +/*
+> > + * Some of the Powkiddy devices switched the CPU regulator, but users
+> > + * are not able to determine this by looking at their hardware.
+> > + * Attempt to auto-detect this situation and fixup the device-tree.
+> > + */
+> > +int rgxx3_detect_regulator(void)
+> > +{
+> > +	struct udevice *bus;
+> > +	struct udevice *chip;
+> > +	u8 val;
+> > +	int ret;
+> > +
+> > +	/* Get the correct i2c bus (i2c0). */
+> > +	ret = uclass_get_device_by_name(UCLASS_I2C,
+> > +					"i2c@fdd40000", &bus);
+> > +	if (ret)
+> > +		return ret;
+> > +
+> > +	/*
+> > +	 * Check for all vdd_cpu regulators and read an arbitrary
+> > +	 * register to confirm it's present.
+> > +	 */
+> > +	for (int i = 0; i < ARRAY_SIZE(regulator_details); i++) {
+> > +		ret = i2c_get_chip(bus, regulator_details[i].addr,
+> > +				   1, &chip);
+> > +		if (ret)
+> > +			return ret;
+> > +
+> > +		ret = dm_i2c_read(chip, 0, &val, 1);
+> > +		if (!ret) {
+> > +			env_set("vdd_cpu", regulator_details[i].regulator_compat);
+> > +			break;
+> > +		}
+> > +	}
+> > +
+> > +	return 0;
+> > +}
+> > +
+> >   int rgxx3_read_board_id(void)
+> >   {
+> >   	u32 adc_info;
+> > @@ -485,6 +551,16 @@ int rk_board_late_init(void)
+> >   			printf("Failed to detect panel type\n");
+> >   	}
+> > +	/*
+> > +	 * Skip vdd_cpu regulator detection if not needed. Warn but
+> > +	 * don't fail for errors in auto-detection of regulator.
+> > +	 */
+> > +	if (rg3xx_model_details[gd->board_type].detect_regulator) {
+> > +		ret = rgxx3_detect_regulator();
+> > +		if (ret)
+> > +			printf("Unable to detect vdd_cpu regulator\n");
+> > +	}
+> > +
+> >   end:
+> >   	/* Turn off red LED and turn on orange LED. */
+> >   	writel(GPIO_WRITEMASK(GPIO_C7 | GPIO_C6 | GPIO_C5) | GPIO_C6,
+> > @@ -547,6 +623,71 @@ int rgxx3_panel_fixup(void *blob)
+> >   	return 0;
+> >   }
+> > +int rgxx3_regulator_fixup(void *blob)
+> > +{
+> > +	const struct powkiddy_regulators *vdd_cpu = NULL;
+> > +	int node, ret, i;
+> > +	char path[] = "/i2c@fdd40000/regulator@00";
+> > +	char name[] = "regulator@00";
+> > +	char *env;
+> > +
+> > +	env = env_get("vdd_cpu");
+> > +	if (!env) {
+> > +		printf("Can't get vdd_cpu env\n");
+> > +		return -EINVAL;
+> > +	}
+> > +
+> > +	/*
+> > +	 * Find the device we have in our tree, which may or may not
+> > +	 * be present.
+> > +	 */
+> > +	for (i = 0; i < ARRAY_SIZE(regulator_details); i++) {
+> > +		sprintf(path, "/i2c@fdd40000/regulator@%02x",
+> > +			regulator_details[i].addr);
+> > +		node = fdt_path_offset(blob, path);
+> > +		if (node > 0)
+> > +			break;
+> > +
+> > +		printf("Unable to find vdd_cpu\n");
+> > +		return -ENODEV;
+> > +	}
+> > +
+> > +	node = fdt_path_offset(blob, path);
+> > +	if (!(node > 0)) {
+> > +		printf("Can't find the vdd_cpu node\n");
+> > +		return -ENODEV;
+> > +	}
+> > +
+> > +	ret = fdt_node_check_compatible(blob, node, env);
+> > +	if (ret < 0)
+> > +		return -ENODEV;
+> > +
+> > +	/* vdd_cpu regulators match, return 0. */
+> > +	if (!ret)
+> > +		return 0;
+> > +
+> > +	/* Regulators don't match, search by first compatible value. */
+> > +	for (i = 0; i < ARRAY_SIZE(regulator_details); i++) {
+> > +		if (!strcmp(env, regulator_details[i].regulator_compat)) {
+> > +			vdd_cpu = &regulator_details[i];
+> > +			break;
+> > +		}
+> > +	}
+> > +
+> > +	if (!vdd_cpu) {
+> > +		printf("Unable to identify vdd_cpu by compat string\n");
+> > +		return -ENODEV;
+> > +	}
+> > +
+> > +	/* Set the compatible and reg with the auto-detected values */
+> > +	fdt_setprop_string(blob, node, "compatible", vdd_cpu->regulator_compat);
+> > +	fdt_setprop_u32(blob, node, "reg", vdd_cpu->addr);
+> > +	sprintf(name, "regulator@%02x", vdd_cpu->addr);
+> > +	fdt_set_name(blob, node, name);
+> > +
+> 
+> I'm not sure this is viable in the long run... This relies on the properties
+> for the two devices to be identical. Are we sure it is absolutely the case?
 
-This commit adds support to manage an external regulator to enable the main
-power supply VDD.
+Yes, for the moment at least the devices are entirely identical except
+for the CPU regulator. Unfortunately the identical ADC IDs is why I
+cannot simply have an additional entry for a new hardware revision.
 
-Signed-off-by: Arturo Buzarra <arturo.buzarra@digi.com>
----
- drivers/rtc/rv3028.c | 32 ++++++++++++++++++++++++++++++++
- 1 file changed, 32 insertions(+)
+> 
+> An option could be to have a DTSO for the "new" regulator that removes the
+> old regulator entirely and we would simply be applying that DTSO at runtime
+> before the kernel starts. I assume you probably want this for SPL or U-Boot
+> proper as well so applying the DTSO there would be required as well, not
+> sure how to do this though.
 
-diff --git a/drivers/rtc/rv3028.c b/drivers/rtc/rv3028.c
-index 9f63afc14a8..b14d2a246ff 100644
---- a/drivers/rtc/rv3028.c
-+++ b/drivers/rtc/rv3028.c
-@@ -12,6 +12,9 @@
- #include <dm.h>
- #include <i2c.h>
- #include <rtc.h>
-+#include <dm/device_compat.h>
-+#include <linux/delay.h>
-+#include <power/regulator.h>
- 
- #define RV3028_SEC			0x00
- #define RV3028_MIN			0x01
-@@ -78,6 +81,12 @@
- 
- #define RTC_RV3028_LEN			7
- 
-+#define VDD_START_TIME_US		200000
-+
-+struct rv3028_priv {
-+	struct udevice *vdd;
-+};
-+
- static int rv3028_rtc_get(struct udevice *dev, struct rtc_time *tm)
- {
- 	u8 regs[RTC_RV3028_LEN];
-@@ -180,6 +189,28 @@ static int rv3028_rtc_write8(struct udevice *dev, unsigned int reg, int val)
- 
- static int rv3028_probe(struct udevice *dev)
- {
-+	struct rv3028_priv *priv = dev_get_priv(dev);
-+	int ret;
-+
-+	if (IS_ENABLED(CONFIG_DM_REGULATOR)) {
-+		ret =  device_get_supply_regulator(dev, "vdd-supply", &priv->vdd);
-+		if (ret && ret != -ENOENT) {
-+			dev_err(dev, "Warning: cannot get VDD supply\n");
-+			return ret;
-+		}
-+
-+		if (priv->vdd) {
-+			ret = regulator_set_enable_if_allowed(priv->vdd, true);
-+			if (ret) {
-+				dev_err(dev, "failed to enable vdd-supply\n");
-+				return ret;
-+			}
-+
-+			/* We must wait Tstart = 0.2s before access to I2C */
-+			udelay(VDD_START_TIME_US);
-+		}
-+	}
-+
- 	i2c_set_chip_flags(dev, DM_I2C_CHIP_RD_ADDRESS |
- 				DM_I2C_CHIP_WR_ADDRESS);
- 
-@@ -205,4 +236,5 @@ U_BOOT_DRIVER(rtc_rv3028) = {
- 	.probe	= rv3028_probe,
- 	.of_match = rv3028_rtc_ids,
- 	.ops	= &rv3028_rtc_ops,
-+	.priv_auto	= sizeof(struct rv3028_priv),
- };
--- 
-2.46.0
+In truth I really don't need the regulator this way for U-Boot at all.
+Near as I can tell it defaults to being on and the right voltage. I can
+do a DTSO, I just figured a simple fixup would be easier (plus we're
+already doing a fixup for a similar situation with panel revisions).
 
+> 
+> Can you please tell the HW vendor to have some way of detecting some
+> variants of the HW instead of letting us just guess stuff? How do they even
+> support this in their downstream kernel/bootloader????
+> Have they already ran out of channels on SARADC?
+> 
+
+I have told both Powkiddy and Anbernic this. Whether they will listen
+is a different matter. They haven't run out of channels on the SARADC
+(except for the Powkiddy X55, which is its own board and has no
+detection logic). In theory if we allow for a ~10% variance in the
+resistor values for a resistor on ADC channel 1, and the range is
+between 0 and 1024 (20 and 1004), that gives us about 49 total devices
+we could "detect" at one time, assuming no one collides.
+
+I have no idea how Powkiddy fixes up the CPU regulator, but I know
+Anbernic does panel fixup with some hacky code in U-Boot and Linux
+proper that detects for the panel like I do. In their case it's built
+into the probe function of Rockchip's own "display-simple-dsi" driver.
+In our case we detect the panel ID in U-Boot and then fixup the device
+tree for Linux with the correct compatible.
+
+> Cheers,
+> Quentin
+
+Thank you,
+Chris
