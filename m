@@ -4,55 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E69DCCF9C6D
-	for <u-boot@archiver.kernel.org>; Sun, 22 Sep 2024 21:42:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A1E7CF9C5B
+	for <u-boot@archiver.kernel.org>; Mon, 23 Sep 2024 05:49:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0A2C88CF0;
-	Sun, 22 Sep 2024 23:41:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 3D0F587B77;
+	Mon, 23 Sep 2024 07:49:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1727041318;
-	bh=dXDB4uLw7cnkqbm0swAdpiW0E7463VNnYl8LrZUOVSs=;
-	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=kqubMBGAhGwnMMO0ghhZbg8BArgx0rqb4Lcsx4AQx97VRqd1uBXPKw0eAlXtnSUJa
-	 V5OQYVFKZT0m5POcrkOWKIw+SI28c82LLQGNoQV7lyY16xdY0KifqdyCy1zG8UCaz9
-	 6IJKRcUBxdY6VGcNTzMKS/YPRjS68Yd6IlHLH5uopCajnX9RboJlBfMH9udoTDmZ3r
-	 0QmCpoZQDX5ar8U8c9pdk7YcXCuOtGkgTH3EwAH9p6N9nhSYtOqBa716OdBq5cnojs
-	 CEJbjKar+LAVsqh2Gw8s+fZFR+GFS0HVkfwzay62U2YLck0e0tCHcNM7tVBqrhtoy3
-	 U+xoQy5iWGUKQ==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="gcB1PkgY";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 8686E88D03; Mon, 23 Sep 2024 07:49:09 +0200 (CEST)
+Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
+ [IPv6:2607:f8b0:4864:20::b29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 6753F88CB8;
- Sun, 22 Sep 2024 23:41:56 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1727041316;
- bh=dXDB4uLw7cnkqbm0swAdpiW0E7463VNnYl8LrZUOVSs=;
- h=Date:Subject:To:References:From:In-Reply-To:From;
- b=tWtrtOJMtSx4RPuqCA+DSTz+zc6AYKebgU7/Wo2g1phtUr2dwB9xuYU2nacW+rf5a
- 84rvIYyDcMMYR8GcchclYmTQKnvz6CJvLxA8PS+2xNrUba6Xl7cjHvJyx6jlTLbVO9
- +zJR4Eavlw+0Un8PWGGMRZ7MBwRynrHxQWVu36kpdxYnvJrATjFA91go0KnCibPhSZ
- 8oxjvQTJ+cN57YPz0uU5mpuogk0/nfrURzXO1IjRoJ4oOQpSGM7ztaSiLn6RleweKj
- mnMqJucoRpEzFYzJ4ZzDixbuj9OPSYvAb+zEa+tCrGZHvztmTbbHWY+jbjHWnYfzBc
- Uyxa0/Y2B7p0Q==
-Message-ID: <8d745de9-26da-4e0c-8393-fb2550c363b6@denx.de>
-Date: Sun, 22 Sep 2024 23:40:45 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 5952588D08
+ for <u-boot@lists.denx.de>; Mon, 23 Sep 2024 07:49:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=9elements.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
+Received: by mail-yb1-xb29.google.com with SMTP id
+ 3f1490d57ef6-e03caab48a2so3284041276.1
+ for <u-boot@lists.denx.de>; Sun, 22 Sep 2024 22:49:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=9elements.com; s=google; t=1727070546; x=1727675346; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=d+GqPi7kvfkTPGuMQMG8mgU5U/TLnK6mH7U//v/3HNA=;
+ b=gcB1PkgYxz1OZ6b0ZakC3Z55rKZMAfDY6fIrviMu7kU5NP6LDTykCpmxCELS7lYInG
+ 9j9/TxNylriitvJa28mXUPoOk3OV2xPoK8hTS7a4UwTLXyR7o8IzYojlbV+JKfygA8af
+ Dsyi9n57IodFQlfpW6I4QajquI01zoyMR5gz3bIbM8uLDWXY/edpl1GMyfugDgeh84sL
+ fDq7Y3oNsVzabdMzH1vl16KzQ0lx/YjpKFFJwBXhAujj9JGynpp7eAyc05ij0lb0vLkq
+ J2AvtUr5K5gyr1eSRn0Op1dZXwjc/PKduV7KaZNfeRQfmSwFz2exy9H8jONIrUAB0v7o
+ 40dw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727070546; x=1727675346;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=d+GqPi7kvfkTPGuMQMG8mgU5U/TLnK6mH7U//v/3HNA=;
+ b=bgzDq+0T9hnerqoBqExNDjik4+oOUPyjZq9A06fK9Rou0DsABdhhl4bMlg8p1tSYY7
+ OXzcj0eN5VKGotd5ua/C9YG2gPGeOOi0xvwFQ5Frv+0DE2nNpTj8bu5/msLZWcEPpxiv
+ MH+2Ds8Xgr1prGGsFbyTPIHojePbwRTe2FTv8rwzORgZjmU2a7l2d1vhZbHbP1oAFO2d
+ swq+GsYzuy2CZ0Af43m3ATGsTTTb+I5mI8zPSDbrsPsuVF/iPnLNJUrjfRIAuuDOiBrb
+ Toeftjsda+U3H/sh4W1yG9BL1qygl2aVZYEYIrifV08y1xVGj0/mxlIEjBhMqkDNgBfw
+ BW9g==
+X-Gm-Message-State: AOJu0YyNjg64IqZnRru1pgu+ysk1wOp6yc1EAMnEF0/E0V2teI+bSe3E
+ DtgxNVYis5nuS+rKaRfGZATGFQIu0OxwfpicekZ2BZKqU7tBooi/cMX1WLpwIRjBwBroM4ffImD
+ nbIJgkDa9GLsRAN5+Jxh4LekGZliDSrHQ5OCXHA==
+X-Google-Smtp-Source: AGHT+IGogvUBK71VcziSAeD3QkSZcxwep197RhAXeoE1QftOmUyPSyvBzNM0uigg5+7kkyAXm2G0F1vRdwacY4hiI1I=
+X-Received: by 2002:a05:6902:1705:b0:e21:70df:8a7 with SMTP id
+ 3f1490d57ef6-e2170df2261mr7346912276.23.1727070546152; Sun, 22 Sep 2024
+ 22:49:06 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 7/7] ARM: socfpga: AA1: support MAC from secure eeprom
-To: Lothar Rubusch <l.rubusch@gmail.com>, u-boot@lists.denx.de,
- trini@konsulko.com, simon.k.r.goldschmidt@gmail.com, tien.fong.chee@intel.com
-References: <20240917062157.3181-1-l.rubusch@gmail.com>
- <20240917062157.3181-8-l.rubusch@gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240917062157.3181-8-l.rubusch@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20240918152136.3395170-1-patrick.rudolph@9elements.com>
+ <20240918152136.3395170-24-patrick.rudolph@9elements.com>
+ <CAFLszTiPO5zb6F7j2YiJgRj0BiKwoqmNik1irTXaBy5KHzZz+Q@mail.gmail.com>
+In-Reply-To: <CAFLszTiPO5zb6F7j2YiJgRj0BiKwoqmNik1irTXaBy5KHzZz+Q@mail.gmail.com>
+From: Patrick Rudolph <patrick.rudolph@9elements.com>
+Date: Mon, 23 Sep 2024 07:48:55 +0200
+Message-ID: <CALNFmy2vWuHnJHXMozStYouPNGTCXWdkuG7fQkT7y-rgi5M4yw@mail.gmail.com>
+Subject: Re: [PATCH v4 23/35] drivers/arm: Implement acpi_fill_madt
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, linux-kernel@vger.kernel.org, 
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,260 +90,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/17/24 8:21 AM, Lothar Rubusch wrote:
+On Thu, Sep 19, 2024 at 4:12=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
+e:
+>
+> On Wed, 18 Sept 2024 at 17:22, Patrick Rudolph
+> <patrick.rudolph@9elements.com> wrote:
+> >
+> > Fill the MADT table in the GICV3 driver and armv8 CPU driver to
+> > drop SoC specific code. While the GIC only needs devicetree
+> > data, the CPU driver needs additional information stored in
+> > the cpu_plat struct.
+> >
+> > While on it update the only board making use of the existing
+> > drivers and writing ACPI MADT in mainboard code.
+> >
+> > TEST: Booted on QEMU sbsa-ref using GICV3 driver model generated MADT.
+> >       Booted on QEMU raspb4 using GICV2 driver model generated MADT.
+> >
+> > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+> > Cc: Simon Glass <sjg@chromium.org>
+> > ---
+> > Changelog v4:
+> > - Read everything from the DT
+> > - Export armv8_cpu_fill_madt() to use it in other CPU drivers
+> > - Depend on IRQ
+> >
+> > ---
+> >  arch/arm/lib/gic-v3-its.c | 89 ++++++++++++++++++++++++++++++++++++++-
+> >  drivers/cpu/Kconfig       |  1 +
+> >  drivers/cpu/armv8_cpu.c   | 80 ++++++++++++++++++++++++++++++++++-
+> >  drivers/cpu/armv8_cpu.h   | 10 +++++
+> >  4 files changed, 178 insertions(+), 2 deletions(-)
+> >
+>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+>
+> I'm still not sure why you are using u64 instead of ulong?
 
-[...]
-
-> +int enclustra_get_mac_from_eeprom(unsigned char *enetaddr, const char *alias)
-> +{
-> +	struct udevice *dev;
-> +	u32 hwaddr_h;
-> +	u8 data[4];
-> +	int i, j, eeprom_addr, mac_len, ret;
-> +
-> +	ret = uclass_get_device_by_name(UCLASS_MISC, alias, &dev);
-> +	if (ret) {
-> +		printf("%s: Failed, cannot find EEPROM! ret = %d\n", __func__, ret);
-> +		return ret;
-> +	}
-> +
-> +	/* Make sure atsha204a is in a defined state (part of protocol) */
-> +	if (atsha204a_sleep(dev)) {
-
-Please propagate return values.
-
-> +		printf("%s(): Failed to bring EEPROM in defined state\n", __func__);
-> +		return -ENODEV;
-> +	}
-> +
-> +	if (atsha204a_wakeup(dev)) {
-> +		printf("%s(): Failed to wakeup EEPROM\n", __func__);
-> +		return -ENODEV;
-> +	}
-> +
-> +	/* Read twice portions of 4 bytes (atsha204 protocol). One from address 4
-
-Use Linux comment style, not netdev:
-
-/*
-  * Read some
-  * stuff
-  * and so on
-  */
-
-> +	 * the other from address 5 of the OTP zone. Then convert the data to
-> +	 * the 6 elements of the MAC address.
-> +	 */
-> +	eeprom_addr = 4;
-> +	mac_len = 6;
-
-These can be const variables assigned at the beginning of this function.
-
-> +	for (i = 0; i < 2; i++) {
-> +		eeprom_addr += i;
-> +		if (atsha204a_read(dev, ATSHA204A_ZONE_OTP, false, eeprom_addr, data)) {
-> +			printf("%s(): Failed to parse ATSHA204A_ZONE_OTP of EEPROM\n",
-> +			       __func__);
-> +			return -EFAULT;
-> +		}
-> +
-> +		for (j = 0; j < 4 && j + i * 4 < mac_len; j++)
-> +			enetaddr[j + i * 4] = data[j];
-> +	}
-> +
-> +	/* Check if the value is a valid mac registered for
-> +	 * Enclustra  GmbH
-> +	 */
-> +	hwaddr_h = enetaddr[0] | enetaddr[1] << 8 | enetaddr[2] << 16;
-> +	if ((hwaddr_h & 0xFFFFFF) != ENCLUSTRA_MAC) {
-> +		printf("%s(): Failed, parsed MAC is no Enclustra MAC\n", __func__);
-> +		return -ENOENT;
-> +	}
-> +
-> +	if (!is_valid_ethaddr(enetaddr)) {
-> +		printf("%s(): Failed, address read from EEPROM is invalid!\n",
-> +		       __func__);
-> +		return -EINVAL;
-> +	}
-> +
-> +	printf("ethaddr set to %02X:%02X:%02X:%02X:%02X:%02X\n",
-> +	       enetaddr[0], enetaddr[1], enetaddr[2],
-> +	       enetaddr[3], enetaddr[4], enetaddr[5]);
-
-This should be:
-
-debug("ethaddr set to %pM\n", ethaddr);
-
-see lib/vsprintf.c for the formatting strings.
-
-> +	return 0;
-> +}
-> +
-> +__weak int enclustra_setup_mac_address(void)
-> +{
-> +	unsigned char enetaddr[6];
-> +
-> +	if (enclustra_mac_is_in_env("ethaddr"))
-> +		return 0;
-> +
-> +	if (enclustra_get_mac_is_enabled("ethernet0"))
-> +		return 0;
-> +
-> +	if (enclustra_get_mac_from_eeprom(enetaddr, "atsha204a@64"))
-
-Please propagate return values, fix globally.
-
-> +		return -ENXIO;
-> +
-> +	if (eth_env_set_enetaddr("ethaddr", enetaddr))
-> +		return -ENXIO;
-> +
-> +	if (!enclustra_get_mac1_from_mac(enetaddr))
-> +		return eth_env_set_enetaddr("eth1addr", enetaddr);
-> +
-> +	printf("%s(): Failed, unable to set mac address!\n", __func__);
-> +	return -ENXIO;
-> +}
-
-[...]
-
-> +int enclustra_get_mac1_from_mac(unsigned char *enetaddr)
-> +{
-> +	u32 hwaddr_h;
-> +
-> +	/* Increment MAC addr */
-> +	hwaddr_h = (enetaddr[3] << 16) | (enetaddr[4] << 8) | enetaddr[5];
-> +	hwaddr_h = (hwaddr_h + 1) & 0xFFFFFF;
-> +	enetaddr[3] = (hwaddr_h >> 16) & 0xFF;
-> +	enetaddr[4] = (hwaddr_h >> 8) & 0xFF;
-> +	enetaddr[5] = hwaddr_h & 0xFF;
-> +
-> +	if (!is_valid_ethaddr(enetaddr)) {
-> +		printf("%s(): Failed, address computed from enetaddr is invalid!\n",
-> +		       __func__);
-> +		return -EINVAL;
-> +	}
-> +
-> +	printf("eth1addr set to %02X:%02X:%02X:%02X:%02X:%02X\n",
-> +	       enetaddr[0], enetaddr[1], enetaddr[2],
-> +	       enetaddr[3], enetaddr[4], enetaddr[5]);
-
-debug("... %pM\n", enetaddr);
-
-> +	return 0;
-> +}
-> diff --git a/board/enclustra/common/mac_ds28.c b/board/enclustra/common/mac_ds28.c
-> new file mode 100644
-> index 0000000000..9aed4f1de1
-> --- /dev/null
-> +++ b/board/enclustra/common/mac_ds28.c
-> @@ -0,0 +1,88 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (c) 2024 Enclustra GmbH
-> + */
-> +
-> +#include <linux/compat.h>
-> +#include <dm.h>
-> +#include <i2c.h>
-> +#include <net.h>
-> +
-> +#include "enclustra_mac.h"
-> +
-> +#define DS28_I2C_ADDR 0x5C
-> +#define DS28_SYS_I2C_EEPROM_BUS 0
-> +
-> +int enclustra_get_mac_from_eeprom(unsigned char *enetaddr, const char *alias)
-> +{
-> +	struct udevice *dev;
-> +	u32 hwaddr_h;
-> +	struct dm_i2c_chip *chip;
-> +	uint chip_addr = DS28_I2C_ADDR;
-> +	int alen = 1;
-> +	int ret;
-> +
-> +	if (i2c_get_chip_for_busnum(DS28_SYS_I2C_EEPROM_BUS, chip_addr,
-> +				    alen, &dev))
-> +		return -ENODEV;
-> +
-> +	chip = dev_get_parent_plat(dev);
-> +	if (chip->offset_len != alen) {
-> +		debug("I2C chip %x: alen %d does not match offset_len %d\n",
-> +		      chip_addr, alen, chip->offset_len);
-> +		return -EADDRNOTAVAIL;
-> +	}
-> +
-> +	ret = dm_i2c_read(dev, 0x10, enetaddr, 6);
-> +	if (ret) {
-> +		printf("%s(): Failed reading EEPROM! ret = %d\n", __func__, ret);
-> +		return ret;
-> +	}
-> +
-> +	/* Check if the value is a valid mac registered for
-> +	 * Enclustra  GmbH
-> +	 */
-> +	hwaddr_h = enetaddr[0] | enetaddr[1] << 8 | enetaddr[2] << 16;
-
-Better use () around the shifts, i.e. ... | (enetaddr[i] << 8) | ...
-
-> +	if ((hwaddr_h & 0xFFFFFF) != ENCLUSTRA_MAC) {
-> +		printf("%s(): Failed, parsed MAC is no Enclustra MAC\n", __func__);
-> +		return -ENOENT;
-> +	}
-> +
-> +	if (!is_valid_ethaddr(enetaddr)) {
-> +		printf("%s(): Failed, address read from EEPROM is invalid!\n",
-> +		       __func__);
-> +		return -EINVAL;
-> +	}
-> +
-> +	printf("ethaddr set to %02X:%02X:%02X:%02X:%02X:%02X\n",
-> +	       enetaddr[0], enetaddr[1], enetaddr[2],
-> +	       enetaddr[3], enetaddr[4], enetaddr[5]);
-> +
-> +	return 0;
-> +}
-> +
-> +__weak int enclustra_setup_mac_address(void)
-
-Is the __weak really necessary ?
-
-> +{
-> +	unsigned char enetaddr[6];
-> +
-> +	if (enclustra_mac_is_in_env("ethaddr"))
-> +		return 0;
-> +
-> +	if (enclustra_get_mac_is_enabled("ethernet0"))
-> +		return 0;
-> +
-> +	// NB: DS28 is still not available in official DT, so referencing
-> +	// here by i2c busnumber and address directly
-> +	// preparation for DT access here, though
-
-Use C comment style /* */
-
-> +	if (enclustra_get_mac_from_eeprom(enetaddr, ""))
-> +		return -ENXIO;
-> +
-> +	if (eth_env_set_enetaddr("ethaddr", enetaddr))
-> +		return -ENXIO;
-> +
-> +	if (!enclustra_get_mac1_from_mac(enetaddr))
-> +		return eth_env_set_enetaddr("eth1addr", enetaddr);
-> +
-> +	printf("%s(): Failed, unable to set mac address!\n", __func__);
-
-MAC address, MAC in capitals.
-
-[...]
-
-> --- a/drivers/misc/Kconfig
-> +++ b/drivers/misc/Kconfig
-> @@ -73,7 +73,7 @@ config ATSHA204A
->   	help
->   	   Enable support for I2C connected Atmel's ATSHA204A
->   	   CryptoAuthentication module found for example on the Turris Omnia
-> -	   board.
-> +	   board and Enclustra SoC FPGA boards.
-This change should be elsewhere in this series ?
+u64 is the type defined in the ACPI spec for the fields within the
+ACPI MADT table.
+It's also valid for 32-bit systems, even though this code is supposed
+to run on 64-bit only.
