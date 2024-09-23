@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50BFACF9C71
-	for <u-boot@archiver.kernel.org>; Mon, 23 Sep 2024 20:35:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10ECECF9C71
+	for <u-boot@archiver.kernel.org>; Mon, 23 Sep 2024 20:36:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7021588BAE;
-	Mon, 23 Sep 2024 22:35:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C793088A4C;
+	Mon, 23 Sep 2024 22:36:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gIHtRxwo";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rr00pKxr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2E97E88BAE; Mon, 23 Sep 2024 22:35:36 +0200 (CEST)
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
+ id 4131F88A0D; Mon, 23 Sep 2024 22:36:19 +0200 (CEST)
+Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
+ [IPv6:2607:f8b0:4864:20::836])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E2EB88B86
- for <u-boot@lists.denx.de>; Mon, 23 Sep 2024 22:35:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 23870889C9
+ for <u-boot@lists.denx.de>; Mon, 23 Sep 2024 22:36:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-7a99e4417c3so425441985a.1
- for <u-boot@lists.denx.de>; Mon, 23 Sep 2024 13:35:34 -0700 (PDT)
+Received: by mail-qt1-x836.google.com with SMTP id
+ d75a77b69052e-4582fb3822eso34174581cf.1
+ for <u-boot@lists.denx.de>; Mon, 23 Sep 2024 13:36:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1727123733; x=1727728533; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1727123776; x=1727728576; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=lRPWmKSQaaM565AsWDdHjS58KUqc+I+kVlSJUlKl7GY=;
- b=gIHtRxwouq917l+szogPqM+Do62M+LrpMa4b6iTlXqT40SOIb94AyxNV1uzRDyuoqq
- t+ZS0Q0mg8xKEonkQZ3PTlgDuax6/mWGm5IVbsI63sm3aCrfBLgyMXap2VtQdR0Wkqz+
- CjM+4p7eqMigUINSdYfyCPp3DBMu2/AL2gBNc=
+ bh=68pRHloMJPAuatqGzkoupwbA1P00InkHfNFXJVlW1jI=;
+ b=rr00pKxrZLpZo3tBckgqkxG7Z4vTw/WKHBEu+ax6S3KKCzuMr+eh/73xDmyidbTGfT
+ RZzTBdgx9kBuHFf2EhtRGundJyNxMqfVXoYdHL70pdr+JRVqvxt+T8emq+9HPx0hKLZt
+ vPgUABtyQmhw2jGrX8DEQF82ee7TnY+h7l1qQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727123733; x=1727728533;
+ d=1e100.net; s=20230601; t=1727123776; x=1727728576;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lRPWmKSQaaM565AsWDdHjS58KUqc+I+kVlSJUlKl7GY=;
- b=r4v/91In9selDrYMkjOtKNFaiAzHsDkdfAgCF58PtMwyb9KE0TYLMCFzPwClqCwN0c
- Mi4jlBeGlU2wb+nC67e8i/6oodgSPtuWm/Wu18HP3rZ/7KuoLO63L086P16NLrIhiVue
- O/eUIHX+pwHlnGfBfnlvTXyqO0iNhG7/5Nv0q3eRV6TKeZIU47nEJp0BC2+MNm4yv6Q7
- lmzKqSal3ltviCS1HNNdoArVjzGGDUYh0uPJToCoQKJXrdYZ/iPqoAboEn6bytTYwbOh
- nC6OIegaZdEGy4Ti62e0fW/UhUeDm1P3NiYf2xRsCEtAJWAhMR8ok/zd0e+1E28uNp0f
- 9pfQ==
-X-Gm-Message-State: AOJu0YzWKvNoywgyomaYLeHQUOhwa+4a/LWbjb47Z0/6xOsX7yVkMLz9
- ThQ5pTOYHqlq1K81MlC7RvVIyckVII4TPnzek/Rm+MAWg/rBFLyYq93Cc5p3giW2IqK816aGxHq
- r
-X-Google-Smtp-Source: AGHT+IGyeU9pImLvvn3ilo0gI5Kf2bVhnoPTn/jskExrLNPAlmPOhQEbuByc4o20j8hjrbRk4xGquA==
-X-Received: by 2002:a05:620a:4688:b0:7a9:a917:2680 with SMTP id
- af79cd13be357-7acb8222974mr2175160085a.64.1727123732903; 
- Mon, 23 Sep 2024 13:35:32 -0700 (PDT)
+ bh=68pRHloMJPAuatqGzkoupwbA1P00InkHfNFXJVlW1jI=;
+ b=a1SYUeH9NxGLfIhXmRgrMOZiiA7gdcw5lhdkXKjnbcoheUO3+cVxWf22353RQZj0oh
+ wLHgLTOq8N1YxM4zhk3B7rNBpH9Rsd0TWyAf1Nst+Hy3i6RnF4cSNH1ykZw1JdAHAl0b
+ Isoz6ReVhYCOqojTgkjgUnEMTV9xhbiUl+NRC94AZZHxwLhorZDj/zpl17c7SJLzgMRw
+ WOXOKRpXywwSygYEx82PwuG1dYCif6aOEDymHFS92Z6ksFhT8kanhRa5etewSKzpZ5HW
+ Xb3+nWy3e2IkzPBKcUXdQKQpIiod8mtfYEk0T0Ec9MFCOKusIlDYVBcZP44zq/cW5x09
+ xuBg==
+X-Gm-Message-State: AOJu0Yz6oc09aJJRgjJd9/YWezdq8EEAnG93pu8uanl4XAox7WfkYJvY
+ D2HxEYha+drUhvt2/Tk55v4293AcI3PGeJgZG3J7y1gXH1jlQQytGVOglb3q1S/IgpXbxtfPkQv
+ n
+X-Google-Smtp-Source: AGHT+IGsc0Mb/7V59X9MD7qhFzneh7TwBJ/I6WigwIbG/PWn+26klH6eBjSdC/ZkkhLBaY1br6ovRA==
+X-Received: by 2002:a05:622a:4b15:b0:45b:506a:b41a with SMTP id
+ d75a77b69052e-45b506ab60fmr8716461cf.26.1727123775912; 
+ Mon, 23 Sep 2024 13:36:15 -0700 (PDT)
 Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7acde5cb9a6sm3210885a.74.2024.09.23.13.35.30
+ d75a77b69052e-45b5253b05fsm105771cf.10.2024.09.23.13.36.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Sep 2024 13:35:31 -0700 (PDT)
-Date: Mon, 23 Sep 2024 14:35:28 -0600
+ Mon, 23 Sep 2024 13:36:15 -0700 (PDT)
+Date: Mon, 23 Sep 2024 14:36:12 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v6 04/19] test: Allow connecting to a running board
-Message-ID: <20240923203528.GS4252@bill-the-cat>
+Subject: Re: [PATCH v6 00/19] labgrid: Provide an integration with Labgrid
+Message-ID: <20240923203612.GT4252@bill-the-cat>
 References: <20240920060158.106612-1-sjg@chromium.org>
- <20240920060158.106612-5-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="fQO1jeQC1WAz0FVc"
+ protocol="application/pgp-signature"; boundary="jG/G/ndf380+YbwS"
 Content-Disposition: inline
-In-Reply-To: <20240920060158.106612-5-sjg@chromium.org>
+In-Reply-To: <20240920060158.106612-1-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,66 +91,94 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---fQO1jeQC1WAz0FVc
+--jG/G/ndf380+YbwS
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Sep 20, 2024 at 08:01:39AM +0200, Simon Glass wrote:
+On Fri, Sep 20, 2024 at 08:01:35AM +0200, Simon Glass wrote:
 
-> Sometimes we know that the board is already running the right software,
-> so provide an option to allow running of tests directly, without first
-> resetting the board.
+> Labgrid provides access to a hardware lab in an automated way. It is
+> possible to boot U-Boot on boards in the lab without physically touching
+> them. It relies on relays, USB UARTs and SD muxes, among other things.
 >=20
-> This saves time when re-running a test where only the Python code is
-> changing.
+> By way of background, about 4 years ago I wrong a thing called Labman[1]
+> which allowed my lab of about 30 devices to be operated remotely, using
+> tbot for the console and build integration. While it worked OK and I
+> used it for many bisects, I didn't take it any further.
 >=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
+> It turns out that there was already an existing program, called Labgrid,
+> which I did not know about at time (thank you Tom for telling me). It is
+> more rounded than Labman and has a number of advantages:
 >=20
-> (no changes since v1)
+> - does not need udev rules, mostly
+> - has several existing users who rely on it
+> - supports multiple machines exporting their devices
 >=20
->  test/py/conftest.py                   |  3 +++
->  test/py/u_boot_console_base.py        | 14 ++++++++++----
->  test/py/u_boot_console_exec_attach.py | 21 ++++++++++++---------
->  3 files changed, 25 insertions(+), 13 deletions(-)
+> It lacks a 'lab check' feature and a few other things, but these can be
+> remedied.
 >=20
-> diff --git a/test/py/conftest.py b/test/py/conftest.py
-> index fc9dd3a83f8..ca66b9d9e61 100644
-> --- a/test/py/conftest.py
-> +++ b/test/py/conftest.py
-> @@ -79,6 +79,8 @@ def pytest_addoption(parser):
->      parser.addoption('--gdbserver', default=3DNone,
->          help=3D'Run sandbox under gdbserver. The argument is the channel=
- '+
->          'over which gdbserver should communicate, e.g. localhost:1234')
-> +    parser.addoption('--no-prompt-wait', default=3DFalse, action=3D'stor=
-e_true',
-> +        help=3D"Assume that U-Boot is ready and don't wait for a prompt")
+> On and off over the past several weeks I have been experimenting with
+> Labgrid. I have managed to create an initial U-Boot integration (this
+> series) by adding various features to Labgrid[2] and the U-Boot test
+> hooks.
+>=20
+> I hope that this might inspire others to set up boards and run tests
+> automatically, rather than relying on infrequent, manual test. Perhaps
+> it may even be possible to have a number of labs available.
+>=20
+> Included in the integration are a number of simple scripts which make it
+> easy to connect to boards and run tests:
+>=20
+> ub-int <target>
+>     Build and boot on a target, starting an interactive session
+>=20
+> ub-cli <target>
+>     Build and boot on a target, ensure U-Boot starts and provide an inter=
+active
+>     session from there
+>=20
+> ub-smoke <target>
+>     Smoke test U-Boot to check that it boots to a prompt on a target
+>=20
+> ub-bisect <target>
+>     Bisect a git tree to locate a failure on a particular target
+>=20
+> ub-pyt <target> <testspec>
+>     Run U-Boot pytests on a target
+>=20
+> Some of these help to provide the same tbot[4] workflow which I have
+> relied on for several years, albeit much simpler versions.
+>=20
+> The goal here is to create some sort of script which can collect
+> patches from the mailing list, apply them and test them on a selection
+> of boards. I suspect that script already exists, so please let me know
+> what you suggest.
 
-I don't think this is the right name for what the commit message says we
-have? Maybe something like --use-running-system or otherwise make it
-clear we're using the board as it's already up and ready to go?
+I still really wish you would split the labgrid parts of this series out
+=66rom the pytest fixes and improvement parts. Things are largely fine
+outside of the labgrid part for example, which I'll probably just take
+after confirming it doesn't break using labgrid other ways.
 
 --=20
 Tom
 
---fQO1jeQC1WAz0FVc
+--jG/G/ndf380+YbwS
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbx0RAACgkQFHw5/5Y0
-tyyiiAwAr/9uPo8V9osltgwtNfbQPf6uDwaIFGF0HgMcBL5H8ziTU8iHBPSZon7k
-Gklk+KC02/rW/b6USlKKoRvd6zQVjIK77JuCOLqP8u6WSjZNpAyWEt9xiXcydHxa
-ch+7LjLKEv8XBk8VPG2WmE5DRwFMiZ7MLVPufLpTJ2ieeK3OT0kB0Fn3bzDnaPDe
-cXzEEpXyIwBiKr7kIJh59hycC6Bf0OxzbHR77G3SmK6cbgE5BBaTCwgv+ul/rp+g
-2muzdNry3++k9LXr/7tghe3j+CkZoqOOjdjFTgjvpZWvdNf0tNOy6rZmglXb+7jv
-crAdaQnzqdb96hur7gxpRnf2m86BS2KFbAHzknKZIpShlUJnWujAU8+36i3y3MJh
-lJHn0v/CN2jwiBIJsL8MWvEFkFrzthIJ3SLtesGYWwTBgVw8X3jA5M2gPTJi6V/6
-oHy3GWEqsN7LUTCnfRkd6sAgArcs6+Ln48MfV21p+YHONhG9q0MNBaOx6yB1GBBl
-SPbEAYlO
-=xTV9
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbx0TwACgkQFHw5/5Y0
+tyztoAwAjvj3aJUqsJFwvRuX6baEBNnrgsJ1jqSTl9iXP3aArM7+Cs1ybSlBtJaH
+LXv088KGEnLMvE2sJCE43Qj+7jzXpHgBhRGlQgaFivZoutvO9VpApDUSzem9zvM7
+1P7br0VRkCdVkbTi+3rD4gikl2EUFIJYfdSWXfRh4wz7mXY/ykXNJp/vQRWnDobg
+K0QXrWFiFnUYUlocY+aLbA7Qm/tuu8T7m04yjzI0c1b1JWcmukOBjVfCEkx6fhbu
+8H56CI4k1MqoBvh4ZCfG05blA6OJ/DN+YGsVDx7K7r/lOlPkxuv3pSRioXpZIggF
+GUvRvB+DH2hrOCFE10Ju4pZAnZi3FiRh4j/3f2ssFnPnMcNzfPWSs905JtoQYY54
+3qyZPzrv72L1KK1KhFd3FCDbk1Y+3UivtnBIKNI7u9rqCKfFkkatuenRcSvYcaa8
+J/k8TN3LChpIu3a9fNpb03hklEHpUdR9PnvZPq0pDwiaNXgwPXGp0aDh8oCA5P8m
+JzOtH73V
+=7kcm
 -----END PGP SIGNATURE-----
 
---fQO1jeQC1WAz0FVc--
+--jG/G/ndf380+YbwS--
