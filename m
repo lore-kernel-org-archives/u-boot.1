@@ -4,146 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C5C2CF9C6E
-	for <u-boot@archiver.kernel.org>; Mon, 23 Sep 2024 12:11:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A732CF9C6E
+	for <u-boot@archiver.kernel.org>; Mon, 23 Sep 2024 12:15:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE2C088D1F;
-	Mon, 23 Sep 2024 14:11:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 8AA2588D1F;
+	Mon, 23 Sep 2024 14:15:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="cAHqL5FV";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="KTflz5od";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 556DD88CBA; Mon, 23 Sep 2024 14:11:33 +0200 (CEST)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170110001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 5752188CBA; Mon, 23 Sep 2024 14:15:43 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 640F688D27
- for <u-boot@lists.denx.de>; Mon, 23 Sep 2024 14:11:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E74088CBA
+ for <u-boot@lists.denx.de>; Mon, 23 Sep 2024 14:15:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=MS02Xw91NizGZCAN8LU2r5ZCWVnLaIsNmAKNs1Ao3DGCLMVuank+g6mmktpASRuNUCWLEcaSY+JMNu5IgQ5bI5++HDfiFFVraxnxTFkRzS+49/86wX1mx6ZFT3SlNOg2hP6jGaYJso4V7BMsgH5TTb8c8FDelVr3BZvawek42+3sk3jLVxDMPrmjRIViCJ2V/3hOgFyJNe48s7WiOQOkuIsxYjBj1ymCx8ok8gL+ZsR3Ko9/bz5JuL9D/jkbwyvAdlD/Yh7VFYtp1IsXgBq2nhdboPqbXfOS7Lawg/Nz2sDNXlYR9grGqNZ15A+Mrr49WcbXjPzBQmwcXLBajwvdAw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=G2A9IYio/qFt4zKPRyxmQ6OPvV3HvbTkt2kLBP0RsRw=;
- b=WafYoNY5RREKhysL7wdsDzknubEjAr6NmVvvqJbcdyJ9HF/0HSt+qZ0y1F4n7911xVf3zIW/JVpkC7N+6VENXs+Yj+higw+3DWS3m8kqebvuleaahyK2gjf3bDY+sGEbWef+ZAK9k43NFJm7K+I+14xXVPdZjOqlOZEVcjRdU/y16vodskZjbHZZryDmMXj0rTEBItYOA6lp5bI/IJgVssrT2u+TGtgsWRzPRuY+EosRB1GsSIfGJW3OoSRpyTAsY7uvQuE++npEvc15eaQ/5aLbIh3kJIdi4BCvpIO4tjNaxskarvv5EOi+uWLgP44qCh+xhliMu1ZiBUnsgD6fNQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=G2A9IYio/qFt4zKPRyxmQ6OPvV3HvbTkt2kLBP0RsRw=;
- b=cAHqL5FVvlFmnD5cXPiDlb9SM1tPchcDln/rAz3DTq30KFaCBZ1j8Gl/99vO2QJ4ncfUFZT3q5zUySewrmw23Idd+6L/HojpkS769KUE3t5f7oICkFNvcYQYo13KYgWhADbhX/bSN9HKsaXbHXBAvVGBh4BhaBeIhc+u1UuYO/XTMQ04Vs7Mx+wchgtDMoynDnMswY9evC4RRanvDwfqv4RbDw4sxS584qFD46RTGtntUTDgp6GtWhqJn21SQ37l3nETTDhzR/n4Xa9QkL6l8AMdm01UJsUU8hZbm5RI1zPWPpeo1Qjw0uv+hDoI8V0RV+pz3qv/qgz7TzZRAeKJUg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by GVXPR04MB9928.eurprd04.prod.outlook.com (2603:10a6:150:117::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7982.25; Mon, 23 Sep
- 2024 12:11:25 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%6]) with mapi id 15.20.7982.018; Mon, 23 Sep 2024
- 12:11:25 +0000
-From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-To: festevam@gmail.com, sbabic@denx.de, joe.hershberger@ni.com,
- rfried.dev@gmail.com, Tom Rini <trini@konsulko.com>
-Cc: uboot-imx@nxp.com, Ye Li <ye.li@nxp.com>, Peng Fan <peng.fan@nxp.com>,
- u-boot@lists.denx.de
-Subject: [PATCH 2/2] net: fec_mxc: Skip recv packet process when fec is halted
-Date: Mon, 23 Sep 2024 21:14:39 +0800
-Message-Id: <20240923131439.28572-2-peng.fan@oss.nxp.com>
-X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20240923131439.28572-1-peng.fan@oss.nxp.com>
-References: <20240923131439.28572-1-peng.fan@oss.nxp.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SI2PR02CA0036.apcprd02.prod.outlook.com
- (2603:1096:4:195::15) To PAXPR04MB8459.eurprd04.prod.outlook.com
- (2603:10a6:102:1da::15)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1727093734; x=1727698534; i=xypron.glpk@gmx.de;
+ bh=px2dMe47nLNHot+tfVYmCbSzy8Le8QcSkAzor0NYlqQ=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=KTflz5odyJ5dy9AWZUSgLzUkl1s9D3d/aFQGcuoDtlxWXYOMWI2cWF45h0k/p8HB
+ eUcp9/FARCddFAeu3DJJxCrRir/t4Qznx0S1nHm17ZVcDdSiOz8peHhAbnQGAlasu
+ ibQ628asMsCA4Bue0LXUVBjfk4x5JQCqUbMBhfDsIEF/sR652gVkjH9lGzM6M+inH
+ Z+hCpsP5B+5hAq6V/h/2dY8iMSI/09bu3RlC23P1sjjgxeDy3OAT1StKJfgSOA0Ry
+ nOgnwIJP+WVtq4vNXoPiGyMUcuRAi0TezKHuE7KFIZY4QEnD+0u9WPZmOgJ6YNfA9
+ BwSNjkAukMQefUoAtw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MpDNf-1sA25h2rjL-00qmJV; Mon, 23
+ Sep 2024 14:15:34 +0200
+Message-ID: <8309d2cf-ae84-4907-a6a4-9d6f5a4b8206@gmx.de>
+Date: Mon, 23 Sep 2024 14:15:29 +0200
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|GVXPR04MB9928:EE_
-X-MS-Office365-Filtering-Correlation-Id: e5f49f92-74a4-4756-e9d5-08dcdbc8d829
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|52116014|376014|366016|1800799024|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?fXPY92030e500EXxW/CqZ0PWErI5kCIxBlNDK0VUw0MWGsVuVpsnbdKYcqJC?=
- =?us-ascii?Q?I/9rfIJNBBIFSR1p+CTV7ydyaL9gJ7hlE/zkfAp84Oq4pNE7DyxT2Br/hF85?=
- =?us-ascii?Q?Zw4KgNmoEn2+QTYIVfWVHi1VsLCs8QruTkZlT7axjVEvpVrg7V8J2CXP9bqi?=
- =?us-ascii?Q?FNX56rgNpetE2QOoxNbR8/yVpE8rLwhUYXALxUqoR/QmiVh2zYtgiK9Sq/I0?=
- =?us-ascii?Q?MhKLK4fdV3XeOPbsF2l/ipsGG8Hj514OpptGjBSMiEbzdLkT5fj1tA9uVRzt?=
- =?us-ascii?Q?DSmh6PV4G2YON+L1tOnrDWDxOGxgnIKEjkNJ+sZDUAnwDqOF6zLnZGFHkKfI?=
- =?us-ascii?Q?3f+tTKkWKWe98ReZNP3Llxm9MDpBBtpazdcZrEeCBiu6MhPGkybdmtpZPtPi?=
- =?us-ascii?Q?7oUPlyTc8a46HP+tkwCF6CTZv4trimCS7CJ6CMzzGSEm6gwav8Z/RxFNjj3Z?=
- =?us-ascii?Q?1HAHPOa3AR7B9YzPYuxixWk3V/T8auF7ehvXIP4v3c2FLuOt3OyPpwZ0YNxF?=
- =?us-ascii?Q?O6DKjWxRZc4TH6WyZg8UB0O3was3+4feWJJbeJ14vMV3Ig6bxLkUIdrzjs9V?=
- =?us-ascii?Q?42A7TT/670KA+n3aMBTNIfl1ayAITlQx4ngZCI29OYL+xdqfAgm31PQzhazV?=
- =?us-ascii?Q?nxlew3YWT+bqLQ6ex00gEUVBRa7qy1Ft0csb+uD41nNb3lTsgUMzLUTIVQaO?=
- =?us-ascii?Q?IJgfJmI60nGceNcINiXDfInWmPkv+p+6mNqfkVKPS9PmEa+OjIwRJuqivZdD?=
- =?us-ascii?Q?sz9gjk6UTBoY7DzY2N+ESsNJFj73knZWw4V+pP/khfxF1zdC6pHVLURj8xDg?=
- =?us-ascii?Q?HYgyal0zOy1TjqSd1YdwlTO+9LxMP2ZD5f6YVtdpAYuXEAUYXqHY6xyUbPzl?=
- =?us-ascii?Q?JmsDhNq3H/2zBpBlnlAYRDH2WZ/gLA2ecz3+IZCilCAc/L9Gvx6KyJ0e1E0j?=
- =?us-ascii?Q?wtNxbHc77kuEFWaGmC2NTPMjfRs/rtDNCgXV/Ga1mDgg/ZjO5u3U/xjA1Lyy?=
- =?us-ascii?Q?xfaUxCb9AiIaxquh3eIAv1+94X3jAxg3TGOL20n1C9Yxpk9AQ8zdV5kVEGvN?=
- =?us-ascii?Q?j+0SMXrVqHKOvJrc80trvQDK4q6PTKQove7Hhe2lVIZo9hH5RjSke5Vg4kVX?=
- =?us-ascii?Q?i8fqrQGONr8fwMvwSI5iNRQbUtmiRHIcGLcHfI1rQwqhOWjgCEEl+R9ADX1l?=
- =?us-ascii?Q?QM64k4t9i7OupdM8epfIgYJ97LUmEWyb17EYRZLd6UwiUPHbeOM/BcbaB/8A?=
- =?us-ascii?Q?k+X33QpQusUySUqbf1nbQFvB2+E56ueQr+iUxaJRMgNv/lol2dRuxkmnUgGV?=
- =?us-ascii?Q?vF1mstuF0neaqp/GvDP7w53W9W5WVgakvr7k//fTsgUfKw=3D=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(52116014)(376014)(366016)(1800799024)(38350700014); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?gmSxKgiecxSn4xD56QFnKPnNVHlGpuAS8wnMq98clPnHrrYWLifqqb6Z4pFH?=
- =?us-ascii?Q?jPXivfUU8XZTDrFC8Lc3zP7Y69fk1FtuVf9o0SLmFjn+OoJR4QKBpWXHSvvu?=
- =?us-ascii?Q?cKw7fN8iFlEvnJvKl2DYFAmiPnzJaH/W0W4t+mnvgONedNTHT9Rb/KWPLsKe?=
- =?us-ascii?Q?VSiX6suhJFTlnqmAQirekH3jgbJiBXcx7MGYLKUuc2+IZQQkb+ypxdxegIO/?=
- =?us-ascii?Q?MHACAR9fADlcQqbyU9Fjl3UoRKML7A+Mima15QeajreoLPZ0oCVPPJutI5l7?=
- =?us-ascii?Q?eD3mtPxUAst2wcN2eT5YmcjlpHQlaKYv9HFs6KF0mFpRWeBgS5wkq+nV0X3s?=
- =?us-ascii?Q?0iIDohSiz75g7t9nXHrNf6c8QJp8IBK/yLAk/j5mS+CAd0hlnOXyTHVvizlS?=
- =?us-ascii?Q?K9QcHJBSY79/mHjrdzEWIz4WPimOVRxEDGPa297VedruG5NmY52Q8/4X2K4t?=
- =?us-ascii?Q?NxVgVHh+jAMYr1GaH9/fe4PA7cxH0bnJRgeeM1lhZ9bLvIAjgGunaieYt24G?=
- =?us-ascii?Q?V5kxH/TnqfSGFy76xcW+8jZypZhXMkaYFmqZhUPOryOKE35uMgP087D8Uu5G?=
- =?us-ascii?Q?3ReovttdHz3+UjfN3Iww5q0oJ7UXlU1XjaAi4q9tf5Tej8/7X6l74RH0RmVi?=
- =?us-ascii?Q?1KE+2E37ev4G/4VMI1j6h2Wji1A9neZCdLU2ybzP4L+Pj3Bybj2KI6YzzGow?=
- =?us-ascii?Q?eYzh1KouLJ+so3oRT7ek0mQlVVB7h0TxLS6NDZWLCB77O1Hx9iza+vPRTToY?=
- =?us-ascii?Q?lrf1lTlMyjqTk0oYazDV83gALz74mgEGaOBeQbOI+6EtJrFyRcZx+q7uN0QN?=
- =?us-ascii?Q?4D/JovgDuozXGJiOdt6NDK+ZTZinoUJauITM4sg5v09uYyLzzpM8r/Jf4xW3?=
- =?us-ascii?Q?e3u4l2QHFr3vc5KRkahbakIh5NI9mHuWbmyHwkKJ5zz8W7MR2xFH6iOshO/R?=
- =?us-ascii?Q?RZdQsCpI+IXB5OmrAEoggtkxyC3ZFOTothD21qPzoYOIu/VJhV4aKkpHTKUi?=
- =?us-ascii?Q?w2fq1AhJO4fNs0/BeHSLq+KCgLgV5y3CB7YzXQhZtu0QFgYIrrSp/Fbb9Z/N?=
- =?us-ascii?Q?qAQYV4M+awdARbWz8b7n22QjFR8P2qBrXLMiGXJAl5LohZwopicygo89M7za?=
- =?us-ascii?Q?VX/T4lLu8t8Blfshkn8AB9b8HE82PkiX/Bg0gVJm9kLaQ3Dc2yN+913KxCwQ?=
- =?us-ascii?Q?9LYdIYjjnvkZf6YAfTaizeDw3lzmmiz2XhJVo6UzzSJTsM2Z9Ssjeik0v0Ky?=
- =?us-ascii?Q?pyHxPwlh5bBLj+Q3sgC4OL/SxhPqVQclKS+JpPMM3tPsJUmGJ0QAGvoEQmLu?=
- =?us-ascii?Q?m7GIjcbCzfg9px6psEVxzL1VowHafjYfe8KPps0sBDwrGeLcMkW/dSEG8swM?=
- =?us-ascii?Q?45wwEAZd2itg2VefcuCLhoOMZjlgYvX+1j9UFsaZQ+Gi3U8n1maZ0ZFDZNwJ?=
- =?us-ascii?Q?pp5WXpX2XzsdHusN476MXz5UjJmY5TTT8nUD3RooZmG30qeN9VD+U2K8lNqB?=
- =?us-ascii?Q?itFD6UWQ+/3KwmlUUFWuhap7T4WiDS5zs3ec8+OR2t+ZJ6otQUpyxHc0W78p?=
- =?us-ascii?Q?ZX9K3U6jk8x9j6C4+TfY74UTszU9BBIvWBjCU1lg?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e5f49f92-74a4-4756-e9d5-08dcdbc8d829
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Sep 2024 12:11:24.9871 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: dWAs+IF9LpWzB1Y1a6+5J/nfARHQKvXGF4JAFt+H0mVThJm9M672JdLSTofj/CX1jlb5wzvRVNc1bVbJnlNRtA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR04MB9928
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/3] efi: Drop the memset() from efi_alloc()
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20240901222259.456932-1-sjg@chromium.org>
+ <20240901222259.456932-2-sjg@chromium.org>
+ <52f2da9e-924c-44b4-8390-7d604d07ab33@gmx.de>
+ <CAFLszTj9hhNfC8QvRaQnb3HDyJ_+e9uExVo2rvy+K=_1xQOoqg@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <CAFLszTj9hhNfC8QvRaQnb3HDyJ_+e9uExVo2rvy+K=_1xQOoqg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:VPvokG+6NtFdQRdLomjNpTuMtiZU7dlOe+xuArx3yLfjBBWwQOs
+ Mn1kDnDaLGGV8YYMd3bZn9bXiCzUEEJX8XJFIMOOXQi1YqWcNfNe9qDiaZps6nKbLVvyl+J
+ Ok604ez1rBarMGUKLqFSwiem6SZNArq6a4RIzMgIeSz28+aHvOWezcsf3vQBCnwgGiqDQ0W
+ ESqlO/L+zhLZ2EYhyX2Ow==
+UI-OutboundReport: notjunk:1;M01:P0:ZjdxrDcH2bQ=;nD8v1OSQZyTFUMQ5/MA6KPNDniN
+ hHrD12fFoJrXCnyM96t+ZJT0pEDrjrzN4ITNbN0SY4b+DZfAb/C/jJ9ksm68cKYpGF4XsM3O0
+ IAxQFkxw4bb8/zepEH8WE+I0ivDsPKUWkoY4p6FPviaMYcGhBYnc//tMyP8QgYq3zypUYkL7U
+ wKBO/3wNbETi96HaCc0ybWNq5tdRDlxD0qK2gaUBNW0QgQC+8A6W/vQ/ypMl3FrHAlSffjRss
+ NH96dETfgJurdykxRz8+aptHpHitG8kdLtMx1z02mjNP52zo4lDD0w0djDHLq7Ixwv7n9rSjG
+ xiTknpRGY5dS8yZMs+w0Ae+8t5KVd4AoCLnLuj8aa8OX7AtN+vYOpOhWTr5MP54ZrGXqA58Qh
+ GTPigrX1LBNxThLjSlL93OPz1KAGHmm+LtVFv806sNXdyj7Tjq39RiwxywWO2Lk5S8SHLsN+n
+ /OXjAZ6wxeazB59YCFV32RgTzOTp2T50O3Fz8gtHr7802tHK0VOvjjKaV3IJ9SxY/EpmjO4x1
+ aClOe5Fb9n0jqe/dQdc3fo/gj4q1qLuxI1iGThVMioJ1ypX3b5cIWkgfM3IxvneK7ciYg++5A
+ bVgmB9PXGU/i/vVJVNezndaKF6F+REANQp6YlGtXOomMsUsPpYrzPWMMKL+3tkuA0CRODmygk
+ 7Z00BnZyesXYJh7ti9zAfRTy+7058bHuMbSpGRqqzT22Zq1epu9D9DygRD3LUXvODSpyPBIZw
+ yZeNBO+OX6IVRl5aF8XTTG1jEIHYZaU1nkcsQgfMlP7bq0xPT+PeEmW1sdS63nuq9GbZ4oeFN
+ hK+Nmy4a7wEz/yEIPFINhVBw==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -160,37 +97,141 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ye Li <ye.li@nxp.com>
+On 19.09.24 16:13, Simon Glass wrote:
+> Hi Heinrich,
+>
+> On Sat, 14 Sept 2024 at 09:40, Heinrich Schuchardt <xypron.glpk@gmx.de> =
+wrote:
+>>
+>> On 02.09.24 00:22, Simon Glass wrote:
+>>>   From my inspection none of the users need the memory to be zeroed. I=
+t
+>>> is somewhat unexpected that it does so, since the name gives no clue t=
+o
+>>> this.
+>>
+>> Though the UEFI specification does not require it, EDK II uses
+>> AllocateZeroPool() to implement
+>> EFI_DEVICE_PATH_UTILITIES_PROTOCOL.CreateDeviceNode(). We should not
+>> deviate from it.
+>
+> Are you saying that there is an unwritten convention in the spec? My
+> inspection of the code leads me to believe that all of the bytes which
+> are allocated are written to, within that code, so that zeroing the
+> bytes serves no purpose.
 
-After FEC is halted by calling fec_halt callback, we should not continue
-receiving packet. Otherwise it will process previous pending interrupts
-on EIR register and uses wrong rbd index as this has been reset to 0.
+EFI_DEVICE_PATH_UTILITIES_PROTOCOL.CreateDeviceNode() is an API:
 
-The GRA interrupt which is triggered by issuing graceful stop command to
-FEC transmitter in fec_halt is processed in this case. It causes wrong
-receive buffer descriptors be used by FEC in next time.
+You have to consider the current and future usage outside U-Boot.
 
-Signed-off-by: Ye Li <ye.li@nxp.com>
-Reviewed-by: Peng Fan <peng.fan@nxp.com>
-Signed-off-by: Peng Fan <peng.fan@nxp.com>
----
- drivers/net/fec_mxc.c | 3 +++
- 1 file changed, 3 insertions(+)
+For saving a few microseconds I would not want to give up compatibility
+with EDK II.
 
-diff --git a/drivers/net/fec_mxc.c b/drivers/net/fec_mxc.c
-index e5d7f0f3e1e..14fea891f7d 100644
---- a/drivers/net/fec_mxc.c
-+++ b/drivers/net/fec_mxc.c
-@@ -818,6 +818,9 @@ static int fecmxc_recv(struct udevice *dev, int flags, uchar **packetp)
- 		return -ENOMEM;
- 	}
- 
-+	if (!(readl(&fec->eth->ecntrl) & FEC_ECNTRL_ETHER_EN))
-+		return 0;
-+
- 	/* Check if any critical events have happened */
- 	ievent = readl(&fec->eth->ievent);
- 	writel(ievent, &fec->eth->ievent);
--- 
-2.35.3
+>
+> My goal here is to allow use of malloc(), instead of calloc(), for examp=
+le.
+
+The caller of the API has to release with the memory with FreePool(). So
+we should allocate it with AllocatePool().
+
+See chapter 10.5.8
+"EFI_DEVICE_PATH_UTILITIES_PROTOCOL.CreateDeviceNode()" in the UEFI
+specification.
+
+Best regards
+
+Heinrich
+
+>
+>>
+>>>
+>>> Drop the memset() so that it effectively becomes a wrapper around the
+>>> normal EFI-pool allocator.
+>>>
+>>> Another option would be to drop this function and call
+>>> efi_allocate_pool() directly, but that increase code size a little.
+>>>
+>>> Move the function comment to the header file like most other exported
+>>> functions in U-Boot.
+>>
+>> Yes, we should move all non-static EFI function descriptions to headers=
+.
+>> But it makes no sense to move the comments of a single function and
+>> leave the other functions unchanged. Have a look at doc/api/efi.rst.
+>
+> I normally like to do these things one at a time, when changes are
+> needed, to avoid massive wholesale changes with no other purpose. That
+> is what has happened with image.h over time. But OK I can drop that
+> part of the patch, once we sort out the zeroring.
+>>>
+>>> Signed-off-by: Simon Glass <sjg@chromium.org>
+>>> ---
+>>>
+>>> Changes in v3:
+>>> - Add new patch to drop the memset() from efi_alloc()
+>>> - Drop patch to convert device_path allocation to use malloc()
+>>>
+>>>    include/efi_loader.h        | 11 ++++++++++-
+>>>    lib/efi_loader/efi_memory.c |  9 ---------
+>>>    2 files changed, 10 insertions(+), 10 deletions(-)
+>>>
+>>> diff --git a/include/efi_loader.h b/include/efi_loader.h
+>>> index f84852e384f..38971d01442 100644
+>>> --- a/include/efi_loader.h
+>>> +++ b/include/efi_loader.h
+>>> @@ -758,8 +758,17 @@ efi_status_t efi_next_variable_name(efi_uintn_t *=
+size, u16 **buf,
+>>>     * Return:  size in pages
+>>>     */
+>>>    #define efi_size_in_pages(size) (((size) + EFI_PAGE_MASK) >> EFI_PA=
+GE_SHIFT)
+>>> -/* Allocate boot service data pool memory */
+>>> +
+>>> +/**
+>>> + * efi_alloc() - allocate boot services data pool memory
+>>> + *
+>>> + * Allocate memory from pool with type EFI_BOOT_SERVICES_DATA
+>>> + *
+>>> + * @size:    number of bytes to allocate
+>>> + * Return:   pointer to allocated memory, or NULL if out of memory
+>>> + */
+>>>    void *efi_alloc(size_t len);
+>>> +
+>>>    /* Allocate pages on the specified alignment */
+>>>    void *efi_alloc_aligned_pages(u64 len, int memory_type, size_t alig=
+n);
+>>>    /* More specific EFI memory allocator, called by EFI payloads */
+>>> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+>>> index c6f1dd09456..50cb2f3898b 100644
+>>> --- a/lib/efi_loader/efi_memory.c
+>>> +++ b/lib/efi_loader/efi_memory.c
+>>> @@ -664,14 +664,6 @@ efi_status_t efi_allocate_pool(enum efi_memory_ty=
+pe pool_type, efi_uintn_t size,
+>>>        return r;
+>>>    }
+>>>
+>>> -/**
+>>> - * efi_alloc() - allocate boot services data pool memory
+>>> - *
+>>> - * Allocate memory from pool and zero it out.
+>>> - *
+>>> - * @size:    number of bytes to allocate
+>>> - * Return:   pointer to allocated memory or NULL
+>>> - */
+>>>    void *efi_alloc(size_t size)
+>>>    {
+>>>        void *buf;
+>>> @@ -681,7 +673,6 @@ void *efi_alloc(size_t size)
+>>>                log_err("out of memory");
+>>>                return NULL;
+>>>        }
+>>> -     memset(buf, 0, size);
+>>>
+>>>        return buf;
+>>>    }
+>>
+>
+>
+> Regards,
+> Simon
 
