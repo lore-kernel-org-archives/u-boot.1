@@ -4,51 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6DC8CF9C72
-	for <u-boot@archiver.kernel.org>; Tue, 24 Sep 2024 02:49:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68AF8CF9C72
+	for <u-boot@archiver.kernel.org>; Tue, 24 Sep 2024 02:49:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 301688814D;
-	Tue, 24 Sep 2024 04:49:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C4E4F88BC2;
+	Tue, 24 Sep 2024 04:49:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8AE8188B9F; Tue, 24 Sep 2024 04:49:21 +0200 (CEST)
+ id 9666888BFC; Tue, 24 Sep 2024 04:49:51 +0200 (CEST)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 80C68880DB
- for <u-boot@lists.denx.de>; Tue, 24 Sep 2024 04:49:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6411E880DB
+ for <u-boot@lists.denx.de>; Tue, 24 Sep 2024 04:49:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ycliang@andestech.com
 Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 48O2n1CB030757
+ by Atcsqr.andestech.com with ESMTPS id 48O2nbWj031189
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Tue, 24 Sep 2024 10:49:01 +0800 (+08)
+ Tue, 24 Sep 2024 10:49:37 +0800 (+08)
  (envelope-from ycliang@andestech.com)
 Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 24 Sep
- 2024 10:49:01 +0800
-Date: Tue, 24 Sep 2024 10:48:56 +0800
+ 2024 10:49:37 +0800
+Date: Tue, 24 Sep 2024 10:49:37 +0800
 From: Leo Liang <ycliang@andestech.com>
 To: <lekkit@at.encryp.ch>
 CC: <u-boot@lists.denx.de>, <nyandarknessgirl@gmail.com>
-Subject: Re: [PATCH 1/3] riscv: qemu: Enable booting from NVMe
-Message-ID: <ZvIomKjQwaqlg_Vu@swlinux02>
-References: <20240922101102.7010-1-lekkit@cheems.de.box.skhron.com.ua>
+Subject: Re: [PATCH 2/3] riscv: qemu: Enable EFI framebuffer
+Message-ID: <ZvIowRPJ21xe19al@swlinux02>
+References: <20240922101102.7010-1-lekkit@at.encryp.ch>
+ <20240922101102.7010-2-lekkit@cheems.de.box.skhron.com.ua>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20240922101102.7010-1-lekkit@cheems.de.box.skhron.com.ua>
+In-Reply-To: <20240922101102.7010-2-lekkit@cheems.de.box.skhron.com.ua>
 User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
 X-Originating-IP: [10.0.15.183]
 X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
  ATCPCS34.andestech.com (10.0.1.134)
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 48O2n1CB030757
+X-MAIL: Atcsqr.andestech.com 48O2nbWj031189
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,18 +66,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Sep 22, 2024 at 01:11:00PM +0300, lekkit@at.encryp.ch wrote:
+On Sun, Sep 22, 2024 at 01:11:01PM +0300, lekkit@at.encryp.ch wrote:
 > [EXTERNAL MAIL]
 > 
 > From: LekKit <50500857+LekKit@users.noreply.github.com>
 > 
-> QEMU supports NVMe devices, but U-Boot only tries to boot from Virtio.
-> This is problematic when explicitly using NVMe, so fix that.
-> 
-> Additionally, RVVM virtual machine is almost fully compatible with QEMU,
-> except it only implements NVMe drives instead of VirtIO.
+> Enable framebuffer for better virtual machine integration.
+> Some guests need EFI FB to work properly.
 > ---
->  include/configs/qemu-riscv.h | 1 +
->  1 file changed, 1 insertion(+)
+>  board/emulation/qemu-riscv/Kconfig | 2 ++
+>  1 file changed, 2 insertions(+)
 
 Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
