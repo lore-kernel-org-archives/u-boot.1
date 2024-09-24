@@ -1,64 +1,57 @@
 Return-Path: <u-boot-bounces@lists.denx.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+Received: from phobos.denx.de (unknown [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33C33CF9C69
-	for <u-boot@archiver.kernel.org>; Tue, 24 Sep 2024 20:01:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75AD1CF9C6B
+	for <u-boot@archiver.kernel.org>; Tue, 24 Sep 2024 22:09:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 48BD388B14;
-	Tue, 24 Sep 2024 22:01:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C216388995;
+	Wed, 25 Sep 2024 00:09:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1727208062;
-	bh=NroMeT8LddEIkesSwO65ZLKRGIx4yF5EiSWierx8KW8=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=0CH1owtcx4CFYDh+66f4Kg1ARfEzcbmhQkC1WpmyrZ0a9yHWlUHdPnyJppdMbfJGw
-	 uRG08OrjIyKdYoKgPTcPthi8eDmTRvAfR1hNiKG2uST8JPHm+z20evAMtbU3Mz2EBY
-	 3Nho7F9dZCwKN01VCoFXEC8MGMUiTqW1ll9vfZ0c/87WrYFN/MiDn42wMZSV5WFZbf
-	 H42nn2TwGcTltVGctCNB1JfZA8V0/MiS+sOKhUOOvSV1LJyrbS6YxNLQv5q9UvyNn8
-	 JFGyDuIY+VnfDm6IRrvFFF1itrWHdjooPGk+rPiBuoTHEa0H1QiFWVHLfo31ep2yS1
-	 Fc6pKTlb4hAUA==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+	s=phobos-20191101; t=1727215761;
+	bh=w3ownSHkCWxmq/vI06FfFpZ0827yjzd/Z7VnXH9/u5U=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=fkqLP3Q/X5iQY2uTQDRgHAK5fOKwb7qXW0zZYcFeKf/uyNyZ0emVGkKU2EF5Tlk5G
+	 Imp9Dtosh0opXKD9/vX8M/4wW/x640wCWEzZMwoyzjbTlOflcZub7Q5gW9zRwTz05u
+	 /dFwJOe4hfcg8ekiGoNwWabEIaXU2ZlLa0+W540T7YLKYRahLA7NW083B6j75bNagd
+	 LH7sULzjFF7orQJjD4h86WaqSISmZhNBlMeAFMOJsFqVu5NI6POExoY8TWuB++hP+q
+	 p7OTGHfQwJNwnSPktkcjKRzfY7BidmwML59UVJjHkEWL6lQoI3ymvaHJuHULEwHLMW
+	 3z6modwGp/i/w==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id C632A88AD7;
- Tue, 24 Sep 2024 22:00:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 4BC4188580;
+ Wed, 25 Sep 2024 00:09:20 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1727208058;
- bh=NroMeT8LddEIkesSwO65ZLKRGIx4yF5EiSWierx8KW8=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=tZMcibPCT4mJ9eP+kfrodNQAIRe0zmkeETtvfItMs1W2qg5c8Y6SU7vTkVgV7vPyb
- o3IpztcolcX4P5dn4W17xc3BvoSHAv5VQ6IZ3cjf/oW9UdkHRHSBRC3MqecFjyC2nN
- 5iNtcJU8OheCKSx/N+nHnEHucUeJhu8/ldlQCYXX9hanxn3IMGX/pO960XZYDBs6Bs
- 7RJAOlIewACeIJV5SnJ4n8RoLqgwhWtXCs7NtUFrlALsn/EP1KPqgb+dJB/Wbxb8v2
- F25k0gc2ZyNbQRcv8ayk0luqVUsKn9VFVoPBwmUJ60YDJDTUtdB0RY+EM2vx2q/alO
- vbZ1FI+rkohXg==
-Message-ID: <5db7f491-e8f2-45d0-baab-fa309cb4db64@denx.de>
-Date: Tue, 24 Sep 2024 20:36:04 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 08/20] arm: dts: agilex5: Enable XGMAC
-To: "Chee, Tien Fong" <tien.fong.chee@intel.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- "Meng, Tingting" <tingting.meng@intel.com>,
- "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@intel.com>,
- "Hea, Kok Kiang" <kok.kiang.hea@intel.com>
-References: <20240920070242.20884-1-tien.fong.chee@intel.com>
- <20240920070242.20884-9-tien.fong.chee@intel.com>
- <92fa9c17-bbf4-49b5-8d7c-4b7d06f60736@denx.de>
- <DM8PR11MB5592C2455A4CFA9CDE0F6DD8D2682@DM8PR11MB5592.namprd11.prod.outlook.com>
-Content-Language: en-US
+ s=phobos-20191101; t=1727215760;
+ bh=w3ownSHkCWxmq/vI06FfFpZ0827yjzd/Z7VnXH9/u5U=;
+ h=From:To:Cc:Subject:Date:From;
+ b=zFVQnD5eAI6lktViWQ+S3Tua+qO5LvVM4vowGGuQGchjbE0+EfKLuOhNNKahRBmkH
+ dlsIvUbFkThO7HAPl24AfGhEuLPQEg+8pDIe2TLG+cG6wOnQCKZBFLyMc7wTkp1xS+
+ k0W6PYhdDQjQY/uJF52tm3A3JBeFtbF3/eUBWAe9b9+GRNsJXEvOt8TChQvGuKftsb
+ fRHAgnosbgF07xPwKvvmuZ0eRJb9sehcEajchiBWroC3IADAbYsiS0IDQLNMyLtbQx
+ +V8lcU+RsyZbr/ItRL1wRVVluDc313h+BG6Eln4qE9K9DNmPO1nevjoWZxbX/X6Qsg
+ 2hvW2r12G8xMw==
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <DM8PR11MB5592C2455A4CFA9CDE0F6DD8D2682@DM8PR11MB5592.namprd11.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>,
+ Andreas Geisreiter <ageisreiter@dh-electronics.de>,
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Fabio Estevam <festevam@denx.de>, Tom Rini <trini@konsulko.com>,
+ u-boot@dh-electronics.com
+Subject: [PATCH] arm: imx: Enable always-on regulators using board specific
+ workaround on DHCOM SoM
+Date: Wed, 25 Sep 2024 00:08:23 +0200
+Message-ID: <20240924220905.514122-1-marex@denx.de>
+X-Mailer: git-send-email 2.45.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,25 +68,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/24/24 8:02 AM, Chee, Tien Fong wrote:
-> Hi,
+U-Boot is currently unable to automatically enable regulators which
+contain DT property regulator-always-on or regulator-boot-on. There
+is an ongoing work to add this functionality to regulator core code,
+but until the proper solution lands, add this awful workaround code
+to force these regulators on. This is specifically needed to assure
+the VIO regulator used to supply ethernet magnetics is enabled.
 
-Hi,
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+NOTE: This is for 2024.10 as a bad temporary workaround
+---
+Cc: Andreas Geisreiter <ageisreiter@dh-electronics.de>
+Cc: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+Cc: Fabio Estevam <festevam@denx.de>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@dh-electronics.com
+Cc: u-boot@lists.denx.de
+---
+ board/dhelectronics/dh_imx6/dh_imx6.c             | 3 +++
+ board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c | 3 +++
+ 2 files changed, 6 insertions(+)
 
->>> diff --git a/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi
->> b/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi
->>> index 9eb21d65428..75ab05031bc 100644
->>> --- a/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi
->>> +++ b/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi
->>> @@ -122,3 +122,36 @@
->>>    	bootph-all;
->>>    };
->>>
->>> +&gmac0 {
->>> +	status = "okay";
->>> +	phy-mode = "rgmii";
->>> +	phy-handle = <&emac0_phy0>;
->> Shouldn't this be part of Linux DT already ?
-> 
-> This enablement not yet in Linux DT, I believe our Linux team is still working on it.
-Is there at least a patch posted upstream ?
+diff --git a/board/dhelectronics/dh_imx6/dh_imx6.c b/board/dhelectronics/dh_imx6/dh_imx6.c
+index c8dd30dfeaf..ada44e01424 100644
+--- a/board/dhelectronics/dh_imx6/dh_imx6.c
++++ b/board/dhelectronics/dh_imx6/dh_imx6.c
+@@ -30,6 +30,7 @@
+ #include <fuse.h>
+ #include <i2c_eeprom.h>
+ #include <mmc.h>
++#include <power/regulator.h>
+ #include <usb.h>
+ #include <linux/delay.h>
+ #include <usb/ehci-ci.h>
+@@ -127,6 +128,8 @@ int board_init(void)
+ 
+ 	setup_fec_clock();
+ 
++	regulators_enable_boot_on(_DEBUG);
++
+ 	return 0;
+ }
+ 
+diff --git a/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c b/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
+index c635735d89c..a389ab3c2d9 100644
+--- a/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
++++ b/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
+@@ -14,6 +14,7 @@
+ #include <malloc.h>
+ #include <net.h>
+ #include <miiphy.h>
++#include <power/regulator.h>
+ 
+ #include "lpddr4_timing.h"
+ #include "../common/dh_common.h"
+@@ -111,6 +112,8 @@ int dh_setup_mac_address(void)
+ 
+ int board_init(void)
+ {
++	regulators_enable_boot_on(_DEBUG);
++
+ 	return 0;
+ }
+ 
+-- 
+2.45.2
+
