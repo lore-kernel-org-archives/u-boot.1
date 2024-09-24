@@ -4,148 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA678CF9C6B
-	for <u-boot@archiver.kernel.org>; Tue, 24 Sep 2024 14:06:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAD9BCF9C6B
+	for <u-boot@archiver.kernel.org>; Tue, 24 Sep 2024 14:29:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E72F98852B;
-	Tue, 24 Sep 2024 16:06:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 3FBEB8897F;
+	Tue, 24 Sep 2024 16:29:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="CgRy2eXR";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MqCSUOrS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31DD888580; Tue, 24 Sep 2024 16:06:44 +0200 (CEST)
-Received: from EUR03-DBA-obe.outbound.protection.outlook.com
- (mail-dbaeur03on20622.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260d::622])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id CF97488995; Tue, 24 Sep 2024 16:29:47 +0200 (CEST)
+Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
+ [IPv6:2607:f8b0:4864:20::72a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B1BDC8852B
- for <u-boot@lists.denx.de>; Tue, 24 Sep 2024 16:06:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3176A88646
+ for <u-boot@lists.denx.de>; Tue, 24 Sep 2024 16:29:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=nxp.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=peng.fan@nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=wSlDr5YuLZGfdiE59UGvGOgikP5FvMO/UGbMBEt9xRBF5kHcMUmDa6eoP/4itdyuuR3lU0JKMHsHQAQPDIr5D4k6hfLeW5fvf4qzRjqH6+zQQ/xkDb/7CO1D1ajvybkRdDRm6Ukn2yEXiIq6ncZ3pfYiz/le9s67GpVZjGD+gSI3EmEgXzqvd88uOXXhPrRLVdovW0Mdh3kL2/IU9bAL8KdGA5qStNGhJW68pgsaTOEcpyohxMaNm+MsDMmIvGVOUc8SvhbkifIOCcBdQFQWJXOqfFYuDxIRxEUjYCu60QbmpdVEuq5dYMJolOTssUfUTwqLa/rmD5xIkdsECr/XvQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=TRdkKzALbVTtZPmLekqotCuEVKnleqD7cmDYuTcmyao=;
- b=ewIG5gwvuyVce7j+/id0cDfAdlEqqLX4/LWOjdqG9XCnGba6gZLebrC9GxTEQSghipdfT0Bb+T032G9rA7dIqUt/UTXXrJFCB0ew2cqa811QnXVabKZHr8v/NlqL5NUPfyf5MIFHl/A884YOYLA5Pd6XKhZLPEy3sz1EeXSYCqBCFNQPmcHmahwLwRHUXOgcUYK7WnGZLQiF+fJaPlB4O8IbfsiwR7Qhy7dX1r3rx8RXkvX7iEapqsvJdmj7l1KAb6Q7ChwUt50NIjGpgGOPqS8ECABS0v0tXyuaZDwI+dm2brNYV7ZS7ZNWY1Vytt6KCsK7QqJF24yR33hTShNtvw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=TRdkKzALbVTtZPmLekqotCuEVKnleqD7cmDYuTcmyao=;
- b=CgRy2eXRFcZ6yZEbeevpNdpiI6xSRSuyVEJ5bedPuQKEoKpeZgTQqV/+yWil1vh7uLtiDgpHsEv2P1sBes8incRxBdK32S8hNz3/HDD5WbCYXUBnvcxT4KCNkjk5aT1CoboFimDots550/VcsT/qWzJnrixVb6YyTv8oefR7pjMQr6CebiUgPW+VGtxwRCEZxWMBch5W4OSZkyGFRzpygyb+IFCPSIRaF0VM+2Gscw8zU0BLiT9S70ewRmL7tp41Mf+pfCHevuyJ/JVZ6gtVer0WaKPAOT4zcbPWYhJvrEpCGOKSNB6/p8lnnY0Djz2v4TQthh1U/VmJ8NL+gKxRgg==
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by AM7PR04MB6920.eurprd04.prod.outlook.com (2603:10a6:20b:101::23)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7982.27; Tue, 24 Sep
- 2024 14:06:34 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%6]) with mapi id 15.20.7982.018; Tue, 24 Sep 2024
- 14:06:34 +0000
-From: Peng Fan <peng.fan@nxp.com>
-To: Marek Vasut <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: dl-uboot-imx <uboot-imx@nxp.com>, Fabio Estevam <festevam@gmail.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, Rasmus Villemoes
- <rasmus.villemoes@prevas.dk>, Stefano Babic <sbabic@denx.de>,
- "tharvey@gateworks.com" <tharvey@gateworks.com>, Tom Rini
- <trini@konsulko.com>
-Subject: RE: [PATCH] arm64: dts: imx8m: Always name the generated fitImage
- u-boot.itb
-Thread-Topic: [PATCH] arm64: dts: imx8m: Always name the generated fitImage
- u-boot.itb
-Thread-Index: AQHbDoIGr5FcCMxyGkyGH5uNc+OA2rJm+LuA
-Date: Tue, 24 Sep 2024 14:06:33 +0000
-Message-ID: <PAXPR04MB8459E5AC0DB3DB3E0520759188682@PAXPR04MB8459.eurprd04.prod.outlook.com>
-References: <20240924130218.308845-1-marex@denx.de>
-In-Reply-To: <20240924130218.308845-1-marex@denx.de>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nxp.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAXPR04MB8459:EE_|AM7PR04MB6920:EE_
-x-ms-office365-filtering-correlation-id: 0cfe3a6f-e24b-499e-7c30-08dcdca218f2
-x-ld-processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|376014|366016|1800799024|38070700018;
-x-microsoft-antispam-message-info: =?us-ascii?Q?wumIGzAG4LGpxV1T+qCgM/TNhN8zgiJgLbJPJEEnFispvQYfiXKBvMjI+M9R?=
- =?us-ascii?Q?8v7DQzIMZ/EPNWTclEd2wC4e9m1xhsVmn+DIhB1Pe6/VLJUAdo++8fkJk0V9?=
- =?us-ascii?Q?my9jva7EW2iiEqsHRQDQ+tyzMuQYk0LcH6LTHFXvmzzPeuWZ5MDimq9ZdrIT?=
- =?us-ascii?Q?jnxcRmzFFPS9WQs7gtFmbytdpnqI9oNUUgSXHmDkKGN0BzrMmjynox+njZC4?=
- =?us-ascii?Q?vTHWb4Zybj/kRjuPEoAiO/ekPrsAJ1okRAzkUjfeaTYfCd1Zxm1mqa+B9IB7?=
- =?us-ascii?Q?d4q/R6xWz6hUjfsy/5YZhg1j15fpBZqK01dkWHee7ivmfbkOUpiNwpFfebX+?=
- =?us-ascii?Q?ht2yPuAKMuTRsR9edFbVk8gbJUkyMn68Iubq4QvittcKGnsOdJ7Ii9ZQYXWy?=
- =?us-ascii?Q?JyO4669uKB61X4yv7Inm4UNqJnuTi56RB6TH6v7KnWgoGlPgkJ/bOefddlg5?=
- =?us-ascii?Q?GCF9tq4tOEsKkM/fH+3JObNxADVI8FxRkk1sxGqaTq620yVjVR+5zb4Zq/5l?=
- =?us-ascii?Q?jmMpL63dRdCnGLMVn0u6AWCoaXxxmegncKFIbVNkhyF2nfmdBWckARsQv7Tz?=
- =?us-ascii?Q?ULQod7Tu61AsvKDF6ZcbFxHDzlOZ6Z7tzWP59SwlGSqdwBSqvW1XorZ8wN+9?=
- =?us-ascii?Q?uUr0wclTlgFwHbf6U2Zh4CmnnfCosYrDZp98Y1ek2cQI0Mt68GZYrZxK0wTH?=
- =?us-ascii?Q?Jsd07kpbbih6AjuOjlepMjV6BBDKIUsutOT/msDd9MXZjCIbp6P7M3lmj5tj?=
- =?us-ascii?Q?tQRaAABhQ+bG2eSvBHkuj2SEg3UaFYtNlV2XfVJtwa3XvHkwt6VPp+0mmuUG?=
- =?us-ascii?Q?Ro/01TJT9lJ+shEg+LIJMLvwWAqyiUTiP1EeqLF5hLRdLExXF0NYHK7NNH/v?=
- =?us-ascii?Q?sT0ZWqbXmHUJ9zrIcZYg3KyShpXFWsGyVHEkdIpDiXCRHJSfWgc5J0eUYdwt?=
- =?us-ascii?Q?efHk2aQnuml/pOjhKDE42jSCQ7izj+vPIKujNeG6g4/o6hm0Xl80Yb7/lbSM?=
- =?us-ascii?Q?gwcLN51Eb5/mEET6H7RB1LGQlK1MOaj0RM43OFgejzMoya4DBgo1V57pbeFE?=
- =?us-ascii?Q?obxppwzlSVqVnQ5u/y/p/+N+4i29uY3CwDP+SHmodvs+tR5u+69emqIBMSSX?=
- =?us-ascii?Q?gwaEZ/I0CAyrLUrLQCvfe25Bjv5e/RTVQwmDCCMYTbLn0oQ1fww/noP0GC/z?=
- =?us-ascii?Q?7Dox/yYZQqxI+s/wXif0G+YmHD8DVP+ZuiCaKKafEpbmoKHb91LNr99rnEyT?=
- =?us-ascii?Q?k2R+8VwBLmI62aPO1mKMIBjZpSUKySRH1DRVXab6XNQVcMl3/Z2ZV4euALTv?=
- =?us-ascii?Q?65PRTuJudvGeaLUvcHtbaeufKlNPLIkVf3SlqNdN3zapuROjp1eDtunEZovn?=
- =?us-ascii?Q?iYzHEo58qNOxDizFNMVbTP1M9Vd5q1VjvUSBl05CXkJLStCwig=3D=3D?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024)(38070700018); DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?mRQo913iLsCIiXa4m5WJyrMnwE6zR++LBFiTeX8HsHdS5QG35cy+f7M1quuY?=
- =?us-ascii?Q?FlBBLcQi1norZ1gEiI6cydkvEYD3Pmh/E2BHpSIeFlWgXbeBRfkM3q/fKxm/?=
- =?us-ascii?Q?h0M0UhfMYuk3dY72n41ywss+qNKp+cymtVW0oWoYrSPcN4TUOvtNjUw46gEP?=
- =?us-ascii?Q?6G5yYkyshBAeSk+kEPf9EN3+ZlL0RZVq7FOncOKFmvE7NS+N345qW1OG3m+m?=
- =?us-ascii?Q?TCDY94gl3A2fCOB79mWoDHXhn7DpJ0tyJt5QiyUIjKEBy9Cjmael6LxDh+uV?=
- =?us-ascii?Q?xRdE1tpTqV4/JsfUrphMJW4ptiaZVNhOwy80tTC5Pd91kNNREjAr35EfIoSz?=
- =?us-ascii?Q?Q37JfiNGPIYVHIrBQJcv5CnQNNEiLmhDO7RPN1WVJ8YnsL7qzEZvGpL/7pGk?=
- =?us-ascii?Q?3AEog0Qoy7mt8B+/2TAQebg8N8+WQkARjZNf/bbWJ/ZckfC16B0WLmqkUiky?=
- =?us-ascii?Q?qRkTjgTJRtF0YV63/nbH4ECRt7ekRi6gd3sap+d7ZD79fTzH01Plyo2hIsq+?=
- =?us-ascii?Q?j3BEIJRZqCq4s9QjDA3A5bY/teY+wuA6JB2rAeuQK50yYgMR63qkmk3Yuj/N?=
- =?us-ascii?Q?3pwZBmNo56ac66zdO7o73FncIAOTm9voJGzivY8qARJiKvmLQION8Ax9Frr7?=
- =?us-ascii?Q?ZlcQBdYLmY0H4qNjPSqYxGAgj51hmiwo7J8c4npI+8k9IFQJCWNOh0x2q6GY?=
- =?us-ascii?Q?oLXIJhUpJgtY5IWQNKeULdAbqHIwIu4P0sznlnW33vtG8pA66OvywPT8H1PG?=
- =?us-ascii?Q?LTrmBtnb9ot/PytZK6APKeeyazOy4rpcJb9pE/BIrmy3/VQU92LVzP5581Pk?=
- =?us-ascii?Q?re5PekknT3oST2b7msRYOfZYuNP4NLxAjbJmv9Uzq+oJf+T2kx8xbIVSA+k4?=
- =?us-ascii?Q?AlFbxL/qLGmbE0y7Ra6p8xi7qfCt0zCslvRXLzXq9jRSnmoj+/KcEHRQ8tMF?=
- =?us-ascii?Q?pyCVqra9gClkYAmzw4gFiBBqCAZa0Q9wKpesSjoEXplscc2p3DMMQgyBbZUG?=
- =?us-ascii?Q?nsEE7Wz723MMyxqJ90DjXAY7soQjQkxu4O2RSC1liv3ybb+Qhw/iur7oPIEH?=
- =?us-ascii?Q?qjbPKKDBwj3S1rvezfXBF2uOsFrPAXzazTryoL877pp9fxB3gZswEszVBzel?=
- =?us-ascii?Q?3UZQoiHJ/d2ZE2emKZhHBQK5uDbTK6vd8xqWlnmoiqdANooTbmxByyHHouRq?=
- =?us-ascii?Q?p8JEwjfJRYiKK230mbzPAjHxZdjqF4kOUbLlKpbE+sI63UOBpgRbAp/OnWIV?=
- =?us-ascii?Q?rBcfgBHY0psFw1UOBiIqc1goDGISXNP3BQdI2x7rm3c6rxc9ohj8yDVCCZO+?=
- =?us-ascii?Q?FTuYqnIb1VQicayi+AkodHWY/nI5tD3Ls88h7zQbBC2AxfOUY41PWUFbSdxY?=
- =?us-ascii?Q?cJ+N4bToubHerK+BVR9TGXO8PJX9vXoH3NtP6i0YYTDy3N1tZnWt7hjPrxux?=
- =?us-ascii?Q?gn+3JtG3XUzk4if93AJyVb74/pwGI+Og8KmNfu+SV7BEEwvNlpGwCHaQ4Wzb?=
- =?us-ascii?Q?Nsa8zUSiG8keLNt4VWrN7nrkPuO+8CeDzmMaQs17aYrhtzj8fbeSTG72BCsk?=
- =?us-ascii?Q?1I8HByWzIyGBOxBxhIo=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x72a.google.com with SMTP id
+ af79cd13be357-7a9a30a045cso531073985a.2
+ for <u-boot@lists.denx.de>; Tue, 24 Sep 2024 07:29:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1727188184; x=1727792984; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=C4s7Uep+7Q1O9yFI7v7/+ADAlXOJX3ORs0vwZ8smw0c=;
+ b=MqCSUOrS+363QfwhgYqz7YLAEUgdxVs7dwDzDrGzWpBF9dsgDJybTnBsf6w8J2G+7z
+ 3En3AmvVU3OVG6+QU4GjaaBDNSnj8Q2qxPej/bqXAaW0EFuPHFK4T1srHPVKqRAp7+vs
+ ls3iqFBdz1ediHSZzjYGKALyrCBx/Fewgx3uI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727188184; x=1727792984;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=C4s7Uep+7Q1O9yFI7v7/+ADAlXOJX3ORs0vwZ8smw0c=;
+ b=soLKrD8fV18ew9QMs5rGqaUWVDvMuw5HIZ0tjYVmox68ONNS1MmYORrys039eGdD5r
+ njt2NnrzN8XQTNTCjaXPqg9+U9GOqyFnp1b1kreZwn7W0bl6qa/87qw72h1gaGLWlTb2
+ YvVT1/k+0a7J5YsaYdPHr+LZ/3qwXMaFuATauxdMP/zuWfoiWHKYdpL3pFSgd1dXvD8Y
+ geyXJ5GIRX4I+wIk93O04f1BDLupri7BcOoRr5jELA/qZi9Pe8DS6LJZHpfC5NLvkdLH
+ LuFgTt7KlJV/ojuAO8iqwQfxLtgE4Wdm5rthMIHlg5LLxT5hwnQhmQz+QZMc9Z4wIrHG
+ 4ynQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUm8lH/FcmgBGxgSCaeuU4kLJ/ZB8q2tuNeKdR0Vx60ou5wFcVvx3gEQKLIOq8d88gPlrXmVLA=@lists.denx.de
+X-Gm-Message-State: AOJu0YwYqj55aZV7jOlUEWoh+9JXu29nDdXzr7QoDS83xHtSMv1w6Sd4
+ mv/jLxzgdnIpR4DCyRUaq7Jbokqm4q7iFAA/m9F10lekLgFXwV32r/GMHww2av2Lu8LFIm2BF+T
+ 1
+X-Google-Smtp-Source: AGHT+IG2JufAuL6lAGZC0tJ7bqWNqg5lefdVXSsbYatHwWoPhcfeuoR+1vYGxy3il1OGui2GqtAJsQ==
+X-Received: by 2002:a05:620a:450c:b0:7a9:ad47:edc1 with SMTP id
+ af79cd13be357-7acb8d99713mr2458402085a.34.1727188183815; 
+ Tue, 24 Sep 2024 07:29:43 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7acde532240sm73969485a.21.2024.09.24.07.29.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 24 Sep 2024 07:29:42 -0700 (PDT)
+Date: Tue, 24 Sep 2024 08:29:38 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Patrick Rudolph <patrick.rudolph@9elements.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Peter Maydell <peter.maydell@linaro.org>
+Subject: Re: [PATCH v3 22/30] board: emulation: Add QEMU sbsa support
+Message-ID: <20240924142938.GW4252@bill-the-cat>
+References: <CAFLszTg0cf_1ojqhO8ZXpkX+MoQYgX_-AFVzUDCyD2yE8U=rcQ@mail.gmail.com>
+ <CALNFmy0QJ4HNHhSKzx94dJ6jS_F0i9VoDqUwwVpe2SCeLB=pmg@mail.gmail.com>
+ <CAFLszTgf=_jJkfyXhxXDZSieMmM_cm7pss3ysM5yz1EphMYVpw@mail.gmail.com>
+ <CALNFmy1oOCNr3Kp8gt6RsjkJT=ShkOpJnQuSwvq2+ftwWtoyOw@mail.gmail.com>
+ <CAFLszTi4Jf2QZZqWd2pA35J1HPEZay=tkbbs94_eyFLJMuYOdA@mail.gmail.com>
+ <CALNFmy3fyS2+Xw4OUv92jfbP_hCBwY6Fi_79fKV+aJOqSm7jVA@mail.gmail.com>
+ <CAFLszThay6_ZixyHXW=1yhKkK_N4Q2QbmF+i=__p26t+LmiddA@mail.gmail.com>
+ <CALNFmy1mMFp8JP7ZoRdD2jhPQcDyhCM7023dopQ7VLkoSHVnWg@mail.gmail.com>
+ <CAFLszTi-dVVKRA9=8EROWphf3xYP+XZVW3Zb-ca_y8OPo135WQ@mail.gmail.com>
+ <CALNFmy1O+1fvdfwWSxhPK80vB6fc998hEECH9hbbdfCO1ZKw-A@mail.gmail.com>
 MIME-Version: 1.0
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0cfe3a6f-e24b-499e-7c30-08dcdca218f2
-X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Sep 2024 14:06:34.0701 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: zRPiGD37YVk2eQJb1Msw0t5w636df+TH5NjkUAjd7PFt9nQG6unsDHCErU5oGXK+FRGGQ+g1ps4mhrlGWxf5pA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR04MB6920
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="DBgimeyDniszRsRV"
+Content-Disposition: inline
+In-Reply-To: <CALNFmy1O+1fvdfwWSxhPK80vB6fc998hEECH9hbbdfCO1ZKw-A@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -162,14 +105,296 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Subject: [PATCH] arm64: dts: imx8m: Always name the generated
-> fitImage u-boot.itb
->=20
-> Maintain backward compatibility with pre-binman u-boot file naming,
-> the U-Boot fitImage used to be named u-boot.itb before, restore the
-> file name after binman conversion.
->=20
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
 
-Reviewed-by: Peng Fan <peng.fan@nxp.com>
+--DBgimeyDniszRsRV
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Sep 24, 2024 at 03:17:15PM +0200, Patrick Rudolph wrote:
+> On Fri, Sep 20, 2024 at 5:59=E2=80=AFPM Simon Glass <sjg@chromium.org> wr=
+ote:
+> >
+> > Hi Patrick,
+> >
+> > On Fri, 20 Sept 2024 at 12:29, Patrick Rudolph
+> > <patrick.rudolph@9elements.com> wrote:
+> > >
+> > > On Fri, Sep 20, 2024 at 11:37=E2=80=AFAM Simon Glass <sjg@chromium.or=
+g> wrote:
+> > > >
+> > > > +Peter Maydell for comment on the below
+> > > >
+> > > > Hi Patrick,
+> > > >
+> > > > On Fri, 20 Sept 2024 at 09:54, Patrick Rudolph
+> > > > <patrick.rudolph@9elements.com> wrote:
+> > > > >
+> > > > > On Thu, Sep 19, 2024 at 4:10=E2=80=AFPM Simon Glass <sjg@chromium=
+=2Eorg> wrote:
+> > > > > >
+> > > > > > Hi Patrick,
+> > > > > >
+> > > > > > On Wed, 18 Sept 2024 at 08:29, Patrick Rudolph
+> > > > > > <patrick.rudolph@9elements.com> wrote:
+> > > > > > >
+> > > > > > > On Mon, Sep 16, 2024 at 5:41=E2=80=AFPM Simon Glass <sjg@chro=
+mium.org> wrote:
+> > > > > > > >
+> > > > > > > > Hi Patrick,
+> > > > > > > >
+> > > > > > > > On Thu, 12 Sept 2024 at 00:23, Patrick Rudolph
+> > > > > > > > <patrick.rudolph@9elements.com> wrote:
+> > > > > > > > >
+> > > > > > > > > On Thu, Sep 12, 2024 at 2:58=E2=80=AFAM Simon Glass <sjg@=
+chromium.org> wrote:
+> > > > > > > > > >
+> > > > > > > > > > Hi Patrick,
+> > > > > > > > > >
+> > > > > > > > > > On Wed, 11 Sept 2024 at 00:26, Patrick Rudolph
+> > > > > > > > > > <patrick.rudolph@9elements.com> wrote:
+> > > > > > > > > > >
+> > > > > > > > > > > Add support for Arm sbsa [1] v0.3+ that is supported =
+by QEMU [2].
+> > > > > > > > > > >
+> > > > > > > > > > > Unlike other Arm based platforms the machine only pro=
+vides a minimal
+> > > > > > > > > > > FDT that contains number of CPUs, ammount of memory a=
+nd machine-version.
+> > > > > > > > > > > The boot firmware has to provide ACPI tables to the O=
+S.
+> > > > > > > > > > >
+> > > > > > > > > > > Add a minimal amount of devicetree nodes to make the =
+board useable within
+> > > > > > > > > > > U-Boot, provide documentation how to use, enable binm=
+an to fabricate both
+> > > > > > > > > > > ROMs that are required to boot and add ACPI tables to=
+ make it full compatible
+> > > > > > > > > > > to the EDK2 reference implementation.
+> > > > > > > > > > >
+> > > > > > > > > > > The board was tested using Fedora 40 Aarch64 Workstat=
+ion. It's able
+> > > > > > > > > > > to boot from USB and AHCI or network.
+> > > > > > > > > > >
+> > > > > > > > > > > Tested and found working:
+> > > > > > > > > > > - serial
+> > > > > > > > > > > - PCI
+> > > > > > > > > > > - xHCI
+> > > > > > > > > > > - Bochs display
+> > > > > > > > > > > - AHCI
+> > > > > > > > > > > - network using e1000e
+> > > > > > > > > > > - CPU init
+> > > > > > > > > > > - Booting Fedora 40
+> > > > > > > > > > >
+> > > > > > > > > > > 1: Server Base System Architecture (SBSA)
+> > > > > > > > > > > 2: https://www.qemu.org/docs/master/system/arm/sbsa.h=
+tml
+> > > > > > > > > > >
+> > > > > > > > > > > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elem=
+ents.com>
+> > > > > > > > > > > Cc: Peter Robinson <pbrobinson@gmail.com>
+> > > > > > > > > > > Cc: Simon Glass <sjg@chromium.org>
+> > > > > > > > > > > Cc: Tom Rini <trini@konsulko.com>
+> > > > > > > > > > > ---
+> > > > > > > > > > > Changelog v3:
+> > > > > > > > > > > - Add GIC and GIC-ITS to devicetree
+> > > > > > > > > > > - Select GICv3 driver
+> > > > > > > > > > > - Drop acpi_fill_madt and use driver model instead
+> > > > > > > > > > >
+> > > > > > > > > > > ---
+> > > > > > > > > > >  arch/arm/Kconfig                            |   1 +
+> > > > > > > > > > >  arch/arm/dts/qemu-sbsa.dts                  |  49 ++
+> > > > > > > > > > >  arch/arm/include/asm/arch-qemu-sbsa/boot0.h |  33 ++
+> > > > > > > > > > >  arch/arm/mach-qemu/Kconfig                  |  36 +-
+> > > > > > > > > > >  board/emulation/qemu-arm/MAINTAINERS        |   2 +
+> > > > > > > > > > >  board/emulation/qemu-sbsa/Kconfig           |  58 +++
+> > > > > > > > > > >  board/emulation/qemu-sbsa/Makefile          |   8 +
+> > > > > > > > > > >  board/emulation/qemu-sbsa/acpi.c            | 235 ++=
+++++++++
+> > > > > > > > > > >  board/emulation/qemu-sbsa/dsdt.asl          | 483 ++=
+++++++++++++++++++
+> > > > > > > > > > >  board/emulation/qemu-sbsa/lowlevel_init.S   |  22 +
+> > > > > > > > > > >  board/emulation/qemu-sbsa/qemu-sbsa.c       | 481 ++=
++++++++++++++++++
+> > > > > > > > > > >  board/emulation/qemu-sbsa/qemu-sbsa.env     |  14 +
+> > > > > > > > > > >  board/emulation/qemu-sbsa/qemu-sbsa.h       |  38 ++
+> > > > > > > > > > >  board/emulation/qemu-sbsa/smc.c             |  72 +++
+> > > > > > > > > > >  configs/qemu-arm-sbsa_defconfig             |  10 +
+> > > > > > > > > > >  doc/board/emulation/index.rst               |   1 +
+> > > > > > > > > > >  doc/board/emulation/qemu-sbsa.rst           |  98 ++=
+++
+> > > > > > > > > > >  doc/develop/driver-model/virtio.rst         |   1 +
+> > > > > > > > > > >  include/configs/qemu-sbsa.h                 |  98 ++=
+++
+> > > > > > > > > > >  19 files changed, 1734 insertions(+), 6 deletions(-)
+> > > > > > > > > > >  create mode 100644 arch/arm/dts/qemu-sbsa.dts
+> > > > > > > > > > >  create mode 100644 arch/arm/include/asm/arch-qemu-sb=
+sa/boot0.h
+> > > > > > > > > > >  create mode 100644 board/emulation/qemu-sbsa/Kconfig
+> > > > > > > > > > >  create mode 100644 board/emulation/qemu-sbsa/Makefile
+> > > > > > > > > > >  create mode 100644 board/emulation/qemu-sbsa/acpi.c
+> > > > > > > > > > >  create mode 100644 board/emulation/qemu-sbsa/dsdt.asl
+> > > > > > > > > > >  create mode 100644 board/emulation/qemu-sbsa/lowleve=
+l_init.S
+> > > > > > > > > > >  create mode 100644 board/emulation/qemu-sbsa/qemu-sb=
+sa.c
+> > > > > > > > > > >  create mode 100644 board/emulation/qemu-sbsa/qemu-sb=
+sa.env
+> > > > > > > > > > >  create mode 100644 board/emulation/qemu-sbsa/qemu-sb=
+sa.h
+> > > > > > > > > > >  create mode 100644 board/emulation/qemu-sbsa/smc.c
+> > > > > > > > > > >  create mode 100644 configs/qemu-arm-sbsa_defconfig
+> > > > > > > > > > >  create mode 100644 doc/board/emulation/qemu-sbsa.rst
+> > > > > > > > > > >  create mode 100644 include/configs/qemu-sbsa.h
+> > > > > > > > > >
+> > > > > > > > > > Wow there is a lot in this patch!
+> > > > > > > > > >
+> > > > > > > > > > I don't think this should be in a separate subdir, just=
+ using
+> > > > > > > > > > board/emulation/qemu-arm should be OK?
+> > > > > > > > > Why would it share the code base with qemu-arm, as it's a=
+ completely
+> > > > > > > > > different board?
+> > > > > > > >
+> > > > > > > > Perhaps I misunderstand this...what kind of board is it? Ho=
+w do you
+> > > > > > > > run qemu for this board?
+> > > > > > > >
+> > > > > > > For QEMU SBSA you use -machine sbsa-ref, but for qemu-arm you=
+ use -machine virt.
+> > > > > > >
+> > > > > > > Both can use a cortex-a57 as CPU, but that's all those boards=
+ share. They have a
+> > > > > > > different memory layout, virt provides a complete FDT, while =
+sbsa-ref doesn't.
+> > > > > > > sbsa-ref needs an Arm-TF and nonsecure boot firmware, while v=
+irt works
+> > > > > > > without a firmware.
+> > > > > >
+> > > > > > OK I see
+> > > > > >
+> > > > > > >
+> > > > > > > > >
+> > > > > > > > > >
+> > > > > > > > > > I see you are setting plat data in the board file...is =
+there not a CPU
+> > > > > > > > > > driver which can read it from the devicetree or set it =
+based on the
+> > > > > > > > > > compatible string?
+> > > > > > > > > The CPU driver could read the data from devicetree, but t=
+hat would require a new
+> > > > > > > > > DT binding. Is that the preferred method over using plat =
+data?
+> > > > > > > >
+> > > > > > > > It is fine to use plat data...but it should be set up in th=
+e driver
+> > > > > > > > where possible. In this case if you don't have a binding yo=
+u can check
+> > > > > > > > the compatible string of the device (or even the root
+> > > > > > > > compatible-string) and add your plat data if it matches.
+> > > > > > >
+> > > > > > > I was able to parse everything from the DT, except for PMU IR=
+Qs. Those
+> > > > > > > aren't needed to
+> > > > > > > boot the platform and can be added later on.
+> > > > > > > Will send out a new revision soon.
+> > > > > >
+> > > > > > OK
+> > > > > >
+> > > > > > >
+> > > > > > > >
+> > > > > > > >
+> > > > > > > > >
+> > > > > > > > > >
+> > > > > > > > > > For FDT fixup, can you please use the event and the ofn=
+ode interface?
+> > > > > > > > > > See EVT_FT_FIXUP and bootmeth_vbe_ft_fixup() as an exam=
+ple.
+> > > > > > >
+> > > > > > > It looks like EVT_FT_FIXUP is run rather late in the bootflow=
+, used to
+> > > > > > > updated the FDT for OS usage,
+> > > > > > > but it must be run early to update the minimal FDT passed by =
+QEMU and
+> > > > > > > add the missing nodes
+> > > > > > > for U-Boot drivers.
+> > > > > >
+> > > > > > If the QEMU FDT is not suitable, shouldn't we use the U-Boot/Li=
+nux
+> > > > > > one? Do we have to use the one passed in by QEMU?
+> > > > > >
+> > > > > There's no U-Boot/Linux FDT, since this is an "ACPI only" platfor=
+m.
+> > > > > In EDK2 firmware there's everything hard-coded as well to generate
+> > > > > proper ACPI code, but since
+> > > > > U-Boot relies on FDT, I decided to "fix" it and add the required
+> > > > > missing nodes. This allows to make
+> > > > > use of U-Boot existing infrastructure around FDT.
+> > > > >
+> > > >
+> > > > So wouldn't it be better to pass in a u-boot.bin with the DT attach=
+ed?
+> > > > Adding the thing in code seems pretty ugly.
+> > > >
+> > > Would that make use of CONFIG_OF_EMBED?
+> > > I decided against this option as it "is not recommended for productio=
+n devices."
+> > > However I agree that it's possible and would be much cleaner and less=
+ code.
+> > > Will look into this.
+> >
+> > Well, indeed, it would be better not to use that. Does QEMU support a
+> > flat binary or does it require an ELF? Given the choice between
+> > OF_EMBED and your DT-building code I would go with the latter.
+> The first executed instruction is at the start of the flash, thus it's
+> not possible to use anything that
+> has a header. Since this is an emulated platform that will never
+> provide a full DT it might be
+> OK to use OF_EMBED here. It would be much less C code and might be
+> easier to maintain.
+>=20
+> >
+> > >
+> > > > > The QEMU generated FDT contains a bare minimum of nodes and isn't
+> > > > > suitable to boot an OS.
+> > > >
+> > > > Yes, I am not very pleased about that, particularly as my patch to
+> > > > allow passing a proper FDT to QEMU[1] has still not been accepted.
+> > > >
+> > > The SBSA ref machine was designed that way, to make sure that only AC=
+PI is used
+> > > to boot the OS.
+> >
+> > Er, but doesn't firmware run before the OS? It seems like a strange
+> > design decision.
+> I guess it was designed with EDK2 in mind as UEFI is mandatory to pass
+> the ACPI table pointer.
+
+This is the reference platform for the "never give the OS a Device Tree"
+Arm platform specification, so, it makes sense that no, really, there's
+no device tree associated with it. Since it's also the case that we
+better never give the OS a device tree, maybe this is a place where
+OF_EMBED is fine and makes sense?
+
+--=20
+Tom
+
+--DBgimeyDniszRsRV
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbyzMsACgkQFHw5/5Y0
+tyx8QgwAtSn72bWDa8xvnj7rS7my1BIQEAY+KTPxGZolmz+CdCStargMjumuF/tF
+nV1BatXgNONTn6bWRDrgIXfE7p+qq3Gb+pPaNphwkklukhM+s2OXTMj38MHEFnCW
+v2AHIYnUfHGg6woRykSerOAu9T+7994G5jJU+Xlcu+lzKdTgQa+HIIOUxDBd8sYi
+RJgxYQjqJTPHLWHKFuekHedx/B7u/aeXqTY8hCoeZHWA2ROlcDNa/oTc/D13e1+K
+Dwl1NQPTvo4j3KImN5uxzXHo0iJiDg6RvAqiLj0b03hYxwrQW+3eh2lZRTOo8npP
+bFqcTKeVzYgedr4jE5QHXJEkl8YGSmTagH3TNPIPkORVF30+75Nqf1vzuaXazXqg
+Kl2bLzuAEg3UwYtIn5vueA+vNdyHrG712dSRWD/6TtiYvpEzG+mqo4eGwCx3BR2p
+a0/IuzKI8eFCS/HSnRA4z5lx18Pf0MCrjR6zvrs7kFlvaymEbQTr8/YQOEXDUV7k
+vrIK4tD5
+=IHP9
+-----END PGP SIGNATURE-----
+
+--DBgimeyDniszRsRV--
