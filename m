@@ -4,163 +4,162 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0D4ACF9C71
-	for <u-boot@archiver.kernel.org>; Tue, 24 Sep 2024 09:20:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B38FBCF9C6B
+	for <u-boot@archiver.kernel.org>; Tue, 24 Sep 2024 10:24:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA56F88210;
-	Tue, 24 Sep 2024 11:20:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F1396880D8;
+	Tue, 24 Sep 2024 12:24:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="WC4d4GAm";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="A2xYgmjj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CDE96885F5; Tue, 24 Sep 2024 11:20:00 +0200 (CEST)
+ id C0B1E88770; Tue, 24 Sep 2024 12:24:25 +0200 (CEST)
 Received: from AM0PR83CU005.outbound.protection.outlook.com
  (mail-westeuropeazlp170100000.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c201::])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B340488005
- for <u-boot@lists.denx.de>; Tue, 24 Sep 2024 11:19:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 74E5886E61
+ for <u-boot@lists.denx.de>; Tue, 24 Sep 2024 12:24:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=cherry.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=I+8MrusaQQeJrJZwFDxFIZ3Cu2VFeIOw4/AW+1lU+NeEZvXCZ5luErqTL+iPEyzO3bK706C48EnTPmvM+VyMggZLyQNNMHSA8xiDkq3AdqUs7qhyYegq0m60ovRVQhwEtriOwLamDmMHKIaoqD36JNu//OnogjlGY+bMLhUBtoadLfzk5qFpbedv/GK9EpEJjpry2kygNf+LeriUTGa6jBoTNCV0hMUzkhU3V/w1w1dBTwtB2qXc2U0xEACFD1zm0seB6kYWNgUDc2Q7JtoyBD6CLLd4S25i2Tf49fDws3loD+bM5htajAWaCezVxQY55qWaF+UimY+Veayvqcl/BQ==
+ b=yAZpgj8JCSU7ldF1XIMnaf2GKj5HxJbcaE+aFYQuyVK7W2+60IM/58qnZWgOFTVUCRSXJsXSzmcdGqVr1zgelcG24tzuK6Kthkf3Ex21c5ALUs2b1JtF3XGn5cQUz+hwYMsa77V8ut00nLtRNJyAHkpnZOuTpkCNBHxziHpk4VwJayMieuGU+4TNbYIEYo08TOqc3FFjx/J5vOQ+wNU2RMOgSz9kPzWOfeYd81xs81hSTm++nYaAsYmc6trKwX9eq4h/PuTKM00aTp+muNyvzcv7M6fcle7X1ytZjthCpC/KZ1E+Mwbcu9Yvh3yZlZ+6M8LdEsaAcvRyjr8k8PXQaQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/KRyeDNzCIzrRusZg5CDfTfdwSMnFAFGLM/hfFotrVI=;
- b=O988XORxOwnAsDpfTDTMbSRAByOMUw/aQx3maVHOf7RqGy0cayP5k+sd7E9mZ1SD2ao7J/Q6btVMJUtBtiHWpb/rDmnlvwRRegzLCZMUSuSaWjf4BuBgmCFXN+q8PTrtiaSKmAporeajaPF62ePu5mxaKm4bcxTmO+5VDXQlg/6JA6nUzI73baWKOZV5tXCyyqqRpMD4Rf2cA7/XF1P6FIMW0T474rtjo4PZSBBB5Cdfgf2TUuw0XoRlbGUIT1IY8aLPaEtl1Gr9eR3kGBIe4kXuXiVMgsCd9xXjIXxqH+ZNsDeDNKqL0VWhT/e8XJK/xDhiNaBUSf1DfKdC+G2mNw==
+ bh=EsY8y4CWAKTExgkQ8A3K01XU71BuAJWX+3t17GjT36g=;
+ b=jWeQBTR1NGs1cViz775Fm9Jap+YW4B/olJ8me8NPucibMWe6OnnJe74b/0YuOk0m3nGRy3WM3uCvRIUqjV+rm3x4bzosVRRsKnYHVG8PVKwbSLChWlm28+kscY6njVjVWb5ZnjewEjiVM9No6eRAKt8XkWZXgZ0APLWf2pE7nShxf4w4+4hxmz5cc4b6oqvXPDJpabmQMnvElghoG7uZU6fkHpkj4p7WlqQgwYephkqEhZ1wUpjPVzkAhPxsc5E7VPChIDropbWOh7DiFVL/8gX58MQh7cnZDrpjXIfgfnYrTSpwUDvOhSG6L7QssHlf/QBuCWU6AT5gwS0uhpVSNw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
  dkim=pass header.d=cherry.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/KRyeDNzCIzrRusZg5CDfTfdwSMnFAFGLM/hfFotrVI=;
- b=WC4d4GAmToQfxV8gM4hXP+SQm3o+67Dl3dWCXk8Eq20DXsPjfySn9rGRjX6wbkv7JrvtlV3UDdVFS7Y5MqkNdjHcwhvQZRm/3sZgB9G+dRr+G4DotrVVhuta+0qzi+PVLZ87RcE9eEEMusVP08MjcOLFmsduWviu1H5DM20CYOE=
+ bh=EsY8y4CWAKTExgkQ8A3K01XU71BuAJWX+3t17GjT36g=;
+ b=A2xYgmjjTD7KchA6yWONE4B2ybvaFJPPKRxZCYDo0+5YdG4ixt/xOCnpeFVSB+jNH1yKCqa2i4mMg6GUDqmv8H0r0R26i6iWVVOAQw1S9JxPiDPFOJ/sDyFEN1Nv06BukgzTV0xTirtEI8yB97Sy/hJ/bOYj/8Ik0EqYrD/01ys=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=cherry.de;
 Received: from AM9PR04MB8906.eurprd04.prod.outlook.com (2603:10a6:20b:409::9)
- by GV1PR04MB10380.eurprd04.prod.outlook.com (2603:10a6:150:1cc::20)
- with Microsoft SMTP Server (version=TLS1_2,
+ by DB9PR04MB9751.eurprd04.prod.outlook.com (2603:10a6:10:4ce::5) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7982.27; Tue, 24 Sep
- 2024 09:19:50 +0000
+ 2024 10:24:17 +0000
 Received: from AM9PR04MB8906.eurprd04.prod.outlook.com
  ([fe80::d379:5378:b1:cea]) by AM9PR04MB8906.eurprd04.prod.outlook.com
  ([fe80::d379:5378:b1:cea%2]) with mapi id 15.20.7918.024; Tue, 24 Sep 2024
- 09:19:50 +0000
-Message-ID: <dc3b71ba-2993-4c5a-82cd-4f66f90b86cf@cherry.de>
-Date: Tue, 24 Sep 2024 11:19:49 +0200
+ 10:24:17 +0000
+Message-ID: <3b41755b-bc5b-4729-9f6d-5229634e8a70@cherry.de>
+Date: Tue, 24 Sep 2024 12:24:16 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH V2 4/4] board: rockchip: Enable PD_VO before driver access
+Subject: Re: [PATCH V2 2/4] board: rockchip: Add vdd_cpu reg fixup for RGXX3
+ Series
 To: Chris Morgan <macromorgan@hotmail.com>
 Cc: Chris Morgan <macroalpha82@gmail.com>, u-boot@lists.denx.de,
  jonas@kwiboo.se, trini@konsulko.com, kever.yang@rock-chips.com,
  philipp.tomsich@vrull.eu, sjg@chromium.org, dsimic@manjaro.org
 References: <20240919140022.511067-1-macroalpha82@gmail.com>
- <20240919140022.511067-5-macroalpha82@gmail.com>
- <da41ca54-871e-4e40-b7c8-626a3c4a3f1a@cherry.de>
- <MN2PR16MB2941B5324EEF8193605018F1A56F2@MN2PR16MB2941.namprd16.prod.outlook.com>
+ <20240919140022.511067-3-macroalpha82@gmail.com>
+ <2a207719-e37c-4289-9470-2324928e24bc@cherry.de>
+ <MN2PR16MB2941DA215E7CDBFD7E3AF730A56F2@MN2PR16MB2941.namprd16.prod.outlook.com>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <MN2PR16MB2941B5324EEF8193605018F1A56F2@MN2PR16MB2941.namprd16.prod.outlook.com>
+In-Reply-To: <MN2PR16MB2941DA215E7CDBFD7E3AF730A56F2@MN2PR16MB2941.namprd16.prod.outlook.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR3P281CA0008.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:1d::14) To AM9PR04MB8906.eurprd04.prod.outlook.com
+X-ClientProxiedBy: FR4P281CA0354.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:f4::11) To AM9PR04MB8906.eurprd04.prod.outlook.com
  (2603:10a6:20b:409::9)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM9PR04MB8906:EE_|GV1PR04MB10380:EE_
-X-MS-Office365-Filtering-Correlation-Id: 93a22ad4-2ee6-4141-9e70-08dcdc7a0ab7
+X-MS-TrafficTypeDiagnostic: AM9PR04MB8906:EE_|DB9PR04MB9751:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6b66cdfa-0609-42f5-8bf9-08dcdc830b6c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?N2VPWWpTRnl5c05kVU5taUsxZXArZFBRVkJjWkxDeGpDNDg0enhURFhzY0lx?=
- =?utf-8?B?dDlGNlIvdDhISUFzaGRJMzYrZnl1YldhWGhWdURReFJiVndsZ2Vnc1UvYkd5?=
- =?utf-8?B?ZFFoOW9CekpUbjhJdTluQS9IdHBneDVIaXhvY1lUbWxlSnVickppeXBNazlJ?=
- =?utf-8?B?TFhUcEppajNWd2ZmSER4TGpLT244d0YvMW51S0NXWXhqcVJJSVc0dTl4K3lT?=
- =?utf-8?B?eThCUXFTaUZjOFBRMzlVQWZuWXZ6SEs1Zi83M0hwU1FzYVdvT3ZpSFJoL3E4?=
- =?utf-8?B?eWpGN0RQdVhVZml5RTJoN3dlaDZudThiWGYrazFLT2M4S2R4S0tYdTM5ekxv?=
- =?utf-8?B?L2prdW9ibWtrNlc0dy9FRWpoUkNiQTluMHF6M3poNnEyczF0dGdva2FQc1lv?=
- =?utf-8?B?empPMGc4TW12Yk1yTUxFeC9mL2tDUk1USTdkWVZvQnhDTmE4WW9aZG9NSHpO?=
- =?utf-8?B?TkluWHd2OHBESlBldWZHUHdyZW9pMFhkb01EMkNtM0twTDRZd1JjWlpwbGFw?=
- =?utf-8?B?bWg2eldtdStlY2tCOENGMEJ1QVRORkZWS3NNOGxvczYwNSt3MjBvQXhpTmlL?=
- =?utf-8?B?Sm9Nd0VMSmZzR2pjZTQxOVVGWGZFaUVzdXBsc1paU2psclA2MzZFOHIvcGJQ?=
- =?utf-8?B?QVF1UWkxTm9vemhheVJaMVI4Z2RDSm1BTThvUmd0YnJ3V3J4aFM4VkVwRU1C?=
- =?utf-8?B?VEJDV1lFT2dIZTY4RTdDTzJYZHF6dmtLU2FmS0MwbjQzaHprYXlYckd3aUlM?=
- =?utf-8?B?WFN0SzBhR2tFT0FjQWowK0prYnB4ZVBjQS9uR1MwSFFVUG80cjVkeTlWQmlE?=
- =?utf-8?B?UXFWUHNFMzVIQjMrRkhDVm9CZ29oeUlVelB1UTI5QzRTdVU4VGk1LzNLdlNM?=
- =?utf-8?B?QUhxMWJQdkpkNFJ5OExKdWhVM0RmV2pUZk4vWTNBSnRXa0RiNVFnL2FUVFNu?=
- =?utf-8?B?RU05SWpabjRpRnQ3dVJGYkwvK1NmdU14SHM4dlJKUzNCMTdIRS9PVnVTekFv?=
- =?utf-8?B?U05WZno2UTBFWERqVFZaTzQ0Wk9oVGR0M0hTRGYvVlZURksyUzVPWEh2WnVO?=
- =?utf-8?B?WUx5NGwvbnZDRjhSWmZBNW1rLzV6bmlPKy9QYzR1SlRuQVpVM0swQUpIYmZp?=
- =?utf-8?B?ejJxcWtLWFkzbm9qdlNxWkZRNjRBblorNUZsUi81NHRvdzBTcFpFNllJbGxK?=
- =?utf-8?B?cGVCVFMza3k0azhYOGlnNVc5QWI1WkpNNTJMcVNsR2FVbnJwUThiQ2tCNFNT?=
- =?utf-8?B?YXBBV01IOXAxQlNZVEhzN0Q0VjZIOEo2bW9LQ29BRDVvMjkrbjZoNStLZTFy?=
- =?utf-8?B?aXNvU2tWZFc1WTlaTGQydzlnUWoxbG1IWEVLVEZiZ2JENnFzTDkrMWY5NC9Q?=
- =?utf-8?B?NDBFNTNOTGtoS3dFOWtTK0NBM1VaTCtwejIvcEpIWm5wT0dNcHU2RWtHTHVz?=
- =?utf-8?B?RlAyekVLS0xmUWJpN0RQWkZLYXlFQVVxRWdnMklmWlJkUVhqem9jK0RhaU9u?=
- =?utf-8?B?dEQ1S2p5WHBlSk5IVG54eVY3Z1RXUkw0bElRVG8rY3VSVHVjdHZCMEJvc0VE?=
- =?utf-8?B?SHkvSy9yUVNDSVdoSTFZODYwbHlwa0VhOEg1amdKM3ZtaGV2V211bzFIWlVF?=
- =?utf-8?B?VE1ycDdZZ2VzYkNJVUdxMUh6M0E4cDY1RjZidm1HUEhyVlhpQ2x3WjNESjg0?=
- =?utf-8?B?NEMyUjd5T3FKc0NaTEtCWXl6bnJLZCtjR3dmQmROUXl1NkdXOHFUWE9uYmpS?=
- =?utf-8?B?Vmhzcm9yekVWbGE5QjFQNUxYSXcwNE1ZOE1Wems4M1krOHhvaC9URkhNZS9h?=
- =?utf-8?B?S0Z3R3lpMmZ0M0ZiSVEzZz09?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?L1RFeGxqejJIQlNKdzJFK3RLZVdtSGREY1dMZDBQQ05jSkpLTVJ0OGsvb1p4?=
+ =?utf-8?B?eis4cXorcHFjbGN6cWgzRElwMmZvMGZuQytZVlo3aXhqK3FoblpKVitHMVRz?=
+ =?utf-8?B?LzZrdWNuUzBub0h4V1lUY0ttVEJuT0dRYWlFUWF0Rm9NUHAySWxlK3gxVkRs?=
+ =?utf-8?B?WVJuYTgybG1nMWlrRmp6QXJxTnZiSUdYS3VTNGZIZFdDdDVIZlg0SGR4WmNs?=
+ =?utf-8?B?TmJZcmh2RjZsTGtRamxxV0lBYU5jQzBMWU96VUFqZGJxTlA0QzJRZERPMGg0?=
+ =?utf-8?B?aXNnWmNTVkxCdWlaUUdBMDZaNW42S0VDdUMwd2tVWDZTOWJMcGNVUUh1ZzFL?=
+ =?utf-8?B?ZVV5S2F5bkcyaER0UDlFTWJBcWxmVjZSWHlDaEF4QmYxeEFmS1pVR1liZTVv?=
+ =?utf-8?B?YUpybVFNKzZLclhVTzJZUWkybGVDSE5GbkNzMVVaWnVhVmE3NEd6aU05VXdG?=
+ =?utf-8?B?Qkc1cFJXb3Iyd0w0Q29IWDhUWmZaNVNObXFmTEQrT0Qra2Y4YTRqVEV4Z2Ex?=
+ =?utf-8?B?R2lNM2V3L0F4ZSt0MkhDUEo4VXNLaThDUUJTVjljSDFKOW5jL25JMzhheW10?=
+ =?utf-8?B?RWlBMnluc3lHWS9PYUE4a3RTMUhvemlJNHZOajhqQ0tWa1N0YXRJVUlKMENw?=
+ =?utf-8?B?VUpKaDRnK0xuTlkxNHhkSUVBOVh0NkJLTUJrcCthdE45VWNQd0RiSnptUytj?=
+ =?utf-8?B?TGFXR0JJOE1uRHU0OC8rRzEybW1Ja3I2SzliQnNjWmgwY1d2V3dIMk1IdGFo?=
+ =?utf-8?B?enZ1Tm5kM1lSNFBzeDBDZm45djFtTG9ZeFdIbWkrMTcrYmJZZ3Z0OERDUENW?=
+ =?utf-8?B?Q2hLZDZlSnNYaFM5UzhZdDREbk9zR2JUNFBTVXNUakxvRGpESEo4MkwvRDlZ?=
+ =?utf-8?B?QlFYOFVwQ1ZXWlFja2dhWnNYbm9sYW84WjJXNEl2akV4Vkg5SW5uMUZ3S1dT?=
+ =?utf-8?B?N0VZQTc5WHdhU0xtdXUzdERnYUJXM2JlcXllQXBvWFBDVTRmQVZud2ZnSXM0?=
+ =?utf-8?B?M0M0TGNxS0NQN1RoS3REZUs1U3BXdUdiRzQwTy9GejVRa1I0STR3NzFSNXla?=
+ =?utf-8?B?MTV1ZmhmNEY0cXZDME8xNFBtTlhyOTliTlpYK3AwMmM1MGNCU2V1dVhOZVhm?=
+ =?utf-8?B?SHJPVFdMMVFlOC9nNDVpR3FLVWpVUDRUbnNaaWUrNVhzTEJPc2Jjdks0U0t3?=
+ =?utf-8?B?cFkvVnBLRFhENWlDTE83Z3htZjF5ajgzd3Q0dEVySE1lSWpIWCs1V0pQLzVG?=
+ =?utf-8?B?emFLV09NTWVkMXVyVFZzVmtDdDg2RE1FSzllckY2QnQzdHlrWkM3ZmlYLzV1?=
+ =?utf-8?B?RnBJU3FRL29sMDB0NzlFeHFmNE0xK0FaYjhsWWxCTFVjRi9ac0Yvbi9ZOGdF?=
+ =?utf-8?B?S2hPZ2s1a3lhTW1RYUcyZ2o5Sk1hbHhHQ21QdG90NVU0VENJemxVNXNqR2ZJ?=
+ =?utf-8?B?QUY3RGpGR2RhaHUzT01OUTN5ZHk2TUw5QThNZVBDWHpxRVhGeDk3WnhJS1pH?=
+ =?utf-8?B?ZXhIRGxjN2ZrQXR4UlZUTy9FVXNHVGZRMXNXZFpmclRzK2p1WkloRGk4UnJ1?=
+ =?utf-8?B?YjJqbXhKZnZiOEI0L0VIb0d3YWRLcnAwNGxLODAxcWowWlRSd1ZnZVF6REFQ?=
+ =?utf-8?B?cmpENExnUEV2Sm1Hak1JVjFUTmFhTk5nbGZPNkd2d05YRUtQT1pkUEROZTdI?=
+ =?utf-8?B?akFHMUtreUt5VHRndHRSYVZrTnJkSkl2Q1BSZ0dHL3FFZytVOVNSK1NRPT0=?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AM9PR04MB8906.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SlhTWGllaTlxemZJWlY4TWdFRnBNS01RWUJkaCs2K09rRVEvSmpRNHR6cXZn?=
- =?utf-8?B?di9nRDVQMzhyaWRTVllFbTNwYmVnVHYxNW05UVBpdnBmTStzbnAvSUJvTFF0?=
- =?utf-8?B?QXFEKzR4UE5UdldxOEhzZm5SRjhyS2RvOTNXUjRUckVuVzliczRGKzQxMTFS?=
- =?utf-8?B?TWcvaHRtY0NZeFlyODYvcnFINEVIUkdaRjNnZUw4YWpaL0dnaUl0QTRMUjVX?=
- =?utf-8?B?Z0tYd2hXZ3F6RGdURXpMN1BCR2xlNTVXODRrZS8wbzFTbURQTVdoS2RTR3Vu?=
- =?utf-8?B?c2hRQkZUSXRxM3RlcE1tblhHcEljY0o3VmlmeUdPdW1mYTdvZmlvZGZ1Zm9x?=
- =?utf-8?B?cU9PV1U4RGtYcTQwZUZGcVdleUR1TnZjck5xa2hsZXZOTUxRVWV1VDZtQUkz?=
- =?utf-8?B?dzRFNGxoMjJuNU1TU0R1d09iVTkyajdUQytKQ2ZZZ29XakYvVEt4YTBLWXZK?=
- =?utf-8?B?Y1h1d1drOUVXY0hXL0ZVVXNqZ2RQTWR1WWkrUG9KaTl6dzVITHZkV1FjNWpo?=
- =?utf-8?B?ZWt3UjFZVFBuZE45RjN4ZlJpK2NQSHFjY1paWjVXb3J6ZU5yY0JKWXJDa2tu?=
- =?utf-8?B?WmZ3Y09lTXlPaENNYnJVSzFWY0VNTFpNdTdPbXZSUk5jb0h4SkdsSktJa1FY?=
- =?utf-8?B?TCt0SjEwRGVsaFMxVjdCYmxMdVdWeEdPSGtmZGlaK0FpOE5wdlVSdloxcUp6?=
- =?utf-8?B?UWpreFhzQkpkVkI1Z3Y2OHEvSzdKSHBsRGtzTjQ1cWJqRElUTnNWWmF6MTk1?=
- =?utf-8?B?K3ptVDlRM25GVGUzUmhtUFNhUWZjNnQveDgxd2JISHljRlNsOVhtSDBoZkgy?=
- =?utf-8?B?NXN0dmNDNmtoZlFSQ2dVUWQvT2xHRXBJVHBzZUwraGVoN09qdU1pdHQ3Yndi?=
- =?utf-8?B?bEhFSHBxei9vRFZtSUZNeHh2TSsrUy9HL09jZlcza3JsQm8xY3RiNWlQRmht?=
- =?utf-8?B?MTZadS9PTGlkOWF5b2NlR3A4RzJsWm1QcmVuZVZmakZmZXVYTk1RU2ZCdElM?=
- =?utf-8?B?d2EvM0Z4Nzh0N2RXUVhiTzNWZy9XV05FUTk5TGhCdS8wOWxBNFlXQlAvU0dq?=
- =?utf-8?B?TkpGZFYzcmp5ZEw5aWFFS0wrZ2hkaHpyNENEWS9LakpENjRUUlhuRmNZeHVt?=
- =?utf-8?B?QnNIazBValRKZW1oODJLTHo1UUJqUnBpeXNHUjQzdFVqMHcxTWdqMjBabUZ3?=
- =?utf-8?B?MXhGTFRJTUhDUEpFQ3Awcm1heThqbWVPMGZNdkxORGhyVStKWXNBdWhSeW9Y?=
- =?utf-8?B?VktkWFJLaUVOUzRKbFY0UHVtVDVRVnN0V1BrODZnUUk0bVg0TmtKWVExbWl2?=
- =?utf-8?B?YVdDZ2VnUFZialhObGxoQmpzeUdpOEdLVGFCNGtmRWczOXliK1lCNTNBY2VC?=
- =?utf-8?B?OHpBNWhRd0o1eVN4cldyMFFCSTBtcG5JaCtYV0plbklVc3pqU0drWDRmdWpO?=
- =?utf-8?B?aERLUjFyVlFTKzB0ajBFK1ZqWlZuTG9OM2pMYm4raGdYWVBRWXdGTW5vWldo?=
- =?utf-8?B?SThWUkNmOCs5bitBa3l3TFc0RUNCckp6RzB5QjVVaHFXLy82R0N6emtuTTQv?=
- =?utf-8?B?bFAxak5WOVVuTHdtUWxSTWFYT0VSNWwyNld2WW14N3RDL21lU2Z5dGNWMDRy?=
- =?utf-8?B?RG9PVittT2Zaa2RYeUsrU1M3SjErR0FFK0dJM0Q3TkM5VzlzZFJyN25MT3pC?=
- =?utf-8?B?VUgzVXJ0ekF3RllZSHM0c0ozVzJjSFhvaVkxRXIzWTZ5QW04TGNSZENsRExI?=
- =?utf-8?B?OGEvYVJ2c2c5ODBrSjhQZHQxQnE5dFBTbW5ET1ZjN3JtdlZFaTF2L0lweVR0?=
- =?utf-8?B?WE1lUnN0RTVXRGo1d2EvemZ4bCtaazRuNGdNZ1N2YVBVeU5tengxQXdtQVoz?=
- =?utf-8?B?c0RObzFORFAvSU5sbVZiVk43b3ZlRTBLMDFCYkpWaUlXODR5eDFJaHdrb09H?=
- =?utf-8?B?NktiZ3htTzZlcStUTGxpMjJVa29ta2dRcTMydzBKUWZtQTE1alNRSTIzcC9D?=
- =?utf-8?B?KzdoVTJSWTgycFExVll4OFB6SVJUOHdqSjhjNEdtWXIzamtQQndtZXdpS092?=
- =?utf-8?B?MzdIRXNJME9pUm56U2pFa3ppL2NXQjBIRUs3aFpwakJ6Z04ybmROUVhBS2lG?=
- =?utf-8?B?ZWgrcWNFRWxlUkZiRFFmWnc1U3NaT3A2cjBrWms0Wm9IcUtWNkJiNDY2YW5l?=
- =?utf-8?B?Smc9PQ==?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?c3NrOUdRcklWOTdmcDBzOTh0VXcxYlpwanVRZWZ2eENxSEErcCt5N3pwb2hh?=
+ =?utf-8?B?REI3RVJzKzFpSzNKb1lla3h5MEI5NmdxMHJTRUxtOFg1TUdKSzF0MnB2ZjB6?=
+ =?utf-8?B?aDBTV1g0WkJVdmFjcXdtcnhwSFg0eU5WZEZrZkU0bzVUREYrTHdzNDNnazBK?=
+ =?utf-8?B?RkIwcDg4cnl0dEF1MjVoaXFzL3lteDZwM3IxdkF6dzBUdVpGeHVrMnI4bEZo?=
+ =?utf-8?B?cUV4ZzR0MU5DTzVFNkJEb3pZRUh4VEVsa0RYaHF4N3N6U21IN0xPMUFEQzJE?=
+ =?utf-8?B?V241QWo5cTZOODd0ekZVdENUdmJlMUdHcHdTS001aU9VYVFkamsyZ2YxQUtJ?=
+ =?utf-8?B?RzYvbGk2cTc0ck9TTkxzRVhoRDR1cGpYcUkyVVV1bzN2cWxENUFJY21HZExU?=
+ =?utf-8?B?VElPUkZkQm8xNFg1a1VpYmxXY1JQbjZFSW9yOGRJeElSSitTOTVINEVzanQz?=
+ =?utf-8?B?Q1JFQTV4aFNiMFhQV095UVQzZkdMM1NpSGxlbWo5MXRwYXpOMm9rUC9RdXE1?=
+ =?utf-8?B?aThuazVuR3NaUmlVNDRCSXFBNktEcnZnYi9GUldOYll4cWxkbjc0YmpXYlBB?=
+ =?utf-8?B?QU5sc0RvOGwxdVdGM1hqTk1jUEtON2xwRUMrak51M0EwbjNwakFhM1VlUWo2?=
+ =?utf-8?B?ejNKZkNZL01ZZHBYbHQ5UVlsYUNTbllKdG1QNG5YcGgza1lEd3VCME93Nkll?=
+ =?utf-8?B?QTk2RzIyQkdLWStRdzkxMkVWYlBkODlHV2UyaE8waUxwcEI1TlZoWC9sZWNP?=
+ =?utf-8?B?Vm0yNFpwNEEwZnBNZlZSVzZLcDc3SWI1d0w3K0NKTVdxaGJ5L3ZUVnNiTk9o?=
+ =?utf-8?B?L01IZ2NHNjZINHArbmtUQk9qaGRRbzhiV1gzTGRDTWZWV2s1SWQ3ZGlkM0RK?=
+ =?utf-8?B?TC92ZWliaHNrZldzN2d6Y1BXeXJEY2MwRms0QW9nV3EzK3R5Qk1OeU9ua05S?=
+ =?utf-8?B?ei9mTkxYS1lXRkNKVjJrOXRkekt1TkFSRklXL29MM1pVU3lYbVVtMTB5elpS?=
+ =?utf-8?B?YTN4N0RqSGJmLzVoa21JdGpsbjBnQkRQRGdvdGhjVnEwMlVEeUJCazBmVE9N?=
+ =?utf-8?B?UzFiQlhiMStiSUthUzMxVC9iS0JCazJXQ25EcEFqVzJ4YSs1QWtqVjZJSXBh?=
+ =?utf-8?B?YkJSZUQ2NzQ0NnRyNVN4LytjLzJnWGM1aWgxaUsvUmFBQkxyd0NyYkorTEVk?=
+ =?utf-8?B?N1loOVQ1OTl2Qk1PNFlIVXFBUUhBaTdBVUlOVzQ2K2RiZEFlYWFaN29aVzZq?=
+ =?utf-8?B?aEYxYkd1YnE0ZzQzUEprN3pKN3FqSHgyR2xuZ3dTL1ZNSjZ0YmFEUHptRGFh?=
+ =?utf-8?B?L3YzcTNyeFFlcm5vRlJGbmVpcjBKeXM0cnU0eDVHSlZVU2Rvd2lKM3dLSW9X?=
+ =?utf-8?B?cXBBZ0o4ODFEYnBSOUd5OExLVFd3YTJ3R3ltcjFqekxkS2dERlkrL1RPdFdZ?=
+ =?utf-8?B?bHZFeHEzRDBDcXAvRDVBdTFzeTZwSnVEcU5mQmRERzF4cEJsTlM5aHZXbE1y?=
+ =?utf-8?B?L0hEWDZqbE5zQWZNak94QWlmd0lYbjY3aTdhdGlDSmEzNzlvaHRIVGdqUmhQ?=
+ =?utf-8?B?Vzl6azYwM1FTc0pnRE9CYlpTbnBEQisvN0I0VXRVZ0pyOWZURGdwTWo0L2F0?=
+ =?utf-8?B?ZldjWjkwWGx6SHZqNEcyOUVyNzE2aVh0ODVyZVdRTmtDWVNvdWIyUmIvekll?=
+ =?utf-8?B?T2VOa3FlMlVuWWVWQnpoVWJhd0IrYjRVdk9OVUdCS2xMaCtjYll3S3pTNWp5?=
+ =?utf-8?B?TEY1WnFaOHA3eEdjWDYzamdYUGJrMWpmQVQ0dmJ1d1BvL2ZtTFBYVDlud2hk?=
+ =?utf-8?B?VmFreEFMWHZHcFpsY0txSzZwMjB1aXBQby9adE5VODMvVEpBTEg4WkNDbTlM?=
+ =?utf-8?B?L3AzNDhETDk3dUsxZjJic2F6OUFiMW1vWC9KYWFSSTJSYkRQVCswUTJSTHV2?=
+ =?utf-8?B?Mm8wQ0lrTXVVOUNoMkxMV2YwUUExczNkd3ZsWCtOQlYwS2lFd0ZoeVRwN0Jr?=
+ =?utf-8?B?Uy9ZK2FCWEFDYTdibnVsczgzbk9GLzJxUVdSTkRmaVFpL0dvNEx1aXdDczNH?=
+ =?utf-8?B?Q3hDa0FDWU01TnJlaC9EdzR4aDA5cEdsc1kyM0hmRkRQL3AxM202c3BMdll6?=
+ =?utf-8?B?ZjJQelhUdzA3aUo2SEhYa0NJa3FCajVqMmhYcy9MVDFEaS9mM0QxL1B0KzNm?=
+ =?utf-8?B?ZVE9PQ==?=
 X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 93a22ad4-2ee6-4141-9e70-08dcdc7a0ab7
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6b66cdfa-0609-42f5-8bf9-08dcdc830b6c
 X-MS-Exchange-CrossTenant-AuthSource: AM9PR04MB8906.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Sep 2024 09:19:50.4993 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Sep 2024 10:24:17.1612 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: CV4MKhNWgX1IN17f5+UzjP+4qiii9pwlavV5mpmEd6TG178TbhMkwxSrWwQUQCERBy2YYu1Me2LwVNTav5N/35KPvqXQTveK8TPxJJKQjAU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR04MB10380
+X-MS-Exchange-CrossTenant-UserPrincipalName: 7Sa7wF5OGFnT/0tPrrA9XcdOntke6q7WqUSlHSbGAGtc8LJvh+Pg5Xg8PofLgmrd5C45dVH6tFq9aPF2ovy24zdg0/JolxU7jgsgGMm9SmI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB9751
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -179,59 +178,337 @@ X-Virus-Status: Clean
 
 Hi Chris,
 
-On 9/23/24 7:38 PM, Chris Morgan wrote:
-> On Mon, Sep 23, 2024 at 01:24:34PM +0200, Quentin Schulz wrote:
+On 9/23/24 7:36 PM, Chris Morgan wrote:
+> On Mon, Sep 23, 2024 at 01:21:01PM +0200, Quentin Schulz wrote:
 >> Hi Chris,
 >>
 >> On 9/19/24 4:00 PM, Chris Morgan wrote:
 >>> From: Chris Morgan <macromorgan@hotmail.com>
 >>>
->>> Enable the PD_VO power domain before driver access on the rk3568 SoC.
+>>> Some of the Powkiddy devices switched to using a different vendor for
+>>> the vdd_cpu regulator. Unfortunately the device does not have a new
+>>> revision to denote this, so users have no way of knowing in advance.
+>>>
+>>> Add code to detect if a device is present at addresses 0x1c or 0x40 on
+>>> the i2c0 bus and update the devicetree if needed.
 >>>
 >>> Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
 >>> ---
->>>    arch/arm/mach-rockchip/rk3568/rk3568.c | 6 ++++++
->>>    1 file changed, 6 insertions(+)
+>>>    board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c | 147 +++++++++++++++++++++
+>>>    1 file changed, 147 insertions(+)
 >>>
->>> diff --git a/arch/arm/mach-rockchip/rk3568/rk3568.c b/arch/arm/mach-rockchip/rk3568/rk3568.c
->>> index 1b3e40074e3..d5742b68d68 100644
->>> --- a/arch/arm/mach-rockchip/rk3568/rk3568.c
->>> +++ b/arch/arm/mach-rockchip/rk3568/rk3568.c
->>> @@ -26,6 +26,8 @@
->>>    #define PMU_BASE_ADDR		0xfdd90000
->>>    #define PMU_NOC_AUTO_CON0	(0x70)
->>>    #define PMU_NOC_AUTO_CON1	(0x74)
->>> +#define PMU_PWR_GATE_SFTCON	(0xa0)
->>> +#define PMU_PD_VO_DWN_ENA	BIT(7)
->>>    #define EDP_PHY_GRF_BASE	0xfdcb0000
->>>    #define EDP_PHY_GRF_CON0	(EDP_PHY_GRF_BASE + 0x00)
->>>    #define EDP_PHY_GRF_CON10	(EDP_PHY_GRF_BASE + 0x28)
->>> @@ -130,6 +132,10 @@ int arch_cpu_init(void)
->>>    	writel(0x3f3f0707, GRF_BASE + GRF_GPIO1C_DS_1);
->>>    	writel(0x3f3f0707, GRF_BASE + GRF_GPIO1C_DS_2);
->>>    	writel(0x3f3f0707, GRF_BASE + GRF_GPIO1C_DS_3);
+>>> diff --git a/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c b/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
+>>> index 224019f9ba3..c1d1826fd14 100644
+>>> --- a/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
+>>> +++ b/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
+>>> @@ -43,6 +43,7 @@ struct rg3xx_model {
+>>>    	const char *board_name;
+>>>    	const char *fdtfile;
+>>>    	const bool detect_panel;
+>>> +	const bool detect_regulator;
+>>>    	const bool uart_con;
+>>>    };
+>>> @@ -69,6 +70,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+>>>    		/* Device is identical to RG353P. */
+>>>    		.fdtfile = DTB_DIR "rk3566-anbernic-rg353p.dtb",
+>>>    		.detect_panel = 1,
+>>> +		.detect_regulator = 0,
+>>>    		.uart_con = 1,
+>>>    	},
+>>>    	[RG353P] = {
+>>> @@ -77,6 +79,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+>>>    		.board_name = "Anbernic RG353P",
+>>>    		.fdtfile = DTB_DIR "rk3566-anbernic-rg353p.dtb",
+>>>    		.detect_panel = 1,
+>>> +		.detect_regulator = 0,
+>>>    		.uart_con = 1,
+>>>    	},
+>>>    	[RG353V] = {
+>>> @@ -85,6 +88,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+>>>    		.board_name = "Anbernic RG353V",
+>>>    		.fdtfile = DTB_DIR "rk3566-anbernic-rg353v.dtb",
+>>>    		.detect_panel = 1,
+>>> +		.detect_regulator = 0,
+>>>    		.uart_con = 1,
+>>>    	},
+>>>    	[RG503] = {
+>>> @@ -93,6 +97,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+>>>    		.board_name = "Anbernic RG503",
+>>>    		.fdtfile = DTB_DIR "rk3566-anbernic-rg503.dtb",
+>>>    		.detect_panel = 0,
+>>> +		.detect_regulator = 0,
+>>>    		.uart_con = 1,
+>>>    	},
+>>>    	[RGB30] = {
+>>> @@ -101,6 +106,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+>>>    		.board_name = "Powkiddy RGB30",
+>>>    		.fdtfile = DTB_DIR "rk3566-powkiddy-rgb30.dtb",
+>>>    		.detect_panel = 0,
+>>> +		.detect_regulator = 1,
+>>>    		.uart_con = 0,
+>>>    	},
+>>>    	[RK2023] = {
+>>> @@ -109,6 +115,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+>>>    		.board_name = "Powkiddy RK2023",
+>>>    		.fdtfile = DTB_DIR "rk3566-powkiddy-rk2023.dtb",
+>>>    		.detect_panel = 0,
+>>> +		.detect_regulator = 1,
+>>>    		.uart_con = 0,
+>>>    	},
+>>>    	[RGARCD] = {
+>>> @@ -117,6 +124,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+>>>    		.board_name = "Anbernic RG ARC-D",
+>>>    		.fdtfile = DTB_DIR "rk3566-anbernic-rg-arc-d.dtb",
+>>>    		.detect_panel = 0,
+>>> +		.detect_regulator = 0,
+>>>    		.uart_con = 1,
+>>>    	},
+>>>    	[RGB10MAX3] = {
+>>> @@ -125,6 +133,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+>>>    		.board_name = "Powkiddy RGB10MAX3",
+>>>    		.fdtfile = DTB_DIR "rk3566-powkiddy-rgb10max3.dtb",
+>>>    		.detect_panel = 0,
+>>> +		.detect_regulator = 1,
+>>>    		.uart_con = 0,
+>>>    	},
+>>>    	/* Devices with duplicate ADC value */
+>>> @@ -134,6 +143,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+>>>    		.board_name = "Anbernic RG353PS",
+>>>    		.fdtfile = DTB_DIR "rk3566-anbernic-rg353ps.dtb",
+>>>    		.detect_panel = 1,
+>>> +		.detect_regulator = 0,
+>>>    		.uart_con = 1,
+>>>    	},
+>>>    	[RG353VS] = {
+>>> @@ -142,6 +152,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+>>>    		.board_name = "Anbernic RG353VS",
+>>>    		.fdtfile = DTB_DIR "rk3566-anbernic-rg353vs.dtb",
+>>>    		.detect_panel = 1,
+>>> +		.detect_regulator = 0,
+>>>    		.uart_con = 1,
+>>>    	},
+>>>    	[RGARCS] = {
+>>> @@ -150,6 +161,7 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+>>>    		.board_name = "Anbernic RG ARC-S",
+>>>    		.fdtfile = DTB_DIR "rk3566-anbernic-rg-arc-s.dtb",
+>>>    		.detect_panel = 0,
+>>> +		.detect_regulator = 0,
+>>>    		.uart_con = 1,
+>>>    	},
+>>>    };
+>>> @@ -172,6 +184,22 @@ static const struct rg353_panel rg353_panel_details[] = {
+>>>    	},
+>>>    };
+>>> +struct powkiddy_regulators {
+>>> +	const u8 addr;
+>>> +	const char *regulator_compat;
+>>> +};
 >>> +
->>> +	/* Enable VO power domain for display */
->>> +	writel((PMU_PD_VO_DWN_ENA << 16),
->>> +	       PMU_BASE_ADDR + PMU_PWR_GATE_SFTCON);
+>>> +static const struct powkiddy_regulators regulator_details[] = {
+>>> +	{
+>>> +		.addr = 0x1c,
+>>> +		.regulator_compat = "tcs,tcs4525",
+>>> +	},
+>>> +	{
+>>> +		.addr = 0x40,
+>>> +		.regulator_compat = "fcs,fan53555",
+>>> +	},
+>>> +};
+>>> +
+>>>    /*
+>>>     * Start LED very early so user knows device is on. Set color
+>>>     * to red.
+>>> @@ -361,6 +389,44 @@ int rgxx3_detect_display(void)
+>>>    	return 0;
+>>>    }
+>>> +/*
+>>> + * Some of the Powkiddy devices switched the CPU regulator, but users
+>>> + * are not able to determine this by looking at their hardware.
+>>> + * Attempt to auto-detect this situation and fixup the device-tree.
+>>> + */
+>>> +int rgxx3_detect_regulator(void)
+>>> +{
+>>> +	struct udevice *bus;
+>>> +	struct udevice *chip;
+>>> +	u8 val;
+>>> +	int ret;
+>>> +
+>>> +	/* Get the correct i2c bus (i2c0). */
+>>> +	ret = uclass_get_device_by_name(UCLASS_I2C,
+>>> +					"i2c@fdd40000", &bus);
+>>> +	if (ret)
+>>> +		return ret;
+>>> +
+>>> +	/*
+>>> +	 * Check for all vdd_cpu regulators and read an arbitrary
+>>> +	 * register to confirm it's present.
+>>> +	 */
+>>> +	for (int i = 0; i < ARRAY_SIZE(regulator_details); i++) {
+>>> +		ret = i2c_get_chip(bus, regulator_details[i].addr,
+>>> +				   1, &chip);
+>>> +		if (ret)
+>>> +			return ret;
+>>> +
+>>> +		ret = dm_i2c_read(chip, 0, &val, 1);
+>>> +		if (!ret) {
+>>> +			env_set("vdd_cpu", regulator_details[i].regulator_compat);
+>>> +			break;
+>>> +		}
+>>> +	}
+>>> +
+>>> +	return 0;
+>>> +}
+>>> +
+>>>    int rgxx3_read_board_id(void)
+>>>    {
+>>>    	u32 adc_info;
+>>> @@ -485,6 +551,16 @@ int rk_board_late_init(void)
+>>>    			printf("Failed to detect panel type\n");
+>>>    	}
+>>> +	/*
+>>> +	 * Skip vdd_cpu regulator detection if not needed. Warn but
+>>> +	 * don't fail for errors in auto-detection of regulator.
+>>> +	 */
+>>> +	if (rg3xx_model_details[gd->board_type].detect_regulator) {
+>>> +		ret = rgxx3_detect_regulator();
+>>> +		if (ret)
+>>> +			printf("Unable to detect vdd_cpu regulator\n");
+>>> +	}
+>>> +
+>>>    end:
+>>>    	/* Turn off red LED and turn on orange LED. */
+>>>    	writel(GPIO_WRITEMASK(GPIO_C7 | GPIO_C6 | GPIO_C5) | GPIO_C6,
+>>> @@ -547,6 +623,71 @@ int rgxx3_panel_fixup(void *blob)
+>>>    	return 0;
+>>>    }
+>>> +int rgxx3_regulator_fixup(void *blob)
+>>> +{
+>>> +	const struct powkiddy_regulators *vdd_cpu = NULL;
+>>> +	int node, ret, i;
+>>> +	char path[] = "/i2c@fdd40000/regulator@00";
+>>> +	char name[] = "regulator@00";
+>>> +	char *env;
+>>> +
+>>> +	env = env_get("vdd_cpu");
+>>> +	if (!env) {
+>>> +		printf("Can't get vdd_cpu env\n");
+>>> +		return -EINVAL;
+>>> +	}
+>>> +
+>>> +	/*
+>>> +	 * Find the device we have in our tree, which may or may not
+>>> +	 * be present.
+>>> +	 */
+>>> +	for (i = 0; i < ARRAY_SIZE(regulator_details); i++) {
+>>> +		sprintf(path, "/i2c@fdd40000/regulator@%02x",
+>>> +			regulator_details[i].addr);
+>>> +		node = fdt_path_offset(blob, path);
+>>> +		if (node > 0)
+>>> +			break;
+>>> +
+>>> +		printf("Unable to find vdd_cpu\n");
+>>> +		return -ENODEV;
+>>> +	}
+>>> +
+>>> +	node = fdt_path_offset(blob, path);
+>>> +	if (!(node > 0)) {
+>>> +		printf("Can't find the vdd_cpu node\n");
+>>> +		return -ENODEV;
+>>> +	}
+>>> +
+>>> +	ret = fdt_node_check_compatible(blob, node, env);
+>>> +	if (ret < 0)
+>>> +		return -ENODEV;
+>>> +
+>>> +	/* vdd_cpu regulators match, return 0. */
+>>> +	if (!ret)
+>>> +		return 0;
+>>> +
+>>> +	/* Regulators don't match, search by first compatible value. */
+>>> +	for (i = 0; i < ARRAY_SIZE(regulator_details); i++) {
+>>> +		if (!strcmp(env, regulator_details[i].regulator_compat)) {
+>>> +			vdd_cpu = &regulator_details[i];
+>>> +			break;
+>>> +		}
+>>> +	}
+>>> +
+>>> +	if (!vdd_cpu) {
+>>> +		printf("Unable to identify vdd_cpu by compat string\n");
+>>> +		return -ENODEV;
+>>> +	}
+>>> +
+>>> +	/* Set the compatible and reg with the auto-detected values */
+>>> +	fdt_setprop_string(blob, node, "compatible", vdd_cpu->regulator_compat);
+>>> +	fdt_setprop_u32(blob, node, "reg", vdd_cpu->addr);
+>>> +	sprintf(name, "regulator@%02x", vdd_cpu->addr);
+>>> +	fdt_set_name(blob, node, name);
+>>> +
 >>
->> Maybe we want to guard this with a symbol for video stuff in U-Boot? I
->> assume Linux is capable of handling this just fine without U-Boot's
->> intervention?
->>
->> At the very least have #if CONFIG_IS_ENABLED(VIDEO) ?
->>
->> What do you think?
+>> I'm not sure this is viable in the long run... This relies on the properties
+>> for the two devices to be identical. Are we sure it is absolutely the case?
 > 
-> I'm game if you are. To me this just brings back the default behavior
-> of the binary A-TF from Rockchip where the PD_VO was enabled, but if
-> we want to guard this I'm okay.
+> Yes, for the moment at least the devices are entirely identical except
+> for the CPU regulator. Unfortunately the identical ADC IDs is why I
+> cannot simply have an additional entry for a new hardware revision.
+> 
+>>
+>> An option could be to have a DTSO for the "new" regulator that removes the
+>> old regulator entirely and we would simply be applying that DTSO at runtime
+>> before the kernel starts. I assume you probably want this for SPL or U-Boot
+>> proper as well so applying the DTSO there would be required as well, not
+>> sure how to do this though.
+> 
+> In truth I really don't need the regulator this way for U-Boot at all.
+> Near as I can tell it defaults to being on and the right voltage. I can
+> do a DTSO, I just figured a simple fixup would be easier (plus we're
+> already doing a fixup for a similar situation with panel revisions).
 > 
 
-Just to be sure I understand correctly...
+The benefit of using DTSO is that 1) it drastically lower the complexity 
+of the C code (or I would very much hope so). 2) you can have this 
+upstream in the kernel and it being very explicit something fishy is 
+going on with the HW so people are aware of those things (which also 
+means if someone has the idea of supporting another bootloader, e.g. 
+Barebox, LittleKernel, ..., they would know about the different variants 
+to support and similar "hacks" to implement).
 
-Would a device without this power domain enabled by U-Boot still have 
-working video in Linux with upstream TF-A?
+You're the maintainer of those boards and this doesn't impact any other 
+product, so I would say this is up to you :)
+
+>>
+>> Can you please tell the HW vendor to have some way of detecting some
+>> variants of the HW instead of letting us just guess stuff? How do they even
+>> support this in their downstream kernel/bootloader????
+>> Have they already ran out of channels on SARADC?
+>>
+> 
+> I have told both Powkiddy and Anbernic this. Whether they will listen
+> is a different matter. They haven't run out of channels on the SARADC
+> (except for the Powkiddy X55, which is its own board and has no
+> detection logic). In theory if we allow for a ~10% variance in the
+> resistor values for a resistor on ADC channel 1, and the range is
+> between 0 and 1024 (20 and 1004), that gives us about 49 total devices
+> we could "detect" at one time, assuming no one collides.
+> 
+
+The channel 1 is commonly used for the recovery button IIRC on recent 
+Rockchip SoCs-based products, so another channel probably makes more sense.
+
+I assume one of the possible issue is that they didn't foresee such a 
+change would be required and forgot about those ADC channels AND the new 
+regulator is pin-to-pin compatible with the same footprint, meaning they 
+didn't need to redo a new PCB. That's the only "excuse" i can give them :)
+
+> I have no idea how Powkiddy fixes up the CPU regulator, but I know
+> Anbernic does panel fixup with some hacky code in U-Boot and Linux
+> proper that detects for the panel like I do. In their case it's built
+> into the probe function of Rockchip's own "display-simple-dsi" driver.
+> In our case we detect the panel ID in U-Boot and then fixup the device
+> tree for Linux with the correct compatible.
+> 
+
+I definitely never had to do that myself. Never! I don't know what 
+you're talking about ;) Oh look, a squirrel.
 
 Cheers,
 Quentin
