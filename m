@@ -4,76 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10ECECF9C71
-	for <u-boot@archiver.kernel.org>; Mon, 23 Sep 2024 20:36:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9894FCF9C5B
+	for <u-boot@archiver.kernel.org>; Tue, 24 Sep 2024 00:51:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C793088A4C;
-	Mon, 23 Sep 2024 22:36:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id ACD7D889E9;
+	Tue, 24 Sep 2024 02:51:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rr00pKxr";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZtdENtnv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4131F88A0D; Mon, 23 Sep 2024 22:36:19 +0200 (CEST)
-Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
- [IPv6:2607:f8b0:4864:20::836])
+ id 944F386E61; Tue, 24 Sep 2024 02:51:10 +0200 (CEST)
+Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
+ [IPv6:2a00:1450:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23870889C9
- for <u-boot@lists.denx.de>; Mon, 23 Sep 2024 22:36:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F3E7B88A74
+ for <u-boot@lists.denx.de>; Tue, 24 Sep 2024 02:51:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x836.google.com with SMTP id
- d75a77b69052e-4582fb3822eso34174581cf.1
- for <u-boot@lists.denx.de>; Mon, 23 Sep 2024 13:36:17 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x234.google.com with SMTP id
+ 38308e7fff4ca-2f78b28ddb6so43709391fa.0
+ for <u-boot@lists.denx.de>; Mon, 23 Sep 2024 17:51:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1727123776; x=1727728576; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=68pRHloMJPAuatqGzkoupwbA1P00InkHfNFXJVlW1jI=;
- b=rr00pKxrZLpZo3tBckgqkxG7Z4vTw/WKHBEu+ax6S3KKCzuMr+eh/73xDmyidbTGfT
- RZzTBdgx9kBuHFf2EhtRGundJyNxMqfVXoYdHL70pdr+JRVqvxt+T8emq+9HPx0hKLZt
- vPgUABtyQmhw2jGrX8DEQF82ee7TnY+h7l1qQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727123776; x=1727728576;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1727139063; x=1727743863; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=68pRHloMJPAuatqGzkoupwbA1P00InkHfNFXJVlW1jI=;
- b=a1SYUeH9NxGLfIhXmRgrMOZiiA7gdcw5lhdkXKjnbcoheUO3+cVxWf22353RQZj0oh
- wLHgLTOq8N1YxM4zhk3B7rNBpH9Rsd0TWyAf1Nst+Hy3i6RnF4cSNH1ykZw1JdAHAl0b
- Isoz6ReVhYCOqojTgkjgUnEMTV9xhbiUl+NRC94AZZHxwLhorZDj/zpl17c7SJLzgMRw
- WOXOKRpXywwSygYEx82PwuG1dYCif6aOEDymHFS92Z6ksFhT8kanhRa5etewSKzpZ5HW
- Xb3+nWy3e2IkzPBKcUXdQKQpIiod8mtfYEk0T0Ec9MFCOKusIlDYVBcZP44zq/cW5x09
- xuBg==
-X-Gm-Message-State: AOJu0Yz6oc09aJJRgjJd9/YWezdq8EEAnG93pu8uanl4XAox7WfkYJvY
- D2HxEYha+drUhvt2/Tk55v4293AcI3PGeJgZG3J7y1gXH1jlQQytGVOglb3q1S/IgpXbxtfPkQv
- n
-X-Google-Smtp-Source: AGHT+IGsc0Mb/7V59X9MD7qhFzneh7TwBJ/I6WigwIbG/PWn+26klH6eBjSdC/ZkkhLBaY1br6ovRA==
-X-Received: by 2002:a05:622a:4b15:b0:45b:506a:b41a with SMTP id
- d75a77b69052e-45b506ab60fmr8716461cf.26.1727123775912; 
- Mon, 23 Sep 2024 13:36:15 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-45b5253b05fsm105771cf.10.2024.09.23.13.36.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Sep 2024 13:36:15 -0700 (PDT)
-Date: Mon, 23 Sep 2024 14:36:12 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v6 00/19] labgrid: Provide an integration with Labgrid
-Message-ID: <20240923203612.GT4252@bill-the-cat>
-References: <20240920060158.106612-1-sjg@chromium.org>
+ bh=9OhC84GMsfQSkJGffi6aGOXypQaSwlVmr3p1y7YhqXU=;
+ b=ZtdENtnvgPkB6W/bZAwC345S3AU1A+2MG2sDZ8cS0+CgfRzBCO8MCxzlBV2UWtj8SI
+ mfOR80/uGJT4r/dy2hc1gRWcwJS0av+pppOFcd5C5b7qdpPTWVn2AA+72Z0hJNDKU81m
+ A2dChT3qdROVTsEFTWsRHCCRTAUojNnagUUWJXK1g4FM0IxdQaOw93gi61qGmuH3y+cz
+ msGWQhuqsuTWuzpUmJwZv8hfwL5e/gggwyUlb1hKHsa9NLtsVWzTfvw5lGHKS1Ju7zhf
+ J9GLRJnSZO0jJt6d2KsMBMhTTa0ebudu64Mctpi7N+BYpN3PG8EwFfIqAQcPP5AhkpKc
+ 6hcg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727139063; x=1727743863;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=9OhC84GMsfQSkJGffi6aGOXypQaSwlVmr3p1y7YhqXU=;
+ b=VRAl6esg1IvcvHWkBvLBAcQ1z7dQSGNo7V3W0kGHu6rrS7+FUpWK4dN0A4E9YXAKDt
+ W/n4EAbl9RvSnFjTX1XrROWJb/lFyEds6yCc9wmTpKb8w0/HvWZPmnmT253YNrecLttN
+ JWsbhCR8IoBH6Kzggi2XSrjUAu0TRlWYIACjQ5GHfwdL79B0EszD2m916IechQfDJ/IE
+ 6JZeftacILGXzTwH19dii9T9+7trgM1+meDtSvDUiHwD44JjLAN6K1x64aGg3SkML1CE
+ TWIWrEtLlf1Gp0vZ7kB2CDREQJo0og3bZwx0tFy/XS7Xv/y2cWheC+SwUal81eHU2NDG
+ r+UQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXkSzDAiWbFzVfYEHjx6KwLvzL4Ruq34RFuTYgBRxTqKGCMsf1e3s619vZ5jQFIk31Tcf3VBe8=@lists.denx.de
+X-Gm-Message-State: AOJu0YwqkSG9dzFmfdbPj4eUaoOVcKdgXK1/jkaX/Fg36xW0SKoOOkvv
+ TXjAhSk7P9nxejTfW5MoYtzl2yOkMR6jdocFiCOjwznWdYkZhQXS3AOa0JPBm36KdcuowNQyKYO
+ u2YdA73gwkWXqWTpgCEDDOoCIGZw=
+X-Google-Smtp-Source: AGHT+IEkHjnAhac8OOYupQ3161QsvtZ0KX8OOxZiMgLDdDcy50FfJc0iODiENdpEQEv2woxKFJA5EZZhahP1ZLvOypo=
+X-Received: by 2002:a05:651c:19a2:b0:2f6:4714:57dd with SMTP id
+ 38308e7fff4ca-2f7cc5de75cmr58590711fa.45.1727139063177; Mon, 23 Sep 2024
+ 17:51:03 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="jG/G/ndf380+YbwS"
-Content-Disposition: inline
-In-Reply-To: <20240920060158.106612-1-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20240923131439.28572-1-peng.fan@oss.nxp.com>
+ <b77e571d-e782-4e7b-a9d2-1ca92df5c512@norik.com>
+In-Reply-To: <b77e571d-e782-4e7b-a9d2-1ca92df5c512@norik.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 23 Sep 2024 21:50:51 -0300
+Message-ID: <CAOMZO5B7HLB8iLdo4YOzf7iVyTNaRA2Zv3U7B6HSvo4GPOST=A@mail.gmail.com>
+Subject: Re: [PATCH 1/2] net: fec_mxc: Fix clk_ref rate on iMX93
+To: Primoz Fiser <primoz.fiser@norik.com>
+Cc: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, sbabic@denx.de,
+ joe.hershberger@ni.com, 
+ rfried.dev@gmail.com, Tom Rini <trini@konsulko.com>,
+ Peng Fan <peng.fan@nxp.com>, 
+ uboot-imx@nxp.com, Ye Li <ye.li@nxp.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,95 +94,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Peng,
 
---jG/G/ndf380+YbwS
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, Sep 23, 2024 at 10:11=E2=80=AFAM Primoz Fiser <primoz.fiser@norik.c=
+om> wrote:
 
-On Fri, Sep 20, 2024 at 08:01:35AM +0200, Simon Glass wrote:
+> Humm, but how did it work so far?
+>
+> On phyboard-segin-imx93, this change breaks fec ethernet.
+>
+> I had to revert this already in NXP downstream u-boot.
 
-> Labgrid provides access to a hardware lab in an automated way. It is
-> possible to boot U-Boot on boards in the lab without physically touching
-> them. It relies on relays, USB UARTs and SD muxes, among other things.
->=20
-> By way of background, about 4 years ago I wrong a thing called Labman[1]
-> which allowed my lab of about 30 devices to be operated remotely, using
-> tbot for the console and build integration. While it worked OK and I
-> used it for many bisects, I didn't take it any further.
->=20
-> It turns out that there was already an existing program, called Labgrid,
-> which I did not know about at time (thank you Tom for telling me). It is
-> more rounded than Labman and has a number of advantages:
->=20
-> - does not need udev rules, mostly
-> - has several existing users who rely on it
-> - supports multiple machines exporting their devices
->=20
-> It lacks a 'lab check' feature and a few other things, but these can be
-> remedied.
->=20
-> On and off over the past several weeks I have been experimenting with
-> Labgrid. I have managed to create an initial U-Boot integration (this
-> series) by adding various features to Labgrid[2] and the U-Boot test
-> hooks.
->=20
-> I hope that this might inspire others to set up boards and run tests
-> automatically, rather than relying on infrequent, manual test. Perhaps
-> it may even be possible to have a number of labs available.
->=20
-> Included in the integration are a number of simple scripts which make it
-> easy to connect to boards and run tests:
->=20
-> ub-int <target>
->     Build and boot on a target, starting an interactive session
->=20
-> ub-cli <target>
->     Build and boot on a target, ensure U-Boot starts and provide an inter=
-active
->     session from there
->=20
-> ub-smoke <target>
->     Smoke test U-Boot to check that it boots to a prompt on a target
->=20
-> ub-bisect <target>
->     Bisect a git tree to locate a failure on a particular target
->=20
-> ub-pyt <target> <testspec>
->     Run U-Boot pytests on a target
->=20
-> Some of these help to provide the same tbot[4] workflow which I have
-> relied on for several years, albeit much simpler versions.
->=20
-> The goal here is to create some sort of script which can collect
-> patches from the mailing list, apply them and test them on a selection
-> of boards. I suspect that script already exists, so please let me know
-> what you suggest.
+How does Linux handle this internal 1/2 divider?
 
-I still really wish you would split the labgrid parts of this series out
-=66rom the pytest fixes and improvement parts. Things are largely fine
-outside of the labgrid part for example, which I'll probably just take
-after confirming it doesn't break using labgrid other ways.
+Which board did you use to test this?
 
---=20
-Tom
+Since this causes a regression on phyboard-segin-imx93, we cannot apply it.
 
---jG/G/ndf380+YbwS
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbx0TwACgkQFHw5/5Y0
-tyztoAwAjvj3aJUqsJFwvRuX6baEBNnrgsJ1jqSTl9iXP3aArM7+Cs1ybSlBtJaH
-LXv088KGEnLMvE2sJCE43Qj+7jzXpHgBhRGlQgaFivZoutvO9VpApDUSzem9zvM7
-1P7br0VRkCdVkbTi+3rD4gikl2EUFIJYfdSWXfRh4wz7mXY/ykXNJp/vQRWnDobg
-K0QXrWFiFnUYUlocY+aLbA7Qm/tuu8T7m04yjzI0c1b1JWcmukOBjVfCEkx6fhbu
-8H56CI4k1MqoBvh4ZCfG05blA6OJ/DN+YGsVDx7K7r/lOlPkxuv3pSRioXpZIggF
-GUvRvB+DH2hrOCFE10Ju4pZAnZi3FiRh4j/3f2ssFnPnMcNzfPWSs905JtoQYY54
-3qyZPzrv72L1KK1KhFd3FCDbk1Y+3UivtnBIKNI7u9rqCKfFkkatuenRcSvYcaa8
-J/k8TN3LChpIu3a9fNpb03hklEHpUdR9PnvZPq0pDwiaNXgwPXGp0aDh8oCA5P8m
-JzOtH73V
-=7kcm
------END PGP SIGNATURE-----
-
---jG/G/ndf380+YbwS--
+Please provide more details.
