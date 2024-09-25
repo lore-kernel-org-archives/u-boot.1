@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4FD7C369DF
-	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 12:52:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 502F9C369D9
+	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 12:52:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C90788BBF;
-	Wed, 25 Sep 2024 14:51:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CC59488C40;
+	Wed, 25 Sep 2024 14:52:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hE1vX1fC";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HOZl8a/L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C10B88BBF; Wed, 25 Sep 2024 14:51:48 +0200 (CEST)
-Received: from mail-ua1-x934.google.com (mail-ua1-x934.google.com
- [IPv6:2607:f8b0:4864:20::934])
+ id 02C0D88C60; Wed, 25 Sep 2024 14:52:23 +0200 (CEST)
+Received: from mail-vs1-xe2d.google.com (mail-vs1-xe2d.google.com
+ [IPv6:2607:f8b0:4864:20::e2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94AD188CC3
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 14:50:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4036588363
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 14:52:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ua1-x934.google.com with SMTP id
- a1e0cc1a2514c-846c36009d5so1860166241.2
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 05:50:42 -0700 (PDT)
+Received: by mail-vs1-xe2d.google.com with SMTP id
+ ada2fe7eead31-49bcf6b9b64so2348873137.1
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 05:52:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727268641; x=1727873441; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727268735; x=1727873535; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=cCYFTxibRzoEcffKaNzPgYiEJs1+BFVWgh/EPL+UtME=;
- b=hE1vX1fCQ32PhKjAyfYLgP02pJVm1kaSu1bijvluj2lZ+MG1074cggDwPR1L9Eb+h3
- mxCJSG+JFjEyvMjiUgS1C1wZKaOAp6xQkPo02cLxnZ2yAobUW6qMdVIgVPlhVC+0lDYT
- ftIPHkBCXSBZ0JNqDOozX06Gyh00hU31vhFVY=
+ bh=EDHRcgah2HmzAzZKrgH3xci95HvPKk9NPPyn8EqUXwI=;
+ b=HOZl8a/LASKIYRZPFyuuSQBIU6Rm5lcXHFhs88e7Mq7H3IPNswxYn7W99M+HF4KYee
+ RYR1bTb3iA9x6/7enulOuueFPwD2J1vr1kPihcB6UoY+V3XYVUw3FKv2f5CmgjhjNvvN
+ e+5uGs6ljnoFsVVCXaUPmzcZPpTQ5QqVIA7Gw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727268641; x=1727873441;
+ d=1e100.net; s=20230601; t=1727268735; x=1727873535;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=cCYFTxibRzoEcffKaNzPgYiEJs1+BFVWgh/EPL+UtME=;
- b=d6pnhvMBGBY35CowpfRyfi1JhmFAKivd5O8hfEYMmUH5qz5L+dJWKbt+ZsAUp7QA7j
- TCPwSRjyrrvzIvudoOXgormjnBYKulrNlaN8g6lCy6ipTPzApU7jx7CL14kqi+27v1Ym
- 2RJbwC3I9x1wUZUIb8X725KingUWXrfV/6T8gQc6AHgFJ9WX9Vn/uzVd69E8IBq7XIXO
- /BoyGddlkG+/eKOIw5Gc4dthEGlFLQuTvk/ESTKbBQhBWCr4qVXlwkKF+uAvpkuxy/JJ
- wWCEJIgfwrYnOO67QNvi0PUAHNf8+x0t53iUSG7qrCVpToI0M4WAXGbh56dCaYntrlkt
- NaAQ==
+ bh=EDHRcgah2HmzAzZKrgH3xci95HvPKk9NPPyn8EqUXwI=;
+ b=KP36VixqkPa2FyGDt/1fLtnG5cMe32Uvj6EyFKnjMA0Re1z+W3HjDUHSNvwm5rIhqy
+ /Bduz3uTl9hBBEGdPIFeHdUmjK7wrKeaxO5FIWvKEarAr0P93t5ENbN6AfLS3I60H8Ag
+ JrIwKO+b2eXJzh3XlpQEoyuirr1ArVylZHRDDFs6yp8I32eelxw1KOlWinVwIPQuHswm
+ jT9CC5Mf80LJsdzldgTADIK664NeqkLcpd0HO/x4j+ZWgWwigZyNGBmgTSxb/BcQo0Sd
+ sA2m1nGtnvtNcOjQqFCk47coNwjnEljNh1SrHNkhK1VUswFKrFUandrL4ztLeSWpr7qD
+ Ra3g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWghYibgMlXMnp6a9zV3WJnLbV8pd4eLQ1M2yC/kw3+SQkD3Xkh8yjTMkqP8Aq84waGwADsHFg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz/6LyFBvFfurC4A4ggnQBj09hE7abbClM3r+NTkzrDInQMxIW/
- +2/y6+11/k9fxoelGUf6pnIvK5mRNjS1O6lmtaoLgF4zF9RZYtgaUHY/eD/xqEJ/0Bqd9mA2bCM
- D+7W6GKLDr6XiYLMk+pzyoGmfsFDJr8LVp4qx
-X-Google-Smtp-Source: AGHT+IG1upIIZRkXJyOr1Ip20je6IGD2jHwADYHOoalRxXNIJE5lPOaU0zL+Xtp6TsFMF0U/Y3hhQ9tsXIvARGuIEGo=
-X-Received: by 2002:a05:6102:3ed1:b0:493:b9f8:82f2 with SMTP id
- ada2fe7eead31-4a15dd4bfdbmr2725255137.25.1727268641415; Wed, 25 Sep 2024
- 05:50:41 -0700 (PDT)
+ AJvYcCW3eY3qidxxAIJzIpN/lnreklWGoop2WaX3VMDtiA69l2Km8GkgwWgqk9sH1hDZPEkqMimzDRI=@lists.denx.de
+X-Gm-Message-State: AOJu0YyGcQ8Een0f5wYmKquXNLXbZe2IwpL1rBpFIR+LNFZrXzZnXovs
+ ayQypr5I3JdAOQyhD9VPxEfzf0X7ewq6pnRiWIgb+BWBZqIYqQAPZX8MCRCG3c4w8BA7wmQKAls
+ rchM+6/RMoFZQSvBn3EL//KFfp2kpA4TM/7LSSC8kj7fia63bLA==
+X-Google-Smtp-Source: AGHT+IEyGsbq3to7k22ydK1EI4QE4bEdOL76MSOmvWVogUOyFDVSlQ6spf7woZRYInViAYSeQGzSPo73F9Lar/kMea0=
+X-Received: by 2002:a05:6102:5128:b0:49b:f52d:491b with SMTP id
+ ada2fe7eead31-4a15dc99073mr2528993137.7.1727268735031; Wed, 25 Sep 2024
+ 05:52:15 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240901222259.456932-1-sjg@chromium.org>
- <20240901222259.456932-2-sjg@chromium.org>
- <52f2da9e-924c-44b4-8390-7d604d07ab33@gmx.de>
- <CAFLszTj9hhNfC8QvRaQnb3HDyJ_+e9uExVo2rvy+K=_1xQOoqg@mail.gmail.com>
- <8309d2cf-ae84-4907-a6a4-9d6f5a4b8206@gmx.de>
-In-Reply-To: <8309d2cf-ae84-4907-a6a4-9d6f5a4b8206@gmx.de>
+References: <20240902011825.746421-1-sjg@chromium.org>
+ <20240902011825.746421-13-sjg@chromium.org>
+ <95edb150-f53d-415a-8176-56e0fc66c822@gmx.de>
+ <CAFLszTj47fa7m2Xa4yi5NkcWNUGr4kiM1z4sAnrbd5rFUKq1Zw@mail.gmail.com>
+ <20240917170346.GN4252@bill-the-cat>
+ <CAFLszThMhNzvW=OTgsAA0Hikv+uxLaVn7bwTGM0=htf=BbzmcA@mail.gmail.com>
+ <20240919174554.GT4252@bill-the-cat>
+ <CAFLszThvd4HSz6n+3OPVcQ4sv-pKD5rPfvJ_2gy_aLnPMG40hQ@mail.gmail.com>
+ <20240920145933.GB4252@bill-the-cat>
+In-Reply-To: <20240920145933.GB4252@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 25 Sep 2024 14:50:28 +0200
-Message-ID: <CAFLszTjPYWVhDnyOR=g9s0u3rocjj3S2n6g2AuiSEcnJOm+Gcg@mail.gmail.com>
-Subject: Re: [PATCH v3 1/3] efi: Drop the memset() from efi_alloc()
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+Date: Wed, 25 Sep 2024 14:52:04 +0200
+Message-ID: <CAFLszTi=Kquk3AfQJYpYdvmZn=EKNZTzjOL-ukLJCtP15KfigQ@mail.gmail.com>
+Subject: Re: [PATCH v5 12/14] efi_loader: Avoid using sandbox virtio devices
+To: Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -92,148 +93,193 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Tom,
 
-On Mon, 23 Sept 2024 at 14:15, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Fri, 20 Sept 2024 at 16:59, Tom Rini <trini@konsulko.com> wrote:
 >
-> On 19.09.24 16:13, Simon Glass wrote:
-> > Hi Heinrich,
+> On Fri, Sep 20, 2024 at 09:25:29AM +0200, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > On Sat, 14 Sept 2024 at 09:40, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> >>
-> >> On 02.09.24 00:22, Simon Glass wrote:
-> >>>   From my inspection none of the users need the memory to be zeroed. It
-> >>> is somewhat unexpected that it does so, since the name gives no clue to
-> >>> this.
-> >>
-> >> Though the UEFI specification does not require it, EDK II uses
-> >> AllocateZeroPool() to implement
-> >> EFI_DEVICE_PATH_UTILITIES_PROTOCOL.CreateDeviceNode(). We should not
-> >> deviate from it.
+> > On Thu, 19 Sept 2024 at 19:45, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Thu, Sep 19, 2024 at 04:10:12PM +0200, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Tue, 17 Sept 2024 at 19:03, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Mon, Sep 16, 2024 at 05:42:31PM +0200, Simon Glass wrote:
+> > > > > > Hi Heinrich,
+> > > > > >
+> > > > > > On Thu, 12 Sept 2024 at 09:12, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> > > > > > >
+> > > > > > > On 02.09.24 03:18, Simon Glass wrote:
+> > > > > > > > While sandbox supports virtio it cannot support actually using the block
+> > > > > > > > devices to read files, since there is nothing on the other end of the
+> > > > > > > > 'virtqueue'.
+> > > > > > > >
+> > > > > > > > A recent change makes EFI probe all block devices, whether used or not.
+> > > > > > > > This is apparently required by EFI, although it violates U-Boot's
+> > > > > > > > lazy-init principle.
+> > > > > > >
+> > > > > > > We always did this.
+> > > > > >
+> > > > > > Commit d5391bf02b9 dates from 2022, so I don't think that is correct.
+> > > > >
+> > > > > Yes, but I also could have sworn that was fixing the behavior having
+> > > > > been changed again previous to that.
+> > > >
+> > > > I don't see any evidence of that, though.
+> > >
+> > > Yes, it's just my recollection of the time and I could be misremembering
+> > > it as one of the other times we've had this discussion.
+> > >
+> > > > > > > What problem do you want to fix? I have not seen any issues in our CI.
+> > > > > >
+> > > > > > The EFI test in this series hangs trying to probe a virtio block
+> > > > > > device. If you drop this patch and try the rest of the series in CI,
+> > > > > > you will see the failure. Or you could just accept that I investigated
+> > > > > > this, root-caused it and produced a suitable fix. This is a v5 patch
+> > > > > > which has had quite a bit of discussion.
+> > > > >
+> > > > > And as I noted an iteration or two back, it's entirely unclear if the
+> > > > > problem is "sandbox virtio is broken" or "this code is wrong here".
+> > > > > Which in fact gets us back to ...
+> > > >
+> > > > sandbox virtio does not support a functioning block device
+> > > >
+> > > > >
+> > > > > > > > We cannot just drop the virtio devices as they are used in sandbox tests.
+> > > > > > > >
+> > > > > > > > So for now just add a special case to work around this.
+> > > > > > > >
+> > > > > > > > The eventual fix is likely adding an implementation of
+> > > > > > > > virtio_sandbox_notify() to actually do the block read. That is tracked
+> > > > > > > > in [1].
+> > > > > > > >
+> > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > > Fixes: d5391bf02b9 ("efi_loader: ensure all block devices are probed")
+> > > > > > > > Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > > > > > > > [1] https://source.denx.de/u-boot/u-boot/-/issues/37
+> > > > > > > > ---
+> > > > > > > >
+> > > > > > > > (no changes since v3)
+> > > > > > > >
+> > > > > > > > Changes in v3:
+> > > > > > > > - Add a Fixes tag
+> > > > > > > > - Mention the issue created for this problem
+> > > > > > > >
+> > > > > > > >   lib/efi_loader/efi_disk.c | 14 +++++++++++++-
+> > > > > > > >   1 file changed, 13 insertions(+), 1 deletion(-)
+> > > > > > > >
+> > > > > > > > diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
+> > > > > > > > index 93a9a5ac025..2e1d37848fc 100644
+> > > > > > > > --- a/lib/efi_loader/efi_disk.c
+> > > > > > > > +++ b/lib/efi_loader/efi_disk.c
+> > > > > > > > @@ -838,8 +838,20 @@ efi_status_t efi_disk_get_device_name(const efi_handle_t handle, char *buf, int
+> > > > > > > >   efi_status_t efi_disks_register(void)
+> > > > > > > >   {
+> > > > > > > >       struct udevice *dev;
+> > > > > > > > +     struct uclass *uc;
+> > > > > > > >
+> > > > > > > > -     uclass_foreach_dev_probe(UCLASS_BLK, dev) {
+> > > > > > > > +     uclass_id_foreach_dev(UCLASS_BLK, dev, uc) {
+> > > > > > > > +             /*
+> > > > > > > > +              * The virtio block-device hangs on sandbox when accessed since
+> > > > > > > > +              * there is nothing listening to the mailbox
+> > > > > > > > +              */
+> > > > > > > > +             if (IS_ENABLED(CONFIG_SANDBOX)) {
+> > > > > > > > +                     struct blk_desc *desc = dev_get_uclass_plat(dev);
+> > > > > > > > +
+> > > > > > > > +                     if (desc->uclass_id == UCLASS_VIRTIO)
+> > > > > > > > +                             continue;
+> > > > > > > > +             }
+> > > > > > > > +             device_probe(dev);
+> > > > > > > >       }
+> > > > > > > >
+> > > > > > > >       return EFI_SUCCESS;
+> > > > > > >
+> > > > > > > Please, do not spray sandbox tweaks all over the place.
+> > > > > > >
+> > > > > > > Can't you just return an error from the sandbox-virtio driver when an
+> > > > > > > attempt to read a queue is made?
+> > > > > > >
+> > > > > > > We are using virtio on QEMU. Why do we need sandbox virtio devices? Just
+> > > > > > > run the relevant tests on the real thing.
+> > > > > >
+> > > > > > Please go ahead with whatever approach to testing you wish. But
+> > > > > > sandbox testing is an important component of U-Boot.
+> > > > >
+> > > > > Yes, but is sandbox implementing the "just be a state machine" part here
+> > > > > correctly, or not? It keeps feeling like "not" and that the reasonable
+> > > > > course of action would be to stop testing this on sandbox until that is
+> > > > > fixed especially since we can test this reliably on qemu.
+> > >
+> > > OK, but I can't tell if your answer to my point here is:
+> > > - Yes, sandbox virtio is broken / incomplete
+> > > - No, sandbox virtio is fine, there's some other mismatch between how
+> > >   it's used for sandbox and how it's used for QEMU. This will get
+> > >   resolved later.
 > >
-> > Are you saying that there is an unwritten convention in the spec? My
-> > inspection of the code leads me to believe that all of the bytes which
-> > are allocated are written to, within that code, so that zeroing the
-> > bytes serves no purpose.
+> > It is incomplete, in that the block device is not fully implemented.
 >
-> EFI_DEVICE_PATH_UTILITIES_PROTOCOL.CreateDeviceNode() is an API:
+> Then please disable it until you can complete it.
 >
-> You have to consider the current and future usage outside U-Boot.
->
-> For saving a few microseconds I would not want to give up compatibility
-> with EDK II.
-
-What sort of compatibility are you referring to? Are we implementing a
-spec or copying Tianocore? Also, did you miss the second sentence in
-my response?
-
->
+> > No other test enables it, but EFI does, since it blinding tries to
+> > access all block devices without any control.
 > >
-> > My goal here is to allow use of malloc(), instead of calloc(), for example.
+> > >
+> > > > We have to move things forward a piece at a time. Not having a proper
+> > > > test for the EFI bootmeth is a significant gap and is what I am trying
+> > > > to fix with this series. It isn't perfect, but it is a step forward
+> > > > and will prevent regressions. It can also be built on later.
+> > > >
+> > > > Happy-path testing with QEMU is all very well, but it only goes so far.
+> > >
+> > > I frankly get really puzzled about why testing all of this, in QEMU,
+> > > where we could actually design the test to see if the OS has booted (and
+> > > if we leave things configurable well enough, do this on real hardware)
+> > > is wrong but sandbox, where we can't boot the OS, is good. Especially
+> > > for the device that's only present in an emulator. We're emulating an
+> > > emulator and not getting matching behavior in our emulator.
+> >
+> > There are many reasons:
 >
-> The caller of the API has to release with the memory with FreePool(). So
-> we should allocate it with AllocatePool().
+> To be clear, I'm not saying sandbox tests have no value, or are
+> unimportant. I apologize for imply as much.
 >
-> See chapter 10.5.8
-> "EFI_DEVICE_PATH_UTILITIES_PROTOCOL.CreateDeviceNode()" in the UEFI
-> specification.
+> > - with sandbox we can test the operation of the bootmeth, including
+> > under failure conditions
+>
+> Yes, state machine tests are useful. But we can test for xFAIL on other
+> platforms, yes?
+>
+> > - we can test what happens within U-Boot itself when
+> > exit-boot-services is called, which is the bug that provoked me to
+> > write the test
+>
+> I honestly don't recall the state of the discussion around that patch,
+> positive/negative/neutral.
+>
+> > - we can build on this test to cover other bootmeths without needing
+> > to install a full OS just to run a test
+>
+> Counter point, we can't test that an OS actually boots. One of the most
+> valuable personally tests we've added recently is
+> test/py/tests/test_net_boot.py which makes the network load and boot an
+> OS image, and test for (some) failure modes.
 
-Yes, my patch does not change that.
+What do you want me to do with this patch?
+
+Without it, the test cannot pass. Are you suggesting that we apply the
+patches, but don't enable the test until it can be made to work,
+without this patch? Are you suggesting that I implement block devices
+for virtio in sandbox?
+
+I see great value in this test. It covers a case which we don't
+currently have in CI.
+
+Please can you just take this patch so we can move forward?? I'm happy
+to add the virtio support later.
 
 Regards,
 Simon
-
-
->
-> Best regards
->
-> Heinrich
->
-> >
-> >>
-> >>>
-> >>> Drop the memset() so that it effectively becomes a wrapper around the
-> >>> normal EFI-pool allocator.
-> >>>
-> >>> Another option would be to drop this function and call
-> >>> efi_allocate_pool() directly, but that increase code size a little.
-> >>>
-> >>> Move the function comment to the header file like most other exported
-> >>> functions in U-Boot.
-> >>
-> >> Yes, we should move all non-static EFI function descriptions to headers.
-> >> But it makes no sense to move the comments of a single function and
-> >> leave the other functions unchanged. Have a look at doc/api/efi.rst.
-> >
-> > I normally like to do these things one at a time, when changes are
-> > needed, to avoid massive wholesale changes with no other purpose. That
-> > is what has happened with image.h over time. But OK I can drop that
-> > part of the patch, once we sort out the zeroring.
-> >>>
-> >>> Signed-off-by: Simon Glass <sjg@chromium.org>
-> >>> ---
-> >>>
-> >>> Changes in v3:
-> >>> - Add new patch to drop the memset() from efi_alloc()
-> >>> - Drop patch to convert device_path allocation to use malloc()
-> >>>
-> >>>    include/efi_loader.h        | 11 ++++++++++-
-> >>>    lib/efi_loader/efi_memory.c |  9 ---------
-> >>>    2 files changed, 10 insertions(+), 10 deletions(-)
-> >>>
-> >>> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> >>> index f84852e384f..38971d01442 100644
-> >>> --- a/include/efi_loader.h
-> >>> +++ b/include/efi_loader.h
-> >>> @@ -758,8 +758,17 @@ efi_status_t efi_next_variable_name(efi_uintn_t *size, u16 **buf,
-> >>>     * Return:  size in pages
-> >>>     */
-> >>>    #define efi_size_in_pages(size) (((size) + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT)
-> >>> -/* Allocate boot service data pool memory */
-> >>> +
-> >>> +/**
-> >>> + * efi_alloc() - allocate boot services data pool memory
-> >>> + *
-> >>> + * Allocate memory from pool with type EFI_BOOT_SERVICES_DATA
-> >>> + *
-> >>> + * @size:    number of bytes to allocate
-> >>> + * Return:   pointer to allocated memory, or NULL if out of memory
-> >>> + */
-> >>>    void *efi_alloc(size_t len);
-> >>> +
-> >>>    /* Allocate pages on the specified alignment */
-> >>>    void *efi_alloc_aligned_pages(u64 len, int memory_type, size_t align);
-> >>>    /* More specific EFI memory allocator, called by EFI payloads */
-> >>> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> >>> index c6f1dd09456..50cb2f3898b 100644
-> >>> --- a/lib/efi_loader/efi_memory.c
-> >>> +++ b/lib/efi_loader/efi_memory.c
-> >>> @@ -664,14 +664,6 @@ efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size,
-> >>>        return r;
-> >>>    }
-> >>>
-> >>> -/**
-> >>> - * efi_alloc() - allocate boot services data pool memory
-> >>> - *
-> >>> - * Allocate memory from pool and zero it out.
-> >>> - *
-> >>> - * @size:    number of bytes to allocate
-> >>> - * Return:   pointer to allocated memory or NULL
-> >>> - */
-> >>>    void *efi_alloc(size_t size)
-> >>>    {
-> >>>        void *buf;
-> >>> @@ -681,7 +673,6 @@ void *efi_alloc(size_t size)
-> >>>                log_err("out of memory");
-> >>>                return NULL;
-> >>>        }
-> >>> -     memset(buf, 0, size);
-> >>>
-> >>>        return buf;
-> >>>    }
-> >>
-> >
-> >
-> > Regards,
-> > Simon
->
