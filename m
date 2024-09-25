@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F199C369D9
-	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 12:58:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5DB6C369D9
+	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 12:58:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF99588B79;
-	Wed, 25 Sep 2024 14:57:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 52A9588C98;
+	Wed, 25 Sep 2024 14:57:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TjKWpVIG";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jDEbell+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A3C3288C37; Wed, 25 Sep 2024 14:57:53 +0200 (CEST)
-Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
- [IPv6:2a00:1450:4864:20::230])
+ id 9ACC188BC2; Wed, 25 Sep 2024 14:57:58 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 32F4088363
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 14:57:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8577388B9F
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 14:57:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-lj1-x230.google.com with SMTP id
- 38308e7fff4ca-2f74e613a10so102379451fa.1
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 05:57:48 -0700 (PDT)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a8d56155f51so803129866b.2
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 05:57:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727269067; x=1727873867; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727269070; x=1727873870; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LMHmGdxRW6equVHL1dqGVz92squyfxsDWicYH7fDlpg=;
- b=TjKWpVIGBskVrXTqImAd36mmBG9WGSvqDmYspzhYiJrqlwftZc3NQdvj7dCVo9DKQy
- YaXrvsN5PhI8hCDtM+AxnYogXP+MPLO0iVrAq0cY69e91Is00IoOAyDSDFv9Yu1vCKf/
- hgVJNNxARgjbiTHv6kVV9T8WwZqBvrjdHvpYM=
+ bh=FWxi/uLbfaPg1MEi4HO89AIME2vpjFbMNr+8BWr6vxo=;
+ b=jDEbell+nNoxO/ZxY891bDspcIIZYhM85yUSMfi9nd0s0pfXzV33DUpkVELScbirxI
+ cdPSA5dE9MhxlOnK5afvnL3YyQSTRpH0EKKisMqWs730laVG5sL8jrSui4qv2JayKANJ
+ p7upQH4/537PT/uukBhZzqDarAdCKkax1EQKk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727269067; x=1727873867;
+ d=1e100.net; s=20230601; t=1727269070; x=1727873870;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LMHmGdxRW6equVHL1dqGVz92squyfxsDWicYH7fDlpg=;
- b=PHGihxqhAgumijkV37PVEJyO5r/T/5RaGiC+gUYv8cbFoP/rMseZUWjl0tBLsJS9O2
- wfRgV1m59XKaBzyQAWlfhO/H+bHRYtLS8jinzEUlwIzulcWS+0LoDSC+XRGvee8XfuHj
- +CYTepD7KLrS3IVoVgguutmARggxNZthOE3uHePdFx+GQ2zkYNS0z/kFBVx7Q1yD0MMn
- uKVou334ulRDadpacuuqsxsnSy6TFH2KZsSraJCkrz6unl68ZF9y95zP+LnUaCaTfD5L
- fdV4LVsZe6Trs8/L7ie6t78ConKDnjHUCBrs8DACBDM28XszJkpjtXMUP5dsbulAxt1J
- Jyyg==
-X-Gm-Message-State: AOJu0YxsSfr4RBwYYy3n3Va+vkbwPVYlVlNI/2GmoeLew3RsZ7hUG1iB
- jH2HHhlq0a9wSuTz3H8EwG/TqElORYDfeCXrV41x9tHLIP+e1p7yAy3x4fvOP0cmuTTTfdpeHz1
- 0ew==
-X-Google-Smtp-Source: AGHT+IG5T0NNocePDgfxM4WDpuOScua2NtFsqFIteJIYRiOiTixKD60zM+r2H0l1cATIUc8MZc5pgw==
-X-Received: by 2002:a05:6512:a8d:b0:536:53e3:feae with SMTP id
- 2adb3069b0e04-5387048a6cbmr2160673e87.11.1727269067042; 
- Wed, 25 Sep 2024 05:57:47 -0700 (PDT)
+ bh=FWxi/uLbfaPg1MEi4HO89AIME2vpjFbMNr+8BWr6vxo=;
+ b=AOd6weK5fQxcbUO8haAkFCwGkJ0OktdEy3n4607F3WUoghVqXg+uB70GjedUGUL1/B
+ /AmFF/TwH0U2JPDntRMNKcu1EteNzh1HWhp3s8XH/YZOUDrzt7oaLhQQFYUrzcj3Sr8R
+ GnJVuKqNRH/zzsqKdOQpQRg4oxR5HRT7jN5T5+z2DJirgB8gPStVRpJJw1mTnW+BqK6+
+ ZZTWu9UsNCn0vXZA3Xxwraoxj7hEhUZ9p9NwsvjMA2hOQi0Jt8DD+ZnQH5sL4AfjPfiK
+ RJgUupYO+GpZS48Zu3TK1iXcJ8AnY+1Az6k52gR587se5zdKUqtT85vfYzqjUDUZKjsJ
+ +eJQ==
+X-Gm-Message-State: AOJu0YxO+zHw3xQYHjQf+Nj0WjAnpl4H3uFupktHZfykMAEB9rt+DYti
+ faqtvHbCgx0+8GEEetikRryqXFW9NnLQ53VCdEN3g8VtkS38A4ZMi+HIaCUSZY1fWaMXtUoiEw5
+ G7A==
+X-Google-Smtp-Source: AGHT+IFyWyZzzIAr9Lmw2OFHoZeZKwixuJPuKRSzYfP0L3W+riNS4JkvTafls7VlXVRnzc0J4xmhkg==
+X-Received: by 2002:a17:907:1b23:b0:a8d:2a46:606f with SMTP id
+ a640c23a62f3a-a93a03f52f4mr259912166b.38.1727269069730; 
+ Wed, 25 Sep 2024 05:57:49 -0700 (PDT)
 Received: from chromium.org ([82.132.187.73]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a93930f7889sm209209766b.179.2024.09.25.05.57.44
+ a640c23a62f3a-a93930f7889sm209209766b.179.2024.09.25.05.57.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Sep 2024 05:57:46 -0700 (PDT)
+ Wed, 25 Sep 2024 05:57:49 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Devarsh Thakkar <devarsht@ti.com>, Kever Yang <kever.yang@rock-chips.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
  Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH 01/19] spl: Reduce the size of the bl_len field
-Date: Wed, 25 Sep 2024 14:55:27 +0200
-Message-ID: <20240925125622.197915-2-sjg@chromium.org>
+ Sean Anderson <seanga2@gmail.com>,
+ Suniel Mahesh <sunil@amarulasolutions.com>
+Subject: [PATCH 02/19] spl: Provide a way of indicating the phase to load
+Date: Wed, 25 Sep 2024 14:55:28 +0200
+Message-ID: <20240925125622.197915-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240925125622.197915-1-sjg@chromium.org>
 References: <20240925125622.197915-1-sjg@chromium.org>
@@ -91,28 +92,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is a block length, so typicaly 512 bytes. Reduce the size to
-16 bits to save space, before more fields are added in future work.
+Provide a field in struct spl_load_info to indicate the phase of the
+image which should be loaded. This is needed by VBE, which can load
+images in various phases.
+
+Set the phase to none by default.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- include/spl.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ include/spl.h | 23 +++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
 
 diff --git a/include/spl.h b/include/spl.h
-index d90eed956af..1cfaa08ed6a 100644
+index 1cfaa08ed6a..113d50152a1 100644
 --- a/include/spl.h
 +++ b/include/spl.h
-@@ -309,7 +309,7 @@ struct spl_load_info {
+@@ -14,6 +14,7 @@
+ #include <asm/global_data.h>
+ #include <asm/spl.h>
+ #include <handoff.h>
++#include <image.h>
+ #include <mmc.h>
+ 
+ struct blk_desc;
+@@ -304,6 +305,7 @@ typedef ulong (*spl_load_reader)(struct spl_load_info *load, ulong sector,
+  * @read: Function to call to read from the device
+  * @priv: Private data for the device
+  * @bl_len: Block length for reading in bytes
++ * @phase: Image phase to load
+  */
+ struct spl_load_info {
  	spl_load_reader read;
- 	void *priv;
+@@ -311,6 +313,9 @@ struct spl_load_info {
  #if IS_ENABLED(CONFIG_SPL_LOAD_BLOCK)
--	int bl_len;
-+	u16 bl_len;
+ 	u16 bl_len;
  #endif
++#if CONFIG_IS_ENABLED(BOOTMETH_VBE)
++	u8 phase;
++#endif
  };
  
+ static inline int spl_get_bl_len(struct spl_load_info *info)
+@@ -332,6 +337,23 @@ static inline void spl_set_bl_len(struct spl_load_info *info, int bl_len)
+ #endif
+ }
+ 
++static inline void spl_set_phase(struct spl_load_info *info,
++				 enum image_phase_t phase)
++{
++#if CONFIG_IS_ENABLED(BOOTMETH_VBE)
++	info->phase = phase;
++#endif
++}
++
++static inline enum image_phase_t spl_get_phase(struct spl_load_info *info)
++{
++#if CONFIG_IS_ENABLED(BOOTMETH_VBE)
++	return info->phase;
++#else
++	return IH_PHASE_NONE;
++#endif
++}
++
+ /**
+  * spl_load_init() - Set up a new spl_load_info structure
+  */
+@@ -342,6 +364,7 @@ static inline void spl_load_init(struct spl_load_info *load,
+ 	load->read = h_read;
+ 	load->priv = priv;
+ 	spl_set_bl_len(load, bl_len);
++	spl_set_phase(load, IH_PHASE_NONE);
+ }
+ 
+ /*
 -- 
 2.43.0
 
