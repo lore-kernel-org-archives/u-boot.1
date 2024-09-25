@@ -4,64 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AA70CCF9E7
-	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 17:05:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42138CCF9E7
+	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 17:25:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0033188C37;
-	Wed, 25 Sep 2024 19:05:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id A205A88BBF;
+	Wed, 25 Sep 2024 19:25:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1727283950;
-	bh=9TMAFc23ppfEwIr1lqMWCOzMG35aHK3NRy8+SRdWoMU=;
-	h=Date:Subject:From:To:Cc:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=SjFgPDWF166TzaavPQDzTI3l5Lf8lDu+r5aQpKIWqXmg/dkLqKuy1tvzHcKeJzoDl
-	 +btjF6a6eZOcrUb6QQ9l9zHOwUiagL2BXQlea/gZZjH8r3W0NS/tm4uvJtJNARGkML
-	 Xw1W0eQx2OnGGB6p6WEbTlnGUS01om2fXQ+Re1PkzGHpV1iQzmShyYXwMlBq5dzz/o
-	 7ROmJ705F5rW+Ud/cQzwY8eDIUDl7ClZPLkcRCEUGJdMMMmyXQR/MfuVUTp62nrnQF
-	 tvGqUQCpkDQ5UWuxYSIcSKVRhNHBZv9rgTJC60DKl4M4YVfeUmLY97/ssCnMMjx7bB
-	 hvEPlLYDV7ebw==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AVXw3LiX";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id CCDF788BBF; Wed, 25 Sep 2024 19:25:53 +0200 (CEST)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id DE9A288BBF;
- Wed, 25 Sep 2024 19:05:47 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1727283948;
- bh=9TMAFc23ppfEwIr1lqMWCOzMG35aHK3NRy8+SRdWoMU=;
- h=Date:Subject:From:To:Cc:References:In-Reply-To:From;
- b=aLeMeH+s/DMqSWS9atvqYp+0466K8iNxeefGRaN9cAC65modIrC7CIQR/Jli5VqEe
- A+mV1UAf2IOHxnLZ1yWLrLrQZBXyhSFMTGKc0q6oOhzWbRBz6vJ5hgnHwhoXUeyQ6x
- dR5W2pR2W3GQ7QEA72jXHAyPgmTO/pWXvcWwnZmdg3BzmTZAhqs/I9vR7wiGOHrI8S
- 9gcnSOYl9hPoZMiRyq7BCb9wxCTch2wZhMQL+cVUHVQWonBOGOQI1E0KYwTZOjJxOZ
- /LWSAsL4TcxxaRFUJdyLKCuvBxQPo08sanUdQzMR1Jq+Yn+FOngEwE0TBItPifMfoc
- XGhjeJZCx+JdQ==
-Message-ID: <9dd94d8a-0b83-480f-831b-e4bfd4a67333@denx.de>
-Date: Wed, 25 Sep 2024 19:05:47 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 6C81188216
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 19:25:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-7a9ae8fc076so7947885a.2
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 10:25:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1727285142; x=1727889942; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/DDRzAOQmfam3St40wivnrS/da9+ocK7ZtUHUnBS8Wk=;
+ b=AVXw3LiXVrFGFTzMozUNT5VtYBXThG40OJFOUku03KeV1DpIe7Gq/oNyLaawvYKCQg
+ G2cjuvK4HzBCPZZZK1vsybE0p++PqPSXCyTBbKGKOfLRTYstNnTA1ZS5+Tof/oXYNN+o
+ bRGOD6uJRjStLSoeq3oE/ahytL08jjR2exgpQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727285142; x=1727889942;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=/DDRzAOQmfam3St40wivnrS/da9+ocK7ZtUHUnBS8Wk=;
+ b=Pse8TitTcNo24cpFUsdVFTnPmfYxpnOPjErUcs4+Ei2d6AvclN2BgvY2l6E0vYSPyj
+ FgJNL20GK3T953yUzJaBDXazol4WzPoj9VYjUSFCtZn0GppDBDQeQOEJYUko4A2CeNuW
+ 3ycpxyrJbCi+xJkiYRnpnrBeJtz7hxnkW7ZDVDEwTZPqsMeq7ReGPsT19hmXqX7dunXj
+ 5CchEXwLoSLTdM01zv7s2zhBJf8ckO2kd9JXYUu9SUG9lOmVhcBDBnt2XM05S3MFJ57i
+ laCAdP58rvqOAeXfjec/DgwKKT0D3cgV8V7Sd4Mz+i4hRhlK3T5W936HuMVST0MNNwlT
+ CcKg==
+X-Gm-Message-State: AOJu0YyfzSOWXLMmtR27JrEN80OdO6zchQh2Nno+11ADuw6HWcpUKBLd
+ hBngkFozYsW61E8w2OjRet3wOIjGfg2OU4DqKRSsQo2MLay/5VdpusM/i4aO5gXLws1rshCJM4j
+ 6F4k=
+X-Google-Smtp-Source: AGHT+IFSxMDl9zlWY0kY9Y5DVDMSPjs5mGzT5GeslBABHAlqXbVWhrANIUabuVUHUT4LMCJVaDUH8g==
+X-Received: by 2002:a05:620a:4543:b0:79f:197d:fe6e with SMTP id
+ af79cd13be357-7ace744d1demr545772085a.45.1727285142230; 
+ Wed, 25 Sep 2024 10:25:42 -0700 (PDT)
+Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7acde5cc8a7sm190320985a.75.2024.09.25.10.25.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 25 Sep 2024 10:25:41 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Jaehoon Chung <jh80.chung@samsung.com>, Jonas Karlman <jonas@kwiboo.se>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20240724224713.2963301-1-jonas@kwiboo.se>
+References: <20240724224713.2963301-1-jonas@kwiboo.se>
+Subject: Re: [PATCH 1/2] power: regulator: Do not call set_suspend_value
+ with -ENODATA
+Message-Id: <172728514096.256765.14707845672734611541.b4-ty@konsulko.com>
+Date: Wed, 25 Sep 2024 11:25:40 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mtd: spi-nor: Clear Winbond SR3 WPS bit on boot
-From: Marek Vasut <marex@denx.de>
-To: Jagan Teki <jagan@amarulasolutions.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Hai Pham <hai.pham.ud@renesas.com>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Johann Neuhauser <jneuhauser@dh-electronics.com>,
- Simon Glass <sjg@chromium.org>,
- Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Vignesh R <vigneshr@ti.com>
-References: <20240304161607.82759-1-marex@denx.de>
- <CAMty3ZB=s5ZNhgHZ2Q8vbzcvFCdO=62xHSY+dAeyr=y3ujkgWA@mail.gmail.com>
- <19a4f9fd-81c7-4ff7-a202-8f0f0c5857a9@denx.de>
- <CAMty3ZD0e1N_AQVOn_eCNkQQusib64QannFfx8Edku57WZWrfA@mail.gmail.com>
- <65ceb565-e84e-4ba1-a11d-7bd0ac98f7ee@denx.de>
-Content-Language: en-US
-In-Reply-To: <65ceb565-e84e-4ba1-a11d-7bd0ac98f7ee@denx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,32 +90,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/11/24 1:05 PM, Marek Vasut wrote:
-> On 8/30/24 3:36 PM, Jagan Teki wrote:
->> On Sun, Aug 25, 2024 at 5:58 AM Marek Vasut <marex@denx.de> wrote:
->>>
->>> On 5/24/24 6:05 PM, Jagan Teki wrote:
->>>> On Mon, Mar 4, 2024 at 9:46 PM Marek Vasut <marex@denx.de> wrote:
->>>>>
->>>>> Some Winbond SPI NORs have special SR3 register which is
->>>>> used among other things to control whether non-standard
->>>>> "Individual Block/Sector Write Protection" (WPS bit)
->>>>> locking scheme is activated. This non-standard locking
->>>>> scheme is not supported by either U-Boot or Linux SPI
->>>>> NOR stack so make sure it is disabled, otherwise the
->>>>> SPI NOR may appear locked for no obvious reason.
->>>>>
->>>>> This SR3 WPS appears e.g. on W25Q16FW which has the same ID as
->>>>> W25Q16DW, but the W25Q16DW does not implement the SR3 WPS bit.
->>>>>
->>>>> Signed-off-by: Marek Vasut <marex@denx.de>
->>>>> ---
->>>>
->>>> Applied to u-boot-spi/master
->>>
->>> I do not see this patch in u-boot/master , was it missed ?
->>
->> I missed it, I will send it as part of PR soon.
-> Is there a PR now ?
+On Wed, 24 Jul 2024 22:47:10 +0000, Jonas Karlman wrote:
 
-Is there any progress on this ?
+> On some boards a PMIC regulator is flagged with regulator-on-in-suspend
+> and does not define any suspend or max microvolt, e.g. on Radxa ROCK 3A:
+> 
+>   vcc_ddr: DCDC_REG3 {
+> 	regulator-name = "vcc_ddr";
+> 	regulator-always-on;
+> 	regulator-boot-on;
+> 	regulator-initial-mode = <0x2>;
+> 
+> [...]
+
+Applied to u-boot/next, thanks!
+
+-- 
+Tom
+
+
