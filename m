@@ -4,68 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D57CC369BA
-	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 09:48:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6517DC369CA
+	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 10:45:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3DDEC88B31;
-	Wed, 25 Sep 2024 11:47:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 986B1889E9;
+	Wed, 25 Sep 2024 12:45:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oB5gC8+P";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NhyWvaSh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0EED18880F; Wed, 25 Sep 2024 11:47:56 +0200 (CEST)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id 072C187E30; Wed, 25 Sep 2024 12:45:29 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05FD288B31
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 11:47:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 715A887BF4
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 12:45:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-5c4226a5af8so8368568a12.1
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 02:47:51 -0700 (PDT)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-a8d2b4a5bf1so917856066b.2
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 03:45:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727257671; x=1727862471; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727261116; x=1727865916; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Dy4gzOxSnfq7oDZUa9vl7mL8uMXc+ROqcMttYvUghpw=;
- b=oB5gC8+P9q8y1X6H+zOehf8QULnLrC+PFeaThO4KwFPxwAXWA7EOPJx7IKs+QN62Sb
- S9UhOaLYCyKnA66c3Mauf+qqSDMefi9k5oj9JWVZwmr+QnDTVJKIA3Gv+hctX99JnAi3
- WmXD2Sfty1ztUuFThBKmBQli+UetaeYv2IpYw=
+ bh=G+4ReTpOUtmkSQpioPKZIoLjm5DrynoaFyhbzdkJPUE=;
+ b=NhyWvaShQPOASfP8C9+zgLnZufXyNQdk10CWXdCGKefUHWBNixGS5KbUbpDSCeHqIf
+ V7DF4zNK8Ze0bV0MdhEG/lXuoT58iq2p2hM3VNwXRDKjFk3/vidEVYXBvh8JLJOH+U9x
+ azqwn9pRxFL7KBOFpTupjQmuE/qslh/yWaeKI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727257671; x=1727862471;
+ d=1e100.net; s=20230601; t=1727261116; x=1727865916;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Dy4gzOxSnfq7oDZUa9vl7mL8uMXc+ROqcMttYvUghpw=;
- b=FqKGzwWL59vAvBpNUNOZ+H9guE8wcCg6pKF+yhTdC+/9+OTwkxrpIYYX9EXjwDYM2m
- JDMsd10G7MvKVsFqsQ5WBUDzDhlp+1OuR1Gm8RooxyrnJGYOj0zkFAkzoSXwLfK8BK8e
- M4O9aKMbElV9RoZaDrGdgRuQYd+2hXK4w6YfA8dqv/tjSjqSjt76maPCWhTvVr8r8R1l
- zhUVCHAi9H1tsAtL9QYaztEuJ356h6bTj2gxzZRyl/G7gIiVr31QDb5w5ByhEl6CvB8A
- KoNdnvtgNfj8DsBrgGZIEH8F9i7nCjZBLbtFkw/8OarClhQu1Ci8athuJrIcg++BH7YX
- q5FA==
-X-Gm-Message-State: AOJu0YzQntsE17JRV3tJobSUtZQJ+/on+ygf894UQpU4bfhtikns2b0m
- X1/XcorJXTzO/5f7kDHWIDgbNf2vxXJqeTHEu6d9vVvyPf9T9oT0Z3x1CNq+VEjmf9oy2oKEHgQ
- =
-X-Google-Smtp-Source: AGHT+IGSicdp82bdsbT0TA4aG9egNIVBWvVCxKjZHEKURQuwbcKifcYFTksfkvZsain0EtMyI7fsMw==
-X-Received: by 2002:a17:906:cae2:b0:a8a:8de6:a605 with SMTP id
- a640c23a62f3a-a93a035d76amr195163766b.17.1727257671073; 
- Wed, 25 Sep 2024 02:47:51 -0700 (PDT)
+ bh=G+4ReTpOUtmkSQpioPKZIoLjm5DrynoaFyhbzdkJPUE=;
+ b=pBzq5p0DI/mV0QMJaCFdK/E1OqAaaBlM7DIXH1DgQ5ivAPFOYnGuIEDliCb998mIBe
+ Qcdcgw2EFDBa3x7DT9B/VQnIsjwINs2YPOZOaYDPFnkk+aWeLgPjHzyNvWsMupuN+k42
+ 3lLqmbU0VIbbaTOyPzoKuLFH+Tihsn/1Fg/bRyY6Pq3IOTCmK71RKw9PMxXHj6xGZgJr
+ d8jjSGUvhFRHZY0aJvgk+bgg9hCDMjV4IFe6inG8nCi+MwqHeyJkI8kSy5rf8SDzwggr
+ Y6ZOrc0Jbit4cglzlxc4bE4IYNpYkBSkX5HhUgJF1fsbJX9ZLlbd2K0U1hO2DyhDRCUN
+ OyIw==
+X-Gm-Message-State: AOJu0YzdSn+FDVsLht1mc8llSgb4yw8DRa+yataZ2WeM7wd/5ELly6uX
+ 9tLYWB5lqzvidmYXLXa39JJTURIwsh7vwe4HfU6yBM1qdDXwtDjl4Rkxm4ju7akQYkvWZP66lKG
+ UMQ==
+X-Google-Smtp-Source: AGHT+IEk3kD+uOyPQu8pBp4pxNfVc77oUILcySn2sEhgQ8nT8FyzqI1h2FXlkhbs8jqlrg99L3Hr+Q==
+X-Received: by 2002:a17:907:1c1d:b0:a7a:bcbc:f7e1 with SMTP id
+ a640c23a62f3a-a93a035ce1emr227603366b.15.1727261116564; 
+ Wed, 25 Sep 2024 03:45:16 -0700 (PDT)
 Received: from chromium.org ([82.132.187.73]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9392f661e1sm191668766b.95.2024.09.25.02.47.49
+ a640c23a62f3a-a9392f342a7sm195352266b.29.2024.09.25.03.45.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Sep 2024 02:47:50 -0700 (PDT)
+ Wed, 25 Sep 2024 03:45:16 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
-	Simon Glass <sjg@chromium.org>
-Subject: [u-boot-test-hooks PATCH] qemu_arm64_tpl: Add a new board
-Date: Wed, 25 Sep 2024 11:47:40 +0200
-Message-ID: <20240925094745.37922-1-sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: [PATCH] sandbox_spl: Restrict use of UPL when not enabled
+Date: Wed, 25 Sep 2024 12:44:53 +0200
+Message-ID: <20240925104501.44457-1-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -85,50 +87,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add this new board, to support testing the relocating SPL loader.
+With sandbox_spl we want to use the file-based boot in CI, so that this
+flow is tested. The recent UPL change enabled booting via that method,
+thus overriding the file-based boot.
+
+Correct this by using UPL only when the --upl flag is given.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Fixes: 91fde8e1764 ("sandbox: Add an SPL loader for UPL")
 ---
 
- bin/travis-ci/conf.qemu_arm64_tpl_na | 29 ++++++++++++++++++++++++++++
- 1 file changed, 29 insertions(+)
- create mode 100644 bin/travis-ci/conf.qemu_arm64_tpl_na
+ arch/sandbox/cpu/spl.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/bin/travis-ci/conf.qemu_arm64_tpl_na b/bin/travis-ci/conf.qemu_arm64_tpl_na
-new file mode 100644
-index 0000000..556e15b
---- /dev/null
-+++ b/bin/travis-ci/conf.qemu_arm64_tpl_na
-@@ -0,0 +1,29 @@
-+# Copyright (c) 2017 Tuomas Tynkkynen. All rights reserved.
-+# Based on conf.vexpress_ca15_tc2_qemu which is:
-+# Copyright (c) 2016 Konsulko Group. All rights reserved.
-+#
-+# Permission is hereby granted, free of charge, to any person obtaining a
-+# copy of this software and associated documentation files (the "Software"),
-+# to deal in the Software without restriction, including without limitation
-+# the rights to use, copy, modify, merge, publish, distribute, sublicense,
-+# and/or sell copies of the Software, and to permit persons to whom the
-+# Software is furnished to do so, subject to the following conditions:
-+#
-+# The above copyright notice and this permission notice shall be included in
-+# all copies or substantial portions of the Software.
-+#
-+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
-+# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+# DEALINGS IN THE SOFTWARE.
+diff --git a/arch/sandbox/cpu/spl.c b/arch/sandbox/cpu/spl.c
+index 1c33a520c64..76638362564 100644
+--- a/arch/sandbox/cpu/spl.c
++++ b/arch/sandbox/cpu/spl.c
+@@ -55,9 +55,10 @@ void board_init_f(ulong flag)
+ 
+ void board_boot_order(u32 *spl_boot_list)
+ {
++	struct sandbox_state *state = state_get_current();
 +
-+console_impl=qemu
-+qemu_machine="virt"
-+qemu_binary="qemu-system-aarch64"
-+qemu_extra_args="-cpu cortex-a57 -nographic"
-+qemu_kernel_args="-bios ${U_BOOT_BUILD_DIR}/image.bin"
-+reset_impl=none
-+flash_impl=none
+ 	spl_boot_list[0] = BOOT_DEVICE_VBE;
+-	spl_boot_list[1] = BOOT_DEVICE_UPL;
+-	spl_boot_list[2] = BOOT_DEVICE_BOARD;
++	spl_boot_list[1] = state->upl ? BOOT_DEVICE_UPL : BOOT_DEVICE_BOARD;
+ }
+ 
+ static int spl_board_load_file(struct spl_image_info *spl_image,
 -- 
 2.43.0
 
