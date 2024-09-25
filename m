@@ -4,57 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4FB4C369D7
-	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 12:27:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CD28C369D9
+	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 12:27:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76EFC88CE1;
+	by phobos.denx.de (Postfix) with ESMTP id D072788CED;
 	Wed, 25 Sep 2024 14:25:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="LmXt+Kba";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="QYHU4OHN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EFD6588BB2; Wed, 25 Sep 2024 14:25:46 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ id 79C3C88B89; Wed, 25 Sep 2024 14:25:47 +0200 (CEST)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3009188C71
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 14:25:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5983D88C66
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 14:25:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+Oliver.Gaskell.analog.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id E40045C5C77;
- Wed, 25 Sep 2024 12:25:22 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id A6B62C4CECE;
- Wed, 25 Sep 2024 12:25:26 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id 2EA1CA440C4;
+ Wed, 25 Sep 2024 12:25:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id E0D82C4CEC3;
+ Wed, 25 Sep 2024 12:25:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1727267126;
- bh=25LADcqFsJ3lzPfFUAh9CwPj57mKM4ybukEy5jVYiA0=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=LmXt+Kba0vAlHiVID8JcGMIy7OscyJIY6QzpdIjlNh52oesODHrtp3vEFzGepqrRR
- TdiBgfJxmSJZVV1NxsZT3M8Joz0/+CdyOtTwrmQwcMejtgss4p73NA5SdwtWnIBt32
- xbWNVFXWt/G2bZzO/LVA+KfTqwKwgI/aBjoXJ27BZu90LfGL1pswENk43px7QnCUaR
- /ryTYXFzahXqQUsOj0dMotKQxHGqymBXhXZhTyDCWvgw3Ttz+wgYl5qakRJLNsb0ta
- WlN/fCrmCwYp3vbg+j7MjwSZF2nb96QlCZc5LorU9jsSFyK8XlmYZOduFgKpa2fu7x
- IRD+sxpJeN1zw==
+ s=k20201202; t=1727267125;
+ bh=f7+xI368zirEAjhF2AIOC44NfErNwrLl4ZoIS0zKRJw=;
+ h=From:Subject:Date:To:Cc:Reply-To:From;
+ b=QYHU4OHNv+qsmMiKEuyKk0MPo4zZbXNk14LdUS8/ihJxZBeF8ok/bkUZ1F8aEZe/f
+ 5CAZsV2GgRLIO09Ppo1Y1oUORo3K1RV1mqcYTMrl3rrMyQGmACeAp9QICNJ5JQfA4l
+ du7d2r8BSFLY3ZRBAw+uxbtqy/kJnrN3Bzc9wpFIufJdSIjxyY3zVogMTq0KgMWRGk
+ ul8hP1Qot155NTpXLjWibWmYYaG5cSg5jsAL7Pp4HH82Bod8q7/Sch9XXrZDcSBVy/
+ K81ufSQyUDQUFrQa1x2GBLGZJvrOacqpHQXG36HBecraxCR7KXunB6QZFrbIwVPyyj
+ wIjlMm7cpxb/g==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 9F901C369D9;
- Wed, 25 Sep 2024 12:25:26 +0000 (UTC)
+ by smtp.lore.kernel.org (Postfix) with ESMTP id CA070C369CB;
+ Wed, 25 Sep 2024 12:25:25 +0000 (UTC)
 From: Oliver Gaskell via B4 Relay
  <devnull+Oliver.Gaskell.analog.com@kernel.org>
-Date: Wed, 25 Sep 2024 13:25:21 +0100
-Subject: [PATCH v2 11/11] mmc: Add support for ADI SC5XX-family processor
- SDHCI peripherals
+Subject: [PATCH v2 00/11] drivers: Driver support for ADI SC5xx SoCs
+Date: Wed, 25 Sep 2024 13:25:10 +0100
+Message-Id: <20240925-sc5xx-driver-series-v2-0-ad9287c25c08@analog.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240925-sc5xx-driver-series-v2-11-ad9287c25c08@analog.com>
-References: <20240925-sc5xx-driver-series-v2-0-ad9287c25c08@analog.com>
-In-Reply-To: <20240925-sc5xx-driver-series-v2-0-ad9287c25c08@analog.com>
+X-B4-Tracking: v=1; b=H4sIACYB9GYC/0WOQW6DMBBFr4K87iDbgICsco8qi8GMjaUYiO0go
+ ih37yS06m6+Rv/99xSJoqckTsVTRNp88svMQX8Vwkw4OwI/chZa6lr2uoJkmn2HMfqNIhxlwB7
+ t0Jqm7wYjuLlGsn7/UL8vnG1cAuQpEv6zGtVo1XRVW6pa6g4UuEiuDHh9JDxnHyg9UmmW8AuMd
+ LuzXT6ogt8JP3Ys++Z1zDjc7mvKPBX87GDFbCY23BRIqOuxx9GOttLtGWe8Lu5vYMBEwHfw+VR
+ sb2CpJERTi8vr9QPA5NlEJQEAAA==
 To: Tom Rini <trini@konsulko.com>, 
  Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
  Greg Malysa <greg.malysa@timesys.com>, 
@@ -69,13 +71,15 @@ To: Tom Rini <trini@konsulko.com>,
  Jaehoon Chung <jh80.chung@samsung.com>
 Cc: u-boot@lists.denx.de, adsp-linux@analog.com, 
  Oliver Gaskell <Oliver.Gaskell@analog.com>, 
- 20240828-sc5xx-upstreaming-patches-v1-0-44d9adfdf327@analog.com
+ 20240828-sc5xx-upstreaming-patches-v1-0-44d9adfdf327@analog.com, 
+ Angelo Dureghello <angelo.dureghello@timesys.com>, 
+ Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
 X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1727267113; l=7264;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1727267113; l=5124;
  i=Oliver.Gaskell@analog.com; s=20240821; h=from:subject:message-id;
- bh=A43dmfuUIGXeXNwBnvcW1AuOUPG4hddAy7bdAiY6V3c=;
- b=ll0ZJeqK22S8jsl98jTy5253hDf5UeCGuPTb/nYHYbgf2e4gX4xqoRrPiLHhtHGRP+1MemiOi
- CXqIEmajf6tA8UtKRfCh8VQO7vfVwm+3BJ4D13wZ3OsH5tzcARGNsHG
+ bh=f7+xI368zirEAjhF2AIOC44NfErNwrLl4ZoIS0zKRJw=;
+ b=AVYUbF2WX5uolw5CSkfcomJAxlBZomJAR6+tBa15w+69Q7lGl507R7FH3E7sF2G/tsryO9Jqu
+ FSw4icw7rIhD+W7FsW7GNshKIELmo3FMUYK2cV2Ibwvc8l5UjLQ06eO
 X-Developer-Key: i=Oliver.Gaskell@analog.com; a=ed25519;
  pk=Icq9TxwFJ6FePHS28YbBWMvtZpFWxpPQLhLA9cNvZ/Y=
 X-Endpoint-Received: by B4 Relay for Oliver.Gaskell@analog.com/20240821
@@ -98,230 +102,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Oliver Gaskell <Oliver.Gaskell@analog.com>
+This series adds all of the supported peripheral drivers for the sc5xx
+series of SoCs from Analog Devices and other drivers that are used by
+the evaluation kits, such as a GPIO expander used by the EZLITE carrier
+boards.
 
-Co-developed-by: Greg Malysa <greg.malysa@timesys.com>
-Signed-off-by: Greg Malysa <greg.malysa@timesys.com>
-Co-developed-by: Ian Roberts <ian.roberts@timesys.com>
-Signed-off-by: Ian Roberts <ian.roberts@timesys.com>
-Signed-off-by: Vasileios Bimpikas <vasileios.bimpikas@analog.com>
-Signed-off-by: Utsav Agarwal <utsav.agarwal@analog.com>
-Signed-off-by: Arturs Artamonovs <arturs.artamonovs@analog.com>
-Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+This series is based on my earlier patch series:
+  "arm: Initial support for Analog Devices SC5xx boards"
+  20240828-sc5xx-upstreaming-patches-v1-0-44d9adfdf327@analog.com
+since both that series and this series modify MAINTAINERS.
+
+Note that patches 05, 07 had Reviewed-by tags, but have had minor
+changes since v1 so these weren't kept.
+
 Signed-off-by: Oliver Gaskell <Oliver.Gaskell@analog.com>
 ---
- MAINTAINERS             |   1 +
- drivers/mmc/Kconfig     |   9 +++
- drivers/mmc/Makefile    |   1 +
- drivers/mmc/adi_sdhci.c | 154 ++++++++++++++++++++++++++++++++++++++++++++++++
- 4 files changed, 165 insertions(+)
+Changes in v2:
+- Address comments on adi_spi3.c
+- Clean up some whitespace errors
+- Modify Kconfigs to reflect changes to mach-sc5xx/Kconfig
+- Link to v1: https://lore.kernel.org/r/20240515215837.14028-1-greg.malysa@timesys.com
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 669b9953c3..7ba20a8e49 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -616,6 +616,7 @@ F:	drivers/dma/adi_dma.c
- F:	drivers/gpio/adp5588_gpio.c
- F:	drivers/gpio/gpio-adi-adsp.c
- F:	drivers/i2c/adi_i2c.c
-+F:	drivers/mmc/adi_sdhci.c
- F:	drivers/net/dwc_eth_qos_adi.c
- F:	drivers/pinctrl/pinctrl-adi-adsp.c
- F:	drivers/remoteproc/adi_sc5xx_rproc.c
-diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
-index 982e84dc3b..6ac65a8ba8 100644
---- a/drivers/mmc/Kconfig
-+++ b/drivers/mmc/Kconfig
-@@ -281,6 +281,15 @@ config MMC_DW_ROCKCHIP
- 	  SD 3.0, SDIO 3.0 and MMC 4.5 and supports common eMMC chips as well
- 	  as removeable SD and micro-SD cards.
- 
-+config MMC_SDHCI_ADI
-+	bool "ADI SD/MMC controller support"
-+	depends on ARCH_SC5XX
-+	depends on DM_MMC && OF_CONTROL
-+	depends on MMC_SDHCI && MMC_SDHCI_ADMA
-+	help
-+	  This enables support for the SD/MMC controller included in some Analog
-+	  Devices SC5XX Socs.
-+
- config MMC_DW_SOCFPGA
- 	bool "SOCFPGA specific extensions for Synopsys DW Memory Card Interface"
- 	depends on ARCH_SOCFPGA
-diff --git a/drivers/mmc/Makefile b/drivers/mmc/Makefile
-index 72c3fb66ce..eac8c28ee5 100644
---- a/drivers/mmc/Makefile
-+++ b/drivers/mmc/Makefile
-@@ -69,6 +69,7 @@ obj-$(CONFIG_MMC_SDHCI_MV)		+= mv_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_NPCM)            += npcm_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_PIC32)		+= pic32_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_ROCKCHIP)	+= rockchip_sdhci.o
-+obj-$(CONFIG_MMC_SDHCI_ADI)		+= adi_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_S5P)		+= s5p_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_STI)		+= sti_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_TANGIER)		+= tangier_sdhci.o
-diff --git a/drivers/mmc/adi_sdhci.c b/drivers/mmc/adi_sdhci.c
-new file mode 100644
-index 0000000000..311089a5f5
---- /dev/null
-+++ b/drivers/mmc/adi_sdhci.c
-@@ -0,0 +1,154 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * (C) Copyright 2022 - Analog Devices, Inc.
-+ *
-+ * Written and/or maintained by Timesys Corporation
-+ *
-+ * Contact: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
-+ * Contact: Greg Malysa <greg.malysa@timesys.com>
-+ *
-+ * Based on Rockchip's sdhci.c file
-+ */
-+
-+#include <clk.h>
-+#include <dm.h>
-+#include <malloc.h>
-+#include <sdhci.h>
-+#include <asm/cache.h>
-+
-+/* 400KHz is max freq for card ID etc. Use that as min */
-+#define EMMC_MIN_FREQ	400000
-+
-+/* Check if an operation crossed a boundary of size ADMA_BOUNDARY_ALIGN */
-+#define ADMA_BOUNDARY_ALGN SZ_128M
-+#define BOUNDARY_OK(addr, len) \
-+	(((addr) | (ADMA_BOUNDARY_ALGN - 1)) == (((addr) + (len) - 1) | \
-+	(ADMA_BOUNDARY_ALGN - 1)))
-+
-+/* We split a descriptor for every crossing of the ADMA alignment boundary,
-+ * so we need an additional descriptor for every expected crossing.
-+ * As I understand it, the max expected transaction size is:
-+ *  CONFIG_SYS_MMC_MAX_BLK_COUNT * MMC_MAX_BLOCK_LEN
-+ *
-+ * With the way the SDHCI-ADMA driver is implemented, if ADMA_MAX_LEN was a
-+ * clean power of two, we'd only ever need +1 descriptor as the first
-+ * descriptor that got split would then bring the remaining DMA
-+ * destination addresses into alignment. Unfortunately, it's currently
-+ * hardcoded to a non-power-of-two value.
-+ *
-+ * If that ever becomes parameterized, ADMA max length can be set to
-+ * 0x10000, and set this to 1.
-+ */
-+#define ADMA_POTENTIAL_CROSSINGS \
-+	DIV_ROUND_UP((CONFIG_SYS_MMC_MAX_BLK_COUNT * MMC_MAX_BLOCK_LEN), \
-+		 ADMA_BOUNDARY_ALGN)
-+/* +1 descriptor for each crossing.
-+ */
-+#define ADMA_TABLE_EXTRA_SZ (ADMA_POTENTIAL_CROSSINGS * ADMA_DESC_LEN)
-+
-+struct adi_sdhc_plat {
-+	struct mmc_config cfg;
-+	struct mmc mmc;
-+};
-+
-+struct adi_sdhc {
-+	struct sdhci_host host;
-+	void *base;
-+};
-+
-+void adi_dwcmshc_adma_write_desc(struct sdhci_host *host, void **desc,
-+				 dma_addr_t addr, int len, bool end)
-+{
-+	int tmplen, offset;
-+
-+	if (likely(!len || BOUNDARY_OK(addr, len))) {
-+		sdhci_adma_write_desc(host, desc, addr, len, end);
-+		return;
-+	}
-+
-+	offset = addr & (ADMA_BOUNDARY_ALGN - 1);
-+	tmplen = ADMA_BOUNDARY_ALGN - offset;
-+	sdhci_adma_write_desc(host, desc, addr, tmplen, false);
-+
-+	addr += tmplen;
-+	len -= tmplen;
-+	sdhci_adma_write_desc(host, desc, addr, len, end);
-+}
-+
-+struct sdhci_ops adi_dwcmshc_sdhci_ops = {
-+	.adma_write_desc = adi_dwcmshc_adma_write_desc,
-+};
-+
-+static int adi_dwcmshc_sdhci_probe(struct udevice *dev)
-+{
-+	struct mmc_uclass_priv *upriv = dev_get_uclass_priv(dev);
-+	struct adi_sdhc_plat *plat = dev_get_plat(dev);
-+	struct adi_sdhc *prv = dev_get_priv(dev);
-+	struct sdhci_host *host = &prv->host;
-+	int max_frequency, ret;
-+	struct clk clk;
-+
-+	max_frequency = dev_read_u32_default(dev, "max-frequency", 0);
-+	ret = clk_get_by_index(dev, 0, &clk);
-+
-+	host->quirks = 0;
-+	host->max_clk = max_frequency;
-+	/*
-+	 * The sdhci-driver only supports 4bit and 8bit, as sdhci_setup_cfg
-+	 * doesn't allow us to clear MMC_MODE_4BIT.  Consequently, we don't
-+	 * check for other bus-width values.
-+	 */
-+	if (host->bus_width == 8)
-+		host->host_caps |= MMC_MODE_8BIT;
-+
-+	host->mmc = &plat->mmc;
-+	host->mmc->priv = &prv->host;
-+	host->mmc->dev = dev;
-+	upriv->mmc = host->mmc;
-+
-+	host->ops = &adi_dwcmshc_sdhci_ops;
-+	host->adma_desc_table = memalign(ARCH_DMA_MINALIGN,
-+					 ADMA_TABLE_SZ + ADMA_TABLE_EXTRA_SZ);
-+	host->adma_addr = virt_to_phys(host->adma_desc_table);
-+
-+	ret = sdhci_setup_cfg(&plat->cfg, host, 0, EMMC_MIN_FREQ);
-+	if (ret)
-+		return ret;
-+
-+	return sdhci_probe(dev);
-+}
-+
-+static int adi_dwcmshc_sdhci_of_to_plat(struct udevice *dev)
-+{
-+	struct sdhci_host *host = dev_get_priv(dev);
-+
-+	host->name = dev->name;
-+	host->ioaddr = dev_read_addr_ptr(dev);
-+	host->bus_width = dev_read_u32_default(dev, "bus-width", 4);
-+
-+	return 0;
-+}
-+
-+static int adi_sdhci_bind(struct udevice *dev)
-+{
-+	struct adi_sdhc_plat *plat = dev_get_plat(dev);
-+
-+	return sdhci_bind(dev, &plat->mmc, &plat->cfg);
-+}
-+
-+static const struct udevice_id adi_dwcmshc_sdhci_ids[] = {
-+	{ .compatible = "adi,dwc-sdhci" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(adi_dwcmshc_sdhci_drv) = {
-+	.name		= "adi_sdhci",
-+	.id		= UCLASS_MMC,
-+	.of_match	= adi_dwcmshc_sdhci_ids,
-+	.of_to_plat	= adi_dwcmshc_sdhci_of_to_plat,
-+	.ops		= &sdhci_ops,
-+	.bind		= adi_sdhci_bind,
-+	.probe		= adi_dwcmshc_sdhci_probe,
-+	.priv_auto	= sizeof(struct adi_sdhc),
-+	.plat_auto	= sizeof(struct adi_sdhc_plat),
-+};
+---
+Greg Malysa (2):
+      net: Add support for ADI SC5xx SoCs with DWC QoS ethernet
+      dma: Add driver for ADI SC5xx-family SoC MDMA functionality
 
+Nathan Barrett-Morrison (3):
+      gpio: Add support for ADI ADP5588 GPIO expander chips
+      usb: musb-new: Add support for Analog Devices SC5xx SoCs
+      remoteproc: Add in SHARC loading for ADI SC5XX-family processors
+
+Oliver Gaskell (6):
+      pinctrl: Add support for ADI SC5XX-family pinctrl
+      gpio: Add support for SC5XX-family processor GPIO driver
+      i2c: Add support for ADI SC5XX-family I2C peripheral
+      watchdog: Add support for ADI SC5XX-family watchdog peripheral
+      spi: Add support for ADI SC5XX-family processor SPI peripherals
+      mmc: Add support for ADI SC5XX-family processor SDHCI peripherals
+
+ MAINTAINERS                            |  11 +
+ drivers/dma/Kconfig                    |   7 +
+ drivers/dma/Makefile                   |   1 +
+ drivers/dma/adi_dma.c                  | 255 ++++++++++++
+ drivers/gpio/Kconfig                   |  17 +
+ drivers/gpio/Makefile                  |   2 +
+ drivers/gpio/adp5588_gpio.c            | 208 ++++++++++
+ drivers/gpio/gpio-adi-adsp.c           | 179 +++++++++
+ drivers/i2c/Kconfig                    |   7 +
+ drivers/i2c/Makefile                   |   1 +
+ drivers/i2c/adi_i2c.c                  | 395 +++++++++++++++++++
+ drivers/mmc/Kconfig                    |   9 +
+ drivers/mmc/Makefile                   |   1 +
+ drivers/mmc/adi_sdhci.c                | 154 ++++++++
+ drivers/net/Kconfig                    |   7 +
+ drivers/net/Makefile                   |   1 +
+ drivers/net/dwc_eth_qos.c              |   6 +
+ drivers/net/dwc_eth_qos.h              |   2 +
+ drivers/net/dwc_eth_qos_adi.c          | 102 +++++
+ drivers/pinctrl/Kconfig                |   8 +
+ drivers/pinctrl/Makefile               |   1 +
+ drivers/pinctrl/pinctrl-adi-adsp.c     | 156 ++++++++
+ drivers/remoteproc/Kconfig             |  11 +
+ drivers/remoteproc/Makefile            |   1 +
+ drivers/remoteproc/adi_sc5xx_rproc.c   | 276 +++++++++++++
+ drivers/spi/Kconfig                    |   7 +
+ drivers/spi/Makefile                   |   1 +
+ drivers/spi/adi_spi3.c                 | 690 +++++++++++++++++++++++++++++++++
+ drivers/usb/musb-new/Kconfig           |   7 +
+ drivers/usb/musb-new/Makefile          |   1 +
+ drivers/usb/musb-new/sc5xx.c           | 202 ++++++++++
+ drivers/watchdog/Kconfig               |   9 +
+ drivers/watchdog/Makefile              |   1 +
+ drivers/watchdog/adi_wdt.c             | 145 +++++++
+ include/dt-bindings/pinctrl/adi-adsp.h |  21 +
+ 35 files changed, 2902 insertions(+)
+---
+base-commit: 041bf69038e2957f38e2de4e5d77bdb3e2ccf8a8
+change-id: 20240923-sc5xx-driver-series-a9afb7c598bc
+prerequisite-message-id: 20240828-sc5xx-upstreaming-patches-v1-0-44d9adfdf327@analog.com
+prerequisite-patch-id: 63cec707680793ef2feeb5b782b1db19d49766ce
+prerequisite-patch-id: fbc3b9227e2dc550878d4e8d113b1ad81ee00028
+prerequisite-patch-id: 988919879c6440227124dc0bb4b24d22c9041d99
+prerequisite-patch-id: 469d6193e82a2f702e938004ad6ff7c22dfbab86
+prerequisite-patch-id: 184667bccb34335a943f5ba405bf2acd75b8c7f3
+prerequisite-patch-id: aad9a1786ecfe51a46034fc055c57bff62d2a653
+prerequisite-patch-id: 909e13e6d779858f6d862b703e7cbfe510cb3a16
+prerequisite-patch-id: 8101423151112c3876c88223ac9ab196aebb8912
+prerequisite-patch-id: 24787a90e7adadab2ae3aa2348ac9d5838c26cfe
+prerequisite-patch-id: 0564b8079526f2fe1d9f723c8c4a2471e3ec6e1c
+prerequisite-patch-id: 0ca62b4ff0cfd3bf5a10ac84f13d0ab261e737d1
+prerequisite-patch-id: f54e027ac323522349f24acbc4a946d8a3cdfaef
+prerequisite-patch-id: 6f85ade3b9119dba85b65da8a49c4a6345c6b3ba
+prerequisite-patch-id: 94e1c6fde429c63a6fa4f7b5aeab0df9a8a00d81
+prerequisite-patch-id: 3227e7bdc2614c377b6837a47ad1cde99791d794
+prerequisite-patch-id: f6a45739e56120f54170b924a3069b98d355d1c0
+prerequisite-patch-id: 10f9f40c697f22a33b83a8538e13bac642795851
+prerequisite-patch-id: 32d268fd6372bda3129cddd26da45d69291efc33
+prerequisite-patch-id: 7640097fdc5a25ec2ffdf0eddb22f3c452510390
+prerequisite-patch-id: e57e6a95ef319c12565a6469f230198259f0bf7d
+
+Best regards,
 -- 
-2.34.1
+Oliver Gaskell <Oliver.Gaskell@analog.com>
 
 
