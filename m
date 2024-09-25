@@ -4,71 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90474C369D9
-	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 13:00:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF4E4C369D9
+	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 13:00:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F374588D54;
-	Wed, 25 Sep 2024 14:58:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5CB3988D55;
+	Wed, 25 Sep 2024 14:58:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lEuB70fY";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZWN//i13";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4296788D4A; Wed, 25 Sep 2024 14:58:16 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 7083D88D25; Wed, 25 Sep 2024 14:58:19 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40D3188D35
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 14:58:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7D68988D16
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 14:58:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-a8d3cde1103so634107866b.2
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 05:58:08 -0700 (PDT)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-a8d4979b843so845508266b.3
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 05:58:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727269087; x=1727873887; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727269097; x=1727873897; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tYoMGrXqE+S6nEdOO2l2em6C8ljT7oMt6hQeXmK8ONo=;
- b=lEuB70fY9zfaVw0D7gc38rAhvRPqhwAqz2Qjy9PwBwHQwNixG1g3xgTwgbXj7g5nzk
- P1wRe4zz+9wdN+GyC8YolQ8dEJWp5KtApVEl4KG5jc0MrCJtqt53zb5tGiF2VhQKYBRO
- /yLRLw1vaFZZR0wU3pp6n2nI7g7mps1M8We0s=
+ bh=4rQjNcZEiTcKHYlVkJr41nBOjX/ScGLdvVwUCY2Idmg=;
+ b=ZWN//i13PUcFKFtT1oWvo0GukUrZj2ZMVtbVEdYF68HCDXR6RyG05wSkrBACagbuTk
+ A45gKH4equHsF0YcPQtrMok9W2Nc1yg2wJbnz8nU0tu/u9I5MEwRMGz50Nauje9Kewld
+ NTPk7HW+8/4DaAHrR7w5hQXTbhk0H6obt4ufA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727269087; x=1727873887;
+ d=1e100.net; s=20230601; t=1727269097; x=1727873897;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tYoMGrXqE+S6nEdOO2l2em6C8ljT7oMt6hQeXmK8ONo=;
- b=MZ0ONxN7n7vA/JTLBBMiiiaHFgNuNWGWLavOsjujcbQ9oU7Noy3k0Tg+aa9C/0Stk+
- N4ZO56dsz7MMucpZjBMiFY/w3M9WrRrxybWabZwIgLyuhKXe9qDdwpJSJet0+ouS3hIn
- CQzsgZdMfV7CGWabKbGSKR/ZseWg1oHEsOE+afWiNihaOdARiaLqrHMApqFlVoLGmCGY
- E0tqrWX3vbUddFjOyiZHYq7NnzCyw/jRQN+OG78GNG1+kmxj34oaRt2DQKuhzd4fJI3o
- ghzKRXhNnZgDlEq0ZOpWgHnXtmtkxBGnKHr04/45WIZ2mufARAMWTdyhfAGM9zrTGIZ6
- x7rg==
-X-Gm-Message-State: AOJu0YwUM3pPt/WCzREfRpFiKAEh7WJALbz7SZYM5il/YB6AF+juY7D8
- CKPJHGYUiaM1edoLTZ7WeaC0oGb7qUF4FunnIKlc0B/SaNchhxQodP16Lr+A23GkAPLQyoOIEsy
- 8Ww==
-X-Google-Smtp-Source: AGHT+IFDMQAxY+dIMBlV7rcMqooYL96t3WAW+8iw5x/xuSL/GIxk7dl1LM8Pn5FKusNSvHmzbP0amw==
-X-Received: by 2002:a17:907:720e:b0:a86:c372:14c3 with SMTP id
- a640c23a62f3a-a93a061bb7emr237196866b.48.1727269087420; 
- Wed, 25 Sep 2024 05:58:07 -0700 (PDT)
+ bh=4rQjNcZEiTcKHYlVkJr41nBOjX/ScGLdvVwUCY2Idmg=;
+ b=VCJzniBNu79lZtaMKk/9vQxlVk+ReF61aknuvI6Zxs1ukKqYBM3SUeQE4VqYYcrAR8
+ JFcEWn8oLGff7ZVOcu5DBx9m4i58IpAVANzTMx74t6MmIuqzlP9RwI1ibNB4imQc31IQ
+ Zrz18A/U6CDMgqg6WUI+XyuW0b4Q1v8L6NYvc5rVd0wjD8su3a2OfrVkxbOW27RMenp2
+ xv56JC4v8T1PTMS93Bc7PrLZvmHkPZydIQftf+e3GkA77ewTqlJBf9+abzlvU35bJl3O
+ Gie7/hNCK5DZRPlm2qwOPL+vQYVbUrPeXJsTwLLxaGPAlqUozVBEkk94A9IQW2cEqyn2
+ Lg/w==
+X-Gm-Message-State: AOJu0YxLBWVdEfM/J15nQj6eFu5y10BY57S9ivbZ2t/pRTSZy2f3hhjK
+ 0Q22QiOktGL4ujdMIbEd5iYH1gPeidhqOVD5zSV5BQ83JTEcqt/4qByTkpTMaF/RSRX4gLfbzPB
+ tIA==
+X-Google-Smtp-Source: AGHT+IHBItOPKu6vdOYVmZ5ot5QEKY7pZeUzVrEJ4tNLZYsR6UVMsev7+W0x/1YsEm5NyWuW2d0tWA==
+X-Received: by 2002:a17:907:3f0e:b0:a8a:7062:23ef with SMTP id
+ a640c23a62f3a-a93a03c6dd4mr253839666b.32.1727269096615; 
+ Wed, 25 Sep 2024 05:58:16 -0700 (PDT)
 Received: from chromium.org ([82.132.187.73]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a93930f7889sm209209766b.179.2024.09.25.05.58.06
+ a640c23a62f3a-a93930f7889sm209209766b.179.2024.09.25.05.58.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Sep 2024 05:58:07 -0700 (PDT)
+ Wed, 25 Sep 2024 05:58:16 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Devarsh Thakkar <devarsht@ti.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH 11/19] spl: Support jumping to VPL from TPL
-Date: Wed, 25 Sep 2024 14:55:37 +0200
-Message-ID: <20240925125622.197915-12-sjg@chromium.org>
+ Albert Aribaud <albert.u.boot@aribaud.net>,
+ Andre Przywara <andre.przywara@arm.com>, Andrew Davis <afd@ti.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ =?UTF-8?q?Cs=C3=B3k=C3=A1s=20Bence?= <csokas.bence@prolan.hu>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Sumit Garg <sumit.garg@linaro.org>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ qemu-devel@nongnu.org
+Subject: [PATCH 15/19] arm: qemu: Allow SPL and TPL
+Date: Wed, 25 Sep 2024 14:55:41 +0200
+Message-ID: <20240925125622.197915-16-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240925125622.197915-1-sjg@chromium.org>
 References: <20240925125622.197915-1-sjg@chromium.org>
@@ -90,73 +99,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use spl_get_image_pos() to obtain the image position to jump to. Add
-the symbols used for VPL so that the correct image can be loaded.
-
-Use the functions provided for accessing these symbols and add a few
-comments too.
+Indicate that these boards can be supported, so a new 'TPL' board can be
+added.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- common/spl/spl.c | 22 ++++++++++++++++------
- 1 file changed, 16 insertions(+), 6 deletions(-)
+ arch/arm/Kconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/common/spl/spl.c b/common/spl/spl.c
-index d01e9861f88..623e486c210 100644
---- a/common/spl/spl.c
-+++ b/common/spl/spl.c
-@@ -50,15 +50,19 @@ u32 *boot_params_ptr = NULL;
- 
- #if CONFIG_IS_ENABLED(BINMAN_UBOOT_SYMBOLS)
- /* See spl.h for information about this */
-+#if defined(CONFIG_SPL_BUILD) && !defined(CONFIG_TPL_BUILD) && !defined(CONFIG_VPL_BUILD)
- binman_sym_declare(ulong, u_boot_any, image_pos);
- binman_sym_declare(ulong, u_boot_any, size);
-+#endif
- 
--#ifdef CONFIG_TPL
-+#if defined(CONFIG_TPL)
-+/* TPL jumps straight to SPL */
- binman_sym_declare(ulong, u_boot_spl_any, image_pos);
- binman_sym_declare(ulong, u_boot_spl_any, size);
- #endif
- 
- #ifdef CONFIG_VPL
-+/* TPL jumps to VPL */
- binman_sym_declare(ulong, u_boot_vpl_any, image_pos);
- binman_sym_declare(ulong, u_boot_vpl_any, size);
- #endif
-@@ -179,9 +183,15 @@ ulong spl_get_image_pos(void)
- 	if (spl_next_phase() == PHASE_VPL)
- 		return binman_sym(ulong, u_boot_vpl_any, image_pos);
- #endif
--	return spl_next_phase() == PHASE_SPL ?
--		binman_sym(ulong, u_boot_spl_any, image_pos) :
--		binman_sym(ulong, u_boot_any, image_pos);
-+#if defined(CONFIG_TPL) && !defined(CONFIG_VPL)
-+	if (spl_next_phase() == PHASE_SPL)
-+		return binman_sym(ulong, u_boot_spl_any, image_pos);
-+#endif
-+#if defined(CONFIG_SPL_BUILD) && !defined(CONFIG_TPL_BUILD) && !defined(CONFIG_VPL_BUILD)
-+	return binman_sym(ulong, u_boot_any, image_pos);
-+#endif
-+
-+	return BINMAN_SYM_MISSING;
- }
- 
- ulong spl_get_image_size(void)
-@@ -263,8 +273,8 @@ void spl_set_header_raw_uboot(struct spl_image_info *spl_image)
- 	 */
- 	if (u_boot_pos && u_boot_pos != BINMAN_SYM_MISSING) {
- 		/* Binman does not support separated entry addresses */
--		spl_image->entry_point = u_boot_pos;
--		spl_image->load_addr = u_boot_pos;
-+		spl_image->entry_point = spl_get_image_text_base();
-+		spl_image->load_addr = spl_get_image_text_base();
- 	} else {
- 		spl_image->entry_point = CONFIG_SYS_UBOOT_START;
- 		spl_image->load_addr = CONFIG_TEXT_BASE;
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index 656f588a97c..dfc735237aa 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -1043,6 +1043,8 @@ config ARCH_QEMU
+ 	select DM_SERIAL
+ 	select OF_CONTROL
+ 	select PL01X_SERIAL
++	select SUPPORT_SPL
++	select SUPPORT_TPL
+ 	imply CMD_DM
+ 	imply DM_RNG
+ 	imply DM_RTC
 -- 
 2.43.0
 
