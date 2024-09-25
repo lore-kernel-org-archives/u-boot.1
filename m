@@ -4,82 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C93CFC369D0
-	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 11:29:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91E3FC369D3
+	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 11:40:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 045A688B5F;
-	Wed, 25 Sep 2024 13:29:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 05B5388B9F;
+	Wed, 25 Sep 2024 13:40:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1727263793;
-	bh=yN+By0kTW5UyUgEkfbbRSYexo8+igSnRUIACG241Aow=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=ySfsczo7+B15kL3W4a00ce1UhiPT6LwYEZ527HetULpJ+khIR1gHlKDDl8smYsZdv
-	 8j/kBuvrgWjmeycBarb10yDXa7DKaqSq7/SHkG7XUmhxWE9G5poDsjXNay1ZUMXYwD
-	 UfCFF4qUazHZ6/kRfbC4N4gaLJ0HG1BLMlFY2pE9Gu1eYNgz7VCjs3aoPo/YwdFvKF
-	 SfLzTvOmjkO/s5D/M3W+wU7lG7dUTNUtcJrv/R/WHHFjoIKtjONyT0QBguzB4s1sB6
-	 PMFAMwEGSSCdl19VdfaT3nZH8oUqBDhcju29/DraWPcmT9qEp3WzOPVb10XRhgbgFh
-	 Pau42fxqPZBKg==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CNYC6NeP";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id D2D1088B9F; Wed, 25 Sep 2024 13:40:39 +0200 (CEST)
+Received: from mail-vs1-xe29.google.com (mail-vs1-xe29.google.com
+ [IPv6:2607:f8b0:4864:20::e29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 44F0587E30;
- Wed, 25 Sep 2024 13:29:49 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1727263792;
- bh=yN+By0kTW5UyUgEkfbbRSYexo8+igSnRUIACG241Aow=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=XTGOEP/CtjPKjYCreJqa/JXTipNa4C3IdYfMBpKdYCDme1antInVV6/exDQESEeuC
- 3djBQcZhc53BZrlsTQvdwYo/eWWwVyBNmyAvdAPwAWmZOwsVd7l3NQ1eFNygFzDJ9E
- 5Zfb2kuLlupn8MAVDsW9dp/irq8qrgSUVgyvwa/Te2rj5cFmbbSpRsO2Jng1Fuzs8U
- QtohBPr/Tx5I+0dgW0dGA2vzssK8ev8IxFBI8BId7M32+CZfmRWOdqNdK22MVJ6IR4
- pkugpTvAoomVNHsISB0Nd3ltb28t+baazeXUJzqNu/enMHI/trW7WlakTLduqq+lvW
- 1rt7FF9FSdzZA==
-Message-ID: <270aa01b-98f9-4164-9539-396b9b3f96bc@denx.de>
-Date: Wed, 25 Sep 2024 13:23:46 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id C519F88B59
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 13:40:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-vs1-xe29.google.com with SMTP id
+ ada2fe7eead31-49be2ef28aaso2170534137.3
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 04:40:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1727264429; x=1727869229; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=uRAoS07zdf4yoX94SbN5uCDHJggIGxQ+h1gDDLMxKxY=;
+ b=CNYC6NePfeoKDUOYlcMgX/AN7Vh9LuNdE2ldUnFHaytuyd0ft1FkIf4b5xPhwY0K+w
+ cIi/DGBVjX9G2MwnFRJdAYVnArmjVHAqzZk+VunAYhhPJI3SIYHq5Nb/1DX10GC/UvX3
+ uqC1bYzfScjVoM731OOUVluyWaLguCjx8eXhG8NO/Xc1n3GoURL4CCOn6045fEGNgtJO
+ Tshg64ZN4MOssvbWPLyA0tAfgW3KCB4hTbI8TdPI+D/B56VkJxU6M23YbnSZA6oP7tub
+ Kz76P+H1Xgw00HTleoZkxyZVsRp1bDIdzLA8+vu4pC2KuW0olLW3Z7UPP5oBhgJnnT+7
+ EZUw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727264429; x=1727869229;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=uRAoS07zdf4yoX94SbN5uCDHJggIGxQ+h1gDDLMxKxY=;
+ b=sVZ5U3d7sgIGV5E7DN2o4VtvH+0v3fm34qalfli+djo5jzA25ZgLB8kNcqoyD+AgtM
+ Rst/M9rrnaW6oHscsCBEnvL6iDkcqRI+7mXxbN2vpKCkZ+rAzE3HUIT8WbUJuARNMRM/
+ tNiSCNdzYNzJIB7aUl5pWrik8L3Ue6eEZsTNeb9NawgvJW1+vfsNchB7LpEXETDDEhYB
+ JyaVSiEecsRDQa4JsFnIfLxr8BpHafiht9wAniheQt6nnf9SFeOCDEaXNG7uh5DWYMjj
+ eDU3GMkiiF1ei+JF/g3qxCjvKOo2Ha0tPtFsSXEz66SV5b7TdlAH979lR0ZVUpRKuEzu
+ 14Yw==
+X-Gm-Message-State: AOJu0Yxv2k+cwBfJoIVg/hnh77jLNk89nIgk2D2imdYxIwL9EfOg3ajm
+ CCCMXFiyyh6KW36M9stn5rk9iEMeKWeua4Bhu5SdOqjLNrC2Xwew
+X-Google-Smtp-Source: AGHT+IH9l0v4dtR+PuthMBnCyN0ZzR3rZqhzMdfnIRQ+WFiHIINo25bN54t3an/ofsy6ovXJp4xHnQ==
+X-Received: by 2002:a05:6102:2ace:b0:49c:103:62f1 with SMTP id
+ ada2fe7eead31-4a15dc94bd7mr1975336137.16.1727264429377; 
+ Wed, 25 Sep 2024 04:40:29 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:a504:e27a:e2d0:762b])
+ by smtp.gmail.com with ESMTPSA id
+ a1e0cc1a2514c-84e73b2631dsm1580029241.16.2024.09.25.04.40.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 25 Sep 2024 04:40:28 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: [GIT PULL] Please pull u-boot-imx-next-20240925
+Date: Wed, 25 Sep 2024 08:40:25 -0300
+Message-Id: <20240925114025.307966-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/5] power: regulator: Exit from
- regulator_set_suspend_value on poorly described regulators
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Ben Wolsieffer <benwolsieffer@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Chris Morgan <macromorgan@hotmail.com>, Dragan Simic <dsimic@manjaro.org>,
- Eugen Hristev <eugen.hristev@collabora.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Kever Yang <kever.yang@rock-chips.com>, Matteo Lisi
- <matteo.lisi@engicam.com>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Max Krummenacher <max.krummenacher@toradex.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>, Sam Day <me@samcday.com>,
- Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Thierry Reding <treding@nvidia.com>,
- Tom Rini <trini@konsulko.com>, Volodymyr Babchuk
- <Volodymyr_Babchuk@epam.com>,
- "u-boot-amlogic@groups.io" <u-boot-amlogic@groups.io>,
- "u-boot-qcom@groups.io" <u-boot-qcom@groups.io>,
- "u-boot@dh-electronics.com" <u-boot@dh-electronics.com>,
- "uboot-stm32@st-md-mailman.stormreply.com"
- <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20240925022314.714285-1-marex@denx.de>
- <20240925022314.714285-3-marex@denx.de>
- <18454c94-9422-4fe3-8996-6fc83834e319@kwiboo.se>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <18454c94-9422-4fe3-8996-6fc83834e319@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,26 +88,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/25/24 8:29 AM, Jonas Karlman wrote:
-> Hi Marek,
+Hi Tom,
 
-Hi,
+Please pull from u-boot-imx/next, thanks.
 
-> On 2024-09-25 04:21, Marek Vasut wrote:
->> In case the DT regulator node does not contain 'regulator-max-microvolt'
->> property and does not contain 'regulator-state-mem' subnode (like the
->> test.dts regul1_scmi: reg@1 {} regulator node), then regulator_pre_probe()
->> will parse this regulator node and set uc_pdata->suspend_on = true and
->> uc_pdata->suspend_uV = uc_pdata->max_uV, where uc_pdata->max_uV is set
->> to -ENODATA because "regulator-max-microvolt" is missing, and therefore
->> uc_pdata->suspend_uV is also -ENODATA. In case regulator_autoset() is
->> used afterward, it will attempt to call regulator_set_suspend_value()
->> with uV = uc_pdata->suspend_uV = -ENODATA and fail with -EINVAL. Check
->> for this case in regulator_set_suspend_value() and immediately return 0,
->> because there is no way to set meaningful suspend voltage, so do nothing
->> and retain the existing settings of the regulator.
-> 
-> I sent a different fix for this some time ago, please check it out:
-> 
-> https://patchwork.ozlabs.org/patch/1964571/
-That one will work too, yes.
+The following changes since commit 0aea8264f668bdcb2f352e6facc8d1cebe873e0a:
+
+  Merge tag 'xilinx-for-v2025.01-rc1' of https://source.denx.de/u-boot/custodians/u-boot-microblaze into next (2024-09-23 08:11:01 -0600)
+
+are available in the Git repository at:
+
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-next-20240925
+
+for you to fetch changes up to 99abeaa648052e8e99682f046b8dfd3739b4e181:
+
+  net: fec_mxc: Skip recv packet process when fec is halted (2024-09-24 16:55:14 -0300)
+
+u-boot-imx-next-20240925
+------------------------
+
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/22406
+
+- i.MX93 FEC fixes.
+- Always name the generated fitImage u-boot.itb to keep compatibility with
+pr-buildman behavior.
+----------------------------------------------------------------
+Marek Vasut (1):
+      arm64: dts: imx8m: Always name the generated fitImage u-boot.itb
+
+Peng Fan (1):
+      net: fec_mxc: Fix clk_ref rate on iMX93
+
+Ye Li (1):
+      net: fec_mxc: Skip recv packet process when fec is halted
+
+ arch/arm/dts/imx8mm-u-boot.dtsi |  1 +
+ arch/arm/dts/imx8mn-u-boot.dtsi |  1 +
+ arch/arm/dts/imx8mp-u-boot.dtsi |  1 +
+ arch/arm/dts/imx8mq-u-boot.dtsi |  1 +
+ drivers/net/fec_mxc.c           | 10 ++++++++--
+ 5 files changed, 12 insertions(+), 2 deletions(-)
