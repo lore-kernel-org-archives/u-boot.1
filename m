@@ -4,81 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8415CF9C71
-	for <u-boot@archiver.kernel.org>; Tue, 24 Sep 2024 23:41:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1424CF9C69
+	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 00:11:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46F1388995;
-	Wed, 25 Sep 2024 01:41:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1DBAA88327;
+	Wed, 25 Sep 2024 02:11:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uhDLBx+Q";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id D9A4088B89; Wed, 25 Sep 2024 01:41:03 +0200 (CEST)
-Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
- [IPv6:2607:f8b0:4864:20::72b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1727223115;
+	bh=XjMP1yjwpYnEUbTRE8/VXoqJeY1tOvTE2KOdqz5QQE8=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=LvN8wnB9wQ6PSn+ZBL1G3BJotm4PNZzw7t6Kud7UVssIVP2R3MoJS6Kd3SpgEJOMB
+	 c4cFEJyLNyETgpaUi3ElWUU8xpfQndSBg7CC7gJaW45yxGkzxdFob35RS1m2MWitos
+	 WofT4gjWLUJ5RFllIg0X4wII2Z8LeUF5rYll7/rVnXxmHJpnkIidEsxYBid7V91yn5
+	 eD+6jGFJqg/Mbil2qljWXH4QxuQ9Lc8gcBbowThX1M39zsmGLirIw3FDD9NGaJluGO
+	 ZUqJajgf8NcwCwA+/LDZX692qktIkdzPlKRLfZdGUxWbk7kJvSyExZbzGr5fL4oITH
+	 56UlkDqq5HHYA==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF28C88995
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 01:40:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72b.google.com with SMTP id
- af79cd13be357-7a9a23fc16fso644999385a.2
- for <u-boot@lists.denx.de>; Tue, 24 Sep 2024 16:40:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1727221242; x=1727826042; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4OhjIoweVa10pV8yJPTuPPySddcuJ2n8hvuqgSxUzWk=;
- b=uhDLBx+Q/7ISQQcvv6b+KdN0iQ1Dz+AA/p64YbeLJ7JhXpAag/i5DduNDRhoI5dFFc
- coIoKmPyf7ddH9lX0OESvITJjsruf5SSWdl9mfPW446kEZW1xkHtxAJf46zW/6ADdLdb
- JJnJ4Fhq7tn8mQ9IJAmEbdzo6byS+n9cYFJMU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727221242; x=1727826042;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=4OhjIoweVa10pV8yJPTuPPySddcuJ2n8hvuqgSxUzWk=;
- b=FO76E5+LVL2kD/wSDK8SN1z1kQhYdKWTHYCYJkWfqkTxbH4uQgADMxBgPJ4nmHcaEw
- gVaW+VDdpwhxUwCF5tzW75ix4JMs6OgDTUQarMcXfIX4sirRK76b2zrPx7xA+LLMJZbI
- ak+ZWjfbw569Tuuamip2zP6PWbL1tSWNtJEr8vKtGMCrcy3Vr21H3f7dy8ZKqkPT86O9
- o4mSS1v4F9pm06DuPxM/fOutJTaoCrDrMo+TwvYEZKud5a8d2/cfxRptqHbxn8oIjxA+
- UPkSo/mouwaiJVv6c5PSGLq7wdX4JgZc1mw/kOF6xdA1jKgVXOPRdFrfz30cgJompzAJ
- n9dA==
-X-Gm-Message-State: AOJu0Ywv7z9gChv/UDU66kkojN/r4OLcVpxzulQU8us0XYu9HtAbUUId
- /nEIMsgJNz0HZhdQuyblfsmry2WmTCy1XJ/ePpTfHhcahoYso/AEiTd1l8LR4eM=
-X-Google-Smtp-Source: AGHT+IH1bMwVuf8Q13LRujMBAtwS98ToI8YrAMjMYlz6+XD0EE/mFrr/Nbv7raNTHkvT4YvFzc4mOA==
-X-Received: by 2002:a05:620a:4005:b0:7a9:b839:1e87 with SMTP id
- af79cd13be357-7ace741361fmr148586985a.39.1727221242578; 
- Tue, 24 Sep 2024 16:40:42 -0700 (PDT)
-Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-45b5257698esm11147141cf.26.2024.09.24.16.40.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Sep 2024 16:40:41 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Jerome Forissier <jerome.forissier@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Lukasz Majewski <lukma@denx.de>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Marek Vasut <marex@denx.de>, Sean Anderson <seanga2@gmail.com>, 
- Simon Glass <sjg@chromium.org>, Andre Przywara <andre.przywara@arm.com>, 
- Samuel Holland <samuel@sholland.org>, 
- Lukas Funke <lukas.funke@weidmueller.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Miquel Raynal <miquel.raynal@bootlin.com>
-In-Reply-To: <20240910130019.3211647-1-jerome.forissier@linaro.org>
-References: <20240910130019.3211647-1-jerome.forissier@linaro.org>
-Subject: Re: [PATCH v2] spl: ram: hide SPL_RAM_SUPPORT
-Message-Id: <172722123988.127252.13444418981332836063.b4-ty@konsulko.com>
-Date: Tue, 24 Sep 2024 17:40:39 -0600
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id BE62287E30;
+ Wed, 25 Sep 2024 02:11:53 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1727223114;
+ bh=XjMP1yjwpYnEUbTRE8/VXoqJeY1tOvTE2KOdqz5QQE8=;
+ h=From:To:Cc:Subject:Date:From;
+ b=JA/U0NkdKC9AEw2fQLei6jeoFk4V5xh+8nv/goPTGnJ1tJPTt6dBRPVGXmoD2B/nM
+ q82uvheU362fdD1kiXb0WDgOyYWGWYNCPSNrQbZs5CXqla1p+DGe8DGFgF3Z3m1Ren
+ g3glApxwBl4OqScmKkQTbcrRG9gX79FsUBj456qxaZ9KIk9i0UFhyb69PGGq2nPTjF
+ 0u4F9itreEox1p95LgrNCmFQJLpLfg9QYRUzGIQLuLh7Y8fKoxkaGUtPovjTIlGLCV
+ o9jwme6bC6n4Utu0YQLuNwHFagXiJx1FkNETuNPHd1NWtGvSBv59rlFYeudMXK1gx+
+ l35SrCe/Ippew==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
+ Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
+Subject: [PATCH] arm64: dts: imx8mp: Add DH i.MX8MP DHCOM SoM on DRC02 carrier
+ board
+Date: Wed, 25 Sep 2024 02:09:23 +0200
+Message-ID: <20240925001119.667820-1-marex@denx.de>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,22 +66,571 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 10 Sep 2024 15:00:18 +0200, Jerome Forissier wrote:
+Add support for DH electronics i.MX8MP DHCOM SoM on DRC02 carrier board.
+This system is populated with two ethernet ports, two CANs, RS485 and RS232,
+USB, capacitive buttons and an OLED display.
 
-> Make SPL_RAM_SUPPORT a hidden Kconfig symbol, automatically selected
-> by SPL_RAM_DEVICE or SPL_DFU. Avoids the situation where SPL_RAM_SUPPORT
-> may be enabled without the other two being enabled, which results in the
-> following build warning:
-> 
-> common/spl/spl_ram.c:19:14: warning: ‘spl_ram_load_read’ defined but not used [-Wunused-function]
->    19 | static ulong spl_ram_load_read(struct spl_load_info *load, ulong sector,
->       |              ^~~~~~~~~~~~~~~~~
-> 
-> [...]
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Stefano Babic <sbabic@denx.de>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@dh-electronics.com
+Cc: u-boot@lists.denx.de
+---
+ arch/arm/dts/Makefile                       |   1 +
+ arch/arm/dts/imx8mp-dhcom-drc02-u-boot.dtsi |   6 +
+ arch/arm/dts/imx8mp-dhcom-drc02.dts         | 230 ++++++++++++++++
+ configs/imx8mp_dhcom_drc02_defconfig        | 277 ++++++++++++++++++++
+ 4 files changed, 514 insertions(+)
+ create mode 100644 arch/arm/dts/imx8mp-dhcom-drc02-u-boot.dtsi
+ create mode 100644 arch/arm/dts/imx8mp-dhcom-drc02.dts
+ create mode 100644 configs/imx8mp_dhcom_drc02_defconfig
 
-Applied to u-boot/next, thanks!
-
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index b3fe3f3c535..cdb90f1d358 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -968,6 +968,7 @@ dtb-$(CONFIG_ARCH_IMX8M) += \
+ 	imx8mp-dhcom-som-overlay-eth2xfast.dtbo \
+ 	imx8mp-dhcom-pdk-overlay-eth2xfast.dtbo \
+ 	imx8mp-debix-model-a.dtb \
++	imx8mp-dhcom-drc02.dtb \
+ 	imx8mp-dhcom-pdk2.dtb \
+ 	imx8mp-dhcom-pdk3.dtb \
+ 	imx8mp-dhcom-pdk3-overlay-rev100.dtbo \
+diff --git a/arch/arm/dts/imx8mp-dhcom-drc02-u-boot.dtsi b/arch/arm/dts/imx8mp-dhcom-drc02-u-boot.dtsi
+new file mode 100644
+index 00000000000..8a23b117d9a
+--- /dev/null
++++ b/arch/arm/dts/imx8mp-dhcom-drc02-u-boot.dtsi
+@@ -0,0 +1,6 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (C) 2024 Marek Vasut <marex@denx.de>
++ */
++
++#include "imx8mp-dhcom-u-boot.dtsi"
+diff --git a/arch/arm/dts/imx8mp-dhcom-drc02.dts b/arch/arm/dts/imx8mp-dhcom-drc02.dts
+new file mode 100644
+index 00000000000..b3ab6e94508
+--- /dev/null
++++ b/arch/arm/dts/imx8mp-dhcom-drc02.dts
+@@ -0,0 +1,230 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (C) 2024 Marek Vasut <marex@denx.de>
++ *
++ * DHCOM iMX8MP variant:
++ * DHCM-iMX8ML8-C160-R204-F1638-SPI16-E2-CAN2-RTC-I-01D2
++ * DHCOM PCB number: 660-100 or newer
++ * DRC02 PCB number: 568-100 or newer
++ */
++
++/dts-v1/;
++
++#include <dt-bindings/leds/common.h>
++#include <dt-bindings/phy/phy-imx8-pcie.h>
++#include "imx8mp-dhcom-som.dtsi"
++
++/ {
++	model = "DH electronics i.MX8M Plus DHCOM on DRC02";
++	compatible = "dh,imx8mp-dhcom-drc02", "dh,imx8mp-dhcom-som",
++		     "fsl,imx8mp";
++
++	chosen {
++		stdout-path = &uart1;
++	};
++};
++
++&eqos {	/* First ethernet */
++	pinctrl-0 = <&pinctrl_eqos_rmii>;
++	phy-handle = <&ethphy0f>;
++	phy-mode = "rmii";
++
++	assigned-clock-parents = <&clk IMX8MP_SYS_PLL1_266M>,
++				 <&clk IMX8MP_SYS_PLL2_100M>,
++				 <&clk IMX8MP_SYS_PLL2_50M>;
++	assigned-clock-rates = <0>, <100000000>, <50000000>;
++};
++
++&ethphy0g {	/* Micrel KSZ9131RNXI */
++	status = "disabled";
++};
++
++&ethphy0f {	/* SMSC LAN8740Ai */
++	status = "okay";
++};
++
++&fec {	/* Second ethernet */
++	pinctrl-0 = <&pinctrl_fec_rmii>;
++	phy-handle = <&ethphy1f>;
++	phy-mode = "rmii";
++	status = "okay";
++
++	assigned-clock-parents = <&clk IMX8MP_SYS_PLL1_266M>,
++				 <&clk IMX8MP_SYS_PLL2_100M>,
++				 <&clk IMX8MP_SYS_PLL2_50M>,
++				 <&clk IMX8MP_SYS_PLL2_50M>;
++	assigned-clock-rates = <0>, <100000000>, <50000000>, <0>;
++};
++
++&ethphy1f {	/* SMSC LAN8740Ai */
++	status = "okay";
++};
++
++&flexcan1 {
++	status = "okay";
++};
++
++&flexcan2 {
++	status = "okay";
++};
++
++&gpio1 {
++	gpio-line-names =
++		"DRC02-In1", "", "", "", "", "DHCOM-I", "DRC02-HW2", "DRC02-HW0",
++		"DHCOM-B", "DHCOM-A", "", "DHCOM-H", "", "", "", "",
++		"", "", "", "", "", "", "", "",
++		"", "", "", "", "", "", "", "";
++
++	/*
++	 * NOTE: On DRC02, the RS485_RX_En is controlled by a separate
++	 * GPIO line, however the i.MX8 UART driver assumes RX happens
++	 * during TX anyway and that it only controls drive enable DE
++	 * line. Hence, the RX is always enabled here.
++	 */
++	rs485-rx-en-hog {
++		gpio-hog;
++		gpios = <13 0>; /* GPIO Q */
++		line-name = "rs485-rx-en";
++		output-low;
++	};
++};
++
++&gpio2 {
++	gpio-line-names =
++		"", "", "", "", "", "", "", "",
++		"DHCOM-O", "DHCOM-N", "", "SOM-HW1", "", "", "", "",
++		"", "", "", "", "DRC02-In2", "", "", "",
++		"", "", "", "", "", "", "", "";
++};
++
++&gpio3 {
++	gpio-line-names =
++		"", "", "", "", "", "", "", "",
++		"", "", "", "", "", "", "SOM-HW0", "",
++		"", "", "", "", "", "", "SOM-MEM0", "SOM-MEM1",
++		"SOM-MEM2", "SOM-HW2", "", "", "", "", "", "";
++};
++
++&gpio4 {
++	gpio-line-names =
++		"", "", "", "", "", "", "", "",
++		"", "", "", "", "", "", "", "",
++		"", "", "", "SOM-HW1", "", "", "", "",
++		"", "", "", "DRC02-Out2", "", "", "", "";
++};
++
++&gpio5 {
++	gpio-line-names =
++		"", "", "DHCOM-C", "", "", "", "", "",
++		"", "", "", "", "", "", "", "",
++		"", "", "", "", "", "", "DHCOM-E", "DRC02-Out1",
++		"", "", "", "", "", "", "", "";
++};
++
++&i2c3 {
++	/* Resistive touch controller not populated on this one SoM variant. */
++	touchscreen@49 {
++		status = "disabled";
++	};
++};
++
++&pcie_phy {
++	status = "disabled";
++};
++
++&pcie {
++	status = "disabled";
++};
++
++/* Console UART */
++&pinctrl_uart1 {
++	fsl,pins = <
++		/* No pull-ups on DRC02, enable in-SoC pull-ups */
++		MX8MP_IOMUXC_SAI2_RXC__UART1_DCE_RX		0x149
++		MX8MP_IOMUXC_SAI2_RXFS__UART1_DCE_TX		0x149
++	>;
++};
++
++&pinctrl_uart3 {
++	fsl,pins = <
++		/* No pull-ups on DRC02, enable in-SoC pull-ups */
++		MX8MP_IOMUXC_ECSPI1_SCLK__UART3_DCE_RX		0x149
++		MX8MP_IOMUXC_ECSPI1_MOSI__UART3_DCE_TX		0x149
++	>;
++};
++
++&uart1 {
++	/*
++	 * Due to the use of CAN2 the signals for CAN2 Tx and Rx are routed to
++	 * DHCOM UART1 RTS/CTS pins. Therefore this UART have to use DHCOM GPIOs
++	 * for RTS/CTS. So configure DHCOM GPIO I as RTS and GPIO M as CTS.
++	 */
++	/delete-property/ uart-has-rtscts;
++	cts-gpios = <&gpio5 5 GPIO_ACTIVE_HIGH>; /* GPIO M */
++	pinctrl-0 = <&pinctrl_uart1 &pinctrl_dhcom_i &pinctrl_dhcom_m>;
++	pinctrl-names = "default";
++	rts-gpios = <&gpio1 5 GPIO_ACTIVE_HIGH>; /* GPIO I */
++};
++
++&uart3 {
++	/*
++	 * On DRC02 this UART is used as RS485 interface and RS485_TX_En is
++	 * controlled by DHCOM GPIO P. So remove RTS/CTS pins and the property
++	 * uart-has-rtscts from this UART and add the DHCOM GPIO P pin via
++	 * rts-gpios. The RS485_RX_En is controlled by DHCOM GPIO Q, see gpio1
++	 * node above.
++	 */
++	/delete-property/ uart-has-rtscts;
++	linux,rs485-enabled-at-boot-time;
++	pinctrl-0 = <&pinctrl_uart3 &pinctrl_dhcom_p &pinctrl_dhcom_q>;
++	pinctrl-names = "default";
++	rts-gpios = <&gpio2 10 GPIO_ACTIVE_HIGH>; /* GPIO P */
++};
++
++/* No WiFi/BT chipset on this SoM variant. */
++&uart2 {
++	bluetooth {
++		status = "disabled";
++	};
++};
++
++/* USB_OTG port is not routed out on DRC02. */
++&usb3_0 {
++	status = "disabled";
++};
++
++&usb_dwc3_0 {
++	status = "disabled";
++};
++
++/* USB_HOST port has USB Hub connected to it, PWR/OC pins are unused */
++&usb3_1 {
++	fsl,disable-port-power-control;
++	fsl,permanently-attached;
++};
++
++&usb_dwc3_1 {
++	dr_mode = "host";
++	maximum-speed = "high-speed";
++};
++
++/* No WiFi/BT chipset on this SoM variant. */
++&usdhc1 {
++	status = "disabled";
++};
++
++&iomuxc {
++	/*
++	 * GPIO I is connected to UART1_RTS
++	 * GPIO M is connected to UART1_CTS
++	 * GPIO P is connected to RS485_TX_En
++	 * GPIO Q is connected to RS485_RX_En
++	 */
++	pinctrl-0 = <&pinctrl_hog_base
++		     &pinctrl_dhcom_a &pinctrl_dhcom_b &pinctrl_dhcom_c
++		     &pinctrl_dhcom_d &pinctrl_dhcom_e &pinctrl_dhcom_f
++		     &pinctrl_dhcom_g &pinctrl_dhcom_h &pinctrl_dhcom_j
++		     &pinctrl_dhcom_k &pinctrl_dhcom_l &pinctrl_dhcom_n
++		     &pinctrl_dhcom_o &pinctrl_dhcom_r &pinctrl_dhcom_s
++		     &pinctrl_dhcom_int>;
++};
+diff --git a/configs/imx8mp_dhcom_drc02_defconfig b/configs/imx8mp_dhcom_drc02_defconfig
+new file mode 100644
+index 00000000000..7c684d3bea5
+--- /dev/null
++++ b/configs/imx8mp_dhcom_drc02_defconfig
+@@ -0,0 +1,277 @@
++CONFIG_ARM=y
++CONFIG_ARCH_IMX8M=y
++CONFIG_TEXT_BASE=0x40200000
++CONFIG_SYS_MALLOC_LEN=0x1000000
++CONFIG_SYS_MALLOC_F_LEN=0x18000
++CONFIG_SPL_GPIO=y
++CONFIG_SPL_LIBCOMMON_SUPPORT=y
++CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_NR_DRAM_BANKS=2
++CONFIG_SF_DEFAULT_SPEED=50000000
++CONFIG_ENV_SIZE=0x10000
++CONFIG_ENV_OFFSET=0xFE0000
++CONFIG_ENV_SECT_SIZE=0x1000
++CONFIG_DM_GPIO=y
++CONFIG_DEFAULT_DEVICE_TREE="imx8mp-dhcom-drc02"
++CONFIG_SPL_TEXT_BASE=0x920000
++CONFIG_TARGET_IMX8MP_DH_DHCOM_PDK2=y
++CONFIG_DM_RESET=y
++CONFIG_SYS_MONITOR_LEN=1048576
++CONFIG_SPL_MMC=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SPL_DRIVERS_MISC=y
++CONFIG_BOOTCOUNT_BOOTLIMIT=3
++CONFIG_SYS_BOOTCOUNT_ADDR=0x30370090
++CONFIG_SPL_STACK=0x96fc00
++CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
++CONFIG_SPL_BSS_START_ADDR=0x96fc00
++CONFIG_SPL_BSS_MAX_SIZE=0x400
++CONFIG_SPL=y
++CONFIG_SYS_BOOTCOUNT_SINGLEWORD=y
++CONFIG_DEBUG_UART_BASE=0x30860000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_ENV_OFFSET_REDUND=0xFF0000
++CONFIG_IMX_BOOTAUX=y
++CONFIG_SPL_IMX_ROMAPI_LOADADDR=0x48000000
++CONFIG_SYS_LOAD_ADDR=0x50000000
++CONFIG_PCI=y
++CONFIG_DEBUG_UART=y
++CONFIG_ENV_VARS_UBOOT_CONFIG=y
++CONFIG_FIT=y
++CONFIG_FIT_EXTERNAL_OFFSET=0x3000
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_SPL_LOAD_FIT_ADDRESS=0x44000000
++CONFIG_SPL_LOAD_FIT_APPLY_OVERLAY=y
++CONFIG_SYS_BOOTM_LEN=0x8000000
++CONFIG_SUPPORT_RAW_INITRD=y
++CONFIG_OF_SYSTEM_SETUP=y
++CONFIG_USE_BOOTARGS=y
++CONFIG_USE_BOOTCOMMAND=y
++CONFIG_BOOTCOMMAND="run dh_update_env distro_bootcmd ; reset"
++CONFIG_USE_PREBOOT=y
++CONFIG_PREBOOT=""
++CONFIG_DEFAULT_FDT_FILE="imx8mp-dhcom-drc02.dtb"
++CONFIG_SYS_CBSIZE=2048
++CONFIG_SYS_PBSIZE=2081
++CONFIG_CONSOLE_MUX=y
++CONFIG_SYS_CONSOLE_ENV_OVERWRITE=y
++CONFIG_ARCH_MISC_INIT=y
++CONFIG_BOARD_LATE_INIT=y
++CONFIG_SPL_MAX_SIZE=0x26000
++CONFIG_SPL_BOARD_INIT=y
++CONFIG_SPL_BOOTROM_SUPPORT=y
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
++CONFIG_SPL_SYS_MALLOC=y
++CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
++CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x4c000000
++CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
++CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
++# CONFIG_SPL_FIT_IMAGE_TINY is not set
++CONFIG_SPL_I2C=y
++CONFIG_SPL_POWER=y
++CONFIG_SPL_WATCHDOG=y
++CONFIG_HUSH_PARSER=y
++CONFIG_SYS_PROMPT="u-boot=> "
++# CONFIG_BOOTM_NETBSD is not set
++# CONFIG_BOOTM_PLAN9 is not set
++# CONFIG_BOOTM_RTEMS is not set
++# CONFIG_BOOTM_VXWORKS is not set
++CONFIG_CMD_ASKENV=y
++# CONFIG_CMD_EXPORTENV is not set
++CONFIG_CMD_ERASEENV=y
++CONFIG_CRC32_VERIFY=y
++CONFIG_CMD_EEPROM=y
++CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
++CONFIG_SYS_EEPROM_SIZE=16384
++CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=6
++CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=20
++CONFIG_CMD_MD5SUM=y
++CONFIG_MD5SUM_VERIFY=y
++CONFIG_CMD_MEMTEST=y
++CONFIG_CMD_SHA1SUM=y
++CONFIG_SHA1SUM_VERIFY=y
++CONFIG_CMD_CLK=y
++CONFIG_CMD_DFU=y
++CONFIG_CMD_FUSE=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_GPT_RENAME=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_LSBLK=y
++CONFIG_CMD_MBR=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_BKOPS_ENABLE=y
++CONFIG_CMD_MTD=y
++CONFIG_CMD_PART=y
++CONFIG_CMD_PCI=y
++CONFIG_CMD_READ=y
++CONFIG_CMD_SPI=y
++CONFIG_CMD_USB=y
++CONFIG_CMD_USB_SDP=y
++CONFIG_CMD_USB_MASS_STORAGE=y
++CONFIG_CMD_CAT=y
++CONFIG_CMD_XXD=y
++CONFIG_CMD_DHCP=y
++CONFIG_CMD_DHCP6=y
++CONFIG_CMD_TFTPPUT=y
++CONFIG_CMD_WGET=y
++CONFIG_CMD_MII=y
++CONFIG_CMD_PING=y
++CONFIG_CMD_PXE=y
++CONFIG_CMD_BOOTCOUNT=y
++CONFIG_CMD_CACHE=y
++CONFIG_CMD_TIME=y
++CONFIG_CMD_GETTIME=y
++CONFIG_CMD_KASLRSEED=y
++CONFIG_CMD_SYSBOOT=y
++CONFIG_CMD_UUID=y
++CONFIG_CMD_PMIC=y
++CONFIG_CMD_REGULATOR=y
++CONFIG_CMD_SMC=y
++CONFIG_HASH_VERIFY=y
++CONFIG_CMD_BTRFS=y
++CONFIG_CMD_EXT2=y
++CONFIG_CMD_EXT4=y
++CONFIG_CMD_EXT4_WRITE=y
++CONFIG_CMD_FAT=y
++CONFIG_CMD_FS_GENERIC=y
++CONFIG_CMD_FS_UUID=y
++CONFIG_CMD_MTDPARTS=y
++CONFIG_CMD_MTDPARTS_SHOW_NET_SIZES=y
++CONFIG_MTDIDS_DEFAULT="nor0=flash@0"
++CONFIG_MTDPARTS_DEFAULT="mtdparts=flash@0:-(sf)"
++CONFIG_MMC_SPEED_MODE_SET=y
++CONFIG_PARTITION_TYPE_GUID=y
++CONFIG_OF_CONTROL=y
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_ENV_OVERWRITE=y
++CONFIG_ENV_IS_NOWHERE=y
++CONFIG_ENV_IS_IN_SPI_FLASH=y
++CONFIG_ENV_SECT_SIZE_AUTO=y
++CONFIG_ENV_SPI_MAX_HZ=80000000
++CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
++CONFIG_VERSION_VARIABLE=y
++CONFIG_NET_RANDOM_ETHADDR=y
++CONFIG_NETCONSOLE=y
++CONFIG_IP_DEFRAG=y
++CONFIG_TFTP_TSIZE=y
++CONFIG_PROT_TCP_SACK=y
++CONFIG_IPV6=y
++CONFIG_SPL_DM=y
++CONFIG_BOOTCOUNT_LIMIT=y
++CONFIG_SYS_BOOTCOUNT_MAGIC=0xB0C40000
++CONFIG_SPL_CLK_COMPOSITE_CCF=y
++CONFIG_CLK_COMPOSITE_CCF=y
++CONFIG_SPL_CLK_IMX8MP=y
++CONFIG_CLK_IMX8MP=y
++CONFIG_FSL_CAAM=y
++CONFIG_IMX8M_DRAM_INLINE_ECC=y
++CONFIG_DFU_TFTP=y
++CONFIG_DFU_TIMEOUT=y
++CONFIG_DFU_MMC=y
++CONFIG_DFU_MTD=y
++CONFIG_DFU_RAM=y
++CONFIG_USB_FUNCTION_FASTBOOT=y
++CONFIG_FASTBOOT_BUF_ADDR=0x42800000
++CONFIG_FASTBOOT_BUF_SIZE=0x20000000
++CONFIG_FASTBOOT_FLASH=y
++CONFIG_FASTBOOT_FLASH_MMC_DEV=0
++CONFIG_GPIO_HOG=y
++CONFIG_SPL_GPIO_HOG=y
++CONFIG_MXC_GPIO=y
++CONFIG_DM_PCA953X=y
++CONFIG_DM_I2C=y
++CONFIG_I2C_MUX=y
++CONFIG_I2C_MUX_PCA954x=y
++# CONFIG_INPUT is not set
++CONFIG_LED=y
++CONFIG_LED_BLINK=y
++CONFIG_LED_GPIO=y
++CONFIG_I2C_EEPROM=y
++CONFIG_SYS_I2C_EEPROM_ADDR=0x50
++CONFIG_SUPPORT_EMMC_BOOT=y
++CONFIG_MMC_IO_VOLTAGE=y
++CONFIG_SPL_MMC_IO_VOLTAGE=y
++CONFIG_MMC_UHS_SUPPORT=y
++CONFIG_SPL_MMC_UHS_SUPPORT=y
++CONFIG_MMC_HS400_ES_SUPPORT=y
++CONFIG_MMC_HS400_SUPPORT=y
++CONFIG_FSL_USDHC=y
++CONFIG_MTD=y
++CONFIG_DM_MTD=y
++CONFIG_DM_SPI_FLASH=y
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++# CONFIG_SPI_FLASH_UNLOCK_ALL is not set
++CONFIG_SPI_FLASH_WINBOND=y
++CONFIG_SPI_FLASH_MTD=y
++CONFIG_PHY_ANEG_TIMEOUT=20000
++CONFIG_PHY_MICREL=y
++CONFIG_PHY_MICREL_KSZ90X1=y
++CONFIG_PHY_SMSC=y
++CONFIG_DM_MDIO=y
++CONFIG_DM_ETH_PHY=y
++CONFIG_DWC_ETH_QOS=y
++CONFIG_DWC_ETH_QOS_IMX=y
++CONFIG_FEC_MXC=y
++CONFIG_RGMII=y
++CONFIG_MII=y
++CONFIG_NVME_PCI=y
++CONFIG_PCIE_DW_IMX=y
++CONFIG_PHY_IMX8MQ_USB=y
++CONFIG_PHY_IMX8M_PCIE=y
++CONFIG_PINCTRL=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_PINCTRL_IMX8M=y
++CONFIG_POWER_DOMAIN=y
++CONFIG_IMX8M_POWER_DOMAIN=y
++CONFIG_IMX8MP_HSIOMIX_BLKCTRL=y
++CONFIG_DM_PMIC=y
++CONFIG_DM_PMIC_PCA9450=y
++CONFIG_SPL_DM_PMIC_PCA9450=y
++CONFIG_SPL_DM_REGULATOR=y
++CONFIG_DM_REGULATOR_PCA9450=y
++CONFIG_SPL_DM_REGULATOR_PCA9450=y
++CONFIG_DM_REGULATOR_FIXED=y
++CONFIG_DM_REGULATOR_GPIO=y
++CONFIG_DM_RNG=y
++CONFIG_DM_RTC=y
++CONFIG_RTC_M41T62=y
++CONFIG_CONS_INDEX=2
++CONFIG_DM_SERIAL=y
++# CONFIG_SPL_DM_SERIAL is not set
++CONFIG_MXC_UART=y
++CONFIG_SPI=y
++CONFIG_DM_SPI=y
++CONFIG_NXP_FSPI=y
++CONFIG_MXC_SPI=y
++CONFIG_SYSRESET=y
++CONFIG_SPL_SYSRESET=y
++CONFIG_SYSRESET_PSCI=y
++CONFIG_SYSRESET_WATCHDOG=y
++CONFIG_DM_THERMAL=y
++CONFIG_IMX_TMU=y
++CONFIG_USB=y
++# CONFIG_SPL_DM_USB is not set
++CONFIG_DM_USB_GADGET=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_XHCI_DWC3=y
++CONFIG_USB_XHCI_DWC3_OF_SIMPLE=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_USB_STORAGE=y
++CONFIG_USB_HOST_ETHER=y
++CONFIG_USB_ETHER_ASIX=y
++CONFIG_USB_GADGET=y
++CONFIG_USB_GADGET_MANUFACTURER="DH electronics"
++CONFIG_USB_GADGET_VENDOR_NUM=0x0525
++CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
++CONFIG_USB_FUNCTION_ACM=y
++CONFIG_USB_ETHER=y
++CONFIG_USB_ETH_CDC=y
++CONFIG_IMX_WATCHDOG=y
 -- 
-Tom
-
+2.45.2
 
