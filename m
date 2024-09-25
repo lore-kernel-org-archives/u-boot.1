@@ -4,72 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AD2FCCF9E3
-	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 15:15:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60527CCF9E6
+	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 16:07:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2922C88BD2;
-	Wed, 25 Sep 2024 17:14:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 8623888B31;
+	Wed, 25 Sep 2024 18:07:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Mn1so5M7";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 6BE9788B5F; Wed, 25 Sep 2024 17:14:24 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1727280473;
+	bh=1C8umNngBMCYQFd1WXEVyHKDidLQK/v79VJr8dhkKoc=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=T0/T9vPt9E+yaxY7nosHpKOHB/m0dRsPzM7JlBUedSZkr6xhZesJF1VtYRGATAqrP
+	 N6l1QBqJZoBEo8LC/s53zo6PBRXMk9zqK5mkwEG3UlfmqLBWJA8UY3Hs/bZkGDBtyg
+	 9biNCdprKxbqpsDZSnXBzYqFjSwudYSCtXGeIuEcvqvN/tv6+i6K2VR36rAXDBXQK/
+	 TpewRgE3miZfF2xBrSqvWQxh17+hh0fHduWDUFrKrFV33dzTP504HFZkRQpAVJ4GRF
+	 Phu343HRKJ5xCfUUiJsOzx1jj73k9ESlHq8b6DR9djtMJ3V0opekPc1PcRFKwlEfp7
+	 Db2sTBaUtadTA==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0290588BD2
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 17:14:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=devarsht@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 48PFE14F102765;
- Wed, 25 Sep 2024 10:14:01 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1727277241;
- bh=I75++hoxomkw9nvhi5KogYtWG4b2mbBUdzn9J7HHuks=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=Mn1so5M7SgXD2znIvNNZ8YFqr4OTKRAGvab+L2t+X5s2fjyNAwMPVVKYyaDmd+9PY
- yXHPeWj3hiEn/IweuWK4LJKHs5HWAQcg2Ae1FNbSfmplHu/w7I/0YnTnlvGzvHcfrx
- 11iY7JRVgNSWsremOSkt2qLON5dB0XLUQektXTTw=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 48PFE05g103161
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 25 Sep 2024 10:14:00 -0500
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 25
- Sep 2024 10:14:00 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 25 Sep 2024 10:14:00 -0500
-Received: from localhost (ti.dhcp.ti.com [172.24.227.95] (may be forged))
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 48PFDxJS017947;
- Wed, 25 Sep 2024 10:13:59 -0500
-From: Devarsh Thakkar <devarsht@ti.com>
-To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <bb@ti.com>
-CC: <sjg@chromium.org>, <agust@denx.de>, <praneeth@ti.com>, <nm@ti.com>,
- <vigneshr@ti.com>, <s-jain1@ti.com>, <r-donadkar@ti.com>,
- <j-humphreys@ti.com>, <ilias.apalodimas@linaro.org>,
- <xypron.glpk@gmx.de>, <akashi.tkhro@gmail.com>,
- <mkorpershoek@baylibre.com>, <eajames@linux.ibm.com>,
- <caleb.connolly@linaro.org>, <quentin.schulz@cherry.de>,
- <martinstolpe@gmail.com>, <iivanov@suse.de>, <n-jain1@ti.com>,
- <devarsht@ti.com>
-Subject: [PATCH 3/3] board: ti: am62x: evm: Update simple-framebuffer node in
- device-tree
-Date: Wed, 25 Sep 2024 20:43:54 +0530
-Message-ID: <20240925151354.480704-4-devarsht@ti.com>
-X-Mailer: git-send-email 2.39.1
-In-Reply-To: <20240925151354.480704-1-devarsht@ti.com>
-References: <20240925151354.480704-1-devarsht@ti.com>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id A882E87BF4;
+ Wed, 25 Sep 2024 18:07:51 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1727280471;
+ bh=1C8umNngBMCYQFd1WXEVyHKDidLQK/v79VJr8dhkKoc=;
+ h=From:To:Cc:Subject:Date:From;
+ b=vwq0V2inlwVYyM1vKHng+biBBUbYG8z84zKGS7dw1gUWFMZGIQOlNw1L4WTwbeOz/
+ 7KYMw5MIVhx8iIon2j+WVWSuE5D4RuFZVk5H/Y2LD4JSgWT6BoniRnEQX7Fc/jkMam
+ F24h4uA43cx4P3uZSyeA+HbwgN91HlJELzpId+sCDPFPSlf2v8LZ/Si1kxkRqaiDTS
+ r4Oc+1PKAYntJNk4rfX8d2ujSBGsoJwpfyVfaLJxQlv7E/ysRWwvBfEcrEGiskeUSu
+ HzVHRSeKrHFgmBxw9E4/V/Yxd/7QZGCWeNK3QNIGFa/DibHAux1DXWbpOeyV07HnZ6
+ D1AB5H9x5Rvdw==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
+ Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
+Subject: [PATCH v2] arm64: dts: imx8mp: Add DH i.MX8MP DHCOM SoM on DRC02
+ carrier board
+Date: Wed, 25 Sep 2024 18:07:17 +0200
+Message-ID: <20240925160738.85211-1-marex@denx.de>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,58 +66,576 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update simple-framebuffer device-tree node by enumerating framebuffer
-related information in existing simple-framebuffer node in Linux
-device-tree file and enabling it.
+Add support for DH electronics i.MX8MP DHCOM SoM on DRC02 carrier board.
+This system is populated with two ethernet ports, two CANs, RS485 and RS232,
+USB, capacitive buttons and an OLED display.
 
-In case there is no simple-framebuffer stub detected in Linux kernel
-device-tree and video is still active, then update the device-tree to
-reserve the framebuffer region for the active splash screen.
+Matching Linux kernel patch has been posted:
+https://lore.kernel.org/imx/20240925160343.84388-2-marex@denx.de/
 
-This helps preserve the splash screen till the display server takes over
-after OS is booted.
-
-Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
+Signed-off-by: Marek Vasut <marex@denx.de>
 ---
- board/ti/am62x/evm.c | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Stefano Babic <sbabic@denx.de>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@dh-electronics.com
+Cc: u-boot@lists.denx.de
+---
+V2: Fill in lore link to kernel DT submission
+---
+ arch/arm/dts/Makefile                       |   1 +
+ arch/arm/dts/imx8mp-dhcom-drc02-u-boot.dtsi |   6 +
+ arch/arm/dts/imx8mp-dhcom-drc02.dts         | 230 ++++++++++++++++
+ configs/imx8mp_dhcom_drc02_defconfig        | 277 ++++++++++++++++++++
+ 4 files changed, 514 insertions(+)
+ create mode 100644 arch/arm/dts/imx8mp-dhcom-drc02-u-boot.dtsi
+ create mode 100644 arch/arm/dts/imx8mp-dhcom-drc02.dts
+ create mode 100644 configs/imx8mp_dhcom_drc02_defconfig
 
-diff --git a/board/ti/am62x/evm.c b/board/ti/am62x/evm.c
-index 9bdd0223cdb6..be0447f6e9ea 100644
---- a/board/ti/am62x/evm.c
-+++ b/board/ti/am62x/evm.c
-@@ -16,6 +16,7 @@
- #include <cpu_func.h>
- #include <k3-ddrss.h>
- #include <fdt_support.h>
-+#include <fdt_simplefb.h>
- #include <asm/io.h>
- #include <asm/arch/hardware.h>
- #include <dm/uclass.h>
-@@ -162,3 +163,23 @@ void spl_perform_fixups(struct spl_image_info *spl_image)
- #endif
- }
- #endif
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index b3fe3f3c535..cdb90f1d358 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -968,6 +968,7 @@ dtb-$(CONFIG_ARCH_IMX8M) += \
+ 	imx8mp-dhcom-som-overlay-eth2xfast.dtbo \
+ 	imx8mp-dhcom-pdk-overlay-eth2xfast.dtbo \
+ 	imx8mp-debix-model-a.dtb \
++	imx8mp-dhcom-drc02.dtb \
+ 	imx8mp-dhcom-pdk2.dtb \
+ 	imx8mp-dhcom-pdk3.dtb \
+ 	imx8mp-dhcom-pdk3-overlay-rev100.dtbo \
+diff --git a/arch/arm/dts/imx8mp-dhcom-drc02-u-boot.dtsi b/arch/arm/dts/imx8mp-dhcom-drc02-u-boot.dtsi
+new file mode 100644
+index 00000000000..8a23b117d9a
+--- /dev/null
++++ b/arch/arm/dts/imx8mp-dhcom-drc02-u-boot.dtsi
+@@ -0,0 +1,6 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (C) 2024 Marek Vasut <marex@denx.de>
++ */
 +
-+#if defined(CONFIG_OF_BOARD_SETUP)
-+int ft_board_setup(void *blob, struct bd_info *bd)
-+{
-+	int ret = -1;
++#include "imx8mp-dhcom-u-boot.dtsi"
+diff --git a/arch/arm/dts/imx8mp-dhcom-drc02.dts b/arch/arm/dts/imx8mp-dhcom-drc02.dts
+new file mode 100644
+index 00000000000..b3ab6e94508
+--- /dev/null
++++ b/arch/arm/dts/imx8mp-dhcom-drc02.dts
+@@ -0,0 +1,230 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (C) 2024 Marek Vasut <marex@denx.de>
++ *
++ * DHCOM iMX8MP variant:
++ * DHCM-iMX8ML8-C160-R204-F1638-SPI16-E2-CAN2-RTC-I-01D2
++ * DHCOM PCB number: 660-100 or newer
++ * DRC02 PCB number: 568-100 or newer
++ */
 +
-+	if (IS_ENABLED(CONFIG_FDT_SIMPLEFB))
-+		ret = fdt_simplefb_enable_and_mem_rsv(blob);
++/dts-v1/;
 +
-+	/* If simplefb is not enabled and video is active, then at least reserve
-+	 * the framebuffer region to preserve the splash screen while OS is booting
++#include <dt-bindings/leds/common.h>
++#include <dt-bindings/phy/phy-imx8-pcie.h>
++#include "imx8mp-dhcom-som.dtsi"
++
++/ {
++	model = "DH electronics i.MX8M Plus DHCOM on DRC02";
++	compatible = "dh,imx8mp-dhcom-drc02", "dh,imx8mp-dhcom-som",
++		     "fsl,imx8mp";
++
++	chosen {
++		stdout-path = &uart1;
++	};
++};
++
++&eqos {	/* First ethernet */
++	pinctrl-0 = <&pinctrl_eqos_rmii>;
++	phy-handle = <&ethphy0f>;
++	phy-mode = "rmii";
++
++	assigned-clock-parents = <&clk IMX8MP_SYS_PLL1_266M>,
++				 <&clk IMX8MP_SYS_PLL2_100M>,
++				 <&clk IMX8MP_SYS_PLL2_50M>;
++	assigned-clock-rates = <0>, <100000000>, <50000000>;
++};
++
++&ethphy0g {	/* Micrel KSZ9131RNXI */
++	status = "disabled";
++};
++
++&ethphy0f {	/* SMSC LAN8740Ai */
++	status = "okay";
++};
++
++&fec {	/* Second ethernet */
++	pinctrl-0 = <&pinctrl_fec_rmii>;
++	phy-handle = <&ethphy1f>;
++	phy-mode = "rmii";
++	status = "okay";
++
++	assigned-clock-parents = <&clk IMX8MP_SYS_PLL1_266M>,
++				 <&clk IMX8MP_SYS_PLL2_100M>,
++				 <&clk IMX8MP_SYS_PLL2_50M>,
++				 <&clk IMX8MP_SYS_PLL2_50M>;
++	assigned-clock-rates = <0>, <100000000>, <50000000>, <0>;
++};
++
++&ethphy1f {	/* SMSC LAN8740Ai */
++	status = "okay";
++};
++
++&flexcan1 {
++	status = "okay";
++};
++
++&flexcan2 {
++	status = "okay";
++};
++
++&gpio1 {
++	gpio-line-names =
++		"DRC02-In1", "", "", "", "", "DHCOM-I", "DRC02-HW2", "DRC02-HW0",
++		"DHCOM-B", "DHCOM-A", "", "DHCOM-H", "", "", "", "",
++		"", "", "", "", "", "", "", "",
++		"", "", "", "", "", "", "", "";
++
++	/*
++	 * NOTE: On DRC02, the RS485_RX_En is controlled by a separate
++	 * GPIO line, however the i.MX8 UART driver assumes RX happens
++	 * during TX anyway and that it only controls drive enable DE
++	 * line. Hence, the RX is always enabled here.
 +	 */
-+	if (IS_ENABLED(CONFIG_VIDEO) && IS_ENABLED(CONFIG_OF_LIBFDT)) {
-+		if (ret && video_is_active())
-+			return fdt_add_fb_mem_rsv(blob);
-+	}
++	rs485-rx-en-hog {
++		gpio-hog;
++		gpios = <13 0>; /* GPIO Q */
++		line-name = "rs485-rx-en";
++		output-low;
++	};
++};
 +
-+	return 0;
-+}
-+#endif
++&gpio2 {
++	gpio-line-names =
++		"", "", "", "", "", "", "", "",
++		"DHCOM-O", "DHCOM-N", "", "SOM-HW1", "", "", "", "",
++		"", "", "", "", "DRC02-In2", "", "", "",
++		"", "", "", "", "", "", "", "";
++};
++
++&gpio3 {
++	gpio-line-names =
++		"", "", "", "", "", "", "", "",
++		"", "", "", "", "", "", "SOM-HW0", "",
++		"", "", "", "", "", "", "SOM-MEM0", "SOM-MEM1",
++		"SOM-MEM2", "SOM-HW2", "", "", "", "", "", "";
++};
++
++&gpio4 {
++	gpio-line-names =
++		"", "", "", "", "", "", "", "",
++		"", "", "", "", "", "", "", "",
++		"", "", "", "SOM-HW1", "", "", "", "",
++		"", "", "", "DRC02-Out2", "", "", "", "";
++};
++
++&gpio5 {
++	gpio-line-names =
++		"", "", "DHCOM-C", "", "", "", "", "",
++		"", "", "", "", "", "", "", "",
++		"", "", "", "", "", "", "DHCOM-E", "DRC02-Out1",
++		"", "", "", "", "", "", "", "";
++};
++
++&i2c3 {
++	/* Resistive touch controller not populated on this one SoM variant. */
++	touchscreen@49 {
++		status = "disabled";
++	};
++};
++
++&pcie_phy {
++	status = "disabled";
++};
++
++&pcie {
++	status = "disabled";
++};
++
++/* Console UART */
++&pinctrl_uart1 {
++	fsl,pins = <
++		/* No pull-ups on DRC02, enable in-SoC pull-ups */
++		MX8MP_IOMUXC_SAI2_RXC__UART1_DCE_RX		0x149
++		MX8MP_IOMUXC_SAI2_RXFS__UART1_DCE_TX		0x149
++	>;
++};
++
++&pinctrl_uart3 {
++	fsl,pins = <
++		/* No pull-ups on DRC02, enable in-SoC pull-ups */
++		MX8MP_IOMUXC_ECSPI1_SCLK__UART3_DCE_RX		0x149
++		MX8MP_IOMUXC_ECSPI1_MOSI__UART3_DCE_TX		0x149
++	>;
++};
++
++&uart1 {
++	/*
++	 * Due to the use of CAN2 the signals for CAN2 Tx and Rx are routed to
++	 * DHCOM UART1 RTS/CTS pins. Therefore this UART have to use DHCOM GPIOs
++	 * for RTS/CTS. So configure DHCOM GPIO I as RTS and GPIO M as CTS.
++	 */
++	/delete-property/ uart-has-rtscts;
++	cts-gpios = <&gpio5 5 GPIO_ACTIVE_HIGH>; /* GPIO M */
++	pinctrl-0 = <&pinctrl_uart1 &pinctrl_dhcom_i &pinctrl_dhcom_m>;
++	pinctrl-names = "default";
++	rts-gpios = <&gpio1 5 GPIO_ACTIVE_HIGH>; /* GPIO I */
++};
++
++&uart3 {
++	/*
++	 * On DRC02 this UART is used as RS485 interface and RS485_TX_En is
++	 * controlled by DHCOM GPIO P. So remove RTS/CTS pins and the property
++	 * uart-has-rtscts from this UART and add the DHCOM GPIO P pin via
++	 * rts-gpios. The RS485_RX_En is controlled by DHCOM GPIO Q, see gpio1
++	 * node above.
++	 */
++	/delete-property/ uart-has-rtscts;
++	linux,rs485-enabled-at-boot-time;
++	pinctrl-0 = <&pinctrl_uart3 &pinctrl_dhcom_p &pinctrl_dhcom_q>;
++	pinctrl-names = "default";
++	rts-gpios = <&gpio2 10 GPIO_ACTIVE_HIGH>; /* GPIO P */
++};
++
++/* No WiFi/BT chipset on this SoM variant. */
++&uart2 {
++	bluetooth {
++		status = "disabled";
++	};
++};
++
++/* USB_OTG port is not routed out on DRC02. */
++&usb3_0 {
++	status = "disabled";
++};
++
++&usb_dwc3_0 {
++	status = "disabled";
++};
++
++/* USB_HOST port has USB Hub connected to it, PWR/OC pins are unused */
++&usb3_1 {
++	fsl,disable-port-power-control;
++	fsl,permanently-attached;
++};
++
++&usb_dwc3_1 {
++	dr_mode = "host";
++	maximum-speed = "high-speed";
++};
++
++/* No WiFi/BT chipset on this SoM variant. */
++&usdhc1 {
++	status = "disabled";
++};
++
++&iomuxc {
++	/*
++	 * GPIO I is connected to UART1_RTS
++	 * GPIO M is connected to UART1_CTS
++	 * GPIO P is connected to RS485_TX_En
++	 * GPIO Q is connected to RS485_RX_En
++	 */
++	pinctrl-0 = <&pinctrl_hog_base
++		     &pinctrl_dhcom_a &pinctrl_dhcom_b &pinctrl_dhcom_c
++		     &pinctrl_dhcom_d &pinctrl_dhcom_e &pinctrl_dhcom_f
++		     &pinctrl_dhcom_g &pinctrl_dhcom_h &pinctrl_dhcom_j
++		     &pinctrl_dhcom_k &pinctrl_dhcom_l &pinctrl_dhcom_n
++		     &pinctrl_dhcom_o &pinctrl_dhcom_r &pinctrl_dhcom_s
++		     &pinctrl_dhcom_int>;
++};
+diff --git a/configs/imx8mp_dhcom_drc02_defconfig b/configs/imx8mp_dhcom_drc02_defconfig
+new file mode 100644
+index 00000000000..7c684d3bea5
+--- /dev/null
++++ b/configs/imx8mp_dhcom_drc02_defconfig
+@@ -0,0 +1,277 @@
++CONFIG_ARM=y
++CONFIG_ARCH_IMX8M=y
++CONFIG_TEXT_BASE=0x40200000
++CONFIG_SYS_MALLOC_LEN=0x1000000
++CONFIG_SYS_MALLOC_F_LEN=0x18000
++CONFIG_SPL_GPIO=y
++CONFIG_SPL_LIBCOMMON_SUPPORT=y
++CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_NR_DRAM_BANKS=2
++CONFIG_SF_DEFAULT_SPEED=50000000
++CONFIG_ENV_SIZE=0x10000
++CONFIG_ENV_OFFSET=0xFE0000
++CONFIG_ENV_SECT_SIZE=0x1000
++CONFIG_DM_GPIO=y
++CONFIG_DEFAULT_DEVICE_TREE="imx8mp-dhcom-drc02"
++CONFIG_SPL_TEXT_BASE=0x920000
++CONFIG_TARGET_IMX8MP_DH_DHCOM_PDK2=y
++CONFIG_DM_RESET=y
++CONFIG_SYS_MONITOR_LEN=1048576
++CONFIG_SPL_MMC=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SPL_DRIVERS_MISC=y
++CONFIG_BOOTCOUNT_BOOTLIMIT=3
++CONFIG_SYS_BOOTCOUNT_ADDR=0x30370090
++CONFIG_SPL_STACK=0x96fc00
++CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
++CONFIG_SPL_BSS_START_ADDR=0x96fc00
++CONFIG_SPL_BSS_MAX_SIZE=0x400
++CONFIG_SPL=y
++CONFIG_SYS_BOOTCOUNT_SINGLEWORD=y
++CONFIG_DEBUG_UART_BASE=0x30860000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_ENV_OFFSET_REDUND=0xFF0000
++CONFIG_IMX_BOOTAUX=y
++CONFIG_SPL_IMX_ROMAPI_LOADADDR=0x48000000
++CONFIG_SYS_LOAD_ADDR=0x50000000
++CONFIG_PCI=y
++CONFIG_DEBUG_UART=y
++CONFIG_ENV_VARS_UBOOT_CONFIG=y
++CONFIG_FIT=y
++CONFIG_FIT_EXTERNAL_OFFSET=0x3000
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_SPL_LOAD_FIT_ADDRESS=0x44000000
++CONFIG_SPL_LOAD_FIT_APPLY_OVERLAY=y
++CONFIG_SYS_BOOTM_LEN=0x8000000
++CONFIG_SUPPORT_RAW_INITRD=y
++CONFIG_OF_SYSTEM_SETUP=y
++CONFIG_USE_BOOTARGS=y
++CONFIG_USE_BOOTCOMMAND=y
++CONFIG_BOOTCOMMAND="run dh_update_env distro_bootcmd ; reset"
++CONFIG_USE_PREBOOT=y
++CONFIG_PREBOOT=""
++CONFIG_DEFAULT_FDT_FILE="imx8mp-dhcom-drc02.dtb"
++CONFIG_SYS_CBSIZE=2048
++CONFIG_SYS_PBSIZE=2081
++CONFIG_CONSOLE_MUX=y
++CONFIG_SYS_CONSOLE_ENV_OVERWRITE=y
++CONFIG_ARCH_MISC_INIT=y
++CONFIG_BOARD_LATE_INIT=y
++CONFIG_SPL_MAX_SIZE=0x26000
++CONFIG_SPL_BOARD_INIT=y
++CONFIG_SPL_BOOTROM_SUPPORT=y
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
++CONFIG_SPL_SYS_MALLOC=y
++CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
++CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x4c000000
++CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
++CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
++# CONFIG_SPL_FIT_IMAGE_TINY is not set
++CONFIG_SPL_I2C=y
++CONFIG_SPL_POWER=y
++CONFIG_SPL_WATCHDOG=y
++CONFIG_HUSH_PARSER=y
++CONFIG_SYS_PROMPT="u-boot=> "
++# CONFIG_BOOTM_NETBSD is not set
++# CONFIG_BOOTM_PLAN9 is not set
++# CONFIG_BOOTM_RTEMS is not set
++# CONFIG_BOOTM_VXWORKS is not set
++CONFIG_CMD_ASKENV=y
++# CONFIG_CMD_EXPORTENV is not set
++CONFIG_CMD_ERASEENV=y
++CONFIG_CRC32_VERIFY=y
++CONFIG_CMD_EEPROM=y
++CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
++CONFIG_SYS_EEPROM_SIZE=16384
++CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=6
++CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=20
++CONFIG_CMD_MD5SUM=y
++CONFIG_MD5SUM_VERIFY=y
++CONFIG_CMD_MEMTEST=y
++CONFIG_CMD_SHA1SUM=y
++CONFIG_SHA1SUM_VERIFY=y
++CONFIG_CMD_CLK=y
++CONFIG_CMD_DFU=y
++CONFIG_CMD_FUSE=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_GPT_RENAME=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_LSBLK=y
++CONFIG_CMD_MBR=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_BKOPS_ENABLE=y
++CONFIG_CMD_MTD=y
++CONFIG_CMD_PART=y
++CONFIG_CMD_PCI=y
++CONFIG_CMD_READ=y
++CONFIG_CMD_SPI=y
++CONFIG_CMD_USB=y
++CONFIG_CMD_USB_SDP=y
++CONFIG_CMD_USB_MASS_STORAGE=y
++CONFIG_CMD_CAT=y
++CONFIG_CMD_XXD=y
++CONFIG_CMD_DHCP=y
++CONFIG_CMD_DHCP6=y
++CONFIG_CMD_TFTPPUT=y
++CONFIG_CMD_WGET=y
++CONFIG_CMD_MII=y
++CONFIG_CMD_PING=y
++CONFIG_CMD_PXE=y
++CONFIG_CMD_BOOTCOUNT=y
++CONFIG_CMD_CACHE=y
++CONFIG_CMD_TIME=y
++CONFIG_CMD_GETTIME=y
++CONFIG_CMD_KASLRSEED=y
++CONFIG_CMD_SYSBOOT=y
++CONFIG_CMD_UUID=y
++CONFIG_CMD_PMIC=y
++CONFIG_CMD_REGULATOR=y
++CONFIG_CMD_SMC=y
++CONFIG_HASH_VERIFY=y
++CONFIG_CMD_BTRFS=y
++CONFIG_CMD_EXT2=y
++CONFIG_CMD_EXT4=y
++CONFIG_CMD_EXT4_WRITE=y
++CONFIG_CMD_FAT=y
++CONFIG_CMD_FS_GENERIC=y
++CONFIG_CMD_FS_UUID=y
++CONFIG_CMD_MTDPARTS=y
++CONFIG_CMD_MTDPARTS_SHOW_NET_SIZES=y
++CONFIG_MTDIDS_DEFAULT="nor0=flash@0"
++CONFIG_MTDPARTS_DEFAULT="mtdparts=flash@0:-(sf)"
++CONFIG_MMC_SPEED_MODE_SET=y
++CONFIG_PARTITION_TYPE_GUID=y
++CONFIG_OF_CONTROL=y
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_ENV_OVERWRITE=y
++CONFIG_ENV_IS_NOWHERE=y
++CONFIG_ENV_IS_IN_SPI_FLASH=y
++CONFIG_ENV_SECT_SIZE_AUTO=y
++CONFIG_ENV_SPI_MAX_HZ=80000000
++CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
++CONFIG_VERSION_VARIABLE=y
++CONFIG_NET_RANDOM_ETHADDR=y
++CONFIG_NETCONSOLE=y
++CONFIG_IP_DEFRAG=y
++CONFIG_TFTP_TSIZE=y
++CONFIG_PROT_TCP_SACK=y
++CONFIG_IPV6=y
++CONFIG_SPL_DM=y
++CONFIG_BOOTCOUNT_LIMIT=y
++CONFIG_SYS_BOOTCOUNT_MAGIC=0xB0C40000
++CONFIG_SPL_CLK_COMPOSITE_CCF=y
++CONFIG_CLK_COMPOSITE_CCF=y
++CONFIG_SPL_CLK_IMX8MP=y
++CONFIG_CLK_IMX8MP=y
++CONFIG_FSL_CAAM=y
++CONFIG_IMX8M_DRAM_INLINE_ECC=y
++CONFIG_DFU_TFTP=y
++CONFIG_DFU_TIMEOUT=y
++CONFIG_DFU_MMC=y
++CONFIG_DFU_MTD=y
++CONFIG_DFU_RAM=y
++CONFIG_USB_FUNCTION_FASTBOOT=y
++CONFIG_FASTBOOT_BUF_ADDR=0x42800000
++CONFIG_FASTBOOT_BUF_SIZE=0x20000000
++CONFIG_FASTBOOT_FLASH=y
++CONFIG_FASTBOOT_FLASH_MMC_DEV=0
++CONFIG_GPIO_HOG=y
++CONFIG_SPL_GPIO_HOG=y
++CONFIG_MXC_GPIO=y
++CONFIG_DM_PCA953X=y
++CONFIG_DM_I2C=y
++CONFIG_I2C_MUX=y
++CONFIG_I2C_MUX_PCA954x=y
++# CONFIG_INPUT is not set
++CONFIG_LED=y
++CONFIG_LED_BLINK=y
++CONFIG_LED_GPIO=y
++CONFIG_I2C_EEPROM=y
++CONFIG_SYS_I2C_EEPROM_ADDR=0x50
++CONFIG_SUPPORT_EMMC_BOOT=y
++CONFIG_MMC_IO_VOLTAGE=y
++CONFIG_SPL_MMC_IO_VOLTAGE=y
++CONFIG_MMC_UHS_SUPPORT=y
++CONFIG_SPL_MMC_UHS_SUPPORT=y
++CONFIG_MMC_HS400_ES_SUPPORT=y
++CONFIG_MMC_HS400_SUPPORT=y
++CONFIG_FSL_USDHC=y
++CONFIG_MTD=y
++CONFIG_DM_MTD=y
++CONFIG_DM_SPI_FLASH=y
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++# CONFIG_SPI_FLASH_UNLOCK_ALL is not set
++CONFIG_SPI_FLASH_WINBOND=y
++CONFIG_SPI_FLASH_MTD=y
++CONFIG_PHY_ANEG_TIMEOUT=20000
++CONFIG_PHY_MICREL=y
++CONFIG_PHY_MICREL_KSZ90X1=y
++CONFIG_PHY_SMSC=y
++CONFIG_DM_MDIO=y
++CONFIG_DM_ETH_PHY=y
++CONFIG_DWC_ETH_QOS=y
++CONFIG_DWC_ETH_QOS_IMX=y
++CONFIG_FEC_MXC=y
++CONFIG_RGMII=y
++CONFIG_MII=y
++CONFIG_NVME_PCI=y
++CONFIG_PCIE_DW_IMX=y
++CONFIG_PHY_IMX8MQ_USB=y
++CONFIG_PHY_IMX8M_PCIE=y
++CONFIG_PINCTRL=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_PINCTRL_IMX8M=y
++CONFIG_POWER_DOMAIN=y
++CONFIG_IMX8M_POWER_DOMAIN=y
++CONFIG_IMX8MP_HSIOMIX_BLKCTRL=y
++CONFIG_DM_PMIC=y
++CONFIG_DM_PMIC_PCA9450=y
++CONFIG_SPL_DM_PMIC_PCA9450=y
++CONFIG_SPL_DM_REGULATOR=y
++CONFIG_DM_REGULATOR_PCA9450=y
++CONFIG_SPL_DM_REGULATOR_PCA9450=y
++CONFIG_DM_REGULATOR_FIXED=y
++CONFIG_DM_REGULATOR_GPIO=y
++CONFIG_DM_RNG=y
++CONFIG_DM_RTC=y
++CONFIG_RTC_M41T62=y
++CONFIG_CONS_INDEX=2
++CONFIG_DM_SERIAL=y
++# CONFIG_SPL_DM_SERIAL is not set
++CONFIG_MXC_UART=y
++CONFIG_SPI=y
++CONFIG_DM_SPI=y
++CONFIG_NXP_FSPI=y
++CONFIG_MXC_SPI=y
++CONFIG_SYSRESET=y
++CONFIG_SPL_SYSRESET=y
++CONFIG_SYSRESET_PSCI=y
++CONFIG_SYSRESET_WATCHDOG=y
++CONFIG_DM_THERMAL=y
++CONFIG_IMX_TMU=y
++CONFIG_USB=y
++# CONFIG_SPL_DM_USB is not set
++CONFIG_DM_USB_GADGET=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_XHCI_DWC3=y
++CONFIG_USB_XHCI_DWC3_OF_SIMPLE=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_USB_STORAGE=y
++CONFIG_USB_HOST_ETHER=y
++CONFIG_USB_ETHER_ASIX=y
++CONFIG_USB_GADGET=y
++CONFIG_USB_GADGET_MANUFACTURER="DH electronics"
++CONFIG_USB_GADGET_VENDOR_NUM=0x0525
++CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
++CONFIG_USB_FUNCTION_ACM=y
++CONFIG_USB_ETHER=y
++CONFIG_USB_ETH_CDC=y
++CONFIG_IMX_WATCHDOG=y
 -- 
-2.39.1
+2.45.2
 
