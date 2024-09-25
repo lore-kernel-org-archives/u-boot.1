@@ -4,65 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66428CCF9EB
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 02:47:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0790CCF9EB
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 02:47:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D74C088C40;
-	Thu, 26 Sep 2024 04:47:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 5ED6088C7C;
+	Thu, 26 Sep 2024 04:47:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cHMlaRFi";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="HC9i1e9i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7490488B79; Wed, 25 Sep 2024 15:04:33 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D2D0A85B66; Wed, 25 Sep 2024 16:30:06 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C843688BBE
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 15:04:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B44188B13
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 16:29:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-42cb0f28bfbso58558525e9.1
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 06:04:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1727269466; x=1727874266; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QDD++45rr4z9OpHh7T9S7/W/evwkqFgsBhhHyLXhORs=;
- b=cHMlaRFivnLObkAWnkM4DN7sQRhoNldp7+27BW957mItGyHm+E7TrpVoRiJPEqPdzu
- 4KnFJ5fxy+FsLoVvlITW5WhkOzrTAlkCsVedZVvLyvqce0qf6m/mPDIVvek2eL61G3+4
- /jV8yz13ur0jmS7cT/JSUuLYOOB3dAvG2VlLpTnuayoXBlT/7iBYrI6r/McIBsNbVnzT
- mmCxUCoF0nJZ7TDrwTEfMQ3BLN+m02Y1SL0Np//dmlmmgRc9hVIiACxTR+MbfmWYqC22
- ijl9mnJukcSmqYDxmiNSK0b2Vxp8npe1me0HZHEZ6AVS8FhEOLA01EuK4bpebjbnEMeq
- 3ZzQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727269466; x=1727874266;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=QDD++45rr4z9OpHh7T9S7/W/evwkqFgsBhhHyLXhORs=;
- b=ufVIWsJ67+gfdBoPnrOnPWIERU4QfZgHKFizoyTbedJfnhu0Y/Zn7W8kOcT1BzL34x
- DpocEONI4vDtOEZG/fmSjrG64H2bV5azqBaq1lZKLLUNVFcpcABAOMCCGNHghjX1SFdG
- H2ERd258WJuvWFY+iI5ejYJfPboWr9gVvFBsc/KhmXPy9R0SZKl1RUwILBxfYjELkJuV
- LCtiz/T2fPRxrnBw3Cvwm+h0KNv5EFfggaFHA6oBeig/HMC4V5VDLBbJvVNV/ynzWr14
- CgQXoCKWY7Bk+rtB2x1PawL16rSqkj91JRWUISH6QPb3R90xA4OBKdB2HHTFwjeyJMf8
- thbQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUWAVV9CjzKEQdTpeCfq9q2wghVduRjhk/PATv05nXX2VDUP2JbEmla5vVsTRbm7reP+PzgnUg=@lists.denx.de
-X-Gm-Message-State: AOJu0YwHzCmcjoZEqacS4LzAFShBDoNYCsB7VzVFYz0wxmHV9U7ZUmgk
- aR2gXbU+xUjc3BxDIpbQFcj9C5p9M349Ailo/79jABfDjIt2JPbF8prp1GVXwcetolruZV0n1j9
- v/6RJl3g3AnViy+Va8EafR2TqLsU=
-X-Google-Smtp-Source: AGHT+IHn1pvV5x/oNt3LZgMPQSzEbkojqXRVdw9uB0ltNpEjyGBgh5zfEfz/KM16xNDY0NH3ndAcrgb3u04y0EKWcek=
-X-Received: by 2002:adf:f14e:0:b0:375:c4c7:c7ac with SMTP id
- ffacd0b85a97d-37cc24ca3f6mr1734527f8f.49.1727269465909; Wed, 25 Sep 2024
- 06:04:25 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=4199=QY=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1727274590;
+ bh=Z4zeMRODlJOGsqiMVzzf6up848uR7mLw3u/TVTd5u58=;
+ b=HC9i1e9i4C3LhyjTRbMK6duOTjOCxvJxbOKDzN/Dc7pbjdBholfAyg/nxZJ06jnM37vFbZ+LM
+ 2Prv6mRqSlidZZYjarLv6VOzTmPDQ0HMK8I5b3Vmq7DoC3squc2VeC390BSayi75v3qmX6o6nCE
+ N88ZEU+0lSU0hnHqanUo7Afu4D2kbSJBsN9biGb3F7gH6H5/FgbtqF/+jIvjLcMbFif0oktIwjF
+ w1Hl/RlKL9usCWlN4jHwSWtSpJUeUsZxjDMt28gahyJLLoPF1aI8DtBZPzu+YayMfbeA7zLS332
+ 0cTSfbgxGtffdmkrEzz6UZSPRZBVz7TmcnnJR/nbxpeg==
+Message-ID: <22f60b89-a1bb-4ddd-a5e7-8d6b19ea7f68@kwiboo.se>
+Date: Wed, 25 Sep 2024 16:29:36 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/4] power: regulator: Trigger probe of regulators which
+ are always-on or boot-on
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Ben Wolsieffer <benwolsieffer@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Chris Morgan <macromorgan@hotmail.com>, Dragan Simic <dsimic@manjaro.org>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Kostya Porotchkin <kostap@marvell.com>, Matteo Lisi
+ <matteo.lisi@engicam.com>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Max Krummenacher <max.krummenacher@toradex.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Sam Day <me@samcday.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Thierry Reding <treding@nvidia.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, u-boot-amlogic@groups.io,
+ u-boot-qcom@groups.io, u-boot@dh-electronics.com,
+ uboot-stm32@st-md-mailman.stormreply.com
 References: <20240626235717.272219-1-marex@denx.de>
  <CAFLszTjwbWdKqs_UBqXvr2F2ahoGd0-BFE-XLNr3-uq73ZLFHg@mail.gmail.com>
  <6abad4ba-b29a-47a3-addb-91e8f46ee425@denx.de>
@@ -73,37 +75,18 @@ References: <20240626235717.272219-1-marex@denx.de>
  <CAPVz0n1krz0GxwEXA+FFr1DHVz-c4R4zm++Ji1KhmBTab9m_2g@mail.gmail.com>
  <20240920164856.GI4252@bill-the-cat> <20240924234406.GX4252@bill-the-cat>
  <CAPVz0n09xf42O1X7QBO8nraDV86EEUOdw+S7qZdr327v0gcQ1A@mail.gmail.com>
- <5f2103ff-cc78-46b6-b008-127678c23592@denx.de>
-In-Reply-To: <5f2103ff-cc78-46b6-b008-127678c23592@denx.de>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Wed, 25 Sep 2024 16:04:12 +0300
-Message-ID: <CAPVz0n3cH5_1iK+0PSW1mBFKQz13Z0DKJyi6GdsGpPQpvBQ7mg@mail.gmail.com>
-Subject: Re: [PATCH 1/4] power: regulator: Trigger probe of regulators which
- are always-on or boot-on
-To: Marek Vasut <marex@denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de, Ben Wolsieffer <benwolsieffer@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Chris Morgan <macromorgan@hotmail.com>, Dragan Simic <dsimic@manjaro.org>, 
- Eugen Hristev <eugen.hristev@collabora.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>, 
- Kostya Porotchkin <kostap@marvell.com>, Matteo Lisi <matteo.lisi@engicam.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Max Krummenacher <max.krummenacher@toradex.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Sam Day <me@samcday.com>, 
- Sumit Garg <sumit.garg@linaro.org>, Thierry Reding <treding@nvidia.com>, 
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, u-boot-amlogic@groups.io, 
- u-boot-qcom@groups.io, u-boot@dh-electronics.com, 
- uboot-stm32@st-md-mailman.stormreply.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <CAPVz0n09xf42O1X7QBO8nraDV86EEUOdw+S7qZdr327v0gcQ1A@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 66f41e5b51aa012038052da9
 X-Mailman-Approved-At: Thu, 26 Sep 2024 04:47:21 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -121,32 +104,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D1=81=D1=80, 25 =D0=B2=D0=B5=D1=80. 2024=E2=80=AF=D1=80. =D0=BE 15:48 Mare=
-k Vasut <marex@denx.de> =D0=BF=D0=B8=D1=88=D0=B5:
->
-> On 9/25/24 12:18 PM, Svyatoslav Ryhel wrote:
->
-> [...]
->
-> > Hello there!
-> > I was digging this when I had some free time and found that with
-> > patches from Marek the only difference is that function
-> > i2c_get_chip_for_busnum is not called for PMIC's main i2c address
->
-> Is it possible this is called earlier, before UART output is
-> initialized, so it does not show up in the log below ?
->
-It is highly unlikely, this function is called when uart is already
-working and pinmux is set.
+On 2024-09-25 12:18, Svyatoslav Ryhel wrote:
+> Hello there!
+> I was digging this when I had some free time and found that with
+> patches from Marek the only difference is that function
+> i2c_get_chip_for_busnum is not called for PMIC's main i2c address
+> which results in issues with i2c you have seen in logs before. I
+> assume this is not a tegra specific issue and not even related to
+> these regulator patches itself.
 
-> Could it be that it is called before your pinmux is properly
-> initialized, hence no UART, and that is why the I2C communication fails?
->
-But if we assume that pinmux is not set, then how we resolve situation
-when pinmux and regulator enable are both set by probe after bind and
-regulators are probed before pinmux. Regulators will fail, they will
-not deffer till pinmux probes. Or you propose return to pre-DM version
-of pinmux? Inconsistency.
+The i2c_get_chip_for_busnum call is typically protected by
+CONFIG_IS_ENABLED(DM_I2C), do you have DM_I2C and SPL_DM_I2C enabled?
 
-> So far, I only found Toradex Tegra T20 board here, no T30.
-What do you mean? Specify please
+grep DM_I2C .config
+
+> 
+> To verify my suspicions, Tom and Marek my you please dump u-boot log
+> with and without patches and with enabled debug logging from
+> i2c-uclass and i2c driver of your SoC.
+> 
+> Here are logs from my device (Tegra SoC)
+
+What board target / defconfig is used? Would like to understand what
+bootph- props are used in the built control fdt.
+
+> 
+> Not working
+> (bootloader) i2c: controller bus 0 at 7000d000, speed 0:
+> i2c_init_controller: speed=400000
+> (bootloader) i2c_init_controller: CLK_DIV_STD_FAST_MODE setting = 25
+> (bootloader) i2c_get_chip: Searching bus 'i2c@7000d000' for address 59:
+> (bootloader) not found
+> (bootloader) pmic_reg_read: reg=37 priv->trans_len:1i2c_xfer: 2 messages
+> (bootloader)
+> (bootloader) i2c_xfer: chip=0x58, len=0x1
+> (bootloader) i2c_write_data: chip=0x58, len=0x1
+> (bootloader) write_data:  0x37
+> (bootloader) pkt header 1 sent (0x10010)
+> (bootloader) pkt header 2 sent (0x0)
+> (bootloader) pkt header 3 sent (0x100b0)
+> (bootloader) pkt data sent (0x37)
+> (bootloader) tegra_i2c_write_data: Error (-1) !!!
+
+Is this at SPL, U-Boot pre-reloc or after relocation? A more complete
+boot log may help us understand when this happens.
+
+> 
+> Working
+> (bootloader) i2c: controller bus 0 at 7000d000, speed 0:
+> i2c_init_controller: speed=400000
+> (bootloader) i2c_init_controller: CLK_DIV_STD_FAST_MODE setting = 25
+> (bootloader) pkt header 1 sent (0x10010)
+> (bootloader) pkt header 2 sent (0x0)
+> (bootloader) pkt header 3 sent (0xb0)
+> (bootloader) pkt data sent (0x0)
+> (bootloader) i2c_get_chip: Searching bus 'i2c@7000d000' for address 58:
+> (bootloader) i2c_get_chip: Searching bus 'i2c@7000d000' for address 59:
+> (bootloader) not found
+> (bootloader) found, ret=0
+> (bootloader) i2c_xfer: 2 messages
+> (bootloader) i2c_xfer: chip=0x58, len=0x1
+> (bootloader) i2c_write_data: chip=0x58, len=0x1
+> (bootloader) write_data:  0xfb
+> (bootloader) pkt header 1 sent (0x10010)
+> (bootloader) pkt header 2 sent (0x0)
+> (bootloader) pkt header 3 sent (0x100b0)
+> (bootloader) pkt data sent (0xfb)
+> (bootloader) i2c_xfer: chip=0x58, len=0x1
+
+Is the working scenario happening at same call site as not working?
+
+Try with #define LOG_DEBUG in lib/initcall.c and compare/include a
+longer part of the boot log.
+
+Regards,
+Jonas
+
+> 
+> As you can see this part
+> 
+> (bootloader) pkt header 1 sent (0x10010)
+> (bootloader) pkt header 2 sent (0x0)
+> (bootloader) pkt header 3 sent (0xb0)
+> (bootloader) pkt data sent (0x0)
+> (bootloader) i2c_get_chip: Searching bus 'i2c@7000d000' for address 58:
+> 
+> is missing in log from u-boot where Marek's patches are applied and
+> this log fragment co-responds to i2c_get_chip_for_busnum call
+
