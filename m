@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36568CF9C69
-	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 02:53:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 372C4CF9C71
+	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 02:53:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1955688B11;
+	by phobos.denx.de (Postfix) with ESMTP id 7202488B49;
 	Wed, 25 Sep 2024 04:53:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1727232787;
-	bh=fDgpgF11PRcuiwsFA2Om9iJn3tB//aCskc7TKnuiNbM=;
+	bh=ns+ea/3HJpzNdldFfu0LKAozT1na/ixD5afT6mspUuk=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ibuNAgJV7fSQ9eCUp8PbIpc5ArwVwRyHrEMdwSyMFDbxIZyxalbJmbMUXqEBbfXjI
-	 EAZjGhtwVcCZ/qkWzhDkuDdrWawTuziEH0fK+eqGIsZUDu1DWdltfzgI0AhcuRFqpL
-	 t1t2fZtFlAWjuv0m+5NEKUTBYV86wSr6xHhnJAMB51L5LYeyazpP0/MsTYBt7/2jxa
-	 +MAv4RbOIlShOV0WukeYF0J5t/WdVmVrrcNA7quGLgeJ2cpRQ49QDyVagy0tnTY64V
-	 VgkIqylf0lG+eKzzLMF+wVLtLEFN0mQyOxRgZXqXrdhBPm4mq/nLC8MWtuN3/sf4RM
-	 xdhJ6ptcUMKZg==
+	b=Wtw+P9QY/zcwHd/P4xB98q8+xJKt1nOdski7s+WmiPJvG1LEmSrs5Jc50qSx1Se3V
+	 3ZUCc8flz/5bk53AyUI94VnJ5Uhu9g2AXMqAFd+72mzxqY5RleDlCNYMRleGvrpCsf
+	 7wtP2B3OeplPtrolj5cubnOp1m7ZvyX8lxNfTF0j5uAp6GxoFSTtp/s81XBCO97HuS
+	 Zoh8eKdCX+zKXZyxleZ3jxChqO6iAg8MUJGSq7TG9g/44V8tkvlWkYuN4PecBL/T4a
+	 pZadwWXhfyGP8sEmGmiFd8lkZbsNzfWdVULHh4pvlNgYdMYAf4vZIRpEhJBoZYtdP7
+	 eZklfn1BC1OdQ==
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id EAB7E88A29;
- Wed, 25 Sep 2024 04:24:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 007A788AA7;
+ Wed, 25 Sep 2024 04:24:01 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1727231041;
- bh=fDgpgF11PRcuiwsFA2Om9iJn3tB//aCskc7TKnuiNbM=;
+ s=phobos-20191101; t=1727231053;
+ bh=ns+ea/3HJpzNdldFfu0LKAozT1na/ixD5afT6mspUuk=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=o/wqqaxrWN+jMhp+JnK036hWv/uM/Szq0GG0nOYbfKtmhLY45Zhs9jNLwIa7XyPfT
- Cp/utkOEorBpDvISHv9LUMJdHfQi+ZFZmtuW8A14LXaRFOdMqHJ5YgHnpFX7ZnajLa
- l5msNLHPkkbi45+PmGj/dod65EOqi0r0RS4wVLmBcW+9ZuEZX1/w1dRSvVApu8WCJp
- jUEBnTA50q7XbmYFZzz/OAUee3CElK/4y/Ab9XliG7oJdMb0ej0B3rU1wBLW4z8GwI
- aOCCy2IH6BDrqclSGE5sLoddzV/pKPngUZsTo4QyYU2n8rbHRpTQ3fRxZMbVlaqjKO
- 9b9OFzOS/B+1g==
+ b=YJe+pBwWNePfejieZbpdgcxwvKRyuSCTvr0rDLqfe+ha3f51+rhlqEHwz4KjO4gF6
+ adYdzGINNtvzmwkbezkuxv8k0qA37tfyypZ7e3LtLLt9gXPZNBm/XeEYJGHSkqU3sj
+ XxZEfiNLcqv7YttRjV55zwGqZOY9SJPMcP3dg2EqsFitXBl9hFjajCNoL/1WiDRfAL
+ Ho0+qUuPV4Jt34ARgpqu09HAX/tMxXzMM+SCUJB0flNYcD45kRRG3XWEvxNETXGM+2
+ FJG6RuP8QHfzshAQ2qvgnfFe+j/RLFfPHPyP5s54IOtE1aomSbVKYlzUXlUboS6VF3
+ 2B/XEbXGw8ulQ==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>, Ben Wolsieffer <benwolsieffer@gmail.com>,
@@ -64,10 +64,10 @@ Cc: Marek Vasut <marex@denx.de>, Ben Wolsieffer <benwolsieffer@gmail.com>,
  Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, u-boot-amlogic@groups.io,
  u-boot-qcom@groups.io, u-boot@dh-electronics.com,
  uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH v2 2/5] power: regulator: Convert
- regulators_enable_boot_on/off() to regulator_post_probe
-Date: Wed, 25 Sep 2024 04:21:53 +0200
-Message-ID: <20240925022314.714285-2-marex@denx.de>
+Subject: [PATCH v2 3/5] power: regulator: Exit from
+ regulator_set_suspend_value on poorly described regulators
+Date: Wed, 25 Sep 2024 04:21:54 +0200
+Message-ID: <20240925022314.714285-3-marex@denx.de>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240925022314.714285-1-marex@denx.de>
 References: <20240925022314.714285-1-marex@denx.de>
@@ -90,14 +90,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Turn regulators_enable_boot_on() and regulators_enable_boot_off() into
-empty functions. Implement matching functionality in regulator_post_probe()
-instead. The regulator_post_probe() is called for all regulators after they
-probe, and regulators that have regulator-always-on or regulator-boot-on DT
-properties now always probe due to DM_FLAG_PROBE_AFTER_BIND being set on
-such regulators in regulator_post_bind().
-
-Finally, fold regulator_unset() functionality into regulator_autoset().
+In case the DT regulator node does not contain 'regulator-max-microvolt'
+property and does not contain 'regulator-state-mem' subnode (like the
+test.dts regul1_scmi: reg@1 {} regulator node), then regulator_pre_probe()
+will parse this regulator node and set uc_pdata->suspend_on = true and
+uc_pdata->suspend_uV = uc_pdata->max_uV, where uc_pdata->max_uV is set
+to -ENODATA because "regulator-max-microvolt" is missing, and therefore
+uc_pdata->suspend_uV is also -ENODATA. In case regulator_autoset() is
+used afterward, it will attempt to call regulator_set_suspend_value()
+with uV = uc_pdata->suspend_uV = -ENODATA and fail with -EINVAL. Check
+for this case in regulator_set_suspend_value() and immediately return 0,
+because there is no way to set meaningful suspend voltage, so do nothing
+and retain the existing settings of the regulator.
 
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
@@ -133,104 +137,26 @@ Cc: u-boot@dh-electronics.com
 Cc: u-boot@lists.denx.de
 Cc: uboot-stm32@st-md-mailman.stormreply.com
 ---
-V2: Rebase on current u-boot/next
+V2: New patch
 ---
- drivers/power/regulator/regulator-uclass.c | 60 +++++++---------------
- 1 file changed, 19 insertions(+), 41 deletions(-)
+ drivers/power/regulator/regulator-uclass.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
 diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
-index e2f703702e3..14cf3159203 100644
+index 14cf3159203..3c05fdf1966 100644
 --- a/drivers/power/regulator/regulator-uclass.c
 +++ b/drivers/power/regulator/regulator-uclass.c
-@@ -308,6 +308,11 @@ int regulator_autoset(struct udevice *dev)
- 			return ret;
- 	}
+@@ -85,6 +85,10 @@ int regulator_set_suspend_value(struct udevice *dev, int uV)
+ 	const struct dm_regulator_ops *ops = dev_get_driver_ops(dev);
+ 	struct dm_regulator_uclass_plat *uc_pdata;
  
-+	if (uc_pdata->force_off) {
-+		ret = regulator_set_enable(dev, false);
-+		goto out;
-+	}
++	/* Regulator did not set limits, assume already configured. */
++	if (uV == -ENODATA)
++		return 0;
 +
- 	if (!uc_pdata->always_on && !uc_pdata->boot_on) {
- 		ret = -EMEDIUMTYPE;
- 		goto out;
-@@ -512,56 +517,28 @@ static int regulator_pre_probe(struct udevice *dev)
- 	return 0;
- }
- 
--int regulators_enable_boot_on(bool verbose)
-+static int regulator_post_probe(struct udevice *dev)
- {
--	struct udevice *dev;
--	struct uclass *uc;
- 	int ret;
- 
--	ret = uclass_get(UCLASS_REGULATOR, &uc);
--	if (ret)
-+	ret = regulator_autoset(dev);
-+	if (ret && ret != -EMEDIUMTYPE && ret != -EALREADY && ret != ENOSYS)
- 		return ret;
--	for (uclass_first_device(UCLASS_REGULATOR, &dev);
--	     dev;
--	     uclass_next_device(&dev)) {
--		ret = regulator_autoset(dev);
--		if (ret == -EMEDIUMTYPE || ret == -EALREADY) {
--			ret = 0;
--			continue;
--		}
--		if (verbose)
--			regulator_show(dev, ret);
--		if (ret == -ENOSYS)
--			ret = 0;
--	}
- 
--	return ret;
-+	if (_DEBUG)
-+		regulator_show(dev, ret);
-+
-+	return 0;
- }
- 
--int regulators_enable_boot_off(bool verbose)
-+int regulators_enable_boot_on(bool verbose)
- {
--	struct udevice *dev;
--	struct uclass *uc;
--	int ret;
--
--	ret = uclass_get(UCLASS_REGULATOR, &uc);
--	if (ret)
--		return ret;
--	for (uclass_first_device(UCLASS_REGULATOR, &dev);
--	     dev;
--	     uclass_next_device(&dev)) {
--		ret = regulator_unset(dev);
--		if (ret == -EMEDIUMTYPE) {
--			ret = 0;
--			continue;
--		}
--		if (verbose)
--			regulator_show(dev, ret);
--		if (ret == -ENOSYS)
--			ret = 0;
--	}
-+	return 0;
-+}
- 
--	return ret;
-+int regulators_enable_boot_off(bool verbose)
-+{
-+	return 0;
- }
- 
- UCLASS_DRIVER(regulator) = {
-@@ -569,5 +546,6 @@ UCLASS_DRIVER(regulator) = {
- 	.name		= "regulator",
- 	.post_bind	= regulator_post_bind,
- 	.pre_probe	= regulator_pre_probe,
-+	.post_probe	= regulator_post_probe,
- 	.per_device_plat_auto	= sizeof(struct dm_regulator_uclass_plat),
- };
+ 	uc_pdata = dev_get_uclass_plat(dev);
+ 	if (uc_pdata->min_uV != -ENODATA && uV < uc_pdata->min_uV)
+ 		return -EINVAL;
 -- 
 2.45.2
 
