@@ -4,71 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57644C369D9
-	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 12:58:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87DD7C369DF
+	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 12:59:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14B0F88CF7;
+	by phobos.denx.de (Postfix) with ESMTP id 7A11088CE1;
 	Wed, 25 Sep 2024 14:58:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UunQKA1f";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UaAW0c1S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6728488B63; Wed, 25 Sep 2024 14:58:02 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id 8E15688363; Wed, 25 Sep 2024 14:58:02 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D27488BB6
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 14:57:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DA1688C4D
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 14:57:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a86e9db75b9so1051475266b.1
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 05:57:52 -0700 (PDT)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-a910860e4dcso479394166b.3
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 05:57:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727269072; x=1727873872; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727269075; x=1727873875; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LsahKmcxnqcrUkA7i6UUMWMT0zqXogCNkuUMjwhHNyA=;
- b=UunQKA1fBROYIAi9KBQJSBioVbKu5kUI5FtrUj0hqcj/uMUeCCzyPUcg+ZtbEOehWG
- HfiwTQWnGnRakFyxDE9wnJv6/U7jMiVDm/DdUnbrBLZ5N/pxvkEMHo6HYfbUPk3VXIG9
- HJH+gMyrcyQMj6sB4m7/g4thbKVKlBXr8vbJE=
+ bh=Sz/ZOT7ytDV4v/a4UL7/PrWJUf3vE5YjIJm4k7cpkzI=;
+ b=UaAW0c1S5uvxun4Xm9syCyTbd/9CzzWs8lnqkFXOiQKDpMJQgjr3Wuvcpx14oqB5a5
+ PVTn/LNZ337hkQZfRQ3hewDrGjQeT7hgh+nUf96c/9UDc4rNemBxAETTaqXDze35w/Yy
+ pAW99SHGp3RT4+8o4yZiNU7CQzm46xFQOsbEg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727269072; x=1727873872;
+ d=1e100.net; s=20230601; t=1727269075; x=1727873875;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LsahKmcxnqcrUkA7i6UUMWMT0zqXogCNkuUMjwhHNyA=;
- b=PwFXicx4tlglEm51oCSsDTcfP+M/vcYx0lJr97K/YWFH6M1dlxKFvJxsIeAyophpLx
- UDXJAk0I1nXwj3LWVPeyG7u8ekn4/p7xOWXj/Ds2kdZ1MQusUybjX+Y7q0LYBVQ06Oc4
- C8iotMvrspB3OUt91XLFeT5NmdcI8RN0PnA0B+4H/BnLJyuIbgGc6l/TXm35mwuxD1jO
- C2QA/aFBD5EPHY/yGeizv9qelN7JYrK09Is77kuoX/lT+Dz5cxF5SnbwblrLPV69wsn+
- kO8vr61cW4ZHlaiXPhO+n6VIJhBcdFNo8g/DmqynPKt3u2W/TP78KXm/TVHaoKdIKk3/
- wScQ==
-X-Gm-Message-State: AOJu0YxgZGkMA1j6iaOCc3jcRU+p3kOxWdg8t9xjDSWC4r3oF54k8d3P
- j7iUqLGwwCdP/nEiQUbVzloRSXoU75O3Wygz40D0/GANMbbrNLKxDOI7Dc++NXTJKoT84xTGiZw
- atA==
-X-Google-Smtp-Source: AGHT+IEXcrboOjidNL6DLH2uzp9VsQTyrC8JOc44CsyJdgUVqJ9reAGD47BaA8D9KU1ri4KwxAS4Rg==
-X-Received: by 2002:a17:907:f75a:b0:a8d:446a:ded8 with SMTP id
- a640c23a62f3a-a93a03603bfmr254860266b.22.1727269071579; 
- Wed, 25 Sep 2024 05:57:51 -0700 (PDT)
+ bh=Sz/ZOT7ytDV4v/a4UL7/PrWJUf3vE5YjIJm4k7cpkzI=;
+ b=nz7LlIuRsTjvQ9d6V4CQVuTE2cxdsZx6m5Iem7jEc3iDBWtGC0jPy2L8slzcxcoqwh
+ 3O3yi4TuFiO7zjsNQW+ca6n6yF0iKR89jiHrSMBup57uTh9BuxLMln2cAaxkRepZP2Ac
+ itWVD96UkQWvL3qTmiMajUdF2AyN9SZoUH4LGHVWd0wrL6xTDWD6ywlWp7Ik+VH3ZhLk
+ IoXsw/IURjxci4xkS0CmNzWjA8xDlfNhlls2pvfKhqfi8JbGoCP+eZNiHvnYlVDAsC9B
+ czyCehgMCpgB8UMlDQwTfI4xtnvzaTn89OG5qLM/Lfm7noIUU4G7lddNYB4DBYor9lPC
+ 8mJw==
+X-Gm-Message-State: AOJu0Yz/a4R0keLxHieVJ6EQ8jl9JVlYXmHgW6ey8wpuVHlL73JVSTSD
+ vL9TcPmOdBBcK2czaNoKVhJmP/7psbYJfOh/lZ8KAwsnac3qQGB9qLAFSnwknEUd58PINlHnNCE
+ GFw==
+X-Google-Smtp-Source: AGHT+IF4IGrZdNf9ZvkWMt5hIVUI/EyNYeiMT+OxfIEEIzwpD9I53T1pGhb0Flauf3atUVuibo0EjA==
+X-Received: by 2002:a17:907:74e:b0:a77:eb34:3b49 with SMTP id
+ a640c23a62f3a-a93a03b4aebmr276968866b.37.1727269074706; 
+ Wed, 25 Sep 2024 05:57:54 -0700 (PDT)
 Received: from chromium.org ([82.132.187.73]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a93930f7889sm209209766b.179.2024.09.25.05.57.50
+ a640c23a62f3a-a93930f7889sm209209766b.179.2024.09.25.05.57.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Sep 2024 05:57:51 -0700 (PDT)
+ Wed, 25 Sep 2024 05:57:54 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH 03/19] spl: Avoid including hash algorithms which are not
- wanted
-Date: Wed, 25 Sep 2024 14:55:29 +0200
-Message-ID: <20240925125622.197915-4-sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>,
+	Simon Glass <sjg@chromium.org>
+Subject: [PATCH 05/19] lib: Mark crc8 as relocation code
+Date: Wed, 25 Sep 2024 14:55:31 +0200
+Message-ID: <20240925125622.197915-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240925125622.197915-1-sjg@chromium.org>
 References: <20240925125622.197915-1-sjg@chromium.org>
@@ -90,31 +88,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update the build rule so that hash algorithms are only included in an
-SPL build if they are requested. This helps to reduce code size.
+Mark the crc8 code as needed by relocation. This is used as a simple
+check against corruption of the code when copying.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- lib/Makefile | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ lib/crc8.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/lib/Makefile b/lib/Makefile
-index 9478257e634..c29d03d4c6e 100644
---- a/lib/Makefile
-+++ b/lib/Makefile
-@@ -76,9 +76,9 @@ obj-$(CONFIG_ECDSA) += ecdsa/
- obj-$(CONFIG_$(SPL_)RSA) += rsa/
- obj-$(CONFIG_HASH) += hash-checksum.o
- obj-$(CONFIG_BLAKE2) += blake2/blake2b.o
--obj-$(CONFIG_$(SPL_)SHA1) += sha1.o
--obj-$(CONFIG_$(SPL_)SHA256) += sha256.o
--obj-$(CONFIG_$(SPL_)SHA512) += sha512.o
-+obj-$(CONFIG_$(SPL_TPL_)SHA1) += sha1.o
-+obj-$(CONFIG_$(SPL_TPL_)SHA256) += sha256.o
-+obj-$(CONFIG_$(SPL_TPL_)SHA512) += sha512.o
- obj-$(CONFIG_CRYPT_PW) += crypt/
- obj-$(CONFIG_$(SPL_)ASN1_DECODER) += asn1_decoder.o
+diff --git a/lib/crc8.c b/lib/crc8.c
+index 811e19917b4..bbb229c3892 100644
+--- a/lib/crc8.c
++++ b/lib/crc8.c
+@@ -6,11 +6,12 @@
+ #ifdef USE_HOSTCC
+ #include <arpa/inet.h>
+ #endif
++#include <asm/sections.h>
+ #include <u-boot/crc.h>
+ 
+ #define POLY	(0x1070U << 3)
+ 
+-static unsigned char _crc8(unsigned short data)
++__rcode static unsigned char _crc8(unsigned short data)
+ {
+ 	int i;
+ 
+@@ -23,7 +24,7 @@ static unsigned char _crc8(unsigned short data)
+ 	return (unsigned char)(data >> 8);
+ }
+ 
+-unsigned int crc8(unsigned int crc, const unsigned char *vptr, int len)
++__rcode unsigned int crc8(unsigned int crc, const unsigned char *vptr, int len)
+ {
+ 	int i;
  
 -- 
 2.43.0
