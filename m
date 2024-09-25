@@ -4,83 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB342C369DF
-	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 12:49:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22606C369D9
+	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 12:49:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6755B88B13;
-	Wed, 25 Sep 2024 14:49:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id D45EC88363;
+	Wed, 25 Sep 2024 14:49:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JnEGpbHm";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ORbVCOHr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 21AE888AA7; Wed, 25 Sep 2024 14:49:14 +0200 (CEST)
-Received: from mail-vs1-xe2d.google.com (mail-vs1-xe2d.google.com
- [IPv6:2607:f8b0:4864:20::e2d])
+ id 47CA188995; Wed, 25 Sep 2024 12:19:20 +0200 (CEST)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B618288B6D
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 14:49:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CBFE688363
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 12:19:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-vs1-xe2d.google.com with SMTP id
- ada2fe7eead31-49bd40d77e5so2202742137.0
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 05:49:09 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-374d29ad8a7so4527018f8f.2
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 03:19:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727268548; x=1727873348; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=KFbn95EpJjbfR42eJuOdVMtwedHuWKsWfiMPqLWbpls=;
- b=JnEGpbHm4YKprRLcZT3s0dqxV20hBiVr/S9x3T0pjpCCksZSsMvL0IO024zJ8mI1+u
- B5WAkZVhUAOZVVGICLmiBlU/lRQICJ9QtuKWmUBo4TLCjIfVo+Mzh9m5LGtaL1p5QANr
- YaPFzKqv8I4Q1Jwy2w76m4enH/cxB8fEfF+f8=
+ d=gmail.com; s=20230601; t=1727259550; x=1727864350; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2pA5toJNQNJuuGd/24/pddJUq7vLn7UArYhmC2gfKFA=;
+ b=ORbVCOHrnAEzW9EWL0GCgxSQ0innfi4VzXiZUzKeH7cGB5D/fp6kxlzWcYgqc2BqHN
+ HZkk2j0hDovVvCjpas2jw5IHqvrgQywt6zSeUnUNWv0XQ2teO0HIgciPkTDYtHHRK2OQ
+ 2onj5B8WbGgJ7Ja0xA40djZ83eAOhaoEoSwG6mcPdX3jzcn/X3CX8aREwAi3MVAmLQav
+ kpSyl/9c5BUYfQpABEPhXT6Uic8N1jrJWMVMpC2qIpbNvw2Ut5XuAsVqZIggFZujUHmU
+ q+jDzY7mfdWkN9vuugmFmiFesPRBxiTFxHSr0Rpyph3vZv/P1vKqI8LRVwR1AshHIvim
+ XUSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727268548; x=1727873348;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=KFbn95EpJjbfR42eJuOdVMtwedHuWKsWfiMPqLWbpls=;
- b=Hvx2HKsAVC1aK/svf0oKGvkh6m+Lc+n+hpEu0EadiBK5e/XOh4DwYovCS2ESSMvLP6
- Ee6SI0KdF3Stjai8/+f1RkUmoQ3s/pTMVTQOo/GcipJAJzzx26nB+9iTHrbvAfVAMwlJ
- xI2RxVYaS/SQxhNZn3XswHEak90ghmK9jt7tYKDunOemZ6VV/qoz6JduhBsffnhmeLV6
- t+jeeGUKtiBsjXKQZ6OkQTFwD1SFdGM0GhmP4ZS9yjhwuLJNcUltZLun/A8AP9bOrkiv
- srwLckD+TMsAy6EI0Ad5BbSEAnR0ENUify8mv0QDihXKr1e8pCmtXYa4ZLM3ejtm2BY+
- BdPA==
-X-Gm-Message-State: AOJu0Yw1T/SJ4QYhN02d8hZjXmPxzZnvNFsnpJ61z9hY0X3HZ6zCbLe7
- 0Yyh21ggT6JutC8FIBOZNTIBeiYwadBgneu/mKYktQkUq05YSO5joMVqgYOaRQypCZzUci1Fx/R
- HDyrvSZLmwvJo3Xa4OkJSzRFWIB1ZLsz/7qH6
-X-Google-Smtp-Source: AGHT+IHjPFWkPKXMASBIUKGdUDF3FmceO7WrCkKdKZQLVj0shj0zQCH1CMkfW1nsNiOCRpp/liBpTQaj0nHxU9XunwE=
-X-Received: by 2002:a05:6102:390d:b0:497:50c0:a6cb with SMTP id
- ada2fe7eead31-4a15dd5470amr2186118137.19.1727268548436; Wed, 25 Sep 2024
- 05:49:08 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1727259550; x=1727864350;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=2pA5toJNQNJuuGd/24/pddJUq7vLn7UArYhmC2gfKFA=;
+ b=cjS1kwxKIvVkRIdsYj8KiYO2mrgRl0wFsank8t0CdDTvOjau95ELdEVDLvzNyqi3uV
+ WBgwihBJq86j0xKFNAU7tkZ2v1wZ+wcTUvjZlTZ/KyWGpTYEibdV7flmm3XUFBtSm2BI
+ Z4dzrkDpkqxFKrUgL91nCDjvozPfuH1qOB7H4eVazU6ivIN7uQ1LkQkhTvHxbxzm1K3T
+ RqhajnYlbYX8U4zHacTRnIy/GY/6j541KeROTV80b3sBiBWP/0b0PRTh6uz83Va5U/xk
+ HNrE4cvaF3XLAvVAzafvN+HYccj3d9RwlZuduFFCP/x73/4tpseHzWfk4AC6QQZKII+I
+ /L+w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUj4DtNJtw9/fBCz+KgVBKAPo7CKYvkfTEPTQ8bqTz4of1w8KJoi3ZJp4AX2TrGujaLL8u2Dho=@lists.denx.de
+X-Gm-Message-State: AOJu0YzjBLAtRmehkoQlRaCmSjTT/hUq+/ZbSAaiI+Se+QeRFZc+AZm0
+ mwCuHZnzbmvpeFxF/Df9BDL0MUg0hUXAbNYwI5m1aNSsZl0E1EoO67VdT0RRymMsp0pjd/UwZe7
+ AfcPrhX1W5Hak/cF8x6lWXYVLzsk=
+X-Google-Smtp-Source: AGHT+IHbyGfTNKPntYM4HqagP6cKcV+xcoxCkim61wL4RPaiNfyr3kXHYNgshVf9TXwbsZDmyS11XMqhxwZ44FlShpA=
+X-Received: by 2002:adf:c083:0:b0:371:8319:4dcc with SMTP id
+ ffacd0b85a97d-37cc2462b44mr1579305f8f.2.1727259549772; Wed, 25 Sep 2024
+ 03:19:09 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240901222259.456932-1-sjg@chromium.org>
- <20240901222259.456932-3-sjg@chromium.org>
- <CADg8p96GUQcWXt3HPjjmZxF9o50d05GmPut5icqRr3Z1NA4hrg@mail.gmail.com>
- <CAFLszTiH=c1RYOOgQZMkYn2HQhL9h0d6bq6VRmzW8Hrk1YG6cg@mail.gmail.com>
- <CADg8p95a1iAzmwd-n8Y9EarX03cFUyBE5k+kwGm2PDy1W+PHNA@mail.gmail.com>
- <CAFLszThDsQrjWerLYiMf=T9VVbdT=i0FKbiD_v+Lv7uUZYsZBA@mail.gmail.com>
- <CADg8p953_gFWNigt+rUhLDVDz=DpQwefdpN8qgLaWNcpDZrrKg@mail.gmail.com>
- <CAFLszTiJkS23KGQ20dziPe5sQ0Ey+wCSSO6uV+Y4Ln=-cpuT=w@mail.gmail.com>
- <8bcde947-2b34-4401-b847-121818d8bcef@gmx.de>
-In-Reply-To: <8bcde947-2b34-4401-b847-121818d8bcef@gmx.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 25 Sep 2024 14:48:55 +0200
-Message-ID: <CAFLszTgO-_HEP5DG92_ohwGih88pXpooVVGAud0D-RQ5YLie0Q@mail.gmail.com>
-Subject: Re: [PATCH v3 2/3] efi: Allow use of malloc() for the EFI pool
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Tom Rini <trini@konsulko.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Eugene Uriev <eugeneuriev@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Richard Weinberger <richard@nod.at>, Sean Anderson <seanga2@gmail.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>
+References: <20240626235717.272219-1-marex@denx.de>
+ <CAFLszTjwbWdKqs_UBqXvr2F2ahoGd0-BFE-XLNr3-uq73ZLFHg@mail.gmail.com>
+ <6abad4ba-b29a-47a3-addb-91e8f46ee425@denx.de>
+ <CAFLszTgAqOXbkcJxYKxM4gn6_oOg7+nyaBK-Y34r_zVaPBScvA@mail.gmail.com>
+ <616b231b-0291-4bb3-93d9-85970419ed62@denx.de>
+ <CAFLszTiHy7yn0Z18GdkSLgykH0s=z8tJ=-QGf+knXPggKwyk9Q@mail.gmail.com>
+ <20240916162758.GE4252@bill-the-cat>
+ <CAPVz0n1krz0GxwEXA+FFr1DHVz-c4R4zm++Ji1KhmBTab9m_2g@mail.gmail.com>
+ <20240920164856.GI4252@bill-the-cat> <20240924234406.GX4252@bill-the-cat>
+In-Reply-To: <20240924234406.GX4252@bill-the-cat>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Wed, 25 Sep 2024 13:18:58 +0300
+Message-ID: <CAPVz0n09xf42O1X7QBO8nraDV86EEUOdw+S7qZdr327v0gcQ1A@mail.gmail.com>
+Subject: Re: [PATCH 1/4] power: regulator: Trigger probe of regulators which
+ are always-on or boot-on
+To: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, 
+ Ben Wolsieffer <benwolsieffer@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Chris Morgan <macromorgan@hotmail.com>, Dragan Simic <dsimic@manjaro.org>, 
+ Eugen Hristev <eugen.hristev@collabora.com>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Jagan Teki <jagan@amarulasolutions.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>, 
+ Kostya Porotchkin <kostap@marvell.com>, Matteo Lisi <matteo.lisi@engicam.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Max Krummenacher <max.krummenacher@toradex.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Sam Day <me@samcday.com>, 
+ Sumit Garg <sumit.garg@linaro.org>, Thierry Reding <treding@nvidia.com>, 
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, u-boot-amlogic@groups.io, 
+ u-boot-qcom@groups.io, u-boot@dh-electronics.com, 
+ uboot-stm32@st-md-mailman.stormreply.com
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Wed, 25 Sep 2024 14:49:21 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,243 +119,238 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+=D1=81=D1=80, 25 =D0=B2=D0=B5=D1=80. 2024=E2=80=AF=D1=80. =D0=BE 02:44 Tom =
+Rini <trini@konsulko.com> =D0=BF=D0=B8=D1=88=D0=B5:
+>
+> On Fri, Sep 20, 2024 at 10:48:56AM -0600, Tom Rini wrote:
+> > On Fri, Sep 20, 2024 at 07:40:35PM +0300, Svyatoslav Ryhel wrote:
+> > > =D0=BF=D0=BD, 16 =D0=B2=D0=B5=D1=80. 2024=E2=80=AF=D1=80. =D0=BE 19:2=
+8 Tom Rini <trini@konsulko.com> =D0=BF=D0=B8=D1=88=D0=B5:
+> > > >
+> > > > On Wed, Sep 11, 2024 at 07:00:56PM -0600, Simon Glass wrote:
+> > > > > Hi Marek,
+> > > > >
+> > > > > On Fri, 28 Jun 2024 at 07:26, Marek Vasut <marex@denx.de> wrote:
+> > > > > >
+> > > > > > On 6/28/24 9:32 AM, Simon Glass wrote:
+> > > > > > > Hi Marek,
+> > > > > >
+> > > > > > Hi,
+> > > > > >
+> > > > > > [...]
+> > > > > >
+> > > > > > >>>> @@ -473,8 +483,6 @@ static int regulator_pre_probe(struct =
+udevice *dev)
+> > > > > > >>>>                                                   -ENODATA=
+);
+> > > > > > >>>>           uc_pdata->max_uA =3D dev_read_u32_default(dev, "=
+regulator-max-microamp",
+> > > > > > >>>>                                                   -ENODATA=
+);
+> > > > > > >>>> -       uc_pdata->always_on =3D dev_read_bool(dev, "regula=
+tor-always-on");
+> > > > > > >>>> -       uc_pdata->boot_on =3D dev_read_bool(dev, "regulato=
+r-boot-on");
+> > > > > > >>>>           uc_pdata->ramp_delay =3D dev_read_u32_default(de=
+v, "regulator-ramp-delay",
+> > > > > > >>>>                                                       0);
+> > > > > > >>>>           uc_pdata->force_off =3D dev_read_bool(dev, "regu=
+lator-force-boot-off");
+> > > > > > >>>> --
+> > > > > > >>>> 2.43.0
+> > > > > > >>>>
+> > > > > > >>>
+> > > > > > >>> This is reading a lot of DT stuff very early, which may be =
+slow. It is
+> > > > > > >>> also reading from the DT in the bind() step which we someti=
+mes have to
+> > > > > > >>> do, but try to avoid.
+> > > > > > >>
+> > > > > > >> Actually, it is reading only the bare minimum very early in =
+bind, the
+> > > > > > >> always-on and boot-on, the rest is in pre_probe, i.e. later.
+> > > > > > >
+> > > > > > > Yes, I see that. Also it is inevitable that these properties =
+need to
+> > > > > > > be read before probe(), since they control whether to probe()=
+.
+> > > > > > >
+> > > > > > >>
+> > > > > > >>> Also this seems to happen in SPL and again pre-reloc and ag=
+ain in
+> > > > > > >>> U-Boot post-reloc?
+> > > > > > >>
+> > > > > > >> What does, the uclass post_bind ?
+> > > > > > >
+> > > > > > > I mean that this code will be called in SPL (if the regulator=
+s are in
+> > > > > > > the DT there), U-Boot pre-reloc and post-reloc, each time tur=
+ning on
+> > > > > > > the regulators. We need a way to control that, don't we?
+> > > > > >
+> > > > > > I would assume that if those regulators are turned on once in t=
+he
+> > > > > > earliest stage , turning them on again in the follow up stage w=
+ould be a
+> > > > > > noop ? This is the point of regulator-*-on, to keep the regulat=
+ors on.
+> > > > >
+> > > > > No, there is sometimes a particular sequence needed.
+> > > > >
+> > > > > >
+> > > > > > >>> Should we have a step in the init sequence where we set up =
+the
+> > > > > > >>> regulators, by calling regulators_enable_boot_on() ?
+> > > > > > >>
+> > > > > > >> Let's not do this , the entire point of this series is to ge=
+t rid of
+> > > > > > >> those functions and do the regulator configuration the same =
+way LED
+> > > > > > >> subsystem does it -- by probing always-on/boot-on regulators=
+ and
+> > > > > > >> configuring them correctly on probe.
+> > > > > > >>
+> > > > > > >> To me regulators_enable_boot_on() and the like was always an
+> > > > > > >> inconsistently applied workaround for missing DM_FLAG_PROBE_=
+AFTER_BIND ,
+> > > > > > >> which is now implemented, so such workarounds can be removed=
+.
+> > > > > > >
+> > > > > > > That patch seemed to slip under the radar, sent and applied o=
+n the
+> > > > > > > same day! We really need to add a test for it, BTW.
+> > > > > >
+> > > > > > Which patch ? My recollection of DM_FLAG_PROBE_AFTER_BIND was t=
+hat it
+> > > > > > took a while to get in.
+> > > > >
+> > > > > [1]
+> > > > >
+> > > > > >
+> > > > > > > My concern is that this might cause us ordering problems. We =
+perhaps
+> > > > > > > want the regulators to be done first. If drivers are probed w=
+hich use
+> > > > > > > regulators, then presumably they will enable them. Consider t=
+his:
+> > > > > > >
+> > > > > > > - LED driver auto-probes
+> > > > > > >     - probes I2C bus 2
+> > > > > > >     - probes LDO1 which is autoset so turns on
+> > > > > > > - LDO1 probes, but is already running
+> > > > > > > - LDO2 probes, which is autoset so turns on
+> > > > > > >
+> > > > > > > So long as it is OK to enable the regulators in any order, th=
+en this
+> > > > > > > seems fine. But is it? How do we handle the case where are pa=
+rticular
+> > > > > > > sequence is needed?
+> > > > > >
+> > > > > > Did we finally arrive at the point where we need -EPROBE_DEFER =
+alike
+> > > > > > mechanism ?
+> > > > >
+> > > > > Nope. But I am concerned that this patch is leading us there. bin=
+d()
+> > > > > really needs to be as clean as possible. It is one of the design
+> > > > > elements of driver model which Linux should adopt.
+> > > > >
+> > > > > There is always a race to be the first to init something, move th=
+e
+> > > > > init earlier, etc... I don't see any general need to init the
+> > > > > regulators right at the start. It should be done in a separate
+> > > > > function and be optional. I am happy to send a patch if you like.
+> > > >
+> > > > Since we're currently stuck on the point where Marek has patches th=
+at
+> > > > fix a real problem, and Svyatoslav has a problem with them, but isn=
+'t
+> > > > currently able to debug it, yes, please put forward your patch that
+> > > > might address both sets of problems so we can all figure out how to
+> > > > resolve the problems, thanks!
+> > >
+> > > With patches from Marek there is no i2c chip probe of PMIC, while
+> > > without i2c chip probe is called (probe_chip function). How this is
+> > > even possible?
+> >
+> > Yes, it's very puzzling. Do you have the ability to get some debug
+> > console type information out so you can sprinkle in some prints and
+> > figure it out?
+>
+> So, here's my plan. Marek posted
+> https://patchwork.ozlabs.org/project/uboot/patch/20240924220905.514122-1-=
+marex@denx.de/
+> which is a work-around, so that v2024.10 can work. I'm going to take
+> that for master tomorrow. I'm also going to take _this_ series to -next
+> tomorrow, as this is the best approach we currently have to solving the
+> overall problem. The Tegra platforms that are now very oddly broken need
+> to get debugged to see where their problem is, and if there's an
+> entirely alternate approach, Simon can post patches for that instead on
+> top of next.
+>
+> --
+> Tom
 
-On Mon, 23 Sept 2024 at 14:36, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> On 12.09.24 02:59, Simon Glass wrote:
-> > Hi Sughosh,
-> >
-> > On Wed, 11 Sept 2024 at 00:50, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> >>
-> >> On Wed, 11 Sept 2024 at 00:14, Simon Glass <sjg@chromium.org> wrote:
-> >>>
-> >>> Hi Sughosh,
-> >>>
-> >>> On Mon, 9 Sept 2024 at 01:44, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> >>>>
-> >>>> On Fri, 6 Sept 2024 at 18:31, Simon Glass <sjg@chromium.org> wrote:
-> >>>>>
-> >>>>> Hi Sughosh,
-> >>>>>
-> >>>>> On Fri, 6 Sept 2024 at 00:23, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> >>>>>>
-> >>>>>> On Mon, 2 Sept 2024 at 03:53, Simon Glass <sjg@chromium.org> wrote:
-> >>>>>>>
-> >>>>>>> This API call is intended for allocating small amounts of memory,
-> >>>>>>> similar to malloc(). The current implementation rounds up to whole pages
-> >>>>>>> which can waste large amounts of memory. It also implements its own
-> >>>>>>> malloc()-style header on each block.
-> >>>>>>>
-> >>>>>>> For certain allocations (those of type EFI_BOOT_SERVICES_DATA) we can
-> >>>>>>> use U-Boot's built-in malloc() instead, at least until the app starts.
-> >>>>>>> This avoids poluting the memory space with blocks of data which may
-> >>>>>>> interfere with boot scripts, etc.
-> >>>>>>>
-> >>>>>>> Once the app has started, there is no advantage to using malloc(), since
-> >>>>>>> it doesn't matter what memory is used: everything is under control of
-> >>>>>>> the EFI subsystem. Also, using malloc() after the app starts might
-> >>>>>>> result in running of memory, since U-Boot's malloc() space is typically
-> >>>>>>> quite small.
-> >>>>>>>
-> >>>>>>> In fact, malloc() is already used for most EFI-related allocations, so
-> >>>>>>> the impact of this change is fairly small.
-> >>>>>>>
-> >>>>>>> One side effect is that this seems to be showing up some bugs in the
-> >>>>>>> EFI code, since the malloc() pool becomes corrupted with some tests.
-> >>>>>>> This has likely crept in due to the very large gaps between allocations
-> >>>>>>> (around 4KB), which provides a lot of leeway when the allocation size is
-> >>>>>>> too small. Work around this by increasing the size for now, until these
-> >>>>>>> (presumed) bugs are located.
-> >>>>>>>
-> >>>>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
-> >>>>>>> ---
-> >>>>>>>
-> >>>>>>> (no changes since v1)
-> >>>>>>>
-> >>>>>>>   common/dlmalloc.c            |   7 +++
-> >>>>>>>   include/efi_loader.h         |  18 ++++++
-> >>>>>>>   include/malloc.h             |   7 +++
-> >>>>>>>   lib/efi_loader/efi_bootbin.c |   2 +
-> >>>>>>>   lib/efi_loader/efi_memory.c  | 110 ++++++++++++++++++++++++++---------
-> >>>>>>>   5 files changed, 117 insertions(+), 27 deletions(-)
-> >>>>>>>
-> >>>>>>> diff --git a/common/dlmalloc.c b/common/dlmalloc.c
-> >>>>>>> index 1ac7ce3f43c..48e9f3515f7 100644
-> >>>>>>> --- a/common/dlmalloc.c
-> >>>>>>> +++ b/common/dlmalloc.c
-> >>>>>>> @@ -613,6 +613,13 @@ void mem_malloc_init(ulong start, ulong size)
-> >>>>>>>   #endif
-> >>>>>>>   }
-> >>>>>>>
-> >>>>>>> +bool malloc_check_in_range(void *ptr)
-> >>>>>>> +{
-> >>>>>>> +       ulong val = (ulong)ptr;
-> >>>>>>> +
-> >>>>>>> +       return val >= mem_malloc_start && val < mem_malloc_end;
-> >>>>>>> +}
-> >>>>>>> +
-> >>>>>>>   /* field-extraction macros */
-> >>>>>>>
-> >>>>>>>   #define first(b) ((b)->fd)
-> >>>>>>> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> >>>>>>> index 38971d01442..d07bc06bad4 100644
-> >>>>>>> --- a/include/efi_loader.h
-> >>>>>>> +++ b/include/efi_loader.h
-> >>>>>>> @@ -805,6 +805,24 @@ int efi_disk_probe(void *ctx, struct event *event);
-> >>>>>>>   int efi_disk_remove(void *ctx, struct event *event);
-> >>>>>>>   /* Called by board init to initialize the EFI memory map */
-> >>>>>>>   int efi_memory_init(void);
-> >>>>>>> +
-> >>>>>>> +/**
-> >>>>>>> + * enum efi_alloc_flags - controls EFI memory allocation
-> >>>>>>> + *
-> >>>>>>> + * @EFIAF_USE_MALLOC: Use malloc() pool for pool allocations of type
-> >>>>>>> + *     EFI_BOOT_SERVICES_DATA, otherwise use page allocation
-> >>>>>>> + */
-> >>>>>>> +enum efi_alloc_flags {
-> >>>>>>> +       EFIAF_USE_MALLOC        = BIT(0),
-> >>>>>>> +};
-> >>>>>>> +
-> >>>>>>> +/**
-> >>>>>>> + * efi_set_alloc() - Set behaviour of EFI memory allocation
-> >>>>>>> + *
-> >>>>>>> + * @flags: new value for allocation flags (see enum efi_alloc_flags)
-> >>>>>>> + */
-> >>>>>>> +void efi_set_alloc(int flags);
-> >>>>>>> +
-> >>>>>>>   /* Adds new or overrides configuration table entry to the system table */
-> >>>>>>>   efi_status_t efi_install_configuration_table(const efi_guid_t *guid, void *table);
-> >>>>>>>   /* Sets up a loaded image */
-> >>>>>>> diff --git a/include/malloc.h b/include/malloc.h
-> >>>>>>> index 07d3e90a855..a64f117e2f2 100644
-> >>>>>>> --- a/include/malloc.h
-> >>>>>>> +++ b/include/malloc.h
-> >>>>>>> @@ -983,6 +983,13 @@ extern ulong mem_malloc_brk;
-> >>>>>>>
-> >>>>>>>   void mem_malloc_init(ulong start, ulong size);
-> >>>>>>>
-> >>>>>>> +/**
-> >>>>>>> + * malloc_check_in_range() - Check if a pointer is within the malloc() region
-> >>>>>>> + *
-> >>>>>>> + * Return: true if within malloc() region
-> >>>>>>> + */
-> >>>>>>> +bool malloc_check_in_range(void *ptr);
-> >>>>>>> +
-> >>>>>>>   #ifdef __cplusplus
-> >>>>>>>   };  /* end of extern "C" */
-> >>>>>>>   #endif
-> >>>>>>> diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
-> >>>>>>> index a87006b3c0e..5bb0fdcf75d 100644
-> >>>>>>> --- a/lib/efi_loader/efi_bootbin.c
-> >>>>>>> +++ b/lib/efi_loader/efi_bootbin.c
-> >>>>>>> @@ -201,6 +201,8 @@ efi_status_t efi_binary_run(void *image, size_t size, void *fdt)
-> >>>>>>>   {
-> >>>>>>>          efi_status_t ret;
-> >>>>>>>
-> >>>>>>> +       efi_set_alloc(0);
-> >>>>>>> +
-> >>>>>>
-> >>>>>> Here we are setting the flags to use the efi_allocate_pages() route to
-> >>>>>> allocate memory, when booting into an EFI app. Do we need to set it
-> >>>>>> back to EFIAF_USE_MALLOC if the app exits and control lands back in
-> >>>>>> U-Boot? I am not sure that is being handled.
-> >>>>>
-> >>>>> I don't believe so. Once we have booted into the app, U-Boot loses
-> >>>>> control of its memory layout, in the sense that the
-> >>>>> efi_allocate_pages() has likely been called and placed things all over
-> >>>>> the place in the memory. People should expect this.
-> >>>>
-> >>>> I am referring to a scenario where the app exits and control returns
-> >>>> back to U-Boot, which I believe is a valid scenario. In such a case,
-> >>>> should control not switch back to the malloc based allocations.
-> >>>> Otherwise we do not have consistent behaviour with the allocations --
-> >>>> any subsequent calls to efi_allocate_pool on return from an EFI app
-> >>>> would continue using the other (efi_allocate_pages() based) path.
-> >>>
-> >>> Thanks for reviewing.
-> >>>
-> >>> I completely understand your scenario, but I think I explained it
-> >>> above. The important thing is to keep memory 'consistent' from a
-> >>> U-Boot point of view until we actually boot something.
-> >>
-> >> How does reverting back to using the malloc heap for
-> >> efi_allocate_pool() after returning back from the EFI app affect
-> >> memory consistency? We now have the LMB memory map which is global and
-> >> persistent. So any allocations that were done (and not freed) from the
-> >> app, would be using the memory that you mention -- from 0 to bottom of
-> >> the stack. In fact, I would argue that not reverting back to malloc
-> >> based allocations on return from the app is inconsistent behaviour.
-> >
-> > No, I mean we should *not* use memory from 0 to the bottom of the
-> > stack. That is supposed to be reserved for image loading. Scripts may
-> > assume they can do anything in this space and most boards have fixed
-> > addresses for kernel, etc.
-> >
-> >>
-> >>>
-> >>> U-Boot expects memory from 0 to the bottom of the stack to be
-> >>> available for loading images. That is why it relocates itself.
-> >>
-> >> The EFI app is supposed to use the memory allocation API's
-> >> (efi_allocate_{pages,pool}) for getting memory. And those requests are
-> >> going to come from the LMB allocations (after the latest LMB rework
-> >> series). So the heap memory is not supposed to be trampled over with.
-> >
-> > I'm not quite sure what you are getting at here? My goal is to tidy up
-> > the allocation of memory *before* the app boots.
->
->
-> AllocatePool() can be used to allocate multiple GiB of memory. The
-> malloc pool is too small for this purpose. You would first have to
-> change the malloc implementation to acquire arbitrary amounts of memory
-> from LMB.
->
-> Please, don't complicate the code by treating different memory types
-> differently in AllocatePool().
->
-> The way forward is to change LMB to store EFI memory types. This will
-> allow us to remove most of the code in lib/efi_loader/efi_memory.c.
->
-> Once that integration work is done we can start thinking about
-> generalizing malloc() to support multiple memory pools of arbitrary size
-> to encompass AllocatePool().
+Hello there!
+I was digging this when I had some free time and found that with
+patches from Marek the only difference is that function
+i2c_get_chip_for_busnum is not called for PMIC's main i2c address
+which results in issues with i2c you have seen in logs before. I
+assume this is not a tegra specific issue and not even related to
+these regulator patches itself.
 
-Unfortunately that is not the correct approach at all. I fully
-understand where you are coming from, but the complexity involved is
-wrong for U-Boot.
+To verify my suspicions, Tom and Marek my you please dump u-boot log
+with and without patches and with enabled debug logging from
+i2c-uclass and i2c driver of your SoC.
 
-I do not have to have to change the malloc() implementation at all. It
-is perfectly fine as it is. It is only EFI that needs to change
-slightly, using malloc() for the pool until the app starts.
+Here are logs from my device (Tegra SoC)
 
-We also need to consider what happens when EFI_LOADER is disabled,
-which I am intent on preserving.
+Not working
+(bootloader) i2c: controller bus 0 at 7000d000, speed 0:
+i2c_init_controller: speed=3D400000
+(bootloader) i2c_init_controller: CLK_DIV_STD_FAST_MODE setting =3D 25
+(bootloader) i2c_get_chip: Searching bus 'i2c@7000d000' for address 59:
+(bootloader) not found
+(bootloader) pmic_reg_read: reg=3D37 priv->trans_len:1i2c_xfer: 2 messages
+(bootloader)
+(bootloader) i2c_xfer: chip=3D0x58, len=3D0x1
+(bootloader) i2c_write_data: chip=3D0x58, len=3D0x1
+(bootloader) write_data:  0x37
+(bootloader) pkt header 1 sent (0x10010)
+(bootloader) pkt header 2 sent (0x0)
+(bootloader) pkt header 3 sent (0x100b0)
+(bootloader) pkt data sent (0x37)
+(bootloader) tegra_i2c_write_data: Error (-1) !!!
 
-Regards,
-Simon
+Working
+(bootloader) i2c: controller bus 0 at 7000d000, speed 0:
+i2c_init_controller: speed=3D400000
+(bootloader) i2c_init_controller: CLK_DIV_STD_FAST_MODE setting =3D 25
+(bootloader) pkt header 1 sent (0x10010)
+(bootloader) pkt header 2 sent (0x0)
+(bootloader) pkt header 3 sent (0xb0)
+(bootloader) pkt data sent (0x0)
+(bootloader) i2c_get_chip: Searching bus 'i2c@7000d000' for address 58:
+(bootloader) i2c_get_chip: Searching bus 'i2c@7000d000' for address 59:
+(bootloader) not found
+(bootloader) found, ret=3D0
+(bootloader) i2c_xfer: 2 messages
+(bootloader) i2c_xfer: chip=3D0x58, len=3D0x1
+(bootloader) i2c_write_data: chip=3D0x58, len=3D0x1
+(bootloader) write_data:  0xfb
+(bootloader) pkt header 1 sent (0x10010)
+(bootloader) pkt header 2 sent (0x0)
+(bootloader) pkt header 3 sent (0x100b0)
+(bootloader) pkt data sent (0xfb)
+(bootloader) i2c_xfer: chip=3D0x58, len=3D0x1
 
+As you can see this part
 
->
-> Best regards
->
-> Heinrich
->
-> >
-> >>>> This is of course with the assumption that the EFI maintainers are
-> >>>> fine with using this hybrid approach on the allocations.
-> >>>
-> >>> Yes, I certainly hope so. This whole problem has caused an enormous
-> >>> amount of confusion and I very much want to clean it up.
-> >>>>
-> >
-> >>>>>
-> >>>>> We can potentially deal with this if we find a specific problem, but I
-> >>>>> can't think of one at the moment.
-> >>>>>
-> >
-> > [..]
-> >
-> > Regards,
-> > Simon
->
+(bootloader) pkt header 1 sent (0x10010)
+(bootloader) pkt header 2 sent (0x0)
+(bootloader) pkt header 3 sent (0xb0)
+(bootloader) pkt data sent (0x0)
+(bootloader) i2c_get_chip: Searching bus 'i2c@7000d000' for address 58:
+
+is missing in log from u-boot where Marek's patches are applied and
+this log fragment co-responds to i2c_get_chip_for_busnum call
