@@ -4,54 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2DC5C369DC
-	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 12:28:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2360DC369D7
+	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 12:28:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CB1388D13;
-	Wed, 25 Sep 2024 14:25:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0B09388C98;
+	Wed, 25 Sep 2024 14:25:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Sech0KmZ";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="mAI+dQPh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 107A488C71; Wed, 25 Sep 2024 14:25:49 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ id AC87588D16; Wed, 25 Sep 2024 14:25:50 +0200 (CEST)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 30E9988C7C
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 14:25:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4808988B6D
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 14:25:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+Oliver.Gaskell.analog.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id AEBB55C5C6C;
- Wed, 25 Sep 2024 12:25:22 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 40EE0C4CED0;
+ by nyc.source.kernel.org (Postfix) with ESMTP id 52DC1A43F06;
+ Wed, 25 Sep 2024 12:25:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 11208C4CEC9;
  Wed, 25 Sep 2024 12:25:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1727267126;
- bh=t87YKM5d+u4JEQVL4bz13CsPwKctQLcPtaJcIQS6hDI=;
+ bh=XChYauj044s+gZDqh7+8F+rzVBhAJGjHRlGEh3gn4ps=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=Sech0KmZAICMbyI4apgm1FxmSXjuoGtr75Bp7EK6/5ShtS5ES8croOGrv+acBeq/h
- qNBZoGu3ixRSwmthKBhrkmUq4wWTh3TSty5oR3ctDKLx7MBSUC8UFPsbvyfMnijvOW
- r4+lfMLTxEBvKyzZFPyscXIn2C4k4p5biEe7BnM0MO4Yoh6vw3fzA8YMoM2rVH90H1
- IA4jcofAZN3CbfZJSrSWy+TmkPrrUnv7xs4fOaq3Gv6G7kBtq2xE36bY56kMagEpfS
- soZTVoBHRUnFUnvR8/7KUsVVj/mBSb+iM32lU2U+17CrAeKTlF55XwyS+6M0tyYeNE
- P7wdv8wVbiYxw==
+ b=mAI+dQPhup84xYcV5VMbTM05xnzSJOJjSYcwMXFn8tpUaauFXbLqSN6wKeYSTUa+l
+ CHm0fntgTJ0tTgJFCxZBYb1gEh/ksAnQNPWzBgHyolGyzwD9A6YdRjLk5xXUYSxgvE
+ 6yY1mrDBcNHb3zbBeHq+dokAnaGt4EQABgNt1chLM5/LxQ/0dameSYe1Ja2SbxvTqB
+ O3ciLlE0jJ41LPCfy8DWQXitwulMjbggUpU87ynhcL4zMkvqOihBDWEx9KS98+ntnQ
+ NHkLK5w0J8UeGEZx1e0U7k/3DtZG48zWxW6xwrDFsgtOwcDDijRdN0U401kGTG0zUL
+ WhEYsp6dZEchg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 364C1C369D7;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 03921C369DB;
  Wed, 25 Sep 2024 12:25:26 +0000 (UTC)
 From: Oliver Gaskell via B4 Relay
  <devnull+Oliver.Gaskell.analog.com@kernel.org>
-Date: Wed, 25 Sep 2024 13:25:15 +0100
-Subject: [PATCH v2 05/11] i2c: Add support for ADI SC5XX-family I2C peripheral
+Date: Wed, 25 Sep 2024 13:25:12 +0100
+Subject: [PATCH v2 02/11] gpio: Add support for SC5XX-family processor GPIO
+ driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240925-sc5xx-driver-series-v2-5-ad9287c25c08@analog.com>
+Message-Id: <20240925-sc5xx-driver-series-v2-2-ad9287c25c08@analog.com>
 References: <20240925-sc5xx-driver-series-v2-0-ad9287c25c08@analog.com>
 In-Reply-To: <20240925-sc5xx-driver-series-v2-0-ad9287c25c08@analog.com>
 To: Tom Rini <trini@konsulko.com>, 
@@ -68,14 +69,13 @@ To: Tom Rini <trini@konsulko.com>,
  Jaehoon Chung <jh80.chung@samsung.com>
 Cc: u-boot@lists.denx.de, adsp-linux@analog.com, 
  Oliver Gaskell <Oliver.Gaskell@analog.com>, 
- 20240828-sc5xx-upstreaming-patches-v1-0-44d9adfdf327@analog.com, 
- Angelo Dureghello <angelo.dureghello@timesys.com>
+ 20240828-sc5xx-upstreaming-patches-v1-0-44d9adfdf327@analog.com
 X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1727267113; l=14746;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1727267113; l=7535;
  i=Oliver.Gaskell@analog.com; s=20240821; h=from:subject:message-id;
- bh=JDKC/jYCqH4t+IjEOFr3/YKA+eqdJg+RZ3XCuYGJYc0=;
- b=OAoctgSnQ2KbOnFrGFSA7d+6G+qZizpJqA0g7aR2djyLX1eTvrzZICI+ELI+fSwtQk6wiu08C
- wiUSopQ3v2zBOFZd6w7qZ2cpc4wk1+lfu00VkfH5MNEH/Iz3zVWo64M
+ bh=AB4E4+Vs+XDjuS2ud6YoEo1HDdw6U3th41Jfz/+AxDo=;
+ b=41k55yA7NEQcCGf/yDq+EfExhE8Lsi/NCFsUsGFsTiysgo/CsN0Fik6+gAiy5I91d/aZr71+6
+ FhPvhRmbqRKCjE8n/JJ+CxZLEEA4C8VpI03sDx71Nb54rmuEWZeQnKJ
 X-Developer-Key: i=Oliver.Gaskell@analog.com; a=ed25519;
  pk=Icq9TxwFJ6FePHS28YbBWMvtZpFWxpPQLhLA9cNvZ/Y=
 X-Endpoint-Received: by B4 Relay for Oliver.Gaskell@analog.com/20240821
@@ -100,465 +100,252 @@ X-Virus-Status: Clean
 
 From: Oliver Gaskell <Oliver.Gaskell@analog.com>
 
-Co-developed-by: Greg Malysa <greg.malysa@timesys.com>
-Signed-off-by: Greg Malysa <greg.malysa@timesys.com>
+This adds support for using the GPIO pins on the SC5XX family of SoCs
+from Analog Devices.
+
+Co-developed-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
 Co-developed-by: Ian Roberts <ian.roberts@timesys.com>
 Signed-off-by: Ian Roberts <ian.roberts@timesys.com>
-Co-developed-by: Angelo Dureghello <angelo.dureghello@timesys.com>
-Signed-off-by: Angelo Dureghello <angelo.dureghello@timesys.com>
 Signed-off-by: Vasileios Bimpikas <vasileios.bimpikas@analog.com>
 Signed-off-by: Utsav Agarwal <utsav.agarwal@analog.com>
 Signed-off-by: Arturs Artamonovs <arturs.artamonovs@analog.com>
-Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+Signed-off-by: Greg Malysa <greg.malysa@timesys.com>
 Signed-off-by: Oliver Gaskell <Oliver.Gaskell@analog.com>
 ---
- MAINTAINERS           |   1 +
- drivers/i2c/Kconfig   |   7 +
- drivers/i2c/Makefile  |   1 +
- drivers/i2c/adi_i2c.c | 395 ++++++++++++++++++++++++++++++++++++++++++++++++++
- 4 files changed, 404 insertions(+)
+ MAINTAINERS                  |   1 +
+ drivers/gpio/Kconfig         |   9 +++
+ drivers/gpio/Makefile        |   1 +
+ drivers/gpio/gpio-adi-adsp.c | 179 +++++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 190 insertions(+)
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 6b3b0bb9b3..101c0d6ed3 100644
+index 9810ccc3e3..7b1d2201bf 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -614,6 +614,7 @@ F:	doc/device-tree-bindings/timer/adi,sc5xx-gptimer.yaml
+@@ -612,6 +612,7 @@ F:	doc/device-tree-bindings/arm/adi/adi,sc5xx.yaml
+ F:	doc/device-tree-bindings/clock/adi,sc5xx-clocks.yaml
+ F:	doc/device-tree-bindings/timer/adi,sc5xx-gptimer.yaml
  F:	drivers/clk/adi/
- F:	drivers/gpio/adp5588_gpio.c
- F:	drivers/gpio/gpio-adi-adsp.c
-+F:	drivers/i2c/adi_i2c.c
++F:	drivers/gpio/gpio-adi-adsp.c
  F:	drivers/pinctrl/pinctrl-adi-adsp.c
  F:	drivers/serial/serial_adi_uart4.c
  F:	drivers/timer/adi_sc5xx_timer.c
-diff --git a/drivers/i2c/Kconfig b/drivers/i2c/Kconfig
-index 52067fa7c1..a84731824c 100644
---- a/drivers/i2c/Kconfig
-+++ b/drivers/i2c/Kconfig
-@@ -154,6 +154,13 @@ config SPL_DM_I2C_GPIO
- 	  bindings are supported.
- 	  Binding info: doc/device-tree-bindings/i2c/i2c-gpio.txt
+diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
+index fcca6941eb..032be1d460 100644
+--- a/drivers/gpio/Kconfig
++++ b/drivers/gpio/Kconfig
+@@ -97,6 +97,15 @@ config SPL_DM_GPIO_LOOKUP_LABEL
+ 	  different gpios on different hardware versions
+ 	  for the same functionality in board code.
  
-+config SYS_I2C_ADI
-+	bool "ADI I2C driver"
-+	depends on DM_I2C && ARCH_SC5XX
++config ADI_GPIO
++	bool "ADI GPIO driver"
++	depends on DM_GPIO && ARCH_SC5XX
 +	help
-+	  Add support for the ADI (Analog Devices) I2C driver as used
-+	  in SC57X, SC58X, SC59X, SC59X_64.
++	  This driver supports GPIO banks on SC5xx processors. It
++	  supports inputs and outputs but does not support pin
++	  interrupt functionality (PINT) or other features in the
++	  Linux version of the driver.
 +
- config SYS_I2C_AT91
- 	bool "Atmel I2C driver"
- 	depends on DM_I2C && ARCH_AT91
-diff --git a/drivers/i2c/Makefile b/drivers/i2c/Makefile
-index 00b90523c6..30c1a43a57 100644
---- a/drivers/i2c/Makefile
-+++ b/drivers/i2c/Makefile
-@@ -11,6 +11,7 @@ obj-$(CONFIG_$(SPL_)I2C_CROS_EC_TUNNEL) += cros_ec_tunnel.o
- obj-$(CONFIG_$(SPL_)I2C_CROS_EC_LDO) += cros_ec_ldo.o
+ config ALTERA_PIO
+ 	bool "Altera PIO driver"
+ 	depends on DM_GPIO
+diff --git a/drivers/gpio/Makefile b/drivers/gpio/Makefile
+index 4a29315435..ba58fbafd1 100644
+--- a/drivers/gpio/Makefile
++++ b/drivers/gpio/Makefile
+@@ -12,6 +12,7 @@ obj-$(CONFIG_$(SPL_TPL_)DM_GPIO) += gpio-uclass.o
  
- obj-$(CONFIG_$(SPL_)SYS_I2C_LEGACY) += i2c_core.o
-+obj-$(CONFIG_SYS_I2C_ADI) += adi_i2c.o
- obj-$(CONFIG_SYS_I2C_ASPEED) += ast_i2c.o
- obj-$(CONFIG_SYS_I2C_AST2600) += ast2600_i2c.o
- obj-$(CONFIG_SYS_I2C_AT91) += at91_i2c.o
-diff --git a/drivers/i2c/adi_i2c.c b/drivers/i2c/adi_i2c.c
+ obj-$(CONFIG_$(SPL_)DM_PCA953X)	+= pca953x_gpio.o
+ 
++obj-$(CONFIG_ADI_GPIO)		+= gpio-adi-adsp.o
+ obj-$(CONFIG_ASPEED_GPIO)	+= gpio-aspeed.o
+ obj-$(CONFIG_AT91_GPIO)	+= at91_gpio.o
+ obj-$(CONFIG_ATMEL_PIO4)	+= atmel_pio4.o
+diff --git a/drivers/gpio/gpio-adi-adsp.c b/drivers/gpio/gpio-adi-adsp.c
 new file mode 100644
-index 0000000000..04a63de577
+index 0000000000..0ce00572e0
 --- /dev/null
-+++ b/drivers/i2c/adi_i2c.c
-@@ -0,0 +1,395 @@
++++ b/drivers/gpio/gpio-adi-adsp.c
+@@ -0,0 +1,179 @@
 +// SPDX-License-Identifier: GPL-2.0-or-later
 +/*
 + * (C) Copyright 2022 - Analog Devices, Inc.
 + *
 + * Written and/or maintained by Timesys Corporation
 + *
-+ * Converted to driver model by Nathan Barrett-Morrison
-+ *
-+ * Contact: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
-+ * Contact: Greg Malysa <greg.malysa@timesys.com>
++ * Author: Greg Malysa <greg.malysa@timesys.com>
++ * Additional Contact: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
 + */
 +
-+#include <clk.h>
 +#include <dm.h>
-+#include <i2c.h>
-+#include <mapmem.h>
-+#include <asm/io.h>
++#include <asm-generic/gpio.h>
++#include <dm/device_compat.h>
++#include <linux/bitops.h>
++#include <linux/io.h>
 +
-+#define CLKLOW(x) ((x) & 0xFF)     // Periods Clock Is Held Low
-+#define CLKHI(y) (((y) & 0xFF) << 0x8) // Periods Clock Is High
++#define ADSP_PORT_MMIO_SIZE		0x80
++#define ADSP_PORT_PIN_SIZE		16
 +
-+#define PRESCALE        0x007F     // SCLKs Per Internal Time Reference (10MHz)
-+#define TWI_ENA         0x0080     // TWI Enable
-+#define SCCB            0x0200     // SCCB Compatibility Enable
++#define ADSP_PORT_REG_FER			0x00
++#define ADSP_PORT_REG_FER_SET		0x04
++#define ADSP_PORT_REG_FER_CLEAR		0x08
++#define ADSP_PORT_REG_DATA			0x0c
++#define ADSP_PORT_REG_DATA_SET		0x10
++#define ADSP_PORT_REG_DATA_CLEAR	0x14
++#define ADSP_PORT_REG_DIR			0x18
++#define ADSP_PORT_REG_DIR_SET		0x1c
++#define ADSP_PORT_REG_DIR_CLEAR		0x20
++#define ADSP_PORT_REG_INEN			0x24
++#define ADSP_PORT_REG_INEN_SET		0x28
++#define ADSP_PORT_REG_INEN_CLEAR	0x2c
++#define ADSP_PORT_REG_PORT_MUX		0x30
++#define ADSP_PORT_REG_DATA_TGL		0x34
++#define ADSP_PORT_REG_POLAR			0x38
++#define ADSP_PORT_REG_POLAR_SET		0x3c
++#define ADSP_PORT_REG_POLAR_CLEAR	0x40
++#define ADSP_PORT_REG_LOCK			0x44
++#define ADSP_PORT_REG_TRIG_TGL		0x48
 +
-+#define SEN             0x0001     // Slave Enable
-+#define SADD_LEN        0x0002     // Slave Address Length
-+#define STDVAL          0x0004     // Slave Transmit Data Valid
-+#define TSC_NAK         0x0008     // NAK Generated At Conclusion Of Transfer
-+#define GEN             0x0010     // General Call Adrress Matching Enabled
-+
-+#define SDIR            0x0001     // Slave Transfer Direction
-+#define GCALL           0x0002     // General Call Indicator
-+
-+#define MEN             0x0001     // Master Mode Enable
-+#define MADD_LEN        0x0002     // Master Address Length
-+#define MDIR            0x0004     // Master Transmit Direction (RX/TX*)
-+#define FAST            0x0008     // Use Fast Mode Timing Specs
-+#define STOP            0x0010     // Issue Stop Condition
-+#define RSTART          0x0020     // Repeat Start or Stop* At End Of Transfer
-+#define DCNT            0x3FC0     // Data Bytes To Transfer
-+#define SDAOVR          0x4000     // Serial Data Override
-+#define SCLOVR          0x8000     // Serial Clock Override
-+
-+#define MPROG           0x0001     // Master Transfer In Progress
-+#define LOSTARB         0x0002     // Lost Arbitration Indicator (Xfer Aborted)
-+#define ANAK            0x0004     // Address Not Acknowledged
-+#define DNAK            0x0008     // Data Not Acknowledged
-+#define BUFRDERR        0x0010     // Buffer Read Error
-+#define BUFWRERR        0x0020     // Buffer Write Error
-+#define SDASEN          0x0040     // Serial Data Sense
-+#define SCLSEN          0x0080     // Serial Clock Sense
-+#define BUSBUSY         0x0100     // Bus Busy Indicator
-+
-+#define SINIT           0x0001     // Slave Transfer Initiated
-+#define SCOMP           0x0002     // Slave Transfer Complete
-+#define SERR            0x0004     // Slave Transfer Error
-+#define SOVF            0x0008     // Slave Overflow
-+#define MCOMP           0x0010     // Master Transfer Complete
-+#define MERR            0x0020     // Master Transfer Error
-+#define XMTSERV         0x0040     // Transmit FIFO Service
-+#define RCVSERV         0x0080     // Receive FIFO Service
-+
-+#define XMTFLUSH        0x0001     // Transmit Buffer Flush
-+#define RCVFLUSH        0x0002     // Receive Buffer Flush
-+#define XMTINTLEN       0x0004     // Transmit Buffer Interrupt Length
-+#define RCVINTLEN       0x0008     // Receive Buffer Interrupt Length
-+
-+#define XMTSTAT         0x0003     // Transmit FIFO Status
-+#define XMT_EMPTY       0x0000     // Transmit FIFO Empty
-+#define XMT_HALF        0x0001     // Transmit FIFO Has 1 Byte To Write
-+#define XMT_FULL        0x0003     // Transmit FIFO Full (2 Bytes To Write)
-+
-+#define RCVSTAT         0x000C     // Receive FIFO Status
-+#define RCV_EMPTY       0x0000     // Receive FIFO Empty
-+#define RCV_HALF        0x0004     // Receive FIFO Has 1 Byte To Read
-+#define RCV_FULL        0x000C     // Receive FIFO Full (2 Bytes To Read)
-+
-+/* Every register is 32bit aligned, but only 16bits in size */
-+#define ureg(name) u16 name; u16 __pad_##name
-+
-+struct twi_regs {
-+	ureg(clkdiv);
-+	ureg(control);
-+	ureg(slave_ctl);
-+	ureg(slave_stat);
-+	ureg(slave_addr);
-+	ureg(master_ctl);
-+	ureg(master_stat);
-+	ureg(master_addr);
-+	ureg(int_stat);
-+	ureg(int_mask);
-+	ureg(fifo_ctl);
-+	ureg(fifo_stat);
-+	u8 __pad[0x50];
-+
-+	ureg(xmt_data8);
-+	ureg(xmt_data16);
-+	ureg(rcv_data8);
-+	ureg(rcv_data16);
++struct adsp_gpio_priv {
++	void __iomem *base;
++	int ngpio;
 +};
 +
-+#undef ureg
-+
-+/*
-+ * The way speed is changed into duty often results in integer truncation
-+ * with 50% duty, so we'll force rounding up to the next duty by adding 1
-+ * to the max. In practice this will get us a speed of something like
-+ * 385 KHz. The other limit is easy to handle as it is only 8 bits.
-+ */
-+#define I2C_SPEED_MAX             400000
-+#define I2C_SPEED_TO_DUTY(speed)  (5000000 / (speed))
-+#define I2C_DUTY_MAX              (I2C_SPEED_TO_DUTY(I2C_SPEED_MAX) + 1)
-+#define I2C_DUTY_MIN              0xff	/* 8 bit limited */
-+
-+#define I2C_M_COMBO		0x4
-+#define I2C_M_STOP		0x2
-+#define I2C_M_READ		0x1
-+
-+/*
-+ * All transfers are described by this data structure
-+ */
-+struct adi_i2c_msg {
-+	u8 flags;
-+	u32 len;		/* msg length */
-+	u8 *buf;		/* pointer to msg data */
-+	u32 olen;		/* addr length */
-+	u8 *obuf;		/* addr buffer */
-+};
-+
-+struct adi_i2c_dev {
-+	struct twi_regs  __iomem *base;
-+	u32 i2c_clk;
-+	uint speed;
-+};
-+
-+/* Allow msec timeout per ~byte transfer */
-+#define I2C_TIMEOUT 10
-+
-+/**
-+ * wait_for_completion - manage the actual i2c transfer
-+ *	@msg: the i2c msg
-+ */
-+static int wait_for_completion(struct twi_regs *twi, struct adi_i2c_msg *msg)
++static u32 get_port(unsigned int pin)
 +{
-+	u16 int_stat, ctl;
-+	ulong timebase = get_timer(0);
-+
-+	do {
-+		int_stat = readw(&twi->int_stat);
-+
-+		if (int_stat & XMTSERV) {
-+			writew(XMTSERV, &twi->int_stat);
-+			if (msg->olen) {
-+				writew(*(msg->obuf++), &twi->xmt_data8);
-+				--msg->olen;
-+			} else if (!(msg->flags & I2C_M_COMBO) && msg->len) {
-+				writew(*(msg->buf++), &twi->xmt_data8);
-+				--msg->len;
-+			} else {
-+				ctl = readw(&twi->master_ctl);
-+				if (msg->flags & I2C_M_COMBO)
-+					writew(ctl | RSTART | MDIR,
-+					       &twi->master_ctl);
-+				else
-+					writew(ctl | STOP, &twi->master_ctl);
-+			}
-+		}
-+		if (int_stat & RCVSERV) {
-+			writew(RCVSERV, &twi->int_stat);
-+			if (msg->len) {
-+				*(msg->buf++) = readw(&twi->rcv_data8);
-+				--msg->len;
-+			} else if (msg->flags & I2C_M_STOP) {
-+				ctl = readw(&twi->master_ctl);
-+				writew(ctl | STOP, &twi->master_ctl);
-+			}
-+		}
-+		if (int_stat & MERR) {
-+			pr_err("%s: master transmit terror: %d\n", __func__,
-+			       readw(&twi->master_stat));
-+			writew(MERR, &twi->int_stat);
-+			return -EIO;
-+		}
-+		if (int_stat & MCOMP) {
-+			writew(MCOMP, &twi->int_stat);
-+			if (msg->flags & I2C_M_COMBO && msg->len) {
-+				ctl = readw(&twi->master_ctl);
-+				ctl = (ctl & ~RSTART) |
-+					(min((unsigned int)msg->len,
-+					     0xffU) << 6) | MEN | MDIR;
-+				writew(ctl, &twi->master_ctl);
-+			} else {
-+				break;
-+			}
-+		}
-+
-+		/* If we were able to do something, reset timeout */
-+		if (int_stat)
-+			timebase = get_timer(0);
-+
-+	} while (get_timer(timebase) < I2C_TIMEOUT);
-+
-+	return 0;
++	return pin / ADSP_PORT_PIN_SIZE;
 +}
 +
-+static int i2c_transfer(struct twi_regs *twi, u8 chip, u8 *offset,
-+			int olen, u8 *buffer, int len, u8 flags)
++static u32 get_offset(unsigned int pin)
 +{
-+	int ret;
-+	u16 ctl;
++	return pin % ADSP_PORT_PIN_SIZE;
++}
 +
-+	struct adi_i2c_msg msg = {
-+		.flags = flags | (len >= 0xff ? I2C_M_STOP : 0),
-+		.buf   = buffer,
-+		.len   = len,
-+		.obuf  = offset,
-+		.olen  = olen,
-+	};
++static int adsp_gpio_input(struct udevice *udev, unsigned int pin)
++{
++	struct adsp_gpio_priv *priv = dev_get_priv(udev);
++	u32 port, offset;
++	void __iomem *portbase;
 +
-+	/* wait for things to settle */
-+	while (readw(&twi->master_stat) & BUSBUSY)
-+		if (!IS_ENABLED(CONFIG_SPL_BUILD) && ctrlc())
-+			return -EINTR;
++	if (pin < priv->ngpio) {
++		port = get_port(pin);
++		offset = get_offset(pin);
++		portbase = priv->base + port * ADSP_PORT_MMIO_SIZE;
 +
-+	/* Set Transmit device address */
-+	writew(chip, &twi->master_addr);
-+
-+	/* Clear the FIFO before starting things */
-+	writew(XMTFLUSH | RCVFLUSH, &twi->fifo_ctl);
-+	writew(0, &twi->fifo_ctl);
-+
-+	/* Prime the pump */
-+	if (msg.olen) {
-+		len = (msg.flags & I2C_M_COMBO) ? msg.olen : msg.olen + len;
-+		writew(*(msg.obuf++), &twi->xmt_data8);
-+		--msg.olen;
-+	} else if (!(msg.flags & I2C_M_READ) && msg.len) {
-+		writew(*(msg.buf++), &twi->xmt_data8);
-+		--msg.len;
++		iowrite16(BIT(offset), portbase + ADSP_PORT_REG_FER_CLEAR);
++		iowrite16(BIT(offset), portbase + ADSP_PORT_REG_DIR_CLEAR);
++		iowrite16(BIT(offset), portbase + ADSP_PORT_REG_INEN_SET);
++		return 0;
 +	}
 +
-+	/* clear int stat */
-+	writew(-1, &twi->master_stat);
-+	writew(-1, &twi->int_stat);
-+	writew(0, &twi->int_mask);
-+
-+	/* Master enable */
-+	ctl = readw(&twi->master_ctl);
-+	ctl = (ctl & FAST) | (min(len, 0xff) << 6) | MEN |
-+		((msg.flags & I2C_M_READ) ? MDIR : 0);
-+	writew(ctl, &twi->master_ctl);
-+
-+	/* Process the rest */
-+	ret = wait_for_completion(twi, &msg);
-+
-+	ctl = readw(&twi->master_ctl) & ~MEN;
-+	writew(ctl, &twi->master_ctl);
-+	ctl = readw(&twi->control) & ~TWI_ENA;
-+	writew(ctl, &twi->control);
-+	ctl = readw(&twi->control) | TWI_ENA;
-+	writew(ctl, &twi->control);
-+	return ret;
++	return -EINVAL;
 +}
 +
-+static int adi_i2c_read(struct twi_regs *twi, u8 chip,
-+			u8 *offset, int olen, u8 *buffer, int len)
++static int adsp_gpio_output(struct udevice *udev, unsigned int pin, int value)
 +{
-+	return i2c_transfer(twi, chip, offset, olen, buffer,
-+			len, olen ? I2C_M_COMBO : I2C_M_READ);
-+}
++	struct adsp_gpio_priv *priv = dev_get_priv(udev);
++	u32 port, offset;
++	void __iomem *portbase;
 +
-+static int adi_i2c_write(struct twi_regs *twi, u8 chip,
-+			 u8 *offset, int olen, u8 *buffer, int len)
-+{
-+	return i2c_transfer(twi, chip, offset, olen, buffer, len, 0);
-+}
++	if (pin < priv->ngpio) {
++		port = get_port(pin);
++		offset = get_offset(pin);
++		portbase = priv->base + port * ADSP_PORT_MMIO_SIZE;
 +
-+static int adi_i2c_set_bus_speed(struct udevice *bus, uint speed)
-+{
-+	struct adi_i2c_dev *dev = dev_get_priv(bus);
-+	struct twi_regs *twi = dev->base;
-+	u16 clkdiv = I2C_SPEED_TO_DUTY(speed);
++		iowrite16(BIT(offset), portbase + ADSP_PORT_REG_FER_CLEAR);
 +
-+	/* Set TWI interface clock */
-+	if (clkdiv < I2C_DUTY_MAX || clkdiv > I2C_DUTY_MIN)
-+		return -1;
-+	clkdiv = (clkdiv << 8) | (clkdiv & 0xff);
-+	writew(clkdiv, &twi->clkdiv);
++		if (value)
++			iowrite16(BIT(offset), portbase + ADSP_PORT_REG_DATA_SET);
++		else
++			iowrite16(BIT(offset), portbase + ADSP_PORT_REG_DATA_CLEAR);
 +
-+	/* Don't turn it on */
-+	writew(speed > 100000 ? FAST : 0, &twi->master_ctl);
-+
-+	return 0;
-+}
-+
-+static int adi_i2c_of_to_plat(struct udevice *bus)
-+{
-+	struct adi_i2c_dev *dev = dev_get_priv(bus);
-+	struct clk clock;
-+	u32 ret;
-+
-+	dev->base = map_sysmem(dev_read_addr(bus), sizeof(struct twi_regs));
-+
-+	if (!dev->base)
-+		return -ENOMEM;
-+
-+	dev->speed = dev_read_u32_default(bus, "clock-frequency",
-+					  I2C_SPEED_FAST_RATE);
-+
-+	ret = clk_get_by_name(bus, "i2c", &clock);
-+	if (ret < 0)
-+		printf("%s: Can't get I2C clk: %d\n", __func__, ret);
-+	else
-+		dev->i2c_clk = clk_get_rate(&clock);
-+
-+	return 0;
-+}
-+
-+static int adi_i2c_probe_chip(struct udevice *bus, u32 chip_addr,
-+			      u32 chip_flags)
-+{
-+	struct adi_i2c_dev *dev = dev_get_priv(bus);
-+	u8 byte;
-+
-+	return adi_i2c_read(dev->base, chip_addr, NULL, 0, &byte, 1);
-+}
-+
-+static int adi_i2c_xfer(struct udevice *bus, struct i2c_msg *msg, int nmsgs)
-+{
-+	struct adi_i2c_dev *dev = dev_get_priv(bus);
-+	struct i2c_msg *dmsg, *omsg, dummy;
-+
-+	memset(&dummy, 0, sizeof(struct i2c_msg));
-+
-+	/*
-+	 * We expect either two messages (one with an offset and one with the
-+	 * actual data) or one message (just data)
-+	 */
-+	if (nmsgs > 2 || nmsgs == 0) {
-+		debug("%s: Only one or two messages are supported.", __func__);
-+		return -EINVAL;
++		iowrite16(BIT(offset), portbase + ADSP_PORT_REG_DIR_SET);
++		iowrite16(BIT(offset), portbase + ADSP_PORT_REG_INEN_CLEAR);
++		return 0;
 +	}
 +
-+	omsg = nmsgs == 1 ? &dummy : msg;
-+	dmsg = nmsgs == 1 ? msg : msg + 1;
-+
-+	if (dmsg->flags & I2C_M_RD)
-+		return adi_i2c_read(dev->base, dmsg->addr, omsg->buf, omsg->len,
-+				  dmsg->buf, dmsg->len);
-+	else
-+		return adi_i2c_write(dev->base, dmsg->addr, omsg->buf, omsg->len,
-+				   dmsg->buf, dmsg->len);
++	return -EINVAL;
 +}
 +
-+int adi_i2c_probe(struct udevice *bus)
++static int adsp_gpio_get_value(struct udevice *udev, unsigned int pin)
 +{
-+	struct adi_i2c_dev *dev = dev_get_priv(bus);
-+	struct twi_regs *twi = dev->base;
++	struct adsp_gpio_priv *priv = dev_get_priv(udev);
++	u32 port, offset;
++	u16 val;
++	void __iomem *portbase;
 +
-+	u16 prescale = ((dev->i2c_clk / 1000 / 1000 + 5) / 10) & 0x7F;
++	if (pin < priv->ngpio) {
++		port = get_port(pin);
++		offset = get_offset(pin);
++		portbase = priv->base + port * ADSP_PORT_MMIO_SIZE;
 +
-+	/* Set TWI internal clock as 10MHz */
-+	writew(prescale, &twi->control);
-+
-+	/* Set TWI interface clock as specified */
-+	adi_i2c_set_bus_speed(bus, dev->speed);
-+
-+	/* Enable it */
-+	writew(TWI_ENA | prescale, &twi->control);
++		val = ioread16(portbase + ADSP_PORT_REG_DATA);
++		return !!(val & BIT(offset));
++	}
 +
 +	return 0;
 +}
 +
-+static const struct dm_i2c_ops adi_i2c_ops = {
-+	.xfer           = adi_i2c_xfer,
-+	.probe_chip     = adi_i2c_probe_chip,
-+	.set_bus_speed  = adi_i2c_set_bus_speed,
++static int adsp_gpio_set_value(struct udevice *udev, unsigned int pin, int value)
++{
++	struct adsp_gpio_priv *priv = dev_get_priv(udev);
++	u32 port, offset;
++	void __iomem *portbase;
++
++	if (pin < priv->ngpio) {
++		port = get_port(pin);
++		offset = get_offset(pin);
++		portbase = priv->base + port * ADSP_PORT_MMIO_SIZE;
++
++		if (value)
++			iowrite16(BIT(offset), portbase + ADSP_PORT_REG_DATA_SET);
++		else
++			iowrite16(BIT(offset), portbase + ADSP_PORT_REG_DATA_CLEAR);
++	}
++
++	return 0;
++}
++
++static const struct dm_gpio_ops adsp_gpio_ops = {
++	.direction_input = adsp_gpio_input,
++	.direction_output = adsp_gpio_output,
++	.get_value = adsp_gpio_get_value,
++	.set_value = adsp_gpio_set_value,
 +};
 +
-+static const struct udevice_id adi_i2c_ids[] = {
-+	{ .compatible = "adi-i2c", },
-+	{ /* sentinel */ }
++static int adsp_gpio_probe(struct udevice *udev)
++{
++	struct adsp_gpio_priv *priv = dev_get_priv(udev);
++	struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(udev);
++
++	uc_priv->bank_name = "adsp gpio";
++	uc_priv->gpio_count = dev_read_u32_default(udev, "adi,ngpios", 0);
++
++	if (!uc_priv->gpio_count) {
++		dev_err(udev, "Missing adi,ngpios property!\n");
++		return -ENOENT;
++	}
++
++	priv->base = dev_read_addr_ptr(udev);
++	priv->ngpio = uc_priv->gpio_count;
++
++	return 0;
++}
++
++static const struct udevice_id adsp_gpio_match[] = {
++	{ .compatible = "adi,adsp-gpio" },
++	{ },
 +};
 +
-+U_BOOT_DRIVER(i2c_adi) = {
-+	.name = "i2c_adi",
-+	.id = UCLASS_I2C,
-+	.of_match = adi_i2c_ids,
-+	.probe = adi_i2c_probe,
-+	.of_to_plat = adi_i2c_of_to_plat,
-+	.priv_auto = sizeof(struct adi_i2c_dev),
-+	.ops = &adi_i2c_ops,
++U_BOOT_DRIVER(adi_adsp_gpio) = {
++	.name	= "adi_adsp_gpio",
++	.id	= UCLASS_GPIO,
++	.ops	= &adsp_gpio_ops,
++	.probe	= adsp_gpio_probe,
++	.priv_auto = sizeof(struct adsp_gpio_priv),
++	.of_match = adsp_gpio_match,
 +	.flags = DM_FLAG_PRE_RELOC,
 +};
 
