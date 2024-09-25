@@ -4,58 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84631CCF9EB
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 01:36:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3259CCCFA10
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 02:47:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B22188B13;
-	Thu, 26 Sep 2024 03:36:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 7B7AA8891E;
+	Thu, 26 Sep 2024 04:47:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1727314612;
-	bh=Bd8OqEq4u7UNT3y4ARQUC4yyV4F04Ga/2/FhYansASU=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=ox1H1oBMBrliMUfUdvJnCzAI8J1/ZBaMvrMDv6nBKc26PbKIzDKVF7/g97qsyIwUc
-	 NqgzhjWFfsjbYhnqnn35mlxCRztATU74NpQbW/n+D0+AQnvgiYdbn/3CujSA2Xm2LP
-	 l66m38Ff0Vy1W7/GwIQr9ZSoB9GfeIrymtTMLki22N9GcH+wrbdhJ7X75zSSo3xRcL
-	 P1bIqFdMXesA+k+ZJMM+ZUNdJ7nbFXzLHxRJN5JlzfFhgeqARWFBlKeSHNzY138zpu
-	 xXM8hIySTSUchozi9yeeug9sUEDMvIPHSxAKIo4qQwb4180na0FGs5tGy+X1GT3lbR
-	 BexBPvqo+dXrQ==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="b1SPcICY";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 3925688CB8; Wed, 25 Sep 2024 14:57:02 +0200 (CEST)
+Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
+ [IPv6:2a00:1450:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id D8F2488B89;
- Thu, 26 Sep 2024 03:36:50 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1727314611;
- bh=Bd8OqEq4u7UNT3y4ARQUC4yyV4F04Ga/2/FhYansASU=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=SjCpNbaV3/4xj9oL7/e0wgBnIi0pnREZzI1tQkMLe37uUX8I0X1yLHaYRc+L54WJl
- rY+37DdalFFVJVMEUYT78sxrhBBu1HybW/dZ+ARf0E0xpsq3IWKCynygFTP3JchntR
- nK/zU3WbjvxZCo+nETwqqe5bEWdBzgqvnM0zOcuyir2uszbl0kJECiC872D2KMj10P
- 6WqFobOr7kM/GRpZJhQ/wE5ZKlYnuiA1KbttHMyNUKdjLLdUkBmsZyFgQazxmZqnlP
- ianZK7O4SIsQVW2gNgHxcnu+qyUZJG2NGa0chyGQVmrIVKVkFEydEzIovB+WwUozdK
- f2vhEKqYo1Lyw==
-Message-ID: <e294ce74-9b77-4de0-b7fc-0d8db9f1226f@denx.de>
-Date: Thu, 26 Sep 2024 03:33:18 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 4DE9088C7C
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 14:56:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-2f74e613a10so102363591fa.1
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 05:56:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1727269017; x=1727873817; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=TBhqg6rrOsSPl3tFjeJPPeRGg22MQOEOeY4bFAHpkXQ=;
+ b=b1SPcICYrotLl3HyHpTfGLUur3u/GJlHDRzttPuyFqBGVr08KLYTmdrU/UkxALNOq5
+ Vc9q4QmNW3fQj4VNdUEHmNHgPmgzvZg9Oi3q+uuFArdl9jd7Oxun4NJ7Dt5QO6I58cWQ
+ mszdWpAdslrdpNj67t1fBFiCd9U4Uyoxy1oCo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727269017; x=1727873817;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=TBhqg6rrOsSPl3tFjeJPPeRGg22MQOEOeY4bFAHpkXQ=;
+ b=sOsTv3O2IoP/5nPvs3SZx066ZLCv65d/uGg5K2yZD5Gs6eXDkP4PUc9L8OwXfHMrh4
+ FJ8hmjZywd0PVfQ+R0SXwkA3Eq605rsAPFBzWj5C4BokJxLcRWPppOBHJG2Hy+fNlUfA
+ P+ETGX3dOK/fwlqm3on9rzhpBVxk94g2bz9gCtdEn9ZXtTG/lFUtfRYYCHjIdwq+zm6W
+ +pTZH6dlkN0iI3NKi3NYe1O5bpis2LIT6gm3YUJc/6dQ2Qnx1L4UXvQSR9jpetd/uvkY
+ TyrOEQwDVvlQti8PpvtiGB9hNV5NdMzmF1RgGp2DXtpdcTPwAOtAk2GYkQiapFmGOTL/
+ 6K7g==
+X-Gm-Message-State: AOJu0Yy2yf3cDDX3se9Wu4VdHKV7JYhBkfsERYQc6HPybFJUNtT98wm6
+ oYohivds+bjFrd8jRv8ViNSMQaEb4FXNcHvQFBsDhqp5QRY7/EikMHvtGoeXHzueDF0OLvv+i8N
+ RMg==
+X-Google-Smtp-Source: AGHT+IFTgBKVQB2+Svfj82U46KunEpR9r22frwRpvBYIrZ1uRKoqgci8MINhw04VSUq3w6mrtcnWKQ==
+X-Received: by 2002:a05:6512:138d:b0:536:5339:35a6 with SMTP id
+ 2adb3069b0e04-5387756657emr1974019e87.53.1727269017147; 
+ Wed, 25 Sep 2024 05:56:57 -0700 (PDT)
+Received: from chromium.org ([82.132.187.73]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a93930f7889sm209209766b.179.2024.09.25.05.56.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 25 Sep 2024 05:56:56 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Albert Aribaud <albert.u.boot@aribaud.net>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Andrew Davis <afd@ti.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ =?UTF-8?q?Cs=C3=B3k=C3=A1s=20Bence?= <csokas.bence@prolan.hu>,
+ Devarsh Thakkar <devarsht@ti.com>, Gary Bisson <bisson.gary@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Lukas Funke <lukas.funke@weidmueller.com>,
+ Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
+ Mathieu Othacehe <m.othacehe@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Nishanth Menon <nm@ti.com>,
+ Paul Kocialkowski <contact@paulk.fr>, Peng Fan <peng.fan@nxp.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Robert Marko <robert.marko@sartura.hr>, Sam Edwards <CFSworks@gmail.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Samuel Holland <samuel@sholland.org>, Sean Anderson <seanga2@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Suniel Mahesh <sunil@amarulasolutions.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ qemu-devel@nongnu.org
+Subject: [PATCH 00/19] spl: Support a relocating jump between phases (VBE part
+ F)
+Date: Wed, 25 Sep 2024 14:55:26 +0200
+Message-ID: <20240925125622.197915-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/9] ARM: dts: socfpga: add Enclustra Intel AA1
-To: Lothar Rubusch <l.rubusch@gmail.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com,
- simon.k.r.goldschmidt@gmail.com, tien.fong.chee@intel.com
-References: <20240912060649.190-1-l.rubusch@gmail.com>
- <20240912060649.190-3-l.rubusch@gmail.com>
- <bf99c2bd-f43c-4041-907f-f60b42163cce@denx.de>
- <CAFXKEHbOpv4g5LZ4dkUpwo1OBrRQ7YKZf10=S-2HqMtSK_OE9g@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAFXKEHbOpv4g5LZ4dkUpwo1OBrRQ7YKZf10=S-2HqMtSK_OE9g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Thu, 26 Sep 2024 04:47:21 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,38 +116,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/26/24 12:49 AM, Lothar Rubusch wrote:
 
-Hi,
+This series includes a way to deal with multiple XPL phases being
+built to run from the same region of SRAM. This is useful because it may
+not be possible to fit all the different phases in different parts of
+the SRAM. Also it is a pain to have to build them with different values
+for CONFIG_TEXT_BASE such that they can be loaded at different
+addresses.
 
-> First of all a huge thank you for the time you spend in reviewing the
-> patches so far. This is highly appreciate!!
-> 
-> 
-> On Fri, Sep 13, 2024 at 1:11 AM Marek Vasut <marex@denx.de> wrote:
-> [...]
->> Is there any chance to upstream these DTs to Linux first , and then let
->> them all trickle into U-Boot through dts/upstream/ ?
-> 
-> Preparing the DTS patches for Linux kernel, I noticed I will need the
-> handoff setup for u-boot. AFAIK there is currently no single handoff.h
-> or handoff.dtsi file in the kernel repo.
-> 
-> Shall I add the files to my DTS patches and ask for upstreaming of the
-> handoff files into the kernel?
+The mechanism is to copy some relocation code to the top of memory, then
+load the next phase below that. Finally, the first phase jumps to the
+relocation code, which copies or decompresses the next phase,
+overwriting the first phase in the process. Finally, the relocation code
+jumps to the start of the next phase.
 
-Are the handoff files really used by Linux for anything , or do they 
-contain various clock/pinmux/DRAM settings only used by U-Boot ? If the 
-later, place them into U-Boot and include them from -u-boot.dtsi file.
+In this way the maximum amount of space can be used, particular if the
+next phase is compressed.
 
-> Example:
-> In specific for u-boot I need a .dts setup like this. Those files are
-> currently not in the kernel:
->      #include "socfpga_arria10_mercury_aa1_handoff.h"
->      #include "socfpga_arria10-handoff.dtsi"
->      #include "socfpga_arria10_handoff_u-boot.dtsi"
->      ...
-> 
-> Since this seems to be common for all socfpga setups (arria10 and
-> cyclone5), I guess the situation is already known by a common
-> approach. How to deal with this situation in u-boot dts/upstream?
+For this to work, some code in U-Boot must be placed in a 'rcode'
+(relocation code) section. This ensures it can be copied as a block,
+thus reducing the amount of the first-stage code which needs to survive
+the relocation process.
+
+For now there is a qemu-arm64 test for this feature, which ensures that
+the basic mechanism is sound. Further work will likely expand this test
+to include VPL and LZ4-compression, which so far have only been used on
+real hardware.
+
+Overall, without SPL_RELOC_LOADER enabled, this series provides a very
+small code-size benefit due to it dropping some unneeded symbols.
+
+
+Simon Glass (19):
+  spl: Reduce the size of the bl_len field
+  spl: Provide a way of indicating the phase to load
+  spl: Avoid including hash algorithms which are not wanted
+  spl: Provide a way to mark code needed for relocation
+  lib: Mark crc8 as relocation code
+  lib: Mark lz4 as relocation code
+  lib: Mark memcpy() and memmove() as relocation code
+  spl: Add a type for the jumper function
+  spl: Add support for a relocating jump to the next phase
+  spl: Plumb in the relocating loader
+  spl: Support jumping to VPL from TPL
+  spl: Record the correct name of the next phase
+  spl: Show how to fill in the size of the next image
+  spl: Add debugging in spl_set_header_raw_uboot()
+  arm: qemu: Allow SPL and TPL
+  arm: Add a new qemu_arm64_tpl board
+  arm: Provide an rcode section in ARMv8 link script
+  arm: qemu_arm64_tpl: Enable the relocating loader
+  CI: Add new test for reloc loader
+
+ .azure-pipelines.yml                  |   3 +
+ .gitlab-ci.yml                        |   6 +
+ MAINTAINERS                           |   6 +
+ arch/arm/Kconfig                      |   2 +
+ arch/arm/cpu/armv8/u-boot-spl.lds     |   8 ++
+ arch/arm/dts/qemu-arm64.dts           |  17 +++
+ arch/arm/mach-qemu/Kconfig            |  20 +++
+ board/emulation/qemu-arm/Kconfig      |   2 +-
+ board/emulation/qemu-arm/MAINTAINERS  |   5 +
+ board/emulation/qemu-arm/Makefile     |   1 +
+ board/emulation/qemu-arm/qemu-arm.env |   4 +
+ board/emulation/qemu-arm/xpl.c        |  50 +++++++
+ common/spl/Kconfig                    |   9 ++
+ common/spl/Kconfig.tpl                |   9 ++
+ common/spl/Kconfig.vpl                |   8 ++
+ common/spl/Makefile                   |   1 +
+ common/spl/spl.c                      |  45 +++++--
+ common/spl/spl_reloc.c                | 182 ++++++++++++++++++++++++++
+ configs/qemu_arm64_tpl_defconfig      |  83 ++++++++++++
+ doc/develop/spl.rst                   |  35 +++++
+ include/asm-generic/sections.h        |  16 +++
+ include/spl.h                         |  57 +++++++-
+ lib/Makefile                          |   6 +-
+ lib/crc8.c                            |   5 +-
+ lib/lz4.c                             |  27 ++--
+ lib/lz4_wrapper.c                     |   2 +-
+ lib/string.c                          |   5 +-
+ test/py/tests/test_reloc.py           |  21 +++
+ 28 files changed, 604 insertions(+), 31 deletions(-)
+ create mode 100644 board/emulation/qemu-arm/xpl.c
+ create mode 100644 common/spl/spl_reloc.c
+ create mode 100644 configs/qemu_arm64_tpl_defconfig
+ create mode 100644 test/py/tests/test_reloc.py
+
+-- 
+2.43.0
+
