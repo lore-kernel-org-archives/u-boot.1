@@ -4,52 +4,152 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1424CF9C69
-	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 00:11:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6F05CF9C69
+	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 01:41:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1DBAA88327;
-	Wed, 25 Sep 2024 02:11:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 0F65088BC2;
+	Wed, 25 Sep 2024 03:41:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1727223115;
-	bh=XjMP1yjwpYnEUbTRE8/VXoqJeY1tOvTE2KOdqz5QQE8=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=LvN8wnB9wQ6PSn+ZBL1G3BJotm4PNZzw7t6Kud7UVssIVP2R3MoJS6Kd3SpgEJOMB
-	 c4cFEJyLNyETgpaUi3ElWUU8xpfQndSBg7CC7gJaW45yxGkzxdFob35RS1m2MWitos
-	 WofT4gjWLUJ5RFllIg0X4wII2Z8LeUF5rYll7/rVnXxmHJpnkIidEsxYBid7V91yn5
-	 eD+6jGFJqg/Mbil2qljWXH4QxuQ9Lc8gcBbowThX1M39zsmGLirIw3FDD9NGaJluGO
-	 ZUqJajgf8NcwCwA+/LDZX692qktIkdzPlKRLfZdGUxWbk7kJvSyExZbzGr5fL4oITH
-	 56UlkDqq5HHYA==
-Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="H2yVyY5o";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 67948882B7; Wed, 25 Sep 2024 03:41:17 +0200 (CEST)
+Received: from EUR02-AM0-obe.outbound.protection.outlook.com
+ (mail-am0eur02on20711.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2606::711])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id BE62287E30;
- Wed, 25 Sep 2024 02:11:53 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1727223114;
- bh=XjMP1yjwpYnEUbTRE8/VXoqJeY1tOvTE2KOdqz5QQE8=;
- h=From:To:Cc:Subject:Date:From;
- b=JA/U0NkdKC9AEw2fQLei6jeoFk4V5xh+8nv/goPTGnJ1tJPTt6dBRPVGXmoD2B/nM
- q82uvheU362fdD1kiXb0WDgOyYWGWYNCPSNrQbZs5CXqla1p+DGe8DGFgF3Z3m1Ren
- g3glApxwBl4OqScmKkQTbcrRG9gX79FsUBj456qxaZ9KIk9i0UFhyb69PGGq2nPTjF
- 0u4F9itreEox1p95LgrNCmFQJLpLfg9QYRUzGIQLuLh7Y8fKoxkaGUtPovjTIlGLCV
- o9jwme6bC6n4Utu0YQLuNwHFagXiJx1FkNETuNPHd1NWtGvSBv59rlFYeudMXK1gx+
- l35SrCe/Ippew==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
- Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
-Subject: [PATCH] arm64: dts: imx8mp: Add DH i.MX8MP DHCOM SoM on DRC02 carrier
- board
-Date: Wed, 25 Sep 2024 02:09:23 +0200
-Message-ID: <20240925001119.667820-1-marex@denx.de>
+ by phobos.denx.de (Postfix) with ESMTPS id 67CD088B31
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 03:41:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=FevMLZSb0cUcJvpYrgyuPpaNTRSsfqzCCUlyuiNj3cbBtyg4PavJ31UoDxhK2QXacBWCJ7+KZeYZIvXvgwWJGXitHWN44HRhNpD0Dn+m5S7XrFYoMYr5uGYgEPVrtghFd7ok2dC8Oyja3zaAcTiwYwWcHfEAh7sMbQkhkoxWlo4P8z/tTO8sn2ugAOSJ9vxeH8Yi9tWbu7mXmbZZfqUXwX4mRbU9VVJPkCBQ4XcITS+mzlSxzov+c+wqkXU/3LBkq09lvMlgxGGxGbyDT/Wk5vvklMy2P+HBhnEr+JDhDEa4o2yfW6fBJmHfVLhWvHVLtQ8PtKFLCy/oiGhOJZ+iyw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=16ac6L+BmCkNoJpY4qbIR2kyFL+6X8/4oUmJJLMgNmA=;
+ b=QPnEBst2QC/fsPpMC5cg9Kk9zz/Iqm79ClOO/qbq9fbDxMslS6EXZtLmWd0GX3AWRjhu6WoJmCp2F6rEMRYcGEIqnovsXc6bftM5O+R2OkDqSyJk9s2/E239ZySsVB3DU+Q3kDz0uwMNidH4lxl9kS1X/TyGlT9QbMteZg2aricN/EBxAD+yAucjv1J5HAkRpuWrnAzysRnisaZTRqUyRU7dJoYBq/QSyCG6mAUB10IHmd5l/zSdPz5HgUYhjE0Q5onxYcA4pm3R5eyt+E+4lOxJUzY5L57ryuCdwz9zrSGiBBbyI6Iaa6DfB294X833GpTUm+UVP98u2wB7bqAjMw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
+ dkim=pass header.d=iopsys.eu; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=16ac6L+BmCkNoJpY4qbIR2kyFL+6X8/4oUmJJLMgNmA=;
+ b=H2yVyY5oUEIak4hAIYFUyB1uYyT0E28lQmo3sqwplqnFrb+7wV5/oJoKP46Vh/sJQN0qdtQyCc+OhhiUOQJ4OiHfS+5AcLRhYamI/mVQje8CpOAxmcJ+ul/la6e5BT/L5gMYtIMjkWCmlQLCntQFXj2G40LOYFRHwH9DQnWpZ6ROgEU0LwSIbXlcb4TjUtKDi0+n3+HQjdNl5v53p8g6TtKSQNpKSYbOICYB6foAIacoezCu+tPb3mXEDYMVJJ9wqda9UWLbf/OLSz5RKpBzx7jKHWB/5VrYrtAqDWyLoIQeH9TUhMoIQLCiCNeFQb0znH7g3N2879auWXIGQqHwUA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=iopsys.eu;
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
+ by VE1PR08MB5645.eurprd08.prod.outlook.com (2603:10a6:800:1a6::23)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7962.16; Wed, 25 Sep
+ 2024 01:41:08 +0000
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0%2]) with mapi id 15.20.8005.010; Wed, 25 Sep 2024
+ 01:41:07 +0000
+From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Anand Moon <linux.amoon@gmail.com>, Marek Vasut <marex@denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Sean Anderson <seanga2@gmail.com>, Baruch Siach <baruch@tkos.co.il>,
+ Yasuharu Shibata <yasuharu.shibata@gmail.com>, u-boot@lists.denx.de
+Subject: [PATCH v8 00/13] net: tcp: improve tcp support
+Date: Wed, 25 Sep 2024 04:40:45 +0300
+Message-ID: <20240925014058.1679074-1-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.45.2
-MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: FR3P281CA0038.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:4a::14) To GV2PR08MB8121.eurprd08.prod.outlook.com
+ (2603:10a6:150:7d::22)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|VE1PR08MB5645:EE_
+X-MS-Office365-Filtering-Correlation-Id: d0bf2f1b-f20b-4c4d-73d5-08dcdd032008
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|52116014|7416014|366016|376014|1800799024|38350700014|921020; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?B5tv4xrnn/d5+umjfFVirwhm+09NJ/fe7SkBgYlVwlUeABE9n/5JSQA+Py/s?=
+ =?us-ascii?Q?KTdf/rq+ywbDzJ8+liC8uknoyd3ZnsX5z8VWaoYcbvwcfJi23oYUfea8WUzw?=
+ =?us-ascii?Q?hWkmQWlmXMUI9Kct6/dmxpDgmo74wC51rxIUsS2Vrg/q39cv1NinPIVEe/AS?=
+ =?us-ascii?Q?/rYPpwaZ587BwHjAAM1PBDgDe4/CuTk7metMsHqLpSFoJJDIxx6ZEhOavKdm?=
+ =?us-ascii?Q?KKDr2queR79WAn3jT1IUPIYOk+QxyhIHtU2PdQYr+Qp+8MtGRqtMBZvITcah?=
+ =?us-ascii?Q?lswXN84q9/XBLir13R9KdZPN9SouVP69SzwVwtvd0C6Qvl/GMh4jMsDuTlkX?=
+ =?us-ascii?Q?FNj6sxxsqwb4wZZ07EVBeH5AAqIP+VM7VxWypOEN1ktSh4lRBOD0E/ZFFe5e?=
+ =?us-ascii?Q?U0+fKhhRJg2nZDS3mIPIyIGyUeJ/Ay2CfmgzGMOP9oD/abrRM+IgKXW/kt94?=
+ =?us-ascii?Q?ik83oGogeJ0+huR5Zfb4kguv6PyHPgKREZPDub2Wt6pn3B7hFMMDUl3Ij/mY?=
+ =?us-ascii?Q?9V8sUVRCCKZtwkbjK5xxaywoeWAYBhGMNp+J5tlyth5noS63RInW1rdypxoy?=
+ =?us-ascii?Q?otmnESj1ToUiZvBUneyOuLA3q2COmfupNPgvC33p+d/hDrd17nwmTeJVczk6?=
+ =?us-ascii?Q?yHQMHFTAXxzIHgAYQxDrgYJ0i/zxKRXYW+Qrc8Y1sCrhDESh6kcn7D9Lyl07?=
+ =?us-ascii?Q?uXhr4B6DKdjSt55iBuTGAlO5JgDL2fk1aq9MMh266cQfHJBsvkCZrO6yCjSF?=
+ =?us-ascii?Q?+R5W8sAZJKgkpEsrXAR9PSKOA4ORvMtJsilxYzpAcl5ujuiZHePxt2Yppx/r?=
+ =?us-ascii?Q?TE8Naz+GE+35rd9pklbsdRzd4EdtiArEy48oQjhvPijYJ5WIkaaZNRsRvhwy?=
+ =?us-ascii?Q?ZVm7xlRxNh1c6PUmQsZEYDqWKTJvtvLXixtYWY7VnBbyoNizXhokuHzCM0p0?=
+ =?us-ascii?Q?TdAqGyC+5OXs+3bPLWzJ5g6tlIDNdY3TyMTpTH1AwurFtUoIubfJ9daR8evg?=
+ =?us-ascii?Q?5J0jXRv6rFvCd6vikzjhwXzWNDC08NNnFIyIBcmHYnkC7UkjEfnqt/g7k698?=
+ =?us-ascii?Q?kfiqKwnu6SF9P+o9B7WTOJE5oZodpmX0udoA80KSDC2m9xjSZ5YQ/NElRCz3?=
+ =?us-ascii?Q?HFO/aklbNkZkYX7/xvYniwtI0eEivg2ZzrO9KdyFkBvLjviCmT0b10Icryms?=
+ =?us-ascii?Q?LNvL6zOQW1B0KYr+mEJBxkrVuXWH9ZU//0gAJb20Jhorsbnl/k00H7i1z/Tb?=
+ =?us-ascii?Q?qG+g/ubZIe1dlY6YAotOSjG62qg+xEdO9XArfmQRYAzBiZElKp9PQplEfn++?=
+ =?us-ascii?Q?zGeGt1qs2E/LCRu46fXKwniYN6xvh2h8dTYbUl8q+TLB2mrRoyZoaawdwz5g?=
+ =?us-ascii?Q?J0Vhj/EBP9YvoNCi0o0H7SThSuh91DrcuMc99NR9EUtDJY+bLR2IfIyuxV7S?=
+ =?us-ascii?Q?PEa2dmpDCBw=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(52116014)(7416014)(366016)(376014)(1800799024)(38350700014)(921020);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Lxas3c8GaBB11gypLER6TcWz3HSL7BN9MhIt3+CDuuIWxPQRi9OZ//MrMXes?=
+ =?us-ascii?Q?FPA6HFjPWdGocPb2WVEtQywlOYW0W9esYs9ANvNkm0wzqZzXGWor4Rm3W0FB?=
+ =?us-ascii?Q?ksDDqj0Wnl7D5NfVcBXNPZbAYMsSSqy2ub+FNphJtCV4YwOvjGaKVd6/Z9jb?=
+ =?us-ascii?Q?EH5MdEqt9I9iKF0PQZWphvDeZwbbOAYHn8nYjoirnd7iBsOxJkQ7nJtloCvr?=
+ =?us-ascii?Q?Aq8oNtr/Ohs/MZFdTGNkfVnvaXqQYUgdM5nV0wJPu9j+fftYdwbqqh6OqJOO?=
+ =?us-ascii?Q?H+EWFJT6YFyvCMNgzOcQjpK1jTsh3OhWZ/j4HpmGVtxP7N25mc5kcEddsUyB?=
+ =?us-ascii?Q?91EAVPKMvqHM6uyQTBXyznNg27l1xmIeY0pOrz8FQG19wVNj7TsD/uTRmpIh?=
+ =?us-ascii?Q?M3twbBsIaKsghcrMZnO40c1u5fgze+YfdNMFCMvnVmQunSt0qxiWwEe0MUal?=
+ =?us-ascii?Q?Jjm2Nez2Nj6uxnJMvOY7pLBOid2/l9SMjsUWwL48VCikRHRdLXIUKwAuEitQ?=
+ =?us-ascii?Q?AFHuPAgFO3FaMsirWuRjstZeVTv4sfI53a+aafr1VbxNVidEeXQdSseKdD4B?=
+ =?us-ascii?Q?4dHEwMtmYJEXBTXQcp57J6udqT/5WlfbBDz2KZMlm58JkVU7PPDDtPt46S6J?=
+ =?us-ascii?Q?1Lq+VjXdiQ/uqAXfeAlm1dbKQQGSK+5aM+6Mm4OHCm+XtL2M3USU/JLNRpkg?=
+ =?us-ascii?Q?1k2S0UXG/AED3sbFGtXF8bh0783tG+UPgKYjCffV/ScUZxHlJmeAgQHM+Yzh?=
+ =?us-ascii?Q?BHRPA+sdgKPcPP/ROzHsedGIuhSDjX8Kc1f8Dupfv+KFLw3ajYSUxliEL1L3?=
+ =?us-ascii?Q?X8L7SkTMzTMzt2Scydm4+VCqQ3seQ3yZT7ma+HOLBgl/S+C0+SQeu0RhT3AI?=
+ =?us-ascii?Q?xoOcjHimnDNIQIWmdGnm1iU48eh/7VGAsitlIXY5iHP4lVePvanML32noUhP?=
+ =?us-ascii?Q?ldwX2mA4uLSWiTIgxt5wlihI1YYui6PmP0HfCS/pLi5HxRANt7OpHTdEMxtR?=
+ =?us-ascii?Q?O76rrqJBleTC7ylSz4pViEnYqKBPh7+VNwYEgr1bIgX0teI/Usbe23U7uaML?=
+ =?us-ascii?Q?veh4v0s9Dy9ooOtxzZeYtYONPqgl6HGT6Z0Bs8x7gO4ecm5dBdSNSbob7Bmy?=
+ =?us-ascii?Q?z+yYXScr16Shfj0gvTg1YVoFkM3XW0ZakoPVVCFvIHCZKgbDFyfjvSuP5Ijx?=
+ =?us-ascii?Q?mLEOSbtrOU2d8azgYN9hdN9E7ElJkgaYr3jr3jbQNEq3wvrnIk7PtraKff1y?=
+ =?us-ascii?Q?Y2zfUEw/nBP+8AFlO5CUrWQEc/ILmGA/NNWd8i3U+JY9oi8tqyhp7BUBAxJZ?=
+ =?us-ascii?Q?r5K5i6s5RkDGRgxx6torY7LChfPZEk+WU+hoL0DCxWSVx/G/z2FTsB+UaMMU?=
+ =?us-ascii?Q?ajWPqe2IMrDB9q16TdMjnVjAbElruoO+8a/yqeOHHKSgLIpS4/rmeBzQu2Im?=
+ =?us-ascii?Q?AxMmoGvgEgUUxRBbqHtx1wkFuGu0rnbfFRuQdQZ0/16I4AAQgmmCCYQit+sV?=
+ =?us-ascii?Q?LVpkXev0d5aFXBQf22/xDtNYuE4CbyjxLYrr9FTAAVlcMflIP58R4V2lDaXB?=
+ =?us-ascii?Q?vBIReEczuHzyHpEs3AhGVVqvIkhNmBiINsvmr9QizdCz7vdakESJB0KCTA+L?=
+ =?us-ascii?Q?yQ=3D=3D?=
+X-OriginatorOrg: iopsys.eu
+X-MS-Exchange-CrossTenant-Network-Message-Id: d0bf2f1b-f20b-4c4d-73d5-08dcdd032008
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Sep 2024 01:41:07.3363 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: P5rqTaw4Harnh+eb70pEr2IIXpaOyoDyQSW9yqRyN53TjQ4GuO5uDF54a9tyyVlXjKLd7QMtLgYTJtsJHnEUt463srgX01U3DRprjiFyp3U=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VE1PR08MB5645
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,571 +166,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for DH electronics i.MX8MP DHCOM SoM on DRC02 carrier board.
-This system is populated with two ethernet ports, two CANs, RS485 and RS232,
-USB, capacitive buttons and an OLED display.
+U-Boot support of LWIP is not ready for a moment, but we already have
+some kind of tcp support. Unfrotunately this support is really bad.
 
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-Cc: Fabio Estevam <festevam@gmail.com>
-Cc: Stefano Babic <sbabic@denx.de>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@dh-electronics.com
-Cc: u-boot@lists.denx.de
----
- arch/arm/dts/Makefile                       |   1 +
- arch/arm/dts/imx8mp-dhcom-drc02-u-boot.dtsi |   6 +
- arch/arm/dts/imx8mp-dhcom-drc02.dts         | 230 ++++++++++++++++
- configs/imx8mp_dhcom_drc02_defconfig        | 277 ++++++++++++++++++++
- 4 files changed, 514 insertions(+)
- create mode 100644 arch/arm/dts/imx8mp-dhcom-drc02-u-boot.dtsi
- create mode 100644 arch/arm/dts/imx8mp-dhcom-drc02.dts
- create mode 100644 configs/imx8mp_dhcom_drc02_defconfig
+Some of the known issues:
+ * tcp packet from other connection can break a current one
+ * tcp send sequence always starts from zero
+ * bad tcp options processing
+ * strange assumptions on packet size for selectiv acknowledge
+ * tcp interface assumes one of the two scenarios:
+     - data downloading from remote host to a board
+     - request-response exchange with a small packets
+   so it's not possible to upload large amount of data from the
+   board to remote host.
+ * wget test generate bad tcp stream, test should fail but it passes instead
 
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index b3fe3f3c535..cdb90f1d358 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -968,6 +968,7 @@ dtb-$(CONFIG_ARCH_IMX8M) += \
- 	imx8mp-dhcom-som-overlay-eth2xfast.dtbo \
- 	imx8mp-dhcom-pdk-overlay-eth2xfast.dtbo \
- 	imx8mp-debix-model-a.dtb \
-+	imx8mp-dhcom-drc02.dtb \
- 	imx8mp-dhcom-pdk2.dtb \
- 	imx8mp-dhcom-pdk3.dtb \
- 	imx8mp-dhcom-pdk3-overlay-rev100.dtbo \
-diff --git a/arch/arm/dts/imx8mp-dhcom-drc02-u-boot.dtsi b/arch/arm/dts/imx8mp-dhcom-drc02-u-boot.dtsi
-new file mode 100644
-index 00000000000..8a23b117d9a
---- /dev/null
-+++ b/arch/arm/dts/imx8mp-dhcom-drc02-u-boot.dtsi
-@@ -0,0 +1,6 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+/*
-+ * Copyright (C) 2024 Marek Vasut <marex@denx.de>
-+ */
-+
-+#include "imx8mp-dhcom-u-boot.dtsi"
-diff --git a/arch/arm/dts/imx8mp-dhcom-drc02.dts b/arch/arm/dts/imx8mp-dhcom-drc02.dts
-new file mode 100644
-index 00000000000..b3ab6e94508
---- /dev/null
-+++ b/arch/arm/dts/imx8mp-dhcom-drc02.dts
-@@ -0,0 +1,230 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+/*
-+ * Copyright (C) 2024 Marek Vasut <marex@denx.de>
-+ *
-+ * DHCOM iMX8MP variant:
-+ * DHCM-iMX8ML8-C160-R204-F1638-SPI16-E2-CAN2-RTC-I-01D2
-+ * DHCOM PCB number: 660-100 or newer
-+ * DRC02 PCB number: 568-100 or newer
-+ */
-+
-+/dts-v1/;
-+
-+#include <dt-bindings/leds/common.h>
-+#include <dt-bindings/phy/phy-imx8-pcie.h>
-+#include "imx8mp-dhcom-som.dtsi"
-+
-+/ {
-+	model = "DH electronics i.MX8M Plus DHCOM on DRC02";
-+	compatible = "dh,imx8mp-dhcom-drc02", "dh,imx8mp-dhcom-som",
-+		     "fsl,imx8mp";
-+
-+	chosen {
-+		stdout-path = &uart1;
-+	};
-+};
-+
-+&eqos {	/* First ethernet */
-+	pinctrl-0 = <&pinctrl_eqos_rmii>;
-+	phy-handle = <&ethphy0f>;
-+	phy-mode = "rmii";
-+
-+	assigned-clock-parents = <&clk IMX8MP_SYS_PLL1_266M>,
-+				 <&clk IMX8MP_SYS_PLL2_100M>,
-+				 <&clk IMX8MP_SYS_PLL2_50M>;
-+	assigned-clock-rates = <0>, <100000000>, <50000000>;
-+};
-+
-+&ethphy0g {	/* Micrel KSZ9131RNXI */
-+	status = "disabled";
-+};
-+
-+&ethphy0f {	/* SMSC LAN8740Ai */
-+	status = "okay";
-+};
-+
-+&fec {	/* Second ethernet */
-+	pinctrl-0 = <&pinctrl_fec_rmii>;
-+	phy-handle = <&ethphy1f>;
-+	phy-mode = "rmii";
-+	status = "okay";
-+
-+	assigned-clock-parents = <&clk IMX8MP_SYS_PLL1_266M>,
-+				 <&clk IMX8MP_SYS_PLL2_100M>,
-+				 <&clk IMX8MP_SYS_PLL2_50M>,
-+				 <&clk IMX8MP_SYS_PLL2_50M>;
-+	assigned-clock-rates = <0>, <100000000>, <50000000>, <0>;
-+};
-+
-+&ethphy1f {	/* SMSC LAN8740Ai */
-+	status = "okay";
-+};
-+
-+&flexcan1 {
-+	status = "okay";
-+};
-+
-+&flexcan2 {
-+	status = "okay";
-+};
-+
-+&gpio1 {
-+	gpio-line-names =
-+		"DRC02-In1", "", "", "", "", "DHCOM-I", "DRC02-HW2", "DRC02-HW0",
-+		"DHCOM-B", "DHCOM-A", "", "DHCOM-H", "", "", "", "",
-+		"", "", "", "", "", "", "", "",
-+		"", "", "", "", "", "", "", "";
-+
-+	/*
-+	 * NOTE: On DRC02, the RS485_RX_En is controlled by a separate
-+	 * GPIO line, however the i.MX8 UART driver assumes RX happens
-+	 * during TX anyway and that it only controls drive enable DE
-+	 * line. Hence, the RX is always enabled here.
-+	 */
-+	rs485-rx-en-hog {
-+		gpio-hog;
-+		gpios = <13 0>; /* GPIO Q */
-+		line-name = "rs485-rx-en";
-+		output-low;
-+	};
-+};
-+
-+&gpio2 {
-+	gpio-line-names =
-+		"", "", "", "", "", "", "", "",
-+		"DHCOM-O", "DHCOM-N", "", "SOM-HW1", "", "", "", "",
-+		"", "", "", "", "DRC02-In2", "", "", "",
-+		"", "", "", "", "", "", "", "";
-+};
-+
-+&gpio3 {
-+	gpio-line-names =
-+		"", "", "", "", "", "", "", "",
-+		"", "", "", "", "", "", "SOM-HW0", "",
-+		"", "", "", "", "", "", "SOM-MEM0", "SOM-MEM1",
-+		"SOM-MEM2", "SOM-HW2", "", "", "", "", "", "";
-+};
-+
-+&gpio4 {
-+	gpio-line-names =
-+		"", "", "", "", "", "", "", "",
-+		"", "", "", "", "", "", "", "",
-+		"", "", "", "SOM-HW1", "", "", "", "",
-+		"", "", "", "DRC02-Out2", "", "", "", "";
-+};
-+
-+&gpio5 {
-+	gpio-line-names =
-+		"", "", "DHCOM-C", "", "", "", "", "",
-+		"", "", "", "", "", "", "", "",
-+		"", "", "", "", "", "", "DHCOM-E", "DRC02-Out1",
-+		"", "", "", "", "", "", "", "";
-+};
-+
-+&i2c3 {
-+	/* Resistive touch controller not populated on this one SoM variant. */
-+	touchscreen@49 {
-+		status = "disabled";
-+	};
-+};
-+
-+&pcie_phy {
-+	status = "disabled";
-+};
-+
-+&pcie {
-+	status = "disabled";
-+};
-+
-+/* Console UART */
-+&pinctrl_uart1 {
-+	fsl,pins = <
-+		/* No pull-ups on DRC02, enable in-SoC pull-ups */
-+		MX8MP_IOMUXC_SAI2_RXC__UART1_DCE_RX		0x149
-+		MX8MP_IOMUXC_SAI2_RXFS__UART1_DCE_TX		0x149
-+	>;
-+};
-+
-+&pinctrl_uart3 {
-+	fsl,pins = <
-+		/* No pull-ups on DRC02, enable in-SoC pull-ups */
-+		MX8MP_IOMUXC_ECSPI1_SCLK__UART3_DCE_RX		0x149
-+		MX8MP_IOMUXC_ECSPI1_MOSI__UART3_DCE_TX		0x149
-+	>;
-+};
-+
-+&uart1 {
-+	/*
-+	 * Due to the use of CAN2 the signals for CAN2 Tx and Rx are routed to
-+	 * DHCOM UART1 RTS/CTS pins. Therefore this UART have to use DHCOM GPIOs
-+	 * for RTS/CTS. So configure DHCOM GPIO I as RTS and GPIO M as CTS.
-+	 */
-+	/delete-property/ uart-has-rtscts;
-+	cts-gpios = <&gpio5 5 GPIO_ACTIVE_HIGH>; /* GPIO M */
-+	pinctrl-0 = <&pinctrl_uart1 &pinctrl_dhcom_i &pinctrl_dhcom_m>;
-+	pinctrl-names = "default";
-+	rts-gpios = <&gpio1 5 GPIO_ACTIVE_HIGH>; /* GPIO I */
-+};
-+
-+&uart3 {
-+	/*
-+	 * On DRC02 this UART is used as RS485 interface and RS485_TX_En is
-+	 * controlled by DHCOM GPIO P. So remove RTS/CTS pins and the property
-+	 * uart-has-rtscts from this UART and add the DHCOM GPIO P pin via
-+	 * rts-gpios. The RS485_RX_En is controlled by DHCOM GPIO Q, see gpio1
-+	 * node above.
-+	 */
-+	/delete-property/ uart-has-rtscts;
-+	linux,rs485-enabled-at-boot-time;
-+	pinctrl-0 = <&pinctrl_uart3 &pinctrl_dhcom_p &pinctrl_dhcom_q>;
-+	pinctrl-names = "default";
-+	rts-gpios = <&gpio2 10 GPIO_ACTIVE_HIGH>; /* GPIO P */
-+};
-+
-+/* No WiFi/BT chipset on this SoM variant. */
-+&uart2 {
-+	bluetooth {
-+		status = "disabled";
-+	};
-+};
-+
-+/* USB_OTG port is not routed out on DRC02. */
-+&usb3_0 {
-+	status = "disabled";
-+};
-+
-+&usb_dwc3_0 {
-+	status = "disabled";
-+};
-+
-+/* USB_HOST port has USB Hub connected to it, PWR/OC pins are unused */
-+&usb3_1 {
-+	fsl,disable-port-power-control;
-+	fsl,permanently-attached;
-+};
-+
-+&usb_dwc3_1 {
-+	dr_mode = "host";
-+	maximum-speed = "high-speed";
-+};
-+
-+/* No WiFi/BT chipset on this SoM variant. */
-+&usdhc1 {
-+	status = "disabled";
-+};
-+
-+&iomuxc {
-+	/*
-+	 * GPIO I is connected to UART1_RTS
-+	 * GPIO M is connected to UART1_CTS
-+	 * GPIO P is connected to RS485_TX_En
-+	 * GPIO Q is connected to RS485_RX_En
-+	 */
-+	pinctrl-0 = <&pinctrl_hog_base
-+		     &pinctrl_dhcom_a &pinctrl_dhcom_b &pinctrl_dhcom_c
-+		     &pinctrl_dhcom_d &pinctrl_dhcom_e &pinctrl_dhcom_f
-+		     &pinctrl_dhcom_g &pinctrl_dhcom_h &pinctrl_dhcom_j
-+		     &pinctrl_dhcom_k &pinctrl_dhcom_l &pinctrl_dhcom_n
-+		     &pinctrl_dhcom_o &pinctrl_dhcom_r &pinctrl_dhcom_s
-+		     &pinctrl_dhcom_int>;
-+};
-diff --git a/configs/imx8mp_dhcom_drc02_defconfig b/configs/imx8mp_dhcom_drc02_defconfig
-new file mode 100644
-index 00000000000..7c684d3bea5
---- /dev/null
-+++ b/configs/imx8mp_dhcom_drc02_defconfig
-@@ -0,0 +1,277 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_IMX8M=y
-+CONFIG_TEXT_BASE=0x40200000
-+CONFIG_SYS_MALLOC_LEN=0x1000000
-+CONFIG_SYS_MALLOC_F_LEN=0x18000
-+CONFIG_SPL_GPIO=y
-+CONFIG_SPL_LIBCOMMON_SUPPORT=y
-+CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_NR_DRAM_BANKS=2
-+CONFIG_SF_DEFAULT_SPEED=50000000
-+CONFIG_ENV_SIZE=0x10000
-+CONFIG_ENV_OFFSET=0xFE0000
-+CONFIG_ENV_SECT_SIZE=0x1000
-+CONFIG_DM_GPIO=y
-+CONFIG_DEFAULT_DEVICE_TREE="imx8mp-dhcom-drc02"
-+CONFIG_SPL_TEXT_BASE=0x920000
-+CONFIG_TARGET_IMX8MP_DH_DHCOM_PDK2=y
-+CONFIG_DM_RESET=y
-+CONFIG_SYS_MONITOR_LEN=1048576
-+CONFIG_SPL_MMC=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_BOOTCOUNT_BOOTLIMIT=3
-+CONFIG_SYS_BOOTCOUNT_ADDR=0x30370090
-+CONFIG_SPL_STACK=0x96fc00
-+CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-+CONFIG_SPL_BSS_START_ADDR=0x96fc00
-+CONFIG_SPL_BSS_MAX_SIZE=0x400
-+CONFIG_SPL=y
-+CONFIG_SYS_BOOTCOUNT_SINGLEWORD=y
-+CONFIG_DEBUG_UART_BASE=0x30860000
-+CONFIG_DEBUG_UART_CLOCK=24000000
-+CONFIG_ENV_OFFSET_REDUND=0xFF0000
-+CONFIG_IMX_BOOTAUX=y
-+CONFIG_SPL_IMX_ROMAPI_LOADADDR=0x48000000
-+CONFIG_SYS_LOAD_ADDR=0x50000000
-+CONFIG_PCI=y
-+CONFIG_DEBUG_UART=y
-+CONFIG_ENV_VARS_UBOOT_CONFIG=y
-+CONFIG_FIT=y
-+CONFIG_FIT_EXTERNAL_OFFSET=0x3000
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_SPL_LOAD_FIT_ADDRESS=0x44000000
-+CONFIG_SPL_LOAD_FIT_APPLY_OVERLAY=y
-+CONFIG_SYS_BOOTM_LEN=0x8000000
-+CONFIG_SUPPORT_RAW_INITRD=y
-+CONFIG_OF_SYSTEM_SETUP=y
-+CONFIG_USE_BOOTARGS=y
-+CONFIG_USE_BOOTCOMMAND=y
-+CONFIG_BOOTCOMMAND="run dh_update_env distro_bootcmd ; reset"
-+CONFIG_USE_PREBOOT=y
-+CONFIG_PREBOOT=""
-+CONFIG_DEFAULT_FDT_FILE="imx8mp-dhcom-drc02.dtb"
-+CONFIG_SYS_CBSIZE=2048
-+CONFIG_SYS_PBSIZE=2081
-+CONFIG_CONSOLE_MUX=y
-+CONFIG_SYS_CONSOLE_ENV_OVERWRITE=y
-+CONFIG_ARCH_MISC_INIT=y
-+CONFIG_BOARD_LATE_INIT=y
-+CONFIG_SPL_MAX_SIZE=0x26000
-+CONFIG_SPL_BOARD_INIT=y
-+CONFIG_SPL_BOOTROM_SUPPORT=y
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-+CONFIG_SPL_SYS_MALLOC=y
-+CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
-+CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x4c000000
-+CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
-+# CONFIG_SPL_FIT_IMAGE_TINY is not set
-+CONFIG_SPL_I2C=y
-+CONFIG_SPL_POWER=y
-+CONFIG_SPL_WATCHDOG=y
-+CONFIG_HUSH_PARSER=y
-+CONFIG_SYS_PROMPT="u-boot=> "
-+# CONFIG_BOOTM_NETBSD is not set
-+# CONFIG_BOOTM_PLAN9 is not set
-+# CONFIG_BOOTM_RTEMS is not set
-+# CONFIG_BOOTM_VXWORKS is not set
-+CONFIG_CMD_ASKENV=y
-+# CONFIG_CMD_EXPORTENV is not set
-+CONFIG_CMD_ERASEENV=y
-+CONFIG_CRC32_VERIFY=y
-+CONFIG_CMD_EEPROM=y
-+CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
-+CONFIG_SYS_EEPROM_SIZE=16384
-+CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=6
-+CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=20
-+CONFIG_CMD_MD5SUM=y
-+CONFIG_MD5SUM_VERIFY=y
-+CONFIG_CMD_MEMTEST=y
-+CONFIG_CMD_SHA1SUM=y
-+CONFIG_SHA1SUM_VERIFY=y
-+CONFIG_CMD_CLK=y
-+CONFIG_CMD_DFU=y
-+CONFIG_CMD_FUSE=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_GPT_RENAME=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_LSBLK=y
-+CONFIG_CMD_MBR=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_BKOPS_ENABLE=y
-+CONFIG_CMD_MTD=y
-+CONFIG_CMD_PART=y
-+CONFIG_CMD_PCI=y
-+CONFIG_CMD_READ=y
-+CONFIG_CMD_SPI=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_USB_SDP=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
-+CONFIG_CMD_CAT=y
-+CONFIG_CMD_XXD=y
-+CONFIG_CMD_DHCP=y
-+CONFIG_CMD_DHCP6=y
-+CONFIG_CMD_TFTPPUT=y
-+CONFIG_CMD_WGET=y
-+CONFIG_CMD_MII=y
-+CONFIG_CMD_PING=y
-+CONFIG_CMD_PXE=y
-+CONFIG_CMD_BOOTCOUNT=y
-+CONFIG_CMD_CACHE=y
-+CONFIG_CMD_TIME=y
-+CONFIG_CMD_GETTIME=y
-+CONFIG_CMD_KASLRSEED=y
-+CONFIG_CMD_SYSBOOT=y
-+CONFIG_CMD_UUID=y
-+CONFIG_CMD_PMIC=y
-+CONFIG_CMD_REGULATOR=y
-+CONFIG_CMD_SMC=y
-+CONFIG_HASH_VERIFY=y
-+CONFIG_CMD_BTRFS=y
-+CONFIG_CMD_EXT2=y
-+CONFIG_CMD_EXT4=y
-+CONFIG_CMD_EXT4_WRITE=y
-+CONFIG_CMD_FAT=y
-+CONFIG_CMD_FS_GENERIC=y
-+CONFIG_CMD_FS_UUID=y
-+CONFIG_CMD_MTDPARTS=y
-+CONFIG_CMD_MTDPARTS_SHOW_NET_SIZES=y
-+CONFIG_MTDIDS_DEFAULT="nor0=flash@0"
-+CONFIG_MTDPARTS_DEFAULT="mtdparts=flash@0:-(sf)"
-+CONFIG_MMC_SPEED_MODE_SET=y
-+CONFIG_PARTITION_TYPE_GUID=y
-+CONFIG_OF_CONTROL=y
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_ENV_OVERWRITE=y
-+CONFIG_ENV_IS_NOWHERE=y
-+CONFIG_ENV_IS_IN_SPI_FLASH=y
-+CONFIG_ENV_SECT_SIZE_AUTO=y
-+CONFIG_ENV_SPI_MAX_HZ=80000000
-+CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
-+CONFIG_VERSION_VARIABLE=y
-+CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_NETCONSOLE=y
-+CONFIG_IP_DEFRAG=y
-+CONFIG_TFTP_TSIZE=y
-+CONFIG_PROT_TCP_SACK=y
-+CONFIG_IPV6=y
-+CONFIG_SPL_DM=y
-+CONFIG_BOOTCOUNT_LIMIT=y
-+CONFIG_SYS_BOOTCOUNT_MAGIC=0xB0C40000
-+CONFIG_SPL_CLK_COMPOSITE_CCF=y
-+CONFIG_CLK_COMPOSITE_CCF=y
-+CONFIG_SPL_CLK_IMX8MP=y
-+CONFIG_CLK_IMX8MP=y
-+CONFIG_FSL_CAAM=y
-+CONFIG_IMX8M_DRAM_INLINE_ECC=y
-+CONFIG_DFU_TFTP=y
-+CONFIG_DFU_TIMEOUT=y
-+CONFIG_DFU_MMC=y
-+CONFIG_DFU_MTD=y
-+CONFIG_DFU_RAM=y
-+CONFIG_USB_FUNCTION_FASTBOOT=y
-+CONFIG_FASTBOOT_BUF_ADDR=0x42800000
-+CONFIG_FASTBOOT_BUF_SIZE=0x20000000
-+CONFIG_FASTBOOT_FLASH=y
-+CONFIG_FASTBOOT_FLASH_MMC_DEV=0
-+CONFIG_GPIO_HOG=y
-+CONFIG_SPL_GPIO_HOG=y
-+CONFIG_MXC_GPIO=y
-+CONFIG_DM_PCA953X=y
-+CONFIG_DM_I2C=y
-+CONFIG_I2C_MUX=y
-+CONFIG_I2C_MUX_PCA954x=y
-+# CONFIG_INPUT is not set
-+CONFIG_LED=y
-+CONFIG_LED_BLINK=y
-+CONFIG_LED_GPIO=y
-+CONFIG_I2C_EEPROM=y
-+CONFIG_SYS_I2C_EEPROM_ADDR=0x50
-+CONFIG_SUPPORT_EMMC_BOOT=y
-+CONFIG_MMC_IO_VOLTAGE=y
-+CONFIG_SPL_MMC_IO_VOLTAGE=y
-+CONFIG_MMC_UHS_SUPPORT=y
-+CONFIG_SPL_MMC_UHS_SUPPORT=y
-+CONFIG_MMC_HS400_ES_SUPPORT=y
-+CONFIG_MMC_HS400_SUPPORT=y
-+CONFIG_FSL_USDHC=y
-+CONFIG_MTD=y
-+CONFIG_DM_MTD=y
-+CONFIG_DM_SPI_FLASH=y
-+CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-+# CONFIG_SPI_FLASH_UNLOCK_ALL is not set
-+CONFIG_SPI_FLASH_WINBOND=y
-+CONFIG_SPI_FLASH_MTD=y
-+CONFIG_PHY_ANEG_TIMEOUT=20000
-+CONFIG_PHY_MICREL=y
-+CONFIG_PHY_MICREL_KSZ90X1=y
-+CONFIG_PHY_SMSC=y
-+CONFIG_DM_MDIO=y
-+CONFIG_DM_ETH_PHY=y
-+CONFIG_DWC_ETH_QOS=y
-+CONFIG_DWC_ETH_QOS_IMX=y
-+CONFIG_FEC_MXC=y
-+CONFIG_RGMII=y
-+CONFIG_MII=y
-+CONFIG_NVME_PCI=y
-+CONFIG_PCIE_DW_IMX=y
-+CONFIG_PHY_IMX8MQ_USB=y
-+CONFIG_PHY_IMX8M_PCIE=y
-+CONFIG_PINCTRL=y
-+CONFIG_SPL_PINCTRL=y
-+CONFIG_PINCTRL_IMX8M=y
-+CONFIG_POWER_DOMAIN=y
-+CONFIG_IMX8M_POWER_DOMAIN=y
-+CONFIG_IMX8MP_HSIOMIX_BLKCTRL=y
-+CONFIG_DM_PMIC=y
-+CONFIG_DM_PMIC_PCA9450=y
-+CONFIG_SPL_DM_PMIC_PCA9450=y
-+CONFIG_SPL_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_PCA9450=y
-+CONFIG_SPL_DM_REGULATOR_PCA9450=y
-+CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_DM_REGULATOR_GPIO=y
-+CONFIG_DM_RNG=y
-+CONFIG_DM_RTC=y
-+CONFIG_RTC_M41T62=y
-+CONFIG_CONS_INDEX=2
-+CONFIG_DM_SERIAL=y
-+# CONFIG_SPL_DM_SERIAL is not set
-+CONFIG_MXC_UART=y
-+CONFIG_SPI=y
-+CONFIG_DM_SPI=y
-+CONFIG_NXP_FSPI=y
-+CONFIG_MXC_SPI=y
-+CONFIG_SYSRESET=y
-+CONFIG_SPL_SYSRESET=y
-+CONFIG_SYSRESET_PSCI=y
-+CONFIG_SYSRESET_WATCHDOG=y
-+CONFIG_DM_THERMAL=y
-+CONFIG_IMX_TMU=y
-+CONFIG_USB=y
-+# CONFIG_SPL_DM_USB is not set
-+CONFIG_DM_USB_GADGET=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_XHCI_DWC3=y
-+CONFIG_USB_XHCI_DWC3_OF_SIMPLE=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_USB_STORAGE=y
-+CONFIG_USB_HOST_ETHER=y
-+CONFIG_USB_ETHER_ASIX=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_MANUFACTURER="DH electronics"
-+CONFIG_USB_GADGET_VENDOR_NUM=0x0525
-+CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
-+CONFIG_USB_FUNCTION_ACM=y
-+CONFIG_USB_ETHER=y
-+CONFIG_USB_ETH_CDC=y
-+CONFIG_IMX_WATCHDOG=y
+This series of patches fixes all of the above issuess.
+
+The benefits:
+ * A lot of bug was fixed
+ * Better and more reliable TCP state machine
+ * Tcp cliens becomes smaller/simpler
+ * Data uploading was fixed (now it's possible to transmit a huge amount of
+   data from the board to remote host)
+ * Netcat over tcp was implemented. Netcat supports data downloading/uploading
+   from/to remote host in client/server mode.
+ * An example web-server implementation. This code can be used as a base
+   for web-based firmware uploading used by some vendors.
+
+Modification was verified with
+ * firmware downloading via u-boot wget command
+ * fastboot over tcp
+ * netcat linux client
+ * Firefox/Chrome/Edge using example web-server implementation
+
+Changes v2:
+ * cover letter was added
+ * some patches were removed
+
+Changes v3:
+ * better cover letter
+
+Changes v4:
+ * fix bug in debug output
+ * add more comments
+ * codestyle fixes
+
+Changes v5:
+ * old patches were ocasionally sent with v4
+ * add back web-server patches
+ * fix bug in debug output
+ * add more comments
+ * codestyle fixes
+
+Changes v6:
+ * fix the wget test
+ * improve description of "simplify tcp header filling code" patch
+
+Changes v7:
+ * fix include ordering
+ * improve option descriptions
+ * fix a lot of extra brackets and comparisons against NULL / 0
+ * add empty lines before final returns
+ * fixed a bug with zero size httpd uploads
+
+Changes v8:
+ * [tcp] add function to restart rx inactivity timeout. This may help
+        in the cases where remote peer waits for u-boot data, but u-boot
+        is busy with long executing action
+ * [httpd] add function returning underlying tcp stream from request id.
+        This (with the above change) allows avoid connection break
+        for the long processing post requests.
+
+Mikhail Kshevetskiy (13):
+  net/tcp: fix TCP options processing
+  net/tcp: fix selective acknowledge
+  net/tcp: put connection specific data into a tcp_stream structure
+  net/tcp: add connection info to tcp_stream structure
+  net/tcp: rename ack_edge and seq_init to more common rcv_nxt and irs
+  net/tcp: improve tcp framework, use better state machine
+  test/cmd/wget: fix the test
+  net/tcp: simplify tcp header filling code
+  net/tcp: define a fallback value for rcv_wnd size
+  net/net: fix include ordering
+  net/netcat: add netcat over tcp support
+  net/httpd: add httpd common code
+  net/httpd-upload: an example web-server implementation for file
+    uploading
+
+ arch/sandbox/include/asm/eth.h |    4 +
+ cmd/Kconfig                    |   35 +
+ cmd/net.c                      |   55 +-
+ include/net.h                  |    7 +-
+ include/net/httpd-upload.h     |   12 +
+ include/net/httpd.h            |   71 ++
+ include/net/netcat.h           |   20 +
+ include/net/tcp.h              |  250 ++++++-
+ include/net/wget.h             |    8 -
+ net/Kconfig                    |   14 +
+ net/Makefile                   |    3 +
+ net/fastboot_tcp.c             |  193 +++--
+ net/httpd-upload.c             |  170 +++++
+ net/httpd.c                    |  735 +++++++++++++++++++
+ net/net.c                      |   60 +-
+ net/netcat.c                   |  194 +++++
+ net/tcp.c                      | 1264 ++++++++++++++++++++++----------
+ net/wget.c                     |  481 ++++--------
+ test/cmd/wget.c                |   45 +-
+ 19 files changed, 2723 insertions(+), 898 deletions(-)
+ create mode 100644 include/net/httpd-upload.h
+ create mode 100644 include/net/httpd.h
+ create mode 100644 include/net/netcat.h
+ create mode 100644 net/httpd-upload.c
+ create mode 100644 net/httpd.c
+ create mode 100644 net/netcat.c
+
 -- 
 2.45.2
 
