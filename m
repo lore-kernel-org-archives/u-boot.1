@@ -4,55 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF9BAC369D9
-	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 12:27:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2DC5C369DC
+	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 12:28:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B83888D06;
+	by phobos.denx.de (Postfix) with ESMTP id 9CB1388D13;
 	Wed, 25 Sep 2024 14:25:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="LbBXl8Ng";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Sech0KmZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A1B988BB2; Wed, 25 Sep 2024 14:25:48 +0200 (CEST)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org
- [IPv6:2604:1380:45d1:ec00::3])
+ id 107A488C71; Wed, 25 Sep 2024 14:25:49 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 513CD88C60
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 14:25:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 30E9988C7C
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 14:25:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+Oliver.Gaskell.analog.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 40575A441D9;
- Wed, 25 Sep 2024 12:25:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 0231EC4CEC7;
+ by dfw.source.kernel.org (Postfix) with ESMTP id AEBB55C5C6C;
+ Wed, 25 Sep 2024 12:25:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 40EE0C4CED0;
  Wed, 25 Sep 2024 12:25:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1727267126;
- bh=vO46czpdfm61R/La7MOBckscYX4MPCXdzWZOlBdw7a0=;
+ bh=t87YKM5d+u4JEQVL4bz13CsPwKctQLcPtaJcIQS6hDI=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=LbBXl8NgbgFFS0I68IpHoMa/uMB8mkUJ3zOhJ5Lu/8KZ/dbtOJWxeLqjB2HjvOUim
- lMaNde21uRsh04Q0z1bXwLLRM9/2qrkbwpypK9pVx2SLcRj5djMzxac0s+AEf2SdCs
- pGMXWbAvrQ2lbdYzXOFLWAk+kHYADnXpY2q7goWwV46llH8PkT9mV8VMzhyOt9XBxe
- dV2yZ0ZKuB4QocFZ+vbGsnI8MQCN7conAJVCcZBX4tBJ66gAQuAdJQn4dIRpbfM+O2
- mpm424uT1jq1elkwe7cOqym42ixq6LLyKrmKoMvsz2pNGgvKb8dC1PECdoHYwU9dfN
- foJitdv3fJftQ==
+ b=Sech0KmZAICMbyI4apgm1FxmSXjuoGtr75Bp7EK6/5ShtS5ES8croOGrv+acBeq/h
+ qNBZoGu3ixRSwmthKBhrkmUq4wWTh3TSty5oR3ctDKLx7MBSUC8UFPsbvyfMnijvOW
+ r4+lfMLTxEBvKyzZFPyscXIn2C4k4p5biEe7BnM0MO4Yoh6vw3fzA8YMoM2rVH90H1
+ IA4jcofAZN3CbfZJSrSWy+TmkPrrUnv7xs4fOaq3Gv6G7kBtq2xE36bY56kMagEpfS
+ soZTVoBHRUnFUnvR8/7KUsVVj/mBSb+iM32lU2U+17CrAeKTlF55XwyS+6M0tyYeNE
+ P7wdv8wVbiYxw==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id E665DC369D7;
- Wed, 25 Sep 2024 12:25:25 +0000 (UTC)
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 364C1C369D7;
+ Wed, 25 Sep 2024 12:25:26 +0000 (UTC)
 From: Oliver Gaskell via B4 Relay
  <devnull+Oliver.Gaskell.analog.com@kernel.org>
-Date: Wed, 25 Sep 2024 13:25:11 +0100
-Subject: [PATCH v2 01/11] pinctrl: Add support for ADI SC5XX-family pinctrl
+Date: Wed, 25 Sep 2024 13:25:15 +0100
+Subject: [PATCH v2 05/11] i2c: Add support for ADI SC5XX-family I2C peripheral
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240925-sc5xx-driver-series-v2-1-ad9287c25c08@analog.com>
+Message-Id: <20240925-sc5xx-driver-series-v2-5-ad9287c25c08@analog.com>
 References: <20240925-sc5xx-driver-series-v2-0-ad9287c25c08@analog.com>
 In-Reply-To: <20240925-sc5xx-driver-series-v2-0-ad9287c25c08@analog.com>
 To: Tom Rini <trini@konsulko.com>, 
@@ -69,13 +68,14 @@ To: Tom Rini <trini@konsulko.com>,
  Jaehoon Chung <jh80.chung@samsung.com>
 Cc: u-boot@lists.denx.de, adsp-linux@analog.com, 
  Oliver Gaskell <Oliver.Gaskell@analog.com>, 
- 20240828-sc5xx-upstreaming-patches-v1-0-44d9adfdf327@analog.com
+ 20240828-sc5xx-upstreaming-patches-v1-0-44d9adfdf327@analog.com, 
+ Angelo Dureghello <angelo.dureghello@timesys.com>
 X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1727267113; l=7920;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1727267113; l=14746;
  i=Oliver.Gaskell@analog.com; s=20240821; h=from:subject:message-id;
- bh=4YNQ4PaVdrya+HmUBsJl7cS1ad9ZhmYIZnFWXc8qk5o=;
- b=3cxdBj997M64d2A45jeiIn6WmBTXuMtYmvOtvW0DftiBPhJOG/LuvmWDJchWAeGtuSNm7L6eC
- fCP+ji1+ef7Bv1/JQO+Y8d9iz1PwIeeQP9xypPcTQAx+CKYQtjnvRgj
+ bh=JDKC/jYCqH4t+IjEOFr3/YKA+eqdJg+RZ3XCuYGJYc0=;
+ b=OAoctgSnQ2KbOnFrGFSA7d+6G+qZizpJqA0g7aR2djyLX1eTvrzZICI+ELI+fSwtQk6wiu08C
+ wiUSopQ3v2zBOFZd6w7qZ2cpc4wk1+lfu00VkfH5MNEH/Iz3zVWo64M
 X-Developer-Key: i=Oliver.Gaskell@analog.com; a=ed25519;
  pk=Icq9TxwFJ6FePHS28YbBWMvtZpFWxpPQLhLA9cNvZ/Y=
 X-Endpoint-Received: by B4 Relay for Oliver.Gaskell@analog.com/20240821
@@ -100,259 +100,467 @@ X-Virus-Status: Clean
 
 From: Oliver Gaskell <Oliver.Gaskell@analog.com>
 
-This adds support for pin configuration on the Analog Devices SC5XX SoC
-family. This commit is largely a port of the Linux driver, which has not
-yet been submitted upstream.
-
-Co-developed-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
-Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+Co-developed-by: Greg Malysa <greg.malysa@timesys.com>
+Signed-off-by: Greg Malysa <greg.malysa@timesys.com>
 Co-developed-by: Ian Roberts <ian.roberts@timesys.com>
 Signed-off-by: Ian Roberts <ian.roberts@timesys.com>
+Co-developed-by: Angelo Dureghello <angelo.dureghello@timesys.com>
+Signed-off-by: Angelo Dureghello <angelo.dureghello@timesys.com>
 Signed-off-by: Vasileios Bimpikas <vasileios.bimpikas@analog.com>
 Signed-off-by: Utsav Agarwal <utsav.agarwal@analog.com>
 Signed-off-by: Arturs Artamonovs <arturs.artamonovs@analog.com>
-Signed-off-by: Greg Malysa <greg.malysa@timesys.com>
+Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
 Signed-off-by: Oliver Gaskell <Oliver.Gaskell@analog.com>
 ---
- MAINTAINERS                            |   1 +
- drivers/pinctrl/Kconfig                |   8 ++
- drivers/pinctrl/Makefile               |   1 +
- drivers/pinctrl/pinctrl-adi-adsp.c     | 156 +++++++++++++++++++++++++++++++++
- include/dt-bindings/pinctrl/adi-adsp.h |  21 +++++
- 5 files changed, 187 insertions(+)
+ MAINTAINERS           |   1 +
+ drivers/i2c/Kconfig   |   7 +
+ drivers/i2c/Makefile  |   1 +
+ drivers/i2c/adi_i2c.c | 395 ++++++++++++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 404 insertions(+)
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 0f4eee367d..9810ccc3e3 100644
+index 6b3b0bb9b3..101c0d6ed3 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -612,6 +612,7 @@ F:	doc/device-tree-bindings/arm/adi/adi,sc5xx.yaml
- F:	doc/device-tree-bindings/clock/adi,sc5xx-clocks.yaml
- F:	doc/device-tree-bindings/timer/adi,sc5xx-gptimer.yaml
+@@ -614,6 +614,7 @@ F:	doc/device-tree-bindings/timer/adi,sc5xx-gptimer.yaml
  F:	drivers/clk/adi/
-+F:	drivers/pinctrl/pinctrl-adi-adsp.c
+ F:	drivers/gpio/adp5588_gpio.c
+ F:	drivers/gpio/gpio-adi-adsp.c
++F:	drivers/i2c/adi_i2c.c
+ F:	drivers/pinctrl/pinctrl-adi-adsp.c
  F:	drivers/serial/serial_adi_uart4.c
  F:	drivers/timer/adi_sc5xx_timer.c
- F:	include/configs/sc5*
-diff --git a/drivers/pinctrl/Kconfig b/drivers/pinctrl/Kconfig
-index a1d53cfbdb..a88a444218 100644
---- a/drivers/pinctrl/Kconfig
-+++ b/drivers/pinctrl/Kconfig
-@@ -170,6 +170,14 @@ config PINCTRL_APPLE
- 	  both the GPIO definitions and pin control functions for each
- 	  available multiplex function.
+diff --git a/drivers/i2c/Kconfig b/drivers/i2c/Kconfig
+index 52067fa7c1..a84731824c 100644
+--- a/drivers/i2c/Kconfig
++++ b/drivers/i2c/Kconfig
+@@ -154,6 +154,13 @@ config SPL_DM_I2C_GPIO
+ 	  bindings are supported.
+ 	  Binding info: doc/device-tree-bindings/i2c/i2c-gpio.txt
  
-+config PINCTRL_ADI
-+	bool "ADI pinctrl driver"
-+	depends on DM && ARCH_SC5XX
++config SYS_I2C_ADI
++	bool "ADI I2C driver"
++	depends on DM_I2C && ARCH_SC5XX
 +	help
-+	  This driver enables pinctrl support on SC5xx processors. This
-+	  driver covers only the pin configuration functionality, and
-+	  GPIO functionality is contained in the separate GPIO driver.
++	  Add support for the ADI (Analog Devices) I2C driver as used
++	  in SC57X, SC58X, SC59X, SC59X_64.
 +
- config PINCTRL_AR933X
- 	bool "QCA/Athores ar933x pin control driver"
- 	depends on DM && SOC_AR933X
-diff --git a/drivers/pinctrl/Makefile b/drivers/pinctrl/Makefile
-index 6d7b7cd905..7dd56774bd 100644
---- a/drivers/pinctrl/Makefile
-+++ b/drivers/pinctrl/Makefile
-@@ -3,6 +3,7 @@
- obj-y					+= pinctrl-uclass.o
- obj-$(CONFIG_$(SPL_)PINCTRL_GENERIC)	+= pinctrl-generic.o
+ config SYS_I2C_AT91
+ 	bool "Atmel I2C driver"
+ 	depends on DM_I2C && ARCH_AT91
+diff --git a/drivers/i2c/Makefile b/drivers/i2c/Makefile
+index 00b90523c6..30c1a43a57 100644
+--- a/drivers/i2c/Makefile
++++ b/drivers/i2c/Makefile
+@@ -11,6 +11,7 @@ obj-$(CONFIG_$(SPL_)I2C_CROS_EC_TUNNEL) += cros_ec_tunnel.o
+ obj-$(CONFIG_$(SPL_)I2C_CROS_EC_LDO) += cros_ec_ldo.o
  
-+obj-$(CONFIG_PINCTRL_ADI)		+= pinctrl-adi-adsp.o
- obj-$(CONFIG_PINCTRL_APPLE)		+= pinctrl-apple.o
- obj-$(CONFIG_PINCTRL_AT91)		+= pinctrl-at91.o
- obj-$(CONFIG_PINCTRL_AT91PIO4)		+= pinctrl-at91-pio4.o
-diff --git a/drivers/pinctrl/pinctrl-adi-adsp.c b/drivers/pinctrl/pinctrl-adi-adsp.c
+ obj-$(CONFIG_$(SPL_)SYS_I2C_LEGACY) += i2c_core.o
++obj-$(CONFIG_SYS_I2C_ADI) += adi_i2c.o
+ obj-$(CONFIG_SYS_I2C_ASPEED) += ast_i2c.o
+ obj-$(CONFIG_SYS_I2C_AST2600) += ast2600_i2c.o
+ obj-$(CONFIG_SYS_I2C_AT91) += at91_i2c.o
+diff --git a/drivers/i2c/adi_i2c.c b/drivers/i2c/adi_i2c.c
 new file mode 100644
-index 0000000000..717ac8e005
+index 0000000000..04a63de577
 --- /dev/null
-+++ b/drivers/pinctrl/pinctrl-adi-adsp.c
-@@ -0,0 +1,156 @@
++++ b/drivers/i2c/adi_i2c.c
+@@ -0,0 +1,395 @@
 +// SPDX-License-Identifier: GPL-2.0-or-later
 +/*
 + * (C) Copyright 2022 - Analog Devices, Inc.
 + *
 + * Written and/or maintained by Timesys Corporation
 + *
-+ * Author: Greg Malysa <greg.malysa@timesys.com>
-+ * Additional Contact: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
-+ *
-+ * dm pinctrl implementation for ADI ADSP SoCs
-+ *
-+ */
-+
-+#include <dm.h>
-+#include <dm/pinctrl.h>
-+#include <dm/device_compat.h>
-+#include <linux/bitops.h>
-+#include <linux/io.h>
-+
-+#define ADSP_PORT_MMIO_SIZE		0x80
-+#define ADSP_PORT_PIN_SIZE		16
-+
-+#define ADSP_PORT_PORT_MUX_BITS		2
-+#define ADSP_PORT_PORT_MUX_MASK		0x03
-+#define ADSP_PINCTRL_FUNCTION_COUNT 4
-+
-+#define ADSP_PORT_REG_FER			0x00
-+#define ADSP_PORT_REG_FER_SET		0x04
-+#define ADSP_PORT_REG_FER_CLEAR		0x08
-+#define ADSP_PORT_REG_DATA			0x0c
-+#define ADSP_PORT_REG_DATA_SET		0x10
-+#define ADSP_PORT_REG_DATA_CLEAR	0x14
-+#define ADSP_PORT_REG_DIR			0x18
-+#define ADSP_PORT_REG_DIR_SET		0x1c
-+#define ADSP_PORT_REG_DIR_CLEAR		0x20
-+#define ADSP_PORT_REG_INEN			0x24
-+#define ADSP_PORT_REG_INEN_SET		0x28
-+#define ADSP_PORT_REG_INEN_CLEAR	0x2c
-+#define ADSP_PORT_REG_PORT_MUX		0x30
-+#define ADSP_PORT_REG_DATA_TGL		0x34
-+#define ADSP_PORT_REG_POLAR			0x38
-+#define ADSP_PORT_REG_POLAR_SET		0x3c
-+#define ADSP_PORT_REG_POLAR_CLEAR	0x40
-+#define ADSP_PORT_REG_LOCK			0x44
-+#define ADSP_PORT_REG_TRIG_TGL		0x48
-+
-+struct adsp_pinctrl_priv {
-+	void __iomem *base;
-+	int npins;
-+	char pinbuf[16];
-+};
-+
-+static u32 get_port(unsigned int pin)
-+{
-+	return pin / ADSP_PORT_PIN_SIZE;
-+}
-+
-+static u32 get_offset(unsigned int pin)
-+{
-+	return pin % ADSP_PORT_PIN_SIZE;
-+}
-+
-+static int adsp_pinctrl_pinmux_set(struct udevice *udev, unsigned int pin, unsigned int func)
-+{
-+	struct adsp_pinctrl_priv *priv = dev_get_priv(udev);
-+	void __iomem *portbase;
-+	u32 port, offset;
-+	u32 val;
-+
-+	if (pin >= priv->npins)
-+		return -ENODEV;
-+
-+	if (func >= ADSP_PINCTRL_FUNCTION_COUNT)
-+		return -EINVAL;
-+
-+	port = get_port(pin);
-+	offset = get_offset(pin);
-+	portbase = priv->base + port * ADSP_PORT_MMIO_SIZE;
-+
-+	val = ioread32(portbase + ADSP_PORT_REG_PORT_MUX);
-+	val &= ~(ADSP_PORT_PORT_MUX_MASK << (ADSP_PORT_PORT_MUX_BITS * offset));
-+	val |= func << (ADSP_PORT_PORT_MUX_BITS * offset);
-+	iowrite32(val, portbase + ADSP_PORT_REG_PORT_MUX);
-+
-+	iowrite32(BIT(offset), portbase + ADSP_PORT_REG_FER_SET);
-+	return 0;
-+}
-+
-+static int adsp_pinctrl_set_state(struct udevice *udev, struct udevice *config)
-+{
-+	const struct fdt_property *pinlist;
-+	int length = 0;
-+	int ret, i;
-+	u32 pin, function;
-+
-+	pinlist = dev_read_prop(config, "adi,pins", &length);
-+	if (!pinlist) {
-+		dev_err(udev, "missing adi,pins property in pinctrl config node\n");
-+		return -EINVAL;
-+	}
-+
-+	if (length % (sizeof(uint32_t) * 2)) {
-+		dev_err(udev, "adi,pins property must be a multiple of two uint32_ts\n");
-+		return -EINVAL;
-+	}
-+
-+	for (i = 0; i < length / sizeof(uint32_t); i += 2) {
-+		ret = dev_read_u32_index(config, "adi,pins", i, &pin);
-+		if (ret)
-+			return ret;
-+
-+		ret = dev_read_u32_index(config, "adi,pins", i + 1, &function);
-+		if (ret)
-+			return ret;
-+
-+		ret = adsp_pinctrl_pinmux_set(udev, pin, function);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+const struct pinctrl_ops adsp_pinctrl_ops = {
-+	.set_state = adsp_pinctrl_set_state,
-+};
-+
-+static int adsp_pinctrl_probe(struct udevice *udev)
-+{
-+	struct adsp_pinctrl_priv *priv = dev_get_priv(udev);
-+
-+	priv->base = dev_read_addr_ptr(udev);
-+	priv->npins = dev_read_u32_default(udev, "adi,npins", 0);
-+
-+	if (!priv->npins) {
-+		dev_err(udev, "Missing adi,npins property!\n");
-+		return -ENOENT;
-+	}
-+
-+	return 0;
-+}
-+
-+static const struct udevice_id adsp_pinctrl_match[] = {
-+	{ .compatible = "adi,adsp-pinctrl" },
-+	{ },
-+};
-+
-+U_BOOT_DRIVER(adi_adsp_pinctrl) = {
-+	.name = "adi_adsp_pinctrl",
-+	.id = UCLASS_PINCTRL,
-+	.of_match = adsp_pinctrl_match,
-+	.probe = adsp_pinctrl_probe,
-+	.priv_auto = sizeof(struct adsp_pinctrl_priv),
-+	.ops = &adsp_pinctrl_ops,
-+	.flags = DM_FLAG_PRE_RELOC,
-+};
-diff --git a/include/dt-bindings/pinctrl/adi-adsp.h b/include/dt-bindings/pinctrl/adi-adsp.h
-new file mode 100644
-index 0000000000..7dc8a1ef5c
---- /dev/null
-+++ b/include/dt-bindings/pinctrl/adi-adsp.h
-@@ -0,0 +1,21 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+/*
-+ * (C) Copyright 2022 - Analog Devices, Inc.
-+ *
-+ * Written and/or maintained by Timesys Corporation
++ * Converted to driver model by Nathan Barrett-Morrison
 + *
 + * Contact: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
 + * Contact: Greg Malysa <greg.malysa@timesys.com>
-+ *
 + */
 +
-+#ifndef DT_BINDINGS_PINCTRL_ADI_ADSP
-+#define DT_BINDINGS_PINCTRL_ADI_ADSP
++#include <clk.h>
++#include <dm.h>
++#include <i2c.h>
++#include <mapmem.h>
++#include <asm/io.h>
 +
-+#define ADI_ADSP_PIN(port, pin) (16 * ((port) - 'A') + (pin))
-+#define ADI_ADSP_PINFUNC_ALT0 0
-+#define ADI_ADSP_PINFUNC_ALT1 1
-+#define ADI_ADSP_PINFUNC_ALT2 2
-+#define ADI_ADSP_PINFUNC_ALT3 3
++#define CLKLOW(x) ((x) & 0xFF)     // Periods Clock Is Held Low
++#define CLKHI(y) (((y) & 0xFF) << 0x8) // Periods Clock Is High
 +
-+#endif
++#define PRESCALE        0x007F     // SCLKs Per Internal Time Reference (10MHz)
++#define TWI_ENA         0x0080     // TWI Enable
++#define SCCB            0x0200     // SCCB Compatibility Enable
++
++#define SEN             0x0001     // Slave Enable
++#define SADD_LEN        0x0002     // Slave Address Length
++#define STDVAL          0x0004     // Slave Transmit Data Valid
++#define TSC_NAK         0x0008     // NAK Generated At Conclusion Of Transfer
++#define GEN             0x0010     // General Call Adrress Matching Enabled
++
++#define SDIR            0x0001     // Slave Transfer Direction
++#define GCALL           0x0002     // General Call Indicator
++
++#define MEN             0x0001     // Master Mode Enable
++#define MADD_LEN        0x0002     // Master Address Length
++#define MDIR            0x0004     // Master Transmit Direction (RX/TX*)
++#define FAST            0x0008     // Use Fast Mode Timing Specs
++#define STOP            0x0010     // Issue Stop Condition
++#define RSTART          0x0020     // Repeat Start or Stop* At End Of Transfer
++#define DCNT            0x3FC0     // Data Bytes To Transfer
++#define SDAOVR          0x4000     // Serial Data Override
++#define SCLOVR          0x8000     // Serial Clock Override
++
++#define MPROG           0x0001     // Master Transfer In Progress
++#define LOSTARB         0x0002     // Lost Arbitration Indicator (Xfer Aborted)
++#define ANAK            0x0004     // Address Not Acknowledged
++#define DNAK            0x0008     // Data Not Acknowledged
++#define BUFRDERR        0x0010     // Buffer Read Error
++#define BUFWRERR        0x0020     // Buffer Write Error
++#define SDASEN          0x0040     // Serial Data Sense
++#define SCLSEN          0x0080     // Serial Clock Sense
++#define BUSBUSY         0x0100     // Bus Busy Indicator
++
++#define SINIT           0x0001     // Slave Transfer Initiated
++#define SCOMP           0x0002     // Slave Transfer Complete
++#define SERR            0x0004     // Slave Transfer Error
++#define SOVF            0x0008     // Slave Overflow
++#define MCOMP           0x0010     // Master Transfer Complete
++#define MERR            0x0020     // Master Transfer Error
++#define XMTSERV         0x0040     // Transmit FIFO Service
++#define RCVSERV         0x0080     // Receive FIFO Service
++
++#define XMTFLUSH        0x0001     // Transmit Buffer Flush
++#define RCVFLUSH        0x0002     // Receive Buffer Flush
++#define XMTINTLEN       0x0004     // Transmit Buffer Interrupt Length
++#define RCVINTLEN       0x0008     // Receive Buffer Interrupt Length
++
++#define XMTSTAT         0x0003     // Transmit FIFO Status
++#define XMT_EMPTY       0x0000     // Transmit FIFO Empty
++#define XMT_HALF        0x0001     // Transmit FIFO Has 1 Byte To Write
++#define XMT_FULL        0x0003     // Transmit FIFO Full (2 Bytes To Write)
++
++#define RCVSTAT         0x000C     // Receive FIFO Status
++#define RCV_EMPTY       0x0000     // Receive FIFO Empty
++#define RCV_HALF        0x0004     // Receive FIFO Has 1 Byte To Read
++#define RCV_FULL        0x000C     // Receive FIFO Full (2 Bytes To Read)
++
++/* Every register is 32bit aligned, but only 16bits in size */
++#define ureg(name) u16 name; u16 __pad_##name
++
++struct twi_regs {
++	ureg(clkdiv);
++	ureg(control);
++	ureg(slave_ctl);
++	ureg(slave_stat);
++	ureg(slave_addr);
++	ureg(master_ctl);
++	ureg(master_stat);
++	ureg(master_addr);
++	ureg(int_stat);
++	ureg(int_mask);
++	ureg(fifo_ctl);
++	ureg(fifo_stat);
++	u8 __pad[0x50];
++
++	ureg(xmt_data8);
++	ureg(xmt_data16);
++	ureg(rcv_data8);
++	ureg(rcv_data16);
++};
++
++#undef ureg
++
++/*
++ * The way speed is changed into duty often results in integer truncation
++ * with 50% duty, so we'll force rounding up to the next duty by adding 1
++ * to the max. In practice this will get us a speed of something like
++ * 385 KHz. The other limit is easy to handle as it is only 8 bits.
++ */
++#define I2C_SPEED_MAX             400000
++#define I2C_SPEED_TO_DUTY(speed)  (5000000 / (speed))
++#define I2C_DUTY_MAX              (I2C_SPEED_TO_DUTY(I2C_SPEED_MAX) + 1)
++#define I2C_DUTY_MIN              0xff	/* 8 bit limited */
++
++#define I2C_M_COMBO		0x4
++#define I2C_M_STOP		0x2
++#define I2C_M_READ		0x1
++
++/*
++ * All transfers are described by this data structure
++ */
++struct adi_i2c_msg {
++	u8 flags;
++	u32 len;		/* msg length */
++	u8 *buf;		/* pointer to msg data */
++	u32 olen;		/* addr length */
++	u8 *obuf;		/* addr buffer */
++};
++
++struct adi_i2c_dev {
++	struct twi_regs  __iomem *base;
++	u32 i2c_clk;
++	uint speed;
++};
++
++/* Allow msec timeout per ~byte transfer */
++#define I2C_TIMEOUT 10
++
++/**
++ * wait_for_completion - manage the actual i2c transfer
++ *	@msg: the i2c msg
++ */
++static int wait_for_completion(struct twi_regs *twi, struct adi_i2c_msg *msg)
++{
++	u16 int_stat, ctl;
++	ulong timebase = get_timer(0);
++
++	do {
++		int_stat = readw(&twi->int_stat);
++
++		if (int_stat & XMTSERV) {
++			writew(XMTSERV, &twi->int_stat);
++			if (msg->olen) {
++				writew(*(msg->obuf++), &twi->xmt_data8);
++				--msg->olen;
++			} else if (!(msg->flags & I2C_M_COMBO) && msg->len) {
++				writew(*(msg->buf++), &twi->xmt_data8);
++				--msg->len;
++			} else {
++				ctl = readw(&twi->master_ctl);
++				if (msg->flags & I2C_M_COMBO)
++					writew(ctl | RSTART | MDIR,
++					       &twi->master_ctl);
++				else
++					writew(ctl | STOP, &twi->master_ctl);
++			}
++		}
++		if (int_stat & RCVSERV) {
++			writew(RCVSERV, &twi->int_stat);
++			if (msg->len) {
++				*(msg->buf++) = readw(&twi->rcv_data8);
++				--msg->len;
++			} else if (msg->flags & I2C_M_STOP) {
++				ctl = readw(&twi->master_ctl);
++				writew(ctl | STOP, &twi->master_ctl);
++			}
++		}
++		if (int_stat & MERR) {
++			pr_err("%s: master transmit terror: %d\n", __func__,
++			       readw(&twi->master_stat));
++			writew(MERR, &twi->int_stat);
++			return -EIO;
++		}
++		if (int_stat & MCOMP) {
++			writew(MCOMP, &twi->int_stat);
++			if (msg->flags & I2C_M_COMBO && msg->len) {
++				ctl = readw(&twi->master_ctl);
++				ctl = (ctl & ~RSTART) |
++					(min((unsigned int)msg->len,
++					     0xffU) << 6) | MEN | MDIR;
++				writew(ctl, &twi->master_ctl);
++			} else {
++				break;
++			}
++		}
++
++		/* If we were able to do something, reset timeout */
++		if (int_stat)
++			timebase = get_timer(0);
++
++	} while (get_timer(timebase) < I2C_TIMEOUT);
++
++	return 0;
++}
++
++static int i2c_transfer(struct twi_regs *twi, u8 chip, u8 *offset,
++			int olen, u8 *buffer, int len, u8 flags)
++{
++	int ret;
++	u16 ctl;
++
++	struct adi_i2c_msg msg = {
++		.flags = flags | (len >= 0xff ? I2C_M_STOP : 0),
++		.buf   = buffer,
++		.len   = len,
++		.obuf  = offset,
++		.olen  = olen,
++	};
++
++	/* wait for things to settle */
++	while (readw(&twi->master_stat) & BUSBUSY)
++		if (!IS_ENABLED(CONFIG_SPL_BUILD) && ctrlc())
++			return -EINTR;
++
++	/* Set Transmit device address */
++	writew(chip, &twi->master_addr);
++
++	/* Clear the FIFO before starting things */
++	writew(XMTFLUSH | RCVFLUSH, &twi->fifo_ctl);
++	writew(0, &twi->fifo_ctl);
++
++	/* Prime the pump */
++	if (msg.olen) {
++		len = (msg.flags & I2C_M_COMBO) ? msg.olen : msg.olen + len;
++		writew(*(msg.obuf++), &twi->xmt_data8);
++		--msg.olen;
++	} else if (!(msg.flags & I2C_M_READ) && msg.len) {
++		writew(*(msg.buf++), &twi->xmt_data8);
++		--msg.len;
++	}
++
++	/* clear int stat */
++	writew(-1, &twi->master_stat);
++	writew(-1, &twi->int_stat);
++	writew(0, &twi->int_mask);
++
++	/* Master enable */
++	ctl = readw(&twi->master_ctl);
++	ctl = (ctl & FAST) | (min(len, 0xff) << 6) | MEN |
++		((msg.flags & I2C_M_READ) ? MDIR : 0);
++	writew(ctl, &twi->master_ctl);
++
++	/* Process the rest */
++	ret = wait_for_completion(twi, &msg);
++
++	ctl = readw(&twi->master_ctl) & ~MEN;
++	writew(ctl, &twi->master_ctl);
++	ctl = readw(&twi->control) & ~TWI_ENA;
++	writew(ctl, &twi->control);
++	ctl = readw(&twi->control) | TWI_ENA;
++	writew(ctl, &twi->control);
++	return ret;
++}
++
++static int adi_i2c_read(struct twi_regs *twi, u8 chip,
++			u8 *offset, int olen, u8 *buffer, int len)
++{
++	return i2c_transfer(twi, chip, offset, olen, buffer,
++			len, olen ? I2C_M_COMBO : I2C_M_READ);
++}
++
++static int adi_i2c_write(struct twi_regs *twi, u8 chip,
++			 u8 *offset, int olen, u8 *buffer, int len)
++{
++	return i2c_transfer(twi, chip, offset, olen, buffer, len, 0);
++}
++
++static int adi_i2c_set_bus_speed(struct udevice *bus, uint speed)
++{
++	struct adi_i2c_dev *dev = dev_get_priv(bus);
++	struct twi_regs *twi = dev->base;
++	u16 clkdiv = I2C_SPEED_TO_DUTY(speed);
++
++	/* Set TWI interface clock */
++	if (clkdiv < I2C_DUTY_MAX || clkdiv > I2C_DUTY_MIN)
++		return -1;
++	clkdiv = (clkdiv << 8) | (clkdiv & 0xff);
++	writew(clkdiv, &twi->clkdiv);
++
++	/* Don't turn it on */
++	writew(speed > 100000 ? FAST : 0, &twi->master_ctl);
++
++	return 0;
++}
++
++static int adi_i2c_of_to_plat(struct udevice *bus)
++{
++	struct adi_i2c_dev *dev = dev_get_priv(bus);
++	struct clk clock;
++	u32 ret;
++
++	dev->base = map_sysmem(dev_read_addr(bus), sizeof(struct twi_regs));
++
++	if (!dev->base)
++		return -ENOMEM;
++
++	dev->speed = dev_read_u32_default(bus, "clock-frequency",
++					  I2C_SPEED_FAST_RATE);
++
++	ret = clk_get_by_name(bus, "i2c", &clock);
++	if (ret < 0)
++		printf("%s: Can't get I2C clk: %d\n", __func__, ret);
++	else
++		dev->i2c_clk = clk_get_rate(&clock);
++
++	return 0;
++}
++
++static int adi_i2c_probe_chip(struct udevice *bus, u32 chip_addr,
++			      u32 chip_flags)
++{
++	struct adi_i2c_dev *dev = dev_get_priv(bus);
++	u8 byte;
++
++	return adi_i2c_read(dev->base, chip_addr, NULL, 0, &byte, 1);
++}
++
++static int adi_i2c_xfer(struct udevice *bus, struct i2c_msg *msg, int nmsgs)
++{
++	struct adi_i2c_dev *dev = dev_get_priv(bus);
++	struct i2c_msg *dmsg, *omsg, dummy;
++
++	memset(&dummy, 0, sizeof(struct i2c_msg));
++
++	/*
++	 * We expect either two messages (one with an offset and one with the
++	 * actual data) or one message (just data)
++	 */
++	if (nmsgs > 2 || nmsgs == 0) {
++		debug("%s: Only one or two messages are supported.", __func__);
++		return -EINVAL;
++	}
++
++	omsg = nmsgs == 1 ? &dummy : msg;
++	dmsg = nmsgs == 1 ? msg : msg + 1;
++
++	if (dmsg->flags & I2C_M_RD)
++		return adi_i2c_read(dev->base, dmsg->addr, omsg->buf, omsg->len,
++				  dmsg->buf, dmsg->len);
++	else
++		return adi_i2c_write(dev->base, dmsg->addr, omsg->buf, omsg->len,
++				   dmsg->buf, dmsg->len);
++}
++
++int adi_i2c_probe(struct udevice *bus)
++{
++	struct adi_i2c_dev *dev = dev_get_priv(bus);
++	struct twi_regs *twi = dev->base;
++
++	u16 prescale = ((dev->i2c_clk / 1000 / 1000 + 5) / 10) & 0x7F;
++
++	/* Set TWI internal clock as 10MHz */
++	writew(prescale, &twi->control);
++
++	/* Set TWI interface clock as specified */
++	adi_i2c_set_bus_speed(bus, dev->speed);
++
++	/* Enable it */
++	writew(TWI_ENA | prescale, &twi->control);
++
++	return 0;
++}
++
++static const struct dm_i2c_ops adi_i2c_ops = {
++	.xfer           = adi_i2c_xfer,
++	.probe_chip     = adi_i2c_probe_chip,
++	.set_bus_speed  = adi_i2c_set_bus_speed,
++};
++
++static const struct udevice_id adi_i2c_ids[] = {
++	{ .compatible = "adi-i2c", },
++	{ /* sentinel */ }
++};
++
++U_BOOT_DRIVER(i2c_adi) = {
++	.name = "i2c_adi",
++	.id = UCLASS_I2C,
++	.of_match = adi_i2c_ids,
++	.probe = adi_i2c_probe,
++	.of_to_plat = adi_i2c_of_to_plat,
++	.priv_auto = sizeof(struct adi_i2c_dev),
++	.ops = &adi_i2c_ops,
++	.flags = DM_FLAG_PRE_RELOC,
++};
 
 -- 
 2.34.1
