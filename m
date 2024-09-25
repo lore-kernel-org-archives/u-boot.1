@@ -4,63 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7583CCF58ED
-	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 13:44:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F8C0CF58ED
+	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 13:49:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BDA3588BC2;
-	Wed, 25 Sep 2024 15:44:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 807C388B13;
+	Wed, 25 Sep 2024 15:49:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1727271855;
-	bh=LYf4a2/yZphr6Y1vfGv8VAl2zmMnC+zc3bvoKpntWMc=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=TuonkYsEmDZUxoVew5wbjdFe5L0pFpqyCEqBvsG5QrqkEcs50hsQB1mCW5/w347xw
-	 Ezg+UHtMP+A/miXi5QYNYNX/ORbiXE1Z4XakBkxZiUXigbcemCvyIn8U2lXnIwi8d6
-	 Oj7e8PvfiGwGME66hF4MwCglOELONBbOUZC447o7rHBVQzJ/5BPfwcQiS3lmy74jUd
-	 QBPc/IllCEd+lFKxyIihac9VKYOkUkwHO8mEoSewQ0j3p+Sj+sK5mzLTLR0Vh34b1Q
-	 RPSA2VE72xLXvpumR9tBJEbwiIl2SN1MpXmCI7YlcCDgYg+b6jr6GscJJjVYcI+yfL
-	 lZaZEVvEUAKUA==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="g50grhzN";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 1055788B13; Wed, 25 Sep 2024 15:49:33 +0200 (CEST)
+Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
+ [IPv6:2a00:1450:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 2B95988BBE;
- Wed, 25 Sep 2024 15:44:04 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1727271854;
- bh=LYf4a2/yZphr6Y1vfGv8VAl2zmMnC+zc3bvoKpntWMc=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=K9A2sHN4cxybvMqxHCC0Aq4jxxl05rAknQRrcgChktQ+qMW9ogHCXcg7/J0gAdyL1
- FeE6sOsJRqapEP4Cw6ujvUmS1BWZaVdHwTr63SZka2hypg3Lnezq01kDgVva3bjXPA
- 7KHdGdFaCbsAqfRZ2Y+5t28G8eI7lkFJH3Hw/enhAJi0dINcGhEWsFT+pFD/e/wbfP
- tm5i3hi5svGX7EB1IiP6Cdp34jUrVNI2e+4x9zU2So78VA5sNT6bNVlKjKzeapmuWD
- bIIneQNaXWroBHgAuGZ10zXMSNhnTqLk5Fn4BxVDP8zqPvHABEhh70bqa3erXf/zVr
- /vALOBdz2ymRA==
-Message-ID: <749f6964-52be-4b4a-81e6-d351564d5465@denx.de>
-Date: Wed, 25 Sep 2024 14:51:25 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 7313A88B11
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 15:49:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-2f7529203ddso9886671fa.0
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 06:49:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1727272158; x=1727876958; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=E7zzNQJW6EUWlgxWVfHpHkAbqJiR+E7WE+maGw4I+xM=;
+ b=g50grhzNq3UY9oBZpm2Vqx66Wp2KaI8h6HWAVekXU2d6KeYYX0/LnKvpGU3bvozt7e
+ ylEbu5br74mkd50gvzSGrza4BmiDEGN+D7PZq2H6758PQnzzZ34ErbN7EYH6VcV3jWwG
+ tQxov3NiArLv1OluGzCDCbINmh7hCDtL8yduhyirUU4PZsVWDggrfKMOUfO/BVa/pCZg
+ 1ULcWrws5+YJQOze8FUWNI/yrlt6VAuwUMctJ5O2QxvM10K/rUGEOKIQou7t1m0w0myP
+ 3Ubngicp06t0W1ao4Zudv/6YG6of+508gKYzaOkkq9Qt3vHpfs3Ri19AQlR6jSo1HyrE
+ FCSA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727272158; x=1727876958;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=E7zzNQJW6EUWlgxWVfHpHkAbqJiR+E7WE+maGw4I+xM=;
+ b=vyEZqBQp4plJzXhNI7YDeHaQjWcUWXXR2ncHpbCJ3TbvoLDw7NhjoPe2s92AKFAQ+V
+ 8o9kRoM4xwWdwsVFT9fP2hFIRB+g+a68pU6UrvdQRZQzOKATyuGR74/Fldbed30Tuc4q
+ uzlB2RCjvBdP0RwMF4wXnhU/aFW7GGkjoTRABtYZzg4X6phX7EJbvAtbBWldsKhs+wz8
+ 19EfKPvhY6hd74UyyoY6XCiVkMIP3scGS6pC9obw8EIZ00utrm915p56wDWrcXIalwLB
+ Qe+ycG19V1LGuXqEUrPZB+M5Cv8g8yLWHPNgQbAjcLAYAz6vYR7cBZq2HrRYrYYaxiY6
+ TgPw==
+X-Gm-Message-State: AOJu0YzOFvSWAQAlgAZby+u47Yh4OJhY3FsCPu+1lLEefXFOt2JqDHIB
+ ORLGEwZb7DHZ2zSxCwqDIku8zVqYy3VJBRFIP+dVfJkK0URWYLXywifpwevH8046L6dgDEMgWnP
+ T7N10M6k7xGvFTZHJHT5XnpIJ63SHNIqJ
+X-Google-Smtp-Source: AGHT+IGQjMXYIq+DLOuxEsauzKyhwlIzHQnxV5qlCfGidEs92yxbivjMmSdQIaNaPR8T947KdpVhBwwdIyovT1PWMEk=
+X-Received: by 2002:a2e:a551:0:b0:2f1:6108:3f00 with SMTP id
+ 38308e7fff4ca-2f9463f9100mr11901421fa.0.1727272157347; Wed, 25 Sep 2024
+ 06:49:17 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 08/20] arm: dts: agilex5: Enable XGMAC
-To: "Chee, Tien Fong" <tien.fong.chee@intel.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- "Meng, Tingting" <tingting.meng@intel.com>,
- "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@intel.com>,
- "Hea, Kok Kiang" <kok.kiang.hea@intel.com>
-References: <20240920070242.20884-1-tien.fong.chee@intel.com>
- <20240920070242.20884-9-tien.fong.chee@intel.com>
- <92fa9c17-bbf4-49b5-8d7c-4b7d06f60736@denx.de>
- <DM8PR11MB5592C2455A4CFA9CDE0F6DD8D2682@DM8PR11MB5592.namprd11.prod.outlook.com>
- <5db7f491-e8f2-45d0-baab-fa309cb4db64@denx.de>
- <DM8PR11MB5592C49308440E5F902A4F1BD2692@DM8PR11MB5592.namprd11.prod.outlook.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <DM8PR11MB5592C49308440E5F902A4F1BD2692@DM8PR11MB5592.namprd11.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20240925001119.667820-1-marex@denx.de>
+In-Reply-To: <20240925001119.667820-1-marex@denx.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Wed, 25 Sep 2024 10:49:04 -0300
+Message-ID: <CAOMZO5Bu-UW--EMZ7hPUcW_COWr+5mZioBrhBv3UgZPXNVBvOg@mail.gmail.com>
+Subject: Re: [PATCH] arm64: dts: imx8mp: Add DH i.MX8MP DHCOM SoM on DRC02
+ carrier board
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Stefano Babic <sbabic@denx.de>, 
+ Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,46 +90,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/25/24 8:13 AM, Chee, Tien Fong wrote:
-> Hi,
-> 
->> -----Original Message-----
->> From: Marek Vasut <marex@denx.de>
->> Sent: Wednesday, September 25, 2024 2:36 AM
->> To: Chee, Tien Fong <tien.fong.chee@intel.com>; u-boot@lists.denx.de
->> Cc: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>; Meng, Tingting
->> <tingting.meng@intel.com>; Yuslaimi, Alif Zakuan
->> <alif.zakuan.yuslaimi@intel.com>; Hea, Kok Kiang
->> <kok.kiang.hea@intel.com>
->> Subject: Re: [PATCH v1 08/20] arm: dts: agilex5: Enable XGMAC
->>
->> On 9/24/24 8:02 AM, Chee, Tien Fong wrote:
->>> Hi,
->>
->> Hi,
->>
->>>>> diff --git a/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi
->>>> b/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi
->>>>> index 9eb21d65428..75ab05031bc 100644
->>>>> --- a/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi
->>>>> +++ b/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi
->>>>> @@ -122,3 +122,36 @@
->>>>>     	bootph-all;
->>>>>     };
->>>>>
->>>>> +&gmac0 {
->>>>> +	status = "okay";
->>>>> +	phy-mode = "rgmii";
->>>>> +	phy-handle = <&emac0_phy0>;
->>>> Shouldn't this be part of Linux DT already ?
->>>
->>> This enablement not yet in Linux DT, I believe our Linux team is still working
->> on it.
->> Is there at least a patch posted upstream ?
-> 
-> Having two patches posted now in Linux mainline, but gmac device is still not yet added into these dt.
-> https://github.com/torvalds/linux/blob/master/arch/arm64/boot/dts/intel/socfpga_agilex5.dtsi
-> https://github.com/torvalds/linux/blob/master/arch/arm64/boot/dts/intel/socfpga_agilex5_socdk.dts
-> 
-> I think we can do a cleanup if the duplicated found in U-Boot later.
-At least reference the two patches (lore links) in the V2 of this patch.
+Hi Marek,
+
+On Tue, Sep 24, 2024 at 9:12=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
+>
+> Add support for DH electronics i.MX8MP DHCOM SoM on DRC02 carrier board.
+> This system is populated with two ethernet ports, two CANs, RS485 and RS2=
+32,
+> USB, capacitive buttons and an OLED display.
+
+The patch looks good. Only one suggestion:
+
+Please send a v2 indicating that the devicetree has already been
+submitted upstream and add the reference o it:
+
+https://lore.kernel.org/linux-devicetree/20240925001628.669604-2-marex@denx=
+.de/
+
+Thanks
