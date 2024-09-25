@@ -4,78 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBF89C7882B
-	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 13:02:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F55ECF58ED
+	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 13:41:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC0F788B79;
-	Wed, 25 Sep 2024 14:58:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 76CED88B11;
+	Wed, 25 Sep 2024 15:41:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="h8n7o1Zg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oPH/bgkQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A64788B63; Wed, 25 Sep 2024 14:58:42 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 02B8588B31; Wed, 25 Sep 2024 15:41:03 +0200 (CEST)
+Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
+ [IPv6:2607:f8b0:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7DD0088D66
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 14:58:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 54C148897F
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 15:40:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-a8d2b24b7a8so178084866b.1
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 05:58:24 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pf1-x431.google.com with SMTP id
+ d2e1a72fcca58-718d6ad6050so4961703b3a.0
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 06:40:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727269104; x=1727873904; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Nd3qKVb3wp1Ho+9jVMi7FFwQQu7frvBUCsumfey2kag=;
- b=h8n7o1ZgT7FUL0vhA8YJqTvwvCQkGPbDah7G5S01TKlJlVibEPEuoX/6kouilttyIb
- U6CTwRp8ILp/OM9Ugh2FGXsNZSG0PA2FhT5U1Q0ANmzKQA4LINCu0Q0x0v9xAglfst5H
- 0GWsg6EiEnyc0vjs7SgIUI3PVbB3hDkiH8Qe8=
+ d=linaro.org; s=google; t=1727271651; x=1727876451; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=T41NmNrrA4I9+5oTm2kLfLKDS+1oLV30y1HEIe1yWgI=;
+ b=oPH/bgkQbibXnzC1zV3Ubs4eLvGvgHYYXE9Z/BUzZ4K2ivpLa71O3xJ6P2YzHc/NvI
+ JCTvrZ6yqKqzWSR66jsEQ/H98qtBySzvG+GSjg+dyRNWRDjGO1oEH4PmI5xDgyzeTFDD
+ E0o/Av8HwNqnUjwsvOk1iaCprTe7prNlMYC+yqMLIAQWeWOdXn/qGh16DKT3gkh3us/e
+ ffwAKsHrkmh+824IzxgmkaOZuSNsDFbEjXcCH7XdRpd+FikKkcumdShaPTgC6oPM2+Do
+ gjYwoUBdNYDngRAIbLhE2cuK7qI02HExOPA/EN5f4UJ7xtPbLS2++oJOacvxBjEBXa80
+ cruQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727269104; x=1727873904;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Nd3qKVb3wp1Ho+9jVMi7FFwQQu7frvBUCsumfey2kag=;
- b=Fxhuti53nAPO/R40iks63tPYmimBidnFXmPWiVGQ9hGoi+R8Kz8RYW4oJfcUV5bIQJ
- EbyrzGedGw782Zgbg2VFYN1LtDmqHYsVKNXqG8kRFDkYEQegocRAwnC49tebnRbpuf1a
- VeTDjgh0VzgIH0SptoQM4ENDn8DjnFA83E0ub1PMqWHY5hiU4VJ6HjmiuPIHwl43IyWE
- YI5CNi2P3oFq1GtLG2QYnDfwHDxockM7EXvgZwZK3IHfY7YCtf56yO14b4ZdMApjuuI9
- SYGsXOrZVwMpBJCouXxlO3Ts7eJhwsAt7Gh1XxvwXFfnU+qSV+q+u2WxwhXxn4FPHnZU
- J1wg==
-X-Gm-Message-State: AOJu0YyUrruVegWTG/VpVESna0h4fOUM24WuSU81K2j1df+H57bNody6
- 49ZHMfL/4KJhWEIHQrUeBns3HIZlVnma6EY/Sm1cptLmEaUo3fhZ2M41lfNTBlZ6xq8H6/tSRMS
- rAw==
-X-Google-Smtp-Source: AGHT+IHA0CQh2Tgt5f1vt4ngT+Ilc3uFOGkpBDxc7gDiCRX+0xnyYdB4Go1kWcDvqcGVT+K0sjQeqg==
-X-Received: by 2002:a17:907:9705:b0:a8a:9243:486 with SMTP id
- a640c23a62f3a-a93a1804ba1mr304485066b.21.1727269103784; 
- Wed, 25 Sep 2024 05:58:23 -0700 (PDT)
-Received: from chromium.org ([82.132.187.73]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a93930f7889sm209209766b.179.2024.09.25.05.58.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Sep 2024 05:58:23 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Sean Anderson <seanga2@gmail.com>,
- Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH 19/19] CI: Add new test for reloc loader
-Date: Wed, 25 Sep 2024 14:55:45 +0200
-Message-ID: <20240925125622.197915-20-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240925125622.197915-1-sjg@chromium.org>
-References: <20240925125622.197915-1-sjg@chromium.org>
+ d=1e100.net; s=20230601; t=1727271651; x=1727876451;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=T41NmNrrA4I9+5oTm2kLfLKDS+1oLV30y1HEIe1yWgI=;
+ b=X8bEfNLHqeM5+SGElBdIQtU1oYdKt3lfu7+sBE7PS+IwYsc9bEO6b9UEUQSUOnLvl1
+ mCCFmQL2DagSOjjmZyHV0rTB/ddHluNPzPToazYArJFefpCkcDT+iZTne9+BzRPhCNTi
+ RNsdzkpGyBF5HuZ1i0jtm/bD5s8U9kINhWH0A2+F5KnQ1P9+KPmTPNNyADr+5kfJHr/u
+ SGwybRQa79dzYyD3O+tV4saNGLHvzYxV7gY43Igw8GVXszHdjO+xxLqv9yzJw5xoQ9Og
+ F6mXTBy9DvKmxzy6Wj7iFldVlDxw5KlkyMD2uAWZoq47S2NgUa/OnFywsmJdW//rIfOd
+ 0fDA==
+X-Gm-Message-State: AOJu0YyOUgxyTzzqJi7KxERMPWgW2UYojFBAtw3FVOcS7GI4tUWDaMGy
+ s6P13DOUNka9f/yfwNjL4O+knJF4k8XBHU8m+ft92fpD0r9RtLP/f1tDo6mGHlAgbZoDIJcjCce
+ jZqC7R5gWGeSSb3yj/nqjpe3gnKuerW3ey/ddPsDoG/+VFvWzdPs=
+X-Google-Smtp-Source: AGHT+IEiqqJ34NHfJjy52/xClqAluJHpKsUvnBxmLU5cAQigRtCZFgOFfXvAPe5EHCR4ZKXXDsVGnXXc1XymlyeUGrw=
+X-Received: by 2002:a05:6a00:3cc2:b0:714:228d:e9f5 with SMTP id
+ d2e1a72fcca58-71b0aaa5bc0mr4914614b3a.2.1727271650590; Wed, 25 Sep 2024
+ 06:40:50 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240920072444.134997-1-sjg@chromium.org>
+ <20240920072444.134997-10-sjg@chromium.org>
+ <CAC_iWj+NMLSAmAqiDRMsSO+SWRKu=7rSFm+BkngO0kpOwRV1JQ@mail.gmail.com>
+ <CAFLszTimWzK+fZToFzH4Ez+nE62GEPnHTOf2HYcTnemv_HKojQ@mail.gmail.com>
+In-Reply-To: <CAFLszTimWzK+fZToFzH4Ez+nE62GEPnHTOf2HYcTnemv_HKojQ@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 25 Sep 2024 16:40:14 +0300
+Message-ID: <CAC_iWjJ1ggBTXkSSdaM8zktf-49MFELf3AynaMjG0XK5ZkVpSw@mail.gmail.com>
+Subject: Re: [PATCH v2 09/18] armv8: Support not having separate BSS
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Richard Henderson <richard.henderson@linaro.org>, 
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,46 +89,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add this to CI. This relies on a u-boot-test-hooks update
+Hi Simon,
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+On Wed, 25 Sept 2024 at 15:48, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Ilias,
+>
+> On Mon, 23 Sept 2024 at 11:49, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > Hi Simon,
+> >
+> > On Fri, 20 Sept 2024 at 10:25, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > Separate BSS is current mandatory on armv8 but this is not useful for
+> > > early boot phases. Add support for the combined BSS.
+> > >
+> > > Use an #ifdef to avoid using CONFIG_SPL_BSS_START_ADDR which is not
+> > > valid in this case.
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > ---
+> > >
+> > > (no changes since v1)
+> > >
+> > >  arch/arm/cpu/armv8/u-boot-spl.lds | 12 ++++++++++++
+> > >  1 file changed, 12 insertions(+)
+> > >
+> > > diff --git a/arch/arm/cpu/armv8/u-boot-spl.lds b/arch/arm/cpu/armv8/u-boot-spl.lds
+> > > index 215cedd69a8..fed69644b55 100644
+> > > --- a/arch/arm/cpu/armv8/u-boot-spl.lds
+> > > +++ b/arch/arm/cpu/armv8/u-boot-spl.lds
+> > > @@ -13,8 +13,10 @@
+> > >
+> > >  MEMORY { .sram : ORIGIN = IMAGE_TEXT_BASE,
+> > >                 LENGTH = IMAGE_MAX_SIZE }
+> > > +#ifdef CONFIG_SPL_SEPARATE_BSS
+> > >  MEMORY { .sdram : ORIGIN = CONFIG_SPL_BSS_START_ADDR,
+> > >                 LENGTH = CONFIG_SPL_BSS_MAX_SIZE }
+> > > +#endif
+> > >
+> > >  OUTPUT_FORMAT("elf64-littleaarch64", "elf64-littleaarch64", "elf64-littleaarch64")
+> > >  OUTPUT_ARCH(aarch64)
+> > > @@ -56,12 +58,22 @@ SECTIONS
+> > >         _end = .;
+> > >         _image_binary_end = .;
+> > >
+> > > +#ifdef CONFIG_SPL_SEPARATE_BSS
+> > >         .bss : {
+> > >                 __bss_start = .;
+> > >                 *(.bss*)
+> > >                 . = ALIGN(8);
+> > >                 __bss_end = .;
+> > >         } >.sdram
+> > > +#else
+> > > +       .bss (NOLOAD) : {
+> > > +               __bss_start = .;
+> > > +               *(.bss*)
+> > > +                . = ALIGN(8);
+> > > +               __bss_end = .;
+> > > +       } >.sram
+> > > +#endif
+> >
+> > This is still going to be separate. The only difference isn't that
+> > it's not loaded. If you want to combine it with a region, you got to
+> > do something similar to what we have in armv7, where it overlaps with
+> > rel.dyn
+>
+> I don't mind about combining it with a region, But SPL doesn't have
+> relocation data, right?
+>
+> My meaning of 'separate' is as described in CONFIG_SPL_SEPARATE_BSS,
+> i.e. being kept in SDRAM.
 
- .azure-pipelines.yml | 3 +++
- .gitlab-ci.yml       | 6 ++++++
- 2 files changed, 9 insertions(+)
+Ok, is the NOLOAD really needed? I would prefer the ifdef around .sdram/.sram
 
-diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-index 93111eb6127..51c4346ce64 100644
---- a/.azure-pipelines.yml
-+++ b/.azure-pipelines.yml
-@@ -415,6 +415,9 @@ stages:
-         qemu_arm64:
-           TEST_PY_BD: "qemu_arm64"
-           TEST_PY_TEST_SPEC: "not sleep"
-+        qemu_arm64_tpl:
-+          TEST_PY_BD: "qemu_arm64_tpl"
-+          TEST_PY_TEST_SPEC: "test_reloc_loader"
-         qemu_m68k:
-           TEST_PY_BD: "M5208EVBE"
-           TEST_PY_ID: "--id qemu"
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 7d621031b85..8020853b73c 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -344,6 +344,12 @@ qemu_arm64 test.py:
-     TEST_PY_TEST_SPEC: "not sleep"
-   <<: *buildman_and_testpy_dfn
- 
-+qemu_arm64 tpl_test.py:
-+  variables:
-+    TEST_PY_BD: "qemu_arm64_tpl"
-+    TEST_PY_TEST_SPEC: "test_reloc_loader"
-+  <<: *buildman_and_testpy_dfn
-+
- qemu_m68k test.py:
-   variables:
-     TEST_PY_BD: "M5208EVBE"
--- 
-2.43.0
+In any case
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
+
+>
+> >
+> > Thanks
+> > /Ilias
+> > > +       __bss_size = __bss_end - __bss_start;
+> > >
+> > >         /DISCARD/ : { *(.rela*) }
+> > >         /DISCARD/ : { *(.dynsym) }
+> > > --
+> > > 2.43.0
+> > >
+>
+> Regards,
+> Simon
