@@ -4,68 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 536BFC369D9
-	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 12:51:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B26A7C369D9
+	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 12:51:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5BF6688C1C;
+	by phobos.denx.de (Postfix) with ESMTP id BBE6688C60;
 	Wed, 25 Sep 2024 14:50:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HiBI72LN";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="i729y0Yl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B98988C24; Wed, 25 Sep 2024 14:50:36 +0200 (CEST)
-Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
- [IPv6:2607:f8b0:4864:20::c2c])
+ id 3375D88B6D; Wed, 25 Sep 2024 14:50:36 +0200 (CEST)
+Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
+ [IPv6:2607:f8b0:4864:20::f32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B646588B6D
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 14:50:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D27A88BD2
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 14:50:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-5e5b57127e6so1272330eaf.2
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 05:50:15 -0700 (PDT)
+Received: by mail-qv1-xf32.google.com with SMTP id
+ 6a1803df08f44-6cb25aad5dfso3168276d6.3
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 05:50:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727268614; x=1727873414; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727268632; x=1727873432; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0fPmAatSQuYm8pzIayvGGkgTSEpvF5nX+SAxmUaYCGQ=;
- b=HiBI72LNXJ4QdcbmwvwbiMHzLND+fAml8iYOhT4zvtcI23osFu0x8oLE3OyesDssJa
- Vw/V1Z5iYvHekWWjSmbX/JD2WYbf6Fs6NXhX/rlpZMOTqvjNWipTycRI9eJhy0H9qY+i
- 0q+4XWD+qVast9W7v2bLTuR4HZgzOVRytkXsI=
+ bh=chYLyTg5fHKfBO2ZsRFHKhSjjSy9bj+k0VnIQWnkuRU=;
+ b=i729y0Yl/RNmx4cOvEIxMVqka+WNPer00WPbEyaMGdKp8WH8rzPZ6bGLwZPiVlc00Q
+ Bk0rFAOJpUxCAe95z+YsO4lbHZFEpWAlWbQ5rGRH72Jte9RqLkov+56of33DZjuv0ocy
+ 0BAkoQ08mt9DyU6CQiSNpTuWtp+Zp2iWfdUzA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727268614; x=1727873414;
+ d=1e100.net; s=20230601; t=1727268632; x=1727873432;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=0fPmAatSQuYm8pzIayvGGkgTSEpvF5nX+SAxmUaYCGQ=;
- b=wosbCS1v6yj6WePLDQ7hyUEIxq2JE0lZzTP6QqrunppNIuUqueLbWw7OI1EY7+txqK
- sRp6yHn+4eD7AVFYEg9jOE9XV/ncWMw2WyjVQeRmGFEgFbyoABRRT3sBRHlicUdHLFmY
- Vd+26itE3q3j0Ouxkm93n/totBG+gjAtQdDkiWmDNCJnzYVBmRjAPJ9oAo5D5Qhq3gE4
- Bckh7MfNNNAHf1UVsuwWHku6N+CrcXblL3/c7mptztHC5k6NQvHIVHLvvIVS6usu79oy
- P6qJt9N6pnLcbMKp0ggNllTNewB32UbeDz7crELe4MADrp1aRPz03wXJ3JbLNjEqku9W
- +gCw==
-X-Gm-Message-State: AOJu0YwHT0yUZothl2048WG/7OWjGVHZ3yJEY+I9OmpneJVdSAMyROu+
- Hv2FvGZeBsDTKzXkZWOd4wBtd1LWrBsGRr5r5Y12gfWWtysB+jaaNGML2jLoLKAjFjXPf2oeoSK
- y3GIjUoYdpfQelYqR+ukypE9E2/OuULkazHBAz7jMT5NdosW72g==
-X-Google-Smtp-Source: AGHT+IG5fwUx3rhNui83BPQKxsfY8wCif623ocsDYFOm3ZLdjSuOAuJ9yNvCra/uwYWjrzuNYKyaN+3ffaZUYU9nA9g=
-X-Received: by 2002:a05:6358:78c:b0:1ba:455d:e5a1 with SMTP id
- e5c5f4694b2df-1bea862a700mr145183555d.22.1727268614496; Wed, 25 Sep 2024
- 05:50:14 -0700 (PDT)
+ bh=chYLyTg5fHKfBO2ZsRFHKhSjjSy9bj+k0VnIQWnkuRU=;
+ b=T73aKQyUze8ddfjUf0kaNZkgqSt/LYrEGiHo6GRi3XHS6m4lzKUTf6Zj2b7lpVUFeu
+ doxhIKM0QWoOvB3ummcHqNexATul8y7WftwKzD2U3px0jowIex9rZj1MWMiO9OofEFGA
+ cDURJ6kw45dw+qVUsBoL8fIkNC2Qbv18RRCwkVVLPx5anUERrPTMMFo5GksdmVHIpSzS
+ l2mEbL7N5/l7S6a4m/TYdO5FHuHaTmStmjmYwozno+Mrqonuefb8fkRFNEZRIddppD+g
+ uJQ9eoiO4KpDtt1nWQKy2xOfl/9vbfpPxcHHT0aW/nVtDDM60n/Qu50Z9Dam1uZ4wNor
+ luiA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVtTtwQSWo2gszUcqqTvmVshRsDxrswrxa45aUoGU5MTDiciy9W+eDBGJgWOoEmXFztK99F6pE=@lists.denx.de
+X-Gm-Message-State: AOJu0YzvnU7v6c+mnKk3ILfw5cnWWuZA9tdh/YixApem0hbtdZbRAQGJ
+ LjUovR3FgZ+bGONQTn9bniBgrVlm+deKLhExWPluYZqbaAaW5prcyaG3pel/Nwsi1gwYsqt62V/
+ jcCIeNz3RLWLlRMa6eetsyMIek+y6BlWT1fHZ
+X-Google-Smtp-Source: AGHT+IHNmvM0JbCX+Be0yoqbNMRxg/l9wFptdLDDpDq2nws6TiEzrDwjJmOFwaIREmcC8vOema3XzsXkFsWu3NT/Ulk=
+X-Received: by 2002:a05:6214:4a01:b0:6c5:26ac:d857 with SMTP id
+ 6a1803df08f44-6cb1de0c7bemr35832396d6.50.1727268632117; Wed, 25 Sep 2024
+ 05:50:32 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240920060158.106612-1-sjg@chromium.org>
- <20240920060158.106612-5-sjg@chromium.org>
- <20240923203528.GS4252@bill-the-cat>
-In-Reply-To: <20240923203528.GS4252@bill-the-cat>
+References: <20240914160548.42551-1-heinrich.schuchardt@canonical.com>
+ <CAFLszTjL46Gb03MS7znLujAKC0VkgOrUaZMy7XPw-jpw3TELTA@mail.gmail.com>
+ <d95b95d2-7afb-42f2-9a01-75d601368be9@canonical.com>
+ <CAC_iWjLCnUpnVGuVYnhzo4EaUmKMSZPws3hSzOOvQqirC71hfQ@mail.gmail.com>
+ <CAFLszTimJuwFKp6DaRDJ22=0tbNPYbcLMT9hcFrC9Rca6vzAyg@mail.gmail.com>
+ <b8d1cef7-4e56-49c6-aeca-b471a82870cd@canonical.com>
+ <CAC_iWjLY9Oea-AryLyrQJ3zXX+Bihza5B8R5UpXh58K3+Ff=Xw@mail.gmail.com>
+ <CAFLszTgASXx5t7=T+yLtC0W9dwo=FkQPF5T6eYD2uyFUWE6D_A@mail.gmail.com>
+ <CAC_iWjJL2tHTe84iqOkzDxANed-TdOObDYoW2jUwe3T=x=cyqA@mail.gmail.com>
+ <CAFLszTghAmCGoiHq+iBwBRC99ucBOUGG+mjq8HEjUVkPAJu-ZQ@mail.gmail.com>
+ <CAC_iWjKLODdFV701vo-ECEo+_U6NQoLS=HsrgmS+RyDHd5pi0A@mail.gmail.com>
+ <CAFLszTits7gXaCfCzwvOOwLcYOtHSPBTh8H+5o5jgZ2wh4eNuQ@mail.gmail.com>
+ <CAC_iWjKetz0BUriZ__khwQaPshadFFNsdZXyN8rtPe8VpkkVwg@mail.gmail.com>
+ <CAFLszTgL-S3jeXK=OWTaqGKtSQDMo=JjiHT3w4+xup+d4Qr4kA@mail.gmail.com>
+ <00f85c61-4d15-4d38-ad0d-f039715ed1d6@canonical.com>
+In-Reply-To: <00f85c61-4d15-4d38-ad0d-f039715ed1d6@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 25 Sep 2024 14:50:01 +0200
-Message-ID: <CAFLszTig=StMBjcz-ouWF_HiTJSc3y5x-e6Zexq1n41DP_FttA@mail.gmail.com>
-Subject: Re: [PATCH v6 04/19] test: Allow connecting to a running board
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
+Date: Wed, 25 Sep 2024 14:50:19 +0200
+Message-ID: <CAFLszThs-uPmLjNnve4TgKxVCEiNyhnCBE0x6ACLcBuG64p7mA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] efi_leader: delete rng-seed if having EFI RNG protocol
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,47 +99,182 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Heinrich,
 
-On Mon, 23 Sept 2024 at 22:35, Tom Rini <trini@konsulko.com> wrote:
+On Sun, 22 Sept 2024 at 15:43, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> On Fri, Sep 20, 2024 at 08:01:39AM +0200, Simon Glass wrote:
+> On 20.09.24 17:58, Simon Glass wrote:
+> > Hi Ilias,
+> >
+> > On Fri, 20 Sept 2024 at 09:37, Ilias Apalodimas
+> > <ilias.apalodimas@linaro.org> wrote:
+> >>
+> >> Hi Simon,
+> >>
+> >> On Fri, 20 Sept 2024 at 10:25, Simon Glass <sjg@chromium.org> wrote:
+> >>>
+> >>> Hi Ilias,
+> >>>
+> >>> On Thu, 19 Sept 2024 at 17:51, Ilias Apalodimas
+> >>> <ilias.apalodimas@linaro.org> wrote:
+> >>>>
+> >>>> On Thu, 19 Sept 2024 at 18:39, Simon Glass <sjg@chromium.org> wrote:
+> >>>>>
+> >>>>> Hi,
+> >>>>>
+> >>>>> On Thu, 19 Sept 2024 at 17:37, Ilias Apalodimas
+> >>>>> <ilias.apalodimas@linaro.org> wrote:
+> >>>>>>
+> >>>>>> On Thu, 19 Sept 2024 at 18:19, Simon Glass <sjg@chromium.org> wrote:
+> >>>>>>>
+> >>>>>>> Hi,
+> >>>>>>>
+> >>>>>>> On Thu, 19 Sept 2024 at 17:13, Ilias Apalodimas
+> >>>>>>> <ilias.apalodimas@linaro.org> wrote:
+> >>>>>>>>
+> >>>>>>>>
+> >>>>>>>>
+> >>>>>>>> On Thu, Sep 19, 2024, 18:05 Heinrich Schuchardt <heinrich.schuchardt@canonical.com> wrote:
+> >>>>>>>>>
+> >>>>>>>>> On 19.09.24 17:00, Simon Glass wrote:
+> >>>>>>>>>> Hi,
+> >>>>>>>>>>
+> >>>>>>>>>> On Thu, 19 Sept 2024 at 16:32, Ilias Apalodimas
+> >>>>>>>>>> <ilias.apalodimas@linaro.org> wrote:
+> >>>>>>>>>>>
+> >>>>>>>>>>> Hi all,
+> >>>>>>>>>>>
+> >>>>>>>>>>> On Thu, 19 Sept 2024 at 17:20, Heinrich Schuchardt
+> >>>>>>>>>>> <heinrich.schuchardt@canonical.com> wrote:
+> >>>>>>>>>>>>
+> >>>>>>>>>>>> On 19.09.24 16:10, Simon Glass wrote:
+> >>>>>>>>>>>>> Hi Heinrich,
+> >>>>>>>>>>>>>
+> >>>>>>>>>>>>> On Sat, 14 Sept 2024 at 18:06, Heinrich Schuchardt
+> >>>>>>>>>>>>> <heinrich.schuchardt@canonical.com> wrote:
+> >>>>>>>>>>>>>>
+> >>>>>>>>>>>>>> For measured be boot we must avoid any volatile values in the device-tree.
+> >>>>>>>>>>>>>> We already delete /chosen/kaslr-seed if we provide and EFI RNG protocol.
+> >>>>>>>>>>>>>
+> >>>>>>>>>>>>> Could you explain a bit why this is, and where this is checked?
+> >>>>>>>>>>>>>>
+> >>>>>>>>>>>>>> Additionally remove /chosen/rng-seed provided by QEMU or U-Boot.
+> >>>>>>>>>>>>
+> >>>>>>>>>>>> Measured boot relies on creating hashes of artifacts and writing these
+> >>>>>>>>>>>> to TPM. If the hashes don't match the OS will either warn or refuse to
+> >>>>>>>>>>>> boot. The device-tree is one of the artifacts that are measured.
+> >>>>>>>>>>>>
+> >>>>>>>>>>>> If we have random values in /chosen, measured boot will fail.
+> >>>>>>>>>>>>
+> >>>>>>>>>>>> When an EFI RNG protocol is provided by the firmware, GRUB and the
+> >>>>>>>>>>>> kernel will use it instead of /chosen/rng-seed and /chosen/kaslr-seed.
+> >>>>>>>>>>>
+> >>>>>>>>>>> There's a comment on top of that function that explains what happens as well.
+> >>>>>>>>>>> In short the EFI stub does not even look at the KASLR seed and never
+> >>>>>>>>>>> randomizes the physical placement of the kernel. It only does that
+> >>>>>>>>>>> when the EFI_RNG protocol is there.
+> >>>>>>>>>>
+> >>>>>>>>>> OK thank you. I suppose I am more just wondering why it got added in
+> >>>>>>>>>> the first place?
+> >>>>>>>>>
+> >>>>>>>>> For booting via the legacy Linux entry point adding kaslr-seed allows to
+> >>>>>>>>> randomize addresses. QEMU adds rng-seed instead of kaslr-seed.
+> >>>>>>>>
+> >>>>>>>>
+> >>>>>>>> Not the kernel physical placement. It randomizes only the virtual placement
+> >>>>>>>
+> >>>>>>> So, are you saying that U-Boot adds this field into the FDT and then removes it?
+> >>>>>>
+> >>>>>> Yes. As Heinrich said, the rng seed is still usable for some
+> >>>>>> randomization. If we boot with EFI and have an RNG protocol, we dont
+> >>>>>> need it and it also messes up the TPM measurements, so we remove it.
+> >>>>>> But the code that injects it to u-boot, or the prior bootloader that
+> >>>>>> handed you over a DT,  does not know if you plan to boot with EFI.
+> >>>>>
+> >>>>> I'm actually surprised that this works. Normally, removing a property
+> >>>>> does not drop that property from the string table, so adding a
+> >>>>> property and deleting it is not normally the same as never adding it.
+> >>>>> But perhaps that has changed?
+> >>>>>
+> >>>>> Anyway, I think we should add the property when we know it is OK to do
+> >>>>> so, which is just before we boot. If you agree I can take a look at
+> >>>>> that.
+> >>>>
+> >>>> Sure, but we won't be able to remove this code. There are still
+> >>>> first-stage boot loaders that might send you a DT over a bloblist,
+> >>>> that has a kaslr-seed
+> >>>
+> >>> But then I don't see what problem that causes...I'm just going to
+> >>> leave this madness to you :-)
+> >>>
+> >>
+> >> The problem is that in theory, we need to measure a DT as early as
+> >> possible, but that's not doable in U-Boot yet. The TCG specs have no
+> >> guidance on measuring DTs, but do have on ACPI tables and we basically
+> >> copy what's done for ACPI.
+> >>
+> >> The DT is more fragile though. As Heinrich said if you decide to
+> >> measure it, you can't have random values -- whether that comes from
+> >> U-Boot injecting those or a previous loader is irrelevant. The result
+> >> is the same, if you have random values in the measured DT, e.g a mac
+> >> address or a kaslr-seed the measurements we take on PCR1 will be
+> >> different and as a result kind of useless.
+> >>
+> >> For the reasons above, measuring a DT is not in any default config.
+> >> It's up to the user whether he wants to measure it or not. But for the
+> >> kaslr-seed, since the kernel does not use it when booting via EFI and
+> >> the EFI_RNG protocol is installed, we remove it.
+> >>
+> >> Hope that clarifies things a bit
+> >
+> > Yes it does, thank you.
+> >
+> > IMO measuring the devicetree should really be done using a hash of
+> > only part of the tree, for example excluding the /options node and
+> > perhaps /chosen as well. I just looked to refresh my memory, and
+> > adding then removing a property does not result in the same DT as
+> > before the addition.
 >
-> > Sometimes we know that the board is already running the right software,
-> > so provide an option to allow running of tests directly, without first
-> > resetting the board.
-> >
-> > This saves time when re-running a test where only the Python code is
-> > changing.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > (no changes since v1)
-> >
-> >  test/py/conftest.py                   |  3 +++
-> >  test/py/u_boot_console_base.py        | 14 ++++++++++----
-> >  test/py/u_boot_console_exec_attach.py | 21 ++++++++++++---------
-> >  3 files changed, 25 insertions(+), 13 deletions(-)
-> >
-> > diff --git a/test/py/conftest.py b/test/py/conftest.py
-> > index fc9dd3a83f8..ca66b9d9e61 100644
-> > --- a/test/py/conftest.py
-> > +++ b/test/py/conftest.py
-> > @@ -79,6 +79,8 @@ def pytest_addoption(parser):
-> >      parser.addoption('--gdbserver', default=None,
-> >          help='Run sandbox under gdbserver. The argument is the channel '+
-> >          'over which gdbserver should communicate, e.g. localhost:1234')
-> > +    parser.addoption('--no-prompt-wait', default=False, action='store_true',
-> > +        help="Assume that U-Boot is ready and don't wait for a prompt")
+> We must not exclude the /chosen node as it may contain:
 >
-> I don't think this is the right name for what the commit message says we
-> have? Maybe something like --use-running-system or otherwise make it
-> clear we're using the board as it's already up and ready to go?
+> * /chosen/bootargs - Command line arguments must be measured.
+> * /chosen/initrd - Filename of the initial RAM disk.
+>
+> For more items see
+> https://www.kernel.org/doc/Documentation/devicetree/bindings/chosen.txt.
+>
+> >
+> > There are several reasons I have this opinion:
+> > - The DT is used for things which don't relate to Linux, such as /options/u-boot
+> > - The DT may have overlays applied
+> > - Some DT nodes may have been 'fixed' up by U-Boot
+> >
+> > So if we want to 'measure' the DT, we should probably provide in the
+> > DT an indication of which part is hashed, so Linux etc. can take that
+> > into account. Also we may want to have multiple hashes, to deal with
+> > the case of additions being made. We have something similar to this
+> > with FIT signatures, but that mechanism is not suitable here (although
+> > it could perhaps help inspire a solution).
+>
+> Current Linux just expects the measurement. It would not to be able to
+> consume any information describing which part of the DT has been measured.
+>
+> The idea of measurement is that it should capture the whole state. We
+> cannot generally exclude fix-ups:
+>
+> If memory is added and U-Boot changes the device-tree accordingly, this
+> should change the measurement.
+>
+> If the network card is replaced with a different card resulting in a
+> different MAC address copied to the device-tree, this should change the
+> measurement, too.
 
-OK, I can change it. The name I have chosen refers to the behaviour
-rather than the effect, but switching to a flag which describes the
-effect is fine with me.
+Yes, anything that is used must be measured.
+
+But removing things from the devicetree does not generally put it back
+to the state before they were added. That's really the main point I
+was trying to get across.
 
 Regards,
 Simon
