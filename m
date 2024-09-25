@@ -4,73 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6517DC369CA
-	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 10:45:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C93CFC369D0
+	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 11:29:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 986B1889E9;
-	Wed, 25 Sep 2024 12:45:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 045A688B5F;
+	Wed, 25 Sep 2024 13:29:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NhyWvaSh";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 072C187E30; Wed, 25 Sep 2024 12:45:29 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1727263793;
+	bh=yN+By0kTW5UyUgEkfbbRSYexo8+igSnRUIACG241Aow=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=ySfsczo7+B15kL3W4a00ce1UhiPT6LwYEZ527HetULpJ+khIR1gHlKDDl8smYsZdv
+	 8j/kBuvrgWjmeycBarb10yDXa7DKaqSq7/SHkG7XUmhxWE9G5poDsjXNay1ZUMXYwD
+	 UfCFF4qUazHZ6/kRfbC4N4gaLJ0HG1BLMlFY2pE9Gu1eYNgz7VCjs3aoPo/YwdFvKF
+	 SfLzTvOmjkO/s5D/M3W+wU7lG7dUTNUtcJrv/R/WHHFjoIKtjONyT0QBguzB4s1sB6
+	 PMFAMwEGSSCdl19VdfaT3nZH8oUqBDhcju29/DraWPcmT9qEp3WzOPVb10XRhgbgFh
+	 Pau42fxqPZBKg==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 715A887BF4
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 12:45:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a8d2b4a5bf1so917856066b.2
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 03:45:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727261116; x=1727865916; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=G+4ReTpOUtmkSQpioPKZIoLjm5DrynoaFyhbzdkJPUE=;
- b=NhyWvaShQPOASfP8C9+zgLnZufXyNQdk10CWXdCGKefUHWBNixGS5KbUbpDSCeHqIf
- V7DF4zNK8Ze0bV0MdhEG/lXuoT58iq2p2hM3VNwXRDKjFk3/vidEVYXBvh8JLJOH+U9x
- azqwn9pRxFL7KBOFpTupjQmuE/qslh/yWaeKI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727261116; x=1727865916;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=G+4ReTpOUtmkSQpioPKZIoLjm5DrynoaFyhbzdkJPUE=;
- b=pBzq5p0DI/mV0QMJaCFdK/E1OqAaaBlM7DIXH1DgQ5ivAPFOYnGuIEDliCb998mIBe
- Qcdcgw2EFDBa3x7DT9B/VQnIsjwINs2YPOZOaYDPFnkk+aWeLgPjHzyNvWsMupuN+k42
- 3lLqmbU0VIbbaTOyPzoKuLFH+Tihsn/1Fg/bRyY6Pq3IOTCmK71RKw9PMxXHj6xGZgJr
- d8jjSGUvhFRHZY0aJvgk+bgg9hCDMjV4IFe6inG8nCi+MwqHeyJkI8kSy5rf8SDzwggr
- Y6ZOrc0Jbit4cglzlxc4bE4IYNpYkBSkX5HhUgJF1fsbJX9ZLlbd2K0U1hO2DyhDRCUN
- OyIw==
-X-Gm-Message-State: AOJu0YzdSn+FDVsLht1mc8llSgb4yw8DRa+yataZ2WeM7wd/5ELly6uX
- 9tLYWB5lqzvidmYXLXa39JJTURIwsh7vwe4HfU6yBM1qdDXwtDjl4Rkxm4ju7akQYkvWZP66lKG
- UMQ==
-X-Google-Smtp-Source: AGHT+IEk3kD+uOyPQu8pBp4pxNfVc77oUILcySn2sEhgQ8nT8FyzqI1h2FXlkhbs8jqlrg99L3Hr+Q==
-X-Received: by 2002:a17:907:1c1d:b0:a7a:bcbc:f7e1 with SMTP id
- a640c23a62f3a-a93a035ce1emr227603366b.15.1727261116564; 
- Wed, 25 Sep 2024 03:45:16 -0700 (PDT)
-Received: from chromium.org ([82.132.187.73]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9392f342a7sm195352266b.29.2024.09.25.03.45.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Sep 2024 03:45:16 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH] sandbox_spl: Restrict use of UPL when not enabled
-Date: Wed, 25 Sep 2024 12:44:53 +0200
-Message-ID: <20240925104501.44457-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 44F0587E30;
+ Wed, 25 Sep 2024 13:29:49 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1727263792;
+ bh=yN+By0kTW5UyUgEkfbbRSYexo8+igSnRUIACG241Aow=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=XTGOEP/CtjPKjYCreJqa/JXTipNa4C3IdYfMBpKdYCDme1antInVV6/exDQESEeuC
+ 3djBQcZhc53BZrlsTQvdwYo/eWWwVyBNmyAvdAPwAWmZOwsVd7l3NQ1eFNygFzDJ9E
+ 5Zfb2kuLlupn8MAVDsW9dp/irq8qrgSUVgyvwa/Te2rj5cFmbbSpRsO2Jng1Fuzs8U
+ QtohBPr/Tx5I+0dgW0dGA2vzssK8ev8IxFBI8BId7M32+CZfmRWOdqNdK22MVJ6IR4
+ pkugpTvAoomVNHsISB0Nd3ltb28t+baazeXUJzqNu/enMHI/trW7WlakTLduqq+lvW
+ 1rt7FF9FSdzZA==
+Message-ID: <270aa01b-98f9-4164-9539-396b9b3f96bc@denx.de>
+Date: Wed, 25 Sep 2024 13:23:46 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 3/5] power: regulator: Exit from
+ regulator_set_suspend_value on poorly described regulators
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Ben Wolsieffer <benwolsieffer@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Chris Morgan <macromorgan@hotmail.com>, Dragan Simic <dsimic@manjaro.org>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Matteo Lisi
+ <matteo.lisi@engicam.com>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Max Krummenacher <max.krummenacher@toradex.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Sam Day <me@samcday.com>,
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Thierry Reding <treding@nvidia.com>,
+ Tom Rini <trini@konsulko.com>, Volodymyr Babchuk
+ <Volodymyr_Babchuk@epam.com>,
+ "u-boot-amlogic@groups.io" <u-boot-amlogic@groups.io>,
+ "u-boot-qcom@groups.io" <u-boot-qcom@groups.io>,
+ "u-boot@dh-electronics.com" <u-boot@dh-electronics.com>,
+ "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20240925022314.714285-1-marex@denx.de>
+ <20240925022314.714285-3-marex@denx.de>
+ <18454c94-9422-4fe3-8996-6fc83834e319@kwiboo.se>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <18454c94-9422-4fe3-8996-6fc83834e319@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,36 +96,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With sandbox_spl we want to use the file-based boot in CI, so that this
-flow is tested. The recent UPL change enabled booting via that method,
-thus overriding the file-based boot.
+On 9/25/24 8:29 AM, Jonas Karlman wrote:
+> Hi Marek,
 
-Correct this by using UPL only when the --upl flag is given.
+Hi,
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
-Fixes: 91fde8e1764 ("sandbox: Add an SPL loader for UPL")
----
-
- arch/sandbox/cpu/spl.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
-
-diff --git a/arch/sandbox/cpu/spl.c b/arch/sandbox/cpu/spl.c
-index 1c33a520c64..76638362564 100644
---- a/arch/sandbox/cpu/spl.c
-+++ b/arch/sandbox/cpu/spl.c
-@@ -55,9 +55,10 @@ void board_init_f(ulong flag)
- 
- void board_boot_order(u32 *spl_boot_list)
- {
-+	struct sandbox_state *state = state_get_current();
-+
- 	spl_boot_list[0] = BOOT_DEVICE_VBE;
--	spl_boot_list[1] = BOOT_DEVICE_UPL;
--	spl_boot_list[2] = BOOT_DEVICE_BOARD;
-+	spl_boot_list[1] = state->upl ? BOOT_DEVICE_UPL : BOOT_DEVICE_BOARD;
- }
- 
- static int spl_board_load_file(struct spl_image_info *spl_image,
--- 
-2.43.0
-
+> On 2024-09-25 04:21, Marek Vasut wrote:
+>> In case the DT regulator node does not contain 'regulator-max-microvolt'
+>> property and does not contain 'regulator-state-mem' subnode (like the
+>> test.dts regul1_scmi: reg@1 {} regulator node), then regulator_pre_probe()
+>> will parse this regulator node and set uc_pdata->suspend_on = true and
+>> uc_pdata->suspend_uV = uc_pdata->max_uV, where uc_pdata->max_uV is set
+>> to -ENODATA because "regulator-max-microvolt" is missing, and therefore
+>> uc_pdata->suspend_uV is also -ENODATA. In case regulator_autoset() is
+>> used afterward, it will attempt to call regulator_set_suspend_value()
+>> with uV = uc_pdata->suspend_uV = -ENODATA and fail with -EINVAL. Check
+>> for this case in regulator_set_suspend_value() and immediately return 0,
+>> because there is no way to set meaningful suspend voltage, so do nothing
+>> and retain the existing settings of the regulator.
+> 
+> I sent a different fix for this some time ago, please check it out:
+> 
+> https://patchwork.ozlabs.org/patch/1964571/
+That one will work too, yes.
