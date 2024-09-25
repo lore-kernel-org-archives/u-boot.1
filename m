@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA337CCF9E8
-	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 17:26:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6A29CCF9E7
+	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 17:26:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED8BE88C1C;
-	Wed, 25 Sep 2024 19:26:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5F26D88363;
+	Wed, 25 Sep 2024 19:26:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RODprfOH";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RbbXmBoH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 707D088363; Wed, 25 Sep 2024 19:26:10 +0200 (CEST)
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
+ id 8B76088216; Wed, 25 Sep 2024 19:26:13 +0200 (CEST)
+Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
+ [IPv6:2607:f8b0:4864:20::732])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 739E188B11
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 19:26:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 60BE188363
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 19:26:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-7a9ad15d11bso9202285a.0
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 10:26:05 -0700 (PDT)
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-7a9a30a045cso8500585a.2
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 10:26:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1727285164; x=1727889964; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1727285170; x=1727889970; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=k6fDHNqKXkYFiqQqwDQEPJSy/AjTChMcY8dviW5KNxw=;
- b=RODprfOHx0yaieu1EOPKGnq9vCecoLKJ8XSBImAYqUmHPdas+VcUwEXW4oI9MoHd9z
- wIMJcCouALBrXdk22Wk3o6PqyT4Fu6mIqDhA5n18IgIkWxhbdY/yv9fOV9AqKJD/eyLr
- xbadITLGohMUESj248CCduhsFBGMu4SvN6uok=
+ bh=mKvIVtqYJ1WSpOhhd/TWIkvRPnvYP9fAfAdKmCbk2lY=;
+ b=RbbXmBoHUxhISbCzdoVWGzGfrc3RGcAeJz+dxH3B4UYOMTjX3hw3FdmqAIvHGcfvNk
+ lDOic3ju2B7pYS2pOLex/6B7jKQJDSdEt8F/hJu5rC7Ew1QqEa0TrhZ+sH4q2fDARhmm
+ iljF8AH2xmI2ermOlR4qZ8YUY+M7BD6+GvYec=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727285164; x=1727889964;
+ d=1e100.net; s=20230601; t=1727285170; x=1727889970;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=k6fDHNqKXkYFiqQqwDQEPJSy/AjTChMcY8dviW5KNxw=;
- b=R3OmfppND8AXE2aWyPINyo5ROZI+h8/49E0nt19XvgPRLYefZpYklohwxDX25gP7/L
- jXVwUNTUvkDkXTtWfGXKsmjozJ6yQoqHVC8Nioph56MF9mmVE25XgwnDG+GR9jFVzlE1
- gdhbtS6XemtaSOEFjvrIw9K57BAGjF5gFSEBjrNqm/pRMBqiF/EXHrKksUdH5lrDeEY5
- lvtsEzaAcenaHpx9uxZmXBhdqNXpcC4JchnkeYEnsekLySecHFKR4zOi4lY57VDuFfDl
- vfAcn6pn4+fzFAlttMPP2ZX0VHqFL8ux8Q+XUYGtE/JeoYf1O49gUCd9uf3KwW/rgTD9
- zxvA==
-X-Gm-Message-State: AOJu0Yx0wtSPJGjUWsTjfKNRi3O4j8Lnvff0mZYL+sexNvtZz14Eqob0
- fcB/0941DdlmCoh39U8YZeWRnd1J3ADijY7H1dGOaXO+fZYYVU40xopYrwD5Xyk=
-X-Google-Smtp-Source: AGHT+IFzd1LrXi8II1tRHdsc4pT1dSjXVvjMRafvKIKye8L1KwzSf9VSW+Gk9pFCeD2k0nRDD1X0ZA==
-X-Received: by 2002:a05:620a:450b:b0:7a9:bc1c:10b9 with SMTP id
- af79cd13be357-7ace7416c3amr522451885a.33.1727285164259; 
- Wed, 25 Sep 2024 10:26:04 -0700 (PDT)
+ bh=mKvIVtqYJ1WSpOhhd/TWIkvRPnvYP9fAfAdKmCbk2lY=;
+ b=QsO5UPSw5yg4Tyi1ONlBY7561bA7hcI2xsqk/39vU6wc1pqqogNAGBJ+3t/ThZ2GDO
+ cWj87Fo+3K9IKn3I+MuG7sUtButGX+hxHdYrk+uVhX1UURIgAw394mE83fRn7RduDLvj
+ +vA/s2mkTWkPxZ6glHcgjuAsjE8EDLL6GmppxOAyg5Q3yF8hO4EUZNkuTF2WbqZMM2hT
+ R5LHFk7SgQPtQtpU92Em74itZBJ6nV40QOl8STlbF2IrG0sMdXbNVJGAH0ddcDbQJqcI
+ 1merjkbt4IQtIVeCY/jNHi3iwiLS3AxSMnB7qwQXwiOHCX9c9eQjX5HC5PPNPEozvdoR
+ 0pfQ==
+X-Gm-Message-State: AOJu0YxYjI45mcCNoUan6cyHnk9PJQRrPAAac3sncI+4rinTmr+ftCLc
+ NTjmL+Q3PEljvsgxvyBraUUk1WUnmcCBzMwZPYxyXLDg/BBMsJ0gT30pPKL0PoI=
+X-Google-Smtp-Source: AGHT+IGUiayhJnoqIUqLyIOy6XSZV2AdJcfwi9LW8GT+K2F4/T310xmKkelhpyM7J9PmTshCzYGlmQ==
+X-Received: by 2002:a05:620a:d81:b0:7a9:bcd1:5279 with SMTP id
+ af79cd13be357-7ace7403c98mr462716785a.18.1727285170141; 
+ Wed, 25 Sep 2024 10:26:10 -0700 (PDT)
 Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7acde62b3a8sm189532085a.135.2024.09.25.10.26.02
+ af79cd13be357-7acde5ccbf4sm191404285a.96.2024.09.25.10.26.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Sep 2024 10:26:03 -0700 (PDT)
-Date: Wed, 25 Sep 2024 11:26:01 -0600
+ Wed, 25 Sep 2024 10:26:09 -0700 (PDT)
+Date: Wed, 25 Sep 2024 11:26:07 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v6 01/19] test: Allow signaling that U-Boot is ready
-Message-ID: <20240925172601.GA4252@bill-the-cat>
+Subject: Re: [PATCH v6 00/19] labgrid: Provide an integration with Labgrid
+Message-ID: <20240925172607.GB4252@bill-the-cat>
 References: <20240920060158.106612-1-sjg@chromium.org>
- <20240920060158.106612-2-sjg@chromium.org>
- <20240923203512.GQ4252@bill-the-cat>
- <CAFLszTjT3RZYChMhBxUDsf6YC-7cZfh1_YhuQrin3sRanSO=Xw@mail.gmail.com>
+ <20240923203612.GT4252@bill-the-cat>
+ <CAFLszThbxYuDeui6PJQpUMr58jvQ=GnxjTK-UWSanU6AGt+cbg@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="+KE24SOC5FH8n2vJ"
+ protocol="application/pgp-signature"; boundary="G9szjRIOlZwlRr2e"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTjT3RZYChMhBxUDsf6YC-7cZfh1_YhuQrin3sRanSO=Xw@mail.gmail.com>
+In-Reply-To: <CAFLszThbxYuDeui6PJQpUMr58jvQ=GnxjTK-UWSanU6AGt+cbg@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,83 +92,116 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---+KE24SOC5FH8n2vJ
+--G9szjRIOlZwlRr2e
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Sep 25, 2024 at 02:49:56PM +0200, Simon Glass wrote:
+On Wed, Sep 25, 2024 at 02:50:08PM +0200, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Mon, 23 Sept 2024 at 22:35, Tom Rini <trini@konsulko.com> wrote:
+> On Mon, 23 Sept 2024 at 22:36, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Fri, Sep 20, 2024 at 08:01:36AM +0200, Simon Glass wrote:
+> > On Fri, Sep 20, 2024 at 08:01:35AM +0200, Simon Glass wrote:
 > >
+> > > Labgrid provides access to a hardware lab in an automated way. It is
+> > > possible to boot U-Boot on boards in the lab without physically touch=
+ing
+> > > them. It relies on relays, USB UARTs and SD muxes, among other things.
+> > >
+> > > By way of background, about 4 years ago I wrong a thing called Labman=
+[1]
+> > > which allowed my lab of about 30 devices to be operated remotely, usi=
+ng
+> > > tbot for the console and build integration. While it worked OK and I
+> > > used it for many bisects, I didn't take it any further.
+> > >
+> > > It turns out that there was already an existing program, called Labgr=
+id,
+> > > which I did not know about at time (thank you Tom for telling me). It=
+ is
+> > > more rounded than Labman and has a number of advantages:
+> > >
+> > > - does not need udev rules, mostly
+> > > - has several existing users who rely on it
+> > > - supports multiple machines exporting their devices
+> > >
+> > > It lacks a 'lab check' feature and a few other things, but these can =
+be
+> > > remedied.
+> > >
+> > > On and off over the past several weeks I have been experimenting with
+> > > Labgrid. I have managed to create an initial U-Boot integration (this
+> > > series) by adding various features to Labgrid[2] and the U-Boot test
+> > > hooks.
+> > >
+> > > I hope that this might inspire others to set up boards and run tests
+> > > automatically, rather than relying on infrequent, manual test. Perhaps
+> > > it may even be possible to have a number of labs available.
+> > >
+> > > Included in the integration are a number of simple scripts which make=
+ it
+> > > easy to connect to boards and run tests:
+> > >
+> > > ub-int <target>
+> > >     Build and boot on a target, starting an interactive session
+> > >
+> > > ub-cli <target>
+> > >     Build and boot on a target, ensure U-Boot starts and provide an i=
+nteractive
+> > >     session from there
+> > >
+> > > ub-smoke <target>
+> > >     Smoke test U-Boot to check that it boots to a prompt on a target
+> > >
+> > > ub-bisect <target>
+> > >     Bisect a git tree to locate a failure on a particular target
+> > >
+> > > ub-pyt <target> <testspec>
+> > >     Run U-Boot pytests on a target
+> > >
+> > > Some of these help to provide the same tbot[4] workflow which I have
+> > > relied on for several years, albeit much simpler versions.
+> > >
+> > > The goal here is to create some sort of script which can collect
+> > > patches from the mailing list, apply them and test them on a selection
+> > > of boards. I suspect that script already exists, so please let me know
+> > > what you suggest.
 > >
-> > > When Labgrid is used, it can get U-Boot ready for running tests. It
-> > > prints a message when it has done so.
-> > >
-> > > Add logic to detect this message and accept it.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > ---
-> > >
-> > > (no changes since v1)
-> > >
-> > >  test/py/u_boot_console_base.py | 9 +++++----
-> > >  1 file changed, 5 insertions(+), 4 deletions(-)
-> >
-> > What happens is that labgrid can also be told to look for and then
-> > interrupt autoboot, just like our pytests can do, and the system is at
-> > the prompt. But this is also what it's like for a system with autoboot
-> > disabled. Do we actually need this patch to achieve the functionality
-> > you want? Doesn't that already just happen?
+> > I still really wish you would split the labgrid parts of this series out
+> > from the pytest fixes and improvement parts. Things are largely fine
+> > outside of the labgrid part for example, which I'll probably just take
+> > after confirming it doesn't break using labgrid other ways.
 >=20
-> The point of this patch is actually to remove code in pytest, by
-> allowing it to skip all the banner-detection stuff. It does not affect
-> things in Labgrid, since it still needs to watch for banners, etc.
-
-But you can't remove code from pytest, people can and will run the suite
-outside of labgrid.
-
-> Without this patch, we have to tell Labgrid's U-Boot driver to do
-> nothing, so that pytest does it. But that is not a good idea, since
-> Labgrid has a lot more info about the board than pytest has. For
-> example, look at all the SPL-banner-count stuff.
-
-Why do you have to tell it to do nothing? The pytest suite works fine,
-today, if the board stops at the prompt automatically. To be clear, the
-labgrid yaml file I'm using with my scripts has the information to stop
-autoboot in it and it's not causing a problem.
-
-> Basically, without this patch we cannot use '-s uboot' to tell the
-> Labgrid strategy to take us to a U-Boot prompt. We must just use a raw
-> console with no strategy, relying on pytest to do all the work.
+> I have had a few attempts at this, but it ends up being somewhat arbitrar=
+y.
 >=20
-> I hope that helps explain the problem?
+> Perhaps I could split out a series with the exception-handling changes
+> and the typo? Perhaps 'Avoid failing skipped tests' also?
 
-I think I see what you're saying, and it's based on the assumption that
-we'll make everyone either use labgrid?
+Well, in a previous series I said where I thought each patch went in
+terms of what-it-did, so yes, that sounds like one of the sets of
+patches I thought was unrelated to labgrid. Thanks.
 
 --=20
 Tom
 
---+KE24SOC5FH8n2vJ
+--G9szjRIOlZwlRr2e
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmb0R6kACgkQFHw5/5Y0
-tyy5VQv/Qgm0Ef7BcCAvwG+WwSHzJ8dtOxuoczI7qV2Ctk8b009cDgxYepn3SOPy
-34KAvbz/o8dHXh0kImYuFXHSlbt3MU31cC4f8voYZ5mDH5mJ3C+sb+eROV5kZAFK
-xTCTUD4mb1SrZMhaN95vlOIs8cbsPaGNUkG+GV4SIJH5WEtb/f0G5+iyR0M7/tHp
-0vO0Fjo5O3w7EZyOCO8xFo3SYVdIGg7EplRu2ahTTEgkOt64UrimrIlTQOsKqse7
-vHbDpRhGhD789x5puzn13nztwz+yHL68GWFH5K8IYB7VCpotbHdW0uU/qm8HgwC0
-YV+B6OTUuXJELyDZrpGbzUjXKwihxlclWJc+IASlfOMpFsYrJEH+1Z09y6KAKDty
-noIc1Wc/3TCAk4fHwlZPAshhyP2EAg8gHtYsQ+RnQpwzksYJT9TV1slPpl+RMiwD
-gMAQNcbAOT4/1mkbl3P8AeQvCbs/nyoOGr4jbsA98HJh5XfGcoI6PcYZmTiIeuvC
-N44LkpCF
-=Y3h2
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmb0R68ACgkQFHw5/5Y0
+tyySxQv9GhifM6GeDSTupxav9QdvNq9uVCLWcDJtkcRRIAiMHXhVx3KeUZM0hXjg
+wdwdTBWGrIVUgiftNNFD2Az2bbUtyF6XhI+6hRWAqD6dabqu3JwzPdol/+R9225R
+kYCsW+o9kyeW5ZTTGCH5E/rt6JB9SvoUi9Q0NycS02oNOp3bXqVWRRLlW2SJM2Ti
+qYd6wzohHrL+LAnaCaWHwX2MKKUSEy6H6jqAODbqdTPofm7++8qUah1MID6VRQOi
+13OoznhCzjJ8EX3WtF10Fgnszcjk+i4+bFzSY14Lf8QPM2svaUTJwVKXpBUJ9gDN
+Z0+1c3/OhUWWi7cTTjig8tNpuFUxsd/YYnxnWcn0u90OSbtwH2AenM+B1V3XSq9N
+Gh7LDjUP+APN/hfLVtU46IM3gyD9JOLai0ujDSqgOjW+2H38O1svssb702Kab6pY
+/sXUl3oCIeBdB0eOavNyEhLwQaP6p+f3jSKfPJCLrY7vRxSo3LSYesar+fhQTP8O
+NKFDuVAq
+=bl/u
 -----END PGP SIGNATURE-----
 
---+KE24SOC5FH8n2vJ--
+--G9szjRIOlZwlRr2e--
