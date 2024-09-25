@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 502F9C369D9
-	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 12:52:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0194C369D9
+	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 12:54:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC59488C40;
-	Wed, 25 Sep 2024 14:52:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5513C88BBF;
+	Wed, 25 Sep 2024 14:54:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HOZl8a/L";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IukhmUzc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 02C0D88C60; Wed, 25 Sep 2024 14:52:23 +0200 (CEST)
-Received: from mail-vs1-xe2d.google.com (mail-vs1-xe2d.google.com
- [IPv6:2607:f8b0:4864:20::e2d])
+ id 798A188CB9; Wed, 25 Sep 2024 14:53:59 +0200 (CEST)
+Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
+ [IPv6:2607:f8b0:4864:20::72e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4036588363
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 14:52:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AAD6488363
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 14:53:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-vs1-xe2d.google.com with SMTP id
- ada2fe7eead31-49bcf6b9b64so2348873137.1
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 05:52:16 -0700 (PDT)
+Received: by mail-qk1-x72e.google.com with SMTP id
+ af79cd13be357-7a9acc6f22dso659426885a.0
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 05:53:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727268735; x=1727873535; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727268834; x=1727873634; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=EDHRcgah2HmzAzZKrgH3xci95HvPKk9NPPyn8EqUXwI=;
- b=HOZl8a/LASKIYRZPFyuuSQBIU6Rm5lcXHFhs88e7Mq7H3IPNswxYn7W99M+HF4KYee
- RYR1bTb3iA9x6/7enulOuueFPwD2J1vr1kPihcB6UoY+V3XYVUw3FKv2f5CmgjhjNvvN
- e+5uGs6ljnoFsVVCXaUPmzcZPpTQ5QqVIA7Gw=
+ bh=zfcFOhYThriLlRowGOHXNxe4RU7KYReq9LnlyxpmpPs=;
+ b=IukhmUzcFGxasCAMT6dVS8vHHn45sfGwvVgGLOoyjSER4fR9xgcvkI2xpIytkomK1n
+ o22NfGJapXfYKh3KOjTNpb9aSDM6Aa5YpPtJPLmrjZeBU6nBwVsfdbZy1FylclAQillw
+ v7FK9HGw5P51+JSXJUQ96Lkbh9ofDOuL3f9qk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727268735; x=1727873535;
+ d=1e100.net; s=20230601; t=1727268834; x=1727873634;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=EDHRcgah2HmzAzZKrgH3xci95HvPKk9NPPyn8EqUXwI=;
- b=KP36VixqkPa2FyGDt/1fLtnG5cMe32Uvj6EyFKnjMA0Re1z+W3HjDUHSNvwm5rIhqy
- /Bduz3uTl9hBBEGdPIFeHdUmjK7wrKeaxO5FIWvKEarAr0P93t5ENbN6AfLS3I60H8Ag
- JrIwKO+b2eXJzh3XlpQEoyuirr1ArVylZHRDDFs6yp8I32eelxw1KOlWinVwIPQuHswm
- jT9CC5Mf80LJsdzldgTADIK664NeqkLcpd0HO/x4j+ZWgWwigZyNGBmgTSxb/BcQo0Sd
- sA2m1nGtnvtNcOjQqFCk47coNwjnEljNh1SrHNkhK1VUswFKrFUandrL4ztLeSWpr7qD
- Ra3g==
+ bh=zfcFOhYThriLlRowGOHXNxe4RU7KYReq9LnlyxpmpPs=;
+ b=ZLCkceibZZqCx02FyLaS1uWfRY0VXUhRnLB7fJPy77xJ8fxAOtEgzqXKmMkrC1NoNq
+ jSH7Slpbi+51+kueIpMysMapDnAJZCqcynZKiXF/hziV9zUynJkbGPGBddgU9VX/Hn4z
+ m0qBloDby+35tfvRNbkF7iuhclHI8OiMHR9LbOC61FD2/0PjdoVpcIy7UIGs7w9aUv59
+ 4cYaWqKOe3yZL7sh24cdEAtRHg4iD2ffY+fqwoey3lHty/9N++pnaf1jhV4SiYpvc01C
+ 6LqVK/r1B9WJz/ejM54PmyJCWdEt0bdhvX1phXKM9W8uMl6phmXkF/Td7WHCl4ymV2Mv
+ Y7fQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW3eY3qidxxAIJzIpN/lnreklWGoop2WaX3VMDtiA69l2Km8GkgwWgqk9sH1hDZPEkqMimzDRI=@lists.denx.de
-X-Gm-Message-State: AOJu0YyGcQ8Een0f5wYmKquXNLXbZe2IwpL1rBpFIR+LNFZrXzZnXovs
- ayQypr5I3JdAOQyhD9VPxEfzf0X7ewq6pnRiWIgb+BWBZqIYqQAPZX8MCRCG3c4w8BA7wmQKAls
- rchM+6/RMoFZQSvBn3EL//KFfp2kpA4TM/7LSSC8kj7fia63bLA==
-X-Google-Smtp-Source: AGHT+IEyGsbq3to7k22ydK1EI4QE4bEdOL76MSOmvWVogUOyFDVSlQ6spf7woZRYInViAYSeQGzSPo73F9Lar/kMea0=
-X-Received: by 2002:a05:6102:5128:b0:49b:f52d:491b with SMTP id
- ada2fe7eead31-4a15dc99073mr2528993137.7.1727268735031; Wed, 25 Sep 2024
- 05:52:15 -0700 (PDT)
+ AJvYcCXKpavLeEAJ2wNqNO76QJCIESGDLHqOgoIbju6hWjaHmfLGxym063XJnDwy6iTC5dn4IsvIv5k=@lists.denx.de
+X-Gm-Message-State: AOJu0YxLR0w366+0XERKgOPCfbn6XfHBuYNTPA0M42XjVJxKVaejez/1
+ n4nKM0QlJRO62GOgwQjDkaUgf01JwtKW5AcSn2DTUsB+ru6kz72gY+0YQUVJ1lvkG7oUk3KQeyy
+ M2UMSjVNckvurDb+As3VCuKtHpREMIppWRMwO
+X-Google-Smtp-Source: AGHT+IGx0jfw82tnWN5GT/piWbQa2ez0yAO60OCU+bLeBTlWNDuUKuzVEf5k63HFMJn4UHHltox6EK4NGZB08n48nus=
+X-Received: by 2002:a05:6214:5704:b0:6c7:c646:25fb with SMTP id
+ 6a1803df08f44-6cb1dd692ecmr43347826d6.27.1727268834527; Wed, 25 Sep 2024
+ 05:53:54 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240902011825.746421-1-sjg@chromium.org>
- <20240902011825.746421-13-sjg@chromium.org>
- <95edb150-f53d-415a-8176-56e0fc66c822@gmx.de>
- <CAFLszTj47fa7m2Xa4yi5NkcWNUGr4kiM1z4sAnrbd5rFUKq1Zw@mail.gmail.com>
- <20240917170346.GN4252@bill-the-cat>
- <CAFLszThMhNzvW=OTgsAA0Hikv+uxLaVn7bwTGM0=htf=BbzmcA@mail.gmail.com>
- <20240919174554.GT4252@bill-the-cat>
- <CAFLszThvd4HSz6n+3OPVcQ4sv-pKD5rPfvJ_2gy_aLnPMG40hQ@mail.gmail.com>
- <20240920145933.GB4252@bill-the-cat>
-In-Reply-To: <20240920145933.GB4252@bill-the-cat>
+References: <20240905082811.1585467-1-sughosh.ganu@linaro.org>
+ <20240905082811.1585467-5-sughosh.ganu@linaro.org>
+ <0291efc6-86a2-437c-938a-707c46c34f91@gmx.de>
+ <CADg8p94TakJXkLs=m6RbvO2T_OmYagf68e4JV655TtQ5DnxtZg@mail.gmail.com>
+ <CAC_iWjKFh+g1k=HHKeApJp8OO5G78p0kruz59UUX-yfZcynJyg@mail.gmail.com>
+ <CADg8p96-kG4jEd5d_7ah3s2kOzgW4_uvDOJL+wOSzdrDjoMqZg@mail.gmail.com>
+In-Reply-To: <CADg8p96-kG4jEd5d_7ah3s2kOzgW4_uvDOJL+wOSzdrDjoMqZg@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 25 Sep 2024 14:52:04 +0200
-Message-ID: <CAFLszTi=Kquk3AfQJYpYdvmZn=EKNZTzjOL-ukLJCtP15KfigQ@mail.gmail.com>
-Subject: Re: [PATCH v5 12/14] efi_loader: Avoid using sandbox virtio devices
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Wed, 25 Sep 2024 14:53:43 +0200
+Message-ID: <CAFLszTjD5vLpcu7+_9xuzynLMjim3oPpg2wewug3-6nMs2CHug@mail.gmail.com>
+Subject: Re: [PATCH 04/16] event: add event to notify lmb memory map changes
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,193 +91,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Sughosh,
 
-On Fri, 20 Sept 2024 at 16:59, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 20 Sept 2024 at 13:38, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> On Fri, Sep 20, 2024 at 09:25:29AM +0200, Simon Glass wrote:
-> > Hi Tom,
+> On Fri, 20 Sept 2024 at 14:51, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
 > >
-> > On Thu, 19 Sept 2024 at 19:45, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Thu, Sep 19, 2024 at 04:10:12PM +0200, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Tue, 17 Sept 2024 at 19:03, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Mon, Sep 16, 2024 at 05:42:31PM +0200, Simon Glass wrote:
-> > > > > > Hi Heinrich,
-> > > > > >
-> > > > > > On Thu, 12 Sept 2024 at 09:12, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> > > > > > >
-> > > > > > > On 02.09.24 03:18, Simon Glass wrote:
-> > > > > > > > While sandbox supports virtio it cannot support actually using the block
-> > > > > > > > devices to read files, since there is nothing on the other end of the
-> > > > > > > > 'virtqueue'.
-> > > > > > > >
-> > > > > > > > A recent change makes EFI probe all block devices, whether used or not.
-> > > > > > > > This is apparently required by EFI, although it violates U-Boot's
-> > > > > > > > lazy-init principle.
-> > > > > > >
-> > > > > > > We always did this.
-> > > > > >
-> > > > > > Commit d5391bf02b9 dates from 2022, so I don't think that is correct.
-> > > > >
-> > > > > Yes, but I also could have sworn that was fixing the behavior having
-> > > > > been changed again previous to that.
-> > > >
-> > > > I don't see any evidence of that, though.
-> > >
-> > > Yes, it's just my recollection of the time and I could be misremembering
-> > > it as one of the other times we've had this discussion.
-> > >
-> > > > > > > What problem do you want to fix? I have not seen any issues in our CI.
-> > > > > >
-> > > > > > The EFI test in this series hangs trying to probe a virtio block
-> > > > > > device. If you drop this patch and try the rest of the series in CI,
-> > > > > > you will see the failure. Or you could just accept that I investigated
-> > > > > > this, root-caused it and produced a suitable fix. This is a v5 patch
-> > > > > > which has had quite a bit of discussion.
-> > > > >
-> > > > > And as I noted an iteration or two back, it's entirely unclear if the
-> > > > > problem is "sandbox virtio is broken" or "this code is wrong here".
-> > > > > Which in fact gets us back to ...
-> > > >
-> > > > sandbox virtio does not support a functioning block device
-> > > >
-> > > > >
-> > > > > > > > We cannot just drop the virtio devices as they are used in sandbox tests.
-> > > > > > > >
-> > > > > > > > So for now just add a special case to work around this.
-> > > > > > > >
-> > > > > > > > The eventual fix is likely adding an implementation of
-> > > > > > > > virtio_sandbox_notify() to actually do the block read. That is tracked
-> > > > > > > > in [1].
-> > > > > > > >
-> > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > Fixes: d5391bf02b9 ("efi_loader: ensure all block devices are probed")
-> > > > > > > > Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > > > > > > > [1] https://source.denx.de/u-boot/u-boot/-/issues/37
-> > > > > > > > ---
-> > > > > > > >
-> > > > > > > > (no changes since v3)
-> > > > > > > >
-> > > > > > > > Changes in v3:
-> > > > > > > > - Add a Fixes tag
-> > > > > > > > - Mention the issue created for this problem
-> > > > > > > >
-> > > > > > > >   lib/efi_loader/efi_disk.c | 14 +++++++++++++-
-> > > > > > > >   1 file changed, 13 insertions(+), 1 deletion(-)
-> > > > > > > >
-> > > > > > > > diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
-> > > > > > > > index 93a9a5ac025..2e1d37848fc 100644
-> > > > > > > > --- a/lib/efi_loader/efi_disk.c
-> > > > > > > > +++ b/lib/efi_loader/efi_disk.c
-> > > > > > > > @@ -838,8 +838,20 @@ efi_status_t efi_disk_get_device_name(const efi_handle_t handle, char *buf, int
-> > > > > > > >   efi_status_t efi_disks_register(void)
-> > > > > > > >   {
-> > > > > > > >       struct udevice *dev;
-> > > > > > > > +     struct uclass *uc;
-> > > > > > > >
-> > > > > > > > -     uclass_foreach_dev_probe(UCLASS_BLK, dev) {
-> > > > > > > > +     uclass_id_foreach_dev(UCLASS_BLK, dev, uc) {
-> > > > > > > > +             /*
-> > > > > > > > +              * The virtio block-device hangs on sandbox when accessed since
-> > > > > > > > +              * there is nothing listening to the mailbox
-> > > > > > > > +              */
-> > > > > > > > +             if (IS_ENABLED(CONFIG_SANDBOX)) {
-> > > > > > > > +                     struct blk_desc *desc = dev_get_uclass_plat(dev);
-> > > > > > > > +
-> > > > > > > > +                     if (desc->uclass_id == UCLASS_VIRTIO)
-> > > > > > > > +                             continue;
-> > > > > > > > +             }
-> > > > > > > > +             device_probe(dev);
-> > > > > > > >       }
-> > > > > > > >
-> > > > > > > >       return EFI_SUCCESS;
-> > > > > > >
-> > > > > > > Please, do not spray sandbox tweaks all over the place.
-> > > > > > >
-> > > > > > > Can't you just return an error from the sandbox-virtio driver when an
-> > > > > > > attempt to read a queue is made?
-> > > > > > >
-> > > > > > > We are using virtio on QEMU. Why do we need sandbox virtio devices? Just
-> > > > > > > run the relevant tests on the real thing.
-> > > > > >
-> > > > > > Please go ahead with whatever approach to testing you wish. But
-> > > > > > sandbox testing is an important component of U-Boot.
-> > > > >
-> > > > > Yes, but is sandbox implementing the "just be a state machine" part here
-> > > > > correctly, or not? It keeps feeling like "not" and that the reasonable
-> > > > > course of action would be to stop testing this on sandbox until that is
-> > > > > fixed especially since we can test this reliably on qemu.
-> > >
-> > > OK, but I can't tell if your answer to my point here is:
-> > > - Yes, sandbox virtio is broken / incomplete
-> > > - No, sandbox virtio is fine, there's some other mismatch between how
-> > >   it's used for sandbox and how it's used for QEMU. This will get
-> > >   resolved later.
+> > Hi Sughosh,
 > >
-> > It is incomplete, in that the block device is not fully implemented.
->
-> Then please disable it until you can complete it.
->
-> > No other test enables it, but EFI does, since it blinding tries to
-> > access all block devices without any control.
-> >
+> > On Tue, 17 Sept 2024 at 15:33, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > > >
-> > > > We have to move things forward a piece at a time. Not having a proper
-> > > > test for the EFI bootmeth is a significant gap and is what I am trying
-> > > > to fix with this series. It isn't perfect, but it is a step forward
-> > > > and will prevent regressions. It can also be built on later.
+> > > On Sat, 14 Sept 2024 at 20:38, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 > > > >
-> > > > Happy-path testing with QEMU is all very well, but it only goes so far.
+> > > > On 9/5/24 10:27, Sughosh Ganu wrote:
+> > > > > Add an event which would be used for notifying changes in the
+> > > > > LMB modules' memory map. This is to be used for having a
+> > > > > synchronous view of the memory that is currently in use, and that is
+> > > > > available for allocations.
+> > > >
+> > > > The synchronous view problem only exists because we are duplicating
+> > > > data. Store the EFI memory type in LMB and the problem vanishes.
 > > >
-> > > I frankly get really puzzled about why testing all of this, in QEMU,
-> > > where we could actually design the test to see if the OS has booted (and
-> > > if we leave things configurable well enough, do this on real hardware)
-> > > is wrong but sandbox, where we can't boot the OS, is good. Especially
-> > > for the device that's only present in an emulator. We're emulating an
-> > > emulator and not getting matching behavior in our emulator.
+> > > The LMB module only concerns itself with RAM memory. If I understand
+> > > correctly, you are proposing maintaining the EFI memory map within the
+> > > LMB module ? That would mean handling memory types other than
+> > > conventional memory in LMB.
 > >
-> > There are many reasons:
+> > I am pretty sure I've asked this before, but do these *always* need to
+> > be in sync?
+> >
+> > The efi allocators will call LMB now. So when we allocate something
+> > gtom EFI, even if any potential changes from LMB haven't been
+> > published to EFI, we won't have any memory corruptions. Can't we just
+> > opportunistically update the memory map once someone requests it?
 >
-> To be clear, I'm not saying sandbox tests have no value, or are
-> unimportant. I apologize for imply as much.
->
-> > - with sandbox we can test the operation of the bootmeth, including
-> > under failure conditions
->
-> Yes, state machine tests are useful. But we can test for xFAIL on other
-> platforms, yes?
->
-> > - we can test what happens within U-Boot itself when
-> > exit-boot-services is called, which is the bug that provoked me to
-> > write the test
->
-> I honestly don't recall the state of the discussion around that patch,
-> positive/negative/neutral.
->
-> > - we can build on this test to cover other bootmeths without needing
-> > to install a full OS just to run a test
->
-> Counter point, we can't test that an OS actually boots. One of the most
-> valuable personally tests we've added recently is
-> test/py/tests/test_net_boot.py which makes the network load and boot an
-> OS image, and test for (some) failure modes.
+> I have given this a thought. Because what you mention, Simon has a
+> similar comment. But to achieve this, it would require generating a
+> new efi memory map afresh every time such a requirement comes up. This
+> would mean, create a new memory map, put in the conventional memory,
+> and add other memory types that were part of the existing memory map.
+> And then remove the older memory map. This would need to be done every
+> time a memory map is needed to be generated. And that would also
+> include instances when a user enters a command to get the current
+> memory map. I think notifying any changes to the lmb memory map to the
+> efi memory module is easier, and less error prone.
 
-What do you want me to do with this patch?
-
-Without it, the test cannot pass. Are you suggesting that we apply the
-patches, but don't enable the test until it can be made to work,
-without this patch? Are you suggesting that I implement block devices
-for virtio in sandbox?
-
-I see great value in this test. It covers a case which we don't
-currently have in CI.
-
-Please can you just take this patch so we can move forward?? I'm happy
-to add the virtio support later.
+We need to get some agreement on my memory-allocation patches first. I
+don't believe we are on the same page on those, despite some weeks of
+discussion. We need to resolve that issue first. I did try right from
+the start to first agree on the problem to be solved. We skipped that,
+so now we are having to do it now...
 
 Regards,
 Simon
+
+
+>
+> -sughosh
+>
+> >
+> > Thanks
+> > /Ilias
+> > >
+> > > -sughosh
+> > >
+> > > >
+> > > > The event is only needed to notify EFI_EVENT_GROUP_MEMORY_MAP_CHANGE.
+> > > >
+> > > > Best regards
+> > > >
+> > > > Heinrich
+> > > >
+> > > > >
+> > > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > > > ---
+> > > > >   common/event.c  |  2 ++
+> > > > >   include/event.h | 14 ++++++++++++++
+> > > > >   2 files changed, 16 insertions(+)
+> > > > >
+> > > > > diff --git a/common/event.c b/common/event.c
+> > > > > index dda569d447..fc8002603c 100644
+> > > > > --- a/common/event.c
+> > > > > +++ b/common/event.c
+> > > > > @@ -48,6 +48,8 @@ const char *const type_name[] = {
+> > > > >
+> > > > >       /* main loop events */
+> > > > >       "main_loop",
+> > > > > +
+> > > > > +     "lmb_map_update",
+> > > > >   };
+> > > > >
+> > > > >   _Static_assert(ARRAY_SIZE(type_name) == EVT_COUNT, "event type_name size");
+> > > > > diff --git a/include/event.h b/include/event.h
+> > > > > index fb353ad623..fce7e96170 100644
+> > > > > --- a/include/event.h
+> > > > > +++ b/include/event.h
+> > > > > @@ -153,6 +153,14 @@ enum event_t {
+> > > > >        */
+> > > > >       EVT_MAIN_LOOP,
+> > > > >
+> > > > > +     /**
+> > > > > +      * @EVT_LMB_MAP_UPDATE:
+> > > > > +      * This event is triggered on an update to the LMB reserved memory
+> > > > > +      * region. This can be used to notify about any LMB memory allocation
+> > > > > +      * or freeing of memory having occurred.
+> > > > > +      */
+> > > > > +     EVT_LMB_MAP_UPDATE,
+> > > > > +
+> > > > >       /**
+> > > > >        * @EVT_COUNT:
+> > > > >        * This constants holds the maximum event number + 1 and is used when
+> > > > > @@ -203,6 +211,12 @@ union event_data {
+> > > > >               oftree tree;
+> > > > >               struct bootm_headers *images;
+> > > > >       } ft_fixup;
+> > > > > +
+> > > > > +     struct event_lmb_map_update {
+> > > > > +             u64 base;
+> > > > > +             u64 size;
+> > > > > +             u8 op;
+> > > > > +     } lmb_map;
+> > > > >   };
+> > > > >
+> > > > >   /**
+> > > >
