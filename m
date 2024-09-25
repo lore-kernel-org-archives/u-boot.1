@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BB8CCCF9E7
-	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 17:27:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52D4DCCF9E8
+	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 17:42:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B12CF88CC8;
-	Wed, 25 Sep 2024 19:26:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 99D4788363;
+	Wed, 25 Sep 2024 19:42:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lwpnYraL";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="7ISV5n2/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 034C288C05; Wed, 25 Sep 2024 19:26:40 +0200 (CEST)
-Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
- [IPv6:2607:f8b0:4864:20::833])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EF6CD88216; Wed, 25 Sep 2024 19:42:12 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A4AE88B13
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 19:26:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F2D488363
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 19:42:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x833.google.com with SMTP id
- d75a77b69052e-4585e250f9dso234881cf.1
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 10:26:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1727285190; x=1727889990; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=M+Y+lZmP/Z6nioj9z8CrMGx9MdMhutgJ2Z0aPzSlQF0=;
- b=lwpnYraL3becdeKoXItj2zm1TjLVpn77E5tm4q+FoNUpyjbUMOS6rZNxg6OBnJToBH
- g5cEfBGtXf9Vo0s/jeoA4khlRMMg2RYrNp9qx193WXENrlWWI1fTX1J5GvUI2PtOqZHN
- UTeD6lqETzXCfRFgPy30Z43ZzmB44B9I3Ibno=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727285190; x=1727889990;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=M+Y+lZmP/Z6nioj9z8CrMGx9MdMhutgJ2Z0aPzSlQF0=;
- b=ApSxrHk3G/9JG1wirWjHZiN/4mH3wtGzVuxQ7jpGboT5KCGwwBetcfVZJOaB0Ry1GS
- MzrSOqWbbjYSsVBz4pvPDqNtoR3Sk0+lG8Xquc/LtU+LCXbkfgmoE5PikOxMNWv1pt3R
- 9nuPvgrvFNxMZlD9hM7nLOZZ09iO4K8+pzbtFLutT73StYF2XxC8SHTpgo8537r/NEGg
- 2fDFpOvAXeqYBfBUqCPQjhrbyvpKG57N3Ficw1cbYTZUMNnmaHSSFMTPuM5FYtAEcB6w
- QJwt3wAO0ZtZn3QImoItwBLV0vmGDB/aO9uZmVYF8IOQFCRZoKNnCq/8dLE92Po/Jw92
- hupQ==
-X-Gm-Message-State: AOJu0YzHkyEalbK5mQVqp+Zd1WN1NjrvH9xu/FZZ8kzku3P90nE8NB/V
- gmM++eaSzAAtZmSLoYLWOiBLBCQw7sGuooOOQKBkdHXkaEx0bNJPsd502twp+puPmT8t1uUdhPi
- U3tY=
-X-Google-Smtp-Source: AGHT+IFr/L8w8PktwW2QIP6GmATFzgDZgFArQ5ndg0O73wa1kklX09fjpz8UJHCtcLw9O7pDkrA9Ig==
-X-Received: by 2002:ac8:7d8a:0:b0:453:1afe:c711 with SMTP id
- d75a77b69052e-45b5def1db8mr44527611cf.28.1727285190003; 
- Wed, 25 Sep 2024 10:26:30 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-45b52654ce6sm17780721cf.67.2024.09.25.10.26.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Sep 2024 10:26:29 -0700 (PDT)
-Date: Wed, 25 Sep 2024 11:26:27 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [u-boot-test-hooks PATCH] qemu_arm64_tpl: Add a new board
-Message-ID: <20240925172627.GE4252@bill-the-cat>
-References: <20240925094745.37922-1-sjg@chromium.org>
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=999876f45b=patrick.delaunay@foss.st.com
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 48PD001t025721;
+ Wed, 25 Sep 2024 19:42:08 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ cNbILd9a5+wkS7QvjeyRS9e0335pxMRsLzbPciSRYsw=; b=7ISV5n2/RNInvpkS
+ 4VCWDkZqCcQT9LiVzmcmuHC0quNUEFyqBD7FLqNBcJUyA/tlkUZxSPTf4iBrkZhL
+ wo9oTVGwN7XN31MjQf4mttvvuqJw4AVtD45JDL7hruJatkQ35wo5VB1Kv1/mXzx+
+ l2EIyEJyU+bMiTAhNdDXSpd05zHh6ikp/t1fjBYwpV0ER/6eWpF+aG6ftpN0V5/r
+ UUf74GfNbUwJGjqDUjbqKRM4PEhgpd5WkCCu06IyMM7l/Q0CAWoKx7iUgOR44GUK
+ 75/YXE4PGXSk0jt25n4mvK233rZoW4r4qsmYlwsoqB8fZLhhHrDXDKjZITYfKKq8
+ YxIzuA==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 41sk95p31n-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 25 Sep 2024 19:42:08 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 661914009C;
+ Wed, 25 Sep 2024 19:41:11 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 14D6227C223;
+ Wed, 25 Sep 2024 19:37:08 +0200 (CEST)
+Received: from [10.48.86.243] (10.48.86.243) by SHFDAG1NODE3.st.com
+ (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Wed, 25 Sep
+ 2024 19:37:06 +0200
+Message-ID: <38cac570-b496-4fde-85ed-9df63db7a99e@foss.st.com>
+Date: Wed, 25 Sep 2024 19:37:04 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="syFB0UWnztF2mBii"
-Content-Disposition: inline
-In-Reply-To: <20240925094745.37922-1-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] ARM: stm32: Fix secure_waitbits() mask check
+To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
+CC: Patrice Chotard <patrice.chotard@foss.st.com>, Tom Rini
+ <trini@konsulko.com>, <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20240708114344.18354-1-marex@denx.de>
+Content-Language: en-US
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <20240708114344.18354-1-marex@denx.de>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.86.243]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,47 +89,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Marek,
 
---syFB0UWnztF2mBii
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Sep 25, 2024 at 11:47:40AM +0200, Simon Glass wrote:
-
-> Add this new board, to support testing the relocating SPL loader.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+On 7/8/24 13:43, Marek Vasut wrote:
+> Do not apply bitwise AND to register value and expected value, only
+> apply bitwise AND to register value and mask, and only then compare
+> the result with expected value that the function polls for.
+>
+> Fixes: b49105320a5b ("stm32mp: psci: Implement PSCI system suspend and DRAM SSR")
+> Signed-off-by: Marek Vasut <marex@denx.de>
 > ---
->=20
->  bin/travis-ci/conf.qemu_arm64_tpl_na | 29 ++++++++++++++++++++++++++++
->  1 file changed, 29 insertions(+)
->  create mode 100644 bin/travis-ci/conf.qemu_arm64_tpl_na
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> Cc: uboot-stm32@st-md-mailman.stormreply.com
+> ---
+>   arch/arm/mach-stm32mp/stm32mp1/psci.c | 3 +--
+>   1 file changed, 1 insertion(+), 2 deletions(-)
+>
+> diff --git a/arch/arm/mach-stm32mp/stm32mp1/psci.c b/arch/arm/mach-stm32mp/stm32mp1/psci.c
+> index e99103910d9..ffdafea464d 100644
+> --- a/arch/arm/mach-stm32mp/stm32mp1/psci.c
+> +++ b/arch/arm/mach-stm32mp/stm32mp1/psci.c
+> @@ -393,8 +393,7 @@ static int __secure secure_waitbits(u32 reg, u32 mask, u32 val)
+>   	asm volatile("mrrc p15, 0, %Q0, %R0, c14" : "=r" (start));
+>   	for (;;) {
+>   		tmp = readl(reg);
+> -		tmp &= mask;
+> -		if ((tmp & val) == val)
+> +		if ((tmp & mask) == val)
+>   			return 0;
+>   		asm volatile("mrrc p15, 0, %Q0, %R0, c14" : "=r" (end));
+>   		if ((end - start) > delay)
 
-I assume we're NOT testing all of the normal U-Boot stuff and so that's
-why qemu_extra_args is so minimal.
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
 
---=20
-Tom
+Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
---syFB0UWnztF2mBii
-Content-Type: application/pgp-signature; name="signature.asc"
+Thanks
+Patrick
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmb0R8MACgkQFHw5/5Y0
-tywJDAv/SlncyAJZh0UOluutncInDS7/LuG/kTs19CHKB1RAP0vdgHwpx9mapAYq
-ng72ty4JAoZRbfW5WwXsGlBe+NYLGLXwgWLJfJG1nCCe8WTI9jxHplDN7MZOXr0q
-si+B+iZEdztu2560CI/PA6LQtiEzRRdhmAigbu1po4/F2NNHpreF8VcGy04qics0
-b34Ykrmvi+RASwlczHR+O7TzZxths0WZI/MQOiAVo99vr4Mxep62aWsTEHmWkeg6
-A95CL9+RNmNK9DCseATmazB89RpwIEorsMPtJ1QQ9WSDfVDH1TJWfkUrKCrOPObx
-O7+QgUYaWUkpQX8YCeaxXe6iHtkrM8pOHMNRM+pfSyxss1fcZO7fewyfbDLDklzo
-QYA0c8iiINnEGP+ZcH/YrM/oUvJIkNOJ9i6p/BUMlmd4WS8zzG6KBuGIQ95wkNF9
-30r6Cd/5dYm5V5UYiraeMkUbl4NzfMRZMvRHfmeuziRvR3epBYIwvTkKNgHmBD5F
-y65K84Zo
-=caDh
------END PGP SIGNATURE-----
-
---syFB0UWnztF2mBii--
