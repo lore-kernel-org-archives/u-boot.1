@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAC53C369D3
-	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 11:42:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E26AC369D4
+	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 11:50:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 543D288B63;
-	Wed, 25 Sep 2024 13:42:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A5E228897F;
+	Wed, 25 Sep 2024 13:50:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ExryEwhl";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="seNStJ/D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F381D88AC2; Wed, 25 Sep 2024 13:42:38 +0200 (CEST)
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [IPv6:2a00:1450:4864:20::229])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D9BBA8897F; Wed, 25 Sep 2024 13:50:51 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE3F588BBF
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 13:42:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4CFBB87E30
+ for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 13:50:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-2f75aaaade6so70766411fa.1
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 04:42:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1727264547; x=1727869347; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=14tMK7J/5OJ5dq0DEQ/xNdRTktR3HwTC6N3t5zefw5w=;
- b=ExryEwhlofqCNIbqRrTSz9zz1d65P3Jzu+r3vzFIYy7ryV73qSGnkY55ZQa+A7Avyq
- PeJT9EtVe0cdxZP1tog/SafizPUgTdd1DiWu212wuL9h9wWfsKWNvueAZ1CQoIlaPw6+
- //NInNANScyU+mysSe8g2QTiHSvF26KAsbUAonjFGO/inmjGwSidvLDUiX5DOdbrUKnF
- XFVm8DO9H8Em+3ch2sTtPpbsqMGzQCtiX8q9QLNHWVEUCBSM0hoLXK+bLekicitvQySw
- cphsD/wE0RFQp+UaCbp/7lPmp7GbEbAb6E9zjAp39D5hS38MIpCGwyfCrok//LRMa9Hg
- YPgA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727264547; x=1727869347;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=14tMK7J/5OJ5dq0DEQ/xNdRTktR3HwTC6N3t5zefw5w=;
- b=D7E40xA9bO9/mH5kDtueT22wtIA6HA3w7KM4hWtExj4PiXtbAC6znJv15PZKupbFQQ
- ubrQksP4B6T2vWb1nfEqlza6Eq2AEPouLN2jRnPg0UWjld663XCZ+i/SFZMwNa1Vjjzx
- qtIPWu6WKXWkhpxpSTMYkC+GAWmcWjyvbBpKQcgL5U2ykMP7Z3cwSLug+KkBvxk91NfW
- BKT6NHz+atk2Wj9zlGELPn44jakfwnvpY0f2FlZWQyoVtfi9FLFBDHDPBFeiPY4tuUbx
- IgwDSzHLG5HEbxKXUascwV4gZitZfds8teEKqlGndN7Zar6Xxf+UcGYViX0y0SsCyfZa
- EK1g==
-X-Gm-Message-State: AOJu0YxP/6mhUWvuFxMQFhtcm0pWCAs1oBSKSP56N1lOk492pMPnuwhY
- 8j3SeDJCxQDgOZSbx3YlfmUzkfijsShbhqmONLruuyfyXmkKBItJM2yYLcqRzrxf/oCTxUj529Q
- I1nom1I/CmtmA/xrgLc3LvmtngiM=
-X-Google-Smtp-Source: AGHT+IFnnEAQusYLsKNuvyyAU0SUrAjAKrHNx4qIqqPlr5aK8geInZUTy2d/SPhMxDX/SjdDGGGy3YQiQHku6fwasWE=
-X-Received: by 2002:a2e:a987:0:b0:2f3:b078:84bc with SMTP id
- 38308e7fff4ca-2f915fc17d4mr18050211fa.4.1727264546782; Wed, 25 Sep 2024
- 04:42:26 -0700 (PDT)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1727265044; x=1727869844; i=xypron.glpk@gmx.de;
+ bh=0lwmNJovfQO4BP+PZeeLOrNk0Wet6EBAmiSZWK6PHzs=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=seNStJ/D7PhdfXw5VBR/euYHpGUSs465ssEF2Fb/x1Oxcgbwootn1VcZcKcURgZV
+ S/8PNkaTt6YjOoEzPkKlyrKy3x31nAnAe8uWZURhs3j50/2OGGysX0ugbhc+TleDE
+ utx3nRjawAnkpIKW8BiMw0KblCuvF0ZiGegg5MuGDKbW8tvwiNYHCV88AgdFVX4Mu
+ mhjleJkoSaSFsHql35UZo3rtVIC93lfpMQOksfOq4BZHqCuCFFofa9G3Z5+qz19Q0
+ u2CYexU8CkWqlydUQ269JQ2za9OwfiSFX8acfpwL7P8+slkj8dYBwGsCcFr8WC7mK
+ Vgj+fpRUZ15xq/XfTA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1N6siz-1rre7I3xbr-00x29I; Wed, 25
+ Sep 2024 13:50:44 +0200
+Message-ID: <478ac7c2-88cd-4880-88da-2c786930ad2c@gmx.de>
+Date: Wed, 25 Sep 2024 13:50:37 +0200
 MIME-Version: 1.0
-References: <20240924130218.308845-1-marex@denx.de>
-In-Reply-To: <20240924130218.308845-1-marex@denx.de>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 25 Sep 2024 08:42:14 -0300
-Message-ID: <CAOMZO5CBgbU4ft4v85yJ7E3G5MHvJ=Xi4Gg9gTqPMzYmjPCVCg@mail.gmail.com>
-Subject: Re: [PATCH] arm64: dts: imx8m: Always name the generated fitImage
- u-boot.itb
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, Peng Fan <peng.fan@nxp.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Stefano Babic <sbabic@denx.de>, 
- Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] sandbox_spl: Restrict use of UPL when not enabled
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20240925104501.44457-1-sjg@chromium.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240925104501.44457-1-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:CoGMZzhKoaNL9hYOIl5L8fhFOXTYOqu+itO8E8Iglpsq/ZGjLdv
+ 42aJicOPBS79AbagfgWrRHtt/sGo8OFtxT5VMPtwI462lAhdPcq8p1L0lgdhdJkc0Ldl/oo
+ QhdjQBDVuP3oWvMp2Xn5PmPy2P/kqNuRFvEEXclMA4eZ3zz8f0ToQnFs7PY2zuUUmw4pRp7
+ U5oSeci/dGHKR08diswIg==
+UI-OutboundReport: notjunk:1;M01:P0:GIHw5Yex1FY=;u5QteCivBI0Lk3bBQIGoiemjiWD
+ DvGWitaXUo2AByeYTagUPJ4TRnkJswGkGAzNZsh2BjTZvM4BRCFWO7tTGNpfv8tZJCYQ050BK
+ lZXI6A8dAPvk5YB19FrHsOloClR+h++CmUko8OMboh9R+7wnlWGzhGiertivw38iS0u1Gjs2o
+ BEXH7SgsBKr6sbLtMpTphjUL9c53Z8cFicbZsvW3E+yYCjQ6q0T22PupNQaMGAKy7RvUzIGSq
+ apCMPTK3j1Nh5e1Z7uSd/VCrMppnrKz0If5YZ5amXhEFoaiGSABe/VNCzmNL10Zf5/e3w+2u1
+ X0GCS+zgjRgC4HLWnuOY8MOoE0YO0oo99kqZS85EGAA5SYpXy+SvoZmzRsMHrLEHjLiUL+zyN
+ TA2EKVPpref0WHuHKWs6IUy3EGUifjzV6KKm1YLTkdm0URyxIgrDSKkcwEEmPLWH+tWEu62J4
+ luhM3uV5VC8sifHjQaxQyUCEeCtdtutfLYt1nYK/F7wOTd2JaewnjyrrbEEPpWmoOCn/SG+xv
+ kl4BXYbOqw7whc0pIAgj5doeQCWC61D6LtEmZlBw0OGKpVSGd1p1ZKqxPjloUkhA4sJf4oQvV
+ D+qAuDEPyNFLRbICRhQ/hglHEfjbot3HjK0aTBLzVpB0AM06HBl/PIQxfXEz3gtNjulfCLXA6
+ aFaDIL/t6Q2d6eQ4ALfenQXEK6khPtOgIFIWxwlntTL2JaWR2QCa8CcYIL4BK26B4xTmx7lx0
+ ZT/cXRcPC2HJZyub+CtapZCwycyu99uKIA7+B35GY01SuYMKqj2yzIQKeHlT/NZeWKJtKZ/ze
+ /yq7p3YI9l3VoI+8v6TWHLfg==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,12 +92,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Sep 24, 2024 at 10:02=E2=80=AFAM Marek Vasut <marex@denx.de> wrote:
+On 25.09.24 12:44, Simon Glass wrote:
+> With sandbox_spl we want to use the file-based boot in CI, so that this
+> flow is tested. The recent UPL change enabled booting via that method,
+> thus overriding the file-based boot.
 >
-> Maintain backward compatibility with pre-binman u-boot file naming,
-> the U-Boot fitImage used to be named u-boot.itb before, restore the
-> file name after binman conversion.
+> Correct this by using UPL only when the --upl flag is given.
 >
-> Signed-off-by: Marek Vasut <marex@denx.de>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Fixes: 91fde8e1764 ("sandbox: Add an SPL loader for UPL")
+> ---
+>
+>   arch/sandbox/cpu/spl.c | 5 +++--
+>   1 file changed, 3 insertions(+), 2 deletions(-)
+>
+> diff --git a/arch/sandbox/cpu/spl.c b/arch/sandbox/cpu/spl.c
+> index 1c33a520c64..76638362564 100644
+> --- a/arch/sandbox/cpu/spl.c
+> +++ b/arch/sandbox/cpu/spl.c
+> @@ -55,9 +55,10 @@ void board_init_f(ulong flag)
+>
+>   void board_boot_order(u32 *spl_boot_list)
+>   {
+> +	struct sandbox_state *state =3D state_get_current();
+> +
+>   	spl_boot_list[0] =3D BOOT_DEVICE_VBE;
+> -	spl_boot_list[1] =3D BOOT_DEVICE_UPL;
+> -	spl_boot_list[2] =3D BOOT_DEVICE_BOARD;
+> +	spl_boot_list[1] =3D state->upl ? BOOT_DEVICE_UPL : BOOT_DEVICE_BOARD;
 
-Applied to u-boot-imx/next, thanks.
+Wouldn't the UPL method check if the loaded file is a universal payload,
+and if not the BOARD method would be executed?
+
+In upl_load_from_image() I am missing a check that the FIT image is
+really a universal payload, e.g. look at the spec-revision field.
+
+Considering
+https://universalpayload.github.io/spec/chapter2-payload-image-format.html=
+#example-fit
+it seems a field uniquely identifying universal payloads (in contrast to
+non-UPL FIT images) is missing in the specification.
+
+Best regards
+
+Heinrich
+
+
+>   }
+>
+>   static int spl_board_load_file(struct spl_image_info *spl_image,
+
