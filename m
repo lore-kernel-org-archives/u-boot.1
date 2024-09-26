@@ -4,82 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F28D7CCF9E9
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 11:26:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CBB2C369DE
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 12:26:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6132A88D35;
-	Thu, 26 Sep 2024 13:26:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0DD1788A0A;
+	Thu, 26 Sep 2024 14:26:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=nskint.co.jp
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BOXujEWM";
+	dkim=pass (1024-bit key; unprotected) header.d=nskint.onmicrosoft.com header.i=@nskint.onmicrosoft.com header.b="KXIOXS2i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B20E488D38; Thu, 26 Sep 2024 13:26:16 +0200 (CEST)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D3CDE88CB9; Thu, 26 Sep 2024 11:26:21 +0200 (CEST)
+Received: from OS0P286CU010.outbound.protection.outlook.com
+ (mail-japanwestazlp170110001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c407::1])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7894588CD9
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 13:26:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C86818891E
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 11:26:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=nskint.co.jp
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-20551eeba95so7831245ad.2
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 04:26:13 -0700 (PDT)
+ spf=pass smtp.mailfrom=k.kurematsu@nskint.co.jp
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=hM149kBz2PY7qhDpOFk4Bx7AMRRmT/KADL9E7o65Y0ZUNj7DJLLP8gqbxDUWsR2LvlOIFsqJtgjcPhfVZC8MQNKn9scaq+sWgR9Am0cGsvIvfJResgwi93WDf/LA7cP5GwFoVnxcBAuxNlY6EHP9zQ/haTxyuxw3eR/zSY9JqjwJdpSlNmgQwDJLWAeibqB+KJylspeOaGN4ZuaKKbzRUSl/l5zFtJXshG1oxly6EAtAP1SsjmlLWdxq4GVHx+oz7uxsT0Gyj5aT8k/yrmiX6GrOQrqFk4HOT8Dfpz+uT40UHEbDzllNBxrT/yYMlp7jYYjO4PuZYBBcRBVMPaFqCw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=a3f1Rx2Tazl2Wd6VdQSpYfsVWx32mDOOp0Jkzzs2wAQ=;
+ b=DX5uYNT5Xab+fERQwumoqfZbcB+r/jjf56+Brz8mDpgWTFuWBgAqTFPM70Zm1sUpNq47KGp5flIuxpbHdwmRNEtBXP7LBbilwCbVzn2niEKGqXeaMZ2XzweZqKGjp/3oxIT18KzImbx3WyHEiCpRUyfqhvpP4JtgSp3UJ9/MuhT+0pEzTnHidvQE3WjbxEcSEYhMwHugMzc9giZeZkQ1BmzO0CjZUF3+mAKgBp7TWGWY58zTr2ce6k3Ub+IcZrCnbKEQlPV1Y/6quWKu0/GgQoA9xjQpWsSMTSJ0cQ7JC5NVynkWeBnbu+Q2MROadT26J2yQkDOfbT8hkAYyYoJ9oA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nskint.co.jp; dmarc=pass action=none header.from=nskint.co.jp;
+ dkim=pass header.d=nskint.co.jp; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1727349972; x=1727954772; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=PVSZBlMxSgXlgs5+6EtOPSeqmKIr+hD2G22dZJi5CSY=;
- b=BOXujEWM/R9DlEVRa7TclUyuG7/SOZUpbNKZJPjXGr3ImVRt/VUzEWFC/xY5gHf1HG
- uFbwaa8a/3o+azuHHQbiNYmpTmbhNb9K00kKYQThp7ed2CRg0OxcojSenvC3chcTQKfB
- nds0HUbOiy0x/FGTU01RcSOYqBHc7OOBsN/+5A1urM8Y3APYPHJF5UBQIp/7bgkacq6/
- wDPdTycydT9yBaj888ksv36buf8Q0X3dDeXLIJcS2OdTYZhYr8mQkB0aJbUIYm1QF1mz
- OAsxnpG83HTanWsosRSR+ZZ+5kjEQnZV+0x7xqxzZ6wp2Zx00oKYz9nc8dJVJJFnBBT+
- qpSg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727349972; x=1727954772;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=PVSZBlMxSgXlgs5+6EtOPSeqmKIr+hD2G22dZJi5CSY=;
- b=lgCu15iNnHL08XjNyf8GP6D0AiqGUcGDosF4UPzbKBm7Ej7w+hTXO1mMkeUaQKF3op
- YxevWK4szshBlPB8Dms1DlecKzt/AMvC3Tq8OzPbTrMINhQoj630E37d3xPfKO41C+R7
- Vobbqiju1SSpezoxL5QG5ZG072xR6U7QZPGDilG1FE2eNO6l9kfTvePvaoivdYWT+qOQ
- +jaCe5vNki0ENreEsqzQpYfZ0gYgeyT9duxqTqxAfdWByfn5aWivo5dSV208cBvF4Sj4
- +GQroV1hBdj00xViGnfiU3U7G6XQxceDgjgY2vuwsucPAfoLTWCBkoi1EOV+Wg40s3Df
- OiWg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWfc0vzEC/uxK2/ww9DlzPHt21ntDLBRCS43AVGwAD0wH90TZ3J4jX1EsTmQA5jnsRoPu6uQMo=@lists.denx.de
-X-Gm-Message-State: AOJu0YyTW6p7KhhmKMfHm4uRVMMTkCkwc7oknUt8kJfbqTxSvxzRNDko
- cdGBev62j2bP84kRuBpLnnr5zfduEBWLmSRItIwu1KAMyLNDk2gBXRM+DujVt/aJEyxvfL6wFLb
- y7AKeEK/nXFdmYUFd8VszZAMz0hq1GMHWiVbnEA==
-X-Google-Smtp-Source: AGHT+IHGBXiLzLZhm8sNXBt/fuSsairRpo5MykRU2jY1lFXbj+2PxZGip+iNGMWy4pWpkJ7JERC+8dBKIS50kCCsipg=
-X-Received: by 2002:a17:902:f687:b0:203:a14d:ed0 with SMTP id
- d9443c01a7336-20afc40d663mr89744955ad.11.1727349971906; Thu, 26 Sep 2024
- 04:26:11 -0700 (PDT)
+ d=nskint.onmicrosoft.com; s=selector1-nskint-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=a3f1Rx2Tazl2Wd6VdQSpYfsVWx32mDOOp0Jkzzs2wAQ=;
+ b=KXIOXS2iWjIvMCdhusO8inwSIQca0ABtvEi/QisnpaYmLrx2xrUvWOjUY7AzzT3Sr0a2iINvEJiyKdinqweNRAJWg7S4Wcu1zp6qysoJD3ramVCh2J/ON3g0ah50ZgZB++NKRRm6GaIgPdU8jJVjo/shS4D4mfhY2zQIzWniwyI=
+Received: from TYCP286MB2334.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:10f::10)
+ by TYWP286MB2053.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:162::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7982.28; Thu, 26 Sep
+ 2024 09:26:05 +0000
+Received: from TYCP286MB2334.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::8585:d563:db6e:848e]) by TYCP286MB2334.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::8585:d563:db6e:848e%6]) with mapi id 15.20.8005.017; Thu, 26 Sep 2024
+ 09:26:05 +0000
+From: Ken Kurematsu <k.kurematsu@nskint.co.jp>
+To: Tobias Waldekranz <tobias@waldekranz.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+CC: Masahiro Mizutani <m.mizutani@nskint.co.jp>, Yoshitaka Ikeda
+ <ikeda@nskint.co.jp>, Ken Kurematsu <k.kurematsu@nskint.co.jp>
+Subject: [PATCH] doc: blkmap: Fix typo in command example
+Thread-Topic: [PATCH] doc: blkmap: Fix typo in command example
+Thread-Index: AdsP9Y161X5HAWCPTFK+Z+ythlJe+A==
+Date: Thu, 26 Sep 2024 09:26:05 +0000
+Message-ID: <TYCP286MB233485B48812E07222B95435DB6A2@TYCP286MB2334.JPNP286.PROD.OUTLOOK.COM>
+Accept-Language: ja-JP, en-US
+Content-Language: ja-JP
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nskint.co.jp;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: TYCP286MB2334:EE_|TYWP286MB2053:EE_
+x-ms-office365-filtering-correlation-id: 92e1467a-2288-451e-8594-08dcde0d3ef1
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230040|366016|376014|1800799024|38070700018;
+x-microsoft-antispam-message-info: =?us-ascii?Q?Ep/norViHsnMyVuZkr58RGhmQBTenhQvLPpf3Dvvy+Mi8DQwgXXlZQiAgXDg?=
+ =?us-ascii?Q?Nw6zhewppg8a+ibBWNx2fvLVz0Pw6I+n+FNh8PM4ndnk6UVZNFfStN5ZsnNa?=
+ =?us-ascii?Q?aKdY9wy3dCL8JqMNUNMecG0prXXGMuw9rg5Nq6OhK+6eQ0G+Vfy22ovvjdWz?=
+ =?us-ascii?Q?f5gLpdxqXtRmcJrLkGtTL/qg0spKqENFRChYlgqgTbpsk5T8OHUHqDe7lGqL?=
+ =?us-ascii?Q?2XWgSfmUlh5VnPSnK3y/WanJ+4KqxS9MGR7g9KZwkKoSJTs/dSxYVcTy2/9b?=
+ =?us-ascii?Q?Xr5ZWu2fWOUwH/phQ7joi7TFfnDXYxV/JwVom3kBndMIMin+b1D4blsCd64C?=
+ =?us-ascii?Q?SIeAA/7JtoUfWxvLVrORLV/qby1uTZUie8w0PDEY0sQctzo/LyWSr5O/mdX4?=
+ =?us-ascii?Q?210Z5vFeEfYLW+Mtbpq4XcXuDccdUFw5E27z3TJVlz6k/YSX2PWezlnXxwVa?=
+ =?us-ascii?Q?DVl8gownKXoLHDevssA+VSlcdK0RpusTIKLd8+548xgv2prssS4/WMYu6L/w?=
+ =?us-ascii?Q?NqRnUJuEYjZ2hocP5L6xbV8iltI9CUk2vm6kz9DGFtXjxBlm9vJqe7l5yxLx?=
+ =?us-ascii?Q?TOzWKzqQe2tFMUqhQSz3zV7NFs5L5KkS9hpm0oiV7fLL/c6+pi4FrOli7yFE?=
+ =?us-ascii?Q?ScOPWw6Tlr3XlwulKgpuzEk4uEkcFOi18DDQwv2R6xDc2cwz7sYYNcxgOVFd?=
+ =?us-ascii?Q?6o2eRmrzb68MxtvNHTSyxMGebGW1wK2LMvbm7DnyqAYU7qF5Sjsh82wvPRWv?=
+ =?us-ascii?Q?ljxMSqiq5IBCcZoGkyvrIoRAner0AIJTQMaWXSqzETOFYvDpRaAqewTCJ1UM?=
+ =?us-ascii?Q?1UCRCLpPubULCclJ3zHj8ShEwdfnwVxXfdPnNvX4Wlu7L/Y5TR6jEoa/GDbA?=
+ =?us-ascii?Q?i0aeSj7US8L1zpwz0h4pfZ3vHJMWLaCeRoarJ+zbgxwKKEsLnchDiFK+PRgZ?=
+ =?us-ascii?Q?WkvqcpinDgaf0Pe2UdYzMD7Gu6QEdNCiklAX0qxDcCOIjHwNREqmDaWoxNgT?=
+ =?us-ascii?Q?/EgyyLBx8c+Z/R+kKYGzAzBVocEFuG3JdmoRBOX+olAkaqkF6qIOCNjeJO8L?=
+ =?us-ascii?Q?mBQ9kAAU7YXGxMKhjV8/42TaHo0YKStvSin0Z1N2pdSDeRTjwg9Gjn/Lb1rs?=
+ =?us-ascii?Q?O133fbjuwW472mduNWPvRRFjgPS6CGsaXFTipjSk8PkfFgXmVOh3CPLcjxGC?=
+ =?us-ascii?Q?rp72xC5msKdd+9cdpixzKHSUVenpZkTAdCm6YrdrjNbcl3DcTU7tU7SlHA3I?=
+ =?us-ascii?Q?39q911Nf0SOcxLuVruiWfXTgtZNRy078n+PEg57JHWFDDkML6ACcC3nBOb3P?=
+ =?us-ascii?Q?MnsZM131dpVQfB1cY86QCSTdi1/hCDKDpqG9EgKCWYwRRfEagaZKXJgtdciL?=
+ =?us-ascii?Q?97M0wolFjFFm88ibIUMeKfalL7NL58fcMfSD5k/Jtb2uMUvtEQ=3D=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:TYCP286MB2334.JPNP286.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024)(38070700018); DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?lvRNKMfnthPB6kMgj6bNB6TmI1/2b97yQGYjfJRa0mAXpaF4ZD2u5U0D1MYt?=
+ =?us-ascii?Q?/mX/9FJLuDJ7n2afMaG05204tzXNYSigNmIM6RZ5c+PLgrT7/v91BVWbcfQG?=
+ =?us-ascii?Q?SFt0oSqMk8VJnpO9iSb9bLWD2CBfkP3dpPjJ3IVK6JrTezr8oV5VqfKcesN3?=
+ =?us-ascii?Q?FOiKFS+xCfSTnWXaOfUzR+nc4GFYQbYU3YAIgmP3BEuFX02MHmrLukLbBGva?=
+ =?us-ascii?Q?31g4XdQKxgqgKCTWx8AA9MnLb794dJgr6eHEXjavBqH7fLHlzp3MhB85/ofJ?=
+ =?us-ascii?Q?O1JDTmp1XskkOvSL/hFCNkiWbRDYzBxhOLT89cVN73/eui8Hhuvva+cDb2Ci?=
+ =?us-ascii?Q?ikc5swR32FBfTB3zenlrx9PJkU2GNb6avjimTBhHF938hSGUAL4qymFkQU50?=
+ =?us-ascii?Q?lWUbWjwBWYmZHEjFMKE5Phy/U+8hmzvQE3KPNM1IoMLGBfx0tbMxkXK46rkn?=
+ =?us-ascii?Q?c6CxkEEPNAcrh5GRY8I2/UtLYtL4QPVGmzO+bAOOXeGPaasXPD5usniHHSbP?=
+ =?us-ascii?Q?JmZrjFZDC3lsquu5AMHF7tfKcl2PysYZ0mgJvDttXHZiBPZv5X+4mJuNwgnb?=
+ =?us-ascii?Q?cJ0wZsjRie1c2IBcR59aaJBWTx5IhW7M8dC7An/03a4tB4JX00V4086/PnuS?=
+ =?us-ascii?Q?DJ0f+QrLFeha7d4t82lwc3X7xiKJpUgsjJQ36pwt8oHuGVfyDVnUNXxZ0U4y?=
+ =?us-ascii?Q?fq0Q7NUt/YtrZsc16ZWOYYdnoxmTmnsptEvF3ptleG2OXJbLzIEGFaBsJi3o?=
+ =?us-ascii?Q?eCaiSMTZxxFZ4z5USD0GZ5Sq5QO0I0AY9ojsWCmTQEpNOmLiBOUFA9rCCac0?=
+ =?us-ascii?Q?QuB0lBHZcFjI49H61dG/EVstF7Vv6ccK7vhXo+cHkQMV5j/oF+ZUHSQRoXf9?=
+ =?us-ascii?Q?Eo0ii/oVkF6Any+X+kf/Im1kun57eYkEC/Io0wTVbWhrUYXaTEmwpaglbkJq?=
+ =?us-ascii?Q?BmAFr1jHDvW2lKTa6gqntwiZpgDGb1jUEVa9E6kjeKfswzN7UReUipl368it?=
+ =?us-ascii?Q?lVhBpHYMbENyw2zLv8v7u3/0ox7fN4R6lr/C21Yp5sm0R/fWhoUEJEM3PAZ7?=
+ =?us-ascii?Q?hs4FjTdc2HFwHoPBA7A5ZHRMLQSVL7bgsKWXer3LeC1YOMwz5ziRdKIdEHhx?=
+ =?us-ascii?Q?McLTMLm0AK+OCKxvU0qn/mBSFhB6LSFj+k+Zl/zltKvo+CeKHhc3yJu9hnDa?=
+ =?us-ascii?Q?NijghNh2QhF73YcjTxGcmailwbzSE+QLD8LcgjBbFhSCjSXs41QlsiVHDVf/?=
+ =?us-ascii?Q?fsq8RAhasq0XGiQNR5uriLS23S6+M2T9UpRGxQloO7NX4YDSo4UbvbLcZGc/?=
+ =?us-ascii?Q?CGwXgzQrh/UxaTGc1Dq5/V9bv/cUqOENQ6DiOGI12B67eR8S2ur0Adl5OpS/?=
+ =?us-ascii?Q?i6LDstyHlecqRPW/27aqQZp4Jhhiku1TBP1kmOm6qtPFrPyp+6HxNagp7dg5?=
+ =?us-ascii?Q?wdpb5v8JsLs3gmbbKCgeBbuPhDUZQCqnwOTW2VBsYssxEMwJsdHkmNFpM/pN?=
+ =?us-ascii?Q?rbAgtrRHdCMwNyQ/8GA0iN5iXC+sUBDfIZ58Ieo9q5hA8kOpvFGe2RohwCUy?=
+ =?us-ascii?Q?MyCLk2TsKOyknDIdE4VaTAQGZKE6BWfz/nbjaD+V?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-References: <20240918152136.3395170-1-patrick.rudolph@9elements.com>
- <20240918152136.3395170-15-patrick.rudolph@9elements.com>
- <CAFLszTimAFGocvqbnT=JVsA2bjNa=ZfxP6Sy46a9e6VkhtdojQ@mail.gmail.com>
- <CAC_iWjLASm6U8kC68MJ0uZ14MGFS_SSL3Pcd8hcEH=a=W8gvBQ@mail.gmail.com>
- <CAFLszTgYHO7FgbCgfRwqT_yj4KBm31xKdEUrn0pZkhtLzOh=HQ@mail.gmail.com>
- <CAC_iWjKv+Z4K5xPW6MZhBZ67-rDy9iRVaoqfLKmJRwSG9nKnfA@mail.gmail.com>
- <CAFLszThA5eOM_xiMgDu=B4wAcP7wV9bzfc565rES8z6d1F8fjg@mail.gmail.com>
- <CAC_iWjLqmN0uA85RayC2hnMOJfCqumCpiq=waQwakd6ECfbXkg@mail.gmail.com>
- <CAFLszTgaVdgPNSC+vxZoH7ko5n_d6F_QnGfgL-biZ19edaUxQQ@mail.gmail.com>
-In-Reply-To: <CAFLszTgaVdgPNSC+vxZoH7ko5n_d6F_QnGfgL-biZ19edaUxQQ@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 26 Sep 2024 14:25:34 +0300
-Message-ID: <CAC_iWj+a+HCBr7A1HCcntZW7rvriTm1PvgVDcpbWCjBdRb7NzA@mail.gmail.com>
-Subject: Re: [PATCH v4 14/35] efi_loader: Allocate and write ACPI tables
-To: Simon Glass <sjg@chromium.org>
-Cc: Patrick Rudolph <patrick.rudolph@9elements.com>, u-boot@lists.denx.de, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+X-OriginatorOrg: nskint.co.jp
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: TYCP286MB2334.JPNP286.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 92e1467a-2288-451e-8594-08dcde0d3ef1
+X-MS-Exchange-CrossTenant-originalarrivaltime: 26 Sep 2024 09:26:05.1370 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 727455a2-9822-4451-819f-f03e059d1a55
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: /URbvjxkHXqV3ZoZC2HUxvbvt1gwazKoaB5C2ZEYgFNQ1o4PCf+8yonI6wbpZPIC1QBx2eeo6ZM2A2wMMtP4oWTfAaH1bm9tybV3ViBpV3I=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYWP286MB2053
+X-Mailman-Approved-At: Thu, 26 Sep 2024 14:26:32 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,165 +158,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Fixed a variable that was incorrect during the calculation of fileblks.
 
-On Fri, 20 Sept 2024 at 19:01, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Ilias,
->
-> On Fri, 20 Sept 2024 at 08:36, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > Hi Simon,
-> >
-> > On Thu, 19 Sept 2024 at 18:36, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Hi Ilias,
-> > >
-> > > On Thu, 19 Sept 2024 at 17:20, Ilias Apalodimas
-> > > <ilias.apalodimas@linaro.org> wrote:
-> > > >
-> > > > Hi Simon,
-> > > >
-> > > > On Thu, 19 Sept 2024 at 18:00, Simon Glass <sjg@chromium.org> wrote:
-> > > > >
-> > > > > Hi Ilias,
-> > > > >
-> > > >
-> > > > [...]
-> > > >
-> > > > > > > > +
-> > > > > > > > +               if (!addr)
-> > > > > > > > +                       return log_msg_ret("mem", -ENOMEM);
-> > > > > > > > +       } else {
-> > > > > > > > +               pages = efi_size_in_pages(TABLE_SIZE);
-> > > > > > > > +
-> > > > > > > > +               ret = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES,
-> > > > > > > > +                                        EFI_ACPI_RECLAIM_MEMORY,
-> > > > > > > > +                                        pages, &new_acpi_addr);
-> > > > > > > > +               if (ret != EFI_SUCCESS)
-> > > > > > > > +                       return log_msg_ret("mem", -ENOMEM);
-> > > > > > > > +
-> > > > > > > > +               addr = (void *)(uintptr_t)new_acpi_addr;
-> > > > > > > > +       }
-> > > > > > > > +
-> > > > > > >
-> > > > > > > The tables should be written regardless of whether EFI_LOADER is enabled.
-> > > > > >
-> > > > > > *Why*? How do you expect to hand them over to the OS?
-> > > > >
-> > > > > Why - because boards which need ACPI tables to boot should generate
-> > > > > them;
-> > > >
-> > > > Noone argued that.
-> > > >
-> > > > > also this happens when U-Boot starts up, in last_stage_init()
-> > > > > How - it isn't possible, but eventually I suppose it will be, once we
-> > > > > have a use case for booting with ACPI but without EFI
-> > > >
-> > > > Are you aware of such an OS? If not, we can accept the patches when we
-> > > > have a reason.
-> > >
-> > > Which patches? This is how it works today. We set up the tables in
-> > > last_stage_init(), so they can be examined while in U-Boot.
-> >
-> > What I mean, is that until we have a valid use case to store the ACPI
-> > in a bloblist, I prefer them being allocated with proper EFI memory
-> > backing
->
-> I'm going to assert prior art here. If ARM is to have ACPI in U-Boot,
-> it should follow the most recent x86 approach and store it in the
-> bloblist. That is what the blloblist is for. It also avoids using
-> memory below the U-Boot area, which is not allowed.
+Signed-off-by: Ken Kurematsu <k.kurematsu@nskint.co.jp>
+---
+ doc/usage/blkmap.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-By prior art you mean [0], which was none of the EFI maintainers got involved?
+diff --git a/doc/usage/blkmap.rst b/doc/usage/blkmap.rst
+index 7337ea507a..75f736c259 100644
+--- a/doc/usage/blkmap.rst
++++ b/doc/usage/blkmap.rst
+@@ -54,7 +54,7 @@ downloaded file, in blocks:
+ ::
+=20
+    setexpr fileblks ${filesize} + 0x1ff
+-   setexpr fileblks ${filesize} / 0x200
++   setexpr fileblks ${fileblks} / 0x200
+=20
+ Then we can add a mapping to the start of our device, backed by the
+ memory at `${loadaddr}`:
+--=20
+2.34.1
 
->
-> >
-> > >
-> > > It is the patches to change this which I object to.
-> > >
-> > > > I remember patches being hard NAK'ed on using DTs to pass the ACPI
-> > > > table address in the past.
-> > >
-> > > Yes, I believe Bytedance carries a patch locally for that :-)
-> >
-> > Exactly
-> >
-> > >
-> > > >
-> > > > >
-> > > > > >
-> > > > > > >
-> > > > > > > Can we drop this else clause? We should always use the bloblist.
-> > > > > >
-> > > > > > Both Heinrich and I said the exact opposite. Unless there's a
-> > > > > > perfectly good reason why we should keep them in bloblist memory, I'd
-> > > > > > like us to do that
-> > > > >
-> > > > > The main reason is that we should not be putting things in memory
-> > > > > between the start of RAM and the bottom of the U-Boot area. That
-> > > > > region of memory is supposed to be for loading images. Most boards
-> > > > > hard-code the image-load addresses in environment variables. But even
-> > > > > if they didn't, we should not be using that memory for U-Boot data.
-> > > >
-> > > > EFI allows you to request a specific address to use. We can choose one
-> > > > that fits the requirements
-> > >
-> > > So long as it is in U-Boot's space, that is fine. I just sent a patch
-> > > about relocation which covers this. It occured to me that this feature
-> > > of U-Boot, which I have always assumed was common knowledge, may have
-> > > not been noticed.
-> > >
-> > > > >
-> > > > > Another reason is that the bloblist is designed for this, for keeping
-> > > > > tables in a small, contiguous area of memory, so that when passed to
-> > > > > Linux they are not spread all over the place.
-> > > >
-> > > > Linux does not and will not read tables from a bloblist though
-> > >
-> > > Indeed. There really isn't any point, anyway, since there are other
-> > > ways of passing the tables along...except for ACPI with FDT but that
-> > > isn't a valid use case for Linux so far.
-> >
-> > What we are trying to do with EFI is to stay as close to the spec and
-> > the current OS implementations as possible. So again, please allocate
-> > EFI memory for the ACPI tables. The patches to convert it to bloblist
-> > allocating them are minimal, so we can do it, once there's an actuall
-> > need for it.
->
-> As it stands today, efi_acpi_register() does not do an EFI allocation,
-> it just adds the existing allocation to the EFI tables. This works
-> fine for x86 - see arch/x86/lib/tables.c -
-
-Yes and I've already mentioned that in my original response.
-
-> so I would like ARM to do
-> the same. The need for it is (as above) that we should ensure that
-> memory usage is within the U-Boot area. This is something which
-> bloblist handles automatically. It is also nice to see all the tables
-> in one place with 'bloblist list'
-
-Unless bloblist is not compiled.... in which case you still need to
-malloc and align.
-I am just putting this out there, because your next email is going to
-be "oh look bloblist is mandatory now".
-For the last time, bloblist make zero sense to allocate data that
-arent going to be handed across loaders.
-
-Patrick, my suggestion is to either use efi_allocate_pages() as you do
-or malloc a properly aligned buffer since we set the memory type in
-efi_acpi_register().
-IIRC the reason we set that in efi_acpi_register() is for QEMU which
-hands us over ACPI tables, so we can't do much. I would personally
-prefer efi allocated memory.
-
-Thanks
-/Ilias
-
-
->
-> Regards,
-> Simon
-
-[0] https://lore.kernel.org/u-boot/20201104165743.632571-11-sjg@chromium.org/
