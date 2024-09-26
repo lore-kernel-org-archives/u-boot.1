@@ -4,73 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3CCECDE03E
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 22:43:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B974CDE03F
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 22:43:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F14B288FDE;
-	Fri, 27 Sep 2024 00:43:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5460388FFD;
+	Fri, 27 Sep 2024 00:43:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MokEazBt";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nGGPBzGi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CEDFF889AA; Fri, 27 Sep 2024 00:43:26 +0200 (CEST)
-Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
- [IPv6:2607:f8b0:4864:20::82b])
+ id D29EB88FFA; Fri, 27 Sep 2024 00:43:34 +0200 (CEST)
+Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
+ [IPv6:2607:f8b0:4864:20::82f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5EF488FF2
- for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 00:43:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D248C88FED
+ for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 00:43:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qt1-x82b.google.com with SMTP id
- d75a77b69052e-45832b2784bso10488861cf.3
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 15:43:24 -0700 (PDT)
+Received: by mail-qt1-x82f.google.com with SMTP id
+ d75a77b69052e-45826431d4bso9597131cf.0
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 15:43:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727390603; x=1727995403; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727390611; x=1727995411; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/9/u1Uw/I/PqSfmemQH4CPz1z3dg2e/lQinOmIApkgs=;
- b=MokEazBt7um1nXsUMDu0hs1tdZoC+GRCk9/epxHgmU4WejjZlZF7rrqs+gst+aqe4f
- 7LUxPQdQWyc3AnLkjjhCyZaz34XtoB42bES6jFxcIkzb4569Yw9oPaTQOroPdn/C7mbJ
- pA0Jb7yQq9hkt17mkIM1XawcjiYIYrN2xaN4w=
+ bh=A+Q5Tl/VjJPDJ5g/bZZgsoRdOLsJkgIK40nMzJhDIOo=;
+ b=nGGPBzGiy1Peg50WqQROVRrYJxOPR3S4pyMrn+4XTc4mUgsLOFCspGtKY9HnR7dbri
+ YfZD9xQjgCkDkFHOKjwiOmAfVSG3TDwzRBmMhjteXbDUA7W5ILih6cxQSVWF38qPPCFO
+ XevjAIMwD73w+VK4D9lNDRNiP0WGVRg547GGw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727390603; x=1727995403;
+ d=1e100.net; s=20230601; t=1727390611; x=1727995411;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/9/u1Uw/I/PqSfmemQH4CPz1z3dg2e/lQinOmIApkgs=;
- b=POmOjYWp3FzouiTU0yoxbqhrjVWP1hKP2CEZWA4S8RjExdIVICej+zh8/PmUiH7VdW
- bq9MEvCPv+cc42cjXwzPwY4aFM0NaM3PgdlSf3doCBcMhGY4XZn8lapQH9fGzM0CYrhT
- oVaadFDuNd9kUIHojtG4PvavUx4IEDxpZnX/YYwoMB7MosFO3W2AIICjPHCU2W97WKjc
- W/U/jPgLMi2uLjTBkL9cR46yDjmbxt5kP6fQrvufd9E0MlsuEgsFFheP9MRllc/tSUSo
- MdvkLZdP3O0MCp29Y3IQbA3i/QtpxYqgyoIiK86DEIPbkCafYM5h014hJOsop7rQhjSr
- 1oUw==
-X-Gm-Message-State: AOJu0YwCa//h8fKQ7wkH2eL6gBGLaKb1WFeH6fNo3YkTX/LfwARgVQuH
- 42pA1x1wbWcP1pY9vRJp/DmjyOgxf3mXJJEIvOTDjHIoAJEQ4TusMrpeBoUsf0aJ6fIwMuFILpF
- hTQuytJE=
-X-Google-Smtp-Source: AGHT+IGUl2j7konjQM9nPQvA1q9Cq1bVX2n+/QXjzmXEXP8awcqQ9ywNYALCb/vJygI8cCYE+o0wVQ==
-X-Received: by 2002:a05:622a:54:b0:458:2334:b8d1 with SMTP id
- d75a77b69052e-45c9f23bf4fmr19702031cf.32.1727390603546; 
- Thu, 26 Sep 2024 15:43:23 -0700 (PDT)
+ bh=A+Q5Tl/VjJPDJ5g/bZZgsoRdOLsJkgIK40nMzJhDIOo=;
+ b=ebrLVLkuG5CoDawVGmTck4CYIDNhfwSuiP0/SmHyukoWzLLoq1eGpE/dT0yqU11F1Z
+ LQhLBmXfPPy3NBr1ZyNWc/UFEsCZlmFdGhTYrYOFO6G8N/+K1NR6Y0DheBkQ4gVzoFXH
+ 56+o8Kwq/HDDxBZBPg9mAw8MJOP2tKzIwXVT+ndltG4V6L16eBv5j8SaW7UC6Qny15Ab
+ 6Pinm5tr2G4AavVXL9wAkbm2fXmIMkLlkxRTem8w2+GMmORZhP0ZyFP7QcfOoWhovqP+
+ RLUf+ltZWZbr1tFlCNsijxOEkLBhXegVZG9fkM+3QVjwMWsnXC4lxSl645YOCr75FVX+
+ IxSQ==
+X-Gm-Message-State: AOJu0Yxu18rLwN7H4kQW2IdR99+8a8LRgSLN3n9nWZe3Ttz4eRunfG06
+ /2oL1DAV+PML6q2/ntG5SwE1III/7a9R1xJ/57rYjO3NeCGcvjOKZPsVYmF1ULysCWjcdHFgTQu
+ /ISzfDjs=
+X-Google-Smtp-Source: AGHT+IGmejgc3vNmUGjIJqx+7UgtL24bw6N+femVYxcC4errdbI9us4wB1QauF0sQ8s3E4Pgpq+nkQ==
+X-Received: by 2002:ac8:5f87:0:b0:458:2ff1:6a4b with SMTP id
+ d75a77b69052e-45c9f221c71mr18700011cf.36.1727390611667; 
+ Thu, 26 Sep 2024 15:43:31 -0700 (PDT)
 Received: from chromium.org ([205.220.129.31])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-45c9f350fadsm2738461cf.80.2024.09.26.15.43.14
+ d75a77b69052e-45c9f350fadsm2738461cf.80.2024.09.26.15.43.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Sep 2024 15:43:23 -0700 (PDT)
+ Thu, 26 Sep 2024 15:43:31 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Devarsh Thakkar <devarsht@ti.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Sean Anderson <sean.anderson@seco.com>, Stefan Roese <sr@denx.de>
-Subject: [PATCH 23/42] serial: Make use of the SERIAL define
-Date: Fri, 27 Sep 2024 00:35:48 +0200
-Message-ID: <20240926223814.1276764-24-sjg@chromium.org>
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marex@denx.de>, Raymond Mao <raymond.mao@linaro.org>
+Subject: [PATCH 24/42] stdio: Make use of the SERIAL define
+Date: Fri, 27 Sep 2024 00:35:49 +0200
+Message-ID: <20240926223814.1276764-25-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240926223814.1276764-1-sjg@chromium.org>
 References: <20240926223814.1276764-1-sjg@chromium.org>
@@ -98,30 +96,25 @@ in the common Makefile.
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- common/Makefile | 10 +---------
- 1 file changed, 1 insertion(+), 9 deletions(-)
+ include/stdio.h | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
 
-diff --git a/common/Makefile b/common/Makefile
-index 9fdad4bc38d..ae8984659c0 100644
---- a/common/Makefile
-+++ b/common/Makefile
-@@ -65,15 +65,7 @@ obj-$(CONFIG_DDR_SPD) += ddr_spd.o
- obj-$(CONFIG_SPD_EEPROM) += ddr_spd.o
- obj-$(CONFIG_HWCONFIG) += hwconfig.o
- obj-$(CONFIG_BOUNCE_BUFFER) += bouncebuf.o
--ifdef CONFIG_XPL_BUILD
--ifdef CONFIG_TPL_BUILD
--obj-$(CONFIG_TPL_SERIAL) += console.o
--else
--obj-$(CONFIG_SPL_SERIAL) += console.o
--endif
--else
--obj-y += console.o
--endif # CONFIG_XPL_BUILD
-+obj-$(CONFIG_$(SPL_TPL_)SERIAL) += console.o
+diff --git a/include/stdio.h b/include/stdio.h
+index 56609b846ff..d42fdd2728c 100644
+--- a/include/stdio.h
++++ b/include/stdio.h
+@@ -9,10 +9,7 @@ int getchar(void);
+ int tstc(void);
  
- obj-$(CONFIG_CROS_EC) += cros_ec.o
- obj-y += dlmalloc.o
+ /* stdout */
+-#if !defined(CONFIG_XPL_BUILD) || \
+-	(defined(CONFIG_TPL_BUILD) && defined(CONFIG_TPL_SERIAL)) || \
+-	(defined(CONFIG_XPL_BUILD) && !defined(CONFIG_TPL_BUILD) && \
+-		defined(CONFIG_SPL_SERIAL))
++#if !defined(CONFIG_XPL_BUILD) || CONFIG_IS_ENABLED(SERIAL)
+ void putc(const char c);
+ void puts(const char *s);
+ #ifdef CONFIG_CONSOLE_FLUSH_SUPPORT
 -- 
 2.43.0
 
