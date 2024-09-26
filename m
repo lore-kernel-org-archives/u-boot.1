@@ -4,75 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20B47CDE038
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 20:54:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EBAECDE038
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 21:04:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 72C0F88E66;
-	Thu, 26 Sep 2024 22:54:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id CA02B88E31;
+	Thu, 26 Sep 2024 23:04:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g057LfzP";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="syEo6z4R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 833EC88E70; Thu, 26 Sep 2024 22:54:26 +0200 (CEST)
-Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
- [IPv6:2607:f8b0:4864:20::833])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1117D88E36; Thu, 26 Sep 2024 23:04:13 +0200 (CEST)
+Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0093088E58
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 22:54:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B0A6888DFD
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 23:04:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qt1-x833.google.com with SMTP id
- d75a77b69052e-458362e898aso8963791cf.0
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 13:54:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727384062; x=1727988862; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9OiGuOtz+2Qb7TAfX4QqF1seWifOLAN0h7K6MhW9cXY=;
- b=g057LfzP3XZE4TSOoui4qW0Hki6IhMZTU0e9amYzIgpTLyVLVgMzUDc2IXdVMxxGPh
- EfZvIszx/Vs5z3p/iG2FmYheo7utmLs0ibL9llVOxCCTAHmKS342BBrb3eJKMcE10V6v
- wP5ASaz4JoYap+xwzpUhmZEHNoHAvj186sRE4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727384062; x=1727988862;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=9OiGuOtz+2Qb7TAfX4QqF1seWifOLAN0h7K6MhW9cXY=;
- b=YYHbSSqR5u99GGHULiQst5hXlTK/getC/sbwzXAG836JhGNmUImMuoaQ0odGrJuyus
- TV6do5ZEy3LgR9YOmLLk4662ai4TGz/+/LO4bo4dr17flc7pJC3MSh330M5V2fjv0e5W
- mR7GykBdRKNJQ5IvOyna3YkzWkfjpElIh0Fdmbr0n7FYIhzbzqC8Va5HkAj3A/OD0pDD
- dEIoVI7yqDZRiwVj9ZG12JL4bOvpYw3zgcw06qXeXdvCzMKdabtYP3WrsN5rIB45Lnnw
- 1S+Jbt7KIMjn2cKu9jFlvZ4ALDVQihoKFUEi+D56fzh8VZf7Tc+9er46PGh86vqswcBG
- 8wOw==
-X-Gm-Message-State: AOJu0Yz+3SqaTReazZPdfJr4pzht190uiiXoDgWY5N4dmKOigX/9gRzK
- NCOesBCeWLiUzgzrXPK2XkeHZN2Y0anwUy1WBr2bvdd3Mnjf7HObWHQK1U1Bsu2qRM5MQhS1p4D
- W7IukdwQ=
-X-Google-Smtp-Source: AGHT+IEYjjMu0BDw6+CpfGNBv3o3TkpeHHlpLQOXwJ5tAh0rTPaV+O6cqIw7qi5+aTjtCUEdKXZDsQ==
-X-Received: by 2002:a05:6214:438a:b0:6c5:7fa3:c40c with SMTP id
- 6a1803df08f44-6cb3b62cb24mr10905056d6.33.1727384061690; 
- Thu, 26 Sep 2024 13:54:21 -0700 (PDT)
-Received: from chromium.org ([205.220.129.31])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6cb3b66cff5sm2538696d6.77.2024.09.26.13.54.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Sep 2024 13:54:21 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
-	Simon Glass <sjg@chromium.org>
-Subject: [PATCH 27/27] led: Drop status_led header file
-Date: Thu, 26 Sep 2024 22:44:47 +0200
-Message-ID: <20240926204455.963584-28-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240926204455.963584-1-sjg@chromium.org>
-References: <20240926204455.963584-1-sjg@chromium.org>
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1727384649;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=huW9wXhHPpnMSU0NOoaJJN+MxqAuZAZs86U8FzSBPOc=;
+ b=syEo6z4R9xF77BWDpezrM7P2y6FX2z89Pp+aIlWP0uuekPcpICT0TN/YuD0c3poXP2na2x
+ HQ81c1/TRyLApUlqsJPbIeEYdnetZGBDhHOELP1uck/pgcXzQW1EXOeCKTEq/0tU84uOnh
+ 0uEYQXWdfrQicGJTWNxShkD+5IiBVKed6p6PvFnf1tMXuNP4RKWzloBQT/UbUh2vr0z03z
+ GIZljaSjML3X12mCQzcZHEqSH/N5fTrz9ASaIlMGdCgE5w0oDB6WX++Ul71byrnuos4TqT
+ qI8FVtTv3U+LaoszK2BjXfkR7q885nIHXiP7tb3m5Q7729I8/tARnf7gxepwVQ==
+Date: Thu, 26 Sep 2024 23:04:09 +0200
+From: Dragan Simic <dsimic@manjaro.org>
+To: Paul Kocialkowski <paulk@sys-base.io>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Kever Yang <kever.yang@rock-chips.com>, Quentin
+ Schulz <quentin.schulz@cherry.de>, Jonas Karlman <jonas@kwiboo.se>, Chris
+ Morgan <macromorgan@hotmail.com>, Tim Lunn <tim@feathertop.org>, Paul
+ Kocialkowski <contact@paulk.fr>
+Subject: Re: [PATCH 4/4] rockchip: Disable DRAM debug by default
+In-Reply-To: <ZvXJOJb0rKDYnTeQ@collins>
+References: <20240926183111.1324284-1-paulk@sys-base.io>
+ <20240926183111.1324284-4-paulk@sys-base.io>
+ <21bf0494f4dd9052801c2bacfe014651@manjaro.org> <ZvXJOJb0rKDYnTeQ@collins>
+Message-ID: <72b29cc73709076229b3aa6ae9d0f5da@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
 Content-Transfer-Encoding: 8bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,112 +74,152 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is not needed anymore. Drop it.
+On 2024-09-26 22:51, Paul Kocialkowski wrote:
+> Le Thu 26 Sep 24, 22:17, Dragan Simic a écrit :
+>> On 2024-09-26 20:31, Paul Kocialkowski wrote:
+>> > From: Paul Kocialkowski <contact@paulk.fr>
+>> >
+>> > Printing debug details about DRAM is not useful in regular use and
+>> > adds visual pollution to the log. Disable it by default.
+>> 
+>> With all the respect, I disagree with disabling this by default.
+>> This prints just a couple of lines that can actually be very helpful
+>> when figuring out what's going on in case of some DRAM-related issues
+>> on random devices in the field.
+> 
+> Well this rationale could apply to lots of things and we generally 
+> don't
+> print debug info about anything else by default.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+I'd rather see these messages as some kind of additional verbosity,
+rather than some true debugging messages for the DRAM init.  It's just
+a couple of additional lines printed on the console, in the end.
 
- include/status_led.h | 91 --------------------------------------------
- 1 file changed, 91 deletions(-)
- delete mode 100644 include/status_led.h
+> Maybe DRAM is more likely to be a source of issues than other hardware 
+> aspects
+> that are maybe more stable, but I don't see what would prevent 
+> rebuilding a
+> u-boot binary with debug enabled. If the DRAM config needs tweaking it 
+> will be
+> necessary to rebuild a binary anyway.
 
-diff --git a/include/status_led.h b/include/status_led.h
-deleted file mode 100644
-index 3d118af0d8b..00000000000
---- a/include/status_led.h
-+++ /dev/null
-@@ -1,91 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0+ */
--/*
-- * (C) Copyright 2000-2004
-- * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
-- */
--
--/*
-- * The purpose of this code is to signal the operational status of a
-- * target which usually boots over the network; while running in
-- * PCBoot, a status LED is blinking. As soon as a valid BOOTP reply
-- * message has been received, the LED is turned off. The Linux
-- * kernel, once it is running, will start blinking the LED again,
-- * with another frequency.
-- */
--
--#ifndef _STATUS_LED_H_
--#define	_STATUS_LED_H_
--
--#ifdef CONFIG_LED_STATUS
--
--#define LED_STATUS_PERIOD	(CONFIG_SYS_HZ / CONFIG_LED_STATUS_FREQ)
--#ifdef CONFIG_LED_STATUS1
--#define LED_STATUS_PERIOD1	(CONFIG_SYS_HZ / CONFIG_LED_STATUS_FREQ1)
--#endif /* CONFIG_LED_STATUS1 */
--#ifdef CONFIG_LED_STATUS2
--#define LED_STATUS_PERIOD2	(CONFIG_SYS_HZ / CONFIG_LED_STATUS_FREQ2)
--#endif /* CONFIG_LED_STATUS2 */
--#ifdef CONFIG_LED_STATUS3
--#define LED_STATUS_PERIOD3	(CONFIG_SYS_HZ / CONFIG_LED_STATUS_FREQ3)
--#endif /* CONFIG_LED_STATUS3 */
--#ifdef CONFIG_LED_STATUS4
--#define LED_STATUS_PERIOD4	(CONFIG_SYS_HZ / CONFIG_LED_STATUS_FREQ4)
--#endif /* CONFIG_LED_STATUS4 */
--#ifdef CONFIG_LED_STATUS5
--#define LED_STATUS_PERIOD5	(CONFIG_SYS_HZ / CONFIG_LED_STATUS_FREQ5)
--#endif /* CONFIG_LED_STATUS5 */
--
--void status_led_init(void);
--void status_led_tick(unsigned long timestamp);
--void status_led_set(int led, int state);
--
--/*****  MVS v1  **********************************************************/
--#if (defined(CONFIG_MVS) && CONFIG_MVS < 2)
--# define STATUS_LED_PAR		im_ioport.iop_pdpar
--# define STATUS_LED_DIR		im_ioport.iop_pddir
--# undef  STATUS_LED_ODR
--# define STATUS_LED_DAT		im_ioport.iop_pddat
--
--# define STATUS_LED_ACTIVE	1		/* LED on for bit == 1	*/
--
--/*****  Someone else defines these  *************************************/
--#elif defined(STATUS_LED_PAR)
--  /*
--   * ADVICE: Define in your board configuration file rather than
--   * filling this file up with lots of custom board stuff.
--   */
--#else
--# error Status LED configuration missing
--#endif
--/************************************************************************/
--
--#include <asm/status_led.h>
--
--#endif	/* CONFIG_LED_STATUS	*/
--
--/*
-- * Coloured LEDs API
-- */
--#ifndef	__ASSEMBLY__
--void coloured_LED_init(void);
--void red_led_on(void);
--void red_led_off(void);
--void green_led_on(void);
--void green_led_off(void);
--void yellow_led_on(void);
--void yellow_led_off(void);
--void blue_led_on(void);
--void blue_led_off(void);
--#else
--	.extern LED_init
--	.extern red_led_on
--	.extern red_led_off
--	.extern yellow_led_on
--	.extern yellow_led_off
--	.extern green_led_on
--	.extern green_led_off
--	.extern blue_led_on
--	.extern blue_led_off
--#endif
--
--#endif	/* _STATUS_LED_H_	*/
--- 
-2.43.0
+In theory, rebuilding a U-Boot image and reinstalling it is rather easy.
+In practice, it's hardly doable on random devices in the field, and it's
+sometimes virtually impossible.  It's simply that not every end user is
+willing or capable of doing things like that.
 
+>> > Signed-off-by: Paul Kocialkowski <contact@paulk.fr>
+>> > ---
+>> >  configs/anbernic-rgxx3-rk3566_defconfig   | 1 -
+>> >  configs/neu2-io-rv1126_defconfig          | 1 -
+>> >  configs/roc-pc-mezzanine-rk3399_defconfig | 1 -
+>> >  configs/roc-pc-rk3399_defconfig           | 1 -
+>> >  configs/rock-pi-n10-rk3399pro_defconfig   | 1 -
+>> >  configs/rock-pi-n8-rk3288_defconfig       | 1 -
+>> >  configs/sonoff-ihost-rv1126_defconfig     | 1 -
+>> >  drivers/ram/rockchip/Kconfig              | 1 -
+>> >  8 files changed, 8 deletions(-)
+>> >
+>> > diff --git a/configs/anbernic-rgxx3-rk3566_defconfig
+>> > b/configs/anbernic-rgxx3-rk3566_defconfig
+>> > index a03509bf4671..5c074cffeb44 100644
+>> > --- a/configs/anbernic-rgxx3-rk3566_defconfig
+>> > +++ b/configs/anbernic-rgxx3-rk3566_defconfig
+>> > @@ -67,7 +67,6 @@ CONFIG_SPL_DM_REGULATOR_FIXED=y
+>> >  CONFIG_REGULATOR_RK8XX=y
+>> >  CONFIG_PWM_ROCKCHIP=y
+>> >  CONFIG_SPL_RAM=y
+>> > -# CONFIG_RAM_ROCKCHIP_DEBUG is not set
+>> >  # CONFIG_RNG_SMCCC_TRNG is not set
+>> >  CONFIG_BAUDRATE=1500000
+>> >  CONFIG_DEBUG_UART_SHIFT=2
+>> > diff --git a/configs/neu2-io-rv1126_defconfig
+>> > b/configs/neu2-io-rv1126_defconfig
+>> > index 2a4c9b45a04f..84e4465f2c5f 100644
+>> > --- a/configs/neu2-io-rv1126_defconfig
+>> > +++ b/configs/neu2-io-rv1126_defconfig
+>> > @@ -45,7 +45,6 @@ CONFIG_MMC_DW=y
+>> >  CONFIG_MMC_DW_ROCKCHIP=y
+>> >  CONFIG_REGULATOR_PWM=y
+>> >  CONFIG_PWM_ROCKCHIP=y
+>> > -# CONFIG_RAM_ROCKCHIP_DEBUG is not set
+>> >  CONFIG_BAUDRATE=1500000
+>> >  CONFIG_DEBUG_UART_SHIFT=2
+>> >  CONFIG_SYSRESET=y
+>> > diff --git a/configs/roc-pc-mezzanine-rk3399_defconfig
+>> > b/configs/roc-pc-mezzanine-rk3399_defconfig
+>> > index a57899bfdfa0..b4041902b381 100644
+>> > --- a/configs/roc-pc-mezzanine-rk3399_defconfig
+>> > +++ b/configs/roc-pc-mezzanine-rk3399_defconfig
+>> > @@ -65,7 +65,6 @@ CONFIG_REGULATOR_PWM=y
+>> >  CONFIG_SPL_DM_REGULATOR_FIXED=y
+>> >  CONFIG_REGULATOR_RK8XX=y
+>> >  CONFIG_PWM_ROCKCHIP=y
+>> > -# CONFIG_RAM_ROCKCHIP_DEBUG is not set
+>> >  CONFIG_RAM_ROCKCHIP_LPDDR4=y
+>> >  CONFIG_BAUDRATE=1500000
+>> >  CONFIG_DEBUG_UART_SHIFT=2
+>> > diff --git a/configs/roc-pc-rk3399_defconfig
+>> > b/configs/roc-pc-rk3399_defconfig
+>> > index b45f0e0a8994..922f67320c20 100644
+>> > --- a/configs/roc-pc-rk3399_defconfig
+>> > +++ b/configs/roc-pc-rk3399_defconfig
+>> > @@ -62,7 +62,6 @@ CONFIG_REGULATOR_PWM=y
+>> >  CONFIG_SPL_DM_REGULATOR_FIXED=y
+>> >  CONFIG_REGULATOR_RK8XX=y
+>> >  CONFIG_PWM_ROCKCHIP=y
+>> > -# CONFIG_RAM_ROCKCHIP_DEBUG is not set
+>> >  CONFIG_RAM_ROCKCHIP_LPDDR4=y
+>> >  CONFIG_BAUDRATE=1500000
+>> >  CONFIG_DEBUG_UART_SHIFT=2
+>> > diff --git a/configs/rock-pi-n10-rk3399pro_defconfig
+>> > b/configs/rock-pi-n10-rk3399pro_defconfig
+>> > index ec995a54a0ee..17fe939ec989 100644
+>> > --- a/configs/rock-pi-n10-rk3399pro_defconfig
+>> > +++ b/configs/rock-pi-n10-rk3399pro_defconfig
+>> > @@ -51,7 +51,6 @@ CONFIG_PHY_ROCKCHIP_TYPEC=y
+>> >  CONFIG_PMIC_RK8XX=y
+>> >  CONFIG_REGULATOR_RK8XX=y
+>> >  CONFIG_PWM_ROCKCHIP=y
+>> > -# CONFIG_RAM_ROCKCHIP_DEBUG is not set
+>> >  CONFIG_BAUDRATE=1500000
+>> >  CONFIG_DEBUG_UART_SHIFT=2
+>> >  CONFIG_SYS_NS16550_MEM32=y
+>> > diff --git a/configs/rock-pi-n8-rk3288_defconfig
+>> > b/configs/rock-pi-n8-rk3288_defconfig
+>> > index 4c09b9137ef8..af0fa8879421 100644
+>> > --- a/configs/rock-pi-n8-rk3288_defconfig
+>> > +++ b/configs/rock-pi-n8-rk3288_defconfig
+>> > @@ -73,7 +73,6 @@ CONFIG_REGULATOR_RK8XX=y
+>> >  CONFIG_PWM_ROCKCHIP=y
+>> >  CONFIG_RAM=y
+>> >  CONFIG_SPL_RAM=y
+>> > -# CONFIG_RAM_ROCKCHIP_DEBUG is not set
+>> >  CONFIG_DEBUG_UART_SHIFT=2
+>> >  CONFIG_SYS_NS16550_MEM32=y
+>> >  CONFIG_SYSRESET=y
+>> > diff --git a/configs/sonoff-ihost-rv1126_defconfig
+>> > b/configs/sonoff-ihost-rv1126_defconfig
+>> > index 4890644c7e6f..739adb49ce93 100644
+>> > --- a/configs/sonoff-ihost-rv1126_defconfig
+>> > +++ b/configs/sonoff-ihost-rv1126_defconfig
+>> > @@ -46,7 +46,6 @@ CONFIG_MMC_DW=y
+>> >  CONFIG_MMC_DW_ROCKCHIP=y
+>> >  CONFIG_REGULATOR_PWM=y
+>> >  CONFIG_PWM_ROCKCHIP=y
+>> > -# CONFIG_RAM_ROCKCHIP_DEBUG is not set
+>> >  CONFIG_BAUDRATE=1500000
+>> >  CONFIG_DEBUG_UART_SHIFT=2
+>> >  CONFIG_SYSRESET=y
+>> > diff --git a/drivers/ram/rockchip/Kconfig b/drivers/ram/rockchip/Kconfig
+>> > index 67c63ecba047..e030c982eccb 100644
+>> > --- a/drivers/ram/rockchip/Kconfig
+>> > +++ b/drivers/ram/rockchip/Kconfig
+>> > @@ -15,7 +15,6 @@ if RAM_ROCKCHIP
+>> >
+>> >  config RAM_ROCKCHIP_DEBUG
+>> >  	bool "Rockchip ram drivers debugging"
+>> > -	default y
+>> >  	help
+>> >  	  This enables debugging ram driver API's for the platforms
+>> >  	  based on Rockchip SoCs.
