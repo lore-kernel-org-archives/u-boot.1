@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DE5BCEBF76
-	for <u-boot@archiver.kernel.org>; Fri, 27 Sep 2024 04:45:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B27C5CEBF69
+	for <u-boot@archiver.kernel.org>; Fri, 27 Sep 2024 04:45:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C7AE18907D;
-	Fri, 27 Sep 2024 06:44:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4E86D89082;
+	Fri, 27 Sep 2024 06:44:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1727412279;
-	bh=ujYq0RRefQSsVz9A/dal4MxankqpgX5og2jYUXn2QHU=;
+	s=phobos-20191101; t=1727412280;
+	bh=6zGLeWN7EYREDuO+VOPtfoMeROFD9KegxMW/djXGoHQ=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=NCmVi7iaMFGd3JStFBKRsBrygKuKpTQJJLJU37XHzw1kUHHVgiGwtyep+pzsjrsqJ
-	 Z6PnoRF88OjAKpl64zFfFGx9XY/JuuBSgHgekjdJFHxLpfkRx/edhtI+yCgYl1m1Yl
-	 WrqEfpi2WBC2Wjy+5OyOQvXj+59Y3w0cue+OqtG9wxvzvTluMGvJ2CHeMXQbO8+U15
-	 /LOg7gbBPc4InNYLscju8y9eTeXq4ouDW+FCSvvONKPBFdvvXJdls26POMC1f9wvTC
-	 TAehfwpPMXUs2DUfD6NN08DU8hh91lPcQ84yR1MlNBIGTeRkPL2tBOF8v7RGgjTqEx
-	 +x3o+8CjVB+bg==
+	b=wkzX9hW+UBxbFAZ/esnyiimGxm1f67KeHdoRuWH5FPJdMr9EURmIFXqqOZ1jpto7Q
+	 qWTFuowmeIJTq4+8nQX5Pzo+Fzh0Xe2Q+PB0+yxTv5nPNtWQEou+W+/ESltpp3L9Z5
+	 5SQz+dY+hEohu42I5Q+u8FlLC2+KB9yBMWK5fYNpbS0IzeP1x94m5s7sn68ZSGkV3Z
+	 yuFJRS4WzT0L/ANmtvnCeC6ST1Ai7MFQ7WUzfQ3UqIAYjVBJLlUuLWnYvxiN4IR+7g
+	 gc6HwKYtSqydhkgFZA0vICAQZAVAV97UIjlclc0aDpNRqkEHZmeuQ3FFHnsyX9Glqj
+	 SwpcQlRmot+jQ==
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id A5A4B88FD5;
- Fri, 27 Sep 2024 01:15:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id B3CAB88FBE;
+ Fri, 27 Sep 2024 01:15:27 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1727392527;
- bh=ujYq0RRefQSsVz9A/dal4MxankqpgX5og2jYUXn2QHU=;
+ s=phobos-20191101; t=1727392528;
+ bh=6zGLeWN7EYREDuO+VOPtfoMeROFD9KegxMW/djXGoHQ=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=qSxdvZpOtU+Jh8yCFG4knb7RpaefZD4mEZg5OWIXOyzCjn4fBTAF1kHx8TmBeCrr1
- YGueFbqB/TiG+/pRy2CaxR1dTqDp8kRjFa8NHduo7qW5QMY2hkXEgI03Qy8wOa5Fug
- Atietba/Wde5Elh/VHo8luT/673qL3/Nt9OJUpimg9x4ZibkTbk/aUglCsAVhMp2Ef
- pvAyIoevmVrJrU8fRv1bI92eFTrKcQRGLnAq6M3y5pZNOthSJ4fGoEhijcIqVz2Kr9
- L529Ngdp112mrevIbBeT9m8NAKog3IqXktvxJwv7U52f4JjPREcs6YFLqoCGxGVvlU
- BG/1nAs0rHbpQ==
+ b=MKtSYQzn5znO1iA8xZ3skMyOGMx/+UQZp5Qek+fYBPQjZByXtVwdLhVZ6gK6ICXbQ
+ arq/nYTiUvUisisx5T1wSAd0/qcvDowjOpRnrFKURO0V/oB+DgEP9XuSSWBMxRkmS5
+ s/McGFDv3hK0nUoMqoz5gnZB0hGi4Coj3Rb1E/07Ri7OsHDgcxYTYz2u+cqshPQIOi
+ RBjMb4URPxjj9ABrNpGQM0nq9J7cRCfbICpYs34/6HrFUJHv9FkzW3CJFwPzf3v7tM
+ 9bIrZgGelN00B7nrf5Gt1XhnyNx61m09rnH+psLjL4ymjHsdVxBX6s+6w00MmH6t6M
+ xFCTGyF6x3h5w==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>, Ben Wolsieffer <benwolsieffer@gmail.com>,
@@ -64,9 +64,9 @@ Cc: Marek Vasut <marex@denx.de>, Ben Wolsieffer <benwolsieffer@gmail.com>,
  Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, u-boot-amlogic@groups.io,
  u-boot-qcom@groups.io, u-boot@dh-electronics.com,
  uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH v3 3/4] power: regulator: Drop regulator_unset()
-Date: Fri, 27 Sep 2024 01:14:14 +0200
-Message-ID: <20240926231457.2933914-3-marex@denx.de>
+Subject: [PATCH v3 4/4] power: regulator: Drop regulators_enable_boot_on/off()
+Date: Fri, 27 Sep 2024 01:14:15 +0200
+Message-ID: <20240926231457.2933914-4-marex@denx.de>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240926231457.2933914-1-marex@denx.de>
 References: <20240926231457.2933914-1-marex@denx.de>
@@ -89,7 +89,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This function is never called, drop it.
+Both regulators_enable_boot_on/off() are unused and superseded by
+regulator uclass regulator_post_probe(). Remove both functions.
 
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
@@ -128,64 +129,255 @@ Cc: uboot-stm32@st-md-mailman.stormreply.com
 V2: Rebase on current u-boot/next
 V3: No change
 ---
- drivers/power/regulator/regulator-uclass.c | 11 -----------
- include/power/regulator.h                  | 14 +-------------
- 2 files changed, 1 insertion(+), 24 deletions(-)
+ arch/arm/mach-rockchip/board.c                |  8 ------
+ arch/arm/mach-snapdragon/board.c              |  1 -
+ arch/arm/mach-tegra/board2.c                  |  3 ---
+ board/Marvell/octeontx2_cn913x/board.c        |  5 ----
+ .../amlogic/odroid-go-ultra/odroid-go-ultra.c |  2 --
+ board/dhelectronics/dh_imx6/dh_imx6.c         |  2 --
+ .../dh_imx8mp/imx8mp_dhcom_pdk2.c             |  2 --
+ board/dhelectronics/dh_stm32mp1/board.c       |  2 --
+ board/engicam/stm32mp1/stm32mp1.c             |  3 ---
+ board/google/veyron/veyron.c                  |  4 ---
+ board/samsung/common/exynos5-dt.c             |  4 ---
+ board/st/stm32mp1/stm32mp1.c                  |  2 --
+ drivers/power/regulator/regulator-uclass.c    | 10 --------
+ include/power/regulator.h                     | 25 -------------------
+ 14 files changed, 73 deletions(-)
 
-diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
-index 9fcc4bd85b9..4e83819ff73 100644
---- a/drivers/power/regulator/regulator-uclass.c
-+++ b/drivers/power/regulator/regulator-uclass.c
-@@ -345,17 +345,6 @@ out:
- 	return ret;
+diff --git a/arch/arm/mach-rockchip/board.c b/arch/arm/mach-rockchip/board.c
+index 0fdf9365b41..3fadf7e4122 100644
+--- a/arch/arm/mach-rockchip/board.c
++++ b/arch/arm/mach-rockchip/board.c
+@@ -202,14 +202,6 @@ int board_late_init(void)
+ 
+ int board_init(void)
+ {
+-	int ret;
+-
+-#ifdef CONFIG_DM_REGULATOR
+-	ret = regulators_enable_boot_on(false);
+-	if (ret)
+-		debug("%s: Cannot enable boot on regulator\n", __func__);
+-#endif
+-
+ 	return 0;
  }
  
--int regulator_unset(struct udevice *dev)
+diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+index 0af297470a6..2ab2ceb5138 100644
+--- a/arch/arm/mach-snapdragon/board.c
++++ b/arch/arm/mach-snapdragon/board.c
+@@ -237,7 +237,6 @@ void __weak qcom_board_init(void)
+ 
+ int board_init(void)
+ {
+-	regulators_enable_boot_on(false);
+ 	show_psci_version();
+ 	qcom_of_fixup_nodes();
+ 	qcom_board_init();
+diff --git a/arch/arm/mach-tegra/board2.c b/arch/arm/mach-tegra/board2.c
+index 7971e3b68d5..5c5838629b2 100644
+--- a/arch/arm/mach-tegra/board2.c
++++ b/arch/arm/mach-tegra/board2.c
+@@ -187,9 +187,6 @@ int board_init(void)
+ 	warmboot_prepare_code(TEGRA_LP0_ADDR, TEGRA_LP0_SIZE);
+ #endif
+ 
+-	/* Set up boot-on regulators */
+-	regulators_enable_boot_on(_DEBUG);
+-
+ 	return nvidia_board_init();
+ }
+ 
+diff --git a/board/Marvell/octeontx2_cn913x/board.c b/board/Marvell/octeontx2_cn913x/board.c
+index 3d20cfb2fab..3ffe15d42b8 100644
+--- a/board/Marvell/octeontx2_cn913x/board.c
++++ b/board/Marvell/octeontx2_cn913x/board.c
+@@ -23,11 +23,6 @@ int board_early_init_f(void)
+ 
+ int board_early_init_r(void)
+ {
+-	if (CONFIG_IS_ENABLED(DM_REGULATOR)) {
+-		/* Check if any existing regulator should be turned down */
+-		regulators_enable_boot_off(false);
+-	}
+-
+ 	return 0;
+ }
+ 
+diff --git a/board/amlogic/odroid-go-ultra/odroid-go-ultra.c b/board/amlogic/odroid-go-ultra/odroid-go-ultra.c
+index 8f3f2045d74..f9412071737 100644
+--- a/board/amlogic/odroid-go-ultra/odroid-go-ultra.c
++++ b/board/amlogic/odroid-go-ultra/odroid-go-ultra.c
+@@ -16,7 +16,5 @@ int mmc_get_env_dev(void)
+ 
+ int board_init(void)
+ {
+-	regulators_enable_boot_on(_DEBUG);
+-
+ 	return 0;
+ }
+diff --git a/board/dhelectronics/dh_imx6/dh_imx6.c b/board/dhelectronics/dh_imx6/dh_imx6.c
+index ada44e01424..f2b14bf701a 100644
+--- a/board/dhelectronics/dh_imx6/dh_imx6.c
++++ b/board/dhelectronics/dh_imx6/dh_imx6.c
+@@ -128,8 +128,6 @@ int board_init(void)
+ 
+ 	setup_fec_clock();
+ 
+-	regulators_enable_boot_on(_DEBUG);
+-
+ 	return 0;
+ }
+ 
+diff --git a/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c b/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
+index a389ab3c2d9..78aae412350 100644
+--- a/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
++++ b/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
+@@ -112,8 +112,6 @@ int dh_setup_mac_address(void)
+ 
+ int board_init(void)
+ {
+-	regulators_enable_boot_on(_DEBUG);
+-
+ 	return 0;
+ }
+ 
+diff --git a/board/dhelectronics/dh_stm32mp1/board.c b/board/dhelectronics/dh_stm32mp1/board.c
+index 4f4f537fee5..24c5f37c12f 100644
+--- a/board/dhelectronics/dh_stm32mp1/board.c
++++ b/board/dhelectronics/dh_stm32mp1/board.c
+@@ -622,8 +622,6 @@ static void board_init_regulator_av96(void)
+ static void board_init_regulator(void)
+ {
+ 	board_init_regulator_av96();
+-
+-	regulators_enable_boot_on(_DEBUG);
+ }
+ #else
+ static inline int board_get_regulator_buck3_nvm_uv_av96(int *uv)
+diff --git a/board/engicam/stm32mp1/stm32mp1.c b/board/engicam/stm32mp1/stm32mp1.c
+index bc2af66d8e9..56557d56429 100644
+--- a/board/engicam/stm32mp1/stm32mp1.c
++++ b/board/engicam/stm32mp1/stm32mp1.c
+@@ -37,9 +37,6 @@ int checkboard(void)
+ /* board dependent setup after realloc */
+ int board_init(void)
+ {
+-	if (IS_ENABLED(CONFIG_DM_REGULATOR))
+-		regulators_enable_boot_on(_DEBUG);
+-
+ 	return 0;
+ }
+ 
+diff --git a/board/google/veyron/veyron.c b/board/google/veyron/veyron.c
+index bd8ce633772..674f19ba03c 100644
+--- a/board/google/veyron/veyron.c
++++ b/board/google/veyron/veyron.c
+@@ -57,10 +57,6 @@ static int veyron_init(void)
+ 	if (ret)
+ 		return log_msg_ret("s33", ret);
+ 
+-	ret = regulators_enable_boot_on(false);
+-	if (ret)
+-		return log_msg_ret("boo", ret);
+-
+ 	return 0;
+ }
+ #endif
+diff --git a/board/samsung/common/exynos5-dt.c b/board/samsung/common/exynos5-dt.c
+index 56862bcb34d..68edd1ec282 100644
+--- a/board/samsung/common/exynos5-dt.c
++++ b/board/samsung/common/exynos5-dt.c
+@@ -88,10 +88,6 @@ int exynos_power_init(void)
+ 	if (ret == -ENODEV)
+ 		return 0;
+ 
+-	ret = regulators_enable_boot_on(false);
+-	if (ret)
+-		return ret;
+-
+ 	ret = exynos_set_regulator("vdd_mif", 1100000);
+ 	if (ret)
+ 		return ret;
+diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
+index 97532a8156f..d5e5e776d2a 100644
+--- a/board/st/stm32mp1/stm32mp1.c
++++ b/board/st/stm32mp1/stm32mp1.c
+@@ -665,8 +665,6 @@ int board_init(void)
+ 	if (board_is_stm32mp15x_dk2())
+ 		board_stm32mp15x_dk2_init();
+ 
+-	regulators_enable_boot_on(_DEBUG);
+-
+ 	/*
+ 	 * sysconf initialisation done only when U-Boot is running in secure
+ 	 * done in TF-A for TFABOOT.
+diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
+index 4e83819ff73..decd0802c84 100644
+--- a/drivers/power/regulator/regulator-uclass.c
++++ b/drivers/power/regulator/regulator-uclass.c
+@@ -526,16 +526,6 @@ static int regulator_post_probe(struct udevice *dev)
+ 	return 0;
+ }
+ 
+-int regulators_enable_boot_on(bool verbose)
 -{
--	struct dm_regulator_uclass_plat *uc_pdata;
--
--	uc_pdata = dev_get_uclass_plat(dev);
--	if (uc_pdata && uc_pdata->force_off)
--		return regulator_set_enable(dev, false);
--
--	return -EMEDIUMTYPE;
+-	return 0;
 -}
 -
- static void regulator_show(struct udevice *dev, int ret)
- {
- 	struct dm_regulator_uclass_plat *uc_pdata;
+-int regulators_enable_boot_off(bool verbose)
+-{
+-	return 0;
+-}
+-
+ UCLASS_DRIVER(regulator) = {
+ 	.id		= UCLASS_REGULATOR,
+ 	.name		= "regulator",
 diff --git a/include/power/regulator.h b/include/power/regulator.h
-index bb07a814c79..5363483d02a 100644
+index 5363483d02a..8a914dfc74f 100644
 --- a/include/power/regulator.h
 +++ b/include/power/regulator.h
-@@ -430,7 +430,7 @@ int regulators_enable_boot_on(bool verbose);
-  *
-  * This disables all regulators which are marked to be off at boot time.
-  *
-- * This effectively calls regulator_unset() for every regulator.
-+ * This effectively does nothing.
+@@ -414,26 +414,6 @@ int regulator_get_mode(struct udevice *dev);
   */
- int regulators_enable_boot_off(bool verbose);
- 
-@@ -453,18 +453,6 @@ int regulators_enable_boot_off(bool verbose);
-  */
- int regulator_autoset(struct udevice *dev);
+ int regulator_set_mode(struct udevice *dev, int mode_id);
  
 -/**
-- * regulator_unset: turn off a regulator
+- * regulators_enable_boot_on() - enable regulators needed for boot
 - *
-- * The setup depends on constraints found in device's uclass's platform data
-- * (struct dm_regulator_uclass_platdata):
+- * This enables all regulators which are marked to be on at boot time. This
+- * only works for regulators which don't have a range for voltage/current,
+- * since in that case it is not possible to know which value to use.
 - *
-- * - Disable - will set - if  'force_off' is set to true,
-- *
-- * The function returns on the first-encountered error.
+- * This effectively calls regulator_autoset() for every regulator.
 - */
--int regulator_unset(struct udevice *dev);
+-int regulators_enable_boot_on(bool verbose);
+-
+-/**
+- * regulators_enable_boot_off() - disable regulators needed for boot
+- *
+- * This disables all regulators which are marked to be off at boot time.
+- *
+- * This effectively does nothing.
+- */
+-int regulators_enable_boot_off(bool verbose);
 -
  /**
-  * regulator_autoset_by_name: setup the regulator given by its uclass's
-  * platform data name field. The setup depends on constraints found in device's
+  * regulator_autoset: setup the voltage/current on a regulator
+  *
+@@ -617,11 +597,6 @@ static inline int regulator_set_mode(struct udevice *dev, int mode_id)
+ 	return -ENOSYS;
+ }
+ 
+-static inline int regulators_enable_boot_on(bool verbose)
+-{
+-	return -ENOSYS;
+-}
+-
+ static inline int regulator_autoset(struct udevice *dev)
+ {
+ 	return -ENOSYS;
 -- 
 2.45.2
 
