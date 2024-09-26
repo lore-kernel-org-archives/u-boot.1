@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0109CDE03C
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 22:07:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61892CDE03C
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 22:08:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8A0788F3C;
-	Fri, 27 Sep 2024 00:07:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3514D88F44;
+	Fri, 27 Sep 2024 00:07:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Yec4AzDJ";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bnm/laAY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3D7B88F41; Fri, 27 Sep 2024 00:07:24 +0200 (CEST)
-Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
- [IPv6:2607:f8b0:4864:20::1029])
+ id 3BDAA88F46; Fri, 27 Sep 2024 00:07:25 +0200 (CEST)
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
+ [IPv6:2607:f8b0:4864:20::1034])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC7E788F30
- for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 00:07:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B9A288E51
+ for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 00:07:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-2e06fade5eeso1245276a91.2
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 15:07:21 -0700 (PDT)
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-2e0a74ce880so844230a91.2
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 15:07:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727388440; x=1727993240; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727388441; x=1727993241; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=o1F5dHBisYC0X9HBAtotNLYSQrixm46XtNJgNUur3Hc=;
- b=Yec4AzDJGV/nU1NidtSbnl1UAJeEWvp/IB1SuAgE6ubWzuoPrkEkYGNHebHkTqoQGq
- d6GIE0GT3JYoI2T/A4pes5JQk7FCGTcwt7mWqdP9GmkyGT0WBLoqAS6DS3PrO5n7qjou
- Ur9RNQ3hr2mSEoffr6npScpTW8lAvbJsnaF2Y=
+ bh=GfpCLcRcVodDIOpvDfroCKlx8aWWJ3N4xMz54cSweKM=;
+ b=bnm/laAYg+5j8ycvwjodqoB1eaym44ZGlnivZaFZKIV6P5Qa1jOZh/+OYQg4JMO269
+ vCYHonIwrIQqm7iLLTWUTUXrxwqv8Gv85/XSnSzLCalyeWocg/LR1ZjBxnQryaE2yDzD
+ PA9m3bJJADOrlG1CXVntB2cZVUKb7ii00W57s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727388440; x=1727993240;
+ d=1e100.net; s=20230601; t=1727388441; x=1727993241;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=o1F5dHBisYC0X9HBAtotNLYSQrixm46XtNJgNUur3Hc=;
- b=otoZlmg13WbP6d0RQkHHQpj62jkmupOXiMN/tVwUH6Z4iR6OettgLNSeJ+UnwR5Mao
- nXqNSVw7dy1ZUGTlHQT22DAGxY/j+TPVYykfgkRbt5AWp/aAxVDk23+NkdNQtwGF0lXk
- wIgu4iVXvMRzgQFcJNZqBtqRfSZ6OPrCFwO2eBh5VhpAZHwGyeRBNHVcOU8qCARmtLnb
- 8Bm3SZ41zobpLlKRE3uTYqUTbKXKXPM9umOWDpV2c/Jkizgk8ojKkDEp4ywG0xBZMZe9
- cwrdmyfhgGbT+3FelWEBoFOoHfrFs4iZtSNOr6BkJzYhlGJYIQ3hN/1KrWrSQzTJxLIE
- C39w==
+ bh=GfpCLcRcVodDIOpvDfroCKlx8aWWJ3N4xMz54cSweKM=;
+ b=WcCYJDJK/6moTrXZGWriGlqT8vyKagQ7uKlimfzD6yghvhJmY8WihguzL7QpQtMx5C
+ kwqtIY6B+ibp4NPYeUYI+raqWOKP62TdUHweI+2TudmcqZcs/ezV7TuK/6ZyRz9Z9Ntq
+ DEEjyrOmWEW6x2ZfFIABVZl7wYbE8BxgEn+3HVU0aAv8bMpeqsXIWlb911HdcbhDYK6x
+ RHgggPHeIvSpd87IwHAMkMv8cxmCj3RanxX1GYNF3MgsEYhTOELlm/iNIyTHwyg4+/E+
+ i86aAWEa6ooTO7oviHzrV+7yZsk3e9gDXF2NUcDDekctiQEjFm4kTvT5BzHiBmhFsXza
+ vkWA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV2j4naz1LjIg953RsDcqqDdb69K1E0NMqVIJCB6sxjI0i4aNNvVI1+ruBnaeAmTbecvODILIY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy4HeUpnURbwFItlOxPsF7vid/AEr1VvMLu2CluwBaa4IVPzXDw
- 3HrX1E7Va75+o7mIbZAT1kUUIz1YN1MxBksrKE4KBTjOqycGcahYRl9sDblIGSBBN6EmRKX6irr
- NRbWtoHQEbxIiFlaNNDux5k+pXZIpaRs9mhte
-X-Google-Smtp-Source: AGHT+IHFwfZn/dUTCVVHWLJv8Sqs01RdponL0uWgENzA4V7f5tcmJ7P6YC+KpSA9NkqmnK8/TuGOhlTRi77JP7KAe9w=
-X-Received: by 2002:a17:90a:d381:b0:2cb:4c32:a7e4 with SMTP id
- 98e67ed59e1d1-2e0b89f9cecmr1291633a91.15.1727388440396; Thu, 26 Sep 2024
- 15:07:20 -0700 (PDT)
+ AJvYcCXuQ8tcmxvRz4whXnxEOPkhxa6ApL96oMpKwll7gWsWBbVkM9uTL4zEo3XDnJuV/HKbep+ZvYY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz/EyzWX6988lQcb5RFdw1HGQH/QGj0X/y/GzTuPK0GShOxx8M5
+ o21+24KRjG7AcZwAV6ciydBpAsqUxIwmTtZGvXgA4wVdUkniHQ2Jn6ybtp6bPCDrd/SmISbQzsE
+ 78GMhh0iEf9as/t+Ew0gMCgYw/xqNPExgb6vA
+X-Google-Smtp-Source: AGHT+IGkuIsTcwoWGS3t8R0YRPnq3LKMu77akM2x+ofkouS0vjtl+X9PfU5VY2bijQAKt98FSv8ERCaZbqhHTbT7QjI=
+X-Received: by 2002:a17:90a:ec0d:b0:2d8:7edb:fd2 with SMTP id
+ 98e67ed59e1d1-2e0b8b49913mr1375735a91.22.1727388441695; Thu, 26 Sep 2024
+ 15:07:21 -0700 (PDT)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 26 Sep 2024 18:07:18 -0400
+ HTTPREST; Thu, 26 Sep 2024 18:07:20 -0400
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20240826191143.426387-13-sjg@chromium.org>
-References: <20240826191143.426387-13-sjg@chromium.org>
+In-Reply-To: <20240826191143.426387-12-sjg@chromium.org>
+References: <20240826191143.426387-12-sjg@chromium.org>
  <20240826191143.426387-1-sjg@chromium.org>
-Date: Thu, 26 Sep 2024 18:07:18 -0400
-X-Google-Sender-Auth: HTpIMD7Ce0I6gdfiwmU0qt4JcYI
-Message-ID: <CAFLszTiVtC-k4m8KsGEXWGArh3xfhsCse5nO2Wtu+RS+JoO7eQ@mail.gmail.com>
-Subject: Re: [PATCH 12/15] binman: Provide a way to set the symbol base address
+Date: Thu, 26 Sep 2024 18:07:20 -0400
+X-Google-Sender-Auth: 7dJEw1ujyfUwiZyKeMnMwxXsfTo
+Message-ID: <CAFLszTj196sH82Dt0YP-7TexNQxxg0en7Aogwp1=MU2dxGC=yA@mail.gmail.com>
+Subject: Re: [PATCH 11/15] binman: Add minor improvements to symbol-writing
 To: Simon Glass <sjg@chromium.org>
 Cc: Lukasz Majewski <lukma@denx.de>,
  Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
@@ -94,24 +94,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The base address of the ELF containing symbols is normally added to
-any symbols written, so that the value points to the correct address in
-memory when everything is loaded. When the binary resides on disk, a
-different offset may be needed, typically 0. Provide a way to specify
-this.
+Add a clarification to the documentation and add a missing comment. Also
+update the test so that when it fails it is easier to see what is going
+on, rather than having to decode hex strings.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/binman/binman.rst                       | 15 ++++++++
- tools/binman/elf.py                           |  7 ++--
- tools/binman/entry.py                         |  8 ++++-
- tools/binman/etype/blob_phase.py              |  5 +++
- tools/binman/ftest.py                         | 35 ++++++++++++++++---
- tools/binman/test/336_symbols_base.dts        | 23 ++++++++++++
- tools/binman/test/337_symbols_base_expand.dts | 24 +++++++++++++
- 7 files changed, 110 insertions(+), 7 deletions(-)
- create mode 100644 tools/binman/test/336_symbols_base.dts
- create mode 100644 tools/binman/test/337_symbols_base_expand.dts
+ tools/binman/binman.rst |  4 +++-
+ tools/binman/elf.py     |  3 ++-
+ tools/binman/ftest.py   | 36 +++++++++++++++++++++++++++++-------
+ 3 files changed, 34 insertions(+), 9 deletions(-)
 
 Applied to u-boot-dm/next, thanks!
