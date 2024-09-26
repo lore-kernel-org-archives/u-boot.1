@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A0AFCDE038
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 20:48:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36AF2CDE038
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 20:48:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2DAF988DBA;
-	Thu, 26 Sep 2024 22:48:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BB49588DDC;
+	Thu, 26 Sep 2024 22:48:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HixVqMX5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FJ64KU/p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2547D88DBA; Thu, 26 Sep 2024 22:48:09 +0200 (CEST)
-Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
- [IPv6:2607:f8b0:4864:20::f2a])
+ id 1C83388DDC; Thu, 26 Sep 2024 22:48:24 +0200 (CEST)
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CD6E88363
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 22:48:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DBBB088363
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 22:48:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2a.google.com with SMTP id
- 6a1803df08f44-6c5ab2de184so9033736d6.0
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 13:48:06 -0700 (PDT)
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-6c3603292abso10251386d6.1
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 13:48:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727383685; x=1727988485; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727383700; x=1727988500; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZoipwiaJLKGpPVfD7oV9SC0oKU+FxmUkE55h+HpP6L8=;
- b=HixVqMX57yNyel0+amuHQvFlc2LB+UBArI544kUq//K5+eIXtPcKAWnFuEldVsJdO1
- uzxZa9ZORqMk/u2E7kPqXg9GsfZTdTENfolDFdIuDJ05tnjYo6WCfBg5SA1TyAHS/0/G
- 9toQFrdon4aLMosAlOLY8ipgSk5sZmb2NDuEc=
+ bh=9CG6IbZBUWbZy/dZT3ria1L5MDEPanLUMQQV8PtW684=;
+ b=FJ64KU/p1g074LSu7h96+71C6KcuAdQPfV0Iw4ir8bEIixIUHCc1tVwsODkNoJGfU5
+ 1/pjvwv+lg+KyKvysfIK1DOHIZluzgoGNjNJWRbeVCwOpCHIkaiqGL0RxRHM6hYjkb82
+ zlR253R15mIvBQlPM9VXDzU98NFGRx7VbFDd0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727383685; x=1727988485;
+ d=1e100.net; s=20230601; t=1727383700; x=1727988500;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZoipwiaJLKGpPVfD7oV9SC0oKU+FxmUkE55h+HpP6L8=;
- b=meAQe0grsVPAHb6YbsKkiCMQ04NfNmQYKwBsfmxDwGbAZceyCPDWUtkx6Y1uKBn5v+
- EMS12IQiYSdscT6NAxXzF6Lz1xzlG/AY6IQeAartax/aEOHHdEsnEuO42KW65sYWpQmj
- h3d+aNZVh6IhRZpxlXMqWo9vRjfV/dtXziMIaGxi9Lle/2rZzFjkuNJpmCo3gIAt3sJI
- Fv5X1GWNr8fcjvy55urZm2if4RLaIPy5SSxFN8pnfEzs1P6R0sUe0z92t3XKtZ6TJvHw
- GHIeCP28W3Ks/fx3FkDt8b3rw9BNkBBWgUnhkDbrc4JsrBHyB31WZVe8IZGqM9WcXOhl
- QGgQ==
-X-Gm-Message-State: AOJu0Ywiuqkj+FU95GGPkQleX35mcmbwGrPyrYVX8sI3xRb9xgq+IGpa
- /ys3uhNQnSPnu3B+R64uRjZ+enQO7Sbi9XkQBR5KYi7jFS3XOM0NkmdMlzOpctM/A3aXnONTIvw
- ZCnRQMp8=
-X-Google-Smtp-Source: AGHT+IEyt7dPuRKEwQbWBlyBzQKjVUD62u5lbjY97PnB03XTKFl7YngsQqkOtrpsQa+9c0SEe9Zk5A==
-X-Received: by 2002:a05:6214:4982:b0:6cb:36bc:197a with SMTP id
- 6a1803df08f44-6cb3b67d9f1mr11103756d6.4.1727383684852; 
- Thu, 26 Sep 2024 13:48:04 -0700 (PDT)
+ bh=9CG6IbZBUWbZy/dZT3ria1L5MDEPanLUMQQV8PtW684=;
+ b=ONntLczxaw0+ukasvwsJepR+CxmSDSjlfhoxwKhUOm8mLwJf9YBXTE2n/dOuUv7dsW
+ 9i/2Ik845EDsbPvy7KI9171MWU1odhDBHY6IcskELYA5AiJ2MFDXXlpwuyJflQi/Z+WD
+ ZaoEWJuz8uk8eFadMHuM4ZnKPuG6dJDQ9UzHlMRNphCF2DS+UM8zwdzKAu1QjpNuW6hM
+ rltqVwRza0XST7XVuWiYSGe5UxYbTPHd8QpuMTCIAAfkWBUWFVgLrRqF1LB9g/3v14RP
+ ScMfV+rLlSOMggvUVmMMxftx/t7M5hXSWFYF0M79b1qkZOXQMCAMzmsGCtajRZHt59ar
+ qh+A==
+X-Gm-Message-State: AOJu0YzlWNhVYubP2E4t723oY2tRMVzeRPwkXomoE2EIsnd+k2DR/dUB
+ l08jNasgblynDofNEzLtfC59dwh3595I85zSUb3KURizrn9qDIew9CNbBqscGqlXEbsyJ1bdrpi
+ 8zhk3rG8=
+X-Google-Smtp-Source: AGHT+IFh14V1nsVLi2QeigrH/ovkwEVnOLrEBiqxaNE6H3WhpLIpbyl9ZmR9JQzvJCT05+sY9HmeTw==
+X-Received: by 2002:a05:6214:4a8e:b0:6cb:2cfa:3b9e with SMTP id
+ 6a1803df08f44-6cb3b5e5023mr16955176d6.11.1727383700645; 
+ Thu, 26 Sep 2024 13:48:20 -0700 (PDT)
 Received: from chromium.org ([205.220.129.31])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6cb3b66cff5sm2538696d6.77.2024.09.26.13.47.50
+ 6a1803df08f44-6cb3b66cff5sm2538696d6.77.2024.09.26.13.48.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Sep 2024 13:48:04 -0700 (PDT)
+ Thu, 26 Sep 2024 13:48:20 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Devarsh Thakkar <devarsht@ti.com>, Jonas Karlman <jonas@kwiboo.se>,
- Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>,
- This contributor prefers not to receive mails <noreply@example.com>
-Subject: [PATCH 03/27] common: doc: Drop old LED support
-Date: Thu, 26 Sep 2024 22:44:23 +0200
-Message-ID: <20240926204455.963584-4-sjg@chromium.org>
+ Kamil Lulko <kamil.lulko@gmail.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH 04/27] st: stm32f429: Drop old LED code
+Date: Thu, 26 Sep 2024 22:44:24 +0200
+Message-ID: <20240926204455.963584-5-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240926204455.963584-1-sjg@chromium.org>
 References: <20240926204455.963584-1-sjg@chromium.org>
@@ -91,140 +92,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This has been replaced with a new LED framework, so drop this old code
-and documentation.
+This predates the LED framework, so drop it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- common/board_f.c | 22 --------------
- doc/README.LED   | 77 ------------------------------------------------
- 2 files changed, 99 deletions(-)
- delete mode 100644 doc/README.LED
+ board/st/stm32f429-discovery/Makefile |  1 -
+ board/st/stm32f429-discovery/led.c    | 39 ---------------------------
+ 2 files changed, 40 deletions(-)
+ delete mode 100644 board/st/stm32f429-discovery/led.c
 
-diff --git a/common/board_f.c b/common/board_f.c
-index 154675d0e40..f161a690ec0 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -36,7 +36,6 @@
- #include <relocate.h>
- #include <serial.h>
- #include <spl.h>
--#include <status_led.h>
- #include <sysreset.h>
- #include <timer.h>
- #include <trace.h>
-@@ -53,27 +52,6 @@
+diff --git a/board/st/stm32f429-discovery/Makefile b/board/st/stm32f429-discovery/Makefile
+index 6b02c0fddec..233eafdad3d 100644
+--- a/board/st/stm32f429-discovery/Makefile
++++ b/board/st/stm32f429-discovery/Makefile
+@@ -7,4 +7,3 @@
+ # Kamil Lulko, <kamil.lulko@gmail.com>
  
- DECLARE_GLOBAL_DATA_PTR;
- 
--/*
-- * TODO(sjg@chromium.org): IMO this code should be
-- * refactored to a single function, something like:
-- *
-- * void led_set_state(enum led_colour_t colour, int on);
-- */
--/************************************************************************
-- * Coloured LED functionality
-- ************************************************************************
-- * May be supplied by boards if desired
-- */
--__weak void coloured_LED_init(void) {}
--__weak void red_led_on(void) {}
--__weak void red_led_off(void) {}
--__weak void green_led_on(void) {}
--__weak void green_led_off(void) {}
--__weak void yellow_led_on(void) {}
--__weak void yellow_led_off(void) {}
--__weak void blue_led_on(void) {}
--__weak void blue_led_off(void) {}
--
- /*
-  * Why is gd allocated a register? Prior to reloc it might be better to
-  * just pass it around to each function in this file?
-diff --git a/doc/README.LED b/doc/README.LED
+ obj-y	:= stm32f429-discovery.o
+-obj-y	+= led.o
+diff --git a/board/st/stm32f429-discovery/led.c b/board/st/stm32f429-discovery/led.c
 deleted file mode 100644
-index c21c9d53ec3..00000000000
---- a/doc/README.LED
+index 4b8038341b9..00000000000
+--- a/board/st/stm32f429-discovery/led.c
 +++ /dev/null
-@@ -1,77 +0,0 @@
--Status LED
--========================================
+@@ -1,39 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * (C) Copyright 2015
+- * Kamil Lulko, <kamil.lulko@gmail.com>
+- */
 -
--This README describes the status LED API.
+-#include <status_led.h>
+-#include <asm-generic/gpio.h>
 -
--The API is defined by the include file include/status_led.h
+-#define RED_LED			110
+-#define GREEN_LED		109
 -
--The first step is to enable CONFIG_LED_STATUS in menuconfig:
--> Device Drivers > LED Support.
+-void coloured_LED_init(void)
+-{
+-	gpio_request(RED_LED, "red led");
+-	gpio_direction_output(RED_LED, 0);
+-	gpio_request(GREEN_LED, "green led");
+-	gpio_direction_output(GREEN_LED, 0);
+-}
 -
--If the LED support is only for specific board, enable
--CONFIG_LED_STATUS_BOARD_SPECIFIC in the menuconfig.
+-void red_led_off(void)
+-{
+-	gpio_set_value(RED_LED, 0);
+-}
 -
--Status LEDS 0 to 5 are enabled by the following configurations at menuconfig:
--CONFIG_STATUS_LED0, CONFIG_STATUS_LED1, ... CONFIG_STATUS_LED5
+-void green_led_off(void)
+-{
+-	gpio_set_value(GREEN_LED, 0);
+-}
 -
--The following should be configured for each of the enabled LEDs:
--CONFIG_STATUS_LED_BIT<n>
--CONFIG_STATUS_LED_STATE<n>
--CONFIG_STATUS_LED_FREQ<n>
--Where <n> is an integer 1 through 5 (empty for 0).
+-void red_led_on(void)
+-{
+-	gpio_set_value(RED_LED, 1);
+-}
 -
--CONFIG_STATUS_LED_BIT is passed into the __led_* functions to identify which LED
--is being acted on. As such, the value choose must be unique with with respect to
--the other CONFIG_STATUS_LED_BIT's. Mapping the value to a physical LED is the
--reponsiblity of the __led_* function.
--
--CONFIG_STATUS_LED_STATE is the initial state of the LED. It should be set to one
--of these values: CONFIG_LED_STATUS_OFF or CONFIG_LED_STATUS_ON.
--
--CONFIG_STATUS_LED_FREQ determines the LED blink frequency.
--Values range from 2 to 10.
--
--Some other LED macros
-----------------------
--
--CONFIG_STATUS_LED_BOOT is the LED to light when the board is booting.
--This must be a valid LED number (0-5).
--
--CONFIG_STATUS_LED_RED is the red LED. It is used to signal errors. This must be
--a valid LED number (0-5). Other similar color LED's macros are
--CONFIG_STATUS_LED_GREEN, CONFIG_STATUS_LED_YELLOW and CONFIG_STATUS_LED_BLUE.
--
--General LED functions
-----------------------
--The following functions should be defined:
--
--__led_init is called once to initialize the LED to CONFIG_STATUS_LED_STATE.
--One time start up code should be placed here.
--
--__led_set is called to change the state of the LED.
--
--__led_toggle is called to toggle the current state of the LED.
--
--Colour LED
--========================================
--
--Colour LED's are at present only used by ARM.
--
--The functions names explain their purpose.
--
--coloured_LED_init
--red_LED_on
--red_LED_off
--green_LED_on
--green_LED_off
--yellow_LED_on
--yellow_LED_off
--blue_LED_on
--blue_LED_off
--
--These are weakly defined in arch/arm/lib/board.c to noops. Where applicable, define
--these functions in the board specific source.
--
--TBD : Describe older board dependent macros similar to what is done for
--
--TBD : Describe general support via asm/status_led.h
+-void green_led_on(void)
+-{
+-	gpio_set_value(GREEN_LED, 1);
+-}
 -- 
 2.43.0
 
