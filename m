@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90D93CCFA13
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 08:11:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76611CCFA13
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 08:11:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F41B88DFB;
+	by phobos.denx.de (Postfix) with ESMTP id 7593288E0A;
 	Thu, 26 Sep 2024 10:03:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="FvqFgsVi";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="GrHcrTAS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8FC3F88DEF; Thu, 26 Sep 2024 10:03:35 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id D944E88DF9; Thu, 26 Sep 2024 10:03:37 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C89C088DFF
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 10:03:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1FEF588D75
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 10:03:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=9elements.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-5c8784e3bc8so640533a12.1
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 01:03:23 -0700 (PDT)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-5c4146c7d5dso622387a12.3
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 01:03:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1727337803; x=1727942603; darn=lists.denx.de;
+ d=9elements.com; s=google; t=1727337806; x=1727942606; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6LnBMmKbXI/uNXiOb1e9oPVA8oCqMIF3bb0cqBhgkuM=;
- b=FvqFgsViLctLj34mSVpKMGG3aZ3vDNlbYgAAy0qWNnZIBR2q0hc69jbLMWbWAX2Kh5
- LgInh6LbmmhmLlwiBD5YUhatitmvGd6EZXTYpSzzuUP5Ugg3gthJgArz2yt8J4bdfZzr
- EbbPxxqCs7jktA1nkukS6p/svHn7YIEs1GnK23rjltRMRxYr2F+pmrfbVWiRI5g6Wlnx
- CGLEQZql8lNnB3kz9scNhI+sh0MHbmdCGC/a5Y7TDSlS/Y9ZJGBv3epIXR38xNvVnuCM
- 3U0FafogwGZcxecZOMaRllSNdo4PWEGVsTJ4b6Wy/xkuD6+GRvD3IDMvsm9a5csVmrJJ
- r2Vw==
+ bh=Vx7koyQ2Jh2/WbXAytjkh2MovXJtEWB2/3ip+qb9u7Y=;
+ b=GrHcrTASwLxYjsGIvVxNk87ht+HEgiSDf8g1SiCPmBxdV0thZFF0Pa+CaK28eyLUFc
+ 9mH1FUnrNbjgJ4kG+ypirPJzLh1DA0+0xNsXfzoIR0rLePhXgyMkNYj6fRPLJAFtN0E6
+ lgLS1AZYeGDM3FwXOV6D6H7FjVtDd8gmDZAlMWIBYP6D9PA+3tDd1pl3WSE03l1PgMjf
+ ceU07mBhvnlb14sWcDoFZzl2RMgm290ntLeBAi72aH4l0PGqbm0qbCYuuONXNoQpejGi
+ MCde3+F4OKd5HiYoeuAqThwH+INxouIZBvUgeQrmfOhw8ibKs+rRXC13tzSgSRIUd2Bb
+ tcWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727337803; x=1727942603;
+ d=1e100.net; s=20230601; t=1727337806; x=1727942606;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6LnBMmKbXI/uNXiOb1e9oPVA8oCqMIF3bb0cqBhgkuM=;
- b=WJIGCG0dQ+abMEzhSWCg/7Gf+BPVz1XYWbkLtyYI1usEQP9oNzYRsKnspcJMF9qXop
- qxyRL82xEaCTx1O9PGlmgjXbi8SoVSDkEbjJQnDF4LvhQSH1XULFtBLEEnw5EoPDKQwA
- 3LvB+4sweOADnHzaS/9IGALDSbyCwcac3TxPUktzH2gmEeiRL7p5FnSPm33hbIi2af/5
- A5qX2UrBkPylRRagRMDUUJDh0ll2jVVB+kQtnKdk2/sJstO7V8//kihJ6KuHZS9k51Gh
- UDugASLOGzetHZPKAt8uk3/U4vEaYapM6TYweyW09df8DLPLfBKDsT2RH/NN+jbaIlKU
- eaQw==
-X-Gm-Message-State: AOJu0Ywt7nwYkOezjq1T2nwhP8wWLtg5K3FO8zFxySt7EZDRsEk5kQOx
- CDOPcMfLkVMpOi5oc7WHueseRvkc0Nx2dN5FTukjSvtN7AZvRWsAH2iQ3Hk1v3PPvdgoR4vYfCq
- qKDQ=
-X-Google-Smtp-Source: AGHT+IE/ja9BJbG4Mrt5uaY5suoQhf1RXLMuO/iwUR0xdUzd6RXBr/ODOtnVSlpi2j2i0SSE3/yCAA==
-X-Received: by 2002:a05:6402:1e94:b0:5c5:5493:7570 with SMTP id
- 4fb4d7f45d1cf-5c720631c38mr4273720a12.21.1727337802701; 
- Thu, 26 Sep 2024 01:03:22 -0700 (PDT)
+ bh=Vx7koyQ2Jh2/WbXAytjkh2MovXJtEWB2/3ip+qb9u7Y=;
+ b=PICJxaFRj+QWPk6B5DSVp0jyYdPCy9PHwXJ4LmlvOy/aD20q9iVanPUK7E3vQB8G5q
+ DY68/ZLt/l+J7USxE34td071LxPbDno8So4ldSbPgLK8fufYO1++Xk9GltXQ25juxEmI
+ bNlLNzugr7nIKbcWCrvrO9V/ED+gIeFka4Zi4QBG4zojFMWu8fSH7VbElTM25Hr1zRPZ
+ aYa+gOJX0Rbx2bVcgd1u7j5SCzXo06Tcb2gKDcg0TywMhOkB3QCB+RJMXFs1D02FrbMH
+ 5uiGyKSv1/fR/8Nk0N6FNEv6r4I3hvACZo1lLf3tKZvlVy23puCWXr2cvRiuXltztcJS
+ Tawg==
+X-Gm-Message-State: AOJu0YyQ7HPrzML0/DDA1iQqr7OTe12GO7vuHPa8J/4Dehmx7tEFIFNS
+ r4NrjpDCxIDRjYxnTBL8clRfZJZgTHqh2jsKtQaDPCNzvTMyLnhsDsQaQ605Rx31aGI1r7qahXP
+ 0DDI=
+X-Google-Smtp-Source: AGHT+IH6t68JxtXHc73HmOitn4njt/SxsLhdkVPmW6qgQHtpZg771nzSP7FLUGl6D+gaALrBlDDVyA==
+X-Received: by 2002:a05:6402:1d48:b0:5c8:79fa:2e3e with SMTP id
+ 4fb4d7f45d1cf-5c879fa3017mr807266a12.28.1727337806314; 
+ Thu, 26 Sep 2024 01:03:26 -0700 (PDT)
 Received: from fedora.sec.9e.network
  (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c5cf4c4fe3sm2822449a12.68.2024.09.26.01.03.21
+ 4fb4d7f45d1cf-5c5cf4c4fe3sm2822449a12.68.2024.09.26.01.03.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Sep 2024 01:03:22 -0700 (PDT)
+ Thu, 26 Sep 2024 01:03:25 -0700 (PDT)
 From: Patrick Rudolph <patrick.rudolph@9elements.com>
-To: u-boot@lists.denx.de, Matthias Brugger <mbrugger@suse.com>,
- Peter Robinson <pbrobinson@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
+To: u-boot@lists.denx.de,
+	Simon Glass <sjg@chromium.org>
+Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v5 29/36] board: raspberrypi: Add ASL files from tianocore
-Date: Thu, 26 Sep 2024 09:59:17 +0200
-Message-ID: <20240926080021.148031-30-patrick.rudolph@9elements.com>
+Subject: [PATCH v5 30/36] arm: cpu: Add ACPI parking protocol support
+Date: Thu, 26 Sep 2024 09:59:18 +0200
+Message-ID: <20240926080021.148031-31-patrick.rudolph@9elements.com>
 X-Mailer: git-send-email 2.46.0
 In-Reply-To: <20240926080021.148031-1-patrick.rudolph@9elements.com>
 References: <20240926080021.148031-1-patrick.rudolph@9elements.com>
@@ -96,1955 +95,479 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Simon Glass <sjg@chromium.org>
+On Arm platforms that use ACPI they cannot rely on the "spin-table"
+CPU bringup usually defined in the FDT. Thus implement the
+'ACPI Multi-processor Startup for ARM Platforms', also referred to as
+'ACPI parking protocol'.
 
-Add the necessary DSDT files copied from tianocore to boot the RPi4.
-In addition generate a board specific SSDT to dynamically enable/disable
-ACPI devices based on FDT. This is required to support the various variants
-and boot options. It also allows to test the code on QEMU 9.0 without
-modifications, since it doesn't emulate PCIe yet.
+The ACPI parking protocol works similar to the spin-table mechanism, but
+the specification also covers lots of shortcomings of the spin-table
+implementations.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
+Every CPU defined in the ACPI MADT table has it's own 4K page where the
+spinloop code and the OS mailbox resides. When selected the U-Boot board
+code must make sure that the secondary CPUs enter u-boot after relocation
+as well, so that they can enter the spinloop code residing in the ACPI
+parking protocol pages.
+
+The OS will then write to the mailbox and generate an IPI to release the
+CPUs from the spinloop code.
+
+For now it's only implemented on ARMv8, but can easily be extended to
+other platforms, like ARMv7.
+
+TEST: Boots all CPUs on qemu-system-aarch64 -machine raspi4b
+
 Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
 Cc: Simon Glass <sjg@chromium.org>
-Cc: Matthias Brugger <mbrugger@suse.com>
-Cc: Peter Robinson <pbrobinson@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>
 ---
-Changelog v5:
-- Drop CPU device from DSDT
-- Add Extern to CPU devices in SSDT
----
- board/raspberrypi/rpi/.gitignore   |   3 +
- board/raspberrypi/rpi/Makefile     |   2 +
- board/raspberrypi/rpi/acpitables.h |  90 +++++++
- board/raspberrypi/rpi/dsdt.asl     | 254 ++++++++++++++++++++
- board/raspberrypi/rpi/emmc.asl     | 136 +++++++++++
- board/raspberrypi/rpi/gpudevs.asl  | 372 +++++++++++++++++++++++++++++
- board/raspberrypi/rpi/pci.asl      | 177 ++++++++++++++
- board/raspberrypi/rpi/pep.asl      |  90 +++++++
- board/raspberrypi/rpi/rhpx.asl     | 195 +++++++++++++++
- board/raspberrypi/rpi/rpi.c        | 183 ++++++++++++++
- board/raspberrypi/rpi/sdhc.asl     | 111 +++++++++
- board/raspberrypi/rpi/uart.asl     | 208 ++++++++++++++++
- 12 files changed, 1821 insertions(+)
- create mode 100644 board/raspberrypi/rpi/.gitignore
- create mode 100644 board/raspberrypi/rpi/acpitables.h
- create mode 100644 board/raspberrypi/rpi/dsdt.asl
- create mode 100644 board/raspberrypi/rpi/emmc.asl
- create mode 100644 board/raspberrypi/rpi/gpudevs.asl
- create mode 100644 board/raspberrypi/rpi/pci.asl
- create mode 100644 board/raspberrypi/rpi/pep.asl
- create mode 100644 board/raspberrypi/rpi/rhpx.asl
- create mode 100644 board/raspberrypi/rpi/sdhc.asl
- create mode 100644 board/raspberrypi/rpi/uart.asl
+Changelog v2:
+- Use shorter function names
+- Drop the use of atomics, they do not work on real hardware
+- Rewrite code and verify on real hardware that CPUs are spinning
+  inside their parking protocol spin-loop code
+Changelog v4:
+- Shorten names
+- Fix coding style
+- Drop extern from the headers
 
-diff --git a/board/raspberrypi/rpi/.gitignore b/board/raspberrypi/rpi/.gitignore
-new file mode 100644
-index 0000000000..39e46ba0ae
---- /dev/null
-+++ b/board/raspberrypi/rpi/.gitignore
-@@ -0,0 +1,3 @@
-+dsdt_generated.aml
-+dsdt_generated.asl.tmp
-+dsdt_generated.c
-diff --git a/board/raspberrypi/rpi/Makefile b/board/raspberrypi/rpi/Makefile
-index b1186cdf10..bb1b7cc630 100644
---- a/board/raspberrypi/rpi/Makefile
-+++ b/board/raspberrypi/rpi/Makefile
-@@ -4,3 +4,5 @@
+---
+ arch/arm/cpu/armv8/Makefile       |   1 +
+ arch/arm/cpu/armv8/acpi_park_v8.S | 113 ++++++++++++++++++++++
+ arch/arm/include/asm/acpi_table.h |  32 +++++++
+ arch/arm/lib/acpi_table.c         | 149 ++++++++++++++++++++++++++++++
+ include/acpi/acpi_table.h         |  10 ++
+ include/bloblist.h                |   1 +
+ lib/Kconfig                       |  16 ++++
+ lib/acpi/acpi_table.c             |   4 +
+ 8 files changed, 326 insertions(+)
+ create mode 100644 arch/arm/cpu/armv8/acpi_park_v8.S
+
+diff --git a/arch/arm/cpu/armv8/Makefile b/arch/arm/cpu/armv8/Makefile
+index bba4f570db..4f4368ff8c 100644
+--- a/arch/arm/cpu/armv8/Makefile
++++ b/arch/arm/cpu/armv8/Makefile
+@@ -29,6 +29,7 @@ obj-$(CONFIG_ARM_SMCCC)		+= smccc-call.o
  
- obj-y	:= rpi.o
- obj-y	+= lowlevel_init.o
-+
-+obj-$(CONFIG_GENERATE_ACPI_TABLE) += dsdt_generated.o
-diff --git a/board/raspberrypi/rpi/acpitables.h b/board/raspberrypi/rpi/acpitables.h
+ ifndef CONFIG_SPL_BUILD
+ obj-$(CONFIG_ARMV8_SPIN_TABLE) += spin_table.o spin_table_v8.o
++obj-$(CONFIG_ACPI_PARKING_PROTOCOL) += acpi_park_v8.o
+ else
+ obj-$(CONFIG_ARCH_SUNXI) += fel_utils.o
+ endif
+diff --git a/arch/arm/cpu/armv8/acpi_park_v8.S b/arch/arm/cpu/armv8/acpi_park_v8.S
 new file mode 100644
-index 0000000000..3ba8f19808
+index 0000000000..e2d2644dd4
 --- /dev/null
-+++ b/board/raspberrypi/rpi/acpitables.h
-@@ -0,0 +1,90 @@
-+/** @file
++++ b/arch/arm/cpu/armv8/acpi_park_v8.S
+@@ -0,0 +1,113 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (C) 2024 9elements GmbH
++ *   Author: Patrick Rudolph <patrick.rudolph@9elements.com>
 + *
-+ *  RPi defines for constructing ACPI tables
++ * This file provides ARMv8 specific code for the generic part of the
++ * ACPI parking protocol implementation. It contains the spinning code
++ * that will be installed into the parking protocol and it points the
++ * secondary CPUs to their own parking protocol page once it has been
++ * set up by the generic part.
++ */
++
++#include <linux/linkage.h>
++#include <asm/acpi_table.h>
++
++/* Filled by C code */
++.global acpi_pp_tables
++acpi_pp_tables:
++	.quad 0
++
++.global acpi_pp_etables
++acpi_pp_etables:
++	.quad 0
++
++/* Read by C code */
++.global acpi_pp_code_size
++acpi_pp_code_size:
++	.word __secondary_pp_code_end - __secondary_pp_code_start
++
++.global acpi_pp_secondary_jump
++ENTRY(acpi_pp_secondary_jump)
++0:
++	/*
++	 * Cannot use atomic operations since the MMU and D-cache
++	 * might be off. Use the MPIDR instead to find the spintable.
++	 */
++
++	/* Check if parking protocol table is ready */
++	ldr	x1, =acpi_pp_tables
++	ldr	x0, [x1]
++	cbnz	x0, 0f
++	wfe
++	b	0b
++
++0:	/* Get end of page tables in x3 */
++	ldr	x1, =acpi_pp_etables
++	ldr	x3, [x1]
++
++	/* Get own CPU ID in w2 */
++	mrs	x2, mpidr_el1
++	lsr	x9, x2, #32
++	bfi	x2, x9, #24, #8	/* w2 is aff3:aff2:aff1:aff0 */
++
++0:	/* Loop over all parking protocol pages */
++	cmp	x0, x3
++	b.ge	hlt
++
++	/* Fetch CPU_ID from current page */
++	ldr	x1, [x0, #ACPI_PP_CPU_ID_OFFSET]
++	lsr	x9, x1, #32
++	bfi	x1, x9, #24, #8	/* w1 is aff3:aff2:aff1:aff0 */
++
++	/* Compare CPU_IDs */
++	cmp	w1, w2
++	b.eq	0f
++
++	add	x0, x0, #ACPI_PP_PAGE_SIZE
++	b	0b
++
++hlt:	wfi
++	b	hlt	/* Should never happen. */
++
++0:	/* x0 points to the 4K-aligned, parking protocol page */
++	add	x2, x0, #ACPI_PP_CPU_CODE_OFFSET
++
++	/* Jump to spin code in own parking protocol page */
++	br	x2
++ENDPROC(acpi_pp_secondary_jump)
++
++.align 8
++__secondary_pp_code_start:
++.global acpi_pp_code_start
++ENTRY(acpi_pp_code_start)
++	/* x0 points to the 4K-aligned, parking protocol page */
++
++	/* Prepare defines for spinning code */
++	mov	w3, #ACPI_PP_CPU_ID_INVALID
++	mov	x2, #ACPI_PP_JMP_ADR_INVALID
++
++	/* Mark parking protocol page as ready */
++	str	w3, [x0, #ACPI_PP_CPU_ID_OFFSET]
++	dsb	sy
++
++0:	wfe
++	ldr	w1, [x0, #ACPI_PP_CPU_ID_OFFSET]
++
++	/* Check CPU ID is valid */
++	cmp	w1, w3
++	b.eq	0b
++
++	/* Check jump address valid */
++	ldr	x1, [x0, #ACPI_PP_CPU_JMP_OFFSET]
++	cmp	x1, x2
++	b.eq	0b
++
++	/* Clear jump address before jump */
++	str	x2, [x0, #ACPI_PP_CPU_JMP_OFFSET]
++	dsb	sy
++
++	br	x1
++ENDPROC(acpi_pp_code_start)
++	/* Secondary Boot Code ends here */
++__secondary_pp_code_end:
+diff --git a/arch/arm/include/asm/acpi_table.h b/arch/arm/include/asm/acpi_table.h
+index c65eabe837..7386f55ad3 100644
+--- a/arch/arm/include/asm/acpi_table.h
++++ b/arch/arm/include/asm/acpi_table.h
+@@ -4,6 +4,7 @@
+ #define __ASM_ACPI_TABLE_H__
+ 
+ #ifndef __ACPI__
++#ifndef __ASSEMBLY__
+ 
+ #include <acpi/acpi_table.h>
+ 
+@@ -109,7 +110,38 @@ int acpi_pptt_add_cache(struct acpi_ctx *ctx, const u32 flags,
+ 			const u32 sets, const u8 assoc, const u8 attributes,
+ 			const u16 line_size);
+ 
++/* Multi-processor Startup for ARM Platforms */
++/**
++ * struct acpi_pp_page - MP startup handshake mailbox
 + *
-+ *  Copyright (c) 2020, Pete Batard <pete@akeo.ie>
-+ *  Copyright (c) 2019, ARM Ltd. All rights reserved.
-+ *  Copyright (c) 2018, Andrei Warkentin <andrey.warkentin@gmail.com>
-+ *  Copyright (c) Microsoft Corporation. All rights reserved.
++ * Defines a 4096 byte memory region that is used for starting secondary CPUs on
++ * an Arm system that follows the "Multi-processor Startup for ARM Platforms" spec.
 + *
-+ *  SPDX-License-Identifier: BSD-2-Clause-Patent
-+ *
-+ **/
-+
-+#ifndef __RPI_ACPITABLES_H__
-+#define __RPI_ACPITABLES_H__
-+
-+#include <acpi/acpi_table.h>
-+
-+// The ASL compiler can't perform arithmetic on MEMORY32FIXED ()
-+// parameters so you can't pass a constant like BASE + OFFSET.
-+// We therefore define a macro that can perform arithmetic base
-+// address update with an offset.
-+#define MEMORY32SETBASE(BufName, MemName, VarName, Offset)       \
-+    CreateDwordField (^BufName, ^MemName._BAS, VarName)          \
-+    Add (BCM2836_SOC_REGISTERS, Offset, VarName)
-+
-+//------------------------------------------------------------------------
-+// Interrupts. These are specific to each platform
-+//------------------------------------------------------------------------
-+#if defined(CONFIG_TARGET_RPI_3)
-+#define BCM2836_V3D_BUS_INTERRUPT               0x2A
-+#define BCM2836_DMA_INTERRUPT                   0x3B
-+#define BCM2836_SPI1_INTERRUPT                  0x3D
-+#define BCM2836_SPI2_INTERRUPT                  0x3D
-+#define BCM2836_HVS_INTERRUPT                   0x41
-+#define BCM2836_HDMI0_INTERRUPT                 0x48
-+#define BCM2836_HDMI1_INTERRUPT                 0x49
-+#define BCM2836_PV2_INTERRUPT                   0x4A
-+#define BCM2836_PV0_INTERRUPT                   0x4D
-+#define BCM2836_PV1_INTERRUPT                   0x4E
-+#define BCM2836_MBOX_INTERRUPT                  0x61
-+#define BCM2836_VCHIQ_INTERRUPT                 0x62
-+#define BCM2386_GPIO_INTERRUPT0                 0x51
-+#define BCM2386_GPIO_INTERRUPT1                 0x52
-+#define BCM2386_GPIO_INTERRUPT2                 0x53
-+#define BCM2386_GPIO_INTERRUPT3                 0x54
-+#define BCM2836_I2C1_INTERRUPT                  0x55
-+#define BCM2836_I2C2_INTERRUPT                  0x55
-+#define BCM2836_SPI0_INTERRUPT                  0x56
-+#define BCM2836_USB_INTERRUPT                   0x29
-+#define BCM2836_SDHOST_INTERRUPT                0x58
-+#define BCM2836_MMCHS1_INTERRUPT                0x5E
-+#define BCM2836_MINI_UART_INTERRUPT             0x3D
-+#define BCM2836_PL011_UART_INTERRUPT            0x59
-+#elif defined(CONFIG_TARGET_RPI_4)
-+#define BCM2836_V3D_BUS_INTERRUPT               0x2A
-+#define BCM2836_DMA_INTERRUPT                   0x3B
-+#define BCM2836_SPI1_INTERRUPT                  0x7D
-+#define BCM2836_SPI2_INTERRUPT                  0x7D
-+#define BCM2836_HVS_INTERRUPT                   0x41
-+#define BCM2836_HDMI0_INTERRUPT                 0x48
-+#define BCM2836_HDMI1_INTERRUPT                 0x49
-+#define BCM2836_PV2_INTERRUPT                   0x4A
-+#define BCM2836_PV0_INTERRUPT                   0x4D
-+#define BCM2836_PV1_INTERRUPT                   0x4E
-+#define BCM2836_MBOX_INTERRUPT                  0x41
-+#define BCM2836_VCHIQ_INTERRUPT                 0x42
-+#define BCM2386_GPIO_INTERRUPT0                 0x91
-+#define BCM2386_GPIO_INTERRUPT1                 0x92
-+#define BCM2386_GPIO_INTERRUPT2                 0x93
-+#define BCM2386_GPIO_INTERRUPT3                 0x94
-+#define BCM2836_I2C1_INTERRUPT                  0x95
-+#define BCM2836_I2C2_INTERRUPT                  0x95
-+#define BCM2836_SPI0_INTERRUPT                  0x96
-+#define BCM2836_USB_INTERRUPT                   0x69
-+#define BCM2836_SDHOST_INTERRUPT                0x98
-+#define BCM2836_MMCHS1_INTERRUPT                0x9E
-+#define BCM2836_MINI_UART_INTERRUPT             0x7D
-+#define BCM2836_PL011_UART_INTERRUPT            0x99
-+#define GENET_INTERRUPT0                        0xBD
-+#define GENET_INTERRUPT1                        0xBE
-+#define GENET_BASE_ADDRESS                      0xFD580000
-+#define GENET_LENGTH                            0x10000
-+#define THERM_SENSOR_BASE_ADDRESS               0xFD5d2200
-+#define THERM_SENSOR_LENGTH                     0x8
-+#else
-+#error "Unsupported rpi module for ACPI tables"
-+#endif
-+
-+#endif // __ACPITABLES_H__
-diff --git a/board/raspberrypi/rpi/dsdt.asl b/board/raspberrypi/rpi/dsdt.asl
-new file mode 100644
-index 0000000000..c89b08d5ea
---- /dev/null
-+++ b/board/raspberrypi/rpi/dsdt.asl
-@@ -0,0 +1,254 @@
-+/** @file
-+ *
-+ *  Differentiated System Definition Table (DSDT)
-+ *
-+ *  Copyright (c) 2020, Pete Batard <pete@akeo.ie>
-+ *  Copyright (c) 2018-2020, Andrey Warkentin <andrey.warkentin@gmail.com>
-+ *  Copyright (c) Microsoft Corporation. All rights reserved.
-+ *  Copyright (c) 2021, ARM Limited. All rights reserved.
-+ *
-+ *  SPDX-License-Identifier: BSD-2-Clause-Patent
-+ *
-+ **/
-+
-+#include <asm/arch/acpi/bcm2711.h>
-+#include <asm/arch/acpi/bcm2836.h>
-+#include <asm/arch/acpi/bcm2836_gpio.h>
-+#include <asm/arch/acpi/bcm2836_gpu.h>
-+#include <asm/arch/acpi/bcm2836_pwm.h>
-+#include <asm/arch/acpi/bcm2836_sdio.h>
-+#include <asm/arch/acpi/bcm2836_sdhost.h>
-+
-+#include "acpitables.h"
-+
-+#define BCM_ALT0 0x4
-+#define BCM_ALT1 0x5
-+#define BCM_ALT2 0x6
-+#define BCM_ALT3 0x7
-+#define BCM_ALT4 0x3
-+#define BCM_ALT5 0x2
-+
-+//
-+// The ASL compiler does not support argument arithmetic in functions
-+// like QWordMemory (). So we need to instantiate dummy qword regions
-+// that we can then update the Min, Max and Length attributes of.
-+// The three macros below help accomplish this.
-+//
-+// QWORDMEMORYSET specifies a CPU memory range (whose base address is
-+// BCM2836_SOC_REGISTERS + Offset), and QWORDBUSMEMORYSET specifies
-+// a VPU memory range (whose base address is provided directly).
-+//
-+#define QWORDMEMORYBUF(Index)                                   \
-+  QWordMemory (ResourceProducer,,                               \
-+    MinFixed, MaxFixed, NonCacheable, ReadWrite,                \
-+    0x0, 0x0, 0x0, 0x0, 0x1,,, RB ## Index)
-+
-+#define QWORDMEMORYSET(Index, Offset, Length)                   \
-+  CreateQwordField (RBUF, RB ## Index._MIN, MI ## Index)        \
-+  CreateQwordField (RBUF, RB ## Index._MAX, MA ## Index)        \
-+  CreateQwordField (RBUF, RB ## Index._LEN, LE ## Index)        \
-+  Store (Length, LE ## Index)                                   \
-+  Add (BCM2836_SOC_REGISTERS, Offset, MI ## Index)              \
-+  Add (MI ## Index, LE ## Index - 1, MA ## Index)
-+
-+#define QWORDBUSMEMORYSET(Index, Base, Length)                  \
-+  CreateQwordField (RBUF, RB ## Index._MIN, MI ## Index)        \
-+  CreateQwordField (RBUF, RB ## Index._MAX, MA ## Index)        \
-+  CreateQwordField (RBUF, RB ## Index._LEN, LE ## Index)        \
-+  Store (Base, MI ## Index)                                     \
-+  Store (Length, LE ## Index)                                   \
-+  Add (MI ## Index, LE ## Index - 1, MA ## Index)
-+
-+DefinitionBlock ("Dsdt.aml", "DSDT", 2, "RPIFDN", "RPI", 2)
-+{
-+  External (\_PR.CP00, DeviceObj)
-+  External (\_PR.CP01, DeviceObj)
-+  External (\_PR.CP02, DeviceObj)
-+  External (\_PR.CP03, DeviceObj)
-+  Scope (\_SB_)
-+  {
-+    include ("pep.asl")
-+
-+    //
-+    // GPU device container describes the DMA translation required
-+    // when a device behind the GPU wants to access Arm memory.
-+    // Only the first GB can be addressed.
-+    //
-+    Device (GDV0)
-+    {
-+      Name (_HID, "ACPI0004")
-+      Name (_UID, 0x1)
-+      Name (_CCA, 0x0)
-+
-+      Method (_CRS, 0, Serialized) {
-+        //
-+        // Container devices with _DMA must have _CRS, meaning GDV0
-+        // to provide all resources that GpuDevs.asl consume (except
-+        // interrupts).
-+        //
-+        Name (RBUF, ResourceTemplate () {
-+          QWORDMEMORYBUF(01)
-+          QWORDMEMORYBUF(02)
-+          QWORDMEMORYBUF(03)
-+          // QWORDMEMORYBUF(04)
-+          // QWORDMEMORYBUF(05)
-+          QWORDMEMORYBUF(06)
-+          QWORDMEMORYBUF(07)
-+          QWORDMEMORYBUF(08)
-+          QWORDMEMORYBUF(09)
-+          QWORDMEMORYBUF(10)
-+          QWORDMEMORYBUF(11)
-+          QWORDMEMORYBUF(12)
-+          QWORDMEMORYBUF(13)
-+          QWORDMEMORYBUF(14)
-+          QWORDMEMORYBUF(15)
-+          // QWORDMEMORYBUF(16)
-+          QWORDMEMORYBUF(17)
-+          QWORDMEMORYBUF(18)
-+          QWORDMEMORYBUF(19)
-+          QWORDMEMORYBUF(20)
-+          QWORDMEMORYBUF(21)
-+          QWORDMEMORYBUF(22)
-+          QWORDMEMORYBUF(23)
-+          QWORDMEMORYBUF(24)
-+          QWORDMEMORYBUF(25)
-+        })
-+
-+        // USB
-+        QWORDMEMORYSET(01, BCM2836_USB_OFFSET, BCM2836_USB_LENGTH)
-+
-+        // GPU
-+        QWORDMEMORYSET(02, BCM2836_V3D_BUS_OFFSET, BCM2836_V3D_BUS_LENGTH)
-+        QWORDMEMORYSET(03, BCM2836_HVS_OFFSET, BCM2836_HVS_LENGTH)
-+        // QWORDMEMORYSET(04, BCM2836_PV0_OFFSET, BCM2836_PV0_LENGTH)
-+        // QWORDMEMORYSET(05, BCM2836_PV1_OFFSET, BCM2836_PV1_LENGTH)
-+        QWORDMEMORYSET(06, BCM2836_PV2_OFFSET, BCM2836_PV2_LENGTH)
-+        QWORDMEMORYSET(07, BCM2836_HDMI0_OFFSET, BCM2836_HDMI0_LENGTH)
-+        QWORDMEMORYSET(08, BCM2836_HDMI1_OFFSET, BCM2836_HDMI1_LENGTH)
-+
-+        // Mailbox
-+        QWORDMEMORYSET(09, BCM2836_MBOX_OFFSET, BCM2836_MBOX_LENGTH)
-+
-+        // VCHIQ
-+        QWORDMEMORYSET(10, BCM2836_VCHIQ_OFFSET, BCM2836_VCHIQ_LENGTH)
-+
-+        // GPIO
-+        QWORDMEMORYSET(11, GPIO_OFFSET, GPIO_LENGTH)
-+
-+        // I2C
-+        QWORDMEMORYSET(12, BCM2836_I2C1_OFFSET, BCM2836_I2C1_LENGTH)
-+        QWORDMEMORYSET(13, BCM2836_I2C2_OFFSET, BCM2836_I2C2_LENGTH)
-+
-+        // SPI
-+        QWORDMEMORYSET(14, BCM2836_SPI0_OFFSET, BCM2836_SPI0_LENGTH)
-+        QWORDMEMORYSET(15, BCM2836_SPI1_OFFSET, BCM2836_SPI1_LENGTH)
-+        // QWORDMEMORYSET(16, BCM2836_SPI2_OFFSET, BCM2836_SPI2_LENGTH)
-+
-+        // PWM
-+        QWORDMEMORYSET(17, BCM2836_PWM_DMA_OFFSET, BCM2836_PWM_DMA_LENGTH)
-+        QWORDMEMORYSET(18, BCM2836_PWM_CTRL_OFFSET, BCM2836_PWM_CTRL_LENGTH)
-+        QWORDBUSMEMORYSET(19, BCM2836_PWM_BUS_BASE_ADDRESS, BCM2836_PWM_BUS_LENGTH)
-+        QWORDBUSMEMORYSET(20, BCM2836_PWM_CTRL_UNCACHED_BASE_ADDRESS, BCM2836_PWM_CTRL_UNCACHED_LENGTH)
-+        QWORDMEMORYSET(21, BCM2836_PWM_CLK_OFFSET, BCM2836_PWM_CLK_LENGTH)
-+
-+        // UART
-+        QWORDMEMORYSET(22, BCM2836_PL011_UART_OFFSET, BCM2836_PL011_UART_LENGTH)
-+        QWORDMEMORYSET(23, BCM2836_MINI_UART_OFFSET, BCM2836_MINI_UART_LENGTH)
-+
-+        // SDC
-+        QWORDMEMORYSET(24, MMCHS1_OFFSET, MMCHS1_LENGTH)
-+        QWORDMEMORYSET(25, SDHOST_OFFSET, SDHOST_LENGTH)
-+
-+        Return (RBUF)
-+      }
-+
-+      Name (_DMA, ResourceTemplate() {
-+        //
-+        // Only the first GB is available.
-+        // Bus 0xC0000000 -> CPU 0x00000000.
-+        //
-+        QWordMemory (ResourceProducer,
-+          ,
-+          MinFixed,
-+          MaxFixed,
-+          NonCacheable,
-+          ReadWrite,
-+          0x0,
-+          0x00000000C0000000, // MIN
-+          0x00000000FFFFFFFF, // MAX
-+          0xFFFFFFFF40000000, // TRA
-+          0x0000000040000000, // LEN
-+          ,
-+          ,
-+          )
-+      })
-+#include "gpudevs.asl"
-+    }
-+
-+#if defined(CONFIG_TARGET_RPI_4)
-+    Device (ETH0)
-+    {
-+      Name (_HID, "BCM6E4E")
-+      Name (_CID, "BCM6E4E")
-+      Name (_UID, 0x0)
-+      Name (_CCA, 0x0)
-+
-+      Method (_CRS, 0x0, Serialized)
-+      {
-+        Return (ResourceTemplate ()
-+        {
-+          // No need for MEMORY32SETBASE on Genet as we have a straight base address constant
-+          MEMORY32FIXED (ReadWrite, GENET_BASE_ADDRESS, GENET_LENGTH, )
-+          Interrupt (ResourceConsumer, Level, ActiveHigh, Exclusive) { GENET_INTERRUPT0, GENET_INTERRUPT1 }
-+        })
-+      }
-+      Name (_DSD, Package () {
-+        ToUUID("daffd814-6eba-4d8c-8a91-bc9bbf4aa301"),
-+        Package () {
-+          Package () { "brcm,max-dma-burst-size", 0x08 },
-+          Package () { "phy-mode", "rgmii-rxid" },
-+        }
-+      })
-+    }
-+
-+    // Define a simple thermal zone. The idea here is we compute the SOC temp
-+    // via a register we can read, and give it to the OS. This enables basic
-+    // reports from the "sensors" utility, and the OS can then poll and take
-+    // actions if that temp exceeds any of the given thresholds.
-+    Device (EC00)
-+    {
-+      Name (_HID, EISAID ("PNP0C06"))
-+      Name (_CCA, 0x0)
-+
-+      // all temps in are tenths of K (aka 2732 is the min temps in Linux (aka 0C))
-+      ThermalZone (TZ00) {
-+        OperationRegion (TEMS, SystemMemory, THERM_SENSOR_BASE_ADDRESS, THERM_SENSOR_LENGTH)
-+        Field (TEMS, DWordAcc, NoLock, Preserve) {
-+          TMPS, 32
-+        }
-+        Method (_TMP, 0, Serialized) {
-+          return (((410040 - ((TMPS & 0x3ff) * 487)) / 100) + 2732);
-+        }
-+
-+        Method (_SCP, 3) { }               // receive cooling policy from OS
-+
-+        Method (_CRT) { Return (3632) }    // (90C) Critical temp point (immediate power-off)
-+        Method (_HOT) { Return (3582) }    // (85C) HOT state where OS should hibernate
-+        Method (_PSV) { Return (3532) }    // (80C) Passive cooling (CPU throttling) trip point
-+
-+        // SSDT inserts _AC0/_AL0 @60C here, if a FAN is configured
-+
-+        Name (_TZP, 10)                   //The OSPM must poll this device every 1 seconds
-+        Name (_PSL, Package () { \_PR.CP00, \_PR.CP01, \_PR.CP02, \_PR.CP03 })
-+      }
-+    }
-+#endif
-+
-+
-+#include "uart.asl"
-+#include "rhpx.asl"
-+#include "sdhc.asl"
-+#include "emmc.asl"
-+#include "pci.asl"
-+  }
-+}
-diff --git a/board/raspberrypi/rpi/emmc.asl b/board/raspberrypi/rpi/emmc.asl
-new file mode 100644
-index 0000000000..63f01362c9
---- /dev/null
-+++ b/board/raspberrypi/rpi/emmc.asl
-@@ -0,0 +1,136 @@
-+/** @file
-+ *
-+ *  Copyright (c) 2021, ARM Limited. All rights reserved.
-+ *
-+ *  SPDX-License-Identifier: BSD-2-Clause-Patent
-+ *
-+ **/
-+
-+#include <asm/arch/acpi/bcm2836_sdhost.h>
-+#include <asm/arch/acpi/bcm2836_sdio.h>
-+#include <asm/arch/acpi/bcm2711.h>
-+
-+Device (GDV1) {
-+  Name (_HID, "ACPI0004")
-+  Name (_UID, 0x2)
-+  Name (_CCA, 0x0)
-+
-+  Name (RBUF, ResourceTemplate ()
-+  {
-+    MEMORY32FIXED (ReadWrite, 0, MMCHS2_LENGTH, RMEM)
-+  })
-+  Method (_CRS, 0x0, Serialized)
-+  {
-+    MEMORY32SETBASE (RBUF, RMEM, RBAS, MMCHS2_OFFSET)
-+    Return (^RBUF)
-+  }
-+
-+  // Translated DMA region for BCM2711 silicon revisions older than C0
-+  Name (DMTR, ResourceTemplate() {
-+    QWordMemory (ResourceProducer,
-+      ,
-+      MinFixed,
-+      MaxFixed,
-+      NonCacheable,
-+      ReadWrite,
-+      0x0,
-+      0x00000000C0000000, // MIN
-+      0x00000000FFFFFFFF, // MAX
-+      0xFFFFFFFF40000000, // TRA
-+      0x0000000040000000, // LEN
-+      ,
-+      ,
-+    )
-+  })
-+
-+  // Non translated DMA region for BCM2711 revisions C0 and newer
-+  Name (DMNT, ResourceTemplate() {
-+    QWordMemory (ResourceProducer,
-+      ,
-+      MinFixed,
-+      MaxFixed,
-+      NonCacheable,
-+      ReadWrite,
-+      0x0,
-+      0x0000000000000000, // MIN
-+      0x000000FFFFFFFFFF, // MAX
-+      0x0000000000000000, // TRA
-+      0x0000010000000000, // LEN
-+      ,
-+      ,
-+    )
-+  })
-+
-+  // emmc2 Host Controller. (brcm,bcm2711-emmc2)
-+  Device (SDC3)
-+  {
-+    Name (_HID, "BRCME88C")
-+    Name (_UID, 0x1)
-+    Name (_CCA, 0x0)
-+    Name (_S1D, 0x1)
-+    Name (_S2D, 0x1)
-+    Name (_S3D, 0x1)
-+    Name (_S4D, 0x1)
-+    Name (SDMA, 0x2)
-+
-+    Name (RBUF, ResourceTemplate ()
-+    {
-+      MEMORY32FIXED (ReadWrite, 0, MMCHS2_LENGTH, RMEM)
-+      Interrupt (ResourceConsumer, Level, ActiveHigh, Shared) { BCM2836_MMCHS1_INTERRUPT }
-+    })
-+    Method (_CRS, 0x0, Serialized)
-+    {
-+      MEMORY32SETBASE (RBUF, RMEM, RBAS, MMCHS2_OFFSET)
-+      Return (^RBUF)
-+    }
-+
-+    // Unfortunately this controller doesn't honor the
-+    // standard SDHCI voltage control registers
-+    // (or at least Linux's standard code can't
-+    // lower the voltage) So, UHS mode is disabled with caps
-+    Name (DSD1, Package () {
-+      ToUUID("daffd814-6eba-4d8c-8a91-bc9bbf4aa301"),
-+        Package () {
-+          Package () { "sdhci-caps-mask", 0x0000000500080000 },
-+        }
-+    })
-+    // Along with disabling UHS, here both SDMA and ADMA2
-+    // are also disabled until the linux _DMA() mask/translate
-+    // works properly.
-+    Name (DSD2, Package () {
-+      ToUUID("daffd814-6eba-4d8c-8a91-bc9bbf4aa301"),
-+        Package () {
-+          Package () { "sdhci-caps-mask", 0x0000000504480000 },
-+        }
-+    })
-+    Method (_DSD, 0x0, Serialized)
-+    {
-+      // Select one of the sdhci-caps-mask definitions
-+      // depending on whether we also want to disable DMA
-+      if (SDMA == 0)
-+      {
-+        return (^DSD2)
-+      }
-+      else
-+      {
-+        return (^DSD1)
-+      }
-+    }
-+
-+    //
-+    // A child device that represents the
-+    // sd card, which is marked as non-removable.
-+    //
-+    Device (SDMM)
-+    {
-+      Method (_ADR)
-+      {
-+        Return (0)
-+      }
-+      Method (_RMV) // Is removable
-+      {
-+        Return (0) // 0 - fixed
-+      }
-+    }
-+  } //SDC3
-+} //GDV1
-diff --git a/board/raspberrypi/rpi/gpudevs.asl b/board/raspberrypi/rpi/gpudevs.asl
-new file mode 100644
-index 0000000000..a3077a9c3b
---- /dev/null
-+++ b/board/raspberrypi/rpi/gpudevs.asl
-@@ -0,0 +1,372 @@
-+/** @file
-+ *
-+ *  [DSDT] Devices behind the GPU.
-+ *
-+ *  Copyright (c) 2018-2020, Andrey Warkentin <andrey.warkentin@gmail.com>
-+ *  Copyright (c) Microsoft Corporation. All rights reserved.
-+ *
-+ *  SPDX-License-Identifier: BSD-2-Clause-Patent
-+ *
-+ **/
-+
-+// DWC OTG Controller
-+Device (USB0)
-+{
-+  Name (_HID, "BCM2848")
-+#if defined(CONFIG_TARGET_RPI_3)
-+  Name (_CID, "DWC_OTG")
-+#elif defined(CONFIG_TARGET_RPI_4)
-+  Name (_CID, "BCM2848")
-+#endif
-+  Name (_UID, 0x0)
-+  Name (_CCA, 0x0)
-+  Method (_STA)
-+  {
-+    Return (0xf)
-+  }
-+  Name (RBUF, ResourceTemplate ()
-+  {
-+    MEMORY32FIXED (ReadWrite, 0, BCM2836_USB_LENGTH, RMEM)
-+    Interrupt (ResourceConsumer, Level, ActiveHigh, Exclusive) { BCM2836_USB_INTERRUPT }
-+  })
-+  Method (_CRS, 0x0, Serialized)
-+  {
-+    MEMORY32SETBASE (RBUF, RMEM, RBAS, BCM2836_USB_OFFSET)
-+    Return (^RBUF)
-+  }
-+}
-+
-+// Video Core 4 GPU
-+Device (GPU0)
-+{
-+  Name (_HID, "BCM2850")
-+  Name (_CID, "BCM2850")
-+  Name (_UID, 0x0)
-+  Name (_CCA, 0x0)
-+  Method (_STA)
-+  {
-+    Return (0xf)
-+  }
-+  Name (RBUF, ResourceTemplate ()
-+  {
-+    // Memory and interrupt for the GPU
-+    MEMORY32FIXED (ReadWrite, 0, BCM2836_V3D_BUS_LENGTH, RM01)
-+    Interrupt (ResourceConsumer, Level, ActiveHigh, Exclusive) { BCM2836_V3D_BUS_INTERRUPT }
-+
-+    // HVS - Hardware Video Scalar
-+    MEMORY32FIXED (ReadWrite, 0, BCM2836_HVS_LENGTH, RM02)
-+    // The HVS interrupt is reserved by the VPU
-+    // Interrupt (ResourceConsumer, Level, ActiveHigh, Exclusive) { BCM2836_HVS_INTERRUPT }
-+
-+    // PixelValve0 - DSI0 or DPI
-+    // MEMORY32FIXED (ReadWrite, BCM2836_PV0_BASE_ADDRESS, BCM2836_PV0_LENGTH, RM03)
-+    // Interrupt (ResourceConsumer, Level, ActiveHigh, Exclusive) { BCM2836_PV0_INTERRUPT }
-+
-+    // PixelValve1 - DS1 or SMI
-+    // MEMORY32FIXED (ReadWrite, BCM2836_PV1_BASE_ADDRESS, BCM2836_PV1_LENGTH, RM04)
-+    // Interrupt (ResourceConsumer, Level, ActiveHigh, Exclusive) { BCM2836_PV1_INTERRUPT }
-+
-+    // PixelValve2 - HDMI output - connected to HVS display FIFO 1
-+    MEMORY32FIXED (ReadWrite, 0, BCM2836_PV2_LENGTH, RM05)
-+    Interrupt (ResourceConsumer, Level, ActiveHigh, Exclusive) { BCM2836_PV2_INTERRUPT }
-+
-+    // HDMI registers
-+    MEMORY32FIXED (ReadWrite, 0, BCM2836_HDMI0_LENGTH, RM06)
-+    MEMORY32FIXED (ReadWrite, 0, BCM2836_HDMI1_LENGTH, RM07)
-+    // hdmi_int[0]
-+    // Interrupt (ResourceConsumer, Level, ActiveHigh, Exclusive) { BCM2836_HDMI0_INTERRUPT }
-+    // hdmi_int[1]
-+    // Interrupt (ResourceConsumer, Level, ActiveHigh, Exclusive) { BCM2836_HDMI1_INTERRUPT }
-+
-+    // HDMI DDC connection
-+    I2CSerialBus (0x50,, 100000,, "\\_SB.GDV0.I2C2",,,,)  // EDID
-+    I2CSerialBus (0x30,, 100000,, "\\_SB.GDV0.I2C2",,,,)  // E-DDC Segment Pointer
-+  })
-+  Method (_CRS, 0x0, Serialized)
-+  {
-+    MEMORY32SETBASE (RBUF, RM01, RB01, BCM2836_V3D_BUS_OFFSET)
-+    MEMORY32SETBASE (RBUF, RM02, RB02, BCM2836_HVS_OFFSET)
-+    MEMORY32SETBASE (RBUF, RM05, RB05, BCM2836_PV2_OFFSET)
-+    MEMORY32SETBASE (RBUF, RM06, RB06, BCM2836_HDMI0_OFFSET)
-+    MEMORY32SETBASE (RBUF, RM07, RB07, BCM2836_HDMI1_OFFSET)
-+    Return (^RBUF)
-+  }
-+
-+  // GPU Power Management Component Data
-+  // Reference : https://github.com/Microsoft/graphics-driver-samples/wiki/Install-Driver-in-a-Windows-VM
-+  Method (PMCD, 0, Serialized)
-+  {
-+    Name (RBUF, Package ()
-+    {
-+      1,                  // Version
-+      1,                  // Number of graphics power components
-+      Package ()          // Power components package
-+      {
-+        Package ()        // GPU component package
-+        {
-+          0,              // Component Index
-+          0,              // DXGK_POWER_COMPONENT_MAPPING.ComponentType (0 = DXGK_POWER_COMPONENT_ENGINE)
-+          0,              // DXGK_POWER_COMPONENT_MAPPING.NodeIndex
-+
-+          Buffer ()       // DXGK_POWER_RUNTIME_COMPONENT.ComponentGuid
-+          {               // 9B2D1E26-1575-4747-8FC0-B9EB4BAA2D2B
-+            0x26, 0x1E, 0x2D, 0x9B, 0x75, 0x15, 0x47, 0x47,
-+            0x8f, 0xc0, 0xb9, 0xeb, 0x4b, 0xaa, 0x2d, 0x2b
-+          },
-+
-+          "VC4_Engine_00",// DXGK_POWER_RUNTIME_COMPONENT.ComponentName
-+          2,              // DXGK_POWER_RUNTIME_COMPONENT.StateCount
-+
-+          Package ()      // DXGK_POWER_RUNTIME_COMPONENT.States[] package
-+          {
-+            Package ()   // F0
-+            {
-+              0,         // DXGK_POWER_RUNTIME_STATE.TransitionLatency
-+              0,         // DXGK_POWER_RUNTIME_STATE.ResidencyRequirement
-+              1210000,   // DXGK_POWER_RUNTIME_STATE.NominalPower (microwatt)
-+            },
-+
-+            Package ()   // F1 - Placeholder
-+            {
-+              10000,     // DXGK_POWER_RUNTIME_STATE.TransitionLatency
-+              10000,     // DXGK_POWER_RUNTIME_STATE.ResidencyRequirement
-+              4,         // DXGK_POWER_RUNTIME_STATE.NominalPower
-+            },
-+          }
-+        }
-+      }
-+    })
-+    Return (RBUF)
-+  }
-+}
-+
-+// PiQ Mailbox Driver
-+Device (RPIQ)
-+{
-+  Name (_HID, "BCM2849")
-+  Name (_CID, "BCM2849")
-+  Name (_UID, 0)
-+  Name (_CCA, 0x0)
-+
-+  Name (RBUF, ResourceTemplate ()
-+  {
-+    MEMORY32FIXED (ReadWrite, 0, BCM2836_MBOX_LENGTH, RMEM)
-+    Interrupt (ResourceConsumer, Level, ActiveHigh, Exclusive) { BCM2836_MBOX_INTERRUPT }
-+  })
-+
-+  Method (_CRS, 0x0, Serialized)
-+  {
-+    MEMORY32SETBASE (RBUF, RMEM, RBAS, BCM2836_MBOX_OFFSET)
-+    Return (^RBUF)
-+  }
-+}
-+
-+// VCHIQ Driver
-+Device (VCIQ)
-+{
-+  Name (_HID, "BCM2835")
-+  Name (_CID, "BCM2835")
-+  Name (_UID, 0)
-+  Name (_CCA, 0x0)
-+  Name (_DEP, Package() { \_SB.GDV0.RPIQ })
-+  Method (_STA)
-+  {
-+    Return (0xf)
-+  }
-+  Name (RBUF, ResourceTemplate ()
-+  {
-+    MEMORY32FIXED (ReadWrite, 0, BCM2836_VCHIQ_LENGTH, RMEM)
-+    Interrupt (ResourceConsumer, Level, ActiveHigh, Exclusive) { BCM2836_VCHIQ_INTERRUPT }
-+  })
-+
-+  Method (_CRS, 0x0, Serialized)
-+  {
-+    MEMORY32SETBASE (RBUF, RMEM, RBAS, BCM2836_VCHIQ_OFFSET)
-+    Return (^RBUF)
-+  }
-+}
-+
-+// VC Shared Memory Driver
-+Device (VCSM)
-+{
-+  Name (_HID, "BCM2856")
-+  Name (_CID, "BCM2856")
-+  Name (_UID, 0)
-+  Name (_CCA, 0x0)
-+  Name (_DEP, Package() { \_SB.GDV0.VCIQ })
-+  Method (_STA)
-+  {
-+    Return (0xf)
-+  }
-+}
-+
-+// Description: GPIO
-+Device (GPI0)
-+{
-+  Name (_HID, "BCM2845")
-+  Name (_CID, "BCM2845")
-+  Name (_UID, 0x0)
-+  Name (_CCA, 0x0)
-+
-+  Name (RBUF, ResourceTemplate ()
-+  {
-+    MEMORY32FIXED (ReadWrite, 0, GPIO_LENGTH, RMEM)
-+    Interrupt (ResourceConsumer, Level, ActiveHigh, Shared)
-+    {
-+      BCM2386_GPIO_INTERRUPT0, BCM2386_GPIO_INTERRUPT1,
-+      BCM2386_GPIO_INTERRUPT2, BCM2386_GPIO_INTERRUPT3
-+    }
-+  })
-+  Method (_CRS, 0x0, Serialized)
-+  {
-+    MEMORY32SETBASE (RBUF, RMEM, RBAS, GPIO_OFFSET)
-+    Return (^RBUF)
-+  }
-+}
-+
-+// Description: I2C
-+Device (I2C1)
-+{
-+  Name (_HID, "BCM2841")
-+  Name (_CID, "BCM2841")
-+  Name (_UID, 0x1)
-+  Name (_CCA, 0x0)
-+
-+  Name (RBUF, ResourceTemplate ()
-+  {
-+    MEMORY32FIXED (ReadWrite, 0, BCM2836_I2C1_LENGTH, RMEM)
-+    Interrupt (ResourceConsumer, Level, ActiveHigh, Shared) { BCM2836_I2C1_INTERRUPT }
-+    PinFunction (Exclusive, PullUp, BCM_ALT0, "\\_SB.GDV0.GPI0", 0, ResourceConsumer, , ) { 2, 3 }
-+  })
-+  Method (_CRS, 0x0, Serialized)
-+  {
-+    MEMORY32SETBASE (RBUF, RMEM, RBAS, BCM2836_I2C1_OFFSET)
-+    Return (^RBUF)
-+  }
-+}
-+
-+// I2C2 is the HDMI DDC connection
-+Device (I2C2)
-+{
-+  Name (_HID, "BCM2841")
-+  Name (_CID, "BCM2841")
-+  Name (_UID, 0x2)
-+  Name (_CCA, 0x0)
-+
-+  Name (RBUF, ResourceTemplate()
-+  {
-+    MEMORY32FIXED (ReadWrite, 0, BCM2836_I2C2_LENGTH, RMEM)
-+    Interrupt (ResourceConsumer, Level, ActiveHigh, Shared) { BCM2836_I2C2_INTERRUPT }
-+  })
-+
-+  Method (_CRS, 0x0, Serialized)
-+  {
-+    MEMORY32SETBASE (RBUF, RMEM, RBAS, BCM2836_I2C2_OFFSET)
-+    Return (^RBUF)
-+  }
-+}
-+
-+// SPI
-+Device (SPI0)
-+{
-+  Name (_HID, "BCM2838")
-+  Name (_CID, "BCM2838")
-+  Name (_UID, 0x0)
-+  Name (_CCA, 0x0)
-+
-+  Name (RBUF, ResourceTemplate ()
-+  {
-+    MEMORY32FIXED (ReadWrite, 0, BCM2836_SPI0_LENGTH, RMEM)
-+    Interrupt (ResourceConsumer, Level, ActiveHigh, Shared) { BCM2836_SPI0_INTERRUPT }
-+    PinFunction (Exclusive, PullDown, BCM_ALT0, "\\_SB.GDV0.GPI0", 0, ResourceConsumer, , ) { 9, 10, 11 } // MISO, MOSI, SCLK
-+    PinFunction (Exclusive, PullUp, BCM_ALT0, "\\_SB.GDV0.GPI0", 0, ResourceConsumer, , ) { 8 } // CE0
-+    PinFunction (Exclusive, PullUp, BCM_ALT0, "\\_SB.GDV0.GPI0", 0, ResourceConsumer, , ) { 7 } // CE1
-+  })
-+
-+  Method (_CRS, 0x0, Serialized)
-+  {
-+    MEMORY32SETBASE (RBUF, RMEM, RBAS, BCM2836_SPI0_OFFSET)
-+    Return (^RBUF)
-+  }
-+}
-+
-+Device (SPI1)
-+{
-+  Name (_HID, "BCM2839")
-+  Name (_CID, "BCM2839")
-+  Name (_UID, 0x1)
-+  Name (_CCA, 0x0)
-+  Name (_DEP, Package() { \_SB.GDV0.RPIQ })
-+
-+  Name (RBUF, ResourceTemplate ()
-+  {
-+    MEMORY32FIXED (ReadWrite, 0, BCM2836_SPI1_LENGTH, RMEM)
-+    Interrupt (ResourceConsumer, Level, ActiveHigh, Shared,) { BCM2836_SPI1_INTERRUPT }
-+    PinFunction (Exclusive, PullDown, BCM_ALT4, "\\_SB.GDV0.GPI0", 0, ResourceConsumer, , ) { 19, 20, 21 } // MISO, MOSI, SCLK
-+    PinFunction (Exclusive, PullDown, BCM_ALT4, "\\_SB.GDV0.GPI0", 0, ResourceConsumer, , ) { 16 } // CE2
-+  })
-+
-+  Method (_CRS, 0x0, Serialized)
-+  {
-+    MEMORY32SETBASE (RBUF, RMEM, RBAS, BCM2836_SPI1_OFFSET)
-+    Return (^RBUF)
-+  }
-+}
-+
-+// SPI2 has no pins on GPIO header
-+// Device (SPI2)
-+// {
-+//   Name (_HID, "BCM2839")
-+//   Name (_CID, "BCM2839")
-+//   Name (_UID, 0x2)
-+//   Name (_CCA, 0x0)
-+//   Name (_DEP, Package() { \_SB.GDV0.RPIQ })
-+//   Method (_STA)
-+//   {
-+//     Return (0xf)     // Disabled
-+//   }
-+//   Method (_CRS, 0x0, Serialized)
-+//   {
-+//     Name (RBUF, ResourceTemplate ()
-+//     {
-+//       MEMORY32FIXED (ReadWrite, BCM2836_SPI2_BASE_ADDRESS, BCM2836_SPI2_LENGTH, RMEM)
-+//       Interrupt (ResourceConsumer, Level, ActiveHigh, Shared,) { BCM2836_SPI2_INTERRUPT }
-+//     })
-+//     Return (RBUF)
-+//   }
-+// }
-+
-+// PWM Driver
-+Device (PWM0)
-+{
-+  Name (_HID, "BCM2844")
-+  Name (_CID, "BCM2844")
-+  Name (_UID, 0)
-+  Name (_CCA, 0x0)
-+
-+  Name (RBUF, ResourceTemplate ()
-+  {
-+    // DMA channel 11 control
-+    MEMORY32FIXED (ReadWrite, 0, BCM2836_PWM_DMA_LENGTH, RM01)
-+    // PWM control
-+    MEMORY32FIXED (ReadWrite, 0, BCM2836_PWM_CTRL_LENGTH, RM02)
-+    // PWM control bus
-+    MEMORY32FIXED (ReadWrite, BCM2836_PWM_BUS_BASE_ADDRESS, BCM2836_PWM_BUS_LENGTH, )
-+    // PWM control uncached
-+    MEMORY32FIXED (ReadWrite, BCM2836_PWM_CTRL_UNCACHED_BASE_ADDRESS, BCM2836_PWM_CTRL_UNCACHED_LENGTH, )
-+    // PWM clock control
-+    MEMORY32FIXED (ReadWrite, 0, BCM2836_PWM_CLK_LENGTH, RM03)
-+    // Interrupt DMA channel 11
-+    Interrupt (ResourceConsumer, Level, ActiveHigh, Exclusive) { BCM2836_DMA_INTERRUPT }
-+    // DMA channel 11, DREQ 5 for PWM
-+    FixedDMA (5, 11, Width32Bit, )
-+  })
-+
-+  Method (_CRS, 0x0, Serialized)
-+  {
-+    MEMORY32SETBASE (RBUF, RM01, RB01, BCM2836_PWM_DMA_OFFSET)
-+    MEMORY32SETBASE (RBUF, RM02, RB02, BCM2836_PWM_CTRL_OFFSET)
-+    MEMORY32SETBASE (RBUF, RM03, RB03, BCM2836_PWM_CLK_OFFSET)
-+    Return (^RBUF)
-+  }
-+}
-\ No newline at end of file
-diff --git a/board/raspberrypi/rpi/pci.asl b/board/raspberrypi/rpi/pci.asl
-new file mode 100644
-index 0000000000..a7a09df5cd
---- /dev/null
-+++ b/board/raspberrypi/rpi/pci.asl
-@@ -0,0 +1,177 @@
-+/** @file
-+ *
-+ *  Copyright (c) 2019 Linaro, Limited. All rights reserved.
-+ *  Copyright (c) 2021 Arm
-+ *
-+ *  SPDX-License-Identifier: BSD-2-Clause-Patent
-+ *
-+ **/
-+
-+Device(PCI0)
-+{
-+  Name(_HID, EISAID("PNP0A08")) // PCI Express Root Bridge
-+  Name(_CID, EISAID("PNP0A03")) // Compatible PCI Root Bridge
-+  Name(_SEG, Zero) // PCI Segment Group number
-+  Name(_BBN, Zero) // PCI Base Bus Number
-+  Name(_CCA, 0)    // Mark the PCI noncoherent
-+
-+  // PCIe can only DMA to first 3GB with early SOC's
-+  // But we keep the restriction on the later ones
-+  // To avoid DMA translation problems.
-+  Name (_DMA, ResourceTemplate() {
-+    QWordMemory (ResourceProducer,
-+      ,
-+      MinFixed,
-+      MaxFixed,
-+      NonCacheable,
-+      ReadWrite,
-+      0x0,
-+      0x0,        // MIN
-+      0xbfffffff, // MAX
-+      0x0,        // TRA
-+      0xc0000000, // LEN
-+      ,
-+      ,
-+      )
-+  })
-+
-+  // PCI Routing Table
-+  Name(_PRT, Package() {
-+    Package (4) { 0x0000FFFF, 0, zero, 175 },
-+    Package (4) { 0x0000FFFF, 1, zero, 176 },
-+    Package (4) { 0x0000FFFF, 2, zero, 177 },
-+    Package (4) { 0x0000FFFF, 3, zero, 178 }
-+  })
-+
-+  Name (_DSD, Package () {
-+    ToUUID("daffd814-6eba-4d8c-8a91-bc9bbf4aa301"),
-+      Package () {
-+        Package () { "linux-ecam-quirk-id", "bcm2711" },
-+      }
-+  })
-+
-+  // Root complex resources
-+  Method (_CRS, 0, Serialized) {
-+    Name (RBUF, ResourceTemplate () {
-+
-+      // bus numbers assigned to this root
-+      WordBusNumber (
-+        ResourceProducer,
-+        MinFixed, MaxFixed, PosDecode,
-+        0,   // AddressGranularity
-+        0,   // AddressMinimum - Minimum Bus Number
-+        255, // AddressMaximum - Maximum Bus Number
-+        0,   // AddressTranslation - Set to 0
-+        256  // RangeLength - Number of Busses
-+      )
-+
-+      // 32-bit mmio window in 64-bit addr
-+      QWordMemory (
-+        ResourceProducer, PosDecode,
-+        MinFixed, MaxFixed,
-+        NonCacheable, ReadWrite,        // cacheable
-+        0x00000000,                     // Granularity
-+        0,                              // PCIE_PCI_MMIO_BEGIN
-+        1,                              // PCIE_MMIO_LEN + PCIE_PCI_MMIO_BEGIN
-+        PCIE_CPU_MMIO_WINDOW,           // PCIE_PCI_MMIO_BEGIN - PCIE_CPU_MMIO_WINDOW
-+        2                               // PCIE_MMIO_LEN + 1
-+        ,,,MMI1
-+      )
-+
-+      // root port registers, not to be used if SMCCC is utilized
-+      QWordMemory (
-+        ResourceConsumer, ,
-+        MinFixed, MaxFixed,
-+        NonCacheable, ReadWrite,        // cacheable
-+        0x00000000,                     // Granularity
-+        0xFD500000,                     // Root port begin
-+        0xFD509FFF,                     // Root port end
-+        0x00000000,                     // no translation
-+        0x0000A000,                     // size
-+        ,,
-+      )
-+    }) // end Name(RBUF)
-+
-+    // Work around ASL's inability to add in a resource definition
-+    // or for that matter compute the min,max,len properly
-+    CreateQwordField (RBUF, MMI1._MIN, MMIB)
-+    CreateQwordField (RBUF, MMI1._MAX, MMIE)
-+    CreateQwordField (RBUF, MMI1._TRA, MMIT)
-+    CreateQwordField (RBUF, MMI1._LEN, MMIL)
-+    Add (MMIB, PCIE_TOP_OF_MEM_WIN, MMIB)
-+    Add (PCIE_BRIDGE_MMIO_LEN, PCIE_TOP_OF_MEM_WIN, MMIE)
-+    Subtract (MMIT, PCIE_TOP_OF_MEM_WIN, MMIT)
-+    Add (PCIE_BRIDGE_MMIO_LEN, 1 , MMIL)
-+
-+    Return (RBUF)
-+  } // end Method(_CRS)
-+
-+  // OS Control Handoff
-+  Name(SUPP, Zero) // PCI _OSC Support Field value
-+  Name(CTRL, Zero) // PCI _OSC Control Field value
-+
-+  // See [1] 6.2.10, [2] 4.5
-+  Method(_OSC,4) {
-+    // Note, This code is very similar to the code in the PCIe firmware
-+    // specification which can be used as a reference
-+    // Check for proper UUID
-+    If(LEqual(Arg0,ToUUID("33DB4D5B-1FF7-401C-9657-7441C03DD766"))) {
-+      // Create DWord-adressable fields from the Capabilities Buffer
-+      CreateDWordField(Arg3,0,CDW1)
-+      CreateDWordField(Arg3,4,CDW2)
-+      CreateDWordField(Arg3,8,CDW3)
-+      // Save Capabilities DWord2 & 3
-+      Store(CDW2,SUPP)
-+      Store(CDW3,CTRL)
-+      // Mask out Native HotPlug
-+      And(CTRL,0x1E,CTRL)
-+      // Always allow native PME, AER (no dependencies)
-+      // Never allow SHPC (no SHPC controller in this system)
-+      And(CTRL,0x1D,CTRL)
-+
-+      If(LNotEqual(Arg1,One)) { // Unknown revision
-+        Or(CDW1,0x08,CDW1)
-+      }
-+
-+      If(LNotEqual(CDW3,CTRL)) {  // Capabilities bits were masked
-+        Or(CDW1,0x10,CDW1)
-+      }
-+      // Update DWORD3 in the buffer
-+      Store(CTRL,CDW3)
-+      Return(Arg3)
-+    } Else {
-+      Or(CDW1,4,CDW1) // Unrecognized UUID
-+      Return(Arg3)
-+    }
-+  } // End _OSC
-+
-+  Device (XHC0)
-+  {
-+    Name (_ADR, 0x00010000)
-+    Name (_CID, "PNP0D10")
-+    Name (_UID, 0x0)            // _UID: Unique ID
-+    Name (_CCA, 0x0)            // _CCA: Cache Coherency Attribute
-+
-+    /*
-+     * Microsoft's USB Device-Specific Methods. See:
-+     * https://docs.microsoft.com/en-us/windows-hardware/drivers/bringup/usb-device-specific-method---dsm-
-+     */
-+    Name (DSMU, ToUUID ("ce2ee385-00e6-48cb-9f05-2edb927c4899"))
-+
-+    Method (_DSM, 4, Serialized) {
-+        If (LEqual (Arg0, DSMU)) {              // USB capabilities UUID
-+            Switch (ToInteger (Arg2)) {
-+            Case (0) {                          // Function 0: List of supported functions
-+                Return (Buffer () { 0x41 })     // 0x41 - Functions 0 and 6 supported
-+            }
-+            Case (6) {                          // Function 6: RegisterAccessType
-+                Return (Buffer () { 0x01 })     // 0x01 - Must use 32bit register access
-+            }
-+            Default { }                         // Unsupported
-+            }
-+        }
-+        return (Buffer () { 0x00 })             // Return 0x00 for anything unsupported
-+    }
-+  } // end XHC0
-+
-+} // PCI0
-\ No newline at end of file
-diff --git a/board/raspberrypi/rpi/pep.asl b/board/raspberrypi/rpi/pep.asl
-new file mode 100644
-index 0000000000..87469e2e5a
---- /dev/null
-+++ b/board/raspberrypi/rpi/pep.asl
-@@ -0,0 +1,90 @@
-+/** @file
-+ *
-+ *  Platform Extension Plugin (PEP).
-+ *
-+ *  Copyright (c) 2019, ARM Ltd. All rights reserved.
-+ *  Copyright (c) 2018, Andrey Warkentin <andrey.warkentin@gmail.com>
-+ *  Copyright (c) Microsoft Corporation. All rights reserved.
-+ *
-+ *  SPDX-License-Identifier: BSD-2-Clause-Patent
-+ *
-+ **/
-+
-+Device(PEPD)
-+{
-+  //
-+  // PEP virtual device.
-+  //
-+  Name (_HID, "BCM2854") // Note: Since PEP on RPi is a virtual device,
-+  Name (_CID, "BCM2854") // its device id needs to be generated by Microsoft
-+  Name (_UID, 0x0)
-+  Name (_CRS, ResourceTemplate ()
-+  {
-+    // No hardware resources for PEP driver are needed.
-+  })
-+
-+  //
-+  // Processor info. PEP proprietary method to return
-+  // PEP_PROCESSOR_TABLE_PLAT structure.
-+  //
-+  // See Pep.h and Pep.c.
-+  //
-+  Name (_GPI, Buffer()
-+  {
-+    0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x5C, 0x00, 0x5F, 0x00, 0x53,
-+    0x00, 0x42, 0x00, 0x2E, 0x00, 0x43, 0x00, 0x50, 0x00, 0x55, 0x00, 0x30,
-+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-+  })
-+
-+  //
-+  // Coordinated state info. PEP proprietary method to return
-+  // PEP_COORDINATED_STATE_TABLE_PLAT structure.
-+  //
-+  // See Pep.h and Pep.c.
-+  //
-+  Name (_GCI, Buffer()
-+  {
-+    0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00,
-+    0x00, 0x00, 0x00, 0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x01,
-+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01,
-+    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00
-+  })
-+
-+  //
-+  // Device info. PEP proprietary method to return
-+  // PEP_DEVICE_TABLE_PLAT structure.
-+  //
-+  // See Pep.h and Pep.c.
-+  //
-+  Name (_GDI, Buffer()
-+  {
-+    0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x5C, 0x00, 0x5F, 0x00, 0x53,
-+    0x00, 0x42, 0x00, 0x2E, 0x00, 0x49, 0x00, 0x32, 0x00, 0x43, 0x00, 0x30,
-+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x09,
-+    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x00,
-+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-+  })
-+}
-diff --git a/board/raspberrypi/rpi/rhpx.asl b/board/raspberrypi/rpi/rhpx.asl
-new file mode 100644
-index 0000000000..214b55c656
---- /dev/null
-+++ b/board/raspberrypi/rpi/rhpx.asl
-@@ -0,0 +1,195 @@
-+/** @file
-+ *
-+ *  [DSDT] RHProxy device to enable WinRT API (RHPX)
-+ *
-+ *  Copyright (c) 2018, Andrey Warkentin <andrey.warkentin@gmail.com>
-+ *  Copyright (c) Microsoft Corporation. All rights reserved.
-+ *
-+ *  SPDX-License-Identifier: BSD-2-Clause-Patent
-+ *
-+ **/
-+
-+Device (RHPX)
-+{
-+  Name (_HID, "MSFT8000")
-+  Name (_CID, "MSFT8000")
-+  Name (_UID, 1)
-+
-+  Name(_CRS, ResourceTemplate ()
-+  {
-+    // Index 0
-+    SPISerialBus (           // SCKL - GPIO 11 - Pin 23
-+                             // MOSI - GPIO 10 - Pin 19
-+                             // MISO - GPIO 9  - Pin 21
-+                             // CE0  - GPIO 8  - Pin 24
-+      0,                     // Device selection (CE0)
-+      PolarityLow,           // Device selection polarity
-+      FourWireMode,          // WireMode
-+      8,                     // DataBit len
-+      ControllerInitiated,   // Slave mode
-+      4000000,               // Connection speed
-+      ClockPolarityLow,      // Clock polarity
-+      ClockPhaseFirst,       // Clock phase
-+      "\\_SB.GDV0.SPI0",     // ResourceSource: SPI bus controller name
-+      0,                     // ResourceSourceIndex
-+                             // Resource usage
-+                             // DescriptorName: creates name for offset of resource descriptor
-+    )                        // Vendor Data
-+
-+    // Index 1
-+    SPISerialBus (           // SCKL - GPIO 11 - Pin 23
-+                             // MOSI - GPIO 10 - Pin 19
-+                             // MISO - GPIO 9  - Pin 21
-+                             // CE1  - GPIO 7  - Pin 26
-+      1,                     // Device selection (CE1)
-+      PolarityLow,           // Device selection polarity
-+      FourWireMode,          // WireMode
-+      8,                     // DataBit len
-+      ControllerInitiated,   // Slave mode
-+      4000000,               // Connection speed
-+      ClockPolarityLow,      // Clock polarity
-+      ClockPhaseFirst,       // Clock phase
-+      "\\_SB.GDV0.SPI0",     // ResourceSource: SPI bus controller name
-+      0,                     // ResourceSourceIndex
-+                             // Resource usage
-+                             // DescriptorName: creates name for offset of resource descriptor
-+    )                        // Vendor Data
-+
-+    // Index 2
-+    I2CSerialBus (           // Pin 3 (GPIO2, SDA1), 5 (GPIO3, SCL1)
-+      0xFFFF,                // SlaveAddress: placeholder
-+      ,                      // SlaveMode: default to ControllerInitiated
-+      0,                     // ConnectionSpeed: placeholder
-+      ,                      // Addressing Mode: default to 7 bit
-+      "\\_SB.GDV0.I2C1",     // ResourceSource: I2C bus controller name
-+      ,
-+      ,
-+      ,                      // Descriptor Name: creates name for offset of resource descriptor
-+    )                        // Vendor Data
-+
-+    // Index 3
-+    SPISerialBus (           // SPI1_SCLK - GPIO21
-+                             // SPI1_MOSI - GPIO20
-+                             // SPI1_MISO - GPIO19
-+                             // SPI1_CE2_N - GPIO16
-+      2,                     // Device selection (CE2)
-+      PolarityLow,           // Device selection polarity
-+      FourWireMode,          // WireMode
-+      8,                     // DataBit len
-+      ControllerInitiated,   // Slave mode
-+      4000000,               // Connection speed
-+      ClockPolarityLow,      // Clock polarity
-+      ClockPhaseFirst,       // Clock phase
-+      "\\_SB.GDV0.SPI1",          // ResourceSource: SPI bus controller name
-+      0,                     // ResourceSourceIndex
-+                             // Resource usage
-+                             // DescriptorName: creates name for offset of resource descriptor
-+    )                        // Vendor Data
-+
-+    // GPIO 2
-+    GpioIO (Shared, PullUp, 0, 0, IoRestrictionNone, "\\_SB.GDV0.GPI0", 0, ResourceConsumer,,) { 2 }
-+    GpioInt (Edge, ActiveBoth, Shared, PullUp, 0, "\\_SB.GDV0.GPI0",)                          { 2 }
-+    // GPIO 3
-+    GpioIO (Shared, PullUp, 0, 0, IoRestrictionNone, "\\_SB.GDV0.GPI0", 0, ResourceConsumer,,) { 3 }
-+    GpioInt (Edge, ActiveBoth, Shared, PullUp, 0, "\\_SB.GDV0.GPI0",)                          { 3 }
-+    // GPIO 4
-+    GpioIO (Shared, PullUp, 0, 0, IoRestrictionNone, "\\_SB.GDV0.GPI0", 0, ResourceConsumer,,) { 4 }
-+    GpioInt (Edge, ActiveBoth, Shared, PullUp, 0, "\\_SB.GDV0.GPI0",)                          { 4 }
-+    // GPIO 5
-+    GpioIO (Shared, PullUp, 0, 0, IoRestrictionNone, "\\_SB.GDV0.GPI0", 0, ResourceConsumer,,) { 5 }
-+    GpioInt (Edge, ActiveBoth, Shared, PullUp, 0, "\\_SB.GDV0.GPI0",)                          { 5 }
-+    // GPIO 6
-+    GpioIO (Shared, PullUp, 0, 0, IoRestrictionNone, "\\_SB.GDV0.GPI0", 0, ResourceConsumer,,) { 6 }
-+    GpioInt (Edge, ActiveBoth, Shared, PullUp, 0, "\\_SB.GDV0.GPI0",)                          { 6 }
-+    // GPIO 7
-+    GpioIO (Shared, PullUp, 0, 0, IoRestrictionNone, "\\_SB.GDV0.GPI0", 0, ResourceConsumer,,) { 7 }
-+    GpioInt (Edge, ActiveBoth, Shared, PullUp, 0, "\\_SB.GDV0.GPI0",)                          { 7 }
-+    // GPIO 8
-+    GpioIO (Shared, PullUp, 0, 0, IoRestrictionNone, "\\_SB.GDV0.GPI0", 0, ResourceConsumer,,) { 8 }
-+    GpioInt (Edge, ActiveBoth, Shared, PullUp, 0, "\\_SB.GDV0.GPI0",)                          { 8 }
-+    // GPIO 9
-+    GpioIO (Shared, PullDown, 0, 0, IoRestrictionNone, "\\_SB.GDV0.GPI0", 0, ResourceConsumer,,) { 9 }
-+    GpioInt (Edge, ActiveBoth, Shared, PullDown, 0, "\\_SB.GDV0.GPI0",)                          { 9 }
-+    // GPIO 10
-+    GpioIO (Shared, PullDown, 0, 0, IoRestrictionNone, "\\_SB.GDV0.GPI0", 0, ResourceConsumer,,) { 10 }
-+    GpioInt (Edge, ActiveBoth, Shared, PullDown, 0, "\\_SB.GDV0.GPI0",)                          { 10 }
-+    // GPIO 11
-+    GpioIO (Shared, PullDown, 0, 0, IoRestrictionNone, "\\_SB.GDV0.GPI0", 0, ResourceConsumer,,) { 11 }
-+    GpioInt (Edge, ActiveBoth, Shared, PullDown, 0, "\\_SB.GDV0.GPI0",)                          { 11 }
-+    // GPIO 12
-+    GpioIO (Shared, PullDown, 0, 0, IoRestrictionNone, "\\_SB.GDV0.GPI0", 0, ResourceConsumer,,) { 12 }
-+    GpioInt (Edge, ActiveBoth, Shared, PullDown, 0, "\\_SB.GDV0.GPI0",)                          { 12 }
-+    // GPIO 13
-+    GpioIO (Shared, PullDown, 0, 0, IoRestrictionNone, "\\_SB.GDV0.GPI0", 0, ResourceConsumer,,) { 13 }
-+    GpioInt (Edge, ActiveBoth, Shared, PullDown, 0, "\\_SB.GDV0.GPI0",)                          { 13 }
-+    // NTRAID#MSFT-7141401-2016/04/7-jordanrh - disable UART muxing
-+    // until a proper solution can be created for the dmap conflict
-+    // GPIO 14 - UART TX
-+    // GpioIO (Shared, PullDown, 0, 0, IoRestrictionNone, "\\_SB.GDV0.GPI0", 0, ResourceConsumer,,) { 14 }
-+    // GpioInt (Edge, ActiveBoth, Shared, PullDown, 0, "\\_SB.GDV0.GPI0",)                          { 14 }
-+    // GPIO 15 - UART RX
-+    // GpioIO (Shared, PullDown, 0, 0, IoRestrictionNone, "\\_SB.GDV0.GPI0", 0, ResourceConsumer,,) { 15 }
-+    // GpioInt (Edge, ActiveBoth, Shared, PullDown, 0, "\\_SB.GDV0.GPI0",)                          { 15 }
-+    // GPIO 16
-+    GpioIO (Shared, PullDown, 0, 0, IoRestrictionNone, "\\_SB.GDV0.GPI0", 0, ResourceConsumer,,) { 16 }
-+    GpioInt (Edge, ActiveBoth, Shared, PullDown, 0, "\\_SB.GDV0.GPI0",)                          { 16 }
-+    // GPIO 17
-+    GpioIO (Shared, PullDown, 0, 0, IoRestrictionNone, "\\_SB.GDV0.GPI0", 0, ResourceConsumer,,) { 17 }
-+    GpioInt (Edge, ActiveBoth, Shared, PullDown, 0, "\\_SB.GDV0.GPI0",)                          { 17 }
-+    // GPIO 18
-+    GpioIO (Shared, PullDown, 0, 0, IoRestrictionNone, "\\_SB.GDV0.GPI0", 0, ResourceConsumer,,) { 18 }
-+    GpioInt (Edge, ActiveBoth, Shared, PullDown, 0, "\\_SB.GDV0.GPI0",)                          { 18 }
-+    // GPIO 19
-+    GpioIO (Shared, PullDown, 0, 0, IoRestrictionNone, "\\_SB.GDV0.GPI0", 0, ResourceConsumer,,) { 19 }
-+    GpioInt (Edge, ActiveBoth, Shared, PullDown, 0, "\\_SB.GDV0.GPI0",)                          { 19 }
-+    // GPIO 20
-+    GpioIO (Shared, PullDown, 0, 0, IoRestrictionNone, "\\_SB.GDV0.GPI0", 0, ResourceConsumer,,) { 20 }
-+    GpioInt (Edge, ActiveBoth, Shared, PullDown, 0, "\\_SB.GDV0.GPI0",)                          { 20 }
-+    // GPIO 21
-+    GpioIO (Shared, PullDown, 0, 0, IoRestrictionNone, "\\_SB.GDV0.GPI0", 0, ResourceConsumer,,) { 21 }
-+    GpioInt (Edge, ActiveBoth, Shared, PullDown, 0, "\\_SB.GDV0.GPI0",)                          { 21 }
-+    // GPIO 22
-+    GpioIO (Shared, PullDown, 0, 0, IoRestrictionNone, "\\_SB.GDV0.GPI0", 0, ResourceConsumer,,) { 22 }
-+    GpioInt (Edge, ActiveBoth, Shared, PullDown, 0, "\\_SB.GDV0.GPI0",)                          { 22 }
-+    // GPIO 23
-+    GpioIO (Shared, PullDown, 0, 0, IoRestrictionNone, "\\_SB.GDV0.GPI0", 0, ResourceConsumer,,) { 23 }
-+    GpioInt (Edge, ActiveBoth, Shared, PullDown, 0, "\\_SB.GDV0.GPI0",)                          { 23 }
-+    // GPIO 24
-+    GpioIO (Shared, PullDown, 0, 0, IoRestrictionNone, "\\_SB.GDV0.GPI0", 0, ResourceConsumer,,) { 24 }
-+    GpioInt (Edge, ActiveBoth, Shared, PullDown, 0, "\\_SB.GDV0.GPI0",)                          { 24 }
-+    // GPIO 25
-+    GpioIO (Shared, PullDown, 0, 0, IoRestrictionNone, "\\_SB.GDV0.GPI0", 0, ResourceConsumer,,) { 25 }
-+    GpioInt (Edge, ActiveBoth, Shared, PullDown, 0, "\\_SB.GDV0.GPI0",)                          { 25 }
-+    // GPIO 26
-+    GpioIO (Shared, PullDown, 0, 0, IoRestrictionNone, "\\_SB.GDV0.GPI0", 0, ResourceConsumer,,) { 26 }
-+    GpioInt (Edge, ActiveBoth, Shared, PullDown, 0, "\\_SB.GDV0.GPI0",)                          { 26 }
-+    // GPIO 27
-+    GpioIO (Shared, PullDown, 0, 0, IoRestrictionNone, "\\_SB.GDV0.GPI0", 0, ResourceConsumer,,) { 27 }
-+    GpioInt (Edge, ActiveBoth, Shared, PullDown, 0, "\\_SB.GDV0.GPI0",)                          { 27 }
-+  })
-+
-+  Name (_DSD, Package()
-+  {
-+    ToUUID ("daffd814-6eba-4d8c-8a91-bc9bbf4aa301"),
-+    Package ()
-+    {
-+      // Reference http://www.raspberrypi.org/documentation/hardware/raspberrypi/spi/README.md
-+      // SPI 0
-+      Package (2) { "bus-SPI-SPI0", Package() { 0, 1 } },                   // Index 0 & 1
-+      Package (2) { "SPI0-MinClockInHz", 7629 },                            // 7629 Hz
-+      Package (2) { "SPI0-MaxClockInHz", 125000000 },                       // 125 MHz
-+      Package (2) { "SPI0-SupportedDataBitLengths", Package() { 8 } },      // Data Bit Length
-+      // I2C1
-+      Package (2) { "bus-I2C-I2C1", Package() { 2 } },
-+      // GPIO Pin Count and supported drive modes
-+      Package (2) { "GPIO-PinCount", 54 },
-+      Package (2) { "GPIO-UseDescriptorPinNumbers", 1 },
-+      Package (2) { "GPIO-SupportedDriveModes", 0xf },                      // InputHighImpedance, InputPullUp, InputPullDown, OutputCmos
-+      // SPI 1
-+      Package (2) { "bus-SPI-SPI1", Package() { 3 }},                       // Index 3
-+      Package (2) { "SPI1-MinClockInHz", 30511 },                           // 30.5 kHz
-+      Package (2) { "SPI1-MaxClockInHz", 20000000 },                        // 20 MHz
-+      Package (2) { "SPI1-SupportedDataBitLengths", Package() { 8 } },      // Data Bit Length
-+    }
-+  })
-+}
-diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
-index ab5ea85cf9..9122f33d88 100644
---- a/board/raspberrypi/rpi/rpi.c
-+++ b/board/raspberrypi/rpi/rpi.c
-@@ -23,6 +23,11 @@
- #endif
- #include <watchdog.h>
- #include <dm/pinctrl.h>
-+#include <dm/ofnode.h>
-+#include <acpi/acpi_table.h>
-+#include <acpi/acpigen.h>
-+#include <dm/lists.h>
++ * @cpu_id:           MPIDR as returned by the Multiprocessor Affinity Register.
++ *                    On 32bit Arm systems the upper bits are unused.
++ * @jumping_address:  On 32bit Arm systems the address must be below 4 GiB
++ * @os_reserved:      Reserved for OS use. Firmware must not access this memory.
++ * @spinning_code:    Reserved for firmware use. OS must not access this memory.
++ *                    The spinning code will be installed by firmware and the secondary
++ *                    CPUs will enter it before the control is handed over to the OS.
++ */
++struct acpi_pp_page {
++	u64 cpu_id;
++	u64 jumping_address;
++	u8 os_reserved[2032];
++	u8 spinning_code[2048];
++} __packed;
++
+ #endif /* !__ASSEMBLY__ */
+ #endif /* !__ACPI__ */
+ 
++/* Multi-processor Startup for ARM Platforms defines */
++#define ACPI_PP_CPU_ID_INVALID		0xffffffff
++#define ACPI_PP_JMP_ADR_INVALID		0
++#define ACPI_PP_PAGE_SIZE		4096
++#define ACPI_PP_CPU_ID_OFFSET		0
++#define ACPI_PP_CPU_JMP_OFFSET		8
++#define ACPI_PP_CPU_CODE_OFFSET		2048
++#define ACPI_PP_VERSION			1
++
+ #endif /* __ASM_ACPI_TABLE_H__ */
+diff --git a/arch/arm/lib/acpi_table.c b/arch/arm/lib/acpi_table.c
+index b264a31cbb..5b59997fb2 100644
+--- a/arch/arm/lib/acpi_table.c
++++ b/arch/arm/lib/acpi_table.c
+@@ -10,9 +10,45 @@
+ #include <acpi/acpigen.h>
+ #include <acpi/acpi_device.h>
+ #include <acpi/acpi_table.h>
++#include <asm-generic/io.h>
++#include <bloblist.h>
++#include <cpu_func.h>
+ #include <dm/acpi.h>
+ #include <dm/uclass.h>
++#include <efi_loader.h>
++#include <linux/log2.h>
++#include <linux/sizes.h>
++#include <malloc.h>
+ #include <string.h>
 +#include <tables_csum.h>
++
++/* defined in assembly file */
++/**
++ * acpi_pp_code_size - Spinloop code size *
++ */
++extern u16 acpi_pp_code_size;
++
++/**
++ * acpi_pp_tables - Start of ACPI PP tables.
++ */
++extern ulong acpi_pp_tables;
++
++/**
++ * acpi_pp_etables - End of ACPI PP tables.
++ */
++extern ulong acpi_pp_etables;
++
++/**
++ * acpi_pp_code_start() - Spinloop code
++ *
++ * Architectural spinloop code to be installed in each parking protocol
++ * page. The spinloop code must be less than 2048 bytes.
++ *
++ * The spinloop code will be entered after calling
++ * acpi_parking_protocol_install().
++ *
++ */
++void acpi_pp_code_start(void);
  
- DECLARE_GLOBAL_DATA_PTR;
+ void acpi_write_madt_gicc(struct acpi_madt_gicc *gicc, uint cpu_num,
+ 			  uint perf_gsiv, ulong phys_base, ulong gicv,
+@@ -125,3 +161,116 @@ void *acpi_fill_madt(struct acpi_madt *madt, struct acpi_ctx *ctx)
  
-@@ -583,3 +588,181 @@ int ft_board_setup(void *blob, struct bd_info *bd)
- 
- 	return 0;
+ 	return ctx->current;
  }
 +
-+#if CONFIG_IS_ENABLED(GENERATE_ACPI_TABLE)
-+static bool is_rpi4(void)
++/**
++ * acpi_write_pp_setup_one_page() - Fill out one page used by the PP
++ *
++ * Fill out the struct acpi_pp_page to contain the spin-loop
++ * code and the mailbox area. After this function the page is ready for
++ * the secondary core's to enter the spin-loop code.
++ *
++ * @page:                 Pointer to current parking protocol page
++ * @gicc:                 Pointer to corresponding GICC sub-table
++ */
++static void acpi_write_pp_setup_one_page(struct acpi_pp_page *page,
++					 struct acpi_madt_gicc *gicc)
 +{
-+	return of_machine_is_compatible("brcm,bcm2711") ||
-+	       of_machine_is_compatible("brcm,bcm2712");
++	void *reloc;
++
++	/* Update GICC. Mark parking protocol as available. */
++	gicc->parking_proto = ACPI_PP_VERSION;
++	gicc->parked_addr = virt_to_phys(page);
++
++	/* Prepare parking protocol page */
++	memset(page, '\0', sizeof(struct acpi_pp_page));
++
++	/* Init mailbox. Set MPIDR so core's will find their page. */
++	page->cpu_id = gicc->mpidr;
++	page->jumping_address = ACPI_PP_JMP_ADR_INVALID;
++
++	/* Relocate spinning code */
++	reloc = &page->spinning_code[0];
++
++	log_debug("Relocating spin table from %lx to %lx (size %x)\n",
++		  (ulong)&acpi_pp_code_start, (ulong)reloc, acpi_pp_code_size);
++	memcpy(reloc, &acpi_pp_code_start, acpi_pp_code_size);
++
++	if (!CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
++		flush_dcache_range((unsigned long)page,
++				   (unsigned long)(page + 1));
 +}
 +
-+static bool is_rpi3(void)
++void acpi_write_park(struct acpi_madt *madt)
 +{
-+	return of_machine_is_compatible("brcm,bcm2837");
-+}
++	struct acpi_pp_page *start, *page;
++	struct acpi_madt_gicc *gicc;
++	int ret, i, ncpus = 0;
 +
-+static int acpi_rpi_board_fill_ssdt(struct acpi_ctx *ctx)
-+{
-+	int node, ret, uart_in_use, mini_clock_rate;
-+	bool enabled;
-+	struct udevice *dev;
-+	struct {
-+		const char *fdt_compatible;
-+		const char *acpi_scope;
-+		bool on_rpi4;
-+		bool on_rpi3;
-+		u32 mmio_address;
-+	} map[] = {
-+		{"brcm,bcm2711-pcie", "\\_SB.PCI0", true, false},
-+		{"brcm,bcm2711-emmc2", "\\_SB.GDV1.SDC3", true, false},
-+		{"brcm,bcm2835-pwm", "\\_SB.GDV0.PWM0", true, true},
-+		{"brcm,bcm2711-genet-v5",  "\\_SB.ETH0", true, false},
-+		{"brcm,bcm2711-thermal", "\\_SB.EC00", true, true},
-+		{"brcm,bcm2835-sdhci", "\\_SB.SDC1", true, true},
-+		{"brcm,bcm2835-sdhost", "\\_SB.SDC2", false, true},
-+		{"brcm,bcm2835-mbox", "\\_SB.GDV0.RPIQ", true, true},
-+		{"brcm,bcm2835-i2c", "\\_SB.GDV0.I2C1", true, true, 0xfe205000},
-+		{"brcm,bcm2835-i2c", "\\_SB.GDV0.I2C2", true, true, 0xfe804000},
-+		{"brcm,bcm2835-spi", "\\_SB.GDV0.SPI0", true, true},
-+		{"brcm,bcm2835-aux-spi", "\\_SB.GDV0.SPI1", true, true, 0xfe215080},
-+		{"arm,pl011", "\\_SB.URT0", true, true},
-+		{"brcm,bcm2835-aux-uart", "\\_SB.URTM", true, true},
-+		{ /* Sentinel */ }
-+	};
++	/*
++	 * According to the "Multi-processor Startup for ARM Platforms":
++	 * - Every CPU as specified by MADT GICC has it's own 4K page
++	 * - Every page is divided into two sections: OS and FW reserved
++	 * - Memory occupied by "Parking Protocol" must be marked 'Reserved'
++	 * - Spinloop code should reside in FW reserved 2048 bytes
++	 * - Spinloop code will check the mailbox in OS reserved area
++	 */
 +
-+	/* Device enable */
-+	for (int i = 0; map[i].fdt_compatible; i++) {
-+		if ((is_rpi4() && !map[i].on_rpi4) ||
-+		    (is_rpi3() && !map[i].on_rpi3)) {
-+			enabled = false;
-+		} else {
-+			node = fdt_node_offset_by_compatible(gd->fdt_blob, -1,
-+							     map[i].fdt_compatible);
-+			while (node != -FDT_ERR_NOTFOUND && map[i].mmio_address) {
-+				struct fdt_resource r;
-+
-+				ret = fdt_get_resource(gd->fdt_blob, node, "reg", 0, &r);
-+				if (ret) {
-+					node = -FDT_ERR_NOTFOUND;
-+					break;
-+				}
-+
-+				if (r.start == map[i].mmio_address)
-+					break;
-+
-+				node = fdt_node_offset_by_compatible(gd->fdt_blob, node,
-+								     map[i].fdt_compatible);
-+			}
-+
-+			enabled = (node > 0) ? fdtdec_get_is_enabled(gd->fdt_blob, node) : 0;
-+		}
-+		acpigen_write_scope(ctx, map[i].acpi_scope);
-+		acpigen_write_name_integer(ctx, "_STA", enabled ? 0xf : 0);
-+		acpigen_pop_len(ctx);
++	if (acpi_pp_code_size > sizeof(page->spinning_code)) {
++		log_err("Spinning code too big to fit: %d\n",
++			acpi_pp_code_size);
++		return;
 +	}
 +
-+	/* GPIO quirks */
-+	node = fdt_node_offset_by_compatible(gd->fdt_blob, -1, "brcm,bcm2835-gpio");
-+	if (node <= 0)
-+		node = fdt_node_offset_by_compatible(gd->fdt_blob, -1, "brcm,bcm2711-gpio");
++	/* Count all MADT GICCs including BSP */
++	for (i = sizeof(struct acpi_madt); i < madt->header.length;
++	     i += gicc->length) {
++		gicc = (struct acpi_madt_gicc *)((void *)madt + i);
++		if (gicc->type != ACPI_APIC_GICC)
++			continue;
++		ncpus++;
++	}
++	log_debug("Found %#x GICCs in MADT\n", ncpus);
 +
-+	acpigen_write_scope(ctx, "\\_SB.GDV0.GPI0");
-+	enabled = (node > 0) ? fdtdec_get_is_enabled(gd->fdt_blob, node) : 0;
-+	acpigen_write_name_integer(ctx, "_STA", enabled ? 0xf : 0);
-+	acpigen_pop_len(ctx);
++	/* Allocate pages linearly due to assembly code requirements */
++	start = bloblist_add(BLOBLISTT_ACPI_PP, ACPI_PP_PAGE_SIZE * ncpus,
++			     ilog2(SZ_4K));
++	if (!start) {
++		log_err("Failed to allocate memory for ACPI-parking-protocol pages\n");
++		return;
++	}
++	log_debug("Allocated parking protocol at %p\n", start);
++	page = start;
 +
-+	if (is_rpi4()) {
-+		/* eMMC quirks */
-+		node = fdt_node_offset_by_compatible(gd->fdt_blob, -1, "brcm,bcm2711-emmc2");
-+		if (node) {
-+			phys_addr_t cpu;
-+			dma_addr_t bus;
-+			u64 size;
++	if (IS_ENABLED(CONFIG_EFI_LOADER)) {
++		/* Default mapping is 'BOOT CODE'. Mark as reserved instead. */
++		ret = efi_add_memory_map((u64)(uintptr_t)start,
++					 ncpus * ACPI_PP_PAGE_SIZE,
++					 EFI_RESERVED_MEMORY_TYPE);
 +
-+			ret = fdt_get_dma_range(gd->fdt_blob, node, &cpu, &bus, &size);
-+
-+			acpigen_write_scope(ctx, "\\_SB.GDV1");
-+			acpigen_write_method_serialized(ctx, "_DMA", 0);
-+			acpigen_emit_byte(ctx, RETURN_OP);
-+
-+			if (!ret && bus != cpu)		/* Translated DMA range */
-+				acpigen_emit_namestring(ctx, "\\_SB.GDV1.DMTR");
-+			else if (!ret && bus == cpu)	/* Non translated DMA */
-+				acpigen_emit_namestring(ctx, "\\_SB.GDV1.DMNT");
-+			else	/* Silicon revisions older than C0: Translated DMA range */
-+				acpigen_emit_namestring(ctx, "\\_SB.GDV1.DMTR");
-+			acpigen_pop_len(ctx);
-+		}
++		if (ret)
++			log_err("Reserved memory mapping failed addr %p size %x\n",
++				start, ncpus * ACPI_PP_PAGE_SIZE);
 +	}
 +
-+	/* Serial */
-+	uart_in_use = ~0;
-+	mini_clock_rate = 0x1000000;
++	/* Prepare the parking protocol pages */
++	for (i = sizeof(struct acpi_madt); i < madt->header.length;
++	     i += gicc->length) {
++		gicc = (struct acpi_madt_gicc *)((void *)madt + i);
++		if (gicc->type != ACPI_APIC_GICC)
++			continue;
 +
-+	ret = uclass_get_device_by_driver(UCLASS_SERIAL,
-+					  DM_DRIVER_GET(bcm283x_pl011_uart),
-+					  &dev);
-+	if (!ret)
-+		uart_in_use = 0;
-+
-+	ret = uclass_get_device_by_driver(UCLASS_SERIAL,
-+					  DM_DRIVER_GET(serial_bcm283x_mu),
-+					  &dev);
-+	if (!ret) {
-+		if (uart_in_use == 0)
-+			log_err("Invalid config: PL011 and MiniUART are both enabled.");
-+		else
-+			uart_in_use = 1;
-+
-+		mini_clock_rate = dev_read_u32_default(dev, "clock", 0x1000000);
-+	}
-+	if (uart_in_use > 1)
-+		log_err("No working serial: PL011 and MiniUART are both disabled.");
-+
-+	acpigen_write_scope(ctx, "\\_SB.BTH0");
-+	acpigen_write_name_integer(ctx, "URIU", uart_in_use);
-+	acpigen_pop_len(ctx);
-+
-+	acpigen_write_scope(ctx, "\\_SB.URTM");
-+	acpigen_write_name_integer(ctx, "MUCR", mini_clock_rate);
-+	acpigen_pop_len(ctx);
-+
-+	return 0;
-+}
-+
-+static int rpi_acpi_write_ssdt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
-+{
-+	struct acpi_table_header *ssdt;
-+	int ret;
-+
-+	ssdt = ctx->current;
-+	memset(ssdt, '\0', sizeof(struct acpi_table_header));
-+
-+	acpi_fill_header(ssdt, "SSDT");
-+	ssdt->revision = acpi_get_table_revision(ACPITAB_SSDT);
-+	ssdt->creator_revision = 1;
-+	ssdt->length = sizeof(struct acpi_table_header);
-+
-+	acpi_inc(ctx, sizeof(struct acpi_table_header));
-+
-+	ret = acpi_rpi_board_fill_ssdt(ctx);
-+	if (ret) {
-+		ctx->current = ssdt;
-+		return log_msg_ret("fill", ret);
++		acpi_write_pp_setup_one_page(page++, gicc);
 +	}
 +
-+	/* (Re)calculate length and checksum */
-+	ssdt->length = ctx->current - (void *)ssdt;
-+	ssdt->checksum = table_compute_checksum((void *)ssdt, ssdt->length);
-+	log_debug("SSDT at %p, length %x\n", ssdt, ssdt->length);
++	acpi_pp_etables = virt_to_phys(start) +
++			  ACPI_PP_PAGE_SIZE * ncpus;
++	acpi_pp_tables = virt_to_phys(start);
 +
-+	/* Drop the table if it is empty */
-+	if (ssdt->length == sizeof(struct acpi_table_header))
-+		return log_msg_ret("fill", -ENOENT);
-+	acpi_add_table(ctx, ssdt);
++	/* Make sure other cores see written value in memory */
++	if (!CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
++		flush_dcache_all();
 +
-+	return 0;
++	/* Send an event to wake up the secondary CPU. */
++	asm("dsb	ishst\n"
++	    "sev");
 +}
-+
-+ACPI_WRITER(5ssdt, "SSDT", rpi_acpi_write_ssdt, 0);
-+#endif
-diff --git a/board/raspberrypi/rpi/sdhc.asl b/board/raspberrypi/rpi/sdhc.asl
-new file mode 100644
-index 0000000000..3feac14acf
---- /dev/null
-+++ b/board/raspberrypi/rpi/sdhc.asl
-@@ -0,0 +1,111 @@
-+/** @file
+diff --git a/include/acpi/acpi_table.h b/include/acpi/acpi_table.h
+index 07c5f65d75..b8b1f1338c 100644
+--- a/include/acpi/acpi_table.h
++++ b/include/acpi/acpi_table.h
+@@ -1237,6 +1237,16 @@ int acpi_iort_add_smmu_v3(struct acpi_ctx *ctx,
+  */
+ void *acpi_fill_madt(struct acpi_madt *madt, struct acpi_ctx *ctx);
+ 
++/**
++ * acpi_write_park() - Installs the ACPI parking protocol.
 + *
-+ *  [DSDT] SD controller/card definition (SDHC)
++ * Sets up the ACPI parking protocol and installs the spinning code for
++ * secondary CPUs.
 + *
-+ *  Copyright (c) 2020, Pete Batard <pete@akeo.ie>
-+ *  Copyright (c) 2018, Andrey Warkentin <andrey.warkentin@gmail.com>
-+ *  Copyright (c) Microsoft Corporation. All rights reserved.
-+ *
-+ *  SPDX-License-Identifier: BSD-2-Clause-Patent
-+ *
-+ **/
++ * @madt: The MADT to update
++ */
++void acpi_write_park(struct acpi_madt *madt);
 +
-+#include <asm/arch/acpi/bcm2836_sdhost.h>
-+#include <asm/arch/acpi/bcm2836_sdio.h>
+ /**
+  * acpi_get_rsdp_addr() - get ACPI RSDP table address
+  *
+diff --git a/include/bloblist.h b/include/bloblist.h
+index b0706b5637..ff32d3fecf 100644
+--- a/include/bloblist.h
++++ b/include/bloblist.h
+@@ -110,6 +110,7 @@ enum bloblist_tag_t {
+ 	BLOBLISTT_ACPI_TABLES = 4,
+ 	BLOBLISTT_TPM_EVLOG = 5,
+ 	BLOBLISTT_TPM_CRB_BASE = 6,
++	BLOBLISTT_ACPI_PP = 7,
+ 
+ 	/* Standard area to allocate blobs used across firmware components */
+ 	BLOBLISTT_AREA_FIRMWARE = 0x10,
+diff --git a/lib/Kconfig b/lib/Kconfig
+index ea444354eb..f4d587136c 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -314,6 +314,22 @@ config GENERATE_ACPI_TABLE
+ 	  by the operating system. It defines platform-independent interfaces
+ 	  for configuration and power management monitoring.
+ 
++config ACPI_PARKING_PROTOCOL
++	bool "Support ACPI parking protocol method"
++	depends on GENERATE_ACPI_TABLE
++	depends on ARMV8_MULTIENTRY
++	depends on BLOBLIST_TABLES
++	default y if !SEC_FIRMWARE_ARMV8_PSCI && !ARMV8_PSCI
++	help
++	  Say Y here to support "ACPI parking protocol" enable method
++	  for booting Linux.
 +
-+#include "acpitables.h"
++	  To use this feature, you must do:
++	    - Bring secondary CPUs into U-Boot proper in a board-specific
++	      manner.  This must be done *after* relocation.  Otherwise, the
++	      secondary CPUs will spin in unprotected memory-area because the
++	      master CPU protects the relocated spin code.
 +
-+//
-+// Note: UEFI can use either SDHost or Arasan. We expose both to the OS.
-+//
+ config SPL_TINY_MEMSET
+ 	bool "Use a very small memset() in SPL"
+ 	depends on SPL
+diff --git a/lib/acpi/acpi_table.c b/lib/acpi/acpi_table.c
+index d6357bdc4d..3a1b18f93b 100644
+--- a/lib/acpi/acpi_table.c
++++ b/lib/acpi/acpi_table.c
+@@ -286,6 +286,10 @@ int acpi_write_madt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
+ 
+ 	/* (Re)calculate length and checksum */
+ 	header->length = (uintptr_t)current - (uintptr_t)madt;
 +
-+// ArasanSD 3.0 SD Host Controller. (brcm,bcm2835-sdhci)
-+Device (SDC1)
-+{
-+  Name (_HID, "BCM2847")
-+  Name (_CID, "BCM2847")
-+  Name (_UID, 0x0)
-+  Name (_CCA, 0x0)
-+  Name (_S1D, 0x1)
-+  Name (_S2D, 0x1)
-+  Name (_S3D, 0x1)
-+  Name (_S4D, 0x1)
++	if (IS_ENABLED(CONFIG_ACPI_PARKING_PROTOCOL))
++		acpi_write_park(madt);
 +
-+  Name (RBUF, ResourceTemplate ()
-+  {
-+    MEMORY32FIXED (ReadWrite, 0, MMCHS1_LENGTH, RMEM)
-+    Interrupt (ResourceConsumer, Level, ActiveHigh, Shared) { BCM2836_MMCHS1_INTERRUPT }
-+  })
-+  Method (_CRS, 0x0, Serialized)
-+  {
-+    MEMORY32SETBASE (RBUF, RMEM, RBAS, MMCHS1_OFFSET)
-+    Return (^RBUF)
-+  }
-+
-+  // The standard CAPs registers on this controller
-+  // appear to be 0, lets set some minimal defaults
-+  // Since this cap doesn't indicate DMA capability
-+  // we don't need a _DMA()
-+  Name (_DSD, Package () {
-+    ToUUID("daffd814-6eba-4d8c-8a91-bc9bbf4aa301"),
-+    Package () {
-+      Package () { "sdhci-caps", 0x0120fa81 },
-+    }
-+  })
-+
-+  //
-+  // A child device that represents the
-+  // sd card, which is marked as non-removable.
-+  //
-+  Device (SDMM)
-+  {
-+    Method (_ADR)
-+    {
-+      Return (0)
-+    }
-+    Method (_RMV) // Is removable
-+    {
-+      Return (0) // 0 - fixed
-+    }
-+  }
-+}
-+
-+// Broadcom SDHost 2.0 SD Host Controller
-+Device (SDC2)
-+{
-+  Name (_HID, "BCM2855")
-+  Name (_CID, "BCM2855")
-+  Name (_UID, 0x0)
-+  Name (_CCA, 0x0)
-+  Name (_S1D, 0x1)
-+  Name (_S2D, 0x1)
-+  Name (_S3D, 0x1)
-+  Name (_S4D, 0x1)
-+
-+  Name (RBUF, ResourceTemplate ()
-+  {
-+    MEMORY32FIXED (ReadWrite, 0, SDHOST_LENGTH, RMEM)
-+    Interrupt (ResourceConsumer, Level, ActiveHigh, Exclusive) { BCM2836_SDHOST_INTERRUPT }
-+  })
-+  Method (_CRS, 0x0, Serialized)
-+  {
-+    MEMORY32SETBASE (RBUF, RMEM, RBAS, SDHOST_OFFSET)
-+    Return (^RBUF)
-+  }
-+
-+  //
-+  // A child device that represents the
-+  // sd card, which is marked as non-removable.
-+  //
-+  Device (SDMM)
-+  {
-+    Method (_ADR)
-+    {
-+      Return (0)
-+    }
-+    Method (_RMV) // Is removable
-+    {
-+      Return (0) // 0 - fixed
-+    }
-+  }
-+}
-\ No newline at end of file
-diff --git a/board/raspberrypi/rpi/uart.asl b/board/raspberrypi/rpi/uart.asl
-new file mode 100644
-index 0000000000..78dc9a74df
---- /dev/null
-+++ b/board/raspberrypi/rpi/uart.asl
-@@ -0,0 +1,208 @@
-+/** @file
-+ *
-+ *  [DSDT] Serial devices (UART).
-+ *
-+ *  Copyright (c) 2021, ARM Limited. All rights reserved.
-+ *  Copyright (c) 2020, Pete Batard <pete@akeo.ie>
-+ *  Copyright (c) 2018, Andrey Warkentin <andrey.warkentin@gmail.com>
-+ *  Copyright (c) Microsoft Corporation. All rights reserved.
-+ *
-+ *  SPDX-License-Identifier: BSD-2-Clause-Patent
-+ *
-+ **/
-+
-+#include <asm/arch/acpi/bcm2836.h>
-+
-+#include "acpitables.h"
-+
-+// PL011 based UART.
-+Device (URT0)
-+{
-+  Name (_HID, "BCM2837")
-+  Name (_CID, "ARMH0011")
-+  Name (_UID, 0x4)
-+  Name (_CCA, 0x0)
-+
-+  Name (RBUF, ResourceTemplate ()
-+  {
-+    MEMORY32FIXED (ReadWrite, 0, BCM2836_PL011_UART_LENGTH, RMEM)
-+    Interrupt (ResourceConsumer, Level, ActiveHigh, Exclusive) { BCM2836_PL011_UART_INTERRUPT }
-+  })
-+  Method (_CRS, 0x0, Serialized)
-+  {
-+    MEMORY32SETBASE (RBUF, RMEM, RBAS, BCM2836_PL011_UART_OFFSET)
-+    Return (^RBUF)
-+  }
-+
-+  Name (CLCK, 48000000)
-+
-+  Name (_DSD, Package ()
-+  {
-+    ToUUID ("daffd814-6eba-4d8c-8a91-bc9bbf4aa301"), Package ()
-+    {
-+      Package (2) { "clock-frequency", CLCK },
-+    }
-+  })
-+}
-+
-+//
-+// UART Mini.
-+//
-+// This device is referenced in the DBG2 table, which will cause the system to
-+// not start the driver when the debugger is enabled and to mark the device
-+// with problem code 53 (CM_PROB_USED_BY_DEBUGGER).
-+//
-+
-+Device (URTM)
-+{
-+  Name (_HID, "BCM2836")
-+  Name (_CID, "BCM2836")
-+  Name (_UID, 0x0)
-+  Name (_CCA, 0x0)
-+
-+  Name (RBUF, ResourceTemplate ()
-+  {
-+    MEMORY32FIXED (ReadWrite, 0, BCM2836_MINI_UART_LENGTH, RMEM)
-+    Interrupt(ResourceConsumer, Level, ActiveHigh, Shared) { BCM2836_MINI_UART_INTERRUPT }
-+
-+  })
-+  Method (_CRS, 0x0, Serialized)
-+  {
-+    MEMORY32SETBASE (RBUF, RMEM, RBAS, BCM2836_MINI_UART_OFFSET)
-+    Return (^RBUF)
-+  }
-+
-+  //
-+  // Mini Uart Clock Rate will be dynamically updated during boot
-+  //
-+  External (\_SB.URTM.MUCR, IntObj)
-+
-+  Name (_DSD, Package ()
-+  {
-+    ToUUID ("daffd814-6eba-4d8c-8a91-bc9bbf4aa301"), Package ()
-+    {
-+      Package (2) { "clock-frequency", MUCR },
-+    }
-+  })
-+}
-+
-+//
-+// Multifunction serial bus device to support Bluetooth function.
-+//
-+Device(BTH0)
-+{
-+  Name (_HID, "BCM2EA6")
-+  Name (_CID, "BCM2EA6")
-+
-+  //
-+  // UART In Use will be dynamically updated during boot
-+  //
-+  External (\_SB.BTH0.URIU, IntObj)
-+
-+  Method (_STA)
-+  {
-+    Return (0xf)
-+  }
-+
-+  //
-+  // Resource for URT0 (PL011)
-+  //
-+  Name (BTPL, ResourceTemplate ()
-+  {
-+    UARTSerialBus(
-+      115200,        // InitialBaudRate: in BPS
-+      ,              // BitsPerByte: default to 8 bits
-+      ,              // StopBits: Defaults to one bit
-+      0x00,          // LinesInUse: 8 1-bit flags to
-+                    //   declare enabled control lines.
-+                    //   Raspberry Pi does not exposed
-+                    //   HW control signals -> not supported.
-+                    //   Optional bits:
-+                    //   - Bit 7 (0x80) Request To Send (RTS)
-+                    //   - Bit 6 (0x40) Clear To Send (CTS)
-+                    //   - Bit 5 (0x20) Data Terminal Ready (DTR)
-+                    //   - Bit 4 (0x10) Data Set Ready (DSR)
-+                    //   - Bit 3 (0x08) Ring Indicator (RI)
-+                    //   - Bit 2 (0x04) Data Carrier Detect (DTD)
-+                    //   - Bit 1 (0x02) Reserved. Must be 0.
-+                    //   - Bit 0 (0x01) Reserved. Must be 0.
-+      ,              // IsBigEndian:
-+                    //   default to LittleEndian.
-+      ,              // Parity: Defaults to no parity
-+      ,              // FlowControl: Defaults to
-+                    //   no flow control.
-+      16,            // ReceiveBufferSize
-+      16,            // TransmitBufferSize
-+      "\\_SB.GDV0.URT0",  // ResourceSource:
-+                    //   UART bus controller name
-+      ,              // ResourceSourceIndex: assumed to be 0
-+      ,              // ResourceUsage: assumed to be
-+                    //   ResourceConsumer
-+      UAR0,          // DescriptorName: creates name
-+                    //   for offset of resource descriptor
-+    )                // Vendor data
-+  })
-+
-+  //
-+  // Resource for URTM (miniUART)
-+  //
-+  Name (BTMN, ResourceTemplate ()
-+  {
-+    //
-+    // BT UART: ResourceSource will be dynamically updated to
-+    // either URT0 (PL011) or URTM (miniUART) during boot
-+    //
-+    UARTSerialBus(
-+      115200,        // InitialBaudRate: in BPS
-+      ,              // BitsPerByte: default to 8 bits
-+      ,              // StopBits: Defaults to one bit
-+      0x00,          // LinesInUse: 8 1-bit flags to
-+                    //   declare enabled control lines.
-+                    //   Raspberry Pi does not exposed
-+                    //   HW control signals -> not supported.
-+                    //   Optional bits:
-+                    //   - Bit 7 (0x80) Request To Send (RTS)
-+                    //   - Bit 6 (0x40) Clear To Send (CTS)
-+                    //   - Bit 5 (0x20) Data Terminal Ready (DTR)
-+                    //   - Bit 4 (0x10) Data Set Ready (DSR)
-+                    //   - Bit 3 (0x08) Ring Indicator (RI)
-+                    //   - Bit 2 (0x04) Data Carrier Detect (DTD)
-+                    //   - Bit 1 (0x02) Reserved. Must be 0.
-+                    //   - Bit 0 (0x01) Reserved. Must be 0.
-+      ,              // IsBigEndian:
-+                    //   default to LittleEndian.
-+      ,              // Parity: Defaults to no parity
-+      ,              // FlowControl: Defaults to
-+                    //   no flow control.
-+      16,            // ReceiveBufferSize
-+      16,            // TransmitBufferSize
-+      "\\_SB.GDV0.URTM",  // ResourceSource:
-+                    //   UART bus controller name
-+      ,              // ResourceSourceIndex: assumed to be 0
-+      ,              // ResourceUsage: assumed to be
-+                    //   ResourceConsumer
-+      UARM,          // DescriptorName: creates name
-+                    //   for offset of resource descriptor
-+    )                // Vendor data
-+  })
-+
-+  Method (_CRS, 0x0, Serialized)
-+  {
-+    if (URIU == 0)
-+    {
-+      //
-+      // PL011 UART is configured for console output
-+      // Return Mini UART for Bluetooth
-+      //
-+      return (^BTMN)
-+    }
-+    else
-+    {
-+      //
-+      // Mini UART is configured for console output
-+      // Return PL011 UART for Bluetooth
-+      //
-+      return (^BTPL)
-+    }
-+  }
-+}
+ 	header->checksum = table_compute_checksum((void *)madt, header->length);
+ 	acpi_add_table(ctx, madt);
+ 	ctx->current = (void *)madt + madt->header.length;
 -- 
 2.46.0
 
