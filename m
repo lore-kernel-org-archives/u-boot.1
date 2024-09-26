@@ -4,72 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAC65CDE03F
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 22:41:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 638C9CDE03F
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 22:42:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D903488F12;
-	Fri, 27 Sep 2024 00:41:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3FD8488FCB;
+	Fri, 27 Sep 2024 00:42:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LnIeGEGO";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PxuUB75I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D88188F12; Fri, 27 Sep 2024 00:41:48 +0200 (CEST)
-Received: from mail-qt1-x843.google.com (mail-qt1-x843.google.com
- [IPv6:2607:f8b0:4864:20::843])
+ id 0180288FCA; Fri, 27 Sep 2024 00:42:03 +0200 (CEST)
+Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
+ [IPv6:2607:f8b0:4864:20::82b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76B2488EA3
- for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 00:41:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6131788F75
+ for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 00:41:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qt1-x843.google.com with SMTP id
- d75a77b69052e-4581d2b0fbaso9663921cf.1
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 15:41:46 -0700 (PDT)
+Received: by mail-qt1-x82b.google.com with SMTP id
+ d75a77b69052e-458366791aaso8329861cf.1
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 15:41:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727390505; x=1727995305; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727390518; x=1727995318; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oX0MJyqF9F9Kid8py+zUqWPWLfVJEWYGa5UwpFhDgZk=;
- b=LnIeGEGOgCsvnn1wU63RidM8ySl9AonuuLdfWfs683jlm19+gm5Q/F3qW50bVkxSYh
- /AoQ2R9+IE3xgTD3NFiGuGI8XkV6zt3uu27omp2lYfWcjg3MvfDuf+PH0JBx2sqnb9ZB
- qvI2E7Y+UmqmuzPzEdlPjAn5G0xJU8l5nw+as=
+ bh=9akIqIJ2QY3zbd3ieLrogNS5ycQGIfe/Xfum9QndAJ8=;
+ b=PxuUB75IcZ5kaI4bFFbKQTzqiTtx9/vKncDROlBFGo1Vl90MY4T5D0aZC2pusG6Ube
+ BQDkfm6dt9J+ET17mo2j+L/ZlZxJaQLIG5KV9J7cGMWQlMULQfBlpJHzlDjjQ3ziW6Jd
+ H2zIe1klP22l7g4M0WZuypjwDF8okLwqfxTaw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727390505; x=1727995305;
+ d=1e100.net; s=20230601; t=1727390518; x=1727995318;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oX0MJyqF9F9Kid8py+zUqWPWLfVJEWYGa5UwpFhDgZk=;
- b=hxU6FKiLYHqd6GJGudQWhmu+8j1JH/yj+NYl7mnvSKq8iQwDGaldA4Lf+7M1Qxi7hJ
- fqS+dxhvkIIbOLIm3X67zA/0aQTCQkaIywm020mSF+zGD6MDJ/dRsWN7bzxh1s89cCbY
- 7ebesD8QIBA+NDsIMu/apF2qiWhnH4/0rcv3n7IokS5/VvKEapHnoTG/lWKKNZdQp9ju
- rHtxHK6CtJUy0+v1CuObLarfMbLRp6nJAhOq2Qilh0pB6AcVw+ObOYH5nIPRkNphM4P4
- aH8jwrGUfLptDE/tb5c7KdE6yhJ0IM6Z2ctkHLnFK08sjhMIGrAXUBuwpvYk2e4BVw1P
- SL/A==
-X-Gm-Message-State: AOJu0Yx1jUWrQUAFt3LfM/eEhTB2rl8ig78imbMJdNp7WMQEoQcGwuNk
- E0X0zSRKh/splFixNIkoxP+AfynJvu6jzuiUkIJGAT3cwe2FpXv2GR5tUOYN6au1utEbKtJME80
- ABmZB3F9irQ==
-X-Google-Smtp-Source: AGHT+IHxLbQQ38RGKIcYNoXMjhsz5+hHwB4xcg1YvOVniMwL5MuaOfASDhQziNUyxGmvU/0wG+auDw==
-X-Received: by 2002:ac8:5856:0:b0:458:3e19:8271 with SMTP id
- d75a77b69052e-45c9f20f575mr15389881cf.34.1727390505292; 
- Thu, 26 Sep 2024 15:41:45 -0700 (PDT)
+ bh=9akIqIJ2QY3zbd3ieLrogNS5ycQGIfe/Xfum9QndAJ8=;
+ b=OhRZJg763xzzHM4LJZyHIOA2J+OShkywcFrqbinr0zCxnkP/WcsIorFRvAAgUfXAe0
+ liGYVxBU+ban0ffJMGDeEl2HU3hKaiYul60UHHfLPLBHhWG8Eq2/300srwxLAefiv+P+
+ GAel0yDW/y4dwtr0/AHoSsoAKa2azPD9iNSE50Xz1lF5923aiu6no3q9Ng+084eBQVqb
+ Uf04JWFQTuOc+6uOH6RKT+LaG+HpIQ/AL2EYckd04lLBGJkLhzx7kwXmAGf71MufzNVa
+ b+NPKf8EgDImD28bfA3q940RN1QhgMB2iNCvajYPXivwQaUlWei6OnRhHlrZHAWattiL
+ RbjQ==
+X-Gm-Message-State: AOJu0YwSElRyv9docbL8OcqG6qY0ps0d15bZTW+1MPB+Grt6Cls5//rv
+ G0jyHk7BxzNuv1oCYPB5V7rlJ285O1RYlnEfXa6K2zdphumumhd9nIhrIDlCLPXb3EYb5+3BJw3
+ iVO4iv5g=
+X-Google-Smtp-Source: AGHT+IHd3Ud1W2Mv4mTs+r5AsWVvXpthm4hk2UHySQ3RXegpv+me/ieESPb5hV4Kd0nUpyNynRQKjw==
+X-Received: by 2002:ac8:5756:0:b0:458:1749:e195 with SMTP id
+ d75a77b69052e-45c9f1b1fe4mr16299541cf.10.1727390518156; 
+ Thu, 26 Sep 2024 15:41:58 -0700 (PDT)
 Received: from chromium.org ([205.220.129.31])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-45c9f350fadsm2738461cf.80.2024.09.26.15.41.36
+ d75a77b69052e-45c9f350fadsm2738461cf.80.2024.09.26.15.41.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Sep 2024 15:41:45 -0700 (PDT)
+ Thu, 26 Sep 2024 15:41:57 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Bryan Brattlof <bb@ti.com>, Greg Malysa <greg.malysa@timesys.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Nishanth Menon <nm@ti.com>, Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH 13/42] xpl: Define CONFIG_SPL_BUILD only for the SPL build
-Date: Fri, 27 Sep 2024 00:35:38 +0200
-Message-ID: <20240926223814.1276764-14-sjg@chromium.org>
+ Jeffy Chen <jeffy.chen@rock-chips.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Lukasz Majewski <lukma@denx.de>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Sean Anderson <seanga2@gmail.com>, Tim Lunn <tim@feathertop.org>,
+ huang lin <hl@rock-chips.com>
+Subject: [PATCH 14/42] rockchip: Simplify check for SPL
+Date: Fri, 27 Sep 2024 00:35:39 +0200
+Message-ID: <20240926223814.1276764-15-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240926223814.1276764-1-sjg@chromium.org>
 References: <20240926223814.1276764-1-sjg@chromium.org>
@@ -91,61 +94,180 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Make this define mean SPL only, not TPL, VPL, etc.
+Now that SPL means SPL (only) and is not defined for TPL, simplify some
+checks for SPL.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- scripts/Makefile.autoconf | 4 ++--
- scripts/Makefile.xpl      | 9 ++++++---
- 2 files changed, 8 insertions(+), 5 deletions(-)
+ arch/arm/include/asm/arch-rockchip/boot0.h |  3 +--
+ arch/arm/mach-rockchip/rk3399/rk3399.c     |  2 +-
+ drivers/clk/rockchip/clk_rk3368.c          |  8 ++++----
+ drivers/ram/rockchip/sdram_rk3288.c        | 10 +++++-----
+ drivers/ram/rockchip/sdram_rk3399.c        |  2 +-
+ drivers/ram/rockchip/sdram_rv1126.c        |  9 +++------
+ 6 files changed, 15 insertions(+), 19 deletions(-)
 
-diff --git a/scripts/Makefile.autoconf b/scripts/Makefile.autoconf
-index d7544022a31..c1eab2f3a1d 100644
---- a/scripts/Makefile.autoconf
-+++ b/scripts/Makefile.autoconf
-@@ -87,11 +87,11 @@ spl/u-boot.cfg: include/config.h FORCE
+diff --git a/arch/arm/include/asm/arch-rockchip/boot0.h b/arch/arm/include/asm/arch-rockchip/boot0.h
+index edb2a31c348..918f0495fa0 100644
+--- a/arch/arm/include/asm/arch-rockchip/boot0.h
++++ b/arch/arm/include/asm/arch-rockchip/boot0.h
+@@ -54,7 +54,6 @@ _start:
+ 	ARM_VECTORS
+ #endif
  
- tpl/u-boot.cfg: include/config.h FORCE
- 	$(Q)mkdir -p $(dir $@)
--	$(call cmd,u_boot_cfg,-DCONFIG_XPL_BUILD -DCONFIG_SPL_BUILD -DCONFIG_TPL_BUILD)
-+	$(call cmd,u_boot_cfg,-DCONFIG_XPL_BUILD -DCONFIG_TPL_BUILD)
+-#if !defined(CONFIG_TPL_BUILD) && defined(CONFIG_XPL_BUILD) && \
+-	(CONFIG_ROCKCHIP_SPL_RESERVE_IRAM > 0)
++#if defined(CONFIG_SPL_BUILD) && (CONFIG_ROCKCHIP_SPL_RESERVE_IRAM > 0)
+ 	.space CONFIG_ROCKCHIP_SPL_RESERVE_IRAM	/* space for the ATF data */
+ #endif
+diff --git a/arch/arm/mach-rockchip/rk3399/rk3399.c b/arch/arm/mach-rockchip/rk3399/rk3399.c
+index edccb2a3980..47bcc71038b 100644
+--- a/arch/arm/mach-rockchip/rk3399/rk3399.c
++++ b/arch/arm/mach-rockchip/rk3399/rk3399.c
+@@ -169,7 +169,7 @@ void board_debug_uart_init(void)
+ }
+ #endif
  
- vpl/u-boot.cfg: include/config.h FORCE
- 	$(Q)mkdir -p $(dir $@)
--	$(call cmd,u_boot_cfg,-DCONFIG_XPL_BUILD -DCONFIG_SPL_BUILD -DCONFIG_VPL_BUILD)
-+	$(call cmd,u_boot_cfg,-DCONFIG_XPL_BUILD -DCONFIG_VPL_BUILD)
+-#if defined(CONFIG_XPL_BUILD) && !defined(CONFIG_TPL_BUILD)
++#if defined(CONFIG_SPL_BUILD)
+ static void rk3399_force_power_on_reset(void)
+ {
+ 	ofnode node;
+diff --git a/drivers/clk/rockchip/clk_rk3368.c b/drivers/clk/rockchip/clk_rk3368.c
+index 630253fbb1d..5ba19bce7b2 100644
+--- a/drivers/clk/rockchip/clk_rk3368.c
++++ b/drivers/clk/rockchip/clk_rk3368.c
+@@ -50,7 +50,7 @@ struct pll_div {
+ 		       (_nr * _no) == hz, #hz "Hz cannot be hit with PLL " \
+ 		       "divisors on line " __stringify(__LINE__));
  
- include/autoconf.mk: u-boot.cfg
- 	$(call cmd,autoconf)
-diff --git a/scripts/Makefile.xpl b/scripts/Makefile.xpl
-index 63d4ec334bc..b43ff998679 100644
---- a/scripts/Makefile.xpl
-+++ b/scripts/Makefile.xpl
-@@ -21,9 +21,10 @@ include $(srctree)/scripts/Kbuild.include
+-#if IS_ENABLED(CONFIG_XPL_BUILD) || IS_ENABLED(CONFIG_TPL_BUILD)
++#if IS_ENABLED(CONFIG_XPL_BUILD)
+ static const struct pll_div apll_l_init_cfg = PLL_DIVISORS(APLL_L_HZ, 12, 2);
+ static const struct pll_div apll_b_init_cfg = PLL_DIVISORS(APLL_B_HZ, 1, 2);
+ #if !defined(CONFIG_TPL_BUILD)
+@@ -88,7 +88,7 @@ static uint32_t rkclk_pll_get_rate(struct rk3368_cru *cru,
+ 	}
+ }
  
- -include include/config/auto.conf
+-#if IS_ENABLED(CONFIG_XPL_BUILD) || IS_ENABLED(CONFIG_TPL_BUILD)
++#if IS_ENABLED(CONFIG_XPL_BUILD)
+ static int rkclk_set_pll(struct rk3368_cru *cru, enum rk3368_pll_id pll_id,
+ 			 const struct pll_div *div)
+ {
+@@ -130,7 +130,7 @@ static int rkclk_set_pll(struct rk3368_cru *cru, enum rk3368_pll_id pll_id,
+ }
+ #endif
  
--# This file contains 0, 2 or 3 lines
-+# This file contains 0, or 2 lines
- # It is empty for U-Boot proper (where $(obj) is empty)
--# For any xPL build it contains CONFIG_SPL_BUILD=y and CONFIG_XPL_BUILD=y
-+# For any xPL build it contains CONFIG_XPL_BUILD=y
-+#    - for SPL builds it also contains CONFIG_SPL_BUILD=y
- #    - for TPL builds it also contains CONFIG_TPL_BUILD=y
- #    - for VPL builds it also contains CONFIG_VPL_BUILD=y
- -include $(obj)/include/autoconf.mk
-@@ -31,7 +32,9 @@ include $(srctree)/scripts/Kbuild.include
- UBOOTINCLUDE := -I$(obj)/include $(UBOOTINCLUDE)
+-#if IS_ENABLED(CONFIG_XPL_BUILD) || IS_ENABLED(CONFIG_TPL_BUILD)
++#if IS_ENABLED(CONFIG_XPL_BUILD)
+ static void rkclk_init(struct rk3368_cru *cru)
+ {
+ 	u32 apllb, aplll, dpll, cpll, gpll;
+@@ -586,7 +586,7 @@ static int rk3368_clk_probe(struct udevice *dev)
  
- KBUILD_CPPFLAGS += -DCONFIG_XPL_BUILD
--KBUILD_CPPFLAGS += -DCONFIG_XPL_BUILD
-+ifeq ($(CONFIG_SPL_BUILD),y)
-+KBUILD_CPPFLAGS += -DCONFIG_SPL_BUILD
-+endif
- ifeq ($(CONFIG_TPL_BUILD),y)
- KBUILD_CPPFLAGS += -DCONFIG_TPL_BUILD
- else
+ 	priv->cru = map_sysmem(plat->dtd.reg[0], plat->dtd.reg[1]);
+ #endif
+-#if IS_ENABLED(CONFIG_XPL_BUILD) || IS_ENABLED(CONFIG_TPL_BUILD)
++#if IS_ENABLED(CONFIG_XPL_BUILD)
+ 	rkclk_init(priv->cru);
+ #endif
+ 
+diff --git a/drivers/ram/rockchip/sdram_rk3288.c b/drivers/ram/rockchip/sdram_rk3288.c
+index 25ceab98ee9..b6d51068baa 100644
+--- a/drivers/ram/rockchip/sdram_rk3288.c
++++ b/drivers/ram/rockchip/sdram_rk3288.c
+@@ -84,7 +84,7 @@ const int ddrconf_table[] = {
+ #define DQS_GATE_TRAINING_ERROR_RANK1	(2 << 4)
+ 
+ #if defined(CONFIG_TPL_BUILD) || \
+-	(!defined(CONFIG_TPL) && defined(CONFIG_XPL_BUILD))
++	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
+ static void copy_to_reg(u32 *dest, const u32 *src, u32 n)
+ {
+ 	int i;
+@@ -1041,7 +1041,7 @@ static int conv_of_plat(struct udevice *dev)
+ static int rk3288_dmc_probe(struct udevice *dev)
+ {
+ #if defined(CONFIG_TPL_BUILD) || \
+-	(!defined(CONFIG_TPL) && defined(CONFIG_XPL_BUILD))
++	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
+ 	struct rk3288_sdram_params *plat = dev_get_plat(dev);
+ 	struct udevice *dev_clk;
+ 	struct regmap *map;
+@@ -1051,7 +1051,7 @@ static int rk3288_dmc_probe(struct udevice *dev)
+ 
+ 	priv->pmu = syscon_get_first_range(ROCKCHIP_SYSCON_PMU);
+ #if defined(CONFIG_TPL_BUILD) || \
+-	(!defined(CONFIG_TPL) && defined(CONFIG_XPL_BUILD))
++	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
+ #if CONFIG_IS_ENABLED(OF_PLATDATA)
+ 	ret = conv_of_plat(dev);
+ 	if (ret)
+@@ -1119,13 +1119,13 @@ U_BOOT_DRIVER(rockchip_rk3288_dmc) = {
+ 	.of_match = rk3288_dmc_ids,
+ 	.ops = &rk3288_dmc_ops,
+ #if defined(CONFIG_TPL_BUILD) || \
+-	(!defined(CONFIG_TPL) && defined(CONFIG_XPL_BUILD))
++	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
+ 	.of_to_plat = rk3288_dmc_of_to_plat,
+ #endif
+ 	.probe = rk3288_dmc_probe,
+ 	.priv_auto	= sizeof(struct dram_info),
+ #if defined(CONFIG_TPL_BUILD) || \
+-	(!defined(CONFIG_TPL) && defined(CONFIG_XPL_BUILD))
++	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
+ 	.plat_auto	= sizeof(struct rk3288_sdram_params),
+ #endif
+ };
+diff --git a/drivers/ram/rockchip/sdram_rk3399.c b/drivers/ram/rockchip/sdram_rk3399.c
+index c3745f9445b..45270e27184 100644
+--- a/drivers/ram/rockchip/sdram_rk3399.c
++++ b/drivers/ram/rockchip/sdram_rk3399.c
+@@ -3196,7 +3196,7 @@ U_BOOT_DRIVER(dmc_rk3399) = {
+ 	.probe = rk3399_dmc_probe,
+ 	.priv_auto	= sizeof(struct dram_info),
+ #if defined(CONFIG_TPL_BUILD) || \
+-	(!defined(CONFIG_TPL) && defined(CONFIG_XPL_BUILD))
++	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
+ 	.plat_auto	= sizeof(struct rockchip_dmc_plat),
+ #endif
+ };
+diff --git a/drivers/ram/rockchip/sdram_rv1126.c b/drivers/ram/rockchip/sdram_rv1126.c
+index b371f597d23..58fd589f68e 100644
+--- a/drivers/ram/rockchip/sdram_rv1126.c
++++ b/drivers/ram/rockchip/sdram_rv1126.c
+@@ -33,8 +33,7 @@
+ #define DESKEW_MDF_DIFF_VAL		(1)
+ 
+ struct dram_info {
+-#if defined(CONFIG_TPL_BUILD) || \
+-	(!defined(CONFIG_TPL) && defined(CONFIG_XPL_BUILD))
++#if defined(CONFIG_TPL_BUILD) || defined(CONFIG_SPL_BUILD)
+ 	void __iomem *pctl;
+ 	void __iomem *phy;
+ 	struct rv1126_cru *cru;
+@@ -48,8 +47,7 @@ struct dram_info {
+ 	struct rv1126_pmugrf *pmugrf;
+ };
+ 
+-#if defined(CONFIG_TPL_BUILD) || \
+-	(!defined(CONFIG_TPL) && defined(CONFIG_XPL_BUILD))
++#if defined(CONFIG_TPL_BUILD) || defined(CONFIG_SPL_BUILD)
+ 
+ #define GRF_BASE_ADDR			0xfe000000
+ #define PMU_GRF_BASE_ADDR		0xfe020000
+@@ -3506,8 +3504,7 @@ error:
+ 
+ static int rv1126_dmc_probe(struct udevice *dev)
+ {
+-#if defined(CONFIG_TPL_BUILD) || \
+-	(!defined(CONFIG_TPL) && defined(CONFIG_XPL_BUILD))
++#if defined(CONFIG_TPL_BUILD) || defined(CONFIG_SPL_BUILD)
+ 	if (rv1126_dmc_init(dev))
+ 		return 0;
+ #else
 -- 
 2.43.0
 
