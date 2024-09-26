@@ -4,74 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21B42CDE03D
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 22:02:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 958A5CDE03D
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 22:03:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A49B88E96;
-	Fri, 27 Sep 2024 00:01:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3354988E8B;
+	Fri, 27 Sep 2024 00:03:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bFnEm/EI";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HfizVZ3R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63BCC88E5F; Fri, 27 Sep 2024 00:01:43 +0200 (CEST)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id DCD0788E96; Fri, 27 Sep 2024 00:03:14 +0200 (CEST)
+Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
+ [IPv6:2607:f8b0:4864:20::829])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22FA588E9F
- for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 00:01:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BC6CC88E5F
+ for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 00:03:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6cb2e136da3so9463166d6.1
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 15:01:41 -0700 (PDT)
+Received: by mail-qt1-x829.google.com with SMTP id
+ d75a77b69052e-45aeef3ce92so8446921cf.2
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 15:03:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727388099; x=1727992899; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
+ d=chromium.org; s=google; t=1727388191; x=1727992991; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
  bh=y6rJQMOhsSwQGbiM5xIK5Rhad8fP1T84y2nnqZJna0o=;
- b=bFnEm/EIt+8c+g5KqggHSDNa8A3Q3av6fYOvYgklX/uCrR5CjQ1P4iJG+pBYmf+Td0
- 0anE9dQyrZyQP2ix9x6Ozd41qv+1x5iVWF4dHXLotyy+A7EYwuNHDPcsYpL+cQqvuMCN
- EEHd7IJaEZbaXrIOBSbN9bRhGTzWtCnrwN9Rk=
+ b=HfizVZ3R/SeCo4uNK/lhmYAWB+EU85OcTI5ee5o1JtDX6IHEHxSlneiQ27olL8y0w0
+ bhWEXgBwKUf1He4ybRGhU42tMF0L4r6+7U2BD5NACF7kWPuFuGNKjIDWze8Irp86h1LA
+ 2RCPRC52Jt/nNN+WRCnwUBOLollJu3/aMFA6s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727388099; x=1727992899;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
+ d=1e100.net; s=20230601; t=1727388191; x=1727992991;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
  bh=y6rJQMOhsSwQGbiM5xIK5Rhad8fP1T84y2nnqZJna0o=;
- b=tqmwiBFAZNE7Gj1CXsaJkRgBYkKcT3KOVUpaUbawEQIW0+/iUl2beOF61HgxUdrrUC
- ieRZF5lTM7bCY19Dl3Lho5JKT2J3xu3RdcI1yEHhXa2xfZG7TZ+NBm0rwMQvbv3cLo/h
- dYrYP7Z4r5Qlipt/shlEAQitL15vwkLWy53cd92W426gopnfGjiOhREMBp+0baaF52XT
- pvwEFerqWuBwYDC/XYMdMWOdgP4RkIhzfEWxsnMOZbwer6N7WbkOrOC4Wx0QeFBnNQXH
- NOm5rEoSSkvaHQgdy2RCf/K7lXOMpxd+d2HyXpnnjxOPmHYgGu0rozWH0w2T0U1XH/3t
- hx/w==
-X-Gm-Message-State: AOJu0YxGjF0hHr7/GYMod69xZnvkZk6bEIO9dR5NWKvlGFt5n7D/u+2H
- +N3Zp3xmaFbZGu1hgnZ9kp+zxY7IWMRXIJnkS7n4pa4eYqbUuvAAxVtbEOZaKLqA+J63aybv5NT
- czzZ/MyE=
-X-Google-Smtp-Source: AGHT+IFrU6skhJCY0Uv4oJqf2BzcA9F+0nEVaOSPd0DzfiCosEPmHjbPPjZbkV9BSVjo9RBRLcpcsQ==
-X-Received: by 2002:a05:6214:590b:b0:6cb:2a26:af89 with SMTP id
- 6a1803df08f44-6cb3b644060mr22625036d6.34.1727388099374; 
- Thu, 26 Sep 2024 15:01:39 -0700 (PDT)
+ b=F2YFsNUzOkRquZAcHbNZQT+SX1LvYmZGwJSktBZnOEhvHbsGkdKeRAX0gV+fYrGbgW
+ HkhNwrb3I/pIKJ2BLevwzd8Op/oUssymBaS51IWTzGR63D/s6DuY51kPQZy1dDElzIaD
+ /9FmeboV/MTbDThK9uKV2G5sa+sPGiON4OGn0d+0/WMBnT9mFGFhRBzRvpHWby5pTRV9
+ 9MaNtgGuoVTjYopObpFEJDThqMd79SSr++Wx4Rk8NGAu/qeExaBvTjEVt8j92sijd+LA
+ 3mClyEM6MxUPustxRAX14TuGGjs13pVFxF2rpDTg3jOFZ0ADxHKuoRMRPZCsZhFK78l5
+ 7HtQ==
+X-Gm-Message-State: AOJu0Yz9VVxCRtoyxBDGukrk6zcS7dBeejJ7LdnxzoVxWHhVf+ruCfuU
+ ezEjCMGBADzpzsJkI2iNPfLZXh6uLP5i4OrIM3s79QE1UkrMXtpboSOck9DyRLM2l99Nxx0t9Ki
+ ooODzbm8=
+X-Google-Smtp-Source: AGHT+IFT62WViDi6PjHkSmjbwNoSyR7iiJuJHI2r7BntBgasvf1sKGPUVR/NRbb1eM5Mobr+cq6Q5w==
+X-Received: by 2002:a05:622a:11d2:b0:458:2bee:8d56 with SMTP id
+ d75a77b69052e-45c9f302443mr12709941cf.44.1727388191147; 
+ Thu, 26 Sep 2024 15:03:11 -0700 (PDT)
 Received: from chromium.org ([205.220.129.31])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6cb3b632366sm3079696d6.71.2024.09.26.15.01.31
+ d75a77b69052e-45c9f2e02c8sm2540211cf.44.2024.09.26.15.02.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Sep 2024 15:01:38 -0700 (PDT)
+ Thu, 26 Sep 2024 15:03:09 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+Cc: Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
 Subject: [PATCH v6 08/12] efi_loader: Disable ANSI output for tests
-Date: Thu, 26 Sep 2024 23:59:38 +0200
-Message-ID: <20240926215950.1265143-9-sjg@chromium.org>
+Date: Fri, 27 Sep 2024 00:02:19 +0200
+Message-ID: <20240926220226.1265965-9-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240926215950.1265143-1-sjg@chromium.org>
-References: <20240926215950.1265143-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
