@@ -4,55 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F6ACCDE03D
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 22:20:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53BAFCDE03D
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 22:20:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 628BF88F41;
-	Fri, 27 Sep 2024 00:20:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C99D188F2A;
+	Fri, 27 Sep 2024 00:20:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1727389236;
-	bh=hwlKn6w62HRl+tUD6nn63TnFGrZ23krRcHwgx4T3ClU=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	s=phobos-20191101; t=1727389238;
+	bh=qQdtIohOnVZnznPY5RWenU1yzPJ6C2j5fuvXlQvHmcE=;
+	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=bLKDLQbUt7XvHpfAIiAp6u8aRekQQDLHNAd+hlaWqoPqP/vJm0RP3694JI4EpyxlA
-	 JwLLKBjZR0WdX2npZN16hH9ChgsB/c+rugC7+8UTRYv18N5xuuXgLd1dSdlz25T4vO
-	 5TfJBFZ77OpOhmSoFe4DJm4/8eKIwANUbVtZpvCOE6GZ6oAawQuCbtaBvjLuP2dqbr
-	 L3ithobUOq62P82Hgm4JjfzzDUHy0VC2NiA55juTs1lR+vE9B3oypdbfGFhNWvROtz
-	 vW8C7gnp3RFaoCeITun6186P8lLW4FnyWiG51fd09CLmxNtxjL3wUwqXCOXOyMoMgo
-	 1tBG+AVjApaUg==
+	b=fsIoPqwqaLDV+S1sFb8goevwOVy3XjteCWpJLd24h54qr7tdg+I5vny9QUQG7p3LO
+	 FjNntYhVOQyOqIctHKhyxPY1gMJZr/H2ivXgBTOLfLlDz7tuPQWd+ZRXRydwsHWdxo
+	 gKzrZTq0tVPFU61+8f2ZKScewed7OgHMAAOzpOz+LC7gMzbrJod+JgFrqi9xqQpQt6
+	 Ley9VnoMmXlzEbLSz92zlg8vCXqfi9VvxD2rV6F2cRovuHGXjyL+T5YS1Lmfu9qghf
+	 d9+LvHqYn+eZ+UOXYQ1YuSEqpYcJZTu64a9hPw55L1xSDDlJ2wEXX5IeFgEKUWB6YV
+	 hNFhUK0FsZxlA==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 2FA2488F20;
+ by phobos.denx.de (Postfix) with ESMTPSA id A0F3888F2A;
  Fri, 27 Sep 2024 00:20:34 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1727389234;
- bh=hwlKn6w62HRl+tUD6nn63TnFGrZ23krRcHwgx4T3ClU=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=h3K4pjCKWuNbWQ1wgDW/vhAUgcQSAakIdQKZ2HyDnZweP9nyjjO13VYCHO9MxDraJ
- cFj5eFRzGGUBrBzmV1nBxMLbEk8YSJMC/fNLap1whSaZRxHZE1J5lbxyxQdvBIFbyd
- lGEClWZYAaTMT8erR5oNoQrx0GqQo7/jSTaZ15PI2ljUJPp98Z3lQlgKE4HMMgBKMY
- 2PL6ORvTawAzcIPLGPm/k+mjK2FUi+psKul1OFpoLjvzD99OAbV+Y87tcCUPtqGmX0
- sKN1aIe1jeMCA7PikGUXgUF6/JocXyGAfIH/F2Rr7Q0RF7T4DjLQJXclG5Vvo/3pnn
- NLZ5eUspyWiow==
-Message-ID: <0ccbc497-e631-4239-b1fd-b7767e428d35@denx.de>
-Date: Fri, 27 Sep 2024 00:19:20 +0200
+ s=phobos-20191101; t=1727389235;
+ bh=qQdtIohOnVZnznPY5RWenU1yzPJ6C2j5fuvXlQvHmcE=;
+ h=Date:From:Subject:To:Cc:References:In-Reply-To:From;
+ b=KvDfGV+Txbxc5HKLiDpMyAenSAhDyurcnSk7STOM03lbdrXcSTxeOj8RDtRbbmDqL
+ AUhRjAO+PrRM1I664E3rbyUzwtoPt9QSQ2g11suT27EbyF+HYiT+AGp6y0BT+1e0cy
+ 1h7P3lZjCtgena5mElL2YPotOj1xIomGyfGcQxO9mN2QzHGI92+wu0tUdaMsFxWHQY
+ UJUFeKCzZP7extMuCjNHJRpPGUHvO+jyv/+xjV17NTHWDzWB+KZdG8mrJsKWWQYPub
+ O5+wRiduCu/hXst6hmR921V5emPFZORGKMOpkU7BxQwTPjr+u1Wj5mK8JJw4DfkfhK
+ WFS1fBcTVma9Q==
+Message-ID: <25ee832c-5688-4a79-9c34-a2e34ec89a76@denx.de>
+Date: Fri, 27 Sep 2024 00:20:21 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 19/27] mx23_olinuxino: Drop status-LED code
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
-References: <20240926204455.963584-1-sjg@chromium.org>
- <20240926204455.963584-20-sjg@chromium.org>
- <68dfb206-92c8-4016-ade6-007ad8830667@denx.de>
- <CAFLszTjcF4CvSeqLn2Ng-VhpmKqHBdO7BOmHGHUY6KOW7-CGtA@mail.gmail.com>
-Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAFLszTjcF4CvSeqLn2Ng-VhpmKqHBdO7BOmHGHUY6KOW7-CGtA@mail.gmail.com>
+Subject: Re: [PATCH 15/15] binman: Make a start on an iMX8 test
+To: Simon Glass <sjg@chromium.org>
+Cc: Lukasz Majewski <lukma@denx.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Brandon Maier <brandon.maier@collins.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20240826191143.426387-16-sjg@chromium.org>
+ <20240826191143.426387-1-sjg@chromium.org>
+ <CAFLszTg2s_4LKkJP-OAwjdSqpygwhggOmSAkY376UWTk2LGxzQ@mail.gmail.com>
+Content-Language: en-US
+In-Reply-To: <CAFLszTg2s_4LKkJP-OAwjdSqpygwhggOmSAkY376UWTk2LGxzQ@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -71,46 +75,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/27/24 12:10 AM, Simon Glass wrote:
-> Hi Marek,
-
-Hello Simon,
-
-> On Thu, 26 Sept 2024 at 23:40, Marek Vasut <marex@denx.de> wrote:
->>
->> On 9/26/24 10:44 PM, Simon Glass wrote:
->>> This is not used anymore, so drop it.
->>>
->>> Signed-off-by: Simon Glass <sjg@chromium.org>
->>> ---
->>>
->>>    board/olimex/mx23_olinuxino/mx23_olinuxino.c | 7 -------
->>>    1 file changed, 7 deletions(-)
->>>
->>> diff --git a/board/olimex/mx23_olinuxino/mx23_olinuxino.c b/board/olimex/mx23_olinuxino/mx23_olinuxino.c
->>> index b2bb6678c23..78136c1620a 100644
->>> --- a/board/olimex/mx23_olinuxino/mx23_olinuxino.c
->>> +++ b/board/olimex/mx23_olinuxino/mx23_olinuxino.c
->>> @@ -13,9 +13,6 @@
->>>    #include <asm/arch/imx-regs.h>
->>>    #include <asm/arch/clock.h>
->>>    #include <asm/arch/sys_proto.h>
->>> -#ifdef CONFIG_LED_STATUS
->>> -#include <status_led.h>
->>> -#endif
->>>    #include <linux/delay.h>
->>>
->>>    DECLARE_GLOBAL_DATA_PTR;
->>> @@ -61,9 +58,5 @@ int board_init(void)
->>>        /* Adress of boot parameters */
->>>        gd->bd->bi_boot_params = PHYS_SDRAM_1 + 0x100;
->>>
->>> -#if defined(CONFIG_LED_STATUS) && defined(CONFIG_LED_STATUS_BOOT_ENABLE)
->>> -     status_led_set(CONFIG_LED_STATUS_BOOT, CONFIG_LED_STATUS_STATE);
->>> -#endif
->> Why not define the GPIO LED in DT, it might even already be defined there.
+On 9/27/24 12:07 AM, Simon Glass wrote:
+> This patch is for Marek, to provide a starting point.
 > 
-> Yes I see it in the DT for quite a few boards, so that's what we should use.
-Since LED uclass already uses well established DM_FLAG_PROBE_AFTER_BIND 
-flag, the update here should be only a matter of enabling DM LED and 
-GPIO LED driver.
+> To try it, use 'binman test -T' and see the missing coverage.
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+> 
+>   tools/binman/etype/nxp_imx8mimage.py |  3 ++-
+>   tools/binman/ftest.py                |  4 ++++
+>   tools/binman/test/339_nxp_imx8.dts   | 17 +++++++++++++++++
+>   3 files changed, 23 insertions(+), 1 deletion(-)
+>   create mode 100644 tools/binman/test/339_nxp_imx8.dts
+> 
+> Applied to u-boot-dm/next, thanks!
+
+Is this patch really supposed to be applied as-is ?
+The commit message makes it seem like some RFC/Example code.
