@@ -4,93 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4AFBCCFA07
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 22:51:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC820CCFA07
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 22:51:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2861A8904F;
-	Fri, 27 Sep 2024 00:50:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2D40E8905C;
+	Fri, 27 Sep 2024 00:50:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NrjAU3F6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nUfjvqcf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B0BF888F07; Fri, 27 Sep 2024 00:39:14 +0200 (CEST)
+ id DAB7788FCB; Fri, 27 Sep 2024 00:45:13 +0200 (CEST)
 Received: from mail-qt1-x841.google.com (mail-qt1-x841.google.com
  [IPv6:2607:f8b0:4864:20::841])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 53F3188966
- for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 00:39:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B62988F9B
+ for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 00:45:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-qt1-x841.google.com with SMTP id
- d75a77b69052e-4581d2b0fbaso9652301cf.1
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 15:39:10 -0700 (PDT)
+ d75a77b69052e-4583209a17dso11048561cf.1
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 15:45:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727390349; x=1727995149; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=QMQ7lQnie3h74GGd4QvjiCK4rTgy1jca/6Hs9YiWo+Q=;
- b=NrjAU3F6B7KEFyY2V45jUPp/D8ekn2p4D68H2AUnUvTJ0uXt2A6Cj0U0KdFMTHIUrQ
- lTc34dTLxW26oQDCA1xC1YuXLJr1Ivv4tjzocEJo8md9JH/j3ahS+ocJa1wCDIn5sxfj
- mvomceBe6A6+v+rJJCFlefpG59BfYAB/RvDkc=
+ d=chromium.org; s=google; t=1727390708; x=1727995508; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3qHObg1PXjnQVDlmzv2RcFwOKeqk8tzOEnXVRpTM3SM=;
+ b=nUfjvqcfH/Fi3cre+KFGUZe5g4B9BKbEBjfhVmwdOpmkzJqLj3QnCeCnqVFtbsRaqa
+ ThjtblHJjQ49VV9mqrzNMBHeEdHcgJA/3vWr3RdwsIlyO9i4Cyp5s4YlMF36JFyAenEL
+ IRdisYRqslN5UQjePi5WYsp26DoHFdTfslAnc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727390349; x=1727995149;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=QMQ7lQnie3h74GGd4QvjiCK4rTgy1jca/6Hs9YiWo+Q=;
- b=uMDWMtYeGWZYrVjXSk7ZAC3SfHS7sjGwOV2FLviKhw9vmUgxoTW+hC5o0Kx95+x86S
- uWzYw2+04XaDGPtzNasl8zd0mSiAmO5yOKNlFBEDyQw8Y3rEMv6hX+/xWwpfGeSSGIQN
- Te+3paey8UEsriRR14p7M7FgW1l15NU8gh3nz8D2J/3b1Tt8jJvsjJ5Cob8Qaixx1ULO
- OtXxLPE0ExVUUslJpsQxqmgidYGl7syEblZhwPIJXMylnt9PClh6tu7RnxA/TT5TK3as
- TbmJ+IAqWuxc1rlIWPP1Zqaiq4lceiGxsKNaG8N91YVVZnuQUfuyI4KMpe5RN3P5qTLF
- sKVQ==
-X-Gm-Message-State: AOJu0YwtANVc2BqCyOrOZO+W128zJLZxr/zYQDILQ/4adnxAQM0Q8V60
- pzTdGDObawhEtp7eXp7be2nK2Bit3Re+gFvDuhly/LN/4TWJ7jWzq8tIIIpWqBOkqA0Ii+UTbQD
- OlZ+8uhzirw==
-X-Google-Smtp-Source: AGHT+IGq1KCs/BB88YcDbe6z6WYklHlNCIrxwMXF1qaXgUyfMmjExJ7PthLz8qi5P8T4/Yh//XrCEA==
-X-Received: by 2002:ac8:5a91:0:b0:45b:16f5:6c1a with SMTP id
- d75a77b69052e-45c9f1e7e40mr17122731cf.16.1727390348449; 
- Thu, 26 Sep 2024 15:39:08 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1727390708; x=1727995508;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=3qHObg1PXjnQVDlmzv2RcFwOKeqk8tzOEnXVRpTM3SM=;
+ b=VyaruZ0wKwEBFg9eZtvAzlzCDz2izhRzayBIubFYcZYzp+4X4tDdrfYijNl7zcPsiJ
+ PJbYhcfzoXIJnDZvDKQvlVz1v/y2ChSGAC5ag0OAjGAi1vqKanwtS9x5BZaEXbKv2gi3
+ kLeH/JsRf0kIuo5XCQJGRhAmMfvjvxrELI93f/wgykIlfUoi+tn+2CSBwglx8Zb/C7H4
+ RoHFgvSiFTBY+MDauWodUkGSPsFazw/yAPXhNU7AR/uK8w1iE+ySgeV9ZmuC33tWkeL3
+ /lVYcTNu1erjQtABN7kZTgp646ybdGCEmE0GuUvuBLxUuHQ94NUChOnKTsjhrBcTQXbf
+ vLYw==
+X-Gm-Message-State: AOJu0Yxodnt+nezxcYrcBrYfS2ZMpRVCVwZvzolixdbQeA64B54iCOjZ
+ tK6DsrA4D/Iwphol571v7osRAIKnzulGb8+6ReyrJi5wzx6CE2EPXt+oc9moGwEcWz/YqhMjHXD
+ joAQAIjtEgg==
+X-Google-Smtp-Source: AGHT+IG7zZ6ReW8B3DGovukGs3fiXABiNdHrOGdwqV+5bvcKfox1CsjOn6mPF6+nl5ko+cTNmlwd0A==
+X-Received: by 2002:a05:622a:10f:b0:458:5e19:b3a4 with SMTP id
+ d75a77b69052e-45c9f284e48mr13898331cf.38.1727390707089; 
+ Thu, 26 Sep 2024 15:45:07 -0700 (PDT)
 Received: from chromium.org ([205.220.129.31])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-45c9f350fadsm2738461cf.80.2024.09.26.15.38.38
+ d75a77b69052e-45c9f350fadsm2738461cf.80.2024.09.26.15.44.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Sep 2024 15:39:08 -0700 (PDT)
+ Thu, 26 Sep 2024 15:45:06 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Alban Bedel <alban.bedel@avionic-design.de>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Andreas Geisreiter <ageisreiter@dh-electronics.de>,
  Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Aspeed BMC SW team <BMC-SW@aspeedtech.com>,
- Baruch Siach <baruch@tkos.co.il>, Boon Khai Ng <boon.khai.ng@intel.com>,
- Chanho Park <chanho61.park@samsung.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Chanho Park <chanho61.park@samsung.com>, Dragan Simic <dsimic@manjaro.org>,
  Ferass El Hafidi <vitali64pmemail@protonmail.com>,
  Gatien Chevallier <gatien.chevallier@foss.st.com>,
- Hiremath Gireesh <Gireesh.Hiremath@in.bosch.com>,
- James Hilliard <james.hilliard1@gmail.com>, Janne Grunau <j@jannau.net>,
+ Greg Malysa <greg.malysa@timesys.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Jesse Taube <mr.bossman075@gmail.com>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>, Jonas Karlman <jonas@kwiboo.se>,
+ "Leon M. Busch-George" <leon@georgemail.eu>,
  Martin Kurbanov <mmkurbanov@sberdevices.ru>,
- Masahiro Yamada <masahiroy@kernel.org>, Minkyu Kang <mk7.kang@samsung.com>,
+ Minkyu Kang <mk7.kang@samsung.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
  Nicolas Ferre <nicolas.ferre@microchip.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Paul Walmsley <paul.walmsley@sifive.com>,
- Prasad Kummari <prasad.kummari@amd.com>, Pratyush Yadav <p.yadav@ti.com>,
- Roman Stratiienko <r.stratiienko@gmail.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Peng Fan <peng.fan@nxp.com>,
+ Prasad Kummari <prasad.kummari@amd.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Randolph <randolph@andestech.com>, Richard Weinberger <richard@nod.at>,
+ Robert Marko <robert.marko@sartura.hr>,
  Sam Protsenko <semen.protsenko@linaro.org>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Wadim Egorov <w.egorov@phytec.de>,
- shengfei Xu <xsf@rock-chips.com>, u-boot@dh-electronics.com
-Subject: [PATCH 00/42] Tidy up use of 'SPL' and CONFIG_SPL_BUILD
-Date: Fri, 27 Sep 2024 00:35:25 +0200
-Message-ID: <20240926223814.1276764-1-sjg@chromium.org>
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ =?UTF-8?q?S=C3=A9bastien=20Szymanski?= <sebastien.szymanski@armadeus.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Wan Yee Lau <wan.yee.lau@intel.com>
+Subject: [PATCH 30/42] global: Rename SPL_TPL_ to PHASE_
+Date: Fri, 27 Sep 2024 00:35:55 +0200
+Message-ID: <20240926223814.1276764-31-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240926223814.1276764-1-sjg@chromium.org>
+References: <20240926223814.1276764-1-sjg@chromium.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Fri, 27 Sep 2024 00:50:46 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -109,1006 +115,1908 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When the SPL build-phase was first created it was designed to solve a
-particular problem (the need to init SDRAM so that U-Boot proper could
-be loaded). It has since expanded to become an important part of U-Boot,
-with three phases now present: TPL, VPL and SPL
+Use PHASE_ as the symbol to select a particular XPL build. This means
+that SPL_TPL_ is no-longer set.
 
-Due to this history, the term 'SPL' is used to mean both a particular
-phase (the one before U-Boot proper) and all the non-proper phases.
-This has become confusing.
+Update the comment in bootstage to refer to this symbol, instead of
+SPL_
 
-For a similar reason CONFIG_SPL_BUILD is set to 'y' for all 'SPL'
-phases, not just SPL. So code which can only be compiled for actual SPL,
-for example, must use something like this:
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-   #if defined(CONFIG_SPL_BUILD) && !defined(CONFIG_TPL_BUILD)
+ Makefile                              |  2 +-
+ arch/arm/cpu/armv8/Makefile           |  2 +-
+ arch/arm/lib/Makefile                 | 16 +++---
+ arch/arm/mach-at91/arm926ejs/Makefile |  2 +-
+ arch/arm/mach-omap2/Makefile          |  2 +-
+ arch/arm/mach-rockchip/Makefile       |  2 +-
+ arch/powerpc/lib/Makefile             |  2 +-
+ arch/riscv/lib/Makefile               | 14 ++---
+ arch/x86/Makefile                     |  6 +-
+ arch/x86/cpu/Makefile                 |  8 +--
+ arch/x86/cpu/broadwell/Makefile       | 10 ++--
+ arch/x86/cpu/intel_common/Makefile    | 10 ++--
+ arch/x86/lib/Makefile                 |  6 +-
+ board/coreboot/coreboot/Makefile      |  2 +-
+ boot/Makefile                         | 80 +++++++++++++--------------
+ common/Makefile                       | 26 ++++-----
+ common/bootstage.c                    |  4 +-
+ common/init/Makefile                  |  2 +-
+ common/spl/Makefile                   | 56 +++++++++----------
+ disk/Makefile                         | 18 +++---
+ drivers/Makefile                      | 70 +++++++++++------------
+ drivers/adc/Makefile                  |  2 +-
+ drivers/block/Makefile                |  8 +--
+ drivers/cache/Makefile                |  2 +-
+ drivers/clk/Makefile                  | 18 +++---
+ drivers/clk/exynos/Makefile           |  2 +-
+ drivers/clk/imx/Makefile              | 20 +++----
+ drivers/clk/ti/Makefile               |  4 +-
+ drivers/core/Makefile                 | 10 ++--
+ drivers/crypto/fsl/Makefile           |  2 +-
+ drivers/gpio/Makefile                 |  6 +-
+ drivers/input/Makefile                |  6 +-
+ drivers/misc/Makefile                 | 16 +++---
+ drivers/mmc/Makefile                  |  6 +-
+ drivers/mtd/Makefile                  |  4 +-
+ drivers/mtd/nand/Makefile             |  2 +-
+ drivers/mtd/nand/raw/Makefile         |  2 +-
+ drivers/mtd/spi/Makefile              |  8 +--
+ drivers/pinctrl/starfive/Makefile     |  4 +-
+ drivers/power/Makefile                |  8 +--
+ drivers/power/acpi_pmc/Makefile       |  2 +-
+ drivers/power/pmic/Makefile           |  4 +-
+ drivers/power/regulator/Makefile      |  2 +-
+ drivers/ram/Makefile                  |  2 +-
+ drivers/reset/Makefile                |  2 +-
+ drivers/rng/Makefile                  |  2 +-
+ drivers/rtc/Makefile                  |  6 +-
+ drivers/scsi/Makefile                 |  2 +-
+ drivers/serial/Makefile               |  2 +-
+ drivers/spi/Makefile                  |  2 +-
+ drivers/sysreset/Makefile             | 14 ++---
+ drivers/tpm/Makefile                  |  4 +-
+ drivers/usb/gadget/Makefile           |  6 +-
+ drivers/usb/host/Makefile             |  4 +-
+ drivers/video/Makefile                | 16 +++---
+ drivers/watchdog/Makefile             |  2 +-
+ env/Makefile                          | 22 ++++----
+ fs/sandbox/Makefile                   |  2 +-
+ lib/Makefile                          | 34 ++++++------
+ lib/acpi/Makefile                     |  2 +-
+ lib/libfdt/Makefile                   |  2 +-
+ lib/rsa/Makefile                      |  4 +-
+ net/Makefile                          |  6 +-
+ scripts/Kbuild.include                |  8 +--
+ scripts/Makefile.xpl                  | 44 +++++++--------
+ test/dm/Makefile                      |  4 +-
+ tools/qconfig.py                      |  6 +-
+ 67 files changed, 338 insertions(+), 338 deletions(-)
 
-In Makefiles we have similar issues. SPL_ has been used as a variable
-which expands to either SPL_ or nothing, to chose between options like
-CONFIG_BLK and CONFIG_SPL_BLK. When TPL appeared, a new SPL_TPL variable
-was created which expanded to 'SPL_', 'TPL_' or nothing. Later it was
-updated to support 'VPL_' as well.
-
-This series starts a change in terminology and usage to resolve the
-above issues:
-
-- The word 'xPL' is used instead of 'SPL' to mean a non-proper build
-- A new CONFIG_XPL_BUILD define indicates that the current build is an
-  'xPL' build
-- The existing CONFIG_SPL_BUILD is changed to mean SPL; it is not now
-  defined for TPL and VPL phases
-- The existing SPL_ Makefile variable is renamed to SPL_
-- The existing SPL_TPL Makefile variable is renamed to PHASE_
-
-It should be noted that xpl_phase() can generally be used instead of
-the above CONFIGs without a code-space or run-time penalty.
-
-This series does not attempt to convert all of U-Boot to use this new
-terminology but it makes a start. In particular, renaming spl.h and
-common/spl seems like a bridge too far at this point.
-
-An attempt has been made to make this series bisectable, but this is a
-little tricky, so some logic errors may be present.
-
-Some more analysis is probably needed, e.g. to make sure that the code
-size doesn't change for any board.
-
-
-Simon Glass (42):
-  Makefile: Add a u-boot.cfg file for VPL
-  scripts: Rename Makefile.spl to Makefile.xpl
-  scripts: Add some comments about autoconf.mk
-  scripts: Define CONFIG_XPL_BUILD for all xPL builds
-  global: Use CONFIG_XPL_BUILD instead of CONFIG_SPL_BUILD
-  doc: Update SPL docs for the xPL changes
-  net: freescale: Drop use of SPL_BUILD dependency
-  x86: Update a comment to mention XPL
-  tegra: Use SPL instead of SPL_BUILD
-  log: global: Rename warn_non_spl() and update the condition
-  qconfig: Add XPL_BUILD to ignored symbols
-  boot: Drop unnecessary ifdef for LOAD_FIT
-  xpl: Define CONFIG_SPL_BUILD only for the SPL build
-  rockchip: Simplify check for SPL
-  mips: Simplify check for SPL
-  powerpc: Simplify check for SPL
-  x86: Simplify check for SPL
-  freescale: Simplify check for SPL
-  mtd: Simplify check for SPL
-  dm: Simplify check for SPL
-  spl: Simplify check for SPL
-  powerpc: Correct check for SPL
-  serial: Make use of the SERIAL define
-  stdio: Make use of the SERIAL define
-  drivers: Simplify Makefile checks
-  kconfig: binman: Check for SPL instead of XPL
-  rockchip: Simplify Makefile condition
-  drivers: Simplify Makefile condition
-  global: Rename SPL_ to XPL_
-  global: Rename SPL_TPL_ to PHASE_
-  spl: Rename SPL_TPL_NAME and SPL_TPL_PROMPT
-  qconfig: Update tool for new Makefile variables
-  xpl: Rename u_boot_first_phase to xpl_is_first_phase()
-  xpl: Rename spl_phase to xpl_phase_t
-  xpl: Rename spl_phase() to xpl_phase()
-  xpl: Rename spl_in_proper() to not_xpl()
-  xpl: Add a function to indicate when in xPL
-  xpl: Rename spl_next_phase() and spl_prev_phase()
-  xpl: Rename spl_phase_prefix() and spl_phase_name()
-  README: Drop SoC-specific comment about SPL
-  doc: Move init-related things out of README
-  doc: Update init docs for the xPL changes
-
- Makefile                                      | 14 +--
- README                                        | 99 +------------------
- arch/arm/Makefile                             |  6 +-
- arch/arm/config.mk                            | 12 +--
- arch/arm/cpu/arm11/Makefile                   |  2 +-
- arch/arm/cpu/arm1176/start.S                  |  2 +-
- arch/arm/cpu/arm920t/Makefile                 |  2 +-
- arch/arm/cpu/arm926ejs/Makefile               |  4 +-
- arch/arm/cpu/arm926ejs/mxs/Makefile           |  4 +-
- arch/arm/cpu/arm926ejs/sunxi/config.mk        |  2 +-
- arch/arm/cpu/armv7/Makefile                   |  4 +-
- arch/arm/cpu/armv7/cpu.c                      |  2 +-
- arch/arm/cpu/armv7/lowlevel_init.S            |  4 +-
- arch/arm/cpu/armv7/s5p-common/Makefile        |  2 +-
- arch/arm/cpu/armv7/start.S                    |  2 +-
- arch/arm/cpu/armv7/sunxi/Makefile             |  4 +-
- arch/arm/cpu/armv8/Makefile                   | 12 +--
- arch/arm/cpu/armv8/cache_v8.c                 |  2 +-
- arch/arm/cpu/armv8/fsl-layerscape/Makefile    |  2 +-
- arch/arm/cpu/armv8/fsl-layerscape/cpu.c       | 14 +--
- .../armv8/fsl-layerscape/fsl_lsch2_speed.c    |  2 +-
- .../armv8/fsl-layerscape/fsl_lsch3_serdes.c   |  6 +-
- arch/arm/cpu/armv8/fsl-layerscape/icid.c      |  6 +-
- arch/arm/cpu/armv8/fsl-layerscape/lowlevel.S  |  6 +-
- .../arm/cpu/armv8/fsl-layerscape/ls1043_ids.c |  2 +-
- .../arm/cpu/armv8/fsl-layerscape/ls1046_ids.c |  2 +-
- arch/arm/cpu/armv8/fsl-layerscape/spl.c       |  4 +-
- arch/arm/cpu/armv8/start.S                    |  8 +-
- arch/arm/dts/imx8qm-u-boot.dtsi               |  2 +-
- arch/arm/dts/imx8qxp-u-boot.dtsi              |  2 +-
- .../asm/arch-fsl-layerscape/fsl_icid.h        |  6 +-
- arch/arm/include/asm/arch-imx8/boot0.h        |  2 +-
- arch/arm/include/asm/arch-lpc32xx/sys_proto.h |  2 +-
- arch/arm/include/asm/arch-mx6/litesom.h       |  2 +-
- arch/arm/include/asm/arch-mx6/mx6-ddr.h       |  4 +-
- arch/arm/include/asm/arch-mxs/sys_proto.h     |  2 +-
- arch/arm/include/asm/arch-rk3066/boot0.h      |  4 +-
- arch/arm/include/asm/arch-rockchip/boot0.h    |  7 +-
- .../include/asm/arch-rockchip/cru_rv1126.h    | 10 +-
- arch/arm/include/asm/arch-sunxi/boot0.h       |  4 +-
- arch/arm/include/asm/arch-sunxi/sys_proto.h   |  2 +-
- arch/arm/include/asm/fsl_secure_boot.h        |  4 +-
- arch/arm/include/asm/ti-common/sys_proto.h    |  2 +-
- arch/arm/lib/Makefile                         | 20 ++--
- arch/arm/lib/cache.c                          |  2 +-
- arch/arm/lib/crt0.S                           | 14 +--
- arch/arm/lib/crt0_64.S                        | 10 +-
- arch/arm/lib/eabi_compat.c                    |  2 +-
- arch/arm/lib/stack.c                          |  2 +-
- arch/arm/lib/vectors.S                        |  6 +-
- arch/arm/lib/zimage.c                         |  4 +-
- arch/arm/mach-aspeed/ast2600/Makefile         |  2 +-
- arch/arm/mach-aspeed/ast2600/lowlevel_init.S  |  2 +-
- arch/arm/mach-at91/Makefile                   |  2 +-
- arch/arm/mach-at91/arm926ejs/Makefile         |  4 +-
- arch/arm/mach-at91/config.mk                  |  2 +-
- arch/arm/mach-davinci/Makefile                |  2 +-
- arch/arm/mach-davinci/config.mk               |  2 +-
- arch/arm/mach-davinci/misc.c                  |  2 +-
- arch/arm/mach-exynos/Makefile                 |  2 +-
- arch/arm/mach-exynos/lowlevel_init.c          |  4 +-
- arch/arm/mach-exynos/pinmux.c                 |  2 +-
- arch/arm/mach-imx/Makefile                    | 20 ++--
- arch/arm/mach-imx/cpu.c                       |  6 +-
- arch/arm/mach-imx/hab.c                       |  8 +-
- arch/arm/mach-imx/imx8/cpu.c                  |  4 +-
- arch/arm/mach-imx/imx8m/clock_imx8mm.c        |  2 +-
- arch/arm/mach-imx/imx8m/clock_imx8mq.c        |  4 +-
- arch/arm/mach-imx/imx8m/soc.c                 | 16 +--
- arch/arm/mach-imx/imx8ulp/Makefile            |  2 +-
- arch/arm/mach-imx/imx8ulp/clock.c             |  2 +-
- arch/arm/mach-imx/imx8ulp/lowlevel_init.S     |  2 +-
- arch/arm/mach-imx/imx8ulp/soc.c               | 12 +--
- arch/arm/mach-imx/imx9/Makefile               |  2 +-
- arch/arm/mach-imx/imx9/clock.c                |  4 +-
- arch/arm/mach-imx/imx9/lowlevel_init.S        |  2 +-
- arch/arm/mach-imx/imx9/soc.c                  | 12 +--
- arch/arm/mach-imx/mx5/clock.c                 |  2 +-
- arch/arm/mach-imx/mx6/Makefile                |  2 +-
- arch/arm/mach-imx/mx6/clock.c                 |  2 +-
- arch/arm/mach-imx/mx6/litesom.c               |  2 +-
- arch/arm/mach-imx/mx6/opos6ul.c               |  4 +-
- arch/arm/mach-imx/mx6/soc.c                   |  6 +-
- arch/arm/mach-imx/mx7/clock.c                 |  2 +-
- arch/arm/mach-imx/mx7/soc.c                   |  4 +-
- arch/arm/mach-imx/mx7ulp/clock.c              |  2 +-
- arch/arm/mach-imx/mx7ulp/soc.c                |  2 +-
- arch/arm/mach-imx/syscounter.c                |  2 +-
- arch/arm/mach-k3/am62ax/Makefile              |  2 +-
- arch/arm/mach-k3/am62px/Makefile              |  2 +-
- arch/arm/mach-k3/am62x/Makefile               |  2 +-
- arch/arm/mach-k3/am64x/Makefile               |  2 +-
- arch/arm/mach-k3/am65x/Makefile               |  2 +-
- arch/arm/mach-k3/arm64/cache.S                |  2 +-
- arch/arm/mach-k3/j721e/Makefile               |  2 +-
- arch/arm/mach-k3/j721s2/Makefile              |  2 +-
- arch/arm/mach-k3/j721s2/j721s2_init.c         |  2 +-
- arch/arm/mach-k3/j722s/Makefile               |  2 +-
- arch/arm/mach-k3/j784s4/Makefile              |  2 +-
- arch/arm/mach-k3/r5/Makefile                  |  2 +-
- arch/arm/mach-k3/security.c                   |  2 +-
- arch/arm/mach-keystone/Makefile               |  2 +-
- arch/arm/mach-keystone/config.mk              |  4 +-
- arch/arm/mach-keystone/mon.c                  |  2 +-
- arch/arm/mach-lpc32xx/Makefile                |  2 +-
- arch/arm/mach-mediatek/Makefile               |  2 +-
- arch/arm/mach-mediatek/mt7629/lowlevel_init.S |  2 +-
- arch/arm/mach-mvebu/Makefile                  |  8 +-
- arch/arm/mach-mvebu/cpu.c                     |  4 +-
- arch/arm/mach-mvebu/include/mach/cpu.h        |  8 +-
- arch/arm/mach-mvebu/include/mach/soc.h        |  2 +-
- arch/arm/mach-mvebu/serdes/a38x/Makefile      |  8 +-
- arch/arm/mach-mvebu/serdes/axp/Makefile       |  4 +-
- arch/arm/mach-nexell/include/mach/display.h   |  2 +-
- arch/arm/mach-omap2/Makefile                  |  4 +-
- arch/arm/mach-omap2/am33xx/Makefile           |  2 +-
- arch/arm/mach-omap2/am33xx/board.c            | 20 ++--
- arch/arm/mach-omap2/boot-common.c             |  6 +-
- arch/arm/mach-omap2/clocks-common.c           |  2 +-
- arch/arm/mach-omap2/config.mk                 |  2 +-
- arch/arm/mach-omap2/config_secure.mk          |  2 +-
- arch/arm/mach-omap2/hwinit-common.c           | 14 +--
- arch/arm/mach-omap2/omap3/Makefile            |  2 +-
- arch/arm/mach-omap2/omap3/board.c             |  6 +-
- arch/arm/mach-omap2/omap3/sdrc.c              |  4 +-
- arch/arm/mach-omap2/omap5/hwinit.c            |  2 +-
- arch/arm/mach-omap2/sec-common.c              |  2 +-
- arch/arm/mach-orion5x/Makefile                |  4 +-
- arch/arm/mach-orion5x/cpu.c                   |  2 +-
- arch/arm/mach-orion5x/lowlevel_init.S         |  4 +-
- arch/arm/mach-renesas/include/mach/boot0.h    |  2 +-
- arch/arm/mach-renesas/lowlevel_init_ca15.S    |  2 +-
- arch/arm/mach-rockchip/Makefile               |  6 +-
- arch/arm/mach-rockchip/px30/px30.c            |  2 +-
- arch/arm/mach-rockchip/rk3036/Makefile        |  2 +-
- arch/arm/mach-rockchip/rk3066/rk3066.c        |  2 +-
- arch/arm/mach-rockchip/rk3188/rk3188.c        |  4 +-
- arch/arm/mach-rockchip/rk322x/rk322x.c        |  2 +-
- arch/arm/mach-rockchip/rk3288/rk3288.c        |  4 +-
- arch/arm/mach-rockchip/rk3308/rk3308.c        |  2 +-
- arch/arm/mach-rockchip/rk3328/rk3328.c        |  2 +-
- arch/arm/mach-rockchip/rk3368/rk3368.c        |  2 +-
- arch/arm/mach-rockchip/rk3399/rk3399.c        |  8 +-
- arch/arm/mach-rockchip/rk3568/rk3568.c        |  2 +-
- arch/arm/mach-rockchip/rk3588/rk3588.c        |  4 +-
- arch/arm/mach-rockchip/rv1108/Makefile        |  2 +-
- arch/arm/mach-rockchip/rv1126/rv1126.c        |  2 +-
- arch/arm/mach-sc5xx/Makefile                  |  2 +-
- arch/arm/mach-sc5xx/config.mk                 |  2 +-
- arch/arm/mach-socfpga/Makefile                |  2 +-
- arch/arm/mach-socfpga/board.c                 |  6 +-
- arch/arm/mach-socfpga/clock_manager.c         |  2 +-
- arch/arm/mach-socfpga/clock_manager_arria10.c |  2 +-
- arch/arm/mach-socfpga/include/mach/boot0.h    |  2 +-
- .../include/mach/clock_manager_arria10.h      |  2 +-
- arch/arm/mach-socfpga/lowlevel_init_soc64.S   |  2 +-
- arch/arm/mach-socfpga/mailbox_s10.c           |  2 +-
- arch/arm/mach-socfpga/misc.c                  |  2 +-
- arch/arm/mach-socfpga/misc_arria10.c          |  2 +-
- arch/arm/mach-socfpga/misc_gen5.c             |  2 +-
- arch/arm/mach-socfpga/reset_manager_s10.c     |  2 +-
- arch/arm/mach-socfpga/secure_vab.c            |  2 +-
- arch/arm/mach-socfpga/timer_s10.c             |  4 +-
- arch/arm/mach-socfpga/wrap_pll_config_soc64.c |  6 +-
- arch/arm/mach-stm32mp/Makefile                |  2 +-
- arch/arm/mach-stm32mp/bsec.c                  | 12 +--
- arch/arm/mach-stm32mp/stm32mp1/Makefile       |  4 +-
- arch/arm/mach-stm32mp/stm32mp1/cpu.c          |  6 +-
- arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c   |  4 +-
- arch/arm/mach-sunxi/Makefile                  |  2 +-
- arch/arm/mach-sunxi/board.c                   | 10 +-
- arch/arm/mach-sunxi/clock_sun4i.c             |  4 +-
- arch/arm/mach-sunxi/clock_sun50i_h6.c         |  4 +-
- arch/arm/mach-sunxi/clock_sun6i.c             |  4 +-
- arch/arm/mach-sunxi/clock_sun8i_a83t.c        |  4 +-
- arch/arm/mach-sunxi/clock_sun9i.c             |  4 +-
- arch/arm/mach-sunxi/gtbus_sun9i.c             |  2 +-
- arch/arm/mach-tegra/Makefile                  |  6 +-
- arch/arm/mach-tegra/board.c                   |  2 +-
- arch/arm/mach-tegra/board2.c                  |  2 +-
- arch/arm/mach-tegra/tegra114/Makefile         |  2 +-
- arch/arm/mach-tegra/tegra124/Kconfig          |  4 +-
- arch/arm/mach-tegra/tegra124/Makefile         |  4 +-
- arch/arm/mach-tegra/tegra20/Makefile          |  4 +-
- arch/arm/mach-tegra/tegra30/Makefile          |  4 +-
- arch/arm/mach-uniphier/Makefile               |  2 +-
- arch/arm/mach-uniphier/arm32/Makefile         |  2 +-
- .../mach-uniphier/boot-device/boot-device.c   |  4 +-
- arch/arm/mach-uniphier/clk/Makefile           |  2 +-
- arch/arm/mach-uniphier/debug-uart/Makefile    |  2 +-
- .../arm/mach-uniphier/debug-uart/debug-uart.c |  4 +-
- arch/arm/mach-uniphier/dram/Makefile          |  2 +-
- arch/arm/mach-zynq/Makefile                   |  2 +-
- arch/arm/mach-zynq/cpu.c                      |  2 +-
- arch/arm/mach-zynqmp/Makefile                 |  8 +-
- arch/arm/mach-zynqmp/cpu.c                    |  4 +-
- arch/microblaze/config.mk                     |  2 +-
- arch/microblaze/cpu/Makefile                  |  2 +-
- arch/microblaze/cpu/start.S                   |  8 +-
- arch/mips/Makefile                            |  2 +-
- arch/mips/config.mk                           |  2 +-
- arch/mips/lib/Makefile                        |  2 +-
- arch/mips/mach-jz47xx/Makefile                |  2 +-
- arch/mips/mach-jz47xx/include/mach/jz4780.h   |  2 +-
- arch/mips/mach-jz47xx/jz4780/jz4780.c         |  4 +-
- arch/mips/mach-jz47xx/start.S                 |  4 +-
- arch/mips/mach-mtmips/Makefile                |  2 +-
- arch/mips/mach-mtmips/cpu.c                   |  2 +-
- arch/mips/mach-mtmips/mt7620/Makefile         |  2 +-
- arch/mips/mach-mtmips/mt7621/Makefile         | 11 +--
- arch/mips/mach-mtmips/mt7628/Makefile         |  2 +-
- arch/powerpc/config.mk                        |  2 +-
- arch/powerpc/cpu/mpc83xx/Makefile             |  2 -
- arch/powerpc/cpu/mpc83xx/start.S              |  6 +-
- arch/powerpc/cpu/mpc85xx/Makefile             |  4 +-
- arch/powerpc/cpu/mpc85xx/cpu_init_early.c     |  2 +-
- arch/powerpc/cpu/mpc85xx/start.S              | 14 +--
- arch/powerpc/cpu/mpc85xx/tlb.c                |  4 +-
- arch/powerpc/cpu/mpc8xxx/Makefile             |  2 +-
- arch/powerpc/cpu/mpc8xxx/fsl_pamu.c           |  4 +-
- arch/powerpc/cpu/mpc8xxx/law.c                |  4 +-
- arch/powerpc/cpu/mpc8xxx/pamu_table.c         |  2 +-
- arch/powerpc/include/asm/fsl_secure_boot.h    |  8 +-
- arch/powerpc/lib/Makefile                     |  6 +-
- arch/riscv/Makefile                           |  2 +-
- arch/riscv/cpu/fu540/Makefile                 |  2 +-
- arch/riscv/cpu/fu740/Makefile                 |  2 +-
- arch/riscv/cpu/jh7110/Makefile                |  2 +-
- arch/riscv/cpu/start.S                        |  8 +-
- arch/riscv/lib/Makefile                       | 24 ++---
- arch/riscv/lib/sifive_cache.c                 |  4 +-
- arch/sandbox/cpu/Makefile                     |  2 +-
- arch/sandbox/cpu/cpu.c                        |  2 +-
- arch/sandbox/cpu/spl.c                        |  8 +-
- arch/sandbox/cpu/start.c                      |  4 +-
- arch/x86/Makefile                             | 10 +-
- arch/x86/config.mk                            |  8 +-
- arch/x86/cpu/Makefile                         | 22 ++---
- arch/x86/cpu/apollolake/Makefile              | 10 +-
- arch/x86/cpu/apollolake/cpu_spl.c             |  4 +-
- arch/x86/cpu/apollolake/fsp_bindings.c        |  4 +-
- arch/x86/cpu/apollolake/hostbridge.c          |  2 +-
- arch/x86/cpu/apollolake/lpc.c                 |  2 +-
- arch/x86/cpu/apollolake/pch.c                 |  2 +-
- arch/x86/cpu/apollolake/pmc.c                 |  4 +-
- arch/x86/cpu/apollolake/punit.c               |  2 +-
- arch/x86/cpu/apollolake/spl.c                 |  2 +-
- arch/x86/cpu/broadwell/Makefile               | 14 +--
- arch/x86/cpu/broadwell/cpu.c                  |  2 +-
- arch/x86/cpu/broadwell/cpu_full.c             |  2 +-
- arch/x86/cpu/broadwell/pch.c                  |  2 +-
- arch/x86/cpu/config.mk                        |  2 +-
- arch/x86/cpu/coreboot/Makefile                |  2 +-
- arch/x86/cpu/coreboot/coreboot.c              |  2 +-
- arch/x86/cpu/cpu.c                            |  4 +-
- arch/x86/cpu/i386/cpu.c                       |  2 +-
- arch/x86/cpu/intel_common/Makefile            | 20 ++--
- arch/x86/cpu/intel_common/mrc.c               |  2 +-
- arch/x86/cpu/intel_common/p2sb.c              |  6 +-
- arch/x86/cpu/ivybridge/Makefile               |  8 +-
- arch/x86/cpu/qemu/Makefile                    |  2 +-
- arch/x86/include/asm/string.h                 |  2 +-
- arch/x86/lib/Makefile                         | 27 +++--
- arch/x86/lib/fsp/Makefile                     |  2 +-
- arch/x86/lib/fsp2/fsp_dram.c                  |  2 +-
- arch/x86/lib/fsp2/fsp_init.c                  |  4 +-
- arch/x86/lib/tpl.c                            |  2 +-
- board/BuR/brppt1/Makefile                     |  2 +-
- board/BuR/brppt1/board.c                      |  4 +-
- board/BuR/brppt2/board.c                      |  6 +-
- board/BuR/brppt2/config.mk                    |  2 +-
- board/BuR/brsmarc1/Makefile                   |  2 +-
- board/BuR/brsmarc1/board.c                    |  8 +-
- board/BuR/brxre1/Makefile                     |  2 +-
- board/BuR/brxre1/board.c                      |  4 +-
- board/BuR/common/common.c                     |  4 +-
- board/CZ.NIC/turris_1x/Makefile               |  2 +-
- board/CZ.NIC/turris_1x/tlb.c                  |  2 +-
- board/CZ.NIC/turris_omnia/Makefile            |  2 +-
- board/CZ.NIC/turris_omnia/turris_omnia.c      |  2 +-
- board/Synology/ds414/Makefile                 |  2 +-
- board/advantech/imx8mp_rsb3720a1/Makefile     |  4 +-
- board/advantech/imx8qm_dmsse20_a1/Makefile    |  2 +-
- board/advantech/imx8qm_rom7720_a1/Makefile    |  2 +-
- board/alliedtelesis/x530/Makefile             |  2 +-
- board/asus/grouper/Makefile                   |  2 +-
- board/asus/transformer-t30/Makefile           |  2 +-
- .../atmel/at91sam9m10g45ek/at91sam9m10g45ek.c |  2 +-
- board/atmel/at91sam9n12ek/at91sam9n12ek.c     |  2 +-
- board/atmel/at91sam9x5ek/at91sam9x5ek.c       |  2 +-
- .../atmel/sama5d27_som1_ek/sama5d27_som1_ek.c |  2 +-
- .../sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c   |  2 +-
- board/atmel/sama5d2_icp/sama5d2_icp.c         |  2 +-
- .../atmel/sama5d2_xplained/sama5d2_xplained.c |  2 +-
- .../atmel/sama5d3_xplained/sama5d3_xplained.c |  2 +-
- board/atmel/sama5d3xek/sama5d3xek.c           |  2 +-
- .../atmel/sama5d4_xplained/sama5d4_xplained.c |  2 +-
- board/atmel/sama5d4ek/sama5d4ek.c             |  2 +-
- board/avionic-design/tec-ng/Makefile          |  2 +-
- board/beacon/imx8mm/Makefile                  |  2 +-
- board/beacon/imx8mn/Makefile                  |  2 +-
- board/beacon/imx8mp/Makefile                  |  2 +-
- board/bitmain/antminer_s9/Makefile            |  2 +-
- board/bosch/acc/acc.c                         |  2 +-
- board/bosch/guardian/Makefile                 |  2 +-
- board/bosch/shc/board.c                       |  4 +-
- board/bsh/imx6ulz_smm_m2/Makefile             |  2 +-
- board/bsh/imx8mn_smm_s2/Makefile              |  2 +-
- board/bticino/mamoj/Makefile                  |  2 +-
- board/cloos/imx8mm_phg/Makefile               |  2 +-
- board/compulab/cl-som-imx7/Makefile           |  2 +-
- board/compulab/cl-som-imx7/common.h           |  4 +-
- board/compulab/cl-som-imx7/mux.c              |  4 +-
- board/compulab/cm_fx6/Makefile                |  2 +-
- board/compulab/cm_t43/Makefile                |  2 +-
- board/compulab/imx8mm-cl-iot-gate/Makefile    |  2 +-
- .../compulab/imx8mm-cl-iot-gate/eeprom_spl.c  |  2 +-
- board/comvetia/lxr2/lxr2.c                    |  2 +-
- .../conclusive/kstr-sama5d27/kstr-sama5d27.c  |  2 +-
- board/congatec/cgtqmx8/Makefile               |  2 +-
- board/congatec/common/Makefile                |  2 -
- board/coreboot/coreboot/Makefile              |  2 +-
- board/data_modul/common/common.c              |  2 +-
- board/data_modul/imx8mm_edm_sbc/Makefile      |  2 +-
- board/data_modul/imx8mp_edm_sbc/Makefile      |  2 +-
- board/davinci/da8xxevm/omapl138_lcdk.c        |  2 +-
- board/dhelectronics/dh_imx6/Makefile          |  2 +-
- board/dhelectronics/dh_imx8mp/Makefile        |  2 +-
- board/dhelectronics/dh_stm32mp1/board.c       |  6 +-
- board/ea/mx7ulp_com/mx7ulp_com.c              |  2 +-
- board/eets/pdu001/board.c                     |  2 +-
- board/embest/mx6boards/mx6boards.c            |  2 +-
- board/engicam/common/Makefile                 |  2 +-
- board/engicam/imx8mm/Makefile                 |  2 +-
- board/engicam/imx8mp/Makefile                 |  2 +-
- board/engicam/stm32mp1/Makefile               |  2 +-
- board/firefly/firefly-rk3288/firefly-rk3288.c |  2 +-
- board/firefly/roc-pc-rk3399/roc-pc-rk3399.c   |  2 +-
- board/freescale/common/Makefile               | 10 +-
- board/freescale/common/cmd_esbc_validate.c    |  2 +-
- board/freescale/common/fsl_chain_of_trust.c   |  8 +-
- board/freescale/common/fsl_validate.c         |  4 +-
- board/freescale/common/qixis.c                |  2 +-
- board/freescale/imx8mm_evk/Makefile           |  2 +-
- board/freescale/imx8mn_evk/Makefile           |  2 +-
- board/freescale/imx8mp_evk/Makefile           |  2 +-
- board/freescale/imx8mq_evk/Makefile           |  2 +-
- board/freescale/imx8qm_mek/Makefile           |  2 +-
- board/freescale/imx8qxp_mek/Makefile          |  2 +-
- board/freescale/imx8ulp_evk/Makefile          |  2 +-
- board/freescale/imx93_evk/Makefile            |  2 +-
- board/freescale/imxrt1020-evk/imxrt1020-evk.c |  2 +-
- board/freescale/imxrt1050-evk/imxrt1050-evk.c |  2 +-
- board/freescale/imxrt1170-evk/imxrt1170-evk.c |  2 +-
- board/freescale/ls1012afrdm/ls1012afrdm.c     |  2 +-
- board/freescale/ls1012aqds/ls1012aqds.c       |  2 +-
- board/freescale/ls1012ardb/ls1012ardb.c       |  2 +-
- board/freescale/ls1021aiot/ls1021aiot.c       |  4 +-
- board/freescale/ls1021aqds/ddr.c              |  4 +-
- board/freescale/ls1021aqds/ls1021aqds.c       |  2 +-
- board/freescale/ls1021atsn/ls1021atsn.c       | 10 +-
- board/freescale/ls1021atwr/ls1021atwr.c       | 10 +-
- board/freescale/ls1028a/ls1028a.c             |  2 +-
- board/freescale/ls1043aqds/Makefile           |  2 +-
- board/freescale/ls1043aqds/ddr.c              |  2 +-
- board/freescale/ls1043aqds/ls1043aqds.c       |  2 +-
- board/freescale/ls1043ardb/Makefile           |  2 +-
- board/freescale/ls1043ardb/ddr.c              |  4 +-
- board/freescale/ls1043ardb/ls1043ardb.c       |  2 +-
- board/freescale/ls1046aqds/Makefile           |  2 +-
- board/freescale/ls1046aqds/ddr.c              |  2 +-
- board/freescale/ls1046aqds/ls1046aqds.c       |  2 +-
- board/freescale/ls1046ardb/Makefile           |  2 +-
- board/freescale/ls1046ardb/ddr.c              |  2 +-
- board/freescale/ls1046ardb/ls1046ardb.c       |  2 +-
- board/freescale/ls1088a/Makefile              |  2 +-
- board/freescale/ls1088a/ddr.c                 |  6 +-
- board/freescale/ls1088a/ls1088a.c             |  8 +-
- board/freescale/ls2080aqds/ddr.c              |  2 +-
- board/freescale/ls2080aqds/ls2080aqds.c       |  4 +-
- board/freescale/ls2080ardb/ddr.c              |  2 +-
- board/freescale/ls2080ardb/eth_ls2080rdb.c    |  2 +-
- board/freescale/lx2160a/lx2160a.c             |  2 +-
- board/freescale/mx23evk/Makefile              |  2 +-
- board/freescale/mx28evk/Makefile              |  2 +-
- board/freescale/mx6memcal/Makefile            |  2 +-
- board/freescale/mx6sabreauto/mx6sabreauto.c   |  2 +-
- board/freescale/mx6sabresd/mx6sabresd.c       |  2 +-
- board/freescale/mx6slevk/mx6slevk.c           |  4 +-
- .../mx6ul_14x14_evk/mx6ul_14x14_evk.c         |  4 +-
- board/freescale/p1010rdb/Makefile             |  4 +-
- board/freescale/p1010rdb/p1010rdb.c           |  2 +-
- board/freescale/p1010rdb/tlb.c                |  2 +-
- board/freescale/p1_p2_rdb_pc/Makefile         |  4 +-
- board/freescale/p1_p2_rdb_pc/tlb.c            |  2 +-
- board/freescale/t102xrdb/Makefile             |  2 +-
- board/freescale/t102xrdb/ddr.c                |  4 +-
- board/freescale/t102xrdb/tlb.c                |  4 +-
- board/freescale/t104xrdb/Makefile             |  2 +-
- board/freescale/t104xrdb/ddr.c                |  4 +-
- board/freescale/t104xrdb/tlb.c                |  6 +-
- board/freescale/t208xqds/Makefile             |  2 +-
- board/freescale/t208xqds/ddr.c                |  2 +-
- board/freescale/t208xqds/tlb.c                |  4 +-
- board/freescale/t208xrdb/Makefile             |  2 +-
- board/freescale/t208xrdb/ddr.c                |  2 +-
- board/freescale/t208xrdb/tlb.c                |  4 +-
- board/freescale/t4rdb/Makefile                |  2 +-
- board/freescale/t4rdb/cpld.c                  |  2 +-
- board/freescale/t4rdb/ddr.c                   |  2 +-
- board/freescale/t4rdb/tlb.c                   |  4 +-
- board/gardena/smart-gateway-at91sam/Makefile  |  2 +-
- board/gardena/smart-gateway-mt7688/board.c    |  2 +-
- board/gateworks/gw_ventana/Makefile           |  2 +-
- board/gateworks/gw_ventana/eeprom.c           |  2 +-
- board/gateworks/venice/Makefile               |  2 +-
- board/gdsys/a38x/Makefile                     |  2 +-
- board/gdsys/a38x/controlcenterdc.c            | 12 +--
- board/ge/b1x5v2/b1x5v2.c                      |  4 +-
- board/ge/b1x5v2/spl.c                         |  2 +-
- board/google/chromebook_coral/coral.c         |  2 +-
- board/google/gru/gru.c                        |  4 +-
- board/google/imx8mq_phanbell/Makefile         |  2 +-
- board/google/veyron/veyron.c                  |  2 +-
- board/grinn/chiliboard/board.c                |  2 +-
- board/grinn/liteboard/board.c                 |  2 +-
- board/htc/endeavoru/Makefile                  |  2 +-
- board/imgtec/ci20/ci20.c                      |  4 +-
- board/isee/igep003x/Makefile                  |  2 +-
- board/isee/igep003x/board.c                   |  2 +-
- board/isee/igep00x0/Makefile                  |  2 +-
- board/k+p/kp_imx6q_tpc/Makefile               |  2 +-
- board/kontron/pitx_imx8m/Makefile             |  2 +-
- board/kontron/sl-mx6ul/Makefile               |  2 +-
- board/kontron/sl-mx8mm/Makefile               |  2 +-
- board/kontron/sl28/Makefile                   |  4 +-
- board/kontron/sl28/ddr.c                      |  2 +-
- board/kosagi/novena/Makefile                  |  2 +-
- board/lenovo/ideapad-yoga-11/Makefile         |  2 +-
- board/lg/sniper/sniper.c                      |  2 +-
- board/lg/x3-t30/Makefile                      |  2 +-
- board/liebherr/display5/Makefile              |  2 +-
- board/liebherr/mccmon6/Makefile               |  2 +-
- board/liebherr/xea/Makefile                   |  2 +-
- board/liebherr/xea/xea.c                      |  6 +-
- board/logicpd/am3517evm/am3517evm.c           |  2 +-
- board/logicpd/imx6/imx6logic.c                |  2 +-
- board/logicpd/omap3som/omap3logic.c           |  2 +-
- board/menlo/m53menlo/m53menlo.c               |  2 +-
- board/menlo/mx8menlo/Makefile                 |  4 +-
- board/microsoft/surface-rt/Makefile           |  2 +-
- board/mntre/imx8mq_reform2/Makefile           |  2 +-
- board/msc/sm2s_imx8mp/Makefile                |  2 +-
- board/myir/mys_6ulx/Makefile                  |  2 +-
- board/nvidia/beaver/Makefile                  |  2 +-
- board/nvidia/cardhu/Makefile                  |  2 +-
- board/olimex/mx23_olinuxino/Makefile          |  2 +-
- board/opalkelly/zynq/Makefile                 |  2 +-
- board/phytec/common/Makefile                  |  2 +-
- board/phytec/pcl063/Makefile                  |  2 +-
- board/phytec/pcm058/pcm058.c                  |  2 +-
- board/phytec/phycore_am335x_r2/Makefile       |  2 +-
- board/phytec/phycore_am335x_r2/board.c        |  2 +-
- board/phytec/phycore_am62x/phycore-am62x.c    |  2 +-
- board/phytec/phycore_imx8mm/Makefile          |  2 +-
- board/phytec/phycore_imx8mp/Makefile          |  2 +-
- board/phytec/phycore_imx93/Makefile           |  2 +-
- board/polyhex/imx8mp_debix_model_a/Makefile   |  2 +-
- board/purism/librem5/Makefile                 |  2 +-
- board/purism/librem5/librem5.h                |  4 +-
- board/radxa/rockpi4-rk3399/rockpi4-rk3399.c   |  4 +-
- board/renesas/alt/Makefile                    |  2 +-
- board/renesas/condor/Makefile                 |  2 +-
- board/renesas/draak/Makefile                  |  2 +-
- board/renesas/eagle/Makefile                  |  2 +-
- board/renesas/ebisu/Makefile                  |  2 +-
- board/renesas/falcon/Makefile                 |  2 +-
- board/renesas/gose/Makefile                   |  2 +-
- board/renesas/koelsch/Makefile                |  2 +-
- board/renesas/lager/Makefile                  |  2 +-
- board/renesas/porter/Makefile                 |  2 +-
- board/renesas/salvator-x/Makefile             |  2 +-
- board/renesas/silk/Makefile                   |  2 +-
- board/renesas/stout/Makefile                  |  2 +-
- board/renesas/ulcb/Makefile                   |  2 +-
- board/renesas/v3hsk/Makefile                  |  2 +-
- board/renesas/v3msk/Makefile                  |  2 +-
- board/ronetix/imx7-cm/Makefile                |  2 +-
- board/ronetix/imx8mq-cm/Makefile              |  2 +-
- board/samsung/common/Makefile                 |  2 +-
- board/samsung/origen/Makefile                 |  2 +-
- board/samsung/smdkv310/Makefile               |  2 +-
- board/seeed/npi_imx6ull/Makefile              |  2 +-
- board/sielaff/imx6dl-sielaff/Makefile         |  2 +-
- board/siemens/capricorn/Makefile              |  2 +-
- board/siemens/capricorn/board.c               |  8 +-
- board/siemens/common/board_am335x.c           | 12 +--
- board/siemens/common/board_am335x.h           |  4 +-
- board/siemens/common/factoryset.c             |  4 +-
- board/siemens/corvus/board.c                  |  2 +-
- board/siemens/draco/Makefile                  |  4 +-
- board/siemens/draco/board.c                   | 14 +--
- board/siemens/pxm2/Makefile                   |  4 +-
- board/siemens/pxm2/board.c                    | 14 +--
- board/siemens/rut/Makefile                    |  4 +-
- board/siemens/rut/board.c                     |  8 +-
- board/siemens/smartweb/smartweb.c             |  2 +-
- board/siemens/taurus/taurus.c                 |  4 +-
- board/sifive/unleashed/Makefile               |  2 +-
- board/sifive/unmatched/Makefile               |  2 +-
- board/silinux/ek874/Makefile                  |  2 +-
- board/softing/vining_2000/vining_2000.c       |  2 +-
- board/softing/vining_fpga/socfpga.c           |  2 +-
- board/solidrun/mx6cuboxi/mx6cuboxi.c          |  2 +-
- board/st/common/Makefile                      |  2 +-
- board/st/common/cmd_stboard.c                 |  2 +-
- board/st/stm32f746-disco/stm32f746-disco.c    |  4 +-
- board/st/stm32mp1/Makefile                    |  2 +-
- board/starfive/visionfive2/Makefile           |  2 +-
- board/sunxi/board.c                           |  6 +-
- board/tcl/sl50/Makefile                       |  2 +-
- board/tcl/sl50/board.c                        | 14 +--
- board/technexion/pico-imx6/spl.c              |  2 +-
- board/technexion/pico-imx6ul/spl.c            |  2 +-
- board/technexion/pico-imx7d/spl.c             |  2 +-
- board/technexion/pico-imx8mq/Makefile         |  2 +-
- board/theadorable/theadorable.c               |  6 +-
- .../theobroma-systems/jaguar_rk3588/Makefile  |  2 +-
- board/theobroma-systems/puma_rk3399/Makefile  |  2 +-
- .../theobroma-systems/ringneck_px30/Makefile  |  2 +-
- board/theobroma-systems/tiger_rk3588/Makefile |  2 +-
- board/ti/am335x/Makefile                      |  2 +-
- board/ti/am335x/board.c                       | 12 +--
- board/ti/am43xx/Makefile                      |  2 +-
- board/ti/am57xx/board.c                       | 10 +-
- board/ti/am62x/evm.c                          |  2 +-
- board/ti/am64x/evm.c                          |  2 +-
- board/ti/common/board_detect.c                |  6 +-
- board/ti/dra7xx/evm.c                         |  6 +-
- board/ti/j721e/evm.c                          |  6 +-
- board/ti/j721s2/evm.c                         |  4 +-
- board/ti/ks2_evm/board.c                      |  2 +-
- board/ti/ks2_evm/board_k2e.c                  |  2 +-
- board/ti/ks2_evm/board_k2g.c                  |  4 +-
- board/ti/ks2_evm/board_k2hk.c                 |  2 +-
- board/ti/ks2_evm/board_k2l.c                  |  2 +-
- board/ti/omap3evm/evm.c                       |  4 +-
- board/timll/devkit8000/devkit8000.c           |  2 +-
- board/topic/zynq/Makefile                     |  2 +-
- board/toradex/apalis_imx6/apalis_imx6.c       | 12 +--
- board/toradex/apalis_imx6/do_fuse.c           |  4 +-
- board/toradex/apalis_imx6/pf0100.c            |  4 +-
- board/toradex/apalis_t30/Makefile             |  2 +-
- board/toradex/colibri_imx6/colibri_imx6.c     | 12 +--
- board/toradex/colibri_imx6/do_fuse.c          |  4 +-
- board/toradex/colibri_imx6/pf0100.c           |  4 +-
- board/toradex/colibri_t30/Makefile            |  2 +-
- board/toradex/common/Makefile                 |  2 +-
- board/toradex/verdin-imx8mm/Makefile          |  2 +-
- board/toradex/verdin-imx8mp/Makefile          |  2 +-
- board/udoo/neo/neo.c                          |  2 +-
- board/udoo/udoo_spl.c                         |  2 +-
- board/variscite/common/imx9_eeprom.c          |  2 +-
- board/variscite/dart_6ul/Makefile             |  2 +-
- board/variscite/imx8mn_var_som/Makefile       |  2 +-
- .../variscite/imx8mn_var_som/imx8mn_var_som.c |  4 +-
- board/variscite/imx93_var_som/Makefile        |  2 +-
- board/vscom/baltos/Makefile                   |  2 +-
- board/vscom/baltos/board.c                    | 14 +--
- board/wandboard/Makefile                      |  2 +-
- board/wexler/qc750/Makefile                   |  2 +-
- board/work-microwave/work_92105/Makefile      |  2 +-
- board/xilinx/common/Makefile                  |  2 +-
- board/xilinx/common/board.c                   |  6 +-
- .../microblaze-generic/microblaze-generic.c   |  2 +-
- board/xilinx/zynq/Makefile                    |  6 +-
- board/xilinx/zynq/board.c                     |  4 +-
- board/xilinx/zynqmp/Makefile                  |  8 +-
- board/xilinx/zynqmp/zynqmp.c                  |  6 +-
- boot/Makefile                                 | 86 ++++++++--------
- boot/fdt_simplefb.c                           |  2 +-
- boot/image-android-dt.c                       |  2 +-
- boot/image-android.c                          |  2 +-
- boot/image-fit-sig.c                          |  2 +-
- boot/vbe_simple_fw.c                          |  4 +-
- cmd/Makefile                                  |  6 +-
- cmd/nvedit.c                                  | 12 +--
- cmd/vbe.c                                     |  2 +-
- common/Makefile                               | 42 ++++----
- common/bloblist.c                             |  6 +-
- common/board_f.c                              |  2 +-
- common/bootstage.c                            |  6 +-
- common/cli_readline.c                         |  2 +-
- common/console.c                              |  2 +-
- common/hash.c                                 |  2 +-
- common/init/Makefile                          |  2 +-
- common/spl/Makefile                           | 58 +++++------
- common/spl/spl.c                              | 61 ++++++------
- common/spl/spl_fit.c                          |  2 +-
- common/spl/spl_legacy.c                       |  2 +-
- common/splash_source.c                        |  2 +-
- config.mk                                     |  2 +-
- disk/Makefile                                 | 18 ++--
- disk/part.c                                   |  2 +-
- disk/part_dos.c                               |  2 +-
- doc/develop/distro.rst                        |  4 +-
- doc/develop/index.rst                         |  1 +
- doc/develop/init.rst                          | 93 +++++++++++++++++
- doc/develop/logging.rst                       |  2 +-
- doc/develop/qconfig.rst                       |  2 +-
- doc/develop/spl.rst                           | 83 ++++++++--------
- doc/develop/tests_sandbox.rst                 |  2 +-
- doc/develop/tests_writing.rst                 |  6 +-
- doc/device-tree-bindings/bootph.yaml          |  2 +-
- drivers/Makefile                              | 90 ++++++++---------
- drivers/adc/Makefile                          |  2 +-
- drivers/ata/Makefile                          |  2 +-
- drivers/block/Makefile                        | 12 +--
- drivers/bus/Makefile                          |  4 +-
- drivers/cache/Makefile                        |  2 +-
- drivers/clk/Makefile                          | 18 ++--
- drivers/clk/altera/clk-agilex.c               |  2 +-
- drivers/clk/altera/clk-agilex5.c              |  2 +-
- drivers/clk/altera/clk-n5x.c                  |  2 +-
- drivers/clk/clk-uclass.c                      |  2 +-
- drivers/clk/clk_vexpress_osc.c                |  4 +-
- drivers/clk/clk_zynq.c                        | 22 ++---
- drivers/clk/exynos/Makefile                   |  2 +-
- drivers/clk/imx/Makefile                      | 20 ++--
- drivers/clk/imx/clk-imx8mm.c                  |  6 +-
- drivers/clk/imx/clk-imx8mn.c                  |  6 +-
- drivers/clk/imx/clk-imxrt1020.c               |  2 +-
- drivers/clk/imx/clk-imxrt1050.c               |  2 +-
- drivers/clk/rockchip/clk_px30.c               |  6 +-
- drivers/clk/rockchip/clk_rk3188.c             |  6 +-
- drivers/clk/rockchip/clk_rk3288.c             |  8 +-
- drivers/clk/rockchip/clk_rk3328.c             |  4 +-
- drivers/clk/rockchip/clk_rk3368.c             | 14 +--
- drivers/clk/rockchip/clk_rk3399.c             | 10 +-
- drivers/clk/rockchip/clk_rk3568.c             | 10 +-
- drivers/clk/rockchip/clk_rk3588.c             | 14 +--
- drivers/clk/sifive/sifive-prci.c              |  2 +-
- drivers/clk/starfive/clk-jh7110-pll.c         |  4 +-
- drivers/clk/stm32/clk-stm32mp1.c              |  6 +-
- drivers/clk/ti/Makefile                       |  4 +-
- drivers/core/Makefile                         | 16 +--
- drivers/core/ofnode.c                         |  4 +-
- drivers/crypto/fsl/Makefile                   |  2 +-
- drivers/crypto/fsl/jobdesc.c                  |  2 +-
- drivers/crypto/fsl/jr.c                       |  6 +-
- drivers/ddr/altera/Makefile                   |  2 +-
- drivers/ddr/altera/sdram_gen5.c               |  4 +-
- drivers/ddr/fsl/lc_common_dimm_params.c       |  6 +-
- drivers/ddr/fsl/main.c                        |  6 +-
- drivers/ddr/imx/imx8m/Makefile                |  2 +-
- drivers/ddr/imx/imx8ulp/Makefile              |  2 +-
- drivers/ddr/imx/imx9/Makefile                 |  2 +-
- drivers/ddr/imx/phy/Makefile                  |  2 +-
- drivers/ddr/marvell/a38x/Makefile             | 44 ++++-----
- drivers/ddr/marvell/a38x/old/Makefile         | 28 +++---
- drivers/ddr/marvell/axp/Makefile              | 20 ++--
- drivers/dfu/Makefile                          | 16 +--
- drivers/firmware/Makefile                     |  2 +-
- drivers/firmware/firmware-zynqmp.c            | 10 +-
- drivers/fpga/intel_sdm_mb.c                   |  2 +-
- drivers/fpga/zynqpl.c                         |  6 +-
- drivers/gpio/Makefile                         | 16 +--
- drivers/gpio/gpio-uclass.c                    |  4 +-
- drivers/gpio/pca953x.c                        |  2 +-
- drivers/gpio/rk_gpio.c                        |  4 +-
- drivers/gpio/s5p_gpio.c                       | 10 +-
- drivers/gpio/sunxi_gpio.c                     |  2 +-
- drivers/gpio/tca642x.c                        |  2 +-
- drivers/gpio/tegra_gpio.c                     |  2 +-
- drivers/i2c/Makefile                          | 16 +--
- drivers/i2c/designware_i2c_pci.c              |  4 +-
- drivers/input/Makefile                        |  8 +-
- drivers/led/Makefile                          |  2 +-
- drivers/mailbox/Makefile                      |  2 +-
- drivers/mailbox/zynqmp-ipi.c                  |  6 +-
- drivers/misc/Makefile                         | 32 +++---
- drivers/misc/gsc.c                            |  2 +-
- drivers/misc/imx8/scu.c                       |  2 +-
- drivers/misc/p2sb-uclass.c                    |  2 +-
- drivers/mmc/Makefile                          | 14 +--
- drivers/mmc/mmc-uclass.c                      |  4 +-
- drivers/mmc/mmc.c                             | 20 ++--
- drivers/mmc/mmc_legacy.c                      |  4 +-
- drivers/mmc/mmc_private.h                     |  2 +-
- drivers/mmc/omap_hsmmc.c                      |  4 +-
- drivers/mmc/rockchip_dw_mmc.c                 |  2 +-
- drivers/mmc/rockchip_sdhci.c                  |  2 +-
- drivers/mmc/socfpga_dw_mmc.c                  |  2 +-
- drivers/mmc/tmio-common.c                     |  2 +-
- drivers/mmc/uniphier-sd.c                     |  4 +-
- drivers/mmc/zynq_sdhci.c                      |  6 +-
- drivers/mtd/Makefile                          |  6 +-
- drivers/mtd/nand/Makefile                     |  4 +-
- drivers/mtd/nand/raw/Makefile                 |  4 +-
- drivers/mtd/nand/raw/atmel_nand.c             |  4 +-
- drivers/mtd/nand/raw/lpc32xx_nand_mlc.c       |  6 +-
- drivers/mtd/nand/raw/lpc32xx_nand_slc.c       |  8 +-
- drivers/mtd/nand/raw/nand_base.c              | 10 +-
- drivers/mtd/nand/raw/omap_gpmc.c              |  4 +-
- drivers/mtd/nand/raw/sand_nand.c              |  4 +-
- drivers/mtd/onenand/Makefile                  |  2 +-
- drivers/mtd/spi/Makefile                      | 10 +-
- drivers/mtd/spi/sf-uclass.c                   |  2 +-
- drivers/mtd/spi/sf_dataflash.c                |  2 +-
- drivers/mtd/spi/spi-nor-core.c                |  4 +-
- drivers/mux/Makefile                          |  2 +-
- drivers/net/Kconfig                           |  2 +-
- drivers/net/dwc_eth_xgmac_socfpga.c           |  2 +-
- drivers/net/dwmac_socfpga.c                   |  2 +-
- drivers/nvme/Makefile                         |  2 +-
- drivers/pci/pci-uclass.c                      |  4 +-
- drivers/pci/pci_rom.c                         |  4 +-
- drivers/phy/Makefile                          |  6 +-
- drivers/phy/cadence/Makefile                  |  4 +-
- drivers/phy/ti/Makefile                       |  2 +-
- drivers/pinctrl/Makefile                      |  8 +-
- drivers/pinctrl/intel/pinctrl.c               |  6 +-
- drivers/pinctrl/mediatek/pinctrl-mtk-common.c |  4 +-
- drivers/pinctrl/pinctrl_stm32.c               |  4 +-
- drivers/pinctrl/starfive/Makefile             |  4 +-
- drivers/pinctrl/tegra/Makefile                |  2 +-
- drivers/pinctrl/uniphier/pinctrl-uniphier.h   |  2 +-
- drivers/power/Makefile                        | 10 +-
- drivers/power/acpi_pmc/Makefile               |  2 +-
- drivers/power/acpi_pmc/acpi-pmc-uclass.c      |  2 +-
- drivers/power/domain/Makefile                 |  2 +-
- drivers/power/pmic/Makefile                   | 34 +++----
- drivers/power/pmic/rk8xx.c                    |  4 +-
- drivers/power/pmic/stpmic1.c                  |  6 +-
- drivers/power/power_core.c                    |  2 +-
- drivers/power/regulator/Makefile              | 48 ++++-----
- drivers/power/regulator/rk8xx.c               |  2 +-
- drivers/power/sy8106a.c                       |  2 +-
- drivers/ram/Makefile                          |  4 +-
- drivers/ram/mediatek/ddr3-mt7629.c            |  4 +-
- drivers/ram/rockchip/sdram_rk3188.c           | 12 +--
- drivers/ram/rockchip/sdram_rk3288.c           |  2 +-
- drivers/ram/rockchip/sdram_rk3399.c           |  4 +-
- drivers/ram/rockchip/sdram_rv1126.c           |  9 +-
- drivers/ram/sifive/sifive_ddr.c               |  6 +-
- drivers/ram/starfive/Makefile                 |  4 +-
- drivers/ram/stm32mp1/stm32mp1_ram.c           |  2 +-
- drivers/remoteproc/Makefile                   |  2 +-
- drivers/reset/Makefile                        |  2 +-
- drivers/reset/reset-socfpga.c                 |  2 +-
- drivers/rng/Makefile                          |  2 +-
- drivers/rtc/Makefile                          |  6 +-
- drivers/scsi/Makefile                         |  6 +-
- drivers/serial/Makefile                       |  6 +-
- drivers/serial/atmel_usart.c                  |  2 +-
- drivers/serial/ns16550.c                      |  8 +-
- drivers/serial/serial-uclass.c                |  2 +-
- drivers/serial/serial.c                       |  2 +-
- drivers/serial/serial_s5p.c                   |  2 +-
- drivers/serial/serial_zynq.c                  |  2 +-
- drivers/spi/Makefile                          |  2 +-
- drivers/spi/designware_spi.c                  |  4 +-
- drivers/spi/ich.c                             |  4 +-
- drivers/spi/rockchip_sfc.c                    |  2 +-
- drivers/spi/spi-uclass.c                      |  4 +-
- drivers/sysreset/Makefile                     | 14 +--
- drivers/sysreset/sysreset-uclass.c            |  2 +-
- drivers/sysreset/sysreset_ast.c               |  2 +-
- drivers/timer/Makefile                        |  8 +-
- drivers/tpm/Makefile                          |  4 +-
- drivers/usb/cdns3/Makefile                    |  4 +-
- drivers/usb/cdns3/core.c                      |  6 +-
- drivers/usb/common/Makefile                   |  2 +-
- drivers/usb/dwc3/Makefile                     |  4 +-
- drivers/usb/gadget/Makefile                   | 10 +-
- drivers/usb/gadget/f_sdp.c                    | 10 +-
- drivers/usb/gadget/udc/Makefile               |  4 +-
- drivers/usb/host/Makefile                     |  6 +-
- drivers/usb/mtu3/mtu3_plat.c                  |  4 +-
- drivers/video/Makefile                        | 18 ++--
- drivers/video/console_truetype.c              |  6 +-
- drivers/video/tidss/Makefile                  |  2 +-
- drivers/video/video-uclass.c                  |  6 +-
- drivers/watchdog/Makefile                     |  2 +-
- dts/Makefile                                  |  2 +-
- env/Makefile                                  | 24 ++---
- env/common.c                                  |  4 +-
- env/fat.c                                     |  4 +-
- env/flash.c                                   |  6 +-
- env/mmc.c                                     |  6 +-
- env/nand.c                                    |  8 +-
- env/nowhere.c                                 |  2 +-
- env/sf.c                                      |  2 +-
- fs/Makefile                                   |  2 +-
- fs/fat/Makefile                               |  4 +-
- fs/fs.c                                       |  6 +-
- fs/sandbox/Makefile                           |  2 +-
- fs/squashfs/Makefile                          |  2 +-
- include/asm-generic/global_data.h             |  2 +-
- include/bootcount.h                           |  4 +-
- include/config_distro_bootcmd.h               | 10 +-
- include/configs/P1010RDB.h                    |  4 +-
- include/configs/am335x_evm.h                  |  4 +-
- include/configs/am335x_guardian.h             |  4 +-
- include/configs/am335x_shc.h                  |  4 +-
- include/configs/am43xx_evm.h                  |  4 +-
- include/configs/am57xx_evm.h                  |  2 +-
- include/configs/capricorn-common.h            |  4 +-
- include/configs/cgtqmx8.h                     |  2 +-
- include/configs/da850evm.h                    |  2 +-
- include/configs/dra7xx_evm.h                  |  4 +-
- include/configs/ds116.h                       |  4 +-
- include/configs/ds414.h                       |  4 +-
- .../configs/gardena-smart-gateway-mt7688.h    |  2 +-
- include/configs/imx6q-bosch-acc.h             |  2 +-
- include/configs/imx6ulz_smm_m2.h              |  4 +-
- include/configs/imx8mm-cl-iot-gate.h          |  2 +-
- include/configs/imx8mm_beacon.h               |  2 +-
- include/configs/imx8mm_data_modul_edm_sbc.h   |  2 +-
- include/configs/imx8mm_evk.h                  |  2 +-
- include/configs/imx8mm_icore_mx8mm.h          |  4 +-
- include/configs/imx8mm_phg.h                  |  2 +-
- include/configs/imx8mm_venice.h               |  2 +-
- include/configs/imx8mp_rsb3720.h              |  2 +-
- include/configs/imx8mq_cm.h                   |  2 +-
- include/configs/imx8mq_evk.h                  |  2 +-
- include/configs/imx8mq_phanbell.h             |  2 +-
- include/configs/imx8mq_reform2.h              |  2 +-
- include/configs/imx8qm_mek.h                  |  2 +-
- include/configs/imx8qxp_mek.h                 |  2 +-
- include/configs/imx8ulp_evk.h                 |  2 +-
- include/configs/imx93_evk.h                   |  2 +-
- include/configs/kontron-sl-mx8mm.h            |  4 +-
- include/configs/kontron_pitx_imx8m.h          |  2 +-
- include/configs/librem5.h                     |  2 +-
- include/configs/linkit-smart-7688.h           |  2 +-
- include/configs/ls1043a_common.h              |  6 +-
- include/configs/ls1046a_common.h              |  6 +-
- include/configs/ls1088a_common.h              |  2 +-
- include/configs/msc_sm2s_imx8mp.h             |  2 +-
- include/configs/mt7621.h                      |  2 +-
- include/configs/mt7628.h                      |  2 +-
- include/configs/n2350.h                       |  4 +-
- include/configs/p1_p2_rdb_pc.h                |  4 +-
- include/configs/phycore_imx8mm.h              |  2 +-
- include/configs/pico-imx8mq.h                 |  2 +-
- include/configs/rk3399_common.h               |  4 +-
- include/configs/rockchip-common.h             |  2 +-
- include/configs/socfpga_common.h              |  2 +-
- include/configs/stm32mp15_common.h            |  4 +-
- include/configs/stm32mp15_dh_dhsom.h          |  2 +-
- include/configs/ti_omap3_common.h             |  2 +-
- include/configs/ti_omap4_common.h             |  2 +-
- include/configs/turris_1x.h                   |  4 +-
- include/configs/turris_omnia.h                |  4 +-
- include/configs/verdin-imx8mm.h               |  2 +-
- include/configs/verdin-imx8mp.h               |  4 +-
- include/configs/vining_2000.h                 |  2 +-
- include/configs/xilinx_zynqmp.h               |  2 +-
- include/configs/zynq-common.h                 |  4 +-
- include/env.h                                 |  2 +-
- include/env_callback.h                        |  2 +-
- include/fdtdec.h                              |  2 +-
- include/image-android-dt.h                    |  2 +-
- include/iotrace.h                             |  2 +-
- include/linux/kconfig.h                       |  8 +-
- include/log.h                                 | 12 +--
- include/mmc.h                                 |  2 +-
- include/mtd/cfi_flash.h                       |  2 +-
- include/net.h                                 |  6 +-
- include/part.h                                |  2 +-
- include/sdp.h                                 |  2 +-
- include/search.h                              |  2 +-
- include/spl.h                                 | 78 ++++++++-------
- include/stdio.h                               |  5 +-
- include/sunxi_gpio.h                          |  2 +-
- include/upl.h                                 |  4 +-
- include/vbe.h                                 |  2 +-
- lib/Makefile                                  | 68 ++++++-------
- lib/acpi/Makefile                             | 10 +-
- lib/aes/Makefile                              |  2 +-
- lib/crypto/Makefile                           | 18 ++--
- lib/display_options.c                         |  2 +-
- lib/ecdsa/Makefile                            |  2 +-
- lib/fdtdec.c                                  |  8 +-
- lib/hang.c                                    |  2 +-
- lib/hashtable.c                               |  4 +-
- lib/hexdump.c                                 |  2 +-
- lib/libfdt/Makefile                           |  2 +-
- lib/lmb.c                                     |  4 +-
- lib/rsa/Makefile                              |  4 +-
- lib/time.c                                    |  2 +-
- lib/uuid.c                                    |  2 +-
- net/Makefile                                  | 12 +--
- net/bootp.c                                   |  2 +-
- net/net.c                                     |  8 +-
- scripts/Kbuild.include                        | 14 +--
- scripts/Makefile.autoconf                     |  6 +-
- scripts/{Makefile.spl => Makefile.xpl}        | 60 ++++++-----
- test/Makefile                                 | 24 ++---
- test/cmd_ut.c                                 |  2 +-
- test/dm/Makefile                              |  6 +-
- test/fuzz/Makefile                            |  2 +-
- test/lib/Makefile                             |  2 +-
- test/test-main.c                              |  2 +-
- tools/qconfig.py                              | 32 +++---
- 906 files changed, 2243 insertions(+), 2257 deletions(-)
- create mode 100644 doc/develop/init.rst
- rename scripts/{Makefile.spl => Makefile.xpl} (92%)
-
+diff --git a/Makefile b/Makefile
+index d38adcbd1e6..ca74406f21c 100644
+--- a/Makefile
++++ b/Makefile
+@@ -883,7 +883,7 @@ libs-y += drivers/usb/ulpi/
+ ifdef CONFIG_POST
+ libs-y += post/
+ endif
+-libs-$(CONFIG_$(SPL_TPL_)UNIT_TEST) += test/
++libs-$(CONFIG_$(PHASE_)UNIT_TEST) += test/
+ libs-$(CONFIG_UT_ENV) += test/env/
+ libs-$(CONFIG_UT_OPTEE) += test/optee/
+ libs-$(CONFIG_UT_OVERLAY) += test/overlay/
+diff --git a/arch/arm/cpu/armv8/Makefile b/arch/arm/cpu/armv8/Makefile
+index c5f568e2cb7..8747d2eb186 100644
+--- a/arch/arm/cpu/armv8/Makefile
++++ b/arch/arm/cpu/armv8/Makefile
+@@ -6,7 +6,7 @@
+ extra-y	:= start.o
+ 
+ obj-y	+= cpu.o
+-ifndef CONFIG_$(SPL_TPL_)TIMER
++ifndef CONFIG_$(PHASE_)TIMER
+ obj-$(CONFIG_SYS_ARCH_TIMER) += generic_timer.o
+ endif
+ ifndef CONFIG_$(XPL_)SYS_DCACHE_OFF
+diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
+index b73a0397541..211ff4960e1 100644
+--- a/arch/arm/lib/Makefile
++++ b/arch/arm/lib/Makefile
+@@ -34,7 +34,7 @@ obj-$(CONFIG_CMD_BOOTI) += bootm.o image.o
+ obj-$(CONFIG_CMD_BOOTM) += bootm.o
+ obj-$(CONFIG_CMD_BOOTZ) += bootm.o zimage.o
+ else
+-obj-$(CONFIG_$(SPL_TPL_)FRAMEWORK) += spl.o
++obj-$(CONFIG_$(PHASE_)FRAMEWORK) += spl.o
+ ifdef CONFIG_SPL_FRAMEWORK
+ obj-$(CONFIG_CMD_BOOTI) += image.o
+ obj-$(CONFIG_CMD_BOOTZ) += zimage.o
+@@ -42,14 +42,14 @@ endif
+ obj-$(CONFIG_OF_LIBFDT) += bootm-fdt.o
+ endif
+ ifdef CONFIG_ARM64
+-obj-$(CONFIG_$(SPL_TPL_)USE_ARCH_MEMSET) += memset-arm64.o
+-obj-$(CONFIG_$(SPL_TPL_)USE_ARCH_MEMCPY) += memcpy-arm64.o
++obj-$(CONFIG_$(PHASE_)USE_ARCH_MEMSET) += memset-arm64.o
++obj-$(CONFIG_$(PHASE_)USE_ARCH_MEMCPY) += memcpy-arm64.o
+ else
+-obj-$(CONFIG_$(SPL_TPL_)USE_ARCH_MEMSET) += memset.o
+-obj-$(CONFIG_$(SPL_TPL_)USE_ARCH_MEMCPY) += memcpy.o
++obj-$(CONFIG_$(PHASE_)USE_ARCH_MEMSET) += memset.o
++obj-$(CONFIG_$(PHASE_)USE_ARCH_MEMCPY) += memcpy.o
+ endif
+-obj-$(CONFIG_$(SPL_TPL_)SYS_L2_PL310) += cache-pl310.o
+-obj-$(CONFIG_$(SPL_TPL_)SEMIHOSTING) += semihosting.o
++obj-$(CONFIG_$(PHASE_)SYS_L2_PL310) += cache-pl310.o
++obj-$(CONFIG_$(PHASE_)SEMIHOSTING) += semihosting.o
+ 
+ ifneq ($(filter y,$(CONFIG_SAVE_PREV_BL_INITRAMFS_START_ADDR) $(CONFIG_SAVE_PREV_BL_FDT_ADDR)),)
+ obj-y += save_prev_bl_data.o
+@@ -73,7 +73,7 @@ obj-y	+= interrupts_64.o
+ else
+ obj-y	+= interrupts.o
+ endif
+-ifndef CONFIG_$(SPL_TPL_)SYSRESET
++ifndef CONFIG_$(PHASE_)SYSRESET
+ obj-y	+= reset.o
+ endif
+ 
+diff --git a/arch/arm/mach-at91/arm926ejs/Makefile b/arch/arm/mach-at91/arm926ejs/Makefile
+index 1695708831c..8f0bc5d997e 100644
+--- a/arch/arm/mach-at91/arm926ejs/Makefile
++++ b/arch/arm/mach-at91/arm926ejs/Makefile
+@@ -16,7 +16,7 @@ obj-$(CONFIG_AT91SAM9X5)	+= at91sam9x5_devices.o
+ obj-$(CONFIG_SAM9X60)		+= sam9x60_devices.o
+ obj-y += clock.o
+ obj-y += cpu.o
+-ifndef CONFIG_$(SPL_TPL_)SYSRESET
++ifndef CONFIG_$(PHASE_)SYSRESET
+ obj-y	+= reset.o
+ endif
+ ifneq ($(CONFIG_ATMEL_PIT_TIMER),y)
+diff --git a/arch/arm/mach-omap2/Makefile b/arch/arm/mach-omap2/Makefile
+index 9a85c764a55..fb5ea97e56e 100644
+--- a/arch/arm/mach-omap2/Makefile
++++ b/arch/arm/mach-omap2/Makefile
+@@ -26,7 +26,7 @@ obj-y	+= vc.o
+ obj-y	+= abb.o
+ endif
+ 
+-ifeq ($(CONFIG_$(SPL_TPL_)SYS_DCACHE_OFF),)
++ifeq ($(CONFIG_$(PHASE_)SYS_DCACHE_OFF),)
+ obj-y	+= omap-cache.o
+ endif
+ 
+diff --git a/arch/arm/mach-rockchip/Makefile b/arch/arm/mach-rockchip/Makefile
+index 70f0af4733c..c0265fe006e 100644
+--- a/arch/arm/mach-rockchip/Makefile
++++ b/arch/arm/mach-rockchip/Makefile
+@@ -29,7 +29,7 @@ ifeq ($(CONFIG_TPL_BUILD),)
+ obj-$(CONFIG_DISPLAY_CPUINFO) += cpu-info.o
+ endif
+ 
+-obj-$(CONFIG_$(SPL_TPL_)RAM) += sdram.o
++obj-$(CONFIG_$(PHASE_)RAM) += sdram.o
+ 
+ obj-$(CONFIG_ROCKCHIP_PX30) += px30/
+ obj-$(CONFIG_ROCKCHIP_RK3036) += rk3036/
+diff --git a/arch/powerpc/lib/Makefile b/arch/powerpc/lib/Makefile
+index 64ac4930b62..6089901fe74 100644
+--- a/arch/powerpc/lib/Makefile
++++ b/arch/powerpc/lib/Makefile
+@@ -44,5 +44,5 @@ obj-y	+= traps.o
+ endif # not minimal
+ 
+ ifdef CONFIG_XPL_BUILD
+-obj-$(CONFIG_$(SPL_TPL_)FRAMEWORK) += spl.o
++obj-$(CONFIG_$(PHASE_)FRAMEWORK) += spl.o
+ endif
+diff --git a/arch/riscv/lib/Makefile b/arch/riscv/lib/Makefile
+index 34b69c13392..608118135d7 100644
+--- a/arch/riscv/lib/Makefile
++++ b/arch/riscv/lib/Makefile
+@@ -40,11 +40,11 @@ extra-$(CONFIG_CMD_BOOTEFI_HELLO_COMPILE) += $(EFI_CRT0) $(EFI_RELOC)
+ extra-$(CONFIG_CMD_BOOTEFI_SELFTEST) += $(EFI_CRT0) $(EFI_RELOC)
+ extra-$(CONFIG_EFI) += $(EFI_CRT0) $(EFI_RELOC)
+ 
+-obj-$(CONFIG_$(SPL_TPL_)USE_ARCH_MEMSET) += memset.o
+-obj-$(CONFIG_$(SPL_TPL_)USE_ARCH_MEMMOVE) += memmove.o
+-obj-$(CONFIG_$(SPL_TPL_)USE_ARCH_MEMCPY) += memcpy.o
+-obj-$(CONFIG_$(SPL_TPL_)USE_ARCH_STRLEN) += strlen_zbb.o
+-obj-$(CONFIG_$(SPL_TPL_)USE_ARCH_STRCMP) += strcmp_zbb.o
+-obj-$(CONFIG_$(SPL_TPL_)USE_ARCH_STRNCMP) += strncmp_zbb.o
++obj-$(CONFIG_$(PHASE_)USE_ARCH_MEMSET) += memset.o
++obj-$(CONFIG_$(PHASE_)USE_ARCH_MEMMOVE) += memmove.o
++obj-$(CONFIG_$(PHASE_)USE_ARCH_MEMCPY) += memcpy.o
++obj-$(CONFIG_$(PHASE_)USE_ARCH_STRLEN) += strlen_zbb.o
++obj-$(CONFIG_$(PHASE_)USE_ARCH_STRCMP) += strcmp_zbb.o
++obj-$(CONFIG_$(PHASE_)USE_ARCH_STRNCMP) += strncmp_zbb.o
+ 
+-obj-$(CONFIG_$(SPL_TPL_)SEMIHOSTING) += semihosting.o
++obj-$(CONFIG_$(PHASE_)SEMIHOSTING) += semihosting.o
+diff --git a/arch/x86/Makefile b/arch/x86/Makefile
+index bc1e1ede12a..fd409b9f720 100644
+--- a/arch/x86/Makefile
++++ b/arch/x86/Makefile
+@@ -4,7 +4,7 @@ ifeq ($(CONFIG_EFI_APP),)
+ ifdef CONFIG_$(XPL_)X86_64
+ head-y := arch/x86/cpu/start64.o
+ else
+-ifeq ($(CONFIG_$(SPL_TPL_)X86_16BIT_INIT),y)
++ifeq ($(CONFIG_$(PHASE_)X86_16BIT_INIT),y)
+ head-y := arch/x86/cpu/start.o
+ else
+ ifndef CONFIG_SPL
+@@ -20,8 +20,8 @@ endif
+ endif
+ endif # EFI
+ 
+-head-$(CONFIG_$(SPL_TPL_)X86_16BIT_INIT) += arch/x86/cpu/start16.o
+-head-$(CONFIG_$(SPL_TPL_)X86_16BIT_INIT) += arch/x86/cpu/resetvec.o
++head-$(CONFIG_$(PHASE_)X86_16BIT_INIT) += arch/x86/cpu/start16.o
++head-$(CONFIG_$(PHASE_)X86_16BIT_INIT) += arch/x86/cpu/resetvec.o
+ 
+ libs-y += arch/x86/cpu/
+ libs-y += arch/x86/lib/
+diff --git a/arch/x86/cpu/Makefile b/arch/x86/cpu/Makefile
+index 8899830370c..39c8b0835cc 100644
+--- a/arch/x86/cpu/Makefile
++++ b/arch/x86/cpu/Makefile
+@@ -9,7 +9,7 @@
+ ifeq ($(CONFIG_$(XPL_)X86_64),y)
+ extra-y	= start64.o
+ else
+-ifeq ($(CONFIG_$(SPL_TPL_)X86_16BIT_INIT),y)
++ifeq ($(CONFIG_$(PHASE_)X86_16BIT_INIT),y)
+ extra-y	= start.o
+ else
+ ifndef CONFIG_SPL
+@@ -24,7 +24,7 @@ endif
+ endif
+ endif
+ 
+-extra-$(CONFIG_$(SPL_TPL_)X86_16BIT_INIT) += resetvec.o start16.o
++extra-$(CONFIG_$(PHASE_)X86_16BIT_INIT) += resetvec.o start16.o
+ 
+ obj-y	+= cpu.o
+ ifndef CONFIG_TPL_BUILD
+@@ -54,10 +54,10 @@ obj-$(CONFIG_INTEL_QUARK) += quark/
+ obj-$(CONFIG_INTEL_QUEENSBAY) += queensbay/
+ obj-$(CONFIG_INTEL_TANGIER) += tangier/
+ obj-$(CONFIG_APIC) += lapic.o ioapic.o
+-obj-$(CONFIG_$(SPL_TPL_)ACPI_GPE) += acpi_gpe.o
++obj-$(CONFIG_$(PHASE_)ACPI_GPE) += acpi_gpe.o
+ obj-$(CONFIG_QFW) += qfw_cpu.o
+ ifndef CONFIG_SYS_COREBOOT
+-obj-$(CONFIG_$(SPL_TPL_)X86_32BIT_INIT) += irq.o
++obj-$(CONFIG_$(PHASE_)X86_32BIT_INIT) += irq.o
+ endif
+ ifndef CONFIG_$(XPL_)X86_64
+ obj-$(CONFIG_$(XPL_)SMP) += mp_init.o
+diff --git a/arch/x86/cpu/broadwell/Makefile b/arch/x86/cpu/broadwell/Makefile
+index 6c6d0edac9b..dfe013e3833 100644
+--- a/arch/x86/cpu/broadwell/Makefile
++++ b/arch/x86/cpu/broadwell/Makefile
+@@ -2,8 +2,8 @@
+ #
+ # Copyright (c) 2016 Google, Inc
+ 
+-obj-$(CONFIG_$(SPL_TPL_)X86_16BIT_INIT) += cpu.o
+-obj-$(CONFIG_$(SPL_TPL_)X86_32BIT_INIT) += cpu_full.o
++obj-$(CONFIG_$(PHASE_)X86_16BIT_INIT) += cpu.o
++obj-$(CONFIG_$(PHASE_)X86_32BIT_INIT) += cpu_full.o
+ 
+ ifdef CONFIG_SPL
+ ifndef CONFIG_XPL_BUILD
+@@ -18,7 +18,7 @@ obj-y += sata.o
+ endif
+ endif
+ 
+-ifeq ($(CONFIG_$(SPL_TPL_)X86_32BIT_INIT),)
++ifeq ($(CONFIG_$(PHASE_)X86_32BIT_INIT),)
+ #obj-y += cpu_from_spl.o
+ endif
+ 
+@@ -29,5 +29,5 @@ obj-y += northbridge.o
+ obj-y += pch.o
+ obj-y += pinctrl_broadwell.o
+ obj-y += power_state.o
+-obj-$(CONFIG_$(SPL_TPL_)X86_32BIT_INIT) += refcode.o
+-obj-$(CONFIG_$(SPL_TPL_)X86_32BIT_INIT) += sdram.o
++obj-$(CONFIG_$(PHASE_)X86_32BIT_INIT) += refcode.o
++obj-$(CONFIG_$(PHASE_)X86_32BIT_INIT) += sdram.o
+diff --git a/arch/x86/cpu/intel_common/Makefile b/arch/x86/cpu/intel_common/Makefile
+index d2db5897377..a28e6c77c9c 100644
+--- a/arch/x86/cpu/intel_common/Makefile
++++ b/arch/x86/cpu/intel_common/Makefile
+@@ -5,10 +5,10 @@
+ obj-$(CONFIG_INTEL_ACPIGEN) += acpi.o
+ 
+ ifdef CONFIG_HAVE_MRC
+-obj-$(CONFIG_$(SPL_TPL_)X86_16BIT_INIT) += car.o
+-obj-$(CONFIG_$(SPL_TPL_)X86_32BIT_INIT) += me_status.o
+-obj-$(CONFIG_$(SPL_TPL_)X86_32BIT_INIT) += report_platform.o
+-obj-$(CONFIG_$(SPL_TPL_)X86_32BIT_INIT) += mrc.o
++obj-$(CONFIG_$(PHASE_)X86_16BIT_INIT) += car.o
++obj-$(CONFIG_$(PHASE_)X86_32BIT_INIT) += me_status.o
++obj-$(CONFIG_$(PHASE_)X86_32BIT_INIT) += report_platform.o
++obj-$(CONFIG_$(PHASE_)X86_32BIT_INIT) += mrc.o
+ endif
+ 
+ ifndef CONFIG_XPL_BUILD
+@@ -28,7 +28,7 @@ obj-y += lpc.o
+ obj-y += lpss.o
+ obj-$(CONFIG_$(XPL_)INTEL_GENERIC_WIFI) += generic_wifi.o
+ ifndef CONFIG_EFI_APP
+-obj-$(CONFIG_$(SPL_TPL_)X86_32BIT_INIT) += microcode.o
++obj-$(CONFIG_$(PHASE_)X86_32BIT_INIT) += microcode.o
+ ifndef CONFIG_$(XPL_)X86_64
+ obj-y += microcode.o
+ endif
+diff --git a/arch/x86/lib/Makefile b/arch/x86/lib/Makefile
+index decf2e5c628..8677b2a88dc 100644
+--- a/arch/x86/lib/Makefile
++++ b/arch/x86/lib/Makefile
+@@ -5,7 +5,7 @@
+ 
+ obj-y	+= bdinfo.o
+ 
+-ifndef CONFIG_$(SPL_TPL_)X86_64
++ifndef CONFIG_$(PHASE_)X86_64
+ obj-y += bios.o
+ obj-y += bios_asm.o
+ obj-y += bios_interrupts.o
+@@ -27,7 +27,7 @@ obj-y	+= init_helpers.o
+ obj-y	+= interrupts.o
+ obj-y	+= lpc-uclass.o
+ obj-y	+= mpspec.o
+-obj-$(CONFIG_$(SPL_TPL_)ACPIGEN) += acpi_nhlt.o
++obj-$(CONFIG_$(PHASE_)ACPIGEN) += acpi_nhlt.o
+ obj-y	+= northbridge-uclass.o
+ obj-$(CONFIG_I8259_PIC) += i8259.o
+ obj-$(CONFIG_I8254_TIMER) += i8254.o
+@@ -44,7 +44,7 @@ obj-y	+= acpi.o
+ obj-$(CONFIG_HAVE_ACPI_RESUME) += acpi_s3.o
+ ifndef CONFIG_QEMU
+ obj-y += acpigen.o
+-obj-$(CONFIG_$(SPL_TPL_)GENERATE_ACPI_TABLE) += acpi_table.o
++obj-$(CONFIG_$(PHASE_)GENERATE_ACPI_TABLE) += acpi_table.o
+ endif
+ obj-y	+= tables.o
+ ifndef CONFIG_XPL_BUILD
+diff --git a/board/coreboot/coreboot/Makefile b/board/coreboot/coreboot/Makefile
+index 75bfbd18943..0abdb7df534 100644
+--- a/board/coreboot/coreboot/Makefile
++++ b/board/coreboot/coreboot/Makefile
+@@ -11,4 +11,4 @@
+ # Daniel Engström, Omicron Ceti AB, daniel@omicron.se.
+ 
+ obj-y	+= coreboot.o
+-obj-$(CONFIG_$(SPL_TPL_)SMBIOS_PARSER)	+= sysinfo.o
++obj-$(CONFIG_$(PHASE_)SMBIOS_PARSER)	+= sysinfo.o
+diff --git a/boot/Makefile b/boot/Makefile
+index 1b6901970e3..b24f806d5bf 100644
+--- a/boot/Makefile
++++ b/boot/Makefile
+@@ -19,54 +19,54 @@ obj-y += image.o image-board.o
+ obj-$(CONFIG_ANDROID_AB) += android_ab.o
+ obj-$(CONFIG_ANDROID_BOOT_IMAGE) += image-android.o image-android-dt.o
+ 
+-obj-$(CONFIG_$(SPL_TPL_)BOOTSTD) += bootdev-uclass.o
+-obj-$(CONFIG_$(SPL_TPL_)BOOTSTD) += bootflow.o
+-obj-$(CONFIG_$(SPL_TPL_)BOOTSTD) += bootmeth-uclass.o
+-obj-$(CONFIG_$(SPL_TPL_)BOOTSTD) += bootstd-uclass.o
+-
+-obj-$(CONFIG_$(SPL_TPL_)BOOTSTD_PROG) += prog_boot.o
+-
+-obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_EXTLINUX) += bootmeth_extlinux.o
+-obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_EXTLINUX_PXE) += bootmeth_pxe.o
+-obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_EFILOADER) += bootmeth_efi.o
+-obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_CROS) += bootm.o bootm_os.o bootmeth_cros.o
+-obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_QFW) += bootmeth_qfw.o
+-obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_SANDBOX) += bootmeth_sandbox.o
+-obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_SCRIPT) += bootmeth_script.o
+-obj-$(CONFIG_$(SPL_TPL_)CEDIT) += cedit.o
+-obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_EFI_BOOTMGR) += bootmeth_efi_mgr.o
+-ifdef CONFIG_$(SPL_TPL_)BOOTSTD_FULL
+-obj-$(CONFIG_$(SPL_TPL_)EXPO) += bootflow_menu.o
+-obj-$(CONFIG_$(SPL_TPL_)BOOTSTD) += bootflow_menu.o
++obj-$(CONFIG_$(PHASE_)BOOTSTD) += bootdev-uclass.o
++obj-$(CONFIG_$(PHASE_)BOOTSTD) += bootflow.o
++obj-$(CONFIG_$(PHASE_)BOOTSTD) += bootmeth-uclass.o
++obj-$(CONFIG_$(PHASE_)BOOTSTD) += bootstd-uclass.o
++
++obj-$(CONFIG_$(PHASE_)BOOTSTD_PROG) += prog_boot.o
++
++obj-$(CONFIG_$(PHASE_)BOOTMETH_EXTLINUX) += bootmeth_extlinux.o
++obj-$(CONFIG_$(PHASE_)BOOTMETH_EXTLINUX_PXE) += bootmeth_pxe.o
++obj-$(CONFIG_$(PHASE_)BOOTMETH_EFILOADER) += bootmeth_efi.o
++obj-$(CONFIG_$(PHASE_)BOOTMETH_CROS) += bootm.o bootm_os.o bootmeth_cros.o
++obj-$(CONFIG_$(PHASE_)BOOTMETH_QFW) += bootmeth_qfw.o
++obj-$(CONFIG_$(PHASE_)BOOTMETH_SANDBOX) += bootmeth_sandbox.o
++obj-$(CONFIG_$(PHASE_)BOOTMETH_SCRIPT) += bootmeth_script.o
++obj-$(CONFIG_$(PHASE_)CEDIT) += cedit.o
++obj-$(CONFIG_$(PHASE_)BOOTMETH_EFI_BOOTMGR) += bootmeth_efi_mgr.o
++ifdef CONFIG_$(PHASE_)BOOTSTD_FULL
++obj-$(CONFIG_$(PHASE_)EXPO) += bootflow_menu.o
++obj-$(CONFIG_$(PHASE_)BOOTSTD) += bootflow_menu.o
+ endif
+ 
+-obj-$(CONFIG_$(SPL_TPL_)OF_LIBFDT) += fdt_support.o
+-obj-$(CONFIG_$(SPL_TPL_)FDT_SIMPLEFB) += fdt_simplefb.o
++obj-$(CONFIG_$(PHASE_)OF_LIBFDT) += fdt_support.o
++obj-$(CONFIG_$(PHASE_)FDT_SIMPLEFB) += fdt_simplefb.o
+ 
+-obj-$(CONFIG_$(SPL_TPL_)UPL) += upl_common.o
+-obj-$(CONFIG_$(SPL_TPL_)UPL_READ) += upl_read.o
+-obj-$(CONFIG_$(SPL_TPL_)UPL_WRITE) += upl_write.o
++obj-$(CONFIG_$(PHASE_)UPL) += upl_common.o
++obj-$(CONFIG_$(PHASE_)UPL_READ) += upl_read.o
++obj-$(CONFIG_$(PHASE_)UPL_WRITE) += upl_write.o
+ 
+-obj-$(CONFIG_$(SPL_TPL_)OF_LIBFDT) += image-fdt.o
+-obj-$(CONFIG_$(SPL_TPL_)FIT_SIGNATURE) += fdt_region.o
+-obj-$(CONFIG_$(SPL_TPL_)FIT) += image-fit.o
++obj-$(CONFIG_$(PHASE_)OF_LIBFDT) += image-fdt.o
++obj-$(CONFIG_$(PHASE_)FIT_SIGNATURE) += fdt_region.o
++obj-$(CONFIG_$(PHASE_)FIT) += image-fit.o
+ obj-$(CONFIG_$(XPL_)MULTI_DTB_FIT) += boot_fit.o common_fit.o
+-obj-$(CONFIG_$(SPL_TPL_)IMAGE_PRE_LOAD) += image-pre-load.o
+-obj-$(CONFIG_$(SPL_TPL_)IMAGE_SIGN_INFO) += image-sig.o
+-obj-$(CONFIG_$(SPL_TPL_)FIT_SIGNATURE) += image-fit-sig.o
+-obj-$(CONFIG_$(SPL_TPL_)FIT_CIPHER) += image-cipher.o
++obj-$(CONFIG_$(PHASE_)IMAGE_PRE_LOAD) += image-pre-load.o
++obj-$(CONFIG_$(PHASE_)IMAGE_SIGN_INFO) += image-sig.o
++obj-$(CONFIG_$(PHASE_)FIT_SIGNATURE) += image-fit-sig.o
++obj-$(CONFIG_$(PHASE_)FIT_CIPHER) += image-cipher.o
+ 
+ obj-$(CONFIG_CMD_ADTIMG) += image-android-dt.o
+ 
+-obj-$(CONFIG_$(SPL_TPL_)LOAD_FIT) += common_fit.o
++obj-$(CONFIG_$(PHASE_)LOAD_FIT) += common_fit.o
+ 
+-obj-$(CONFIG_$(SPL_TPL_)EXPO) += expo.o scene.o expo_build.o
+-obj-$(CONFIG_$(SPL_TPL_)EXPO) += scene_menu.o scene_textline.o
++obj-$(CONFIG_$(PHASE_)EXPO) += expo.o scene.o expo_build.o
++obj-$(CONFIG_$(PHASE_)EXPO) += scene_menu.o scene_textline.o
+ 
+-obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_VBE) += vbe.o
+-obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_VBE_REQUEST) += vbe_request.o
+-obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_VBE_SIMPLE) += vbe_simple.o
+-obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_VBE_SIMPLE_FW) += vbe_simple_fw.o
+-obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_VBE_SIMPLE_OS) += vbe_simple_os.o
++obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE) += vbe.o
++obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_REQUEST) += vbe_request.o
++obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_SIMPLE) += vbe_simple.o
++obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_SIMPLE_FW) += vbe_simple_fw.o
++obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_SIMPLE_OS) += vbe_simple_os.o
+ 
+-obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_ANDROID) += bootmeth_android.o
++obj-$(CONFIG_$(PHASE_)BOOTMETH_ANDROID) += bootmeth_android.o
+diff --git a/common/Makefile b/common/Makefile
+index ae8984659c0..2ee5ef9cc6e 100644
+--- a/common/Makefile
++++ b/common/Makefile
+@@ -44,8 +44,8 @@ obj-$(CONFIG_USB_KEYBOARD) += usb_kbd.o
+ 
+ endif # !CONFIG_XPL_BUILD
+ 
+-obj-$(CONFIG_$(SPL_TPL_)BOOTSTAGE) += bootstage.o
+-obj-$(CONFIG_$(SPL_TPL_)BLOBLIST) += bloblist.o
++obj-$(CONFIG_$(PHASE_)BOOTSTAGE) += bootstage.o
++obj-$(CONFIG_$(PHASE_)BLOBLIST) += bloblist.o
+ 
+ ifdef CONFIG_XPL_BUILD
+ ifdef CONFIG_SPL_DFU
+@@ -65,16 +65,16 @@ obj-$(CONFIG_DDR_SPD) += ddr_spd.o
+ obj-$(CONFIG_SPD_EEPROM) += ddr_spd.o
+ obj-$(CONFIG_HWCONFIG) += hwconfig.o
+ obj-$(CONFIG_BOUNCE_BUFFER) += bouncebuf.o
+-obj-$(CONFIG_$(SPL_TPL_)SERIAL) += console.o
++obj-$(CONFIG_$(PHASE_)SERIAL) += console.o
+ 
+ obj-$(CONFIG_CROS_EC) += cros_ec.o
+ obj-y += dlmalloc.o
+-obj-$(CONFIG_$(SPL_TPL_)SYS_MALLOC_F) += malloc_simple.o
++obj-$(CONFIG_$(PHASE_)SYS_MALLOC_F) += malloc_simple.o
+ 
+-obj-$(CONFIG_$(SPL_TPL_)CYCLIC) += cyclic.o
+-obj-$(CONFIG_$(SPL_TPL_)EVENT) += event.o
++obj-$(CONFIG_$(PHASE_)CYCLIC) += cyclic.o
++obj-$(CONFIG_$(PHASE_)EVENT) += event.o
+ 
+-obj-$(CONFIG_$(SPL_TPL_)HASH) += hash.o
++obj-$(CONFIG_$(PHASE_)HASH) += hash.o
+ obj-$(CONFIG_IO_TRACE) += iotrace.o
+ obj-y += memsize.o
+ obj-y += stdio.o
+@@ -88,15 +88,15 @@ obj-$(CONFIG_FSL_DDR_INTERACTIVE) += cli_getch.o cli_simple.o cli_readline.o
+ obj-$(CONFIG_STM32MP1_DDR_INTERACTIVE) += cli_getch.o cli_simple.o cli_readline.o
+ obj-$(CONFIG_DFU_OVER_USB) += dfu.o
+ obj-y += command.o
+-obj-$(CONFIG_$(SPL_TPL_)LOG) += log.o
+-obj-$(CONFIG_$(SPL_TPL_)LOG_CONSOLE) += log_console.o
+-obj-$(CONFIG_$(SPL_TPL_)LOG_SYSLOG) += log_syslog.o
++obj-$(CONFIG_$(PHASE_)LOG) += log.o
++obj-$(CONFIG_$(PHASE_)LOG_CONSOLE) += log_console.o
++obj-$(CONFIG_$(PHASE_)LOG_SYSLOG) += log_syslog.o
+ obj-y += s_record.o
+ obj-$(CONFIG_CMD_LOADB) += xyzModem.o
+-obj-$(CONFIG_$(SPL_TPL_)YMODEM_SUPPORT) += xyzModem.o
++obj-$(CONFIG_$(PHASE_)YMODEM_SUPPORT) += xyzModem.o
+ 
+-obj-$(CONFIG_$(SPL_TPL_)AVB_VERIFY) += avb_verify.o
+-obj-$(CONFIG_$(SPL_TPL_)STACKPROTECTOR) += stackprot.o
++obj-$(CONFIG_$(PHASE_)AVB_VERIFY) += avb_verify.o
++obj-$(CONFIG_$(PHASE_)STACKPROTECTOR) += stackprot.o
+ obj-$(CONFIG_SCP03) += scp03.o
+ 
+ obj-$(CONFIG_QFW) += qfw.o
+diff --git a/common/bootstage.c b/common/bootstage.c
+index 49acc9078a6..72d80ee9fe5 100644
+--- a/common/bootstage.c
++++ b/common/bootstage.c
+@@ -351,7 +351,7 @@ void bootstage_report(void)
+ 	}
+ 	if (data->rec_count > RECORD_COUNT)
+ 		printf("Overflowed internal boot id table by %d entries\n"
+-		       "Please increase CONFIG_(SPL_TPL_)BOOTSTAGE_RECORD_COUNT\n",
++		       "Please increase CONFIG_(PHASE_)BOOTSTAGE_RECORD_COUNT\n",
+ 		       data->rec_count - RECORD_COUNT);
+ 
+ 	puts("\nAccumulated time:\n");
+@@ -473,7 +473,7 @@ int bootstage_unstash(const void *base, int size)
+ 
+ 	if (data->rec_count + hdr->count > RECORD_COUNT) {
+ 		debug("%s: Bootstage has %d records, we have space for %d\n"
+-			"Please increase CONFIG_(SPL_)BOOTSTAGE_RECORD_COUNT\n",
++			"Please increase CONFIG_(PHASE_)BOOTSTAGE_RECORD_COUNT\n",
+ 		      __func__, hdr->count, RECORD_COUNT - data->rec_count);
+ 		return -ENOSPC;
+ 	}
+diff --git a/common/init/Makefile b/common/init/Makefile
+index 853b56d1e57..224e092f88c 100644
+--- a/common/init/Makefile
++++ b/common/init/Makefile
+@@ -5,4 +5,4 @@
+ #
+ 
+ obj-y += board_init.o
+-obj-$(CONFIG_$(SPL_TPL_)HANDOFF) += handoff.o
++obj-$(CONFIG_$(PHASE_)HANDOFF) += handoff.o
+diff --git a/common/spl/Makefile b/common/spl/Makefile
+index 10528b31a7c..75123eb666b 100644
+--- a/common/spl/Makefile
++++ b/common/spl/Makefile
+@@ -7,35 +7,35 @@
+ #
+ 
+ ifdef CONFIG_XPL_BUILD
+-obj-$(CONFIG_$(SPL_TPL_)FRAMEWORK) += spl.o
+-obj-$(CONFIG_$(SPL_TPL_)BOOTROM_SUPPORT) += spl_bootrom.o
+-obj-$(CONFIG_$(SPL_TPL_)LOAD_FIT) += spl_fit.o
+-obj-$(CONFIG_$(SPL_TPL_)BLK_FS) += spl_blk_fs.o
+-obj-$(CONFIG_$(SPL_TPL_)LEGACY_IMAGE_FORMAT) += spl_legacy.o
+-obj-$(CONFIG_$(SPL_TPL_)NOR_SUPPORT) += spl_nor.o
+-obj-$(CONFIG_$(SPL_TPL_)XIP_SUPPORT) += spl_xip.o
+-obj-$(CONFIG_$(SPL_TPL_)YMODEM_SUPPORT) += spl_ymodem.o
++obj-$(CONFIG_$(PHASE_)FRAMEWORK) += spl.o
++obj-$(CONFIG_$(PHASE_)BOOTROM_SUPPORT) += spl_bootrom.o
++obj-$(CONFIG_$(PHASE_)LOAD_FIT) += spl_fit.o
++obj-$(CONFIG_$(PHASE_)BLK_FS) += spl_blk_fs.o
++obj-$(CONFIG_$(PHASE_)LEGACY_IMAGE_FORMAT) += spl_legacy.o
++obj-$(CONFIG_$(PHASE_)NOR_SUPPORT) += spl_nor.o
++obj-$(CONFIG_$(PHASE_)XIP_SUPPORT) += spl_xip.o
++obj-$(CONFIG_$(PHASE_)YMODEM_SUPPORT) += spl_ymodem.o
+ ifndef CONFIG_SPL_UBI
+-obj-$(CONFIG_$(SPL_TPL_)NAND_SUPPORT) += spl_nand.o
+-obj-$(CONFIG_$(SPL_TPL_)ONENAND_SUPPORT) += spl_onenand.o
++obj-$(CONFIG_$(PHASE_)NAND_SUPPORT) += spl_nand.o
++obj-$(CONFIG_$(PHASE_)ONENAND_SUPPORT) += spl_onenand.o
+ endif
+-obj-$(CONFIG_$(SPL_TPL_)UBI) += spl_ubi.o
+-obj-$(CONFIG_$(SPL_TPL_)NET) += spl_net.o
+-obj-$(CONFIG_$(SPL_TPL_)MMC) += spl_mmc.o
+-obj-$(CONFIG_$(SPL_TPL_)ATF) += spl_atf.o
+-obj-$(CONFIG_$(SPL_TPL_)OPTEE_IMAGE) += spl_optee.o
+-obj-$(CONFIG_$(SPL_TPL_)OPENSBI) += spl_opensbi.o
+-obj-$(CONFIG_$(SPL_TPL_)USB_STORAGE) += spl_usb.o
+-obj-$(CONFIG_$(SPL_TPL_)FS_FAT) += spl_fat.o
+-obj-$(CONFIG_$(SPL_TPL_)FS_EXT4) += spl_ext.o
+-obj-$(CONFIG_$(SPL_TPL_)LOAD_IMX_CONTAINER) += spl_imx_container.o
+-obj-$(CONFIG_$(SPL_TPL_)SATA) += spl_sata.o
+-obj-$(CONFIG_$(SPL_TPL_)NVME) += spl_nvme.o
+-obj-$(CONFIG_$(SPL_TPL_)SEMIHOSTING) += spl_semihosting.o
+-obj-$(CONFIG_$(SPL_TPL_)DFU) += spl_dfu.o
+-obj-$(CONFIG_$(SPL_TPL_)SPI_LOAD) += spl_spi.o
+-obj-$(CONFIG_$(SPL_TPL_)RAM_SUPPORT) += spl_ram.o
+-obj-$(CONFIG_$(SPL_TPL_)USB_SDP_SUPPORT) += spl_sdp.o
++obj-$(CONFIG_$(PHASE_)UBI) += spl_ubi.o
++obj-$(CONFIG_$(PHASE_)NET) += spl_net.o
++obj-$(CONFIG_$(PHASE_)MMC) += spl_mmc.o
++obj-$(CONFIG_$(PHASE_)ATF) += spl_atf.o
++obj-$(CONFIG_$(PHASE_)OPTEE_IMAGE) += spl_optee.o
++obj-$(CONFIG_$(PHASE_)OPENSBI) += spl_opensbi.o
++obj-$(CONFIG_$(PHASE_)USB_STORAGE) += spl_usb.o
++obj-$(CONFIG_$(PHASE_)FS_FAT) += spl_fat.o
++obj-$(CONFIG_$(PHASE_)FS_EXT4) += spl_ext.o
++obj-$(CONFIG_$(PHASE_)LOAD_IMX_CONTAINER) += spl_imx_container.o
++obj-$(CONFIG_$(PHASE_)SATA) += spl_sata.o
++obj-$(CONFIG_$(PHASE_)NVME) += spl_nvme.o
++obj-$(CONFIG_$(PHASE_)SEMIHOSTING) += spl_semihosting.o
++obj-$(CONFIG_$(PHASE_)DFU) += spl_dfu.o
++obj-$(CONFIG_$(PHASE_)SPI_LOAD) += spl_spi.o
++obj-$(CONFIG_$(PHASE_)RAM_SUPPORT) += spl_ram.o
++obj-$(CONFIG_$(PHASE_)USB_SDP_SUPPORT) += spl_sdp.o
+ endif
+ 
+-obj-$(CONFIG_$(SPL_TPL_)UPL) += spl_upl.o
++obj-$(CONFIG_$(PHASE_)UPL) += spl_upl.o
+diff --git a/disk/Makefile b/disk/Makefile
+index 45588cf66e4..2248a659f8b 100644
+--- a/disk/Makefile
++++ b/disk/Makefile
+@@ -5,16 +5,16 @@
+ 
+ #ccflags-y += -DET_DEBUG -DDEBUG
+ 
+-obj-$(CONFIG_$(SPL_TPL_)PARTITIONS)  += part.o
+-ifdef CONFIG_$(SPL_TPL_)BLK
+-obj-$(CONFIG_$(SPL_TPL_)PARTITIONS)  += disk-uclass.o
++obj-$(CONFIG_$(PHASE_)PARTITIONS)  += part.o
++ifdef CONFIG_$(PHASE_)BLK
++obj-$(CONFIG_$(PHASE_)PARTITIONS)  += disk-uclass.o
+ endif
+ 
+ # Must have BLK or SPL_LEGACY_BLOCK to support partitions
+-ifneq ($(CONFIG_$(SPL_TPL_)BLK),$(CONFIG_SPL_LEGACY_BLOCK),)
+-obj-$(CONFIG_$(SPL_TPL_)MAC_PARTITION)   += part_mac.o
+-obj-$(CONFIG_$(SPL_TPL_)DOS_PARTITION)   += part_dos.o
+-obj-$(CONFIG_$(SPL_TPL_)ISO_PARTITION)   += part_iso.o
+-obj-$(CONFIG_$(SPL_TPL_)AMIGA_PARTITION) += part_amiga.o
+-obj-$(CONFIG_$(SPL_TPL_)EFI_PARTITION)   += part_efi.o
++ifneq ($(CONFIG_$(PHASE_)BLK),$(CONFIG_SPL_LEGACY_BLOCK),)
++obj-$(CONFIG_$(PHASE_)MAC_PARTITION)   += part_mac.o
++obj-$(CONFIG_$(PHASE_)DOS_PARTITION)   += part_dos.o
++obj-$(CONFIG_$(PHASE_)ISO_PARTITION)   += part_iso.o
++obj-$(CONFIG_$(PHASE_)AMIGA_PARTITION) += part_amiga.o
++obj-$(CONFIG_$(PHASE_)EFI_PARTITION)   += part_efi.o
+ endif
+diff --git a/drivers/Makefile b/drivers/Makefile
+index fd247265fe5..af593501261 100644
+--- a/drivers/Makefile
++++ b/drivers/Makefile
+@@ -1,43 +1,43 @@
+ # SPDX-License-Identifier: GPL-2.0+
+ 
+-obj-$(CONFIG_$(SPL_TPL_)ADC) += adc/
+-obj-$(CONFIG_$(SPL_TPL_)BIOSEMU) += bios_emulator/
+-obj-$(CONFIG_$(SPL_TPL_)BLK) += block/
+-obj-$(CONFIG_$(SPL_TPL_)BOOTCOUNT_LIMIT) += bootcount/
+-obj-$(CONFIG_$(SPL_TPL_)BUTTON) += button/
+-obj-$(CONFIG_$(SPL_TPL_)CACHE) += cache/
+-obj-$(CONFIG_$(SPL_TPL_)CLK) += clk/
+-obj-$(CONFIG_$(SPL_TPL_)DM) += core/
+-obj-$(CONFIG_$(SPL_TPL_)DMA) += dma/
+-obj-$(CONFIG_$(SPL_TPL_)DMA_LEGACY) += dma/
+-obj-$(CONFIG_$(SPL_TPL_)DFU) += dfu/
+-obj-$(CONFIG_$(SPL_TPL_)EXTCON) += extcon/
+-obj-$(CONFIG_$(SPL_TPL_)GPIO) += gpio/
+-obj-$(CONFIG_$(SPL_TPL_)DRIVERS_MISC) += misc/
+-obj-$(CONFIG_$(SPL_TPL_)SYSRESET) += sysreset/
+-obj-$(CONFIG_$(SPL_TPL_)FIRMWARE) +=firmware/
+-obj-$(CONFIG_$(SPL_TPL_)I2C) += i2c/
+-obj-$(CONFIG_$(SPL_TPL_)INPUT) += input/
+-obj-$(CONFIG_$(SPL_TPL_)LED) += led/
+-obj-$(CONFIG_$(SPL_TPL_)MMC) += mmc/
++obj-$(CONFIG_$(PHASE_)ADC) += adc/
++obj-$(CONFIG_$(PHASE_)BIOSEMU) += bios_emulator/
++obj-$(CONFIG_$(PHASE_)BLK) += block/
++obj-$(CONFIG_$(PHASE_)BOOTCOUNT_LIMIT) += bootcount/
++obj-$(CONFIG_$(PHASE_)BUTTON) += button/
++obj-$(CONFIG_$(PHASE_)CACHE) += cache/
++obj-$(CONFIG_$(PHASE_)CLK) += clk/
++obj-$(CONFIG_$(PHASE_)DM) += core/
++obj-$(CONFIG_$(PHASE_)DMA) += dma/
++obj-$(CONFIG_$(PHASE_)DMA_LEGACY) += dma/
++obj-$(CONFIG_$(PHASE_)DFU) += dfu/
++obj-$(CONFIG_$(PHASE_)EXTCON) += extcon/
++obj-$(CONFIG_$(PHASE_)GPIO) += gpio/
++obj-$(CONFIG_$(PHASE_)DRIVERS_MISC) += misc/
++obj-$(CONFIG_$(PHASE_)SYSRESET) += sysreset/
++obj-$(CONFIG_$(PHASE_)FIRMWARE) +=firmware/
++obj-$(CONFIG_$(PHASE_)I2C) += i2c/
++obj-$(CONFIG_$(PHASE_)INPUT) += input/
++obj-$(CONFIG_$(PHASE_)LED) += led/
++obj-$(CONFIG_$(PHASE_)MMC) += mmc/
+ obj-y += mtd/
+-obj-$(CONFIG_$(SPL_TPL_)ETH) += net/
+-obj-$(CONFIG_$(SPL_TPL_)PCH) += pch/
+-obj-$(CONFIG_$(SPL_TPL_)PCI) += pci/
+-obj-$(CONFIG_$(SPL_TPL_)PHY) += phy/
+-obj-$(CONFIG_$(SPL_TPL_)PINCTRL) += pinctrl/
+-obj-$(CONFIG_$(SPL_TPL_)POWER) += power/
+-obj-$(CONFIG_$(SPL_TPL_)RAM) += ram/
+-obj-$(CONFIG_$(SPL_TPL_)RTC) += rtc/
+-obj-$(CONFIG_$(SPL_TPL_)SERIAL) += serial/
+-obj-$(CONFIG_$(SPL_TPL_)SPI) += spi/
+-obj-$(CONFIG_$(SPL_TPL_)TIMER) += timer/
+-obj-$(CONFIG_$(SPL_TPL_)VIRTIO) += virtio/
++obj-$(CONFIG_$(PHASE_)ETH) += net/
++obj-$(CONFIG_$(PHASE_)PCH) += pch/
++obj-$(CONFIG_$(PHASE_)PCI) += pci/
++obj-$(CONFIG_$(PHASE_)PHY) += phy/
++obj-$(CONFIG_$(PHASE_)PINCTRL) += pinctrl/
++obj-$(CONFIG_$(PHASE_)POWER) += power/
++obj-$(CONFIG_$(PHASE_)RAM) += ram/
++obj-$(CONFIG_$(PHASE_)RTC) += rtc/
++obj-$(CONFIG_$(PHASE_)SERIAL) += serial/
++obj-$(CONFIG_$(PHASE_)SPI) += spi/
++obj-$(CONFIG_$(PHASE_)TIMER) += timer/
++obj-$(CONFIG_$(PHASE_)VIRTIO) += virtio/
+ obj-$(CONFIG_$(XPL_)DM_MAILBOX) += mailbox/
+ obj-$(CONFIG_$(XPL_)REMOTEPROC) += remoteproc/
+ obj-$(CONFIG_$(XPL_)SYSINFO) += sysinfo/
+-obj-$(CONFIG_$(SPL_TPL_)SM) += sm/
+-obj-$(CONFIG_$(SPL_TPL_)TPM) += tpm/
++obj-$(CONFIG_$(PHASE_)SM) += sm/
++obj-$(CONFIG_$(PHASE_)TPM) += tpm/
+ obj-$(CONFIG_$(XPL_)NVME) += nvme/
+ obj-$(CONFIG_XEN) += xen/
+ obj-$(CONFIG_$(XPL_)FPGA) += fpga/
+@@ -122,7 +122,7 @@ obj-$(CONFIG_W1_EEPROM) += w1-eeprom/
+ obj-$(CONFIG_MACH_PIC32) += ddr/microchip/
+ obj-$(CONFIG_FUZZ) += fuzz/
+ obj-$(CONFIG_DM_HWSPINLOCK) += hwspinlock/
+-obj-$(CONFIG_$(SPL_TPL_)DM_RNG) += rng/
++obj-$(CONFIG_$(PHASE_)DM_RNG) += rng/
+ endif
+ 
+ obj-y += soc/
+diff --git a/drivers/adc/Makefile b/drivers/adc/Makefile
+index dca0b39c2e2..665a7965412 100644
+--- a/drivers/adc/Makefile
++++ b/drivers/adc/Makefile
+@@ -4,7 +4,7 @@
+ # Przemyslaw Marczak <p.marczak@samsung.com>
+ #
+ 
+-obj-$(CONFIG_$(SPL_TPL_)ADC) += adc-uclass.o
++obj-$(CONFIG_$(PHASE_)ADC) += adc-uclass.o
+ obj-$(CONFIG_ADC_EXYNOS) += exynos-adc.o
+ obj-$(CONFIG_ADC_SANDBOX) += sandbox.o
+ obj-$(CONFIG_SARADC_ROCKCHIP) += rockchip-saradc.o
+diff --git a/drivers/block/Makefile b/drivers/block/Makefile
+index 98a34c01c38..ee290620545 100644
+--- a/drivers/block/Makefile
++++ b/drivers/block/Makefile
+@@ -3,7 +3,7 @@
+ # (C) Copyright 2000-2007
+ # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+ 
+-obj-$(CONFIG_$(SPL_TPL_)BLK) += blk-uclass.o
++obj-$(CONFIG_$(PHASE_)BLK) += blk-uclass.o
+ 
+ ifndef CONFIG_$(XPL_)BLK
+ obj-$(CONFIG_SPL_LEGACY_BLOCK) += blk_legacy.o
+@@ -14,9 +14,9 @@ obj-$(CONFIG_IDE) += ide.o
+ obj-$(CONFIG_RKMTD) += rkmtd.o
+ endif
+ obj-$(CONFIG_SANDBOX) += sandbox.o host-uclass.o host_dev.o
+-obj-$(CONFIG_$(SPL_TPL_)BLOCK_CACHE) += blkcache.o
+-obj-$(CONFIG_$(SPL_TPL_)BLKMAP) += blkmap.o
+-obj-$(CONFIG_$(SPL_TPL_)BLKMAP) += blkmap_helper.o
++obj-$(CONFIG_$(PHASE_)BLOCK_CACHE) += blkcache.o
++obj-$(CONFIG_$(PHASE_)BLKMAP) += blkmap.o
++obj-$(CONFIG_$(PHASE_)BLKMAP) += blkmap_helper.o
+ 
+ obj-$(CONFIG_EFI_MEDIA) += efi-media-uclass.o
+ obj-$(CONFIG_EFI_MEDIA_SANDBOX) += sb_efi_media.o
+diff --git a/drivers/cache/Makefile b/drivers/cache/Makefile
+index e1b71e0ed51..2f683866b87 100644
+--- a/drivers/cache/Makefile
++++ b/drivers/cache/Makefile
+@@ -1,5 +1,5 @@
+ 
+-obj-$(CONFIG_$(SPL_TPL_)CACHE) += cache-uclass.o
++obj-$(CONFIG_$(PHASE_)CACHE) += cache-uclass.o
+ obj-$(CONFIG_SANDBOX) += sandbox_cache.o
+ obj-$(CONFIG_L2X0_CACHE) += cache-l2x0.o
+ obj-$(CONFIG_NCORE_CACHE) += cache-ncore.o
+diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
+index f9b90a38b00..7f84f22d4b1 100644
+--- a/drivers/clk/Makefile
++++ b/drivers/clk/Makefile
+@@ -4,13 +4,13 @@
+ # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+ #
+ 
+-obj-$(CONFIG_$(SPL_TPL_)CLK) += clk-uclass.o
+-obj-$(CONFIG_$(SPL_TPL_)CLK) += clk_fixed_rate.o
+-obj-$(CONFIG_$(SPL_TPL_)CLK) += clk_fixed_factor.o
+-obj-$(CONFIG_$(SPL_TPL_)CLK_CCF) += clk.o clk-divider.o clk-mux.o clk-gate.o
+-obj-$(CONFIG_$(SPL_TPL_)CLK_CCF) += clk-fixed-factor.o
+-obj-$(CONFIG_$(SPL_TPL_)CLK_COMPOSITE_CCF) += clk-composite.o
+-obj-$(CONFIG_$(SPL_TPL_)CLK_GPIO) += clk-gpio.o
++obj-$(CONFIG_$(PHASE_)CLK) += clk-uclass.o
++obj-$(CONFIG_$(PHASE_)CLK) += clk_fixed_rate.o
++obj-$(CONFIG_$(PHASE_)CLK) += clk_fixed_factor.o
++obj-$(CONFIG_$(PHASE_)CLK_CCF) += clk.o clk-divider.o clk-mux.o clk-gate.o
++obj-$(CONFIG_$(PHASE_)CLK_CCF) += clk-fixed-factor.o
++obj-$(CONFIG_$(PHASE_)CLK_COMPOSITE_CCF) += clk-composite.o
++obj-$(CONFIG_$(PHASE_)CLK_GPIO) += clk-gpio.o
+ 
+ obj-y += adi/
+ obj-y += analogbits/
+@@ -18,7 +18,7 @@ obj-y += imx/
+ obj-$(CONFIG_CLK_JH7110) += starfive/
+ obj-y += tegra/
+ obj-y += ti/
+-obj-$(CONFIG_$(SPL_TPL_)CLK_INTEL) += intel/
++obj-$(CONFIG_$(PHASE_)CLK_INTEL) += intel/
+ obj-$(CONFIG_ARCH_ASPEED) += aspeed/
+ obj-$(CONFIG_ARCH_MEDIATEK) += mediatek/
+ obj-$(CONFIG_ARCH_MESON) += meson/
+@@ -42,7 +42,7 @@ obj-$(CONFIG_CLK_OCTEON) += clk_octeon.o
+ obj-$(CONFIG_CLK_OWL) += owl/
+ obj-$(CONFIG_CLK_QCOM) += qcom/
+ obj-$(CONFIG_CLK_RENESAS) += renesas/
+-obj-$(CONFIG_$(SPL_TPL_)CLK_SCMI) += clk_scmi.o
++obj-$(CONFIG_$(PHASE_)CLK_SCMI) += clk_scmi.o
+ obj-$(CONFIG_CLK_SIFIVE) += sifive/
+ obj-$(CONFIG_CLK_SOPHGO) += sophgo/
+ obj-$(CONFIG_CLK_SUNXI) += sunxi/
+diff --git a/drivers/clk/exynos/Makefile b/drivers/clk/exynos/Makefile
+index 734100e2bff..77385864fef 100644
+--- a/drivers/clk/exynos/Makefile
++++ b/drivers/clk/exynos/Makefile
+@@ -7,6 +7,6 @@
+ #   Thomas Abraham <thomas.ab@samsung.com>
+ #   Sam Protsenko <semen.protsenko@linaro.org>
+ 
+-obj-$(CONFIG_$(SPL_TPL_)CLK_CCF)	+= clk.o clk-pll.o
++obj-$(CONFIG_$(PHASE_)CLK_CCF)	+= clk.o clk-pll.o
+ obj-$(CONFIG_CLK_EXYNOS7420)		+= clk-exynos7420.o
+ obj-$(CONFIG_CLK_EXYNOS850)		+= clk-exynos850.o
+diff --git a/drivers/clk/imx/Makefile b/drivers/clk/imx/Makefile
+index 6d4bcd35714..a89ee7acb12 100644
+--- a/drivers/clk/imx/Makefile
++++ b/drivers/clk/imx/Makefile
+@@ -2,25 +2,25 @@
+ #
+ # SPDX-License-Identifier: GPL-2.0
+ 
+-obj-$(CONFIG_$(SPL_TPL_)CLK_CCF) += clk-gate2.o clk-pllv3.o clk-pfd.o
+-obj-$(CONFIG_$(SPL_TPL_)CLK_IMX6Q) += clk-imx6q.o
++obj-$(CONFIG_$(PHASE_)CLK_CCF) += clk-gate2.o clk-pllv3.o clk-pfd.o
++obj-$(CONFIG_$(PHASE_)CLK_IMX6Q) += clk-imx6q.o
+ obj-$(CONFIG_CLK_IMX8) += clk-imx8.o
+ 
+ ifdef CONFIG_CLK_IMX8
+ obj-$(CONFIG_IMX8QXP) += clk-imx8qxp.o
+ obj-$(CONFIG_IMX8QM) += clk-imx8qm.o
+ endif
+-obj-$(CONFIG_$(SPL_TPL_)CLK_IMX8MM) += clk-imx8mm.o clk-pll14xx.o \
++obj-$(CONFIG_$(PHASE_)CLK_IMX8MM) += clk-imx8mm.o clk-pll14xx.o \
+ 				clk-composite-8m.o
+-obj-$(CONFIG_$(SPL_TPL_)CLK_IMX8MN) += clk-imx8mn.o clk-pll14xx.o \
++obj-$(CONFIG_$(PHASE_)CLK_IMX8MN) += clk-imx8mn.o clk-pll14xx.o \
+ 				clk-composite-8m.o
+-obj-$(CONFIG_$(SPL_TPL_)CLK_IMX8MP) += clk-imx8mp.o clk-pll14xx.o \
++obj-$(CONFIG_$(PHASE_)CLK_IMX8MP) += clk-imx8mp.o clk-pll14xx.o \
+ 				clk-composite-8m.o
+-obj-$(CONFIG_$(SPL_TPL_)CLK_IMX8MQ) += clk-imx8mq.o clk-pll14xx.o \
++obj-$(CONFIG_$(PHASE_)CLK_IMX8MQ) += clk-imx8mq.o clk-pll14xx.o \
+ 				clk-composite-8m.o
+-obj-$(CONFIG_$(SPL_TPL_)CLK_IMX93) += clk-imx93.o clk-fracn-gppll.o \
++obj-$(CONFIG_$(PHASE_)CLK_IMX93) += clk-imx93.o clk-fracn-gppll.o \
+ 				clk-gate-93.o clk-composite-93.o
+ 
+-obj-$(CONFIG_$(SPL_TPL_)CLK_IMXRT1020) += clk-imxrt1020.o
+-obj-$(CONFIG_$(SPL_TPL_)CLK_IMXRT1050) += clk-imxrt1050.o
+-obj-$(CONFIG_$(SPL_TPL_)CLK_IMXRT1170) += clk-imxrt1170.o
++obj-$(CONFIG_$(PHASE_)CLK_IMXRT1020) += clk-imxrt1020.o
++obj-$(CONFIG_$(PHASE_)CLK_IMXRT1050) += clk-imxrt1050.o
++obj-$(CONFIG_$(PHASE_)CLK_IMXRT1170) += clk-imxrt1170.o
+diff --git a/drivers/clk/ti/Makefile b/drivers/clk/ti/Makefile
+index 07aa9a53e08..a58f19f46d9 100644
+--- a/drivers/clk/ti/Makefile
++++ b/drivers/clk/ti/Makefile
+@@ -11,5 +11,5 @@ obj-$(CONFIG_CLK_TI_DIVIDER) += clk-divider.o
+ obj-$(CONFIG_CLK_TI_GATE) += clk-gate.o
+ obj-$(CONFIG_CLK_TI_MUX) += clk-mux.o
+ obj-$(CONFIG_CLK_TI_SCI) += clk-sci.o
+-obj-$(CONFIG_$(SPL_TPL_)CLK_K3_PLL) += clk-k3-pll.o
+-obj-$(CONFIG_$(SPL_TPL_)CLK_K3) += clk-k3.o
++obj-$(CONFIG_$(PHASE_)CLK_K3_PLL) += clk-k3-pll.o
++obj-$(CONFIG_$(PHASE_)CLK_K3) += clk-k3.o
+diff --git a/drivers/core/Makefile b/drivers/core/Makefile
+index 20dbff6f956..9ea57911f89 100644
+--- a/drivers/core/Makefile
++++ b/drivers/core/Makefile
+@@ -3,14 +3,14 @@
+ # Copyright (c) 2013 Google, Inc
+ 
+ obj-y	+= device.o fdtaddr.o lists.o root.o uclass.o util.o tag.o
+-obj-$(CONFIG_$(SPL_TPL_)ACPIGEN) += acpi.o
+-obj-$(CONFIG_$(SPL_TPL_)DEVRES) += devres.o
+-obj-$(CONFIG_$(SPL_TPL_)DM_DEVICE_REMOVE)	+= device-remove.o
++obj-$(CONFIG_$(PHASE_)ACPIGEN) += acpi.o
++obj-$(CONFIG_$(PHASE_)DEVRES) += devres.o
++obj-$(CONFIG_$(PHASE_)DM_DEVICE_REMOVE)	+= device-remove.o
+ obj-$(CONFIG_$(XPL_)SIMPLE_BUS)	+= simple-bus.o
+ obj-$(CONFIG_SIMPLE_PM_BUS)	+= simple-pm-bus.o
+ obj-$(CONFIG_DM)	+= dump.o
+-obj-$(CONFIG_$(SPL_TPL_)REGMAP)	+= regmap.o
+-obj-$(CONFIG_$(SPL_TPL_)SYSCON)	+= syscon-uclass.o
++obj-$(CONFIG_$(PHASE_)REGMAP)	+= regmap.o
++obj-$(CONFIG_$(PHASE_)SYSCON)	+= syscon-uclass.o
+ obj-$(CONFIG_$(XPL_)OF_LIVE) += of_access.o of_addr.o
+ ifndef CONFIG_DM_DEV_READ_INLINE
+ obj-$(CONFIG_OF_CONTROL) += read.o
+diff --git a/drivers/crypto/fsl/Makefile b/drivers/crypto/fsl/Makefile
+index 4fbce519a0b..965c4938c8c 100644
+--- a/drivers/crypto/fsl/Makefile
++++ b/drivers/crypto/fsl/Makefile
+@@ -6,6 +6,6 @@ obj-y += sec.o
+ obj-$(CONFIG_FSL_CAAM) += jr.o fsl_hash.o jobdesc.o error.o
+ obj-$(CONFIG_CMD_BLOB)$(CONFIG_IMX_CAAM_DEK_ENCAP) += fsl_blob.o
+ obj-$(CONFIG_RSA_FREESCALE_EXP) += fsl_rsa.o
+-obj-$(CONFIG_$(SPL_TPL_)FSL_CAAM_RNG) += rng.o
++obj-$(CONFIG_$(PHASE_)FSL_CAAM_RNG) += rng.o
+ obj-$(CONFIG_FSL_DCP_RNG) += dcp_rng.o
+ obj-$(CONFIG_FSL_MFGPROT) += fsl_mfgprot.o
+diff --git a/drivers/gpio/Makefile b/drivers/gpio/Makefile
+index 24d1b0394fb..21b4325e4f9 100644
+--- a/drivers/gpio/Makefile
++++ b/drivers/gpio/Makefile
+@@ -8,7 +8,7 @@ obj-$(CONFIG_DWAPB_GPIO)	+= dwapb_gpio.o
+ obj-$(CONFIG_AXP_GPIO)		+= axp_gpio.o
+ obj-$(CONFIG_DM_74X164)		+= 74x164_gpio.o
+ endif
+-obj-$(CONFIG_$(SPL_TPL_)DM_GPIO) += gpio-uclass.o
++obj-$(CONFIG_$(PHASE_)DM_GPIO) += gpio-uclass.o
+ 
+ obj-$(CONFIG_$(XPL_)DM_PCA953X)	+= pca953x_gpio.o
+ 
+@@ -24,7 +24,7 @@ obj-$(CONFIG_INTEL_ICH6_GPIO)	+= intel_ich6_gpio.o
+ obj-$(CONFIG_INTEL_BROADWELL_GPIO)	+= intel_broadwell_gpio.o
+ obj-$(CONFIG_IPROC_GPIO)	+= iproc_gpio.o
+ obj-$(CONFIG_KIRKWOOD_GPIO)	+= kw_gpio.o
+-obj-$(CONFIG_$(SPL_TPL_)MCP230XX_GPIO)	+= mcp230xx_gpio.o
++obj-$(CONFIG_$(PHASE_)MCP230XX_GPIO)	+= mcp230xx_gpio.o
+ obj-$(CONFIG_MXC_GPIO)	+= mxc_gpio.o
+ obj-$(CONFIG_MXS_GPIO)	+= mxs_gpio.o
+ obj-$(CONFIG_NPCM_GPIO)      	+= npcm_gpio.o
+@@ -63,7 +63,7 @@ obj-$(CONFIG_OCTEON_GPIO)	+= octeon_gpio.o
+ obj-$(CONFIG_MVEBU_GPIO)	+= mvebu_gpio.o
+ obj-$(CONFIG_MSM_GPIO)		+= msm_gpio.o
+ obj-$(CONFIG_$(XPL_)PCF8575_GPIO)	+= pcf8575_gpio.o
+-obj-$(CONFIG_$(SPL_TPL_)QCOM_PMIC_GPIO)	+= qcom_pmic_gpio.o
++obj-$(CONFIG_$(PHASE_)QCOM_PMIC_GPIO)	+= qcom_pmic_gpio.o
+ obj-$(CONFIG_MT7620_GPIO)	+= mt7620_gpio.o
+ obj-$(CONFIG_MT7621_GPIO)	+= mt7621_gpio.o
+ obj-$(CONFIG_MSCC_SGPIO)	+= mscc_sgpio.o
+diff --git a/drivers/input/Makefile b/drivers/input/Makefile
+index 3e855346bce..8d4107b8848 100644
+--- a/drivers/input/Makefile
++++ b/drivers/input/Makefile
+@@ -3,9 +3,9 @@
+ # (C) Copyright 2000-2007
+ # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+ 
+-obj-$(CONFIG_$(SPL_TPL_)CROS_EC_KEYB) += cros_ec_keyb.o
+-obj-$(CONFIG_$(SPL_TPL_)OF_CONTROL) += key_matrix.o
+-obj-$(CONFIG_$(SPL_TPL_)DM_KEYBOARD) += input.o keyboard-uclass.o
++obj-$(CONFIG_$(PHASE_)CROS_EC_KEYB) += cros_ec_keyb.o
++obj-$(CONFIG_$(PHASE_)OF_CONTROL) += key_matrix.o
++obj-$(CONFIG_$(PHASE_)DM_KEYBOARD) += input.o keyboard-uclass.o
+ obj-$(CONFIG_BUTTON_KEYBOARD) += button_kbd.o
+ 
+ ifndef CONFIG_XPL_BUILD
+diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
+index 794c2a2d38e..79e54c4a1b5 100644
+--- a/drivers/misc/Makefile
++++ b/drivers/misc/Makefile
+@@ -3,12 +3,12 @@
+ # (C) Copyright 2000-2007
+ # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+ 
+-obj-$(CONFIG_$(SPL_TPL_)MISC) += misc-uclass.o
+-obj-$(CONFIG_$(SPL_TPL_)NVMEM) += nvmem.o
++obj-$(CONFIG_$(PHASE_)MISC) += misc-uclass.o
++obj-$(CONFIG_$(PHASE_)NVMEM) += nvmem.o
+ 
+-obj-$(CONFIG_$(SPL_TPL_)CROS_EC) += cros_ec.o
+-obj-$(CONFIG_$(SPL_TPL_)CROS_EC_SANDBOX) += cros_ec_sandbox.o
+-obj-$(CONFIG_$(SPL_TPL_)CROS_EC_LPC) += cros_ec_lpc.o
++obj-$(CONFIG_$(PHASE_)CROS_EC) += cros_ec.o
++obj-$(CONFIG_$(PHASE_)CROS_EC_SANDBOX) += cros_ec_sandbox.o
++obj-$(CONFIG_$(PHASE_)CROS_EC_LPC) += cros_ec_lpc.o
+ 
+ ifndef CONFIG_XPL_BUILD
+ obj-$(CONFIG_SANDBOX) += sandbox_adder.o
+@@ -51,7 +51,7 @@ obj-$(CONFIG_IMX_ELE) += imx_ele/
+ obj-$(CONFIG_LED_STATUS) += status_led.o
+ obj-$(CONFIG_LED_STATUS_GPIO) += gpio_led.o
+ obj-$(CONFIG_MPC83XX_SERDES) += mpc83xx_serdes.o
+-obj-$(CONFIG_$(SPL_TPL_)LS2_SFP) += ls2_sfp.o
++obj-$(CONFIG_$(PHASE_)LS2_SFP) += ls2_sfp.o
+ obj-$(CONFIG_$(XPL_)MXC_OCOTP) += mxc_ocotp.o
+ obj-$(CONFIG_MXS_OCOTP) += mxs_ocotp.o
+ obj-$(CONFIG_NPCM_OTP) += npcm_otp.o
+@@ -70,7 +70,7 @@ obj-$(CONFIG_SANDBOX) += qfw_sandbox.o
+ endif
+ obj-$(CONFIG_ROCKCHIP_EFUSE) += rockchip-efuse.o
+ obj-$(CONFIG_ROCKCHIP_OTP) += rockchip-otp.o
+-obj-$(CONFIG_$(SPL_TPL_)ROCKCHIP_IODOMAIN) += rockchip-io-domain.o
++obj-$(CONFIG_$(PHASE_)ROCKCHIP_IODOMAIN) += rockchip-io-domain.o
+ obj-$(CONFIG_SANDBOX) += syscon_sandbox.o misc_sandbox.o
+ obj-$(CONFIG_SIFIVE_OTP) += sifive-otp.o
+ obj-$(CONFIG_SMSC_LPC47M) += smsc_lpc47m.o
+@@ -81,7 +81,7 @@ obj-$(CONFIG_SYS_DPAA_QBMAN) += fsl_portals.o
+ obj-$(CONFIG_TEGRA186_BPMP) += tegra186_bpmp.o
+ obj-$(CONFIG_TEGRA_CAR) += tegra_car.o
+ obj-$(CONFIG_TEST_DRV) += test_drv.o
+-obj-$(CONFIG_$(SPL_TPL_)TURRIS_OMNIA_MCU) += turris_omnia_mcu.o
++obj-$(CONFIG_$(PHASE_)TURRIS_OMNIA_MCU) += turris_omnia_mcu.o
+ obj-$(CONFIG_TWL4030_LED) += twl4030_led.o
+ obj-$(CONFIG_VEXPRESS_CONFIG) += vexpress_config.o
+ obj-$(CONFIG_WINBOND_W83627) += winbond_w83627.o
+diff --git a/drivers/mmc/Makefile b/drivers/mmc/Makefile
+index 328653b8823..868f3090ff2 100644
+--- a/drivers/mmc/Makefile
++++ b/drivers/mmc/Makefile
+@@ -6,11 +6,11 @@
+ obj-y += mmc.o
+ obj-$(CONFIG_$(XPL_)DM_MMC) += mmc-uclass.o
+ 
+-ifdef CONFIG_$(SPL_TPL_)DM_MMC
+-obj-$(CONFIG_$(SPL_TPL_)BOOTSTD) += mmc_bootdev.o
++ifdef CONFIG_$(PHASE_)DM_MMC
++obj-$(CONFIG_$(PHASE_)BOOTSTD) += mmc_bootdev.o
+ endif
+ 
+-obj-$(CONFIG_$(SPL_TPL_)MMC_WRITE) += mmc_write.o
++obj-$(CONFIG_$(PHASE_)MMC_WRITE) += mmc_write.o
+ obj-$(CONFIG_$(XPL_)MMC_PWRSEQ) += mmc-pwrseq.o
+ obj-$(CONFIG_MMC_SDHCI_ADMA_HELPERS) += sdhci-adma.o
+ 
+diff --git a/drivers/mtd/Makefile b/drivers/mtd/Makefile
+index 2388d2aa27c..e204f19ff8b 100644
+--- a/drivers/mtd/Makefile
++++ b/drivers/mtd/Makefile
+@@ -34,9 +34,9 @@ else
+ ifneq ($(mtd-y),)
+ obj-$(CONFIG_SPL_MTD) += mtd.o
+ endif
+-obj-$(CONFIG_$(SPL_TPL_)NAND_SUPPORT) += nand/
++obj-$(CONFIG_$(PHASE_)NAND_SUPPORT) += nand/
+ obj-$(CONFIG_SPL_ONENAND_SUPPORT) += onenand/
+-obj-$(CONFIG_$(SPL_TPL_)SPI_FLASH_SUPPORT) += spi/
++obj-$(CONFIG_$(PHASE_)SPI_FLASH_SUPPORT) += spi/
+ obj-$(CONFIG_SPL_UBI) += ubispl/
+ 
+ endif
+diff --git a/drivers/mtd/nand/Makefile b/drivers/mtd/nand/Makefile
+index ad02095b35b..cf53c5f601e 100644
+--- a/drivers/mtd/nand/Makefile
++++ b/drivers/mtd/nand/Makefile
+@@ -6,5 +6,5 @@ obj-$(CONFIG_MTD_NAND_CORE) += nandcore.o
+ obj-$(CONFIG_MTD_RAW_NAND) += raw/
+ obj-$(CONFIG_MTD_SPI_NAND) += spi/
+ else
+-obj-$(CONFIG_$(SPL_TPL_)NAND_SUPPORT) += raw/
++obj-$(CONFIG_$(PHASE_)NAND_SUPPORT) += raw/
+ endif
+diff --git a/drivers/mtd/nand/raw/Makefile b/drivers/mtd/nand/raw/Makefile
+index ca10ac7aecb..b47a3d787ce 100644
+--- a/drivers/mtd/nand/raw/Makefile
++++ b/drivers/mtd/nand/raw/Makefile
+@@ -18,7 +18,7 @@ obj-$(CONFIG_SPL_NAND_BASE) += nand_base.o nand_amd.o nand_hynix.o \
+ 				nand_macronix.o nand_micron.o \
+ 				nand_samsung.o nand_toshiba.o
+ obj-$(CONFIG_SPL_NAND_IDENT) += nand_ids.o nand_timings.o
+-obj-$(CONFIG_$(SPL_TPL_)NAND_INIT) += nand.o
++obj-$(CONFIG_$(PHASE_)NAND_INIT) += nand.o
+ ifeq ($(CONFIG_SPL_ENV_SUPPORT),y)
+ obj-$(CONFIG_ENV_IS_IN_NAND) += nand_util.o
+ endif
+diff --git a/drivers/mtd/spi/Makefile b/drivers/mtd/spi/Makefile
+index 2a287a62a47..44e67cd913a 100644
+--- a/drivers/mtd/spi/Makefile
++++ b/drivers/mtd/spi/Makefile
+@@ -3,12 +3,12 @@
+ # (C) Copyright 2006
+ # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+ 
+-obj-$(CONFIG_$(SPL_TPL_)DM_SPI_FLASH) += sf-uclass.o
++obj-$(CONFIG_$(PHASE_)DM_SPI_FLASH) += sf-uclass.o
+ spi-nor-y := sf_probe.o spi-nor-ids.o
+ 
+ ifdef CONFIG_XPL_BUILD
+ obj-$(CONFIG_SPL_SPI_BOOT)	+= fsl_espi_spl.o
+-ifeq ($(CONFIG_$(SPL_TPL_)SPI_FLASH_TINY),y)
++ifeq ($(CONFIG_$(PHASE_)SPI_FLASH_TINY),y)
+ spi-nor-y += spi-nor-tiny.o
+ else
+ spi-nor-y += spi-nor-core.o
+@@ -19,6 +19,6 @@ endif
+ 
+ obj-$(CONFIG_SPI_FLASH) += spi-nor.o
+ obj-$(CONFIG_SPI_FLASH_DATAFLASH) += sf_dataflash.o
+-obj-$(CONFIG_$(SPL_TPL_)SPI_FLASH_MTD) += sf_mtd.o
++obj-$(CONFIG_$(PHASE_)SPI_FLASH_MTD) += sf_mtd.o
+ obj-$(CONFIG_SPI_FLASH_SANDBOX) += sandbox.o
+-obj-$(CONFIG_$(SPL_TPL_)BOOTDEV_SPI_FLASH) += sf_bootdev.o
++obj-$(CONFIG_$(PHASE_)BOOTDEV_SPI_FLASH) += sf_bootdev.o
+diff --git a/drivers/pinctrl/starfive/Makefile b/drivers/pinctrl/starfive/Makefile
+index a4a12069b36..1503153ddc9 100644
+--- a/drivers/pinctrl/starfive/Makefile
++++ b/drivers/pinctrl/starfive/Makefile
+@@ -1,6 +1,6 @@
+ 
+ # SPDX-License-Identifier: GPL-2.0
+ # Core
+-obj-$(CONFIG_$(SPL_TPL_)PINCTRL_STARFIVE) += pinctrl-starfive.o
++obj-$(CONFIG_$(PHASE_)PINCTRL_STARFIVE) += pinctrl-starfive.o
+ # SoC Drivers
+-obj-$(CONFIG_$(SPL_TPL_)PINCTRL_STARFIVE_JH7110)	+= pinctrl-jh7110-sys.o pinctrl-jh7110-aon.o
++obj-$(CONFIG_$(PHASE_)PINCTRL_STARFIVE_JH7110)	+= pinctrl-jh7110-sys.o pinctrl-jh7110-aon.o
+diff --git a/drivers/power/Makefile b/drivers/power/Makefile
+index 5a987194cda..3f4d56f5139 100644
+--- a/drivers/power/Makefile
++++ b/drivers/power/Makefile
+@@ -3,8 +3,8 @@
+ # Copyright (c) 2009 Wind River Systems, Inc.
+ # Tom Rix <Tom.Rix at windriver.com>
+ 
+-obj-$(CONFIG_$(SPL_TPL_)ACPI_PMC) += acpi_pmc/
+-obj-$(CONFIG_$(SPL_TPL_)POWER_DOMAIN) += domain/
++obj-$(CONFIG_$(PHASE_)ACPI_PMC) += acpi_pmc/
++obj-$(CONFIG_$(PHASE_)POWER_DOMAIN) += domain/
+ obj-y += pmic/
+ obj-y += regulator/
+ 
+@@ -23,9 +23,9 @@ obj-$(CONFIG_SY8106A_POWER)	+= sy8106a.o
+ obj-$(CONFIG_TPS6586X_POWER)	+= tps6586x.o
+ obj-$(CONFIG_TWL4030_POWER)	+= twl4030.o
+ obj-$(CONFIG_PALMAS_POWER)	+= palmas.o
+-obj-$(CONFIG_$(SPL_TPL_)POWER_LEGACY) += power_core.o
++obj-$(CONFIG_$(PHASE_)POWER_LEGACY) += power_core.o
+ obj-$(CONFIG_DIALOG_POWER) += power_dialog.o
+ obj-$(CONFIG_POWER_FSL) += power_fsl.o
+-obj-$(CONFIG_$(SPL_TPL_)POWER_I2C) += power_i2c.o
++obj-$(CONFIG_$(PHASE_)POWER_I2C) += power_i2c.o
+ obj-$(CONFIG_POWER_SPI) += power_spi.o
+ obj-$(CONFIG_POWER_MT6323) += mt6323.o
+diff --git a/drivers/power/acpi_pmc/Makefile b/drivers/power/acpi_pmc/Makefile
+index 0db52a65824..3259b397a9a 100644
+--- a/drivers/power/acpi_pmc/Makefile
++++ b/drivers/power/acpi_pmc/Makefile
+@@ -3,4 +3,4 @@
+ # Copyright 2019 Google LLC
+ 
+ obj-y += acpi-pmc-uclass.o
+-obj-$(CONFIG_$(SPL_TPL_)ACPI_PMC_SANDBOX) += sandbox.o pmc_emul.o
++obj-$(CONFIG_$(PHASE_)ACPI_PMC_SANDBOX) += sandbox.o pmc_emul.o
+diff --git a/drivers/power/pmic/Makefile b/drivers/power/pmic/Makefile
+index 48f7dd49ef8..bc138f563ff 100644
+--- a/drivers/power/pmic/Makefile
++++ b/drivers/power/pmic/Makefile
+@@ -3,7 +3,7 @@
+ # Copyright (C) 2012 Samsung Electronics
+ # Lukasz Majewski <l.majewski@samsung.com>
+ 
+-obj-$(CONFIG_$(SPL_TPL_)DM_PMIC) += pmic-uclass.o
++obj-$(CONFIG_$(PHASE_)DM_PMIC) += pmic-uclass.o
+ obj-$(CONFIG_$(XPL_)DM_PMIC_FAN53555) += fan53555.o
+ obj-$(CONFIG_$(XPL_)DM_PMIC_DA9063) += da9063.o
+ obj-$(CONFIG_$(XPL_)DM_PMIC_MAX77663) += max77663.o
+@@ -22,7 +22,7 @@ obj-$(CONFIG_PMIC_AS3722) += as3722.o as3722_gpio.o
+ obj-$(CONFIG_$(XPL_)PMIC_AXP) += axp.o
+ obj-$(CONFIG_PMIC_MAX8997) += max8997.o
+ obj-$(CONFIG_PMIC_QCOM) += pmic_qcom.o
+-obj-$(CONFIG_$(SPL_TPL_)PMIC_RK8XX) += rk8xx.o
++obj-$(CONFIG_$(PHASE_)PMIC_RK8XX) += rk8xx.o
+ obj-$(CONFIG_$(XPL_)PMIC_RN5T567) += rn5t567.o
+ obj-$(CONFIG_PMIC_TPS65090) += tps65090.o
+ obj-$(CONFIG_PMIC_S5M8767) += s5m8767.o
+diff --git a/drivers/power/regulator/Makefile b/drivers/power/regulator/Makefile
+index cac02aaa36f..ca6c89d13b5 100644
+--- a/drivers/power/regulator/Makefile
++++ b/drivers/power/regulator/Makefile
+@@ -22,7 +22,7 @@ obj-$(CONFIG_$(XPL_)DM_REGULATOR_COMMON) += regulator_common.o
+ obj-$(CONFIG_$(XPL_)DM_REGULATOR_FIXED) += fixed.o
+ obj-$(CONFIG_$(XPL_)DM_REGULATOR_GPIO) += gpio-regulator.o
+ obj-$(CONFIG_DM_REGULATOR_QCOM_RPMH) += qcom-rpmh-regulator.o
+-obj-$(CONFIG_$(SPL_TPL_)REGULATOR_RK8XX) += rk8xx.o
++obj-$(CONFIG_$(PHASE_)REGULATOR_RK8XX) += rk8xx.o
+ obj-$(CONFIG_DM_REGULATOR_S2MPS11) += s2mps11_regulator.o
+ obj-$(CONFIG_REGULATOR_S5M8767) += s5m8767.o
+ obj-$(CONFIG_DM_REGULATOR_SANDBOX) += sandbox.o
+diff --git a/drivers/ram/Makefile b/drivers/ram/Makefile
+index 35d8f5761e1..f92e86eaa3f 100644
+--- a/drivers/ram/Makefile
++++ b/drivers/ram/Makefile
+@@ -3,7 +3,7 @@
+ # Copyright (c) 2015 Google, Inc
+ # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+ #
+-obj-$(CONFIG_$(SPL_TPL_)DM) += ram-uclass.o
++obj-$(CONFIG_$(PHASE_)DM) += ram-uclass.o
+ obj-$(CONFIG_MPC83XX_SDRAM) += mpc83xx_sdram.o
+ obj-$(CONFIG_SANDBOX) += sandbox_ram.o
+ obj-$(CONFIG_STM32MP1_DDR) += stm32mp1/
+diff --git a/drivers/reset/Makefile b/drivers/reset/Makefile
+index 2eb639e4a65..d99a78c9828 100644
+--- a/drivers/reset/Makefile
++++ b/drivers/reset/Makefile
+@@ -32,4 +32,4 @@ obj-$(CONFIG_RESET_SCMI) += reset-scmi.o
+ obj-$(CONFIG_RESET_ZYNQMP) += reset-zynqmp.o
+ obj-$(CONFIG_RESET_DRA7) += reset-dra7.o
+ obj-$(CONFIG_RESET_AT91) += reset-at91.o
+-obj-$(CONFIG_$(SPL_TPL_)RESET_JH7110) += reset-jh7110.o
++obj-$(CONFIG_$(PHASE_)RESET_JH7110) += reset-jh7110.o
+diff --git a/drivers/rng/Makefile b/drivers/rng/Makefile
+index 30553c9d6e9..30c58272d41 100644
+--- a/drivers/rng/Makefile
++++ b/drivers/rng/Makefile
+@@ -3,7 +3,7 @@
+ # Copyright (c) 2019, Linaro Limited
+ #
+ 
+-obj-$(CONFIG_$(SPL_TPL_)DM_RNG) += rng-uclass.o
++obj-$(CONFIG_$(PHASE_)DM_RNG) += rng-uclass.o
+ obj-$(CONFIG_RNG_MESON) += meson-rng.o
+ obj-$(CONFIG_RNG_SANDBOX) += sandbox_rng.o
+ obj-$(CONFIG_RNG_MSM) += msm_rng.o
+diff --git a/drivers/rtc/Makefile b/drivers/rtc/Makefile
+index 03a424c31a5..99b5a2a346a 100644
+--- a/drivers/rtc/Makefile
++++ b/drivers/rtc/Makefile
+@@ -4,7 +4,7 @@
+ # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+ #ccflags-y += -DDEBUG
+ 
+-obj-$(CONFIG_$(SPL_TPL_)DM_RTC) += rtc-uclass.o
++obj-$(CONFIG_$(PHASE_)DM_RTC) += rtc-uclass.o
+ 
+ obj-$(CONFIG_RTC_ARMADA38X) += armada38x.o
+ obj-$(CONFIG_RTC_DAVINCI) += davinci.o
+@@ -17,7 +17,7 @@ obj-$(CONFIG_RTC_DS3232) += ds3232.o
+ obj-$(CONFIG_RTC_EMULATION) += emul_rtc.o
+ obj-$(CONFIG_RTC_GOLDFISH) += goldfish_rtc.o
+ obj-$(CONFIG_RTC_HT1380) += ht1380.o
+-obj-$(CONFIG_$(SPL_TPL_)RTC_SANDBOX) += i2c_rtc_emul.o
++obj-$(CONFIG_$(PHASE_)RTC_SANDBOX) += i2c_rtc_emul.o
+ obj-$(CONFIG_RTC_ISL1208) += isl1208.o
+ obj-$(CONFIG_RTC_M41T62) += m41t62.o
+ obj-$(CONFIG_RTC_MAX313XX) += max313xx.o
+@@ -37,6 +37,6 @@ obj-$(CONFIG_RTC_RX8025) += rx8025.o
+ obj-$(CONFIG_RTC_RX8010SJ) += rx8010sj.o
+ obj-$(CONFIG_RTC_S35392A) += s35392a.o
+ obj-$(CONFIG_RTC_STM32) += stm32_rtc.o
+-obj-$(CONFIG_$(SPL_TPL_)RTC_SANDBOX) += sandbox_rtc.o
++obj-$(CONFIG_$(PHASE_)RTC_SANDBOX) += sandbox_rtc.o
+ obj-$(CONFIG_RTC_ABX80X) += abx80x.o
+ obj-$(CONFIG_RTC_ZYNQMP) += zynqmp_rtc.o
+diff --git a/drivers/scsi/Makefile b/drivers/scsi/Makefile
+index 7c19a435722..b76de1b22a8 100644
+--- a/drivers/scsi/Makefile
++++ b/drivers/scsi/Makefile
+@@ -6,7 +6,7 @@
+ ifndef CONFIG_XPL_BUILD
+ obj-$(CONFIG_SCSI) += scsi.o scsi-uclass.o
+ ifdef CONFIG_SCSI
+-obj-$(CONFIG_$(SPL_TPL_)BOOTSTD) += scsi_bootdev.o
++obj-$(CONFIG_$(PHASE_)BOOTSTD) += scsi_bootdev.o
+ obj-$(CONFIG_SANDBOX) += sandbox_scsi.o
+ obj-$(CONFIG_SANDBOX) += scsi_emul.o
+ endif
+diff --git a/drivers/serial/Makefile b/drivers/serial/Makefile
+index 1c0b013eb1f..ebe692a9963 100644
+--- a/drivers/serial/Makefile
++++ b/drivers/serial/Makefile
+@@ -3,7 +3,7 @@
+ # (C) Copyright 2006-2009
+ # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+ 
+-ifeq ($(CONFIG_$(SPL_TPL_)DM_SERIAL),y)
++ifeq ($(CONFIG_$(PHASE_)DM_SERIAL),y)
+ obj-y += serial-uclass.o
+ else
+ obj-y += serial.o
+diff --git a/drivers/spi/Makefile b/drivers/spi/Makefile
+index 32d7bf7237a..7051e2a00c6 100644
+--- a/drivers/spi/Makefile
++++ b/drivers/spi/Makefile
+@@ -4,7 +4,7 @@
+ # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+ 
+ # There are many options which enable SPI, so make this library available
+-ifdef CONFIG_$(SPL_TPL_)DM_SPI
++ifdef CONFIG_$(PHASE_)DM_SPI
+ obj-y += spi-uclass.o
+ obj-$(CONFIG_CADENCE_QSPI) += cadence_qspi.o cadence_qspi_apb.o
+ obj-$(CONFIG_CADENCE_OSPI_VERSAL) += cadence_ospi_versal.o
+diff --git a/drivers/sysreset/Makefile b/drivers/sysreset/Makefile
+index a6a0584585c..796fc9effa5 100644
+--- a/drivers/sysreset/Makefile
++++ b/drivers/sysreset/Makefile
+@@ -2,7 +2,7 @@
+ #
+ # (C) Copyright 2016 Cadence Design Systems Inc.
+ 
+-obj-$(CONFIG_$(SPL_TPL_)SYSRESET) += sysreset-uclass.o
++obj-$(CONFIG_$(PHASE_)SYSRESET) += sysreset-uclass.o
+ obj-$(CONFIG_ARCH_ASPEED) += sysreset_ast.o
+ obj-$(CONFIG_ARCH_ROCKCHIP) += sysreset_rockchip.o
+ obj-$(CONFIG_ARCH_STI) += sysreset_sti.o
+@@ -10,24 +10,24 @@ obj-$(CONFIG_SANDBOX) += sysreset_sandbox.o
+ obj-$(CONFIG_SYSRESET_CV1800B) += sysreset_cv1800b.o
+ obj-$(CONFIG_POWEROFF_GPIO) += poweroff_gpio.o
+ obj-$(CONFIG_SYSRESET_GPIO) += sysreset_gpio.o
+-obj-$(CONFIG_$(SPL_TPL_)SYSRESET_MAX77663) += sysreset_max77663.o
++obj-$(CONFIG_$(PHASE_)SYSRESET_MAX77663) += sysreset_max77663.o
+ obj-$(CONFIG_SYSRESET_MPC83XX) += sysreset_mpc83xx.o
+ obj-$(CONFIG_SYSRESET_MICROBLAZE) += sysreset_microblaze.o
+ obj-$(CONFIG_SYSRESET_OCTEON) += sysreset_octeon.o
+-obj-$(CONFIG_$(SPL_TPL_)SYSRESET_PALMAS) += sysreset_palmas.o
++obj-$(CONFIG_$(PHASE_)SYSRESET_PALMAS) += sysreset_palmas.o
+ obj-$(CONFIG_SYSRESET_PSCI) += sysreset_psci.o
+ obj-$(CONFIG_SYSRESET_SBI) += sysreset_sbi.o
+ obj-$(CONFIG_SYSRESET_SOCFPGA) += sysreset_socfpga.o
+ obj-$(CONFIG_SYSRESET_SOCFPGA_SOC64) += sysreset_socfpga_soc64.o
+ obj-$(CONFIG_SYSRESET_TEGRA) += sysreset_tegra.o
+ obj-$(CONFIG_SYSRESET_TI_SCI) += sysreset-ti-sci.o
+-obj-$(CONFIG_$(SPL_TPL_)SYSRESET_TPS65910) += sysreset_tps65910.o
+-obj-$(CONFIG_$(SPL_TPL_)SYSRESET_TPS80031) += sysreset_tps80031.o
++obj-$(CONFIG_$(PHASE_)SYSRESET_TPS65910) += sysreset_tps65910.o
++obj-$(CONFIG_$(PHASE_)SYSRESET_TPS80031) += sysreset_tps80031.o
+ obj-$(CONFIG_SYSRESET_SYSCON) += sysreset_syscon.o
+ obj-$(CONFIG_SYSRESET_WATCHDOG) += sysreset_watchdog.o
+ obj-$(CONFIG_SYSRESET_RESETCTL) += sysreset_resetctl.o
+-obj-$(CONFIG_$(SPL_TPL_)SYSRESET_AT91) += sysreset_at91.o
+-obj-$(CONFIG_$(SPL_TPL_)SYSRESET_X86) += sysreset_x86.o
++obj-$(CONFIG_$(PHASE_)SYSRESET_AT91) += sysreset_at91.o
++obj-$(CONFIG_$(PHASE_)SYSRESET_X86) += sysreset_x86.o
+ obj-$(CONFIG_SYSRESET_RAA215300) += sysreset_raa215300.o
+ obj-$(CONFIG_SYSRESET_QCOM_PSHOLD) += sysreset_qcom-pshold.o
+ obj-$(CONFIG_TARGET_XTFPGA) += sysreset_xtfpga.o
+diff --git a/drivers/tpm/Makefile b/drivers/tpm/Makefile
+index 9540fd7fe78..76e516dbbaf 100644
+--- a/drivers/tpm/Makefile
++++ b/drivers/tpm/Makefile
+@@ -1,7 +1,7 @@
+ # SPDX-License-Identifier: GPL-2.0+
+ # Copyright (c) 2011 The Chromium OS Authors. All rights reserved.
+ 
+-obj-$(CONFIG_$(SPL_TPL_)TPM) += tpm-uclass.o
++obj-$(CONFIG_$(PHASE_)TPM) += tpm-uclass.o
+ 
+ obj-$(CONFIG_TPM_ATMEL_TWI) += tpm_atmel_twi.o
+ obj-$(CONFIG_TPM_TIS_INFINEON) += tpm_tis_infineon.o
+@@ -10,7 +10,7 @@ obj-$(CONFIG_TPM_TIS_SANDBOX) += tpm_tis_sandbox.o sandbox_common.o
+ obj-$(CONFIG_TPM_ST33ZP24_I2C) += tpm_tis_st33zp24_i2c.o
+ obj-$(CONFIG_TPM_ST33ZP24_SPI) += tpm_tis_st33zp24_spi.o
+ 
+-obj-$(CONFIG_$(SPL_TPL_)TPM2_CR50_I2C) += cr50_i2c.o
++obj-$(CONFIG_$(PHASE_)TPM2_CR50_I2C) += cr50_i2c.o
+ obj-$(CONFIG_TPM2_TIS_SANDBOX) += tpm2_tis_sandbox.o sandbox_common.o
+ obj-$(CONFIG_TPM2_TIS_SPI) += tpm2_tis_core.o tpm2_tis_spi.o
+ obj-$(CONFIG_TPM2_TIS_I2C) += tpm2_tis_core.o tpm2_tis_i2c.o
+diff --git a/drivers/usb/gadget/Makefile b/drivers/usb/gadget/Makefile
+index 3158487cba4..a44b2bfc1f2 100644
+--- a/drivers/usb/gadget/Makefile
++++ b/drivers/usb/gadget/Makefile
+@@ -3,9 +3,9 @@
+ # (C) Copyright 2000-2007
+ # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+ 
+-obj-$(CONFIG_$(SPL_TPL_)USB_GADGET) += epautoconf.o config.o usbstring.o
+-obj-$(CONFIG_$(SPL_TPL_)USB_ETHER) += epautoconf.o config.o usbstring.o ether.o
+-obj-$(CONFIG_$(SPL_TPL_)USB_ETH_RNDIS) += rndis.o
++obj-$(CONFIG_$(PHASE_)USB_GADGET) += epautoconf.o config.o usbstring.o
++obj-$(CONFIG_$(PHASE_)USB_ETHER) += epautoconf.o config.o usbstring.o ether.o
++obj-$(CONFIG_$(PHASE_)USB_ETH_RNDIS) += rndis.o
+ 
+ ifdef CONFIG_XPL_BUILD
+ obj-$(CONFIG_SPL_USB_GADGET) += g_dnl.o
+diff --git a/drivers/usb/host/Makefile b/drivers/usb/host/Makefile
+index 07deb4fadd6..792956e647a 100644
+--- a/drivers/usb/host/Makefile
++++ b/drivers/usb/host/Makefile
+@@ -8,8 +8,8 @@ obj-y += usb-uclass.o
+ obj-$(CONFIG_SANDBOX) += usb-sandbox.o
+ endif
+ 
+-ifdef CONFIG_$(SPL_TPL_)USB_STORAGE
+-obj-$(CONFIG_$(SPL_TPL_)BOOTSTD) += usb_bootdev.o
++ifdef CONFIG_$(PHASE_)USB_STORAGE
++obj-$(CONFIG_$(PHASE_)BOOTSTD) += usb_bootdev.o
+ endif
+ 
+ # ohci
+diff --git a/drivers/video/Makefile b/drivers/video/Makefile
+index 93fed8c491a..af8b2b266e2 100644
+--- a/drivers/video/Makefile
++++ b/drivers/video/Makefile
+@@ -4,12 +4,12 @@
+ # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+ 
+ ifdef CONFIG_DM
+-obj-$(CONFIG_$(SPL_TPL_)BACKLIGHT) += backlight-uclass.o
++obj-$(CONFIG_$(PHASE_)BACKLIGHT) += backlight-uclass.o
+ obj-$(CONFIG_BACKLIGHT_GPIO) += backlight_gpio.o
+ obj-$(CONFIG_BACKLIGHT_PWM) += pwm_backlight.o
+-obj-$(CONFIG_$(SPL_TPL_)CONSOLE_NORMAL) += console_normal.o
++obj-$(CONFIG_$(PHASE_)CONSOLE_NORMAL) += console_normal.o
+ obj-$(CONFIG_CONSOLE_ROTATION) += console_rotate.o
+-ifdef CONFIG_$(SPL_TPL_)CONSOLE_NORMAL
++ifdef CONFIG_$(PHASE_)CONSOLE_NORMAL
+ obj-y += console_core.o
+ else ifdef CONFIG_CONSOLE_ROTATION
+ obj-y += console_core.o
+@@ -18,14 +18,14 @@ obj-$(CONFIG_CONSOLE_ROTATION) += console_core.o
+ obj-$(CONFIG_CONSOLE_TRUETYPE) += console_truetype.o fonts/
+ obj-$(CONFIG_DISPLAY) += display-uclass.o
+ obj-$(CONFIG_VIDEO_MIPI_DSI) += dsi-host-uclass.o
+-obj-$(CONFIG_$(SPL_TPL_)VIDEO) += video-uclass.o vidconsole-uclass.o
+-obj-$(CONFIG_$(SPL_TPL_)VIDEO) += video_bmp.o
+-obj-$(CONFIG_$(SPL_TPL_)PANEL) += panel-uclass.o
++obj-$(CONFIG_$(PHASE_)VIDEO) += video-uclass.o vidconsole-uclass.o
++obj-$(CONFIG_$(PHASE_)VIDEO) += video_bmp.o
++obj-$(CONFIG_$(PHASE_)PANEL) += panel-uclass.o
+ obj-$(CONFIG_PANEL_HX8238D) += hx8238d.o
+-obj-$(CONFIG_$(SPL_TPL_)SIMPLE_PANEL) += simple_panel.o
++obj-$(CONFIG_$(PHASE_)SIMPLE_PANEL) += simple_panel.o
+ 
+ obj-$(CONFIG_VIDEO_LOGO) += u_boot_logo.o
+-obj-$(CONFIG_$(SPL_TPL_)BMP) += bmp.o
++obj-$(CONFIG_$(PHASE_)BMP) += bmp.o
+ 
+ endif
+ 
+diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
+index 7b39adcf0ff..1639d827fee 100644
+--- a/drivers/watchdog/Makefile
++++ b/drivers/watchdog/Makefile
+@@ -14,7 +14,7 @@ obj-$(CONFIG_XILINX_TB_WATCHDOG) += xilinx_tb_wdt.o
+ obj-$(CONFIG_OMAP_WATCHDOG) += omap_wdt.o
+ obj-$(CONFIG_DESIGNWARE_WATCHDOG) += designware_wdt.o
+ obj-$(CONFIG_ULP_WATCHDOG) += ulp_wdog.o
+-obj-$(CONFIG_$(SPL_TPL_)WDT) += wdt-uclass.o
++obj-$(CONFIG_$(PHASE_)WDT) += wdt-uclass.o
+ obj-$(CONFIG_WDT_SANDBOX) += sandbox_wdt.o
+ obj-$(CONFIG_WDT_ALARM_SANDBOX) += sandbox_alarm-wdt.o
+ obj-$(CONFIG_WDT_APPLE) += apple_wdt.o
+diff --git a/env/Makefile b/env/Makefile
+index c5145c1735f..a54e924d419 100644
+--- a/env/Makefile
++++ b/env/Makefile
+@@ -3,10 +3,10 @@
+ # (C) Copyright 2004-2006
+ # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+ 
+-obj-$(CONFIG_$(SPL_TPL_)ENV_SUPPORT) += common.o
+-obj-$(CONFIG_$(SPL_TPL_)ENV_SUPPORT) += env.o
+-obj-$(CONFIG_$(SPL_TPL_)ENV_SUPPORT) += attr.o
+-obj-$(CONFIG_$(SPL_TPL_)ENV_SUPPORT) += flags.o
++obj-$(CONFIG_$(PHASE_)ENV_SUPPORT) += common.o
++obj-$(CONFIG_$(PHASE_)ENV_SUPPORT) += env.o
++obj-$(CONFIG_$(PHASE_)ENV_SUPPORT) += attr.o
++obj-$(CONFIG_$(PHASE_)ENV_SUPPORT) += flags.o
+ 
+ ifndef CONFIG_XPL_BUILD
+ obj-y += callback.o
+@@ -20,12 +20,12 @@ obj-$(CONFIG_ENV_IS_IN_REMOTE) += remote.o
+ obj-$(CONFIG_ENV_IS_IN_UBI) += ubi.o
+ endif
+ 
+-obj-$(CONFIG_$(SPL_TPL_)ENV_IS_NOWHERE) += nowhere.o
+-obj-$(CONFIG_$(SPL_TPL_)ENV_IS_IN_MMC) += mmc.o
+-obj-$(CONFIG_$(SPL_TPL_)ENV_IS_IN_FAT) += fat.o
+-obj-$(CONFIG_$(SPL_TPL_)ENV_IS_IN_EXT4) += ext4.o
+-obj-$(CONFIG_$(SPL_TPL_)ENV_IS_IN_NAND) += nand.o
+-obj-$(CONFIG_$(SPL_TPL_)ENV_IS_IN_SPI_FLASH) += sf.o
+-obj-$(CONFIG_$(SPL_TPL_)ENV_IS_IN_FLASH) += flash.o
++obj-$(CONFIG_$(PHASE_)ENV_IS_NOWHERE) += nowhere.o
++obj-$(CONFIG_$(PHASE_)ENV_IS_IN_MMC) += mmc.o
++obj-$(CONFIG_$(PHASE_)ENV_IS_IN_FAT) += fat.o
++obj-$(CONFIG_$(PHASE_)ENV_IS_IN_EXT4) += ext4.o
++obj-$(CONFIG_$(PHASE_)ENV_IS_IN_NAND) += nand.o
++obj-$(CONFIG_$(PHASE_)ENV_IS_IN_SPI_FLASH) += sf.o
++obj-$(CONFIG_$(PHASE_)ENV_IS_IN_FLASH) += flash.o
+ 
+ CFLAGS_embedded.o := -Wa,--no-warn -DENV_CRC=$(shell tools/envcrc 2>/dev/null)
+diff --git a/fs/sandbox/Makefile b/fs/sandbox/Makefile
+index 880d59dd693..54ad842d1fe 100644
+--- a/fs/sandbox/Makefile
++++ b/fs/sandbox/Makefile
+@@ -9,4 +9,4 @@
+ # Pavel Bartusek, Sysgo Real-Time Solutions AG, pba@sysgo.de
+ 
+ obj-y := sandboxfs.o
+-obj-$(CONFIG_$(SPL_TPL_)BOOTSTD) += host_bootdev.o
++obj-$(CONFIG_$(PHASE_)BOOTSTD) += host_bootdev.o
+diff --git a/lib/Makefile b/lib/Makefile
+index 139476a4a23..7ccc91f5d33 100644
+--- a/lib/Makefile
++++ b/lib/Makefile
+@@ -20,7 +20,7 @@ obj-$(CONFIG_OPTEE_LIB) += optee/
+ 
+ obj-$(CONFIG_AES) += aes.o
+ obj-$(CONFIG_AES) += aes/
+-obj-$(CONFIG_$(SPL_TPL_)BINMAN_FDT) += binman.o
++obj-$(CONFIG_$(PHASE_)BINMAN_FDT) += binman.o
+ 
+ ifndef API_BUILD
+ ifneq ($(CONFIG_CHARSET),)
+@@ -56,8 +56,8 @@ obj-$(CONFIG_BITREVERSE) += bitrev.o
+ obj-y += list_sort.o
+ endif
+ 
+-obj-$(CONFIG_$(SPL_TPL_)TPM) += tpm-common.o
+-ifeq ($(CONFIG_$(SPL_TPL_)TPM),y)
++obj-$(CONFIG_$(PHASE_)TPM) += tpm-common.o
++ifeq ($(CONFIG_$(PHASE_)TPM),y)
+ obj-$(CONFIG_TPM) += tpm_api.o
+ obj-$(CONFIG_TPM_V1) += tpm-v1.o
+ obj-$(CONFIG_TPM_V2) += tpm-v2.o
+@@ -65,12 +65,12 @@ obj-$(CONFIG_EFI_TCG2_PROTOCOL) += tpm_tcg2.o
+ obj-$(CONFIG_MEASURED_BOOT) += tpm_tcg2.o
+ endif
+ 
+-obj-$(CONFIG_$(SPL_TPL_)CRC8) += crc8.o
+-obj-$(CONFIG_$(SPL_TPL_)CRC16) += crc16.o
++obj-$(CONFIG_$(PHASE_)CRC8) += crc8.o
++obj-$(CONFIG_$(PHASE_)CRC16) += crc16.o
+ 
+ obj-y += crypto/
+ 
+-obj-$(CONFIG_$(SPL_TPL_)ACPI) += acpi/
++obj-$(CONFIG_$(PHASE_)ACPI) += acpi/
+ obj-$(CONFIG_$(XPL_)MD5) += md5.o
+ obj-$(CONFIG_ECDSA) += ecdsa/
+ obj-$(CONFIG_$(XPL_)RSA) += rsa/
+@@ -93,12 +93,12 @@ obj-$(CONFIG_$(XPL_)LIB_RATIONAL) += rational.o
+ 
+ obj-$(CONFIG_LIBAVB) += libavb/
+ 
+-obj-$(CONFIG_$(SPL_TPL_)OF_LIBFDT) += libfdt/
+-obj-$(CONFIG_$(SPL_TPL_)OF_REAL) += fdtdec_common.o fdtdec.o
++obj-$(CONFIG_$(PHASE_)OF_LIBFDT) += libfdt/
++obj-$(CONFIG_$(PHASE_)OF_REAL) += fdtdec_common.o fdtdec.o
+ 
+ ifdef CONFIG_XPL_BUILD
+ obj-$(CONFIG_SPL_YMODEM_SUPPORT) += crc16-ccitt.o
+-obj-$(CONFIG_$(SPL_TPL_)HASH) += crc16-ccitt.o
++obj-$(CONFIG_$(PHASE_)HASH) += crc16-ccitt.o
+ obj-$(CONFIG_MMC_SPI_CRC_ON) += crc16-ccitt.o
+ obj-y += net_utils.o
+ endif
+@@ -110,15 +110,15 @@ obj-y += display_options.o
+ CFLAGS_display_options.o := $(if $(BUILD_TAG),-DBUILD_TAG='"$(BUILD_TAG)"')
+ obj-$(CONFIG_BCH) += bch.o
+ obj-$(CONFIG_MMC_SPI) += crc7.o
+-obj-$(CONFIG_$(SPL_TPL_)CRC32) += crc32.o
++obj-$(CONFIG_$(PHASE_)CRC32) += crc32.o
+ obj-$(CONFIG_CRC32C) += crc32c.o
+ obj-y += ctype.o
+ obj-y += div64.o
+-obj-$(CONFIG_$(SPL_TPL_)OF_LIBFDT) += fdtdec.o fdtdec_common.o
++obj-$(CONFIG_$(PHASE_)OF_LIBFDT) += fdtdec.o fdtdec_common.o
+ obj-y += hang.o
+ obj-y += linux_compat.o
+ obj-y += linux_string.o
+-obj-$(CONFIG_$(SPL_TPL_)LMB) += lmb.o
++obj-$(CONFIG_$(PHASE_)LMB) += lmb.o
+ obj-y += membuff.o
+ obj-$(CONFIG_REGEX) += slre.o
+ obj-y += string.o
+@@ -133,12 +133,12 @@ obj-y += panic.o
+ 
+ ifeq ($(CONFIG_XPL_BUILD),y)
+ # SPL U-Boot may use full-printf, tiny-printf or none at all
+-ifdef CONFIG_$(SPL_TPL_)USE_TINY_PRINTF
+-obj-$(CONFIG_$(SPL_TPL_)SPRINTF) += tiny-printf.o
++ifdef CONFIG_$(PHASE_)USE_TINY_PRINTF
++obj-$(CONFIG_$(PHASE_)SPRINTF) += tiny-printf.o
+ else
+-obj-$(CONFIG_$(SPL_TPL_)SPRINTF) += vsprintf.o
++obj-$(CONFIG_$(PHASE_)SPRINTF) += vsprintf.o
+ endif
+-obj-$(CONFIG_$(SPL_TPL_)STRTO) += strto.o
++obj-$(CONFIG_$(PHASE_)STRTO) += strto.o
+ else
+ # Main U-Boot always uses the full printf support
+ obj-y += vsprintf.o strto.o
+@@ -152,7 +152,7 @@ obj-y += date.o
+ obj-y += rtc-lib.o
+ obj-$(CONFIG_LIB_ELF) += elf.o
+ 
+-obj-$(CONFIG_$(SPL_TPL_)SEMIHOSTING) += semihosting.o
++obj-$(CONFIG_$(PHASE_)SEMIHOSTING) += semihosting.o
+ 
+ #
+ # Build a fast OID lookup registry from include/linux/oid_registry.h
+diff --git a/lib/acpi/Makefile b/lib/acpi/Makefile
+index 99be19adb4c..dcca0c67268 100644
+--- a/lib/acpi/Makefile
++++ b/lib/acpi/Makefile
+@@ -3,7 +3,7 @@
+ 
+ obj-y += acpi.o
+ 
+-ifdef CONFIG_$(SPL_TPL_)GENERATE_ACPI_TABLE
++ifdef CONFIG_$(PHASE_)GENERATE_ACPI_TABLE
+ 
+ obj-$(CONFIG_$(XPL_)ACPIGEN) += acpigen.o
+ obj-$(CONFIG_$(XPL_)ACPIGEN) += acpi_device.o
+diff --git a/lib/libfdt/Makefile b/lib/libfdt/Makefile
+index 1fe50ecbe52..c492377032b 100644
+--- a/lib/libfdt/Makefile
++++ b/lib/libfdt/Makefile
+@@ -16,4 +16,4 @@ obj-y += \
+ obj-$(CONFIG_OF_LIBFDT_OVERLAY) += fdt_overlay.o
+ 
+ ccflags-y := -I$(srctree)/scripts/dtc/libfdt \
+-	-DFDT_ASSUME_MASK=$(CONFIG_$(SPL_TPL_)OF_LIBFDT_ASSUME_MASK)
++	-DFDT_ASSUME_MASK=$(CONFIG_$(PHASE_)OF_LIBFDT_ASSUME_MASK)
+diff --git a/lib/rsa/Makefile b/lib/rsa/Makefile
+index c9ac72c1e26..1f9b24001bf 100644
+--- a/lib/rsa/Makefile
++++ b/lib/rsa/Makefile
+@@ -5,6 +5,6 @@
+ # (C) Copyright 2000-2007
+ # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+ 
+-obj-$(CONFIG_$(SPL_TPL_)RSA_VERIFY) += rsa-verify.o
+-obj-$(CONFIG_$(SPL_TPL_)RSA_VERIFY_WITH_PKEY) += rsa-keyprop.o
++obj-$(CONFIG_$(PHASE_)RSA_VERIFY) += rsa-verify.o
++obj-$(CONFIG_$(PHASE_)RSA_VERIFY_WITH_PKEY) += rsa-keyprop.o
+ obj-$(CONFIG_RSA_SOFTWARE_EXP) += rsa-mod-exp.o
+diff --git a/net/Makefile b/net/Makefile
+index a1d37855593..a7075c36a04 100644
+--- a/net/Makefile
++++ b/net/Makefile
+@@ -11,7 +11,7 @@ obj-$(CONFIG_CMD_CDP)  += cdp.o
+ obj-$(CONFIG_CMD_DNS)  += dns.o
+ obj-$(CONFIG_DM_DSA)   += dsa-uclass.o
+ obj-$(CONFIG_$(XPL_)DM_ETH) += eth-uclass.o
+-obj-$(CONFIG_$(SPL_TPL_)BOOTDEV_ETH) += eth_bootdev.o
++obj-$(CONFIG_$(PHASE_)BOOTDEV_ETH) += eth_bootdev.o
+ obj-$(CONFIG_DM_MDIO)  += mdio-uclass.o
+ obj-$(CONFIG_DM_MDIO_MUX) += mdio-mux-uclass.o
+ obj-$(CONFIG_$(XPL_)DM_ETH) += eth_common.o
+@@ -27,8 +27,8 @@ obj-$(CONFIG_CMD_PCAP) += pcap.o
+ obj-$(CONFIG_CMD_RARP) += rarp.o
+ obj-$(CONFIG_CMD_SNTP) += sntp.o
+ obj-$(CONFIG_CMD_TFTPBOOT) += tftp.o
+-obj-$(CONFIG_$(SPL_TPL_)UDP_FUNCTION_FASTBOOT)  += fastboot_udp.o
+-obj-$(CONFIG_$(SPL_TPL_)TCP_FUNCTION_FASTBOOT)  += fastboot_tcp.o
++obj-$(CONFIG_$(PHASE_)UDP_FUNCTION_FASTBOOT)  += fastboot_udp.o
++obj-$(CONFIG_$(PHASE_)TCP_FUNCTION_FASTBOOT)  += fastboot_tcp.o
+ obj-$(CONFIG_CMD_WOL)  += wol.o
+ obj-$(CONFIG_PROT_UDP) += udp.o
+ obj-$(CONFIG_PROT_TCP) += tcp.o
+diff --git a/scripts/Kbuild.include b/scripts/Kbuild.include
+index 1a6b28feedf..edc91b24e45 100644
+--- a/scripts/Kbuild.include
++++ b/scripts/Kbuild.include
+@@ -327,15 +327,15 @@ endif
+ ifdef CONFIG_XPL_BUILD
+ XPL_ := SPL_
+ ifeq ($(CONFIG_VPL_BUILD),y)
+-SPL_TPL_ := VPL_
++PHASE_ := VPL_
+ else
+ ifeq ($(CONFIG_TPL_BUILD),y)
+-SPL_TPL_ := TPL_
++PHASE_ := TPL_
+ else
+-SPL_TPL_ := SPL_
++PHASE_ := SPL_
+ endif
+ endif
+ else
+ XPL_ :=
+-SPL_TPL_ :=
++PHASE_ :=
+ endif
+diff --git a/scripts/Makefile.xpl b/scripts/Makefile.xpl
+index 11ae93f8556..dca5f4539d0 100644
+--- a/scripts/Makefile.xpl
++++ b/scripts/Makefile.xpl
+@@ -61,17 +61,17 @@ export SPL_NAME
+ ifdef CONFIG_XPL_BUILD
+ XPL_ := SPL_
+ ifeq ($(CONFIG_VPL_BUILD),y)
+-SPL_TPL_ := VPL_
++PHASE_ := VPL_
+ else
+ ifeq ($(CONFIG_TPL_BUILD),y)
+-SPL_TPL_ := TPL_
++PHASE_ := TPL_
+ else
+-SPL_TPL_ := SPL_
++PHASE_ := SPL_
+ endif
+ endif
+ else
+ XPL_ :=
+-SPL_TPL_ :=
++PHASE_ :=
+ endif
+ 
+ ifeq ($(obj)$(CONFIG_SUPPORT_SPL),spl)
+@@ -93,7 +93,7 @@ include $(srctree)/scripts/Makefile.lib
+ KBUILD_CFLAGS += -ffunction-sections -fdata-sections
+ LDFLAGS_FINAL += --gc-sections
+ 
+-ifeq ($(CONFIG_$(SPL_TPL_)STACKPROTECTOR),y)
++ifeq ($(CONFIG_$(PHASE_)STACKPROTECTOR),y)
+ KBUILD_CFLAGS += -fstack-protector-strong
+ else
+ KBUILD_CFLAGS += -fno-stack-protector
+@@ -117,8 +117,8 @@ endif
+ libs-y += common/init/
+ 
+ # Special handling for a few options which support SPL/TPL/VPL
+-libs-$(CONFIG_$(SPL_TPL_)LIBCOMMON_SUPPORT) += boot/ common/ cmd/ env/
+-libs-$(CONFIG_$(SPL_TPL_)LIBGENERIC_SUPPORT) += lib/
++libs-$(CONFIG_$(PHASE_)LIBCOMMON_SUPPORT) += boot/ common/ cmd/ env/
++libs-$(CONFIG_$(PHASE_)LIBGENERIC_SUPPORT) += lib/
+ ifdef CONFIG_SPL_FRAMEWORK
+ libs-$(CONFIG_PARTITIONS) += disk/
+ endif
+@@ -131,7 +131,7 @@ libs-y += dts/
+ libs-y += fs/
+ libs-$(CONFIG_SPL_POST_MEM_SUPPORT) += post/drivers/
+ libs-$(CONFIG_SPL_NET) += net/
+-libs-$(CONFIG_$(SPL_TPL_)UNIT_TEST) += test/
++libs-$(CONFIG_$(PHASE_)UNIT_TEST) += test/
+ 
+ head-y		:= $(addprefix $(obj)/,$(head-y))
+ libs-y		:= $(addprefix $(obj)/,$(libs-y))
+@@ -147,12 +147,12 @@ endif
+ 
+ u-boot-spl-init := $(head-y)
+ u-boot-spl-main := $(libs-y)
+-ifdef CONFIG_$(SPL_TPL_)OF_PLATDATA
++ifdef CONFIG_$(PHASE_)OF_PLATDATA
+ platdata-hdr := include/generated/dt-structs-gen.h include/generated/dt-decl.h
+ platdata-inst := $(obj)/dts/dt-uclass.o $(obj)/dts/dt-device.o
+ platdata-noinst := $(obj)/dts/dt-plat.o
+ 
+-ifdef CONFIG_$(SPL_TPL_)OF_PLATDATA_INST
++ifdef CONFIG_$(PHASE_)OF_PLATDATA_INST
+ u-boot-spl-platdata := $(platdata-inst)
+ u-boot-spl-old-platdata := $(platdata-noinst)
+ else
+@@ -169,9 +169,9 @@ endif  # OF_PLATDATA
+ 
+ # Linker Script
+ # First test whether there's a linker-script for the specific stage defined...
+-ifneq ($(CONFIG_$(SPL_TPL_)LDSCRIPT),)
++ifneq ($(CONFIG_$(PHASE_)LDSCRIPT),)
+ # need to strip off double quotes
+-LDSCRIPT := $(addprefix $(srctree)/,$(CONFIG_$(SPL_TPL_)LDSCRIPT:"%"=%))
++LDSCRIPT := $(addprefix $(srctree)/,$(CONFIG_$(PHASE_)LDSCRIPT:"%"=%))
+ else
+ # ...then fall back to the generic SPL linker-script
+ ifneq ($(CONFIG_SPL_LDSCRIPT),)
+@@ -205,11 +205,11 @@ LDPPFLAGS += \
+ 
+ # Turn various CONFIG symbols into IMAGE symbols for easy reuse of
+ # the scripts between SPL, TPL and VPL.
+-ifneq ($(CONFIG_$(SPL_TPL_)MAX_SIZE),0x0)
+-LDPPFLAGS += -DIMAGE_MAX_SIZE=$(CONFIG_$(SPL_TPL_)MAX_SIZE)
++ifneq ($(CONFIG_$(PHASE_)MAX_SIZE),0x0)
++LDPPFLAGS += -DIMAGE_MAX_SIZE=$(CONFIG_$(PHASE_)MAX_SIZE)
+ endif
+-ifneq ($(CONFIG_$(SPL_TPL_)TEXT_BASE),)
+-LDPPFLAGS += -DIMAGE_TEXT_BASE=$(CONFIG_$(SPL_TPL_)TEXT_BASE)
++ifneq ($(CONFIG_$(PHASE_)TEXT_BASE),)
++LDPPFLAGS += -DIMAGE_TEXT_BASE=$(CONFIG_$(PHASE_)TEXT_BASE)
+ endif
+ 
+ MKIMAGEOUTPUT ?= /dev/null
+@@ -323,7 +323,7 @@ endif
+ #   - OF_REAL is enabled
+ #   - we have either OF_SEPARATE or OF_HOSTFILE
+ build_dtb :=
+-ifneq ($(CONFIG_$(SPL_TPL_)OF_REAL),)
++ifneq ($(CONFIG_$(PHASE_)OF_REAL),)
+ ifneq ($(CONFIG_OF_SEPARATE)$(CONFIG_SANDBOX),)
+ build_dtb := y
+ endif
+@@ -331,7 +331,7 @@ endif
+ 
+ ifneq ($(build_dtb),)
+ $(obj)/$(SPL_BIN)-dtb.bin: $(obj)/$(SPL_BIN)-nodtb.bin \
+-		$(if $(CONFIG_$(SPL_TPL_)SEPARATE_BSS),,$(obj)/$(SPL_BIN)-pad.bin) \
++		$(if $(CONFIG_$(PHASE_)SEPARATE_BSS),,$(obj)/$(SPL_BIN)-pad.bin) \
+ 		$(FINAL_DTB_CONTAINER)  FORCE
+ 	$(call if_changed,cat)
+ 
+@@ -355,7 +355,7 @@ pythonpath = PYTHONPATH=scripts/dtc/pylibfdt
+ DTOC_ARGS := $(pythonpath) $(srctree)/tools/dtoc/dtoc \
+ 	-d $(obj)/$(SPL_BIN).dtb -p $(SPL_NAME)
+ 
+-ifneq ($(CONFIG_$(SPL_TPL_)OF_PLATDATA_INST),)
++ifneq ($(CONFIG_$(PHASE_)OF_PLATDATA_INST),)
+ DTOC_ARGS += -i
+ endif
+ 
+@@ -400,7 +400,7 @@ quiet_cmd_objcopy = OBJCOPY $@
+ cmd_objcopy = $(OBJCOPY) $(OBJCOPYFLAGS) $(OBJCOPYFLAGS_$(@F)) $< $@
+ 
+ OBJCOPYFLAGS_$(SPL_BIN)-nodtb.bin = $(SPL_OBJCFLAGS) -O binary \
+-		$(if $(CONFIG_$(SPL_TPL_)X86_16BIT_INIT),-R .start16 -R .resetvec)
++		$(if $(CONFIG_$(PHASE_)X86_16BIT_INIT),-R .start16 -R .resetvec)
+ 
+ $(obj)/$(SPL_BIN)-nodtb.bin: $(obj)/$(SPL_BIN) FORCE
+ 	$(call if_changed,objcopy)
+@@ -429,8 +429,8 @@ LDFLAGS_$(SPL_BIN) += $(call ld-option, --no-dynamic-linker)
+ LDFLAGS_$(SPL_BIN) += --build-id=none
+ 
+ # Pick the best match (e.g. SPL_TEXT_BASE for SPL, TPL_TEXT_BASE for TPL)
+-ifneq ($(CONFIG_$(SPL_TPL_)TEXT_BASE),)
+-LDFLAGS_$(SPL_BIN) += -Ttext $(CONFIG_$(SPL_TPL_)TEXT_BASE)
++ifneq ($(CONFIG_$(PHASE_)TEXT_BASE),)
++LDFLAGS_$(SPL_BIN) += -Ttext $(CONFIG_$(PHASE_)TEXT_BASE)
+ endif
+ 
+ ifdef CONFIG_TARGET_SOCFPGA_ARRIA10
+diff --git a/test/dm/Makefile b/test/dm/Makefile
+index c6c63051e0b..6c9ebb8d07c 100644
+--- a/test/dm/Makefile
++++ b/test/dm/Makefile
+@@ -42,7 +42,7 @@ obj-$(CONFIG_CLK) += clk.o clk_ccf.o
+ obj-$(CONFIG_CPU) += cpu.o
+ obj-$(CONFIG_CROS_EC) += cros_ec.o
+ obj-$(CONFIG_PWM_CROS_EC) += cros_ec_pwm.o
+-obj-$(CONFIG_$(SPL_TPL_)DEVRES) += devres.o
++obj-$(CONFIG_$(PHASE_)DEVRES) += devres.o
+ obj-$(CONFIG_DMA) += dma.o
+ obj-$(CONFIG_VIDEO_MIPI_DSI) += dsi_host.o
+ obj-$(CONFIG_DM_DSA) += dsa.o
+@@ -102,7 +102,7 @@ obj-$(CONFIG_DM_RESET) += reset.o
+ obj-$(CONFIG_SYSRESET) += sysreset.o
+ obj-$(CONFIG_DM_REGULATOR) += regulator.o
+ obj-$(CONFIG_CMD_RKMTD) += rkmtd.o
+-obj-$(CONFIG_$(SPL_TPL_)DM_RNG) += rng.o
++obj-$(CONFIG_$(PHASE_)DM_RNG) += rng.o
+ obj-$(CONFIG_DM_RTC) += rtc.o
+ obj-$(CONFIG_SCMI_FIRMWARE) += scmi.o
+ obj-$(CONFIG_SCSI) += scsi.o
+diff --git a/tools/qconfig.py b/tools/qconfig.py
+index e025f560928..7b4934b726d 100755
+--- a/tools/qconfig.py
++++ b/tools/qconfig.py
+@@ -1222,8 +1222,8 @@ def scan_makefiles(fnames):
+     (None, 'FRED')
+     >>> RE_MK_CONFIGS.search('CONFIG_$(XPL_)MARY').groups()
+     ('$(XPL_)', 'MARY')
+-    >>> RE_MK_CONFIGS.search('CONFIG_$(SPL_TPL_)MARY').groups()
+-    ('$(SPL_TPL_)', 'MARY')
++    >>> RE_MK_CONFIGS.search('CONFIG_$(PHASE_)MARY').groups()
++    ('$(PHASE_)', 'MARY')
+     """
+     all_uses = collections.defaultdict(list)
+     fname_uses = {}
+@@ -1322,7 +1322,7 @@ def do_scan_source(path, do_update):
+                 an SPL_ option, but for which there is none;
+                 for MOD_PROPER, look at source code which implies a Proper
+                 option (i.e. use of CONFIG_IS_ENABLED() or $(XPL_) or
+-                $(SPL_TPL_) but for which there none;
++                $(PHASE_) but for which there none;
+                 if MODE_NORMAL, ignore SPL
+ 
+         Returns:
 -- 
 2.43.0
 
