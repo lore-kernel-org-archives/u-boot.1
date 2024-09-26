@@ -4,79 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CF52CCFA07
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 22:46:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1662CDE03E
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 22:46:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C4FEF8901B;
-	Fri, 27 Sep 2024 00:46:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 369E589014;
+	Fri, 27 Sep 2024 00:46:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GbbHfx8l";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aNrnTNu2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3844888F9B; Fri, 27 Sep 2024 00:46:40 +0200 (CEST)
-Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
- [IPv6:2607:f8b0:4864:20::835])
+ id 7A56A89014; Fri, 27 Sep 2024 00:46:50 +0200 (CEST)
+Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
+ [IPv6:2607:f8b0:4864:20::833])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 19C288901B
- for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 00:46:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 67F0789028
+ for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 00:46:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qt1-x835.google.com with SMTP id
- d75a77b69052e-458366791aaso8342561cf.1
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 15:46:38 -0700 (PDT)
+Received: by mail-qt1-x833.google.com with SMTP id
+ d75a77b69052e-4581f44b9b4so9535651cf.1
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 15:46:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727390797; x=1727995597; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727390806; x=1727995606; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oB+kFWYr6VO1zDSHp/QiflCBX53cBwQFBEDFUIAcHJU=;
- b=GbbHfx8lf09yZ9bsoKMq1FthRVuEbCSrlKuwEp0Hfh/DmLNZt9z0lCU9Q6B+dUbzcG
- QTB1CUBLiL6RJElR6gXK1vrAWoeZY4CcJajMGacBCmF0rYAciloMLtB3IX+XyiEjVo51
- hZs1Ry34vyOq3WirnZjmt3L/5811o5IHY+LB8=
+ bh=dqv8jDvf3hyGABjLNMYEmSg58jRPtJ2g4OErKsJLRsQ=;
+ b=aNrnTNu2/ph4ilTxtxWz1ZikVcQlHjMISujpqMVGafapiI9RlRWBLOKmUmeXg7MJ5H
+ EJ+LmTZfv+dHjqU1FPHw4Ym7b6ggZJbyHVZd2wJh5tbRSGKaqgtB15hqRxChaHnUQdyT
+ n1NWueruKg3qYjahkL+qmQHiFvI0PlTR8P8IM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727390797; x=1727995597;
+ d=1e100.net; s=20230601; t=1727390806; x=1727995606;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oB+kFWYr6VO1zDSHp/QiflCBX53cBwQFBEDFUIAcHJU=;
- b=JCb9tWbCEk74prMgR6Kmvaqpp7rbTX2hkpBYiYEm/MTHqC9oup28DlNt+ohmLiFOWD
- hiiACaIDa8JeVVHlT7H8jtz898fBfdBMXibWHm9+YUefB2Q6lsRfm6wP3ZcqU2NFoqIZ
- E6bleuJvistY79mzQJD37uyToyIIZFDIOHVScsuadqPB2ZlXo0a2JElAeY87RW6zIRpB
- LytlKZ19+V2pFq1rXlZ4lo+0xc69mQUwXqdKYjTLWH9bbu3fT1mhwHy5sJMHlt5qVcI5
- UrAysm/rpqtJ62QsaN1B6fhM7Ig4R2moI57KluxsmBqHnd7O9m1OGFgVle402NpQo0+U
- JOKg==
-X-Gm-Message-State: AOJu0YyDP58YkQejY02jZpQ05GXvqWPLt6CbvrLzuMIvNwZem79ss7sG
- WIJomGD+mNVsPYLthQiZ6it/REmNN5lpJPUcL2C+Berqd3xMj/tlfQuCiG4rJczjI6oJM3N/m1l
- Lci0CfgE=
-X-Google-Smtp-Source: AGHT+IHXiIOB576DlyiSnNRD9N3o7S7MiDTFbGNnzc6fkRp9IOjNPwlc66SwiygR4lbSv+HvxnqFgA==
-X-Received: by 2002:a05:622a:3ce:b0:458:3b10:872 with SMTP id
- d75a77b69052e-45c9f2a488dmr14701651cf.60.1727390796892; 
- Thu, 26 Sep 2024 15:46:36 -0700 (PDT)
+ bh=dqv8jDvf3hyGABjLNMYEmSg58jRPtJ2g4OErKsJLRsQ=;
+ b=JtAGSWc0xdsztloMiUZ06nVU1YQvvaCCjCBgHLehg1RYo018OBhw3p5WS3MouzkxrM
+ wj/+Wp8H3WluqBkhUJPs7mhLWHs1JPXJICWmcah6LqlxdYcZlQF0R0q+MBHV1ZVlX0hq
+ t7U2NgtTL/sLosGJtTg4/ZGtDVVWB7yJtnTEaOoOZ4Ap/79nfyzisOc//89lVOSGRtn8
+ 4TYf0bpjUPdWW/iLKwwBIXjhm+tEHpauNPCYOUJAffCDO2e3erYsPzoZf1aRs8w+hV6L
+ t7uChs2JjVweQCPP/mBhq/H79vj0YPCgA/rg3rahR6DTwmztNUZXImjlDIqDvvXrQhl7
+ PlGA==
+X-Gm-Message-State: AOJu0Yyw4dm1MX3zW2YY1hE9dzvtCiTFjKUkt19zyKnPLkI6vXcOhR3/
+ zbxXdlpzT9y9bYJCLTozHRVP1NVrtHJMG2lPYepTPcitMjveYx/dKCAnyBftLCedUWmYEq3lkyv
+ iPBoOly8=
+X-Google-Smtp-Source: AGHT+IF5g1u4hG2QArbybBrQpuwnqZ90yJuq1ALhgzQgN0ngxd3k2PA2NFfiuBp7TZVPveeEHRiKbw==
+X-Received: by 2002:a05:622a:15cf:b0:458:1def:72ba with SMTP id
+ d75a77b69052e-45c9f2829bbmr18174141cf.46.1727390806235; 
+ Thu, 26 Sep 2024 15:46:46 -0700 (PDT)
 Received: from chromium.org ([205.220.129.31])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-45c9f350fadsm2738461cf.80.2024.09.26.15.46.22
+ d75a77b69052e-45c9f350fadsm2738461cf.80.2024.09.26.15.46.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Sep 2024 15:46:36 -0700 (PDT)
+ Thu, 26 Sep 2024 15:46:46 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Devarsh Thakkar <devarsht@ti.com>, Kever Yang <kever.yang@rock-chips.com>,
+ Devarsh Thakkar <devarsht@ti.com>,
  Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Sean Anderson <seanga2@gmail.com>, Stefan Roese <sr@denx.de>
-Subject: [PATCH 36/42] xpl: Rename spl_in_proper() to not_xpl()
-Date: Fri, 27 Sep 2024 00:36:01 +0200
-Message-ID: <20240926223814.1276764-37-sjg@chromium.org>
+ Sean Anderson <seanga2@gmail.com>,
+ Suniel Mahesh <sunil@amarulasolutions.com>
+Subject: [PATCH 37/42] xpl: Add a function to indicate when in xPL
+Date: Fri, 27 Sep 2024 00:36:02 +0200
+Message-ID: <20240926223814.1276764-38-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240926223814.1276764-1-sjg@chromium.org>
 References: <20240926223814.1276764-1-sjg@chromium.org>
@@ -98,80 +93,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Give this function a slightly easier name.
+Add the opposite function to not_xpl() for completeness.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- drivers/mtd/nand/raw/sand_nand.c    | 2 +-
- drivers/ram/rockchip/sdram_rk3399.c | 2 +-
- drivers/serial/ns16550.c            | 4 ++--
- include/spl.h                       | 4 ++--
- 4 files changed, 6 insertions(+), 6 deletions(-)
+ include/spl.h | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/drivers/mtd/nand/raw/sand_nand.c b/drivers/mtd/nand/raw/sand_nand.c
-index 53489223030..3678bb8a41b 100644
---- a/drivers/mtd/nand/raw/sand_nand.c
-+++ b/drivers/mtd/nand/raw/sand_nand.c
-@@ -601,7 +601,7 @@ static int sand_nand_probe(struct udevice *dev)
- 		}
- 
- 		nand = &chip->nand;
--		nand->options = spl_in_proper() ? 0 : NAND_SKIP_BBTSCAN;
-+		nand->options = not_xpl() ? 0 : NAND_SKIP_BBTSCAN;
- 		nand->flash_node = np;
- 		nand->dev_ready = sand_nand_dev_ready;
- 		nand->cmdfunc = sand_nand_command;
-diff --git a/drivers/ram/rockchip/sdram_rk3399.c b/drivers/ram/rockchip/sdram_rk3399.c
-index 7f8a6ba8410..5676c099a43 100644
---- a/drivers/ram/rockchip/sdram_rk3399.c
-+++ b/drivers/ram/rockchip/sdram_rk3399.c
-@@ -196,7 +196,7 @@ static bool phase_sdram_init(void)
- 	return xpl_phase() == PHASE_TPL ||
- 		(!IS_ENABLED(CONFIG_TPL) &&
- 		 !IS_ENABLED(CONFIG_ROCKCHIP_EXTERNAL_TPL) &&
--		 !spl_in_proper());
-+		 !not_xpl());
- }
- 
- static struct io_setting *
-diff --git a/drivers/serial/ns16550.c b/drivers/serial/ns16550.c
-index 248fe3f778f..3489228127e 100644
---- a/drivers/serial/ns16550.c
-+++ b/drivers/serial/ns16550.c
-@@ -473,7 +473,7 @@ static int ns16550_serial_getinfo(struct udevice *dev,
- 	struct ns16550_plat *plat = com_port->plat;
- 
- 	/* save code size */
--	if (!spl_in_proper())
-+	if (!not_xpl())
- 		return -ENOSYS;
- 
- 	info->type = SERIAL_CHIP_16550_COMPATIBLE;
-@@ -555,7 +555,7 @@ int ns16550_serial_of_to_plat(struct udevice *dev)
- 	struct clk clk;
- 	int err;
- 
--	addr = spl_in_proper() ? dev_read_addr_size(dev, &size) :
-+	addr = not_xpl() ? dev_read_addr_size(dev, &size) :
- 		dev_read_addr(dev);
- 	err = ns16550_serial_assign_base(plat, addr, size);
- 	if (err && !device_is_on_pci_bus(dev))
 diff --git a/include/spl.h b/include/spl.h
-index 09472f7f9bc..bea4d78f8c6 100644
+index bea4d78f8c6..3281b02d63b 100644
 --- a/include/spl.h
 +++ b/include/spl.h
-@@ -134,8 +134,8 @@ static inline enum xpl_phase_t xpl_phase(void)
- #endif
+@@ -144,6 +144,16 @@ static inline bool not_xpl(void)
+ 	return true;
  }
  
--/* returns true if in U-Boot proper, false if in SPL */
--static inline bool spl_in_proper(void)
-+/* returns true if in U-Boot proper, false if in xPL */
-+static inline bool not_xpl(void)
- {
- #ifdef CONFIG_XPL_BUILD
- 	return false;
++/* returns true if in xPL, false if in U-Boot proper */
++static inline bool is_xpl(void)
++{
++#ifdef CONFIG_XPL_BUILD
++	return true;
++#endif
++
++	return false;
++}
++
+ /**
+  * spl_prev_phase() - Figure out the previous U-Boot phase
+  *
 -- 
 2.43.0
 
