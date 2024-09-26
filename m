@@ -4,137 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 855C2CCFA15
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 04:56:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98FE2CCFA17
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 04:56:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C147F88C9C;
-	Thu, 26 Sep 2024 06:55:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2F3DC88CFB;
+	Thu, 26 Sep 2024 06:55:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="0CT4SWI3";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="yuzKewIM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4F2188C53; Thu, 26 Sep 2024 06:55:37 +0200 (CEST)
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2417::600])
+ id E9EC087BF4; Thu, 26 Sep 2024 06:55:37 +0200 (CEST)
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on20601.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2413::601])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 640E787BF4
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 06:55:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 745BA88C71
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 06:55:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=n8yYZe9xNd2SKvEVH9fyZuXJlYsQtim+Jhun4YF1EjV7RQBCMlzBI4ldgX/hCPLX5KRT5xh67DJYw7+y4k1Os8uWZya7e1p/K24tdRJJa7iZGjUFI9gha/x8fHtnUSLhCVw7dmAQf64bVdZkZEvjAPWtux5EDxbom81Q1hIzra15p2LLD8AAoLkA86cjTyjBxjY/7jqwqpXOQQfAAawgZsppuNamPTsv7PTkWZAV8jyGeSFDmbkkkSBkHopiEuUjzJwMVwOCg+UYbZwtFe5IfZKNeXp47qglLZC5q7K974NlEQ375m3QFaAmPLt6k0Er7DuIvL+8upF1ZeADQx0fqw==
+ b=YbqGW9eEBz5EwovHHaRGhD1lYB72kzE3CixQ3D1NlRxbFAjMj6QeqbvBF3vTKYBvDprAJHJK4xvWpdA29ExUQL54TL2WGo5V5+ZTMZFsvJbCAt4mMQg0Y3vo2Tr0PwW7MRMGc4BsjVsRx663nPtr7Al0sHCef5ZfrHqdtRubmYlCZ3slrN6F7Tc+6Q4vpnsgOd8t64ewwICsuFrH6CsBV6luhGJ3YhHKBFQ7oyuvbqz7ScAVf538nxqFx/L24MxG5f6lZqUcwaDxBpwo/6uymWzRnzo8jfcfSYU4g6ZFJu5OPqdgfj9O3qoOmLJ+nk7kRnpyuZFedVQCZWpAYLwyuQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yZ39GvdBuMnSzmvec3syLG2jmHDRaP1an1mkNkojafs=;
- b=mQhYHw17v/5FPE/92aBRfmo7US1RmVltlFYwLocaNE+w5oJOE81oK21koKAVB3oLSZSewynMK9U3Rkubi48C/K5RsVvhHa9vmIXqBoxzSe0m3u5iW0h5I1MYNwRSIOKxWPg/zxuTVLfygiMYyYTr5JZsA+xf/u0k5r8X2ALw2peb/QHyljLbW4Q9+E4yHjsveH6zx59L2vgtON18Z8Mnu18v2XuP/R9OM1M8MA3pAXP0tfNSBBaoMgwnN+BbRZTa+wyQmSYNSO1vxCuaZwBDuhqAFV4GsGJIhmAUjNRCaedOyPSP1bPQ3NcBa2vCF10RpLr/b3eAcNdDoVZOW771ig==
+ bh=A7tgclXvHpA9CDRTCdDf+4+EbwKnRVwdZkRSYZekF04=;
+ b=OiyycI1tnHK+42bV3s1B8oHIxH8rWkb9nomdzBNDiGmJcsBSqOOFFpkP1ckbXDlsj22aEU/VLthlXpYQkLvtxXNn93PjkWM4mmIN//cp5fc3GCcD4TwpwroWfTPey6do7yvhsn2tuuRQHQcFrs4/eXCqwvQ76I97zPCiAq3udXppSqvvU4llmLxMjsm3Rtv8XrOjMLK2aJ9mybiAxygMrPWSipktCoFpUZyheIMmi1bXeOonmJYCBvKjqbGIW1u3bCb/uix/L8416SVnvjelyw5Mu3kjWWcKkXq9wunIsHJ0XuzRaes08bXBmhTC4FydhAfyC5Tb1UkW50/CFq0AKg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yZ39GvdBuMnSzmvec3syLG2jmHDRaP1an1mkNkojafs=;
- b=0CT4SWI37bkTR4kuetK2GM67kTNT/k/2POqmk3Gnjv+m+k3F/+gdILy4qjNMaJQuHAhufNDOwI+dgAycfrY9+zPIVOdPhHEioc77H2TzQukWrAcKXnFi0DXzedektvJ34b4IKZpCfTqm11IRhy8ZOEZ+BVj9iWB2WR4ziEiZGVg=
-Received: from CH5P220CA0022.NAMP220.PROD.OUTLOOK.COM (2603:10b6:610:1ef::28)
- by PH7PR12MB9073.namprd12.prod.outlook.com (2603:10b6:510:2eb::22)
+ bh=A7tgclXvHpA9CDRTCdDf+4+EbwKnRVwdZkRSYZekF04=;
+ b=yuzKewIM3NrmZuIQapbP2/StuGp/z4gLC3XsuQnZaH2Q8sk0Z8IeUptCRwbvM8shQ+htFCmy4sMDfdcp8lrYrSl6IlUu/7b/mJDDVAwe+sHTvDu/iGrx2oqclJDOEYg/5kNw3i2yTMYpXvqYqPF3KoCtG5NFmZC8fAY89P0fW5U=
+Received: from MW3PR05CA0022.namprd05.prod.outlook.com (2603:10b6:303:2b::27)
+ by IA1PR12MB6329.namprd12.prod.outlook.com (2603:10b6:208:3e5::19)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7982.28; Thu, 26 Sep
- 2024 04:55:28 +0000
-Received: from DS3PEPF000099D3.namprd04.prod.outlook.com
- (2603:10b6:610:1ef:cafe::4c) by CH5P220CA0022.outlook.office365.com
- (2603:10b6:610:1ef::28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8005.19 via Frontend
- Transport; Thu, 26 Sep 2024 04:55:28 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7982.25; Thu, 26 Sep
+ 2024 04:55:19 +0000
+Received: from SJ5PEPF000001D2.namprd05.prod.outlook.com
+ (2603:10b6:303:2b:cafe::4a) by MW3PR05CA0022.outlook.office365.com
+ (2603:10b6:303:2b::27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8026.5 via Frontend
+ Transport; Thu, 26 Sep 2024 04:55:19 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DS3PEPF000099D3.mail.protection.outlook.com (10.167.17.4) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8005.15 via Frontend Transport; Thu, 26 Sep 2024 04:55:28 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ SJ5PEPF000001D2.mail.protection.outlook.com (10.167.242.54) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8005.15 via Frontend Transport; Thu, 26 Sep 2024 04:55:18 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 25 Sep
- 2024 23:55:27 -0500
+ 2024 23:55:17 -0500
 Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
  (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 25 Sep
- 2024 23:55:26 -0500
+ 2024 23:55:16 -0500
 Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Wed, 25 Sep 2024 23:55:24 -0500
+ Transport; Wed, 25 Sep 2024 23:55:15 -0500
 From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 To: <u-boot@lists.denx.de>
 CC: <michal.simek@amd.com>, <jagan@amarulasolutions.com>,
- <trini@konsulko.com>, <git@amd.com>, Ashok Reddy Soma
- <ashok.reddy.soma@amd.com>
-Subject: [PATCH v14 4/8] mtd: spi-nor: Add parallel and stacked memories
- support in read_bar and write_bar
-Date: Thu, 26 Sep 2024 10:25:04 +0530
-Message-ID: <20240926045508.1492638-5-venkatesh.abbarapu@amd.com>
+ <trini@konsulko.com>, <git@amd.com>
+Subject: [PATCH v14 0/8] spi-nor: Add parallel and stacked memories support
+Date: Thu, 26 Sep 2024 10:25:00 +0530
+Message-ID: <20240926045508.1492638-1-venkatesh.abbarapu@amd.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240926045508.1492638-1-venkatesh.abbarapu@amd.com>
-References: <20240926045508.1492638-1-venkatesh.abbarapu@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF000099D3:EE_|PH7PR12MB9073:EE_
-X-MS-Office365-Filtering-Correlation-Id: df917d00-e3a8-4626-1247-08dcdde770e9
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001D2:EE_|IA1PR12MB6329:EE_
+X-MS-Office365-Filtering-Correlation-Id: a43c01c2-e113-4720-2bc7-08dcdde76b61
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|82310400026|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?b3H4YJC2BiE8eYI9xU9O128mAJaWC8UUPeJBIeRPKT95E/FBd5Q5exjqgc1j?=
- =?us-ascii?Q?qnwN7npRp0YWOQ3M726Wa3zTxcojNhx4nHMkyz8ZHipCb/vcBpKCmpJ8n8WP?=
- =?us-ascii?Q?A+vOTNp2M6C7r+AwTkfgTWfbMXRrEAbJ74HSTWSh1HYRC/DbGgagtJ79Zi/Y?=
- =?us-ascii?Q?bpMIFawqAlGyryrFaf0VfbDRLMH1vD7ZX5vJt/ERMG00O3pdiR8vKmI6+1W5?=
- =?us-ascii?Q?xUSX5F9mffRZ7ROJQucR5xR5xpmqhJxmqK8/nQt2GPMC02bmFpqnzp9iAMPn?=
- =?us-ascii?Q?L3tzyLCOuLOakwfJOj4DHn2zP6LXJEuIJOVPfOicsVhCdt8ETAq7ID0yBgt1?=
- =?us-ascii?Q?ZzlqWhN9G3PbyUpszP9viSpIsMRaSTWTu1VsdZ8xjtYxl+Pwp3qvz5QUVMKR?=
- =?us-ascii?Q?//AkFgYLoyDBNXNU4uLb39ni1KiWyDepfLGyPmobCWp3mo3k4X51AvEE5LrO?=
- =?us-ascii?Q?rItNDk8iNNQqHRdh4uMSyJCWXsf7+pUpyZqCdfTH0M8nIuqzgFDdMu310ccN?=
- =?us-ascii?Q?YvjSLDHVUe5d75kxICnbU7HGIIgnYnJHgWzymI63RBiBj/91Tc1dNn70fnQi?=
- =?us-ascii?Q?JpkEyvBwsiE8KsBSlp6k9ops6poi2VREY/uZEcUiAh5Q+gw2PcAJ+VuoNsrF?=
- =?us-ascii?Q?9ZAcBHyO+mlWVGBlEMwraUTj6QCd+SKfnbJ6fMQR4NMP1vV3bCAoewQnYrse?=
- =?us-ascii?Q?KnmdjgquJA/M6ipmliRmLwh6+cl8RVawYehp2h5hfElhmSgcojeCnGV1fEAu?=
- =?us-ascii?Q?LX7QiF35Xsl4e3VZy7rGOuvrOIstnwATRFgKkaWsBons37p4z5KLNUEAqNyj?=
- =?us-ascii?Q?Heh9iKPRPfst0rtphe0HDVQKthv4MPnid++BGmAl8UP4Tvb9ZPX1e1zUS5qE?=
- =?us-ascii?Q?t/fOgoBt7qHIirh01ZbOJog8z8GJrK+bzqzutKfrX+IDuHbyMVKpkcemkCl/?=
- =?us-ascii?Q?2Icv4x/ozYH9AMFKxVoxQazVDEuVxCuvqXWNsGNeuceMdHZlhk1wfzsG5SuO?=
- =?us-ascii?Q?2JUUr9XtxmDFoI/Y/NsMT+m/d8vISIvFMjFvuosCGKB/4IVmwqN63ZosN+vp?=
- =?us-ascii?Q?Ric1q58DF5pgWb6+BK7uLzTEf/5GS9FrwKP6vCM+SwRklnPKI1mDcch6SS8E?=
- =?us-ascii?Q?xI/aeRLMTHcMpHnfqdTXkJsC03t8apFmzkUdLHbwhoEMizFehqJhwc3yAxCz?=
- =?us-ascii?Q?5ZsjmRr01ZEnrEg9mPA5nSqTx/DkgBgKxa6kqWUW52Hc49ZBJG7TmCOSGFuL?=
- =?us-ascii?Q?SU8egI5Ev00/96qbgxOTL+SqXZnvqr4EBegBgXM2jFlxqPlevgd6WakkYzKG?=
- =?us-ascii?Q?RWYwSW0QVOKJm6fuG/iSViTCG1J3JQu3Jo7dVYCAtgBUdKdHwTH2t9wsRHE8?=
- =?us-ascii?Q?1ZjcqGelIhl/I69nm2mlJ7AiFLdU?=
+ ARA:13230040|1800799024|376014|36860700013|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?X0XmRb24jQDLGpCoV9kETGYJeMY149GC6qBk2WhaxMpYHBUhUtGujtmYgcJz?=
+ =?us-ascii?Q?k1qULRaCwqVbxy0a1l+o/WwPjyjH+S8k37RvBc9K7HnTGVzW0cqNiZhSDauM?=
+ =?us-ascii?Q?o6p71OkbgByv0NjD11+ZMjUZCHXbcH0rUeQm0givq/4xMv/Oim/D4sK5xFtL?=
+ =?us-ascii?Q?h3qo2Fc5fXiG+gvA4+sY4rDBrWWlvgbt/Y7B0Jt8HF5D24PuMtsQfGl9retH?=
+ =?us-ascii?Q?v4GD75aNuZTdQWq/+3BaQl1aosPu6HH7sSBJpp8gI39nX5unV8KcZlDmIR2d?=
+ =?us-ascii?Q?v+E4aIij9kV+pz5KfKToIREow8yz0bMSDuhGoty9W5DSD3LCUzpyUednltdi?=
+ =?us-ascii?Q?+MdbIqXXVI60KTUoFbIubrIfl9KZDyq0pjR40/qXPQkGuzbCN8bbSDIoLRQO?=
+ =?us-ascii?Q?BAX08c1RIIdfpEf0tiGBpaTCpixH9yyKFmOuEJumaRaciUMiG0wNqQj+w5/F?=
+ =?us-ascii?Q?J4w9A6beuEiAsaUjBQeoDsFDoS2oZBWQH+bYWnZrxKruGf1TaD4241lFX263?=
+ =?us-ascii?Q?dHrPTQxW5Ax7YAs55E19iOkcZGrsh/iQXSswzWjnCir+3SHnOaLjjYaWYP7s?=
+ =?us-ascii?Q?oi8Wzdqa5eBC9fwpG4pONzNu/Hi74+eZlO7JHFfudlbsOvt9UgKv5YiSTR/O?=
+ =?us-ascii?Q?lhZAdcA1mSCiKAsbNWWehrjQ7shKi5y+5soBxppM/7AP/lzd7tyYe71UwuWl?=
+ =?us-ascii?Q?XIRG2b/FriyDc+2o0qw65GoXMN34h121WwBhjZw/wVjcKumXJD19Ii7EWAyq?=
+ =?us-ascii?Q?6WLuzUVqhBxgeIRGexhpBiYkxk8CABEi5mfujp+POoQWHkZsrZBEdcXAZCvN?=
+ =?us-ascii?Q?n5978MFPpOsIOUxVfPp2MzhbU4s1Co6+enfZJVQIYbMotz7PQ2pYhDRR6DhI?=
+ =?us-ascii?Q?FVDuOwEd1QkCTfvsJUUDRbDRnR04OtnHNvldNvkEytD4BMAU+XcZ7/Dk6GvL?=
+ =?us-ascii?Q?1u3ce64AHibIhBob8Wak6/gzWHhroafRcbaktMrbWUBhb2/Unj7KxadQAJSg?=
+ =?us-ascii?Q?TS27hgkHg5MuJd+U7tn7TCgLQrtBjze9zHnS+gLJ8pQW03bTF4zkgb1LUrbg?=
+ =?us-ascii?Q?Py4OvrGBOOE+PvTvP1VgeeibIx7ZTjqCYGAzqrYyuZ5nkBZOhgcMfNgD93WR?=
+ =?us-ascii?Q?8vRUdqm2cVDHyiysLBJaCV6q1hlTalnIpiUdr2GdeA1feMqzpDZPK3s2xRtH?=
+ =?us-ascii?Q?Kn9eQJUApARr5N988ImODZIS4utHyWUPFPrshC12WTYvz67XQd9IXJdOV0d7?=
+ =?us-ascii?Q?lDD3BKPGZ+V9RQMKMC6vj+XWWyDuVZj9xZcDG9htufLT0sl2g6kilQ9soCS7?=
+ =?us-ascii?Q?DILiScG7cEW7tJQMVUHDzB5HjItEN/8X61XtUynWo3Bmhnm/OGElfejiTvql?=
+ =?us-ascii?Q?IF75UD9MnA1tX1JojHHgWec1obbPZvI4dgtfJaz6K39fQAolPPMDXQuzqIva?=
+ =?us-ascii?Q?mHlWPl82dX8wkhKio0yov+JQirv1CuSW?=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013); DIR:OUT;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(36860700013)(82310400026); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Sep 2024 04:55:28.0336 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: df917d00-e3a8-4626-1247-08dcdde770e9
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Sep 2024 04:55:18.7075 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a43c01c2-e113-4720-2bc7-08dcdde76b61
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF000099D3.namprd04.prod.outlook.com
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001D2.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB9073
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6329
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -151,113 +148,134 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
+This series adds support for Xilinx qspi parallel and
+stacked memeories.
 
-Add support for parallel memories and stacked memories configuration
-in read_bar and write_bar functions.
+In parallel mode, the current implementation assumes that a maximum
+of two flashes are connected. The QSPI controller splits the data
+evenly between both the flashes so, both the flashes that are connected
+in parallel mode should be identical.
+During each operation SPI-NOR sets 0th bit for CS0 & 1st bit for CS1 in
+nor->flags.
 
-Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
----
- drivers/mtd/spi/spi-nor-core.c | 55 +++++++++++++++++++++++++++++-----
- 1 file changed, 47 insertions(+), 8 deletions(-)
+In stacked mode the current implementation assumes that a maximum of two
+flashes are connected and both the flashes are of same make but can differ
+in sizes. So, except the sizes all other flash parameters of both the flashes
+are identical.
 
-diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
-index ecebb44171..032e429d3f 100644
---- a/drivers/mtd/spi/spi-nor-core.c
-+++ b/drivers/mtd/spi/spi-nor-core.c
-@@ -928,12 +928,32 @@ static int clean_bar(struct spi_nor *nor)
- 
- static int write_bar(struct spi_nor *nor, u32 offset)
- {
--	u8 cmd, bank_sel;
-+	u8 cmd, bank_sel, upage_curr;
- 	int ret;
-+	struct mtd_info *mtd = &nor->mtd;
-+
-+	/* Wait until previous write command is finished */
-+	if (spi_nor_wait_till_ready(nor))
-+		return 1;
-+
-+	if (nor->flags & (SNOR_F_HAS_PARALLEL | SNOR_F_HAS_STACKED) &&
-+	    mtd->size <= SZ_32M)
-+		return 0;
-+
-+	if (mtd->size <= SZ_16M)
-+		return 0;
-+
-+	offset = offset % (u32)mtd->size;
-+	bank_sel = offset >> 24;
- 
--	bank_sel = offset / SZ_16M;
--	if (bank_sel == nor->bank_curr)
--		goto bar_end;
-+	upage_curr = nor->spi->flags & SPI_XFER_U_PAGE;
-+
-+	if (!(nor->flags & SNOR_F_HAS_STACKED) && bank_sel == nor->bank_curr)
-+		return 0;
-+	else if (upage_curr == nor->upage_prev && bank_sel == nor->bank_curr)
-+		return 0;
-+
-+	nor->upage_prev = upage_curr;
- 
- 	cmd = nor->bank_write_cmd;
- 	write_enable(nor);
-@@ -943,15 +963,19 @@ static int write_bar(struct spi_nor *nor, u32 offset)
- 		return ret;
- 	}
- 
--bar_end:
- 	nor->bank_curr = bank_sel;
--	return nor->bank_curr;
-+
-+	return write_disable(nor);
- }
- 
- static int read_bar(struct spi_nor *nor, const struct flash_info *info)
- {
- 	u8 curr_bank = 0;
- 	int ret;
-+	struct mtd_info *mtd = &nor->mtd;
-+
-+	if (mtd->size <= SZ_16M)
-+		return 0;
- 
- 	switch (JEDEC_MFR(info)) {
- 	case SNOR_MFR_SPANSION:
-@@ -963,15 +987,30 @@ static int read_bar(struct spi_nor *nor, const struct flash_info *info)
- 		nor->bank_write_cmd = SPINOR_OP_WREAR;
- 	}
- 
-+	if (nor->flags & SNOR_F_HAS_PARALLEL)
-+		nor->spi->flags |= SPI_XFER_LOWER;
-+
- 	ret = nor->read_reg(nor, nor->bank_read_cmd,
--				    &curr_bank, 1);
-+			    &curr_bank, 1);
- 	if (ret) {
- 		debug("SF: fail to read bank addr register\n");
- 		return ret;
- 	}
- 	nor->bank_curr = curr_bank;
- 
--	return 0;
-+	// Make sure both chips use the same BAR
-+	if (nor->flags & SNOR_F_HAS_PARALLEL) {
-+		write_enable(nor);
-+		ret = nor->write_reg(nor, nor->bank_write_cmd, &curr_bank, 1);
-+		if (ret)
-+			return ret;
-+
-+		ret = write_disable(nor);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return ret;
- }
- #endif
- 
+Spi-nor will pass on the appropriate flash select flag to low level driver,
+and it will select pass all the data to that particular flash.
+
+Write operation in parallel mode are performed in page size * 2 chunks as
+each write operation results in writing both the flashes. For doubling the
+address space each operation is performed at addr/2 flash offset, where addr
+is the address specified by the user.
+
+Similarly for read and erase operations it will read from both flashes, so
+size and offset are divided by 2 and send to flash.
+
+Changes in v2:
+- Fixed the compilation issues.
+Changes in v3:
+- Fixed the CI issues.
+Changes in v4:
+- Removed the dio,dummy_bytes variables from zynq_qspi driver.
+- Fix the compilation issue by including the DM_SPI config.
+Changes in v5:
+- Fixed the issue reported by buildman.
+Changes in v6:
+- Fixed the issues reported while running the sandbox test cases.
+Changes in v7:
+- Fixed the issues reported while running these da850evm_defconfig,
+  imx28_xea_defconfig configs.
+- Fixed the issue when DM_SPI config is disabled.
+- Fixed the issue while running the sandbox_noinst_defconfig with spl
+  ./spl/u-boot-spl -d arch/sandbox/dts/test.dtb
+   jedec_spi_nor spi.bin@0: has no valid 'reg' property (-12)
+   jedec_spi_nor spi.bin@1: has no valid 'reg' property (-12)
+   ### ERROR ### Please RESET the board ### Changes in v8:
+- Fixed the compilation issue with imx28_xea_defconfig.
+- Fixed the SPL size issue with the axm and taurus defconfigs.
+- Rebased the patches on top of next branch.
+Changes in v9:
+- Updated the commit log why SPL_FIT is being enabled.
+Changes in v10:
+- Added the new config SPI_ADVANCE to fix the issue while enabling imx28_xea_defconfig.
+Changes in v11:
+- Removed the unused variable, corrected the type of variable and replaced memcpy with memmove.
+Changes in v12:
+- Fixed the compilation issue with mx6sabresd defconfig, as the binary size got exceeded.
+Changes in v13:
+- Fixed the compilation issue for imx28 by making bisectable.
+Changes in v14:
+- Enable the parallel/stacked feature only when the SPI_ADVANCE
+config is enabled.
+
+Ashok Reddy Soma (2):
+  mtd: spi-nor: Add parallel memories support for read_sr and read_fsr
+  mtd: spi-nor: Add parallel and stacked memories support in read_bar
+    and write_bar
+
+Venkatesh Yadav Abbarapu (6):
+  config: mx6sabresd: Default don't enable the flash lock
+  mtd: spi-nor: Add parallel and stacked memories support
+  spi: spi-uclass: Read chipselect and restrict capabilities
+  spi: zynqmp_gqspi: Add parallel memories support in GQSPI driver
+  spi: zynq_qspi: Add parallel memories support in QSPI driver
+  config: xilinx: Enable the SPI_ADVANCE config option
+
+ configs/mx6sabresd_defconfig             |   1 +
+ configs/xilinx_versal_net_virt_defconfig |   5 +-
+ configs/xilinx_versal_virt_defconfig     |   5 +-
+ configs/xilinx_zynq_virt_defconfig       |   7 +-
+ configs/xilinx_zynqmp_virt_defconfig     |  14 +-
+ drivers/mtd/spi/sandbox.c                |   2 +-
+ drivers/mtd/spi/spi-nor-core.c           | 404 ++++++++++++++++++++---
+ drivers/spi/Kconfig                      |   6 +
+ drivers/spi/altera_spi.c                 |   4 +-
+ drivers/spi/atcspi200_spi.c              |   2 +-
+ drivers/spi/ath79_spi.c                  |   2 +-
+ drivers/spi/atmel_spi.c                  |   6 +-
+ drivers/spi/bcm63xx_hsspi.c              |  42 +--
+ drivers/spi/bcm63xx_spi.c                |   6 +-
+ drivers/spi/bcmbca_hsspi.c               |  34 +-
+ drivers/spi/cf_spi.c                     |   6 +-
+ drivers/spi/davinci_spi.c                |   8 +-
+ drivers/spi/fsl_dspi.c                   |  18 +-
+ drivers/spi/fsl_espi.c                   |   4 +-
+ drivers/spi/fsl_qspi.c                   |   4 +-
+ drivers/spi/gxp_spi.c                    |   2 +-
+ drivers/spi/mpc8xx_spi.c                 |   4 +-
+ drivers/spi/mpc8xxx_spi.c                |  10 +-
+ drivers/spi/mscc_bb_spi.c                |   4 +-
+ drivers/spi/mxc_spi.c                    |   6 +-
+ drivers/spi/npcm_fiu_spi.c               |  14 +-
+ drivers/spi/nxp_fspi.c                   |   2 +-
+ drivers/spi/octeon_spi.c                 |   2 +-
+ drivers/spi/omap3_spi.c                  |   4 +-
+ drivers/spi/pic32_spi.c                  |   2 +-
+ drivers/spi/rk_spi.c                     |   4 +-
+ drivers/spi/rockchip_sfc.c               |   2 +-
+ drivers/spi/spi-aspeed-smc.c             |  28 +-
+ drivers/spi/spi-mxic.c                   |   6 +-
+ drivers/spi/spi-qup.c                    |   4 +-
+ drivers/spi/spi-sifive.c                 |   6 +-
+ drivers/spi/spi-sn-f-ospi.c              |   2 +-
+ drivers/spi/spi-sunxi.c                  |   6 +-
+ drivers/spi/spi-synquacer.c              |   4 +-
+ drivers/spi/spi-uclass.c                 |  30 +-
+ drivers/spi/stm32_qspi.c                 |   2 +-
+ drivers/spi/stm32_spi.c                  |   4 +-
+ drivers/spi/ti_qspi.c                    |  14 +-
+ drivers/spi/xilinx_spi.c                 |   6 +-
+ drivers/spi/zynq_qspi.c                  | 121 ++++++-
+ drivers/spi/zynq_spi.c                   |   6 +-
+ drivers/spi/zynqmp_gqspi.c               | 141 +++++++-
+ include/linux/mtd/spi-nor.h              |  17 +
+ include/spi.h                            |  23 +-
+ lib/acpi/acpi_device.c                   |   2 +-
+ 50 files changed, 811 insertions(+), 247 deletions(-)
+
 -- 
 2.25.1
 
