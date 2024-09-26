@@ -4,72 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76EEDCDE038
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 21:53:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80B34CDE03C
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 22:00:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C52F788E5F;
-	Thu, 26 Sep 2024 23:53:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9842588E5F;
+	Fri, 27 Sep 2024 00:00:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ix65KjR0";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XpH9s025";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E1D288E99; Thu, 26 Sep 2024 23:53:40 +0200 (CEST)
-Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
- [IPv6:2607:f8b0:4864:20::434])
+ id BC24E88E77; Fri, 27 Sep 2024 00:00:28 +0200 (CEST)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2850188E51
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 23:53:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2D16088E51
+ for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 00:00:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-718e2855479so1083459b3a.1
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 14:53:38 -0700 (PDT)
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-6cb321145easo10008476d6.1
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 15:00:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727387616; x=1727992416; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=X3cdGrjyoBCZlXMdKwh8kQ0MiH0JUzKyNZjIYgTj6M0=;
- b=Ix65KjR0I4XQFChh/U+YbhgcYlgsv2ApOlU1nXLxTQazPn2BDkxCtaP/Y/28jmCx4Z
- lcQUYY1sYZRLw1lJbW7OxR1DCQ0e5Zv9juaUWvEmK9XycgU9HYQKG9sseg4Y3M7Je8JB
- 9kChcKZhn7TY8UZDq8chBWHxV4VhZCT7v/hzo=
+ d=chromium.org; s=google; t=1727388024; x=1727992824; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=qPTOJ/MPb5haIOT7DpPoaaYgQiZtC/gjLPP/HPSEP+0=;
+ b=XpH9s025cDz2iz3ymSpMjKeDLitWww6c2W6q8ue66815h1MfqcfOc742OfMl9aOHur
+ KxPz3tR4hhHETomGMrPZJWVMNspgYkHQypPT3cRgeq2+hXojSjUyPNe617+EAbrtFShT
+ 2gh4fp9x+XSajRPC5+WhgpEjYvZ0sp6GQ8uOo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727387616; x=1727992416;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1727388024; x=1727992824;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=X3cdGrjyoBCZlXMdKwh8kQ0MiH0JUzKyNZjIYgTj6M0=;
- b=qp8sm0bGsXR5Ct28BPQvRpdKXaZz/LdNWsz+0VS3P30wvSOvU2iKQw0coG8E5Xzi3+
- gGwsS6FM8M6WzZzQ6eI8evZVm+RAgMGyU0HM2qYBCM/nm3gucMWklKfs3AoPGc9kbG37
- n2rKLktgSIBG3la8xukmJnLJOmuE/iWk00fqQaqPBt7T9cH5kDdexnWkyWSUEgLUy47i
- LClOdq+UBYwlFrGGboxoLjDiIIyO2bBZg8ludOEQDirY3a7qay2VuF5rKG9iF2KNIPBK
- qbBPzddGflRtIz8hqBP9LWpLGJg9bQJc0Ivc2oDbAYY/d1dXGKovLZZe437s05ktSQDL
- Dxkg==
-X-Gm-Message-State: AOJu0YyB0PJE6YiyNi2eYesNk/WF7tTp4dzXIfXdM37+S7F3YcMouib5
- 5oaTxSHzcGZo/uOHm3rTGOAhwdekpjg65pX00lSD/PpVJ9cJ4cEPffElTiw/qOpcHbetFj4JI1B
- LJg3aH/2Httx6yrKAgxKm/qqNjFJCHAl+mn08
-X-Google-Smtp-Source: AGHT+IGodMSJj3AK4dcELMu52dxlcwYYmfmoxs/++juecpOh9TVr3zOFIObBEMlFFDWNKSvEMC1KKQ0oJCEJ8SMe1pY=
-X-Received: by 2002:a17:903:1208:b0:20b:2eb3:97ac with SMTP id
- d9443c01a7336-20b36ad2913mr17358965ad.24.1727387616665; Thu, 26 Sep 2024
- 14:53:36 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240920072444.134997-1-sjg@chromium.org>
- <20240920072444.134997-10-sjg@chromium.org>
- <CAC_iWj+NMLSAmAqiDRMsSO+SWRKu=7rSFm+BkngO0kpOwRV1JQ@mail.gmail.com>
- <CAFLszTimWzK+fZToFzH4Ez+nE62GEPnHTOf2HYcTnemv_HKojQ@mail.gmail.com>
- <CAC_iWjJ1ggBTXkSSdaM8zktf-49MFELf3AynaMjG0XK5ZkVpSw@mail.gmail.com>
-In-Reply-To: <CAC_iWjJ1ggBTXkSSdaM8zktf-49MFELf3AynaMjG0XK5ZkVpSw@mail.gmail.com>
+ bh=qPTOJ/MPb5haIOT7DpPoaaYgQiZtC/gjLPP/HPSEP+0=;
+ b=afsZ06W/HwLUOgPzT2foIu3LhuzzbNoxL9xMBqxjPHUJ9z8LrSG0PkxnNfPR21J09D
+ lez8HT4G1fwi0UD8tPee28HXcGtyh+QsMg4I93nnms8d6/l/bllxVserTdRfiQ+Bwgzk
+ oiM6lsIA7p8lAKm2TO/1qN9gMOJFSVk0CNKVE/WbmH/cdJ4zPGTrRp/9P30mPVSggs2W
+ S0H98/39Q8/K/nwvK2uytudhkJGAtntX6/05uhLTxwel2mG6kUlu7y929iOOAHp7YEAV
+ BMU8rWI3t/L1AL8DCgfvvSur55EgiQWv1CYeXsfb5uyPcdsD55K8COWrB0ioxOFy6jrc
+ qtUQ==
+X-Gm-Message-State: AOJu0Yye43pwVuTXJ5pqUY6aHKwpa92sq4NT+JrIhCt0ObswrwcHT2VK
+ i9ZPJgBkED871n6Kd2FGmuZuGeQdGas1ugOufbqLmCD21YGnNYf1VFzLG91By3YW8vMaZdGzaix
+ RIJ2bKGc=
+X-Google-Smtp-Source: AGHT+IE05ElOPrxS49xPAthTjLeu4hwcXJg1NN85aq/7e3jj/aleEZf5OJ3Qn8f4dmlNvd2QZVDZ7g==
+X-Received: by 2002:ad4:4ea7:0:b0:6c3:5ff2:7db3 with SMTP id
+ 6a1803df08f44-6cb2f27069emr84169286d6.9.1727388024576; 
+ Thu, 26 Sep 2024 15:00:24 -0700 (PDT)
+Received: from chromium.org ([205.220.129.31])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6cb3b632366sm3079696d6.71.2024.09.26.15.00.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 26 Sep 2024 15:00:23 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 26 Sep 2024 23:53:24 +0200
-Message-ID: <CAFLszTgFHR_G7nSnsmHHC4dhZ4L=MgZkkefvs6Jtja9zbY=MKw@mail.gmail.com>
-Subject: Re: [PATCH v2 09/18] armv8: Support not having separate BSS
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, Richard Henderson <richard.henderson@linaro.org>, 
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Albert Aribaud <albert.u.boot@aribaud.net>,
+ Bin Meng <bmeng.cn@gmail.com>
+Subject: [PATCH v6 00/12] efi: Add a test for EFI bootmeth
+Date: Thu, 26 Sep 2024 23:59:30 +0200
+Message-ID: <20240926215950.1265143-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,107 +88,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+The test coverage for the EFI bootmeth is incomplete since it does not
+actually boot the application.
 
-On Wed, 25 Sept 2024 at 15:40, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hi Simon,
->
-> On Wed, 25 Sept 2024 at 15:48, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Hi Ilias,
-> >
-> > On Mon, 23 Sept 2024 at 11:49, Ilias Apalodimas
-> > <ilias.apalodimas@linaro.org> wrote:
-> > >
-> > > Hi Simon,
-> > >
-> > > On Fri, 20 Sept 2024 at 10:25, Simon Glass <sjg@chromium.org> wrote:
-> > > >
-> > > > Separate BSS is current mandatory on armv8 but this is not useful for
-> > > > early boot phases. Add support for the combined BSS.
-> > > >
-> > > > Use an #ifdef to avoid using CONFIG_SPL_BSS_START_ADDR which is not
-> > > > valid in this case.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > ---
-> > > >
-> > > > (no changes since v1)
-> > > >
-> > > >  arch/arm/cpu/armv8/u-boot-spl.lds | 12 ++++++++++++
-> > > >  1 file changed, 12 insertions(+)
-> > > >
-> > > > diff --git a/arch/arm/cpu/armv8/u-boot-spl.lds b/arch/arm/cpu/armv8/u-boot-spl.lds
-> > > > index 215cedd69a8..fed69644b55 100644
-> > > > --- a/arch/arm/cpu/armv8/u-boot-spl.lds
-> > > > +++ b/arch/arm/cpu/armv8/u-boot-spl.lds
-> > > > @@ -13,8 +13,10 @@
-> > > >
-> > > >  MEMORY { .sram : ORIGIN = IMAGE_TEXT_BASE,
-> > > >                 LENGTH = IMAGE_MAX_SIZE }
-> > > > +#ifdef CONFIG_SPL_SEPARATE_BSS
-> > > >  MEMORY { .sdram : ORIGIN = CONFIG_SPL_BSS_START_ADDR,
-> > > >                 LENGTH = CONFIG_SPL_BSS_MAX_SIZE }
-> > > > +#endif
-> > > >
-> > > >  OUTPUT_FORMAT("elf64-littleaarch64", "elf64-littleaarch64", "elf64-littleaarch64")
-> > > >  OUTPUT_ARCH(aarch64)
-> > > > @@ -56,12 +58,22 @@ SECTIONS
-> > > >         _end = .;
-> > > >         _image_binary_end = .;
-> > > >
-> > > > +#ifdef CONFIG_SPL_SEPARATE_BSS
-> > > >         .bss : {
-> > > >                 __bss_start = .;
-> > > >                 *(.bss*)
-> > > >                 . = ALIGN(8);
-> > > >                 __bss_end = .;
-> > > >         } >.sdram
-> > > > +#else
-> > > > +       .bss (NOLOAD) : {
-> > > > +               __bss_start = .;
-> > > > +               *(.bss*)
-> > > > +                . = ALIGN(8);
-> > > > +               __bss_end = .;
-> > > > +       } >.sram
-> > > > +#endif
-> > >
-> > > This is still going to be separate. The only difference isn't that
-> > > it's not loaded. If you want to combine it with a region, you got to
-> > > do something similar to what we have in armv7, where it overlaps with
-> > > rel.dyn
-> >
-> > I don't mind about combining it with a region, But SPL doesn't have
-> > relocation data, right?
-> >
-> > My meaning of 'separate' is as described in CONFIG_SPL_SEPARATE_BSS,
-> > i.e. being kept in SDRAM.
->
-> Ok, is the NOLOAD really needed? I would prefer the ifdef around .sdram/.sram
->
-> In any case
-> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+This series creates a simple test for this purpose. It includes a few
+patches to make this work:
 
-Oh I see... well the NOLOAD stops it writing zero data into the image,
-as I understand it. Actually I wonder why we don't have NOLOAD for the
-separate-BSS case? If we can use NOLOAD for both then we can indeed
-shrink the #ifdef
+- ANSI output from the EFI loader confusing the unit-testing checker
+- Hang in sandbox virtio due to EFI probing all block devices
 
->
->
-> >
-> > >
-> > > Thanks
-> > > /Ilias
-> > > > +       __bss_size = __bss_end - __bss_start;
-> > > >
-> > > >         /DISCARD/ : { *(.rela*) }
-> > > >         /DISCARD/ : { *(.dynsym) }
-> > > > --
-> > > > 2.43.0
-> > > >
+Other necessary fixes have been split out into two other series.
 
-Regards,
-Simon
+Changes in v6:
+- Expand the debug messages to be more descriptive
+- Drop the patch to disable sandbox virtio blk with EFI
+- Add new patch to disable the sandbox virtio blk device
+- Deal with sandbox CONFIG_LOGF_FUNC
+- Rebase on -next
+- Drop patches previously applied
+- Drop mention of helloworld since it is no-longer used by this test
+
+Changes in v5:
+- Drop the Fixes tag
+
+Changes in v4:
+- Add efi_loader tag to some patches
+- Split out non-EFI patches into a different series
+
+Changes in v3:
+- Drop the extra- rules since scripts/Makefile.lib takes care of it
+- Add new patch to drop crt0/relocal extra- rules
+- Put back the Linaro copyright accidentally removed
+
+Changes in v2:
+- Reword commit message
+- Use 'Firmware vendor' instead of just 'Vendor'
+- Add many new patches to resolve all the outstanding test issues
+
+Simon Glass (12):
+  efi_loader: Rename and move CMD_BOOTEFI_HELLO_COMPILE
+  efi: arm: x86: riscv: Drop crt0/relocal extra- rules
+  efi_loader: Shorten the app rules
+  efi_loader: Shorten the app rules further
+  efi_loader: Show the vendor in helloworld
+  efi: Use the same filename for all sandbox builds
+  bootstd: Add debugging for efi bootmeth
+  efi_loader: Disable ANSI output for tests
+  efi_loader: Add a test app
+  sandbox: virtio: Disable the sandbox virtio blk device
+  test: efi: boot: Set up an image suitable for EFI testing
+  test: efi: boot: Add a test for the efi bootmeth
+
+ arch/Kconfig                        |   3 +-
+ arch/arm/lib/Makefile               |   8 ----
+ arch/riscv/lib/Makefile             |   4 --
+ arch/sandbox/dts/test.dts           |   2 +-
+ arch/x86/lib/Makefile               |  16 -------
+ boot/bootmeth_efi.c                 |  11 ++++-
+ cmd/Kconfig                         |  14 +-----
+ configs/octeontx2_95xx_defconfig    |   2 +-
+ configs/octeontx2_96xx_defconfig    |   2 +-
+ configs/octeontx_81xx_defconfig     |   2 +-
+ configs/octeontx_83xx_defconfig     |   2 +-
+ doc/develop/uefi/uefi.rst           |   2 +-
+ include/efi_default_filename.h      |  24 +---------
+ include/efi_loader.h                |  21 ++++++++-
+ lib/efi_loader/Kconfig              |  22 +++++++++
+ lib/efi_loader/Makefile             |  47 ++++++-------------
+ lib/efi_loader/efi_console.c        |  26 +++++++----
+ lib/efi_loader/helloworld.c         |   3 ++
+ lib/efi_loader/testapp.c            |  68 ++++++++++++++++++++++++++++
+ test/boot/bootdev.c                 |  18 +++++++-
+ test/boot/bootflow.c                |  65 +++++++++++++++++++++++++-
+ test/py/tests/bootstd/flash1.img.xz | Bin 0 -> 5016 bytes
+ test/py/tests/test_efi_fit.py       |   2 +-
+ test/py/tests/test_efi_loader.py    |   2 +-
+ test/py/tests/test_ut.py            |  52 ++++++++++++++++++---
+ 25 files changed, 294 insertions(+), 124 deletions(-)
+ create mode 100644 lib/efi_loader/testapp.c
+ create mode 100644 test/py/tests/bootstd/flash1.img.xz
+
+-- 
+2.43.0
+
