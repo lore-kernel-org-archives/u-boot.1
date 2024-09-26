@@ -4,69 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA7F5CDE03A
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 21:05:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48D73CDE03A
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 21:16:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E84188E31;
-	Thu, 26 Sep 2024 23:05:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id C72E488DBC;
+	Thu, 26 Sep 2024 23:16:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=sys-base.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AarW5QGh";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 98F0E88DFD; Thu, 26 Sep 2024 23:05:09 +0200 (CEST)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7366A88DCF; Thu, 26 Sep 2024 23:16:24 +0200 (CEST)
+Received: from leonov.paulk.fr (leonov.paulk.fr [185.233.101.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6039488E61
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 23:05:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1023F88D9B
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 23:16:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-6cb3062d9b5so8781436d6.0
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 14:05:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727384706; x=1727989506; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Jly9HS9JCyEWvO6LTycerWzlpD07oTNoOBloMS/IhRA=;
- b=AarW5QGhcKMr3tGgPOn2ynRRHvItyD5LSpL5PBajBet+U+Hsz4284IJ5jneV8QmZwP
- 1kv4P+71Rj+/kNr0PNmiTUY24xoJP5d3lwyIsGZFGcj3r5nCV8mFhX212wpOTOsrwuLE
- cYXP/Agxt2QiVdjnUTYlYOo5VTa9zrj9LFK1U=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727384706; x=1727989506;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Jly9HS9JCyEWvO6LTycerWzlpD07oTNoOBloMS/IhRA=;
- b=OP9NXPJNCVdEpcCRgNaafQMlOISDBSutugbm2q4MqNdA5sDU2VCTZI9CTu8oQ0QFX5
- sOU5cnE8jdtTSPieSbNLXwybkQxOpqNJEIGFbTt3qt0kX0X6SW0y4U5M6Dg+WfOqIvQm
- D78b9eSIuYBW5mYPNhX1nxYb/mFMcgFo1G09wq0V6pyoHWRbliPykwkKbNr5mwHBXIfH
- 0HNo69rT2SFQrZ8lPvmHk2vchKfbeH/bKZ962LPUgyM1GQ/DsEAKZEaLxM6lYitNVkwz
- H5iDZj7n2agMEUCtRDNOBAqHWPR7AkOCGxXUGAixR2GBbIOvf7AX4tw0ZznXdCZBlsjE
- eT6Q==
-X-Gm-Message-State: AOJu0Ywrjj+8jLzytfkGjs1NFKel/8AsDWcHRbBJZPWUj1blyPSjNu1o
- r/ySl2StnK4ByeUtHGxxQ8UrvQdXsEH6CgMHfMoP57KOUldknRc0g5SevzGaHmFjF57bNS4vV+K
- o1RiihVjLgnSnCzEoGN5136D+km7Zs5RYN0z5
-X-Google-Smtp-Source: AGHT+IHa0BP4NEwKWjM3A0kHWh6Zc9XsdJ5MrOvjd2HfPndmGUHmdA8NAhKdPt8attlHeVwrrqBXs7BBcyK1qySAOkE=
-X-Received: by 2002:a05:6214:5911:b0:6c7:c615:4c2e with SMTP id
- 6a1803df08f44-6cb3b65b3c7mr12381216d6.53.1727384706290; Thu, 26 Sep 2024
- 14:05:06 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=sys-base.io
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=paulk@sys-base.io
+Received: from laika.paulk.fr (12.234.24.109.rev.sfr.net [109.24.234.12])
+ by leonov.paulk.fr (Postfix) with ESMTPS id 63FA81F0004D
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 21:16:21 +0000 (UTC)
+Received: by laika.paulk.fr (Postfix, from userid 65534)
+ id ACF61A60192; Thu, 26 Sep 2024 21:16:18 +0000 (UTC)
+Received: from collins (unknown [192.168.1.1])
+ by laika.paulk.fr (Postfix) with ESMTPSA id A7A33A6018E;
+ Thu, 26 Sep 2024 21:16:17 +0000 (UTC)
+Date: Thu, 26 Sep 2024 23:16:15 +0200
+From: Paul Kocialkowski <paulk@sys-base.io>
+To: Dragan Simic <dsimic@manjaro.org>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Jonas Karlman <jonas@kwiboo.se>,
+ Chris Morgan <macromorgan@hotmail.com>,
+ Tim Lunn <tim@feathertop.org>, Paul Kocialkowski <contact@paulk.fr>
+Subject: Re: [PATCH 4/4] rockchip: Disable DRAM debug by default
+Message-ID: <ZvXPHya0NdGRdCiq@collins>
+References: <20240926183111.1324284-1-paulk@sys-base.io>
+ <20240926183111.1324284-4-paulk@sys-base.io>
+ <21bf0494f4dd9052801c2bacfe014651@manjaro.org>
+ <ZvXJOJb0rKDYnTeQ@collins>
+ <72b29cc73709076229b3aa6ae9d0f5da@manjaro.org>
 MIME-Version: 1.0
-References: <20240926080021.148031-1-patrick.rudolph@9elements.com>
- <20240926080021.148031-15-patrick.rudolph@9elements.com>
-In-Reply-To: <20240926080021.148031-15-patrick.rudolph@9elements.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 26 Sep 2024 23:04:54 +0200
-Message-ID: <CAFLszThRmwr_58R7WONuHg1EchEboBEFtfqaYz0EzZVYutvMtw@mail.gmail.com>
-Subject: Re: [PATCH v5 14/36] efi_loader: Allocate and write ACPI tables
-To: Patrick Rudolph <patrick.rudolph@9elements.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="b2vbG1CuP05tMneM"
+Content-Disposition: inline
+In-Reply-To: <72b29cc73709076229b3aa6ae9d0f5da@manjaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,127 +67,214 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Patrick,
 
-On Thu, 26 Sept 2024 at 10:02, Patrick Rudolph
-<patrick.rudolph@9elements.com> wrote:
->
-> Allocate memory for ACPI tables inside the efi_loader and write out
-> the tables similar to SMBIOS tables. When ACPI is enabled and wasn't
-> installed in other places, install the ACPI table in EFI. Since EFI
-> is necessary to pass the ACPI table location when FDT isn't used,
-> there's no need to install it separately.
->
-> When CONFIG_BLOBLIST_TABLES is set the tables will be stored in a
-> bloblist. The tables are still passed to the OS using EFI.
->
-> This allows non x86 platforms to boot using ACPI only in case the
-> EFI loader is being used.
->
-> TEST: Booted QEMU SBSA (no QFW) using EFI and ACPI only.
->
-> Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> ---
-> Changelog v3:
-> - Drop memalign and use efi_allocate_pages
-> - Use log_debug instead of debug
-> - Clarify commit message
-> - Skip writing ACPI tables on sandbox
-> - Rename function
-> - Add function comment
->
-> ---
->  lib/efi_loader/efi_acpi.c        | 80 +++++++++++++++++++++++++++++++-
->  test/py/tests/test_event_dump.py |  1 +
->  2 files changed, 79 insertions(+), 2 deletions(-)
->
-> diff --git a/lib/efi_loader/efi_acpi.c b/lib/efi_loader/efi_acpi.c
-> index 67bd7f8ca2..9d38d0060c 100644
-> --- a/lib/efi_loader/efi_acpi.c
-> +++ b/lib/efi_loader/efi_acpi.c
-> @@ -6,15 +6,23 @@
->   */
->
->  #include <efi_loader.h>
-> -#include <log.h>
-> -#include <mapmem.h>
->  #include <acpi/acpi_table.h>
->  #include <asm/global_data.h>
-> +#include <asm/io.h>
-> +#include <bloblist.h>
-> +#include <linux/sizes.h>
-> +#include <linux/log2.h>
-> +#include <log.h>
-> +#include <malloc.h>
-> +#include <mapmem.h>
->
->  DECLARE_GLOBAL_DATA_PTR;
->
->  static const efi_guid_t acpi_guid = EFI_ACPI_TABLE_GUID;
->
-> +enum {
-> +       TABLE_SIZE      = SZ_64K,
-> +};
->  /*
->   * Install the ACPI table as a configuration table.
->   *
-> @@ -47,3 +55,71 @@ efi_status_t efi_acpi_register(void)
->         return efi_install_configuration_table(&acpi_guid,
->                                                (void *)(ulong)addr);
->  }
-> +
-> +/*
-> + * Allocate memory for ACPI tables and write ACPI tables to the
-> + * allocated buffer.
-> + *
-> + * Return:     status code
-> + */
-> +static int alloc_write_acpi_tables(void)
-> +{
-> +       u64 table_addr, table_end;
-> +       u64 new_acpi_addr = 0;
-> +       efi_uintn_t pages;
-> +       efi_status_t ret;
-> +       void *addr;
-> +
-> +       if (!IS_ENABLED(CONFIG_GENERATE_ACPI_TABLE))
-> +               return 0;
-> +
-> +       if (IS_ENABLED(CONFIG_X86) ||
-> +           IS_ENABLED(CONFIG_QFW_ACPI) ||
-> +           IS_ENABLED(CONFIG_SANDBOX)) {
-> +               log_debug("Skipping writing ACPI tables as already done\n");
-> +               return 0;
-> +       }
-> +
-> +       /* Align the table to a 4KB boundary to keep EFI happy */
-> +       if (IS_ENABLED(CONFIG_BLOBLIST_TABLES)) {
-> +               addr = bloblist_add(BLOBLISTT_ACPI_TABLES, TABLE_SIZE,
-> +                                   ilog2(SZ_4K));
-> +
-> +               if (!addr)
-> +                       return log_msg_ret("mem", -ENOMEM);
-> +       } else {
-> +               pages = efi_size_in_pages(TABLE_SIZE);
-> +
-> +               ret = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES,
-> +                                        EFI_ACPI_RECLAIM_MEMORY,
-> +                                        pages, &new_acpi_addr);
-> +               if (ret != EFI_SUCCESS)
-> +                       return log_msg_ret("mem", -ENOMEM);
-> +
-> +               addr = (void *)(uintptr_t)new_acpi_addr;
-> +       }
+--b2vbG1CuP05tMneM
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-You can drop the if and the else, since bloblist is always enabled for
-ACPI on Arm.
+Hi,
 
-If you set gd->arch.table_start and gd->arch.table_end then efi_acpi.c
-will add your ACPI table to the memory map.
+Le Thu 26 Sep 24, 23:04, Dragan Simic a =C3=A9crit :
+> On 2024-09-26 22:51, Paul Kocialkowski wrote:
+> > Le Thu 26 Sep 24, 22:17, Dragan Simic a =C3=A9crit :
+> > > On 2024-09-26 20:31, Paul Kocialkowski wrote:
+> > > > From: Paul Kocialkowski <contact@paulk.fr>
+> > > >
+> > > > Printing debug details about DRAM is not useful in regular use and
+> > > > adds visual pollution to the log. Disable it by default.
+> > >=20
+> > > With all the respect, I disagree with disabling this by default.
+> > > This prints just a couple of lines that can actually be very helpful
+> > > when figuring out what's going on in case of some DRAM-related issues
+> > > on random devices in the field.
+> >=20
+> > Well this rationale could apply to lots of things and we generally don't
+> > print debug info about anything else by default.
+>=20
+> I'd rather see these messages as some kind of additional verbosity,
+> rather than some true debugging messages for the DRAM init.  It's just
+> a couple of additional lines printed on the console, in the end.
 
-[..]
+It's mostly the fact that it's platform-specific and makes about no sense
+to a non-developer user that makes me think it's not welcome by default.
+It's really printing internal variables, not providing user-readable inform=
+ation
+that can be useful outside of the scope of development.
 
-Regards,
-Simon
+> > Maybe DRAM is more likely to be a source of issues than other hardware
+> > aspects
+> > that are maybe more stable, but I don't see what would prevent
+> > rebuilding a
+> > u-boot binary with debug enabled. If the DRAM config needs tweaking it
+> > will be
+> > necessary to rebuild a binary anyway.
+>=20
+> In theory, rebuilding a U-Boot image and reinstalling it is rather easy.
+> In practice, it's hardly doable on random devices in the field, and it's
+> sometimes virtually impossible.  It's simply that not every end user is
+> willing or capable of doing things like that.
+
+Well that is more or less what makes me think this is not welcome by defaul=
+t:
+a non-developer user would not be able to do anything useful with this
+information, since they won't be able to rebuild a binary to change the DRAM
+config and solve any DRAM-related issue.
+
+Just knowing this information "on the field" won't help solve any issue if
+there is no possibility to undergo development and build a binary with a
+modified DRAM config.
+
+In what scenario exactly do you think this would be valuable information to
+a non-developer?
+
+Cheers,
+
+Paul
+
+> > > > Signed-off-by: Paul Kocialkowski <contact@paulk.fr>
+> > > > ---
+> > > >  configs/anbernic-rgxx3-rk3566_defconfig   | 1 -
+> > > >  configs/neu2-io-rv1126_defconfig          | 1 -
+> > > >  configs/roc-pc-mezzanine-rk3399_defconfig | 1 -
+> > > >  configs/roc-pc-rk3399_defconfig           | 1 -
+> > > >  configs/rock-pi-n10-rk3399pro_defconfig   | 1 -
+> > > >  configs/rock-pi-n8-rk3288_defconfig       | 1 -
+> > > >  configs/sonoff-ihost-rv1126_defconfig     | 1 -
+> > > >  drivers/ram/rockchip/Kconfig              | 1 -
+> > > >  8 files changed, 8 deletions(-)
+> > > >
+> > > > diff --git a/configs/anbernic-rgxx3-rk3566_defconfig
+> > > > b/configs/anbernic-rgxx3-rk3566_defconfig
+> > > > index a03509bf4671..5c074cffeb44 100644
+> > > > --- a/configs/anbernic-rgxx3-rk3566_defconfig
+> > > > +++ b/configs/anbernic-rgxx3-rk3566_defconfig
+> > > > @@ -67,7 +67,6 @@ CONFIG_SPL_DM_REGULATOR_FIXED=3Dy
+> > > >  CONFIG_REGULATOR_RK8XX=3Dy
+> > > >  CONFIG_PWM_ROCKCHIP=3Dy
+> > > >  CONFIG_SPL_RAM=3Dy
+> > > > -# CONFIG_RAM_ROCKCHIP_DEBUG is not set
+> > > >  # CONFIG_RNG_SMCCC_TRNG is not set
+> > > >  CONFIG_BAUDRATE=3D1500000
+> > > >  CONFIG_DEBUG_UART_SHIFT=3D2
+> > > > diff --git a/configs/neu2-io-rv1126_defconfig
+> > > > b/configs/neu2-io-rv1126_defconfig
+> > > > index 2a4c9b45a04f..84e4465f2c5f 100644
+> > > > --- a/configs/neu2-io-rv1126_defconfig
+> > > > +++ b/configs/neu2-io-rv1126_defconfig
+> > > > @@ -45,7 +45,6 @@ CONFIG_MMC_DW=3Dy
+> > > >  CONFIG_MMC_DW_ROCKCHIP=3Dy
+> > > >  CONFIG_REGULATOR_PWM=3Dy
+> > > >  CONFIG_PWM_ROCKCHIP=3Dy
+> > > > -# CONFIG_RAM_ROCKCHIP_DEBUG is not set
+> > > >  CONFIG_BAUDRATE=3D1500000
+> > > >  CONFIG_DEBUG_UART_SHIFT=3D2
+> > > >  CONFIG_SYSRESET=3Dy
+> > > > diff --git a/configs/roc-pc-mezzanine-rk3399_defconfig
+> > > > b/configs/roc-pc-mezzanine-rk3399_defconfig
+> > > > index a57899bfdfa0..b4041902b381 100644
+> > > > --- a/configs/roc-pc-mezzanine-rk3399_defconfig
+> > > > +++ b/configs/roc-pc-mezzanine-rk3399_defconfig
+> > > > @@ -65,7 +65,6 @@ CONFIG_REGULATOR_PWM=3Dy
+> > > >  CONFIG_SPL_DM_REGULATOR_FIXED=3Dy
+> > > >  CONFIG_REGULATOR_RK8XX=3Dy
+> > > >  CONFIG_PWM_ROCKCHIP=3Dy
+> > > > -# CONFIG_RAM_ROCKCHIP_DEBUG is not set
+> > > >  CONFIG_RAM_ROCKCHIP_LPDDR4=3Dy
+> > > >  CONFIG_BAUDRATE=3D1500000
+> > > >  CONFIG_DEBUG_UART_SHIFT=3D2
+> > > > diff --git a/configs/roc-pc-rk3399_defconfig
+> > > > b/configs/roc-pc-rk3399_defconfig
+> > > > index b45f0e0a8994..922f67320c20 100644
+> > > > --- a/configs/roc-pc-rk3399_defconfig
+> > > > +++ b/configs/roc-pc-rk3399_defconfig
+> > > > @@ -62,7 +62,6 @@ CONFIG_REGULATOR_PWM=3Dy
+> > > >  CONFIG_SPL_DM_REGULATOR_FIXED=3Dy
+> > > >  CONFIG_REGULATOR_RK8XX=3Dy
+> > > >  CONFIG_PWM_ROCKCHIP=3Dy
+> > > > -# CONFIG_RAM_ROCKCHIP_DEBUG is not set
+> > > >  CONFIG_RAM_ROCKCHIP_LPDDR4=3Dy
+> > > >  CONFIG_BAUDRATE=3D1500000
+> > > >  CONFIG_DEBUG_UART_SHIFT=3D2
+> > > > diff --git a/configs/rock-pi-n10-rk3399pro_defconfig
+> > > > b/configs/rock-pi-n10-rk3399pro_defconfig
+> > > > index ec995a54a0ee..17fe939ec989 100644
+> > > > --- a/configs/rock-pi-n10-rk3399pro_defconfig
+> > > > +++ b/configs/rock-pi-n10-rk3399pro_defconfig
+> > > > @@ -51,7 +51,6 @@ CONFIG_PHY_ROCKCHIP_TYPEC=3Dy
+> > > >  CONFIG_PMIC_RK8XX=3Dy
+> > > >  CONFIG_REGULATOR_RK8XX=3Dy
+> > > >  CONFIG_PWM_ROCKCHIP=3Dy
+> > > > -# CONFIG_RAM_ROCKCHIP_DEBUG is not set
+> > > >  CONFIG_BAUDRATE=3D1500000
+> > > >  CONFIG_DEBUG_UART_SHIFT=3D2
+> > > >  CONFIG_SYS_NS16550_MEM32=3Dy
+> > > > diff --git a/configs/rock-pi-n8-rk3288_defconfig
+> > > > b/configs/rock-pi-n8-rk3288_defconfig
+> > > > index 4c09b9137ef8..af0fa8879421 100644
+> > > > --- a/configs/rock-pi-n8-rk3288_defconfig
+> > > > +++ b/configs/rock-pi-n8-rk3288_defconfig
+> > > > @@ -73,7 +73,6 @@ CONFIG_REGULATOR_RK8XX=3Dy
+> > > >  CONFIG_PWM_ROCKCHIP=3Dy
+> > > >  CONFIG_RAM=3Dy
+> > > >  CONFIG_SPL_RAM=3Dy
+> > > > -# CONFIG_RAM_ROCKCHIP_DEBUG is not set
+> > > >  CONFIG_DEBUG_UART_SHIFT=3D2
+> > > >  CONFIG_SYS_NS16550_MEM32=3Dy
+> > > >  CONFIG_SYSRESET=3Dy
+> > > > diff --git a/configs/sonoff-ihost-rv1126_defconfig
+> > > > b/configs/sonoff-ihost-rv1126_defconfig
+> > > > index 4890644c7e6f..739adb49ce93 100644
+> > > > --- a/configs/sonoff-ihost-rv1126_defconfig
+> > > > +++ b/configs/sonoff-ihost-rv1126_defconfig
+> > > > @@ -46,7 +46,6 @@ CONFIG_MMC_DW=3Dy
+> > > >  CONFIG_MMC_DW_ROCKCHIP=3Dy
+> > > >  CONFIG_REGULATOR_PWM=3Dy
+> > > >  CONFIG_PWM_ROCKCHIP=3Dy
+> > > > -# CONFIG_RAM_ROCKCHIP_DEBUG is not set
+> > > >  CONFIG_BAUDRATE=3D1500000
+> > > >  CONFIG_DEBUG_UART_SHIFT=3D2
+> > > >  CONFIG_SYSRESET=3Dy
+> > > > diff --git a/drivers/ram/rockchip/Kconfig b/drivers/ram/rockchip/Kc=
+onfig
+> > > > index 67c63ecba047..e030c982eccb 100644
+> > > > --- a/drivers/ram/rockchip/Kconfig
+> > > > +++ b/drivers/ram/rockchip/Kconfig
+> > > > @@ -15,7 +15,6 @@ if RAM_ROCKCHIP
+> > > >
+> > > >  config RAM_ROCKCHIP_DEBUG
+> > > >  	bool "Rockchip ram drivers debugging"
+> > > > -	default y
+> > > >  	help
+> > > >  	  This enables debugging ram driver API's for the platforms
+> > > >  	  based on Rockchip SoCs.
+
+--=20
+Paul Kocialkowski,
+
+Independent contractor - sys-base - https://www.sys-base.io/
+Free software developer - https://www.paulk.fr/
+
+Expertise in multimedia, graphics and embedded hardware support with Linux.
+
+--b2vbG1CuP05tMneM
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEAbcMXZQMtj1fphLChP3B6o/ulQwFAmb1zx8ACgkQhP3B6o/u
+lQzcFA/9GMGdfEzqNi/Hu6qcrGoWDivZ0Ytg85Fz6wYhQXYo/xZm8Ay0tW5DumeX
+1N7hmBCcDnivpNwu5JybcjisrwO5Op3fyyyG/JOQzYfTd5HujkHS/LSiatO1pm35
+vnecz3YGfOJIO1XtItR35Ysn2WLC+WKV2LhkRxovK6TsjoarJGAi0YAlAW3MrH2R
+CSbML1rMFL+Kc+zH4ECx3dw6MEhE9mOGcVokwWKKriUlWmVIcWaF7m7UD0KWnkDb
+gMHkgcY6s62EBF+cZr8Uof5zoFcoBk80W+SvTTRIvKkuXRyjw4qTmF9iIdcWQdR6
+DknxsrmVxq8luurbNo6+kscgRLJtb3hTkPWaGNkFM+/Nq1MgDWre0i+ElOPNtTdi
+Ykj2hVQpG3IK25bFkYL/sPGAgMxrp5LviOtK6DoM3R9z8hmaqVwvMS/ctPnU7oSJ
+kaeoSTt7HdM/8AflH0K8USwhrr9JdHcSlhY3H3V4YBcqP7oXxxK2kNuhTAhYv7u3
+ZHw8JbJHO651uhkTx7qy4EGCY/HVMpwzc3jD1dJXWB2jXgwwuSVLXHGdJl/S7lMp
+ITC5g+OGzzQFxw8eYeLM29hOxHrA3FbQD9JU5nLh+oSW/XWjksyR46UudXwyK9eH
+16Duw9fq4u/6508pSmJMgR7qaCvnfziIPizMz5+2h/u3jfRLVAI=
+=JucP
+-----END PGP SIGNATURE-----
+
+--b2vbG1CuP05tMneM--
