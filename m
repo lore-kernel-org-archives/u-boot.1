@@ -4,70 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B770CDE038
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 20:53:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69EC4CDE038
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 20:54:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91D8288E70;
-	Thu, 26 Sep 2024 22:53:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F314088E78;
+	Thu, 26 Sep 2024 22:54:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ep02a5RO";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SuOBH3S5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9203588E7E; Thu, 26 Sep 2024 22:53:49 +0200 (CEST)
-Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
- [IPv6:2607:f8b0:4864:20::f33])
+ id AFC7D88E7A; Thu, 26 Sep 2024 22:54:12 +0200 (CEST)
+Received: from mail-vs1-xe29.google.com (mail-vs1-xe29.google.com
+ [IPv6:2607:f8b0:4864:20::e29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 406C288E89
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 22:53:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9803088E58
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 22:54:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf33.google.com with SMTP id
- 6a1803df08f44-6c5ab2de184so9058226d6.0
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 13:53:47 -0700 (PDT)
+Received: by mail-vs1-xe29.google.com with SMTP id
+ ada2fe7eead31-49bd40d77e5so491839137.0
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 13:54:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727384026; x=1727988826; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727384049; x=1727988849; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Oq4+LbcSKPVzLVxV1qfMCvR3xmcNLaHJREX2zC2n0hw=;
- b=ep02a5ROUUryj80NugOZP8PC0Tq2JYoJnVrYLIgbHLyCXMP19EUnwlPA+yvp0uMqKh
- /nS8dRUTYU/Vqe8lE9ZnqzIPkIzIaf9BuxZkzm9F7Xi+SQ7wdjBDlQOBnpby1p0dBwT6
- P84yGhvCLWD/8mN8WRKMKgVxZKowvIMUQFaDw=
+ bh=7HEe4lVmRFg+1ABfBpSDh1VyQhcXPLKGlr2GD+uRsus=;
+ b=SuOBH3S52mCoJENSIAM8nM2dn8jl8rVVl8aLHRlDydAG3HAOyu8pVtIApzFy0pB+vu
+ wAWEG+9iqiXK05d3PutkqQnsOzhN1sjfGzpxsyia6xANsBKa20fjEMTG2k+u3Nhxz54e
+ ZERzchbfF7pSR3El2KIQXUaaJRfbi+aAanoRs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727384026; x=1727988826;
+ d=1e100.net; s=20230601; t=1727384049; x=1727988849;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Oq4+LbcSKPVzLVxV1qfMCvR3xmcNLaHJREX2zC2n0hw=;
- b=h6eyStDarecLGnBVfhp4LoCdpOiDpcvTfrfqiaY/WvEB/GfdsRcQrumN8DpEA2LgdR
- mlNXFG9Ru9jSV5Zj26V6gJPykhOhzMIpXPFU1VsyLPN4YWQgvX/nc2Lf0tenU0cSFwDj
- j7au+5CBXnDEW3d2TuaZZKR020ppBg+ePNLY2zfVCAtJA96RjbJ+MEbGqpHQnENkwHbN
- PKy1N5Afo2fvJ/1ExbXO27t09Xk+eWsQpj7y7F3htL2ifpMY/lsnZF4U1wAuNLIQ5pjV
- jidTaI255DxnrDVE0ld45m1VvHDl+2dL1EGW5sGQ6EnNveG/FXiPYMnQaa8m9XedZ2gc
- UpBw==
-X-Gm-Message-State: AOJu0YzjB5VDg5mswJ/OFkS2pzywRV+KPmPMjiJaX6KCPaiMxrbJTflq
- 5/LvrdzlEy3iVUPJVQ9fezaD2tzPG+oxKCYE/436UGYbjk/+U+zm857BxRw3NYUFg71Ellit9qg
- LopxAS0I=
-X-Google-Smtp-Source: AGHT+IHVx8ti83D5t//rwlA6Jm2WoZLU209aFQ5jOxd+K58e4ugEGgtn4WhprVAyWuJNA2f/7k/h7g==
-X-Received: by 2002:a05:6214:398b:b0:6c5:688a:63b4 with SMTP id
- 6a1803df08f44-6cb3b67c681mr8435336d6.50.1727384025995; 
- Thu, 26 Sep 2024 13:53:45 -0700 (PDT)
+ bh=7HEe4lVmRFg+1ABfBpSDh1VyQhcXPLKGlr2GD+uRsus=;
+ b=YvEaPlpsmoOMmNGHeIm5uQEfXq8Vg3KBb/9T36FjP0zWxsx4GY+d6THILpLd3M3qVT
+ QwzFJVSvXp25gVXew+fwyxTthKhiEyKMHlgWD0q9jlY2ZfiNt/5uTrZi1NtEQjZ2BGC0
+ RQwXastHoNs32O05PkIEYRmnOKcW3zUshpdoKyjrd2JoXmhQNHmnBXjMALFlitxGapbS
+ ndOQD0ZKmN4tnZoBQnzrOkf9KoZ0RKiGHFzdrTjF4m0TX2Ase8f4aoSRLGyYaYyEWGu9
+ guLpM//fqpshqrZDlVTVr7y8/l2iRd/2XRyMpGrtVOHzrvTST/HRt56/ZZZLQk7leLPO
+ L29g==
+X-Gm-Message-State: AOJu0YyXsiS/qaFeoBZAKDpeLSVj7QMwlWbCqtPu5qg7bbsPDHJpCkHG
+ ss/VTapxO/ly35XTYpOZMPGcYqt2KTJlfNQ9CF66pvz8ULxXzaeBTQDOpYlm93kKcc+nmSW+Vmp
+ xBKiRNf8=
+X-Google-Smtp-Source: AGHT+IGX0qZh6i5cSN5XH0/8FYauHgsFusqkvZvrZisqfll8cH4azocdM5QAcvFc/N93Vh+aBhs+Yg==
+X-Received: by 2002:a05:6102:304f:b0:49b:f52d:491b with SMTP id
+ ada2fe7eead31-4a2d7f27565mr1190201137.7.1727384049331; 
+ Thu, 26 Sep 2024 13:54:09 -0700 (PDT)
 Received: from chromium.org ([205.220.129.31])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6cb3b66cff5sm2538696d6.77.2024.09.26.13.53.36
+ 6a1803df08f44-6cb3b66cff5sm2538696d6.77.2024.09.26.13.53.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Sep 2024 13:53:45 -0700 (PDT)
+ Thu, 26 Sep 2024 13:54:09 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Mario Six <mario.six@gdsys.cc>
-Subject: [PATCH 25/27] mpc83xx: Drop status-LED code
-Date: Thu, 26 Sep 2024 22:44:45 +0200
-Message-ID: <20240926204455.963584-26-sjg@chromium.org>
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Charles Hardin <ckhardin@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Ramon Fried <rfried.dev@gmail.com>, Sean Anderson <seanga2@gmail.com>,
+ Sean Edmond <seanedmond@microsoft.com>
+Subject: [PATCH 26/27] net: Drop status-LED code
+Date: Thu, 26 Sep 2024 22:44:46 +0200
+Message-ID: <20240926204455.963584-27-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240926204455.963584-1-sjg@chromium.org>
 References: <20240926204455.963584-1-sjg@chromium.org>
@@ -94,32 +102,93 @@ This is not used anymore, so drop it.
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- drivers/timer/mpc83xx_timer.c | 5 -----
- 1 file changed, 5 deletions(-)
+ net/bootp.c |  7 -------
+ net/net.c   | 33 ---------------------------------
+ 2 files changed, 40 deletions(-)
 
-diff --git a/drivers/timer/mpc83xx_timer.c b/drivers/timer/mpc83xx_timer.c
-index 9da74479aaa..aefc18898e9 100644
---- a/drivers/timer/mpc83xx_timer.c
-+++ b/drivers/timer/mpc83xx_timer.c
-@@ -9,7 +9,6 @@
- #include <dm.h>
- #include <irq_func.h>
- #include <log.h>
--#include <status_led.h>
- #include <sysinfo.h>
- #include <time.h>
- #include <timer.h>
-@@ -178,10 +177,6 @@ void timer_interrupt(struct pt_regs *regs)
- 	if (CFG_SYS_WATCHDOG_FREQ && (priv->timestamp % (CFG_SYS_WATCHDOG_FREQ)) == 0)
- 		schedule();
- #endif    /* CONFIG_WATCHDOG || CONFIG_HW_WATCHDOG */
--
+diff --git a/net/bootp.c b/net/bootp.c
+index 512ab2ed7c8..8a7806f3efc 100644
+--- a/net/bootp.c
++++ b/net/bootp.c
+@@ -19,9 +19,6 @@
+ #include <linux/delay.h>
+ #include <net/tftp.h>
+ #include "bootp.h"
 -#ifdef CONFIG_LED_STATUS
--	status_led_tick(priv->timestamp);
--#endif /* CONFIG_LED_STATUS */
- }
+-#include <status_led.h>
+-#endif
+ #ifdef CONFIG_BOOTP_RANDOM_DELAY
+ #include "net_rand.h"
+ #endif
+@@ -370,10 +367,6 @@ static void bootp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
+ 	/*
+ 	 *	Got a good BOOTP reply.	 Copy the data into our variables.
+ 	 */
+-#if defined(CONFIG_LED_STATUS) && defined(CONFIG_LED_STATUS_BOOT_ENABLE)
+-	status_led_set(CONFIG_LED_STATUS_BOOT, CONFIG_LED_STATUS_OFF);
+-#endif
+-
+ 	store_net_params(bp);		/* Store net parameters from reply */
  
- void wait_ticks(ulong ticks)
+ 	/* Retrieve extended information (we must parse the vendor area) */
+diff --git a/net/net.c b/net/net.c
+index 1e0b7c85624..fef214f2ebe 100644
+--- a/net/net.c
++++ b/net/net.c
+@@ -99,10 +99,6 @@
+ #include <net/pcap.h>
+ #endif
+ #include <net/udp.h>
+-#if defined(CONFIG_LED_STATUS)
+-#include <miiphy.h>
+-#include <status_led.h>
+-#endif
+ #include <watchdog.h>
+ #include <linux/compiler.h>
+ #include <test/test.h>
+@@ -613,19 +609,6 @@ restart:
+ 		break;
+ 	}
+ 
+-#if defined(CONFIG_MII) || defined(CONFIG_CMD_MII)
+-#if	defined(CONFIG_SYS_FAULT_ECHO_LINK_DOWN)	&& \
+-	defined(CONFIG_LED_STATUS)			&& \
+-	defined(CONFIG_LED_STATUS_RED)
+-	/*
+-	 * Echo the inverted link state to the fault LED.
+-	 */
+-	if (miiphy_link(eth_get_dev()->name, CONFIG_SYS_FAULT_MII_ADDR))
+-		status_led_set(CONFIG_LED_STATUS_RED, CONFIG_LED_STATUS_OFF);
+-	else
+-		status_led_set(CONFIG_LED_STATUS_RED, CONFIG_LED_STATUS_ON);
+-#endif /* CONFIG_SYS_FAULT_ECHO_LINK_DOWN, ... */
+-#endif /* CONFIG_MII, ... */
+ #ifdef CONFIG_USB_KEYBOARD
+ 	net_busy_flag = 1;
+ #endif
+@@ -680,22 +663,6 @@ restart:
+ 		    ((get_timer(0) - time_start) > time_delta)) {
+ 			thand_f *x;
+ 
+-#if defined(CONFIG_MII) || defined(CONFIG_CMD_MII)
+-#if	defined(CONFIG_SYS_FAULT_ECHO_LINK_DOWN)	&& \
+-	defined(CONFIG_LED_STATUS)			&& \
+-	defined(CONFIG_LED_STATUS_RED)
+-			/*
+-			 * Echo the inverted link state to the fault LED.
+-			 */
+-			if (miiphy_link(eth_get_dev()->name,
+-					CONFIG_SYS_FAULT_MII_ADDR))
+-				status_led_set(CONFIG_LED_STATUS_RED,
+-					       CONFIG_LED_STATUS_OFF);
+-			else
+-				status_led_set(CONFIG_LED_STATUS_RED,
+-					       CONFIG_LED_STATUS_ON);
+-#endif /* CONFIG_SYS_FAULT_ECHO_LINK_DOWN, ... */
+-#endif /* CONFIG_MII, ... */
+ 			debug_cond(DEBUG_INT_STATE, "--- net_loop timeout\n");
+ 			x = time_handler;
+ 			time_handler = (thand_f *)0;
 -- 
 2.43.0
 
