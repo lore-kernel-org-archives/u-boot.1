@@ -4,53 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48D73CDE03A
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 21:16:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DE43CDE03B
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 21:22:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C72E488DBC;
-	Thu, 26 Sep 2024 23:16:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=sys-base.io
+	by phobos.denx.de (Postfix) with ESMTP id C68AB88DB6;
+	Thu, 26 Sep 2024 23:22:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="I+DmA3GG";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7366A88DCF; Thu, 26 Sep 2024 23:16:24 +0200 (CEST)
-Received: from leonov.paulk.fr (leonov.paulk.fr [185.233.101.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BF0B288DB8; Thu, 26 Sep 2024 23:22:16 +0200 (CEST)
+Received: from mail-qv1-xf44.google.com (mail-qv1-xf44.google.com
+ [IPv6:2607:f8b0:4864:20::f44])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1023F88D9B
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 23:16:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B64A8641A
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 23:22:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=sys-base.io
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paulk@sys-base.io
-Received: from laika.paulk.fr (12.234.24.109.rev.sfr.net [109.24.234.12])
- by leonov.paulk.fr (Postfix) with ESMTPS id 63FA81F0004D
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 21:16:21 +0000 (UTC)
-Received: by laika.paulk.fr (Postfix, from userid 65534)
- id ACF61A60192; Thu, 26 Sep 2024 21:16:18 +0000 (UTC)
-Received: from collins (unknown [192.168.1.1])
- by laika.paulk.fr (Postfix) with ESMTPSA id A7A33A6018E;
- Thu, 26 Sep 2024 21:16:17 +0000 (UTC)
-Date: Thu, 26 Sep 2024 23:16:15 +0200
-From: Paul Kocialkowski <paulk@sys-base.io>
-To: Dragan Simic <dsimic@manjaro.org>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Jonas Karlman <jonas@kwiboo.se>,
- Chris Morgan <macromorgan@hotmail.com>,
- Tim Lunn <tim@feathertop.org>, Paul Kocialkowski <contact@paulk.fr>
-Subject: Re: [PATCH 4/4] rockchip: Disable DRAM debug by default
-Message-ID: <ZvXPHya0NdGRdCiq@collins>
-References: <20240926183111.1324284-1-paulk@sys-base.io>
- <20240926183111.1324284-4-paulk@sys-base.io>
- <21bf0494f4dd9052801c2bacfe014651@manjaro.org>
- <ZvXJOJb0rKDYnTeQ@collins>
- <72b29cc73709076229b3aa6ae9d0f5da@manjaro.org>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf44.google.com with SMTP id
+ 6a1803df08f44-6c34dd6c21aso8702906d6.2
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 14:22:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1727385733; x=1727990533; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=lH2Fsy49SpdvJ3X8kblIDtVETXD992/udmCNSqJqqB0=;
+ b=I+DmA3GGC8Ji3e454j9HBMu2v++6FfQPiBW2lypkDjUpiEODYn2g1Ha/KErertJBlg
+ jhSO0/4fyfvjK4S22BhdCaX7roooNOFED8RdnjuC6E1NCqrNOP2QH/I0bdl6rt/D3Ns0
+ SvuWmYmbYWu2fk6dxUDoXJRdwGelwU6/4ca18=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727385733; x=1727990533;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=lH2Fsy49SpdvJ3X8kblIDtVETXD992/udmCNSqJqqB0=;
+ b=IOuAMdYitr+UbqpUGUjt3jcz1UEDOEO06OzTY+PN1QKRl7a33Y+Hf8bACamHr2nOKK
+ ih5BIPoPdBaT9t2j0V8mSTtFORMzQ1u30q67wJOlDJ/9+WHdd+gJWGNEm9LS2Ykuwg8+
+ aqbYVaZRxn3TsAPhhtRx78pkGRoZDbM0jl+9lWBGwZLzurdydi3BtharPpCrXoTVV083
+ Pe0axwgAHhSTsH25s1BUPOM6/rLUuA3EF86v+T+PD1S31YVGLWNbPo81lv3VC9z6Thjr
+ JYd6OVIiQXH28c0fVDz0Z4SlWHqhuvrp1932qKRd01jvoulX82IWqM727xhIJxe8rC8Z
+ yclw==
+X-Gm-Message-State: AOJu0YxbvSh6tak9bfJhZQ/I+ZfqGBNBFfhk9aj9QR6jmWRZhRbzBH/L
+ 7YW34ARwdz4Ut1utOmF/GeDxvpET2CaWnziMuZULBrlLWv7aDmkJ6IKdwW56RSqywG4B6NtIELQ
+ lBIRLZMOTjC57lhSBbbJRblEdjeVSegUM/rJD9M1SPG8pTXGWw5s/FcI36Q==
+X-Google-Smtp-Source: AGHT+IEn7hQWXf9Z1VttJ6cEtmYlZx4PlCIFXWmYS9o/XII5uBI0E2OqxsSTj/dPCFwUgHAIRSAgA5ZcmCeR775tYFs=
+X-Received: by 2002:a05:6214:5684:b0:6cb:20f4:30eb with SMTP id
+ 6a1803df08f44-6cb3b645139mr14374176d6.36.1727385732925; Thu, 26 Sep 2024
+ 14:22:12 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="b2vbG1CuP05tMneM"
-Content-Disposition: inline
-In-Reply-To: <72b29cc73709076229b3aa6ae9d0f5da@manjaro.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 26 Sep 2024 23:22:01 +0200
+Message-ID: <CAFLszTi-vwb90vZMDAou=-gdZzSeJvRYPWG6V0=BCLLjYWn7Gg@mail.gmail.com>
+Subject: Please pull u-boot-dm/next
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,214 +78,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---b2vbG1CuP05tMneM
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/22430
+https://dev.azure.com/simon0972/u-boot/_build/results?buildId=68&view=results
 
-Hi,
 
-Le Thu 26 Sep 24, 23:04, Dragan Simic a =C3=A9crit :
-> On 2024-09-26 22:51, Paul Kocialkowski wrote:
-> > Le Thu 26 Sep 24, 22:17, Dragan Simic a =C3=A9crit :
-> > > On 2024-09-26 20:31, Paul Kocialkowski wrote:
-> > > > From: Paul Kocialkowski <contact@paulk.fr>
-> > > >
-> > > > Printing debug details about DRAM is not useful in regular use and
-> > > > adds visual pollution to the log. Disable it by default.
-> > >=20
-> > > With all the respect, I disagree with disabling this by default.
-> > > This prints just a couple of lines that can actually be very helpful
-> > > when figuring out what's going on in case of some DRAM-related issues
-> > > on random devices in the field.
-> >=20
-> > Well this rationale could apply to lots of things and we generally don't
-> > print debug info about anything else by default.
->=20
-> I'd rather see these messages as some kind of additional verbosity,
-> rather than some true debugging messages for the DRAM init.  It's just
-> a couple of additional lines printed on the console, in the end.
+The following changes since commit 4386ab9118e7b405829fbcb3bbbaf2f47ddf0b44:
 
-It's mostly the fact that it's platform-specific and makes about no sense
-to a non-developer user that makes me think it's not welcome by default.
-It's really printing internal variables, not providing user-readable inform=
-ation
-that can be useful outside of the scope of development.
+  power: regulator: Consistently return -ENOSYS when ops is
+unimplemented (2024-09-25 08:54:03 -0600)
 
-> > Maybe DRAM is more likely to be a source of issues than other hardware
-> > aspects
-> > that are maybe more stable, but I don't see what would prevent
-> > rebuilding a
-> > u-boot binary with debug enabled. If the DRAM config needs tweaking it
-> > will be
-> > necessary to rebuild a binary anyway.
->=20
-> In theory, rebuilding a U-Boot image and reinstalling it is rather easy.
-> In practice, it's hardly doable on random devices in the field, and it's
-> sometimes virtually impossible.  It's simply that not every end user is
-> willing or capable of doing things like that.
+are available in the Git repository at:
 
-Well that is more or less what makes me think this is not welcome by defaul=
-t:
-a non-developer user would not be able to do anything useful with this
-information, since they won't be able to rebuild a binary to change the DRAM
-config and solve any DRAM-related issue.
+  git://git.denx.de/u-boot-dm.git tags/dm-next-26sep24
 
-Just knowing this information "on the field" won't help solve any issue if
-there is no possibility to undergo development and build a binary with a
-modified DRAM config.
+for you to fetch changes up to ac0876c890c2dcaa4e21ce36bfa2ea3e02139a01:
 
-In what scenario exactly do you think this would be valuable information to
-a non-developer?
+  binman: Make a start on an iMX8 test (2024-09-26 12:40:31 +0200)
 
-Cheers,
+----------------------------------------------------------------
+Simon Glass (17):
+      buildman: Retry the build for current source
+      buildman: Allow skipping the dtc build
+      binman: Fix up test coverage for mkeficapsule
+      binman: Correct the comment for fdtgrep
+      binman: Tidy up comments for Entry.GetEntryArgsOrProps()
+      binman: Tidy up comments and pylint warnings in fit
+      binman: Avoid setting the image_pos attribute directly
+      binman: Update fdt-list-dir to use the provided directory
+      binman: fit: Avoid assuming that a FIT member is a section
+      binman: fit: Set the image_pos attributes only once
+      binman: fit: Refine handling of devicetrees for OF_UPSTREAM
+      binman: Adjust naming for reading symbols
+      binman: Add minor improvements to symbol-writing
+      binman: Provide a way to set the symbol base address
+      binman: Unwind the end-at-4gb special-case a little
+      binman: Allow image_pos to be None when writing symbols
+      binman: Make a start on an iMX8 test
 
-Paul
+ tools/binman/binman.rst                       |  19 +++++++-
+ tools/binman/btool/fdtgrep.py                 |   3 +-
+ tools/binman/elf.py                           |  14 ++++--
+ tools/binman/elf_test.py                      |   4 +-
+ tools/binman/entry.py                         |  25 +++++++++-
+ tools/binman/etype/atf_fip.py                 |   2 +-
+ tools/binman/etype/blob_phase.py              |   5 ++
+ tools/binman/etype/cbfs.py                    |   2 +-
+ tools/binman/etype/efi_capsule.py             |   2 +
+ tools/binman/etype/fit.py                     | 116
+++++++++++++++++++++++++++++-----------------
+ tools/binman/etype/nxp_imx8mimage.py          |   3 +-
+ tools/binman/etype/section.py                 |  31 ++++++------
+ tools/binman/ftest.py                         | 152
++++++++++++++++++++++++++++++++++++++++++++++++++++--------
+ tools/binman/image.py                         |  21 ++++-----
+ tools/binman/image_test.py                    |   8 ++--
+ tools/binman/test/336_symbols_base.dts        |  23 +++++++++
+ tools/binman/test/337_symbols_base_expand.dts |  24 ++++++++++
+ tools/binman/test/338_symbols_comp.dts        |  26 ++++++++++
+ tools/binman/test/339_nxp_imx8.dts            |  17 +++++++
+ tools/buildman/builder.py                     |  27 ++++++++++-
+ tools/buildman/builderthread.py               |  12 ++++-
+ tools/buildman/buildman.rst                   |   3 ++
+ tools/buildman/cmdline.py                     |   2 +
+ tools/buildman/control.py                     |   3 +-
+ tools/buildman/test.py                        |  31 ++++++++++++
+ 25 files changed, 460 insertions(+), 115 deletions(-)
+ create mode 100644 tools/binman/test/336_symbols_base.dts
+ create mode 100644 tools/binman/test/337_symbols_base_expand.dts
+ create mode 100644 tools/binman/test/338_symbols_comp.dts
+ create mode 100644 tools/binman/test/339_nxp_imx8.dts
 
-> > > > Signed-off-by: Paul Kocialkowski <contact@paulk.fr>
-> > > > ---
-> > > >  configs/anbernic-rgxx3-rk3566_defconfig   | 1 -
-> > > >  configs/neu2-io-rv1126_defconfig          | 1 -
-> > > >  configs/roc-pc-mezzanine-rk3399_defconfig | 1 -
-> > > >  configs/roc-pc-rk3399_defconfig           | 1 -
-> > > >  configs/rock-pi-n10-rk3399pro_defconfig   | 1 -
-> > > >  configs/rock-pi-n8-rk3288_defconfig       | 1 -
-> > > >  configs/sonoff-ihost-rv1126_defconfig     | 1 -
-> > > >  drivers/ram/rockchip/Kconfig              | 1 -
-> > > >  8 files changed, 8 deletions(-)
-> > > >
-> > > > diff --git a/configs/anbernic-rgxx3-rk3566_defconfig
-> > > > b/configs/anbernic-rgxx3-rk3566_defconfig
-> > > > index a03509bf4671..5c074cffeb44 100644
-> > > > --- a/configs/anbernic-rgxx3-rk3566_defconfig
-> > > > +++ b/configs/anbernic-rgxx3-rk3566_defconfig
-> > > > @@ -67,7 +67,6 @@ CONFIG_SPL_DM_REGULATOR_FIXED=3Dy
-> > > >  CONFIG_REGULATOR_RK8XX=3Dy
-> > > >  CONFIG_PWM_ROCKCHIP=3Dy
-> > > >  CONFIG_SPL_RAM=3Dy
-> > > > -# CONFIG_RAM_ROCKCHIP_DEBUG is not set
-> > > >  # CONFIG_RNG_SMCCC_TRNG is not set
-> > > >  CONFIG_BAUDRATE=3D1500000
-> > > >  CONFIG_DEBUG_UART_SHIFT=3D2
-> > > > diff --git a/configs/neu2-io-rv1126_defconfig
-> > > > b/configs/neu2-io-rv1126_defconfig
-> > > > index 2a4c9b45a04f..84e4465f2c5f 100644
-> > > > --- a/configs/neu2-io-rv1126_defconfig
-> > > > +++ b/configs/neu2-io-rv1126_defconfig
-> > > > @@ -45,7 +45,6 @@ CONFIG_MMC_DW=3Dy
-> > > >  CONFIG_MMC_DW_ROCKCHIP=3Dy
-> > > >  CONFIG_REGULATOR_PWM=3Dy
-> > > >  CONFIG_PWM_ROCKCHIP=3Dy
-> > > > -# CONFIG_RAM_ROCKCHIP_DEBUG is not set
-> > > >  CONFIG_BAUDRATE=3D1500000
-> > > >  CONFIG_DEBUG_UART_SHIFT=3D2
-> > > >  CONFIG_SYSRESET=3Dy
-> > > > diff --git a/configs/roc-pc-mezzanine-rk3399_defconfig
-> > > > b/configs/roc-pc-mezzanine-rk3399_defconfig
-> > > > index a57899bfdfa0..b4041902b381 100644
-> > > > --- a/configs/roc-pc-mezzanine-rk3399_defconfig
-> > > > +++ b/configs/roc-pc-mezzanine-rk3399_defconfig
-> > > > @@ -65,7 +65,6 @@ CONFIG_REGULATOR_PWM=3Dy
-> > > >  CONFIG_SPL_DM_REGULATOR_FIXED=3Dy
-> > > >  CONFIG_REGULATOR_RK8XX=3Dy
-> > > >  CONFIG_PWM_ROCKCHIP=3Dy
-> > > > -# CONFIG_RAM_ROCKCHIP_DEBUG is not set
-> > > >  CONFIG_RAM_ROCKCHIP_LPDDR4=3Dy
-> > > >  CONFIG_BAUDRATE=3D1500000
-> > > >  CONFIG_DEBUG_UART_SHIFT=3D2
-> > > > diff --git a/configs/roc-pc-rk3399_defconfig
-> > > > b/configs/roc-pc-rk3399_defconfig
-> > > > index b45f0e0a8994..922f67320c20 100644
-> > > > --- a/configs/roc-pc-rk3399_defconfig
-> > > > +++ b/configs/roc-pc-rk3399_defconfig
-> > > > @@ -62,7 +62,6 @@ CONFIG_REGULATOR_PWM=3Dy
-> > > >  CONFIG_SPL_DM_REGULATOR_FIXED=3Dy
-> > > >  CONFIG_REGULATOR_RK8XX=3Dy
-> > > >  CONFIG_PWM_ROCKCHIP=3Dy
-> > > > -# CONFIG_RAM_ROCKCHIP_DEBUG is not set
-> > > >  CONFIG_RAM_ROCKCHIP_LPDDR4=3Dy
-> > > >  CONFIG_BAUDRATE=3D1500000
-> > > >  CONFIG_DEBUG_UART_SHIFT=3D2
-> > > > diff --git a/configs/rock-pi-n10-rk3399pro_defconfig
-> > > > b/configs/rock-pi-n10-rk3399pro_defconfig
-> > > > index ec995a54a0ee..17fe939ec989 100644
-> > > > --- a/configs/rock-pi-n10-rk3399pro_defconfig
-> > > > +++ b/configs/rock-pi-n10-rk3399pro_defconfig
-> > > > @@ -51,7 +51,6 @@ CONFIG_PHY_ROCKCHIP_TYPEC=3Dy
-> > > >  CONFIG_PMIC_RK8XX=3Dy
-> > > >  CONFIG_REGULATOR_RK8XX=3Dy
-> > > >  CONFIG_PWM_ROCKCHIP=3Dy
-> > > > -# CONFIG_RAM_ROCKCHIP_DEBUG is not set
-> > > >  CONFIG_BAUDRATE=3D1500000
-> > > >  CONFIG_DEBUG_UART_SHIFT=3D2
-> > > >  CONFIG_SYS_NS16550_MEM32=3Dy
-> > > > diff --git a/configs/rock-pi-n8-rk3288_defconfig
-> > > > b/configs/rock-pi-n8-rk3288_defconfig
-> > > > index 4c09b9137ef8..af0fa8879421 100644
-> > > > --- a/configs/rock-pi-n8-rk3288_defconfig
-> > > > +++ b/configs/rock-pi-n8-rk3288_defconfig
-> > > > @@ -73,7 +73,6 @@ CONFIG_REGULATOR_RK8XX=3Dy
-> > > >  CONFIG_PWM_ROCKCHIP=3Dy
-> > > >  CONFIG_RAM=3Dy
-> > > >  CONFIG_SPL_RAM=3Dy
-> > > > -# CONFIG_RAM_ROCKCHIP_DEBUG is not set
-> > > >  CONFIG_DEBUG_UART_SHIFT=3D2
-> > > >  CONFIG_SYS_NS16550_MEM32=3Dy
-> > > >  CONFIG_SYSRESET=3Dy
-> > > > diff --git a/configs/sonoff-ihost-rv1126_defconfig
-> > > > b/configs/sonoff-ihost-rv1126_defconfig
-> > > > index 4890644c7e6f..739adb49ce93 100644
-> > > > --- a/configs/sonoff-ihost-rv1126_defconfig
-> > > > +++ b/configs/sonoff-ihost-rv1126_defconfig
-> > > > @@ -46,7 +46,6 @@ CONFIG_MMC_DW=3Dy
-> > > >  CONFIG_MMC_DW_ROCKCHIP=3Dy
-> > > >  CONFIG_REGULATOR_PWM=3Dy
-> > > >  CONFIG_PWM_ROCKCHIP=3Dy
-> > > > -# CONFIG_RAM_ROCKCHIP_DEBUG is not set
-> > > >  CONFIG_BAUDRATE=3D1500000
-> > > >  CONFIG_DEBUG_UART_SHIFT=3D2
-> > > >  CONFIG_SYSRESET=3Dy
-> > > > diff --git a/drivers/ram/rockchip/Kconfig b/drivers/ram/rockchip/Kc=
-onfig
-> > > > index 67c63ecba047..e030c982eccb 100644
-> > > > --- a/drivers/ram/rockchip/Kconfig
-> > > > +++ b/drivers/ram/rockchip/Kconfig
-> > > > @@ -15,7 +15,6 @@ if RAM_ROCKCHIP
-> > > >
-> > > >  config RAM_ROCKCHIP_DEBUG
-> > > >  	bool "Rockchip ram drivers debugging"
-> > > > -	default y
-> > > >  	help
-> > > >  	  This enables debugging ram driver API's for the platforms
-> > > >  	  based on Rockchip SoCs.
 
---=20
-Paul Kocialkowski,
-
-Independent contractor - sys-base - https://www.sys-base.io/
-Free software developer - https://www.paulk.fr/
-
-Expertise in multimedia, graphics and embedded hardware support with Linux.
-
---b2vbG1CuP05tMneM
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEAbcMXZQMtj1fphLChP3B6o/ulQwFAmb1zx8ACgkQhP3B6o/u
-lQzcFA/9GMGdfEzqNi/Hu6qcrGoWDivZ0Ytg85Fz6wYhQXYo/xZm8Ay0tW5DumeX
-1N7hmBCcDnivpNwu5JybcjisrwO5Op3fyyyG/JOQzYfTd5HujkHS/LSiatO1pm35
-vnecz3YGfOJIO1XtItR35Ysn2WLC+WKV2LhkRxovK6TsjoarJGAi0YAlAW3MrH2R
-CSbML1rMFL+Kc+zH4ECx3dw6MEhE9mOGcVokwWKKriUlWmVIcWaF7m7UD0KWnkDb
-gMHkgcY6s62EBF+cZr8Uof5zoFcoBk80W+SvTTRIvKkuXRyjw4qTmF9iIdcWQdR6
-DknxsrmVxq8luurbNo6+kscgRLJtb3hTkPWaGNkFM+/Nq1MgDWre0i+ElOPNtTdi
-Ykj2hVQpG3IK25bFkYL/sPGAgMxrp5LviOtK6DoM3R9z8hmaqVwvMS/ctPnU7oSJ
-kaeoSTt7HdM/8AflH0K8USwhrr9JdHcSlhY3H3V4YBcqP7oXxxK2kNuhTAhYv7u3
-ZHw8JbJHO651uhkTx7qy4EGCY/HVMpwzc3jD1dJXWB2jXgwwuSVLXHGdJl/S7lMp
-ITC5g+OGzzQFxw8eYeLM29hOxHrA3FbQD9JU5nLh+oSW/XWjksyR46UudXwyK9eH
-16Duw9fq4u/6508pSmJMgR7qaCvnfziIPizMz5+2h/u3jfRLVAI=
-=JucP
------END PGP SIGNATURE-----
-
---b2vbG1CuP05tMneM--
+Regards,
+Simon
