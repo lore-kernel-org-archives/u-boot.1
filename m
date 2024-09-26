@@ -4,64 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DE43CDE03B
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 21:22:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E693CDE038
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 21:24:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C68AB88DB6;
-	Thu, 26 Sep 2024 23:22:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 8F2BD88DDE;
+	Thu, 26 Sep 2024 23:24:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="I+DmA3GG";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="jghDTCv9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF0B288DB8; Thu, 26 Sep 2024 23:22:16 +0200 (CEST)
-Received: from mail-qv1-xf44.google.com (mail-qv1-xf44.google.com
- [IPv6:2607:f8b0:4864:20::f44])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4C6A788DF1; Thu, 26 Sep 2024 23:24:44 +0200 (CEST)
+Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B64A8641A
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 23:22:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 31D7788DB6
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 23:24:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf44.google.com with SMTP id
- 6a1803df08f44-6c34dd6c21aso8702906d6.2
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 14:22:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727385733; x=1727990533; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=lH2Fsy49SpdvJ3X8kblIDtVETXD992/udmCNSqJqqB0=;
- b=I+DmA3GGC8Ji3e454j9HBMu2v++6FfQPiBW2lypkDjUpiEODYn2g1Ha/KErertJBlg
- jhSO0/4fyfvjK4S22BhdCaX7roooNOFED8RdnjuC6E1NCqrNOP2QH/I0bdl6rt/D3Ns0
- SvuWmYmbYWu2fk6dxUDoXJRdwGelwU6/4ca18=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727385733; x=1727990533;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=lH2Fsy49SpdvJ3X8kblIDtVETXD992/udmCNSqJqqB0=;
- b=IOuAMdYitr+UbqpUGUjt3jcz1UEDOEO06OzTY+PN1QKRl7a33Y+Hf8bACamHr2nOKK
- ih5BIPoPdBaT9t2j0V8mSTtFORMzQ1u30q67wJOlDJ/9+WHdd+gJWGNEm9LS2Ykuwg8+
- aqbYVaZRxn3TsAPhhtRx78pkGRoZDbM0jl+9lWBGwZLzurdydi3BtharPpCrXoTVV083
- Pe0axwgAHhSTsH25s1BUPOM6/rLUuA3EF86v+T+PD1S31YVGLWNbPo81lv3VC9z6Thjr
- JYd6OVIiQXH28c0fVDz0Z4SlWHqhuvrp1932qKRd01jvoulX82IWqM727xhIJxe8rC8Z
- yclw==
-X-Gm-Message-State: AOJu0YxbvSh6tak9bfJhZQ/I+ZfqGBNBFfhk9aj9QR6jmWRZhRbzBH/L
- 7YW34ARwdz4Ut1utOmF/GeDxvpET2CaWnziMuZULBrlLWv7aDmkJ6IKdwW56RSqywG4B6NtIELQ
- lBIRLZMOTjC57lhSBbbJRblEdjeVSegUM/rJD9M1SPG8pTXGWw5s/FcI36Q==
-X-Google-Smtp-Source: AGHT+IEn7hQWXf9Z1VttJ6cEtmYlZx4PlCIFXWmYS9o/XII5uBI0E2OqxsSTj/dPCFwUgHAIRSAgA5ZcmCeR775tYFs=
-X-Received: by 2002:a05:6214:5684:b0:6cb:20f4:30eb with SMTP id
- 6a1803df08f44-6cb3b645139mr14374176d6.36.1727385732925; Thu, 26 Sep 2024
- 14:22:12 -0700 (PDT)
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 26 Sep 2024 23:22:01 +0200
-Message-ID: <CAFLszTi-vwb90vZMDAou=-gdZzSeJvRYPWG6V0=BCLLjYWn7Gg@mail.gmail.com>
-Subject: Please pull u-boot-dm/next
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1727385881;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=CB3Ae3I+1uK5bSZkoPxDQ5u5/Lw57xvAy18G3LxuU9Q=;
+ b=jghDTCv9/7xiRLK7iiLdA9VelWzeZEca5bu+IVV3ryuuL/6ZQsE5IaPUOKDRsHOHFxXeBm
+ WAoCVJ7Pg8E6ls65rVtGfuwqjEIR95HBwKiXMzirno0eFrzx9uQ0BQFm5yGiug4CCYfnz0
+ rpzPUAcU7U6HhI2z8/eqQHyQVAFuESwPZY5kio1rB/T5cr53wgTlE+iz2P9m6BT8wHHsS8
+ sVUe0VMBNQuBSqAo416QwrtQibMZOtPJFC/XmyL0v3dahP+h+TcLAzl/ym6BAscqsFfNIQ
+ DZQ8LzSDyHHKpMdCWfgNZAXDKM5V9pCdX2QWlzS4vZyqBlXEMMqtg5NNzbqzmQ==
+Date: Thu, 26 Sep 2024 23:24:40 +0200
+From: Dragan Simic <dsimic@manjaro.org>
+To: Paul Kocialkowski <paulk@sys-base.io>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Kever Yang <kever.yang@rock-chips.com>, Quentin
+ Schulz <quentin.schulz@cherry.de>, Jonas Karlman <jonas@kwiboo.se>, Chris
+ Morgan <macromorgan@hotmail.com>, Tim Lunn <tim@feathertop.org>, Paul
+ Kocialkowski <contact@paulk.fr>
+Subject: Re: [PATCH 4/4] rockchip: Disable DRAM debug by default
+In-Reply-To: <ZvXPHya0NdGRdCiq@collins>
+References: <20240926183111.1324284-1-paulk@sys-base.io>
+ <20240926183111.1324284-4-paulk@sys-base.io>
+ <21bf0494f4dd9052801c2bacfe014651@manjaro.org> <ZvXJOJb0rKDYnTeQ@collins>
+ <72b29cc73709076229b3aa6ae9d0f5da@manjaro.org> <ZvXPHya0NdGRdCiq@collins>
+Message-ID: <acc079de0eb93a32df523f26836339a7@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
+Content-Transfer-Encoding: 8bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,78 +75,196 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On 2024-09-26 23:16, Paul Kocialkowski wrote:
+> Le Thu 26 Sep 24, 23:04, Dragan Simic a écrit :
+>> On 2024-09-26 22:51, Paul Kocialkowski wrote:
+>> > Le Thu 26 Sep 24, 22:17, Dragan Simic a écrit :
+>> > > On 2024-09-26 20:31, Paul Kocialkowski wrote:
+>> > > > From: Paul Kocialkowski <contact@paulk.fr>
+>> > > >
+>> > > > Printing debug details about DRAM is not useful in regular use and
+>> > > > adds visual pollution to the log. Disable it by default.
+>> > >
+>> > > With all the respect, I disagree with disabling this by default.
+>> > > This prints just a couple of lines that can actually be very helpful
+>> > > when figuring out what's going on in case of some DRAM-related issues
+>> > > on random devices in the field.
+>> >
+>> > Well this rationale could apply to lots of things and we generally don't
+>> > print debug info about anything else by default.
+>> 
+>> I'd rather see these messages as some kind of additional verbosity,
+>> rather than some true debugging messages for the DRAM init.  It's just
+>> a couple of additional lines printed on the console, in the end.
+> 
+> It's mostly the fact that it's platform-specific and makes about no 
+> sense
+> to a non-developer user that makes me think it's not welcome by 
+> default.
+> It's really printing internal variables, not providing user-readable 
+> information
+> that can be useful outside of the scope of development.
 
-https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/22430
-https://dev.azure.com/simon0972/u-boot/_build/results?buildId=68&view=results
+Well, each and every U-Boot build is platform- and device-specific, so
+I see no problems with some of the messages produced by default being
+platform- or device-specific.
 
+In practice, anything that U-Boot prints on the console has little to no
+meaning to the vast majority of people who actually happen to see and
+register those messages.  As a result, those messages are mostly useful
+to the developers only.
 
-The following changes since commit 4386ab9118e7b405829fbcb3bbbaf2f47ddf0b44:
+>> > Maybe DRAM is more likely to be a source of issues than other hardware
+>> > aspects
+>> > that are maybe more stable, but I don't see what would prevent
+>> > rebuilding a
+>> > u-boot binary with debug enabled. If the DRAM config needs tweaking it
+>> > will be
+>> > necessary to rebuild a binary anyway.
+>> 
+>> In theory, rebuilding a U-Boot image and reinstalling it is rather 
+>> easy.
+>> In practice, it's hardly doable on random devices in the field, and 
+>> it's
+>> sometimes virtually impossible.  It's simply that not every end user 
+>> is
+>> willing or capable of doing things like that.
+> 
+> Well that is more or less what makes me think this is not welcome by 
+> default:
+> a non-developer user would not be able to do anything useful with this
+> information, since they won't be able to rebuild a binary to change the 
+> DRAM
+> config and solve any DRAM-related issue.
 
-  power: regulator: Consistently return -ENOSYS when ops is
-unimplemented (2024-09-25 08:54:03 -0600)
+A non-developer may be able to forward the messages to a developer, who
+in turn may be able to use them to roughly figure out what's going on.
 
-are available in the Git repository at:
+> Just knowing this information "on the field" won't help solve any issue 
+> if
+> there is no possibility to undergo development and build a binary with 
+> a
+> modified DRAM config.
+> 
+> In what scenario exactly do you think this would be valuable 
+> information to
+> a non-developer?
 
-  git://git.denx.de/u-boot-dm.git tags/dm-next-26sep24
+I'm actually speaking from experience.  Those messages have already
+proven to be useful in a few cases that I happened to witness.
 
-for you to fetch changes up to ac0876c890c2dcaa4e21ce36bfa2ea3e02139a01:
-
-  binman: Make a start on an iMX8 test (2024-09-26 12:40:31 +0200)
-
-----------------------------------------------------------------
-Simon Glass (17):
-      buildman: Retry the build for current source
-      buildman: Allow skipping the dtc build
-      binman: Fix up test coverage for mkeficapsule
-      binman: Correct the comment for fdtgrep
-      binman: Tidy up comments for Entry.GetEntryArgsOrProps()
-      binman: Tidy up comments and pylint warnings in fit
-      binman: Avoid setting the image_pos attribute directly
-      binman: Update fdt-list-dir to use the provided directory
-      binman: fit: Avoid assuming that a FIT member is a section
-      binman: fit: Set the image_pos attributes only once
-      binman: fit: Refine handling of devicetrees for OF_UPSTREAM
-      binman: Adjust naming for reading symbols
-      binman: Add minor improvements to symbol-writing
-      binman: Provide a way to set the symbol base address
-      binman: Unwind the end-at-4gb special-case a little
-      binman: Allow image_pos to be None when writing symbols
-      binman: Make a start on an iMX8 test
-
- tools/binman/binman.rst                       |  19 +++++++-
- tools/binman/btool/fdtgrep.py                 |   3 +-
- tools/binman/elf.py                           |  14 ++++--
- tools/binman/elf_test.py                      |   4 +-
- tools/binman/entry.py                         |  25 +++++++++-
- tools/binman/etype/atf_fip.py                 |   2 +-
- tools/binman/etype/blob_phase.py              |   5 ++
- tools/binman/etype/cbfs.py                    |   2 +-
- tools/binman/etype/efi_capsule.py             |   2 +
- tools/binman/etype/fit.py                     | 116
-++++++++++++++++++++++++++++-----------------
- tools/binman/etype/nxp_imx8mimage.py          |   3 +-
- tools/binman/etype/section.py                 |  31 ++++++------
- tools/binman/ftest.py                         | 152
-+++++++++++++++++++++++++++++++++++++++++++++++++++--------
- tools/binman/image.py                         |  21 ++++-----
- tools/binman/image_test.py                    |   8 ++--
- tools/binman/test/336_symbols_base.dts        |  23 +++++++++
- tools/binman/test/337_symbols_base_expand.dts |  24 ++++++++++
- tools/binman/test/338_symbols_comp.dts        |  26 ++++++++++
- tools/binman/test/339_nxp_imx8.dts            |  17 +++++++
- tools/buildman/builder.py                     |  27 ++++++++++-
- tools/buildman/builderthread.py               |  12 ++++-
- tools/buildman/buildman.rst                   |   3 ++
- tools/buildman/cmdline.py                     |   2 +
- tools/buildman/control.py                     |   3 +-
- tools/buildman/test.py                        |  31 ++++++++++++
- 25 files changed, 460 insertions(+), 115 deletions(-)
- create mode 100644 tools/binman/test/336_symbols_base.dts
- create mode 100644 tools/binman/test/337_symbols_base_expand.dts
- create mode 100644 tools/binman/test/338_symbols_comp.dts
- create mode 100644 tools/binman/test/339_nxp_imx8.dts
-
-
-Regards,
-Simon
+>> > > > Signed-off-by: Paul Kocialkowski <contact@paulk.fr>
+>> > > > ---
+>> > > >  configs/anbernic-rgxx3-rk3566_defconfig   | 1 -
+>> > > >  configs/neu2-io-rv1126_defconfig          | 1 -
+>> > > >  configs/roc-pc-mezzanine-rk3399_defconfig | 1 -
+>> > > >  configs/roc-pc-rk3399_defconfig           | 1 -
+>> > > >  configs/rock-pi-n10-rk3399pro_defconfig   | 1 -
+>> > > >  configs/rock-pi-n8-rk3288_defconfig       | 1 -
+>> > > >  configs/sonoff-ihost-rv1126_defconfig     | 1 -
+>> > > >  drivers/ram/rockchip/Kconfig              | 1 -
+>> > > >  8 files changed, 8 deletions(-)
+>> > > >
+>> > > > diff --git a/configs/anbernic-rgxx3-rk3566_defconfig
+>> > > > b/configs/anbernic-rgxx3-rk3566_defconfig
+>> > > > index a03509bf4671..5c074cffeb44 100644
+>> > > > --- a/configs/anbernic-rgxx3-rk3566_defconfig
+>> > > > +++ b/configs/anbernic-rgxx3-rk3566_defconfig
+>> > > > @@ -67,7 +67,6 @@ CONFIG_SPL_DM_REGULATOR_FIXED=y
+>> > > >  CONFIG_REGULATOR_RK8XX=y
+>> > > >  CONFIG_PWM_ROCKCHIP=y
+>> > > >  CONFIG_SPL_RAM=y
+>> > > > -# CONFIG_RAM_ROCKCHIP_DEBUG is not set
+>> > > >  # CONFIG_RNG_SMCCC_TRNG is not set
+>> > > >  CONFIG_BAUDRATE=1500000
+>> > > >  CONFIG_DEBUG_UART_SHIFT=2
+>> > > > diff --git a/configs/neu2-io-rv1126_defconfig
+>> > > > b/configs/neu2-io-rv1126_defconfig
+>> > > > index 2a4c9b45a04f..84e4465f2c5f 100644
+>> > > > --- a/configs/neu2-io-rv1126_defconfig
+>> > > > +++ b/configs/neu2-io-rv1126_defconfig
+>> > > > @@ -45,7 +45,6 @@ CONFIG_MMC_DW=y
+>> > > >  CONFIG_MMC_DW_ROCKCHIP=y
+>> > > >  CONFIG_REGULATOR_PWM=y
+>> > > >  CONFIG_PWM_ROCKCHIP=y
+>> > > > -# CONFIG_RAM_ROCKCHIP_DEBUG is not set
+>> > > >  CONFIG_BAUDRATE=1500000
+>> > > >  CONFIG_DEBUG_UART_SHIFT=2
+>> > > >  CONFIG_SYSRESET=y
+>> > > > diff --git a/configs/roc-pc-mezzanine-rk3399_defconfig
+>> > > > b/configs/roc-pc-mezzanine-rk3399_defconfig
+>> > > > index a57899bfdfa0..b4041902b381 100644
+>> > > > --- a/configs/roc-pc-mezzanine-rk3399_defconfig
+>> > > > +++ b/configs/roc-pc-mezzanine-rk3399_defconfig
+>> > > > @@ -65,7 +65,6 @@ CONFIG_REGULATOR_PWM=y
+>> > > >  CONFIG_SPL_DM_REGULATOR_FIXED=y
+>> > > >  CONFIG_REGULATOR_RK8XX=y
+>> > > >  CONFIG_PWM_ROCKCHIP=y
+>> > > > -# CONFIG_RAM_ROCKCHIP_DEBUG is not set
+>> > > >  CONFIG_RAM_ROCKCHIP_LPDDR4=y
+>> > > >  CONFIG_BAUDRATE=1500000
+>> > > >  CONFIG_DEBUG_UART_SHIFT=2
+>> > > > diff --git a/configs/roc-pc-rk3399_defconfig
+>> > > > b/configs/roc-pc-rk3399_defconfig
+>> > > > index b45f0e0a8994..922f67320c20 100644
+>> > > > --- a/configs/roc-pc-rk3399_defconfig
+>> > > > +++ b/configs/roc-pc-rk3399_defconfig
+>> > > > @@ -62,7 +62,6 @@ CONFIG_REGULATOR_PWM=y
+>> > > >  CONFIG_SPL_DM_REGULATOR_FIXED=y
+>> > > >  CONFIG_REGULATOR_RK8XX=y
+>> > > >  CONFIG_PWM_ROCKCHIP=y
+>> > > > -# CONFIG_RAM_ROCKCHIP_DEBUG is not set
+>> > > >  CONFIG_RAM_ROCKCHIP_LPDDR4=y
+>> > > >  CONFIG_BAUDRATE=1500000
+>> > > >  CONFIG_DEBUG_UART_SHIFT=2
+>> > > > diff --git a/configs/rock-pi-n10-rk3399pro_defconfig
+>> > > > b/configs/rock-pi-n10-rk3399pro_defconfig
+>> > > > index ec995a54a0ee..17fe939ec989 100644
+>> > > > --- a/configs/rock-pi-n10-rk3399pro_defconfig
+>> > > > +++ b/configs/rock-pi-n10-rk3399pro_defconfig
+>> > > > @@ -51,7 +51,6 @@ CONFIG_PHY_ROCKCHIP_TYPEC=y
+>> > > >  CONFIG_PMIC_RK8XX=y
+>> > > >  CONFIG_REGULATOR_RK8XX=y
+>> > > >  CONFIG_PWM_ROCKCHIP=y
+>> > > > -# CONFIG_RAM_ROCKCHIP_DEBUG is not set
+>> > > >  CONFIG_BAUDRATE=1500000
+>> > > >  CONFIG_DEBUG_UART_SHIFT=2
+>> > > >  CONFIG_SYS_NS16550_MEM32=y
+>> > > > diff --git a/configs/rock-pi-n8-rk3288_defconfig
+>> > > > b/configs/rock-pi-n8-rk3288_defconfig
+>> > > > index 4c09b9137ef8..af0fa8879421 100644
+>> > > > --- a/configs/rock-pi-n8-rk3288_defconfig
+>> > > > +++ b/configs/rock-pi-n8-rk3288_defconfig
+>> > > > @@ -73,7 +73,6 @@ CONFIG_REGULATOR_RK8XX=y
+>> > > >  CONFIG_PWM_ROCKCHIP=y
+>> > > >  CONFIG_RAM=y
+>> > > >  CONFIG_SPL_RAM=y
+>> > > > -# CONFIG_RAM_ROCKCHIP_DEBUG is not set
+>> > > >  CONFIG_DEBUG_UART_SHIFT=2
+>> > > >  CONFIG_SYS_NS16550_MEM32=y
+>> > > >  CONFIG_SYSRESET=y
+>> > > > diff --git a/configs/sonoff-ihost-rv1126_defconfig
+>> > > > b/configs/sonoff-ihost-rv1126_defconfig
+>> > > > index 4890644c7e6f..739adb49ce93 100644
+>> > > > --- a/configs/sonoff-ihost-rv1126_defconfig
+>> > > > +++ b/configs/sonoff-ihost-rv1126_defconfig
+>> > > > @@ -46,7 +46,6 @@ CONFIG_MMC_DW=y
+>> > > >  CONFIG_MMC_DW_ROCKCHIP=y
+>> > > >  CONFIG_REGULATOR_PWM=y
+>> > > >  CONFIG_PWM_ROCKCHIP=y
+>> > > > -# CONFIG_RAM_ROCKCHIP_DEBUG is not set
+>> > > >  CONFIG_BAUDRATE=1500000
+>> > > >  CONFIG_DEBUG_UART_SHIFT=2
+>> > > >  CONFIG_SYSRESET=y
+>> > > > diff --git a/drivers/ram/rockchip/Kconfig b/drivers/ram/rockchip/Kconfig
+>> > > > index 67c63ecba047..e030c982eccb 100644
+>> > > > --- a/drivers/ram/rockchip/Kconfig
+>> > > > +++ b/drivers/ram/rockchip/Kconfig
+>> > > > @@ -15,7 +15,6 @@ if RAM_ROCKCHIP
+>> > > >
+>> > > >  config RAM_ROCKCHIP_DEBUG
+>> > > >  	bool "Rockchip ram drivers debugging"
+>> > > > -	default y
+>> > > >  	help
+>> > > >  	  This enables debugging ram driver API's for the platforms
+>> > > >  	  based on Rockchip SoCs.
