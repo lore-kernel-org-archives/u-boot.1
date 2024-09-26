@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFAC4CCFA13
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 08:04:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFE55CCFA13
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 08:04:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C432E88D29;
-	Thu, 26 Sep 2024 10:02:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 396E088D54;
+	Thu, 26 Sep 2024 10:02:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="Mk70PP8o";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="Fe1EpcHN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E895788D29; Thu, 26 Sep 2024 10:02:33 +0200 (CEST)
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [IPv6:2a00:1450:4864:20::22a])
+ id 38BDF88C4C; Thu, 26 Sep 2024 10:02:36 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B37F982BA7
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 10:02:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D4DC88D15
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 10:02:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=9elements.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-2f7528f4658so6352521fa.3
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 01:02:18 -0700 (PDT)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-5c718af3354so686635a12.0
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 01:02:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1727337738; x=1727942538; darn=lists.denx.de;
+ d=9elements.com; s=google; t=1727337744; x=1727942544; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ta632l/OzkeBllyBS1wjgzq57epJ46bHhzgb4ezorw0=;
- b=Mk70PP8oApbkwrj6BgxXFhQM+zO8/R8jzBAfUxswvN91k8KKTMFjvGF1PnwQ3MPvQu
- qncPvKMQfO3xTo1BP/Cr8i4cf/gj3+JcjNcJMSP9vsFrmbctA96akg1GMCqXqkZrPExw
- 81fMr0ldS86GZf0sPanrKIToD3ASgLDeWk+W8VKJeSzRMJle6bTD4s3SttCzaYcP4/aO
- A5lrZkEjzukLErEmE0p7NOQ6qO1ghIZTxAzrulK7WtCWH61m6idTIJBbvvvY7T/g8V8i
- DN6dZoGMHfhHjTwAYjUp3ZI2W7hz1nmOp9ap1TtXpag6bqYFXOj/xlfoHKObv+2UKAjr
- Id4g==
+ bh=6qh3O7OJOcShIcJEa8pKcyU3WtV3GEhgds1yBXJI620=;
+ b=Fe1EpcHNYirSPWU/vpoA5zMXdlvrAQESOlRHiDZFJR+oucEMGIJ314V95a5PEtRw72
+ CwiEOC9g33ssxxbhTOkM3a2AmfiMflA7dhMmtQlpEXj6R/JlsDw94nVL0QYRIZIPEy2N
+ Nx0q29AA9D9bJi3eccQAvKWy5MRPybn7IECK+cXcBGCDuQgcZQyzUKP0EEuZsRXfUAnw
+ 3kzcVEnKSK4Bmund7ScD2Uq/MVtTGQHO4rGN3bHoiu6ITCOkbym9XWG3eemLc+A7cs1R
+ mJUl4Q1n1zLeQOZ8fUnYQWjzOct4sf7dgU6u9yKINC5iDFkkreatot7bI9fdHewuYJ5A
+ 4L6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727337738; x=1727942538;
+ d=1e100.net; s=20230601; t=1727337744; x=1727942544;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ta632l/OzkeBllyBS1wjgzq57epJ46bHhzgb4ezorw0=;
- b=Q+o3OvL5sRaCqHtdFBt2Yjp2OLXfvHXmTWS3NCrjVfkZuEZ1NOiAMzJ3NtMyrm1qBi
- Z6kc/e9SfCZncy9v3NqIP6/1jjYW88h0sMSDiG1CD80kK9+FWrtujcjMHnUy0PY1Itj8
- EqW1mLN5AIu2hmTSgj9r3OfhFVjLHbAGRo/Hl+L4weXXaRV8LQOin/DE4d7lP0RF/vZE
- KPSw3je+RuYQj17YNSMaPg4toQ6loBOyXUvSCa3ze+2k3XUpntNJvfGuCiWE/NaeU6LT
- DEzvmzcWtSpc1k5FHdlkNmDtZVA9VhsBJBoYKyyMKhtpUNO/oQnMExwgO/9BiOaNCpPC
- 6Fow==
-X-Gm-Message-State: AOJu0YyEAFbVFGMzdRVI8ChKuClyJ0yB6zefUxtt/bUEo1IcdUUmlNRy
- Ea6Kng5B2NjmF/vZGEamd7I9w1ASXEA6kPz0sPunwrvFVz8sRZTBZlyimZnw16dSnUg2cFcPbt+
- m
-X-Google-Smtp-Source: AGHT+IGb87EvuFqXQeHZTFoaa0oBZyQDgA/wlRBK8fS5nthuyKWPl/T0bGemEu+MN7mp8YBV4AaUHA==
-X-Received: by 2002:a2e:74f:0:b0:2f7:5e7f:b4e1 with SMTP id
- 38308e7fff4ca-2f91ca4643bmr27058921fa.30.1727337737692; 
- Thu, 26 Sep 2024 01:02:17 -0700 (PDT)
+ bh=6qh3O7OJOcShIcJEa8pKcyU3WtV3GEhgds1yBXJI620=;
+ b=HQVENGeTgGfLJMMoGNWhCRl2M8LXiVw4/dNgn73bNTWRY7lGdScuqprA/xZL3gYEd5
+ q4ASl1gkmR5tgfrlEeN2HmZLdYQj7xrkowf4DmsG5bZtBIq4ZkApSRrJqFr06/xuxs5z
+ QkmdIo8lG5w7Vb6wHc3uORWQ1gvxZLuaD0VaFGSAn57QlEjjXqWQ30WZzGp3wjSiMH7q
+ Y+h38Crm91nJBz3qZZJ+KtUOUCWLjB8zRm+NH/ppnybwIQI7C8/1E7jvLMCuO5T4lLlx
+ HtlfvVEki70zMY/gmZ8Ey3vXCXSze1Q0oQWMA3qndptIEw1uqJPisBMkksKBIB+hz8m2
+ m/4g==
+X-Gm-Message-State: AOJu0YymTHyHZgPl8mO9SXA/+gJ5n2kQBV3rAz2QWFKqQlzq2Zol63j8
+ JAdTaCy609GEUsUssdyadbU6avBtXKMF2C6l2McadA5B3G5CBoelWwZ144WdxezOcyIuIeAtO9t
+ f
+X-Google-Smtp-Source: AGHT+IF8dk5nMgZMVe8izTw1BbzhcIDmNko9PMFnSHQhMUZb5BINNE8w0TzXP/K+Gs2XRqy9aMQmqw==
+X-Received: by 2002:a05:6402:50cb:b0:5c8:776b:d170 with SMTP id
+ 4fb4d7f45d1cf-5c8776bd517mr1822890a12.9.1727337743974; 
+ Thu, 26 Sep 2024 01:02:23 -0700 (PDT)
 Received: from fedora.sec.9e.network
  (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c5cf4c4fe3sm2822449a12.68.2024.09.26.01.02.16
+ 4fb4d7f45d1cf-5c5cf4c4fe3sm2822449a12.68.2024.09.26.01.02.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Sep 2024 01:02:17 -0700 (PDT)
+ Thu, 26 Sep 2024 01:02:22 -0700 (PDT)
 From: Patrick Rudolph <patrick.rudolph@9elements.com>
 To: u-boot@lists.denx.de,
 	Simon Glass <sjg@chromium.org>
-Cc: Maximilian Brune <maximilian.brune@9elements.com>,
+Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v5 05/36] serial: serial_pl01x: Implement .getinfo() for PL01
-Date: Thu, 26 Sep 2024 09:58:53 +0200
-Message-ID: <20240926080021.148031-6-patrick.rudolph@9elements.com>
+Subject: [PATCH v5 07/36] arm: acpi: Add generic ACPI methods
+Date: Thu, 26 Sep 2024 09:58:55 +0200
+Message-ID: <20240926080021.148031-8-patrick.rudolph@9elements.com>
 X-Mailer: git-send-email 2.46.0
 In-Reply-To: <20240926080021.148031-1-patrick.rudolph@9elements.com>
 References: <20240926080021.148031-1-patrick.rudolph@9elements.com>
@@ -95,104 +95,336 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Maximilian Brune <maximilian.brune@9elements.com>
+Add generic ACPI code to generate
+- MADT GICC
+- MADT GICD
+- MADT GICR
+- MADT GIC ITS
+- PPTT processor
+- PPTT cache
 
-When ACPI is enabled on arm it will use the getinfo function to fill
-the SPCR ACPI table.
+as commonly used on arm platforms.
 
-Signed-off-by: Maximilian Brune <maximilian.brune@9elements.com>
+Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
-Cc: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>
 ---
- boot/bootflow.c               |  8 ++++++--
- drivers/serial/serial_pl01x.c | 24 ++++++++++++++++++++++++
- include/serial.h              |  1 +
- 3 files changed, 31 insertions(+), 2 deletions(-)
+Changelog v2:
+- Add full comments to exported functions
 
-diff --git a/boot/bootflow.c b/boot/bootflow.c
-index 59d77d2385..d8807eb109 100644
---- a/boot/bootflow.c
-+++ b/boot/bootflow.c
-@@ -936,11 +936,15 @@ int bootflow_cmdline_auto(struct bootflow *bflow, const char *arg)
- 		return ret;
+---
+ arch/arm/include/asm/acpi_table.h | 115 ++++++++++++++++++++++++++++++
+ arch/arm/lib/Makefile             |   1 +
+ arch/arm/lib/acpi_table.c         | 114 +++++++++++++++++++++++++++++
+ include/acpi/acpi_table.h         |  34 ++++++++-
+ 4 files changed, 263 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/lib/acpi_table.c
+
+diff --git a/arch/arm/include/asm/acpi_table.h b/arch/arm/include/asm/acpi_table.h
+index e69de29bb2..c65eabe837 100644
+--- a/arch/arm/include/asm/acpi_table.h
++++ b/arch/arm/include/asm/acpi_table.h
+@@ -0,0 +1,115 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++
++#ifndef __ASM_ACPI_TABLE_H__
++#define __ASM_ACPI_TABLE_H__
++
++#ifndef __ACPI__
++
++#include <acpi/acpi_table.h>
++
++/**
++ * acpi_write_madt_gicc() - Write out a MADT GICC sub-table
++ *
++ * Write out the GIC CPU Interface sub-table.
++ *
++ * @gicc:             Pointer to place to put the sub-table
++ * @cpu_num:          GIC's CPU Interface Number
++ * @perf_gsiv:        The GSIV used for Performance Monitoring Interrupts
++ * @phys_base:        Address at which the processor can access this
++ *                    GIC CPU Interface
++ * @gicv:             Address of the GIC virtual CPU interface registers
++ * @gich:             Address of the GIC virtual interface control block
++ *                    registers
++ * @vgic_maint_irq:   GSIV for Virtual GIC maintenance interrupt
++ * @gicr_base:        Physical address of the associated Redistributor
++ * @mpidr:            MPIDR as defined by ARM architecture
++ * @efficiency:       Describes the relative power efficiency
++ */
++void acpi_write_madt_gicc(struct acpi_madt_gicc *gicc, uint cpu_num,
++			  uint perf_gsiv, ulong phys_base, ulong gicv,
++			  ulong gich, uint vgic_maint_irq, u64 gicr_base,
++			  ulong mpidr, uint efficiency);
++
++/**
++ * acpi_write_madt_gicd() - Write out a MADT GICD sub-table
++ *
++ * Write out the GIC Distributor sub-table.
++ *
++ * @gicd:            Pointer to place to put the sub-table
++ * @gic_id:          This GIC Distributor's hardware ID
++ * @phys_base:       The 64-bit physical address for this Distributor
++ * @gic_version:     GIC version
++ */
++void acpi_write_madt_gicd(struct acpi_madt_gicd *gicd, uint gic_id,
++			  ulong phys_base, uint gic_version);
++
++/**
++ * acpi_write_madt_gicr() - Write out a MADT GICR sub-table
++ *
++ * Write out the GIC Redistributor sub-table.
++ *
++ * @gicr:                            Pointer to place to put the sub-table
++ * @discovery_range_base_address:    Physical address of a page range
++ *                                   containing all GIC Redistributors
++ * @discovery_range_length:          Length of the GIC Redistributor
++ *                                   Discovery page range
++ */
++void acpi_write_madt_gicr(struct acpi_madt_gicr *gicr,
++			  u64 discovery_range_base_address,
++			  u32 discovery_range_length);
++
++/**
++ * acpi_write_madt_its() - Write out a MADT ITS sub-table
++ *
++ * Write out the GIC Interrupt Translation Service sub-table.
++ *
++ * @its:                    Pointer to place to put the sub-table
++ * @its_id:                 Uniqueue GIC ITS ID
++ * @physical_base_address:  Physical address for the Interrupt
++ *                          Translation Service
++ */
++void acpi_write_madt_its(struct acpi_madt_its *its,
++			 u32 its_id,
++			 u64 physical_base_address);
++
++/**
++ * acpi_pptt_add_proc() - Write out a PPTT processor sub-table
++ *
++ * Write out the Processor Properties Topology Table processor sub-table.
++ *
++ * @ctx:                   ACPI context pointer
++ * @flags:                 Processor Structure Flags
++ * @parent:                Reference to parent processor
++ * @proc_id:               ACPI processor ID as defined in MADT
++ * @num_resources:         Number of resource structure references
++ * @resource_list:         References to other PPTT structures
++ * Return: offset from start of PPTT in bytes
++ */
++int acpi_pptt_add_proc(struct acpi_ctx *ctx, const u32 flags, const u32 parent,
++		       const u32 proc_id, const u32 num_resources,
++		       const u32 *resource_list);
++
++/**
++ * acpi_pptt_add_cache() - Write out a PPTT cache sub-table
++ *
++ * Write out the Processor Properties Topology Table cache sub-table.
++ *
++ * @ctx: ACPI context pointer
++ * @flags:                Cache Structure Flags
++ * @next_cache_level:     Reference to next level of cache
++ * @size:                 Size of the cache in bytes
++ * @sets:                 Number of sets in the cache
++ * @assoc:                Integer number of ways
++ * @attributes:           Allocation type, Cache type, policy
++ * @line_size:            Line size in bytes
++ * Return: offset from start of PPTT in bytes
++ */
++int acpi_pptt_add_cache(struct acpi_ctx *ctx, const u32 flags,
++			const u32 next_cache_level, const u32 size,
++			const u32 sets, const u8 assoc, const u8 attributes,
++			const u16 line_size);
++
++#endif /* !__ASSEMBLY__ */
++#endif /* !__ACPI__ */
++
++#endif /* __ASM_ACPI_TABLE_H__ */
+diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
+index 67275fba61..a7efed6771 100644
+--- a/arch/arm/lib/Makefile
++++ b/arch/arm/lib/Makefile
+@@ -86,6 +86,7 @@ obj-y	+= psci-dt.o
+ obj-$(CONFIG_DEBUG_LL)	+= debug.o
  
- 	*buf = '\0';
--	if (!strcmp("earlycon", arg)) {
-+	if (!strcmp("earlycon", arg) && info.type == SERIAL_CHIP_16550_COMPATIBLE) {
- 		snprintf(buf, sizeof(buf),
- 			 "uart8250,mmio32,%#lx,%dn8", info.addr,
- 			 info.baudrate);
--	} else if (!strcmp("console", arg)) {
-+	} else if (!strcmp("earlycon", arg) && info.type == SERIAL_CHIP_PL01X) {
-+		snprintf(buf, sizeof(buf),
-+			 "pl011,mmio32,%#lx,%dn8", info.addr,
-+			 info.baudrate);
-+	} else if (!strcmp("console", arg) && info.type == SERIAL_CHIP_16550_COMPATIBLE) {
- 		snprintf(buf, sizeof(buf),
- 			 "ttyS0,%dn8", info.baudrate);
- 	}
-diff --git a/drivers/serial/serial_pl01x.c b/drivers/serial/serial_pl01x.c
-index 80c35963b8..ab67922d18 100644
---- a/drivers/serial/serial_pl01x.c
-+++ b/drivers/serial/serial_pl01x.c
-@@ -19,6 +19,7 @@
- #include <watchdog.h>
- #include <asm/io.h>
- #include <serial.h>
-+#include <spl.h>
- #include <dm/device_compat.h>
- #include <dm/platform_data/serial_pl01x.h>
- #include <linux/compiler.h>
-@@ -272,6 +273,28 @@ __weak struct serial_device *default_serial_console(void)
- 	return &pl01x_serial_drv;
- }
- #else
+ obj-$(CONFIG_BLOBLIST)  += xferlist.o
++obj-$(CONFIG_GENERATE_ACPI_TABLE) += acpi_table.o
+ 
+ # For EABI conformant tool chains, provide eabi_compat()
+ ifneq (,$(findstring -mabi=aapcs-linux,$(PLATFORM_CPPFLAGS)))
+diff --git a/arch/arm/lib/acpi_table.c b/arch/arm/lib/acpi_table.c
+new file mode 100644
+index 0000000000..db6e40bdef
+--- /dev/null
++++ b/arch/arm/lib/acpi_table.c
+@@ -0,0 +1,114 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Based on acpi.c from coreboot
++ *
++ * Copyright (C) 2024 9elements GmbH
++ */
 +
-+static int pl01x_serial_getinfo(struct udevice *dev,
-+				struct serial_device_info *info)
++#define LOG_CATEGORY LOGC_ACPI
++
++#include <acpi/acpigen.h>
++#include <acpi/acpi_device.h>
++#include <acpi/acpi_table.h>
++#include <string.h>
++
++void acpi_write_madt_gicc(struct acpi_madt_gicc *gicc, uint cpu_num,
++			  uint perf_gsiv, ulong phys_base, ulong gicv,
++			  ulong gich, uint vgic_maint_irq, u64 gicr_base,
++			  ulong mpidr, uint efficiency)
 +{
-+	struct pl01x_serial_plat *plat = dev_get_plat(dev);
-+
-+	/* save code size */
-+	if (!spl_in_proper())
-+		return -ENOSYS;
-+
-+	info->type = SERIAL_CHIP_PL01X;
-+	info->addr_space = SERIAL_ADDRESS_SPACE_MEMORY;
-+	info->addr = plat->base;
-+	info->size = 0x1000;
-+	info->reg_width = 4;
-+	info->reg_shift = 2;
-+	info->reg_offset = 0;
-+	info->clock = plat->clock;
-+
-+	return 0;
++	memset(gicc, '\0', sizeof(struct acpi_madt_gicc));
++	gicc->type = ACPI_APIC_GICC;
++	gicc->length = sizeof(struct acpi_madt_gicc);
++	gicc->cpu_if_num = cpu_num;
++	gicc->processor_id = cpu_num;
++	gicc->flags = ACPI_MADTF_ENABLED;
++	gicc->perf_gsiv = perf_gsiv;
++	gicc->phys_base = phys_base;
++	gicc->gicv = gicv;
++	gicc->gich = gich;
++	gicc->vgic_maint_irq = vgic_maint_irq;
++	gicc->gicr_base = gicr_base;
++	gicc->mpidr = mpidr;
++	gicc->efficiency = efficiency;
 +}
 +
- int pl01x_serial_setbrg(struct udevice *dev, int baudrate)
- {
- 	struct pl01x_serial_plat *plat = dev_get_plat(dev);
-@@ -341,6 +364,7 @@ static const struct dm_serial_ops pl01x_serial_ops = {
- 	.pending = pl01x_serial_pending,
- 	.getc = pl01x_serial_getc,
- 	.setbrg = pl01x_serial_setbrg,
-+	.getinfo = pl01x_serial_getinfo,
++void acpi_write_madt_gicd(struct acpi_madt_gicd *gicd, uint gic_id,
++			  ulong phys_base, uint gic_version)
++{
++	memset(gicd, '\0', sizeof(struct acpi_madt_gicd));
++	gicd->type = ACPI_APIC_GICD;
++	gicd->length = sizeof(struct acpi_madt_gicd);
++	gicd->gic_id = gic_id;
++	gicd->phys_base = phys_base;
++	gicd->gic_version = gic_version;
++}
++
++void acpi_write_madt_gicr(struct acpi_madt_gicr *gicr,
++			  u64 discovery_range_base_address,
++			  u32 discovery_range_length)
++{
++	memset(gicr, '\0', sizeof(struct acpi_madt_gicr));
++	gicr->type = ACPI_APIC_GICR;
++	gicr->length = sizeof(struct acpi_madt_gicr);
++	gicr->discovery_range_base_address = discovery_range_base_address;
++	gicr->discovery_range_length = discovery_range_length;
++}
++
++void acpi_write_madt_its(struct acpi_madt_its *its,
++			 u32 its_id,
++			 u64 physical_base_address)
++{
++	memset(its, '\0', sizeof(struct acpi_madt_its));
++	its->type = ACPI_APIC_ITS;
++	its->length = sizeof(struct acpi_madt_its);
++	its->gic_its_id = its_id;
++	its->physical_base_address = physical_base_address;
++}
++
++int acpi_pptt_add_proc(struct acpi_ctx *ctx, const u32 flags, const u32 parent,
++		       const u32 proc_id, const u32 num_resources,
++		       const u32 *resource_list)
++{
++	struct acpi_pptt_proc *proc = ctx->current;
++	int offset;
++
++	offset = ctx->current - ctx->tab_start;
++	proc->hdr.type = ACPI_PPTT_TYPE_PROC;
++	proc->flags = flags;
++	proc->parent = parent;
++	proc->proc_id = proc_id;
++	proc->num_resources = num_resources;
++	proc->hdr.length = sizeof(struct acpi_pptt_proc) +
++		sizeof(u32) * num_resources;
++
++	if (resource_list)
++		memcpy(proc + 1, resource_list, sizeof(u32) * num_resources);
++
++	acpi_inc(ctx, proc->hdr.length);
++
++	return offset;
++}
++
++int acpi_pptt_add_cache(struct acpi_ctx *ctx, const u32 flags,
++			const u32 next_cache_level, const u32 size,
++			const u32 sets, const u8 assoc, const u8 attributes,
++			const u16 line_size)
++{
++	struct acpi_pptt_cache *cache = ctx->current;
++	int offset;
++
++	offset = ctx->current - ctx->tab_start;
++	cache->hdr.type = ACPI_PPTT_TYPE_CACHE;
++	cache->hdr.length = sizeof(struct acpi_pptt_cache);
++	cache->flags = flags;
++	cache->next_cache_level = next_cache_level;
++	cache->size = size;
++	cache->sets = sets;
++	cache->assoc = assoc;
++	cache->attributes = attributes;
++	cache->line_size = line_size;
++	acpi_inc(ctx, cache->hdr.length);
++
++	return offset;
++}
+diff --git a/include/acpi/acpi_table.h b/include/acpi/acpi_table.h
+index c6a3e44a95..7d994a985f 100644
+--- a/include/acpi/acpi_table.h
++++ b/include/acpi/acpi_table.h
+@@ -342,7 +342,10 @@ enum acpi_apic_types {
+ 	ACPI_APIC_LX2APIC,		/* Processor local x2APIC */
+ 	ACPI_APIC_LX2APIC_NMI,		/* Local x2APIC NMI */
+ 	ACPI_APIC_GICC,			/* Generic Interrupt Ctlr CPU i/f */
+-	ACPI_APIC_GICD			/* Generic Interrupt Ctlr Distributor */
++	ACPI_APIC_GICD,			/* Generic Interrupt Ctlr Distributor */
++	ACPI_APIC_MSI_FRAME,		/* Generic Interrupt MSI Frame */
++	ACPI_APIC_GICR,			/* Generic Interrupt Ctlr Redistributor */
++	ACPI_APIC_ITS,			/* Interrupt Translation Service */
  };
  
- #if CONFIG_IS_ENABLED(OF_REAL)
-diff --git a/include/serial.h b/include/serial.h
-index d129dc3253..d7a9a8cfb8 100644
---- a/include/serial.h
-+++ b/include/serial.h
-@@ -124,6 +124,7 @@ enum serial_stop {
- enum serial_chip_type {
- 	SERIAL_CHIP_UNKNOWN = -1,
- 	SERIAL_CHIP_16550_COMPATIBLE,
-+	SERIAL_CHIP_PL01X,
- };
+ /* MADT: Processor Local APIC Structure */
+@@ -437,6 +440,35 @@ struct acpi_madt_gicd {
+ 	u8 reserved3[3];
+ } __packed;
  
- enum adr_space_type {
++/**
++ * struct __packed acpi_madt_gicr - GIC Redistributor (type 0xe)
++ *
++ * This holds information about the Generic Interrupt Controller (GIC)
++ * Redistributor interface. See ACPI Spec v6.3 section 5.2.12.17
++ */
++struct acpi_madt_gicr {
++	u8 type;
++	u8 length;
++	u16 reserved;
++	u64 discovery_range_base_address;
++	u32 discovery_range_length;
++} __packed;
++
++/**
++ * struct __packed acpi_madt_its - GIC Interrupt Translation Service (type 0xf)
++ *
++ * This holds information about the Interrupt Translation Service (ITS)
++ * Structure. See ACPI Spec v6.3 section 5.2.12.18
++ */
++struct acpi_madt_its {
++	u8 type;
++	u8 length;
++	u16 reserved;
++	u32 gic_its_id;
++	u64 physical_base_address;
++	u32 reserved2;
++} __packed;
++
+ /* MCFG (PCI Express MMIO config space BAR description table) */
+ struct acpi_mcfg {
+ 	struct acpi_table_header header;
 -- 
 2.46.0
 
