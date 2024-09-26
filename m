@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 736C9CDE03A
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 21:34:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A254CDE038
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 21:34:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 617AA88E8A;
-	Thu, 26 Sep 2024 23:33:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C663C88ED5;
+	Thu, 26 Sep 2024 23:33:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="V7wFQpN8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="E+ap2dpf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52F7D88E77; Thu, 26 Sep 2024 23:33:43 +0200 (CEST)
-Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
- [IPv6:2607:f8b0:4864:20::72a])
+ id D178D88E77; Thu, 26 Sep 2024 23:33:45 +0200 (CEST)
+Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
+ [IPv6:2607:f8b0:4864:20::f32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 265B388E26
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 23:33:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ED8C688E6B
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 23:33:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x72a.google.com with SMTP id
- af79cd13be357-7a9a3e731f9so126939685a.0
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 14:33:40 -0700 (PDT)
+Received: by mail-qv1-xf32.google.com with SMTP id
+ 6a1803df08f44-6cb3062d9a6so9059426d6.0
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 14:33:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727386419; x=1727991219; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727386422; x=1727991222; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1h5THxLVGZj3TY8ULRW+Ubp/vSXnj1UQClaUkIY8ues=;
- b=V7wFQpN8Ggpvig5Ploi7SRBnCsA7KyWqzkFJuQ/e47I+CkwDb2MZzCT8f+K7hKwkcQ
- mL2e3nk6bnWmsff8lDmfocumNSINuoNWO5acFg7auiE6EgvHPwaejxU+uhgPBgvWyiqe
- nnAWjn1OccTxR722oYOX4x2VF5dAdnsu054AY=
+ bh=a5mqr1YeTyBwxls/Lax9pQpy+Y1lZK0KyVvbVo/SD9Y=;
+ b=E+ap2dpfx8kiwwkyjj4Kohv/Hey+WexKwLeThH3B9X/++LweBEHaTQeBjGO+99NQsf
+ 9xLDUtO8Gq0Mkb8CeEp2exCY9rMxqXOhCoFeeBjWRSWiINZJ1h9lccOsvqzkwEkFH8RT
+ vkNGpMkHZjr+GIytQ9XQVV2wKmn9ucOb4RCds=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727386419; x=1727991219;
+ d=1e100.net; s=20230601; t=1727386422; x=1727991222;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=1h5THxLVGZj3TY8ULRW+Ubp/vSXnj1UQClaUkIY8ues=;
- b=DIh3aTefqwV7ITSa4csvUtbSPFiLElLG/JM81/PQR93PJivnnziLYjOpQuDl81zUSA
- BGtWyUNyxqlJBgf0BSnOKBxEvygmmQ2Y0tpl2LV0ihOHV/+4rdmpsOyWOoOekbkg8bbO
- ScJ+DXNW9bfliCzECUB+erXxfwXjfbeJKBSnefcIzyJIJJxVjL5+jl2iWqkOfctbEPyo
- p5EB/Yx2Lsg5AXirZdmFyJs5akpRZk5byE3WUgEclo9ZzNivUqstKQNpD/q+glVc7EOz
- eswicFKjztzWAoBs4Afv4pxC2QDuoJnou/p3qBRgARkCfxpGWy3Z3nTxb2Txd8K0G0mF
- vGdg==
+ bh=a5mqr1YeTyBwxls/Lax9pQpy+Y1lZK0KyVvbVo/SD9Y=;
+ b=DH6JNFwH6zYLLnXr814A42uaqtR9vs4pTxQQ0V060lJ9Cys1SNChWmcSauuVQCRijV
+ dzuGsGzGMw2DTuhVPNr5LAlqjka+45LPoZXIoL6SUdJ8OV8NXibjTORKbmvlE2YVkjwS
+ 4b6zIImU43GHS89ewuTIC/mC/56TJ6YfZSGGdMTSMSjCd1wcB2ZNCDH+2cpsjnwcln6M
+ FfIOLYBdAghgQS7LUYWoD6ck6DxUMMVxUT4jwV857EFMeJbQREWuxlZuNd8Ua8UoM/6p
+ D+Flyric5cov3cByaNb6qo35YhneJcHhgcWVAO8+2cfpUSgE+k9rR4YDPFhe2phGTV7z
+ atrQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVg8Ba3Oiqfx2lqgjF5/u63Y8OsJ3VX/LzCvPu2iDni1g2oAfImaS4VB3yNx+ZXAfrTxptD/rA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy1/lTDqpWX7PYt5UIpUAdsFjVMvviojgZ+5ZVY5/tLCCazR74K
- fx19bfFVY6eHFNpUjN7b0TlGaOiAKHPjuvn2znbIwW0MiA38XZp1evVIW10nCNpEjoBmnp5DzAb
- ZqUMiMRtBCFfQh8IsOCAl8aPOZWD/EpZHRb41
-X-Google-Smtp-Source: AGHT+IGIgN/ID2tDoiYrEa2hsQM7g09djsNydXH+tYlY6WJ6k/AzgMXw+mk2tr4KlNO2soUfxHguht6x6UWTncjqT0s=
-X-Received: by 2002:a05:6214:568c:b0:6cb:3045:9f0e with SMTP id
- 6a1803df08f44-6cb3b643fcdmr12487146d6.33.1727386418949; Thu, 26 Sep 2024
- 14:33:38 -0700 (PDT)
+ AJvYcCUaePVKw8S+uUmEA7uNYcStlZNxn7NufDCdiJxVfwd2EayDOUp902cCMJGm69lXfO/3hrn3r9g=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywu13Qiy4azeKVi8eX4fMTEKfx8dRfbbGtdzS9BQG1FkBX7KQO3
+ hx1etU2ZwAPZ9AOyKPhwiNBH9YHRs7Q0pT+5aCR1LOP/pe9U3lMYcO9VnZDbVpGWfOxF81evNT9
+ s0wkwIOaMV0tOax67akwgurEr7QLV7aZt674/
+X-Google-Smtp-Source: AGHT+IHWcDEUJtLX8ghGMkFZNDYNit4RHjLhNE0T8JIVuD6aw4h2wdZIBQTt+XO9UQR1K/bFm/tC/z23vqt1wnTOMQ0=
+X-Received: by 2002:a05:6214:5411:b0:6cb:20b6:f39a with SMTP id
+ 6a1803df08f44-6cb3b5c7d52mr19377816d6.13.1727386421898; Thu, 26 Sep 2024
+ 14:33:41 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240920225101.2008-1-ansuelsmth@gmail.com>
- <20240920225101.2008-9-ansuelsmth@gmail.com>
-In-Reply-To: <20240920225101.2008-9-ansuelsmth@gmail.com>
+ <20240920225101.2008-10-ansuelsmth@gmail.com>
+In-Reply-To: <20240920225101.2008-10-ansuelsmth@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 26 Sep 2024 23:33:26 +0200
-Message-ID: <CAFLszTgGA_D4XvnKj4xoVtO_u38xFu+FQzKannU+kdJtVmYKwg@mail.gmail.com>
-Subject: Re: [PATCH v4 08/11] ubi: implement support for LED activity
+Date: Thu, 26 Sep 2024 23:33:28 +0200
+Message-ID: <CAFLszTjcKKsfVW+QkZ9Z3SKDc0ffbt-XK7zGROWV=JK80qkwnQ@mail.gmail.com>
+Subject: Re: [PATCH v4 09/11] doc: introduce led.rst documentation
 To: Christian Marangi <ansuelsmth@gmail.com>
 Cc: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>, 
  Ramon Fried <rfried.dev@gmail.com>, Michal Simek <michal.simek@amd.com>, 
@@ -110,13 +110,17 @@ X-Virus-Status: Clean
 
 On Sat, 21 Sept 2024 at 00:52, Christian Marangi <ansuelsmth@gmail.com> wrote:
 >
-> Implement support for LED activity. If the feature is enabled,
-> make the defined ACTIVITY LED to signal ubi write operation.
+> Introduce simple led.rst documentation to document all the additional
+> Kconfig and the current limitation of LED_BLINK and GPIO software blink.
+>
+> Also add missing definition for sw_blink in led_uc_plat struct.
 >
 > Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 > ---
->  cmd/ubi.c | 13 +++++++++++--
->  1 file changed, 11 insertions(+), 2 deletions(-)
->
+>  doc/api/index.rst |  1 +
+>  doc/api/led.rst   | 10 ++++++++++
+>  include/led.h     | 41 +++++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 52 insertions(+)
+>  create mode 100644 doc/api/led.rst
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
