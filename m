@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5158CCDE03F
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 22:43:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83B71CDE03E
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 22:43:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BFA1988FE2;
-	Fri, 27 Sep 2024 00:42:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 30B6588F9B;
+	Fri, 27 Sep 2024 00:43:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="X8b521aI";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="M8ZBdB/x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71ACE88F9B; Fri, 27 Sep 2024 00:42:56 +0200 (CEST)
-Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
- [IPv6:2607:f8b0:4864:20::82b])
+ id B8FD488FE0; Fri, 27 Sep 2024 00:43:05 +0200 (CEST)
+Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
+ [IPv6:2607:f8b0:4864:20::832])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C15D889AA
- for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 00:42:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ADCB287B77
+ for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 00:43:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qt1-x82b.google.com with SMTP id
- d75a77b69052e-45aeed46f5eso6707761cf.3
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 15:42:54 -0700 (PDT)
+Received: by mail-qt1-x832.google.com with SMTP id
+ d75a77b69052e-458366791aaso8332801cf.1
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 15:43:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727390573; x=1727995373; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727390582; x=1727995382; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FEzsHDcxeOIs29JdDFKKZCHsR6B0CDfy/ct1oRnnm5Y=;
- b=X8b521aIk0Iy2eXolviIPiWTNg/me5g2hiV/AAi+zR0ELXzTMDlVmpY6hahUc74BTp
- n4p//65yT+2iqIjSXEk6m2JK11oEi8DSCsuk3lnWsN+Ho/mQqaEhiqZYJRbQ2RzrH4N6
- 0tqmhPMkFN6HSs0RMMOdtrsr/0uahEv3aRKq4=
+ bh=ZiLjMtLPhGqbinSBSP/b2U4VwNho2J+ttezSEqKlDUw=;
+ b=M8ZBdB/xm0g8pdXnIelg8RsMU8xqB1D0RXQpALhjW/c2GZSOCEyFa/bJsezWY3xMzH
+ q9wNjRD7NCkv2OFaZ9AT6B6u7QYbeHSExdda8vIOKQk/ZgykYM8rB6bKaqqv79xzhDIh
+ 1hEBmux0nEvTzlEJmbhJHmEPzFBJ/LPVosO9M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727390573; x=1727995373;
+ d=1e100.net; s=20230601; t=1727390582; x=1727995382;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FEzsHDcxeOIs29JdDFKKZCHsR6B0CDfy/ct1oRnnm5Y=;
- b=rq5wTYV3X0zrqLWNtSb51+G+c8jIAHXer0geIn+qZo/dzy/2XcbwuskzQOF6oVPHja
- Y0092RUW8XtmKrMMa3yOsl05kIGF0M///po3H6zx23VFHQiIxK/EPFT0QRJ7+ZGrpMnH
- BnbOuTBulLop/vnJsnfgN3yuzcSuKh9Cmw9tK7kmLtRlX7KupKUJILV1SK7Gh+ZxH471
- TLLUfuuSLqSLyU34bGMJxcabQK1r7X9FsGf97lt62mDtmo3/0bqfCq3xf7AS+5OvqPkP
- TW+tT3g/fRfmkvfulcrpQxDueF8bL/No56/rHo2PUD8Vfk7J0444iyo/jadUd8hWrj4a
- jw1A==
-X-Gm-Message-State: AOJu0YzkM4692BbvJnMGv9tzvWo6RXZF7xJ8cnIJWEexDz4mR/71BB6P
- 1Ei0ms0KnGQqo0AwTGhx/gQFBIwPHBLFVdEDx5OQxi8W5HEfDVeJgM6khwMo3I76woxD4KQQ+M9
- rXoPo7O0=
-X-Google-Smtp-Source: AGHT+IE/ECFvqp25ZBchOXUhE1bW7BhXtJoNC3bMDtFdlZi0fJPKNHwvGw/zgQJI71CxfSC8kgL1Hw==
-X-Received: by 2002:ac8:5856:0:b0:458:5716:fbd8 with SMTP id
- d75a77b69052e-45c9f20d1ebmr14709981cf.32.1727390573195; 
- Thu, 26 Sep 2024 15:42:53 -0700 (PDT)
+ bh=ZiLjMtLPhGqbinSBSP/b2U4VwNho2J+ttezSEqKlDUw=;
+ b=gRsBc344C91rO9/i7rrgB8BfFiddFTSCxBYZn0HTlzU09JpsJVja5uVxa1QW544U2u
+ qdZhFbGPbCKwdqScDHuRe8r5B0b8QqGXJ5C/I7wDe6Gx6Kbjk9Bn60MQpIA4Lp99egi6
+ EIGpGdAaewBndq7av6MiHhttGdZI5gva3cIZIUsnIPx2j5K8lcrzrSiSiE3Au23kKgQr
+ ptPcRjN2mg6BqT/WmCnPkAufz8riNLSPAmmY3QrQ8+fjIhPxAHN0PevDl2JNhggUwfxW
+ Umc9NC99U4uUZUTNEVILbjNpQ7HdvYL4r7pz4/MmgdJsjbe7PJpF/b3ddvRLJiaab/iW
+ Oe2g==
+X-Gm-Message-State: AOJu0YxNshGBLZCX1w3QGiFWq3kdq380M89XHgcXGA8PMCZuQBf6IowF
+ FpcQejKjID9MSkh1hzgwktyzjhMoy+TqxorxMz/5XT8zofig5VTkORLcsrPLoP2h0nqw4awZh0p
+ FyqhEszw=
+X-Google-Smtp-Source: AGHT+IFiHS0N6uc6RFxsWV5HE7PAGRgzAfE1qjyeXrgPPnOQ8T0NhX7m4QzE5utBY0w1rpby46yiFg==
+X-Received: by 2002:ac8:7f8c:0:b0:458:5bb4:7751 with SMTP id
+ d75a77b69052e-45c9f1e7c03mr15837361cf.13.1727390582521; 
+ Thu, 26 Sep 2024 15:43:02 -0700 (PDT)
 Received: from chromium.org ([205.220.129.31])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-45c9f350fadsm2738461cf.80.2024.09.26.15.42.43
+ d75a77b69052e-45c9f350fadsm2738461cf.80.2024.09.26.15.42.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Sep 2024 15:42:52 -0700 (PDT)
+ Thu, 26 Sep 2024 15:43:02 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
- Jonas Karlman <jonas@kwiboo.se>, Marek Vasut <marex@denx.de>,
- Pavel Herrmann <morpheus.ibis@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Subject: [PATCH 20/42] dm: Simplify check for SPL
-Date: Fri, 27 Sep 2024 00:35:45 +0200
-Message-ID: <20240926223814.1276764-21-sjg@chromium.org>
+ Devarsh Thakkar <devarsht@ti.com>, Kever Yang <kever.yang@rock-chips.com>,
+ Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>
+Subject: [PATCH 21/42] spl: Simplify check for SPL
+Date: Fri, 27 Sep 2024 00:35:46 +0200
+Message-ID: <20240926223814.1276764-22-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240926223814.1276764-1-sjg@chromium.org>
 References: <20240926223814.1276764-1-sjg@chromium.org>
@@ -99,22 +98,40 @@ checks for SPL.
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- drivers/core/ofnode.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ include/spl.h | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
-index 129b34a5cd2..1ea6dd0e58a 100644
---- a/drivers/core/ofnode.c
-+++ b/drivers/core/ofnode.c
-@@ -1468,7 +1468,7 @@ int ofnode_read_simple_size_cells(ofnode node)
- 
- bool ofnode_pre_reloc(ofnode node)
- {
--#if defined(CONFIG_XPL_BUILD) || defined(CONFIG_TPL_BUILD)
-+#if defined(CONFIG_XPL_BUILD)
- 	/* for SPL and TPL the remaining nodes after the fdtgrep 1st pass
- 	 * had property bootph-all or bootph-pre-sram/bootph-pre-ram.
- 	 * They are removed in final dtb (fdtgrep 2nd pass)
+diff --git a/include/spl.h b/include/spl.h
+index dd9aeeaf9cc..415d198da56 100644
+--- a/include/spl.h
++++ b/include/spl.h
+@@ -90,7 +90,7 @@ enum u_boot_phase {
+  *
+  * To include code only in SPL, you might do:
+  *
+- *    #if defined(CONFIG_XPL_BUILD) && !defined(CONFIG_TPL_BUILD)
++ *    #if defined(CONFIG_SPL_BUILD)
+  *    ...
+  *    #endif
+  *
+@@ -120,7 +120,7 @@ static inline enum u_boot_phase spl_phase(void)
+ 	return PHASE_TPL;
+ #elif defined(CONFIG_VPL_BUILD)
+ 	return PHASE_VPL;
+-#elif defined(CONFIG_XPL_BUILD)
++#elif defined(CONFIG_SPL_BUILD)
+ 	return PHASE_SPL;
+ #else
+ 	DECLARE_GLOBAL_DATA_PTR;
+@@ -154,7 +154,7 @@ static inline enum u_boot_phase spl_prev_phase(void)
+ 	return PHASE_NONE;
+ #elif defined(CONFIG_VPL_BUILD)
+ 	return PHASE_TPL;	/* VPL requires TPL */
+-#elif defined(CONFIG_XPL_BUILD)
++#elif defined(CONFIG_SPL_BUILD)
+ 	return IS_ENABLED(CONFIG_VPL) ? PHASE_VPL :
+ 		IS_ENABLED(CONFIG_TPL) ? PHASE_TPL :
+ 		PHASE_NONE;
 -- 
 2.43.0
 
