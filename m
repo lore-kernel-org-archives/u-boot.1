@@ -4,204 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 919E6CCF9E9
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 06:02:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06D1ACCF9E9
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 07:12:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE14D88CC2;
-	Thu, 26 Sep 2024 08:02:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
+	by phobos.denx.de (Postfix) with ESMTP id 7170E8857C;
+	Thu, 26 Sep 2024 09:12:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="X7+fou/+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vApv8pKc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 352FD88418; Thu, 26 Sep 2024 08:02:30 +0200 (CEST)
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.14])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 9935888CB9; Thu, 26 Sep 2024 09:12:30 +0200 (CEST)
+Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
+ [IPv6:2a00:1450:4864:20::22c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6A09C88BD2
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 08:02:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 060AF884DB
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 09:12:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=intel.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tien.fong.chee@intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1727330545; x=1758866545;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-transfer-encoding:mime-version;
- bh=FpouWx1VKmNLcWqk3nFW5+uFFa7TphyS+5ANEYCucW8=;
- b=X7+fou/+aWM24OWJVn0EAoIAy7Sl+eDT9iAEhYk2e6xMgz/QOea1v7Xw
- Nww51zX/kbeErO75//SQmtqsU52gnYL6fYfe/Go9s5UwsAAyaeFQP6XVx
- /Lr2SkM+n11zBYAzgwdkPwKJ9PjxDeW4+BXvHkzDi7ZGc/BODZQVeIigF
- 3LRxcm5PNHtQBuU9dGsJoY8toAngfv30NVgzms8tFDwYHDAQjJq3RhZsO
- PQ/1rUUR8Y2vSDqDCuDA5Np+MZgFGeGmYlx761ubhP+pdanO1ZyG/Jn4s
- uGMY0KJBLE+252Mh3HiRH9Nu0jzqhOVHkqTUSxPU+30NWoctu2m+GF1eQ Q==;
-X-CSE-ConnectionGUID: CjB4iJW6SnSc5KRX9J3+oA==
-X-CSE-MsgGUID: t087AAA+RjGzRer6Dw4zgg==
-X-IronPort-AV: E=McAfee;i="6700,10204,11206"; a="26588630"
-X-IronPort-AV: E=Sophos;i="6.10,259,1719903600"; d="scan'208";a="26588630"
-Received: from fmviesa007.fm.intel.com ([10.60.135.147])
- by fmvoesa108.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 25 Sep 2024 23:02:20 -0700
-X-CSE-ConnectionGUID: gQXo6d9tRBGo2EtuyFdA9g==
-X-CSE-MsgGUID: /sgnE5J2SXy/ETMSLc3/tg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.10,259,1719903600"; d="scan'208";a="71686989"
-Received: from fmsmsx602.amr.corp.intel.com ([10.18.126.82])
- by fmviesa007.fm.intel.com with ESMTP/TLS/AES256-GCM-SHA384;
- 25 Sep 2024 23:02:20 -0700
-Received: from fmsmsx610.amr.corp.intel.com (10.18.126.90) by
- fmsmsx602.amr.corp.intel.com (10.18.126.82) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Wed, 25 Sep 2024 23:02:19 -0700
-Received: from fmsmsx612.amr.corp.intel.com (10.18.126.92) by
- fmsmsx610.amr.corp.intel.com (10.18.126.90) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Wed, 25 Sep 2024 23:02:19 -0700
-Received: from fmsedg602.ED.cps.intel.com (10.1.192.136) by
- fmsmsx612.amr.corp.intel.com (10.18.126.92) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39 via Frontend Transport; Wed, 25 Sep 2024 23:02:19 -0700
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com (104.47.58.168)
- by edgegateway.intel.com (192.55.55.71) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2507.39; Wed, 25 Sep 2024 23:02:19 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=hhKgiUbn/xC4thLPzjBpUv1NH5ChOvC3T5cHiVll4GS6/GA8eQL7QG74OBGBNeWswkrxHh+rkGWdwwjI2zG3/REWp0rq/8CxjGTS+D0q4ndJTS0q2d690MywLe/26mRSlEvTXnRV0j+BvDiSCYFfiJvhtTLe1nQxG9Jg+RmfajbWoje4IEqoVYuVtGicDeKmZmyZBjkwg2Ylv+WqNjL8y+b9Z/MBAivTQozD+P/+yEuKMX5Q7+C3JPkFmm9Ol/vKPzT8I35QmHGNoXyXOjFdOoey/x/tFOLwW9iIyXOY+mNJK34/2NWQWjL99TNOkVIxFHRG9CtE+VZs++S0oUBDAw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=FpouWx1VKmNLcWqk3nFW5+uFFa7TphyS+5ANEYCucW8=;
- b=lYJpRQGa8TA5YcJZMpMU278Z6vzkSIr2lE8k/j1lUVuzFOJMeHqwPKHOThshVEnrX1FWjaOhzBI3u+MnFOQjncI8Nx1kCF400r2f4v2ARZh+EjFr+dmvDTv7dYVuoV5geEJTRmGbWZTUH/Cw14vJT4STLyHVkcmTSQgmoHhxwckmF3jAiuTauOkFJOJsPjrO5LXXiYXYHUTgyhNLEA8OziGwg8X8duMsvLkrYfbiOG+6kxr/Q6hZU3jJ6XYiEMRKdYlghwPCwPUOZdRTZ/bo2aBwnSUFIJaGyBH9rek421l3dPPlNv5ysqR/eBWi7B4TXylxM8agVMTnc5bhO9Fa2A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Received: from CO6PR11MB5585.namprd11.prod.outlook.com (2603:10b6:5:356::23)
- by PH8PR11MB7096.namprd11.prod.outlook.com (2603:10b6:510:214::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7982.26; Thu, 26 Sep
- 2024 06:02:16 +0000
-Received: from CO6PR11MB5585.namprd11.prod.outlook.com
- ([fe80::dc6b:e780:5f06:b8cf]) by CO6PR11MB5585.namprd11.prod.outlook.com
- ([fe80::dc6b:e780:5f06:b8cf%2]) with mapi id 15.20.7982.022; Thu, 26 Sep 2024
- 06:02:16 +0000
-From: "Chee, Tien Fong" <tien.fong.chee@intel.com>
-To: Marek Vasut <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>, "Meng, Tingting"
- <tingting.meng@intel.com>, "Yuslaimi, Alif Zakuan"
- <alif.zakuan.yuslaimi@intel.com>, "Hea, Kok Kiang" <kok.kiang.hea@intel.com>
-Subject: RE: [PATCH v1 04/20] arm: socfpga: agilex5: Add low level
- initialization
-Thread-Topic: [PATCH v1 04/20] arm: socfpga: agilex5: Add low level
- initialization
-Thread-Index: AQHbCysxcBsr3IIvwUKhOtjjWPaLTLJiQ8QAgAQDArCAAQMWAIAAt5tAgAB7MwCAARslgA==
-Date: Thu, 26 Sep 2024 06:02:15 +0000
-Message-ID: <CO6PR11MB55854FEA82DE5B61948975F2D26A2@CO6PR11MB5585.namprd11.prod.outlook.com>
-References: <20240920070242.20884-1-tien.fong.chee@intel.com>
- <20240920070242.20884-5-tien.fong.chee@intel.com>
- <9cc437c8-59dc-4e78-82d4-8ef479ca9ba1@denx.de>
- <DM8PR11MB55924FDB9E2C081EE97216CCD2682@DM8PR11MB5592.namprd11.prod.outlook.com>
- <19445387-1b9a-45e9-84f2-c6de0487ce34@denx.de>
- <DM8PR11MB559230887920D1150E8F9591D2692@DM8PR11MB5592.namprd11.prod.outlook.com>
- <3aa8bf84-ea2e-4485-8a2d-e1af9d483c98@denx.de>
-In-Reply-To: <3aa8bf84-ea2e-4485-8a2d-e1af9d483c98@denx.de>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=intel.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: CO6PR11MB5585:EE_|PH8PR11MB7096:EE_
-x-ms-office365-filtering-correlation-id: 06ae3065-f4e4-4e28-3564-08dcddf0c5ca
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|376014|1800799024|366016|38070700018;
-x-microsoft-antispam-message-info: =?utf-8?B?ekxOQm94M05vMG43VjVMN1VTZHFaNzY3aUI0Tm9zNGEvU3YyL2dUTkQxQ1FW?=
- =?utf-8?B?U3JSRnU5YnN1ZDFBU0g2U1Z6SjNiZGd2UGp1U0pyYWV2UzBQclZzV2ZkdkpU?=
- =?utf-8?B?TE9ZcGhpa0xTVmtQTDB5cTJLckd1dyt1Q0ttWkJ2UjJhRnZFWWZjUzlXa2VF?=
- =?utf-8?B?dVM1ZEJnM3UxWHVIUEMvZFNKRXlQVlVWYy9nbmQ0MTI5SHR5S1I3Y1FZdVRS?=
- =?utf-8?B?cUl1SXdxQTFEVWJwK3FtUEkyem9qU1piNXVBbFh3K1lidlVFVFVJYlZIbEdo?=
- =?utf-8?B?R200TDhpT2tWVXkwQjVUWFZLVnEvbGNKWit5RHd3RnpZSFNqQTRoRHBnR3po?=
- =?utf-8?B?WCtQSUROWGhyNE1CN2Npa3RSMmd0ZVJOWXNpYmFrTFhrRGNVVUpycUdvNS9o?=
- =?utf-8?B?TTlNSVlSZ3M1YjlIeDRSYUI4R05yTHAxQUk5Nm91Y1ZDN1p6WkFJb1c0K0th?=
- =?utf-8?B?UmRPRFk5RVZzQjB3aFU0TWQ5ZUl5ODRMNTYvUWcvY0toU2krQ1V2QklQWWU4?=
- =?utf-8?B?SXdvZVlpbjJrSFFZTHgrSWJ2eWwrMmJTKzhRdDdmRU1naERJUlA4UkU5MTBK?=
- =?utf-8?B?M3MyNWIzay8ySEFpbHlwWmppUElTc01Lc1RzczU3Z1YxR1lPNzR0elRpVTJK?=
- =?utf-8?B?NklQZ2U3cFRMWWI0OXdVY1pqUis5RmcvTWtWQnFTa05CeEhVQjZKaE9wR0NG?=
- =?utf-8?B?Z0JSS3VvU1JBQmh2U2MrNklQNGNXbkJ6b3VyVmpVWWFtbElyN0xYZkZDdGlp?=
- =?utf-8?B?Z3pUWHNIekhGQnN2bjhneGJ0N1Vsc0tKemJIeUVLZ09sV3pEUTRNb3RqMVYr?=
- =?utf-8?B?dUNERXZXUnIvb0VVVUViR0JiUTVOdGtBZldCZVVHcmZuSllhcUZKZ1hPOWti?=
- =?utf-8?B?akd0eEk5RHBINmVzNmNLTEdmanh3cFFCVXdvclU0ZHlqeW51TDFTRC9OSTIw?=
- =?utf-8?B?T1NXbHhERlhuODdNVURvaGowdTJiZWo2KzZySDVQSVJ5S2dKb20xSmE2SERy?=
- =?utf-8?B?NmppL3liaWEwTU5WdVlzelAyZzdMcTJ1SVFsMXlSYWtRYXhsNXFPeXBLcWUw?=
- =?utf-8?B?TXFNOUxqSVVrOU9rbDA5Zzc5b2FXTEZVdmhVZElwVldLdnZmYWM5cEgzbDJB?=
- =?utf-8?B?NjZLTkZNTGRpMWtlVFJxMDAxaXNXWEZ4cFY4YnZ0MkIrRVpMMUs4R3M0YjlZ?=
- =?utf-8?B?S29WM2hUSmRRSXFlek1VRno2a2JDai9vNSsweXE3UUhlTWNLN3Z2bVNDTjBN?=
- =?utf-8?B?MUxPeEp1MzRRVSttVXhhL0xSN29QZi9ZRW9iRnY1eWxFbzVrSTgxaTJueE5a?=
- =?utf-8?B?NC9kNmxkRnVEMU4zNXZucUFuOVgyY1FWbUFxWWxxMWRnZ2xRbTdmME4xdHBo?=
- =?utf-8?B?SE41SThPRW1uNW5NVGw3cC9XZW5BL0I3K3JpYU5MRDV1UUVCWXpiNEozM24y?=
- =?utf-8?B?WFJ5aWdZQzV0ZFpHZkJMSG5rcUNSTXJUcHBtcWttLzh0dmNVcFpFckxnQTIw?=
- =?utf-8?B?Y2czUm1xcm9SRklIcHNEZEpMVWRhNk5PREhTVFd5TjArM3VnWmwzbCt5MHRY?=
- =?utf-8?B?aVJ2YmJqWjAxRDZLZTR4R0k2V3h4UGYxRDV1TzJsQkhDU3JoVWxGU1Znd2to?=
- =?utf-8?B?eFBYSXF3anpLUU52NXFSckQ4SzNnSXhBaTZpcElNMzRpek92QU9TakhYeE1l?=
- =?utf-8?B?ekhtdG50MWwwNy9tRlF0TnVBRjVaZDVJQS9HdVhCN0J5K1dqTzVZNERzOFBh?=
- =?utf-8?B?b2tFUGRBOGZ5UGtaVksvL3dCVEdNVkZjVlB2WUZyeEVWNDdYSGUyNmppa05q?=
- =?utf-8?B?NDFjYVFTTHh2cWpOV3lHZz09?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CO6PR11MB5585.namprd11.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(38070700018); DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?Y0lJZEEzVFFCaEZtc3lkcUgxbmp0TzVYdC9ReExLdU52OEdWbGJyejNhQW5H?=
- =?utf-8?B?ODNQdzlWenI2Y1pXYnM5TUx1TytwTnhPTVlWVkMxN1pEaTAvRmg1ekQ4b1hm?=
- =?utf-8?B?SU9VQVVXUE51N0c0VFBzYm1mWnEzVEFsYnNVNHBWYlNjZTFHTytJdHoveFhL?=
- =?utf-8?B?MDN4b1c1dnFRUDZoaVNseTZoK3FqSW5SazB1YmxONUJyd1QydE14YmF1MFJY?=
- =?utf-8?B?dXI1OW81NDRONEZxT3hiQmdmSDF1TFBKM1JxZjVQNDZkaktQbWlRMGQxY1BT?=
- =?utf-8?B?UGg0bVg3QVc4V0NLNjkvYTh6azJwT3MyemJWbXNjek8xcmtSdzNNbWpaQ0Mx?=
- =?utf-8?B?aEtYdVFmam96Y3YxVHd3Q1l4SThHZ3VKQVB5a2ZVSjVHZUU5T2N6OEZ5YzdW?=
- =?utf-8?B?ZCs0ekY5SXNwTjFydTh3aGdWY3BOeHo3MXdkM0tDdmxFcXVLRDJTVk9OTHRp?=
- =?utf-8?B?SFFTKzNnK3JZTE10T2Y3cjRsWjRHZkRucEtwSDEzUEluVlZmOXpFWVJNaktT?=
- =?utf-8?B?SjFPekNwYUpvOG4xWWE4dzRXNnF6UFJRSkMyY2lPVUhLYkRZdEk4Y0kvTFlI?=
- =?utf-8?B?b1dBKzhNdW5nVmNYcFlWdGR2N0o2NU1weGFXQ0RtQWVVQ2hmUThiOWp2WVFS?=
- =?utf-8?B?K2NrWmxURzhWNVV6b2lqbi9zQk1HQ2RVMXJ3MUllc2YvSHJvaGVyZG81cVll?=
- =?utf-8?B?cmNhTU4xbzc5SGxSYTNDVUx0RVdRWWpEcjJVUXNjN0JWZ0RhOW9yMDJQUVVK?=
- =?utf-8?B?WFJJT1dXOWlxdnFCYkhiNThuZEk0eGU4RUEwTkZoU0w0Q1hWNzJBaDlIOGNy?=
- =?utf-8?B?Q3Z1YlZmYjl2UXVJUXd3S3FzQndRbzA1eE9qRlRreDBycEI1QS9sK3dPWUdl?=
- =?utf-8?B?ODdMZXVSM1d2VndFV2F4Znp1RkdRdGJzenEyMW9OOFBQVkJMZHJ5YXNHWWR5?=
- =?utf-8?B?dUErR2Z6ZWVGeTJNQlNBSE83dWlCRTlWRHYxRk9NWndZb3VwYlZxSyttZGs2?=
- =?utf-8?B?OGswT3crNlY2TW1XNTdmdEMyNnZKZVZKY2hkTlE0YmxrSzZPL1IrMXhWbEJr?=
- =?utf-8?B?cUVJTHIwWU5QTnhtejVmdHdLUWY3aGlUcVpXVGJHaW1vOFpwRmYra3ZuWWN3?=
- =?utf-8?B?T0tOZmJrKy9oTWVzU0FhWlpYaU4zSjVEU1BPVHozcG9YK3ZGbXgwTlNZN0N5?=
- =?utf-8?B?UDAzRDhtMEE5VjgyZnR2eXRNaURFSnhOakx3UkVwR09WZktKbmoxbW84V0Js?=
- =?utf-8?B?Vm9ybWdZMW43ZmRWKzFFRXIrWmxGUFZsaGFyU3JQRVR2SGNzbjhSczI3K3cy?=
- =?utf-8?B?VU5tQ1RIVW1WUTlRZk1FajZCOFE0TlppeDFpcUhhejZUbE51L0ZjRGVpTUo3?=
- =?utf-8?B?cW1FSHB2UUdXeURmUkVvRU04STBDMXBjRFFNWm1MS2w4dDBzWXN0STJtWnBL?=
- =?utf-8?B?Y2ZzTjFNZVZ4dmVzS1RzL3A3R2FMNDlTZ05TR2p1d0taMlo0dk1kaWJxVitr?=
- =?utf-8?B?b1p3aDN4aUV3b2pZSlRsK0dCZWltMjJRM2djeUc1SGFEY3hqRWVGTVdQUmRt?=
- =?utf-8?B?d1M1ZkUweE9qQ3FFRGFPVERxVTNoLzVEbDdCRDVNQmZITjIzc2FGaEdxRWRo?=
- =?utf-8?B?dkRwQnpxZDNMT2ZNbGJjc01zTDJUdFAyUFN0QVZIVkdmcm8wVlM4VWVtckNJ?=
- =?utf-8?B?STI0ZmkrM2J0bnlpcVR6aFRHVlEyZnJPcEc2WlRsTTZMRjQ1cGhPUndtOEty?=
- =?utf-8?B?Sk82R1YrdWY3Y0dGVjV0QjRnV0FFQmtYTjVWRkt1YUFLVE5EeklJNmNGdlNB?=
- =?utf-8?B?WUgvdG5UU2NkclZ4blNkekVJOXprdnlDL1lON2xIelpuRnlXWnV4c1RQZWw2?=
- =?utf-8?B?SGpuUTVWbGpOS29Dd0UrTEZQaXptY0xOKzJwYU5EOVFBekNXZjg5TmpyNUxx?=
- =?utf-8?B?bDVnb3JHYkQ3cWMvNXQ0TjdGQmRNbFdrWnR3SDJRVHc3OHJhWGlaWTVrajBG?=
- =?utf-8?B?VURXRWxZd21sWXd5UUZIQWVJcmJhSG9ab0tiZm1WWlJmU1A5M1g1ekNkS0lX?=
- =?utf-8?B?K28yelYxSlNuZ2UzRzd0blZ6WUxZTnM1dW51a3FtWS9jRmhFQ0toTVB2YjhL?=
- =?utf-8?Q?OlK5UYXtdG0tjAGx2839R87WH?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-lj1-x22c.google.com with SMTP id
+ 38308e7fff4ca-2f754d4a6e4so6874691fa.3
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 00:12:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1727334746; x=1727939546; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=KeSRZJnq19jZB2fpb8btbH76oiO+wC9AEzsh8wTV1bk=;
+ b=vApv8pKciIA7ncB0jM+E9MsDCGPoqO/lgByj6D47+bbZ3SwljVxDCtvFO9Ck9PTsw4
+ A2ZHZLrCNUx9YqzK0SOQS3NvyhwNgZ/V93vaFhxBUhrJI7B7eTHD1KoXsbnxHSSe19Nv
+ hVpdp1jAT2DFfi/SZqnyxSW2OkVkWK6HPIWnehdy/z9CqlH3HNrWm+j8s6wxvoNtAAkR
+ QuH5TbdEWLgUp/TB5asr4zxy4IGkolpTKX8kica5Vu00bM8+9ASQqORQVbS85lwjexHW
+ 7BaB0clIAVwsa3Aho+RJ6mQGmHhRMDvq/lTlKN+xTvhZFSyU9hQXA68aWPIAMppeSfTb
+ CeJQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727334746; x=1727939546;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=KeSRZJnq19jZB2fpb8btbH76oiO+wC9AEzsh8wTV1bk=;
+ b=aWNc6Fw09k76jYUIaKBKhyNjnTzQpTBN6B+9oCh8W9OuqLRQxssaBfflka2HpmOPm+
+ FKEkqznvvzuIhKRfddUmN6hPy3xCnpFYZxmhjSPcOsaViFRD+ENbE8IR8C16rb/wMKL8
+ /1Ub5lq9Q0EpS+1P+o2PvSS+BIcGZZPBs4kXbtoKIsDBQxa1lQhv3ZJrVpstVifn18M5
+ 4XAkGdDKS7f+4MugyE9GsDrEcxtFxYMZqje8X5xmO495jsRhjf7BP2+E9n+qLO5Gvy7n
+ HoiFQvbTWfAZg+HeEyUHOPODZeR+6mtALZ/8v4UrhvVKexjZhtIClfeDzBnBJ2Lmu+Tz
+ 6imw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXEM6ZP2cU+PX8LRkHGCU1V8PHHb/l/IyFTqUFulwxqO0s0nYlYsGPP/NPh9zsmbO/Z8wkYq88=@lists.denx.de
+X-Gm-Message-State: AOJu0YxnDvjlqJrUGv1uKcHe8jxMe6s4emPECKzUxeR9SA2zdi29zSQF
+ TL39Vinlj+KpVP2V+0g23jVrIRepBN1RI8WhH1IAjrNsWyr2F7SawTZm9Q+ws0oPOuCLnlUcttv
+ C4m+O+jcvmmrbSIDrwycocRdDFCvPiqPVi5Nn8g==
+X-Google-Smtp-Source: AGHT+IFnaizA3Y1o9l/Pvu57JmfG7sKBMSmh/D566wPqoI+uqrSln79hYtz5D7BRJSHt8Qb6zrYYT50rcyXw+aUlCcY=
+X-Received: by 2002:a2e:4a0a:0:b0:2ef:1784:a20 with SMTP id
+ 38308e7fff4ca-2f91ca68786mr26339011fa.38.1727334746071; Thu, 26 Sep 2024
+ 00:12:26 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: CO6PR11MB5585.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 06ae3065-f4e4-4e28-3564-08dcddf0c5ca
-X-MS-Exchange-CrossTenant-originalarrivaltime: 26 Sep 2024 06:02:15.9429 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: P57vz0APXBRg+ylSba0Ppc3tJzcPO86EEXZy8Gq1DIGyNRYNsWLGrWuFVB7MxMvB7jgUtOgl8OD/GuSBLgKqDTOUAm2RmkNrBItpNILmXO8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR11MB7096
-X-OriginatorOrg: intel.com
+References: <20240905082811.1585467-1-sughosh.ganu@linaro.org>
+ <20240905082811.1585467-5-sughosh.ganu@linaro.org>
+ <0291efc6-86a2-437c-938a-707c46c34f91@gmx.de>
+ <CADg8p94TakJXkLs=m6RbvO2T_OmYagf68e4JV655TtQ5DnxtZg@mail.gmail.com>
+ <CAC_iWjKFh+g1k=HHKeApJp8OO5G78p0kruz59UUX-yfZcynJyg@mail.gmail.com>
+ <CADg8p96-kG4jEd5d_7ah3s2kOzgW4_uvDOJL+wOSzdrDjoMqZg@mail.gmail.com>
+ <CAFLszTjD5vLpcu7+_9xuzynLMjim3oPpg2wewug3-6nMs2CHug@mail.gmail.com>
+In-Reply-To: <CAFLszTjD5vLpcu7+_9xuzynLMjim3oPpg2wewug3-6nMs2CHug@mail.gmail.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Thu, 26 Sep 2024 12:42:14 +0530
+Message-ID: <CADg8p94_8znKCR=97kCj-ypMdqW59k7PbC42G-xGFr7t9+t9XQ@mail.gmail.com>
+Subject: Re: [PATCH 04/16] event: add event to notify lmb memory map changes
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -218,30 +96,140 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGksDQoNCj4gPj4gYXJjaC9hcm0vY3B1L2FybXY3L2xvd2xldmVsX2luaXQuUzoucHVzaHNlY3Rp
-b24gLnRleHQuc19pbml0LCAiYXgiDQo+ID4+IGFyY2gvYXJtL2NwdS9hcm12Ny9sb3dsZXZlbF9p
-bml0LlM6V0VBSyhzX2luaXQpDQo+ID4+IGFyY2gvYXJtL2NwdS9hcm12Ny9sb3dsZXZlbF9pbml0
-LlM6RU5EUFJPQyhzX2luaXQpDQo+ID4+IGFyY2gvYXJtL2NwdS9hcm12Ny9sb3dsZXZlbF9pbml0
-LlM6ICAgICBibCAgICAgIHNfaW5pdA0KPiA+Pg0KPiA+PiBNYXliZSBzdWNoIGEgZGVmYXVsdCBs
-b3dsZXZlbF9pbml0IGZvciBhcm12OCBjb3VsZCBhbHNvIGhhdmUgYW4gc19pbml0ID8NCj4gPj4N
-Cj4gPj4+IFdoYXQncyBjb25jZXJuIHdpdGggbG93bGV2ZWxfaW5pdCgpPyBJdCdzIGFsc28gd2ly
-ZWQgaW50byBleGlzdGluZw0KPiA+Pj4gZWFybHkgaG9vayBmdW5jdGlvbiB3aGljaCdzIGxvY2F0
-ZWQgaW5zaWRlIHN0YXJ0LlMNCj4gPj4gSSB3b3VsZCBsaWtlIHRvIGF2b2lkIGR1cGxpY2F0aW5n
-IGxvd2xldmVsX2luaXQgZnVuY3Rpb25hbGl0eSBhcyBtdWNoDQo+ID4+IGFzIHBvc3NpYmxlICwg
-Y29tbW9uIGxvd2xldmVsX2luaXQgd291bGQgYmUgdmVyeSB3ZWxjb21lIC4NCj4gPg0KPiA+IFN1
-cmUsIEkgY2FuIGFkZCB0aGUgc19pbml0IHRvIGNvbW1vbiBsb3dsZXZlbF9pbml0IGFuZCBtb3Zp
-bmcgdGhlIGNvZGVzIHRvDQo+IHNfaW5pdC4NCj4gVGhhbmtzLiBUaGVuIHRoZSBxdWVzdGlvbiBp
-cywgaG93IG11Y2ggb2YgdGhpcyBzdHVmZiBjYW4gYmUgcmVtb3ZlZA0KPiBiZWNhdXNlIGl0IGlz
-IHBhcnQgb2YgZ2VuZXJpYyBsb3dsZXZlbF9pbml0LCBJIGhvcGUgYSBsb3QuDQoNCkknbSBub3Qg
-c3VyZSBJIGNvbXBsZXRlbHkgdW5kZXJzdGFuZCB5b3VyIHF1ZXN0aW9uLCBidXQgSSBjYW4gc2hh
-cmUgd2hhdCB3ZSdyZSBnb2luZyB0byBkby4NCkRlY2xhcmluZyBhIHdlYWsgc19pbml0IGZ1bmN0
-aW9uIGF0IGxvd2xldmVsX2luaXQuUw0KDQoucHVzaHNlY3Rpb24gLnRleHQuc19pbml0LCAiYXgi
-DQpXRUFLKHNfaW5pdCkNCglieAlscg0KRU5EUFJPQyhzX2luaXQpDQoucG9wc2VjdGlvbg0KDQpD
-YWxsaW5nIHNfaW5pdCBiZWZvcmUgbG93bGV2ZWxfaW5pdCByZXR1cm5lZCB0byBwYXJlbnQgY2Fs
-bA0KICAgICAgICAgICAgICBbLi4uXQ0KCWJsIHNfaW5pdA0KCW1vdmUgbHIsIHgyOQ0KICAgICAg
-ICAgICAgICByZXQNCg0KV2Ugd2lsbCBtb3ZlIHRoZSBjb2RlcyB0byBzX2luaXQgd2hpY2ggaXMg
-ZGVjbGFyZWQgaW4gb3VyIHBsYXRmb3JtIGRyaXZlciwgYXJjaC9hcm0vbWFjaC1zb2NmcGdhIC4N
-Cg0KVGhlIGNvZGVzIGlzIG5lZWRlZCB0byBiYWNrdXAgdGhlIGRhdGEgc2VjdGlvbiBhcyBlYXJs
-aWVyIGFzIHBvc3NpYmxlIHRvIHN1cHBvcnQNCndhcm0gcmVzZXQgLyB3YXRjaGRvZyBkdWUgdG8g
-d2FybSByZXNldCB1c2UgY2FzZSwgd2hlcmUgcmVsb2FkaW5nIFNQTCB3b3VsZCBiZSBza2lwcGVk
-IGFmdGVyIHJlc2V0Lg0KDQpUaGFua3MuDQoNClJlZ2FyZHMsDQpUaWVuIEZvbmcNCg0K
+On Wed, 25 Sept 2024 at 18:23, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Sughosh,
+>
+> On Fri, 20 Sept 2024 at 13:38, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> >
+> > On Fri, 20 Sept 2024 at 14:51, Ilias Apalodimas
+> > <ilias.apalodimas@linaro.org> wrote:
+> > >
+> > > Hi Sughosh,
+> > >
+> > > On Tue, 17 Sept 2024 at 15:33, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > > >
+> > > > On Sat, 14 Sept 2024 at 20:38, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> > > > >
+> > > > > On 9/5/24 10:27, Sughosh Ganu wrote:
+> > > > > > Add an event which would be used for notifying changes in the
+> > > > > > LMB modules' memory map. This is to be used for having a
+> > > > > > synchronous view of the memory that is currently in use, and that is
+> > > > > > available for allocations.
+> > > > >
+> > > > > The synchronous view problem only exists because we are duplicating
+> > > > > data. Store the EFI memory type in LMB and the problem vanishes.
+> > > >
+> > > > The LMB module only concerns itself with RAM memory. If I understand
+> > > > correctly, you are proposing maintaining the EFI memory map within the
+> > > > LMB module ? That would mean handling memory types other than
+> > > > conventional memory in LMB.
+> > >
+> > > I am pretty sure I've asked this before, but do these *always* need to
+> > > be in sync?
+> > >
+> > > The efi allocators will call LMB now. So when we allocate something
+> > > gtom EFI, even if any potential changes from LMB haven't been
+> > > published to EFI, we won't have any memory corruptions. Can't we just
+> > > opportunistically update the memory map once someone requests it?
+> >
+> > I have given this a thought. Because what you mention, Simon has a
+> > similar comment. But to achieve this, it would require generating a
+> > new efi memory map afresh every time such a requirement comes up. This
+> > would mean, create a new memory map, put in the conventional memory,
+> > and add other memory types that were part of the existing memory map.
+> > And then remove the older memory map. This would need to be done every
+> > time a memory map is needed to be generated. And that would also
+> > include instances when a user enters a command to get the current
+> > memory map. I think notifying any changes to the lmb memory map to the
+> > efi memory module is easier, and less error prone.
+>
+> We need to get some agreement on my memory-allocation patches first. I
+> don't believe we are on the same page on those, despite some weeks of
+> discussion. We need to resolve that issue first. I did try right from
+> the start to first agree on the problem to be solved. We skipped that,
+> so now we are having to do it now...
+
+These patches are currently under review. But fwiw, I think you are
+aware that these patches are not related to what your patch series is
+attempting. Your patches are related to the efi_allocate_pool()
+function, whereas this series is trying to use LMB as the backend for
+allocating pages, as requested from efi_allocate_pages(). So these are
+not related. But like I said, you are aware of these details :)
+
+-sughosh
+
+>
+> Regards,
+> Simon
+>
+>
+> >
+> > -sughosh
+> >
+> > >
+> > > Thanks
+> > > /Ilias
+> > > >
+> > > > -sughosh
+> > > >
+> > > > >
+> > > > > The event is only needed to notify EFI_EVENT_GROUP_MEMORY_MAP_CHANGE.
+> > > > >
+> > > > > Best regards
+> > > > >
+> > > > > Heinrich
+> > > > >
+> > > > > >
+> > > > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > > > > ---
+> > > > > >   common/event.c  |  2 ++
+> > > > > >   include/event.h | 14 ++++++++++++++
+> > > > > >   2 files changed, 16 insertions(+)
+> > > > > >
+> > > > > > diff --git a/common/event.c b/common/event.c
+> > > > > > index dda569d447..fc8002603c 100644
+> > > > > > --- a/common/event.c
+> > > > > > +++ b/common/event.c
+> > > > > > @@ -48,6 +48,8 @@ const char *const type_name[] = {
+> > > > > >
+> > > > > >       /* main loop events */
+> > > > > >       "main_loop",
+> > > > > > +
+> > > > > > +     "lmb_map_update",
+> > > > > >   };
+> > > > > >
+> > > > > >   _Static_assert(ARRAY_SIZE(type_name) == EVT_COUNT, "event type_name size");
+> > > > > > diff --git a/include/event.h b/include/event.h
+> > > > > > index fb353ad623..fce7e96170 100644
+> > > > > > --- a/include/event.h
+> > > > > > +++ b/include/event.h
+> > > > > > @@ -153,6 +153,14 @@ enum event_t {
+> > > > > >        */
+> > > > > >       EVT_MAIN_LOOP,
+> > > > > >
+> > > > > > +     /**
+> > > > > > +      * @EVT_LMB_MAP_UPDATE:
+> > > > > > +      * This event is triggered on an update to the LMB reserved memory
+> > > > > > +      * region. This can be used to notify about any LMB memory allocation
+> > > > > > +      * or freeing of memory having occurred.
+> > > > > > +      */
+> > > > > > +     EVT_LMB_MAP_UPDATE,
+> > > > > > +
+> > > > > >       /**
+> > > > > >        * @EVT_COUNT:
+> > > > > >        * This constants holds the maximum event number + 1 and is used when
+> > > > > > @@ -203,6 +211,12 @@ union event_data {
+> > > > > >               oftree tree;
+> > > > > >               struct bootm_headers *images;
+> > > > > >       } ft_fixup;
+> > > > > > +
+> > > > > > +     struct event_lmb_map_update {
+> > > > > > +             u64 base;
+> > > > > > +             u64 size;
+> > > > > > +             u8 op;
+> > > > > > +     } lmb_map;
+> > > > > >   };
+> > > > > >
+> > > > > >   /**
+> > > > >
