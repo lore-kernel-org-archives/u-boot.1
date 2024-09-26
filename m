@@ -4,61 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53BAFCDE03D
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 22:20:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 022E6CDE03E
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 22:31:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C99D188F2A;
-	Fri, 27 Sep 2024 00:20:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 42FAF88EE4;
+	Fri, 27 Sep 2024 00:31:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1727389238;
-	bh=qQdtIohOnVZnznPY5RWenU1yzPJ6C2j5fuvXlQvHmcE=;
-	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=fsIoPqwqaLDV+S1sFb8goevwOVy3XjteCWpJLd24h54qr7tdg+I5vny9QUQG7p3LO
-	 FjNntYhVOQyOqIctHKhyxPY1gMJZr/H2ivXgBTOLfLlDz7tuPQWd+ZRXRydwsHWdxo
-	 gKzrZTq0tVPFU61+8f2ZKScewed7OgHMAAOzpOz+LC7gMzbrJod+JgFrqi9xqQpQt6
-	 Ley9VnoMmXlzEbLSz92zlg8vCXqfi9VvxD2rV6F2cRovuHGXjyL+T5YS1Lmfu9qghf
-	 d9+LvHqYn+eZ+UOXYQ1YuSEqpYcJZTu64a9hPw55L1xSDDlJ2wEXX5IeFgEKUWB6YV
-	 hNFhUK0FsZxlA==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="a/PGIinI";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id A493988EE4; Fri, 27 Sep 2024 00:31:20 +0200 (CEST)
+Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
+ [IPv6:2607:f8b0:4864:20::72c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id A0F3888F2A;
- Fri, 27 Sep 2024 00:20:34 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1727389235;
- bh=qQdtIohOnVZnznPY5RWenU1yzPJ6C2j5fuvXlQvHmcE=;
- h=Date:From:Subject:To:Cc:References:In-Reply-To:From;
- b=KvDfGV+Txbxc5HKLiDpMyAenSAhDyurcnSk7STOM03lbdrXcSTxeOj8RDtRbbmDqL
- AUhRjAO+PrRM1I664E3rbyUzwtoPt9QSQ2g11suT27EbyF+HYiT+AGp6y0BT+1e0cy
- 1h7P3lZjCtgena5mElL2YPotOj1xIomGyfGcQxO9mN2QzHGI92+wu0tUdaMsFxWHQY
- UJUFeKCzZP7extMuCjNHJRpPGUHvO+jyv/+xjV17NTHWDzWB+KZdG8mrJsKWWQYPub
- O5+wRiduCu/hXst6hmR921V5emPFZORGKMOpkU7BxQwTPjr+u1Wj5mK8JJw4DfkfhK
- WFS1fBcTVma9Q==
-Message-ID: <25ee832c-5688-4a79-9c34-a2e34ec89a76@denx.de>
-Date: Fri, 27 Sep 2024 00:20:21 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 808B488ECD
+ for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 00:31:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qk1-x72c.google.com with SMTP id
+ af79cd13be357-7acdd65fbceso119985285a.3
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 15:31:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1727389877; x=1727994677; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=xxvWwbKtkXUX7p+oVxlmhMEoMQZ1mWXFT1NL11pr7hg=;
+ b=a/PGIinIKbp4RXp0sk1IPOVEYOKqBIdq0mbKOcS8o/ZTVDRnUzhntaoG5ulvv1Ljyn
+ 2khUGIcZO7Mxven5Q9AoZZhEhadX4I1cpMWDxvaTIo8o0mjwAr00Pfr0MYootrfWJMNU
+ jZx8CvoIpQtSIVo9biz87U4ntPyhcaOPkY4P4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727389877; x=1727994677;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=xxvWwbKtkXUX7p+oVxlmhMEoMQZ1mWXFT1NL11pr7hg=;
+ b=KdcO3XpgGeKOTC/VX4zpW/T761KlKFEnkU0F9YSgTEFlz40CNYwL/5lWBSzPYfiFQk
+ nD5CBjfFdhIJ64hme5fZicjGvi65X5sea1cnH1xn1N0G40Erhv/KtZJqSujdMrLGr/UV
+ I67F0ro9+lB3OVmCmJJGbAEnxLVcQvXyT7fVo8mSzUp6okeh6b1D/YKPsgLBIrizUAbp
+ y2ly5NrtfkiRxNzHkmciwIOiUbWP0z7u+7Ku2VA8WOpF8qmOf6V3S5a0N0sh+OZpsh8c
+ MMqMyWG6TOAd1qAQtFlSHZ12n8+voCFSSP/wpv69fDCoUAvSMXnddx0waNNjtwGNg/dP
+ uXRg==
+X-Gm-Message-State: AOJu0Yw+oWazOw1FfDqTofyGc3xi01WjCABAYw8E7KCMNgxDsnnsAB5b
+ rVzl6YqQ6kD1Gjm0OymMBpBAUO8SVP0h/93/POXrDrvnD/74sNSFUrEVNy9cB0W/VgGLJAAwdiv
+ Ixq8s7JU=
+X-Google-Smtp-Source: AGHT+IEvYH/S9p+vl5/y/Ht4brKRy9eKLijnbbgrG3l0LioTWt/44GjADLoG/3hHJACGQPLC+OIbRw==
+X-Received: by 2002:a05:620a:4693:b0:7ac:b118:9b90 with SMTP id
+ af79cd13be357-7ae37853210mr169582485a.27.1727389877218; 
+ Thu, 26 Sep 2024 15:31:17 -0700 (PDT)
+Received: from chromium.org ([205.220.129.31])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7ae37858436sm30149885a.134.2024.09.26.15.30.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 26 Sep 2024 15:31:16 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Albert Aribaud <albert.u.boot@aribaud.net>,
+ Alexander Gendin <agendin@matrox.com>, Alison Wang <alison.wang@nxp.com>,
+ Andy Fleming <afleming@gmail.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Doug Zobel <douglas.zobel@climate.com>,
+ Etienne Carriere <etienne.carriere@foss.st.com>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Johan Jonker <jbx6244@gmail.com>,
+ Kamil Lulko <kamil.lulko@gmail.com>,
+ =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mario Six <mario.six@gdsys.cc>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Priyanka Jain <priyanka.jain@nxp.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Sean Anderson <sean.anderson@seco.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ This contributor prefers not to receive mails <noreply@example.com>,
+ Wan Yee Lau <wan.yee.lau@intel.com>
+Subject: [PATCH 00/27] led: Remove old status-LED code
+Date: Fri, 27 Sep 2024 00:29:36 +0200
+Message-ID: <20240926223009.1270197-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH 15/15] binman: Make a start on an iMX8 test
-To: Simon Glass <sjg@chromium.org>
-Cc: Lukasz Majewski <lukma@denx.de>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Brandon Maier <brandon.maier@collins.com>,
- Neha Malcom Francis <n-francis@ti.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-References: <20240826191143.426387-16-sjg@chromium.org>
- <20240826191143.426387-1-sjg@chromium.org>
- <CAFLszTg2s_4LKkJP-OAwjdSqpygwhggOmSAkY376UWTk2LGxzQ@mail.gmail.com>
-Content-Language: en-US
-In-Reply-To: <CAFLszTg2s_4LKkJP-OAwjdSqpygwhggOmSAkY376UWTk2LGxzQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,21 +109,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/27/24 12:07 AM, Simon Glass wrote:
-> This patch is for Marek, to provide a starting point.
-> 
-> To try it, use 'binman test -T' and see the missing coverage.
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
->   tools/binman/etype/nxp_imx8mimage.py |  3 ++-
->   tools/binman/ftest.py                |  4 ++++
->   tools/binman/test/339_nxp_imx8.dts   | 17 +++++++++++++++++
->   3 files changed, 23 insertions(+), 1 deletion(-)
->   create mode 100644 tools/binman/test/339_nxp_imx8.dts
-> 
-> Applied to u-boot-dm/next, thanks!
+There has been an LED framework in U-Boot which uses driver model for
+about 9 years now. Recent work is underway to improve it and provide
+more features. It is probably a good time to drop the old code, which
+is only used by 5 boards:
 
-Is this patch really supposed to be applied as-is ?
-The commit message makes it seem like some RFC/Example code.
+   ./tools/qconfig.py -f LED_STATUS
+   5 matches
+   eb_cpu5282 eb_cpu5282_internal mx23_olinuxino pinephone
+   socfpga_vining_fpga
+
+This series attempts that.
+
+
+Simon Glass (27):
+  led: Drop LED_STATUS_BOARD_SPECIFIC
+  arm: Drop old LED support
+  common: doc: Drop old LED support
+  st: stm32f429: Drop old LED code
+  led: Make the LED config common
+  eb_cpu5282: Drop STATUS_LED
+  mx23_olinuxino: Drop STATUS_LED
+  pinephone: Drop STATUS_LED
+  socfpga_vining_fpga: Drop STATUS_LED
+  led: Drop LED_STATUS from Kconfig
+  led: Drop the legacy LED command
+  misc: Drop gpio_led driver
+  pca9551_led: Delete driver
+  misc: status_led: Delete driver
+  m68k: Drop unused status_led.h header file
+  powerpc: Drop status-LED code
+  eb_cpu5282: Drop status-LED code
+  igep00x0: Drop unused status_led.h header file
+  mx23_olinuxino: Drop status-LED code
+  vining_fpga: Drop status-LED code
+  sunxi: Drop status-LED code
+  common: Drop status-LED code in board_r
+  image: Drop unused status_led.h header file
+  ide: Drop unused status_led.h header file
+  mpc83xx: Drop status-LED code
+  net: Drop status-LED code
+  led: Drop status_led header file
+
+ arch/arm/lib/crt0.S                          |   4 -
+ arch/m68k/lib/bootm.c                        |   3 -
+ arch/powerpc/lib/interrupts.c                |   6 -
+ board/BuS/eb_cpu5282/eb_cpu5282.c            |  20 --
+ board/isee/igep00x0/igep00x0.c               |   1 -
+ board/olimex/mx23_olinuxino/mx23_olinuxino.c |   7 -
+ board/softing/vining_fpga/socfpga.c          |   4 -
+ board/st/stm32f429-discovery/Makefile        |   1 -
+ board/st/stm32f429-discovery/led.c           |  39 ---
+ board/sunxi/board.c                          |   6 -
+ boot/image.c                                 |   4 -
+ cmd/Makefile                                 |   1 -
+ cmd/ide.c                                    |   4 -
+ cmd/legacy_led.c                             | 185 ----------
+ common/board_f.c                             |  22 --
+ common/board_r.c                             |  16 -
+ configs/eb_cpu5282_defconfig                 |   6 -
+ configs/eb_cpu5282_internal_defconfig        |   6 -
+ configs/mx23_olinuxino_defconfig             |   8 -
+ configs/pinephone_defconfig                  |   5 -
+ configs/socfpga_vining_fpga_defconfig        |  11 -
+ doc/README.LED                               |  77 -----
+ drivers/led/Kconfig                          | 342 +------------------
+ drivers/misc/Kconfig                         |  13 -
+ drivers/misc/Makefile                        |   3 -
+ drivers/misc/gpio_led.c                      | 106 ------
+ drivers/misc/pca9551_led.c                   | 170 ---------
+ drivers/misc/status_led.c                    | 124 -------
+ drivers/timer/mpc83xx_timer.c                |   5 -
+ include/configs/eb_cpu5282.h                 |   6 -
+ include/status_led.h                         | 102 ------
+ net/bootp.c                                  |   7 -
+ net/net.c                                    |  33 --
+ 33 files changed, 11 insertions(+), 1336 deletions(-)
+ delete mode 100644 board/st/stm32f429-discovery/led.c
+ delete mode 100644 cmd/legacy_led.c
+ delete mode 100644 doc/README.LED
+ delete mode 100644 drivers/misc/gpio_led.c
+ delete mode 100644 drivers/misc/pca9551_led.c
+ delete mode 100644 drivers/misc/status_led.c
+ delete mode 100644 include/status_led.h
+
+-- 
+2.43.0
+
