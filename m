@@ -4,87 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBDEDCDE03E
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 22:50:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB3DECDE03E
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 22:51:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53B9089048;
+	by phobos.denx.de (Postfix) with ESMTP id B935E89041;
 	Fri, 27 Sep 2024 00:50:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=redhat.com
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="dsot7CN1";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id BC88988E5A; Thu, 26 Sep 2024 23:30:53 +0200 (CEST)
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1727391048;
+	bh=ChzMy5WYqc3uW8w8j0l/YJ76ufI3mEG1AJyTnWAHWvQ=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=gGaB9pbhCG+ZkSLuTHrS9/tQqGucJjk6Gkj3y5hN1ExN1DmRFK317fCKKjLu0+TAW
+	 g7j/D6uXi+jOSowEuAJDD6biHgWxggK5Rmj5raDsAAieJUlv8If2nS9x5QXJ1nslvp
+	 8HuX2RimmmQz1UMQNIgRPf8Y8+LfENxAlz/pYMTspY6J9CxMxTa2L7OIFVCn1oLZyU
+	 LXqSNKU9sIDdAdRqnRftPH70wYBVvcXaobAXEs+uKPWwBhNzArMNr00wXZ5/bB6wNB
+	 iO0h+hOSM/4o8YimSuXcLS4/q4AX47rvovHLxN1KtjMWeZU6zBhliuFjqjGoQK5MIw
+	 hNsJGcdefwjAA==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A8B588DDE
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 23:30:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=redhat.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fmartine@redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1727386250;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=7JhIUhSfqEs3b7/fQ/6ulsjKq/dBl6uE1L7vg3meKls=;
- b=dsot7CN1evKxn/aTQ5mLJmP3HKAHpjKR/a1j9rAYEF5FkRTjd0yJbU3BWXYxCeafFry+Lo
- q4b4VVmMDS+GTSbKggxmfrmUvkdvgawjeq8hTHAywk8B0b6FfycfIOhuGGFSizR4i/3Zrf
- AknIw4reTFrNKDNEBMXUTHCEizUZ5Yk=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-495--txKczlwP2-WcjGpxTv71Q-1; Thu, 26 Sep 2024 17:30:47 -0400
-X-MC-Unique: -txKczlwP2-WcjGpxTv71Q-1
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-42cb080ab53so10051345e9.0
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 14:30:46 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727386246; x=1727991046;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=7JhIUhSfqEs3b7/fQ/6ulsjKq/dBl6uE1L7vg3meKls=;
- b=DqrEy5nx4h/5w481JNujp0o4JWW86VUrA8fLSek7gxykwyQQARHKCrqwHnf9Kd2lgO
- L118UWtf9B8U77LW1GfLdFJi92e+lobMaJMBfZ1ObF95O48Yj+JEbaoxM/w//tuDrQDE
- ZYBe3NO4Zak2QAu/LN5lfTZLfo2xELLtkVfagotmAEOsTGZGK7Qq3uIiF1oUgzt6Ui18
- 4g7XqljJbWKdJj6UnwGjS3nIdHoHnwc1zbRZDkZrURkmqlL+H8glAoyHkngfitZsJyhf
- 6/Geo7jUBHHQ+P68IUeettiiwndmSwJeE2nVXLc3iruU9EE0jg36ZRAeHW+unOASH+YL
- J9Ug==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU5Yg/U7UqRsq+fANPoFxp70qgtPrb5Q/XsJ1RWwgHoDmaJ2sIA7DfxoTdfGmfO5NrO9gx2O5g=@lists.denx.de
-X-Gm-Message-State: AOJu0YwYJ+kzDLnLYmS+voLcECjL6BWN1JkFUiPxoGPBHQayG9ikah2u
- unQpAynbWwtkYF+6bpn0pxiL4n/IWsoUsbXTd0VCE+VIl/idtIDCNuq4BJsulSwCqOLtFbyLLpL
- FiPQHkkaACBIeYMNRP5NXjMS+k/7+3E+FOokUCwc+ceucQrnMuVM=
-X-Received: by 2002:a05:600c:1f91:b0:42c:bc04:58a5 with SMTP id
- 5b1f17b1804b1-42f58491434mr5899155e9.33.1727386245853; 
- Thu, 26 Sep 2024 14:30:45 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEo4LFHKJmqzU8e9Spx0s6hN2/td6Q3cnW6+9uYm1d9QviTHiivnSY2KW2fLq3Oal01dwIoJg==
-X-Received: by 2002:a05:600c:1f91:b0:42c:bc04:58a5 with SMTP id
- 5b1f17b1804b1-42f58491434mr5898975e9.33.1727386245472; 
- Thu, 26 Sep 2024 14:30:45 -0700 (PDT)
-Received: from localhost (62-151-111-63.jazzfree.ya.com. [62.151.111.63])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37cd56e6665sm791887f8f.54.2024.09.26.14.30.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Sep 2024 14:30:45 -0700 (PDT)
-From: Javier Martinez Canillas <javierm@redhat.com>
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Enric
- Balletbo i Serra <eballetbo@gmail.com>
-Subject: Re: [PATCH 18/27] igep00x0: Drop unused status_led.h header file
-In-Reply-To: <20240926204455.963584-19-sjg@chromium.org>
-References: <20240926204455.963584-1-sjg@chromium.org>
- <20240926204455.963584-19-sjg@chromium.org>
-Date: Thu, 26 Sep 2024 23:30:44 +0200
-Message-ID: <87ikui85mj.fsf@minerva.mail-host-address-is-not-set>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 28D2788F08;
+ Fri, 27 Sep 2024 00:16:52 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1727389015;
+ bh=ChzMy5WYqc3uW8w8j0l/YJ76ufI3mEG1AJyTnWAHWvQ=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=DiXsIH+G6ZySjfUCfP5aKPpfnXl8I+vYWVWriBGcB3t9w31yebE3rXbXxbca9CkgY
+ fbucKsnL1LcldN3CfoMX0eWUNl6VePMlr/EGjolRDcqbLZG/sC+lkOUzdFa6GHmgDg
+ qz7roYNQmT4NjhE68/kRHiCZsysXPbVT5OuPaxW5VY6FZ79KVX12uxtE/H2mkO7Hbh
+ lSFNUjcZBwNJJC6spPPk5tdLYrUNXWLYmava2gf9lNqH9SudwnRAvsez4Q5WDAFtqw
+ l9eEjCyR04aBA+D669ArIuyD6Vvx27IxFlb7rLK0HBcnOQGKsc6Wl9fSeoRrwAWvAR
+ DDKhYGTEFPNSQ==
+Message-ID: <b769e5c6-7e19-4ce6-9c3d-9a262a1bad8e@denx.de>
+Date: Fri, 27 Sep 2024 00:16:51 +0200
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/5] power: regulator: Trigger probe of regulators
+ which are always-on or boot-on
+To: Jonas Karlman <jonas@kwiboo.se>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Ben Wolsieffer <benwolsieffer@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Chris Morgan <macromorgan@hotmail.com>, Dragan Simic <dsimic@manjaro.org>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Kostya Porotchkin <kostap@marvell.com>, Matteo Lisi
+ <matteo.lisi@engicam.com>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Max Krummenacher <max.krummenacher@toradex.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Sam Day <me@samcday.com>,
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Thierry Reding <treding@nvidia.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, u-boot-amlogic@groups.io,
+ u-boot-qcom@groups.io, u-boot@dh-electronics.com,
+ uboot-stm32@st-md-mailman.stormreply.com
+References: <20240925022314.714285-1-marex@denx.de>
+ <b8eb1c20-afdb-497e-9788-498550520d61@kwiboo.se>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <b8eb1c20-afdb-497e-9788-498550520d61@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Fri, 27 Sep 2024 00:50:46 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,22 +92,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Simon Glass <sjg@chromium.org> writes:
+On 9/26/24 5:05 PM, Jonas Karlman wrote:
+> Hi Marek,
 
-Hello Simon,
+Hi,
 
-> This header file is not used, so drop it.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->
-
-Reviewed-by: Javier Martinez Canillas <javierm@redhat.com>
-
--- 
-Best regards,
-
-Javier Martinez Canillas
-Core Platforms
-Red Hat
-
+> On 2024-09-25 04:21, Marek Vasut wrote:
+>> In case a regulator DT node contains regulator-always-on or regulator-boot-on
+>> property, make sure the regulator gets correctly configured by U-Boot on start
+>> up. Unconditionally probe such regulator drivers. This is a preparatory patch
+>> for introduction of .regulator_post_probe() which would trigger the regulator
+>> configuration.
+>>
+>> Parsing of regulator-always-on and regulator-boot-on DT property has been
+>> moved to regulator_post_bind() as the information is required early, the
+>> rest of the DT parsing has been kept in regulator_pre_probe() to avoid
+>> slowing down the boot process.
+>>
+>> Signed-off-by: Marek Vasut <marex@denx.de>
+> 
+> [snip]
+> 
+>>   
+>> -	debug("'%s' of dev: '%s', has nonunique value: '%s\n",
+>> -	      property, dev->name, uc_pdata->name);
+>> +	/*
+>> +	 * In case the regulator has regulator-always-on or
+>> +	 * regulator-boot-on DT property, trigger probe() to
+>> +	 * configure its default state during startup.
+>> +	 */
+>> +	if (uc_pdata->always_on && uc_pdata->boot_on)
+> 
+> This check for always_on _and_ boot_on does not fully match the commit
+> message, comment or the old behavior of regulators_enable_boot_on()
+> where any always_on _or_ boot_on would trigger autoset().
+This should be ORR, thanks for spotting this, fixed in V3.
