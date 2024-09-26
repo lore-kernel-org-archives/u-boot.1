@@ -4,68 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CE87CDE03A
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 21:29:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50408CDE03A
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 21:29:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A48F688E41;
-	Thu, 26 Sep 2024 23:29:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1809488E7E;
+	Thu, 26 Sep 2024 23:29:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="G2TmbOe2";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jb2J857O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68F0A88E5F; Thu, 26 Sep 2024 23:29:11 +0200 (CEST)
-Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
- [IPv6:2607:f8b0:4864:20::f2c])
+ id D922788E6B; Thu, 26 Sep 2024 23:29:22 +0200 (CEST)
+Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
+ [IPv6:2607:f8b0:4864:20::732])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 233CA88E7E
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 23:29:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C9EB88E8B
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 23:29:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-6cb2aaf4a73so10846376d6.2
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 14:29:09 -0700 (PDT)
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-7a9ae0e116cso130951985a.1
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 14:29:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727386148; x=1727990948; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727386159; x=1727990959; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=OMw+5pi7chUN5hb/RkjldWbw8ccRdloUZ6iZKwS2Oqc=;
- b=G2TmbOe2K9HdRDWHpCrbXeacXC4bDfwhXmSBTH5+HwQP8nM39wnBS2ATH8bPQ68OEq
- wueeqpa/DCMXyUHVZ3t7hljTmJppxTCfRJd122qI9psm2XjWwTQPH7EJ0F1OM2c6gOk0
- l9+JWy5HNMO0e89DFXpfLthlpxJgLPMgMRYH4=
+ bh=r6G1tqlh+k8/VPgb/5n0Ku1edOKOUcnPXIVsHxHSIiI=;
+ b=jb2J857OhsE3HK1NS1hAbiov9pp0oyDMU2JTIvq2s5HHB2Y6xBa6W1D8jQuOU9dBZU
+ QlSc6CvTFqNTZdNO2JxEpY2UQz0IbacKwhdefsqn83k+lzcr7dYz7r4wFVjoLDeyxyvh
+ PvEFe8mioPp6T6Oiw+/luPt20fZeHMOOVSp/U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727386148; x=1727990948;
+ d=1e100.net; s=20230601; t=1727386159; x=1727990959;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=OMw+5pi7chUN5hb/RkjldWbw8ccRdloUZ6iZKwS2Oqc=;
- b=DIbNltoN6JkWpqPoZAc7+6amq/Ojj6/UFAOyEBKPjWHCXh9EulldalIw8m3tx8Ui2/
- sh8Gnl8KwcAuBRcPd/c7CgWQEPUz/LA6+iSf3MTrd/QSKuosd/uKG5O9Ze4t1m4eTLGp
- loVUBBsEztUa4v85hWehjyLNEhnWDaeCS8BhxtyGVqta6i5fzeZgffR+uNIx7rii1C2+
- oc0Tzu3RDXyFsldaNlGvS+cUWrt0n+2AH+SRl9ACBFsmwld4rrfifZWos5VvjLekZY7N
- q+iG/68M6YHTKIIjeBdQtnVFHBjJHD35NnEgrQ4DDEbQCJPVnrjit3+1NXgHvQFdB5oX
- LZgQ==
-X-Gm-Message-State: AOJu0YyHNZWwEbohsOfomQS6igGi33mxuxVDWuPb1fpNGi/eFDvnyc3w
- ojxHId1GpmxhBrnn/qykgN/9JnT/sAotLd5ktT3RCjenRWNoKtUw75PoOSKWTaaJiuOuXWaXWXg
- I0NxAxXNv6HYxntDAQzt20qKuZe5EyiSXZbAP
-X-Google-Smtp-Source: AGHT+IGMeAQxZEj4CzcY5xERMcsLPWtTT/3zxCnFbNCtXPYgyJhwa5dTAPcVo9sHUD/FRcbtuzBvStq4jdUF1zikq7M=
-X-Received: by 2002:a05:6214:5c04:b0:6cb:375d:fd16 with SMTP id
- 6a1803df08f44-6cb3b5e4ea1mr10707686d6.5.1727386147991; Thu, 26 Sep 2024
- 14:29:07 -0700 (PDT)
+ bh=r6G1tqlh+k8/VPgb/5n0Ku1edOKOUcnPXIVsHxHSIiI=;
+ b=RRh0Q1NnQBTqR/ayU2x3Cj1C04CB4HUyRF2p9d7Gm6msQgTC2arG1wGsIiBBJ0s3rh
+ 7Pvi6ONkyioXNKyVqlmzNTfJTO0dgqcBsk8SX7yUl+o3sWhjRVrW13TZoXEcju9cr04V
+ ERUzgEOJDP4NT1TbKDuKz/BLeUWAEMec8OgksbmyuRJLXbG4v8I6QaKCHNqloFp6876r
+ t/zoGTZ1spQ8zlBtCAryjxTvni53A27TQgw1cvESjk42liFxg/Qz1Plv/Vn7+zfmrur/
+ g3m80ZfKYFPmEZO+QuIvAsT5vJ50nZyWbpArQDx7cJMHYQEbv7vtYmNk7NHa/L9D5YRS
+ 5wKA==
+X-Gm-Message-State: AOJu0YyzOdB+bTphICPmC91hnBCDmnrbDfsXrQeyp0wA3ViVfD4bMJez
+ EF3bu0QKVIjbb8vHCgeUerA1G+61qbMX5cYTNTfTozpBVszg331ehoeT3LD8ugpfRvuCMpoTYFb
+ LQyC+nt21/IA2CiFLJOPx9adV9BIdgvpphCKfqtI5DyjxHYrf6RDeQg4=
+X-Google-Smtp-Source: AGHT+IFrTWjKcwRQSGDn5m4a7krqI4aQsJ2Ug24KTb8EBi16Pzc7tB56oXpblMJK4JOldXRW6xXs8lu6LMZS6CeB69w=
+X-Received: by 2002:a05:6214:498d:b0:6c5:2ab8:846e with SMTP id
+ 6a1803df08f44-6cb3b64c61cmr12492486d6.50.1727386158903; Thu, 26 Sep 2024
+ 14:29:18 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240926080021.148031-1-patrick.rudolph@9elements.com>
- <20240926080021.148031-17-patrick.rudolph@9elements.com>
-In-Reply-To: <20240926080021.148031-17-patrick.rudolph@9elements.com>
+ <20240926080021.148031-33-patrick.rudolph@9elements.com>
+In-Reply-To: <20240926080021.148031-33-patrick.rudolph@9elements.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 26 Sep 2024 23:28:54 +0200
-Message-ID: <CAFLszThhaf4HuD4sso8TdD2sS=L26KZ4bEJ7cpPeMKwiHkx5CA@mail.gmail.com>
-Subject: Re: [PATCH v5 16/36] drivers: usb: Add generic XHCI
+Date: Thu, 26 Sep 2024 23:29:07 +0200
+Message-ID: <CAFLszTg3HscsjCkZmRfSMmbyPA_PC4Knahm-T-wtPeq6SCeFvQ@mail.gmail.com>
+Subject: Re: [PATCH v5 32/36] arm: mach-bcm283x: Add ARMV8_MULTIENTRY support
 To: Patrick Rudolph <patrick.rudolph@9elements.com>
-Cc: u-boot@lists.denx.de, Bin Meng <bmeng.cn@gmail.com>,
- Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Tom Rini <trini@konsulko.com>, 
+ Matthias Brugger <mbrugger@suse.com>, Peter Robinson <pbrobinson@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,157 +87,337 @@ X-Virus-Status: Clean
 
 Hi Patrick,
 
-On Thu, 26 Sept 2024 at 10:06, Patrick Rudolph
+On Thu, 26 Sept 2024 at 10:12, Patrick Rudolph
 <patrick.rudolph@9elements.com> wrote:
 >
-> Add support for the generic XHCI driver that contains no SoC
-> specific code. It can be used on platforms that simply work out
-
-SoC-specific
-
-> of the box, like on emulated platforms.
-
-out-of-the-box
-
+> When ACPI is enabled over FDT the APs cannot be brought out of reset
+> by the OS using the "FDT spin-table" mechanism, as no FDT is provided
+> to the OS. The APs must be released out of reset in u-boot and then
+> brought up in an ACPI compliant fashion.
 >
-> TEST: Booted on QEMU sbsa machine using the generic xhci driver.
+> When ARMV8_MULTIENTRY is specified, the APs are released from reset
+> and will enter U-Boot after it has been relocated as well.
+>
+> By default ARMV8_MULTIENTRY is not selected, keeping existing behaviour.
+>
+> TEST: All APs enter U-Boot when run on qemu-system-aarch64 and on
+>       real hardware.
 >
 > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-> Reviewed-by: Marek Vasut <marex@denx.de>
+> Cc: Matthias Brugger <mbrugger@suse.com>
+> Cc: Peter Robinson <pbrobinson@gmail.com>
 > Cc: Tom Rini <trini@konsulko.com>
-> Cc: Marek Vasut <marex@denx.de>
 > ---
-> Changelog v3:
-> - Drop weak board_xhci_enable()
+> Changelog v2:
+> - Drop CPU code from board
+> - Add CPU driver to release APs from reset
 > Changelog v4:
-> - Use dev_dbg() instead of debug()
->
+> - Use the generic armv8 CPU driver
+> - Probe all CPUs
+> - Release secondary CPUs in the probe function
+> - Use of_to_plat() to parse DT
+> - Drop udelay()
+> - Select the GICv2 driver
+> Changelog v5:
+> - Cosmetic fixes
+> - Drop arch_early_init_r()
 > ---
->  drivers/usb/host/Kconfig        |  8 ++++
->  drivers/usb/host/Makefile       |  1 +
->  drivers/usb/host/xhci-generic.c | 77 +++++++++++++++++++++++++++++++++
->  3 files changed, 86 insertions(+)
->  create mode 100644 drivers/usb/host/xhci-generic.c
+>  arch/arm/Kconfig              |   1 +
+>  arch/arm/mach-bcm283x/Kconfig |   5 +-
+>  drivers/cpu/Makefile          |   2 +-
+>  drivers/cpu/bcm283x_cpu.c     | 217 ++++++++++++++++++++++++++++++++++
+>  4 files changed, 223 insertions(+), 2 deletions(-)
+>  create mode 100644 drivers/cpu/bcm283x_cpu.c
 >
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
-
-
-> diff --git a/drivers/usb/host/Kconfig b/drivers/usb/host/Kconfig
-> index 6e10b629a3..bb5893d56d 100644
-> --- a/drivers/usb/host/Kconfig
-> +++ b/drivers/usb/host/Kconfig
-> @@ -68,6 +68,14 @@ config USB_XHCI_MVEBU
->           SoCs, which includes Armada8K, Armada3700 and other Armada
->           family SoCs.
+> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> index 985dd8f3da..94ab271370 100644
+> --- a/arch/arm/Kconfig
+> +++ b/arch/arm/Kconfig
+> @@ -651,6 +651,7 @@ config ARCH_ORION5X
 >
-> +config USB_XHCI_GENERIC
-> +       bool "Generic SoC USB 3.0 support"
-> +       depends on OF_CONTROL
-> +       default n
-> +       help
-> +         Choose this option to add support for USB 3.0 driver for SoCs
-> +         that do not need platform specific code, like on emulated targets.
-> +
->  config USB_XHCI_OCTEON
->         bool "Support for Marvell Octeon family on-chip xHCI USB controller"
->         depends on ARCH_OCTEON
-> diff --git a/drivers/usb/host/Makefile b/drivers/usb/host/Makefile
-> index 8dad36f936..9e880195ec 100644
-> --- a/drivers/usb/host/Makefile
-> +++ b/drivers/usb/host/Makefile
-> @@ -50,6 +50,7 @@ obj-$(CONFIG_USB_XHCI_EXYNOS) += xhci-exynos5.o
->  obj-$(CONFIG_USB_XHCI_FSL) += xhci-fsl.o
->  obj-$(CONFIG_USB_XHCI_MTK) += xhci-mtk.o
->  obj-$(CONFIG_USB_XHCI_MVEBU) += xhci-mvebu.o
-> +obj-$(CONFIG_USB_XHCI_GENERIC) += xhci-generic.o
->  obj-$(CONFIG_USB_XHCI_OMAP) += xhci-omap.o
->  obj-$(CONFIG_USB_XHCI_PCI) += xhci-pci.o
->  obj-$(CONFIG_USB_XHCI_RCAR) += xhci-rcar.o
-> diff --git a/drivers/usb/host/xhci-generic.c b/drivers/usb/host/xhci-generic.c
+>  config ARCH_BCM283X
+>         bool "Broadcom BCM283X family"
+> +       select CPU
+>         select DM
+>         select DM_GPIO
+>         select DM_SERIAL
+> diff --git a/arch/arm/mach-bcm283x/Kconfig b/arch/arm/mach-bcm283x/Kconfig
+> index b3287ce8bc..0ef8156c64 100644
+> --- a/arch/arm/mach-bcm283x/Kconfig
+> +++ b/arch/arm/mach-bcm283x/Kconfig
+> @@ -24,7 +24,9 @@ config BCM2837_64B
+>         bool "Broadcom BCM2837 SoC 64-bit support"
+>         depends on ARCH_BCM283X
+>         select BCM2837
+> +       select DRIVER_GICV2
+>         select ARM64
+> +       select CPU_ARMV8
+>
+>  config BCM2711
+>         bool "Broadcom BCM2711 SoC support"
+> @@ -42,11 +44,12 @@ config BCM2711_64B
+>         bool "Broadcom BCM2711 SoC 64-bit support"
+>         depends on ARCH_BCM283X
+>         select BCM2711
+> +       select DRIVER_GICV2
+>         select ARM64
+> +       select CPU_ARMV8
+>
+>  menu "Broadcom BCM283X family"
+>         depends on ARCH_BCM283X
+> -
+>  choice
+>         prompt "Broadcom BCM283X board select"
+>         optional
+> diff --git a/drivers/cpu/Makefile b/drivers/cpu/Makefile
+> index 773395693a..eaf494706e 100644
+> --- a/drivers/cpu/Makefile
+> +++ b/drivers/cpu/Makefile
+> @@ -6,7 +6,7 @@
+>
+>  obj-$(CONFIG_CPU) += cpu-uclass.o
+>
+> -
+> +obj-$(CONFIG_ARCH_BCM283X) += bcm283x_cpu.o
+>  obj-$(CONFIG_ARCH_BMIPS) += bmips_cpu.o
+>  obj-$(CONFIG_ARCH_IMX8) += imx8_cpu.o
+>  obj-$(CONFIG_ARCH_AT91) += at91_cpu.o
+> diff --git a/drivers/cpu/bcm283x_cpu.c b/drivers/cpu/bcm283x_cpu.c
 > new file mode 100644
-> index 0000000000..5131f37991
+> index 0000000000..ccfb27d3b6
 > --- /dev/null
-> +++ b/drivers/usb/host/xhci-generic.c
-> @@ -0,0 +1,77 @@
+> +++ b/drivers/cpu/bcm283x_cpu.c
+> @@ -0,0 +1,217 @@
 > +// SPDX-License-Identifier: GPL-2.0+
 > +/*
-> + * Copyright (C) 2024 9elements GmbH
-> + *
-> + * GENERIC USB HOST xHCI Controller
+> + * Copyright 2024 9elements GmbH
 > + */
 > +
+> +#include <acpi/acpigen.h>
+> +#include <asm/armv8/cpu.h>
+> +#include <asm/cache.h>
 > +#include <asm/io.h>
+> +#include <asm/global_data.h>
+> +#include <asm/system.h>
+> +#include <asm-generic/sections.h>
+> +#include <cpu.h>
+> +#include <cpu_func.h>
 > +#include <dm.h>
-> +#include <dm/device_compat.h>
-> +#include <fdtdec.h>
-> +#include <log.h>
-> +#include <usb.h>
+> +#include <fdt_support.h>
+> +#include <linux/bitops.h>
+> +#include <linux/clk-provider.h>
+> +#include <linux/delay.h>
+> +#include "armv8_cpu.h"
+
+Header order is still a bit wonky throughout - please ask if unsure -
+it is documented in code still
+
 > +
-> +#include <usb/xhci.h>
+> +DECLARE_GLOBAL_DATA_PTR;
 > +
-> +struct generic_xhci_plat {
-> +       fdt_addr_t hcd_base;
+> +struct bcm_plat {
+> +       u64 release_addr;
 > +};
 > +
-> +/**
-> + * Contains pointers to register base addresses
-> + * for the usb controller.
-> + */
-> +struct generic_xhci {
-> +       struct xhci_ctrl ctrl;  /* Needs to come first in this struct! */
-> +       struct usb_plat usb_plat;
-> +       struct xhci_hccr *hcd;
-> +};
-> +
-> +static int xhci_usb_probe(struct udevice *dev)
+> +static int cpu_bcm_get_desc(const struct udevice *dev, char *buf, int size)
 > +{
-> +       struct generic_xhci_plat *plat = dev_get_plat(dev);
-> +       struct generic_xhci *ctx = dev_get_priv(dev);
-> +       struct xhci_hcor *hcor;
-> +       int len;
+> +       struct cpu_plat *plat = dev_get_parent_plat(dev);
+> +       const char *name;
+> +       int ret;
 > +
-> +       ctx->hcd = (struct xhci_hccr *)phys_to_virt(plat->hcd_base);
-> +       len = HC_LENGTH(xhci_readl(&ctx->hcd->cr_capbase));
-> +       hcor = (struct xhci_hcor *)((uintptr_t)ctx->hcd + len);
+> +       if (size < 32)
+> +               return -ENOSPC;
 > +
-> +       return xhci_register(dev, ctx->hcd, hcor);
+> +       if (device_is_compatible(dev, "arm,cortex-a53"))
+> +               name = "A53";
+> +       else if (device_is_compatible(dev, "arm,cortex-a72"))
+> +               name = "A72";
+> +       else
+> +               name = "?";
+> +
+> +       ret = snprintf(buf, size, "Broadcom Cortex-%s at %u MHz\n",
+> +                      name, plat->timebase_freq);
+
+Do you need to set ret?
+
+> +
+> +       return 0;
 > +}
 > +
-> +static int xhci_usb_of_to_plat(struct udevice *dev)
+> +static int cpu_bcm_get_info(const struct udevice *dev, struct cpu_info *info)
 > +{
-> +       struct generic_xhci_plat *plat = dev_get_plat(dev);
+> +       struct cpu_plat *plat = dev_get_parent_plat(dev);
 > +
-> +       /*
-> +        * Get the base address for XHCI controller from the device node
-> +        */
-> +       plat->hcd_base = dev_read_addr(dev);
-> +       if (plat->hcd_base == FDT_ADDR_T_NONE) {
-> +               dev_dbg(dev, "Can't get the XHCI register base address\n");
-> +               return -ENXIO;
+> +       info->cpu_freq = plat->timebase_freq * 1000;
+> +       info->features = BIT(CPU_FEAT_L1_CACHE) | BIT(CPU_FEAT_MMU);
+> +
+> +       return 0;
+> +}
+> +
+> +static int cpu_bcm_get_count(const struct udevice *dev)
+> +{
+> +       return uclass_id_count(UCLASS_CPU);
+> +}
+> +
+> +static int cpu_bcm_get_vendor(const struct udevice *dev,  char *buf, int size)
+> +{
+> +       snprintf(buf, size, "Broadcom");
+> +
+> +       return 0;
+> +}
+> +
+> +static int cpu_bcm_is_current(struct udevice *dev)
+> +{
+> +#ifdef CONFIG_ARM64
+
+Can you use if (IS_ENABLED(CONFIG_ARM64)) ?
+
+> +       struct cpu_plat *plat = dev_get_parent_plat(dev);
+> +
+> +       if (plat->cpu_id == (read_mpidr() & 0xffff))
+> +               return 1;
+> +#endif
+> +
+> +       return 0;
+> +}
+> +
+> +/**
+> + * bcm_cpu_on - Releases the secondary CPU from it's spintable
+> + *
+> + * Write the CPU's spintable mailbox and let the CPU enter U-Boot.
+> + *
+> + * @dev: Device to start
+> + * @return: zero on success or error code on failure.
+> + */
+> +static int bcm_cpu_on(struct udevice *dev)
+> +{
+> +       struct bcm_plat *plat = dev_get_plat(dev);
+> +       ulong *start_address;
+> +
+> +       if (plat->release_addr == ~0ULL)
+> +               return -ENODATA;
+> +
+> +       start_address = map_physmem(plat->release_addr, sizeof(uintptr_t), MAP_NOCACHE);
+> +
+> +       /* Point secondary CPU to U-Boot entry */
+> +       *start_address = (uintptr_t)_start;
+> +
+> +       /* Make sure the other CPUs see the written start address */
+> +       if (!CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
+> +               flush_dcache_all();
+> +
+> +       /* Send an event to wake up the secondary CPU. */
+> +       asm("dsb        ishst\n"
+> +           "sev");
+> +
+> +       unmap_physmem(start_address, MAP_NOCACHE);
+> +
+> +       return 0;
+> +}
+> +
+> +static const struct cpu_ops cpu_bcm_ops = {
+> +       .get_desc       = cpu_bcm_get_desc,
+> +       .get_info       = cpu_bcm_get_info,
+> +       .get_count      = cpu_bcm_get_count,
+> +       .get_vendor     = cpu_bcm_get_vendor,
+> +       .is_current     = cpu_bcm_is_current,
+> +};
+> +
+> +static const struct udevice_id cpu_bcm_ids[] = {
+> +       { .compatible = "arm,cortex-a53" },     /* RPi 3 */
+> +       { .compatible = "arm,cortex-a72" },     /* RPi 4 */
+> +       { }
+> +};
+> +
+> +static int bcm_cpu_bind(struct udevice *dev)
+> +{
+> +       struct cpu_plat *plat = dev_get_parent_plat(dev);
+> +
+> +       plat->cpu_id = dev_read_addr(dev);
+> +
+> +       return 0;
+> +}
+> +
+> +/**
+> + * bcm_cpu_of_to_plat - Gather spin-table release address
+> + *
+> + * Read the spin-table release address to allow all seconary CPUs to enter
+> + * U-Boot when necessary.
+> + *
+> + * @dev: Device to start
+> + */
+> +static int bcm_cpu_of_to_plat(struct udevice *dev)
+> +{
+> +       struct bcm_plat *plat = dev_get_plat(dev);
+> +       const char *prop;
+> +
+> +       if (CONFIG_IS_ENABLED(ARMV8_MULTIENTRY)) {
+> +               plat->release_addr = ~0ULL;
+> +
+> +               prop = dev_read_string(dev, "enable-method");
+> +               if (!prop || strcmp(prop, "spin-table"))
+> +                       return -ENODEV;
+> +
+> +               plat->release_addr = dev_read_u64_default(dev, "cpu-release-addr", ~0ULL);
+> +
+> +               if (plat->release_addr == ~0ULL)
+> +                       return -ENODEV;
 > +       }
 > +
 > +       return 0;
 > +}
 > +
-> +static const struct udevice_id xhci_usb_ids[] = {
-> +       { .compatible = "generic-xhci" },
-> +       { }
+> +static int bcm_cpu_probe(struct udevice *dev)
+> +{
+> +       struct cpu_plat *plat = dev_get_parent_plat(dev);
+> +       struct clk clk;
+> +       int ret;
+> +
+> +       /* Get a clock if it exists */
+> +       ret = clk_get_by_index(dev, 0, &clk);
+> +       if (!ret) {
+> +               ret = clk_enable(&clk);
+> +               if (ret && (ret != -ENOSYS || ret != -EOPNOTSUPP))
+> +                       return ret;
+> +               ret = clk_get_rate(&clk);
+> +               if (IS_ERR_VALUE(ret))
+> +                       return ret;
+> +               plat->timebase_freq = ret;
+> +       }
+> +
+> +       /*
+> +        * The armstub holds the secondary CPUs in a spinloop. When
+> +        * ARMV8_MULTIENTRY is enabled release the secondary CPUs and
+> +        * let them enter U-Boot as well.
+> +        */
+> +       if (CONFIG_IS_ENABLED(ARMV8_MULTIENTRY)) {
+> +               ret = bcm_cpu_on(dev);
+> +               if (ret)
+> +                       return ret;
+> +       }
+> +
+> +       return ret;
+> +}
+> +
+> +struct acpi_ops bcm283x_cpu_acpi_ops = {
+> +       .fill_ssdt      = armv8_cpu_fill_ssdt,
+> +       .fill_madt      = armv8_cpu_fill_madt,
 > +};
 > +
-> +U_BOOT_DRIVER(usb_xhci) = {
-> +       .name   = "xhci_generic",
-> +       .id     = UCLASS_USB,
-> +       .of_match = xhci_usb_ids,
-> +       .of_to_plat = xhci_usb_of_to_plat,
-> +       .probe = xhci_usb_probe,
-> +       .remove = xhci_deregister,
-> +       .ops    = &xhci_usb_ops,
-> +       .plat_auto      = sizeof(struct generic_xhci_plat),
-> +       .priv_auto      = sizeof(struct generic_xhci),
-> +       .flags  = DM_FLAG_ALLOC_PRIV_DMA,
+> +U_BOOT_DRIVER(cpu_bcm_drv) = {
+> +       .name           = "bcm283x_cpu",
+> +       .id             = UCLASS_CPU,
+> +       .of_match       = cpu_bcm_ids,
+> +       .ops            = &cpu_bcm_ops,
+> +       .probe          = bcm_cpu_probe,
+> +       .bind           = bcm_cpu_bind,
+> +       .of_to_plat     = bcm_cpu_of_to_plat,
+> +       .plat_auto      = sizeof(struct bcm_plat),
+> +       ACPI_OPS_PTR(&bcm283x_cpu_acpi_ops)
 > +};
 > --
 > 2.46.0
 >
+
+Regards,
+Simon
