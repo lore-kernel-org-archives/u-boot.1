@@ -4,144 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CBB2C369DE
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 12:26:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84E11C369CD
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 12:29:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0DD1788A0A;
-	Thu, 26 Sep 2024 14:26:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=nskint.co.jp
+	by phobos.denx.de (Postfix) with ESMTP id E6AA088D7D;
+	Thu, 26 Sep 2024 14:29:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=nskint.onmicrosoft.com header.i=@nskint.onmicrosoft.com header.b="KXIOXS2i";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IN6Mo80K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D3CDE88CB9; Thu, 26 Sep 2024 11:26:21 +0200 (CEST)
-Received: from OS0P286CU010.outbound.protection.outlook.com
- (mail-japanwestazlp170110001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c407::1])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 98112884DB; Thu, 26 Sep 2024 14:29:06 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C86818891E
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 11:26:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 968DC88A0A
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 14:29:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=nskint.co.jp
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=k.kurematsu@nskint.co.jp
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=hM149kBz2PY7qhDpOFk4Bx7AMRRmT/KADL9E7o65Y0ZUNj7DJLLP8gqbxDUWsR2LvlOIFsqJtgjcPhfVZC8MQNKn9scaq+sWgR9Am0cGsvIvfJResgwi93WDf/LA7cP5GwFoVnxcBAuxNlY6EHP9zQ/haTxyuxw3eR/zSY9JqjwJdpSlNmgQwDJLWAeibqB+KJylspeOaGN4ZuaKKbzRUSl/l5zFtJXshG1oxly6EAtAP1SsjmlLWdxq4GVHx+oz7uxsT0Gyj5aT8k/yrmiX6GrOQrqFk4HOT8Dfpz+uT40UHEbDzllNBxrT/yYMlp7jYYjO4PuZYBBcRBVMPaFqCw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=a3f1Rx2Tazl2Wd6VdQSpYfsVWx32mDOOp0Jkzzs2wAQ=;
- b=DX5uYNT5Xab+fERQwumoqfZbcB+r/jjf56+Brz8mDpgWTFuWBgAqTFPM70Zm1sUpNq47KGp5flIuxpbHdwmRNEtBXP7LBbilwCbVzn2niEKGqXeaMZ2XzweZqKGjp/3oxIT18KzImbx3WyHEiCpRUyfqhvpP4JtgSp3UJ9/MuhT+0pEzTnHidvQE3WjbxEcSEYhMwHugMzc9giZeZkQ1BmzO0CjZUF3+mAKgBp7TWGWY58zTr2ce6k3Ub+IcZrCnbKEQlPV1Y/6quWKu0/GgQoA9xjQpWsSMTSJ0cQ7JC5NVynkWeBnbu+Q2MROadT26J2yQkDOfbT8hkAYyYoJ9oA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nskint.co.jp; dmarc=pass action=none header.from=nskint.co.jp;
- dkim=pass header.d=nskint.co.jp; arc=none
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a8d6ac24a3bso174935866b.1
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 05:29:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=nskint.onmicrosoft.com; s=selector1-nskint-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=a3f1Rx2Tazl2Wd6VdQSpYfsVWx32mDOOp0Jkzzs2wAQ=;
- b=KXIOXS2iWjIvMCdhusO8inwSIQca0ABtvEi/QisnpaYmLrx2xrUvWOjUY7AzzT3Sr0a2iINvEJiyKdinqweNRAJWg7S4Wcu1zp6qysoJD3ramVCh2J/ON3g0ah50ZgZB++NKRRm6GaIgPdU8jJVjo/shS4D4mfhY2zQIzWniwyI=
-Received: from TYCP286MB2334.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:10f::10)
- by TYWP286MB2053.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:162::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7982.28; Thu, 26 Sep
- 2024 09:26:05 +0000
-Received: from TYCP286MB2334.JPNP286.PROD.OUTLOOK.COM
- ([fe80::8585:d563:db6e:848e]) by TYCP286MB2334.JPNP286.PROD.OUTLOOK.COM
- ([fe80::8585:d563:db6e:848e%6]) with mapi id 15.20.8005.017; Thu, 26 Sep 2024
- 09:26:05 +0000
-From: Ken Kurematsu <k.kurematsu@nskint.co.jp>
-To: Tobias Waldekranz <tobias@waldekranz.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-CC: Masahiro Mizutani <m.mizutani@nskint.co.jp>, Yoshitaka Ikeda
- <ikeda@nskint.co.jp>, Ken Kurematsu <k.kurematsu@nskint.co.jp>
-Subject: [PATCH] doc: blkmap: Fix typo in command example
-Thread-Topic: [PATCH] doc: blkmap: Fix typo in command example
-Thread-Index: AdsP9Y161X5HAWCPTFK+Z+ythlJe+A==
-Date: Thu, 26 Sep 2024 09:26:05 +0000
-Message-ID: <TYCP286MB233485B48812E07222B95435DB6A2@TYCP286MB2334.JPNP286.PROD.OUTLOOK.COM>
-Accept-Language: ja-JP, en-US
-Content-Language: ja-JP
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nskint.co.jp;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: TYCP286MB2334:EE_|TYWP286MB2053:EE_
-x-ms-office365-filtering-correlation-id: 92e1467a-2288-451e-8594-08dcde0d3ef1
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|366016|376014|1800799024|38070700018;
-x-microsoft-antispam-message-info: =?us-ascii?Q?Ep/norViHsnMyVuZkr58RGhmQBTenhQvLPpf3Dvvy+Mi8DQwgXXlZQiAgXDg?=
- =?us-ascii?Q?Nw6zhewppg8a+ibBWNx2fvLVz0Pw6I+n+FNh8PM4ndnk6UVZNFfStN5ZsnNa?=
- =?us-ascii?Q?aKdY9wy3dCL8JqMNUNMecG0prXXGMuw9rg5Nq6OhK+6eQ0G+Vfy22ovvjdWz?=
- =?us-ascii?Q?f5gLpdxqXtRmcJrLkGtTL/qg0spKqENFRChYlgqgTbpsk5T8OHUHqDe7lGqL?=
- =?us-ascii?Q?2XWgSfmUlh5VnPSnK3y/WanJ+4KqxS9MGR7g9KZwkKoSJTs/dSxYVcTy2/9b?=
- =?us-ascii?Q?Xr5ZWu2fWOUwH/phQ7joi7TFfnDXYxV/JwVom3kBndMIMin+b1D4blsCd64C?=
- =?us-ascii?Q?SIeAA/7JtoUfWxvLVrORLV/qby1uTZUie8w0PDEY0sQctzo/LyWSr5O/mdX4?=
- =?us-ascii?Q?210Z5vFeEfYLW+Mtbpq4XcXuDccdUFw5E27z3TJVlz6k/YSX2PWezlnXxwVa?=
- =?us-ascii?Q?DVl8gownKXoLHDevssA+VSlcdK0RpusTIKLd8+548xgv2prssS4/WMYu6L/w?=
- =?us-ascii?Q?NqRnUJuEYjZ2hocP5L6xbV8iltI9CUk2vm6kz9DGFtXjxBlm9vJqe7l5yxLx?=
- =?us-ascii?Q?TOzWKzqQe2tFMUqhQSz3zV7NFs5L5KkS9hpm0oiV7fLL/c6+pi4FrOli7yFE?=
- =?us-ascii?Q?ScOPWw6Tlr3XlwulKgpuzEk4uEkcFOi18DDQwv2R6xDc2cwz7sYYNcxgOVFd?=
- =?us-ascii?Q?6o2eRmrzb68MxtvNHTSyxMGebGW1wK2LMvbm7DnyqAYU7qF5Sjsh82wvPRWv?=
- =?us-ascii?Q?ljxMSqiq5IBCcZoGkyvrIoRAner0AIJTQMaWXSqzETOFYvDpRaAqewTCJ1UM?=
- =?us-ascii?Q?1UCRCLpPubULCclJ3zHj8ShEwdfnwVxXfdPnNvX4Wlu7L/Y5TR6jEoa/GDbA?=
- =?us-ascii?Q?i0aeSj7US8L1zpwz0h4pfZ3vHJMWLaCeRoarJ+zbgxwKKEsLnchDiFK+PRgZ?=
- =?us-ascii?Q?WkvqcpinDgaf0Pe2UdYzMD7Gu6QEdNCiklAX0qxDcCOIjHwNREqmDaWoxNgT?=
- =?us-ascii?Q?/EgyyLBx8c+Z/R+kKYGzAzBVocEFuG3JdmoRBOX+olAkaqkF6qIOCNjeJO8L?=
- =?us-ascii?Q?mBQ9kAAU7YXGxMKhjV8/42TaHo0YKStvSin0Z1N2pdSDeRTjwg9Gjn/Lb1rs?=
- =?us-ascii?Q?O133fbjuwW472mduNWPvRRFjgPS6CGsaXFTipjSk8PkfFgXmVOh3CPLcjxGC?=
- =?us-ascii?Q?rp72xC5msKdd+9cdpixzKHSUVenpZkTAdCm6YrdrjNbcl3DcTU7tU7SlHA3I?=
- =?us-ascii?Q?39q911Nf0SOcxLuVruiWfXTgtZNRy078n+PEg57JHWFDDkML6ACcC3nBOb3P?=
- =?us-ascii?Q?MnsZM131dpVQfB1cY86QCSTdi1/hCDKDpqG9EgKCWYwRRfEagaZKXJgtdciL?=
- =?us-ascii?Q?97M0wolFjFFm88ibIUMeKfalL7NL58fcMfSD5k/Jtb2uMUvtEQ=3D=3D?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:TYCP286MB2334.JPNP286.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024)(38070700018); DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?lvRNKMfnthPB6kMgj6bNB6TmI1/2b97yQGYjfJRa0mAXpaF4ZD2u5U0D1MYt?=
- =?us-ascii?Q?/mX/9FJLuDJ7n2afMaG05204tzXNYSigNmIM6RZ5c+PLgrT7/v91BVWbcfQG?=
- =?us-ascii?Q?SFt0oSqMk8VJnpO9iSb9bLWD2CBfkP3dpPjJ3IVK6JrTezr8oV5VqfKcesN3?=
- =?us-ascii?Q?FOiKFS+xCfSTnWXaOfUzR+nc4GFYQbYU3YAIgmP3BEuFX02MHmrLukLbBGva?=
- =?us-ascii?Q?31g4XdQKxgqgKCTWx8AA9MnLb794dJgr6eHEXjavBqH7fLHlzp3MhB85/ofJ?=
- =?us-ascii?Q?O1JDTmp1XskkOvSL/hFCNkiWbRDYzBxhOLT89cVN73/eui8Hhuvva+cDb2Ci?=
- =?us-ascii?Q?ikc5swR32FBfTB3zenlrx9PJkU2GNb6avjimTBhHF938hSGUAL4qymFkQU50?=
- =?us-ascii?Q?lWUbWjwBWYmZHEjFMKE5Phy/U+8hmzvQE3KPNM1IoMLGBfx0tbMxkXK46rkn?=
- =?us-ascii?Q?c6CxkEEPNAcrh5GRY8I2/UtLYtL4QPVGmzO+bAOOXeGPaasXPD5usniHHSbP?=
- =?us-ascii?Q?JmZrjFZDC3lsquu5AMHF7tfKcl2PysYZ0mgJvDttXHZiBPZv5X+4mJuNwgnb?=
- =?us-ascii?Q?cJ0wZsjRie1c2IBcR59aaJBWTx5IhW7M8dC7An/03a4tB4JX00V4086/PnuS?=
- =?us-ascii?Q?DJ0f+QrLFeha7d4t82lwc3X7xiKJpUgsjJQ36pwt8oHuGVfyDVnUNXxZ0U4y?=
- =?us-ascii?Q?fq0Q7NUt/YtrZsc16ZWOYYdnoxmTmnsptEvF3ptleG2OXJbLzIEGFaBsJi3o?=
- =?us-ascii?Q?eCaiSMTZxxFZ4z5USD0GZ5Sq5QO0I0AY9ojsWCmTQEpNOmLiBOUFA9rCCac0?=
- =?us-ascii?Q?QuB0lBHZcFjI49H61dG/EVstF7Vv6ccK7vhXo+cHkQMV5j/oF+ZUHSQRoXf9?=
- =?us-ascii?Q?Eo0ii/oVkF6Any+X+kf/Im1kun57eYkEC/Io0wTVbWhrUYXaTEmwpaglbkJq?=
- =?us-ascii?Q?BmAFr1jHDvW2lKTa6gqntwiZpgDGb1jUEVa9E6kjeKfswzN7UReUipl368it?=
- =?us-ascii?Q?lVhBpHYMbENyw2zLv8v7u3/0ox7fN4R6lr/C21Yp5sm0R/fWhoUEJEM3PAZ7?=
- =?us-ascii?Q?hs4FjTdc2HFwHoPBA7A5ZHRMLQSVL7bgsKWXer3LeC1YOMwz5ziRdKIdEHhx?=
- =?us-ascii?Q?McLTMLm0AK+OCKxvU0qn/mBSFhB6LSFj+k+Zl/zltKvo+CeKHhc3yJu9hnDa?=
- =?us-ascii?Q?NijghNh2QhF73YcjTxGcmailwbzSE+QLD8LcgjBbFhSCjSXs41QlsiVHDVf/?=
- =?us-ascii?Q?fsq8RAhasq0XGiQNR5uriLS23S6+M2T9UpRGxQloO7NX4YDSo4UbvbLcZGc/?=
- =?us-ascii?Q?CGwXgzQrh/UxaTGc1Dq5/V9bv/cUqOENQ6DiOGI12B67eR8S2ur0Adl5OpS/?=
- =?us-ascii?Q?i6LDstyHlecqRPW/27aqQZp4Jhhiku1TBP1kmOm6qtPFrPyp+6HxNagp7dg5?=
- =?us-ascii?Q?wdpb5v8JsLs3gmbbKCgeBbuPhDUZQCqnwOTW2VBsYssxEMwJsdHkmNFpM/pN?=
- =?us-ascii?Q?rbAgtrRHdCMwNyQ/8GA0iN5iXC+sUBDfIZ58Ieo9q5hA8kOpvFGe2RohwCUy?=
- =?us-ascii?Q?MyCLk2TsKOyknDIdE4VaTAQGZKE6BWfz/nbjaD+V?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ d=chromium.org; s=google; t=1727353744; x=1727958544; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=31H+kJxzmCnhqeBHzbcDiS14/Dwq3yuP8Vh3u/YrUZo=;
+ b=IN6Mo80KsSAINx+Gzj4CFprb/vUUe3RjO+hb83TjLjJEpwUu8gV0WWH8g0V6kkmm8y
+ Czre4WaUmHeGp6MDoZlnzSMBCfrLy89AFmeKJtZZzhFgo6yfkTpjneeOl3/cRsN3RZND
+ WJY777eu4+r9sl0f+cN0ewmn/lsLkdse6nrSU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727353744; x=1727958544;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=31H+kJxzmCnhqeBHzbcDiS14/Dwq3yuP8Vh3u/YrUZo=;
+ b=k0BB9ssq8X6ppWxa/xhBoC52RY5C158olk4rsahcDxZ9Smh9PYntDt/aVWHoBFMhna
+ 9yyBuhDvL7hNhlpnAp0tNVqLc4ZjsgBI7RDQvgT+8yQtim3kDbsmcWHsVYC/40WX1TCm
+ g5mKjhldhf7Z20QJno7iqsil6do9e6YBq2SoLn00RlLxngQ8Ky8EBxHeHKHFvRx3QAMv
+ nLjI7ZpNUDqW7UK0QYcD4BUxeefpMiARht+OKsKSyk0LnFCyM6h0sZ0DQziX1Q0HnUVT
+ Bu8oeK8z9EodNyUICNLBNz+wASZM88P0VQbvqqJIFmbXWu/FJf1oMUjEyk4cn50auy8T
+ HwIQ==
+X-Gm-Message-State: AOJu0YwnjlwklXteSkHX/yPNN63pj5VQTEAb7wzZ2J3zAvGfz+96JtWq
+ mj6N/xikbLg+e6jMX7PLvn9Rbllv27qcaYucVGfdvIS6Oe4BJMsK0yX+DRe14uUUQFvn8QvcL9u
+ NFted
+X-Google-Smtp-Source: AGHT+IExhqaLzjaIHKwJIEFrdlV8a9wnemDyz0NeTYGtCbPkqiLjGjwWkZgCrU3UfmnRcuN0ohuRHA==
+X-Received: by 2002:a17:907:f1c1:b0:a7a:acae:340b with SMTP id
+ a640c23a62f3a-a93b1649142mr324295366b.31.1727353743763; 
+ Thu, 26 Sep 2024 05:29:03 -0700 (PDT)
+Received: from chromium.org ([212.185.66.16]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a93930fb361sm342878166b.183.2024.09.26.05.29.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 26 Sep 2024 05:29:03 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Alexander Dahl <ada@thorsis.com>,
+ Heiko Schocher <hs@denx.de>, Joao Marcos Costa <jmcosta944@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Sean Anderson <seanga2@gmail.com>, Svyatoslav Ryhel <clamor95@gmail.com>
+Subject: [PATCH v2] doc: Move the generic memory-documentation to doc/
+Date: Thu, 26 Sep 2024 14:28:51 +0200
+Message-ID: <20240926122852.658621-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-OriginatorOrg: nskint.co.jp
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TYCP286MB2334.JPNP286.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 92e1467a-2288-451e-8594-08dcde0d3ef1
-X-MS-Exchange-CrossTenant-originalarrivaltime: 26 Sep 2024 09:26:05.1370 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 727455a2-9822-4451-819f-f03e059d1a55
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: /URbvjxkHXqV3ZoZC2HUxvbvt1gwazKoaB5C2ZEYgFNQ1o4PCf+8yonI6wbpZPIC1QBx2eeo6ZM2A2wMMtP4oWTfAaH1bm9tybV3ViBpV3I=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYWP286MB2053
-X-Mailman-Approved-At: Thu, 26 Sep 2024 14:26:32 +0200
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -158,26 +91,142 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fixed a variable that was incorrect during the calculation of fileblks.
+Move this section of the README into doc/ with some minor updates to
+mention SPL and user lower-case hex.
 
-Signed-off-by: Ken Kurematsu <k.kurematsu@nskint.co.jp>
+Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
- doc/usage/blkmap.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/doc/usage/blkmap.rst b/doc/usage/blkmap.rst
-index 7337ea507a..75f736c259 100644
---- a/doc/usage/blkmap.rst
-+++ b/doc/usage/blkmap.rst
-@@ -54,7 +54,7 @@ downloaded file, in blocks:
- ::
-=20
-    setexpr fileblks ${filesize} + 0x1ff
--   setexpr fileblks ${filesize} / 0x200
-+   setexpr fileblks ${fileblks} / 0x200
-=20
- Then we can add a mapping to the start of our device, backed by the
- memory at `${loadaddr}`:
---=20
-2.34.1
+Changes in v2:
+- Mention that these docs need updating
+
+ README                 | 45 ----------------------------------------
+ doc/develop/index.rst  |  1 +
+ doc/develop/memory.rst | 47 ++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 48 insertions(+), 45 deletions(-)
+ create mode 100644 doc/develop/memory.rst
+
+diff --git a/README b/README
+index 4be1e8c22a0..d73042406b6 100644
+--- a/README
++++ b/README
+@@ -2516,51 +2516,6 @@ On RISC-V, the following registers are used:
+ 
+     ==> U-Boot will use gp to hold a pointer to the global data
+ 
+-Memory Management:
+-------------------
+-
+-U-Boot runs in system state and uses physical addresses, i.e. the
+-MMU is not used either for address mapping nor for memory protection.
+-
+-The available memory is mapped to fixed addresses using the memory
+-controller. In this process, a contiguous block is formed for each
+-memory type (Flash, SDRAM, SRAM), even when it consists of several
+-physical memory banks.
+-
+-U-Boot is installed in the first 128 kB of the first Flash bank (on
+-TQM8xxL modules this is the range 0x40000000 ... 0x4001FFFF). After
+-booting and sizing and initializing DRAM, the code relocates itself
+-to the upper end of DRAM. Immediately below the U-Boot code some
+-memory is reserved for use by malloc() [see CONFIG_SYS_MALLOC_LEN
+-configuration setting]. Below that, a structure with global Board
+-Info data is placed, followed by the stack (growing downward).
+-
+-Additionally, some exception handler code is copied to the low 8 kB
+-of DRAM (0x00000000 ... 0x00001FFF).
+-
+-So a typical memory configuration with 16 MB of DRAM could look like
+-this:
+-
+-	0x0000 0000	Exception Vector code
+-	      :
+-	0x0000 1FFF
+-	0x0000 2000	Free for Application Use
+-	      :
+-	      :
+-
+-	      :
+-	      :
+-	0x00FB FF20	Monitor Stack (Growing downward)
+-	0x00FB FFAC	Board Info Data and permanent copy of global data
+-	0x00FC 0000	Malloc Arena
+-	      :
+-	0x00FD FFFF
+-	0x00FE 0000	RAM Copy of Monitor Code
+-	...		eventually: LCD or video framebuffer
+-	...		eventually: pRAM (Protected RAM - unchanged by reset)
+-	0x00FF FFFF	[End of RAM]
+-
+-
+ System Initialization:
+ ----------------------
+ 
+diff --git a/doc/develop/index.rst b/doc/develop/index.rst
+index 0d0e60ab56c..cbea38d4323 100644
+--- a/doc/develop/index.rst
++++ b/doc/develop/index.rst
+@@ -13,6 +13,7 @@ General
+    codingstyle
+    designprinciples
+    docstyle
++   memory
+    patman
+    process
+    release_cycle
+diff --git a/doc/develop/memory.rst b/doc/develop/memory.rst
+new file mode 100644
+index 00000000000..816fe3ec5db
+--- /dev/null
++++ b/doc/develop/memory.rst
+@@ -0,0 +1,47 @@
++.. SPDX-License-Identifier: GPL-2.0+:
++
++Memory Management
++-----------------
++
++Note: This information is outdated and needs to be updated.
++
++U-Boot runs in system state and uses physical addresses, i.e. the
++MMU is not used either for address mapping nor for memory protection.
++
++The available memory is mapped to fixed addresses using the
++memory-controller. In this process, a contiguous block is formed for each
++memory type (Flash, SDRAM, SRAM), even when it consists of several
++physical-memory banks.
++
++U-Boot is installed in XIP flash memory, or may be loaded into a lower region of
++RAM by a secondary program loader (SPL). After
++booting and sizing and initialising DRAM, the code relocates itself
++to the upper end of DRAM. Immediately below the U-Boot code some
++memory is reserved for use by malloc() [see CONFIG_SYS_MALLOC_LEN
++configuration setting]. Below that, a structure with global Board-Info
++data is placed, followed by the stack (growing downward).
++
++Additionally, some exception handler code may be copied to the low 8 kB
++of DRAM (0x00000000 ... 0x00001fff).
++
++So a typical memory configuration with 16 MB of DRAM could look like
++this::
++
++	0x0000 0000	Exception Vector code
++	      :
++	0x0000 1fff
++	0x0000 2000	Free for Application Use
++	      :
++	      :
++
++	      :
++	      :
++	0x00fb ff20	Monitor Stack (Growing downward)
++	0x00fb ffac	Board Info Data and permanent copy of global data
++	0x00fc 0000	Malloc Arena
++	      :
++	0x00fd ffff
++	0x00fe 0000	RAM Copy of Monitor Code
++	...		eventually: LCD or video framebuffer
++	...		eventually: pRAM (Protected RAM - unchanged by reset)
++	0x00ff ffff	[End of RAM]
+-- 
+2.43.0
 
