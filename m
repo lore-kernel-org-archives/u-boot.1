@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4383ECDE03A
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 21:36:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECBA3CDE038
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 21:36:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA3D288EAF;
-	Thu, 26 Sep 2024 23:36:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 32A7788EE8;
+	Thu, 26 Sep 2024 23:36:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="l5SO/Fwo";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LJa1UeXe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A7B3F88E8C; Thu, 26 Sep 2024 23:36:26 +0200 (CEST)
-Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
- [IPv6:2607:f8b0:4864:20::72d])
+ id F37D088EE4; Thu, 26 Sep 2024 23:36:31 +0200 (CEST)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44C7988EEE
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 23:36:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AB40788EE8
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 23:36:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x72d.google.com with SMTP id
- af79cd13be357-7a9a30a0490so142068185a.3
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 14:36:22 -0700 (PDT)
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6cb2458774dso9631096d6.3
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 14:36:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727386581; x=1727991381; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727386588; x=1727991388; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=YhZn4lBRaTsy5GsGEcaGlTcXw7lBcGw7RTbgF084KxI=;
- b=l5SO/FwomTXuLTZlOCnaeFEVhduqCrQunbEBUT/VUXeoFZv+tU9sdfbeaa0yPdNTLK
- aU3A9cYdXr2OIvAlMewc5i7l+2xav7HUo0KN499g3NQXEKTneXeRoCTfOHP0+m22hUWo
- K8bS4WWcW1MXBRAy96REzra8hmfU+urXjXlpo=
+ bh=wCXYyM/+/5xUBew91tJaMjtSI1SqU0ew4w353g67kVA=;
+ b=LJa1UeXetwSq7eazU+rGaqB28v/mXTZToYuBhOvv3Pdm6zM89/esXNTP7eeD9vBJ5U
+ DszMQ2v3nYt9+wIA2jvEZ0C/FwbM0fVHcd6T8MMKGWjYrqIWnBiHltbx2Lohv1urVgfB
+ pQ501446cYwHdj6KkwSxNog9Qfbxnsa8ExyEA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727386581; x=1727991381;
+ d=1e100.net; s=20230601; t=1727386588; x=1727991388;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=YhZn4lBRaTsy5GsGEcaGlTcXw7lBcGw7RTbgF084KxI=;
- b=kfTZ+QqqbAMAYGW7OTUAxjhl4lMsOAs4L48n0ijVpIgeeCD5zbK91qNl9h5/sTz2R6
- MoZ+IwJO6uAsJn0El8QtwJa/AM2Yi3CLm5RqVSLKnKB1DdIyn2Lesvnzt7/OybgWLv9g
- ToOr36JdRRTe0nbkLk4MTr8dkS2OOepYsf9XD1JU9uMgyQY+Rfd4NuIASWzk8PtL4EQ1
- tAeKZcQmKBd/Apxg3/TNcHASUZKGeFemg3miZc/zcu2LfEszraJSOhUlviUYSZmcexH4
- xkENFDe6iO8D4OuuQZ7PnP4xOf98GnoKP2TGeFLpgglkM83rwBv/CtkY2Xktf+l/oImz
- kJmw==
-X-Gm-Message-State: AOJu0Yz2FHwr5a5RpA1aT/7M9d/uOSJA/IFFkVExq6IVHrN1dCWIdww4
- bwzZQE8h6MpScWTVhcgS0btg8kxogi+VvJyQgTDawiGwCZRSKnRkSyRXzvQbLtDR431xoiJkvO+
- Wm7pFCQ2+71FZcX4P8yyMxh+m/5fXnvf3MzWy
-X-Google-Smtp-Source: AGHT+IFt4e2uMStq18MQA3WUBix249GqTqSFTGFYtsWOEGUkW1iFkRLRiZc6q11ZmrBtoqAgHgBOxrSEN2nVr8SgdtE=
-X-Received: by 2002:a05:6214:5411:b0:6cb:20b6:f39a with SMTP id
- 6a1803df08f44-6cb3b5c7d52mr19531366d6.13.1727386581161; Thu, 26 Sep 2024
- 14:36:21 -0700 (PDT)
+ bh=wCXYyM/+/5xUBew91tJaMjtSI1SqU0ew4w353g67kVA=;
+ b=REOFg1RjGamZzexPgCW8sZ8nnnK8YoEbzrDyiqvJPJQhe05CME4ee0x+eTZ9OFAPXd
+ 4tMNgb9jylACoTJKLXFeBO+8Op2WAEXhZo+H14BwVjyNgA7n+4hOGTPRiDyOqFwaMCGc
+ Zpxjkf6uvBF+U4xscV0WjBThUYTeNdajexNOhx6FHf0zwCtuMRHCP34vRT31hnWhgMHx
+ GYHjH6w5SQ3TsCwmwIr1Xzs1CTdQYW7OrX3LV4zv9Mov0e5Ki5HCkJuFmPAenx1UB7Zd
+ PKJMm/h6xZIhVd9ZIYFUEoEOpG/NQxfL7LKdqbx3Ghtm1wh3veaDWqlsFpYNYGQPH0W5
+ IQpg==
+X-Gm-Message-State: AOJu0Yy0s7XCIci+TuDNm6bz+YP+LiE9GBq73ucrycX3hOWillWy8ZAW
+ hFSydvKKEwzfMrR94yA0cnzj5FdDqbYAyVDOFGQeTqEmTCDIMc1romKAMwCx+DHomkmHIng0AIr
+ SfBTq/XhUoxtoNaA8TNoDsYXIYGKnl9vtdpjg
+X-Google-Smtp-Source: AGHT+IGImaRecE0ViVpGkPVi4KVJb49MIkGg/SV0mWeasgshJ0HoGSjdCOISoCBFcUB0nDsHPzPPTBvbOCJnrvO7x6Y=
+X-Received: by 2002:a05:6214:2f0f:b0:6cb:f8a:ba8a with SMTP id
+ 6a1803df08f44-6cb3b5f701cmr19872346d6.25.1727386588608; Thu, 26 Sep 2024
+ 14:36:28 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240925125622.197915-1-sjg@chromium.org>
- <20240925125622.197915-5-sjg@chromium.org>
- <20240926040649.GG4252@bill-the-cat>
-In-Reply-To: <20240926040649.GG4252@bill-the-cat>
+ <20240925125622.197915-2-sjg@chromium.org>
+ <20240926040636.GF4252@bill-the-cat>
+In-Reply-To: <20240926040636.GF4252@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 26 Sep 2024 23:36:09 +0200
-Message-ID: <CAFLszTjYs=A2jTTxH7GyYMDFBzb=Z6JNnLzGecy6Uv9wM2XizA@mail.gmail.com>
-Subject: Re: [PATCH 04/19] spl: Provide a way to mark code needed for
- relocation
+Date: Thu, 26 Sep 2024 23:36:17 +0200
+Message-ID: <CAFLszTjtW8hBpYMTUXZKALPUuC=4QE8=DQLgOn52XEmj6qg7ng@mail.gmail.com>
+Subject: Re: [PATCH 01/19] spl: Reduce the size of the bl_len field
 To: Tom Rini <trini@konsulko.com>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Sam Edwards <CFSworks@gmail.com>
+ Devarsh Thakkar <devarsht@ti.com>, 
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Manoj Sai <abbaraju.manojsai@amarulasolutions.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,26 +92,28 @@ Hi Tom,
 
 On Thu, 26 Sept 2024 at 06:06, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Wed, Sep 25, 2024 at 02:55:30PM +0200, Simon Glass wrote:
+> On Wed, Sep 25, 2024 at 02:55:27PM +0200, Simon Glass wrote:
 >
-> > Add a linker symbol which can be used to mark relocation code, so it can
-> > be collected by the linker and copied into a suitable place and executed
-> > when needed.
+> > This is a block length, so typicaly 512 bytes. Reduce the size to
+> > 16 bits to save space, before more fields are added in future work.
 > >
 > > Signed-off-by: Simon Glass <sjg@chromium.org>
 > > ---
 > >
-> >  include/asm-generic/sections.h | 16 ++++++++++++++++
-> >  1 file changed, 16 insertions(+)
+> >  include/spl.h | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> This patch, unless there's an implicit dependency on the other series
-> and so introduces an #include leads to fail to build on sandbox.
->
-> https://source.denx.de/u-boot/u-boot/-/jobs/906194
+> I don't think this works as intended:
+> 02: spl: Reduce the size of the bl_len field
+>        arm: (for 1/1 boards) spl/u-boot-spl:all +8.0 spl/u-boot-spl:text +8.0
+>             chiliboard     : spl/u-boot-spl:all +8 spl/u-boot-spl:text +8
+>                spl-u-boot-spl: add: 0/0, grow: 2/0 bytes: 8/0 (8)
+>                  function                                   old     new   delta
+>                  spl_nand_load_image                         60      64      +4
+>                  spl_mmc_load                               320     324      +4
 
-Yes it is in part D:
-
-https://patchwork.ozlabs.org/project/uboot/patch/20240920072444.134997-2-sjg@chromium.org/
+Yes, unfortunately some ARM devices need more code to access a 16-bit
+value. Perhaps this optimisation is not worth it?
 
 Regards,
 Simon
