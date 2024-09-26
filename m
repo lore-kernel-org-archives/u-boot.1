@@ -4,60 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CDEACEBF60
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 23:19:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64546CEBF60
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 23:22:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD10688F89;
-	Fri, 27 Sep 2024 01:19:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id EA45088F89;
+	Fri, 27 Sep 2024 01:22:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1727392769;
-	bh=UKdWl1LdIP1kRyYLp9E3zhZy6Eu2vOMnf7zhgcv8YRw=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=osW8r7VwSXP6dzXmyR4AzmJuHiY2va0Mhm72gmRYEhkYKzdx2qYSoInzwlSs2zaIX
-	 DPz+pMI+owvhJi5bvOpmOXMKi9tFJH+rgEpJPqOOdEboyrhw8KyvHZN3gXE++ZhZpc
-	 d7XMMxdu51fDfSLwIs6+jrhVcJvilbpCm+SXrXCyFyCHeFtOh1JrGINpDpxX8ZIJRU
-	 SRO/xbKFc+dY5XLly/PCzr3rCdLqEnDkTr3zmXgFIv+ChqX+dBGvffd+bNNnl6t5rK
-	 IZdxJOSBDGBeov3Uqgbb28f19DsDnmFQImYQNs97GOrAgHRh9tfuibe//ogWMKwNnr
-	 i5YFRrYBCx55Q==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Lt3gulZ/";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 3E83A88F85; Fri, 27 Sep 2024 01:22:39 +0200 (CEST)
+Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
+ [IPv6:2607:f8b0:4864:20::72c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id ECCB188F68;
- Fri, 27 Sep 2024 01:19:27 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1727392768;
- bh=UKdWl1LdIP1kRyYLp9E3zhZy6Eu2vOMnf7zhgcv8YRw=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=XAUk3FwBsqqzaQctDjIqr4+wkmhCqBD/zdqmatWTsylpUsQMz8THU0H6Er9wdtxmY
- 6Pb5Bw8wnsbIc7b84ivIcIMJDVwELZS4+tP8JytSafK1eRtfGihr6SwJSqjqP+bTo+
- 10nB35JxDzExNE4i6lgCeklj8lX7Gr2ZJjvlM4OaMrCbC6UDAis1NtJ8WExNga95IW
- 98ZRw6DfA/NyIvG/+No80zAho663WV5jpTfdNmGp1PXMfe91pGMEQR20Rcnba+Lgsq
- B8yfYfFbw+bwAlIO+1dqA/Rqqj3YffgPz2QsloWX7W5ZuQwOjfSk5zh7Ja6X7qmV3G
- QFyzCRGDwbbSA==
-Message-ID: <57a00da7-ec38-4c3a-8e5a-b44929358337@denx.de>
-Date: Fri, 27 Sep 2024 01:13:34 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 196E688F85
+ for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 01:22:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x72c.google.com with SMTP id
+ af79cd13be357-7acb0499ffeso132111385a.1
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 16:22:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1727392956; x=1727997756; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=rUwbDWB2ZXNHVy6SFl2DnVE0nhTgRLWDzyhTmu7dNAA=;
+ b=Lt3gulZ/dMRM1tWdmf2MEuPZ++wRPvUp5bPc68FiRtVuZs8hXIT2+rfRM6WmJPcVWB
+ UBnR61x/afNPVZQ3tlMX7ZTPhdiKW5FMJjrReoZohzur2nv7DLH9MxzGNLwfZ43eLdDC
+ ZMK8TGDGRVkSRNwiarqiJmWCWc9R1JvQhfQkw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727392956; x=1727997756;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rUwbDWB2ZXNHVy6SFl2DnVE0nhTgRLWDzyhTmu7dNAA=;
+ b=Y0g3b1NkYEJE/EvqB3iPbUdOIkP3PDOhgyHXe71kJlLISVYH3ripgPH4FKFbl4X2vA
+ dhHxYEEBT0WrSFXcGTU43ueGd2A9aD/nFkqdMCgYxtN/TX/UL7jpHrDwSqtuuSKhp7vh
+ cnnvLxmTWKz9IpLGcm5izTAzaF4Ou3Fagyouua1Ht0KeYPeWwp94exSMRVbb0gt4VXVz
+ hK2mdY1Sm3xrJb6KXp9cbRTWjlQobgALtfwzcESTsu+kfiNzquzpnSUy/hA2DdpPBjwb
+ 8SSRRhuQeJ0z6nOlwYp7Z1UJGGIqEgYWAqPf9kLMy3u0NLWLgj6soWmRHFqfrRTf71k8
+ 37sw==
+X-Gm-Message-State: AOJu0YwjkZX4y8b2Fj0OB65PRc/oyXZOPX8lS7h37E9xdb+/lGoK/5Jd
+ idoa/0m9fuaI2XAQsLVnvXWRizeNAE2Y3QA0PHaCCoPMK4D+nzmoZOU6efK5ziY=
+X-Google-Smtp-Source: AGHT+IGjEKgfURbzi4YSIrFjgdhM8rGVWQT7H1MxbqclK2cEToGVKlHwcjo/2P6h3VDaYhV6s9fztw==
+X-Received: by 2002:a05:620a:19a3:b0:7a9:ad47:edc1 with SMTP id
+ af79cd13be357-7ae37856f1fmr196679985a.34.1727392955890; 
+ Thu, 26 Sep 2024 16:22:35 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7ae377bc78csm34755885a.19.2024.09.26.16.22.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 26 Sep 2024 16:22:35 -0700 (PDT)
+Date: Thu, 26 Sep 2024 17:22:32 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Devarsh Thakkar <devarsht@ti.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Sean Anderson <seanga2@gmail.com>
+Subject: Re: [PATCH 11/19] spl: Support jumping to VPL from TPL
+Message-ID: <20240926232232.GM4252@bill-the-cat>
+References: <20240925125622.197915-1-sjg@chromium.org>
+ <20240925125622.197915-12-sjg@chromium.org>
+ <20240926040710.GI4252@bill-the-cat>
+ <CAFLszTjEpHJE4Zf9hZ_5HQw8adouQ9et3Y+y7LcDe1YKj6ah+w@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/9] ARM: dts: socfpga: add Enclustra Intel AA1
-To: Lothar Rubusch <l.rubusch@gmail.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com,
- simon.k.r.goldschmidt@gmail.com, tien.fong.chee@intel.com
-References: <20240912060649.190-1-l.rubusch@gmail.com>
- <20240912060649.190-3-l.rubusch@gmail.com>
- <bf99c2bd-f43c-4041-907f-f60b42163cce@denx.de>
- <CAFXKEHbOpv4g5LZ4dkUpwo1OBrRQ7YKZf10=S-2HqMtSK_OE9g@mail.gmail.com>
- <e294ce74-9b77-4de0-b7fc-0d8db9f1226f@denx.de>
- <CAFXKEHZVJiLO_qsy8wtRS9BAs4SG8crTXjoJxwgN45a8GP+JKg@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAFXKEHZVJiLO_qsy8wtRS9BAs4SG8crTXjoJxwgN45a8GP+JKg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="loRsvXOnAGJqXwzj"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTjEpHJE4Zf9hZ_5HQw8adouQ9et3Y+y7LcDe1YKj6ah+w@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,103 +95,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/27/24 12:53 AM, Lothar Rubusch wrote:
-> On Thu, Sep 26, 2024 at 3:36 AM Marek Vasut <marex@denx.de> wrote:
->>
->> On 9/26/24 12:49 AM, Lothar Rubusch wrote:
->>
->> Hi,
-> [...]
->>> Shall I add the files to my DTS patches and ask for upstreaming of the
->>> handoff files into the kernel?
->>
->> Are the handoff files really used by Linux for anything , or do they
->> contain various clock/pinmux/DRAM settings only used by U-Boot ? If the
->> later, place them into U-Boot and include them from -u-boot.dtsi file.
-> 
-> Similar to the other socfpga targets, the handoff files are just
-> relevant to u-boot. So, I'll keep them in arch/arm/dts.
 
-Right
+--loRsvXOnAGJqXwzj
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> My particular situation then is as follows. The .dts file just
-> includes several .dtsi files. I place this .dts file into
-> arch/arm/dts. The first includes contain the "handoff setup". Then I
-> include adjustments (.dtsi fragments) to the selected base-board and
-> boot-mode. Both  can vary that's why I really would prefer to allow
-> for a Kconfig option on that, in contrary to provide a set of .dts
-> files for all possible combinations.
-> 
-> Example:
-> $ cat ./arch/arm/dts/socfpga_arria10_mercury_aa1_pe1_sdmmc-u-boot.dts
+On Thu, Sep 26, 2024 at 11:33:52PM +0200, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Thu, 26 Sept 2024 at 06:07, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Wed, Sep 25, 2024 at 02:55:37PM +0200, Simon Glass wrote:
+> > > Use spl_get_image_pos() to obtain the image position to jump to. Add
+> > > the symbols used for VPL so that the correct image can be loaded.
+> > >
+> > > Use the functions provided for accessing these symbols and add a few
+> > > comments too.
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > ---
+> > >
+> > >  common/spl/spl.c | 22 ++++++++++++++++------
+> > >  1 file changed, 16 insertions(+), 6 deletions(-)
+> > >
+> > > diff --git a/common/spl/spl.c b/common/spl/spl.c
+> > > index d01e9861f88..623e486c210 100644
+> > > --- a/common/spl/spl.c
+> > > +++ b/common/spl/spl.c
+> > > @@ -50,15 +50,19 @@ u32 *boot_params_ptr =3D NULL;
+> > >
+> > >  #if CONFIG_IS_ENABLED(BINMAN_UBOOT_SYMBOLS)
+> > >  /* See spl.h for information about this */
+> > > +#if defined(CONFIG_SPL_BUILD) && !defined(CONFIG_TPL_BUILD) && !defi=
+ned(CONFIG_VPL_BUILD)
+> > >  binman_sym_declare(ulong, u_boot_any, image_pos);
+> > >  binman_sym_declare(ulong, u_boot_any, size);
+> > > +#endif
+> > >
+> > > -#ifdef CONFIG_TPL
+> > > +#if defined(CONFIG_TPL)
+> > > +/* TPL jumps straight to SPL */
+> > >  binman_sym_declare(ulong, u_boot_spl_any, image_pos);
+> > >  binman_sym_declare(ulong, u_boot_spl_any, size);
+> > >  #endif
+> > >
+> > >  #ifdef CONFIG_VPL
+> > > +/* TPL jumps to VPL */
+> > >  binman_sym_declare(ulong, u_boot_vpl_any, image_pos);
+> > >  binman_sym_declare(ulong, u_boot_vpl_any, size);
+> > >  #endif
+> >
+> > So I see on a64-olinuxino and others a size reduction here, as those
+> > symbols aren't included now. Do we have something in the tooling to
+> > ensure that we aren't now referencing / dereferencing invalid links?
+>=20
+> Yes I noticed that on some other boards. I dug into it a bit and
+> decided that the symbol was being declared when it didn't need to be.
+> If the symbol were used but not declared, we get an error.
 
-Upstream DT named this way into Linux:
+OK, thanks.
 
-socfpga_arria10_mercury_aa1_pe1_sdmmc.dts
+--=20
+Tom
 
-And then in U-Boot, implement the extras which include whatever you 
-need, name the file:
+--loRsvXOnAGJqXwzj
+Content-Type: application/pgp-signature; name="signature.asc"
 
-socfpga_arria10_mercury_aa1_pe1_sdmmc-u-boot.dtsi
+-----BEGIN PGP SIGNATURE-----
 
-The U-Boot build system will combine the two DTs, the build system 
-should automatically append matching -u-boot.dtsi content to any .dts file.
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmb17LgACgkQFHw5/5Y0
+tyzt0Av/e7va91LuPDA8pJHFwzwu+/+mJPJGGT0k6zEvgIZcdQVAAEO0SlpCg860
+GvPsqfzbutwIdIgzMoA+drriWbSVSmxf9naTiVH/hCyfgbhT+561NRc8IcWAP2lM
++mCCwgORisdv3NmmazSFpF4JgSDBpvAYVmHVDbZmpFS9CfRuSo6axa/5mIdM4CFM
+cQX7jREUkiYwFIMAkn+JAkTgwZCL0f05RtjE40Mocaf2Eb8NY0TqT9jXQ7Gny4mP
+c1ePlgkeVRvwrPTrskVFjL+ovdc3o4QyBaz8uOQFGUI6apKf3y4zxS4BxxIfbBfh
+8nPu2zzazI/OtJIGhdAJWuXm8BFDa/s6YxRlASHJyW1BiWGQDqg0nt6gNE5SEcy/
+CW4/O/yJ9Vrq6WSdkcBvNov31DpVno+Mwk4LpUeBm8WM6p2O1DqDF4+slx76XeHu
+v5Y7JI2QIijUnGbwFVZCzxeoCXT51v17enkYvssT09BhYMOk+X5we/Vnq0k4to0z
+aHtrSpUW
+=usKx
+-----END PGP SIGNATURE-----
 
-I am not sure if this also works if the .dts file is in dts/upstream/* 
-while the -u-boot.dtsi is in arch/*/dts/ , but there is now definitely a 
-use case for such a setup, it is probably a matter of tweaking the 
-Makefiles .
-
-> /dts-v1/;
-> /* will be taken from /arch/arm/dts */
-> #include "socfpga_arria10_mercury_aa1_handoff.h"
-> #include "socfpga_arria10-handoff.dtsi"
-> #include "socfpga_arria10_handoff_u-boot.dtsi"
-> 
-> /* will be taken from /dts/upstream */
-> #include "../../../dts/upstream/src/arm/intel/socfpga/socfpga_arria10_mercury_aa1.dtsi"
-> #include "../../../dts/upstream/src/arm/intel/socfpga/socfpga_enclustra_mercury_bootmode_sdmmc.dtsi"
-> #include "../../../dts/upstream/src/arm/intel/socfpga/socfpga_enclustra_mercury_pe1.dtsi"
-> 
-> Ideally, now I like to have the first part as default device tree.
-> DEFAULT_DEVICE_TREE=socfpga_arria10_mercury_aa1_pe1_sdmmc-u-boot.dts
-> When doing so, I noticed I cannot enable CONFIG_OF_UPSTREAM anymore,
-> the files in arch/arm/dts won't be found anymore.
-> Then I have the issue how to access the generic .dtsi files used for
-> boot-mode or base board. These files are identical to the kernel DT
-> why I would prefer to use them from dts/upstream. Including them like
-> ../../../../../... works, but... I think there must be a better way.
-
-Look at how the -u-boot.dtsi are automatically added on top of .dts 
-files, that might be a start.
-
-> Ideally I like to setup some Kconfig choice for base board selection
-> and one for boot-mode.
-
-> 1.) In the documentation control.rst I read that the u-boot.dts is
-> combined of several elements. Is there a way to take this base .dts,
-> then add a base board .dtsi by Kconfig option, and similar a
-> boot-mode?
-
-The -u-boot.dtsi is preprocessed by C preprocessor, just like all the 
-other DTs, so you can have a -u-boot.dtsi file which contains C 
-preprocessor conditional statements in it to conditionally include other 
-.dtsi files:
-
-#if IS_ENABLED(...)
-#include ...
-#else ...
-...
-#endif
-
-> 2.) Is there a way to enable CONFIG_OF_UPSTREAM and use explicit DTS
-> from arch/arm/dts for the u-boot?
-
-This I do not know.
-
-> 3.) What would be the best possibility to have a u-boot.dts with
-> handoff setup in arch/arm/dts and append .dtsi files from the general
-> dts/upstream - in case are there other boards are doing something
-> similar?
-
-See above, maybe some of it helps.
+--loRsvXOnAGJqXwzj--
