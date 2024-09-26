@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 308FBCCF9E9
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 11:05:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37A7FCCF9E9
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 11:08:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F2C188CD9;
-	Thu, 26 Sep 2024 13:05:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BA13788D66;
+	Thu, 26 Sep 2024 13:08:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AP07cW9q";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="e1lnsyt1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B039788D38; Thu, 26 Sep 2024 13:05:05 +0200 (CEST)
-Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
- [IPv6:2607:f8b0:4864:20::f33])
+ id BF42E88D61; Thu, 26 Sep 2024 13:08:12 +0200 (CEST)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C412C88A0A
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 13:04:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 20EC788A0A
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 13:08:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf33.google.com with SMTP id
- 6a1803df08f44-6cb2f271043so7485236d6.0
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 04:04:56 -0700 (PDT)
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6cb321145easo4203126d6.1
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 04:08:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727348696; x=1727953496; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Ue1eWPH1utHZkT4XxZouyIpF9bUkfOwxMsrl8KgXnbU=;
- b=AP07cW9q62xy+FwBKb1GjfKq4ERob5zRgxkjclLe5FUwddLgSbk4HUempAAlNqpXx1
- CvoT5d548JOG+VLH4w17MxvD7JjnWkbngnGVqU8uLJkUKTiq++nA6Mq1im/jiSD0UMPI
- JBQuvae1QprK31AtrYrB8gdI6wGWicTz07vyU=
+ d=chromium.org; s=google; t=1727348889; x=1727953689; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=y/7ClwDcD2JJCGmuhrd183hS5b47EsTQJv6wC+dY8GA=;
+ b=e1lnsyt1H3eEez3b7hSua8gkG4HaV5uniiyuGxXPYVR7aVs8khLpOLpUajcbdLJta7
+ PBFp8hh5ZF5SEFERqiQUPe+eraSLq1a496RIAxcY6l4oyRnl7x68MC5zrSw1hMUj0pzH
+ t4uflWSp9jiJbx5bi8agJtG9lk0krzVtalTM8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727348696; x=1727953496;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Ue1eWPH1utHZkT4XxZouyIpF9bUkfOwxMsrl8KgXnbU=;
- b=g7Jq+6kt4ijRGxU0pzfr+YoPf1BYb8+mF0aINLGtiGb60H68fsQdTbftg6mG+eDw2D
- 9u81yt6jTyH8Gz9wJr1g18f+epcAWZHfarKBnsU4mVwRyLlSjBTXYh/IrFIBCWJS3buw
- t43GgNAbnGTrLfFjZH1FPS5AEyWUdz8D/3r5VwIfqxw+Loku9yAIDGzAvMUnSFrBWEpV
- l5bCP5TXc4Knf7xaGNtAS5LDUN+8ZmavvG0ZCTGRK41ld8EPXkC8fN1WF7qvzRBcgzPW
- KBtRhcTUM3ikgRvl3hPchdxdvazEr/BMZPU9kJTcPqexWDPFiw1z9CzlaZRfoW063uty
- 0CLw==
+ d=1e100.net; s=20230601; t=1727348889; x=1727953689;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=y/7ClwDcD2JJCGmuhrd183hS5b47EsTQJv6wC+dY8GA=;
+ b=RlTrnfIT2SQtWwm6y5oYXbx0HL53RyBIWBszVEqveejYJsCaxxB8DEf1V1lP37PEch
+ 0xs/8KwNj9dIDvzk6ZSulveILHwmi74kFq5B82SNKn5chjL7j76MZMIMc9hwh6OOgTYi
+ gAtp/wDxnEcFeh4wfpJHXttW7J+Wj8c1B7xKeB62PebmqxqpLj39HvloKZCpTubg/rY8
+ zIJ7MpFP3OHiybryLnlOOKtIq3J+EqJAWamXc8MSlfseM2AdB/ZPN4hEpaaUy8weiFmC
+ WkJIpNB5XHgG4ID2zXipq1ZJ5eH3bfL1qV53UzvKa3ne1bEIOa/OjRnsuaBPx9mzeGWx
+ DZTw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXiF6NjrPHNsKI+SDWY+f/7F5rkSlxuw6KaMCubac9rwinG8u5U09zGqcUdBKe7FSJUlvXiRrA=@lists.denx.de
-X-Gm-Message-State: AOJu0YwtkixZst/667de7z+tMH1CR6birsGe2FVd8RxMiQIK3hQqW2bc
- R9w/o55tTDK93wXD9ebZpg6LX3AAxWlkMIA/QqBhyqz5iEKLBy8WAwndut3OUH1p3Pw02adqRMi
- UdXKOfAJyGXy87R59bxgWWQS1wSOYC3DK47QH
-X-Google-Smtp-Source: AGHT+IG3QzZ+Hd+9U/afEfklDgP6/3Ix8wtZcR0cLBbsZc68Et9LKPYIqrQDJRxR7FTtlU4dfYYGIRx7vCwBpa1XZhg=
-X-Received: by 2002:a05:6214:54c6:b0:6c7:c5b8:62d9 with SMTP id
- 6a1803df08f44-6cb1dd6f173mr85550776d6.3.1727348695670; Thu, 26 Sep 2024
- 04:04:55 -0700 (PDT)
+ AJvYcCX2xzJIW9ysHXGalt6MRBUVq7aofA3FFOVyNd1+6lIaizxv6q+n6Ijp93Cm3CPhDQkx3PriEPU=@lists.denx.de
+X-Gm-Message-State: AOJu0YyNUGKrEMptsSpxuYcrY/DGVljq6JvxPE5dxGqVQENBalOD0k0V
+ lwfXRurghQojNn5psgj5xAss8i/N7uoQ+0qLue8wooQeqQXOiRE/2EQ8X673GCX3WbfKh7gUO78
+ m53mO1QDRZzPt6QCnnCF/R4gritFecMHLZnbT
+X-Google-Smtp-Source: AGHT+IGep2PRZfwMbbSjP8G4HXHtt+ZinTnu0eXz2KgCxl78ibGlEG5KNsW2TFV3uK0vlTzxGvPPl6VyhaYIMtuRIaM=
+X-Received: by 2002:a05:6214:2dc7:b0:6c3:6560:af09 with SMTP id
+ 6a1803df08f44-6cb2f18cbc2mr39049766d6.0.1727348889008; Thu, 26 Sep 2024
+ 04:08:09 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240918152136.3395170-1-patrick.rudolph@9elements.com>
- <20240918152136.3395170-15-patrick.rudolph@9elements.com>
- <CAFLszTimAFGocvqbnT=JVsA2bjNa=ZfxP6Sy46a9e6VkhtdojQ@mail.gmail.com>
- <CAC_iWjLASm6U8kC68MJ0uZ14MGFS_SSL3Pcd8hcEH=a=W8gvBQ@mail.gmail.com>
- <CAFLszTgYHO7FgbCgfRwqT_yj4KBm31xKdEUrn0pZkhtLzOh=HQ@mail.gmail.com>
- <CAC_iWjKv+Z4K5xPW6MZhBZ67-rDy9iRVaoqfLKmJRwSG9nKnfA@mail.gmail.com>
- <CAFLszThA5eOM_xiMgDu=B4wAcP7wV9bzfc565rES8z6d1F8fjg@mail.gmail.com>
- <CAC_iWjLqmN0uA85RayC2hnMOJfCqumCpiq=waQwakd6ECfbXkg@mail.gmail.com>
- <CAFLszTgaVdgPNSC+vxZoH7ko5n_d6F_QnGfgL-biZ19edaUxQQ@mail.gmail.com>
- <CALNFmy3-0u=RhhiPgCzj2szzhaADXrWm79jkD1p3pmpmto456g@mail.gmail.com>
-In-Reply-To: <CALNFmy3-0u=RhhiPgCzj2szzhaADXrWm79jkD1p3pmpmto456g@mail.gmail.com>
+References: <20240905082811.1585467-1-sughosh.ganu@linaro.org>
+ <20240905082811.1585467-5-sughosh.ganu@linaro.org>
+ <0291efc6-86a2-437c-938a-707c46c34f91@gmx.de>
+ <CADg8p94TakJXkLs=m6RbvO2T_OmYagf68e4JV655TtQ5DnxtZg@mail.gmail.com>
+ <CAC_iWjKFh+g1k=HHKeApJp8OO5G78p0kruz59UUX-yfZcynJyg@mail.gmail.com>
+ <CADg8p96-kG4jEd5d_7ah3s2kOzgW4_uvDOJL+wOSzdrDjoMqZg@mail.gmail.com>
+ <CAFLszTjD5vLpcu7+_9xuzynLMjim3oPpg2wewug3-6nMs2CHug@mail.gmail.com>
+ <CADg8p94_8znKCR=97kCj-ypMdqW59k7PbC42G-xGFr7t9+t9XQ@mail.gmail.com>
+In-Reply-To: <CADg8p94_8znKCR=97kCj-ypMdqW59k7PbC42G-xGFr7t9+t9XQ@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 26 Sep 2024 13:04:43 +0200
-Message-ID: <CAFLszThqaF9oSxEW5ZYw9udqtC+8n3BhQj313qUvRvrQV=OwWw@mail.gmail.com>
-Subject: Re: [PATCH v4 14/35] efi_loader: Allocate and write ACPI tables
-To: Patrick Rudolph <patrick.rudolph@9elements.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
+Date: Thu, 26 Sep 2024 13:07:56 +0200
+Message-ID: <CAFLszTg2TvZp37HTjVwnYAw9cgX1-mfipkaw7frEL4cwJbzF4w@mail.gmail.com>
+Subject: Re: [PATCH 04/16] event: add event to notify lmb memory map changes
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,178 +93,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Patrick,
+Hi Sughosh,
 
-On Thu, 26 Sept 2024 at 10:01, Patrick Rudolph
-<patrick.rudolph@9elements.com> wrote:
+On Thu, 26 Sept 2024 at 09:12, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> Hi Simon,
-> On Fri, Sep 20, 2024 at 6:01=E2=80=AFPM Simon Glass <sjg@chromium.org> wr=
-ote:
+> On Wed, 25 Sept 2024 at 18:23, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > Hi Ilias,
+> > Hi Sughosh,
 > >
-> > On Fri, 20 Sept 2024 at 08:36, Ilias Apalodimas
-> > <ilias.apalodimas@linaro.org> wrote:
+> > On Fri, 20 Sept 2024 at 13:38, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > > >
-> > > Hi Simon,
+> > > On Fri, 20 Sept 2024 at 14:51, Ilias Apalodimas
+> > > <ilias.apalodimas@linaro.org> wrote:
+> > > >
+> > > > Hi Sughosh,
+> > > >
+> > > > On Tue, 17 Sept 2024 at 15:33, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > > > >
+> > > > > On Sat, 14 Sept 2024 at 20:38, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> > > > > >
+> > > > > > On 9/5/24 10:27, Sughosh Ganu wrote:
+> > > > > > > Add an event which would be used for notifying changes in the
+> > > > > > > LMB modules' memory map. This is to be used for having a
+> > > > > > > synchronous view of the memory that is currently in use, and that is
+> > > > > > > available for allocations.
+> > > > > >
+> > > > > > The synchronous view problem only exists because we are duplicating
+> > > > > > data. Store the EFI memory type in LMB and the problem vanishes.
+> > > > >
+> > > > > The LMB module only concerns itself with RAM memory. If I understand
+> > > > > correctly, you are proposing maintaining the EFI memory map within the
+> > > > > LMB module ? That would mean handling memory types other than
+> > > > > conventional memory in LMB.
+> > > >
+> > > > I am pretty sure I've asked this before, but do these *always* need to
+> > > > be in sync?
+> > > >
+> > > > The efi allocators will call LMB now. So when we allocate something
+> > > > gtom EFI, even if any potential changes from LMB haven't been
+> > > > published to EFI, we won't have any memory corruptions. Can't we just
+> > > > opportunistically update the memory map once someone requests it?
 > > >
-> > > On Thu, 19 Sept 2024 at 18:36, Simon Glass <sjg@chromium.org> wrote:
-> > > >
-> > > > Hi Ilias,
-> > > >
-> > > > On Thu, 19 Sept 2024 at 17:20, Ilias Apalodimas
-> > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > >
-> > > > > Hi Simon,
-> > > > >
-> > > > > On Thu, 19 Sept 2024 at 18:00, Simon Glass <sjg@chromium.org> wro=
-te:
-> > > > > >
-> > > > > > Hi Ilias,
-> > > > > >
-> > > > >
-> > > > > [...]
-> > > > >
-> > > > > > > > > +
-> > > > > > > > > +               if (!addr)
-> > > > > > > > > +                       return log_msg_ret("mem", -ENOMEM=
-);
-> > > > > > > > > +       } else {
-> > > > > > > > > +               pages =3D efi_size_in_pages(TABLE_SIZE);
-> > > > > > > > > +
-> > > > > > > > > +               ret =3D efi_allocate_pages(EFI_ALLOCATE_A=
-NY_PAGES,
-> > > > > > > > > +                                        EFI_ACPI_RECLAIM=
-_MEMORY,
-> > > > > > > > > +                                        pages, &new_acpi=
-_addr);
-> > > > > > > > > +               if (ret !=3D EFI_SUCCESS)
-> > > > > > > > > +                       return log_msg_ret("mem", -ENOMEM=
-);
-> > > > > > > > > +
-> > > > > > > > > +               addr =3D (void *)(uintptr_t)new_acpi_addr=
-;
-> > > > > > > > > +       }
-> > > > > > > > > +
-> > > > > > > >
-> > > > > > > > The tables should be written regardless of whether EFI_LOAD=
-ER is enabled.
-> > > > > > >
-> > > > > > > *Why*? How do you expect to hand them over to the OS?
-> > > > > >
-> > > > > > Why - because boards which need ACPI tables to boot should gene=
-rate
-> > > > > > them;
-> > > > >
-> > > > > Noone argued that.
-> > > > >
-> > > > > > also this happens when U-Boot starts up, in last_stage_init()
-> > > > > > How - it isn't possible, but eventually I suppose it will be, o=
-nce we
-> > > > > > have a use case for booting with ACPI but without EFI
-> > > > >
-> > > > > Are you aware of such an OS? If not, we can accept the patches wh=
-en we
-> > > > > have a reason.
-> > > >
-> > > > Which patches? This is how it works today. We set up the tables in
-> > > > last_stage_init(), so they can be examined while in U-Boot.
-> > >
-> > > What I mean, is that until we have a valid use case to store the ACPI
-> > > in a bloblist, I prefer them being allocated with proper EFI memory
-> > > backing
+> > > I have given this a thought. Because what you mention, Simon has a
+> > > similar comment. But to achieve this, it would require generating a
+> > > new efi memory map afresh every time such a requirement comes up. This
+> > > would mean, create a new memory map, put in the conventional memory,
+> > > and add other memory types that were part of the existing memory map.
+> > > And then remove the older memory map. This would need to be done every
+> > > time a memory map is needed to be generated. And that would also
+> > > include instances when a user enters a command to get the current
+> > > memory map. I think notifying any changes to the lmb memory map to the
+> > > efi memory module is easier, and less error prone.
 > >
-> > I'm going to assert prior art here. If ARM is to have ACPI in U-Boot,
-> > it should follow the most recent x86 approach and store it in the
-> > bloblist. That is what the blloblist is for. It also avoids using
-> > memory below the U-Boot area, which is not allowed.
-> >
-> > >
-> > > >
-> > > > It is the patches to change this which I object to.
-> > > >
-> > > > > I remember patches being hard NAK'ed on using DTs to pass the ACP=
-I
-> > > > > table address in the past.
-> > > >
-> > > > Yes, I believe Bytedance carries a patch locally for that :-)
-> > >
-> > > Exactly
-> > >
-> > > >
-> > > > >
-> > > > > >
-> > > > > > >
-> > > > > > > >
-> > > > > > > > Can we drop this else clause? We should always use the blob=
-list.
-> > > > > > >
-> > > > > > > Both Heinrich and I said the exact opposite. Unless there's a
-> > > > > > > perfectly good reason why we should keep them in bloblist mem=
-ory, I'd
-> > > > > > > like us to do that
-> > > > > >
-> > > > > > The main reason is that we should not be putting things in memo=
-ry
-> > > > > > between the start of RAM and the bottom of the U-Boot area. Tha=
-t
-> > > > > > region of memory is supposed to be for loading images. Most boa=
-rds
-> > > > > > hard-code the image-load addresses in environment variables. Bu=
-t even
-> > > > > > if they didn't, we should not be using that memory for U-Boot d=
-ata.
-> > > > >
-> > > > > EFI allows you to request a specific address to use. We can choos=
-e one
-> > > > > that fits the requirements
-> > > >
-> > > > So long as it is in U-Boot's space, that is fine. I just sent a pat=
-ch
-> > > > about relocation which covers this. It occured to me that this feat=
-ure
-> > > > of U-Boot, which I have always assumed was common knowledge, may ha=
-ve
-> > > > not been noticed.
-> > > >
-> > > > > >
-> > > > > > Another reason is that the bloblist is designed for this, for k=
-eeping
-> > > > > > tables in a small, contiguous area of memory, so that when pass=
-ed to
-> > > > > > Linux they are not spread all over the place.
-> > > > >
-> > > > > Linux does not and will not read tables from a bloblist though
-> > > >
-> > > > Indeed. There really isn't any point, anyway, since there are other
-> > > > ways of passing the tables along...except for ACPI with FDT but tha=
-t
-> > > > isn't a valid use case for Linux so far.
-> > >
-> > > What we are trying to do with EFI is to stay as close to the spec and
-> > > the current OS implementations as possible. So again, please allocate
-> > > EFI memory for the ACPI tables. The patches to convert it to bloblist
-> > > allocating them are minimal, so we can do it, once there's an actuall
-> > > need for it.
-> >
-> > As it stands today, efi_acpi_register() does not do an EFI allocation,
-> > it just adds the existing allocation to the EFI tables. This works
-> > fine for x86 - see arch/x86/lib/tables.c - so I would like ARM to do
-> > the same. The need for it is (as above) that we should ensure that
-> > memory usage is within the U-Boot area. This is something which
-> > bloblist handles automatically. It is also nice to see all the tables
-> > in one place with 'bloblist list'
-> >
+> > We need to get some agreement on my memory-allocation patches first. I
+> > don't believe we are on the same page on those, despite some weeks of
+> > discussion. We need to resolve that issue first. I did try right from
+> > the start to first agree on the problem to be solved. We skipped that,
+> > so now we are having to do it now...
 >
-> So what's the consent and the next step here?
-> Is the current code OK as is, as it works with both BLOBLIST and without?
-> Should I drop support for one or the other?
+> These patches are currently under review. But fwiw, I think you are
+> aware that these patches are not related to what your patch series is
+> attempting. Your patches are related to the efi_allocate_pool()
+> function, whereas this series is trying to use LMB as the backend for
+> allocating pages, as requested from efi_allocate_pages(). So these are
+> not related. But like I said, you are aware of these details :)
 
-Just BLOBLIST. The EFI allocation is done using efi_acpi.c which you
-can check to make sure it is working.
+The thing is, if we actually tidy up the EFI allocations then there
+will be no use of allocate-pages before the app starts. So we won't
+need to 'sync' the two different sets of memory tables. There will
+just be one.
 
-Using efi_allocate_pages() before the app starts is not good.
+If I were confident that we could apply your series and then clean it
+up later, I would be fine with it. But given that my two series have
+sat here for a considerable period of time and are still not really
+making progress, I lack confidence.
 
 Regards,
 Simon
+[..]
