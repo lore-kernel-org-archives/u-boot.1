@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83B71CDE03E
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 22:43:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9F05CDE03F
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 22:43:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 30B6588F9B;
-	Fri, 27 Sep 2024 00:43:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 93A4988E1F;
+	Fri, 27 Sep 2024 00:43:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="M8ZBdB/x";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kV/d09bQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B8FD488FE0; Fri, 27 Sep 2024 00:43:05 +0200 (CEST)
-Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
- [IPv6:2607:f8b0:4864:20::832])
+ id 1AA69889AA; Fri, 27 Sep 2024 00:43:20 +0200 (CEST)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ADCB287B77
- for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 00:43:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 085A088FEE
+ for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 00:43:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qt1-x832.google.com with SMTP id
- d75a77b69052e-458366791aaso8332801cf.1
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 15:43:03 -0700 (PDT)
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-6cb2aaf4a73so11442806d6.2
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 15:43:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727390582; x=1727995382; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727390594; x=1727995394; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZiLjMtLPhGqbinSBSP/b2U4VwNho2J+ttezSEqKlDUw=;
- b=M8ZBdB/xm0g8pdXnIelg8RsMU8xqB1D0RXQpALhjW/c2GZSOCEyFa/bJsezWY3xMzH
- q9wNjRD7NCkv2OFaZ9AT6B6u7QYbeHSExdda8vIOKQk/ZgykYM8rB6bKaqqv79xzhDIh
- 1hEBmux0nEvTzlEJmbhJHmEPzFBJ/LPVosO9M=
+ bh=7bmFrjVceaa9EGbUmHR0EqKoYF1u9DWDilLma9WPI5A=;
+ b=kV/d09bQ5qTx5hb9YwYrGtp58zJKNrwhWeAw1yjfSQ2RiHw0kzgVEwb2/s99aZprqG
+ K76Ay5D5WNDNLMdT2+qiaK1r9Koo96LYtEuVPOwaGsfFiGAtF4Tvz400KMWZHM6D+mlX
+ cQr/uNh2BzyRwUD723UQQTfwqIFBmp9ac6Azk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727390582; x=1727995382;
+ d=1e100.net; s=20230601; t=1727390594; x=1727995394;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZiLjMtLPhGqbinSBSP/b2U4VwNho2J+ttezSEqKlDUw=;
- b=gRsBc344C91rO9/i7rrgB8BfFiddFTSCxBYZn0HTlzU09JpsJVja5uVxa1QW544U2u
- qdZhFbGPbCKwdqScDHuRe8r5B0b8QqGXJ5C/I7wDe6Gx6Kbjk9Bn60MQpIA4Lp99egi6
- EIGpGdAaewBndq7av6MiHhttGdZI5gva3cIZIUsnIPx2j5K8lcrzrSiSiE3Au23kKgQr
- ptPcRjN2mg6BqT/WmCnPkAufz8riNLSPAmmY3QrQ8+fjIhPxAHN0PevDl2JNhggUwfxW
- Umc9NC99U4uUZUTNEVILbjNpQ7HdvYL4r7pz4/MmgdJsjbe7PJpF/b3ddvRLJiaab/iW
- Oe2g==
-X-Gm-Message-State: AOJu0YxNshGBLZCX1w3QGiFWq3kdq380M89XHgcXGA8PMCZuQBf6IowF
- FpcQejKjID9MSkh1hzgwktyzjhMoy+TqxorxMz/5XT8zofig5VTkORLcsrPLoP2h0nqw4awZh0p
- FyqhEszw=
-X-Google-Smtp-Source: AGHT+IFiHS0N6uc6RFxsWV5HE7PAGRgzAfE1qjyeXrgPPnOQ8T0NhX7m4QzE5utBY0w1rpby46yiFg==
-X-Received: by 2002:ac8:7f8c:0:b0:458:5bb4:7751 with SMTP id
- d75a77b69052e-45c9f1e7c03mr15837361cf.13.1727390582521; 
- Thu, 26 Sep 2024 15:43:02 -0700 (PDT)
+ bh=7bmFrjVceaa9EGbUmHR0EqKoYF1u9DWDilLma9WPI5A=;
+ b=J3EeYhsUIG6kY5SSUxg8x2Ol1+ZuS2ncGEOKmcsQeMgToVcBExzwpMz32ok1y1uI78
+ HsWP9huNgw5URazZaHcl3brbpb2w7raDUJRwfIJ2ZFVyiahPSEkGGcO603G8mRI1TfbV
+ tj+cgNjk2t5hkCIh2qGnWqWCrFlRrot/jSe40GgmaIm9+Gl9EZ67Sde5sIghxi+ze1Gr
+ aegCexzMV6oStDM09P+VX1WFHnVe9IP9fEisH3xFrgaLXZovkjSvEXXOWibftH7jIIWv
+ P56I4svI3nzGj3pGlw8X8H8FIetwB4MZJ0IwAnEaL7x+9crngDBGZm9IOzAexBlIUX+R
+ JYng==
+X-Gm-Message-State: AOJu0YwgMWsPr/M44NRVk2pBOuF2jRAgf7CT7EdRqV0v/CKI9vF2roIo
+ Pm7KKs5hMeZYDY4Lkn07FpuWfJuNejc1aP3PFKYiwxwuAAlxFIFxHOP8Gfb7NkId3mOdPvho7Cd
+ beYUMgWA=
+X-Google-Smtp-Source: AGHT+IFDCZwmu6lVnLIvS+Gt2ppLXxIZTkYAqgDu/o0DxSMELy3xQ6x1migg3W/1dGNudtWhpOtFKQ==
+X-Received: by 2002:a05:622a:190a:b0:456:8633:43e9 with SMTP id
+ d75a77b69052e-45c9f2a482amr18088671cf.52.1727390593813; 
+ Thu, 26 Sep 2024 15:43:13 -0700 (PDT)
 Received: from chromium.org ([205.220.129.31])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-45c9f350fadsm2738461cf.80.2024.09.26.15.42.54
+ d75a77b69052e-45c9f350fadsm2738461cf.80.2024.09.26.15.43.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Sep 2024 15:43:02 -0700 (PDT)
+ Thu, 26 Sep 2024 15:43:13 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Devarsh Thakkar <devarsht@ti.com>, Kever Yang <kever.yang@rock-chips.com>,
- Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH 21/42] spl: Simplify check for SPL
-Date: Fri, 27 Sep 2024 00:35:46 +0200
-Message-ID: <20240926223814.1276764-22-sjg@chromium.org>
+ Andy Fleming <afleming@gmail.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Mario Six <mario.six@gdsys.cc>, Priyanka Jain <priyanka.jain@nxp.com>,
+ Stefan Roese <sr@denx.de>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Wolfgang Denk <wd@denx.de>
+Subject: [PATCH 22/42] powerpc: Correct check for SPL
+Date: Fri, 27 Sep 2024 00:35:47 +0200
+Message-ID: <20240926223814.1276764-23-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240926223814.1276764-1-sjg@chromium.org>
 References: <20240926223814.1276764-1-sjg@chromium.org>
@@ -92,46 +93,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that SPL means SPL (only) and is not defined for TPL, simplify some
-checks for SPL.
+This variable does not exist so the condition will never be met. Fix it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- include/spl.h | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ arch/powerpc/lib/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/include/spl.h b/include/spl.h
-index dd9aeeaf9cc..415d198da56 100644
---- a/include/spl.h
-+++ b/include/spl.h
-@@ -90,7 +90,7 @@ enum u_boot_phase {
-  *
-  * To include code only in SPL, you might do:
-  *
-- *    #if defined(CONFIG_XPL_BUILD) && !defined(CONFIG_TPL_BUILD)
-+ *    #if defined(CONFIG_SPL_BUILD)
-  *    ...
-  *    #endif
-  *
-@@ -120,7 +120,7 @@ static inline enum u_boot_phase spl_phase(void)
- 	return PHASE_TPL;
- #elif defined(CONFIG_VPL_BUILD)
- 	return PHASE_VPL;
--#elif defined(CONFIG_XPL_BUILD)
-+#elif defined(CONFIG_SPL_BUILD)
- 	return PHASE_SPL;
- #else
- 	DECLARE_GLOBAL_DATA_PTR;
-@@ -154,7 +154,7 @@ static inline enum u_boot_phase spl_prev_phase(void)
- 	return PHASE_NONE;
- #elif defined(CONFIG_VPL_BUILD)
- 	return PHASE_TPL;	/* VPL requires TPL */
--#elif defined(CONFIG_XPL_BUILD)
-+#elif defined(CONFIG_SPL_BUILD)
- 	return IS_ENABLED(CONFIG_VPL) ? PHASE_VPL :
- 		IS_ENABLED(CONFIG_TPL) ? PHASE_TPL :
- 		PHASE_NONE;
+diff --git a/arch/powerpc/lib/Makefile b/arch/powerpc/lib/Makefile
+index b218ae2b91c..64ac4930b62 100644
+--- a/arch/powerpc/lib/Makefile
++++ b/arch/powerpc/lib/Makefile
+@@ -44,5 +44,5 @@ obj-y	+= traps.o
+ endif # not minimal
+ 
+ ifdef CONFIG_XPL_BUILD
+-obj-$(CONFIG_$(SPL_TPL)_FRAMEWORK) += spl.o
++obj-$(CONFIG_$(SPL_TPL_)FRAMEWORK) += spl.o
+ endif
 -- 
 2.43.0
 
