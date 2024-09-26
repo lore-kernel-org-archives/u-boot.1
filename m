@@ -4,72 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BCCCCDE00D
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 14:37:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A034CDE025
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 16:45:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4966B8860D;
-	Thu, 26 Sep 2024 16:37:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8013488C94;
+	Thu, 26 Sep 2024 18:45:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mx6+gDF0";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="wmDyYQIc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A2EA88C91; Thu, 26 Sep 2024 16:37:12 +0200 (CEST)
-Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
- [IPv6:2607:f8b0:4864:20::82e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2EF4788CFC; Thu, 26 Sep 2024 18:45:43 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1811B880F4
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 16:37:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D0AF088A9D
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 18:45:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-4583083d05eso7156271cf.3
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 07:37:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1727361429; x=1727966229; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=8aCPIvQ1YGA7VLjCu3DijmwgR0ILzUjoQg7ApskON9c=;
- b=mx6+gDF0PrphIAW+PVdztuPgcRVbsZASkAq96a4ZmN5OfL7e3qiRTfWFIN7cduN2yO
- gxOQ/zyBwJP+ejmeb5mYHNt35QFM7bHXYDmVCVMRvPopNoM05Nut1yoFkgnJ8+jpuJge
- 5rD+CwSv2CBf5kUC+tqX8ovOE416nL0Gjpob0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727361429; x=1727966229;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=8aCPIvQ1YGA7VLjCu3DijmwgR0ILzUjoQg7ApskON9c=;
- b=o2Ll9nZQsybHFG+5fkPgJQ8rv/bNM2w6ygDGdcrLEL+nHQUob+d2chcDvGn2td27x0
- ODsSHa8DJDZxffoHLaZWfIltBvokp0m6tjLiL0nBFht7UjasW3uVKjU2l+gdBmhBbvNy
- jCqeNQdKXZ5jxWZc4nMVXO9guqdUM8YAccJRyu/zrs8pMg9c/1BLCW4Kb+q7QmwT3Da5
- AmSHd0Qv9m/YUjF4ZwX5i3FPaKYpQS2UZUJZQOvdyFhtKNqL+T1t0DnPAGExUADZashj
- 0QMgZhFtAn6O0m64Y9WS31IBOLxSCyIb/z6JoyGnxYYvU1jFU2PWqJzNDG7qw/A8RJRT
- xjRA==
-X-Gm-Message-State: AOJu0Yz58z3xZ7zU6PIiA8d85kKN20LsHn1eR5ea3yYmYx6kiElnnMNH
- mbBOCMA9n8GDuzVCHy+HQsM/2c5arvWbu/LHTZ6aUzBo7JIxMxiPmU47806BOaA=
-X-Google-Smtp-Source: AGHT+IFxGqbXHQ9F8crD2L141WEcGZBjNm+e3Hs5ESVfZtHEw0UWeHW+rDRGKeWiOFEoFQr190U8Jg==
-X-Received: by 2002:a05:622a:20a:b0:456:61f0:810d with SMTP id
- d75a77b69052e-45b5dece4b8mr94430361cf.10.1727361428598; 
- Thu, 26 Sep 2024 07:37:08 -0700 (PDT)
-Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-45b525b193asm26344721cf.49.2024.09.26.07.37.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Sep 2024 07:37:08 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
-In-Reply-To: <20240925094745.37922-1-sjg@chromium.org>
-References: <20240925094745.37922-1-sjg@chromium.org>
-Subject: Re: [u-boot-test-hooks PATCH] qemu_arm64_tpl: Add a new board
-Message-Id: <172736142733.606809.2517380252705522662.b4-ty@konsulko.com>
-Date: Thu, 26 Sep 2024 08:37:07 -0600
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=devarsht@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 48QGjaE9055900;
+ Thu, 26 Sep 2024 11:45:36 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1727369136;
+ bh=HV2PbK25Nj5yw3bPOZJ/cCr1INatqwTTPDF6A79JXWo=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=wmDyYQIcvxc9tL7YeQB06mpgBspIBntJ7c3b/rlosUh2jW8eIJKTbaSNUSjJEZEbm
+ rm5Vv0IaNmV/gUAwhAbMocwCUdCgeayy0fLnHgmXK3RAwSr+e3N9u1nruDT0zpuPgl
+ LufwmKUoOZJemizfFpIdemxjAbRanhNAGwNW+qPs=
+Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 48QGja78084784
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 26 Sep 2024 11:45:36 -0500
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 26
+ Sep 2024 11:45:35 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 26 Sep 2024 11:45:35 -0500
+Received: from [10.249.130.181] ([10.249.130.181])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 48QGjUrf101664;
+ Thu, 26 Sep 2024 11:45:32 -0500
+Message-ID: <08a38499-c36d-4bf7-adcc-d3f547f3afc8@ti.com>
+Date: Thu, 26 Sep 2024 22:15:29 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] rpi: Fix build error when CONFIG_VIDEO is disabled
+ for Raspberry Pi
+To: Martin Stolpe <martinstolpe@gmail.com>
+CC: "Ivan T. Ivanov" <iivanov@suse.de>, <u-boot@lists.denx.de>, Francois
+ Berder <fberder@outlook.fr>, Matthias Brugger <mbrugger@suse.com>, Nikhil M
+ Jain <n-jain1@ti.com>, Peter Robinson <pbrobinson@gmail.com>, Rasmus
+ Villemoes <rasmus.villemoes@prevas.dk>, Tom Rini <trini@konsulko.com>
+References: <20240920063204.1049202-1-martin.stolpe@gmail.com>
+ <20240920063204.1049202-2-martin.stolpe@gmail.com>
+ <20240920081625.z3fwz6n7o2zxd4gf@localhost.localdomain>
+ <CAPHZmLbcfMVOydp9jCY0mWKdKPePBp+3rfttMyKbHT-CbB7kjA@mail.gmail.com>
+ <e27aef89-8038-9099-58ed-b927cce54579@ti.com>
+ <CAPHZmLZopucK5uMwENuF83pRMLYR2A5sC7fes4-1JXE4jX7=rw@mail.gmail.com>
+Content-Language: en-US
+From: Devarsh Thakkar <devarsht@ti.com>
+In-Reply-To: <CAPHZmLZopucK5uMwENuF83pRMLYR2A5sC7fes4-1JXE4jX7=rw@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,15 +88,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 25 Sep 2024 11:47:40 +0200, Simon Glass wrote:
+Hi Martin,
 
-> Add this new board, to support testing the relocating SPL loader.
+On 26/09/24 17:56, Martin Stolpe wrote:
+> Hi,
+> 
+> Am Di., 24. Sept. 2024 um 08:38 Uhr schrieb Devarsh Thakkar
+> <devarsht@ti.com <mailto:devarsht@ti.com>>:
 > 
 > 
+>     CONFIG_FDT_SIMPLEFB is only used in splash-screen context which in-turn
+>     depends on CONFIG_VIDEO. So CONFIG_FDT_SIMPLEFB is in a way dependent on
+>     CONFIG_VIDEO. We had fixed similar issue in past in vendor tree and
+>     by making
+>     CONFIG_FDT_SIMPLEFB dependent on CONFIG_VIDEO using below set of
+>     patches [1]
+>     which I was planning to post upstream too.
+> 
+>     Kindly let me know If these patches look good to you and fix your
+>     problem too,
+>     I can post same set of patches to upstream too.
+> 
+>     [1] :
+>     https://git.ti.com/cgit/ti-u-boot/ti-u-boot/commit/?h=ti-u-boot-2024.04&id=1199800505f11f2162030cb641c6d0c9276d5c9c <https://git.ti.com/cgit/ti-u-boot/ti-u-boot/commit/?h=ti-u-boot-2024.04&id=1199800505f11f2162030cb641c6d0c9276d5c9c>
+>     [2] :
+>     https://git.ti.com/cgit/ti-u-boot/ti-u-boot/commit/?h=ti-u-boot-2024.04&id=5b4b8eac243cbd86286ff2cf57ca0469c4d86345 <https://git.ti.com/cgit/ti-u-boot/ti-u-boot/commit/?h=ti-u-boot-2024.04&id=5b4b8eac243cbd86286ff2cf57ca0469c4d86345>
+> 
+> 
+> These patches look good to me.
+> 
 
-Applied to u-boot/u-boot-test-hooks.git/master, thanks!
+Thanks for taking a look, I have posted them to the list [1], it would
+be great if you could provide a Reviewed-by or Tested-by too.
 
--- 
-Tom
+> If I understand the code correctly the frame buffer node should only be
+> created if CONFIG_FDT_SIMPLEFB is enabled. Thus I would change the code
+> like this:
+> 
 
+Yes, that's true, I think you also need to conditionally compile
+ft_board_setup only when CONFIG_OF_BOARD_SETUP is enabled.
 
+[1]: https://lore.kernel.org/all/20240925151354.480704-4-devarsht@ti.com/
+
+Regards
+Devarsh
