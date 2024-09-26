@@ -4,77 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32FF3CCFA02
-	for <u-boot@archiver.kernel.org>; Wed, 25 Sep 2024 22:17:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84631CCF9EB
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 01:36:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56AC388BBE;
-	Thu, 26 Sep 2024 00:17:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9B22188B13;
+	Thu, 26 Sep 2024 03:36:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ujsYNfuf";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id D6ABC88906; Thu, 26 Sep 2024 00:17:46 +0200 (CEST)
-Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
- [IPv6:2607:f8b0:4864:20::72f])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1727314612;
+	bh=Bd8OqEq4u7UNT3y4ARQUC4yyV4F04Ga/2/FhYansASU=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=ox1H1oBMBrliMUfUdvJnCzAI8J1/ZBaMvrMDv6nBKc26PbKIzDKVF7/g97qsyIwUc
+	 NqgzhjWFfsjbYhnqnn35mlxCRztATU74NpQbW/n+D0+AQnvgiYdbn/3CujSA2Xm2LP
+	 l66m38Ff0Vy1W7/GwIQr9ZSoB9GfeIrymtTMLki22N9GcH+wrbdhJ7X75zSSo3xRcL
+	 P1bIqFdMXesA+k+ZJMM+ZUNdJ7nbFXzLHxRJN5JlzfFhgeqARWFBlKeSHNzY138zpu
+	 xXM8hIySTSUchozi9yeeug9sUEDMvIPHSxAKIo4qQwb4180na0FGs5tGy+X1GT3lbR
+	 BexBPvqo+dXrQ==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D7D6388A24
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 00:17:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72f.google.com with SMTP id
- af79cd13be357-7a9aa913442so27935885a.1
- for <u-boot@lists.denx.de>; Wed, 25 Sep 2024 15:17:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1727302657; x=1727907457; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ACcOP8bAJA3BghOQB50la0BG/hh2B5n1SnvrSFI1/RE=;
- b=ujsYNfufgF6x9UA9N4zcOlW5HsyVJxKncyaCRjZAiPmCHJtBIVj5RBjcGxH3/d8x0t
- lCIZzZeDdizTnoPctbSyAU2Zb2PMBKfbW/JLtXmZ5c+xBnMoedrr9dYk25jtfPsJH4EW
- sGiPtw8o6oOXcV07MRHpaclqqFuwC1/hCAER8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727302657; x=1727907457;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ACcOP8bAJA3BghOQB50la0BG/hh2B5n1SnvrSFI1/RE=;
- b=YA1/pNs1D06KpaVI/D5KRA/6GTPLtBsllzO1TqcRQKRX+VWRDWCAiQcOjn6DDbD4z2
- QUCDD35nGTJbM1T/Zqw+LjlSU0FvnREwKkV3MfdN86CaNRcPDuNML4OfVoXByexSGiFg
- Ryh/NiF4PAZdz3C0oDw+VSvmxUOtlwaiMEVdwYkm6yRnZOCe3tX/n6BGSfMybDOafsRG
- fvLM7ojsReTswEPTDWTFPTM43t7oe+S5cc7hCu9MG7T1WmVIzaoDroNzw2DfszdOK0y/
- F1fhhtuGwOdKqQJtTry/Vtor7x1FwsiTLJhHj1swB37cLEyffBhyEeqm56HIiXKD5ru6
- beNg==
-X-Gm-Message-State: AOJu0Yxh8AExtquwGj4dZQbGs0KvkekIAmrFvOMaNiMYT8GEO17636kM
- TUUdR1NYrf+u7EAMyDoi8oSY7qeoNf63Dfg+xUKGdJIqALl7IOhG0CHoqWZYYiM=
-X-Google-Smtp-Source: AGHT+IHhXr+9tyFXMZ7JSo2oWQsD5riJ+B5G9UvY3+q3m6LT+GJwGxgtt3wkS03q9SYj1kP6KwPrJw==
-X-Received: by 2002:a05:620a:1a21:b0:7a1:c40c:b1f1 with SMTP id
- af79cd13be357-7ace745d9c3mr550913585a.58.1727302656678; 
- Wed, 25 Sep 2024 15:17:36 -0700 (PDT)
-Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7acde5fcc4esm211806385a.112.2024.09.25.15.17.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Sep 2024 15:17:34 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>
-Cc: Andreas Geisreiter <ageisreiter@dh-electronics.de>, 
- Christoph Niedermaier <cniedermaier@dh-electronics.com>, 
- Fabio Estevam <festevam@denx.de>, u-boot@dh-electronics.com
-In-Reply-To: <20240924220905.514122-1-marex@denx.de>
-References: <20240924220905.514122-1-marex@denx.de>
-Subject: Re: [PATCH] arm: imx: Enable always-on regulators using board
- specific workaround on DHCOM SoM
-Message-Id: <172730265333.324390.138101374116879908.b4-ty@konsulko.com>
-Date: Wed, 25 Sep 2024 16:17:33 -0600
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id D8F2488B89;
+ Thu, 26 Sep 2024 03:36:50 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1727314611;
+ bh=Bd8OqEq4u7UNT3y4ARQUC4yyV4F04Ga/2/FhYansASU=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=SjCpNbaV3/4xj9oL7/e0wgBnIi0pnREZzI1tQkMLe37uUX8I0X1yLHaYRc+L54WJl
+ rY+37DdalFFVJVMEUYT78sxrhBBu1HybW/dZ+ARf0E0xpsq3IWKCynygFTP3JchntR
+ nK/zU3WbjvxZCo+nETwqqe5bEWdBzgqvnM0zOcuyir2uszbl0kJECiC872D2KMj10P
+ 6WqFobOr7kM/GRpZJhQ/wE5ZKlYnuiA1KbttHMyNUKdjLLdUkBmsZyFgQazxmZqnlP
+ ianZK7O4SIsQVW2gNgHxcnu+qyUZJG2NGa0chyGQVmrIVKVkFEydEzIovB+WwUozdK
+ f2vhEKqYo1Lyw==
+Message-ID: <e294ce74-9b77-4de0-b7fc-0d8db9f1226f@denx.de>
+Date: Thu, 26 Sep 2024 03:33:18 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/9] ARM: dts: socfpga: add Enclustra Intel AA1
+To: Lothar Rubusch <l.rubusch@gmail.com>
+Cc: u-boot@lists.denx.de, trini@konsulko.com,
+ simon.k.r.goldschmidt@gmail.com, tien.fong.chee@intel.com
+References: <20240912060649.190-1-l.rubusch@gmail.com>
+ <20240912060649.190-3-l.rubusch@gmail.com>
+ <bf99c2bd-f43c-4041-907f-f60b42163cce@denx.de>
+ <CAFXKEHbOpv4g5LZ4dkUpwo1OBrRQ7YKZf10=S-2HqMtSK_OE9g@mail.gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <CAFXKEHbOpv4g5LZ4dkUpwo1OBrRQ7YKZf10=S-2HqMtSK_OE9g@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,20 +72,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 25 Sep 2024 00:08:23 +0200, Marek Vasut wrote:
+On 9/26/24 12:49 AM, Lothar Rubusch wrote:
 
-> U-Boot is currently unable to automatically enable regulators which
-> contain DT property regulator-always-on or regulator-boot-on. There
-> is an ongoing work to add this functionality to regulator core code,
-> but until the proper solution lands, add this awful workaround code
-> to force these regulators on. This is specifically needed to assure
-> the VIO regulator used to supply ethernet magnetics is enabled.
+Hi,
+
+> First of all a huge thank you for the time you spend in reviewing the
+> patches so far. This is highly appreciate!!
 > 
+> 
+> On Fri, Sep 13, 2024 at 1:11 AM Marek Vasut <marex@denx.de> wrote:
 > [...]
+>> Is there any chance to upstream these DTs to Linux first , and then let
+>> them all trickle into U-Boot through dts/upstream/ ?
+> 
+> Preparing the DTS patches for Linux kernel, I noticed I will need the
+> handoff setup for u-boot. AFAIK there is currently no single handoff.h
+> or handoff.dtsi file in the kernel repo.
+> 
+> Shall I add the files to my DTS patches and ask for upstreaming of the
+> handoff files into the kernel?
 
-Applied to u-boot/master, thanks!
+Are the handoff files really used by Linux for anything , or do they 
+contain various clock/pinmux/DRAM settings only used by U-Boot ? If the 
+later, place them into U-Boot and include them from -u-boot.dtsi file.
 
--- 
-Tom
-
-
+> Example:
+> In specific for u-boot I need a .dts setup like this. Those files are
+> currently not in the kernel:
+>      #include "socfpga_arria10_mercury_aa1_handoff.h"
+>      #include "socfpga_arria10-handoff.dtsi"
+>      #include "socfpga_arria10_handoff_u-boot.dtsi"
+>      ...
+> 
+> Since this seems to be common for all socfpga setups (arria10 and
+> cyclone5), I guess the situation is already known by a common
+> approach. How to deal with this situation in u-boot dts/upstream?
