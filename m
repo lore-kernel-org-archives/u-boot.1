@@ -4,77 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF884CDE03D
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 22:07:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7BC4CDE03D
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 22:07:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED31388F2A;
-	Fri, 27 Sep 2024 00:07:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6A8E588F28;
+	Fri, 27 Sep 2024 00:07:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AHJ1ATGA";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="m/JgVK3D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77CCC88DB6; Fri, 27 Sep 2024 00:07:21 +0200 (CEST)
-Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
- [IPv6:2607:f8b0:4864:20::42f])
+ id D7FA788F31; Fri, 27 Sep 2024 00:07:21 +0200 (CEST)
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
+ [IPv6:2607:f8b0:4864:20::1034])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 78C4688F16
- for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 00:07:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A941588E04
+ for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 00:07:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x42f.google.com with SMTP id
- d2e1a72fcca58-7179802b8fcso1172116b3a.1
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 15:07:17 -0700 (PDT)
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-2e075ceebdaso1141821a91.2
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 15:07:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727388436; x=1727993236; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727388438; x=1727993238; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9O5+jruVbnF1e5NeyhBcsJgNpD/l9zTiupyH8fMzpOM=;
- b=AHJ1ATGAm11RdROKS8/oTu+TJR/LHE7FOOgIfz/odo9gg1DAYeFJlmvbvHh5OOy3H8
- axf90z18J0uwvDDzjzSeHNOfcKqfsPRz9SobYtFLKEvZ37u+3dNlIBNW+UWbsM2LZrDj
- Lb8MCzsAa8e+tWcnxM1GRMwaMeZXXP+1hsIkM=
+ bh=d8R6giqP5FJjVQGiNXGO5XjgnWtxRbfAbZH7hxWOW78=;
+ b=m/JgVK3D6dSrtl1g8Azx0BGhtT8vIqbHJHGGyD6Zyf/Sdlox+zu044bxLa9IQtz2F1
+ ztB1jm1n84O6ggpwBtDWn+ZR6DjTGpyKYhc+blYOdYqYKIYHamtr+cxsYpU84H7CuFSj
+ 27sDqMi+HJdZg4Vr/2hsCi68qTTtLZ9F1og+w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727388436; x=1727993236;
+ d=1e100.net; s=20230601; t=1727388438; x=1727993238;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=9O5+jruVbnF1e5NeyhBcsJgNpD/l9zTiupyH8fMzpOM=;
- b=qG7KLaH31zGhzRNdS5viDdBS8GrfS2RWWoWc/LPGSaD1LVT2oSm1kpXJIPt70DoYOO
- Rq9FohvP3dLITp9yQ94VufL4zXCBFgj0kS0jpbtqj3P760TUMT9u8KQ9yIicNHX5I4lg
- iYDb9YquCqa7nVeoJw8VdqYsX5ww0oboqrOMPzoxcYGrBVpt7cM+4sm5nd7+VovmXgXr
- TsfM3n46wIvvnAqWMAZ3hhEDx+/EkMXFDrexGklV617VlMM/YiPp9DjiqOMS9ZQV+96L
- ERuC1XXwOA/7I2J/DtTWGoqSGTGx5gdW+DJ4q3phJEzrgse/aldZM1olxPvHL2JxYjG3
- 0PZg==
+ bh=d8R6giqP5FJjVQGiNXGO5XjgnWtxRbfAbZH7hxWOW78=;
+ b=bmMrQrBmRvVLtMBxFr7jhcrtKSpnfX/0DP+vGFvE2y8/sD9pqMfh3MHJApVaKIPVig
+ gUg4ku6uRDOTCpC9haS/qtjaLZqLjWEj/6QlZp6uvPOtMUHUXZtXlWjBIY0pOwOmYJn5
+ Fi2pAu9DadaT+2ubY0C9NOLoUWxE1wIb+LbZMKnE6ujMPe45hoHjngA5OlpmsMt0hnED
+ BRWrqBWV1RAWqnabb1MQL9P66s1P1D/Qzzo+JgfaMwHfJwHv0NPIkIcN0xjWeB8GPl1P
+ No8hJ6LPNQioIy2j56OVVi2iTWPafVtezyV3dWmVxihtKKjPvcJ6eiEuVpmNNnwyPrTs
+ YcTg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXJR4FVJngTvpPp+XybX3oja7Ge9YHJ5TTl3puKs2s9w2ZiZWW5oLNnX/ZiweiboRQtYdG3u3o=@lists.denx.de
-X-Gm-Message-State: AOJu0YwBKr5SdOK1br747AnT1OWXtQEm8MmnrBK2MB2tu5K9QoT81kLH
- ncDz4CKp9FZ5S1HfVHNKZzNoXKFVd5HyreNuBw2m5MFWlkSoEuZZv0wpBPoiVwV6qthEaadUsHV
- Rwvy8cNp4n6pj3Pz4QmtOTKzzDLWjJ8/CNfPc
-X-Google-Smtp-Source: AGHT+IGoxyPuWgY/r0rl9hT4pN+67qd9X8UX+HW8CU7LA8QVYnv7k4DZx3P/kPONzAV9YdAxkvAojQdUafS8wH3ftFU=
-X-Received: by 2002:a17:90a:3009:b0:2e0:a4a4:75d9 with SMTP id
- 98e67ed59e1d1-2e0b89ef178mr1178883a91.12.1727388436030; Thu, 26 Sep 2024
- 15:07:16 -0700 (PDT)
+ AJvYcCVoj4cX02vmW62RA6T3+5v6ZqKclCvHomqMWj2gd/h2vcupH2dNd+6D3DN0n6Oiu3LSDm+/8wA=@lists.denx.de
+X-Gm-Message-State: AOJu0YwZk3qUmzKZcJgTIBETiMT6+hW+9CXQdYgKRuzY1kClQjMXPOzu
+ cJ4+tSBNNGLPnH+umN5KwxaG8ce994FmGF/qlh5sZb/jDdlQqTHLIC5fmQ+5CNGCkW7m868Jsdi
+ tMhod504Lwosb5NhcUnilH/hxWm3nqCSWkE5X
+X-Google-Smtp-Source: AGHT+IF4ApjTtiYpB+iypHVD5u020LNnZeYv6c6LXfEsc1O7hqZOWO13ovPXbX49PlKiPUg7UIuSuOk4FIU/vY06psg=
+X-Received: by 2002:a17:90a:43e3:b0:2d8:e3f3:fd66 with SMTP id
+ 98e67ed59e1d1-2e0b8ed3b30mr1205304a91.34.1727388438244; Thu, 26 Sep 2024
+ 15:07:18 -0700 (PDT)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 26 Sep 2024 15:07:15 -0700
+ HTTPREST; Thu, 26 Sep 2024 15:07:16 -0700
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20240826191143.426387-15-sjg@chromium.org>
-References: <20240826191143.426387-15-sjg@chromium.org>
+In-Reply-To: <20240826191143.426387-14-sjg@chromium.org>
+References: <20240826191143.426387-14-sjg@chromium.org>
  <20240826191143.426387-1-sjg@chromium.org>
-Date: Thu, 26 Sep 2024 15:07:15 -0700
-X-Google-Sender-Auth: znTgRg3PmTV2FbST4mbTRCWXfZw
-Message-ID: <CAFLszTippBa59Hiq-3LPK2MaA7DqZ6aiUF8zYD7Xi5faVKvDGQ@mail.gmail.com>
-Subject: Re: [PATCH 14/15] binman: Allow image_pos to be None when writing
- symbols
+Date: Thu, 26 Sep 2024 15:07:16 -0700
+X-Google-Sender-Auth: k7sCGsaktYsO2nZjuNXPQ0KxXEE
+Message-ID: <CAFLszTgD0-CTchi23RwBWx9g54q_C0YphvDSo3yV4-e6P=1qgA@mail.gmail.com>
+Subject: Re: [PATCH 13/15] binman: Unwind the end-at-4gb special-case a little
 To: Simon Glass <sjg@chromium.org>
 Cc: Lukasz Majewski <lukma@denx.de>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Brandon Maier <brandon.maier@collins.com>,
- Neha Malcom Francis <n-francis@ti.com>, 
- Rong Tao <rongtao@cestc.cn>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Rong Tao <rongtao@cestc.cn>, 
  Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -93,19 +89,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some images do not have an image_pos value, for example an image which
-is part of a compressed section and therefore cannot be accessed
-directly.
-
-Handle this case, returning None as the value.
+Move the check for this further out, so that base_addr is computed in
+Entry.WriteSymbols() rather than at lower levels.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/binman/etype/section.py          |  3 ++
- tools/binman/ftest.py                  | 49 +++++++++++++++++++-------
- tools/binman/test/338_symbols_comp.dts | 26 ++++++++++++++
- 3 files changed, 65 insertions(+), 13 deletions(-)
- create mode 100644 tools/binman/test/338_symbols_comp.dts
+ tools/binman/entry.py         | 11 +++++++++--
+ tools/binman/etype/section.py | 15 +++++----------
+ tools/binman/image.py         | 10 ++++------
+ 3 files changed, 18 insertions(+), 18 deletions(-)
 
 Applied to u-boot-dm/next, thanks!
