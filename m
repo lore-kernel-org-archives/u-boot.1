@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AC9FCDE03C
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 22:00:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45C98CDE03C
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 22:01:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B45EB88ED1;
-	Fri, 27 Sep 2024 00:00:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2416588E9F;
+	Fri, 27 Sep 2024 00:00:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="D2ReB4WE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GQ/7IeQZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 881B088EC9; Fri, 27 Sep 2024 00:00:49 +0200 (CEST)
-Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
- [IPv6:2607:f8b0:4864:20::b36])
+ id CF5C188EC9; Fri, 27 Sep 2024 00:00:57 +0200 (CEST)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E8F788E9F
- for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 00:00:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A6D4988E9F
+ for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 00:00:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-yb1-xb36.google.com with SMTP id
- 3f1490d57ef6-e22531db3baso1514588276.3
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 15:00:47 -0700 (PDT)
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-6cb2458774dso9788696d6.3
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 15:00:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727388046; x=1727992846; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727388054; x=1727992854; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mpghxRb9gXK6ZpZvSrEIS0pABSRGGJJzjUN0aGDhTNA=;
- b=D2ReB4WEsAjEqNDfuocoqxgp9IrTb+wh6s6rsIs6G1dHqggSFciHlBSXoGUzh4acoP
- 3qsPn5FLqZMXCmtdLBzauEYX6UMMapC2s0l5bvUZhkz1Pjo14+X07JN8rgid2hSCbAi4
- 0SsGdGnSxrU09VOHorVYMOCE9Fn/LK7L9BVss=
+ bh=u0fE4v1/zhNDvHrzRjK/HlTmtUOa9OFPgm96GahDpEo=;
+ b=GQ/7IeQZiDGQZpM7ttDvHxuBhTCYQoRyzvVd0H/LMkDJTxbvQtKWhK80sF7VENxkRY
+ 60x5tKEb6pAs3wjIDwZXWX/7OEVA+r6K2BAtdEXuKsJ9u5QtQHD3JOU3PWUuqRkF8b8S
+ 84kvQrLS+bgYHoSHLaDGF+09jL5tAJ1X24vv4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727388046; x=1727992846;
+ d=1e100.net; s=20230601; t=1727388054; x=1727992854;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mpghxRb9gXK6ZpZvSrEIS0pABSRGGJJzjUN0aGDhTNA=;
- b=HR6KwDZou8bs5mQtQDwBumB77E5Jvwau0iMjmSvqOluTWm5/NNeM/6408oBCVJzFOL
- P8dWx/KKJYTwciY1Iyas3sx6/YUo31biFLdPiSDfjQy8B3wn1xywRqb27eUHXcHcxSia
- toaDvxAN4DBXgimaMcIoWHrl8g6gz/f1d4L4e3s/r9NyVFPESMfyKPurIP2rp2z3ZQQp
- pymjZWYhJyWSdc0LuagNoD9TMylnhd+c3npAFGXU7wHXVHcch47HxDXqaEnmT6IRGJo9
- R1IPJMhs+vAVzBZS2Ju4A8UhvwsNzXMssz9Os1XAaZubh3MjraLthETkN+4sRm7dsuaF
- tT5Q==
-X-Gm-Message-State: AOJu0YwkARhxf4725FikYStfHXePeEA7OJXznGlmyN1Dln6uQMF0EaLA
- nl8IcCghXXvdgSAGZeDhblDZVN+ZVkJTZJVKkDsrz/N4EEFBjKUWKnPqq2RMKAupDNM/F2HA26p
- rIJS1tlw=
-X-Google-Smtp-Source: AGHT+IFtJ1wIIgdX0pAVG2J0y3FuYc99BLAiLTBysVPZLJEBo4lOQqywhklsdlaBvKql047MDhEZZw==
-X-Received: by 2002:a05:6902:102f:b0:e20:26cf:2eda with SMTP id
- 3f1490d57ef6-e2604b80adbmr848483276.32.1727388045609; 
- Thu, 26 Sep 2024 15:00:45 -0700 (PDT)
+ bh=u0fE4v1/zhNDvHrzRjK/HlTmtUOa9OFPgm96GahDpEo=;
+ b=dovlEI7DCfDWWNMl9n1PxOCzlwQGS6BChtiW5EGdjoRSvxJUaunBk/roEtiW8SanLS
+ 7bWFRSndkaEF/uKRxK6IcMpPMEKkjga6u/hoMfwv15y6xVArSWVVr/Kc+B0xFLR05ucm
+ fNhogIgCjBVEUiwz+UbeRxdk5pdJZDSY5Q+wDhX7hsQ0xLNJJl6XnwCFnN5NvAe0/I9H
+ odAZfNGQpbHyrNP0qmtv+1+/3fQE9S/CffB0Rq+NiUb48bbBzAc5zXnLR088uXfOJhTP
+ XTRNX49yskB/vnBJDrrE1eD0aj/U4otqCrzcKOsqmi0m7FJpJ8qixhWgMGEJxUhpWTZp
+ NCQQ==
+X-Gm-Message-State: AOJu0YxyksHb8CfMyCzxAoIy9br2taQBcovOWcPu8yzmEFKni88BPTmZ
+ 2seHNUh0AkUp9q4PubRiKEuA0Tn+N4x7TWADumy5Av/sMnocPE6+/aO0xPLEK9z1d6vdNtTcRgs
+ /HYO3zBY=
+X-Google-Smtp-Source: AGHT+IFwJmHAbWwxHCh++mHksLZdNx3xBVm4wFbE7TVVGTJA2cc7X4ooIwsOJ06EcYiYCGFgqRD8tw==
+X-Received: by 2002:a05:6214:5b09:b0:6c3:5c39:45e1 with SMTP id
+ 6a1803df08f44-6cb3b5d8f96mr14448986d6.12.1727388053897; 
+ Thu, 26 Sep 2024 15:00:53 -0700 (PDT)
 Received: from chromium.org ([205.220.129.31])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6cb3b632366sm3079696d6.71.2024.09.26.15.00.36
+ 6a1803df08f44-6cb3b632366sm3079696d6.71.2024.09.26.15.00.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Sep 2024 15:00:44 -0700 (PDT)
+ Thu, 26 Sep 2024 15:00:53 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Albert Aribaud <albert.u.boot@aribaud.net>,
- Bin Meng <bmeng.cn@gmail.com>
-Subject: [PATCH v6 02/12] efi: arm: x86: riscv: Drop crt0/relocal extra- rules
-Date: Thu, 26 Sep 2024 23:59:32 +0200
-Message-ID: <20240926215950.1265143-3-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH v6 03/12] efi_loader: Shorten the app rules
+Date: Thu, 26 Sep 2024 23:59:33 +0200
+Message-ID: <20240926215950.1265143-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240926215950.1265143-1-sjg@chromium.org>
 References: <20240926215950.1265143-1-sjg@chromium.org>
@@ -91,76 +90,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The link rule (for $(obj)/%_efi.so) in scripts/Makefile.lib handles
-pulling in efi_crt0.o and efi_reloc.o so drop the 'extra' rules.
+We have quite a few apps now, so create a way to specify them as a list
+rather than repeating the same rules again and again.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 
-(no changes since v3)
+(no changes since v1)
 
-Changes in v3:
-- Add new patch to drop crt0/relocal extra- rules
+ lib/efi_loader/Makefile | 31 +++++++++----------------------
+ 1 file changed, 9 insertions(+), 22 deletions(-)
 
- arch/arm/lib/Makefile   |  7 -------
- arch/riscv/lib/Makefile |  3 ---
- arch/x86/lib/Makefile   | 16 ----------------
- 3 files changed, 26 deletions(-)
-
-diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
-index 4e54c577cc3..87000d1609b 100644
---- a/arch/arm/lib/Makefile
-+++ b/arch/arm/lib/Makefile
-@@ -129,10 +129,3 @@ CFLAGS_REMOVE_$(EFI_CRT0) := $(CFLAGS_NON_EFI)
+diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+index 27dbd9e760d..660368b9d8f 100644
+--- a/lib/efi_loader/Makefile
++++ b/lib/efi_loader/Makefile
+@@ -22,29 +22,13 @@ CFLAGS_REMOVE_dtbdump.o := $(CFLAGS_NON_EFI)
+ CFLAGS_initrddump.o := $(CFLAGS_EFI) -Os -ffreestanding
+ CFLAGS_REMOVE_initrddump.o := $(CFLAGS_NON_EFI)
  
- CFLAGS_$(EFI_RELOC) := $(CFLAGS_EFI)
- CFLAGS_REMOVE_$(EFI_RELOC) := $(CFLAGS_NON_EFI)
--
--# TODO: As of v2019.01 the relocation code for the EFI application cannot
--# be built on ARMv7-M.
--ifndef CONFIG_CPU_V7M
--#extra-$(CONFIG_CMD_BOOTEFI_SELFTEST) += $(EFI_CRT0) $(EFI_RELOC)
+-ifdef CONFIG_RISCV
+-always += boothart.efi
+-targets += boothart.o
 -endif
--extra-$(CONFIG_EFI) += $(EFI_CRT0) $(EFI_RELOC)
-diff --git a/arch/riscv/lib/Makefile b/arch/riscv/lib/Makefile
-index 4f6272aab6e..bcfdb516b76 100644
---- a/arch/riscv/lib/Makefile
-+++ b/arch/riscv/lib/Makefile
-@@ -36,9 +36,6 @@ CFLAGS_REMOVE_$(EFI_CRT0) := $(CFLAGS_NON_EFI)
- CFLAGS_$(EFI_RELOC) := $(CFLAGS_EFI)
- CFLAGS_REMOVE_$(EFI_RELOC) := $(CFLAGS_NON_EFI)
- 
--extra-$(CONFIG_CMD_BOOTEFI_SELFTEST) += $(EFI_CRT0) $(EFI_RELOC)
--extra-$(CONFIG_EFI) += $(EFI_CRT0) $(EFI_RELOC)
 -
- obj-$(CONFIG_$(SPL_TPL_)USE_ARCH_MEMSET) += memset.o
- obj-$(CONFIG_$(SPL_TPL_)USE_ARCH_MEMMOVE) += memmove.o
- obj-$(CONFIG_$(SPL_TPL_)USE_ARCH_MEMCPY) += memcpy.o
-diff --git a/arch/x86/lib/Makefile b/arch/x86/lib/Makefile
-index 8bc8d92172b..d6ea9c955f8 100644
---- a/arch/x86/lib/Makefile
-+++ b/arch/x86/lib/Makefile
-@@ -87,19 +87,3 @@ extra-$(CONFIG_EFI_STUB_32BIT) += crt0_ia32_efi.o reloc_ia32_efi.o
- extra-$(CONFIG_EFI_STUB_64BIT) += crt0_x86_64_efi.o reloc_x86_64_efi.o
- 
+-ifneq ($(CONFIG_BOOTEFI_HELLO_COMPILE),)
+-always += helloworld.efi
+-targets += helloworld.o
+-endif
+-
+-ifneq ($(CONFIG_GENERATE_SMBIOS_TABLE),)
+-always += smbiosdump.efi
+-targets += smbiosdump.o
+-endif
+-
++# These are the apps that are built
++apps-$(CONFIG_RISCV) += boothart
++apps-$(CONFIG_BOOTEFI_HELLO_COMPILE) += helloworld
++apps-$(CONFIG_GENERATE_SMBIOS_TABLE) += smbiosdump
++apps-$(CONFIG_EFI_LOAD_FILE2_INITRD) += initrddump
+ ifeq ($(CONFIG_GENERATE_ACPI_TABLE),)
+-always += dtbdump.efi
+-targets += dtbdump.o
+-endif
+-
+-ifdef CONFIG_EFI_LOAD_FILE2_INITRD
+-always += initrddump.efi
+-targets += initrddump.o
++apps-y += dtbdump
  endif
--
--ifdef CONFIG_EFI_STUB
--
--ifeq ($(CONFIG_$(SPL_)X86_64),)
--extra-y += $(EFI_CRT0) $(EFI_RELOC)
--endif
--
--else
--
--ifndef CONFIG_SPL_BUILD
--ifneq ($(CONFIG_CMD_BOOTEFI_SELFTEST),)
--extra-y += $(EFI_CRT0) $(EFI_RELOC)
--endif
--endif
--
--endif
+ 
+ obj-$(CONFIG_CMD_BOOTEFI_HELLO) += helloworld_efi.o
+@@ -95,3 +79,6 @@ obj-$(CONFIG_EFI_ECPT) += efi_conformance.o
+ 
+ EFI_VAR_SEED_FILE := $(subst $\",,$(CONFIG_EFI_VAR_SEED_FILE))
+ $(obj)/efi_var_seed.o: $(srctree)/$(EFI_VAR_SEED_FILE)
++
++always += $(foreach f,$(apps-y),$(f).efi)
++targets += $(foreach f,$(apps-y),$(f).o)
 -- 
 2.43.0
 
