@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80B54CDE03C
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 22:04:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 215CECDE03C
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 22:05:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2198688F16;
-	Fri, 27 Sep 2024 00:04:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B18C288F08;
+	Fri, 27 Sep 2024 00:04:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fJT+Zxfa";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Vl22ru2L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA70288F19; Fri, 27 Sep 2024 00:04:40 +0200 (CEST)
-Received: from mail-qt1-x841.google.com (mail-qt1-x841.google.com
- [IPv6:2607:f8b0:4864:20::841])
+ id 77B7288E5F; Fri, 27 Sep 2024 00:04:56 +0200 (CEST)
+Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
+ [IPv6:2607:f8b0:4864:20::835])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D93188F08
- for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 00:04:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4CA7688F20
+ for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 00:04:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qt1-x841.google.com with SMTP id
- d75a77b69052e-4582760b79cso7646351cf.2
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 15:04:38 -0700 (PDT)
+Received: by mail-qt1-x835.google.com with SMTP id
+ d75a77b69052e-457ce5fda1aso10424431cf.1
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 15:04:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727388277; x=1727993077; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727388293; x=1727993093; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8NsoWrKvKiLXVN4mlrqIvo/GswLT+AT+UTkOMrs+pRE=;
- b=fJT+Zxfa0wSfZFEnOqKW0bT/dRMYDOMN+LvZtkza5pakHAmPUw7u/PkJ5Vfp/YueNr
- mwiml3xTVfbDxU+keCDY6FCZC2/TC+M70Z0Kt+bpR8Uf1B4/3czCnVvU5fipxPKXhXGZ
- CbUzk70MpBdFSa1cOfF3WfsGWtT/UjVjcOCDw=
+ bh=Om30R/bO07FiLUUzQpwO0r5hfTUNSYAT76agqWciOgU=;
+ b=Vl22ru2L7a5WHFMPZqq5nRaF3zr05L0KhtkxbY3n8TrYWcmUlEm3atq6LVH3g2wzl0
+ PpqZS8D1lEE5w4KrH87myEGnptREJzFiNjssri4pWFOjYOx7dxf9JTKFvE5o6LKsvCW8
+ YVtLgCb3mV5lHP2RyfnSBDl6a2YIXROLipMmo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727388277; x=1727993077;
+ d=1e100.net; s=20230601; t=1727388293; x=1727993093;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8NsoWrKvKiLXVN4mlrqIvo/GswLT+AT+UTkOMrs+pRE=;
- b=EB5Njf/wAB5euyoAFeI91qkrzPH9YUSV/YBdY3HJAourkaQYkcPueISjPVUKAcc8/F
- HPoZBFoo6zl5OSQXxa3A9Pt8OXmMwhlJrPNKKkqsH1gpZ1eRhmHg1JoNkWQ9on4ja7aA
- f6lmFccpdp+FlngFzA+S7qzT682O9Gw7lmhp2ezLg1O99V0AklzdnlQSyx0OuDpwhXU0
- 0rukXbLujAyClnfTyzKDhdgoxk0NAj7amqVmOW+q8z9gGLLEj5K7afyA7wofM03X/0jV
- GabsdVmE9oy3+11I7queJMrwddsjor9aOMyt9iXVqpP9+whV9B9rwP8yGQq2UWXxPRW2
- N3Eg==
-X-Gm-Message-State: AOJu0YxAhLxtrT36lGOfcPTc3QaBKDXvawtevZomKJTzN2pXz+2BdBFj
- K6VnkgJ4Inp2oL4vknWPvAbGgOqbk9W7cLyZiLEG4if6cTZrEEEm1/ydX1OasOlK8p4MlgCsT/W
- G5ED91nlZrQ==
-X-Google-Smtp-Source: AGHT+IHe1YmP45PzBv+LeJoAoxP9wAxe9dQgo+RgzBBxhmu6xma1oRIm7EqN6sDflcUjFV15P0f7uw==
-X-Received: by 2002:ac8:5a4d:0:b0:458:441c:7d4b with SMTP id
- d75a77b69052e-45c9f283f43mr14096011cf.46.1727388276636; 
- Thu, 26 Sep 2024 15:04:36 -0700 (PDT)
+ bh=Om30R/bO07FiLUUzQpwO0r5hfTUNSYAT76agqWciOgU=;
+ b=adqezRJDPryTAwqjxmqyP3q+XX9DIFbytMNrbTlTrRKxKj7DHrUYL+uCeZXEnbK70V
+ 9smDf+a8XMHTkdPtWX+jyPi2Elm1w8bJj7BbQ9ltjyJ680kKIJR1ccTrqkAocKgBjGPQ
+ FuIgtHVKLpnChbqok2N+Stkco/WBjSx8cZhyy3VUEowMo701gjD0ZV0Ww+rP4bp4I7rv
+ 39j5fGdwJIJZ2aR7Pg6F8UfwPoc2cZJcOE0Jm+z19+WLVRAh+UJXsFjpnHTrLgIJtZP5
+ TsLu93eX3L8YlGc5XcCwWtWLRF0MTX0YnIF67J5B4XV+efi4m4hWcIbRM9L7vdRzHNXP
+ RNzw==
+X-Gm-Message-State: AOJu0YzI4iyG0dLTezv2EzCkGFC24cIUGzlDn/fx9bCSNBGqrXd/hwW5
+ p2GwsNPGf3Ly/iKAZeSrsyrHU7wzDoc0RiqVmjV37/o0fU8auuaezt3VKZArD9qjAFeRDwbvPcE
+ YFowOsEU=
+X-Google-Smtp-Source: AGHT+IEfEg7BRas4cW2g8FJlAGjRqWA/mxTvsQ6Vm75m01C8u0JA5yocTWL5nTCftK0EHQFrWSV5Aw==
+X-Received: by 2002:a05:622a:5ce:b0:458:3eb3:7496 with SMTP id
+ d75a77b69052e-45c9f28794dmr13654861cf.45.1727388292597; 
+ Thu, 26 Sep 2024 15:04:52 -0700 (PDT)
 Received: from chromium.org ([205.220.129.31])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-45c9f2e02c8sm2540211cf.44.2024.09.26.15.04.22
+ d75a77b69052e-45c9f2e02c8sm2540211cf.44.2024.09.26.15.04.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Sep 2024 15:04:35 -0700 (PDT)
+ Thu, 26 Sep 2024 15:04:51 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v6 11/12] test: efi: boot: Set up an image suitable for EFI
- testing
-Date: Fri, 27 Sep 2024 00:02:22 +0200
-Message-ID: <20240926220226.1265965-12-sjg@chromium.org>
+Subject: [PATCH v6 12/12] test: efi: boot: Add a test for the efi bootmeth
+Date: Fri, 27 Sep 2024 00:02:23 +0200
+Message-ID: <20240926220226.1265965-13-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240926220226.1265965-9-sjg@chromium.org>
 References: <20240926220226.1265965-9-sjg@chromium.org>
@@ -91,270 +90,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Create a new disk for use with tests, which contains the new 'testapp'
-EFI app specifically intended for testing the EFI loader.
+Add a simple test of booting with the EFI bootmeth, which runs the app
+and checks that it can call 'exit boot-services' (to check that all the
+device-removal code doesn't break anything) and then exit back to
+U-Boot.
 
-Attach it to the USB device, since most testing is currently done with
-mmc.
-
-Initially this image will be used to test the EFI bootmeth.
-
-Fix a stale comment in prep_mmc_bootdev() while we are here.
-
-For now this uses sudo and a compressed fallback file, like all the
-other bootstd tests. Once this series is in, the patch which moves
-this to use user-space tools will be cleaned up and re-submitted.
+This uses a disk image containing the testapp, ready for execution by
+sandbox when needed.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+
 ---
 
-(no changes since v1)
+Changes in v6:
+- Deal with sandbox CONFIG_LOGF_FUNC
+- Rebase on -next
+- Drop patches previously applied
+- Drop mention of helloworld since it is no-longer used by this test
 
- arch/sandbox/dts/test.dts           |   2 +-
- test/boot/bootdev.c                 |  18 +++++++++-
- test/boot/bootflow.c                |   2 +-
- test/py/tests/bootstd/flash1.img.xz | Bin 0 -> 5016 bytes
- test/py/tests/test_ut.py            |  52 ++++++++++++++++++++++++----
- 5 files changed, 65 insertions(+), 9 deletions(-)
- create mode 100644 test/py/tests/bootstd/flash1.img.xz
+Changes in v4:
+- Add efi_loader tag to some patches
+- Split out non-EFI patches into a different series
 
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index 8412506c17a..2fc5c181a3b 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -1507,7 +1507,7 @@
- 				flash-stick@1 {
- 					reg = <1>;
- 					compatible = "sandbox,usb-flash";
--					sandbox,filepath = "testflash1.bin";
-+					sandbox,filepath = "flash1.img";
- 				};
- 
- 				flash-stick@2 {
-diff --git a/test/boot/bootdev.c b/test/boot/bootdev.c
-index c635d06ec25..269bcd693a6 100644
---- a/test/boot/bootdev.c
-+++ b/test/boot/bootdev.c
-@@ -212,6 +212,10 @@ static int bootdev_test_order(struct unit_test_state *uts)
- 	/* Use the environment variable to override it */
- 	ut_assertok(env_set("boot_targets", "mmc1 mmc2 usb"));
- 	ut_assertok(bootflow_scan_first(NULL, NULL, &iter, 0, &bflow));
-+
-+	/* get the usb device which has a backing file (flash1.img) */
-+	ut_asserteq(0, bootflow_scan_next(&iter, &bflow));
-+
- 	ut_asserteq(-ENODEV, bootflow_scan_next(&iter, &bflow));
- 	ut_asserteq(5, iter.num_devs);
- 	ut_asserteq_str("mmc1.bootdev", iter.dev_used[0]->name);
-@@ -251,7 +255,11 @@ static int bootdev_test_order(struct unit_test_state *uts)
- 	ut_assertok(bootflow_scan_first(NULL, NULL, &iter, 0, &bflow));
- 	ut_asserteq(2, iter.num_devs);
- 
--	/* Now scan past mmc1 and make sure that the 3 USB devices show up */
-+	/*
-+	 * Now scan past mmc1 and make sure that the 3 USB devices show up. The
-+	 * first one has a backing file so returns success
-+	 */
-+	ut_asserteq(0, bootflow_scan_next(&iter, &bflow));
- 	ut_asserteq(-ENODEV, bootflow_scan_next(&iter, &bflow));
- 	ut_asserteq(6, iter.num_devs);
- 	ut_asserteq_str("mmc2.bootdev", iter.dev_used[0]->name);
-@@ -313,6 +321,10 @@ static int bootdev_test_prio(struct unit_test_state *uts)
- 
- 	/* 3 MMC and 3 USB bootdevs: MMC should come before USB */
- 	ut_assertok(bootflow_scan_first(NULL, NULL, &iter, 0, &bflow));
-+
-+	/* get the usb device which has a backing file (flash1.img) */
-+	ut_asserteq(0, bootflow_scan_next(&iter, &bflow));
-+
- 	ut_asserteq(-ENODEV, bootflow_scan_next(&iter, &bflow));
- 	ut_asserteq(6, iter.num_devs);
- 	ut_asserteq_str("mmc2.bootdev", iter.dev_used[0]->name);
-@@ -330,6 +342,10 @@ static int bootdev_test_prio(struct unit_test_state *uts)
- 	bootflow_iter_uninit(&iter);
- 	ut_assertok(bootflow_scan_first(NULL, NULL, &iter, BOOTFLOWIF_HUNT,
- 					&bflow));
-+
-+	/* get the usb device which has a backing file (flash1.img) */
-+	ut_asserteq(0, bootflow_scan_next(&iter, &bflow));
-+
- 	ut_asserteq(-ENODEV, bootflow_scan_next(&iter, &bflow));
- 	ut_asserteq(7, iter.num_devs);
- 	ut_asserteq_str("usb_mass_storage.lun0.bootdev",
+Changes in v2:
+- Add many new patches to resolve all the outstanding test issues
+
+ test/boot/bootflow.c | 63 ++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 63 insertions(+)
+
 diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index 6ad63afe90a..e05103188b4 100644
+index e05103188b4..da2ee1ab345 100644
 --- a/test/boot/bootflow.c
 +++ b/test/boot/bootflow.c
-@@ -525,7 +525,7 @@ static int prep_mmc_bootdev(struct unit_test_state *uts, const char *mmc_dev,
+@@ -13,6 +13,7 @@
+ #include <cli.h>
+ #include <dm.h>
+ #include <efi_default_filename.h>
++#include <efi_loader.h>
+ #include <expo.h>
+ #ifdef CONFIG_SANDBOX
+ #include <asm/test.h>
+@@ -31,6 +32,9 @@ extern U_BOOT_DRIVER(bootmeth_android);
+ extern U_BOOT_DRIVER(bootmeth_cros);
+ extern U_BOOT_DRIVER(bootmeth_2script);
  
- 	order[2] = mmc_dev;
- 
--	/* Enable the mmc4 node since we need a second bootflow */
-+	/* Enable the requested mmc node since we need a second bootflow */
- 	root = oftree_root(oftree_default());
- 	node = ofnode_find_subnode(root, mmc_dev);
- 	ut_assert(ofnode_valid(node));
-diff --git a/test/py/tests/bootstd/flash1.img.xz b/test/py/tests/bootstd/flash1.img.xz
-new file mode 100644
-index 0000000000000000000000000000000000000000..9148b91a20c1f0acb54449b124d1408961e92507
-GIT binary patch
-literal 5016
-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
-
-literal 0
-HcmV?d00001
-
-diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
-index 39aa1035e34..f647e2f0af2 100644
---- a/test/py/tests/test_ut.py
-+++ b/test/py/tests/test_ut.py
-@@ -28,21 +28,22 @@ def mkdir_cond(dirname):
-     if not os.path.exists(dirname):
-         os.mkdir(dirname)
- 
--def setup_image(cons, mmc_dev, part_type, second_part=False):
-+def setup_image(cons, devnum, part_type, second_part=False, basename='mmc'):
-     """Create a 20MB disk image with a single partition
- 
-     Args:
-         cons (ConsoleBase): Console to use
--        mmc_dev (int): MMC device number to use, e.g. 1
-+        devnum (int): Device number to use, e.g. 1
-         part_type (int): Partition type, e.g. 0xc for FAT32
-         second_part (bool): True to contain a small second partition
-+        basename (str): Base name to use in the filename, e.g. 'mmc'
- 
-     Returns:
-         tuple:
-             str: Filename of MMC image
-             str: Directory name of 'mnt' directory
-     """
--    fname = os.path.join(cons.config.source_dir, f'mmc{mmc_dev}.img')
-+    fname = os.path.join(cons.config.source_dir, f'{basename}{devnum}.img')
-     mnt = os.path.join(cons.config.persistent_data_dir, 'mnt')
-     mkdir_cond(mnt)
- 
-@@ -78,16 +79,17 @@ def mount_image(cons, fname, mnt, fstype):
-     u_boot_utils.run_and_log(cons, f'sudo chown {getpass.getuser()} {mnt}')
-     return loop
- 
--def copy_prepared_image(cons, mmc_dev, fname):
-+def copy_prepared_image(cons, devnum, fname, basename='mmc'):
-     """Use a prepared image since we cannot create one
- 
-     Args:
-         cons (ConsoleBase): Console touse
--        mmc_dev (int): MMC device number
-+        devnum (int): device number
-         fname (str): Filename of MMC image
-+        basename (str): Base name to use in the filename, e.g. 'mmc'
-     """
-     infname = os.path.join(cons.config.source_dir,
--                           f'test/py/tests/bootstd/mmc{mmc_dev}.img.xz')
-+                           f'test/py/tests/bootstd/{basename}{devnum}.img.xz')
-     u_boot_utils.run_and_log(cons, ['sh', '-c', f'xz -dc {infname} >{fname}'])
- 
- def setup_bootmenu_image(cons):
-@@ -549,6 +551,43 @@ def test_ut_dm_init(u_boot_console):
-     with open(fn, 'wb') as fh:
-         fh.write(data)
- 
++/* Use this as the vendor for EFI to tell the app to exit boot services */
++static u16 __efi_runtime_data test_vendor[] = u"U-Boot testing";
 +
-+def setup_efi_image(cons):
-+    """Create a 20MB disk image with an EFI app on it"""
-+    devnum = 1
-+    basename = 'flash'
-+    fname, mnt = setup_image(cons, devnum, 0xc, second_part=True,
-+                             basename=basename)
+ static int inject_response(struct unit_test_state *uts)
+ {
+ 	/*
+@@ -1205,3 +1209,62 @@ static int bootflow_android(struct unit_test_state *uts)
+ 	return 0;
+ }
+ BOOTSTD_TEST(bootflow_android, UTF_CONSOLE);
 +
-+    loop = None
-+    mounted = False
-+    complete = False
-+    try:
-+        loop = mount_image(cons, fname, mnt, 'ext4')
-+        mounted = True
-+        efi_dir = os.path.join(mnt, 'EFI')
-+        mkdir_cond(efi_dir)
-+        bootdir = os.path.join(efi_dir, 'BOOT')
-+        mkdir_cond(bootdir)
-+        efi_src = os.path.join(cons.config.build_dir,
-+                               f'lib/efi_loader/testapp.efi')
-+        efi_dst = os.path.join(bootdir, 'BOOTSBOX.EFI')
-+        with open(efi_src, 'rb') as inf:
-+            with open(efi_dst, 'wb') as outf:
-+                outf.write(inf.read())
-+    except ValueError as exc:
-+        print(f'Falled to create image, failing back to prepared copy: {exc}')
++/* Test EFI bootmeth */
++static int bootflow_efi(struct unit_test_state *uts)
++{
++	/* disable ethernet since the hunter will run dhcp */
++	test_set_eth_enable(false);
 +
-+    finally:
-+        if mounted:
-+            u_boot_utils.run_and_log(cons, 'sudo umount --lazy %s' % mnt)
-+        if loop:
-+            u_boot_utils.run_and_log(cons, 'sudo losetup -d %s' % loop)
++	/* make USB scan without delays */
++	test_set_skip_delays(true);
 +
-+    if not complete:
-+        copy_prepared_image(cons, devnum, fname, basename)
++	bootstd_reset_usb();
 +
++	/* Avoid outputting ANSI characters which mess with our asserts */
++	efi_console_set_ansi(false);
 +
- @pytest.mark.buildconfigspec('cmd_bootflow')
- @pytest.mark.buildconfigspec('sandbox')
- def test_ut_dm_init_bootstd(u_boot_console):
-@@ -559,6 +598,7 @@ def test_ut_dm_init_bootstd(u_boot_console):
-     setup_cedit_file(u_boot_console)
-     setup_cros_image(u_boot_console)
-     setup_android_image(u_boot_console)
-+    setup_efi_image(u_boot_console)
- 
-     # Restart so that the new mmc1.img is picked up
-     u_boot_console.restart_uboot()
++	ut_assertok(bootstd_test_drop_bootdev_order(uts));
++	ut_assertok(run_command("bootflow scan", 0));
++	ut_assert_skip_to_line(
++		"Bus usb@1: scanning bus usb@1 for devices... 5 USB Device(s) found");
++
++	ut_assertok(run_command("bootflow list", 0));
++
++	ut_assert_nextlinen("Showing all");
++	ut_assert_nextlinen("Seq");
++	ut_assert_nextlinen("---");
++	ut_assert_nextlinen("  0  extlinux");
++	ut_assert_nextlinen(
++		"  1  efi          ready   usb_mass_    1  usb_mass_storage.lun0.boo /EFI/BOOT/BOOTSBOX.EFI");
++	ut_assert_nextlinen("---");
++	ut_assert_skip_to_line("(2 bootflows, 2 valid)");
++	ut_assert_console_end();
++
++	ut_assertok(run_command("bootflow select 1", 0));
++	ut_assert_console_end();
++
++	systab.fw_vendor = test_vendor;
++
++	ut_asserteq(1, run_command("bootflow boot", 0));
++	ut_assert_nextline(
++		"** Booting bootflow 'usb_mass_storage.lun0.bootdev.part_1' with efi");
++	if (IS_ENABLED(CONFIG_LOGF_FUNC))
++		ut_assert_skip_to_line("       efi_run_image() Booting /\\EFI\\BOOT\\BOOTSBOX.EFI");
++	else
++		ut_assert_skip_to_line("Booting /\\EFI\\BOOT\\BOOTSBOX.EFI");
++
++	/* TODO: Why the \r ? */
++	ut_assert_nextline("U-Boot test app for EFI_LOADER\r");
++	ut_assert_nextline("Exiting boot sevices");
++	if (IS_ENABLED(CONFIG_LOGF_FUNC))
++		ut_assert_nextline("     do_bootefi_exec() ## Application failed, r = 5");
++	else
++		ut_assert_nextline("## Application failed, r = 5");
++	ut_assert_nextline("Boot failed (err=-22)");
++
++	ut_assert_console_end();
++
++	return 0;
++}
++BOOTSTD_TEST(bootflow_efi, UTF_CONSOLE);
 -- 
 2.43.0
 
