@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62B3DCDE025
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 16:56:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 019F4CDE024
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 17:06:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A720888D63;
-	Thu, 26 Sep 2024 18:56:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 55DDC88C94;
+	Thu, 26 Sep 2024 19:06:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="U1sI4kqE";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="KKBJXaB3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A7C4188C94; Thu, 26 Sep 2024 18:56:41 +0200 (CEST)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7971F88D63; Thu, 26 Sep 2024 17:05:39 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CB6A889DA
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 18:56:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 0327E88A46
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 17:05:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-6e232e260c2so8757057b3.0
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 09:56:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1727369798; x=1727974598;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Eq5lMmNJ3UipQb961q6niTGgs6bT1KgmGIJX8vHg8ng=;
- b=U1sI4kqEQc4mwSzaW5gKpxSHNBuG1NwxhSRPsV8/4/JtSFyeZ21HsCKAWaAMiDGtPB
- pHLb88V0/8ed2y4q2jO8PkpbCGaXSPDm3IbUqxbmG1Qbu1/sy3QIgL12uf3whaVgpV7I
- lJECpFzyhi0EDysrr+6Z0Calz/X0BBwJ7Dwx8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727369798; x=1727974598;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Eq5lMmNJ3UipQb961q6niTGgs6bT1KgmGIJX8vHg8ng=;
- b=UlDsdJYxfv/Ru/PVcLbf2fDZcCjqUfT70m5505VqGrhxpnVUZ0lNH6s/CeGYdybcbM
- UHXHLB7UnZ5H5QczddngLxAUZ3xa9j4ZTZaCesh80Cd61C/3TYEwKa814kzoy2b5tzq/
- RAwF0nF642ZnSAdzRCsTvQyUaG30KH8sz1W9xE/xugYHr/zvl+1Mv87n4VsnOAQ5Eegv
- zhKXe3iCnQC+qDVoB1Ra42Jc9na5q8MQ2JwPX+c3Ab0gbg2ZdyJAKQ62E5+9rZOFf1Ul
- mP4NmetlYquM8JFb/KmUmrUyUDrXRO6Kunb7UWuIwxsF4FcpL2No/sDec6tGVHFoQpoR
- YAHg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWvKJhU7WVlTd86LdKAwNGcZ40FosGXMX/oKg3hQcpdIOLXt72IeC2wt3APGxtNDdgz4fy13TE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxaEWDizQ4N+9oJx7oBCTBTQNUgqxmsDFsVAplTF68DW17YEADX
- 0Oxf7ojz6ZPurLgSzQeIBfCd8lhy76t9KaCdPlBvug/BIOiK7DQTgQAKwwYeVhjqs3AFC85VukK
- E6l16qyevTFflTzQjTpN7WnHFzdvLQXlPoP6X0w==
-X-Google-Smtp-Source: AGHT+IFX2SuIRZ/w4IOLljhRgXARKoKOmuKSc/tXfbXbuNWsRDcjH1xvxa7w4rCIucWw6/MzdBIDtcD+dx8E9GkNl40=
-X-Received: by 2002:a05:690c:3241:b0:6dd:b920:1cb5 with SMTP id
- 00721157ae682-6e24758582fmr1334087b3.25.1727369798081; Thu, 26 Sep 2024
- 09:56:38 -0700 (PDT)
+ smtp.mailfrom=SRS0=3c7c=QZ=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1727363127;
+ bh=Y+YnRVBW43H1F0UL6bLCP1aMcWtJ29E/WmvU1jfMCaM=;
+ b=KKBJXaB30RQHqA6J7TmHnNCaNsqz9t73wzVY6LW8fxwe9GRxO72hmWqP8EMoM4eZsdP+u9aJE
+ sa2CtZstdNVYs+FXL/DTkgBnig648Btar1BYHWICCGlkzK7lBeH9jYCjcBeV1CDXRBwYrUYge3H
+ bv59tM+xfaviOowY9Hh9flgarH8Q/3BnYzAbr03osTmSxeLoKfrUxP734fv3N5DoUl/gsUnx4XK
+ a7K8x+UYwWtIud53lW4cWDJhfjVHLlgBfWe/cSfgeJd3FROfJVte4nK5LQBA1SMDfYqiAvgcNxn
+ 0S7zDscPqrPz6EU5FAAdotYqqsttyIOhmi53y1ibvkpg==
+Message-ID: <b8eb1c20-afdb-497e-9788-498550520d61@kwiboo.se>
+Date: Thu, 26 Sep 2024 17:05:11 +0200
 MIME-Version: 1.0
-References: <20240825122617.3708982-1-dario.binacchi@amarulasolutions.com>
- <CANV2PTN_+9rZu0=XrNE+AUO3YRPCUjSHZy-Oe8WcXb_M-MiVTw@mail.gmail.com>
- <7a25850c-6082-4490-867b-126b480ba757@linaro.org>
- <20240826150146.GG2479150@bill-the-cat>
-In-Reply-To: <20240826150146.GG2479150@bill-the-cat>
-From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Date: Thu, 26 Sep 2024 18:56:27 +0200
-Message-ID: <CABGWkvo9NgtrgmeQw63i+4EdhCpAcJ+rVpbXQrSM9h8atXZf6Q@mail.gmail.com>
-Subject: Re: [PATCH 1/2] bootm: adjust the print format
-To: Tom Rini <trini@konsulko.com>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>, E Shattow <lucent@gmail.com>,
- u-boot@lists.denx.de, 
- linux-amarula@amarulasolutions.com, Eddie James <eajames@linux.ibm.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/5] power: regulator: Trigger probe of regulators
+ which are always-on or boot-on
+To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Ben Wolsieffer <benwolsieffer@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Chris Morgan <macromorgan@hotmail.com>, Dragan Simic <dsimic@manjaro.org>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Kostya Porotchkin <kostap@marvell.com>, Matteo Lisi
+ <matteo.lisi@engicam.com>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Max Krummenacher <max.krummenacher@toradex.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Sam Day <me@samcday.com>,
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Thierry Reding <treding@nvidia.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, u-boot-amlogic@groups.io,
+ u-boot-qcom@groups.io, u-boot@dh-electronics.com,
+ uboot-stm32@st-md-mailman.stormreply.com
+References: <20240925022314.714285-1-marex@denx.de>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20240925022314.714285-1-marex@denx.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 66f578317ea0e42a3af9b8e1
+X-Mailman-Approved-At: Thu, 26 Sep 2024 19:06:16 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,108 +94,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Tom,
+Hi Marek,
 
-On Mon, Aug 26, 2024 at 5:01=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
-:
->
-> On Mon, Aug 26, 2024 at 02:26:10PM +0100, Caleb Connolly wrote:
-> >
-> >
-> > On 25/08/2024 19:36, E Shattow wrote:
-> > > On Sun, Aug 25, 2024 at 5:26=E2=80=AFAM Dario Binacchi
-> > > <dario.binacchi@amarulasolutions.com> wrote:
-> > > >
-> > > > All three addresses printed are in hexadecimal format, but only the
-> > > > first two have the "0x" prefix. The patch aligns the format of the
-> > > > "end" address with the other two by adding the "0x" prefix.
-> > > >
-> > > > Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-> > > > ---
-> > > >
-> > > >   boot/bootm.c | 2 +-
-> > > >   1 file changed, 1 insertion(+), 1 deletion(-)
-> > > >
-> > > > diff --git a/boot/bootm.c b/boot/bootm.c
-> > > > index 480f8e6a0e6e..951e549f19ff 100644
-> > > > --- a/boot/bootm.c
-> > > > +++ b/boot/bootm.c
-> > > > @@ -703,7 +703,7 @@ static int bootm_load_os(struct bootm_headers *=
-images, int boot_progress)
-> > > >
-> > > >                  /* Handle BOOTM_STATE_LOADOS */
-> > > >                  if (relocated_addr !=3D load) {
-> > > > -                       printf("Moving Image from 0x%lx to 0x%lx, e=
-nd=3D%lx\n",
-> > > > +                       printf("Moving Image from 0x%lx to 0x%lx, e=
-nd=3D0x%lx\n",
-> > > >                                 load, relocated_addr,
-> > > >                                 relocated_addr + image_size);
-> > > >                          memmove((void *)relocated_addr, load_buf, =
-image_size);
-> > > > --
-> > > > 2.43.0
-> > > >
-> > >
-> > >  From U-Boot documentation, alpha-numeric input is assumed to be
-> > > hexadecimal except when it is not, and generally does not accept "0x"
-> > > prefix on input. So the correct action would be to make this
->
-> While there was some point in history where I'm sure we got confused by
-> "0x" input I don't think that's true anymore (and everything should be
-> using some strto function that works as expected, not a custom parser).
-> So the docs should be updated there.
->
-> > > consistent over the whole U-Boot code base, or remove the "0x"
-> > > prefixes (not add more of them) ?
-> >
-> > Most(?) U-Boot commands accept the 0x prefix. I don't think stripping i=
-t is
-> > sensible, I myself have gotten confused many times over hex values that=
- lack
-> > the leading 0x in U-Boot output.
-> >
-> > Maybe unavailable in SPL (not sure) but I prefer the "%#lx" format whic=
-h
-> > prepends the 0x automatically.
->
-> That we assume input is hex is just what it is these days. Output really
-> ought to be prefixed with 0x because that's just common convention (and
-> whatever we assumed people would Just Know 25+ years ago may not be true
-> today). Since updating this output really shouldn't change our ABI, it's
-> conceptually fine with me but we don't use "%#lx" a lot and so I don't
-> know if tiny-printf handles it and so that might not be the right call
-> for SPL code and so lets not change this patch.
->
-> Reviewed-by: Tom Rini <trini@konsulko.com>
->
-> --
-> Tom
+On 2024-09-25 04:21, Marek Vasut wrote:
+> In case a regulator DT node contains regulator-always-on or regulator-boot-on
+> property, make sure the regulator gets correctly configured by U-Boot on start
+> up. Unconditionally probe such regulator drivers. This is a preparatory patch
+> for introduction of .regulator_post_probe() which would trigger the regulator
+> configuration.
+> 
+> Parsing of regulator-always-on and regulator-boot-on DT property has been
+> moved to regulator_post_bind() as the information is required early, the
+> rest of the DT parsing has been kept in regulator_pre_probe() to avoid
+> slowing down the boot process.
+> 
+> Signed-off-by: Marek Vasut <marex@denx.de>
 
-Can this patch be merged?
-I've seen both Review tags and conflicting opinions, and I haven't understo=
-od
-whether it can be accepted or not.
+[snip]
 
-Thanks and regards,
-Dario
+>  
+> -	debug("'%s' of dev: '%s', has nonunique value: '%s\n",
+> -	      property, dev->name, uc_pdata->name);
+> +	/*
+> +	 * In case the regulator has regulator-always-on or
+> +	 * regulator-boot-on DT property, trigger probe() to
+> +	 * configure its default state during startup.
+> +	 */
+> +	if (uc_pdata->always_on && uc_pdata->boot_on)
 
---=20
+This check for always_on _and_ boot_on does not fully match the commit
+message, comment or the old behavior of regulators_enable_boot_on()
+where any always_on _or_ boot_on would trigger autoset().
 
-Dario Binacchi
+Regards,
+Jonas
 
-Senior Embedded Linux Developer
+> +		dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
+>  
+> -	return -EINVAL;
+> +	return 0;
+>  }
+>  
 
-dario.binacchi@amarulasolutions.com
-
-__________________________________
-
-
-Amarula Solutions SRL
-
-Via Le Canevare 30, 31100 Treviso, Veneto, IT
-
-T. +39 042 243 5310
-info@amarulasolutions.com
-
-www.amarulasolutions.com
+[snip]
