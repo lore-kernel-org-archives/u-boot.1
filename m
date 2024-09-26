@@ -4,73 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EADCCDE03A
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 20:47:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6620FCDE03A
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 20:47:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 662C388363;
-	Thu, 26 Sep 2024 22:47:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C759088DBC;
+	Thu, 26 Sep 2024 22:47:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="n5dNDZJx";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cTMV1/gX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E21688D63; Thu, 26 Sep 2024 22:47:39 +0200 (CEST)
-Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
- [IPv6:2607:f8b0:4864:20::82c])
+ id 06DCE88DBA; Thu, 26 Sep 2024 22:47:52 +0200 (CEST)
+Received: from mail-vs1-xe32.google.com (mail-vs1-xe32.google.com
+ [IPv6:2607:f8b0:4864:20::e32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 27CE38806A
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 22:47:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E64F188DD4
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 22:47:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qt1-x82c.google.com with SMTP id
- d75a77b69052e-4585721f6edso8847621cf.2
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 13:47:37 -0700 (PDT)
+Received: by mail-vs1-xe32.google.com with SMTP id
+ ada2fe7eead31-49bcb3d0d6fso453891137.2
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 13:47:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727383656; x=1727988456; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727383668; x=1727988468; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8AuXWoANLB+LWEL8cSz8dz3ZeOjGtWVdxqyK1y3liXI=;
- b=n5dNDZJxxKpidDRRnszxFHbbJoyaMxF1vnUwrD6sYkvubX7g3mtuWLC9gDytS77UXh
- xY8tqp2i35gIlLMVs3aSUe+PBteUJR3YR/S1vhDwzf+p7SCPnlumCzFd1nWSQD0f2mjg
- jg0MgDsJDFUfn4oM0HzVLiaVlRPDMe35hQYVM=
+ bh=l59ngf+6ydqxL5LaeXdE85b+15Aa1xrUSq4OmGEBRRU=;
+ b=cTMV1/gXc/MMH0MN3xuemCXmXIKhT4Kg17mHVa0wVviUKi493W1M8cW+W652cSSnSW
+ 2vGHqAV4v0BJrtaNBcqqRLGOWS7coN60fL58qxyFNwB0xNQ8u7nCMZS8ThTAfUEzUQYL
+ iynujsWlB2ILxGsdgISeEJDbstZc1w8638eiI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727383656; x=1727988456;
+ d=1e100.net; s=20230601; t=1727383668; x=1727988468;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8AuXWoANLB+LWEL8cSz8dz3ZeOjGtWVdxqyK1y3liXI=;
- b=R8YLyjfjeCgFu78ApM5j1TxCb6g4XTt+uQPYyM+ULdBr/jLXgaOzOvFLFAhOL4WstK
- PCMrsocGDXczvLfZwCEvE36SEzip6fsrm4KV3JSAooZ84VQ63vZkUPrJ3QksLTaUCsok
- 4RPm42O0kTdQ2neMQjS/a5A849Jft0AIEVoFa+ri7EUuza50wl2SCSTscOyTlJaOPsmL
- z7cscE/qLnM4qNEC2naVZYJJjHWyQv3pWdWozxarIUxfbE5SM9EeDbIf6Xaq623ZhOC9
- fZjN+twkqsaOyZiuAe2duNlNyM7yIbBbK7A1GuN10Yyn0jjY/5XCHZtV+9QhQ5wUEPke
- TfCA==
-X-Gm-Message-State: AOJu0YxJX/wuiY+vDhcKMsSgf2KOLWx5Zg18AKd8Zd+OuUGB4ZWm/uQg
- 3+G4iJcXlvxheDw/Hen+vZ/OwuIGlVyjcy52l63+xurgyWLCSmVeGJR/5bWAZxVxDGu3oCx7wGh
- XPgk2BR8=
-X-Google-Smtp-Source: AGHT+IHA/Rub4qcXOE570taCDNohungd59jH4cgEhAH9asCgI1nEguacn/gbWCgMG+HkTR1rXpg1+Q==
-X-Received: by 2002:a05:6214:3b86:b0:6c5:5088:e39a with SMTP id
- 6a1803df08f44-6cb3b5fae96mr12295676d6.29.1727383655904; 
- Thu, 26 Sep 2024 13:47:35 -0700 (PDT)
+ bh=l59ngf+6ydqxL5LaeXdE85b+15Aa1xrUSq4OmGEBRRU=;
+ b=D/x3me1kSNfhqvH9Cz14e0Gib7NidOAYa4hHEdiIJXir3ucB8aJxiVPi4+8BXMFx9x
+ Koe2ygX7sS6V8SbzygFixRl9HYo4AyUSOxp/Pw3RnZCBz6cxbFDDyOEvvdqtF26nHgKI
+ ShUwcOtrl/FysCKz+lcPKTut6OPG9xpzbmBNR73qZzlUyr7Pk2ueoTDFicl2xfOsus3F
+ 5+QplcRjP0B+Y6Gd1ocBNbILtFFRncQn89QfPjYAbXhy4z8PX/8VZd3O5NSRF3UzsVbi
+ NBM0wROMW5V0fgJhCP0QjEtpMDkMmGtIKIE0P+U/wyu3RP6cVb3wFsAaPJUBNsY3MA/S
+ fDeA==
+X-Gm-Message-State: AOJu0Yz54l05N9aFevuApzqTSpeXsIr0nEfXW6OuHTKY7JJnpgJ2vDAh
+ VE880kGiW0mWyhcYM2BVrXyHN56/dEmCfjKDUph1Xs1UwXMnSZ/nYUY4laEnOj6AItWZ3+RXhG8
+ 9pJ4lxzI=
+X-Google-Smtp-Source: AGHT+IFqPfxvNGDH+p7+8TgHHL+8mcW3cbODQY2/3leJyOtkb7KuH7ubizdhHYllZNiG5JZzLlDr4w==
+X-Received: by 2002:a05:6102:3048:b0:48f:df71:17e3 with SMTP id
+ ada2fe7eead31-4a2e116c3e8mr1076274137.28.1727383668630; 
+ Thu, 26 Sep 2024 13:47:48 -0700 (PDT)
 Received: from chromium.org ([205.220.129.31])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6cb3b66cff5sm2538696d6.77.2024.09.26.13.47.19
+ 6a1803df08f44-6cb3b66cff5sm2538696d6.77.2024.09.26.13.47.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Sep 2024 13:47:35 -0700 (PDT)
+ Thu, 26 Sep 2024 13:47:48 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Doug Zobel <douglas.zobel@climate.com>,
- Michael Polyntsov <michael.polyntsov@iopsys.eu>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Subject: [PATCH 01/27] led: Drop LED_STATUS_BOARD_SPECIFIC
-Date: Thu, 26 Sep 2024 22:44:21 +0200
-Message-ID: <20240926204455.963584-2-sjg@chromium.org>
+ Albert Aribaud <albert.u.boot@aribaud.net>
+Subject: [PATCH 02/27] arm: Drop old LED support
+Date: Thu, 26 Sep 2024 22:44:22 +0200
+Message-ID: <20240926204455.963584-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240926204455.963584-1-sjg@chromium.org>
 References: <20240926204455.963584-1-sjg@chromium.org>
@@ -92,121 +89,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is not used by any board and there is a driver model version of
-LEDs. Drop it.
+This has been replaced with a new LED framework, so drop this old code.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- cmd/legacy_led.c     | 40 ----------------------------------------
- drivers/led/Kconfig  |  6 ------
- include/status_led.h | 13 +------------
- 3 files changed, 1 insertion(+), 58 deletions(-)
+ arch/arm/lib/crt0.S | 4 ----
+ 1 file changed, 4 deletions(-)
 
-diff --git a/cmd/legacy_led.c b/cmd/legacy_led.c
-index 50de7e89d8f..ef2135e0dba 100644
---- a/cmd/legacy_led.c
-+++ b/cmd/legacy_led.c
-@@ -24,26 +24,6 @@ struct led_tbl_s {
- typedef struct led_tbl_s led_tbl_t;
+diff --git a/arch/arm/lib/crt0.S b/arch/arm/lib/crt0.S
+index a0311438b45..3293e4df63c 100644
+--- a/arch/arm/lib/crt0.S
++++ b/arch/arm/lib/crt0.S
+@@ -185,10 +185,6 @@ here:
+ 	movne	r9, r0
+ # endif
  
- static const led_tbl_t led_commands[] = {
--#ifdef CONFIG_LED_STATUS_BOARD_SPECIFIC
--#ifdef CONFIG_LED_STATUS0
--	{ "0", CONFIG_LED_STATUS_BIT, NULL, NULL, NULL },
+-#if ! defined(CONFIG_SPL_BUILD)
+-	bl coloured_LED_init
+-	bl red_led_on
 -#endif
--#ifdef CONFIG_LED_STATUS1
--	{ "1", CONFIG_LED_STATUS_BIT1, NULL, NULL, NULL },
--#endif
--#ifdef CONFIG_LED_STATUS2
--	{ "2", CONFIG_LED_STATUS_BIT2, NULL, NULL, NULL },
--#endif
--#ifdef CONFIG_LED_STATUS3
--	{ "3", CONFIG_LED_STATUS_BIT3, NULL, NULL, NULL },
--#endif
--#ifdef CONFIG_LED_STATUS4
--	{ "4", CONFIG_LED_STATUS_BIT4, NULL, NULL, NULL },
--#endif
--#ifdef CONFIG_LED_STATUS5
--	{ "5", CONFIG_LED_STATUS_BIT5, NULL, NULL, NULL },
--#endif
--#endif
- #ifdef CONFIG_LED_STATUS_GREEN
- 	{ "green", CONFIG_LED_STATUS_GREEN, green_led_off, green_led_on, NULL },
- #endif
-@@ -148,26 +128,6 @@ int do_legacy_led(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- U_BOOT_CMD(
- 	led, 4, 1, do_legacy_led,
- 	"["
--#ifdef CONFIG_LED_STATUS_BOARD_SPECIFIC
--#ifdef CONFIG_LED_STATUS0
--	"0|"
--#endif
--#ifdef CONFIG_LED_STATUS1
--	"1|"
--#endif
--#ifdef CONFIG_LED_STATUS2
--	"2|"
--#endif
--#ifdef CONFIG_LED_STATUS3
--	"3|"
--#endif
--#ifdef CONFIG_LED_STATUS4
--	"4|"
--#endif
--#ifdef CONFIG_LED_STATUS5
--	"5|"
--#endif
--#endif
- #ifdef CONFIG_LED_STATUS_GREEN
- 	"green|"
- #endif
-diff --git a/drivers/led/Kconfig b/drivers/led/Kconfig
-index bee74b25751..5c401f92080 100644
---- a/drivers/led/Kconfig
-+++ b/drivers/led/Kconfig
-@@ -142,12 +142,6 @@ config LED_STATUS_GPIO
- 	  The status LED can be connected to a GPIO pin. In such cases, the
- 	  gpio_led driver can be used as a status LED backend implementation.
- 
--config LED_STATUS_BOARD_SPECIFIC
--	bool "Specific board"
--	default y
--	help
--	  LED support is only for a specific board.
--
- comment "LEDs parameters"
- 
- config LED_STATUS0
-diff --git a/include/status_led.h b/include/status_led.h
-index 6707ab1d29d..3d118af0d8b 100644
---- a/include/status_led.h
-+++ b/include/status_led.h
-@@ -54,23 +54,12 @@ void status_led_set(int led, int state);
-    * ADVICE: Define in your board configuration file rather than
-    * filling this file up with lots of custom board stuff.
-    */
--
--#elif defined(CONFIG_LED_STATUS_BOARD_SPECIFIC)
--/* led_id_t is unsigned long mask */
--typedef unsigned long led_id_t;
--
--extern void __led_toggle (led_id_t mask);
--extern void __led_init (led_id_t mask, int state);
--extern void __led_set (led_id_t mask, int state);
--void __led_blink(led_id_t mask, int freq);
- #else
- # error Status LED configuration missing
- #endif
- /************************************************************************/
- 
--#ifndef CONFIG_LED_STATUS_BOARD_SPECIFIC
--# include <asm/status_led.h>
--#endif
-+#include <asm/status_led.h>
- 
- #endif	/* CONFIG_LED_STATUS	*/
- 
+ 	/* call board_init_r(gd_t *id, ulong dest_addr) */
+ 	mov     r0, r9                  /* gd_t */
+ 	ldr	r1, [r9, #GD_RELOCADDR]	/* dest_addr */
 -- 
 2.43.0
 
