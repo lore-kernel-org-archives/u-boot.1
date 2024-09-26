@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ED4DCDE038
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 20:50:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA94ACDE038
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 20:51:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB47488E0D;
-	Thu, 26 Sep 2024 22:50:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 524F188E2C;
+	Thu, 26 Sep 2024 22:51:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BI/N3keO";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eqryFZIQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2ABEF88DF9; Thu, 26 Sep 2024 22:50:44 +0200 (CEST)
-Received: from mail-ua1-x936.google.com (mail-ua1-x936.google.com
- [IPv6:2607:f8b0:4864:20::936])
+ id 7686888E2C; Thu, 26 Sep 2024 22:51:01 +0200 (CEST)
+Received: from mail-ua1-x92d.google.com (mail-ua1-x92d.google.com
+ [IPv6:2607:f8b0:4864:20::92d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E664088E0D
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 22:50:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 56F2288E25
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 22:50:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ua1-x936.google.com with SMTP id
- a1e0cc1a2514c-84e85014badso474728241.1
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 13:50:41 -0700 (PDT)
+Received: by mail-ua1-x92d.google.com with SMTP id
+ a1e0cc1a2514c-84eaa79a00fso204600241.2
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 13:50:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727383841; x=1727988641; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727383858; x=1727988658; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=V5pO2UqTV2Zkdlytqu2neqpGC44d9ZphkyvdVp71MKc=;
- b=BI/N3keOEnI1ujSDTcDM6PhCK4YmDYBgs1Sh3armHQxjuLalwnuHFiXixO/LOkPmnO
- kqdZPnnMQFjL8IIBF6yyapXUYKgcuDwq4rVIHZROCWZ7UN3XmwdKzGvViwx2G8sTmUDv
- nSMVUKaYc4jRgJr7n9nBexuxp0qKwy4HHuB6Q=
+ bh=8+9Zr2wevhtE5YFd3lEn4disC5Yg2fd861yhGNjBoWs=;
+ b=eqryFZIQ6yRQJoqiTp4LZ3c8mdjsRTF9Emg1l97GGblxGJXVJFhPOF8TJ4uQsUDsV9
+ xcG/X+sR0PDMp/N08TNGhU7HVAIpNWXnHBkmaidfEGCUFR+dtYWifWdq15pQZcp7MGgJ
+ B5fqNEhs8ukD1IGAtk27C/Wjv+tMjy17MSFVU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727383841; x=1727988641;
+ d=1e100.net; s=20230601; t=1727383858; x=1727988658;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=V5pO2UqTV2Zkdlytqu2neqpGC44d9ZphkyvdVp71MKc=;
- b=v2Z/ns2Ky/g9Ppj+yKc0lVKx3TaMe4qh6+42VgNg2pQsCd7xOS2gceXc9ct2nfHhlk
- REUIESO+Uj6kuSoPo/S1gMEHLrYPLUpQpap/cnbvCE+ffvpkZsPbvGQepwDDWd1CoyZ3
- tpviaAY0FxzQDSJAcH1bxIBDr6JlDHMwRKtQenfELsMIi9ge/CKXKuuldMLSzAoIrkOd
- 7WuZOc74uIJQyJxY/8KATvj0qnfRObdo/ScBVyPt0a5agq24EbB4RqaIjwMeKfGjYl07
- oyV9k4VQfhGv//5d1PjYwB0laTOZ1fDTH178ZkmV0gc2qzqcmnAjQ3U039e7SYFE4Cjo
- aBtA==
-X-Gm-Message-State: AOJu0YyXszC33ndzCoE9K6FX7HmEbYz5H7+19Bbkvuha5n52y7P57sdl
- c9jDHbBqhE0toHIV4x5V0Seft8M7mh+6dSWRkpwpixlbxTt6m1YBRKy9F8KoUOgIk6Gb5UuDwbT
- VJ6hoiPo=
-X-Google-Smtp-Source: AGHT+IFwdDlUkSoKIJqWSfrSAwAS462JFfMInpAPO342htaRCeduaBnUyYvaPFZengpWqd1KXsIpfQ==
-X-Received: by 2002:a05:6102:d89:b0:498:9c0a:af1a with SMTP id
- ada2fe7eead31-4a2cefd1c40mr1145014137.4.1727383840632; 
- Thu, 26 Sep 2024 13:50:40 -0700 (PDT)
+ bh=8+9Zr2wevhtE5YFd3lEn4disC5Yg2fd861yhGNjBoWs=;
+ b=lR4gyD4r0lFZ7r4npGBC1u/k1aNby2HwL5uZvtOX7jam/F22q13W3heJgL9+z1KV9p
+ pYg0j66G91oeFaD0vUhYjvgb6sgtCEtyPLAQQC7yxzhNkbRPJaJqSBx+oeODiVCu6KYa
+ IkRC96gYNhTmqxSLgjYrsGGyQWBmTXerKIQdOMyGtSBU0rg15oC+hf9XOgL9yjP3Zp4l
+ 4kC2Ome0go9fNJ//qUBVLZqIsSUPzIQu/54wU+VAEO4iwz+pdy7Lxxpe9P7B+ut8ugMQ
+ 6bZy1FJlY3ImvbyKe4J/TeOxGGT2Er+1v+ioB7GoUh74faPTUK46rQg0iVLm+uqWupe9
+ se7A==
+X-Gm-Message-State: AOJu0YybQMAOi5Iv3F+lkp3Nk0M5VXbrijjKczXwXXWWiozjxpumrPFS
+ IB35Kb/mxvwBNVXsWcupvfYqamJ359ODNQYXS+J37IntNGp6Kd4Mjs+8+pOdazXOjNbev++2jXy
+ mC9zlBnc=
+X-Google-Smtp-Source: AGHT+IH9DBfxUnFUmJ4rLQHm5w9WBBUQAZxDIjDGmRyYlDJnkBQoqsHwQX/ucxpuDJxHIgO4ouuPgg==
+X-Received: by 2002:a05:6102:a49:b0:49c:103:62f1 with SMTP id
+ ada2fe7eead31-4a2d7f5b34amr965984137.16.1727383858098; 
+ Thu, 26 Sep 2024 13:50:58 -0700 (PDT)
 Received: from chromium.org ([205.220.129.31])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6cb3b66cff5sm2538696d6.77.2024.09.26.13.50.19
+ 6a1803df08f44-6cb3b66cff5sm2538696d6.77.2024.09.26.13.50.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Sep 2024 13:50:40 -0700 (PDT)
+ Thu, 26 Sep 2024 13:50:57 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Alexander Gendin <agendin@matrox.com>,
  Caleb Connolly <caleb.connolly@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Jonas Karlman <jonas@kwiboo.se>,
- Kever Yang <kever.yang@rock-chips.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>,
  =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
- Stefan Roese <sr@denx.de>, Wan Yee Lau <wan.yee.lau@intel.com>
-Subject: [PATCH 13/27] pca9551_led: Delete driver
-Date: Thu, 26 Sep 2024 22:44:33 +0200
-Message-ID: <20240926204455.963584-14-sjg@chromium.org>
+ Wan Yee Lau <wan.yee.lau@intel.com>
+Subject: [PATCH 14/27] misc: status_led: Delete driver
+Date: Thu, 26 Sep 2024 22:44:34 +0200
+Message-ID: <20240926204455.963584-15-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240926204455.963584-1-sjg@chromium.org>
 References: <20240926204455.963584-1-sjg@chromium.org>
@@ -99,223 +99,152 @@ This driver is not used anymore. Drop it.
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- drivers/misc/Kconfig       |  13 ---
- drivers/misc/Makefile      |   1 -
- drivers/misc/pca9551_led.c | 170 -------------------------------------
- 3 files changed, 184 deletions(-)
- delete mode 100644 drivers/misc/pca9551_led.c
+ drivers/misc/Makefile     |   1 -
+ drivers/misc/status_led.c | 124 --------------------------------------
+ 2 files changed, 125 deletions(-)
+ delete mode 100644 drivers/misc/status_led.c
 
-diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-index 6009d55f400..23eb509d974 100644
---- a/drivers/misc/Kconfig
-+++ b/drivers/misc/Kconfig
-@@ -446,19 +446,6 @@ config SPL_PWRSEQ
- 	  device. When the device is started up, its power sequence can be
- 	  initiated.
- 
--config PCA9551_LED
--	bool "Enable PCA9551 LED driver"
--	help
--	  Enable driver for PCA9551 LED controller. This controller
--	  is connected via I2C. So I2C needs to be enabled.
--
--config PCA9551_I2C_ADDR
--	hex "I2C address of PCA9551 LED controller"
--	depends on PCA9551_LED
--	default 0x60
--	help
--	  The I2C address of the PCA9551 LED controller.
--
- config STM32MP_FUSE
- 	bool "Enable STM32MP fuse wrapper providing the fuse API"
- 	depends on ARCH_STM32MP && MISC
 diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
-index c4941377b7d..03d87ef8a0e 100644
+index 03d87ef8a0e..cf6ece919bc 100644
 --- a/drivers/misc/Makefile
 +++ b/drivers/misc/Makefile
-@@ -57,7 +57,6 @@ obj-$(CONFIG_NPCM_OTP) += npcm_otp.o
- obj-$(CONFIG_NPCM_HOST) += npcm_host_intf.o
- obj-$(CONFIG_NUVOTON_NCT6102D) += nuvoton_nct6102d.o
- obj-$(CONFIG_P2SB) += p2sb-uclass.o
--obj-$(CONFIG_PCA9551_LED) += pca9551_led.o
- obj-$(CONFIG_$(SPL_)PWRSEQ) += pwrseq-uclass.o
- ifdef CONFIG_QFW
- obj-y += qfw.o
-diff --git a/drivers/misc/pca9551_led.c b/drivers/misc/pca9551_led.c
+@@ -48,7 +48,6 @@ obj-$(CONFIG_$(SPL_)I2C_EEPROM) += i2c_eeprom.o
+ obj-$(CONFIG_IHS_FPGA) += ihs_fpga.o
+ obj-$(CONFIG_IMX8) += imx8/
+ obj-$(CONFIG_IMX_ELE) += imx_ele/
+-obj-$(CONFIG_LED_STATUS) += status_led.o
+ obj-$(CONFIG_MPC83XX_SERDES) += mpc83xx_serdes.o
+ obj-$(CONFIG_$(SPL_TPL_)LS2_SFP) += ls2_sfp.o
+ obj-$(CONFIG_$(SPL_)MXC_OCOTP) += mxc_ocotp.o
+diff --git a/drivers/misc/status_led.c b/drivers/misc/status_led.c
 deleted file mode 100644
-index 040d0d5cf48..00000000000
---- a/drivers/misc/pca9551_led.c
+index 3b1baa4f840..00000000000
+--- a/drivers/misc/status_led.c
 +++ /dev/null
-@@ -1,170 +0,0 @@
+@@ -1,124 +0,0 @@
 -// SPDX-License-Identifier: GPL-2.0+
 -/*
-- * Copyright (C) 2015 Stefan Roese <sr@denx.de>
+- * (C) Copyright 2000-2003
+- * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
 - */
 -
--#include <errno.h>
--#include <i2c.h>
 -#include <status_led.h>
--
--#ifndef CONFIG_PCA9551_I2C_ADDR
--#error "CONFIG_PCA9551_I2C_ADDR not defined!"
--#endif
--
--#define PCA9551_REG_INPUT	0x00	/* Input register (read only) */
--#define PCA9551_REG_PSC0	0x01	/* Frequency prescaler 0 */
--#define PCA9551_REG_PWM0	0x02	/* PWM0 */
--#define PCA9551_REG_PSC1	0x03	/* Frequency prescaler 1 */
--#define PCA9551_REG_PWM1	0x04	/* PWM1 */
--#define PCA9551_REG_LS0		0x05	/* LED0 to LED3 selector */
--#define PCA9551_REG_LS1		0x06	/* LED4 to LED7 selector */
--
--#define PCA9551_CTRL_AI		(1 << 4)	/* Auto-increment flag */
--
--#define PCA9551_LED_STATE_ON		0x00
--#define PCA9551_LED_STATE_OFF		0x01
--#define PCA9551_LED_STATE_BLINK0	0x02
--#define PCA9551_LED_STATE_BLINK1	0x03
--
--struct pca9551_blink_rate {
--	u8 psc;	/* Frequency preescaler, see PCA9551_7.pdf p. 6 */
--	u8 pwm;	/* Pulse width modulation, see PCA9551_7.pdf p. 6 */
--};
--
--static int freq_last = -1;
--static int mask_last = -1;
--static int idx_last = -1;
--static int mode_last;
--
--static int pca9551_led_get_state(int led, int *state)
--{
--	unsigned int reg;
--	u8 shift, buf;
--	int ret;
--
--	if (led < 0 || led > 7) {
--		return -EINVAL;
--	} else if (led < 4) {
--		reg = PCA9551_REG_LS0;
--		shift = led << 1;
--	} else {
--		reg = PCA9551_REG_LS1;
--		shift = (led - 4) << 1;
--	}
--
--	ret = i2c_read(CONFIG_PCA9551_I2C_ADDR, reg, 1, &buf, 1);
--	if (ret)
--		return ret;
--
--	*state = (buf >> shift) & 0x03;
--	return 0;
--}
--
--static int pca9551_led_set_state(int led, int state)
--{
--	unsigned int reg;
--	u8 shift, buf, mask;
--	int ret;
--
--	if (led < 0 || led > 7) {
--		return -EINVAL;
--	} else if (led < 4) {
--		reg = PCA9551_REG_LS0;
--		shift = led << 1;
--	} else {
--		reg = PCA9551_REG_LS1;
--		shift = (led - 4) << 1;
--	}
--	mask = 0x03 << shift;
--
--	ret = i2c_read(CONFIG_PCA9551_I2C_ADDR, reg, 1, &buf, 1);
--	if (ret)
--		return ret;
--
--	buf = (buf & ~mask) | ((state & 0x03) << shift);
--
--	ret = i2c_write(CONFIG_PCA9551_I2C_ADDR, reg, 1, &buf, 1);
--	if (ret)
--		return ret;
--
--	return 0;
--}
--
--static int pca9551_led_set_blink_rate(int idx, struct pca9551_blink_rate rate)
--{
--	unsigned int reg;
--	int ret;
--
--	switch (idx) {
--	case 0:
--		reg = PCA9551_REG_PSC0;
--		break;
--	case 1:
--		reg = PCA9551_REG_PSC1;
--		break;
--	default:
--		return -EINVAL;
--	}
--	reg |= PCA9551_CTRL_AI;
--
--	ret = i2c_write(CONFIG_PCA9551_I2C_ADDR, reg, 1, (u8 *)&rate, 2);
--	if (ret)
--		return ret;
--
--	return 0;
--}
+-#include <linux/types.h>
 -
 -/*
-- * Functions referenced by cmd_led.c or status_led.c
+- * The purpose of this code is to signal the operational status of a
+- * target which usually boots over the network; while running in
+- * U-Boot, a status LED is blinking. As soon as a valid BOOTP reply
+- * message has been received, the LED is turned off. The Linux
+- * kernel, once it is running, will start blinking the LED again,
+- * with another frequency.
 - */
--void __led_init(led_id_t id, int state)
+-
+-/* ------------------------------------------------------------------------- */
+-
+-typedef struct {
+-	led_id_t mask;
+-	int state;
+-	int period;
+-	int cnt;
+-} led_dev_t;
+-
+-led_dev_t led_dev[] = {
+-	{	CONFIG_LED_STATUS_BIT,
+-		CONFIG_LED_STATUS_STATE,
+-		LED_STATUS_PERIOD,
+-		0,
+-	},
+-#if defined(CONFIG_LED_STATUS1)
+-	{	CONFIG_LED_STATUS_BIT1,
+-		CONFIG_LED_STATUS_STATE1,
+-		LED_STATUS_PERIOD1,
+-		0,
+-	},
+-#endif
+-#if defined(CONFIG_LED_STATUS2)
+-	{	CONFIG_LED_STATUS_BIT2,
+-		CONFIG_LED_STATUS_STATE2,
+-		LED_STATUS_PERIOD2,
+-		0,
+-	},
+-#endif
+-#if defined(CONFIG_LED_STATUS3)
+-	{	CONFIG_LED_STATUS_BIT3,
+-		CONFIG_LED_STATUS_STATE3,
+-		LED_STATUS_PERIOD3,
+-		0,
+-	},
+-#endif
+-#if defined(CONFIG_LED_STATUS4)
+-	{	CONFIG_LED_STATUS_BIT4,
+-		CONFIG_LED_STATUS_STATE4,
+-		LED_STATUS_PERIOD4,
+-		0,
+-	},
+-#endif
+-#if defined(CONFIG_LED_STATUS5)
+-	{	CONFIG_LED_STATUS_BIT5,
+-		CONFIG_LED_STATUS_STATE5,
+-		LED_STATUS_PERIOD5,
+-		0,
+-	},
+-#endif
+-};
+-
+-#define MAX_LED_DEV	(sizeof(led_dev)/sizeof(led_dev_t))
+-
+-static int status_led_init_done = 0;
+-
+-void status_led_init(void)
 -{
+-	led_dev_t *ld;
+-	int i;
+-
+-	for (i = 0, ld = led_dev; i < MAX_LED_DEV; i++, ld++)
+-		__led_init (ld->mask, ld->state);
+-	status_led_init_done = 1;
 -}
 -
--void __led_set(led_id_t mask, int state)
+-void status_led_tick(ulong timestamp)
 -{
--	if (state == CONFIG_LED_STATUS_OFF)
--		pca9551_led_set_state(mask, PCA9551_LED_STATE_OFF);
--	else
--		pca9551_led_set_state(mask, PCA9551_LED_STATE_ON);
--}
+-	led_dev_t *ld;
+-	int i;
 -
--void __led_toggle(led_id_t mask)
--{
--	int state = 0;
+-	if (!status_led_init_done)
+-		status_led_init();
 -
--	pca9551_led_get_state(mask, &state);
--	pca9551_led_set_state(mask, !state);
--}
+-	for (i = 0, ld = led_dev; i < MAX_LED_DEV; i++, ld++) {
 -
--void __led_blink(led_id_t mask, int freq)
--{
--	struct pca9551_blink_rate rate;
--	int mode;
--	int idx;
+-		if (ld->state != CONFIG_LED_STATUS_BLINKING)
+-			continue;
 -
--	if ((freq == freq_last) || (mask == mask_last)) {
--		idx = idx_last;
--		mode = mode_last;
--	} else {
--		/* Toggle blink index */
--		if (idx_last == 0) {
--			idx = 1;
--			mode = PCA9551_LED_STATE_BLINK1;
--		} else {
--			idx = 0;
--			mode = PCA9551_LED_STATE_BLINK0;
+-		if (++ld->cnt >= ld->period) {
+-			__led_toggle (ld->mask);
+-			ld->cnt -= ld->period;
 -		}
 -
--		idx_last = idx;
--		mode_last = mode;
 -	}
--	freq_last = freq;
--	mask_last = mask;
+-}
 -
--	rate.psc = ((freq * 38) / 1000) - 1;
--	rate.pwm = 128;		/* 50% duty cycle */
+-void status_led_set(int led, int state)
+-{
+-	led_dev_t *ld;
 -
--	pca9551_led_set_blink_rate(idx, rate);
--	pca9551_led_set_state(mask, mode);
+-	if (led < 0 || led >= MAX_LED_DEV)
+-		return;
+-
+-	if (!status_led_init_done)
+-		status_led_init();
+-
+-	ld = &led_dev[led];
+-
+-	ld->state = state;
+-	if (state == CONFIG_LED_STATUS_BLINKING) {
+-		ld->cnt = 0;		/* always start with full period    */
+-		state = CONFIG_LED_STATUS_ON;	/* always start with LED _ON_ */
+-	}
+-	__led_set (ld->mask, state);
 -}
 -- 
 2.43.0
