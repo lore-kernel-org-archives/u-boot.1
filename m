@@ -4,64 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1747CCCFA15
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 11:18:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F28D7CCF9E9
+	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 11:26:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0474E88D3A;
-	Thu, 26 Sep 2024 13:18:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6132A88D35;
+	Thu, 26 Sep 2024 13:26:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YoB5Ncn/";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BOXujEWM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF29D88D54; Thu, 26 Sep 2024 13:18:46 +0200 (CEST)
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
- [IPv6:2607:f8b0:4864:20::634])
+ id B20E488D38; Thu, 26 Sep 2024 13:26:16 +0200 (CEST)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38CFA88D38
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 13:18:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7894588CD9
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 13:26:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-2053616fa36so9657895ad.0
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 04:18:43 -0700 (PDT)
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-20551eeba95so7831245ad.2
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 04:26:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1727349522; x=1727954322; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=lincjFuWnIjJJPS7lLRXQksdS3sxyxYLgaCzLq2QGJQ=;
- b=YoB5Ncn/8etmbN+yntTFNtKcLmK4HH1rT0bLOiQzItnIfyfzBUOtpw8eOB1ETGUnRo
- kBSh6Z+LwILSCQ3J1ITJU3po95wWZ3vIoot8Q7sV1J8kiG32KouFaXp3ORDcG+PHokcS
- CT7EAYnpeY2580LlrtmyGUVCBq+myQA/EJHlcygVrX3gi4decR8lY81e2ziVQbyd4rB0
- F+R/zfcpEC5q6pGxYTw3GdZJLxpIIvL9hCnCpiaysl9NdfvEYZ0upfgWXZKx4N2vzvz8
- FVkFOadAXOcpAziWLwbPJwYStF5JF0QdSfOH+bPwD7iZ3FsJ3VfzloWichLim3BZAqQ/
- n9KA==
+ d=linaro.org; s=google; t=1727349972; x=1727954772; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=PVSZBlMxSgXlgs5+6EtOPSeqmKIr+hD2G22dZJi5CSY=;
+ b=BOXujEWM/R9DlEVRa7TclUyuG7/SOZUpbNKZJPjXGr3ImVRt/VUzEWFC/xY5gHf1HG
+ uFbwaa8a/3o+azuHHQbiNYmpTmbhNb9K00kKYQThp7ed2CRg0OxcojSenvC3chcTQKfB
+ nds0HUbOiy0x/FGTU01RcSOYqBHc7OOBsN/+5A1urM8Y3APYPHJF5UBQIp/7bgkacq6/
+ wDPdTycydT9yBaj888ksv36buf8Q0X3dDeXLIJcS2OdTYZhYr8mQkB0aJbUIYm1QF1mz
+ OAsxnpG83HTanWsosRSR+ZZ+5kjEQnZV+0x7xqxzZ6wp2Zx00oKYz9nc8dJVJJFnBBT+
+ qpSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727349522; x=1727954322;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=lincjFuWnIjJJPS7lLRXQksdS3sxyxYLgaCzLq2QGJQ=;
- b=OqReYWTPgSlkg8wX660Rhe/BBq3WLKCtOorVO2rzS/LBD8i3MwjEmZRmPvSgPgolOq
- 3uvMRSTCmC4+bPVw73HaKQHOyH5rShDTggr2DQaHjaM7ZAOa4T6a6QRzcOeot7qYsXXb
- EAbFZ4gE/7q/vUSlUlQSOXSgOlQ/aiKkzBbxaVKDuIT7KBACGQ0YdnZiqG1305op+qis
- kCPDtQpEl26bRlrW43UUJueejFOiaOSjxGoTLmufIcFntNKORUj6AmKETntmJ9S2h0ud
- jt+sbcAubhBxfRcmwJq33wZDn2mKzJHB/FHqwAdujgj8ZukNttNlI0iGx7d5A6NqrMbl
- H9Vw==
+ d=1e100.net; s=20230601; t=1727349972; x=1727954772;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=PVSZBlMxSgXlgs5+6EtOPSeqmKIr+hD2G22dZJi5CSY=;
+ b=lgCu15iNnHL08XjNyf8GP6D0AiqGUcGDosF4UPzbKBm7Ej7w+hTXO1mMkeUaQKF3op
+ YxevWK4szshBlPB8Dms1DlecKzt/AMvC3Tq8OzPbTrMINhQoj630E37d3xPfKO41C+R7
+ Vobbqiju1SSpezoxL5QG5ZG072xR6U7QZPGDilG1FE2eNO6l9kfTvePvaoivdYWT+qOQ
+ +jaCe5vNki0ENreEsqzQpYfZ0gYgeyT9duxqTqxAfdWByfn5aWivo5dSV208cBvF4Sj4
+ +GQroV1hBdj00xViGnfiU3U7G6XQxceDgjgY2vuwsucPAfoLTWCBkoi1EOV+Wg40s3Df
+ OiWg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXQYewoo7xIGmjEugruuy9QWYSKtu+ZcwyuHsd2JbgXRdwJHFsmPmFgSifQpfCyFAXoVPj1CAQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YyVscVX4NhQ01FLas1M1/bl0j9C4wD4fxEibEps4PoQ//2mV2iN
- m9qlGgdo+jSxhISsQ/ldBFO6blLyG3btdIvKnfFOkNV03eALxwSWY/QKlmAAk1nbi8rEg3N5WgV
- MfsDKYOamBUbViQRqsg4buzfyomxB+OyXlatipw==
-X-Google-Smtp-Source: AGHT+IETfZsLXDB6cRuKcXg+A8tnjA7HLUIUrXc/7LYXgf52a/TcC+/sazWoH+hT5Nuqs62/yX26qDzkA5/AefxLITA=
-X-Received: by 2002:a17:902:c946:b0:20b:20b:1881 with SMTP id
- d9443c01a7336-20b020b1b1cmr70506695ad.36.1727349522360; Thu, 26 Sep 2024
- 04:18:42 -0700 (PDT)
+ AJvYcCWfc0vzEC/uxK2/ww9DlzPHt21ntDLBRCS43AVGwAD0wH90TZ3J4jX1EsTmQA5jnsRoPu6uQMo=@lists.denx.de
+X-Gm-Message-State: AOJu0YyTW6p7KhhmKMfHm4uRVMMTkCkwc7oknUt8kJfbqTxSvxzRNDko
+ cdGBev62j2bP84kRuBpLnnr5zfduEBWLmSRItIwu1KAMyLNDk2gBXRM+DujVt/aJEyxvfL6wFLb
+ y7AKeEK/nXFdmYUFd8VszZAMz0hq1GMHWiVbnEA==
+X-Google-Smtp-Source: AGHT+IHGBXiLzLZhm8sNXBt/fuSsairRpo5MykRU2jY1lFXbj+2PxZGip+iNGMWy4pWpkJ7JERC+8dBKIS50kCCsipg=
+X-Received: by 2002:a17:902:f687:b0:203:a14d:ed0 with SMTP id
+ d9443c01a7336-20afc40d663mr89744955ad.11.1727349971906; Thu, 26 Sep 2024
+ 04:26:11 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240918152136.3395170-1-patrick.rudolph@9elements.com>
  <20240918152136.3395170-15-patrick.rudolph@9elements.com>
@@ -72,18 +71,15 @@ References: <20240918152136.3395170-1-patrick.rudolph@9elements.com>
  <CAFLszThA5eOM_xiMgDu=B4wAcP7wV9bzfc565rES8z6d1F8fjg@mail.gmail.com>
  <CAC_iWjLqmN0uA85RayC2hnMOJfCqumCpiq=waQwakd6ECfbXkg@mail.gmail.com>
  <CAFLszTgaVdgPNSC+vxZoH7ko5n_d6F_QnGfgL-biZ19edaUxQQ@mail.gmail.com>
- <CALNFmy3-0u=RhhiPgCzj2szzhaADXrWm79jkD1p3pmpmto456g@mail.gmail.com>
- <CAFLszThqaF9oSxEW5ZYw9udqtC+8n3BhQj313qUvRvrQV=OwWw@mail.gmail.com>
-In-Reply-To: <CAFLszThqaF9oSxEW5ZYw9udqtC+8n3BhQj313qUvRvrQV=OwWw@mail.gmail.com>
+In-Reply-To: <CAFLszTgaVdgPNSC+vxZoH7ko5n_d6F_QnGfgL-biZ19edaUxQQ@mail.gmail.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 26 Sep 2024 14:18:05 +0300
-Message-ID: <CAC_iWjKPrUu+j5dJNbQWZB+J7OUa1X01e_d8cN=YSrO_86cOhA@mail.gmail.com>
+Date: Thu, 26 Sep 2024 14:25:34 +0300
+Message-ID: <CAC_iWj+a+HCBr7A1HCcntZW7rvriTm1PvgVDcpbWCjBdRb7NzA@mail.gmail.com>
 Subject: Re: [PATCH v4 14/35] efi_loader: Allocate and write ACPI tables
 To: Simon Glass <sjg@chromium.org>
 Cc: Patrick Rudolph <patrick.rudolph@9elements.com>, u-boot@lists.denx.de, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,198 +96,165 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 26 Sept 2024 at 14:04, Simon Glass <sjg@chromium.org> wrote:
+Hi Simon,
+
+On Fri, 20 Sept 2024 at 19:01, Simon Glass <sjg@chromium.org> wrote:
 >
-> Hi Patrick,
+> Hi Ilias,
 >
-> On Thu, 26 Sept 2024 at 10:01, Patrick Rudolph
-> <patrick.rudolph@9elements.com> wrote:
+> On Fri, 20 Sept 2024 at 08:36, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
 > >
 > > Hi Simon,
-> > On Fri, Sep 20, 2024 at 6:01=E2=80=AFPM Simon Glass <sjg@chromium.org> =
-wrote:
+> >
+> > On Thu, 19 Sept 2024 at 18:36, Simon Glass <sjg@chromium.org> wrote:
 > > >
 > > > Hi Ilias,
 > > >
-> > > On Fri, 20 Sept 2024 at 08:36, Ilias Apalodimas
+> > > On Thu, 19 Sept 2024 at 17:20, Ilias Apalodimas
 > > > <ilias.apalodimas@linaro.org> wrote:
 > > > >
 > > > > Hi Simon,
 > > > >
-> > > > On Thu, 19 Sept 2024 at 18:36, Simon Glass <sjg@chromium.org> wrote=
-:
+> > > > On Thu, 19 Sept 2024 at 18:00, Simon Glass <sjg@chromium.org> wrote:
 > > > > >
 > > > > > Hi Ilias,
 > > > > >
-> > > > > On Thu, 19 Sept 2024 at 17:20, Ilias Apalodimas
-> > > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > > >
-> > > > > > Hi Simon,
-> > > > > >
-> > > > > > On Thu, 19 Sept 2024 at 18:00, Simon Glass <sjg@chromium.org> w=
-rote:
-> > > > > > >
-> > > > > > > Hi Ilias,
-> > > > > > >
-> > > > > >
-> > > > > > [...]
-> > > > > >
-> > > > > > > > > > +
-> > > > > > > > > > +               if (!addr)
-> > > > > > > > > > +                       return log_msg_ret("mem", -ENOM=
-EM);
-> > > > > > > > > > +       } else {
-> > > > > > > > > > +               pages =3D efi_size_in_pages(TABLE_SIZE)=
-;
-> > > > > > > > > > +
-> > > > > > > > > > +               ret =3D efi_allocate_pages(EFI_ALLOCATE=
-_ANY_PAGES,
-> > > > > > > > > > +                                        EFI_ACPI_RECLA=
-IM_MEMORY,
-> > > > > > > > > > +                                        pages, &new_ac=
-pi_addr);
-> > > > > > > > > > +               if (ret !=3D EFI_SUCCESS)
-> > > > > > > > > > +                       return log_msg_ret("mem", -ENOM=
-EM);
-> > > > > > > > > > +
-> > > > > > > > > > +               addr =3D (void *)(uintptr_t)new_acpi_ad=
-dr;
-> > > > > > > > > > +       }
-> > > > > > > > > > +
-> > > > > > > > >
-> > > > > > > > > The tables should be written regardless of whether EFI_LO=
-ADER is enabled.
-> > > > > > > >
-> > > > > > > > *Why*? How do you expect to hand them over to the OS?
-> > > > > > >
-> > > > > > > Why - because boards which need ACPI tables to boot should ge=
-nerate
-> > > > > > > them;
-> > > > > >
-> > > > > > Noone argued that.
-> > > > > >
-> > > > > > > also this happens when U-Boot starts up, in last_stage_init()
-> > > > > > > How - it isn't possible, but eventually I suppose it will be,=
- once we
-> > > > > > > have a use case for booting with ACPI but without EFI
-> > > > > >
-> > > > > > Are you aware of such an OS? If not, we can accept the patches =
-when we
-> > > > > > have a reason.
-> > > > >
-> > > > > Which patches? This is how it works today. We set up the tables i=
-n
-> > > > > last_stage_init(), so they can be examined while in U-Boot.
 > > > >
-> > > > What I mean, is that until we have a valid use case to store the AC=
-PI
-> > > > in a bloblist, I prefer them being allocated with proper EFI memory
-> > > > backing
+> > > > [...]
+> > > >
+> > > > > > > > +
+> > > > > > > > +               if (!addr)
+> > > > > > > > +                       return log_msg_ret("mem", -ENOMEM);
+> > > > > > > > +       } else {
+> > > > > > > > +               pages = efi_size_in_pages(TABLE_SIZE);
+> > > > > > > > +
+> > > > > > > > +               ret = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES,
+> > > > > > > > +                                        EFI_ACPI_RECLAIM_MEMORY,
+> > > > > > > > +                                        pages, &new_acpi_addr);
+> > > > > > > > +               if (ret != EFI_SUCCESS)
+> > > > > > > > +                       return log_msg_ret("mem", -ENOMEM);
+> > > > > > > > +
+> > > > > > > > +               addr = (void *)(uintptr_t)new_acpi_addr;
+> > > > > > > > +       }
+> > > > > > > > +
+> > > > > > >
+> > > > > > > The tables should be written regardless of whether EFI_LOADER is enabled.
+> > > > > >
+> > > > > > *Why*? How do you expect to hand them over to the OS?
+> > > > >
+> > > > > Why - because boards which need ACPI tables to boot should generate
+> > > > > them;
+> > > >
+> > > > Noone argued that.
+> > > >
+> > > > > also this happens when U-Boot starts up, in last_stage_init()
+> > > > > How - it isn't possible, but eventually I suppose it will be, once we
+> > > > > have a use case for booting with ACPI but without EFI
+> > > >
+> > > > Are you aware of such an OS? If not, we can accept the patches when we
+> > > > have a reason.
 > > >
-> > > I'm going to assert prior art here. If ARM is to have ACPI in U-Boot,
-> > > it should follow the most recent x86 approach and store it in the
-> > > bloblist. That is what the blloblist is for. It also avoids using
-> > > memory below the U-Boot area, which is not allowed.
-> > >
-> > > >
-> > > > >
-> > > > > It is the patches to change this which I object to.
-> > > > >
-> > > > > > I remember patches being hard NAK'ed on using DTs to pass the A=
-CPI
-> > > > > > table address in the past.
-> > > > >
-> > > > > Yes, I believe Bytedance carries a patch locally for that :-)
-> > > >
-> > > > Exactly
-> > > >
-> > > > >
-> > > > > >
-> > > > > > >
-> > > > > > > >
-> > > > > > > > >
-> > > > > > > > > Can we drop this else clause? We should always use the bl=
-oblist.
-> > > > > > > >
-> > > > > > > > Both Heinrich and I said the exact opposite. Unless there's=
- a
-> > > > > > > > perfectly good reason why we should keep them in bloblist m=
-emory, I'd
-> > > > > > > > like us to do that
-> > > > > > >
-> > > > > > > The main reason is that we should not be putting things in me=
-mory
-> > > > > > > between the start of RAM and the bottom of the U-Boot area. T=
-hat
-> > > > > > > region of memory is supposed to be for loading images. Most b=
-oards
-> > > > > > > hard-code the image-load addresses in environment variables. =
-But even
-> > > > > > > if they didn't, we should not be using that memory for U-Boot=
- data.
-> > > > > >
-> > > > > > EFI allows you to request a specific address to use. We can cho=
-ose one
-> > > > > > that fits the requirements
-> > > > >
-> > > > > So long as it is in U-Boot's space, that is fine. I just sent a p=
-atch
-> > > > > about relocation which covers this. It occured to me that this fe=
-ature
-> > > > > of U-Boot, which I have always assumed was common knowledge, may =
-have
-> > > > > not been noticed.
-> > > > >
-> > > > > > >
-> > > > > > > Another reason is that the bloblist is designed for this, for=
- keeping
-> > > > > > > tables in a small, contiguous area of memory, so that when pa=
-ssed to
-> > > > > > > Linux they are not spread all over the place.
-> > > > > >
-> > > > > > Linux does not and will not read tables from a bloblist though
-> > > > >
-> > > > > Indeed. There really isn't any point, anyway, since there are oth=
-er
-> > > > > ways of passing the tables along...except for ACPI with FDT but t=
-hat
-> > > > > isn't a valid use case for Linux so far.
-> > > >
-> > > > What we are trying to do with EFI is to stay as close to the spec a=
-nd
-> > > > the current OS implementations as possible. So again, please alloca=
-te
-> > > > EFI memory for the ACPI tables. The patches to convert it to blobli=
-st
-> > > > allocating them are minimal, so we can do it, once there's an actua=
-ll
-> > > > need for it.
-> > >
-> > > As it stands today, efi_acpi_register() does not do an EFI allocation=
-,
-> > > it just adds the existing allocation to the EFI tables. This works
-> > > fine for x86 - see arch/x86/lib/tables.c - so I would like ARM to do
-> > > the same. The need for it is (as above) that we should ensure that
-> > > memory usage is within the U-Boot area. This is something which
-> > > bloblist handles automatically. It is also nice to see all the tables
-> > > in one place with 'bloblist list'
-> > >
+> > > Which patches? This is how it works today. We set up the tables in
+> > > last_stage_init(), so they can be examined while in U-Boot.
 > >
-> > So what's the consent and the next step here?
-> > Is the current code OK as is, as it works with both BLOBLIST and withou=
-t?
-> > Should I drop support for one or the other?
+> > What I mean, is that until we have a valid use case to store the ACPI
+> > in a bloblist, I prefer them being allocated with proper EFI memory
+> > backing
 >
-> Just BLOBLIST. The EFI allocation is done using efi_acpi.c which you
-> can check to make sure it is working.
->
-> Using efi_allocate_pages() before the app starts is not good.
+> I'm going to assert prior art here. If ARM is to have ACPI in U-Boot,
+> it should follow the most recent x86 approach and store it in the
+> bloblist. That is what the blloblist is for. It also avoids using
+> memory below the U-Boot area, which is not allowed.
 
-Simon, please stop trying to enforce decisions on subsystems you don't
-maintain. I am pretty sure both Heinrich and I said no to this.
+By prior art you mean [0], which was none of the EFI maintainers got involved?
+
+>
+> >
+> > >
+> > > It is the patches to change this which I object to.
+> > >
+> > > > I remember patches being hard NAK'ed on using DTs to pass the ACPI
+> > > > table address in the past.
+> > >
+> > > Yes, I believe Bytedance carries a patch locally for that :-)
+> >
+> > Exactly
+> >
+> > >
+> > > >
+> > > > >
+> > > > > >
+> > > > > > >
+> > > > > > > Can we drop this else clause? We should always use the bloblist.
+> > > > > >
+> > > > > > Both Heinrich and I said the exact opposite. Unless there's a
+> > > > > > perfectly good reason why we should keep them in bloblist memory, I'd
+> > > > > > like us to do that
+> > > > >
+> > > > > The main reason is that we should not be putting things in memory
+> > > > > between the start of RAM and the bottom of the U-Boot area. That
+> > > > > region of memory is supposed to be for loading images. Most boards
+> > > > > hard-code the image-load addresses in environment variables. But even
+> > > > > if they didn't, we should not be using that memory for U-Boot data.
+> > > >
+> > > > EFI allows you to request a specific address to use. We can choose one
+> > > > that fits the requirements
+> > >
+> > > So long as it is in U-Boot's space, that is fine. I just sent a patch
+> > > about relocation which covers this. It occured to me that this feature
+> > > of U-Boot, which I have always assumed was common knowledge, may have
+> > > not been noticed.
+> > >
+> > > > >
+> > > > > Another reason is that the bloblist is designed for this, for keeping
+> > > > > tables in a small, contiguous area of memory, so that when passed to
+> > > > > Linux they are not spread all over the place.
+> > > >
+> > > > Linux does not and will not read tables from a bloblist though
+> > >
+> > > Indeed. There really isn't any point, anyway, since there are other
+> > > ways of passing the tables along...except for ACPI with FDT but that
+> > > isn't a valid use case for Linux so far.
+> >
+> > What we are trying to do with EFI is to stay as close to the spec and
+> > the current OS implementations as possible. So again, please allocate
+> > EFI memory for the ACPI tables. The patches to convert it to bloblist
+> > allocating them are minimal, so we can do it, once there's an actuall
+> > need for it.
+>
+> As it stands today, efi_acpi_register() does not do an EFI allocation,
+> it just adds the existing allocation to the EFI tables. This works
+> fine for x86 - see arch/x86/lib/tables.c -
+
+Yes and I've already mentioned that in my original response.
+
+> so I would like ARM to do
+> the same. The need for it is (as above) that we should ensure that
+> memory usage is within the U-Boot area. This is something which
+> bloblist handles automatically. It is also nice to see all the tables
+> in one place with 'bloblist list'
+
+Unless bloblist is not compiled.... in which case you still need to
+malloc and align.
+I am just putting this out there, because your next email is going to
+be "oh look bloblist is mandatory now".
+For the last time, bloblist make zero sense to allocate data that
+arent going to be handed across loaders.
+
+Patrick, my suggestion is to either use efi_allocate_pages() as you do
+or malloc a properly aligned buffer since we set the memory type in
+efi_acpi_register().
+IIRC the reason we set that in efi_acpi_register() is for QEMU which
+hands us over ACPI tables, so we can't do much. I would personally
+prefer efi allocated memory.
 
 Thanks
 /Ilias
+
+
 >
 > Regards,
 > Simon
+
+[0] https://lore.kernel.org/u-boot/20201104165743.632571-11-sjg@chromium.org/
