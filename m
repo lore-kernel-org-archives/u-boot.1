@@ -4,80 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41678CDD1DC
-	for <u-boot@archiver.kernel.org>; Fri, 27 Sep 2024 20:41:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ED8ACF6483
+	for <u-boot@archiver.kernel.org>; Fri, 27 Sep 2024 21:50:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B3B28911B;
-	Fri, 27 Sep 2024 22:40:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id F204089142;
+	Fri, 27 Sep 2024 23:50:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rFskVflQ";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 91AEE89142; Fri, 27 Sep 2024 22:40:56 +0200 (CEST)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1727473815;
+	bh=wgUgq3TKQsczl9xsWJ24tkNjpODX8zKua4Fy63ndGWA=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=uqofLILagvuGtGvLFDcuwCc3ubKZw48pj+es/pMy1ryXR/HvExiz4fpHf5T8pPgTv
+	 WysXav1Ah2u5FZqo5m/klBONZoE8uh9gJNyDH/exw5AwES5E512G/UiC5EJHIOGUYj
+	 e7jGCrg3pnn45Ll8LxWEwVU5GZ46wdbgR9YmFw/XZSGaYlpVSNzWzn+zABncwUXC9O
+	 9FI1BPSHHmMLWdKPNyCiiZ9aBH8s+68rvByBKcoTArroc/qEzTuOxEU5sZFliXzEuf
+	 9T9CR9uPOajw4mqPEFQ48S8djupOLi8C9SsHuLJVxbxCdHNRuojscSBxCj7x9Mhjik
+	 6U1esHG1o5Z6g==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2DAF28911B
- for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 22:40:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-6cb2824ddc2so19156196d6.1
- for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 13:40:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1727469653; x=1728074453; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=3dfQuxpvKY7VdxMCUZQYkYO7BLf9no3w1svRCLXuQB4=;
- b=rFskVflQBpoO8GOYIVdDM+B4DjeJm2MTm0pMeT74O+fIj3bt/WM8FuyY8PTXFhS1nS
- 5czhmLiS/xjqbJOJ7mY+41Vfb0GSAtrQn+Pq+NpXfh6sjrhrHnXNUL2w+3nu9Vn/92Oo
- xBIb5pugEJLlSxMGH8qSDoTn++/+WZOL+svJ8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727469653; x=1728074453;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3dfQuxpvKY7VdxMCUZQYkYO7BLf9no3w1svRCLXuQB4=;
- b=Wxh7TgAPsgJE+HszI3LXIMXRk6pR58GRNiiny1Z7/oLwWZqISYTjo9zGUKmC5AQ5yx
- K2fio9xp3gRtA+lQH96JyCjvcjqs5PRVPFUfsljcT6cOj3JN38xN2t+3TWoFjG7rbteY
- DOAlon7K3jyQyX06mnSz9DkX6uzUkunnqwHQUO/NPjMjcimgeQgY5tEqXRjswOi9l2H+
- WpdTu0v9o/dq5/HiIlx6R4869mdVaP9bcmqqvlsug7zP7S7UkyTMAbz8MOQ8M4S7xyjY
- UyHaBaOExIR+GUz33rOBuCmg9TOUi5O7xR7J4xgxtYj7ahtsxYyltpPn3pnRQVEozbkN
- uk/A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXnjLbtn3ZmVyuSOC8bUDsbYAItpMKyi4SJSAENLnpgeOUgxcdkpN1XVv0/+yJRYrqy3/+F8g8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwLg4DJ9kQEta0LXuYoz8gVtW05u/Y2Y2t94aCsvoQaVCnFRVVb
- rBlRqDCK7dM0NESkjCDsZNxjzT3CBZEZ7Q7JPYTkVoMFnxrI1lX44/ybUnfeW68=
-X-Google-Smtp-Source: AGHT+IE7YIlHpJTMGVh9TDAOONGoDefZ/asj5gzB5mu6wknd0PllFV7CGU5IorjkOOgbOngKI9xUtw==
-X-Received: by 2002:a05:6214:2d41:b0:6cb:10ee:de84 with SMTP id
- 6a1803df08f44-6cb3b5c12d2mr45919006d6.4.1727469652809; 
- Fri, 27 Sep 2024 13:40:52 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6cb3b66ca18sm12450646d6.103.2024.09.27.13.40.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Sep 2024 13:40:50 -0700 (PDT)
-Date: Fri, 27 Sep 2024 14:40:46 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Brian Ruley <brian.ruley@gehealthcare.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- ian.ray@gehealthcare.com, Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
-Subject: Re: [PATCH] binman: add fast authentication method for i.MX8M signing
-Message-ID: <20240927204046.GW4252@bill-the-cat>
-References: <20240927124237.47-1-brian.ruley@gehealthcare.com>
- <CAFLszTjHkmT0JcgcZ6Yn69q27Pe7YhvwuXc0bC0N+agmpPtCfg@mail.gmail.com>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 105A2890C6;
+ Fri, 27 Sep 2024 23:50:13 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1727473814;
+ bh=wgUgq3TKQsczl9xsWJ24tkNjpODX8zKua4Fy63ndGWA=;
+ h=From:To:Cc:Subject:Date:From;
+ b=HDveb+IaC0Q7F+bkxs35ialBoZXnepgJfw9Vxz00qZSnvz9JF84/kEqKiXdso+snb
+ mSN7uA3lGCNS2yGzqQXh8tTPWPELSh3QxkxMKHFIDT+pfeTbqkeMwG8b15KTFB94Uy
+ FmHWo8JjNn/bQj6hNi8eJ/8+t+ZMtY2DpF5uwe02ilp/XTSOVTeX7MqVpcF3Sfu+Ag
+ PXysOK6N7bklZWAiy61CZcR4KiJTBXHYsr2qFHgxSUCVPejjcT9wNUyv8GT5GYar5U
+ qDKY5ANdO4eI8qk6ajdsO8Z9S4lCxDMhzZaSErE5Ue4Qt7Se4HBVEekIfcD706jvgU
+ k1jHgMxQI+xfA==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Fabio Estevam <festevam@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Jonas Karlman <jonas@kwiboo.se>,
+ Lothar Rubusch <l.rubusch@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@denx.de>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@dh-electronics.com
+Subject: [PATCH 1/3] dts: Deduplicate dtbs target
+Date: Fri, 27 Sep 2024 23:48:27 +0200
+Message-ID: <20240927214955.394224-1-marex@denx.de>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="kYc487uz/O5FmdKf"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTjHkmT0JcgcZ6Yn69q27Pe7YhvwuXc0bC0N+agmpPtCfg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,61 +73,338 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The dtbs: target is almost identical in all architecture Makefiles.
+All architecture Makefiles include scripts/Makefile.dts . Deduplicate
+the dtbs: target into scripts/Makefile.dts . No functional change.
 
---kYc487uz/O5FmdKf
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Jonas Karlman <jonas@kwiboo.se>
+Cc: Lothar Rubusch <l.rubusch@gmail.com>
+Cc: Michal Simek <michal.simek@amd.com>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Stefano Babic <sbabic@denx.de>
+Cc: Sumit Garg <sumit.garg@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@dh-electronics.com
+Cc: u-boot@lists.denx.de
+---
+ arch/arc/dts/Makefile            | 9 +--------
+ arch/arm/dts/Makefile            | 8 --------
+ arch/m68k/dts/Makefile           | 9 +--------
+ arch/microblaze/dts/Makefile     | 9 +--------
+ arch/mips/dts/Makefile           | 8 --------
+ arch/nios2/dts/Makefile          | 9 +--------
+ arch/powerpc/dts/Makefile        | 8 --------
+ arch/riscv/dts/Makefile          | 9 +--------
+ arch/sandbox/dts/Makefile        | 9 +--------
+ arch/sh/dts/Makefile             | 8 --------
+ arch/x86/dts/Makefile            | 8 --------
+ arch/xtensa/dts/Makefile         | 8 --------
+ dts/upstream/src/arm/Makefile    | 8 --------
+ dts/upstream/src/arm64/Makefile  | 8 --------
+ dts/upstream/src/xtensa/Makefile | 8 --------
+ scripts/Makefile.dts             | 8 ++++++++
+ 16 files changed, 14 insertions(+), 120 deletions(-)
 
-On Fri, Sep 27, 2024 at 10:50:29AM -0600, Simon Glass wrote:
-> Hi,
->=20
-> On Fri, 27 Sept 2024 at 06:42, Brian Ruley <brian.ruley@gehealthcare.com>=
- wrote:
-> >
-> > Using the PKI tree with SRKs as intermediate CA isn't necessary or even
-> > desirable in some situations (boot time, for example). Add the possbili=
-ty
-> > to use the "fast authentication" method where the image and CSF are both
-> > signed using the SRK [1, p.63].
-> >
-> > [1] https://community.nxp.com/pwmxy87654/attachments/pwmxy87654/imx-pro=
-cessors/202591/1/CST_UG.pdf
-> >
-> > Signed-off-by: Brian Ruley <brian.ruley@gehealthcare.com>
-> > Cc: Marek Vasut <marex@denx.de>
-> >
-> >  tools/binman/etype/nxp_imx8mcst.py | 23 +++++++++++++++++++----
-> >  1 file changed, 19 insertions(+), 4 deletions(-)
-> >
->=20
-> Please can you coordinate with Marek as we need to sort out the test
-> coverage for this etype, before adding more functionality. I did a
-> starting point, now in -next, which should help.
+diff --git a/arch/arc/dts/Makefile b/arch/arc/dts/Makefile
+index 532a8131c59..fe6ad7b849a 100644
+--- a/arch/arc/dts/Makefile
++++ b/arch/arc/dts/Makefile
+@@ -10,12 +10,5 @@ dtb-$(CONFIG_TARGET_IOT_DEVKIT) +=  iot_devkit.dtb
+ 
+ include $(srctree)/scripts/Makefile.dts
+ 
+-targets += $(dtb-y)
+-
++# Add any required device tree compiler flags here
+ DTC_FLAGS += -R 4 -p 0x1000
+-
+-PHONY += dtbs
+-dtbs: $(addprefix $(obj)/, $(dtb-y))
+-	@:
+-
+-clean-files := *.dtb
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index cdb90f1d358..5976ebd09fc 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -1304,16 +1304,8 @@ dtb-$(CONFIG_TARGET_CORSTONE1000) += corstone1000-mps3.dtb \
+ 
+ include $(srctree)/scripts/Makefile.dts
+ 
+-targets += $(dtb-y)
+-
+ # Add any required device tree compiler flags here
+ DTC_FLAGS += -a 0x8
+ 
+ DTC_FLAGS_imx8mp-dhcom-som-overlay-rev100 += -Wno-avoid_default_addr_size -Wno-reg_format
+ DTC_FLAGS_imx8mp-dhcom-pdk3-overlay-rev100 += -Wno-avoid_default_addr_size -Wno-reg_format
+-
+-PHONY += dtbs
+-dtbs: $(addprefix $(obj)/, $(dtb-y))
+-	@:
+-
+-clean-files := *.dtb *.dtbo *_HS
+diff --git a/arch/m68k/dts/Makefile b/arch/m68k/dts/Makefile
+index 7988522eb98..8b354b9c570 100644
+--- a/arch/m68k/dts/Makefile
++++ b/arch/m68k/dts/Makefile
+@@ -20,12 +20,5 @@ dtb-$(CONFIG_TARGET_STMARK2) += stmark2.dtb
+ 
+ include $(srctree)/scripts/Makefile.dts
+ 
+-targets += $(dtb-y)
+-
++# Add any required device tree compiler flags here
+ DTC_FLAGS += -R 4 -p 0x1000
+-
+-PHONY += dtbs
+-dtbs: $(addprefix $(obj)/, $(dtb-y))
+-	@:
+-
+-clean-files := *.dtb
+diff --git a/arch/microblaze/dts/Makefile b/arch/microblaze/dts/Makefile
+index 427a8f9aaca..9be902d3bb1 100644
+--- a/arch/microblaze/dts/Makefile
++++ b/arch/microblaze/dts/Makefile
+@@ -4,12 +4,5 @@ dtb-y += $(shell echo $(CONFIG_DEFAULT_DEVICE_TREE)).dtb
+ 
+ include $(srctree)/scripts/Makefile.dts
+ 
+-targets += $(dtb-y)
+-
++# Add any required device tree compiler flags here
+ DTC_FLAGS += -R 4 -p 0x1000
+-
+-PHONY += dtbs
+-dtbs: $(addprefix $(obj)/, $(dtb-y))
+-	@:
+-
+-clean-files := *.dtb
+diff --git a/arch/mips/dts/Makefile b/arch/mips/dts/Makefile
+index 14fbce597b9..752e771514f 100644
+--- a/arch/mips/dts/Makefile
++++ b/arch/mips/dts/Makefile
+@@ -39,13 +39,5 @@ dtb-$(CONFIG_SOC_SERVAL) += serval_pcb105.dtb serval_pcb106.dtb
+ 
+ include $(srctree)/scripts/Makefile.dts
+ 
+-targets += $(dtb-y)
+-
+ # Add any required device tree compiler flags here
+ DTC_FLAGS +=
+-
+-PHONY += dtbs
+-dtbs: $(addprefix $(obj)/, $(dtb-y))
+-	@:
+-
+-clean-files := *.dtb
+diff --git a/arch/nios2/dts/Makefile b/arch/nios2/dts/Makefile
+index 2b29fa90f6c..d77db9762a1 100644
+--- a/arch/nios2/dts/Makefile
++++ b/arch/nios2/dts/Makefile
+@@ -4,12 +4,5 @@ dtb-y += $(CONFIG_DEFAULT_DEVICE_TREE:"%"=%).dtb
+ 
+ include $(srctree)/scripts/Makefile.dts
+ 
+-targets += $(dtb-y)
+-
++# Add any required device tree compiler flags here
+ DTC_FLAGS += -R 4 -p 0x1000
+-
+-PHONY += dtbs
+-dtbs: $(addprefix $(obj)/, $(dtb-y))
+-	@:
+-
+-clean-files := *.dtb
+diff --git a/arch/powerpc/dts/Makefile b/arch/powerpc/dts/Makefile
+index 321c644804e..766b0c05951 100644
+--- a/arch/powerpc/dts/Makefile
++++ b/arch/powerpc/dts/Makefile
+@@ -35,13 +35,5 @@ dtb-$(CONFIG_TARGET_CMPCPRO) += cmpcpro.dtb
+ 
+ include $(srctree)/scripts/Makefile.dts
+ 
+-targets += $(dtb-y)
+-
+ # Add any required device tree compiler flags here
+ DTC_FLAGS +=
+-
+-PHONY += dtbs
+-dtbs: $(addprefix $(obj)/, $(dtb-y))
+-	@:
+-
+-clean-files := *.dtb
+diff --git a/arch/riscv/dts/Makefile b/arch/riscv/dts/Makefile
+index c4c44057bad..f3dfd751cb4 100644
+--- a/arch/riscv/dts/Makefile
++++ b/arch/riscv/dts/Makefile
+@@ -15,12 +15,5 @@ dtb-$(CONFIG_TARGET_ASPEED_AST2700_IBEX) += ast2700-ibex.dtb
+ 
+ include $(srctree)/scripts/Makefile.dts
+ 
+-targets += $(dtb-y)
+-
++# Add any required device tree compiler flags here
+ DTC_FLAGS += -R 4 -p 0x1000
+-
+-PHONY += dtbs
+-dtbs: $(addprefix $(obj)/, $(dtb-y))
+-	@:
+-
+-clean-files := *.dtb
+diff --git a/arch/sandbox/dts/Makefile b/arch/sandbox/dts/Makefile
+index f810b4752f5..1c9fb4a4566 100644
+--- a/arch/sandbox/dts/Makefile
++++ b/arch/sandbox/dts/Makefile
+@@ -10,12 +10,5 @@ dtb-$(CONFIG_CMD_EXTENSION) += overlay0.dtbo overlay1.dtbo
+ 
+ include $(srctree)/scripts/Makefile.dts
+ 
+-targets += $(dtb-y)
+-
++# Add any required device tree compiler flags here
+ DTC_FLAGS += -R 4 -p 0x1000
+-
+-PHONY += dtbs
+-dtbs: $(addprefix $(obj)/, $(dtb-y))
+-	@:
+-
+-clean-files := *.dtb *.dtbo
+diff --git a/arch/sh/dts/Makefile b/arch/sh/dts/Makefile
+index 144fd3e7d22..e9153e42534 100644
+--- a/arch/sh/dts/Makefile
++++ b/arch/sh/dts/Makefile
+@@ -2,13 +2,5 @@ dtb-y += sh7751-r2dplus.dtb
+ 
+ include $(srctree)/scripts/Makefile.dts
+ 
+-targets += $(dtb-y)
+-
+ # Add any required device tree compiler flags here
+ DTC_FLAGS +=
+-
+-PHONY += dtbs
+-dtbs: $(addprefix $(obj)/, $(dtb-y))
+-	@:
+-
+-clean-files := *.dtb *_HS
+diff --git a/arch/x86/dts/Makefile b/arch/x86/dts/Makefile
+index cd77f4c4e81..9a46726e026 100644
+--- a/arch/x86/dts/Makefile
++++ b/arch/x86/dts/Makefile
+@@ -24,12 +24,4 @@ dtb-y += bayleybay.dtb \
+ 
+ include $(srctree)/scripts/Makefile.dts
+ 
+-targets += $(dtb-y)
+-
+ DTC_FLAGS += -R 4 -p $(if $(CONFIG_EFI_APP),0x8000,0x1000)
+-
+-PHONY += dtbs
+-dtbs: $(addprefix $(obj)/, $(dtb-y))
+-	@:
+-
+-clean-files := *.dtb
+diff --git a/arch/xtensa/dts/Makefile b/arch/xtensa/dts/Makefile
+index c22c50ac4e5..aa582b85e5c 100644
+--- a/arch/xtensa/dts/Makefile
++++ b/arch/xtensa/dts/Makefile
+@@ -4,12 +4,4 @@ dtb-$(CONFIG_XTENSA) += ml605.dtb ml605_nommu.dtb kc705.dtb kc705_nommu.dtb
+ 
+ include $(srctree)/scripts/Makefile.dts
+ 
+-targets += $(dtb-y)
+-
+ DTC_FLAGS +=
+-
+-PHONY += dtbs
+-dtbs: $(addprefix $(obj)/, $(dtb-y))
+-	@:
+-
+-clean-files := *.dtb
+diff --git a/dts/upstream/src/arm/Makefile b/dts/upstream/src/arm/Makefile
+index 9a8f6aa3584..c86a2be5d85 100644
+--- a/dts/upstream/src/arm/Makefile
++++ b/dts/upstream/src/arm/Makefile
+@@ -2,13 +2,5 @@
+ 
+ include $(srctree)/scripts/Makefile.dts
+ 
+-targets += $(dtb-y)
+-
+ # Add any required device tree compiler flags here
+ DTC_FLAGS += -a 0x8
+-
+-PHONY += dtbs
+-dtbs: $(addprefix $(obj)/, $(dtb-y))
+-	@:
+-
+-clean-files := */*.dtb */*.dtbo
+diff --git a/dts/upstream/src/arm64/Makefile b/dts/upstream/src/arm64/Makefile
+index 26a83d3d29d..b6db0dc6b26 100644
+--- a/dts/upstream/src/arm64/Makefile
++++ b/dts/upstream/src/arm64/Makefile
+@@ -2,17 +2,9 @@
+ 
+ include $(srctree)/scripts/Makefile.dts
+ 
+-targets += $(dtb-y)
+-
+ # Add any required device tree compiler flags here
+ DTC_FLAGS += -a 0x8
+ 
+ ifdef CONFIG_RCAR_64
+ DTC_FLAGS += -R 4 -p 0x1000
+ endif
+-
+-PHONY += dtbs
+-dtbs: $(addprefix $(obj)/, $(dtb-y))
+-	@:
+-
+-clean-files := */*.dtb */*.dtbo
+diff --git a/dts/upstream/src/xtensa/Makefile b/dts/upstream/src/xtensa/Makefile
+index 2a81acb32bc..c86a2be5d85 100644
+--- a/dts/upstream/src/xtensa/Makefile
++++ b/dts/upstream/src/xtensa/Makefile
+@@ -2,13 +2,5 @@
+ 
+ include $(srctree)/scripts/Makefile.dts
+ 
+-targets += $(dtb-y)
+-
+ # Add any required device tree compiler flags here
+ DTC_FLAGS += -a 0x8
+-
+-PHONY += dtbs
+-dtbs: $(addprefix $(obj)/, $(dtb-y))
+-	@:
+-
+-clean-files := *.dtb *.dtbo */*.dtb */*.dtbo
+diff --git a/scripts/Makefile.dts b/scripts/Makefile.dts
+index 790f3c508f1..1fe142f2bbf 100644
+--- a/scripts/Makefile.dts
++++ b/scripts/Makefile.dts
+@@ -14,3 +14,11 @@ dtb-vendor_dts := $(patsubst %.dts,%.dtb,$(wildcard $(dt_dir)/$(subst ",,$(CONFI
+ dtb-y += $(subst $(dt_dir)/,,$(dtb-vendor_dts))
+ 
+ endif
++
++targets += $(dtb-y)
++
++PHONY += dtbs
++dtbs: $(addprefix $(obj)/, $(dtb-y))
++	@:
++
++clean-files := *.dtb *.dtbo */*.dtb */*.dtbo *_HS
+-- 
+2.45.2
 
-Well, when someone has both time and understanding of the tools and the
-frameworks, we can expand the automatic tests while still having
-functional testing as people use the feature.
-
---=20
-Tom
-
---kYc487uz/O5FmdKf
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmb3GEMACgkQFHw5/5Y0
-tyw2uQv/SKGKEN5wpJzRrxdGf4UZVfZ58Busrr0DpQkkuHbBdOORv1T8xjYSY4Oa
-hL6obPm16IUYMAIeNb3+og13GOWvo3oR7xFWpmaTAVTYLxH2wkMa1yi6HDNGwD8o
-aPEEgWduEcuXXXV9unh2maEUEK1KPyg5mFolfb6427CvG7hrt7RW5V5fb8rF1VTa
-sv21aO/JeQk2LPgrHvtqywJ3o0GDLR42rG1APjhKi6WWEBlvzL6lcM854/pIORZp
-BH8Qu1TpsFXKqux2JsF25jMP/O6SwDTdYq0+EmYyDc4PAqdgjN5aCwHrqQWZk10a
-5+NmxQFiZD6IiOdFu6umb4yhqcflzsOBZMeEbpt7+dedz9GpQYxPEXabgl5yZIim
-1kyvzKxAEWafEutj+HM5FvswHQriwIzPfVG0EWoExT9Yk4Uc7ikmh2Y6fTwWaGC+
-bcXMtjzf6oQctzUgZCucutxK3zOwk8acoZR9g9mmJEyJeWZOoVsFnDVBqZPGRx5a
-QDSeeX94
-=AUQZ
------END PGP SIGNATURE-----
-
---kYc487uz/O5FmdKf--
