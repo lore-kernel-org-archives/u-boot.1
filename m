@@ -4,52 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C34ABCEBF62
-	for <u-boot@archiver.kernel.org>; Fri, 27 Sep 2024 12:25:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CFF6CDE02F
+	for <u-boot@archiver.kernel.org>; Fri, 27 Sep 2024 12:33:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E9B6E890BB;
-	Fri, 27 Sep 2024 14:25:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=sys-base.io
+	by phobos.denx.de (Postfix) with ESMTP id 302CF890C6;
+	Fri, 27 Sep 2024 14:33:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HgNkOMhy";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 39EB2890BE; Fri, 27 Sep 2024 14:25:57 +0200 (CEST)
-Received: from leonov.paulk.fr (leonov.paulk.fr [185.233.101.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 254BB890DB; Fri, 27 Sep 2024 14:33:18 +0200 (CEST)
+Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
+ [IPv6:2607:f8b0:4864:20::102f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD45C88F85
- for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 14:25:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C8CB4890BB
+ for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 14:33:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=sys-base.io
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paulk@sys-base.io
-Received: from laika.paulk.fr (12.234.24.109.rev.sfr.net [109.24.234.12])
- by leonov.paulk.fr (Postfix) with ESMTPS id 8CD741F0004F
- for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 12:25:51 +0000 (UTC)
-Received: by laika.paulk.fr (Postfix, from userid 65534)
- id C219AA604A9; Fri, 27 Sep 2024 12:25:49 +0000 (UTC)
-Received: from collins (unknown [192.168.1.1])
- by laika.paulk.fr (Postfix) with ESMTPSA id 9F98DA604A2;
- Fri, 27 Sep 2024 12:25:47 +0000 (UTC)
-Date: Fri, 27 Sep 2024 14:25:45 +0200
-From: Paul Kocialkowski <paulk@sys-base.io>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
- Chris Morgan <macromorgan@hotmail.com>,
- Tim Lunn <tim@feathertop.org>, Paul Kocialkowski <contact@paulk.fr>
-Subject: Re: [PATCH 1/4] rockchip: rk3399-roc-pc: Hook sysreset gpio to
- enable full reset
-Message-ID: <ZvakSVYH58S0_TBy@collins>
-References: <20240926183111.1324284-1-paulk@sys-base.io>
- <4304848f-9af5-4991-bfc8-836ccf2abb43@cherry.de>
- <ZvaAsxlL3GIGyyVL@collins>
- <d48e2192-6cb1-478a-92e0-0f0db5642822@cherry.de>
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pj1-x102f.google.com with SMTP id
+ 98e67ed59e1d1-2e0af6e5da9so1047549a91.2
+ for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 05:33:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1727440394; x=1728045194; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=yBWX1XFDUXK2HhEwYuSFPuqQX0v4/YIxOEyzY4KbNek=;
+ b=HgNkOMhy/4qnqW8WngG9nrHkFYtQec49Y+FM3iyb+fPHibAkOhF8L75sY5vEOX9ABj
+ v2AdTL8Wucpa6td30fDii5UJ1MbBoOyJhdd97Xs/bYlPPudAlKOu4sf4YjHT87erQo3U
+ 1/N4ZqA7VeUG7ygxc1ZSjU7KGO1EdU5gOZyrLdQIAIjR7JcL8TpgR5yuVBVB78Yr95LK
+ e3q1LmoSFb9tN67SZiruOHqX4Eq5HaYGu1ni2Y5kj8mq66zD8XbDewVD1hbp6vdnJhqd
+ 8XxLWswZ04lKCBEigRXzxztb+vJ2v9+HQfcQR+W7dS4cOtYiVevf7cybmLl+lTo5UTak
+ UYUQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727440394; x=1728045194;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=yBWX1XFDUXK2HhEwYuSFPuqQX0v4/YIxOEyzY4KbNek=;
+ b=sW7QSkjJ24icILHo05cGPdS93dczKLGnqB7aYl//Z1G4Lbr6IUYJuljVDQf0/RVxfC
+ HebcG4Af5yFgC+CmSDjs+WJwmwdJasA+w2VoZEw0dD9axf5quudQwHqiNvnhQk7HYpDS
+ QDVBHFQz/DsXbU1f/m+BiEtIi6MJbIYdE5JJChhWhIjipkOYZ4+LJ4FPNtKmJglPFx8j
+ BQ69eAZmi01dwpEADF5sYPh+v87PF2mRuTnCicD0BDovB5OE1YgArQQ3HpYxRft5ndTI
+ dAfKo8/797Iwz/oHnfS0o6ccN0+qL+w+FQ6w/BrlXfqWECRAb/T8s6RNEGpVRavDWd4G
+ 8NFw==
+X-Gm-Message-State: AOJu0Yyk3JRNn4v6GluWWU0YmzrzFss8BxFcI91NzOfXi8CiUie82PNe
+ Nhy8sogpl+qYgwKoWJXxDwi6NkZyIjwk8IS3nnvCZFz0tnWnkA6F4vA6uojbYEbqmtqvwpfaQpP
+ MvkNHnmZnEDPDw2FPqbvKXN49XVnQ22xsXetgwA==
+X-Google-Smtp-Source: AGHT+IF1ogLG0q9J774edAtSfCRLz0u7qzDDuIFzNImFn/WBwMmeTC31fmvFkGtEW+wnaaxu4GYJv5cpPHY4lS3ybJ0=
+X-Received: by 2002:a17:90a:898f:b0:2d3:db53:5577 with SMTP id
+ 98e67ed59e1d1-2e0b8ec65a9mr3394605a91.36.1727440394193; Fri, 27 Sep 2024
+ 05:33:14 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="sep3G3zQ+LPyVaTo"
-Content-Disposition: inline
-In-Reply-To: <d48e2192-6cb1-478a-92e0-0f0db5642822@cherry.de>
+References: <20240920072444.134997-1-sjg@chromium.org>
+ <20240920072444.134997-10-sjg@chromium.org>
+ <CAC_iWj+NMLSAmAqiDRMsSO+SWRKu=7rSFm+BkngO0kpOwRV1JQ@mail.gmail.com>
+ <CAFLszTimWzK+fZToFzH4Ez+nE62GEPnHTOf2HYcTnemv_HKojQ@mail.gmail.com>
+ <CAC_iWjJ1ggBTXkSSdaM8zktf-49MFELf3AynaMjG0XK5ZkVpSw@mail.gmail.com>
+ <CAFLszTgFHR_G7nSnsmHHC4dhZ4L=MgZkkefvs6Jtja9zbY=MKw@mail.gmail.com>
+In-Reply-To: <CAFLszTgFHR_G7nSnsmHHC4dhZ4L=MgZkkefvs6Jtja9zbY=MKw@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 27 Sep 2024 15:32:36 +0300
+Message-ID: <CAC_iWjJveHpzOuRgMuEUt+6kYdmkPZB7P5k+2m8MSv4hQ7-yWw@mail.gmail.com>
+Subject: Re: [PATCH v2 09/18] armv8: Support not having separate BSS
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Richard Henderson <richard.henderson@linaro.org>, 
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,96 +91,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, 27 Sept 2024 at 00:53, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Ilias,
+>
+> On Wed, 25 Sept 2024 at 15:40, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > Hi Simon,
+> >
+> > On Wed, 25 Sept 2024 at 15:48, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > Hi Ilias,
+> > >
+> > > On Mon, 23 Sept 2024 at 11:49, Ilias Apalodimas
+> > > <ilias.apalodimas@linaro.org> wrote:
+> > > >
+> > > > Hi Simon,
+> > > >
+> > > > On Fri, 20 Sept 2024 at 10:25, Simon Glass <sjg@chromium.org> wrote:
+> > > > >
+> > > > > Separate BSS is current mandatory on armv8 but this is not useful for
+> > > > > early boot phases. Add support for the combined BSS.
+> > > > >
+> > > > > Use an #ifdef to avoid using CONFIG_SPL_BSS_START_ADDR which is not
+> > > > > valid in this case.
+> > > > >
+> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > ---
+> > > > >
+> > > > > (no changes since v1)
+> > > > >
+> > > > >  arch/arm/cpu/armv8/u-boot-spl.lds | 12 ++++++++++++
+> > > > >  1 file changed, 12 insertions(+)
+> > > > >
+> > > > > diff --git a/arch/arm/cpu/armv8/u-boot-spl.lds b/arch/arm/cpu/armv8/u-boot-spl.lds
+> > > > > index 215cedd69a8..fed69644b55 100644
+> > > > > --- a/arch/arm/cpu/armv8/u-boot-spl.lds
+> > > > > +++ b/arch/arm/cpu/armv8/u-boot-spl.lds
+> > > > > @@ -13,8 +13,10 @@
+> > > > >
+> > > > >  MEMORY { .sram : ORIGIN = IMAGE_TEXT_BASE,
+> > > > >                 LENGTH = IMAGE_MAX_SIZE }
+> > > > > +#ifdef CONFIG_SPL_SEPARATE_BSS
+> > > > >  MEMORY { .sdram : ORIGIN = CONFIG_SPL_BSS_START_ADDR,
+> > > > >                 LENGTH = CONFIG_SPL_BSS_MAX_SIZE }
+> > > > > +#endif
+> > > > >
+> > > > >  OUTPUT_FORMAT("elf64-littleaarch64", "elf64-littleaarch64", "elf64-littleaarch64")
+> > > > >  OUTPUT_ARCH(aarch64)
+> > > > > @@ -56,12 +58,22 @@ SECTIONS
+> > > > >         _end = .;
+> > > > >         _image_binary_end = .;
+> > > > >
+> > > > > +#ifdef CONFIG_SPL_SEPARATE_BSS
+> > > > >         .bss : {
+> > > > >                 __bss_start = .;
+> > > > >                 *(.bss*)
+> > > > >                 . = ALIGN(8);
+> > > > >                 __bss_end = .;
+> > > > >         } >.sdram
+> > > > > +#else
+> > > > > +       .bss (NOLOAD) : {
+> > > > > +               __bss_start = .;
+> > > > > +               *(.bss*)
+> > > > > +                . = ALIGN(8);
+> > > > > +               __bss_end = .;
+> > > > > +       } >.sram
+> > > > > +#endif
+> > > >
+> > > > This is still going to be separate. The only difference isn't that
+> > > > it's not loaded. If you want to combine it with a region, you got to
+> > > > do something similar to what we have in armv7, where it overlaps with
+> > > > rel.dyn
+> > >
+> > > I don't mind about combining it with a region, But SPL doesn't have
+> > > relocation data, right?
+> > >
+> > > My meaning of 'separate' is as described in CONFIG_SPL_SEPARATE_BSS,
+> > > i.e. being kept in SDRAM.
+> >
+> > Ok, is the NOLOAD really needed? I would prefer the ifdef around .sdram/.sram
+> >
+> > In any case
+> > Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>
+> Oh I see... well the NOLOAD stops it writing zero data into the image,
+> as I understand it.
 
---sep3G3zQ+LPyVaTo
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+It doesn't load that section into memory.
 
-Le Fri 27 Sep 24, 12:07, Quentin Schulz a =C3=A9crit :
-> > > > diff --git a/arch/arm/dts/rk3399-roc-pc-u-boot.dtsi b/arch/arm/dts/=
-rk3399-roc-pc-u-boot.dtsi
-> > > > index aecf7dbe383c..883d399a06a3 100644
-> > > > --- a/arch/arm/dts/rk3399-roc-pc-u-boot.dtsi
-> > > > +++ b/arch/arm/dts/rk3399-roc-pc-u-boot.dtsi
-> > > > @@ -7,6 +7,10 @@
-> > > >    #include "rk3399-sdram-lpddr4-100.dtsi"
-> > > >    / {
-> > > > +	config {
-> > > > +		sysreset-gpio =3D <&gpio1 RK_PA6 GPIO_ACTIVE_HIGH>;
-> > >=20
-> > > I think this is the wrong pin to use.
-> > >=20
-> > > The routing of GPIO1_A6 is similar on RK3399 Puma and Pine64 RockPro6=
-4, but
-> > > it differs massively for the Firefly Roc PC.
-> > >=20
-> > > However, a similar routing is done for GPIO1_A5 on the Firefly, I bel=
-ieve
-> > > that one is more appropriate. What do you think?
-> >=20
-> > I just double-checked the schematics (ROC_3399_PC), looking at signal O=
-TP_OUT_H
-> > which is definitely connected to GPIO1_A6 (P26).
-> >=20
-> > Also it clearly resets the board when toggled and solves the MMC reset =
-issue
-> > I was having on this exact board, so I'm rather confident that it's the=
- right
-> > one to use :)
->=20
-> At least we're on the same page for using OTP_OUT_H, but it's routed to
-> GPIO1_A5 on the schematics I found:
->=20
-> https://www.t-firefly.com/download/Firefly-RK3399/hardware/Firefly-RK3399=
-_V10/Firefly-RK3399_V10_SCH_(2017-2-8).pdf
->=20
-> Mmmmmm seems like I was looking at the wrong schematics?
+>  Actually I wonder why we don't have NOLOAD for the
+> separate-BSS case? If we can use NOLOAD for both then we can indeed
+> shrink the #ifdef
 
-Ah yes I think the Firefly-RK3399 and ROC-RK3399-PC are two distinct design=
-s.
+If .bss is zero'ed out properly (which I think it is) we can use NOLOAD on both
 
-> https://en.t-firefly.com/doc/download/page/id/51.html does route GPIO1_A6=
- to
-> the OTP_OUT_H signal..
-> https://en.t-firefly.com/doc/download/page/id/78.html
-> https://en.t-firefly.com/doc/download/page/id/127.html
->=20
-> So, the Roc PC, Roc PC Plus and Roc PC Pro all seem to have a similar
-> routing for this pin, therefore:
->=20
-> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
-
-Right, and for the record the version I have is the ROC-RK3399-PC Plus.
-
-Thanks!
-
---=20
-Paul Kocialkowski,
-
-Independent contractor - sys-base - https://www.sys-base.io/
-Free software developer - https://www.paulk.fr/
-
-Specialist in multimedia, graphics and embedded hardware support with Linux.
-
---sep3G3zQ+LPyVaTo
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEAbcMXZQMtj1fphLChP3B6o/ulQwFAmb2pEkACgkQhP3B6o/u
-lQzuWA/7BXiPhvDJyVMcyQG5Zn0b4HC9o0O71QlJUAyqg40mFVRnwv3U62heFKPW
-lpzn4oCas0HTZV1efEohdZoImfrVwXdM4lstsCwEnpL9E9UJ6RljQXMbOiaBF1Fv
-qPFk6i5m7Fedwq2WJJI6KgzZ+p4r3lXVT8Rk0nHJ7wNgHs++BzbcaOcg334sprSQ
-PyfhSM+c3jFHxTY61//jz+tfa8zNOe+hA+YMFQwxSIwcJKPyhqnpwKx0Bx0uDS6e
-bnf3rmexTj6EeKiFqRl9ql4Yejms1wx9Qq5qf8aJ01wj/nJQ//Xy4cSY/28rBSUy
-wgGYgfwQX5ZcCxXmaqgoIXw+3qcjYSsUl+quR+U0H40lPFaL/hiDfZF5EtyrnwBX
-ykiH5TPd4WrQmHE27zwjzTo2GUl9nPsvcnlR1ebrRMgqzo/6TOC6GkE+fmNmawIx
-w1PsMHfQIyOXOppkp7jZFdrrf62P76qdTf59S8EkzvTIhDnIb+P/smZieeDFn1pM
-i1dHBRa/5HE1jufAQf/rxdEJa44bY4t0Eb8+UX8QIGAUUaKDvaBATK3NvDPQ7wLC
-EB0rXK6AT4Xkk86vlKrOPn9ntp31ti3/+aPYKvQCYXB6z3F2hoZOqKC6ha8TcLYe
-Gg49vu9JBFcgjaen1SgaPQ8sZaP8ZG5Qq/7lSVfNqSXj0XtGL98=
-=A5fK
------END PGP SIGNATURE-----
-
---sep3G3zQ+LPyVaTo--
+Thanks
+/Ilias
+>
+> >
+> >
+> > >
+> > > >
+> > > > Thanks
+> > > > /Ilias
+> > > > > +       __bss_size = __bss_end - __bss_start;
+> > > > >
+> > > > >         /DISCARD/ : { *(.rela*) }
+> > > > >         /DISCARD/ : { *(.dynsym) }
+> > > > > --
+> > > > > 2.43.0
+> > > > >
+>
+> Regards,
+> Simon
