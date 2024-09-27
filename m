@@ -4,77 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFE2DCEBF67
-	for <u-boot@archiver.kernel.org>; Fri, 27 Sep 2024 01:27:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25E52CEBF70
+	for <u-boot@archiver.kernel.org>; Fri, 27 Sep 2024 02:52:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75B7A88E7E;
-	Fri, 27 Sep 2024 03:27:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9101388FDA;
+	Fri, 27 Sep 2024 04:52:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YLk9WVwM";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Bbdsvfdp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A20688FF8; Fri, 27 Sep 2024 03:27:19 +0200 (CEST)
-Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
- [IPv6:2607:f8b0:4864:20::633])
+ id 46C5C88F28; Fri, 27 Sep 2024 04:52:07 +0200 (CEST)
+Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
+ [IPv6:2607:f8b0:4864:20::b29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1CCAF88E39
- for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 03:27:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 14B7088F9B
+ for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 04:52:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tkuw584924@gmail.com
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-2055a3f80a4so10483805ad.2
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 18:27:17 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb29.google.com with SMTP id
+ 3f1490d57ef6-dff1ccdc17bso1806771276.0
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 19:52:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1727400435; x=1728005235; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=DGNGF7eO3t38w9yDtJyTFQ4IFiPZGpvqaVYQf7DQaHc=;
- b=YLk9WVwMsg/8kJ7EiQorU8m87ysKySI6QgFl+uv1EAJbPIEXSBjgWee0jYjni31aJG
- odrAhVwOZaJkgYig6XkG5bnbV9Tgw+Y0BRD7bkEXKZ/ZykKLUY0dqXdd2NJYJYFCXPdb
- yiRoavTMBi/YJrFPYZcBsvZ0U716AfLU2J2TD9sf40/bvj4wX8YAMkNrDay/LhCU3SJZ
- f7cokYyYee0FnjSnDoO6IyGPicDI33+tPRqj7efuc642L/4JFJe9ZYy0TVXLheNhCotc
- uY/IK+LenebxMxcVcqPLHInJBsd3xKHAgvQQ0xwWxGcW3ytEhA2bnDRyNSJQ6wF7c2ea
- g2Yg==
+ d=konsulko.com; s=google; t=1727405524; x=1728010324; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=sNLRgvleWObyhVy50EBElu/ds4f1Sf7Q/RumtaZ6E5A=;
+ b=BbdsvfdpzfV+ZuE4gdDDCChDmfj22lN8GcbpRxephZ7oEgehBmukgjV3R1qcN1nMja
+ JPETqCd5j3bVqjwXLLOe/j4+zavmHR5gCpKkY4xrAYU/R3afTCdTerqeIoBFHZmGR4Bu
+ aR5ZX8QDJ9blmO5Ma3XUgchlgMtFIvvB0cSEk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727400435; x=1728005235;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=DGNGF7eO3t38w9yDtJyTFQ4IFiPZGpvqaVYQf7DQaHc=;
- b=V817Y98PYSXxtQGBNPyZayaoBFSgYF5mv3OzuTMYvVx3can4d69FaghNQWJorP5I3T
- vJcIulqcZsPeh2fulnQrCw8NZeL6y1KMEVyHXpmEpmMWLmOUj8TzmpNVXGIAH0Nr6qlY
- K55/hrBF/awtaP5hRVcd0JLDKAknHNQ5RTZtNEq9SKhm6hAEC2ioWhXg7XeiIMpWtysb
- WjRRV9oBopOMkrSHrSMrKoNyRqPuAYzOUl5hIA62aiq/Cuiwn4uA8EkcqGmXo1yHbqlz
- 0YJ6GIWM4MBbxATmfxILhIz2DRippd8qOKXjllTMY3nv3DY9TbWJstTr80RDm+cnpTTW
- DTog==
-X-Gm-Message-State: AOJu0YyCaxjFx3mMi0qjFSVQ6djcjQ8P4ggu3v23qZRdxz9AdrupzjGL
- SXSBjUmpeUM2C5KY1PwZnF/1UjRw6RkgxrfJ9Rnv/R/UdT/8fWGHXt+hfQ==
-X-Google-Smtp-Source: AGHT+IH0GwVB8LwyFkSCa0HZClIFx/lK7+gJW0moNNyRdt0yP/qEhteDZqKq2LfrrPUPfYFfyWRDLg==
-X-Received: by 2002:a17:902:cec1:b0:202:32cf:5dbe with SMTP id
- d9443c01a7336-20b37bb65femr23930435ad.58.1727400435443; 
- Thu, 26 Sep 2024 18:27:15 -0700 (PDT)
-Received: from ISCN5CG2520RPD.infineon.com (KD106168128197.ppp-bb.dion.ne.jp.
- [106.168.128.197]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-7e6db613f6csm517705a12.91.2024.09.26.18.27.12
+ d=1e100.net; s=20230601; t=1727405524; x=1728010324;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=sNLRgvleWObyhVy50EBElu/ds4f1Sf7Q/RumtaZ6E5A=;
+ b=uANrxZ1+5PVaTcIv0qdoX5KdV6D4aZ01Kw8alA0ANJMjugf+wbcY4dMixDEc0kLTEN
+ qJV3NAgzUnqvEAGnFS2Ucrkj3NK5c/BEa9KZwpJV+B8PlUYeOa0F7t9nldy3qUmFIT+8
+ VbCfyAcVmDLP1NmBF834S26Y/ix+ngBtil1H24VTR/WVMPMvbbVSzwXjHPtUzAsfXM81
+ zlPuGTt6biv4A8QMqcfALy4ZIcGlx+AN7t4ETVDjiUasNvzpMptKCFd/cs4sS2JDe6SK
+ qpQhfdabS+9CQa1JKesTlomaaOdFL/r68s/kjA57XjmB5lDgGuKOOlZNhW3MbbIbmz5D
+ hzsg==
+X-Gm-Message-State: AOJu0YwtVbx8wkGNevVWUBPXcjNB7+tIdcG/e9RMHwg6xQvyn42wfN9B
+ yVSKzKxla+jWpMjqSAGoHTBgbsJTovsWlQ9Y6Zfi618dzNOBjLczJlDeZbPMgdRyLPEqCnynpOR
+ 8bD0=
+X-Google-Smtp-Source: AGHT+IGnr+ETT353qwYRPoA+0VevVz1rgqchyWTSBrdMTvdKY3DhXZczxrwhNXSRcCvNcV9MKxkLfQ==
+X-Received: by 2002:a05:6902:1b92:b0:e25:de81:12ec with SMTP id
+ 3f1490d57ef6-e2604cf943fmr1409291276.51.1727405523829; 
+ Thu, 26 Sep 2024 19:52:03 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-45c9f2bb69bsm4181711cf.30.2024.09.26.19.52.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Sep 2024 18:27:15 -0700 (PDT)
-From: tkuw584924@gmail.com
-X-Google-Original-From: Takahiro.Kuwano@infineon.com
-To: u-boot@lists.denx.de
-Cc: jagan@amarulasolutions.com, vigneshr@ti.com, tudor.ambarus@linaro.org,
- pratyush@kernel.org, tkuw584924@gmail.com, Bacem.Daassi@infineon.com,
- Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
-Subject: [2nd RESEND PATCH] mtd: spi-nor-ids: Add support for S28HS256T
-Date: Fri, 27 Sep 2024 10:27:08 +0900
-Message-Id: <20240927012708.8732-1-Takahiro.Kuwano@infineon.com>
-X-Mailer: git-send-email 2.34.1
+ Thu, 26 Sep 2024 19:52:02 -0700 (PDT)
+Date: Thu, 26 Sep 2024 20:51:59 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH v6 01/19] test: Allow signaling that U-Boot is ready
+Message-ID: <20240927025159.GR4252@bill-the-cat>
+References: <20240920060158.106612-1-sjg@chromium.org>
+ <20240920060158.106612-2-sjg@chromium.org>
+ <20240923203512.GQ4252@bill-the-cat>
+ <CAFLszTjT3RZYChMhBxUDsf6YC-7cZfh1_YhuQrin3sRanSO=Xw@mail.gmail.com>
+ <20240925172601.GA4252@bill-the-cat>
+ <CAFLszTjFMRpfwFVPJ=-xqKUu=XbH=hq+yP+N17TuFd2b8+rt4g@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="n+cndVSg6uEcsGaP"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTjFMRpfwFVPJ=-xqKUu=XbH=hq+yP+N17TuFd2b8+rt4g@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,31 +95,134 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
 
-Infineon S28HS256T is 256Mb Octal SPI device which has same
-functionalities with 512Mb and 1Gb parts.
+--n+cndVSg6uEcsGaP
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Link:https://www.infineon.com/dgdl/Infineon-S28HS256T_S28HL256T_256Mb_SEMPER_Flash_Octal_interface_1_8V_3-DataSheet-v02_00-EN.pdf?fileId=8ac78c8c8fc2dd9c018fc66787aa0657
-Signed-off-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
-Reviewed-by: Pratyush Yadav <pratyush@kernel.org>
-Reviewed-by: Tudor Ambarus <tudor.ambarus@linaro.org>
----
- drivers/mtd/spi/spi-nor-ids.c | 1 +
- 1 file changed, 1 insertion(+)
+On Thu, Sep 26, 2024 at 11:36:00PM +0200, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Wed, 25 Sept 2024 at 19:26, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Wed, Sep 25, 2024 at 02:49:56PM +0200, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Mon, 23 Sept 2024 at 22:35, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Fri, Sep 20, 2024 at 08:01:36AM +0200, Simon Glass wrote:
+> > > >
+> > > >
+> > > > > When Labgrid is used, it can get U-Boot ready for running tests. =
+It
+> > > > > prints a message when it has done so.
+> > > > >
+> > > > > Add logic to detect this message and accept it.
+> > > > >
+> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > ---
+> > > > >
+> > > > > (no changes since v1)
+> > > > >
+> > > > >  test/py/u_boot_console_base.py | 9 +++++----
+> > > > >  1 file changed, 5 insertions(+), 4 deletions(-)
+> > > >
+> > > > What happens is that labgrid can also be told to look for and then
+> > > > interrupt autoboot, just like our pytests can do, and the system is=
+ at
+> > > > the prompt. But this is also what it's like for a system with autob=
+oot
+> > > > disabled. Do we actually need this patch to achieve the functionali=
+ty
+> > > > you want? Doesn't that already just happen?
+> > >
+> > > The point of this patch is actually to remove code in pytest, by
+> > > allowing it to skip all the banner-detection stuff. It does not affect
+> > > things in Labgrid, since it still needs to watch for banners, etc.
+> >
+> > But you can't remove code from pytest, people can and will run the suite
+> > outside of labgrid.
+>=20
+> Yes, that's right. I meant that with Labgrid the code is not used.
 
-diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-index 4e7e89eb65a..b1e3a08089f 100644
---- a/drivers/mtd/spi/spi-nor-ids.c
-+++ b/drivers/mtd/spi/spi-nor-ids.c
-@@ -386,6 +386,7 @@ const struct flash_info spi_nor_ids[] = {
- #ifdef CONFIG_SPI_FLASH_S28HX_T
- 	{ INFO("s28hl512t",  0x345a1a,      0, 256 * 1024, 256, SPI_NOR_OCTAL_DTR_READ) },
- 	{ INFO("s28hl01gt",  0x345a1b,      0, 256 * 1024, 512, SPI_NOR_OCTAL_DTR_READ) },
-+	{ INFO("s28hs256t",  0x345b19,      0, 256 * 1024, 128, SPI_NOR_OCTAL_DTR_READ) },
- 	{ INFO("s28hs512t",  0x345b1a,      0, 256 * 1024, 256, SPI_NOR_OCTAL_DTR_READ) },
- 	{ INFO("s28hs01gt",  0x345b1b,      0, 256 * 1024, 512, SPI_NOR_OCTAL_DTR_READ) },
- 	{ INFO("s28hs02gt",  0x345b1c,      0, 256 * 1024, 1024, SPI_NOR_OCTAL_DTR_READ | NO_CHIP_ERASE) },
--- 
-2.34.1
+OK. I still think this (and I assume the related flag to tell whichever
+helper that was that the platform is ready to go) are too implementation
+specific.
 
+> > > Without this patch, we have to tell Labgrid's U-Boot driver to do
+> > > nothing, so that pytest does it. But that is not a good idea, since
+> > > Labgrid has a lot more info about the board than pytest has. For
+> > > example, look at all the SPL-banner-count stuff.
+> >
+> > Why do you have to tell it to do nothing? The pytest suite works fine,
+> > today, if the board stops at the prompt automatically. To be clear, the
+> > labgrid yaml file I'm using with my scripts has the information to stop
+> > autoboot in it and it's not causing a problem.
+>=20
+> But if it wasn't causing a problem I would not have invented this
+> annoying scheme.
+
+Well, I honestly thought it might be a remnant from development that
+wasn't needed once everything else was done. I do that from time to time
+myself.
+
+> For several boards, by the time pytest gets to see
+> the output it is too late to press a key and stop.
+
+Why / how? Do we perhaps need to adjust the timeout upwards, slightly?
+Especially in light of the changes you also did to detect a "dead" board
+and so we don't wait 30 minutes for a test run to fail.
+
+> Also, some boards
+> have a different prompt which is not detected by pytest.
+>=20
+> For example:
+> configs/am62x_beagleplay_a53_defconfig:CONFIG_AUTOBOOT_PROMPT=3D"Press
+> SPACE to abort autoboot in %d seconds\n"
+
+Yeah, I had forgotten that as I turn that off along with turning on
+other tests via config fragment, on that platform. That really is a
+deficiency in our pytest version of this.
+
+> > > Basically, without this patch we cannot use '-s uboot' to tell the
+> > > Labgrid strategy to take us to a U-Boot prompt. We must just use a raw
+> > > console with no strategy, relying on pytest to do all the work.
+> > >
+> > > I hope that helps explain the problem?
+> >
+> > I think I see what you're saying, and it's based on the assumption that
+> > we'll make everyone either use labgrid?
+>=20
+> Not at all. I tested this version of the series again with my
+> pre-Labgrid lab and it works fine. But I do believe that the hooks
+> that pytest has are not ideal for use with Labgrid.
+
+OK. But, why can't you make use of the labgrid functionality to pause
+the board? It's the state flag for labgrid-client yes? Dropping that in
+with my labgrid support would be just a tweak to the console script to
+check if the board set labgrid_strategy or something, and I think you
+could adapt yours to that too?
+
+--=20
+Tom
+
+--n+cndVSg6uEcsGaP
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmb2HcgACgkQFHw5/5Y0
+tyxMlQwAjEGRLZ8ajVJ+aRY2o2S6DuvTnkydaWEKepMVwhYCVDyf2GVTmVRdjV4j
+8Jpq+9kQ/MeyH2v9B/FuhrMmbD1OLVtp1Zx8XoI2VfxtyZU72FG0ixk97QmqE7KP
+8cMzKoUY2B+yGPQRadcYwnsV0dZFKBYPoc7HiaFLlvu3MvI41DPhfHzRYTNdy8FV
+MfI/SfOHHExRXbRzEp0YCNWh6WJmUOMtLIGe6OnmoJ551ctytxRHCkVkxQZIM2Ch
+IQ64EnkVsDhMLZjBI2dNFAX1R4VckW8PSYDCHzLBXwh7XeEcgl5pf3W/0U0fFg6F
+BcxgyusT8co8tkHDJbMotq1relDRIwHrz7eeyHZhWcg1tTVoGc0LHSR3zYx+t+N+
+uXqC39wWXxnw6lbk+oo9P7XunZ7OAqRozDhF/+0kg+xigbmcH2MI+4xpT02HY1nB
+KH9cP4fba1ivwcTwU8OtwUenDnTJhk9ujhu2wlw2dUs/lGBPny3pBjTlULBkxrMt
+azxFiXj0
+=3ly9
+-----END PGP SIGNATURE-----
+
+--n+cndVSg6uEcsGaP--
