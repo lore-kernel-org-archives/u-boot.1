@@ -4,78 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48480CEBF8E
-	for <u-boot@archiver.kernel.org>; Fri, 27 Sep 2024 10:43:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65D1FCEBF8F
+	for <u-boot@archiver.kernel.org>; Fri, 27 Sep 2024 10:43:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 67CA888FAF;
-	Fri, 27 Sep 2024 12:43:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D04A2890C4;
+	Fri, 27 Sep 2024 12:43:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MyuP+sUs";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="etYJlsw1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2510A890AD; Fri, 27 Sep 2024 12:43:02 +0200 (CEST)
-Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
- [IPv6:2607:f8b0:4864:20::f2e])
+ id 39FA2890C5; Fri, 27 Sep 2024 12:43:42 +0200 (CEST)
+Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
+ [IPv6:2607:f8b0:4864:20::f32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB8F288D65
- for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 12:42:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 144D088FAF
+ for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 12:43:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2e.google.com with SMTP id
- 6a1803df08f44-6cb2458774dso13580036d6.3
- for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 03:42:59 -0700 (PDT)
+Received: by mail-qv1-xf32.google.com with SMTP id
+ 6a1803df08f44-6cb3062d9a6so13434216d6.0
+ for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 03:43:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727433779; x=1728038579; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727433819; x=1728038619; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=mmkoku26XnpwV+gV4cx8Uyae11+wO4XVqXjSaclDRuc=;
- b=MyuP+sUswioIEthr/g1bpsqzqQF1UIq1UJ6p/0dUdT+3Ri0Lu3s4H6EGdjiOTsyYTj
- kdIOwpJN06IrfqE6sD3yFcEuw5oeXjlDx45RUjo8HyNaMBYlEMkg3Pt3Th2F/1WsHGGK
- XnW8XnUKn5Y6T47zoRv731JOvg+LHZru3Sxwg=
+ bh=llP0v2JYYx/1eSaxlZ2AUNY0CHybS3kF3rewLoCfkGI=;
+ b=etYJlsw1EhYY6xzhjF9ihLoPCOMI16XcawZoPszf2SZO1wGkuY4NgifK8K9BCjgFHC
+ cMpSEx03/ray7Teg2cruiJZdBNEFpSxRN16Oh0bnM/JXyj5cN8+A1nPIEkvjhHIz3JSA
+ rZZ879dS1BMA7RhmoijWnSDShIjkEPGtKa88A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727433779; x=1728038579;
+ d=1e100.net; s=20230601; t=1727433819; x=1728038619;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=mmkoku26XnpwV+gV4cx8Uyae11+wO4XVqXjSaclDRuc=;
- b=m7rbmCnDXFA2+/R5eI0dlXD2xD0YhUOk3ymflWxRzj6ze4U6waXGoPXpXMAFBSTIA8
- iYLFcSCQPwvVebpHykSnKZnBiNqydXL9hbjR9TjZN/ecOS2gcD6OCJs4Kk/xcSRrZOak
- 0xSMPaZAZoP0vhNV8nA5F8uCh5Y147e1ce+PuM9Vl3wRHKkGcNiCbLt077YRC3lRqOd9
- +Ntjp83iRqjZkK4rgPYKXn9oRgdVj6Tgg4Sz0BmIJY4CVgv9+NtA9+9tnsB1uGEgUkH+
- JAxITh5650NcPS+70fTIlQYjKyDx7ayWVRaAMwICeysJba8kjAvlZZeDJV4buveWe684
- iagQ==
+ bh=llP0v2JYYx/1eSaxlZ2AUNY0CHybS3kF3rewLoCfkGI=;
+ b=dvs++wqm80Vlqd4j0snPEDy1XnEabBlrYrKmk1CJ9UiW02DwimfJQFRkUVrJKu2Tjy
+ E+x0+cNv35X3WyZiF0Zdu0oWqcAW4ZIyohszFgfsxQQ6X25W6ltZCAy1DmS1J1NQihtl
+ tFKZwBG4Hp30eFOABxME30Pf2r0h5D5h1uSC63iSi3TAOPq2mOsPUQz6tXkI7fdVCZr5
+ fDz0IjJ46NdFQszESz/3l1UVFwu87fcAB8v6NhwKUHMrYPFiUVGG1qAeoxjgx8yfLyyt
+ sP+tI8LctKo7SW+CaLit6tJ7r+ZtPn10c9DQHaVGw4P80F8OniO/MQ0UrpJtL39mBImd
+ MS+w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVftsmbfN/HyP/bxo67iVdhxtNB28WfeIMr4ceAyEjQh+xAjNjWVVHd/ldslufe+Zsl5v7S+ws=@lists.denx.de
-X-Gm-Message-State: AOJu0YyIkW38jOCPVsgmbFOCSgD7ZSuMBWdVfr9S7Pl0/0daOWqkF70E
- BqDrz1l8/DGK7prUXa5RwpvIjL0l9pZrDbxwZobKliHyo3KCIfTA6QuSUa2g9iX6KHRdV/4REBz
- GOBmliVdDZskZYEOeEUdc9PxndV5XynO2nFea
-X-Google-Smtp-Source: AGHT+IEhQH2g1lcfuXa/Ltl3zYMZxLD7PAaVXKp1h4CiZlFv7gm9PYa8so2D6RZCYiBGs0Cg97ry2DYGyoM2/WrS2vM=
-X-Received: by 2002:a05:6214:4383:b0:6c3:6455:85d2 with SMTP id
- 6a1803df08f44-6cb3b5c11ddmr34340146d6.8.1727433778579; Fri, 27 Sep 2024
- 03:42:58 -0700 (PDT)
+ AJvYcCWFL1cVLx44L8IpyWrvi469x8e+t/KSsn8tTjtpZiG9Pp96Q8XicI/ryE5RQnn3s9rQizX2FMk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw/4lyKrFXJLMmamXDVfZuBoh5sFJ1WFnu3YM8Twnae0xXrxxJk
+ dNqfnX+8Bmhc1HFwHbPCLbt8+hcKMSfIZocTrHvj7OjFq8cXwvnAiy/PT+NmdUOViDG1P7WFN/U
+ qar0vQR58CIp0rr1LHnQh7bv9CYSobusAMiaN
+X-Google-Smtp-Source: AGHT+IGXl/xKUk9eEQTPtPF9FCc2KfHppMy2mUS+qpH05li0gBJi3YIbxo2PaPNCIc9qruoGNDH1FETTshTh9nsPgNE=
+X-Received: by 2002:a05:6214:5411:b0:6cb:20b6:f39a with SMTP id
+ 6a1803df08f44-6cb3b5c7d52mr47429616d6.13.1727433818978; Fri, 27 Sep 2024
+ 03:43:38 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240905082811.1585467-1-sughosh.ganu@linaro.org>
- <20240905082811.1585467-5-sughosh.ganu@linaro.org>
- <0291efc6-86a2-437c-938a-707c46c34f91@gmx.de>
- <CADg8p94TakJXkLs=m6RbvO2T_OmYagf68e4JV655TtQ5DnxtZg@mail.gmail.com>
- <CAC_iWjKFh+g1k=HHKeApJp8OO5G78p0kruz59UUX-yfZcynJyg@mail.gmail.com>
- <CADg8p96-kG4jEd5d_7ah3s2kOzgW4_uvDOJL+wOSzdrDjoMqZg@mail.gmail.com>
- <CAFLszTjD5vLpcu7+_9xuzynLMjim3oPpg2wewug3-6nMs2CHug@mail.gmail.com>
- <CADg8p94_8znKCR=97kCj-ypMdqW59k7PbC42G-xGFr7t9+t9XQ@mail.gmail.com>
- <CAFLszTg2TvZp37HTjVwnYAw9cgX1-mfipkaw7frEL4cwJbzF4w@mail.gmail.com>
- <CADg8p95eA-qMFtiypaTOyfAkVwdKWWD2yMa+HZyewWfR_vS2kw@mail.gmail.com>
-In-Reply-To: <CADg8p95eA-qMFtiypaTOyfAkVwdKWWD2yMa+HZyewWfR_vS2kw@mail.gmail.com>
+ <20240905082811.1585467-3-sughosh.ganu@linaro.org>
+ <b83d04eb-bc3a-4387-b812-6973d851ae90@gmx.de>
+ <CADg8p95VsW99mr=Y62_DYeRvrxBDT9zEz+H_nrt6oyYM76f1dA@mail.gmail.com>
+ <CAFLszTjitzss7SCPhO8_wuRdXWVmF20M4pbxWjkXO0Ef9nyiVA@mail.gmail.com>
+ <CADg8p96c161nrDDky70k_z+Qjza5Z8ktrvdaDrn6kruMxZsrAQ@mail.gmail.com>
+In-Reply-To: <CADg8p96c161nrDDky70k_z+Qjza5Z8ktrvdaDrn6kruMxZsrAQ@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 27 Sep 2024 04:42:47 -0600
-Message-ID: <CAFLszThCXoHkOM5cOGmbrQvVnTARNUsZyN=NH_+JBi-pB=XK6g@mail.gmail.com>
-Subject: Re: [PATCH 04/16] event: add event to notify lmb memory map changes
+Date: Fri, 27 Sep 2024 04:43:28 -0600
+Message-ID: <CAFLszTjUhLc5jzGDyCxc3x0hVM8X9bt3Aw76gPt4PJi683TffQ@mail.gmail.com>
+Subject: Re: [PATCH 02/16] lmb: add a flag to allow suppressing memory map
+ change notification
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
  u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -97,131 +94,82 @@ X-Virus-Status: Clean
 
 Hi Sughosh,
 
-On Thu, 26 Sept 2024 at 14:29, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+On Fri, 20 Sept 2024 at 06:33, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> On Thu, 26 Sept 2024 at 16:38, Simon Glass <sjg@chromium.org> wrote:
+> On Thu, 19 Sept 2024 at 19:42, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > Hi Sughosh,
+> > Hi,
 > >
-> > On Thu, 26 Sept 2024 at 09:12, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > On Tue, 17 Sept 2024 at 13:55, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > > >
-> > > On Wed, 25 Sept 2024 at 18:23, Simon Glass <sjg@chromium.org> wrote:
+> > > On Sat, 14 Sept 2024 at 20:14, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 > > > >
-> > > > Hi Sughosh,
+> > > > On 9/5/24 10:27, Sughosh Ganu wrote:
+> > > > > Add a flag LMB_NONOTIFY that can be passed to the LMB API's for
+> > > > > reserving memory. This will then result in no notification being sent
+> > > > > from the LMB module for the changes to the LMB's memory map.
 > > > >
-> > > > On Fri, 20 Sept 2024 at 13:38, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> > > > >
-> > > > > On Fri, 20 Sept 2024 at 14:51, Ilias Apalodimas
-> > > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > > >
-> > > > > > Hi Sughosh,
-> > > > > >
-> > > > > > On Tue, 17 Sept 2024 at 15:33, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> > > > > > >
-> > > > > > > On Sat, 14 Sept 2024 at 20:38, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> > > > > > > >
-> > > > > > > > On 9/5/24 10:27, Sughosh Ganu wrote:
-> > > > > > > > > Add an event which would be used for notifying changes in the
-> > > > > > > > > LMB modules' memory map. This is to be used for having a
-> > > > > > > > > synchronous view of the memory that is currently in use, and that is
-> > > > > > > > > available for allocations.
-> > > > > > > >
-> > > > > > > > The synchronous view problem only exists because we are duplicating
-> > > > > > > > data. Store the EFI memory type in LMB and the problem vanishes.
-> > > > > > >
-> > > > > > > The LMB module only concerns itself with RAM memory. If I understand
-> > > > > > > correctly, you are proposing maintaining the EFI memory map within the
-> > > > > > > LMB module ? That would mean handling memory types other than
-> > > > > > > conventional memory in LMB.
-> > > > > >
-> > > > > > I am pretty sure I've asked this before, but do these *always* need to
-> > > > > > be in sync?
-> > > > > >
-> > > > > > The efi allocators will call LMB now. So when we allocate something
-> > > > > > gtom EFI, even if any potential changes from LMB haven't been
-> > > > > > published to EFI, we won't have any memory corruptions. Can't we just
-> > > > > > opportunistically update the memory map once someone requests it?
-> > > > >
-> > > > > I have given this a thought. Because what you mention, Simon has a
-> > > > > similar comment. But to achieve this, it would require generating a
-> > > > > new efi memory map afresh every time such a requirement comes up. This
-> > > > > would mean, create a new memory map, put in the conventional memory,
-> > > > > and add other memory types that were part of the existing memory map.
-> > > > > And then remove the older memory map. This would need to be done every
-> > > > > time a memory map is needed to be generated. And that would also
-> > > > > include instances when a user enters a command to get the current
-> > > > > memory map. I think notifying any changes to the lmb memory map to the
-> > > > > efi memory module is easier, and less error prone.
+> > > > You seem to be using this in patch 3 and 7.
 > > > >
-> > > > We need to get some agreement on my memory-allocation patches first. I
-> > > > don't believe we are on the same page on those, despite some weeks of
-> > > > discussion. We need to resolve that issue first. I did try right from
-> > > > the start to first agree on the problem to be solved. We skipped that,
-> > > > so now we are having to do it now...
+> > > > Please, describe in this patch why you want to be able to suppress
+> > > > notification.
 > > >
-> > > These patches are currently under review. But fwiw, I think you are
-> > > aware that these patches are not related to what your patch series is
-> > > attempting. Your patches are related to the efi_allocate_pool()
-> > > function, whereas this series is trying to use LMB as the backend for
-> > > allocating pages, as requested from efi_allocate_pages(). So these are
-> > > not related. But like I said, you are aware of these details :)
+> > > Will add the reasoning behind this flag in the commit message.
+> > >
+> > > >
+> > > > In the EFI context we should use LMB notification to notify the
+> > > > EFI_EVENT_GROUP_MEMORY_MAP_CHANGE event.
+> > > >
+> > > > See chapter 7.1.2 EFI_BOOT_SERVICES.CreateEventEx() in the UEFI
+> > > > specification.
+> > >
+> > > So, do you want me to use the EFI event signaling mechanism for this
+> > > purpose ? Is my understanding correct ? If so, this will mean that we
+> > > have an event notification specifically for EFI, and there might be
+> > > one needed for any other consumers of this event. Currently there
+> > > aren't any other consumers of the LMB memory map change event other
+> > > than EFI, but using the U-Boot's event notification mechanism means
+> > > that the same notification mechanism can be used if there were any
+> > > additional consumers of this event in the future. In that case, we
+> > > would have two separate event notifications, one for EFI, and one for
+> > > non-EFI consumers.
 > >
-> > The thing is, if we actually tidy up the EFI allocations then there
-> > will be no use of allocate-pages before the app starts. So we won't
-> > need to 'sync' the two different sets of memory tables. There will
-> > just be one.
-
-The issue is, again, that we never actually identified the problem to
-be solved at the beginning. So we are suffering somewhat now from a
-lack of clarity. But in any case, let me try to respond to the points
-you raise.
-
+> > As I have previously said, none of this is necessary.
+> >
+> > Essentially all of the EFI setup that is done in U-Boot can be delayed
+> > until we are actually starting an EFI app. The current approach of
+> > keeping parallel EFI tables everywhere is causing much confusion.
+> >
+> > For EFI, it should be enough to read the lmb tables at the end and add
+> > whatever parallel tables are needed to boot the app. We should not
+> > need to keep things in sync through the life of U-Boot, since:
+> >
+> > 1. EFI pool-allocations should use malloc() until the app starts
+> > 2. EFI page allocations should not be allowed until the app starts
+> >
+> > This whole area needs a healthy dose of 'keep it simple'.
 >
-> How do we get rid of using efi_allocate_pages() in U-Boot ? This
-> function is used, among other things, to allocate memory used for
-> loading images to memory. This can be a significant amount of memory.
-> Are you proposing using malloc() even for loading EFI images ?
-
-We actually don't use efi_allocate_pages() to load things into memory,
-or at least I hope we don't. We should be using lmb. No, we cannot use
-malloc() for loading images as the region is quite small on many
-boards. Heinrich mentioned it can be as small as 1-2MB on some. Also,
-it isn't really what malloc() is designed for.
-
+> Except, the current implementation proposed by the patch *is* actually
+> much more simpler than syncing the maps when the app starts. Because
+> there is another scenario when the map needs to be synced, when the
+> user issues a 'efidebug memmap' command, which dumps the efi memory
+> map.
 >
-> Moreover, the syncing of the memory maps is currently needed primarily
-> as we support printing the EFI memory map through a command. And I
-> mentioned in one of my earlier replies that not syncing the changes in
-> the LMB memory map with the EFI module would mean that the EFI memory
-> map would have to be generated afresh whenever there is a need for the
-> EFI memory map -- this would be either when requested from an EFI app,
-> or when a user asks through a command. Re-generating the EFI memory
-> map is not a trivial task, and syncing the changes in the LMB map as
-> and when they happen is much easier.
+> Syncing the map from lmb means that the efi memory map first has to be
+> generated afresh. And that is much more complicated than the method
+> incorporated in the patch series. Apart from the ram/conventional
+> memory type, we also need to include other memory types that might
+> have been added to the memory map. So, this would mean, create a new
+> memory map, add entries for conventional memory as have been obtained
+> from lmb followed by other entries, and then discard the old memory
+> map. And this has to be carried out every time a need for a memory map
+> update is needed.
 
-Yes I have seen you make this point and I am sorry I didn't reply
-directly. The thing is, we don't care about the EFI memory until we
-boot the app. After all, it is only the app that actually needs it.
-
-I see that 'efi_init_obj_list()' is called by the efidebug command, so
-yes, it should show the memory map.
-
-But in my view of the world the memory map (before an app boots and
-does what it likes in terms of allocations, etc.) consists solely of:
-
-1. U-Boot's memory (malloc() space, code, bloblist, stack,
-arch-specific stuff, etc.)
-2. Images that were loaded (which are in lmb)
-
-Since we need to handle (1) by manually adding records to the EFI map,
-it isn't a big stretch to handle (2) with a for-loop through the lmb
-records.
-
-
-> > If I were confident that we could apply your series and then clean it
-> > up later, I would be fine with it. But given that my two series have
-> > sat here for a considerable period of time and are still not really
-> > making progress, I lack confidence.
+We are just not on the same page here. But I've replied to this point
+on your other email. Also please understand that my objective is
+actually to not do EFI allocations until just before the EFI app
+actually starts (when we set up the EFI memory map). Until then, I
+believe malloc() suffices.
 
 Regards,
 Simon
