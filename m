@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3F38CF6482
-	for <u-boot@archiver.kernel.org>; Fri, 27 Sep 2024 21:56:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12A7ACF6483
+	for <u-boot@archiver.kernel.org>; Fri, 27 Sep 2024 21:56:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 382AA8915F;
-	Fri, 27 Sep 2024 23:55:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A35AE8914F;
+	Fri, 27 Sep 2024 23:55:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1727474154;
-	bh=BD06Ph8UDvFEGZmRkJf0+5e0Opsybw8hDos3+SNgynY=;
+	s=phobos-20191101; t=1727474156;
+	bh=EtTsB600uo+BXcIYGZRTCRffXf3o9eSmDDW1m9B1VYE=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ZrnWu8uX1g/pCzLct96Vy7Xlo1E8N/XzDH+jAPXwFwfeshQ3AgA2vru+7HL7lY33S
-	 XoYO7MIx7tC432c6Zr3f4CRkdp0tdTqsFOt1Y80cvmgDKi2zn/3F0NN1pRH4Oeg9Si
-	 n4CJWNvaeAub9bx0am2Be6E6+dHyVTyFl4JUbaCYYWU7EM4ztcaXB+GjUqFLoYNcOc
-	 f52YRUI5h/cNv4tpeP0eeEaojuYskyTbw0aUgWnScRBKzcCYhImGbeTmYhBRDAbsFq
-	 UFHPh5UlF1jKjjf6z6sHLGBBjdM+hvolH9rDZyvV6uigudPBMErdrLucTBnfZ2T4yt
-	 BjMS6dROTWwCQ==
+	b=iWz3ahW7M+sDgEdl2DVPRuMZssQtY1lZPlChdkOIH9GwZWYJVTRklRHxbKnmTEE0g
+	 Q/P6pUWdQcppH/STGZPL0sv0WEMZwupY5uXhh5fvsEvkPHZaI/WYadsS7hN9gt0u0g
+	 Nyl13VqTvH2mSVL4mc2x4/LmbWzBOjxKSZJ2sY4HlYpM2h67TAJeeBfgnfAVLR8JO+
+	 Mz06PD4v4EfxAVkfbai9Qf8qnm/9ADaNgf7rZHsvppYS2W8OiMUR6EO04nPtr++c1H
+	 VM4zEF+ADEXzmoPhtWKGPE2Qz4ITXefbq6U69oRywuuBhWG/BAZhn9HudhNJPD7XEN
+	 PHuel1nwRoHPw==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 9329389142;
- Fri, 27 Sep 2024 23:55:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 21D8489146;
+ Fri, 27 Sep 2024 23:55:53 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1727474152;
- bh=BD06Ph8UDvFEGZmRkJf0+5e0Opsybw8hDos3+SNgynY=;
+ s=phobos-20191101; t=1727474153;
+ bh=EtTsB600uo+BXcIYGZRTCRffXf3o9eSmDDW1m9B1VYE=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=YiKZwFpbk/GOlgDPKLs4sSZBmdicf9Zl2ble3Y/xyu7phcRJdT27LT/a/NmWOwRXz
- apie4pSGweLPwT91yXhbyBbNhbSY32BYqoUUG2Jk2Leo/KEHQldTYvssiK9gg093im
- ikDziwyjgFT0XJjKvU8M2v0vvVw6Mtnd7EtIDWCH7r3J4uRBRxSQY6WvmdbQJWRCWg
- 53n0BRd9xpQJUx8xz8nJXd5X3rTRBxAtUbGKsk25YlnNqJxBNrCOfJMWPLWeBTfECA
- wvHEEXISpRa3Nu/LQChi50EP95wYX52ZMeMxYzQNk9ADm4cdpyphhHL6waHzQuU561
- gNGJ1P8x5yQ/w==
-Message-ID: <1bba9e4b-621c-4b94-befe-a3eb468a8b3d@denx.de>
-Date: Fri, 27 Sep 2024 22:41:46 +0200
+ b=E8rjCYPNnHQZOMEtZ6GewzPmVWPF5x3r8x+L98w6AcwFE5GunqXZSTrnOkB5WtuAm
+ oFvxJXN4q8Onw4RdjeI9BPW83yOFIhxrWX/Aq4bVx9Bzmz3/BLSaxKzWOtEaub1ie7
+ 3ncISM/1eQBgNAjHRm3IPVyRfdKy1gm0RZPwA69avqCKMeCqB8+sEyZc9vLTORda60
+ qi6quJrcsiwI7eFgLdniKeATDs5Tky35x5mPaNITex7ex57WAi0cNLUa0UrjqLDkWN
+ dvuf/6gbC5Y+yf/ghwU8FaRTbY+yzNuNXhdZJ17fwxuSlSHBq27ZxGOF/PkfTZNvYF
+ X50rQ7PuSqzFw==
+Message-ID: <c8cf0683-36f7-4163-9a72-8abb74139e73@denx.de>
+Date: Fri, 27 Sep 2024 22:44:01 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 5/7] usb: onboard-hub: Bail out if peer hub is already
- probed
+Subject: Re: [PATCH v2 4/7] usb: onboard-hub: Add i2c initialization for
+ usb5744 hub
 To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
 Cc: michal.simek@amd.com, fabrice.gasnier@foss.st.com, git@amd.com
 References: <20240927070137.21816-1-venkatesh.abbarapu@amd.com>
- <20240927070137.21816-6-venkatesh.abbarapu@amd.com>
+ <20240927070137.21816-5-venkatesh.abbarapu@amd.com>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240927070137.21816-6-venkatesh.abbarapu@amd.com>
+In-Reply-To: <20240927070137.21816-5-venkatesh.abbarapu@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -71,30 +71,51 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 9/27/24 9:01 AM, Venkatesh Yadav Abbarapu wrote:
-> The .bind function is implemented to bind the correct
-> "half" of the hub that the driver wants to bind,
-> and returning -ENODEV for the other "half".
-> 
-> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-> ---
->   common/usb_onboard_hub.c | 20 ++++++++++++++++++++
->   1 file changed, 20 insertions(+)
-> 
-> diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c
-> index 00808ed45e..9c50ca09c9 100644
-> --- a/common/usb_onboard_hub.c
-> +++ b/common/usb_onboard_hub.c
-> @@ -162,6 +162,25 @@ err:
->   	return ret;
->   }
+
+[...]
+
+>   struct onboard_hub {
+>   	struct udevice *vdd;
+>   	struct gpio_desc *reset_gpio;
+> @@ -21,8 +27,86 @@ struct onboard_hub {
+>   struct onboard_hub_data {
+>   	unsigned long reset_us;
+>   	unsigned long power_on_delay_us;
+> +	int (*i2c_init)(struct udevice *dev);
+
+Why not call it simply "init" ?
+
+>   };
 >   
-> +static int usb_onboard_hub_bind(struct udevice *dev)
+> +static int usb5744_i2c_init(struct udevice *dev)
 > +{
+> +	/*
+> +	 *  Prevent the MCU from the putting the HUB in suspend mode through register write.
+> +	 *  The BYPASS_UDC_SUSPEND bit (Bit 3) of the RuntimeFlags2 register at address
+> +	 *  0x411D controls this aspect of the hub.
+> +	 *  Format to write to hub registers via SMBus- 2D 00 00 05 00 01 41 1D 08
+> +	 *  Byte 0: Address of slave 2D
+> +	 *  Byte 1: Memory address 00
+> +	 *  Byte 2: Memory address 00
+> +	 *  Byte 3: Number of bytes to write to memory
+> +	 *  Byte 4: Write configuration register (00)
+> +	 *  Byte 5: Write the number of data bytes (01- 1 data byte)
+> +	 *  Byte 6: LSB of register address 0x41
+> +	 *  Byte 7: MSB of register address 0x1D
+> +	 *  Byte 8: value to be written to the register
+> +	 */
+> +	u8 data_buf[8] = {0x0, 0x5, 0x0, 0x1, 0x41, 0x1D, 0x08};
+> +	int ret, slave_addr;
+> +	u8 buf = USB5744_COMMAND_ATTACH;
+> +	u8 config_reg_access_buf = USB5744_CONFIG_REG_ACCESS;
+> +	struct dm_i2c_chip *i2c_chip;
 > +	struct ofnode_phandle_args phandle;
-> +	const void *fdt = gd->fdt_blob;
-> +	int ret, off;
-> +
-> +	if (dev_read_phandle_with_args(dev, "peer-hub", NULL, 0, 0, &phandle)) {
+> +	struct udevice *i2c_bus = NULL, *i2c_dev;
+
+Make sure this list of variables is ordered as reverse xmas tree if 
+possible.
+
+> +	if (dev_read_phandle_with_args(dev, "i2c-bus", NULL, 0, 0, &phandle)) {
 
 Return the error code:
 
@@ -104,11 +125,73 @@ if (ret) {
 return ret;
 }
 
-> +		dev_err(dev, "peer-hub not specified\n");
+> +		dev_err(dev, "i2c-bus not specified\n");
 > +		return -ENOENT;
 > +	}
 > +
-> +	off = ofnode_to_offset(phandle.node);
-> +	ret = fdt_node_check_compatible(fdt, off, "usb424,5744");
+> +	ret = device_get_global_by_ofnode(ofnode_get_parent(phandle.node), &i2c_bus);
+> +	if (ret) {
+> +		dev_err(dev, "Failed to get i2c node, err: %d\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	ret = ofnode_read_u32(phandle.node, "reg", &slave_addr);
+> +	if (ret)
+> +		return ret;
+> +
+> +	ret = i2c_get_chip(i2c_bus, slave_addr, 1, &i2c_dev);
+> +	if (ret) {
+> +		dev_dbg(dev, "%s: can't find i2c chip device for addr %x\n", __func__,
+> +			slave_addr);
+> +		return ret;
+> +	}
+> +
+> +	i2c_chip = dev_get_parent_plat(i2c_dev);
 
-return fdt_node_check_compatible(...);
+Can this fail ? If so, is return 0 really the correct thing to do ?
+
+> +	if (!i2c_chip)
+> +		return 0;
+> +
+> +	i2c_chip->flags &= ~DM_I2C_CHIP_WR_ADDRESS;
+> +	/* SMBus write command */
+> +	ret = dm_i2c_write(i2c_dev, 0, (uint8_t *)&data_buf, 8);
+
+Is the uint8_t * cast necessary ?
+
+> +	if (ret) {
+> +		dev_err(dev, "data_buf i2c_write failed, err:%d\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	/* Configuration register access command */
+> +	ret = dm_i2c_write(i2c_dev, USB5744_CONFIG_REG_ACCESS_LSB,
+> +			   (uint8_t *)&config_reg_access_buf, 2);
+
+Is the uint8_t * cast necessary ?
+
+> +	if (ret) {
+> +		dev_err(dev, "config_reg_access i2c_write failed, err: %d\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	/* USB Attach with SMBus */
+> +	ret = dm_i2c_write(i2c_dev, USB5744_COMMAND_ATTACH_LSB, (uint8_t *)&buf, 2);
+
+Is the uint8_t * cast necessary ?
+
+> +	if (ret) {
+> +		dev_err(dev, "usb_attach i2c_write failed, err: %d\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+>   static int usb_onboard_hub_probe(struct udevice *dev)
+>   {
+>   	struct onboard_hub_data *data =
+> @@ -61,7 +145,21 @@ static int usb_onboard_hub_probe(struct udevice *dev)
+>   		udelay(data->power_on_delay_us);
+>   	}
+[...]
