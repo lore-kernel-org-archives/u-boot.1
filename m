@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9707ACEBF60
-	for <u-boot@archiver.kernel.org>; Fri, 27 Sep 2024 01:11:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A5A1CEBF60
+	for <u-boot@archiver.kernel.org>; Fri, 27 Sep 2024 01:12:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D64B89036;
-	Fri, 27 Sep 2024 03:11:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 91C0488FFB;
+	Fri, 27 Sep 2024 03:11:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="H1gLooyo";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dcjUPw5U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9DE0C8901A; Fri, 27 Sep 2024 03:11:39 +0200 (CEST)
-Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
- [IPv6:2607:f8b0:4864:20::534])
+ id B21BA89043; Fri, 27 Sep 2024 03:11:41 +0200 (CEST)
+Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
+ [IPv6:2607:f8b0:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6183E88F92
- for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 03:11:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 46BD489018
+ for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 03:11:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tkuw584924@gmail.com
-Received: by mail-pg1-x534.google.com with SMTP id
- 41be03b00d2f7-7db54269325so1187543a12.2
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 18:11:37 -0700 (PDT)
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-71b08405187so1394451b3a.3
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 18:11:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1727399496; x=1728004296; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1727399498; x=1728004298; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AbMH9Vn5UEisbRohX7IXOJsetc/yDsrvw7QEfb4/Y64=;
- b=H1gLooyovV9GlktBYYe/OaceeAbuTOfqdsKS3Upe0jou8oBhHKRtI1IxDI6gjIBc5/
- yUaVegzgEfLRhv1HMwdNDANA6jh6v+Z7O+vlGTYOv0iFL+/1XuT62+HPEQzgYvgcOABK
- tfItYKnAu2YmwRHOQi9mCGv64Kf3igfi5xUkLijhmfHaGTu9TD980niZC3eBKFHyHMvq
- a2YrsfWI4UkkzCNCYVh1zj07dxhb+o6VOSKsUr1xwK1QXT0c+eodqQdFTcJBniwT3k1y
- EiK4gRKMglCFrDQyn/mt+cdYoCphVVEQIgsBAF66KFrP0Lbn+vG2m5k+Eov2Zxq4m2Ed
- I6dQ==
+ bh=xdmHXq9QJGinOeop2lXgATZnU8wYRzyYPB4xkSKnmw0=;
+ b=dcjUPw5UXMrf8GCN1NHHNMMTJpZF5HaoYYtwlb2X1Q1gGNUeBQQ3gXZhP9LJkizedu
+ SjS8DFr1lywd0HDtnux4eSqH0WJZpNcwGAGqvjeDekjp2ycPK2qaffaleo7tLgyTvnSV
+ aaG6uTkhW/+wOCSWKRbrsYYb6m+iaDpSviABLN1OIVnsy2+ndGW8G8ytSwIbTm0TOFMl
+ qrpW9tI7g7gFhFQ9sCBILtN2G4kkmL6pCVHivYC3nIajy27s3bdEDI0FLLI0fjmgD29J
+ a//xWwVpHgDhocBXpusVdr2UlFfojZWBicKbwJAj/jmixlvUEmL5NbHMTCfcyESymflC
+ Mzmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727399496; x=1728004296;
+ d=1e100.net; s=20230601; t=1727399498; x=1728004298;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AbMH9Vn5UEisbRohX7IXOJsetc/yDsrvw7QEfb4/Y64=;
- b=NfgnjbUjM48gpdluX43PQwO+OYc3/6ID+WmqihbmJK7I2Dclm66CNZy03st0AAw81A
- UnZX7kLoSICwJJVRc+wBdwsXHqzXEboAwG3CSCk+Mza8RvH4BOvZ4DV40ujoBeUVi2NB
- acWELB+xiK8Uk9w3CS6Sit6HufVHGf8rXReHLTSCka2TXBDmkSr027EUnxtYO2uktMpk
- YvGBLabEgVTlEbnRPajo+dWRA5PXBbTZGN9tS6l05RpSr7hdz3cXPs9fv0kFQy3GmLcz
- UB9MndeSWcjbDB2LHM2a+EuIjE9IHXJz4TmIxiAa0vyBduXeD08hHCyjAGHxHSp1NUo/
- UqBw==
-X-Gm-Message-State: AOJu0YxVKLBLZm4+4zFtp3Xo0k59miCvY6xg/oxz1HVBszGqQ+zND0FK
- pN0Tp3yjUCOdwy+eWyfi+gse+hajSxHE71vG+4+eu7SytQOGeNewp/HBMw==
-X-Google-Smtp-Source: AGHT+IHY81L/qkaVcxfi6Jz8xx36tzV/K67EoHWvsJTVcCUHrdAue8URjxKLMK/He+6h31HebYFJQQ==
-X-Received: by 2002:a05:6a20:bc86:b0:1d4:fc11:baec with SMTP id
- adf61e73a8af0-1d4fc11bb32mr1411454637.2.1727399494474; 
- Thu, 26 Sep 2024 18:11:34 -0700 (PDT)
+ bh=xdmHXq9QJGinOeop2lXgATZnU8wYRzyYPB4xkSKnmw0=;
+ b=i81Q0ZLVIYH59hhIua3thhCtIuhmCJmrtnmFYrfHuMxYr/c4ycGHrijAzrcHYukJmj
+ Bea8xWLkh584Izjq5ZZsOz+XLX0aENXYhvB/DdROUfnOC1Vynr9NRshjYmMAQ9i0NvUr
+ Myi0q5J7FRFWYv6FaOtSdwQGMUuzLL9ufra9NW2OUXHB7Lp3LNJTbjMheNLRfbEIIkSy
+ NkBwyBKE48/u+p/PFSlPZ+gol+3vuKOwuNQ2bRscVl+FD1/Al8r9cGoFZQhQeo+CEBWh
+ 9RzxvFD2dzFsAxceUmV+Y6/Qs9pDWXOQp5yFR7+q3prh/hGOqxBwpc3+teJa7zF36047
+ fbyg==
+X-Gm-Message-State: AOJu0Yw74tJ/YJv6P3+z4rT+N6rjpDKIf3V6+qQhgs3oEnMDrOYM3qRf
+ i6iQ1Z7VA1ZFIErz+IDu6hHm/4rFr3kMGe1WOlo7mrY9aZcFmxnjVKF42g==
+X-Google-Smtp-Source: AGHT+IHAjshHBRh0/GzsNTiriPzAIhNFfir0GmyBa5xZozJIw2M4shxj9fDMHMeo0vTZbAWDEk6N2g==
+X-Received: by 2002:a05:6a00:2350:b0:714:2198:26bd with SMTP id
+ d2e1a72fcca58-71b25f3c36cmr2519573b3a.11.1727399497653; 
+ Thu, 26 Sep 2024 18:11:37 -0700 (PDT)
 Received: from ISCN5CG2520RPD.infineon.com (KD106168128197.ppp-bb.dion.ne.jp.
  [106.168.128.197]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-71b264d86bfsm524068b3a.95.2024.09.26.18.11.31
+ d2e1a72fcca58-71b264d86bfsm524068b3a.95.2024.09.26.18.11.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Sep 2024 18:11:34 -0700 (PDT)
+ Thu, 26 Sep 2024 18:11:37 -0700 (PDT)
 From: tkuw584924@gmail.com
 X-Google-Original-From: Takahiro.Kuwano@infineon.com
 To: u-boot@lists.denx.de
 Cc: jagan@amarulasolutions.com, vigneshr@ti.com, tudor.ambarus@linaro.org,
  pratyush@kernel.org, tkuw584924@gmail.com, Bacem.Daassi@infineon.com,
- Takahiro Kuwano <Takahiro.Kuwano@infineon.com>, Dhruva Gole <d-gole@ti.com>
-Subject: [2nd RESEND PATCH v2 2/3] mtd: spi-nor-id: Use INFO6 macro for S25FL-S
-Date: Fri, 27 Sep 2024 10:11:18 +0900
-Message-Id: <340ebd9792c07e7e687ddfbb6b1236ef8d62eda2.1727399216.git.Takahiro.Kuwano@infineon.com>
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+Subject: [2nd RESEND PATCH v2 3/3] mtd: spi-nor-id: Add S25FS064S, S25FS128S,
+ S25FS256S IDs
+Date: Fri, 27 Sep 2024 10:11:19 +0900
+Message-Id: <9abd2c55c818c537283970bb0885a43388a6c918.1727399216.git.Takahiro.Kuwano@infineon.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1727399216.git.Takahiro.Kuwano@infineon.com>
 References: <cover.1727399216.git.Takahiro.Kuwano@infineon.com>
@@ -96,30 +97,66 @@ X-Virus-Status: Clean
 
 From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
 
-The 6th ID byte is needed to distiguish S25FL-S and S25FS-S families.
+The S25FS064S, S25FS128S, and S25FS256S are the same family of SPI NOR
+Flash devices with S25FS512S. Some difference depending on the device
+densities are taken care in post SFDP fixup.
 
 Signed-off-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
 Reviewed-by: Pratyush Yadav <pratyush@kernel.org>
-Reviewed-by: Dhruva Gole <d-gole@ti.com>
 ---
- drivers/mtd/spi/spi-nor-ids.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/mtd/spi/spi-nor-core.c | 24 ++++++++++++++++++------
+ drivers/mtd/spi/spi-nor-ids.c  |  3 +++
+ 2 files changed, 21 insertions(+), 6 deletions(-)
 
+diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
+index b633f3092b1..e126fa37c16 100644
+--- a/drivers/mtd/spi/spi-nor-core.c
++++ b/drivers/mtd/spi/spi-nor-core.c
+@@ -3406,12 +3406,24 @@ static int s25fs_s_post_bfpt_fixup(struct spi_nor *nor,
+ static void s25fs_s_post_sfdp_fixup(struct spi_nor *nor,
+ 				    struct spi_nor_flash_parameter *params)
+ {
+-	/* READ_1_1_2 is not supported */
+-	params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_2;
+-	/* READ_1_1_4 is not supported */
+-	params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_4;
+-	/* PP_1_1_4 is not supported */
+-	params->hwcaps.mask &= ~SNOR_HWCAPS_PP_1_1_4;
++	/*
++	 * The S25FS064S(8MB) supports 1-1-2 and 1-1-4 commands, but params for
++	 * read ops in SFDP are wrong. The other density parts do not support
++	 * 1-1-2 and 1-1-4 commands.
++	 */
++	if (params->size == SZ_8M) {
++		spi_nor_set_read_settings(&params->reads[SNOR_CMD_READ_1_1_2],
++					  0, 8, SPINOR_OP_READ_1_1_2,
++					  SNOR_PROTO_1_1_2);
++		spi_nor_set_read_settings(&params->reads[SNOR_CMD_READ_1_1_4],
++					  0, 8, SPINOR_OP_READ_1_1_4,
++					  SNOR_PROTO_1_1_4);
++	} else {
++		params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_2;
++		params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_4;
++		params->hwcaps.mask &= ~SNOR_HWCAPS_PP_1_1_4;
++	}
++
+ 	/* Use volatile register to enable quad */
+ 	params->quad_enable = s25fs_s_quad_enable;
+ }
 diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-index 88709a52b3a..17e0f84e9ee 100644
+index 17e0f84e9ee..9693c179b7e 100644
 --- a/drivers/mtd/spi/spi-nor-ids.c
 +++ b/drivers/mtd/spi/spi-nor-ids.c
-@@ -339,8 +339,8 @@ const struct flash_info spi_nor_ids[] = {
- 	 */
- 	{ INFO("s25sl032p",  0x010215, 0x4d00,  64 * 1024,  64, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
- 	{ INFO("s25sl064p",  0x010216, 0x4d00,  64 * 1024, 128, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("s25fl256s0", 0x010219, 0x4d00, 256 * 1024, 128, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
--	{ INFO("s25fl256s1", 0x010219, 0x4d01,  64 * 1024, 512, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
-+	{ INFO6("s25fl256s0", 0x010219, 0x4d0080, 256 * 1024, 128, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
-+	{ INFO6("s25fl256s1", 0x010219, 0x4d0180,  64 * 1024, 512, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
+@@ -342,6 +342,9 @@ const struct flash_info spi_nor_ids[] = {
+ 	{ INFO6("s25fl256s0", 0x010219, 0x4d0080, 256 * 1024, 128, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
+ 	{ INFO6("s25fl256s1", 0x010219, 0x4d0180,  64 * 1024, 512, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
  	{ INFO6("s25fl512s",  0x010220, 0x4d0080, 256 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
++	{ INFO6("s25fs064s",  0x010217, 0x4d0181,  64 * 1024, 128, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
++	{ INFO6("s25fs128s",  0x012018, 0x4d0181,  64 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
++	{ INFO6("s25fs256s",  0x010219, 0x4d0181,  64 * 1024, 512, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
  	{ INFO6("s25fs512s",  0x010220, 0x4d0081, 256 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
  	{ INFO("s25fl512s_256k",  0x010220, 0x4d00, 256 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
+ 	{ INFO("s25fl512s_64k",  0x010220, 0x4d01, 64 * 1024, 1024, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
 -- 
 2.34.1
 
