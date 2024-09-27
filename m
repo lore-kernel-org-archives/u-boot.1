@@ -4,79 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A5A1CEBF60
-	for <u-boot@archiver.kernel.org>; Fri, 27 Sep 2024 01:12:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE9E3CEBF66
+	for <u-boot@archiver.kernel.org>; Fri, 27 Sep 2024 01:18:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91C0488FFB;
-	Fri, 27 Sep 2024 03:11:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 50A7088F9B;
+	Fri, 27 Sep 2024 03:18:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dcjUPw5U";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Znt4+b53";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B21BA89043; Fri, 27 Sep 2024 03:11:41 +0200 (CEST)
-Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
- [IPv6:2607:f8b0:4864:20::42e])
+ id D4C8988F89; Fri, 27 Sep 2024 03:18:21 +0200 (CEST)
+Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
+ [IPv6:2607:f8b0:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46BD489018
- for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 03:11:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5FA0D88FC8
+ for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 03:18:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tkuw584924@gmail.com
-Received: by mail-pf1-x42e.google.com with SMTP id
- d2e1a72fcca58-71b08405187so1394451b3a.3
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 18:11:39 -0700 (PDT)
+Received: by mail-pg1-x530.google.com with SMTP id
+ 41be03b00d2f7-7db4c1a54easo978341a12.1
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 18:18:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1727399498; x=1728004298; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xdmHXq9QJGinOeop2lXgATZnU8wYRzyYPB4xkSKnmw0=;
- b=dcjUPw5UXMrf8GCN1NHHNMMTJpZF5HaoYYtwlb2X1Q1gGNUeBQQ3gXZhP9LJkizedu
- SjS8DFr1lywd0HDtnux4eSqH0WJZpNcwGAGqvjeDekjp2ycPK2qaffaleo7tLgyTvnSV
- aaG6uTkhW/+wOCSWKRbrsYYb6m+iaDpSviABLN1OIVnsy2+ndGW8G8ytSwIbTm0TOFMl
- qrpW9tI7g7gFhFQ9sCBILtN2G4kkmL6pCVHivYC3nIajy27s3bdEDI0FLLI0fjmgD29J
- a//xWwVpHgDhocBXpusVdr2UlFfojZWBicKbwJAj/jmixlvUEmL5NbHMTCfcyESymflC
- Mzmw==
+ d=gmail.com; s=20230601; t=1727399898; x=1728004698; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=nxpTGr9UaKaTuM4jpRJ+VnqgtuShAUJ9hhEXAKHxwqQ=;
+ b=Znt4+b53vOLnZ2GSeXCwQAJOVcvmI2Qr2AA5M/dp+uZPu0eGwhkN7AOxYfmPSJzPRt
+ NoR/jX2xSl6hapzkh5QWw+CXifBHbCKjd0Wh679l57EChRcteM2zVYsFgmB0PZxzDL7c
+ rwl9aIRwPxqeJ/7v3ROh+artzz4K8bZ3r1r1YjwnClkK+6rxd7emacGyIQGZcGITqY8v
+ tb/M2XoLg2z4QiEeG7yqddd60uHvemmmYQciKRxbWqNJI4Xe0hTvqKbOvpAE/8yuaThF
+ 9a+mZ04E4LxVKq7EQvvpuQ/1YqQ1RZziSo09+SSd0DWpqB9HXrw6rg+PYhxatwOeOphQ
+ Fl5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727399498; x=1728004298;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=xdmHXq9QJGinOeop2lXgATZnU8wYRzyYPB4xkSKnmw0=;
- b=i81Q0ZLVIYH59hhIua3thhCtIuhmCJmrtnmFYrfHuMxYr/c4ycGHrijAzrcHYukJmj
- Bea8xWLkh584Izjq5ZZsOz+XLX0aENXYhvB/DdROUfnOC1Vynr9NRshjYmMAQ9i0NvUr
- Myi0q5J7FRFWYv6FaOtSdwQGMUuzLL9ufra9NW2OUXHB7Lp3LNJTbjMheNLRfbEIIkSy
- NkBwyBKE48/u+p/PFSlPZ+gol+3vuKOwuNQ2bRscVl+FD1/Al8r9cGoFZQhQeo+CEBWh
- 9RzxvFD2dzFsAxceUmV+Y6/Qs9pDWXOQp5yFR7+q3prh/hGOqxBwpc3+teJa7zF36047
- fbyg==
-X-Gm-Message-State: AOJu0Yw74tJ/YJv6P3+z4rT+N6rjpDKIf3V6+qQhgs3oEnMDrOYM3qRf
- i6iQ1Z7VA1ZFIErz+IDu6hHm/4rFr3kMGe1WOlo7mrY9aZcFmxnjVKF42g==
-X-Google-Smtp-Source: AGHT+IHAjshHBRh0/GzsNTiriPzAIhNFfir0GmyBa5xZozJIw2M4shxj9fDMHMeo0vTZbAWDEk6N2g==
-X-Received: by 2002:a05:6a00:2350:b0:714:2198:26bd with SMTP id
- d2e1a72fcca58-71b25f3c36cmr2519573b3a.11.1727399497653; 
- Thu, 26 Sep 2024 18:11:37 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1727399898; x=1728004698;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=nxpTGr9UaKaTuM4jpRJ+VnqgtuShAUJ9hhEXAKHxwqQ=;
+ b=FnZ/fI/9iPhQ+7u4H+/Wz6zMdCoYb/YhJA16AHlsGvwqrJTIuAV+64R4t/SZu+3rIy
+ fUvSCoIqh+m1Op2i8hv8HvxY/+0C8mhjs86FI4KozG6gq3HNjSgdjVZ5my904dH5Zs3/
+ crcZSwvJrskx14VY3zHSMOZnwzErqkOk4gG5t38dY71E7QNVlnVzMwF4zGd89nwbgsVn
+ Fs1XwpWEHKXaU09u1s4/oGzEubz22HryxmVeKL+QPby+F1eovrmlC7gqNwk/7rt5jsCD
+ s79RtB8iZtSFZBwJJQgW+ypB345d3XTdZm+hYtlCQH9qeZ95sFkvRpMMKri9MUAqvSbs
+ tbsw==
+X-Gm-Message-State: AOJu0YxjfNbVtOaJe+K1TIicO7rvlKuHBVjbn/1RYBxkuQCf7yDvNZAh
+ pnBd6tVLVK3ir8XPhAip/ZGkoYG8vxuDYTk4JBva0WqmtJtMSiJFOi8C2A==
+X-Google-Smtp-Source: AGHT+IEqPhovLL1wjd/kqES764pYFH6ZyS6xpu2GnrJtqy0hr20IWW1vvRbITQVz4w7j57+E6a7WLA==
+X-Received: by 2002:a05:6a21:58b:b0:1cf:5170:21b2 with SMTP id
+ adf61e73a8af0-1d4fa7c5b8dmr1925646637.41.1727399897792; 
+ Thu, 26 Sep 2024 18:18:17 -0700 (PDT)
 Received: from ISCN5CG2520RPD.infineon.com (KD106168128197.ppp-bb.dion.ne.jp.
  [106.168.128.197]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-71b264d86bfsm524068b3a.95.2024.09.26.18.11.34
+ d2e1a72fcca58-71b2652a622sm509908b3a.164.2024.09.26.18.18.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Sep 2024 18:11:37 -0700 (PDT)
+ Thu, 26 Sep 2024 18:18:17 -0700 (PDT)
 From: tkuw584924@gmail.com
 X-Google-Original-From: Takahiro.Kuwano@infineon.com
 To: u-boot@lists.denx.de
 Cc: jagan@amarulasolutions.com, vigneshr@ti.com, tudor.ambarus@linaro.org,
  pratyush@kernel.org, tkuw584924@gmail.com, Bacem.Daassi@infineon.com,
  Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
-Subject: [2nd RESEND PATCH v2 3/3] mtd: spi-nor-id: Add S25FS064S, S25FS128S,
- S25FS256S IDs
-Date: Fri, 27 Sep 2024 10:11:19 +0900
-Message-Id: <9abd2c55c818c537283970bb0885a43388a6c918.1727399216.git.Takahiro.Kuwano@infineon.com>
+Subject: [2nd RESEND PATCH v2 0/6] mtd: Make sure UBIFS does not do multi-pass
+ page programming on flashes that don't support it
+Date: Fri, 27 Sep 2024 10:18:05 +0900
+Message-Id: <cover.1727399650.git.Takahiro.Kuwano@infineon.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1727399216.git.Takahiro.Kuwano@infineon.com>
-References: <cover.1727399216.git.Takahiro.Kuwano@infineon.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -97,66 +94,34 @@ X-Virus-Status: Clean
 
 From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
 
-The S25FS064S, S25FS128S, and S25FS256S are the same family of SPI NOR
-Flash devices with S25FS512S. Some difference depending on the device
-densities are taken care in post SFDP fixup.
+Resent after modifying commit message in #5 (mention Linux commit first)
+and collecting A-b tags.
 
-Signed-off-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
-Reviewed-by: Pratyush Yadav <pratyush@kernel.org>
----
- drivers/mtd/spi/spi-nor-core.c | 24 ++++++++++++++++++------
- drivers/mtd/spi/spi-nor-ids.c  |  3 +++
- 2 files changed, 21 insertions(+), 6 deletions(-)
+This series is equivalent to the one for Linux MTD submitted by
+Pratyush Yadav.
 
-diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
-index b633f3092b1..e126fa37c16 100644
---- a/drivers/mtd/spi/spi-nor-core.c
-+++ b/drivers/mtd/spi/spi-nor-core.c
-@@ -3406,12 +3406,24 @@ static int s25fs_s_post_bfpt_fixup(struct spi_nor *nor,
- static void s25fs_s_post_sfdp_fixup(struct spi_nor *nor,
- 				    struct spi_nor_flash_parameter *params)
- {
--	/* READ_1_1_2 is not supported */
--	params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_2;
--	/* READ_1_1_4 is not supported */
--	params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_4;
--	/* PP_1_1_4 is not supported */
--	params->hwcaps.mask &= ~SNOR_HWCAPS_PP_1_1_4;
-+	/*
-+	 * The S25FS064S(8MB) supports 1-1-2 and 1-1-4 commands, but params for
-+	 * read ops in SFDP are wrong. The other density parts do not support
-+	 * 1-1-2 and 1-1-4 commands.
-+	 */
-+	if (params->size == SZ_8M) {
-+		spi_nor_set_read_settings(&params->reads[SNOR_CMD_READ_1_1_2],
-+					  0, 8, SPINOR_OP_READ_1_1_2,
-+					  SNOR_PROTO_1_1_2);
-+		spi_nor_set_read_settings(&params->reads[SNOR_CMD_READ_1_1_4],
-+					  0, 8, SPINOR_OP_READ_1_1_4,
-+					  SNOR_PROTO_1_1_4);
-+	} else {
-+		params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_2;
-+		params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_4;
-+		params->hwcaps.mask &= ~SNOR_HWCAPS_PP_1_1_4;
-+	}
-+
- 	/* Use volatile register to enable quad */
- 	params->quad_enable = s25fs_s_quad_enable;
- }
-diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-index 17e0f84e9ee..9693c179b7e 100644
---- a/drivers/mtd/spi/spi-nor-ids.c
-+++ b/drivers/mtd/spi/spi-nor-ids.c
-@@ -342,6 +342,9 @@ const struct flash_info spi_nor_ids[] = {
- 	{ INFO6("s25fl256s0", 0x010219, 0x4d0080, 256 * 1024, 128, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
- 	{ INFO6("s25fl256s1", 0x010219, 0x4d0180,  64 * 1024, 512, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
- 	{ INFO6("s25fl512s",  0x010220, 0x4d0080, 256 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
-+	{ INFO6("s25fs064s",  0x010217, 0x4d0181,  64 * 1024, 128, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
-+	{ INFO6("s25fs128s",  0x012018, 0x4d0181,  64 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
-+	{ INFO6("s25fs256s",  0x010219, 0x4d0181,  64 * 1024, 512, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
- 	{ INFO6("s25fs512s",  0x010220, 0x4d0081, 256 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
- 	{ INFO("s25fl512s_256k",  0x010220, 0x4d00, 256 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
- 	{ INFO("s25fl512s_64k",  0x010220, 0x4d01, 64 * 1024, 1024, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
+https://patchwork.ozlabs.org/project/linux-mtd/list/?series=217759&state=*
+
+Changes in v2:
+  - Fix an issue in setting macronix_octal_fixups
+  - Rework fixup hooks
+
+Takahiro Kuwano (6):
+  mtd: ubi: Do not zero out EC and VID on ECC-ed NOR flashes
+  mtd: spi-nor: Allow flashes to specify MTD writesize
+  mtd: spi-nor: Check nor->info before setting macronix_octal_fixups
+  mtd: spi-nor: Replace default_init() hook with late_init()
+  mtd: spi-nor: Call spi_nor_post_sfdp_fixups() only after
+    spi_nor_parse_sfdp()
+  mtd: spi-nor: Set ECC unit size to MTD writesize in Infineon SEMPER
+    flashes
+
+ drivers/mtd/spi/spi-nor-core.c | 88 +++++++++++++++++++++-------------
+ drivers/mtd/ubi/build.c        |  4 +-
+ drivers/mtd/ubi/io.c           |  9 +++-
+ include/linux/mtd/spi-nor.h    |  1 +
+ 4 files changed, 65 insertions(+), 37 deletions(-)
+
 -- 
 2.34.1
 
