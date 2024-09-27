@@ -4,78 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F3EACEBF8C
-	for <u-boot@archiver.kernel.org>; Fri, 27 Sep 2024 10:19:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DA8FCEBF8C
+	for <u-boot@archiver.kernel.org>; Fri, 27 Sep 2024 10:26:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F0E88908D;
-	Fri, 27 Sep 2024 12:19:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 78DD088B1C;
+	Fri, 27 Sep 2024 12:26:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kxsTeGHE";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="kS9bHC+a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E4F7C8908D; Fri, 27 Sep 2024 12:19:18 +0200 (CEST)
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [IPv6:2a00:1450:4864:20::22c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 318ED88B2D; Fri, 27 Sep 2024 12:26:12 +0200 (CEST)
+Received: from mail-m3284.qiye.163.com (mail-m3284.qiye.163.com
+ [220.197.32.84])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E6DC884DB
- for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 12:19:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E22FD8898B
+ for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 12:26:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-2f75de9a503so21598841fa.0
- for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 03:19:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1727432355; x=1728037155; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=qCRxrENw+9BLkBTFU1TsbkeG4w/1Gmunbo9GGi6uMBQ=;
- b=kxsTeGHEUo6hBeMGShf3ypTqTgi2XmhOGr869RUrf0n4oFCj0HYgkKzMTOdX0XhvVG
- 7nU32ukQhWjKyKayxHrPKMmfkKasu/Av+PzgoUojQOV0aYLeRBY5oXaLMQIqL2u2qBTp
- nlKupUMRAqYcdT1cOQq6kMZcSo2HWsT/lgXa4HEApXpvvfAOwoT4If9EuLmDYJLuaBY0
- 3bt0ok9yr27PqeRnooPAztcc5US9gzQ4qgKVP7HvJQ5FWfrh+2cvWNYX5CDFc+H1ivRP
- p3ImQcKyF1JLhigYdjuKFn7gOSqWtivPQULrQGKSXRue8WyTseU3FmTPA2+TVv0Li0wm
- mylw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727432355; x=1728037155;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=qCRxrENw+9BLkBTFU1TsbkeG4w/1Gmunbo9GGi6uMBQ=;
- b=cqK9KA8yOydKt2B61SEI6vl3hUTvowi5D91q69swUVaoZZ8tjSRNfC0r8SwWUjIHMa
- DUebvmsNeJPjJI/9pwnyTVygAz7rNTXXoX6QfPfP5ESKbSV0tDC+C+T87azSiiconUu2
- Lp+7PlSS/FYA3LLiHubk7rU0PnTPwWF+YnZCVMC6DKuk5Ydg6RQdUspeknndHUY0E6xu
- /KNfbUUaWAeNFo9JVfCuFPotoT7qSDVoX+LpXvo9YRA+sDG+J+0je7oCV9CWIuaDSHa2
- 6MuRNoHHyEFnkDXc5AQB9UF1i1H5WRCr8zWWAbnVDWoHwD49lbtkRvybA+CDAOAlBIxl
- n69g==
-X-Gm-Message-State: AOJu0YwI5+ZjMW+tMZQCLrQiNQW8HTQPpSIFLyjvn7lOc2rxnsX2inQp
- TX2+nDQ1ogksXOyyVGmWbbvzxFqQLX3HE8hIDZHMZlk6hWEhs7UfUX0A3wIEJ8axSah40DWZz+o
- 4rUpbrUmkooj6T3pvnNLsf5YaEEk=
-X-Google-Smtp-Source: AGHT+IGMVGzLMSwCAoN5fQVwUA2qWjYuRubSkofl+D3Pb+Gvonb3QI42AV1ypxMEruUnexoU8FY2Fgb52X5UTRQvhYI=
-X-Received: by 2002:a2e:be10:0:b0:2f7:5519:710d with SMTP id
- 38308e7fff4ca-2f9d417b05dmr16121321fa.33.1727432354931; Fri, 27 Sep 2024
- 03:19:14 -0700 (PDT)
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=kS9bHC+aI+oe8UlWgAenVqjKx49JdMiGbJi5itgQp7Yf/0NKsK2oEMD1aKSpDnHDU/XdMx5weYS8NM9GHxFc7eTyLRZSvgeg8Tw3De8HNyIcHUQeOZeCmPcGk0Lh4wjJsgyIum+rRRkgfy/g8i2NMsf0Q/GMJlI1QkWu78qLshw=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
+ bh=6ZVg8HJhpIZ2uRp6RGOruewra2Xivx4o6ULnyojl8H0=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.12.67] (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTPA id E6F4A2806E9;
+ Fri, 27 Sep 2024 18:25:56 +0800 (CST)
+Message-ID: <e09da585-a742-4e61-abaf-602aaf1df34d@rock-chips.com>
+Date: Fri, 27 Sep 2024 18:25:56 +0800
 MIME-Version: 1.0
-References: <20240927071844.2738740-1-alice.guo@oss.nxp.com>
-In-Reply-To: <20240927071844.2738740-1-alice.guo@oss.nxp.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 27 Sep 2024 07:19:02 -0300
-Message-ID: <CAOMZO5AczcCNAg2rPJSoc2mrULGtAX4TgCZfD_z-iWFrpn711w@mail.gmail.com>
-Subject: Re: [PATCH v1] gpio: adp5585: Add SPL config for ADP5585 driver
-To: alice.guo@oss.nxp.com
-Cc: u-boot@lists.denx.de, trini@konsulko.com, marek.vasut+renesas@mailbox.org, 
- clamor95@gmail.com, paul.barker.ct@bp.renesas.com, michal.simek@amd.com, 
- andre.przywara@arm.com, ye.li@nxp.com, jim.t90615@gmail.com, 
- billy_tsai@aspeedtech.com, kabel@kernel.org, caleb.connolly@linaro.org, 
- biju.das.jz@bp.renesas.com, sr@denx.de, piotr.wojtaszczyk@timesys.com, 
- Peng Fan <peng.fan@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] rockchip: rk3399: Weaken dependency on SPL serial
+To: Daniel Semkowicz <dse@thaumatec.com>, u-boot@lists.denx.de
+Cc: Dragan Simic <dsimic@manjaro.org>, Jonas Karlman <jonas@kwiboo.se>,
+ Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+References: <20240920090613.76154-1-dse@thaumatec.com>
+Content-Language: en-US
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <20240920090613.76154-1-dse@thaumatec.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ0IdGFZOGRhOGExPHRoeHU5WFRQJFh
+ oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
+ hVSktLVUpCS0tZBg++
+X-HM-Tid: 0a923304109209d3kunme6f4a2806e9
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PBg6Ehw6DDIaFDUpH006Ay8K
+ CkgKCyNVSlVKTElMT0hJTE5MQ01JVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJTkJNNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,15 +76,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alice,
 
-On Fri, Sep 27, 2024 at 4:37=E2=80=AFAM <alice.guo@oss.nxp.com> wrote:
+On 2024/9/20 17:06, Daniel Semkowicz wrote:
+> Allow to disable serial console in SPL. Weak dependency is already used
+> with TPL serial.
 >
-> From: Ye Li <ye.li@nxp.com>
->
-> So we can disable to build ADP5585 in SPL to save size
->
-> Signed-off-by: Ye Li <ye.li@nxp.com>
-> Reviewed-by: Peng Fan <peng.fan@nxp.com>
+> Signed-off-by: Daniel Semkowicz <dse@thaumatec.com>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
-You missed your Signed-off-by here.
+Thanks,
+- Kever
+> ---
+>
+>   arch/arm/mach-rockchip/Kconfig | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
+> index fc1b638ff01..269c219a6f8 100644
+> --- a/arch/arm/mach-rockchip/Kconfig
+> +++ b/arch/arm/mach-rockchip/Kconfig
+> @@ -257,7 +257,6 @@ config ROCKCHIP_RK3399
+>   	select SPL_SYSCON if SPL
+>   	select TPL_NEEDS_SEPARATE_STACK if TPL
+>   	select SPL_SEPARATE_BSS
+> -	select SPL_SERIAL
+>   	select CLK
+>   	select FIT
+>   	select PINCTRL
+> @@ -288,6 +287,7 @@ config ROCKCHIP_RK3399
+>   	imply SPL_DM_SEQ_ALIAS
+>   	imply SPL_FIT_SIGNATURE
+>   	imply SPL_ROCKCHIP_COMMON_BOARD
+> +	imply SPL_SERIAL
+>   	imply SYS_BOOTCOUNT_SINGLEWORD if BOOTCOUNT_LIMIT
+>   	imply TPL_CLK
+>   	imply TPL_DM
