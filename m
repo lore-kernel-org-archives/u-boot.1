@@ -4,85 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11ED6CEBF9C
-	for <u-boot@archiver.kernel.org>; Fri, 27 Sep 2024 12:35:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87B4ECEBF9C
+	for <u-boot@archiver.kernel.org>; Fri, 27 Sep 2024 12:35:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8CDBA89105;
-	Fri, 27 Sep 2024 14:35:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 02F5189111;
+	Fri, 27 Sep 2024 14:35:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AyrOFzxq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Qfoz+EE8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4EDAA89108; Fri, 27 Sep 2024 14:35:21 +0200 (CEST)
-Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
- [IPv6:2607:f8b0:4864:20::f30])
+ id 2227089111; Fri, 27 Sep 2024 14:35:56 +0200 (CEST)
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92AA3890C6
- for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 14:35:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AAEF08910E
+ for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 14:35:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf30.google.com with SMTP id
- 6a1803df08f44-6cb259e2eafso17783386d6.0
- for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 05:35:18 -0700 (PDT)
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-6cb2aac40faso20557186d6.1
+ for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 05:35:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727440517; x=1728045317; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=orJbm0lbQH/JTNDLT0DC7HmSfcdOMKQpeSLkiLYnnC8=;
- b=AyrOFzxqrvpkiZkLg8gGFIciAzQYZeU3Rhb9d/PgsAUap1uPvwK2psl4/uSZIBDn5t
- h4sWBZ3Tovc6mCsQF84VneF7/0GzbkHOMuaqqi7bzpS8/tVmzOM2dqxbZYue9wGZHFvx
- HtGwVJ0UMJZcD2ip7JeCBqh+76y6LVUmY+9G4=
+ d=chromium.org; s=google; t=1727440552; x=1728045352; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=jtzuIVFvT3uGmggyQb/t53UY2UE8BdoB8Sphj4z9fDc=;
+ b=Qfoz+EE8BVN14/MXWBbxKuRIvSdDhmuZPU3l8heVGhv9jiYL5dfVfhQ1XdQD8+yMWN
+ oNYjLy6Lh+o6oH0AD/psM3TQ31EgjEiGoSozMNOc8at1hs34ZastxXah0QM7pI0U8gvI
+ G/NdVhqd0RzTMVwbv5ImLgXmadD3p8Tct+1WI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727440517; x=1728045317;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=orJbm0lbQH/JTNDLT0DC7HmSfcdOMKQpeSLkiLYnnC8=;
- b=Uj1Zs94iba5DVYM+sDNPjtk6zmv8U4aej5wMrfHmn+8Fj4sBBAebeadEdRo/KlGdy9
- 2TSZ3W+cdl9qeQhHu5nJM1gMLx3dt0Za4JoLUx0w3MOx//mr2TgKiwXJ3x+AVBv7KXfj
- UuuFe4xw3M8hD7Zlt1MpYnthoW+isWFSFJ5U87yt8lqdi9+Qe3BHAZk+xjUNBiPSR+Xz
- vjw7kVCqlUZH7BbkNaWttk7kAeX7LwS0+2cbwJz8GfJV3qBJrQPJnenH1Wv6X3l1yv/l
- 1SvsYHb80k5eibLjhOAmLeXJM7QBgCY6Q8bJPXgue9wxJYp0lQln0Z3eGAmG/uGy5ZHW
- wXKw==
+ d=1e100.net; s=20230601; t=1727440552; x=1728045352;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=jtzuIVFvT3uGmggyQb/t53UY2UE8BdoB8Sphj4z9fDc=;
+ b=W2MB0Gn1wHNnh7bJAqw+S+fIwvTvmzCvwc6iADGJy+2U89maCVIOgakOmRi8q4x5ej
+ dEkM0FG2PR2CUn9qVbe9PFuWOS/QIPDxgJs9w9rwZJafPd5gmvcJ/rAtKOJ+euo0y9C0
+ EYfTIyeOMIt1d2Pa4Co4RsQXeCWuVSmTpCBrERjCbWykVxoepniAznwFMoZO10uDpSSM
+ srNeJeR2uhHXU2PQq1a2nWewhMSS1M0+m1zkFI1f8inkVseQn5jG2I0bZGY095BNGN3/
+ MfP2k0QpNqd4ed3RGCB4y5NM/e5E2GUMlPbrBEEzpr1X/xEJGYzSkUJJFMHvtbxlCiLf
+ r4BA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUem/F6Y3e6m38RDTuvKSo4gjz5gxcesfXuh6N/wKI3wxbs9iX61o8sB325VPtIfxPfW1UG8IQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YyvZvZgEo1anjujUobrgU6zkF/Ow8XEVe6GXihNMyeQ+P57VEOX
- ZXLUHfX54namPEbBZxRCpc+W0RZ81NaIF4wt1tbEYqyRkdY267cgmOZHPVchyQhRcRrKoaN9+tX
- b+jR1ERkrlOcaAPfnyoz4eKM7OL++bvluNvZNWzrSBEnUlupdN9DP
-X-Google-Smtp-Source: AGHT+IE+r3CkIDrbxjgOOpHSEQ3BxAtOSWHZafMAcVvx3tGuKoNhApD9raMcH5WIZlIvM6WxLvdKPC6Rd5GYbxno5WA=
-X-Received: by 2002:a05:6214:489:b0:6cb:2de5:d7a1 with SMTP id
- 6a1803df08f44-6cb2f270becmr119908336d6.8.1727440517324; Fri, 27 Sep 2024
- 05:35:17 -0700 (PDT)
+ AJvYcCUL1PmNYfdqHAHYeljPRz7ueG2omKB9zs1t9Q+fDjxNwDusqY3XpEy2ax8w2Iz4V4R/eEWttP4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz++bRWlV4qPkhwu3Vk+TEg+WSGiofrlJDDNH9VtCQRpFI0v29B
+ NusYt6pXG1PO7qGwpWx0MwJjHsmQ3UkdyKsvHGWjMTWi2O6a8MeMuJ0vchX/hvOnKg3TLU0goBS
+ JByF8mO2Vo2Aw1jt/L0wixf1/CGuP5Y0Jhmnc
+X-Google-Smtp-Source: AGHT+IH8xsRrGopw13+JMBXW5Q5uGUtN9bxMwptjntOY2phAJF0jl5HZ381tOq0R2dWtZOmc0PlJyRbCp7Wj/29Ysp8=
+X-Received: by 2002:a05:6214:2b8b:b0:6c3:6799:dde3 with SMTP id
+ 6a1803df08f44-6cb3b43ab1cmr46697456d6.23.1727440552366; Fri, 27 Sep 2024
+ 05:35:52 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240918152136.3395170-1-patrick.rudolph@9elements.com>
- <20240918152136.3395170-15-patrick.rudolph@9elements.com>
- <CAFLszTimAFGocvqbnT=JVsA2bjNa=ZfxP6Sy46a9e6VkhtdojQ@mail.gmail.com>
- <CAC_iWjLASm6U8kC68MJ0uZ14MGFS_SSL3Pcd8hcEH=a=W8gvBQ@mail.gmail.com>
- <CAFLszTgYHO7FgbCgfRwqT_yj4KBm31xKdEUrn0pZkhtLzOh=HQ@mail.gmail.com>
- <CAC_iWjKv+Z4K5xPW6MZhBZ67-rDy9iRVaoqfLKmJRwSG9nKnfA@mail.gmail.com>
- <CAFLszThA5eOM_xiMgDu=B4wAcP7wV9bzfc565rES8z6d1F8fjg@mail.gmail.com>
- <CAC_iWjLqmN0uA85RayC2hnMOJfCqumCpiq=waQwakd6ECfbXkg@mail.gmail.com>
- <CAFLszTgaVdgPNSC+vxZoH7ko5n_d6F_QnGfgL-biZ19edaUxQQ@mail.gmail.com>
- <CALNFmy3-0u=RhhiPgCzj2szzhaADXrWm79jkD1p3pmpmto456g@mail.gmail.com>
- <CAFLszThqaF9oSxEW5ZYw9udqtC+8n3BhQj313qUvRvrQV=OwWw@mail.gmail.com>
- <CAC_iWjKPrUu+j5dJNbQWZB+J7OUa1X01e_d8cN=YSrO_86cOhA@mail.gmail.com>
- <CAFLszTjoZuF6x38j_PyQdO9W_zzyQY+DPrXKm8J2pM-T_GYsgA@mail.gmail.com>
- <CAC_iWjLR7ndQAPOhe+Z-11F-nFXBGpPUOZB=Mmwt36CzJtvD0g@mail.gmail.com>
-In-Reply-To: <CAC_iWjLR7ndQAPOhe+Z-11F-nFXBGpPUOZB=Mmwt36CzJtvD0g@mail.gmail.com>
+References: <20240905082811.1585467-1-sughosh.ganu@linaro.org>
+ <20240905082811.1585467-5-sughosh.ganu@linaro.org>
+ <0291efc6-86a2-437c-938a-707c46c34f91@gmx.de>
+ <CADg8p94TakJXkLs=m6RbvO2T_OmYagf68e4JV655TtQ5DnxtZg@mail.gmail.com>
+ <CAC_iWjKFh+g1k=HHKeApJp8OO5G78p0kruz59UUX-yfZcynJyg@mail.gmail.com>
+ <CADg8p96-kG4jEd5d_7ah3s2kOzgW4_uvDOJL+wOSzdrDjoMqZg@mail.gmail.com>
+ <CAFLszTjD5vLpcu7+_9xuzynLMjim3oPpg2wewug3-6nMs2CHug@mail.gmail.com>
+ <CADg8p94_8znKCR=97kCj-ypMdqW59k7PbC42G-xGFr7t9+t9XQ@mail.gmail.com>
+ <CAFLszTg2TvZp37HTjVwnYAw9cgX1-mfipkaw7frEL4cwJbzF4w@mail.gmail.com>
+ <CADg8p95eA-qMFtiypaTOyfAkVwdKWWD2yMa+HZyewWfR_vS2kw@mail.gmail.com>
+ <CAFLszThCXoHkOM5cOGmbrQvVnTARNUsZyN=NH_+JBi-pB=XK6g@mail.gmail.com>
+ <CADg8p9441xGZ9qBzojvxjLaEBy7abKo1RGxC_5VkuKwLO_N3mw@mail.gmail.com>
+In-Reply-To: <CADg8p9441xGZ9qBzojvxjLaEBy7abKo1RGxC_5VkuKwLO_N3mw@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 27 Sep 2024 06:35:06 -0600
-Message-ID: <CAFLszThcqgvAf0DDKhOXnKAdQ21r-PLDppTM=CASbaaONTei4g@mail.gmail.com>
-Subject: Re: [PATCH v4 14/35] efi_loader: Allocate and write ACPI tables
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Patrick Rudolph <patrick.rudolph@9elements.com>, u-boot@lists.denx.de, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
+Date: Fri, 27 Sep 2024 06:35:41 -0600
+Message-ID: <CAFLszThBRkftMB+HebGvVi0gSk=ErkG+rsJ7piaT3U=Zm_OQRA@mail.gmail.com>
+Subject: Re: [PATCH 04/16] event: add event to notify lmb memory map changes
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,315 +97,198 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi Sughosh,
 
-On Fri, 27 Sept 2024 at 05:30, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+On Fri, 27 Sept 2024 at 05:01, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> On Fri, 27 Sept 2024 at 13:53, Simon Glass <sjg@chromium.org> wrote:
+> On Fri, 27 Sept 2024 at 16:12, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > Hi Ilias,
+> > Hi Sughosh,
 > >
-> > On Thu, 26 Sept 2024 at 13:18, Ilias Apalodimas
-> > <ilias.apalodimas@linaro.org> wrote:
+> > On Thu, 26 Sept 2024 at 14:29, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > > >
-> > > On Thu, 26 Sept 2024 at 14:04, Simon Glass <sjg@chromium.org> wrote:
+> > > On Thu, 26 Sept 2024 at 16:38, Simon Glass <sjg@chromium.org> wrote:
 > > > >
-> > > > Hi Patrick,
+> > > > Hi Sughosh,
 > > > >
-> > > > On Thu, 26 Sept 2024 at 10:01, Patrick Rudolph
-> > > > <patrick.rudolph@9elements.com> wrote:
+> > > > On Thu, 26 Sept 2024 at 09:12, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > > > > >
-> > > > > Hi Simon,
-> > > > > On Fri, Sep 20, 2024 at 6:01=E2=80=AFPM Simon Glass <sjg@chromium=
-.org> wrote:
+> > > > > On Wed, 25 Sept 2024 at 18:23, Simon Glass <sjg@chromium.org> wrote:
 > > > > > >
-> > > > > > Hi Ilias,
+> > > > > > Hi Sughosh,
 > > > > > >
-> > > > > > On Fri, 20 Sept 2024 at 08:36, Ilias Apalodimas
-> > > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > > On Fri, 20 Sept 2024 at 13:38, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > > > > > > >
-> > > > > > > Hi Simon,
+> > > > > > > On Fri, 20 Sept 2024 at 14:51, Ilias Apalodimas
+> > > > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > > > >
+> > > > > > > > Hi Sughosh,
+> > > > > > > >
+> > > > > > > > On Tue, 17 Sept 2024 at 15:33, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > > > > > > > >
+> > > > > > > > > On Sat, 14 Sept 2024 at 20:38, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> > > > > > > > > >
+> > > > > > > > > > On 9/5/24 10:27, Sughosh Ganu wrote:
+> > > > > > > > > > > Add an event which would be used for notifying changes in the
+> > > > > > > > > > > LMB modules' memory map. This is to be used for having a
+> > > > > > > > > > > synchronous view of the memory that is currently in use, and that is
+> > > > > > > > > > > available for allocations.
+> > > > > > > > > >
+> > > > > > > > > > The synchronous view problem only exists because we are duplicating
+> > > > > > > > > > data. Store the EFI memory type in LMB and the problem vanishes.
+> > > > > > > > >
+> > > > > > > > > The LMB module only concerns itself with RAM memory. If I understand
+> > > > > > > > > correctly, you are proposing maintaining the EFI memory map within the
+> > > > > > > > > LMB module ? That would mean handling memory types other than
+> > > > > > > > > conventional memory in LMB.
+> > > > > > > >
+> > > > > > > > I am pretty sure I've asked this before, but do these *always* need to
+> > > > > > > > be in sync?
+> > > > > > > >
+> > > > > > > > The efi allocators will call LMB now. So when we allocate something
+> > > > > > > > gtom EFI, even if any potential changes from LMB haven't been
+> > > > > > > > published to EFI, we won't have any memory corruptions. Can't we just
+> > > > > > > > opportunistically update the memory map once someone requests it?
 > > > > > > >
-> > > > > > > On Thu, 19 Sept 2024 at 18:36, Simon Glass <sjg@chromium.org>=
- wrote:
-> > > > > > > >
-> > > > > > > > Hi Ilias,
-> > > > > > > >
-> > > > > > > > On Thu, 19 Sept 2024 at 17:20, Ilias Apalodimas
-> > > > > > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > > > > > >
-> > > > > > > > > Hi Simon,
-> > > > > > > > >
-> > > > > > > > > On Thu, 19 Sept 2024 at 18:00, Simon Glass <sjg@chromium.=
-org> wrote:
-> > > > > > > > > >
-> > > > > > > > > > Hi Ilias,
-> > > > > > > > > >
-> > > > > > > > >
-> > > > > > > > > [...]
-> > > > > > > > >
-> > > > > > > > > > > > > +
-> > > > > > > > > > > > > +               if (!addr)
-> > > > > > > > > > > > > +                       return log_msg_ret("mem",=
- -ENOMEM);
-> > > > > > > > > > > > > +       } else {
-> > > > > > > > > > > > > +               pages =3D efi_size_in_pages(TABLE=
-_SIZE);
-> > > > > > > > > > > > > +
-> > > > > > > > > > > > > +               ret =3D efi_allocate_pages(EFI_AL=
-LOCATE_ANY_PAGES,
-> > > > > > > > > > > > > +                                        EFI_ACPI=
-_RECLAIM_MEMORY,
-> > > > > > > > > > > > > +                                        pages, &=
-new_acpi_addr);
-> > > > > > > > > > > > > +               if (ret !=3D EFI_SUCCESS)
-> > > > > > > > > > > > > +                       return log_msg_ret("mem",=
- -ENOMEM);
-> > > > > > > > > > > > > +
-> > > > > > > > > > > > > +               addr =3D (void *)(uintptr_t)new_a=
-cpi_addr;
-> > > > > > > > > > > > > +       }
-> > > > > > > > > > > > > +
-> > > > > > > > > > > >
-> > > > > > > > > > > > The tables should be written regardless of whether =
-EFI_LOADER is enabled.
-> > > > > > > > > > >
-> > > > > > > > > > > *Why*? How do you expect to hand them over to the OS?
-> > > > > > > > > >
-> > > > > > > > > > Why - because boards which need ACPI tables to boot sho=
-uld generate
-> > > > > > > > > > them;
-> > > > > > > > >
-> > > > > > > > > Noone argued that.
-> > > > > > > > >
-> > > > > > > > > > also this happens when U-Boot starts up, in last_stage_=
-init()
-> > > > > > > > > > How - it isn't possible, but eventually I suppose it wi=
-ll be, once we
-> > > > > > > > > > have a use case for booting with ACPI but without EFI
-> > > > > > > > >
-> > > > > > > > > Are you aware of such an OS? If not, we can accept the pa=
-tches when we
-> > > > > > > > > have a reason.
-> > > > > > > >
-> > > > > > > > Which patches? This is how it works today. We set up the ta=
-bles in
-> > > > > > > > last_stage_init(), so they can be examined while in U-Boot.
-> > > > > > >
-> > > > > > > What I mean, is that until we have a valid use case to store =
-the ACPI
-> > > > > > > in a bloblist, I prefer them being allocated with proper EFI =
-memory
-> > > > > > > backing
+> > > > > > > I have given this a thought. Because what you mention, Simon has a
+> > > > > > > similar comment. But to achieve this, it would require generating a
+> > > > > > > new efi memory map afresh every time such a requirement comes up. This
+> > > > > > > would mean, create a new memory map, put in the conventional memory,
+> > > > > > > and add other memory types that were part of the existing memory map.
+> > > > > > > And then remove the older memory map. This would need to be done every
+> > > > > > > time a memory map is needed to be generated. And that would also
+> > > > > > > include instances when a user enters a command to get the current
+> > > > > > > memory map. I think notifying any changes to the lmb memory map to the
+> > > > > > > efi memory module is easier, and less error prone.
 > > > > > >
-> > > > > > I'm going to assert prior art here. If ARM is to have ACPI in U=
--Boot,
-> > > > > > it should follow the most recent x86 approach and store it in t=
-he
-> > > > > > bloblist. That is what the blloblist is for. It also avoids usi=
-ng
-> > > > > > memory below the U-Boot area, which is not allowed.
-> > > > > >
-> > > > > > >
-> > > > > > > >
-> > > > > > > > It is the patches to change this which I object to.
-> > > > > > > >
-> > > > > > > > > I remember patches being hard NAK'ed on using DTs to pass=
- the ACPI
-> > > > > > > > > table address in the past.
-> > > > > > > >
-> > > > > > > > Yes, I believe Bytedance carries a patch locally for that :=
--)
-> > > > > > >
-> > > > > > > Exactly
-> > > > > > >
-> > > > > > > >
-> > > > > > > > >
-> > > > > > > > > >
-> > > > > > > > > > >
-> > > > > > > > > > > >
-> > > > > > > > > > > > Can we drop this else clause? We should always use =
-the bloblist.
-> > > > > > > > > > >
-> > > > > > > > > > > Both Heinrich and I said the exact opposite. Unless t=
-here's a
-> > > > > > > > > > > perfectly good reason why we should keep them in blob=
-list memory, I'd
-> > > > > > > > > > > like us to do that
-> > > > > > > > > >
-> > > > > > > > > > The main reason is that we should not be putting things=
- in memory
-> > > > > > > > > > between the start of RAM and the bottom of the U-Boot a=
-rea. That
-> > > > > > > > > > region of memory is supposed to be for loading images. =
-Most boards
-> > > > > > > > > > hard-code the image-load addresses in environment varia=
-bles. But even
-> > > > > > > > > > if they didn't, we should not be using that memory for =
-U-Boot data.
-> > > > > > > > >
-> > > > > > > > > EFI allows you to request a specific address to use. We c=
-an choose one
-> > > > > > > > > that fits the requirements
-> > > > > > > >
-> > > > > > > > So long as it is in U-Boot's space, that is fine. I just se=
-nt a patch
-> > > > > > > > about relocation which covers this. It occured to me that t=
-his feature
-> > > > > > > > of U-Boot, which I have always assumed was common knowledge=
-, may have
-> > > > > > > > not been noticed.
-> > > > > > > >
-> > > > > > > > > >
-> > > > > > > > > > Another reason is that the bloblist is designed for thi=
-s, for keeping
-> > > > > > > > > > tables in a small, contiguous area of memory, so that w=
-hen passed to
-> > > > > > > > > > Linux they are not spread all over the place.
-> > > > > > > > >
-> > > > > > > > > Linux does not and will not read tables from a bloblist t=
-hough
-> > > > > > > >
-> > > > > > > > Indeed. There really isn't any point, anyway, since there a=
-re other
-> > > > > > > > ways of passing the tables along...except for ACPI with FDT=
- but that
-> > > > > > > > isn't a valid use case for Linux so far.
-> > > > > > >
-> > > > > > > What we are trying to do with EFI is to stay as close to the =
-spec and
-> > > > > > > the current OS implementations as possible. So again, please =
-allocate
-> > > > > > > EFI memory for the ACPI tables. The patches to convert it to =
-bloblist
-> > > > > > > allocating them are minimal, so we can do it, once there's an=
- actuall
-> > > > > > > need for it.
-> > > > > >
-> > > > > > As it stands today, efi_acpi_register() does not do an EFI allo=
-cation,
-> > > > > > it just adds the existing allocation to the EFI tables. This wo=
-rks
-> > > > > > fine for x86 - see arch/x86/lib/tables.c - so I would like ARM =
-to do
-> > > > > > the same. The need for it is (as above) that we should ensure t=
-hat
-> > > > > > memory usage is within the U-Boot area. This is something which
-> > > > > > bloblist handles automatically. It is also nice to see all the =
-tables
-> > > > > > in one place with 'bloblist list'
-> > > > > >
+> > > > > > We need to get some agreement on my memory-allocation patches first. I
+> > > > > > don't believe we are on the same page on those, despite some weeks of
+> > > > > > discussion. We need to resolve that issue first. I did try right from
+> > > > > > the start to first agree on the problem to be solved. We skipped that,
+> > > > > > so now we are having to do it now...
 > > > > >
-> > > > > So what's the consent and the next step here?
-> > > > > Is the current code OK as is, as it works with both BLOBLIST and =
-without?
-> > > > > Should I drop support for one or the other?
+> > > > > These patches are currently under review. But fwiw, I think you are
+> > > > > aware that these patches are not related to what your patch series is
+> > > > > attempting. Your patches are related to the efi_allocate_pool()
+> > > > > function, whereas this series is trying to use LMB as the backend for
+> > > > > allocating pages, as requested from efi_allocate_pages(). So these are
+> > > > > not related. But like I said, you are aware of these details :)
 > > > >
-> > > > Just BLOBLIST. The EFI allocation is done using efi_acpi.c which yo=
-u
-> > > > can check to make sure it is working.
-> > > >
-> > > > Using efi_allocate_pages() before the app starts is not good.
+> > > > The thing is, if we actually tidy up the EFI allocations then there
+> > > > will be no use of allocate-pages before the app starts. So we won't
+> > > > need to 'sync' the two different sets of memory tables. There will
+> > > > just be one.
+> >
+> > The issue is, again, that we never actually identified the problem to
+> > be solved at the beginning. So we are suffering somewhat now from a
+> > lack of clarity. But in any case, let me try to respond to the points
+> > you raise.
+> >
 > > >
-> > > Simon, please stop trying to enforce decisions on subsystems you don'=
-t
-> > > maintain. I am pretty sure both Heinrich and I said no to this.
+> > > How do we get rid of using efi_allocate_pages() in U-Boot ? This
+> > > function is used, among other things, to allocate memory used for
+> > > loading images to memory. This can be a significant amount of memory.
+> > > Are you proposing using malloc() even for loading EFI images ?
 > >
-> > I am the ACPI maintainer, and x86 maintainer long before ACPI came in
-> > for ARM (which I originally hacked together, as you know). I also
-> > wrote bloblist, including the header file which says:
+> > We actually don't use efi_allocate_pages() to load things into memory,
+> > or at least I hope we don't. We should be using lmb. No, we cannot use
+> > malloc() for loading images as the region is quite small on many
+> > boards. Heinrich mentioned it can be as small as 1-2MB on some. Also,
+> > it isn't really what malloc() is designed for.
 >
-> That's not the EFI subsystem though. And last time I checked where the
-> ACPI tables are allocated makes no difference as long as they are
-> installed on a config table.
-
-With my maintainer hat on, ACPI tables go in a bloblist.
-
-The difference it makes is that the tables end up in the U-Boot memory-area=
-.
-
->
-> >
-> >  * 6. Bloblist is designed to be passed to Linux as reserved memory.
-> > While linux
-> >  * doesn't understand the bloblist header, it can be passed the indivdu=
-al blobs.
->
-> And as I already said, *when* bloblist is consumed by any OS and you
-> have a valid use case other than "I can do bloblist list and I like
-> it", you can change 3 lines of code and allocate the ACPI table there.
-
-Bloblist is not intended to be consumed by an OS. It is a firmware
-construct, a way for U-Boot to arrange things in such a way that they
-can be located and updated at runtime. What objection do you actually
-have to using bloblist for tables?
-
->
-> >  * For example, ACPI tables can reside in a blob and the address of tho=
-se is
-> >  * passed to Linux, without Linux ever being away of the existence of a
-> >  * bloblist. Having all the blobs contiguous in memory simplifies the
-> >  * reserved-memory space.
->
-> No, it doesn't because all of the other tables are currently allocated
-> by the EFI subsystem. So it actually fragments it. Apart from that You
-> dont really know what the OS is going to do with that memory. It
-> depends on the EFI memory type and OS decisions.
-
-The ACPI table is not allocated by the EFI subsystem. Neither is
-SMBIOS, which currently uses malloc() but should move into a bloblist
-too. The system table is in U-Boot's data region. Much of EFI's data
-and all the driver model stuff is in the malloc() region.
-
+> So you are proposing using lmb for loading images. And that is
+> precisely what this series is doing -- changing the
+> efi_allocate_pages() function so that it calls the lmb API's to get
+> the memory. So then I wonder why are we not on the same page ? Yes, I
+> understand that you have a differing view when it comes to
+> efi_allocate_pool(), but the changes to the efi_allocate_pages() done
+> in this series are exactly what you refer to above.
 >
 > >
-> > This decision has serious impacts on memory management in U-Boot. It
-> > also bears on the complexity of memory, how bootstd works, board
-> > scripts and the like. We should discuss this and figure out a path
-> > forward.
+> > >
+> > > Moreover, the syncing of the memory maps is currently needed primarily
+> > > as we support printing the EFI memory map through a command. And I
+> > > mentioned in one of my earlier replies that not syncing the changes in
+> > > the LMB memory map with the EFI module would mean that the EFI memory
+> > > map would have to be generated afresh whenever there is a need for the
+> > > EFI memory map -- this would be either when requested from an EFI app,
+> > > or when a user asks through a command. Re-generating the EFI memory
+> > > map is not a trivial task, and syncing the changes in the LMB map as
+> > > and when they happen is much easier.
+> >
+> > Yes I have seen you make this point and I am sorry I didn't reply
+> > directly. The thing is, we don't care about the EFI memory until we
+> > boot the app. After all, it is only the app that actually needs it.
+> >
+> > I see that 'efi_init_obj_list()' is called by the efidebug command, so
+> > yes, it should show the memory map.
+> >
+> > But in my view of the world the memory map (before an app boots and
+> > does what it likes in terms of allocations, etc.) consists solely of:
+> >
+> > 1. U-Boot's memory (malloc() space, code, bloblist, stack,
+> > arch-specific stuff, etc.)
+> > 2. Images that were loaded (which are in lmb)
+> >
+> > Since we need to handle (1) by manually adding records to the EFI map,
+> > it isn't a big stretch to handle (2) with a for-loop through the lmb
+> > records.
+> >
+> >
+> > > > If I were confident that we could apply your series and then clean it
+> > > > up later, I would be fine with it. But given that my two series have
+> > > > sat here for a considerable period of time and are still not really
+> > > > making progress, I lack confidence.
 >
-> It has close to zero impact because *all* of the EFI memory lives in
-> top memory. So apart from the EFI_BOUNCE_BUFFER perhaps,  I don't see
-> why the impact is """serious""".
-> EFI allocates memory which does not affect U-Boot of file loading
-> apart from the max size allowed. Now with LMB it is marked as
-> reserved. So why is this any different from any other LMB reservation?
-> It's memory used by someone that you aren't allowed to use, just like
-> we reserve U-Boot memory. If there's a bug in reservations, by all
-> means, let's fix it.
+> So the difference here is, unlike the way the LMB memory map gets
+> stored and shown, i.e. a separate entry for the total available
+> memory, and then a separate list of currently allocated entries, the
+> EFI memory map storage is designed in a different way. The
+> conventional memory, which is the DRAM memory gets added first, and
+> that is then followed by carving out the different memory regions
+> which are being used, e.g. the U-Boot's memory, and other memory
+> regions that have been requested. So if you try out the 'efidebug
+> memmap' command, you will see a single list of memory regions, which
+> includes the conventional memory, and other reserved memory regions.
+> Although I did not come up with this design, I suspect that it is the
+> way it is because the EFI memory map is not dealing only with
+> DRAM/conventional memory, but other possible memory regions as well.
+>
+> What this means is that syncing the EFI memory map in the manner that
+> you propose would mean that the entire EFI memory map would have to be
+> re-generated, as the carve-out's (reserved memory regions) might have
+> changed. Please also note that, apart from the added complexity, we
+> are also going to be worse off from the size impact point-of-view.
+> Especially if we consider Ilias's review comment of doing away with
+> the event framework, and directly calling the efi_add_memory_map_pg()
+> directly.
 
-I think you are saying that because only a small amount of memory is
-affected it doesn't matter much. Well, I suppose so. But if it doesn't
-matter, why is Sughosh spending all this time solving the problem?
-Also with [1] I definitely saw it allocating stuff where it should
-not. If it has so little impact, why are we still discussing it? Also,
-my efforts seem to have uncovered latent bugs, where EFI tests fail if
-there is not a large margin after each allocation. That should be
-cause for concern. We would not put up with that elsewhere in U-Boot.
+Look, I certainly understand your frustration and I share it.
 
-I am not trying to mess with EFI in U-Boot, if that is what you are
-worried about. Actually I haven't been paying it enough attention as
-it is in good hands...but I need to put more time into it. As a
-subsystem it is here for the long haul and it needs to interoperate
-properly. I was at a conference last week where there was a talk about
-U-Boot as an EFI app with a pass-through (i.e. not calling
-exit-boot-services) to Linux's EFI stub. There is a lot of activity in
-this area. EFI is an important piece of technology in the industry.
-But this is U-Boot, and we just need to design things properly. I have
-quietly commented on some of my concerns (e.g. efi_set_bootdev()) but
-have not put time into fixing them.
+I would like to see progress on the series i sent, which moves pool
+allocations to use malloc(). I would also like to see the EFI test
+applied, which has been held up for a long time (perhaps the latest
+version will be OK) I did discuss this with Tom and was OK with your
+first series on the basis that we can figure out the next step after
+that. But I never believed that the problem to be solved was that lmb
+and EFI were not deeply integrated and I was expecting to have made
+some progress on the malloc() issue by now.
 
-There is no need for the 6-8 tidy allocations, which are done before
-the app starts, to be allocated in the wrong place, with a small
-impact. We can just do it in malloc(). Let's just fix it.
+I should also point out that no one else dug into this to understand
+what was really going on (that EFI was allocating stuff where it
+shouldn't, i.e. in space that is supposed to be used by lmb). I had an
+inkling of it but had never spent the time to really understand it.
 
-There is no need for the tables to be allocated in an EFI-specific
-way, or using lmb. We have bloblist for that purpose. What's the
-concern?
+My current view on EFI memory is that, just before launching the app
+(or firmware update, or whatever), we should be able to call
+efi_memory_init(), which adds the known memory, the U-Boot regions and
+the images it knows about. Only the last piece is missing today. As to
+that, we need to clean up the EFI hack and maintain a list of images
+and which device they came from, so that the EFI loader can find that
+out. It isn't just about lmb.
+
+So I hope you can understand that, coming from that point of view, all
+this stuff about keeping things in sync doesn't seem right.
 
 Regards,
 Simon
-
-[1] https://patchwork.ozlabs.org/project/uboot/patch/20240725135629.3505072=
--7-sjg@chromium.org/
