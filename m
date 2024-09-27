@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE9E3CEBF66
-	for <u-boot@archiver.kernel.org>; Fri, 27 Sep 2024 01:18:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB033CEBF66
+	for <u-boot@archiver.kernel.org>; Fri, 27 Sep 2024 01:18:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50A7088F9B;
-	Fri, 27 Sep 2024 03:18:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ACE9588FF8;
+	Fri, 27 Sep 2024 03:18:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Znt4+b53";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Kv2rjHBT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4C8988F89; Fri, 27 Sep 2024 03:18:21 +0200 (CEST)
-Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
- [IPv6:2607:f8b0:4864:20::530])
+ id C0D8988FF8; Fri, 27 Sep 2024 03:18:24 +0200 (CEST)
+Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
+ [IPv6:2607:f8b0:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5FA0D88FC8
- for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 03:18:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 95FAE88E39
+ for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 03:18:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tkuw584924@gmail.com
-Received: by mail-pg1-x530.google.com with SMTP id
- 41be03b00d2f7-7db4c1a54easo978341a12.1
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 18:18:19 -0700 (PDT)
+Received: by mail-pf1-x431.google.com with SMTP id
+ d2e1a72fcca58-7179802b8fcso1247885b3a.1
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 18:18:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1727399898; x=1728004698; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=nxpTGr9UaKaTuM4jpRJ+VnqgtuShAUJ9hhEXAKHxwqQ=;
- b=Znt4+b53vOLnZ2GSeXCwQAJOVcvmI2Qr2AA5M/dp+uZPu0eGwhkN7AOxYfmPSJzPRt
- NoR/jX2xSl6hapzkh5QWw+CXifBHbCKjd0Wh679l57EChRcteM2zVYsFgmB0PZxzDL7c
- rwl9aIRwPxqeJ/7v3ROh+artzz4K8bZ3r1r1YjwnClkK+6rxd7emacGyIQGZcGITqY8v
- tb/M2XoLg2z4QiEeG7yqddd60uHvemmmYQciKRxbWqNJI4Xe0hTvqKbOvpAE/8yuaThF
- 9a+mZ04E4LxVKq7EQvvpuQ/1YqQ1RZziSo09+SSd0DWpqB9HXrw6rg+PYhxatwOeOphQ
- Fl5g==
+ d=gmail.com; s=20230601; t=1727399901; x=1728004701; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TJCotb6F8xEv62pHeeeP2FBRLw2yh6SOq0lDdvQw+ZU=;
+ b=Kv2rjHBTTmESyWQqXkGtOvYhPM4qwftaM2VYYjuhhEMKLZ/9dACq3zihuMC/FzGbvm
+ AcDRgPAi1EBA49RzlfVI+u1QU/THTTPspZRjzKGqmsB7xaHSZpHc9NTlJzkUUL73OhPZ
+ 20e0qd9yjU1/zMlwpDdf57tDrkpXDsEWZ6EveFEOGB8e5pIjepsUUveYX/HsRCx/0TbJ
+ UAT+bZ9uK8gHaYLKrvhP4AcklqCczh8/TGUurXUdlB/9e95pVVcxAai/qBlT1dKPn45v
+ Uk7nCLRDReaFtEaN67n+O6cjijnvzwvkSJSKFXppzuUwRVVG3DtuNjG2dMT3844W3vLW
+ 6MBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727399898; x=1728004698;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=nxpTGr9UaKaTuM4jpRJ+VnqgtuShAUJ9hhEXAKHxwqQ=;
- b=FnZ/fI/9iPhQ+7u4H+/Wz6zMdCoYb/YhJA16AHlsGvwqrJTIuAV+64R4t/SZu+3rIy
- fUvSCoIqh+m1Op2i8hv8HvxY/+0C8mhjs86FI4KozG6gq3HNjSgdjVZ5my904dH5Zs3/
- crcZSwvJrskx14VY3zHSMOZnwzErqkOk4gG5t38dY71E7QNVlnVzMwF4zGd89nwbgsVn
- Fs1XwpWEHKXaU09u1s4/oGzEubz22HryxmVeKL+QPby+F1eovrmlC7gqNwk/7rt5jsCD
- s79RtB8iZtSFZBwJJQgW+ypB345d3XTdZm+hYtlCQH9qeZ95sFkvRpMMKri9MUAqvSbs
- tbsw==
-X-Gm-Message-State: AOJu0YxjfNbVtOaJe+K1TIicO7rvlKuHBVjbn/1RYBxkuQCf7yDvNZAh
- pnBd6tVLVK3ir8XPhAip/ZGkoYG8vxuDYTk4JBva0WqmtJtMSiJFOi8C2A==
-X-Google-Smtp-Source: AGHT+IEqPhovLL1wjd/kqES764pYFH6ZyS6xpu2GnrJtqy0hr20IWW1vvRbITQVz4w7j57+E6a7WLA==
-X-Received: by 2002:a05:6a21:58b:b0:1cf:5170:21b2 with SMTP id
- adf61e73a8af0-1d4fa7c5b8dmr1925646637.41.1727399897792; 
- Thu, 26 Sep 2024 18:18:17 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1727399901; x=1728004701;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=TJCotb6F8xEv62pHeeeP2FBRLw2yh6SOq0lDdvQw+ZU=;
+ b=PXOfPw6GTM+lFdHMfZsZvhRFIRNy/7m9vk1PW7R6/Tsin4tE4gLABpDoc1/CgPbu5Q
+ ZTZ7byWqTIIOqgH6Pzl0SumiIHh5z+arg6aQAZ9dTuQW0fJWVgkzXMcM2bMz5xV+iXBn
+ +oWJ/TeBy4k48NRcluJvccVB/Yo/9WQeSrKUWrfvCm6pB4BnleYF10mwMRRYtdnH9bDp
+ sa3UVdTaX+LQAfXEzGdxiOzzPfk/IfC/dvYJREzAL2FSZSp2uuf8VyWnrXob4S4vRUtj
+ +rhqIKtbvtlDqLBFLKcdHxANunkO0o8za+wsKVBIYfnE+4JC0mREerY3wT1LNp7in+hZ
+ mMzA==
+X-Gm-Message-State: AOJu0Yx2wcwlNrL6dS5p5akVSYxQFDFVOxEAXGQAZMrHbGjdBfDUjn1n
+ z1dCy8btaoSf6vp3BAopzc+YDH/iPbduo0Pr22rW38M9hU8N1kFVnPbNuA==
+X-Google-Smtp-Source: AGHT+IHN/WYgPUZb0ou9BLqdhJ+HQvBSdL9S/ltXgwELmUTZIqwqGHAhFXuBl9m9UUDiJR+f3nxJqw==
+X-Received: by 2002:a05:6a00:4612:b0:713:e3f9:b58e with SMTP id
+ d2e1a72fcca58-71b26044023mr2914714b3a.17.1727399900880; 
+ Thu, 26 Sep 2024 18:18:20 -0700 (PDT)
 Received: from ISCN5CG2520RPD.infineon.com (KD106168128197.ppp-bb.dion.ne.jp.
  [106.168.128.197]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-71b2652a622sm509908b3a.164.2024.09.26.18.18.15
+ d2e1a72fcca58-71b2652a622sm509908b3a.164.2024.09.26.18.18.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Sep 2024 18:18:17 -0700 (PDT)
+ Thu, 26 Sep 2024 18:18:20 -0700 (PDT)
 From: tkuw584924@gmail.com
 X-Google-Original-From: Takahiro.Kuwano@infineon.com
 To: u-boot@lists.denx.de
 Cc: jagan@amarulasolutions.com, vigneshr@ti.com, tudor.ambarus@linaro.org,
  pratyush@kernel.org, tkuw584924@gmail.com, Bacem.Daassi@infineon.com,
  Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
-Subject: [2nd RESEND PATCH v2 0/6] mtd: Make sure UBIFS does not do multi-pass
- page programming on flashes that don't support it
-Date: Fri, 27 Sep 2024 10:18:05 +0900
-Message-Id: <cover.1727399650.git.Takahiro.Kuwano@infineon.com>
+Subject: [2nd RESEND PATCH v2 1/6] mtd: ubi: Do not zero out EC and VID on
+ ECC-ed NOR flashes
+Date: Fri, 27 Sep 2024 10:18:06 +0900
+Message-Id: <53a897774ae0b6357a867c0158cc68e01a578618.1727399650.git.Takahiro.Kuwano@infineon.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1727399650.git.Takahiro.Kuwano@infineon.com>
+References: <cover.1727399650.git.Takahiro.Kuwano@infineon.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -94,34 +97,65 @@ X-Virus-Status: Clean
 
 From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
 
-Resent after modifying commit message in #5 (mention Linux commit first)
-and collecting A-b tags.
+For NOR flashes EC and VID are zeroed out before an erase is issued to
+make sure UBI does not mistakenly treat the PEB as used and associate it
+with an LEB.
 
-This series is equivalent to the one for Linux MTD submitted by
-Pratyush Yadav.
+But on some flashes, like the Infineon Semper NOR flash family,
+multi-pass page programming is not allowed on the default ECC scheme.
+This means zeroing out these magic numbers will result in the flash
+throwing a page programming error.
 
-https://patchwork.ozlabs.org/project/linux-mtd/list/?series=217759&state=*
+Do not zero out EC and VID for such flashes. A writesize > 1 is an
+indication of an ECC-ed flash.
 
-Changes in v2:
-  - Fix an issue in setting macronix_octal_fixups
-  - Rework fixup hooks
+This patch replicates the following upstream linux commit:
+f669e74be820 ("ubi: Do not zero out EC and VID on ECC-ed NOR flashes")
 
-Takahiro Kuwano (6):
-  mtd: ubi: Do not zero out EC and VID on ECC-ed NOR flashes
-  mtd: spi-nor: Allow flashes to specify MTD writesize
-  mtd: spi-nor: Check nor->info before setting macronix_octal_fixups
-  mtd: spi-nor: Replace default_init() hook with late_init()
-  mtd: spi-nor: Call spi_nor_post_sfdp_fixups() only after
-    spi_nor_parse_sfdp()
-  mtd: spi-nor: Set ECC unit size to MTD writesize in Infineon SEMPER
-    flashes
+Acked-by: Tudor Ambarus <tudor.ambarus@linaro.org>
+Acked-by: Pratyush Yadav <pratyush@kernel.org>
+Signed-off-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+---
+ drivers/mtd/ubi/build.c | 4 +---
+ drivers/mtd/ubi/io.c    | 9 ++++++++-
+ 2 files changed, 9 insertions(+), 4 deletions(-)
 
- drivers/mtd/spi/spi-nor-core.c | 88 +++++++++++++++++++++-------------
- drivers/mtd/ubi/build.c        |  4 +-
- drivers/mtd/ubi/io.c           |  9 +++-
- include/linux/mtd/spi-nor.h    |  1 +
- 4 files changed, 65 insertions(+), 37 deletions(-)
-
+diff --git a/drivers/mtd/ubi/build.c b/drivers/mtd/ubi/build.c
+index cf0d702421f..104537784ab 100644
+--- a/drivers/mtd/ubi/build.c
++++ b/drivers/mtd/ubi/build.c
+@@ -679,10 +679,8 @@ static int io_init(struct ubi_device *ubi, int max_beb_per1024)
+ 		ubi->bad_peb_limit = get_bad_peb_limit(ubi, max_beb_per1024);
+ 	}
+ 
+-	if (ubi->mtd->type == MTD_NORFLASH) {
+-		ubi_assert(ubi->mtd->writesize == 1);
++	if (ubi->mtd->type == MTD_NORFLASH)
+ 		ubi->nor_flash = 1;
+-	}
+ 
+ 	ubi->min_io_size = ubi->mtd->writesize;
+ 	ubi->hdrs_min_io_size = ubi->mtd->writesize >> ubi->mtd->subpage_sft;
+diff --git a/drivers/mtd/ubi/io.c b/drivers/mtd/ubi/io.c
+index 14be95b74bc..45699b4a477 100644
+--- a/drivers/mtd/ubi/io.c
++++ b/drivers/mtd/ubi/io.c
+@@ -563,7 +563,14 @@ int ubi_io_sync_erase(struct ubi_device *ubi, int pnum, int torture)
+ 		return -EROFS;
+ 	}
+ 
+-	if (ubi->nor_flash) {
++	/*
++	 * If the flash is ECC-ed then we have to erase the ECC block before we
++	 * can write to it. But the write is in preparation to an erase in the
++	 * first place. This means we cannot zero out EC and VID before the
++	 * erase and we just have to hope the flash starts erasing from the
++	 * start of the page.
++	 */
++	if (ubi->nor_flash && ubi->mtd->writesize == 1) {
+ 		err = nor_erase_prepare(ubi, pnum);
+ 		if (err)
+ 			return err;
 -- 
 2.34.1
 
