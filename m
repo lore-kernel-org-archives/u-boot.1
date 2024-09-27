@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 118DDCEBF66
-	for <u-boot@archiver.kernel.org>; Fri, 27 Sep 2024 01:24:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C01ADCEBF66
+	for <u-boot@archiver.kernel.org>; Fri, 27 Sep 2024 01:24:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D28888FF1;
-	Fri, 27 Sep 2024 03:24:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CFA3788F9B;
+	Fri, 27 Sep 2024 03:24:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="A7A9WgMo";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nso8Hfw3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5AEE089043; Fri, 27 Sep 2024 03:24:30 +0200 (CEST)
-Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
- [IPv6:2607:f8b0:4864:20::52d])
+ id 7BD6E8905F; Fri, 27 Sep 2024 03:24:33 +0200 (CEST)
+Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
+ [IPv6:2607:f8b0:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F39188F89
- for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 03:24:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A28A88F89
+ for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 03:24:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tkuw584924@gmail.com
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-7c1324be8easo2062739a12.1
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 18:24:27 -0700 (PDT)
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-719ba0654f9so1337412b3a.3
+ for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 18:24:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1727400266; x=1728005066; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1727400270; x=1728005070; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uf9RUtl/Tr0OPTBTIBzO9rddMoHtyO/6Fqh0WfoqxtQ=;
- b=A7A9WgMoDSr5Ro68molCyHS8HsSQlgq7gyQCamYsFSBEsfZCJ48t0Ks8fi2e0ND6Q2
- 1T8qbZmiiriK9zDLBs2E6FDZWQmzbwnRVpukj0asYeu7pqQfoDysqxywWanPwzQSW51Z
- Q2CMfpZhBY0QtxmQHnD7shADnFRh558ui4MwB3uLl53a/Knv+P75bQ7lUXtqZGQgPayG
- 2JPlbaDC6hiPtA9C7RSwdYgdaxYFosxy5uNLrf0qX/sqLw6P7u/pcm766prY3Io78ZBu
- swxsn8VnmshsAfuG7iELg8WL/0KHNUD7ZTxioaqMspxzns039/zX08mtkk/c2S9pRYra
- qFBQ==
+ bh=P8devojGrhaz81913PgUgK2Z1VAPxOaMNPVXag73vEQ=;
+ b=nso8Hfw3PZJTS+ZYgbEl7q+g8q+AHnts+CZptJ72orimTmgd/NV+eKHaNcDdqREsrg
+ UxNOMQvOo+MD+M4IM9zt3tIms9fukUQvgknDAAInQkMawVxvEcKBEaN0iX1b/KAwSPvj
+ 56MGXgi1OFdKivDNwM9C17GGuzORUpQoXkJXqdV3Qnh0SIP8sIQ/6Xj+4IIhpTmReeq+
+ 6atZDDTuC65fpDjfYpJodgrK7nFMauVwgqgRu953+PFC6N9JmUjcwCZ+SQ7CZHHo7rBq
+ tm8J41htoX4qb1bEkPm/zzPbW45oGWOPUdLyMMaVhfvRkyyUmGUi0jMs546uqSpw0j2g
+ cVrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727400266; x=1728005066;
+ d=1e100.net; s=20230601; t=1727400270; x=1728005070;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=uf9RUtl/Tr0OPTBTIBzO9rddMoHtyO/6Fqh0WfoqxtQ=;
- b=dLwtRkPMb43S2ui4x7Xo5u4Y2n1LKAsFIO9Ck5pegk1AqapfCesh0Ey3qaPpwYlz+d
- l+HA6gZu4un16/jx0g+Y9pIeKFqkG0eEWZ9kckh1Cqu0Lu97zCQ2StcY7pKB+kILbd1s
- bCGGpRCFatR3UYN7PbNy93LlZcMh7zoM1uMuoY1SRm35BeFA5pTJ+UtBnN4h4sNJ7SrG
- gUfOY003X1iNdEcHqkBIlZfYEyYG35Yhnvk3R+oSS+4Iees6CKy1bYye+itPz9crsdOh
- kyMF/poSK8m6zXgeLjWuscYSUodkJhlLQmi+7bV7GB8K2XTWMu/Gb3v5TnWrHiPCfMd7
- nwDA==
-X-Gm-Message-State: AOJu0Ywn0FOxZaXl5sVDkOhKQS3I51HEiPekbWVLr7BBS8EiZ0jtz89D
- dVHsg9F2rc4kwnda8JDV08oee5fsFptQCX3/5qy9guf5LAcCenfK2oc/Ww==
-X-Google-Smtp-Source: AGHT+IFDF8Fg5w9yqDO5lzvjCCAd+IbjoD1cyebuXk/r92m2ZCiSd5JNbJjN3JgXH3GWBs2X7LeATA==
-X-Received: by 2002:a05:6a20:6f9c:b0:1cf:4ed:ffc0 with SMTP id
- adf61e73a8af0-1d4fa1b8417mr3172177637.4.1727400266524; 
- Thu, 26 Sep 2024 18:24:26 -0700 (PDT)
+ bh=P8devojGrhaz81913PgUgK2Z1VAPxOaMNPVXag73vEQ=;
+ b=mCUJcmPnaHQFSCjA4sCfZHCti0YnHzsm9/hR00JzbJ1xSdsJ5O8mf9U1RjKImfJifl
+ T73+ELq9AFAUXvr9T3/bISb9uznEbfroyaZqmAq+sGu7dU1L3JVnQ1onI5IuJFosbUa6
+ Py06lSs/tc0FPz8K+7cRUxUlT1f6pXKnEwAcHEY9kJZXJ+jGf43g7xdo//rCfn07uTFV
+ FSZm1zUzwscf8MFsJS0IoUFhVegzQrTGkrhGrESAC4CSrdYs/kX30YgrfM+tNYa5uiSe
+ Z4d4sp+ZilflVMYwebXAkdXXI0Yh/hnAPnvTQdsZUXQ+auCzEz+m5RTBQRuSjzn6Y146
+ LFpw==
+X-Gm-Message-State: AOJu0YysyCYFM5IjpIFPBFBdfxltLaqr/vf5Yc3RG1qT7cIoOz7cR2jq
+ zsGq1IOnVKY2mmJzTRj7sdetu5GVbrw5q+vGYB2mYEt+fGiLgf8vA5cGkg==
+X-Google-Smtp-Source: AGHT+IERKW1bMf4BME4X55MUaURN02z8wGuaP0Ev0HYe+FBvxQ+mCw+ttAk+navJe81KRXUau+WrMA==
+X-Received: by 2002:a05:6a00:39a2:b0:717:8d5d:94d6 with SMTP id
+ d2e1a72fcca58-71b25f4416cmr2574305b3a.12.1727400269671; 
+ Thu, 26 Sep 2024 18:24:29 -0700 (PDT)
 Received: from ISCN5CG2520RPD.infineon.com (KD106168128197.ppp-bb.dion.ne.jp.
  [106.168.128.197]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-71b2652e609sm516341b3a.182.2024.09.26.18.24.23
+ d2e1a72fcca58-71b2652e609sm516341b3a.182.2024.09.26.18.24.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Sep 2024 18:24:26 -0700 (PDT)
+ Thu, 26 Sep 2024 18:24:29 -0700 (PDT)
 From: tkuw584924@gmail.com
 X-Google-Original-From: Takahiro.Kuwano@infineon.com
 To: u-boot@lists.denx.de
 Cc: jagan@amarulasolutions.com, vigneshr@ti.com, tudor.ambarus@linaro.org,
  pratyush@kernel.org, tkuw584924@gmail.com, Bacem.Daassi@infineon.com,
  Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
-Subject: [RESEND PATCH v2 1/2] mtd: spi-nor-ids: Add NO_CHIP_ERASE flag to
- Infineon s25hl02Gt and s25hs02gt
-Date: Fri, 27 Sep 2024 10:24:15 +0900
-Message-Id: <e53926f0a392413244fad554389c4bcec3f783a3.1727400131.git.Takahiro.Kuwano@infineon.com>
+Subject: [RESEND PATCH v2 2/2] mtd: spi-nor-ids: Add NO_CHIP_ERASE flag to
+ Infineon s28hs02gt
+Date: Fri, 27 Sep 2024 10:24:16 +0900
+Message-Id: <eabd1311458353111ff4a42d5001e60e9d0f6759.1727400131.git.Takahiro.Kuwano@infineon.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1727400131.git.Takahiro.Kuwano@infineon.com>
 References: <cover.1727400131.git.Takahiro.Kuwano@infineon.com>
@@ -97,38 +97,28 @@ X-Virus-Status: Clean
 
 From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
 
-S25HL02GT and S25HS02GT are dual-die package parts and do not support
-chip erase.
+S28HS02GT is dual-die package parts and do not support chip erase.
 
-Fixes: c95a914aed7 ("mtd: spi-nor-ids: Add Cypress s25hl-t/s25hs-t")
+Fixes: 16dd1095101 ("mtd: spi-nor-ids: Add Infineon(Cypress) s28hs02gt ID")
 Reviewed-by: Tudor Ambarus <tudor.ambarus@linaro.org>
 Signed-off-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
 ---
- drivers/mtd/spi/spi-nor-ids.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/mtd/spi/spi-nor-ids.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-index 9693c179b7e..3270ebb533c 100644
+index 3270ebb533c..4e7e89eb65a 100644
 --- a/drivers/mtd/spi/spi-nor-ids.c
 +++ b/drivers/mtd/spi/spi-nor-ids.c
-@@ -372,7 +372,7 @@ const struct flash_info spi_nor_ids[] = {
- 		SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES |
- 		USE_CLSR) },
- 	{ INFO6("s25hl02gt",  0x342a1c, 0x0f0090, 256 * 1024, 1024,
--		SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+		SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES | NO_CHIP_ERASE) },
- 	{ INFO6("s25hs512t",  0x342b1a, 0x0f0390, 256 * 1024, 256,
- 		SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES |
- 		USE_CLSR) },
-@@ -380,7 +380,7 @@ const struct flash_info spi_nor_ids[] = {
- 		SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES |
- 		USE_CLSR) },
- 	{ INFO6("s25hs02gt",  0x342b1c, 0x0f0090, 256 * 1024, 1024,
--		SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+		SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES | NO_CHIP_ERASE) },
- 	{ INFO6("s25fs256t",  0x342b19, 0x0f0890, 128 * 1024, 256,
- 		SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
- #ifdef CONFIG_SPI_FLASH_S28HX_T
+@@ -388,7 +388,7 @@ const struct flash_info spi_nor_ids[] = {
+ 	{ INFO("s28hl01gt",  0x345a1b,      0, 256 * 1024, 512, SPI_NOR_OCTAL_DTR_READ) },
+ 	{ INFO("s28hs512t",  0x345b1a,      0, 256 * 1024, 256, SPI_NOR_OCTAL_DTR_READ) },
+ 	{ INFO("s28hs01gt",  0x345b1b,      0, 256 * 1024, 512, SPI_NOR_OCTAL_DTR_READ) },
+-	{ INFO("s28hs02gt",  0x345b1c,      0, 256 * 1024, 1024, SPI_NOR_OCTAL_DTR_READ) },
++	{ INFO("s28hs02gt",  0x345b1c,      0, 256 * 1024, 1024, SPI_NOR_OCTAL_DTR_READ | NO_CHIP_ERASE) },
+ #endif
+ #endif
+ #ifdef CONFIG_SPI_FLASH_SST		/* SST */
 -- 
 2.34.1
 
