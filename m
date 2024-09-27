@@ -4,20 +4,20 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3498CCEBF72
-	for <u-boot@archiver.kernel.org>; Fri, 27 Sep 2024 03:07:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58A21CEBF72
+	for <u-boot@archiver.kernel.org>; Fri, 27 Sep 2024 03:07:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9BF5F88FE0;
-	Fri, 27 Sep 2024 05:07:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0B37A89061;
+	Fri, 27 Sep 2024 05:07:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=aspeedtech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A679189058; Fri, 27 Sep 2024 05:07:32 +0200 (CEST)
+ id 1BA9E884DB; Fri, 27 Sep 2024 05:07:33 +0200 (CEST)
 Received: from TWMBX01.aspeed.com (mail.aspeedtech.com [211.20.114.72])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C240288413
- for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 05:07:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D224488EEC
+ for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 05:07:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=aspeedtech.com
 Authentication-Results: phobos.denx.de;
@@ -32,10 +32,12 @@ Received: from mail.aspeedtech.com (192.168.10.152) by TWMBX01.aspeed.com
 From: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
 To: <trini@konsulko.com>, <sjg@chromium.org>, <bob.wolff68@gmail.com>,
  <u-boot@lists.denx.de>
-Subject: [PATCH v2 0/4] aspeed: ast2700: Add Caliptra ECDSA driver
-Date: Fri, 27 Sep 2024 11:07:22 +0800
-Message-ID: <20240927030726.2211297-1-chiawei_wang@aspeedtech.com>
+Subject: [PATCH v2 1/4] lib: ecdsa: Add ECDSA384 support
+Date: Fri, 27 Sep 2024 11:07:23 +0800
+Message-ID: <20240927030726.2211297-2-chiawei_wang@aspeedtech.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240927030726.2211297-1-chiawei_wang@aspeedtech.com>
+References: <20240927030726.2211297-1-chiawei_wang@aspeedtech.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -55,42 +57,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Aspeed AST2700 SoCs integrates the Caliptra secure IP, where an ECDSA384
-signature verification HW interface is exported for SoC crypto needs.
+Add ECDSA384 algorithm support for image signing and verification.
 
-This patch series firstly extends the FIT image signing/verify common
-code to support the ECDSA384 algorithm. For better convenience, the
-device tree for ECDSA public key storage is also revised by referring
-to RSA implementations.
+Signed-off-by: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+---
+ include/u-boot/ecdsa.h   |  1 +
+ lib/ecdsa/ecdsa-verify.c | 14 +++++++++++---
+ tools/image-sig-host.c   |  7 +++++++
+ 3 files changed, 19 insertions(+), 3 deletions(-)
 
-After the FIT common code revision, the driver is implemented for
-AST2700 to leverage the Caliptra ECDSA384 signature verification.
-
-These are verified by signed FIT images with the algorithm "sha384,ecdsa384".
-
-v2 change:
-  - revise the commit message of padding check removal for better explanation
-  - remove redundant check in static function
-  - revise errno and error message as suggested by Simon
-  - collect Reviewed-by tags
-
-Chia-Wei Wang (4):
-  lib: ecdsa: Add ECDSA384 support
-  lib: ecdsa: Create device tree node automatically
-  image-fit-sig: Remove padding check
-  drivers/crypto: aspeed: Add Caliptra ECDSA384 support
-
- boot/image-fit-sig.c                |   2 +-
- drivers/crypto/aspeed/Kconfig       |  10 ++
- drivers/crypto/aspeed/Makefile      |   1 +
- drivers/crypto/aspeed/cptra_ecdsa.c | 184 ++++++++++++++++++++++++++++
- include/u-boot/ecdsa.h              |   1 +
- lib/ecdsa/ecdsa-libcrypto.c         |  25 ++--
- lib/ecdsa/ecdsa-verify.c            |  14 ++-
- tools/image-sig-host.c              |   7 ++
- 8 files changed, 233 insertions(+), 11 deletions(-)
- create mode 100644 drivers/crypto/aspeed/cptra_ecdsa.c
-
+diff --git a/include/u-boot/ecdsa.h b/include/u-boot/ecdsa.h
+index 53490c6b287..0d4df9887e6 100644
+--- a/include/u-boot/ecdsa.h
++++ b/include/u-boot/ecdsa.h
+@@ -65,5 +65,6 @@ int ecdsa_verify(struct image_sign_info *info,
+ /** @} */
+ 
+ #define ECDSA256_BYTES	(256 / 8)
++#define ECDSA384_BYTES	(384 / 8)
+ 
+ #endif
+diff --git a/lib/ecdsa/ecdsa-verify.c b/lib/ecdsa/ecdsa-verify.c
+index 4d1835b598a..629b662cf6c 100644
+--- a/lib/ecdsa/ecdsa-verify.c
++++ b/lib/ecdsa/ecdsa-verify.c
+@@ -22,8 +22,10 @@ static int ecdsa_key_size(const char *curve_name)
+ {
+ 	if (!strcmp(curve_name, "prime256v1"))
+ 		return 256;
+-	else
+-		return 0;
++	else if (!strcmp(curve_name, "secp384r1"))
++		return 384;
++
++	return 0;
+ }
+ 
+ static int fdt_get_key(struct ecdsa_public_key *key, const void *fdt, int node)
+@@ -121,12 +123,18 @@ int ecdsa_verify(struct image_sign_info *info,
+ 	return ecdsa_verify_hash(dev, info, hash, sig, sig_len);
+ }
+ 
+-U_BOOT_CRYPTO_ALGO(ecdsa) = {
++U_BOOT_CRYPTO_ALGO(ecdsa256) = {
+ 	.name = "ecdsa256",
+ 	.key_len = ECDSA256_BYTES,
+ 	.verify = ecdsa_verify,
+ };
+ 
++U_BOOT_CRYPTO_ALGO(ecdsa384) = {
++	.name = "ecdsa384",
++	.key_len = ECDSA384_BYTES,
++	.verify = ecdsa_verify,
++};
++
+ /*
+  * uclass definition for ECDSA API
+  *
+diff --git a/tools/image-sig-host.c b/tools/image-sig-host.c
+index d0133aec4c8..22253502065 100644
+--- a/tools/image-sig-host.c
++++ b/tools/image-sig-host.c
+@@ -76,6 +76,13 @@ struct crypto_algo crypto_algos[] = {
+ 		.add_verify_data = ecdsa_add_verify_data,
+ 		.verify = ecdsa_verify,
+ 	},
++	{
++		.name = "ecdsa384",
++		.key_len = ECDSA384_BYTES,
++		.sign = ecdsa_sign,
++		.add_verify_data = ecdsa_add_verify_data,
++		.verify = ecdsa_verify,
++	},
+ };
+ 
+ struct padding_algo padding_algos[] = {
 -- 
 2.25.1
 
