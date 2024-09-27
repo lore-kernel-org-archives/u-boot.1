@@ -4,92 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06D14CDD1BD
-	for <u-boot@archiver.kernel.org>; Fri, 27 Sep 2024 15:52:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D488CDD1C8
+	for <u-boot@archiver.kernel.org>; Fri, 27 Sep 2024 16:01:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1FA18909F;
-	Fri, 27 Sep 2024 17:52:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 453F78910E;
+	Fri, 27 Sep 2024 18:01:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aHBT7OYP";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="C8KskgtG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0287D890BB; Fri, 27 Sep 2024 17:52:45 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 6C4BB8910E; Fri, 27 Sep 2024 18:01:22 +0200 (CEST)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 03FB88908D
- for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 17:52:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A0C589105
+ for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 18:01:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-5c876ed9c93so2296062a12.2
- for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 08:52:42 -0700 (PDT)
+ spf=pass smtp.mailfrom=glaroque@baylibre.com
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-37cdbcb139cso395785f8f.1
+ for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 09:01:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1727452362; x=1728057162; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=jQHkoitMZ1K3yK7TaFnL8lhpjXgQlNuz9AkVOhaX1iA=;
- b=aHBT7OYP65bPMSKz06Mv2uX55zC0AgsjQdeeyUvRquyDBMYgXA67NWnXuBh5iTTl61
- mXw2LHElLAASUc8np7Db0C+i8bpGgImyXVOwDZO1jMLQYglzgmxhuCB71RFLwo/Ql6AI
- MQaCUDvqHfECYKwoeL4F2jm1nzRRtZc2aiBqJH4LKlbqAiaBQn3ty3UQrJXo5gBW1qsb
- rvmG8PO2mCbMTP4YcMFRs0WqjCMsmxPYBsioqa6GFT912wZduxVGzs9F6Q4xcVKV12ii
- jXszcFYFS+fT0GbRoW6vTBnAkvOEDhEyiIZN3a6an0mXhe5bM7tRNdR4LKj4XgYfh/TB
- UpRw==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1727452880; x=1728057680;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=YI46YMRgzu9HpNeVHBBF+GGVpNsymGGvDSbwsbtptDo=;
+ b=C8KskgtGtDFF+I7n5VCw03xeolP6JoRA3FW9Vqrbm65x199ye7HBB7iOf/j6sHGl5R
+ 1pPTsPiEO+g50ECkiJhGRv25Nin4pP2ptBMYQvjN0cUFlC1K7RxwzF3DQ/GyF2c18eil
+ Y1X4b4Zty6tHofCggsU7l1h6Z8sJOJUSnk/hJqIeObWPpPzMHTuztEQi4Zf9X9ANg/0o
+ 96uuL8gUOGTbDtjn6M2FL5WnJMQ5II8AE9d5XcdoWEi4/KHd6fviROzclJCnkrTPToOA
+ LNQVwBGNd342QKgkvKtd+DH/wvaTjlehaym5NC0WAyFAEUWh226YRrYMaM6BIvgZ8I1V
+ SY9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727452362; x=1728057162;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=jQHkoitMZ1K3yK7TaFnL8lhpjXgQlNuz9AkVOhaX1iA=;
- b=KzOo2HIhf+Fyn1ApH0Qcrr+L5getruA1zruQQDVM4wRu+SMkEROE41rlv2E7GgKZZr
- lJ5EeidCDXxcWeLOBug3U7A8ErP34sKtpvAdoHDmGhGxrDfgk2On1l+etxAYkp7nspK2
- OENZKdGIHJHAEh8ATnuYiE84YN4abFPoPKYOb9/S1D05o9faZUgpGLd8ZFjEYPn1C2ix
- XDv84dmNJP/nREg+UfjerYbOG8Yj7rgaEo56Ih79wd3qvkbJOvsHprQI3AKyKxTSjMeI
- uhAcOZC+kQlcwHxMLVI94+fxIrDYMTxnLrZYLVezTrbGCj4cBqqs6IX91v9U8jI/Do8y
- HKRg==
-X-Gm-Message-State: AOJu0YxZISLgaWpiA3gO4YAc4SUkLwkSfzfG8ldfZNNEyvDkZu0nYlkh
- N16OVTYOeAXnn2s3P7EvE+e7+Kf1HcKO8FZ51QueQJNtAmz1ggAL6EEH2YFVJB3lzvhpEemvIph
- yutK7bVS9/6bm0uMPNell38GOpI8=
-X-Google-Smtp-Source: AGHT+IFUBN0bph+nnroOI8lnF4XESyHDeocMH0nd87cKhRmwWagSml0T4lVdTsMgoTmT83L7rTS/zFXR8AuCnIF6Lkw=
-X-Received: by 2002:a05:6402:5207:b0:5c5:cf45:cca3 with SMTP id
- 4fb4d7f45d1cf-5c8824ef73bmr2766179a12.7.1727452362209; Fri, 27 Sep 2024
- 08:52:42 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1727452880; x=1728057680;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=YI46YMRgzu9HpNeVHBBF+GGVpNsymGGvDSbwsbtptDo=;
+ b=nfcw/CDgu3RCU1drr1WoHAtb0F+Th4fvIA+LzryMHDIBFUYNUK9gUm0O8lTgNa31b+
+ ZkMZ7T74O/Gk/Hi7GzfvvbyyPGPFMp9/OkCbAh+i3etK0GD6E7J+R+jhYaotTIhlMhml
+ gJHDZEFYkXQY/IehKTvoDIl8LQ6vf684ZiRTlsGt2/RopLnSl0OvnKLV+ni5iPps9NcS
+ Ew8IrJ1aLhESqiIa1j7RWin6c5/nP4Gaq5A/2L0987BVuMFyJKryIPXhVz28rPbqLeuy
+ wBO1ajPebsTmO/Bi85nVVTw3mqKTbqbHcWcHLrKp4DvB+NBUjoTQkpGW1ESxXtYttD6J
+ hhyQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVUG7nbraqHHJ5MSEOpE0Pbl7G5RZwbQfyRZeGA/BOnRp459syuo385Y/HKWyabLLDZ24QzOxw=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy5viL07uS/Y7nT0VUJY1wQbmBWUK4HkKbwB9DhaYNbRN3P6+kU
+ RtV6wrjcmI9LVyUqO4FIYGKlsZFyaXcZwtjHxRJR5tWjwDeqJii3jBiCnkwT5JA=
+X-Google-Smtp-Source: AGHT+IEWRkSH9VFfbIUvBj+qQhrtkh8I9L6PazmiK/K1aMpKGbvPcWraHBmknUUY2CX/s8ZxS/7roQ==
+X-Received: by 2002:a5d:5910:0:b0:37c:c60d:f9b5 with SMTP id
+ ffacd0b85a97d-37cd5a60a1fmr2351646f8f.2.1727452879409; 
+ Fri, 27 Sep 2024 09:01:19 -0700 (PDT)
+Received: from ?IPV6:2a05:6e02:10a5:e010:35ef:1faa:c54c:3c?
+ ([2a05:6e02:10a5:e010:35ef:1faa:c54c:3c])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-37cd5764c50sm2829573f8f.112.2024.09.27.09.01.18
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 27 Sep 2024 09:01:19 -0700 (PDT)
+Message-ID: <411a5d8a-a101-47c3-bdc2-20a2dd93a812@baylibre.com>
+Date: Fri, 27 Sep 2024 18:01:18 +0200
 MIME-Version: 1.0
-References: <20240926223009.1270197-1-sjg@chromium.org>
-In-Reply-To: <20240926223009.1270197-1-sjg@chromium.org>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Fri, 27 Sep 2024 16:50:15 +0100
-Message-ID: <CALeDE9M4DrdsDrJEGehWuXyfNSd1K=sWE8RpSk6W5uySBoGUQQ@mail.gmail.com>
-Subject: Re: [PATCH 00/27] led: Remove old status-LED code
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Albert Aribaud <albert.u.boot@aribaud.net>, 
- Alexander Gendin <agendin@matrox.com>, Alison Wang <alison.wang@nxp.com>, 
- Andy Fleming <afleming@gmail.com>, Angelo Dureghello <angelo@kernel-space.org>,
- Doug Zobel <douglas.zobel@climate.com>,
- Etienne Carriere <etienne.carriere@foss.st.com>, 
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Joe Hershberger <joe.hershberger@ni.com>, Johan Jonker <jbx6244@gmail.com>, 
- Kamil Lulko <kamil.lulko@gmail.com>,
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Mario Six <mario.six@gdsys.cc>, 
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 3/3] board: ti: am62px: Add android bootflow support
+To: Bryan Brattlof <bb@ti.com>
+Cc: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, u-boot@lists.denx.de,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michael Polyntsov <michael.polyntsov@iopsys.eu>, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Priyanka Jain <priyanka.jain@nxp.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Raymond Mao <raymond.mao@linaro.org>, 
- Sean Anderson <sean.anderson@seco.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- This contributor prefers not to receive mails <noreply@example.com>,
- Wan Yee Lau <wan.yee.lau@intel.com>
-Content-Type: text/plain; charset="UTF-8"
+ Vishal Mahaveer <vishalm@ti.com>
+References: <20240912-sitaraupstream-v2-0-2101323d3fa5@baylibre.com>
+ <20240912-sitaraupstream-v2-3-2101323d3fa5@baylibre.com>
+ <20240916132720.r3tstmbxmbqpvncb@bryanbrattlof.com>
+Content-Language: en-US
+From: Guillaume LA ROQUE <glaroque@baylibre.com>
+In-Reply-To: <20240916132720.r3tstmbxmbqpvncb@bryanbrattlof.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,95 +103,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi Bryan,
 
-> There has been an LED framework in U-Boot which uses driver model for
-> about 9 years now. Recent work is underway to improve it and provide
-> more features. It is probably a good time to drop the old code, which
-> is only used by 5 boards:
+Le 16/09/2024 à 15:27, Bryan Brattlof a écrit :
+> Hi Guillaume!
 >
->    ./tools/qconfig.py -f LED_STATUS
->    5 matches
->    eb_cpu5282 eb_cpu5282_internal mx23_olinuxino pinephone
->    socfpga_vining_fpga
+> On September 12, 2024 thus sayeth Guillaume La Roque:
+>> From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>>
+>> When CONFIG_BOOTMETH_ANDROID is set, enable Android boot flow support.
+>>
+>> To build for AM62Px for Android, we can re-use
+>> the am62x_a53_android.config fragment when building A53 bootloaders:
+>>
+>>    $ make am62px_evm_a53_defconfig
+>>    $ make am62x_a53_android.config
+>>    $ make
+>>
+>> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>> Signed-off-by: Guillaume La Roque <glaroque@baylibre.com>
+>> ---
+>>   board/ti/am62px/am62px.env | 5 +++++
+>>   1 file changed, 5 insertions(+)
+>>
+>> diff --git a/board/ti/am62px/am62px.env b/board/ti/am62px/am62px.env
+>> index f8b6aff2c2fd..7ef54079aa8d 100644
+>> --- a/board/ti/am62px/am62px.env
+>> +++ b/board/ti/am62px/am62px.env
+>> @@ -13,3 +13,8 @@ mmcdev=1
+>>   bootpart=1:2
+>>   bootdir=/boot
+>>   rd_spec=-
+>> +
+>> +#if CONFIG_BOOTMETH_ANDROID
+>> +#include <env/ti/android.env>
+>> +adtb_idx=3
+>> +#endif
+>> \ No newline at end of file
+> It's odd that checkpatch.pl didn't complain about this. Or maybe it has
+> never complained about newlines? my git hook script didn't complain so
+> IDK. Anywho just wanted to point out the nitpick ;)
+i run checkpatch with b4 tool and script not return any error on this.
+i will change settings to not add this for the future .
+thanks to point me this .
 
-Why aren't these boards being migrated to what ever the new frame work
-is rather than dropping quite useful functionality on these devices?
+Guillaume
+> ~Bryan
 
-> This series attempts that.
->
->
-> Simon Glass (27):
->   led: Drop LED_STATUS_BOARD_SPECIFIC
->   arm: Drop old LED support
->   common: doc: Drop old LED support
->   st: stm32f429: Drop old LED code
->   led: Make the LED config common
->   eb_cpu5282: Drop STATUS_LED
->   mx23_olinuxino: Drop STATUS_LED
->   pinephone: Drop STATUS_LED
->   socfpga_vining_fpga: Drop STATUS_LED
->   led: Drop LED_STATUS from Kconfig
->   led: Drop the legacy LED command
->   misc: Drop gpio_led driver
->   pca9551_led: Delete driver
->   misc: status_led: Delete driver
->   m68k: Drop unused status_led.h header file
->   powerpc: Drop status-LED code
->   eb_cpu5282: Drop status-LED code
->   igep00x0: Drop unused status_led.h header file
->   mx23_olinuxino: Drop status-LED code
->   vining_fpga: Drop status-LED code
->   sunxi: Drop status-LED code
->   common: Drop status-LED code in board_r
->   image: Drop unused status_led.h header file
->   ide: Drop unused status_led.h header file
->   mpc83xx: Drop status-LED code
->   net: Drop status-LED code
->   led: Drop status_led header file
->
->  arch/arm/lib/crt0.S                          |   4 -
->  arch/m68k/lib/bootm.c                        |   3 -
->  arch/powerpc/lib/interrupts.c                |   6 -
->  board/BuS/eb_cpu5282/eb_cpu5282.c            |  20 --
->  board/isee/igep00x0/igep00x0.c               |   1 -
->  board/olimex/mx23_olinuxino/mx23_olinuxino.c |   7 -
->  board/softing/vining_fpga/socfpga.c          |   4 -
->  board/st/stm32f429-discovery/Makefile        |   1 -
->  board/st/stm32f429-discovery/led.c           |  39 ---
->  board/sunxi/board.c                          |   6 -
->  boot/image.c                                 |   4 -
->  cmd/Makefile                                 |   1 -
->  cmd/ide.c                                    |   4 -
->  cmd/legacy_led.c                             | 185 ----------
->  common/board_f.c                             |  22 --
->  common/board_r.c                             |  16 -
->  configs/eb_cpu5282_defconfig                 |   6 -
->  configs/eb_cpu5282_internal_defconfig        |   6 -
->  configs/mx23_olinuxino_defconfig             |   8 -
->  configs/pinephone_defconfig                  |   5 -
->  configs/socfpga_vining_fpga_defconfig        |  11 -
->  doc/README.LED                               |  77 -----
->  drivers/led/Kconfig                          | 342 +------------------
->  drivers/misc/Kconfig                         |  13 -
->  drivers/misc/Makefile                        |   3 -
->  drivers/misc/gpio_led.c                      | 106 ------
->  drivers/misc/pca9551_led.c                   | 170 ---------
->  drivers/misc/status_led.c                    | 124 -------
->  drivers/timer/mpc83xx_timer.c                |   5 -
->  include/configs/eb_cpu5282.h                 |   6 -
->  include/status_led.h                         | 102 ------
->  net/bootp.c                                  |   7 -
->  net/net.c                                    |  33 --
->  33 files changed, 11 insertions(+), 1336 deletions(-)
->  delete mode 100644 board/st/stm32f429-discovery/led.c
->  delete mode 100644 cmd/legacy_led.c
->  delete mode 100644 doc/README.LED
->  delete mode 100644 drivers/misc/gpio_led.c
->  delete mode 100644 drivers/misc/pca9551_led.c
->  delete mode 100644 drivers/misc/status_led.c
->  delete mode 100644 include/status_led.h
->
-> --
-> 2.43.0
->
+
