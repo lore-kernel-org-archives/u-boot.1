@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B0E5CF6493
-	for <u-boot@archiver.kernel.org>; Sat, 28 Sep 2024 20:04:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 032C9CF6493
+	for <u-boot@archiver.kernel.org>; Sat, 28 Sep 2024 20:04:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9565B88CC1;
+	by phobos.denx.de (Postfix) with ESMTP id EE89188DC6;
 	Sat, 28 Sep 2024 22:01:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SzlllPyu";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YON7YoGk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D185188DAA; Sat, 28 Sep 2024 22:01:23 +0200 (CEST)
-Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
- [IPv6:2607:f8b0:4864:20::12b])
+ id 7E90A88CBF; Sat, 28 Sep 2024 22:01:24 +0200 (CEST)
+Received: from mail-il1-x132.google.com (mail-il1-x132.google.com
+ [IPv6:2607:f8b0:4864:20::132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D68888A1E
- for <u-boot@lists.denx.de>; Sat, 28 Sep 2024 22:01:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A79BF88CB8
+ for <u-boot@lists.denx.de>; Sat, 28 Sep 2024 22:01:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12b.google.com with SMTP id
- e9e14a558f8ab-3a1a3090f93so10785585ab.1
- for <u-boot@lists.denx.de>; Sat, 28 Sep 2024 13:01:16 -0700 (PDT)
+Received: by mail-il1-x132.google.com with SMTP id
+ e9e14a558f8ab-3a0cc384a85so16723745ab.1
+ for <u-boot@lists.denx.de>; Sat, 28 Sep 2024 13:01:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727553675; x=1728158475; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727553676; x=1728158476; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zcPITtsUMO5L6lRAossaSaaqAcYXL4hltOZ731c5vuk=;
- b=SzlllPyuh5aV7nTnpTaFGcTPyTU1LdrTWn0wLGRsQY5zT3hkFJU8dX7hDt78vKnp5i
- NkmiKPowWYXr1LFhyM0yS2uVxeQobVjBLPH+OTE1lUvKeVbY+/0nVOPGHpdE/KSkatZW
- /CiClaeIawj2H2HA7yqg31oq8YeISIUji2C5E=
+ bh=eTtkBGd5s4+YWTHD4xJAVZSLAYO0yo46Yw9b8n5LrI4=;
+ b=YON7YoGk5KQOdVNiPSBw9hhi0g52Gzlkahr6YoYCg0MJdS8ZyUoUh/8YOoo7qXoeD+
+ Pl8GwHRxFhv20VmTkD9aMpopj09KHHoaDpkh95Otoc31VqwJw7XYVmN85/saudtmSI8v
+ WUZ5bPkGFmVROb+R2waREQt0MK35xI2lFbX9E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727553675; x=1728158475;
+ d=1e100.net; s=20230601; t=1727553676; x=1728158476;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zcPITtsUMO5L6lRAossaSaaqAcYXL4hltOZ731c5vuk=;
- b=sxk926/qCmstl2+tkT7CScqBHABXjeY9ZeLB7g+kEJZCzL1GsRCd0h1y9aXBesWCts
- 3HR5+WTTL1Vx3bpotwHdrWA6oW0DeGz/c/012fMHXFdoLgOot9yDloRcrwHi8TmJJhPi
- JpRECBg8ESqKPHwMXDNlHztJU8Q0Kos66pm6RxwYaY6EIa6EAyBwmfgg+RroegP9y2mY
- hph7NUlFtXfSi4e+r2CjN6WhUq3378Sbg2HstEZ1bdcylMquRQUvAdlW3NiXV7b2bgIB
- p+BFpBE5AZibBivXfE01T7Lext5GBygV7Pol7kPaaIeCpZB+mKcNfnS1IcrbGNKKJF3z
- y9AA==
-X-Gm-Message-State: AOJu0YwwTCjsPzgtDvrkDmo0xWk0YXReGBrwzD7/lBa9lFpT3Gja/glW
- 1ssR3Dq6viwo/NijOReKp64q6GEgUUFXSYqXrqh5rt4xNJjsU7CTfaWTkn0iaSkp7yXpKNb5uV9
- weg==
-X-Google-Smtp-Source: AGHT+IHDB9gvnxN9/fiC7NonPJNOUdbx/NIBB/K+N6V5mUH4uUFnVFDh8tMGmYSlPkxXXNhuYiy7QA==
-X-Received: by 2002:a05:6e02:12ee:b0:3a0:4250:165f with SMTP id
- e9e14a558f8ab-3a344fce47emr72654275ab.0.1727553674769; 
- Sat, 28 Sep 2024 13:01:14 -0700 (PDT)
+ bh=eTtkBGd5s4+YWTHD4xJAVZSLAYO0yo46Yw9b8n5LrI4=;
+ b=eBivBrm3aQghq2Lj2YZ2idB7WEQQIvwevaSG6D3quGEMgfMsrKKgnWpaJN7Dtd3AHO
+ G950phCDfj/6umBArDB34mvsXwgOQFDqBjl9+yZPOII5vIy5J++AQ4vQ21nU/4O/TP0n
+ zItcoSEitOnXifnpsbxIbeyuKGXXpq93Q6l0nH7fZy/gX+aspTjaFPyjq+Fo4L32sN11
+ /BMMzYVJ4Ib9pnpFv4l0ZSU2AJ25pSjsD4LuZ30QDDoEe6FXiDw4VpWpCHQbldzyBmT5
+ NVviYowJs9tZdLacI5dtrEFpkALBEU5fq5/8KO5Tq4YjKxp2Ho8KVmCwW5wOhQxy4vQo
+ X+KQ==
+X-Gm-Message-State: AOJu0YyFLzgyaa5WoZ5HnnpZZrt5VjfUeFXc4rJvjFBXzIgtOk9gEPmI
+ oLfGPdnk1LE7UVO7eIRxXYrCgWGyMECU8QWylLENQ/rYUhrkdUJN3QZiSGUtq5iN97DakJNlr78
+ nVg==
+X-Google-Smtp-Source: AGHT+IES1SqQKKV0uWeLHZKVve7YUOjsL/Jg42yoCndUS6VZFRR6VCah+f2ter5k+BPUL5c7U2xorg==
+X-Received: by 2002:a05:6e02:154c:b0:39f:5d96:1fde with SMTP id
+ e9e14a558f8ab-3a34516009dmr55540825ab.3.1727553676208; 
+ Sat, 28 Sep 2024 13:01:16 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4d888835307sm1242590173.2.2024.09.28.13.01.13
+ 8926c6da1cb9f-4d888835307sm1242590173.2.2024.09.28.13.01.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 28 Sep 2024 13:01:14 -0700 (PDT)
+ Sat, 28 Sep 2024 13:01:15 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Bin Meng <bmeng.cn@gmail.com>, Devarsh Thakkar <devarsht@ti.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Kever Yang <kever.yang@rock-chips.com>,
  Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Michael Trimarchi <michael@amarulasolutions.com>,
  Quentin Schulz <quentin.schulz@cherry.de>,
- Raymond Mao <raymond.mao@linaro.org>, Sean Anderson <seanga2@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v2 26/30] xpl: Rename spl_next_phase() and spl_prev_phase()
-Date: Sat, 28 Sep 2024 14:00:26 -0600
-Message-Id: <20240928200030.194546-27-sjg@chromium.org>
+ Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Suniel Mahesh <sunil@amarulasolutions.com>
+Subject: [PATCH v2 27/30] xpl: Rename spl_phase_prefix() and spl_phase_name()
+Date: Sat, 28 Sep 2024 14:00:27 -0600
+Message-Id: <20240928200030.194546-28-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240928200030.194546-1-sjg@chromium.org>
 References: <20240928200030.194546-1-sjg@chromium.org>
@@ -98,168 +97,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rename this to use the xpl prefix.
+Use simpler names for these functions.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- arch/sandbox/cpu/spl.c |  4 ++--
- arch/x86/lib/tpl.c     |  2 +-
- common/bloblist.c      |  2 +-
- common/spl/spl.c       | 14 +++++++-------
- include/spl.h          |  8 ++++----
- lib/fdtdec.c           |  2 +-
- 6 files changed, 16 insertions(+), 16 deletions(-)
+ arch/sandbox/cpu/spl.c | 4 ++--
+ arch/x86/lib/tpl.c     | 2 +-
+ cmd/vbe.c              | 2 +-
+ common/spl/spl.c       | 5 ++---
+ include/spl.h          | 8 ++++----
+ 5 files changed, 10 insertions(+), 11 deletions(-)
 
 diff --git a/arch/sandbox/cpu/spl.c b/arch/sandbox/cpu/spl.c
-index 7497d90fb89..71d785f4c3e 100644
+index 71d785f4c3e..c50df5f9179 100644
 --- a/arch/sandbox/cpu/spl.c
 +++ b/arch/sandbox/cpu/spl.c
-@@ -28,7 +28,7 @@ int sandbox_find_next_phase(char *fname, int maxlen, bool use_img)
+@@ -27,8 +27,8 @@ int sandbox_find_next_phase(char *fname, int maxlen, bool use_img)
+ 	const char *cur_prefix, *next_prefix;
  	int ret;
  
- 	cur_prefix = spl_phase_prefix(xpl_phase());
--	next_prefix = spl_phase_prefix(spl_next_phase());
-+	next_prefix = spl_phase_prefix(xpl_next_phase());
+-	cur_prefix = spl_phase_prefix(xpl_phase());
+-	next_prefix = spl_phase_prefix(xpl_next_phase());
++	cur_prefix = xpl_prefix(xpl_phase());
++	next_prefix = xpl_prefix(xpl_next_phase());
  	ret = os_find_u_boot(fname, maxlen, use_img, cur_prefix, next_prefix);
  	if (ret)
  		return log_msg_ret("find", ret);
-@@ -101,7 +101,7 @@ static int load_from_image(struct spl_image_info *spl_image,
- 	if (!IS_ENABLED(CONFIG_SANDBOX_VPL))
- 		return -ENOENT;
- 
--	next_phase = spl_next_phase();
-+	next_phase = xpl_next_phase();
- 	pos = spl_get_image_pos();
- 	size = spl_get_image_size();
- 	if (pos == BINMAN_SYM_MISSING || size == BINMAN_SYM_MISSING) {
 diff --git a/arch/x86/lib/tpl.c b/arch/x86/lib/tpl.c
-index 7c03dea0711..0606b4a1c67 100644
+index 0606b4a1c67..f7df7e03621 100644
 --- a/arch/x86/lib/tpl.c
 +++ b/arch/x86/lib/tpl.c
 @@ -103,7 +103,7 @@ int spl_spi_load_image(void)
  
  void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
  {
--	debug("Jumping to %s at %lx\n", spl_phase_name(spl_next_phase()),
-+	debug("Jumping to %s at %lx\n", spl_phase_name(xpl_next_phase()),
+-	debug("Jumping to %s at %lx\n", spl_phase_name(xpl_next_phase()),
++	debug("Jumping to %s at %lx\n", xpl_name(xpl_next_phase()),
  	      (ulong)spl_image->entry_point);
  #ifdef DEBUG
  	print_buffer(spl_image->entry_point, (void *)spl_image->entry_point, 1,
-diff --git a/common/bloblist.c b/common/bloblist.c
-index fb86789df42..6640ad1fd69 100644
---- a/common/bloblist.c
-+++ b/common/bloblist.c
-@@ -512,7 +512,7 @@ int bloblist_init(void)
- 	 */
- 	bool from_boot_arg = fixed && xpl_is_first_phase();
+diff --git a/cmd/vbe.c b/cmd/vbe.c
+index 423d9e5f8f0..186f6e6860d 100644
+--- a/cmd/vbe.c
++++ b/cmd/vbe.c
+@@ -93,7 +93,7 @@ static int do_vbe_state(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	printf("Phases:");
+ 	for (i = PHASE_NONE; i < PHASE_COUNT; i++) {
+ 		if (handoff->phases & (1 << i))
+-			printf(" %s", spl_phase_name(i));
++			printf(" %s", xpl_name(i));
  
--	if (spl_prev_phase() == PHASE_TPL && !IS_ENABLED(CONFIG_TPL_BLOBLIST))
-+	if (xpl_prev_phase() == PHASE_TPL && !IS_ENABLED(CONFIG_TPL_BLOBLIST))
- 		from_addr = false;
- 	if (fixed)
- 		addr = IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
+ 	}
+ 	if (!handoff->phases)
 diff --git a/common/spl/spl.c b/common/spl/spl.c
-index a0de495e529..a221b64f81d 100644
+index a221b64f81d..94657d00591 100644
 --- a/common/spl/spl.c
 +++ b/common/spl/spl.c
-@@ -176,10 +176,10 @@ ulong spl_get_image_pos(void)
- 		return BINMAN_SYM_MISSING;
- 
- #ifdef CONFIG_VPL
--	if (spl_next_phase() == PHASE_VPL)
-+	if (xpl_next_phase() == PHASE_VPL)
- 		return binman_sym(ulong, u_boot_vpl_any, image_pos);
- #endif
--	return spl_next_phase() == PHASE_SPL ?
-+	return xpl_next_phase() == PHASE_SPL ?
- 		binman_sym(ulong, u_boot_spl_any, image_pos) :
- 		binman_sym(ulong, u_boot_any, image_pos);
- }
-@@ -190,10 +190,10 @@ ulong spl_get_image_size(void)
- 		return BINMAN_SYM_MISSING;
- 
- #ifdef CONFIG_VPL
--	if (spl_next_phase() == PHASE_VPL)
-+	if (xpl_next_phase() == PHASE_VPL)
- 		return binman_sym(ulong, u_boot_vpl_any, size);
- #endif
--	return spl_next_phase() == PHASE_SPL ?
-+	return xpl_next_phase() == PHASE_SPL ?
- 		binman_sym(ulong, u_boot_spl_any, size) :
- 		binman_sym(ulong, u_boot_any, size);
- }
-@@ -201,10 +201,10 @@ ulong spl_get_image_size(void)
- ulong spl_get_image_text_base(void)
- {
- #ifdef CONFIG_VPL
--	if (spl_next_phase() == PHASE_VPL)
-+	if (xpl_next_phase() == PHASE_VPL)
- 		return CONFIG_VPL_TEXT_BASE;
- #endif
--	return spl_next_phase() == PHASE_SPL ? CONFIG_SPL_TEXT_BASE :
-+	return xpl_next_phase() == PHASE_SPL ? CONFIG_SPL_TEXT_BASE :
- 		CONFIG_TEXT_BASE;
- }
- 
-@@ -762,7 +762,7 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+@@ -475,8 +475,7 @@ static int spl_common_init(bool setup_malloc)
+ 		if (ret)
+ 			log_debug("Failed to unstash bootstage: ret=%d\n", ret);
+ 	}
+-	bootstage_mark_name(get_bootstage_id(true),
+-			    spl_phase_name(xpl_phase()));
++	bootstage_mark_name(get_bootstage_id(true), xpl_name(xpl_phase()));
+ #if CONFIG_IS_ENABLED(LOG)
+ 	ret = log_init();
+ 	if (ret) {
+@@ -762,7 +761,7 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
  
  	os = spl_image.os;
  	if (os == IH_OS_U_BOOT) {
--		debug("Jumping to %s...\n", spl_phase_name(spl_next_phase()));
-+		debug("Jumping to %s...\n", spl_phase_name(xpl_next_phase()));
+-		debug("Jumping to %s...\n", spl_phase_name(xpl_next_phase()));
++		debug("Jumping to %s...\n", xpl_name(xpl_next_phase()));
  	} else if (CONFIG_IS_ENABLED(ATF) && os == IH_OS_ARM_TRUSTED_FIRMWARE) {
  		debug("Jumping to U-Boot via ARM Trusted Firmware\n");
  		spl_fixup_fdt(spl_image_fdt_addr(&spl_image));
 diff --git a/include/spl.h b/include/spl.h
-index f90c3f56329..d66c6cdd24a 100644
+index d66c6cdd24a..fcf1313b8ae 100644
 --- a/include/spl.h
 +++ b/include/spl.h
-@@ -155,12 +155,12 @@ static inline bool is_xpl(void)
+@@ -194,11 +194,11 @@ static inline enum xpl_phase_t xpl_next_phase(void)
  }
  
  /**
-- * spl_prev_phase() - Figure out the previous U-Boot phase
-+ * xpl_prev_phase() - Figure out the previous U-Boot phase
+- * spl_phase_name() - Get the name of the current phase
++ * xpl_name() - Get the name of a phase
   *
-  * Return: the previous phase from this one, e.g. if called in SPL this returns
-  *	PHASE_TPL, if TPL is enabled
+  * Return: phase name
   */
--static inline enum xpl_phase_t spl_prev_phase(void)
-+static inline enum xpl_phase_t xpl_prev_phase(void)
+-static inline const char *spl_phase_name(enum xpl_phase_t phase)
++static inline const char *xpl_name(enum xpl_phase_t phase)
  {
- #ifdef CONFIG_TPL_BUILD
- 	return PHASE_NONE;
-@@ -177,12 +177,12 @@ static inline enum xpl_phase_t spl_prev_phase(void)
+ 	switch (phase) {
+ 	case PHASE_TPL:
+@@ -216,12 +216,12 @@ static inline const char *spl_phase_name(enum xpl_phase_t phase)
  }
  
  /**
-- * spl_next_phase() - Figure out the next U-Boot phase
-+ * xpl_next_phase() - Figure out the next U-Boot phase
+- * spl_phase_prefix() - Get the prefix  of the current phase
++ * xpl_prefix() - Get the prefix  of the current phase
   *
-  * Return: the next phase from this one, e.g. if called in TPL this returns
-  *	PHASE_SPL
+  * @phase: Phase to look up
+  * Return: phase prefix ("spl", "tpl", etc.)
   */
--static inline enum xpl_phase_t spl_next_phase(void)
-+static inline enum xpl_phase_t xpl_next_phase(void)
+-static inline const char *spl_phase_prefix(enum xpl_phase_t phase)
++static inline const char *xpl_prefix(enum xpl_phase_t phase)
  {
- #ifdef CONFIG_TPL_BUILD
- 	return IS_ENABLED(CONFIG_VPL) ? PHASE_VPL : PHASE_SPL;
-diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-index cdc2edbd61e..b2d38795a48 100644
---- a/lib/fdtdec.c
-+++ b/lib/fdtdec.c
-@@ -1676,7 +1676,7 @@ int fdtdec_setup(void)
- 	 * not whether this phase creates one.
- 	 */
- 	if (CONFIG_IS_ENABLED(BLOBLIST) &&
--	    (spl_prev_phase() != PHASE_TPL ||
-+	    (xpl_prev_phase() != PHASE_TPL ||
- 	     !IS_ENABLED(CONFIG_TPL_BLOBLIST))) {
- 		ret = bloblist_maybe_init();
- 		if (!ret) {
+ 	switch (phase) {
+ 	case PHASE_TPL:
 -- 
 2.34.1
 
