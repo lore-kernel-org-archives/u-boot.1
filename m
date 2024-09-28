@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8934FCF6491
-	for <u-boot@archiver.kernel.org>; Sat, 28 Sep 2024 22:08:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D16BCF6491
+	for <u-boot@archiver.kernel.org>; Sat, 28 Sep 2024 22:19:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B280488BB7;
-	Sun, 29 Sep 2024 00:08:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CF1D288901;
+	Sun, 29 Sep 2024 00:19:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="ZLDSZy31";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="aBlW31W7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0043788C4C; Sun, 29 Sep 2024 00:08:30 +0200 (CEST)
+ id 3DA9588C44; Sun, 29 Sep 2024 00:19:13 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5003888ADC
- for <u-boot@lists.denx.de>; Sun, 29 Sep 2024 00:08:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B603E885B3
+ for <u-boot@lists.denx.de>; Sun, 29 Sep 2024 00:19:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,30 +28,30 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
  Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1727561303;
- bh=vw9kq1UTB1tgSxhlkqVwEyQ+ozx4dMui9zbz3WCaTpA=;
- b=ZLDSZy31rC9OdLS9TvrC8qPIGR4hlz6mb3rTMkP/ymySaSC8EIH/dFdCzu3CjkDjO10pdbjbV
- SJhAkJBVLTFnG6dyVGdH4I1qoWtteO4dZa67PypJUjcIDVsq2O3V/y2ucSIhoW6hhfm0JJacQVy
- xBM+a+w1QJ00d9qeft2l5QRU1BVX1+Y3TJN3MDFAKewXEWwjcGjRMIKeBDryrkkx0lkbnYhMnwS
- 1hbYcE5bmjxdDqbbIZ8JnP/UBdq6U/2dgt/6rZ0B0N5bD1Uds7Lj9YBByakdiV7gn7ulNbueBca
- uKEfEt63mrHPXMGGY2E3pyYIOYBT6vxs4HK4hHaHLXJA==
-Message-ID: <0ecc8823-65ad-4231-8b96-5c694c382df9@kwiboo.se>
-Date: Sun, 29 Sep 2024 00:08:13 +0200
+ s=fe-e1b5cab7be; t=1727561946;
+ bh=M2E50hcrZH6VHGIWQSVtgOkjppJt/SM8zNBzpVDSnEE=;
+ b=aBlW31W7VlgJ5AsXrBZmaLltqeEywCy5V78AvV1ber6pNDjxleMUFBwSERrHOzsEowBiQS+Dg
+ 9BXv8znX8H+YBDE8EJj4yfBs+ksYEtUvszYrzWcaJAIayy/5gxztbqsgL0uR2Kd8p7ZHeGjSDxL
+ zdlcmTYrelygm0qt++qodmmtPCTl4Jp6cKT9znHuNnunakSqewyGvqDNUrGACg76TrRffJHZYFB
+ OTpq74EKRRZ1ozaRKC4Q2JB9ka1Ihif76HRUFu1zRc1YdnJBFHntEcopXSdFDJtQHlBtqhHkFu4
+ uM4jGv3ISwH9Pdka8XpVVsPuKpAc0Im02L7aG1tLzujA==
+Message-ID: <b76e04ae-eeef-4c97-9930-c8f59d5051d4@kwiboo.se>
+Date: Sun, 29 Sep 2024 00:18:59 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 16/30] kconfig: binman: Check for SPL instead of XPL
+Subject: Re: [PATCH v2 13/30] xpl: Define CONFIG_SPL_BUILD only for the SPL
+ build
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini
- <trini@konsulko.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Masahiro Yamada <yamada.masahiro@socionext.com>,
- Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
+ <trini@konsulko.com>, Bryan Brattlof <bb@ti.com>,
+ Greg Malysa <greg.malysa@timesys.com>, Ian Roberts
+ <ian.roberts@timesys.com>, Nishanth Menon <nm@ti.com>,
+ Sumit Garg <sumit.garg@linaro.org>
 References: <20240928200030.194546-1-sjg@chromium.org>
- <20240928200030.194546-17-sjg@chromium.org>
+ <20240928200030.194546-14-sjg@chromium.org>
 Content-Language: en-US
 From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20240928200030.194546-17-sjg@chromium.org>
+In-Reply-To: <20240928200030.194546-14-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Report-Abuse-To: abuse@forwardemail.net
@@ -60,7 +60,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
-X-ForwardEmail-ID: 66f87e55ee3ee57cb7930f59
+X-ForwardEmail-ID: 66f880d9ee3ee57cb79315c8
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,111 +80,51 @@ X-Virus-Status: Clean
 Hi Simon,
 
 On 2024-09-28 22:00, Simon Glass wrote:
-> Now that SPL means SPL (only) and is not defined for other phases,
-> update kconfig rules.
+> Make this define mean SPL only, not TPL, VPL, etc.
 > 
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 > 
 > (no changes since v1)
 > 
->  include/linux/kconfig.h                | 10 +++++-----
->  tools/binman/test/generated/autoconf.h |  2 +-
->  2 files changed, 6 insertions(+), 6 deletions(-)
+>  scripts/Makefile.autoconf | 4 ++--
+>  scripts/Makefile.xpl      | 9 ++++++---
+>  2 files changed, 8 insertions(+), 5 deletions(-)
 > 
-> diff --git a/include/linux/kconfig.h b/include/linux/kconfig.h
-> index a59f2a61e6a..ec9584b2426 100644
-> --- a/include/linux/kconfig.h
-> +++ b/include/linux/kconfig.h
-> @@ -40,7 +40,7 @@
->  #define _CONFIG_PREFIX TPL_
->  #elif defined(CONFIG_VPL_BUILD)
->  #define _CONFIG_PREFIX VPL_
-> -#elif defined(CONFIG_XPL_BUILD)
-> +#elif defined(CONFIG_SPL_BUILD)
 
-This change back from XPL to SPL is probably not needed it you did not
-change it to XPL in the first place.
+[snip]
 
-Just doing a mass search and replace is making this series hard to
-review.
+> --- a/scripts/Makefile.xpl
+> +++ b/scripts/Makefile.xpl
+> @@ -21,9 +21,10 @@ include $(srctree)/scripts/Kbuild.include
+>  
+>  -include include/config/auto.conf
+>  
+> -# This file contains 0, 2 or 3 lines
+> +# This file contains 0, or 2 lines
+>  # It is empty for U-Boot proper (where $(obj) is empty)
+> -# For any xPL build it contains CONFIG_SPL_BUILD=y and CONFIG_XPL_BUILD=y
+> +# For any xPL build it contains CONFIG_XPL_BUILD=y
+> +#    - for SPL builds it also contains CONFIG_SPL_BUILD=y
+>  #    - for TPL builds it also contains CONFIG_TPL_BUILD=y
+>  #    - for VPL builds it also contains CONFIG_VPL_BUILD=y
+>  -include $(obj)/include/autoconf.mk
+> @@ -31,7 +32,9 @@ include $(srctree)/scripts/Kbuild.include
+>  UBOOTINCLUDE := -I$(obj)/include $(UBOOTINCLUDE)
+>  
+>  KBUILD_CPPFLAGS += -DCONFIG_XPL_BUILD
+> -KBUILD_CPPFLAGS += -DCONFIG_XPL_BUILD
 
-Personally I did not fully realize that SPL_ or SPL_BUILD meant any xPL
-build before this series, so I would look at each SPL_BUILD to XPL_BUILD
-and SPL_ to XPL_ change and try to understand the original intent.
-
-I know multiple places where I have used SPL_ and not SPL_TPL_ because
-of this, and similar have used SPL_BUILD for parts I only want in SPL
-and not in TPL.
-
-How should I best handle sending fixes where I e.g. have used SPL_ in
-Makefile that instead should be changed to SPL_TPL_/PHASE_ and similar
-avoid a change to XPL_BUILD because the original intent was just for SPL?
-
-I will also suggest you rearrange some of you patches to make this more
-reviewable and possible also make git bisect easier, maybe:
-
-- any fixes not involving XPL first, e.g. _SPL to _SPL_TPL in Makefile,
-  SPL_BUILD in Kconfig etc
-- add XPL_BUILD symbol
-- all fixes and cleanup involving XPL_BUILD symbol
-- rename and use spl_ to xpl_ functions
-- doc updates
-- replace SPL_BUILD with XPL_BUILD in code, preferably in multiple
-  smaller logical patches instead of a single big patch
-- remove SPL_BUILD for TPL and VPL
-- rename SPL_ to XPL_ in Makefile
-- rename SPL_TPL_ to PHASE_ in Makefile, NAME and PROMPT
-
-or something similar instead of doing the big search and replace early.
+This change look strange and this line should have defined
+CONFIG_SPL_BUILD prior to this patch.
 
 Regards,
 Jonas
 
->  #define _CONFIG_PREFIX SPL_
->  #else
->  #define _CONFIG_PREFIX
-> @@ -54,7 +54,7 @@
->   * CONFIG_VAL(FOO) evaluates to the value of
->   *  CONFIG_TOOLS_FOO if USE_HOSTCC is defined,
->   *  CONFIG_FOO if CONFIG_XPL_BUILD is undefined,
-> - *  CONFIG_SPL_FOO if CONFIG_XPL_BUILD is defined.
-> + *  CONFIG_SPL_FOO if CONFIG_SPL_BUILD is defined.
->   *  CONFIG_TPL_FOO if CONFIG_TPL_BUILD is defined.
->   *  CONFIG_VPL_FOO if CONFIG_VPL_BUILD is defined.
->   */
-> @@ -107,21 +107,21 @@ long invalid_use_of_IF_ENABLED_INT(void);
->   * CONFIG_IS_ENABLED(FOO) expands to
->   *  1 if USE_HOSTCC is defined and CONFIG_TOOLS_FOO is set to 'y',
->   *  1 if CONFIG_XPL_BUILD is undefined and CONFIG_FOO is set to 'y',
-> - *  1 if CONFIG_XPL_BUILD is defined and CONFIG_SPL_FOO is set to 'y',
-> + *  1 if CONFIG_SPL_BUILD is defined and CONFIG_SPL_FOO is set to 'y',
->   *  1 if CONFIG_TPL_BUILD is defined and CONFIG_TPL_FOO is set to 'y',
->   *  0 otherwise.
->   *
->   * CONFIG_IS_ENABLED(FOO, (abc)) expands to
->   *  abc if USE_HOSTCC is defined and CONFIG_TOOLS_FOO is set to 'y',
->   *  abc if CONFIG_XPL_BUILD is undefined and CONFIG_FOO is set to 'y',
-> - *  abc if CONFIG_XPL_BUILD is defined and CONFIG_SPL_FOO is set to 'y',
-> + *  abc if CONFIG_SPL_BUILD is defined and CONFIG_SPL_FOO is set to 'y',
->   *  abc if CONFIG_TPL_BUILD is defined and CONFIG_TPL_FOO is set to 'y',
->   *  nothing otherwise.
->   *
->   * CONFIG_IS_ENABLED(FOO, (abc), (def)) expands to
->   *  abc if USE_HOSTCC is defined and CONFIG_TOOLS_FOO is set to 'y',
->   *  abc if CONFIG_XPL_BUILD is undefined and CONFIG_FOO is set to 'y',
-> - *  abc if CONFIG_XPL_BUILD is defined and CONFIG_SPL_FOO is set to 'y',
-> + *  abc if CONFIG_SPL_BUILD is defined and CONFIG_SPL_FOO is set to 'y',
->   *  abc if CONFIG_TPL_BUILD is defined and CONFIG_TPL_FOO is set to 'y',
->   *  def otherwise.
->   *
-> diff --git a/tools/binman/test/generated/autoconf.h b/tools/binman/test/generated/autoconf.h
-> index 75af48f9116..6a23039f469 100644
-> --- a/tools/binman/test/generated/autoconf.h
-> +++ b/tools/binman/test/generated/autoconf.h
-> @@ -1,3 +1,3 @@
->  #define CONFIG_BINMAN 1
-> -#define CONFIG_XPL_BUILD 1
-> +#define CONFIG_SPL_BUILD 1
->  #define CONFIG_SPL_BINMAN_SYMBOLS 1
+> +ifeq ($(CONFIG_SPL_BUILD),y)
+> +KBUILD_CPPFLAGS += -DCONFIG_SPL_BUILD
+> +endif
+>  ifeq ($(CONFIG_TPL_BUILD),y)
+>  KBUILD_CPPFLAGS += -DCONFIG_TPL_BUILD
+>  else
 
