@@ -4,75 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 971ADCF6491
-	for <u-boot@archiver.kernel.org>; Sat, 28 Sep 2024 20:02:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8583ECF6493
+	for <u-boot@archiver.kernel.org>; Sat, 28 Sep 2024 20:02:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 67B9988CBB;
+	by phobos.denx.de (Postfix) with ESMTP id C441A88D08;
 	Sat, 28 Sep 2024 22:00:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lvdvwlP9";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="md5Uk4ux";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 90EFF88CEC; Sat, 28 Sep 2024 22:00:56 +0200 (CEST)
-Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
- [IPv6:2607:f8b0:4864:20::12c])
+ id 8DE9088CC1; Sat, 28 Sep 2024 22:00:57 +0200 (CEST)
+Received: from mail-il1-x134.google.com (mail-il1-x134.google.com
+ [IPv6:2607:f8b0:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6A9D588D03
- for <u-boot@lists.denx.de>; Sat, 28 Sep 2024 22:00:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5E97D88CB8
+ for <u-boot@lists.denx.de>; Sat, 28 Sep 2024 22:00:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12c.google.com with SMTP id
- e9e14a558f8ab-3a27599274eso10804915ab.0
- for <u-boot@lists.denx.de>; Sat, 28 Sep 2024 13:00:54 -0700 (PDT)
+Received: by mail-il1-x134.google.com with SMTP id
+ e9e14a558f8ab-37636c3872bso10905265ab.3
+ for <u-boot@lists.denx.de>; Sat, 28 Sep 2024 13:00:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727553653; x=1728158453; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727553654; x=1728158454; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=a7c73vWIxd7nX0BBNjOiZaml+da+5Tcj8xZdEC9QEN4=;
- b=lvdvwlP9NJorhqYmIDgosit2v1JFxDzozG/tSVVUHV2HPGtztg/gud8vz6KpVMHsqk
- sajhA8TOVGILFOepawVueTMQDmKy/uHBILjyzlVEGuNksya7N5dpphvo5Wdf1Wsa+H+h
- /HfJ22DUS5y0uc15ceb3C3zw8jrTPU6NsQGZw=
+ bh=fP1RmEvIU2Sh7Be5Zg+73FY0r6t2TbCqXiAwHWLxaN4=;
+ b=md5Uk4uxlwhVcwBF3xAMqWFYBlksXjoK/f9KcMbVdMZ7jeaxl8bbjGg+yRoDZY00zG
+ abe6aqc9Xoz695h4xAYLyUIN1ZO7ZrVdBTXgZQQBkJkNLqrqaLRNw61ET4p2C5YPVYwQ
+ 3coxes0i6DPnca93j3BH8xyX8iAGxH4FvoWK0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727553653; x=1728158453;
+ d=1e100.net; s=20230601; t=1727553654; x=1728158454;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=a7c73vWIxd7nX0BBNjOiZaml+da+5Tcj8xZdEC9QEN4=;
- b=lKQXWGRhZ1d2BJ0qWf9exmGJ8DbWgMvs44F4KA8FSFTXCfsNq4GWq7WnaZpm+HgUYx
- lfgb55r3g6vZoO8yaCHQLatifISJvVF2Gyqa3hJZx7ZrSmHHmTaSkG+um2x6ArGRinRx
- wvJoOtUgFJuBF33C8VJ0pyahC4XYTKPhO9iem81Z9hQgLPF79GYDV+jcgR8mMVaI47Rm
- QWYT0Nr7QaNgGFBQLo+0j4gGEYq9n9z9AgTKU+VqEeqUQayu590mSm/A0MwYb83kdnIK
- 7vPBqVGzF/3q2KlfMEwzs9a7ymSzBpoK45ami4ttsXSy0WHzAjfvhbDWkd46+fve9qnC
- BXnA==
-X-Gm-Message-State: AOJu0YyOnAVshQXwktBY9kI2pvSbu35xpO5GEsXdOCnr5tV1Eb2FJmTF
- xXrYeXT7YgOYxNQ8mb6dbXbUCCwMB72MoKR2uYayS65X9V3vEtHVySjym5cT9Rgd+O1xKiM7r3v
- Vnw==
-X-Google-Smtp-Source: AGHT+IFDwbufbbuv9a6ny0Lgt5LIoKPiR0uHmIAnXoun6pjg+lTF8c/Pjakf6z2/V9e5ydjnKKOs+g==
+ bh=fP1RmEvIU2Sh7Be5Zg+73FY0r6t2TbCqXiAwHWLxaN4=;
+ b=aFaykAU4ZIbSmVgaOWs+XOQOw3uk07hgg7A5nUu8vsg1MlPjNNlATNVx9/on3vNegp
+ OqAr8oM+ZGi+Ntjz5dUEPvefib5OW86rEN4t/ckU6+hs2YSnBHRzo9x1QTHzD6aF9oQF
+ npurnWYQajq3ASc22sto4wkaTqLe3kw/JjomM9R70CM/nMqsK55vmnswN9wqiOP34FqC
+ rMFzP/PnO2k4Z6lewyzoMBmCwj0tku1UHzYIJkfqxkEQf2C8yCnRCDBJa0IgXlCYxyBC
+ YAfQuWLEZFprUL7X1K81IAudQq5roID7qwh2lrmVel2nyFVI4FXq9En028DlWbou1WhY
+ Rk9A==
+X-Gm-Message-State: AOJu0YwtJPA7zMAcIKuYo+KOO+ZQO7bS/OT20DknGEshCPL0pzvoqCNI
+ 0Pu1MhCQ32Z6yICIHClZcXAxs5C003TJCA7Ix3gmRdfYg+BqSX0SSvmSJI2VKCCetRUT9uaenSM
+ f6A==
+X-Google-Smtp-Source: AGHT+IHi0QSPnrQfNGN+xHpYj7s+N3AjwBvGcwMgL2Cuf666JWbRDLGO7wt2SV8g6nyFnRjJsLTUXg==
 X-Received: by 2002:a92:c266:0:b0:3a0:9fc6:5437 with SMTP id
- e9e14a558f8ab-3a3451a2361mr56747695ab.18.1727553652856; 
- Sat, 28 Sep 2024 13:00:52 -0700 (PDT)
+ e9e14a558f8ab-3a3451a2361mr56747975ab.18.1727553653689; 
+ Sat, 28 Sep 2024 13:00:53 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4d888835307sm1242590173.2.2024.09.28.13.00.51
+ 8926c6da1cb9f-4d888835307sm1242590173.2.2024.09.28.13.00.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 28 Sep 2024 13:00:52 -0700 (PDT)
+ Sat, 28 Sep 2024 13:00:53 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- =?UTF-8?q?Thomas=20Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>,
- William Zhang <william.zhang@broadcom.com>
-Subject: [PATCH v2 10/30] log: global: Rename warn_non_spl() and update the
- condition
-Date: Sat, 28 Sep 2024 14:00:10 -0600
-Message-Id: <20240928200030.194546-11-sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>,
+	Simon Glass <sjg@chromium.org>
+Subject: [PATCH v2 11/30] qconfig: Add XPL_BUILD to ignored symbols
+Date: Sat, 28 Sep 2024 14:00:11 -0600
+Message-Id: <20240928200030.194546-12-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240928200030.194546-1-sjg@chromium.org>
 References: <20240928200030.194546-1-sjg@chromium.org>
@@ -94,97 +89,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This should now refer to xPL rather than SPL, so update it throughout
-the tree.
+This now appears in the code base, so add it to the list of ignored
+symbols in qconfig
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- arch/arm/lib/cache.c     |  2 +-
- doc/develop/logging.rst  |  2 +-
- drivers/spi/spi-uclass.c |  4 ++--
- include/log.h            | 10 +++++-----
- 4 files changed, 9 insertions(+), 9 deletions(-)
+ tools/qconfig.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/arm/lib/cache.c b/arch/arm/lib/cache.c
-index b2ae74a59f1..cac2159fe1a 100644
---- a/arch/arm/lib/cache.c
-+++ b/arch/arm/lib/cache.c
-@@ -62,7 +62,7 @@ int check_cache_range(unsigned long start, unsigned long stop)
- 		ok = 0;
+diff --git a/tools/qconfig.py b/tools/qconfig.py
+index 8c2fc9efc5f..71e911eeb3b 100755
+--- a/tools/qconfig.py
++++ b/tools/qconfig.py
+@@ -77,7 +77,7 @@ IGNORE_SYMS = ['DEBUG_SECTION_MISMATCH', 'FTRACE_MCOUNT_RECORD', 'GCOV_KERNEL',
+                'IS_ENABLED_', 'IS_ENABLED_1', 'IS_ENABLED_2', 'IS_ENABLED_3',
+                'SPL_', 'TPL_', 'SPL_FOO', 'TPL_FOO', 'TOOLS_FOO',
+                'ACME', 'SPL_ACME', 'TPL_ACME', 'TRACE_BRANCH_PROFILING',
+-               'VAL', '_UNDEFINED', 'SPL_BUILD', ]
++               'VAL', '_UNDEFINED', 'SPL_BUILD', 'XPL_BUILD', ]
  
- 	if (!ok) {
--		warn_non_spl("CACHE: Misaligned operation at range [%08lx, %08lx]\n",
-+		warn_non_xpl("CACHE: Misaligned operation at range [%08lx, %08lx]\n",
- 			     start, stop);
- 	}
+ SPL_PREFIXES = ['SPL_', 'TPL_', 'VPL_', 'TOOLS_']
  
-diff --git a/doc/develop/logging.rst b/doc/develop/logging.rst
-index 704a6bf1d84..d7a40c94bf0 100644
---- a/doc/develop/logging.rst
-+++ b/doc/develop/logging.rst
-@@ -292,7 +292,7 @@ Convert debug() statements in the code to log() statements
- 
- Convert error() statements in the code to log() statements
- 
--Figure out what to do with BUG(), BUG_ON() and warn_non_spl()
-+Figure out what to do with BUG(), BUG_ON() and warn_non_xpl()
- 
- Add a way to browse log records
- 
-diff --git a/drivers/spi/spi-uclass.c b/drivers/spi/spi-uclass.c
-index 6e281725239..f6efebd2e90 100644
---- a/drivers/spi/spi-uclass.c
-+++ b/drivers/spi/spi-uclass.c
-@@ -538,7 +538,7 @@ int spi_slave_of_to_plat(struct udevice *dev, struct dm_spi_slave_plat *plat)
- 		mode |= SPI_TX_OCTAL;
- 		break;
- 	default:
--		warn_non_spl("spi-tx-bus-width %d not supported\n", value);
-+		warn_non_xpl("spi-tx-bus-width %d not supported\n", value);
- 		break;
- 	}
- 
-@@ -556,7 +556,7 @@ int spi_slave_of_to_plat(struct udevice *dev, struct dm_spi_slave_plat *plat)
- 		mode |= SPI_RX_OCTAL;
- 		break;
- 	default:
--		warn_non_spl("spi-rx-bus-width %d not supported\n", value);
-+		warn_non_xpl("spi-rx-bus-width %d not supported\n", value);
- 		break;
- 	}
- 
-diff --git a/include/log.h b/include/log.h
-index 371f99d82e7..bf81a27011f 100644
---- a/include/log.h
-+++ b/include/log.h
-@@ -247,9 +247,9 @@ int _log_buffer(enum log_category_t cat, enum log_level_t level,
- #endif
- 
- #ifdef CONFIG_XPL_BUILD
--#define _SPL_BUILD	1
-+#define _XPL_BUILD	1
- #else
--#define _SPL_BUILD	0
-+#define _XPL_BUILD	0
- #endif
- 
- #if CONFIG_IS_ENABLED(LOG)
-@@ -281,9 +281,9 @@ int _log_buffer(enum log_category_t cat, enum log_level_t level,
- #define debug(fmt, args...)			\
- 	debug_cond(_DEBUG, fmt, ##args)
- 
--/* Show a message if not in SPL */
--#define warn_non_spl(fmt, args...)			\
--	debug_cond(!_SPL_BUILD, fmt, ##args)
-+/* Show a message if not in xPL */
-+#define warn_non_xpl(fmt, args...)			\
-+	debug_cond(!_XPL_BUILD, fmt, ##args)
- 
- /*
-  * An assertion is run-time check done in debug mode only. If DEBUG is not
 -- 
 2.34.1
 
