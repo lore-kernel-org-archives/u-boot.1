@@ -2,101 +2,98 @@ Return-Path: <u-boot-bounces@lists.denx.de>
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6CF0CCFA07
-	for <u-boot@archiver.kernel.org>; Thu, 26 Sep 2024 22:51:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13448CF6496
+	for <u-boot@archiver.kernel.org>; Sat, 28 Sep 2024 23:36:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A173B89056;
-	Fri, 27 Sep 2024 00:50:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 625BD88CAE;
+	Sun, 29 Sep 2024 01:36:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ddIpxdSB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ejZ6NKcP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D529A88F41; Fri, 27 Sep 2024 00:40:36 +0200 (CEST)
-Received: from mail-qt1-x844.google.com (mail-qt1-x844.google.com
- [IPv6:2607:f8b0:4864:20::844])
+ id 8FC8D88CBA; Sat, 28 Sep 2024 22:00:50 +0200 (CEST)
+Received: from mail-io1-xd43.google.com (mail-io1-xd43.google.com
+ [IPv6:2607:f8b0:4864:20::d43])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F15FE88966
- for <u-boot@lists.denx.de>; Fri, 27 Sep 2024 00:40:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A7C4288CC2
+ for <u-boot@lists.denx.de>; Sat, 28 Sep 2024 22:00:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qt1-x844.google.com with SMTP id
- d75a77b69052e-4582a0b438aso10129491cf.0
- for <u-boot@lists.denx.de>; Thu, 26 Sep 2024 15:40:35 -0700 (PDT)
+Received: by mail-io1-xd43.google.com with SMTP id
+ ca18e2360f4ac-82ceab75c27so189007839f.1
+ for <u-boot@lists.denx.de>; Sat, 28 Sep 2024 13:00:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727390435; x=1727995235; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727553648; x=1728158448; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cq/2ROJ5aSihOUIW/HOPYyPfuEZ9iiyaOMLl+TTlMdo=;
- b=ddIpxdSBZgEukYlWAT5K+jW84ucz9A1+Rtv2Wdc+NHd6hrdScYnDS7e/VIm8BSvPaa
- T89PdJYyPuo34Y5WUH0hEsd0XcqwthKD50gavLFtFFq1IoHel8YbLURenrieks684GAE
- ieZCjNE9635H4q9rUXfQS1X2WlorSHFYwBFsw=
+ bh=vcxl342WxLOJgwfmgUJpinuIPghQdy7TWmDt3Fl59hM=;
+ b=ejZ6NKcP/XXYS8WxmxXkEvEbvV9bnBdSqf/Zuu/VplW3y10LRoxQjFhFcTHi9E1plF
+ LNBRiY7eQcqxlrjEuGIi83/PA2lPUbYGqFoMeg6wxuoNHjvPgScG38iCgfyGiK1GBbUL
+ gJV8OSNCWUG/BdiI8Yj2wYOs9AuQz8q7VWVYg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727390435; x=1727995235;
+ d=1e100.net; s=20230601; t=1727553648; x=1728158448;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cq/2ROJ5aSihOUIW/HOPYyPfuEZ9iiyaOMLl+TTlMdo=;
- b=qzLXBesxGwCOCuQLC/rO0tZ8OUD17wZM3dfaoxipz4XN4plY7EsI6BgPwos6nKxoSR
- uhOd9EnsZ0yJGLLfzmTAhn22dUWPuVVuRJuPPI9OHI4Aru1PY2ZYDtS10FsNtZYIp3M9
- QLVXTn1Cn8uAQ8gQaY6AirtN5DbHBiVnNfKcpZNtztXK7+9DHIFh4CsI+oMD0fbfN0Bg
- tZNA5o7Wz6DFVkYRJz+rfeXWUL6oRJGT/gs9nUGuh4o0HZYqmi6PaxZTi5KZVlaWMdxH
- wN901iwcV5Ho796+GZHPBVw8D6vUQCal3UGncl4Fj75bp+JnEn6pZhKmU+YaWseB2xSD
- jNNg==
-X-Gm-Message-State: AOJu0Yx8ziAlGEjHDaJbaUu6qpMLt2kAIXvvaWxC26Y/mi/7EjubF7E0
- 3ZROSCrhNcbUKaWQJwq98wTXemFqqTOS/DaI8pE6xEUre7kTfiuQQy6culRVISyHaNF8mZ6p8w2
- AARj1DAhXuA==
-X-Google-Smtp-Source: AGHT+IE8g2Pm6/ePk0CCyuHJgaAxWLTsedSbZ2AcPFfy0OzCaseYg8EMHumoFoy06Dgz1rk9yrytzA==
-X-Received: by 2002:a05:622a:14c6:b0:458:3871:e062 with SMTP id
- d75a77b69052e-45c9f21f6a8mr15896721cf.34.1727390432968; 
- Thu, 26 Sep 2024 15:40:32 -0700 (PDT)
-Received: from chromium.org ([205.220.129.31])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-45c9f350fadsm2738461cf.80.2024.09.26.15.39.59
+ bh=vcxl342WxLOJgwfmgUJpinuIPghQdy7TWmDt3Fl59hM=;
+ b=k8htPRCn3mkFGn4uBoDADY/sujTcHA0nUuP1lws1bw+yNTwMjWB5YktLXy/wW38nQz
+ M0UxOd0X2rRwYyJznVEmU4omiVmqug+CKoiO5dq3ykk5UKV3bocg1rRaiMCM7FBUZf3n
+ x/ghQ89n6TV6xFErdbTQi2M94Qr2bykN5JXPWOYxRgGpzEUHc2f5NdZYAnkVPgweHtR6
+ EpWlUCbytGTqPZSV3njKCDl8jjhmoMvNV1d9ElL5bM6tft1DKjKlKYKDbsVQJ7O5tD0L
+ hd3HvglFZg4BThHOdcIYlid6yLSoPu7vF1wBTkHc0UvEFl0ooiRO0kH+uiP4HpgbEawq
+ AStA==
+X-Gm-Message-State: AOJu0Yx9WbH1WL2rgkHD1HXKKCnrPP7VYKuIyeBxbAodya6+avssZcMX
+ g/aL7eei0hemP11LjLe3dcUaoi+h047sZs95+ZMJX5f2AqjhnEE6FuUn6Ifr+5vANqJA+cOOS8u
+ UQewM
+X-Google-Smtp-Source: AGHT+IEhP4MEpu50Q+js46m886gO0gX0YLIEEraCCTxdljWuRQ6Wjwzg1PJ+K7sNbEYXqtPvnaIL/A==
+X-Received: by 2002:a05:6602:6015:b0:82a:31d4:1aab with SMTP id
+ ca18e2360f4ac-834932741fdmr642335739f.14.1727553646413; 
+ Sat, 28 Sep 2024 13:00:46 -0700 (PDT)
+Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
+ [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4d888835307sm1242590173.2.2024.09.28.13.00.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Sep 2024 15:40:31 -0700 (PDT)
+ Sat, 28 Sep 2024 13:00:44 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Alban Bedel <alban.bedel@avionic-design.de>,
- Andreas Geisreiter <ageisreiter@dh-electronics.de>,
- Artur Rojek <artur@conclusive.pl>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Aspeed BMC SW team <BMC-SW@aspeedtech.com>,
- Baruch Siach <baruch@tkos.co.il>, Benjamin Hahn <B.Hahn@phytec.de>,
- Boon Khai Ng <boon.khai.ng@intel.com>,
- "Derald D. Woods" <woods.technical@gmail.com>,
- Eric Nelson <eric@nelint.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- James Hilliard <james.hilliard1@gmail.com>,
+ Alifer Moraes <alifer.wsdm@gmail.com>, "Andrew F. Davis" <afd@ti.com>,
+ Apurva Nandan <a-nandan@ti.com>, Christian Marangi <ansuelsmth@gmail.com>,
+ Ezequiel Garcia <ezequiel@collabora.com>, FUKAUMI Naoki <naoki@radxa.com>,
+ Gilles Talis <gilles.talis@gmail.com>,
+ Giulio Benetti <giulio.benetti@benettiengineering.com>,
+ Hans de Goede <hdegoede@redhat.com>, Harald Seiler <hws@denx.de>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Liviu Dudau <liviu.dudau@foss.arm.com>,
- Martyn Welch <martyn.welch@collabora.com>,
- Maxim Uvarov <maxim.uvarov@linaro.org>, Minkyu Kang <mk7.kang@samsung.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Paul Walmsley <paul.walmsley@sifive.com>, Pratyush Yadav <p.yadav@ti.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Linus Walleij <linus.walleij@linaro.org>,
+ Lukas Funke <lukas.funke@weidmueller.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>, Minkyu Kang <mk7.kang@samsung.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Parthiban Nallathambi <parthiban@linumiz.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Qiang Zhao <qiang.zhao@nxp.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Roger Quadros <rogerq@kernel.org>,
  Roman Stratiienko <r.stratiienko@gmail.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Suniel Mahesh <sunil@amarulasolutions.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Tien Fong Chee <tien.fong.chee@intel.com>,
- Wadim Egorov <w.egorov@phytec.de>, shengfei Xu <xsf@rock-chips.com>,
- u-boot@dh-electronics.com
-Subject: [PATCH 05/42] global: Use CONFIG_XPL_BUILD instead of CONFIG_SPL_BUILD
-Date: Fri, 27 Sep 2024 00:35:30 +0200
-Message-ID: <20240926223814.1276764-6-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240926223814.1276764-1-sjg@chromium.org>
-References: <20240926223814.1276764-1-sjg@chromium.org>
+ Sean Edmond <seanedmond@microsoft.com>,
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
+ Thierry Reding <treding@nvidia.com>, Tim Harvey <tharvey@gateworks.com>,
+ Vitor Soares <vitor.soares@toradex.com>,
+ William Zhang <william.zhang@broadcom.com>, Yannic Moog <y.moog@phytec.de>
+Subject: [PATCH v2 05/30] global: Use CONFIG_XPL_BUILD instead of
+ CONFIG_SPL_BUILD
+Date: Sat, 28 Sep 2024 14:00:05 -0600
+Message-Id: <20240928200030.194546-6-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240928200030.194546-1-sjg@chromium.org>
+References: <20240928200030.194546-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 27 Sep 2024 00:50:46 +0200
+X-Mailman-Approved-At: Sun, 29 Sep 2024 01:35:59 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,6 +114,8 @@ Use the new symbol to refer to any 'SPL' build, including TPL and VPL
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
+
+(no changes since v1)
 
  README                                        |  4 +-
  arch/arm/Makefile                             |  6 +--
@@ -15595,5 +15594,5 @@ index 6a23039f469..75af48f9116 100644
 +#define CONFIG_XPL_BUILD 1
  #define CONFIG_SPL_BINMAN_SYMBOLS 1
 -- 
-2.43.0
+2.34.1
 
