@@ -4,75 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8A6FCF6491
-	for <u-boot@archiver.kernel.org>; Sat, 28 Sep 2024 20:05:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACAF0CF6496
+	for <u-boot@archiver.kernel.org>; Sat, 28 Sep 2024 20:56:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 094D688E0C;
-	Sat, 28 Sep 2024 22:01:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 288E388B29;
+	Sat, 28 Sep 2024 22:56:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AV9JsEmF";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="royNqjPM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52B2D88CB8; Sat, 28 Sep 2024 22:01:26 +0200 (CEST)
-Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
- [IPv6:2607:f8b0:4864:20::12b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 04A7888C6D; Sat, 28 Sep 2024 22:56:47 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E75B88B23
- for <u-boot@lists.denx.de>; Sat, 28 Sep 2024 22:01:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1FEA788ADC
+ for <u-boot@lists.denx.de>; Sat, 28 Sep 2024 22:56:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12b.google.com with SMTP id
- e9e14a558f8ab-3a1f1ef7550so15933685ab.1
- for <u-boot@lists.denx.de>; Sat, 28 Sep 2024 13:01:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727553682; x=1728158482; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Z4wpv3aF4s4BmvGpn2h0tB0lYY45u16KmBZDEqIiAnw=;
- b=AV9JsEmF8BjpIuEYN0QbRnekhpbklVjMF4+KGWEXtqDlHB/pgBkTwYsFdiW5/FVnRa
- XJ1LBE0YQLkBruG4VWkvt+o5hs3Cp+WmvJqmjDjXqbMub9vtm/dqqmh0cEioyNBUpg10
- ge/FE5SKNWyfw5M7K/ZCy5Rz85sSRW3snAxsk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727553682; x=1728158482;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Z4wpv3aF4s4BmvGpn2h0tB0lYY45u16KmBZDEqIiAnw=;
- b=ef57p6JWUdwJzN0kYKsiN+X5+Z/sJLSs0RLo9/qRiW19PDC3/oO2+/+vufTgh8jH+x
- 7vh+AeRMSABJr7HcIhVknXdBx1HeP0BeuoyIoPPFnvxWpXa5NoESwQhpM332I3NuLach
- DFM0g9B1i1vBv6uWVf+Bs0TyDQZ2iazKIQoVPrDoLhGxsMrOPK4ZSMW6QZYwlDGj1eef
- mQQpm8kZAdpi3/tzhakwFwyKPIqYmpX7t1pRSwcSYh8c0n6TgJgk5SLUs/LPK/N4J8c2
- jRL17ktxnSWfULVCTzkjbGbPjPfMb+V/A936vymRhPRrD9LNz2DN2/o2LptZ83G4oixZ
- SEHw==
-X-Gm-Message-State: AOJu0Yxfm/i/m5EC7bqkZsNgnBfQjb/C4XB5mjgIaEsOnqurOSNsKkuT
- ZfUCyl/Az0UjrW3Wx+DXjbYy8gmo7Pi48SzztwXlz5Os/E5GfbK/pqYAZobRCxaLzW3YE3NyXZq
- hPQ==
-X-Google-Smtp-Source: AGHT+IG0LmFQFSe6Lh8aYmljQArHgqP9w38Nxcjnjv9xho/O+aJuZrnbfLaIzDE7Ju00qo8Uj8uWZA==
-X-Received: by 2002:a05:6e02:170e:b0:3a0:a71b:75ee with SMTP id
- e9e14a558f8ab-3a3451bc0b1mr67271465ab.19.1727553681715; 
- Sat, 28 Sep 2024 13:01:21 -0700 (PDT)
-Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
- [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4d888835307sm1242590173.2.2024.09.28.13.01.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 28 Sep 2024 13:01:20 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
-	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 30/30] doc: Update init docs for the xPL changes
-Date: Sat, 28 Sep 2024 14:00:30 -0600
-Message-Id: <20240928200030.194546-31-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240928200030.194546-1-sjg@chromium.org>
-References: <20240928200030.194546-1-sjg@chromium.org>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=c70e=Q3=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1727556999;
+ bh=/6PZxOapO87TWivCh4KK48Km/BOp8U2n+R9H1Ius7F0=;
+ b=royNqjPMlX4yXlUboZ5C8iJhuQ+ZtXZP1Cggz6oAjVo4pvIhqWSoDb66Nx1Utyo7vKsXsBa85
+ Dw3fw7tUEq0SFJ8ALwikEpU6eWsBO9qHvOpp6+yD/4MLXGkxlOWt77qPmQc5GnDaMj/m9q3aIGq
+ Wl8dT5NBzOpJL6jQhNzgBB31Ke5tUPT1vlTNsm0dsHwFVaX1+0CXp1DqjPaNXilHNNKl/qF11VV
+ Jc0Z/bjN1E9tI1OFyze5DsmN3v0fflqFfik3J34KKPSrd8A+pfjhMgB5yrSpq21YNebZ1bVkBv7
+ +iXLpoSJNDc53kEy3+4HJCimKg6ScIggpxTLjWuLTiVA==
+Message-ID: <7a415f72-01e3-4257-ac6d-c21c1610abe9@kwiboo.se>
+Date: Sat, 28 Sep 2024 22:56:27 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 04/30] scripts: Define CONFIG_XPL_BUILD for all xPL
+ builds
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini
+ <trini@konsulko.com>, Bryan Brattlof <bb@ti.com>,
+ Greg Malysa <greg.malysa@timesys.com>, Ian Roberts
+ <ian.roberts@timesys.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Nishanth Menon <nm@ti.com>, Sumit Garg <sumit.garg@linaro.org>
+References: <20240928200030.194546-1-sjg@chromium.org>
+ <20240928200030.194546-5-sjg@chromium.org>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20240928200030.194546-5-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 66f86d82ee3ee57cb792fb77
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,81 +78,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update the documentation here to cover the meaning of xPL
+Hi Simon,
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+On 2024-09-28 22:00, Simon Glass wrote:
+> The new name 'xPL' is intended to indicate a build of any phase which is
+> not U-Boot proper. Define it for all such phases.
+> 
+> Note that we also define CONFIG_SPL_BUILD for all xPL builds. This
+> preserves existing behaviour, but future patches will adjust that.
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+> 
+> (no changes since v1)
+> 
+>  scripts/Makefile.autoconf | 6 +++---
+>  scripts/Makefile.xpl      | 9 +++++----
+>  2 files changed, 8 insertions(+), 7 deletions(-)
+> 
+> diff --git a/scripts/Makefile.autoconf b/scripts/Makefile.autoconf
+> index b42f9b525fe..d7544022a31 100644
+> --- a/scripts/Makefile.autoconf
+> +++ b/scripts/Makefile.autoconf
+> @@ -83,15 +83,15 @@ u-boot.cfg: include/config.h FORCE
+>  
+>  spl/u-boot.cfg: include/config.h FORCE
+>  	$(Q)mkdir -p $(dir $@)
+> -	$(call cmd,u_boot_cfg,-DCONFIG_SPL_BUILD)
+> +	$(call cmd,u_boot_cfg,-DCONFIG_XPL_BUILD -DCONFIG_SPL_BUILD)
+>  
+>  tpl/u-boot.cfg: include/config.h FORCE
+>  	$(Q)mkdir -p $(dir $@)
+> -	$(call cmd,u_boot_cfg,-DCONFIG_SPL_BUILD -DCONFIG_TPL_BUILD)
+> +	$(call cmd,u_boot_cfg,-DCONFIG_XPL_BUILD -DCONFIG_SPL_BUILD -DCONFIG_TPL_BUILD)
+>  
+>  vpl/u-boot.cfg: include/config.h FORCE
+>  	$(Q)mkdir -p $(dir $@)
+> -	$(call cmd,u_boot_cfg,-DCONFIG_SPL_BUILD -DCONFIG_VPL_BUILD)
+> +	$(call cmd,u_boot_cfg,-DCONFIG_XPL_BUILD -DCONFIG_SPL_BUILD -DCONFIG_VPL_BUILD)
+>  
+>  include/autoconf.mk: u-boot.cfg
+>  	$(call cmd,autoconf)
+> diff --git a/scripts/Makefile.xpl b/scripts/Makefile.xpl
+> index 3091311a3d2..ad21d451a30 100644
+> --- a/scripts/Makefile.xpl
+> +++ b/scripts/Makefile.xpl
+> @@ -21,15 +21,16 @@ include $(srctree)/scripts/Kbuild.include
+>  
+>  -include include/config/auto.conf
+>  
+> -# This file contains 0, 1 or 2 lines
+> +# This file contains 0, 2 or 3 lines
+>  # It is empty for U-Boot proper (where $(obj) is empty)
+> -# For any xPL build it contains CONFIG_SPL_BUILD=y
+> -# For TPL builds it has CONFIG_SPL_BUILD=y and CONFIG_TPL_BUILD=y
+> -# For VPL builds it has CONFIG_SPL_BUILD=y and CONFIG_VPL_BUILD=y
+> +# For any xPL build it contains CONFIG_SPL_BUILD=y and CONFIG_XPL_BUILD=y
+> +#    - for TPL builds it also contains CONFIG_TPL_BUILD=y
+> +#    - for VPL builds it also contains CONFIG_VPL_BUILD=y
 
-Changes in v2:
-- Drop patches not stricly necessary for the conversion
-- Update cover letter re code size
-- Rebase to -next
+This comment block was just added in the prior patch, and now changed
+and re-formatted, why not just add the comments in this patch or at
+least this patch should only contain the addition of XPL_BUILD.
 
- doc/develop/init.rst | 23 ++++++++++++-----------
- 1 file changed, 12 insertions(+), 11 deletions(-)
+Regards,
+Jonas
 
-diff --git a/doc/develop/init.rst b/doc/develop/init.rst
-index 2955d9bdbc3..ce985781bb4 100644
---- a/doc/develop/init.rst
-+++ b/doc/develop/init.rst
-@@ -4,15 +4,16 @@ Board Initialisation Flow
- -------------------------
- 
- This is the intended start-up flow for boards. This should apply for both
--SPL and U-Boot proper (i.e. they both follow the same rules).
-+xPL and U-Boot proper (i.e. they both follow the same rules).
- 
--Note: "SPL" stands for "Secondary Program Loader," which is explained in
--more detail later in this file.
-+Note: "xPL" stands for "any Program Loader", including SPL (Secondary
-+Program Loader), TPL (Tertiary Program Loader) and VPL (Verifying Program
-+Loader). The boot sequence is TPL->VPL->SPL->U-Boot proper
- 
--At present, SPL mostly uses a separate code path, but the function names
-+At present, xPL mostly uses a separate code path, but the function names
- and roles of each function are the same. Some boards or architectures
- may not conform to this.  At least most ARM boards which use
--CONFIG_SPL_FRAMEWORK conform to this.
-+CONFIG_xPL_FRAMEWORK conform to this.
- 
- Execution typically starts with an architecture-specific (and possibly
- CPU-specific) start.S file, such as:
-@@ -48,7 +49,7 @@ board_init_f()
- 
- Non-xPL-specific notes:
- 
--    - dram_init() is called to set up DRAM. If already done in SPL this
-+    - dram_init() is called to set up DRAM. If already done in xPL this
-       can do nothing
- 
- xPL-specific notes:
-@@ -68,9 +69,9 @@ xPL-specific notes:
-     - must return normally from this function (don't call board_init_r()
-       directly)
- 
--Here the BSS is cleared. For SPL, if CONFIG_SPL_STACK_R is defined, then at
-+Here the BSS is cleared. For xPL, if CONFIG_xPL_STACK_R is defined, then at
- this point the stack and global_data are relocated to below
--CONFIG_SPL_STACK_R_ADDR. For non-SPL, U-Boot is relocated to run at the top of
-+CONFIG_xPL_STACK_R_ADDR. For non-xPL, U-Boot is relocated to run at the top of
- memory.
- 
- board_init_r()
-@@ -82,11 +83,11 @@ board_init_r()
-     - BSS is available, all static/global variables can be used
-     - execution eventually continues to main_loop()
- 
--Non-SPL-specific notes:
-+Non-xPL-specific notes:
- 
-     - U-Boot is relocated to the top of memory and is now running from
-       there.
- 
--SPL-specific notes:
-+xPL-specific notes:
- 
--    - stack is optionally in SDRAM, if CONFIG_SPL_STACK_R is defined
-+    - stack is optionally in SDRAM, if CONFIG_xPL_STACK_R is defined
--- 
-2.34.1
+>  -include $(obj)/include/autoconf.mk
+>  
+>  UBOOTINCLUDE := -I$(obj)/include $(UBOOTINCLUDE)
+>  
+> +KBUILD_CPPFLAGS += -DCONFIG_XPL_BUILD
+>  KBUILD_CPPFLAGS += -DCONFIG_SPL_BUILD
+>  ifeq ($(CONFIG_TPL_BUILD),y)
+>  KBUILD_CPPFLAGS += -DCONFIG_TPL_BUILD
 
