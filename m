@@ -4,52 +4,149 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9B27CF6491
-	for <u-boot@archiver.kernel.org>; Sat, 28 Sep 2024 23:54:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 804D4CF6491
+	for <u-boot@archiver.kernel.org>; Sun, 29 Sep 2024 01:33:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78143889DA;
-	Sun, 29 Sep 2024 01:54:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id CDA5788BE4;
+	Sun, 29 Sep 2024 03:33:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1727567649;
-	bh=qRxZQy5a1cYPOlgGSbTyJUUQWH/gVdIJ4VES5MzfqBg=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=pm4JP33gWHMMmSjLEiUszgDYB425vjBS5AXn8gOG6OLItRiPScIwpJv4deti5OB6E
-	 eQc6msQVtJhs5/qb0bphI5D5IYIU+lnZ2Yc/HNcVIQV9eRjxTlCamjfdyi4z/8/tAg
-	 6hpBm315i0rhtJZlYaczP7x+QKky2gFtgMUYLDIyKGlCW+hRzYYNcXND6XBpraTiuJ
-	 XdPRiA1LQsi67jDkx+Qagd6rRBOrWibe0ZxvcvnLw+hpqn8rUGc8rZ2JaQJstcO4Vx
-	 ga5/Bw7d1GzJdLTLiDy/7OQQI+eRTQTEgc6HbRMq/O8uOzqW+IbgZJ5O2Sy/YWUeQA
-	 ynJKFVZlOAc5g==
-Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="J12dK96b";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id C088D88BE4; Sun, 29 Sep 2024 03:33:40 +0200 (CEST)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170130004.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::4])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 6119588972;
- Sun, 29 Sep 2024 01:54:08 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1727567648;
- bh=qRxZQy5a1cYPOlgGSbTyJUUQWH/gVdIJ4VES5MzfqBg=;
- h=From:To:Cc:Subject:Date:From;
- b=roE+xtApHHBtKf79h2O9F9qHu39nfNAiaJpnU0RCNQKV5+FvYxfWTG+cmLXBt6vac
- iqBZBsrx8QsL1l0Zt4tWkFz7C+ptsQAddg/ii8OZAkIS/M+U5I7HeJi9oZ5TgEb6k/
- wx9fhIlJdInjARWI2oMn5OvUpFCYyckXYJ1LQzCdtuzTjFOE3ZAUCeLxWYp8BcAjqf
- aU5RsxdZ6F4B+H+DAX3+fWdQ2gpjsZjCmc1Zk/wjtJE1vwmwMzYy/LEThZFEND+3hR
- ThoeteKqjamKJbvqdFMKOJlBa/r6lfeu81kWAfB0NO+0kHnzvr+5HQdJUrSIu+6Utw
- 7mxVZ54xdQItQ==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
- Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
-Subject: [PATCH] arm64: dts: imx8mp: Add support for DH electronics i.MX8M
- Plus DHCOM PicoITX
-Date: Sun, 29 Sep 2024 01:52:35 +0200
-Message-ID: <20240928235325.358821-1-marex@denx.de>
-X-Mailer: git-send-email 2.45.2
-MIME-Version: 1.0
+ by phobos.denx.de (Postfix) with ESMTPS id B3D4B889B3
+ for <u-boot@lists.denx.de>; Sun, 29 Sep 2024 03:33:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=cT8723ki+Qp5UHKb386E96+/bm8d0qYeQ/8wdJkclT6LpwmgWPBGp1rSBcWolUZ941okGZgCuzgz3LWORY/VN7GRCWLun9DBz6393WlqUCt0TK+tGhs3nYcmojbmztADSkpAw9p/IMunoQbZ4QNIaOHbmHce+1ueX4oNxXRrRCaFK1YmsOPMUM9Ht/hGPx9RqEgb7p3j7E02REUeQuydO0r9kFMNUfb9GGYqMjZ8NpFSmSwC5T35gcA4Ww1PEWroJdiQipqwhy5IWm7d14iHTAx8EYi0ie9rN9IUMZQ+84YX0bo+p+cco69ylZEF2F7gXccxWZwfl6+qWDJhcJYKtg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=1BmQJdC1xzJ8m2GMOhYod5/xwRzdi/fli5+pbeVWlwY=;
+ b=LdxsO2ubRyKu0xsRLJd77wkcpRwiYKdhfGTD6aTc2X5uH5n2meLpdA7TkvztowTeYPstVcjGWaA7Oc3C29VdHugfqJWMxcd2p0udAi7jzqjFx8DdIDvrq04lL/4p+y5t4QcHzuxl6cspw3duWFr/8ERNAPvnStPoggiNwBCeF5RscBJNJcIs6qNM570WjHk6B2+IoBfjVcdY1aWRC5GuB4H6hBC9TrrF8xM0/0/VFnaUtZ+QElfEHV8BH66OxQml+rBvun6YT/R2ZAO/bNIxxTE/UFfM+eZGPpENnFLerOWXEswm6hId4TeuJC4s6w7A2GnptrC0n3vcnkaRIoGhOw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=1BmQJdC1xzJ8m2GMOhYod5/xwRzdi/fli5+pbeVWlwY=;
+ b=J12dK96bpvHiBxyJsCQS90Zc5jHl68e4NNbHU9717lj/mnobWMTdOt2i3XXi1tYsiCFxBTQQTISIzte5xAfJP+kaA1BtXfQwE83lhxj+qTVB5L+KovEmsxzm1KmbmNsaOQuJMkJvtBvm21Tdomf4JAQMdQ4xYd6Tfi0nmZ7MmqA0hNMdy2kArzC6KqL+jDH/+Lh70pnlYoskcIAry7WBXRGEQWdn8xRFV4/YApVbe3WFI/ucbvRY7XJiW6E+q7nCfmXjsCipHq3dkQ10+X3T/HGFEW606QHqBxqpmIH2RSgCwfX58OLL8+8AmorlmzEAvZV/meWkd8gNeqPUGpCN1A==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
+ by PA1PR04MB10772.eurprd04.prod.outlook.com (2603:10a6:102:48c::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8005.24; Sun, 29 Sep
+ 2024 01:33:30 +0000
+Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
+ ([fe80::6979:311a:bf0c:1a49]) by PAXPR04MB9644.eurprd04.prod.outlook.com
+ ([fe80::6979:311a:bf0c:1a49%5]) with mapi id 15.20.8005.024; Sun, 29 Sep 2024
+ 01:33:30 +0000
+From: alice.guo@oss.nxp.com
+To: u-boot@lists.denx.de,
+	festevam@gmail.com
+Cc: trini@konsulko.com, marek.vasut+renesas@mailbox.org, clamor95@gmail.com,
+ paul.barker.ct@bp.renesas.com, michal.simek@amd.com,
+ andre.przywara@arm.com, ye.li@nxp.com, jim.t90615@gmail.com,
+ billy_tsai@aspeedtech.com, kabel@kernel.org, caleb.connolly@linaro.org,
+ biju.das.jz@bp.renesas.com, sr@denx.de, piotr.wojtaszczyk@timesys.com,
+ Alice Guo <alice.guo@nxp.com>, Peng Fan <peng.fan@nxp.com>
+Subject: [PATCH v2] gpio: adp5585: Add SPL config for ADP5585 driver
+Date: Sun, 29 Sep 2024 09:32:26 +0800
+Message-Id: <20240929013226.2750458-1-alice.guo@oss.nxp.com>
+X-Mailer: git-send-email 2.34.1
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SI2PR02CA0028.apcprd02.prod.outlook.com
+ (2603:1096:4:195::8) To PAXPR04MB9644.eurprd04.prod.outlook.com
+ (2603:10a6:102:242::11)
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|PA1PR04MB10772:EE_
+X-MS-Office365-Filtering-Correlation-Id: a3fe7d2d-361c-4e5f-008c-08dce026b917
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|52116014|1800799024|376014|366016|7416014|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?gpfCVU1d/lIbIbHbhJxO5z678OQhr54shCxxSACUi+xlPPKkZq2949Ab/j78?=
+ =?us-ascii?Q?9rNP0G6ZtXJXSc3RZrBQD1jC7ZeSnfwGdsufM1zdea2ofqNQ1sUA0cYzDBr4?=
+ =?us-ascii?Q?9ejNaN4VrPhaeUztDUeB2qUv+p/R/d/EIvWDQo2sAhFmioJVOkbwkCzwYsRN?=
+ =?us-ascii?Q?krNNI3lpfJTgMcTTyYDsdmy+KNEUwFnY3RDwsedC7ectrwq0TyoICjLCJBwm?=
+ =?us-ascii?Q?+I5ny8PmKUsGHaiHZlcdJ+hx8uXw6AJ8v08sM0fZJwRewXMDHwBupNGONlky?=
+ =?us-ascii?Q?hTkwUus9LYSG9lsp/zEw1mBy9eilZHUSFiFt6qvJv4Je0/adkRhypvmNKuQo?=
+ =?us-ascii?Q?L2aUHUevffl2MR6wXeH3vzoHY+0rqgkn4x5Jzo5Y+jbRabm89I0jrkUxMBDW?=
+ =?us-ascii?Q?aEqFQ2Evltgb5LXIu+npDv08wGqE/L5HjOiQoK/4rFDZuqg/aZjVwUD1VWys?=
+ =?us-ascii?Q?9a69qf6G44zeEbZFG7RUBIWKhQ3NCcDTMw/6oi8oZUIHoxpp674iUoi3JWrC?=
+ =?us-ascii?Q?8RPN5Xzpj36KWLmN2ya1v7QCYIZF9euUvC9oic4LovZbm2a80Vw0IWgDpR7+?=
+ =?us-ascii?Q?H4lpzdBY8iCaO6xOs4StVBMk5ep+V9x7p6ia+F/8oALlg+0Owgf13A4a+Ywb?=
+ =?us-ascii?Q?2MsNzv/r63D/71LvY8S0ARu8+jQbzigcJy7AkZexcfcf6meL2dShBKVgr2Wj?=
+ =?us-ascii?Q?tUjCcHFlLP/+78wa1fqs0XRlfgelRjq/miq289AXci4m89RAJvcdwKwcMsv7?=
+ =?us-ascii?Q?7thHIqON50NPeyR067kyrhmWY8QmIjm75hbR6wfP5ZaDNTc/J1EqtwlahoRU?=
+ =?us-ascii?Q?b4LNO+46BrJeYRZB+NHf0VVhQ1fyNhqeRyD7prbQozFW2B5qdASW1coC/qBK?=
+ =?us-ascii?Q?hcyOfROqfR2TYzK5JCQ6JTPSeo+Wu6NWYOHr2BQpdEko7UsXRz9udE+7pMAJ?=
+ =?us-ascii?Q?p5+EXPxOayQwuOeXUg73Lpcbutjhmo0jbbXDGvQxqCBVERCDPF8xAskN11BM?=
+ =?us-ascii?Q?YWQSu1rbA2DNSovnrcmSgG8g+l31w46tZMnBOA7TdqWNRUdvG8a/DfKMcnCU?=
+ =?us-ascii?Q?3GP1bNTH/ymH63a9fxxekjJxVPXDqKqaO9j3iJCpQWE7ty4yPNRs84O7Cf8+?=
+ =?us-ascii?Q?FCOD7mgBNBxVpSVx1PMAVB4HOF3g0XjjScKAe7cJy/Y0jacx5g2GW6N3LrJg?=
+ =?us-ascii?Q?WzdtWtILpruXNx8l13jd6de/qyMR5u9pTOG345i5aBokqpIa37F3DypOpR2z?=
+ =?us-ascii?Q?/hGWTbXKyM0WsV5M57CPonveLlshP9Q2/4K1FtItpA9rjom3wsLXajnGEz2A?=
+ =?us-ascii?Q?x9yB30unhkBxG6sS1iNYfS8qoiACv/zY44reSnMQvY+l4bycBRf4EzH+yG+P?=
+ =?us-ascii?Q?AuFTOURI3O8KQowbxa91S9SBErU0WXv1qCuAlx+wZ5OkgVSGEw=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(52116014)(1800799024)(376014)(366016)(7416014)(38350700014);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?bLwEen8csvKp8Ej/WeYH4toqd4+AD4yLkRVLYjy9KGlholZpI18mS//S1Pdh?=
+ =?us-ascii?Q?X/qGWRvRVNSYiA0e7PY0XIYY/1sXftEGQcBFuRbjhgTeGSLedj2Tv5JcLn5H?=
+ =?us-ascii?Q?2lTH/KYesJkXL+6xqw/y94tf+C2TGVIWvFo7iSuPxjj7MweXdSLrAQ0qVLb0?=
+ =?us-ascii?Q?hkrnNUWBBxqaQvMzsIxlDcNgK3n1tDfypUcGwiVPMZXYcfsdR9OiYq8mibvd?=
+ =?us-ascii?Q?LT8Up3IVsDliaZ2VpeW8NLhFwJggnStyMf1PTbwQcoY4r82SEhms5fUvkR6D?=
+ =?us-ascii?Q?dOkR6KmtQiXbK1lkLEv5l31IK0NrjllXFicMc+8NTcidObEnwTjD5xpPvSr4?=
+ =?us-ascii?Q?D90Rp2yHJKPvCCsKl8SA9xut7UcvDPx8vUmg9AvDxGDAuTp8O8qe3Ts10WrW?=
+ =?us-ascii?Q?onhHUKfVR6cjdLw0q37Gy34SxncJYnxxa3S0lFDVCH47PvZvae7YB/zFIYxv?=
+ =?us-ascii?Q?Ppul3XVqHzbbj0EIWZYU4+SJkmks4UkgAaFy4GV5+hpND17vhmHLgJgtXimt?=
+ =?us-ascii?Q?eYHehcb5Vo1MDXQnptB1kMQYI9sz3ejF1bqgdUMWsklRNmBVDtuyqZKbtEF6?=
+ =?us-ascii?Q?NeOs9Uvya4DZg3RJFnyBty8UFtp0gB3ibfJkruB//0jz5E900Me+pE/tycbE?=
+ =?us-ascii?Q?RjHlBu6rsxZugViwjC5rZgua5h68iaRTl+vuTEKnAsmNo0O7vvpDUHsmiPIM?=
+ =?us-ascii?Q?pVd/O4RZZNnmWQcl1oLNe6AnMgl5RpAmiZ5bE39M2ODEt/Oq0TK5wQaMlV1L?=
+ =?us-ascii?Q?7UGKoGllEsro51ztHbUWSnImIzVZni9o+c2ng0EEn8RyNLMWqPyN8HGV1G56?=
+ =?us-ascii?Q?wvLXSHMnQFnz0OM9/SHR1FjOdkSgwlZF4xYxwyT0e1lw4cQnmTvZvvYQGaKK?=
+ =?us-ascii?Q?7zpZNgfWHPjRK0fIHB3chpCH92CoqANaVVmZoaOKtuuzCWnb94itvk3XMfqZ?=
+ =?us-ascii?Q?Cv9Z4MPcRLhwFR8E9R8JjNg196z/BsyOKgSDtBB6Z9njTP9H3UoVwDXlgBwW?=
+ =?us-ascii?Q?eCO0v4WfmBLRu9iYf8/gi9gQxLDIhmn5qWy1Gxw40Zvrn+BpDPmu6Sy2IOwu?=
+ =?us-ascii?Q?j6gmcqN14gum98AtALS+Lqo8UFoticpetkZPdAdYAI0BrnqAXsCn6EtKlvhY?=
+ =?us-ascii?Q?DGx6hztURdbErAh2P4+HargLbRuS8ocxrTiNtPLDNFq1gicXxXlsQ/4TULEH?=
+ =?us-ascii?Q?FxXb0n2Fdh7VJYUgx2HgVz1CJQd/675nzcgnWd7hnh8XrQKY7znPobMKX1r8?=
+ =?us-ascii?Q?0sp1c2lP2oN6mP/JgMWnFsLg5BbGRnBb29icoi+TNmy/5l1k914MK4MERE84?=
+ =?us-ascii?Q?vT78kWfu6XcZgIahJnTks6NQ91jECMXWtXt0jX+WT05RvLtCbBgNpr2h2cIg?=
+ =?us-ascii?Q?nPROEHiaE4SVyMuFFnS26ktDTDK4GolLai13YBSRj0y1HxUYfI+2gPUAAy5H?=
+ =?us-ascii?Q?ZLofI3Fyh3uT6NjnoF9PmZcc4ecqsf7jrGdYsOBzCKMvZQNacKMDHrocx3Ma?=
+ =?us-ascii?Q?q6ZNaVEs0beIbO8ydARe2xdqwVYT397HElJvaHt3F0wJeCkzDFu67vV6kRJe?=
+ =?us-ascii?Q?FJRdmrkVRsYapgJexP6zf6/m9xsJ4yh3suazMl1Y?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a3fe7d2d-361c-4e5f-008c-08dce026b917
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Sep 2024 01:33:30.2476 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 9bN63jZy2npdtLp90kPQK8GDr1/YceI2Zh1cf/t5o1ya8IQE5kXqhrC5XBdFLbT8WXR0pW7wiRmEPTn2+a30yA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR04MB10772
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,492 +163,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for DH electronics i.MX8M Plus DHCOM SoM on PicoITX carrier board.
-This system is populated with serial console, EQoS ethernet, eMMC, SD, SPI NOR,
-LEDs and USB 3.0 host used in USB 2.0 mode on PicoITX.
+From: Ye Li <ye.li@nxp.com>
 
-Matching Linux kernel patch has been posted:
-https://lore.kernel.org/imx/20240928234949.357893-2-marex@denx.de/
+So we can disable to build ADP5585 in SPL to save size
 
-Signed-off-by: Marek Vasut <marex@denx.de>
+Signed-off-by: Ye Li <ye.li@nxp.com>
+Signed-off-by: Alice Guo <alice.guo@nxp.com>
+Reviewed-by: Peng Fan <peng.fan@nxp.com>
 ---
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-Cc: Fabio Estevam <festevam@gmail.com>
-Cc: Stefano Babic <sbabic@denx.de>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@dh-electronics.com
-Cc: u-boot@lists.denx.de
----
- arch/arm/dts/Makefile                         |   1 +
- arch/arm/dts/imx8mp-dhcom-picoitx-u-boot.dtsi |   6 +
- arch/arm/dts/imx8mp-dhcom-picoitx.dts         | 152 ++++++++++
- configs/imx8mp_dhcom_picoitx_defconfig        | 273 ++++++++++++++++++
- 4 files changed, 432 insertions(+)
- create mode 100644 arch/arm/dts/imx8mp-dhcom-picoitx-u-boot.dtsi
- create mode 100644 arch/arm/dts/imx8mp-dhcom-picoitx.dts
- create mode 100644 configs/imx8mp_dhcom_picoitx_defconfig
+Changes for v2:
+ - added my Signed-off-by
 
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index cdb90f1d358..d69b53ce8f7 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -972,6 +972,7 @@ dtb-$(CONFIG_ARCH_IMX8M) += \
- 	imx8mp-dhcom-pdk2.dtb \
- 	imx8mp-dhcom-pdk3.dtb \
- 	imx8mp-dhcom-pdk3-overlay-rev100.dtbo \
-+	imx8mp-dhcom-picoitx.dtb \
- 	imx8mp-icore-mx8mp-edimm2.2.dtb \
- 	imx8mp-msc-sm2s.dtb \
- 	imx8mq-pico-pi.dtb \
-diff --git a/arch/arm/dts/imx8mp-dhcom-picoitx-u-boot.dtsi b/arch/arm/dts/imx8mp-dhcom-picoitx-u-boot.dtsi
-new file mode 100644
-index 00000000000..4e95cd0e483
---- /dev/null
-+++ b/arch/arm/dts/imx8mp-dhcom-picoitx-u-boot.dtsi
-@@ -0,0 +1,6 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+/*
-+ * Copyright (C) 2023-2024 Marek Vasut <marex@denx.de>
-+ */
+ drivers/gpio/Kconfig  | 6 ++++++
+ drivers/gpio/Makefile | 2 +-
+ 2 files changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
+index 3996333fe8..1e5711663e 100644
+--- a/drivers/gpio/Kconfig
++++ b/drivers/gpio/Kconfig
+@@ -700,4 +700,10 @@ config RZG2L_GPIO
+ 	  Support the gpio functionality of the pin function controller (PFC)
+ 	  on the Renesas RZ/G2L SoC family.
+ 
++config SPL_ADP5585_GPIO
++	bool "ADP5585 GPIO driver in SPL"
++	depends on SPL_DM_GPIO && SPL_I2C
++	help
++	  Support ADP5585 GPIO expander in SPL.
 +
-+#include "imx8mp-dhcom-u-boot.dtsi"
-diff --git a/arch/arm/dts/imx8mp-dhcom-picoitx.dts b/arch/arm/dts/imx8mp-dhcom-picoitx.dts
-new file mode 100644
-index 00000000000..285aaa5b6c0
---- /dev/null
-+++ b/arch/arm/dts/imx8mp-dhcom-picoitx.dts
-@@ -0,0 +1,152 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+/*
-+ * Copyright (C) 2023-2024 Marek Vasut <marex@denx.de>
-+ *
-+ * DHCOM iMX8MP variant:
-+ * DHCM-iMX8ML8-C160-R204-F1638-SPI16-E-SD-RTC-T-RGB-I-01D2
-+ * DHCOM PCB number: 660-200 or newer
-+ * PicoITX PCB number: 487-600 or newer
-+ */
-+
-+/dts-v1/;
-+
-+#include <dt-bindings/leds/common.h>
-+#include "imx8mp-dhcom-som.dtsi"
-+
-+/ {
-+	model = "DH electronics i.MX8M Plus DHCOM PicoITX";
-+	compatible = "dh,imx8mp-dhcom-picoitx", "dh,imx8mp-dhcom-som",
-+		     "fsl,imx8mp";
-+
-+	chosen {
-+		stdout-path = &uart1;
-+	};
-+
-+	led {
-+		compatible = "gpio-leds";
-+
-+		led-0 {
-+			color = <LED_COLOR_ID_YELLOW>;
-+			default-state = "off";
-+			function = LED_FUNCTION_INDICATOR;
-+			gpios = <&gpio1 5 GPIO_ACTIVE_HIGH>; /* GPIO I */
-+			pinctrl-0 = <&pinctrl_dhcom_i>;
-+			pinctrl-names = "default";
-+		};
-+	};
-+};
-+
-+&eqos {	/* First ethernet */
-+	pinctrl-0 = <&pinctrl_eqos_rmii>;
-+	phy-handle = <&ethphy0f>;
-+	phy-mode = "rmii";
-+
-+	assigned-clock-parents = <&clk IMX8MP_SYS_PLL1_266M>,
-+				 <&clk IMX8MP_SYS_PLL2_100M>,
-+				 <&clk IMX8MP_SYS_PLL2_50M>;
-+	assigned-clock-rates = <0>, <100000000>, <50000000>;
-+};
-+
-+&ethphy0g {	/* Micrel KSZ9131RNXI */
-+	status = "disabled";
-+};
-+
-+&ethphy0f {	/* SMSC LAN8740Ai */
-+	status = "okay";
-+};
-+
-+&fec {
-+	status = "disabled";
-+};
-+
-+&flexcan1 {
-+	status = "okay";
-+};
-+
-+&gpio1 {
-+	gpio-line-names =
-+		"DHCOM-G", "", "", "",
-+		"", "DHCOM-I", "PicoITX-HW0", "PicoITX-HW2",
-+		"DHCOM-B", "DHCOM-A", "", "DHCOM-H", "", "", "", "",
-+		"", "", "", "", "", "", "", "",
-+		"", "", "", "", "", "", "", "";
-+};
-+
-+&gpio2 {
-+	gpio-line-names =
-+		"", "", "", "", "", "", "", "",
-+		"", "", "", "PicoITX-HW1", "", "", "", "",
-+		"", "", "", "", "DHCOM-INT", "", "", "",
-+		"", "", "", "", "", "", "", "";
-+};
-+
-+&gpio4 {
-+	gpio-line-names =
-+		"", "", "", "", "", "", "", "",
-+		"", "", "", "", "", "", "", "",
-+		"", "", "", "SOM-HW1", "", "", "", "",
-+		"", "", "", "PicoITX-Out2", "", "", "", "";
-+};
-+
-+&gpio5 {
-+	gpio-line-names =
-+		"", "", "PicoITX-In2", "", "", "", "", "",
-+		"", "", "", "", "", "", "", "",
-+		"", "", "", "",
-+		"", "", "PicoITX-In1", "PicoITX-Out1",
-+		"", "", "", "", "", "", "", "";
-+};
-+
-+/* No HS connector on this SoM variant, so no HDMI, PCIe and only USB HS. */
-+&pcie_phy {
-+	status = "disabled";
-+};
-+
-+&pcie {
-+	status = "disabled";
-+};
-+
-+/* No WiFi/BT chipset on this SoM variant. */
-+&uart2 {
-+	bluetooth {
-+		status = "disabled";
-+	};
-+};
-+
-+/* USB_OTG port is not routed out on PicoITX. */
-+&usb3_0 {
-+	status = "disabled";
-+};
-+
-+&usb_dwc3_0 {
-+	status = "disabled";
-+};
-+
-+&usb3_1 {
-+	fsl,over-current-active-low;
-+};
-+
-+&usb_dwc3_1 {
-+	dr_mode = "host";
-+	maximum-speed = "high-speed";
-+};
-+
-+/* No WiFi/BT chipset on this SoM variant. */
-+&usdhc1 {
-+	status = "disabled";
-+};
-+
-+&iomuxc {
-+	/*
-+	 * The following DHCOM GPIOs are used on this board.
-+	 * Therefore, they have been removed from the list below.
-+	 * I: yellow led
-+	 */
-+	pinctrl-0 = <&pinctrl_dhcom_a &pinctrl_dhcom_b &pinctrl_dhcom_c
-+		     &pinctrl_dhcom_d &pinctrl_dhcom_e &pinctrl_dhcom_f
-+		     &pinctrl_dhcom_g &pinctrl_dhcom_h &pinctrl_dhcom_j
-+		     &pinctrl_dhcom_k &pinctrl_dhcom_l &pinctrl_dhcom_m
-+		     &pinctrl_dhcom_n &pinctrl_dhcom_o &pinctrl_dhcom_p
-+		     &pinctrl_dhcom_q &pinctrl_dhcom_r &pinctrl_dhcom_s
-+		     &pinctrl_dhcom_int>;
-+};
-diff --git a/configs/imx8mp_dhcom_picoitx_defconfig b/configs/imx8mp_dhcom_picoitx_defconfig
-new file mode 100644
-index 00000000000..4d8ce2dba4b
---- /dev/null
-+++ b/configs/imx8mp_dhcom_picoitx_defconfig
-@@ -0,0 +1,273 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_IMX8M=y
-+CONFIG_TEXT_BASE=0x40200000
-+CONFIG_SYS_MALLOC_LEN=0x1000000
-+CONFIG_SYS_MALLOC_F_LEN=0x18000
-+CONFIG_SPL_GPIO=y
-+CONFIG_SPL_LIBCOMMON_SUPPORT=y
-+CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_NR_DRAM_BANKS=2
-+CONFIG_SF_DEFAULT_SPEED=50000000
-+CONFIG_ENV_SIZE=0x10000
-+CONFIG_ENV_OFFSET=0xFE0000
-+CONFIG_ENV_SECT_SIZE=0x1000
-+CONFIG_DM_GPIO=y
-+CONFIG_DEFAULT_DEVICE_TREE="imx8mp-dhcom-picoitx"
-+CONFIG_SPL_TEXT_BASE=0x920000
-+CONFIG_TARGET_IMX8MP_DH_DHCOM_PDK2=y
-+CONFIG_DM_RESET=y
-+CONFIG_SYS_MONITOR_LEN=1048576
-+CONFIG_SPL_MMC=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_BOOTCOUNT_BOOTLIMIT=3
-+CONFIG_SYS_BOOTCOUNT_ADDR=0x30370090
-+CONFIG_SPL_STACK=0x96fc00
-+CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-+CONFIG_SPL_BSS_START_ADDR=0x96fc00
-+CONFIG_SPL_BSS_MAX_SIZE=0x400
-+CONFIG_SPL=y
-+CONFIG_SYS_BOOTCOUNT_SINGLEWORD=y
-+CONFIG_DEBUG_UART_BASE=0x30860000
-+CONFIG_DEBUG_UART_CLOCK=24000000
-+CONFIG_ENV_OFFSET_REDUND=0xFF0000
-+CONFIG_IMX_BOOTAUX=y
-+CONFIG_SPL_IMX_ROMAPI_LOADADDR=0x48000000
-+CONFIG_SYS_LOAD_ADDR=0x50000000
-+CONFIG_DEBUG_UART=y
-+CONFIG_ENV_VARS_UBOOT_CONFIG=y
-+CONFIG_FIT=y
-+CONFIG_FIT_EXTERNAL_OFFSET=0x3000
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_SPL_LOAD_FIT_ADDRESS=0x44000000
-+CONFIG_SPL_LOAD_FIT_APPLY_OVERLAY=y
-+CONFIG_SYS_BOOTM_LEN=0x8000000
-+CONFIG_SUPPORT_RAW_INITRD=y
-+CONFIG_OF_SYSTEM_SETUP=y
-+CONFIG_USE_BOOTARGS=y
-+CONFIG_USE_BOOTCOMMAND=y
-+CONFIG_BOOTCOMMAND="run dh_update_env distro_bootcmd ; reset"
-+CONFIG_USE_PREBOOT=y
-+CONFIG_DEFAULT_FDT_FILE="imx8mp-dhcom-picoitx.dtb"
-+CONFIG_SYS_CBSIZE=2048
-+CONFIG_SYS_PBSIZE=2081
-+CONFIG_CONSOLE_MUX=y
-+CONFIG_SYS_CONSOLE_ENV_OVERWRITE=y
-+CONFIG_ARCH_MISC_INIT=y
-+CONFIG_BOARD_LATE_INIT=y
-+CONFIG_SPL_MAX_SIZE=0x26000
-+CONFIG_SPL_BOARD_INIT=y
-+CONFIG_SPL_BOOTROM_SUPPORT=y
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-+CONFIG_SPL_SYS_MALLOC=y
-+CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
-+CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x4c000000
-+CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x300
-+# CONFIG_SPL_FIT_IMAGE_TINY is not set
-+CONFIG_SPL_I2C=y
-+CONFIG_SPL_POWER=y
-+CONFIG_SPL_WATCHDOG=y
-+CONFIG_HUSH_PARSER=y
-+CONFIG_SYS_PROMPT="u-boot=> "
-+# CONFIG_BOOTM_NETBSD is not set
-+# CONFIG_BOOTM_PLAN9 is not set
-+# CONFIG_BOOTM_RTEMS is not set
-+# CONFIG_BOOTM_VXWORKS is not set
-+CONFIG_CMD_ASKENV=y
-+# CONFIG_CMD_EXPORTENV is not set
-+CONFIG_CMD_ERASEENV=y
-+CONFIG_CRC32_VERIFY=y
-+CONFIG_CMD_EEPROM=y
-+CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
-+CONFIG_SYS_EEPROM_SIZE=16384
-+CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=6
-+CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=20
-+CONFIG_CMD_MD5SUM=y
-+CONFIG_MD5SUM_VERIFY=y
-+CONFIG_CMD_MEMTEST=y
-+CONFIG_CMD_SHA1SUM=y
-+CONFIG_SHA1SUM_VERIFY=y
-+CONFIG_CMD_CLK=y
-+CONFIG_CMD_DFU=y
-+CONFIG_CMD_FUSE=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_GPT_RENAME=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_LSBLK=y
-+CONFIG_CMD_MBR=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_BKOPS_ENABLE=y
-+CONFIG_MMC_SPEED_MODE_SET=y
-+CONFIG_CMD_MTD=y
-+CONFIG_CMD_PART=y
-+CONFIG_CMD_READ=y
-+CONFIG_CMD_SPI=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_USB_SDP=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
-+CONFIG_CMD_CAT=y
-+CONFIG_CMD_XXD=y
-+CONFIG_CMD_DHCP=y
-+CONFIG_CMD_DHCP6=y
-+CONFIG_CMD_TFTPPUT=y
-+CONFIG_CMD_WGET=y
-+CONFIG_CMD_MII=y
-+CONFIG_CMD_PING=y
-+CONFIG_CMD_PXE=y
-+CONFIG_CMD_BOOTCOUNT=y
-+CONFIG_CMD_CACHE=y
-+CONFIG_CMD_TIME=y
-+CONFIG_CMD_GETTIME=y
-+CONFIG_CMD_KASLRSEED=y
-+CONFIG_CMD_SYSBOOT=y
-+CONFIG_CMD_UUID=y
-+CONFIG_CMD_PMIC=y
-+CONFIG_CMD_REGULATOR=y
-+CONFIG_CMD_SMC=y
-+CONFIG_HASH_VERIFY=y
-+CONFIG_CMD_BTRFS=y
-+CONFIG_CMD_EXT2=y
-+CONFIG_CMD_EXT4=y
-+CONFIG_CMD_EXT4_WRITE=y
-+CONFIG_CMD_FAT=y
-+CONFIG_CMD_FS_GENERIC=y
-+CONFIG_CMD_FS_UUID=y
-+CONFIG_CMD_MTDPARTS=y
-+CONFIG_CMD_MTDPARTS_SHOW_NET_SIZES=y
-+CONFIG_MTDIDS_DEFAULT="nor0=flash@0"
-+CONFIG_MTDPARTS_DEFAULT="mtdparts=flash@0:-(sf)"
-+CONFIG_PARTITION_TYPE_GUID=y
-+CONFIG_OF_CONTROL=y
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_ENV_OVERWRITE=y
-+CONFIG_ENV_IS_NOWHERE=y
-+CONFIG_ENV_IS_IN_SPI_FLASH=y
-+CONFIG_ENV_SECT_SIZE_AUTO=y
-+CONFIG_ENV_SPI_MAX_HZ=80000000
-+CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
-+CONFIG_VERSION_VARIABLE=y
-+CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_NETCONSOLE=y
-+CONFIG_IP_DEFRAG=y
-+CONFIG_TFTP_TSIZE=y
-+CONFIG_PROT_TCP_SACK=y
-+CONFIG_IPV6=y
-+CONFIG_SPL_DM=y
-+CONFIG_REGMAP=y
-+CONFIG_SYSCON=y
-+CONFIG_BOOTCOUNT_LIMIT=y
-+CONFIG_SYS_BOOTCOUNT_MAGIC=0xB0C40000
-+CONFIG_SPL_CLK_COMPOSITE_CCF=y
-+CONFIG_CLK_COMPOSITE_CCF=y
-+CONFIG_SPL_CLK_IMX8MP=y
-+CONFIG_CLK_IMX8MP=y
-+CONFIG_FSL_CAAM=y
-+CONFIG_IMX8M_DRAM_INLINE_ECC=y
-+CONFIG_DFU_TFTP=y
-+CONFIG_DFU_TIMEOUT=y
-+CONFIG_DFU_MMC=y
-+CONFIG_DFU_MTD=y
-+CONFIG_DFU_RAM=y
-+CONFIG_USB_FUNCTION_FASTBOOT=y
-+CONFIG_FASTBOOT_BUF_ADDR=0x42800000
-+CONFIG_FASTBOOT_BUF_SIZE=0x20000000
-+CONFIG_FASTBOOT_FLASH=y
-+CONFIG_FASTBOOT_FLASH_MMC_DEV=0
-+CONFIG_GPIO_HOG=y
-+CONFIG_SPL_GPIO_HOG=y
-+CONFIG_MXC_GPIO=y
-+CONFIG_DM_PCA953X=y
-+CONFIG_DM_I2C=y
-+CONFIG_I2C_MUX=y
-+CONFIG_I2C_MUX_PCA954x=y
-+# CONFIG_INPUT is not set
-+CONFIG_LED=y
-+CONFIG_LED_BLINK=y
-+CONFIG_LED_GPIO=y
-+CONFIG_I2C_EEPROM=y
-+CONFIG_SYS_I2C_EEPROM_ADDR=0x50
-+CONFIG_SUPPORT_EMMC_BOOT=y
-+CONFIG_MMC_IO_VOLTAGE=y
-+CONFIG_SPL_MMC_IO_VOLTAGE=y
-+CONFIG_MMC_UHS_SUPPORT=y
-+CONFIG_SPL_MMC_UHS_SUPPORT=y
-+CONFIG_MMC_HS400_ES_SUPPORT=y
-+CONFIG_MMC_HS400_SUPPORT=y
-+CONFIG_FSL_USDHC=y
-+CONFIG_MTD=y
-+CONFIG_DM_MTD=y
-+CONFIG_DM_SPI_FLASH=y
-+CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-+# CONFIG_SPI_FLASH_UNLOCK_ALL is not set
-+CONFIG_SPI_FLASH_WINBOND=y
-+CONFIG_SPI_FLASH_MTD=y
-+CONFIG_PHY_ANEG_TIMEOUT=20000
-+CONFIG_PHY_MICREL=y
-+CONFIG_PHY_MICREL_KSZ90X1=y
-+CONFIG_PHY_SMSC=y
-+CONFIG_DM_MDIO=y
-+CONFIG_DM_ETH_PHY=y
-+CONFIG_DWC_ETH_QOS=y
-+CONFIG_DWC_ETH_QOS_IMX=y
-+CONFIG_FEC_MXC=y
-+CONFIG_RGMII=y
-+CONFIG_MII=y
-+CONFIG_PHY_IMX8MQ_USB=y
-+CONFIG_PINCTRL=y
-+CONFIG_SPL_PINCTRL=y
-+CONFIG_PINCTRL_IMX8M=y
-+CONFIG_POWER_DOMAIN=y
-+CONFIG_IMX8M_POWER_DOMAIN=y
-+CONFIG_IMX8MP_HSIOMIX_BLKCTRL=y
-+CONFIG_DM_PMIC=y
-+CONFIG_DM_PMIC_PCA9450=y
-+CONFIG_SPL_DM_PMIC_PCA9450=y
-+CONFIG_DM_REGULATOR=y
-+CONFIG_SPL_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_PCA9450=y
-+CONFIG_SPL_DM_REGULATOR_PCA9450=y
-+CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_DM_REGULATOR_GPIO=y
-+CONFIG_DM_RNG=y
-+CONFIG_DM_RTC=y
-+CONFIG_RTC_M41T62=y
-+CONFIG_CONS_INDEX=2
-+CONFIG_DM_SERIAL=y
-+# CONFIG_SPL_DM_SERIAL is not set
-+CONFIG_MXC_UART=y
-+CONFIG_SPI=y
-+CONFIG_DM_SPI=y
-+CONFIG_NXP_FSPI=y
-+CONFIG_MXC_SPI=y
-+CONFIG_SYSRESET=y
-+CONFIG_SPL_SYSRESET=y
-+CONFIG_SYSRESET_PSCI=y
-+CONFIG_SYSRESET_WATCHDOG=y
-+CONFIG_DM_THERMAL=y
-+CONFIG_IMX_TMU=y
-+CONFIG_USB=y
-+# CONFIG_SPL_DM_USB is not set
-+CONFIG_DM_USB_GADGET=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_XHCI_DWC3=y
-+CONFIG_USB_XHCI_DWC3_OF_SIMPLE=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_USB_STORAGE=y
-+CONFIG_USB_HOST_ETHER=y
-+CONFIG_USB_ETHER_ASIX=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_MANUFACTURER="DH electronics"
-+CONFIG_USB_GADGET_VENDOR_NUM=0x0525
-+CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
-+CONFIG_USB_FUNCTION_ACM=y
-+CONFIG_USB_ETHER=y
-+CONFIG_USB_ETH_CDC=y
-+CONFIG_IMX_WATCHDOG=y
+ endif
+diff --git a/drivers/gpio/Makefile b/drivers/gpio/Makefile
+index da0faf0524..56c20e4c63 100644
+--- a/drivers/gpio/Makefile
++++ b/drivers/gpio/Makefile
+@@ -76,5 +76,5 @@ obj-$(CONFIG_SL28CPLD_GPIO)	+= sl28cpld-gpio.o
+ obj-$(CONFIG_ZYNQMP_GPIO_MODEPIN)	+= zynqmp_gpio_modepin.o
+ obj-$(CONFIG_SLG7XL45106_I2C_GPO)	+= gpio_slg7xl45106.o
+ obj-$(CONFIG_FTGPIO010)		+= ftgpio010.o
+-obj-$(CONFIG_ADP5585_GPIO)	+= adp5585_gpio.o
++obj-$(CONFIG_$(SPL_)ADP5585_GPIO)	+= adp5585_gpio.o
+ obj-$(CONFIG_RZG2L_GPIO)	+= rzg2l-gpio.o
 -- 
-2.45.2
+2.34.1
 
