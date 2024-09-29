@@ -4,59 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7244BCF6495
-	for <u-boot@archiver.kernel.org>; Sun, 29 Sep 2024 11:00:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2DF9CF6499
+	for <u-boot@archiver.kernel.org>; Sun, 29 Sep 2024 11:47:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B086188815;
-	Sun, 29 Sep 2024 13:00:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 033EB8891B;
+	Sun, 29 Sep 2024 13:47:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="YzjKOC9o";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Key25yoX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 72B768885D; Sun, 29 Sep 2024 13:00:10 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4220C88970; Sun, 29 Sep 2024 13:47:56 +0200 (CEST)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C50488870D
- for <u-boot@lists.denx.de>; Sun, 29 Sep 2024 13:00:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0CBC588770
+ for <u-boot@lists.denx.de>; Sun, 29 Sep 2024 13:47:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=c70e=Q3=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1727607602;
- bh=ZvHd4LnOa1Sa9FDwHWyVJcfiwbzdshRTJqJMoj1BFgw=;
- b=YzjKOC9oA1ystOsWaqzOnlo99hn/pxf1dcdn4G8yx3OBDcdIWKpC92p81F9adjtTqYuO5DoVI
- CzsX+7s6+IZxUOCqg8CtZ0ViDIowmYgYj1VRffTGaqIiRJ3gFftMSmkiffXL+rnNeneAFirZCsO
- Tsd6aeptP+VxUHPNyz/wCvr2weArlpsCT5Y8bY8X/aSvDWdRarjnXTwEwa/of+Cm6gAA/oRPuLo
- MBaLgQUmjCIPlUNc/bjmLfMBWW+Hi5VB9KU+hKx5R9zSURmZh6STDPjP0Nwnbp4ZWtMKSfrJjko
- /jtmBqpyE54VOSPMPa7+nVjca13BwybWZ2W7CgY2ie4A==
-Message-ID: <1099eb05-949a-41ec-9ffd-fad4498224a6@kwiboo.se>
-Date: Sun, 29 Sep 2024 12:59:54 +0200
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6cb2f271043so38482556d6.0
+ for <u-boot@lists.denx.de>; Sun, 29 Sep 2024 04:47:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1727610473; x=1728215273; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=X/7KDbAoQF1k6zQZO9a9JEZT2AT9KGNImx73cX6Oop4=;
+ b=Key25yoXj01GFEg+USDoZZykNCq7Mm2GQ0ve4giaUJOWFpS8SJODFkwXnR8xilIFlC
+ av0eezUX7Yll/y7rVLTbh8HS14l9NmZSOkKuj3x71cr3IjoqCf9+okBMPGyyp6B7rB4e
+ Ak+s3ZyALMBTqCo9cXcgU71lWafeNqxQ2gmEE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727610473; x=1728215273;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=X/7KDbAoQF1k6zQZO9a9JEZT2AT9KGNImx73cX6Oop4=;
+ b=LDzNjxyAfM1yPQpHMUevFMposgKNXgTKYzaQ+9JUitKgQyI87RZLecZGNw0XrOhd0v
+ avUnLhSUrE3zegHpIShcWH/g5IRJ3xMgDAfZGwTAQ8LlpmfdEEkIvg9j3RgA72WKikzx
+ CTy9TJCGqfT9UWgcqQiUOO9SE10qPIy7Ei2FgnIxoCy0XgMnfrLH6WH5OgdLn0MNPDbq
+ M3Q0fHJrkWPfod5/e3cg/hmp0nmKktdYwMtkKaq5V6dS510gx3ncHYHnu4d0wk3+czOh
+ I/Z1fYdZlD0iNbKpPGoEgZsu00xdVv2SsJJMTTNbwcyKzMnXGH7Iy3PTsW3ZTeOj6IVT
+ +ahQ==
+X-Gm-Message-State: AOJu0Yx1srfE8I+kHibIT8mxjCul6zDA1sGnbhKwyQObocb8w1MGlpaq
+ +VF3+WhTVIhPsf0AaW86g5yLRRe6+WPh3aHxlsBKfcnc9UHLNP4E+Oh1i/Lc2cbboD2/9G7/zrp
+ yNGLFoAm1zdYIVe4K58edmu7u+gyHe695gG+f
+X-Google-Smtp-Source: AGHT+IHZkyH0BzioMTGvElO+4lotfBg+dbskUEwY/jDB1fvDrBMEjSovdQson1sEQfg4qwG6HIPPnWG1Cb/ux3oBky8=
+X-Received: by 2002:a05:6214:4290:b0:6c3:68b0:a5ce with SMTP id
+ 6a1803df08f44-6cb3b6138f1mr153054786d6.27.1727610472833; Sun, 29 Sep 2024
+ 04:47:52 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 05/30] global: Use CONFIG_XPL_BUILD instead of
- CONFIG_SPL_BUILD
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 References: <20240928200030.194546-1-sjg@chromium.org>
- <20240928200030.194546-6-sjg@chromium.org>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20240928200030.194546-6-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 207.246.76.47
-X-ForwardEmail-ID: 66f9332f07d6cfacc5036ed0
+ <20240928200030.194546-22-sjg@chromium.org>
+ <00b69273-b2dc-4a4b-be4e-5358afad9614@kwiboo.se>
+In-Reply-To: <00b69273-b2dc-4a4b-be4e-5358afad9614@kwiboo.se>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 29 Sep 2024 13:47:41 +0200
+Message-ID: <CAFLszTjRXbDWZsCqY+1=v9v6oWxfsOtq5s7WuMpAk2YcxMyhuA@mail.gmail.com>
+Subject: Re: [PATCH v2 21/30] xpl: Rename u_boot_first_phase to
+ xpl_is_first_phase()
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Devarsh Thakkar <devarsht@ti.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Manoj Sai <abbaraju.manojsai@amarulasolutions.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Nishanth Menon <nm@ti.com>, 
+ Paul Kocialkowski <paulk@sys-base.io>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Raymond Mao <raymond.mao@linaro.org>, Sean Anderson <seanga2@gmail.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,478 +92,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi Jonas,
 
-On 2024-09-28 22:00, Simon Glass wrote:
-> Use the new symbol to refer to any 'SPL' build, including TPL and VPL
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
-> (no changes since v1)
-> 
+On Sat, 28 Sept 2024 at 16:23, Jonas Karlman <jonas@kwiboo.se> wrote:
+>
+> Hi Simon,
+>
+> On 2024-09-28 22:00, Simon Glass wrote:
+> > This is a better name for this function, so update it.
+> >
+> > Tidy up the function comment to mention VPL. Use SPL_BUILD in the SPL
+> > check, for clarity.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> > (no changes since v1)
+> >
+> >  arch/arm/mach-omap2/am33xx/board.c |  2 +-
+> >  common/bloblist.c                  |  4 ++--
+> >  common/spl/spl.c                   |  4 ++--
+> >  include/spl.h                      | 16 +++++++++-------
+> >  4 files changed, 14 insertions(+), 12 deletions(-)
+> >
+>
+> [snip]
+>
+> > --- a/include/spl.h
+> > +++ b/include/spl.h
+> > @@ -34,24 +34,26 @@ struct spl_boot_device;
+> >  enum boot_device;
+> >
+> >  /*
+> > - * u_boot_first_phase() - check if this is the first U-Boot phase
+> > + * xpl_is_first_phase() - check if this is the first U-Boot phase
+> >   *
+> > - * U-Boot has up to three phases: TPL, SPL and U-Boot proper. Depending on the
+> > - * build flags we can determine whether the current build is for the first
+> > + * U-Boot has up to four phases: TPL, VPL, SPL and U-Boot proper. Depending on
+> > + * the build flags we can determine whether the current build is for the first
+> >   * phase of U-Boot or not. If there is no SPL, then this is U-Boot proper. If
+> >   * there is SPL but no TPL, the the first phase is SPL. If there is TPL, then
+> > - * it is the first phase.
+> > + * it is the first phase, etc.
+> >   *
+> > - * @returns true if this is the first phase of U-Boot
+> > + * Note that VPL can never be the first phase. If it exists, it is loaded from
+> > + * TPL
+> >   *
+> > + * Return: true if this is the first phase of U-Boot
+> >   */
+> > -static inline bool u_boot_first_phase(void)
+> > +static inline bool xpl_is_first_phase(void)
+> >  {
+> >       if (IS_ENABLED(CONFIG_TPL)) {
+> >               if (IS_ENABLED(CONFIG_TPL_BUILD))
+> >                       return true;
+> >       } else if (IS_ENABLED(CONFIG_SPL)) {
+> > -             if (IS_ENABLED(CONFIG_XPL_BUILD))
+> > +             if (IS_ENABLED(CONFIG_SPL_BUILD))
+>
+> Here is another instance where it made no sense to replace SPL with XPL
+> to just later restore it back to SPL.
 
-[snip]
+Thanks for taking the time to look through this!
 
-> diff --git a/arch/arm/include/asm/arch-rockchip/boot0.h b/arch/arm/include/asm/arch-rockchip/boot0.h
-> index 0c375e543a5..edb2a31c348 100644
-> --- a/arch/arm/include/asm/arch-rockchip/boot0.h
-> +++ b/arch/arm/include/asm/arch-rockchip/boot0.h
-> @@ -12,7 +12,7 @@
->   * To make life easier for everyone, we build the SPL binary with
->   * space for this 4-byte header already included in the binary.
->   */
-> -#ifdef CONFIG_SPL_BUILD
-> +#ifdef CONFIG_XPL_BUILD
->  	/*
->  	 * We need to add 4 bytes of space for the 'RK33' at the
->  	 * beginning of the executable.	 However, as we want to keep
-> @@ -39,7 +39,7 @@ entry_counter:
->  	.word   0
->  #endif
->  
-> -#if (defined(CONFIG_SPL_BUILD) || defined(CONFIG_ARM64))
-> +#if (defined(CONFIG_XPL_BUILD) || defined(CONFIG_ARM64))
->  	/* U-Boot proper of armv7 do not need this */
->  	b reset
->  #endif
-> @@ -54,7 +54,7 @@ _start:
->  	ARM_VECTORS
->  #endif
->  
-> -#if !defined(CONFIG_TPL_BUILD) && defined(CONFIG_SPL_BUILD) && \
-> +#if !defined(CONFIG_TPL_BUILD) && defined(CONFIG_XPL_BUILD) && \
+The rename to XPL happens in 'global: Rename SPL_ to XPL_' which is an
+earlier patch. That patch renames absolutely everything. If I leave
+this particular one as SPL_BUILD, then there will still be occurrences
+of SPL_BUILD in U-Boot. So when I later rebase this series I won't
+know whether I missed something or not.
 
-This is meant to be for SPL where TF-A is loaded into part of SRAM,
-and is only needed/used when CONFIG_TPL=n, so no need to replace it with
-XPL_BUILD.
-
->  	(CONFIG_ROCKCHIP_SPL_RESERVE_IRAM > 0)
->  	.space CONFIG_ROCKCHIP_SPL_RESERVE_IRAM	/* space for the ATF data */
->  #endif
-> diff --git a/arch/arm/include/asm/arch-rockchip/cru_rv1126.h b/arch/arm/include/asm/arch-rockchip/cru_rv1126.h
-> index 49a1f763795..ae273de3144 100644
-> --- a/arch/arm/include/asm/arch-rockchip/cru_rv1126.h
-> +++ b/arch/arm/include/asm/arch-rockchip/cru_rv1126.h
-> @@ -11,7 +11,7 @@
->  #define KHz		1000
->  #define OSC_HZ		(24 * MHz)
->  
-> -#if defined(CONFIG_SPL_BUILD) && defined(CONFIG_SPL_KERNEL_BOOT)
-> +#if defined(CONFIG_XPL_BUILD) && defined(CONFIG_SPL_KERNEL_BOOT)
->  #define APLL_HZ		(1008 * MHz)
->  #else
->  #define APLL_HZ		(816 * MHz)
-> @@ -20,7 +20,7 @@
->  #define CPLL_HZ		(500 * MHz)
->  #define HPLL_HZ		(1400 * MHz)
->  #define PCLK_PDPMU_HZ	(100 * MHz)
-> -#if defined(CONFIG_SPL_BUILD) && defined(CONFIG_SPL_KERNEL_BOOT)
-> +#if defined(CONFIG_XPL_BUILD) && defined(CONFIG_SPL_KERNEL_BOOT)
->  #define ACLK_PDBUS_HZ	(396 * MHz)
->  #else
->  #define ACLK_PDBUS_HZ	(500 * MHz)
-> @@ -32,7 +32,7 @@
->  #define HCLK_PDCORE_HZ	(200 * MHz)
->  #define HCLK_PDAUDIO_HZ	(150 * MHz)
->  #define CLK_OSC0_DIV_HZ	(32768)
-> -#if defined(CONFIG_SPL_BUILD) && defined(CONFIG_SPL_KERNEL_BOOT)
-> +#if defined(CONFIG_XPL_BUILD) && defined(CONFIG_SPL_KERNEL_BOOT)
->  #define ACLK_PDVI_HZ	(297 * MHz)
->  #define CLK_ISP_HZ	(297 * MHz)
->  #define ACLK_PDISPP_HZ	(297 * MHz)
-> @@ -324,7 +324,7 @@ enum {
->  	DCLK_VOP_DIV_SHIFT	= 0,
->  	DCLK_VOP_DIV_MASK	= 0xff,
->  
-> -#if defined(CONFIG_SPL_BUILD) && defined(CONFIG_SPL_KERNEL_BOOT)
-> +#if defined(CONFIG_XPL_BUILD) && defined(CONFIG_SPL_KERNEL_BOOT)
->  	/* CRU_CLK_SEL49_CON */
->  	ACLK_PDVI_SEL_SHIFT	= 6,
->  	ACLK_PDVI_SEL_MASK	= 0x3 << ACLK_PDVI_SEL_SHIFT,
-> @@ -397,7 +397,7 @@ enum {
->  	CLK_GMAC_SRC_DIV_SHIFT	= 0,
->  	CLK_GMAC_SRC_DIV_MASK	= 0x1f << CLK_GMAC_SRC_DIV_SHIFT,
->  
-> -#if defined(CONFIG_SPL_BUILD) && defined(CONFIG_SPL_KERNEL_BOOT)
-> +#if defined(CONFIG_XPL_BUILD) && defined(CONFIG_SPL_KERNEL_BOOT)
->  	/* CRU_CLK_SEL68_CON */
->  	ACLK_PDISPP_SEL_SHIFT	= 6,
->  	ACLK_PDISPP_SEL_MASK	= 0x3 << ACLK_PDISPP_SEL_SHIFT,
-
-I am pretty sure all these are meant for SPL where it is possible to
-SPL_KERNEL_BOOT, so no need to replace these with XPL_BUILD.
-
-[snip]
-
-> diff --git a/arch/arm/mach-rockchip/rk3399/rk3399.c b/arch/arm/mach-rockchip/rk3399/rk3399.c
-> index 2d7d0f82a2f..edccb2a3980 100644
-> --- a/arch/arm/mach-rockchip/rk3399/rk3399.c
-> +++ b/arch/arm/mach-rockchip/rk3399/rk3399.c
-> @@ -51,7 +51,7 @@ static struct mm_region rk3399_mem_map[] = {
->  
->  struct mm_region *mem_map = rk3399_mem_map;
->  
-> -#ifdef CONFIG_SPL_BUILD
-> +#ifdef CONFIG_XPL_BUILD
->  
->  #define TIMER_END_COUNT_L	0x00
->  #define TIMER_END_COUNT_H	0x04
-> @@ -83,7 +83,7 @@ void rockchip_stimer_init(void)
->  int arch_cpu_init(void)
->  {
->  
-> -#ifdef CONFIG_SPL_BUILD
-> +#ifdef CONFIG_XPL_BUILD
->  	struct rk3399_pmusgrf_regs *sgrf;
->  	struct rk3399_grf_regs *grf;
->  
-> @@ -136,7 +136,7 @@ void board_debug_uart_init(void)
->  	struct rk3399_pmugrf_regs * const pmugrf = (void *)PMUGRF_BASE;
->  	struct rockchip_gpio_regs * const gpio = (void *)GPIO0_BASE;
->  
-> -	if (IS_ENABLED(CONFIG_SPL_BUILD) &&
-> +	if (IS_ENABLED(CONFIG_XPL_BUILD) &&
-
-This should not be changed to XPL, this part is meant for SPL and does
-not even compile when CONFIG_TPL=y and TPL_BUILD is defined.
-
->  	    (IS_ENABLED(CONFIG_TARGET_CHROMEBOOK_BOB) ||
->  	     IS_ENABLED(CONFIG_TARGET_CHROMEBOOK_KEVIN))) {
->  		rk_setreg(&grf->io_vsel, 1 << 0);
-> @@ -169,7 +169,7 @@ void board_debug_uart_init(void)
->  }
->  #endif
->  
-> -#if defined(CONFIG_SPL_BUILD) && !defined(CONFIG_TPL_BUILD)
-> +#if defined(CONFIG_XPL_BUILD) && !defined(CONFIG_TPL_BUILD)
-
-Following is intended for SPL as can be observed from the !TPL_BUILD,
-please do not change this to XPL_BUILD.
-
->  static void rk3399_force_power_on_reset(void)
->  {
->  	ofnode node;
-
-[snip]
-
-> diff --git a/drivers/ram/rockchip/sdram_rk3288.c b/drivers/ram/rockchip/sdram_rk3288.c
-> index c9f61e933e9..25ceab98ee9 100644
-> --- a/drivers/ram/rockchip/sdram_rk3288.c
-> +++ b/drivers/ram/rockchip/sdram_rk3288.c
-> @@ -84,7 +84,7 @@ const int ddrconf_table[] = {
->  #define DQS_GATE_TRAINING_ERROR_RANK1	(2 << 4)
->  
->  #if defined(CONFIG_TPL_BUILD) || \
-> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
-> +	(!defined(CONFIG_TPL) && defined(CONFIG_XPL_BUILD))
-
-DRAM is initialized in TPL or SPL (when CONFIG_TPL=n) on Rockchip, so no
-need to change this to XPL_BUILD.
-
->  static void copy_to_reg(u32 *dest, const u32 *src, u32 n)
->  {
->  	int i;
-> @@ -1013,7 +1013,7 @@ static int rk3288_dmc_of_to_plat(struct udevice *dev)
->  
->  	return 0;
->  }
-> -#endif /* CONFIG_SPL_BUILD */
-> +#endif /* CONFIG_XPL_BUILD */
-
-This is related to the above #if so does not need to be changed.
-
->  
->  #if CONFIG_IS_ENABLED(OF_PLATDATA)
->  static int conv_of_plat(struct udevice *dev)
-> @@ -1041,7 +1041,7 @@ static int conv_of_plat(struct udevice *dev)
->  static int rk3288_dmc_probe(struct udevice *dev)
->  {
->  #if defined(CONFIG_TPL_BUILD) || \
-> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
-> +	(!defined(CONFIG_TPL) && defined(CONFIG_XPL_BUILD))
-
-Same here.
-
->  	struct rk3288_sdram_params *plat = dev_get_plat(dev);
->  	struct udevice *dev_clk;
->  	struct regmap *map;
-> @@ -1051,7 +1051,7 @@ static int rk3288_dmc_probe(struct udevice *dev)
->  
->  	priv->pmu = syscon_get_first_range(ROCKCHIP_SYSCON_PMU);
->  #if defined(CONFIG_TPL_BUILD) || \
-> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
-> +	(!defined(CONFIG_TPL) && defined(CONFIG_XPL_BUILD))
-
-Same.
-
->  #if CONFIG_IS_ENABLED(OF_PLATDATA)
->  	ret = conv_of_plat(dev);
->  	if (ret)
-> @@ -1119,13 +1119,13 @@ U_BOOT_DRIVER(rockchip_rk3288_dmc) = {
->  	.of_match = rk3288_dmc_ids,
->  	.ops = &rk3288_dmc_ops,
->  #if defined(CONFIG_TPL_BUILD) || \
-> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
-> +	(!defined(CONFIG_TPL) && defined(CONFIG_XPL_BUILD))
-
-Same.
-
->  	.of_to_plat = rk3288_dmc_of_to_plat,
->  #endif
->  	.probe = rk3288_dmc_probe,
->  	.priv_auto	= sizeof(struct dram_info),
->  #if defined(CONFIG_TPL_BUILD) || \
-> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
-> +	(!defined(CONFIG_TPL) && defined(CONFIG_XPL_BUILD))
-
-Same.
-
->  	.plat_auto	= sizeof(struct rk3288_sdram_params),
->  #endif
->  };
-> diff --git a/drivers/ram/rockchip/sdram_rk3399.c b/drivers/ram/rockchip/sdram_rk3399.c
-> index 45270e27184..c3745f9445b 100644
-> --- a/drivers/ram/rockchip/sdram_rk3399.c
-> +++ b/drivers/ram/rockchip/sdram_rk3399.c
-> @@ -3196,7 +3196,7 @@ U_BOOT_DRIVER(dmc_rk3399) = {
->  	.probe = rk3399_dmc_probe,
->  	.priv_auto	= sizeof(struct dram_info),
->  #if defined(CONFIG_TPL_BUILD) || \
-> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
-> +	(!defined(CONFIG_TPL) && defined(CONFIG_XPL_BUILD))
-
-Same on RK3399, DRAM is initialized in TPL or SPL, so no need to change
-this.
-
->  	.plat_auto	= sizeof(struct rockchip_dmc_plat),
->  #endif
->  };
-> diff --git a/drivers/ram/rockchip/sdram_rv1126.c b/drivers/ram/rockchip/sdram_rv1126.c
-> index 4fbb088a8d9..b371f597d23 100644
-> --- a/drivers/ram/rockchip/sdram_rv1126.c
-> +++ b/drivers/ram/rockchip/sdram_rv1126.c
-> @@ -34,7 +34,7 @@
->  
->  struct dram_info {
->  #if defined(CONFIG_TPL_BUILD) || \
-> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
-> +	(!defined(CONFIG_TPL) && defined(CONFIG_XPL_BUILD))
-
-And same on RV1126, DRAM is initialized in TPL or SPL when CONFIG_TPL=n,
-so no need to change this to XPL_BUILD.
-
->  	void __iomem *pctl;
->  	void __iomem *phy;
->  	struct rv1126_cru *cru;
-> @@ -49,7 +49,7 @@ struct dram_info {
->  };
->  
->  #if defined(CONFIG_TPL_BUILD) || \
-> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
-> +	(!defined(CONFIG_TPL) && defined(CONFIG_XPL_BUILD))
-
-Same.
-
->  
->  #define GRF_BASE_ADDR			0xfe000000
->  #define PMU_GRF_BASE_ADDR		0xfe020000
-> @@ -3507,7 +3507,7 @@ error:
->  static int rv1126_dmc_probe(struct udevice *dev)
->  {
->  #if defined(CONFIG_TPL_BUILD) || \
-> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
-> +	(!defined(CONFIG_TPL) && defined(CONFIG_XPL_BUILD))
-
-Same.
-
->  	if (rv1126_dmc_init(dev))
->  		return 0;
->  #else
-
-[snip]
-
-> diff --git a/include/linux/kconfig.h b/include/linux/kconfig.h
-> index 2bc704e1104..a59f2a61e6a 100644
-> --- a/include/linux/kconfig.h
-> +++ b/include/linux/kconfig.h
-> @@ -40,7 +40,7 @@
->  #define _CONFIG_PREFIX TPL_
->  #elif defined(CONFIG_VPL_BUILD)
->  #define _CONFIG_PREFIX VPL_
-> -#elif defined(CONFIG_SPL_BUILD)
-> +#elif defined(CONFIG_XPL_BUILD)
-
-There is most likely no need to replace this with XPL_BUILD, since we
-already check for the other phases above.
-
->  #define _CONFIG_PREFIX SPL_
->  #else
->  #define _CONFIG_PREFIX
-> @@ -53,8 +53,8 @@
->  /*
->   * CONFIG_VAL(FOO) evaluates to the value of
->   *  CONFIG_TOOLS_FOO if USE_HOSTCC is defined,
-> - *  CONFIG_FOO if CONFIG_SPL_BUILD is undefined,
-> - *  CONFIG_SPL_FOO if CONFIG_SPL_BUILD is defined.
-> + *  CONFIG_FOO if CONFIG_XPL_BUILD is undefined,
-> + *  CONFIG_SPL_FOO if CONFIG_XPL_BUILD is defined.
-
-Similar here, there is no need to replace this with XPL_BUILD for the
-CONFIG_SPL line.
-
->   *  CONFIG_TPL_FOO if CONFIG_TPL_BUILD is defined.
->   *  CONFIG_VPL_FOO if CONFIG_VPL_BUILD is defined.
->   */
-> @@ -106,22 +106,22 @@ long invalid_use_of_IF_ENABLED_INT(void);
->  /*
->   * CONFIG_IS_ENABLED(FOO) expands to
->   *  1 if USE_HOSTCC is defined and CONFIG_TOOLS_FOO is set to 'y',
-> - *  1 if CONFIG_SPL_BUILD is undefined and CONFIG_FOO is set to 'y',
-> - *  1 if CONFIG_SPL_BUILD is defined and CONFIG_SPL_FOO is set to 'y',
-> + *  1 if CONFIG_XPL_BUILD is undefined and CONFIG_FOO is set to 'y',
-> + *  1 if CONFIG_XPL_BUILD is defined and CONFIG_SPL_FOO is set to 'y',
-
-Same.
-
->   *  1 if CONFIG_TPL_BUILD is defined and CONFIG_TPL_FOO is set to 'y',
->   *  0 otherwise.
->   *
->   * CONFIG_IS_ENABLED(FOO, (abc)) expands to
->   *  abc if USE_HOSTCC is defined and CONFIG_TOOLS_FOO is set to 'y',
-> - *  abc if CONFIG_SPL_BUILD is undefined and CONFIG_FOO is set to 'y',
-> - *  abc if CONFIG_SPL_BUILD is defined and CONFIG_SPL_FOO is set to 'y',
-> + *  abc if CONFIG_XPL_BUILD is undefined and CONFIG_FOO is set to 'y',
-> + *  abc if CONFIG_XPL_BUILD is defined and CONFIG_SPL_FOO is set to 'y',
-
-Same.
-
->   *  abc if CONFIG_TPL_BUILD is defined and CONFIG_TPL_FOO is set to 'y',
->   *  nothing otherwise.
->   *
->   * CONFIG_IS_ENABLED(FOO, (abc), (def)) expands to
->   *  abc if USE_HOSTCC is defined and CONFIG_TOOLS_FOO is set to 'y',
-> - *  abc if CONFIG_SPL_BUILD is undefined and CONFIG_FOO is set to 'y',
-> - *  abc if CONFIG_SPL_BUILD is defined and CONFIG_SPL_FOO is set to 'y',
-> + *  abc if CONFIG_XPL_BUILD is undefined and CONFIG_FOO is set to 'y',
-> + *  abc if CONFIG_XPL_BUILD is defined and CONFIG_SPL_FOO is set to 'y',
-
-Same.
-
->   *  abc if CONFIG_TPL_BUILD is defined and CONFIG_TPL_FOO is set to 'y',
->   *  def otherwise.
->   *
-
-[snip]
-
-> diff --git a/include/spl.h b/include/spl.h
-> index de808ccd413..dd9aeeaf9cc 100644
-> --- a/include/spl.h
-> +++ b/include/spl.h
-> @@ -51,7 +51,7 @@ static inline bool u_boot_first_phase(void)
->  		if (IS_ENABLED(CONFIG_TPL_BUILD))
->  			return true;
->  	} else if (IS_ENABLED(CONFIG_SPL)) {
-> -		if (IS_ENABLED(CONFIG_SPL_BUILD))
-> +		if (IS_ENABLED(CONFIG_XPL_BUILD))
-
-Probably no need to replace SPL_BUILD with XPL_BUILD here.
-
-This function should probably be fixed to properly support/report VPL
-before this patch.
-
->  			return true;
->  	} else {
->  		return true;
-> @@ -90,7 +90,7 @@ enum u_boot_phase {
->   *
->   * To include code only in SPL, you might do:
->   *
-> - *    #if defined(CONFIG_SPL_BUILD) && !defined(CONFIG_TPL_BUILD)
-> + *    #if defined(CONFIG_XPL_BUILD) && !defined(CONFIG_TPL_BUILD)
->   *    ...
->   *    #endif
->   *
-> @@ -102,7 +102,7 @@ enum u_boot_phase {
->   *
->   * To include code only in U-Boot proper, you might do:
->   *
-> - *    #ifndef CONFIG_SPL_BUILD
-> + *    #ifndef CONFIG_XPL_BUILD
->   *    ...
->   *    #endif
->   *
-> @@ -120,7 +120,7 @@ static inline enum u_boot_phase spl_phase(void)
->  	return PHASE_TPL;
->  #elif defined(CONFIG_VPL_BUILD)
->  	return PHASE_VPL;
-> -#elif defined(CONFIG_SPL_BUILD)
-> +#elif defined(CONFIG_XPL_BUILD)
-
-TPL_BUILD and VPL_BUILD is already checked the lines before this so
-probably no need to replace SPL_BUILD with XPL_BUILD here.
-
->  	return PHASE_SPL;
->  #else
->  	DECLARE_GLOBAL_DATA_PTR;
-> @@ -135,7 +135,7 @@ static inline enum u_boot_phase spl_phase(void)
->  /* returns true if in U-Boot proper, false if in SPL */
->  static inline bool spl_in_proper(void)
->  {
-> -#ifdef CONFIG_SPL_BUILD
-> +#ifdef CONFIG_XPL_BUILD
->  	return false;
->  #endif
->  
-> @@ -154,7 +154,7 @@ static inline enum u_boot_phase spl_prev_phase(void)
->  	return PHASE_NONE;
->  #elif defined(CONFIG_VPL_BUILD)
->  	return PHASE_TPL;	/* VPL requires TPL */
-> -#elif defined(CONFIG_SPL_BUILD)
-> +#elif defined(CONFIG_XPL_BUILD)
->  	return IS_ENABLED(CONFIG_VPL) ? PHASE_VPL :
->  		IS_ENABLED(CONFIG_TPL) ? PHASE_TPL :
->  		PHASE_NONE;
-> @@ -227,7 +227,7 @@ static inline const char *spl_phase_prefix(enum u_boot_phase phase)
->  }
->  
->  /* A string name for SPL or TPL */
-> -#ifdef CONFIG_SPL_BUILD
-> +#ifdef CONFIG_XPL_BUILD
->  # ifdef CONFIG_TPL_BUILD
->  #  define SPL_TPL_NAME	"TPL"
->  # elif defined(CONFIG_VPL_BUILD)
-
-[snip]
-
-> diff --git a/scripts/Makefile.xpl b/scripts/Makefile.xpl
-> index ad21d451a30..63d4ec334bc 100644
-> --- a/scripts/Makefile.xpl
-> +++ b/scripts/Makefile.xpl
-> @@ -31,7 +31,7 @@ include $(srctree)/scripts/Kbuild.include
->  UBOOTINCLUDE := -I$(obj)/include $(UBOOTINCLUDE)
->  
->  KBUILD_CPPFLAGS += -DCONFIG_XPL_BUILD
-> -KBUILD_CPPFLAGS += -DCONFIG_SPL_BUILD
-> +KBUILD_CPPFLAGS += -DCONFIG_XPL_BUILD
-
-This should not be changed to XPL_BUILD.
-
->  ifeq ($(CONFIG_TPL_BUILD),y)
->  KBUILD_CPPFLAGS += -DCONFIG_TPL_BUILD
->  else
-> @@ -55,7 +55,7 @@ endif
->  
->  export SPL_NAME
->  
-> -ifdef CONFIG_SPL_BUILD
-> +ifdef CONFIG_XPL_BUILD
->  SPL_ := SPL_
->  ifeq ($(CONFIG_VPL_BUILD),y)
->  SPL_TPL_ := VPL_
-
-[snip]
+I can certainly drop the s/XPL/SPL/ change in this patch though, if
+that is suitable?
 
 Regards,
-Jonas
-
+Simon
