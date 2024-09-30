@@ -4,77 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A0E7CF6499
-	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 11:17:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 530E4CF6497
+	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 11:24:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B9F1288009;
-	Mon, 30 Sep 2024 13:17:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id DE5E288641;
+	Mon, 30 Sep 2024 13:24:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="H2MO/H2D";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="H78LBQFS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E92E288E3C; Mon, 30 Sep 2024 13:17:17 +0200 (CEST)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
+ id B393B886A7; Mon, 30 Sep 2024 13:24:26 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05FC088005
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 13:17:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C348D88618
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 13:24:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-5398996acbeso3110267e87.1
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 04:17:15 -0700 (PDT)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-42cb5b3c57eso38695865e9.2
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 04:24:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1727695035; x=1728299835; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Q4QKKlb+Q1TvNTRHVU/HqklhRTGiU320aqDZUBsFLT8=;
- b=H2MO/H2D/xUm8BDtpKxaOP/LGXzSaZPEGfJ7R22i6y+pAgpki36cavv5MQNgqgFOya
- ZF9A6UKAF3oNo2QSRGmGTCVDrUDVYkC/t5365Hq/9roYU7lSQr7wklBxmnvwvwWYHnjG
- XaRxsXHreMR+mgI7f03EtAtLq9vcGR0ULiEr7NJamkgmf0cRkDtR2qLDZreF2EtX57Pe
- c3At56CBSk9WoSNV89qeoYr50ZMXSjaTQ0YlLlbxycCi7tOofzaXkhRHOl/VdRbuFlzL
- 5PCqjqBQHp0eUQGCTD3dIJf6btFnEBrsk5RO50yVhsxEVYccuE2rnsHMX/npX12J2VFw
- mOYw==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1727695463; x=1728300263;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=R/VRx5vn92zuCw+c/YCmAAxP/Fmz8HbbBRzibmmtj+A=;
+ b=H78LBQFSaY6/SMs3QA/yfXvRR7ss/J7JIjSs4KgnBKDjrF2QZfWyCYFUCtTv6tx2Sh
+ svp52Jz5H/Wrkhfp4cbEUgc2aF+EKHbeqh6mqqxz06ldJR3bSJfRUwhgF2U7CJJu4w+T
+ XdOydawRVV2amFsHK2tLk+7H1+i1sLSdiDKJBjya93vmKQyQRzgV+PMPXnjEbCwUsPV8
+ AmcJxjUtQcouuTCu4m4zy2JI4h02RMsN4sv2rRCKl0l8mRr9M/X4sOfOoBowQSVMJz77
+ Mog/L4QQF+4Ly3HaaHtudoMBe260Pt+KGlXm+BV0kZyxgk8NL/tJ0VQl5ljfBrRe0KRu
+ +BIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727695035; x=1728299835;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Q4QKKlb+Q1TvNTRHVU/HqklhRTGiU320aqDZUBsFLT8=;
- b=Tv30mL3X8gr5wxrJY9gf6MiXAmTpi61lDnkkK/N22WkAN/DgM1Sb54E4EqYz9r7Yh8
- f7VmTDH079Yz4qI4pMV+qa8LDEuorD4pSiyweK40Y0Beku4M5QL7nFps0bZVHlo2vCc7
- tabmEpVfrt6cKUUTdL1gkV1CjP5MekIBfAWUAwuGUdbE7KkolnjHP7Okp3Oc5LLw7Kte
- 2CDJHfxrcXonQmtfuEAl9h/1UYD1SfrpJ+8nNpd627mF/8DK9teKLQhoF/csLqpnFaa+
- dafisoMv1A95H55z0Lw5ZeC0RIWqvhcfQupKa08XkC8m6At/U8A1ojQduY+OM97Pfw9Q
- DK7Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUz1JavobzrJ72I2tgGJkz8/ZclWK0qn7TQKcQS3LqGNttJo/vBtDYz8NU2F5Cmt+tuH6R5Ugw=@lists.denx.de
-X-Gm-Message-State: AOJu0YzkgyN82mnN6oxuTNzcFi7OaPfv6ERRQQy3ZndKHJ8++vToFVIp
- rTGkP7kmV7JosP2u9/McBYfWD9K7sy3x9ZTRZH7dq1pOV7LkbnMh/FuE6UfRO327AHdbDKD4cLP
- XZdrLCVdjXN5kO52AUkIKD6nzm+4=
-X-Google-Smtp-Source: AGHT+IGaH5/dtJoRqjSKc2q1+EBk8XuMGBFecJSGA1cunGAdGADo7t+zA3CoUgcxpWccUBLS+8cVk3va+ceOWrMOwk0=
-X-Received: by 2002:ac2:51ce:0:b0:539:89f7:3187 with SMTP id
- 2adb3069b0e04-53989f7343fmr4911068e87.47.1727695034914; Mon, 30 Sep 2024
- 04:17:14 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1727695463; x=1728300263;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=R/VRx5vn92zuCw+c/YCmAAxP/Fmz8HbbBRzibmmtj+A=;
+ b=XwQXq5VeI59YM7o4pYULhc70EXqMdJeqi4m3tKMXZ7KBomizgPd/G7UeTUTcO5+YeC
+ jdmelX7Cj5Gy1fMYHcO5jyZet3PjMFjDs4bzkbFPm2n2zeHbItPECdruDty0UDSywRsa
+ 2yaCfW0EHOyBnC3CoOoHiYs47+cFSi5S7AmPhtlFTrQBqUhH46Xs0KBqdK8MZ4i/i2nB
+ RnRpx77uQae5XieGDhs+136nuWcVcf2g2gV0ERNn4CTOfUQJvqRWgCrqMWSynLzwh2kc
+ i7BMbhTPDX6nNlbiaIEnn59YXxnq+nQs97HKafFMs4lNavOMqL4T3VzTVZklCjsNZzSP
+ Kc9w==
+X-Gm-Message-State: AOJu0YwAZJNO2/i97/ecgSVU/cyuSUtGxxjWBY0NS5ovZ8/Kb3iS+McE
+ R/tqz9EaLfLudqC0fKuxT8n/0lYoRSZxF6K0NOykI8rvz67OfbDPUiSsExubQUU=
+X-Google-Smtp-Source: AGHT+IEWfuWpCu/Swu0OebA9Tg5L+Rj+lRT53g+xRWomH67t6gV6P66QH3HRQg1xUGHVGHCrq/Mpeg==
+X-Received: by 2002:a05:600c:3b2a:b0:42f:5209:f82 with SMTP id
+ 5b1f17b1804b1-42f5849c3c1mr90506845e9.29.1727695462844; 
+ Mon, 30 Sep 2024 04:24:22 -0700 (PDT)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-37cd575dd04sm8803610f8f.114.2024.09.30.04.24.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 30 Sep 2024 04:24:22 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Dmitry Rokosov <ddrokosov@salutedevices.com>, igor.opaniuk@gmail.com,
+ sjg@chromium.org, semen.protsenko@linaro.org, trini@konsulko.com,
+ colin.mcallister@garmin.com, 4.shket@gmail.com, avromanov@salutedevices.com
+Cc: u-boot@lists.denx.de, kernel@salutedevices.com, rockosov@gmail.com,
+ Dmitry Rokosov <ddrokosov@salutedevices.com>
+Subject: Re: [PATCH v2 2/6] treewide: bcb: move ab_select command to bcb
+ subcommands
+In-Reply-To: <20240911214945.15873-3-ddrokosov@salutedevices.com>
+References: <20240911214945.15873-1-ddrokosov@salutedevices.com>
+ <20240911214945.15873-3-ddrokosov@salutedevices.com>
+Date: Mon, 30 Sep 2024 13:24:21 +0200
+Message-ID: <87jzetmlju.fsf@baylibre.com>
 MIME-Version: 1.0
-References: <20240930065041.5554-1-peng.fan@oss.nxp.com>
-In-Reply-To: <20240930065041.5554-1-peng.fan@oss.nxp.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 30 Sep 2024 08:17:03 -0300
-Message-ID: <CAOMZO5DDL_AkGr1_TZHLwowvypmMnuD1b7DGGjoNdECPL9WHyA@mail.gmail.com>
-Subject: Re: [PATCH 1/5] mmc: fsl_esdhc_imx: Enable AHB/IPG clk
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Cc: sbabic@denx.de, u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
- uboot-imx@nxp.com, Ye Li <ye.li@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,38 +94,546 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peng,
+Hi Dmitry,
 
-On Mon, Sep 30, 2024 at 2:47=E2=80=AFAM Peng Fan (OSS) <peng.fan@oss.nxp.co=
-m> wrote:
+Thank you for the patch.
+
+On jeu., sept. 12, 2024 at 00:49, Dmitry Rokosov <ddrokosov@salutedevices.com> wrote:
+
+> To enhance code organization, it is beneficial to consolidate all A/B
+> BCB management routines into a single super-command.
+> The 'bcb' command is an excellent candidate for this purpose.
 >
-> From: Peng Fan <peng.fan@nxp.com>
+> This patch integrates the separate 'ab_select' command into the 'bcb'
+> group as the 'ab_select' subcommand, maintaining the same parameter list
+> for consistency.
 >
-> Only enable PER clk is not enough, also need to enable AHB/IPG clk.
-
-Currently, the driver is working and now extra clocks need to be turned on.
-
-Please provide more details here as to why this is a problem now and
-it wasn't before.
-
->  #if CONFIG_IS_ENABLED(CLK)
->         /* Assigned clock already set clock */
-> +       ret =3D clk_get_by_name(dev, "ipg", &priv->ipg_clk);
-> +       if (!ret) {
-> +               ret =3D clk_enable(&priv->ipg_clk);
-> +               if (ret) {
-> +                       printf("Failed to enable ipg_clk\n");
-> +                       return ret;
-> +               }
-> +       }
+> Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
+> ---
+>  MAINTAINERS                               |  1 -
+>  cmd/Kconfig                               | 15 +----
+>  cmd/Makefile                              |  1 -
+>  cmd/ab_select.c                           | 66 --------------------
+>  cmd/bcb.c                                 | 73 +++++++++++++++++++----
+>  configs/am57xx_hs_evm_usb_defconfig       |  1 -
+>  configs/khadas-vim3_android_ab_defconfig  |  1 -
+>  configs/khadas-vim3l_android_ab_defconfig |  1 -
+>  configs/sandbox64_defconfig               |  4 +-
+>  configs/sandbox_defconfig                 |  4 +-
+>  doc/android/ab.rst                        | 12 ++--
+>  include/configs/khadas-vim3_android.h     |  2 +-
+>  include/configs/khadas-vim3l_android.h    |  2 +-
+>  include/configs/meson64_android.h         |  4 +-
+>  include/configs/ti_omap5_common.h         |  4 +-
+>  test/py/tests/test_android/test_ab.py     |  8 +--
+>  16 files changed, 84 insertions(+), 115 deletions(-)
+>  delete mode 100644 cmd/ab_select.c
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 2050ae24df82..876330d2d750 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -65,7 +65,6 @@ R:	Sam Protsenko <semen.protsenko@linaro.org>
+>  S:	Maintained
+>  T:	git https://source.denx.de/u-boot/custodians/u-boot-dfu.git
+>  F:	boot/android_ab.c
+> -F:	cmd/ab_select.c
+>  F:	doc/android/ab.rst
+>  F:	include/android_ab.h
+>  F:	test/py/tests/test_android/test_ab.py
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index 978f44eda426..eb0fb07b426a 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -1053,6 +1053,7 @@ config CMD_ADC
+>  config CMD_BCB
+>  	bool "bcb"
+>  	depends on PARTITIONS
+> +	depends on ANDROID_AB
+>  	help
+>  	  Read/modify/write the fields of Bootloader Control Block, usually
+>  	  stored on the flash "misc" partition with its structure defined in:
+> @@ -1766,20 +1767,6 @@ config CMD_XXD
+>  
+>  endmenu
+>  
+> -menu "Android support commands"
+> -
+> -config CMD_AB_SELECT
+> -	bool "ab_select"
+> -	depends on ANDROID_AB
+> -	help
+> -	  On Android devices with more than one boot slot (multiple copies of
+> -	  the kernel and system images) this provides a command to select which
+> -	  slot should be used to boot from and register the boot attempt. This
+> -	  is used by the new A/B update model where one slot is updated in the
+> -	  background while running from the other slot.
+> -
+> -endmenu
+> -
+>  if NET
+>  
+>  menuconfig CMD_NET
+> diff --git a/cmd/Makefile b/cmd/Makefile
+> index 87133cc27a8a..281c13220e95 100644
+> --- a/cmd/Makefile
+> +++ b/cmd/Makefile
+> @@ -17,7 +17,6 @@ obj-$(CONFIG_CMD_2048) += 2048.o
+>  obj-$(CONFIG_CMD_ACPI) += acpi.o
+>  obj-$(CONFIG_CMD_ADDRMAP) += addrmap.o
+>  obj-$(CONFIG_CMD_AES) += aes.o
+> -obj-$(CONFIG_CMD_AB_SELECT) += ab_select.o
+>  obj-$(CONFIG_CMD_ADC) += adc.o
+>  obj-$(CONFIG_CMD_ARMFLASH) += armflash.o
+>  obj-$(CONFIG_BLK) += blk_common.o
+> diff --git a/cmd/ab_select.c b/cmd/ab_select.c
+> deleted file mode 100644
+> index 7c178c728ca4..000000000000
+> --- a/cmd/ab_select.c
+> +++ /dev/null
+> @@ -1,66 +0,0 @@
+> -// SPDX-License-Identifier: BSD-2-Clause
+> -/*
+> - * Copyright (C) 2017 The Android Open Source Project
+> - */
+> -
+> -#include <android_ab.h>
+> -#include <command.h>
+> -#include <env.h>
+> -#include <part.h>
+> -
+> -static int do_ab_select(struct cmd_tbl *cmdtp, int flag, int argc,
+> -			char *const argv[])
+> -{
+> -	int ret;
+> -	struct blk_desc *dev_desc;
+> -	struct disk_partition part_info;
+> -	char slot[2];
+> -	bool dec_tries = true;
+> -
+> -	if (argc < 4)
+> -		return CMD_RET_USAGE;
+> -
+> -	for (int i = 4; i < argc; i++) {
+> -		if (strcmp(argv[i], "--no-dec") == 0) {
+> -			dec_tries = false;
+> -		} else {
+> -			return CMD_RET_USAGE;
+> -		}
+> -	}
+> -
+> -	/* Lookup the "misc" partition from argv[2] and argv[3] */
+> -	if (part_get_info_by_dev_and_name_or_num(argv[2], argv[3],
+> -						 &dev_desc, &part_info,
+> -						 false) < 0) {
+> -		return CMD_RET_FAILURE;
+> -	}
+> -
+> -	ret = ab_select_slot(dev_desc, &part_info, dec_tries);
+> -	if (ret < 0) {
+> -		printf("Android boot failed, error %d.\n", ret);
+> -		return CMD_RET_FAILURE;
+> -	}
+> -
+> -	/* Android standard slot names are 'a', 'b', ... */
+> -	slot[0] = BOOT_SLOT_NAME(ret);
+> -	slot[1] = '\0';
+> -	env_set(argv[1], slot);
+> -	printf("ANDROID: Booting slot: %s\n", slot);
+> -	return CMD_RET_SUCCESS;
+> -}
+> -
+> -U_BOOT_CMD(ab_select, 5, 0, do_ab_select,
+> -	   "Select the slot used to boot from and register the boot attempt.",
+> -	   "<slot_var_name> <interface> <dev[:part|#part_name]> [--no-dec]\n"
+> -	   "    - Load the slot metadata from the partition 'part' on\n"
+> -	   "      device type 'interface' instance 'dev' and store the active\n"
+> -	   "      slot in the 'slot_var_name' variable. This also updates the\n"
+> -	   "      Android slot metadata with a boot attempt, which can cause\n"
+> -	   "      successive calls to this function to return a different result\n"
+> -	   "      if the returned slot runs out of boot attempts.\n"
+> -	   "    - If 'part_name' is passed, preceded with a # instead of :, the\n"
+> -	   "      partition name whose label is 'part_name' will be looked up in\n"
+> -	   "      the partition table. This is commonly the \"misc\" partition.\n"
+> -           "    - If '--no-dec' is set, the number of tries remaining will not\n"
+> -           "      decremented for the selected boot slot\n"
+> -);
+> diff --git a/cmd/bcb.c b/cmd/bcb.c
+> index 97a96c009641..a56535a743c0 100644
+> --- a/cmd/bcb.c
+> +++ b/cmd/bcb.c
+> @@ -8,6 +8,7 @@
+>  #include <android_bootloader_message.h>
+>  #include <bcb.h>
+>  #include <command.h>
+> +#include <android_ab.h>
+>  #include <display_options.h>
+>  #include <log.h>
+>  #include <part.h>
+> @@ -23,6 +24,7 @@ enum bcb_cmd {
+>  	BCB_CMD_FIELD_TEST,
+>  	BCB_CMD_FIELD_DUMP,
+>  	BCB_CMD_STORE,
+> +	BCB_CMD_AB_SELECT,
+>  };
+>  
+>  static const char * const fields[] = {
+> @@ -52,6 +54,8 @@ static int bcb_cmd_get(char *cmd)
+>  		return BCB_CMD_STORE;
+>  	if (!strcmp(cmd, "dump"))
+>  		return BCB_CMD_FIELD_DUMP;
+> +	if (!strcmp(cmd, "ab_select"))
+> +		return BCB_CMD_AB_SELECT;
+>  	else
+>  		return -1;
+>  }
+> @@ -85,6 +89,10 @@ static int bcb_is_misused(int argc, char *const argv[])
+>  		if (argc != 2)
+>  			goto err;
+>  		break;
+> +	case BCB_CMD_AB_SELECT:
+> +		if (argc != 4 && argc != 5)
+> +			goto err;
+> +		return 0;
+>  	default:
+>  		printf("Error: 'bcb %s' not supported\n", argv[0]);
+>  		return -1;
+> @@ -414,6 +422,44 @@ void bcb_reset(void)
+>  	__bcb_reset();
+>  }
+>  
+> +static int do_bcb_ab_select(struct cmd_tbl *cmdtp, int flag, int argc,
+> +			    char * const argv[])
+> +{
+> +	int ret;
+> +	struct blk_desc *dev_desc;
+> +	struct disk_partition part_info;
+> +	char slot[2];
+> +	bool dec_tries = true;
 > +
-> +       ret =3D clk_get_by_name(dev, "ahb", &priv->ahb_clk);
-> +       if (!ret) {
-> +               ret =3D clk_enable(&priv->ahb_clk);
-> +               if (ret) {
-> +                       printf("Failed to enable ahb_clk\n");
-> +                       return ret;
+> +	for (int i = 4; i < argc; i++) {
+> +		if (strcmp(argv[i], "--no-dec") == 0)
+> +			dec_tries = false;
+> +		else
+> +			return CMD_RET_USAGE;
+> +	}
+> +
+> +	/* Lookup the "misc" partition from argv[2] and argv[3] */
+> +	if (part_get_info_by_dev_and_name_or_num(argv[2], argv[3],
+> +						 &dev_desc, &part_info,
+> +						 false) < 0) {
+> +		return CMD_RET_FAILURE;
+> +	}
+> +
+> +	ret = ab_select_slot(dev_desc, &part_info, dec_tries);
+> +	if (ret < 0) {
+> +		printf("Android boot failed, error %d.\n", ret);
+> +		return CMD_RET_FAILURE;
+> +	}
+> +
+> +	/* Android standard slot names are 'a', 'b', ... */
+> +	slot[0] = BOOT_SLOT_NAME(ret);
+> +	slot[1] = '\0';
+> +	env_set(argv[1], slot);
+> +	printf("ANDROID: Booting slot: %s\n", slot);
+> +
+> +	return CMD_RET_SUCCESS;
+> +}
+> +
+>  static struct cmd_tbl cmd_bcb_sub[] = {
+>  	U_BOOT_CMD_MKENT(load, CONFIG_SYS_MAXARGS, 1, do_bcb_load, "", ""),
+>  	U_BOOT_CMD_MKENT(set, CONFIG_SYS_MAXARGS, 1, do_bcb_set, "", ""),
+> @@ -421,6 +467,8 @@ static struct cmd_tbl cmd_bcb_sub[] = {
+>  	U_BOOT_CMD_MKENT(test, CONFIG_SYS_MAXARGS, 1, do_bcb_test, "", ""),
+>  	U_BOOT_CMD_MKENT(dump, CONFIG_SYS_MAXARGS, 1, do_bcb_dump, "", ""),
+>  	U_BOOT_CMD_MKENT(store, CONFIG_SYS_MAXARGS, 1, do_bcb_store, "", ""),
+> +	U_BOOT_CMD_MKENT(ab_select, CONFIG_SYS_MAXARGS, 1,
+> +			 do_bcb_ab_select, "", ""),
+>  };
+>  
+>  static int do_bcb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+> @@ -460,15 +508,18 @@ U_BOOT_CMD(
+>  	"bcb dump  <field>              - dump  BCB <field>\n"
+>  	"bcb store                      - store BCB back to <interface>\n"
+>  	"\n"
+> -	"Legend:\n"
+> -	"<interface> - storage device interface (virtio, mmc, etc)\n"
+> -	"<dev>       - storage device index containing the BCB partition\n"
+> -	"<part>      - partition index or name containing the BCB\n"
+> -	"<field>     - one of {command,status,recovery,stage,reserved}\n"
+> -	"<op>        - the binary operator used in 'bcb test':\n"
+> -	"              '=' returns true if <val> matches the string stored in <field>\n"
+> -	"              '~' returns true if <val> matches a subset of <field>'s string\n"
+> -	"<val>       - string/text provided as input to bcb {set,test}\n"
+> -	"              NOTE: any ':' character in <val> will be replaced by line feed\n"
+> -	"              during 'bcb set' and used as separator by upper layers\n"
 
-In the case of failure, the previously enabled clock must be disabled.
+Why does the "Legend:" block gets removed? Is it no longer relevant?
+To me, we should keep this block, moving it below "bcb ab_select"
 
-Would it be better to use clk_enable_bulk() here instead?
+> +	"bcb ab_select -\n"
+> +	"    Select the slot used to boot from and register the boot attempt.\n"
+> +	"    <slot_var_name> <interface> <dev[:part|#part_name]> [--no-dec]\n"
+> +	"    - Load the slot metadata from the partition 'part' on\n"
+> +	"      device type 'interface' instance 'dev' and store the active\n"
+> +	"      slot in the 'slot_var_name' variable. This also updates the\n"
+> +	"      Android slot metadata with a boot attempt, which can cause\n"
+> +	"      successive calls to this function to return a different result\n"
+> +	"      if the returned slot runs out of boot attempts.\n"
+> +	"    - If 'part_name' is passed, preceded with a # instead of :, the\n"
+> +	"      partition name whose label is 'part_name' will be looked up in\n"
+> +	"      the partition table. This is commonly the \"misc\" partition.\n"
+> +	"    - If '--no-dec' is set, the number of tries remaining will not\n"
+> +	"      decremented for the selected boot slot\n"
+>  );
+> diff --git a/configs/am57xx_hs_evm_usb_defconfig b/configs/am57xx_hs_evm_usb_defconfig
+> index 807e1d66a6d7..6d822b021768 100644
+> --- a/configs/am57xx_hs_evm_usb_defconfig
+> +++ b/configs/am57xx_hs_evm_usb_defconfig
+> @@ -50,7 +50,6 @@ CONFIG_CMD_ADTIMG=y
+>  CONFIG_CMD_ABOOTIMG=y
+>  CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
+>  CONFIG_CMD_BCB=y
+> -CONFIG_CMD_AB_SELECT=y
+>  CONFIG_BOOTP_DNS2=y
+>  # CONFIG_CMD_PMIC is not set
+>  CONFIG_CMD_AVB=y
+> diff --git a/configs/khadas-vim3_android_ab_defconfig b/configs/khadas-vim3_android_ab_defconfig
+> index 37b8d6a9256b..5281c426cb73 100644
+> --- a/configs/khadas-vim3_android_ab_defconfig
+> +++ b/configs/khadas-vim3_android_ab_defconfig
+> @@ -47,7 +47,6 @@ CONFIG_CMD_SPI=y
+>  CONFIG_CMD_USB=y
+>  CONFIG_CMD_USB_MASS_STORAGE=y
+>  # CONFIG_CMD_SETEXPR is not set
+> -CONFIG_CMD_AB_SELECT=y
+>  CONFIG_CMD_REGULATOR=y
+>  CONFIG_CMD_AVB=y
+>  CONFIG_OF_CONTROL=y
+> diff --git a/configs/khadas-vim3l_android_ab_defconfig b/configs/khadas-vim3l_android_ab_defconfig
+> index 95e70275cc4f..ff3001b78fa2 100644
+> --- a/configs/khadas-vim3l_android_ab_defconfig
+> +++ b/configs/khadas-vim3l_android_ab_defconfig
+> @@ -47,7 +47,6 @@ CONFIG_CMD_SPI=y
+>  CONFIG_CMD_USB=y
+>  CONFIG_CMD_USB_MASS_STORAGE=y
+>  # CONFIG_CMD_SETEXPR is not set
+> -CONFIG_CMD_AB_SELECT=y
+>  CONFIG_CMD_REGULATOR=y
+>  CONFIG_CMD_AVB=y
+>  CONFIG_OF_CONTROL=y
+> diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
+> index dd0582d2a0c0..635753f00b73 100644
+> --- a/configs/sandbox64_defconfig
+> +++ b/configs/sandbox64_defconfig
+> @@ -25,6 +25,7 @@ CONFIG_CONSOLE_RECORD=y
+>  CONFIG_CONSOLE_RECORD_OUT_SIZE=0x6000
+>  CONFIG_PRE_CONSOLE_BUFFER=y
+>  CONFIG_DISPLAY_BOARDINFO_LATE=y
+> +CONFIG_ANDROID_AB=y
+>  CONFIG_CMD_CPU=y
+>  CONFIG_CMD_LICENSE=y
+>  CONFIG_CMD_BOOTZ=y
+> @@ -44,6 +45,7 @@ CONFIG_CMD_MD5SUM=y
+>  CONFIG_CMD_MEMINFO=y
+>  CONFIG_CMD_MX_CYCLIC=y
+>  CONFIG_CMD_MEMTEST=y
+> +CONFIG_CMD_BCB=y
+>  CONFIG_CMD_DEMO=y
+>  CONFIG_CMD_GPIO=y
+>  CONFIG_CMD_GPT=y
+> @@ -167,8 +169,8 @@ CONFIG_PWRSEQ=y
+>  CONFIG_I2C_EEPROM=y
+>  CONFIG_MMC_SANDBOX=y
+>  CONFIG_DM_MTD=y
+> -CONFIG_MTD_RAW_NAND=y
+>  CONFIG_SYS_MAX_NAND_DEVICE=8
+> +CONFIG_MTD_RAW_NAND=y
+>  CONFIG_SYS_NAND_USE_FLASH_BBT=y
+>  CONFIG_NAND_SANDBOX=y
+>  CONFIG_SYS_NAND_ONFI_DETECTION=y
+> diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+> index dc5fcdbd1c9e..cb69554a7306 100644
+> --- a/configs/sandbox_defconfig
+> +++ b/configs/sandbox_defconfig
+> @@ -66,6 +66,7 @@ CONFIG_CMD_MEMINFO=y
+>  CONFIG_CMD_MEM_SEARCH=y
+>  CONFIG_CMD_MX_CYCLIC=y
+>  CONFIG_CMD_MEMTEST=y
+> +CONFIG_CMD_BCB=y
+>  CONFIG_CMD_DEMO=y
+>  CONFIG_CMD_GPIO=y
+>  CONFIG_CMD_GPIO_READ=y
+> @@ -93,7 +94,6 @@ CONFIG_CMD_AXI=y
+>  CONFIG_CMD_CAT=y
+>  CONFIG_CMD_SETEXPR_FMT=y
+>  CONFIG_CMD_XXD=y
+> -CONFIG_CMD_AB_SELECT=y
+>  CONFIG_CMD_DHCP6=y
+>  CONFIG_BOOTP_DNS2=y
+>  CONFIG_CMD_PCAP=y
+> @@ -219,8 +219,8 @@ CONFIG_MMC_PCI=y
+>  CONFIG_MMC_SANDBOX=y
+>  CONFIG_MMC_SDHCI=y
+>  CONFIG_DM_MTD=y
+> -CONFIG_MTD_RAW_NAND=y
+>  CONFIG_SYS_MAX_NAND_DEVICE=8
+> +CONFIG_MTD_RAW_NAND=y
+>  CONFIG_SYS_NAND_USE_FLASH_BBT=y
+>  CONFIG_NAND_SANDBOX=y
+>  CONFIG_SYS_NAND_ONFI_DETECTION=y
+> diff --git a/doc/android/ab.rst b/doc/android/ab.rst
+> index 2adf88781d60..7fd4aeb6a724 100644
+> --- a/doc/android/ab.rst
+> +++ b/doc/android/ab.rst
+> @@ -18,7 +18,7 @@ The A/B updates support can be activated by specifying next options in
+>  your board configuration file::
+>  
+>      CONFIG_ANDROID_AB=y
+> -    CONFIG_CMD_AB_SELECT=y
+> +    CONFIG_CMD_BCB=y
+>  
+>  The disk space on target device must be partitioned in a way so that each
+>  partition which needs to be updated has two or more instances. The name of
+> @@ -26,8 +26,8 @@ each instance must be formed by adding suffixes: ``_a``, ``_b``, ``_c``, etc.
+>  For example: ``boot_a``, ``boot_b``, ``system_a``, ``system_b``, ``vendor_a``,
+>  ``vendor_b``.
+>  
+> -As a result you can use ``ab_select`` command to ensure A/B boot process in your
+> -boot script. This command analyzes and processes A/B metadata stored on a
+> +As a result you can use ``bcb ab_select`` command to ensure A/B boot process in
+> +your boot script. This command analyzes and processes A/B metadata stored on a
+>  special partition (e.g. ``misc``) and determines which slot should be used for
+>  booting up.
+>  
+> @@ -42,15 +42,15 @@ Command usage
+>  
+>  .. code-block:: none
+>  
+> -    ab_select <slot_var_name> <interface> <dev[:part_number|#part_name]>
+> +    bcb ab_select <slot_var_name> <interface> <dev[:part_number|#part_name]>
+>  
+>  for example::
+>  
+> -    => ab_select slot_name mmc 1:4
+> +    => bcb ab_select slot_name mmc 1:4
+>  
+>  or::
+>  
+> -    => ab_select slot_name mmc 1#misc
+> +    => bcb ab_select slot_name mmc 1#misc
+>  
+>  Result::
+>  
+> diff --git a/include/configs/khadas-vim3_android.h b/include/configs/khadas-vim3_android.h
+> index da6adf6c413a..4a8348914035 100644
+> --- a/include/configs/khadas-vim3_android.h
+> +++ b/include/configs/khadas-vim3_android.h
+> @@ -12,7 +12,7 @@
+>  #define LOGO_UUID "43a3305d-150f-4cc9-bd3b-38fca8693846;"
+>  #define ROOT_UUID "ddb8c3f6-d94d-4394-b633-3134139cc2e0;"
+>  
+> -#if defined(CONFIG_CMD_AB_SELECT)
+> +#if defined(CONFIG_CMD_BCB)
+>  #define PARTS_DEFAULT \
+>  	"uuid_disk=${uuid_gpt_disk};" \
+>  	"name=logo,start=512K,size=2M,uuid=" LOGO_UUID \
+> diff --git a/include/configs/khadas-vim3l_android.h b/include/configs/khadas-vim3l_android.h
+> index b1768e2d8211..bf1c831c0bc3 100644
+> --- a/include/configs/khadas-vim3l_android.h
+> +++ b/include/configs/khadas-vim3l_android.h
+> @@ -12,7 +12,7 @@
+>  #define LOGO_UUID "43a3305d-150f-4cc9-bd3b-38fca8693846;"
+>  #define ROOT_UUID "ddb8c3f6-d94d-4394-b633-3134139cc2e0;"
+>  
+> -#if defined(CONFIG_CMD_AB_SELECT)
+> +#if defined(CONFIG_CMD_BCB)
+
+This part should only be executed when our partitioning scheme is A/B. I
+think this diff will break because for both:
+
+configs/khadas-vim3l_android_ab_defconfig
+configs/khadas-vim3_android_defconfig
+
+We have CONFIG_CMD_BCB=y
+
+How can we differentiate, at build time, boards wanting A/B support and
+boards that don't?
+
+Note that non A/B is being deprecated so this might not be an issue in
+the future.
+
+>  #define PARTS_DEFAULT \
+>  	"uuid_disk=${uuid_gpt_disk};" \
+>  	"name=logo,start=512K,size=2M,uuid=" LOGO_UUID \
+> diff --git a/include/configs/meson64_android.h b/include/configs/meson64_android.h
+> index c0e977abb01f..93f9e191a165 100644
+> --- a/include/configs/meson64_android.h
+> +++ b/include/configs/meson64_android.h
+> @@ -47,13 +47,13 @@
+>  #define AVB_VERIFY_CMD ""
+>  #endif
+>  
+> -#if defined(CONFIG_CMD_AB_SELECT)
+> +#if defined(CONFIG_CMD_BCB)
+>  #define ANDROIDBOOT_GET_CURRENT_SLOT_CMD "get_current_slot=" \
+>  	"if part number mmc ${mmcdev} " CONTROL_PARTITION " control_part_number; " \
+>  	"then " \
+>  		"echo " CONTROL_PARTITION \
+>  			" partition number:${control_part_number};" \
+> -		"ab_select current_slot mmc ${mmcdev}:${control_part_number};" \
+> +		"bcb ab_select current_slot mmc ${mmcdev}:${control_part_number};" \
+>  	"else " \
+>  		"echo " CONTROL_PARTITION " partition not found;" \
+>  	"fi;\0"
+> diff --git a/include/configs/ti_omap5_common.h b/include/configs/ti_omap5_common.h
+> index 26494ae98010..5a2ea8c4ddcc 100644
+> --- a/include/configs/ti_omap5_common.h
+> +++ b/include/configs/ti_omap5_common.h
+> @@ -93,13 +93,13 @@
+>  
+>  #define CONTROL_PARTITION "misc"
+>  
+> -#if defined(CONFIG_CMD_AB_SELECT)
+> +#if defined(CONFIG_CMD_BCB)
+>  #define AB_SELECT_SLOT \
+>  	"if part number mmc 1 " CONTROL_PARTITION " control_part_number; " \
+>  	"then " \
+>  		"echo " CONTROL_PARTITION \
+>  			" partition number:${control_part_number};" \
+> -		"ab_select slot_name mmc ${mmcdev}:${control_part_number};" \
+> +		"bcb ab_select slot_name mmc ${mmcdev}:${control_part_number};" \
+>  	"else " \
+>  		"echo " CONTROL_PARTITION " partition not found;" \
+>  		"exit;" \
+> diff --git a/test/py/tests/test_android/test_ab.py b/test/py/tests/test_android/test_ab.py
+> index c79cb07fda35..0d7b7995a9fa 100644
+> --- a/test/py/tests/test_android/test_ab.py
+> +++ b/test/py/tests/test_android/test_ab.py
+> @@ -56,20 +56,20 @@ def ab_disk_image(u_boot_console):
+>  
+>  @pytest.mark.boardspec('sandbox')
+>  @pytest.mark.buildconfigspec('android_ab')
+> -@pytest.mark.buildconfigspec('cmd_ab_select')
+> +@pytest.mark.buildconfigspec('cmd_bcb')
+>  @pytest.mark.requiredtool('sgdisk')
+>  def test_ab(ab_disk_image, u_boot_console):
+> -    """Test the 'ab_select' command."""
+> +    """Test the 'bcb ab_select' command."""
+>  
+>      u_boot_console.run_command('host bind 0 ' + ab_disk_image.path)
+>  
+> -    output = u_boot_console.run_command('ab_select slot_name host 0#misc')
+> +    output = u_boot_console.run_command('bcb ab_select slot_name host 0#misc')
+>      assert 're-initializing A/B metadata' in output
+>      assert 'Attempting slot a, tries remaining 7' in output
+>      output = u_boot_console.run_command('printenv slot_name')
+>      assert 'slot_name=a' in output
+>  
+> -    output = u_boot_console.run_command('ab_select slot_name host 0:1')
+> +    output = u_boot_console.run_command('bcb ab_select slot_name host 0:1')
+>      assert 'Attempting slot b, tries remaining 7' in output
+>      output = u_boot_console.run_command('printenv slot_name')
+>      assert 'slot_name=b' in output
+> -- 
+> 2.43.0
