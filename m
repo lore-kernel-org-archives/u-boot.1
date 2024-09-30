@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C5B2CCFA16
-	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 19:07:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53791CDD1A9
+	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 19:24:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8F4489003;
-	Mon, 30 Sep 2024 21:07:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=sys-base.io
+	by phobos.denx.de (Postfix) with ESMTP id B4EFE88FDA;
+	Mon, 30 Sep 2024 21:23:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 4FAF189016; Mon, 30 Sep 2024 21:07:47 +0200 (CEST)
-Received: from leonov.paulk.fr (leonov.paulk.fr [185.233.101.22])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1727724238;
+	bh=ZogeETTs2W0bfsxYlMFYFk7Wqi2FswpNZewmcK8z3dU=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=cJNapTEy+qhJ+E4zSDMmFSB8nUO14kv5xu9z9ERVkm2IQ9r62gSY6SGehSGGooszk
+	 wVmoHKLu8x/3yODjLljw/mWY2CfULLDo2ND2Pp0Wyp9s4ImuDGT3zMm0FPIIGgzDxK
+	 qnCeQ2eu40j1uPokpYuGXlT0FUtLv1bwJbZmtpa5shwc+CA/ggYwrbzIvhpCfcHLYs
+	 Rp3R7m5l+tSWo+3BQ27O35uUah2Yl8c4NJsx1iIZuGohzSdBzwSFjQfx5PgNpO8r5G
+	 TPmGzH3r91V0ItyqQGMpxUgi23hKMAkGWiKqu/aWMjfanCHYMSNwKHeDGOMynBdBG7
+	 5NWWNcWXbLjtg==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 446CE88FDA
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 21:07:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=sys-base.io
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paulk@sys-base.io
-Received: from laika.paulk.fr (12.234.24.109.rev.sfr.net [109.24.234.12])
- by leonov.paulk.fr (Postfix) with ESMTPS id 34B1A1F00050
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 19:07:41 +0000 (UTC)
-Received: by laika.paulk.fr (Postfix, from userid 65534)
- id E9A8DA60DC0; Mon, 30 Sep 2024 19:07:38 +0000 (UTC)
-Received: from collins (unknown [192.168.1.1])
- by laika.paulk.fr (Postfix) with ESMTPSA id 2874FA60DB8;
- Mon, 30 Sep 2024 19:07:37 +0000 (UTC)
-Date: Mon, 30 Sep 2024 21:07:34 +0200
-From: Paul Kocialkowski <paulk@sys-base.io>
-To: Simon Glass <sjg@chromium.org>
-Cc: Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Jonas Karlman <jonas@kwiboo.se>,
- Chris Morgan <macromorgan@hotmail.com>,
- Tim Lunn <tim@feathertop.org>, Paul Kocialkowski <contact@paulk.fr>
-Subject: Re: [PATCH 3/4] rockchip: rk3399-rockpro64: Disable bootstage
- instrumentation config
-Message-ID: <Zvr29j1cyTNmq-RN@collins>
-References: <20240926183111.1324284-1-paulk@sys-base.io>
- <20240926183111.1324284-3-paulk@sys-base.io>
- <CALeDE9NkpxES=SRKxH6=xk_94rRK9Y0gwuj=C-d+eddjOd_gkg@mail.gmail.com>
- <CAFLszTgqGGMm3Hxa2FmT9Z6-BFAR8J6cgb2PNBE8FR=S-X8c8A@mail.gmail.com>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 536A388E3A;
+ Mon, 30 Sep 2024 21:23:57 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1727724237;
+ bh=ZogeETTs2W0bfsxYlMFYFk7Wqi2FswpNZewmcK8z3dU=;
+ h=From:To:Cc:Subject:Date:From;
+ b=PB1VZbkfwrcvBbxhreW0PPViJI+ojBgvWPu69dg75r4kKWGwd2g020BLawnVtv/n/
+ blr+sRGhzMVuf6hIU3nqycCnR20dUKr/9t8PYU2Aa+q6746j/5bI4sJT4Y0UNWao/Q
+ YNLqkSAXXNzy4K3h90a009xc6zlg2HLOQdVzd6BjwS3B+XH7WY2mKFZzds6nuYN067
+ IdwnacF/zYsP4hyWmad+e0h8AhO9TPkJrWKJ3kTN/JP75R2fwOvNm0XXAKkEBklFI9
+ P0cCHNqYRnnC7jqg3jJ7qBMZCN0A8c/CseMFgnQO1fngMzb3PSKOGwEtzzImYe7Iew
+ IJksrRI+g5tsg==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH] ARM: stm32: Add script to install U-Boot from SD/eMMC to SPI
+ NOR on DH STM32MP15xx DHSOM
+Date: Mon, 30 Sep 2024 21:23:40 +0200
+Message-ID: <20240930192343.59359-1-marex@denx.de>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="PCCGejnIGNoG7agE"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTgqGGMm3Hxa2FmT9Z6-BFAR8J6cgb2PNBE8FR=S-X8c8A@mail.gmail.com>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,104 +67,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Make the dh_update_sd_to_sf script generic, rename it to dh_update_sdmmc_to_sf
+and implement two specific dh_update_sd_to_sf and dh_update_emmc_to_sf scripts
+which load U-Boot from either SD or eMMC and install it into SPI NOR.
 
---PCCGejnIGNoG7agE
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@dh-electronics.com
+Cc: u-boot@lists.denx.de
+Cc: uboot-stm32@st-md-mailman.stormreply.com
+---
+ include/configs/stm32mp15_dh_dhsom.h | 16 +++++++++++++---
+ 1 file changed, 13 insertions(+), 3 deletions(-)
 
-Hi,
+diff --git a/include/configs/stm32mp15_dh_dhsom.h b/include/configs/stm32mp15_dh_dhsom.h
+index de39b19219d..fa759c938b3 100644
+--- a/include/configs/stm32mp15_dh_dhsom.h
++++ b/include/configs/stm32mp15_dh_dhsom.h
+@@ -38,16 +38,26 @@
+ 		"setenv loadaddr1 && "					\
+ 		"setenv sblkcnt && "					\
+ 		"setenv ublkcnt\0"					\
+-	"dh_update_sd_to_sf=" /* Erase SPI NOR and install U-Boot from SD */ \
++	"dh_update_sdmmc_to_sf=" /* Erase SPI NOR and install U-Boot from SD/eMMC */ \
+ 		"setexpr loadaddr1 ${loadaddr} + 0x1000000 && "		\
+-		"load mmc 0:4 ${loadaddr1} /boot/u-boot-spl.stm32 && "	\
++		"load ${dh_update_iface} ${dh_update_dev} "		\
++			"${loadaddr1} /boot/u-boot-spl.stm32 && "	\
+ 		"env set filesize1 ${filesize} && "			\
+-		"load mmc 0:4 ${loadaddr} /boot/u-boot.itb && "		\
++		"load ${dh_update_iface} ${dh_update_dev} "		\
++			"${loadaddr} /boot/u-boot.itb && "		\
+ 		"sf probe && sf erase 0 0x200000 && "			\
+ 		"sf update ${loadaddr1} 0 ${filesize1} && "		\
+ 		"sf update ${loadaddr1} 0x40000 ${filesize1} && "	\
+ 		"sf update ${loadaddr} 0x80000 ${filesize} && "		\
+ 		"env set filesize1 && env set loadaddr1\0"		\
++	"dh_update_sd_to_sf=" /* Erase SPI NOR and install U-Boot from SD */ \
++		"setenv dh_update_iface mmc && "			\
++		"setenv dh_update_dev 0:4 && "				\
++		"run dh_update_sdmmc_to_sf\0"				\
++	"dh_update_emmc_to_sf=" /* Erase SPI NOR and install U-Boot from eMMC */ \
++		"setenv dh_update_iface mmc && "			\
++		"setenv dh_update_dev 1:4 && "				\
++		"run dh_update_sdmmc_to_sf\0"				\
+ 	"stdin=serial\0"						\
+ 	"stdout=serial\0"						\
+ 	"stderr=serial\0"						\
+-- 
+2.45.2
 
-Le Mon 30 Sep 24, 12:52, Simon Glass a =C3=A9crit :
-> On Mon, 30 Sept 2024 at 03:03, Peter Robinson <pbrobinson@gmail.com> wrot=
-e:
-> > On Thu, 26 Sept 2024 at 19:32, Paul Kocialkowski <paulk@sys-base.io> wr=
-ote:
-> > > The boot timing and reporting (bootstage) infrastructure is useful for
-> > > performance analysis and debug but adds overhead and console noise wh=
-en
-> > > using the device normally. Remove it from the device config.
-> > >
-> > > Signed-off-by: Paul Kocialkowski <contact@paulk.fr>
-> > Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
-> >
-> > This makes sense, for those that want this information will know how
-> > to build it for testing.
->=20
-> Can you just disable the report? There should be no need to disable
-> bootstage itself.
-
-I see bootstage as a debug/development feature, so I don't really see why it
-should be enabled on default builds.
-
-Besides the console noise aspect, my intent here is also to tidy up this co=
-nfig.
-
-Cheers,
-
-Paul
-
-> Regards,
-> Simon
->=20
->=20
-> > > ---
-> > >  configs/rockpro64-rk3399_defconfig | 3 ---
-> > >  1 file changed, 3 deletions(-)
-> > >
-> > > diff --git a/configs/rockpro64-rk3399_defconfig b/configs/rockpro64-r=
-k3399_defconfig
-> > > index fc0804a0b80d..095d27ffaa04 100644
-> > > --- a/configs/rockpro64-rk3399_defconfig
-> > > +++ b/configs/rockpro64-rk3399_defconfig
-> > > @@ -19,8 +19,6 @@ CONFIG_SPL_SPI=3Dy
-> > >  CONFIG_SYS_LOAD_ADDR=3D0x800800
-> > >  CONFIG_PCI=3Dy
-> > >  CONFIG_DEBUG_UART=3Dy
-> > > -CONFIG_BOOTSTAGE=3Dy
-> > > -CONFIG_BOOTSTAGE_REPORT=3Dy
-> > >  CONFIG_DEFAULT_FDT_FILE=3D"rockchip/rk3399-rockpro64.dtb"
-> > >  CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
-> > >  CONFIG_SPL_MAX_SIZE=3D0x40000
-> > > @@ -38,7 +36,6 @@ CONFIG_CMD_POWEROFF=3Dy
-> > >  CONFIG_CMD_USB=3Dy
-> > >  # CONFIG_CMD_SETEXPR is not set
-> > >  CONFIG_CMD_TIME=3Dy
-> > > -CONFIG_CMD_BOOTSTAGE=3Dy
-> > >  CONFIG_SPL_OF_CONTROL=3Dy
-> > >  CONFIG_OF_SPL_REMOVE_PROPS=3D"clock-names interrupt-parent assigned-=
-clocks assigned-clock-rates assigned-clock-parents"
-> > >  CONFIG_ENV_IS_IN_SPI_FLASH=3Dy
-> > > --
-> > > 2.46.2
-> > >
-
---=20
-Paul Kocialkowski,
-
-Independent contractor - sys-base - https://www.sys-base.io/
-Free software developer - https://www.paulk.fr/
-
-Specialist in multimedia, graphics and embedded hardware support with Linux.
-
---PCCGejnIGNoG7agE
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEAbcMXZQMtj1fphLChP3B6o/ulQwFAmb69vYACgkQhP3B6o/u
-lQzEOQ/9FmJgyG9rtOfxFExvllbAZ+y+BC8n4IWLbab6Wtwt/8ImJGFGdXxjJx+v
-PleCas3pBi+7XINjRmS+Uofl1Oa+zWgizewZAQaZTUXfih6YG7MZXT7cZwpK9EWl
-/oMLT/XG3ojixWFx9Bqdlg8a0yPiPhcTxZD2kNGbREo8exkvNduFhpM5HfMmn6Xj
-Xd7O7JY9KUbII09OEzFD0WolarUFaXdvDGzav+BTD+SjTU7FFZFBRDcASeH8XCi/
-kboawPPZfdYSs4anhQXodbJpBkCFCaY5cUVr830iH4RQBZE451tLaPm18ZPzr2hq
-Phgj8yPsPt3AGQqHPe0N8YHyAcwbR44aN9ptZj0XGVWuoVO0NN5UZvj7plRwyp3r
-eA9jUWGGDuJ/2g6d+omLKmjqxSW+QJ0QqpS2RfrDkawAU3I4tGZ2IjkwmumCdvNp
-tst5FVU+hb9DrNts/oUmV4tbwrQiwBOOqAyCvrkHQSqCvyNDNgrrWcxbVSukORph
-qT6eRw2kxNUnARQ7QYLZ4Mg3qpyL3FigNlSP1llEcJqq84tYEUb4ReTS4k0M/F6/
-F2wcUChNHQeuKCEhNQCO9B1VK9Aa4nutd4XtYg0A4Ts97hHYoNVOlshDYJ/NlnJ2
-VbdGFmeD2q90ycIceOoPra/UBS60GCBoZkg/Bu3/qCcwLKF9MIU=
-=m+zY
------END PGP SIGNATURE-----
-
---PCCGejnIGNoG7agE--
