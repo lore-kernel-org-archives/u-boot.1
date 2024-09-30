@@ -4,65 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCC19CE835D
-	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 17:35:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 294F4CE835D
+	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 17:55:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 89BB88900E;
-	Mon, 30 Sep 2024 19:35:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id A96A788FDA;
+	Mon, 30 Sep 2024 19:55:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1727717708;
-	bh=wodmrb4f0XlPuXC38UvmawtUYwE43SI6+f6H3StxQAY=;
-	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=uuwp9T8JgEoDZnpdPj2w5zBJyLKly+D2upZ7DOkzZW5Wc7VlpPBwuy033jbUTBSHN
-	 sf7xVF8Ak+3qJRxU9Vpwym6d4qIHu2aWQZNps8pPvlBEPF8GXGn7unU1r5qUaOEAWf
-	 3RfMW3em/8kak29GUkyQbAXK726RvaZfCRavs8hptsLXvfpConEz/5vSmQNhSKPKR3
-	 290IpgRz9kBcsqJsFp1Ab0UUYx+l3CT2XeHfAp8jzUXgE6IGQgoNBDvLwiyhJjsbOT
-	 cQC5gcY1mppg5Pok/I5DC5I7597caO5c7SVcJN5fFJ6Vg5QKxE2IIejGw6Gd/ytuMd
-	 GrCjhKZ/4/oYA==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="INCwg6Qe";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id B1A8588FD6; Mon, 30 Sep 2024 19:55:41 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 5FD6988F94;
- Mon, 30 Sep 2024 19:35:05 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1727717706;
- bh=wodmrb4f0XlPuXC38UvmawtUYwE43SI6+f6H3StxQAY=;
- h=Date:From:Subject:To:Cc:References:In-Reply-To:From;
- b=PsFVPFySAtKtFLC8jhnNFZMXZnZ4kJjGWhxRVc62qDqk2A49vGEsk3i7f5/Jsj5Ok
- 5JWojxLxPqrkOYPYA4vPwVKh2tf0i0K87wsRL8K3KDlrLttD6DHBTHcRYL8j/V96qc
- 3rUwQBtyboXlbw5WYvd26zpEHYC+cqG0L9b0CsSkwKi3/DJ0HozpH+Mb7EYz4WCvTJ
- kFWHRyUa3xbnqnvJI60WCIMo/iYyY+AgHyFUys4HqE/L2AutLtxNVNljNlP3ArgX+u
- uWVRzDdbFvoa3Bjy8uiUjsY2FWkY/DFwqieAFbCuqxkGJ5e6CspgqbXHvQ7vSWY/6t
- H6gfgdp6Gj0ZA==
-Message-ID: <d4592568-472c-4dcd-97c9-bc5e7a60625f@denx.de>
-Date: Mon, 30 Sep 2024 19:34:29 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 96BE388C7D
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 19:55:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 2AE6B3F1E0
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 17:55:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1727718939;
+ bh=jOO3r+8ylySkaOuLBXOU7TqqV4ID84EpM1nvfBzX6QY=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=INCwg6QenbWIYOB+ubR3rZS4WhHSORKY8HYCemyodPigw17e6a0dHrci05wDSCmSN
+ 5EpjjsDqQIxoigjIvAyeHNG+079MdgGWiWrtWN9cAFF1513yrUZQi+4yBEPSK4PooN
+ 0/PDB4F6bEYeJ3JnD7z+K7LgLAT10019gs85mJSIF4aJmKm5PhmkJhDYoFc56BF6TK
+ S3h5+PDrV2cMjaPTu+vGuUVzrLwvwI39vuqEsBnjbHTdHiEn4Mnwdu+5lchUaqrhNq
+ PiqZ8wX4alExJ27tmdF3qmOiNDdvY73IMS/ByyAFppYk91ZKi3HiUWPiCrVqnOqSxE
+ FVDbVhh8YGy+Q==
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-42caf073db8so38552535e9.3
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 10:55:39 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727718939; x=1728323739;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=jOO3r+8ylySkaOuLBXOU7TqqV4ID84EpM1nvfBzX6QY=;
+ b=mD78UrjaSedCtGbWdYyar/HNXindq7uHN7diVqxmzVA4tpF2hesJtWY0mjlOB1roRf
+ 5kiZF7a7rmiq0iGbcNz6fiOfglqOpSwQzGljAFxSbNfrLS8e9Z998d12Zj7lOvFKfR/I
+ dzWdcNVHzZ17rf1TCOzN3uref+WD2uWgG6ckuhjXSH+7cuWQzWkp8XIzlgsT+I3a8mMK
+ jJ0rrZvujF0Um5FtcNW4VBuohqlUYqmVkK6l6e3Y3H3mIrbATCTfVrg2yNyGaU352BO3
+ ywhcNNYvMbhzeoRLeQSP0A7V2ReSfBVjm22f4y5/WIRVKSUK/qlm9wmYnZ5onhPCkASZ
+ +gCA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWFTIVNMixGH3IBECQ7YLYLU6Z75CczaUclugkfcOR4ew/qyVfdIsP2se2g12tDBBfnx4Tz8c8=@lists.denx.de
+X-Gm-Message-State: AOJu0YySkzYBhbEXTNtylnbR4oz2AsOAjv9ZmwFJkra8opc1kNvgeJAE
+ MV+Q4myNl0noPOrsdCb7YxrTpqARu3WE96kDtfICckJDOn2o2AkbK5IEEC6Nx+inLRFCX4s50bQ
+ eqThqygi86S9ZJXti1QLdtA0Tmuzo4scvJiHMTRBCKChkojEJ9RLDcS1wwL6ZahmKMc4=
+X-Received: by 2002:a05:600c:3b8c:b0:42c:be90:fa1b with SMTP id
+ 5b1f17b1804b1-42f584335f0mr100509045e9.14.1727718938685; 
+ Mon, 30 Sep 2024 10:55:38 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHR+JsYdHUOpsygwNHBItVWw6IcbbRTNTCjQDYE7hoOqG+YFwllHh6SgB3krmYwkUf8EQUFDA==
+X-Received: by 2002:a05:600c:3b8c:b0:42c:be90:fa1b with SMTP id
+ 5b1f17b1804b1-42f584335f0mr100508815e9.14.1727718938260; 
+ Mon, 30 Sep 2024 10:55:38 -0700 (PDT)
+Received: from [192.168.103.101]
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-42f57dd2e67sm109795785e9.10.2024.09.30.10.55.36
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 30 Sep 2024 10:55:37 -0700 (PDT)
+Message-ID: <4632a46c-a355-4c2a-8588-6e911b296e3d@canonical.com>
+Date: Mon, 30 Sep 2024 19:55:35 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH 2/3] dts: Add ability to build DTOs only from
- arch/$(ARCH)/dts
-To: Jan Kiszka <jan.kiszka@siemens.com>, Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- Fabio Estevam <festevam@gmail.com>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Jonas Karlman <jonas@kwiboo.se>,
- Lothar Rubusch <l.rubusch@gmail.com>, Michal Simek <michal.simek@amd.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Simon Glass
- <sjg@chromium.org>, Stefano Babic <sbabic@denx.de>,
- Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
-References: <20240927214955.394224-1-marex@denx.de>
- <20240927214955.394224-2-marex@denx.de>
- <CAFA6WYPPXDJC4kSiBAR=jL-Z0v3a8+=_=+hLx+Ug0+yu407y3Q@mail.gmail.com>
- <67761100-c52d-4949-8da3-8783782c44da@siemens.com>
+Subject: Re: [PATCH v1 00/12] Support OF_UPSTREAM for StarFive JH7110
+To: Hal Feng <hal.feng@starfivetech.com>
+Cc: Emil Renner Berthing <emil.renner.berthing@canonical.com>,
+ Minda Chen <minda.chen@starfivetech.com>, u-boot@lists.denx.de,
+ Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Rick Chen <rick@andestech.com>,
+ H Bell <dmoo_dv@protonmail.com>, E Shattow <lucent@gmail.com>,
+ Nam Cao <namcao@linutronix.de>, Bo Gan <ganboing@gmail.com>
+References: <20240930155919.111738-1-hal.feng@starfivetech.com>
 Content-Language: en-US
-In-Reply-To: <67761100-c52d-4949-8da3-8783782c44da@siemens.com>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240930155919.111738-1-hal.feng@starfivetech.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -81,42 +111,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/30/24 8:10 AM, Jan Kiszka wrote:
-> On 30.09.24 08:02, Sumit Garg wrote:
->> + Jan
->>
->> Hi Marek,
->>
->> On Sat, 28 Sept 2024 at 03:20, Marek Vasut <marex@denx.de> wrote:
->>>
->>> Currently the enablement of OF_UPSTREAM results on the build system
->>> searching for DTs only in dts/upstream/ . There are platforms which
->>> use U-Boot specific DTBOs applied on top of U-Boot control DT during
->>> SPL stage, and source DTs for these are located in arch/$(ARCH)/dtb.
->>
->> I would like to understand the need to maintain DTBOs separately from
->> DTBs. Why aren't we pushing DTBOs to Linux kernel sources as we do for
->> DTBs? Jan recently pushed those so-called U-Boot specific DTBOs for a
->> TI platform which were accepted in the Linux kernel upstream. This
->> patch will just deny the ability to build those DTBOs from dts
->> upstream tree. IMHO, this takes a step backwards on the whole notion
->> of OF_UPSTREAM.
+On 30.09.24 17:59, Hal Feng wrote:
+> This patchset add OF_STREAM support for StarFive JH7110 based boards.
+> All the JH7110 based boards can use the DT from upstreaming linux kernel.
+> The v1.3b board device tree is set as the default device tree.
 > 
-> Exactly - I was sent the other direction (get DTSOs upstream), and I'm
-> now only waiting for 6.12-rc1-dts so that the first round to make use of
-> that can be integrated into U-Boot [1]. Anything that would prevent that
-> here is not welcome anymore.
+> This patchset should be applied after the DT from dts/upstream/ updating
+> to the latest version.
 
-I will only re-iterate what I wrote on my previous email, this commit 
-does not prevent building DTBOs from dts/upstream/ , they are preferred. 
-This only adds fallback to U-Boot local DTOs if the upstream DTOs are 
-not upstream yet.
+Hello Hal,
 
->> If we really want a middle ground solution to allow migration to
->> OF_UPSTREAM easier then we need to find a way to build DTBOs from both
->> directories (local and upstream dts). I would imagine that will likely
->> complicate building and packaging DTBOs.
+Thanks a lot for making the move to upstream device-trees for JH7110 
+based boards.
+
+With the current patchset you suggest to specify the relevant 
+device-tree when building, e.g.
+
+make OPENSBI=$(opensbi_dir)/build/platform/generic/firmware/fw_dynamic.bin \
+DEVICE_TREE=starfive/jh7110-milkv-mars
+
+Another approach would be to build all device-trees into U-Boot and use 
+the EEPROM information to select the correct one at runtime.
+
+This approach is selected by Wandboard defconfig and other boards by 
+specifying CONFIG_MULTI_DTB_FIT and CONFIG_OF_LIST. The choice of the 
+device-tree is made in board_fit_config_name_match().
+
+The advantage from the standpoint of a Linux distro would be that one 
+distro image can be provided that will run on all JH7110 boards.
+
+Best regards
+
+Heinrich
+
+
 > 
-> I tried that, and I got the clear signal that it is not desired.
+> Hal Feng (12):
+>    Makefile: Add OF_UPSTREAM Makefile for RISC-V
+>    dts: starfive: Switch to using upstream DT
+>    riscv: dts: jh7110: Drop redundant devicetree files
+>    dt-bindings: Remove StarFive JH7110 clock and reset definitions
+>    riscv: dts: jh7110: Make u-boot device trees adapting to upstream DT
+>    clk: starfive: jh7110: Sync clock definitions with upstream
+>      dt-bindings
+>    pcie: starfive: Make the driver compatible with upstream DT
+>    riscv: dts: jh7110: Move common code to the new
+>      jh7110-common-u-boot.dtsi
+>    riscv: dts: jh7110: Add u-boot device tree for JH7110 based boards
+>    board: starfive: spl: Drop the unneeded DT modification code
+>    configs: visionfive2: Add OF_LIST for JH7110 based board DT
+>    doc: board: starfive: Update the building guide
+> 
+>   arch/riscv/cpu/jh7110/Kconfig                 |   1 +
+>   arch/riscv/dts/Makefile                       |   1 -
+>   ...-u-boot.dtsi => jh7110-common-u-boot.dtsi} |  41 +-
+>   arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi  |  11 +
+>   .../dts/jh7110-pine64-star64-u-boot.dtsi      |   6 +
+>   ...10-starfive-visionfive-2-v1.2a-u-boot.dtsi |   6 +
+>   ...10-starfive-visionfive-2-v1.3b-u-boot.dtsi |  14 +
+>   .../dts/jh7110-starfive-visionfive-2.dts      |  11 -
+>   .../dts/jh7110-starfive-visionfive-2.dtsi     | 380 ---------
+>   arch/riscv/dts/jh7110-u-boot.dtsi             |  36 +-
+>   arch/riscv/dts/jh7110.dtsi                    | 761 ------------------
+>   board/starfive/visionfive2/spl.c              | 358 --------
+>   configs/starfive_visionfive2_defconfig        |   3 +-
+>   doc/board/starfive/milk-v_mars.rst            |   2 +-
+>   doc/board/starfive/milk-v_mars_cm.rst         |   2 +-
+>   doc/board/starfive/pine64_star64.rst          |   2 +-
+>   doc/board/starfive/visionfive2.rst            |  11 +-
+>   drivers/clk/starfive/clk-jh7110-pll.c         |   6 +-
+>   drivers/clk/starfive/clk-jh7110.c             |  44 +-
+>   drivers/pci/pcie_starfive_jh7110.c            |  59 +-
+>   dts/upstream/src/riscv/Makefile               |  14 +
+>   .../dt-bindings/clock/starfive,jh7110-crg.h   | 258 ------
+>   .../dt-bindings/reset/starfive,jh7110-crg.h   | 183 -----
+>   23 files changed, 194 insertions(+), 2016 deletions(-)
+>   rename arch/riscv/dts/{jh7110-starfive-visionfive-2-u-boot.dtsi => jh7110-common-u-boot.dtsi} (56%)
+>   create mode 100644 arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
+>   create mode 100644 arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
+>   create mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
+>   create mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
+>   delete mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2.dts
+>   delete mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
+>   delete mode 100644 arch/riscv/dts/jh7110.dtsi
+>   create mode 100644 dts/upstream/src/riscv/Makefile
+>   delete mode 100644 include/dt-bindings/clock/starfive,jh7110-crg.h
+>   delete mode 100644 include/dt-bindings/reset/starfive,jh7110-crg.h
+> 
+> 
+> base-commit: 56b47b8b6a09c777e74fe6c52512c832691169aa
 
-Is there a link to a discussion ?
