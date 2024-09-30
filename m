@@ -4,87 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6ED8FCF64B1
-	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 13:00:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 322F4CF64B1
+	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 13:01:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A223388ED7;
-	Mon, 30 Sep 2024 15:00:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 285F488F04;
+	Mon, 30 Sep 2024 15:00:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gehealthcare.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="DEuEavFy";
+	dkim=pass (2048-bit key; unprotected) header.d=gehealthcare.com header.i=@gehealthcare.com header.b="EMyddt/C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 72D0188D89; Mon, 30 Sep 2024 11:43:23 +0200 (CEST)
-Received: from relay2-d.mail.gandi.net (relay2-d.mail.gandi.net
- [IPv6:2001:4b98:dc4:8::222])
+ id 1300488E07; Mon, 30 Sep 2024 12:22:01 +0200 (CEST)
+Received: from mx0a-00176a03.pphosted.com (mx0a-00176a03.pphosted.com
+ [67.231.149.52])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B5CE888C8
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 11:43:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 709CC88DE8
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 12:21:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=gehealthcare.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 1FA3140003;
- Mon, 30 Sep 2024 09:43:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1727689400;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Nk9PfTdSng/f6BOxizJgMx8zThAm4aj29ORFqJM00Zs=;
- b=DEuEavFyR/Ep70P32Mw8jPoMdCua7aY3wUymp8zFSCYfok8phg0+BWsOJjnJXBxHDRQbb+
- RhiKvivrslfMGexW/IrBQCqQIpvfJ/Ht1rA/wDZD+HapjwYLyQ3G+YBzZpNorsOTC1jcPP
- 81S+bU+sfqwhcUl4ajhK25+tTn5GVsoAdkrpkt3HwZOndpGEX6VY63EuKwUlGHJ5inHb0o
- WqW8g2nlHGMAuE4Uw9aBJ6e79mxV6PFIb3ozUELBKQaf1TAXaQ+G2JvZPuBh6qEdXSH3ro
- DWjfDn6GphQ7800gghaOayRoDqEFD3VpYBLZkyQIgszXYqVV4hXHYX2D+cpjng==
-Date: Mon, 30 Sep 2024 11:43:14 +0200
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Cc: u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>,
- linux-amarula@amarulasolutions.com, michael@amarulasolutions.com, AKASHI
- Takahiro <akashi.tkhro@gmail.com>, Alexander Dahl <ada@thorsis.com>,
- Anatolij Gustschin <agust@denx.de>, Andrzej Hajda
- <andrzej.hajda@intel.com>, Anton Bambura <jenneron@protonmail.com>, Ashok
- Reddy Soma <ashok.reddy.soma@amd.com>, Devarsh Thakkar <devarsht@ti.com>,
- Eugen Hristev <eugen.hristev@collabora.com>, Fabio Estevam
- <festevam@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, Hou
- Zhiqiang <Zhiqiang.Hou@nxp.com>, Igor Prusov <ivprusov@salutedevices.com>,
- Igor Prusov <ivprusov@sberdevices.ru>, Jaehoon Chung
- <jh80.chung@samsung.com>, Jan Kiszka <jan.kiszka@siemens.com>, Joe
- Hershberger <joe.hershberger@ni.com>, Jonas =?UTF-8?B?U2Nod8O2YmVs?=
- <jonasschwoebel@yahoo.de>, Julien Masson <jmasson@baylibre.com>, Liu Ying
- <victor.liu@nxp.com>, Lukasz Majewski <lukma@denx.de>, Maksim Kiselev
- <bigunclemax@gmail.com>, Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Marco Felsch <m.felsch@pengutronix.de>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, Martyn
- Welch <martyn.welch@collabora.com>, Mattijs Korpershoek
- <mkorpershoek@baylibre.com>, Minkyu Kang <mk7.kang@samsung.com>, "NXP i.MX
- U-Boot Team" <uboot-imx@nxp.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Nicolas Heemeryck
- <nicolas.heemeryck@devialet.com>, Nikhil M Jain <n-jain1@ti.com>, Patrick
- Barsanti <patrick.barsanti@amarulasolutions.com>, Peng Fan
- <peng.fan@nxp.com>, Peter Robinson <pbrobinson@gmail.com>, Sakari Ailus
- <sakari.ailus@linux.intel.com>, Sam Protsenko <semen.protsenko@linaro.org>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>, Stefan
- Bosch <stefan_b@posteo.net>, Stefano Babic <sbabic@denx.de>, Svyatoslav
- Ryhel <clamor95@gmail.com>, =?UTF-8?B?U8OpYmFzdGllbg==?= Szymanski
- <sebastien.szymanski@armadeus.com>, Tim Harvey <tharvey@gateworks.com>, Tom
- Rini <trini@konsulko.com>, Vinod Koul <vkoul@kernel.org>, Yang Xiwen
- <forbidden405@outlook.com>, Ye Li <ye.li@nxp.com>, u-boot-amlogic@groups.io
-Subject: Re: [PATCH 00/26] Support display (and even more) on the BSH SMM
- S2/PRO boards
-Message-ID: <20240930114314.30b9e1f5@xps-13>
-In-Reply-To: <20240913095622.72377-1-dario.binacchi@amarulasolutions.com>
-References: <20240913095622.72377-1-dario.binacchi@amarulasolutions.com>
-Organization: Bootlin
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
+ spf=pass smtp.mailfrom=brian.ruley@gehealthcare.com
+Received: from pps.filterd (m0047961.ppops.net [127.0.0.1])
+ by m0047961.ppops.net-00176a03. (8.18.1.2/8.18.1.2) with ESMTP id
+ 48U6UNQ8002420
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 06:21:56 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ gehealthcare.com; h=cc:content-transfer-encoding:date:from
+ :in-reply-to:message-id:mime-version:references:subject:to; s=
+ outbound; bh=05eK4B5xnasFn6di928A5HoSQIQP28wJ8AL6HIiaZqY=; b=EMy
+ ddt/C359FsZeZ/n+Uui/sHZWzh+6ppKLsgP7OuPd/Ff5vI0KMPgI15DwHS1r/Ar8
+ 9q1HaGA0yMNJTcNjFCF+HCMC4ZyJKg32T43Q+B0kBrWsKsL9euS7RvLf/DmLxrJc
+ +5xS0Tb9fbxHraeOlsqg05l1rwBHlhKWtaU8LTS8Z7b0B9WxfvN6rlTlaXR9TG9t
+ 1QHOn3M2Rj6rcRZx5COw/381M0aiTXAtQipYKFggFsRMPXeOs8wFwofH7yDH3Gn3
+ Kfl8hb2AkY65lmdHNOSqsChaW80EI4X90y2z8NnytXTAgNsHOtPrd7ZrVlxHa0LM
+ vkW76RIxEgpKiBKVQ5A==
+From: Brian Ruley <brian.ruley@gehealthcare.com>
+To: Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: ian.ray@gehealthcare.com, Brian Ruley <brian.ruley@gehealthcare.com>,
+ Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
+Subject: [PATCH v2] binman: add fast authentication method for i.MX8M signing
+Date: Mon, 30 Sep 2024 13:21:48 +0300
+Message-Id: <20240930102148.854-1-brian.ruley@gehealthcare.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20240927124237.47-1-brian.ruley@gehealthcare.com>
+References: <20240927124237.47-1-brian.ruley@gehealthcare.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-GND-Sasl: miquel.raynal@bootlin.com
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: g3vOSssK0nKwjlsPxc-yIl1zFuIIET2i
+X-Proofpoint-ORIG-GUID: g3vOSssK0nKwjlsPxc-yIl1zFuIIET2i
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1051,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-30_09,2024-09-27_01,2024-09-02_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+ phishscore=0 mlxscore=0
+ impostorscore=0 adultscore=0 lowpriorityscore=0 clxscore=1015
+ malwarescore=0 mlxlogscore=999 bulkscore=0 suspectscore=0
+ priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2408220000 definitions=main-2409300073
 X-Mailman-Approved-At: Mon, 30 Sep 2024 15:00:33 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,26 +81,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Dario,
+Using the PKI tree with SRKs as intermediate CA isn't necessary or even
+desirable in some situations (boot time, for example). Add the possbility
+to use the "fast authentication" method where the image and CSF are both
+signed using the SRK [1, p.63].
 
-dario.binacchi@amarulasolutions.com wrote on Fri, 13 Sep 2024 11:55:42
-+0200:
+[1] https://community.nxp.com/pwmxy87654/attachments/pwmxy87654/imx-processors/202591/1/CST_UG.pdf
 
-> This series was created out of the need to supportsimple-framebuffer for
-> BSH boards SMM_S2 and SMM_S2PRO. To achieve this goal, it was necessary
-> to develop additional code and/or drivers for all the required components
-> (i. e. clock, power domain, video, etc.). This series has a Linux
-> counterpart that will also be submitted upstream as soon as possible.
-> Furthermore, given the overlap in topics with the recent series [1], we
-> are open to collaborate on the common parts to ensure proper development.
->=20
-> [1] https://lore.kernel.org/all/20240910101344.110633-1-miquel.raynal@boo=
-tlin.com/T/#mb7cd440abc6fcc0de205f577eb3225e1c1c76823
+Signed-off-by: Brian Ruley <brian.ruley@gehealthcare.com>
+Cc: Marek Vasut <marex@denx.de>
+---
+Changes for v2:
+- fixed default key length (s/2048/4096) for srk-crt node 
 
-I received a bit of feedback on this U-Boot series, I can take the
-feedback into account and send a v2. Then, if you are still okay, you
-can stack your patches on top of mine and do the required adaptations
-(on both sides).
+ tools/binman/etype/nxp_imx8mcst.py | 23 +++++++++++++++++++----
+ 1 file changed, 19 insertions(+), 4 deletions(-)
+---
+ tools/binman/etype/nxp_imx8mcst.py | 24 ++++++++++++++++++++----
+ 1 file changed, 20 insertions(+), 4 deletions(-)
 
-Thanks,
-Miqu=C3=A8l
+diff --git a/tools/binman/etype/nxp_imx8mcst.py b/tools/binman/etype/nxp_imx8mcst.py
+index 8221517b0c..93fec1a914 100644
+--- a/tools/binman/etype/nxp_imx8mcst.py
++++ b/tools/binman/etype/nxp_imx8mcst.py
+@@ -36,6 +36,9 @@ csf_config_template = """
+   File = "SRK_1_2_3_4_table.bin"
+   Source index = 0
+ 
++[Install NOCAK]
++  File = "SRK1_sha256_4096_65537_v3_usr_crt.pem"
++
+ [Install CSFK]
+   File = "CSF1_1_sha256_4096_65537_v3_usr_crt.pem"
+ 
+@@ -70,8 +73,13 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
+         super().ReadNode()
+         self.loader_address = fdt_util.GetInt(self._node, 'nxp,loader-address')
+         self.srk_table = os.getenv('SRK_TABLE', fdt_util.GetString(self._node, 'nxp,srk-table', 'SRK_1_2_3_4_table.bin'))
+-        self.csf_crt = os.getenv('CSF_KEY', fdt_util.GetString(self._node, 'nxp,csf-crt', 'CSF1_1_sha256_4096_65537_v3_usr_crt.pem'))
+-        self.img_crt = os.getenv('IMG_KEY', fdt_util.GetString(self._node, 'nxp,img-crt', 'IMG1_1_sha256_4096_65537_v3_usr_crt.pem'))
++        self.fast_auth = fdt_util.GetBool(self._node, 'nxp,fast-auth')
++        if not self.fast_auth:
++            self.csf_crt = os.getenv('CSF_KEY', fdt_util.GetString(self._node, 'nxp,csf-crt', 'CSF1_1_sha256_4096_65537_v3_usr_crt.pem'))
++            self.img_crt = os.getenv('IMG_KEY', fdt_util.GetString(self._node, 'nxp,img-crt', 'IMG1_1_sha256_4096_65537_v3_usr_crt.pem'))
++        else:
++            self.srk_crt = os.getenv('SRK_KEY', fdt_util.GetString(self._node, 'nxp,srk-crt', 'SRK1_sha256_4096_65537_v3_usr_crt.pem'))
++
+         self.unlock = fdt_util.GetBool(self._node, 'nxp,unlock')
+         self.ReadEntries()
+ 
+@@ -125,8 +133,16 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
+         # Load configuration template and modify keys of interest
+         config.read_string(csf_config_template)
+         config['Install SRK']['File'] = '"' + self.srk_table + '"'
+-        config['Install CSFK']['File'] = '"' + self.csf_crt + '"'
+-        config['Install Key']['File'] = '"' + self.img_crt + '"'
++        if not self.fast_auth:
++            config.remove_section('Install NOCAK')
++            config['Install CSFK']['File'] = '"' + self.csf_crt + '"'
++            config['Install Key']['File'] = '"' + self.img_crt + '"'
++        else:
++            config.remove_section('Install CSFK')
++            config.remove_section('Install Key')
++            config['Install NOCAK']['File'] = '"' + self.srk_crt + '"'
++            config['Authenticate Data']['Verification index'] = '0'
++
+         config['Authenticate Data']['Blocks'] = hex(signbase) + ' 0 ' + hex(len(data)) + ' "' + str(output_dname) + '"'
+         if not self.unlock:
+             config.remove_section('Unlock')
+-- 
+2.39.5
+
