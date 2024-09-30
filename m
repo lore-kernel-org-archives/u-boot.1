@@ -4,145 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BB06CF649D
-	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 09:54:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2737CF649D
+	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 10:11:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E2E2A88CF1;
-	Mon, 30 Sep 2024 11:54:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id 2E0A388DD1;
+	Mon, 30 Sep 2024 12:11:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="lUN342xP";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Qy/xlQJh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D360388915; Mon, 30 Sep 2024 11:54:34 +0200 (CEST)
-Received: from EUR03-AM7-obe.outbound.protection.outlook.com
- (mail-am7eur03on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260e::601])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 1969788DD1; Mon, 30 Sep 2024 12:11:39 +0200 (CEST)
+Received: from mail-m25497.xmail.ntesmail.com (mail-m25497.xmail.ntesmail.com
+ [103.129.254.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 29B1588D6B
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 11:54:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 70C6988DA1
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 12:11:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=FX1NAR7tUeZzTBXY+Qr63I2DaMmUESRzvqkEtNBU07L92/xHFCxSy1wD3pYu1nN1K2gn96NiIVrBf8s18iZ7psD+F6OowNafLPsbTMMLfBbZhngMuh//oQm1VDwhhK4JIqzA6rgttxPwGj9N6ob2zxXz3T76p91guFp1Z+rxv1GkvieN6ByKU+5t+hFQ5zHdVtEpW7kbbSWiZtioS7/PGgmOsTrW/nzaGrnM1A21p4xNHwkuO8aA+KGcyoSSGhHEYRUfR1KvTU74GnoVQXr23Fq0tUOnXcJzUOV9Ad1CsFIu+jgfsJoQ16HL0QOJHoHOTkGFknAGzGVg2HrxEvcJbQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Lb6RDIpoW1vyEvxfiX+wEwp8XvO2JtUkZ+IZhR4Ivbc=;
- b=BLXv3rtA7R6yRwziRWh23UdkSI+BJBB9f9HdEn6bjFRWRYoXeSXbt3fQMSaib6FLDTzRnQqmu4pz+1n/rGeH5RsVdfUEdliVFT6On2EacQhp/stZpge7XuKakeaeNGnhaQK0rIwvNKkbN1EzrUQ2DR1uM/R/FdWlGuav4chTEBKY3KRyKKh6b7oEqr+GS26jWw1Y/iYyUL93k+KwBj5HD7i1f5BREmYE4tbdVAvTNoSbPIJ9gojJNvRl12f0KYf3zhURoAnO5i7OE8dTMJxwEn9nN1pflww2+xJuxEMzUuBDcJ9vRfP5lrOfAWx2444ABjkgGVhoQo295a26bnCW8g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Lb6RDIpoW1vyEvxfiX+wEwp8XvO2JtUkZ+IZhR4Ivbc=;
- b=lUN342xPHuJk4DM0i16zMTfrWDktCiwYumZazxeXztBuf1QE7xSb98So47hGAOvJplMfN5wA3s+CibSXLde5EbaEWjG5BCE4wyNYgaSsrhVz7aL1ObwSVNhC6hyPlB8W7GBx4E9b6vIgMhfiFaXowVqycjr51hNuF42Cj+7rmiE=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
- by GV1PR10MB8736.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:1d1::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7982.27; Mon, 30 Sep
- 2024 09:54:28 +0000
-Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::9fcc:5df3:197:6691]) by DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::9fcc:5df3:197:6691%3]) with mapi id 15.20.8005.024; Mon, 30 Sep 2024
- 09:54:27 +0000
-From: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Quentin Schulz <foss+uboot@0leil.net>,  Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>,  u-boot@lists.denx.de
-Subject: Re: [PATCH] cmd/mem.c: fix undefined behavior in mem cmp
-In-Reply-To: <73723830-60be-4968-bb88-f518e493361f@cherry.de> (Quentin
- Schulz's message of "Mon, 30 Sep 2024 10:38:35 +0200")
-References: <20240927-cmd-mem-undefined-v1-1-56fa57d0927b@cherry.de>
- <87bk09kjsd.fsf@prevas.dk>
- <73723830-60be-4968-bb88-f518e493361f@cherry.de>
-Date: Mon, 30 Sep 2024 11:54:29 +0200
-Message-ID: <8734lhlb56.fsf@prevas.dk>
-User-Agent: Gnus/5.13 (Gnus v5.13)
-Content-Type: text/plain
-X-ClientProxiedBy: MM0P280CA0043.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:190:b::14) To DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:10:45a::14)
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=Qy/xlQJhZkS4b4ep4MTftgP4G2QoZzVb3xmkv+Vu+am3s8m2AYaAsVQxShFEeC/RmUOc4tcpKWyVCpbo/3Qtp8mcZ2NKYmvciSwleAyLr5pyUYjfdZn82YsSh03OvcrSjGQlJM/CU1mOBW2k8bv8mffDdCLWSsFbB+axoqO+39M=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
+ bh=piof78mm4JiDdUxoV/sTiNJr590WG0TqzyYNZw+g28k=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.12.67] (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTPA id F199C280993;
+ Mon, 30 Sep 2024 18:11:22 +0800 (CST)
+Message-ID: <5041bde8-fb1e-4c97-9c71-2007008ad3d0@rock-chips.com>
+Date: Mon, 30 Sep 2024 18:11:22 +0800
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|GV1PR10MB8736:EE_
-X-MS-Office365-Filtering-Correlation-Id: 26b91499-383b-4a6f-6318-08dce135df59
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|52116014|1800799024|376014|366016|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?POBN39wLkKL7EjDNabvEaQjJzqr8c8ERwRYEVbVSGzsLbKUZrdkiUH3wKUYK?=
- =?us-ascii?Q?8Yxd6q6FRzH/Z25o2vjnJzO/BtUsAjWeoT7Yw3M3UCRBLAHs8U0fS0F8GImj?=
- =?us-ascii?Q?Chnqa4ZmPB/vFUCNpSocSiQZ4OtFznKSc7gUXkL6zPF7YLxDqmA4tycNYFRo?=
- =?us-ascii?Q?NZJTiBL1odqUey/ZaQ1GoD3CIzPQUKsG73nbiHOuEXe3Ksg+FEn+qcqa+7MF?=
- =?us-ascii?Q?dQc/LcshPM0N/KVpduMGxuTtRh18Lg8VO84qPRjmRPBd+H5CMTnSB+q7cp5F?=
- =?us-ascii?Q?8BSYc0bg/sPAUWCir16zkwxw5Ps0jeu48AzsX08BPRCgOwlw40WngLlgvjuN?=
- =?us-ascii?Q?yZjDjKJTzmjBVjkqQ3RFUnV1SMIsDx+yz/Wy8lIFCf6Yi3YWH9xoLy55LMnp?=
- =?us-ascii?Q?JXlD4LJuAMqAs9cWIDzkscjT3iqj8xXVzf+yAUfW3ETgBDbU+Ds+ih897OvN?=
- =?us-ascii?Q?zkjolMYpyyvshqyyfcAnKCAr1oXLxweG9t6w2JDwQ9m51jjKdlaFj32euXVQ?=
- =?us-ascii?Q?U8rwQrUHkDOCWqDuhYPVz7EK2VFLtIAKqMpespkpPmHVjGJ85XmnSGWxL8lw?=
- =?us-ascii?Q?+amCzFc54e2lzBrNMO0pAXLme5Jg28X70TqyM2aCEuLke5mvkBn8zwdKh9v1?=
- =?us-ascii?Q?b0/rAHVgUOot56e9xfzt/leg93+ZlSBZV9BlHSP4y26FrUweucrPTyvLkpyw?=
- =?us-ascii?Q?uqSy5HSA75S02O9ZT8IWMxUO3SchpI3hGdzvnfCVGWrEzWhGdMrki+kJ580B?=
- =?us-ascii?Q?Vuau/xS6giM9iap7pq57TjGLHY6OnfxvcFS05+MrDztegpMJf+kWualOyUQ3?=
- =?us-ascii?Q?iVYvDGuJRUUHsN+j0QO8mH1FMkXr/YIHC3/JFFA7oL8j07MKH1w6BaGih9s1?=
- =?us-ascii?Q?wO7r5p3XCVD4OJv2a7cMFNunCKHy+xkz0/J+LN1AUW1lchf296tipAjQvLXG?=
- =?us-ascii?Q?1S/eNgrVuVOsFXObnimQ7VlpBn+5Lhp2chaD/MfgIpmYeAZhJzFFBIUKpSTf?=
- =?us-ascii?Q?m6nyGq13I0/rGwrIwZtBs/R93unlfzkuRWq+Ui37XGqGncBuB2Mf+7tYTye/?=
- =?us-ascii?Q?fO5tVn6qfyIAo5iOt9PnBzQ7cWUV8TOmPj5e7U7ov3BJ8sxBwwlGcNrgkcXx?=
- =?us-ascii?Q?cXgMSsmRQNuFrKZRFccSXHmgz/6r+xYyP+wCAJGqb3N6xR4sKbjxrO2AP2uk?=
- =?us-ascii?Q?OUnvMFQZ7zbDNAbEOje2Zi0qhvNEzCgBOzH2zVjRwN5HPYSVX+/X8OhF+az5?=
- =?us-ascii?Q?hBn96htOqfKfxpQzor+P8PrO9zEfTBTldBpQzUe52Ized1u/Go4TJFRpisAY?=
- =?us-ascii?Q?WmtUBC8bRpisnVT98+r9OfZ9JHZtIk9bJ9LEgo/5N4vi8Q=3D=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(52116014)(1800799024)(376014)(366016)(38350700014); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Y9zNuY9uIiaIBgkPTh/L/cN2gH55bzstdLKFfvZbEkWLWBsipBcytJZ8aL0E?=
- =?us-ascii?Q?8hTSyubZ4QA8vlmh3otdtx/k6PDgY9ZdPjvxtlZSejIKrbOwlfoB4zRzGOS4?=
- =?us-ascii?Q?rJlRcs/GnjNIv4bCxnHoD4DwXlPZvUpDScgnrIQMoJCfrRFHlNvCHWIvIEuq?=
- =?us-ascii?Q?E1AT4cn5N+7nvvj+/szymxdTLGJf13ttidvwh4VP8fD3MYs4wK31FROcHakQ?=
- =?us-ascii?Q?WxgY/QxGDM+i/AMPI3wiydIv/0ZHfGMQ5gCAP1qVDY9e92XlCJuu6jljEabk?=
- =?us-ascii?Q?5JhDMIf+FI62SkADO04zPMcDnvFiRiVW+2R2dljCixxZjjtdjeZAPAJK0zN3?=
- =?us-ascii?Q?BwJZfKnGQWLkhLVkSRNwvfbtI5DzF8pHJaDVlXA7qE/2rRoPlUuUACOTNA3b?=
- =?us-ascii?Q?Ii1li/ah87wUC12HBGMzJDftSwkwDGobNy4b6/dDMSEk7GWmi1+bi6oLkWOk?=
- =?us-ascii?Q?dRHSCljsBdy5Kr/pmOv/G1251swYSJwW5VFvY8vYESa/3I8nS5I/AyouL7is?=
- =?us-ascii?Q?JcSp1Ct4P8VqNvWOS7dSwJL6K/U81ykiEtw6hrwiC7M7gKrD/ty0WW3MS6gz?=
- =?us-ascii?Q?XEhiducvLprVjYqpFu9ypLuwP4goeiK+v4BzNj51vp4Sv6vkiC6dj/BZ/1qn?=
- =?us-ascii?Q?bNFVDLu5LOewFmu5u7WuhbXjKePEj5hS6lrY0vuGVnAOr61Y8nj2fHSlGuQC?=
- =?us-ascii?Q?CVTYTgJ327wHd9mcZSYi08dWjQpEryrw/SvDgZGkz/gdAjLBha7d+VjbBxcr?=
- =?us-ascii?Q?h7Oqc5Ae3viOsKnNRaOqMhMC3ZKxUysEDo017NxRxb1zLFRwI6Io1t5T+pIN?=
- =?us-ascii?Q?0RPz+h/RieYGbHh9XbvzLrdosf0ZipKoVKRPy9T7eDcCFMNcvNofvAw53CE+?=
- =?us-ascii?Q?dxzbCOYYqUabc4/jLw4hdjO99XVgBptAIclsqWeC2li5gLvvxzWqIM91tOzm?=
- =?us-ascii?Q?jgWmDXehrqSBlTCH2WQlA/CNMUGoAXR5lMqul+gEKRoNIiJdgodEZFlqls5t?=
- =?us-ascii?Q?qQyyxdulR/A0iir5mi8vp/EUfeofDwdrAVkWZ8TWPoPs7XcnG2L1+SuMDynT?=
- =?us-ascii?Q?UZdVYOrIqIWqBLvnzJ0WaJSr8sf+k4PptEP/0AnWkcACD34YNBRL7HHp5hnf?=
- =?us-ascii?Q?v0zTG/CCc8kb5KpFdAofKr0DQYtXGpxW4Mfv8A3mCMukaAHUsKMuHSgDI0OW?=
- =?us-ascii?Q?Cv/Tgm0xyLdcEvsQbwN7YnH6YaP8wKj9mB5EWj/fxql/FarLIvW1xO5ggPY+?=
- =?us-ascii?Q?qnOrhjm6FvMY6dqT/xEt2cSyT/kmlHA+C2IdhsjGBtLeYGHZ7vCm+tXe8bll?=
- =?us-ascii?Q?tzlQyN5KIYNf0ujLOJoC4HdzbU+LYhYb7Z36bsbVgzgq8PWzlGexBxiPXi3D?=
- =?us-ascii?Q?hvA2C54ZeyJ3JurCo1Rc6pD6oMeVbA+Dm9AV66cEW87JtzhxKa+/7OMmL4nq?=
- =?us-ascii?Q?v+KkCEl/u+q1OHOoQCr6LfM1z43vd9oEy4SpGRVfsttOqvlfof4JA/PmVojj?=
- =?us-ascii?Q?1ssep0Ibvey4PgBsK1uacIlBN5n0WvyYdPqe/+/B83MDuIzYtvUF7oJ1sv4J?=
- =?us-ascii?Q?Za0k+pRbqP7hcrNSYMAqnhybgI5Hr0mTreObSZ0bfMvI6KQyZIT6kI4Ubn5t?=
- =?us-ascii?Q?dA=3D=3D?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 26b91499-383b-4a6f-6318-08dce135df59
-X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2024 09:54:27.8211 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: jmggx7ziuBbgSW4Mwb8zjkLRukW788KVDT1zrSRGG+g01yNrFSZmiPqprlzaUPau7erkLbAt1SGBUPAecfzY1L1Il80fihz2k0okaEhED24=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR10MB8736
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/4] rockchip: Skip serial pinctrl at pre-reloc phase
+To: Quentin Schulz <quentin.schulz@cherry.de>, Jonas Karlman
+ <jonas@kwiboo.se>, Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
+Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20240805084350.3895788-1-jonas@kwiboo.se>
+ <6df6a6df-f8fc-44c3-9688-6f2ccbd8888d@cherry.de>
+ <ea4c0f12-bf49-405a-afdb-3312e1eb8c95@kwiboo.se>
+ <4bdb19d3-db99-4456-b7db-a96153a3f7dd@cherry.de>
+Content-Language: en-US
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <4bdb19d3-db99-4456-b7db-a96153a3f7dd@cherry.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUIZGFZCTUoYGU1CSB9OTklWFRQJFh
+ oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
+ hVSktLVUpCS0tZBg++
+X-HM-Tid: 0a924269ce5209d3kunmf199c280993
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Pww6PBw4HDIdTSMuCDdLNUgd
+ QxcKC0pVSlVKTElMTUJKS0NIQklJVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKS0pOSTcG
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -159,80 +78,229 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Quentin Schulz <quentin.schulz@cherry.de> writes:
+Hi Quentin,
 
-> Hi Rasmus,
+On 2024/8/12 18:44, Quentin Schulz wrote:
+> Hi Jonas,
 >
-> On 9/27/24 8:56 PM, Rasmus Villemoes wrote:
->> Quentin Schulz <foss+uboot@0leil.net> writes:
->> 
->>> From: Quentin Schulz <quentin.schulz@cherry.de>
+> On 8/5/24 2:22 PM, Jonas Karlman wrote:
+>> Hi Quentin,
+>>
+>> On 2024-08-05 12:23, Quentin Schulz wrote:
+>>> Hi Jonas,
 >>>
->>> My linter complains that "When using void pointers in calculations, the
->>> behaviour is undefined".
+>>> On 8/5/24 10:43 AM, Jonas Karlman wrote:
+>>>> UART pinctrl for serial is typically applied multiple times:
+>>>> - in external TPL or in TPL for DEBUG_UART in board_debug_uart_init()
+>>>> - in SPL for DEBUG_UART in board_debug_uart_init()
+>>>> - in SPL using pinctrl from DT
+>>>> - in pre-reloc phase using pinctrl from DT
+>>>> - after relocation using pinctrl from DT
+>>>>
+>>>> This series change bootph props for the UART pinctrl to not include 
+>>>> them
+>>>> in pre-reloc phase to save some boot time:
+>>>>
 >>>
->>> GCC does say that "In GNU C, addition and subtraction operations are
->>> supported on pointers to void"[1] but this hints at this only being
->>> supported in the GNU flavor of C. And I assume U-Boot may want to be
->>> compiled with clang/llvm?
+>>> NACK. I feel like this is a hack for vendor trees only.
+>>
+>> I disagree, this just relaxes the bootph props currently enforced by
+>> <soc>-u-boot.dtsi files. For boards that has special need they can
+>> still add bootph-all or the bootph-some-ram prop to restore prior
+>> behavior.
+
+The pinctrl setting for the same module for multi times is obviously not 
+a good idea,
+
+and for SPL, it used to work without pinctrl which is simple and fast 
+and enough for use.
+
+Because in most case, people use the UART and storage with is the same 
+as the bootrom
+
+used, so the IO has been already been initialized.
+
+This change works for most of the boards and for  different design can 
+customize for its
+
+usage, them the patch is acceptable, this is different default setting 
+instead of hack.
+
+
+Thanks,
+
+- Kever
+
+>>
+>> Also please do not associate me with any vendor, I am a hobbyist :-)
+>>
+>
+> Non-upstream = vendor for me :)
+>
 >>>
->>> Let's fix that warning by casting the void pointer to a u8 pointer since
->>> the size variable unit is byte.
+>>> 1) The Device Tree represents the hardware. We need the mux at all 
+>>> times.
+>>
+>> I do not think this changes the the description of the hardware in any
+>> way. The bootph props is currently already more of a representation of
+>> how software should behave than hardware.
+>>
+>> In general for Rockchip use of the bootph-some-ram prop (pre-relocation
+>> phase) does not fully make any sense, since we already have full SDRAM
+>> in SPL.
+>>
+>> If we where to fully follow the dtschema description for the bootph
+>> props, for Rockchip they should probably map to something like:
+>>
+>> TPL:
+>> - bootph-pre-sram: Enable this node when SRAM is not available.
+>> - bootph-pre-ram: Enable this node in the phase that sets up SDRAM.
+>>
+>> SPL:
+>> - bootph-some-ram: Enable this node in the phase that is run after SDRAM
+>>                     is working but before all of it is available.
+>>
+>> U-Boot pre-reloc:
+>> - no prop mapping, we have all SDRAM and can use all devices, ideally
+>>    for Rockchip we should just do bare minimum to relocate without
+>>    loading any driver and then move to main post-reloc phase.
+>>
+>> Instead they map to the different U-Boot software stages:
+>> - bootph-pre-sram: TPL
+>> - bootph-pre-ram: SPL
+>> - bootph-some-ram: U-Boot pre-reloc
+>>
+>>> 2) This breaks users who want to have no serial in TPL/SPL but in 
+>>> proper
+>>> (where you want it as soon as possible I assume, thus pre-reloc).
+>>
+>> Do you know of any such user/board? Adding the bootph-some-ram or
+>> bootph-all prop can easily be done in <board>-u-boot.dtsi for such
+>> user/board to restore current behavior.
+>>
+>
+> Yes, Lukasz in Cc has a device that is doing that, he'll be fixing a 
+> few things related to that soon (tm).
+>
+> I would suggest to have one commit that basically moves bootph-all to 
+> all boards which currently include the -u-boot.dtsi where bootph-all 
+> is, and add bootph-pre-sram+pre-ram to -u-boot.dtsi. 0-sum change and 
+> then on a per-board basis remove this bootph-all? Basically, I'm not 
+> sure this is a sane default to have. For non-upstreamed boards, they 
+> can figure this out whenever they contribute. For upstreamed boards, I 
+> would aim at not possibly breaking stuff in the name of optimization?
+>
+> The issue I believe is that you wouldn't be able to tell if there are 
+> users today since this should be a Kconfig symbol selection 
+> (SPL/TPL_SERIAL for example).
+>
+> We could start having #ifdefs in -u-boot.dtsi for when 
+> $(SPL_TPL_)SERIAL is enabled if we wanted too. Not sure it's a 
+> welcomed added complexity though.
+>
+>>> 3) This likely also means if BL31 is configured to output on a 
+>>> different
+>>> UART mux of the same controller for some reason (I've seen weird 
+>>> stuff),
+>>> now U-Boot proper pre-reloc will not output anything as well.
+>>
+>> Same as for 2), adding the bootph-some-ram or bootph-all can and should
+>> be done at board level for boards that have special, or weird,
+>> requirements.
+>>
+>
+> It's just super weird to me to enter some corner cases because it 
+> works in most cases today and is bringing ~100ms boot time decrease.
+>
+>> It is also possible to add board specific code that call
+>> debug_uart_init() early if you want to ensure pinmux without adding the
+>> unnecessary delay that use of pinctrl in pre-reloc brings.
+>>
 >>>
->>> [1] https://gcc.gnu.org/onlinedocs/gcc/Pointer-Arith.html
+>>> Adding Lukasz in Cc who's trying to fix U-Boot so that this is possible
+>>> on PX30 (therefore, not just a theoretical use case I'm bringing up 
+>>> ;) ).
 >>>
->> No, let's please not. Try enabling -Wpointer-arith and see how much
->> churn that would require all over the tree (doing it in this one place
->> would be pointless), and all the casts would make the code much much
->> harder to read.
->> 
+>>>> - Radxa ROCK Pi S (RK3308): ~80 ms
+>>>> - Radxa ZERO 3W (RK3566): ~120 ms
+>>>> - Radxa ROCK 5B (RK3588): ~150 ms
+>>>>
+>>>> Similar change has already been applied for RK3328 and RK3399 boards.
+>>>>
+>>>
+>>> Then I believe this was a mistake.
+>>
+>> My wording may have been misleading, when we added broad use of 
+>> pinctrl props
+>> to SPL for rk3328/rk3399 we limited so that the uart pinctrl group 
+>> was only
+>> enabled for TPL/SPL and not pre-reloc phase, because also including 
+>> it at
+>> pre-reloc added 200-300 ms in extra boot time.
+>>
+>> This series tries to apply same findings on remaining Rockchip aarch64
+>> boards.
+>>
 >
-> That alone is not a justification.
+> What I'm complaining about in this patch series applies as well to the 
+> patches that are already merged if the intent and result are the same.
 >
->> We do rely on lots of gcc extensions, and Clang has documented that it
->> "aims to support a broad range of GCC extensions". Arithmetic on void is
->> one of them, and that's not going to go away.
->> 
+>>>
+>>>> The change for PX30 has not been runtime tested, and only include 
+>>>> change
+>>>> for uart2, not uart0 and uart5 used on two of the supported px30 
+>>>> boards.
+>>>>
+>>>
+>>> This means we have uart2 pinctrl at all stages even though we make no
+>>> use of it?
+>>
+>> Yes, in my opinion the px30-u-boot.dtsi include lots of nodes that seem
+>> very board specific, some that probably should move to board specific
+>> u-boot.dtsi files.
+>>
 >
-> But this very well could/is.
+> That I would welcome.
 >
-> 1) is there a way to tell Clang that we want to follow this GNU
-> extension for that case?
-
-For that case? No. But we do -std=gnu11 which is understood by both
-compilers and tells clang that we do use GNU extensions. I don't know
-the clang internals, but I strongly suspect that that flag would make
-sure that defaults for various warnings are set appropriately (that is,
-not warning for something which is explicitly guaranteed to work in GNU
-C).
-
-> Is that the default?
-
-In our build, yes. See CSTD_FLAG. But both gcc and clang default to some
--std=gnuXX, with the exact value of XX depending on compiler version.
-
-> 2) do we document somewhere the GNU C extensions we use on the whole
-> tree?
-
-Not that I know of explicitly, but CSTD_FLAG=-std=gnu11 kind of
-documents that gnu extensions are used.
-
-Note that typeof() and inline asm() statements are also gnu extensions
-that we make heavy use of, as are various __attribute__(()), statement
-expressions (i.e. ({ stuff; }) ), omitting the middle expression in ?: ,
-special handling of token paste ## after a comma, case ranges 'case LOW
-... HIGH', etc. etc. 
-
+>>>
+>>> I'm starting to wonder if this optimization isn't orthogonal to having
+>>> as much support as possible via an <soc>-u-boot.dtsi which was done to
+>>> make bring-up and maintenance easier. If you're really after
+>>> optimization AND we keep the pinctrl for the debug uart (thus, not
+>>> breaking 2) above), then what we want is cleaning up the default
+>>> px30-u-boot.dtsi and move bootph properties to the board DTS instead?
+>>
+>> Agree, for other aarch64 socs I have already tried to cleanup
+>> <soc>-u-boot.dtsi to only contain what more than 70-80% of all supported
+>> boards may need. For rk3399 bob and kevin even use /delete-property/ to
+>> remove some of the common boothp props because all other rk3399 boards
+>> benefited from those common boothp props.
+>>
+>> I have no px30 board and the only rk3326 board I do have does not
+>> include the px30-u-boot.dtsi, so I will not try to do any cleanup of
+>> that file.
+>>
 >
-> 3) is anyone aware of a way to silence some specific warnings at the
-> project level so that clang takes care of it so that linters use those
-> settings so we avoid people sending more commits for that "issue"?
-
-I don't quite parse that sentence. Are you saying that your linter is
-being invoked by clang, and you want clang to pass certain options to
-the linter to disable certain warnings? I don't know how clang could
-know that options those would be.
-
-Rasmus
-
-
+> Understood, this falls on someone else's shoulders then :)
+>
+>>>
+>>> I was a bit against this "turn-key" solution wrt u-boot DT for
+>>> rk3568/rk3588 but we went ahead, are we changing our mind now? Just to
+>>> know what exactly is the direction we are planning to take.
+>>
+>> Please elaborate, I do not understand what you mean by this.
+>>
+>
+> I looked a bit and could only find:
+> https://lore.kernel.org/u-boot/9d7063f9-c1c9-681c-480b-4c88895e6ccf@theobroma-systems.com/ 
+>
+>
+> This doesn't really match what I remembered of an "argument" I believe 
+> I had with Kever about putting stuff **I** didn't need for my boards 
+> in <soc>-u-boot.dtsi of which the answer was "I prefer to have 
+> something that works with minimal work than something that is 
+> optimized and require more work for newer boards". But cannot find it 
+> anymore, so maybe it was all in my head :)
+>
+> Cheers,
+> Quentin
