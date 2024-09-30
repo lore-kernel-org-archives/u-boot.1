@@ -4,73 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D72D8CF6495
-	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 01:50:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9095ECF6495
+	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 01:51:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE26488E07;
-	Mon, 30 Sep 2024 03:50:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2C94F88E24;
+	Mon, 30 Sep 2024 03:50:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mGuYH4o2";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="T+hWS5M2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A36B88DEE; Mon, 30 Sep 2024 03:50:16 +0200 (CEST)
-Received: from mail-il1-x144.google.com (mail-il1-x144.google.com
- [IPv6:2607:f8b0:4864:20::144])
+ id 795C488DD4; Mon, 30 Sep 2024 03:50:17 +0200 (CEST)
+Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
+ [IPv6:2607:f8b0:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C57F88DB9
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 03:50:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C069388DB3
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 03:50:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x144.google.com with SMTP id
- e9e14a558f8ab-3a0cbc08b38so21195095ab.0
- for <u-boot@lists.denx.de>; Sun, 29 Sep 2024 18:50:07 -0700 (PDT)
+Received: by mail-il1-x136.google.com with SMTP id
+ e9e14a558f8ab-3a0be4d803eso12306785ab.0
+ for <u-boot@lists.denx.de>; Sun, 29 Sep 2024 18:50:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727661005; x=1728265805; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727661012; x=1728265812; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Dbo9XIbfPu+qBB4oruzLa05bATz1A+yQvgxUT+dIVMI=;
- b=mGuYH4o2h9JZ+76CdGiwnpZKU6uF54j7TCmKcDG84YDt6UTlQSEoPX9uX6PYX1B1BO
- YlqIF5+HLclhB9lRHCObtEokD4DzD8KNAfWKLCxMoXlarK1F1frxfwQL7l90uZOpMRpu
- 8fI0vuU2sD3IXWOHvKqjgFhnYuv46e4M931JI=
+ bh=36vFZOza+LM0nQqmS9ICzxhOs0sKTWoKuUc0cf1FvJ0=;
+ b=T+hWS5M2J6ZjwBbx9uBjz79H9mYoSQVeQ7LZ9hccUP/h0e0qJmoK3xIPCSTYeDI7eI
+ 4oSmmjF1ZbUSqEJ5ynTFXlPC3LpOPqlR9MBcGmILHV2KtvNGftvsQqP4XaAX6MRDkXRd
+ FPbLO53MHQ4Yr6UONL6pwsswLiZJhEup2NA9E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727661005; x=1728265805;
+ d=1e100.net; s=20230601; t=1727661012; x=1728265812;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Dbo9XIbfPu+qBB4oruzLa05bATz1A+yQvgxUT+dIVMI=;
- b=Z6n2wDuHb5MvRYZmiQF+Gp52qxU6gu3MzTe7zfaSkbcX8Moq0OGorMKIRwRkELRSuD
- lsjqyQA2yxVJUoet9Qzb0gh4lQ3m1UBuhCI56mpLS8GC5GJlCpjllFoiXEBHx/l1R86Y
- OsOeTVdyng2BRIssdFGLQ4qwJosnebkbt3ujaUWMitAyJyhGDSdQTFOXCgYIXtCPIFQx
- ls32gU2gkwIO3MhpsdvPbwC99A4WHmn3UAud/Dm84vNA0Pd9qB3139lrNsRzoT/TaKQP
- oxrkF//bVZysIXvesAY1A/tab/z6S7SIabL10ih4NA8LJ3tOiNq1RmZtw9fP78CFw4aQ
- DdLw==
-X-Gm-Message-State: AOJu0YyXWUtzYsKiRNHPxce4omVVTh5XJGq8kynZPu/hm2wQV7Zqg/aS
- +NECa4S1rTlT1VIgU6L1Cloy3X6nPU8yHT/Yp7W5TjfkobecutkES+a0gHnIbtycQXPGC73Iwb4
- GaDOx
-X-Google-Smtp-Source: AGHT+IHEsImi+zuGFXCxGmOQFcb1mLQWcU+SVwkgRuKk5U9qwipjO2D59N78eP+WLeb/fgSKMII5Ug==
-X-Received: by 2002:a05:6e02:20c5:b0:3a0:9b0c:6b2c with SMTP id
- e9e14a558f8ab-3a3451aadcfmr78849125ab.18.1727661005600; 
- Sun, 29 Sep 2024 18:50:05 -0700 (PDT)
+ bh=36vFZOza+LM0nQqmS9ICzxhOs0sKTWoKuUc0cf1FvJ0=;
+ b=kbB7cdQL5krHCjj2rQY0zset8Qyqn5GXr91ApDCPAvhhy9w45f0tdquoGwhi8i/DHs
+ 0I4jrI14ZRjMBXWMIt4sXrmFGWO/GJf5hCL/RRPVCxbcayVBNc5z7v5VrSYn/tfecu5S
+ cn6w7mLRHV9L+oEoKhR7xKXMHrEnuqLyPhciuRlqwVU/ze9WsdqRNkc9YJrPyjjplvJi
+ S7o8UP+bUJLhMgL/ptmVUZ8RtYnquZmMF1oFn4CGyI14sYH4zWBiqy5d/6YHfyqF3HR3
+ h3uZ0y4BSkd+bm6TMryYWALF/ECh8VIu51PaBFXn+HT8CZSL5rw3SR1sYBTBEtrPMRGM
+ nlzQ==
+X-Gm-Message-State: AOJu0YyQho4u7KS6rRMtCo8s0TNlEGYkMhf9rUJ70zOSFE30RhzYcTvz
+ YVDhY1BoaNLwCbTuxJuvFSlcaGjmDpoHHEhkZKsr636Bj3rmkK0yTvz6H6C510SP+FmThcWnsa5
+ ZpA==
+X-Google-Smtp-Source: AGHT+IGE+yjAEZeo/0+BmQK+SoMhiYvpR9sbvwORYqt3ipctOQK6eT8ZoGjoijVJsYUcf3NG8xcj2Q==
+X-Received: by 2002:a05:6e02:198f:b0:3a2:7651:9878 with SMTP id
+ e9e14a558f8ab-3a345179e49mr81785295ab.12.1727661012304; 
+ Sun, 29 Sep 2024 18:50:12 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3a344de1d5fsm22074185ab.62.2024.09.29.18.50.04
+ e9e14a558f8ab-3a344de1d5fsm22074185ab.62.2024.09.29.18.50.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 29 Sep 2024 18:50:05 -0700 (PDT)
+ Sun, 29 Sep 2024 18:50:11 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Bryan Brattlof <bb@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jesse Taube <mr.bossman075@gmail.com>,
- "Leon M. Busch-George" <leon@georgemail.eu>,
- Masahiro Yamada <masahiroy@kernel.org>, Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH v3 01/33] Makefile: Add a u-boot.cfg file for VPL
-Date: Sun, 29 Sep 2024 19:49:24 -0600
-Message-Id: <20240930014956.1434060-2-sjg@chromium.org>
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marex@denx.de>, Raymond Mao <raymond.mao@linaro.org>
+Subject: [PATCH v3 06/33] stdio: Make use of the SERIAL define
+Date: Sun, 29 Sep 2024 19:49:29 -0600
+Message-Id: <20240930014956.1434060-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240930014956.1434060-1-sjg@chromium.org>
 References: <20240930014956.1434060-1-sjg@chromium.org>
@@ -92,29 +90,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Create this file for VPL as well, for consistency.
+This is always enabled for U-Boot proper, so simplify the condition
+in the common Makefile.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+Changes in v3:
+- Move earlier in the series
 
- Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ include/stdio.h | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
 
-diff --git a/Makefile b/Makefile
-index 525576f987d..300cee2e7f6 100644
---- a/Makefile
-+++ b/Makefile
-@@ -624,7 +624,7 @@ include/config/%.conf: $(KCONFIG_CONFIG) include/config/auto.conf.cmd
- 	@# Otherwise, 'make silentoldconfig' would be invoked twice.
- 	$(Q)touch include/config/auto.conf
+diff --git a/include/stdio.h b/include/stdio.h
+index 7b999a519ba..e7325795533 100644
+--- a/include/stdio.h
++++ b/include/stdio.h
+@@ -9,10 +9,7 @@ int getchar(void);
+ int tstc(void);
  
--u-boot.cfg spl/u-boot.cfg tpl/u-boot.cfg:
-+u-boot.cfg spl/u-boot.cfg tpl/u-boot.cfg vpl/u-boot.cfg:
- 	$(Q)$(MAKE) -f $(srctree)/scripts/Makefile.autoconf $(@)
- 
- -include include/autoconf.mk
+ /* stdout */
+-#if !defined(CONFIG_SPL_BUILD) || \
+-	(defined(CONFIG_TPL_BUILD) && defined(CONFIG_TPL_SERIAL)) || \
+-	(defined(CONFIG_SPL_BUILD) && !defined(CONFIG_TPL_BUILD) && \
+-		defined(CONFIG_SPL_SERIAL))
++#if !defined(CONFIG_SPL_BUILD) || CONFIG_IS_ENABLED(SERIAL)
+ void putc(const char c);
+ void puts(const char *s);
+ #ifdef CONFIG_CONSOLE_FLUSH_SUPPORT
 -- 
 2.34.1
 
