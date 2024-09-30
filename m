@@ -4,201 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA1B0CF649D
-	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 10:20:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 763CBCF649D
+	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 11:05:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3283088DE8;
-	Mon, 30 Sep 2024 12:20:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
+	by phobos.denx.de (Postfix) with ESMTP id A767888E07;
+	Mon, 30 Sep 2024 13:05:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="Y93cAlQa";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="J330WDZj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 448B788DDF; Mon, 30 Sep 2024 12:20:42 +0200 (CEST)
-Received: from EUR02-DB5-obe.outbound.protection.outlook.com
- (mail-db5eur02on20617.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2608::617])
+ id 6776A88E12; Mon, 30 Sep 2024 13:05:40 +0200 (CEST)
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on20618.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2412::618])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 187D488DE8
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 12:20:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 06B5D8843A
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 13:05:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jan.kiszka@siemens.com
+ spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NW+jp+vxgUKiHrjjR9KdqK7fDmXSqIIfr0UuJ+kwKNx7mXh0BvaxPdndaZMcleRWseh/RpxP7eNcFEFFX/8TMEND7Esj+XZ/vJHz63I6AeHWBQ1pI0Gxa/gUACEkEH+7LWIdSruXCvny9GpUZ8cidP5vNCCEAyRsc914aMGXNSKN6yDf/5ZaRK2T8YaN1sv5o0bCwO9tJBYFVYDICKWr5Opz8oy3bBC//LUrEr4/RzpfgM6m96Kc1LwIdZaVNVLMxbS5QHtrhc6xWrjAQXef37Hb6v986+Qlp6ZW3MkA1RkWJrWUIkj6j9yrCe6AgcpJidBZLfS3zkIKjU1co0Nrow==
+ b=VpUOd+HXnm6bYb0JTFywo0WTB0pf3qwcEQbUX5a2oyxjGf6OOEmjSl2JKLVi9FbiUWQRE1vhF8tN6dBaIP4jzuDl49MMeHwD0+eXqEB9ZmHEGJltAfofJHF8NaKZGjwDTAPFkYegH6zxNA6mf8y5u99LWzqcuV0YKMYsJLDe2FMIguNNfbKwqu4E/wk/jh+S6aQwL/5MnmY0dPtlgu4TZKB25hne12x/PBC39X1mpC7d8CaZ+2WpCk6nfho91UA+a9q1388VAH+iRcxY/0I9Pkyhl/WZJ3JDMtflFcZnAmTeAftrM+EQs3BQlxhs6nL7WcNaQmJR6h3c72RWj3mUQw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=7DUzYzLs09KvNM0cHxS+OrSFFXj6N5aXLOJXzc1rLGg=;
- b=gw3JRcaJYJJ8fEXzT9ZExyj0TNpVuYMcnQFKKmpO9sk3QKUuny83wqSbJwKMIIg1h/5l9zyLILcvynBWceTSx3v2uE5u7z8ftEK6HdqnhgkwflypsTN8ultrBEv2shQAcmlh9jHyKxe2FGmLfjUuMIwUL/yWALadmM1qpPZe/YvKfZT4NQaQRzUSciox1YCfOwfAB41Cxvv7MWrLYktNabdEUEY6xcOLVwd/6i1xyJ7LU+1svlFSrymxry/1yXMs+/u9VYi197ccnyB1+Ik0iAqAwZzxo0h4quxdcoh6jo4HBdeGN0Nc8pkAXQyjyrIG/6MjL6QUk2CKgFrzknZeXg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
- dkim=pass header.d=siemens.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
- s=selector2;
+ bh=WyCnd81QCDxOFpqotxal7VpPAz5bSx5s4oLwbacBTCw=;
+ b=OJMaxbUBwvmbX5N1FiSkvxG3eiP+ASgxiOhRyZMn9LpK51LT2zbQXmF5sd6pc4brRQz34UL71ZjvirIoKujYJE5RpzPqVOKHatxxfw+7lZym+E+4YS66WdhJ4ce93VrnDMRqMd6fPkqcBHdzlP94Kk9Fl7QpugE5XoNCDyzK933lwiOzmAj5g/p9wDNMdyuGY/iEed7uu37D1aKMUV1NhqTUI8N1k5pe8wQ9BYieA4+OZpUyy+yzemQaVbYV7Rd2Lr2pe7kPpwxFp7nGbGRr2appUZbQakapLWEIty66PJIAH31UwwhxNoNWe8MHYMnieqq9zrOwbDIloKAcg6O1iA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7DUzYzLs09KvNM0cHxS+OrSFFXj6N5aXLOJXzc1rLGg=;
- b=Y93cAlQa3YDjq9s/AC+JY1AEn/Yu4AmHzOirUsgte80Xm8MnSTIzMCA8kkdBOeaWKlna5Lre9TjsAUsK0RTkn+yCXHgpOXlj0tbaoEZVieAEvIbqy69pKTRjNk6DAJh9gFSR4D9paSFnvPTjqkMKG3/rcn1VsfbD3fK2f9C5GWtakdXiVFZMmfGSH3YqzmOIyLyHXOyWyF2VbMqhm1oQwH14tIDIVPCLtfx84zJtWDJAuvxeE/ZKWglTv+gFW/i0MZGKEkpDDMVPkL1+uG0thgK+b6nA4n8URB6bB7Mgk/teCpfXX3RfppDCzPrFRxfld2DKdnPl1VuBN6Jrv3KMsg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=siemens.com;
-Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:588::19)
- by PA1PR10MB9002.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:445::21)
- with Microsoft SMTP Server (version=TLS1_2,
+ bh=WyCnd81QCDxOFpqotxal7VpPAz5bSx5s4oLwbacBTCw=;
+ b=J330WDZjiPS5F1cFjGJRHA0wg8qE7JGiQPHs1VxwEA+PvuAJXEE43D5/dm0g9fmzTHOZyxv3vj7qg9xfGvaMrfx4X3xp9U6v20BQ0+dqtV47+MTdB7TUEAWkTRq7f4RVaLWIH2oD05BkSSToF9LkQb6P0pIjVJQ32sC0Uybe31U=
+Received: from BN0PR02CA0032.namprd02.prod.outlook.com (2603:10b6:408:e5::7)
+ by IA1PR12MB8466.namprd12.prod.outlook.com (2603:10b6:208:44b::7) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8005.26; Mon, 30 Sep
- 2024 10:20:38 +0000
-Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::8fe1:7e71:cf4a:7408]) by AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::8fe1:7e71:cf4a:7408%3]) with mapi id 15.20.8005.024; Mon, 30 Sep 2024
- 10:20:38 +0000
-Message-ID: <a54b501a-9a98-426c-a5ca-faf547411a30@siemens.com>
-Date: Mon, 30 Sep 2024 12:20:36 +0200
-User-Agent: Mozilla Thunderbird
-From: Jan Kiszka <jan.kiszka@siemens.com>
-Subject: [PATCH] Extend usage for OF_OVERLAY_LIST beyond SPL
-Content-Language: en-US
-To: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
-Cc: Sumit Garg <sumit.garg@linaro.org>, Marek Vasut <marex@denx.de>,
- Frank Wunderlich <frank-w@public-files.de>, Jonas Karlman <jonas@kwiboo.se>,
- Nishanth Menon <nm@ti.com>,
- "Li, Hua Qian (DI FA CTR IPC CN PRC4)" <huaqian.li@siemens.com>
-Autocrypt: addr=jan.kiszka@siemens.com; keydata=
- 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
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR4P281CA0117.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:bb::6) To AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:588::19)
+ 2024 11:05:33 +0000
+Received: from BL02EPF0002992D.namprd02.prod.outlook.com
+ (2603:10b6:408:e5:cafe::c9) by BN0PR02CA0032.outlook.office365.com
+ (2603:10b6:408:e5::7) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8005.26 via Frontend
+ Transport; Mon, 30 Sep 2024 11:05:33 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BL02EPF0002992D.mail.protection.outlook.com (10.167.249.58) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8026.11 via Frontend Transport; Mon, 30 Sep 2024 11:05:33 +0000
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 30 Sep
+ 2024 06:04:14 -0500
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+CC: Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini
+ <trini@konsulko.com>
+Subject: [PATCH 1/2] arm64: versal: Remove description for USB1
+Date: Mon, 30 Sep 2024 13:03:52 +0200
+Message-ID: <f148161ee489d19d708df1b4fa7477821e06bb55.1727694230.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1047; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=3PoNCrydrSWYjBToTFICVCRde/HmfWR+ujSR8YUGkuI=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhrRfrTPW1sbqeYQzOhTmOR57k8wwd6ZChrfhK5NpWys1r
+ qzU5TvSEcvCIMjEICumyCJtc+XM3soZU4QvHpaDmcPKBDKEgYtTACayK4Fhvl+zzo7NKcHX5kSt
+ KYzJOOg+xSDRlGGe/tKZZrE3IiS/zo/pXzvl4qMJi0oPAAA=
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS4PR10MB6181:EE_|PA1PR10MB9002:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4ed3ae48-fa02-4637-e2b7-08dce139878d
-X-MS-Exchange-AtpMessageProperties: SA
+X-MS-TrafficTypeDiagnostic: BL02EPF0002992D:EE_|IA1PR12MB8466:EE_
+X-MS-Office365-Filtering-Correlation-Id: b5857052-38e1-44bb-73a4-08dce13fce1f
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Nk1GQ3ZGVkgybUtmQ0w2dVlnaWJYdkxSRndPeW9UZHFMaDNTWHpLZllScE1B?=
- =?utf-8?B?NkFqOGlRT2piM2Y5V1YxUmhaUEhobWQyL2Z3dk9CRGJWWThlb0hDOE40UTR2?=
- =?utf-8?B?YjA0SUxsamR3c1pKdHRnVWk0T2FhQ1g4bGNhK0MxaGorbDhCVm9Mb05Rc2xN?=
- =?utf-8?B?aFVDUERKMGN1eDErbERkUnBmTExkbm9yZmZsL3Q4SDFtci93WklBSmYxTFN3?=
- =?utf-8?B?M3U2akFpNXNWdkF5dzYwYWlUVVJXNmhqWVlCNVhHWlE4S2xHRTFQZm5qZzBU?=
- =?utf-8?B?TjdoSDRsZFhvb2NVRHpuM1FONW9TM1NnbnEzYnRXTGtsc1ZNSnpYK2lxZUxj?=
- =?utf-8?B?Q2dFT1pVYldXMURiT0x5SW1aZlVWM1pQT1VpQVI5cnJnYnJqRzdWRHBDcHIv?=
- =?utf-8?B?L29NaTI4UE1xNy8yRjFTNFFnOVRPcUI0Zkp3RHZKc1RQQ0VCdjF2TDBCeTB6?=
- =?utf-8?B?VFRGM0RidVVUcTVOTlZ5VDlDRVdjNzFCejFQSXI5cTZvZGhrNHVWUTlHK3Nt?=
- =?utf-8?B?KytkelM3Zkk3TnZBbXJjdGxrV2gxd25CV25XbTZSaVVTbGY3dzh2bSt2ZVIv?=
- =?utf-8?B?ckpYZndBYkhNMG51VXkyd2RJdXR0Z2hpYzh5WCtxQzFlb1FNRmoyYm9HQ1l3?=
- =?utf-8?B?Y0VhaE92Z3FLc0xRQnpFNkRSa21iSkNLZ2JhVUlWbC9MWlhpNmhPNGZTNUQv?=
- =?utf-8?B?cUlZR0pwYjkyb0daYVM1N0xqTWVxTWIxWkNxVjJ1NWFFQUk3Ymp6QVZ3eWxI?=
- =?utf-8?B?aHBiUFFVTm8zK2V5R3Mvd3F1Y2FJZWZXc0VocUozL3RidWRFUGE3U1hiZW56?=
- =?utf-8?B?c3lINnJ5c3NrUGRMek5hK3pWQmZXTHhrV1orcHJrdDZIM0hXZ1Q0SytmbEJT?=
- =?utf-8?B?elAxdkpNbzVIOFpjUVR4a2JDUTR1RGRCYTJ6L1FiNi9nQUJQZ09tYkZ4bmVM?=
- =?utf-8?B?WTF1WXhpTUxOcWxlY1hpd25iRk5YSFVnOUx5aXpJTGJxcWRQcllQTHFkTWRT?=
- =?utf-8?B?clFUZUovQ1FFYmVMNzVSVlpNQ3EzcHVyOFZzdTM5M1hNQVhjTWRsSHExaHNt?=
- =?utf-8?B?ZjZUSEw1UWlxZFhsVUtIbWtVNVVnM1d3SjhzdDU3aFVhdjRWRzFSUXhKcC8w?=
- =?utf-8?B?R0x0UHM0VE90SytzNld5OVd5QTdOSkVndzNKNnJuK3pxYnJRR2ZKWkxVUmh1?=
- =?utf-8?B?eTJyUEJxYmxIK0luRHNsTzhZV1lHM0dQd20wK0x2dGxXWHdISEljck9nZ0Zx?=
- =?utf-8?B?eFNiSm1lMThiU1UyTGJHRjNmVXNsSlRDK0w1NFZkTUwrZG4vUWdPOWZ2ZVpw?=
- =?utf-8?B?WThWZGw5MmZxS1Y5bDJZRVVzejUza0tlNWxPWGhLS3A2MHQ2N2tycm50Rndy?=
- =?utf-8?B?OWxvZ0V1YmRTZWM2THhTQkdIYm5USS9hekwvNnYrbE4vOUQ2bUQ2byt6SmVM?=
- =?utf-8?B?ZGs0bzlIeHgvTGhRb3FBZm15Y3IvenRRbmx2ZTdYNjlEa1N2aEgxeHhoTktB?=
- =?utf-8?B?RlByY2EvQ0w3ZDJPWERYOWh1MjJXb3NlV2cra0FBQTYzYUNxazVBZW52dUN6?=
- =?utf-8?B?cjY2UERoeHA5RnRYaHlJWDBzOUpia3U3LytHdG5GT292OW54Nm5kL2tpeGM0?=
- =?utf-8?B?TnR1anBXdTFKMVQ2eEJ0RzhIMUFLL3o3ckdOODJncTdWeWJrMzRPYUlJQWRQ?=
- =?utf-8?B?V3ZYS0orZGh3WDVjWnB6d1crRzVrb1RDUDJlZkVNNmdNMGQyb2JCZkR3PT0=?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TkxWb2prYlZqTEwwR0MyOGlIbDV2anZwaVNPOW9vN2N2bm1GYWxyOGpwaHZS?=
- =?utf-8?B?L3Z2eThKRE9tRUpXWHQ2a3NBd2hCWjhVMHYxdUM0Nnd2Umx6dGVzbVpFNUtH?=
- =?utf-8?B?cXdzVzlNN3g5dmZ3N25vS2U3YW8wVElkM2IvRzNCNXNkUSs1QWlaaHRwRzRW?=
- =?utf-8?B?bVo0Ukhyb2kyVG9DYVBKcWV3QnVySVpWb29lR0RkMzVJQ0M0MlNOVE43Uy83?=
- =?utf-8?B?R1hqMlVDNElpam9JWTFmaGNCMVF5clZrZkpQT3pwZGc1Z0VpQnZTbW51cG1J?=
- =?utf-8?B?cms0K3FVRklCWjdQZUlka2tYdDI0MHk5aE00Qm9DMmVIYndsWTNUWHY0WDdF?=
- =?utf-8?B?L3NUZ1Nyc290T002a25QeldwRVNrc2YydHF1b0ZuRlV2Z2ZvZm1QaE9yT0RE?=
- =?utf-8?B?SFkzQk9nMWFRY1IxYXJBMk5udlRrZVg1SXo2K2FTdkttRDIxNkw3RjhNMlZh?=
- =?utf-8?B?b0t1RTJrVVp1SUNxS2NNNFJmNkgzZHFPUzZPdll2SmRaRkx6NHRNSG92Y1Qy?=
- =?utf-8?B?Z1BuUU5hSFVjMENPb2dlamdTMEtRMS9nbjVhSW94TE5lbFQyK1cxcHJVSlJr?=
- =?utf-8?B?NU1RYmlubG5hcy8zOEltYzIvaC9zZEt1emdZb0hwZzlBVU5QZVlzYXZLeHUv?=
- =?utf-8?B?em5zZnRUNEpNYjgwd1g5MHJ6V3NqRS8vMmNFMEl1cVA5SWQ1WkgvQk4xNWl5?=
- =?utf-8?B?ZHN0Rm9QeDU3YkgzRm5EdkptSmVlSDJKZ0dFUGpYQU5FaHhRMGhudVhldG03?=
- =?utf-8?B?b0FVWXdLQ1RaSkFzeG56d0RDNDBIU2VnQWM0ZkVIdzFqSHJJWE50a3ZORnZv?=
- =?utf-8?B?K0xtQkphZEt1bFNRbGhPamptMkh6ZXJ2RWd3bGs0Y1J0NUdUc3QwTTExRWpX?=
- =?utf-8?B?Mk92SVdtOXg1K1c5NHBXcFl0Q1RaU0JZWUIvb2xOOU1YRWpQYzVMa1dsLytp?=
- =?utf-8?B?djVhSUFIanVVaURvNDUzeFliUDZQNG9qV0gvZzVYRkkyWk1pd0pEMkpaN2Y3?=
- =?utf-8?B?RnN5NVNiS3hyV2R3KzYrYnhidHdmcnk3dTAwZWd1RDFTMUhpeUpKRG5uczBM?=
- =?utf-8?B?VmVLWUt5blg4RWxjR1Arck9iSkJGTlZhSXZUTWoxM0U4T3JwbjAxL3VXTlVp?=
- =?utf-8?B?dHEwdEhqTG05MHYvUnpTSnlycTdYTWxta0tKV1p4WTFNSWs3WmpCM1pmQ1Uw?=
- =?utf-8?B?NlB2eUJJdmEyTFY5WjcvYzg2cU5OY0FpS2wzdUxlZktESE90dHdSanJWdUZV?=
- =?utf-8?B?Z1VEQlNBUklRcjVEeXVkUnpLYzZJc3IvYkVUREJORnQ3K3pLd3VpQ0s2WVV6?=
- =?utf-8?B?QU5lSWE0M1RBTUx1UG1jVGVNb2ZjNmxVSXN5QVBOdmpnRkRTREZaNGtzNjhB?=
- =?utf-8?B?cVlIakNOVERSV0M5TVd5bUl4Umkrai9Xcm9DS2JLYmVUbVJTNHZmQUVXOWZ5?=
- =?utf-8?B?b3dQdEdyeGM0ejNOQzZENzJTUlZQd0hWUXljRVRMckhzNTYwNy9jTkM2ZDRM?=
- =?utf-8?B?WDFUTG44Zk40Y093RmVQb0lxRHhzUzFwY3E5QUYyQ0t0djgwTndzc0xDR2lu?=
- =?utf-8?B?dUJQWWVVdmJaVG4wMTlZY3pVSlcvYVlrSktRSnZxS3MzWmV2SThOYllId0VI?=
- =?utf-8?B?c1RjT0Z3S3E5UTZWeFFrRU93MEpVRllzbmszZ2ttOVRqZjRXckliKzMrTjZq?=
- =?utf-8?B?S2V5U21oK281NUVjakhxQXJ1bFZaZGJuOG5NRlRQS0lIY01yZHd3WnBCZ1JW?=
- =?utf-8?B?SFBMcXR3eTZiL1kxRWRMQXUwbjJoc3Z6MTY1Rk1GbUsvb05EUythYm5FVEph?=
- =?utf-8?B?YXQyU3ArbGlFYitySFUzMGc4YkFlcnQ3TmZvS3BpVExKWWZUVHBaYVV2YUpx?=
- =?utf-8?B?YWV3bVlkNVVWbGRyc1d3Z2lZeHFuTU5NY0ZON1dOb2VNT1RVOW0zQ2NxN3FO?=
- =?utf-8?B?dDFIMm9OaDB5V01DZHd3U1Y5VzZaTFdVbTdWY0d5TVlqdlkybHJrcTFLZWFq?=
- =?utf-8?B?Z1ZGQmRKbHorZUpGRm1YbUs5R2JHNHp6Z2pTMENnT0JaYkZNNXFPeEpsNk0v?=
- =?utf-8?B?dDMyaUJXT1FSVnNQWEx3SkN2bm91SGcranBiZnVCYmZXcnVoZjV1bmxySHhZ?=
- =?utf-8?Q?jgzMT2reHc56n2X0t9KvS5pLR?=
-X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4ed3ae48-fa02-4637-e2b7-08dce139878d
-X-MS-Exchange-CrossTenant-AuthSource: AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2024 10:20:38.4205 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: gu0sxU+fB6hZ+dPHyUi2no7q5ft+qWoG/raGyjSR/ZUvQH8ibG1sa6ihYbhJRnjFj+bhQkXRGJ9bIz8EGToO2g==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR10MB9002
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|36860700013|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?dZ0SgQKM4ZzgNqboAB26wmDA9l5WDYMjHxrKIozzcEq/c26q7VpntS6rUds/?=
+ =?us-ascii?Q?EtHsKhi3OOR/Efrx5VYHm8wvDjb+9RtHeFZzgTnsatd7B9S4tofKuZeef6XP?=
+ =?us-ascii?Q?++xLW6iE/YGFHHFDHgns6f99ijUMcM4GpC2iWE0teZr6XSFTWFm0KwRzDpM+?=
+ =?us-ascii?Q?MUPxEBIJIR5+BQSHI8tHsH7h2T+sCV/wqkb2XperkFrlIF4hagIHTUclj++v?=
+ =?us-ascii?Q?avBpBMFOawSo9xUy4W47Jht5cf84GW8dfF8N2Dm+hVtqxqU9IXlz9cwMTEyf?=
+ =?us-ascii?Q?a/ogU9vGn2KTlH0kGtwP7yWUhKivtG6cDR+jYpPeYO4zQ9x/aCfuhiM1fwxl?=
+ =?us-ascii?Q?vtsJSj5d4inmJsJBlwHOVG4xW75coK3guU/3C3Hk+QfvkdIh2Swi1WylYUFg?=
+ =?us-ascii?Q?H+YoM/aekSRXGoAX1PRk2nqXslusyQV/8RYBmuKuxjd7HyQhYAIdzzQIAsC9?=
+ =?us-ascii?Q?RrS3Sm0NbHacuUGdHvvU4FIAgsERsFqmiMP8oSVPsPKBjw1hNm8prhzjfoVB?=
+ =?us-ascii?Q?lgd2OQIvqDyD+SCqlEu+z+zwMLWJ4zIifr5m1sXiN4K544iQMV+rVdedmNIs?=
+ =?us-ascii?Q?wum+PNR27Feub45kB6BMTtTKbO89XwuxJIArS+Ten9J8PO6sArdTpHZ6I63a?=
+ =?us-ascii?Q?EBOdhiYxISM7bgPGJ/4fGYSQvoQ51m2MUu6JbJ5zHzlmdpSuIu9Z8VeR7jAj?=
+ =?us-ascii?Q?f6Y857ZgbwPQ/RVNkrodm7Te4B0o4xifxA07M6lnvyoxODp6vKJa+tWQ9LP4?=
+ =?us-ascii?Q?rzaG8psI2N/sNjt9ruLfReXjLLayoMXcvD6ele0zuzUQ+EeNycR/dX/3D6Py?=
+ =?us-ascii?Q?FxBRTy4+Xcavol+OJNkDNlXaAMiXnDxJMH8Ps7Pn8CY37sMJhkeAwS7RXKnC?=
+ =?us-ascii?Q?BVhQPoqqQMk0/TX2phiV9v1wKzd+zJhfkZoFKCJaJhnIdYKmOC8ZwNoMyMaS?=
+ =?us-ascii?Q?GOKP4jW/Ux7UQjTpYW7H+MlhVAwRiUaPCRgXpyLQFxPjnnAYyuX/qIcjZNlg?=
+ =?us-ascii?Q?8DxalLUtAiT7n6kGyeRcxsdHm5O21zkNrd8eLVsLhI5nAxLBOl+SdFhnxIwZ?=
+ =?us-ascii?Q?cBtuExaCoexEFXMzi5vXu0npWIhPgVkB6BfT4DlZorYl6cI5hR6CQVTQJxga?=
+ =?us-ascii?Q?x0ELzZ04QFmRc1ykBThDD4fxn/GVAgDM+BCZQTFYnROgZ0QWJhoMyU+dxPBE?=
+ =?us-ascii?Q?7dLLjR2yOYx283qJKW9TUEo8eV4Q1a6tHS4GtT8IsygWAELnFplqLfzVAmO0?=
+ =?us-ascii?Q?30Fl768c2W7zNaQA5iGNxk4i3j6+LJ/xXdb2VYS/qZy8Dx91/x2YTjie/4W2?=
+ =?us-ascii?Q?5UMPdkW1JP/TryXKc5IceDyseIIfIaNbn9ZxRHMs84SpueR6elMxtuzkJqhD?=
+ =?us-ascii?Q?QRxFP7glHpzvBAvb0ykOsONX3jE1?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(36860700013)(82310400026); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2024 11:05:33.5405 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b5857052-38e1-44bb-73a4-08dce13fce1f
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0002992D.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB8466
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -215,55 +149,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Jan Kiszka <jan.kiszka@siemens.com>
+There is only one USB controller that's why remove description for USB1.
 
-Allow to use OF_OVERLAY_LIST also for the case that the overlays just
-need be built, e.g. when they will be picked up by binman as artifacts
-of the final U-Boot image. The IOT2050 boards have such a need when
-switching to OF_UPSTREAM.
-
-Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
+Signed-off-by: Michal Simek <michal.simek@amd.com>
 ---
 
-While waiting for the merge of v6.12-rc1-dts and while seeing related 
-but different attempts to address the overlay topic. See the patch
-in use here:
+ include/configs/xilinx_versal.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-https://github.com/siemens/u-boot/commits/jan/iot2050
-
- dts/Kconfig          | 4 ++--
- scripts/Makefile.dts | 1 +
- 2 files changed, 3 insertions(+), 2 deletions(-)
-
-diff --git a/dts/Kconfig b/dts/Kconfig
-index 569d4be338e..7ea4fd5a79b 100644
---- a/dts/Kconfig
-+++ b/dts/Kconfig
-@@ -226,11 +226,11 @@ config OF_LIST
+diff --git a/include/configs/xilinx_versal.h b/include/configs/xilinx_versal.h
+index dc3f41b94a29..212dc9df2a2e 100644
+--- a/include/configs/xilinx_versal.h
++++ b/include/configs/xilinx_versal.h
+@@ -85,7 +85,7 @@
+ 	"jtag "
  
- config OF_OVERLAY_LIST
- 	string "List of device tree overlays to include for DT control"
--	depends on SPL_LOAD_FIT_APPLY_OVERLAY
- 	help
- 	  This option specifies a list of device tree overlays to use for DT
- 	  control. This option can then be used by a FIT generator to include
--	  the overlays in the FIT image.
-+	  the overlays in the FIT image or by binman when assembling an image
-+	  that uses overlays during DT fixup.
+ #define BOOT_TARGET_DEVICES_USB_DFU(func) \
+-	func(USB_DFU, usb_dfu, 0) func(USB_DFU, usb_dfu, 1)
++	func(USB_DFU, usb_dfu, 0)
  
- choice
- 	prompt "OF LIST compression"
-diff --git a/scripts/Makefile.dts b/scripts/Makefile.dts
-index 790f3c508f1..dc181240a21 100644
---- a/scripts/Makefile.dts
-+++ b/scripts/Makefile.dts
-@@ -1,6 +1,7 @@
- # SPDX-License-Identifier: GPL-2.0+
+ #define BOOTENV_DEV_USB_DFU(devtypeu, devtypel, instance) \
+ 	"bootcmd_" #devtypel #instance "=setenv dfu_alt_info boot.scr ram " \
+@@ -99,7 +99,7 @@
+ 	""
  
- dtb-y += $(patsubst %,%.dtb,$(subst ",,$(CONFIG_DEFAULT_DEVICE_TREE) $(CONFIG_OF_LIST) $(CONFIG_SPL_OF_LIST)))
-+dtb-y += $(patsubst %,%.dtbo,$(subst ",,$(CONFIG_OF_OVERLAY_LIST)))
+ #define BOOT_TARGET_DEVICES_USB_THOR(func) \
+-	func(USB_THOR, usb_thor, 0) func(USB_THOR, usb_thor, 1)
++	func(USB_THOR, usb_thor, 0)
  
- ifeq ($(CONFIG_OF_UPSTREAM_BUILD_VENDOR),y)
- ifeq ($(CONFIG_ARM64),y)
+ #define BOOTENV_DEV_USB_THOR(devtypeu, devtypel, instance) \
+ 	"bootcmd_" #devtypel #instance "=setenv dfu_alt_info boot.scr ram " \
 -- 
 2.43.0
+
