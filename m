@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A1B6CE8372
-	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 16:30:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6712CE8374
+	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 16:31:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB73688E00;
-	Mon, 30 Sep 2024 18:30:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3039B88F94;
+	Mon, 30 Sep 2024 18:31:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CqJdLtHi";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Qxi2RY1v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B550A88E07; Mon, 30 Sep 2024 18:30:50 +0200 (CEST)
-Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
- [IPv6:2607:f8b0:4864:20::c2d])
+ id 472DD88CF1; Mon, 30 Sep 2024 18:31:12 +0200 (CEST)
+Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
+ [IPv6:2607:f8b0:4864:20::f30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3F83988CF1
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 18:30:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F0CBC88F9F
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 18:31:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2d.google.com with SMTP id
- 006d021491bc7-5e5a0519d00so1958722eaf.3
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 09:30:48 -0700 (PDT)
+Received: by mail-qv1-xf30.google.com with SMTP id
+ 6a1803df08f44-6cb2e5d0104so34165946d6.3
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 09:31:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1727713847; x=1728318647; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=9yWxlzNGbz0gJ45EQq1aQlRj1Cvu/8CPRFXeLe9A8b0=;
- b=CqJdLtHiij6bHSxQvUHunLdy4pggd3TD0UJoZNYfvMQ76QXt7r5siTlnPqxkm1XVQO
- DmuwvD00LoYtuHrxdzYh5DrHr6oSOLvfrj4Qp5G806SVj4/pDacJgnYfIJAjMOcWs4ca
- J7yKFi3dMHLs5HJP5DJ43SBIWyPemPgYjEzxw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727713847; x=1728318647;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1727713867; x=1728318667; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9yWxlzNGbz0gJ45EQq1aQlRj1Cvu/8CPRFXeLe9A8b0=;
- b=u3LJmFFJyIc9Qpkqv/6nY2kn3W6kk5PPfC6HPEhf9P/8JuVU4mnx3v08TkNN69KjSm
- 8NufsAgvdqXyUTF07MewK/148VUH8mePyYhevenKT++NnIb76+nXo/at2ZcF8IfNT95K
- bAWNTH/JHGrwnUpUAGdcL0GI0Ko9k3OB8cVB19FfxWl/l79yIHLZciCdJi2BW8ykDHMe
- /dqdos1Za9+lBhUJ0wbg3GHqwFzTsvPJKDabkz59MHp59K0PbjO+Rd4PVYg35vvk5J1N
- m1LCWJFbFsHjX0oQkqmyb0ePYpl8HSzwDIIvymQ7CWuW4CuPAPtMegarKYXqtGkT2FwL
- 1YnA==
-X-Gm-Message-State: AOJu0YwBD472mekq7Nh808PBa2mvqFGilgwHqWpRlGG/A9psn00We7v+
- wmZtOjWcg+tEYRWSrFPvnq1PS6S0OpYklVi4DdnPr45vW5yF4vnyCEY+uocYxd7opUk/dyRXzMl
- F
-X-Google-Smtp-Source: AGHT+IG0NSOHPtTLfu4/KffV3LknZdg62ASKIfAcew39wy6fpcw2wC7acH5w8xUstm5O9d27dk8Uhg==
-X-Received: by 2002:a05:6358:2d86:b0:1bc:2d00:84ad with SMTP id
- e5c5f4694b2df-1becbb38c67mr350231755d.3.1727713846830; 
- Mon, 30 Sep 2024 09:30:46 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-45c9f36337csm37347301cf.96.2024.09.30.09.30.45
+ bh=uNiw0vK3iLZChBCLvImBSIOuBA+SOQVmEM6qzBNY0WE=;
+ b=Qxi2RY1vR5rtI7j7yAJ1kmZZZZxwBC/gD7SVF17c3Bn7xyw2sWDpsuE+Re7Ar/Su0T
+ lHH2jA1Q/0Y1HUEf6lbtnybRRCbG+0wEWb3+0uD1DXCX+eVdSLYbTl2+IddTM2DcZ21r
+ NDZH3YBTAj6fau/KVyVcqPksIr64tAJe6bMsk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727713867; x=1728318667;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=uNiw0vK3iLZChBCLvImBSIOuBA+SOQVmEM6qzBNY0WE=;
+ b=AFCxsygoETo6lgBFcNI3LiJSbNxVmdSVgwwhS/dG5oWm0SbeLxYMFyqwBSuSJDnLiH
+ i0Fg94/jC9AfN+LhKJgC3eQlkoWaCVkvJN5AUSZEZnReRHRCApLG2NCqaWYeI0znZ1Bu
+ ElWNV3n/5gh0dNFUtF5rFiPD9NdTp5m+Yuq3kPDDjxlLmxwIHifiDd98VBScBJJV/H4A
+ ztbsnCyvgRJDxNaG7m2YXKtWwTFLCDUgaH66JIRgR4dqs4nSuxdkE7D6XJrynkJGtvch
+ 43NQC2b/xSdMSa5z6duCRhRpE6O4wZkTg/G4lWkWiw+NUxoSL+zRlsjO27adYCM19bsU
+ NvFQ==
+X-Gm-Message-State: AOJu0Yy8BygyIYWMNeSpvbKGnJYlnpqLBMYXgweMSqnBs11+E4C9FGi1
+ 0q+mwAId+ab8Up0+Or3huQyhV0hlK1IElnvhGElOuv4tCh6qMdF8RkvsNp8YeuI=
+X-Google-Smtp-Source: AGHT+IFBg1iBDd484I1UXPFq3f677bxEi/CONi90YDPKBLPXL4xGHJm1QhkzBiXxjxdS2ZJ+WFIB/w==
+X-Received: by 2002:a05:6214:3bc9:b0:6cb:53c3:dc3a with SMTP id
+ 6a1803df08f44-6cb53c3e2f8mr112697726d6.32.1727713867307; 
+ Mon, 30 Sep 2024 09:31:07 -0700 (PDT)
+Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6cb3b60fbf0sm41520376d6.37.2024.09.30.09.31.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Sep 2024 09:30:46 -0700 (PDT)
-Date: Mon, 30 Sep 2024 10:30:43 -0600
+ Mon, 30 Sep 2024 09:31:07 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Kever Yang <kever.yang@rock-chips.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: Pull request: u-boot-rockchip-20240930
-Message-ID: <20240930163043.GD5579@bill-the-cat>
-References: <20240930091424.2696174-1-kever.yang@rock-chips.com>
+To: lukma@denx.de, mkorpershoek@baylibre.com, marex@denx.de, 
+ rogerq@kernel.org, vigneshr@ti.com, jjhiblot@ti.com, 
+ Siddharth Vadapalli <s-vadapalli@ti.com>
+Cc: u-boot@lists.denx.de, srk@ti.com
+In-Reply-To: <20240930093407.2998969-1-s-vadapalli@ti.com>
+References: <20240930093407.2998969-1-s-vadapalli@ti.com>
+Subject: Re: [PATCH] usb: gadget: cdns3: Fix missing cache operations for
+ non-zero Endpoints
+Message-Id: <172771386586.2406900.1428916275116433506.b4-ty@konsulko.com>
+Date: Mon, 30 Sep 2024 10:31:05 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="RowyH7+J6A9vSK33"
-Content-Disposition: inline
-In-Reply-To: <20240930091424.2696174-1-kever.yang@rock-chips.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,63 +91,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, 30 Sep 2024 15:04:07 +0530, Siddharth Vadapalli wrote:
 
---RowyH7+J6A9vSK33
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, Sep 30, 2024 at 05:14:24PM +0800, Kever Yang wrote:
-
-> Hi Tom,
->=20
-> Please pull the fixex for rockchip platform:
-> - rk8xx pmic fix
->=20
-> CI:
-> https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/22470
->=20
-> Thanks,
-> - Kever
->=20
-> The following changes since commit 596465138175cd7e4171cad1e68a2ef7c5c002=
-bc:
->=20
->   regulator: rk8xx: Fix buck get and set enabled state on RK806 (2024-09-=
-27 18:20:49 +0800)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-rockchip.git tags/u-boo=
-t-rockchip-20240930
->=20
-> for you to fetch changes up to 7210de40a25a222043aed1348ec667a5ccc204b6:
->=20
->   regulator: rk8xx: Use buck variable consistently (2024-09-27 18:20:49 +=
-0800)
->=20
+> Transfer initiation and completion for the non-zero Endpoints are
+> handled by cdns3_ep_run_transfer() and cdns3_transfer_completed()
+> respectively.
+> 
+> Failing to flush the cache associated with the TRB Pool within
+> cdns3_ep_run_transfer() results in the transfers never being initiated.
+> Similarly, failing to invalidate the cache associated with the TRB pool
+> within cdns3_transfer_completed() results in the transfers never being
+> completed.
+> 
+> [...]
 
 Applied to u-boot/master, thanks!
 
---=20
+-- 
 Tom
 
---RowyH7+J6A9vSK33
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmb60jAACgkQFHw5/5Y0
-tyz44wv+IXevEvu4fcCYSAQ86wHlJe0FDR3o0cBlmqVBdU447f/Aa+UQP9f2eJ8c
-MmAqz/kEeRMX2F28JdjTpEiW9W2SAAAOC8bNREzbFc5xnVcHCC8Z9peDJ6wD8eD7
-xkgoO79+K6G+ot0C9uCJbFSam0Et1TYM6l1gvjuG73RG9TTFBkHXMWpXzoyrGNJR
-Mt6gD9NLrv/khKZIDRgX1XNy2wHsJBpFmb1Dh+JbH+kAENmLr+hv3S+3s1GjgCAC
-lik2q7Vimwl4DLQt112Th0f3LvoXXGXAKN1QbXIo5Th7N8+XbakVlel1GBtpzgXg
-b0trOfEP36fOKHMrD5sCUGv13lc89zuHxLEPR48qL+zvsftGeL2KJnVkGYGYXvv1
-ZQw2aJcyhh/7hzIq2YlJWBpZqLVnEnVWdLpUlPP8Q+Ug1uGqUuSiJxkX4FCJkbXY
-HNjAhuX2SXxTY6ldsNS3Gh2InNh8xe16oJB/zkczCVBN+yyqtDlq8QqVfBSxQvk7
-NudeAVGM
-=URK5
------END PGP SIGNATURE-----
-
---RowyH7+J6A9vSK33--
