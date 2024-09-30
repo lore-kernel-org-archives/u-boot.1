@@ -4,66 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2064ACE8379
-	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 18:52:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3209CCFA16
+	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 18:53:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2CEA38908D;
-	Mon, 30 Sep 2024 20:52:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A3F9088FDA;
+	Mon, 30 Sep 2024 20:52:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Er1ZN7h2";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TtnLX4YZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D05E8907F; Mon, 30 Sep 2024 20:52:28 +0200 (CEST)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
+ id 651D287D1A; Mon, 30 Sep 2024 20:52:32 +0200 (CEST)
+Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
+ [IPv6:2607:f8b0:4864:20::72f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 32EE587D1A
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 20:52:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 807C98907F
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 20:52:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-6de14e0f050so38639997b3.0
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 11:52:25 -0700 (PDT)
+Received: by mail-qk1-x72f.google.com with SMTP id
+ af79cd13be357-7a99eee4a5bso421931385a.0
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 11:52:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727722344; x=1728327144; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727722347; x=1728327147; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=E7jrz5jBcKxdgCKu7qLVTZxv0o5LNAxkOdVdlPtw6Uc=;
- b=Er1ZN7h2FzonoPBQHP7QYLRyKzS4g+i6OaJ7kdJPnbwbm2zROIqDhPkJ/0Bgg769kl
- fV73nwzMsFTEKfZ+RpFIZ/deoAHS3dP3U12KYs2Z3RPJ6z/Qm/ER5wSKRuXfD8tYgSmx
- 3cUH0CzUGxp3bqd7yQ6gDLHFQ3Bt3mfTxsMeI=
+ bh=GXwgebbNqRzJTqvp3Juovqw25/56wQ9E2prrLAZjW6Q=;
+ b=TtnLX4YZ7s0f2Z2OZnO1AH9hTZHMYTloFl9MfopSo8rURdb09Aa+o1WNFnniM9ODjU
+ qoWYoLfiX3L+xZBxjqGfubZkq7CB3kONLVCVRnqvhPclnP4Anj8mZPKJDbKmPGkn5auK
+ lGXg11zVGKBxbwlhv0Gf+/EerUTUNHA4JuEF4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727722344; x=1728327144;
+ d=1e100.net; s=20230601; t=1727722347; x=1728327147;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=E7jrz5jBcKxdgCKu7qLVTZxv0o5LNAxkOdVdlPtw6Uc=;
- b=FlV3AKBYy8M9eCxjEaHc5z7OQ5V8vBur3VLAW1yVc6rpurNBHK6boBFBY56D2YASTT
- 2xEOOD7dnVq9gITqvHvQ2wdKFEmqBYkgYoW1bpjd/fEqWmMndTZPnTA+ySnUFkdIzWks
- CRyOeSyTVUjG2aD9THk2MSRtxK6jzjp+pF6Q861D3Kgn5+mn/0aTM3PJKnavmicRseFu
- StWdE/TXaHXSHIemjfMOBJXWQSCUeOdwUbNfiIODiPp4CgJNEK97yeVw5n8z6a0sTC9i
- NdYSSObSx3rCGU1VYgmp76wrQPfJm0x71KEu5PO2nBQRPQRpJ/H/iuX/76acHiuDxL6r
- ud8g==
-X-Gm-Message-State: AOJu0YxM1mjVXEtV0USb7bNlmC2LINxgTZLUkRQy+XbxVgLoEb+PMJL7
- VXVeOZMkmmhv7p7l1zBQXakwtPT/osoEyDmWu6bIhjrlovLBv7FX6JeyfimyCJhAGXh6kgAt/pm
- ndZkicsK2PXyA0IeIKrft7Wv55RT6Xz+Gwdda25QpoMgZ7MQ=
-X-Google-Smtp-Source: AGHT+IEnkgBI+rpAFVZ0sYFGtF3buye5D+2jPXGdytqoqJG520JHGEQnbwipPcV39Uw9M5Z2i2888gHlt1HijCJkAZU=
-X-Received: by 2002:a05:690c:3:b0:6e2:313a:a022 with SMTP id
- 00721157ae682-6e2475b93d2mr102689817b3.33.1727722344108; Mon, 30 Sep 2024
- 11:52:24 -0700 (PDT)
+ bh=GXwgebbNqRzJTqvp3Juovqw25/56wQ9E2prrLAZjW6Q=;
+ b=EG6WU+CQI/ACqlmY2LmS3zmvqE+Prgn12y+ySKIvQlPYpodkUpTS6bjxy7vDk7rN2w
+ p5/l7zCXJaR3wlATqlzerhAAPqBbf7O5QyExPORW3OuzFMyEK7mAZ32bJlpAu/hDVJn1
+ 6QrLGfKKazWG2CAaHRVxReScq9t+OqkZTTu+DreZ18Hv+8FTxaYHw1qKAi8RY9WclCAZ
+ OsukI7JSuIouK6zhnm5b9THjfZPEITp10Z1TaHSm5dLgxgh7/Mk48J4CeGzdsrQz+Kpg
+ 8Y0c+0NL/roTmiAuxLaeIf9v8Sxr/fslmleQGmUQ7uy1DAcHjhJaiItKr1QDRw8LSf2H
+ xTrg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVrnbsCo1sdmw5BX74OJBTimw/DPEkTaVWzOY1L6BIrHynNj/CJETO5JKH/I3qKuNXIQhYslmc=@lists.denx.de
+X-Gm-Message-State: AOJu0YxLEyl5MCroVzUpEg3XY6IMMY6DZ+UaeVTiGn76lum/HCEOarWJ
+ Gqx/0nJL6XIWj2BkvSLBAwLnzrWUBaT+JbPgNgTS/rtUw2apsYtluBPzltjfltUJuWN1/11inVg
+ VWjMPok1wSRw9nCx9Qpxiwf4rPRFEM/iG+SN5
+X-Google-Smtp-Source: AGHT+IEsTD4vTxi75j5I09rH8WJIC8w23PNFAfK03uoTV5i7OvSqwnUSy4LyojF9yBpClZeijcjdbOPoj2Mjwwtcruc=
+X-Received: by 2002:a05:6214:5d8f:b0:6cb:1006:e9cb with SMTP id
+ 6a1803df08f44-6cb3b5f90eemr156097266d6.28.1727722347338; Mon, 30 Sep 2024
+ 11:52:27 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240929092739.2513768-1-daniel@0x0f.com>
-In-Reply-To: <20240929092739.2513768-1-daniel@0x0f.com>
+References: <20240930102148.854-1-brian.ruley@gehealthcare.com>
+ <20240930161006.41052-1-brian.ruley@gehealthcare.com>
+ <20240930161006.41052-2-brian.ruley@gehealthcare.com>
+In-Reply-To: <20240930161006.41052-2-brian.ruley@gehealthcare.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 30 Sep 2024 12:52:13 -0600
-Message-ID: <CAFLszTjkzoZxvx5yGeg098h4qGFUCYYW4kYygB3ypiZFOCKf5g@mail.gmail.com>
-Subject: Re: [PATCH] cmd: Make bootvx independent of bootelf
-To: Daniel Palmer <daniel@0x0f.com>
-Cc: u-boot@lists.denx.de
+Date: Mon, 30 Sep 2024 12:52:16 -0600
+Message-ID: <CAFLszTiKK8CJ0ocN8G4LMqPCSDj0726Py5VfEPEDTDz6XCBjiA@mail.gmail.com>
+Subject: Re: [PATCH v3 2/2] binman: add fast authentication method for i.MX8M
+ signing
+To: Brian Ruley <brian.ruley@gehealthcare.com>
+Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>,
+ ian.ray@gehealthcare.com, Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,100 +87,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Daniel,
+Hi Brian,
 
-On Sun, 29 Sept 2024 at 03:27, Daniel Palmer <daniel@0x0f.com> wrote:
+On Mon, 30 Sept 2024 at 10:10, Brian Ruley <brian.ruley@gehealthcare.com> wrote:
 >
-> There are lots of usecases for running baremetal ELF
-> binaries via bootelf but if you enable bootelf you
-> get bootvx as well and you probably don't want or need
-> it.
+> Using the PKI tree with SRKs as intermediate CA isn't necessary or even
+> desirable in some situations (boot time, for example). Add the possibility
+
+spelling
+
+> to use the "fast authentication" method where the image and CSF are both
+> signed using the SRK [1, p.63].
 >
-> Hide bootvx behind it's own configuration option.
+> [1] https://community.nxp.com/pwmxy87654/attachments/pwmxy87654/imx-processors/202591/1/CST_UG.pdf
 >
-> Signed-off-by: Daniel Palmer <daniel@0x0f.com>
+> Signed-off-by: Brian Ruley <brian.ruley@gehealthcare.com>
+> Cc: Marek Vasut <marex@denx.de>
+>
+>  tools/binman/etype/nxp_imx8mcst.py | 23 +++++++++++++++++++----
+>  1 file changed, 19 insertions(+), 4 deletions(-)
+
+That should be below the --- (you can use patman to get this right
+automatically)
 > ---
->  cmd/Kconfig | 11 +++++++++--
->  cmd/elf.c   |  6 ++++++
->  2 files changed, 15 insertions(+), 2 deletions(-)
+>  tools/binman/etype/nxp_imx8mcst.py | 44 ++++++++++++++++++++++--------
+>  1 file changed, 32 insertions(+), 12 deletions(-)
 >
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index 978f44eda426..262c4118f7f6 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -491,11 +491,18 @@ config CMD_CEDIT
->           loading and saving of configuration as well as showing an editor.
+> diff --git a/tools/binman/etype/nxp_imx8mcst.py b/tools/binman/etype/nxp_imx8mcst.py
+> index 0c744a00d7..a80cb94499 100644
+> --- a/tools/binman/etype/nxp_imx8mcst.py
+> +++ b/tools/binman/etype/nxp_imx8mcst.py
+> @@ -36,6 +36,9 @@ csf_config_template = '''
+>    File = "SRK_1_2_3_4_table.bin"
+>    Source index = 0
 >
->  config CMD_ELF
-> -       bool "bootelf, bootvx"
-> +       bool "bootelf"
->         default y
->         select LIB_ELF
->         help
-> -         Boot an ELF/vxWorks image from the memory.
-> +         Boot an ELF image from memory.
+> +[Install NOCAK]
+> +  File = "SRK1_sha256_4096_65537_v3_usr_crt.pem"
 > +
-> +config CMD_ELF_BOOTVX
-> +       bool "bootvx"
-> +       default y
-> +       depends on CMD_ELF
-> +       help
-> +         Boot a vxWorks image from memory
->
->  config CMD_ELF_FDT_SETUP
->         bool "Flattened Device Tree setup in bootelf cmd"
-> diff --git a/cmd/elf.c b/cmd/elf.c
-> index 673c6c30511c..fe7f06ef74eb 100644
-> --- a/cmd/elf.c
-> +++ b/cmd/elf.c
-> @@ -10,8 +10,10 @@
->  #include <env.h>
->  #include <image.h>
->  #include <log.h>
-> +#ifdef CONFIG_CMD_ELF_BOOTVX
->  #include <net.h>
->  #include <vxworks.h>
-> +#endif
+>  [Install CSFK]
+>    File = "CSF1_1_sha256_4096_65537_v3_usr_crt.pem"
 
-No need to #idef headers files. Just include them always.
+Since 'sha256_4096_65537_v3_usr_crt.' is common to everything, could
+you have a variable, say keyname, and use that everywhere?
 
->  #ifdef CONFIG_X86
->  #include <vesa.h>
->  #include <asm/cache.h>
-> @@ -100,6 +102,7 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
->         return rcode;
->  }
 >
-> +#ifdef CONFIG_CMD_ELF_BOOTVX
->  /*
->   * Interpreter command to boot VxWorks from a memory image.  The image can
->   * be either an ELF image or a raw binary.  Will attempt to setup the
-> @@ -307,6 +310,7 @@ int do_bootvx(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
->
->         return 1;
->  }
-> +#endif
->
->  U_BOOT_CMD(
->         bootelf, CONFIG_SYS_MAXARGS, 0, do_bootelf,
-> @@ -323,8 +327,10 @@ U_BOOT_CMD(
->  #endif
->  );
->
-> +#ifdef CONFIG_CMD_ELF_BOOTVX
->  U_BOOT_CMD(
->         bootvx, 2, 0, do_bootvx,
->         "Boot vxWorks from an ELF image",
->         " [address] - load address of vxWorks ELF image."
->  );
+> @@ -74,16 +77,25 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
+>                              self._node, 'nxp,srk-table',
+>                              'SRK_1_2_3_4_table.bin'
+>                           ))
+> -        self.csf_crt = os.getenv(
+> -            'CSF_KEY', fdt_util.GetString(
+> -                           self._node, 'nxp,csf-crt',
+> -                           'CSF1_1_sha256_4096_65537_v3_usr_crt.pem'
+> -                       ))
+> -        self.img_crt = os.getenv(
+> -            'IMG_KEY', fdt_util.GetString(
+> -                           self._node, 'nxp,img-crt',
+> -                           'IMG1_1_sha256_4096_65537_v3_usr_crt.pem'
+> -                       ))
+> +        self.fast_auth = fdt_util.GetBool(self._node, 'nxp,fast-auth')
+> +        if not self.fast_auth:
+> +            self.csf_crt = os.getenv(
+> +                'CSF_KEY', fdt_util.GetString(
+> +                               self._node, 'nxp,csf-crt',
+> +                               'CSF1_1_sha256_4096_65537_v3_usr_crt.pem'
 
-This needs a doc/usage/cmd update
+e.g. f'CSF1_1_{keyname}'
 
-I'm not sure if it is possible to test it in CI?
+> +                           ))
+> +            self.img_crt = os.getenv(
+> +                'IMG_KEY', fdt_util.GetString(
+> +                               self._node, 'nxp,img-crt',
+> +                               'IMG1_1_sha256_4096_65537_v3_usr_crt.pem'
+> +                           ))
+> +        else:
+> +            self.srk_crt = os.getenv(
+> +                'SRK_KEY', fdt_util.GetString(
+> +                               self._node, 'nxp,srk-crt',
+> +                               'SRK1_sha256_4096_65537_v3_usr_crt.pem'
+> +                           ))
 
-> +#endif
+All three options seem to read the 'nxp,srk-crt' property, so you can
+do that once the if() to reduce the amount of duplicated code.
+
+> +
+>          self.unlock = fdt_util.GetBool(self._node, 'nxp,unlock')
+>          self.ReadEntries()
+>
+> @@ -137,8 +149,16 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
+>          # Load configuration template and modify keys of interest
+>          config.read_string(csf_config_template)
+>          config['Install SRK']['File'] = '"' + self.srk_table + '"'
+
+This is what I mean by the f-string:
+
+f'"{self.srk_table}"'
+
+> -        config['Install CSFK']['File'] = '"' + self.csf_crt + '"'
+> -        config['Install Key']['File'] = '"' + self.img_crt + '"'
+> +        if not self.fast_auth:
+> +            config.remove_section('Install NOCAK')
+> +            config['Install CSFK']['File'] = '"' + self.csf_crt + '"'
+> +            config['Install Key']['File'] = '"' + self.img_crt + '"'
+> +        else:
+> +            config.remove_section('Install CSFK')
+> +            config.remove_section('Install Key')
+> +            config['Install NOCAK']['File'] = '"' + self.srk_crt + '"'
+> +            config['Authenticate Data']['Verification index'] = '0'
+> +
+>          config['Authenticate Data']['Blocks'] = (hex(signbase) + ' 0 '
+>                                                   + hex(len(data)) + ' "'
+>                                                   + str(output_dname) + '"')
+
+Can use f-strings here too, e.g.
+
+f'{signbase:#x} 0 {len(data):#x} ...
+
 > --
-> 2.43.0
+> 2.39.5
 >
 
 Regards,
