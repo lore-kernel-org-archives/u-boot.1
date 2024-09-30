@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 421ECCE834D
-	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 14:27:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C323CE8347
+	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 14:27:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC33C88915;
-	Mon, 30 Sep 2024 16:27:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4A49188E1A;
+	Mon, 30 Sep 2024 16:27:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="M0UoaiS9";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="c0fHPPjk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D75F288DD9; Mon, 30 Sep 2024 16:27:20 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 7E6C6881C1; Mon, 30 Sep 2024 16:27:21 +0200 (CEST)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 89E51881C1
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 16:27:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 48E0F88915
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 16:27:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-42cb7a2e4d6so39465655e9.0
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 07:27:18 -0700 (PDT)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-37ccdc0d7f6so2283506f8f.0
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 07:27:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1727706438; x=1728311238; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1727706439; x=1728311239; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uTy4NWgRgDq+j6izR3kA2Sx29gvr/380M3CE+fbX1a0=;
- b=M0UoaiS9YattBG2FG6Wf2Un7gLAWdlFi50jboJBhqXJGRRkz4NH5qQ8vN/5eAPDiTZ
- nQsluLU9hh+bqOvDxHMBr8NtrS/opjcAnenuFPdjA1YBc6GLd7l1A+qr/NTYVVfDaziw
- p2nTwm6qa+yFKuw8FbU6h5EZ3/7c6A2bLpYEpmXahsKOYZng57/OjwZB+RMYr4uR2WN5
- A+8AoN+QZfx9B7gBpVquYODx1827p4G4cKRn90+ORWjVe7d5ayJ5IP+5OpFCUIfVlyvx
- pStgFiix12ijwIdtlSawHJT+nKIY4jB4ZSJ0Cw1cbQUJcKdNm7zAc0JZzoT0kik2rO5b
- BrjA==
+ bh=jvw5KqLxLj1F5gegJYYVjZJm0uru/pqT1hBAosgRBe0=;
+ b=c0fHPPjkHd9eJBbfG/rcsEg/ASBsDjrqvB8JTlFJzm1TTkTV99JxltptCIPlUVij5t
+ OExnJqpwGDutDOyhuKp5b6Ns2cHwjf88q0mrOWylDL46olLsSp6iziziuikxd7ZbEetO
+ Ee+1YLa4J3xTdxQynMLMk/Bwhx6kwPDpNdABrAI0BC87DlxIxGD792u9QcPN8sSJa6Se
+ v/n4zx+zo9pnZL7FKs0SMNkCiCDQ2j4JLvQrbW/dsVOROCGGkZvc5xmrJ5IbhirrUQ5U
+ JWdY6qNHoTS+KFzh/+WBlfZp+BpMVTf2jTGhSqTQtDLHtB1MCHqARhityjxs8Y8K/Rnp
+ jEWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727706438; x=1728311238;
+ d=1e100.net; s=20230601; t=1727706439; x=1728311239;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=uTy4NWgRgDq+j6izR3kA2Sx29gvr/380M3CE+fbX1a0=;
- b=X6PMyaWYFEO9lccEGS1gksyVFJShhMLzEFlAarlXINOoS8ZeTfq/b89/XhJjhxA4MS
- UrC7/FmuUnVi1KTmWy8m9+x3/a669tIrzMneLdLsSCPsmHsk1dlF9I603RgvFhAr7dSC
- v6wUO/4zmKdwlC0Ov+jHcUA+x4TLJP48AdaEepTgjUQqswYla6zf2CcyL/vqSRARZRSZ
- Vc85qOWD+dr7L81oBPd9L+qU18b7zJq6Duu041I8NTobytR0w8vCE11SwlGVPNLMJPGH
- XKab6+miC0aMAEuvOsuVD7mSJ1cse4WWlHRf7N/Y3CJROsOIwJieKW0Wdg9tn9APnIxP
- DUzA==
+ bh=jvw5KqLxLj1F5gegJYYVjZJm0uru/pqT1hBAosgRBe0=;
+ b=fY9DWJsyPX7Vr+TQlen6TgDVLN8grSHa8OsWwkeCujUR6l3ERS8CSqnHVeTI8D7gGV
+ JfXzoQ4d+NQnUObbEN6+4QgKPKenuxd/oxbq8amU1e5CttIA7kaF31rzFTp+I1yiieP+
+ iuEMRUBD4UUUdTgk6HGYv3/RVXSS7oD8wI3QXVwgzFM0o8Xnnxw/7JLPhcxkXImUFVrd
+ JeJ1GDnYUgclqdMGYmJwNxAq4WjIbIxzXPRBY2QnXuVMhnHnn/W8HOETyf1Iy4Cxg3ew
+ lC5BCZ2hdT+RKSSgPIf6719MffRhlDrZBilz1Je29fexvHWUluqsos2s6/tbHoOAERh+
+ W2sw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVStfhy3rH5umHl5udLGrqnBHDUGH40x9URemwoZRmcqoXVAiuS0+PpY7zhl6YbvCMheJtdBtE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxftSCx7YjV3zDYaAprcAXGfj3EpMNumjpDlIL7K6tJIBgY8ndr
- KaAnn4Yi+8hBV9UgRVA46rgXxq9Vt2DXSDhw5+ZZNxsKAgOcwteLcLyqsE1ytts=
-X-Google-Smtp-Source: AGHT+IGkVkRLAnFMNBhq2ckUOemFjVtte20pPdMd8MyjD2M8rkjLNilgJw3+H78iaM35SB0WEslugA==
-X-Received: by 2002:a5d:6585:0:b0:368:117c:84fd with SMTP id
- ffacd0b85a97d-37cd5a6b529mr7989547f8f.3.1727706437918; 
- Mon, 30 Sep 2024 07:27:17 -0700 (PDT)
+ AJvYcCUU2qBpInJUN6EjMACDuIulcdsXZQtuX/nDD87MMRv3qc2KALP1EX3h6+Gngjh5tN0Coq/3SlU=@lists.denx.de
+X-Gm-Message-State: AOJu0YwYF/uhWXt1d/fEAmQcxAQ6dD10zP4TQ0vF5BCAIJWpOEdQlJey
+ UezRDuiwHUwkD47HrUpnTCAxSQtc8Gydl5yEN8l+TEYBEiJbbLLKgmp2hp2x0Oo=
+X-Google-Smtp-Source: AGHT+IHhiYsNkXlX5g4IUoMh0HORNQHbGXHCfjgU5EU1KIVllNY9lq9Dv9QYHatl7s+K306KvyOjJQ==
+X-Received: by 2002:a5d:410a:0:b0:37c:cfeb:e612 with SMTP id
+ ffacd0b85a97d-37cd5a6923bmr8365122f8f.1.1727706438717; 
+ Mon, 30 Sep 2024 07:27:18 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:8261:5fff:fe11:bdda])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37cd564d2e8sm9303200f8f.18.2024.09.30.07.27.16
+ ffacd0b85a97d-37cd564d2e8sm9303200f8f.18.2024.09.30.07.27.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Sep 2024 07:27:17 -0700 (PDT)
+ Mon, 30 Sep 2024 07:27:18 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>
-Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Da Xue <da@libre.computer>
-In-Reply-To: <20240917-u-boot-topic-dynamic-uuid-v2-0-416e39c6e271@linaro.org>
-References: <20240917-u-boot-topic-dynamic-uuid-v2-0-416e39c6e271@linaro.org>
-Subject: Re: [PATCH v2 0/2] ARM: meson: libretech-ac: add support for EFI
- Capsules Update
-Message-Id: <172770643662.753773.10601289383991053323.b4-ty@linaro.org>
-Date: Mon, 30 Sep 2024 16:27:16 +0200
+Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, da@libre.computer, 
+ ilias.apalodimas@linaro.org
+In-Reply-To: <20240920-u-boot-topic-libre-computer-solitude-alta-v1-0-8915b108840b@linaro.org>
+References: <20240920-u-boot-topic-libre-computer-solitude-alta-v1-0-8915b108840b@linaro.org>
+Subject: Re: [PATCH 0/2] board: libre-computer: Add support for Libre
+ Computer aml-a311d-cc & aml-s905d3-cc boards
+Message-Id: <172770643803.753773.10093460884732350284.b4-ty@linaro.org>
+Date: Mon, 30 Sep 2024 16:27:18 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,22 +98,25 @@ X-Virus-Status: Clean
 
 Hi,
 
-On Tue, 17 Sep 2024 14:34:44 +0200, Neil Armstrong wrote:
-> The necessary changes were made in U-Boot to easily support
-> EFI Capsules Update and be compliant with Arm SystemReady IR.
+On Fri, 20 Sep 2024 15:33:32 +0200, Neil Armstrong wrote:
+> Add support for the Libre Computer aml-a311d-cc "Alta" & aml-s905d3-cc
+> "Solitude" boards:
+> https://libre.computer/products/aml-a311d-cc/
+> https://libre.computer/products/aml-s905d3-cc/
 > 
-> Let's add support for the libretech-ac/AML-S805X-CC since
-> it's an easy well-supported target having a dedicated SPI
-> Flash to store U-Boot.
+> The Alta & Solitude boards have a Credit Card form factor, similar to the
+> the previous "Le Potato" card, but with the Amlogic A311D or S903D3 SoCS,
+> MIPI DSI and CSI connectors. PoE header and a single USB2 Type-C
+> connector replacing the microUSB one for power and USB 2.0.
 > 
 > [...]
 
 Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-amlogic (u-boot-amlogic-next)
 
-[1/2] board: libretech-ac: move board support into dedicated directory
-      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/8297f25e99f54b9ba8dcbf68a9299ca1b0022f14
-[2/2] board: libre-computer: aml-s805x-cc: Enable capsule updates
-      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/0c4ad96cb7f7a6a771830f934ef333d2da0f2b90
+[1/2] ARM: meson: add support for Libre Computer aml-a311d-cc
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/0ace48fc0990381450a4dfc75275eeade202a8ed
+[2/2] ARM: meson: add support for Libre Computer aml-s905d3-cc
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/aae228b1a590e840ae15f84c97b5b66da7cd4a2d
 
 -- 
 Neil
