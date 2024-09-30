@@ -4,82 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C323CE8347
-	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 14:27:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA7CCCE8356
+	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 14:57:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A49188E1A;
-	Mon, 30 Sep 2024 16:27:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1EE3288DA9;
+	Mon, 30 Sep 2024 16:57:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="c0fHPPjk";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="PYpXgZRd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E6C6881C1; Mon, 30 Sep 2024 16:27:21 +0200 (CEST)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 19DFE88DE6; Mon, 30 Sep 2024 16:57:45 +0200 (CEST)
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on20601.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2413::601])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 48E0F88915
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 16:27:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C0F2A88D86
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 16:57:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-37ccdc0d7f6so2283506f8f.0
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 07:27:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1727706439; x=1728311239; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jvw5KqLxLj1F5gegJYYVjZJm0uru/pqT1hBAosgRBe0=;
- b=c0fHPPjkHd9eJBbfG/rcsEg/ASBsDjrqvB8JTlFJzm1TTkTV99JxltptCIPlUVij5t
- OExnJqpwGDutDOyhuKp5b6Ns2cHwjf88q0mrOWylDL46olLsSp6iziziuikxd7ZbEetO
- Ee+1YLa4J3xTdxQynMLMk/Bwhx6kwPDpNdABrAI0BC87DlxIxGD792u9QcPN8sSJa6Se
- v/n4zx+zo9pnZL7FKs0SMNkCiCDQ2j4JLvQrbW/dsVOROCGGkZvc5xmrJ5IbhirrUQ5U
- JWdY6qNHoTS+KFzh/+WBlfZp+BpMVTf2jTGhSqTQtDLHtB1MCHqARhityjxs8Y8K/Rnp
- jEWg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727706439; x=1728311239;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=jvw5KqLxLj1F5gegJYYVjZJm0uru/pqT1hBAosgRBe0=;
- b=fY9DWJsyPX7Vr+TQlen6TgDVLN8grSHa8OsWwkeCujUR6l3ERS8CSqnHVeTI8D7gGV
- JfXzoQ4d+NQnUObbEN6+4QgKPKenuxd/oxbq8amU1e5CttIA7kaF31rzFTp+I1yiieP+
- iuEMRUBD4UUUdTgk6HGYv3/RVXSS7oD8wI3QXVwgzFM0o8Xnnxw/7JLPhcxkXImUFVrd
- JeJ1GDnYUgclqdMGYmJwNxAq4WjIbIxzXPRBY2QnXuVMhnHnn/W8HOETyf1Iy4Cxg3ew
- lC5BCZ2hdT+RKSSgPIf6719MffRhlDrZBilz1Je29fexvHWUluqsos2s6/tbHoOAERh+
- W2sw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUU2qBpInJUN6EjMACDuIulcdsXZQtuX/nDD87MMRv3qc2KALP1EX3h6+Gngjh5tN0Coq/3SlU=@lists.denx.de
-X-Gm-Message-State: AOJu0YwYF/uhWXt1d/fEAmQcxAQ6dD10zP4TQ0vF5BCAIJWpOEdQlJey
- UezRDuiwHUwkD47HrUpnTCAxSQtc8Gydl5yEN8l+TEYBEiJbbLLKgmp2hp2x0Oo=
-X-Google-Smtp-Source: AGHT+IHhiYsNkXlX5g4IUoMh0HORNQHbGXHCfjgU5EU1KIVllNY9lq9Dv9QYHatl7s+K306KvyOjJQ==
-X-Received: by 2002:a5d:410a:0:b0:37c:cfeb:e612 with SMTP id
- ffacd0b85a97d-37cd5a6923bmr8365122f8f.1.1727706438717; 
- Mon, 30 Sep 2024 07:27:18 -0700 (PDT)
-Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:8261:5fff:fe11:bdda])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37cd564d2e8sm9303200f8f.18.2024.09.30.07.27.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Sep 2024 07:27:18 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-To: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>
-Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, da@libre.computer, 
- ilias.apalodimas@linaro.org
-In-Reply-To: <20240920-u-boot-topic-libre-computer-solitude-alta-v1-0-8915b108840b@linaro.org>
-References: <20240920-u-boot-topic-libre-computer-solitude-alta-v1-0-8915b108840b@linaro.org>
-Subject: Re: [PATCH 0/2] board: libre-computer: Add support for Libre
- Computer aml-a311d-cc & aml-s905d3-cc boards
-Message-Id: <172770643803.753773.10093460884732350284.b4-ty@linaro.org>
-Date: Mon, 30 Sep 2024 16:27:18 +0200
+ spf=fail smtp.mailfrom=Padmarao.Begari@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=NE/hfl5mfEJKZv2wdv2j1HrxV8mS1JY06TuYWZvP+hkTWpae76G4SR4awB/zMe2MO/dxJhTCe+xkVZpV0eFYzepu8mQQAaSrgowrFnsNzt+qa1ojKnoCzQgKAs9+enJKuCnD5u+wBFZDN5f3+5MEI6VH09FtWao3u91cjQ81868qrUPRHcQONn00wWETTocdG44XmjTsytksxZlGGBt8LyOHtM7NwPXbUBwQp/Jcoc+AweISLUCiShCtmVTxTefs5mElchEXvsxJPV6UOkcgAG57gnp0DLHiS37LkiV3Y5X3/6H69wXotnAplTI22XLpoOAmgsjzHTqW0u0qkKBgGg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=hFNtj+tbzQSjGfb7DN0oQIWaofXRYOp5/tEhudMH8xQ=;
+ b=nm2H7XWBdbHcyhuNzgk3i0yrYovVLYoWpnF5O5uHJW5pX0kLzHZf6f+aG6RfEIbSP7QDEFR4Yd0YOgIMQopQ1wjR/zAP+4jhpYnGYLscIatRzyWgFAQWY8bgXthpKGiHVKE770Rdah+ZSqGk25S1WKVYlkTrgvn6tRl5gYli4uIMZl4qOi/MZJ6F5s9UDs4ZuprFVxofEwc1To+R1bZPHgd0h2W0jp7Zn/yCweColaQJqJx0e4BcuzfB73kWXfkWMx9ComiCrINFEsmxC63Gez3A4v28Krv+r0PI6qXj3PqUDnx+anBf9clNjJv5bVmR1Rbc4aWVCrCmmJflraJv3g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=hFNtj+tbzQSjGfb7DN0oQIWaofXRYOp5/tEhudMH8xQ=;
+ b=PYpXgZRd1uO5FNSbSjvVAYZX5amXxiImVq+y5f56IlB2fnEp7Zq5Ao7LC5e0lfDZBOTb1XOvhvelPgQYlrClhZwNjeKd6ZmqPJI4MoHIeS6PyW24Oqsf3zjgF+uzifp/qKxz1l0J9GpWxmGLn/sOA6tpIXZ7g50Rxgg0E42utwo=
+Received: from BY1P220CA0021.NAMP220.PROD.OUTLOOK.COM (2603:10b6:a03:5c3::16)
+ by PH8PR12MB7205.namprd12.prod.outlook.com (2603:10b6:510:227::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8005.25; Mon, 30 Sep
+ 2024 14:57:35 +0000
+Received: from SJ1PEPF00002324.namprd03.prod.outlook.com
+ (2603:10b6:a03:5c3:cafe::bd) by BY1P220CA0021.outlook.office365.com
+ (2603:10b6:a03:5c3::16) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8005.27 via Frontend
+ Transport; Mon, 30 Sep 2024 14:57:35 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ SJ1PEPF00002324.mail.protection.outlook.com (10.167.242.87) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8026.11 via Frontend Transport; Mon, 30 Sep 2024 14:57:34 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 30 Sep
+ 2024 09:57:23 -0500
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 30 Sep
+ 2024 09:55:25 -0500
+Received: from xhdkummari40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Mon, 30 Sep 2024 09:55:23 -0500
+From: Padmarao Begari <padmarao.begari@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <git@amd.com>, <michal.simek@amd.com>, <venkatesh.abbarapu@amd.com>,
+ <Prasad.Kummari@amd.com>
+Subject: [PATCH] xilinx: common: fix board_late_init() for Microblaze
+Date: Mon, 30 Sep 2024 20:25:16 +0530
+Message-ID: <20240930145516.755826-1-padmarao.begari@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF00002324:EE_|PH8PR12MB7205:EE_
+X-MS-Office365-Filtering-Correlation-Id: f6160b64-32b2-4b25-b0e2-08dce16037ed
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|376014|36860700013|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?wkrjKvN4qY0MtuK09TG6mD//5TcRsyO16l0Q7ONMy7s4Wt8Bp1Q2WsnV/Shm?=
+ =?us-ascii?Q?88ytZYr8koVXHg62PJNXK30YYw40ZBtXWz9FUfAa59EZLx8VKZu5iylTE56y?=
+ =?us-ascii?Q?q0fePJFMlnoshVvxj46Abq514urvfXvONbfxFfVFCC/ow2snTvf4n7pxt8zi?=
+ =?us-ascii?Q?hr/jRYrPtFJ32qYeAsw3HYCYdkKHx3wf6wW1CRx0+oauEBztYWenCcb1afg/?=
+ =?us-ascii?Q?xUaZtrKch3RfK5R3URDFIHZyJXSjBX9YEtRhiJfDW8XpcaOjNyiE0m4ZzOcZ?=
+ =?us-ascii?Q?Z1LzzJdMnlG+H2SnmAaYaTMCLAWPe+wce4krD7zY9z3O9vft090dsUoTim5e?=
+ =?us-ascii?Q?UDnNmgrb4AS56M2vHt4Efv7g2YBqHRBE9TdvxIrZhEm/CRqT06N0bCk59bxa?=
+ =?us-ascii?Q?oKMsv7yI+fdsgOiBv64Z4uI+mJbEcmACAwjeBPj3YYEHc/70xBYqP8e2/ddH?=
+ =?us-ascii?Q?ENKtatXFiYzdHN0C5ad0FKu3HeRBopF4tlr2fW+UqGQGE8B0xR5H+1aXXXnz?=
+ =?us-ascii?Q?Y/R/4c/TRusRwInJwOz1MJ0xUoJYKe/1pibEo/aY9zG26YvGKUKrNzwIr4qW?=
+ =?us-ascii?Q?3WE/HluqREY+E5tttaZX3H9bqGJkn885Ih4ASReDVOpZBr9+jGQ4Hm51plZG?=
+ =?us-ascii?Q?/IjC+RJrZekD8nugPGAwIXo8OSJ8K+E/JoqAzaX40/BKC5GVOmFpM3xZyjV1?=
+ =?us-ascii?Q?ttRSC31CSpEUxw5/DKoLCcGn95J5LRu6TIDI1Dz/DFd/k4euAvxc6FFATIAc?=
+ =?us-ascii?Q?gV5pXcYBo2/P86OU6rsYcuA7D6/0k2ZPAIVMCcLpSm9eEO2D7hB63jWQyjdQ?=
+ =?us-ascii?Q?sXV98NAQxYr/u9eos1enP2T3EzzUCr5LjF56ptWYsCf1yPHn/dMum6eKmr8B?=
+ =?us-ascii?Q?xUbqv6kuGYTc5Ltjut9es6a35IvluhpVmHomijZRNkLu1poB381RgPkW+pNU?=
+ =?us-ascii?Q?Nplg7MPzcIgQr5zh6mOfkwHlRWNhIyj+U1ajMIK7nEwCkiEZNhJ2mlnjE1pF?=
+ =?us-ascii?Q?Iy2elgiKwCRBX9b8BoPXGrazbR4USvZVGpHufG70I7HD0imzjb6kQrLUEM1q?=
+ =?us-ascii?Q?+q9iWi+sscbCDJlfkYs9evkh/3cowWC83Gnn9/H1kNBqyurPn4A9ub4iSxNg?=
+ =?us-ascii?Q?V+xlfMra6+oyySYIdDnm6SQ4s3mTF+E0zP7B5fgaPrM+54WqyOEL8JbJqNw8?=
+ =?us-ascii?Q?Ci0a0dBXiMCaPnbITtndygg9mEu6ZaUD6MWB02etAj7PrC2gyTEaX39CCAOv?=
+ =?us-ascii?Q?42Dd1JMpWtmotEocSqIiwqcyUCba+5rRUdgromoo0nQaA1yvDf24gUHW8r1w?=
+ =?us-ascii?Q?G6GL+MN1hheIyrW89QbjofhYowkm4AE0XZAKqC30ce1rEXVPjTT+uZilWQJH?=
+ =?us-ascii?Q?Sf1nnoO3derPULssd42pKgWAnok2g9mOmu9bAbpYoCoQ8KwkfDM1nLRTF+19?=
+ =?us-ascii?Q?Qzyycx0huG0UXXDaNTpKQc1hxxw3a1Z4?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2024 14:57:34.9795 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: f6160b64-32b2-4b25-b0e2-08dce16037ed
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF00002324.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB7205
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,28 +148,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Fix the issue introduced by commit 067e0294806e
+("board: xilinx: Remove conditional check for Microblaze").
+The scriptaddr should be physical location not really offset
+from start of DDR. It is assigned initially with offset.
+When U-Boot is not found boot.scr script address in device tree,
+then it is calculated based on offset and ram base address for
+Microblaze in board_late_init_xilinx() function.
 
-On Fri, 20 Sep 2024 15:33:32 +0200, Neil Armstrong wrote:
-> Add support for the Libre Computer aml-a311d-cc "Alta" & aml-s905d3-cc
-> "Solitude" boards:
-> https://libre.computer/products/aml-a311d-cc/
-> https://libre.computer/products/aml-s905d3-cc/
-> 
-> The Alta & Solitude boards have a Credit Card form factor, similar to the
-> the previous "Le Potato" card, but with the Amlogic A311D or S903D3 SoCS,
-> MIPI DSI and CSI connectors. PoE header and a single USB2 Type-C
-> connector replacing the microUSB one for power and USB 2.0.
-> 
-> [...]
+Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
+---
+ board/xilinx/microblaze-generic/microblaze-generic.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-amlogic (u-boot-amlogic-next)
-
-[1/2] ARM: meson: add support for Libre Computer aml-a311d-cc
-      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/0ace48fc0990381450a4dfc75275eeade202a8ed
-[2/2] ARM: meson: add support for Libre Computer aml-s905d3-cc
-      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/aae228b1a590e840ae15f84c97b5b66da7cd4a2d
-
+diff --git a/board/xilinx/microblaze-generic/microblaze-generic.c b/board/xilinx/microblaze-generic/microblaze-generic.c
+index 2b035d5358..356b247aec 100644
+--- a/board/xilinx/microblaze-generic/microblaze-generic.c
++++ b/board/xilinx/microblaze-generic/microblaze-generic.c
+@@ -56,6 +56,7 @@ int board_late_init(void)
+ 
+ 	max_size = gd->start_addr_sp - CONFIG_STACK_SIZE;
+ 	max_size = round_down(max_size, SZ_16M);
++	max_size -= gd->ram_base;
+ 
+ 	status |= env_set_hex("scriptaddr", max_size + SZ_2M);
+ 
 -- 
-Neil
+2.25.1
 
