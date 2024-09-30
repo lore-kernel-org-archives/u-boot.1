@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5DEECF6498
-	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 01:50:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C025CF6495
+	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 01:50:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC34F88D9A;
-	Mon, 30 Sep 2024 03:50:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7C5B888DD1;
+	Mon, 30 Sep 2024 03:50:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PoxGtDtr";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FoxxQCF6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3FBED88D9C; Mon, 30 Sep 2024 03:50:12 +0200 (CEST)
-Received: from mail-il1-x12a.google.com (mail-il1-x12a.google.com
- [IPv6:2607:f8b0:4864:20::12a])
+ id EB9E888DBA; Mon, 30 Sep 2024 03:50:12 +0200 (CEST)
+Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
+ [IPv6:2607:f8b0:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91EF188DC0
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 03:50:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A9EE88DC1
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 03:50:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12a.google.com with SMTP id
- e9e14a558f8ab-3a1a412638fso16590815ab.1
- for <u-boot@lists.denx.de>; Sun, 29 Sep 2024 18:50:08 -0700 (PDT)
+Received: by mail-il1-x12b.google.com with SMTP id
+ e9e14a558f8ab-3a340f9dd8aso22157415ab.2
+ for <u-boot@lists.denx.de>; Sun, 29 Sep 2024 18:50:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727661007; x=1728265807; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727661008; x=1728265808; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=T4Zbsl3FmgVUUNcL4fqwwQH2wLjEgIXNiyEBtDIEC5M=;
- b=PoxGtDtr05Y7s3F58PQvMjY/yV+jP6EYvKpi5Lh7kKoFR/vxtsuXyCWJSaQxRNvFrd
- lO1SJYr2VYhUuHMJU+xnIxUSwAOAkggTFR1rsFR+yS7wA7fZWpVA3mitQ1iimr2Jfbbv
- b0y0zu2xjXLOl5tnp9RSxVHPl4ngzfJ1hsKik=
+ bh=MaUkLAb/tzjoG/kpNA2a1s2g3n3b4WrRqzfRqyUWjLk=;
+ b=FoxxQCF64CbmhiYwZUIWaWlqilJ2l0QY+qaOWn7h8WKm0DwGE7my59ntvyWIvEshDr
+ gMA2T2CF8U6IbzHXr4JP9tmT+asbqouhFaR0YTBLO/EzphbsSpkI0cqNy8B59I9CKuZ0
+ hm6HSe1aWnsCpysRXLxSMItBmuKqbHyKu+I0M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727661007; x=1728265807;
+ d=1e100.net; s=20230601; t=1727661008; x=1728265808;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=T4Zbsl3FmgVUUNcL4fqwwQH2wLjEgIXNiyEBtDIEC5M=;
- b=cN/4hAL0ajktvg1ZP2TuZdF+kMYn/+hVJAS1au+sYA15V86w8TLz4zF062Ljtf2MO9
- URFWqr1iVc1aPwyTGn7HLXnLtDXCaLfcnyAH4ktIIfuZTGMFWxT6p8haqYZdy9DiEDE8
- 0Kz/iTKuOTe1rxsrbohg70pJoLbCjRztX6XrNYVeAgNi35Fkj20waSnGo9iqNvKboXCl
- D04ZceLGCsowZcv5gtbR0KgIkcs/LEN9f9Yu14WfiLB2hTbLX5roBHhJ594OcN8H3Z7O
- 16olAxUWoEd9gD+dYiFrQLAh+f0igjcFoJO6LLANmYpm2JXNC9736KfYec91Gb4kncqG
- dvrQ==
-X-Gm-Message-State: AOJu0YwQUpRinaUhCO3m1Qa9L3WWiW4FQdWedBS1yENZaiKjG5xBPr9a
- 2m7y17yEk4uAM8rGB00eBiZEdm0nTblVNxP7tmuBX05UIKl00z+ophY0cedgd5GgXWApXNqIO2X
- lHA==
-X-Google-Smtp-Source: AGHT+IGGLDED+867h+JLL8GrTt15WCc9rv4mk+hC01pD2xCMpeZSojF4sRPgia9EgVuOioXw6lUdxQ==
-X-Received: by 2002:a05:6e02:1848:b0:3a0:9043:59ac with SMTP id
- e9e14a558f8ab-3a3452bf576mr84287025ab.25.1727661006956; 
- Sun, 29 Sep 2024 18:50:06 -0700 (PDT)
+ bh=MaUkLAb/tzjoG/kpNA2a1s2g3n3b4WrRqzfRqyUWjLk=;
+ b=OGXg7i+F70sMvpLbkO8SbU5vpKniJRlJc2X0/1XB17xbCCFlW+hUuyhPygIinPOm6N
+ HzfirIv/ERs4WVxwaq+DKd1S80FE5Zgr6YUNU41TizbfaknhFR+d+/I6T99u4VAvWVzO
+ 1FcUakJ3RfZosMQTgIjoOdlUHNcD/fFV0umDMjxFqaVTpzlLz4S8Nv41qzFkGqbM9wW9
+ 1odohjAZxJrRE0TEV1uvS2SHLmEeDZPLf6MlPA8loP/uawOLLq48uMzmKvhnG82IqF9e
+ CPwrTUuGNtYtvsz0Lg5DdGGZlLwo/XV/xbmG3la79PyvfuioOLb975pQSMiwLPq22Fmg
+ u3OA==
+X-Gm-Message-State: AOJu0YzjHUDny8KrrIkLTUCDCIb/WBNbInEdBNO9C/dgBrPClHqrLkPu
+ /zNuN3kE4+TN8jRu0MZrN3VQhR0vn6M4idLyWjX7B2XvRGkSIoTmGsibUuc13QGxV+l+82TAwUs
+ bCw==
+X-Google-Smtp-Source: AGHT+IGkGbSfFm5gpN1c0IfhhB/G3pCsVkoq6NCIPr6Bhbat0tbpC+LMXrImPcwZ14mue13IWzcYow==
+X-Received: by 2002:a92:ca08:0:b0:3a0:c23f:9647 with SMTP id
+ e9e14a558f8ab-3a34514afc2mr87069585ab.1.1727661008205; 
+ Sun, 29 Sep 2024 18:50:08 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3a344de1d5fsm22074185ab.62.2024.09.29.18.50.05
+ e9e14a558f8ab-3a344de1d5fsm22074185ab.62.2024.09.29.18.50.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 29 Sep 2024 18:50:06 -0700 (PDT)
+ Sun, 29 Sep 2024 18:50:07 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Julien Masson <jmasson@baylibre.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Subject: [PATCH v3 02/33] boot: Drop unnecessary ifdef for LOAD_FIT
-Date: Sun, 29 Sep 2024 19:49:25 -0600
-Message-Id: <20240930014956.1434060-3-sjg@chromium.org>
+ Stephen Warren <swarren@nvidia.com>,
+ Stephen Warren <swarren@wwwdotorg.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Thierry Reding <treding@nvidia.com>,
+ Tom Warren <twarren@nvidia.com>
+Subject: [PATCH v3 03/33] tegra: Drop dependency on SPL_BUILD
+Date: Sun, 29 Sep 2024 19:49:26 -0600
+Message-Id: <20240930014956.1434060-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240930014956.1434060-1-sjg@chromium.org>
 References: <20240930014956.1434060-1-sjg@chromium.org>
@@ -92,31 +92,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use the normal SPL_TPL_ approach for this option.
+SPL_BUILD is not a Kconfig symbol so perhaps the intent here is to
+use SPL instead. But that changes the output size.
+
+So drop the dependency on !SPL_BUILD since it does nothing.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+Changes in v3:
+- Correct the subject to match what the patch changed to do
 
- boot/Makefile | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ arch/arm/mach-tegra/tegra124/Kconfig | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/boot/Makefile b/boot/Makefile
-index f4675d6ffd5..40e2337de0f 100644
---- a/boot/Makefile
-+++ b/boot/Makefile
-@@ -58,9 +58,7 @@ obj-$(CONFIG_$(SPL_TPL_)FIT_CIPHER) += image-cipher.o
- 
- obj-$(CONFIG_CMD_ADTIMG) += image-android-dt.o
- 
--ifdef CONFIG_SPL_BUILD
--obj-$(CONFIG_SPL_LOAD_FIT) += common_fit.o
--endif
-+obj-$(CONFIG_$(SPL_TPL_)LOAD_FIT) += common_fit.o
- 
- obj-$(CONFIG_$(SPL_TPL_)EXPO) += expo.o scene.o expo_build.o
- obj-$(CONFIG_$(SPL_TPL_)EXPO) += scene_menu.o scene_textline.o
+diff --git a/arch/arm/mach-tegra/tegra124/Kconfig b/arch/arm/mach-tegra/tegra124/Kconfig
+index fb016aa46c9..84c8f86bad0 100644
+--- a/arch/arm/mach-tegra/tegra124/Kconfig
++++ b/arch/arm/mach-tegra/tegra124/Kconfig
+@@ -21,8 +21,8 @@ config TARGET_CEI_TK1_SOM
+ 	bool "Colorado Engineering Inc Tegra124 TK1-som board"
+ 	select ARCH_SUPPORT_PSCI
+ 	select BOARD_LATE_INIT
+-	select CPU_V7_HAS_NONSEC if !SPL_BUILD
+-	select CPU_V7_HAS_VIRT if !SPL_BUILD
++	select CPU_V7_HAS_NONSEC
++	select CPU_V7_HAS_VIRT
+ 	help
+ 	  The Colorado Engineering Tegra TK1-SOM is a very compact
+ 	  (51mmx58mm) board that is functionally almost the same as
 -- 
 2.34.1
 
