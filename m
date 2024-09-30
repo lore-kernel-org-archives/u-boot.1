@@ -4,54 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71C55CF649D
-	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 09:14:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83203CF6497
+	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 09:34:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0DF0E88D2E;
-	Mon, 30 Sep 2024 11:14:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id DC89888CA3;
+	Mon, 30 Sep 2024 11:34:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Lzwbfozf";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ChVNW/7C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4317888B55; Mon, 30 Sep 2024 11:14:33 +0200 (CEST)
-Received: from mail-m21473.qiye.163.com (mail-m21473.qiye.163.com
- [117.135.214.73])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 795DC88CA3; Mon, 30 Sep 2024 11:34:28 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1945588AD7
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 11:14:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 1FB1B88D4F
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 11:34:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=LzwbfozfiABuQ3OyT6Gy0kx//i7hy6Wlfqn2cftimZAbV24+U8ONhqeDXSJ1RBnspVfkvhC8z2x5qU3uCwNr/3pqf9K1RUvlwBA7nviCkn/duxAOD7axf/oV0G2pCtaorEhV+qhS4oCUgKaZxz4JcxVgybnddwcC0igryGU5WWw=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=+kccSnM8vkYtVinz5GmmTrQK/BI6w+Fw6xVhZ/swPVY=;
- h=date:mime-version:subject:message-id:from;
-Received: from localhost.localdomain (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id D5F0B280965;
- Mon, 30 Sep 2024 17:14:24 +0800 (CST)
-From: Kever Yang <kever.yang@rock-chips.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de
-Subject: Pull request: u-boot-rockchip-20240930
-Date: Mon, 30 Sep 2024 17:14:24 +0800
-Message-Id: <20240930091424.2696174-1-kever.yang@rock-chips.com>
-X-Mailer: git-send-email 2.25.1
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 48U9YBZW062091;
+ Mon, 30 Sep 2024 04:34:11 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1727688851;
+ bh=vJ945bPOtPS67zFmt7xl/wYPhbPgEdsY/ZcmZ9XCqCc=;
+ h=From:To:CC:Subject:Date;
+ b=ChVNW/7C6JaxpR2gfHDFxUuxQex/bVdcFgKVjtab8u28IN5KZx+I0JjjKiQC2PNG8
+ 9hZz5ir2uXGJ0LZx8qcNh1rGlYLidNF5VBrgHRNKb98xpmcOFu6onU76lRkxTnOsi1
+ hw4KKWIt0uCFOWFR70ephX55yVkFbNh2CAfDihyQ=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 48U9YB9N064723
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 30 Sep 2024 04:34:11 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 30
+ Sep 2024 04:34:11 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 30 Sep 2024 04:34:11 -0500
+Received: from uda0492258.dhcp.ti.com (uda0492258.dhcp.ti.com [10.24.72.81])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 48U9Y7Mh023165;
+ Mon, 30 Sep 2024 04:34:08 -0500
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+To: <trini@konsulko.com>, <lukma@denx.de>, <mkorpershoek@baylibre.com>,
+ <marex@denx.de>, <rogerq@kernel.org>, <vigneshr@ti.com>, <jjhiblot@ti.com>
+CC: <u-boot@lists.denx.de>, <srk@ti.com>, <s-vadapalli@ti.com>
+Subject: [PATCH] usb: gadget: cdns3: Fix missing cache operations for non-zero
+ Endpoints
+Date: Mon, 30 Sep 2024 15:04:07 +0530
+Message-ID: <20240930093407.2998969-1-s-vadapalli@ti.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQxkYQlZJQhhOTxkfGBgfQh1WFRQJFh
- oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
- hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a924235a54d09d3kunmd5f0b280965
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PDo6EQw6PzIqIiMaFRg8HRpW
- KyMKCwpVSlVKTElMTUNMTU1OT0lOVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKT01JNwY+
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,32 +79,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Transfer initiation and completion for the non-zero Endpoints are
+handled by cdns3_ep_run_transfer() and cdns3_transfer_completed()
+respectively.
 
-Please pull the fixex for rockchip platform:
-- rk8xx pmic fix
+Failing to flush the cache associated with the TRB Pool within
+cdns3_ep_run_transfer() results in the transfers never being initiated.
+Similarly, failing to invalidate the cache associated with the TRB pool
+within cdns3_transfer_completed() results in the transfers never being
+completed.
 
-CI:
-https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/22470
+Fix this.
 
-Thanks,
-- Kever
+Fixes: 7e91f6ccdc84 ("usb: Add Cadence USB3 host and gadget driver")
+Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+---
 
-The following changes since commit 596465138175cd7e4171cad1e68a2ef7c5c002bc:
+Hello,
 
-  regulator: rk8xx: Fix buck get and set enabled state on RK806 (2024-09-27 18:20:49 +0800)
+This patch is based on commit
+56b47b8b6a Merge tag 'u-boot-stm32-20240926' of https://source.denx.de/u-boot/custodians/u-boot-stm
+of the master branch of U-Boot.
 
-are available in the Git repository at:
+This patch has been validated on AM642-EVM in the context of Fastboot.
+Fastboot is non-functional without this patch. EP1 is configured in
+Bulk Mode for Fastboot and is non-responsive. This patch addresses the
+issue, thereby enabling Fastboot.
 
-  https://source.denx.de/u-boot/custodians/u-boot-rockchip.git tags/u-boot-rockchip-20240930
+Regards,
+Siddharth.
 
-for you to fetch changes up to 7210de40a25a222043aed1348ec667a5ccc204b6:
+ drivers/usb/cdns3/gadget.c | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
-  regulator: rk8xx: Use buck variable consistently (2024-09-27 18:20:49 +0800)
+diff --git a/drivers/usb/cdns3/gadget.c b/drivers/usb/cdns3/gadget.c
+index 32b2c41206..ac7e469469 100644
+--- a/drivers/usb/cdns3/gadget.c
++++ b/drivers/usb/cdns3/gadget.c
+@@ -965,6 +965,12 @@ int cdns3_ep_run_transfer(struct cdns3_endpoint *priv_ep,
+ 	if (priv_dev->dev_ver <= DEV_VER_V2)
+ 		cdns3_wa1_tray_restore_cycle_bit(priv_dev, priv_ep);
+ 
++	/* Flush TRBs */
++	flush_dcache_range((unsigned long)priv_ep->trb_pool,
++			   (unsigned long)priv_ep->trb_pool +
++			   ROUND(sizeof(struct cdns3_trb) * priv_ep->num_trbs,
++				 CONFIG_SYS_CACHELINE_SIZE));
++
+ 	trace_cdns3_prepare_trb(priv_ep, priv_req->trb);
+ 
+ 	/*
+@@ -1153,6 +1159,13 @@ static void cdns3_transfer_completed(struct cdns3_device *priv_dev,
+ 				priv_ep->endpoint.desc->bEndpointAddress);
+ #endif
+ 
++		/* Invalidate TRBs */
++		invalidate_dcache_range((unsigned long)priv_ep->trb_pool,
++					(unsigned long)priv_ep->trb_pool +
++					ROUND(sizeof(struct cdns3_trb) *
++					      priv_ep->num_trbs,
++					      CONFIG_SYS_CACHELINE_SIZE));
++
+ 		if (!cdns3_request_handled(priv_ep, priv_req))
+ 			goto prepare_next_td;
+ 
+-- 
+2.40.1
 
-----------------------------------------------------------------
-Jonas Karlman (1):
-      regulator: rk8xx: Use buck variable consistently
-
- drivers/power/regulator/rk8xx.c | 14 ++++++++------
- 1 file changed, 8 insertions(+), 6 deletions(-)
