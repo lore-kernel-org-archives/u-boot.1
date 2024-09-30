@@ -4,215 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B828DCF6497
-	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 06:10:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 912A0CF6497
+	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 06:38:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E2D188D9B;
-	Mon, 30 Sep 2024 08:10:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
+	by phobos.denx.de (Postfix) with ESMTP id 00E9488670;
+	Mon, 30 Sep 2024 08:38:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="x1b0FPAp";
+	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="UTtldXQH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0B3D88CA3; Mon, 30 Sep 2024 08:10:52 +0200 (CEST)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2614::601])
+ id C4474886FD; Mon, 30 Sep 2024 08:38:49 +0200 (CEST)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100000.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8574288D86
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 08:10:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BE518885D1
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 08:38:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jan.kiszka@siemens.com
+ dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=peng.fan@nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=fi+N8dhsI/MppeHGyRjgOuIrA9d+pWW3dunjbzCIsSxo2gO6ZCjdsx6n7A9hKm5EotEKZKkJbM/sbfCosOeYiPOxfuYszAejsAfOGmKOGi8Xs8F2zzkRNgh49TsWPA6wVJ2nhADw+x00QA9k/9+eFHdKDPU7bYlBrEiDHxhcdguhYsMPltZhV2vdTCNR5LZ8p78BVBScNc4LRkCHDtsfex+1WNy0Ci3acBiB6/Aagl/KMliPqY7FjDiNOIlMY6WiGOYjJN9833iXQ/J9lez8MHICi6MmCyDJxm7QibRYbLlHHrtcKTLVyG86rRPx+dNIiivyyPhxcWEDsRxRTwDmhA==
+ b=Uxultht5cjgw+VIGKovMpyrIefGyyMtFexrxPxmVyW1l66jRIq7OlygRkWfE1KjR2qmuIpW76yMGcjrkMFUmhALpkmJE92eEXjMvN+IpHf5HpDn0TtJZkYKbdSCv1aW67+M6TMFFP1oc5ZXFfkLoeGkTq2zrVsak5tpllk3a0wU+XGMopLaUZJfBAC9eA30C8F3MxeIxU1cvVZYiW0wFoNK97ht8g/yQ/WjYtff93t+yE0wye3xq9YogMRtv5ESdNwzCj9TcKvtP4IVIi59u6xjV62jPcWzqSK8Ps9P/nZkXakQ8nYvrpBWPAt2Km2orc2t5TM3UOfnHP8di5mw+vg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=SZ5gHPCki3DrtehWaQffz6uR8xnid9W9HSP9y/d/o+8=;
- b=IqyYLcnP8j5lldrL1rNoNHcMuNZJ/oAvjz0Y79GVnMNUVEHcpX/iKb2nH/fJ2ipWlV70uHLd4WEhRb8w1iWWWV47twf5hOcFsk7EZ1RJ85CdZWznAHq7z+ccWdTQqJvGloDWIpCDSh9ZJ9YnDS+U+7b+za4RfbKAX7pO+JO0v8yy6DEleMDST9Y0LLW+yBi+8ZkE0ER25UdbFB4kH27nttPw6ASNopAHdgew1/Xiwa1wksc4Ii/gGh4hpMRwtjL8VHLlTk+y3wfW9VtMQ04mPpwiQniwHUnH+JXj2/9CqZITyTJu2hHVl6QI/ZheUY3tnuJP5Nu3X8f4QECOKTO9tw==
+ bh=N0uV5Wl/XNsJGNiNa4an9OCoxSwfUOLqdAFC9wArDOE=;
+ b=Z7KrOsDbwKTx96ST7qZOwwKbNPGTpARvVYT0H4QNi5qcrjNK1SnTSrk5cjNLqNmMajsUpz29z5tHgepvl1TYMmpFi7PnobmRdNKovkbPKMIqD0OOadO/iJkIf+SbVaGVygLelExiSEYoBzv4JNuhi8hEB0jmiLqch00R3Ut+m4wvHpY6Av/Im3mjuHraUIf/Rz6hF5lKrBnur6mvQDZ0vI12JuCoi0NjLo3L6HKpKL97D8j4883DKztaE8vpkj9qnyZ6/1TF7eOLqp8wADf4+4EUWwJITuLPR/1GQ2yijJ0QuiZEwDx11wQ3oQoAU0B/rAaBYH4I19FsnUOXqwfD6Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
- dkim=pass header.d=siemens.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
- s=selector2;
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SZ5gHPCki3DrtehWaQffz6uR8xnid9W9HSP9y/d/o+8=;
- b=x1b0FPAp6a1u0RQNrWX1vZcUnWVUZ7cYf85McGj9vY7pSlqIHq3Cweg5AGbW24G5/cqzKD8jUXGJLZu9nClPxFJpxivUzsUeQ9H4UvN6gW1uJzim7gAL28IntYQaEonlycC78YxSq3ZPIvLThpfComePW0P5eiKe5suHlog9nmQj3u9H83kEPfh8Jw1lJNR/pIc6W3/GqxuX0IEUDOzDTjY3qF+1BBsJWbQnON9bMrTIy7cyHSbcgKOSqYIHI6PrHpci4OOUu7IWoojlL6OHVSvkYxUcJSyuS/o2dYgy3MdPlS1Jta9h6TJ7lpjavUi3pigjcMg79qQuTE9es2c03Q==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=siemens.com;
-Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:588::19)
- by GV1PR10MB5819.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:52::5) with
- Microsoft SMTP Server (version=TLS1_2,
+ bh=N0uV5Wl/XNsJGNiNa4an9OCoxSwfUOLqdAFC9wArDOE=;
+ b=UTtldXQHf6IAHTP2kQ4o7ashZeaiQIWFRWjRBRZ+tPbsl8nSV2RWnLI1ofd++WJuRJZ41+dpig46f+EJMUdyDRaBUWFqkyAgGGfPcPwADyfI5GLvP+7IfCD9iIEKBvjIYYHpY3cfn4yNEVL9W7NmxuUauCsyF7sBnStIpPjwTvVIMCMGQDjCD1kQbWag7/AutcLXL7s6kkTFN66aeaQDV+FkCmsYbuo2NXV8DTFXZz8/dHYsPkd2spxDaIL2mAIjPdv6LAcRWSxM+CP0V6TDE77IYTO21VA4wMMvJcVMmbdQHHesUA+JSjzDXIb1FdBogn52WrxOzPKidTKNbg//GA==
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by AM9PR04MB8289.eurprd04.prod.outlook.com (2603:10a6:20b:3e8::8)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8005.26; Mon, 30 Sep
- 2024 06:10:46 +0000
-Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::8fe1:7e71:cf4a:7408]) by AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::8fe1:7e71:cf4a:7408%3]) with mapi id 15.20.8005.024; Mon, 30 Sep 2024
- 06:10:46 +0000
-Message-ID: <67761100-c52d-4949-8da3-8783782c44da@siemens.com>
-Date: Mon, 30 Sep 2024 08:10:43 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] dts: Add ability to build DTOs only from
- arch/$(ARCH)/dts
-To: Sumit Garg <sumit.garg@linaro.org>, Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- Fabio Estevam <festevam@gmail.com>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Jonas Karlman <jonas@kwiboo.se>,
- Lothar Rubusch <l.rubusch@gmail.com>, Michal Simek <michal.simek@amd.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Simon Glass
- <sjg@chromium.org>, Stefano Babic <sbabic@denx.de>,
- Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
-References: <20240927214955.394224-1-marex@denx.de>
- <20240927214955.394224-2-marex@denx.de>
- <CAFA6WYPPXDJC4kSiBAR=jL-Z0v3a8+=_=+hLx+Ug0+yu407y3Q@mail.gmail.com>
-From: Jan Kiszka <jan.kiszka@siemens.com>
+ 2024 06:38:45 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630%6]) with mapi id 15.20.7982.018; Mon, 30 Sep 2024
+ 06:38:45 +0000
+From: Peng Fan <peng.fan@nxp.com>
+To: Ahmad Fatoum <a.fatoum@pengutronix.de>, "Peng Fan (OSS)"
+ <peng.fan@oss.nxp.com>
+CC: U-Boot Mailing List <u-boot@lists.denx.de>, "barebox@lists.infradead.org"
+ <barebox@lists.infradead.org>, dl-uboot-imx <uboot-imx@nxp.com>, Steffen
+ Trumtrar <str@pengutronix.de>
+Subject: RE: i.MX8/9: question about unused DDR PHY trained CSR board array
+Thread-Topic: i.MX8/9: question about unused DDR PHY trained CSR board array
+Thread-Index: AQHbEOasH/154nFPc0KKSVuBKZ9YPLJv5Acw
+Date: Mon, 30 Sep 2024 06:38:45 +0000
+Message-ID: <PAXPR04MB8459A8BB89FAB50D6871EA9388762@PAXPR04MB8459.eurprd04.prod.outlook.com>
+References: <8074530f-720b-4aea-934b-c0643c356617@pengutronix.de>
+In-Reply-To: <8074530f-720b-4aea-934b-c0643c356617@pengutronix.de>
+Accept-Language: en-US
 Content-Language: en-US
-Autocrypt: addr=jan.kiszka@siemens.com; keydata=
- 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
-In-Reply-To: <CAFA6WYPPXDJC4kSiBAR=jL-Z0v3a8+=_=+hLx+Ug0+yu407y3Q@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR0P281CA0122.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:97::12) To AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:588::19)
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PAXPR04MB8459:EE_|AM9PR04MB8289:EE_
+x-ms-office365-filtering-correlation-id: d606f0b4-a715-48d8-dd2d-08dce11a88bb
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230040|366016|1800799024|376014|38070700018;
+x-microsoft-antispam-message-info: =?us-ascii?Q?UEAhVgm/Fm7qtR65NuBck7W0TnAdWf7ctXjFXTJsBDP+PFAhuYt4fI+d1TQt?=
+ =?us-ascii?Q?7rS16mxyV+DrXEqgn3NG4QdIOh2csP3KrDvt8mInbBuc4dfb2rs3dyvL8Wum?=
+ =?us-ascii?Q?Js27EKFqpkh6Kx2ItibJdytdVstd+ggvpP7fbpFPmT4xpTCdra214mCLE+de?=
+ =?us-ascii?Q?+4nCzXN2i2K5Cn6ULezZjNzH8kF+bJqeGrIiGg4OY36PBBTj/0eum3EBUw3B?=
+ =?us-ascii?Q?uX2p67PHuvR/Lgp5fNUqqfbOmN5XAn/czKG007HyqoY1StLGoJ9YxeLtTpSU?=
+ =?us-ascii?Q?i/7P8CDt+FeDeeaE+0LpmDmCzvGzgcAXmUs428SF6KMCUnP8O7zK/+Qb5Ca5?=
+ =?us-ascii?Q?GvKyjDUsBfFzjE9yeh2HfnvVMjqiFvJA6qKbFG5KU9qD1Bxxk7q7WsCQYlHp?=
+ =?us-ascii?Q?w3wWC420OBLQ3W96iI87PABTgqU3qqkB9Dz4h87DKtzvHMAtqrCdr6MqIFVl?=
+ =?us-ascii?Q?SkZKYv1Ac11BgA1exwbh8aRoh/P/gUZl6ay0bxwWaIKYiGxnnXPR2XUtuJpT?=
+ =?us-ascii?Q?GKgIyrlm4swtnLQH3PXHNXq7txSpzfQcQm+RXCfuyBfzyEMKF9TmNSGE7uJB?=
+ =?us-ascii?Q?g5EzOmllb2QzZQER8A4QctAtPJQ09brogAsOb6YOYLvS2eomySNhCl4YoPWb?=
+ =?us-ascii?Q?Prp/wYoxtr3whYhm3FnIAm+LJfvOtvq0dwsHT5QjreIIfGPewkOjmC3VqvNA?=
+ =?us-ascii?Q?bYxCZ0K912ArCxabqVjA03GWvw4ZjETqRjcUEosxbA1lAC0hzPp/IhAWATPk?=
+ =?us-ascii?Q?AVRRGN+WvDJqDDhJcOmwAlnnyX8ZUXolokUE70x/U0OJT27zbXQ7lgvuITFA?=
+ =?us-ascii?Q?HAAyFDMCMH3LitKKh/XfdbQd1H2Bj3CWpyskEWNZqSscHL0UM/1kan2k7+kM?=
+ =?us-ascii?Q?ovUg7E3LRlpC2CSIsubL1PbRnCDZRVPLywIMZhcPWDlsBdlpppzj1bOUQDro?=
+ =?us-ascii?Q?Gur7X5J24vznGGZQDbScDuAE8hnqy0AX7zSTIrOaqtN7OjNEgaZbHuyg4fJP?=
+ =?us-ascii?Q?kj4U774ApBkwhHdDaqh7DIN5ytn/8fC4T2A3gEmxr54BRYX3zjNDWXo+kXR5?=
+ =?us-ascii?Q?8M3Gei5V+zlSdbwU5KI/6SJj4VxW9XeGTedye0yUhHEi/bcjEMs3FBLg+Dai?=
+ =?us-ascii?Q?PJxp47J+2CmLq7kMfcsu9vUyaNza4TSsw3cWy4CnazGzRZDrq0ca6oDdAbYa?=
+ =?us-ascii?Q?62PqKthbOiovppCqXunatWYPLdUXST7NLf7ypTn5/jOloskNhsVnKW1Ar/sW?=
+ =?us-ascii?Q?ZSRF1T4eeZ/M0sh+KZ8D/eWKwcSyzskL+8GhnSHBIUL1kbvWhWc4ReDer9KF?=
+ =?us-ascii?Q?fLh0FopuJsrqHFrDOHDdeqSQ8TyZxtTGjPbyy0DqcAFruSlbCuLnoaos/glS?=
+ =?us-ascii?Q?O20pgP4WAyK630inyPUC3YfIxJ2VLnOKYzrnhezH/LhU0H4q0A=3D=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(38070700018); DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?L/Gr8klK28yyhPZh3wAEwDkr+clJCST8eD7yRuQdOPzl/8EvFiUkMxENTjgV?=
+ =?us-ascii?Q?oTMXW9AMG9l6R+YCy7IuwbAQDFsAQ5C6RctaBSZJHmWaB44NAqNthUzt9vN+?=
+ =?us-ascii?Q?8a5UCli7xSsPtcaai6+SvuM2PPHZKqoYS5WBe8mcTF3eMFvdkeWSGS+tJKuA?=
+ =?us-ascii?Q?Hj+Rs81hGqD1YSAz+lyCz1m54uNnDyoc3gLW8Vmuxq2c2vQZMfpvMd+rF0PP?=
+ =?us-ascii?Q?6hp5VOJ4o/do9wNKjQeR9L98CRMv1w3WhX6zxt3XKn1aaqPdRPOimqkv7G2T?=
+ =?us-ascii?Q?VPh4/F3wmX3YnZgUxcjBk6un+vPi3o2+7D70N5z+r0hgXS5ztKqaI0DeAXtu?=
+ =?us-ascii?Q?kggq20NTJXdToWnkZc1cPDoS6zuMSqLHp/4pzObX0HYNCMxmjigFiyGocbP7?=
+ =?us-ascii?Q?IC0fSXVNZyf2ll/u91ndIsZW+RFPkfuSZhlaC5t2//f57KjPrD5t+b/THGEg?=
+ =?us-ascii?Q?pvGUrd4ys/61fQlRVBRXAC2BPiEhr57I/fn/3Z4ICdswC/2XC8Sgn5DMS/bc?=
+ =?us-ascii?Q?nGadSs3xsvFZHdZHZuO1Kveftu+1nK9LtDy7+IvE7Be3cCoALHgEkrv6sqIx?=
+ =?us-ascii?Q?UcjOseXyaQuQTIAt38qzdH3qIf6ze+iIqz8V9MZY/Wq566p0ffO2OqWEMKCL?=
+ =?us-ascii?Q?pG6dVT5JSiOYTpOEy+f5VrW8xnhwLdFdyFb3M2KqJ+CZ1BrbS8jew/rie1v5?=
+ =?us-ascii?Q?5dWOHSu+WURcISYYkXaH+6zADv4C80NuRBKSnmURU+WN60kMZxlb38HGMeIE?=
+ =?us-ascii?Q?K7R7zQ8K2C4a8UXlLiZ/oA5sDC7ELi1bEDD/iAEwVgSax0MkEb2PYLENI7wm?=
+ =?us-ascii?Q?+hM0quEmqhCP7RH3Shhe7frMZUUuGoAz16qSEwZcazeRTW3PO98WdHFZZJ8g?=
+ =?us-ascii?Q?tE69sD9KP8OjkyNRKarERRau2UJhbuXNX3YeFxDND3ypW2IWLAhdGTHxBnYt?=
+ =?us-ascii?Q?hpn8wDSUEwf/sLBSi1n+T1k+6wUTwRM0A3XQUukAjk9GUxCIfWmqtHt3fgCj?=
+ =?us-ascii?Q?+5+j6s5f8oNyRmPz01oVwzY1gnYxNHYZ8+d/kC0+y7ekeJsCK8CCrV3f/lRZ?=
+ =?us-ascii?Q?sSebTJ39/5826MnEXdNlyWX9cEDRGHBF1Vtv0qwy+nTBx+TOzoY6frpY3DrG?=
+ =?us-ascii?Q?zH3uC6g68UDFFaoyLp+NTJ9h67dN4wQ72KvzVyjINKCcWpd+1giYdWQyKeU5?=
+ =?us-ascii?Q?NXyb4/AEVDSRgtiR8jnmfUS+hgmj22Rmaom1GgNW7zoBwX3C6xCEd/Fsm5sv?=
+ =?us-ascii?Q?GPfdJkiZWzz0k51Ie3gTCoBzveV+PKFnnTvAx9/7CLwOTIAZTHeJfu/C8J4S?=
+ =?us-ascii?Q?EWkXaieiDfoow8Flf8NALnxqruNmX9ldTQgP7moJ2A3KbNcN3Q+74W5/1JcS?=
+ =?us-ascii?Q?RyPHNJ9bqfvhqL2hKzFEZuQuSgCgBXKbPwOT/nLq1HjZstYrHwczm3NYIFwS?=
+ =?us-ascii?Q?qcOWDf5KfnxdSQtbFcH/yh5d8vdFi9m22byDKeuhHXW+8z6U3ap5BSXyaSDj?=
+ =?us-ascii?Q?v/xxQFRw+hC+qckgBtIPTvkxiZHg1V7/72W0pAI4eEjH25prSHmNi8k9oaI6?=
+ =?us-ascii?Q?CtV+mXENlU5EW4tTdmI=3D?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS4PR10MB6181:EE_|GV1PR10MB5819:EE_
-X-MS-Office365-Filtering-Correlation-Id: 04e54e1c-97fc-4d40-1ac0-08dce1169f8c
-X-LD-Processed: 38ae3bcd-9579-4fd4-adda-b42e1495d55a,ExtAddr
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|7416014|1800799024|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?QUxqUHI4OE1uZlNHNGEwRE9mVmNwTEMyaFJUS1luRjN3aTBhV0x1Mmhrc09t?=
- =?utf-8?B?RGNscm5aS1VwblRDYmt0R1FSbDRQQ1NiWE9MQm95NDl5Q0xCRU9tdlBKcVlO?=
- =?utf-8?B?MDN4QlROalVpQkRpOUpBSURDSHlIWnN3RFVlblVhVU0yeVlzQ3VHcEZoTE9D?=
- =?utf-8?B?SlFTYnBMM3A3bS8wbWMyU3FsaURmRy9ZaHhIbnB1NWprYzdqL3ZXbWZ1ZDZw?=
- =?utf-8?B?K1pCc1ZRMUJGM2FESXhWcks0NmtUMjBqNVB1UkpCbnRzYi9HVDRlazJNdTVu?=
- =?utf-8?B?OEN3NW5ka1RlQnRHS3M1Y0hPZjFmT3orSVUyWk01MTVobUpKUUlIWFhRaUF2?=
- =?utf-8?B?QkFOcDRud3BWbXNidjdYWWg4eThEUitNYWhJQU8rdEJtSjB6QTlUYUh2ZHcv?=
- =?utf-8?B?RHBSVHpxYmlDemxYNXVoTzEvdlBrb3hzTk9HWEwvSXBRRzIzRmVWekFFMXFC?=
- =?utf-8?B?SkhYODRMY1RHaVVGbXRwQkhESHZoRituajlxMkhZVDJ6OCtlbnhndW45UzBj?=
- =?utf-8?B?aGo5OGxqRmxwSjIwK2JLbEtBTmR3VDlUQmx2RkpjL0U0SkRoTGk1WVVMODgr?=
- =?utf-8?B?ckczdTU0dEtpS2hZTVFqYm1kVGs5MVYwSUl0bEl5Skp3QWxieU5XbVh0RXlF?=
- =?utf-8?B?Ylc4d3pQckhzWXRMNzJhWEM2TERUQkVjNEhPMEIzTDlubFRsY3I1K3FoNFAy?=
- =?utf-8?B?YTlhUzN6T3dwSjJRZTlUTGFQbW5tYXhMMEYyM25oQXUzTE96aEE0NHpFZEpS?=
- =?utf-8?B?MDQ3Wk5aeWZtYkh0bzJlT0tpTHA4eFY4c1BCRzE1ZG43dFRXbUZneGlpbVhT?=
- =?utf-8?B?d29WaXhkRzFNYVZjQ2hIQUhscy8rUDJzaGdMVGxrejc5aUh6WGFIbEhOdnJC?=
- =?utf-8?B?OHRnbnVrUFVKcmo3UFJZYU5zb2xBL2xubEp4OFM5a2JlbHVZZTRZZDFOTDli?=
- =?utf-8?B?NUJibnNJRW03cEpqMGtrK3BwMGRKM2JvOUQ0L09HNisrOEJySzVmN2g5T3Nr?=
- =?utf-8?B?RmhiZVFjTGpoVFJIbERYcDlURnpIWmx1M3FjKzd4ZGZFYVJKRlprc09kVEJW?=
- =?utf-8?B?cWRyaWV6NjJPbFZrZ2tveWk5VnlMVDAxUWhOS09PVStOK01ydHd3cWpEYm9u?=
- =?utf-8?B?OUE3aWN0cGFDQSt0THk5ZUk2cGs1ZVhzck1SN0JEQlRaS3NtNUQ3bkNna1V3?=
- =?utf-8?B?OVI3ZTZqRVh6UStmMzYvazhQMjNiUkFOaXpXTk04ZnRQSWRKVjcraW1FODVx?=
- =?utf-8?B?ZmE2SXpuSHNHV1dOazg2WlAzT1JOOHNkRitVVnhYZnc1d2MzcXFGTGtIR0N4?=
- =?utf-8?B?elBXekNOTWNSNkl5ZFJWZUhOYi8xUHNXaHRWZVNub2dxd0V3WnBsb3ozbHVw?=
- =?utf-8?B?em9UcytpRWRNRDlZWWVQcCtuVlV4UXpzMWJZR2FTekdlbmpSWFJleHQ5Q2FO?=
- =?utf-8?B?Vk9zanpkVUJ5VG43T3pybG9ITG1kTG5KVlFDVzU0eVFDN2FueXYzdjZ6LzY3?=
- =?utf-8?B?MndlSkIrL0lUOENrTWpsa0R3d2ZibHdQUEF4SEx4S1NQeGxES09zb2F0QWhD?=
- =?utf-8?B?RWphYUpkNDk0eEcvTUQ3ZVlyLzhHdm5IZlRBYVpaMmljelRxZFJGZEo0amwr?=
- =?utf-8?B?aEtBbkVSU1loamJBb1pwQmxMZ2RRU2t0RVNQbzQ1bU9Zb3Btdk9FQ0QwcW13?=
- =?utf-8?B?aGYvK0VyVktOUnhxSU9YREFqQUdrOWxCdUhjNXg2YjU4SlZOQ09aQy9aamxN?=
- =?utf-8?B?U0VBU3FLOWc4MTNtRkZyODh5RU5sRDdDODQ1RGpQRWl0WG5ZUHFnK25VUjRX?=
- =?utf-8?Q?kd4Zid8+YDaACZs0SS5TuL+CiHRXUhxzuteBU=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(7416014)(1800799024)(366016); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NUlhbWFqZ1VzVmU1a2I2ck84RXpVMkttS1MwZmsyVTBYdmFYTmF1ZDR2NDJu?=
- =?utf-8?B?dHEyem1pNS9ieDE5Z1pBZUQwZVczWHE4TXBWeGcrRldwS1pMSndweTEyM2dH?=
- =?utf-8?B?UEN1aEhlcWVwb05vbEVWdXFpUnpZY0VFT1JvRlVkUy9RRS96UFhoR3Fpak9X?=
- =?utf-8?B?RUNSaDRUMW1kdis4UnpXVzVzNkgvUGljeUc2VXhlQmVkUGJISkxMZy9LRk9v?=
- =?utf-8?B?OXZNWnVxeDVhTTZzcmdxa1I0eG5Rb0FCSUZGVlJtOHJWTnRWTnpyQkM3Tkho?=
- =?utf-8?B?dU9wbzZ4ZXB4ZHV4L1JCKyttZHo4eHI3Zm81azFqMFBiUHpIdnhWaXNNbVEv?=
- =?utf-8?B?TkppYjZVc3dJU1RaOUY5bDJFTTVieE9vNmRHTWpZWG1uOTNGYjBGNjdxcFBI?=
- =?utf-8?B?bDVrTHdZQ3hWUGJ3Zko0ZkxZM1V2SGZmdlpFTUZwcjhlWlVRQXoyb1BPVUxY?=
- =?utf-8?B?eFJid0hkakdYWjRGdnJSQ3daT3pLOXNobUZSbExobTVFZW5VTThPRGpjY1VS?=
- =?utf-8?B?Y0dQOXJBbnM0Z1JYV211Z056Q2tVZ1pZdEJCRExUWE1jMUczeDl2OWsyV1Ux?=
- =?utf-8?B?anQrMmZ6L3Yybm9wQ05WeFU2Q3hhclR0djlCMTBiLzFMNThiT1J0WURPNDRa?=
- =?utf-8?B?QktmMG9BWHlBczVHTXFxV1NpU3VNVHJ2Yll3WUpFVFRJckFsU1ZwSWJvczNl?=
- =?utf-8?B?THAyNmppU1FxMGl0bWwwU1ZKWFo4aXhqYmpyM20wOUJSQ2U5WUdiYk5PRE4x?=
- =?utf-8?B?MUMvamUwODBEVVRsV3lWSVFYZjd0RzdXSzdRNEc5aHBNOHhudjVLQkcxNi9Q?=
- =?utf-8?B?Z3l4bVloNDhBQUZDbFBxUTJWZUdna2dRZGdRM0NVdjRzN2ZVTk1WeFFmekt2?=
- =?utf-8?B?U3VqUUx0MUYxNlVyMVJ0NkxVb1FmNWUrWFo1Zk5rbVZ2cVlOY05xdW1YRVNm?=
- =?utf-8?B?dEwvNmpTdzhUR05MRXBSVVh6Ukdqc1pSVWRGdllTQkpyVitZVHltekdPcXhD?=
- =?utf-8?B?SW05aUVaSjgwbTgwbVN4UUlrRG11S2ZSbTI0alhhUDJsdyszcFZJUS9HMWQ2?=
- =?utf-8?B?bnZ0SWNLTXFjRmV5UlBpTTVPN0dGZ3JSOGtBVmNRdXhJVW1pem16S3crWU4v?=
- =?utf-8?B?VnF4aG9BeVhvRkpWVURYZ0FQL21NbGlzNGdjVGZmc1RKd3JWQS9RR1dLZDBP?=
- =?utf-8?B?UW5sYkhHVGJpbmRoRlV6eVlUVXMrM0ZDTkJWNThmTCthR2ZzdTR3cERuRkFY?=
- =?utf-8?B?N21CU0VhNExiUXFXazFWRUdYMVRjY3BBY014dWpvZ0lnTUZFQlpRSVRYY1Rk?=
- =?utf-8?B?VFVobUl5T2lmRnBRdlpUa3ZXNWd1UHp0Z2xnM1crOWVZVHgrR3V5ei9ZYVQ1?=
- =?utf-8?B?cFJNa2kzY040T0ZjWEJmczhkRjNPa0tOU3BFZFN4VDYvellXY0JodXJqNWMr?=
- =?utf-8?B?VnFiRnZUdU5HRnc1L3F2Y01yRDIyYlBLaFlMVC9aeEtTbnJOS2owekhSMldz?=
- =?utf-8?B?cTFBZ1ZCVHVtbnVLeW9kT2tvbmlmYnU0cE9BNDlWb21nMWRQZTY1WWIwUm4r?=
- =?utf-8?B?Tmt1RjluQXBJVVZHWG1NWm43bERWVzZKczg4bS9tZGZJTElEYTJRRzBtc1Y3?=
- =?utf-8?B?ODFwZHBhMSsyRU1DQzhSV3dyYldYMHZzRnE2c3QrV3JNdkIyWVNGOHJvOU1q?=
- =?utf-8?B?UUZHWVZmUU5tOUErcFhlbURCUUhSOUl4V1RsVUJ1VEhSaUE4NFNzTGZJZjNH?=
- =?utf-8?B?bEJ6MUsrQm1iZjh1V0dwR3pxSGtVNmU5c21hRGdkWndPQVYxWlBrWWtHZy8r?=
- =?utf-8?B?SlFpN0V0Q0x3blFWSDlYSE51OE9nSGRSVmpIVTJtOU1JMEtGcWM1dHY3bkgy?=
- =?utf-8?B?dGVkWFlWeTB2NUFtSThWSWZwR1BGRytqOHpGWEhEWE05TTcrRC9TTlJ1dFph?=
- =?utf-8?B?MFkweVByQThBVjZlOGh6UHR4K1U3QUNiclNtWmtpNjZYOWNrbWdmaEZvWDRl?=
- =?utf-8?B?WnFJU3dGcGE5U3g3UXl1WFBoeG4xc0dnczNqU29WTm5BTXA5NkNmbVRteG1L?=
- =?utf-8?B?Q0prekc4cUhDcTRvS09kd2FWSHlZZzlNUTcxNk5CWWpIQ1Q3dWxBd0p4Sm81?=
- =?utf-8?Q?eVw8ePkjva5sHFWMgA9YO/Zw0?=
-X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 04e54e1c-97fc-4d40-1ac0-08dce1169f8c
-X-MS-Exchange-CrossTenant-AuthSource: AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
+X-OriginatorOrg: nxp.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2024 06:10:46.2975 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: qkHzghJMG/jkKhlHLk3L0v3npZwtzjPYfFHqg25omRREydZY9R3NuM2a4ZEKsat+hipYT/k/XFLw8+mh0l5ylQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR10MB5819
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d606f0b4-a715-48d8-dd2d-08dce11a88bb
+X-MS-Exchange-CrossTenant-originalarrivaltime: 30 Sep 2024 06:38:45.8640 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: iy3zTUFskHoH2l+VfJlVPS/uhg+ENS0B2wEsCDi+5pXI3KGHRXxmTq5C08X3DHnDWbr07I18iD8nE/p6T3RnBg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8289
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -229,168 +158,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 30.09.24 08:02, Sumit Garg wrote:
-> + Jan
-> 
-> Hi Marek,
-> 
-> On Sat, 28 Sept 2024 at 03:20, Marek Vasut <marex@denx.de> wrote:
->>
->> Currently the enablement of OF_UPSTREAM results on the build system
->> searching for DTs only in dts/upstream/ . There are platforms which
->> use U-Boot specific DTBOs applied on top of U-Boot control DT during
->> SPL stage, and source DTs for these are located in arch/$(ARCH)/dtb.
-> 
-> I would like to understand the need to maintain DTBOs separately from
-> DTBs. Why aren't we pushing DTBOs to Linux kernel sources as we do for
-> DTBs? Jan recently pushed those so-called U-Boot specific DTBOs for a
-> TI platform which were accepted in the Linux kernel upstream. This
-> patch will just deny the ability to build those DTBOs from dts
-> upstream tree. IMHO, this takes a step backwards on the whole notion
-> of OF_UPSTREAM.
+Hi Ahmad,
 
-Exactly - I was sent the other direction (get DTSOs upstream), and I'm
-now only waiting for 6.12-rc1-dts so that the first round to make use of
-that can be integrated into U-Boot [1]. Anything that would prevent that
-here is not welcome anymore.
+> Subject: i.MX8/9: question about unused DDR PHY trained CSR board
+> array
+>=20
+> Hello Peng,
+>=20
+> Looking at the DDR setup code for i.MX8M and i.MX9 that you had
+> contributed, I am wondering about struct
+> dram_cfg_param::ddrphy_trained_csr and the global
+> ddrphy_trained_csr array.
+>=20
+> struct dram_cfg_param::ddrphy_trained_csr is presumably generated
+> by the i.MX DDR tool and it seems populated by all the i.MX8M/9
+> boards in U-Boot.
+>=20
+> This struct member is wholly unused though and instead a global
+> ddrphy_trained_csr is used.
+>=20
+> What I wonder about is whether it's possible for the DDR tool to
+> generate a different ddrphy_trained_csr than the default:
+>=20
+>   1) If yes, we should drop the global ddrphy_trained_csr and actually
+> use
+>      the board-specific array
+>=20
+>   2) If not, we should drop the board-specific array and perhaps ask for
+>     the DDR tool to be changed
+>=20
+> I initially assumed 1) and because all boards supported by barebox had
+> a board-specific ddrphy_trained_csr that's identical to the global
+> ddrphy_trained_csr, I dropped the unused array[1][2].
+>=20
+> I now have the DDR settings for an i.MX9 LPDDR4 board in front of me
+> that has different contents for struct
+> dram_cfg_param::ddrphy_trained_csr than the default.
+>=20
+> I will inquire how that came about, but in parallel I wanted to ask you i=
+f
+> this is supposed to happen and to alert you to this issue.
 
-> 
-> If we really want a middle ground solution to allow migration to
-> OF_UPSTREAM easier then we need to find a way to build DTBOs from both
-> directories (local and upstream dts). I would imagine that will likely
-> complicate building and packaging DTBOs.
+Thanks for raising this issue. I think board specific csr should be used.
 
-I tried that, and I got the clear signal that it is not desired.
+I will check with DDR TOOL owners on this.
 
-Jan
+>=20
+> The way things are, this is either a bug or a missed space saving
+> opportunity for U-Boot.
 
-[1] https://github.com/siemens/u-boot/commits/jan/iot2050
-
-> 
-> -Sumit
-> 
->>
->> Add dedicated 'dtbos' target which builds only .dtbos and not .dtbs and
->> in case OF_UPSTREAM is enabled, build this target for arch/$(ARCH)/dtb
->> to generate local U-Boot specific DTBOs.
->>
->> Adjust top level Makefile so binman would search for .dtb and .dtbo in
->> both OF_UPSTREAM specific paths and arch/$(ARCH)/dtb for the .dtbo case.
->>
->> Signed-off-by: Marek Vasut <marex@denx.de>
->> ---
->> Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
->> Cc: Caleb Connolly <caleb.connolly@linaro.org>
->> Cc: Christoph Niedermaier <cniedermaier@dh-electronics.com>
->> Cc: Fabio Estevam <festevam@gmail.com>
->> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
->> Cc: Jonas Karlman <jonas@kwiboo.se>
->> Cc: Lothar Rubusch <l.rubusch@gmail.com>
->> Cc: Michal Simek <michal.simek@amd.com>
->> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
->> Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
->> Cc: Simon Glass <sjg@chromium.org>
->> Cc: Stefano Babic <sbabic@denx.de>
->> Cc: Sumit Garg <sumit.garg@linaro.org>
->> Cc: Tom Rini <trini@konsulko.com>
->> Cc: u-boot@dh-electronics.com
->> Cc: u-boot@lists.denx.de
->> ---
->>  Makefile             |  5 ++++-
->>  dts/Makefile         | 11 +++++++++--
->>  scripts/Makefile.dts |  5 ++++-
->>  3 files changed, 17 insertions(+), 4 deletions(-)
->>
->> diff --git a/Makefile b/Makefile
->> index 525576f987d..fba8e48681e 100644
->> --- a/Makefile
->> +++ b/Makefile
->> @@ -1194,6 +1194,8 @@ else
->>  dt_dir := arch/$(ARCH)/dts
->>  endif
->>
->> +local_dto_dir := arch/$(ARCH)/dts
->> +
->>  ifeq ($(CONFIG_MULTI_DTB_FIT),y)
->>
->>  ifeq ($(CONFIG_MULTI_DTB_FIT_LZO),y)
->> @@ -1377,7 +1379,8 @@ cmd_binman = $(srctree)/tools/binman/binman $(if $(BINMAN_DEBUG),-D) \
->>                 build -u -d u-boot.dtb -O . -m \
->>                 --allow-missing $(if $(BINMAN_ALLOW_MISSING),--ignore-missing) \
->>                 -I . -I $(srctree) -I $(srctree)/board/$(BOARDDIR) \
->> -               -I $(dt_dir) -a of-list=$(CONFIG_OF_LIST) \
->> +               -I $(dt_dir) -I $(local_dto_dir) \
->> +               -a of-list=$(CONFIG_OF_LIST) \
->>                 $(foreach f,$(BINMAN_INDIRS),-I $(f)) \
->>                 -a atf-bl31-path=${BL31} \
->>                 -a tee-os-path=${TEE} \
->> diff --git a/dts/Makefile b/dts/Makefile
->> index d6c2c9daf31..f872a867667 100644
->> --- a/dts/Makefile
->> +++ b/dts/Makefile
->> @@ -11,12 +11,16 @@ DEVICE_TREE := unset
->>  endif
->>
->>  ifeq ($(CONFIG_OF_UPSTREAM),y)
->> +local_dtbos := local-dtbos
->> +local_dtbo_dir := arch/$(ARCH)/dts
->>  ifeq ($(CONFIG_ARM64),y)
->>  dt_dir := dts/upstream/src/arm64
->>  else
->>  dt_dir := dts/upstream/src/$(ARCH)
->>  endif
->>  else
->> +local_dtbos :=
->> +local_dtbo_dir :=
->>  dt_dir := arch/$(ARCH)/dts
->>  endif
->>
->> @@ -40,7 +44,7 @@ endif
->>
->>  targets += dt.dtb
->>
->> -$(DTB): arch-dtbs
->> +$(DTB): arch-dtbs $(local_dtbos)
->>         $(Q)test -e $@ || (                                             \
->>         echo >&2;                                                       \
->>         echo >&2 "Device Tree Source ($@) is not correctly specified."; \
->> @@ -49,10 +53,13 @@ $(DTB): arch-dtbs
->>         echo >&2;                                                       \
->>         /bin/false)
->>
->> -PHONY += arch-dtbs
->> +PHONY += arch-dtbs local-dtbos
->>  arch-dtbs:
->>         $(Q)$(MAKE) $(build)=$(dt_dir) dtbs
->>
->> +local-dtbos:
->> +       $(Q)$(MAKE) $(build)=$(local_dtbo_dir) dtbos
->> +
->>  ifeq ($(CONFIG_SPL_BUILD),y)
->>  obj-$(CONFIG_OF_EMBED) := dt-spl.dtb.o
->>  # support "out-of-tree" build for dtb-spl
->> diff --git a/scripts/Makefile.dts b/scripts/Makefile.dts
->> index 1fe142f2bbf..f4d3a37010a 100644
->> --- a/scripts/Makefile.dts
->> +++ b/scripts/Makefile.dts
->> @@ -17,8 +17,11 @@ endif
->>
->>  targets += $(dtb-y)
->>
->> -PHONY += dtbs
->> +PHONY += dtbs dtbos
->>  dtbs: $(addprefix $(obj)/, $(dtb-y))
->>         @:
->>
->> +dtbos: $(addprefix $(obj)/, $(filter-out %.dtb,$(dtb-y)))
->> +       @:
->> +
->>  clean-files := *.dtb *.dtbo */*.dtb */*.dtbo *_HS
->> --
->> 2.45.2
->>
-
--- 
-Siemens AG, Technology
-Linux Expert Center
+Thanks,
+Peng.
 
