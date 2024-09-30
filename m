@@ -4,72 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54FF6CF6495
-	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 01:51:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAAC7CF6495
+	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 01:51:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B3AD88DFE;
-	Mon, 30 Sep 2024 03:50:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 743C888E0C;
+	Mon, 30 Sep 2024 03:50:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SpJlVMDA";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Hy4ywc7D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2BE4688E49; Mon, 30 Sep 2024 03:50:23 +0200 (CEST)
-Received: from mail-il1-x144.google.com (mail-il1-x144.google.com
- [IPv6:2607:f8b0:4864:20::144])
+ id 1E9A388E0C; Mon, 30 Sep 2024 03:50:25 +0200 (CEST)
+Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
+ [IPv6:2607:f8b0:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7ADF488DB3
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 03:50:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 39168889C9
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 03:50:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x144.google.com with SMTP id
- e9e14a558f8ab-37636c3872bso12625555ab.3
- for <u-boot@lists.denx.de>; Sun, 29 Sep 2024 18:50:17 -0700 (PDT)
+Received: by mail-il1-x12c.google.com with SMTP id
+ e9e14a558f8ab-3a275a1562eso13996765ab.1
+ for <u-boot@lists.denx.de>; Sun, 29 Sep 2024 18:50:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727661016; x=1728265816; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727661020; x=1728265820; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=98uPw419gdwMRv5Go30+/ApFfdscCs3u/29kR2So/SM=;
- b=SpJlVMDA6piVinblQ8ReNSWJVseXiGGEHxm8jiem6JvCgFfxrPwRPWi+wSvOMu9A9h
- MDY+Jua2UGEsdYrIOJrkkXu56pf5Ij4WykXBLyQmZh5+a2RUs2MSY+XUTXOSpm+qm3HD
- uZmLQynQ7fdWOMTqBvE5mR20fXNtMZxaUfGp0=
+ bh=c12AmD5Eqhd3/EomTBw6CQQMDwCiJP1UxxKXZHAWicU=;
+ b=Hy4ywc7Dx5sqJ/Z4MnxccTUYPd1Gtjtyz040PQDAG1sDa2PkKPoxo99rYqdQTVkMaf
+ d/0mFRJ2XcSyPevOvWmAUoX30LrJKvjU0gPyz/ltpv6GO+xCm+DbkUUeeB1sjQrr7zYz
+ L20i3RJMghv7g2JJzPpJqhL6wVyaRbK4A67a0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727661016; x=1728265816;
+ d=1e100.net; s=20230601; t=1727661020; x=1728265820;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=98uPw419gdwMRv5Go30+/ApFfdscCs3u/29kR2So/SM=;
- b=LHVKw+ugT4+H6w29Q4+ygFM/sHK92IE9m7RdIPyu0EoLFX3G2mcUttkLN3XFM3PIvM
- JoKBVZUjI+FeWCedkvgn7ISmq87hAivcDRaMn+uJV1fMUAl0gBA5soOoJjO3Rwkur47P
- zueyIb0aXUgVe73Vd0g2rmnNdicbHCQBAe69QxF97z7cbZMkLUzG9mBZbxiVydWHsfM9
- hita4y6cjqTYZSERvH6fBFMhVmjBg3Nc1QiYtIu41PrY+27OKeFXdaHGtB8KavjRREEx
- gL/KRwwWfUr5ZjsLa5+dLxjzQWkFSEjybF511Ao/fp6xfuZmsQG3lD60uYMGcQ4xNJEc
- ec5g==
-X-Gm-Message-State: AOJu0YyWyMkcsr5qBoO3Di6HqAUR/tWFQycujy/TyT+LQ8bmanYSsoUs
- s+EmzRFVOa16YN+27LYjMVzZ5jMRT/VADZ4JfHd9pqNFQHwxZxHLXMwIzNj0x35oF/MKUkmARiQ
- w/lD9
-X-Google-Smtp-Source: AGHT+IEkH89/RQARGXBmggp7pTlGFJ3AhK1aUJH/wt7O+0YWBOjSkVzd3V4w85NJ7eAVGAY1po5I7Q==
-X-Received: by 2002:a05:6e02:1aaa:b0:3a0:8f99:5e00 with SMTP id
- e9e14a558f8ab-3a345145870mr82156235ab.4.1727661016087; 
- Sun, 29 Sep 2024 18:50:16 -0700 (PDT)
+ bh=c12AmD5Eqhd3/EomTBw6CQQMDwCiJP1UxxKXZHAWicU=;
+ b=Gar6NzG/l81zISdkUDFqWxll7uv99ktv97ibbdGrJS7QfJUuf+se5MhZF3ByhOpedo
+ xxoXWL5iRGy0qD1mmVS6HOAs+Tb98iJoHcdJ9wYJE/3VZDzbiHS5E1kR7puGUTXd4kFV
+ znfIOEoJxnajXdEkKrhSp0nEDwSg2Sc/wpTSP0e99zVNd4H+Fz7TpMkBD2YYh3/gwzIE
+ FCMi+HTXh+GgndDDlUuaJ1QXMgsgfoV3TZEnQEO3RY0CYX1U1V7DIhEhPIxaQ8W1vxtY
+ B2JeAT4oiHS9d3CpxKtFcO4aGYX7oUN51WtcrhxgAPxlxmkJ16+Qf2OwL1sTAWDpRRtZ
+ K1tQ==
+X-Gm-Message-State: AOJu0Yy6Gl4ei52QK+B/VzZkrruraG8VrQOeAYnRsNGmOob2ANZbgc3l
+ nlT2SyRJ4NniHAnpWa44fZVh21BkK36tRdz/I+g2swC/jCqasvqMrFBgbV818UNMov+NsEE5ji2
+ mnw==
+X-Google-Smtp-Source: AGHT+IGK3Pqz7vO/UlzoTi9tE7qqaRyJSwV0gc0eED0DvQyCW3cap4m92gU5+u8E1/tE0QjHwz18DQ==
+X-Received: by 2002:a05:6e02:148a:b0:3a0:9c04:8047 with SMTP id
+ e9e14a558f8ab-3a3446029cdmr68783375ab.6.1727661019812; 
+ Sun, 29 Sep 2024 18:50:19 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3a344de1d5fsm22074185ab.62.2024.09.29.18.50.15
+ e9e14a558f8ab-3a344de1d5fsm22074185ab.62.2024.09.29.18.50.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 29 Sep 2024 18:50:15 -0700 (PDT)
+ Sun, 29 Sep 2024 18:50:19 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Bryan Brattlof <bb@ti.com>, Greg Malysa <greg.malysa@timesys.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Nishanth Menon <nm@ti.com>, Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH v3 09/33] scripts: Define CONFIG_XPL_BUILD for all xPL builds
-Date: Sun, 29 Sep 2024 19:49:32 -0600
-Message-Id: <20240930014956.1434060-10-sjg@chromium.org>
+ Devarsh Thakkar <devarsht@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Suniel Mahesh <sunil@amarulasolutions.com>
+Subject: [PATCH v3 12/33] xpl: Rename spl_phase to xpl_phase_t
+Date: Sun, 29 Sep 2024 19:49:35 -0600
+Message-Id: <20240930014956.1434060-13-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240930014956.1434060-1-sjg@chromium.org>
 References: <20240930014956.1434060-1-sjg@chromium.org>
@@ -91,69 +96,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The new name 'xPL' is intended to indicate a build of any phase which is
-not U-Boot proper. Define it for all such phases.
-
-Note that we also define CONFIG_SPL_BUILD for all xPL builds. This
-preserves existing behaviour, but future patches will adjust that.
+This name fits better with the new naming scheme, so update it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- scripts/Makefile.autoconf | 6 +++---
- scripts/Makefile.xpl      | 9 +++++----
- 2 files changed, 8 insertions(+), 7 deletions(-)
+ arch/sandbox/cpu/spl.c               |  2 +-
+ common/spl/spl.c                     |  2 +-
+ doc/device-tree-bindings/bootph.yaml |  2 +-
+ include/spl.h                        | 12 ++++++------
+ 4 files changed, 9 insertions(+), 9 deletions(-)
 
-diff --git a/scripts/Makefile.autoconf b/scripts/Makefile.autoconf
-index b42f9b525fe..d7544022a31 100644
---- a/scripts/Makefile.autoconf
-+++ b/scripts/Makefile.autoconf
-@@ -83,15 +83,15 @@ u-boot.cfg: include/config.h FORCE
+diff --git a/arch/sandbox/cpu/spl.c b/arch/sandbox/cpu/spl.c
+index 1c33a520c64..6c6f4fd8c3e 100644
+--- a/arch/sandbox/cpu/spl.c
++++ b/arch/sandbox/cpu/spl.c
+@@ -91,7 +91,7 @@ static int load_from_image(struct spl_image_info *spl_image,
+ 			   struct spl_boot_device *bootdev)
+ {
+ 	struct sandbox_state *state = state_get_current();
+-	enum u_boot_phase next_phase;
++	enum xpl_phase_t next_phase;
+ 	const char *fname;
+ 	ulong pos, size;
+ 	int full_size;
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index 9c3bba48251..9ed91929ee1 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -441,7 +441,7 @@ static inline int write_spl_handoff(void) { return 0; }
+  */
+ static enum bootstage_id get_bootstage_id(bool start)
+ {
+-	enum u_boot_phase phase = spl_phase();
++	enum xpl_phase_t phase = spl_phase();
  
- spl/u-boot.cfg: include/config.h FORCE
- 	$(Q)mkdir -p $(dir $@)
--	$(call cmd,u_boot_cfg,-DCONFIG_SPL_BUILD)
-+	$(call cmd,u_boot_cfg,-DCONFIG_XPL_BUILD -DCONFIG_SPL_BUILD)
+ 	if (IS_ENABLED(CONFIG_TPL_BUILD) && phase == PHASE_TPL)
+ 		return start ? BOOTSTAGE_ID_START_TPL : BOOTSTAGE_ID_END_TPL;
+diff --git a/doc/device-tree-bindings/bootph.yaml b/doc/device-tree-bindings/bootph.yaml
+index a3ccf06efa7..a364b3fe37f 100644
+--- a/doc/device-tree-bindings/bootph.yaml
++++ b/doc/device-tree-bindings/bootph.yaml
+@@ -83,6 +83,6 @@ properties:
+   bootph-all:
+     type: boolean
+     description:
+-      Include this node in all phases (for U-Boot see enum u_boot_phase).
++      Include this node in all phases (for U-Boot see enum xpl_phase_t).
  
- tpl/u-boot.cfg: include/config.h FORCE
- 	$(Q)mkdir -p $(dir $@)
--	$(call cmd,u_boot_cfg,-DCONFIG_SPL_BUILD -DCONFIG_TPL_BUILD)
-+	$(call cmd,u_boot_cfg,-DCONFIG_XPL_BUILD -DCONFIG_SPL_BUILD -DCONFIG_TPL_BUILD)
+ additionalProperties: true
+diff --git a/include/spl.h b/include/spl.h
+index fa87d865f5f..6d44b627259 100644
+--- a/include/spl.h
++++ b/include/spl.h
+@@ -62,7 +62,7 @@ static inline bool xpl_is_first_phase(void)
+ 	return false;
+ }
  
- vpl/u-boot.cfg: include/config.h FORCE
- 	$(Q)mkdir -p $(dir $@)
--	$(call cmd,u_boot_cfg,-DCONFIG_SPL_BUILD -DCONFIG_VPL_BUILD)
-+	$(call cmd,u_boot_cfg,-DCONFIG_XPL_BUILD -DCONFIG_SPL_BUILD -DCONFIG_VPL_BUILD)
- 
- include/autoconf.mk: u-boot.cfg
- 	$(call cmd,autoconf)
-diff --git a/scripts/Makefile.xpl b/scripts/Makefile.xpl
-index 3091311a3d2..ad21d451a30 100644
---- a/scripts/Makefile.xpl
-+++ b/scripts/Makefile.xpl
-@@ -21,15 +21,16 @@ include $(srctree)/scripts/Kbuild.include
- 
- -include include/config/auto.conf
- 
--# This file contains 0, 1 or 2 lines
-+# This file contains 0, 2 or 3 lines
- # It is empty for U-Boot proper (where $(obj) is empty)
--# For any xPL build it contains CONFIG_SPL_BUILD=y
--# For TPL builds it has CONFIG_SPL_BUILD=y and CONFIG_TPL_BUILD=y
--# For VPL builds it has CONFIG_SPL_BUILD=y and CONFIG_VPL_BUILD=y
-+# For any xPL build it contains CONFIG_SPL_BUILD=y and CONFIG_XPL_BUILD=y
-+#    - for TPL builds it also contains CONFIG_TPL_BUILD=y
-+#    - for VPL builds it also contains CONFIG_VPL_BUILD=y
- -include $(obj)/include/autoconf.mk
- 
- UBOOTINCLUDE := -I$(obj)/include $(UBOOTINCLUDE)
- 
-+KBUILD_CPPFLAGS += -DCONFIG_XPL_BUILD
- KBUILD_CPPFLAGS += -DCONFIG_SPL_BUILD
- ifeq ($(CONFIG_TPL_BUILD),y)
- KBUILD_CPPFLAGS += -DCONFIG_TPL_BUILD
+-enum u_boot_phase {
++enum xpl_phase_t {
+ 	PHASE_NONE,	/* Invalid phase, signifying before U-Boot */
+ 	PHASE_TPL,	/* Running in TPL */
+ 	PHASE_VPL,	/* Running in VPL */
+@@ -116,7 +116,7 @@ enum u_boot_phase {
+  *
+  * Return: U-Boot phase
+  */
+-static inline enum u_boot_phase spl_phase(void)
++static inline enum xpl_phase_t spl_phase(void)
+ {
+ #ifdef CONFIG_TPL_BUILD
+ 	return PHASE_TPL;
+@@ -150,7 +150,7 @@ static inline bool spl_in_proper(void)
+  * Return: the previous phase from this one, e.g. if called in SPL this returns
+  *	PHASE_TPL, if TPL is enabled
+  */
+-static inline enum u_boot_phase spl_prev_phase(void)
++static inline enum xpl_phase_t spl_prev_phase(void)
+ {
+ #ifdef CONFIG_TPL_BUILD
+ 	return PHASE_NONE;
+@@ -172,7 +172,7 @@ static inline enum u_boot_phase spl_prev_phase(void)
+  * Return: the next phase from this one, e.g. if called in TPL this returns
+  *	PHASE_SPL
+  */
+-static inline enum u_boot_phase spl_next_phase(void)
++static inline enum xpl_phase_t spl_next_phase(void)
+ {
+ #ifdef CONFIG_TPL_BUILD
+ 	return IS_ENABLED(CONFIG_VPL) ? PHASE_VPL : PHASE_SPL;
+@@ -188,7 +188,7 @@ static inline enum u_boot_phase spl_next_phase(void)
+  *
+  * Return: phase name
+  */
+-static inline const char *spl_phase_name(enum u_boot_phase phase)
++static inline const char *spl_phase_name(enum xpl_phase_t phase)
+ {
+ 	switch (phase) {
+ 	case PHASE_TPL:
+@@ -211,7 +211,7 @@ static inline const char *spl_phase_name(enum u_boot_phase phase)
+  * @phase: Phase to look up
+  * Return: phase prefix ("spl", "tpl", etc.)
+  */
+-static inline const char *spl_phase_prefix(enum u_boot_phase phase)
++static inline const char *spl_phase_prefix(enum xpl_phase_t phase)
+ {
+ 	switch (phase) {
+ 	case PHASE_TPL:
 -- 
 2.34.1
 
