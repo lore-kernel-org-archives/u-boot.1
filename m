@@ -4,161 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D507CF6497
-	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 08:55:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51958CF649D
+	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 09:00:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A3EC88A29;
-	Mon, 30 Sep 2024 10:55:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id D6FCF88CA3;
+	Mon, 30 Sep 2024 10:59:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="OI0OIfDg";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="ScjMxYAE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A443688A43; Mon, 30 Sep 2024 10:55:25 +0200 (CEST)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 22B3C88CB0; Mon, 30 Sep 2024 10:59:58 +0200 (CEST)
+Received: from mail-m607.netease.com (mail-m607.netease.com [210.79.60.7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60BAB889C9
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 10:55:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 4D45E88A29
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 10:59:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=oI+6ykLI2bmt+GDuzS41Q2dGpwuJ/8E9E1iwLQTFXsLN69xA2XBlirYU5Iz7Ca58lLhI0V/fLAKU2JS4BhAG82vWJl5cbuUiCZAMe+d4cLCfzvKgpBHyFPjNnle4pjYxNEdLLZK32U6hV5kSBSUm1QLVEPqmmo3DG4BFmRlD9ED6BupVUO3IYshxSXytMlxs5KNfUTPsCToFIwxj0qkLkRc03thY1zlv5N0b/POeVZ/Znp6WpZNR8DhpA+zLWk9wFvJaHRkGD+/Wop97gdav+k2UDvCZlOHn1nITzMpaZ+5tFNQbsmG2cmoxHDI5qIKFqVW/wTEBNPbgFlcfHZQPdA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=T+URfLdrMa7bKzEaq2H9ISaxt5GhZqEJiW1tQrh4V40=;
- b=CdvE8f/d1s3LeUidtTpzd3anKg4WVFqMrsaHiByAV6x8G5DbwUudHgyI5PWKxoTbKVlFANahZA1LARBVxpWkeWl+ZzsB/8EmCNleh3gL8QcafS30YfGAi/NMwRCNnATQ/4iw/qD4WW+MOBDJTb1qPIYW88d1iYqjzbR5CLoOPFkZOwrIQw7nZI91IT7VR9ErOb8iv5iitZkt41kIfHO1o2h1tX8cmS6VsZC2QGT6dPLW3ZBxfakgJBKzI09vI7KNSaN5kOkWJKdxFMmgN4sc0lepBYi0vOYdMcRsmPKXDUJKYSMMC86d5NrzE87BkCTrfpxL1/W4xmeR0g6SBPEwPQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=T+URfLdrMa7bKzEaq2H9ISaxt5GhZqEJiW1tQrh4V40=;
- b=OI0OIfDg29XSjI+q3VtvzC8SehEmTEnTULrbtXkuDflehDNBhyHv5QH6S/kTB+XdSa5sBJghs+QM55JNsNlCulfrJr3Prpp6uMXx+dPKuTtG9j6Ci0Z73eOVmaf5M3d3nkha6OCY97VTsqNwZYDfXRopGiOYH2bwn0oXvC9ML4o=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AM9PR04MB8906.eurprd04.prod.outlook.com (2603:10a6:20b:409::9)
- by DB9PR04MB8316.eurprd04.prod.outlook.com (2603:10a6:10:246::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8005.26; Mon, 30 Sep
- 2024 08:55:18 +0000
-Received: from AM9PR04MB8906.eurprd04.prod.outlook.com
- ([fe80::d379:5378:b1:cea]) by AM9PR04MB8906.eurprd04.prod.outlook.com
- ([fe80::d379:5378:b1:cea%2]) with mapi id 15.20.7918.024; Mon, 30 Sep 2024
- 08:55:18 +0000
-Message-ID: <c72f7799-5748-4602-bfb2-c99ba767a614@cherry.de>
-Date: Mon, 30 Sep 2024 10:55:17 +0200
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=ScjMxYAEKedYicy9VLwcA2PF5Pm0CW8GRPJKAU6mLNPWnT5eoz0+b/FPdLfweSAZMxlil/qDZK3Extk1Sll43viii/HNKUBvhq6uD440Nn5YKhUCsN7iK9yY4JaCxt6bvGb2PvjSRCUSv2uJt50Q/nwdbeYuDVGT5dVXHdbeLAM=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
+ bh=N1qIh1KvPJ+WabL+4Rrv/EOElTvo1B8aNaR//JUwbCo=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.12.67] (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTPA id AA7E928091E;
+ Mon, 30 Sep 2024 16:59:41 +0800 (CST)
+Message-ID: <947cc3e3-dec2-480d-8911-e87a6b0c88ad@rock-chips.com>
+Date: Mon, 30 Sep 2024 16:59:41 +0800
+MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/4] debug_uart: Replace debug functions with dummies
- if CONFIG_DEBUG_UART is not set
-To: Kever Yang <kever.yang@rock-chips.com>,
- Lukasz Czechowski <lukasz.czechowski@thaumatec.com>, u-boot@lists.denx.de
-Cc: trini@konsulko.com, sjg@chromium.org, philipp.tomsich@vrull.eu
-References: <20240918130155.299353-1-lukasz.czechowski@thaumatec.com>
- <20240918130155.299353-2-lukasz.czechowski@thaumatec.com>
- <22ae3879-e266-440c-8f25-2d46a5676261@rock-chips.com>
+Subject: Re: [PATCH 3/3] board: rockchip: Fix panel detection for mainline A-TF
+To: Chris Morgan <macromorgan@hotmail.com>
+Cc: Chris Morgan <macroalpha82@gmail.com>, u-boot@lists.denx.de,
+ jonas@kwiboo.se, trini@konsulko.com, philipp.tomsich@vrull.eu,
+ sjg@chromium.org, dsimic@manjaro.org, quentin.schulz@cherry.de
+References: <20240916210137.182493-1-macroalpha82@gmail.com>
+ <20240916210137.182493-4-macroalpha82@gmail.com>
+ <82810c78-3a7b-4bc3-8c49-803a58292780@rock-chips.com>
+ <MN2PR16MB2941BE355B2F4C1623CE946FA5622@MN2PR16MB2941.namprd16.prod.outlook.com>
+ <2a073bbf-4ba2-40d0-8ab8-1ece28062474@rock-chips.com>
+ <MN2PR16MB294182BF4056E3BFFE6721FAA5632@MN2PR16MB2941.namprd16.prod.outlook.com>
 Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <22ae3879-e266-440c-8f25-2d46a5676261@rock-chips.com>
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <MN2PR16MB294182BF4056E3BFFE6721FAA5632@MN2PR16MB2941.namprd16.prod.outlook.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: WA0P291CA0017.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:1::16) To AM9PR04MB8906.eurprd04.prod.outlook.com
- (2603:10a6:20b:409::9)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM9PR04MB8906:EE_|DB9PR04MB8316:EE_
-X-MS-Office365-Filtering-Correlation-Id: e6ecca2a-ff83-453f-1745-08dce12d9bb3
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?VkxaMGpwSTJ0N3ZCYlNFaW90STFUeFZ0QUlyMU1BSEx0TVAwbzdrYzdRanpQ?=
- =?utf-8?B?MUJONWtoWmtjcjR0VVJyUVc5WnVSWmNVenUvODdYUmJFS3JMbTdzZVhGNzAy?=
- =?utf-8?B?MktFekd3OFloVDNqcVZMUHJuSVc3a3lMTTdmOUNQSUd5aHlYUkF5cW92S0tT?=
- =?utf-8?B?Z2pFT1V1dzJXcGcxZDZPWmJHOUhRVTZJbnhVRVBVSHdTUVAvOTBjNjV5THBi?=
- =?utf-8?B?WS9sUVpqcUphYXRxM1ExQXZpYTVnT2VxcXYvTjZyWDgrajA5NEdoQkNZbitL?=
- =?utf-8?B?ekdzclhZSlUvNzhrcnhjbUVCZ3N2Q0NUMjcxc2VzWVNkb2V4OWtWYlQ4V3Ns?=
- =?utf-8?B?NVFBa1JTVUVOS2V0aDFHbE1rVzY3bldCYnBwOUhEMEpWV3Bvb2ZjQjJocVl0?=
- =?utf-8?B?UzZQRmpwbFBTZllEenhza2xCcGhhR0JZSlFKWW1NOXo4a3ZsRmU3bFo3S2JH?=
- =?utf-8?B?NS9lNU9YTnluaFIvdHI0ek9BRmlrK0RFZGdmTTV4K0JBQTRBeVpyaWM1ZEdk?=
- =?utf-8?B?dS8rU3R3eVg2LzhIUmRqSXpLOUs5RGhrV2lVbXlHcE9CRm9pYkczQ3hEWk1H?=
- =?utf-8?B?c0lJemoxUVBmcUpPbUVTRitsaGNweXpGa0d1ZnVyY3l6Vi9MQVF2K1RCQ0FK?=
- =?utf-8?B?dDBUeitxY0R5KzVrRlp2K0dGRFNSVm9pRUpnRzRPYi9rQlRQNkp1aG1RaHBY?=
- =?utf-8?B?TGcxZitIbVhUbmc0V3FNQVNVQ3lobGNmQWlXOWNoYnFKZHQ3enpIbTZHYWpk?=
- =?utf-8?B?MER4K1dXYWJHd0FwTm04aWwvZjQ2TUNMMjFReXAzVGtQT2loeXpab1V4Tlk5?=
- =?utf-8?B?dU5XV1FkUUM0MDBuMWQ3RkhtdG04Z3FDWnZhZkx2SmROL2F6SnQzTHZYWHR4?=
- =?utf-8?B?OHZqS3NvVkhTelpoMENUM1VISUt3UWF6MkJSeUhBUGR0N0tac3cvd2Y0VjFN?=
- =?utf-8?B?SVd5K3FSRnNadW9qdlNOeGtrR04vdUZpVTFZQ3JkVEFkWVRXNTdMOHA3VnhJ?=
- =?utf-8?B?VUdVV1RsSWc0V1V0ejM5U0pPV1p2SVB6SEc0WXl3SWEwK2pwSUd0QUQ3U0g4?=
- =?utf-8?B?WGwyaWpJbllYZ1ZmZjBNMUE4K0tGMjdjZFl5aUpUZ0lkSWRucGZiUzRydlhK?=
- =?utf-8?B?R0kvOFRtUTFBTnJ2R1FvcGgrTTIwUmcrc1licXJMNTh5S0pEKzlRdVRleUpl?=
- =?utf-8?B?U0FjdWtOZStsTGM5d3NhaVdlRFYrcVQ5QU1weEZKTGtYZW5MbTFOYTBpMnVm?=
- =?utf-8?B?d2tEeS9xT0tUbTd4QUNpMU94R3JsZGJkZW9DVGxndUdDVlAxQ0R2RnBLOFkw?=
- =?utf-8?B?aFd4Y09Yd3JiU2pGUDkvY25YalA1UVBZaGNyNkdwdWt1emdYK2QrTU5ZcDR3?=
- =?utf-8?B?N0J4clpQekI0RkN4UHF3MWw3dVlSNVVpVmRNSWRnM3JJMm9GYWJGZXBKa1U0?=
- =?utf-8?B?NzZhWS9CdE9OL3lkSHltVm9hTDd4K3JkWW5RN09KR2Nsek1PdVRBajExb1pO?=
- =?utf-8?B?SWQ4dXliNzdpclZqTGkydUVrY2JZRGhHd3dYSDM4L3ExWGR4Wm5EQVlkZWV5?=
- =?utf-8?B?SlEzQTBSd1VZVnFqd1d3NHFUK2xMRnV0OW1MUFVzVC9uOGJWZXhTcVUxTWRq?=
- =?utf-8?B?TlNvSUsxOWluYVluanZFcnVQdWFMODFiNHVqazNvVGFBSEVTMkc1dVhEU1h2?=
- =?utf-8?B?d3AzKzVabURxRVVOYjF3WU9NUG03RUxCcUxDeWRPWmlEby9QdHhmWEtScnh5?=
- =?utf-8?Q?80ObNmrkXo44BkMhMk=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM9PR04MB8906.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UmdtbWljWWwrZCtGMFVUbFg5UjU4TEtOWGZJYmpyV2NudHhVQ01FbXRuODVu?=
- =?utf-8?B?U2hkdFNMNUxhRGpiWjdDRFpZcGtYQlk4ZmZYU2VzanE0aGpLWHl1SStsWWYv?=
- =?utf-8?B?NDJyNCtPYXIrZCtHc09tSFhxbEIzRWs0MU9JU0ZXZDNQVFh3SmZlWklUYW1T?=
- =?utf-8?B?b1B1dFZVeGxiRG5DUVllZ2lCUHQyQU9lWnNJbUZQcFJXdW41cUtidUZacmtI?=
- =?utf-8?B?RlJoRGsyNko3b05RUkN2RnZOdnlWMjA5MkJqLytodTJjb1ZWYi9uTTVlTzBK?=
- =?utf-8?B?Nk13TGhQR09VQW1RcEx0RnU0RDdqbEp5eUEyYlRkUUJ3QmF2Sk84TjN5SUdD?=
- =?utf-8?B?TEI5b1Z1UDFaZnc2Qk1wcExqTFNBNDJ0aDdoWnpnS21lQXZWTTB5VVhQcjJG?=
- =?utf-8?B?Zmd3ZnFaR09JYWh6R0k3dzU5UGRvUW00OHVMZzc4MG9xZGdyTzBIUERyR2ps?=
- =?utf-8?B?ZTVtNmxObm1heXBRQU1aNU13TlNWRFE2WDBlTUxDZGdHQmgxcWxaRjNKTG5N?=
- =?utf-8?B?WTRrcDFHMDlPSUEwcDJQemZMSVN4SWtyWkhPWjZwR29SYWp0azRHZ3A3R2Ny?=
- =?utf-8?B?bVRLWkdFQUh4cEpFQ2JUQ3Z1dTRZVlNBL2kzS3RtSUswdW14N0h3QkVKN2pO?=
- =?utf-8?B?VVpwT284OEV0SFFmUkV2d3IvMmszcW4ybFl6Y0xwWTFjNWZ3ZnZVY1A5NVVh?=
- =?utf-8?B?eWJwWkRSRWkvRnMwMlBKOGZqWUFGWnU2UkVLaXhUTk4vcmlSNVVNc1dkL3Q1?=
- =?utf-8?B?ZVJUdG9jYlQ1bVd3d05pU3IwejQ1YUwvalh4RXhnU1czTHZITFhlb2xBcGpt?=
- =?utf-8?B?T1M0aVpUd2ZnNTBvNGE5Nys2QTdmNlhWVjFacFJpUWlXblV6VkNKaThTbW1u?=
- =?utf-8?B?V3lESGEwWjlLeDA5TGNSWEZ5UUFZMmNnV0JWa0NmWFVYckJENGlzSDFkM25U?=
- =?utf-8?B?Z29KYTJNRUxHdm4wMDdIUkoyQ0tVQ1VvOXU1MkZXblo1OTlwV01YUlFjSEJT?=
- =?utf-8?B?d1NMVCtCeFc1ODQwSEtUTStnajI2TmdkU1RvL2NmV3BYcnF0NGdkTG1FaERq?=
- =?utf-8?B?VkV4QUFHOUFrOEZvWmFLaE1uNnhpcTlhTW5aNlZRYnhLNktydVhIMEltblNP?=
- =?utf-8?B?cDVTVUF0V25DUnd1U0h3UEdMQzhLZ2VJYUFzcmNXYmxVa1RFbXkwWk52c2ND?=
- =?utf-8?B?TENiQ2R5MmozSFRmOGI0dkxvVlh5Wi8xY0pROEZNWHZQWStvQkhXWlFvVVVz?=
- =?utf-8?B?YjlaZWFkYWdJOWluSUlHSzN6c3RMWlgvdVNpZWpRS21EazVVd3R3T1RDVTE1?=
- =?utf-8?B?STBoRjljWGNodEpnMExKa29MTDhxMXZDY1BBZjk4RlVPVUhDZUw3Zmd2N2ZU?=
- =?utf-8?B?cS93RExhRnkrMUs5Vm01UWsydExFTUVSQzVjT1l6MkxGZE1TcTROTmZxaEVK?=
- =?utf-8?B?ZWZhbG9nWU1jNDBhODllY1BzV2JYZ3kxOFBuZXNhcE4xNUJycU1zc0p3Mjdo?=
- =?utf-8?B?WHBBZFBFZ2ViU2MrNlJ4NDBRTmN3c2dDYk52V3B5dDJ3QW0wTGRPTlMvSTEr?=
- =?utf-8?B?ejdCS3RKeHkvWVp4RitUdDRZQXNhL1lnQllNMFBXM0I4bWJFRTR6bEdLUXpV?=
- =?utf-8?B?K1ZjU3RaS1hmSWRTQ3d6SlB1aklIOTNXVU9Md3c0NzMvblg1SFVaVEJzU0FG?=
- =?utf-8?B?Qkt0bDRVMlZlYlpBcWZnRkVCNVdoVE9zQVY4d1ZXK0pYNXRveVpkb1BqT01P?=
- =?utf-8?B?RnR1THp3V1RYVFZWUVZ3eUV1M0RNdEw4VnBmQ1h0cTFzVEFBWGY1OHhxYXNH?=
- =?utf-8?B?dEFLYmFOV1VjOGtSOVVOQldqazNZUjIxQnE3WGpaZWxkcUhGeks4dlJWZm11?=
- =?utf-8?B?a0tJZlRReEh3WkpuRUNpTXZSVDhOSVRqaCs5SllkTFVhWVVaTWs3RHJwM1Vi?=
- =?utf-8?B?M1owcFBjNlJnaXNiSEdwaWtCVHIrM3NydnFWelgvdmRoN2ZiWDE2Sjk3ckVQ?=
- =?utf-8?B?djdyK1c0RzZUaUx5MVJBeEc4R1Z3aWFmdDJrVEtlUWVqRk1IV0E2QlhORGRy?=
- =?utf-8?B?THRWK3dOZkUvcFRWNU81SUw5Zm42bmlhaUJCbmpEZ3dlT3JSUDNaZ2dlbGN6?=
- =?utf-8?B?Y001QkdYU2FCZkxwWnd3WXNJdGlKcTFiRUJxSkFZOHEwbXpSTW9CS0gyVmF0?=
- =?utf-8?B?QkE9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: e6ecca2a-ff83-453f-1745-08dce12d9bb3
-X-MS-Exchange-CrossTenant-AuthSource: AM9PR04MB8906.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2024 08:55:18.3169 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ATSxkaE1SuKgHc1YCjCVVragQ6ohZzNhHzgaczv9jVgPH0K+EnX+fk0tRqUZmrKBm2xPHpvD3i1DPTmtwFqM/CgzB2c5tC5mYViw8sFhSgQ=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB8316
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGkNKGFYZTUlJGkkYGkweSkNWFRQJFh
+ oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
+ hVSktLVUpCS0tZBg++
+X-HM-Tid: 0a9242282cd209d3kunmaa7e928091e
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Mhg6KTo5GjIdUSMJLDE9NEoP
+ IisaCkxVSlVKTElMTUNNTENJTEhLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFMS0hONwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -175,63 +78,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kever,
 
-On 9/29/24 3:53 AM, Kever Yang wrote:
-> Hi Lukasz,
-> 
->      I think this will make the error happen like this:
-> 
-> +common/console.c: In function 'puts':
-> +common/console.c:746:29: error: unused variable 'ch' [-Werror=unused- 
-> variable]
-> +  746 |                         int ch = *s++;
-> +      |                             ^~
-> +cc1: all warnings being treated as errors
-> +make[2]: *** [scripts/Makefile.build:257: common/console.o] Error 1
-> 
-> 
-> The main reason is that below patch removes "#ifdef":
-> 
-> c04f856822a console: remove #ifdef CONFIG when it is possible
-> 
+On 2024/9/19 21:15, Chris Morgan wrote:
+> On Thu, Sep 19, 2024 at 09:48:58AM +0800, Kever Yang wrote:
+>> Hi Chris,
+>>
+>> On 2024/9/18 21:38, Chris Morgan wrote:
+>>> On Wed, Sep 18, 2024 at 11:06:34AM +0800, Kever Yang wrote:
+>>>> Hi Chris,
+>>>>
+>>>> Please update the subject with something like "Enable the VO PD before
+>>>> driver access",
+>>>>
+>>>> and the commit message for the change reason is enough.
+>>>>
+>>>> and the config is more soc level, I think you can add this to
+>>>> arch_cpu_init() for we don't have a power domain driver.
+>>> To my knowledge I'm the only board trying to access the video before
+>>> Linux proper. Do you want me to add this for all rk3568 boards then
+>>> (from within rk3568.c under arch_cpu_init() as you say)?
+>> Yes, please move it to rk3568.c in case other board need it.
+>>>    I'm thinking
+>>> if I do though I can at least get rid of the memory barrier.
+>>>
+>>>> On 2024/9/17 05:01, Chris Morgan wrote:
+>>>>> From: Chris Morgan <macromorgan@hotmail.com>
+>>>>>
+>>>>> The current panel detection logic crashes when the device boots with
+>>>>> mainline A-TF, causing a reboot loop. It turns out mainline A-TF
+>>>>> doesn't enable the VO power domain like the BSP A-TF did.
+>>>>>
+>>>>> Set the VO domain on and use a memory barrier to ensure it is powered
+>>>>> up before we attempt to do the panel detection.
+>>>>>
+>>>>> Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
+>>>>> ---
+>>>>>     board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c | 13 +++++++++++++
+>>>>>     configs/anbernic-rgxx3-rk3566_defconfig    |  2 --
+>>>>>     2 files changed, 13 insertions(+), 2 deletions(-)
+>>>>>
+>>>>> diff --git a/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c b/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
+>>>>> index c1d1826fd14..f4e7c1ab360 100644
+>>>>> --- a/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
+>>>>> +++ b/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
+>>>>> @@ -22,6 +22,10 @@
+>>>>>     DECLARE_GLOBAL_DATA_PTR;
+>>>>> +#define PMU_BASE_ADDR		0xfdd90000
+>>>>> +#define PMU_PWR_GATE_SFTCON	0xa0
+>>>>> +#define PMU_PD_VO_DWN_ENA	BIT(7)
+>>>>> +
+>>>>>     #define GPIO0_BASE		0xfdd60000
+>>>>>     #define GPIO4_BASE		0xfe770000
+>>>>>     #define GPIO_SWPORT_DR_L	0x0000
+>>>>> @@ -311,6 +315,15 @@ int rgxx3_detect_display(void)
+>>>>>     	int i;
+>>>>>     	u8 panel_id[2];
+>>>>> +	/* Disable VO power domain power-down */
+>>>> Disable?
+>>> It's weird verbiage but the data sheet says "Enable power down PD_VO"
+>>> by writing a 1, so I figure I'm disabling it by writing a 0.
+>> OK, understand now.
+>>
+>> To make it simple and clear, could you just say "Enable PD_VO for display"?
+>>
+>>>>> +	writel((PMU_PD_VO_DWN_ENA << 16),
+>>>>> +	       PMU_BASE_ADDR + PMU_PWR_GATE_SFTCON);
+>>>>> +	/*
+>>>>> +	 * System will crash if the power domain isn't enabled before
+>>>>> +	 * we start trying to talk to the DSI panel.
+>>>>> +	 */
+>>>>> +	wmb();
+>>>>> +
+>>>>>     	/*
+>>>>>     	 * Take panel out of reset status.
+>>>>>     	 * Set GPIO4_A0 to output.
+>>>>> diff --git a/configs/anbernic-rgxx3-rk3566_defconfig b/configs/anbernic-rgxx3-rk3566_defconfig
+>>>>> index f5e5470df8c..49d3766613e 100644
+>>>>> --- a/configs/anbernic-rgxx3-rk3566_defconfig
+>>>>> +++ b/configs/anbernic-rgxx3-rk3566_defconfig
+>>>>> @@ -49,8 +49,6 @@ CONFIG_SPL_REGMAP=y
+>>>>>     CONFIG_SPL_SYSCON=y
+>>>>>     CONFIG_SPL_ADC=y
+>>>>>     CONFIG_SPL_CLK=y
+>>>>> -CONFIG_ARM_SMCCC_FEATURES=y
+>>>>> -CONFIG_SCMI_FIRMWARE=y
+>>>> This should be a separate patch, and what's the change?
+>>>>
+>>>>
+>>> Mainline A-TF seems to get angry with U-Boot when these are enabled.
+>>> By angry I mean it freezes. It's all a related change to allowing
+>>> mainline A-TF, though I should probably call it out better as a
+>>> required change. Again I also specify though in the commit message
+>>> that mainline A-TF still doesn't work with Linux proper because of
+>>> the missing psci clk and psci reset bits, but at least with this
+>>> change U-Boot won't be contributing to the problem (for this board).
+>> The scmi clock is missing on rk3568 mainline A-TF now, but it should return
+>> error with something like
+>>
+>> NOT SUPPORT instead of hang inside.
+>>
+>> Any way, this is a separate change, we don't need it if the ATF supports
+>> scmi clock later.
+>>
+>> Thanks,
+>>
+>> - Kever
+> I'll opt to disable this for now anyway (but in a commit by itself),
+> if that's okay. It makes no difference for booting when using binary
+> A-TF, but it does make a difference when using the *current* mainline
+> A-TF, even if we do get SCMI later.
 
-Can you please always share the link to the pipelines that fail so 
-people have an idea on how to reproduce it locally?
+Could you try with below  patch for rk3568 SCMI support:
 
-Here I assume it is: 
-https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/22455
+https://review.trustedfirmware.org/c/TF-A/trusted-firmware-a/+/31265
 
-A simple way is to apply the patches, build the pine64-lts for example 
-and then you'll see warnings (which aren't failing builds locally I 
-believe but in CI, yes).
 
-I think we can fool the compiler with the following:
+Thanks,
 
-diff --git a/include/debug_uart.h b/include/debug_uart.h
-index dc0f1aa4c98..b19e44d6d0f 100644
---- a/include/debug_uart.h
-+++ b/include/debug_uart.h
-@@ -204,12 +204,12 @@ void printdec(unsigned int value);
-  #define DEBUG_UART_FUNCS \
-  	#warning "DEBUG_UART not defined!"
+- Kever
 
--#define printch(ch) do{}while(0);
--#define printascii(str) do{}while(0);
--#define printhex2(value) do{}while(0);
--#define printhex4(value) do{}while(0);
--#define printhex8(value) do{}while(0);
--#define printdec(value) do{}while(0);
-+#define printch(ch) do{ (void)(ch); }while(0);
-+#define printascii(str) do{ (void)(str); }while(0);
-+#define printhex2(value) do{ (void)(value); }while(0);
-+#define printhex4(value) do{ (void)(value); }while(0);
-+#define printhex8(value) do{ (void)(value); }while(0);
-+#define printdec(value) do{ (void)(value); }while(0);
-
-  #endif
-
-Does this make sense?
-
-Cheers,
-Quentin
+>
+> Thank you,
+> Chris
+>
+>>>> Thanks,
+>>>>
+>>>> - Kever
+>>>>
+>>>>>     CONFIG_ROCKCHIP_GPIO=y
+>>>>>     CONFIG_SYS_I2C_ROCKCHIP=y
+>>>>>     CONFIG_MISC=y
+>>> Thank you,
+>>> Chris
