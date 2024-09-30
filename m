@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4B11CF6498
-	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 02:52:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D62A5CF6499
+	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 02:52:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B57B88E43;
-	Mon, 30 Sep 2024 04:52:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AD59988E6E;
+	Mon, 30 Sep 2024 04:52:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="q2KmymYL";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="tXYmwdfy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 69EEB8641A; Mon, 30 Sep 2024 04:52:09 +0200 (CEST)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170120003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
+ id 9925A88DBA; Mon, 30 Sep 2024 04:52:14 +0200 (CEST)
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::1])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 49D0E889B8
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 04:52:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9091F88E1C
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 04:52:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=x3HQmUMYxhaFZXmpdCtFjC4cDF10oSYEBAjYwSx4UeHXhAr2wvHeT1gxcB4oh4JzoCZIx7Snl+PZKdDTQ4pVc2lqi/1MR/Jikh+XizgchDM2sZ8jw5KihG//147mGoR3jyXq1lvcZ4NMzsZA29q3l6YJyTftR4Vv1mdS255FzRT/oMHDgPz9903al0srnYOwfJrznJ8fn+JfNeXi7o6IMoZHXCYtrkBeVMLTHyDctFaMZlMe3FJ/1zuGr4WLW5WfezWbh3tphWS0VoSNMPzFRpX600/9RD0sDwFOdrNpz1/fdDqETQsMuz+WDamBX3rAUmhR0qptk0Zx4v+DqnHYxA==
+ b=hjEG2R27zynR9F5t9C8+9kHXRtJ0+VVUcCJzLt/V3QTu6Q/A2khJPOkSl0iK/4PLgRoNRiN6Gsl22k2ifzrn5shxfMrOm49YrOFk2lRo9HGfBVEvCa/Dmmb0X/+dOS48/Jrsek/dgwqbHvlZkhA1N+a1L/3P5i/BSoAbEKhOt8lAuv9f2orBprhAGse1Ju6E/h72f073tHYgkaSEq8Rx4vvn2l6DTtORtY4NIkNh8cNjD3CkNzGRVdgfaGq4zzm6w4w3qsZhL4BsRs2dkyEsAAkZ7J0p/s+eSBIlqh95BuP9Cgz7Cvga5rilUJ7aXlWwnYuTGkzOUDOWZoiNmWt9KA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GJHCPSeeUrbuWgrN7iHTZdZkdDu+b1BF3+NTUzxBfNs=;
- b=Jqp/Off+h+F9/uXVgqs7Pr/+dnoQyWZnLMlF4f9Wc08k6QqBya04cJ7bhwSoAOioM9xcRv8uHw37YPurEse3eWScxryF6s8DnD0UbgKWUVPEm0K5jwXGGGUCKCQqg0zfbfOy1cNRYK+8saaqHYBJ/0s4WZQKv1sYaSJlMqVkia3HCdDqVgDU/s8rm33NDyPWuiyqsVvaL2Q6wPE+3xS/gcOKrOTu8+v2Kqyf6wv47RvShmAyOxdj1xajnUSTMZDBOb17mmjBff75w2BECjJ3B+NzxaPnZ7YtzBLG31vLzX5cGjOVLRyDStTx1nyOfq99GonUl/AwUvwTy8MLZ4lsPw==
+ bh=upqG9JAkU004nZ3uFh2EJIvdkRVex+/urhvVgnLTYaw=;
+ b=My9nLpQSfbEHiRvVjNYAs0Bm6bNKX5a5QualfkJXCLESQxfhOtE3SLn3a2sz5knDK/SH4orxPzCU2NshhYZ/vCPqJ+L3fdvOJB0/dox7NHrVR+36Rp2BypBr3gLGRAGS+pxx3og1L2iNl//PtZRnJJhuWYqNlOeixwLJuJIWrnsVFRmkw4N7IC6Pm8912invMQwABOzgiSFYxfKv3La8a1sFQRGrmOKCtShUhYoacgHVXe8BgnB7BcTZskoBmYYAXJfPGXrhqC//3/KooOrSPqHMD98kd2WchKv0oRO0JZj1MLHdGJucHLQKkhsmNMujMwzBVSg8N1+xlF0ASY5NMA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GJHCPSeeUrbuWgrN7iHTZdZkdDu+b1BF3+NTUzxBfNs=;
- b=q2KmymYLnoi+lB9488kEYkTjvXnNY2iuol/FjtHIlgFYd4hfKYh6fZ9PSFxhkFqmL4Ba/1YWDyywJL+/VjimajKIV6CJVCRscOkDwXpzLc8CaowBDX9Qb8CUav5Ms4aQY/SWc3RkanwAmE0Z37trRcBI5/F7efFf/9gxmHFa0piKThxSm44zuA/rucgM555bqYrJaCUi+YyVqKQJLdZoDuQDSW1Y4QW8YOku3O4c+fhZyr70cNx63e9sgzcKCyDL8CzFgm4gRL/7CMSkj3rX2WnZ+cTiNSCWsZ4eieRgAPrG1+iIx0haMPXve53E3kLCHI57M5nZgzPYXd56e1dqLg==
+ bh=upqG9JAkU004nZ3uFh2EJIvdkRVex+/urhvVgnLTYaw=;
+ b=tXYmwdfybTMLYDUU9GyEii4XQVFO5nrGFwVoZPlMVlCjrKAUwFdL1Q5KAfX/vwCc2gZK1AfbVxmD4sIa0HJhMnW8Yq6cr97ts+XpzycatPxai4xRxZP6rxgxofRN8dBuQhsGDAj6FfKFXh3t+MVij+5DmxvemH9nLY1YPG79/Z/CAIMBEwbkyThElvwekorxGFI9JdJLhhLrOG6j6sMl6+mLdE2MMLYOmzrvJ7wM3ckCzw9J+/inoK4apoiFxIK6P1EKJoGKmMiQMlHhCbGGc8rRHV/aecRHBEHCPJqER/Q8OdmJhprYXzMgj59JCCZH+kvg1OfsMhNnVUzu4HImkQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
  by DU2PR04MB8712.eurprd04.prod.outlook.com (2603:10a6:10:2df::8) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.27; Mon, 30 Sep
- 2024 02:52:05 +0000
+ 2024 02:52:08 +0000
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::165a:30a2:5835:9630%6]) with mapi id 15.20.7982.018; Mon, 30 Sep 2024
- 02:52:05 +0000
+ 02:52:08 +0000
 From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
 To: festevam@gmail.com, sbabic@denx.de, u-boot@lists.denx.de,
  Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>
 Cc: uboot-imx@nxp.com, Joy Zou <joy.zou@nxp.com>, Ye Li <ye.li@nxp.com>,
  Peng Fan <peng.fan@nxp.com>
-Subject: [PATCH 2/4] power: regulator: Support pmic pf5300
-Date: Mon, 30 Sep 2024 11:55:28 +0800
-Message-Id: <20240930035531.27079-2-peng.fan@oss.nxp.com>
+Subject: [PATCH 3/4] power: pmic: ADD PMIC PF9453 support
+Date: Mon, 30 Sep 2024 11:55:29 +0800
+Message-Id: <20240930035531.27079-3-peng.fan@oss.nxp.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20240930035531.27079-1-peng.fan@oss.nxp.com>
 References: <20240930035531.27079-1-peng.fan@oss.nxp.com>
@@ -73,76 +73,76 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|DU2PR04MB8712:EE_
-X-MS-Office365-Filtering-Correlation-Id: a6ca4f33-990e-40ed-b554-08dce0faddd6
+X-MS-Office365-Filtering-Correlation-Id: 3b352770-18d2-490f-d687-08dce0fae016
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|1800799024|52116014|366016|376014|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?ICYEkkimVa9WrtQe9o5XNxauFVEHmpvswsItC2RFiNj3QBRmMbmQFUdYP+2W?=
- =?us-ascii?Q?NbTq+XRR18thp6XnAP/aIt7/4v/X3GVGb/u5IY0gt/i4posFUI2UodqNRfUm?=
- =?us-ascii?Q?6bWtKG+5A818E7UQp3a8DZ9bOQex18LUr21uvyPryegowPUkDOVBRqeajUu0?=
- =?us-ascii?Q?4luRXeawiC1Abi5c+B4KyRXYTbVKrs8vT1xLa2vkkzdQXTf59m1ZK+RTOTgE?=
- =?us-ascii?Q?fw9+PMC1MuXr2/jPF4bhbWdT7DRzPet18zP92S6xnk10SN55LcSpVZFRp29s?=
- =?us-ascii?Q?+4Kplz4MANgcSCFLFM+KZ2rBRl/iJCkjFsIobST7nCQUqJjcM5xcptj8AuIP?=
- =?us-ascii?Q?Qq7alFIUz1w36ZAben+SaPkBzRxfBpIANVXVeGeJoi84W92Qgcg4Xrv2NcRX?=
- =?us-ascii?Q?F+SJ+QOtW56WtQQM6oO7FCBCpFUmjoDTMRGTOwzz+OX+EdyMMuAKn6O3AufY?=
- =?us-ascii?Q?3bEtWv/KAt0yaiuJLVO88id4K4OnEkLvr/ynlYgLqFZUYllFYC+y6QOAoMAb?=
- =?us-ascii?Q?5N5MMlPRNfhXphqoprC3BxVvWu0Mn+evV2aaD+h+TjjjCdWcPbdvyvzKTH7i?=
- =?us-ascii?Q?pJ/vuknpVUjlW5lpD3XeqRVOdSPKL1ZKVWwvq+vF1L/vGleggS7EuRXUj6Lh?=
- =?us-ascii?Q?+acSWDgQWxXjOJblOjZ0wndufrebSs4TCEReQd8FXeHAwwyyAH3U9k2on9PH?=
- =?us-ascii?Q?1k5FRZaNlhNqpGG2dbyIxVEmAdVQdF/gi/pFOlW5jYbyT725m1KZjfz1iA4f?=
- =?us-ascii?Q?kvFaghzptan915/chnPJx50H2wI+SLTAnPX7X/FqJ94FHAh9h/npG1wSmusE?=
- =?us-ascii?Q?IFAs+rWZ2jeWhDGxYdzd55GIOOIR1wc83JJb319yhv4IE6iihW7S2fLHhxIF?=
- =?us-ascii?Q?8IvRXQMuO4PCsVcGtL0bSftnEG8DAK3Bn+t2pLEJxXhFks0qxg+mpq6T/ilj?=
- =?us-ascii?Q?cAEYkrfy0XubZFV5dTintpXPBSY2ZWGNT6R9h90+izsnVbTvS9cef/hif0iR?=
- =?us-ascii?Q?z8Z9xPdCkH+MetMSzxRywD8iEirvd9HeCamVgXWxP7cDpRjJUlofhBbmdMsw?=
- =?us-ascii?Q?q3o6XbCR85gUWkS3HyIhUs/XbKcGj8Zm4SMVY4S0dkvZ5Ok18wVNADOHVywY?=
- =?us-ascii?Q?YLH4A3AtZeIBPl3H4uchJhSR9XWBDgIy63A2m6BTZneUcc6d1nh1HDpR2fgY?=
- =?us-ascii?Q?quH4m8fKFk65A7FqCDIoMRBwd1LzZ7+KjsaEAa0CZsbV0R/ty8ik0OAZ1v2d?=
- =?us-ascii?Q?VnqloTgu210yKwINt4p4MoE4MdblSp1bw6mhMCLkOr2ZSF3bun7SVMekddFF?=
- =?us-ascii?Q?sFnVX64VJFRwkm4al45kXYhhDjqCaYpolCS0dREEOySR9g=3D=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?ULCt8k8zKEjieVA3exn87Dv9t8xqeLYaGve+u0HxGohNh8BgayIIXEnYJQ+8?=
+ =?us-ascii?Q?rRibN10aG6SuyEoQSQ+RJ3M8/HOcHbkNHBLFMJUYQ6kudkt9u4vwlLyPZugt?=
+ =?us-ascii?Q?jOfzjOrd2qkfH3oUa9EZoW7U5iiV4rrht2NJUy0+1PZphpaFijNMIFGyIOr8?=
+ =?us-ascii?Q?DJii0kb3TLsfU6ramC2VJCeCfQp323YX8xtfDuMWoMUvpZOSgMH6te1teOz8?=
+ =?us-ascii?Q?jYrcby4wqj0d/E78I+1628oD7/3+xhWv337ESApCTzAy6IHxMGgPsluDSbgO?=
+ =?us-ascii?Q?7Ry9xb6+G37XtpowtkNo9uVhzx49oyySujAbZDGqrnJ0QSN8HrqJ+Iikyy8g?=
+ =?us-ascii?Q?AYM/yukU742AaMB2kp5Nm+bcpSPvbfFAjoAwJjR/3uoac5iQ217pD2SNnyoV?=
+ =?us-ascii?Q?RDBydTJJ1kj3/coyRR4DXTSMJngAKCX8LyAzHUDrMYT6p5Xv0iX96q4j8MsM?=
+ =?us-ascii?Q?nTPzlO5Atyi0j0CZ6hjmXVInlM/M/ZGeHJL0f19pSW0w3UAtLHB8d5LWRzGU?=
+ =?us-ascii?Q?VY4RXzA7RMyjgAL/shMsl8zXsU1DETsrhvaJOBXJqFg23cpuctEJLEbWvD7p?=
+ =?us-ascii?Q?jmp2octGI/ddvEb5Ax7lRCEdSxC5ecAZCKvr424+h8emv96sSsSYYE4S+l+s?=
+ =?us-ascii?Q?bI4oobee8whchcaF7lSdosWsjO3zC8QpVw3Hm8vdmHnZBfwNACBxB4whmsPP?=
+ =?us-ascii?Q?jAIPLEK2LyfFSj+k0d8VUM9VDys6LReQcxr7zQug+SfezBR03OVtoMUcg4ft?=
+ =?us-ascii?Q?WdM2YcJIwVv4UAMwpcbkWdgkPYpt7tvkpvoMFJ/XIYsKBSeT3j3YdFFoWE5V?=
+ =?us-ascii?Q?6nZictSyeOE0WbTMMeDR/9OsGdPKjPx9FFacPUQ9EIX4TKKLVrZ5MHIpZebj?=
+ =?us-ascii?Q?YOIa6ATfksjcncpWng+qudfe0SxJWTh9AmasoL8RbR/wnCYthe/zDM0WuuHZ?=
+ =?us-ascii?Q?z09XVe889cwgTgJI/zmnMM6VIwmzWlhIqCczs9Tah7cTweySKJMyRAKNj8y7?=
+ =?us-ascii?Q?PnKP+E+E0AXjv+301l+/35quyNI8B+YlWi2ucpRIxbhCtqkf+kivMOQ5S5R1?=
+ =?us-ascii?Q?KlFt2XoBgww0d5LAg21Nv9J39brQnXB7HYePOw9oO4Z4VGVwKgu0+JQuHT2A?=
+ =?us-ascii?Q?0a1p+gOW1PgWVe8VkVrVmqFsWI098hE1j/PTbJGCzf6jbtENIrXavmQLrz0P?=
+ =?us-ascii?Q?Oxbp5+7b+rbFAVc+21RtQfxahr6hEqRopJ6Na1OWIAsLUriRXB6AwDbfKfZZ?=
+ =?us-ascii?Q?Q0CENgf4zxAhb030e/GwqxYmHrWvt2ukNLBCtHfWnCvdSMk6vhlR5n45aggp?=
+ =?us-ascii?Q?iUX6NGeqEtYW54yXojxPGrb2vcJGIrQtgK1rsB8iwWnh/w=3D=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(1800799024)(52116014)(366016)(376014)(38350700014); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?nW6d8tsGyA1xJQpJRN/zPB5oFuJMU2uwEQMrS5X8ZPrbRd2TDPVoHVKmQkNs?=
- =?us-ascii?Q?T4sxNFGDslQ96kNFprQLJpy+tXWYQTVFmPL32A9KAo/rzZYq4/jo98f3Us++?=
- =?us-ascii?Q?/SZE3BNIXeDqp2VzgSZEeXEb3l7UU/qKYVlBTWxaKspAWvpcK3v6R7jtMBar?=
- =?us-ascii?Q?Dvo7vm9B8OEyk12hUkMt17HtF14J5Sp5A9B7bAoOugKFtGf3nGsp2GW3DfP2?=
- =?us-ascii?Q?Bnm2KHfzMHogPuSHj6QmRhYM2E0f5beObHha2xNNHD0pzcWVyHyF4+/OOs2S?=
- =?us-ascii?Q?DhG05cC1CGt+JpFUmRSJREaj+59FbOY/WncxLtngxtVIUDcKzFkhA3REuTRa?=
- =?us-ascii?Q?wcBosl804GrWklXoTJahQFcWAZwIFPPCX0PE2Y19KIyaZLqN/kVWzNV1C/ao?=
- =?us-ascii?Q?DfSd81lJKsU+qEQt2k+krI5KuQaLSyQwXU2YHR1K6KLoagjuasN28BSj5Tgx?=
- =?us-ascii?Q?9mWtNFYYbdM4/9v4rS/BwCQlAe0w33Zd9gUEfH56aC8XGklCSGuaiZJ9KiXM?=
- =?us-ascii?Q?rM8meUm8Vjyk5tJC4ZaoupKWo/yD7BX8Zv/eal/MsVQOIHfqaZjXAeSZ97dw?=
- =?us-ascii?Q?Q1t/Bu/gRqlTtPM3BEbGNXy7N+mH6vrriNxT5IEwn9F+9uvaPsJiif9Uf40p?=
- =?us-ascii?Q?71awOri6AbJYSapkR1SURhhkg3OYQtlyyqMw++5pP/mbAmB+ZbXEHi7yM2Yi?=
- =?us-ascii?Q?+UcNrnez5KCdgaPinW8CL5VfnG49Hp0zg2KbEuJXyAdvsTpY11iQKGHWfM8Y?=
- =?us-ascii?Q?itzMxfU7QtTi943pBl4JYzx+47o8xQQKkr5h9gharYgdd3ti1fhC4ef5OLM7?=
- =?us-ascii?Q?0thWUNKDZajS0nxFPT8HXwJ8P3BXDbz2BVhiGasySCRbCc+JTkAzSoOB8fVR?=
- =?us-ascii?Q?q+CSZeENKToV6C3rloR3LDHxN0M7cGJbI/nagD3gq4iU/XpHaA70MCLiRo48?=
- =?us-ascii?Q?Zm6XxDQ7XZnU5vezgY9yaJAxqQ4sjFTxgQ3SJ0pujISoFA1D0l8Ww2VjUM0N?=
- =?us-ascii?Q?MMXq1keT4yVmU3KQPlR/RWGN1clALgRUCqu4vmQxhtRPYxJUdiQzt2L3BOKY?=
- =?us-ascii?Q?FtR3hIow7bG75KN26g3OMzZ0kGo/36paYaJHxTD5qDbWguJ81hlav7THMyxk?=
- =?us-ascii?Q?gv4goJyYFdOZpgB91u82qE5gbXwt81zR2IwDLjS0tDqRdVDtKO2oPKdZEl0i?=
- =?us-ascii?Q?di89i3r/398YT1X5ZKis0opf1nYL2pDJ5qa/wkHpwr4RnXjWidYEJ5KdF5Us?=
- =?us-ascii?Q?1f2K4hCj6Wo/ZdCZkuZNFWBrbfXv9YDe/iTiy1MK8KlF2GpwyUCi5HibsCGZ?=
- =?us-ascii?Q?g06HPxt23SOOMnqTU/nGHZ7Hdb5bv24W/h7+POQVGrxqzPEpwaQhFKtX+Lic?=
- =?us-ascii?Q?hXLofS/uOgkwER73twVdR4gUDo/ZiDQM0Cd5e69eB+X+nw1B3aGisXmEpaCC?=
- =?us-ascii?Q?U5JSqiMCUOSsKVat6LOchU6KpVa7ovvdLxvoQiegtSw6CDgXwBlfU4vH4ZTr?=
- =?us-ascii?Q?8m71nDWfWLA0PQRSf1JQNgPT06GaoSLiDhrrk+zLEgjct9Y0bAEnH2GqX212?=
- =?us-ascii?Q?dDs4FML5eGOEoj0ZSx3ddNM/Z7erzl2Cww8E9d1B?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?SH4aIdv1eD1kUzt+CRMd7Zqt+D7Uu1N/cwK5G8nc7hUkKVMXXIVdQgZsRIWr?=
+ =?us-ascii?Q?LxAfhHzouJNPqzFUgxsDz9UmqDSdJ1l8aI0lbp6sX4I7x0hsB3ydX5JroPP+?=
+ =?us-ascii?Q?AOPImwKlfrciBMo3sERzN5EekKG6F4vaaYGLEDs2CXfhJ0fKZ5ibN9Uk0Bvz?=
+ =?us-ascii?Q?Ty7LGenX+M9bRwq14cxGin2dUEohIl8eDoMUc38XF2sccniYqmCx0jS9m++b?=
+ =?us-ascii?Q?NKIcK2YsWYxsIx2CfbsdFvfmI0evo7ScRSumpA7Ip3MNHWzr39U52IeussnY?=
+ =?us-ascii?Q?eE0r2xx1ViLd/Ewe2sLdYFnhjqOai3f6PIZCDwoT9/iR9XlxKbusqafa81uj?=
+ =?us-ascii?Q?Kwo6sg3m7gac8X0sEcNusNo0bvK3rKwerzBD1VsaFmb9SlhIgM3l1Nasd283?=
+ =?us-ascii?Q?bb6YihnQX2NMAuV0rwfvCW5uD+z2X2ZKljBEe4pkA4UknJRMGhTDrNBJfwlh?=
+ =?us-ascii?Q?GgjHjreY5Me7cVe398UL17uIutv5EmNrhfVJe3WRJuBsbieWeb+neVfBdYYh?=
+ =?us-ascii?Q?hVpB0LTMoSBeI4CQGIRVOFeuSHjGZVuE83UeYFAPLqROfn91ji3+9ptsx5oD?=
+ =?us-ascii?Q?tX0lkly87I5CsAubJrg+cO04IFsF2qM3o4PUkpKIoYK32wdMVvzZlAQiokDf?=
+ =?us-ascii?Q?qwV0WVSP8A/FxgZ94Fz+lLU62JmqgwY083jZXzkYjI8a3mrz4t1xsBXg5Ygj?=
+ =?us-ascii?Q?NCRnW/pPaFqKvkYCAfbcHlJqvd303BbfwmsCFTLo4m4VwzwMQ6IJYf+UnhcM?=
+ =?us-ascii?Q?vKxULvrD0xq4yGeGgQZshPiLEPNvH7vKCKBEkB2SsUK+OgEVwOq9mK9ZsYMd?=
+ =?us-ascii?Q?YvcYTunpiz6hL2EI39PdHC7Qk1U8glNGXNvT+V1p4V48r+eT4HjI6QQY83eh?=
+ =?us-ascii?Q?jMyc6hI4h1UycNEOMQMUROzLUqasenLGEvWNatn7BrcQtYTeHAE/u0gc0QNX?=
+ =?us-ascii?Q?MpSUIGr15DEQWRvbeFwYiG0F9YmM92SqObKnnXPXZBVWGCat65j1nst9rbVB?=
+ =?us-ascii?Q?ldVxwm1vsMN5Ul3jp6Trq3J7H9WgJUAunzG3duPReYNYZ/6wwz5WK4tO9ipQ?=
+ =?us-ascii?Q?rEFTYaPIYcy/yEzV80SLB6Nb3l1c+TXI5x47X6xxTjA0qGIiIwMDoPFHWE3y?=
+ =?us-ascii?Q?XKRI1QbC5UUFi0xW6faEnl/HwW0xhCMJoTZ95ak2PlabU4UEfaji2I/LtSHF?=
+ =?us-ascii?Q?QsdJgKvgGN/VST0IGeCAkx9mcnip5Rq/tLZ/i6nQfg2bGKd8t25ke0tO7ZDp?=
+ =?us-ascii?Q?tL3pDRkvM09GAZ8o4mKqxQTS/I7Mr+3LFXH2tzQCLUk9SOaTUOYKqOaEbckk?=
+ =?us-ascii?Q?Zh6aTZAK+usAFkVJSbhTItHiZihGsCxxU0dMLaDO5X+ZujdbapjRBMqmfE6e?=
+ =?us-ascii?Q?+jPxoOWbXOvQ4gR7y6PMwHA6EBmnb8JRb5Y4Xqopac7ooHJZ8r/DuYWcdgyw?=
+ =?us-ascii?Q?7oeARFLgkGYULzXX6SeigmtmWZlEP329McaSNICdqaaoSeziy9O23s2qULT6?=
+ =?us-ascii?Q?QiIsBAP/xdP7q0j48p6zz3naJQD6ZWhNfmECcx7eCzK3OceXldV3v0Z7UV78?=
+ =?us-ascii?Q?R/zM1lv7gNNvWMwyvqYytRuyb17k5y4Rgg0XYoSO?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a6ca4f33-990e-40ed-b554-08dce0faddd6
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3b352770-18d2-490f-d687-08dce0fae016
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2024 02:52:05.0965 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2024 02:52:08.7352 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ZDIudlzs1XDS5xLRBmf++5e/a+NYa4naMx/+7y9wN5nmfFgoXtJmFjJ7VhFuL0r6eHOtzpv0a7pT2qQ4pF8rcw==
+X-MS-Exchange-CrossTenant-UserPrincipalName: rJ4o2ZlMAQhoNDFquokxbuWX686b29XK2gpNpFYDRp9/vtf96B4hxnAgwu/m5SU1jIyyy1VShUBgVqvqs/h7Ig==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR04MB8712
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -162,309 +162,315 @@ X-Virus-Status: Clean
 
 From: Joy Zou <joy.zou@nxp.com>
 
-Add regulator support for NXP pmic pf5300.
+Support NXP PMIC pf9453.
 
-Signed-off-by: Joy Zou <joy.zou@nxp.com>
 Reviewed-by: Ye Li <ye.li@nxp.com>
+Reviewed-by: Peng Fan <peng.fan@nxp.com>
+Signed-off-by: Joy Zou <joy.zou@nxp.com>
 Signed-off-by: Peng Fan <peng.fan@nxp.com>
 ---
- drivers/power/regulator/Kconfig  |  15 ++
- drivers/power/regulator/Makefile |   1 +
- drivers/power/regulator/pf5300.c | 247 +++++++++++++++++++++++++++++++
- 3 files changed, 263 insertions(+)
- create mode 100644 drivers/power/regulator/pf5300.c
+ drivers/power/pmic/Kconfig  |  15 ++++
+ drivers/power/pmic/Makefile |   1 +
+ drivers/power/pmic/pf9453.c | 173 ++++++++++++++++++++++++++++++++++++
+ include/power/pf9453.h      |  71 +++++++++++++++
+ 4 files changed, 260 insertions(+)
+ create mode 100644 drivers/power/pmic/pf9453.c
+ create mode 100644 include/power/pf9453.h
 
-diff --git a/drivers/power/regulator/Kconfig b/drivers/power/regulator/Kconfig
-index b2f487b050b..69dfb07df50 100644
---- a/drivers/power/regulator/Kconfig
-+++ b/drivers/power/regulator/Kconfig
-@@ -111,6 +111,21 @@ config SPL_DM_REGULATOR_PF0900
- 	This config enables implementation of driver-model regulator uclass
- 	features for regulators on ROHM PF0900 in SPL.
+diff --git a/drivers/power/pmic/Kconfig b/drivers/power/pmic/Kconfig
+index 420c4099937..42e405901de 100644
+--- a/drivers/power/pmic/Kconfig
++++ b/drivers/power/pmic/Kconfig
+@@ -171,6 +171,21 @@ config SPL_DM_PMIC_PCA9450
+ 	  This config enables implementation of driver-model pmic uclass features
+ 	  for PMIC PCA9450 in SPL. The driver implements read/write operations.
  
-+config DM_REGULATOR_PF5300
-+	bool "Enable Driver Model for NXP PF5300 regulators"
-+	depends on DM_REGULATOR && DM_PMIC_PF5300
++config DM_PMIC_PF9453
++	bool "Enable Driver Model for PMIC PF9453"
++	depends on DM_I2C
 +	help
-+	This config enables implementation of driver-model regulator uclass
-+	features for regulators on NXP PF5300 PMICs. PF5300 contains 1 sw.
-+	The driver implements get/set api for value and enable.
++	  This config enables implementation of driver-model pmic uclass features
++	  for PMIC PF9453. The driver implements read/write operations.
 +
-+config SPL_DM_REGULATOR_PF5300
-+	bool "Enable Driver Model for NXP PF5300 regulators in SPL"
-+	depends on DM_REGULATOR_PF0900 && SPL
++config SPL_DM_PMIC_PF9453
++	bool "Enable Driver Model for PMIC PF9453 in SPL"
++	depends on SPL_DM_PMIC
++	depends on SPL_DM_I2C
 +	help
-+	This config enables implementation of driver-model regulator uclass
-+	features for regulators on ROHM PF5300 in SPL.
++	  This config enables implementation of driver-model pmic uclass features
++	  for PMIC PF9453 in SPL. The driver implements read/write operations.
 +
- config DM_REGULATOR_DA9063
- 	bool "Enable Driver Model for REGULATOR DA9063"
- 	depends on DM_REGULATOR && DM_PMIC_DA9063
-diff --git a/drivers/power/regulator/Makefile b/drivers/power/regulator/Makefile
-index a49700dfd25..7a580d45b72 100644
---- a/drivers/power/regulator/Makefile
-+++ b/drivers/power/regulator/Makefile
-@@ -17,6 +17,7 @@ obj-$(CONFIG_$(SPL_)DM_PMIC_PFUZE100) += pfuze100.o
- obj-$(CONFIG_$(SPL_)DM_REGULATOR_BD71837) += bd71837.o
- obj-$(CONFIG_$(SPL_)DM_REGULATOR_PCA9450) += pca9450.o
- obj-$(CONFIG_$(SPL_)DM_REGULATOR_PF0900) += pf0900.o
-+obj-$(CONFIG_$(SPL_)DM_REGULATOR_PF5300) += pf5300.o
- obj-$(CONFIG_$(SPL_)REGULATOR_PWM) += pwm_regulator.o
- obj-$(CONFIG_$(SPL_)DM_REGULATOR_FAN53555) += fan53555.o
- obj-$(CONFIG_$(SPL_)DM_REGULATOR_COMMON) += regulator_common.o
-diff --git a/drivers/power/regulator/pf5300.c b/drivers/power/regulator/pf5300.c
+ config DM_PMIC_PF0900
+ 	bool "Enable Driver Model for PMIC PF0900"
+ 	depends on DM_I2C
+diff --git a/drivers/power/pmic/Makefile b/drivers/power/pmic/Makefile
+index 74ace69daf5..7cee4ee0582 100644
+--- a/drivers/power/pmic/Makefile
++++ b/drivers/power/pmic/Makefile
+@@ -14,6 +14,7 @@ obj-$(CONFIG_$(SPL_)DM_PMIC_BD71837) += bd71837.o
+ obj-$(CONFIG_$(SPL_)DM_PMIC_MP5416) += mp5416.o
+ obj-$(CONFIG_$(SPL_)DM_PMIC_PFUZE100) += pfuze100.o
+ obj-$(CONFIG_$(SPL_)DM_PMIC_PCA9450) += pca9450.o
++obj-$(CONFIG_$(SPL_)DM_PMIC_PF9453) += pf9453.o
+ obj-$(CONFIG_$(SPL_)DM_PMIC_PF0900) += pf0900.o
+ obj-$(CONFIG_$(SPL_)DM_PMIC_PF5300) += pf5300.o
+ obj-$(CONFIG_PMIC_S2MPS11) += s2mps11.o
+diff --git a/drivers/power/pmic/pf9453.c b/drivers/power/pmic/pf9453.c
 new file mode 100644
-index 00000000000..6df24934e09
+index 00000000000..893a7771d0e
 --- /dev/null
-+++ b/drivers/power/regulator/pf5300.c
-@@ -0,0 +1,247 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
++++ b/drivers/power/pmic/pf9453.c
+@@ -0,0 +1,173 @@
++// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * NXP PF5300 regulator driver
-+ * Copyright 2023 NXP
++ * Copyright 2024 NXP
 + */
 +
-+#include <dm.h>
++#include <asm/global_data.h>
++#include <asm-generic/gpio.h>
++#include <fdtdec.h>
 +#include <errno.h>
++#include <dm.h>
++#include <dm/device_compat.h>
++#include <i2c.h>
++#include <linux/err.h>
 +#include <log.h>
-+#include <linux/bitops.h>
-+#include <power/pf5300.h>
 +#include <power/pmic.h>
 +#include <power/regulator.h>
++#include <power/pf9453.h>
 +
-+/**
-+ * struct pf5300_vrange - describe linear range of voltages
-+ *
-+ * @min_volt:	smallest voltage in range
-+ * @step:	how much voltage changes at each selector step
-+ * @min_sel:	smallest selector in the range
-+ * @max_sel:	maximum selector in the range
-+ */
-+struct pf5300_vrange {
-+	unsigned int	min_volt;
-+	u8		min_sel;
-+	u8		max_sel;
-+	unsigned int	step;
++DECLARE_GLOBAL_DATA_PTR;
++
++static const struct pmic_child_info pmic_children_info[] = {
++	/* buck */
++	{ .prefix = "b", .driver = PF9453_REGULATOR_DRIVER},
++	{ .prefix = "B", .driver = PF9453_REGULATOR_DRIVER},
++	/* ldo */
++	{ .prefix = "l", .driver = PF9453_REGULATOR_DRIVER},
++	{ .prefix = "L", .driver = PF9453_REGULATOR_DRIVER},
++	{ },
 +};
 +
-+/**
-+ * struct pf5300_plat - describe regulator control registers
-+ *
-+ * @name:	name of the regulator. Used for matching the dt-entry
-+ * @enable_reg:	register address used to enable/disable regulator
-+ * @enablemask:	register mask used to enable/disable regulator
-+ * @volt_reg:	register address used to configure regulator voltage
-+ * @volt_mask:	register mask used to configure regulator voltage
-+ * @ranges:	pointer to ranges of regulator voltages and matching register
-+ *		values
-+ * @numranges:	number of voltage ranges pointed by ranges
-+ */
-+struct pf5300_plat {
-+	const char		*name;
-+	u8			enable_reg;
-+	u8			enablemask;
-+	u8			volt_reg;
-+	u8			volt_mask;
-+	struct pf5300_vrange	*ranges;
-+	unsigned int		numranges;
++struct pf9453_priv {
++	struct gpio_desc *sd_vsel_gpio;
 +};
 +
-+#define PCA_RANGE(_min, _sel_low, _sel_hi, _vstep) \
-+{ \
-+	.min_volt = (_min), .min_sel = (_sel_low), \
-+	.max_sel = (_sel_hi), .step = (_vstep),\
-+}
-+
-+#define PCA_DATA(_name, enreg, enmask, vreg, vmask, _range) \
-+{ \
-+	.name = (_name), .enable_reg = (enreg), .enablemask = (enmask), \
-+	.volt_reg = (vreg), .volt_mask = (vmask), .ranges = (_range), \
-+	.numranges = ARRAY_SIZE(_range) \
-+}
-+
-+static struct pf5300_vrange pf5300_sw1_vranges[] = {
-+	PCA_RANGE(500000,  0x00, 0x8C, 5000),
-+	PCA_RANGE(0,       0x8D, 0xFF, 0),
-+};
-+
-+static struct pf5300_plat pf5301_reg_data[] = {
-+	PCA_DATA("SW1_2a", PF5300_REG_SW1_CTRL1, SW_MODE_PWM,
-+		 PF5300_REG_SW1_VOLT, SW1_VOLT_MASK,
-+		 pf5300_sw1_vranges),
-+};
-+
-+static struct pf5300_plat pf5302_reg_data[] = {
-+	PCA_DATA("SW1_29", PF5300_REG_SW1_CTRL1, SW_MODE_PWM,
-+		 PF5300_REG_SW1_VOLT, SW1_VOLT_MASK,
-+		 pf5300_sw1_vranges),
-+};
-+
-+static int vrange_find_value(struct pf5300_vrange *r, unsigned int sel,
-+			     unsigned int *val)
++static int pf9453_reg_count(struct udevice *dev)
 +{
-+	if (!val || sel < r->min_sel || sel > r->max_sel)
-+		return -EINVAL;
++	return PF9453_REG_NUM;
++}
 +
-+	*val = r->min_volt + r->step * (sel - r->min_sel);
++static bool is_reg_protect(uint reg)
++{
++	switch (reg) {
++	case PF9453_BUCK1OUT:
++	case PF9453_BUCK2OUT:
++	case PF9453_BUCK3OUT:
++	case PF9453_BUCK4OUT:
++	case PF9453_LDO1OUT_L:
++	case PF9453_LDO1OUT_H:
++	case PF9453_LDO2OUT:
++	case PF9453_LDOSNVS_CFG1:
++	case PF9453_BUCK2OUT_MAX_LIMIT:
++	case PF9453_BUCK2OUT_MIN_LIMIT:
++		return true;
++	default:
++		return false;
++	}
++}
++
++static int pf9453_write(struct udevice *dev, uint reg, const uint8_t *buff,
++			 int len)
++{
++	bool is_pro;
++	u32 val = PF9453_UNLOCK_KEY;
++
++	is_pro = is_reg_protect(reg);
++	if (is_pro) {
++		if (dm_i2c_write(dev, PF9453_REG_LOCK, (uint8_t *)&val, 1)) {
++			pr_err("write error to device: %p register: %#x!\n", dev, reg);
++			return -EIO;
++		}
++
++		if (dm_i2c_write(dev, reg, buff, len)) {
++			pr_err("write error to device: %p register: %#x!\n", dev, reg);
++			return -EIO;
++		}
++
++		val = PF9453_LOCK_KEY;
++		if (dm_i2c_write(dev, PF9453_REG_LOCK, (uint8_t *)&val, 1)) {
++			pr_err("write error to device: %p register: %#x!\n", dev, reg);
++			return -EIO;
++		}
++	} else {
++
++		if (dm_i2c_write(dev, reg, buff, len)) {
++			pr_err("write error to device: %p register: %#x!\n", dev, reg);
++			return -EIO;
++		}
++	}
++
 +	return 0;
 +}
 +
-+static int vrange_find_selector(struct pf5300_vrange *r, int val,
-+				unsigned int *sel)
++static int pf9453_read(struct udevice *dev, uint reg, uint8_t *buff,
++			int len)
 +{
-+	int ret = -EINVAL;
-+	int num_vals = r->max_sel - r->min_sel + 1;
-+
-+	if (val >= r->min_volt &&
-+	    val <= r->min_volt + r->step * (num_vals - 1)) {
-+		if (r->step) {
-+			*sel = r->min_sel + ((val - r->min_volt) / r->step);
-+			ret = 0;
-+		} else {
-+			*sel = r->min_sel;
-+			ret = 0;
-+		}
-+	}
-+	return ret;
-+}
-+
-+static int pf5300_get_enable(struct udevice *dev)
-+{
-+	struct pf5300_plat *plat = dev_get_plat(dev);
-+	int val;
-+
-+	val = pmic_reg_read(dev->parent, plat->enable_reg);
-+	if (val < 0)
-+		return val;
-+
-+	return (val & plat->enablemask);
-+}
-+
-+static int pf5300_set_enable(struct udevice *dev, bool enable)
-+{
-+	int val = 0;
-+	int tmp = 0;
-+	struct pf5300_plat *plat = dev_get_plat(dev);
-+
-+	if (enable)
-+		tmp = plat->enablemask;
-+	val = pmic_reg_read(dev->parent, plat->enable_reg);
-+	if (tmp < 0)
-+		return tmp;
-+	val = (tmp & plat->enablemask) | (val & (~plat->enablemask));
-+
-+	return pmic_reg_write(dev->parent, plat->enable_reg, val);
-+}
-+
-+static int pf5300_get_value(struct udevice *dev)
-+{
-+	struct pf5300_plat *plat = dev_get_plat(dev);
-+	unsigned int reg, tmp;
-+	int i, ret;
-+
-+	ret = pmic_reg_read(dev->parent, plat->volt_reg);
-+	if (ret < 0)
-+		return ret;
-+
-+	reg = ret;
-+	reg &= plat->volt_mask;
-+
-+	for (i = 0; i < plat->numranges; i++) {
-+		struct pf5300_vrange *r = &plat->ranges[i];
-+
-+		if (!vrange_find_value(r, reg, &tmp))
-+			return tmp;
++	if (dm_i2c_read(dev, reg, buff, len)) {
++		pr_err("read error from device: %p register: %#x!\n", dev, reg);
++		return -EIO;
 +	}
 +
-+	pr_err("Unknown voltage value read from pmic\n");
-+
-+	return -EINVAL;
++	return 0;
 +}
 +
-+static int pf5300_set_value(struct udevice *dev, int uvolt)
++static int pf9453_bind(struct udevice *dev)
 +{
-+	struct pf5300_plat *plat = dev_get_plat(dev);
-+	unsigned int sel;
-+	int i, val, found = 0;
++	int children;
++	ofnode regulators_node;
 +
-+	for (i = 0; i < plat->numranges; i++) {
-+		struct pf5300_vrange *r = &plat->ranges[i];
++	regulators_node = dev_read_subnode(dev, "regulators");
++	if (!ofnode_valid(regulators_node)) {
++		debug("%s: %s regulators subnode not found!", __func__,
++		      dev->name);
++		return -ENXIO;
++	}
 +
-+		found = !vrange_find_selector(r, uvolt, &sel);
-+		if (found) {
-+			unsigned int tmp;
++	debug("%s: '%s' - found regulators subnode\n", __func__, dev->name);
 +
-+			/*
-+			 * We require exactly the requested value to be
-+			 * supported - this can be changed later if needed
-+			 */
-+			found = !vrange_find_value(r, sel, &tmp);
-+			if (found && tmp == uvolt)
-+				break;
-+			found = 0;
++	children = pmic_bind_children(dev, regulators_node,
++				      pmic_children_info);
++	if (!children)
++		debug("%s: %s - no child found\n", __func__, dev->name);
++
++	/* Always return success for this device */
++	return 0;
++}
++
++static int pf9453_probe(struct udevice *dev)
++{
++	struct pf9453_priv *priv = dev_get_priv(dev);
++	unsigned int reset_ctrl;
++	int ret = 0;
++
++	if (CONFIG_IS_ENABLED(DM_GPIO) && CONFIG_IS_ENABLED(DM_REGULATOR_PF9453)) {
++		priv->sd_vsel_gpio = devm_gpiod_get_optional(dev, "sd-vsel",
++							     GPIOD_IS_OUT |
++							     GPIOD_IS_OUT_ACTIVE);
++		if (IS_ERR(priv->sd_vsel_gpio)) {
++			ret = PTR_ERR(priv->sd_vsel_gpio);
++			dev_err(dev, "Failed to request SD_VSEL GPIO: %d\n", ret);
++			if (ret)
++				return ret;
 +		}
 +	}
 +
-+	if (!found)
-+		return -EINVAL;
++	if (ofnode_read_bool(dev_ofnode(dev), "nxp,wdog_b-warm-reset"))
++		reset_ctrl = PF9453_PMIC_RESET_WDOG_B_CFG_WARM;
++	else
++		reset_ctrl = PF9453_PMIC_RESET_WDOG_B_CFG_COLD;
 +
-+	val = pmic_reg_read(dev->parent, plat->volt_reg);
-+	if (val < 0)
-+		return val;
-+	val = (sel & plat->volt_mask) | (val & (~plat->volt_mask));
-+	return pmic_reg_write(dev->parent, plat->volt_reg, val);
++	return pmic_clrsetbits(dev, PF9453_RESET_CTRL,
++			       PF9453_PMIC_RESET_WDOG_B_CFG_MASK, reset_ctrl);
 +}
 +
-+static int pf5300_regulator_probe(struct udevice *dev)
-+{
-+	struct pf5300_plat *plat = dev_get_plat(dev);
-+	int i, type;
-+
-+	type = dev_get_driver_data(dev_get_parent(dev));
-+
-+	if (type != PF5300_TYPE_PF5300 && type != PF5300_TYPE_PF5301 &&
-+	    type != PF5300_TYPE_PF5302) {
-+		debug("Unknown PMIC type\n");
-+		return -EINVAL;
-+	}
-+
-+	if (type == PF5300_TYPE_PF5301) {
-+		for (i = 0; i < ARRAY_SIZE(pf5301_reg_data); i++) {
-+			if (strcmp(dev->name, pf5301_reg_data[i].name))
-+				continue;
-+			*plat = pf5301_reg_data[i];
-+
-+			return 0;
-+		}
-+	} else if (type == PF5300_TYPE_PF5302) {
-+		for (i = 0; i < ARRAY_SIZE(pf5302_reg_data); i++) {
-+			if (strcmp(dev->name, pf5302_reg_data[i].name))
-+				continue;
-+			*plat = pf5301_reg_data[i];
-+
-+			return 0;
-+		}
-+	}
-+
-+	pr_err("Unknown regulator '%s'\n", dev->name);
-+
-+	return -ENOENT;
-+}
-+
-+static const struct dm_regulator_ops pf5300_regulator_ops = {
-+	.get_value	= pf5300_get_value,
-+	.set_value	= pf5300_set_value,
-+	.get_enable	= pf5300_get_enable,
-+	.set_enable	= pf5300_set_enable,
++static struct dm_pmic_ops pf9453_ops = {
++	.reg_count = pf9453_reg_count,
++	.read = pf9453_read,
++	.write = pf9453_write,
 +};
 +
-+U_BOOT_DRIVER(pf5300_regulator) = {
-+	.name		= PF5300_REGULATOR_DRIVER,
-+	.id		= UCLASS_REGULATOR,
-+	.ops		= &pf5300_regulator_ops,
-+	.probe		= pf5300_regulator_probe,
-+	.plat_auto	= sizeof(struct pf5300_plat),
++static const struct udevice_id pf9453_ids[] = {
++	{ .compatible = "nxp,pf9453", .data = NXP_CHIP_TYPE_PF9453, },
++	{ }
 +};
++
++U_BOOT_DRIVER(pmic_pf9453) = {
++	.name = "pf9453 pmic",
++	.id = UCLASS_PMIC,
++	.of_match = pf9453_ids,
++	.bind = pf9453_bind,
++	.probe = pf9453_probe,
++	.ops = &pf9453_ops,
++	.priv_auto = sizeof(struct pf9453_priv),
++};
+diff --git a/include/power/pf9453.h b/include/power/pf9453.h
+new file mode 100644
+index 00000000000..fd9617edc2c
+--- /dev/null
++++ b/include/power/pf9453.h
+@@ -0,0 +1,71 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright 2024 NXP
++ */
++
++#ifndef PF9453_H_
++#define PF9453_H_
++
++#define PF9453_REGULATOR_DRIVER "pf9453_regulator"
++
++enum {
++	PF9453_REG_DEV_ID          = 0x00,
++	PF9453_OTP_VER             = 0x01,
++	PF9453_INT1                = 0x02,
++	PF9453_INT1_MSK            = 0x03,
++	PF9453_INT1_STATUS         = 0x04,
++	PF9453_VRFLT1_INT          = 0x05,
++	PF9453_VRFLT1_MASK         = 0x06,
++	PF9453_PWRON_STAT          = 0x07,
++	PF9453_RESET_CTRL          = 0x08,
++	PF9453_SW_RST              = 0x09,
++	PF9453_PWR_CTRL            = 0x0a,
++	PF9453_CONFIG1             = 0x0b,
++	PF9453_CONFIG2             = 0x0c,
++	PF9453_32K_CONFIG          = 0x0d,
++	PF9453_BUCK1CTRL           = 0x10,
++	PF9453_BUCK1OUT            = 0x11,
++	PF9453_BUCK2CTRL           = 0x14,
++	PF9453_BUCK2OUT            = 0x15,
++	PF9453_BUCK2OUT_STBY       = 0x1D,
++	PF9453_BUCK2OUT_MAX_LIMIT  = 0x1F,
++	PF9453_BUCK2OUT_MIN_LIMIT  = 0x20,
++	PF9453_BUCK3CTRL           = 0x21,
++	PF9453_BUCK3OUT            = 0x22,
++	PF9453_BUCK4CTRL           = 0x2e,
++	PF9453_BUCK4OUT            = 0x2f,
++	PF9453_LDO1OUT_L          = 0x36,
++	PF9453_LDO1CFG            = 0x37,
++	PF9453_LDO1OUT_H          = 0x38,
++	PF9453_LDOSNVS_CFG1        = 0x39,
++	PF9453_LDOSNVS_CFG2        = 0x3a,
++	PF9453_LDO2CFG            = 0x3b,
++	PF9453_LDO2OUT            = 0x3c,
++	PF9453_BUCK_POK            = 0x3d,
++	PF9453_LSW_CTRL1           = 0x40,
++	PF9453_LSW_CTRL2           = 0x41,
++	PF9453_REG_LOCK            = 0x4e,
++	PF9453_REG_NUM,
++};
++
++int power_pf9453_init(unsigned char bus, unsigned char addr);
++
++enum {
++	NXP_CHIP_TYPE_PF9453 = 0,
++	NXP_CHIP_TYPE_AMOUNT
++};
++
++#define PF9453_UNLOCK_KEY		0x5c
++#define PF9453_LOCK_KEY			0x0
++
++#define PF9453_EN_MODE_MASK		0x3
++#define PF9453_BUCK_RUN_MASK		0x7f
++#define PF9453_LDO1_MASK		0x7f
++#define PF9453_LDO2_MASK		0x3f
++#define PF9453_LDOSNVS_MASK		0x7f
++
++#define PF9453_PMIC_RESET_WDOG_B_CFG_MASK		0xc0
++#define PF9453_PMIC_RESET_WDOG_B_CFG_WARM		0x40
++#define PF9453_PMIC_RESET_WDOG_B_CFG_COLD       	0x80
++
++#endif
 -- 
 2.35.3
 
