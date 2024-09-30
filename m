@@ -4,75 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6276CE8379
-	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 18:51:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE253CCFA16
+	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 18:52:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B9898905C;
-	Mon, 30 Sep 2024 20:51:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7EF6D8904C;
+	Mon, 30 Sep 2024 20:51:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="W1Kl7iC6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Yrcaegys";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F2AB38904C; Mon, 30 Sep 2024 20:51:49 +0200 (CEST)
-Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
- [IPv6:2607:f8b0:4864:20::d31])
+ id 1899C89068; Mon, 30 Sep 2024 20:51:55 +0200 (CEST)
+Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
+ [IPv6:2607:f8b0:4864:20::d35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C23F889021
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 20:51:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 264298904C
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 20:51:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd31.google.com with SMTP id
- ca18e2360f4ac-82ab349320fso197439439f.1
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 11:51:47 -0700 (PDT)
+Received: by mail-io1-xd35.google.com with SMTP id
+ ca18e2360f4ac-8323b555ae2so233912439f.2
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 11:51:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727722306; x=1728327106; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727722309; x=1728327109; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ECbWg51i9WXQVdA5QjYH65IvNhmltS3gENq9T+KTr8g=;
- b=W1Kl7iC6BVw7+W1Bb2xvFEd4HDdUlkqa404G02FZsmOv2G4dBU9clfpdz5oCw8lQKS
- 4IniYbMQOs5Qlnuh/OGzYcVzPuFWxhFdM/Rpc6x/mY5H1gLdyG4vDfO2vERmQ/Pskehr
- fhjYvfiZD+h6c4XlAnbLoTRK0NB+idzeDOulo=
+ bh=lGEQhzFwopvuzaEW/U6EInRgbwufFr1eMAEe4cpnpCQ=;
+ b=Yrcaegysm2CljHO/k/IGz7buHVWQ+nx7A1HV1ylKjpEKiOTh0+Fr66V0jErH2mznaW
+ BkQluUo37WQ9IWDLIVjq2w/9qUoTsKojDR9GLCsIxlNcQx1K28qqB4UDAPYF4Vo18wD5
+ usg7KL62GGWXoTU4pNAGtrHiMC6X3sp/PaSIQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727722306; x=1728327106;
+ d=1e100.net; s=20230601; t=1727722309; x=1728327109;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ECbWg51i9WXQVdA5QjYH65IvNhmltS3gENq9T+KTr8g=;
- b=CxCZftgfj49+WD4oPeYzWtq6X61ownCsEp4BWs87tNLotenzHHaQA5OfZmmKeUm0sf
- vBg7egsLos87OsOohO4bTUd8uhhEfd+4DI2jpL9TzBi9u/VnWuZiAex+0HC+/n8FORjH
- UuFXXDyJW4si760Tn0lbYwbTpXzrhzLVl2SZB6VvSb4nPQHRsc7GbsTI6xAlOzxPsRVG
- QjeGepata0nz6zc2jCboMnMXNll6Kf4r2v8YLP2y0f3vbEJSZBjMGHEf1raEEDuTl1Qh
- okQJlQIcpxQ2XHnXFYOFr2lcjJghQBoY2uQlneHO0i6mDL7PQH3G8EMzbBHKs2EfnmDz
- HxRQ==
-X-Gm-Message-State: AOJu0Yw2FWxX6c3yyGRgvju2Ia9l0/YwfWEGS3ucP8INQtDLNQO9SLZH
- fA1gbquscmMIuhzUqcU58LdX9JXQ3GOWb+F06T5DjilP0LcwnO9DYVITNyIR8EVc9eUKYq9+5Bj
- 5Xg==
-X-Google-Smtp-Source: AGHT+IHwmXHhvcCs5xPP41ilncQVarNdYICD0t87QNnOruUis6Cb4bmuuL9qqZKKv8C3oav+x4oBkA==
-X-Received: by 2002:a05:6602:2c01:b0:82c:f43f:bafe with SMTP id
- ca18e2360f4ac-834931e59e1mr1364803339f.8.1727722306326; 
- Mon, 30 Sep 2024 11:51:46 -0700 (PDT)
+ bh=lGEQhzFwopvuzaEW/U6EInRgbwufFr1eMAEe4cpnpCQ=;
+ b=xIks2O6sZZThYUq6LvZmMaflESYxC90amuDgtNJVsc4wm6cwUCirC6JTkuRacI7/On
+ LHMJC8APknQ322BmE7k5H5ChOGn1Sn6CvpZsjAbnLLPXzYG/2MHXpbIwZGnbmPT6P39n
+ kRWxlKWxyutxDzMpW1fsMb6Bkyo0qi4Qtnk16WIbPtY3v1L+NvrQoWw0IhfdGJ3cRXs8
+ +lf6mkX4+WTArUtxWjWSPOeeVgV6W5XhtsR4ZrOvLRJNOnoQzP+V60aqWZJAwQIJGz2S
+ 5n7ScmnEBO90O7mrByeNYS0ljTDVTOU3oTRa2VhSodYRgpencuW/ruawdXg3rSzYqtrJ
+ tv/A==
+X-Gm-Message-State: AOJu0YxHAMuugNzUVmv6FUCJHNFCZOP+/ml9G50sIMN6prmQHsCJmqS+
+ 74MC3J7rvTzLCqWLdRbTMjJQN/OX80bVM0BXtPqrjEhqH3NbQ9VHejtps9f5ogYqRfYMzJ1ELGE
+ m2A==
+X-Google-Smtp-Source: AGHT+IGsU7/Tlz1nLR2EFF47kBSAOCAx+yDEs46UoL7tjZBdwhzIDgXDYTaObPzVqAfbweE3iB+wkA==
+X-Received: by 2002:a05:6602:6d13:b0:82c:ffb5:86ab with SMTP id
+ ca18e2360f4ac-834931d4168mr1377690539f.5.1727722308145; 
+ Mon, 30 Sep 2024 11:51:48 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4d888849b68sm2239195173.59.2024.09.30.11.51.45
+ 8926c6da1cb9f-4d888849b68sm2239195173.59.2024.09.30.11.51.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Sep 2024 11:51:46 -0700 (PDT)
+ Mon, 30 Sep 2024 11:51:47 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Brian Ruley <brian.ruley@gehealthcare.com>,
  Marek Vasut <marex@denx.de>, Simon Glass <sjg@chromium.org>,
+ Alexander Dahl <ada@thorsis.com>,
  Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Joao Marcos Costa <jmcosta944@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
  Philippe Reynes <philippe.reynes@softathome.com>,
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
-Subject: [PATCH 2/3] binman: Support getting test-coverage on just one test
-Date: Mon, 30 Sep 2024 12:51:37 -0600
-Message-Id: <20240930185139.2185983-2-sjg@chromium.org>
+ Robert Marko <robert.marko@sartura.hr>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Sumit Garg <sumit.garg@linaro.org>
+Subject: [PATCH 3/3] binman: Add a tutorial on resolving test-coverage bugs
+Date: Mon, 30 Sep 2024 12:51:38 -0600
+Message-Id: <20240930185139.2185983-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240930185139.2185983-1-sjg@chromium.org>
 References: <20240930185139.2185983-1-sjg@chromium.org>
@@ -94,70 +103,799 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Pass the arguments through to test_util so that a single test can be
-used.
-
-Update the docs and add some missing backquotes in the same section.
+Provide a short description of how tests work, why they are so critical
+and how to resolve gaps in Binman's test coverage.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/binman/binman.rst | 5 ++++-
- tools/binman/main.py    | 6 +++---
- 2 files changed, 7 insertions(+), 4 deletions(-)
+ MAINTAINERS                  |   1 +
+ doc/develop/binman_tests.rst | 734 +++++++++++++++++++++++++++++++++++
+ doc/develop/index.rst        |   1 +
+ tools/binman/binman.rst      |   5 +
+ 4 files changed, 741 insertions(+)
+ create mode 100644 doc/develop/binman_tests.rst
 
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 7ab39d91a55..65a9ea1face 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -909,6 +909,7 @@ BINMAN
+ M:	Simon Glass <sjg@chromium.org>
+ M:	Alper Nebi Yasak <alpernebiyasak@gmail.com>
+ S:	Maintained
++F:	doc/develop/binman_tests.rst
+ F:	tools/binman/
+ 
+ BLKMAP
+diff --git a/doc/develop/binman_tests.rst b/doc/develop/binman_tests.rst
+new file mode 100644
+index 00000000000..a632694a6fe
+--- /dev/null
++++ b/doc/develop/binman_tests.rst
+@@ -0,0 +1,734 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++.. toctree::
++   :maxdepth: 1
++
++Binman Tests
++============
++
++.. contents::
++   :depth: 2
++   :local:
++
++There is some material on writing tests in the main Binman documentation
++(see :doc:`package/index`). This short guide is separate so people don't
++feel they have to read as much.
++
++Code and output is mostly included verbatim, which makes the doc longer, but
++avoids its becoming confusing when the output or referenced code changes in the
++future.
++
++Purpose
++-------
++
++The main purpose of tests in Binman is to make sure that Binman actually does
++what it is supposed to. Various people contribute code, refactoring is done
++over time, but U-Boot users (developers, SoC vendors, board vendors) rely on
++Binman producing images which function correctly. Without tests, a one-line
++change could unintentionally break a corner-case and the problem might not be
++noticed for months. Debugging an image-generation problem with a board you
++don't have can be very hard.
++
++A secondary purpose is productivity. U-Boot contributors are busy and often
++have too much on their plate. Trying to figure out why their patch broke
++some other vendor's workflow can be very time-consuming and frustrating. By
++building in tests from the start, this is largely avoided. If your change has
++full test coverage and doesn't break any test, all is well and no one can
++complain.
++
++A lessor purpose is to document what Binman actually does. If a test covers a
++feature, it works. If there is no test coverage, no one can say for sure
++whether it works in all expected situations, certainly not wihout manual
++effort.
++
++In fact, strictly speaking it isn't completely clear what 'works' even means in
++the case where these is no test to cover the code. We are often left guessing
++as to what the documentation means, what was actually intended, etc.
++
++Finally, code-coverage helps to remove 'zombie code', copied from elsewhere
++because it looks reasonable, but not actually needed. The same situation arises
++in silicon-chip design, where a part of the chip is not validated. If it isn't
++validated, it can be assumed not to work, either now or later, so it is best to
++remove that logic to avoid it causing problems.
++
++Setting up
++----------
++
++Binman tests use various utility programs. Most of these are documented in
++:doc:`../build/gcc`. But some are SoC-specific. To fetch these, tell Binman to
++fetch or build any missing tools:
++
++.. code-block:: bash
++
++    $ binman tool -f missing
++
++When this completes successfully, you can list the tools. You should see
++something like this:
++
++.. code-block:: bash
++
++    $ binman tool -l
++    Name             Version      Description                Path
++    ---------------  -----------  -------------------------  ------------------------------
++    bootgen          ****** Bootg Xilinx Bootgen             /home/sglass/.binman-tools/bootgen
++    bzip2            1.0.8        bzip2 compression          /usr/bin/bzip2
++    cbfstool         unknown      Manipulate CBFS files      /home/sglass/bin/cbfstool
++    fdt_add_pubkey   unknown      Generate image for U-Boot  /home/sglass/bin/fdt_add_pubkey
++    fdtgrep          unknown      Grep devicetree files      /home/sglass/bin/fdtgrep
++    fiptool          v2.11.0(rele Manipulate ATF FIP files   /home/sglass/.binman-tools/fiptool
++    futility         v0.0.1-9f2e9 Chromium OS firmware utili /home/sglass/.binman-tools/futility
++    gzip             1.12         gzip compression           /usr/bin/gzip
++    ifwitool         unknown      Manipulate Intel IFWI file /home/sglass/.binman-tools/ifwitool
++    lz4              v1.9.4       lz4 compression            /usr/bin/lz4
++    lzma_alone       9.22 beta    lzma_alone compression     /usr/bin/lzma_alone
++    lzop             v1.04        lzo compression            /usr/bin/lzop
++    mkeficapsule     2024.10-rc5- mkeficapsule tool for gene /home/sglass/bin/mkeficapsule
++    mkimage          2024.10-rc5- Generate image for U-Boot  /home/sglass/bin/mkimage
++    openssl          3.0.13 30 Ja openssl cryptography toolk /usr/bin/openssl
++    xz               5.4.5        xz compression             /usr/bin/xz
++    zstd             v1.5.5       zstd compression           /usr/bin/zstd
++
++The tools are written to ``~/.binman-tools`` so add that to your ``PATH``.
++It's fine to have some of the tools elsewhere (e.g. ``~/bin``) so long as they
++are up-to-date. This allows you use the version of the tools intended for
++running tests.
++
++Now you should be able to actually run the tests:
++
++.. code-block:: bash
++
++    $ binman test
++    ======================== Running binman tests ========================
++    ......................................................................
++    ......................................................................
++    ......................................................................
++    ......................................................................
++    ......................................................................
++    ......................................................................
++    ......................................................................
++    ......................................................................
++    ........
++    ----------------------------------------------------------------------
++    Ran 568 tests in 2.578s
++
++    OK
++
++If this doesn't work, see if you can have some missing tools. Check that the
++dependencies are all there as above. If it is very slow, try installing
++concurrencytest so that the tests run in parallel.
++
++The next thing to set up is code coverage, using the -T flag:
++
++.. code-block:: bash
++
++    $ binman test -T
++    ======================== Running binman tests ========================
++    ......................................................................
++    ......................................................................
++    ......................................................................
++    ......................................................................
++    ......................................................................
++    ......................................................................
++    ......................................................................
++    ......................................................................
++    ........
++    ----------------------------------------------------------------------
++    Ran 568 tests in 17.367s
++
++    OK
++
++    99%
++    Name                                                    Stmts   Miss  Cover
++    ---------------------------------------------------------------------------
++    tools/binman/__init__.py                                    0      0   100%
++    tools/binman/bintool.py                                   263      0   100%
++    tools/binman/btool/bootgen.py                              21      0   100%
++    tools/binman/btool/btool_gzip.py                            5      0   100%
++    tools/binman/btool/bzip2.py                                 5      0   100%
++    tools/binman/btool/cbfstool.py                             24      0   100%
++    tools/binman/btool/cst.py                                  15      4    73%
++    tools/binman/btool/fdt_add_pubkey.py                       21      0   100%
++    tools/binman/btool/fdtgrep.py                              26      0   100%
++    tools/binman/btool/fiptool.py                              19      0   100%
++    tools/binman/btool/futility.py                             19      0   100%
++    tools/binman/btool/ifwitool.py                             22      0   100%
++    tools/binman/btool/lz4.py                                  22      0   100%
++    tools/binman/btool/lzma_alone.py                           34      0   100%
++    tools/binman/btool/lzop.py                                  5      0   100%
++    tools/binman/btool/mkeficapsule.py                         27      0   100%
++    tools/binman/btool/mkimage.py                              23      0   100%
++    tools/binman/btool/openssl.py                              42      0   100%
++    tools/binman/btool/xz.py                                    5      0   100%
++    tools/binman/btool/zstd.py                                  5      0   100%
++    tools/binman/cbfs_util.py                                 376      0   100%
++    tools/binman/cmdline.py                                    90      0   100%
++    tools/binman/control.py                                   409      0   100%
++    tools/binman/elf.py                                       241      0   100%
++    tools/binman/entry.py                                     548      0   100%
++    tools/binman/etype/alternates_fdt.py                       58      0   100%
++    tools/binman/etype/atf_bl31.py                              5      0   100%
++    tools/binman/etype/atf_fip.py                              67      0   100%
++    tools/binman/etype/blob.py                                 49      0   100%
++    tools/binman/etype/blob_dtb.py                             46      0   100%
++    tools/binman/etype/blob_ext.py                              9      0   100%
++    tools/binman/etype/blob_ext_list.py                        32      0   100%
++    tools/binman/etype/blob_named_by_arg.py                     9      0   100%
++    tools/binman/etype/blob_phase.py                           22      0   100%
++    tools/binman/etype/cbfs.py                                101      0   100%
++    tools/binman/etype/collection.py                           30      0   100%
++    tools/binman/etype/cros_ec_rw.py                            5      0   100%
++    tools/binman/etype/efi_capsule.py                          59      0   100%
++    tools/binman/etype/efi_empty_capsule.py                    33      0   100%
++    tools/binman/etype/encrypted.py                            34      0   100%
++    tools/binman/etype/fdtmap.py                               62      0   100%
++    tools/binman/etype/files.py                                35      0   100%
++    tools/binman/etype/fill.py                                 13      0   100%
++    tools/binman/etype/fit.py                                 311      0   100%
++    tools/binman/etype/fmap.py                                 37      0   100%
++    tools/binman/etype/gbb.py                                  37      0   100%
++    tools/binman/etype/image_header.py                         53      0   100%
++    tools/binman/etype/intel_cmc.py                             4      0   100%
++    tools/binman/etype/intel_descriptor.py                     39      0   100%
++    tools/binman/etype/intel_fit.py                            12      0   100%
++    tools/binman/etype/intel_fit_ptr.py                        17      0   100%
++    tools/binman/etype/intel_fsp.py                             4      0   100%
++    tools/binman/etype/intel_fsp_m.py                           4      0   100%
++    tools/binman/etype/intel_fsp_s.py                           4      0   100%
++    tools/binman/etype/intel_fsp_t.py                           4      0   100%
++    tools/binman/etype/intel_ifwi.py                           67      0   100%
++    tools/binman/etype/intel_me.py                              4      0   100%
++    tools/binman/etype/intel_mrc.py                             6      0   100%
++    tools/binman/etype/intel_refcode.py                         6      0   100%
++    tools/binman/etype/intel_vbt.py                             4      0   100%
++    tools/binman/etype/intel_vga.py                             4      0   100%
++    tools/binman/etype/mkimage.py                              84      0   100%
++    tools/binman/etype/null.py                                  9      0   100%
++    tools/binman/etype/nxp_imx8mcst.py                         78     59    24%
++    tools/binman/etype/nxp_imx8mimage.py                       38      6    84%
++    tools/binman/etype/opensbi.py                               5      0   100%
++    tools/binman/etype/powerpc_mpc85xx_bootpg_resetvec.py       6      0   100%
++    tools/binman/etype/pre_load.py                             76      0   100%
++    tools/binman/etype/rockchip_tpl.py                          5      0   100%
++    tools/binman/etype/scp.py                                   5      0   100%
++    tools/binman/etype/section.py                             418      0   100%
++    tools/binman/etype/tee_os.py                               31      0   100%
++    tools/binman/etype/text.py                                 21      0   100%
++    tools/binman/etype/ti_board_config.py                     139      0   100%
++    tools/binman/etype/ti_dm.py                                 5      0   100%
++    tools/binman/etype/ti_secure.py                            65      0   100%
++    tools/binman/etype/ti_secure_rom.py                       117      0   100%
++    tools/binman/etype/u_boot.py                                7      0   100%
++    tools/binman/etype/u_boot_dtb.py                            9      0   100%
++    tools/binman/etype/u_boot_dtb_with_ucode.py                51      0   100%
++    tools/binman/etype/u_boot_elf.py                           19      0   100%
++    tools/binman/etype/u_boot_env.py                           27      0   100%
++    tools/binman/etype/u_boot_expanded.py                       4      0   100%
++    tools/binman/etype/u_boot_img.py                            7      0   100%
++    tools/binman/etype/u_boot_nodtb.py                          7      0   100%
++    tools/binman/etype/u_boot_spl.py                            8      0   100%
++    tools/binman/etype/u_boot_spl_bss_pad.py                   14      0   100%
++    tools/binman/etype/u_boot_spl_dtb.py                        9      0   100%
++    tools/binman/etype/u_boot_spl_elf.py                        8      0   100%
++    tools/binman/etype/u_boot_spl_expanded.py                  12      0   100%
++    tools/binman/etype/u_boot_spl_nodtb.py                      8      0   100%
++    tools/binman/etype/u_boot_spl_pubkey_dtb.py                32      0   100%
++    tools/binman/etype/u_boot_spl_with_ucode_ptr.py             8      0   100%
++    tools/binman/etype/u_boot_tpl.py                            8      0   100%
++    tools/binman/etype/u_boot_tpl_bss_pad.py                   14      0   100%
++    tools/binman/etype/u_boot_tpl_dtb.py                        9      0   100%
++    tools/binman/etype/u_boot_tpl_dtb_with_ucode.py             8      0   100%
++    tools/binman/etype/u_boot_tpl_elf.py                        8      0   100%
++    tools/binman/etype/u_boot_tpl_expanded.py                  12      0   100%
++    tools/binman/etype/u_boot_tpl_nodtb.py                      8      0   100%
++    tools/binman/etype/u_boot_tpl_with_ucode_ptr.py            12      0   100%
++    tools/binman/etype/u_boot_ucode.py                         33      0   100%
++    tools/binman/etype/u_boot_vpl.py                            8      0   100%
++    tools/binman/etype/u_boot_vpl_bss_pad.py                   14      0   100%
++    tools/binman/etype/u_boot_vpl_dtb.py                        9      0   100%
++    tools/binman/etype/u_boot_vpl_elf.py                        8      0   100%
++    tools/binman/etype/u_boot_vpl_expanded.py                  12      0   100%
++    tools/binman/etype/u_boot_vpl_nodtb.py                      8      0   100%
++    tools/binman/etype/u_boot_with_ucode_ptr.py                42      0   100%
++    tools/binman/etype/vblock.py                               38      0   100%
++    tools/binman/etype/x86_reset16.py                           7      0   100%
++    tools/binman/etype/x86_reset16_spl.py                       7      0   100%
++    tools/binman/etype/x86_reset16_tpl.py                       7      0   100%
++    tools/binman/etype/x86_start16.py                           7      0   100%
++    tools/binman/etype/x86_start16_spl.py                       7      0   100%
++    tools/binman/etype/x86_start16_tpl.py                       7      0   100%
++    tools/binman/etype/x509_cert.py                            71      0   100%
++    tools/binman/etype/xilinx_bootgen.py                       72      0   100%
++    tools/binman/fip_util.py                                  202      0   100%
++    tools/binman/fmap_util.py                                  49      0   100%
++    tools/binman/image.py                                     181      0   100%
++    tools/binman/state.py                                     201      0   100%
++    ---------------------------------------------------------------------------
++    TOTAL                                                    5954     69    99%
++
++    To get a report in 'htmlcov/index.html', type: python3-coverage html
++    Coverage error: 99%, but should be 100%
++    ValueError: Test coverage failure
++
++Unfortunately the run failed. As it suggests, create a report:
++
++.. code-block:: bash
++
++    $ python3-coverage html
++    Wrote HTML report to htmlcov/index.html
++
++If you open that file in the browser, you can see which files are not reaching
++100% and click on them. Here is ``nxp_imx8mimage.py``, for example:
++
++.. code-block:: python
++
++    43        # Generate mkimage configuration file similar to imx8mimage.cfg
++    44        # and pass it to mkimage to generate SPL image for us here.
++    45        cfg_fname = tools.get_output_filename('nxp.imx8mimage.cfg.%s' % uniq)
++    46        with open(cfg_fname, 'w') as outf:
++    47            print('ROM_VERSION v%d' % self.rom_version, file=outf)
++    48            print('BOOT_FROM %s' % self.boot_from, file=outf)
++    49            print('LOADER %s %#x' % (input_fname, self.loader_address), file=outf)
++    50
++    51        output_fname = tools.get_output_filename(f'cfg-out.{uniq}')
++    52        args = ['-d', input_fname, '-n', cfg_fname, '-T', 'imx8mimage',
++    53                output_fname]
++    54        if self.mkimage.run_cmd(*args) is not None:
++    55            return tools.read_file(output_fname)
++    56        else:
++    57            # Bintool is missing; just use the input data as the output
++    58 x          self.record_missing_bintool(self.mkimage)
++    59 x          return data
++    60
++    61    def SetImagePos(self, image_pos):
++    62        # Customized SoC specific SetImagePos which skips the mkimage etype
++    63        # implementation and removes the 0x48 offset introduced there. That
++    64        # offset is only used for uImage/fitImage, which is not the case in
++    65        # here.
++    66        upto = 0x00
++    67        for entry in super().GetEntries().values():
++    68 x          entry.SetOffsetSize(upto, None)
++    69
++    70            # Give up if any entries lack a size
++    71 x          if entry.size is None:
++    72 x              return
++    73 x          upto += entry.size
++    74
++    75        Entry_section.SetImagePos(self, image_pos)
++
++Most of the file is covered, but the lines marked with ``x`` indicate missing
++coverage. The will show up red in your browser.
++
++What is a test?
++---------------
++
++A test is a function in ``ftest.py`` which uses an image description in
++``tools/binman/test`` to perform some operations and exercise the code. Some
++tests are just a few lines; some are more complicated.
++
++Here is a simple test:
++
++.. code-block:: python
++
++    def testSimple(self):
++        """Test a simple binman with a single file"""
++        data = self._DoReadFile('005_simple.dts')
++        self.assertEqual(U_BOOT_DATA, data)
++
++This test tells Binman to build an image using the description. Then it checks
++that the resulting image looks correct. The image description is:
++
++.. code-block:: devicetree
++
++    /dts-v1/;
++
++    / {
++        #address-cells = <1>;
++        #size-cells = <1>;
++
++        binman {
++            u-boot {
++            };
++        };
++    };
++
++As you will know from the Binman documentation, this says that there is
++one image and it contains the U-Boot binary. So this test builds an image
++consisting of a U-Boot binary, then checks that it does indeed have just a
++U-Boot binary in it.
++
++Test data
++---------
++
++Using real binaries (like ``u-boot.bin``) to test Binman would be quite tedious.
++Every output file would be large and it would be hard to tell by looking at the
++output (e.g. with a hex dump) if a particular entry contains ``u-boot.bin`` or
++``u-boot-spl.bin`` or something else.
++
++Binman gets around this by using simple placeholders. Here is the placeholder
++for u-boot.bin:
++
++.. code-block:: python
++
++    U_BOOT_DATA           = b'1234'
++
++This is just bytes. So the test above checks that the output image contains
++these four bytes. This makes verification fast for Binman and very easy for
++humans.
++
++Even the devicetree is a placeholder:
++
++.. code-block:: python
++
++    U_BOOT_DTB_DATA       = b'udtb'
++
++But for some tests you need to use the real devicetree. In that case you can
++use ``_DoReadFileRealDtb()``. See ``testUpdateFdtAll()`` for an example of how
++to check the devicetree updated by Binman.
++
++Test structure
++--------------
++
++Each test is designed to test just one thing. Binman tests are named according
++to what they are testing. Individually they don't do very much, but as a whole
++they test every line of code in Binman.
++
++So ``testSimple()`` is designed to check that Binman can build the
++simplest-possible image that isn't completely empty.
++
++Another type of test is one which checks error-handling, for example:
++
++.. code-block:: python
++
++    def testFillNoSize(self):
++        """Test for an fill entry type with no size"""
++        with self.assertRaises(ValueError) as e:
++            self._DoReadFile('070_fill_no_size.dts')
++        self.assertIn("'fill' entry is missing properties: size",
++                      str(e.exception))
++
++This test deliberately tries to provoke an error. The image description is:
++
++.. code-block:: devicetree
++
++    // SPDX-License-Identifier: GPL-2.0+
++    /dts-v1/;
++
++    / {
++        #address-cells = <1>;
++        #size-cells = <1>;
++
++        binman {
++            size = <16>;
++            fill {
++                fill-byte = [ff];
++            };
++        };
++    };
++
++You can see that there is no size for the 'fill' entry, so we would expect
++Binman to complain. The test checks that it actually does. It also checks the
++error message produced by Binman. Sometimes you need to add several tests, each
++with their own broken image description, in order to check all the error cases.
++
++Sometimes you need to capture the console output of Binman, to check it is
++correct. You can to this with ``test_util.capture_sys_output()``, for example:
++
++.. code-block:: python
++
++    with test_util.capture_sys_output() as (_, stderr):
++        self._DoTestFile('071_gbb.dts', force_missing_bintools='futility',
++                         entry_args=entry_args)
++    err = stderr.getvalue()
++    self.assertRegex(err, "Image 'image'.*missing bintools.*: futility")
++
++The test collects the output and checks it with a regular expression. If you
++need to see the test output (e.g. to debug it), you will have to remove that
++capture line.
++
++How to add a new test
++---------------------
++
++This section explains the process of writing a new test. It uses an example to
++help with this, but your code will be different.
++
++Generally you are adding a test because you are adding a new entry type
++('etype'). So start by creating the shortest and simplest image-description you
++can, which contains the new etype. Put it in a numbered file in
++``tool/binman/test`` so that it comes last. All the numbers are unique and there
++are no gaps.
++
++Example from ``tools/binman/test/339_nxp_imx8.dts``:
++
++.. code-block:: devicetree
++
++    // SPDX-License-Identifier: GPL-2.0+
++
++    /dts-v1/;
++
++    / {
++        #address-cells = <1>;
++        #size-cells = <1>;
++
++        binman {
++            nxp-imx8mimage {
++                args;    /* TODO: Needed by mkimage etype superclass */
++                nxp,boot-from = "sd";
++                nxp,rom-version = <1>;
++                nxp,loader-address = <0x10>;
++            };
++        };
++    };
++
++Note that you should use tabs in the file, not spaces. You can see that this has
++been cut down to the bare minimum, just enough to include the etype and the
++arguments it needs. This is of course not a real image. It will not boot on
++anything. But that's fine; we are just trying to test this one etype. Try not
++to add any other sections and etypes unless they are absolutely essential for
++your test to work. This helps others too: they don't need to understand the full
++complexity of your etype just to read your test.
++
++Then create your test by adding a new function at the end of ``ftest.py``:
++
++.. code-block:: python
++
++    def testNxpImx8Image(self):
++        """Test that binman can produce an iMX8 image"""
++        self._DoTestFile('339_nxp_imx8.dts')
++
++This uses the test file that you created. It doesn't check anything, it just
++runs the image description through binman.
++
++Let's run it:
++
++.. code-block:: bash
++
++    $ binman test testNxpImx8Image
++    ======================== Running binman tests ========================
++    .
++    ----------------------------------------------------------------------
++    Ran 1 test in 0.242s
++
++    OK
++
++So the test passes. It doesn't really do a lot, but it does exercise the etype.
++The next step is to update it to actually check the output:
++
++.. code-block:: python
++
++    def testNxpImx8Image(self):
++        """Test that binman can produce an iMX8 image"""
++        data = self._DoReadFile('339_nxp_imx8.dts')
++        print('data', len(data))
++
++The ``_DoReadFile()`` function is documented in the code. It returns the image
++contents as the first part of a tuple.
++
++Running this we see:
++
++.. code-block:: bash
++
++    data 2200
++
++So it is producing a little over 8K of data. Your etype will be different, but
++in any case you can add Python code to check that this data is actually correct,
++based on your knowledge of your etype. Note that you should not be checking
++whether the external tools (called 'bintools' in Binman) are actually working,
++since presumably they have their own tests. You just need to check that the
++image seems reasonable, e.g. is not empty, contains the expected sections, etc.
++
++When your etype does use a bintool, it also needs tests, but generally it will
++be tested by virtue of the etype test. This is because your etype must call the
++bintool to create the image. Sometimes you might need to add a test for a
++bintool error-condition, though.
++
++Finishing code coverage
++-----------------------
++
++The objective is to have test-coverage for every line of code that you add to
++Binman. So how can you tell? First, get a coverage report as described above.
++Look through the output for any files which are not at 100%. Add more test cases
++(image descriptions and new functions in ``ftest.py``) until you have covered
++each line.
++
++In the above example, here are some possible steps:
++
++#. The first red bit is where the ``mkimage`` call returns None. This can be
++   traced to ``Bintoolmkimage.mkimage()`` which calls
++   ``Bintool.run_cmd_result()`` and ``None`` means that ``mkimage`` is missing.
++   So the etype has code to handle that case, but it is never used. You can
++   look for other examples of ``self.mkimage`` returning ``None`` - e.g.
++   ``Entry_mkimage.BuildSectionData()`` does this. The clue for finding this is
++   that the ``nxp-imx8mimage`` etype is based on ``Entry_mkimage``:
++
++   .. code-block:: python
++
++       class Entry_nxp_imx8mimage(Entry_mkimage):
++
++   It must be tested somewhere...in this case ``testMkimage()`` doesn't do it,
++   but ``testMkimageMissing()`` immediately below that does. So you can create a
++   similar test, e.g.:
++
++   .. code-block:: python
++
++       def testNxpImx8ImageMkimageMissing(self):
++           """Test that binman can produce an iMX8 image"""
++           with test_util.capture_sys_output() as (_, stderr):
++               self._DoTestFile('339_nxp_imx8.dts',
++                                force_missing_bintools='mkimage')
++           err = stderr.getvalue()
++           self.assertRegex(err, "Image 'image'.*missing bintools.*: mkimage")
++
++   Note that this uses exactly the same image description as the first test.
++   It just checks what happens when the tool is missing. Checking the coverage
++   again, you will see that the first red bit has gone:
++
++   .. code-block:: bash
++
++       $ binman test -T
++       $ python3-coverage html
++
++#. The second red bit is for ``SetImagePos()``. You can see that it is iterating
++   through the sub-entries inside the ``nxp-imx8mimage`` entry. In the case of
++   the 339 file, there are no such entries, so this code inside the for() loop
++   isn't used:
++
++   .. code-block:: python
++
++       def SetImagePos(self, image_pos):
++        # Customized SoC specific SetImagePos which skips the mkimage etype
++        # implementation and removes the 0x48 offset introduced there. That
++        # offset is only used for uImage/fitImage, which is not the case in
++        # here.
++        upto = 0x00
++        for entry in super().GetEntries().values():
++            entry.SetOffsetSize(upto, None)
++
++            # Give up if any entries lack a size
++            if entry.size is None:
++                return
++            upto += entry.size
++
++        Entry_section.SetImagePos(self, image_pos)
++
++   The solution is to add an entry, e.g. in ``340_nxp_imx8_non_empty.dts``:
++
++   .. code-block:: devicetree
++
++       // SPDX-License-Identifier: GPL-2.0+
++
++       /dts-v1/;
++
++       / {
++           #address-cells = <1>;
++           #size-cells = <1>;
++
++           binman {
++               nxp-imx8mimage {
++                   args;    /* TODO: Needed by mkimage etype superclass */
++                   nxp,boot-from = "sd";
++                   nxp,rom-version = <1>;
++                   nxp,loader-address = <0x10>;
++
++                   u-boot {
++                   };
++               };
++           };
++       };
++
++   Now write a little test to use it:
++
++   .. code-block:: python
++
++       def testNxpImx8ImageNonEmpty(self):
++           """Test that binman can produce an iMX8 image with something in it"""
++            data = self._DoReadFile('340_nxp_imx8_non_empty.dts')
++            # check data here
++
++   With that, the second red bit goes away, because the for() loop is now used.
++
++#. There is one more red bit left, the ``return`` in ``SetImagePos()``. The
++   above effort got the for() loop to be executed, but it doesn't cover the
++   ``return``. It might have been copied from some other etype, e.g. the mkimage
++   one. See ``Entry_mkimage.SetImagePos()`` which contains the code:
++
++   .. code-block:: python
++
++       for entry in self.GetEntries().values():
++           entry.SetOffsetSize(upto, None)
++
++           # Give up if any entries lack a size
++           if entry.size is None:
++               return
++           upto += entry.size
++
++   But which test covers that code for mkimage? By figuring that out, you could
++   use a similar technique. One way to find out is to delete the two lines in
++   ``Entry_mkimage`` which check for entry.size being None and returning, then
++   see what breaks with ``binman test``:
++
++   .. code-block:: bash
++
++       ERROR: binman.ftest.TestFunctional.testMkimageCollection (subunit.RemotedTestCase)
++       binman.ftest.TestFunctional.testMkimageCollection
++       ----------------------------------------------------------------------
++       testtools.testresult.real._StringException: Traceback (most recent call last):
++       TypeError: unsupported operand type(s) for +=: 'int' and 'NoneType'
++
++       ======================================================================
++       ERROR: binman.ftest.TestFunctional.testMkimageImage (subunit.RemotedTestCase)
++       binman.ftest.TestFunctional.testMkimageImage
++       ----------------------------------------------------------------------
++       testtools.testresult.real._StringException: Traceback (most recent call last):
++       TypeError: unsupported operand type(s) for +=: 'int' and 'NoneType'
++
++       ======================================================================
++       ERROR: binman.ftest.TestFunctional.testMkimageSpecial (subunit.RemotedTestCase)
++       binman.ftest.TestFunctional.testMkimageSpecial
++       ----------------------------------------------------------------------
++       testtools.testresult.real._StringException: Traceback (most recent call last):
++       TypeError: unsupported operand type(s) for +=: 'int' and 'NoneType'
++
++   We can verify that you got the right test, by putting the lines back in and
++   getting coverage for just that test:
++
++   .. code-block:: bash
++
++       binman test -T testMkimageCollection
++       python3-coverage html
++
++   You will see a lot of red since we are seeing test coverage just for one
++   test, but if you look in ``mkimage.py`` at ``SetImagePos()`` you will see
++   that the ``return`` is covered (i.e. it is marked green).
++
++   Looking at the ``.dts`` files for each of these tests, none jumps out as
++   being relevant to our case. It seems that this code just isn't needed, so the
++   best solution is to delete those two lines from the function:
++
++   .. code-block:: python
++
++       def SetImagePos(self, image_pos):
++           # Customized SoC specific SetImagePos which skips the mkimage etype
++           # implementation and removes the 0x48 offset introduced there. That
++           # offset is only used for uImage/fitImage, which is not the case in
++           # here.
++           upto = 0x00
++           for entry in super().GetEntries().values():
++               entry.SetOffsetSize(upto, None)
++               upto += entry.size
++
++           Entry_section.SetImagePos(self, image_pos)
++
++We should check the updated code on a real build, to make sure it really
++isn't needed, of course.
++
++Now, the test coverage is complete!
++
++If we later discover a case where those lines are needed, we can add the
++lines back, along with a test for this case.
++
++Getting help
++------------
++
++If you are stuck and cannot work out how to add test coverage for your entry
++type, ask on the U-Boot mailing list, cc ``Simon Glass <sjg@chromium.org>`` or
++on irc ``sjg1``
+diff --git a/doc/develop/index.rst b/doc/develop/index.rst
+index 0d0e60ab56c..e75169ef14c 100644
+--- a/doc/develop/index.rst
++++ b/doc/develop/index.rst
+@@ -81,6 +81,7 @@ Testing
+    py_testing
+    tests_writing
+    tests_sandbox
++   binman_tests
+ 
+ Refactoring
+ -----------
 diff --git a/tools/binman/binman.rst b/tools/binman/binman.rst
-index f9a3a42183b..c25914312a8 100644
+index c25914312a8..381e55686f9 100644
 --- a/tools/binman/binman.rst
 +++ b/tools/binman/binman.rst
-@@ -2099,12 +2099,15 @@ Code coverage
- -------------
+@@ -2194,6 +2194,11 @@ Use '-P 1' to disable this. It is automatically disabled when code coverage is
+ being used (-T) since they are incompatible.
  
- Binman is a critical tool and is designed to be very testable. Entry
--implementations target 100% test coverage. Run 'binman test -T' to check this.
-+implementations target 100% test coverage. Run ``binman test -T`` to check this.
  
- To enable Python test coverage on Debian-type distributions (e.g. Ubuntu)::
- 
-    $ sudo apt-get install python-coverage python3-coverage python-pytest
- 
-+You can also check the coverage provided by a single test, e.g.::
++Writing tests
++-------------
 +
-+   binman test -T testSimple
++See :doc:`../binman_tests`.
++
+ Debugging tests
+ ---------------
  
- Exit status
- -----------
-diff --git a/tools/binman/main.py b/tools/binman/main.py
-index dc817ddcd42..619840e7d55 100755
---- a/tools/binman/main.py
-+++ b/tools/binman/main.py
-@@ -85,7 +85,7 @@ def RunTests(debug, verbosity, processes, test_preserve_dirs, args, toolpath):
- 
-     return (0 if result.wasSuccessful() else 1)
- 
--def RunTestCoverage(toolpath, build_dir):
-+def RunTestCoverage(toolpath, build_dir, args):
-     """Run the tests and check that we get 100% coverage"""
-     glob_list = control.GetEntryModules(False)
-     all_set = set([os.path.splitext(os.path.basename(item))[0]
-@@ -97,7 +97,7 @@ def RunTestCoverage(toolpath, build_dir):
-     test_util.run_test_coverage('tools/binman/binman', None,
-             ['*test*', '*main.py', 'tools/patman/*', 'tools/dtoc/*',
-              'tools/u_boot_pylib/*'],
--            build_dir, all_set, extra_args or None)
-+            build_dir, all_set, extra_args or None, args=args)
- 
- def RunBinman(args):
-     """Main entry point to binman once arguments are parsed
-@@ -117,7 +117,7 @@ def RunBinman(args):
- 
-     if args.cmd == 'test':
-         if args.test_coverage:
--            RunTestCoverage(args.toolpath, args.build_dir)
-+            RunTestCoverage(args.toolpath, args.build_dir, args.tests)
-         else:
-             ret_code = RunTests(args.debug, args.verbosity, args.processes,
-                                 args.test_preserve_dirs, args.tests,
 -- 
 2.34.1
 
