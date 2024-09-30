@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88034CE835C
-	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 15:52:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62884CE835C
+	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 15:55:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A37A88E56;
-	Mon, 30 Sep 2024 17:52:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id D2E0488E56;
+	Mon, 30 Sep 2024 17:55:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="N9Pwc6gv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jAUjmrBs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CFC2688F53; Mon, 30 Sep 2024 17:52:30 +0200 (CEST)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id B612C889E9; Mon, 30 Sep 2024 17:55:43 +0200 (CEST)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1A95889E9
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 17:52:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C67688E56
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 17:55:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-42cbc38a997so27313135e9.1
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 08:52:28 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6cb2d2a7d48so31943836d6.3
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 08:55:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1727711548; x=1728316348;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=inoeM5C8JN4l9dKW7Yan/PfYFVO4Eft9vY9gzk3iWrk=;
- b=N9Pwc6gvyudZNhXNlq8spztLSUDAoePOaOSaidwviKqgAdlr/huZg3bj5WNobcOq7q
- RRkNNGV63zOlLCmnpY2n/Nvaj91u0yDt684JkDOOC3p64yyUT6AaF8PoSigfPQkB2LPY
- KvMhNr4sp6T/kP8HyH/dQGUvitwValFgUf0AdV20Sd9unMUibcrDfge9yGzMeEYBLIMb
- hMe5H0IquSZ5PEG2w7yySJL707O0DvPSMrAcmON3mFfEOHErLWUWuqk/pGE3eXBrb4/+
- ITMsANbfK5t4OND5FmIlq8FC6Et+Ax5KpxIRw12ZX2MvqQWv3FxmyOHf0BFMuBnkrD4X
- jYrg==
+ d=chromium.org; s=google; t=1727711740; x=1728316540; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=rIKgu7cUxeJNky8hWLy6yxrjKZbnLuf1g/fyElyo4To=;
+ b=jAUjmrBsJOxIMQRtU+MZ9iwkwvuE5njioi2t4kzWugoYG19h/Xt47ssKgtzmhNjUap
+ rTBDAbaEE9NZcGaoPegV1H8QAOWCkjku+TW/AiSFkIE/VaTk+plgDrtPmiUVf/+yUn72
+ VGUIi8Q4FlvuP82nO3LyHNRRafnaSBTUb1EWc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727711548; x=1728316348;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=inoeM5C8JN4l9dKW7Yan/PfYFVO4Eft9vY9gzk3iWrk=;
- b=iUrO1Lr2onfHXIul9oo7DKL/q5aCKDnM1CkJo88PqoG9q7TU1YoXS5KCBN9Eos/7XC
- cCoOZbjhUWacokMPeskst/r1DJdT91386epja9x28zKXa7MWIjdib/t7NVYY5pTQfn+J
- uw2F50hkWFWE15ZTOz9vmuOTZ/k/T6G5hKmjZRVT691b5D6l1WnuwuuGdNex9g171Bef
- 9ZcD17+2T8kE09+gR8oiQywLLXoIcOsxpcG6wrYJhTHFYFHJnZMsrNqeG1HOP9txlpO+
- EXiBrxiZGBUURzV4oI2BY267ayDLjZRtEeXBBWU8vPKQvcH6zc6M/GaXgcGdKSArR7qr
- pLOg==
-X-Gm-Message-State: AOJu0Yx1b7/r3QYSBsheDa7UCNVexf8BqyqgSVxZDJwUc1SQL7rSq505
- /a5ht5sGobD0wbQ5e5L0vYQ37/qRZ0U/+AJUh9shHocbBLx0LM6fB1RLkK/lp5Y=
-X-Google-Smtp-Source: AGHT+IFRZGLPjJ81cd/p1GFNyF9eqQx1uWhTxC28fuhtrPwE3+n+pbBPSR3wbx8WqI5FXa2v2SA+VQ==
-X-Received: by 2002:a05:600c:4ec6:b0:42c:bd5a:9471 with SMTP id
- 5b1f17b1804b1-42f71385ac0mr374335e9.16.1727711548211; 
- Mon, 30 Sep 2024 08:52:28 -0700 (PDT)
-Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42f57e13944sm107441005e9.30.2024.09.30.08.52.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Sep 2024 08:52:27 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Dmitry Rokosov <ddrokosov@salutedevices.com>, igor.opaniuk@gmail.com,
- sjg@chromium.org, semen.protsenko@linaro.org, trini@konsulko.com,
- colin.mcallister@garmin.com, 4.shket@gmail.com, avromanov@salutedevices.com
-Cc: u-boot@lists.denx.de, kernel@salutedevices.com, rockosov@gmail.com,
- Dmitry Rokosov <ddrokosov@salutedevices.com>
-Subject: Re: [PATCH v2 4/6] cmd: bcb: introduce 'ab_dump' command to print
- BCB block content
-In-Reply-To: <20240911214945.15873-5-ddrokosov@salutedevices.com>
-References: <20240911214945.15873-1-ddrokosov@salutedevices.com>
- <20240911214945.15873-5-ddrokosov@salutedevices.com>
-Date: Mon, 30 Sep 2024 17:52:27 +0200
-Message-ID: <878qv9m950.fsf@baylibre.com>
+ d=1e100.net; s=20230601; t=1727711740; x=1728316540;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=rIKgu7cUxeJNky8hWLy6yxrjKZbnLuf1g/fyElyo4To=;
+ b=lINO4t8JHuyBJO2WtaW4aiXKjymKf2l8JbHp2zwEzwljhPVC2WoiOXS/6SkL70PXWu
+ Eqr++sGUJzWRagNsL7sWJRD9s8PQ7/5KBcTjl23C6ahpd5/xI/b+JedqOEvQu3AGruae
+ b1XhLDF9s65tTUZX+bPYllKUxVYD0QgpeD6OeXwcEgtkB5Yd4Oj1q45zCV54/yRBWsNi
+ ZBzIMM9STCodidJRF23Soa7Nr4R6V6g1uK2G80c7lt5qqS9F58CW9RmB3Cz6b+Ptf0i9
+ KhbRa1VtkbWYszb+S1QONUGIbSQmnoCmbqgRUJhDNL5GnI1HnHCFlDG00IpLwwbduY6b
+ y8dA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWw9IqtCTNw6b5MvdO59PLbnCo+uvzIURW9Ls4eIs1iblC3P427WkOcMnHamMyHC51La//Y9V0=@lists.denx.de
+X-Gm-Message-State: AOJu0YzUqgcfvzrOX/+Ry6g8XcNdf+YsbeyYeczZdyLQkSfeyk6WY7Ue
+ 3GzdrChskFIEkmGKCTX5+myXRdMBKRbLW8J2Tag/0ShEwmEL989wnfbzvNS8oWkiQmFJxKE/4v4
+ ZU5Tcyvg2EllYdRPtb5M+DkQhLEJ2UxfqJSc0
+X-Google-Smtp-Source: AGHT+IHZvghBHUTBtrv5Mnt/shSPAdtdVRneDU/K9GcUB9QcZYIi7XOfoEIOV+xsv5rVycyCgQq/1OcmITvDWoD/chY=
+X-Received: by 2002:a05:6214:3b8a:b0:6cb:465f:368d with SMTP id
+ 6a1803df08f44-6cb465f3bc4mr183464256d6.47.1727711740227; Mon, 30 Sep 2024
+ 08:55:40 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
+References: <20240927124237.47-1-brian.ruley@gehealthcare.com>
+ <CAFLszTjHkmT0JcgcZ6Yn69q27Pe7YhvwuXc0bC0N+agmpPtCfg@mail.gmail.com>
+ <20240927204046.GW4252@bill-the-cat>
+ <CAOMZO5DAUD3WR5z8ZxPkVhnv_2VZpYaHRziEvZ7MHvwooNS8Jg@mail.gmail.com>
+ <CAFLszTiUQBJvaU_bhUYdsujo-oeeT8RCDguu+pYQ9YEppqqALg@mail.gmail.com>
+ <20240930004623.GA5579@bill-the-cat> <ZvqJJ7DOhxpEBgXl@zoo11.em.health.ge.com>
+ <CAFLszThuGsiQeQXaL6jtHezj_JAQ+TwJTco_8C=qDTiu0sLFOg@mail.gmail.com>
+ <Zvq6B84h6xEw9GmD@zoo11.em.health.ge.com>
+In-Reply-To: <Zvq6B84h6xEw9GmD@zoo11.em.health.ge.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 30 Sep 2024 09:55:29 -0600
+Message-ID: <CAFLszTgH2btdXxRd5p4+vX8d3t5_4ZTRQRpxHiMb3Beyh9AsBw@mail.gmail.com>
+Subject: Re: [PATCH] binman: add fast authentication method for i.MX8M signing
+To: Brian Ruley <brian.ruley@gehealthcare.com>
+Cc: Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Ian Ray <ian.ray@gehealthcare.com>,
+ Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,51 +92,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Dmitry,
+Hi Brian,
 
-Thank you for the patch.
-
-On jeu., sept. 12, 2024 at 00:49, Dmitry Rokosov <ddrokosov@salutedevices.com> wrote:
-
-> It's really helpful to have the ability to dump BCB block for debugging
-> A/B logic on the board supported this partition schema.
+On Mon, 30 Sept 2024 at 08:47, Brian Ruley <brian.ruley@gehealthcare.com> wrote:
 >
-> Command 'bcb ab_dump' prints all fields of bootloader_control struct
-> including slot_metadata for all presented slots.
+> On Mon, Sep 30, 2024 at 08:10:49AM -0600, Simon Glass wrote:
+> >
+> > WARNING: This email originated from outside of GE HealthCare. Please validate the sender's email address before clicking on links or attachments as they may not be safe.
+> >
+> > Hi Brian,
+> >
+> > On Mon, 30 Sept 2024 at 07:01, Brian Ruley <brian.ruley@gehealthcare.com> wrote:
+> > >
+> > > On Sun, Sep 29, 2024 at 06:46:23PM -0600, Tom Rini wrote:
+> > > > On Sun, Sep 29, 2024 at 04:49:17PM -0600, Simon Glass wrote:
+> > > > > Hi Fabio,
+> > > > >
+> > > > > On Sun, 29 Sept 2024 at 14:53, Fabio Estevam <festevam@gmail.com> wrote:
+> > > > > >
+> > > > > > Hi Simon, Marek, and Tom,
+> > > > > >
+> > > > > > On Fri, Sep 27, 2024 at 5:47???PM Tom Rini <trini@konsulko.com> wrote:
+> > > > > >
+> > > > > > > > Please can you coordinate with Marek as we need to sort out the test
+> > > > > > > > coverage for this etype, before adding more functionality. I did a
+> > > > > > > > starting point, now in -next, which should help.
+> > > > > > >
+> > > > > > > Well, when someone has both time and understanding of the tools and the
+> > > > > > > frameworks, we can expand the automatic tests while still having
+> > > > > > > functional testing as people use the feature.
+> > > > > >
+> > > > > > Do you think this patch should be applied as is? Could the tests be
+> > > > > > handled later?
+> > > > > >
+> > > > > > Please let me know.
+> > > > >
+> > > > > Who is going to handle the tests later and when?
+> > > >
+> > > > Someone, once how to write and run the tests is documented. That's a
+> > > > big hurdle this private thread has shown, to me at least.
+> > > >
+> > > > --
+> > > > Tom
+> > >
+> > > Hi,
+> > >
+> > > I fixed a minor issue in the patch, and sent a revised version.
+> > >
+> > > Seems that you don't have the testing quite defined yet, so I don't know
+> > > what I can contribute there. Maybe something can be done with the CSF
+> > > parser to check that the signing works correctly?
+> >
+> > Just to be clear, the testing is fully defined...this is actually the
+> > only entry type which doesn't have a proper test. Every other user was
+> > able to add a test. The goal here isn't really to check that external
+> > tools are working (they should have their own tests), more to check
+> > that Binman is doing the right thing.
+> >
+> > I will get some sort of patch out by tomorrow morning to help this process.
+> >
+> > >
+> > > However, I think this feature is quite benign, and it would be great to
+> > > get some functional testing in for this feature, as Tom said. For us,
+> > > this is an important feature, so we have done extensive testing
+> > > internally to verify that it works.
+> >
+> > I fully understand that...but of course without an automated test in
+> > Binman it may break at any moment, as Binman continues to be expanded.
+> >
+> > BTW, minor code-style things: U-Boot's Python code uses single quotes
+> > and the line limit is 80cols.
+> >
+> > Regards,
+> > Simon
 >
-> Output example:
-> =====
->> board# bcb ab_dump ubi 0#misc
->> Read 512 bytes from volume misc to 000000000bf07580
->> Read 512 bytes from volume misc to 000000000bf42f40
->> Bootloader Control:       [misc]
->> Active Slot:              _a
->> Magic Number:             0x42414342
->> Version:                  1
->> Number of Slots:          2
->> Recovery Tries Remaining: 0
->> CRC:                      0x2c8b50bc (Valid)
->>
->> Slot[0] Metadata:
->> 	- Priority:         15
->> 	- Tries Remaining:  0
->> 	- Successful Boot:  1
->> 	- Verity Corrupted: 0
->>
->> Slot[1] Metadata:
->> 	- Priority:         14
->> 	- Tries Remaining:  7
->> 	- Successful Boot:  0
->> 	- Verity Corrupted: 0
-> ====
+> Hi Simon,
 >
-> Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
+> > Just to be clear, the testing is fully defined...this is actually the
+> > only entry type which doesn't have a proper test. Every other user was
+> > able to add a test. The goal here isn't really to check that external
+> > tools are working (they should have their own tests), more to check
+> > that Binman is doing the right thing.
+> >
+> > I will get some sort of patch out by tomorrow morning to help this process.
+>
+> Alrighty. I'll include a test once we get this sorted out.
+>
+> > BTW, minor code-style things: U-Boot's Python code uses single quotes
+> > and the line limit is 80cols.
+>
+> I don't understand what you mean because I did use single quotes :)
+> Perhaps you were looking at the CSF template, which is not Python code?
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Ah OK, I see. It would be less confusing if you used f-strings.
+Unfortunately Binman does not use them always and there are tons of
+pylint warnings about it.
 
-> ---
->  boot/android_ab.c    | 68 ++++++++++++++++++++++++++++++++++++++++++++
->  cmd/bcb.c            | 35 +++++++++++++++++++++++
->  include/android_ab.h | 10 +++++++
->  3 files changed, 113 insertions(+)
 >
+> As for the column width, sorry, I was only trying to follow the pattern
+> in the file. I thought it was 120 cols. I will include a predecessor
+> patch to fix the column width to 80.
+
+Oh, OK, yes I wasn't around when the original patch was sent so didn't
+review it.
+
+Regards,
+SImon
