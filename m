@@ -4,72 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3209CCFA16
-	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 18:53:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDCDCCCFA16
+	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 18:53:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A3F9088FDA;
-	Mon, 30 Sep 2024 20:52:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1D6D88907B;
+	Mon, 30 Sep 2024 20:52:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TtnLX4YZ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VI0lxHLc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 651D287D1A; Mon, 30 Sep 2024 20:52:32 +0200 (CEST)
-Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
- [IPv6:2607:f8b0:4864:20::72f])
+ id 84EF48907C; Mon, 30 Sep 2024 20:52:38 +0200 (CEST)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 807C98907F
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 20:52:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 584FD87D1A
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 20:52:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x72f.google.com with SMTP id
- af79cd13be357-7a99eee4a5bso421931385a.0
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 11:52:28 -0700 (PDT)
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-6de14e0f050so38641847b3.0
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 11:52:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727722347; x=1728327147; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727722355; x=1728327155; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=GXwgebbNqRzJTqvp3Juovqw25/56wQ9E2prrLAZjW6Q=;
- b=TtnLX4YZ7s0f2Z2OZnO1AH9hTZHMYTloFl9MfopSo8rURdb09Aa+o1WNFnniM9ODjU
- qoWYoLfiX3L+xZBxjqGfubZkq7CB3kONLVCVRnqvhPclnP4Anj8mZPKJDbKmPGkn5auK
- lGXg11zVGKBxbwlhv0Gf+/EerUTUNHA4JuEF4=
+ bh=NMXSqukqM95SormfjSd6rworylVgZ6bRDGZ/UJmSzCU=;
+ b=VI0lxHLcW4QA0UYyRGWGe/7Xh+tUJk520G7ZhEdNb0p+a+aB99Jy9j9tWSc4LES9oL
+ zqkNDfbhIsl6ghijzvBv4DTIVf4w2IXCxqR7lTZ/JhPk29t13QokoGPrbdmD6EWogYq3
+ 7riMBh392DcJ8bKWNT4n2Qhkxz8ZyxpDsVftI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727722347; x=1728327147;
+ d=1e100.net; s=20230601; t=1727722355; x=1728327155;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=GXwgebbNqRzJTqvp3Juovqw25/56wQ9E2prrLAZjW6Q=;
- b=EG6WU+CQI/ACqlmY2LmS3zmvqE+Prgn12y+ySKIvQlPYpodkUpTS6bjxy7vDk7rN2w
- p5/l7zCXJaR3wlATqlzerhAAPqBbf7O5QyExPORW3OuzFMyEK7mAZ32bJlpAu/hDVJn1
- 6QrLGfKKazWG2CAaHRVxReScq9t+OqkZTTu+DreZ18Hv+8FTxaYHw1qKAi8RY9WclCAZ
- OsukI7JSuIouK6zhnm5b9THjfZPEITp10Z1TaHSm5dLgxgh7/Mk48J4CeGzdsrQz+Kpg
- 8Y0c+0NL/roTmiAuxLaeIf9v8Sxr/fslmleQGmUQ7uy1DAcHjhJaiItKr1QDRw8LSf2H
- xTrg==
+ bh=NMXSqukqM95SormfjSd6rworylVgZ6bRDGZ/UJmSzCU=;
+ b=dOZCpqy5sWAxYp0yCkxB/QRacBB7EeJ9q6qIwf7cK0kEtDCzcJ8J06C+cYbYib3jdC
+ c3jUT41ox502AdvSgLpjA0XsdCHcMSFqoXytkow11FVhmdVkm/Tepq9gkiLrxzVd/vhQ
+ FjFd6FMVlHY9O64WpD3AbhyGxVPoVRW2VvgxXhtKxJ58tT7Y+++XzkfFpcBiXeOPpdw4
+ CA3NhZvTAK3P2KvU8zJM5Fz866yr7hnUyyzq5l75H/DUsucGkraIkT4HK6+RFJZ2/k6D
+ ATb1KAksm5KuyuLQMUmbFGqMp37yulIKBX4qEBeMYB+DZgdp6o8AidR5Fi1X9N8EZaI2
+ jSPw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVrnbsCo1sdmw5BX74OJBTimw/DPEkTaVWzOY1L6BIrHynNj/CJETO5JKH/I3qKuNXIQhYslmc=@lists.denx.de
-X-Gm-Message-State: AOJu0YxLEyl5MCroVzUpEg3XY6IMMY6DZ+UaeVTiGn76lum/HCEOarWJ
- Gqx/0nJL6XIWj2BkvSLBAwLnzrWUBaT+JbPgNgTS/rtUw2apsYtluBPzltjfltUJuWN1/11inVg
- VWjMPok1wSRw9nCx9Qpxiwf4rPRFEM/iG+SN5
-X-Google-Smtp-Source: AGHT+IEsTD4vTxi75j5I09rH8WJIC8w23PNFAfK03uoTV5i7OvSqwnUSy4LyojF9yBpClZeijcjdbOPoj2Mjwwtcruc=
-X-Received: by 2002:a05:6214:5d8f:b0:6cb:1006:e9cb with SMTP id
- 6a1803df08f44-6cb3b5f90eemr156097266d6.28.1727722347338; Mon, 30 Sep 2024
- 11:52:27 -0700 (PDT)
+ AJvYcCWVPyPWW3VzM/p2NAfAlZehXRpll9n3DoS1R+jlH2PyMR1UbN6nSx2asTRZ3P3tcdlTOs61fEw=@lists.denx.de
+X-Gm-Message-State: AOJu0YxjM2augGfqTcuQGi5FUnXiUOJAGsM3sGg2DNSETVBHukZwhjEv
+ LdmlgLeN8V9LHe+x7fi12ZV25ofB+Ps6olpQT7SdXucN3OrwxjjwJVWobyM2prg1/1wSe7FKnx5
+ QjLwGngEqX2v1JXN63eBp0FsECFlFtWKvsNepN2B0O39QW04=
+X-Google-Smtp-Source: AGHT+IFlcjrE2+1rpsL2aFhn1Xnqa1Qvu4s4kZPUmR6FIoRiLduzOP4Vzuing6oB2ylqo6ussNfLUiU2fyrPlNvxHPI=
+X-Received: by 2002:a05:6902:2009:b0:e11:6eb3:833f with SMTP id
+ 3f1490d57ef6-e2604b14c30mr9253523276.5.1727722355254; Mon, 30 Sep 2024
+ 11:52:35 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240930102148.854-1-brian.ruley@gehealthcare.com>
  <20240930161006.41052-1-brian.ruley@gehealthcare.com>
- <20240930161006.41052-2-brian.ruley@gehealthcare.com>
-In-Reply-To: <20240930161006.41052-2-brian.ruley@gehealthcare.com>
+In-Reply-To: <20240930161006.41052-1-brian.ruley@gehealthcare.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 30 Sep 2024 12:52:16 -0600
-Message-ID: <CAFLszTiKK8CJ0ocN8G4LMqPCSDj0726Py5VfEPEDTDz6XCBjiA@mail.gmail.com>
-Subject: Re: [PATCH v3 2/2] binman: add fast authentication method for i.MX8M
- signing
+Date: Mon, 30 Sep 2024 12:52:24 -0600
+Message-ID: <CAFLszTj_qCcSMqQ0KawZus1YoHR4iRDSwKYO2Ur=nLcG8c1HqA@mail.gmail.com>
+Subject: Re: [PATCH v3 1/2] binman: cosmetic: code formatting fixes
 To: Brian Ruley <brian.ruley@gehealthcare.com>
 Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>,
- ian.ray@gehealthcare.com, Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
+ ian.ray@gehealthcare.com, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,118 +89,91 @@ Hi Brian,
 
 On Mon, 30 Sept 2024 at 10:10, Brian Ruley <brian.ruley@gehealthcare.com> wrote:
 >
-> Using the PKI tree with SRKs as intermediate CA isn't necessary or even
-> desirable in some situations (boot time, for example). Add the possibility
-
-spelling
-
-> to use the "fast authentication" method where the image and CSF are both
-> signed using the SRK [1, p.63].
->
-> [1] https://community.nxp.com/pwmxy87654/attachments/pwmxy87654/imx-processors/202591/1/CST_UG.pdf
+> Conform to the style guide used in the project by making the following
+> changes:
+> * Use single quotes for multiline strings (except docstrings)
+> * Fix line width to 79 cols
+> * Use f-string instead of formatting a regular string
 >
 > Signed-off-by: Brian Ruley <brian.ruley@gehealthcare.com>
-> Cc: Marek Vasut <marex@denx.de>
->
->  tools/binman/etype/nxp_imx8mcst.py | 23 +++++++++++++++++++----
->  1 file changed, 19 insertions(+), 4 deletions(-)
-
-That should be below the --- (you can use patman to get this right
-automatically)
 > ---
->  tools/binman/etype/nxp_imx8mcst.py | 44 ++++++++++++++++++++++--------
->  1 file changed, 32 insertions(+), 12 deletions(-)
+>  tools/binman/etype/nxp_imx8mcst.py | 28 +++++++++++++++++++++-------
+>  1 file changed, 21 insertions(+), 7 deletions(-)
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Thanks for doing this.
+
+Some of my comments on the other patch could be applied here, if you prefer.
+
 >
 > diff --git a/tools/binman/etype/nxp_imx8mcst.py b/tools/binman/etype/nxp_imx8mcst.py
-> index 0c744a00d7..a80cb94499 100644
+> index 8221517b0c..0c744a00d7 100644
 > --- a/tools/binman/etype/nxp_imx8mcst.py
 > +++ b/tools/binman/etype/nxp_imx8mcst.py
-> @@ -36,6 +36,9 @@ csf_config_template = '''
->    File = "SRK_1_2_3_4_table.bin"
->    Source index = 0
+> @@ -23,7 +23,7 @@ from u_boot_pylib import tools
+>  MAGIC_NXP_IMX_IVT = 0x412000d1
+>  MAGIC_FITIMAGE    = 0xedfe0dd0
 >
-> +[Install NOCAK]
-> +  File = "SRK1_sha256_4096_65537_v3_usr_crt.pem"
-> +
->  [Install CSFK]
->    File = "CSF1_1_sha256_4096_65537_v3_usr_crt.pem"
-
-Since 'sha256_4096_65537_v3_usr_crt.' is common to everything, could
-you have a variable, say keyname, and use that everywhere?
-
+> -csf_config_template = """
+> +csf_config_template = '''
+>  [Header]
+>    Version = 4.3
+>    Hash Algorithm = sha256
+> @@ -53,7 +53,7 @@ csf_config_template = """
+>  [Authenticate Data]
+>    Verification index = 2
+>    Blocks = 0x1234 0x78 0xabcd "data.bin"
+> -"""
+> +'''
 >
-> @@ -74,16 +77,25 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
->                              self._node, 'nxp,srk-table',
->                              'SRK_1_2_3_4_table.bin'
->                           ))
-> -        self.csf_crt = os.getenv(
-> -            'CSF_KEY', fdt_util.GetString(
-> -                           self._node, 'nxp,csf-crt',
-> -                           'CSF1_1_sha256_4096_65537_v3_usr_crt.pem'
-> -                       ))
-> -        self.img_crt = os.getenv(
-> -            'IMG_KEY', fdt_util.GetString(
-> -                           self._node, 'nxp,img-crt',
-> -                           'IMG1_1_sha256_4096_65537_v3_usr_crt.pem'
-> -                       ))
-> +        self.fast_auth = fdt_util.GetBool(self._node, 'nxp,fast-auth')
-> +        if not self.fast_auth:
-> +            self.csf_crt = os.getenv(
-> +                'CSF_KEY', fdt_util.GetString(
-> +                               self._node, 'nxp,csf-crt',
-> +                               'CSF1_1_sha256_4096_65537_v3_usr_crt.pem'
-
-e.g. f'CSF1_1_{keyname}'
-
-> +                           ))
-> +            self.img_crt = os.getenv(
-> +                'IMG_KEY', fdt_util.GetString(
-> +                               self._node, 'nxp,img-crt',
-> +                               'IMG1_1_sha256_4096_65537_v3_usr_crt.pem'
-> +                           ))
-> +        else:
-> +            self.srk_crt = os.getenv(
-> +                'SRK_KEY', fdt_util.GetString(
-> +                               self._node, 'nxp,srk-crt',
-> +                               'SRK1_sha256_4096_65537_v3_usr_crt.pem'
-> +                           ))
-
-All three options seem to read the 'nxp,srk-crt' property, so you can
-do that once the if() to reduce the amount of duplicated code.
-
-> +
+>  class Entry_nxp_imx8mcst(Entry_mkimage):
+>      """NXP i.MX8M CST .cfg file generator and cst invoker
+> @@ -69,9 +69,21 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
+>      def ReadNode(self):
+>          super().ReadNode()
+>          self.loader_address = fdt_util.GetInt(self._node, 'nxp,loader-address')
+> -        self.srk_table = os.getenv('SRK_TABLE', fdt_util.GetString(self._node, 'nxp,srk-table', 'SRK_1_2_3_4_table.bin'))
+> -        self.csf_crt = os.getenv('CSF_KEY', fdt_util.GetString(self._node, 'nxp,csf-crt', 'CSF1_1_sha256_4096_65537_v3_usr_crt.pem'))
+> -        self.img_crt = os.getenv('IMG_KEY', fdt_util.GetString(self._node, 'nxp,img-crt', 'IMG1_1_sha256_4096_65537_v3_usr_crt.pem'))
+> +        self.srk_table = os.getenv(
+> +            'SRK_TABLE', fdt_util.GetString(
+> +                            self._node, 'nxp,srk-table',
+> +                            'SRK_1_2_3_4_table.bin'
+> +                         ))
+> +        self.csf_crt = os.getenv(
+> +            'CSF_KEY', fdt_util.GetString(
+> +                           self._node, 'nxp,csf-crt',
+> +                           'CSF1_1_sha256_4096_65537_v3_usr_crt.pem'
+> +                       ))
+> +        self.img_crt = os.getenv(
+> +            'IMG_KEY', fdt_util.GetString(
+> +                           self._node, 'nxp,img-crt',
+> +                           'IMG1_1_sha256_4096_65537_v3_usr_crt.pem'
+> +                       ))
 >          self.unlock = fdt_util.GetBool(self._node, 'nxp,unlock')
 >          self.ReadEntries()
 >
-> @@ -137,8 +149,16 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
->          # Load configuration template and modify keys of interest
->          config.read_string(csf_config_template)
+> @@ -118,7 +130,7 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
+>          tools.write_file(output_dname, data)
+>
+>          # Generate CST configuration file used to sign payload
+> -        cfg_fname = tools.get_output_filename('nxp.csf-config-txt.%s' % uniq)
+> +        cfg_fname = tools.get_output_filename(f'nxp.csf-config-txt.{uniq}')
+>          config = configparser.ConfigParser()
+>          # Do not make key names lowercase
+>          config.optionxform = str
+> @@ -127,7 +139,9 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
 >          config['Install SRK']['File'] = '"' + self.srk_table + '"'
-
-This is what I mean by the f-string:
-
-f'"{self.srk_table}"'
-
-> -        config['Install CSFK']['File'] = '"' + self.csf_crt + '"'
-> -        config['Install Key']['File'] = '"' + self.img_crt + '"'
-> +        if not self.fast_auth:
-> +            config.remove_section('Install NOCAK')
-> +            config['Install CSFK']['File'] = '"' + self.csf_crt + '"'
-> +            config['Install Key']['File'] = '"' + self.img_crt + '"'
-> +        else:
-> +            config.remove_section('Install CSFK')
-> +            config.remove_section('Install Key')
-> +            config['Install NOCAK']['File'] = '"' + self.srk_crt + '"'
-> +            config['Authenticate Data']['Verification index'] = '0'
-> +
->          config['Authenticate Data']['Blocks'] = (hex(signbase) + ' 0 '
->                                                   + hex(len(data)) + ' "'
->                                                   + str(output_dname) + '"')
-
-Can use f-strings here too, e.g.
-
-f'{signbase:#x} 0 {len(data):#x} ...
-
+>          config['Install CSFK']['File'] = '"' + self.csf_crt + '"'
+>          config['Install Key']['File'] = '"' + self.img_crt + '"'
+> -        config['Authenticate Data']['Blocks'] = hex(signbase) + ' 0 ' + hex(len(data)) + ' "' + str(output_dname) + '"'
+> +        config['Authenticate Data']['Blocks'] = (hex(signbase) + ' 0 '
+> +                                                 + hex(len(data)) + ' "'
+> +                                                 + str(output_dname) + '"')
+>          if not self.unlock:
+>              config.remove_section('Unlock')
+>          with open(cfg_fname, 'w') as cfgf:
 > --
 > 2.39.5
 >
