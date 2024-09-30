@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAAC7CF6495
-	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 01:51:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19B52CF6498
+	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 01:51:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 743C888E0C;
+	by phobos.denx.de (Postfix) with ESMTP id E5E0A88E2D;
 	Mon, 30 Sep 2024 03:50:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Hy4ywc7D";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZD/bbBqx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E9A388E0C; Mon, 30 Sep 2024 03:50:25 +0200 (CEST)
-Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
- [IPv6:2607:f8b0:4864:20::12c])
+ id 3EDB388DD4; Mon, 30 Sep 2024 03:50:25 +0200 (CEST)
+Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
+ [IPv6:2607:f8b0:4864:20::d33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39168889C9
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 03:50:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 27A7388DCC
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 03:50:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12c.google.com with SMTP id
- e9e14a558f8ab-3a275a1562eso13996765ab.1
- for <u-boot@lists.denx.de>; Sun, 29 Sep 2024 18:50:21 -0700 (PDT)
+Received: by mail-io1-xd33.google.com with SMTP id
+ ca18e2360f4ac-82cec47242eso156862039f.0
+ for <u-boot@lists.denx.de>; Sun, 29 Sep 2024 18:50:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727661020; x=1728265820; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727661014; x=1728265814; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=c12AmD5Eqhd3/EomTBw6CQQMDwCiJP1UxxKXZHAWicU=;
- b=Hy4ywc7Dx5sqJ/Z4MnxccTUYPd1Gtjtyz040PQDAG1sDa2PkKPoxo99rYqdQTVkMaf
- d/0mFRJ2XcSyPevOvWmAUoX30LrJKvjU0gPyz/ltpv6GO+xCm+DbkUUeeB1sjQrr7zYz
- L20i3RJMghv7g2JJzPpJqhL6wVyaRbK4A67a0=
+ bh=7Q4n9fIwwJuzf7jg66heoCDb7szSn0cqODkLF135vew=;
+ b=ZD/bbBqxg/ETIG8NNM3j+6YJbwMK3koVE2CPfKw7qVpFdk6ZyFV0fVuLlFZPEQ3JnP
+ MnKIFL1rD1Z7e3DECS7jRsl3onboTBjSj2oCWyc9fviO58OQ8l+eCS1939d3WVUQE4Qm
+ uWqwfdPbshJTl4oOFHbHtSUzdkYfiz4APrSl4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727661020; x=1728265820;
+ d=1e100.net; s=20230601; t=1727661014; x=1728265814;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=c12AmD5Eqhd3/EomTBw6CQQMDwCiJP1UxxKXZHAWicU=;
- b=Gar6NzG/l81zISdkUDFqWxll7uv99ktv97ibbdGrJS7QfJUuf+se5MhZF3ByhOpedo
- xxoXWL5iRGy0qD1mmVS6HOAs+Tb98iJoHcdJ9wYJE/3VZDzbiHS5E1kR7puGUTXd4kFV
- znfIOEoJxnajXdEkKrhSp0nEDwSg2Sc/wpTSP0e99zVNd4H+Fz7TpMkBD2YYh3/gwzIE
- FCMi+HTXh+GgndDDlUuaJ1QXMgsgfoV3TZEnQEO3RY0CYX1U1V7DIhEhPIxaQ8W1vxtY
- B2JeAT4oiHS9d3CpxKtFcO4aGYX7oUN51WtcrhxgAPxlxmkJ16+Qf2OwL1sTAWDpRRtZ
- K1tQ==
-X-Gm-Message-State: AOJu0Yy6Gl4ei52QK+B/VzZkrruraG8VrQOeAYnRsNGmOob2ANZbgc3l
- nlT2SyRJ4NniHAnpWa44fZVh21BkK36tRdz/I+g2swC/jCqasvqMrFBgbV818UNMov+NsEE5ji2
- mnw==
-X-Google-Smtp-Source: AGHT+IGK3Pqz7vO/UlzoTi9tE7qqaRyJSwV0gc0eED0DvQyCW3cap4m92gU5+u8E1/tE0QjHwz18DQ==
-X-Received: by 2002:a05:6e02:148a:b0:3a0:9c04:8047 with SMTP id
- e9e14a558f8ab-3a3446029cdmr68783375ab.6.1727661019812; 
- Sun, 29 Sep 2024 18:50:19 -0700 (PDT)
+ bh=7Q4n9fIwwJuzf7jg66heoCDb7szSn0cqODkLF135vew=;
+ b=CNzzGrVuDi4fuFb2tLWjz6xVmqepGD0KKJteJ6NdniL7E+6CzDh1lsgScRklwJvC2O
+ ISiBiycfK2cI/REovaVF6J9Tts7VRmlrsz1vi45bNZkQajrDrdTJ5R6MsaFHTYIDDSSX
+ 3TS8gQunOOU5gQJ5dpVh7CKZ14zJwKRlIhgQ7M8+e7pjuEXWs0IjThcqnCIiSx/mzvEU
+ jwWjOAttSJyDKZ/uLeLyS3JSUdHg1rodO8g3GZ+lNBwc+IMqsm4EJdgBVAjMHtJg/sXA
+ vurZLApz5KD+RcTdW+b4tRoRBy8asjNFFbfKp7rlisfZEnp0DwWRW3fcdNQs2YHicqlw
+ dq8A==
+X-Gm-Message-State: AOJu0YzDgX77Q0QfEK7qRFB009hxJVnaVr8gvl7ZmY+lcXfBINF82Q5J
+ wBU/W6h38uIQS/EM6FqsDMy2pjrJoprsSeFcEGCDPZs8SQw/ptm49XBCpDPq7QZtaVJA9uQtZS+
+ Q5w==
+X-Google-Smtp-Source: AGHT+IFaueSLvHmGE0u53UmKfxwwyTXPN6uEqYxuV2qpoJGmhMZnhY7WyMU7fTmneCHxyxdj7xmsoA==
+X-Received: by 2002:a05:6e02:1c89:b0:395:e85e:f2fa with SMTP id
+ e9e14a558f8ab-3a3445ec40fmr86441585ab.1.1727661013751; 
+ Sun, 29 Sep 2024 18:50:13 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3a344de1d5fsm22074185ab.62.2024.09.29.18.50.18
+ e9e14a558f8ab-3a344de1d5fsm22074185ab.62.2024.09.29.18.50.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 29 Sep 2024 18:50:19 -0700 (PDT)
+ Sun, 29 Sep 2024 18:50:13 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Devarsh Thakkar <devarsht@ti.com>,
+ Bryan Brattlof <bb@ti.com>, Greg Malysa <greg.malysa@timesys.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Suniel Mahesh <sunil@amarulasolutions.com>
-Subject: [PATCH v3 12/33] xpl: Rename spl_phase to xpl_phase_t
-Date: Sun, 29 Sep 2024 19:49:35 -0600
-Message-Id: <20240930014956.1434060-13-sjg@chromium.org>
+ Jesse Taube <mr.bossman075@gmail.com>,
+ "Leon M. Busch-George" <leon@georgemail.eu>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Nishanth Menon <nm@ti.com>, Sumit Garg <sumit.garg@linaro.org>
+Subject: [PATCH v3 07/33] scripts: Rename Makefile.spl to Makefile.xpl
+Date: Sun, 29 Sep 2024 19:49:30 -0600
+Message-Id: <20240930014956.1434060-8-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240930014956.1434060-1-sjg@chromium.org>
 References: <20240930014956.1434060-1-sjg@chromium.org>
@@ -96,115 +94,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This name fits better with the new naming scheme, so update it.
+Rename this file to indicate that it refers to any non-U-Boot-proper
+phase, not just SPL, which is the phase immediately before U-Boot
+proper.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- arch/sandbox/cpu/spl.c               |  2 +-
- common/spl/spl.c                     |  2 +-
- doc/device-tree-bindings/bootph.yaml |  2 +-
- include/spl.h                        | 12 ++++++------
- 4 files changed, 9 insertions(+), 9 deletions(-)
+ Makefile                               | 6 +++---
+ scripts/{Makefile.spl => Makefile.xpl} | 0
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+ rename scripts/{Makefile.spl => Makefile.xpl} (100%)
 
-diff --git a/arch/sandbox/cpu/spl.c b/arch/sandbox/cpu/spl.c
-index 1c33a520c64..6c6f4fd8c3e 100644
---- a/arch/sandbox/cpu/spl.c
-+++ b/arch/sandbox/cpu/spl.c
-@@ -91,7 +91,7 @@ static int load_from_image(struct spl_image_info *spl_image,
- 			   struct spl_boot_device *bootdev)
- {
- 	struct sandbox_state *state = state_get_current();
--	enum u_boot_phase next_phase;
-+	enum xpl_phase_t next_phase;
- 	const char *fname;
- 	ulong pos, size;
- 	int full_size;
-diff --git a/common/spl/spl.c b/common/spl/spl.c
-index 9c3bba48251..9ed91929ee1 100644
---- a/common/spl/spl.c
-+++ b/common/spl/spl.c
-@@ -441,7 +441,7 @@ static inline int write_spl_handoff(void) { return 0; }
-  */
- static enum bootstage_id get_bootstage_id(bool start)
- {
--	enum u_boot_phase phase = spl_phase();
-+	enum xpl_phase_t phase = spl_phase();
+diff --git a/Makefile b/Makefile
+index 300cee2e7f6..4378993ccfd 100644
+--- a/Makefile
++++ b/Makefile
+@@ -2094,7 +2094,7 @@ spl/u-boot-spl-dtb.hex: spl/u-boot-spl
+ 	@:
  
- 	if (IS_ENABLED(CONFIG_TPL_BUILD) && phase == PHASE_TPL)
- 		return start ? BOOTSTAGE_ID_START_TPL : BOOTSTAGE_ID_END_TPL;
-diff --git a/doc/device-tree-bindings/bootph.yaml b/doc/device-tree-bindings/bootph.yaml
-index a3ccf06efa7..a364b3fe37f 100644
---- a/doc/device-tree-bindings/bootph.yaml
-+++ b/doc/device-tree-bindings/bootph.yaml
-@@ -83,6 +83,6 @@ properties:
-   bootph-all:
-     type: boolean
-     description:
--      Include this node in all phases (for U-Boot see enum u_boot_phase).
-+      Include this node in all phases (for U-Boot see enum xpl_phase_t).
+ spl/u-boot-spl: tools prepare $(if $(CONFIG_SPL_OF_CONTROL),dts/dt.dtb)
+-	$(Q)$(MAKE) obj=spl -f $(srctree)/scripts/Makefile.spl all
++	$(Q)$(MAKE) obj=spl -f $(srctree)/scripts/Makefile.xpl all
  
- additionalProperties: true
-diff --git a/include/spl.h b/include/spl.h
-index fa87d865f5f..6d44b627259 100644
---- a/include/spl.h
-+++ b/include/spl.h
-@@ -62,7 +62,7 @@ static inline bool xpl_is_first_phase(void)
- 	return false;
- }
+ spl/sunxi-spl.bin: spl/u-boot-spl
+ 	@:
+@@ -2113,14 +2113,14 @@ tpl/u-boot-tpl.bin: tpl/u-boot-tpl
+ 	$(TPL_SIZE_CHECK)
  
--enum u_boot_phase {
-+enum xpl_phase_t {
- 	PHASE_NONE,	/* Invalid phase, signifying before U-Boot */
- 	PHASE_TPL,	/* Running in TPL */
- 	PHASE_VPL,	/* Running in VPL */
-@@ -116,7 +116,7 @@ enum u_boot_phase {
-  *
-  * Return: U-Boot phase
-  */
--static inline enum u_boot_phase spl_phase(void)
-+static inline enum xpl_phase_t spl_phase(void)
- {
- #ifdef CONFIG_TPL_BUILD
- 	return PHASE_TPL;
-@@ -150,7 +150,7 @@ static inline bool spl_in_proper(void)
-  * Return: the previous phase from this one, e.g. if called in SPL this returns
-  *	PHASE_TPL, if TPL is enabled
-  */
--static inline enum u_boot_phase spl_prev_phase(void)
-+static inline enum xpl_phase_t spl_prev_phase(void)
- {
- #ifdef CONFIG_TPL_BUILD
- 	return PHASE_NONE;
-@@ -172,7 +172,7 @@ static inline enum u_boot_phase spl_prev_phase(void)
-  * Return: the next phase from this one, e.g. if called in TPL this returns
-  *	PHASE_SPL
-  */
--static inline enum u_boot_phase spl_next_phase(void)
-+static inline enum xpl_phase_t spl_next_phase(void)
- {
- #ifdef CONFIG_TPL_BUILD
- 	return IS_ENABLED(CONFIG_VPL) ? PHASE_VPL : PHASE_SPL;
-@@ -188,7 +188,7 @@ static inline enum u_boot_phase spl_next_phase(void)
-  *
-  * Return: phase name
-  */
--static inline const char *spl_phase_name(enum u_boot_phase phase)
-+static inline const char *spl_phase_name(enum xpl_phase_t phase)
- {
- 	switch (phase) {
- 	case PHASE_TPL:
-@@ -211,7 +211,7 @@ static inline const char *spl_phase_name(enum u_boot_phase phase)
-  * @phase: Phase to look up
-  * Return: phase prefix ("spl", "tpl", etc.)
-  */
--static inline const char *spl_phase_prefix(enum u_boot_phase phase)
-+static inline const char *spl_phase_prefix(enum xpl_phase_t phase)
- {
- 	switch (phase) {
- 	case PHASE_TPL:
+ tpl/u-boot-tpl: tools prepare $(if $(CONFIG_TPL_OF_CONTROL),dts/dt.dtb)
+-	$(Q)$(MAKE) obj=tpl -f $(srctree)/scripts/Makefile.spl all
++	$(Q)$(MAKE) obj=tpl -f $(srctree)/scripts/Makefile.xpl all
+ 
+ vpl/u-boot-vpl.bin: vpl/u-boot-vpl
+ 	@:
+ 	$(VPL_SIZE_CHECK)
+ 
+ vpl/u-boot-vpl: tools prepare $(if $(CONFIG_TPL_OF_CONTROL),dts/dt.dtb)
+-	$(Q)$(MAKE) obj=vpl -f $(srctree)/scripts/Makefile.spl all
++	$(Q)$(MAKE) obj=vpl -f $(srctree)/scripts/Makefile.xpl all
+ 
+ TAG_SUBDIRS := $(patsubst %,$(srctree)/%,$(u-boot-dirs) include)
+ 
+diff --git a/scripts/Makefile.spl b/scripts/Makefile.xpl
+similarity index 100%
+rename from scripts/Makefile.spl
+rename to scripts/Makefile.xpl
 -- 
 2.34.1
 
