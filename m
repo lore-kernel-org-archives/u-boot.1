@@ -4,74 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E72F8CF6499
-	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 12:05:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F672CF6499
+	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 12:44:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3353188E19;
-	Mon, 30 Sep 2024 14:05:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 87CD788E4B;
+	Mon, 30 Sep 2024 14:44:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Udiv6XNQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="G/Tx5GVv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF1A588B27; Mon, 30 Sep 2024 14:05:56 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id 098A488D9B; Mon, 30 Sep 2024 14:44:34 +0200 (CEST)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE09D88E3F
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 14:05:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B0B8F88D9B
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 14:44:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-710dead5d2aso2629077a34.0
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 05:05:53 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-42cb2191107so34903015e9.1
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 05:44:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1727697953; x=1728302753; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vBU7M9VQ55Y/qRVJdGBBQoPfvQ+CtZ8Jj/f9RtQSyhM=;
- b=Udiv6XNQFxno1bKlzHAbYxt8ZN+GC+Snf8nym5SjTM9xNWB94Q7pIxystwlThC9B7X
- /Rji14HQIkSam4EynmH2x7r3xd4LzIPgB0o0V+0Y7YHyF/KS+N9Tkj8lsdo5xiYf3RYn
- RMOCLSytFqRKKfw4Z8Tlk41Ka4tuArmhf5wWjMKVPAjnOyUgnZuTIfyW+evlTImHHHE5
- UPn2N7oaKDnyuVKZ721ubVnZqadRN/MNZTzabywX75HJ9E4S8t6dgIMy9cjBhxhZUV5L
- qd44Qt/VWoquFuxhPf6Hg1NBI708WIwYWDVS4sYsvLb64C2rN/gG3WZuJlByDh24c5xv
- Rd3Q==
+ d=linaro.org; s=google; t=1727700271; x=1728305071; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=uRL4zvhzzA3K5lSrueir/ymWsHnxlt7p/AQ8zEYXF2o=;
+ b=G/Tx5GVvRAnTzo5maUHptdZK/KgOPBiIOzNoEZdcQdDvDI4A4BuNugoCWXcJSLnk9p
+ vG9u1MY09ObnocFHd0yTrCa/byfAArX2NaTG9MzpgKGL9zJDaom1kDyZzZqJjHLsarfG
+ oHtX2Fjoc6x0GtjPRGbxIBwVluj+vtvLE5BY3jawzlc9ANHXEqNe3hjbg/6YTsS6+SdJ
+ bTKo30+/DEvMRT0qae1+7n2zazKczq7YXtDwjT1oTDGEPzV6AHbB9i1uFTj0hJuYQcsn
+ wnzq3Lc8OCyfpBSYBxLIkOAaBlH+cCXCtNKOnr+hOUCy8Ct7a6S2knwTW0neLgzjs25e
+ q+9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727697953; x=1728302753;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1727700271; x=1728305071;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=vBU7M9VQ55Y/qRVJdGBBQoPfvQ+CtZ8Jj/f9RtQSyhM=;
- b=FdCapEQQBCd8k3XuCnCT5xdWaYKvRTBoUwhkSyesn/tTuH09ZNM0UjDNbCNLPbn4wH
- C76hRDFz4CGyZfXBSJB/vIM8La2gkJwuym/ZskyvpY+bkDEf/srv2WneaCpJxf+WoQjK
- NCW8ancnhpQd+y+68MZjrVhDXqhBhFxPbNYY2C5deyN1K0LRF0xY5x3dMKY2npgPubiE
- MYRcOnz839kgg/z9R1qino+CSjDxI1JdPzZLufKNAb4ARsb6VC5l59sc/WPvcbdi+vn2
- 66oFqruvQDM3khRRedLzCaYaTgoUkCsertmIQgGOBcKTkDbE6rf5CS+FWmzc9X4XosCG
- +Q3A==
-X-Gm-Message-State: AOJu0Yx33QT6vtnVakBP/rn05pLbCoUWJfzybb2xjz/Y5dU5bOpnu9Cy
- PKrs73yr+I4uNy5ATNJTatmilhu+GY8V9vAWpvUpOX64KmUDo/GlFpDGpfPPJ5LKpdalNm6+LUc
- h8vA41ytOT8Crs3b2NOTFa/m1SXQf7KiAosn2cw==
-X-Google-Smtp-Source: AGHT+IE5caeJREp0CtJr7MGYkroBPva2rGIslSg7llZSdEPpNp9WwOVja0oFY+4emTMtRvzWJQA44lZYFWCMRcO0Az4=
-X-Received: by 2002:a05:6830:6e96:b0:710:f0bf:9799 with SMTP id
- 46e09a7af769-714fbeff96dmr7040743a34.21.1727697952603; Mon, 30 Sep 2024
- 05:05:52 -0700 (PDT)
+ bh=uRL4zvhzzA3K5lSrueir/ymWsHnxlt7p/AQ8zEYXF2o=;
+ b=FJ/4fo97g/FJgkI9j6icZ1o33tYYe5NVUmECshA2x+A3sR3iSAYxhxveCIINdjoRkA
+ PVsrnGprXk1+VaeC24fsUAR4PPp23ayorj1APftDSNhu3t9cSfZ1fUqK8uafCKYtqdMm
+ ErZWbFhgoh1CF5w4pfxwuJJfeXnSgwXj+eNZVWUPj5mqoIKCGKJP5s7ovr3prAc87qxX
+ EfhNlPX9H2b2+WU8ERhyhjQSR0+7y7tALMpm6VjzJdt7/z0vWDyi4MBAz+fblgSj7bFK
+ ETza7gK6w9lghMocqERKgPUi7LjAR8mV1fdZC27bcvwjUqbkHb+VIVc1+Kg2MJyOUWQy
+ xZDw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVKA7A+AJrceJ3ebP+4f7a0R1fBfZOiP8QBTEZHzzGiE/L1bkHxZILxoKhaniXF1QX3ymlofis=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxs4wgkwCR9R5IDtuPmHHi+hbYXH4un6G1lcHNxpD7Y2n6oHQyt
+ nx4/ePvU+dx5MfZ0MdwgO5Ib+G4GoF0R0V+FPMv6cbJQOrZy69PwZJFOtS4Ki88=
+X-Google-Smtp-Source: AGHT+IENfamxJmwDWFE5l+vSwaFdywkcoskRmSieDqb0aAS9FvTUlA0ktpmqP1dFJe6VbtuRJVXZ/w==
+X-Received: by 2002:a7b:c5c3:0:b0:42f:310f:de9 with SMTP id
+ 5b1f17b1804b1-42f5b906496mr85595235e9.15.1727700271023; 
+ Mon, 30 Sep 2024 05:44:31 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-42e96a36597sm149362745e9.31.2024.09.30.05.44.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 30 Sep 2024 05:44:30 -0700 (PDT)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [PATCH v3 00/13] ufs: enhancements to support Qualcomm UFS controllers
+Date: Mon, 30 Sep 2024 14:44:22 +0200
+Message-Id: <20240930-topic-ufs-enhancements-v3-0-58234f84ab89@linaro.org>
 MIME-Version: 1.0
-References: <a54b501a-9a98-426c-a5ca-faf547411a30@siemens.com>
-In-Reply-To: <a54b501a-9a98-426c-a5ca-faf547411a30@siemens.com>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Mon, 30 Sep 2024 17:35:41 +0530
-Message-ID: <CAFA6WYOAYQ26vAT8=Z74N6EJ3HcvqmiwshxGkMVe5oQyAfFrrw@mail.gmail.com>
-Subject: Re: [PATCH] Extend usage for OF_OVERLAY_LIST beyond SPL
-To: Jan Kiszka <jan.kiszka@siemens.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Marek Vasut <marex@denx.de>, Frank Wunderlich <frank-w@public-files.de>,
- Jonas Karlman <jonas@kwiboo.se>, Nishanth Menon <nm@ti.com>, "Li,
- Hua Qian (DI FA CTR IPC CN PRC4)" <huaqian.li@siemens.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIACad+mYC/4XNQQ6CMBCF4auYrq0pLSK48h7GRS2vMIm2pMVGQ
+ 7i7hZUujMt/MvPNxCICIbLjZmIBiSJ5l0NtN8z02nXg1OZmUshSNIXgox/I8IeNHC4vGNzhxsg
+ tatjGQDVtzfLxEGDpucLnS+6e4ujDa/2TimX6l0wFF1wB4mqtNqYqTzdyOvidDx1bzCQ/HPnbk
+ dmp9hpVgYOC1l/OPM9vMH9uMAUBAAA=
+To: Tom Rini <trini@konsulko.com>, Bhupesh Sharma <bhupesh.linux@gmail.com>, 
+ Neha Malcom Francis <n-francis@ti.com>
+Cc: Michal Simek <michal.simek@amd.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, bmeng.cn@gmail.com, 
+ u-boot@lists.denx.de, u-boot-qcom@groups.io, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, 
+ Bhupesh Sharma <bhupesh.linux@gmail.com>
+X-Mailer: b4 0.14.1
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2773;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=3ZxUyYFfECS9SFI9LAuVBXgTYRNuxlMThshcIdQ0VB0=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBm+p0n7S0D7Z5LNdu1LLgRjHOCrGIuuGlHFPPMX8ql
+ lZVvlUmJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZvqdJwAKCRB33NvayMhJ0YDbD/
+ 4t2pzmuAbqejj9bml4BBPF9aBkyXIPinU5cOuNzyOnedDmUSB6X2TcgaNTg0n7Q+F0lV89U6D0NLb/
+ cqNhIMTyMdyoa392dHGvQNP2/YbVXbjdcfRoK1M2vnpMEn/qGRDaMi5OYRl6qwwpd3uFZhNybLQ3dk
+ Z4/F575cvwZi2368Et9ld82xdEnMUpVRZnN1mtx2ALXtjPNpzcy4ZdLBQiGibt4UnAOD6S15FDqrp1
+ +0wCic0cX8DgBdc8aXaJYSD1WDTAL1Z+RtpJbj3iBKaQ7sFKk+rOLCeEskfbGc8FWSVzbWNg5Eu1uI
+ fnoAm5NouphIt19ezuYes5wdhp4V/gV6pDqW0P1u8h8LPd9eAzlM5HbEZCCfY9jhUnWTrsgp/4efpc
+ tHUpwFlYQty+2FeiPwAu2gVcZmVwIktRmrintL5tIKXxF0uZgAsqe27CJSuCefemy5n6RMH2xEfT6z
+ NZLm8xZYRqPBxRMfcFr16CnW25q7I6Mkci+JejJlVuGWeGbkj1AImEeI0u9WuCK5BWC194Cx+0egha
+ izsodujgPVWuxbu8iMWcuMv4A2PQh5pOVXviUe18Ch152PwaapXjCTCPQgh+QjT7jZgu20MPgHOtW9
+ hFlbXIKAmcxkBo+cmOtdyUg4mMfOvyNTouZT/UQMm3LlBE9H3HR35ReOQsWQ==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,62 +117,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 30 Sept 2024 at 15:50, Jan Kiszka <jan.kiszka@siemens.com> wrote:
->
-> From: Jan Kiszka <jan.kiszka@siemens.com>
->
-> Allow to use OF_OVERLAY_LIST also for the case that the overlays just
-> need be built, e.g. when they will be picked up by binman as artifacts
-> of the final U-Boot image. The IOT2050 boards have such a need when
-> switching to OF_UPSTREAM.
->
-> Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
-> ---
->
-> While waiting for the merge of v6.12-rc1-dts and while seeing related
-> but different attempts to address the overlay topic. See the patch
-> in use here:
->
-> https://github.com/siemens/u-boot/commits/jan/iot2050
->
->  dts/Kconfig          | 4 ++--
->  scripts/Makefile.dts | 1 +
->  2 files changed, 3 insertions(+), 2 deletions(-)
->
+This serie regroups all the fixes and base enhancements required to
+support the Qualcomm UFS controllers in U-Boot.
 
-Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
+This syncs headers & defines from Linux, and includes 2 set of
+fixes that were sent separately:
+- ufs: core: remove link_startup_again logic
+- ufs: properly fix cache operations
 
--Sumit
+Without those 2 sets, UFS cannot initialize on Qualcomm controlers
+since v5, and a numerous of Cache issues makes any UFS controller
+fail to initialize.
 
-> diff --git a/dts/Kconfig b/dts/Kconfig
-> index 569d4be338e..7ea4fd5a79b 100644
-> --- a/dts/Kconfig
-> +++ b/dts/Kconfig
-> @@ -226,11 +226,11 @@ config OF_LIST
->
->  config OF_OVERLAY_LIST
->         string "List of device tree overlays to include for DT control"
-> -       depends on SPL_LOAD_FIT_APPLY_OVERLAY
->         help
->           This option specifies a list of device tree overlays to use for DT
->           control. This option can then be used by a FIT generator to include
-> -         the overlays in the FIT image.
-> +         the overlays in the FIT image or by binman when assembling an image
-> +         that uses overlays during DT fixup.
->
->  choice
->         prompt "OF LIST compression"
-> diff --git a/scripts/Makefile.dts b/scripts/Makefile.dts
-> index 790f3c508f1..dc181240a21 100644
-> --- a/scripts/Makefile.dts
-> +++ b/scripts/Makefile.dts
-> @@ -1,6 +1,7 @@
->  # SPDX-License-Identifier: GPL-2.0+
->
->  dtb-y += $(patsubst %,%.dtb,$(subst ",,$(CONFIG_DEFAULT_DEVICE_TREE) $(CONFIG_OF_LIST) $(CONFIG_SPL_OF_LIST)))
-> +dtb-y += $(patsubst %,%.dtbo,$(subst ",,$(CONFIG_OF_OVERLAY_LIST)))
->
->  ifeq ($(CONFIG_OF_UPSTREAM_BUILD_VENDOR),y)
->  ifeq ($(CONFIG_ARM64),y)
-> --
-> 2.43.0
+Since UFS core hasn't changed for a while, and since UFS is core
+technology for the Qualcomm SoCs, I volunteer maintaininig the
+UFS subsystem if Bhupesh & Neha Malcom Francis are ok with that.
+
+It has been reported to show regressions on:
+- TI K3 platforms (j721s2, j721e, j7200, j784s4) [1]
+- AMD platform (amd_versal2_virt_defconfig) [2]
+
+[1] https://lore.kernel.org/all/38f599a8-7094-4a04-8ff6-96fc8b9d168a@ti.com/
+[2] https://lore.kernel.org/all/SA1PR12MB869713CA620F99077B75EF0E98632@SA1PR12MB8697.namprd12.prod.outlook.com/
+
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
+Changes in v3:
+- Fixup patch 9
+- Link to v2: https://lore.kernel.org/r/20240920-topic-ufs-enhancements-v2-0-65ae61e73eaa@linaro.org
+
+Changes in v2:
+- Added review and tested-by tags
+- Updated patch 12 message with more explanations
+- Synced patch 9 again with Linux 6.11
+- Updated patches 7, 8, 9 and 10 with informations about the origins of the changes
+- Link to v1: https://lore.kernel.org/r/20240910-topic-ufs-enhancements-v1-0-3ee0bffacc64@linaro.org
+
+---
+Bhupesh Sharma (5):
+      ufs/ufs.h: Add definition of 'ufshcd_rmwl()'
+      ufs: Clear UECPA once due to LINERESET has happened during LINK_STARTUP
+      ufs: Sync possible UFS Quirks with Linux UFS driver
+      ufs: Add missing memory barriers
+      ufs: Fix debug message in 'ufs_start'
+
+Marek Vasut (2):
+      ufs: Add UFSHCD_QUIRK_BROKEN_64BIT_ADDRESS
+      ufs: Add UFSHCD_QUIRK_HIBERN_FASTAUTO
+
+Neil Armstrong (6):
+      ufs: allocate descriptors with size aligned with DMA_MINALIGN
+      ufs: fix dcache flush and invalidate range calculation
+      ufs: split flush and invalidate to only invalidate when required
+      ufs: use dcache helpers for scsi_cmd data and only invalidate if necessary
+      ufs: core: remove link_startup_again logic
+      MAINTAINERS: Add myself to the list of UFS maintainers
+
+ MAINTAINERS       |   1 +
+ drivers/ufs/ufs.c |  98 +++++++++++++++-----------
+ drivers/ufs/ufs.h | 203 ++++++++++++++++++++++++++++++++++++++++++++++++------
+ 3 files changed, 241 insertions(+), 61 deletions(-)
+---
+base-commit: ddbcafeb53e7093c58488596bfce6d8823777c3a
+change-id: 20240910-topic-ufs-enhancements-fe8ef9ce39d8
+
+Best regards,
+-- 
+Neil Armstrong <neil.armstrong@linaro.org>
+
