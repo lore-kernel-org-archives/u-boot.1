@@ -4,64 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51958CF649D
-	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 09:00:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CF0BCF649D
+	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 09:03:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6FCF88CA3;
-	Mon, 30 Sep 2024 10:59:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id D39CC88CA3;
+	Mon, 30 Sep 2024 11:03:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="ScjMxYAE";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mwxFf0Dq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22B3C88CB0; Mon, 30 Sep 2024 10:59:58 +0200 (CEST)
-Received: from mail-m607.netease.com (mail-m607.netease.com [210.79.60.7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EB56F88CC8; Mon, 30 Sep 2024 11:03:22 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D45E88A29
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 10:59:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 0C2EE88A29
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 11:03:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=ScjMxYAEKedYicy9VLwcA2PF5Pm0CW8GRPJKAU6mLNPWnT5eoz0+b/FPdLfweSAZMxlil/qDZK3Extk1Sll43viii/HNKUBvhq6uD440Nn5YKhUCsN7iK9yY4JaCxt6bvGb2PvjSRCUSv2uJt50Q/nwdbeYuDVGT5dVXHdbeLAM=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=N1qIh1KvPJ+WabL+4Rrv/EOElTvo1B8aNaR//JUwbCo=;
- h=date:mime-version:subject:message-id:from;
-Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id AA7E928091E;
- Mon, 30 Sep 2024 16:59:41 +0800 (CST)
-Message-ID: <947cc3e3-dec2-480d-8911-e87a6b0c88ad@rock-chips.com>
-Date: Mon, 30 Sep 2024 16:59:41 +0800
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-5c896b9b3e1so1409964a12.2
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 02:03:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1727687000; x=1728291800; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=I7lRyiHXlyHzUh95kgEidni6UiDFmAjoM/Ba1pnLmdk=;
+ b=mwxFf0Dqf6Dg/OPAIoyaK6EP8CGDejz1h/OchOWLoh1zY+/EkGQ65gRey+qU8B1GjD
+ SbEkhwLJ0NxvjYKmlc76Yj55P1MQQWu4c8x6XwfUcggt89DZTrPnSee6IC8CMHFmH1Ci
+ b3KqzMIp894leBFpaQdFBCbXnogCx9iLGTOyIg5Lmcb4StOX04vBy4MQBCg+JuoMu9d9
+ 8r6JZCAjvhg6C2dxayCPhdQDGlfjM1B9mOGLxtgYaKRU/ZNybDsQt5emcCWGaTzzOPeJ
+ A7imZNJ5DJIgxrq8qm6SuH6qUmMCy2OxcdIKEkpqZrWbcU2xu7rHHh4rLNX2RSqho2Su
+ dO0Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727687000; x=1728291800;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=I7lRyiHXlyHzUh95kgEidni6UiDFmAjoM/Ba1pnLmdk=;
+ b=hAQxefjPVEqivuONoOeqBn54x/HZqLwV1ryV4Y4+XwdWQj1nJzL+Kh7RGBUeatb2cK
+ GVjfzq9qMQhXP4Clx8iOGpx6rZKLjnsRnwM0HqE7lKxht3lxvjEdONVJbeDxmQ4DLbVw
+ 7qoqm5wHkkYDNCEA+T2TympPI9Wd7FjxfnWdUja9JZFcHn/G8tjaS7sc1CdxOgFM/qLt
+ n9jRFfgyWJ1SL2M4bFoOFwI+k2l8ayoVUSvNL0tQ8QCUNF5SmnKGcWgdq0lOgcZ1dLz1
+ kvhm7L8Bx4kWf3Q5AUOmAvx2GZgYP+H0WbvGwytS+V31ozIUiRIalzwG7sKniWTHI8Nc
+ dGtg==
+X-Gm-Message-State: AOJu0YyuYB6j9u4dvTXGfFACVjzU1Hy1IE77FuIC5k4H6aMpF6UMdGZx
+ YXH25b9RCF0T17m2LvaIM16v/gN7OYtYGsZ+mGMng+IHnKegmzy0zuNX7blo/r+M1Xob4sk15iP
+ xG/Acit1tlHdbX5QCn7U575oD8G0=
+X-Google-Smtp-Source: AGHT+IGCbCMAtLGWHtWEa0vXxqzRwWHE+Nq/rt74xT/kGGKsWghcRC/Lj8E79CQFzXzoV95meP/t5eEjV3YECaR8aUM=
+X-Received: by 2002:a05:6402:34c6:b0:5c2:5438:6ea with SMTP id
+ 4fb4d7f45d1cf-5c8824eb2aamr9673754a12.19.1727687000192; Mon, 30 Sep 2024
+ 02:03:20 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] board: rockchip: Fix panel detection for mainline A-TF
-To: Chris Morgan <macromorgan@hotmail.com>
-Cc: Chris Morgan <macroalpha82@gmail.com>, u-boot@lists.denx.de,
- jonas@kwiboo.se, trini@konsulko.com, philipp.tomsich@vrull.eu,
- sjg@chromium.org, dsimic@manjaro.org, quentin.schulz@cherry.de
-References: <20240916210137.182493-1-macroalpha82@gmail.com>
- <20240916210137.182493-4-macroalpha82@gmail.com>
- <82810c78-3a7b-4bc3-8c49-803a58292780@rock-chips.com>
- <MN2PR16MB2941BE355B2F4C1623CE946FA5622@MN2PR16MB2941.namprd16.prod.outlook.com>
- <2a073bbf-4ba2-40d0-8ab8-1ece28062474@rock-chips.com>
- <MN2PR16MB294182BF4056E3BFFE6721FAA5632@MN2PR16MB2941.namprd16.prod.outlook.com>
-Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <MN2PR16MB294182BF4056E3BFFE6721FAA5632@MN2PR16MB2941.namprd16.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGkNKGFYZTUlJGkkYGkweSkNWFRQJFh
- oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
- hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a9242282cd209d3kunmaa7e928091e
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Mhg6KTo5GjIdUSMJLDE9NEoP
- IisaCkxVSlVKTElMTUNNTENJTEhLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFMS0hONwY+
+References: <20240926183111.1324284-1-paulk@sys-base.io>
+ <20240926183111.1324284-3-paulk@sys-base.io>
+In-Reply-To: <20240926183111.1324284-3-paulk@sys-base.io>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Mon, 30 Sep 2024 10:01:08 +0100
+Message-ID: <CALeDE9NkpxES=SRKxH6=xk_94rRK9Y0gwuj=C-d+eddjOd_gkg@mail.gmail.com>
+Subject: Re: [PATCH 3/4] rockchip: rk3399-rockpro64: Disable bootstage
+ instrumentation config
+To: Paul Kocialkowski <paulk@sys-base.io>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Jonas Karlman <jonas@kwiboo.se>, 
+ Chris Morgan <macromorgan@hotmail.com>, Tim Lunn <tim@feathertop.org>, 
+ Paul Kocialkowski <contact@paulk.fr>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,135 +92,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-On 2024/9/19 21:15, Chris Morgan wrote:
-> On Thu, Sep 19, 2024 at 09:48:58AM +0800, Kever Yang wrote:
->> Hi Chris,
->>
->> On 2024/9/18 21:38, Chris Morgan wrote:
->>> On Wed, Sep 18, 2024 at 11:06:34AM +0800, Kever Yang wrote:
->>>> Hi Chris,
->>>>
->>>> Please update the subject with something like "Enable the VO PD before
->>>> driver access",
->>>>
->>>> and the commit message for the change reason is enough.
->>>>
->>>> and the config is more soc level, I think you can add this to
->>>> arch_cpu_init() for we don't have a power domain driver.
->>> To my knowledge I'm the only board trying to access the video before
->>> Linux proper. Do you want me to add this for all rk3568 boards then
->>> (from within rk3568.c under arch_cpu_init() as you say)?
->> Yes, please move it to rk3568.c in case other board need it.
->>>    I'm thinking
->>> if I do though I can at least get rid of the memory barrier.
->>>
->>>> On 2024/9/17 05:01, Chris Morgan wrote:
->>>>> From: Chris Morgan <macromorgan@hotmail.com>
->>>>>
->>>>> The current panel detection logic crashes when the device boots with
->>>>> mainline A-TF, causing a reboot loop. It turns out mainline A-TF
->>>>> doesn't enable the VO power domain like the BSP A-TF did.
->>>>>
->>>>> Set the VO domain on and use a memory barrier to ensure it is powered
->>>>> up before we attempt to do the panel detection.
->>>>>
->>>>> Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
->>>>> ---
->>>>>     board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c | 13 +++++++++++++
->>>>>     configs/anbernic-rgxx3-rk3566_defconfig    |  2 --
->>>>>     2 files changed, 13 insertions(+), 2 deletions(-)
->>>>>
->>>>> diff --git a/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c b/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
->>>>> index c1d1826fd14..f4e7c1ab360 100644
->>>>> --- a/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
->>>>> +++ b/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
->>>>> @@ -22,6 +22,10 @@
->>>>>     DECLARE_GLOBAL_DATA_PTR;
->>>>> +#define PMU_BASE_ADDR		0xfdd90000
->>>>> +#define PMU_PWR_GATE_SFTCON	0xa0
->>>>> +#define PMU_PD_VO_DWN_ENA	BIT(7)
->>>>> +
->>>>>     #define GPIO0_BASE		0xfdd60000
->>>>>     #define GPIO4_BASE		0xfe770000
->>>>>     #define GPIO_SWPORT_DR_L	0x0000
->>>>> @@ -311,6 +315,15 @@ int rgxx3_detect_display(void)
->>>>>     	int i;
->>>>>     	u8 panel_id[2];
->>>>> +	/* Disable VO power domain power-down */
->>>> Disable?
->>> It's weird verbiage but the data sheet says "Enable power down PD_VO"
->>> by writing a 1, so I figure I'm disabling it by writing a 0.
->> OK, understand now.
->>
->> To make it simple and clear, could you just say "Enable PD_VO for display"?
->>
->>>>> +	writel((PMU_PD_VO_DWN_ENA << 16),
->>>>> +	       PMU_BASE_ADDR + PMU_PWR_GATE_SFTCON);
->>>>> +	/*
->>>>> +	 * System will crash if the power domain isn't enabled before
->>>>> +	 * we start trying to talk to the DSI panel.
->>>>> +	 */
->>>>> +	wmb();
->>>>> +
->>>>>     	/*
->>>>>     	 * Take panel out of reset status.
->>>>>     	 * Set GPIO4_A0 to output.
->>>>> diff --git a/configs/anbernic-rgxx3-rk3566_defconfig b/configs/anbernic-rgxx3-rk3566_defconfig
->>>>> index f5e5470df8c..49d3766613e 100644
->>>>> --- a/configs/anbernic-rgxx3-rk3566_defconfig
->>>>> +++ b/configs/anbernic-rgxx3-rk3566_defconfig
->>>>> @@ -49,8 +49,6 @@ CONFIG_SPL_REGMAP=y
->>>>>     CONFIG_SPL_SYSCON=y
->>>>>     CONFIG_SPL_ADC=y
->>>>>     CONFIG_SPL_CLK=y
->>>>> -CONFIG_ARM_SMCCC_FEATURES=y
->>>>> -CONFIG_SCMI_FIRMWARE=y
->>>> This should be a separate patch, and what's the change?
->>>>
->>>>
->>> Mainline A-TF seems to get angry with U-Boot when these are enabled.
->>> By angry I mean it freezes. It's all a related change to allowing
->>> mainline A-TF, though I should probably call it out better as a
->>> required change. Again I also specify though in the commit message
->>> that mainline A-TF still doesn't work with Linux proper because of
->>> the missing psci clk and psci reset bits, but at least with this
->>> change U-Boot won't be contributing to the problem (for this board).
->> The scmi clock is missing on rk3568 mainline A-TF now, but it should return
->> error with something like
->>
->> NOT SUPPORT instead of hang inside.
->>
->> Any way, this is a separate change, we don't need it if the ATF supports
->> scmi clock later.
->>
->> Thanks,
->>
->> - Kever
-> I'll opt to disable this for now anyway (but in a commit by itself),
-> if that's okay. It makes no difference for booting when using binary
-> A-TF, but it does make a difference when using the *current* mainline
-> A-TF, even if we do get SCMI later.
-
-Could you try with below  patch for rk3568 SCMI support:
-
-https://review.trustedfirmware.org/c/TF-A/trusted-firmware-a/+/31265
-
-
-Thanks,
-
-- Kever
-
+On Thu, 26 Sept 2024 at 19:32, Paul Kocialkowski <paulk@sys-base.io> wrote:
 >
-> Thank you,
-> Chris
+> From: Paul Kocialkowski <contact@paulk.fr>
 >
->>>> Thanks,
->>>>
->>>> - Kever
->>>>
->>>>>     CONFIG_ROCKCHIP_GPIO=y
->>>>>     CONFIG_SYS_I2C_ROCKCHIP=y
->>>>>     CONFIG_MISC=y
->>> Thank you,
->>> Chris
+> The boot timing and reporting (bootstage) infrastructure is useful for
+> performance analysis and debug but adds overhead and console noise when
+> using the device normally. Remove it from the device config.
+>
+> Signed-off-by: Paul Kocialkowski <contact@paulk.fr>
+Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
+
+This makes sense, for those that want this information will know how
+to build it for testing.
+> ---
+>  configs/rockpro64-rk3399_defconfig | 3 ---
+>  1 file changed, 3 deletions(-)
+>
+> diff --git a/configs/rockpro64-rk3399_defconfig b/configs/rockpro64-rk3399_defconfig
+> index fc0804a0b80d..095d27ffaa04 100644
+> --- a/configs/rockpro64-rk3399_defconfig
+> +++ b/configs/rockpro64-rk3399_defconfig
+> @@ -19,8 +19,6 @@ CONFIG_SPL_SPI=y
+>  CONFIG_SYS_LOAD_ADDR=0x800800
+>  CONFIG_PCI=y
+>  CONFIG_DEBUG_UART=y
+> -CONFIG_BOOTSTAGE=y
+> -CONFIG_BOOTSTAGE_REPORT=y
+>  CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-rockpro64.dtb"
+>  CONFIG_DISPLAY_BOARDINFO_LATE=y
+>  CONFIG_SPL_MAX_SIZE=0x40000
+> @@ -38,7 +36,6 @@ CONFIG_CMD_POWEROFF=y
+>  CONFIG_CMD_USB=y
+>  # CONFIG_CMD_SETEXPR is not set
+>  CONFIG_CMD_TIME=y
+> -CONFIG_CMD_BOOTSTAGE=y
+>  CONFIG_SPL_OF_CONTROL=y
+>  CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+>  CONFIG_ENV_IS_IN_SPI_FLASH=y
+> --
+> 2.46.2
+>
