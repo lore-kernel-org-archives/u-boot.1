@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17D20CE835C
-	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 15:27:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD467CE835C
+	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 15:46:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A28C788E26;
-	Mon, 30 Sep 2024 17:27:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 137D988E3F;
+	Mon, 30 Sep 2024 17:46:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="dbR/L/+2";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Jkbz9lrL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 272A087FA7; Mon, 30 Sep 2024 17:27:21 +0200 (CEST)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id 2269F88ED7; Mon, 30 Sep 2024 17:46:56 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A30D488E14
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 17:27:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1117B882EF
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 17:46:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-37ccfbbd467so2635746f8f.0
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 08:27:18 -0700 (PDT)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-42cd74c0d16so41999815e9.1
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 08:46:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1727710038; x=1728314838;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1727711213; x=1728316013;
  darn=lists.denx.de; 
- h=mime-version:message-id:date:subject:cc:to:from:from:to:cc:subject
- :date:message-id:reply-to;
- bh=8S2rym8N/tWXzwaZGBmEVKHXmHSoia0TZKTs+ufPhLY=;
- b=dbR/L/+2F1NHlAUqiAdcNrx5sU8iMAg8f+mSYMc3iXzjGSCXqcLYOgFAbN5ZZl3/k2
- JTFRy9SWYnkEg3eujwQjkBi2vzH1VVMJIUQ0Gwn9MUfEScBjR4qKfqEguVMleOHAH+0z
- o9gGP3xK7oYkdCLYyLdMeQwm+1aDiEkvvNzvYha2+mRVQXZob8xwezdfFUknchgP4ODg
- XMjphbSXV8u+bHquRXtcyaoHj7BqasG/YMCIA1RRJsTvp0dTCrpmyiiGTODcOpbmZb8x
- HlrtRh0t8JIN5d2hXGk+KJioBTPsGohkgQbgshK8uVvI07HFAwZsg+pJKyAzBQEVJtyo
- GSPQ==
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=37CzbMGj8CDjHa7Zg8dBs0EbztjUXJe3UPmcqQ1LoY0=;
+ b=Jkbz9lrLKL4tEaKz5LdHgwCp3P41V1ti+6gbOteYgjVNTZZ7lvVYn6aoMmcGj4hq70
+ 8+qqhuzJ+KTh005TQoSJ2sqt8yYlqrj8pz+f10pft8K1K5uI+tftVA9qyHHPk5kUiT/R
+ Wz0QugdaljHqk6kyyhKLps4eKzKGrHb8DeJOwoQ24j1hHnJbSO4GlTENWAgUgzJsZ0TJ
+ 6VKYGP92RmFdCNeVxuwEWwueRtlxEaWsXKcfHa/HVft1CjHpq9VUJ4X4pJEvPk2k6MjJ
+ R1DfnbJe80pmJTtz0qOlkMECntbZDArELHBk8uvh1jyCDDQQfulDUyNfMbHVpRzCK1eo
+ 4YeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727710038; x=1728314838;
- h=mime-version:message-id:date:subject:cc:to:from:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=8S2rym8N/tWXzwaZGBmEVKHXmHSoia0TZKTs+ufPhLY=;
- b=E7HNFPrlfd97JhJZ1HNSVN7SvVykUSJdB66vyMXpKfcffAkhDtWulvdENaYBfbggyw
- jj75jQdJdME2porKSwxSHkZZYG2sMEGceFb3IK54FD+JV0UAYxRyDtwvjQnLdHyU4ebz
- Th1Qi1B3IkQa1dAmtsEC5iZtMb+syE4ydZTmF7BryjIPQMDJcqZIbPTXwWLsPIK2+Gy0
- RHNk7gSY+ci6YDOI8JQuWw9KEfXdKYXTmf5QGLukAzF+D6pR5UE5Yb9z1BgeZHH6myUl
- gaM/zyupFT6LD1iuzEeQHxHOXYW6gZWpte7Yj6h6xNP59JdHRXIMStD/av6GX+E/ex/U
- JjOA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVidnghubhDiQiJXGd8G4wKCM13ADnZOhwXlTu7h6p6kSbvXkCrNAgOlZEMgb3HfskRjg2EP1o=@lists.denx.de
-X-Gm-Message-State: AOJu0YyGj8q5VVDoPAFGXQoxHzx487okI5iIxfTuGSCHR4voMbLyQ1aX
- IeCg4DThV06kLNr8zSPdXO8TeRNEHH1FMUZ09fsIx+Z6GgmHi3AQeRuVHGkKvuA=
-X-Google-Smtp-Source: AGHT+IGQQgJd4EEtPc0YnqTQf1IBxUpXtab5o/UiK4T1blq5iX7fnaPuyfOjXn4FJU7pun6jMMjjJw==
-X-Received: by 2002:adf:f787:0:b0:37c:ca01:98e9 with SMTP id
- ffacd0b85a97d-37cd5a8305dmr6388866f8f.6.1727710038100; 
- Mon, 30 Sep 2024 08:27:18 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1727711213; x=1728316013;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=37CzbMGj8CDjHa7Zg8dBs0EbztjUXJe3UPmcqQ1LoY0=;
+ b=V6ZpLa+J9f3tSCv5/1N92gO/Uve2sF7+qN1VUaxJYArJ1d72rneV6GzYNyR1g9hE3G
+ Sk0D6P7y1hJdVYzZoWLy2xHKKeN/s5siBwCpuu281kHb25rmbLaldqcgTTKX1EzfysuH
+ s6MYItBwMl3GUtjsnzM932FLbGmlnfVwhis6/xvxazmb//Y/u9tJFiU05ukZ3V6njzN0
+ slbPmvbsooS98kpM9HxTEihCWe9p92L61QtnZgUzoCe2husIDWHegvYjhzVbnO8oIwj0
+ eNG3rqjDLKj1JvZp+PsKPEkSxHB5Crg1UW/iVBG4zaiIwEHaXmgCP77xs1eAXBTaWMhi
+ TWeA==
+X-Gm-Message-State: AOJu0YyZ5GK8a0otHdnx0EfVzfFWwT4BSmkTJ5hdYY1CTOnIfNGxgHSb
+ u/hjfG7teGQCSgNUyaql1Oy3NakQ5+XnvGgGPtYjgz9z+R7oJfFc9KcSX/55LfU=
+X-Google-Smtp-Source: AGHT+IEWYW6pOcKbyR3SIv736lxadNFzN8cZlOW525HBZOrxCNyjKZgpBkZd3/H8twf0nMLR+ac/VA==
+X-Received: by 2002:a05:600c:4454:b0:42c:b95c:65ba with SMTP id
+ 5b1f17b1804b1-42f5840edf1mr88378305e9.6.1727711213490; 
+ Mon, 30 Sep 2024 08:46:53 -0700 (PDT)
 Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37cd5745696sm9233128f8f.106.2024.09.30.08.27.17
+ 5b1f17b1804b1-42e96a3622bsm153900185e9.35.2024.09.30.08.46.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Sep 2024 08:27:17 -0700 (PDT)
+ Mon, 30 Sep 2024 08:46:53 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>, Jerome Forissier
- <jerome.forissier@linaro.org>
-Subject: [GIT PULL] Please pull u-boot-dfu-20240930
-Date: Mon, 30 Sep 2024 17:27:16 +0200
-Message-ID: <87h69xmaaz.fsf@baylibre.com>
+To: Siddharth Vadapalli <s-vadapalli@ti.com>, trini@konsulko.com,
+ lukma@denx.de, marex@denx.de, rogerq@kernel.org, vigneshr@ti.com,
+ jjhiblot@ti.com
+Cc: u-boot@lists.denx.de, srk@ti.com, s-vadapalli@ti.com
+Subject: Re: [PATCH] usb: gadget: cdns3: Fix missing cache operations for
+ non-zero Endpoints
+In-Reply-To: <20240930093407.2998969-1-s-vadapalli@ti.com>
+References: <20240930093407.2998969-1-s-vadapalli@ti.com>
+Date: Mon, 30 Sep 2024 17:46:52 +0200
+Message-ID: <87ed51m9eb.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -90,41 +92,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Siddharth,
 
-Please find some fixes for master:
-- Fix Kconfig dependencies for DFU_OVER_USB
+Thank you for the patch.
 
-CI job:
-- https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/22468/
+On lun., sept. 30, 2024 at 15:04, Siddharth Vadapalli <s-vadapalli@ti.com> wrote:
 
-PS: I know it's a bit late, if you'd prefer to defer this to next
-release, let me know.
+> Transfer initiation and completion for the non-zero Endpoints are
+> handled by cdns3_ep_run_transfer() and cdns3_transfer_completed()
+> respectively.
+>
+> Failing to flush the cache associated with the TRB Pool within
+> cdns3_ep_run_transfer() results in the transfers never being initiated.
+> Similarly, failing to invalidate the cache associated with the TRB pool
+> within cdns3_transfer_completed() results in the transfers never being
+> completed.
+>
+> Fix this.
+>
+> Fixes: 7e91f6ccdc84 ("usb: Add Cadence USB3 host and gadget driver")
+> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 
-Thanks,
-Mattijs
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
-The following changes since commit 5f044932413694475422d4b16607dfcf9aff8781:
-
-  scripts/Makefile.lib: do not include CONFIG_DEVICE_TREE_INCLUDES in dtsi_include_list (2024-09-10 11:31:54 -0600)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-dfu.git tags/u-boot-dfu-20240930
-
-for you to fetch changes up to 2f9c472dd7a91bc2d6e7840a550edcd257ff8b57:
-
-  dfu: fix Kconfig dependencies (2024-09-13 17:41:18 +0200)
-
-----------------------------------------------------------------
-u-boot-dfu-20240930
-
-- Fix Kconfig dependencies for DFU_OVER_USB
-
-----------------------------------------------------------------
-Jerome Forissier (1):
-      dfu: fix Kconfig dependencies
-
- drivers/dfu/Kconfig        | 2 +-
- drivers/usb/gadget/Kconfig | 1 +
- 2 files changed, 2 insertions(+), 1 deletion(-)
