@@ -4,64 +4,201 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2737CF649D
-	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 10:11:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA1B0CF649D
+	for <u-boot@archiver.kernel.org>; Mon, 30 Sep 2024 10:20:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E0A388DD1;
-	Mon, 30 Sep 2024 12:11:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 3283088DE8;
+	Mon, 30 Sep 2024 12:20:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Qy/xlQJh";
+	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="Y93cAlQa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1969788DD1; Mon, 30 Sep 2024 12:11:39 +0200 (CEST)
-Received: from mail-m25497.xmail.ntesmail.com (mail-m25497.xmail.ntesmail.com
- [103.129.254.97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 448B788DDF; Mon, 30 Sep 2024 12:20:42 +0200 (CEST)
+Received: from EUR02-DB5-obe.outbound.protection.outlook.com
+ (mail-db5eur02on20617.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2608::617])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 70C6988DA1
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 12:11:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 187D488DE8
+ for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 12:20:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=Qy/xlQJhZkS4b4ep4MTftgP4G2QoZzVb3xmkv+Vu+am3s8m2AYaAsVQxShFEeC/RmUOc4tcpKWyVCpbo/3Qtp8mcZ2NKYmvciSwleAyLr5pyUYjfdZn82YsSh03OvcrSjGQlJM/CU1mOBW2k8bv8mffDdCLWSsFbB+axoqO+39M=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=piof78mm4JiDdUxoV/sTiNJr590WG0TqzyYNZw+g28k=;
- h=date:mime-version:subject:message-id:from;
-Received: from [172.16.12.67] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id F199C280993;
- Mon, 30 Sep 2024 18:11:22 +0800 (CST)
-Message-ID: <5041bde8-fb1e-4c97-9c71-2007008ad3d0@rock-chips.com>
-Date: Mon, 30 Sep 2024 18:11:22 +0800
-MIME-Version: 1.0
+ dmarc=pass (p=reject dis=none) header.from=siemens.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jan.kiszka@siemens.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=NW+jp+vxgUKiHrjjR9KdqK7fDmXSqIIfr0UuJ+kwKNx7mXh0BvaxPdndaZMcleRWseh/RpxP7eNcFEFFX/8TMEND7Esj+XZ/vJHz63I6AeHWBQ1pI0Gxa/gUACEkEH+7LWIdSruXCvny9GpUZ8cidP5vNCCEAyRsc914aMGXNSKN6yDf/5ZaRK2T8YaN1sv5o0bCwO9tJBYFVYDICKWr5Opz8oy3bBC//LUrEr4/RzpfgM6m96Kc1LwIdZaVNVLMxbS5QHtrhc6xWrjAQXef37Hb6v986+Qlp6ZW3MkA1RkWJrWUIkj6j9yrCe6AgcpJidBZLfS3zkIKjU1co0Nrow==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=7DUzYzLs09KvNM0cHxS+OrSFFXj6N5aXLOJXzc1rLGg=;
+ b=gw3JRcaJYJJ8fEXzT9ZExyj0TNpVuYMcnQFKKmpO9sk3QKUuny83wqSbJwKMIIg1h/5l9zyLILcvynBWceTSx3v2uE5u7z8ftEK6HdqnhgkwflypsTN8ultrBEv2shQAcmlh9jHyKxe2FGmLfjUuMIwUL/yWALadmM1qpPZe/YvKfZT4NQaQRzUSciox1YCfOwfAB41Cxvv7MWrLYktNabdEUEY6xcOLVwd/6i1xyJ7LU+1svlFSrymxry/1yXMs+/u9VYi197ccnyB1+Ik0iAqAwZzxo0h4quxdcoh6jo4HBdeGN0Nc8pkAXQyjyrIG/6MjL6QUk2CKgFrzknZeXg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
+ dkim=pass header.d=siemens.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=7DUzYzLs09KvNM0cHxS+OrSFFXj6N5aXLOJXzc1rLGg=;
+ b=Y93cAlQa3YDjq9s/AC+JY1AEn/Yu4AmHzOirUsgte80Xm8MnSTIzMCA8kkdBOeaWKlna5Lre9TjsAUsK0RTkn+yCXHgpOXlj0tbaoEZVieAEvIbqy69pKTRjNk6DAJh9gFSR4D9paSFnvPTjqkMKG3/rcn1VsfbD3fK2f9C5GWtakdXiVFZMmfGSH3YqzmOIyLyHXOyWyF2VbMqhm1oQwH14tIDIVPCLtfx84zJtWDJAuvxeE/ZKWglTv+gFW/i0MZGKEkpDDMVPkL1+uG0thgK+b6nA4n8URB6bB7Mgk/teCpfXX3RfppDCzPrFRxfld2DKdnPl1VuBN6Jrv3KMsg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=siemens.com;
+Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:588::19)
+ by PA1PR10MB9002.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:445::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8005.26; Mon, 30 Sep
+ 2024 10:20:38 +0000
+Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::8fe1:7e71:cf4a:7408]) by AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::8fe1:7e71:cf4a:7408%3]) with mapi id 15.20.8005.024; Mon, 30 Sep 2024
+ 10:20:38 +0000
+Message-ID: <a54b501a-9a98-426c-a5ca-faf547411a30@siemens.com>
+Date: Mon, 30 Sep 2024 12:20:36 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/4] rockchip: Skip serial pinctrl at pre-reloc phase
-To: Quentin Schulz <quentin.schulz@cherry.de>, Jonas Karlman
- <jonas@kwiboo.se>, Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
-Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-References: <20240805084350.3895788-1-jonas@kwiboo.se>
- <6df6a6df-f8fc-44c3-9688-6f2ccbd8888d@cherry.de>
- <ea4c0f12-bf49-405a-afdb-3312e1eb8c95@kwiboo.se>
- <4bdb19d3-db99-4456-b7db-a96153a3f7dd@cherry.de>
+From: Jan Kiszka <jan.kiszka@siemens.com>
+Subject: [PATCH] Extend usage for OF_OVERLAY_LIST beyond SPL
 Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <4bdb19d3-db99-4456-b7db-a96153a3f7dd@cherry.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUIZGFZCTUoYGU1CSB9OTklWFRQJFh
- oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
- hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a924269ce5209d3kunmf199c280993
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Pww6PBw4HDIdTSMuCDdLNUgd
- QxcKC0pVSlVKTElMTUJKS0NIQklJVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKS0pOSTcG
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+Cc: Sumit Garg <sumit.garg@linaro.org>, Marek Vasut <marex@denx.de>,
+ Frank Wunderlich <frank-w@public-files.de>, Jonas Karlman <jonas@kwiboo.se>,
+ Nishanth Menon <nm@ti.com>,
+ "Li, Hua Qian (DI FA CTR IPC CN PRC4)" <huaqian.li@siemens.com>
+Autocrypt: addr=jan.kiszka@siemens.com; keydata=
+ xsFNBGZY+hkBEACkdtFD81AUVtTVX+UEiUFs7ZQPQsdFpzVmr6R3D059f+lzr4Mlg6KKAcNZ
+ uNUqthIkgLGWzKugodvkcCK8Wbyw+1vxcl4Lw56WezLsOTfu7oi7Z0vp1XkrLcM0tofTbClW
+ xMA964mgUlBT2m/J/ybZd945D0wU57k/smGzDAxkpJgHBrYE/iJWcu46jkGZaLjK4xcMoBWB
+ I6hW9Njxx3Ek0fpLO3876bszc8KjcHOulKreK+ezyJ01Hvbx85s68XWN6N2ulLGtk7E/sXlb
+ 79hylHy5QuU9mZdsRjjRGJb0H9Buzfuz0XrcwOTMJq7e7fbN0QakjivAXsmXim+s5dlKlZjr
+ L3ILWte4ah7cGgqc06nFb5jOhnGnZwnKJlpuod3pc/BFaFGtVHvyoRgxJ9tmDZnjzMfu8YrA
+ +MVv6muwbHnEAeh/f8e9O+oeouqTBzgcaWTq81IyS56/UD6U5GHet9Pz1MB15nnzVcyZXIoC
+ roIhgCUkcl+5m2Z9G56bkiUcFq0IcACzjcRPWvwA09ZbRHXAK/ao/+vPAIMnU6OTx3ejsbHn
+ oh6VpHD3tucIt+xA4/l3LlkZMt5FZjFdkZUuAVU6kBAwElNBCYcrrLYZBRkSGPGDGYZmXAW/
+ VkNUVTJkRg6MGIeqZmpeoaV2xaIGHBSTDX8+b0c0hT/Bgzjv8QARAQABzSNKYW4gS2lzemth
+ IDxqYW4ua2lzemthQHNpZW1lbnMuY29tPsLBlAQTAQoAPhYhBABMZH11cs99cr20+2mdhQqf
+ QXvYBQJmWPvXAhsDBQkFo5qABQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEGmdhQqfQXvY
+ zPAP/jGiVJ2VgPcRWt2P8FbByfrJJAPCsos+SZpncRi7tl9yTEpS+t57h7myEKPdB3L+kxzg
+ K3dt1UhYp4FeIHA3jpJYaFvD7kNZJZ1cU55QXrJI3xu/xfB6VhCs+VAUlt7XhOsOmTQqCpH7
+ pRcZ5juxZCOxXG2fTQTQo0gfF5+PQwQYUp0NdTbVox5PTx5RK3KfPqmAJsBKdwEaIkuY9FbM
+ 9lGg8XBNzD2R/13cCd4hRrZDtyegrtocpBAruVqOZhsMb/h7Wd0TGoJ/zJr3w3WnDM08c+RA
+ 5LHMbiA29MXq1KxlnsYDfWB8ts3HIJ3ROBvagA20mbOm26ddeFjLdGcBTrzbHbzCReEtN++s
+ gZneKsYiueFDTxXjUOJgp8JDdVPM+++axSMo2js8TwVefTfCYt0oWMEqlQqSqgQwIuzpRO6I
+ ik7HAFq8fssy2cY8Imofbj77uKz0BNZC/1nGG1OI9cU2jHrqsn1i95KaS6fPu4EN6XP/Gi/O
+ 0DxND+HEyzVqhUJkvXUhTsOzgzWAvW9BlkKRiVizKM6PLsVm/XmeapGs4ir/U8OzKI+SM3R8
+ VMW8eovWgXNUQ9F2vS1dHO8eRn2UqDKBZSo+qCRWLRtsqNzmU4N0zuGqZSaDCvkMwF6kIRkD
+ ZkDjjYQtoftPGchLBTUzeUa2gfOr1T4xSQUHhPL8zsFNBGZY+hkBEADb5quW4M0eaWPIjqY6
+ aC/vHCmpELmS/HMa5zlA0dWlxCPEjkchN8W4PB+NMOXFEJuKLLFs6+s5/KlNok/kGKg4fITf
+ Vcd+BQd/YRks3qFifckU+kxoXpTc2bksTtLuiPkcyFmjBph/BGms35mvOA0OaEO6fQbauiHa
+ QnYrgUQM+YD4uFoQOLnWTPmBjccoPuiJDafzLxwj4r+JH4fA/4zzDa5OFbfVq3ieYGqiBrtj
+ tBFv5epVvGK1zoQ+Rc+h5+dCWPwC2i3cXTUVf0woepF8mUXFcNhY+Eh8vvh1lxfD35z2CJeY
+ txMcA44Lp06kArpWDjGJddd+OTmUkFWeYtAdaCpj/GItuJcQZkaaTeiHqPPrbvXM361rtvaw
+ XFUzUlvoW1Sb7/SeE/BtWoxkeZOgsqouXPTjlFLapvLu5g9MPNimjkYqukASq/+e8MMKP+EE
+ v3BAFVFGvNE3UlNRh+ppBqBUZiqkzg4q2hfeTjnivgChzXlvfTx9M6BJmuDnYAho4BA6vRh4
+ Dr7LYTLIwGjguIuuQcP2ENN+l32nidy154zCEp5/Rv4K8SYdVegrQ7rWiULgDz9VQWo2zAjo
+ TgFKg3AE3ujDy4V2VndtkMRYpwwuilCDQ+Bpb5ixfbFyZ4oVGs6F3jhtWN5Uu43FhHSCqUv8
+ FCzl44AyGulVYU7hTQARAQABwsF8BBgBCgAmFiEEAExkfXVyz31yvbT7aZ2FCp9Be9gFAmZY
+ +hkCGwwFCQWjmoAACgkQaZ2FCp9Be9hN3g/8CdNqlOfBZGCFNZ8Kf4tpRpeN3TGmekGRpohU
+ bBMvHYiWW8SvmCgEuBokS+Lx3pyPJQCYZDXLCq47gsLdnhVcQ2ZKNCrr9yhrj6kHxe1Sqv1S
+ MhxD8dBqW6CFe/mbiK9wEMDIqys7L0Xy/lgCFxZswlBW3eU2Zacdo0fDzLiJm9I0C9iPZzkJ
+ gITjoqsiIi/5c3eCY2s2OENL9VPXiH1GPQfHZ23ouiMf+ojVZ7kycLjz+nFr5A14w/B7uHjz
+ uL6tnA+AtGCredDne66LSK3HD0vC7569sZ/j8kGKjlUtC+zm0j03iPI6gi8YeCn9b4F8sLpB
+ lBdlqo9BB+uqoM6F8zMfIfDsqjB0r/q7WeJaI8NKfFwNOGPuo93N+WUyBi2yYCXMOgBUifm0
+ T6Hbf3SHQpbA56wcKPWJqAC2iFaxNDowcJij9LtEqOlToCMtDBekDwchRvqrWN1mDXLg+av8
+ qH4kDzsqKX8zzTzfAWFxrkXA/kFpR3JsMzNmvextkN2kOLCCHkym0zz5Y3vxaYtbXG2wTrqJ
+ 8WpkWIE8STUhQa9AkezgucXN7r6uSrzW8IQXxBInZwFIyBgM0f/fzyNqzThFT15QMrYUqhhW
+ ZffO4PeNJOUYfXdH13A6rbU0y6xE7Okuoa01EqNi9yqyLA8gPgg/DhOpGtK8KokCsdYsTbk=
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR4P281CA0117.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:bb::6) To AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:588::19)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS4PR10MB6181:EE_|PA1PR10MB9002:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4ed3ae48-fa02-4637-e2b7-08dce139878d
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?Nk1GQ3ZGVkgybUtmQ0w2dVlnaWJYdkxSRndPeW9UZHFMaDNTWHpLZllScE1B?=
+ =?utf-8?B?NkFqOGlRT2piM2Y5V1YxUmhaUEhobWQyL2Z3dk9CRGJWWThlb0hDOE40UTR2?=
+ =?utf-8?B?YjA0SUxsamR3c1pKdHRnVWk0T2FhQ1g4bGNhK0MxaGorbDhCVm9Mb05Rc2xN?=
+ =?utf-8?B?aFVDUERKMGN1eDErbERkUnBmTExkbm9yZmZsL3Q4SDFtci93WklBSmYxTFN3?=
+ =?utf-8?B?M3U2akFpNXNWdkF5dzYwYWlUVVJXNmhqWVlCNVhHWlE4S2xHRTFQZm5qZzBU?=
+ =?utf-8?B?TjdoSDRsZFhvb2NVRHpuM1FONW9TM1NnbnEzYnRXTGtsc1ZNSnpYK2lxZUxj?=
+ =?utf-8?B?Q2dFT1pVYldXMURiT0x5SW1aZlVWM1pQT1VpQVI5cnJnYnJqRzdWRHBDcHIv?=
+ =?utf-8?B?L29NaTI4UE1xNy8yRjFTNFFnOVRPcUI0Zkp3RHZKc1RQQ0VCdjF2TDBCeTB6?=
+ =?utf-8?B?VFRGM0RidVVUcTVOTlZ5VDlDRVdjNzFCejFQSXI5cTZvZGhrNHVWUTlHK3Nt?=
+ =?utf-8?B?KytkelM3Zkk3TnZBbXJjdGxrV2gxd25CV25XbTZSaVVTbGY3dzh2bSt2ZVIv?=
+ =?utf-8?B?ckpYZndBYkhNMG51VXkyd2RJdXR0Z2hpYzh5WCtxQzFlb1FNRmoyYm9HQ1l3?=
+ =?utf-8?B?Y0VhaE92Z3FLc0xRQnpFNkRSa21iSkNLZ2JhVUlWbC9MWlhpNmhPNGZTNUQv?=
+ =?utf-8?B?cUlZR0pwYjkyb0daYVM1N0xqTWVxTWIxWkNxVjJ1NWFFQUk3Ymp6QVZ3eWxI?=
+ =?utf-8?B?aHBiUFFVTm8zK2V5R3Mvd3F1Y2FJZWZXc0VocUozL3RidWRFUGE3U1hiZW56?=
+ =?utf-8?B?c3lINnJ5c3NrUGRMek5hK3pWQmZXTHhrV1orcHJrdDZIM0hXZ1Q0SytmbEJT?=
+ =?utf-8?B?elAxdkpNbzVIOFpjUVR4a2JDUTR1RGRCYTJ6L1FiNi9nQUJQZ09tYkZ4bmVM?=
+ =?utf-8?B?WTF1WXhpTUxOcWxlY1hpd25iRk5YSFVnOUx5aXpJTGJxcWRQcllQTHFkTWRT?=
+ =?utf-8?B?clFUZUovQ1FFYmVMNzVSVlpNQ3EzcHVyOFZzdTM5M1hNQVhjTWRsSHExaHNt?=
+ =?utf-8?B?ZjZUSEw1UWlxZFhsVUtIbWtVNVVnM1d3SjhzdDU3aFVhdjRWRzFSUXhKcC8w?=
+ =?utf-8?B?R0x0UHM0VE90SytzNld5OVd5QTdOSkVndzNKNnJuK3pxYnJRR2ZKWkxVUmh1?=
+ =?utf-8?B?eTJyUEJxYmxIK0luRHNsTzhZV1lHM0dQd20wK0x2dGxXWHdISEljck9nZ0Zx?=
+ =?utf-8?B?eFNiSm1lMThiU1UyTGJHRjNmVXNsSlRDK0w1NFZkTUwrZG4vUWdPOWZ2ZVpw?=
+ =?utf-8?B?WThWZGw5MmZxS1Y5bDJZRVVzejUza0tlNWxPWGhLS3A2MHQ2N2tycm50Rndy?=
+ =?utf-8?B?OWxvZ0V1YmRTZWM2THhTQkdIYm5USS9hekwvNnYrbE4vOUQ2bUQ2byt6SmVM?=
+ =?utf-8?B?ZGs0bzlIeHgvTGhRb3FBZm15Y3IvenRRbmx2ZTdYNjlEa1N2aEgxeHhoTktB?=
+ =?utf-8?B?RlByY2EvQ0w3ZDJPWERYOWh1MjJXb3NlV2cra0FBQTYzYUNxazVBZW52dUN6?=
+ =?utf-8?B?cjY2UERoeHA5RnRYaHlJWDBzOUpia3U3LytHdG5GT292OW54Nm5kL2tpeGM0?=
+ =?utf-8?B?TnR1anBXdTFKMVQ2eEJ0RzhIMUFLL3o3ckdOODJncTdWeWJrMzRPYUlJQWRQ?=
+ =?utf-8?B?V3ZYS0orZGh3WDVjWnB6d1crRzVrb1RDUDJlZkVNNmdNMGQyb2JCZkR3PT0=?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TkxWb2prYlZqTEwwR0MyOGlIbDV2anZwaVNPOW9vN2N2bm1GYWxyOGpwaHZS?=
+ =?utf-8?B?L3Z2eThKRE9tRUpXWHQ2a3NBd2hCWjhVMHYxdUM0Nnd2Umx6dGVzbVpFNUtH?=
+ =?utf-8?B?cXdzVzlNN3g5dmZ3N25vS2U3YW8wVElkM2IvRzNCNXNkUSs1QWlaaHRwRzRW?=
+ =?utf-8?B?bVo0Ukhyb2kyVG9DYVBKcWV3QnVySVpWb29lR0RkMzVJQ0M0MlNOVE43Uy83?=
+ =?utf-8?B?R1hqMlVDNElpam9JWTFmaGNCMVF5clZrZkpQT3pwZGc1Z0VpQnZTbW51cG1J?=
+ =?utf-8?B?cms0K3FVRklCWjdQZUlka2tYdDI0MHk5aE00Qm9DMmVIYndsWTNUWHY0WDdF?=
+ =?utf-8?B?L3NUZ1Nyc290T002a25QeldwRVNrc2YydHF1b0ZuRlV2Z2ZvZm1QaE9yT0RE?=
+ =?utf-8?B?SFkzQk9nMWFRY1IxYXJBMk5udlRrZVg1SXo2K2FTdkttRDIxNkw3RjhNMlZh?=
+ =?utf-8?B?b0t1RTJrVVp1SUNxS2NNNFJmNkgzZHFPUzZPdll2SmRaRkx6NHRNSG92Y1Qy?=
+ =?utf-8?B?Z1BuUU5hSFVjMENPb2dlamdTMEtRMS9nbjVhSW94TE5lbFQyK1cxcHJVSlJr?=
+ =?utf-8?B?NU1RYmlubG5hcy8zOEltYzIvaC9zZEt1emdZb0hwZzlBVU5QZVlzYXZLeHUv?=
+ =?utf-8?B?em5zZnRUNEpNYjgwd1g5MHJ6V3NqRS8vMmNFMEl1cVA5SWQ1WkgvQk4xNWl5?=
+ =?utf-8?B?ZHN0Rm9QeDU3YkgzRm5EdkptSmVlSDJKZ0dFUGpYQU5FaHhRMGhudVhldG03?=
+ =?utf-8?B?b0FVWXdLQ1RaSkFzeG56d0RDNDBIU2VnQWM0ZkVIdzFqSHJJWE50a3ZORnZv?=
+ =?utf-8?B?K0xtQkphZEt1bFNRbGhPamptMkh6ZXJ2RWd3bGs0Y1J0NUdUc3QwTTExRWpX?=
+ =?utf-8?B?Mk92SVdtOXg1K1c5NHBXcFl0Q1RaU0JZWUIvb2xOOU1YRWpQYzVMa1dsLytp?=
+ =?utf-8?B?djVhSUFIanVVaURvNDUzeFliUDZQNG9qV0gvZzVYRkkyWk1pd0pEMkpaN2Y3?=
+ =?utf-8?B?RnN5NVNiS3hyV2R3KzYrYnhidHdmcnk3dTAwZWd1RDFTMUhpeUpKRG5uczBM?=
+ =?utf-8?B?VmVLWUt5blg4RWxjR1Arck9iSkJGTlZhSXZUTWoxM0U4T3JwbjAxL3VXTlVp?=
+ =?utf-8?B?dHEwdEhqTG05MHYvUnpTSnlycTdYTWxta0tKV1p4WTFNSWs3WmpCM1pmQ1Uw?=
+ =?utf-8?B?NlB2eUJJdmEyTFY5WjcvYzg2cU5OY0FpS2wzdUxlZktESE90dHdSanJWdUZV?=
+ =?utf-8?B?Z1VEQlNBUklRcjVEeXVkUnpLYzZJc3IvYkVUREJORnQ3K3pLd3VpQ0s2WVV6?=
+ =?utf-8?B?QU5lSWE0M1RBTUx1UG1jVGVNb2ZjNmxVSXN5QVBOdmpnRkRTREZaNGtzNjhB?=
+ =?utf-8?B?cVlIakNOVERSV0M5TVd5bUl4Umkrai9Xcm9DS2JLYmVUbVJTNHZmQUVXOWZ5?=
+ =?utf-8?B?b3dQdEdyeGM0ejNOQzZENzJTUlZQd0hWUXljRVRMckhzNTYwNy9jTkM2ZDRM?=
+ =?utf-8?B?WDFUTG44Zk40Y093RmVQb0lxRHhzUzFwY3E5QUYyQ0t0djgwTndzc0xDR2lu?=
+ =?utf-8?B?dUJQWWVVdmJaVG4wMTlZY3pVSlcvYVlrSktRSnZxS3MzWmV2SThOYllId0VI?=
+ =?utf-8?B?c1RjT0Z3S3E5UTZWeFFrRU93MEpVRllzbmszZ2ttOVRqZjRXckliKzMrTjZq?=
+ =?utf-8?B?S2V5U21oK281NUVjakhxQXJ1bFZaZGJuOG5NRlRQS0lIY01yZHd3WnBCZ1JW?=
+ =?utf-8?B?SFBMcXR3eTZiL1kxRWRMQXUwbjJoc3Z6MTY1Rk1GbUsvb05EUythYm5FVEph?=
+ =?utf-8?B?YXQyU3ArbGlFYitySFUzMGc4YkFlcnQ3TmZvS3BpVExKWWZUVHBaYVV2YUpx?=
+ =?utf-8?B?YWV3bVlkNVVWbGRyc1d3Z2lZeHFuTU5NY0ZON1dOb2VNT1RVOW0zQ2NxN3FO?=
+ =?utf-8?B?dDFIMm9OaDB5V01DZHd3U1Y5VzZaTFdVbTdWY0d5TVlqdlkybHJrcTFLZWFq?=
+ =?utf-8?B?Z1ZGQmRKbHorZUpGRm1YbUs5R2JHNHp6Z2pTMENnT0JaYkZNNXFPeEpsNk0v?=
+ =?utf-8?B?dDMyaUJXT1FSVnNQWEx3SkN2bm91SGcranBiZnVCYmZXcnVoZjV1bmxySHhZ?=
+ =?utf-8?Q?jgzMT2reHc56n2X0t9KvS5pLR?=
+X-OriginatorOrg: siemens.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4ed3ae48-fa02-4637-e2b7-08dce139878d
+X-MS-Exchange-CrossTenant-AuthSource: AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2024 10:20:38.4205 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: gu0sxU+fB6hZ+dPHyUi2no7q5ft+qWoG/raGyjSR/ZUvQH8ibG1sa6ihYbhJRnjFj+bhQkXRGJ9bIz8EGToO2g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR10MB9002
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,229 +215,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+From: Jan Kiszka <jan.kiszka@siemens.com>
 
-On 2024/8/12 18:44, Quentin Schulz wrote:
-> Hi Jonas,
->
-> On 8/5/24 2:22 PM, Jonas Karlman wrote:
->> Hi Quentin,
->>
->> On 2024-08-05 12:23, Quentin Schulz wrote:
->>> Hi Jonas,
->>>
->>> On 8/5/24 10:43 AM, Jonas Karlman wrote:
->>>> UART pinctrl for serial is typically applied multiple times:
->>>> - in external TPL or in TPL for DEBUG_UART in board_debug_uart_init()
->>>> - in SPL for DEBUG_UART in board_debug_uart_init()
->>>> - in SPL using pinctrl from DT
->>>> - in pre-reloc phase using pinctrl from DT
->>>> - after relocation using pinctrl from DT
->>>>
->>>> This series change bootph props for the UART pinctrl to not include 
->>>> them
->>>> in pre-reloc phase to save some boot time:
->>>>
->>>
->>> NACK. I feel like this is a hack for vendor trees only.
->>
->> I disagree, this just relaxes the bootph props currently enforced by
->> <soc>-u-boot.dtsi files. For boards that has special need they can
->> still add bootph-all or the bootph-some-ram prop to restore prior
->> behavior.
+Allow to use OF_OVERLAY_LIST also for the case that the overlays just
+need be built, e.g. when they will be picked up by binman as artifacts
+of the final U-Boot image. The IOT2050 boards have such a need when
+switching to OF_UPSTREAM.
 
-The pinctrl setting for the same module for multi times is obviously not 
-a good idea,
+Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
+---
 
-and for SPL, it used to work without pinctrl which is simple and fast 
-and enough for use.
+While waiting for the merge of v6.12-rc1-dts and while seeing related 
+but different attempts to address the overlay topic. See the patch
+in use here:
 
-Because in most case, people use the UART and storage with is the same 
-as the bootrom
+https://github.com/siemens/u-boot/commits/jan/iot2050
 
-used, so the IO has been already been initialized.
+ dts/Kconfig          | 4 ++--
+ scripts/Makefile.dts | 1 +
+ 2 files changed, 3 insertions(+), 2 deletions(-)
 
-This change works for most of the boards and for  different design can 
-customize for its
-
-usage, them the patch is acceptable, this is different default setting 
-instead of hack.
-
-
-Thanks,
-
-- Kever
-
->>
->> Also please do not associate me with any vendor, I am a hobbyist :-)
->>
->
-> Non-upstream = vendor for me :)
->
->>>
->>> 1) The Device Tree represents the hardware. We need the mux at all 
->>> times.
->>
->> I do not think this changes the the description of the hardware in any
->> way. The bootph props is currently already more of a representation of
->> how software should behave than hardware.
->>
->> In general for Rockchip use of the bootph-some-ram prop (pre-relocation
->> phase) does not fully make any sense, since we already have full SDRAM
->> in SPL.
->>
->> If we where to fully follow the dtschema description for the bootph
->> props, for Rockchip they should probably map to something like:
->>
->> TPL:
->> - bootph-pre-sram: Enable this node when SRAM is not available.
->> - bootph-pre-ram: Enable this node in the phase that sets up SDRAM.
->>
->> SPL:
->> - bootph-some-ram: Enable this node in the phase that is run after SDRAM
->>                     is working but before all of it is available.
->>
->> U-Boot pre-reloc:
->> - no prop mapping, we have all SDRAM and can use all devices, ideally
->>    for Rockchip we should just do bare minimum to relocate without
->>    loading any driver and then move to main post-reloc phase.
->>
->> Instead they map to the different U-Boot software stages:
->> - bootph-pre-sram: TPL
->> - bootph-pre-ram: SPL
->> - bootph-some-ram: U-Boot pre-reloc
->>
->>> 2) This breaks users who want to have no serial in TPL/SPL but in 
->>> proper
->>> (where you want it as soon as possible I assume, thus pre-reloc).
->>
->> Do you know of any such user/board? Adding the bootph-some-ram or
->> bootph-all prop can easily be done in <board>-u-boot.dtsi for such
->> user/board to restore current behavior.
->>
->
-> Yes, Lukasz in Cc has a device that is doing that, he'll be fixing a 
-> few things related to that soon (tm).
->
-> I would suggest to have one commit that basically moves bootph-all to 
-> all boards which currently include the -u-boot.dtsi where bootph-all 
-> is, and add bootph-pre-sram+pre-ram to -u-boot.dtsi. 0-sum change and 
-> then on a per-board basis remove this bootph-all? Basically, I'm not 
-> sure this is a sane default to have. For non-upstreamed boards, they 
-> can figure this out whenever they contribute. For upstreamed boards, I 
-> would aim at not possibly breaking stuff in the name of optimization?
->
-> The issue I believe is that you wouldn't be able to tell if there are 
-> users today since this should be a Kconfig symbol selection 
-> (SPL/TPL_SERIAL for example).
->
-> We could start having #ifdefs in -u-boot.dtsi for when 
-> $(SPL_TPL_)SERIAL is enabled if we wanted too. Not sure it's a 
-> welcomed added complexity though.
->
->>> 3) This likely also means if BL31 is configured to output on a 
->>> different
->>> UART mux of the same controller for some reason (I've seen weird 
->>> stuff),
->>> now U-Boot proper pre-reloc will not output anything as well.
->>
->> Same as for 2), adding the bootph-some-ram or bootph-all can and should
->> be done at board level for boards that have special, or weird,
->> requirements.
->>
->
-> It's just super weird to me to enter some corner cases because it 
-> works in most cases today and is bringing ~100ms boot time decrease.
->
->> It is also possible to add board specific code that call
->> debug_uart_init() early if you want to ensure pinmux without adding the
->> unnecessary delay that use of pinctrl in pre-reloc brings.
->>
->>>
->>> Adding Lukasz in Cc who's trying to fix U-Boot so that this is possible
->>> on PX30 (therefore, not just a theoretical use case I'm bringing up 
->>> ;) ).
->>>
->>>> - Radxa ROCK Pi S (RK3308): ~80 ms
->>>> - Radxa ZERO 3W (RK3566): ~120 ms
->>>> - Radxa ROCK 5B (RK3588): ~150 ms
->>>>
->>>> Similar change has already been applied for RK3328 and RK3399 boards.
->>>>
->>>
->>> Then I believe this was a mistake.
->>
->> My wording may have been misleading, when we added broad use of 
->> pinctrl props
->> to SPL for rk3328/rk3399 we limited so that the uart pinctrl group 
->> was only
->> enabled for TPL/SPL and not pre-reloc phase, because also including 
->> it at
->> pre-reloc added 200-300 ms in extra boot time.
->>
->> This series tries to apply same findings on remaining Rockchip aarch64
->> boards.
->>
->
-> What I'm complaining about in this patch series applies as well to the 
-> patches that are already merged if the intent and result are the same.
->
->>>
->>>> The change for PX30 has not been runtime tested, and only include 
->>>> change
->>>> for uart2, not uart0 and uart5 used on two of the supported px30 
->>>> boards.
->>>>
->>>
->>> This means we have uart2 pinctrl at all stages even though we make no
->>> use of it?
->>
->> Yes, in my opinion the px30-u-boot.dtsi include lots of nodes that seem
->> very board specific, some that probably should move to board specific
->> u-boot.dtsi files.
->>
->
-> That I would welcome.
->
->>>
->>> I'm starting to wonder if this optimization isn't orthogonal to having
->>> as much support as possible via an <soc>-u-boot.dtsi which was done to
->>> make bring-up and maintenance easier. If you're really after
->>> optimization AND we keep the pinctrl for the debug uart (thus, not
->>> breaking 2) above), then what we want is cleaning up the default
->>> px30-u-boot.dtsi and move bootph properties to the board DTS instead?
->>
->> Agree, for other aarch64 socs I have already tried to cleanup
->> <soc>-u-boot.dtsi to only contain what more than 70-80% of all supported
->> boards may need. For rk3399 bob and kevin even use /delete-property/ to
->> remove some of the common boothp props because all other rk3399 boards
->> benefited from those common boothp props.
->>
->> I have no px30 board and the only rk3326 board I do have does not
->> include the px30-u-boot.dtsi, so I will not try to do any cleanup of
->> that file.
->>
->
-> Understood, this falls on someone else's shoulders then :)
->
->>>
->>> I was a bit against this "turn-key" solution wrt u-boot DT for
->>> rk3568/rk3588 but we went ahead, are we changing our mind now? Just to
->>> know what exactly is the direction we are planning to take.
->>
->> Please elaborate, I do not understand what you mean by this.
->>
->
-> I looked a bit and could only find:
-> https://lore.kernel.org/u-boot/9d7063f9-c1c9-681c-480b-4c88895e6ccf@theobroma-systems.com/ 
->
->
-> This doesn't really match what I remembered of an "argument" I believe 
-> I had with Kever about putting stuff **I** didn't need for my boards 
-> in <soc>-u-boot.dtsi of which the answer was "I prefer to have 
-> something that works with minimal work than something that is 
-> optimized and require more work for newer boards". But cannot find it 
-> anymore, so maybe it was all in my head :)
->
-> Cheers,
-> Quentin
+diff --git a/dts/Kconfig b/dts/Kconfig
+index 569d4be338e..7ea4fd5a79b 100644
+--- a/dts/Kconfig
++++ b/dts/Kconfig
+@@ -226,11 +226,11 @@ config OF_LIST
+ 
+ config OF_OVERLAY_LIST
+ 	string "List of device tree overlays to include for DT control"
+-	depends on SPL_LOAD_FIT_APPLY_OVERLAY
+ 	help
+ 	  This option specifies a list of device tree overlays to use for DT
+ 	  control. This option can then be used by a FIT generator to include
+-	  the overlays in the FIT image.
++	  the overlays in the FIT image or by binman when assembling an image
++	  that uses overlays during DT fixup.
+ 
+ choice
+ 	prompt "OF LIST compression"
+diff --git a/scripts/Makefile.dts b/scripts/Makefile.dts
+index 790f3c508f1..dc181240a21 100644
+--- a/scripts/Makefile.dts
++++ b/scripts/Makefile.dts
+@@ -1,6 +1,7 @@
+ # SPDX-License-Identifier: GPL-2.0+
+ 
+ dtb-y += $(patsubst %,%.dtb,$(subst ",,$(CONFIG_DEFAULT_DEVICE_TREE) $(CONFIG_OF_LIST) $(CONFIG_SPL_OF_LIST)))
++dtb-y += $(patsubst %,%.dtbo,$(subst ",,$(CONFIG_OF_OVERLAY_LIST)))
+ 
+ ifeq ($(CONFIG_OF_UPSTREAM_BUILD_VENDOR),y)
+ ifeq ($(CONFIG_ARM64),y)
+-- 
+2.43.0
