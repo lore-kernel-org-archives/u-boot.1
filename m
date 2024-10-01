@@ -4,68 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD5E4CEB2D1
-	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 06:08:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CA7CCF6493
+	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 07:12:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B2CF8912A;
-	Tue,  1 Oct 2024 08:08:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A47C988EF4;
+	Tue,  1 Oct 2024 09:12:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZKex2KBy";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="sTDxMlWh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 248B38913F; Tue,  1 Oct 2024 08:08:01 +0200 (CEST)
+ id 4115888BD6; Tue,  1 Oct 2024 09:12:21 +0200 (CEST)
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0D2B89121
- for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 08:07:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B563988E6C
+ for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 09:12:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=vaishnav.a@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49167rxP122465;
- Tue, 1 Oct 2024 01:07:53 -0500
+ spf=pass smtp.mailfrom=j-choudhary@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4917CFqZ006669;
+ Tue, 1 Oct 2024 02:12:15 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1727762873;
- bh=D7FeKBx4OkUA9tDBtwzHojef4gg0ydEY3uMpO/UXUR8=;
+ s=ti-com-17Q1; t=1727766735;
+ bh=0rL2pd4EAryWIZxPywbet1bY2/bvXATjTdIZLI4z9uE=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=ZKex2KByGNRo/AC8tMfdcqovNj2fT1OrowmTzlHodIgT1G0bKvnv3lq98EhyDYcI2
- Ig+HXVuqDOyR+3MEypMQIpQQhojm92UEsF3JOsY87JEsYwY+FxihBV+O7u22/3rP0W
- MvFzCI+aaX0LQMEmG4G+D/z49vvsg4vNz2twQ/7g=
-Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 49167rV9012076
+ b=sTDxMlWhj2BfoCGEtFqS1+JrT2Hc8UR83pDGN7JQI8ESkOYtYIPtKmKGlk4tZPf/k
+ IaUUCrOLWnD0L2Z/cRVpbcfqC5A1IaqwpR1ibsw/A/HaVnNrZUe1/KOLQayQ6NirTh
+ iYV0UivnfMt2OhIYJBESEz97LcL7Gy6d4EAGMpfU=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4917CFCQ063203
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 1 Oct 2024 01:07:53 -0500
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 1 Oct 2024 02:12:15 -0500
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 1
- Oct 2024 01:07:53 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2024 02:12:15 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 1 Oct 2024 01:07:53 -0500
-Received: from [10.24.69.142] ([10.24.69.142])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49167o5G124978;
- Tue, 1 Oct 2024 01:07:51 -0500
-Message-ID: <d08bf82d-b26b-4cc5-8448-229f001fc0a6@ti.com>
-Date: Tue, 1 Oct 2024 11:37:50 +0530
+ Frontend Transport; Tue, 1 Oct 2024 02:12:15 -0500
+Received: from [172.24.227.21] (jayesh-hp-z2-tower-g5-workstation.dhcp.ti.com
+ [172.24.227.21])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4917CCqT069498;
+ Tue, 1 Oct 2024 02:12:12 -0500
+Message-ID: <6a8b2c40-64af-43ab-92d2-2c671a759e2f@ti.com>
+Date: Tue, 1 Oct 2024 12:42:11 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/2] lmb: rework logic to validate load address for
- network commands
-To: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, Sughosh Ganu
- <sughosh.ganu@linaro.org>
-CC: Ramon Fried <rfried.dev@gmail.com>, Joe Hershberger
- <joe.hershberger@ni.com>, Praneeth Bajjuri <praneeth@ti.com>, "Kumar, Udit"
- <u-kumar1@ti.com>
-References: <20240916152025.75789-1-sughosh.ganu@linaro.org>
- <172688637179.2451825.4736403690225486599.b4-ty@konsulko.com>
+Subject: Re: [PATCH] board: ti: j722s: Update Resource Management configs
+To: Vaishnav Achath <vaishnav.a@ti.com>, <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <bb@ti.com>, <hnagalla@ti.com>, <n-francis@ti.com>,
+ <vishalm@ti.com>, <u-kumar1@ti.com>
+References: <20240915204714.1051646-1-vaishnav.a@ti.com>
 Content-Language: en-US
-From: Vaishnav Achath <vaishnav.a@ti.com>
-In-Reply-To: <172688637179.2451825.4736403690225486599.b4-ty@konsulko.com>
+From: Jayesh Choudhary <j-choudhary@ti.com>
+In-Reply-To: <20240915204714.1051646-1-vaishnav.a@ti.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
@@ -85,26 +82,201 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hello Vaishnav,
 
-On 21/09/24 08:09, Tom Rini wrote:
-> On Mon, 16 Sep 2024 20:50:23 +0530, Sughosh Ganu wrote:
+On 16/09/24 02:17, Vaishnav Achath wrote:
+> Update J722S Resource Management configs to the latest output
+> generated by K3 Resource Partitioning tool. Main change includes
+> allocating more BCDMA channels to A53 for CSI2RX to support
+> 4 x CSIRX capture instance simultaneously.
 > 
->> Rework the logic to verify the load address so that address re-use is
->> not an issue.
->>
->>
->> Note: To be applied on next, on top of
->> https://patchwork.ozlabs.org/project/uboot/patch/20240913073251.2286529-2-prasad.kummari@amd.com/
->>
->> [...]
+> Signed-off-by: Vaishnav Achath <vaishnav.a@ti.com>
+
+Reviewed-by: Jayesh Choudhary <j-choudhary@ti.com>
+
+> ---
 > 
-> Applied to u-boot/next, thanks!
-
-Can these fixes be applied to master also as the failures are seen now 
-in master as well?
-
-Thanks and Regards,
-Vaishnav
-
+> Test logs (CSI capture + RM config dump):
+> https://gist.github.com/vachath/7b37cd288ef16ad8a2ac6ff5710d1e9a
 > 
+>   board/ti/j722s/rm-cfg.yaml      | 48 ++++++++++++++++++++++-----------
+>   board/ti/j722s/tifs-rm-cfg.yaml | 28 +++++++++++++------
+>   2 files changed, 53 insertions(+), 23 deletions(-)
+> 
+> diff --git a/board/ti/j722s/rm-cfg.yaml b/board/ti/j722s/rm-cfg.yaml
+> index 21ca30104c..e32beb8479 100644
+> --- a/board/ti/j722s/rm-cfg.yaml
+> +++ b/board/ti/j722s/rm-cfg.yaml
+> @@ -244,7 +244,7 @@ rm-cfg:
+>               subhdr:
+>                   magic: 0x7B25
+>                   size: 8
+> -            resasg_entries_size: 1160
+> +            resasg_entries_size: 1184
+>               reserved: 0
+>       resasg_entries:
+>           -
+> @@ -1017,13 +1017,13 @@ rm-cfg:
+>               reserved: 0
+>           -
+>               start_resource: 8
+> -            num_resource: 12
+> +            num_resource: 32
+>               type: 12750
+>               host_id: 12
+>               reserved: 0
+>           -
+> -            start_resource: 20
+> -            num_resource: 20
+> +            start_resource: 8
+> +            num_resource: 32
+>               type: 12750
+>               host_id: 38
+>               reserved: 0
+> @@ -1035,13 +1035,13 @@ rm-cfg:
+>               reserved: 0
+>           -
+>               start_resource: 0
+> -            num_resource: 12
+> +            num_resource: 32
+>               type: 12769
+>               host_id: 12
+>               reserved: 0
+>           -
+> -            start_resource: 12
+> -            num_resource: 20
+> +            start_resource: 0
+> +            num_resource: 32
+>               type: 12769
+>               host_id: 38
+>               reserved: 0
+> @@ -1053,10 +1053,22 @@ rm-cfg:
+>               reserved: 0
+>           -
+>               start_resource: 0
+> -            num_resource: 8
+> +            num_resource: 2
+>               type: 12810
+>               host_id: 12
+>               reserved: 0
+> +        -
+> +            start_resource: 2
+> +            num_resource: 2
+> +            type: 12810
+> +            host_id: 20
+> +            reserved: 0
+> +        -
+> +            start_resource: 4
+> +            num_resource: 2
+> +            type: 12810
+> +            host_id: 22
+> +            reserved: 0
+>           -
+>               start_resource: 22
+>               num_resource: 18
+> @@ -1065,21 +1077,27 @@ rm-cfg:
+>               reserved: 0
+>           -
+>               start_resource: 12288
+> -            num_resource: 64
+> +            num_resource: 56
+>               type: 12813
+>               host_id: 12
+>               reserved: 0
+>           -
+> -            start_resource: 12352
+> -            num_resource: 64
+> +            start_resource: 12344
+> +            num_resource: 48
+>               type: 12813
+> -            host_id: 38
+> +            host_id: 20
+>               reserved: 0
+>           -
+> -            start_resource: 12416
+> -            num_resource: 88
+> +            start_resource: 12392
+> +            num_resource: 48
+>               type: 12813
+> -            host_id: 128
+> +            host_id: 22
+> +            reserved: 0
+> +        -
+> +            start_resource: 12440
+> +            num_resource: 64
+> +            type: 12813
+> +            host_id: 38
+>               reserved: 0
+>           -
+>               start_resource: 1536
+> diff --git a/board/ti/j722s/tifs-rm-cfg.yaml b/board/ti/j722s/tifs-rm-cfg.yaml
+> index 5e8d7e0444..4a2af0ebca 100644
+> --- a/board/ti/j722s/tifs-rm-cfg.yaml
+> +++ b/board/ti/j722s/tifs-rm-cfg.yaml
+> @@ -244,7 +244,7 @@ tifs-rm-cfg:
+>               subhdr:
+>                   magic: 0x7B25
+>                   size: 8
+> -            resasg_entries_size: 976
+> +            resasg_entries_size: 992
+>               reserved: 0
+>       resasg_entries:
+>           -
+> @@ -897,13 +897,13 @@ tifs-rm-cfg:
+>                   reserved: 0
+>           -
+>                   start_resource: 8
+> -                num_resource: 12
+> +                num_resource: 32
+>                   type: 12750
+>                   host_id: 12
+>                   reserved: 0
+>           -
+> -                start_resource: 20
+> -                num_resource: 20
+> +                start_resource: 8
+> +                num_resource: 32
+>                   type: 12750
+>                   host_id: 38
+>                   reserved: 0
+> @@ -915,13 +915,13 @@ tifs-rm-cfg:
+>                   reserved: 0
+>           -
+>                   start_resource: 0
+> -                num_resource: 12
+> +                num_resource: 32
+>                   type: 12769
+>                   host_id: 12
+>                   reserved: 0
+>           -
+> -                start_resource: 12
+> -                num_resource: 20
+> +                start_resource: 0
+> +                num_resource: 32
+>                   type: 12769
+>                   host_id: 38
+>                   reserved: 0
+> @@ -933,10 +933,22 @@ tifs-rm-cfg:
+>                   reserved: 0
+>           -
+>                   start_resource: 0
+> -                num_resource: 8
+> +                num_resource: 2
+>                   type: 12810
+>                   host_id: 12
+>                   reserved: 0
+> +        -
+> +                start_resource: 2
+> +                num_resource: 2
+> +                type: 12810
+> +                host_id: 20
+> +                reserved: 0
+> +        -
+> +                start_resource: 4
+> +                num_resource: 2
+> +                type: 12810
+> +                host_id: 22
+> +                reserved: 0
+>           -
+>                   start_resource: 22
+>                   num_resource: 18
