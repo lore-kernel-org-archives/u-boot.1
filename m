@@ -4,80 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FE49CEACDF
-	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 16:04:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A3E4CEACDF
+	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 16:06:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 172D189212;
-	Tue,  1 Oct 2024 18:03:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=debian.org
+	by phobos.denx.de (Postfix) with ESMTP id 01E218920B;
+	Tue,  1 Oct 2024 18:06:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WoOaDtvl";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YrAk8JKl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2AE668923B; Tue,  1 Oct 2024 18:03:53 +0200 (CEST)
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
- [IPv6:2607:f8b0:4864:20::102d])
+ id 95D1389249; Tue,  1 Oct 2024 18:06:18 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1FE9589212
- for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 18:03:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C7FD88D35
+ for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 18:06:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=debian.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=grandpaul@gmail.com
-Received: by mail-pj1-x102d.google.com with SMTP id
- 98e67ed59e1d1-2e09d9f2021so3819191a91.0
- for <u-boot@lists.denx.de>; Tue, 01 Oct 2024 09:03:50 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-42e7b7bef42so46943495e9.3
+ for <u-boot@lists.denx.de>; Tue, 01 Oct 2024 09:06:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1727798629; x=1728403429; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
- :message-id:reply-to;
- bh=v91BdpbFDp19sDkbOmY5Qds46Y10EoSStX7WLsph0ZY=;
- b=WoOaDtvlS7n7fml1Uz2bYTLCIyEqHe64HVPyoYMEq55tEge6nOAy2uaF5M9h7Q0+50
- CNtoESXKbvXK1x3P8DixkH9yziL0ghr7zTg2zBHqefox9D2mAekviUOODrgaqDZfYClJ
- enw2p73zNUwKQXJ6CdyhE69/IAfhhTEZ6ctqMZDDM2QMr+Y0Z/biiMdMFLAzwtvGCsXU
- MQQgmgSqSa3yegPtTyhL7zz+cb35nc1o+serpxKW0x/k0E2I2MTHaKOtdAqNWpNeAP0/
- 5Tg2/38fiNM6rfjEH0KNBIhulhoUHBAUln2SNTjc1djduAqu1hfFgA54E9xSrXtBaa+7
- MH2w==
+ d=linaro.org; s=google; t=1727798776; x=1728403576; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9G2l7+To5OlgTCvgraK4cWfefDy9bhL/BPt0Ejv7RX8=;
+ b=YrAk8JKlp7XPqMyPB25asopQauFX7MhxVjFPhyyYfmRu4GdCFQWJUW5iD4lFi9vuqp
+ hTmuaMviqzdqyeR5iZB+0tMvlv5mBqaUq3dRmxsGjP3/1d2bQlMc9d1c2SSsFefwTHIA
+ b6Bv2nejUbporo9bqfEV43nvkeIsIwOjKgx5OC3zrFsUM9CEw2f3p2vZBBeiyobOXXcV
+ w74404XehecE08zbwUlVlG+BdU/g00DqXfl6FYyjtBqIJITT4ByAyFooMChKz7iVHIjy
+ PLcf6ymQGqf3/pNDxSv6NdjVq9zLOFqHpu4jMFU8Gdz+IbJfCnBl4lu+FvMxguishpjn
+ Rmjg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727798629; x=1728403429;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:sender:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=v91BdpbFDp19sDkbOmY5Qds46Y10EoSStX7WLsph0ZY=;
- b=Pg8KYbLsYNVEh5vWkn7pZNez7aXwbciQ9/LUNm45mA36EWrsdT328HQuLS0S6l4WtA
- DH0IAKDBPINbx6BiGF0xHSaViNAgjpDfb0+inXkXTXz/4PNx+YClUu4X2k4KdeatFgOW
- GpIS/ZebC/emSO0ZnwHSjCpxV58iCN0fkYAkS27pQAvryu6skxNRkmcaPehQfFopyPk3
- JONnk9ksijtBPRlIth2Ighnvv4jrtKfNoufmi5ED0x+EbpBO7HD9jaQKF358e9nv3a/P
- OJcf9ktW8ex1aGeNvwTSkZa70v4kLAd3pX8v9fdUin7Mi1uDEjQb5lpWudQmx70pX84x
- IYYQ==
-X-Gm-Message-State: AOJu0YxYMDg15c4s7g+73f1lL/fwdv2sMJuCH5/xdyoimo+MOPRqoJVP
- +0edhIyRVAvWhjkQqJbeCrJRg8AZ+fhE6b6JBHzz4YYIBvwic7/r802ynVrDSeM=
-X-Google-Smtp-Source: AGHT+IE7ZeN625h1dlLRybQ21UbIFftzs260+jBN/w7Awc+NY8ME7t1RwWMeacTWtJXJ//yBiUlUPQ==
-X-Received: by 2002:a17:90b:4b42:b0:2e0:9fe3:d3b0 with SMTP id
- 98e67ed59e1d1-2e1848e2c65mr196909a91.27.1727798628987; 
- Tue, 01 Oct 2024 09:03:48 -0700 (PDT)
-Received: from localhost ([111.184.129.17]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2e0b6c73ec3sm10442443a91.17.2024.10.01.09.03.48
+ d=1e100.net; s=20230601; t=1727798776; x=1728403576;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9G2l7+To5OlgTCvgraK4cWfefDy9bhL/BPt0Ejv7RX8=;
+ b=iNCxbiu9eSx3dQkOB+0rVjUmMVbbW+7ayMT0GyhUS/P3Y6o1iQvMgyCebDnc7aPAJg
+ CdAuVpOgDCO5lJNWfUKA9ItC3qLC6IgvZXu0wQOoejY+FsMAQu/P9PJQJES/Geo0ViG5
+ X1ZlBm04vNOsmVY9Sm46XWCe67/tziW/41iAtE/VdQKq7ABWNH8p6IOwdEE+vS+rH+Tx
+ 5EKQ2r0swNP74NEE2BeS72SGmSwuF5F3y1ab+ZrOPjDgQdiw/kgj2NcSKpoim6sJV2K4
+ xrtwIz/qle86JqSNpev8W8KfZTB3MrXfLYVkSVYDvD38eVAuzvNZYWQhgHEJmpGxzf3k
+ TT1w==
+X-Gm-Message-State: AOJu0YzhyWY9BpAl/2lFpvZAOhE7KpXrwPqITWrmW/Gjb3aQfaqvAMOl
+ ghZwgf04G6uGOMEjRi6JVT/MxMNcikszOjXT+RKRTvdQEuXBMpuzhLaOOQUOw+o=
+X-Google-Smtp-Source: AGHT+IGg9j+xx45PAhrVY2QDbz7QK+HOTsHRI0kACod0Y0ozI/Lsz0jT5+YJEf+agXvI1oD5T5tG0w==
+X-Received: by 2002:a7b:ce8d:0:b0:42c:a8cb:6a96 with SMTP id
+ 5b1f17b1804b1-42f5849939fmr132073055e9.31.1727798775793; 
+ Tue, 01 Oct 2024 09:06:15 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-37cd574282esm12031460f8f.104.2024.10.01.09.06.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Oct 2024 09:03:48 -0700 (PDT)
-From: "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>
-To: u-boot@lists.denx.de
-Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@denx.de>,
- Fabio Estevam <festevam@gmail.com>,
- "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>
-Subject: [PATCH 1/1] arch: arm: dts: imx8mm-cl-iot-gate.dts: add no-mmc-hs400
- to mmc2
-Date: Wed,  2 Oct 2024 00:03:24 +0800
-Message-ID: <20241001160324.3894617-2-paulliu@debian.org>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20241001160324.3894617-1-paulliu@debian.org>
-References: <20241001160324.3894617-1-paulliu@debian.org>
+ Tue, 01 Oct 2024 09:06:15 -0700 (PDT)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [PATCH v2 0/2] dfu: sf: fix flash probe when DM_SPI_FLASH is enabled
+Date: Tue, 01 Oct 2024 18:06:10 +0200
+Message-Id: <20241001-uboot-topic-dfu-sf-dt-v2-0-67f7acfa3ff5@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAPId/GYC/4WNQQ6CMBBFr0Jm7RhaQcCV9zAsajuFSQxD2kI0h
+ LtbuYDL95L//gaRAlOEW7FBoJUjy5RBnwqwo5kGQnaZQZe6KjvV4PIUSZhkZovOLxg9uoStoau
+ m2jau6SBv50Ce30f30WceOSYJn+NmVT/7r7gqVNhaf2mrWhGZ6v7iyQQ5Sxig3/f9C/M9ImK7A
+ AAA
+To: Lukasz Majewski <lukma@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Tom Rini <trini@konsulko.com>, Jagan Teki <jagan@amarulasolutions.com>, 
+ Vignesh R <vigneshr@ti.com>
+Cc: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.14.1
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1048;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=Z+LbyU88Zt4+2fXgeshE7++1CDqdcV2FKtCUj+PSCSY=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBm/B31iDSU0c1ETQYvsx6+foo1X8GcxygS1GTx5OUD
+ 8lDmO0CJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZvwd9QAKCRB33NvayMhJ0U5FD/
+ 94Nphumf1a9RbvUNWWFygwDwa5gdgK1rMm6ZvVW4hVoCxv06aGKCx4ao8xvZxsQnv9pEDmj7IpSpZ7
+ AstyOUGbj4M7gt2/5PqYZ7WyhqWuS4je89M4dStNXL0LbmdrM29573MuYLPZsvf+c3mdiwiHBVuD44
+ qQISSnioN8gQaG8jARbU24dRr4LShhdQ81Bj6L20HpPzp1BqTxYWG0aqKuemthNqZrYyUsNee6YR73
+ ectao1Gps/vrm9B7RFr9jnhPjSUQqOrkNV0RJRTrMWNQa2f/XyzZcKJEnx7SSLf/XvPKs7uZmelizx
+ 8pvwRWImDvM2Pyj54BI9Hw2OoaCYJGgZVabIKGl7Vn/IQNXA9e2yudgkoYVOVEJy2rogWLizg85uvt
+ p+s2F94/D6tjFk2n3Oea36P+7FrnD5DbH/DrEPXEtqOexLAdLCQEvCdpoLlRxclUYT6Y3riPpSVLHv
+ 6su5f/7KW+2+XC+2oU19b0GuJVFEJBx1qDonqFFKH7LDkzlq0xHEWgLiriXcx79Iic+kySkELPwJGI
+ DMs+EVItqX5F1tcKGlSbJ7IcU0Kk21UOSvClkhoA8o2nZqHoUNYsZaQ4DZ50rRGgnDdKSoSR64c4mZ
+ dr4YD+L1ezVLMD1mjhLtjwoQKmooG9zknu6y2g9obwPndU82ukbBRsEVPepw==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,37 +112,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
+With DM_SPI_FLASH is enabled, the code uses the legacy
+SPI FLASH code leading to probable errors since it doesn't
+use speed and mode provided by DT.
 
-The eMMC device on imx8mm-cl-iot-gate seems not support hs400.
-When booting 6.1.0 kernel we got the following error.
+This adds the DM functions as dummy inline functions
+to add both legacy and DM support in DFU sf code avoiding
+using #if/#else conditionals.
 
-    mmc2: mmc_select_hs400es failed, error -110
-    mmc2: error -110 whilst initialising MMC card
-
-Add no-mmc-hs400 to mmc2 node solves the problem.
-
-Signed-off-by: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Stefano Babic <sbabic@denx.de>
-Cc: Fabio Estevam <festevam@gmail.com>
-Cc: NXP i.MX U-Boot Team <uboot-imx@nxp.com>
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- arch/arm/dts/imx8mm-cl-iot-gate.dts | 1 +
- 1 file changed, 1 insertion(+)
+Changes in v2:
+- switch to if(IS_ENABLED())
+- add SPI FLASH DM functions as dummy inline functions
+- Link to v1: https://lore.kernel.org/r/20240917-uboot-topic-dfu-sf-dt-v1-1-8cf38451eea4@linaro.org
 
-diff --git a/arch/arm/dts/imx8mm-cl-iot-gate.dts b/arch/arm/dts/imx8mm-cl-iot-gate.dts
-index 425701204a..aa6ca070bf 100644
---- a/arch/arm/dts/imx8mm-cl-iot-gate.dts
-+++ b/arch/arm/dts/imx8mm-cl-iot-gate.dts
-@@ -350,6 +350,7 @@
- 	pinctrl-1 = <&pinctrl_usdhc3_100mhz>;
- 	bus-width = <8>;
- 	non-removable;
-+	no-mmc-hs400;
- 	status = "okay";
- };
- 
+---
+Neil Armstrong (2):
+      spi: add DM_SPI_FLASH compatibility inline functions
+      dfu: sf: rely on DT for spi speed and mode
+
+ drivers/dfu/dfu_sf.c | 16 +++++++++++++++-
+ include/spi_flash.h  | 34 ++++++++++++++++++++++++++++++++++
+ 2 files changed, 49 insertions(+), 1 deletion(-)
+---
+base-commit: 19dbc09405d3503ce3efef3c2e4b4f0f1a03372d
+change-id: 20240917-uboot-topic-dfu-sf-dt-8ae62e5c7d79
+
+Best regards,
 -- 
-2.45.2
+Neil Armstrong <neil.armstrong@linaro.org>
 
