@@ -4,74 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B8AACF3180
-	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 20:55:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33446CF3185
+	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 21:54:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26766892DB;
-	Tue,  1 Oct 2024 22:55:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 4FFEC88E03;
+	Tue,  1 Oct 2024 23:54:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="ghCiJAW+";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="n1BgnKus";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 405D38924F; Tue,  1 Oct 2024 22:55:06 +0200 (CEST)
-Received: from relay7-d.mail.gandi.net (relay7-d.mail.gandi.net
- [IPv6:2001:4b98:dc4:8::227])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id EF98D88DFB; Tue,  1 Oct 2024 23:54:38 +0200 (CEST)
+Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
+ [IPv6:2607:f8b0:4864:20::f2f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21DD2892D5
- for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 22:55:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0EDC388E03
+ for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 23:54:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 7A84020003;
- Tue,  1 Oct 2024 20:55:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1727816101;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=50Y/sVoN3EndO9j9nbF3L9MeQmxgq+nVKIVwqHmd9E8=;
- b=ghCiJAW+z/a4eQo/cxzMzpeH4oOLAk/S5zAmA07HWy6p+28wRF3Z92shDZMFmvDZCSlTvB
- YQuqaOVRDOTWM8K023oM60oTtCJ4G0iCd/eFXZcQaDWPqV8NR3EcknVaAnmKLavKfJr3V/
- zIXEHN7Cj6Q3z+syj9bT7CSORew5HvsOCH5zKmsZjxWVv7U99UZUOGz1qKpT1klE8gSjlD
- Qz7y0Gg2EI3EbI1bZ8u74dGibHKXnJIFKU7LWLZhBdqOBn/c2OnET/HXYFmMDQ75jvmwTJ
- NRQXHtLm6N/gwsOJNW0Zg1N1/TL2GSlkWr+uUewN+UytX8SbZz1dk2rG9gnPDQ==
-Date: Tue, 1 Oct 2024 22:54:58 +0200
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Cc: hs@denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>,
- linux-amarula@amarulasolutions.com, Ye Li <ye.li@nxp.com>, AKASHI Takahiro
- <akashi.tkhro@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini
- <trini@konsulko.com>
-Subject: Re: [PATCH 08/26] power: Add iMX8M block ctrl driver for dispmix
-Message-ID: <20241001225458.2642801f@xps-13>
-In-Reply-To: <CAOf5uw=jQEtQUGWzd40shLidcMNfkTsPjSbCQ7L=MJdBUTUbTw@mail.gmail.com>
-References: <20240913095622.72377-1-dario.binacchi@amarulasolutions.com>
- <20240913095622.72377-9-dario.binacchi@amarulasolutions.com>
- <beecebba-79f5-e21d-3062-287c2dbb04e9@denx.de>
- <CABGWkvqOzc3cGM_aKVurv1XbAbeHXE77xwq_uAmSuZMgjCoevQ@mail.gmail.com>
- <ebb734bd-bdf7-ffd2-d676-7eb6011466a3@denx.de>
- <CAOf5uwm13jyOb0M9Xvx_bO1RpXhDcWqKBC-4fhZGo61Q5cjnjw@mail.gmail.com>
- <3cb57821-30f0-6aa0-2dec-313381b1350a@denx.de>
- <9ce14505-6c37-f2e8-4b5d-44f1a55f0393@denx.de>
- <20241001102908.39b2d3a6@xps-13>
- <CAOf5uwn8vhozjtMqXmWL=3Jaf05UhV7cnGn15Ywj07-PmwW_9w@mail.gmail.com>
- <20241001105057.2992e124@xps-13>
- <a91171dd-a2f2-8df7-5b11-4a35a227ef2e@denx.de>
- <CAOf5uwkw-NcSq6NDROsUJVfCTdYZcshxFyUJRW9Q-f1wcKmz=w@mail.gmail.com>
- <20241001120111.181be2a4@xps-13>
- <CAOf5uw=jQEtQUGWzd40shLidcMNfkTsPjSbCQ7L=MJdBUTUbTw@mail.gmail.com>
-Organization: Bootlin
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2f.google.com with SMTP id
+ 6a1803df08f44-6cb399056b4so44824696d6.0
+ for <u-boot@lists.denx.de>; Tue, 01 Oct 2024 14:54:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1727819675; x=1728424475; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=rVTF65WfKHz7Y7D/De+R+r/zxvSKouhpC2Bvhcy67+k=;
+ b=n1BgnKusu+mFfnVtTuLK+PeA+1Xoy1pVwP+eQwu7Rzj5fT+rPRUP/ePxUcyJMrnBG3
+ qSjwYc3jJb2VTpLOHGPMLKmovMGhBYVO48+CitPtLnrKBoMGPXzxgkJF4d2rZsw4ZTII
+ ut6tK1wrzSV8JDkaxQ7TA9PEvoX2IJ0oVN75g=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727819675; x=1728424475;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rVTF65WfKHz7Y7D/De+R+r/zxvSKouhpC2Bvhcy67+k=;
+ b=hVwmIieKxu3GuoIM3BtfzuHo4TToW3NaDJqXmEvggsV0jwZBTRz8TH9XiBc+g6Q5ex
+ exDddpTcz3FvLiihHR9STF/yMlUvl4aHexbuvP5vxfuER/OzES1+rXEyW3X/gS3Lwxl3
+ G2Q56ntfoTJWmojqP+WU8u5tl+eVSTGPpNdZDb/qt8Kk1ZqFt0Y5U9PMzx1zKHvi+clY
+ eKWRJ6yG5JJdN1ySZImD1x4jYACpzpjpyd06u9MXUvo6lfFq5/zaocqKYNd3RrycwnL/
+ bzkufB8iivkzfCqRoRgXpeF+dGc5b6pVtpvf+S2qBdEu2hx46pDBC6+bKTJzvL9N6HXv
+ fTvw==
+X-Gm-Message-State: AOJu0YxIu3LKSZcxT26Nq2p+s8zpjRx43Fxhf3cou/adlASqHr1uuMt3
+ +4LVmoARVDVSEAfU224PpULgGokQGOKYA1EKTqU0cyrmRe07Yqsm3j6Ja96JA/o=
+X-Google-Smtp-Source: AGHT+IEj3h0qXwyIj8j9i1kYyC5eGKqAXBsZIvk0NhFt6H7c2dh/HyPba5gW+z1pJPAOrOlM6TX9Pg==
+X-Received: by 2002:a05:6214:5b13:b0:6cb:5418:4523 with SMTP id
+ 6a1803df08f44-6cb81b99b5amr14410316d6.40.1727819674766; 
+ Tue, 01 Oct 2024 14:54:34 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6cb3b66ceb7sm53767046d6.90.2024.10.01.14.54.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 01 Oct 2024 14:54:34 -0700 (PDT)
+Date: Tue, 1 Oct 2024 15:54:29 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexey Romanov <avromanov@salutedevices.com>,
+ Anton Bambura <jenneron@protonmail.com>,
+ Arseniy Krasnov <avkrasnov@salutedevices.com>,
+ Billy Tsai <billy_tsai@aspeedtech.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Jesse Taube <mr.bossman075@gmail.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Kongyang Liu <seashell11234455@gmail.com>,
+ Konrad Dybcio <konrad.dybcio@linaro.org>, Leo <ycliang@andestech.com>,
+ Martin Kurbanov <mmkurbanov@sberdevices.ru>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Max Resch <resch.max@gmail.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Nicolas Ferre <nicolas.ferre@microchip.com>, Nishanth Menon <nm@ti.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Randolph <randolph@andestech.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Stefan Roese <sr@denx.de>, Sumit Garg <sumit.garg@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Vignesh R <vigneshr@ti.com>
+Subject: Re: [PATCH v3 31/33] global: Rename SPL_TPL_ to PHASE_
+Message-ID: <20241001215429.GJ4737@bill-the-cat>
+References: <20240930014956.1434060-1-sjg@chromium.org>
+ <20240930014956.1434060-32-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-GND-Sasl: miquel.raynal@bootlin.com
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="SFkIKWeWx7f4Ic8w"
+Content-Disposition: inline
+In-Reply-To: <20240930014956.1434060-32-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,132 +114,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michael,
 
-michael@amarulasolutions.com wrote on Tue, 1 Oct 2024 15:02:56 +0200:
+--SFkIKWeWx7f4Ic8w
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> Hi
+On Sun, Sep 29, 2024 at 07:49:54PM -0600, Simon Glass wrote:
+
+> Use PHASE_ as the symbol to select a particular XPL build. This means
+> that SPL_TPL_ is no-longer set.
 >=20
-> On Tue, Oct 1, 2024 at 12:01=E2=80=AFPM Miquel Raynal <miquel.raynal@boot=
-lin.com> wrote:
-> >
-> > Hi Michael,
-> > =20
-> > > > >>>> Ported the patch from patchset
-> > > > >>>>
-> > > > >>>> "[PATCH 05/26] clk: imx8mm: Mark IMX8MM_SYS_PLL2 and IMX8MM_SY=
-S_PLL3 as enabled"
-> > > > >>>>
-> > > > >>>> to imx8mp [2] and fec ethernet works again for me on imx8mp!
-> > > > >>>>
-> > > > >>>> Could you add this if you post a v2 ? =20
-> > > > >>>
-> > > > >>> TBH I don't feel like the below change is the correct one, it i=
-s too
-> > > > >>> specific. The clock core is recursive and thus should handle the
-> > > > >>> reparenting situations gracefully.
-> > > > >>>
-> > > > >>> I posted a series that is targeting the LVDS output on imx8mp. =
-You
-> > > > >>> should probably consider checking these patches as well if you =
-work
-> > > > >>> on imx8mp as well. I also had similar breakages with Ethernet w=
-hich
-> > > > >>> happened during the assigned-clocks handling. This patch, which=
- is more
-> > > > >>> future and platform agnostic, fixed it:
-> > > > >>>
-> > > > >>> https://lore.kernel.org/u-boot/20240910101344.110633-3-miquel.r=
-aynal@bootlin.com/
-> > > > >>> =20
-> > > > >>
-> > > > >> The clock patches are not specific at all. You need to have it w=
-orking
-> > > > >> for the parent for each component. =20
-> > > > >
-> > > > > The diff shown by Heiko is explicitly enabling PLLs by naming the=
-m in
-> > > > > the iMX driver. This is not the correct approach. The problem of
-> > > > > having non-enabled new parents is global. Parent clocks should be
-> > > > > enabled before changing muxes, and this should be enforced
-> > > > > by the clock core/uclass, not the SoC drivers. =20
-> > > >
-> > > > Okay, valid argument.
-> > > > =20
-> > > > > =20
-> > > > >> This is a standard way to do it and nothing magic compared to ot=
-her
-> > > > >> implementations. =20
-> > > > >
-> > > > > No, naming PLLs explicitly is not the correct approach.
-> > > > > =20
-> > > > >> I don't see
-> > > > >> in your series any addressing or reparent clock or take in accou=
-nt
-> > > > >> that a clock should be enable before
-> > > > >> reparenting. =20
-> > > > >
-> > > > > That's exactly the link above, whose diff is pasted here for refe=
-rence:
-> > > > >
-> > > > > @@ -595,6 +595,10 @@ int clk_set_parent(struct clk *clk, struct c=
-lk *parent)
-> > > > >       if (!ops->set_parent)
-> > > > >               return -ENOSYS;
-> > > > >
-> > > > > +     ret =3D clk_enable(parent);
-> > > > > +     if (ret)
-> > > > > +             return ret; =20
-> > > >
-> > > > As I said before, I had *exact* the same patch and thought I made a=
- big
-> > > > hack :-P
-> > > >
-> > > > But I wonder ... if this a generic "problem", why nobody had yet pr=
-oblems
-> > > > with it... =20
-> > >
-> > > I think that a generic approach that takes into account the reparent
-> > > is more valuable, then
-> > > this. =20
-> >
-> > I'm sorry I don't fully understand your answer. I assume you agree with
-> > the generic approach quoted above.
-> > =20
-> > > If a clock is enabled by another stage and we don't aware about
-> > > it we need to mark
-> > > as enabled. =20
-> >
-> > clk_enable() already handles this kind of situation.
-> > =20
-> > > I think that this force of enable it's just a short path
-> > > that does not solve the generic
-> > > problem. =20
-> >
-> > What "force of enable"? The parent needs to be enabled before we use it
-> > as parent. The logic is always the same:
-> > - clk_enable() the new parent
-> > - change the parent
-> > - clk_disable() the old parent
-> > I don't see any short path here.
-> > =20
-> > > I really tried to abstract what is really implemented in
-> > > other OS on the same topic. =20
-> >
-> > FYI, Linux does the clk_enable(parent) like above.
-> > =20
+> Update the comment in bootstage to refer to this symbol, instead of
+> SPL_
 >=20
-> You mean linux enables a clock in set_parent even if the clock_chain
-> is not yet enabled.
-> clock a disable
-> clock b disable
->=20
-> clk_set_parent(a, b) b->a now b is enabled?
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+[snip]
+> diff --git a/common/bootstage.c b/common/bootstage.c
+> index dca33148192..dd6aed7c2fd 100644
+> --- a/common/bootstage.c
+> +++ b/common/bootstage.c
+> @@ -351,7 +351,7 @@ void bootstage_report(void)
+>  	}
+>  	if (data->rec_count > RECORD_COUNT)
+>  		printf("Overflowed internal boot id table by %d entries\n"
+> -		       "Please increase CONFIG_(SPL_TPL_)BOOTSTAGE_RECORD_COUNT\n",
+> +		       "Please increase CONFIG_(PHASE_)BOOTSTAGE_RECORD_COUNT\n",
+>  		       data->rec_count - RECORD_COUNT);
+> =20
+>  	puts("\nAccumulated time:\n");
 
-Actually you're right Linux does the enable call only if a flag is set
-(and anyway it's not in the faulty case reported above) or when the
-reparented clock is already clocking. I'll have to check again with
-this clk_enable() solves the situation and what could be done instead.
+This is a 2 byte rodata reduction because we change the constant string
+to be shorter. Perhaps this (and the later debug() message) should be
+reworked to read:
+"Please increase BOOTSTAGE_RECORD_COUNT for this phase\n"
+which is hopefully enough of a crumb to lead someone to the right CONFIG
+option?
 
-Thanks,
-Miqu=C3=A8l
+--=20
+Tom
+
+--SFkIKWeWx7f4Ic8w
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmb8b5EACgkQFHw5/5Y0
+tyxenAv+Owd7/fDF2lzRYtoqqChmc5hTZPaFMOpejaeude6xGjAVyOL9eeH+yu2P
+65VAAlZSLKcKa4cw6h8R2bRPMDzYJ9oBehTUGErcSKrLkt8XrpWKODLn39mh9roT
+QOoZJLiFj9pCl+TtBRFNhEW7KlJgyvx+HX1syiTOl7GKqrVkaUVUunOg7UEfnLad
+WDuMJWIdZGa5YbLfgdmYJkJcvB4/2+e/5UsNBMvNCd2lxgTGX0iZh8W/GCaHZ9q0
+BYXrEjLPVewGFuhkCwodJ+SK5vhXO3Qerqfrf8onoXc1rMXMv/lKkv/cuylQjRds
+oyQu4O3ANf91z1DMh7huhmgg3XL1roIYb/sumKQymF9b5seuH24IkF1/4AXzpc7f
+F0g6hSfLxe7dz1lUY5Kjb4Bz8vqHf1ZNm/Kqbp3qwR/3IDWGxqT8jp9bJhkDgmhZ
+AFdegGeLbZ0uxwP9nsvLP6zmZ7sZbpeOdJneYo34E9flxmXlQNL+LK1i3e1zPqeW
+vTFGmpBf
+=TBx3
+-----END PGP SIGNATURE-----
+
+--SFkIKWeWx7f4Ic8w--
