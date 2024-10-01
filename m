@@ -4,82 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86F1DCEACD5
-	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 15:38:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 611D0CEACDF
+	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 16:03:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E3E6888CFB;
-	Tue,  1 Oct 2024 17:38:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id A600489236;
+	Tue,  1 Oct 2024 18:03:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=debian.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="L5+N8Ttg";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MdxV45uj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 48F0588CC3; Tue,  1 Oct 2024 17:38:53 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 6520F88A34; Tue,  1 Oct 2024 18:03:50 +0200 (CEST)
+Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
+ [IPv6:2607:f8b0:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD2C789229
- for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 17:38:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B56689212
+ for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 18:03:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=none (p=none dis=none) header.from=debian.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-42cba6cdf32so50400235e9.1
- for <u-boot@lists.denx.de>; Tue, 01 Oct 2024 08:38:50 -0700 (PDT)
+ spf=pass smtp.mailfrom=grandpaul@gmail.com
+Received: by mail-oi1-x236.google.com with SMTP id
+ 5614622812f47-3e03d17365bso3531000b6e.1
+ for <u-boot@lists.denx.de>; Tue, 01 Oct 2024 09:03:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1727797127; x=1728401927;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=EJT8LeUg+UMFYuonmVoVgM1eGd64e6PyskomK9ZfcmA=;
- b=L5+N8TtgZX22PjZaS9TS7l1/d9pkMhix0+WOxCOjfhdPmfQLOS476wiB13Tw1LAhKP
- icF+EA+ap9jqZ55PC4lpkIqS1ZVUDGR2cqa1fTS+MNzCEtj5oO8kW9WmbwctfC0ZnPEx
- 3mp6rTcRsQLYNwcva5ugf2JTMkbdMqY0fvAtbA52UEy7F9ljFDd6XGyLx36ssj/1BLPU
- L0omrCuDCAh7VW6EmKqdCOu5XTPHRYkDwiDtyTYUoroLdjGe5iFSUjalT5V1bDvbCQQI
- lOWL3zlShpVxVkyQTEjNmUR59DFepU+4f3Q2Loy6BYDDd1wWPnPsy1FE1rmBp+vWXPD6
- WfRw==
+ d=gmail.com; s=20230601; t=1727798627; x=1728403427; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:sender:from:to:cc:subject:date:message-id:reply-to;
+ bh=fUfoQkDscu1W4z2m6w2/tsCmCcOfbkf2JWdOdJhO/eM=;
+ b=MdxV45ujqCJxoi5Y6VXUfxCE7SAHzAFG5oeeptsSsTa3ttZI4TQNMWGVZin9942EMy
+ l9WJPAUEjDBGvqeTxaxAKJ+jyW7XRpsSyBt+MdJ8/frZxDD0d7CyXxxCQVywG60VBP3U
+ 8chawFBWf+g2w2c2rvqLbLC/dwrACXB86EAPnhUv7Dh/croMAS+Z+3+90kfWS6nELwyc
+ 3Wyvmtq+x0ohqzk3WXjYh/uoEHxs32H+toKF25axcB1a34EmG3LjEznlQlxQDsMsBJgs
+ 0knOfkiW7XWM3J0ziO5AAUc1IqslnkCTvlfBkk7x7ytba1TbkXjauWU9xXE9TmFtlxEL
+ 9ziQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727797127; x=1728401927;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=EJT8LeUg+UMFYuonmVoVgM1eGd64e6PyskomK9ZfcmA=;
- b=lERIxEiLF+i2NBdBUrPHtUMGctShOs8kokVSPRDmXhiBoKiX4NReLDCTx78x583hY0
- 08TNeA5JsE87lUcdMIKnC4K7IWrDgyFuDk2ay7yu/UUSSCRKYQr7yM/MHcuBxmY0utuE
- UTuwvQYmUiOouWf5ncpn842P5YF4Ad71UUwnCUKByIMVsXaaaeBTdi1lPbvILPRZuEiP
- mI17nBiUjcvN3f9qR2TAGLhUF/rRXWfOkSTHvGSPixZy7d2jWOh+te7YRtl2sh7aVG4b
- OOpPEDBaIHw/+LnbRbc9igRbEeuHrR+gmgKB4CM1bMkAcuo3dUPV8J63xQ8mH0B3ZTJt
- bd0Q==
-X-Gm-Message-State: AOJu0Ywk2l6b+CZg+VzvV6WwOdmLpS96DcxLwx+8uCEoTwVvFZ9/rwpO
- x8Az/QbA+vKDNCuwxoCIxeVNqqsGT3XVyFiuz1wXnPQkZrBZ2KiVY4KbG2WrbMA=
-X-Google-Smtp-Source: AGHT+IG0ecQdM279WS26IKPEEkKuL7h/b79fLABexbswTWorpzoe11ipwpR5GhpoNlcfwa1cGTo0bw==
-X-Received: by 2002:a05:6000:1b83:b0:37c:c4bc:181c with SMTP id
- ffacd0b85a97d-37cfb8b52f1mr935f8f.11.1727797126667; 
- Tue, 01 Oct 2024 08:38:46 -0700 (PDT)
-Received: from mkorpershoek-xps13.carmes.etincelle-coworking.com
- ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37cd56e922csm12006162f8f.65.2024.10.01.08.38.45
+ d=1e100.net; s=20230601; t=1727798627; x=1728403427;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:sender:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=fUfoQkDscu1W4z2m6w2/tsCmCcOfbkf2JWdOdJhO/eM=;
+ b=dtEWbYCAxnPc9vBbYOcLJMJLG/wR4ICeMavBOTuZdFBSSfLzDmy3Eo0qsjXMnZnlYy
+ 2oAAjRRbf6+ovvwPf/kFlIzCXC30usmkhL7IyJV/vTc72yc2jQMLdresojq6yShA2+C3
+ hYi2sZyY4NWLVjfAUiDYV3C7hT7XJtDFL4rLu7vhmxefM5uya2JZFI/SochhQauUdKLn
+ IWo8R6NjDSgvXAYOc9Repks/DOtV7+orbz49vt5cvWPSVK4LVdHUrfHLmhfj4ci+3wN/
+ r/4q1Qw0XYXBkzKLLE/v7FNIifx34Bk2CpxYGH3DjiHIJ0bXxaF+81cHMnZyK5AFwifG
+ CKGA==
+X-Gm-Message-State: AOJu0YxH5qILGSpakdcq28v4OPML1g0BJ8KzcyXLBeOLflg01ab4B1A1
+ Dgac9n7wq9qnaMd9N+240q1PuxR1ndsFd27bf+rx4GY+y33W8P9OtiLR3DBk
+X-Google-Smtp-Source: AGHT+IHIKAdSd9e2PqZ72Gi7EEtR46nUnIkfoY+w2z1CRIvyGkkbsDcWmQPokmsfMr9X+58wxtYWsw==
+X-Received: by 2002:a05:6808:320c:b0:3e3:9a24:4c63 with SMTP id
+ 5614622812f47-3e3b40e1dc0mr278562b6e.5.1727798626668; 
+ Tue, 01 Oct 2024 09:03:46 -0700 (PDT)
+Received: from localhost ([111.184.129.17]) by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-7e6db2bce30sm7403440a12.38.2024.10.01.09.03.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Oct 2024 08:38:46 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Vitaliy Vasylskyy <vitaliy.vasylskyy@globallogic.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Lukasz Majewski <lukma@denx.de>, 
- Miquel Raynal <miquel.raynal@bootlin.com>, Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>
-In-Reply-To: <20240908230654.286062-1-marek.vasut+renesas@mailbox.org>
-References: <20240908230654.286062-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH v2] usb: gadget: usbhs: Add Renesas USBHS device driver
-Message-Id: <172779712511.85568.2897665223760729938.b4-ty@baylibre.com>
-Date: Tue, 01 Oct 2024 17:38:45 +0200
+ Tue, 01 Oct 2024 09:03:46 -0700 (PDT)
+From: "Ying-Chun Liu (PaulLiu)" <paulliu@debian.org>
+To: u-boot@lists.denx.de
+Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
+Subject: [PATCH 0/1] arch: arm: dts: imx8mm-cl-iot-gate.dts: add no-mmc-hs400
+ to mmc2
+Date: Wed,  2 Oct 2024 00:03:23 +0800
+Message-ID: <20241001160324.3894617-1-paulliu@debian.org>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,22 +88,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+From: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
 
-On Mon, 09 Sep 2024 01:06:24 +0200, Marek Vasut wrote:
-> Add UDC driver for Renesas USBHS controller found in R-Car Gen3 SoCs.
-> This is mostly ported from the Linux kernel, with additional porting
-> glue. The code has been synchronized with 1b4861e32e46 ("Linux 6.9.3")
-> and cleaned up and ported to DM since the original implementation by
-> Vitaliy.
-> 
-> 
-> [...]
+The eMMC device on imx8mm-cl-iot-gate seems not support hs400.
+When booting 6.1.0 kernel we got the following error.
 
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu-next)
+    mmc2: mmc_select_hs400es failed, error -110
+    mmc2: error -110 whilst initialising MMC card
 
-[1/1] usb: gadget: usbhs: Add Renesas USBHS device driver
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/50bb758c1e3424d9e1925588c9269b24418c2e04
+Add no-mmc-hs400 to mmc2 node solves the problem.
 
---
-Mattijs
+Ying-Chun Liu (PaulLiu) (1):
+  arch: arm: dts: imx8mm-cl-iot-gate.dts: add no-mmc-hs400 to mmc2
+
+ arch/arm/dts/imx8mm-cl-iot-gate.dts | 1 +
+ 1 file changed, 1 insertion(+)
+
+-- 
+2.45.2
+
