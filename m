@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3E61CEB2D0
-	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 13:21:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4833ECEB2FD
+	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 13:21:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F611891FB;
+	by phobos.denx.de (Postfix) with ESMTP id DD4F589204;
 	Tue,  1 Oct 2024 15:19:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="d5yOIwNR";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KSh9Rc5i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E7A6891B8; Tue,  1 Oct 2024 14:26:07 +0200 (CEST)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
+ id 0CE48891B5; Tue,  1 Oct 2024 14:26:09 +0200 (CEST)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D801891C6
- for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 14:26:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F5C6891A0
+ for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 14:26:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-37ccd81de57so3406376f8f.0
- for <u-boot@lists.denx.de>; Tue, 01 Oct 2024 05:26:05 -0700 (PDT)
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-37cdbcb139cso2880231f8f.1
+ for <u-boot@lists.denx.de>; Tue, 01 Oct 2024 05:26:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1727785565; x=1728390365; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1727785566; x=1728390366; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=w87C4Z/qR+AjxVgt/LCAEnP1+5uYeVUj4/5pIOTbt4c=;
- b=d5yOIwNRVN8w/pCHkocv+HrkzB7q1nWJi6gLSaNS2UgwmJnkJx9vsddW7lG2GcoODE
- i82X6zstXeI9ZhJlENCG0Tt2mYmpy7MDJI9JKlnFD10njyDL/l2kPzlC9jCx8r8TaaJg
- wI+aCRgShRdtt1XjKPVXmG9lnMlHe/Ndo02J9WryOFmrwPArbwKGNLj6LvmapuCL8XS2
- C/ptq1DUTZvRe4w82BQpBlkREP/ZeQo27t8PDBqxfdtqruTPtXDa6hfA/bB7ExoVMBk+
- OlkUW5i3j/OU1wayTBjUh5ta1FwZ4YiLhP264i7ppilleaPKVxTCT+yIJq4WRf+jxa4H
- 5Uyw==
+ :reply-to; bh=mWpLx/wht1TQRpskguMCKkqT+YiI0H6xuR/wKhA6SH0=;
+ b=KSh9Rc5iL8Ts39k95flU2sDxRGD5w2kzyybfdGl9YvF6t/cRQZ4kqaOYmUXWbGGGkU
+ r8H0RdMWmdCxULxAVIZdMKr1sGJYEYpOK5J6Lo/W8HrPYATbHh25lXXy8Y7S9+tNtyxJ
+ H9vvJl06a3c5696AV8Omvjj5HxL2NI4IZwSj+DrhJ6AflpPKIKXbkGXA90jY2etvJcGL
+ 7RG9ddELecG7vV+/HtkGXD4EEqbSd7mu1iX5SUzIBg5Xjf2pMUNx0Zv081hqlNNSnSM/
+ fwL+ROPEMNXHwUqv5YEJ97dcI59UU54x+wURj4gxoSnOo9Is4BiBH9hAT2R9ZTZsezEM
+ nnyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727785565; x=1728390365;
+ d=1e100.net; s=20230601; t=1727785566; x=1728390366;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=w87C4Z/qR+AjxVgt/LCAEnP1+5uYeVUj4/5pIOTbt4c=;
- b=TyqbkDaS0HGzTlnAcfGFhhVYw1Q6x1cbudZq38TT+FEq2XTqFATIO9ZiuuDba8nObg
- OGY2bEvAXWLqIKlHfd2x/8etWyruYQv+x/rmBV+8BCPyq7vieACe8h7noahy1oCRAPPF
- iwhC7trdfjDe9Hrt6T+ARpxwWovblFALJIhxtae7ZxNX0T1F7PBOUbG/yFB0nt7imfGt
- vJghu3btq3xFX0axLYXwcdgMacJkrpExZ/Fw6hlhTEOfw+GWAhJePfUhN5gCLF437m/G
- ui3Bhh9meYb3Md5iRTR3y8dij0kf/PtMWPe/1lnvAuprErzoHDy4uQn4cdS2hRlfckQB
- 069A==
+ bh=mWpLx/wht1TQRpskguMCKkqT+YiI0H6xuR/wKhA6SH0=;
+ b=qn+vjjEUSX6YvQrtYl2inCGo2/wyTImiET0bb0C/Jf8WP9aLDcK37fKThfpF+Lw+PP
+ JPBfecCYaTzYVkcopJQE0LjVhQKEYw1TYez9zQMXMEASneAbeLyvYrr5n/VWLlZz0o91
+ dAvyfdsrnuHsvkQNL+cRE6Lwlaw6ji+AZA3CHJNXaoTGmRjggMChzWETstFNwtzUkXzh
+ i7DbnrPtzgeI7T8cj95VSsEgvVcXZ0kRE5WJM4jJJeyywk8v12ytfk1J4lLl2R3Ggqj8
+ J5W+x4Sydt42XUDLJ91+sCkydQDIWEmjsBm26wgEdlZxY8y80ghG9V5+NfLcRxdJ1hS7
+ jzxA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXgqeHj7fj0xa8sOC8f7wbEp63rN71LnggQmnoBFy7m4gFy6JUbOE9U7O54cBy1WMrSJFYdV1U=@lists.denx.de
-X-Gm-Message-State: AOJu0YxpnraHMeJc9CuLXLw6ekhhxrG5zsK87KtnsA8X5WPTuInCd+t4
- pK5pH2XI9Jt1Ehk367byaSEc1eujcfszQiyonrLHnm1qkPUMtP0S
-X-Google-Smtp-Source: AGHT+IFAujWJX1kzBnQi8zxZqAgHz4aT8OjyHwhxqx9Qu0o6a0GLh/dy4QQh6XDENNE4mwSu7IkFAA==
-X-Received: by 2002:adf:eb92:0:b0:37c:cc7c:761c with SMTP id
- ffacd0b85a97d-37cf289b9ccmr1417211f8f.3.1727785564507; 
- Tue, 01 Oct 2024 05:26:04 -0700 (PDT)
+ AJvYcCXWTUrQV7gSwMVr2xHCGHb/7QrNjXwN3YimW0WTxNzhl2mrGGZ9pUfvrF/mNJvLqvqw9PTUcPI=@lists.denx.de
+X-Gm-Message-State: AOJu0YwD0fxHVp47W/iglG8+86/2IOB1B9fNloXYLK2t8Jf4+r1vazTX
+ 3kt0tQdsmk2qzTHFDFsKlq1rmVBCBzHzIGWgj3HYwor+1Z8fVTuH
+X-Google-Smtp-Source: AGHT+IHy5izUC5izP2GZwrxrG8SLPlQVTXvuRaR8dfWJtTUln/2QciydgNnYeull4d7jGyERlDqUvw==
+X-Received: by 2002:a5d:6882:0:b0:371:8319:4dbd with SMTP id
+ ffacd0b85a97d-37cd5a77b2emr8901385f8f.17.1727785566369; 
+ Tue, 01 Oct 2024 05:26:06 -0700 (PDT)
 Received: from localhost.localdomain (93-34-90-105.ip49.fastwebnet.it.
  [93.34.90.105]) by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-37cd56e94c4sm11646366f8f.62.2024.10.01.05.26.02
+ ffacd0b85a97d-37cd56e94c4sm11646366f8f.62.2024.10.01.05.26.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Oct 2024 05:26:03 -0700 (PDT)
+ Tue, 01 Oct 2024 05:26:05 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Joe Hershberger <joe.hershberger@ni.com>,
@@ -94,9 +94,9 @@ To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Michael Polyntsov <michael.polyntsov@iopsys.eu>,
  Doug Zobel <douglas.zobel@climate.com>, Marek Vasut <marex@denx.de>,
  u-boot@lists.denx.de, John Crispin <john@phrozen.org>
-Subject: [PATCH v5 10/11] test: dm: Add tests for LED boot and activity
-Date: Tue,  1 Oct 2024 14:24:43 +0200
-Message-ID: <20241001122511.8832-11-ansuelsmth@gmail.com>
+Subject: [PATCH v5 11/11] test: dm: Expand ofnode options test with new helper
+Date: Tue,  1 Oct 2024 14:24:44 +0200
+Message-ID: <20241001122511.8832-12-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241001122511.8832-1-ansuelsmth@gmail.com>
 References: <20241001122511.8832-1-ansuelsmth@gmail.com>
@@ -119,109 +119,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add tests for LED boot and activity feature and add required property in
-sandbox test DTS.
+Expand ofnode options test with new generic helper for bool, int and
+string.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- arch/sandbox/dts/test.dts |  2 ++
- test/dm/led.c             | 72 +++++++++++++++++++++++++++++++++++++++
- 2 files changed, 74 insertions(+)
+ arch/sandbox/dts/test.dts | 3 +++
+ test/dm/ofnode.c          | 9 +++++++++
+ 2 files changed, 12 insertions(+)
 
 diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index 5fb5eac862e..25859ad852d 100644
+index 25859ad852d..e5381b56da4 100644
 --- a/arch/sandbox/dts/test.dts
 +++ b/arch/sandbox/dts/test.dts
-@@ -101,6 +101,8 @@
- 			bootscr-ram-offset = /bits/ 64 <0x12345678>;
- 			bootscr-flash-offset = /bits/ 64 <0>;
+@@ -103,6 +103,9 @@
  			bootscr-flash-size = /bits/ 64 <0x2000>;
-+			boot-led = "sandbox:green";
-+			activity-led = "sandbox:red";
+ 			boot-led = "sandbox:green";
+ 			activity-led = "sandbox:red";
++			testing-bool;
++			testing-int = <123>;
++			testing-str = "testing";
  		};
  	};
  
-diff --git a/test/dm/led.c b/test/dm/led.c
-index c28fa044f45..4b019c71f3a 100644
---- a/test/dm/led.c
-+++ b/test/dm/led.c
-@@ -137,3 +137,75 @@ static int dm_test_led_blink(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_led_blink, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
- #endif
+diff --git a/test/dm/ofnode.c b/test/dm/ofnode.c
+index 39191d7f52b..7c0adcd596b 100644
+--- a/test/dm/ofnode.c
++++ b/test/dm/ofnode.c
+@@ -614,6 +614,15 @@ static int dm_test_ofnode_options(struct unit_test_state *uts)
+ 	u64 bootscr_address, bootscr_offset;
+ 	u64 bootscr_flash_offset, bootscr_flash_size;
+ 
++	ut_assert(!ofnode_options_read_bool("missing"));
++	ut_assert(ofnode_options_read_bool("testing-bool"));
 +
-+/* Test LED boot */
-+#ifdef CONFIG_LED_BOOT
-+static int dm_test_led_boot(struct unit_test_state *uts)
-+{
-+	struct udevice *dev
++	ut_asserteq(123, ofnode_options_read_int("testing-int", 0));
++	ut_asserteq(6, ofnode_options_read_int("missing", 6));
 +
-+	/* options/u-boot/boot-led is set to "sandbox:green" */
-+	ut_assertok(led_get_by_label("sandbox:green", &dev));
-+	ut_asserteq(LEDST_OFF, led_get_state(dev));
-+	ut_assertok(led_boot_on());
-+	ut_asserteq(LEDST_ON, led_get_state(dev));
-+	ut_assertok(led_boot_off());
-+	ut_asserteq(LEDST_OFF, led_get_state(dev));
++	ut_assertnull(ofnode_options_read_str("missing"));
++	ut_asserteq_str("testing", ofnode_options_read_str("testing-str"));
 +
-+	return 0;
-+}
-+
-+/* Test LED boot blink fallback */
-+#ifndef CONFIG_LED_BLINK
-+static int dm_test_led_boot(struct unit_test_state *uts)
-+{
-+	struct udevice *dev
-+
-+	/* options/u-boot/boot-led is set to "sandbox:green" */
-+	ut_assertok(led_get_by_label("sandbox:green", &dev));
-+	ut_asserteq(LEDST_OFF, led_get_state(dev));
-+	ut_assertok(led_boot_blink());
-+	ut_asserteq(LEDST_ON, led_get_state(dev));
-+	ut_assertok(led_boot_off());
-+	ut_asserteq(LEDST_OFF, led_get_state(dev));
-+
-+	return 0;
-+}
-+#endif
-+#endif
-+
-+/* Test LED activity */
-+#ifdef CONFIG_LED_ACTIVITY
-+static int dm_test_led_boot(struct unit_test_state *uts)
-+{
-+	struct udevice *dev
-+
-+	/* options/u-boot/activity-led is set to "sandbox:red" */
-+	ut_assertok(led_get_by_label("sandbox:red", &dev));
-+	ut_asserteq(LEDST_OFF, led_get_state(dev));
-+	ut_assertok(led_activity_on());
-+	ut_asserteq(LEDST_ON, led_get_state(dev));
-+	ut_assertok(led_activity_off());
-+	ut_asserteq(LEDST_OFF, led_get_state(dev));
-+
-+	return 0;
-+}
-+
-+/* Test LED activity blink fallback */
-+#ifndef CONFIG_LED_BLINK
-+static int dm_test_led_boot(struct unit_test_state *uts)
-+{
-+	struct udevice *dev
-+
-+	/* options/u-boot/activity-led is set to "sandbox:red" */
-+	ut_assertok(led_get_by_label("sandbox:red", &dev));
-+	ut_asserteq(LEDST_OFF, led_get_state(dev));
-+	ut_assertok(led_activity_blink());
-+	ut_asserteq(LEDST_ON, led_get_state(dev));
-+	ut_assertok(led_activity_off());
-+	ut_asserteq(LEDST_OFF, led_get_state(dev));
-+
-+	return 0;
-+}
-+#endif
-+#endif
+ 	ut_assertok(ofnode_read_bootscript_address(&bootscr_address,
+ 						   &bootscr_offset));
+ 	ut_asserteq_64(0, bootscr_address);
 -- 
 2.45.2
 
