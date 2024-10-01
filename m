@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB3D4CEB2CD
-	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 00:24:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAE2ECEB2DF
+	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 02:35:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4759588F77;
-	Tue,  1 Oct 2024 02:24:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id EE5FF8904B;
+	Tue,  1 Oct 2024 04:35:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="S32feTHj";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="pL3d/Q/E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 936E688F83; Tue,  1 Oct 2024 02:24:50 +0200 (CEST)
-Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
- [IPv6:2607:f8b0:4864:20::734])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 011D4890BC; Tue,  1 Oct 2024 04:35:05 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E5038897F
- for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 02:24:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B44D189042
+ for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 04:35:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x734.google.com with SMTP id
- af79cd13be357-7a99eee4a5bso442793185a.0
- for <u-boot@lists.denx.de>; Mon, 30 Sep 2024 17:24:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1727742287; x=1728347087; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=AtvU0WWYeMwPb7Enn1rfpTks8ZcKwy9B3OZG6x8Q2Gw=;
- b=S32feTHjnqlLw1wcsICFV1qUNNMOaKPFaG7UTK1O4zAF8LEG5yRdBjHVEhiil+spfk
- wG4JgYbAMVwv8Jt9QLQrfuEqeKdjmmJQILW8DqedKS6UA0UN8O0u7SgzGK90KurTjRUA
- d49yReuTxl4IO5+1eg0QXSknUfOA4XE/uWyWw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727742287; x=1728347087;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=AtvU0WWYeMwPb7Enn1rfpTks8ZcKwy9B3OZG6x8Q2Gw=;
- b=T55X5mSjPgTzEyv4iU8gGHwnQlWrB3AFizCKvGz06VNkB2Sden+64m+a+m6ym5nkMZ
- uoWJRYcUI4s5D+nvjHh8uv7Qrq7OLmWml8iLiAtk7ECh1DkXaEZLELETfUZ/qxny+g3R
- SBwnNFwCNulKIkDwGp7Ejg24G2UVZST8GmxEDk7bdToC3YcTv/v7urjmX4vs/CF6T453
- DuXtkf3BHRjlsCeb3Jt6l7RLbn7x9XKW3b6OCzojhkmQpvZmIDFDM5oNOB+RAv9Lezua
- sR9z1gxH3KBvy9tmAU4rhjaLpobZX6BaM/f7r6nfZwovpyqxXvYQIiSlGIX6JD1iecx3
- ZXWw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU2GioCGVUEz2Xp2uetWhBo3UsnUJZ9MI3AVUxIrRoysTDnc3InCb8SvCYvITBk3BM8jh7QpCg=@lists.denx.de
-X-Gm-Message-State: AOJu0YzTP86awl/wGPc5xcaunk/5j1eoOxqvhVuTys6e7cbCr3SA5a6+
- I3D1lCQOazQNAKGU5keaQ0/FyM8Wr018IlRJKZOBny/1kOyEutdt1mUwXji+A4A=
-X-Google-Smtp-Source: AGHT+IEyEj/SyaEp5/cfDq/Hhx61ujnIN4Lk7DklSPNKilH4U3PyzwFQrkZmwaQu7tlkT66kCopH2Q==
-X-Received: by 2002:a05:620a:24cf:b0:7a9:be53:fe3b with SMTP id
- af79cd13be357-7ae37838c24mr2212487085a.14.1727742287081; 
- Mon, 30 Sep 2024 17:24:47 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7ae37829d45sm455537685a.77.2024.09.30.17.24.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Sep 2024 17:24:45 -0700 (PDT)
-Date: Mon, 30 Sep 2024 18:24:42 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1727750099; x=1728354899; i=xypron.glpk@gmx.de;
+ bh=AXSUoJRk9zpSp2K/qnyRSNL7ouEAUp1Hf/QCixl9sY4=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=pL3d/Q/EKvilXXll5T6xPMS4qdotGwp2LU5rieu8k3sKlaYPPHDzprXesW0V1b+5
+ MSJmpWbGqbHLNvRsc+XHNcCJYhaK7wHxwux0h+WuIBOqD2bGmrCDIYN81vdEGupqi
+ kHA6JS/oYDRrEuz17VNyJjyVW9l+qTok8tQM931wwN3WBABWfGR7MWBXisZtJy0uo
+ +0CfDaVZkxNAkKOCBJkp1hvx5hnuWG0cMP48vm2eeNVrq23285mTIpf+58ylmlLPU
+ u06KCVPWJjip9elyh4/us94DiHg0OisKN7OhnoF4TQwkNGlcTUQdMwdtpKfBsgQcW
+ eqbihZUzqjbj9WEnlA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MhlKs-1sHz6Z2yFE-00Zn2D; Tue, 01
+ Oct 2024 04:34:59 +0200
+Message-ID: <79d98f61-7659-47a3-938f-1eb79f402edf@gmx.de>
+Date: Tue, 1 Oct 2024 04:34:54 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 08/12] efi_loader: Disable ANSI output for tests
+To: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v6 08/12] efi_loader: Disable ANSI output for tests
-Message-ID: <20241001002442.GC4737@bill-the-cat>
 References: <20240926215950.1265143-1-sjg@chromium.org>
  <20240926215950.1265143-9-sjg@chromium.org>
  <08596845-c0b1-4557-9993-cde57420560d@gmx.de>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="pnUSAqhgFf5/HBQK"
-Content-Disposition: inline
-In-Reply-To: <08596845-c0b1-4557-9993-cde57420560d@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+ <20241001002442.GC4737@bill-the-cat>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20241001002442.GC4737@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:dNDcfYaNQr1f6O6lERrVV/HRB71V1uGwzxJC3d7Qw6syiOjanY8
+ puMoqcUB62C07FCblB2edsNvZfFEc7maUpqdzcqtbHFiuj7t3dBZ97AD3PNpZcWcCaenVLC
+ GiMLdigyKTr3lgr/nes531l55qtOyAZaDxfb1yuPY9EYEYlz7XL4ic07NAU+uLmEgWqZSBQ
+ 0XFs+gNDLktarOOAiYHRg==
+UI-OutboundReport: notjunk:1;M01:P0:nywqxFZU2Zg=;K0XPuu0T8wg1xUKJPb/+Hx2S4H+
+ GHeofIWgE0bxGsdaMUAIVR2oTNVA2GB/dVRX28iyjhsf18idTxiKH8DWznVoL5WOUxGwDvIXi
+ imJ7qz2pUZeqa8GaQ9Scm1E/WwrOlkjFhO4/DZpfGl5COkpKoEyHLClOQBepOxGIKCVmeCh+z
+ yuFCK8o2kVC1AfLF/DtUA3+F+BzhiVsUW05YCdiFJ+Tw1eqzv8L2ec6aWZeGRQyOc++DZJgvD
+ vIEI8RNX5BUbK/d/69DbBMO4OhHC5lLadz9rw2mBTmVsoIm+qyoWwKT1gMjyoySQjeWCxKcn8
+ sUjowEh9vgFfx0TLknyvvYiDUkrnc0lZWlDuwapesEMHJTcvX9EPVngo2mWfRJY5dgIeFvTaK
+ 8RsQ3vmndsqdC+F141WILhaNW1bKz5X14/CAK921ZmJvmwK9+DYcv41WJA3gr0pUs5AUaTWqK
+ gNb680OzNHNM4uIEq14s/uyDIR0ZfkYtj8RlFIQjDM4CV4uxP6sgnbXAbZsQ4UQIwnH+GivtB
+ EXY17RhlxFiEuoWXdmU/AAw9zAv9I6NgplL6I7Z+78l0rlZeusgMR79bgXJjaEUkk4qeI/el3
+ sOCmkPR9NtinOQeN3zD+YinLRxUfTiCOffVzvIDR1y5GZV9Q7CTTxkGp3BsCRmyYnEUEAmvAb
+ 6U2wemgjr+WMl1vx+b4CjK9dGFFCEkgbTTz6dK5ifTx4kfTYCkyDeH9ghN7sXZR0+thlPjIvS
+ V4w86H3ViHEciZttA1MAzE+BspCw8MKIfXHTyb2z4mGcnEam2RjclmmlCZgfOuMoKWMVSznKm
+ bMJMj4z4bxoLXWtKiWKz0muA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,57 +94,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 10/1/24 02:24, Tom Rini wrote:
+> On Tue, Oct 01, 2024 at 01:38:56AM +0200, Heinrich Schuchardt wrote:
+>> On 26.09.24 23:59, Simon Glass wrote:
+>>> We don't want ANSI characters written in tests since it is a pain to
+>>> check the output with ut_assert_nextline() et al.
+>>>
+>>> Provide a way to tests to request that ANSI characters not be sent.
+>>>
+>>> Add a proper function comment while we are here, to encourage others.
+>>>
+>>> Signed-off-by: Simon Glass <sjg@chromium.org>
+>>
+>> Please, consider prior review before resubmitting patches.
+>>
+>> As responded to all prior submissions:
+>>
+>> We want to test the code running on actual machines.
+>> We don't want to have sandbox code everywhere.
+>>
+>> I cannot see any test that is not passing due to the current behavior.
+>
+> The pytests for the EFI selftests are unreliable for me, on Raspberry Pi
+> 3, more often in 32bit mode than 64bit mode, but I feel like I see it
+> there too. And when they fail, the console log is full of ANSI escape
+> sequences. Is this specific test a test you run regularly on real
+> hardware?
+>
 
---pnUSAqhgFf5/HBQK
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+It is not only the EFI test but also pytest adding color to the console
+output.
 
-On Tue, Oct 01, 2024 at 01:38:56AM +0200, Heinrich Schuchardt wrote:
-> On 26.09.24 23:59, Simon Glass wrote:
-> > We don't want ANSI characters written in tests since it is a pain to
-> > check the output with ut_assert_nextline() et al.
-> >=20
-> > Provide a way to tests to request that ANSI characters not be sent.
-> >=20
-> > Add a proper function comment while we are here, to encourage others.
-> >=20
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
->=20
-> Please, consider prior review before resubmitting patches.
->=20
-> As responded to all prior submissions:
->=20
-> We want to test the code running on actual machines.
-> We don't want to have sandbox code everywhere.
->=20
-> I cannot see any test that is not passing due to the current behavior.
+When I download a raw LOG and display it with
 
-The pytests for the EFI selftests are unreliable for me, on Raspberry Pi
-3, more often in 32bit mode than 64bit mode, but I feel like I see it
-there too. And when they fail, the console log is full of ANSI escape
-sequences. Is this specific test a test you run regularly on real
-hardware?
+   wget
+https://source.denx.de/u-boot/custodians/u-boot-efi/-/jobs/904222/raw
+   less -r raw
 
---=20
-Tom
+I see the correct colored output. Same when I run
 
---pnUSAqhgFf5/HBQK
-Content-Type: application/pgp-signature; name="signature.asc"
+   cat raw
 
------BEGIN PGP SIGNATURE-----
+If you want to strip ANSI codes from a file, you can use ansi2txt from
+Ubuntu package colorized logs.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmb7QUMACgkQFHw5/5Y0
-tyzPPAv8CN60vREHMKo2tta79vg4sDh50BWJM/Ef9nP5zLGoZcCO14rgj8b6mtma
-K0jpTLI3oLd82+pdsMCgeB0TysC8E5ncBb+e/vWdHWT+hPa4dBxTuKeEXGSsxFeV
-L4JL0iuyvSXE/i6KMamnyIVZeM8TewyR3K+yXoFgU+xI7x5aMKxfhd02YKzyz1KP
-jrXM9LaVu2OSGb2PP5qY8W9FpSViLlL/UXBIsW8ZSmdF9edHXFS/KPyHbNwTmwSC
-zBNt0DUKIQtxDzvAVWlIGH8crPS5FJ8q8W5nS/z9ay/N078fHV4uxsAuAjg6AXHu
-RcvDy3CvncDcq576LYi0vOPf/n1V/+MqG+VFiv1OX0KvLbzhREAH1TmcBeGVvr3U
-wlquhJVuIOoagtkSWkApoBS3hyNuLls9YXauOgUzlEkGYLAbP7+W0AzLHLv9+0tZ
-xPU8ORGoACxfl/X5GQrNAQ+XqIZxRsPxIass8qcgh/Azz/nY40S4iYq4fEPb76Tv
-4mFIX5EE
-=bh++
------END PGP SIGNATURE-----
+   ansi2txt < raw > flat.log
 
---pnUSAqhgFf5/HBQK--
+I typically run UEFI tests interactively on the sandbox, virtual
+machines, and on actual hardware.
+
+lib/efi_selftest/efi_selftest_textoutput.c is specifically used to print
+out all combinations of fore- and background colors.
+
+Furthermore color is used in /lib/efi_selftest/ for:
+
+* start of test
+* success, warning, error
+
+This coloring is not functionally necessary but for my taste makes the
+output easier to read.
+
+test/py/tests/test_efi_selftest.py just has no problems with the color
+output when running:
+
+     if u_boot_console.p.expect(['Summary: 0 failures', 'Press any key']):
+
+While color output in UEFI unit tests as said is not functionally
+necessary in most tests, the current patch tries to suppress ANSI output
+which is functionally necessary and which probably should be tested for.
+
+Best regards
+
+Heinrich
