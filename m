@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2F17CF3180
-	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 20:46:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2A33CF3185
+	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 20:46:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E236D892E3;
-	Tue,  1 Oct 2024 22:45:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 47BE589256;
+	Tue,  1 Oct 2024 22:45:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="i2oRA6kt";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="t+aItcUD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 734C3892E9; Tue,  1 Oct 2024 22:45:06 +0200 (CEST)
+ id 1DC8689221; Tue,  1 Oct 2024 22:45:09 +0200 (CEST)
 Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on20701.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2614::701])
+ (mail-db8eur05on20700.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2614::700])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 443BD89256
- for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 22:45:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 07FB1892E6
+ for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 22:45:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=cNusK87UVFjOMgaiWW0s51GiYV1DJTlbMwN9eXrqh8jtNl6vJUfJApZmmNs+14CBd1L40AbNlZR8xq2ANE/8dpRCw8sB79gnG/9pGk9ufBCjeybLyaxFINuzc9tnUkA3vKdprzuJdmTICGkd6blwzQthebSOEO9/BP84SeAl+vUM/RJuJ4QjCr6rmfmBCPhBw8s8IMEmmBkkogpYmNldGp39CKO3rPbACPJ0o8rD/h2qlAxoftXKPH4gL/Cu9wanKaKOV2ycOCVDw5bN3mMvWNB0h1aRXu2N4CxYwkABUgLlDdS9D+oAHuWhf8cIhJQIIRBtvowaS3pe8VErC0ba2g==
+ b=oehruwbicebLDOgHuDpWuXKLFj3uB+ClXvhTyVdaCP4dAAs0hzyrnG1c7Xz+DHace6xINKZBcsHvhnBXuil8v5E7TFfRQsvaQ+FepbH05O7YiI5b+JWslHbUq3L13mkuQUDU07cZPz4xUYJ3ICWDVscdCM+LAQVI97AkEa0QPHHoX2zVkUweVk2ms2x+O2wE3DyjNpqFpD4x58i9Hwy/2ssE49oZJ88k7UMK8Xerug0q9/O/bWr/yrLQiwxa6mzDkft/h3BZ17eeEilw4aZaI0/+JOHAJNnLlFOOase0mNhc0SqMcczd0SVZiPGd/drlXs1QvxlRRTdsCW45KIlQ/g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=l/6p9hFb4G9HBd9BBmwi2nVPzvtan2Glp8fZHCixB3k=;
- b=BdDXlL+OYxtRuFqq3KNvve3hbPY/IajMiA3x+f6DZsjr5wsqZyish45K9/u8X9cuJLHrtlTsuJ4uYj3Szln+XHdDKHtnSy6OXsWJAIeDShI1dS16BLY8wzvj1MBe4p6/ihyV5lnjVevBtILIft3d5MQ8QKGsySYOR3G5dEn15ciHpYuN+9mtTYU2wSRHWloH+n1fQ+N/VtffVY2bt33slVuUjTOsqqruA5hpm4yI7RJYe5ZvmDvrZPq/WpJ3ClF6JJVXVmzo9MIOWdXD7GgiozFVeDnn3yMfWaSVTjli8B3MU73tgUFm6DdHKMUzujgSEOE5fXnS8RMiWY33eM+S9A==
+ bh=9FVKMCs7g8msQQCy2l/Ny47c+XR4Rl1ZvMK36YZTPu8=;
+ b=pYjfgZ8tsq3+3Rm5kU7Zw1DCkXfHn2zuKCdeggndB2GwAZQX5V8yy3paQIeemf2Kp4+nuCfl5QQIWDeRinxbDeV04lEe2R1Cd8p5KiHeEPK3kysU6528KE0OG8eN9z5XJ8qoJaHmnkU9MVcbQS8aUzUE6fZ7SV0SZt4AQ7aTNqJ2aaxd3Xnhu2D9EaDAZE4C85zXYM9nmIatF5MlTIJVST58riHHRhKCDvlwqcQjHWNseyWSOqaxc1EyNha5N0gVth2OsbFMvvX9XamqDLqS/XnzdKYTBq3LW9UaS/mbh5/gllLWDRi0Tiw9w8QXeI//H1/mS92JSTo88Sb2Rcre3g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=l/6p9hFb4G9HBd9BBmwi2nVPzvtan2Glp8fZHCixB3k=;
- b=i2oRA6ktYJZy39BLzFWerYzqFRuVJbHCAlVx/b/R+qiK+a3k1RyWwalaLwncr0Rat620NvIqDlgAV3+p/CsxLeKxdrl7Bf3AEMjUm2VfLfVC8RGORlxRYbZ0ArXDXi8+2J8GWVR8W/BYT/GCCmrMrB+LVR1x6FdwFLeOmiC7j+PPDxJi7lDFK0m5ywTMYuXayXIgyo7+h6UvbQgprw3ADCzFkbXq5joR2eZjCVPkYPfj4hboEYnNRoP2+wAUpVARAFuWCw1tRiIpMBVdc+MJ63aSdiuGqsNuhiU1AOXcAB7Jce91PrUyCv6q/NMpsZODl1oMAU0LLOY+Xq9O9sV95w==
+ bh=9FVKMCs7g8msQQCy2l/Ny47c+XR4Rl1ZvMK36YZTPu8=;
+ b=t+aItcUDoiGPIG4fkd79CQ3mgOzCyYM/9kyJSreCNfjBUu931XpzgXgFbXkDFc89PG+Lits11YzgpQK5qgDYH3+FKeslVRDwLn3tccsfT9gRFis9cphU5P+fUQa1VxZWNVyN16jrz5W3b9t/XogCpwyxxqYaQEe30dQSoTF2hCVWJX6nm153vApqi7aAtRdIusE75eoHclVue17mgnNuUnXAypJZhoVrvBOjonuQ7rlqHsIAHAKLnyDeH1lzHic8mxW2sA2+tyibt2/gQ12tV6SjxMvE7GM8FgfVHp/gKb8MKGLXf27aAkEJfNVr3mgQgTd8qaeNg/oPDYzLK4OnFA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
  by DU0PR08MB7812.eurprd08.prod.outlook.com (2603:10a6:10:3b4::8) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8026.15; Tue, 1 Oct
- 2024 20:45:02 +0000
+ 2024 20:45:04 +0000
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0%2]) with mapi id 15.20.8026.014; Tue, 1 Oct 2024
- 20:45:02 +0000
+ 20:45:04 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 To: Tom Rini <trini@konsulko.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
@@ -68,9 +68,10 @@ To: Tom Rini <trini@konsulko.com>,
  Miquel Raynal <miquel.raynal@bootlin.com>,
  Max Krummenacher <max.krummenacher@toradex.com>,
  Francesco Dolcini <francesco.dolcini@toradex.com>, u-boot@lists.denx.de
-Subject: [RESEND PATCH v4 08/10] mtd: spinand: more refactoring
-Date: Tue,  1 Oct 2024 23:44:40 +0300
-Message-ID: <20241001204444.917238-9-mikhail.kshevetskiy@iopsys.eu>
+Subject: [RESEND PATCH v4 09/10] mtd: spinand: sync supported flashes with
+ linux-6.10
+Date: Tue,  1 Oct 2024 23:44:41 +0300
+Message-ID: <20241001204444.917238-10-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241001204444.917238-1-mikhail.kshevetskiy@iopsys.eu>
 References: <20241001204444.917238-1-mikhail.kshevetskiy@iopsys.eu>
@@ -82,76 +83,77 @@ X-ClientProxiedBy: GVX0EPF00011B5E.SWEP280.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|DU0PR08MB7812:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4b0b076c-7d9c-441e-bb1e-08dce259ec7d
+X-MS-Office365-Filtering-Correlation-Id: d1916560-6c9f-4cbe-e53b-08dce259ed49
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|7416014|376014|52116014|366016|1800799024|921020|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?359Jagj3e+ylXNBDXgbNFNz1ZmYL13Po45l4BOFeiasDlQbG5COALD6cmzt0?=
- =?us-ascii?Q?7+kYsdHkjU9dHOgDwCmebMiVhYq2ZeU3V4td3WHwxOZjRpR5evH4viDJcrlx?=
- =?us-ascii?Q?f0ZKVwKg0ES9sWQwTEeKHSOb5FiwfFVf8jwrpx0P9z0KAJjs03j+ufHS+mzL?=
- =?us-ascii?Q?ll092QlscenZP/9JGbU1peY90ks32EbeqfFEjfZTMtXHYh/qPy2jEhb+Q7Vs?=
- =?us-ascii?Q?gfg6Pzz9ZtbXb6G7MJErtw7L8UPRXtOvHSWTxkpJcaZEikQThPEQG8WxmJH2?=
- =?us-ascii?Q?0orrkaWyM3j8HqzrrIMJarBJEJ9uC+iksXPMXyJJUXtkkqONx8i+84kT69QH?=
- =?us-ascii?Q?Er+sqodGf6TQkS0QKlSnn71LJoM5rfkWVfqq5HwdlRg9J4DHG90RO6W3Lxjr?=
- =?us-ascii?Q?K6wHJxL8Yf7WWC0ZHKV0ncb/9QRtF7zfFdaG+qvXb2+bwZv67SkEDMJHWX7W?=
- =?us-ascii?Q?y1tnulL5t/7LghUDlCOL/HxLJnkpabK1ukvJejWNAo6PLWgkS04ZbKi4vPpM?=
- =?us-ascii?Q?Bk7QMgb6QxxF+Ue5U1BBsc9KK9ycoZ1/alY/3PWCRPjMzcBhzH7zzJeFv58X?=
- =?us-ascii?Q?DrILOlu54fVZIGZK44gv++n49aBpImfnB+zAfh0AQTfCHWAcYudfHJJHLF+m?=
- =?us-ascii?Q?L52q3ZzGOLtUAHkvkWK6RsqAdNBD5uSZMqOJwNDTZYbdE9qeFI8t9z/OmnRy?=
- =?us-ascii?Q?az7GzunHwAjXefT73C4cSUXepJn3x7nbcFMJbfOtdrNscUI65d+MqDBMQ4Ad?=
- =?us-ascii?Q?DX/8GN5X3qYL4n9wS00tI9Ig6wtCiFjHGHe5S8eSitjxXbzqQYIX0GvLTvPw?=
- =?us-ascii?Q?1TPvqKe+5B5+ufGYaQxJYZTo7+7qx/tgyMPUJP0gRA0kG/tmtlvu8uUUoSBD?=
- =?us-ascii?Q?cAIEh2VD4UCwsgVXd4euY8mExbBuhrC4y4FCwpKgVNmB8BFDoMaCztb3l8++?=
- =?us-ascii?Q?zn/6NcoOBpxbv4BW9epH0yz/fXakbqOJqy4zveW2nGOMBxF5vQv4nPhxQPD0?=
- =?us-ascii?Q?miqnj3MEOGS+vT9eyeEZT0PV9iHNgK9CekXcsYfP1Y7mlZVFSWWr5MOIXRGk?=
- =?us-ascii?Q?s6BN8+IiLmTrzAnV1JgLH905hm6/anQlFYpE5eOkBXWx5kca3rKsVT3ZFvZ3?=
- =?us-ascii?Q?pJ1ABLw+xiPbpj6Z6a9CwKaDREFOCjHg9jdz9c8bqIENKXJu6bI2321LSqIb?=
- =?us-ascii?Q?zcJVUXAvwHvcv+qf9A76vpIZ1mKNxsZTTToH8mj77GQ6LVw833tFxcwYY1YP?=
- =?us-ascii?Q?0c7IQwXQk9YLJ6U8Kky8j22ozZwrTQazkd6SjRIGy8NbTEUirpl8FPXM2mLh?=
- =?us-ascii?Q?uI49sj7KpVB3gASKwoI8eeSdLNb0x16Y+enIyi72hZz+uA=3D=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?8G/7R88yOP88Jle3bNhHVxOJIBtULf5EmxtzYnTaMa6KJXyfEIARBy8TjDHT?=
+ =?us-ascii?Q?z6oUVg1NpRb0N9HNFbCmvAR8cWYx9QwzG6JeSr96LMoXZQxKBBCsN/KBKLUE?=
+ =?us-ascii?Q?pzb0kNJozZNZtpF/hU+iffMeJC+F/SWdrSNI98E7VLDKAtkuYtTBoI07xNEv?=
+ =?us-ascii?Q?Vxe23+nd83zSd9WqeYgHPNyCIOBp3fLCV1hy1rT/p1oXeCHrTA3lJUPMt0B2?=
+ =?us-ascii?Q?TPNIx5l97TFyq2mT0bpPJuUR2EPgIbrYW2+b8HZFsabYUQnUS5mYjezAQOoo?=
+ =?us-ascii?Q?MuwsoDtsuBeCNyJ0vjMx1Sh9f+/ayC1BLE1lIzPhV+j4zMREOJncUiN3F5/g?=
+ =?us-ascii?Q?1r/dv7ICxrdpaWuhTXRjbvVPmEIjUzzESFZsuLiwPzr9fr2gk7rOiv5rRieu?=
+ =?us-ascii?Q?CIEu+R56rygnD4ZYhVjeloccD/gnK1yPPhONt6gcP6R2d8RheGtILtryqNvJ?=
+ =?us-ascii?Q?yK1d3x53vPoe8QmNapO5ZCaM2JKoFhYS7hXLuWV1nEVoE9n0Z8DS2CwDec8n?=
+ =?us-ascii?Q?va67R5WsIFyw7k0e57Ud48bCSxrgqnblHYv4+Xrb7Ja6BT9YOKK8jMIjAZ51?=
+ =?us-ascii?Q?C3abRFX3AFqgzJT8WvXq5M+rQTViK6LiTbRt0Nl4QxhXS2kfpZIKbPP9CsUL?=
+ =?us-ascii?Q?FXG3MMC0pjfp/rtiUgH2NHLonhArTpohuxvc1r8Dn10jSHnySrJeQrLtARMg?=
+ =?us-ascii?Q?FRibxz/jK5N2rcT6Ihn+ylKbwv28PPTNyl2RY8VB+duNeAKmAV60UsmMxLhr?=
+ =?us-ascii?Q?qS6UH5i2FvZodORMNkNwysZiVBmKLDKt7I3EFjYidIfpTZr8SK0awjeQK1ii?=
+ =?us-ascii?Q?HddkFjfmsnwsjSwU3EoeCQ0wMMyeymYo+v1ujRasriwwCnic307hUaOWYlMV?=
+ =?us-ascii?Q?Ub0evwqJr03bBRTvk1pGnG+p+u7X0Ybb2ikwHR6ih7hhYHwp1CFHdURSD6h7?=
+ =?us-ascii?Q?1/XnoxMjLojCaqJW76TR8o5r4FiWKTYTBDYiN6YveuGSEkRvPqK7ckdjsx1x?=
+ =?us-ascii?Q?QNZGLv0PFMlF2tCeHsOqTgTrjJA4UpkzwQ1jz4MqkI1li3SQbqgu2m3GEcdr?=
+ =?us-ascii?Q?AUysG0jwzn1PsYOpeJrxreyDYvSjt6drg3NPa1rvfZ9HVLk/1aNCKgDaNgBq?=
+ =?us-ascii?Q?vkjiXfVpVx5bC/101PeNd11odxk2cOU0YcvN49zpoNqFKwvf8p5b4ilIcA2k?=
+ =?us-ascii?Q?NQBw75OEZnJA6I9ZMQ6V5Zi9ZapQmhbB+KSVVRLxE1BGrvKyng6tIwwnoJPg?=
+ =?us-ascii?Q?ubxMVuBcJsVaa09iNLhqh0QjToqn4PKwemvBaedKM1XX4L6ituRCvTkZu8kS?=
+ =?us-ascii?Q?Byr+qizwWSNGEt1u8BO3zEscJ8BxrKZALo+ujmkprD7voKKIueSh2FwhiY7u?=
+ =?us-ascii?Q?G7Pnlyc=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(7416014)(376014)(52116014)(366016)(1800799024)(921020)(38350700014);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?0tzA6H/ByiAXjSRdQF0Cg2TBAHOaJucNp0WlP2Igem9zJm0qXpmScV85hEva?=
- =?us-ascii?Q?du4RrzEPFA8XwQ92Ertm6TN9F9J5WXxy4LY0IQJv+tg1BS+IjxhL0mWZtqG+?=
- =?us-ascii?Q?f3npGqtmnMcCRtBYCBrlCvl2vavPktPT/9SWsSOHBjVwJxYHRHlYjHGSVQoD?=
- =?us-ascii?Q?xoH1qdWisNFAD8RIFxDLjg6DyA/RKSXKA3P2s0KQvEvRfHKfNlXfISf1JUqK?=
- =?us-ascii?Q?gSp4ejS6ghh+UHJHNuDaQBCPmCAeHodD3FdnYHKe6Sv4y4OLnEtAoS8z2Dpv?=
- =?us-ascii?Q?RMJ3PIZlCyYkScl+MB4vJTFLVv2w8xNjcrWv2SyM6sK9pSVAspu1tzk6e/L7?=
- =?us-ascii?Q?iKEHosHIRuWunPRcprLZN4oTjIY6YNHzShQg0tgDQF7TJQ9e5W48wPOpwT66?=
- =?us-ascii?Q?B+rTCdImFTUS7D3aPoqPjpKASecxyIo7VO5Rat2x8HC/9QBPOZXINwsN20Cc?=
- =?us-ascii?Q?Pfa8jCZfpxFg/tr0CihvAWohOySsuQvNxhRiBl7TMo8OeU+H0jwwpWCYgj+1?=
- =?us-ascii?Q?jndqf5gKZnzL5y2ktSrmo5QypP/oREeqp/6ugoeGKHCd/G0TvDm0WpQWBGcY?=
- =?us-ascii?Q?NqdBpUxiLwM/Nmau0EBdCM2gb3oeHOm86FLbCqScKv9edmpFHyEEUefoZlR1?=
- =?us-ascii?Q?xGSKwfh4oavy7WiHNhopkJkBFQdSujaOtQzHixrwZEs6gTwMNF4yyGa1+Dx8?=
- =?us-ascii?Q?klWpAkVYnk+NgqwcNY001OGC3ORSZuTgqL30reY6UcPLIRpLe9YVbKOp3w0T?=
- =?us-ascii?Q?CjQ8q6Zxo2oOAjnBcMiQTtWw+h1H59Q7lfM17+e3ByrE/Mav+D3Ar2NxuIdy?=
- =?us-ascii?Q?qxgS94C3sxYb4i7tgwGf2ryhAyAgRPVHm0jh6gkak544gbYCnqATC3EztRpu?=
- =?us-ascii?Q?T2ag8rLnBGERXEX1hQob4RYqjsQF19Lr7Sk+CUJiQLhjeNT+GnGw9bMZ5xCj?=
- =?us-ascii?Q?hzNfVWarLFK5MjpBWNew9TJqY3uGdU7CePdGHk71jpXUkGIo9yu2FflPvI8O?=
- =?us-ascii?Q?RI/wcP4PdTAbNU9MVudqDNY8AlLdvwnkLXP0t6Z6txLvOh1uK9e6TcJVX/CD?=
- =?us-ascii?Q?PMxjpjeLUGW7B/TE+TukgtfPSDqzztAlE+yw4VkOqf94h35rd21PKxRptBIE?=
- =?us-ascii?Q?ChdW2pPqA3RNkOIAZhpNaYg2slI8IGu6PDRkW9P8eOtkl1tqZ3mFtfnUHycC?=
- =?us-ascii?Q?Bc1WGUF3rDjFHrgh5T8kMK1Hj83jVf4Gku+hClqTEDA6b68dM+CAkpMxH0Tb?=
- =?us-ascii?Q?LXgxJG/G0njTK3A6hL0zOQ3SRFWLK2r0CkJauuSgen8tjCNzzPvjC6Al4gM9?=
- =?us-ascii?Q?jhxL0IPchdW2C2sLZiGrowF9Xjd3yq6noyzj0Y8LapOPD1uv/4pvAIGima4G?=
- =?us-ascii?Q?883sQP8xMUajMXRaZYc37P0YUbRdnh03sqIXGD+CcaWQ1eBOqAfq8AUVYRGs?=
- =?us-ascii?Q?rCvU/rdLiFNhPNOybdw5K3kFHLZoM/ufS4/0vTEcsqutSu6BLhb2/OdSNDz1?=
- =?us-ascii?Q?NZLvABOUobI1GcH07SXSc+ywMk2iOFFU0K8OKvZm2+OWiaICgjiWG1fRmw5x?=
- =?us-ascii?Q?zDWJqo0IGdGDpNkkxVUvku+rxlXmIE7sykuJkU1AsYCpsjE0HObdw9LV/dBO?=
- =?us-ascii?Q?Bx5+WfAM00dKtfb8IdvbSCk=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?oXkJcXqoSIBqaS7TSZio4M6AaGZHyFj1ymyugfcTwiyGWPRRwq6yjKHJNonL?=
+ =?us-ascii?Q?mdVXJfkELgYy+Z2D+4ADDnohtIHXMLlsPhF7afa5lj2ukZRVV24D0t9D0Jn7?=
+ =?us-ascii?Q?iL/mdLVANAOc1kqwSNt1QYfpdFOym2MtaHuIf/8gbtWTCX2Faz7/K7sPWng/?=
+ =?us-ascii?Q?cS3EKfwmPboMhumX/LuWxGqCDu43x+dtu43E7cufQks4OE/8fBpj9HxUfBAC?=
+ =?us-ascii?Q?+7f/WJYx3JsPKJwewbIAfBL4kiBqLRJeojzqgNt1W+lI4eD55zcqwF3QHhSo?=
+ =?us-ascii?Q?zmEMvZZEbwUVpt2tXHHzgyv/FpoIt0tkiy8BhVD8OXhEKDwwb/oPCdxQIYZd?=
+ =?us-ascii?Q?fmQngqPW6vY2z8Wnc2i9frgsce8jbuJ0XsmATD8+Vsm8x7A9UiIC9dFnCBUq?=
+ =?us-ascii?Q?hgNhrkM/cxGu2b/9yTCRnKJemWQ+waazx+8poJp56vmOM26xid7xp4gLzOJ/?=
+ =?us-ascii?Q?4OpaHRde4r9Jf4RpXOzbwUJPwzcyGOm/leY8xyE4s0MfDGT3wi9zZpRyrNDR?=
+ =?us-ascii?Q?AsRGUwxLsp6TgOOpmsmlPSf5Oa6LN5jZPdqUqqlHhAf+ZjEues7tQpP8uQE/?=
+ =?us-ascii?Q?4utWl15pPq64v8K5GiTBsKOCqp+tWq6i3mPRE38Xa2rB7MpnGkU2i4pD6kZc?=
+ =?us-ascii?Q?efzeqhJzmiwOW52bhi6KtKv/ftVo0f/mLl6sPA/rOhWbLJlOVGjhQ0KrvvKo?=
+ =?us-ascii?Q?d3bIhRSSMew1BCysjJHQoBgchzCIRZ1uUAOPy9x+Z8KDNndoZiUPZ3KcN7m3?=
+ =?us-ascii?Q?+JjoJaxXv/MAN6ArwXBrFca+OqgdSKDoBxMmLom6l2VSz2uTlcOcuOlGJ1Rb?=
+ =?us-ascii?Q?lzx/0FypCST3y67Z0MF2ckuHK64iimZBFSD3XJS4rZ7Z0nWGMrjpzTWZNVCQ?=
+ =?us-ascii?Q?CCh8HZ91V1Wm6+Ry9dGiA0raPoGio1IbuPFRuDwb4QNLyBygTxmnngAFnaCx?=
+ =?us-ascii?Q?Jcgecqx9qpaxpnDT+IEtwI6os/r+tlQ4qB6ivQfRdCO66jPo2appmuHUY1RI?=
+ =?us-ascii?Q?BcPGnWJgf5EKFb9hLhtM6LpZz14qRJspmQ9s0HDmjBgGMQDyDiesajTCH3pT?=
+ =?us-ascii?Q?MHco1Bq91UWZ+U0fPURsnrMYVdabd/wc97a+QiMCW8iPv0/Ag4AxX1L08edV?=
+ =?us-ascii?Q?+e2EZS4wYqEkOsN5iS8zlHirQ38hDq48GogSC0VY+Jd8Hep/dnukGMjmdxWd?=
+ =?us-ascii?Q?NdsNi5A5yJ6r5eHWrg09bv9B6jSY8bLzMe3HO2mTCl0QZMO50g8cmODP/beE?=
+ =?us-ascii?Q?3fr29lZui3HhrmcGfWB7n+M+ATWQhvRvZ5MVuAiSesMGiJFUqihJ69qAk5N2?=
+ =?us-ascii?Q?iBscZ2yZraC1zJF/kAP+tYyHx/rBpGGEdzY9NK9zKr5/pWlRgCniHVYDlML/?=
+ =?us-ascii?Q?oQgFaoNtcQkake5zzVeq20NKxLw7rKuIvCMCAPXl3ZVW4iE7jjwRoPmJoP8j?=
+ =?us-ascii?Q?7B2etHa87+2wae8zWHi2MzIBFyvUCEvmaDp18tu9ZoIh9RqYbIB1v1doejK8?=
+ =?us-ascii?Q?mDe2Xv7GZdMiwwl7Crc+c/xMCEVFHBpWMiH9OmrR4kJrTFG8jdjZPIa4FkTY?=
+ =?us-ascii?Q?ynZCdP3lw4QeILMaI4bM0CJ3+Atwef6cW7Xn52Sz3+QEDPq+6Np4D4748Jup?=
+ =?us-ascii?Q?sBDZI1xUv3V0ZToGViF+qiY=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4b0b076c-7d9c-441e-bb1e-08dce259ec7d
+X-MS-Exchange-CrossTenant-Network-Message-Id: d1916560-6c9f-4cbe-e53b-08dce259ed49
 X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Oct 2024 20:45:02.8850 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Oct 2024 20:45:04.2808 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: jgoeQ82Eog/TLoV/x8U1qlpJO0DK2S1xcyTLSVLAXGAoL2t/RSUDvVW7aCVyCRHs9VpkxXrJYAM8h6JuRqesIec8qVarj8Vg90nBCyd62VA=
+X-MS-Exchange-CrossTenant-UserPrincipalName: HNzyO60T+TjmSWwE5jXup8VoiB1/bvDFlgdZKKqil40Gch7vWaOb53cAMBh2OAIrsTILcO2gpMVFyPr1Qsq++KtAyYntWzCZmFmarT6nQOc=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR08MB7812
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -169,49 +171,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-changes:
- * Move spinand_check_ecc_status(), spinand_noecc_ooblayout_ecc(),
-   spinand_noecc_ooblayout_free() and spinand_noecc_ooblayout close
-   to each other.
- * some code formatting
- * remove comments not present in linux driver
-
-This make code more close to linux-6.10 kernel driver
-
 Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 ---
- drivers/mtd/nand/spi/core.c | 115 +++++++++++++++++-------------------
- 1 file changed, 55 insertions(+), 60 deletions(-)
+ drivers/mtd/nand/spi/Makefile         |   4 +-
+ drivers/mtd/nand/spi/alliancememory.c | 155 ++++++++++++++++++++
+ drivers/mtd/nand/spi/ato.c            |  84 +++++++++++
+ drivers/mtd/nand/spi/core.c           |   5 +-
+ drivers/mtd/nand/spi/esmt.c           |  16 ++-
+ drivers/mtd/nand/spi/foresee.c        |  97 +++++++++++++
+ drivers/mtd/nand/spi/gigadevice.c     | 194 +++++++++++++++++++++++++-
+ drivers/mtd/nand/spi/macronix.c       |  25 +++-
+ drivers/mtd/nand/spi/toshiba.c        |  33 +++++
+ drivers/mtd/nand/spi/winbond.c        |  57 ++++++++
+ include/linux/mtd/spinand.h           |   5 +-
+ 11 files changed, 664 insertions(+), 11 deletions(-)
+ create mode 100644 drivers/mtd/nand/spi/alliancememory.c
+ create mode 100644 drivers/mtd/nand/spi/ato.c
+ create mode 100644 drivers/mtd/nand/spi/foresee.c
 
-diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
-index 6ca8b7c80cc..548a7144ee3 100644
---- a/drivers/mtd/nand/spi/core.c
-+++ b/drivers/mtd/nand/spi/core.c
-@@ -222,6 +222,59 @@ static int spinand_ecc_enable(struct spinand_device *spinand,
- 			       enable ? CFG_ECC_ENABLE : 0);
- }
+diff --git a/drivers/mtd/nand/spi/Makefile b/drivers/mtd/nand/spi/Makefile
+index 65b836b34ca..d438747cf37 100644
+--- a/drivers/mtd/nand/spi/Makefile
++++ b/drivers/mtd/nand/spi/Makefile
+@@ -1,5 +1,5 @@
+ # SPDX-License-Identifier: GPL-2.0
  
-+static int spinand_check_ecc_status(struct spinand_device *spinand, u8 status)
+-spinand-objs := core.o esmt.o gigadevice.o macronix.o micron.o paragon.o
+-spinand-objs += toshiba.o winbond.o xtx.o
++spinand-objs := core.o alliancememory.o ato.o esmt.o foresee.o gigadevice.o macronix.o
++spinand-objs += micron.o paragon.o toshiba.o winbond.o xtx.o
+ obj-$(CONFIG_MTD_SPI_NAND) += spinand.o
+diff --git a/drivers/mtd/nand/spi/alliancememory.c b/drivers/mtd/nand/spi/alliancememory.c
+new file mode 100644
+index 00000000000..e29e4cc77ec
+--- /dev/null
++++ b/drivers/mtd/nand/spi/alliancememory.c
+@@ -0,0 +1,155 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Author: Mario Kicherer <dev@kicherer.org>
++ */
++
++#ifndef __UBOOT__
++#include <linux/device.h>
++#include <linux/kernel.h>
++#endif
++#include <linux/mtd/spinand.h>
++
++#define SPINAND_MFR_ALLIANCEMEMORY	0x52
++
++#define AM_STATUS_ECC_BITMASK		(3 << 4)
++
++#define AM_STATUS_ECC_NONE_DETECTED	(0 << 4)
++#define AM_STATUS_ECC_CORRECTED		(1 << 4)
++#define AM_STATUS_ECC_ERRORED		(2 << 4)
++#define AM_STATUS_ECC_MAX_CORRECTED	(3 << 4)
++
++static SPINAND_OP_VARIANTS(read_cache_variants,
++		SPINAND_PAGE_READ_FROM_CACHE_QUADIO_OP(0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_X4_OP(0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_DUALIO_OP(0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_X2_OP(0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_OP(true, 0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_OP(false, 0, 1, NULL, 0));
++
++static SPINAND_OP_VARIANTS(write_cache_variants,
++			   SPINAND_PROG_LOAD_X4(true, 0, NULL, 0),
++			   SPINAND_PROG_LOAD(true, 0, NULL, 0));
++
++static SPINAND_OP_VARIANTS(update_cache_variants,
++			   SPINAND_PROG_LOAD_X4(false, 0, NULL, 0),
++			   SPINAND_PROG_LOAD(false, 0, NULL, 0));
++
++static int am_get_eccsize(struct mtd_info *mtd)
 +{
-+	struct nand_device *nand = spinand_to_nand(spinand);
++	if (mtd->oobsize == 64)
++		return 0x20;
++	else if (mtd->oobsize == 128)
++		return 0x38;
++	else if (mtd->oobsize == 256)
++		return 0x70;
++	else
++		return -EINVAL;
++}
 +
-+	if (spinand->eccinfo.get_status)
-+		return spinand->eccinfo.get_status(spinand, status);
++static int am_ooblayout_ecc(struct mtd_info *mtd, int section,
++			    struct mtd_oob_region *region)
++{
++	int ecc_bytes;
 +
-+	switch (status & STATUS_ECC_MASK) {
-+	case STATUS_ECC_NO_BITFLIPS:
++	ecc_bytes = am_get_eccsize(mtd);
++	if (ecc_bytes < 0)
++		return ecc_bytes;
++
++	region->offset = mtd->oobsize - ecc_bytes;
++	region->length = ecc_bytes;
++
++	return 0;
++}
++
++static int am_ooblayout_free(struct mtd_info *mtd, int section,
++			     struct mtd_oob_region *region)
++{
++	int ecc_bytes;
++
++	if (section)
++		return -ERANGE;
++
++	ecc_bytes = am_get_eccsize(mtd);
++	if (ecc_bytes < 0)
++		return ecc_bytes;
++
++	/*
++	 * It is unclear how many bytes are used for the bad block marker. We
++	 * reserve the common two bytes here.
++	 *
++	 * The free area in this kind of flash is divided into chunks where the
++	 * first 4 bytes of each chunk are unprotected. The number of chunks
++	 * depends on the specific model. The models with 4096+256 bytes pages
++	 * have 8 chunks, the others 4 chunks.
++	 */
++
++	region->offset = 2;
++	region->length = mtd->oobsize - 2 - ecc_bytes;
++
++	return 0;
++}
++
++static const struct mtd_ooblayout_ops am_ooblayout = {
++	.ecc = am_ooblayout_ecc,
++	.rfree = am_ooblayout_free,
++};
++
++static int am_ecc_get_status(struct spinand_device *spinand, u8 status)
++{
++	switch (status & AM_STATUS_ECC_BITMASK) {
++	case AM_STATUS_ECC_NONE_DETECTED:
 +		return 0;
 +
-+	case STATUS_ECC_HAS_BITFLIPS:
++	case AM_STATUS_ECC_CORRECTED:
 +		/*
-+		 * We have no way to know exactly how many bitflips have been
-+		 * fixed, so let's return the maximum possible value so that
-+		 * wear-leveling layers move the data immediately.
++		 * use oobsize to determine the flash model and the maximum of
++		 * correctable errors and return maximum - 1 by convention
 +		 */
-+		return nand->eccreq.strength;
++		if (spinand->base.mtd->oobsize == 64)
++			return 3;
++		else
++			return 7;
 +
-+	case STATUS_ECC_UNCOR_ERROR:
++	case AM_STATUS_ECC_ERRORED:
 +		return -EBADMSG;
++
++	case AM_STATUS_ECC_MAX_CORRECTED:
++		/*
++		 * use oobsize to determine the flash model and the maximum of
++		 * correctable errors
++		 */
++		if (spinand->base.mtd->oobsize == 64)
++			return 4;
++		else
++			return 8;
 +
 +	default:
 +		break;
@@ -220,14 +339,225 @@ index 6ca8b7c80cc..548a7144ee3 100644
 +	return -EINVAL;
 +}
 +
-+static int spinand_noecc_ooblayout_ecc(struct mtd_info *mtd, int section,
-+				       struct mtd_oob_region *region)
++static const struct spinand_info alliancememory_spinand_table[] = {
++	SPINAND_INFO("AS5F34G04SND",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x2f),
++		     NAND_MEMORG(1, 2048, 128, 64, 4096, 80, 1, 1, 1),
++		     NAND_ECCREQ(4, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&am_ooblayout,
++				     am_ecc_get_status)),
++};
++
++static const struct spinand_manufacturer_ops alliancememory_spinand_manuf_ops = {
++};
++
++const struct spinand_manufacturer alliancememory_spinand_manufacturer = {
++	.id = SPINAND_MFR_ALLIANCEMEMORY,
++	.name = "AllianceMemory",
++	.chips = alliancememory_spinand_table,
++	.nchips = ARRAY_SIZE(alliancememory_spinand_table),
++	.ops = &alliancememory_spinand_manuf_ops,
++};
+diff --git a/drivers/mtd/nand/spi/ato.c b/drivers/mtd/nand/spi/ato.c
+new file mode 100644
+index 00000000000..f0d4436cf45
+--- /dev/null
++++ b/drivers/mtd/nand/spi/ato.c
+@@ -0,0 +1,84 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (C) 2022 Aidan MacDonald
++ *
++ * Author: Aidan MacDonald <aidanmacdonald.0x0@gmail.com>
++ */
++
++#ifndef __UBOOT__
++#include <linux/device.h>
++#include <linux/kernel.h>
++#endif
++#include <linux/mtd/spinand.h>
++
++#define SPINAND_MFR_ATO		0x9b
++
++static SPINAND_OP_VARIANTS(read_cache_variants,
++		SPINAND_PAGE_READ_FROM_CACHE_X4_OP(0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_OP(true, 0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_OP(false, 0, 1, NULL, 0));
++
++static SPINAND_OP_VARIANTS(write_cache_variants,
++		SPINAND_PROG_LOAD_X4(true, 0, NULL, 0),
++		SPINAND_PROG_LOAD(true, 0, NULL, 0));
++
++static SPINAND_OP_VARIANTS(update_cache_variants,
++		SPINAND_PROG_LOAD_X4(false, 0, NULL, 0),
++		SPINAND_PROG_LOAD(false, 0, NULL, 0));
++
++static int ato25d1ga_ooblayout_ecc(struct mtd_info *mtd, int section,
++				   struct mtd_oob_region *region)
++{
++	if (section > 3)
++		return -ERANGE;
++
++	region->offset = (16 * section) + 8;
++	region->length = 8;
++	return 0;
++}
++
++static int ato25d1ga_ooblayout_free(struct mtd_info *mtd, int section,
++				    struct mtd_oob_region *region)
++{
++	if (section > 3)
++		return -ERANGE;
++
++	if (section) {
++		region->offset = (16 * section);
++		region->length = 8;
++	} else {
++		/* first byte of section 0 is reserved for the BBM */
++		region->offset = 1;
++		region->length = 7;
++	}
++
++	return 0;
++}
++
++static const struct mtd_ooblayout_ops ato25d1ga_ooblayout = {
++	.ecc = ato25d1ga_ooblayout_ecc,
++	.rfree = ato25d1ga_ooblayout_free,
++};
++
++static const struct spinand_info ato_spinand_table[] = {
++	SPINAND_INFO("ATO25D1GA",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x12),
++		     NAND_MEMORG(1, 2048, 64, 64, 1024, 20, 1, 1, 1),
++		     NAND_ECCREQ(1, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&ato25d1ga_ooblayout, NULL)),
++};
++
++static const struct spinand_manufacturer_ops ato_spinand_manuf_ops = {
++};
++
++const struct spinand_manufacturer ato_spinand_manufacturer = {
++	.id = SPINAND_MFR_ATO,
++	.name = "ATO",
++	.chips = ato_spinand_table,
++	.nchips = ARRAY_SIZE(ato_spinand_table),
++	.ops = &ato_spinand_manuf_ops,
++};
+diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
+index 548a7144ee3..d5cb9026246 100644
+--- a/drivers/mtd/nand/spi/core.c
++++ b/drivers/mtd/nand/spi/core.c
+@@ -866,13 +866,16 @@ static const struct nand_ops spinand_ops = {
+ };
+ 
+ static const struct spinand_manufacturer *spinand_manufacturers[] = {
++	&alliancememory_spinand_manufacturer,
++	&ato_spinand_manufacturer,
++	&esmt_c8_spinand_manufacturer,
++	&foresee_spinand_manufacturer,
+ 	&gigadevice_spinand_manufacturer,
+ 	&macronix_spinand_manufacturer,
+ 	&micron_spinand_manufacturer,
+ 	&paragon_spinand_manufacturer,
+ 	&toshiba_spinand_manufacturer,
+ 	&winbond_spinand_manufacturer,
+-	&esmt_c8_spinand_manufacturer,
+ 	&xtx_spinand_manufacturer,
+ };
+ 
+diff --git a/drivers/mtd/nand/spi/esmt.c b/drivers/mtd/nand/spi/esmt.c
+index 7e07b26827a..23be098b885 100644
+--- a/drivers/mtd/nand/spi/esmt.c
++++ b/drivers/mtd/nand/spi/esmt.c
+@@ -106,7 +106,8 @@ static const struct mtd_ooblayout_ops f50l1g41lb_ooblayout = {
+ 
+ static const struct spinand_info esmt_c8_spinand_table[] = {
+ 	SPINAND_INFO("F50L1G41LB",
+-		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x01),
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x01, 0x7f,
++				0x7f, 0x7f),
+ 		     NAND_MEMORG(1, 2048, 64, 64, 1024, 20, 1, 1, 1),
+ 		     NAND_ECCREQ(1, 512),
+ 		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
+@@ -115,7 +116,8 @@ static const struct spinand_info esmt_c8_spinand_table[] = {
+ 		     0,
+ 		     SPINAND_ECCINFO(&f50l1g41lb_ooblayout, NULL)),
+ 	SPINAND_INFO("F50D1G41LB",
+-		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x11),
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x11, 0x7f,
++				0x7f, 0x7f),
+ 		     NAND_MEMORG(1, 2048, 64, 64, 1024, 20, 1, 1, 1),
+ 		     NAND_ECCREQ(1, 512),
+ 		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
+@@ -123,6 +125,16 @@ static const struct spinand_info esmt_c8_spinand_table[] = {
+ 					      &update_cache_variants),
+ 		     0,
+ 		     SPINAND_ECCINFO(&f50l1g41lb_ooblayout, NULL)),
++	SPINAND_INFO("F50D2G41KA",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x51, 0x7f,
++				0x7f, 0x7f),
++		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&f50l1g41lb_ooblayout, NULL)),
+ };
+ 
+ static const struct spinand_manufacturer_ops esmt_spinand_manuf_ops = {
+diff --git a/drivers/mtd/nand/spi/foresee.c b/drivers/mtd/nand/spi/foresee.c
+new file mode 100644
+index 00000000000..7d141cdd658
+--- /dev/null
++++ b/drivers/mtd/nand/spi/foresee.c
+@@ -0,0 +1,97 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2023, SberDevices. All Rights Reserved.
++ *
++ * Author: Martin Kurbanov <mmkurbanov@salutedevices.com>
++ */
++
++#ifndef __UBOOT__
++#include <linux/device.h>
++#include <linux/kernel.h>
++#endif
++#include <linux/mtd/spinand.h>
++
++#define SPINAND_MFR_FORESEE		0xCD
++
++static SPINAND_OP_VARIANTS(read_cache_variants,
++		SPINAND_PAGE_READ_FROM_CACHE_X4_OP(0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_X2_OP(0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_OP(true, 0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_OP(false, 0, 1, NULL, 0));
++
++static SPINAND_OP_VARIANTS(write_cache_variants,
++		SPINAND_PROG_LOAD_X4(true, 0, NULL, 0),
++		SPINAND_PROG_LOAD(true, 0, NULL, 0));
++
++static SPINAND_OP_VARIANTS(update_cache_variants,
++		SPINAND_PROG_LOAD_X4(false, 0, NULL, 0),
++		SPINAND_PROG_LOAD(false, 0, NULL, 0));
++
++static int f35sqa002g_ooblayout_ecc(struct mtd_info *mtd, int section,
++				    struct mtd_oob_region *region)
 +{
 +	return -ERANGE;
 +}
 +
-+static int spinand_noecc_ooblayout_free(struct mtd_info *mtd, int section,
-+					struct mtd_oob_region *region)
++static int f35sqa002g_ooblayout_free(struct mtd_info *mtd, int section,
++				     struct mtd_oob_region *region)
 +{
 +	if (section)
 +		return -ERANGE;
@@ -239,104 +569,507 @@ index 6ca8b7c80cc..548a7144ee3 100644
 +	return 0;
 +}
 +
-+static const struct mtd_ooblayout_ops spinand_noecc_ooblayout = {
-+	.ecc = spinand_noecc_ooblayout_ecc,
-+	.rfree = spinand_noecc_ooblayout_free,
++static const struct mtd_ooblayout_ops f35sqa002g_ooblayout = {
++	.ecc = f35sqa002g_ooblayout_ecc,
++	.rfree = f35sqa002g_ooblayout_free,
 +};
 +
- static int spinand_write_enable_op(struct spinand_device *spinand)
++static int f35sqa002g_ecc_get_status(struct spinand_device *spinand, u8 status)
++{
++	struct nand_device *nand = spinand_to_nand(spinand);
++
++	switch (status & STATUS_ECC_MASK) {
++	case STATUS_ECC_NO_BITFLIPS:
++		return 0;
++
++	case STATUS_ECC_HAS_BITFLIPS:
++		return nand->eccreq.strength;
++
++	default:
++		break;
++	}
++
++	/* More than 1-bit error was detected in one or more sectors and
++	 * cannot be corrected.
++	 */
++	return -EBADMSG;
++}
++
++static const struct spinand_info foresee_spinand_table[] = {
++	SPINAND_INFO("F35SQA002G",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x72, 0x72),
++		     NAND_MEMORG(1, 2048, 64, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(1, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&f35sqa002g_ooblayout,
++				     f35sqa002g_ecc_get_status)),
++};
++
++static const struct spinand_manufacturer_ops foresee_spinand_manuf_ops = {
++};
++
++const struct spinand_manufacturer foresee_spinand_manufacturer = {
++	.id = SPINAND_MFR_FORESEE,
++	.name = "FORESEE",
++	.chips = foresee_spinand_table,
++	.nchips = ARRAY_SIZE(foresee_spinand_table),
++	.ops = &foresee_spinand_manuf_ops,
++};
+diff --git a/drivers/mtd/nand/spi/gigadevice.c b/drivers/mtd/nand/spi/gigadevice.c
+index f2ecf47f8d4..f3608a13d8e 100644
+--- a/drivers/mtd/nand/spi/gigadevice.c
++++ b/drivers/mtd/nand/spi/gigadevice.c
+@@ -43,6 +43,22 @@ static SPINAND_OP_VARIANTS(read_cache_variants_f,
+ 		SPINAND_PAGE_READ_FROM_CACHE_OP_3A(true, 0, 1, NULL, 0),
+ 		SPINAND_PAGE_READ_FROM_CACHE_OP_3A(false, 0, 0, NULL, 0));
+ 
++static SPINAND_OP_VARIANTS(read_cache_variants_1gq5,
++		SPINAND_PAGE_READ_FROM_CACHE_QUADIO_OP(0, 2, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_X4_OP(0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_DUALIO_OP(0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_X2_OP(0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_OP(true, 0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_OP(false, 0, 1, NULL, 0));
++
++static SPINAND_OP_VARIANTS(read_cache_variants_2gq5,
++		SPINAND_PAGE_READ_FROM_CACHE_QUADIO_OP(0, 4, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_X4_OP(0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_DUALIO_OP(0, 2, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_X2_OP(0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_OP(true, 0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_OP(false, 0, 1, NULL, 0));
++
+ static SPINAND_OP_VARIANTS(write_cache_variants,
+ 		SPINAND_PROG_LOAD_X4(true, 0, NULL, 0),
+ 		SPINAND_PROG_LOAD(true, 0, NULL, 0));
+@@ -174,7 +190,7 @@ static int gd5fxgq4uexxg_ecc_get_status(struct spinand_device *spinand,
  {
- 	struct spi_mem_op op = SPINAND_WR_EN_DIS_OP(true);
-@@ -413,9 +466,8 @@ out:
- static int spinand_read_id_op(struct spinand_device *spinand, u8 naddr,
- 			      u8 ndummy, u8 *buf)
- {
--	struct spi_mem_op op = SPINAND_READID_OP(naddr, ndummy,
--						 spinand->scratchbuf,
--						 SPINAND_MAX_ID_LEN);
-+	struct spi_mem_op op = SPINAND_READID_OP(
-+		naddr, ndummy, spinand->scratchbuf, SPINAND_MAX_ID_LEN);
+ 	u8 status2;
+ 	struct spi_mem_op op = SPINAND_GET_FEATURE_OP(GD5FXGQXXEXXG_REG_STATUS2,
+-						      &status2);
++						      spinand->scratchbuf);
  	int ret;
  
- 	ret = spi_mem_exec_op(spinand->slave, &op);
-@@ -445,35 +497,6 @@ static int spinand_lock_block(struct spinand_device *spinand, u8 lock)
- 	return spinand_write_reg_op(spinand, REG_BLOCK_LOCK, lock);
- }
+ 	switch (status & STATUS_ECC_MASK) {
+@@ -195,6 +211,7 @@ static int gd5fxgq4uexxg_ecc_get_status(struct spinand_device *spinand,
+ 		 * report the maximum of 4 in this case
+ 		 */
+ 		/* bits sorted this way (3...0): ECCS1,ECCS0,ECCSE1,ECCSE0 */
++		status2 = *(spinand->scratchbuf);
+ 		return ((status & STATUS_ECC_MASK) >> 2) |
+ 			((status2 & STATUS_ECC_MASK) >> 4);
  
--static int spinand_check_ecc_status(struct spinand_device *spinand, u8 status)
--{
--	struct nand_device *nand = spinand_to_nand(spinand);
--
--	if (spinand->eccinfo.get_status)
--		return spinand->eccinfo.get_status(spinand, status);
--
--	switch (status & STATUS_ECC_MASK) {
--	case STATUS_ECC_NO_BITFLIPS:
--		return 0;
--
--	case STATUS_ECC_HAS_BITFLIPS:
--		/*
--		 * We have no way to know exactly how many bitflips have been
--		 * fixed, so let's return the maximum possible value so that
--		 * wear-leveling layers move the data immediately.
--		 */
--		return nand->eccreq.strength;
--
--	case STATUS_ECC_UNCOR_ERROR:
--		return -EBADMSG;
--
--	default:
--		break;
--	}
--
--	return -EINVAL;
--}
--
- static int spinand_read_page(struct spinand_device *spinand,
- 			     const struct nand_page_io_req *req,
- 			     bool ecc_enabled)
-@@ -1056,30 +1079,6 @@ static int spinand_detect(struct spinand_device *spinand)
- 	return 0;
- }
- 
--static int spinand_noecc_ooblayout_ecc(struct mtd_info *mtd, int section,
--				       struct mtd_oob_region *region)
--{
--	return -ERANGE;
--}
--
--static int spinand_noecc_ooblayout_free(struct mtd_info *mtd, int section,
--					struct mtd_oob_region *region)
--{
--	if (section)
--		return -ERANGE;
--
--	/* Reserve 2 bytes for the BBM. */
--	region->offset = 2;
--	region->length = 62;
--
--	return 0;
--}
--
--static const struct mtd_ooblayout_ops spinand_noecc_ooblayout = {
--	.ecc = spinand_noecc_ooblayout_ecc,
--	.rfree = spinand_noecc_ooblayout_free,
--};
--
- static int spinand_init_flash(struct spinand_device *spinand)
+@@ -216,7 +233,7 @@ static int gd5fxgq5xexxg_ecc_get_status(struct spinand_device *spinand,
  {
- 	struct udevice *dev = spinand->slave->dev;
-@@ -1169,10 +1168,6 @@ static int spinand_init(struct spinand_device *spinand)
- 	if (ret)
- 		goto err_manuf_cleanup;
+ 	u8 status2;
+ 	struct spi_mem_op op = SPINAND_GET_FEATURE_OP(GD5FXGQXXEXXG_REG_STATUS2,
+-						      &status2);
++						      spinand->scratchbuf);
+ 	int ret;
  
--	/*
--	 * Right now, we don't support ECC, so let the whole oob
--	 * area is available for user.
--	 */
- 	mtd->_read_oob = spinand_mtd_read;
- 	mtd->_write_oob = spinand_mtd_write;
- 	mtd->_block_isbad = spinand_mtd_block_isbad;
+ 	switch (status & STATUS_ECC_MASK) {
+@@ -236,6 +253,7 @@ static int gd5fxgq5xexxg_ecc_get_status(struct spinand_device *spinand,
+ 		 * 1 ... 4 bits are flipped (and corrected)
+ 		 */
+ 		/* bits sorted this way (1...0): ECCSE1, ECCSE0 */
++		status2 = *(spinand->scratchbuf);
+ 		return ((status2 & STATUS_ECC_MASK) >> 4) + 1;
+ 
+ 	case STATUS_ECC_UNCOR_ERROR:
+@@ -329,6 +347,36 @@ static const struct spinand_info gigadevice_spinand_table[] = {
+ 		     SPINAND_HAS_QE_BIT,
+ 		     SPINAND_ECCINFO(&gd5fxgqx_variant2_ooblayout,
+ 				     gd5fxgq4uexxg_ecc_get_status)),
++	SPINAND_INFO("GD5F1GQ4RExxG",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0xc1),
++		     NAND_MEMORG(1, 2048, 128, 64, 1024, 20, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&gd5fxgqx_variant2_ooblayout,
++				     gd5fxgq4uexxg_ecc_get_status)),
++	SPINAND_INFO("GD5F2GQ4UExxG",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0xd2),
++		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&gd5fxgqx_variant2_ooblayout,
++				     gd5fxgq4uexxg_ecc_get_status)),
++	SPINAND_INFO("GD5F2GQ4RExxG",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0xc2),
++		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&gd5fxgqx_variant2_ooblayout,
++				     gd5fxgq4uexxg_ecc_get_status)),
+ 	SPINAND_INFO("GD5F1GQ4UFxxG",
+ 		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE, 0xb1, 0x48),
+ 		     NAND_MEMORG(1, 2048, 128, 64, 1024, 20, 1, 1, 1),
+@@ -343,12 +391,152 @@ static const struct spinand_info gigadevice_spinand_table[] = {
+ 		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x51),
+ 		     NAND_MEMORG(1, 2048, 128, 64, 1024, 20, 1, 1, 1),
+ 		     NAND_ECCREQ(4, 512),
+-		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants_1gq5,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&gd5fxgqx_variant2_ooblayout,
++				     gd5fxgq5xexxg_ecc_get_status)),
++	SPINAND_INFO("GD5F1GQ5RExxG",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x41),
++		     NAND_MEMORG(1, 2048, 128, 64, 1024, 20, 1, 1, 1),
++		     NAND_ECCREQ(4, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants_1gq5,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&gd5fxgqx_variant2_ooblayout,
++				     gd5fxgq5xexxg_ecc_get_status)),
++	SPINAND_INFO("GD5F2GQ5UExxG",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x52),
++		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(4, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants_2gq5,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&gd5fxgqx_variant2_ooblayout,
++				     gd5fxgq5xexxg_ecc_get_status)),
++	SPINAND_INFO("GD5F2GQ5RExxG",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x42),
++		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(4, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants_2gq5,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&gd5fxgqx_variant2_ooblayout,
++				     gd5fxgq5xexxg_ecc_get_status)),
++	SPINAND_INFO("GD5F4GQ6UExxG",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x55),
++		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 1, 2, 1),
++		     NAND_ECCREQ(4, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants_2gq5,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&gd5fxgqx_variant2_ooblayout,
++				     gd5fxgq5xexxg_ecc_get_status)),
++	SPINAND_INFO("GD5F4GQ6RExxG",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x45),
++		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 1, 2, 1),
++		     NAND_ECCREQ(4, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants_2gq5,
+ 					      &write_cache_variants,
+ 					      &update_cache_variants),
+ 		     SPINAND_HAS_QE_BIT,
+ 		     SPINAND_ECCINFO(&gd5fxgqx_variant2_ooblayout,
+ 				     gd5fxgq5xexxg_ecc_get_status)),
++	SPINAND_INFO("GD5F1GM7UExxG",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x91),
++		     NAND_MEMORG(1, 2048, 128, 64, 1024, 20, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants_1gq5,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&gd5fxgqx_variant2_ooblayout,
++				     gd5fxgq4uexxg_ecc_get_status)),
++	SPINAND_INFO("GD5F1GM7RExxG",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x81),
++		     NAND_MEMORG(1, 2048, 128, 64, 1024, 20, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants_1gq5,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&gd5fxgqx_variant2_ooblayout,
++				     gd5fxgq4uexxg_ecc_get_status)),
++	SPINAND_INFO("GD5F2GM7UExxG",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x92),
++		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants_1gq5,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&gd5fxgqx_variant2_ooblayout,
++				     gd5fxgq4uexxg_ecc_get_status)),
++	SPINAND_INFO("GD5F2GM7RExxG",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x82),
++		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants_1gq5,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&gd5fxgqx_variant2_ooblayout,
++				     gd5fxgq4uexxg_ecc_get_status)),
++	SPINAND_INFO("GD5F4GM8UExxG",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x95),
++		     NAND_MEMORG(1, 2048, 128, 64, 4096, 80, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants_1gq5,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&gd5fxgqx_variant2_ooblayout,
++				     gd5fxgq4uexxg_ecc_get_status)),
++	SPINAND_INFO("GD5F4GM8RExxG",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x85),
++		     NAND_MEMORG(1, 2048, 128, 64, 4096, 80, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants_1gq5,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&gd5fxgqx_variant2_ooblayout,
++				     gd5fxgq4uexxg_ecc_get_status)),
++	SPINAND_INFO("GD5F2GQ5xExxH",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x22),
++		     NAND_MEMORG(1, 2048, 64, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(4, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants_2gq5,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&gd5fxgqx_variant2_ooblayout,
++				     gd5fxgq4uexxg_ecc_get_status)),
++	SPINAND_INFO("GD5F1GQ5RExxH",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x21),
++		     NAND_MEMORG(1, 2048, 64, 64, 1024, 20, 1, 1, 1),
++		     NAND_ECCREQ(4, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants_1gq5,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&gd5fxgqx_variant2_ooblayout,
++				     gd5fxgq4uexxg_ecc_get_status)),
++	SPINAND_INFO("GD5F1GQ4RExxH",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xc9),
++		     NAND_MEMORG(1, 2048, 64, 64, 1024, 20, 1, 1, 1),
++		     NAND_ECCREQ(4, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants_1gq5,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&gd5fxgqx_variant2_ooblayout,
++				     gd5fxgq4uexxg_ecc_get_status)),
+ };
+ 
+ static const struct spinand_manufacturer_ops gigadevice_spinand_manuf_ops = {
+diff --git a/drivers/mtd/nand/spi/macronix.c b/drivers/mtd/nand/spi/macronix.c
+index 86bffc2800b..3d4a7f0c3cb 100644
+--- a/drivers/mtd/nand/spi/macronix.c
++++ b/drivers/mtd/nand/spi/macronix.c
+@@ -23,7 +23,7 @@ static SPINAND_OP_VARIANTS(read_cache_variants,
+ 
+ static SPINAND_OP_VARIANTS(write_cache_variants,
+ 		SPINAND_PROG_LOAD_X4(true, 0, NULL, 0),
+-		SPINAND_PROG_LOAD(true, 0, NULL, 0));
++		SPINAND_PROG_LOAD(false, 0, NULL, 0));
+ 
+ static SPINAND_OP_VARIANTS(update_cache_variants,
+ 		SPINAND_PROG_LOAD_X4(false, 0, NULL, 0),
+@@ -86,9 +86,10 @@ static int mx35lf1ge4ab_ecc_get_status(struct spinand_device *spinand,
+ 		 * in order to avoid forcing the wear-leveling layer to move
+ 		 * data around if it's not necessary.
+ 		 */
+-		if (mx35lf1ge4ab_get_eccsr(spinand, &eccsr))
++		if (mx35lf1ge4ab_get_eccsr(spinand, spinand->scratchbuf))
+ 			return nand->eccreq.strength;
+ 
++		eccsr = *spinand->scratchbuf;
+ 		if (WARN_ON(eccsr > nand->eccreq.strength || !eccsr))
+ 			return nand->eccreq.strength;
+ 
+@@ -300,6 +301,26 @@ static const struct spinand_info macronix_spinand_table[] = {
+ 		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout,
+ 				     mx35lf1ge4ab_ecc_get_status)),
+ 
++	SPINAND_INFO("MX31LF2GE4BC",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0x2e),
++		     NAND_MEMORG(1, 2048, 64, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout,
++				     mx35lf1ge4ab_ecc_get_status)),
++	SPINAND_INFO("MX3UF2GE4BC",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xae),
++		     NAND_MEMORG(1, 2048, 64, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&mx35lfxge4ab_ooblayout,
++				     mx35lf1ge4ab_ecc_get_status)),
+ };
+ 
+ static const struct spinand_manufacturer_ops macronix_spinand_manuf_ops = {
+diff --git a/drivers/mtd/nand/spi/toshiba.c b/drivers/mtd/nand/spi/toshiba.c
+index b9908e79271..ad48b1c7c8a 100644
+--- a/drivers/mtd/nand/spi/toshiba.c
++++ b/drivers/mtd/nand/spi/toshiba.c
+@@ -269,6 +269,39 @@ static const struct spinand_info toshiba_spinand_table[] = {
+ 		     SPINAND_HAS_QE_BIT,
+ 		     SPINAND_ECCINFO(&tx58cxgxsxraix_ooblayout,
+ 				     tx58cxgxsxraix_ecc_get_status)),
++	/* 1.8V 1Gb (1st generation) */
++	SPINAND_INFO("TC58NYG0S3HBAI4",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xA1),
++		     NAND_MEMORG(1, 2048, 128, 64, 1024, 20, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&tx58cxgxsxraix_ooblayout,
++				     tx58cxgxsxraix_ecc_get_status)),
++	/* 1.8V 4Gb (1st generation) */
++	SPINAND_INFO("TH58NYG2S3HBAI4",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xAC),
++		     NAND_MEMORG(1, 2048, 128, 64, 4096, 80, 1, 2, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_x4_variants,
++					      &update_cache_x4_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&tx58cxgxsxraix_ooblayout,
++				     tx58cxgxsxraix_ecc_get_status)),
++	/* 1.8V 8Gb (1st generation) */
++	SPINAND_INFO("TH58NYG3S0HBAI6",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xA3),
++		     NAND_MEMORG(1, 4096, 256, 64, 4096, 80, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_x4_variants,
++					      &update_cache_x4_variants),
++		     SPINAND_HAS_QE_BIT,
++		     SPINAND_ECCINFO(&tx58cxgxsxraix_ooblayout,
++				     tx58cxgxsxraix_ecc_get_status)),
+ };
+ 
+ static const struct spinand_manufacturer_ops toshiba_spinand_manuf_ops = {
+diff --git a/drivers/mtd/nand/spi/winbond.c b/drivers/mtd/nand/spi/winbond.c
+index dd4ed257a83..c62096dc2e6 100644
+--- a/drivers/mtd/nand/spi/winbond.c
++++ b/drivers/mtd/nand/spi/winbond.c
+@@ -18,6 +18,8 @@
+ 
+ #define WINBOND_CFG_BUF_READ		BIT(3)
+ 
++#define W25N04KV_STATUS_ECC_5_8_BITFLIPS	(3 << 4)
++
+ static SPINAND_OP_VARIANTS(read_cache_variants,
+ 		SPINAND_PAGE_READ_FROM_CACHE_QUADIO_OP(0, 2, NULL, 0),
+ 		SPINAND_PAGE_READ_FROM_CACHE_X4_OP(0, 1, NULL, 0),
+@@ -121,6 +123,7 @@ static int w25n02kv_ecc_get_status(struct spinand_device *spinand,
+ 		return -EBADMSG;
+ 
+ 	case STATUS_ECC_HAS_BITFLIPS:
++	case W25N04KV_STATUS_ECC_5_8_BITFLIPS:
+ 		/*
+ 		 * Let's try to retrieve the real maximum number of bitflips
+ 		 * in order to avoid forcing the wear-leveling layer to move
+@@ -172,6 +175,60 @@ static const struct spinand_info winbond_spinand_table[] = {
+ 					      &update_cache_variants),
+ 		     0,
+ 		     SPINAND_ECCINFO(&w25n02kv_ooblayout, w25n02kv_ecc_get_status)),
++	SPINAND_INFO("W25N01JW",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xbc, 0x21),
++		     NAND_MEMORG(1, 2048, 64, 64, 1024, 20, 1, 1, 1),
++		     NAND_ECCREQ(4, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&w25m02gv_ooblayout, w25n02kv_ecc_get_status)),
++	SPINAND_INFO("W25N02JWZEIF",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xbf, 0x22),
++		     NAND_MEMORG(1, 2048, 64, 64, 1024, 20, 1, 2, 1),
++		     NAND_ECCREQ(4, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&w25n02kv_ooblayout, w25n02kv_ecc_get_status)),
++	SPINAND_INFO("W25N512GW",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xba, 0x20),
++		     NAND_MEMORG(1, 2048, 64, 64, 512, 10, 1, 1, 1),
++		     NAND_ECCREQ(4, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&w25n02kv_ooblayout, w25n02kv_ecc_get_status)),
++	SPINAND_INFO("W25N02KWZEIR",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xba, 0x22),
++		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&w25n02kv_ooblayout, w25n02kv_ecc_get_status)),
++	SPINAND_INFO("W25N01GWZEIG",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xba, 0x21),
++		     NAND_MEMORG(1, 2048, 64, 64, 1024, 20, 1, 1, 1),
++		     NAND_ECCREQ(4, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&w25m02gv_ooblayout, w25n02kv_ecc_get_status)),
++	SPINAND_INFO("W25N04KV",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xaa, 0x23),
++		     NAND_MEMORG(1, 2048, 128, 64, 4096, 40, 2, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&w25n02kv_ooblayout, w25n02kv_ecc_get_status)),
+ };
+ 
+ static int winbond_spinand_init(struct spinand_device *spinand)
+diff --git a/include/linux/mtd/spinand.h b/include/linux/mtd/spinand.h
+index b701d25f73d..81a7b0dbbb2 100644
+--- a/include/linux/mtd/spinand.h
++++ b/include/linux/mtd/spinand.h
+@@ -266,13 +266,16 @@ struct spinand_manufacturer {
+ };
+ 
+ /* SPI NAND manufacturers */
++extern const struct spinand_manufacturer alliancememory_spinand_manufacturer;
++extern const struct spinand_manufacturer ato_spinand_manufacturer;
++extern const struct spinand_manufacturer esmt_c8_spinand_manufacturer;
++extern const struct spinand_manufacturer foresee_spinand_manufacturer;
+ extern const struct spinand_manufacturer gigadevice_spinand_manufacturer;
+ extern const struct spinand_manufacturer macronix_spinand_manufacturer;
+ extern const struct spinand_manufacturer micron_spinand_manufacturer;
+ extern const struct spinand_manufacturer paragon_spinand_manufacturer;
+ extern const struct spinand_manufacturer toshiba_spinand_manufacturer;
+ extern const struct spinand_manufacturer winbond_spinand_manufacturer;
+-extern const struct spinand_manufacturer esmt_c8_spinand_manufacturer;
+ extern const struct spinand_manufacturer xtx_spinand_manufacturer;
+ 
+ /**
 -- 
 2.45.2
 
