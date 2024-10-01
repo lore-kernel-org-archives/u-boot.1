@@ -4,65 +4,165 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76E06CEB2FD
-	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 05:16:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CA16CEB2FD
+	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 05:20:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26F968910E;
-	Tue,  1 Oct 2024 07:16:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id E56F288F63;
+	Tue,  1 Oct 2024 07:20:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1727759805;
-	bh=6UiCjw8QqyFBPevvYVjaEThnO/ZVhoPkXWx5BraKAcM=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=tnDFGltezRDoBVSVCyBcWEzKyW9HO1lod1+/3EczIkdJBr4ZD9FaLn8cVvceEsMvQ
-	 hyafVzxyWbv080uT5X2FVZsnquPuXx7QaagFHmj9zATtGEN3YstwVOeCKGfRcoPCSU
-	 3ieTWt9Et0twY11ycQgtHtjGypmXEFpNQZU3LYAr80lrtx9H6ywaOED1WyMrO8ze6x
-	 O3CeFYirA1g8QrIjgOOL17zCT4cEh1jZlp58kUXOvCAnM/e+RtEKVlELWW1MCFlXB2
-	 ObaIb9BUXjB3WgdrfUoJB+G06p8Xs4RyXRYhViPGZUwUwRq31H6HaksGOcgGGpPQqN
-	 VZtKaLHDIneiA==
-Received: from [192.168.1.107] (82-131-158-173.pool.digikabel.hu
- [82.131.158.173])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 32AC488CA1;
- Tue,  1 Oct 2024 07:16:43 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1727759803;
- bh=6UiCjw8QqyFBPevvYVjaEThnO/ZVhoPkXWx5BraKAcM=;
- h=Date:Subject:To:Cc:References:Reply-To:From:In-Reply-To:From;
- b=EzCqNNXI8nMlBaaUlFzDgDNOjwQUUnIwdjGH162cU4MHYBdwDC3d47594bE4aBIaU
- PtqSdV2M1koo2WPDbidmX7r4l6bIfqD2BvmxW1Uwk09+mitteetMWTJ2ARFpkQNCUM
- QpLEnEZCpY1gsGY3ITzv8nS4kmw/M65gEFdvafkBuY1sMyEY7+vpqj2rC4mAGM3eVr
- bryiLFeV87nwBllOXeDSa63zveSqNEdKFW/86pl8he0HFf4FQGyTgu9EX51QLWjJnx
- Z+HP+RInO5NME/DrVcXgay2FIVW0LJRN19F5EdzSXuLtsaf0zeChH/kUPSpD/tPM49
- up1EDQSn2+YSw==
-Message-ID: <3cb57821-30f0-6aa0-2dec-313381b1350a@denx.de>
-Date: Tue, 1 Oct 2024 07:14:42 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH 08/26] power: Add iMX8M block ctrl driver for dispmix
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="sbxpm/nt";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id AD6A98910E; Tue,  1 Oct 2024 07:20:25 +0200 (CEST)
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on20614.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2412::614])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 60D5888E3A
+ for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 07:20:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Q7j7UmXJUpFd6zMACthOFh8KOHEyQlh4yvZ8BWWvgxV9kc//95z0DfVswtPOA6RA7AfkeVK8h6gvqZJETyz9yHAd6wf4NiJ0fOJ8BHChKQthcUHixB1XvVo5pipuMQjsS+R59eLNd4IsR531PcGOuElmRlmK7WHNRYTbK4Vqk0PWuULynG5vDPUuZbnSkuYSJWoXUzwxUhDQGAtVggzIt6/ENeIUC5EmBObAni61YPKQ9kRQBLMkgpgqFiOpkSZOVQldmq24u9E9LX7GSUhQfgCoRLGm7n/hWfFNySH07Imrkac7kxpHJdhXy5SCuuVfuNOdmJCwtD9GCl9OWM4MXg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=/ypmDG0Lqc4gUDyTnuvqPeZBg9dhp4AKPmR8zcn6BTQ=;
+ b=ffo74gEqdrF67YTfwfyBGtB0SQOg19u8tFJRayag20I7lDETBFH99ZAAz14aIbfyu0BXwuUMyH86XcYAgCC2hsfOME92gshDi679ITs40oYunjAK5S5rCGuKo23Ts94YMucAkgTXHCIPc/G1gdcDUrJvodSNBNWtUePDwhwNF1zedsWsnX/eHyv4sW6rBhbvTRMx5qg04c4VsGkz5lLtIzvsS1Z/R+gKXh2OkgNao/kuhWKOy9nvcwk9PrgXa4MY+Un6lPND4RxOQ3RyRKphUrp9qwjG9vv8YYOUNfyouK42S1Rj2uGQkQYkPsMjGm0C6IRnzqlqygS2gwuBZXwqvQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=/ypmDG0Lqc4gUDyTnuvqPeZBg9dhp4AKPmR8zcn6BTQ=;
+ b=sbxpm/ntAatf2nhunwmMSgDUoPSjClxPTifxPh4SUjHUyBGb/f6itN0sBNl+7HXeFQGMgQgsfJxUCkAhwRvPNVzp/nYNXi+QdAsFXD0HSLlCzQkQc9mWxYTadv2NSLhCh0c0um3OoW2u10kZHqjyMh4Lt8EaZDESYMC1cRXQpU8=
+Received: from SA1PR12MB8697.namprd12.prod.outlook.com (2603:10b6:806:385::10)
+ by CH2PR12MB4246.namprd12.prod.outlook.com (2603:10b6:610:a9::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8005.26; Tue, 1 Oct
+ 2024 05:20:10 +0000
+Received: from SA1PR12MB8697.namprd12.prod.outlook.com
+ ([fe80::dbf9:f1d1:7c67:f88c]) by SA1PR12MB8697.namprd12.prod.outlook.com
+ ([fe80::dbf9:f1d1:7c67:f88c%6]) with mapi id 15.20.8005.024; Tue, 1 Oct 2024
+ 05:20:09 +0000
+From: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>
+To: Marek Vasut <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: "Simek, Michal" <michal.simek@amd.com>, "fabrice.gasnier@foss.st.com"
+ <fabrice.gasnier@foss.st.com>, "git (AMD-Xilinx)" <git@amd.com>
+Subject: RE: [PATCH v2 5/7] usb: onboard-hub: Bail out if peer hub is already
+ probed
+Thread-Topic: [PATCH v2 5/7] usb: onboard-hub: Bail out if peer hub is already
+ probed
+Thread-Index: AQHbEKsm90WQaPiMa0yiBPI57rQ+k7JsGf8AgAVHBTA=
+Date: Tue, 1 Oct 2024 05:20:09 +0000
+Message-ID: <SA1PR12MB8697F80C18E42BB7140AFE4098772@SA1PR12MB8697.namprd12.prod.outlook.com>
+References: <20240927070137.21816-1-venkatesh.abbarapu@amd.com>
+ <20240927070137.21816-6-venkatesh.abbarapu@amd.com>
+ <1bba9e4b-621c-4b94-befe-a3eb468a8b3d@denx.de>
+In-Reply-To: <1bba9e4b-621c-4b94-befe-a3eb468a8b3d@denx.de>
+Accept-Language: en-US
 Content-Language: en-US
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>,
- linux-amarula@amarulasolutions.com, Miquel Raynal
- <miquel.raynal@bootlin.com>, Ye Li <ye.li@nxp.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
-References: <20240913095622.72377-1-dario.binacchi@amarulasolutions.com>
- <20240913095622.72377-9-dario.binacchi@amarulasolutions.com>
- <beecebba-79f5-e21d-3062-287c2dbb04e9@denx.de>
- <CABGWkvqOzc3cGM_aKVurv1XbAbeHXE77xwq_uAmSuZMgjCoevQ@mail.gmail.com>
- <ebb734bd-bdf7-ffd2-d676-7eb6011466a3@denx.de>
- <CAOf5uwm13jyOb0M9Xvx_bO1RpXhDcWqKBC-4fhZGo61Q5cjnjw@mail.gmail.com>
-From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <CAOf5uwm13jyOb0M9Xvx_bO1RpXhDcWqKBC-4fhZGo61Q5cjnjw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: SA1PR12MB8697:EE_|CH2PR12MB4246:EE_
+x-ms-office365-filtering-correlation-id: 32387266-859e-4aa3-a9cf-08dce1d8b7f5
+x-ld-processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230040|376014|1800799024|366016|38070700018;
+x-microsoft-antispam-message-info: =?utf-8?B?QWdoUHprWlVZTHIwZGYxQUc3ZlN4STNsa1BLQUU1UmM4SFhMbU9kUmVRNVhx?=
+ =?utf-8?B?bFB1aTE3L3hpL1JsbkFKbGJudjFzSHZCRmVPMXYrWU4vZmtDTVBFM0hKZUw2?=
+ =?utf-8?B?Tzl2ZWJscEszQVBwKzErVFZCUGRqTEtTclR1aElzQVlPcThrNzlQd1hiYTVi?=
+ =?utf-8?B?UjZ0ZENQUGp5RTk3T0daa1AzNHFBeGszMHlxUDJKYldqV0ZTa2ZiVUlDQTlt?=
+ =?utf-8?B?NDRJRytWZGNrd1V2azBnVmhDaHRHaWxwYzdpRmhoZXllZE1PUjhVVURBdjA2?=
+ =?utf-8?B?RnpGRk1vNTliRFNKZGdqUmo0UnJ0NVZBcHgvZlVqTnNrRDBUV1JacldWMEVB?=
+ =?utf-8?B?a01kWVFHbUFtZ3J3N3gvUVRLa1VsbnY1cmZSWHhmNlVDcndHWUdFZ0pWNzcz?=
+ =?utf-8?B?T1hqMHd6M3JLSE1vVHRKQ1RzNFlaaEd3SERsR1QrbEFqWEhndmpWcmFNZFZG?=
+ =?utf-8?B?M2wxdjgrKzF1SE9NdFhmYVFKTDJLQ3BVd1lJREJXVDNhUlhVR28wRTh1ZlQw?=
+ =?utf-8?B?a25LRmFUVXprVWdrVGVvc2N1alkxUlV1bUFNMXFDUWdSVmxEMEtwVENOZ1kz?=
+ =?utf-8?B?SFdQTE1EQi9ZWURmanQxWlR6a09sVVk5U2prekpMYUI3QkorUzFUYWxYVlBD?=
+ =?utf-8?B?cEwvUnQvWWZKNldwQld4ZkZXbFg0Y2JQdWp5V01udUFhRXluUXI3TUJsbEg2?=
+ =?utf-8?B?ckFKQXQ5WGlXZUd5M0VaeTFLclRTMG81L0ZCTFg3NTQ5Q2krdURCUi8ycWxB?=
+ =?utf-8?B?Y2RQTU9VcG9VVVhWeGttV3ZiWkNPTUxQWnVySUhKV0RwcUlKOVV1ekczMnlF?=
+ =?utf-8?B?R2ZVd3hHaEVYUHVVbGs4K2QyOGR1YUNmSllLSHVSNzlveGMrdFJTWElaTGhF?=
+ =?utf-8?B?czNSc29qRzVNVjVUUithTVFybFpNUDVaeERNSHg4ekZQaUxzdUt6d29uM0Rx?=
+ =?utf-8?B?c094dmZrMFBMbEdjUG1jblRTcXRYS3paR0xWeENXSU1oWUVkMEs5YVVQTVps?=
+ =?utf-8?B?R2JhRkFjMEwxMlUxOTJmcFRMZFBUc3hUazJKaVp4bW03YWQwQkNPM1RzWm01?=
+ =?utf-8?B?TTAwQ3Q0Q2lYZXlzSEt6QnVCOUdvRHpJM1BIa0Y1QUpsdG5FMndZc3Y3Smsy?=
+ =?utf-8?B?dHBsdXhkUmlwUnZFNk1aNjFCKzJ0c3pIOFFDK1VHZlZSWEZUMnlTcXJGbGV3?=
+ =?utf-8?B?bW93WmphaTkwdkF6djNRL3RiSVhZRGVzSXJTcnlWanpmWnQva01US3VmOThR?=
+ =?utf-8?B?U3Bkelh2Yjh0b0VVTzc2OG9MZnhYQkZVQWdqdVdUYk1BVFZwcGVKc3ZkdFpR?=
+ =?utf-8?B?VmNFdElSMTVYNVZLU1V3ZGhwM2lNT05OVkdvUkJodklydkRiaWJ4VkJnOFlk?=
+ =?utf-8?B?c0l4VEtEU3ltOEF1eDM3NzAxR2JVRS9uUVpTdUVCdThzOW1YNVowMkxka1FD?=
+ =?utf-8?B?ZzlkTmdhMVYxNm41VWlOQkUyMWlVLzk0L25XS0ZuZlZHOTV6YXJnVzFJT0lm?=
+ =?utf-8?B?SFF4dEkxbTNjQlJaSTJXcVQxRkFRd0JZVDZzWUJQclpjWS9BQUErUEZkcDRj?=
+ =?utf-8?B?SytKZ3RFbkQrMTRHbU9BMEYvTURtMzRCOXRNbFNudW9vVEpMSHk3K1lCY0NG?=
+ =?utf-8?B?Sm5lcHlVd1AvUWxqME9LbHRZMWRUcnJVb3drTVEzNWNTWkNxV2xhWDdTcklw?=
+ =?utf-8?B?YWdEMFAwaEhhWmZMeGdXM3NjMHRIQWdIdHlyTExQNzQ5YzVnTUFLdWhYUGRD?=
+ =?utf-8?B?SWpaR2xsMGhEa1p0bURRUkV3SXlPUmxyWnpVZUl1OW9JaktJaXFURUdwd2lx?=
+ =?utf-8?B?QzRZK2x2V0I5RU42d2NNbE1wSzBnK1ZhOEw2VEhPY0t0OGtIbnZseERqRCtQ?=
+ =?utf-8?B?ZmRHUHFldFM2MWJyRHJwYjNuNUlqeXdoNC9mRVBlUXNPK3c9PQ==?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SA1PR12MB8697.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016)(38070700018); DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?Q0Vla25yVm5vNjJITEl6L09VM3FSeCtVdXhHdWV2dE1TVDZtRVloR2Nxektv?=
+ =?utf-8?B?dHlMcTAvQ2FmNVVhMTJpWVoxZzdMbGFGaWEvcEQwZFRGTzFoS1oxMDVsaGQ4?=
+ =?utf-8?B?a3FWK0d0QUdYSVZRVFdEbXQ4VVp0a1YxTTBZa1RtQlVuN2V1UXFidlE1WHdK?=
+ =?utf-8?B?YzJVYlEwQWV4VzVRc2Q3Z2pvdTRJeU9tS0t5WVNGenBTNUJBenBiRzIxVmhH?=
+ =?utf-8?B?OE5KZmM2RTlOUEhXV1NRQmtkNUVob3RZWlo2ZzJFbDZiMTArL25xa3k4cXp2?=
+ =?utf-8?B?QytEL0MrVklGL29RLzJKbE0yckU4a0RvZ3VKenhNVGh5ZG02SjhHc0ZhUERz?=
+ =?utf-8?B?aHQyV0dCb21LSEZQYVV2TE9vZ1V0YW1sdXBaREtReHhMRTlVYWlrOG5jblNE?=
+ =?utf-8?B?RDBacVF6bk1vVE5lb2FBN1o0TFoxbFpaZHI0b0M1TUpzOTRuUmhIblN5MUds?=
+ =?utf-8?B?bjJyQ3o3N0Z0SUZxWTA0dDNqWDNydVJtb3BzcGpHT2h2Nk51REZBalBmdFJy?=
+ =?utf-8?B?VUhzRWdXTHMrdW1SMnBPMzVZRklSQ1IyRnl5b3VGdlZ6czd4R2JUVVBWaUNK?=
+ =?utf-8?B?WTlabVBEM1JtbFJWRkJ5T3JWRkwzaHJTbTkyRlZ5YzlZdmRiRXhYS0dkdHhy?=
+ =?utf-8?B?eEVnOG1ZbU5pNVVwVHRNSmZkVkVsb2FuWGJUbTMxRjR2SnZaWXhHNDh4QkEy?=
+ =?utf-8?B?RndnRWorNkR0Q1ZLNDVUOWlqMDI1b2UxdjZ4L2lTM1RZWjRndldmeFU3a3Vj?=
+ =?utf-8?B?eFBtTVZZekRWQUxkc0F3KzR6RFlkM1lwUlh4R2FQNXRRY1VlelNydXFvOWNQ?=
+ =?utf-8?B?a3FSMW85ZWtMYVlLVTRzb2VDNnJZK2ZHcHMwYWgzaXVWVTFHemNsdUlTczNS?=
+ =?utf-8?B?VWlwcjFPQ0YzbG5pY0VtWHpYbFVrcm5YWTZYQkhOYjZEL3RIRXF3bk5hTVFL?=
+ =?utf-8?B?bEMyUlY0dUJ0NWtpaWJoVkRGRWJoajByMmFrc3p6d1c5QnYva0w1L215YWNY?=
+ =?utf-8?B?bVR1RUphWmhzamRhN2R0eWpvM3Q5aXQ4blQ1UmlCZ2NFd0h6OFBjS3V6OFI2?=
+ =?utf-8?B?NVJHa3dYYjZrV1ZLN1h5ZEVabzFkNGJzN3pCbS9BWjRIb0lOMlpGcXV0dDdl?=
+ =?utf-8?B?a1V5c2NHb3RkUnprd2ZqbkdLWXJSbmRxMVR5WHNwZzg5cFdxVlE1dU9ocDZI?=
+ =?utf-8?B?UlRaaVljdS8xcVJ5K281aExjN1I4OFgrMk9GWGNHTGVZV1h0N0FXVW4xOTVP?=
+ =?utf-8?B?Ym1MbHJzQllZOU16Z1A3SU1qczhibnBZTS9leGdXeHpUUWZkU3FxSWZaYll4?=
+ =?utf-8?B?eWlYZWgrQ0tSVnFWdnpOZ2JFd0gvVE5BVjA0d1YyUmJiZUdvTEJtWU1YRXND?=
+ =?utf-8?B?ejdiZ3Q4WVpHNFBESVlaVXpRelBhdGdUZXV0WFM4MXpBL01IbzNtTWsrT3Nw?=
+ =?utf-8?B?YjN0WWVYb0xNYVFBM0d6dnhneWN3MUkybTFDUFdveUdvWnVmRGlKWWJKNDg5?=
+ =?utf-8?B?bnFtaERqQjZrUGxidDIvNGFVU3JjK0xUbFBEYXorQUhmUVF5alN5UkM3cER3?=
+ =?utf-8?B?cE1pZnk3RlBvNks5bjZvYjhoNGFCVDVwblc1UVhQU1hzV25mYUxFcUFEa2hT?=
+ =?utf-8?B?VENLZHhpL0FQdGt6WHhlYzhEZlFCZ0J6L2c5MHhkZFlXNEMwd2R3emg3aFBQ?=
+ =?utf-8?B?dzhGbnZJY0FYTTA1b2pRTjV2eEh5dEw2enM0U3lDVE9RUEFQZksyVWlQNG9m?=
+ =?utf-8?B?U0tVazZFQlZQK2k0R0VwQVBXWlpHeEJkWG13aUpDa1RWVklSZWEybXJ6NmtK?=
+ =?utf-8?B?QzNGM2k0S1FQNEtsWDFaYWlBVUhpZFJ5Sm4zeWhvZlc4RnQ3aTF3dVB3cmhK?=
+ =?utf-8?B?OEtETSt6L2FjVU8wUjJXQWNTZVljZW0zWFMxN0NxczJNNzFrVGRlYTdKckFM?=
+ =?utf-8?B?R1oybHdvcEFOWEtjMG9LNWNtMzkvOUhxRnoyZCtEMFd0OTJXT3hOQWU4RU9o?=
+ =?utf-8?B?OU5kdm91RWpCRS9JZXp3VnJWRnA0TUdzR3RENmluendLSkJtTms0REhUMWNE?=
+ =?utf-8?B?Q1RZS3daQXlDeTFtT0gxeWRwY01qb0txNFZmU2dVUlZCOWt0UFROZ2Vqd1du?=
+ =?utf-8?Q?Ldf8=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: SA1PR12MB8697.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 32387266-859e-4aa3-a9cf-08dce1d8b7f5
+X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Oct 2024 05:20:09.5012 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: m74oNUDkjboWH3kZurzC555YKbf44vWowSLRymr9ZneE+rHX+d3Yl1JQ0ktWnPAO6uNlh1MqSABoTAjB6nKlXw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4246
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,373 +174,42 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Micahel,
-
-On 01.10.24 07:01, Michael Nazzareno Trimarchi wrote:
-> Hi Heko
-> 
-> On Tue, Oct 1, 2024 at 6:23 AM Heiko Schocher <hs@denx.de> wrote:
->>
->> Hi Dario,
->>
->> On 30.09.24 15:20, Dario Binacchi wrote:
->>> Hello Heiko,
->>>
->>> On Tue, Sep 24, 2024 at 11:07 AM Heiko Schocher <hs@denx.de> wrote:
->>>>
->>>> Hello Dario,
->>>>
->>>> On 13.09.24 11:55, Dario Binacchi wrote:
->>>>> From: Michael Trimarchi <michael@amarulasolutions.com>
->>>>>
->>>>> Add iMX8 block ctrl driver for displaymix on iMX8MM/iMX8MN and
->>>>> mediamix on iMX8MP.
->>>>>
->>>>> To support blk ctrl driver, the power domain driver on iMX8M needs
->>>>> update to add relevant PGC domains
->>>>>
->>>>> Signed-off-by: Ye Li <ye.li@nxp.com>
->>>>> Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
->>>>> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
->>>>> ---
->>>>>
->>>>>     drivers/power/domain/Kconfig              |   6 +
->>>>>     drivers/power/domain/Makefile             |   1 +
->>>>>     drivers/power/domain/imx8m-blk-ctrl.c     | 438 ++++++++++++++++++++++
->>>>>     drivers/power/domain/imx8m-power-domain.c | 213 ++++++++++-
->>>>>     4 files changed, 656 insertions(+), 2 deletions(-)
->>>>>     create mode 100644 drivers/power/domain/imx8m-blk-ctrl.c
->>>>>
->>>>> diff --git a/drivers/power/domain/Kconfig b/drivers/power/domain/Kconfig
->>>>> index bd82d2f7044b..fb006b6e8e28 100644
->>>>> --- a/drivers/power/domain/Kconfig
->>>>> +++ b/drivers/power/domain/Kconfig
->>>>> @@ -40,6 +40,12 @@ config IMX8M_POWER_DOMAIN
->>>>>           Enable support for manipulating NXP i.MX8M on-SoC power domains via
->>>>>           requests to the ATF.
->>>>>
->>>>> +config IMX8M_BLK_CTRL
->>>>> +     bool "Enable i.MX8M block control driver"
->>>>> +     depends on POWER_DOMAIN && ARCH_IMX8M
->>>>> +     help
->>>>> +       Enable support for manipulating NXP i.MX8M on-SoC block control driver
->>>>> +
->>>>>     config IMX8MP_HSIOMIX_BLKCTRL
->>>>>         bool "Enable i.MX8MP HSIOMIX domain driver"
->>>>>         depends on POWER_DOMAIN && IMX8MP
->>>>> diff --git a/drivers/power/domain/Makefile b/drivers/power/domain/Makefile
->>>>> index 2daab73eb758..46849fd2a4db 100644
->>>>> --- a/drivers/power/domain/Makefile
->>>>> +++ b/drivers/power/domain/Makefile
->>>>> @@ -8,6 +8,7 @@ obj-$(CONFIG_APPLE_PMGR_POWER_DOMAIN) += apple-pmgr.o
->>>>>     obj-$(CONFIG_BCM6328_POWER_DOMAIN) += bcm6328-power-domain.o
->>>>>     obj-$(CONFIG_IMX8_POWER_DOMAIN) += imx8-power-domain-legacy.o imx8-power-domain.o
->>>>>     obj-$(CONFIG_IMX8M_POWER_DOMAIN) += imx8m-power-domain.o
->>>>> +obj-$(CONFIG_IMX8M_BLK_CTRL) += imx8m-blk-ctrl.o
->>>>>     obj-$(CONFIG_IMX8MP_HSIOMIX_BLKCTRL) += imx8mp-hsiomix.o
->>>>>     obj-$(CONFIG_MTK_POWER_DOMAIN) += mtk-power-domain.o
->>>>>     obj-$(CONFIG_MESON_GX_VPU_POWER_DOMAIN) += meson-gx-pwrc-vpu.o
->>>>> diff --git a/drivers/power/domain/imx8m-blk-ctrl.c b/drivers/power/domain/imx8m-blk-ctrl.c
->>>>> new file mode 100644
->>>>> index 000000000000..4c89078b991b
->>>>> --- /dev/null
->>>>> +++ b/drivers/power/domain/imx8m-blk-ctrl.c
->>>>> @@ -0,0 +1,438 @@
->>>>> +// SPDX-License-Identifier: GPL-2.0
->>>>> +/*
->>>>> + * Copyright 2023 NXP
->>>>> + */
->>>>> +
->>>>> +#include <dm.h>
->>>>> +#include <malloc.h>
->>>>> +#include <power-domain-uclass.h>
->>>>> +#include <asm/io.h>
->>>>> +#include <dm/device-internal.h>
->>>>> +#include <dm/device.h>
->>>>> +#include <dt-bindings/power/imx8mm-power.h>
->>>>> +#include <dt-bindings/power/imx8mn-power.h>
->>>>> +#include <dt-bindings/power/imx8mp-power.h>
->>>>> +#include <clk.h>
->>>>> +#include <linux/delay.h>
->>>>> +
->>>>> +#define BLK_SFT_RSTN 0x0
->>>>> +#define BLK_CLK_EN   0x4
->>>>> +#define BLK_MIPI_RESET_DIV   0x8 /* Mini/Nano/Plus DISPLAY_BLK_CTRL only */
->>>>> +
->>>>> +#define DOMAIN_MAX_CLKS 4
->>>>> +
->>>>> +struct imx8m_blk_ctrl_domain {
->>>>> +     struct clk clks[DOMAIN_MAX_CLKS];
->>>>> +     struct power_domain power_dev;
->>>>> +};
->>>>> +
->>>>> +struct imx8m_blk_ctrl {
->>>>> +     void __iomem *base;
->>>>> +     struct power_domain bus_power_dev;
->>>>> +     struct imx8m_blk_ctrl_domain *domains;
->>>>> +};
->>>>> +
->>>>> +struct imx8m_blk_ctrl_domain_data {
->>>>> +     const char *name;
->>>>> +     const char * const *clk_names;
->>>>> +     const char *gpc_name;
->>>>> +     int num_clks;
->>>>> +     u32 rst_mask;
->>>>> +     u32 clk_mask;
->>>>> +     u32 mipi_phy_rst_mask;
->>>>> +};
->>>>> +
->>>>> +struct imx8m_blk_ctrl_data {
->>>>> +     int max_reg;
->>>>> +     const struct imx8m_blk_ctrl_domain_data *domains;
->>>>> +     int num_domains;
->>>>> +     u32 bus_rst_mask;
->>>>> +     u32 bus_clk_mask;
->>>>> +};
->>>>> +
->>>>> +static int imx8m_blk_ctrl_request(struct power_domain *power_domain)
->>>>> +{
->>>>> +     return 0;
->>>>> +}
->>>>> +
->>>>> +static int imx8m_blk_ctrl_free(struct power_domain *power_domain)
->>>>> +{
->>>>> +     return 0;
->>>>> +}
->>>>> +
->>>>> +static int imx8m_blk_ctrl_enable_domain_clk(struct udevice *dev, ulong domain_id, bool enable)
->>>>> +{
->>>>> +     int ret, i;
->>>>> +     struct imx8m_blk_ctrl *priv = (struct imx8m_blk_ctrl *)dev_get_priv(dev);
->>>>> +     struct imx8m_blk_ctrl_data *drv_data =
->>>>> +             (struct imx8m_blk_ctrl_data *)dev_get_driver_data(dev);
->>>>> +
->>>>> +     debug("%s num_clk %u\n", __func__, drv_data->domains[domain_id].num_clks);
->>>>> +
->>>>> +     for (i = 0; i < drv_data->domains[domain_id].num_clks; i++) {
->>>>> +             debug("%s clk %s\n", __func__, drv_data->domains[domain_id].clk_names[i]);
->>>>> +             if (enable)
->>>>> +                     ret = clk_enable(&priv->domains[domain_id].clks[i]);
->>>>> +             else
->>>>> +                     ret = clk_disable(&priv->domains[domain_id].clks[i]);
->>>>> +             if (ret && ret != -ENOENT) {
->>>>> +                     printf("Failed to %s domain clk %s\n", enable ? "enable" : "disable",
->>>>> +                            drv_data->domains[domain_id].clk_names[i]);
->>>>> +                     return ret;
->>>>> +             }
->>>>> +     }
->>>>> +
->>>>> +     return 0;
->>>>> +}
->>>>> +
->>>>> +static int imx8m_blk_ctrl_power_on(struct power_domain *power_domain)
->>>>> +{
->>>>> +     struct udevice *dev = power_domain->dev;
->>>>> +     struct imx8m_blk_ctrl *priv = (struct imx8m_blk_ctrl *)dev_get_priv(dev);
->>>>> +     struct imx8m_blk_ctrl_data *drv_data =
->>>>> +             (struct imx8m_blk_ctrl_data *)dev_get_driver_data(dev);
->>>>> +     int ret;
->>>>> +
->>>>> +     debug("%s, id %lu\n", __func__, power_domain->id);
->>>>> +
->>>>> +     if (!priv->domains[power_domain->id].power_dev.dev)
->>>>> +             return -ENODEV;
->>>>> +
->>>>> +     ret = power_domain_on(&priv->bus_power_dev);
->>>>> +     if (ret < 0) {
->>>>> +             printf("Failed to power up bus domain %d\n", ret);
->>>>> +             return ret;
->>>>> +     }
->>>>> +
->>>>> +     /* Enable bus clock and deassert bus reset */
->>>>> +     setbits_le32(priv->base + BLK_CLK_EN, drv_data->bus_clk_mask);
->>>>> +     setbits_le32(priv->base + BLK_SFT_RSTN, drv_data->bus_rst_mask);
->>>>> +
->>>>> +     /* wait for reset to propagate */
->>>>> +     udelay(5);
->>>>> +
->>>>> +     /* put devices into reset */
->>>>> +     clrbits_le32(priv->base + BLK_SFT_RSTN, drv_data->domains[power_domain->id].rst_mask);
->>>>> +     if (drv_data->domains[power_domain->id].mipi_phy_rst_mask)
->>>>> +             clrbits_le32(priv->base + BLK_MIPI_RESET_DIV, d
->>>>> +                          rv_data->domains[power_domain->id].mipi_phy_rst_mask);
->>>>
->>>> Does this build for you?
->>>>
->>>> I needed the following fix:
->>>>
->>>> diff --git a/drivers/power/domain/imx8m-blk-ctrl.c b/drivers/power/domain/imx8m-blk-ctrl.c
->>>> index 4c89078b99..b772d50480 100644
->>>> --- a/drivers/power/domain/imx8m-blk-ctrl.c
->>>> +++ b/drivers/power/domain/imx8m-blk-ctrl.c
->>>> @@ -114,8 +114,8 @@ static int imx8m_blk_ctrl_power_on(struct power_domain *power_domain)
->>>>            /* put devices into reset */
->>>>            clrbits_le32(priv->base + BLK_SFT_RSTN, drv_data->domains[power_domain->id].rst_mask);
->>>>            if (drv_data->domains[power_domain->id].mipi_phy_rst_mask)
->>>> -               clrbits_le32(priv->base + BLK_MIPI_RESET_DIV, d
->>>> -                            rv_data->domains[power_domain->id].mipi_phy_rst_mask);
->>>> +               clrbits_le32(priv->base + BLK_MIPI_RESET_DIV,
->>>> +                            drv_data->domains[power_domain->id].mipi_phy_rst_mask);
->>>>
->>>>            /* enable upstream and blk-ctrl clocks to allow reset to propagate */
->>>>            ret = imx8m_blk_ctrl_enable_domain_clk(dev, power_domain->id, true);
->>>>
->>>> to get it building.
->>>
->>> Yes, you're right. I made some changes suggested by patman, and before
->>> applying the
->>>    patch, I didn't recompile, so I didn't notice.
->>>
->>>>
->>>> BTW: Just also working on bootlogo support for an imx8mp based board!
->>>>
->>>> I now applied your patches:
->>>>
->>>> clk: Propagate clk_set_rate() if CLK_SET_PARENT_RATE present for gate and mux
->>>> clk: clk-uclass: Implement CLK_OPS_PARENT_ENABLE
->>>>
->>>> And added in my adapted /drivers/clk/imx/clk-imx8mp.c (imported from linux)
->>>>
->>>> clk_dm(IMX8MP_CLK_MEDIA_AXI, imx8m_clk_composite_flags("media_axi", imx8mp_media_axi_sels,
->>>> ARRAY_SIZE(imx8mp_media_axi_sels), base + 0x8a00, CLK_IS_CRITICAL));
->>>>
->>>> instead of using imx8m_clk_composite, and dropped my approach to
->>>> get clocks up and working.
->>>>
->>>> Also dropped my similiar approach for mediablock and used your
->>>>
->>>> power: Add iMX8M block ctrl driver for dispmix
->>>>
->>>> And with this 3 patches, bootlogo works also/still fine for me!
->>>>
->>>> I did not applied/need your patches:
->>>>
->>>> clk: imx8mn: Prevent clock critical path from disabling during reparent and set_rate
->>>> clk: imx8mm: Prevent clock critical path from disabling during reparent and set_rate
->>>> clk: imx8mm: Mark IMX8MM_SYS_PLL2 and IMX8MM_SYS_PLL3 as enabled
->>>> clk: imx8mn: Mark IMX8MN_SYS_PLL2 and IMX8MN_SYS_PLL3 as enabled
->>>>
->>>> Of course, they are for imx8mm, but I mean I do not need similiar patches
->>>> for imx8mp!
->>>>
->>>> Also not applied (as for imx8mm)
->>>> clk: imx8mn: add video clocks support
->>>>
->>>> but as said, have similiar patch for clk-imx8mp.c
->>>>
->>>> May you check if using imx8m_clk_composite_flags() is working for you?
->>>
->>> I will do it
->>>
->>>>
->>>> I did not applied your patches 09/26 and the following patches from
->>>> your series, as I made a video bridge driver based on
->>>>
->>>> linux driver drivers/gpu/drm/bridge/fsl-ldb.c
->>>>
->>>> and a lcdif driver based on linux:/drivers/gpu/drm/mxsfb/lcdif_drv.c
->>>>
->>>
->>> Thank you for you feedback Heiko
->>
->> You are welcome!
->>
->> Hmm.. unfortunately ... I had applied your 2 clock patches, which
->> fixed a problem with enabling parent clocks ... but they broke booting
->> on a carrier which has fec ethernet! After "Net: " output the board hang...
->>
->> I reverted your 2 clock patches and it bootet again ... so there is
->> a problem ... try to get some more time to look into...
->>
-> 
-> We have a fec, but we had I think two patches more on it. I forget to
-> answer Marek
-> about them because I don't have my board now and because he is
-> partially right (or maybe right).
-> Anyway when we boot we could have and we have clocks that are enabled
-> by bootrom or SPL that
-> we need to declare as enable like PLL2/PLL3 those clocks are parts or
-> could be part of reparent so,
-> you need to have a reference counter on them that allow to not disable
-> during the down chain disable
-> and up chain enable. I think that what happens to your ethernet it's
-> that you disable some clock that is
-> critical to the board to survive. I had a patch merged by Tom that
-
-Yep, thats what I think too! If you access registers in a block for
-which the clock is not enabled ... it just hang...
-
-> prints the clock name so if you enable
-> the debug of the clock you will find that your board stops working
-> during one of this reparinting.
-
-I currently work on 2024.07... will rebase if 2024.10 is out...
-
-Ah, you mean:
-
-commit a70d991212c9684e09ed80ece69ce1ff7bfd9f08
-Author: Michael Trimarchi <michael@amarulasolutions.com>
-Date:   Tue Jul 9 08:28:13 2024 +0200
-
-     clk: clk-uclass: Print clk name in clk_enable/clk_disable
-
-     Print clk name in clk_enable and clk_disable. Make sense to know
-     what clock get disabled/enabled before a system crash or system
-     hang.
-
-     Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
-
-I have the same change when I debug :-P
-
-IIRC I did not see the clock names ... but I will recheck!
-
-Thanks!
-
-> Can you check it?
-
-Yep, will do.
-
-bye,
-Heiko
-> 
-> Michael
-> 
-> 
->> Do you have fec ethernet on your board?
->>
->> Thanks!
->>
->> bye,
->> Heiko
->>>
->>> Regards,
->>> Dario
->>>
->>>> bye,
->>>> Heiko
->>>> --
->>>> DENX Software Engineering GmbH,      Managing Director: Erika Unter
->>>> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
->>>> Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
->>>
->>>
->>>
->>
->> --
->> DENX Software Engineering GmbH,      Managing Director: Erika Unter
->> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
->> Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
-> 
-> 
-> 
-
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+SGkgTWFyZWssDQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogTWFyZWsg
+VmFzdXQgPG1hcmV4QGRlbnguZGU+DQo+IFNlbnQ6IFNhdHVyZGF5LCBTZXB0ZW1iZXIgMjgsIDIw
+MjQgMjoxMiBBTQ0KPiBUbzogQWJiYXJhcHUsIFZlbmthdGVzaCA8dmVua2F0ZXNoLmFiYmFyYXB1
+QGFtZC5jb20+OyB1LWJvb3RAbGlzdHMuZGVueC5kZQ0KPiBDYzogU2ltZWssIE1pY2hhbCA8bWlj
+aGFsLnNpbWVrQGFtZC5jb20+OyBmYWJyaWNlLmdhc25pZXJAZm9zcy5zdC5jb207IGdpdA0KPiAo
+QU1ELVhpbGlueCkgPGdpdEBhbWQuY29tPg0KPiBTdWJqZWN0OiBSZTogW1BBVENIIHYyIDUvN10g
+dXNiOiBvbmJvYXJkLWh1YjogQmFpbCBvdXQgaWYgcGVlciBodWIgaXMgYWxyZWFkeSBwcm9iZWQN
+Cj4gDQo+IE9uIDkvMjcvMjQgOTowMSBBTSwgVmVua2F0ZXNoIFlhZGF2IEFiYmFyYXB1IHdyb3Rl
+Og0KPiA+IFRoZSAuYmluZCBmdW5jdGlvbiBpcyBpbXBsZW1lbnRlZCB0byBiaW5kIHRoZSBjb3Jy
+ZWN0ICJoYWxmIiBvZiB0aGUNCj4gPiBodWIgdGhhdCB0aGUgZHJpdmVyIHdhbnRzIHRvIGJpbmQs
+IGFuZCByZXR1cm5pbmcgLUVOT0RFViBmb3IgdGhlIG90aGVyDQo+ID4gImhhbGYiLg0KPiA+DQo+
+ID4gU2lnbmVkLW9mZi1ieTogVmVua2F0ZXNoIFlhZGF2IEFiYmFyYXB1IDx2ZW5rYXRlc2guYWJi
+YXJhcHVAYW1kLmNvbT4NCj4gPiAtLS0NCj4gPiAgIGNvbW1vbi91c2Jfb25ib2FyZF9odWIuYyB8
+IDIwICsrKysrKysrKysrKysrKysrKysrDQo+ID4gICAxIGZpbGUgY2hhbmdlZCwgMjAgaW5zZXJ0
+aW9ucygrKQ0KPiA+DQo+ID4gZGlmZiAtLWdpdCBhL2NvbW1vbi91c2Jfb25ib2FyZF9odWIuYyBi
+L2NvbW1vbi91c2Jfb25ib2FyZF9odWIuYyBpbmRleA0KPiA+IDAwODA4ZWQ0NWUuLjljNTBjYTA5
+YzkgMTAwNjQ0DQo+ID4gLS0tIGEvY29tbW9uL3VzYl9vbmJvYXJkX2h1Yi5jDQo+ID4gKysrIGIv
+Y29tbW9uL3VzYl9vbmJvYXJkX2h1Yi5jDQo+ID4gQEAgLTE2Miw2ICsxNjIsMjUgQEAgZXJyOg0K
+PiA+ICAgCXJldHVybiByZXQ7DQo+ID4gICB9DQo+ID4NCj4gPiArc3RhdGljIGludCB1c2Jfb25i
+b2FyZF9odWJfYmluZChzdHJ1Y3QgdWRldmljZSAqZGV2KSB7DQo+ID4gKwlzdHJ1Y3Qgb2Zub2Rl
+X3BoYW5kbGVfYXJncyBwaGFuZGxlOw0KPiA+ICsJY29uc3Qgdm9pZCAqZmR0ID0gZ2QtPmZkdF9i
+bG9iOw0KPiA+ICsJaW50IHJldCwgb2ZmOw0KPiA+ICsNCj4gPiArCWlmIChkZXZfcmVhZF9waGFu
+ZGxlX3dpdGhfYXJncyhkZXYsICJwZWVyLWh1YiIsIE5VTEwsIDAsIDAsDQo+ID4gKyZwaGFuZGxl
+KSkgew0KPiANCj4gUmV0dXJuIHRoZSBlcnJvciBjb2RlOg0KPiANCj4gcmV0ID0gZGV2X3JlYWRf
+cGhhbmRsZV93aXRoX2FyZ3MoKQ0KPiBpZiAocmV0KSB7DQo+IC4uLg0KPiByZXR1cm4gcmV0Ow0K
+PiB9DQo+IA0KPiA+ICsJCWRldl9lcnIoZGV2LCAicGVlci1odWIgbm90IHNwZWNpZmllZFxuIik7
+DQo+ID4gKwkJcmV0dXJuIC1FTk9FTlQ7DQo+ID4gKwl9DQo+ID4gKw0KPiA+ICsJb2ZmID0gb2Zu
+b2RlX3RvX29mZnNldChwaGFuZGxlLm5vZGUpOw0KPiA+ICsJcmV0ID0gZmR0X25vZGVfY2hlY2tf
+Y29tcGF0aWJsZShmZHQsIG9mZiwgInVzYjQyNCw1NzQ0Iik7DQo+IA0KPiByZXR1cm4gZmR0X25v
+ZGVfY2hlY2tfY29tcGF0aWJsZSguLi4pOw0KVGhlIHJldHVybiB2YWx1ZSBvZiBmZHRfbm9kZV9j
+aGVja19jb21wYXRpYmxlIGlzICIwIiBpbiBzdWNjZXNzIGNhc2UgYW5kICIxIiBpbiBmYWlsdXJl
+Lg0KSSBjYW4ndCByZXR1cm4gZmR0X25vZGVfY2hlY2tfY29tcGF0aWJsZSgpIGRpcmVjdGx5IGFz
+IG5lZWQgdG8gcmV0dXJuIC1FTk9ERVYgZm9yIG90aGVyIGhhbGYgb2YgdGhlIGh1Yi4NCg0KVGhh
+bmtzDQpWZW5rYXRlc2gNCg==
