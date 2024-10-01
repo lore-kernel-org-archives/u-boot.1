@@ -4,90 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE0A9CE8374
-	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 13:03:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBA38CE837A
+	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 13:19:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 213C888D5C;
-	Tue,  1 Oct 2024 15:03:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 71F4F891B1;
+	Tue,  1 Oct 2024 15:19:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="ZZ+JgxAY";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="eqCt8xNy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 460E2891A6; Tue,  1 Oct 2024 15:03:12 +0200 (CEST)
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [IPv6:2a00:1450:4864:20::229])
+ id 9B17A88E6C; Tue,  1 Oct 2024 14:07:30 +0200 (CEST)
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D78A788D5C
- for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 15:03:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 2223889062
+ for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 14:07:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-2fac47f0b1aso29424201fa.1
- for <u-boot@lists.denx.de>; Tue, 01 Oct 2024 06:03:09 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-37cc9aeb01dso3060219f8f.2
+ for <u-boot@lists.denx.de>; Tue, 01 Oct 2024 05:07:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1727787789; x=1728392589;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1727784445; x=1728389245;
  darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=IAASV4yzlnu9kqn+Dc8qpk1+N6GkzQ+YGpBXJwGk+z8=;
- b=ZZ+JgxAYQe6m6xPYd3lD8dE6+iXdK0csoiDXowPbByWrkCkVh7p3wRfT1xd11ScOAk
- z6dU+gOkbgzqq2Tiqs3bj8193StAFO3VTMwEWQu+27NryjhcEOMautHLiBwXSkxRzdzC
- 9h+RytKEhBLnWq6n+NRtYuqIPBRqEucaOb0hQ=
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=4w2ywr1AId3fLxxpMWOlpioSd09kxKS99WL3sBpdeUA=;
+ b=eqCt8xNyVsqzIMdNOF8xyuLoskgFy89dUN9psD+fC1vx0pgbtHrVwblbHSeufupSWb
+ BY93+q5hNRE6GUrYlU6u8i0cAb07mTMKwC/LQfNZaVbl89CunBrmTyihukmMEsfGc/wI
+ l79ezJZkE7qhu4g7e7hCWvXt+YiIAZshRUFVG2B9GJGI2nx57rLbCctb/e8AiVFIxTMa
+ HDT7LQWDuF5U9ujCrIggtMLbgFj8Q+FkQAKsKKGQ/ZrnDH7nD0LMR6M4wY0ETxk9cq2k
+ thJ86iSvepstHPVpKs1uZG/of/eaS21n6erFqsnulPIK1PV/VfBELmHbQPDYfGFaxSBz
+ ASJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727787789; x=1728392589;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=IAASV4yzlnu9kqn+Dc8qpk1+N6GkzQ+YGpBXJwGk+z8=;
- b=GMibXEDPqNZf9l6sZHl4HyLFAGjazrhPyvsY4w3ao2rPjwFGkHhNcatBmWH6AKlAYN
- h9qqxw5/dYSUv1j0S8m1h0q6dxVfbK9qUDKq402AGHONGdG4Dj9lcUap6Cvf7hUP7ogn
- X7r0mFPs27QFvCaLELPoyzi37pAci4ft81x7c3J1oh1+DOtOMy21+0IjZbsyrpL0OUt1
- YA1N1bKo8G8rwoZ2bt5vT1cSNnKkhSV+I+gDqyD/x+8CLB+faTZr5fgN1464l9eIJFji
- RL9dyrF5crZMlEon3/i2KRY4jJbRyr9FyepjLcIxLqQ/mA8a5qbbPY9+a6qWhqp4j3Xf
- S/SQ==
+ d=1e100.net; s=20230601; t=1727784445; x=1728389245;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=4w2ywr1AId3fLxxpMWOlpioSd09kxKS99WL3sBpdeUA=;
+ b=c6OUWOSKtDuIKUrNTwilgYJzimurobkioUtEQfoKjSgGpv0KCuSeq/fKO7n0Y5FeoB
+ IrBEGBDXt84xKrfaZlski5BlWMZULLukoAmDa6uve8SI5JmY/87XeGo6KlunQsraY81M
+ u4QT1v1s/3e6JjC8Sphqr82Nx2DcsLjaLnC+9n9Jt1b+9KZhcpNEeMcIrvtPwuP4X7kd
+ 9JCZxmHwrV/ctTDQ3DJNt24ZBYhSTmT9scTZn3V4lx6SSg85Va1N/Yfs4N9ua7lcUwpI
+ TfGo4xbRjCGqA0X/JGQuCY2nb+2VHm7lZ3RhrSlltnxFnBoFAExN74WPKmywY9snTTxs
+ WSxw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUAxXdNmSQmaxdK6/C+ME/tjrOaDSL0oWcCBvPNzBiaeVTPTuc7HkXSmlBmeDVf8u8wYso6Pg0=@lists.denx.de
-X-Gm-Message-State: AOJu0YzqE1a8VkRPUAxBQGIUgtletFTnYb933stskNjSoJyOz7MZT2uK
- Urts+DOUo17FjrGhMISlDwhpW0rbdlHKbwb/QdlLknX9R2kr1aj69W4RdCdhYGDVmL8qiSc48rM
- gMaLpdJH2VHnJxGXb4BNm6kPpGUzkxFh0Qc7mYw==
-X-Google-Smtp-Source: AGHT+IG12EYuNy9qScx+zfCxwvJCgb9fkn9tML6UURwsWLtfxr6TP0C1NJ09Yo8kMXYDL9eBP0O+5NkwCqMDOBTInIM=
-X-Received: by 2002:a2e:bc0a:0:b0:2fa:d296:6fc6 with SMTP id
- 38308e7fff4ca-2fad29673e4mr32660141fa.13.1727787787551; Tue, 01 Oct 2024
- 06:03:07 -0700 (PDT)
+ AJvYcCU7hgqH8+vZ7ad2/A2riwXnnVxfpTyj2g902rWGP3q+S2rozNlzlpMCs+pmDN3NyYxv49+TK8U=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw3qez2It+HdHgcOzMSoG+CJ6ajvH5TUKP8z804o5q37alldepb
+ UcZ9u3EmxgCgr2Tiud3HkOOaBxjnepdjOtrpv2VtBiod/yNiTCyD5OcUOtrg450=
+X-Google-Smtp-Source: AGHT+IE/mt22azbQZrO4MFWdq3hWcHhe7Y9RpEkjhSxDn7oj7d8CBUIlrj/NM3ldDU+XP6/D5fKlsg==
+X-Received: by 2002:adf:f846:0:b0:37c:d526:9bb0 with SMTP id
+ ffacd0b85a97d-37cd5aa5d5emr9765144f8f.35.1727784445407; 
+ Tue, 01 Oct 2024 05:07:25 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-37cd564d35bsm11659657f8f.21.2024.10.01.05.07.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 01 Oct 2024 05:07:24 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>, AKASHI Takahiro
+ <akashi.tkhro@gmail.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Andrew Davis <afd@ti.com>, Bin Meng <bmeng@tinylab.org>, Bryan Brattlof
+ <bb@ti.com>, Caleb Connolly <caleb.connolly@linaro.org>, =?utf-8?B?Q3M=?=
+ =?utf-8?B?w7Nrw6Fz?= Bence
+ <csokas.bence@prolan.hu>, Dragan Simic <dsimic@manjaro.org>, Eddie James
+ <eajames@linux.ibm.com>, Hans de Goede <hdegoede@redhat.com>, Heinrich
+ Schuchardt <xypron.glpk@gmx.de>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Janne Grunau <j@jannau.net>, Jesse Taube
+ <mr.bossman075@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>, Johan
+ Jonker <jbx6244@gmail.com>, Julien Masson <jmasson@baylibre.com>, Kever
+ Yang <kever.yang@rock-chips.com>, "Leon M. Busch-George"
+ <leon@georgemail.eu>, Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek
+ Vasut <marex@denx.de>, Michal Simek <michal.simek@amd.com>, Nam Cao
+ <namcao@linutronix.de>, Peter Robinson <pbrobinson@gmail.com>, Quentin
+ Schulz <quentin.schulz@cherry.de>, Ramon Fried <rfried.dev@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Rayagonda Kokatanur
+ <rayagonda.kokatanur@broadcom.com>, Stefan Roese <sr@denx.de>, Sumit Garg
+ <sumit.garg@linaro.org>, Thomas =?utf-8?Q?Wei=C3=9Fschuh?=
+ <thomas.weissschuh@linutronix.de>, Tony Dinh <mibodhi@gmail.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Subject: Re: [PATCH v2 0/8] bootstd: sunxi: Migrate to standard boot
+In-Reply-To: <CAFLszTjrxJA_ZmU-Uptb=kYJcvaXwCwNHg0MeGVW=DNUhPoSaw@mail.gmail.com>
+References: <20240823204824.443631-1-sjg@chromium.org>
+ <CAFLszTjrxJA_ZmU-Uptb=kYJcvaXwCwNHg0MeGVW=DNUhPoSaw@mail.gmail.com>
+Date: Tue, 01 Oct 2024 14:07:21 +0200
+Message-ID: <87cykkc9hi.fsf@baylibre.com>
 MIME-Version: 1.0
-References: <20240913095622.72377-1-dario.binacchi@amarulasolutions.com>
- <20240913095622.72377-9-dario.binacchi@amarulasolutions.com>
- <beecebba-79f5-e21d-3062-287c2dbb04e9@denx.de>
- <CABGWkvqOzc3cGM_aKVurv1XbAbeHXE77xwq_uAmSuZMgjCoevQ@mail.gmail.com>
- <ebb734bd-bdf7-ffd2-d676-7eb6011466a3@denx.de>
- <CAOf5uwm13jyOb0M9Xvx_bO1RpXhDcWqKBC-4fhZGo61Q5cjnjw@mail.gmail.com>
- <3cb57821-30f0-6aa0-2dec-313381b1350a@denx.de>
- <9ce14505-6c37-f2e8-4b5d-44f1a55f0393@denx.de>
- <20241001102908.39b2d3a6@xps-13>
- <CAOf5uwn8vhozjtMqXmWL=3Jaf05UhV7cnGn15Ywj07-PmwW_9w@mail.gmail.com>
- <20241001105057.2992e124@xps-13>
- <a91171dd-a2f2-8df7-5b11-4a35a227ef2e@denx.de>
- <CAOf5uwkw-NcSq6NDROsUJVfCTdYZcshxFyUJRW9Q-f1wcKmz=w@mail.gmail.com>
- <20241001120111.181be2a4@xps-13>
-In-Reply-To: <20241001120111.181be2a4@xps-13>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Tue, 1 Oct 2024 15:02:56 +0200
-Message-ID: <CAOf5uw=jQEtQUGWzd40shLidcMNfkTsPjSbCQ7L=MJdBUTUbTw@mail.gmail.com>
-Subject: Re: [PATCH 08/26] power: Add iMX8M block ctrl driver for dispmix
-To: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: hs@denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- u-boot@lists.denx.de, 
- Fabio Estevam <festevam@denx.de>, linux-amarula@amarulasolutions.com, 
- Ye Li <ye.li@nxp.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-Mailman-Approved-At: Tue, 01 Oct 2024 15:19:18 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,139 +113,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+Hi Simon,
 
-On Tue, Oct 1, 2024 at 12:01=E2=80=AFPM Miquel Raynal <miquel.raynal@bootli=
-n.com> wrote:
->
-> Hi Michael,
->
-> > > >>>> Ported the patch from patchset
-> > > >>>>
-> > > >>>> "[PATCH 05/26] clk: imx8mm: Mark IMX8MM_SYS_PLL2 and IMX8MM_SYS_=
-PLL3 as enabled"
-> > > >>>>
-> > > >>>> to imx8mp [2] and fec ethernet works again for me on imx8mp!
-> > > >>>>
-> > > >>>> Could you add this if you post a v2 ?
-> > > >>>
-> > > >>> TBH I don't feel like the below change is the correct one, it is =
-too
-> > > >>> specific. The clock core is recursive and thus should handle the
-> > > >>> reparenting situations gracefully.
-> > > >>>
-> > > >>> I posted a series that is targeting the LVDS output on imx8mp. Yo=
-u
-> > > >>> should probably consider checking these patches as well if you wo=
-rk
-> > > >>> on imx8mp as well. I also had similar breakages with Ethernet whi=
-ch
-> > > >>> happened during the assigned-clocks handling. This patch, which i=
-s more
-> > > >>> future and platform agnostic, fixed it:
-> > > >>>
-> > > >>> https://lore.kernel.org/u-boot/20240910101344.110633-3-miquel.ray=
-nal@bootlin.com/
-> > > >>>
-> > > >>
-> > > >> The clock patches are not specific at all. You need to have it wor=
-king
-> > > >> for the parent for each component.
-> > > >
-> > > > The diff shown by Heiko is explicitly enabling PLLs by naming them =
-in
-> > > > the iMX driver. This is not the correct approach. The problem of
-> > > > having non-enabled new parents is global. Parent clocks should be
-> > > > enabled before changing muxes, and this should be enforced
-> > > > by the clock core/uclass, not the SoC drivers.
-> > >
-> > > Okay, valid argument.
-> > >
-> > > >
-> > > >> This is a standard way to do it and nothing magic compared to othe=
-r
-> > > >> implementations.
-> > > >
-> > > > No, naming PLLs explicitly is not the correct approach.
-> > > >
-> > > >> I don't see
-> > > >> in your series any addressing or reparent clock or take in account
-> > > >> that a clock should be enable before
-> > > >> reparenting.
-> > > >
-> > > > That's exactly the link above, whose diff is pasted here for refere=
-nce:
-> > > >
-> > > > @@ -595,6 +595,10 @@ int clk_set_parent(struct clk *clk, struct clk=
- *parent)
-> > > >       if (!ops->set_parent)
-> > > >               return -ENOSYS;
-> > > >
-> > > > +     ret =3D clk_enable(parent);
-> > > > +     if (ret)
-> > > > +             return ret;
-> > >
-> > > As I said before, I had *exact* the same patch and thought I made a b=
-ig
-> > > hack :-P
-> > >
-> > > But I wonder ... if this a generic "problem", why nobody had yet prob=
-lems
-> > > with it...
-> >
-> > I think that a generic approach that takes into account the reparent
-> > is more valuable, then
-> > this.
->
-> I'm sorry I don't fully understand your answer. I assume you agree with
-> the generic approach quoted above.
->
-> > If a clock is enabled by another stage and we don't aware about
-> > it we need to mark
-> > as enabled.
->
-> clk_enable() already handles this kind of situation.
->
-> > I think that this force of enable it's just a short path
-> > that does not solve the generic
-> > problem.
->
-> What "force of enable"? The parent needs to be enabled before we use it
-> as parent. The logic is always the same:
-> - clk_enable() the new parent
-> - change the parent
-> - clk_disable() the old parent
-> I don't see any short path here.
->
-> > I really tried to abstract what is really implemented in
-> > other OS on the same topic.
->
-> FYI, Linux does the clk_enable(parent) like above.
->
+On mar., oct. 01, 2024 at 05:18, Simon Glass <sjg@chromium.org> wrote:
 
-You mean linux enables a clock in set_parent even if the clock_chain
-is not yet enabled.
-clock a disable
-clock b disable
+> Hi,
+>
+> On Fri, 23 Aug 2024 at 14:48, Simon Glass <sjg@chromium.org> wrote:
+>>
+>> This series attempts to migrate all sunxi boards to use standard boot,
+>> along with a text environment.
+>>
+>> Changes in v2:
+>> - Add new patch to resolve BOOTSTD->BLK recursion with Kconfig
+>> - Put the FEL bootmeth before all other global bootmeths
+>> - Convert the other DISTRO_DEFAULTS in the Kconfig too
+>> - Keep BOOTCMD_SUNXI_COMPAT
+>> - Keep bootcmd_sunxi_compat if OLD_SUNXI_KERNEL_COMPAT is enabled
+>>
+>> Simon Glass (8):
+>>   blk: Make functions available unconditionally
+>>   bootstd: Avoid calling unavailable block functions
+>>   bootstd: Avoid depending on BLK
+>>   sunxi: Add a bootmeth for FEL
+>>   sunxi: Move to bootstd
+>>   sunxi: Drop old distro boot variables
+>>   env: Provide a work-around for unquoting fdtfile
+>>   sunxi: Move to text environment
+>>
+>>  Makefile                                      |   1 +
+>>  arch/arm/Kconfig                              |  10 +-
+>>  board/sunxi/sunxi.env                         | 152 +++++++++++
+>>  boot/Kconfig                                  |  16 +-
+>>  boot/Makefile                                 |   1 +
+>>  boot/bootdev-uclass.c                         |   3 +
+>>  boot/bootmeth_fel.c                           |  81 ++++++
+>>  .../gardena-smart-gateway-mt7688_defconfig    |   1 +
+>>  doc/usage/environment.rst                     |  12 +
+>>  include/blk.h                                 |   9 +-
+>>  include/configs/sunxi-common.h                | 238 ------------------
+>>  11 files changed, 278 insertions(+), 246 deletions(-)
+>>  create mode 100644 board/sunxi/sunxi.env
+>>  create mode 100644 boot/bootmeth_fel.c
+>>
+>> --
+>> 2.34.1
+>>
+>
+> I'm just checking on this series. Are there any comments, or can it be applied?
 
-clk_set_parent(a, b) b->a now b is enabled?
+Quentin mentioned a typo in patch 3/8, see:
+https://lore.kernel.org/all/1f963aa8-948a-4657-9f1b-a3bc38df4714@cherry.de/
 
-Michael
+Can you make sure it gets removed when being applied ?
 
-> Thanks,
-> Miqu=C3=A8l
-
-
-
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+>
+> Regards,
+> Simon
