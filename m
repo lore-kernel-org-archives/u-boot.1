@@ -4,60 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A45C8CEACEC
-	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 17:08:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82BC5CEACEC
+	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 17:17:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B17B78922F;
-	Tue,  1 Oct 2024 19:08:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 2479C89232;
+	Tue,  1 Oct 2024 19:17:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gehealthcare.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1727802533;
-	bh=+Xc6XnMC82ZUWsikS3I+r9kW9t0fHJdMx09htY3mMUc=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=EW4aCxCOUzBbfj6EgDx4+i//k6T7R56RtaK7ttZ9YmduqlqkXNMaA0JdyX+jis3BW
-	 fwvz3O4WPmjElewl2D4Iy0mkhPlBdOrQnTeXZONp53yJQI3U+gofEDAWsnnAHShbPa
-	 3DfJQqu2xNZXkjElT5oQ1wKTMDu7Lz2oWBYLvixllAP+HFs+cvQKQDQEglV6sR1Y4e
-	 x6P1Ijn3nrE8lAjPY5Vp7/EvWjmyxEvOB7Lalmy/dgtrcV6zVThF8waKETu72yO5mT
-	 WD1DQqVqxUGSWn+F7zbBf0U8sMKwQnkPNgqokqFlakOxlx+vA6YXLrXEfwIwNyYNKt
-	 j6h0Esyro40Rw==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gehealthcare.com header.i=@gehealthcare.com header.b="IA37Q6d0";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 39362891F0; Tue,  1 Oct 2024 15:58:44 +0200 (CEST)
+Received: from mx0a-00176a03.pphosted.com (mx0b-00176a03.pphosted.com
+ [67.231.157.48])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id BF4EC89209;
- Tue,  1 Oct 2024 19:08:52 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1727802533;
- bh=+Xc6XnMC82ZUWsikS3I+r9kW9t0fHJdMx09htY3mMUc=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=p+7yuURj7DjF3OS6fPxvi+Lm1tf2Jrxc8xYWNdkDcLfE8AYS+1L7g0FUQ7ClCOMd5
- +qIGI3Oo15p38Kyogz+hoCSzqNclGZ+DtT417Q1s/WWsLu5SPp3r6AukbWRw8lCjXN
- IpkaEL16WuaiBhqx6a8CT3CJ2i5oOxCoX42LPy1dN1Bs+Xxnd8S1LfxdHbUt+7Cte+
- vKF0bi3CdLgV3nM6sfwjTC+TRm1g4SMiT/xeTk0e6HeJkrpm4EUoFeGNhqy7YhAhjJ
- 9dKJWcptT5B0o4oCKwrTBL4YH7Qie/6vKrceB7ru3TzISkXSC1Os1ZoH1ZB/J0A+yr
- via5tOohSyLyw==
-Message-ID: <19661704-b3ab-428a-902c-8628060ae60d@denx.de>
-Date: Tue, 1 Oct 2024 17:47:22 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id DA68688D8D
+ for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 15:58:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=gehealthcare.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=brian.ruley@gehealthcare.com
+Received: from pps.filterd (m0048299.ppops.net [127.0.0.1])
+ by m0048299.ppops.net-00176a03. (8.18.1.2/8.18.1.2) with ESMTP id
+ 491BnQZP019749
+ for <u-boot@lists.denx.de>; Tue, 1 Oct 2024 09:58:40 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ gehealthcare.com; h=cc:content-transfer-encoding:date:from
+ :in-reply-to:message-id:mime-version:references:subject:to; s=
+ outbound; bh=ISOnfkHy6fSM88CoAmzjHw8M9TsV1Y/ZzLFHczXo6Ps=; b=IA3
+ 7Q6d0PElaQ/aFUXqn/Nv1rvIeT9gi4JBwETDObhf5rkWXXn4fU0ELba+nhHps7qc
+ 823pGaMSR1X34Co1EYne63pC79kGUpAFCl02Abd9CIwKXa1AuBVsq9PWTF7yi0u1
+ TsrRY1wvCMY0vBruvQkUWzg/4zlGAm5XQtACmoxetq8Oy2akBUkSGzkuRvLYGnHF
+ E8x92tpdBbBt15TtcAx56CKzixBB6zPmcSwFcIEZxFCBOKxSCgXIEgOgapHRs77C
+ cxCsUdyRF37OEGKRq7s25x8dJC0X6G9eqhhvQYxkJZkmHNGgCFXMgYaYdkR7Zq+n
+ 6eUFvLiPxa+Rv+NPL6Q==
+From: Brian Ruley <brian.ruley@gehealthcare.com>
+To: Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: ian.ray@gehealthcare.com, Brian Ruley <brian.ruley@gehealthcare.com>,
+ Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
+Subject: [PATCH v4 1/2] binman: cosmetic: refactor `nxp_imx8mcst' etype code
+Date: Tue,  1 Oct 2024 16:58:08 +0300
+Message-Id: <20241001135810.96-1-brian.ruley@gehealthcare.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20240930161006.41052-1-brian.ruley@gehealthcare.com>
+References: <20240930161006.41052-1-brian.ruley@gehealthcare.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] usb: dwc3: fix dcache flush range calculation
-To: neil.armstrong@linaro.org, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-References: <20240724-u-boot-dwc3-gadget-dcache-fixup-v2-0-65836d699a71@linaro.org>
- <20240724-u-boot-dwc3-gadget-dcache-fixup-v2-2-65836d699a71@linaro.org>
- <fc51702a-1609-4231-984f-fd24bd051c85@denx.de>
- <64a97d38-95bc-4b6f-9b90-33a5e339624e@linaro.org>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <64a97d38-95bc-4b6f-9b90-33a5e339624e@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Proofpoint-ORIG-GUID: 7d__C5HQ6nghSoxZaJS-fQ62uvk7CuZY
+X-Proofpoint-GUID: 7d__C5HQ6nghSoxZaJS-fQ62uvk7CuZY
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1051,Hydra:6.0.680,FMLib:17.12.62.30
+ definitions=2024-10-01_10,2024-09-30_01,2024-09-30_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxscore=0
+ malwarescore=0
+ mlxlogscore=982 phishscore=0 adultscore=0 clxscore=1015 lowpriorityscore=0
+ suspectscore=0 bulkscore=0 spamscore=0 priorityscore=1501 impostorscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2408220000
+ definitions=main-2410010090
+X-Mailman-Approved-At: Tue, 01 Oct 2024 19:17:42 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,58 +81,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/1/24 5:32 PM, Neil Armstrong wrote:
-> On 01/10/2024 17:21, Marek Vasut wrote:
->> On 7/24/24 5:48 PM, Neil Armstrong wrote:
->>> The current flush operation will omit doing a flush/invalidate on
->>> the first and last bytes if the base address and size are not aligned
->>> with DMA_MINALIGN.
->>>
->>> This causes operation failures Qualcomm platforms.
->>>
->>> Take in account the alignment and size of the buffer and also
->>> flush the previous and last cacheline.
->>>
->>> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
->>> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
->>> ---
->>>   drivers/usb/dwc3/io.h | 5 ++++-
->>>   1 file changed, 4 insertions(+), 1 deletion(-)
->>>
->>> diff --git a/drivers/usb/dwc3/io.h b/drivers/usb/dwc3/io.h
->>> index 04791d4c9be..1aaf5413c6d 100644
->>> --- a/drivers/usb/dwc3/io.h
->>> +++ b/drivers/usb/dwc3/io.h
->>> @@ -50,6 +50,9 @@ static inline void dwc3_writel(void __iomem *base, 
->>> u32 offset, u32 value)
->>>   static inline void dwc3_flush_cache(uintptr_t addr, int length)
->>>   {
->>> -    flush_dcache_range(addr, addr + ROUND(length, CACHELINE_SIZE));
->>> +    uintptr_t start_addr = (uintptr_t)addr & ~(ARCH_DMA_MINALIGN - 1);
->>> +    uintptr_t end_addr = ALIGN((uintptr_t)addr + length, 
->>> ARCH_DMA_MINALIGN);
->>> +
->>> +    flush_dcache_range(start_addr, end_addr);
->> include/cpu_func.h:void flush_dcache_range(unsigned long start, 
->> unsigned long stop);
->>
->> So you shouldn't be feeding this function uintptr_t , right ?
-> 
-> uintptr_t is the right type to perform pointer calculation,
-> I should probably cast it to unsigned long for flush_dcache_range.
+Simplify code and conform to the style guide used in the project by
+making the following changes:
+* Capitalize global constants
+* Use single quotes for multiline strings (except docstrings)
+* Fix line width to 79 cols
+* Use f-string instead of formatting a regular string or using a
+  complicated concatenation
+* Move common suffix used in keys to a global variable "KEY_NAME"
+  to reduce the likelihood of typos and making future changes
+  easier
 
-Better fix flush_dcache_range(), using unsigned long there is not great, 
-but that's for separate series from this bugfix.
+Signed-off-by: Brian Ruley <brian.ruley@gehealthcare.com>
+Cc: Marek Vasut <marex@denx.de>
+---
+Changes for v4:
+- expand f-string usage, add common information to variable, capitalize
+  constants
 
-> I'll do this in v2.
-> 
->>
->> Also, why change CACHELINE_SIZE to ARCH_DMA_MINALIGN ?
-> 
-> Because all the memory allocated for DMA was done with dma_alloc_coherent()
-> which uses ARCH_DMA_MINALIGN directly or indirectly.
-> 
-> I should probably remove CACHELINE_SIZE in the same patch.
-And document this in the commit message, that's useful information.
+ tools/binman/etype/nxp_imx8mcst.py | 36 +++++++++++++++++++-----------
+ 1 file changed, 23 insertions(+), 13 deletions(-)
 
-Thanks
+diff --git a/tools/binman/etype/nxp_imx8mcst.py b/tools/binman/etype/nxp_imx8mcst.py
+index 8221517b0c..bd5a5d805f 100644
+--- a/tools/binman/etype/nxp_imx8mcst.py
++++ b/tools/binman/etype/nxp_imx8mcst.py
+@@ -23,7 +23,9 @@ from u_boot_pylib import tools
+ MAGIC_NXP_IMX_IVT = 0x412000d1
+ MAGIC_FITIMAGE    = 0xedfe0dd0
+ 
+-csf_config_template = """
++KEY_NAME = 'sha256_4096_65537_v3_usr_crt'
++
++CSF_CONFIG_TEMPLATE = f'''
+ [Header]
+   Version = 4.3
+   Hash Algorithm = sha256
+@@ -37,7 +39,7 @@ csf_config_template = """
+   Source index = 0
+ 
+ [Install CSFK]
+-  File = "CSF1_1_sha256_4096_65537_v3_usr_crt.pem"
++  File = "CSF1_1_{KEY_NAME}.pem"
+ 
+ [Authenticate CSF]
+ 
+@@ -48,12 +50,12 @@ csf_config_template = """
+ [Install Key]
+   Verification index = 0
+   Target Index = 2
+-  File = "IMG1_1_sha256_4096_65537_v3_usr_crt.pem"
++  File = "IMG1_1_{KEY_NAME}.pem"
+ 
+ [Authenticate Data]
+   Verification index = 2
+   Blocks = 0x1234 0x78 0xabcd "data.bin"
+-"""
++'''
+ 
+ class Entry_nxp_imx8mcst(Entry_mkimage):
+     """NXP i.MX8M CST .cfg file generator and cst invoker
+@@ -69,9 +71,15 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
+     def ReadNode(self):
+         super().ReadNode()
+         self.loader_address = fdt_util.GetInt(self._node, 'nxp,loader-address')
+-        self.srk_table = os.getenv('SRK_TABLE', fdt_util.GetString(self._node, 'nxp,srk-table', 'SRK_1_2_3_4_table.bin'))
+-        self.csf_crt = os.getenv('CSF_KEY', fdt_util.GetString(self._node, 'nxp,csf-crt', 'CSF1_1_sha256_4096_65537_v3_usr_crt.pem'))
+-        self.img_crt = os.getenv('IMG_KEY', fdt_util.GetString(self._node, 'nxp,img-crt', 'IMG1_1_sha256_4096_65537_v3_usr_crt.pem'))
++        self.srk_table = os.getenv(
++            'SRK_TABLE', fdt_util.GetString(self._node, 'nxp,srk-table',
++                                            'SRK_1_2_3_4_table.bin'))
++        self.csf_crt = os.getenv(
++            'CSF_KEY', fdt_util.GetString(self._node, 'nxp,csf-crt',
++                                          f'CSF1_1_{KEY_NAME}.pem'))
++        self.img_crt = os.getenv(
++            'IMG_KEY', fdt_util.GetString(self._node, 'nxp,img-crt',
++                                          f'IMG1_1_{KEY_NAME}.pem'))
+         self.unlock = fdt_util.GetBool(self._node, 'nxp,unlock')
+         self.ReadEntries()
+ 
+@@ -118,16 +126,18 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
+         tools.write_file(output_dname, data)
+ 
+         # Generate CST configuration file used to sign payload
+-        cfg_fname = tools.get_output_filename('nxp.csf-config-txt.%s' % uniq)
++        cfg_fname = tools.get_output_filename(f'nxp.csf-config-txt.{uniq}')
+         config = configparser.ConfigParser()
+         # Do not make key names lowercase
+         config.optionxform = str
+         # Load configuration template and modify keys of interest
+-        config.read_string(csf_config_template)
+-        config['Install SRK']['File'] = '"' + self.srk_table + '"'
+-        config['Install CSFK']['File'] = '"' + self.csf_crt + '"'
+-        config['Install Key']['File'] = '"' + self.img_crt + '"'
+-        config['Authenticate Data']['Blocks'] = hex(signbase) + ' 0 ' + hex(len(data)) + ' "' + str(output_dname) + '"'
++        config.read_string(CSF_CONFIG_TEMPLATE)
++        config['Install SRK']['File']  = f'"{self.srk_table}"'
++        config['Install CSFK']['File'] = f'"{self.csf_crt}"'
++        config['Install Key']['File']  = f'"{self.img_crt}"'
++        config['Authenticate Data']['Blocks'] = \
++            f'{signbase:#x} 0 {len(data):#x} "{output_dname}"'
++
+         if not self.unlock:
+             config.remove_section('Unlock')
+         with open(cfg_fname, 'w') as cfgf:
+-- 
+2.39.5
+
