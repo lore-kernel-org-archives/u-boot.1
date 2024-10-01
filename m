@@ -4,69 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E259BCE7CE7
-	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 08:56:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC88CCE7CF7
+	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 08:56:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C6838914D;
-	Tue,  1 Oct 2024 10:56:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id C124089177;
+	Tue,  1 Oct 2024 10:56:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="KM+aMxEP";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="KkTnJcEP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A2EC8916A; Tue,  1 Oct 2024 10:56:07 +0200 (CEST)
-Received: from relay5-d.mail.gandi.net (relay5-d.mail.gandi.net
- [217.70.183.197])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id DC3F589177; Tue,  1 Oct 2024 10:56:10 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A50DA8914D
- for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 10:56:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A88878917B
+ for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 10:56:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 7C17C1C000F;
- Tue,  1 Oct 2024 08:56:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1727772964;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=r0dzoVw4qnLoQ7OX1J+X92Ie2UHz7AfhF3omT2FTR9E=;
- b=KM+aMxEPb+tz4fNc32oWmT0nRGZUPmdHW9plZXlJGNAOhpZ71e4FAOFmZeaaZuUMlQqHxS
- jd9KiFjbXujBeU5Nls16ytjsGuStlexwLkqoQIa0eF/yCJIj0F6sugzrYWKNr/2WrN//LI
- B2YwmLmC/Nz3qhmNTcxaA2UcS1dbmARR2ATWM5UcHHtZsVCCE6mB+sIYNPMs8X+bzR8KSd
- +iMmDqMwU68xOAkD4VCz/VlvRMaCOgIa7wf7koDptfAIXZUfWHJQRJ1T8beqEymxR4vvN0
- Xwi3a2J19UEd+lv2GyJu1sfhkQ40V4jTzKFOB9xD+ImYoD3QsFJHZzakNqYxcQ==
-Date: Tue, 1 Oct 2024 10:56:02 +0200
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: Heiko Schocher <hs@denx.de>
-Cc: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>, Dario
- Binacchi <dario.binacchi@amarulasolutions.com>, u-boot@lists.denx.de, Fabio
- Estevam <festevam@denx.de>, linux-amarula@amarulasolutions.com, Ye Li
- <ye.li@nxp.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>, Jaehoon Chung
- <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 08/26] power: Add iMX8M block ctrl driver for dispmix
-Message-ID: <20241001105602.23dcc2a6@xps-13>
-In-Reply-To: <ff13dbb5-47af-28c8-c44d-079ac475b977@denx.de>
-References: <20240913095622.72377-1-dario.binacchi@amarulasolutions.com>
- <20240913095622.72377-9-dario.binacchi@amarulasolutions.com>
- <beecebba-79f5-e21d-3062-287c2dbb04e9@denx.de>
- <CABGWkvqOzc3cGM_aKVurv1XbAbeHXE77xwq_uAmSuZMgjCoevQ@mail.gmail.com>
- <ebb734bd-bdf7-ffd2-d676-7eb6011466a3@denx.de>
- <CAOf5uwm13jyOb0M9Xvx_bO1RpXhDcWqKBC-4fhZGo61Q5cjnjw@mail.gmail.com>
- <3cb57821-30f0-6aa0-2dec-313381b1350a@denx.de>
- <9ce14505-6c37-f2e8-4b5d-44f1a55f0393@denx.de>
- <20241001102908.39b2d3a6@xps-13>
- <ff13dbb5-47af-28c8-c44d-079ac475b977@denx.de>
-Organization: Bootlin
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-42cb1758e41so38716895e9.1
+ for <u-boot@lists.denx.de>; Tue, 01 Oct 2024 01:56:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1727772968; x=1728377768;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=HPYnEP6r7NeDstVnKAC7nLURVWB8somVZhS9DoSmpFE=;
+ b=KkTnJcEPS94ZA64GG3N1yxem0nfwURHJ7ThZS6uqZCh/0MrqSSzfIXRwMUFB+Cc5+M
+ Q3YWjbSV7hkilfG3Z6AQVP6pDQ/PiF14lgWa9vR7Afxb7Tr42WMbe4BojXT16UaQwSQc
+ r2u68/NdNzWrXhmzyJXgj8vqKKblUqB6Sl7TU+4KgPq8B1ZUhbJtOJNesQeIN+zdBLgg
+ cfzEe/fICxu6ergZJjG+mV1AyTGYVE726w9LFqTE8IWNBIDtpdibliMdTMMN3TkqgV6K
+ 0Y3z0D8KmPZinamCbotgq8qBaBLQW/uv8DCMrWphb2pKXHuIF/dCtGA4BISkjVswM5Ee
+ 2ZLg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727772968; x=1728377768;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=HPYnEP6r7NeDstVnKAC7nLURVWB8somVZhS9DoSmpFE=;
+ b=kTu/7+p0rHZxTrjNItStRmfMQYEbN+2vvuYypdHA0kbcMa9SyjTyHOqGNeX5del9MQ
+ jFOePTS8Ac3+L14x2WVcs57slzMj/owvhvaaSZEtJYk+BNIXVulo+h01Ib19JG11tB1B
+ F6T0WO6jYlWskrMMmx5Oo9Y+AmTxJiCq/1sO+63Oij8Ftqe1l9voE3PiUKZpMTg7IecT
+ k3dTJX/Ian37ae021kvvemXhHHCfY2njJCqVTzYRaCPFCJCes0nsjWfmcRPR6Rk1vGeF
+ uGs0ta8dt+5LSf5gshSa/1QEijkSJdw5RCWE/kE3r9jAE8e+kmSXkQx3ZRsLRzJVaX9X
+ yReA==
+X-Gm-Message-State: AOJu0Yy29vhEVttoyR6DuiC+bjjJDoynr9ri3tGV9nN7Qm0/KmKzVpdi
+ 5DjVIX1vsQkC4Wo6GhHghARzYO3DS458ybUiNUWgcfBHGBLMQKhTMFoDCIexlWU=
+X-Google-Smtp-Source: AGHT+IEMOQUgxvgEcje0wBsyjUkrVZWjjTypLuM4MOEORepHXyNtPec23YVPkYXu5CGUya3yqhXkyA==
+X-Received: by 2002:a05:600c:1ca4:b0:426:5ef5:bcb1 with SMTP id
+ 5b1f17b1804b1-42f5840a012mr98072815e9.6.1727772967984; 
+ Tue, 01 Oct 2024 01:56:07 -0700 (PDT)
+Received: from mkorpershoek-xps13.carmes.etincelle-coworking.com
+ ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-42f57e40ab9sm126464945e9.48.2024.10.01.01.56.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 01 Oct 2024 01:56:07 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: u-boot@lists.denx.de, Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Cc: Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240911133900.1444083-1-rasmus.villemoes@prevas.dk>
+References: <20240911133900.1444083-1-rasmus.villemoes@prevas.dk>
+Subject: Re: [PATCH] dfu: define a callback function for the dfu_alt_info
+ environment variable
+Message-Id: <172777296703.47811.4486590659666115846.b4-ty@baylibre.com>
+Date: Tue, 01 Oct 2024 10:56:07 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-GND-Sasl: miquel.raynal@bootlin.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,60 +96,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heiko,
+Hi,
 
-> >> I see with your patch the clock names, so fine... and see [1]
-> >>
-> >> Hmm... I am on imx8mp, and I think the changes the patchset do in
-> >>
-> >> "clk: imx8mn: Prevent clock critical path from disabling during repare=
-nt and set_rate"
-> >>
-> >> are in clk-imx8mp already ...
-> >>
-> >> Ported the patch from patchset
-> >>
-> >> "[PATCH 05/26] clk: imx8mm: Mark IMX8MM_SYS_PLL2 and IMX8MM_SYS_PLL3 a=
-s enabled"
-> >>
-> >> to imx8mp [2] and fec ethernet works again for me on imx8mp!
-> >>
-> >> Could you add this if you post a v2 ? =20
-> >=20
-> > TBH I don't feel like the below change is the correct one, it is too
-> > specific. The clock core is recursive and thus should handle the
-> > reparenting situations gracefully.
-> >=20
-> > I posted a series that is targeting the LVDS output on imx8mp. You
-> > should probably consider checking these patches as well if you work
-> > on imx8mp as well. I also had similar breakages with Ethernet which
-> > happened during the assigned-clocks handling. This patch, which is more
-> > future and platform agnostic, fixed it:
-> >=20
-> > https://lore.kernel.org/u-boot/20240910101344.110633-3-miquel.raynal@bo=
-otlin.com/ =20
->=20
-> Yes, I also had such a "fix" first, before seeing Darios patchset!
->=20
-> Damn, I did not see your patches...
->=20
-> regarding your patch ... I am unsure which version is the best one ...
-> I fear of side effects for other plattforms adding this change in
-> generic "drivers/clk/clk-uclass.c" file...
+On Wed, 11 Sep 2024 15:39:00 +0200, Rasmus Villemoes wrote:
+> I'm trying to use dfu-util for bootstrapping an stm32mp board. It
+> mostly works fine, but something goes horribly wrong as soon as I make
+> use of the ability to run arbitrary u-boot shell commands. The shell
+> commands themselves work fine, but the heuristic "dfu_alt_info may
+> have changed, we have to reinit" seems to cause the board and/or my
+> host machine to go into some bad state, and further dfu-util commands
+> fail.
+> 
+> [...]
 
-FYI, this is the same approach as Linux. I don't expect any hardware
-related breakage, however if people have already tried to workaround
-the core's mistakes by doing more than expected in the SoC drivers,
-maybe we will observe issues.
+Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu-next)
 
-> > My series is complimentary, even though there are some overlaps that we
-> > need to merge. =20
->=20
-> I try to find time to test them on my board!
+[1/1] dfu: define a callback function for the dfu_alt_info environment variable
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/4b17845529f5f0c94fe68c2daba1948d0ee41bb2
 
-Sure, let me know if you have troubles, it's still fresh :-) I will
-rework it a bit as it received already interesting feedback, and will
-note to Cc you (as well as Dario/Michael) in v2.
-
-Thanks,
-Miqu=C3=A8l
+--
+Mattijs
