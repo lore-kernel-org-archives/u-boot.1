@@ -4,59 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D839CE7D19
-	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 12:13:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 277C7CE7D12
+	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 12:24:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E9FF4891C1;
-	Tue,  1 Oct 2024 14:13:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id CC5D7891AC;
+	Tue,  1 Oct 2024 14:24:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1727784810;
-	bh=fCCZ7dARBFU7XWDfqsCpha4LUylyBwIKT4OVKr5SGzc=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=e2cuGAwe/1Nw3Q+OXMTB3IXGGAjuophtZ29YJDEOct24pzJMtleXCXNG0N2V5hIaw
-	 y+XjCSMgrGIUI5tbcVD2cdIEbDV8nfh3FJchtpLkzTI/dj1zW8vGUr6N9NcqRABuOV
-	 nZ5HG9BWBUow9szuAE+E6GXzPMtSuWEbT+K7pymDwH4HIIu5BYJ5aNpLgMAbXbyxlh
-	 DAdsSa7M3uwVlE8IzqXRv2lW/MHZjnhrkIQ2tOBq5X4senXxTKWIB9iEpYePA+xVWa
-	 4TDziZMVj6V+SUDXStE1W/wQcVN6STCKiiu4gMoyQf7r60cOttrPgwnytvbUW6bCi8
-	 JBO1tN7MKihaQ==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Qi7zPDPD";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id AC7DC891AC; Tue,  1 Oct 2024 14:24:42 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 1347F891A7;
- Tue,  1 Oct 2024 14:13:28 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1727784808;
- bh=fCCZ7dARBFU7XWDfqsCpha4LUylyBwIKT4OVKr5SGzc=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=ohzWpNbnMdzimqXxLETK2C8v6Kp3WXJZ22pIDMVQeDl487x+2vRgj6md5O7ZmdUsg
- gd1oomOkHuG8YbTKGfCcFXRBnS/bePg2dRYJFhxcyKVotcDzsUNH0Dm/HTaQItBFZk
- 9tXBJQimiqI6i2XnMydCGkMygfo/SUQ8SRObEYAy47Ihkp2V/ERfqCEutePR5NwAnc
- D/76POPF2l6CO1asF+9/7ijqHlY1dT4TrzWiC9gzyXkvScayHoZLFiAfyN5N3wXkmC
- /9a0+v7EYqxSaCjJn9O1bu+mjNrTJ5EO/pp9EcENlLk+u1ueeLK/62Cakd5QrXS3tm
- DM9tKOTzDF5dQ==
-Message-ID: <98b7166d-48da-4643-9479-93a5577978e1@denx.de>
-Date: Tue, 1 Oct 2024 14:07:22 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id A3147891A0
+ for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 14:24:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a7aa086b077so801917766b.0
+ for <u-boot@lists.denx.de>; Tue, 01 Oct 2024 05:24:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1727785479; x=1728390279; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=cpDmIu4G6TXONJFE2YHbhBIVTeWrw3GXdfP1ZYFIqvw=;
+ b=Qi7zPDPD69Gmk90t4POxkXz8VcBgGrC2RtreMznmDuCYGNFxzPWMlniJ98U+/TkrvG
+ OO6dGZi5y6h7aUG94VfIMBtB2ceVFu5cbqhn7eqysitNokY+ddhkfb50U6fC2gt2Dpk2
+ AWmTHRf9JVStn/oIvIUGtFgWc/PRdR9HT7rHyko6bJVaKG2AhejhztoblyRNgPUud6sl
+ k1yESWTC4IUT9l7lJvV3DDc9zJZwvXfl1ViO32MgWCVB/sv1GE3+Zg8693j/f5mjuMyq
+ u0jvxQeifFxG9Pb51Ey9A3GAGwQJjP1d28BPYooXqgmGwCCMLNhBSur81BwrNosYz3Q8
+ nK8g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727785479; x=1728390279;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=cpDmIu4G6TXONJFE2YHbhBIVTeWrw3GXdfP1ZYFIqvw=;
+ b=YL6O3yPpWYNJkAe8K/fzpAw0dZRT1e5oUjfZv3kWf9ouHlsIifDCXEid/61AlHSPOg
+ epGmjg8BbYLNO0rVdb/UBlkwmmKLcwSCnGPVoStB+17vxi3opUORvDU2oSlJSpsuSoZ6
+ xc1VTFo20b/R3OsCjwTk9QHEkPYBmppbSs2t/09aQK/VpDTs3jalmpHpeAKb8hdjdetT
+ 9cPvt2BrydmRAjUYgI7AoluiF4h3yYX0Y71PnI+AxjGfQCpDvVtWKngDJE5Ai9OocCrZ
+ MiolwYCiVJp0iLbptLhFXc+fmjBM/3uqV2m1Mt+zJMAgtgBt/5ZoHLgUq2GEjy0T4MZe
+ puug==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX/UMQKBDcSLxyTdE0V/0NckodeqnCU6a5KwakjJ0tFXsAKOmLNIFCzdDrlGidba3YmHNSmd4U=@lists.denx.de
+X-Gm-Message-State: AOJu0YyngI7xRF7ynAaEH6tZRO5zxfrQPsd3bOmLMXtORJWVgvmSiVU8
+ wH8z98jtjcWXlTFIyc22JuphbqeKp4NJEDST2Tt97pxWLVERJOnc9UXS1s528x/jSV06P3N5JDD
+ 3
+X-Google-Smtp-Source: AGHT+IHxb/1sR90ygzR22L65XqLHCMCM5tyfJ/oURc58vrRLm+4FkFTx2LT3VUefFBGdYWxlNMAEfg==
+X-Received: by 2002:a17:907:1c8d:b0:a8a:9054:8399 with SMTP id
+ a640c23a62f3a-a93c492f8b7mr1817701566b.27.1727785479021; 
+ Tue, 01 Oct 2024 05:24:39 -0700 (PDT)
+Received: from ?IPV6:2a0f:5382:acab:1312:9265:84ff:fec9:103a?
+ ([2a0f:5382:acab:1312:9265:84ff:fec9:103a])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a93c299f5a9sm704575266b.225.2024.10.01.05.24.37
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 01 Oct 2024 05:24:38 -0700 (PDT)
+Message-ID: <ee2e9f46-d2e3-4d91-a140-9fe81859a1dc@linaro.org>
+Date: Tue, 1 Oct 2024 14:24:37 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 5/7] usb: onboard-hub: Bail out if peer hub is already
- probed
-To: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: "Simek, Michal" <michal.simek@amd.com>,
- "fabrice.gasnier@foss.st.com" <fabrice.gasnier@foss.st.com>,
- "git (AMD-Xilinx)" <git@amd.com>
-References: <20240927070137.21816-1-venkatesh.abbarapu@amd.com>
- <20240927070137.21816-6-venkatesh.abbarapu@amd.com>
- <1bba9e4b-621c-4b94-befe-a3eb468a8b3d@denx.de>
- <SA1PR12MB8697F80C18E42BB7140AFE4098772@SA1PR12MB8697.namprd12.prod.outlook.com>
+Subject: Re: [PATCH 1/1] cmd: simplify CONFIG_CMD_USB_MASS_STORAGE dependencies
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Lukasz Majewski <lukma@denx.de>
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+References: <20240921092050.9260-1-heinrich.schuchardt@canonical.com>
 Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <SA1PR12MB8697F80C18E42BB7140AFE4098772@SA1PR12MB8697.namprd12.prod.outlook.com>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20240921092050.9260-1-heinrich.schuchardt@canonical.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -75,79 +100,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/1/24 7:20 AM, Abbarapu, Venkatesh wrote:
-> Hi Marek,
+
+
+On 21/09/2024 11:20, Heinrich Schuchardt wrote:
+> CONFIG_USB_GADGET_DOWNLOAD depends on CONFIG_USB_GADGET.
+> It is sufficient to depend on the prior.
 > 
->> -----Original Message-----
->> From: Marek Vasut <marex@denx.de>
->> Sent: Saturday, September 28, 2024 2:12 AM
->> To: Abbarapu, Venkatesh <venkatesh.abbarapu@amd.com>; u-boot@lists.denx.de
->> Cc: Simek, Michal <michal.simek@amd.com>; fabrice.gasnier@foss.st.com; git
->> (AMD-Xilinx) <git@amd.com>
->> Subject: Re: [PATCH v2 5/7] usb: onboard-hub: Bail out if peer hub is already probed
->>
->> On 9/27/24 9:01 AM, Venkatesh Yadav Abbarapu wrote:
->>> The .bind function is implemented to bind the correct "half" of the
->>> hub that the driver wants to bind, and returning -ENODEV for the other
->>> "half".
->>>
->>> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
->>> ---
->>>    common/usb_onboard_hub.c | 20 ++++++++++++++++++++
->>>    1 file changed, 20 insertions(+)
->>>
->>> diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c index
->>> 00808ed45e..9c50ca09c9 100644
->>> --- a/common/usb_onboard_hub.c
->>> +++ b/common/usb_onboard_hub.c
->>> @@ -162,6 +162,25 @@ err:
->>>    	return ret;
->>>    }
->>>
->>> +static int usb_onboard_hub_bind(struct udevice *dev) {
->>> +	struct ofnode_phandle_args phandle;
->>> +	const void *fdt = gd->fdt_blob;
->>> +	int ret, off;
->>> +
->>> +	if (dev_read_phandle_with_args(dev, "peer-hub", NULL, 0, 0,
->>> +&phandle)) {
->>
->> Return the error code:
->>
->> ret = dev_read_phandle_with_args()
->> if (ret) {
->> ...
->> return ret;
->> }
->>
->>> +		dev_err(dev, "peer-hub not specified\n");
->>> +		return -ENOENT;
->>> +	}
->>> +
->>> +	off = ofnode_to_offset(phandle.node);
->>> +	ret = fdt_node_check_compatible(fdt, off, "usb424,5744");
->>
->> return fdt_node_check_compatible(...);
-> The return value of fdt_node_check_compatible is "0" in success case and "1" in failure.
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
-There is more:
+Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+>   cmd/Kconfig | 3 +--
+>   1 file changed, 1 insertion(+), 2 deletions(-)
+> 
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index 4ccb0cef390..02b2569e713 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -1685,9 +1685,8 @@ config CMD_ROCKUSB
+>   
+>   config CMD_USB_MASS_STORAGE
+>   	bool "UMS usb mass storage"
+> -	depends on USB_GADGET_DOWNLOAD
+> +	depends on BLK && USB_GADGET_DOWNLOAD
+>   	select USB_FUNCTION_MASS_STORAGE
+> -	depends on BLK && USB_GADGET
+>   	help
+>   	  Enables the command "ums" and the USB mass storage support to the
+>   	  export a block device: U-Boot, the USB device, acts as a simple
 
-scripts/dtc/libfdt/libfdt.h
+-- 
+// Caleb (they/them)
 
-  982  * returns:
-  983  *      0, if the node has a 'compatible' property listing the 
-given string
-  984  *      1, if the node has a 'compatible' property, but it does 
-not list
-  985  *              the given string
-  986  *      -FDT_ERR_NOTFOUND, if the given node has no 'compatible' 
-property
-  987  *      -FDT_ERR_BADOFFSET, if nodeoffset does not refer to a 
-BEGIN_NODE tag
-  988  *      -FDT_ERR_BADMAGIC,
-  989  *      -FDT_ERR_BADVERSION,
-  990  *      -FDT_ERR_BADSTATE,
-  991  *      -FDT_ERR_BADSTRUCTURE, standard meanings
-
-> I can't return fdt_node_check_compatible() directly as need to return -ENODEV for other half of the hub.
-OK
