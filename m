@@ -4,81 +4,161 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77F2FCE7D10
-	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 11:19:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0903CE7D0D
+	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 11:21:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB57B89179;
-	Tue,  1 Oct 2024 13:19:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 6314189179;
+	Tue,  1 Oct 2024 13:21:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lSbvQNxY";
+	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="FgfUQnC/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A24B78917A; Tue,  1 Oct 2024 13:19:37 +0200 (CEST)
-Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
- [IPv6:2607:f8b0:4864:20::730])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id ED3BC89198; Tue,  1 Oct 2024 13:21:00 +0200 (CEST)
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::1])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3689D89152
- for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 13:19:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D9B7D89152
+ for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 13:20:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x730.google.com with SMTP id
- af79cd13be357-7a99fdf2e1aso699912885a.2
- for <u-boot@lists.denx.de>; Tue, 01 Oct 2024 04:19:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727781566; x=1728386366; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QxZjLygKaRmNszIROKNe3KIqf1LaGiKJh78Li5/c6q0=;
- b=lSbvQNxYR21gpOvTbzGC1oCefh8hdA6crNqjVE1b7D2HhUyo22xfiNch230Ar/vB8q
- Ve6jy06sAv0EPwEOXbeigLVDj55lGji5nDpJt4Vlj6n8joHJLNBusGgO/k8fP0gkuWat
- jh3Zt4s38EPhRt8Gu+V4Dm9+hELjZ9JIVCcfc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727781566; x=1728386366;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=QxZjLygKaRmNszIROKNe3KIqf1LaGiKJh78Li5/c6q0=;
- b=LMm73pYKHgXfLwvJov6tp7nr5G6v8SOynowCzNgRJtyUyzgvmLip0dt0tsdEl/lhqC
- G56LHsMmhKa3OEeMxz6M/OQhqfj65yDayYMbhV+N47LNNYucqibyrCSp+j4TFU8HbWUv
- B56EBvZx/0JO+QPUEbDwaNRCEUGntVDZtTCTDQPYUrFTvj7v5o1uPoZJg5hONTb8DWJs
- 0C+U62omlis7Un9C9KaYX/Kxo7ACWfsM0jmaMR31m2p9fG7IvaYewaYT7cBgTga5zggA
- NUxOCIfPgK0ctO+4TU7YYg2Z/jPi6mB27WQ4FKBFnUuctM7TmfOaIA7vNi0wkLIjSHfo
- Exvg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUK375A1wuW7b9zS5lwOkliQbOjMXlw4mFAjbmVJV67goe0CFENA8/9W/b8zvDriMkXsSSw3GU=@lists.denx.de
-X-Gm-Message-State: AOJu0YxRD/mwyxyTNsOM7IhH9e0BoMk32y8Y4+22oikmToDi31e8pPQ1
- Pvxkn19S69Lb79VmKvhWwTKVJbsO53MWw+wMX10/zQ0dMcDv1hJnvZP3p6Ne+9ICXf06eLAGNK5
- HdrIXpXwdluYiMqQaXjjS+0/E1CVtXF0lns+M
-X-Google-Smtp-Source: AGHT+IHoeSibV9GlPKHSeu3hFr3bz0TV8bDAxLiWV7a/WtlC8sE/j2G6KENjnZ7Y+Zh7NCuwTwEC3Z1aGmIKy5C3MUw=
-X-Received: by 2002:a05:6214:448c:b0:6c1:8663:e8f0 with SMTP id
- 6a1803df08f44-6cb3b61465amr222487716d6.28.1727781566383; Tue, 01 Oct 2024
- 04:19:26 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=peng.fan@nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=q6bRoZMLil3KxUgGlrbiDme8yAtfUWiABM+Zg2LJ8qLD+OzjSSZb1y6Q73nc3cIjxOO49awUm7iWv0EgLtufEjkgvCJL4HU6mojOdDHX7to6AIHlnkWQMh/iesURScXvHvCYU1G6fAXC4NTEdzBGb10ZkIbZUb+bSAnrTPykEI32NSRJtXV6/ZAUe3VSiC9yRJobxRvMbAxv+zsF9278sFabrAsqVvvs0vBDxpmo0J5CQcsPRzvcKKt8r/bCKIgWCvjlOObV7wvD59hTLJ3sxse24bOPbIizuQHKY6ZpbK9Bcz1pLweeENTT4VQYoYE8PMFLDhVJQXkWFakXoTXqcw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=TirNdoP6ydvU9/LtiwXSn4tonosZGHrzw0p/CCm7deU=;
+ b=nVy1sZ781Jba5sZcywdODZWv+49Ssu7i4jhz38CmzCOh3fur5iE/G+D3qqAqozI5UeM8dNtFQDZRBJlRUB5lyt1mFsgvhSlE4YT294QPxgux0XfySqs3r+c5TMGokRZzWbZpgWCwVRuL2CBvPKK5plmyf2LIxsVBods+24v+dG+U3Fc2jA54CePdGmo0uGQukD1+fCFtgm+kn2sDAKAT481rA99NXD6wOcVXvV+xzDby4SPxuc5H1Y/2Zvy8vn/0OG1sm8sMf82amD48vsk9rzdBcWaDUu68EqD87iMuJbcnUMP0JzSwMlNI07VkHyp1p5xMnjUlgu7RqZq7god42w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=TirNdoP6ydvU9/LtiwXSn4tonosZGHrzw0p/CCm7deU=;
+ b=FgfUQnC/s7OR4VGGZB+xvnyYVTyZAIoDSEYiQgdSpZ980nDVByRGK3ljnyjMZtdd36/jNEoAogSpFB72A7OtOa/gvR6zjEKpjtIGxbl/2a/ZX66L/aVBgmVxQa4lVnarg8en3apYkCq2KI9oLCkTt/o6T9j61uAW23Q/UpgzR178bMaNhMMDS+fJ2SumimeJTP6zIeZt98NlQOTsZC93+svg6rRW10aL6tCGynplglxM1nyhGeFJ5v3W/3Za11pyhLOf1xagDjAdzVIG3RmneOFo6RMVx2i6v4BuB+UxkkPcAUzof9P8dAXVfru/H1IXild3kWHiC3WfYw59nBXZyw==
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by AM7PR04MB7158.eurprd04.prod.outlook.com (2603:10a6:20b:120::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8005.26; Tue, 1 Oct
+ 2024 11:20:49 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630%6]) with mapi id 15.20.7982.018; Tue, 1 Oct 2024
+ 11:20:49 +0000
+From: Peng Fan <peng.fan@nxp.com>
+To: Fabio Estevam <festevam@gmail.com>, "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+CC: "sbabic@denx.de" <sbabic@denx.de>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>, Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini
+ <trini@konsulko.com>, dl-uboot-imx <uboot-imx@nxp.com>, Ye Li <ye.li@nxp.com>
+Subject: RE: [PATCH 1/5] mmc: fsl_esdhc_imx: Enable AHB/IPG clk
+Thread-Topic: [PATCH 1/5] mmc: fsl_esdhc_imx: Enable AHB/IPG clk
+Thread-Index: AQHbEvwyMe4OQS8N8Eae/WVzRzKoW7JwLpSAgAGSzIA=
+Date: Tue, 1 Oct 2024 11:20:49 +0000
+Message-ID: <PAXPR04MB8459DD7A606439C37EE3085888772@PAXPR04MB8459.eurprd04.prod.outlook.com>
+References: <20240930065041.5554-1-peng.fan@oss.nxp.com>
+ <CAOMZO5DDL_AkGr1_TZHLwowvypmMnuD1b7DGGjoNdECPL9WHyA@mail.gmail.com>
+In-Reply-To: <CAOMZO5DDL_AkGr1_TZHLwowvypmMnuD1b7DGGjoNdECPL9WHyA@mail.gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PAXPR04MB8459:EE_|AM7PR04MB7158:EE_
+x-ms-office365-filtering-correlation-id: 286da13a-fc44-43b1-b795-08dce20b1a24
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230040|366016|376014|1800799024|38070700018;
+x-microsoft-antispam-message-info: =?utf-8?B?cVoxSENSS3IvUlRKM09OYk9ROWsveWttQkQ2RWhZNmxFanJyWmpHaXpIRlFB?=
+ =?utf-8?B?aEdGMmorVi9NZnd4clBWN1FkMG1oNE9hVHZ3NjMzZjlTZUVmRUdGQURqRG9Y?=
+ =?utf-8?B?RUNyVW01UXEvMlEwdEl5TDExZHNmRnBGRWJjTmZQWXpGTCthczdyWS9IdzNl?=
+ =?utf-8?B?WUxuNThEZ3JyK1dUMURZN0RpK3BKV2JIUkRwUEtSL1dLQUYyYjJwSkRDVUFO?=
+ =?utf-8?B?K2dsL0tBTnlHeDd1aGRUYjZON3N0eDV6ZzJaTXZGWWxuLzliM3FpWTNpTVFp?=
+ =?utf-8?B?NHlmbGh6c1J3WW5Xd2FPUjFyUEhnNFBnRFA3SXA2cFBoVmkyZWhxaXpPY2pL?=
+ =?utf-8?B?T1BON1BoTnZNbmZ4TVU5WUNLb2w5L1F4azZWNlh5NlVpb0RMems0TzUrYzRv?=
+ =?utf-8?B?UDZITklNSXZvZ1I4NjZjMzF1cWlLNExnSzF0OFNHOFB1SDRMVGtKMGM4Z3A2?=
+ =?utf-8?B?ZEZGbThic2Q2RU9BNVVLMUE3VXo1UkVYeE01aVVINTllY3ZlbC9hOVJpejFS?=
+ =?utf-8?B?U2hTNjYxMENNcklkMGIySU9ESE5ubTZDTTUwUVo2K0RValFNRHQrNnp4Mkli?=
+ =?utf-8?B?VHJGejZHbHN4TGxjRytTelZ1ajJXNUpCNzdicjR1eEI1Unk3Y1lVbnRhYnht?=
+ =?utf-8?B?QjdKc1dVTFl0M1lzZGJBcjgyZVhseTdmSWRQdG5VR1RMRVRwUXJWcVdwZGxh?=
+ =?utf-8?B?bUhMdzM5bngzTDZZQVhOYUNwWFdiMHoySE11emZ6TkEzaHY2L2ptOVFRV2Zu?=
+ =?utf-8?B?ZU1ta1F6OE9LRi9EZnZZQVFqcFM3bGVzRWZOU1pRbDhFb0Urd3VlNWdYSU4z?=
+ =?utf-8?B?U01hbWRWVlpPcHdVRzloaWkvR0pXY0lmUDhmQitqS2YyVDBxUFMwTmc4QTFB?=
+ =?utf-8?B?RnhTYmRlcGZnaUtRNzg5NDJGNHdZVlNXVkQrQ1pSVTdVcUNwWDkyd1RQa0Nr?=
+ =?utf-8?B?N2R5Tzc5QjUybTFibEp0VkJtSzEzaTFwalVQNWVVMk1WL2VLeVdCRjZBbjVT?=
+ =?utf-8?B?Q01QMGRUc3duZ0NBWURRUzlUdnF5N0VPUWx0WE1CODBzdzVDZzZPUUd5cUpH?=
+ =?utf-8?B?MkVBblFsbGQvQTFjUDZqL3RQaW9sRTlRSUtUMlhoS0lxdlo4bjJubWJ6MkdF?=
+ =?utf-8?B?NFdla0JWLzJPaVBsNHYvYmJOMkVaWjJpemVNTkRNSlRrUUd1aE1tN3hReGN3?=
+ =?utf-8?B?RkVDMEJlYmkramwzcm9rSkFFL1pLQzU1MzlGcnlYK3lVZ2Jpa0l4d1kyNytK?=
+ =?utf-8?B?bUNVRDBjS1gvakVOOXdzaVE4T1hoQmVESE13dHk3T2tOOFJLa0lsYnFOL2JR?=
+ =?utf-8?B?eTJJUURGYnVKcWVDdkRBK2FOK2JUYlZxTnErRGRERmlPdGpQZnJTZTdtUllD?=
+ =?utf-8?B?NXA5MTdnVTBOQ0JBc2RqVGJtSGZDTmpid2dBY0RjQk9QcWxrOGFySllPaWY1?=
+ =?utf-8?B?L203VXpnWFd4WVNqTnlOOFJoZzlWb2t2M05oS1JGeVh1cUM4eUpTTnlFV0hJ?=
+ =?utf-8?B?YVVqamlhMEVrMmFZQW1HM0x3bXFvMis3NDVFeVJvK2JudGlUdDdaa2hyK1RX?=
+ =?utf-8?B?bGx5UjNqZDVwMnBnL3hPZ3hNOXMyTFRWS0VwNWFyNjVHVmRMMlVxOXNMTFpH?=
+ =?utf-8?B?WmUwNXRwS0daUlEzM29MRDFSUjA1c2ZydzJCRVd2RnNSZTlFd3JYaERqVHRk?=
+ =?utf-8?B?U1dNME1nc3E1YWFKRVpGcXBmeXNJK1JHd0hxNnlRaGpjNUplNE5PaXZHV3BU?=
+ =?utf-8?B?M3NzQ29UWGluUHJNeUFzNEFpMVdZOVkxME1Ed29pV241aGFJY0ROd2RPcnBM?=
+ =?utf-8?B?TGgyaWJWMVRNdDdBbmxWM0hlMHNQMGFvR3NaTlRYeDU4OS9WOHpidHQ0NFJG?=
+ =?utf-8?B?amcyNE1MSGFuSURTaisyVE5hZUJMTVAvRHFscTkyNkMvZnc9PQ==?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024)(38070700018); DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?K1JwODV4NHg4M3NOZEhMdUdQL1ZVaTFRakhydmN1citVRmQ0SGNFNUtXK2R0?=
+ =?utf-8?B?VDNtdlVybDJzV011c1RLUkZSd3VKTGlUekdpQXV6MitkSkhBdjdYMU15QjZr?=
+ =?utf-8?B?aWlKUEhpckdmQ2t3WUZXUlBvZ3pFSVR4ei9udnJ3VWdSTzZCZTRGc3hrTndo?=
+ =?utf-8?B?aGR6eFVnbnNCMEtQV2F5czUxckV0TkEzWG1wcENEc254RHhMS09VK3o0RjBK?=
+ =?utf-8?B?UnBDaElLQVREQ25VU3YwZi85bGNRdEtlQnVFVEpUNTJOdGhMNkd3dUtPMk83?=
+ =?utf-8?B?OUgyMFhhRGZmb1I5bjN6R29lTGczOERxcTZmV2Y3Zk1lMko2RC9NZHA3SHI1?=
+ =?utf-8?B?QUJEWG13OXhXYlM5L1hsSGp0Y1d3cm5nT2VzektiK0hxL0lrQm9yZmswVzE2?=
+ =?utf-8?B?TXVrRmZ3dlpjUzd3NWE3eTN6czFENURqOWw0cDRrZjRORFlJc3Njei8xVXF2?=
+ =?utf-8?B?Y2JRemsyaTBsdklKQk9pTXA4RjlIeGJ5R0ZCRzU5M1NRdmg5THptMFNTc2Fy?=
+ =?utf-8?B?REY2VjZ6ZTlSL3Z6eCtOR2VITVBVaTNIZzNtK1BhbGRYUnBnQXlnSFZrcGt3?=
+ =?utf-8?B?T3RWOTJlVHRqWUtPcm9ybGQ4U2o0bzVNUjNmWmVQK3h5aFBYQW0xRE9NZWV3?=
+ =?utf-8?B?amZhQzg5OXBkNFcvaGIxMThSQ2ZTWmdqN01oUmtGMmZCT2FYNFFxNHE2dFJF?=
+ =?utf-8?B?NFl4Yzd5ZDRCU2ZZcXkzSlhCaDQ1elFPdmo0elNkYzZMZ3dyYXRBei9EcDYr?=
+ =?utf-8?B?UkpwbTVrcjFBSzZHOXg2SjZYQkJQc2ljeWxUZklqVXE4dmc1cm94RjIxTDhq?=
+ =?utf-8?B?OEZEQXdTemZOVTRPVUlzUjJaSTBIOGlZL0VLbmh3bmdPWHNtSm1hVzlnMTZI?=
+ =?utf-8?B?ODJUYllLOWtyRHFEaWpyWjVNbmIrdURLKzlDUWUzc1JQTDU0STF0cVJjVnJw?=
+ =?utf-8?B?VVlzeFJkSTZEendWTkxPQXJtSDFzREw0OHZoVHF4U1JkVE5vVVN1OGVBbnl4?=
+ =?utf-8?B?cVNoU3VJeHMwdTdmVFFhdXVuWHdWOFErQ2VqanJZaFVaeTYzZDVTNFZ1NDlH?=
+ =?utf-8?B?cmtlMHVzMjY2RmF1anE5a2srb3pPaXIrbk4zQVlaT1NBY3NKSm5BL2phbWlQ?=
+ =?utf-8?B?Mkk3RldMd2ZtRnFMRmNEVnU1YWVEQkdKWDlkREg4amYrRHRvWU9QUmpQS01Y?=
+ =?utf-8?B?SGF3UXprZkl4OEV5cFdmWWtjOXhzYjRMejFMUEV4RHVEblRld0VhM3htMzNX?=
+ =?utf-8?B?UFgwbkJ1ZkY1N0N6ME5SR24zcDZMVW9NYmowekNxK0N3b3hwMXJLaW5DOW13?=
+ =?utf-8?B?YW5kd3Z6MWZuZFJTYlRzV1gzRWtrUEh2cFEvWjc3ZFFrMExEblBiV0xlWUp0?=
+ =?utf-8?B?VGpSZlpCNnNWSG1RSklpRGJ1U1RoaHJYK1ZKUDRyV2lTM2ZQQXlNNGo2a1g0?=
+ =?utf-8?B?czRSZTV5T2o3d1lIMm1FRG15dWp5RlJvSW9EL2hSSG04TlNYcHpROVJsclA1?=
+ =?utf-8?B?N0drOXJWcE9DNEt3V3J2eE1kQU14ckJzZzFBemxjSERIYzRZYitmNktPaEo4?=
+ =?utf-8?B?Ti9iNlUxdzRJQU42UTJxaU83V1FhRll3cWNTclNoVGpKUFFyMm5Jb3ZrOC8y?=
+ =?utf-8?B?QVRsNVVVT0ZSanNESDVrOERpNWp0WmRqbFRqRUNaZmtKTGc3VnErZ2J3eWVt?=
+ =?utf-8?B?YlVkQXFObytFVTdxeStKalh6U1BheDRoZmJVbHltKzVNY3FzbkNROHFkdkIw?=
+ =?utf-8?B?SE1MbzVoUnQ5WU1SQWhoR21ISmVOTU5jRDNUa2VHdVdIU1M5R1dySkRKVHZH?=
+ =?utf-8?B?eVh5akZTdjNTUTdhMyt1Y1J4d0NjeSs2Ui9qMlY1QXNsNnBod3o1R3VTOC9I?=
+ =?utf-8?B?Ty90cm03WDRUU3Y3NVVma0E0VUpHR0FwVzRraEJsUEpvbk40YkxsZ1djWjFF?=
+ =?utf-8?B?UkVYajJOMkZwVGZoNklYajVuRlhwZk15ZitsSFdQYXBjYXlVUjNDYUJmbXl6?=
+ =?utf-8?B?azlXMXRnTDNCZTYydE1UeEFvelBvZVcwV1l1UDM3cyszTE5wV2dGV21keUY5?=
+ =?utf-8?B?VVROcG1wLytlRzVod0NPY0dzbjVLb2ZtRG1rVmIyZi8yNmVieEtEUmNJVDIy?=
+ =?utf-8?Q?CKhM=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-References: <20240926183111.1324284-1-paulk@sys-base.io>
- <20240926183111.1324284-3-paulk@sys-base.io>
- <CALeDE9NkpxES=SRKxH6=xk_94rRK9Y0gwuj=C-d+eddjOd_gkg@mail.gmail.com>
- <CAFLszTgqGGMm3Hxa2FmT9Z6-BFAR8J6cgb2PNBE8FR=S-X8c8A@mail.gmail.com>
- <Zvr29j1cyTNmq-RN@collins>
-In-Reply-To: <Zvr29j1cyTNmq-RN@collins>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 1 Oct 2024 05:19:15 -0600
-Message-ID: <CAFLszTi5dJejFqYeg2UpqnSjLbWphcZiCW8HUkXyrPH_cKVTKg@mail.gmail.com>
-Subject: Re: [PATCH 3/4] rockchip: rk3399-rockpro64: Disable bootstage
- instrumentation config
-To: Paul Kocialkowski <paulk@sys-base.io>
-Cc: Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Jonas Karlman <jonas@kwiboo.se>, 
- Chris Morgan <macromorgan@hotmail.com>, Tim Lunn <tim@feathertop.org>, 
- Paul Kocialkowski <contact@paulk.fr>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 286da13a-fc44-43b1-b795-08dce20b1a24
+X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Oct 2024 11:20:49.0818 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: /4KFrwFKnCbPPznT0seDazDgdLtXEq2Z4FCGcfPCT0WZg109iGg2uzrMw3Q0E0XssVOl0A8rrp8vrhg1+51GIg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR04MB7158
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,98 +175,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Paul,
-
-On Mon, 30 Sept 2024 at 13:07, Paul Kocialkowski <paulk@sys-base.io> wrote:
->
-> Hi,
->
-> Le Mon 30 Sep 24, 12:52, Simon Glass a =C3=A9crit :
-> > On Mon, 30 Sept 2024 at 03:03, Peter Robinson <pbrobinson@gmail.com> wr=
-ote:
-> > > On Thu, 26 Sept 2024 at 19:32, Paul Kocialkowski <paulk@sys-base.io> =
-wrote:
-> > > > The boot timing and reporting (bootstage) infrastructure is useful =
-for
-> > > > performance analysis and debug but adds overhead and console noise =
-when
-> > > > using the device normally. Remove it from the device config.
-> > > >
-> > > > Signed-off-by: Paul Kocialkowski <contact@paulk.fr>
-> > > Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
-> > >
-> > > This makes sense, for those that want this information will know how
-> > > to build it for testing.
-> >
-> > Can you just disable the report? There should be no need to disable
-> > bootstage itself.
->
-> I see bootstage as a debug/development feature, so I don't really see why=
- it
-> should be enabled on default builds.
->
-> Besides the console noise aspect, my intent here is also to tidy up this =
-config.
-
-Well OK.
-
-BTW one day I'd like to see bootstage be on by default, since it
-provides a way to monitor boot times for devices. But that would need
-some improvements: the current shared-memory approach between SPL and
-U-Boot is not great and we could use bloblist instead. Also I'm not
-sure how the information could be sent to the OS.
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
-Regards,
-Simon
-
-
->
-> Cheers,
->
-> Paul
->
-> > Regards,
-> > Simon
-> >
-> >
-> > > > ---
-> > > >  configs/rockpro64-rk3399_defconfig | 3 ---
-> > > >  1 file changed, 3 deletions(-)
-> > > >
-> > > > diff --git a/configs/rockpro64-rk3399_defconfig b/configs/rockpro64=
--rk3399_defconfig
-> > > > index fc0804a0b80d..095d27ffaa04 100644
-> > > > --- a/configs/rockpro64-rk3399_defconfig
-> > > > +++ b/configs/rockpro64-rk3399_defconfig
-> > > > @@ -19,8 +19,6 @@ CONFIG_SPL_SPI=3Dy
-> > > >  CONFIG_SYS_LOAD_ADDR=3D0x800800
-> > > >  CONFIG_PCI=3Dy
-> > > >  CONFIG_DEBUG_UART=3Dy
-> > > > -CONFIG_BOOTSTAGE=3Dy
-> > > > -CONFIG_BOOTSTAGE_REPORT=3Dy
-> > > >  CONFIG_DEFAULT_FDT_FILE=3D"rockchip/rk3399-rockpro64.dtb"
-> > > >  CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
-> > > >  CONFIG_SPL_MAX_SIZE=3D0x40000
-> > > > @@ -38,7 +36,6 @@ CONFIG_CMD_POWEROFF=3Dy
-> > > >  CONFIG_CMD_USB=3Dy
-> > > >  # CONFIG_CMD_SETEXPR is not set
-> > > >  CONFIG_CMD_TIME=3Dy
-> > > > -CONFIG_CMD_BOOTSTAGE=3Dy
-> > > >  CONFIG_SPL_OF_CONTROL=3Dy
-> > > >  CONFIG_OF_SPL_REMOVE_PROPS=3D"clock-names interrupt-parent assigne=
-d-clocks assigned-clock-rates assigned-clock-parents"
-> > > >  CONFIG_ENV_IS_IN_SPI_FLASH=3Dy
-> > > > --
-> > > > 2.46.2
-> > > >
->
-> --
-> Paul Kocialkowski,
->
-> Independent contractor - sys-base - https://www.sys-base.io/
-> Free software developer - https://www.paulk.fr/
->
-> Specialist in multimedia, graphics and embedded hardware support with Lin=
-ux.
+PiBTdWJqZWN0OiBSZTogW1BBVENIIDEvNV0gbW1jOiBmc2xfZXNkaGNfaW14OiBFbmFibGUgQUhC
+L0lQRyBjbGsNCj4gDQo+IEhpIFBlbmcsDQo+IA0KPiBPbiBNb24sIFNlcCAzMCwgMjAyNCBhdCAy
+OjQ34oCvQU0gUGVuZyBGYW4gKE9TUykNCj4gPHBlbmcuZmFuQG9zcy5ueHAuY29tPiB3cm90ZToN
+Cj4gPg0KPiA+IEZyb206IFBlbmcgRmFuIDxwZW5nLmZhbkBueHAuY29tPg0KPiA+DQo+ID4gT25s
+eSBlbmFibGUgUEVSIGNsayBpcyBub3QgZW5vdWdoLCBhbHNvIG5lZWQgdG8gZW5hYmxlIEFIQi9J
+UEcgY2xrLg0KPiANCj4gQ3VycmVudGx5LCB0aGUgZHJpdmVyIGlzIHdvcmtpbmcgYW5kIG5vdyBl
+eHRyYSBjbG9ja3MgbmVlZCB0byBiZSB0dXJuZWQNCj4gb24uDQo+IA0KPiBQbGVhc2UgcHJvdmlk
+ZSBtb3JlIGRldGFpbHMgaGVyZSBhcyB0byB3aHkgdGhpcyBpcyBhIHByb2JsZW0gbm93IGFuZCBp
+dA0KPiB3YXNuJ3QgYmVmb3JlLg0KDQpXaXRoIHBhcnRpdGlvbiByZXNldCBzdXBwb3J0ZWQsIHdo
+ZW4gU1BMIHJlcnVuIGFmdGVyIHBhcnRpdGlvbiByZXNldCwNCnRoZSBtbWMgY2xrIG1heSBhbHJl
+YWR5IGJlIGRpc2FibGVkIGluIGxpbnV4IG1tYyBydW50aW1lIHN1c3BlbmQuDQpTbyBuZWVkIHRv
+IGVuYWJsZSBhbGwgdGhlIGNsa3MgZm9yIG1tYyBpbiBTUEwvVS1ib290Lg0KDQo+IA0KPiA+ICAj
+aWYgQ09ORklHX0lTX0VOQUJMRUQoQ0xLKQ0KPiA+ICAgICAgICAgLyogQXNzaWduZWQgY2xvY2sg
+YWxyZWFkeSBzZXQgY2xvY2sgKi8NCj4gPiArICAgICAgIHJldCA9IGNsa19nZXRfYnlfbmFtZShk
+ZXYsICJpcGciLCAmcHJpdi0+aXBnX2Nsayk7DQo+ID4gKyAgICAgICBpZiAoIXJldCkgew0KPiA+
+ICsgICAgICAgICAgICAgICByZXQgPSBjbGtfZW5hYmxlKCZwcml2LT5pcGdfY2xrKTsNCj4gPiAr
+ICAgICAgICAgICAgICAgaWYgKHJldCkgew0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIHBy
+aW50ZigiRmFpbGVkIHRvIGVuYWJsZSBpcGdfY2xrXG4iKTsNCj4gPiArICAgICAgICAgICAgICAg
+ICAgICAgICByZXR1cm4gcmV0Ow0KPiA+ICsgICAgICAgICAgICAgICB9DQo+ID4gKyAgICAgICB9
+DQo+ID4gKw0KPiA+ICsgICAgICAgcmV0ID0gY2xrX2dldF9ieV9uYW1lKGRldiwgImFoYiIsICZw
+cml2LT5haGJfY2xrKTsNCj4gPiArICAgICAgIGlmICghcmV0KSB7DQo+ID4gKyAgICAgICAgICAg
+ICAgIHJldCA9IGNsa19lbmFibGUoJnByaXYtPmFoYl9jbGspOw0KPiA+ICsgICAgICAgICAgICAg
+ICBpZiAocmV0KSB7DQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgcHJpbnRmKCJGYWlsZWQg
+dG8gZW5hYmxlIGFoYl9jbGtcbiIpOw0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIHJldHVy
+biByZXQ7DQo+IA0KPiBJbiB0aGUgY2FzZSBvZiBmYWlsdXJlLCB0aGUgcHJldmlvdXNseSBlbmFi
+bGVkIGNsb2NrIG11c3QgYmUgZGlzYWJsZWQuDQo+IA0KPiBXb3VsZCBpdCBiZSBiZXR0ZXIgdG8g
+dXNlIGNsa19lbmFibGVfYnVsaygpIGhlcmUgaW5zdGVhZD8NCg0KSSB3aWxsIGdpdmUgYSBsb29r
+IGF0IHRoaXMuDQoNClRoYW5rcywNClBlbmcuDQo=
