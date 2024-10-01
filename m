@@ -4,68 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CA7CCF6493
-	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 07:12:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28C8DCE837A
+	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 07:21:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A47C988EF4;
-	Tue,  1 Oct 2024 09:12:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id A0F3989003;
+	Tue,  1 Oct 2024 09:21:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=kernel-space.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="sTDxMlWh";
+	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="lOqigvSB";
+	dkim=pass (1024-bit key) header.d=kernel-space.org header.i=@kernel-space.org header.b="YctBbnv/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4115888BD6; Tue,  1 Oct 2024 09:12:21 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 226BF88EF4; Tue,  1 Oct 2024 09:21:20 +0200 (CEST)
+Received: from mail.kernel-space.org (unknown [IPv6:2a01:4f8:c2c:5a84::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B563988E6C
- for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 09:12:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 24C598910B
+ for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 09:21:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=kernel-space.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-choudhary@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4917CFqZ006669;
- Tue, 1 Oct 2024 02:12:15 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1727766735;
- bh=0rL2pd4EAryWIZxPywbet1bY2/bvXATjTdIZLI4z9uE=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=sTDxMlWhj2BfoCGEtFqS1+JrT2Hc8UR83pDGN7JQI8ESkOYtYIPtKmKGlk4tZPf/k
- IaUUCrOLWnD0L2Z/cRVpbcfqC5A1IaqwpR1ibsw/A/HaVnNrZUe1/KOLQayQ6NirTh
- iYV0UivnfMt2OhIYJBESEz97LcL7Gy6d4EAGMpfU=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4917CFCQ063203
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 1 Oct 2024 02:12:15 -0500
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 1
- Oct 2024 02:12:15 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 1 Oct 2024 02:12:15 -0500
-Received: from [172.24.227.21] (jayesh-hp-z2-tower-g5-workstation.dhcp.ti.com
- [172.24.227.21])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4917CCqT069498;
- Tue, 1 Oct 2024 02:12:12 -0500
-Message-ID: <6a8b2c40-64af-43ab-92d2-2c671a759e2f@ti.com>
-Date: Tue, 1 Oct 2024 12:42:11 +0530
+ spf=pass smtp.mailfrom=angelo@kernel-space.org
+Received: from kernel-space.org (localhost [127.0.0.1])
+ by kernel-space.org (OpenSMTPD) with ESMTP id a6390c5c;
+ Tue, 1 Oct 2024 07:14:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=kernel-space.org; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=s1; bh=7k
+ xlARUwxBiflPvy7oDUdcTgr58=; b=lOqigvSBelOOANoBFMdi5jnqV+n+CJSwgV
+ bfLQtUQtpNA5Z0+h4ywm76POlBXP4LDH3raZ+5C34GP/Ig3PhWPmw1vNRRs5CMQm
+ 7nvoDfbEmBuB7TTxbS6mMP2zj+0OC+I7YAbT8WFmaaIa3Mscj+g9TwaJ/yAhvUfs
+ HvE2tQYYg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=kernel-space.org; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; q=dns; s=s1; b=
+ s+BrMz0czywzTdbr8ioDZ7Bmos9Mdi6nKUGSoQQOmco/SkIqbyCRlHsbzJdd6u+H
+ pf2mGF1fKHY1BALb4ffrfUHu3kBxQwytcjVnoUkd0fFS3glvIQJYg+UZB+UzYZqO
+ BiXZ7+VOXikk1ParoGauDoHp3rYbCGAB2gnQnOBsf6o=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
+ s=s1; t=1727766855;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=RWkel0DYx35M30NERSHnwXM+CUSNKvAQhh3g/egckZc=;
+ b=YctBbnv/HvrjHyc0ZmQVacVQNVdjDDhb+6tmcOF4CiR+m7cysUCy+ssvC+W4izMIyWFbfx
+ 7TaSDVCRb3aq/D24Pf0wRenwCeREXTlkNML3i4KXs3XqE8HpHN/f213c6nByVG2PTLe/+7
+ WSWMgmAAYNmq7QDIKLEE+NYpsPLY3y0=
+Received: from [192.168.0.2] (host-79-54-25-3.retail.telecomitalia.it
+ [79.54.25.3])
+ by kernel-space.org (OpenSMTPD) with ESMTPSA id 827b26cb
+ (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
+ Tue, 1 Oct 2024 07:14:15 +0000 (UTC)
+Message-ID: <884ec3fb-1fe2-4afd-b757-f81734fa9d9e@kernel-space.org>
+Date: Tue, 1 Oct 2024 09:19:53 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] board: ti: j722s: Update Resource Management configs
-To: Vaishnav Achath <vaishnav.a@ti.com>, <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, <bb@ti.com>, <hnagalla@ti.com>, <n-francis@ti.com>,
- <vishalm@ti.com>, <u-kumar1@ti.com>
-References: <20240915204714.1051646-1-vaishnav.a@ti.com>
+Subject: Re: [PATCH 00/27] led: Remove old status-LED code
+To: Simon Glass <sjg@chromium.org>, Peter Robinson <pbrobinson@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini
+ <trini@konsulko.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Albert Aribaud <albert.u.boot@aribaud.net>,
+ Alexander Gendin <agendin@matrox.com>, Alison Wang <alison.wang@nxp.com>,
+ Andy Fleming <afleming@gmail.com>, Doug Zobel <douglas.zobel@climate.com>,
+ Etienne Carriere <etienne.carriere@foss.st.com>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Johan Jonker <jbx6244@gmail.com>,
+ Kamil Lulko <kamil.lulko@gmail.com>, =?UTF-8?Q?Marek_Beh=C3=BAn?=
+ <kabel@kernel.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mario Six <mario.six@gdsys.cc>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Priyanka Jain <priyanka.jain@nxp.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Sean Anderson
+ <sean.anderson@seco.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ This contributor prefers not to receive mails <noreply@example.com>,
+ Wan Yee Lau <wan.yee.lau@intel.com>
+References: <20240926223009.1270197-1-sjg@chromium.org>
+ <CALeDE9M4DrdsDrJEGehWuXyfNSd1K=sWE8RpSk6W5uySBoGUQQ@mail.gmail.com>
+ <CAFLszTiqqiQD3S03y3_g8LDehJ3dE1stONUzm+MWHEDppZCMjw@mail.gmail.com>
 Content-Language: en-US
-From: Jayesh Choudhary <j-choudhary@ti.com>
-In-Reply-To: <20240915204714.1051646-1-vaishnav.a@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+From: Angelo Dureghello <angelo@kernel-space.org>
+In-Reply-To: <CAFLszTiqqiQD3S03y3_g8LDehJ3dE1stONUzm+MWHEDppZCMjw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,201 +108,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Vaishnav,
+Hi,
 
-On 16/09/24 02:17, Vaishnav Achath wrote:
-> Update J722S Resource Management configs to the latest output
-> generated by K3 Resource Partitioning tool. Main change includes
-> allocating more BCDMA channels to A53 for CSI2RX to support
-> 4 x CSIRX capture instance simultaneously.
-> 
-> Signed-off-by: Vaishnav Achath <vaishnav.a@ti.com>
+On 27/09/24 6:52 PM, Simon Glass wrote:
+> Hi Peter,
+>
+> On Fri, 27 Sept 2024 at 09:52, Peter Robinson <pbrobinson@gmail.com> wrote:
+>> Hi Simon,
+>>
+>>> There has been an LED framework in U-Boot which uses driver model for
+>>> about 9 years now. Recent work is underway to improve it and provide
+>>> more features. It is probably a good time to drop the old code, which
+>>> is only used by 5 boards:
+>>>
+>>>     ./tools/qconfig.py -f LED_STATUS
+>>>     5 matches
+>>>     eb_cpu5282 eb_cpu5282_internal mx23_olinuxino pinephone
+>>>     socfpga_vining_fpga
+>> Why aren't these boards being migrated to what ever the new frame work
+>> is rather than dropping quite useful functionality on these devices?
+> I don't have any of those boards, but perhaps their maintainers might
+> like to weigh in?
 
-Reviewed-by: Jayesh Choudhary <j-choudhary@ti.com>
+i have the 5282 evb, but seems to have some issues executing code with
+a recent toolchain, i am working to revive it so i can perform tests
+eventually.
 
-> ---
-> 
-> Test logs (CSI capture + RM config dump):
-> https://gist.github.com/vachath/7b37cd288ef16ad8a2ac6ff5710d1e9a
-> 
->   board/ti/j722s/rm-cfg.yaml      | 48 ++++++++++++++++++++++-----------
->   board/ti/j722s/tifs-rm-cfg.yaml | 28 +++++++++++++------
->   2 files changed, 53 insertions(+), 23 deletions(-)
-> 
-> diff --git a/board/ti/j722s/rm-cfg.yaml b/board/ti/j722s/rm-cfg.yaml
-> index 21ca30104c..e32beb8479 100644
-> --- a/board/ti/j722s/rm-cfg.yaml
-> +++ b/board/ti/j722s/rm-cfg.yaml
-> @@ -244,7 +244,7 @@ rm-cfg:
->               subhdr:
->                   magic: 0x7B25
->                   size: 8
-> -            resasg_entries_size: 1160
-> +            resasg_entries_size: 1184
->               reserved: 0
->       resasg_entries:
->           -
-> @@ -1017,13 +1017,13 @@ rm-cfg:
->               reserved: 0
->           -
->               start_resource: 8
-> -            num_resource: 12
-> +            num_resource: 32
->               type: 12750
->               host_id: 12
->               reserved: 0
->           -
-> -            start_resource: 20
-> -            num_resource: 20
-> +            start_resource: 8
-> +            num_resource: 32
->               type: 12750
->               host_id: 38
->               reserved: 0
-> @@ -1035,13 +1035,13 @@ rm-cfg:
->               reserved: 0
->           -
->               start_resource: 0
-> -            num_resource: 12
-> +            num_resource: 32
->               type: 12769
->               host_id: 12
->               reserved: 0
->           -
-> -            start_resource: 12
-> -            num_resource: 20
-> +            start_resource: 0
-> +            num_resource: 32
->               type: 12769
->               host_id: 38
->               reserved: 0
-> @@ -1053,10 +1053,22 @@ rm-cfg:
->               reserved: 0
->           -
->               start_resource: 0
-> -            num_resource: 8
-> +            num_resource: 2
->               type: 12810
->               host_id: 12
->               reserved: 0
-> +        -
-> +            start_resource: 2
-> +            num_resource: 2
-> +            type: 12810
-> +            host_id: 20
-> +            reserved: 0
-> +        -
-> +            start_resource: 4
-> +            num_resource: 2
-> +            type: 12810
-> +            host_id: 22
-> +            reserved: 0
->           -
->               start_resource: 22
->               num_resource: 18
-> @@ -1065,21 +1077,27 @@ rm-cfg:
->               reserved: 0
->           -
->               start_resource: 12288
-> -            num_resource: 64
-> +            num_resource: 56
->               type: 12813
->               host_id: 12
->               reserved: 0
->           -
-> -            start_resource: 12352
-> -            num_resource: 64
-> +            start_resource: 12344
-> +            num_resource: 48
->               type: 12813
-> -            host_id: 38
-> +            host_id: 20
->               reserved: 0
->           -
-> -            start_resource: 12416
-> -            num_resource: 88
-> +            start_resource: 12392
-> +            num_resource: 48
->               type: 12813
-> -            host_id: 128
-> +            host_id: 22
-> +            reserved: 0
-> +        -
-> +            start_resource: 12440
-> +            num_resource: 64
-> +            type: 12813
-> +            host_id: 38
->               reserved: 0
->           -
->               start_resource: 1536
-> diff --git a/board/ti/j722s/tifs-rm-cfg.yaml b/board/ti/j722s/tifs-rm-cfg.yaml
-> index 5e8d7e0444..4a2af0ebca 100644
-> --- a/board/ti/j722s/tifs-rm-cfg.yaml
-> +++ b/board/ti/j722s/tifs-rm-cfg.yaml
-> @@ -244,7 +244,7 @@ tifs-rm-cfg:
->               subhdr:
->                   magic: 0x7B25
->                   size: 8
-> -            resasg_entries_size: 976
-> +            resasg_entries_size: 992
->               reserved: 0
->       resasg_entries:
->           -
-> @@ -897,13 +897,13 @@ tifs-rm-cfg:
->                   reserved: 0
->           -
->                   start_resource: 8
-> -                num_resource: 12
-> +                num_resource: 32
->                   type: 12750
->                   host_id: 12
->                   reserved: 0
->           -
-> -                start_resource: 20
-> -                num_resource: 20
-> +                start_resource: 8
-> +                num_resource: 32
->                   type: 12750
->                   host_id: 38
->                   reserved: 0
-> @@ -915,13 +915,13 @@ tifs-rm-cfg:
->                   reserved: 0
->           -
->                   start_resource: 0
-> -                num_resource: 12
-> +                num_resource: 32
->                   type: 12769
->                   host_id: 12
->                   reserved: 0
->           -
-> -                start_resource: 12
-> -                num_resource: 20
-> +                start_resource: 0
-> +                num_resource: 32
->                   type: 12769
->                   host_id: 38
->                   reserved: 0
-> @@ -933,10 +933,22 @@ tifs-rm-cfg:
->                   reserved: 0
->           -
->                   start_resource: 0
-> -                num_resource: 8
-> +                num_resource: 2
->                   type: 12810
->                   host_id: 12
->                   reserved: 0
-> +        -
-> +                start_resource: 2
-> +                num_resource: 2
-> +                type: 12810
-> +                host_id: 20
-> +                reserved: 0
-> +        -
-> +                start_resource: 4
-> +                num_resource: 2
-> +                type: 12810
-> +                host_id: 22
-> +                reserved: 0
->           -
->                   start_resource: 22
->                   num_resource: 18
+>
+> Regards,
+> Simon
+
+
+Regards,
+
+Angelo
+
