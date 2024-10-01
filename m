@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39B55CEB2D0
-	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 13:21:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3E61CEB2D0
+	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 13:21:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E5C5B891F5;
-	Tue,  1 Oct 2024 15:19:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5F611891FB;
+	Tue,  1 Oct 2024 15:19:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ke0Xdeqq";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="d5yOIwNR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 58D60891CA; Tue,  1 Oct 2024 14:26:05 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 4E7A6891B8; Tue,  1 Oct 2024 14:26:07 +0200 (CEST)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55596891B8
- for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 14:26:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D801891C6
+ for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 14:26:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-37cfa129074so123841f8f.1
- for <u-boot@lists.denx.de>; Tue, 01 Oct 2024 05:26:03 -0700 (PDT)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-37ccd81de57so3406376f8f.0
+ for <u-boot@lists.denx.de>; Tue, 01 Oct 2024 05:26:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1727785563; x=1728390363; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1727785565; x=1728390365; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=guWSoBziwmzGibPUpLXQOAbzmdb6H+UaN+ZAPqFRVXY=;
- b=Ke0XdeqqqyCTQmMScc7kL5WfcaRL3A5BIyA/4SeCXt9FJecZ3xpRat6N5cel7xgmEV
- F+6r8VwkyUUxTxTFYoHgYvQRBpFeQCtHenXSwZJg4hiaXw2QXL+MpCWWMLHioXnUbRjH
- db+5/OZAYuofBpAo25XFBxF3md6g2D/ftQYEvIKd/yKlXzEd5HMhz3J1p9+3h1FH8+8W
- YDr5GuDlcj95zKRipPdzhyMlH6jrt4CCdoNjJf7OpBva1KinLL213oqw9Z+rk5qWNPW2
- JP+zrmVWQ6oc4j4E8H8MzWPVMlDbVCKAzVUdJSLZgu3NnURaCWHBljSdfnfUWugf3Rnw
- rc9w==
+ :reply-to; bh=w87C4Z/qR+AjxVgt/LCAEnP1+5uYeVUj4/5pIOTbt4c=;
+ b=d5yOIwNRVN8w/pCHkocv+HrkzB7q1nWJi6gLSaNS2UgwmJnkJx9vsddW7lG2GcoODE
+ i82X6zstXeI9ZhJlENCG0Tt2mYmpy7MDJI9JKlnFD10njyDL/l2kPzlC9jCx8r8TaaJg
+ wI+aCRgShRdtt1XjKPVXmG9lnMlHe/Ndo02J9WryOFmrwPArbwKGNLj6LvmapuCL8XS2
+ C/ptq1DUTZvRe4w82BQpBlkREP/ZeQo27t8PDBqxfdtqruTPtXDa6hfA/bB7ExoVMBk+
+ OlkUW5i3j/OU1wayTBjUh5ta1FwZ4YiLhP264i7ppilleaPKVxTCT+yIJq4WRf+jxa4H
+ 5Uyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727785563; x=1728390363;
+ d=1e100.net; s=20230601; t=1727785565; x=1728390365;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=guWSoBziwmzGibPUpLXQOAbzmdb6H+UaN+ZAPqFRVXY=;
- b=Vi0vPyAM5bs2SovzeRTLfwni9MUQJ/7lHCK0XgkaSLzBqXZJmkAp0wTk8+YOHR/noR
- CrBv0zf3u1uEXC+acYUlcJ1zKzKsNrYJrrBiRwxV8k/SBv+2yRjPNj8N+hS11msLijIp
- A00/B7g5tAB95Ui4ZxfHPsgfIKjMbhlRNK1+KcFO9dFsykOVB/7mdeySSmHHH/FNVMG1
- MTIboxhO8526RUxmIm6c11mFvsMRKc8mwno6D6ZR2qiCgoTyw2tNhbhcK4aR7yqETpSn
- 8Hyo3rQkI26jQhnK7HVCryHluiUytgIDxEnXdrdFXEDN5eWjGQm+OujUFmiZpiZUl7hI
- ZmRQ==
+ bh=w87C4Z/qR+AjxVgt/LCAEnP1+5uYeVUj4/5pIOTbt4c=;
+ b=TyqbkDaS0HGzTlnAcfGFhhVYw1Q6x1cbudZq38TT+FEq2XTqFATIO9ZiuuDba8nObg
+ OGY2bEvAXWLqIKlHfd2x/8etWyruYQv+x/rmBV+8BCPyq7vieACe8h7noahy1oCRAPPF
+ iwhC7trdfjDe9Hrt6T+ARpxwWovblFALJIhxtae7ZxNX0T1F7PBOUbG/yFB0nt7imfGt
+ vJghu3btq3xFX0axLYXwcdgMacJkrpExZ/Fw6hlhTEOfw+GWAhJePfUhN5gCLF437m/G
+ ui3Bhh9meYb3Md5iRTR3y8dij0kf/PtMWPe/1lnvAuprErzoHDy4uQn4cdS2hRlfckQB
+ 069A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWWyoJcDv9PzQpBwI7wsVBGS6+m61J3kCWcFstnix4GUHvz4SwIGUqpz6hNpkFtimvlSTWgENY=@lists.denx.de
-X-Gm-Message-State: AOJu0YywSbUtb13iB/3NEOyFmlniKmGWpeXouNKegvR+lH9hhwfZOtLb
- 4Bfj81fi6Ijx+HT8BnmT0fHuYDd2msaOakx8sPPt3TXXFBXDFJBr
-X-Google-Smtp-Source: AGHT+IEzJkGy3nbPRi2r059cgFx6yfS5DtYbaNWGDpEUO6qdvZ8tWSuxDGdA/nM4mzY8l5q9X6MBjg==
-X-Received: by 2002:a5d:6849:0:b0:374:c4c2:fc23 with SMTP id
- ffacd0b85a97d-37cd5b1054cmr9718335f8f.56.1727785562493; 
- Tue, 01 Oct 2024 05:26:02 -0700 (PDT)
+ AJvYcCXgqeHj7fj0xa8sOC8f7wbEp63rN71LnggQmnoBFy7m4gFy6JUbOE9U7O54cBy1WMrSJFYdV1U=@lists.denx.de
+X-Gm-Message-State: AOJu0YxpnraHMeJc9CuLXLw6ekhhxrG5zsK87KtnsA8X5WPTuInCd+t4
+ pK5pH2XI9Jt1Ehk367byaSEc1eujcfszQiyonrLHnm1qkPUMtP0S
+X-Google-Smtp-Source: AGHT+IFAujWJX1kzBnQi8zxZqAgHz4aT8OjyHwhxqx9Qu0o6a0GLh/dy4QQh6XDENNE4mwSu7IkFAA==
+X-Received: by 2002:adf:eb92:0:b0:37c:cc7c:761c with SMTP id
+ ffacd0b85a97d-37cf289b9ccmr1417211f8f.3.1727785564507; 
+ Tue, 01 Oct 2024 05:26:04 -0700 (PDT)
 Received: from localhost.localdomain (93-34-90-105.ip49.fastwebnet.it.
  [93.34.90.105]) by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-37cd56e94c4sm11646366f8f.62.2024.10.01.05.26.00
+ ffacd0b85a97d-37cd56e94c4sm11646366f8f.62.2024.10.01.05.26.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Oct 2024 05:26:01 -0700 (PDT)
+ Tue, 01 Oct 2024 05:26:03 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Joe Hershberger <joe.hershberger@ni.com>,
@@ -94,9 +94,9 @@ To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Michael Polyntsov <michael.polyntsov@iopsys.eu>,
  Doug Zobel <douglas.zobel@climate.com>, Marek Vasut <marex@denx.de>,
  u-boot@lists.denx.de, John Crispin <john@phrozen.org>
-Subject: [PATCH v5 09/11] doc: introduce led.rst documentation
-Date: Tue,  1 Oct 2024 14:24:42 +0200
-Message-ID: <20241001122511.8832-10-ansuelsmth@gmail.com>
+Subject: [PATCH v5 10/11] test: dm: Add tests for LED boot and activity
+Date: Tue,  1 Oct 2024 14:24:43 +0200
+Message-ID: <20241001122511.8832-11-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241001122511.8832-1-ansuelsmth@gmail.com>
 References: <20241001122511.8832-1-ansuelsmth@gmail.com>
@@ -119,108 +119,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce simple led.rst documentation to document all the additional
-Kconfig and the current limitation of LED_BLINK and GPIO software blink.
-
-Also add missing definition for sw_blink in led_uc_plat struct.
+Add tests for LED boot and activity feature and add required property in
+sandbox test DTS.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- doc/api/index.rst |  1 +
- doc/api/led.rst   | 10 ++++++++++
- include/led.h     | 41 +++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 52 insertions(+)
- create mode 100644 doc/api/led.rst
+ arch/sandbox/dts/test.dts |  2 ++
+ test/dm/led.c             | 72 +++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 74 insertions(+)
 
-diff --git a/doc/api/index.rst b/doc/api/index.rst
-index ec0b8adb2cf..9f7f23f868f 100644
---- a/doc/api/index.rst
-+++ b/doc/api/index.rst
-@@ -14,6 +14,7 @@ U-Boot API documentation
-    event
-    getopt
-    interrupt
-+   led
-    linker_lists
-    lmb
-    logging
-diff --git a/doc/api/led.rst b/doc/api/led.rst
-new file mode 100644
-index 00000000000..e52e350d1bb
---- /dev/null
-+++ b/doc/api/led.rst
-@@ -0,0 +1,10 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+LED
-+===
-+
-+.. kernel-doc:: include/led.h
-+   :doc: Overview
-+
-+.. kernel-doc:: include/led.h
-+   :internal:
-\ No newline at end of file
-diff --git a/include/led.h b/include/led.h
-index 19d92d6441a..64247cd3a70 100644
---- a/include/led.h
-+++ b/include/led.h
-@@ -11,6 +11,46 @@
- #include <cyclic.h>
- #include <dm/ofnode.h>
+diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+index 5fb5eac862e..25859ad852d 100644
+--- a/arch/sandbox/dts/test.dts
++++ b/arch/sandbox/dts/test.dts
+@@ -101,6 +101,8 @@
+ 			bootscr-ram-offset = /bits/ 64 <0x12345678>;
+ 			bootscr-flash-offset = /bits/ 64 <0>;
+ 			bootscr-flash-size = /bits/ 64 <0x2000>;
++			boot-led = "sandbox:green";
++			activity-led = "sandbox:red";
+ 		};
+ 	};
  
-+/**
-+ * DOC: Overview
-+ *
-+ * Generic LED API provided when a supported compatible is defined in DeviceTree.
-+ *
-+ * To enable support for LEDs, enable the `CONFIG_LED` Kconfig option.
-+ *
-+ * The most common implementation is for GPIO-connected LEDs. If using GPIO-connected LEDs,
-+ * enable the `LED_GPIO` Kconfig option.
-+ *
-+ * `LED_BLINK` support requires LED driver support and is therefore optional. If LED blink
-+ * functionality is needed, enable the `LED_BLINK` Kconfig option. If LED driver doesn't
-+ * support HW Blink, SW Blink can be used with the Cyclic framework by enabling the
-+ * CONFIG_LED_SW_BLINK.
-+ *
-+ * Boot and Activity LEDs are also supported. These LEDs can signal various system operations
-+ * during runtime, such as boot initialization, file transfers, and flash write/erase operations.
-+ *
-+ * To enable a Boot LED, enable `CONFIG_LED_BOOT` and define in `/options/u-boot` root node the
-+ * property `boot-led`. This will enable the specified LED to blink and turn ON when
-+ * the bootloader initializes correctly.
-+ *
-+ * To enable an Activity LED, enable `CONFIG_LED_ACTIVITY` and define in `/options/u-boot` root
-+ * node the property `activity-led`.
-+ * This will enable the specified LED to blink and turn ON during file transfers or flash
-+ * write/erase operations.
-+ *
-+ * Both Boot and Activity LEDs provide a simple API to turn the LED ON or OFF:
-+ * `led_boot_on()`, `led_boot_off()`, `led_activity_on()`, and `led_activity_off()`.
-+ *
-+ * Both configurations can optionally define a `boot/activity-led-period` property
-+ * if `CONFIG_LED_BLINK` or `CONFIG_LED_SW_BLINK` is enabled for LED blink operations, which
-+ * is usually used by the Activity LED. If not defined the default value of 250 (ms) is used.
-+ *
-+ * When `CONFIG_LED_BLINK` or `CONFIG_LED_SW_BLINK` is enabled, additional APIs are exposed:
-+ * `led_boot_blink()` and `led_activity_blink()`. Note that if `CONFIG_LED_BLINK` or
-+ * `CONFIG_LED_SW_BLINK` is disabled, these APIs will behave like the `led_boot_on()` and
-+ * `led_activity_on()` APIs, respectively.
-+ */
+diff --git a/test/dm/led.c b/test/dm/led.c
+index c28fa044f45..4b019c71f3a 100644
+--- a/test/dm/led.c
++++ b/test/dm/led.c
+@@ -137,3 +137,75 @@ static int dm_test_led_blink(struct unit_test_state *uts)
+ }
+ DM_TEST(dm_test_led_blink, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
+ #endif
 +
- struct udevice;
- 
- enum led_state_t {
-@@ -41,6 +81,7 @@ struct led_sw_blink {
-  *
-  * @label:	LED label
-  * @default_state:	LED default state
-+ * @sw_blink:	LED software blink struct
-  */
- struct led_uc_plat {
- 	const char *label;
++/* Test LED boot */
++#ifdef CONFIG_LED_BOOT
++static int dm_test_led_boot(struct unit_test_state *uts)
++{
++	struct udevice *dev
++
++	/* options/u-boot/boot-led is set to "sandbox:green" */
++	ut_assertok(led_get_by_label("sandbox:green", &dev));
++	ut_asserteq(LEDST_OFF, led_get_state(dev));
++	ut_assertok(led_boot_on());
++	ut_asserteq(LEDST_ON, led_get_state(dev));
++	ut_assertok(led_boot_off());
++	ut_asserteq(LEDST_OFF, led_get_state(dev));
++
++	return 0;
++}
++
++/* Test LED boot blink fallback */
++#ifndef CONFIG_LED_BLINK
++static int dm_test_led_boot(struct unit_test_state *uts)
++{
++	struct udevice *dev
++
++	/* options/u-boot/boot-led is set to "sandbox:green" */
++	ut_assertok(led_get_by_label("sandbox:green", &dev));
++	ut_asserteq(LEDST_OFF, led_get_state(dev));
++	ut_assertok(led_boot_blink());
++	ut_asserteq(LEDST_ON, led_get_state(dev));
++	ut_assertok(led_boot_off());
++	ut_asserteq(LEDST_OFF, led_get_state(dev));
++
++	return 0;
++}
++#endif
++#endif
++
++/* Test LED activity */
++#ifdef CONFIG_LED_ACTIVITY
++static int dm_test_led_boot(struct unit_test_state *uts)
++{
++	struct udevice *dev
++
++	/* options/u-boot/activity-led is set to "sandbox:red" */
++	ut_assertok(led_get_by_label("sandbox:red", &dev));
++	ut_asserteq(LEDST_OFF, led_get_state(dev));
++	ut_assertok(led_activity_on());
++	ut_asserteq(LEDST_ON, led_get_state(dev));
++	ut_assertok(led_activity_off());
++	ut_asserteq(LEDST_OFF, led_get_state(dev));
++
++	return 0;
++}
++
++/* Test LED activity blink fallback */
++#ifndef CONFIG_LED_BLINK
++static int dm_test_led_boot(struct unit_test_state *uts)
++{
++	struct udevice *dev
++
++	/* options/u-boot/activity-led is set to "sandbox:red" */
++	ut_assertok(led_get_by_label("sandbox:red", &dev));
++	ut_asserteq(LEDST_OFF, led_get_state(dev));
++	ut_assertok(led_activity_blink());
++	ut_asserteq(LEDST_ON, led_get_state(dev));
++	ut_assertok(led_activity_off());
++	ut_asserteq(LEDST_OFF, led_get_state(dev));
++
++	return 0;
++}
++#endif
++#endif
 -- 
 2.45.2
 
