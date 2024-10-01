@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AB6ACF6493
-	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 07:22:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A6D4CE7CE3
+	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 07:49:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12BEC88FC7;
-	Tue,  1 Oct 2024 09:22:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=kernel-space.org
+	by phobos.denx.de (Postfix) with ESMTP id E71D488BDE;
+	Tue,  1 Oct 2024 09:49:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="aFynSlGl";
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel-space.org header.i=@kernel-space.org header.b="MUA/qMhW";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Db+jJopK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99E2C89003; Tue,  1 Oct 2024 09:22:52 +0200 (CEST)
-Received: from mail.kernel-space.org (unknown [IPv6:2a01:4f8:c2c:5a84::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BD85088C9C; Tue,  1 Oct 2024 09:49:53 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF32588F77
- for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 09:22:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=kernel-space.org
+ by phobos.denx.de (Postfix) with ESMTPS id D2D49885D1
+ for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 09:49:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=angelo@kernel-space.org
-Received: from kernel-space.org (localhost [127.0.0.1])
- by kernel-space.org (OpenSMTPD) with ESMTP id 38a34106;
- Tue, 1 Oct 2024 07:15:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=kernel-space.org; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=s1; bh=uJ
- MNaXM1tAu3KFQAXXLmzdspAyQ=; b=aFynSlGlx7h4EWoXbVWrAiDAeHS8h+iskD
- tI3KLSlm2elBYzU5AfVfdiTR9a+OpZQPtDp9ru7I37FTsY54GBDMoWxYyakwO1Uh
- uIim1yjV2CDgVE+Ajg2rEkunmxcrRX6fDi7iFFXYAXkmYivA1VX+HZ6MmIXUuLK1
- JgOviAR64=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=kernel-space.org; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; q=dns; s=s1; b=
- PZCHFk8bQCkh5ZHgKaTSEeONL2uODbf/M30QMTxQFM5U8Bpbompq6FMiX7/rmZfy
- K3Tkz23tvt1VWA63fwCUBsqT6VkJIMHI4u8v8b33JsR0v4uy0nXzpPMU/Sh/SHxq
- g8JJfdynh7fQkWISwCnkClkHPiGzuo7x63GxSkuzBl8=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
- s=s1; t=1727766951;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=28WDqrAHcRNz/kIlKUHf+2B99VvtF4ab4Rkf2+Fu5js=;
- b=MUA/qMhWAk8GE8hkD2Y3VCuzLvrKovywvHoDpS2EO1WAsdmwVtdTaLYDiVee/a0nho9SQC
- aVfYPrPykDE/jVUWFwiC/ec0woMUR1+mJYkgMcEyLLgDFpQr49MharAbAYmNmzEiZY4Orj
- C/eG2lvlNBr4tuK196pODeBJ0lFgtEY=
-Received: from [192.168.0.2] (host-79-54-25-3.retail.telecomitalia.it
- [79.54.25.3])
- by kernel-space.org (OpenSMTPD) with ESMTPSA id 5c8ea777
- (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
- Tue, 1 Oct 2024 07:15:51 +0000 (UTC)
-Message-ID: <1dd21156-f976-4d0e-8251-c44ab144342c@kernel-space.org>
-Date: Tue, 1 Oct 2024 09:21:30 +0200
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-5c71f1396e4so6634494a12.0
+ for <u-boot@lists.denx.de>; Tue, 01 Oct 2024 00:49:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1727768990; x=1728373790; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=aw29kNnX+uVxx/WlyKqFfWgdoa2DDQzAPKtMdh/VmKk=;
+ b=Db+jJopKLsij9KcF1QToVfN6Ft2H4FSMgJu8oZowtvle3y4lWbuzishNQJ9DJKUtpu
+ 1D8OaeORMUMoc2sUhrj292u8RlLxPVNW/62+GggjzWJdIw7lhtJBiEKP2prKlHmJuHi2
+ pbhEubWR9apfevjXVmv4iHSRWxS1y5EN0gQfiE3dHSUswDQ4TpcIejDJFAQWdI7T5nsr
+ j9CAgGx1eXuPJZjpJwl+36FaFBx2EsuNNKMZksTFUxEYfPMLgb8Xl9KgXNevPXfRw6IC
+ CiXkCPwBjHGhNAKejNyuX3x/Pkb1efuqKlO/uePY4m+XpHym3T1uf7pOe/u652TuqYqK
+ hIgA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727768990; x=1728373790;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=aw29kNnX+uVxx/WlyKqFfWgdoa2DDQzAPKtMdh/VmKk=;
+ b=d04077g3nHx+zv58EHc/42/UupGe5QVsCphypzgpOeDPBOHyHEh9nmlCpa5YknN9TL
+ o/Vy2ptBRuFS30rORfZEnN2hhylW+eJeEoo5xgDsTIJ2b88vGH1UFBMTkfuf7x+sXZwF
+ 1tySvI0VmRWI5S5aYR46of+cr8bWnVpS4Q5stUCnbAmxPus9RpmFB8C6aaUZ+ZAB9YI8
+ ewR2VT2GlYEzA3t0RqI+2rrSjIZ5YS/fAwSYPa1VIqVKbW9vwH9SJlPM2eTOK/e7PODn
+ n/2aDtc7PD3HZtS8ZV5Fc4dOwXGJCJkyTvgwvSxpkKSaHrhBk3hdKb1MepzPqyxNICfM
+ jgGQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUcBeaMoJTTA7ts1Dq0iiI0uYnPL0Mi6wPolErby7tNcnTORDQh20LppF2SQEtX7C3GQ4R0YJ8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw2P0wuDnNRTtyVAxJD1vpzLEYLTDo7wO5n+9uuZVu+X7/+31hJ
+ 2t2Tcl8RuXO7H9Q/gIbt7waw9ECezZZM9+6amyqy8AuZ/UybMA5+erWR2egTlB2TbbYNXX4r/Av
+ 15+z7J9qq5+qq6SuipnTTAQMCHX0=
+X-Google-Smtp-Source: AGHT+IHEfFa/Dvqy3PDWwoawhdFWyg/HfSi0VXOqPgXMH7YwIekhiIAle3opjyzMfd/MABbj0y5dTxE5OMOEbtgWtCs=
+X-Received: by 2002:a05:6402:50d4:b0:5c5:c4b9:e68f with SMTP id
+ 4fb4d7f45d1cf-5c8824ccc1dmr13411961a12.5.1727768990232; Tue, 01 Oct 2024
+ 00:49:50 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Acked
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Alison Wang <alison.wang@nxp.com>,
- Angelo Dureghello <angelo@sysam.it>,
+References: <20240926215950.1265143-1-sjg@chromium.org>
+ <20240926215950.1265143-9-sjg@chromium.org>
+ <08596845-c0b1-4557-9993-cde57420560d@gmx.de>
+ <20241001002442.GC4737@bill-the-cat>
+In-Reply-To: <20241001002442.GC4737@bill-the-cat>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Tue, 1 Oct 2024 08:49:26 +0100
+Message-ID: <CALeDE9O0zys8UW+ZoTDoQr2hAJKG+d7AbNpsyMMxdbtVWzFxWA@mail.gmail.com>
+Subject: Re: [PATCH v6 08/12] efi_loader: Disable ANSI output for tests
+To: Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-References: <20240926204455.963584-1-sjg@chromium.org>
- <20240926204455.963584-16-sjg@chromium.org>
-Content-Language: en-US
-From: Angelo Dureghello <angelo@kernel-space.org>
-In-Reply-To: <20240926204455.963584-16-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,30 +92,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Acked-by: Angelo Dureghello <angelo@kernel-space.org>
+On Tue, 1 Oct 2024 at 01:42, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Tue, Oct 01, 2024 at 01:38:56AM +0200, Heinrich Schuchardt wrote:
+> > On 26.09.24 23:59, Simon Glass wrote:
+> > > We don't want ANSI characters written in tests since it is a pain to
+> > > check the output with ut_assert_nextline() et al.
+> > >
+> > > Provide a way to tests to request that ANSI characters not be sent.
+> > >
+> > > Add a proper function comment while we are here, to encourage others.
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> >
+> > Please, consider prior review before resubmitting patches.
+> >
+> > As responded to all prior submissions:
+> >
+> > We want to test the code running on actual machines.
+> > We don't want to have sandbox code everywhere.
+> >
+> > I cannot see any test that is not passing due to the current behavior.
+>
+> The pytests for the EFI selftests are unreliable for me, on Raspberry Pi
+> 3, more often in 32bit mode than 64bit mode, but I feel like I see it
+> there too. And when they fail, the console log is full of ANSI escape
+> sequences. Is this specific test a test you run regularly on real
+> hardware?
 
-Thanks !
-
-On 26/09/24 10:44 PM, Simon Glass wrote:
-> This header file is not used, so drop it.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->
->   arch/m68k/lib/bootm.c | 3 ---
->   1 file changed, 3 deletions(-)
->
-> diff --git a/arch/m68k/lib/bootm.c b/arch/m68k/lib/bootm.c
-> index 3dcff8076e3..1fa112f8dbf 100644
-> --- a/arch/m68k/lib/bootm.c
-> +++ b/arch/m68k/lib/bootm.c
-> @@ -15,9 +15,6 @@
->   #include <bzlib.h>
->   #include <watchdog.h>
->   #include <asm/byteorder.h>
-> -#ifdef CONFIG_SHOW_BOOT_PROGRESS
-> -# include <status_led.h>
-> -#endif
->   
->   DECLARE_GLOBAL_DATA_PTR;
->   
+Is it possible there's a bug in the RPi support somewhere that's
+causing these issues that is triggered more easily with the ASCI
+codes?
