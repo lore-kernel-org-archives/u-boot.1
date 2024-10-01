@@ -4,150 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 871E0CF318A
-	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 23:01:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D894BCF318A
+	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 23:14:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7649B88EEE;
-	Wed,  2 Oct 2024 01:00:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+	by phobos.denx.de (Postfix) with ESMTP id 51E6088ED5;
+	Wed,  2 Oct 2024 01:14:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="KHHDGHYq";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="S5MLa+qp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8993788EB7; Wed,  2 Oct 2024 01:00:26 +0200 (CEST)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on20700.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2613::700])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 011B688E58; Wed,  2 Oct 2024 01:14:27 +0200 (CEST)
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D254C88ECB
- for <u-boot@lists.denx.de>; Wed,  2 Oct 2024 01:00:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DD24388EAA
+ for <u-boot@lists.denx.de>; Wed,  2 Oct 2024 01:14:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=A1XAMFfNLuCACA5sem26udAdA5+lSMdugiJP3znSoqHAIn2HkZvB54gcrtvoYjXDgsLzZancn7TTi0r/xv1GiFowgrelGpT13Txm++VoO2hVYgcXbiTnyvvDbdJa723bMOChtlOEpoSKnolu6Ec+pYv3G7NFGtJxStaVk49Yzk8yGrvWD4mf1/dSUAovE5RGR5FkNyXmPoDvOtJejNrNzP01OGdspVynZfJpy9AkwMTurB3qn7qx5tJhjRCzceE05PCCZE6gGffrKCaGdlQVu28IxH+jh4qSF28RPin+rbxAEgjKvC4afkT2bck6zPoBtcsF1F4QRiIp5XawWVWRsg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=cQsQOrsN2p0YRHuZ0Hv/EnOUjxgc9j4BINd0bQIEWHI=;
- b=J+KhZy9aEyaS5dkvft9Fe1ROerdDdueiV/sV2WHaug7qfZkBGkvn85L9SsBmKEr7qMRCqTDbHFymesZIHqeLieJAmdXf8foY5/ZA2cqCMqeSxRIfNqkvxu/m8RHYdPavMiNfxTkUPGm2lScTrMkv+54C8jCqXfORWHPforK+p1AOj1hClKPswDxFPyVMISMwmZ4yqBzKlw0uya9K2SCaYl9JO2j3pWcszmwSCKd3rUPoFnT7WAayyThT+oy1xWJTx76e8N4k42oZ/Wgftx0N/BLIjOsLi206mQgxdHWlTWkAIgTp3ljcmki+vej3n4pz1uJFMSIyZBFPJXQLAB14UQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
- dkim=pass header.d=iopsys.eu; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cQsQOrsN2p0YRHuZ0Hv/EnOUjxgc9j4BINd0bQIEWHI=;
- b=KHHDGHYqeqNSXzvhLARuUaSjiQbDec1bYOM7pfaNqXbBLls+UWR9DB2jZfw4+0nWZQYj3rcBqgPUZCSnmOkkliMaLCSUSqPiCXVySytxKqB1ehCNHq4psux7CmzrQCi6Aqms/ym2o9Pu3qiMEZ20idG/CxTqTIkF26ZkqmZIFRYxrzZSYyGPK7NzTmpw1adxvRT4Evm/eRBZe1ROmgdunFLbUc2LJJYJW0VMFb7m9R0auM3ztpwHFC+vJiSK5V8+DL42u3xRRhXHtHcq4Z/891z2Mlyefo1crkQl+3uWyp9qCR7ZbC1VTDEUa0oKxzG9cXhAKb5P/30xT1S88B9s3Q==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=iopsys.eu;
-Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
- by PA4PR08MB6271.eurprd08.prod.outlook.com (2603:10a6:102:eb::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8026.15; Tue, 1 Oct
- 2024 23:00:21 +0000
-Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
- ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
- ([fe80::4cd3:da80:2532:daa0%2]) with mapi id 15.20.8026.014; Tue, 1 Oct 2024
- 23:00:21 +0000
-From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Arseniy Krasnov <avkrasnov@salutedevices.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, u-boot@lists.denx.de
-Subject: [PATCH v3 3/3] cmd: mtd: add nand_read_test command support
-Date: Wed,  2 Oct 2024 02:00:11 +0300
-Message-ID: <20241001230011.954429-4-mikhail.kshevetskiy@iopsys.eu>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20241001230011.954429-1-mikhail.kshevetskiy@iopsys.eu>
-References: <20241001230011.954429-1-mikhail.kshevetskiy@iopsys.eu>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: GV3PEPF00002BBE.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:144:1:0:6:0:10) To GV2PR08MB8121.eurprd08.prod.outlook.com
- (2603:10a6:150:7d::22)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-7a99de9beb2so378361985a.3
+ for <u-boot@lists.denx.de>; Tue, 01 Oct 2024 16:14:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1727824459; x=1728429259; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=wRo6ZBuezVKmdlSrCKS3MKGETn+wMipFoWHHZff7RBc=;
+ b=S5MLa+qp+QB/8VCXx+Gjs2sUJSksMQh9MXbNDV0yBE38aC9xL88ElKHrnMSi0vuV+A
+ S/4GYLRGsUSR4TF8aOh1VvXZUEiuxl3pD92/+aIoZbgW2RQqueGazlN8w+btJ4i/RZMH
+ HOFV1UeF6Ko3m7u0ZefjCXMQfuMzht9DboNpo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727824459; x=1728429259;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=wRo6ZBuezVKmdlSrCKS3MKGETn+wMipFoWHHZff7RBc=;
+ b=aa2/zgA73+Ospel4wrUa09IKaLPEoOrJV9OGjwIkMfwJ9+g8nsktfxIC6W8tw2wxWk
+ MjyaQJM9kJ5i9Ugag0TVddEE1uAi1PJMzmzOk/veVg/nbQ88rRM3OrcbBAM19gVayfhr
+ /jjD1vqoIGC1nqg1ETOeR5REl/Vut5IwBajPdDQEW1cmY20AbFHMpYAy5JS0qdIh7au8
+ EACZldEX+Zzn6ulK4qQ5YoTZWP/cr6j5G3d8Z9mtdfjahhrjr3kCGlvcXc2YkGrcpE0a
+ KzraZQ30LzM0Z+ie0RtMGhvQO6EaJkwICQQYCsDfkP7V7Q3jVshfqW7KlJUL0sZMGDuz
+ XLkQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU4GRSJdXI/w9gKEew3jA4xMtteB/wHzUExaauFrPTISJM6Jq9lbLtWaZhF1ym2vcfzVoEuyDU=@lists.denx.de
+X-Gm-Message-State: AOJu0YyV16XD/eejxrITxcPEkyZHlvzIo/B7tdLobL/Wc8fAHVL+XhWE
+ loaOF9Hn9S6kFMWQpH/kz7POvnelKgXblJi5mq+NSHb0JRoUTb0B5DcsGlmvuXM=
+X-Google-Smtp-Source: AGHT+IF5DkruRsB/EHBpiAAtk2qkY9oJRGK9T06UhfjVosBM/KewymoEhvBlJPCQVMBtiRGnqHTxnQ==
+X-Received: by 2002:a05:620a:2906:b0:7a9:af25:804d with SMTP id
+ af79cd13be357-7ae626ad82cmr184784785a.6.1727824459395; 
+ Tue, 01 Oct 2024 16:14:19 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6cb3b5fff6bsm54822576d6.2.2024.10.01.16.14.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 01 Oct 2024 16:14:17 -0700 (PDT)
+Date: Tue, 1 Oct 2024 17:14:15 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH v6 08/12] efi_loader: Disable ANSI output for tests
+Message-ID: <20241001231415.GN4737@bill-the-cat>
+References: <20240926215950.1265143-1-sjg@chromium.org>
+ <20240926215950.1265143-9-sjg@chromium.org>
+ <08596845-c0b1-4557-9993-cde57420560d@gmx.de>
+ <20241001002442.GC4737@bill-the-cat>
+ <79d98f61-7659-47a3-938f-1eb79f402edf@gmx.de>
+ <20241001180235.GH4737@bill-the-cat>
+ <e02a9912-7260-4e0a-81d8-c7814907a791@gmx.de>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|PA4PR08MB6271:EE_
-X-MS-Office365-Filtering-Correlation-Id: 45e288c3-e4af-4851-652c-08dce26cd391
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|7416014|376014|366016|52116014|1800799024|921020|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?f+FDtVWqPcOvkz0T+p7umqKyPoJSzx8vCqy4e+znF8R4Im2Jsuk3Wvql5YWT?=
- =?us-ascii?Q?XGz+Fs/jHFiaLeEheT9h5gWyfnCs85wIymqgZjqEYbT9gU0DDb06HUbw9Moo?=
- =?us-ascii?Q?mt53KmmHFQqkVjsiE8qhqvPamm362SrgnxyHwLfySXtE/Uvs/t/WgMsAB99a?=
- =?us-ascii?Q?7RUn+pMiYwIdFeJTGdIhmVkKAVZFEREaaDF0lguW1rAmLHlcM5oFxLJuRMGB?=
- =?us-ascii?Q?SVKfElh5z+T/xuFRY1Cx3NK8xzJcwtxImiLUoXj8RDbX/Z+KCKKG/m6VxOGQ?=
- =?us-ascii?Q?qJ4DJ5zHStynApOpoc8ljIV4Xm5776gThAgqRJhcNAKYAtrnIepudj87B8qi?=
- =?us-ascii?Q?jHqDDfk/raKcP47wSJjA9Jxr2gTSQ5U+wsZ7HZeW52U0h2qntzi9s4jtZkCf?=
- =?us-ascii?Q?Yr9/VYcGkPNti1NabevQ6ZYybibxcUHjvMYdEVlChP+vjj1tMWS2Oe/lSzo6?=
- =?us-ascii?Q?7lXlvnluxhoM2sSny0NA2T9pUiGbsVUp0xJt0QHPSrTiRIm/AsUN7hlQbT7t?=
- =?us-ascii?Q?VBqkLcpqkCe0M41LfZQOnnwQTx+fbTndLo+/wm8BZj61et9+2lphOfPVwRCM?=
- =?us-ascii?Q?9s91zVtsao6eUywIHsqFvSP3L3FfBXOfUlE+2FNHtSYFDVPkl/aQ36RrZlIc?=
- =?us-ascii?Q?7F7EX1q3xzLNmr2aCEmPWlHxCZY2SEk78U7ToCJUwsz6mxbodKu5+hY/ifyK?=
- =?us-ascii?Q?Ot04XN/QGMwzqdJJltQttWMGU/VjzJTuApxyLJ6GonLUsLsJEgD1lDo3mE2t?=
- =?us-ascii?Q?UE4NJHtyKozFnxdHt4MHPdFH3NdIPSrw8ZBNmgrBYaau6IBgNeojwYdSb8r3?=
- =?us-ascii?Q?+0IPMdYzovj2RUvVkTeU5/APTqVbzmBeBttsS/xlM685u+ON/ifCsMA27Jx6?=
- =?us-ascii?Q?23hoC38AtL6lLUZStF6738VFrtlmXoTZ1p4hiBB18Z2q+2XWFX2CuntFK1a0?=
- =?us-ascii?Q?YE3O710X3Le0oWUdvsyP7N753th9YOrlPmzWtd+OTUTGfLnnMJ4dXmCPd/oq?=
- =?us-ascii?Q?5RsZ13PC/SN+GbTrjZNz8h3Uu7cNsVepwbYM5ojNYk2hVG6Ch1PV9flEzshu?=
- =?us-ascii?Q?5BcGRNx26xO1KkELHSwhrkGENNv8D9HFzIFPXhnpcNnzLGqCYKUeCJLG3XqW?=
- =?us-ascii?Q?d9duqE18DA3qXv6vfcC0m3PiR1sLz/mPs5iobyfZekNki6IoCNwoeWN4T7+1?=
- =?us-ascii?Q?AwIhO9lNXksU3ovT5Wh0GhNoQuc4atJQEs3Ody1UKnBv+0AGLLPuil1Wrrh5?=
- =?us-ascii?Q?2/JEskzuU6QL2pJDHb1qGcQ49phwVc1Ry+yuI1M/cfH3CiZJ+GUl/pPLvcTz?=
- =?us-ascii?Q?xCxb4UHu49oarAsxBFVBFp4DtI9jq1/TWBMdvkuWZuJjcKQeJ8Hq+L2d471j?=
- =?us-ascii?Q?QZ1ivV0=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(376014)(366016)(52116014)(1800799024)(921020)(38350700014);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?ejT4rGBVEk9p4KT5dCaX6Jw7xhfRjm2vvwuZLZNBcOvns9mNXikxP3lBEFbB?=
- =?us-ascii?Q?QqBm94/vRw3NsWukHSbAoR+wqa5yFHFg3XM+y+SCC6waUI1J5Zxa8ndFwJ58?=
- =?us-ascii?Q?ka+6GeQVFGgtvzCBdFkBXe+s2keKakNmkvqM8COrFeq4AKYynW5tWw1KhjRc?=
- =?us-ascii?Q?1w5U9HgheEiteXhx2HCs+uEcFrcdNs7+mg9fBoaj8aNfHnu4exZSMXt5pLsD?=
- =?us-ascii?Q?Fh99Fdlqk35i/YoZmKa7wLM4VoYQLZ/tdJYmSe1jNF6mintpTOd3XGVItEAX?=
- =?us-ascii?Q?b8Q0LsPJRDsRMQKGExhSND3Dl8RDDdhqibr8cTDJfgoFk8aS20kXosqsBKB1?=
- =?us-ascii?Q?dGpeS0P750zcIVG/vu/t6UvmOUjuYeFhjUlcYBKVcoW1FMbEZ04mjQRbdh4K?=
- =?us-ascii?Q?d2jLlLBJlrlZSfTA/Vx8k/nWWtJD5/KXlfWxMduU88cGZu4hzx7j7L8p4zjz?=
- =?us-ascii?Q?DwMz80slS8nTfNjvMypqMzuDS49jlEwkXeOGRfMJTunGuH/zihC4I3SOl/ey?=
- =?us-ascii?Q?6/JiWIFWAPB2XS+H0gX7Xjz6clbBtxoOOMs8oCd780AFmy0e/nndrpB5/a+M?=
- =?us-ascii?Q?fbAbXLy10A7WyISKgbIE8JaIVNdJCIVFJorUvZgz4WssF3Rj5pNMYVbC6cs0?=
- =?us-ascii?Q?IFfecIpmTmvP3MUPWBQk9HM8OrTWgreWj+/PQdfOtmCwIdv413VsiuPPBTar?=
- =?us-ascii?Q?b/r+hHDIzjFabJt3qDAMfuyEB+tcttJVV0UcSxz5h7FOw3rltoUXnPstfErh?=
- =?us-ascii?Q?yecWyauMhEzdAsa1pecbZ8cWvuic54sj/S8pUO7oSLAbqRmzMANaVROvr8po?=
- =?us-ascii?Q?BOhN3pNybhR7ojo+wQ3/h6EoAmr1grc2XWGllqUIYUiGZ34b+GU04PckrQOQ?=
- =?us-ascii?Q?yMrzkt4a1WoV3r0UUXSQp9H943D7DpU76jBEKUbyS2p28iUjjju1uW5DoBR1?=
- =?us-ascii?Q?T5E0qQn2PzTxd+6FsyFwHxIEa/L+/IwuShwaN4zDrnjsDG4DbtUaseDHlzD9?=
- =?us-ascii?Q?Y3JYhO9GzAzS7X8oNwegYw11h6Y0D67HyEmSyZyoQKtrbQ6ePailiwnhFQ9L?=
- =?us-ascii?Q?RR3Z09y7ymlhYvt70Is7qYsrn9T7g8AyunZSqSO8jg4a2oZ2sf+/Qd3tiKcm?=
- =?us-ascii?Q?CW3Cjt+VvJJvW4d51jBwW/j5jYSn11DEOfRCdhp1Mbxm+3Lor3h+Cqir99K5?=
- =?us-ascii?Q?GkOBLiwOPO1sIcqTRAKFlqGoUvTSbkinTOFiJ/dqE328CkBNo6oDaf2SwDqa?=
- =?us-ascii?Q?TiUtcz13kqnDAeD5OOOTkXW5jxOZwH02KrUFd+kI672AEOHOKQBGG2EE37LP?=
- =?us-ascii?Q?mYo+oKZGcddrEkazJkaW/Y61Mi2C1HTyFdKucuRVFt+9xoYqRivBPxDh20Uk?=
- =?us-ascii?Q?wkfHE8NafNTyNMl0NhxsuWU/2YA1Ek7Y8MQTGGTZGFLye+lp1dq/jguk/xRS?=
- =?us-ascii?Q?Z6RN2axRumCvLqRRoRZ6WldLBExNV742hN71n2d0B+DqRf83BpoHsilymGmn?=
- =?us-ascii?Q?ngzlgK+jjKf+GvntO1CXgXxJZ6tuAG/3w6FlmvY+yMq1RRS3Pj+NstPEqzSw?=
- =?us-ascii?Q?AL+9azb4hr98mPDhsDfLFFZBj5F4D3g8Tj3xnIvx4U1h6ceveedMJq2Cs89f?=
- =?us-ascii?Q?VrIH7X7rUXomJkf1vHr/Kd4=3D?=
-X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 45e288c3-e4af-4851-652c-08dce26cd391
-X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Oct 2024 23:00:21.5096 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: RI7WhRwPP/+wg0pYQPAk8kxXXhXrqGwq4e+RoKUbrw2eMM4r1eDwq7EN0T4UvpKCD4fpIrbc2iHmAoIA0OuGLFFgMJFoXVIP8D2aJD68T/Q=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR08MB6271
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="aP6D7JZRbowoGZT0"
+Content-Disposition: inline
+In-Reply-To: <e02a9912-7260-4e0a-81d8-c7814907a791@gmx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -164,269 +99,316 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch implements read-only test of nand flash devices.
 
-Test reads blocks of NAND flash in normal and raw modes and compares
-results. The following statuses can be returned for a block:
- * non-ecc reading failed,
- * ecc reading failed,
- * block is bad,
- * bitflips is above maximum,
- * actual number of biflips above reported one,
- * bitflips reached it maximum value,
- * block is ok.
+--aP6D7JZRbowoGZT0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
----
- cmd/Kconfig |  16 +++++
- cmd/mtd.c   | 193 ++++++++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 209 insertions(+)
+On Wed, Oct 02, 2024 at 12:18:39AM +0200, Heinrich Schuchardt wrote:
+> On 10/1/24 20:02, Tom Rini wrote:
+> > On Tue, Oct 01, 2024 at 04:34:54AM +0200, Heinrich Schuchardt wrote:
+> > > On 10/1/24 02:24, Tom Rini wrote:
+> > > > On Tue, Oct 01, 2024 at 01:38:56AM +0200, Heinrich Schuchardt wrote:
+> > > > > On 26.09.24 23:59, Simon Glass wrote:
+> > > > > > We don't want ANSI characters written in tests since it is a pa=
+in to
+> > > > > > check the output with ut_assert_nextline() et al.
+> > > > > >=20
+> > > > > > Provide a way to tests to request that ANSI characters not be s=
+ent.
+> > > > > >=20
+> > > > > > Add a proper function comment while we are here, to encourage o=
+thers.
+> > > > > >=20
+> > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > >=20
+> > > > > Please, consider prior review before resubmitting patches.
+> > > > >=20
+> > > > > As responded to all prior submissions:
+> > > > >=20
+> > > > > We want to test the code running on actual machines.
+> > > > > We don't want to have sandbox code everywhere.
+> > > > >=20
+> > > > > I cannot see any test that is not passing due to the current beha=
+vior.
+> > > >=20
+> > > > The pytests for the EFI selftests are unreliable for me, on Raspber=
+ry Pi
+> > > > 3, more often in 32bit mode than 64bit mode, but I feel like I see =
+it
+> > > > there too. And when they fail, the console log is full of ANSI esca=
+pe
+> > > > sequences. Is this specific test a test you run regularly on real
+> > > > hardware?
+> > > >=20
+> > >=20
+> > > It is not only the EFI test but also pytest adding color to the conso=
+le
+> > > output.
+> >=20
+> > Alright, so at least for the problems I have _today_, I've figured it
+> > out, and the problem is that the watchdog test fails too quickly:
+> >=20
+> > [snip]
+> > test/py/tests/test_efi_selftest.py ..F
+> > test/py/u_boot_console_base.p
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D FAILURES =3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D
+> > ______________________ test_efi_selftest_watchdog_reboot ______________=
+_________
+> > test/py/tests/test_efi_selftest.py:61: in test_efi_selftest_watchdog_re=
+boot
+> >      u_boot_console.restart_uboot()
+> > test/py/u_boot_console_base.py:478: in restart_uboot
+> >      self.ensure_spawned(expect_reset)
+> > test/py/u_boot_console_base.py:442: in ensure_spawned
+> >      self.wait_for_boot_prompt(loop_num =3D loop_num)
+> > test/py/u_boot_console_base.py:195: in wait_for_boot_prompt
+> >      raise Exception('Bad pattern found on console: ' +
+> > E   Exception: Bad pattern found on console: spl_signon
+> > ----------------------------- Captured stdout call --------------------=
+---------
+> > =3D> setenv efi_selftest list
+> > =3D> =3D> bootefi selftest
+> > =1B7=1B[r=1B[999;999H=1B[6n=1B8No EFI system partition
+> > No EFI system partition
+> > Failed to persist EFI variables
+> > No EFI system partition
+> > Failed to persist EFI variables
+> > No EFI system partition
+> > Failed to persist EFI variables
+> >=20
+> > Available tests:
+> > 'block image transfer' - on request
+> > 'block device'
+> > 'configuration tables'
+> > 'controllers'
+> > 'crc32'
+> > 'device path'
+> > 'device path utilities protocol'
+> > 'conformance profile table'
+> > 'event groups'
+> > 'event services'
+> > 'exception' - on request
+> > 'ExitBootServices'
+> > 'device tree'
+> > 'graphical output'
+> > 'HII database protocols'
+> > 'load file protocol'
+> > 'loaded image'
+> > 'load image from file'
+> > 'mem'
+> > 'memory'
+> > 'open protocol'
+> > 'manage protocols'
+> > 'register protocol notify'
+> > 'reset system' - on request
+> > 'reset system runtime' - on request
+> > 'real time clock'
+> > 'simple network protocol'
+> > 'start image return'
+> > 'start image exit'
+> > 'text input' - on request
+> > 'extended text input' - on request
+> > 'text output'
+> > 'task priority levels'
+> > 'unicode collation'
+> > 'variables'
+> > 'variables at runtime'
+> > 'virtual address map'
+> > 'watchdog timer'
+> > 'watchdog reboot' - on request
+> > =3D> =3D> setenv efi_selftest watchdog reboot
+> > =3D> =3D> bootefi selftest
+> > =1B[1;37;40m
+> > Testing EFI API implementation
+> > =1B[0;37;40m=1B[1;37;40m
+> > Selected test: 'watchdog reboot'
+> > =1B[0;37;40m=1B[1;34;40m
+> > Setting up 'watchdog reboot'
+> > =1B[0;37;40m=1B[1;32;40mSetting up 'watchdog reboot' succeeded
+> > =1B[0;37;40m=1B[1;34;40m
+> > Executing 'watchdog reboot'
+> > =1B[0;37;40m
+> > EFI: Watchdog timeout
+> > resetting ...
+> > +u-boot-test-reset am64x_evm_a53 na
+> > Selected role am64-sk from configuration file
+> > Selected role am64-sk from configuration file
+> > connecting to NetworkSerialPort(target=3DTarget(name=3D'am64-sk', env=
+=3DEnvironment(config_file=3D'/home/trini/u-boot/lg_env.yaml')), name=3D'US=
+BSerialPort', state=3D<BindingState.bound: 1>, avail=3DTrue, host=3D'ti-lab=
+-host', port=3D57479, speed=3D115200, protocol=3D'rfc2217') calling microco=
+m -s 115200 -t ti-lab-host:57479
+> > connected to 192.168.116.10 (port 57479)
+> > Escape character: Ctrl-\
+> > Type the escape character to get to the prompt.
+> >=20
+> > U-Boot SPL 2024.10-rc5-00022-g17da9795c115 (Oct 01 2024 - 14:29:10 +000=
+0)
+> > SYSFW ABI: 3.1 (firmware rev 0x0009 '9.2.7--v09.02.07 (Kool Koala)')
+> > EEPROM not available at 0x50, trying to read at 0x51
+> > SPL initial stack usage: 13368 bytes
+> > Trying to boot from MMC2
+> > Loading Environment from MMC... MMC Device 0 not found
+> > *** Warning - No MMC card found, using default environment
+> >=20
+> > Starting ATF on ARM64 core...
+> >=20
+> > NOTICE:  BL31: v2.10.0(release):v2.10.0-729-gc8be7c08c
+> > NOTICE:  BL31: Built : 13:50:07, Apr 24 2024
+> > I/TC:
+> > I/TC: OP-TEE version: 4.2.0-22-g16fbd46d2 (gcc version 13.2.0 (GCC)) #2=
+ Wed Apr 24 19:50:23 UTC 2024 aarch64
+> > I/TC: WARNING: This OP-TEE configuration might be insecure!
+> > I/TC: WARNING: Please check https://optee.readthedocs.io/en/latest/arch=
+itecture/porting_guidelines.html
+> > I/TC: Primary CPU initializing
+> > I/TC: GIC redistributor base address not provided
+> > I/TC: Assuming default GIC group status and modifier
+> > I/TC: SYSFW ABI: 3.1 (firmware rev 0x0009 '9.2.7--v09.02.07 (Kool Koala=
+)')
+> > I/TC: HUK Initialized
+> > I/TC: Activated SA2UL device
+> > I/TC: Fixing SA2UL firewall owner for GP device
+> > I/TC: Enabled firewalls for SA2UL TRNG device
+> > I/TC: SA2UL TRNG initialized
+> > I/TC: SA2UL Drivers initialized
+> > I/TC: Primary CPU switching to normal world boot
+> >=20
+> > U-Boot SPL 2024.10-rc5-00022-g17da9795c115 (Oct 01 2024 - 14:31:31 +000=
+0)
+> > SYSFW ABI: 3.1 (firmware rev 0x0009 '9.2.7--v09.02.07 (Kool Koala)')
+> > Trying to boot from MMC2
+> > ?
+> > U-Boot SPL 2024.10-rc5-00022-g17da9795c115 (Oct 01 2024 - 14:29:10 +000=
+0)
+> > Resetting on cold boot to workaround ErrataID:i2331
+> > Please resend tiboot3.bin in case of UART/DFU boot
+> > resetting ...
+> >=20
+> > U-Boot SPL 2024.10-rc5-00022-g17da9795c115 (Oct 01 2024 - 14:29:10 +000=
+0)
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D short test summary info =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> > SKIPPED [47] test/py/conftest.py:512: board "am64x_evm_a53" not support=
+ed
+> > SKIPPED [5] test/py/conftest.py:531: .config feature "cmd_avb" not enab=
+led
+> > SKIPPED [1] test/py/conftest.py:531: .config feature "optee_ta_avb" not=
+ enabled
+> > SKIPPED [1] test/py/conftest.py:531: .config feature "cmd_bootstage" no=
+t enabled
+> > SKIPPED [2] test/py/conftest.py:531: .config feature "bootstage_stash" =
+not enabled
+> > SKIPPED [1] test/py/tests/test_dfu.py:114: got empty parameter set ['en=
+v__usb_dev_port'], function test_dfu at /home/trini/u-boot/u-boot/test/py/t=
+ests/test_dfu.py:113
+> > SKIPPED [1] test/py/tests/test_efi_fit.py:401: No env__efi_fit_tftp_fil=
+e binary specified in environment
+> > FAILED test/py/tests/test_efi_selftest.py::test_efi_selftest_watchdog_r=
+eboot
+> > !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!=
+!!!!!!!!!
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D 1 failed, 17 pas=
+sed, 58 skipped in 58.92s =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+> >=20
+> > I thought it was the escape sequences confusing the check rather than
+> > the platform takes longer than expected to provide whatever the expected
+> > string is. Another TI K3 platform gets slightly farther along before
+> > failing the same way. I'm going back to looping over Pis to see if they
+> > fail in a way that they used to in my previous lab setup.
+> >=20
+>=20
+> The relevant error message is:
+>=20
+>     E   Exception: Bad pattern found on console: spl_signon
+>=20
+> The error occurs because the substring
+>=20
+>     U-Boot SPL 2024.10
+>=20
+> occurs multiple times during the reboot process. This is not expected in
+> wait_for_boot_prompt().
+>=20
+> The EFI test is resetting the board and then calling restart_uboot()
+> which by itself does another reset.
+>=20
+> While the watchdog triggered reboot is running thee test environment may
+> need some time before triggering a reboot itself. This may lead to the
+> observed duplicate output of the U-Boot greeter which is recorded as an
+> error.
+>=20
+> Maybe we should directly call wait_for_boot_prompt(loop_num =3D 2).
+>=20
+>=20
+> diff --git a/test/py/tests/test_efi_selftest.py
+> b/test/py/tests/test_efi_selftest.py
+> index 43f24245582..c3ee1888afb 100644
+> --- a/test/py/tests/test_efi_selftest.py
+> +++ b/test/py/tests/test_efi_selftest.py
+> @@ -58,7 +58,7 @@ def test_efi_selftest_watchdog_reboot(u_boot_console):
+>      u_boot_console.run_command(cmd=3D'bootefi selftest',
+> wait_for_prompt=3DFalse)
+>      if u_boot_console.p.expect(['resetting', 'U-Boot']):
+>          raise Exception('Reset failed in \'watchdog reboot\' test')
+> -    u_boot_console.restart_uboot()
+> +    u_boot_console.wait_for_boot_prompt(loop_num =3D 2)
+>=20
+>  @pytest.mark.buildconfigspec('cmd_bootefi_selftest')
+>  def test_efi_selftest_text_input(u_boot_console):
+>=20
+> Thanks for bringing the issue to my attention.
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index ea0491d3155..5a0efb7b173 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -1471,6 +1471,22 @@ config CMD_MTD_NAND_WRITE_TEST
- 
- 	  WARNING: This test will destroy any data on blocks being tested.
- 
-+config CMD_MTD_NAND_READ_TEST
-+	bool "mtd nand_read_test"
-+	depends on CMD_MTD
-+	help
-+	  MTD nand_read_test command support.
-+
-+	  Reads blocks of NAND flash in normal and raw modes and compares results.
-+	  The following statuses can be returned for a block:
-+	    * non-ecc reading failed,
-+	    * ecc reading failed,
-+	    * block is bad,
-+	    * bitflips is above maximum,
-+	    * actual number of biflips above reported one,
-+	    * bitflips reached it maximum value,
-+	    * block is ok.
-+
- config CMD_MUX
- 	bool "mux"
- 	depends on MULTIPLEXER
-diff --git a/cmd/mtd.c b/cmd/mtd.c
-index 739a8a52cbd..1bfe9fc97da 100644
---- a/cmd/mtd.c
-+++ b/cmd/mtd.c
-@@ -931,6 +931,191 @@ out_put_mtd:
- }
- #endif
- 
-+#ifdef CONFIG_CMD_MTD_NAND_READ_TEST
-+enum nand_read_status {
-+	NAND_READ_STATUS_UNKNOWN = 0,
-+	NAND_READ_STATUS_NONECC_READ_FAIL,
-+	NAND_READ_STATUS_ECC_READ_FAIL,
-+	NAND_READ_STATUS_BAD_BLOCK,
-+	NAND_READ_STATUS_BITFLIP_ABOVE_MAX,
-+	NAND_READ_STATUS_BITFLIP_MISMATCH,
-+	NAND_READ_STATUS_BITFLIP_MAX,
-+	NAND_READ_STATUS_OK,
-+};
-+
-+static enum nand_read_status nand_read_block_check(struct mtd_info *mtd,
-+						   loff_t off, size_t blocksize)
-+{
-+	struct mtd_oob_ops	ops = {};
-+	u_char			*buf;
-+	int			i, d, ret, len, pos, cnt, max;
-+
-+	if (blocksize % mtd->writesize != 0) {
-+		printf("\r  block at %llx: bad block size\n", off);
-+		return NAND_READ_STATUS_UNKNOWN;
-+	}
-+
-+	buf = malloc_cache_aligned(2 * blocksize);
-+	if (buf == NULL) {
-+		printf("\r  block at %llx: can't allocate memory\n", off);
-+		return NAND_READ_STATUS_UNKNOWN;
-+	}
-+
-+	ops.mode = MTD_OPS_RAW;
-+	ops.len = blocksize;
-+	ops.datbuf = buf;
-+	ops.ooblen = 0;
-+	ops.oobbuf = NULL;
-+
-+	if (mtd->_read_oob)
-+		ret = mtd->_read_oob(mtd, off, &ops);
-+	else
-+		ret = mtd->_read(mtd, off, ops.len, &ops.retlen, ops.datbuf);
-+
-+	if (ret != 0) {
-+		free(buf);
-+		printf("\r  block at %llx: non-ecc reading error %d\n",
-+		       off, ret);
-+		return NAND_READ_STATUS_NONECC_READ_FAIL;
-+	}
-+
-+	ops.mode = MTD_OPS_AUTO_OOB;
-+	ops.datbuf = buf + blocksize;
-+
-+	if (mtd->_read_oob)
-+		ret = mtd->_read_oob(mtd, off, &ops);
-+	else
-+		ret = mtd->_read(mtd, off, ops.len, &ops.retlen, ops.datbuf);
-+
-+	if (ret == -EBADMSG) {
-+		free(buf);
-+		printf("\r  block at %llx: bad block\n", off);
-+		return NAND_READ_STATUS_BAD_BLOCK;
-+	}
-+
-+	if (ret < 0) {
-+		free(buf);
-+		printf("\r  block at %llx: ecc reading error %d\n", off, ret);
-+		return NAND_READ_STATUS_ECC_READ_FAIL;
-+	}
-+
-+	if (mtd->ecc_strength == 0) {
-+		free(buf);
-+		return NAND_READ_STATUS_OK;
-+	}
-+
-+	if (ret > mtd->ecc_strength) {
-+		free(buf);
-+		printf("\r  block at %llx: returned bit-flips value %d "
-+		       "is above maximum value %d\n",
-+		       off, ret, mtd->ecc_strength);
-+		return NAND_READ_STATUS_BITFLIP_ABOVE_MAX;
-+	}
-+
-+	max = 0;
-+	pos = 0;
-+	len = blocksize;
-+	while (len > 0) {
-+		cnt = 0;
-+		for (i = 0; i < mtd->ecc_step_size; i++) {
-+			d = buf[pos + i] ^ buf[blocksize + pos + i];
-+			if (d == 0)
-+				continue;
-+
-+			while (d > 0) {
-+				d &= (d - 1);
-+				cnt++;
-+			}
-+		}
-+		if (cnt > max)
-+			max = cnt;
-+
-+		len -= mtd->ecc_step_size;
-+		pos += mtd->ecc_step_size;
-+	}
-+
-+	free(buf);
-+
-+	if (max > ret) {
-+		printf("\r  block at %llx: bitflip mismatch, "
-+		       "read %d but actual %d\n", off, ret, max);
-+		return NAND_READ_STATUS_BITFLIP_MISMATCH;
-+	}
-+
-+	if (ret == mtd->ecc_strength) {
-+		printf("\r  block at %llx: max bitflip reached, "
-+		       "block is unreliable\n", off);
-+		return NAND_READ_STATUS_BITFLIP_MAX;
-+	}
-+
-+	return NAND_READ_STATUS_OK;
-+}
-+
-+static int do_mtd_nand_read_test(struct cmd_tbl *cmdtp, int flag, int argc,
-+				 char *const argv[])
-+{
-+	struct mtd_info		*mtd;
-+	u64			off;
-+	int			stat[NAND_READ_STATUS_OK + 1];
-+	enum nand_read_status	ret;
-+
-+	if (argc < 2)
-+		return CMD_RET_USAGE;
-+
-+	mtd = get_mtd_by_name(argv[1]);
-+	if (IS_ERR_OR_NULL(mtd))
-+		return CMD_RET_FAILURE;
-+
-+	if (!mtd_can_have_bb(mtd)) {
-+		printf("Only NAND-based devices can be checked\n");
-+		goto out_put_mtd;
-+	}
-+
-+	printf("ECC strength:     %d\n",   mtd->ecc_strength);
-+	printf("ECC step size:    %d\n",   mtd->ecc_step_size);
-+	printf("Erase block size: 0x%x\n", mtd->erasesize);
-+	printf("Total blocks:     %d\n",   do_div(mtd->size, mtd->erasesize));
-+
-+	memset(stat, 0, sizeof(stat));
-+	for (off = 0; off < mtd->size; off += mtd->erasesize) {
-+		ret = nand_read_block_check(mtd, off, mtd->erasesize);
-+		stat[ret]++;
-+
-+		switch (ret) {
-+		case NAND_READ_STATUS_BAD_BLOCK:
-+		case NAND_READ_STATUS_BITFLIP_MAX:
-+			if (!mtd_block_isbad(mtd, off))
-+				printf("\r  block at %llx: should be marked "
-+				       "as BAD\n", off);
-+			break;
-+
-+		case NAND_READ_STATUS_OK:
-+			if (mtd_block_isbad(mtd, off))
-+				printf("\r  block at %llx: marked as BAD, but "
-+				       "probably is GOOD\n", off);
-+			break;
-+
-+		default:
-+			break;
-+		}
-+	}
-+
-+out_put_mtd:
-+	put_mtd_device(mtd);
-+	printf("\n");
-+	printf("results:\n");
-+	printf("  Good blocks:            %d\n", stat[NAND_READ_STATUS_OK]);
-+	printf("  Physically bad blocks:  %d\n", stat[NAND_READ_STATUS_BAD_BLOCK]);
-+	printf("  Unreliable blocks:      %d\n", stat[NAND_READ_STATUS_BITFLIP_MAX]);
-+	printf("  Non checked blocks:     %d\n", stat[NAND_READ_STATUS_UNKNOWN]);
-+	printf("  Failed to check blocks: %d\n", stat[NAND_READ_STATUS_NONECC_READ_FAIL] +
-+						 stat[NAND_READ_STATUS_ECC_READ_FAIL]);
-+	printf("  Suspictious blocks:     %d\n", stat[NAND_READ_STATUS_BITFLIP_ABOVE_MAX] +
-+						 stat[NAND_READ_STATUS_BITFLIP_MISMATCH]);
-+	return CMD_RET_SUCCESS;
-+}
-+#endif
-+
- static int do_mtd_bad(struct cmd_tbl *cmdtp, int flag, int argc,
- 		      char *const argv[])
- {
-@@ -1019,6 +1204,9 @@ U_BOOT_LONGHELP(mtd,
- #endif
- #ifdef CONFIG_CMD_MTD_TORTURE
- 	"mtd torture                           <name>        [<off> [<size>]]\n"
-+#endif
-+#ifdef CONFIG_CMD_MTD_NANDTEST
-+	"mtd nandtest                          <name>\n"
- #endif
- 	"\n"
- 	"With:\n"
-@@ -1061,6 +1249,11 @@ U_BOOT_CMD_WITH_SUBCMDS(mtd, "MTD utils", mtd_help_text,
- 		U_BOOT_SUBCMD_MKENT_COMPLETE(nand_write_test, 4, 0,
- 					     do_nand_write_test,
- 					     mtd_name_complete),
-+#endif
-+#ifdef CONFIG_CMD_MTD_NAND_READ_TEST
-+		U_BOOT_SUBCMD_MKENT_COMPLETE(nand_read_test, 2, 0,
-+					     do_mtd_nand_read_test,
-+					     mtd_name_complete),
- #endif
- 		U_BOOT_SUBCMD_MKENT_COMPLETE(bad, 2, 1, do_mtd_bad,
- 					     mtd_name_complete));
--- 
-2.45.2
+Thanks for digging in to this more. I suspect (and I'll try and confirm
+soon) that we need to take in to account:
+commit 645f75f6884a22905b0e3790ca9254fa1a13216e
+Author: Tom Rini <trini@konsulko.com>
+Date:   Wed Apr 24 16:45:37 2024 -0600
 
+    test/py: Make the number of SPL banners seen a variable
+   =20
+    Currently we have the option to tell the console code that we should
+    ignore the SPL banner. We also have an option to say that we can see it
+    a second time, and ignore it. However, some platforms such as TI AM64x
+    will have us see the SPL banner three times. Rather than add an
+    "spl3_skipped" option, rework the code. By default we expect to see the
+    banner once, but boards can specify seeing it as many times as they
+    expect to.
+   =20
+    Signed-off-by: Tom Rini <trini@konsulko.com>
+
+as well in this area.
+>=20
+> Best regards
+>=20
+> Heinrich
+>=20
+
+--=20
+Tom
+
+--aP6D7JZRbowoGZT0
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmb8gkMACgkQFHw5/5Y0
+tyws5Qv7BE2nmaTuxPCp98/2lZ2PBpVrFaHJ3J6x5a04r1uSlKNaXkBFDdTKAk5Z
+i1TuU/Xq6LR980iWAnJy7cqqSSyvnnU7K40UPzz8vFkOQEPDM89gWoxaA6B5W+c7
+wPQurmZpAuu4+XIO6piMO8muqGC2npliaV6gWLs02wcb2mvYUmwPkY/gmeAy0mYc
+KIRZnm3ULx45DbvFCKkdtUoHK4GUBnoLkb8ya6083+bVGOIfIsRVWi3ZlP5PZB2P
+iNYQGGw3YmHrIGHUQTrogVsF2qIFenmypID0/c0hLs7pHoh6nQn9kQdmrZh8IjS8
+t/4TE1m2EUDfMSiNWvcvZQ+KVEckVL0O0vHKEF+9UFNuAlh4qvPWGQB0MMy6XTyF
+CFV7opT70o1LTa25H3+8XCe7tD5DuQuASg5rAkA7bKQM/VxV026rl7Nlxt08no3Y
+v+AZMWwNGWYSU54B7l+ihAC+bRxM0eUCCaUzPcrW07x6gWhliBQCxJDlyqMBMTf7
+SVmFOXZ2
+=6Plb
+-----END PGP SIGNATURE-----
+
+--aP6D7JZRbowoGZT0--
