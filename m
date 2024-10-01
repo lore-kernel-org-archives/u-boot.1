@@ -4,104 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4833ECEB2FD
-	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 13:21:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DA5CCEB2D0
+	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 13:22:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD4F589204;
-	Tue,  1 Oct 2024 15:19:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7759589211;
+	Tue,  1 Oct 2024 15:19:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KSh9Rc5i";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="STGBQMak";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0CE48891B5; Tue,  1 Oct 2024 14:26:09 +0200 (CEST)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id AB5B4891B8; Tue,  1 Oct 2024 15:07:04 +0200 (CEST)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F5C6891A0
- for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 14:26:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2AC7988D09
+ for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 15:07:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-37cdbcb139cso2880231f8f.1
- for <u-boot@lists.denx.de>; Tue, 01 Oct 2024 05:26:07 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-6cb7f5f9fb7so866116d6.1
+ for <u-boot@lists.denx.de>; Tue, 01 Oct 2024 06:07:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1727785566; x=1728390366; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=mWpLx/wht1TQRpskguMCKkqT+YiI0H6xuR/wKhA6SH0=;
- b=KSh9Rc5iL8Ts39k95flU2sDxRGD5w2kzyybfdGl9YvF6t/cRQZ4kqaOYmUXWbGGGkU
- r8H0RdMWmdCxULxAVIZdMKr1sGJYEYpOK5J6Lo/W8HrPYATbHh25lXXy8Y7S9+tNtyxJ
- H9vvJl06a3c5696AV8Omvjj5HxL2NI4IZwSj+DrhJ6AflpPKIKXbkGXA90jY2etvJcGL
- 7RG9ddELecG7vV+/HtkGXD4EEqbSd7mu1iX5SUzIBg5Xjf2pMUNx0Zv081hqlNNSnSM/
- fwL+ROPEMNXHwUqv5YEJ97dcI59UU54x+wURj4gxoSnOo9Is4BiBH9hAT2R9ZTZsezEM
- nnyw==
+ d=chromium.org; s=google; t=1727788015; x=1728392815; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=2k4PXbuPVAAZijPWlEFotLy87sZXzua9Rp0insH/hvw=;
+ b=STGBQMak7scKcfTdIYOVkwV0v3NBrdwR5pjaNTaJY2ISpZn2BKQfa3uOUMgAPCuM1I
+ c0bFIyOVWUID5m7auL6D02V2lxtbLJUm8Mm0fkgulQuVTblpaQyH6PI3kASUAzrroWBM
+ 7E/t2fRT/WHWod8mUELfot+UM64LdVyPXQhV4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727785566; x=1728390366;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=mWpLx/wht1TQRpskguMCKkqT+YiI0H6xuR/wKhA6SH0=;
- b=qn+vjjEUSX6YvQrtYl2inCGo2/wyTImiET0bb0C/Jf8WP9aLDcK37fKThfpF+Lw+PP
- JPBfecCYaTzYVkcopJQE0LjVhQKEYw1TYez9zQMXMEASneAbeLyvYrr5n/VWLlZz0o91
- dAvyfdsrnuHsvkQNL+cRE6Lwlaw6ji+AZA3CHJNXaoTGmRjggMChzWETstFNwtzUkXzh
- i7DbnrPtzgeI7T8cj95VSsEgvVcXZ0kRE5WJM4jJJeyywk8v12ytfk1J4lLl2R3Ggqj8
- J5W+x4Sydt42XUDLJ91+sCkydQDIWEmjsBm26wgEdlZxY8y80ghG9V5+NfLcRxdJ1hS7
- jzxA==
+ d=1e100.net; s=20230601; t=1727788015; x=1728392815;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=2k4PXbuPVAAZijPWlEFotLy87sZXzua9Rp0insH/hvw=;
+ b=XCqOWoglbi37X12CTWbvOX1w6BMKC9nb8j3CZWitv8+6XzjcqfsPnaA1Eu6slgvDsB
+ pYGTvMfgmGeUADforxgnyuxYIxWp6DGSziqlGSeXsHd+DMXkVQcIQ+JR1ihCOEKq+BvS
+ dEdJ6P1HMN5vnj56JHBH3wjlxmVnzMzQMplyi3/qyAiAh2jLqQsJpakzbMVriZKSLGoz
+ YGwoPvym4uzf2dzbsg6XrA9raI3LQ3/l19X68l6lPQcTP3ofXfLvCnAC4QpTL85rI7TV
+ jHzab7zTLL09Hp+ptEaHk2Ukik/DxCb98CyqC605HDgSidCJlbhtKCdoyZld3M7otsTn
+ usZg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXWTUrQV7gSwMVr2xHCGHb/7QrNjXwN3YimW0WTxNzhl2mrGGZ9pUfvrF/mNJvLqvqw9PTUcPI=@lists.denx.de
-X-Gm-Message-State: AOJu0YwD0fxHVp47W/iglG8+86/2IOB1B9fNloXYLK2t8Jf4+r1vazTX
- 3kt0tQdsmk2qzTHFDFsKlq1rmVBCBzHzIGWgj3HYwor+1Z8fVTuH
-X-Google-Smtp-Source: AGHT+IHy5izUC5izP2GZwrxrG8SLPlQVTXvuRaR8dfWJtTUln/2QciydgNnYeull4d7jGyERlDqUvw==
-X-Received: by 2002:a5d:6882:0:b0:371:8319:4dbd with SMTP id
- ffacd0b85a97d-37cd5a77b2emr8901385f8f.17.1727785566369; 
- Tue, 01 Oct 2024 05:26:06 -0700 (PDT)
-Received: from localhost.localdomain (93-34-90-105.ip49.fastwebnet.it.
- [93.34.90.105]) by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-37cd56e94c4sm11646366f8f.62.2024.10.01.05.26.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Oct 2024 05:26:05 -0700 (PDT)
-From: Christian Marangi <ansuelsmth@gmail.com>
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Etienne Carriere <etienne.carriere@foss.st.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
- Sean Anderson <seanga2@gmail.com>, Eddie James <eajames@linux.ibm.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Alexander Gendin <agendin@matrox.com>,
- Yang Xiwen <forbidden405@outlook.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Arseniy Krasnov <avkrasnov@salutedevices.com>, Heiko Schocher <hs@denx.de>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Martin Kurbanov <mmkurbanov@salutedevices.com>,
- Alexey Romanov <avromanov@salutedevices.com>,
- Artur Rojek <artur@conclusive.pl>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Vasileios Amoiridis <vassilisamir@gmail.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Michael Polyntsov <michael.polyntsov@iopsys.eu>,
- Doug Zobel <douglas.zobel@climate.com>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de, John Crispin <john@phrozen.org>
-Subject: [PATCH v5 11/11] test: dm: Expand ofnode options test with new helper
-Date: Tue,  1 Oct 2024 14:24:44 +0200
-Message-ID: <20241001122511.8832-12-ansuelsmth@gmail.com>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20241001122511.8832-1-ansuelsmth@gmail.com>
-References: <20241001122511.8832-1-ansuelsmth@gmail.com>
+ AJvYcCWiPb46FCCN65W2xDQ4tB24npRBZboPBaCeEtiW4LkqFPl4cUfabe8wVI6cMweQ/xMYnf46g0w=@lists.denx.de
+X-Gm-Message-State: AOJu0YyS2czk7Axv5pEJK8BTgsOb06aiXZ20Gfpada7Q+KbsayxylAWx
+ O/SVhEOgNeqMOSfn14qw636+/kDXa2KRK/MIkiysOkf2p/ni3qu019VnkEGvlj/gPn2FUxV5Tm+
+ 6g1/84tLSZVAOX2iSwIKP9vHGd5IFCyLI5CfL
+X-Google-Smtp-Source: AGHT+IF9ypY2c+uXcQ5eRbAYHLsT9gGa9WB4QLlzWNIyALcsdf9H+7jDOh935DUngHI4ZSS0x500C0GhcSb/UOAkSQU=
+X-Received: by 2002:a05:6214:4c03:b0:6cb:410a:ef5d with SMTP id
+ 6a1803df08f44-6cb410af56bmr154057946d6.5.1727788014870; Tue, 01 Oct 2024
+ 06:06:54 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240823204824.443631-1-sjg@chromium.org>
+ <CAFLszTjrxJA_ZmU-Uptb=kYJcvaXwCwNHg0MeGVW=DNUhPoSaw@mail.gmail.com>
+ <87cykkc9hi.fsf@baylibre.com> <8be3b3b6-b805-4459-81af-815d6168edbb@cherry.de>
+In-Reply-To: <8be3b3b6-b805-4459-81af-815d6168edbb@cherry.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 1 Oct 2024 07:06:44 -0600
+Message-ID: <CAFLszThSHKRSQmcMq2cYLyLwxaCLAsx81Q25sW=YsPGLaS2+Ow@mail.gmail.com>
+Subject: Re: [PATCH v2 0/8] bootstd: sunxi: Migrate to standard boot
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Tom Rini <trini@konsulko.com>, Jagan Teki <jagan@amarulasolutions.com>, 
+ Andre Przywara <andre.przywara@arm.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Andrew Davis <afd@ti.com>,
+ Bin Meng <bmeng@tinylab.org>, 
+ Bryan Brattlof <bb@ti.com>, Caleb Connolly <caleb.connolly@linaro.org>, 
+ =?UTF-8?B?Q3PDs2vDoXMgQmVuY2U=?= <csokas.bence@prolan.hu>, 
+ Dragan Simic <dsimic@manjaro.org>, Eddie James <eajames@linux.ibm.com>, 
+ Hans de Goede <hdegoede@redhat.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Janne Grunau <j@jannau.net>, 
+ Jesse Taube <mr.bossman075@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Johan Jonker <jbx6244@gmail.com>, Julien Masson <jmasson@baylibre.com>, 
+ Kever Yang <kever.yang@rock-chips.com>,
+ "Leon M. Busch-George" <leon@georgemail.eu>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
+ Michal Simek <michal.simek@amd.com>, Nam Cao <namcao@linutronix.de>, 
+ Peter Robinson <pbrobinson@gmail.com>, Ramon Fried <rfried.dev@gmail.com>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Stefan Roese <sr@denx.de>, Sumit Garg <sumit.garg@linaro.org>, 
+ =?UTF-8?Q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>, 
+ Tony Dinh <mibodhi@gmail.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Tue, 01 Oct 2024 15:19:18 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -119,50 +110,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Expand ofnode options test with new generic helper for bool, int and
-string.
+Hi,
 
-Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
----
- arch/sandbox/dts/test.dts | 3 +++
- test/dm/ofnode.c          | 9 +++++++++
- 2 files changed, 12 insertions(+)
+On Tue, 1 Oct 2024 at 06:23, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+>
+> Hi Mattijs, Simon,
+>
+> On 10/1/24 2:07 PM, Mattijs Korpershoek wrote:
+> > Hi Simon,
+> >
+> > On mar., oct. 01, 2024 at 05:18, Simon Glass <sjg@chromium.org> wrote:
+> >
+> >> Hi,
+> >>
+> >> On Fri, 23 Aug 2024 at 14:48, Simon Glass <sjg@chromium.org> wrote:
+> >>>
+> >>> This series attempts to migrate all sunxi boards to use standard boot,
+> >>> along with a text environment.
+> >>>
+> >>> Changes in v2:
+> >>> - Add new patch to resolve BOOTSTD->BLK recursion with Kconfig
+> >>> - Put the FEL bootmeth before all other global bootmeths
+> >>> - Convert the other DISTRO_DEFAULTS in the Kconfig too
+> >>> - Keep BOOTCMD_SUNXI_COMPAT
+> >>> - Keep bootcmd_sunxi_compat if OLD_SUNXI_KERNEL_COMPAT is enabled
+> >>>
+> >>> Simon Glass (8):
+> >>>    blk: Make functions available unconditionally
+> >>>    bootstd: Avoid calling unavailable block functions
+> >>>    bootstd: Avoid depending on BLK
+> >>>    sunxi: Add a bootmeth for FEL
+> >>>    sunxi: Move to bootstd
+> >>>    sunxi: Drop old distro boot variables
+> >>>    env: Provide a work-around for unquoting fdtfile
+> >>>    sunxi: Move to text environment
+> >>>
+> >>>   Makefile                                      |   1 +
+> >>>   arch/arm/Kconfig                              |  10 +-
+> >>>   board/sunxi/sunxi.env                         | 152 +++++++++++
+> >>>   boot/Kconfig                                  |  16 +-
+> >>>   boot/Makefile                                 |   1 +
+> >>>   boot/bootdev-uclass.c                         |   3 +
+> >>>   boot/bootmeth_fel.c                           |  81 ++++++
+> >>>   .../gardena-smart-gateway-mt7688_defconfig    |   1 +
+> >>>   doc/usage/environment.rst                     |  12 +
+> >>>   include/blk.h                                 |   9 +-
+> >>>   include/configs/sunxi-common.h                | 238 ------------------
+> >>>   11 files changed, 278 insertions(+), 246 deletions(-)
+> >>>   create mode 100644 board/sunxi/sunxi.env
+> >>>   create mode 100644 boot/bootmeth_fel.c
+> >>>
+> >>> --
+> >>> 2.34.1
+> >>>
+> >>
+> >> I'm just checking on this series. Are there any comments, or can it be applied?
+> >
+> > Quentin mentioned a typo in patch 3/8, see:
+> > https://lore.kernel.org/all/1f963aa8-948a-4657-9f1b-a3bc38df4714@cherry.de/
+> >
+>
+> Well, is it really a typo or was this still a WIP patch that made it to
+> the ML somehow? That was basically the "question" or concern about "wip"
+> appearing in the commit log :)
 
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index 25859ad852d..e5381b56da4 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -103,6 +103,9 @@
- 			bootscr-flash-size = /bits/ 64 <0x2000>;
- 			boot-led = "sandbox:green";
- 			activity-led = "sandbox:red";
-+			testing-bool;
-+			testing-int = <123>;
-+			testing-str = "testing";
- 		};
- 	};
- 
-diff --git a/test/dm/ofnode.c b/test/dm/ofnode.c
-index 39191d7f52b..7c0adcd596b 100644
---- a/test/dm/ofnode.c
-+++ b/test/dm/ofnode.c
-@@ -614,6 +614,15 @@ static int dm_test_ofnode_options(struct unit_test_state *uts)
- 	u64 bootscr_address, bootscr_offset;
- 	u64 bootscr_flash_offset, bootscr_flash_size;
- 
-+	ut_assert(!ofnode_options_read_bool("missing"));
-+	ut_assert(ofnode_options_read_bool("testing-bool"));
-+
-+	ut_asserteq(123, ofnode_options_read_int("testing-int", 0));
-+	ut_asserteq(6, ofnode_options_read_int("missing", 6));
-+
-+	ut_assertnull(ofnode_options_read_str("missing"));
-+	ut_asserteq_str("testing", ofnode_options_read_str("testing-str"));
-+
- 	ut_assertok(ofnode_read_bootscript_address(&bootscr_address,
- 						   &bootscr_offset));
- 	ut_asserteq_64(0, bootscr_address);
--- 
-2.45.2
+It was an ex-wip patch which I modified and failed to remove the
+'wip'. It was fixed in v3[1] (which I now see that I should have
+replied to here)
 
+Regards,
+SImon
+
+[1] https://patchwork.ozlabs.org/project/uboot/patch/20240901222734.462334-4-sjg@chromium.org/
