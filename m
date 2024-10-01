@@ -4,69 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD425CE7CF7
-	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 08:51:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B95CCE7CF7
+	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 08:52:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D94B8916A;
-	Tue,  1 Oct 2024 10:51:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id C6115874AC;
+	Tue,  1 Oct 2024 10:52:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="Sm+37mKE";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="v9by1+hf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0BF0A89161; Tue,  1 Oct 2024 10:51:03 +0200 (CEST)
-Received: from relay9-d.mail.gandi.net (relay9-d.mail.gandi.net
- [217.70.183.199])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 6A6128917A; Tue,  1 Oct 2024 10:52:07 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7AD6E8916A
- for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 10:50:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1874189177
+ for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 10:52:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 85396FF807;
- Tue,  1 Oct 2024 08:50:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1727772659;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=iMCUZl5trZ+YZts28U63dI+mvHeVbRAlUb7tIf0wzrE=;
- b=Sm+37mKEBpRC1+p9SeqDWjv3PZFnQEC7BSc/4e22jF5Fuq4STu0HeGaRmbECL3sGwq3NrM
- QEWGaWx6I1OGCT1kU+lB2XHxkEUcDaLgnnz+Y4mBRTihNU6cfb2auoqCx1o/joRO9f8WEn
- YI9VDdwSIAd+oeEUb5DeA1kBBOVDPK8UvmfOB0iObQSZe8tAGONFbs2MGq3PGde+h43+Hh
- //VzlnfVhHwi+cxYUW6D3cQ7zd/x9THnd+s1kmMkHQKiBTJs9uNxNFFG6OcoMqKhiGvZWJ
- /A0MFQOFVI0EZ+0zEfFHvydRNCmfnOFwRV2S4G2R0QxehSUJIVr9bw6pYh5iZA==
-Date: Tue, 1 Oct 2024 10:50:57 +0200
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Cc: Heiko Schocher <hs@denx.de>, Dario Binacchi
- <dario.binacchi@amarulasolutions.com>, u-boot@lists.denx.de, Fabio Estevam
- <festevam@denx.de>, linux-amarula@amarulasolutions.com, Ye Li
- <ye.li@nxp.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>, Jaehoon Chung
- <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 08/26] power: Add iMX8M block ctrl driver for dispmix
-Message-ID: <20241001105057.2992e124@xps-13>
-In-Reply-To: <CAOf5uwn8vhozjtMqXmWL=3Jaf05UhV7cnGn15Ywj07-PmwW_9w@mail.gmail.com>
-References: <20240913095622.72377-1-dario.binacchi@amarulasolutions.com>
- <20240913095622.72377-9-dario.binacchi@amarulasolutions.com>
- <beecebba-79f5-e21d-3062-287c2dbb04e9@denx.de>
- <CABGWkvqOzc3cGM_aKVurv1XbAbeHXE77xwq_uAmSuZMgjCoevQ@mail.gmail.com>
- <ebb734bd-bdf7-ffd2-d676-7eb6011466a3@denx.de>
- <CAOf5uwm13jyOb0M9Xvx_bO1RpXhDcWqKBC-4fhZGo61Q5cjnjw@mail.gmail.com>
- <3cb57821-30f0-6aa0-2dec-313381b1350a@denx.de>
- <9ce14505-6c37-f2e8-4b5d-44f1a55f0393@denx.de>
- <20241001102908.39b2d3a6@xps-13>
- <CAOf5uwn8vhozjtMqXmWL=3Jaf05UhV7cnGn15Ywj07-PmwW_9w@mail.gmail.com>
-Organization: Bootlin
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-42cb58d810eso37174135e9.0
+ for <u-boot@lists.denx.de>; Tue, 01 Oct 2024 01:52:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1727772724; x=1728377524;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=+Vh9wZ9ow6C+AxI6sCUbau0dIfZJtbujaUdbg2XeWAY=;
+ b=v9by1+hfcYfB2DzEtr1e4oKxpmdudYOoXQ8H29z9zFiahV9u0tsFk8d1Sbb9GcZbbq
+ kKok+3NZF7303v1jux7Ujl0h/Ht5ZEG0FwdlsIKuO32Csgb1K4f87SVTEY4bOGNsrWI6
+ 8DqHdD7HbI0DUfqGMr4qPjQfkrJMv/Ay/swE7mWX4hSbLFVNJNXdDN7YcWokY/bUrPV3
+ cR6gVgmpTpLbvDu8s1BRVqnqvK3ZEjoZbYS1SVZQenoIkorMk2Tygm7FmlirJeVkO46a
+ iM5yYXpMbBale2//YKt0h8RAeIbUJjCuzV+SEE8VqS0IRJV8NGL/db38aKa3faeYW0VY
+ uCwA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727772724; x=1728377524;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=+Vh9wZ9ow6C+AxI6sCUbau0dIfZJtbujaUdbg2XeWAY=;
+ b=IjlIQx8ztHh+nr7EgqDPrFljfEWAbsjLDHz2gf63CIQ/p304SzGHWaKrpF6H4QO3qS
+ ypmop/nrL51BEjIj8tu+6x1ysFOPZ+vBGvui0HDuWKZJW51uFQ9SoAgm4tWkj1U6ovZQ
+ wQzWKcOdLEXFLHBez/6jBgs4/0rEjS8Zf6Nmk+6c0EJqmX9rYzxZw+fYG9uHgD1MQ7qu
+ aXVBKk/5G6CrYT8VbJzn/u5fp8pRD/O2jNikbSwCaq9AIiqMPlJehFlGKxcUo4Ne5x30
+ xYdSM3ZEEF8oo6NBu+s4d5GN8A6dhWwDzBkLBmvMXj1qfooPKVy5WK58KiVe1VfKidNN
+ d0oQ==
+X-Gm-Message-State: AOJu0YxmAlguOKJQ4qpMMn1Ygs3gVjTsXZ8cvbNTR4k+iuNBr1PHehwe
+ rVvq6/S+Mg8+T3CPXzREZW8qx96E1MSyVeCSkkeobQJng4Soh06nC9pFYRbGDpM=
+X-Google-Smtp-Source: AGHT+IHzgtO+KnSUC8i3dk1FQa1O0xqA3keWEl0X/uZR5SnwD86Y0+pQQeY0yX6gBk2mNW/YYuvFbQ==
+X-Received: by 2002:a05:6000:c47:b0:37c:cce8:4acc with SMTP id
+ ffacd0b85a97d-37cf28a9931mr1279240f8f.13.1727772724377; 
+ Tue, 01 Oct 2024 01:52:04 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-37cd564d2c7sm11359191f8f.9.2024.10.01.01.52.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 01 Oct 2024 01:52:03 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Neil Armstrong <neil.armstrong@linaro.org>, Lukasz Majewski
+ <lukma@denx.de>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH] dfu: sf: rely on DT for spi speed and mode
+In-Reply-To: <20240917-uboot-topic-dfu-sf-dt-v1-1-8cf38451eea4@linaro.org>
+References: <20240917-uboot-topic-dfu-sf-dt-v1-1-8cf38451eea4@linaro.org>
+Date: Tue, 01 Oct 2024 10:52:00 +0200
+Message-ID: <87ldz8cij3.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-GND-Sasl: miquel.raynal@bootlin.com
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,150 +89,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michael,
+Hi Neil,
 
-michael@amarulasolutions.com wrote on Tue, 1 Oct 2024 10:33:56 +0200:
+Thank you for the patch and sorry the review delay.
 
-> Hi Miguel
->=20
-> On Tue, Oct 1, 2024 at 10:29=E2=80=AFAM Miquel Raynal <miquel.raynal@boot=
-lin.com> wrote:
-> >
-> > Hi Heiko,
-> >
-> > =20
-> > > >>> Hmm.. unfortunately ... I had applied your 2 clock patches, which
-> > > >>> fixed a problem with enabling parent clocks ... but they broke bo=
-oting
-> > > >>> on a carrier which has fec ethernet! After "Net: " output the boa=
-rd hang...
-> > > >>>
-> > > >>> I reverted your 2 clock patches and it bootet again ... so there =
-is
-> > > >>> a problem ... try to get some more time to look into...
-> > > >>> =20
-> > > >>
-> > > >> We have a fec, but we had I think two patches more on it. I forget=
- to
-> > > >> answer Marek
-> > > >> about them because I don't have my board now and because he is
-> > > >> partially right (or maybe right).
-> > > >> Anyway when we boot we could have and we have clocks that are enab=
-led
-> > > >> by bootrom or SPL that
-> > > >> we need to declare as enable like PLL2/PLL3 those clocks are parts=
- or
-> > > >> could be part of reparent so,
-> > > >> you need to have a reference counter on them that allow to not dis=
-able
-> > > >> during the down chain disable
-> > > >> and up chain enable. I think that what happens to your ethernet it=
-'s
-> > > >> that you disable some clock that is
-> > > >> critical to the board to survive. I had a patch merged by Tom that=
- =20
-> > > >
-> > > > Yep, thats what I think too! If you access registers in a block for
-> > > > which the clock is not enabled ... it just hang...
-> > > > =20
-> > > >> prints the clock name so if you enable
-> > > >> the debug of the clock you will find that your board stops working
-> > > >> during one of this reparinting. =20
-> > > >
-> > > > I currently work on 2024.07... will rebase if 2024.10 is out...
-> > > >
-> > > > Ah, you mean:
-> > > >
-> > > > commit a70d991212c9684e09ed80ece69ce1ff7bfd9f08
-> > > > Author: Michael Trimarchi <michael@amarulasolutions.com>
-> > > > Date:   Tue Jul 9 08:28:13 2024 +0200
-> > > >
-> > > >      clk: clk-uclass: Print clk name in clk_enable/clk_disable
-> > > >
-> > > >      Print clk name in clk_enable and clk_disable. Make sense to kn=
-ow
-> > > >      what clock get disabled/enabled before a system crash or system
-> > > >      hang.
-> > > >
-> > > >      Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
-> > > >
-> > > > I have the same change when I debug :-P
-> > > >
-> > > > IIRC I did not see the clock names ... but I will recheck! =20
-> > >
-> > > I see with your patch the clock names, so fine... and see [1]
-> > >
-> > > Hmm... I am on imx8mp, and I think the changes the patchset do in
-> > >
-> > > "clk: imx8mn: Prevent clock critical path from disabling during repar=
-ent and set_rate"
-> > >
-> > > are in clk-imx8mp already ...
-> > >
-> > > Ported the patch from patchset
-> > >
-> > > "[PATCH 05/26] clk: imx8mm: Mark IMX8MM_SYS_PLL2 and IMX8MM_SYS_PLL3 =
-as enabled"
-> > >
-> > > to imx8mp [2] and fec ethernet works again for me on imx8mp!
-> > >
-> > > Could you add this if you post a v2 ? =20
-> >
-> > TBH I don't feel like the below change is the correct one, it is too
-> > specific. The clock core is recursive and thus should handle the
-> > reparenting situations gracefully.
-> >
-> > I posted a series that is targeting the LVDS output on imx8mp. You
-> > should probably consider checking these patches as well if you work
-> > on imx8mp as well. I also had similar breakages with Ethernet which
-> > happened during the assigned-clocks handling. This patch, which is more
-> > future and platform agnostic, fixed it:
-> >
-> > https://lore.kernel.org/u-boot/20240910101344.110633-3-miquel.raynal@bo=
-otlin.com/
-> > =20
->=20
-> The clock patches are not specific at all. You need to have it working
-> for the parent for each component.
+On mar., sept. 17, 2024 at 14:24, Neil Armstrong <neil.armstrong@linaro.org> wrote:
 
-The diff shown by Heiko is explicitly enabling PLLs by naming them in
-the iMX driver. This is not the correct approach. The problem of
-having non-enabled new parents is global. Parent clocks should be
-enabled before changing muxes, and this should be enforced
-by the clock core/uclass, not the SoC drivers.
+> Align with cmd_sf, and try to rely on DT for spi speed and mode,
+> and still fallback on spi_flash_probe() if it fails.
+>
+> With the current scheme, spi_flash_probe() will be called
+> with CONFIG_SF_DEFAULT_SPEED and CONFIG_SF_DEFAULT_MODE
+> with are set to 0 by default on DT platforms using DM_SPI_FLASH.
+>
+> Like cmd_sf, keep the option to specify the speed and mode
+> from the dfu_alt_mode string, but rely on DT properties
+> if not specified.
+>
+> Using CONFIG_SF_DEFAULT_SPEED and CONFIG_SF_DEFAULT_MODE
+> makes the SPIFC controller on Amlogic Meson G12B & SM1
+> hardware fail and is unable to recover until a system reboot.
+>
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+> ---
+>  drivers/dfu/dfu_sf.c | 22 ++++++++++++++++++++++
+>  1 file changed, 22 insertions(+)
+>
+> diff --git a/drivers/dfu/dfu_sf.c b/drivers/dfu/dfu_sf.c
+> index 7c1c0f9e2dc..b5d875be5ea 100644
+> --- a/drivers/dfu/dfu_sf.c
+> +++ b/drivers/dfu/dfu_sf.c
+> @@ -123,6 +123,9 @@ static struct spi_flash *parse_dev(char *devstr)
+>  	unsigned int mode = CONFIG_SF_DEFAULT_MODE;
+>  	char *s, *endp;
+>  	struct spi_flash *dev;
+> +#if CONFIG_IS_ENABLED(DM_SPI_FLASH)
+> +	bool use_dt = true;
+> +#endif
 
-> This is a standard way to do it and nothing magic compared to other
-> implementations.
+Can we use if (IS_ENABLED(CONFIG...)) for this logic instead of #if ?
 
-No, naming PLLs explicitly is not the correct approach.
+checkpatch.pl seems to warn about this:
 
-> I don't see
-> in your series any addressing or reparent clock or take in account
-> that a clock should be enable before
-> reparenting.
+$ ./scripts/checkpatch.pl --u-boot --git HEAD^..HEAD
+WARNING: Use 'if (IS_ENABLED(CONFIG...))' instead of '#if or #ifdef' where possible
+#36: FILE: drivers/dfu/dfu_sf.c:126:
++#if CONFIG_IS_ENABLED(DM_SPI_FLASH)
 
-That's exactly the link above, whose diff is pasted here for reference:
-
-@@ -595,6 +595,10 @@ int clk_set_parent(struct clk *clk, struct clk *parent)
- 	if (!ops->set_parent)
- 		return -ENOSYS;
-=20
-+	ret =3D clk_enable(parent);
-+	if (ret)
-+		return ret;
-
->=20
-> > My series is complimentary, even though there are some overlaps that we
-> > need to merge. =20
->=20
-> The only collision I can see from your series is that you re-write the
-> imx approach of power domain.
-> Can you please expand here a bit your point?
-
-Well, that's what I'd call an overlap :) There are also similar changes
-in the clock core IIRC. Well, there is a bit of merging that needs to
-happen I guess, but if you don't think there is any then my series can
-enter as-is (once the comments addressed, ofc).
+I know we will have an unused local variable (use_dt) when
+DM_SPI_FLASH=n but to me that is fine.
+We already have unused local variables based on KConfig symbols in
+dfu_flush_medium_sf()
 
 Thanks,
-Miqu=C3=A8l
+Mattijs
+
+>  
+>  	s = strsep(&devstr, ":");
+>  	if (!s || !*s || (bus = simple_strtoul(s, &endp, 0), *endp)) {
+> @@ -143,6 +146,9 @@ static struct spi_flash *parse_dev(char *devstr)
+>  			printf("Invalid SPI speed %s\n", s);
+>  			return NULL;
+>  		}
+> +#if CONFIG_IS_ENABLED(DM_SPI_FLASH)
+> +		use_dt = false;
+> +#endif
+>  	}
+>  
+>  	s = strsep(&devstr, ":");
+> @@ -152,9 +158,25 @@ static struct spi_flash *parse_dev(char *devstr)
+>  			printf("Invalid SPI mode %s\n", s);
+>  			return NULL;
+>  		}
+> +#if CONFIG_IS_ENABLED(DM_SPI_FLASH)
+> +		use_dt = false;
+> +#endif
+>  	}
+>  
+> +#if CONFIG_IS_ENABLED(DM_SPI_FLASH)
+> +	if (use_dt) {
+> +		struct udevice *new;
+> +
+> +		if (!spi_flash_probe_bus_cs(bus, cs, &new))
+> +			dev = dev_get_uclass_priv(new);
+> +		else
+> +			dev = NULL;
+> +	} else {
+> +		dev = spi_flash_probe(bus, cs, speed, mode);
+> +	}
+> +#else
+>  	dev = spi_flash_probe(bus, cs, speed, mode);
+> +#endif
+>  	if (!dev) {
+>  		printf("Failed to create SPI flash at %u:%u:%u:%u\n",
+>  		       bus, cs, speed, mode);
+>
+> ---
+> base-commit: 19dbc09405d3503ce3efef3c2e4b4f0f1a03372d
+> change-id: 20240917-uboot-topic-dfu-sf-dt-8ae62e5c7d79
+>
+> Best regards,
+> -- 
+> Neil Armstrong <neil.armstrong@linaro.org>
