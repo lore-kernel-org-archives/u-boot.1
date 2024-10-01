@@ -4,132 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBF1CCE7CE7
-	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 08:25:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E174CE7CE7
+	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 08:29:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC3F3890AE;
-	Tue,  1 Oct 2024 10:25:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 994BA88B1F;
+	Tue,  1 Oct 2024 10:29:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="gW5aV153";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="GotUd42w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 458AE89121; Tue,  1 Oct 2024 10:25:54 +0200 (CEST)
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on20614.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2414::614])
+ id 21BEE89157; Tue,  1 Oct 2024 10:29:14 +0200 (CEST)
+Received: from relay9-d.mail.gandi.net (relay9-d.mail.gandi.net
+ [217.70.183.199])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0196C88FC7
- for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 10:25:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5E3EC8915B
+ for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 10:29:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Padmarao.Begari@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LKJuu1F9l12Z2uZYVCGlqrnjgHFHDP8LiIdmt8GxHfroL6ThJc7T6eZ3m/R9T7zf+iQ3MWm3/yppbrzSw8UK3MoLgB0aLml17GEZA9GdWHlxcWo5+GKZDYasH1PAf3G+sKG18uQConqEkskimki8brc7xzmeZM+wGuWj9MehETlFa/rglm6GC0MT8UNP3JVC6x3k6qQNerDRvGs7dSXx9QxpxsfCjJHr/EsUZfjTT720l9aXagjesUsP3RUD3It90V3yQttBIIz+86y17jYQCzIde8fIzE4cjssnQ6ZnZXR4QX01QEMqbeh63ioLQqxphYCGtgoiQXmhmAfZ58UD7w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=oQSudLRfg8mc0HNjK0+ekw/HGzr9rb6lsXXMM2pwpe8=;
- b=QyXlNB7CEIvvtRngbArjd9YDwcWPhyQCgjpxrx+imv9AyhuuCF8AkHXZ//o9nmmhvcEMDYISHrhdleeTDEkL34K08c4NfdXTktVBp0P3t8wFxWIawAPma+cKIpREAxokVYBkKKAapJcOqgS1Mb6ahTOaTnEHyJx/1EE1O/tkPj9SgwKdhB2K3x5w1D5Aq7qQk9wXiudv5vDihfwjWMDNVvtO5K5Vf6P9+zIOhYovxKezGx6nrDZhoA4O25VIdyuAkatuH0TFppW6hRqMGeMUYFAwvDNfYKIxVGQRkdCI1iq+sEvXXn6XNsDuOOwCdl3XeOAYhtxdIZn0G8fHsP3fkA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=oQSudLRfg8mc0HNjK0+ekw/HGzr9rb6lsXXMM2pwpe8=;
- b=gW5aV153/2ck1M+CAwgedN9BxeJu0Vv2QU8T4munU2sZlz9P5SvKGIAVydZBuWwDCg/H4P64SqP2ZQ7VWpCor39eNgjoHTI0Cbyx7UZo+RD2ZnJGVFe24zN/rOZCSMnQPOehDVb0Ja71mo4PNELIm6EZrzvAFLZGh/43sIsapPA=
-Received: from MN0P220CA0011.NAMP220.PROD.OUTLOOK.COM (2603:10b6:208:52e::23)
- by MN0PR12MB6320.namprd12.prod.outlook.com (2603:10b6:208:3d3::5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8005.27; Tue, 1 Oct
- 2024 08:25:48 +0000
-Received: from BL02EPF0002992C.namprd02.prod.outlook.com
- (2603:10b6:208:52e:cafe::b5) by MN0P220CA0011.outlook.office365.com
- (2603:10b6:208:52e::23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8005.27 via Frontend
- Transport; Tue, 1 Oct 2024 08:25:48 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- BL02EPF0002992C.mail.protection.outlook.com (10.167.249.57) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8026.11 via Frontend Transport; Tue, 1 Oct 2024 08:25:48 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 1 Oct
- 2024 03:25:46 -0500
-Received: from xhdkummari40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Tue, 1 Oct 2024 03:25:44 -0500
-From: Padmarao Begari <padmarao.begari@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <git@amd.com>, <michal.simek@amd.com>, <venkatesh.abbarapu@amd.com>,
- <Prasad.Kummari@amd.com>
-Subject: [PATCH v2] xilinx: common: fix script address for Microblaze
-Date: Tue, 1 Oct 2024 13:55:37 +0530
-Message-ID: <20241001082537.830286-1-padmarao.begari@amd.com>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 3F328FF805;
+ Tue,  1 Oct 2024 08:29:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+ t=1727771350;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=fnj/aC+51BsA8+3XTNoW1y2F0GBRIcsP9+JhtYXInMU=;
+ b=GotUd42wgIgL5I6vdYLVQJQ1V9G+AwMFtTEHMY0cYBWcEK9ys6qie35u74evSRp/S2vPy6
+ bFr8UGEyfW2CDkD2dyHvvYvm1h8a08UZX3d3S7j1YxaY8APE5Tmf1SCXkTnLZ5vD4iUKf8
+ Sh+eEf0hvImwJMf6z5/ilgWEUlRq+sEXvBR/brSATmCGDs42LiWmZj0YvpHTjo2lrWJSZT
+ Ojlyv95EszIh9oQCTeglwbt2v4ETFh+cTeG8vY3Gcyxe4cUT8NKnW5daSwDpWH22tWotsy
+ 2Am/dQmrOpzYcFUCnkChFviC+xBVwkHgpT6mba8y+kuRKps9qdGILvqH1XGNPQ==
+Date: Tue, 1 Oct 2024 10:29:08 +0200
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+To: Heiko Schocher <hs@denx.de>
+Cc: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>, Dario
+ Binacchi <dario.binacchi@amarulasolutions.com>, u-boot@lists.denx.de, Fabio
+ Estevam <festevam@denx.de>, linux-amarula@amarulasolutions.com, Ye Li
+ <ye.li@nxp.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>, Jaehoon Chung
+ <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH 08/26] power: Add iMX8M block ctrl driver for dispmix
+Message-ID: <20241001102908.39b2d3a6@xps-13>
+In-Reply-To: <9ce14505-6c37-f2e8-4b5d-44f1a55f0393@denx.de>
+References: <20240913095622.72377-1-dario.binacchi@amarulasolutions.com>
+ <20240913095622.72377-9-dario.binacchi@amarulasolutions.com>
+ <beecebba-79f5-e21d-3062-287c2dbb04e9@denx.de>
+ <CABGWkvqOzc3cGM_aKVurv1XbAbeHXE77xwq_uAmSuZMgjCoevQ@mail.gmail.com>
+ <ebb734bd-bdf7-ffd2-d676-7eb6011466a3@denx.de>
+ <CAOf5uwm13jyOb0M9Xvx_bO1RpXhDcWqKBC-4fhZGo61Q5cjnjw@mail.gmail.com>
+ <3cb57821-30f0-6aa0-2dec-313381b1350a@denx.de>
+ <9ce14505-6c37-f2e8-4b5d-44f1a55f0393@denx.de>
+Organization: Bootlin
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB03.amd.com: padmarao.begari@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF0002992C:EE_|MN0PR12MB6320:EE_
-X-MS-Office365-Filtering-Correlation-Id: 136868bf-825d-4697-7c11-08dce1f2a72b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|36860700013|82310400026|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?OYi0+8lRlBRfCKSVpnFM4vm+tNh6TDQE4KT7K3wuxNc6xFthdbQnlu8AtXYa?=
- =?us-ascii?Q?/vFwl4YpwzMxBQZVz5mjJRsf7DojDgfZ0nD/e3EJ4QS5HEqCuW4/hoy0SgbL?=
- =?us-ascii?Q?WWBK9MvtpKD3rCkFQM2fz+pSztzgXHNIOJLGi2semAB1cioq53CcO0PpcxsL?=
- =?us-ascii?Q?2IFcJqmP4p//t4X028/3ZjYlJP8Tbzy8UMkX2vQutGgTmrMW+36gSCN0sCwa?=
- =?us-ascii?Q?h9NBpibZuOifW1BHC5xf9cgEU7N0EInp2hPjBY5VHr+EIbFUQJH64kqK64MJ?=
- =?us-ascii?Q?zbv6qfR93l8RK3CNVA4AU2eiz8T/bUSTP+gXL+d2K5OchQV3JT5VjHvG9kCd?=
- =?us-ascii?Q?f3aq3/BFGymFR9ThV3d2QtF5Fe9deCkoh93u4za5MAyzZMjXZkHd2+cbMIfW?=
- =?us-ascii?Q?bAOrqHJJrRS6cHmIKHNinj8a28r2h61tTPtvNjk3/k8gXSZJmmcW/5FaLtqN?=
- =?us-ascii?Q?DXjZS2fIEVUfZMyk9fpD7EtOK69Zxfydpu7sAt+z39jxnkMx2fbEyTisUsb1?=
- =?us-ascii?Q?V/UgHvZDF9fB7EBBcMTjQlro8mbsACUuWV+tx9/A60Ff5x7qNDNRaXWw16cy?=
- =?us-ascii?Q?s5xPlvTKvfUmoMmk7bjOnTjWloAaRRETdVB9AlCrcCUmt8J0+NPT3wq0+QNO?=
- =?us-ascii?Q?xgwLvbrYbXLlIvU0Bbv36h92UtC09hlJDso9MacZrgk+vUGWALTbQaMPiuo7?=
- =?us-ascii?Q?Q9SM4P4GDKi+uh2ISPAdBXjWbNl5eiEw2na2yqW6oVdsoUerEZT6czCsVQ/F?=
- =?us-ascii?Q?x9abqEnGEGWIl2UKk6RL6ignu7BRlHbueCYM1bEc31Guzj+PqKuDD+cKe2fZ?=
- =?us-ascii?Q?NgBo4lYSZ99PE3K4Fc3e0pRj8uxfIUnc47Xp7KdCkn27X+y/jJq/3Q1WTW5r?=
- =?us-ascii?Q?1+20w3wViUP3vatD+7ZyhDohkLoeohNxLOhqes/ijX+wmJyEinQPZaT3ZQx/?=
- =?us-ascii?Q?1tk5fLtk22ZgMWRGeP4f5OrfsAo6unPWBdAx5UnlqQb75qTMJTFQgk5gk9FZ?=
- =?us-ascii?Q?+OgHRwhYWt29vdIdaKHTJbqjMn63HhSUlPHEBfbFZ95nEg9GO6lwtI4a4qw7?=
- =?us-ascii?Q?oJWseT7vvTCHIkX5H+iCfORak1ZGyaw6JGn+tf4ELs2jlE+zTho8BoFg6uII?=
- =?us-ascii?Q?bmgD2RWXvumRaVwlufKqysQ7jWcec9dFiZ2RiCmHWQjYEErAgy+iY2nPo1NG?=
- =?us-ascii?Q?F16b+GfjO0DcraXD5X/qcZvVKqkMOIerk4Nsf7gw/uO656fhWH6+XU6PYeDe?=
- =?us-ascii?Q?ehzAXTXB1I7uxLQ6DK0JYcpaVoCQtW+9jsGtfQMPBcf3y7cv5eCoPMo6Xx1j?=
- =?us-ascii?Q?Z/tAe/J66VHSWDL2zzYTgF+dk5hoQ7K95X3jd4hPqak6iKZGjQzgXHhP4QJx?=
- =?us-ascii?Q?ME5IS9hjyQ4OVunTjUZY2/MxXE0WPDEk1heJkDkRBBBKLXA1zxYsg4bKdXjp?=
- =?us-ascii?Q?7sv+UL/eaHNqZH0aFDqVHQrGguBBZL9s?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(36860700013)(82310400026)(376014); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Oct 2024 08:25:48.1966 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 136868bf-825d-4697-7c11-08dce1f2a72b
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0002992C.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB6320
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-GND-Sasl: miquel.raynal@bootlin.com
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -146,39 +81,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix the issue introduced by commit 067e0294806e
-("board: xilinx: Remove conditional check for Microblaze").
-The scriptaddr should be physical location not really offset
-from start of DDR. When U-Boot is not found boot.scr script
-address in device tree, then it is assigned  based on script
-address  and ram base address for Microblaze and i.e exceeding
-DDR memory. To fix this, the script address is assigned
-initially with offset instead of address. Later it is added
-with ram base address and gets the physical address.
+Hi Heiko,
 
-Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
----
-Changes in v2:
-- Update commit subject line
-- Update commit message
-- Change only for scriptaddr
----
- board/xilinx/microblaze-generic/microblaze-generic.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/board/xilinx/microblaze-generic/microblaze-generic.c b/board/xilinx/microblaze-generic/microblaze-generic.c
-index 2b035d5358..696484a012 100644
---- a/board/xilinx/microblaze-generic/microblaze-generic.c
-+++ b/board/xilinx/microblaze-generic/microblaze-generic.c
-@@ -57,7 +57,7 @@ int board_late_init(void)
- 	max_size = gd->start_addr_sp - CONFIG_STACK_SIZE;
- 	max_size = round_down(max_size, SZ_16M);
- 
--	status |= env_set_hex("scriptaddr", max_size + SZ_2M);
-+	status |= env_set_hex("scriptaddr", (max_size - gd->ram_base) + SZ_2M);
- 
- 	status |= env_set_hex("pxefile_addr_r", max_size + SZ_1M);
- 
--- 
-2.25.1
+> >>> Hmm.. unfortunately ... I had applied your 2 clock patches, which
+> >>> fixed a problem with enabling parent clocks ... but they broke booting
+> >>> on a carrier which has fec ethernet! After "Net: " output the board h=
+ang...
+> >>>
+> >>> I reverted your 2 clock patches and it bootet again ... so there is
+> >>> a problem ... try to get some more time to look into...
+> >>> =20
+> >>
+> >> We have a fec, but we had I think two patches more on it. I forget to
+> >> answer Marek
+> >> about them because I don't have my board now and because he is
+> >> partially right (or maybe right).
+> >> Anyway when we boot we could have and we have clocks that are enabled
+> >> by bootrom or SPL that
+> >> we need to declare as enable like PLL2/PLL3 those clocks are parts or
+> >> could be part of reparent so,
+> >> you need to have a reference counter on them that allow to not disable
+> >> during the down chain disable
+> >> and up chain enable. I think that what happens to your ethernet it's
+> >> that you disable some clock that is
+> >> critical to the board to survive. I had a patch merged by Tom that =20
+> >=20
+> > Yep, thats what I think too! If you access registers in a block for
+> > which the clock is not enabled ... it just hang...
+> >  =20
+> >> prints the clock name so if you enable
+> >> the debug of the clock you will find that your board stops working
+> >> during one of this reparinting. =20
+> >=20
+> > I currently work on 2024.07... will rebase if 2024.10 is out...
+> >=20
+> > Ah, you mean:
+> >=20
+> > commit a70d991212c9684e09ed80ece69ce1ff7bfd9f08
+> > Author: Michael Trimarchi <michael@amarulasolutions.com>
+> > Date:=C2=A0=C2=A0 Tue Jul 9 08:28:13 2024 +0200
+> >=20
+> >  =C2=A0=C2=A0=C2=A0 clk: clk-uclass: Print clk name in clk_enable/clk_d=
+isable
+> >=20
+> >  =C2=A0=C2=A0=C2=A0 Print clk name in clk_enable and clk_disable. Make =
+sense to know
+> >  =C2=A0=C2=A0=C2=A0 what clock get disabled/enabled before a system cra=
+sh or system
+> >  =C2=A0=C2=A0=C2=A0 hang.
+> >=20
+> >  =C2=A0=C2=A0=C2=A0 Signed-off-by: Michael Trimarchi <michael@amarulaso=
+lutions.com>
+> >=20
+> > I have the same change when I debug :-P
+> >=20
+> > IIRC I did not see the clock names ... but I will recheck! =20
+>=20
+> I see with your patch the clock names, so fine... and see [1]
+>=20
+> Hmm... I am on imx8mp, and I think the changes the patchset do in
+>=20
+> "clk: imx8mn: Prevent clock critical path from disabling during reparent =
+and set_rate"
+>=20
+> are in clk-imx8mp already ...
+>=20
+> Ported the patch from patchset
+>=20
+> "[PATCH 05/26] clk: imx8mm: Mark IMX8MM_SYS_PLL2 and IMX8MM_SYS_PLL3 as e=
+nabled"
+>=20
+> to imx8mp [2] and fec ethernet works again for me on imx8mp!
+>=20
+> Could you add this if you post a v2 ?
 
+TBH I don't feel like the below change is the correct one, it is too
+specific. The clock core is recursive and thus should handle the
+reparenting situations gracefully.
+
+I posted a series that is targeting the LVDS output on imx8mp. You
+should probably consider checking these patches as well if you work
+on imx8mp as well. I also had similar breakages with Ethernet which
+happened during the assigned-clocks handling. This patch, which is more
+future and platform agnostic, fixed it:
+
+https://lore.kernel.org/u-boot/20240910101344.110633-3-miquel.raynal@bootli=
+n.com/
+
+My series is complimentary, even though there are some overlaps that we
+need to merge.
+
+Thanks,
+Miqu=C3=A8l
