@@ -4,96 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DA5CCEB2D0
-	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 13:22:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08B4DCF64BE
+	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 13:35:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7759589211;
-	Tue,  1 Oct 2024 15:19:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 8902B891F4;
+	Tue,  1 Oct 2024 15:35:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="STGBQMak";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="F+GlU0wS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB5B4891B8; Tue,  1 Oct 2024 15:07:04 +0200 (CEST)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
+ id 4BAD4891FF; Tue,  1 Oct 2024 15:35:23 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2AC7988D09
- for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 15:07:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E1BEA891FA
+ for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 15:35:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-6cb7f5f9fb7so866116d6.1
- for <u-boot@lists.denx.de>; Tue, 01 Oct 2024 06:07:01 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-71116d8504bso3472549a34.3
+ for <u-boot@lists.denx.de>; Tue, 01 Oct 2024 06:35:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727788015; x=1728392815; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1727789719; x=1728394519; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=2k4PXbuPVAAZijPWlEFotLy87sZXzua9Rp0insH/hvw=;
- b=STGBQMak7scKcfTdIYOVkwV0v3NBrdwR5pjaNTaJY2ISpZn2BKQfa3uOUMgAPCuM1I
- c0bFIyOVWUID5m7auL6D02V2lxtbLJUm8Mm0fkgulQuVTblpaQyH6PI3kASUAzrroWBM
- 7E/t2fRT/WHWod8mUELfot+UM64LdVyPXQhV4=
+ bh=LmkEUmu1Rbc2T65RLnGDFxitQ/RJM3a2ldcmfa+Exoc=;
+ b=F+GlU0wSP1Xvh+NJRY1GKgflUeODt4wMqy+Qcf70MLYw+U+bzoOKQgJvIdCxDu84J9
+ D4wL2PHs+Jn7jtrvhgFWgOd2c5ox7sLISz7WDrIvW6DyXIr5l35wAc4SyCQNhTn/FCCy
+ JAcNPR/l/WzOZJUo+8/bV4rhxBdVo5MvXA0FWMVYAU5YXv5rxUwIFNV4vw3i9mFce1QJ
+ adBbzxSS+vvpfgdS4D/pkdN9mtvZVC7PB7rKhSDboYSIHVUvwcGEVpEG5lFxROJwLa15
+ nEZKeJ59OU4GNjqyIB6p4zsnAQ6bklzn2oxlBskk7/0FSVnz6CyFHr5+L2C+HQyAzt1k
+ lsiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727788015; x=1728392815;
+ d=1e100.net; s=20230601; t=1727789719; x=1728394519;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=2k4PXbuPVAAZijPWlEFotLy87sZXzua9Rp0insH/hvw=;
- b=XCqOWoglbi37X12CTWbvOX1w6BMKC9nb8j3CZWitv8+6XzjcqfsPnaA1Eu6slgvDsB
- pYGTvMfgmGeUADforxgnyuxYIxWp6DGSziqlGSeXsHd+DMXkVQcIQ+JR1ihCOEKq+BvS
- dEdJ6P1HMN5vnj56JHBH3wjlxmVnzMzQMplyi3/qyAiAh2jLqQsJpakzbMVriZKSLGoz
- YGwoPvym4uzf2dzbsg6XrA9raI3LQ3/l19X68l6lPQcTP3ofXfLvCnAC4QpTL85rI7TV
- jHzab7zTLL09Hp+ptEaHk2Ukik/DxCb98CyqC605HDgSidCJlbhtKCdoyZld3M7otsTn
- usZg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWiPb46FCCN65W2xDQ4tB24npRBZboPBaCeEtiW4LkqFPl4cUfabe8wVI6cMweQ/xMYnf46g0w=@lists.denx.de
-X-Gm-Message-State: AOJu0YyS2czk7Axv5pEJK8BTgsOb06aiXZ20Gfpada7Q+KbsayxylAWx
- O/SVhEOgNeqMOSfn14qw636+/kDXa2KRK/MIkiysOkf2p/ni3qu019VnkEGvlj/gPn2FUxV5Tm+
- 6g1/84tLSZVAOX2iSwIKP9vHGd5IFCyLI5CfL
-X-Google-Smtp-Source: AGHT+IF9ypY2c+uXcQ5eRbAYHLsT9gGa9WB4QLlzWNIyALcsdf9H+7jDOh935DUngHI4ZSS0x500C0GhcSb/UOAkSQU=
-X-Received: by 2002:a05:6214:4c03:b0:6cb:410a:ef5d with SMTP id
- 6a1803df08f44-6cb410af56bmr154057946d6.5.1727788014870; Tue, 01 Oct 2024
- 06:06:54 -0700 (PDT)
+ bh=LmkEUmu1Rbc2T65RLnGDFxitQ/RJM3a2ldcmfa+Exoc=;
+ b=XTCK7E4LT/ecJsfY0T8d7vV7VgTmB+cHPbnN57ofregkW3W8TdhvTqIkwzDebQsHee
+ uRJyy9JvbIpNssL/FvxtK+Mx0pLdOuOyzre6lqvnHy8zkR6tiCnSISc8vwqvkeCL2aIy
+ /tSAsIv66BEir9RZ1AympyvQeORpEGW1uAgV4UH9zMRCyIf0Y5I1kWON5aBvPHUJD9WN
+ JnqZe58kW6lCpdV3SS7gCLmf0jBw0oP+u8NhdO9VIN90ZgUMxZWDpEgNxvq/E/8h074i
+ mZWr0xNoXARzUY6kxjliIIu4Zcsr872+8GyiFmoGastzMypZRdkN79g7s8uzIHTG56an
+ 4P+A==
+X-Gm-Message-State: AOJu0Yx/3Za/hgFvQTDsGVWvSTlV09q+OLdPcrthHEvq/xoqw6rMA66b
+ gBOewwSNVd5fuw8mDOmdrvCxhfPWiR1oPehybrJfhO5+hb6hmQJSet9mRBpmJhY3Esq/+X3Kq/A
+ lh1dqp20FgY71k9AzuOGKCKM5243pcahg+XOpww==
+X-Google-Smtp-Source: AGHT+IGn+grlzSlF4msCqs5umohUtmRpdqaUdOauaUwsT2WR36VgxbMXXLIRZ1vQMkbOySFYhYuOMw9LPRctAI0HqbI=
+X-Received: by 2002:a05:6830:6308:b0:708:a300:a6db with SMTP id
+ 46e09a7af769-714fbe835c4mr10590221a34.7.1727789719620; Tue, 01 Oct 2024
+ 06:35:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240823204824.443631-1-sjg@chromium.org>
- <CAFLszTjrxJA_ZmU-Uptb=kYJcvaXwCwNHg0MeGVW=DNUhPoSaw@mail.gmail.com>
- <87cykkc9hi.fsf@baylibre.com> <8be3b3b6-b805-4459-81af-815d6168edbb@cherry.de>
-In-Reply-To: <8be3b3b6-b805-4459-81af-815d6168edbb@cherry.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 1 Oct 2024 07:06:44 -0600
-Message-ID: <CAFLszThSHKRSQmcMq2cYLyLwxaCLAsx81Q25sW=YsPGLaS2+Ow@mail.gmail.com>
-Subject: Re: [PATCH v2 0/8] bootstd: sunxi: Migrate to standard boot
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Tom Rini <trini@konsulko.com>, Jagan Teki <jagan@amarulasolutions.com>, 
- Andre Przywara <andre.przywara@arm.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Andrew Davis <afd@ti.com>,
- Bin Meng <bmeng@tinylab.org>, 
- Bryan Brattlof <bb@ti.com>, Caleb Connolly <caleb.connolly@linaro.org>, 
- =?UTF-8?B?Q3PDs2vDoXMgQmVuY2U=?= <csokas.bence@prolan.hu>, 
- Dragan Simic <dsimic@manjaro.org>, Eddie James <eajames@linux.ibm.com>, 
- Hans de Goede <hdegoede@redhat.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Janne Grunau <j@jannau.net>, 
- Jesse Taube <mr.bossman075@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Johan Jonker <jbx6244@gmail.com>, Julien Masson <jmasson@baylibre.com>, 
- Kever Yang <kever.yang@rock-chips.com>,
- "Leon M. Busch-George" <leon@georgemail.eu>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
- Michal Simek <michal.simek@amd.com>, Nam Cao <namcao@linutronix.de>, 
- Peter Robinson <pbrobinson@gmail.com>, Ramon Fried <rfried.dev@gmail.com>, 
+References: <20240927214955.394224-1-marex@denx.de>
+ <20240927214955.394224-2-marex@denx.de>
+ <CAFA6WYPPXDJC4kSiBAR=jL-Z0v3a8+=_=+hLx+Ug0+yu407y3Q@mail.gmail.com>
+ <75eb6eb6-dd55-4509-a041-a5941286493f@denx.de>
+In-Reply-To: <75eb6eb6-dd55-4509-a041-a5941286493f@denx.de>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Tue, 1 Oct 2024 19:05:08 +0530
+Message-ID: <CAFA6WYM8KJQkTQ6YtMC7ByKU-h1Yss9K50veWmsnni3gYsgj_w@mail.gmail.com>
+Subject: Re: [PATCH 2/3] dts: Add ability to build DTOs only from
+ arch/$(ARCH)/dts
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Fabio Estevam <festevam@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Jonas Karlman <jonas@kwiboo.se>, 
+ Lothar Rubusch <l.rubusch@gmail.com>, Michal Simek <michal.simek@amd.com>, 
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Stefan Roese <sr@denx.de>, Sumit Garg <sumit.garg@linaro.org>, 
- =?UTF-8?Q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>, 
- Tony Dinh <mibodhi@gmail.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+ Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@denx.de>,
+ Tom Rini <trini@konsulko.com>, 
+ u-boot@dh-electronics.com, Jan Kiszka <jan.kiszka@siemens.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Tue, 01 Oct 2024 15:19:18 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,75 +99,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
-On Tue, 1 Oct 2024 at 06:23, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+On Mon, 30 Sept 2024 at 23:05, Marek Vasut <marex@denx.de> wrote:
 >
-> Hi Mattijs, Simon,
+> On 9/30/24 8:02 AM, Sumit Garg wrote:
+> > + Jan
+> >
+> > Hi Marek,
 >
-> On 10/1/24 2:07 PM, Mattijs Korpershoek wrote:
-> > Hi Simon,
-> >
-> > On mar., oct. 01, 2024 at 05:18, Simon Glass <sjg@chromium.org> wrote:
-> >
-> >> Hi,
+> Hi,
+>
+> > On Sat, 28 Sept 2024 at 03:20, Marek Vasut <marex@denx.de> wrote:
 > >>
-> >> On Fri, 23 Aug 2024 at 14:48, Simon Glass <sjg@chromium.org> wrote:
-> >>>
-> >>> This series attempts to migrate all sunxi boards to use standard boot,
-> >>> along with a text environment.
-> >>>
-> >>> Changes in v2:
-> >>> - Add new patch to resolve BOOTSTD->BLK recursion with Kconfig
-> >>> - Put the FEL bootmeth before all other global bootmeths
-> >>> - Convert the other DISTRO_DEFAULTS in the Kconfig too
-> >>> - Keep BOOTCMD_SUNXI_COMPAT
-> >>> - Keep bootcmd_sunxi_compat if OLD_SUNXI_KERNEL_COMPAT is enabled
-> >>>
-> >>> Simon Glass (8):
-> >>>    blk: Make functions available unconditionally
-> >>>    bootstd: Avoid calling unavailable block functions
-> >>>    bootstd: Avoid depending on BLK
-> >>>    sunxi: Add a bootmeth for FEL
-> >>>    sunxi: Move to bootstd
-> >>>    sunxi: Drop old distro boot variables
-> >>>    env: Provide a work-around for unquoting fdtfile
-> >>>    sunxi: Move to text environment
-> >>>
-> >>>   Makefile                                      |   1 +
-> >>>   arch/arm/Kconfig                              |  10 +-
-> >>>   board/sunxi/sunxi.env                         | 152 +++++++++++
-> >>>   boot/Kconfig                                  |  16 +-
-> >>>   boot/Makefile                                 |   1 +
-> >>>   boot/bootdev-uclass.c                         |   3 +
-> >>>   boot/bootmeth_fel.c                           |  81 ++++++
-> >>>   .../gardena-smart-gateway-mt7688_defconfig    |   1 +
-> >>>   doc/usage/environment.rst                     |  12 +
-> >>>   include/blk.h                                 |   9 +-
-> >>>   include/configs/sunxi-common.h                | 238 ------------------
-> >>>   11 files changed, 278 insertions(+), 246 deletions(-)
-> >>>   create mode 100644 board/sunxi/sunxi.env
-> >>>   create mode 100644 boot/bootmeth_fel.c
-> >>>
-> >>> --
-> >>> 2.34.1
-> >>>
-> >>
-> >> I'm just checking on this series. Are there any comments, or can it be applied?
+> >> Currently the enablement of OF_UPSTREAM results on the build system
+> >> searching for DTs only in dts/upstream/ . There are platforms which
+> >> use U-Boot specific DTBOs applied on top of U-Boot control DT during
+> >> SPL stage, and source DTs for these are located in arch/$(ARCH)/dtb.
 > >
-> > Quentin mentioned a typo in patch 3/8, see:
-> > https://lore.kernel.org/all/1f963aa8-948a-4657-9f1b-a3bc38df4714@cherry.de/
-> >
+> > I would like to understand the need to maintain DTBOs separately from
+> > DTBs. Why aren't we pushing DTBOs to Linux kernel sources as we do for
+> > DTBs?
 >
-> Well, is it really a typo or was this still a WIP patch that made it to
-> the ML somehow? That was basically the "question" or concern about "wip"
-> appearing in the commit log :)
+> This is a stopgap measure, I would like to start reducing the amount of
+> U-Boot DTs for iMX platforms, but the DTBOs are still in U-Boot only, so
+> I would like to have some middle-of-the-road solution until the DTOs get
+> upstreamed to Linux too.
+>
+> > Jan recently pushed those so-called U-Boot specific DTBOs for a
+> > TI platform which were accepted in the Linux kernel upstream. This
+> > patch will just deny the ability to build those DTBOs from dts
+> > upstream tree. IMHO, this takes a step backwards on the whole notion
+> > of OF_UPSTREAM.
+>
+> I don't think this will deny building those DTOs which are already
+> upstream. With OF_UPSTREAM enabled, this will build:
+> - Upstream DTBs
+> - Upstream DTBOs
+> - U-Boot local DTBOs (and NOT U-Boot local DTBs)
+> The DTs that are bundled into u-boot.itb are searched exactly in that
+> order too, upstream ones first, upstream DTBOs second and finally the
+> U-Boot local DTBOs. The upstream content should always get higher
+> priority if there are any leftover DTBOs in U-Boot which are also upstream.
+>
+> > If we really want a middle ground solution to allow migration to
+> > OF_UPSTREAM easier then we need to find a way to build DTBOs from both
+> > directories (local and upstream dts). I would imagine that will likely
+> > complicate building and packaging DTBOs.
+>
+> I believe this is exactly what this commit does ?
 
-It was an ex-wip patch which I modified and failed to remove the
-'wip'. It was fixed in v3[1] (which I now see that I should have
-replied to here)
+Okay I see, probably the commit subject was too confusing for me:
 
-Regards,
-SImon
+"dts: Add ability to build DTOs only from arch/$(ARCH)/dts"
 
-[1] https://patchwork.ozlabs.org/project/uboot/patch/20240901222734.462334-4-sjg@chromium.org/
+I can see the benefit that it provides to people migrating to
+OF_UPSTREAM. The negative part can be people just not pushing the
+DTBOs upstream which should rather be easier as we have seen Jan
+pushing DTBOs upstream. There is also magic added by this patch
+regarding which DTBO is actually being used (local or upstream one),
+the packaging ordering can be magic to someone debugging a boot issue
+on a particular platform.
+
+IMHO, the OF_UPSTREAM migration can wait until all the required DT
+sources (.dts and .dtso) are present upstream. If we start to mix and
+match DT sources then it is going to turn into maintainers' hardship
+again. However, I am still open to further convincing arguments for
+this.
+
+-Sumit
