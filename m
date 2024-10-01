@@ -4,83 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CD7ACEACCC
-	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 14:28:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6425CEACD5
+	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 14:43:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B313088D39;
-	Tue,  1 Oct 2024 16:28:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5069A891FE;
+	Tue,  1 Oct 2024 16:43:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bpr82Ps4";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="repu1GH9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C840D891D3; Tue,  1 Oct 2024 16:28:46 +0200 (CEST)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
+ id 26E94891FE; Tue,  1 Oct 2024 16:43:07 +0200 (CEST)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D5FA88D38
- for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 16:28:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1140588D1C
+ for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 16:43:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-6ddceaaa9ddso49191647b3.1
- for <u-boot@lists.denx.de>; Tue, 01 Oct 2024 07:28:44 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-37ce9644daaso1653683f8f.3
+ for <u-boot@lists.denx.de>; Tue, 01 Oct 2024 07:43:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1727792923; x=1728397723; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=tOKKzzZmpNzG8zD7QI09Q3JDDY2cYCcdbKfaknGIANs=;
- b=bpr82Ps47XJZ6s+1l3LA5BqWYxiDnEN2BmeDa5KnSk+6UlWpS5yehjJ+IEo2gpndfJ
- BMyciEHuq+80SMunMYdejzKRNRt7JBiry2BPLtpCfhOoJSoYGma0TWxJ02VV9e6e3Kqd
- Vx7NOyLef9jmTB3Ndl2U5OGMjMaUMS1fvED5M=
+ d=linaro.org; s=google; t=1727793783; x=1728398583; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=JDwyQtU+hUDnhHvQbMDLAbTxtQniTGBWI6mtWhDKI4s=;
+ b=repu1GH9fyxtQdNQ24esTGBrj7o+biRjCZSR4yNx7TotIAVPGwY5WQgGk65JIvzP6t
+ w7hRtyvegPKvGpaqFf7Nu2sFgujr9YDl3mJ4TuQX7miC8r8F9E/UwiaKRP14qMAjtz2L
+ S8if8zmseltbD6LGcM3TwZ/DL7PvlJri3KN+8emyyGv5l/wRWE8QSsChUr4xdYNr+x6+
+ Xm8mDxGnDK7NJpqlmXvk8LkWAWRqMAKQyaEEpV3wuziEcKI8ppXYEUV9dkPBNq1GcZsg
+ HTG4gcEBOtt1w/UxXxOszjgGuss2Wa/eTY/6DCR3UQki8AV7onJaWuWEbC24cm9Axvgk
+ hKhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727792923; x=1728397723;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tOKKzzZmpNzG8zD7QI09Q3JDDY2cYCcdbKfaknGIANs=;
- b=qtHSTAtmADgDINFNJqtxmo/z5h6a+TGFkBVnQHfKYI1jc+XKJZkuIKKpcACvSGvhqI
- H/0lPHNREXkL/4bay+BVq66jwsH7Zops0amqSXpN6FpNFCXmVIAtyn9xMVmgadifluwY
- tzqRMZ+qWjGHsP364PW9VTtgTFbNHLcZcoHRGVQqHo7k0CcO/+3kpmH0PcxMM0Xis7bC
- DHK2pqj4KIVdAs9m6NYVnPhwF0YTtcbprdRS81wicNvLU/B39cwv+Z6uBGEudglIdUfa
- q8AOfjbQHabRkSoJns3W0UIJOJ5SLKouUplE7cw7Hz4MqyuUrpSPvvUhMFBrDioV5QZY
- CXXQ==
+ d=1e100.net; s=20230601; t=1727793783; x=1728398583;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=JDwyQtU+hUDnhHvQbMDLAbTxtQniTGBWI6mtWhDKI4s=;
+ b=MkwF6YSG3nuV+8RKrmmy//Fv0IxP1kxWBy4sFoaSAQ98sCoWaBPTYzC7LIiUlBY2j9
+ BTcshOz/WXlVlD594qvdnmlZb7oCFSYoVqoNEWFgbodP+Tq1FYhbJosV8l6/nhqoOjUV
+ sWAMK0YkLOTfyqR7DK/pJ9PC05NTGgDO5aRxnkdPFYhgeTV8yox3I2gy4fCaQv5AMSLR
+ lS0d0jmgHm/kaShp7OkT2lH66A0qpw2TobC4pqLUpEkDr4ep1z/XiHB2UjtfuMTE8CZe
+ GAuGSVYRL7p1R4S4dSk8ZpHkpxGoS0/2vgYmorLOgpRS6s8rLg+XB2QcwNT381Kvzicx
+ svcw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVGLb4MZwyZvAUll0Qr/F5vqyzQZwtJepRBHQ/ybAYAeaxHkJwPp+dwTLOTInj8xWuGjYd3blk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxi4funEgCNRbsCAwXGfF5zhkRAqkwZYmty+8IiQHa9ZGPujQgC
- tJw7/8MLmGJB9uTBdFMrEBbbhHaeMAstX5FPwuB5IrSf4ywg4BVX4xUysCnaJRw=
-X-Google-Smtp-Source: AGHT+IEI/UeCWhdSjZgOSJFerbUKAdpTBi5egIQbGQ8DLpRfEFsTf/deEQ4GNtFR8Hubn4vAS2b9rw==
-X-Received: by 2002:a05:690c:91:b0:6db:b5b2:53c with SMTP id
- 00721157ae682-6e2475e6608mr110896547b3.32.1727792923188; 
- Tue, 01 Oct 2024 07:28:43 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
+ AJvYcCVGrpt4+s2tA8K98dBj1E+vQ2w6pg+CH0rgIxoU9XlUCZCyVSwyBacpc/KauOwp5UJ/p9MA9nI=@lists.denx.de
+X-Gm-Message-State: AOJu0YzdImLGc+Whu9YvOJdD8+Uqqjh4OkdQWUZjcyc7TkYMJNUz9rRI
+ w6Yz4u0uA6zZUCxmth6Kz0WeULiBysJXKhiH+ejzAhHd6UVr/HGDJoDjFy1DrcI=
+X-Google-Smtp-Source: AGHT+IEh4hQhIV275Pysy1P7zje3FxSvG9karfD2zgBC6AGssuSCNUy+CwE8BVU3Pc//8QSaLEip5A==
+X-Received: by 2002:a05:6000:4d2:b0:378:a935:482 with SMTP id
+ ffacd0b85a97d-37cd5b0dca9mr7755781f8f.58.1727793783423; 
+ Tue, 01 Oct 2024 07:43:03 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:982:cbb0:f9b2:9800:19f8:2888?
+ ([2a01:e0a:982:cbb0:f9b2:9800:19f8:2888])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6cb3b69421csm49358906d6.142.2024.10.01.07.28.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Oct 2024 07:28:41 -0700 (PDT)
-Date: Tue, 1 Oct 2024 08:28:37 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v6 08/12] efi_loader: Disable ANSI output for tests
-Message-ID: <20241001142837.GD4737@bill-the-cat>
-References: <20240926215950.1265143-1-sjg@chromium.org>
- <20240926215950.1265143-9-sjg@chromium.org>
- <08596845-c0b1-4557-9993-cde57420560d@gmx.de>
- <20241001002442.GC4737@bill-the-cat>
- <CALeDE9O0zys8UW+ZoTDoQr2hAJKG+d7AbNpsyMMxdbtVWzFxWA@mail.gmail.com>
+ 5b1f17b1804b1-42f57dec11bsm136940895e9.23.2024.10.01.07.43.02
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 01 Oct 2024 07:43:02 -0700 (PDT)
+Message-ID: <1b12b2ba-9f4a-4535-8ab3-134975fd3a25@linaro.org>
+Date: Tue, 1 Oct 2024 16:43:02 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="YbQXIhCdyjNXTVyw"
-Content-Disposition: inline
-In-Reply-To: <CALeDE9O0zys8UW+ZoTDoQr2hAJKG+d7AbNpsyMMxdbtVWzFxWA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH v2 0/3] dwc3: gadget: properly fix cache operations
+To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+References: <20240724-u-boot-dwc3-gadget-dcache-fixup-v2-0-65836d699a71@linaro.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20240724-u-boot-dwc3-gadget-dcache-fixup-v2-0-65836d699a71@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,74 +120,48 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
---YbQXIhCdyjNXTVyw
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 24/07/2024 17:48, Neil Armstrong wrote:
+> We experience huge problems with cache handling on Qualcomm
+> systems, and it appears the dcache handling in the DWC3 gadget
+> code is quite wrong and causes operational issues.
+> 
+> This serie fixes the dcache operations on unaligned data,
+> and properly invalidate buffers when reading back data from
+> hardware.
+> 
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+> ---
+> Changes in v2:
+> - Fix typo in drivers/usb/dwc3/core.h and rewrite patch 1 commit message
+> - Link to v1: https://lore.kernel.org/r/20240719-u-boot-dwc3-gadget-dcache-fixup-v1-0-58a5f026ea8e@linaro.org
+> 
+> ---
+> Neil Armstrong (3):
+>        usb: dwc3: allocate setup_buf with dma_alloc_coherent()
+>        usb: dwc3: fix dcache flush range calculation
+>        usb: dwc3: invalidate dcache on buffer used in interrupt handling
+> 
+>   drivers/usb/dwc3/core.h   |  2 ++
+>   drivers/usb/dwc3/ep0.c    |  6 ++++--
+>   drivers/usb/dwc3/gadget.c | 10 ++++++----
+>   drivers/usb/dwc3/io.h     | 13 ++++++++++++-
+>   4 files changed, 24 insertions(+), 7 deletions(-)
+> ---
+> base-commit: 3f772959501c99fbe5aa0b22a36efe3478d1ae1c
+> change-id: 20240719-u-boot-dwc3-gadget-dcache-fixup-ea1e92758663
+> 
+> Best regards,
 
-On Tue, Oct 01, 2024 at 08:49:26AM +0100, Peter Robinson wrote:
-> On Tue, 1 Oct 2024 at 01:42, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Tue, Oct 01, 2024 at 01:38:56AM +0200, Heinrich Schuchardt wrote:
-> > > On 26.09.24 23:59, Simon Glass wrote:
-> > > > We don't want ANSI characters written in tests since it is a pain to
-> > > > check the output with ut_assert_nextline() et al.
-> > > >
-> > > > Provide a way to tests to request that ANSI characters not be sent.
-> > > >
-> > > > Add a proper function comment while we are here, to encourage other=
-s.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > >
-> > > Please, consider prior review before resubmitting patches.
-> > >
-> > > As responded to all prior submissions:
-> > >
-> > > We want to test the code running on actual machines.
-> > > We don't want to have sandbox code everywhere.
-> > >
-> > > I cannot see any test that is not passing due to the current behavior.
-> >
-> > The pytests for the EFI selftests are unreliable for me, on Raspberry Pi
-> > 3, more often in 32bit mode than 64bit mode, but I feel like I see it
-> > there too. And when they fail, the console log is full of ANSI escape
-> > sequences. Is this specific test a test you run regularly on real
-> > hardware?
->=20
-> Is it possible there's a bug in the RPi support somewhere that's
-> causing these issues that is triggered more easily with the ASCI
-> codes?
+Gentle ping, those fixes are quite important to make USB Gadget reliable
+on Qualcomm platforms,
 
-I don't think so, in that I thought I saw it on other platforms as well,
-but I don't have the logs anymore. I'll see if I can trigger a failure
-again.
-
---=20
-Tom
-
---YbQXIhCdyjNXTVyw
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmb8BxIACgkQFHw5/5Y0
-tywAHgwAqMp3u/kQ4PzW6oq/uFiDjXVc8NhXG+3V1HUFUrFu9zF/XyzNGgPF72Du
-c9tz9suQ85ceLVHGUoSoyKFBPawDfzR7DhcbgbTSznK1Q7wBm0KfqjBS/8CzaOBz
-W+ihF26Zh2IQGEbrPEZW8jfuMNCPqXE8d9EiPka2tUFC8BIoRc5OZ158gsFhA5D1
-huJvHWWgSVZspcVZo1LX3HMiU1ys0RJuCm6gbL/Ag7bUWAYbNidjAB9RBSPSeUMB
-OzGlChg4Cl1B4xW1iBmsy5nFnuUQHV7eTpxlXHHsFG+/63S8EUVbhKCAuHtuAxsq
-+wUfDVF3UaQcRoMEwfHjs0TF+wlcMGCr/nylqAPRD+wV86Bi86i4vUrB7ofaEFw9
-wtJgkhodsSvrY8ERVoZvvcc95wdcWY7AJW4w5pCTchU8WTNPWeY5bPFswV1fI6gG
-mIvdWV+PjYEfkpFHcf8s1jwANAUfJZvkrIAojuu2DJ7eB6RITNEQgK3D4A1yFS0G
-YVy1E9dm
-=6vgc
------END PGP SIGNATURE-----
-
---YbQXIhCdyjNXTVyw--
+Thanks,
+Neil
