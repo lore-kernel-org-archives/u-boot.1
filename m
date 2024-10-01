@@ -4,146 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27736CF64BE
-	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 13:43:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BEC1CEACC5
+	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 14:10:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F6B1891D7;
-	Tue,  1 Oct 2024 15:43:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id 7CB62891C8;
+	Tue,  1 Oct 2024 16:10:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="JK5pVtQ7";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Q+WQ5Ah3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 44C38891E0; Tue,  1 Oct 2024 15:43:26 +0200 (CEST)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on20626.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2613::626])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 357CF891EC; Tue,  1 Oct 2024 16:10:01 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 20E06891CE
- for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 15:43:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F27588D69
+ for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 16:09:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=mKreXgifBBc9sp30f4vySrww7BTfEK0PUYTuuEKxvIMpyvaCl+zjDJKIFWtJVdrmDMVxBCTPowDALfJ8PzfNijalJKuOF+PwIUEmJUgAMDEQ2AUatytOSPg6Af+y2M4dJy1xkpaJEWVr6V3K6+bft5OmxR0eLo/AQsH0q1cxRroOcXlYfjNf3k39uMsud5xsMtJqSgfX6d3L/m+OMBS1ZFdyOOQNZJPtEh8ZCipcHozANU6cCRiYOvAy326E3oLxeCykD2X21zMwoHQP4OVZsv3sPIlakMlTNwjiCJOzuk+NQoPurUwer+Pj7kWA4t0IbR8v4Iy9wMx2rwUhIYH4Ew==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=RMaAOyAAxHIj54sPQAVyZTBWDAHVmUI5TB93aKvDmEQ=;
- b=K+/pvsSAL6r+pzb3zMtd33T2Qqdh11EvcFm9puiYitkZJrdRt2LoHz1B2dZPF0+TBIpuCnNXQfIu+K1+qMxXAG9R9QMI5G97OFUtavsnfcXebx4j6c2H3gMn8s6bPfXs6VyJ0i2U/k89SOHG7luCibMv8rWlXgGPtM1wSuR+SRF2+AKhkbQ9KmX4B1cUEaRCbV1byfDkEEB7+Sbv6TxLT+RzGXU1IoPV8Dzz+LDq/DDJ7C+ZuHHIEZXgoHH7IgUvonAWRs/k8MtTPIOkmPR/grdR8qKZwTNBUINbDqFZoGeUy3PpjgrueVXTc6xxMpANH5mJ4SxuGrNb7eJFBRYUYQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=RMaAOyAAxHIj54sPQAVyZTBWDAHVmUI5TB93aKvDmEQ=;
- b=JK5pVtQ7xc4IiGgNGMZCoo3kwuza6zWFJzilOGH74epssaW2rRpX2dBqa+62cBQSeB4VNHfkZS9fvEsoR2XEO78AMgWTRpHLEr9gn5ZmBCFUu8tTtWmBTbAM91VlWVHABg0N1Yf62qhDTqgN1/A0+a7bA6AA+4jggas7Ws5yR14=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
- by AS2PR10MB7737.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:64e::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8005.26; Tue, 1 Oct
- 2024 13:43:21 +0000
-Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::9fcc:5df3:197:6691]) by DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::9fcc:5df3:197:6691%3]) with mapi id 15.20.8005.026; Tue, 1 Oct 2024
- 13:43:21 +0000
-From: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>,  Patrick Delaunay
- <patrick.delaunay@foss.st.com>,  Marek Vasut <marex@denx.de>,  Emil
- Kronborg <emil.kronborg@protonmail.com>
-Subject: Re: [PATCH 0/3] env: mmc: fix use of two separate partitions with
- proper type GUID
-In-Reply-To: <20240912134141.4143855-1-rasmus.villemoes@prevas.dk> (Rasmus
- Villemoes's message of "Thu, 12 Sep 2024 15:41:38 +0200")
-References: <20240912134141.4143855-1-rasmus.villemoes@prevas.dk>
-Date: Tue, 01 Oct 2024 15:43:23 +0200
-Message-ID: <871q10j5vo.fsf@prevas.dk>
-User-Agent: Gnus/5.13 (Gnus v5.13)
-Content-Type: text/plain
-X-ClientProxiedBy: MM0P280CA0097.SWEP280.PROD.OUTLOOK.COM (2603:10a6:190:9::6)
- To DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:10:45a::14)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-37ccc600466so2477631f8f.1
+ for <u-boot@lists.denx.de>; Tue, 01 Oct 2024 07:09:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1727791796; x=1728396596; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=BpTsb3thJtGw13ntZS0eiumREn3B1R4DhtPaLPj9tYs=;
+ b=Q+WQ5Ah37oQtMYDe2q1dA8d4DbdqmE7/QQGNXawEtH6uLQgpwPPFuXi+0RnNaENRWN
+ ofKMQyC4fHXVLMnIG/IxN4Fl4smXrSjiH8mAFq3gbCkS0GFyA7v7QXQOeT0yAL0ktLXj
+ RFeNJ5zaxKrNn9m4Dk+qTuHl1t+h8yPMu/TY0pEBqnv6ONdoMZuKqPqT0jN30H6lP0DP
+ sVdDjGDhkzudoqTWjyEgqCKy/G4ctXzXfoZ6GRggDO2Rm+6bNE73bjWLbzWz1+paJmrj
+ OFi9caZZjXBzSZulQdeRswfQnxlRRMVS1oUiCkUG3JJzGTLjg20PGKXKXfDrpc0Vhjlw
+ xBWg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727791796; x=1728396596;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=BpTsb3thJtGw13ntZS0eiumREn3B1R4DhtPaLPj9tYs=;
+ b=XhQYoCY9DLNJevKNDTl96MPi/POyzyTCidBFr0N9lGEoZTKFUVOK5VvqjfzbHYOnZY
+ cBm50HGEUkG/UKXKsbdwESATv+a1ZK43L5CmsV7Y7TsLOOwYM9TSJyw6JHuW431HOOhF
+ v4yUJZbJVq8soMdlUVFOpmghs753AZNyOvURumjW16hbz9r+PsDPjoQCQ7awy07Rf83M
+ Qmg69ZO6q5f2OSefdIyT/dPik2OlJH6xwBD+iFH9/qjX73H60oXDu3+TlO/kYg8SulN+
+ 35esCR1ruyMPkXgFWK7w1cY8rOSahhdwO9KB9WW5gAoPuPABu+q8fvd7FTDklr5KOeT0
+ msIA==
+X-Gm-Message-State: AOJu0Yx5U5Vbtogg0OJA11grWflQppgQAQxsMx3jHM2LGzM6ZFlDKEMU
+ 7ks+JZT12S4fmVHo8/HbNATrRLFhK6Wt9heU3iPsQkM8sOS7fJH3LHKVWfI34v65rV5FiRQRTOW
+ M
+X-Google-Smtp-Source: AGHT+IGEUpZsj8+gg077nV1OeLH4VaTkNk2P+hOWR3vJATDjJceL3ipf6C9Amt5h0cJ585j8XavJUA==
+X-Received: by 2002:adf:f406:0:b0:37c:cea1:fe4a with SMTP id
+ ffacd0b85a97d-37cd5a63125mr9274503f8f.4.1727791795493; 
+ Tue, 01 Oct 2024 07:09:55 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:982:cbb0:f9b2:9800:19f8:2888?
+ ([2a01:e0a:982:cbb0:f9b2:9800:19f8:2888])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-37cd566a41fsm11905709f8f.45.2024.10.01.07.09.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 01 Oct 2024 07:09:55 -0700 (PDT)
+Message-ID: <c15c456b-ea6c-4b3c-90bb-8df6218fe6a0@linaro.org>
+Date: Tue, 1 Oct 2024 16:09:54 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|AS2PR10MB7737:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3e7452ac-b075-438f-3482-08dce21f03b9
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|52116014|366016|376014|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?q3BkXbM9ajXH/lhn94sN9NLsEMQXjFNT9nzHqFtqJsjLQhtaNyuwl7nWlhCm?=
- =?us-ascii?Q?jXtto/vbF9LbNqTbSMRAzlkOpVaDE6+vmtcE092JIVAaqgNoSQaWeYeRudr0?=
- =?us-ascii?Q?QYLNXe+jrbVMrW+2Gc4zFamMaAebdc78WExbez9RODHVl9afXgUZQd3Sw2NO?=
- =?us-ascii?Q?jKt5FUIeORqSZUTAX7PnY5Xsn1UOLWZlWopTukAGtoLf6fnpEjL6Ufq1huaQ?=
- =?us-ascii?Q?4FQ9hCg7Qd+Q0eO+pmfYwYYabZMItbUuGrnrWMP8xHKxMOGMAVN5wm0gsUWn?=
- =?us-ascii?Q?vjgCBm1CzLQeKe140KD3pRPACg/kqcXO168Fpipx4FsMAYaAZRMUk7FpxEBU?=
- =?us-ascii?Q?6CdneHjN1FqMOzI0lItfoXNs7KBxWb8jYzuQjMjIyLc2SNL6j9UYo/alqtW7?=
- =?us-ascii?Q?ccwFUb9SJL7yFV4XifcThY9SMwrJ0K5PdmXdIPTnYnRpgTlFmqiuj2MwhHHT?=
- =?us-ascii?Q?efral1CyghKSetCgD00x9Ur5ZlOwkrXM48z8R2n55kn/ica5qYiemvhzRYt8?=
- =?us-ascii?Q?32TOSr/zgfQcUdgSzqDS+zHSt2oqw7f97Wql7hCx63Gt3+H1IdqZkAzh1emi?=
- =?us-ascii?Q?CWJKuvQ5Q4P+eTolgsrbS+umPmFUtFs621oqO/CXUIBWjKKVa4xytpUXNEHE?=
- =?us-ascii?Q?oR3VgsguGv+pWIy+D69egy0GupjWFwb6UB5mvXjLwh6w9TvHe68sSuyKi2s6?=
- =?us-ascii?Q?ZArkfQxUA6NKGDRWF4oQexdVgv7jSSInSP6wMapE22frwn1Wy8GR3XDDCDbT?=
- =?us-ascii?Q?pFXRZOXiAz39OusgcxXAGWQ9x2kPrDBeUQFCWsd0xY5Syrq3oWhz90IhEBYF?=
- =?us-ascii?Q?9OXya7xF+jRY8yG3+rCM8niv6WX7PVcK7br/N435TXve9QhzBJim1YjbORsU?=
- =?us-ascii?Q?Cggtg0Y6PVOLxgHaP4fnPhUP9sx3eIj9aafUjOjsm1FVsFCR6JU/GAI6xgjQ?=
- =?us-ascii?Q?ZYHdeiaScMywG5xDsuws3+eJSGkfvoNN0hW5sgKQX2+wz3YRVZPFWu01dKdo?=
- =?us-ascii?Q?becRuXyTqZvLlqJnTmgsnqbdV82CRshEhzP8F4EAAkOBWc60LGiD5qeNOsoC?=
- =?us-ascii?Q?yaK9Xhux9+VX1iXTfBrxENv12ALZJsAKfM8satkLxIniOSngV7R0o/Cho1G4?=
- =?us-ascii?Q?g0RTlPPT104UNlh/ItN7XzU/FVEzoscK43Lpsk9f0ojaJBAmQatMfXYtwkMA?=
- =?us-ascii?Q?49X2q3JmeVZxaPUjY7KzKdL0v2ZLRbqnWxFtDlck7aoCkgcJwHepPdWNXaLN?=
- =?us-ascii?Q?Nqmovnd91nUreuF/wMoCxhNtXApqyDnPoq5mFPlU2AMW6ovUW2q7KM6W1BCP?=
- =?us-ascii?Q?6jKkW13pD7Ja5J0T6zLlO054OgcBHk8pBT6J0vZwz9cfCcmCvCsfLxNm91c4?=
- =?us-ascii?Q?061QuhOyFLoZZPcs3GSYHi+TDtgWaOYJ3rMt6ZzDjcUawGbbKA=3D=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(52116014)(366016)(376014)(38350700014); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?lzMGqPwwYjz+yHVBI8nRVvcuD84uXLyQ1XXNGxy62zqNztZN0UEbn+XFCY+A?=
- =?us-ascii?Q?fAnsn0GIFvmhZ7TvHFVOyyK7Ys9mN6ZskD8i++5ODQoUxLHZ7TeOC/Or71v0?=
- =?us-ascii?Q?p4jm/xVqAXkCmJ1Jjbf19czE0/PrtF7dR2tyoHkmA8SddfzpHJhKySF6yNwo?=
- =?us-ascii?Q?a93xopKd/l9j3zAjY44R84HQGoEYSGTM82LtX5XdDKYnScUvxVugQidXS3Ng?=
- =?us-ascii?Q?t28mdz8M1WyKwQt7kDbfSWxDn+mVtshPN0SFbA3zpGSaiID9QqS8WR7pfSXC?=
- =?us-ascii?Q?5+SMhBEP8cDG6K5bsP8zVrBLhtTlTYi3K2gBEAW6NgTRtpWJCxoyNES9Hl16?=
- =?us-ascii?Q?VmmUuXFXJrSX/OOZCVTB14pSpB+PSPIKpxYYiRE8h3RAVDjxa13Zsy/1rqnN?=
- =?us-ascii?Q?51xall/nkP4FJc2hEDkunDSupNJbnOMfmEQpPCIfmlY5Bqam5YCxd/A7RVVv?=
- =?us-ascii?Q?zjQmc8EKy3CWHPM3ThqJF5eoQkSr5tlTFhrANPy2p6QCnmhoVo4MBGmwCoOK?=
- =?us-ascii?Q?qYJMSxg9gAmCaComm3LP0bPKrujE5ga9voh8MirK4MFinx1yZcqE1ees/n29?=
- =?us-ascii?Q?R5GXYfsEUedtl7zRdAQTZvZzzzTV42sjfqKiUnJZ/U63rr/E015hFWu92A9r?=
- =?us-ascii?Q?8PCeu+Hj1o8RIKZRfItxGDPpW5FVGegXqnUY3W74bZarl6e1CQC7eJQexZ2a?=
- =?us-ascii?Q?wX0oXo9V263JFq9zf6o5P0FTpN5NmyrSbKwX6tQByJYlIUIaW0TOrE6BHtC0?=
- =?us-ascii?Q?Fs51QVgcHCeppHLGW6UMZQLFVQOjA6E7/OukhVu2rqCSzWLXnW8fQmGTGtNA?=
- =?us-ascii?Q?NWtdhFaQt41FsUerQba4UIToczK1LzE1QO+VFqmunJs2x1AQyXy5VtVdN2WQ?=
- =?us-ascii?Q?e7aTxgrqYYDketakoM/yCtiIjtiwiz2cllEbAwdDT7dl4Yz3f5fXTe4JpzG6?=
- =?us-ascii?Q?FzP678s3HWlUpNuErvhCAO4Lgp8ZotFS5hmESD5zsnKfN9+H/4G1wxhdZohW?=
- =?us-ascii?Q?zgSp2QskGD0M/TX0q6dOeO7DUrP5rMbOLIL2dyvDaF1Dh6zAMEVzEwvrG7M5?=
- =?us-ascii?Q?5yC086AZq55X2QA5RVzGUR3O8WNb+lzsC5bBC+AW8b1TC3y7xZ1X9JNi5/mV?=
- =?us-ascii?Q?+EzDtoTckrHP/fV6kmyGilUUvzFff7EHYm5HJ1N1VVcJpK1ynzb2LY5ZaCvZ?=
- =?us-ascii?Q?/5JUAE983UlkEcU3YzEFOBLa0+dm4+cLhYHZfbKnmiKUrdd54LtlyEMzocxR?=
- =?us-ascii?Q?4CWqA7pwXrXo9Xo/os0czqTDX2/UciItHT+y5cayS3EnlX4wE6yZ8CzuLPWV?=
- =?us-ascii?Q?Cmqpt099qfiIJiSTslQxeslgHzg4vqdt80crKidgTV+Mn3n1c84nW/eoxL/u?=
- =?us-ascii?Q?WClmHJ3i0kQLju0xhm/5XPx+uI9pQYkPBrdXVHfV/7C7Zo1UNdH9Z6vglsz6?=
- =?us-ascii?Q?DkkGdlH2MCP3fZtJFQq4i8Z9P1jn3I0nxWyaCfeAdaGq4b9RTVWM+46879qI?=
- =?us-ascii?Q?GM5me6zZUpuLT1hosLWptIluZkLauUZUOZwLKjaFxiZuMi6dx6gpeYuHRrgi?=
- =?us-ascii?Q?lI/mLwRkHARxxCKbwZtppQbSXnhg0tFZl4IwPQhcNtaY/osV3gKFIBffcdmc?=
- =?us-ascii?Q?LQ=3D=3D?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3e7452ac-b075-438f-3482-08dce21f03b9
-X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Oct 2024 13:43:21.5729 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: uDNgOLRRYtedsROQj/BLcTfKXPoJQ/91WdLIzo6V9z6N7BJBPE5LwfibDwyHq3cVCbd/86hddmUaH+SyV8cgt5ZUhVwxfER/zr15VFaR8fU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR10MB7737
+User-Agent: Mozilla Thunderbird
+From: neil.armstrong@linaro.org
+Subject: Re: [PATCH] dfu: sf: rely on DT for spi speed and mode
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20240917-uboot-topic-dfu-sf-dt-v1-1-8cf38451eea4@linaro.org>
+ <87ldz8cij3.fsf@baylibre.com>
+ <d350e3d8-557e-4f7f-a4a5-983746d554b5@linaro.org>
+ <9726572a-61e8-457d-aa02-720aa1d5b54b@linaro.org>
+ <87frpgc9ps.fsf@baylibre.com>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <87frpgc9ps.fsf@baylibre.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -155,37 +121,144 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rasmus Villemoes <rasmus.villemoes@prevas.dk> writes:
+On 01/10/2024 14:02, Mattijs Korpershoek wrote:
+> On mar., oct. 01, 2024 at 12:13, Neil Armstrong <neil.armstrong@linaro.org> wrote:
+> 
+>> On 01/10/2024 12:01, Neil Armstrong wrote:
+>>> On 01/10/2024 10:52, Mattijs Korpershoek wrote:
+>>>> Hi Neil,
+>>>>
+>>>> Thank you for the patch and sorry the review delay.
+>>>>
+>>>> On mar., sept. 17, 2024 at 14:24, Neil Armstrong <neil.armstrong@linaro.org> wrote:
+>>>>
+>>>>> Align with cmd_sf, and try to rely on DT for spi speed and mode,
+>>>>> and still fallback on spi_flash_probe() if it fails.
+>>>>>
+>>>>> With the current scheme, spi_flash_probe() will be called
+>>>>> with CONFIG_SF_DEFAULT_SPEED and CONFIG_SF_DEFAULT_MODE
+>>>>> with are set to 0 by default on DT platforms using DM_SPI_FLASH.
+>>>>>
+>>>>> Like cmd_sf, keep the option to specify the speed and mode
+>>>>> from the dfu_alt_mode string, but rely on DT properties
+>>>>> if not specified.
+>>>>>
+>>>>> Using CONFIG_SF_DEFAULT_SPEED and CONFIG_SF_DEFAULT_MODE
+>>>>> makes the SPIFC controller on Amlogic Meson G12B & SM1
+>>>>> hardware fail and is unable to recover until a system reboot.
+>>>>>
+>>>>> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+>>>>> ---
+>>>>>    drivers/dfu/dfu_sf.c | 22 ++++++++++++++++++++++
+>>>>>    1 file changed, 22 insertions(+)
+>>>>>
+>>>>> diff --git a/drivers/dfu/dfu_sf.c b/drivers/dfu/dfu_sf.c
+>>>>> index 7c1c0f9e2dc..b5d875be5ea 100644
+>>>>> --- a/drivers/dfu/dfu_sf.c
+>>>>> +++ b/drivers/dfu/dfu_sf.c
+>>>>> @@ -123,6 +123,9 @@ static struct spi_flash *parse_dev(char *devstr)
+>>>>>        unsigned int mode = CONFIG_SF_DEFAULT_MODE;
+>>>>>        char *s, *endp;
+>>>>>        struct spi_flash *dev;
+>>>>> +#if CONFIG_IS_ENABLED(DM_SPI_FLASH)
+>>>>> +    bool use_dt = true;
+>>>>> +#endif
+>>>>
+>>>> Can we use if (IS_ENABLED(CONFIG...)) for this logic instead of #if ?
+>>>>
+>>>> checkpatch.pl seems to warn about this:
+>>>>
+>>>> $ ./scripts/checkpatch.pl --u-boot --git HEAD^..HEAD
+>>>> WARNING: Use 'if (IS_ENABLED(CONFIG...))' instead of '#if or #ifdef' where possible
+>>>> #36: FILE: drivers/dfu/dfu_sf.c:126:
+>>>> +#if CONFIG_IS_ENABLED(DM_SPI_FLASH)
+>>>>
+>>>> I know we will have an unused local variable (use_dt) when
+>>>> DM_SPI_FLASH=n but to me that is fine.
+>>>> We already have unused local variables based on KConfig symbols in
+>>>> dfu_flush_medium_sf()
+>>>
+>>> Sure, let me check !
+>>
+>> OK so there's:
+>> u-boot/drivers/dfu/dfu_sf.c: In function ‘parse_dev’:
+>> u-boot-upstream/u-boot/drivers/dfu/dfu_sf.c:163:8: warning: implicit declaration of function ‘spi_flash_probe_bus_cs’; did you mean ‘spi_flash_protect’? [-Wimplicit-function-declaration]
+>>     163 |   if (!spi_flash_probe_bus_cs(bus, cs, &new))
+>>         |        ^~~~~~~~~~~~~~~~~~~~~~
+>>         |        spi_flash_protect
+>>
+>> because there's no dummy spi_flash_probe_bus_cs fallback when !DM_SPI_FLASH
+> 
+> Ok,
+> Can we add a dummy function?
 
-> I always define a disk layout with two separate partitions for the two
-> copies of the U-Boot environment and, being the one who introduced the
-> type GUID for such partitions, of course also set those partitions'
-> type GUID appropriately.
->
-> This has worked just fine, but, it turns out, only because I've never
-> had CONFIG_PARTITION_TYPE_GUID enabled on any of my boards; I've
-> always just set the offsets of the two partitions via the config
-> variables CONFIG_ENV_OFFSET(,_REDUND).
->
-> I didn't even know that env/mmc.c had learnt to look for the env
-> partition based on the type GUID, or that that would overrule the
-> ENV_OFFSET config variables, until I experienced weird random
-> corruption while doing bringup for an stm32 board, where
-> PARTITION_TYPE_GUID is automatically set because it is select'ed by
-> CMD_STM32PROG.
->
-> These patches try to fix the code to fit my scheme, while not changing
-> anything for existing setups that use the two-copies-one-partition
-> scheme, other than complaining loudly if the system is misconfigured
-> and avoiding such random corruption of neighbouring partitions.
+We can, not sure about the strategy of the SPI FLASH Driver Model, but it
+should be the default at some point, so let me add it.
 
-Tom, any chance these could be picked up before 2024.10 release? And if
-not, at least be put in -next so I have some stable sha1s to refer to
-in my own branch.
+Neil
 
-Rasmus
+> 
+> If you'd prefer not to, we can keep the #if block for that part and
+> use if (IS_ENABLED) on the other 3 occurences.
+> 
+>>
+>> Neil
+>>>
+>>> Neil
+>>>
+>>>>
+>>>> Thanks,
+>>>> Mattijs
+>>>>
+>>>>>        s = strsep(&devstr, ":");
+>>>>>        if (!s || !*s || (bus = simple_strtoul(s, &endp, 0), *endp)) {
+>>>>> @@ -143,6 +146,9 @@ static struct spi_flash *parse_dev(char *devstr)
+>>>>>                printf("Invalid SPI speed %s\n", s);
+>>>>>                return NULL;
+>>>>>            }
+>>>>> +#if CONFIG_IS_ENABLED(DM_SPI_FLASH)
+>>>>> +        use_dt = false;
+>>>>> +#endif
+>>>>>        }
+>>>>>        s = strsep(&devstr, ":");
+>>>>> @@ -152,9 +158,25 @@ static struct spi_flash *parse_dev(char *devstr)
+>>>>>                printf("Invalid SPI mode %s\n", s);
+>>>>>                return NULL;
+>>>>>            }
+>>>>> +#if CONFIG_IS_ENABLED(DM_SPI_FLASH)
+>>>>> +        use_dt = false;
+>>>>> +#endif
+>>>>>        }
+>>>>> +#if CONFIG_IS_ENABLED(DM_SPI_FLASH)
+>>>>> +    if (use_dt) {
+>>>>> +        struct udevice *new;
+>>>>> +
+>>>>> +        if (!spi_flash_probe_bus_cs(bus, cs, &new))
+>>>>> +            dev = dev_get_uclass_priv(new);
+>>>>> +        else
+>>>>> +            dev = NULL;
+>>>>> +    } else {
+>>>>> +        dev = spi_flash_probe(bus, cs, speed, mode);
+>>>>> +    }
+>>>>> +#else
+>>>>>        dev = spi_flash_probe(bus, cs, speed, mode);
+>>>>> +#endif
+>>>>>        if (!dev) {
+>>>>>            printf("Failed to create SPI flash at %u:%u:%u:%u\n",
+>>>>>                   bus, cs, speed, mode);
+>>>>>
+>>>>> ---
+>>>>> base-commit: 19dbc09405d3503ce3efef3c2e4b4f0f1a03372d
+>>>>> change-id: 20240917-uboot-topic-dfu-sf-dt-8ae62e5c7d79
+>>>>>
+>>>>> Best regards,
+>>>>> -- 
+>>>>> Neil Armstrong <neil.armstrong@linaro.org>
+>>>
+
