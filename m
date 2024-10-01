@@ -4,135 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAE45CEB2FE
-	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 05:49:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F6FFCEB2FE
+	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 05:54:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D1E28912A;
-	Tue,  1 Oct 2024 07:49:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 330D88914F;
+	Tue,  1 Oct 2024 07:54:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Dcul9qrU";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id BC1A08912C; Tue,  1 Oct 2024 07:49:52 +0200 (CEST)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on20611.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2416::611])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3DD6B89121
- for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 07:49:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ltrZrBBlh0nBrnGXNLWhN09nVkdnV5FU74zxURATXz0aEbJ4KKlx6qoeHflxCucK5d6zexiC3ji4ULg7IbVf/1j+iQyWEVSxxb8tuJA+50GBNk2XXrgUyTHYZV6NGMns56/UynLpSKmoZR9VycpdJVYWWV46gMmwjpD2i2+DvNf3TtlKjbO0sh2WCZp93rKyYCWFw0CgEjxnqDnVKXWPY8PHf1CEhXykxuvwGrE2JNQi36seCg4CMGRLdPOaWtG/TbHk83DmSzos5MqaGZ4RrYhKaUucv0tGLxtbukiMWcDbtbV3cN+coNnewDVJIr9b39Wq//pRsJkqXtyYfE2d8A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=o+IAosZWM9uxoJAGh5Mh4ubvKfPHNz3dFpvu6aydAmU=;
- b=Aq7+1hHAkDIdXednRRCU9zPb1ZhJ9WIWJMw3D6A198DHd23RWMkoM5REMqGawTF24Q5vYPgdyZFrrV35dk3a/1BcAQ7zNwy1YdGu6ToDvAf6TH2QscziH2Ims+CzRsYNcNa++KrFDPlTWptEDpG9VAUFDbDUIEsjk5gFYtTIwSN1m2/KldFrnodRMCreNv88YVo/UWohdDfZ1GrgV74bnsrAuBdgzqACwbhRxbNWKQjrY89LySCe9ukp2z7BqW2D2NTLeOiT6QsndBkEDZdLKZdHDtplBocyAmK8uJ5ZOo+N0ouosNauXDaexQiZrw8glmz1LUgG2EzkuN7dw4jWMQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=o+IAosZWM9uxoJAGh5Mh4ubvKfPHNz3dFpvu6aydAmU=;
- b=Dcul9qrUsjVJEch5OFzAzbeDbhyWdJ7Tbp4LcaUeDESBJscBfJtBr5NOZtaHeVoGl6h04dilZLZAY+m3VEza9bp7wnHmcr8URMEuMWqGLxtFTL0Bz5EdODF/8l9QpqaaCoVvcoJsEAsu7HxMUPMq/RTjNhRNkQlrClCnIculhtU=
-Received: from SJ0PR03CA0081.namprd03.prod.outlook.com (2603:10b6:a03:331::26)
- by DS7PR12MB5837.namprd12.prod.outlook.com (2603:10b6:8:78::6) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8005.26; Tue, 1 Oct 2024 05:15:30 +0000
-Received: from SJ1PEPF00002315.namprd03.prod.outlook.com
- (2603:10b6:a03:331:cafe::b2) by SJ0PR03CA0081.outlook.office365.com
- (2603:10b6:a03:331::26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8005.27 via Frontend
- Transport; Tue, 1 Oct 2024 05:15:30 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SJ1PEPF00002315.mail.protection.outlook.com (10.167.242.169) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8026.11 via Frontend Transport; Tue, 1 Oct 2024 05:15:30 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 1 Oct
- 2024 00:15:17 -0500
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 1 Oct
- 2024 00:14:51 -0500
-Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Tue, 1 Oct 2024 00:14:50 -0500
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <marex@denx.de>, <fabrice.gasnier@foss.st.com>,
- <git@amd.com>
-Subject: [PATCH v3 7/7] arm64: zynqmp: Update the usb5744 hub node as per
- binding
-Date: Tue, 1 Oct 2024 10:35:29 +0530
-Message-ID: <20241001050529.17922-8-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20241001050529.17922-1-venkatesh.abbarapu@amd.com>
-References: <20241001050529.17922-1-venkatesh.abbarapu@amd.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1727762040;
+	bh=UkrKOlE/yT4agd7NiN5Kqi14HhkO2WSQ13+5uurn40Y=;
+	h=Date:Subject:From:To:Cc:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=oFGWCqK6Gxsvlbt9epZbjTWuBrFRXMWJ4GLNqL4xpHecITPsJY2cYSxHD1LoA6Xhj
+	 pzpbnKbCFbmXQBsZ7UufbQz1B6YmWdn6Jg4RvtPhQlvNLUBWWI5a862u0gG7wrqgCO
+	 CKr8d922uojjaCZlZGBx/WErIRU9RVCaJYmrXzLXApp4McLkm3JXWRTkTFLNi3mCED
+	 X8xOm044RsxR5td8EFau+xNOdY5MubB1s6QPxbH6SN9ar6Lyj0N1ZAQ0x/wy8lxlJc
+	 p7aoY/qnaTAZl3KNGMyjhhHn/2CCEkiEqNScNCX4VboGebh9UiUJYmQdj0K9U9pE+K
+	 GARczxjiVb5HQ==
+Received: from [192.168.1.107] (82-131-158-173.pool.digikabel.hu
+ [82.131.158.173])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested) (Authenticated sender: hs@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 830CB88C69;
+ Tue,  1 Oct 2024 07:53:56 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1727762038;
+ bh=UkrKOlE/yT4agd7NiN5Kqi14HhkO2WSQ13+5uurn40Y=;
+ h=Date:Subject:From:To:Cc:Reply-To:References:In-Reply-To:From;
+ b=ZO8cW/lxKWAc/RSp1kpZgu3w+AldqcrWaknEAE6R0ZBHgBhUO+WrAuz3tWSdMuQc2
+ WTPjAVHN/Tu7tYTtikIsXFmUONv/guWQCwx+n0wY3lDuby7IPu0fqN1SMTDiwrSF2h
+ 5NqDywtyGBUwE+JkE7gMDksr+zpXXCXJ0VUuieJsLmsA9yir8HKrQAPYbD1GBNqYJb
+ gLxfKFCX/fH+7UK7kW6WAg/igTVaXdoCne8qzZJHNs57/eJpS1vrT48Swl1WK0G1Z5
+ rDWtR9PUR0unfC3sLfJ/1fj/ql7QkRroW3Icbj9iQcvwf7TDhvMyhGPz3p0rrwlg/2
+ uLK6G4O2y5PJg==
+Message-ID: <9ce14505-6c37-f2e8-4b5d-44f1a55f0393@denx.de>
+Date: Tue, 1 Oct 2024 07:51:56 +0200
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF00002315:EE_|DS7PR12MB5837:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1a92fd49-7ad8-4096-7f6c-08dce1d81188
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|82310400026|376014|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?BtQkAhfftMbSwti0lIPPAmUWjrGXDV5tfQpRLsAh/g+qv8qAwb3g/o4sZlXy?=
- =?us-ascii?Q?CMp3W7q+VBAuwT078msrU9efNkrr/ELsXksFlOFmuey6B2itSVPD/bDdC6od?=
- =?us-ascii?Q?OqUSXRziy2s0kawFjDinAwNfih0IfZcXGfBjOMewKeyfZYnswtK4zTYySZa9?=
- =?us-ascii?Q?8Ux+EnpAvJBtAEcK7aOCL0hHx4r2XVORDYEQHmCiSucxjlQsGLTdRX2/i/Ku?=
- =?us-ascii?Q?Y0HEtCQtNUE7TDvp0ex7nT+yFLo+cp1wgUD0U8itI3qIzyoe4HDC8tezhRUg?=
- =?us-ascii?Q?7aMU3+/7DnjLRFu779eSfZDYs2w9HBiLShQuPuyXpmT6142rTKCOU/KP4Xqf?=
- =?us-ascii?Q?6DfrUYv99SgR22CK/EKTvg3SkWlWUtGqUAWjfRcbECJN8+BnAJ1afxK7pGWB?=
- =?us-ascii?Q?7UmU3AkxkE/tAEp3rOg34jVPpZRfEGz0gXG8+8unwTH1JVMAJhFrbYe26FZQ?=
- =?us-ascii?Q?m06QZ+lWNKPKeaDvYqrTwLYM7FCfECj+qEU8O0GMOXPPHUtDCenIminLVeqi?=
- =?us-ascii?Q?kiCSoHkoBPPkgdtc8wDc8MY4sIL7Qo8RDZrzUH7N1b8qX1bj+pMKXqyulsI1?=
- =?us-ascii?Q?idPNBwgHnIpROKjpVuZopVbrqMRwBjgy4l1c/kEQlZCrCJBxQG7f/TqNmiRV?=
- =?us-ascii?Q?56rgj3Ypqs1JHnO04K5/m/mbe/wAMKorzSBHMs/Zz12kl7U3TO5i1lxHxiG+?=
- =?us-ascii?Q?uH3MIsZ4t3yMYSeRu51bliXK/M2DFuRrHQOsT7ZTkl3ajqbSUvUWyykPilDB?=
- =?us-ascii?Q?PZb+o3IHHZ8wa2huqaZvjvVVeME2OvAk+D4W71nHl4C/v/UbRmTSA0yBZDbG?=
- =?us-ascii?Q?n6+vGBcoss+5C0Ga7gq1dMMqxREXCFI2m8xlGDqRZ+LqsELpIv4A9+WyQeA3?=
- =?us-ascii?Q?EWQitnyNePp+4R2Zbf8e5Kt+cO80CIvL+NmSfXpAqlFtUISVhP3znH9MDgKv?=
- =?us-ascii?Q?UsOsizrQ4IKRTkE5K5ZV8J+6Jpxb9uHxVLWGJvjoyy1WwCUV0yFcMkwfiisW?=
- =?us-ascii?Q?E9V5uuN8sqRK4Ng33D2Gau+9n9tqsPprs8Jss8u8UQrJL19T/WGoKoeLyBDz?=
- =?us-ascii?Q?Repfy9XMLTVFfbca59NYi/E14ZbgNhF31nnU479CyDyh/AKNeahniNlvGfFb?=
- =?us-ascii?Q?J0DAHXSba5PH6YfZFVWxf61Z/urTnNwIVABhb55RgtZkYNInNBAMnxSYxmwE?=
- =?us-ascii?Q?jzLGen4VVOhySozKA0Uqj/79JKMvpDTMQyUxzXZ7bwhiftjmeB78s1JLozw6?=
- =?us-ascii?Q?ETA0ENRbcI+BexGQe0kRtYdIDO4eRxxZkOhxLJaD6bRz6bKox4dZ6+YtXABD?=
- =?us-ascii?Q?Uu6ZmlS2UYEQC+HVEKCQxStL/f24ixYPt+oZMOD1YJpO2+p56WtIBRG33kqA?=
- =?us-ascii?Q?frNE/K+zfhS3A6IO8TV/3Kzw2pAe?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(82310400026)(376014)(1800799024); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Oct 2024 05:15:30.1392 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1a92fd49-7ad8-4096-7f6c-08dce1d81188
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF00002315.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB5837
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH 08/26] power: Add iMX8M block ctrl driver for dispmix
+Content-Language: en-US
+From: Heiko Schocher <hs@denx.de>
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>,
+ linux-amarula@amarulasolutions.com, Miquel Raynal
+ <miquel.raynal@bootlin.com>, Ye Li <ye.li@nxp.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
+References: <20240913095622.72377-1-dario.binacchi@amarulasolutions.com>
+ <20240913095622.72377-9-dario.binacchi@amarulasolutions.com>
+ <beecebba-79f5-e21d-3062-287c2dbb04e9@denx.de>
+ <CABGWkvqOzc3cGM_aKVurv1XbAbeHXE77xwq_uAmSuZMgjCoevQ@mail.gmail.com>
+ <ebb734bd-bdf7-ffd2-d676-7eb6011466a3@denx.de>
+ <CAOf5uwm13jyOb0M9Xvx_bO1RpXhDcWqKBC-4fhZGo61Q5cjnjw@mail.gmail.com>
+ <3cb57821-30f0-6aa0-2dec-313381b1350a@denx.de>
+In-Reply-To: <3cb57821-30f0-6aa0-2dec-313381b1350a@denx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -144,251 +75,424 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Updating the usb5744 hub node as per the latest upstream DT binding
-https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/
-tree/Documentation/devicetree/bindings/usb/microchip,usb5744.yaml?h=v6.8.8
+Hello Michael,
 
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
----
- arch/arm/dts/zynqmp-sck-kr-g-revA.dtso | 48 ++++++++++++++++++++++++++
- arch/arm/dts/zynqmp-sck-kr-g-revB.dtso | 48 ++++++++++++++++++++++++++
- arch/arm/dts/zynqmp-sck-kv-g-revA.dtso | 18 ++++++++++
- arch/arm/dts/zynqmp-sck-kv-g-revB.dtso | 25 +++++++++++++-
- 4 files changed, 138 insertions(+), 1 deletion(-)
+On 01.10.24 07:14, Heiko Schocher wrote:
+> Hi Micahel,
+> 
+> On 01.10.24 07:01, Michael Nazzareno Trimarchi wrote:
+>> Hi Heko
+>>
+>> On Tue, Oct 1, 2024 at 6:23 AM Heiko Schocher <hs@denx.de> wrote:
+>>>
+>>> Hi Dario,
+>>>
+>>> On 30.09.24 15:20, Dario Binacchi wrote:
+>>>> Hello Heiko,
+>>>>
+>>>> On Tue, Sep 24, 2024 at 11:07 AM Heiko Schocher <hs@denx.de> wrote:
+>>>>>
+>>>>> Hello Dario,
+>>>>>
+>>>>> On 13.09.24 11:55, Dario Binacchi wrote:
+>>>>>> From: Michael Trimarchi <michael@amarulasolutions.com>
+>>>>>>
+>>>>>> Add iMX8 block ctrl driver for displaymix on iMX8MM/iMX8MN and
+>>>>>> mediamix on iMX8MP.
+>>>>>>
+>>>>>> To support blk ctrl driver, the power domain driver on iMX8M needs
+>>>>>> update to add relevant PGC domains
+>>>>>>
+>>>>>> Signed-off-by: Ye Li <ye.li@nxp.com>
+>>>>>> Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
+>>>>>> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+>>>>>> ---
+>>>>>>
+>>>>>>     drivers/power/domain/Kconfig              |   6 +
+>>>>>>     drivers/power/domain/Makefile             |   1 +
+>>>>>>     drivers/power/domain/imx8m-blk-ctrl.c     | 438 ++++++++++++++++++++++
+>>>>>>     drivers/power/domain/imx8m-power-domain.c | 213 ++++++++++-
+>>>>>>     4 files changed, 656 insertions(+), 2 deletions(-)
+>>>>>>     create mode 100644 drivers/power/domain/imx8m-blk-ctrl.c
+>>>>>>
+>>>>>> diff --git a/drivers/power/domain/Kconfig b/drivers/power/domain/Kconfig
+>>>>>> index bd82d2f7044b..fb006b6e8e28 100644
+>>>>>> --- a/drivers/power/domain/Kconfig
+>>>>>> +++ b/drivers/power/domain/Kconfig
+>>>>>> @@ -40,6 +40,12 @@ config IMX8M_POWER_DOMAIN
+>>>>>>           Enable support for manipulating NXP i.MX8M on-SoC power domains via
+>>>>>>           requests to the ATF.
+>>>>>>
+>>>>>> +config IMX8M_BLK_CTRL
+>>>>>> +     bool "Enable i.MX8M block control driver"
+>>>>>> +     depends on POWER_DOMAIN && ARCH_IMX8M
+>>>>>> +     help
+>>>>>> +       Enable support for manipulating NXP i.MX8M on-SoC block control driver
+>>>>>> +
+>>>>>>     config IMX8MP_HSIOMIX_BLKCTRL
+>>>>>>         bool "Enable i.MX8MP HSIOMIX domain driver"
+>>>>>>         depends on POWER_DOMAIN && IMX8MP
+>>>>>> diff --git a/drivers/power/domain/Makefile b/drivers/power/domain/Makefile
+>>>>>> index 2daab73eb758..46849fd2a4db 100644
+>>>>>> --- a/drivers/power/domain/Makefile
+>>>>>> +++ b/drivers/power/domain/Makefile
+>>>>>> @@ -8,6 +8,7 @@ obj-$(CONFIG_APPLE_PMGR_POWER_DOMAIN) += apple-pmgr.o
+>>>>>>     obj-$(CONFIG_BCM6328_POWER_DOMAIN) += bcm6328-power-domain.o
+>>>>>>     obj-$(CONFIG_IMX8_POWER_DOMAIN) += imx8-power-domain-legacy.o imx8-power-domain.o
+>>>>>>     obj-$(CONFIG_IMX8M_POWER_DOMAIN) += imx8m-power-domain.o
+>>>>>> +obj-$(CONFIG_IMX8M_BLK_CTRL) += imx8m-blk-ctrl.o
+>>>>>>     obj-$(CONFIG_IMX8MP_HSIOMIX_BLKCTRL) += imx8mp-hsiomix.o
+>>>>>>     obj-$(CONFIG_MTK_POWER_DOMAIN) += mtk-power-domain.o
+>>>>>>     obj-$(CONFIG_MESON_GX_VPU_POWER_DOMAIN) += meson-gx-pwrc-vpu.o
+>>>>>> diff --git a/drivers/power/domain/imx8m-blk-ctrl.c b/drivers/power/domain/imx8m-blk-ctrl.c
+>>>>>> new file mode 100644
+>>>>>> index 000000000000..4c89078b991b
+>>>>>> --- /dev/null
+>>>>>> +++ b/drivers/power/domain/imx8m-blk-ctrl.c
+>>>>>> @@ -0,0 +1,438 @@
+>>>>>> +// SPDX-License-Identifier: GPL-2.0
+>>>>>> +/*
+>>>>>> + * Copyright 2023 NXP
+>>>>>> + */
+>>>>>> +
+>>>>>> +#include <dm.h>
+>>>>>> +#include <malloc.h>
+>>>>>> +#include <power-domain-uclass.h>
+>>>>>> +#include <asm/io.h>
+>>>>>> +#include <dm/device-internal.h>
+>>>>>> +#include <dm/device.h>
+>>>>>> +#include <dt-bindings/power/imx8mm-power.h>
+>>>>>> +#include <dt-bindings/power/imx8mn-power.h>
+>>>>>> +#include <dt-bindings/power/imx8mp-power.h>
+>>>>>> +#include <clk.h>
+>>>>>> +#include <linux/delay.h>
+>>>>>> +
+>>>>>> +#define BLK_SFT_RSTN 0x0
+>>>>>> +#define BLK_CLK_EN   0x4
+>>>>>> +#define BLK_MIPI_RESET_DIV   0x8 /* Mini/Nano/Plus DISPLAY_BLK_CTRL only */
+>>>>>> +
+>>>>>> +#define DOMAIN_MAX_CLKS 4
+>>>>>> +
+>>>>>> +struct imx8m_blk_ctrl_domain {
+>>>>>> +     struct clk clks[DOMAIN_MAX_CLKS];
+>>>>>> +     struct power_domain power_dev;
+>>>>>> +};
+>>>>>> +
+>>>>>> +struct imx8m_blk_ctrl {
+>>>>>> +     void __iomem *base;
+>>>>>> +     struct power_domain bus_power_dev;
+>>>>>> +     struct imx8m_blk_ctrl_domain *domains;
+>>>>>> +};
+>>>>>> +
+>>>>>> +struct imx8m_blk_ctrl_domain_data {
+>>>>>> +     const char *name;
+>>>>>> +     const char * const *clk_names;
+>>>>>> +     const char *gpc_name;
+>>>>>> +     int num_clks;
+>>>>>> +     u32 rst_mask;
+>>>>>> +     u32 clk_mask;
+>>>>>> +     u32 mipi_phy_rst_mask;
+>>>>>> +};
+>>>>>> +
+>>>>>> +struct imx8m_blk_ctrl_data {
+>>>>>> +     int max_reg;
+>>>>>> +     const struct imx8m_blk_ctrl_domain_data *domains;
+>>>>>> +     int num_domains;
+>>>>>> +     u32 bus_rst_mask;
+>>>>>> +     u32 bus_clk_mask;
+>>>>>> +};
+>>>>>> +
+>>>>>> +static int imx8m_blk_ctrl_request(struct power_domain *power_domain)
+>>>>>> +{
+>>>>>> +     return 0;
+>>>>>> +}
+>>>>>> +
+>>>>>> +static int imx8m_blk_ctrl_free(struct power_domain *power_domain)
+>>>>>> +{
+>>>>>> +     return 0;
+>>>>>> +}
+>>>>>> +
+>>>>>> +static int imx8m_blk_ctrl_enable_domain_clk(struct udevice *dev, ulong domain_id, bool enable)
+>>>>>> +{
+>>>>>> +     int ret, i;
+>>>>>> +     struct imx8m_blk_ctrl *priv = (struct imx8m_blk_ctrl *)dev_get_priv(dev);
+>>>>>> +     struct imx8m_blk_ctrl_data *drv_data =
+>>>>>> +             (struct imx8m_blk_ctrl_data *)dev_get_driver_data(dev);
+>>>>>> +
+>>>>>> +     debug("%s num_clk %u\n", __func__, drv_data->domains[domain_id].num_clks);
+>>>>>> +
+>>>>>> +     for (i = 0; i < drv_data->domains[domain_id].num_clks; i++) {
+>>>>>> +             debug("%s clk %s\n", __func__, drv_data->domains[domain_id].clk_names[i]);
+>>>>>> +             if (enable)
+>>>>>> +                     ret = clk_enable(&priv->domains[domain_id].clks[i]);
+>>>>>> +             else
+>>>>>> +                     ret = clk_disable(&priv->domains[domain_id].clks[i]);
+>>>>>> +             if (ret && ret != -ENOENT) {
+>>>>>> +                     printf("Failed to %s domain clk %s\n", enable ? "enable" : "disable",
+>>>>>> +                            drv_data->domains[domain_id].clk_names[i]);
+>>>>>> +                     return ret;
+>>>>>> +             }
+>>>>>> +     }
+>>>>>> +
+>>>>>> +     return 0;
+>>>>>> +}
+>>>>>> +
+>>>>>> +static int imx8m_blk_ctrl_power_on(struct power_domain *power_domain)
+>>>>>> +{
+>>>>>> +     struct udevice *dev = power_domain->dev;
+>>>>>> +     struct imx8m_blk_ctrl *priv = (struct imx8m_blk_ctrl *)dev_get_priv(dev);
+>>>>>> +     struct imx8m_blk_ctrl_data *drv_data =
+>>>>>> +             (struct imx8m_blk_ctrl_data *)dev_get_driver_data(dev);
+>>>>>> +     int ret;
+>>>>>> +
+>>>>>> +     debug("%s, id %lu\n", __func__, power_domain->id);
+>>>>>> +
+>>>>>> +     if (!priv->domains[power_domain->id].power_dev.dev)
+>>>>>> +             return -ENODEV;
+>>>>>> +
+>>>>>> +     ret = power_domain_on(&priv->bus_power_dev);
+>>>>>> +     if (ret < 0) {
+>>>>>> +             printf("Failed to power up bus domain %d\n", ret);
+>>>>>> +             return ret;
+>>>>>> +     }
+>>>>>> +
+>>>>>> +     /* Enable bus clock and deassert bus reset */
+>>>>>> +     setbits_le32(priv->base + BLK_CLK_EN, drv_data->bus_clk_mask);
+>>>>>> +     setbits_le32(priv->base + BLK_SFT_RSTN, drv_data->bus_rst_mask);
+>>>>>> +
+>>>>>> +     /* wait for reset to propagate */
+>>>>>> +     udelay(5);
+>>>>>> +
+>>>>>> +     /* put devices into reset */
+>>>>>> +     clrbits_le32(priv->base + BLK_SFT_RSTN, drv_data->domains[power_domain->id].rst_mask);
+>>>>>> +     if (drv_data->domains[power_domain->id].mipi_phy_rst_mask)
+>>>>>> +             clrbits_le32(priv->base + BLK_MIPI_RESET_DIV, d
+>>>>>> +                          rv_data->domains[power_domain->id].mipi_phy_rst_mask);
+>>>>>
+>>>>> Does this build for you?
+>>>>>
+>>>>> I needed the following fix:
+>>>>>
+>>>>> diff --git a/drivers/power/domain/imx8m-blk-ctrl.c b/drivers/power/domain/imx8m-blk-ctrl.c
+>>>>> index 4c89078b99..b772d50480 100644
+>>>>> --- a/drivers/power/domain/imx8m-blk-ctrl.c
+>>>>> +++ b/drivers/power/domain/imx8m-blk-ctrl.c
+>>>>> @@ -114,8 +114,8 @@ static int imx8m_blk_ctrl_power_on(struct power_domain *power_domain)
+>>>>>            /* put devices into reset */
+>>>>>            clrbits_le32(priv->base + BLK_SFT_RSTN, drv_data->domains[power_domain->id].rst_mask);
+>>>>>            if (drv_data->domains[power_domain->id].mipi_phy_rst_mask)
+>>>>> -               clrbits_le32(priv->base + BLK_MIPI_RESET_DIV, d
+>>>>> -                            rv_data->domains[power_domain->id].mipi_phy_rst_mask);
+>>>>> +               clrbits_le32(priv->base + BLK_MIPI_RESET_DIV,
+>>>>> +                            drv_data->domains[power_domain->id].mipi_phy_rst_mask);
+>>>>>
+>>>>>            /* enable upstream and blk-ctrl clocks to allow reset to propagate */
+>>>>>            ret = imx8m_blk_ctrl_enable_domain_clk(dev, power_domain->id, true);
+>>>>>
+>>>>> to get it building.
+>>>>
+>>>> Yes, you're right. I made some changes suggested by patman, and before
+>>>> applying the
+>>>>    patch, I didn't recompile, so I didn't notice.
+>>>>
+>>>>>
+>>>>> BTW: Just also working on bootlogo support for an imx8mp based board!
+>>>>>
+>>>>> I now applied your patches:
+>>>>>
+>>>>> clk: Propagate clk_set_rate() if CLK_SET_PARENT_RATE present for gate and mux
+>>>>> clk: clk-uclass: Implement CLK_OPS_PARENT_ENABLE
+>>>>>
+>>>>> And added in my adapted /drivers/clk/imx/clk-imx8mp.c (imported from linux)
+>>>>>
+>>>>> clk_dm(IMX8MP_CLK_MEDIA_AXI, imx8m_clk_composite_flags("media_axi", imx8mp_media_axi_sels,
+>>>>> ARRAY_SIZE(imx8mp_media_axi_sels), base + 0x8a00, CLK_IS_CRITICAL));
+>>>>>
+>>>>> instead of using imx8m_clk_composite, and dropped my approach to
+>>>>> get clocks up and working.
+>>>>>
+>>>>> Also dropped my similiar approach for mediablock and used your
+>>>>>
+>>>>> power: Add iMX8M block ctrl driver for dispmix
+>>>>>
+>>>>> And with this 3 patches, bootlogo works also/still fine for me!
+>>>>>
+>>>>> I did not applied/need your patches:
+>>>>>
+>>>>> clk: imx8mn: Prevent clock critical path from disabling during reparent and set_rate
+>>>>> clk: imx8mm: Prevent clock critical path from disabling during reparent and set_rate
+>>>>> clk: imx8mm: Mark IMX8MM_SYS_PLL2 and IMX8MM_SYS_PLL3 as enabled
+>>>>> clk: imx8mn: Mark IMX8MN_SYS_PLL2 and IMX8MN_SYS_PLL3 as enabled
+>>>>>
+>>>>> Of course, they are for imx8mm, but I mean I do not need similiar patches
+>>>>> for imx8mp!
+>>>>>
+>>>>> Also not applied (as for imx8mm)
+>>>>> clk: imx8mn: add video clocks support
+>>>>>
+>>>>> but as said, have similiar patch for clk-imx8mp.c
+>>>>>
+>>>>> May you check if using imx8m_clk_composite_flags() is working for you?
+>>>>
+>>>> I will do it
+>>>>
+>>>>>
+>>>>> I did not applied your patches 09/26 and the following patches from
+>>>>> your series, as I made a video bridge driver based on
+>>>>>
+>>>>> linux driver drivers/gpu/drm/bridge/fsl-ldb.c
+>>>>>
+>>>>> and a lcdif driver based on linux:/drivers/gpu/drm/mxsfb/lcdif_drv.c
+>>>>>
+>>>>
+>>>> Thank you for you feedback Heiko
+>>>
+>>> You are welcome!
+>>>
+>>> Hmm.. unfortunately ... I had applied your 2 clock patches, which
+>>> fixed a problem with enabling parent clocks ... but they broke booting
+>>> on a carrier which has fec ethernet! After "Net: " output the board hang...
+>>>
+>>> I reverted your 2 clock patches and it bootet again ... so there is
+>>> a problem ... try to get some more time to look into...
+>>>
+>>
+>> We have a fec, but we had I think two patches more on it. I forget to
+>> answer Marek
+>> about them because I don't have my board now and because he is
+>> partially right (or maybe right).
+>> Anyway when we boot we could have and we have clocks that are enabled
+>> by bootrom or SPL that
+>> we need to declare as enable like PLL2/PLL3 those clocks are parts or
+>> could be part of reparent so,
+>> you need to have a reference counter on them that allow to not disable
+>> during the down chain disable
+>> and up chain enable. I think that what happens to your ethernet it's
+>> that you disable some clock that is
+>> critical to the board to survive. I had a patch merged by Tom that
+> 
+> Yep, thats what I think too! If you access registers in a block for
+> which the clock is not enabled ... it just hang...
+> 
+>> prints the clock name so if you enable
+>> the debug of the clock you will find that your board stops working
+>> during one of this reparinting.
+> 
+> I currently work on 2024.07... will rebase if 2024.10 is out...
+> 
+> Ah, you mean:
+> 
+> commit a70d991212c9684e09ed80ece69ce1ff7bfd9f08
+> Author: Michael Trimarchi <michael@amarulasolutions.com>
+> Date:   Tue Jul 9 08:28:13 2024 +0200
+> 
+>      clk: clk-uclass: Print clk name in clk_enable/clk_disable
+> 
+>      Print clk name in clk_enable and clk_disable. Make sense to know
+>      what clock get disabled/enabled before a system crash or system
+>      hang.
+> 
+>      Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
+> 
+> I have the same change when I debug :-P
+> 
+> IIRC I did not see the clock names ... but I will recheck!
 
-diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
-index 6349a0e108..e40840acb8 100644
---- a/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
-+++ b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
-@@ -105,11 +105,19 @@
- 			#address-cells = <1>;
- 			#size-cells = <0>;
- 			reg = <0>;
-+			hub_1: usb-hub@2d {
-+				compatible = "microchip,usb5744";
-+				reg = <0x2d>;
-+			};
- 		};
- 		usbhub_i2c1: i2c@1 {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
- 			reg = <1>;
-+			hub_2: usb-hub@2d {
-+				compatible = "microchip,usb5744";
-+				reg = <0x2d>;
-+			};
- 		};
- 		/* Bus 2/3 are not connected */
- 	};
-@@ -164,6 +172,26 @@
- 	dr_mode = "host";
- 	snps,usb3_lpm_capable;
- 	maximum-speed = "super-speed";
-+	#address-cells = <1>;
-+	#size-cells = <0>;
+I see with your patch the clock names, so fine... and see [1]
+
+Hmm... I am on imx8mp, and I think the changes the patchset do in
+
+"clk: imx8mn: Prevent clock critical path from disabling during reparent and set_rate"
+
+are in clk-imx8mp already ...
+
+Ported the patch from patchset
+
+"[PATCH 05/26] clk: imx8mm: Mark IMX8MM_SYS_PLL2 and IMX8MM_SYS_PLL3 as enabled"
+
+to imx8mp [2] and fec ethernet works again for me on imx8mp!
+
+Could you add this if you post a v2 ?
+
+bye,
+Heiko
+[1]
+│   │    <> Net:   clk_set_defaults(gpio@30230000)
+│   │    <> clk_set_default_parents: could not read assigned-clock-parents for 00000000fee74d90 
+name=gpio@30230000
+│   │    <> clk_set_defaults(aristainetos3-fec-rgmii-grp)
+│   │    <> clk_set_default_parents: could not read assigned-clock-parents for 00000000fee75780 
+name=aristainetos3-fec-rgmii-grp
+│   │    <> clk_set_defaults(ethernet@30be0000)
+│   │    <> clk_get_by_indexed_prop(dev=00000000fee7ad20, index=0, clk=00000000fee5e3b8)
+│   │    <> clk_of_xlate_default(clk=00000000fee5e3b8)
+│   │    <> clk_request(dev=00000000fee77480, clk=00000000fee5e3b8)
+│   │    <> clk_get_by_indexed_prop(dev=00000000fee7ad20, index=0, clk=00000000fee5e390)
+│   │    <> clk_of_xlate_default(clk=00000000fee5e390)
+│   │    <> clk_request(dev=00000000fee77480, clk=00000000fee5e390)
+│   │    <> clk_set_parent(clk=00000000fee825c0, parent=00000000fee80680)
+│   │    <> clk_get_parent(clk=00000000fee825c0)
+│   │    <> clk_enable(clk=00000000fee743d0 name=clock-osc-24m)
+│   │    <> clk_enable(clk=00000000fee80680 name=sys_pll1_266m)
+│   │    <> clk_enable(clk=00000000fee7fb40 name=sys_pll1_out)
+│   │    <> clk_disable(clk=00000000fee80680 name=sys_pll1_266m)
+│   │    <> clk_disable(clk=00000000fee7fb40 name=sys_pll1_out)
+│   │    <> clk_disable(clk=00000000fee743d0 name=clock-osc-24m)
+│   │    <> clk_get_by_indexed_prop(dev=00000000fee7ad20, index=1, clk=00000000fee5e3b8)
+│   │    <> clk_of_xlate_default(clk=00000000fee5e3b8)
+│   │    <> clk_request(dev=00000000fee77480, clk=00000000fee5e3b8)
+│   │    <> clk_get_by_indexed_prop(dev=00000000fee7ad20, index=1, clk=00000000fee5e390)
+│   │    <> clk_of_xlate_default(clk=00000000fee5e390)
+│   │    <> clk_request(dev=00000000fee77480, clk=00000000fee5e390)
+│   │    <> clk_set_parent(clk=00000000fee85b80, parent=00000000fee80b80)
+│   │    <> clk_get_parent(clk=00000000fee85b80)
+│   │    <> clk_enable(clk=00000000fee743d0 name=clock-osc-24m)
+│   │    <> clk_enable(clk=00000000fee80b80 name=sys_pll2_100m)
+│   │    <> clk_enable(clk=00000000fee7fc80 name=sys_pll2_out)
+│   │    <> clk_enable(clk=00000000fee7f480 name=sys_pll2_bypass)
+│   │    <> clk_enable(clk=00000000fee7eb80 name=sys_pll2)
+│   │    <> clk_enable(clk=00000000fee7e280 name=sys_pll2_ref_sel)
+│   │    <> clk_enable(clk=00000000fee743d0 name=clock-osc-24m)
+│   │    <> clk_disable(clk=00000000fee80b80 name=sys_pll2_100m)
+│   │    <> clk_disable(clk=00000000fee7fc80 name=sys_pll2_out)
+│   │    <> clk_disable(clk=00000000fee7f480 name=sys_pll2_bypass)
+│   │    <> clk_disable(clk=00000000fee7eb80 name=sys_pll2)
+
+[2]
+diff --git a/drivers/clk/imx/clk-imx8mp.c b/drivers/clk/imx/clk-imx8mp.c
+index d6865509cb..f6fa66094d 100644
+--- a/drivers/clk/imx/clk-imx8mp.c
++++ b/drivers/clk/imx/clk-imx8mp.c
+@@ -235,6 +235,7 @@ static const char * const imx8mp_clkout_sels[] = {"audio_pll1_out", "audio_pll2_
+  static int imx8mp_clk_probe(struct udevice *dev)
+  {
+         struct clk osc_24m_clk, osc_32k_clk;
++       struct clk *clk;
+         void __iomem *base;
+         int ret;
+
+@@ -303,6 +304,14 @@ static int imx8mp_clk_probe(struct udevice *dev)
+                 return ret;
+         clk_dm(IMX8MP_CLK_32K, dev_get_clk_ptr(osc_32k_clk.dev));
+
++       ret = clk_get_by_id(IMX8MP_SYS_PLL2, &clk);
++       if (!ret)
++               clk_enable(clk);
 +
-+	/* 2.0 hub on port 1 */
-+	hub_2_0: hub@1 {
-+		compatible = "usb424,2744";
-+		reg = <1>;
-+		peer-hub = <&hub_3_0>;
-+		i2c-bus = <&hub_1>;
-+		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
-+	};
++       ret = clk_get_by_id(IMX8MP_SYS_PLL3, &clk);
++       if (!ret)
++               clk_enable(clk);
 +
-+	/* 3.0 hub on port 2 */
-+	hub_3_0: hub@2 {
-+		compatible = "usb424,5744";
-+		reg = <2>;
-+		peer-hub = <&hub_2_0>;
-+		i2c-bus = <&hub_1>;
-+		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
-+	};
- };
- 
- &usb1 { /* mio64 - mio75 */
-@@ -188,6 +216,26 @@
- 	dr_mode = "host";
- 	snps,usb3_lpm_capable;
- 	maximum-speed = "super-speed";
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+
-+	/* 2.0 hub on port 1 */
-+	hub1_2_0: hub@1 {
-+		compatible = "usb424,2744";
-+		reg = <1>;
-+		peer-hub = <&hub1_3_0>;
-+		i2c-bus = <&hub_2>;
-+		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
-+	};
-+
-+	/* 3.0 hub on port 2 */
-+	hub1_3_0: hub@2 {
-+		compatible = "usb424,5744";
-+		reg = <2>;
-+		peer-hub = <&hub1_2_0>;
-+		i2c-bus = <&hub_2>;
-+		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
-+	};
- };
- 
- &gem0 { /* mdio mio50/51 */
-diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso b/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
-index b0d737d3ca..ce1ad2b765 100644
---- a/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
-+++ b/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
-@@ -117,11 +117,19 @@
- 			#address-cells = <1>;
- 			#size-cells = <0>;
- 			reg = <0>;
-+			hub_1: usb-hub@2d {
-+				compatible = "microchip,usb5744";
-+				reg = <0x2d>;
-+			};
- 		};
- 		usbhub_i2c1: i2c@1 {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
- 			reg = <1>;
-+			hub_2: usb-hub@2d {
-+				compatible = "microchip,usb5744";
-+				reg = <0x2d>;
-+			};
- 		};
- 		/* Bus 2/3 are not connected */
- 	};
-@@ -184,6 +192,26 @@
- 	dr_mode = "host";
- 	snps,usb3_lpm_capable;
- 	maximum-speed = "super-speed";
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+
-+	/* 2.0 hub on port 1 */
-+	hub_2_0: hub@1 {
-+		compatible = "usb424,2744";
-+		reg = <1>;
-+		peer-hub = <&hub_3_0>;
-+		i2c-bus = <&hub_1>;
-+		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
-+	};
-+
-+	/* 3.0 hub on port 2 */
-+	hub_3_0: hub@2 {
-+		compatible = "usb424,5744";
-+		reg = <2>;
-+		peer-hub = <&hub_2_0>;
-+		i2c-bus = <&hub_1>;
-+		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
-+	};
- };
- 
- &usb1 { /* mio64 - mio75 */
-@@ -209,6 +237,26 @@
- 	dr_mode = "host";
- 	snps,usb3_lpm_capable;
- 	maximum-speed = "super-speed";
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+
-+	/* 2.0 hub on port 1 */
-+	hub1_2_0: hub@1 {
-+		compatible = "usb424,2744";
-+		reg = <1>;
-+		peer-hub = <&hub1_3_0>;
-+		i2c-bus = <&hub_2>;
-+		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
-+	};
-+
-+	/* 3.0 hub on port 2 */
-+	hub1_3_0: hub@2 {
-+		compatible = "usb424,5744";
-+		reg = <2>;
-+		peer-hub = <&hub1_2_0>;
-+		i2c-bus = <&hub_2>;
-+		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
-+	};
- };
- 
- &gem0 { /* mdio mio50/51 */
-diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
-index 561b546e37..0ef0357bd2 100644
---- a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
-+++ b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
-@@ -142,6 +142,24 @@
- 	dr_mode = "host";
- 	snps,usb3_lpm_capable;
- 	maximum-speed = "super-speed";
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+
-+	/* 2.0 hub on port 1 */
-+	hub_2_0: hub@1 {
-+		compatible = "usb424,2744";
-+		reg = <1>;
-+		peer-hub = <&hub_3_0>;
-+		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
-+	};
-+
-+	/* 3.0 hub on port 2 */
-+	hub_3_0: hub@2 {
-+		compatible = "usb424,5744";
-+		reg = <2>;
-+		peer-hub = <&hub_2_0>;
-+		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
-+	};
- };
- 
- &sdhci1 { /* on CC with tuned parameters */
-diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
-index 64683e0ccb..92d8851eb8 100644
---- a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
-+++ b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
-@@ -92,7 +92,10 @@
- 		label = "ina260-u14";
- 		reg = <0x40>;
- 	};
--	/* u43 - 0x2d - USB hub */
-+	hub: usb-hub@2d {
-+		compatible = "microchip,usb5744";
-+		reg = <0x2d>;
-+	};
- 	/* u27 - 0xe0 - STDP4320 DP/HDMI splitter */
- };
- 
-@@ -146,6 +149,26 @@
- 	dr_mode = "host";
- 	snps,usb3_lpm_capable;
- 	maximum-speed = "super-speed";
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+
-+	/* 2.0 hub on port 1 */
-+	hub_2_0: hub@1 {
-+		compatible = "usb424,2744";
-+		reg = <1>;
-+		peer-hub = <&hub_3_0>;
-+		i2c-bus = <&hub>;
-+		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
-+	};
-+
-+	/* 3.0 hub on port 2 */
-+	hub_3_0: hub@2 {
-+		compatible = "usb424,5744";
-+		reg = <2>;
-+		peer-hub = <&hub_2_0>;
-+		i2c-bus = <&hub>;
-+		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
-+	};
- };
- 
- &sdhci1 { /* on CC with tuned parameters */
+         base = dev_read_addr_ptr(dev);
+         if (!base)
+                 return -EINVAL;
 -- 
-2.17.1
-
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
