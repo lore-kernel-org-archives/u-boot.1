@@ -4,72 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34502CE7D05
-	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 10:01:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C68FACE7D05
+	for <u-boot@archiver.kernel.org>; Tue,  1 Oct 2024 10:02:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD0AF8910B;
-	Tue,  1 Oct 2024 12:01:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 638E08918F;
+	Tue,  1 Oct 2024 12:02:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="BpxyEk9a";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ticSh1xK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B23CD89184; Tue,  1 Oct 2024 12:01:15 +0200 (CEST)
-Received: from relay2-d.mail.gandi.net (relay2-d.mail.gandi.net
- [IPv6:2001:4b98:dc4:8::222])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id D6B288918F; Tue,  1 Oct 2024 12:02:00 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51D5B88B1F
- for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 12:01:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CB0A888B1F
+ for <u-boot@lists.denx.de>; Tue,  1 Oct 2024 12:01:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 042474000C;
- Tue,  1 Oct 2024 10:01:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1727776872;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=gQ+8zDbhxauG3Ubk6n1trLCZslz9fKrmEUCaOYMA3ok=;
- b=BpxyEk9aTh6RpwNW7Dc6G1877z0AMFmFMqr1Kx4lYD/uvQuavz2kIv5v6rp/MkmG0E2Ox/
- JuKwfnwBND9dv5mnDSPC0Vyfvv7lw+Vrmmuu7Uy87uKgG+ay56wZjC+ZefvD7PHDKE2yTa
- /1wseGZJq0fS2JoGUo0eZLSJHBsthIpy8PYC7s9YvUof9jIguDxHGUCpuRwIk4IsWNMwp7
- PiaRbVwxo2nMCSh6yEoelbZQOG99CtLHifpKQn6fyt43WRzQ2Mbo/wwU/hkIT4RIgodZ2V
- pqF68KN5mVKyby7+rEac+B6YOFHnskkjCW/9JZTdzfN2N/mHUrR0Me64FLFe/w==
-Date: Tue, 1 Oct 2024 12:01:11 +0200
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Cc: hs@denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>,
- linux-amarula@amarulasolutions.com, Ye Li <ye.li@nxp.com>, AKASHI Takahiro
- <akashi.tkhro@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini
- <trini@konsulko.com>
-Subject: Re: [PATCH 08/26] power: Add iMX8M block ctrl driver for dispmix
-Message-ID: <20241001120111.181be2a4@xps-13>
-In-Reply-To: <CAOf5uwkw-NcSq6NDROsUJVfCTdYZcshxFyUJRW9Q-f1wcKmz=w@mail.gmail.com>
-References: <20240913095622.72377-1-dario.binacchi@amarulasolutions.com>
- <20240913095622.72377-9-dario.binacchi@amarulasolutions.com>
- <beecebba-79f5-e21d-3062-287c2dbb04e9@denx.de>
- <CABGWkvqOzc3cGM_aKVurv1XbAbeHXE77xwq_uAmSuZMgjCoevQ@mail.gmail.com>
- <ebb734bd-bdf7-ffd2-d676-7eb6011466a3@denx.de>
- <CAOf5uwm13jyOb0M9Xvx_bO1RpXhDcWqKBC-4fhZGo61Q5cjnjw@mail.gmail.com>
- <3cb57821-30f0-6aa0-2dec-313381b1350a@denx.de>
- <9ce14505-6c37-f2e8-4b5d-44f1a55f0393@denx.de>
- <20241001102908.39b2d3a6@xps-13>
- <CAOf5uwn8vhozjtMqXmWL=3Jaf05UhV7cnGn15Ywj07-PmwW_9w@mail.gmail.com>
- <20241001105057.2992e124@xps-13>
- <a91171dd-a2f2-8df7-5b11-4a35a227ef2e@denx.de>
- <CAOf5uwkw-NcSq6NDROsUJVfCTdYZcshxFyUJRW9Q-f1wcKmz=w@mail.gmail.com>
-Organization: Bootlin
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-a8d56155f51so681748566b.2
+ for <u-boot@lists.denx.de>; Tue, 01 Oct 2024 03:01:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1727776916; x=1728381716; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=r7lbniU0UCRelfv2Yyl1vo/wocIlU44i2TP/zIQAI4g=;
+ b=ticSh1xKtSdKDIslPyxk6RmBSOeOUGs7A8ifcQ8mM5k9lyWb6Iw1cS8C39GpGldps5
+ 2Q/eG2gPwRCxntgWv5tmCzDfKn08pky82oPt78Ebh4eapz9agFbdNZChe7275xvVjARi
+ DncdczJowefAAWfqthyXjal2OzlvLVydaRfaCPKhTFjxM90QQhcDKmrFwH3xGVNqNuky
+ o2QQy9N0mtSgH3pXClEKWcFAWgl+1KdfKWBKo9Nh/1ULvBKWYFGI4UoXowvfgdpXhkOq
+ X2csv5rO8+8B9XRo4uD9Nf5AVb/kMrJA+FrV8OmKw58pXuiptnDj3A1dWAaPfLarAPlV
+ 7Png==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727776916; x=1728381716;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=r7lbniU0UCRelfv2Yyl1vo/wocIlU44i2TP/zIQAI4g=;
+ b=iZJsSjrcMn9bsS5EjVvjzB/HgxDw8eFMt9CuQ8d85vsU3iNbISGqnWNYOMJ6rZPzuH
+ FpG2jus3hSmvLJDT93FXxc76G+boJzhZrvOh1GfNE7E1/C/or/I3qqn9x8b7Bt82AtIe
+ 4hm5tsUw499/QtZa950ZAARLNUYoqIvrqS+I0F8KPYD+6MWmJLmibCfG0tFQuc5HfpdX
+ 0H17ff5hXVGHZa4YHDeR+gCGTggDPL8t/hOxoPMAJOoV7FoHNz6GZtEI8BWY7XSyiaoZ
+ osIbiGOZJl1G8ByovcvnFW0S3fgJMJ6exRv+oWzsXsKA8/E1grjFfA5fo1v01e0fJWLg
+ t1lA==
+X-Gm-Message-State: AOJu0Yy4Zw7s+QnhuI5lJueTO/qzKLQDy9ZdvkTMahoM1VPBJHh38Y9k
+ gC/25WSzNHfOvusogluVeY3l3HHKKCZz0MWkk8WM3Is+udJSbIVyMzKlDkAJnPoguuXSXAsACzU
+ F
+X-Google-Smtp-Source: AGHT+IGMaGWDBn+XiRyRiBOYJBPHSa1Y29nPX3eP+grCiplLs21FKoH+AErNf6Djfdrqr2Ssy8wqAQ==
+X-Received: by 2002:adf:a413:0:b0:37c:cc96:d1cd with SMTP id
+ ffacd0b85a97d-37cd5aaf9f5mr9816471f8f.34.1727776903469; 
+ Tue, 01 Oct 2024 03:01:43 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:982:cbb0:ec13:4c0:b08d:b067?
+ ([2a01:e0a:982:cbb0:ec13:4c0:b08d:b067])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-37cd56e6587sm11386535f8f.47.2024.10.01.03.01.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 01 Oct 2024 03:01:43 -0700 (PDT)
+Message-ID: <d350e3d8-557e-4f7f-a4a5-983746d554b5@linaro.org>
+Date: Tue, 1 Oct 2024 12:01:41 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-GND-Sasl: miquel.raynal@bootlin.com
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH] dfu: sf: rely on DT for spi speed and mode
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20240917-uboot-topic-dfu-sf-dt-v1-1-8cf38451eea4@linaro.org>
+ <87ldz8cij3.fsf@baylibre.com>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <87ldz8cij3.fsf@baylibre.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,107 +118,118 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michael,
+On 01/10/2024 10:52, Mattijs Korpershoek wrote:
+> Hi Neil,
+> 
+> Thank you for the patch and sorry the review delay.
+> 
+> On mar., sept. 17, 2024 at 14:24, Neil Armstrong <neil.armstrong@linaro.org> wrote:
+> 
+>> Align with cmd_sf, and try to rely on DT for spi speed and mode,
+>> and still fallback on spi_flash_probe() if it fails.
+>>
+>> With the current scheme, spi_flash_probe() will be called
+>> with CONFIG_SF_DEFAULT_SPEED and CONFIG_SF_DEFAULT_MODE
+>> with are set to 0 by default on DT platforms using DM_SPI_FLASH.
+>>
+>> Like cmd_sf, keep the option to specify the speed and mode
+>> from the dfu_alt_mode string, but rely on DT properties
+>> if not specified.
+>>
+>> Using CONFIG_SF_DEFAULT_SPEED and CONFIG_SF_DEFAULT_MODE
+>> makes the SPIFC controller on Amlogic Meson G12B & SM1
+>> hardware fail and is unable to recover until a system reboot.
+>>
+>> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+>> ---
+>>   drivers/dfu/dfu_sf.c | 22 ++++++++++++++++++++++
+>>   1 file changed, 22 insertions(+)
+>>
+>> diff --git a/drivers/dfu/dfu_sf.c b/drivers/dfu/dfu_sf.c
+>> index 7c1c0f9e2dc..b5d875be5ea 100644
+>> --- a/drivers/dfu/dfu_sf.c
+>> +++ b/drivers/dfu/dfu_sf.c
+>> @@ -123,6 +123,9 @@ static struct spi_flash *parse_dev(char *devstr)
+>>   	unsigned int mode = CONFIG_SF_DEFAULT_MODE;
+>>   	char *s, *endp;
+>>   	struct spi_flash *dev;
+>> +#if CONFIG_IS_ENABLED(DM_SPI_FLASH)
+>> +	bool use_dt = true;
+>> +#endif
+> 
+> Can we use if (IS_ENABLED(CONFIG...)) for this logic instead of #if ?
+> 
+> checkpatch.pl seems to warn about this:
+> 
+> $ ./scripts/checkpatch.pl --u-boot --git HEAD^..HEAD
+> WARNING: Use 'if (IS_ENABLED(CONFIG...))' instead of '#if or #ifdef' where possible
+> #36: FILE: drivers/dfu/dfu_sf.c:126:
+> +#if CONFIG_IS_ENABLED(DM_SPI_FLASH)
+> 
+> I know we will have an unused local variable (use_dt) when
+> DM_SPI_FLASH=n but to me that is fine.
+> We already have unused local variables based on KConfig symbols in
+> dfu_flush_medium_sf()
 
-> > >>>> Ported the patch from patchset
-> > >>>>
-> > >>>> "[PATCH 05/26] clk: imx8mm: Mark IMX8MM_SYS_PLL2 and IMX8MM_SYS_PL=
-L3 as enabled"
-> > >>>>
-> > >>>> to imx8mp [2] and fec ethernet works again for me on imx8mp!
-> > >>>>
-> > >>>> Could you add this if you post a v2 ? =20
-> > >>>
-> > >>> TBH I don't feel like the below change is the correct one, it is too
-> > >>> specific. The clock core is recursive and thus should handle the
-> > >>> reparenting situations gracefully.
-> > >>>
-> > >>> I posted a series that is targeting the LVDS output on imx8mp. You
-> > >>> should probably consider checking these patches as well if you work
-> > >>> on imx8mp as well. I also had similar breakages with Ethernet which
-> > >>> happened during the assigned-clocks handling. This patch, which is =
-more
-> > >>> future and platform agnostic, fixed it:
-> > >>>
-> > >>> https://lore.kernel.org/u-boot/20240910101344.110633-3-miquel.rayna=
-l@bootlin.com/
-> > >>> =20
-> > >>
-> > >> The clock patches are not specific at all. You need to have it worki=
-ng
-> > >> for the parent for each component. =20
-> > >
-> > > The diff shown by Heiko is explicitly enabling PLLs by naming them in
-> > > the iMX driver. This is not the correct approach. The problem of
-> > > having non-enabled new parents is global. Parent clocks should be
-> > > enabled before changing muxes, and this should be enforced
-> > > by the clock core/uclass, not the SoC drivers. =20
-> >
-> > Okay, valid argument.
-> > =20
-> > > =20
-> > >> This is a standard way to do it and nothing magic compared to other
-> > >> implementations. =20
-> > >
-> > > No, naming PLLs explicitly is not the correct approach.
-> > > =20
-> > >> I don't see
-> > >> in your series any addressing or reparent clock or take in account
-> > >> that a clock should be enable before
-> > >> reparenting. =20
-> > >
-> > > That's exactly the link above, whose diff is pasted here for referenc=
-e:
-> > >
-> > > @@ -595,6 +595,10 @@ int clk_set_parent(struct clk *clk, struct clk *=
-parent)
-> > >       if (!ops->set_parent)
-> > >               return -ENOSYS;
-> > >
-> > > +     ret =3D clk_enable(parent);
-> > > +     if (ret)
-> > > +             return ret; =20
-> >
-> > As I said before, I had *exact* the same patch and thought I made a big
-> > hack :-P
-> >
-> > But I wonder ... if this a generic "problem", why nobody had yet proble=
-ms
-> > with it... =20
->=20
-> I think that a generic approach that takes into account the reparent
-> is more valuable, then
-> this.
+Sure, let me check !
 
-I'm sorry I don't fully understand your answer. I assume you agree with
-the generic approach quoted above.
+Neil
 
-> If a clock is enabled by another stage and we don't aware about
-> it we need to mark
-> as enabled.
+> 
+> Thanks,
+> Mattijs
+> 
+>>   
+>>   	s = strsep(&devstr, ":");
+>>   	if (!s || !*s || (bus = simple_strtoul(s, &endp, 0), *endp)) {
+>> @@ -143,6 +146,9 @@ static struct spi_flash *parse_dev(char *devstr)
+>>   			printf("Invalid SPI speed %s\n", s);
+>>   			return NULL;
+>>   		}
+>> +#if CONFIG_IS_ENABLED(DM_SPI_FLASH)
+>> +		use_dt = false;
+>> +#endif
+>>   	}
+>>   
+>>   	s = strsep(&devstr, ":");
+>> @@ -152,9 +158,25 @@ static struct spi_flash *parse_dev(char *devstr)
+>>   			printf("Invalid SPI mode %s\n", s);
+>>   			return NULL;
+>>   		}
+>> +#if CONFIG_IS_ENABLED(DM_SPI_FLASH)
+>> +		use_dt = false;
+>> +#endif
+>>   	}
+>>   
+>> +#if CONFIG_IS_ENABLED(DM_SPI_FLASH)
+>> +	if (use_dt) {
+>> +		struct udevice *new;
+>> +
+>> +		if (!spi_flash_probe_bus_cs(bus, cs, &new))
+>> +			dev = dev_get_uclass_priv(new);
+>> +		else
+>> +			dev = NULL;
+>> +	} else {
+>> +		dev = spi_flash_probe(bus, cs, speed, mode);
+>> +	}
+>> +#else
+>>   	dev = spi_flash_probe(bus, cs, speed, mode);
+>> +#endif
+>>   	if (!dev) {
+>>   		printf("Failed to create SPI flash at %u:%u:%u:%u\n",
+>>   		       bus, cs, speed, mode);
+>>
+>> ---
+>> base-commit: 19dbc09405d3503ce3efef3c2e4b4f0f1a03372d
+>> change-id: 20240917-uboot-topic-dfu-sf-dt-8ae62e5c7d79
+>>
+>> Best regards,
+>> -- 
+>> Neil Armstrong <neil.armstrong@linaro.org>
 
-clk_enable() already handles this kind of situation.
-
-> I think that this force of enable it's just a short path
-> that does not solve the generic
-> problem.
-
-What "force of enable"? The parent needs to be enabled before we use it
-as parent. The logic is always the same:
-- clk_enable() the new parent
-- change the parent
-- clk_disable() the old parent
-I don't see any short path here.
-
-> I really tried to abstract what is really implemented in
-> other OS on the same topic.
-
-FYI, Linux does the clk_enable(parent) like above.
-
-Thanks,
-Miqu=C3=A8l
