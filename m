@@ -4,93 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FD73CEACF3
-	for <u-boot@archiver.kernel.org>; Wed,  2 Oct 2024 18:52:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A53F7CF319E
+	for <u-boot@archiver.kernel.org>; Wed,  2 Oct 2024 19:16:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E10AF88CFC;
-	Wed,  2 Oct 2024 20:52:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=devpi.de
+	by phobos.denx.de (Postfix) with ESMTP id E3E2588D27;
+	Wed,  2 Oct 2024 21:16:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=devpi.de header.i=@devpi.de header.b="NHdE7BRf";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="G3keoQk0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0463188E33; Wed,  2 Oct 2024 20:52:34 +0200 (CEST)
-Received: from smtp052.goneo.de (smtp5.goneo.de [IPv6:2001:1640:5::8:30])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 41CD388DBE; Wed,  2 Oct 2024 21:16:46 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A612288C60
- for <u-boot@lists.denx.de>; Wed,  2 Oct 2024 20:52:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 21F1888D14
+ for <u-boot@lists.denx.de>; Wed,  2 Oct 2024 21:16:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=devpi.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=lehmanju@devpi.de
-Received: from hub1.goneo.de (hub1.goneo.de [85.220.129.52])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits))
- (No client certificate requested)
- by smtp5.goneo.de (Postfix) with ESMTPS id 593F9240E47;
- Wed,  2 Oct 2024 20:52:31 +0200 (CEST)
-Received: from hub1.goneo.de (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits))
- (No client certificate requested)
- by hub1.goneo.de (Postfix) with ESMTPS id 7ABB0240562;
- Wed,  2 Oct 2024 20:52:29 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=devpi.de; s=DKIM001;
- t=1727895149;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=bZGZ2cY9Fiji+PukDDuA1dZriKeThMq8xNheF5azpsU=;
- b=NHdE7BRfVlMdLmSHpnCFiUMidA0gs+ftaF0jR3lrDDyL1XX5Ci09QBZQPaV9e5U3/YVr4r
- ih6bUoT3wY0Dje4+8++JqFtKy35uw1CeKO3b43061uH7FpaCLdlVbPRuS9Us+kfhkJfKEl
- ymZlCOezriBW7dwnQS+Hj59KIp93C4BSDKeYPyxYL43D9IayKJi0INczejJMKbVyNLK0oA
- FahVDbpb5JNMjttqgG11bvdJcaxpP2HwJqHDwOz4duo42+RI0+SUHNJR1H0KYHlmPShT8g
- D08nHejvYlSFqh6IC9cxQDzWG2529T38z6SW0rnBlydjlaxIu80rF1+pEFJqmw==
-Received: from p200300cbef3987100000000000000193.dip0.t-ipconnect.de
- (p200300cbef398710000000000000076d.dip0.t-ipconnect.de
- [IPv6:2003:cb:ef39:8710::76d])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by hub1.goneo.de (Postfix) with ESMTPSA id 2D2A62400E6;
- Wed,  2 Oct 2024 20:52:29 +0200 (CEST)
-From: Julius Lehmann <lehmanju@devpi.de>
-Date: Wed, 02 Oct 2024 20:52:17 +0200
-Subject: [PATCH] phy: qcom: Add SM8150 to QMP UFS PHY driver
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-710f0415ac8so79951a34.1
+ for <u-boot@lists.denx.de>; Wed, 02 Oct 2024 12:16:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1727896603; x=1728501403; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=NKpi3giNrzn6dC0DhqpsT1D14VRa6aJRkGhO5aIitsw=;
+ b=G3keoQk0XvtWq2EknbhVMxtJ26OCGjRo75VeNDJ214zRHjF1BYy18hFB65qF3XhqZJ
+ kr4TuIjRYahJ0Em+4GOJj+Z9rXcsGbd5xee8/PmLCUU7xiOzPFVnho4NgGzYbzlfPo0C
+ fcku1CbVmytkD8tRcLEACCGLw44qyGnTZyGnQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727896603; x=1728501403;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NKpi3giNrzn6dC0DhqpsT1D14VRa6aJRkGhO5aIitsw=;
+ b=V134Rkoc8bLsGhLUe6KIoFyd3I399EqV9i00FVZtsuVpmasUXhNJ+40hkHc29oKOpf
+ tO7J03EueV+0/UnKlj392Q/EjVm0iNd7lb8RnAmaojhSX3xXXetKJuXaVfpeI2ZYYQHw
+ S1h546BoltM/0Ys53CbZf771g2PeUo5tCviSQaqLoNz6/5e/V6Gts4UZbdw5ZChOJCaH
+ bguQjGvHXKMRy+/0DTlEdVKF/Q6ORj4iscGic7Rbu0RieEiaSq0kVovgM2XxGxbVLw74
+ Y0f6IUahe1f7OTQkhF71duYTe1iqSJwxokfj//RYXW1KETCSJ+JTJyv3XwSefdRHwfQp
+ 9hUA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV387u7+cpvmJKTwQB0lme9oxn+SWRydY/NoTXCxx/PMTNV8TJL0G7cU8BCShdw4k7CRBmVpSk=@lists.denx.de
+X-Gm-Message-State: AOJu0YwG3V5dR07AgytJPt19KP3TZLAcyZI+elWjlREFXl/otTzhdu/z
+ v/iS3+i9Kc+Z6ZjSyvTSDhq3ejttjJfnbyO9qhNy/Op+smVq+yPI7xZsu9QxIhg=
+X-Google-Smtp-Source: AGHT+IF7MVE6Jyv2qSmwXw4wG3GBl8YXy8jmxQxeq4pKNfnp0sXuZjLyBun6qOPuZ3xFaQmqj2osCQ==
+X-Received: by 2002:a05:6358:60c3:b0:1bc:468f:c74a with SMTP id
+ e5c5f4694b2df-1c0ceed45b4mr216894755d.27.1727896602718; 
+ Wed, 02 Oct 2024 12:16:42 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7ae377bcd31sm649037985a.26.2024.10.02.12.16.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 02 Oct 2024 12:16:41 -0700 (PDT)
+Date: Wed, 2 Oct 2024 13:16:38 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Martyn Welch <martyn.welch@collabora.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/4] boot: pxe_utils: Add fallback support
+Message-ID: <20241002191638.GQ4737@bill-the-cat>
+References: <20241002132633.246942-1-martyn.welch@collabora.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20241002-sm8150-qmp-phy-v1-1-719695ad2f1e@devpi.de>
-X-B4-Tracking: v=1; b=H4sIAGCW/WYC/x3MMQqAMAxA0atIZgNJUbBeRRzURptBrS2IIt7d4
- viG/x9IElUStMUDUU5Num8ZXBYw+WFbBNVlgyFTMZHBtDZcEx5rwOBvdG60lhwPPE6QoxBl1us
- fdv37fpK7YABgAAAA
-X-Change-ID: 20241002-sm8150-qmp-phy-ddb990d1a1bc
-To: Caleb Connolly <caleb.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, 
- Julius Lehmann <lehmanju@devpi.de>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4315; i=lehmanju@devpi.de;
- h=from:subject:message-id; bh=z4xUGdrSVw+4htX32tI+Ay2Ep7eUk2gKyW5KzQxvtUg=;
- b=owEBbQKS/ZANAwAKARK2S7xC0EEDAcsmYgBm/ZZtCkn+8hTqIPUdxMZUo46SO+5m/+DKoxbiD
- MFIBn7Ux/yJAjMEAAEKAB0WIQTCqoxFzEvlxm0XalUStku8QtBBAwUCZv2WbQAKCRAStku8QtBB
- A9nuD/9azTJsvgJOun2nb2FvxMws/pOkToh7b/GifFGeOo04gy5D/K9/rUp1SEQmXF+C/KwAhH0
- KIKQR6XFz54DNhKMbFVPzn3DxU5Du0jTDfGnQrlbfVS1V3vezcw3z6e665WpN8cPyTCDWErRzpG
- D8il8RivdXrjbUITQwoHYiJvqvEoTMOlePhSji40PF6Rf9afQ4N1Q6QQj2hrfstFw7YtT9dRnRU
- vpzygS0c9sIvRqltxgZbtYaUDOG1KnM4r0b7qMXZhkgLY4c9XEO8s2vwQULpJOwHGz4mCpwEkCP
- nJ/zodFXIFcA3jhjhI+DLPSGoP2EJon7QaWYp6jiD7dMz/Ppmsb9wabMARZBPu6Elnyt4YADo+Q
- 4NoO7CY9knIjTZLeWgbxTCcvG6hKoWc/d2ovEJJiNaxPZe356RtCWWkW2rG/44jK5LSHMwje3Tz
- 5JPK1erWYqhAbNOb0pBO0Ck1TOpMjnvEsd5OLkjrPIukQtvEWc5jZ2DuByjhg6VeUlkDNB34AGw
- b00RU1c5GxadpH0iglvxIMBB3F2NHa81/aas4iVGahXLKmzf+DOrKjpz7gj5Pj9CF1emxGU68pL
- cWdQFqIEVuXzE45VNsanjITGthT+x2+1kDVK8W+AmXEb68caA969EscH4lr1PiKu1IdsNoSo+xR
- ObRiPQtfJYoQWIQ==
-X-Developer-Key: i=lehmanju@devpi.de; a=openpgp;
- fpr=C2AA8C45CC4BE5C66D176A5512B64BBC42D04103
-X-Rspamd-UID: 219f3f
-X-Rspamd-UID: 2ab45f
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="1dhnzmrMCXYsiKXV"
+Content-Disposition: inline
+In-Reply-To: <20241002132633.246942-1-martyn.welch@collabora.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,109 +91,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Copy PHY tables over from Linux to support SM8150
 
----
-As the title suggests, this is really just a simple patch to add Qualcomm's SM8150 SoC to the QMP UFS PHY driver. It has been tested to work with https://lore.kernel.org/u-boot/20240930-topic-ufs-enhancements-v3-0-58234f84ab89@linaro.org/ on a Xiaomi Mi Pad 5.
+--1dhnzmrMCXYsiKXV
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Julius Lehmann <lehmanju@devpi.de>
----
- drivers/phy/qcom/phy-qcom-qmp-ufs.c | 62 +++++++++++++++++++++++++++++++++++++
- 1 file changed, 62 insertions(+)
+On Wed, Oct 02, 2024 at 02:26:30PM +0100, Martyn Welch wrote:
+> When configured correctly, we can detect when boot fails after the boot
+> process has been handed over to the kernel through the use of U-Boot's
+> bootcount support. In some instances, such as when we are performing
+> atomic updates via a system such as OSTree, it is desirable to provide a
+> fallback option so that we can return to a previous (hopefully working)
+> state.
+>=20
+> Add a "fallback" option to the supported extlinux configuration options
+> that points to a label like "default" so that we can utilise this in
+> later commits.
+>=20
+> Signed-off-by: Martyn Welch <martyn.welch@collabora.com>
 
-diff --git a/drivers/phy/qcom/phy-qcom-qmp-ufs.c b/drivers/phy/qcom/phy-qcom-qmp-ufs.c
-index 8908a34df548340556d92ac8ca488dbbbd0e293a..11f92b8261aff48dddb63cd8de31db3716a45fb4 100644
---- a/drivers/phy/qcom/phy-qcom-qmp-ufs.c
-+++ b/drivers/phy/qcom/phy-qcom-qmp-ufs.c
-@@ -189,6 +189,29 @@ static const struct qmp_ufs_init_tbl sdm845_ufsphy_pcs[] = {
- 	QMP_PHY_INIT_CFG(QPHY_V3_PCS_UFS_MULTI_LANE_CTRL1, 0x02),
- };
- 
-+static const struct qmp_ufs_init_tbl sm8150_ufsphy_hs_g4_tx[] = {
-+	QMP_PHY_INIT_CFG(QSERDES_V4_TX_LANE_MODE_1, 0x75),
-+};
-+
-+static const struct qmp_ufs_init_tbl sm8150_ufsphy_hs_g4_rx[] = {
-+	QMP_PHY_INIT_CFG(QSERDES_V4_RX_UCDR_SO_SATURATION_AND_ENABLE, 0x5a),
-+	QMP_PHY_INIT_CFG(QSERDES_V4_RX_UCDR_PI_CTRL2, 0x81),
-+	QMP_PHY_INIT_CFG(QSERDES_V4_RX_UCDR_FO_GAIN, 0x0e),
-+	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_TERM_BW, 0x6f),
-+	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_IDAC_MEASURE_TIME, 0x20),
-+	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_IDAC_TSETTLE_LOW, 0x80),
-+	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_IDAC_TSETTLE_HIGH, 0x01),
-+	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_00_LOW, 0x3f),
-+	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_00_HIGH, 0xff),
-+	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_00_HIGH2, 0xff),
-+	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_00_HIGH3, 0x7f),
-+	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_00_HIGH4, 0x6c),
-+	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_01_LOW, 0x6d),
-+	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_01_HIGH, 0x6d),
-+	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_01_HIGH2, 0xed),
-+	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_01_HIGH4, 0x3c),
-+};
-+
- static const struct qmp_ufs_init_tbl sm8150_ufsphy_serdes[] = {
- 	QMP_PHY_INIT_CFG(QSERDES_V4_COM_SYSCLK_EN_SEL, 0xd9),
- 	QMP_PHY_INIT_CFG(QSERDES_V4_COM_HSCLK_SEL, 0x11),
-@@ -623,6 +646,44 @@ static const struct qmp_ufs_cfg sdm845_ufsphy_cfg = {
- 	.no_pcs_sw_reset	= true,
- };
- 
-+static const struct qmp_ufs_cfg sm8150_ufsphy_cfg = {
-+	.lanes			= 2,
-+
-+	.offsets		= &qmp_ufs_offsets,
-+
-+	.tbls = {
-+		.serdes		= sm8150_ufsphy_serdes,
-+		.serdes_num	= ARRAY_SIZE(sm8150_ufsphy_serdes),
-+		.tx		= sm8150_ufsphy_tx,
-+		.tx_num		= ARRAY_SIZE(sm8150_ufsphy_tx),
-+		.rx		= sm8150_ufsphy_rx,
-+		.rx_num		= ARRAY_SIZE(sm8150_ufsphy_rx),
-+		.pcs		= sm8150_ufsphy_pcs,
-+		.pcs_num	= ARRAY_SIZE(sm8150_ufsphy_pcs),
-+	},
-+	.tbls_hs_b = {
-+		.serdes		= sm8150_ufsphy_hs_b_serdes,
-+		.serdes_num	= ARRAY_SIZE(sm8150_ufsphy_hs_b_serdes),
-+	},
-+	.tbls_hs_g4 = {
-+		.tx		= sm8150_ufsphy_hs_g4_tx,
-+		.tx_num		= ARRAY_SIZE(sm8150_ufsphy_hs_g4_tx),
-+		.rx		= sm8150_ufsphy_hs_g4_rx,
-+		.rx_num		= ARRAY_SIZE(sm8150_ufsphy_hs_g4_rx),
-+		.pcs		= sm8150_ufsphy_hs_g4_pcs,
-+		.pcs_num	= ARRAY_SIZE(sm8150_ufsphy_hs_g4_pcs),
-+	},
-+	.clk_list		= sdm845_ufs_phy_clk_l,
-+	.num_clks		= ARRAY_SIZE(sdm845_ufs_phy_clk_l),
-+	.vreg_list		= qmp_ufs_vreg_l,
-+	.num_vregs		= ARRAY_SIZE(qmp_ufs_vreg_l),
-+	.reset_list		= qmp_ufs_reset_l,
-+	.num_resets		= ARRAY_SIZE(qmp_ufs_reset_l),
-+	.regs			= ufsphy_v4_regs_layout,
-+
-+	.no_pcs_sw_reset	= false,
-+};
-+
- static const struct qmp_ufs_cfg sm8250_ufsphy_cfg = {
- 	.lanes			= 2,
- 
-@@ -1100,6 +1161,7 @@ static struct phy_ops qmp_ufs_ops = {
- 
- static const struct udevice_id qmp_ufs_ids[] = {
- 	{ .compatible = "qcom,sdm845-qmp-ufs-phy", .data = (ulong)&sdm845_ufsphy_cfg },
-+	{ .compatible = "qcom,sm8150-qmp-ufs-phy", .data = (ulong)&sm8150_ufsphy_cfg },
- 	{ .compatible = "qcom,sm8250-qmp-ufs-phy", .data = (ulong)&sm8250_ufsphy_cfg },
- 	{ .compatible = "qcom,sm8550-qmp-ufs-phy", .data = (ulong)&sm8550_ufsphy_cfg },
- 	{ .compatible = "qcom,sm8650-qmp-ufs-phy", .data = (ulong)&sm8650_ufsphy_cfg },
+Is "fallback" part of the nominal extlinux specification?
 
----
-base-commit: 2d21dd440e052bb2c8ccc9fa3137ab40c8f87f14
-change-id: 20241002-sm8150-qmp-phy-ddb990d1a1bc
+--=20
+Tom
 
-Best regards,
--- 
-Julius Lehmann <lehmanju@devpi.de>
+--1dhnzmrMCXYsiKXV
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmb9nBMACgkQFHw5/5Y0
+tyxqlQv+IO+MSMVqn2B+9v5qLZhT+WEpjQ6vzSzPmDBsApiUvCYhRO2aNZ//aP4v
+nx6ePvMHT3OtbBODUxk1scaM7oWC1ZsDzQPALV/Bvlxtv/YWg4F4ZNS6RTSQRvB+
+/UEjQ8DdrD8H/k0S3re7Y0ziLEer0ygdjwAkJcgIO4exogfLsucKBC+Xq0NJ7IfY
+ekBnXVpYC3rPYu+WxmbIm5NJrA9AZw1x4SKChu46P0yNx7nBOs1SysaZyPZry4u9
+6JgSULYgdK8+lM2bFpcsBYZKWM7RI2yUxjUpoRh13JlNx+o7Jv621eZ4rMCsFi78
+OG1kkyEt0O1j88UAQ+CaDhGHW9yvXi4ulYS7KeabpO6iQB5EFjOilgoteFFjJIZD
+4ik37vy88e2RNx9D0+1XK1E19hl5PmgX1+LzKBSjeZq2S8FhcTZPL1XOEgtHUIcv
+LMkkR4EUZh3Ekc1e0163lUDN4/Km17tGFwvtF6KrHlpe8e46vW02hR7BXij53ZOU
+7K6TDDqu
+=1vOo
+-----END PGP SIGNATURE-----
+
+--1dhnzmrMCXYsiKXV--
