@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EA80CF6D28
-	for <u-boot@archiver.kernel.org>; Wed,  2 Oct 2024 14:53:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 796A0CF6D2C
+	for <u-boot@archiver.kernel.org>; Wed,  2 Oct 2024 14:53:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80BFD89112;
-	Wed,  2 Oct 2024 16:52:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D6BC488965;
+	Wed,  2 Oct 2024 16:52:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JGe7wG2B";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YIDTu5tG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 949498919C; Wed,  2 Oct 2024 16:52:49 +0200 (CEST)
-Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
- [IPv6:2a00:1450:4864:20::231])
+ id DF0458924D; Wed,  2 Oct 2024 16:52:50 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4269788DEF
- for <u-boot@lists.denx.de>; Wed,  2 Oct 2024 16:52:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AEFA8890DF
+ for <u-boot@lists.denx.de>; Wed,  2 Oct 2024 16:52:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-2fac6b3c220so46412011fa.2
- for <u-boot@lists.denx.de>; Wed, 02 Oct 2024 07:52:47 -0700 (PDT)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-a8d56155f51so862313866b.2
+ for <u-boot@lists.denx.de>; Wed, 02 Oct 2024 07:52:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1727880766; x=1728485566; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1727880767; x=1728485567; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AFKi0j5xF5blKdyCG7iffX4LbNUzsEBmHGEAKQalLzg=;
- b=JGe7wG2BcuPL/3hNGddNh+22A/WZ6P8we8js34WpafV4OPscTAHDrXZ/7WG4Sh2b9k
- /I2QGPdgHaK4ibMYHPxHIaolsfx05w3oInXWScsQIn8PpKROhJQodZKOjsT6L9mLnuGE
- Uww8xPfv9C7SKcmIwC0j/iEMODLEb77ABGLOw8iqU8TrtqbPdCc3IwroDsxIG0jMT8ae
- LvcdoqqrluZrDllvDeCeeoTF7sReUNo0ua+jtiXWfD8ByH0/7rpvjfzokIsU5q+I5Z4H
- GxT3RhIlL2qoGwTLVpd/cAcsbmvyfpJPsZ7cPVbZePgPsw6QrXEH92aWlIGgacFx9fE6
- YJmg==
+ bh=iEF0Cs6bcXjfkOeOH/lgkSB3H0YERHzlC4Omkpsp+ds=;
+ b=YIDTu5tGyByvFaGjH0C3h1PYOH8fj8GaSn/CWKUFHGVWwkP34OU+qulg7nu3qeG+Re
+ zSBIcRA/7xWLt6+c/z+uEpq59XbPU2N4OfIfsdiHzTbXhK+dvozUbXVadvpydROXs/oM
+ mjBl2hGz+gxGWXU0CStLtvNLg+38ZDk5E2Ktadsen+fTL2v4W5KOQ0XjdeRSeVMv0Jhx
+ YsDClPIaJbRZLz567XtzUNiM/lIGA3/ZWZe4ilVrtHRn08kHth4XC48gklye5JU3gGkL
+ /qx9orqXRJJpe4k+eMm3g7tt/YDP+PcaL9dva9n3UHrW8q9oiusA+LGSurBRc+9Tcn07
+ Uq3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727880766; x=1728485566;
+ d=1e100.net; s=20230601; t=1727880767; x=1728485567;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AFKi0j5xF5blKdyCG7iffX4LbNUzsEBmHGEAKQalLzg=;
- b=gxkIH8z3ENOFEQWM5fnKAN/FF4cED9SkJvN3lqvMAbFsM+YpZVY9NT/PRbx+A11+Oh
- ORs2tRYKNxqd7IDsAvSKyccHAgMSkTC1ePuBgEm9yacg/KBS4gC24ChJgJR6N8eYe4nx
- E54fknGeYXIf5fyFtNF6soNjG2RDlBMXmx+vbzWtS/xCdCY1ogrXVsXcdJMefE75LCk4
- VtLmyR8rgquK/RN2F2ggZDmNoaalcq+vMAyq5FQ9GIySLT/JNGagydL33o4BHn0pazM3
- 31jwt950jNlLQ0JEV2zq2b4ZxtpI7E5m/cfxlc4ZXIAGVYBpgUECoSKfMCzdXQYxjYtV
- Ac2g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXEbobSB90hhYTR2PfBm1PtSR7uhkLiV5WELlHqzs53f/269I4TL/w5XPv/LcQaEWybSDX9aSE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxOVlXUg9vOE1iWbsMJukQOktkHHDGsP7i1Fd4l5AVDJluiAc4F
- +6zS/RI8cPdMpSaZpMNV6+DAPaRx/Vu0cHwaX7dOiWEKjXP1UxtmSs4qOfghCf60f6B4IpnbS0W
- h
-X-Google-Smtp-Source: AGHT+IEQ8D2oTmnja2b+sN5PX+3CcvQKR0n9nbovRA7XFxUts7OZDVmlt+5C3WNP+YtKpme8/gKYrQ==
-X-Received: by 2002:a2e:bc1a:0:b0:2fa:d84a:bda5 with SMTP id
- 38308e7fff4ca-2fae10224admr37542961fa.7.1727880766102; 
- Wed, 02 Oct 2024 07:52:46 -0700 (PDT)
+ bh=iEF0Cs6bcXjfkOeOH/lgkSB3H0YERHzlC4Omkpsp+ds=;
+ b=tqQ5LElGYQQtrWJTWRPThUiW99/PY4s3XnBYMp+H8NmT6/ckVoGwkr3lzHK+owAdR2
+ YZk74vbrQZ45SuH1mZxZF2pV+IONb5HY2t57yJ+pdZxTOa2sl5icUcd/bFxbK7lDDVjj
+ 8GpFJJwzfMCzean9mLINbUdZNmR8bif6Ieym5G+JOYzwQn2h4PzCTTpkvJ6PelQvNHNP
+ K2CS6YtDgWI/OqiV0wsRBeBwLfDL8FgE+hWLZyQW0Olk+khTQZ1LQ7nhppj+wNIuJcEE
+ Rv173dF6A+jGmD9jJuGEOPSo3VSj+cGXi9kufuRF+yMlOrYLIsnJ3QeY8gemOk4r7vis
+ OhwA==
+X-Gm-Message-State: AOJu0YwT4Dhmb6Q/02SUH+uyvp/+SqE5Neltn94QvrJgh2Bx+j+ifc0a
+ Dzn/1mcZcH8Hhaw47nSN46XH9/ZjC3i5mvVyurQgH9oCNjCZiM3aJhSamNcqk1ekW+1jTso6ATm
+ 1
+X-Google-Smtp-Source: AGHT+IEQhKykwnOVazkLmlmlo/fQfcFqMJ5RQCwiRtruTq6M7Wm0tD4KwqSKcszGfrY5utOJQn/+rA==
+X-Received: by 2002:a17:907:7da6:b0:a8a:cc5a:7f3c with SMTP id
+ a640c23a62f3a-a98f838cce5mr262443766b.58.1727880767451; 
+ Wed, 02 Oct 2024 07:52:47 -0700 (PDT)
 Received: from [192.168.195.50] ([95.90.247.28])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a93c297be12sm889785666b.179.2024.10.02.07.52.45
+ a640c23a62f3a-a93c297be12sm889785666b.179.2024.10.02.07.52.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Oct 2024 07:52:45 -0700 (PDT)
+ Wed, 02 Oct 2024 07:52:46 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-In-Reply-To: <20240911-topic-sm8x50-msm-gpio-special-pins-sm8250-v2-0-c49834055128@linaro.org>
-References: <20240911-topic-sm8x50-msm-gpio-special-pins-sm8250-v2-0-c49834055128@linaro.org>
-Subject: Re: [PATCH v2 0/2] qcom: allow msm_gpio to set special pins
- direction & value
-Message-Id: <172788076498.935801.14687111194323775043.b4-ty@linaro.org>
-Date: Wed, 02 Oct 2024 16:52:44 +0200
+To: Heiko Schocher <hs@denx.de>, Neil Armstrong <neil.armstrong@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
+In-Reply-To: <20240909120641.1396544-1-caleb.connolly@linaro.org>
+References: <20240909120641.1396544-1-caleb.connolly@linaro.org>
+Subject: Re: [PATCH] Revert "gpio: qcom_pmic: add a quirk to skip GPIO
+ configuration"
+Message-Id: <172788076627.935801.18201778074694041684.b4-ty@linaro.org>
+Date: Wed, 02 Oct 2024 16:52:46 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,22 +97,20 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Wed, 11 Sep 2024 20:07:13 +0200, Neil Armstrong wrote:
-> After struct msm_special_pin_data was introduced in [1], use the data
-> to setup the pin direction and/or value if supported by the pin data.
+On Mon, 09 Sep 2024 14:06:10 +0200, Caleb Connolly wrote:
+> This reverts commit 19f000b72b2fa7e4540f7cdb91287aff594239bd.
 > 
-> Add the proper msm_special_pin_data for sm8250 after sm8550 and sm8650.
-> 
-> [1] https://lore.kernel.org/all/20240528-topic-sm8x50-pinctrl-pinconf-v1-0-54d1e9ad7dfa@linaro.org/
+> The bug in writing was caused by a long-standing error in the SPMI
+> driver which has since been fixed - c2de620d64d4 ("spmi: msm: fix
+> version 5 support"). We can safely enable writing GPIO configuration
+> now.
 > 
 > [...]
 
 Applied, thanks!
 
-[1/2] gpio: msm: add support for special pins
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/5fe73d1ecad4
-[2/2] pinctr: qcom: sm8250: add special pins pins configuration data
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/43a6e47a5366
+[1/1] Revert "gpio: qcom_pmic: add a quirk to skip GPIO configuration"
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/25595a48555c
 
 Best regards,
 -- 
