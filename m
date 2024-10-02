@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CCA0CF31AE
-	for <u-boot@archiver.kernel.org>; Wed,  2 Oct 2024 09:54:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB5DECF31A9
+	for <u-boot@archiver.kernel.org>; Wed,  2 Oct 2024 09:54:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FF6B89043;
-	Wed,  2 Oct 2024 11:52:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7070188F65;
+	Wed,  2 Oct 2024 11:52:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="bTyXI3XZ";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="cY6In4HZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE1CA89057; Wed,  2 Oct 2024 11:52:07 +0200 (CEST)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
+ id E69E488F1F; Wed,  2 Oct 2024 11:52:11 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1CF288F1F
- for <u-boot@lists.denx.de>; Wed,  2 Oct 2024 11:52:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EB57488009
+ for <u-boot@lists.denx.de>; Wed,  2 Oct 2024 11:52:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=9elements.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-37ccd81de57so422652f8f.0
- for <u-boot@lists.denx.de>; Wed, 02 Oct 2024 02:52:05 -0700 (PDT)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-37cd5016d98so3343994f8f.1
+ for <u-boot@lists.denx.de>; Wed, 02 Oct 2024 02:52:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1727862725; x=1728467525; darn=lists.denx.de;
+ d=9elements.com; s=google; t=1727862728; x=1728467528; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TOl/zHDv+NoSeT3rWTl+kdkv0/0hEtgLzkQfuKxb4/I=;
- b=bTyXI3XZihjjl9LqWKOw6PvWuhYH4yyJQeetZHMEY3ISqG2wl/xC3sAwZr9AV8XgXx
- U3i8cgpz8oTV2JhSqqqll0Kcf9q+IriShxVbBcqB6e8uNoLxbFKV8LWm586TeutWPgEx
- vZIHbo0oG48+E2ST5o1swACgWm/wEtNGAKJfEsr6NyAItpYjkUHO1gvOG6Z24v0DHgnx
- WuUGJF/2KAEClyUctzX9LYwbJDt7AO1iB/91MfMbHc7vSVk/YtB7FG1ZGPEnxZ1iRp/Q
- 7k+Gd1S1gq2O3ISLbzLwdW9jXMNm4JcgaUO0IcYsr7BfotEB5sJpB70DnHMmzPnbR6XC
- KCcA==
+ bh=uSw/+UvxareXuiM+EM6A7VjgIoG3h6S3ddH37ocs4Nw=;
+ b=cY6In4HZ4s6ZKMf29jinPewlRfrkt3FA2GlLcwmiWH+6nvFWg2rH6DX0NpH08e1zUE
+ 50hRew4Q7R9Fi+3yj9bl2hLCRzIGtRAA/6a10SiwFM6C4GfYHUdjIX61jJ2CEjU4J1E2
+ eOm5OVrNRjOwuhnhbY8B7fhS8XidKeM3glcx+BSnaOVnGqQEr8igt0PxNExXrVQlcKfp
+ IYWEDEpiFD4dz4YoZ0hW14PpKXfdiv/DDK9IWGqqzUiIHI21/WsNCWFU3GOhqZ9BR24M
+ 7sCNhzXRDX5cz6cIfE/LcoVDT8MLryhqftOX082H6l1CU1cOHeSYdbdCNJ0Td4kDytUR
+ +K+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727862725; x=1728467525;
+ d=1e100.net; s=20230601; t=1727862728; x=1728467528;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=TOl/zHDv+NoSeT3rWTl+kdkv0/0hEtgLzkQfuKxb4/I=;
- b=vQXpftzSRnglgSJKx5cvLcJgz6AMZZzp2IUWJoVkve6xtzon3L35hnhZjUVBKnKjgg
- +BNJQmtcBW8ahWVPgmCF8HT3YVMfv3Vm0aq0A3nBYCb2Ex+B3eDHa8COcUwY7pwOWJkN
- Yoz0SgbwkvmDUa7DQauyUx5HGtt0Z3Klg+/8MeRXdm398j/tDN3TAUVuUHi7m9/UMjfo
- jHuo+ruza7R4AEXScaKQLwP0z7tqsOsoPXzm1UkDvsDC3cT0adHU9z0IEsvh0fW20+tY
- oOD0kEgQcb3DypS36Vcv3Msi5vcudMZWLe3zwRBXPXc9iaLmc7rydsDWOojZDJjq1tU4
- /ZWA==
-X-Gm-Message-State: AOJu0YwarYwPtqyaJSulsmP4lCEgU4XCDYW0Gy0rNUqRW96XUpm0drtU
- JLTcAdYCOB6M6o6G6Cejd1OIU1KFyebIXPfleELkw6/Qar9mjDyXahY9BEfRGhBg2ia8rcRwOCX
- u
-X-Google-Smtp-Source: AGHT+IGo2BWlW6xta1Vhb33UcA3inoJ2JhkOmLtUfMuO5FuSSgXl7+c2hhVB4nifdaX05j5IzfGyxQ==
-X-Received: by 2002:adf:fe05:0:b0:374:c33d:377d with SMTP id
- ffacd0b85a97d-37cf28d67b7mr3235426f8f.28.1727862725227; 
- Wed, 02 Oct 2024 02:52:05 -0700 (PDT)
+ bh=uSw/+UvxareXuiM+EM6A7VjgIoG3h6S3ddH37ocs4Nw=;
+ b=AFVcrt4FIMub0q88eLB/prlUMkmJZltSCZYubY97y7zwB3/pJWTBbewKULFHhYZryI
+ ADyQAD+Oe+RH/IMZv4i/70TxgLzQSv/nkDkAjDH9Wx036FB4DA/omZZ8Nr+SIS4Boluv
+ Tp0QUR46K3dcWXcupklxwUVSAgWyG8C29Az/QoUwApRU0P8OJr5vq1KiAWfQGQ88HA/e
+ qqKgrVe276W+kS5GSODDWUk8N4oGZ+FaTbv0qpgB6wwLQNPKiX8LYpQLkMtb3vqli/M5
+ ehMs1JJLnpyWDESLE2rCvvI+/baKFAVgU0O9tU2xrRj82AL3Vk18SsdGu3KKBpnKCgHS
+ Vuxw==
+X-Gm-Message-State: AOJu0YyUKzotP7aAjcpfn5B8P8y4EneiOYBT2l65cFy1Lqt901jbA6b7
+ tMgHVqE3w2gDlVXsP9s7M8fBOK5fo0xftx0r+1gXCFL+8KcPvov5QirYpngZfUghocLWuzAcIxv
+ q
+X-Google-Smtp-Source: AGHT+IGCR5hURcENhLEeztM4hIbKQ7FexNMcf5wsTN9vMe2uWDyoByBgCRY6S5UtgQOlNgI3uSCJhA==
+X-Received: by 2002:adf:a15d:0:b0:37c:ce58:5a1a with SMTP id
+ ffacd0b85a97d-37cfba13729mr1497552f8f.54.1727862728278; 
+ Wed, 02 Oct 2024 02:52:08 -0700 (PDT)
 Received: from fedora.sec.9e.network
  (ip-078-094-000-050.um19.pools.vodafone-ip.de. [78.94.0.50])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37cd56e94c4sm13555292f8f.62.2024.10.02.02.52.04
+ ffacd0b85a97d-37cd56e94c4sm13555292f8f.62.2024.10.02.02.52.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Oct 2024 02:52:04 -0700 (PDT)
+ Wed, 02 Oct 2024 02:52:07 -0700 (PDT)
 From: Patrick Rudolph <patrick.rudolph@9elements.com>
 To: u-boot@lists.denx.de,
-	Simon Glass <sjg@chromium.org>
+	Bin Meng <bmeng.cn@gmail.com>
 Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v6 15/37] acpi: Add processor device
-Date: Wed,  2 Oct 2024 11:47:06 +0200
-Message-ID: <20241002094832.24933-16-patrick.rudolph@9elements.com>
+ Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v6 16/37] drivers: usb: Add generic XHCI
+Date: Wed,  2 Oct 2024 11:47:07 +0200
+Message-ID: <20241002094832.24933-17-patrick.rudolph@9elements.com>
 X-Mailer: git-send-email 2.46.2
 In-Reply-To: <20241002094832.24933-1-patrick.rudolph@9elements.com>
 References: <20241002094832.24933-1-patrick.rudolph@9elements.com>
@@ -95,72 +95,143 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a new method to write the processor device identified by _HID
-ACPI0007, that is preferred over the Processor OpCode since ACPI 6.0.
+Add support for the generic XHCI driver that contains no SoC
+specific code. It can be used on platforms that simply work out
+of the box, like on emulated platforms.
 
-Fixes booting arm using ACPI only since the Processor OpCode isn't
-found valid by the Linux kernel.
+TEST: Booted on QEMU sbsa machine using the generic xhci driver.
 
 Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Cc: Simon Glass <sjg@chromium.org>
+Reviewed-by: Marek Vasut <marex@denx.de>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marex@denx.de>
 ---
- include/acpi/acpigen.h | 12 ++++++++++++
- lib/acpi/acpigen.c     | 11 +++++++++++
- 2 files changed, 23 insertions(+)
+Changelog v3:
+- Drop weak board_xhci_enable()
+Changelog v4:
+- Use dev_dbg() instead of debug()
+Changelog v6:
+- Update header order
 
-diff --git a/include/acpi/acpigen.h b/include/acpi/acpigen.h
-index 3aa94d70b9..16df85b9c1 100644
---- a/include/acpi/acpigen.h
-+++ b/include/acpi/acpigen.h
-@@ -833,6 +833,7 @@ void acpigen_write_dsm_end(struct acpi_ctx *ctx);
-  *
-  * This emits a Processor package header with the required information. The
-  * caller must complete the information and call acpigen_pop_len() at the end
-+ * Deprecated since ACPI 6.0.
-  *
-  * @ctx: ACPI context pointer
-  * @cpuindex: CPU number
-@@ -842,6 +843,17 @@ void acpigen_write_dsm_end(struct acpi_ctx *ctx);
- void acpigen_write_processor(struct acpi_ctx *ctx, uint cpuindex,
- 			     u32 pblock_addr, uint pblock_len);
+---
+ drivers/usb/host/Kconfig        |  8 ++++
+ drivers/usb/host/Makefile       |  1 +
+ drivers/usb/host/xhci-generic.c | 75 +++++++++++++++++++++++++++++++++
+ 3 files changed, 84 insertions(+)
+ create mode 100644 drivers/usb/host/xhci-generic.c
+
+diff --git a/drivers/usb/host/Kconfig b/drivers/usb/host/Kconfig
+index 6e10b629a3..bb5893d56d 100644
+--- a/drivers/usb/host/Kconfig
++++ b/drivers/usb/host/Kconfig
+@@ -68,6 +68,14 @@ config USB_XHCI_MVEBU
+ 	  SoCs, which includes Armada8K, Armada3700 and other Armada
+ 	  family SoCs.
  
-+/**
-+ * acpigen_write_processor_device() - Write a Processor device
++config USB_XHCI_GENERIC
++	bool "Generic SoC USB 3.0 support"
++	depends on OF_CONTROL
++	default n
++	help
++	  Choose this option to add support for USB 3.0 driver for SoCs
++	  that do not need platform specific code, like on emulated targets.
++
+ config USB_XHCI_OCTEON
+ 	bool "Support for Marvell Octeon family on-chip xHCI USB controller"
+ 	depends on ARCH_OCTEON
+diff --git a/drivers/usb/host/Makefile b/drivers/usb/host/Makefile
+index 8dad36f936..9e880195ec 100644
+--- a/drivers/usb/host/Makefile
++++ b/drivers/usb/host/Makefile
+@@ -50,6 +50,7 @@ obj-$(CONFIG_USB_XHCI_EXYNOS) += xhci-exynos5.o
+ obj-$(CONFIG_USB_XHCI_FSL) += xhci-fsl.o
+ obj-$(CONFIG_USB_XHCI_MTK) += xhci-mtk.o
+ obj-$(CONFIG_USB_XHCI_MVEBU) += xhci-mvebu.o
++obj-$(CONFIG_USB_XHCI_GENERIC) += xhci-generic.o
+ obj-$(CONFIG_USB_XHCI_OMAP) += xhci-omap.o
+ obj-$(CONFIG_USB_XHCI_PCI) += xhci-pci.o
+ obj-$(CONFIG_USB_XHCI_RCAR) += xhci-rcar.o
+diff --git a/drivers/usb/host/xhci-generic.c b/drivers/usb/host/xhci-generic.c
+new file mode 100644
+index 0000000000..355d488317
+--- /dev/null
++++ b/drivers/usb/host/xhci-generic.c
+@@ -0,0 +1,75 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2024 9elements GmbH
 + *
-+ * Write a device with _HID ACPI0007 identifying a processor.
-+ * Replacement for the Processor OpCode.
-+ *
-+ * @ctx: ACPI context pointer
-+ * @cpuindex: CPU number
++ * GENERIC USB HOST xHCI Controller
 + */
-+void acpigen_write_processor_device(struct acpi_ctx *ctx, uint cpuindex);
++#include <dm.h>
++#include <fdtdec.h>
++#include <log.h>
++#include <usb.h>
++#include <asm/io.h>
++#include <dm/device_compat.h>
++#include <usb/xhci.h>
 +
- /**
-  * acpigen_write_processor_package() - Write a package containing the processors
-  *
-diff --git a/lib/acpi/acpigen.c b/lib/acpi/acpigen.c
-index b95cabb914..427ebc2104 100644
---- a/lib/acpi/acpigen.c
-+++ b/lib/acpi/acpigen.c
-@@ -361,6 +361,17 @@ void acpigen_write_processor(struct acpi_ctx *ctx, uint cpuindex,
- 	acpigen_emit_byte(ctx, pblock_len);
- }
- 
-+void acpigen_write_processor_device(struct acpi_ctx *ctx, uint cpuindex)
++struct generic_xhci_plat {
++	fdt_addr_t hcd_base;
++};
++
++/**
++ * Contains pointers to register base addresses
++ * for the usb controller.
++ */
++struct generic_xhci {
++	struct xhci_ctrl ctrl;	/* Needs to come first in this struct! */
++	struct usb_plat usb_plat;
++	struct xhci_hccr *hcd;
++};
++
++static int xhci_usb_probe(struct udevice *dev)
 +{
-+	char pscope[16];
++	struct generic_xhci_plat *plat = dev_get_plat(dev);
++	struct generic_xhci *ctx = dev_get_priv(dev);
++	struct xhci_hcor *hcor;
++	int len;
 +
-+	snprintf(pscope, sizeof(pscope), ACPI_CPU_STRING, cpuindex);
-+	acpigen_write_device(ctx, pscope);
-+	acpigen_write_name_string(ctx, "_HID", "ACPI0007");
-+	acpigen_write_name_integer(ctx, "_UID", cpuindex);
-+	acpigen_pop_len(ctx); /* Device */
++	ctx->hcd = (struct xhci_hccr *)phys_to_virt(plat->hcd_base);
++	len = HC_LENGTH(xhci_readl(&ctx->hcd->cr_capbase));
++	hcor = (struct xhci_hcor *)((uintptr_t)ctx->hcd + len);
++
++	return xhci_register(dev, ctx->hcd, hcor);
 +}
 +
- void acpigen_write_processor_package(struct acpi_ctx *ctx,
- 				     const char *const name,
- 				     const uint first_core,
++static int xhci_usb_of_to_plat(struct udevice *dev)
++{
++	struct generic_xhci_plat *plat = dev_get_plat(dev);
++
++	/*
++	 * Get the base address for XHCI controller from the device node
++	 */
++	plat->hcd_base = dev_read_addr(dev);
++	if (plat->hcd_base == FDT_ADDR_T_NONE) {
++		dev_dbg(dev, "Can't get the XHCI register base address\n");
++		return -ENXIO;
++	}
++
++	return 0;
++}
++
++static const struct udevice_id xhci_usb_ids[] = {
++	{ .compatible = "generic-xhci" },
++	{ }
++};
++
++U_BOOT_DRIVER(usb_xhci) = {
++	.name	= "xhci_generic",
++	.id	= UCLASS_USB,
++	.of_match = xhci_usb_ids,
++	.of_to_plat = xhci_usb_of_to_plat,
++	.probe = xhci_usb_probe,
++	.remove = xhci_deregister,
++	.ops	= &xhci_usb_ops,
++	.plat_auto	= sizeof(struct generic_xhci_plat),
++	.priv_auto	= sizeof(struct generic_xhci),
++	.flags	= DM_FLAG_ALLOC_PRIV_DMA,
++};
 -- 
 2.46.2
 
