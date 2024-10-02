@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 796A0CF6D2C
-	for <u-boot@archiver.kernel.org>; Wed,  2 Oct 2024 14:53:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67903CF6D28
+	for <u-boot@archiver.kernel.org>; Wed,  2 Oct 2024 14:53:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6BC488965;
-	Wed,  2 Oct 2024 16:52:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3789F892F0;
+	Wed,  2 Oct 2024 16:52:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YIDTu5tG";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PrEHSg2L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF0458924D; Wed,  2 Oct 2024 16:52:50 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id D63B5890DF; Wed,  2 Oct 2024 16:52:51 +0200 (CEST)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AEFA8890DF
- for <u-boot@lists.denx.de>; Wed,  2 Oct 2024 16:52:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 968DF88DEF
+ for <u-boot@lists.denx.de>; Wed,  2 Oct 2024 16:52:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a8d56155f51so862313866b.2
- for <u-boot@lists.denx.de>; Wed, 02 Oct 2024 07:52:48 -0700 (PDT)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-a83562f9be9so143039866b.0
+ for <u-boot@lists.denx.de>; Wed, 02 Oct 2024 07:52:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1727880767; x=1728485567; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1727880769; x=1728485569; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iEF0Cs6bcXjfkOeOH/lgkSB3H0YERHzlC4Omkpsp+ds=;
- b=YIDTu5tGyByvFaGjH0C3h1PYOH8fj8GaSn/CWKUFHGVWwkP34OU+qulg7nu3qeG+Re
- zSBIcRA/7xWLt6+c/z+uEpq59XbPU2N4OfIfsdiHzTbXhK+dvozUbXVadvpydROXs/oM
- mjBl2hGz+gxGWXU0CStLtvNLg+38ZDk5E2Ktadsen+fTL2v4W5KOQ0XjdeRSeVMv0Jhx
- YsDClPIaJbRZLz567XtzUNiM/lIGA3/ZWZe4ilVrtHRn08kHth4XC48gklye5JU3gGkL
- /qx9orqXRJJpe4k+eMm3g7tt/YDP+PcaL9dva9n3UHrW8q9oiusA+LGSurBRc+9Tcn07
- Uq3A==
+ bh=rIALLUv2TiSgifNaCXPdvMDBFxeZRSDQQi8L85UuWvs=;
+ b=PrEHSg2Lt1Md+TumjoUSzFk1Pn760HnKkmzOGw3VcQOJ0RZmyWqscqzokfMBhO72Yq
+ hLX2Eg5OzvL9nnHu9mQjrJhw6pn4QAw7nC3xwVXuJg9l2BXfw7htz96ZthAUu6nGDilW
+ 2hwWPylWevi2VDayvapXSaftQZ4eRwNQP0Z7DHLX5Fsm8o5qzlYA9H3AeU5361CcsrTq
+ oRZifeXYThihrvDnCLACbhUMxkSz2BuzIthUsKdnjfeVeJLT5mExSZdb8hsB6b8KymnW
+ /U/jj3kBGcNGHBlKxnpnjURNmAmjL6QbGwwIsqF7kr2ZJQXixmtuGRbFFjI4vJhBzB5d
+ uRnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727880767; x=1728485567;
+ d=1e100.net; s=20230601; t=1727880769; x=1728485569;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=iEF0Cs6bcXjfkOeOH/lgkSB3H0YERHzlC4Omkpsp+ds=;
- b=tqQ5LElGYQQtrWJTWRPThUiW99/PY4s3XnBYMp+H8NmT6/ckVoGwkr3lzHK+owAdR2
- YZk74vbrQZ45SuH1mZxZF2pV+IONb5HY2t57yJ+pdZxTOa2sl5icUcd/bFxbK7lDDVjj
- 8GpFJJwzfMCzean9mLINbUdZNmR8bif6Ieym5G+JOYzwQn2h4PzCTTpkvJ6PelQvNHNP
- K2CS6YtDgWI/OqiV0wsRBeBwLfDL8FgE+hWLZyQW0Olk+khTQZ1LQ7nhppj+wNIuJcEE
- Rv173dF6A+jGmD9jJuGEOPSo3VSj+cGXi9kufuRF+yMlOrYLIsnJ3QeY8gemOk4r7vis
- OhwA==
-X-Gm-Message-State: AOJu0YwT4Dhmb6Q/02SUH+uyvp/+SqE5Neltn94QvrJgh2Bx+j+ifc0a
- Dzn/1mcZcH8Hhaw47nSN46XH9/ZjC3i5mvVyurQgH9oCNjCZiM3aJhSamNcqk1ekW+1jTso6ATm
- 1
-X-Google-Smtp-Source: AGHT+IEQhKykwnOVazkLmlmlo/fQfcFqMJ5RQCwiRtruTq6M7Wm0tD4KwqSKcszGfrY5utOJQn/+rA==
-X-Received: by 2002:a17:907:7da6:b0:a8a:cc5a:7f3c with SMTP id
- a640c23a62f3a-a98f838cce5mr262443766b.58.1727880767451; 
- Wed, 02 Oct 2024 07:52:47 -0700 (PDT)
+ bh=rIALLUv2TiSgifNaCXPdvMDBFxeZRSDQQi8L85UuWvs=;
+ b=fsHuyIw66LCaJk0dWktXJHnwrZAJ9xHR9Th1yN4WyfvCUI8WQlKu1WfCuQQtaFrrZr
+ KYafCx4P1TIz1WaXf9UlBVQ+XMLq9ds1KVqW4vHqbFFqK2Vpt9WyQm15r8TqZ9UQn+0L
+ sISnv5b68C0iWHoNbF+tuIklOwRpdxXLHvrZTng/6tRvQo2LDAhXQdwsGCDd3wxGdw+V
+ VT0m0Th5BfZRpJWQ7BAMaD+Po/MVm7HedzFWjD8nnr5eL7qEnzSJSO2vX/oMANVPc9LP
+ A/c7WjGqV8kFlAwhBXcnH904+fwyScF5w6IR/SJEIf8jzjDowCOsEsfwOYWErpHlkWgL
+ GpDA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWR+eDSHl0Ogn6E3m+s0FYzgxEiyXUxjck/ruBsgOCAZxxpmYgmTkKEyakdLGwM+oDoZQUeQqg=@lists.denx.de
+X-Gm-Message-State: AOJu0YxhfeDvOfLmGaw8A5TSbGP2kc9jnMiJct3K9z7fsG1v7Mcv/C6t
+ +2T6q1GLwo2Ctjzj1ngii8tpwffnD07+WTlYqyFmKs+vw4141dZV+CnXQHEuiM0=
+X-Google-Smtp-Source: AGHT+IGA01Ff9XwU8vKmoK/S0/DbRUFqXKnPNpvczO/1BpILWR+wxlXIhbNtYa/fv9uNAhvdvHWokg==
+X-Received: by 2002:a17:907:7fa7:b0:a93:a664:a257 with SMTP id
+ a640c23a62f3a-a98f838dde3mr346082866b.61.1727880769071; 
+ Wed, 02 Oct 2024 07:52:49 -0700 (PDT)
 Received: from [192.168.195.50] ([95.90.247.28])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a93c297be12sm889785666b.179.2024.10.02.07.52.46
+ a640c23a62f3a-a93c297be12sm889785666b.179.2024.10.02.07.52.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Oct 2024 07:52:46 -0700 (PDT)
+ Wed, 02 Oct 2024 07:52:48 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Heiko Schocher <hs@denx.de>, Neil Armstrong <neil.armstrong@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>, 
- Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
-In-Reply-To: <20240909120641.1396544-1-caleb.connolly@linaro.org>
-References: <20240909120641.1396544-1-caleb.connolly@linaro.org>
-Subject: Re: [PATCH] Revert "gpio: qcom_pmic: add a quirk to skip GPIO
- configuration"
-Message-Id: <172788076627.935801.18201778074694041684.b4-ty@linaro.org>
-Date: Wed, 02 Oct 2024 16:52:46 +0200
+To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
+In-Reply-To: <20240819-b4-qcom-clk-dump-v1-0-182cf77c23a2@linaro.org>
+References: <20240819-b4-qcom-clk-dump-v1-0-182cf77c23a2@linaro.org>
+Subject: Re: [PATCH 0/4] clk/qcom: implement clk dump callback
+Message-Id: <172788076765.935801.8728096845283608347.b4-ty@linaro.org>
+Date: Wed, 02 Oct 2024 16:52:47 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,20 +98,27 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Mon, 09 Sep 2024 14:06:10 +0200, Caleb Connolly wrote:
-> This reverts commit 19f000b72b2fa7e4540f7cdb91287aff594239bd.
+On Mon, 19 Aug 2024 21:34:16 +0200, Caleb Connolly wrote:
+> Add support for dumping a few of the clocks used on Qualcomm platforms.
+> Naming the Global PLL's, Root Clock Generators, and gate clocks.
 > 
-> The bug in writing was caused by a long-standing error in the SPMI
-> driver which has since been fixed - c2de620d64d4 ("spmi: msm: fix
-> version 5 support"). We can safely enable writing GPIO configuration
-> now.
+> This helps a lot with platform bringup and feature enablement by making
+> it easy to sanity check that the clocks are programmed correctly.
+> 
+> == Usage ==
 > 
 > [...]
 
 Applied, thanks!
 
-[1/1] Revert "gpio: qcom_pmic: add a quirk to skip GPIO configuration"
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/25595a48555c
+[1/4] clk/qcom: implement clk dump
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/c0999fefc80f
+[2/4] clk/qcom: sdm845: add dump data
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/2880a076b4c1
+[3/4] clk/qcom: sm6115: add debug data
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/84b2b8dc2991
+[4/4] clk/qcom: sm8250: add debug data
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/866cda772046
 
 Best regards,
 -- 
