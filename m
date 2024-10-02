@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED3E4CF6D2C
-	for <u-boot@archiver.kernel.org>; Wed,  2 Oct 2024 14:39:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E84B0CF6D28
+	for <u-boot@archiver.kernel.org>; Wed,  2 Oct 2024 14:39:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 67E2A890E9;
-	Wed,  2 Oct 2024 16:39:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BC27989034;
+	Wed,  2 Oct 2024 16:39:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ct6UxBJP";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WesUoDMY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 864D1890DB; Wed,  2 Oct 2024 16:39:39 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 805C8890F3; Wed,  2 Oct 2024 16:39:41 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4823688DD4
- for <u-boot@lists.denx.de>; Wed,  2 Oct 2024 16:39:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C1E7E890CE
+ for <u-boot@lists.denx.de>; Wed,  2 Oct 2024 16:39:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-37ce8458ae3so3076046f8f.1
- for <u-boot@lists.denx.de>; Wed, 02 Oct 2024 07:39:37 -0700 (PDT)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-42cd46f3a26so55310675e9.2
+ for <u-boot@lists.denx.de>; Wed, 02 Oct 2024 07:39:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1727879977; x=1728484777; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=vaGmmxiIY6lbY9schxXTSyY3RpaxlfEytXp4JYAMJ+0=;
- b=ct6UxBJPX+GBntU/5xI+t2//hCIV4TDG26OS6SHlNTkdyZU++sInhZyUfMHe2V6SK/
- B+i/WKYvDU2eVmqNzX66L3pZmyR5/Juf1Cuqo2D68RbN+Qwdez6bV1FtgHHkNyBppj+O
- SlmeUhsVFJGr1CX2ftzt+Tgdd8WxXPMU6Ls+FhaFUwimcpnqD5LRSJXDmt5ZeEaRbRzc
- KN5F8W3oxx2pVUJ1GqUhFLMtenfA8cjpMV9XcKoYCXVWdoKEfdQ1Ytcu+Ef9yyAY92ea
- Bgmuq6qr68lluQJBS75u+mWwv6yo6pUxOmXx4LT36V4R3fwaxMWqfWsQwOnP5uMty8+e
- OEGA==
+ d=linaro.org; s=google; t=1727879978; x=1728484778; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=Kw110bgQIB++mEZ/IhsEoAMkwIQOj/pRBnQftJzGOqk=;
+ b=WesUoDMY3K30sWUQGG+OvFNWSpuKn5mhUvN7h2da81QaA3T2JBgHPF5LhXsLuvRwKR
+ ZiEgozRIQk2rWn2Qidkv1eNvced1U86Nt2Jz+jWyKqGIr1ca/9cr8UDqhOmf8Rf+dM51
+ WABrDtfg28kaSi6QKRZDZbdYo1jMS+mATQkrcmPPIU4n9pAbMQt2Gi70sJ1qUY4zfZIf
+ 1JJYM2bf6ybUlUg8Q89tQoJx+m7O0p0W5TR0DTsDQVRodlSq5afvME22GPwO98wlM8at
+ YVf17tIe3qRN5SSJfc/IgWDH+4f/AYXGIcZGdoXb8pzEMxtdAtFwfAg1KrtA9r/mvHQj
+ 8wdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727879977; x=1728484777;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=vaGmmxiIY6lbY9schxXTSyY3RpaxlfEytXp4JYAMJ+0=;
- b=q0aeDIMeBmTcU5taZBx4dtB+xUE54FwVX/oDL9SRnjaw1b1jc8VKS/ma2KfI7DfjEa
- /432SVCfsSkf2YYAoETMBTuiVQj6hrgG12If1mWlZ6nbcUAkDwMBON1qH57nZaZNYDpH
- Eb8P58vsCMhb30juWvzcuotptT+/JF66RizMRDmRy2KnZiZnAR8GS6OblPIzxS2Hdz31
- Xf6vOKtzapiuqlRi1o3tm2P0oHhtqmoX8uYlX8lD6nzbXnX1xzfA2psjRMjV9qdyilMZ
- fDUJVycO5RCKQM7f4Ito/6WB7CjfV1h8ti19wzPoE6DNZ6hCOil9+uFP2RvYIUdUAgRF
- wEKg==
+ d=1e100.net; s=20230601; t=1727879978; x=1728484778;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Kw110bgQIB++mEZ/IhsEoAMkwIQOj/pRBnQftJzGOqk=;
+ b=wzjHa3FuwaVzRA7B5AhWwhNa668GtDXBkWKXPxlQls2cFLFHHndYnodtHWnLwdqMy/
+ PfhmtRdRqVcQ23994Z4pXeGf0CMaCJZQZKx7INRTgq52FDb7J++MGabXLVqu0Nht7vmL
+ iz0KUNquQi8ZMrtOJXvzyrePctpKYtwNNISFb8GujXGBxh2Qf9WJivvss9gk58vyYJO4
+ zTH31JqcqSmyQnmMm9IbhCSVBDpnDJKjgt1Si/zslRmVs2oU7trWzIW0lLPxdu0KNKz+
+ sVTwLjSgripLjOSlelcDGy8avY8J1CG+uWm78qTITKzfZa3eTczg136zbnTQ/Xz69r1f
+ Fjag==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW7IiZ8G/d2DNt/+5oWq/KbzrXK8b/hh1hAZLlyUv0hcvMdaLcgva3rxTFZDzyL0Ai+7pJ/4Lo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyp9TOf+u0w7zCScO0NIsJsUJjVRpviCerEvqFv8XZ/0uqIi5Pw
- HPHTH+UbRSctbR5abo9DNJhbYMk/sqTFDssxIAfvnRxDA7sQWuaEY99aVNjRSKk=
-X-Google-Smtp-Source: AGHT+IGPRCInLe/z/Wb8LdOvxgyiK74HbOFPAr2uAw9E4TYxZUDlV3B2ja3PT5V6UaM+PG6RAy/rcw==
-X-Received: by 2002:a5d:424b:0:b0:37c:cfa4:d998 with SMTP id
- ffacd0b85a97d-37cfba196b8mr2621213f8f.49.1727879976634; 
- Wed, 02 Oct 2024 07:39:36 -0700 (PDT)
+ AJvYcCWAXMNMgRtMowzV6m4rI9I1mTxHLYmuYSZb/1N8+5dZJ4ji2gpDNz+X42LBVG7qwYTMm7toVgc=@lists.denx.de
+X-Gm-Message-State: AOJu0YzdE9q0tNit5vcqU/9FSf5OULIlL6h/Mp+ueR7xtv/MwCSmpD3+
+ F4Vih4smtxrqNtEzCdVfdjb20s4rVQFNpFlAp9acJQdO3qCypJJFtAdLZMIJelU=
+X-Google-Smtp-Source: AGHT+IHaCo7KnIIYzC5zjoVW7e/TAKzY3txwz2SYHgvUr7a08ELVpYIeRoXKMXWvSYonHTk1aF68PQ==
+X-Received: by 2002:a05:600c:4454:b0:42f:68e8:d874 with SMTP id
+ 5b1f17b1804b1-42f778fa3c7mr23965155e9.31.1727879978166; 
+ Wed, 02 Oct 2024 07:39:38 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37cd56e65c3sm14056083f8f.60.2024.10.02.07.39.35
+ ffacd0b85a97d-37cd56e65c3sm14056083f8f.60.2024.10.02.07.39.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Oct 2024 07:39:36 -0700 (PDT)
+ Wed, 02 Oct 2024 07:39:37 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: [PATCH v3 0/3] dwc3: gadget: properly fix cache operations
-Date: Wed, 02 Oct 2024 16:39:31 +0200
-Message-Id: <20241002-u-boot-dwc3-gadget-dcache-fixup-v3-0-5398088ef93c@linaro.org>
+Date: Wed, 02 Oct 2024 16:39:33 +0200
+Subject: [PATCH v3 2/3] usb: dwc3: fix dcache flush range calculation
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIACNb/WYC/43NQQ6CMBAF0KuQrh1DC5TWlfcwLsZ2gCaGkhZQQ
- 7i7hZWudDd/fvL+wiIFR5GdsoUFml10vk+hOGTMdNi3BM6mzEQuyrzmGia4eT+CfZgCWrQtpdu
- g6Qga95wGIOSkRV0pKQuWlCFQKvaFyzXlzsXRh9c+OPPt+789c8ihUlg1uZCEis5312PwRx9at
- uGz+ABF+RsUCZSVKqSVWmPNv8B1Xd9luXX5IAEAAA==
+Message-Id: <20241002-u-boot-dwc3-gadget-dcache-fixup-v3-2-5398088ef93c@linaro.org>
+References: <20241002-u-boot-dwc3-gadget-dcache-fixup-v3-0-5398088ef93c@linaro.org>
+In-Reply-To: <20241002-u-boot-dwc3-gadget-dcache-fixup-v3-0-5398088ef93c@linaro.org>
 To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>, 
  Lukasz Majewski <lukma@denx.de>, 
  Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
@@ -83,20 +81,20 @@ To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
 Cc: Caleb Connolly <caleb.connolly@linaro.org>, u-boot-qcom@groups.io, 
  u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1524;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1510;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=GfbA3zniiujI438rfwCcDakKsGpX25rIoOVqi2MIG8k=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBm/VsmVhgzxeJXFc8AB+36bvj1054rMl4HYTq0rXSM
- GTFbvQuJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZv1bJgAKCRB33NvayMhJ0fEZD/
- 4+sKdw/0sa/wCQ2pyIzDlvVdrfm286CakXMsm2JZW1wSitSo+ddQSmE1r6prE30h4S8/SbINnTJt+M
- LPdkIWm5qzkByuz1tv32zSpUS74e/KOT333InFHdzOB4OJYlBOvDAB0sMblF8N89/yNXMnv1HTZ8A7
- st6085sZ3Az+VR8xt2S1dyHOUI0FSg8EUBkBgBguSSHFfM6KP8CVMkP3iIGpnR8Ng/5suB35D/NOH1
- dwBQRFwN7kjZe9Jh9RmTY2qlXnP1z4wUUbiO8cundaQpwRthrlD2cyGD8IJal6C+iAAv/rOPgzvaxs
- NO6PH/YIF/ftBIV3+nOl18RMwL7lQ+uJxvRHsxdHNXRlz99syV1OkLudSpSIQOI5KlhCd02gSbb4qO
- y5UZQ3bWAX0Z5ZxHaisAiXr6COnof3bqCV2/+2r86Sb9N1KF4R4EmotNTTNzSnmXWn6Z3qh1h6wgqd
- YklXjNKLr/7RoyJWCebLHZSnmV5qdfR0cZmTAjsxtyed8AYPdLBkySBMVX630WeZdHRCAn7RSOatTD
- GIKx0gdyMpSBnvCM+Nkview9CbfpqNAklDef2nwnN0POWmSehWULBBKszjlTRgGVTEYg5zXAj3ot0i
- YHlr/TA/FTg/C6w3as1K9Dnnsp8jdMqBXjsRL2gqbNbvlzQbMcrDma1nrt0A==
+ bh=y5L/ah81b52wg2BmUIBDjC9IK51neBebBKPXX2bS1kY=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBm/VsncgLj8ZE6ED+Md4TtA91Kn2hdkE1XO7lhZWvK
+ WjJbWUqJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZv1bJwAKCRB33NvayMhJ0XQOD/
+ 4zFItGtjvmgfMrc4tdNBqGcrgt3ca2zr57HvavxIadd8tHujqtoqxaWHHqCjIO0gvg+9fAC8lDmns2
+ 6vCEmMsGJlLEtjztYRJGYQvRdcvqetzdwPAUGLdRWvM4TM22+m8DEFdP7fhAHbFVJFufvr+pAFQySc
+ 2Kky04jHSJry+UhYSyTbQHPUTtXpCW7JGxlk7ScS8w0O5Y0bwRgdjk60eOICT66y3cRoZSoDErfIjb
+ yLh3mzOZPYznEEyjfQSeq1Y7dSvedjuatxdXZtTf+LpHp/tBU/XMhtlO2d/fFL8RxDromOF3l25z0a
+ 5pEQ93lGtnzeNZEpACPJ+W13n+YBlkIB3IljXCldt8+YN78fw1nWo0/lSt6JS+6GnmwsKKJPC1/lmM
+ HOyRyVy4yilAf0iwkNEOoV6zwGale+3HXuOmBIJl9Ao++xFx1szK1jWTjoQAhMN5hdndptsG0SlgNU
+ dgsDuXYK5UNRQC9G7buIjRRMcDyc/rqfnchmnei3w3R/06TbBYuXUXvTklNlUij+kEuILjv9c/e0VW
+ 4lZE6c1Zll6TioiQQTBNCwaDTHHFfCQDlMvYkDTO+YFeA4BoauucBJgN1qMpwEI80/wZoPn+J0RE8m
+ POM5wPmbnoT3pX4oGklZwqarSJTuI1e0xhnILhc3pzQrFSUrngHtLzdzcKnQ==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
@@ -115,42 +113,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We experience huge problems with cache handling on Qualcomm
-systems, and it appears the dcache handling in the DWC3 gadget
-code is quite wrong and causes operational issues.
+The current flush operation will omit doing a flush/invalidate on
+the first and last bytes if the base address and size are not aligned
+with DMA_MINALIGN.
 
-This serie fixes the dcache operations on unaligned data,
-and properly invalidate buffers when reading back data from
-hardware.
+This causes operation failures Qualcomm platforms.
 
+Take in account the alignment and size of the buffer and also
+flush the previous and last cacheline.
+
+Remove CACHELINE_SIZE which was the same as DMA_MINALIGN.
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
-Changes in v3:
-- Cast addresses to (unsigned long) when calling invalidate_dcache_range()
-- Drop unused CACHELINE_SIZE
-- Fix warning by casting ctrl to uintptr_r when calling dwc3_invalidate_cache()
-- Link to v2: https://lore.kernel.org/r/20240724-u-boot-dwc3-gadget-dcache-fixup-v2-0-65836d699a71@linaro.org
+ drivers/usb/dwc3/io.h | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-Changes in v2:
-- Fix typo in drivers/usb/dwc3/core.h and rewrite patch 1 commit message
-- Link to v1: https://lore.kernel.org/r/20240719-u-boot-dwc3-gadget-dcache-fixup-v1-0-58a5f026ea8e@linaro.org
+diff --git a/drivers/usb/dwc3/io.h b/drivers/usb/dwc3/io.h
+index 04791d4c9be..a6c2bb0f47d 100644
+--- a/drivers/usb/dwc3/io.h
++++ b/drivers/usb/dwc3/io.h
+@@ -20,7 +20,6 @@
+ #include <cpu_func.h>
+ #include <asm/io.h>
+ 
+-#define	CACHELINE_SIZE		CONFIG_SYS_CACHELINE_SIZE
+ static inline u32 dwc3_readl(void __iomem *base, u32 offset)
+ {
+ 	unsigned long offs = offset - DWC3_GLOBALS_REGS_START;
+@@ -50,6 +49,9 @@ static inline void dwc3_writel(void __iomem *base, u32 offset, u32 value)
+ 
+ static inline void dwc3_flush_cache(uintptr_t addr, int length)
+ {
+-	flush_dcache_range(addr, addr + ROUND(length, CACHELINE_SIZE));
++	uintptr_t start_addr = (uintptr_t)addr & ~(ARCH_DMA_MINALIGN - 1);
++	uintptr_t end_addr = ALIGN((uintptr_t)addr + length, ARCH_DMA_MINALIGN);
++
++	flush_dcache_range((unsigned long)start_addr, (unsigned long)end_addr);
+ }
+ #endif /* __DRIVERS_USB_DWC3_IO_H */
 
----
-Neil Armstrong (3):
-      usb: dwc3: allocate setup_buf with dma_alloc_coherent()
-      usb: dwc3: fix dcache flush range calculation
-      usb: dwc3: invalidate dcache on buffer used in interrupt handling
-
- drivers/usb/dwc3/core.h   |  2 ++
- drivers/usb/dwc3/ep0.c    |  6 ++++--
- drivers/usb/dwc3/gadget.c | 10 ++++++----
- drivers/usb/dwc3/io.h     | 14 ++++++++++++--
- 4 files changed, 24 insertions(+), 8 deletions(-)
----
-base-commit: ddbcafeb53e7093c58488596bfce6d8823777c3a
-change-id: 20240719-u-boot-dwc3-gadget-dcache-fixup-ea1e92758663
-
-Best regards,
 -- 
-Neil Armstrong <neil.armstrong@linaro.org>
+2.34.1
 
