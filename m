@@ -4,70 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 340C6CF8548
-	for <u-boot@archiver.kernel.org>; Wed,  2 Oct 2024 22:56:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F031CF8547
+	for <u-boot@archiver.kernel.org>; Wed,  2 Oct 2024 22:56:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1C4489028;
-	Thu,  3 Oct 2024 00:55:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 305DB89051;
+	Thu,  3 Oct 2024 00:55:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IA3kTCzg";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FUcBM+Bl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC05D88FAA; Thu,  3 Oct 2024 00:55:50 +0200 (CEST)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id 3406C89065; Thu,  3 Oct 2024 00:55:52 +0200 (CEST)
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
+ [IPv6:2607:f8b0:4864:20::f2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99F5B88FEC
- for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 00:55:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BDA3188F5B
+ for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 00:55:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6cb284c1a37so3324326d6.1
- for <u-boot@lists.denx.de>; Wed, 02 Oct 2024 15:55:48 -0700 (PDT)
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-6cb2dffcdbbso2955386d6.1
+ for <u-boot@lists.denx.de>; Wed, 02 Oct 2024 15:55:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727909747; x=1728514547; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727909748; x=1728514548; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5Wh0SBecN+X+eJGHKcNVqFmqHtlvnzMpz2FHKnqi4wc=;
- b=IA3kTCzg4ua+hxv6OqoO+cEAJDo7km90UYjZO/eOXY8EFMWylB0XWYDFT23KOuad4o
- 3jMMpi1HHmjCNaQjSo9E0y8MFEW1nZ3FCa/wq0K0R0qF/ooW4g03O5wUDEshDSqbaJaA
- 0es8NM362/9X/YRfuZszJk2zwFH6RrsyOrY2A=
+ bh=w0wRBiF9Rrq/nk1qOOkidGdoqSZa5Yv+cMyCurX9NgE=;
+ b=FUcBM+BlXI+ezv5bs89AxH2/86MdQkxrTmgB97OY1aXrY9UIMKKnBGKE7q+gDp9bAS
+ 1zWY/+HnZ7PdeIj31JUD/+wxaR8ELboWop425lqZ58m4HuPRZU6nRo5/IPxfPA2pf6KD
+ ER/RlxQ0jFededSYwzh485qAPlUkn8kYDgzqc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727909747; x=1728514547;
+ d=1e100.net; s=20230601; t=1727909748; x=1728514548;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=5Wh0SBecN+X+eJGHKcNVqFmqHtlvnzMpz2FHKnqi4wc=;
- b=OYua+TnZFdlA9/1bo8ViJXO8WTRbnHdNURC86j8Za4/lmNhRw0i14x+kgsy20Q5eNT
- EFSik7vTxHByGAM8vz5oB55CtV2esdTWSqukT6g6AeJK0SJ1C5TyTrOZcaBBEfc3l+td
- 0FkpziwBg9tN0Qy3ojrEjy/eYKXCtI9Vj3gvXzrTfvHj8TF/mZvdYvtZ4w4DDp9LWuTH
- KPqOagLCCtg1pjKz1QbcPXx2we3vUK4K7xYAASfxfgYYTf1RdepLItV5UL+xsMaaePCA
- GR1/g1SgKQYADPQ+cKVUyFZ7MuXlMtBco6s8JzUn4vozHMLwfoLfPRlTEm0silwGZ05V
- h5hQ==
-X-Gm-Message-State: AOJu0Yx4v5kKsoHACIYD10UDA97DJAzshfBzEobcsYpISb6fogfPQ/Mh
- oNIqVB11KAyyYTYh+ovTFs0ZkymR6gQ7jjZckmu/FGdboS6qnOBuoUXhR7YHGhy5eSoCFmh5McD
- 4OVkhyPsDxTGYOnSL3jLZWNgz49wskczVJ9qE
-X-Google-Smtp-Source: AGHT+IHBzjt7xtCfeBdpeKSzOLWzeE0AwRcELmiAPQgtxw5ymXYxxSNX4zg/t/3S2qFuKtBsZTFzJZKzyofjOOQ09rg=
-X-Received: by 2002:a05:6214:498f:b0:6cb:3883:bdbb with SMTP id
- 6a1803df08f44-6cb819f5e5bmr79376546d6.25.1727909747552; Wed, 02 Oct 2024
- 15:55:47 -0700 (PDT)
+ bh=w0wRBiF9Rrq/nk1qOOkidGdoqSZa5Yv+cMyCurX9NgE=;
+ b=tlqD4TQlk0lsFf88gs8iuFEJDXG2sUGpf328k1QFSOxYTdK8asMATxR3JMxJBn8q8s
+ tLM70JZg8TUBChl91Qak+Hi4GMMHzuGLiK90JOWgq5a2pBwHQYCSKcyFALBGPIaQR6Ck
+ 67qU4ywkwri3kiuXe5tiEsETbau5uTO0fIEz9EXSA7UBxPgthL/GK7k7xN5QujuQtBet
+ CpAV3G0KtFiDRKUJod/0Me3+FKDQrscd2plOyqoOPqbIN/neJI0ZAiwp+H+04Zlyyph3
+ /63d6WU3EgK7dbIb6X504PKjPeVO3gkOTs3Dq7cQsIDvbFTwAMMHgwqJMK8wScv4kAXx
+ URYA==
+X-Gm-Message-State: AOJu0Yx4zbC7xB6fhfVIWNfvHuIeSxx0xfTF3uVwqBWRZQw9AKLydTde
+ 7lsYwaxs+mFFVej0SIZ4oQ/hURQD7CKWCW99WNjWXIn7xt8kSqrCSoRPCAmQwHVbAMhcoKDws4b
+ neWa1hEybjHJ3JKT7V23rxGZvZqj4OuVZNUngHTBn1LeZdVE=
+X-Google-Smtp-Source: AGHT+IHL1HC5Bxh89FeivUSbspMXQhnq7+8AMWkPyBQ6rmdnNoLUr8vpMrliTrhS9SBZSxg6Mtwdp4u2L+3mxPdxQnU=
+X-Received: by 2002:a05:6214:3c98:b0:6cb:3c08:30a0 with SMTP id
+ 6a1803df08f44-6cb81cc8093mr76540236d6.49.1727909748611; Wed, 02 Oct 2024
+ 15:55:48 -0700 (PDT)
 MIME-Version: 1.0
 References: <20241002094832.24933-1-patrick.rudolph@9elements.com>
- <20241002094832.24933-34-patrick.rudolph@9elements.com>
-In-Reply-To: <20241002094832.24933-34-patrick.rudolph@9elements.com>
+ <20241002094832.24933-38-patrick.rudolph@9elements.com>
+In-Reply-To: <20241002094832.24933-38-patrick.rudolph@9elements.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 2 Oct 2024 16:55:37 -0600
-Message-ID: <CAFLszTjPKSPyOj2ytZpKixtyverBuBFkDp7+JtmreSvbmDa=ew@mail.gmail.com>
-Subject: Re: [PATCH v6 33/37] arm: mach-bcm283x: Add ARMV8_MULTIENTRY support
+Date: Wed, 2 Oct 2024 16:55:38 -0600
+Message-ID: <CAFLszTgKa46eQsf=RpEsKoiOW7CsFj-8aK5xTCfQ7H1PGG35Xw@mail.gmail.com>
+Subject: Re: [PATCH v6 37/37] CI: Enable qemu_sbsa
 To: Patrick Rudolph <patrick.rudolph@9elements.com>
-Cc: u-boot@lists.denx.de, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tom Rini <trini@konsulko.com>, 
- Matthias Brugger <mbrugger@suse.com>, Peter Robinson <pbrobinson@gmail.com>
+Cc: u-boot@lists.denx.de, linux-kernel@vger.kernel.org, 
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,49 +83,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 2 Oct 2024 at 03:57, Patrick Rudolph
+On Wed, 2 Oct 2024 at 03:58, Patrick Rudolph
 <patrick.rudolph@9elements.com> wrote:
 >
-> When ACPI is enabled over FDT the APs cannot be brought out of reset
-> by the OS using the "FDT spin-table" mechanism, as no FDT is provided
-> to the OS. The APs must be released out of reset in u-boot and then
-> brought up in an ACPI compliant fashion.
->
-> When ARMV8_MULTIENTRY is specified, the APs are released from reset
-> and will enter U-Boot after it has been relocated as well.
->
-> By default ARMV8_MULTIENTRY is not selected, keeping existing behaviour.
->
-> TEST: All APs enter U-Boot when run on qemu-system-aarch64 and on
->       real hardware.
+> Add QEMU's SBSA ref board to azure pipelines and gitlab CI to run tests on it.
+> TEST: Run on Azure pipelines and confirmed that tests succeed.
 >
 > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-> Cc: Matthias Brugger <mbrugger@suse.com>
-> Cc: Peter Robinson <pbrobinson@gmail.com>
-> Cc: Tom Rini <trini@konsulko.com>
 > ---
-> Changelog v2:
-> - Drop CPU code from board
-> - Add CPU driver to release APs from reset
-> Changelog v4:
-> - Use the generic armv8 CPU driver
-> - Probe all CPUs
-> - Release secondary CPUs in the probe function
-> - Use of_to_plat() to parse DT
-> - Drop udelay()
-> - Select the GICv2 driver
-> Changelog v5:
-> - Cosmetic fixes
-> - Drop arch_early_init_r()
 > Changelog v6:
-> - Update header order
-> - Drop ifdef
+> - Add gitlab CI support
 > ---
->  arch/arm/Kconfig              |   1 +
->  arch/arm/mach-bcm283x/Kconfig |   5 +-
->  drivers/cpu/Makefile          |   2 +-
->  drivers/cpu/bcm283x_cpu.c     | 214 ++++++++++++++++++++++++++++++++++
->  4 files changed, 220 insertions(+), 2 deletions(-)
->  create mode 100644 drivers/cpu/bcm283x_cpu.c
+>  .azure-pipelines.yml |  8 ++++++++
+>  .gitlab-ci.yml       | 11 +++++++++++
+>  2 files changed, 19 insertions(+)
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+
+> diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+> index 93111eb612..2881851ecf 100644
+> --- a/.azure-pipelines.yml
+> +++ b/.azure-pipelines.yml
+> @@ -250,6 +250,11 @@ stages:
+>                wget -O - https://github.com/riscv-software-src/opensbi/releases/download/v1.3.1/opensbi-1.3.1-rv-bin.tar.xz | tar -C /tmp -xJ;
+>                export OPENSBI=/tmp/opensbi-1.3.1-rv-bin/share/opensbi/lp64/generic/firmware/fw_dynamic.bin;
+>            fi
+> +          if [[ "\${TEST_PY_BD}" == "qemu-arm-sbsa" ]]; then
+> +              wget -O /tmp/bl1.bin https://artifacts.codelinaro.org/artifactory/linaro-419-sbsa-ref/latest/tf-a/bl1.bin;
+> +              wget -O /tmp/fip.bin https://artifacts.codelinaro.org/artifactory/linaro-419-sbsa-ref/latest/tf-a/fip.bin;
+> +              export BINMAN_INDIRS=/tmp
+> +          fi
+>            # the below corresponds to .gitlab-ci.yml "script"
+>            cd \${WORK_DIR}
+>            export UBOOT_TRAVIS_BUILD_DIR=/tmp/\${TEST_PY_BD}
+> @@ -415,6 +420,9 @@ stages:
+>          qemu_arm64:
+>            TEST_PY_BD: "qemu_arm64"
+>            TEST_PY_TEST_SPEC: "not sleep"
+> +        qemu_arm_sbsa_ref:
+> +          TEST_PY_BD: "qemu-arm-sbsa"
+> +          TEST_PY_TEST_SPEC: "not sleep"
+>          qemu_m68k:
+>            TEST_PY_BD: "M5208EVBE"
+>            TEST_PY_ID: "--id qemu"
+> diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+> index 7d621031b8..3f02a492d5 100644
+> --- a/.gitlab-ci.yml
+> +++ b/.gitlab-ci.yml
+> @@ -39,6 +39,11 @@ stages:
+>          wget -O - https://github.com/riscv-software-src/opensbi/releases/download/v1.3.1/opensbi-1.3.1-rv-bin.tar.xz | tar -C /tmp -xJ;
+>          export OPENSBI=/tmp/opensbi-1.3.1-rv-bin/share/opensbi/lp64/generic/firmware/fw_dynamic.bin;
+>        fi
+> +    - if [[ "${TEST_PY_BD}" == "qemu-arm-sbsa" ]]; then
+> +        wget -O /tmp/bl1.bin https://artifacts.codelinaro.org/artifactory/linaro-419-sbsa-ref/latest/tf-a/bl1.bin;
+> +        wget -O /tmp/fip.bin https://artifacts.codelinaro.org/artifactory/linaro-419-sbsa-ref/latest/tf-a/fip.bin;
+> +        export BINMAN_INDIRS=/tmp
+> +      fi
+>
+>    after_script:
+>      - cp -v /tmp/${TEST_PY_BD}/*.{html,css,xml} .
+> @@ -344,6 +349,12 @@ qemu_arm64 test.py:
+>      TEST_PY_TEST_SPEC: "not sleep"
+>    <<: *buildman_and_testpy_dfn
+>
+> +qemu_arm_sbsa test.py:
+> +  variables:
+> +    TEST_PY_BD: "qemu-arm-sbsa"
+> +    TEST_PY_TEST_SPEC: "not sleep"
+> +  <<: *buildman_and_testpy_dfn
+> +
+>  qemu_m68k test.py:
+>    variables:
+>      TEST_PY_BD: "M5208EVBE"
+> --
+> 2.46.2
+>
