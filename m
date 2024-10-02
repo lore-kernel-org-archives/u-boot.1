@@ -4,89 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 767E5CF8547
-	for <u-boot@archiver.kernel.org>; Wed,  2 Oct 2024 22:57:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D34A6CF8548
+	for <u-boot@archiver.kernel.org>; Wed,  2 Oct 2024 22:57:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1AA9889118;
-	Thu,  3 Oct 2024 00:55:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 81DBF890E4;
+	Thu,  3 Oct 2024 00:55:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HvHi//Ig";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="J19xjqtH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B93B88FFB; Thu,  3 Oct 2024 00:55:54 +0200 (CEST)
-Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
- [IPv6:2607:f8b0:4864:20::f32])
+ id 496DB890E4; Thu,  3 Oct 2024 00:55:56 +0200 (CEST)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD5D78901B
- for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 00:55:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 94AAA88F5B
+ for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 00:55:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf32.google.com with SMTP id
- 6a1803df08f44-6cb3d2ce75eso13269026d6.0
- for <u-boot@lists.denx.de>; Wed, 02 Oct 2024 15:55:51 -0700 (PDT)
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-6cb2f344dbbso2778736d6.3
+ for <u-boot@lists.denx.de>; Wed, 02 Oct 2024 15:55:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727909750; x=1728514550; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=tHT05oy9Zb03oLutDMF4gtb1zHH+EywA/Pf5IkPVlZw=;
- b=HvHi//IgtFbYYN2Tymh+VuLqXSo+RPJxo/HsUqjWtClSTPYEeNo73vPXh0IGUGE1rc
- oO1VptPg82HAhyLiU9mDNFJsLW+jhJo7/KWKwapOHg6fxUDgZ2HirwQ4DsIjI2/XMiqZ
- Gj4QSbS/gM0PjtOKRnCVADui2UXgf9IV2o5dw=
+ d=chromium.org; s=google; t=1727909751; x=1728514551; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=frBoE9ieFSCcLTkVs/ZEtO6YQJT0JU+DPASyBRSmeQI=;
+ b=J19xjqtH9YPJSTOS5wTfdRsnTIjn9SQh4YNdfUOs3MF01gpl831//pxgDfAR2w31xn
+ TDYQb+78okN09QrY0IexZRw8sAQwr48MwPWafOPVCP/pCy7Sryqqc6gc4ln4vGAWOEe+
+ x3riv5DZcEhE4j5tW3B7/R5Y+jPX3dqGoTFD0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727909750; x=1728514550;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=tHT05oy9Zb03oLutDMF4gtb1zHH+EywA/Pf5IkPVlZw=;
- b=sH4lpeEruZCs60HmLvMBDNFgRF4UGp5FRIVkpph3a98e0M6KZ2VN/9bCg+0Jq7rcjB
- fXiEwTE0tlFERHVIo/RfRPSz/ZDKwXlOQZItSOm776GEzYKthBH7J8fGzJxobmV+qcL2
- 5lGHJFsn2LIV3Op8Q8O4qhIQ+ik9bHdQvM5bSQ6UX3zb3U5DRNKjj+8fbXaBNVI6ARSy
- 0pr4JTr+eBlJ/J4rLKtKmF/FOwR3PgsW/x1lBbpPZ/CQBnSdyIpanVPlH1TMU6HvJvVl
- Qlw9IqAT8BG0WJhtoT2VbwqVp0QRMTRQc+BkyOvllD5XKr3qEgK0ZjHPB25ow+HqXvXP
- XtEw==
-X-Gm-Message-State: AOJu0Ywidsxvpcvx5ssioUBlm5uFNG8phmpG0gNcMfQLaRVJPo7vze5e
- 378r3W9QEUAq74QvIE7Glqh6o335K0MKkzKZW2mFDxnrxNCJFV028Uvz80RW3BE20ac4GfGYtFf
- DOaBfdZ5bmnBZM48kAY5YBiSMgTu9Ms4NaWXk
-X-Google-Smtp-Source: AGHT+IFjuoS7/Zw3tzNvR+meA5geMK78vcwT93kXjxfgxpwBD0lzcVblJiT7llCr4T1Wb+Nyae6rvj4vbgAj1dmj790=
-X-Received: by 2002:a05:6214:5a07:b0:6c7:c646:4b7f with SMTP id
- 6a1803df08f44-6cb900ad4c5mr19312976d6.3.1727909750523; Wed, 02 Oct 2024
- 15:55:50 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1727909751; x=1728514551;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=frBoE9ieFSCcLTkVs/ZEtO6YQJT0JU+DPASyBRSmeQI=;
+ b=O/C0Qjs5qKBl2O1b7Li0ZFO+E9No+dSZRKyutubJ4WsTGpvZAurSkGqS1rv/fr9/pf
+ HcySEQzuFzCQVj3SXMg4R1/AIrWuWieAmFd1W8yO82fJOM5tvGbftSjUBrEo6PDLz6Qc
+ o2KZdP0rHMUDFabdSK3R5qB0x4mLczwfOA1/zgH+8YixwwkbNaMX0eDlB54vSwUU0y8T
+ QTl6Fo2FJ2aceRcr+4bl5Z8EQjeDZJXoUzDL0s4DrTyoOdFIdpuircD9Km54p7eBvECI
+ TLrOD1VbOSxGqB0UnYDlTelS8vSrdMf8Yid4A6xv5FNTh4XEwAXQPayYeZ/kei+PXmzV
+ Am3g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWbIsowqA6v7Sk9NfjnvpoLPHpF9ItLUZ55CD+8EW94LYYqKwZlfOcbijEqrSto+lrvwTGJOLM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yza02mM45KOeJPtQccNPM77M9PyrQwVtRRX24D6Jq0DeBuydCDA
+ rmngnxa3XoK9EoyQ2UfEFTStxqBlG7IZCH91pnq9mze1hqIIYKbUCN6Lv8e4UDk2WolxTXiQrmw
+ 6pm8jDnip3Mq3MLVxPff07UkjfHNcaNiAWFt/
+X-Google-Smtp-Source: AGHT+IHLUSMCTlGs0VnFBrcdRhbruItGW7Uobfg6RJewQTDEwe+Ijkhfst95E+Cy/OOihElqaONR1+aixYZKrnGE3eE=
+X-Received: by 2002:a05:6214:490a:b0:6cb:2e94:3e24 with SMTP id
+ 6a1803df08f44-6cb819c8b43mr61611056d6.11.1727909751485; Wed, 02 Oct 2024
+ 15:55:51 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240926231457.2933914-1-marex@denx.de>
- <20240926231457.2933914-2-marex@denx.de>
-In-Reply-To: <20240926231457.2933914-2-marex@denx.de>
+References: <20240611-misc-20240610-v2-0-028e82b0b620@cherry.de>
+ <20240611-misc-20240610-v2-3-028e82b0b620@cherry.de>
+ <20241002-caption-saline-d00d342af087@thorsis.com>
+ <cd12220e-a111-4576-87d1-e838f1c5998e@cherry.de>
+ <b574fe29-3e3b-df51-6b09-af06303e11ac@gmail.com>
+ <20241002155437.GP4737@bill-the-cat>
+In-Reply-To: <20241002155437.GP4737@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 2 Oct 2024 16:55:39 -0600
-Message-ID: <CAFLszThbZ5t+siC0Gz_7KaecTTwUA6J2uTdtHEaYoK+V6Rm_7A@mail.gmail.com>
-Subject: Re: [PATCH v3 2/4] power: regulator: Convert
- regulators_enable_boot_on/off() to regulator_post_probe
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, Ben Wolsieffer <benwolsieffer@gmail.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>,
- Chris Morgan <macromorgan@hotmail.com>, 
- Dragan Simic <dsimic@manjaro.org>, Eugen Hristev <eugen.hristev@collabora.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>, 
- Matteo Lisi <matteo.lisi@engicam.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Max Krummenacher <max.krummenacher@toradex.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Sam Day <me@samcday.com>, 
- Sumit Garg <sumit.garg@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>, 
- Thierry Reding <treding@nvidia.com>, Tom Rini <trini@konsulko.com>, 
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, u-boot-amlogic@groups.io, 
- u-boot-qcom@groups.io, u-boot@dh-electronics.com, 
- uboot-stm32@st-md-mailman.stormreply.com
+Date: Wed, 2 Oct 2024 16:55:40 -0600
+Message-ID: <CAFLszTiOnm8sX03zs0u1WZCKh0cUFZKwvD9TZRfUOQnuLcvkrg@mail.gmail.com>
+Subject: Re: [PATCH v2 3/4] dm: core: migrate debug() messages to use dm_warn
+To: Tom Rini <trini@konsulko.com>
+Cc: Sean Anderson <seanga2@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Quentin Schulz <foss+uboot@0leil.net>, u-boot@lists.denx.de, 
+ Alexander Dahl <ada@thorsis.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Dario Binacchi <dariobin@libero.it>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>, 
+ Michal Simek <michal.simek@amd.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,165 +98,121 @@ X-Virus-Status: Clean
 
 Hi,
 
-On Thu, 26 Sept 2024 at 17:15, Marek Vasut <marex@denx.de> wrote:
+On Wed, 2 Oct 2024 at 09:54, Tom Rini <trini@konsulko.com> wrote:
 >
-> Turn regulators_enable_boot_on() and regulators_enable_boot_off() into
-> empty functions. Implement matching functionality in regulator_post_probe()
-> instead. The regulator_post_probe() is called for all regulators after they
-> probe, and regulators that have regulator-always-on or regulator-boot-on DT
-> properties now always probe due to DM_FLAG_PROBE_AFTER_BIND being set on
-> such regulators in regulator_post_bind().
+> On Wed, Oct 02, 2024 at 11:13:14AM -0400, Sean Anderson wrote:
+> > On 10/2/24 05:25, Quentin Schulz wrote:
+> > > Hi Alexander,
+> > >
+> > > On 10/2/24 10:37 AM, Alexander Dahl wrote:
+> > > > Hello Quentin,
+> > > >
+> > > > sorry for being late to the party, but I just tested v2024.10-rc6 a=
+nd
+> > > > my console output looks like this now:
+> > > >
+> > > >      ofnode_read_bool: bootph-all: true
+> > > >      ofnode_read_u32_array: ranges: ofnode_read_bool: bootph-all: f=
+alse
+> > > >      ofnode_read_bool: bootph-some-ram: false
+> > > >      ofnode_read_bool: bootph-pre-ram: false
+> > > >      ofnode_read_bool: bootph-pre-sram: false
+> > > >      ofnode_read_bool: u-boot,dm-pre-reloc: false
+> > > >      ofnode_read_bool: u-boot,dm-pre-proper: false
+> > > >      ofnode_read_bool: u-boot,dm-spl: false
+> > > >      ofnode_read_bool: u-boot,dm-tpl: false
+> > > >      ofnode_read_bool: u-boot,dm-vpl: false
+> > > >      ofnode_read_bool: bootph-all: false
+> > > >      ofnode_read_bool: bootph-some-ram: false
+> > > >      ofnode_read_bool: bootph-pre-ram: false
+> > > >      ofnode_read_bool: bootph-pre-sram: false
+> > > >      ofnode_read_bool: u-boot,dm-pre-reloc: false
+> > > >      ofnode_read_bool: u-boot,dm-pre-proper: false
+> > > >      ofnode_read_bool: u-boot,dm-spl: false
+> > > >      ofnode_read_bool: u-boot,dm-tpl: false
+> > > >      ofnode_read_bool: u-boot,dm-vpl: false
+> > > >      ofnode_read_bool: bootph-all: true
+> > > >      ofnode_read_u32_array: ranges: ofnode_read_bool: bootph-all: t=
+rue
+> > > >      ofnode_read_u32_array: ranges: ofnode_read_bool: bootph-all: t=
+rue
+> > > >      ofnode_read_bool: bootph-all: true
+> > > >      ofnode_read_bool: bootph-all: false
+> > > >      =E2=80=A6
+> > > >
+> > > > This goes on for several screen pages, and clutters the usual outpu=
+t.
+> > > > I first thought I messed up CONFIG_LOGLEVEL or CONFIG_LOG, but no.
+> > > > All I had done was setting CONFIG_DM_WARN =E2=80=A6
+> > > >
+> > > > Am Tue, Jun 11, 2024 at 03:04:26PM +0200 schrieb Quentin Schulz:
+> > > > > From: Quentin Schulz <quentin.schulz@cherry.de>
+> > > > >
+> > > > > Prior to that, seeing the debug() messages required to enable DM_=
+DEBUG
+> > > > > which defines DEBUG (and then _DEBUG) which in turn makes failing
+> > > > > assert() calls reset U-Boot which isn't necessarily what is desir=
+ed.
+> > > > >
+> > > > > Instead, let's migrate to dm_warn which is using log_debug when u=
+nset or
+> > > > > log_warn when set.
+> > > > >
+> > > > > While at it, reword the DM_DEBUG symbol in Kconfig to explain wha=
+t it
+> > > > > now actually does.
+> > > >
+> > > > CONFIG_DM_WARN currently reads like this:
+> > > >
+> > > >      Enable this to see warnings related to driver model.
+> > > >
+> > > >      Warnings may help with debugging, such as when expected device=
+s do
+> > > >      not bind correctly. If the option is disabled, dm_warn() is co=
+mpiled
+> > > >      out - it will do nothing when called.
+> > > >
+> > > > Instead of just useful warnings, users get debug messages all over =
+the
+> > > > place now.  Is this actually intended behaviour?  Can this be fixed
+> > > > before v2024.10 release please?
+> > > >
+> > >
+> > > There are basically less than 3 working days left before v2024.10 is =
+released and I'm inclined to say this is annoying rather than a bug, so I a=
+m not entirely sure this will 1) make it in time if we agree on a fix (need=
+s to include review process in those 3 working days) 2) be acceptable for a=
+ late addition in the release cycle. Let's try though, maybe we can figure =
+something out.
+> >
+> > This is a bug. Printing this many messages will have a major impact on =
+boot times.
+> >
+> > A config going from "may print out a few more lines of extra info" to "=
+firehose"
+> > is very surprising to users (as evidenced by Alexander's email).
+> >
+> > If you can't figure out which lines to disable, I recommend simply reve=
+rting the
+> > patch.
 >
-> Finally, fold regulator_unset() functionality into regulator_autoset().
->
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
-> Cc: Ben Wolsieffer <benwolsieffer@gmail.com>
-> Cc: Caleb Connolly <caleb.connolly@linaro.org>
-> Cc: Chris Morgan <macromorgan@hotmail.com>
-> Cc: Dragan Simic <dsimic@manjaro.org>
-> Cc: Eugen Hristev <eugen.hristev@collabora.com>
-> Cc: Francesco Dolcini <francesco.dolcini@toradex.com>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Jaehoon Chung <jh80.chung@samsung.com>
-> Cc: Jagan Teki <jagan@amarulasolutions.com>
-> Cc: Jonas Karlman <jonas@kwiboo.se>
-> Cc: Kever Yang <kever.yang@rock-chips.com>
-> Cc: Matteo Lisi <matteo.lisi@engicam.com>
-> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> Cc: Max Krummenacher <max.krummenacher@toradex.com>
-> Cc: Neil Armstrong <neil.armstrong@linaro.org>
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
-> Cc: Quentin Schulz <quentin.schulz@cherry.de>
-> Cc: Sam Day <me@samcday.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Sumit Garg <sumit.garg@linaro.org>
-> Cc: Svyatoslav Ryhel <clamor95@gmail.com>
-> Cc: Thierry Reding <treding@nvidia.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-> Cc: u-boot-amlogic@groups.io
-> Cc: u-boot-qcom@groups.io
-> Cc: u-boot@dh-electronics.com
-> Cc: u-boot@lists.denx.de
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
-> V2: Rebase on current u-boot/next
-> V3: No change
-> ---
->  drivers/power/regulator/regulator-uclass.c | 60 +++++++---------------
->  1 file changed, 19 insertions(+), 41 deletions(-)
->
-> diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
-> index 1a970004540..9fcc4bd85b9 100644
-> --- a/drivers/power/regulator/regulator-uclass.c
-> +++ b/drivers/power/regulator/regulator-uclass.c
-> @@ -314,6 +314,11 @@ int regulator_autoset(struct udevice *dev)
->                         return ret;
->         }
->
-> +       if (uc_pdata->force_off) {
-> +               ret = regulator_set_enable(dev, false);
-> +               goto out;
-> +       }
-> +
->         if (!uc_pdata->always_on && !uc_pdata->boot_on) {
->                 ret = -EMEDIUMTYPE;
->                 goto out;
-> @@ -518,56 +523,28 @@ static int regulator_pre_probe(struct udevice *dev)
->         return 0;
->  }
->
-> -int regulators_enable_boot_on(bool verbose)
-> +static int regulator_post_probe(struct udevice *dev)
->  {
-> -       struct udevice *dev;
-> -       struct uclass *uc;
->         int ret;
->
-> -       ret = uclass_get(UCLASS_REGULATOR, &uc);
-> -       if (ret)
-> +       ret = regulator_autoset(dev);
-> +       if (ret && ret != -EMEDIUMTYPE && ret != -EALREADY && ret != ENOSYS)
->                 return ret;
-> -       for (uclass_first_device(UCLASS_REGULATOR, &dev);
-> -            dev;
-> -            uclass_next_device(&dev)) {
-> -               ret = regulator_autoset(dev);
-> -               if (ret == -EMEDIUMTYPE || ret == -EALREADY) {
-> -                       ret = 0;
-> -                       continue;
-> -               }
-> -               if (verbose)
-> -                       regulator_show(dev, ret);
-> -               if (ret == -ENOSYS)
-> -                       ret = 0;
-> -       }
->
-> -       return ret;
-> +       if (_DEBUG)
-> +               regulator_show(dev, ret);
-> +
-> +       return 0;
->  }
->
-> -int regulators_enable_boot_off(bool verbose)
-> +int regulators_enable_boot_on(bool verbose)
->  {
-> -       struct udevice *dev;
-> -       struct uclass *uc;
-> -       int ret;
-> -
-> -       ret = uclass_get(UCLASS_REGULATOR, &uc);
-> -       if (ret)
-> -               return ret;
-> -       for (uclass_first_device(UCLASS_REGULATOR, &dev);
-> -            dev;
-> -            uclass_next_device(&dev)) {
-> -               ret = regulator_unset(dev);
-> -               if (ret == -EMEDIUMTYPE) {
-> -                       ret = 0;
-> -                       continue;
-> -               }
-> -               if (verbose)
-> -                       regulator_show(dev, ret);
-> -               if (ret == -ENOSYS)
-> -                       ret = 0;
-> -       }
-> +       return 0;
-> +}
->
-> -       return ret;
-> +int regulators_enable_boot_off(bool verbose)
-> +{
-> +       return 0;
->  }
->
->  UCLASS_DRIVER(regulator) = {
-> @@ -575,5 +552,6 @@ UCLASS_DRIVER(regulator) = {
->         .name           = "regulator",
->         .post_bind      = regulator_post_bind,
->         .pre_probe      = regulator_pre_probe,
-> +       .post_probe     = regulator_post_probe,
->         .per_device_plat_auto   = sizeof(struct dm_regulator_uclass_plat),
->  };
-> --
-> 2.45.2
->
+> Checking this myself too, no platforms enable this by default. So I
+> believe we do need to improve the situation here, but I don't think we
+> need to revert this for release.
 
-I thought I objected to this patch, but it seems to be in -next? Does
-anyone know what has happened here?
+I think the problem is that the dm_warn() thing went a bit too far.
 
-I am seeing these errors now when running sandbox 'u-boot -D':
+For example, ofnode_read_u8() should not warn unless something goes
+wrong, but when it was log_debug() it would show everything.
 
-       i2c_emul_find() No emulators for device 'sandbox_pmic'
-  sandbox_pmic_write() write error to device: 0000000018c49db0 register: 0x0!
-       out_set_value() PMIC write failed: -5
-       i2c_emul_find() No emulators for device 'sandbox_pmic'
-  sandbox_pmic_write() write error to device: 0000000018c49db0 register: 0x0!
-       out_set_value() PMIC write failed: -5
+So in that case, the first and last dm_warn() should change back to
+log_debug(). The middle one should be expanded to show the node name
+and (strictly speaking) it should only show the node name if _DEBUG is
+0. Eek.
+
+Not a release-blocker IMO, but it does suggest that adding a CI test
+for DM_WARN would be useful. We have a few of these already, e.g.
+'sandbox_noinst with LOAD_FIT_FULL test.py'
 
 Regards,
 Simon
