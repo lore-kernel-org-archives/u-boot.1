@@ -4,83 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67903CF6D28
-	for <u-boot@archiver.kernel.org>; Wed,  2 Oct 2024 14:53:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAFDCCF6D28
+	for <u-boot@archiver.kernel.org>; Wed,  2 Oct 2024 14:59:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3789F892F0;
-	Wed,  2 Oct 2024 16:52:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 29F8F892EB;
+	Wed,  2 Oct 2024 16:59:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gehealthcare.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PrEHSg2L";
+	dkim=pass (2048-bit key; unprotected) header.d=gehealthcare.com header.i=@gehealthcare.com header.b="GPJ9lln5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D63B5890DF; Wed,  2 Oct 2024 16:52:51 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7BCFC88F00; Wed,  2 Oct 2024 08:41:24 +0200 (CEST)
+Received: from mx0a-00176a03.pphosted.com (mx0b-00176a03.pphosted.com
+ [67.231.157.48])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 968DF88DEF
- for <u-boot@lists.denx.de>; Wed,  2 Oct 2024 16:52:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1742B88DA3
+ for <u-boot@lists.denx.de>; Wed,  2 Oct 2024 08:41:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=gehealthcare.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-a83562f9be9so143039866b.0
- for <u-boot@lists.denx.de>; Wed, 02 Oct 2024 07:52:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1727880769; x=1728485569; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rIALLUv2TiSgifNaCXPdvMDBFxeZRSDQQi8L85UuWvs=;
- b=PrEHSg2Lt1Md+TumjoUSzFk1Pn760HnKkmzOGw3VcQOJ0RZmyWqscqzokfMBhO72Yq
- hLX2Eg5OzvL9nnHu9mQjrJhw6pn4QAw7nC3xwVXuJg9l2BXfw7htz96ZthAUu6nGDilW
- 2hwWPylWevi2VDayvapXSaftQZ4eRwNQP0Z7DHLX5Fsm8o5qzlYA9H3AeU5361CcsrTq
- oRZifeXYThihrvDnCLACbhUMxkSz2BuzIthUsKdnjfeVeJLT5mExSZdb8hsB6b8KymnW
- /U/jj3kBGcNGHBlKxnpnjURNmAmjL6QbGwwIsqF7kr2ZJQXixmtuGRbFFjI4vJhBzB5d
- uRnw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727880769; x=1728485569;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=rIALLUv2TiSgifNaCXPdvMDBFxeZRSDQQi8L85UuWvs=;
- b=fsHuyIw66LCaJk0dWktXJHnwrZAJ9xHR9Th1yN4WyfvCUI8WQlKu1WfCuQQtaFrrZr
- KYafCx4P1TIz1WaXf9UlBVQ+XMLq9ds1KVqW4vHqbFFqK2Vpt9WyQm15r8TqZ9UQn+0L
- sISnv5b68C0iWHoNbF+tuIklOwRpdxXLHvrZTng/6tRvQo2LDAhXQdwsGCDd3wxGdw+V
- VT0m0Th5BfZRpJWQ7BAMaD+Po/MVm7HedzFWjD8nnr5eL7qEnzSJSO2vX/oMANVPc9LP
- A/c7WjGqV8kFlAwhBXcnH904+fwyScF5w6IR/SJEIf8jzjDowCOsEsfwOYWErpHlkWgL
- GpDA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWR+eDSHl0Ogn6E3m+s0FYzgxEiyXUxjck/ruBsgOCAZxxpmYgmTkKEyakdLGwM+oDoZQUeQqg=@lists.denx.de
-X-Gm-Message-State: AOJu0YxhfeDvOfLmGaw8A5TSbGP2kc9jnMiJct3K9z7fsG1v7Mcv/C6t
- +2T6q1GLwo2Ctjzj1ngii8tpwffnD07+WTlYqyFmKs+vw4141dZV+CnXQHEuiM0=
-X-Google-Smtp-Source: AGHT+IGA01Ff9XwU8vKmoK/S0/DbRUFqXKnPNpvczO/1BpILWR+wxlXIhbNtYa/fv9uNAhvdvHWokg==
-X-Received: by 2002:a17:907:7fa7:b0:a93:a664:a257 with SMTP id
- a640c23a62f3a-a98f838dde3mr346082866b.61.1727880769071; 
- Wed, 02 Oct 2024 07:52:49 -0700 (PDT)
-Received: from [192.168.195.50] ([95.90.247.28])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a93c297be12sm889785666b.179.2024.10.02.07.52.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Oct 2024 07:52:48 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-In-Reply-To: <20240819-b4-qcom-clk-dump-v1-0-182cf77c23a2@linaro.org>
-References: <20240819-b4-qcom-clk-dump-v1-0-182cf77c23a2@linaro.org>
-Subject: Re: [PATCH 0/4] clk/qcom: implement clk dump callback
-Message-Id: <172788076765.935801.8728096845283608347.b4-ty@linaro.org>
-Date: Wed, 02 Oct 2024 16:52:47 +0200
+ spf=pass smtp.mailfrom=brian.ruley@gehealthcare.com
+Received: from pps.filterd (m0048204.ppops.net [127.0.0.1])
+ by m0048204.ppops.net-00176a03. (8.18.1.2/8.18.1.2) with ESMTP id
+ 4926CEIf017873
+ for <u-boot@lists.denx.de>; Wed, 2 Oct 2024 02:41:20 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ gehealthcare.com; h=cc:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=outbound; bh=A
+ utZbJW6D8l2ZImfqSfNED3HKwvru6I0+JIeJ8tLG5E=; b=GPJ9lln53tghvROOI
+ vItBqEdrSVrzMEbvzol0zubdWvtNcOk1bRqEe149Yg5Skap9hWEQ8tcElcYX+NLE
+ 9ANSSJzgVwNUbizx5xw513fRtqrRkb2/kaBIdMV3eD0tcSWtT5wNZY2Rno+jjbMM
+ UXdEYFEOULmgNkcmc1GwQd2Q+ryPqp/IyV97Gv3KMDJPYS2+davcl51Wct3rc0Q1
+ /eDri9d0OUGbAg06WrMyow8gc6LGB+MpA/bJ7VSWwIm1sbrdBSg/+qR45KAbS7JB
+ 9UYdpSW13FMVTe/aBcpGXQiUdiumxxl2B/TXVZTIKY8UpKYQaIXIjL9zH7O91fky
+ zqKVg==
+Date: Wed, 2 Oct 2024 09:41:14 +0300
+From: Brian Ruley <brian.ruley@gehealthcare.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Ian Ray <ian.ray@gehealthcare.com>, Marek Vasut <marex@denx.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: [PATCH v3 1/2] binman: cosmetic: code formatting fixes
+Message-ID: <ZvzrCt1_TMxTG6xt@zoo11.em.health.ge.com>
+References: <20240930102148.854-1-brian.ruley@gehealthcare.com>
+ <20240930161006.41052-1-brian.ruley@gehealthcare.com>
+ <CAFLszTj_qCcSMqQ0KawZus1YoHR4iRDSwKYO2Ur=nLcG8c1HqA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14-dev
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAFLszTj_qCcSMqQ0KawZus1YoHR4iRDSwKYO2Ur=nLcG8c1HqA@mail.gmail.com>
+X-Proofpoint-GUID: 4uTJEgJziTHTt3gHuD9OzWmg323Qv7FQ
+X-Proofpoint-ORIG-GUID: 4uTJEgJziTHTt3gHuD9OzWmg323Qv7FQ
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1051,Hydra:6.0.680,FMLib:17.12.62.30
+ definitions=2024-10-02_06,2024-09-30_01,2024-09-30_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0
+ phishscore=0
+ impostorscore=0 mlxscore=0 suspectscore=0 adultscore=0 mlxlogscore=999
+ clxscore=1015 malwarescore=0 lowpriorityscore=0 priorityscore=1501
+ spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2408220000 definitions=main-2410020048
+X-Mailman-Approved-At: Wed, 02 Oct 2024 16:59:01 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,30 +83,132 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-On Mon, 19 Aug 2024 21:34:16 +0200, Caleb Connolly wrote:
-> Add support for dumping a few of the clocks used on Qualcomm platforms.
-> Naming the Global PLL's, Root Clock Generators, and gate clocks.
+On Mon, Sep 30, 2024 at 12:52:24PM -0600, Simon Glass wrote:
 > 
-> This helps a lot with platform bringup and feature enablement by making
-> it easy to sanity check that the clocks are programmed correctly.
+> WARNING: This email originated from outside of GE HealthCare. Please validate the sender's email address before clicking on links or attachments as they may not be safe.
 > 
-> == Usage ==
+> Hi Brian,
 > 
-> [...]
+> On Mon, 30 Sept 2024 at 10:10, Brian Ruley <brian.ruley@gehealthcare.com> wrote:
+> >
+> > Conform to the style guide used in the project by making the following
+> > changes:
+> > * Use single quotes for multiline strings (except docstrings)
+> > * Fix line width to 79 cols
+> > * Use f-string instead of formatting a regular string
+> >
+> > Signed-off-by: Brian Ruley <brian.ruley@gehealthcare.com>
+> > ---
+> >  tools/binman/etype/nxp_imx8mcst.py | 28 +++++++++++++++++++++-------
+> >  1 file changed, 21 insertions(+), 7 deletions(-)
+> 
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> 
+> Thanks for doing this.
+> 
+> Some of my comments on the other patch could be applied here, if you prefer.
+> 
+> >
+> > diff --git a/tools/binman/etype/nxp_imx8mcst.py b/tools/binman/etype/nxp_imx8mcst.py
+> > index 8221517b0c..0c744a00d7 100644
+> > --- a/tools/binman/etype/nxp_imx8mcst.py
+> > +++ b/tools/binman/etype/nxp_imx8mcst.py
+> > @@ -23,7 +23,7 @@ from u_boot_pylib import tools
+> >  MAGIC_NXP_IMX_IVT = 0x412000d1
+> >  MAGIC_FITIMAGE    = 0xedfe0dd0
+> >
+> > -csf_config_template = """
+> > +csf_config_template = '''
+> >  [Header]
+> >    Version = 4.3
+> >    Hash Algorithm = sha256
+> > @@ -53,7 +53,7 @@ csf_config_template = """
+> >  [Authenticate Data]
+> >    Verification index = 2
+> >    Blocks = 0x1234 0x78 0xabcd "data.bin"
+> > -"""
+> > +'''
+> >
+> >  class Entry_nxp_imx8mcst(Entry_mkimage):
+> >      """NXP i.MX8M CST .cfg file generator and cst invoker
+> > @@ -69,9 +69,21 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
+> >      def ReadNode(self):
+> >          super().ReadNode()
+> >          self.loader_address = fdt_util.GetInt(self._node, 'nxp,loader-address')
+> > -        self.srk_table = os.getenv('SRK_TABLE', fdt_util.GetString(self._node, 'nxp,srk-table', 'SRK_1_2_3_4_table.bin'))
+> > -        self.csf_crt = os.getenv('CSF_KEY', fdt_util.GetString(self._node, 'nxp,csf-crt', 'CSF1_1_sha256_4096_65537_v3_usr_crt.pem'))
+> > -        self.img_crt = os.getenv('IMG_KEY', fdt_util.GetString(self._node, 'nxp,img-crt', 'IMG1_1_sha256_4096_65537_v3_usr_crt.pem'))
+> > +        self.srk_table = os.getenv(
+> > +            'SRK_TABLE', fdt_util.GetString(
+> > +                            self._node, 'nxp,srk-table',
+> > +                            'SRK_1_2_3_4_table.bin'
+> > +                         ))
+> > +        self.csf_crt = os.getenv(
+> > +            'CSF_KEY', fdt_util.GetString(
+> > +                           self._node, 'nxp,csf-crt',
+> > +                           'CSF1_1_sha256_4096_65537_v3_usr_crt.pem'
+> > +                       ))
+> > +        self.img_crt = os.getenv(
+> > +            'IMG_KEY', fdt_util.GetString(
+> > +                           self._node, 'nxp,img-crt',
+> > +                           'IMG1_1_sha256_4096_65537_v3_usr_crt.pem'
+> > +                       ))
+> >          self.unlock = fdt_util.GetBool(self._node, 'nxp,unlock')
+> >          self.ReadEntries()
+> >
+> > @@ -118,7 +130,7 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
+> >          tools.write_file(output_dname, data)
+> >
+> >          # Generate CST configuration file used to sign payload
+> > -        cfg_fname = tools.get_output_filename('nxp.csf-config-txt.%s' % uniq)
+> > +        cfg_fname = tools.get_output_filename(f'nxp.csf-config-txt.{uniq}')
+> >          config = configparser.ConfigParser()
+> >          # Do not make key names lowercase
+> >          config.optionxform = str
+> > @@ -127,7 +139,9 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
+> >          config['Install SRK']['File'] = '"' + self.srk_table + '"'
+> >          config['Install CSFK']['File'] = '"' + self.csf_crt + '"'
+> >          config['Install Key']['File'] = '"' + self.img_crt + '"'
+> > -        config['Authenticate Data']['Blocks'] = hex(signbase) + ' 0 ' + hex(len(data)) + ' "' + str(output_dname) + '"'
+> > +        config['Authenticate Data']['Blocks'] = (hex(signbase) + ' 0 '
+> > +                                                 + hex(len(data)) + ' "'
+> > +                                                 + str(output_dname) + '"')
+> >          if not self.unlock:
+> >              config.remove_section('Unlock')
+> >          with open(cfg_fname, 'w') as cfgf:
+> > --
+> > 2.39.5
+> >
+> 
+> Regards,
+> Simon
 
-Applied, thanks!
+Hi Simon,
 
-[1/4] clk/qcom: implement clk dump
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/c0999fefc80f
-[2/4] clk/qcom: sdm845: add dump data
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/2880a076b4c1
-[3/4] clk/qcom: sm6115: add debug data
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/84b2b8dc2991
-[4/4] clk/qcom: sm8250: add debug data
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/866cda772046
+Sure thing, I'm glad to contribute. I'm quite new to upstreaming so this
+is a good learning experience for me, and I thank you for your patience.
 
-Best regards,
--- 
-Caleb Connolly <caleb.connolly@linaro.org>
+I didn't have time to respond yesterday, but I sent a new revision
+based on your comments.
 
+Only one I didn't quite get was
+
+> All three options seem to read the 'nxp,srk-crt' property, so you can
+> do that once the if() to reduce the amount of duplicated code.
+
+Each is reading a different property "img-crt", "csf-crt", and
+"srk-crt", with the latter read only if "fast-auth" is set.
+
+As for the testing part, after I got `binman test` working, I
+experimented with creating a test for the `nxp-imx8mcst` etype, using
+what you had done as a starting point. FYI, it doesn't depend on the
+`nxp-imx8mimage` because it's for invoking `mkimage` when building
+SPL, for example. So, what I did is just create a fake FIT image
+inside the nxp-imx8mcst node, and run the test. I can send the patch
+if you wish.
+
+The test, however, was unsuccessful because a PKI tree is needed to
+sign the assets. I thought maybe you would have a comment on that?
+
+Best,
+Brian
