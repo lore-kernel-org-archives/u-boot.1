@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97008CF319D
-	for <u-boot@archiver.kernel.org>; Wed,  2 Oct 2024 07:29:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE869CF319D
+	for <u-boot@archiver.kernel.org>; Wed,  2 Oct 2024 07:30:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D056E88F44;
-	Wed,  2 Oct 2024 09:29:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6132A88B08;
+	Wed,  2 Oct 2024 09:30:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="xR+9AX3m";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="yIF1rEuk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06A1C88B08; Wed,  2 Oct 2024 09:29:30 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 6FFEA88A4C; Wed,  2 Oct 2024 09:30:16 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B87D88ED9
- for <u-boot@lists.denx.de>; Wed,  2 Oct 2024 09:29:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6847E88B08
+ for <u-boot@lists.denx.de>; Wed,  2 Oct 2024 09:30:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-42cb60aff1eso58430945e9.0
- for <u-boot@lists.denx.de>; Wed, 02 Oct 2024 00:29:26 -0700 (PDT)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-42cba6cdf32so56925635e9.1
+ for <u-boot@lists.denx.de>; Wed, 02 Oct 2024 00:30:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1727854165; x=1728458965;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1727854214; x=1728459014;
  darn=lists.denx.de; 
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=X0OS+nOLlMH3sKaDvO//Qs7D6/2L9FK9AdcsI1+VPog=;
- b=xR+9AX3m+oxPpZHMhO5JSZri1hK2hXsQ70JfO5xw4d2SgTNUNxRNQYqgw5dPP9LEzh
- 79Vcb/qgL855VA2gBt0jDXsST4uDvAjMTs+l99i53YNxAMw107vXRfuxOgI+yKvXlpAQ
- h1ytU42lE3VtRnWJ7q0iNEpjxCWlGY5cI/88hbWqE3fNbJn5wpiwXqQulo4IdikfnbdQ
- X7WstcfSr3UEttDGjNRIscxhA7lTdc836IsKfYPezBL3BulOSECq2sl/i/9wP33zL/LY
- f62StQeEilL5ZvdswyK1GJf3McTMPahhIsw1z6Az7jOiDo3+2mJ36HviGQl9ukbWZLgd
- aiqg==
+ bh=eBM+DLAC/cT6O30EFsYXBt2coDHYQ/6B8OJKxvRY/vQ=;
+ b=yIF1rEuk06WMd8W7mAKa2ZfUisVIiwyDmLitBSTqchlUPgAiwLgSzol+1KA5SMzFhZ
+ eIgR92y7OC6Uz5IrGig+BAOdU16Uodt/mx2iK4h40akK04rqY2zkDmaKAb2jnGU+cqHH
+ jMQqi9EMn9v/5n8TOjEAlXNyOcZ2p/cu6uTgigemYmM95CIBJEeK0t6TNr0OeUt7GmvF
+ jzw7dSaTR+qclD3/nLBKC/Wcs/KcWnqS6CMAdGKETka+kjI6qWr1KIONv5E0Yg2lXkpK
+ tYlg2NSZPm9XaNvfw/4GAv+88CF1uZzXfAaBXgyyAeL+sR8TVi3L8Z3QtOiNZdxvvUmZ
+ tNRQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727854165; x=1728458965;
+ d=1e100.net; s=20230601; t=1727854214; x=1728459014;
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=X0OS+nOLlMH3sKaDvO//Qs7D6/2L9FK9AdcsI1+VPog=;
- b=jOnEjW10D1E05dqd2wS+SzYWVfaCTDaKADoTnR4ZBj2snAvp5UGa8LYAi3vKWbRGmj
- sXyezMYxNF3Vib+PbA5G0j17UCBD5+1REh9omFAs7GKG3dMEdsir5XuZUpZDA2mf4gCc
- bfkEnO76VVeIavBJDvQRMlXmsyFLg7PsdRtm4A5MJJRBafNJpKcqADYcgyXxss3fA7VX
- 2gXf0fbzm3DmxzAH8sbAlmPgpZnSrf6TRhM7eNPM0dO5VpGrcKtb1TanCP8vWIAUdSn0
- YUFWxq2rFkMs8Y0TOCs1xKDVGq3LLQ/I4NzBVmUIomTuPADSpzQWcAU4PNB6vBCcUrkl
- miOA==
-X-Gm-Message-State: AOJu0Yy0nGsevEkqLcUEeRMkD8qgk9XLoHK0pJY8Jma5J2Sg0rRTXe06
- l/Kug4hnScbLiddX5wC1jFoH2xL5xVDm4mwNNUqGF5k3/v4rQBNKKr6j2Yn7Ks0=
-X-Google-Smtp-Source: AGHT+IHJPQWRw1aXeKJeQ//RobD+F+2gbrhNCwAqj6fipSd/rOs3K6nBbHCGCSLhthxugr9L7XDxIA==
-X-Received: by 2002:a5d:4442:0:b0:37c:ccc1:17d2 with SMTP id
- ffacd0b85a97d-37cfb9d6758mr1164262f8f.34.1727854165403; 
- Wed, 02 Oct 2024 00:29:25 -0700 (PDT)
+ bh=eBM+DLAC/cT6O30EFsYXBt2coDHYQ/6B8OJKxvRY/vQ=;
+ b=IwbrWf0lwrOJz5whlJZvev8N7QAOgXs/nsN1fngD/qXSv+k0U3aPK7Uzv5a4+hNMFA
+ hxKvMv6GdEzNFXQ9oLgie0src/ZVdQ8QQIhxyx2nTM52HXcZHwsaAt9q0Em1Gz7vIOt0
+ NUEUSo/bVowh57gxQimgxK3RaTe2iZkjxUZMha+PY8R5Qr6oFmrT/m5QsMnnNwZIQ9Wz
+ ScMI9SNHzLLRFnF2eDO/zNVBa65eCAYorBP+0c5U67vKO09S7a0MK+6jLr+gjuSOYjLj
+ tGH4enynUiia8jlj8EsT7hV54W9sH3LhEHRpaYbJ5Q5XRw/9CMCgJpbNl4lkXNeGElGM
+ i5pQ==
+X-Gm-Message-State: AOJu0YwBuasPy/ELjT469x+lhUTefD9TgQdazr8oCm1sXkha71mHhkZ6
+ TI5pmkC3Hw1+4OQQkeTv6sZNJ2M4UbhuawccfIZXarUtmveQuBfaoGiykhIohEs=
+X-Google-Smtp-Source: AGHT+IGQb7Na52Ntoy4qfe9B93UarmubAUvFtrXBafp/HMfmGyesdsyoPVfVynhqMNYmxnpPnAAHqQ==
+X-Received: by 2002:a05:600c:3b02:b0:42c:b22e:fc3e with SMTP id
+ 5b1f17b1804b1-42f777c7c88mr15308345e9.15.1727854213626; 
+ Wed, 02 Oct 2024 00:30:13 -0700 (PDT)
 Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37cd56e6587sm13322517f8f.47.2024.10.02.00.29.24
+ 5b1f17b1804b1-42f79c67c5csm11032185e9.0.2024.10.02.00.30.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Oct 2024 00:29:24 -0700 (PDT)
+ Wed, 02 Oct 2024 00:30:12 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 To: Neil Armstrong <neil.armstrong@linaro.org>, Lukasz Majewski
  <lukma@denx.de>, Tom Rini <trini@konsulko.com>, Jagan Teki
  <jagan@amarulasolutions.com>, Vignesh R <vigneshr@ti.com>
 Cc: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2 1/2] spi: add DM_SPI_FLASH compatibility inline
- functions
-In-Reply-To: <20241001-uboot-topic-dfu-sf-dt-v2-1-67f7acfa3ff5@linaro.org>
+Subject: Re: [PATCH v2 2/2] dfu: sf: rely on DT for spi speed and mode
+In-Reply-To: <20241001-uboot-topic-dfu-sf-dt-v2-2-67f7acfa3ff5@linaro.org>
 References: <20241001-uboot-topic-dfu-sf-dt-v2-0-67f7acfa3ff5@linaro.org>
- <20241001-uboot-topic-dfu-sf-dt-v2-1-67f7acfa3ff5@linaro.org>
-Date: Wed, 02 Oct 2024 09:29:22 +0200
-Message-ID: <8734lfm08d.fsf@baylibre.com>
+ <20241001-uboot-topic-dfu-sf-dt-v2-2-67f7acfa3ff5@linaro.org>
+Date: Wed, 02 Oct 2024 09:30:11 +0200
+Message-ID: <87zfnnklmk.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -99,71 +98,72 @@ Thank you for the patch.
 
 On mar., oct. 01, 2024 at 18:06, Neil Armstrong <neil.armstrong@linaro.org> wrote:
 
-> To smoothly handle the transition from the legacy SPI FLASH
-> API to the the driver model API, add the DM functions
-> as dummy inline functions.
+> Align with cmd_sf, and try to rely on DT for spi speed and mode,
+> and still fallback on spi_flash_probe() if it fails.
 >
-> Today, client code uses #if/#else conditionals, but it's better
-> to use if(IS_ENABLED()) to make sure all code builds fine
-> and avoid configuration hell, leaving the compiler remove
-> the dead code.
+> With the current scheme, spi_flash_probe() will be called
+> with CONFIG_SF_DEFAULT_SPEED and CONFIG_SF_DEFAULT_MODE
+> with are set to 0 by default on DT platforms using DM_SPI_FLASH.
 >
-> An example is cmd/sf, which could make use of those dummy
-> functions to drop the conditional compilation.
+> Like cmd_sf, keep the option to specify the speed and mode
+> from the dfu_alt_mode string, but rely on DT properties
+> if not specified.
+>
+> Using CONFIG_SF_DEFAULT_SPEED and CONFIG_SF_DEFAULT_MODE
+> makes the SPIFC controller on Amlogic Meson G12B & SM1
+> hardware fail and is unable to recover until a system reboot.
 >
 > Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
 > ---
->  include/spi_flash.h | 34 ++++++++++++++++++++++++++++++++++
->  1 file changed, 34 insertions(+)
+>  drivers/dfu/dfu_sf.c | 16 +++++++++++++++-
+>  1 file changed, 15 insertions(+), 1 deletion(-)
 >
-> diff --git a/include/spi_flash.h b/include/spi_flash.h
-> index 10d19fd4b11..2e703e85250 100644
-> --- a/include/spi_flash.h
-> +++ b/include/spi_flash.h
-> @@ -139,6 +139,40 @@ int sandbox_sf_bind_emul(struct sandbox_state *state, int busnum, int cs,
->  void sandbox_sf_unbind_emul(struct sandbox_state *state, int busnum, int cs);
+> diff --git a/drivers/dfu/dfu_sf.c b/drivers/dfu/dfu_sf.c
+> index 7c1c0f9e2dc..8f7296adec6 100644
+> --- a/drivers/dfu/dfu_sf.c
+> +++ b/drivers/dfu/dfu_sf.c
+> @@ -123,6 +123,7 @@ static struct spi_flash *parse_dev(char *devstr)
+>  	unsigned int mode = CONFIG_SF_DEFAULT_MODE;
+>  	char *s, *endp;
+>  	struct spi_flash *dev;
+> +	bool use_dt = true;
 >  
->  #else
-> +/* Compatibility functions for when DM_SPI_FLASH is disabled */
-> +static inline int spi_flash_probe_bus_cs(unsigned int busnum, unsigned int cs,
-> +					 struct udevice **devp)
-> +{
-> +	return -ENODEV;
-> +}
-> +
-> +static inline int spi_flash_read_dm(struct udevice *dev, u32 offset, size_t len,
-> +				    void *buf)
-> +{
-> +	return -ENODEV;
-> +}
-> +
-> +static inline int spi_flash_write_dm(struct udevice *dev, u32 offset, size_t len,
-> +				     const void *buf)
-> +{
-> +	return -ENODEV;
-> +}
-> +
-> +static inline int spi_flash_erase_dm(struct udevice *dev, u32 offset, size_t len)
-> +{
-> +	return -ENODEV;
-> +}
-> +
-> +static inline int spl_flash_get_sw_write_prot(struct udevice *dev)
-> +{
-> +	return -ENODEV;
-> +}
-> +
-> +static inline int spi_flash_std_probe(struct udevice *dev)
-> +{
-> +	return -ENODEV;
-> +}
-> +
->  struct spi_flash *spi_flash_probe(unsigned int bus, unsigned int cs,
->  		unsigned int max_hz, unsigned int spi_mode);
+>  	s = strsep(&devstr, ":");
+>  	if (!s || !*s || (bus = simple_strtoul(s, &endp, 0), *endp)) {
+> @@ -143,6 +144,8 @@ static struct spi_flash *parse_dev(char *devstr)
+>  			printf("Invalid SPI speed %s\n", s);
+>  			return NULL;
+>  		}
+> +		if (IS_ENABLED(CONFIG_DM_SPI_FLASH))
+> +			use_dt = false;
+>  	}
 >  
+>  	s = strsep(&devstr, ":");
+> @@ -152,9 +155,20 @@ static struct spi_flash *parse_dev(char *devstr)
+>  			printf("Invalid SPI mode %s\n", s);
+>  			return NULL;
+>  		}
+> +		if (IS_ENABLED(CONFIG_DM_SPI_FLASH))
+> +			use_dt = false;
+>  	}
+>  
+> -	dev = spi_flash_probe(bus, cs, speed, mode);
+> +	if (IS_ENABLED(CONFIG_DM_SPI_FLASH) && use_dt) {
+> +		struct udevice *new;
+> +
+> +		if (!spi_flash_probe_bus_cs(bus, cs, &new))
+> +			dev = dev_get_uclass_priv(new);
+> +		else
+> +			dev = NULL;
+> +	} else {
+> +		dev = spi_flash_probe(bus, cs, speed, mode);
+> +	}
+>  	if (!dev) {
+>  		printf("Failed to create SPI flash at %u:%u:%u:%u\n",
+>  		       bus, cs, speed, mode);
 >
 > -- 
 > 2.34.1
