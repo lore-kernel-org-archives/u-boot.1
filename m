@@ -4,74 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C6EDCF319D
-	for <u-boot@archiver.kernel.org>; Wed,  2 Oct 2024 07:27:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97008CF319D
+	for <u-boot@archiver.kernel.org>; Wed,  2 Oct 2024 07:29:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3969688F2A;
-	Wed,  2 Oct 2024 09:27:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D056E88F44;
+	Wed,  2 Oct 2024 09:29:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="TdJixeTG";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="xR+9AX3m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4ADEE88F31; Wed,  2 Oct 2024 09:27:00 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 06A1C88B08; Wed,  2 Oct 2024 09:29:30 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E1E8588ED9
- for <u-boot@lists.denx.de>; Wed,  2 Oct 2024 09:26:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B87D88ED9
+ for <u-boot@lists.denx.de>; Wed,  2 Oct 2024 09:29:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-42cb6f3a5bcso77877685e9.2
- for <u-boot@lists.denx.de>; Wed, 02 Oct 2024 00:26:57 -0700 (PDT)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-42cb60aff1eso58430945e9.0
+ for <u-boot@lists.denx.de>; Wed, 02 Oct 2024 00:29:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1727854017; x=1728458817;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1727854165; x=1728458965;
  darn=lists.denx.de; 
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=1Acwtf6IMIgB95wN+5OaEs7gJfj01r4tI6ZcyGrp+Dg=;
- b=TdJixeTGHtp5kV6MQfX655bqwGdxi9JdlVple0s60H8O1PWidL96d0+tl0TyCSdk6a
- iGkhLd1LbtrjcO+NpJWKFqEcCDuSp3RmZ96y/CpIel9uyp7qPPB/fjq0IbCasam/N9Fx
- 4k90iKklb+QLTcSvxzPSCRKLOq4NE+AkWxKC147M4IztICkESQh007HjkRN6SxPSq39Z
- srWpwp9UfveANSafiFhxFIO+lLFVOHU8jMnpOCL+z985wGn+yWL4vvj0e6/W7MB9H027
- G0q7z0Lsk+MmxBKKv6W18KTTjE+CGhy/TtAHXyc8ZKHW3uTXMwYi+1jeiKi1c59nipnC
- d5GA==
+ bh=X0OS+nOLlMH3sKaDvO//Qs7D6/2L9FK9AdcsI1+VPog=;
+ b=xR+9AX3m+oxPpZHMhO5JSZri1hK2hXsQ70JfO5xw4d2SgTNUNxRNQYqgw5dPP9LEzh
+ 79Vcb/qgL855VA2gBt0jDXsST4uDvAjMTs+l99i53YNxAMw107vXRfuxOgI+yKvXlpAQ
+ h1ytU42lE3VtRnWJ7q0iNEpjxCWlGY5cI/88hbWqE3fNbJn5wpiwXqQulo4IdikfnbdQ
+ X7WstcfSr3UEttDGjNRIscxhA7lTdc836IsKfYPezBL3BulOSECq2sl/i/9wP33zL/LY
+ f62StQeEilL5ZvdswyK1GJf3McTMPahhIsw1z6Az7jOiDo3+2mJ36HviGQl9ukbWZLgd
+ aiqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727854017; x=1728458817;
+ d=1e100.net; s=20230601; t=1727854165; x=1728458965;
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=1Acwtf6IMIgB95wN+5OaEs7gJfj01r4tI6ZcyGrp+Dg=;
- b=kJnZzvace0zKXOQYaawZOLH66ELKC5M5COL45ct0G5VzQpsiWl3Fp8fmCD1Qra0nKt
- l/gp4dzeAisHYDuo/WnAwXWmcoTDg5neqPOPur56bdkQKmLl08gXzr14m69T1kyaFvb6
- oULra3fhtIShBxw6sZMm9zuWOTYBud+zfe6tAP/83hBB59FDTTq1d50qW/30yr8xlEEB
- giazoC545ilRktIr0ouXxnC038G0NsTj5/CTHx3F3e7orXb5ees2shNQ0UPYtX4XjwkY
- jQIP3oCyC7DdCikcZ9a50iX6kMjKT3L70pvGXlfwafw1jb3q4crw0eKq1mV+y8QU6Q1I
- OZPA==
-X-Gm-Message-State: AOJu0Yw3CkIwSpC/Hqk4mXe+r1MrkZp6QE8lDW1/EpbHzUYJZ6DjSdTN
- D9jTULK23q6Wc6CUS86DxvKtEaErKGdVhTlJyLQMoZeoaeXFj6lWjriYhK6U42M=
-X-Google-Smtp-Source: AGHT+IEHlMVK4mE7y1sxFHY3ljRoNUaVs8ixG2GHsE+3ioZeRfM9DVOAXtOcctAqLsz4fDikBK7fyw==
-X-Received: by 2002:a05:600c:1d88:b0:42c:a387:6a6f with SMTP id
- 5b1f17b1804b1-42f777c365fmr17026825e9.20.1727854017239; 
- Wed, 02 Oct 2024 00:26:57 -0700 (PDT)
+ bh=X0OS+nOLlMH3sKaDvO//Qs7D6/2L9FK9AdcsI1+VPog=;
+ b=jOnEjW10D1E05dqd2wS+SzYWVfaCTDaKADoTnR4ZBj2snAvp5UGa8LYAi3vKWbRGmj
+ sXyezMYxNF3Vib+PbA5G0j17UCBD5+1REh9omFAs7GKG3dMEdsir5XuZUpZDA2mf4gCc
+ bfkEnO76VVeIavBJDvQRMlXmsyFLg7PsdRtm4A5MJJRBafNJpKcqADYcgyXxss3fA7VX
+ 2gXf0fbzm3DmxzAH8sbAlmPgpZnSrf6TRhM7eNPM0dO5VpGrcKtb1TanCP8vWIAUdSn0
+ YUFWxq2rFkMs8Y0TOCs1xKDVGq3LLQ/I4NzBVmUIomTuPADSpzQWcAU4PNB6vBCcUrkl
+ miOA==
+X-Gm-Message-State: AOJu0Yy0nGsevEkqLcUEeRMkD8qgk9XLoHK0pJY8Jma5J2Sg0rRTXe06
+ l/Kug4hnScbLiddX5wC1jFoH2xL5xVDm4mwNNUqGF5k3/v4rQBNKKr6j2Yn7Ks0=
+X-Google-Smtp-Source: AGHT+IHJPQWRw1aXeKJeQ//RobD+F+2gbrhNCwAqj6fipSd/rOs3K6nBbHCGCSLhthxugr9L7XDxIA==
+X-Received: by 2002:a5d:4442:0:b0:37c:ccc1:17d2 with SMTP id
+ ffacd0b85a97d-37cfb9d6758mr1164262f8f.34.1727854165403; 
+ Wed, 02 Oct 2024 00:29:25 -0700 (PDT)
 Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37cd565e479sm13268789f8f.37.2024.10.02.00.26.54
+ ffacd0b85a97d-37cd56e6587sm13322517f8f.47.2024.10.02.00.29.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Oct 2024 00:26:55 -0700 (PDT)
+ Wed, 02 Oct 2024 00:29:24 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>, Jerome Forissier
- <jerome.forissier@linaro.org>
-Subject: Re: [GIT PULL] Please pull u-boot-dfu-20240930
-In-Reply-To: <20241001184426.GI4737@bill-the-cat>
-References: <87h69xmaaz.fsf@baylibre.com> <20241001184426.GI4737@bill-the-cat>
-Date: Wed, 02 Oct 2024 09:26:54 +0200
-Message-ID: <875xqbm0ch.fsf@baylibre.com>
+To: Neil Armstrong <neil.armstrong@linaro.org>, Lukasz Majewski
+ <lukma@denx.de>, Tom Rini <trini@konsulko.com>, Jagan Teki
+ <jagan@amarulasolutions.com>, Vignesh R <vigneshr@ti.com>
+Cc: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH v2 1/2] spi: add DM_SPI_FLASH compatibility inline
+ functions
+In-Reply-To: <20241001-uboot-topic-dfu-sf-dt-v2-1-67f7acfa3ff5@linaro.org>
+References: <20241001-uboot-topic-dfu-sf-dt-v2-0-67f7acfa3ff5@linaro.org>
+ <20241001-uboot-topic-dfu-sf-dt-v2-1-67f7acfa3ff5@linaro.org>
+Date: Wed, 02 Oct 2024 09:29:22 +0200
+Message-ID: <8734lfm08d.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -90,43 +93,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On mar., oct. 01, 2024 at 12:44, Tom Rini <trini@konsulko.com> wrote:
+Hi Neil,
 
-> On Mon, Sep 30, 2024 at 05:27:16PM +0200, Mattijs Korpershoek wrote:
+Thank you for the patch.
+
+On mar., oct. 01, 2024 at 18:06, Neil Armstrong <neil.armstrong@linaro.org> wrote:
+
+> To smoothly handle the transition from the legacy SPI FLASH
+> API to the the driver model API, add the DM functions
+> as dummy inline functions.
 >
->> Hi Tom,
->> 
->> Please find some fixes for master:
->> - Fix Kconfig dependencies for DFU_OVER_USB
->> 
->> CI job:
->> - https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/22468/
->> 
->> PS: I know it's a bit late, if you'd prefer to defer this to next
->> release, let me know.
->> 
->> Thanks,
->> Mattijs
->> 
->> The following changes since commit 5f044932413694475422d4b16607dfcf9aff8781:
->> 
->>   scripts/Makefile.lib: do not include CONFIG_DEVICE_TREE_INCLUDES in dtsi_include_list (2024-09-10 11:31:54 -0600)
->> 
->> are available in the Git repository at:
->> 
->>   https://source.denx.de/u-boot/custodians/u-boot-dfu.git tags/u-boot-dfu-20240930
->> 
->> for you to fetch changes up to 2f9c472dd7a91bc2d6e7840a550edcd257ff8b57:
->> 
->>   dfu: fix Kconfig dependencies (2024-09-13 17:41:18 +0200)
->> 
+> Today, client code uses #if/#else conditionals, but it's better
+> to use if(IS_ENABLED()) to make sure all code builds fine
+> and avoid configuration hell, leaving the compiler remove
+> the dead code.
 >
-> For the record, I applied this prior to v2024.10-rc6 but seemed to
-> forget the email, sorry.
+> An example is cmd/sf, which could make use of those dummy
+> functions to drop the conditional compilation.
+>
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 
-Ah, and I did not notice that. Sorry for the noise, i've marked the PR
-as "handled elsewhere on patchwork"
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
+> ---
+>  include/spi_flash.h | 34 ++++++++++++++++++++++++++++++++++
+>  1 file changed, 34 insertions(+)
+>
+> diff --git a/include/spi_flash.h b/include/spi_flash.h
+> index 10d19fd4b11..2e703e85250 100644
+> --- a/include/spi_flash.h
+> +++ b/include/spi_flash.h
+> @@ -139,6 +139,40 @@ int sandbox_sf_bind_emul(struct sandbox_state *state, int busnum, int cs,
+>  void sandbox_sf_unbind_emul(struct sandbox_state *state, int busnum, int cs);
+>  
+>  #else
+> +/* Compatibility functions for when DM_SPI_FLASH is disabled */
+> +static inline int spi_flash_probe_bus_cs(unsigned int busnum, unsigned int cs,
+> +					 struct udevice **devp)
+> +{
+> +	return -ENODEV;
+> +}
+> +
+> +static inline int spi_flash_read_dm(struct udevice *dev, u32 offset, size_t len,
+> +				    void *buf)
+> +{
+> +	return -ENODEV;
+> +}
+> +
+> +static inline int spi_flash_write_dm(struct udevice *dev, u32 offset, size_t len,
+> +				     const void *buf)
+> +{
+> +	return -ENODEV;
+> +}
+> +
+> +static inline int spi_flash_erase_dm(struct udevice *dev, u32 offset, size_t len)
+> +{
+> +	return -ENODEV;
+> +}
+> +
+> +static inline int spl_flash_get_sw_write_prot(struct udevice *dev)
+> +{
+> +	return -ENODEV;
+> +}
+> +
+> +static inline int spi_flash_std_probe(struct udevice *dev)
+> +{
+> +	return -ENODEV;
+> +}
+> +
+>  struct spi_flash *spi_flash_probe(unsigned int bus, unsigned int cs,
+>  		unsigned int max_hz, unsigned int spi_mode);
+>  
 >
 > -- 
-> Tom
+> 2.34.1
