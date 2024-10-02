@@ -4,76 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB5DECF31A9
-	for <u-boot@archiver.kernel.org>; Wed,  2 Oct 2024 09:54:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1E68CF31A9
+	for <u-boot@archiver.kernel.org>; Wed,  2 Oct 2024 09:54:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7070188F65;
-	Wed,  2 Oct 2024 11:52:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DB74E89050;
+	Wed,  2 Oct 2024 11:52:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="cY6In4HZ";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="GUSdeNG9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E69E488F1F; Wed,  2 Oct 2024 11:52:11 +0200 (CEST)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id 2883B88F75; Wed,  2 Oct 2024 11:52:16 +0200 (CEST)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB57488009
- for <u-boot@lists.denx.de>; Wed,  2 Oct 2024 11:52:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 98C2C89050
+ for <u-boot@lists.denx.de>; Wed,  2 Oct 2024 11:52:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=9elements.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-37cd5016d98so3343994f8f.1
- for <u-boot@lists.denx.de>; Wed, 02 Oct 2024 02:52:08 -0700 (PDT)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-37ccf0c0376so3797064f8f.3
+ for <u-boot@lists.denx.de>; Wed, 02 Oct 2024 02:52:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1727862728; x=1728467528; darn=lists.denx.de;
+ d=9elements.com; s=google; t=1727862733; x=1728467533; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uSw/+UvxareXuiM+EM6A7VjgIoG3h6S3ddH37ocs4Nw=;
- b=cY6In4HZ4s6ZKMf29jinPewlRfrkt3FA2GlLcwmiWH+6nvFWg2rH6DX0NpH08e1zUE
- 50hRew4Q7R9Fi+3yj9bl2hLCRzIGtRAA/6a10SiwFM6C4GfYHUdjIX61jJ2CEjU4J1E2
- eOm5OVrNRjOwuhnhbY8B7fhS8XidKeM3glcx+BSnaOVnGqQEr8igt0PxNExXrVQlcKfp
- IYWEDEpiFD4dz4YoZ0hW14PpKXfdiv/DDK9IWGqqzUiIHI21/WsNCWFU3GOhqZ9BR24M
- 7sCNhzXRDX5cz6cIfE/LcoVDT8MLryhqftOX082H6l1CU1cOHeSYdbdCNJ0Td4kDytUR
- +K+Q==
+ bh=m4u0RLupFUsXE/MddF5FQw7oQfS8irq1IQRRKo2AcsQ=;
+ b=GUSdeNG9DeabWiGz6TxsggwFkkZrZLdjmuNnEPca5zHEkdpOUfwyX0oHF80H/vYf6U
+ kiC4xH7M2MmTgSwHuKpn6K+I50Zb2Yz4AERWjqeTMyx1y39XxBytvuz77em3n+xvPBKn
+ ndEcmoKwDhdABr5tLACS8ZNRUuss7f57T76Amxm27Z1/s/etl4A+PdJwOrkKkNaxJbYh
+ VlwLN5y9/qTyTORQTviP448x6HQjalOwp6a1FUe92TtNNX+7tDkspIMdMIutqT5WJ7YE
+ oOYAkkIjp6I8WbsFbKPrRTcfiggeHe/BoRUzmdJuQIYsNalLODP++LFn771iijqS97o5
+ WzVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727862728; x=1728467528;
+ d=1e100.net; s=20230601; t=1727862733; x=1728467533;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=uSw/+UvxareXuiM+EM6A7VjgIoG3h6S3ddH37ocs4Nw=;
- b=AFVcrt4FIMub0q88eLB/prlUMkmJZltSCZYubY97y7zwB3/pJWTBbewKULFHhYZryI
- ADyQAD+Oe+RH/IMZv4i/70TxgLzQSv/nkDkAjDH9Wx036FB4DA/omZZ8Nr+SIS4Boluv
- Tp0QUR46K3dcWXcupklxwUVSAgWyG8C29Az/QoUwApRU0P8OJr5vq1KiAWfQGQ88HA/e
- qqKgrVe276W+kS5GSODDWUk8N4oGZ+FaTbv0qpgB6wwLQNPKiX8LYpQLkMtb3vqli/M5
- ehMs1JJLnpyWDESLE2rCvvI+/baKFAVgU0O9tU2xrRj82AL3Vk18SsdGu3KKBpnKCgHS
- Vuxw==
-X-Gm-Message-State: AOJu0YyUKzotP7aAjcpfn5B8P8y4EneiOYBT2l65cFy1Lqt901jbA6b7
- tMgHVqE3w2gDlVXsP9s7M8fBOK5fo0xftx0r+1gXCFL+8KcPvov5QirYpngZfUghocLWuzAcIxv
- q
-X-Google-Smtp-Source: AGHT+IGCR5hURcENhLEeztM4hIbKQ7FexNMcf5wsTN9vMe2uWDyoByBgCRY6S5UtgQOlNgI3uSCJhA==
-X-Received: by 2002:adf:a15d:0:b0:37c:ce58:5a1a with SMTP id
- ffacd0b85a97d-37cfba13729mr1497552f8f.54.1727862728278; 
- Wed, 02 Oct 2024 02:52:08 -0700 (PDT)
+ bh=m4u0RLupFUsXE/MddF5FQw7oQfS8irq1IQRRKo2AcsQ=;
+ b=R3qWD/6g9oUBmTTZJH8wrGfMcOWylqx1IiBcMUL/YZ4F/Ctuj4fD6WoA5T12OSHDM3
+ HHeQuv3g0S1U1LokUP2SgoEFDLUqqQSqeJB8PCo9j5o/BoSsVGYlHZ6cagIXNHAS4r0X
+ NyY/1fOGvxY12HNeS6K06FCBS3cF5y4eSOEAaHUWW42wE5u35ObS01Q3oXO+yQiD4P6B
+ 3qmXLaTOFWp9VQ9k5g5zcpMrtoswdJIYAbGGGlpIYt7LIZXrM3KaiS0aSy6/OzHZ6nTA
+ ZRhyRKhW/0djV74LWXUd6WcmYxDBVljlNdC7ZIDLUOD+5nk8VKsBP66KCy8jtmWfZzVI
+ Md6Q==
+X-Gm-Message-State: AOJu0YzZvRMJlQnLqQFjPpW/65ivgwxulzptpFO+rzKaMfU93aZ+EkYB
+ qT3btcBFpOe3pAIacR/4MbPOe5vsXJD8NdenVYVKBZAGNPVlJV7FUkQmrm+/qYfC1XeOMGWCSEk
+ +rKk=
+X-Google-Smtp-Source: AGHT+IEE42K1O9p4ZnRfNsdQA522x38uNPhnsDf3Dre7Ia7s1nuzXPdxdecYoXPWr6IGreP/EbOzYQ==
+X-Received: by 2002:a5d:60c2:0:b0:37c:d4e8:2c6a with SMTP id
+ ffacd0b85a97d-37cfba11d8dmr1232058f8f.51.1727862732994; 
+ Wed, 02 Oct 2024 02:52:12 -0700 (PDT)
 Received: from fedora.sec.9e.network
  (ip-078-094-000-050.um19.pools.vodafone-ip.de. [78.94.0.50])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37cd56e94c4sm13555292f8f.62.2024.10.02.02.52.07
+ ffacd0b85a97d-37cd56e94c4sm13555292f8f.62.2024.10.02.02.52.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Oct 2024 02:52:07 -0700 (PDT)
+ Wed, 02 Oct 2024 02:52:12 -0700 (PDT)
 From: Patrick Rudolph <patrick.rudolph@9elements.com>
-To: u-boot@lists.denx.de,
-	Bin Meng <bmeng.cn@gmail.com>
+To: u-boot@lists.denx.de, Stefan Roese <sr@denx.de>,
+ Tony Dinh <mibodhi@gmail.com>, Dennis Gilmore <dgilmore@redhat.com>,
+ Kostya Porotchkin <kostap@marvell.com>, Ben Schneider <ben@bens.haus>,
+ Luka Kovacic <luka.kovacic@sartura.hr>,
+ Luka Perkov <luka.perkov@sartura.hr>,
+ Aaron Williams <awilliams@marvell.com>,
+ =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
 Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
- Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v6 16/37] drivers: usb: Add generic XHCI
-Date: Wed,  2 Oct 2024 11:47:07 +0200
-Message-ID: <20241002094832.24933-17-patrick.rudolph@9elements.com>
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v6 17/37] drivers: ata: Rename ahci_mvebu
+Date: Wed,  2 Oct 2024 11:47:08 +0200
+Message-ID: <20241002094832.24933-18-patrick.rudolph@9elements.com>
 X-Mailer: git-send-email 2.46.2
 In-Reply-To: <20241002094832.24933-1-patrick.rudolph@9elements.com>
 References: <20241002094832.24933-1-patrick.rudolph@9elements.com>
@@ -95,143 +100,381 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for the generic XHCI driver that contains no SoC
-specific code. It can be used on platforms that simply work out
-of the box, like on emulated platforms.
+Rename 'ahci_mvebu' to 'ahci_generic' and select it by default.
+The AHCI driver contains no SoC specific code and only expects the
+base address to be passed, thus rename it to ahci_generic and add the
+DT compatible string "generic-ahci".
 
-TEST: Booted on QEMU sbsa machine using the generic xhci driver.
+Update existing defconfigs to use the new Kconfig name as well.
+
+TEST: Booted on QEMU sbsa using the generic-ahci node.
 
 Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-Reviewed-by: Marek Vasut <marex@denx.de>
+Reviewed-by: Stefan Roese <sr@denx.de>
 Cc: Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marex@denx.de>
+Cc: Stefan Roese <sr@denx.de>
 ---
-Changelog v3:
-- Drop weak board_xhci_enable()
-Changelog v4:
-- Use dev_dbg() instead of debug()
-Changelog v6:
-- Update header order
+ MAINTAINERS                                     |  2 +-
+ configs/clearfog_defconfig                      |  2 +-
+ configs/clearfog_gt_8k_defconfig                |  2 +-
+ configs/clearfog_sata_defconfig                 |  2 +-
+ configs/clearfog_spi_defconfig                  |  2 +-
+ configs/db-88f6820-gp_defconfig                 |  2 +-
+ configs/ds116_defconfig                         |  2 +-
+ configs/helios4_defconfig                       |  2 +-
+ configs/mvebu_crb_cn9130_defconfig              |  2 +-
+ configs/mvebu_db-88f3720_defconfig              |  2 +-
+ configs/mvebu_db_armada8k_defconfig             |  2 +-
+ configs/mvebu_db_cn9130_defconfig               |  2 +-
+ configs/mvebu_espressobin-88f3720_defconfig     |  2 +-
+ .../mvebu_espressobin_ultra-88f3720_defconfig   |  2 +-
+ configs/mvebu_mcbin-88f8040_defconfig           |  2 +-
+ configs/mvebu_puzzle-m801-88f8040_defconfig     |  2 +-
+ configs/n2350_defconfig                         |  2 +-
+ configs/octeon_nic23_defconfig                  |  2 +-
+ configs/turris_omnia_defconfig                  |  2 +-
+ drivers/ata/Kconfig                             | 12 +++++++-----
+ drivers/ata/Makefile                            |  2 +-
+ drivers/ata/{ahci_mvebu.c => ahci_generic.c}    | 17 +++++++++--------
+ 22 files changed, 36 insertions(+), 33 deletions(-)
+ rename drivers/ata/{ahci_mvebu.c => ahci_generic.c} (71%)
 
----
- drivers/usb/host/Kconfig        |  8 ++++
- drivers/usb/host/Makefile       |  1 +
- drivers/usb/host/xhci-generic.c | 75 +++++++++++++++++++++++++++++++++
- 3 files changed, 84 insertions(+)
- create mode 100644 drivers/usb/host/xhci-generic.c
-
-diff --git a/drivers/usb/host/Kconfig b/drivers/usb/host/Kconfig
-index 6e10b629a3..bb5893d56d 100644
---- a/drivers/usb/host/Kconfig
-+++ b/drivers/usb/host/Kconfig
-@@ -68,6 +68,14 @@ config USB_XHCI_MVEBU
- 	  SoCs, which includes Armada8K, Armada3700 and other Armada
- 	  family SoCs.
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 2050ae24df..d3a0469ca1 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -356,7 +356,7 @@ S:	Maintained
+ T:	git https://source.denx.de/u-boot/custodians/u-boot-marvell.git
+ F:	arch/arm/mach-kirkwood/
+ F:	arch/arm/mach-mvebu/
+-F:	drivers/ata/ahci_mvebu.c
++F:	drivers/ata/ahci_generic.c
+ F:	drivers/clk/mvebu/
+ F:	drivers/ddr/marvell/
+ F:	drivers/gpio/mvebu_gpio.c
+diff --git a/configs/clearfog_defconfig b/configs/clearfog_defconfig
+index 62dbf2aa48..9cb4753685 100644
+--- a/configs/clearfog_defconfig
++++ b/configs/clearfog_defconfig
+@@ -52,7 +52,7 @@ CONFIG_ARP_TIMEOUT=200
+ CONFIG_NET_RETRY_COUNT=50
+ CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_SPL_OF_TRANSLATE=y
+-CONFIG_AHCI_MVEBU=y
++CONFIG_AHCI_GENERIC=y
+ CONFIG_DM_PCA953X=y
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_MVTWSI=y
+diff --git a/configs/clearfog_gt_8k_defconfig b/configs/clearfog_gt_8k_defconfig
+index df7e04a75b..66eb5e2407 100644
+--- a/configs/clearfog_gt_8k_defconfig
++++ b/configs/clearfog_gt_8k_defconfig
+@@ -46,7 +46,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ARP_TIMEOUT=200
+ CONFIG_NET_RETRY_COUNT=50
+ CONFIG_NET_RANDOM_ETHADDR=y
+-CONFIG_AHCI_MVEBU=y
++CONFIG_AHCI_GENERIC=y
+ CONFIG_LBA48=y
+ CONFIG_SYS_64BIT_LBA=y
+ CONFIG_DM_I2C=y
+diff --git a/configs/clearfog_sata_defconfig b/configs/clearfog_sata_defconfig
+index 41382f995d..b1e1fc75dd 100644
+--- a/configs/clearfog_sata_defconfig
++++ b/configs/clearfog_sata_defconfig
+@@ -52,7 +52,7 @@ CONFIG_ARP_TIMEOUT=200
+ CONFIG_NET_RETRY_COUNT=50
+ CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_SPL_OF_TRANSLATE=y
+-CONFIG_AHCI_MVEBU=y
++CONFIG_AHCI_GENERIC=y
+ CONFIG_DM_PCA953X=y
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_MVTWSI=y
+diff --git a/configs/clearfog_spi_defconfig b/configs/clearfog_spi_defconfig
+index f345b12e6c..64f862d298 100644
+--- a/configs/clearfog_spi_defconfig
++++ b/configs/clearfog_spi_defconfig
+@@ -52,7 +52,7 @@ CONFIG_ARP_TIMEOUT=200
+ CONFIG_NET_RETRY_COUNT=50
+ CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_SPL_OF_TRANSLATE=y
+-CONFIG_AHCI_MVEBU=y
++CONFIG_AHCI_GENERIC=y
+ CONFIG_DM_PCA953X=y
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_MVTWSI=y
+diff --git a/configs/db-88f6820-gp_defconfig b/configs/db-88f6820-gp_defconfig
+index ee8cb8ae66..16417a4e12 100644
+--- a/configs/db-88f6820-gp_defconfig
++++ b/configs/db-88f6820-gp_defconfig
+@@ -58,7 +58,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ARP_TIMEOUT=200
+ CONFIG_NET_RETRY_COUNT=50
+ CONFIG_SPL_OF_TRANSLATE=y
+-CONFIG_AHCI_MVEBU=y
++CONFIG_AHCI_GENERIC=y
+ CONFIG_SYS_I2C_LEGACY=y
+ CONFIG_SPL_SYS_I2C_LEGACY=y
+ CONFIG_SYS_I2C_MVTWSI=y
+diff --git a/configs/ds116_defconfig b/configs/ds116_defconfig
+index 1173e3a0f6..d687be2d5b 100644
+--- a/configs/ds116_defconfig
++++ b/configs/ds116_defconfig
+@@ -65,7 +65,7 @@ CONFIG_NET_RETRY_COUNT=50
+ CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_NETCONSOLE=y
+ CONFIG_SPL_OF_TRANSLATE=y
+-CONFIG_AHCI_MVEBU=y
++CONFIG_AHCI_GENERIC=y
+ CONFIG_LBA48=y
+ CONFIG_SYS_64BIT_LBA=y
+ CONFIG_DM_I2C=y
+diff --git a/configs/helios4_defconfig b/configs/helios4_defconfig
+index 29b6230e90..c0ae1de264 100644
+--- a/configs/helios4_defconfig
++++ b/configs/helios4_defconfig
+@@ -52,7 +52,7 @@ CONFIG_ARP_TIMEOUT=200
+ CONFIG_NET_RETRY_COUNT=50
+ CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_SPL_OF_TRANSLATE=y
+-CONFIG_AHCI_MVEBU=y
++CONFIG_AHCI_GENERIC=y
+ CONFIG_DM_PCA953X=y
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_MVTWSI=y
+diff --git a/configs/mvebu_crb_cn9130_defconfig b/configs/mvebu_crb_cn9130_defconfig
+index 4d5f575b03..d253fe88d6 100644
+--- a/configs/mvebu_crb_cn9130_defconfig
++++ b/configs/mvebu_crb_cn9130_defconfig
+@@ -46,7 +46,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_SYS_MMC_ENV_DEV=1
+ CONFIG_ARP_TIMEOUT=200
+ CONFIG_NET_RETRY_COUNT=50
+-CONFIG_AHCI_MVEBU=y
++CONFIG_AHCI_GENERIC=y
+ CONFIG_LBA48=y
+ CONFIG_SYS_64BIT_LBA=y
+ CONFIG_DM_I2C=y
+diff --git a/configs/mvebu_db-88f3720_defconfig b/configs/mvebu_db-88f3720_defconfig
+index b955abb31e..1e9332c845 100644
+--- a/configs/mvebu_db-88f3720_defconfig
++++ b/configs/mvebu_db-88f3720_defconfig
+@@ -43,7 +43,7 @@ CONFIG_ENV_IS_IN_SPI_FLASH=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ARP_TIMEOUT=200
+ CONFIG_NET_RETRY_COUNT=50
+-CONFIG_AHCI_MVEBU=y
++CONFIG_AHCI_GENERIC=y
+ CONFIG_LBA48=y
+ CONFIG_SYS_64BIT_LBA=y
+ CONFIG_CLK=y
+diff --git a/configs/mvebu_db_armada8k_defconfig b/configs/mvebu_db_armada8k_defconfig
+index 6913796c01..a9b76a3843 100644
+--- a/configs/mvebu_db_armada8k_defconfig
++++ b/configs/mvebu_db_armada8k_defconfig
+@@ -42,7 +42,7 @@ CONFIG_ENV_IS_IN_SPI_FLASH=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ARP_TIMEOUT=200
+ CONFIG_NET_RETRY_COUNT=50
+-CONFIG_AHCI_MVEBU=y
++CONFIG_AHCI_GENERIC=y
+ CONFIG_LBA48=y
+ CONFIG_SYS_64BIT_LBA=y
+ CONFIG_DM_I2C=y
+diff --git a/configs/mvebu_db_cn9130_defconfig b/configs/mvebu_db_cn9130_defconfig
+index 9133e25b24..2c345f7436 100644
+--- a/configs/mvebu_db_cn9130_defconfig
++++ b/configs/mvebu_db_cn9130_defconfig
+@@ -47,7 +47,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_SYS_MMC_ENV_DEV=1
+ CONFIG_ARP_TIMEOUT=200
+ CONFIG_NET_RETRY_COUNT=50
+-CONFIG_AHCI_MVEBU=y
++CONFIG_AHCI_GENERIC=y
+ CONFIG_LBA48=y
+ CONFIG_SYS_64BIT_LBA=y
+ CONFIG_DM_GPIO_LOOKUP_LABEL=y
+diff --git a/configs/mvebu_espressobin-88f3720_defconfig b/configs/mvebu_espressobin-88f3720_defconfig
+index 7ecf5ab0d6..c7015c9b13 100644
+--- a/configs/mvebu_espressobin-88f3720_defconfig
++++ b/configs/mvebu_espressobin-88f3720_defconfig
+@@ -54,7 +54,7 @@ CONFIG_ARP_TIMEOUT=200
+ CONFIG_NET_RETRY_COUNT=50
+ CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_AHCI_PCI=y
+-CONFIG_AHCI_MVEBU=y
++CONFIG_AHCI_GENERIC=y
+ CONFIG_LBA48=y
+ CONFIG_SYS_64BIT_LBA=y
+ CONFIG_CLK=y
+diff --git a/configs/mvebu_espressobin_ultra-88f3720_defconfig b/configs/mvebu_espressobin_ultra-88f3720_defconfig
+index 974b6df165..0a4329d786 100644
+--- a/configs/mvebu_espressobin_ultra-88f3720_defconfig
++++ b/configs/mvebu_espressobin_ultra-88f3720_defconfig
+@@ -53,7 +53,7 @@ CONFIG_ARP_TIMEOUT=200
+ CONFIG_NET_RETRY_COUNT=50
+ CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_AHCI_PCI=y
+-CONFIG_AHCI_MVEBU=y
++CONFIG_AHCI_GENERIC=y
+ CONFIG_LBA48=y
+ CONFIG_SYS_64BIT_LBA=y
+ CONFIG_CLK=y
+diff --git a/configs/mvebu_mcbin-88f8040_defconfig b/configs/mvebu_mcbin-88f8040_defconfig
+index eef612a261..8bb26bd3d6 100644
+--- a/configs/mvebu_mcbin-88f8040_defconfig
++++ b/configs/mvebu_mcbin-88f8040_defconfig
+@@ -46,7 +46,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ARP_TIMEOUT=200
+ CONFIG_NET_RETRY_COUNT=50
+ CONFIG_NET_RANDOM_ETHADDR=y
+-CONFIG_AHCI_MVEBU=y
++CONFIG_AHCI_GENERIC=y
+ CONFIG_LBA48=y
+ CONFIG_SYS_64BIT_LBA=y
+ CONFIG_DM_I2C=y
+diff --git a/configs/mvebu_puzzle-m801-88f8040_defconfig b/configs/mvebu_puzzle-m801-88f8040_defconfig
+index b00e92908b..db7881c3fc 100644
+--- a/configs/mvebu_puzzle-m801-88f8040_defconfig
++++ b/configs/mvebu_puzzle-m801-88f8040_defconfig
+@@ -49,7 +49,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ARP_TIMEOUT=200
+ CONFIG_NET_RETRY_COUNT=50
+ CONFIG_NET_RANDOM_ETHADDR=y
+-CONFIG_AHCI_MVEBU=y
++CONFIG_AHCI_GENERIC=y
+ CONFIG_LBA48=y
+ CONFIG_SYS_64BIT_LBA=y
+ CONFIG_DM_PCA953X=y
+diff --git a/configs/n2350_defconfig b/configs/n2350_defconfig
+index e7d7deabfe..b6fc333906 100644
+--- a/configs/n2350_defconfig
++++ b/configs/n2350_defconfig
+@@ -65,7 +65,7 @@ CONFIG_NET_RETRY_COUNT=50
+ CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_NETCONSOLE=y
+ CONFIG_SPL_OF_TRANSLATE=y
+-CONFIG_AHCI_MVEBU=y
++CONFIG_AHCI_GENERIC=y
+ CONFIG_LBA48=y
+ CONFIG_SYS_64BIT_LBA=y
+ CONFIG_DM_I2C=y
+diff --git a/configs/octeon_nic23_defconfig b/configs/octeon_nic23_defconfig
+index 5a8db5a087..d19d459555 100644
+--- a/configs/octeon_nic23_defconfig
++++ b/configs/octeon_nic23_defconfig
+@@ -46,7 +46,7 @@ CONFIG_EFI_PARTITION=y
+ CONFIG_ENV_IS_IN_SPI_FLASH=y
+ CONFIG_TFTP_TSIZE=y
+ CONFIG_SATA=y
+-CONFIG_AHCI_MVEBU=y
++CONFIG_AHCI_GENERIC=y
+ CONFIG_LBA48=y
+ CONFIG_SYS_64BIT_LBA=y
+ CONFIG_CLK=y
+diff --git a/configs/turris_omnia_defconfig b/configs/turris_omnia_defconfig
+index 93f0bc53f9..85c71f2eef 100644
+--- a/configs/turris_omnia_defconfig
++++ b/configs/turris_omnia_defconfig
+@@ -90,7 +90,7 @@ CONFIG_NET_RETRY_COUNT=50
+ CONFIG_NETCONSOLE=y
+ CONFIG_SPL_OF_TRANSLATE=y
+ CONFIG_AHCI_PCI=y
+-CONFIG_AHCI_MVEBU=y
++CONFIG_AHCI_GENERIC=y
+ CONFIG_DM_PCA953X=y
+ CONFIG_MMC_SDHCI=y
+ CONFIG_MMC_SDHCI_MV=y
+diff --git a/drivers/ata/Kconfig b/drivers/ata/Kconfig
+index 6cca561f97..4fbb63a148 100644
+--- a/drivers/ata/Kconfig
++++ b/drivers/ata/Kconfig
+@@ -78,14 +78,16 @@ config MTK_AHCI
+ 	  Enable this driver to support Sata devices through
+ 	  Mediatek AHCI controller (e.g. MT7622).
  
-+config USB_XHCI_GENERIC
-+	bool "Generic SoC USB 3.0 support"
+-config AHCI_MVEBU
+-	bool "Marvell EBU AHCI SATA support"
+-	depends on ARCH_MVEBU || ARCH_OCTEON
++config AHCI_GENERIC
++	bool "Generic AHCI SATA support"
 +	depends on OF_CONTROL
-+	default n
-+	help
-+	  Choose this option to add support for USB 3.0 driver for SoCs
-+	  that do not need platform specific code, like on emulated targets.
-+
- config USB_XHCI_OCTEON
- 	bool "Support for Marvell Octeon family on-chip xHCI USB controller"
- 	depends on ARCH_OCTEON
-diff --git a/drivers/usb/host/Makefile b/drivers/usb/host/Makefile
-index 8dad36f936..9e880195ec 100644
---- a/drivers/usb/host/Makefile
-+++ b/drivers/usb/host/Makefile
-@@ -50,6 +50,7 @@ obj-$(CONFIG_USB_XHCI_EXYNOS) += xhci-exynos5.o
- obj-$(CONFIG_USB_XHCI_FSL) += xhci-fsl.o
- obj-$(CONFIG_USB_XHCI_MTK) += xhci-mtk.o
- obj-$(CONFIG_USB_XHCI_MVEBU) += xhci-mvebu.o
-+obj-$(CONFIG_USB_XHCI_GENERIC) += xhci-generic.o
- obj-$(CONFIG_USB_XHCI_OMAP) += xhci-omap.o
- obj-$(CONFIG_USB_XHCI_PCI) += xhci-pci.o
- obj-$(CONFIG_USB_XHCI_RCAR) += xhci-rcar.o
-diff --git a/drivers/usb/host/xhci-generic.c b/drivers/usb/host/xhci-generic.c
-new file mode 100644
-index 0000000000..355d488317
---- /dev/null
-+++ b/drivers/usb/host/xhci-generic.c
-@@ -0,0 +1,75 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2024 9elements GmbH
-+ *
-+ * GENERIC USB HOST xHCI Controller
-+ */
-+#include <dm.h>
-+#include <fdtdec.h>
-+#include <log.h>
-+#include <usb.h>
-+#include <asm/io.h>
-+#include <dm/device_compat.h>
-+#include <usb/xhci.h>
-+
-+struct generic_xhci_plat {
-+	fdt_addr_t hcd_base;
-+};
-+
-+/**
-+ * Contains pointers to register base addresses
-+ * for the usb controller.
-+ */
-+struct generic_xhci {
-+	struct xhci_ctrl ctrl;	/* Needs to come first in this struct! */
-+	struct usb_plat usb_plat;
-+	struct xhci_hccr *hcd;
-+};
-+
-+static int xhci_usb_probe(struct udevice *dev)
-+{
-+	struct generic_xhci_plat *plat = dev_get_plat(dev);
-+	struct generic_xhci *ctx = dev_get_priv(dev);
-+	struct xhci_hcor *hcor;
-+	int len;
-+
-+	ctx->hcd = (struct xhci_hccr *)phys_to_virt(plat->hcd_base);
-+	len = HC_LENGTH(xhci_readl(&ctx->hcd->cr_capbase));
-+	hcor = (struct xhci_hcor *)((uintptr_t)ctx->hcd + len);
-+
-+	return xhci_register(dev, ctx->hcd, hcor);
-+}
-+
-+static int xhci_usb_of_to_plat(struct udevice *dev)
-+{
-+	struct generic_xhci_plat *plat = dev_get_plat(dev);
-+
-+	/*
-+	 * Get the base address for XHCI controller from the device node
-+	 */
-+	plat->hcd_base = dev_read_addr(dev);
-+	if (plat->hcd_base == FDT_ADDR_T_NONE) {
-+		dev_dbg(dev, "Can't get the XHCI register base address\n");
-+		return -ENXIO;
-+	}
-+
-+	return 0;
-+}
-+
-+static const struct udevice_id xhci_usb_ids[] = {
-+	{ .compatible = "generic-xhci" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(usb_xhci) = {
-+	.name	= "xhci_generic",
-+	.id	= UCLASS_USB,
-+	.of_match = xhci_usb_ids,
-+	.of_to_plat = xhci_usb_of_to_plat,
-+	.probe = xhci_usb_probe,
-+	.remove = xhci_deregister,
-+	.ops	= &xhci_usb_ops,
-+	.plat_auto	= sizeof(struct generic_xhci_plat),
-+	.priv_auto	= sizeof(struct generic_xhci),
-+	.flags	= DM_FLAG_ALLOC_PRIV_DMA,
-+};
+ 	select SCSI_AHCI
+ 	select SCSI
+ 	help
+-	  This option enables support for the Marvell EBU SoC's
+-	  onboard AHCI SATA.
++	  This option enables support for generic onboard AHCI SATA controller
++	  that do not need platform specific quirks, like emulated devices,
++	  Marvell EBU SoC's onboard AHCI SATA controllers or Cavium's Octeon
++	  7130 AHCI controllers.
+ 
+ 	  If unsure, say N.
+ 
+diff --git a/drivers/ata/Makefile b/drivers/ata/Makefile
+index af6f0bf278..507bf84c14 100644
+--- a/drivers/ata/Makefile
++++ b/drivers/ata/Makefile
+@@ -14,6 +14,6 @@ obj-$(CONFIG_SATA) += sata.o sata_bootdev.o
+ obj-$(CONFIG_SATA_CEVA) += sata_ceva.o
+ obj-$(CONFIG_SATA_MV) += sata_mv.o
+ obj-$(CONFIG_SATA_SIL) += sata_sil.o
+-obj-$(CONFIG_AHCI_MVEBU) += ahci_mvebu.o
++obj-$(CONFIG_AHCI_GENERIC) += ahci_generic.o
+ obj-$(CONFIG_SUNXI_AHCI) += ahci_sunxi.o
+ obj-$(CONFIG_MTK_AHCI) += mtk_ahci.o
+diff --git a/drivers/ata/ahci_mvebu.c b/drivers/ata/ahci_generic.c
+similarity index 71%
+rename from drivers/ata/ahci_mvebu.c
+rename to drivers/ata/ahci_generic.c
+index f6e2d6bee4..6e5a6cbafd 100644
+--- a/drivers/ata/ahci_mvebu.c
++++ b/drivers/ata/ahci_generic.c
+@@ -16,7 +16,7 @@ __weak int board_ahci_enable(void)
+ 	return 0;
+ }
+ 
+-static int mvebu_ahci_bind(struct udevice *dev)
++static int generic_ahci_bind(struct udevice *dev)
+ {
+ 	struct udevice *scsi_dev;
+ 	int ret;
+@@ -30,7 +30,7 @@ static int mvebu_ahci_bind(struct udevice *dev)
+ 	return 0;
+ }
+ 
+-static int mvebu_ahci_probe(struct udevice *dev)
++static int generic_ahci_probe(struct udevice *dev)
+ {
+ 	/*
+ 	 * Board specific SATA / AHCI enable code, e.g. enable the
+@@ -43,18 +43,19 @@ static int mvebu_ahci_probe(struct udevice *dev)
+ 	return 0;
+ }
+ 
+-static const struct udevice_id mvebu_ahci_ids[] = {
++static const struct udevice_id generic_ahci_ids[] = {
+ 	{ .compatible = "marvell,armada-380-ahci" },
+ 	{ .compatible = "marvell,armada-3700-ahci" },
+ 	{ .compatible = "marvell,armada-8k-ahci" },
+ 	{ .compatible = "cavium,octeon-7130-ahci" },
++	{ .compatible = "generic-ahci" },
+ 	{ }
+ };
+ 
+-U_BOOT_DRIVER(ahci_mvebu_drv) = {
+-	.name		= "ahci_mvebu",
++U_BOOT_DRIVER(ahci_generic_drv) = {
++	.name		= "ahci_generic",
+ 	.id		= UCLASS_AHCI,
+-	.of_match	= mvebu_ahci_ids,
+-	.bind		= mvebu_ahci_bind,
+-	.probe		= mvebu_ahci_probe,
++	.of_match	= generic_ahci_ids,
++	.bind		= generic_ahci_bind,
++	.probe		= generic_ahci_probe,
+ };
 -- 
 2.46.2
 
