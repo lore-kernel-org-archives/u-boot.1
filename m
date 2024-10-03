@@ -4,55 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFFC6CF856D
-	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 08:43:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36C3BCF856F
+	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 09:00:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF0C688975;
-	Thu,  3 Oct 2024 10:43:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id B1F2C88DE9;
+	Thu,  3 Oct 2024 11:00:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="cd/HZyD1";
+	dkim=pass (1024-bit key; unprotected) header.d=collabora.com header.i=martyn.welch@collabora.com header.b="GAY2rkBz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 041CB88C4D; Thu,  3 Oct 2024 10:43:02 +0200 (CEST)
-Received: from relay8-d.mail.gandi.net (relay8-d.mail.gandi.net
- [IPv6:2001:4b98:dc4:8::228])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 8FDC788C24; Thu,  3 Oct 2024 11:00:44 +0200 (CEST)
+Received: from sender4-pp-f112.zoho.com (sender4-pp-f112.zoho.com
+ [136.143.188.112])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CB0188896
- for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 10:42:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C53C48913A
+ for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 11:00:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=none dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bastien.curutchet@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPA id DAFCA1BF209;
- Thu,  3 Oct 2024 08:42:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1727944978;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=FH5eaqytOJ4Xiy6u+mLvuC+gFjeXDh61YlJUUy0ZW20=;
- b=cd/HZyD1MXMys2vh/thZxbQ307Zbz+NT6h1qjor6Fes3+BXQ9NycFfzUYuOf1WRqbMvfmh
- hh+RDzwTg5mlPdvhaJjU5b1mAnFJpLvKyFvS7H1cwye3Jeftu2Nx4MPUPe/u4j4p1wov8C
- 7o6ROj5f3qzQL5KmO9rMMuebjcqrH+Tybb+KObJGouHc94mh6FUveTonz5bwnd6cPETD8U
- QziLyJiTP0aWVhWHRCRpyErpGLCiS+7aAw4mr/61r9vsu70wCeaS5N7IN0xwJ3U8Ldeiic
- ATWUIeFdeT+s2QsSDjsLQcc61apgKmU+E/QvE4mM8V/Dv0J3zNa5Wo4VK3f6OQ==
-From: Bastien Curutchet <bastien.curutchet@bootlin.com>
-To: Tom Rini <trini@konsulko.com>,
-	Stefan Roese <sr@denx.de>
-Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Herve Codina <herve.codina@bootlin.com>,
- Christopher Cordahi <christophercordahi@nanometrics.ca>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>
-Subject: [PATCH] drivers: watchdog: Add DaVinci's watchdog support
-Date: Thu,  3 Oct 2024 10:42:55 +0200
-Message-ID: <20241003084255.33478-1-bastien.curutchet@bootlin.com>
-X-Mailer: git-send-email 2.46.0
+ spf=pass smtp.mailfrom=martyn.welch@collabora.com
+ARC-Seal: i=1; a=rsa-sha256; t=1727946038; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=d348+46b/zBWaAlF2J97m5Ydgdo5lrO8tMSJtr+55T7leugrkxVKCwcNE/fOLZDzlFLGcSZs1wzRIN15Djk4paHHQxohlQqWwvr1GBxabGQPsejKrbnnfv1/+1KH/FsXfzO9fzzHAgcUPSldB0xHdQpk+rnyL8HN8HtNSVObCK8=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1727946038;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=RGrTrwomjTiA4Y2yZjWUt2iiFXVrxY3USqiWNZZJJLs=; 
+ b=P2vQxBTze/xFu3fjsK+QANI7CrgjfBlelcg5uXiNEdShsvQ7rXnN0gysGontMbgryrBaQWms9oyqOvcpNj8LHcEuipvUdlsE+hvR+lvVjFldwtUn5L+iGLdr6biAAvABMFQ/Cc/Jt+6qej/Sn/sWbmuPEjydQ4CXBL5PM4vQijg=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=collabora.com;
+ spf=pass  smtp.mailfrom=martyn.welch@collabora.com;
+ dmarc=pass header.from=<martyn.welch@collabora.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1727946038; 
+ s=zohomail; d=collabora.com; i=martyn.welch@collabora.com;
+ h=Message-ID:Subject:Subject:From:From:To:To:Cc:Cc:Date:Date:In-Reply-To:References:Content-Type:Content-Transfer-Encoding:MIME-Version:Message-Id:Reply-To;
+ bh=RGrTrwomjTiA4Y2yZjWUt2iiFXVrxY3USqiWNZZJJLs=;
+ b=GAY2rkBzf49kI2MqVzssT/ozGP/4tYwCehqvTwUX2r+iAN4LxfssLLwJ92Knk0ga
+ fDpX0Ga3Qw50TISZKSlhnkp1m4kBiecFciFHDpixwBnm0Ns+a/yxxDBcw85mTETQK1i
+ NU3gVZUfX9KP1n4zc/GST8WSZfxw66VHEgGHvkVQ=
+Received: by mx.zohomail.com with SMTPS id 1727946036414323.6711960714299;
+ Thu, 3 Oct 2024 02:00:36 -0700 (PDT)
+Message-ID: <1024259d3b2e3ed5d6828c12bac32630e2361c04.camel@collabora.com>
+Subject: Re: [PATCH 1/4] boot: pxe_utils: Add fallback support
+From: Martyn Welch <martyn.welch@collabora.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Date: Thu, 03 Oct 2024 10:00:33 +0100
+In-Reply-To: <20241002191638.GQ4737@bill-the-cat>
+References: <20241002132633.246942-1-martyn.welch@collabora.com>
+ <20241002191638.GQ4737@bill-the-cat>
+Organization: Collabora Ltd.
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.54.0-1+b1 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-GND-Sasl: bastien.curutchet@bootlin.com
+X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,183 +78,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for the DaVinci's watchdog timer
+On Wed, 2024-10-02 at 13:16 -0600, Tom Rini wrote:
+> On Wed, Oct 02, 2024 at 02:26:30PM +0100, Martyn Welch wrote:
+> > When configured correctly, we can detect when boot fails after the
+> > boot
+> > process has been handed over to the kernel through the use of U-
+> > Boot's
+> > bootcount support. In some instances, such as when we are
+> > performing
+> > atomic updates via a system such as OSTree, it is desirable to
+> > provide a
+> > fallback option so that we can return to a previous (hopefully
+> > working)
+> > state.
+> >=20
+> > Add a "fallback" option to the supported extlinux configuration
+> > options
+> > that points to a label like "default" so that we can utilise this
+> > in
+> > later commits.
+> >=20
+> > Signed-off-by: Martyn Welch <martyn.welch@collabora.com>
+>=20
+> Is "fallback" part of the nominal extlinux specification?
+>=20
 
-Signed-off-by: Bastien Curutchet <bastien.curutchet@bootlin.com>
----
- drivers/watchdog/Kconfig       |   7 ++
- drivers/watchdog/Makefile      |   1 +
- drivers/watchdog/davinci_wdt.c | 131 +++++++++++++++++++++++++++++++++
- 3 files changed, 139 insertions(+)
- create mode 100644 drivers/watchdog/davinci_wdt.c
+When looking at options to implement this functionality, I did spend
+some time looking for an extlinux specification. The best I could find
+was:
 
-diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
-index 0c3e991331..a1c50b3f1f 100644
---- a/drivers/watchdog/Kconfig
-+++ b/drivers/watchdog/Kconfig
-@@ -169,6 +169,13 @@ config WDT_CORTINA
- 	  This driver support all CPU ISAs supported by Cortina
- 	  Access CAxxxx SoCs.
- 
-+config WDT_DAVINCI
-+	bool "DaVinci watchdog timer support"
-+	depends on WDT
-+	help
-+	  Select this to enable the watchdog timer for DaVinci SoCs such as the
-+	  OMAP-L138.
-+
- config WDT_GPIO
- 	bool "External gpio watchdog support"
- 	depends on WDT
-diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
-index 7b39adcf0f..ad3053998a 100644
---- a/drivers/watchdog/Makefile
-+++ b/drivers/watchdog/Makefile
-@@ -29,6 +29,7 @@ obj-$(CONFIG_WDT_BOOKE) += booke_wdt.o
- obj-$(CONFIG_WDT_CORTINA) += cortina_wdt.o
- obj-$(CONFIG_WDT_ORION) += orion_wdt.o
- obj-$(CONFIG_WDT_CDNS) += cdns_wdt.o
-+obj-$(CONFIG_WDT_DAVINCI) += davinci_wdt.o
- obj-$(CONFIG_WDT_FTWDT010) += ftwdt010_wdt.o
- obj-$(CONFIG_WDT_GPIO) += gpio_wdt.o
- obj-$(CONFIG_WDT_MAX6370) += max6370_wdt.o
-diff --git a/drivers/watchdog/davinci_wdt.c b/drivers/watchdog/davinci_wdt.c
-new file mode 100644
-index 0000000000..fa8d7842e9
---- /dev/null
-+++ b/drivers/watchdog/davinci_wdt.c
-@@ -0,0 +1,131 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * DaVinci Watchdog driver
-+ *
-+ */
-+
-+#include <asm/io.h>
-+#include <clk.h>
-+#include <dm.h>
-+#include <wdt.h>
-+
-+/* Control Register */
-+#define DAVINCI_WDT_ID			0x00
-+#define DAVINCI_WDT_TIM12		0x10
-+#define DAVINCI_WDT_TIM34		0x14
-+#define DAVINCI_WDT_PRD12		0x18
-+#define DAVINCI_WDT_PRD34		0x1C
-+#define DAVINCI_WDT_TCR			0x20
-+#define DAVINCI_WDT_TGCR		0x24
-+#define DAVINCI_WDT_WDTCR		0x28
-+
-+#define DAVINCI_TCR_CONT_EN		BIT(7)
-+
-+#define DAVINCI_TGCR_PLUSEN		BIT(4)
-+#define DAVINCI_TGCR_WDT_MODE		BIT(3)
-+#define DAVINCI_TGCR_TIM34RS		BIT(1)
-+#define DAVINCI_TGCR_TIM12RS		BIT(0)
-+
-+#define DAVINCI_WDTCR_INVALID_KEY	(0x5555 << 16)
-+#define DAVINCI_WDTCR_WDKEY0		(0xA5C6 << 16)
-+#define DAVINCI_WDTCR_WDKEY1		(0xDA7E << 16)
-+#define DAVINCI_WDTCR_WDFLAG		BIT(15)
-+#define DAVINCI_WDTCR_WDEN		BIT(14)
-+
-+#define DEFAULT_THRESHOLD		0xA03200000
-+
-+struct davinci_wdt_priv {
-+	void __iomem *base;
-+	struct clk *ref_clk;
-+};
-+
-+static int davinci_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
-+{
-+	struct davinci_wdt_priv *priv = dev_get_priv(dev);
-+	ulong rate = clk_get_rate(priv->ref_clk);
-+	u64 threshold;
-+
-+	if (!rate)
-+		threshold = DEFAULT_THRESHOLD;
-+	else
-+		threshold = rate * timeout_ms / 1000;
-+
-+	/* Reset control registers */
-+	writel(0, priv->base + DAVINCI_WDT_TCR);
-+	writel(0, priv->base + DAVINCI_WDT_TGCR);
-+
-+	/* Enable watchdog mode and timers */
-+	writel(DAVINCI_TGCR_WDT_MODE | DAVINCI_TGCR_TIM12RS | DAVINCI_TGCR_TIM34RS,
-+	       priv->base + DAVINCI_WDT_TGCR);
-+
-+	/* Reset counters */
-+	writel(0, priv->base + DAVINCI_WDT_TIM12);
-+	writel(0, priv->base + DAVINCI_WDT_TIM34);
-+
-+	/* Set timeout threshold */
-+	writel(threshold & 0xFFFFFFFF, priv->base + DAVINCI_WDT_PRD12);
-+	writel(threshold >> 32, priv->base + DAVINCI_WDT_PRD34);
-+
-+	/* Enable counter */
-+	writel(DAVINCI_TCR_CONT_EN, priv->base + DAVINCI_WDT_TCR);
-+
-+	/* Go to watchdog's active state */
-+	writel(DAVINCI_WDTCR_WDEN | DAVINCI_WDTCR_WDKEY0, priv->base + DAVINCI_WDT_WDTCR);
-+	writel(DAVINCI_WDTCR_WDEN | DAVINCI_WDTCR_WDKEY1, priv->base + DAVINCI_WDT_WDTCR);
-+
-+	return 0;
-+}
-+
-+static int davinci_wdt_expire_now(struct udevice *dev, ulong flags)
-+{
-+	struct davinci_wdt_priv *priv = dev_get_priv(dev);
-+
-+	writel(DAVINCI_WDTCR_INVALID_KEY, priv->base + DAVINCI_WDT_WDTCR);
-+
-+	return 0;
-+}
-+
-+static int davinci_wdt_restart(struct udevice *dev)
-+{
-+	struct davinci_wdt_priv *priv = dev_get_priv(dev);
-+
-+	writel(DAVINCI_WDTCR_WDEN | DAVINCI_WDTCR_WDKEY0, priv->base + DAVINCI_WDT_WDTCR);
-+	writel(DAVINCI_WDTCR_WDEN | DAVINCI_WDTCR_WDKEY1, priv->base + DAVINCI_WDT_WDTCR);
-+
-+	return 0;
-+}
-+
-+static int davinci_wdt_probe(struct udevice *dev)
-+{
-+	struct davinci_wdt_priv *priv = dev_get_priv(dev);
-+
-+	priv->base = dev_remap_addr_index(dev, 0);
-+	if (!priv->base)
-+		return -EFAULT;
-+
-+	priv->ref_clk = devm_clk_get(dev, "ref");
-+	if (IS_ERR(priv->ref_clk))
-+		return PTR_ERR(priv->ref_clk);
-+
-+	return 0;
-+}
-+
-+static const struct wdt_ops davinci_wdt_ops = {
-+	.start = davinci_wdt_start,
-+	.reset = davinci_wdt_restart,
-+	.expire_now = davinci_wdt_expire_now,
-+};
-+
-+static const struct udevice_id davinci_wdt_ids[] = {
-+	{.compatible = "ti,davinci-wdt"},
-+	{}
-+};
-+
-+U_BOOT_DRIVER(davinci_wdt) = {
-+	.name = "davinci_wdt",
-+	.id = UCLASS_WDT,
-+	.probe = davinci_wdt_probe,
-+	.of_match = davinci_wdt_ids,
-+	.ops = &davinci_wdt_ops,
-+	.priv_auto = sizeof(struct davinci_wdt_priv),
-+};
--- 
-2.46.0
+https://wiki.syslinux.org/wiki/index.php
 
+Putting aside the difference in syntax from that used by the syslinux
+project, of the 22 keywords currently supported by U-Boot, only 13 of
+them are mentioned there (surprisingly the syslinux documentation
+doesn't include "title" as an option).
+
+I'd come to the conclusion that U-Boot already provides a greatly
+extended version of the syntax, made suitable for booting in a wider
+variety of instances than catered for by the syslinux project.
+
+Though I admit, I could have missed another better source to
+documentation. Is that the one you're thinking of or is there a better
+one?
+
+Martyn
