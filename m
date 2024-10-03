@@ -4,84 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D3F3CF8554
-	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 08:02:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFFC6CF856D
+	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 08:43:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D163889E2;
-	Thu,  3 Oct 2024 10:02:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id EF0C688975;
+	Thu,  3 Oct 2024 10:43:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="yJGnG3Fi";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="cd/HZyD1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 793B28870D; Thu,  3 Oct 2024 10:02:34 +0200 (CEST)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 041CB88C4D; Thu,  3 Oct 2024 10:43:02 +0200 (CEST)
+Received: from relay8-d.mail.gandi.net (relay8-d.mail.gandi.net
+ [IPv6:2001:4b98:dc4:8::228])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 37B65889E2
- for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 10:02:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9CB0188896
+ for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 10:42:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-37ccdc0d7f6so423209f8f.0
- for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 01:02:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1727942550; x=1728547350;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=iEEFHyoRloPiWvlo6Z+8rGV+aY8Q4YnUs2L6a9uEeVE=;
- b=yJGnG3Figih4AMurozxRd22yvgzmsd/V1LcD10taWqfFJcKBnC9FIRm9HSnAgcQbTw
- Me9jI24ywR5iViG4otsEqxWgtqzEmGpXtd2+YbxeaVBy9At3CYkJO01SsNn2TcE1QKGo
- kAlP9lBhOOlov5qGrH1Dc0QppNb0r3WYhHVxwSXVfgFnXs/yeWUXC7Guo8s5wh48ttSd
- 2LS10FAHNURfrg3eTs/Z36udex3BL6zAGEorIS6IEs9KYqCO0FyA5C/id2OkiOTQqgdD
- QvCfFUTyMe4ohN/lJbfAYz9fAEU91rAg9uapxm4KnpEt0Njx9xFBMqm+etN2bs1vi7D9
- /GRw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727942550; x=1728547350;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=iEEFHyoRloPiWvlo6Z+8rGV+aY8Q4YnUs2L6a9uEeVE=;
- b=BImMullONz61pMAGU0Wquz6BFh1pEQ+AGWAHpxUrNmz68TcjMZt5fwz452LUjxQFjS
- MWqekyUZkVFjozzOH7OxWtQoJUn/JZ246sextpbWSzHw+78FE2Wh7ko4kIBgVSEnXhxA
- FFSQFfApAgrOU9sj1NbFKcvBq/XWzBvL4dHhZNde1Gf5MzqDWhLU1XAylx+IZ8hqNqij
- o5f84tsqaXRDnPlY1coMBUR8x37BhIYyQlsOwUn8zyAzqvOiNqksd+MSKy3SJs8wRF4U
- mgynEqSrqM7mSAVaHBOWsiUQHaCYPZvfbtyXPkIXFHm0kdc2dcr3u+kOD+AL4Ag/hMCR
- 048w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXgrZ/Dm0a1VJRV3LPz7vW/YuQwRAPxQHdnSSfGElaPnzGRlSxkhhzgTKhgCCQvMSW3M+jZClQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz93qxRFcqWvZRCnCvzD/tAdalNzjm0/7z0dCQY/ou+5BEGgWar
- 5tPeQEtEtWGIBLqTZv0kKpaTUiIetpwS4norCL3Llp6ypU55mCCAiNLKB/DO+fA=
-X-Google-Smtp-Source: AGHT+IGE5ySefiYvgabjdOymXDHqSnLeKKh5Bi/JffTfGQWHp5cW2cd3A167oYeXVz0UmjKnjvvfHg==
-X-Received: by 2002:a05:6000:156b:b0:37c:cd71:2b96 with SMTP id
- ffacd0b85a97d-37cfba045c0mr4205871f8f.36.1727942550626; 
- Thu, 03 Oct 2024 01:02:30 -0700 (PDT)
-Received: from mkorpershoek-xps13.carmes.etincelle-coworking.com
- ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d082a6b75sm683967f8f.81.2024.10.03.01.02.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Oct 2024 01:02:30 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Lukasz Majewski <lukma@denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Tom Rini <trini@konsulko.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Simon Glass <sjg@chromium.org>, 
- u-boot@lists.denx.de
-In-Reply-To: <20240921092050.9260-1-heinrich.schuchardt@canonical.com>
-References: <20240921092050.9260-1-heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH 1/1] cmd: simplify CONFIG_CMD_USB_MASS_STORAGE dependencies
-Message-Id: <172794254992.98842.876898139690556720.b4-ty@baylibre.com>
-Date: Thu, 03 Oct 2024 10:02:29 +0200
+ spf=pass smtp.mailfrom=bastien.curutchet@bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPA id DAFCA1BF209;
+ Thu,  3 Oct 2024 08:42:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+ t=1727944978;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=FH5eaqytOJ4Xiy6u+mLvuC+gFjeXDh61YlJUUy0ZW20=;
+ b=cd/HZyD1MXMys2vh/thZxbQ307Zbz+NT6h1qjor6Fes3+BXQ9NycFfzUYuOf1WRqbMvfmh
+ hh+RDzwTg5mlPdvhaJjU5b1mAnFJpLvKyFvS7H1cwye3Jeftu2Nx4MPUPe/u4j4p1wov8C
+ 7o6ROj5f3qzQL5KmO9rMMuebjcqrH+Tybb+KObJGouHc94mh6FUveTonz5bwnd6cPETD8U
+ QziLyJiTP0aWVhWHRCRpyErpGLCiS+7aAw4mr/61r9vsu70wCeaS5N7IN0xwJ3U8Ldeiic
+ ATWUIeFdeT+s2QsSDjsLQcc61apgKmU+E/QvE4mM8V/Dv0J3zNa5Wo4VK3f6OQ==
+From: Bastien Curutchet <bastien.curutchet@bootlin.com>
+To: Tom Rini <trini@konsulko.com>,
+	Stefan Roese <sr@denx.de>
+Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Herve Codina <herve.codina@bootlin.com>,
+ Christopher Cordahi <christophercordahi@nanometrics.ca>,
+ Bastien Curutchet <bastien.curutchet@bootlin.com>
+Subject: [PATCH] drivers: watchdog: Add DaVinci's watchdog support
+Date: Thu,  3 Oct 2024 10:42:55 +0200
+Message-ID: <20241003084255.33478-1-bastien.curutchet@bootlin.com>
+X-Mailer: git-send-email 2.46.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.0
+Content-Transfer-Encoding: 8bit
+X-GND-Sasl: bastien.curutchet@bootlin.com
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,18 +69,183 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Add support for the DaVinci's watchdog timer
 
-On Sat, 21 Sep 2024 11:20:50 +0200, Heinrich Schuchardt wrote:
-> CONFIG_USB_GADGET_DOWNLOAD depends on CONFIG_USB_GADGET.
-> It is sufficient to depend on the prior.
-> 
-> 
+Signed-off-by: Bastien Curutchet <bastien.curutchet@bootlin.com>
+---
+ drivers/watchdog/Kconfig       |   7 ++
+ drivers/watchdog/Makefile      |   1 +
+ drivers/watchdog/davinci_wdt.c | 131 +++++++++++++++++++++++++++++++++
+ 3 files changed, 139 insertions(+)
+ create mode 100644 drivers/watchdog/davinci_wdt.c
 
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu-next)
+diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+index 0c3e991331..a1c50b3f1f 100644
+--- a/drivers/watchdog/Kconfig
++++ b/drivers/watchdog/Kconfig
+@@ -169,6 +169,13 @@ config WDT_CORTINA
+ 	  This driver support all CPU ISAs supported by Cortina
+ 	  Access CAxxxx SoCs.
+ 
++config WDT_DAVINCI
++	bool "DaVinci watchdog timer support"
++	depends on WDT
++	help
++	  Select this to enable the watchdog timer for DaVinci SoCs such as the
++	  OMAP-L138.
++
+ config WDT_GPIO
+ 	bool "External gpio watchdog support"
+ 	depends on WDT
+diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
+index 7b39adcf0f..ad3053998a 100644
+--- a/drivers/watchdog/Makefile
++++ b/drivers/watchdog/Makefile
+@@ -29,6 +29,7 @@ obj-$(CONFIG_WDT_BOOKE) += booke_wdt.o
+ obj-$(CONFIG_WDT_CORTINA) += cortina_wdt.o
+ obj-$(CONFIG_WDT_ORION) += orion_wdt.o
+ obj-$(CONFIG_WDT_CDNS) += cdns_wdt.o
++obj-$(CONFIG_WDT_DAVINCI) += davinci_wdt.o
+ obj-$(CONFIG_WDT_FTWDT010) += ftwdt010_wdt.o
+ obj-$(CONFIG_WDT_GPIO) += gpio_wdt.o
+ obj-$(CONFIG_WDT_MAX6370) += max6370_wdt.o
+diff --git a/drivers/watchdog/davinci_wdt.c b/drivers/watchdog/davinci_wdt.c
+new file mode 100644
+index 0000000000..fa8d7842e9
+--- /dev/null
++++ b/drivers/watchdog/davinci_wdt.c
+@@ -0,0 +1,131 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * DaVinci Watchdog driver
++ *
++ */
++
++#include <asm/io.h>
++#include <clk.h>
++#include <dm.h>
++#include <wdt.h>
++
++/* Control Register */
++#define DAVINCI_WDT_ID			0x00
++#define DAVINCI_WDT_TIM12		0x10
++#define DAVINCI_WDT_TIM34		0x14
++#define DAVINCI_WDT_PRD12		0x18
++#define DAVINCI_WDT_PRD34		0x1C
++#define DAVINCI_WDT_TCR			0x20
++#define DAVINCI_WDT_TGCR		0x24
++#define DAVINCI_WDT_WDTCR		0x28
++
++#define DAVINCI_TCR_CONT_EN		BIT(7)
++
++#define DAVINCI_TGCR_PLUSEN		BIT(4)
++#define DAVINCI_TGCR_WDT_MODE		BIT(3)
++#define DAVINCI_TGCR_TIM34RS		BIT(1)
++#define DAVINCI_TGCR_TIM12RS		BIT(0)
++
++#define DAVINCI_WDTCR_INVALID_KEY	(0x5555 << 16)
++#define DAVINCI_WDTCR_WDKEY0		(0xA5C6 << 16)
++#define DAVINCI_WDTCR_WDKEY1		(0xDA7E << 16)
++#define DAVINCI_WDTCR_WDFLAG		BIT(15)
++#define DAVINCI_WDTCR_WDEN		BIT(14)
++
++#define DEFAULT_THRESHOLD		0xA03200000
++
++struct davinci_wdt_priv {
++	void __iomem *base;
++	struct clk *ref_clk;
++};
++
++static int davinci_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
++{
++	struct davinci_wdt_priv *priv = dev_get_priv(dev);
++	ulong rate = clk_get_rate(priv->ref_clk);
++	u64 threshold;
++
++	if (!rate)
++		threshold = DEFAULT_THRESHOLD;
++	else
++		threshold = rate * timeout_ms / 1000;
++
++	/* Reset control registers */
++	writel(0, priv->base + DAVINCI_WDT_TCR);
++	writel(0, priv->base + DAVINCI_WDT_TGCR);
++
++	/* Enable watchdog mode and timers */
++	writel(DAVINCI_TGCR_WDT_MODE | DAVINCI_TGCR_TIM12RS | DAVINCI_TGCR_TIM34RS,
++	       priv->base + DAVINCI_WDT_TGCR);
++
++	/* Reset counters */
++	writel(0, priv->base + DAVINCI_WDT_TIM12);
++	writel(0, priv->base + DAVINCI_WDT_TIM34);
++
++	/* Set timeout threshold */
++	writel(threshold & 0xFFFFFFFF, priv->base + DAVINCI_WDT_PRD12);
++	writel(threshold >> 32, priv->base + DAVINCI_WDT_PRD34);
++
++	/* Enable counter */
++	writel(DAVINCI_TCR_CONT_EN, priv->base + DAVINCI_WDT_TCR);
++
++	/* Go to watchdog's active state */
++	writel(DAVINCI_WDTCR_WDEN | DAVINCI_WDTCR_WDKEY0, priv->base + DAVINCI_WDT_WDTCR);
++	writel(DAVINCI_WDTCR_WDEN | DAVINCI_WDTCR_WDKEY1, priv->base + DAVINCI_WDT_WDTCR);
++
++	return 0;
++}
++
++static int davinci_wdt_expire_now(struct udevice *dev, ulong flags)
++{
++	struct davinci_wdt_priv *priv = dev_get_priv(dev);
++
++	writel(DAVINCI_WDTCR_INVALID_KEY, priv->base + DAVINCI_WDT_WDTCR);
++
++	return 0;
++}
++
++static int davinci_wdt_restart(struct udevice *dev)
++{
++	struct davinci_wdt_priv *priv = dev_get_priv(dev);
++
++	writel(DAVINCI_WDTCR_WDEN | DAVINCI_WDTCR_WDKEY0, priv->base + DAVINCI_WDT_WDTCR);
++	writel(DAVINCI_WDTCR_WDEN | DAVINCI_WDTCR_WDKEY1, priv->base + DAVINCI_WDT_WDTCR);
++
++	return 0;
++}
++
++static int davinci_wdt_probe(struct udevice *dev)
++{
++	struct davinci_wdt_priv *priv = dev_get_priv(dev);
++
++	priv->base = dev_remap_addr_index(dev, 0);
++	if (!priv->base)
++		return -EFAULT;
++
++	priv->ref_clk = devm_clk_get(dev, "ref");
++	if (IS_ERR(priv->ref_clk))
++		return PTR_ERR(priv->ref_clk);
++
++	return 0;
++}
++
++static const struct wdt_ops davinci_wdt_ops = {
++	.start = davinci_wdt_start,
++	.reset = davinci_wdt_restart,
++	.expire_now = davinci_wdt_expire_now,
++};
++
++static const struct udevice_id davinci_wdt_ids[] = {
++	{.compatible = "ti,davinci-wdt"},
++	{}
++};
++
++U_BOOT_DRIVER(davinci_wdt) = {
++	.name = "davinci_wdt",
++	.id = UCLASS_WDT,
++	.probe = davinci_wdt_probe,
++	.of_match = davinci_wdt_ids,
++	.ops = &davinci_wdt_ops,
++	.priv_auto = sizeof(struct davinci_wdt_priv),
++};
+-- 
+2.46.0
 
-[1/1] cmd: simplify CONFIG_CMD_USB_MASS_STORAGE dependencies
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/c74758ccc091402b558b9aa7eaf1c50171d2f49f
-
---
-Mattijs
