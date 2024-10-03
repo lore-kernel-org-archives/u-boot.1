@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 524B4CF34B6
-	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 15:49:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F264ECF34B0
+	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 15:50:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E692888E7A;
-	Thu,  3 Oct 2024 17:47:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5850488F62;
+	Thu,  3 Oct 2024 17:47:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XE91zOjv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aPzhxr7E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A23C88F95; Thu,  3 Oct 2024 17:47:37 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 5BB5888F62; Thu,  3 Oct 2024 17:47:39 +0200 (CEST)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5AB6888F5E
- for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 17:47:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2536588EE8
+ for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 17:47:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-42cbface8d6so14487815e9.3
- for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 08:47:35 -0700 (PDT)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-37cd1ccaf71so1289225f8f.0
+ for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 08:47:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1727970454; x=1728575254; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1727970456; x=1728575256; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iR7fwaiaf6ymrpq1AznpcyUra4kodMDvFIUQi7Nly3U=;
- b=XE91zOjvGjM+wN6SuJYG6SgZ7syfCeGLdhtHaTgMUFqLX3xfPHsmk+7BrNR+TfpRcP
- VS+gkyvZlMYAFU1atDYRyehMBaP8u6CThQST5DQHZrlwgxaOzIFbqUslDGLZtdQYpKfH
- cupHVE5CNHhErFP8Aoscq1l+UKQHeuC34l7e8w1u1OHTIn0nP/6QwDeBIKQCU/dl0O05
- 2jj6ULrFTryCffZ5EQ9f+ChnuEO02bCtsKeCn+1CL/Me1D41fiy4ksBMSAuBWW5709IV
- OGB/4wzbsz51+9V0yjXDwZKac4Zp7xUtcGeAIG/Oltp0LlnUhVjRc4OtgfJ+Mu3SKV7f
- T1bw==
+ bh=MktPFMTO7Kpc7/pKSJ53v9OJ+XoE2+jn+aez6r7cU7Q=;
+ b=aPzhxr7EztjkaH1Vxiz9+88mhsAM25fiBYgGiKCbYNF6UZY5+/sv6Kjru14uiHrfCU
+ vPciiIQ9XtIOUfTBMdhDGHcWu0z8ZboubY5Vppruo5q+WX3gA13zR9COMSI/PLNGeQe2
+ 1meTDtBJTzcuOpYUa8slC7H1AJnrmyhqYBeHBwKR4BfaZ+kQoE0ftCyXWZsh3jx39IPn
+ lDFu4bjIl4RxpRWelRpsE3QFCEKhohfURvPFzGTHTTqE2iXeJ8X3pGOiZ3ij5F44Eq60
+ 48ov0D+tMVo21bmlb5j+ZZk+BUBu50Prxu4wGVA0NLRJtJZPTlXTI0ToANBkvs6OqeDm
+ P87w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727970454; x=1728575254;
+ d=1e100.net; s=20230601; t=1727970456; x=1728575256;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=iR7fwaiaf6ymrpq1AznpcyUra4kodMDvFIUQi7Nly3U=;
- b=rvxusypdwmTcT7fLy1oumcXc6BwlGt1VKMn/f+Dd2h3SlQqIaWzo0gx54y/edZnyfJ
- x+tNZTz18XoIfPX3kgAzU9AMiFH/nE7KZ3Cpnm22D5XDRVJM/HmmuS1ieWoOsbuV28Nm
- IsXt+yRNFX1xoriXIySCtCkkXujhH7iJ8x9qF9gAklIJOWqQd/eMWQmCBNoTf6SJyGnW
- KERM7PjXLlEcRBloTvSufjotC3GplsriRJUpjPsh2cMD73ZAR5xXSlIUg/RT6CP08rKL
- 8Z1gIRZWt8xVFA/g28Uooui67hy55DQkLJqV6c8Hvd8sCiTE1YU0EGldarhhzxlmpGka
- GmNQ==
-X-Gm-Message-State: AOJu0YwN5C43XtTzUS3p8LzqHxcBL9yv/qt7VBggRxZ+CdTMePMjRNQH
- OhvZFDZ0ghJSZi4kLtG6A4l7naWAfZKwpkCpvCWkOFmxoCNKbGVVq36j4fjxRQmx/KVOH4JiWqH
- aKoD4VqSK
-X-Google-Smtp-Source: AGHT+IE8Ippuv4xFZkJWmuNMuzV1y6NJB9H4eBpC4rrHi0jJC9IAeALxFeOttzoooLs8Cphk4uQZZA==
-X-Received: by 2002:a05:6000:1211:b0:37c:d1ea:f1ce with SMTP id
- ffacd0b85a97d-37cfb9d318amr5296393f8f.25.1727970454109; 
- Thu, 03 Oct 2024 08:47:34 -0700 (PDT)
+ bh=MktPFMTO7Kpc7/pKSJ53v9OJ+XoE2+jn+aez6r7cU7Q=;
+ b=MNGL0w1KR3zfOITEKoXST2BgRN66tUQ5QpfZuhWcviwr8MYXFYTu5F8gyUWynsZL6a
+ j0XKHNDrrZ4vbptNgD97ncqbpdEcv7eQH2rKzSjLUB0THoermCb+4xiLEPdPPmfvDfUS
+ vMi3fWMjlqbh7uEeyBki/C1OTwFfkWiH2SAf0bwWXi/3O3AKxVFyPGgKFC+qsH2xwvro
+ YnlAdw9UdUcIUxXBsdZGulQaSPJmh5Zst0Gt996ELeE8xazWhha7cyNFqBoxQtWI8vLr
+ +Iq43nt39OnGYVvwE6cq9gtt82ICUHk96jLdBqxiUbJLEBEl14qgr9Pxd2i/jyBNKECn
+ sc8w==
+X-Gm-Message-State: AOJu0YxQpJs6jhNBaL+Yu+OvZk2wNlT+wTM/p1e61UOy2PLsyHmrHMvj
+ 65btEAsle61nNZW/RAtiUz4X3NxOSw2PQiJgF5aWYL1A6gEQ9oYY0TGSZUU2790JblA93fBBa+D
+ AzQvBlqf9
+X-Google-Smtp-Source: AGHT+IF6PX9TDS4gZGan/ktwvf0dvgY0BurTF/Nyl+t6DidM7qRXFsRoT3vQ3XjKqGeIBWVKHjUreQ==
+X-Received: by 2002:a5d:688e:0:b0:374:c6b6:c656 with SMTP id
+ ffacd0b85a97d-37d04a32a79mr2203310f8f.21.1727970456286; 
+ Thu, 03 Oct 2024 08:47:36 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:d888:7a58:deed:47d6])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d08245059sm1541748f8f.55.2024.10.03.08.47.32
+ ffacd0b85a97d-37d08245059sm1541748f8f.55.2024.10.03.08.47.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Oct 2024 08:47:33 -0700 (PDT)
+ Thu, 03 Oct 2024 08:47:34 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -72,16 +72,11 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
  Anton Antonov <Anton.Antonov@arm.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Sumit Garg <sumit.garg@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Robert Marko <robert.marko@sartura.hr>,
- Sam Protsenko <semen.protsenko@linaro.org>, Andrew Davis <afd@ti.com>
-Subject: [PATCH v11 26/29] MAINTAINERS: net-lwip: add myself as a maintainer
-Date: Thu,  3 Oct 2024 17:46:30 +0200
-Message-Id: <97a2a2f8bceaf42aef74ea2daef9d1d6bb4445ac.1727968902.git.jerome.forissier@linaro.org>
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH v11 27/29] configs: use syntax CONFIG_FOO=n in
+ tools-only_defconfig
+Date: Thu,  3 Oct 2024 17:46:31 +0200
+Message-Id: <fe12e1f45985088649336fb032f4b724724a1f89.1727968902.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1727968902.git.jerome.forissier@linaro.org>
 References: <cover.1727968902.git.jerome.forissier@linaro.org>
@@ -103,36 +98,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add myself as a maintainer for the lwIP network stack integration code
-and network commands as well as the sandbox ethernet driver for lwIP.
+The tools-only defconfig causes troubles on MacOSX due to the default
+C compiler being Clang (LLVM) rather than GCC and more specifically
+due to [1]. Therefore replace "# CONFIG_FOO is not set" with the
+equivalent "CONFIG_FOO=n" using the following command:
 
+ $ sed -i -e 's/# \(CONFIG_[^ ]*\) is not set/\1=n/' \
+       configs/tools-only_defconfig
+
+This fixes the tools_only_macOS CI job on GitHub [2].
+
+[1] https://github.com/llvm/llvm-project/issues/78778
+[2] https://dev.azure.com/u-boot/u-boot/_build/results?buildId=9105&view=results
+
+Suggested-by: Tom Rini <trini@konsulko.com>
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
- MAINTAINERS | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+ configs/tools-only_defconfig | 32 ++++++++++++++++----------------
+ 1 file changed, 16 insertions(+), 16 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 7ab39d91a55..27d6de67b21 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1352,6 +1352,17 @@ F:	drivers/net/
- F:	include/net.h
- F:	net/
- 
-+NETWORK (LWIP)
-+M:	Jerome Forissier <jerome.forissier@linaro.org>
-+S:	Maintained
-+F:	cmd/net-lwip.c
-+F:	configs/qemu_arm64_lwip_defconfig
-+F:	drivers/net/sandbox-lwip.c
-+F:	include/net-lwip.h
-+F:	lib/lwip/Makefile
-+F:	lib/lwip/u-boot/
-+F:	net/lwip/
-+
- NIOS
- M:	Thomas Chou <thomas@wytron.com.tw>
- S:	Maintained
+diff --git a/configs/tools-only_defconfig b/configs/tools-only_defconfig
+index e00f2c48598..7511e30d709 100644
+--- a/configs/tools-only_defconfig
++++ b/configs/tools-only_defconfig
+@@ -4,26 +4,26 @@ CONFIG_ENV_SIZE=0x2000
+ CONFIG_DEFAULT_DEVICE_TREE="sandbox"
+ CONFIG_SYS_LOAD_ADDR=0x0
+ CONFIG_PCI=y
+-# CONFIG_SANDBOX_SDL is not set
++CONFIG_SANDBOX_SDL=n
+ CONFIG_ANDROID_BOOT_IMAGE=y
+ CONFIG_TIMESTAMP=y
+ CONFIG_FIT=y
+ CONFIG_FIT_SIGNATURE=y
+-# CONFIG_BOOTSTD_FULL is not set
+-# CONFIG_BOOTMETH_CROS is not set
+-# CONFIG_BOOTMETH_VBE is not set
++CONFIG_BOOTSTD_FULL=n
++CONFIG_BOOTMETH_CROS=n
++CONFIG_BOOTMETH_VBE=n
+ CONFIG_USE_BOOTCOMMAND=y
+ CONFIG_BOOTCOMMAND="run distro_bootcmd"
+-# CONFIG_CMD_BOOTD is not set
+-# CONFIG_CMD_BOOTM is not set
+-# CONFIG_CMD_BOOTI is not set
+-# CONFIG_CMD_ELF is not set
+-# CONFIG_CMD_EXTENSION is not set
+-# CONFIG_CMD_DATE is not set
++CONFIG_CMD_BOOTD=n
++CONFIG_CMD_BOOTM=n
++CONFIG_CMD_BOOTI=n
++CONFIG_CMD_ELF=n
++CONFIG_CMD_EXTENSION=n
++CONFIG_CMD_DATE=n
+ CONFIG_OF_CONTROL=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_NO_NET=y
+-# CONFIG_ACPIGEN is not set
++CONFIG_ACPIGEN=n
+ CONFIG_AXI=y
+ CONFIG_AXI_SANDBOX=y
+ CONFIG_SANDBOX_GPIO=y
+@@ -32,9 +32,9 @@ CONFIG_DM_RTC=y
+ CONFIG_SOUND=y
+ CONFIG_SYSRESET=y
+ CONFIG_TIMER=y
+-# CONFIG_VIRTIO_MMIO is not set
+-# CONFIG_VIRTIO_PCI is not set
+-# CONFIG_VIRTIO_SANDBOX is not set
+-# CONFIG_GENERATE_ACPI_TABLE is not set
+-# CONFIG_EFI_LOADER is not set
++CONFIG_VIRTIO_MMIO=n
++CONFIG_VIRTIO_PCI=n
++CONFIG_VIRTIO_SANDBOX=n
++CONFIG_GENERATE_ACPI_TABLE=n
++CONFIG_EFI_LOADER=n
+ CONFIG_TOOLS_MKEFICAPSULE=y
 -- 
 2.40.1
 
