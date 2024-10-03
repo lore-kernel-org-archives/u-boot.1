@@ -4,44 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F4143CF854C
-	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 00:46:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9946DCF854E
+	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 01:35:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A40188CF1;
-	Thu,  3 Oct 2024 02:46:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id A48D488E18;
+	Thu,  3 Oct 2024 03:35:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FAYfB7+Z";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D79688D3F; Thu,  3 Oct 2024 02:46:08 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 8903388CC3
- for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 02:46:05 +0200 (CEST)
+ id F0BC488E88; Thu,  3 Oct 2024 03:35:25 +0200 (CEST)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 58F3988DB7
+ for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 03:35:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 30A7E339;
- Wed,  2 Oct 2024 17:46:34 -0700 (PDT)
-Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C17033F640;
- Wed,  2 Oct 2024 17:46:03 -0700 (PDT)
-Date: Thu, 3 Oct 2024 01:45:26 +0100
-From: Andre Przywara <andre.przywara@arm.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-6cb2a6d3144so2422716d6.2
+ for <u-boot@lists.denx.de>; Wed, 02 Oct 2024 18:35:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1727919322; x=1728524122; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=g0Nyvjpxo3FJBcVAJtR/Gw3cWC4t1luSndB4/lAzod4=;
+ b=FAYfB7+ZjgeYySQLDZgyJCfISbdew90julb8Z8CnooVdV4OSzXFHvtecLdQaoD/E+V
+ ItJP5LeI6h1tkzSODCnKj5kHjxUD8SLt+nLj6OU6BKwzxBV1pwgzF2kmGkgWNPLthy5s
+ fyLHM9qKTWHb8GiGbGzkp2oF+jZM9BZ1icdyI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727919322; x=1728524122;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=g0Nyvjpxo3FJBcVAJtR/Gw3cWC4t1luSndB4/lAzod4=;
+ b=xR0yhvZH9wVQZWBp3vUiY1/D0F8f1mqCGcy1Ya7BQCMK482MlnCjTIxG3C04l9OZx1
+ i25GRnTmx7sUSfjTb7xFIhdYAWObz0IDCyOTywYvMopvbD8/p6M0hPqgYxXrDv6oxShL
+ j24iA4Wj531PAiM8eQfSccjIuqSaPDNAigHVB9uxUeRDPxkBiVd3BEBuOCSq7WqeFIVc
+ UbZnr51lqrckLo6rk1S2/Zsrq8h14gv3NENeUHfJIYbIpn7A1pfIRGih9nnsG3CPgSYY
+ dYTvMLNIDXyK6x8nqv8KvWM9I/YxJWRor4orb9/Lwr4WxWqK0pK+i+QoG6ihMD4ZMbhz
+ jTRQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUDYglsbhyJwqzYFOiFVS75xCfnC3+PXFORzfYlx+0+jczE92izvxS+hyJHl935DYC/bFjydWc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy8Zoed6+UTWk5A/zxOiN1PTj4p9qayyR7LuCc5PLTTmOK8ywbQ
+ rZ0VSGuRs+tRZZaVGUC3jQYhmbQx3PSLzAdBDQx/bJ28vzXc8Qpz7un6LeFBz8Q=
+X-Google-Smtp-Source: AGHT+IG+yfNcDvPh5txv01p+r+kl/LnBh/G8Ac/JIRXBzMk3JcX8Uv4pDK2F7Nw4MaOLtuAdQcXQ0A==
+X-Received: by 2002:a05:6214:2c08:b0:6cb:7107:a3e6 with SMTP id
+ 6a1803df08f44-6cb81a4414emr75785456d6.34.1727919321939; 
+ Wed, 02 Oct 2024 18:35:21 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6cb9381f2a8sm1085936d6.138.2024.10.02.18.35.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 02 Oct 2024 18:35:20 -0700 (PDT)
+Date: Wed, 2 Oct 2024 19:35:16 -0600
+From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Jagan Teki
- <jagan@amarulasolutions.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH v3 8/8] sunxi: Move to text environment
-Message-ID: <20241003014526.6963895a@minigeek.lan>
-In-Reply-To: <20240901222734.462334-9-sjg@chromium.org>
-References: <20240901222734.462334-1-sjg@chromium.org>
- <20240901222734.462334-9-sjg@chromium.org>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+Cc: Patrick Rudolph <patrick.rudolph@9elements.com>, u-boot@lists.denx.de,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>,
+ Peter Robinson <pbrobinson@gmail.com>
+Subject: Re: [PATCH v6 25/37] board: emulation: Add QEMU sbsa support
+Message-ID: <20241003013516.GR4737@bill-the-cat>
+References: <20241002094832.24933-1-patrick.rudolph@9elements.com>
+ <20241002094832.24933-26-patrick.rudolph@9elements.com>
+ <CAFLszTh-cEBp0-HP5XMONdwSUBepKWNgJSHLJfQ2VYW9FgJq=Q@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="TWNqZVJ7+CYguupf"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTh-cEBp0-HP5XMONdwSUBepKWNgJSHLJfQ2VYW9FgJq=Q@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,392 +96,200 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun,  1 Sep 2024 16:27:34 -0600
-Simon Glass <sjg@chromium.org> wrote:
 
-Hi Simon,
+--TWNqZVJ7+CYguupf
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> Convert these boards to use a text environment.
-> 
-> For the boards check, the only differences are extra spaces after the
-> semicolons in 'dfu_alt_info_ram' and 'partitions', both of which are
-> permitted.
-> 
-> Add in the special boot command for old kernels, dropping the
-> unnecessary and confusing hex prefixes.
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
-> (no changes since v2)
-> 
-> Changes in v2:
-> - Keep bootcmd_sunxi_compat if OLD_SUNXI_KERNEL_COMPAT is enabled
-> 
->  board/sunxi/sunxi.env          | 152 ++++++++++++++++++++++++++++++
->  include/configs/sunxi-common.h | 165 ---------------------------------
->  2 files changed, 152 insertions(+), 165 deletions(-)
->  create mode 100644 board/sunxi/sunxi.env
-> 
-> diff --git a/board/sunxi/sunxi.env b/board/sunxi/sunxi.env
-> new file mode 100644
-> index 00000000000..6f28e720081
-> --- /dev/null
-> +++ b/board/sunxi/sunxi.env
-> @@ -0,0 +1,152 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Common sunxi environment
-> + *
-> + * Copyright 2024 Google LLC
-> + * Written by Simon Glass <sjg@chromium.org>
-> + /
-> +
-> +/****************************************************************************
-> + *           environment variables holding default load addresses           *
-> + ****************************************************************************/
-> +/*
-> + * We cannot use expressions here, because expressions won't be evaluated in
-> + * autoconf.mk.
-> + */
-> +#ifdef CONFIG_ARM64
-> +/*
-> + * Boards seem to come with at least 512MB of DRAM.
-> + * The kernel should go at 512K, which is the default text offset (that will
-> + * be adjusted at runtime if needed).
-> + * There is no compression for arm64 kernels (yet), so leave some space
-> + * for really big kernels, say 256MB for now.
-> + * Scripts, PXE and DTBs should go afterwards, leaving the rest for the initrd.
-> + */
-> +#define BOOTM_SIZE        0xa000000
-> +#define KERNEL_ADDR_R     SDRAM_OFFSET(0080000)
-> +#define KERNEL_COMP_ADDR_R SDRAM_OFFSET(4000000)
-> +#define KERNEL_COMP_SIZE  0xb000000
-> +#define FDT_ADDR_R        SDRAM_OFFSET(FA00000)
-> +#define SCRIPT_ADDR_R     SDRAM_OFFSET(FC00000)
-> +#define PXEFILE_ADDR_R    SDRAM_OFFSET(FD00000)
-> +#define FDTOVERLAY_ADDR_R SDRAM_OFFSET(FE00000)
-> +#define RAMDISK_ADDR_R    SDRAM_OFFSET(FF00000)
-> +
-> +#elif (CONFIG_SUNXI_MINIMUM_DRAM_MB >= 256)
-> +/*
-> + * 160M RAM (256M minimum minus 64MB heap + 32MB for u-boot, stack, fb, etc.
-> + * 32M uncompressed kernel, 16M compressed kernel, 1M fdt,
-> + * 1M script, 1M pxe, 1M dt overlay and the ramdisk at the end.
-> + */
-> +#define BOOTM_SIZE        0xa000000
-> +#define KERNEL_ADDR_R     SDRAM_OFFSET(2000000)
-> +#define FDT_ADDR_R        SDRAM_OFFSET(3000000)
-> +#define SCRIPT_ADDR_R     SDRAM_OFFSET(3100000)
-> +#define PXEFILE_ADDR_R    SDRAM_OFFSET(3200000)
-> +#define FDTOVERLAY_ADDR_R SDRAM_OFFSET(3300000)
-> +#define RAMDISK_ADDR_R    SDRAM_OFFSET(3400000)
-> +
-> +#elif (CONFIG_SUNXI_MINIMUM_DRAM_MB >= 64)
-> +/*
-> + * 64M RAM minus 2MB heap + 16MB for u-boot, stack, fb, etc.
-> + * 16M uncompressed kernel, 8M compressed kernel, 1M fdt,
-> + * 1M script, 1M pxe, 1M dt overlay and the ramdisk at the end.
-> + */
-> +#define BOOTM_SIZE        0x2e00000
-> +#define KERNEL_ADDR_R     SDRAM_OFFSET(1000000)
-> +#define FDT_ADDR_R        SDRAM_OFFSET(1800000)
-> +#define SCRIPT_ADDR_R     SDRAM_OFFSET(1900000)
-> +#define PXEFILE_ADDR_R    SDRAM_OFFSET(1A00000)
-> +#define FDTOVERLAY_ADDR_R SDRAM_OFFSET(1B00000)
-> +#define RAMDISK_ADDR_R    SDRAM_OFFSET(1C00000)
-> +
-> +#elif (CONFIG_SUNXI_MINIMUM_DRAM_MB >= 32)
-> +/*
-> + * 32M RAM minus 2.5MB for u-boot, heap, stack, etc.
-> + * 16M uncompressed kernel, 7M compressed kernel, 128K fdt, 64K script,
-> + * 128K DT overlay, 128K PXE and the ramdisk in the rest (max. 5MB)
-> + */
-> +#define BOOTM_SIZE        0x1700000
-> +#define KERNEL_ADDR_R     SDRAM_OFFSET(1000000)
-> +#define FDT_ADDR_R        SDRAM_OFFSET(1d50000)
-> +#define SCRIPT_ADDR_R     SDRAM_OFFSET(1d40000)
-> +#define PXEFILE_ADDR_R    SDRAM_OFFSET(1d00000)
-> +#define FDTOVERLAY_ADDR_R SDRAM_OFFSET(1d20000)
-> +#define RAMDISK_ADDR_R    SDRAM_OFFSET(1800000)
-> +
-> +#else
-> +#error Need at least 32MB of DRAM. Please adjust load addresses.
-> +#endif
-> +
-> +#define UUID_GPT_ESP ""
-> +
-> +#ifdef CONFIG_ARM64
-> +#define UUID_GPT_SYSTEM b921b045-1df0-41c3-af44-4c6f280d3fae
-> +#else
-> +#define UUID_GPT_SYSTEM 69dad710-2ce4-4e3c-b16c-21a1d49abed3
-> +#endif
+On Wed, Oct 02, 2024 at 04:55:34PM -0600, Simon Glass wrote:
+> Hi Patrick,
+>=20
+> On Wed, 2 Oct 2024 at 03:52, Patrick Rudolph
+> <patrick.rudolph@9elements.com> wrote:
+> >
+> > Add support for Arm sbsa [1] v0.3+ that is supported by QEMU [2].
+> >
+> > Unlike other Arm based platforms the machine only provides a minimal
+> > FDT that contains number of CPUs, ammount of memory and machine-version.
+> > The boot firmware has to provide ACPI tables to the OS.
+> > Due to this design a full DTB is added here as well that allows U-Boot's
+> > driver to properly function. The DTB is appended at the end of the U-Bo=
+ot
+> > image and will be merged with the QEMU provided DTB.
+> >
+> > In addition provide documentation how to use, enable binman to fabricat=
+e both
+> > ROMs that are required to boot and add ACPI tables to make it full comp=
+atible
+> > to the EDK2 reference implementation.
+> >
+> > The board was tested using Fedora 40 Aarch64 Workstation. It's able
+> > to boot from USB and AHCI or network.
+> >
+> > Tested and found working:
+> > - serial
+> > - PCI
+> > - xHCI
+> > - Bochs display
+> > - AHCI
+> > - network using e1000e
+> > - CPU init
+> > - Booting Fedora 40
+> >
+> > 1: Server Base System Architecture (SBSA)
+> > 2: https://www.qemu.org/docs/master/system/arm/sbsa.html
+> >
+> > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+> > Cc: Peter Robinson <pbrobinson@gmail.com>
+> > Cc: Simon Glass <sjg@chromium.org>
+> > Cc: Tom Rini <trini@konsulko.com>
+> > ---
+> > Changelog v3:
+> > - Add GIC and GIC-ITS to devicetree
+> > - Select GICv3 driver
+> > - Drop acpi_fill_madt and use driver model instead
+> > Changelog v4:
+> > - Drop CPU platform code
+> > - Enhance the DT to allow MADT generation from DT
+> > Changelog v5:
+> > - Add full DT and place it at the end of U-Boot
+> > - Merge DT with QEMU's DT
+> > - Drop DT generation code
+> > - Fix flash region length
+> > - Drop enable_caches()
+> > - Support platforms that do not pass FDT in x0
+> > Changelog v6:
+> > - Update header order
+> > - Drop pad-byte from DT
+> > - select BINMAN_FDT
+> > - select E1000_NO_NVM
+> > - drop config.h include
+> > - drop a few CFG_ defines that were used for SPL
+> >
+> > ---
+> >  arch/arm/Kconfig                            |   3 +-
+> >  arch/arm/dts/qemu-sbsa.dts                  | 136 ++++++
+> >  arch/arm/include/asm/arch-qemu-sbsa/boot0.h |  34 ++
+> >  arch/arm/mach-qemu/Kconfig                  |  36 +-
+> >  board/emulation/qemu-arm/MAINTAINERS        |   2 +
+> >  board/emulation/qemu-sbsa/Kconfig           |  57 +++
+> >  board/emulation/qemu-sbsa/Makefile          |   8 +
+> >  board/emulation/qemu-sbsa/acpi.c            | 192 ++++++++
+> >  board/emulation/qemu-sbsa/dsdt.asl          | 483 ++++++++++++++++++++
+> >  board/emulation/qemu-sbsa/lowlevel_init.S   |  22 +
+> >  board/emulation/qemu-sbsa/qemu-sbsa.c       | 311 +++++++++++++
+> >  board/emulation/qemu-sbsa/qemu-sbsa.env     |  14 +
+> >  board/emulation/qemu-sbsa/qemu-sbsa.h       |  38 ++
+> >  board/emulation/qemu-sbsa/smc.c             |  71 +++
+> >  configs/qemu-arm-sbsa_defconfig             |  10 +
+> >  doc/board/emulation/index.rst               |   1 +
+> >  doc/board/emulation/qemu-sbsa.rst           |  98 ++++
+> >  doc/develop/driver-model/virtio.rst         |   1 +
+> >  include/configs/qemu-sbsa.h                 |  95 ++++
+> >  19 files changed, 1605 insertions(+), 7 deletions(-)
+> >  create mode 100644 arch/arm/dts/qemu-sbsa.dts
+> >  create mode 100644 arch/arm/include/asm/arch-qemu-sbsa/boot0.h
+> >  create mode 100644 board/emulation/qemu-sbsa/Kconfig
+> >  create mode 100644 board/emulation/qemu-sbsa/Makefile
+> >  create mode 100644 board/emulation/qemu-sbsa/acpi.c
+> >  create mode 100644 board/emulation/qemu-sbsa/dsdt.asl
+> >  create mode 100644 board/emulation/qemu-sbsa/lowlevel_init.S
+> >  create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.c
+> >  create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.env
+> >  create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.h
+> >  create mode 100644 board/emulation/qemu-sbsa/smc.c
+> >  create mode 100644 configs/qemu-arm-sbsa_defconfig
+> >  create mode 100644 doc/board/emulation/qemu-sbsa.rst
+> >  create mode 100644 include/configs/qemu-sbsa.h
+>=20
+> With the tweaks below:
+>=20
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+>=20
+> [..]
+>=20
+> > diff --git a/arch/arm/dts/qemu-sbsa.dts b/arch/arm/dts/qemu-sbsa.dts
+> > new file mode 100644
+> > index 0000000000..f743ea3863
+> > --- /dev/null
+> > +++ b/arch/arm/dts/qemu-sbsa.dts
+> > @@ -0,0 +1,136 @@
+> > +// SPDX-License-Identifier: GPL-2.0+ OR MIT
+> > +/*
+> > + * Devicetree with onboard devices for qemu_sbsa-ref for internal use =
+only!
+> > + * DO NOT PASS TO THE OS!
+> > + *
+> > + * As QEMU provides only a minimal devicetree this one is merged with
+> > + * it and then fixed at runtime.
+> > + *
+> > + * Copyright 2024 9elements GmbH
+> > + */
+> > +#include "configs/qemu-sbsa.h"
+> > +
+> > +/dts-v1/;
+> > +
+> > +#define MAKE_PROP(x) (x>>32) (x&0xffffffff)
+> > +
+> > +/ {
+> > +       #address-cells =3D <2>;
+> > +       #size-cells =3D <2>;
+> > +       interrupt-parent =3D <&intc>;
+> > +       compatible =3D "linux,sbsa-ref";
+> > +
+> > +       binman: binman {
+> > +               multiple-images;
+> > +       };
+> > +
+> > +       cpus {
+> > +               /* Filled by fdtdec_board_setup() */
+> > +       };
+> > +
+> > +       memory {
+> > +               /* Filled by fdtdec_board_setup() */
+> > +       };
+> > +
+> > +       soc {
+> > +               compatible =3D "simple-bus";
+> > +               #address-cells =3D <2>;
+> > +               #size-cells =3D <2>;
+> > +               ranges;
+> > +
+> > +               uart0 {
+> > +                       compatible =3D "arm,pl011";
+> > +                       status =3D "okay";
+> > +                       reg =3D <MAKE_PROP(SBSA_UART_BASE_ADDR)
+>=20
+> Can you use
+>=20
+> reg =3D /bits 64/ <0x60000000>
+>=20
+> instead?
+>=20
+> Same for those below.
 
-Do we really need those definitions? In the header file those were
-later used in the actual (lower case) variable assignment, but here the
-UUIDs are assigned directly (below)?
+Isn't that less readable ?
 
-> +
-> +stdin=serial
-> +#ifdef CONFIG_USB_KEYBOARD
-> +stdin+=,usbkbd
-> +#endif
-> +
-> +stdout=serial
-> +stderr=serial
-> +#ifdef CONFIG_VIDEO
-> +stdout+=,vidconsole
-> +stderr+=,vidconsole
-> +#endif
-> +
-> +bootm_size=BOOTM_SIZE
-> +kernel_addr_r=KERNEL_ADDR_R
-> +fdt_addr_r=FDT_ADDR_R
-> +scriptaddr=SCRIPT_ADDR_R
-> +pxefile_addr_r=PXEFILE_ADDR_R
-> +fdtoverlay_addr_r=FDTOVERLAY_ADDR_R
-> +ramdisk_addr_r=RAMDISK_ADDR_R
-> +
-> +#ifdef CONFIG_ARM64
-> +kernel_comp_addr_r=KERNEL_COMP_ADDR_R
-> +kernel_comp_size=KERNEL_COMP_SIZE
-> +#endif
-> +
-> +dfu_alt_info_ram=
-> +  kernel ram KERNEL_ADDR_R 0x1000000;
-> +  fdt ram FDT_ADDR_R 0x100000;
-> +  ramdisk ram RAMDISK_ADDR_R 0x4000000
-> +
-> +#ifdef CONFIG_ARM64
-> +fdtfile=allwinner/DEFAULT_DEVICE_TREE.dtb
+--=20
+Tom
 
-I am confused, shouldn't that be CONFIG_DEFAULT_DEVICE_TREE? Or is
-there more magic involved? And it looks like something is prepending
-the directory name already:
-(comparing the env between current master and after these patches)
--fdtcontroladdr=fbf0b090
--fdtfile=allwinner/sun50i-h618-orangepi-zero3.dtb
-+fdtcontroladdr=fbf0aa30
-+fdtfile=allwinner/allwinner/sun50i-h618-orangepi-zero3.dtb
+--TWNqZVJ7+CYguupf
+Content-Type: application/pgp-signature; name="signature.asc"
 
-(Or is this a problem with the switch to dts/upstream for the H616 I
-have in my tree already?)
+-----BEGIN PGP SIGNATURE-----
 
-> +#else
-> +fdtfile=DEFAULT_DEVICE_TREE.dtb
-> +#endif
-> +
-> +console=ttyS0,115200
-> +
-> +uuid_gpt_esp=c12a7328-f81f-11d2-ba4b-00a0c93ec93b
-> +#ifdef CONFIG_ARM64
-> +uuid_gpt_system=b921b045-1df0-41c3-af44-4c6f280d3fae
-> +#else
-> +uuid_gpt_system=69dad710-2ce4-4e3c-b16c-21a1d49abed3
-> +#endif
-> +
-> +partitions=
-> +  name=loader1,start=8k,size=32k,uuid=${uuid_gpt_loader1};
-> +  name=loader2,size=984k,uuid=${uuid_gpt_loader2};
-> +  name=esp,size=128M,bootable,uuid=${uuid_gpt_esp};
-> +  name=system,size=-,uuid=${uuid_gpt_system};
-> +
-> +/* support booting a very old kernel */
-> +#ifdef CONFIG_OLD_SUNXI_KERNEL_COMPAT
-> +bootcmd_sunxi_compat=
-> +  setenv root /dev/mmcblk0p3 rootwait;
-> +  if ext2load mmc 0 44000000 uEnv.txt; then
-> +          "echo Loaded environment from uEnv.txt;
-> +          "env import -t 44000000 ${filesize};
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmb99NAACgkQFHw5/5Y0
+tyywmAv+IVpiW/f3pFwoaSuMQExjkvuMxX91AfBvNm7Q4fPFxbcycod8TCvNlWLG
+8WnGLTYcI3Fxh/9GeV+/W620CkdZYcjcaCWzsGzK4/pUjppHuRbU5pA12i4o80O9
+wv5K1DknWPKgveoa1LmVhNl5Pnwj8nPUfOZ8P879/bsJMe7Z+0qSq+7c0U95ItkF
+VnN+QyRvkG+PwEzf1elLA+kZMJ7FhCkN9oKHfGGkpFdv3V9k1MKFRJNwD4pDvNSA
+3eEWGAdEXfAvdA9Tt5YPLjjUi29cgxBRd7y5kntpnrSAmGXySKLOLc7iqA6bPrvK
+KLIrSACIJCRiztPBsE6JFGukAN5ewPW8OTkDy8ANQse1qV1dkJHS4cGSvt8nIxIW
+R3WG0iOGAHzvG1te6CzwYDqKQO0R6WHalrupBrFI5PQ5gz1nDwCgfmlvH0kt1x7W
+VSmgDW0uPB9O014DpRNNglduKEfaV9RVB3txF0vzYDUf5ulPcBHcrH2OL9FWChJa
+MzvBjRfO
+=+xL3
+-----END PGP SIGNATURE-----
 
-is the indentation and the initial quotation for those two lines a
-leftover from the old file?
-
-The rest seems to be the same as before, effectively.
-Other than those nits I like the new way much better, didn't know we
-could now do this.
-
-Cheers,
-Andre
-
-> +  fi;
-> +  setenv bootargs console=${console} root=${root} ${extraargs};
-> +  ext2load mmc 0 43000000 script.bin &&
-> +  ext2load mmc 0 48000000 uImage &&
-> +  bootm 48000000
-> +#endif
-> diff --git a/include/configs/sunxi-common.h b/include/configs/sunxi-common.h
-> index 666553ccadb..ceea26494ad 100644
-> --- a/include/configs/sunxi-common.h
-> +++ b/include/configs/sunxi-common.h
-> @@ -61,169 +61,4 @@
->  #define PHYS_SDRAM_0			CFG_SYS_SDRAM_BASE
->  #define PHYS_SDRAM_0_SIZE		0x80000000 /* 2 GiB */
->  
-> -/****************************************************************************
-> - *           environment variables holding default load addresses           *
-> - ****************************************************************************/
-> -/*
-> - * We cannot use expressions here, because expressions won't be evaluated in
-> - * autoconf.mk.
-> - */
-> -#ifdef CONFIG_ARM64
-> -/*
-> - * Boards seem to come with at least 512MB of DRAM.
-> - * The kernel should go at 512K, which is the default text offset (that will
-> - * be adjusted at runtime if needed).
-> - * There is no compression for arm64 kernels (yet), so leave some space
-> - * for really big kernels, say 256MB for now.
-> - * Scripts, PXE and DTBs should go afterwards, leaving the rest for the initrd.
-> - */
-> -#define BOOTM_SIZE        __stringify(0xa000000)
-> -#define KERNEL_ADDR_R     __stringify(SDRAM_OFFSET(0080000))
-> -#define KERNEL_COMP_ADDR_R __stringify(SDRAM_OFFSET(4000000))
-> -#define KERNEL_COMP_SIZE  __stringify(0xb000000)
-> -#define FDT_ADDR_R        __stringify(SDRAM_OFFSET(FA00000))
-> -#define SCRIPT_ADDR_R     __stringify(SDRAM_OFFSET(FC00000))
-> -#define PXEFILE_ADDR_R    __stringify(SDRAM_OFFSET(FD00000))
-> -#define FDTOVERLAY_ADDR_R __stringify(SDRAM_OFFSET(FE00000))
-> -#define RAMDISK_ADDR_R    __stringify(SDRAM_OFFSET(FF00000))
-> -
-> -#elif (CONFIG_SUNXI_MINIMUM_DRAM_MB >= 256)
-> -/*
-> - * 160M RAM (256M minimum minus 64MB heap + 32MB for u-boot, stack, fb, etc.
-> - * 32M uncompressed kernel, 16M compressed kernel, 1M fdt,
-> - * 1M script, 1M pxe, 1M dt overlay and the ramdisk at the end.
-> - */
-> -#define BOOTM_SIZE        __stringify(0xa000000)
-> -#define KERNEL_ADDR_R     __stringify(SDRAM_OFFSET(2000000))
-> -#define FDT_ADDR_R        __stringify(SDRAM_OFFSET(3000000))
-> -#define SCRIPT_ADDR_R     __stringify(SDRAM_OFFSET(3100000))
-> -#define PXEFILE_ADDR_R    __stringify(SDRAM_OFFSET(3200000))
-> -#define FDTOVERLAY_ADDR_R __stringify(SDRAM_OFFSET(3300000))
-> -#define RAMDISK_ADDR_R    __stringify(SDRAM_OFFSET(3400000))
-> -
-> -#elif (CONFIG_SUNXI_MINIMUM_DRAM_MB >= 64)
-> -/*
-> - * 64M RAM minus 2MB heap + 16MB for u-boot, stack, fb, etc.
-> - * 16M uncompressed kernel, 8M compressed kernel, 1M fdt,
-> - * 1M script, 1M pxe, 1M dt overlay and the ramdisk at the end.
-> - */
-> -#define BOOTM_SIZE        __stringify(0x2e00000)
-> -#define KERNEL_ADDR_R     __stringify(SDRAM_OFFSET(1000000))
-> -#define FDT_ADDR_R        __stringify(SDRAM_OFFSET(1800000))
-> -#define SCRIPT_ADDR_R     __stringify(SDRAM_OFFSET(1900000))
-> -#define PXEFILE_ADDR_R    __stringify(SDRAM_OFFSET(1A00000))
-> -#define FDTOVERLAY_ADDR_R __stringify(SDRAM_OFFSET(1B00000))
-> -#define RAMDISK_ADDR_R    __stringify(SDRAM_OFFSET(1C00000))
-> -
-> -#elif (CONFIG_SUNXI_MINIMUM_DRAM_MB >= 32)
-> -/*
-> - * 32M RAM minus 2.5MB for u-boot, heap, stack, etc.
-> - * 16M uncompressed kernel, 7M compressed kernel, 128K fdt, 64K script,
-> - * 128K DT overlay, 128K PXE and the ramdisk in the rest (max. 5MB)
-> - */
-> -#define BOOTM_SIZE        __stringify(0x1700000)
-> -#define KERNEL_ADDR_R     __stringify(SDRAM_OFFSET(1000000))
-> -#define FDT_ADDR_R        __stringify(SDRAM_OFFSET(1d50000))
-> -#define SCRIPT_ADDR_R     __stringify(SDRAM_OFFSET(1d40000))
-> -#define PXEFILE_ADDR_R    __stringify(SDRAM_OFFSET(1d00000))
-> -#define FDTOVERLAY_ADDR_R __stringify(SDRAM_OFFSET(1d20000))
-> -#define RAMDISK_ADDR_R    __stringify(SDRAM_OFFSET(1800000))
-> -
-> -#else
-> -#error Need at least 32MB of DRAM. Please adjust load addresses.
-> -#endif
-> -
-> -#define MEM_LAYOUT_ENV_SETTINGS \
-> -	"bootm_size=" BOOTM_SIZE "\0" \
-> -	"kernel_addr_r=" KERNEL_ADDR_R "\0" \
-> -	"fdt_addr_r=" FDT_ADDR_R "\0" \
-> -	"scriptaddr=" SCRIPT_ADDR_R "\0" \
-> -	"pxefile_addr_r=" PXEFILE_ADDR_R "\0" \
-> -	"fdtoverlay_addr_r=" FDTOVERLAY_ADDR_R "\0" \
-> -	"ramdisk_addr_r=" RAMDISK_ADDR_R "\0"
-> -
-> -#ifdef CONFIG_ARM64
-> -#define MEM_LAYOUT_ENV_EXTRA_SETTINGS \
-> -	"kernel_comp_addr_r=" KERNEL_COMP_ADDR_R "\0" \
-> -	"kernel_comp_size=" KERNEL_COMP_SIZE "\0"
-> -#else
-> -#define MEM_LAYOUT_ENV_EXTRA_SETTINGS ""
-> -#endif
-> -
-> -#define DFU_ALT_INFO_RAM \
-> -	"dfu_alt_info_ram=" \
-> -	"kernel ram " KERNEL_ADDR_R " 0x1000000;" \
-> -	"fdt ram " FDT_ADDR_R " 0x100000;" \
-> -	"ramdisk ram " RAMDISK_ADDR_R " 0x4000000\0"
-> -
-> -#ifdef CONFIG_OLD_SUNXI_KERNEL_COMPAT
-> -#define BOOTCMD_SUNXI_COMPAT \
-> -	"bootcmd_sunxi_compat=" \
-> -		"setenv root /dev/mmcblk0p3 rootwait; " \
-> -		"if ext2load mmc 0 0x44000000 uEnv.txt; then " \
-> -			"echo Loaded environment from uEnv.txt; " \
-> -			"env import -t 0x44000000 ${filesize}; " \
-> -		"fi; " \
-> -		"setenv bootargs console=${console} root=${root} ${extraargs}; " \
-> -		"ext2load mmc 0 0x43000000 script.bin && " \
-> -		"ext2load mmc 0 0x48000000 uImage && " \
-> -		"bootm 0x48000000\0"
-> -#else
-> -#define BOOTCMD_SUNXI_COMPAT
-> -#endif
-> -
-> -#ifdef CONFIG_USB_KEYBOARD
-> -#define CONSOLE_STDIN_SETTINGS \
-> -	"stdin=serial,usbkbd\0"
-> -#else
-> -#define CONSOLE_STDIN_SETTINGS \
-> -	"stdin=serial\0"
-> -#endif
-> -
-> -#ifdef CONFIG_VIDEO
-> -#define CONSOLE_STDOUT_SETTINGS \
-> -	"stdout=serial,vidconsole\0" \
-> -	"stderr=serial,vidconsole\0"
-> -#else
-> -#define CONSOLE_STDOUT_SETTINGS \
-> -	"stdout=serial\0" \
-> -	"stderr=serial\0"
-> -#endif
-> -
-> -#define PARTS_DEFAULT \
-> -	"name=loader1,start=8k,size=32k,uuid=${uuid_gpt_loader1};" \
-> -	"name=loader2,size=984k,uuid=${uuid_gpt_loader2};" \
-> -	"name=esp,size=128M,bootable,uuid=${uuid_gpt_esp};" \
-> -	"name=system,size=-,uuid=${uuid_gpt_system};"
-> -
-> -#define UUID_GPT_ESP "c12a7328-f81f-11d2-ba4b-00a0c93ec93b"
-> -
-> -#ifdef CONFIG_ARM64
-> -#define UUID_GPT_SYSTEM "b921b045-1df0-41c3-af44-4c6f280d3fae"
-> -#else
-> -#define UUID_GPT_SYSTEM "69dad710-2ce4-4e3c-b16c-21a1d49abed3"
-> -#endif
-> -
-> -#define CONSOLE_ENV_SETTINGS \
-> -	CONSOLE_STDIN_SETTINGS \
-> -	CONSOLE_STDOUT_SETTINGS
-> -
-> -#ifdef CONFIG_ARM64
-> -#define FDTFILE "allwinner/" CONFIG_DEFAULT_DEVICE_TREE ".dtb"
-> -#else
-> -#define FDTFILE CONFIG_DEFAULT_DEVICE_TREE ".dtb"
-> -#endif
-> -
-> -#define CFG_EXTRA_ENV_SETTINGS \
-> -	CONSOLE_ENV_SETTINGS \
-> -	MEM_LAYOUT_ENV_SETTINGS \
-> -	MEM_LAYOUT_ENV_EXTRA_SETTINGS \
-> -	DFU_ALT_INFO_RAM \
-> -	"fdtfile=" FDTFILE "\0" \
-> -	"console=ttyS0,115200\0" \
-> -	"uuid_gpt_esp=" UUID_GPT_ESP "\0" \
-> -	"uuid_gpt_system=" UUID_GPT_SYSTEM "\0" \
-> -	"partitions=" PARTS_DEFAULT "\0" \
-> -	BOOTCMD_SUNXI_COMPAT
-> -
->  #endif /* _SUNXI_COMMON_CONFIG_H */
-
+--TWNqZVJ7+CYguupf--
