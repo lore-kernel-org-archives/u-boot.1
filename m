@@ -4,100 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE32ECF34B0
-	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 15:05:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDA7BCF34B0
+	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 15:23:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A5C3E88E19;
-	Thu,  3 Oct 2024 17:05:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 5C80888D9F;
+	Thu,  3 Oct 2024 17:23:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Y5E71Mdv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NY3PiVbM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 143D788D9F; Thu,  3 Oct 2024 17:05:50 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id A389888E4A; Thu,  3 Oct 2024 17:23:41 +0200 (CEST)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CA14F88DD4
- for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 17:05:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AB3BB88D9F
+ for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 17:23:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-37cd8972738so839644f8f.3
- for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 08:05:46 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-37cdac05af9so1118849f8f.0
+ for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 08:23:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1727967946; x=1728572746; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PoZRjAzyLV42dbmh6tTvJFMzFGmTF2YZ8Chn0i6KVXc=;
- b=Y5E71MdvggktoWG9XvAHMVaSSCrxUPXTzRzi+EZyPZQpgyYhryjxVQH9wEpd6kKnkY
- rsrWFwxLuaka67AgZB1LkiESt3zJmrShEL5tS9B/4TonVuS3Z01P5Vf9RhNVjnE4DVXf
- bBOhjLrVqRn7q0IJ83tlaNlgacUXld75eaaBV9gor3qSw6G49hcsbLN1eR/ZZVQLpDtP
- fL3MKNXOilQrMcRfAYg0mJvmiFFlH/CXw1+3cU/v76Z+UVbpTF6YdVsM8CQZSgEWn6EX
- RF7l+p4baygKYeZoRBePjg7gAIGn4r9EmDH4veNzgfn8ZparodWTnNxZ8dOykgYtrcak
- GBsg==
+ d=linaro.org; s=google; t=1727969018; x=1728573818; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=HBguTU1p2cddND2TWrcGBBpXEh6q5s/BcDDx8nwRbWI=;
+ b=NY3PiVbMLkvc7vmSFt0t7H8k+qx772XNO0/7QvNG4heoOz/uq6C0iYgEEjk42FmOaF
+ 2M6uaHXC8Vb/oDaCGwY5PIDWKNYhzDwKIzRqbF/hVzCxqgJmpOkxWopADV3gV1Zaq9iD
+ Q7zrgcFQ4XCHCDboo0B1rnv3W8+DdpUR0n+S4UGq42pFrxEKpdedFnxvRKWhBoZMh3By
+ VgmY4JAcxCpwFPv9qwmDwpJi1hbMhhwaEMReWoIz0GL+16+Bmc8hOgPS5vq7YjpssRzZ
+ z8MY2CJsHMC6EGv9WzC6Qqsmh8Fx/Bgl+fjZG6ct08CW1r3ReVyCLGNumseviAQNwzb8
+ 2jwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727967946; x=1728572746;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=PoZRjAzyLV42dbmh6tTvJFMzFGmTF2YZ8Chn0i6KVXc=;
- b=eoqhXa/BGnqExMD67Vm2P7/R1UGvKBHaZe8/JAFHIQgcGsv4aI2Cs1tfw5D9gdZNXd
- k+0fol2wsgtUyYVTeS9tKPhrCTIwXuQ62q9DMHwn2lJRRUYOsDJPZF4E/saB6mNNo9fg
- MrZ0XU2rGYenmmewoMwYFl9Zi3QC0qruEAhgE90j6JDRL792r8Lon3YjtKNkkyXEv3a9
- y0XYZhR+qRzyE46SqnUbn29NVxZvSVN38vCsz8wGjNZNBbtZ4fhmU8FU2JJlrVdSuYtn
- JbN484LjORCdGaEZQEAlk8ro6MLwfhiCIIm2pbYJCPdgehT7ia77sKn2sZpq/ED7uFs0
- jmbA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUN3+Hk6MJMxTfj9sh4CMfsj3dCQgplSJQqju1MP0sMAtGVwq8lSzp8DvHK9z7VrsBw9RlYqds=@lists.denx.de
-X-Gm-Message-State: AOJu0YzbHRGG22IN3m4QVMRtiowHEESX7DBaDnTa0XKZU7o8/YyzQk/G
- u1Hvg+OpoiFDsuvmM71EM133uO7+QdWMhsUAcbaicGMD5/Q28jeM4y+kjjEuyNvdNZt4uhpqVvr
- gMzXq0vEOzCGplqvfRf1J/4r7F7E=
-X-Google-Smtp-Source: AGHT+IEcWJVWS1+erVM/jK6NIxwluKOTR0nUIOM/eO87CBIT8x35AE6ERRCWn2cnBAT1y7GDHEQycP6dPqqpTPLWIII=
-X-Received: by 2002:a5d:5585:0:b0:374:ca16:e09b with SMTP id
- ffacd0b85a97d-37cfb8b5735mr3777463f8f.9.1727967945859; Thu, 03 Oct 2024
- 08:05:45 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1727969018; x=1728573818;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=HBguTU1p2cddND2TWrcGBBpXEh6q5s/BcDDx8nwRbWI=;
+ b=IZKKtAjrJqQxKFpfwbL8UXbeojtOscT5hWRx0l/jKA3RdUZIYel3UXj3/I7YJlNRNE
+ 2cG5OHYbxYuSTo+NCmyYx4osixU+i5UESUJoRyRlxli2yPW3A4ssd0EMY9LzeS+YCbXl
+ Omm4a40YN9bSg5Twfh7ZcGkQfBUdNJTGWKww+KMRpcuX3eMF8lQjMSYEojie1KfL7Oh7
+ N5gJpsMN5TZ9CXT+hSpktPGlESw0n74ltxZDxOT9Ikzjj/inC245ItWPyhIYxZbL7Xex
+ 5BGCcDksbZVkV26i6I/fQWtGJu5rCbNw5JeROu2uN3ME4/s1/ijm9FEq8UvgknrUDcae
+ L+BA==
+X-Gm-Message-State: AOJu0Ywhef4FYEIgboLXZy399xXfBypZqcpVKERLswBCeeeoI+l2rsu1
+ wQQfqXpnzvNbJQtUES6WJ3lEOmizWb3EJKWl4hQxhEFdZhDzbYXRlm4JA0+BgAp7OBNYu96TUxn
+ UXK65xg==
+X-Google-Smtp-Source: AGHT+IFNx6tRAbhICnfdKjPNnk2fwPoNnyXFSka28TktFOlLt0xKfHwUTZ5viSoD9UL1ewA5d8Cn/w==
+X-Received: by 2002:adf:9bdd:0:b0:37c:d123:f3bf with SMTP id
+ ffacd0b85a97d-37cfb8b5697mr5829372f8f.3.1727969017609; 
+ Thu, 03 Oct 2024 08:23:37 -0700 (PDT)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:d888:7a58:deed:47d6])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-37d081f7482sm1506220f8f.8.2024.10.03.08.23.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 03 Oct 2024 08:23:37 -0700 (PDT)
+From: Jerome Forissier <jerome.forissier@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
+ Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
+ Anton Antonov <Anton.Antonov@arm.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>
+Subject: [PATCH v11 00/29] Introduce the lwIP network stack
+Date: Thu,  3 Oct 2024 17:22:46 +0200
+Message-Id: <cover.1727968902.git.jerome.forissier@linaro.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-References: <20240926231457.2933914-1-marex@denx.de>
- <20240926231457.2933914-2-marex@denx.de>
- <CAFLszThbZ5t+siC0Gz_7KaecTTwUA6J2uTdtHEaYoK+V6Rm_7A@mail.gmail.com>
- <20241003014042.GS4737@bill-the-cat>
- <CAFLszTiawdOfoMx-ZmMLW77dBS11WWVpWHNF-KfPi86xEJB+rQ@mail.gmail.com>
-In-Reply-To: <CAFLszTiawdOfoMx-ZmMLW77dBS11WWVpWHNF-KfPi86xEJB+rQ@mail.gmail.com>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Thu, 3 Oct 2024 18:05:34 +0300
-Message-ID: <CAPVz0n0dYu7pbvEef6zEMrgKHyiRX-DYmD2bxuSVB3p+rrjJjQ@mail.gmail.com>
-Subject: Re: [PATCH v3 2/4] power: regulator: Convert
- regulators_enable_boot_on/off() to regulator_post_probe
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de, Ben Wolsieffer <benwolsieffer@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Chris Morgan <macromorgan@hotmail.com>, Dragan Simic <dsimic@manjaro.org>, 
- Eugen Hristev <eugen.hristev@collabora.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>, 
- Matteo Lisi <matteo.lisi@engicam.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Max Krummenacher <max.krummenacher@toradex.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Sam Day <me@samcday.com>, 
- Sumit Garg <sumit.garg@linaro.org>, Thierry Reding <treding@nvidia.com>, 
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, u-boot-amlogic@groups.io, 
- u-boot-qcom@groups.io, u-boot@dh-electronics.com, 
- uboot-stm32@st-md-mailman.stormreply.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,208 +94,570 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D1=87=D1=82, 3 =D0=B6=D0=BE=D0=B2=D1=82. 2024=E2=80=AF=D1=80. =D0=BE 18:03=
- Simon Glass <sjg@chromium.org> =D0=BF=D0=B8=D1=88=D0=B5:
->
-> Hi Tom,
->
-> On Wed, 2 Oct 2024 at 19:40, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Wed, Oct 02, 2024 at 04:55:39PM -0600, Simon Glass wrote:
-> > > Hi,
-> > >
-> > > On Thu, 26 Sept 2024 at 17:15, Marek Vasut <marex@denx.de> wrote:
-> > > >
-> > > > Turn regulators_enable_boot_on() and regulators_enable_boot_off() i=
-nto
-> > > > empty functions. Implement matching functionality in regulator_post=
-_probe()
-> > > > instead. The regulator_post_probe() is called for all regulators af=
-ter they
-> > > > probe, and regulators that have regulator-always-on or regulator-bo=
-ot-on DT
-> > > > properties now always probe due to DM_FLAG_PROBE_AFTER_BIND being s=
-et on
-> > > > such regulators in regulator_post_bind().
-> > > >
-> > > > Finally, fold regulator_unset() functionality into regulator_autose=
-t().
-> > > >
-> > > > Signed-off-by: Marek Vasut <marex@denx.de>
-> > > > ---
-> > > > Cc: Ben Wolsieffer <benwolsieffer@gmail.com>
-> > > > Cc: Caleb Connolly <caleb.connolly@linaro.org>
-> > > > Cc: Chris Morgan <macromorgan@hotmail.com>
-> > > > Cc: Dragan Simic <dsimic@manjaro.org>
-> > > > Cc: Eugen Hristev <eugen.hristev@collabora.com>
-> > > > Cc: Francesco Dolcini <francesco.dolcini@toradex.com>
-> > > > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> > > > Cc: Jaehoon Chung <jh80.chung@samsung.com>
-> > > > Cc: Jagan Teki <jagan@amarulasolutions.com>
-> > > > Cc: Jonas Karlman <jonas@kwiboo.se>
-> > > > Cc: Kever Yang <kever.yang@rock-chips.com>
-> > > > Cc: Matteo Lisi <matteo.lisi@engicam.com>
-> > > > Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> > > > Cc: Max Krummenacher <max.krummenacher@toradex.com>
-> > > > Cc: Neil Armstrong <neil.armstrong@linaro.org>
-> > > > Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> > > > Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> > > > Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
-> > > > Cc: Quentin Schulz <quentin.schulz@cherry.de>
-> > > > Cc: Sam Day <me@samcday.com>
-> > > > Cc: Simon Glass <sjg@chromium.org>
-> > > > Cc: Sumit Garg <sumit.garg@linaro.org>
-> > > > Cc: Svyatoslav Ryhel <clamor95@gmail.com>
-> > > > Cc: Thierry Reding <treding@nvidia.com>
-> > > > Cc: Tom Rini <trini@konsulko.com>
-> > > > Cc: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-> > > > Cc: u-boot-amlogic@groups.io
-> > > > Cc: u-boot-qcom@groups.io
-> > > > Cc: u-boot@dh-electronics.com
-> > > > Cc: u-boot@lists.denx.de
-> > > > Cc: uboot-stm32@st-md-mailman.stormreply.com
-> > > > ---
-> > > > V2: Rebase on current u-boot/next
-> > > > V3: No change
-> > > > ---
-> > > >  drivers/power/regulator/regulator-uclass.c | 60 +++++++-----------=
-----
-> > > >  1 file changed, 19 insertions(+), 41 deletions(-)
-> > > >
-> > > > diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/p=
-ower/regulator/regulator-uclass.c
-> > > > index 1a970004540..9fcc4bd85b9 100644
-> > > > --- a/drivers/power/regulator/regulator-uclass.c
-> > > > +++ b/drivers/power/regulator/regulator-uclass.c
-> > > > @@ -314,6 +314,11 @@ int regulator_autoset(struct udevice *dev)
-> > > >                         return ret;
-> > > >         }
-> > > >
-> > > > +       if (uc_pdata->force_off) {
-> > > > +               ret =3D regulator_set_enable(dev, false);
-> > > > +               goto out;
-> > > > +       }
-> > > > +
-> > > >         if (!uc_pdata->always_on && !uc_pdata->boot_on) {
-> > > >                 ret =3D -EMEDIUMTYPE;
-> > > >                 goto out;
-> > > > @@ -518,56 +523,28 @@ static int regulator_pre_probe(struct udevice=
- *dev)
-> > > >         return 0;
-> > > >  }
-> > > >
-> > > > -int regulators_enable_boot_on(bool verbose)
-> > > > +static int regulator_post_probe(struct udevice *dev)
-> > > >  {
-> > > > -       struct udevice *dev;
-> > > > -       struct uclass *uc;
-> > > >         int ret;
-> > > >
-> > > > -       ret =3D uclass_get(UCLASS_REGULATOR, &uc);
-> > > > -       if (ret)
-> > > > +       ret =3D regulator_autoset(dev);
-> > > > +       if (ret && ret !=3D -EMEDIUMTYPE && ret !=3D -EALREADY && r=
-et !=3D ENOSYS)
-> > > >                 return ret;
-> > > > -       for (uclass_first_device(UCLASS_REGULATOR, &dev);
-> > > > -            dev;
-> > > > -            uclass_next_device(&dev)) {
-> > > > -               ret =3D regulator_autoset(dev);
-> > > > -               if (ret =3D=3D -EMEDIUMTYPE || ret =3D=3D -EALREADY=
-) {
-> > > > -                       ret =3D 0;
-> > > > -                       continue;
-> > > > -               }
-> > > > -               if (verbose)
-> > > > -                       regulator_show(dev, ret);
-> > > > -               if (ret =3D=3D -ENOSYS)
-> > > > -                       ret =3D 0;
-> > > > -       }
-> > > >
-> > > > -       return ret;
-> > > > +       if (_DEBUG)
-> > > > +               regulator_show(dev, ret);
-> > > > +
-> > > > +       return 0;
-> > > >  }
-> > > >
-> > > > -int regulators_enable_boot_off(bool verbose)
-> > > > +int regulators_enable_boot_on(bool verbose)
-> > > >  {
-> > > > -       struct udevice *dev;
-> > > > -       struct uclass *uc;
-> > > > -       int ret;
-> > > > -
-> > > > -       ret =3D uclass_get(UCLASS_REGULATOR, &uc);
-> > > > -       if (ret)
-> > > > -               return ret;
-> > > > -       for (uclass_first_device(UCLASS_REGULATOR, &dev);
-> > > > -            dev;
-> > > > -            uclass_next_device(&dev)) {
-> > > > -               ret =3D regulator_unset(dev);
-> > > > -               if (ret =3D=3D -EMEDIUMTYPE) {
-> > > > -                       ret =3D 0;
-> > > > -                       continue;
-> > > > -               }
-> > > > -               if (verbose)
-> > > > -                       regulator_show(dev, ret);
-> > > > -               if (ret =3D=3D -ENOSYS)
-> > > > -                       ret =3D 0;
-> > > > -       }
-> > > > +       return 0;
-> > > > +}
-> > > >
-> > > > -       return ret;
-> > > > +int regulators_enable_boot_off(bool verbose)
-> > > > +{
-> > > > +       return 0;
-> > > >  }
-> > > >
-> > > >  UCLASS_DRIVER(regulator) =3D {
-> > > > @@ -575,5 +552,6 @@ UCLASS_DRIVER(regulator) =3D {
-> > > >         .name           =3D "regulator",
-> > > >         .post_bind      =3D regulator_post_bind,
-> > > >         .pre_probe      =3D regulator_pre_probe,
-> > > > +       .post_probe     =3D regulator_post_probe,
-> > > >         .per_device_plat_auto   =3D sizeof(struct dm_regulator_ucla=
-ss_plat),
-> > > >  };
-> > > > --
-> > > > 2.45.2
-> > > >
-> > >
-> > > I thought I objected to this patch, but it seems to be in -next? Does
-> > > anyone know what has happened here?
-> >
-> > Yes, you missed me noting that this fixes real problems and has been
-> > needing to be fixed for a while. I said you should provide your
-> > alternative approach and we'll get this sorted out in -next and I took
-> > the work-around for master so the release wouldn't be broken.
->
-> OK ta. So long as we can revert/change that is fine.
->
-> >
-> > > I am seeing these errors now when running sandbox 'u-boot -D':
-> > >
-> > >        i2c_emul_find() No emulators for device 'sandbox_pmic'
-> > >   sandbox_pmic_write() write error to device: 0000000018c49db0 regist=
-er: 0x0!
-> > >        out_set_value() PMIC write failed: -5
-> > >        i2c_emul_find() No emulators for device 'sandbox_pmic'
-> > >   sandbox_pmic_write() write error to device: 0000000018c49db0 regist=
-er: 0x0!
-> > >        out_set_value() PMIC write failed: -5
-> >
-> > I suppose the good news is that perhaps this is also related to the
-> > problem that Svyatoslav was reporting.
->
-> OK, I actually never fully understood the problem, but yes, sandbox is
-> supposed to work similarly.
->
-> Regards,
-> Simon
+This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
+library for the network stack" [1]. The goal is to introduce the lwIP TCP/IP
+stack [2] [3] as an alternative to the current implementation in net/,
+selectable with Kconfig, and ultimately keep only lwIP if possible. Some
+reasons for doing so are:
+- Make the support of HTTPS in the wget command easier. Javier T. and
+Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
+so. With that it becomes possible to fetch and launch a distro installer
+such as Debian etc. using a secure, authenticated connection directly
+from the U-Boot shell. Several use cases:
+  * Authentication: prevent MITM attack (third party replacing the
+binary with a different one)
+  * Confidentiality: prevent third parties from grabbing a copy of the
+image as it is being downloaded
+  * Allow connection to servers that do not support plain HTTP anymore
+(this is becoming more and more common on the Internet these days)
+- Possibly benefit from additional features implemented in lwIP
+- Less code to maintain in U-Boot
 
-Simon,
+Prior to applying this series, the lwIP stack needs to be added as a
+Git subtree with the following command:
 
-Please inform me when you come up with a solution, I would like to
-test it. Thanks.
+ $ git subtree add --squash --prefix lib/lwip/lwip \
+   https://github.com/lwip-tcpip/lwip.git  STABLE-2_2_0_RELEASE 
+
+Notes
+
+1. A number of features are currently incompatible with NET_LWIP:
+DFU_TFTP, FASTBOOT, SPL_NET, ETH_SANDBOX, ETH_SANDBOX_RAW, DM_ETH. They
+all make assumptions on how the network stack is implemented and/or
+pull sybols that are not trivially exported from lwIP. Some interface
+rework may be needed.
+
+2. Due to the above, and in order to provide some level of testing of the
+lwIP code in CI even when the legacy NET is the default, a new QEMU
+configuration is introduced (qemu_arm64_lwip_defconfig) which is
+based on qemu_arm64_defconfig with NET_LWIP and CMD_*_LWIP enabled.
+In addition to that, this series has some [TESTING] patches
+which make NET_LWIP the default.
+
+[1] https://lore.kernel.org/all/20231127125726.3735-1-maxim.uvarov@linaro.org/
+[2] https://www.nongnu.org/lwip/
+[3] https://en.wikipedia.org/wiki/LwIP
+
+Changes in v11:
+
+- Rebased onto next
+- "Miscellaneous fixes" removed (patches were merged in next). The
+series still begins with small fixes posted separately [1] [2] [3].
+- Add (some) support for CMD_PXE and therefore drop patch "[TESTING]
+configs: set CONFIG_NET=y when PXE is enabled". This is build-tested
+only and it is very likely that some work is needed to make it useful.
+For example, adding the code for DHCP option 209 to lwIP so that
+BOOTP_PXE_DHCP_OPTION can be supported.
+- SANDBOX is now supported, but with the dm eth and wget tests
+disabled.
+- Move eth_set_enable_bootdevs() declaration to net-common.h
+Fixes warning with snow_defconfig:
+test/test-main.c:310:17: warning: implicit declaration of function ‘eth_set_enable_bootdevs’ [....]
+- Do eth_init() and eth_init_rings() only once, and do not forget
+lwip_init()! Fixes TFTP stalls on TI K3 (reported by Tom R. and
+tested by Ilias A.)
+- Set MEM_ALIGNMENT to 8 in lib/lwip/u-boot/lwipopts.h. Fixes TFTP
+random crashes on TI K3 (Ilias A.)
+- net_lwip_rx(): call free_pkt() even when recv() has returned 0,
+as required by the driver model documentation (and imx8mp_evk). Fixes
+a regression introduced in v9. Goes together with patch [2].
+- Add "lwip: tftp: bind to TFTP port only when in server mode" to
+fix an issue with interrupted tftp commands (the tftp command hangs
+if it is interrupted with Ctrl-C and started again).
+- TFTP: fix uninitialized "ret" variable in do_tftpb(); print "Abort"
+on Ctrl-C.
+- MAINTAINERS: remove README and add sandbox ethernet driver to the
+list of maintained files.
+- AFAICT, CI should be all good except qemu_xtensa_dc233c which is
+broken when NET_LWIP=y (QEMU just hangs with no output). I could
+not find or build a suitable GDB binary to debug that.
+
+[1] https://patchwork.ozlabs.org/project/uboot/patch/20241002144845.1439316-1-jerome.forissier@linaro.org/
+[2] https://patchwork.ozlabs.org/project/uboot/patch/20240927142038.879037-1-jerome.forissier@linaro.org/ 
+[3] https://patchwork.ozlabs.org/project/uboot/patch/20241003142030.1610222-1-jerome.forissier@linaro.org/
+
+Changes in v10:
+
+- Rebase onto next
+- URL for lwIP changed in cover letter: using GitHub now since all
+tags have suddenly disappeared from the repository on gnu.org.
+- Post fixes as a separate series [1] or individual patches [2] [3]
+- Add "if NET_LWIP" to net/lwip/Kconfig to fix a kconfig warning
+  when doing the full branch build with buildman ("[NEW]")
+- net/ is added to libs-y only when NET or NET_LWIP, not NO_NET
+- Apply review tags
+
+[1] http://patchwork.ozlabs.org/project/uboot/list/?series=422079
+https://lists.denx.de/pipermail/u-boot/2024-September/563904.html
+[2] http://patchwork.ozlabs.org/project/uboot/list/?series=421962
+[3] http://patchwork.ozlabs.org/project/uboot/list/?series=421959
+ 
+Changes in v9:
+
+- Rebased onto master, reordered commits to put some fixes that are not
+strictly related to lwIP first.
+- New commit "test/py: test_efi_loader: add missing dependency on
+cmd_tftpboot" (Tom R.)
+- test_efi_loader.py: add missing dependency on cmd_wget (Tom R.)
+- wget: fix divide by zero when transfer takes less than 1ms (Tom R.)
+- New commit "configs: use syntax CONFIG_FOO=n in tools-only_defconfig"
+(Tom R.)
+- Make TCP_WND configurable (via CONFIG_LWIP_TCP_WND) because a large
+value is needed for good performance especially with latency but 
+transfers stall in QEMU (-net user) when the value is larger than a few
+KB (Anton A., offlist)
+- Added [TESTING] commits to run CI with NET_LWIP enabled by default
+except for SANDBOX and platforms that enable PXE, and fixed a number of
+issues:
+  * coreboot_defconfig: 'implicit declaration' warnings on
+    ip_checksum_ok() and compute_ip_checksum()
+  * Fix EFI net tests (bootefi selftest) by adding missing
+    push_packed() call to net_process_received_packet()
+  * qemu_arm64: fix test_efi_loader.py failures (skip HTTP test
+    by default since it needs a HTTP server; fix a bug in the dhcp
+    command which would not set the "serverip" variable)
+  * QEMU CI tests for r2dplus_i82557c, r2dplus_rtl8139:
+    Fixed receive errors due to calling free_pkt() with a
+    length of zero. r2dplus_tulip: fixed "dm_pci_phys_to_bus:
+    invalid physical address" caused by too late eth_init_rings().
+With that the CI status is all GREEN:
+https://dev.azure.com/u-boot/u-boot/_build/results?buildId=9225&view=results
+
+Changes in v8:
+
+- Fix bootefi with tftp and wget. It would previously fail with an
+error message: "No UEFI binary known at 200000". Tested on Raspberry
+3B+. Also fix the legacy wget. (Tom R.)
+- wget: add "Bytes transferred =" message and accept legacy syntax
+for better compatibility which also makes it easier to add a test to
+the test suite
+- wget: When no server name or address is supplied, use
+${httpserverip} then ${serverip}.
+- wget: start the timer used for measuring throughput when the first
+data block is received. In other words: do not include DNS resolution
+and TCP connection time in measurement. It gives better numbers ;)
+but more importantly is how the legacy code works.
+- wget: handle non-200 result codes from the server as errors.
+- tftp: when no server name or ip is supplied, use ${tftpserverip}
+then fall back to ${serverip}.
+- New commit: "test/py: add HTTP (wget) test"
+- New commit: "net: wget: removed unused function wget_success()"
+- Change back all !CONFIG_IS_ENABLED(NO_NET) tests to
+(CONFIG_IS_ENABLED(NET) || CONFIG_IS_ENABLED(NET_LWIP)) since the
+NO_NET case is wrong when CONFIG_SPL_BUILD or CONFIG_TPL_BUILD is
+defined (Tom R.)
+
+Changes in v7:
+
+- Rebased onto master
+- Updated binary size comparisons in this cover letter. Note that
+the increase for imx8mp_evk_defconfig  was wrong due to a configuration
+error.
+
+Changes in v6:
+
+- Rebased on next
+- "flash: prefix error codes with FL_"
+Update drivers/mtd/altera_qspi.c too (Tom R.)
+- "net: introduce alternative implementation as net-lwip/"
+Introduce a "Networking" top-level menu in the main Kconfig. Avoids
+having a lot of network-related symbols on the first screen of
+menuconfig. The "Networking stack" choice as well as the applicable
+symbols (depending on the selected choice) are now all inside this
+"Networking" menu. (Michal S.)
+For PROT_DHCP_LWIP and PROT_DNS_LWIP, use "select" PROT_UDP_LWIP
+rather than "depends on".
+Move NET_RANDOM_ETHADDR to the common ('if NET || NET_LWIP') block.
+Move SYS_RX_ETH_BUFFER out of 'if NET || NET_LWIP' since it is used
+unguarded in some code (e.g., am62x_beagleplay_r5) (Tom R.).
+- "net: split include/net.h into net{,-common,-legacy,-lwip}.h"
+Move net_random_ethaddr() to net-common.h.
+- "net: eth-uclass: add function eth_start_udev()"
+Fix typo and apply Tom R.'s R-b.
+- "net-lwip: add DHCP support and dhcp commmand"
+Convert !CONFIG_IS_ENABLED(NET) to
+CONFIG_IS_ENABLED(NO_NET) in board/xilinx/common/board.c
+to fix an issue with device having no MAC address (thanks Michal S.).
+Do the same at other places (icore_mx8mp.c, imx8mp_debix_model_a.c,
+board/ti/am335x/board.c, tiny-printf.c).
+Move CMD_MII and CMD_MDIO into 'if NET || NET_LWIP'.
+- "net-lwip: add TFTP support and tftpboot command":
+Fix help string.
+- "net: split cmd/net.c into cmd/net.c and cmd/net-common.c":
+Apply Ilias' R-b.
+- "net-lwip: add TFTP_BLOCKSIZE"
+Apply Ilias' R-b. I moved the TFTP_BLOCKSIZE Kconfig into this commit
+where it belongs (it was previously in "net" split ... net.h").
+
+Changes in v5:
+
+- Rebased on next
+- Refactor Kconfig options to avoid duplicates
+- Library functions use a more consistent naming (dhcp_loop(),
+ping_loop() etc.) and take a struct udevice * parameter (Heinrich S.)
+- Do not use net_process_receive_packet() for input anymore. Instead of
+calling eth_rx() which would invoke net_process_receive_packet(), we
+call a new net_lwip_rx(udev) function which invokes the device recv()
+and pushes the packets up the lwIP stack. Thus everything is tied to
+a udevice now. (Heinrich S.)
+- Add "configs: replace '# CONFIG_NET is not set' with CONFIG_NO_NET=y"
+(Tom R.)
+- tftp: unify display with legacy command: add throughput, 65 hashes per
+line, one every 10 blocks received (Tom R.)
+- Moved net-lwip/* to net/lwip/* (Simon G.)
+- Rename static function low_level_output() to linkoutput() since it is
+the name used in the lwIP netif struct.
+- Fixed off-by-one in parse_url() which could cause wget to fail when
+passed a URL with a host name (as opposed to a URL with an IP address).
+- Improved TFTP performance by adding support for the blksize option
+(patches "lwip: tftp: add support of blksize option to client" and
+"net-lwip: add TFTP_BLOCKSIZE) (Tom R.)
+- Add an optional port number to the tftp command for easier testing
+(syntax: tftp [[ip:[port:]]filename])
+- wget: display an "unsupported URI" error if uri is not http://
+(Jon H.)
+- Adjusted the lwIP TCP options in lib/lwip/u-boot/lwipopts.h for
+better performance, in particular TCP_WND.
+- Add "net: fec_mxc_init(): do not ignore return status of fec_open()"
+- Set the proper environment variables when DHCP succeeds (ipaddr%d
+etc.) and read the proper ones for the given device in new_netif(),
+allowing correct behavior when several adapters are available (tested
+on i.MX8M Plus).
+- Fix an alignment issue with outgoing packets (see the linkoutput()
+function). With that the i.MX8M Plus ENET1 interface works properly.
+(reported by Tim H.).
+- Add review tags
+
+Changes in v4:
+
+- Fixed the DHCP algorithm which was missing a sys_timeout() call in
+the "fine timer" callback. This should close the issue that Tom R.
+reported with his Raspberry Pi 3 (it does fix it on mine).
+- The DHCP exchange timeout is increased from 2 to 10 seconds
+- The DHCP exchange can be interrupted with Ctrl-C.
+- "net: introduce alternative implementation as net-lwip/": rework
+dependencies. A few symbols have 'depends on !NET_LWIP' and in addition
+'NET_LWIP depends on !SANDBOX'. Sandbox, DSA and fastboot are
+unsupported, because they are deeply welded to the current stack.
+- All network commands (dns, ping, tftp and wget):
+  * Get rid of global variables (Ilias A.)
+  * Use printf() rather than log_info()
+- "net-lwip: add ping command": use packet count instead of
+timeout, fix code style (Ilias A.)
+- Add "net: split cmd/net.c into cmd/net.c and cmd/net-common.c"
+extracted from the wget patch (Ilias A.).
+- Add "net: split include/net.h into net{,-common,-legacy,-lwip}.h"
+(Ilias A.)
+- Add "flash: prefix error codes with FL_" which is required to
+avoid name clashes when splitting net.h
+- Reworked the initialization of the lwIP stack. One and only
+one network interface (struct netif) is added for the duration
+of the command that uses that interface. That's commit "net-lwip:
+add DHCP support and dhcp commmand".
+- Drop "test: dm: dsa, eth: disable tests when CONFIG_NET_LWIP=y",
+not needed now that NET_LWIP depend on !SANDBOX.
+- qemu_arm64_lwip_defconfig now enables CMD_DNS and CMD_WGET (so
+that all the supported network commands are available).
+
+Changes in v3:
+
+- Make NET_LWIP a Kconfig choice in patch "net: introduce alternative
+implementation as net-lwip/" (Tom R.)
+- Drop the patch introducing lwIP as a Git subtree and document the git
+command in the cover letter instead (Tom R.)
+- "net-lwip: add TFTP support and tftpboot command": use the same
+"Bytes transferred =" message as in the legacy implementation (Tom R.,
+Maxim U.)
+- Drop "test/py: net: add _lwip variants of dhcp, ping and tftpboot
+tests" which is not needed anymore.
+- Add missing kfree() calls in cmd/net-common.c and fix the parsing of
+decimal address in net-lwip/wget.c (patch "net-lwip: add wget command")
+(Maxim U.)
+- "net-lwip: add ping command": drop the ICMP payload (Ilias A.). Set
+the sequence number to zero when entering ping_loop().
+
+Changes in v2:
+
+** Address comments from Ilias A.
+
+- "net-lwip: add wget command"
+Implement the wget_with_dns() function to do most of the wget work and
+call it from do_wget(). This allows to simplify patch "net-lwip: add
+support for EFI_HTTP_BOOT".
+
+- "net-lwip: import net command from cmd/net.c"
+Move a few functions from cmd/net.c to a new file cmd/net-common.c
+rather than duplicating then in cmd/net-lwip.c.
+
+- "net-lwip: add support for EFI_HTTP_BOOT"
+Since wget_with_dns() is now implemented in "net-lwip: add wget command",
+just enable the wget command when the lwIP stack is enabled and
+EFI_HTTP_BOOT is requested.
+
+** Address comments from Tom R.
+
+- "net-lwip: add DHCP support and dhcp commmand",
+  "net-lwip: add TFTP support and tftpboot command",
+  "net-lwip: add ping command",
+  "net-lwip: add dns command",
+  "net-lwip: add wget command"
+Do not introduce new CMD_XXX_LWIP symbols and use existing CMD_XXX
+instead.
+
+- "configs: add qemu_arm64_lwip_defconfig"
+Use #include <configs/qemu_arm64_defconfig>.
+
+- "net-lwip: import lwIP library under lib/lwip"
+Patch removed and replaced by the introduction of a Git subtree:
+"Squashed 'lib/lwip/lwip/' content from commit 0a0452b2c3".
+
+Note that I have not yet addressed your comments on "test: dm: dsa,
+eth: disable tests when CONFIG_NET_LWIP=y"). I need some more time
+for that and I think running CI on this v2 will help better understand
+what is needed for v3.
+
+** Miscellaneous improvements
+
+- "net: introduce alternative implementation as net-lwip/":
+
+* Make DFU_OVER_TFTP not DFU_TFTP incompatible with NET_LWIP. It seems
+quite natural to supplement "depends on NET" with "&& !NET_LWIP".
+* Make PROT_*_LWIP not visible by removing the Kconfig prompt.
+
+
+Jerome Forissier (28):
+  net: recv(): return -EAGAIN instead of 0 when no cleanup is expected
+  Make AVB_VERIFY depend on FASTBOOT
+  linker_lists: set LINKER_LIST_ALIGN to 8 for CPU_MIPS64
+  sandbox: add dummy driver ETH_SANDBOX_LWIP
+  test: boot: fix bootdev_test_any for when DSA_SANDBOX is disabled
+  test: boot: fix bootflow_cmd_label for when DSA_SANDBOX is disabled
+  net: introduce alternative implementation as net-lwip/
+  configs: replace '# CONFIG_NET is not set' with CONFIG_NO_NET=y
+  net: split include/net.h into net{,-common,-legacy,-lwip}.h
+  net: move copy_filename() to new file net/net-common.c
+  net: eth-uclass: add function eth_start_udev()
+  net-lwip: build lwIP
+  net-lwip: add DHCP support and dhcp commmand
+  lwip: tftp: bind to TFTP port only when in server mode
+  net-lwip: add TFTP support and tftpboot command
+  net-lwip: add ping command
+  net-lwip: add dns command
+  net: split cmd/net.c into cmd/net.c and cmd/net-common.c
+  net-lwip: add wget command
+  cmd: bdinfo: enable -e when CONFIG_CMD_NET_LWIP=y
+  configs: add qemu_arm64_lwip_defconfig
+  lwip: tftp: add support of blksize option to client
+  net-lwip: add TFTP_BLOCKSIZE
+  CI: add qemu_arm64_lwip to the test matrix
+  MAINTAINERS: net-lwip: add myself as a maintainer
+  configs: use syntax CONFIG_FOO=n in tools-only_defconfig
+  [TESTING] configs: set CONFIG_NET=y for FTGMAC100
+  [TESTING] Kconfig: enable NET_LWIP by default
+
+Jonathan Humphreys (1):
+  net-lwip: lwIP wget supports user defined port in the uri, so allow
+    it.
+
+ .azure-pipelines.yml                          |   7 +
+ Kconfig                                       |  29 +
+ MAINTAINERS                                   |  11 +
+ Makefile                                      |   6 +-
+ arch/Kconfig                                  |   2 +-
+ board/engicam/imx8mp/icore_mx8mp.c            |   2 +-
+ .../imx8mp_debix_model_a.c                    |   2 +-
+ board/ti/am335x/board.c                       |   3 +-
+ board/xilinx/common/board.c                   |   3 +-
+ boot/Kconfig                                  |   4 +-
+ cmd/Kconfig                                   | 140 +--
+ cmd/Makefile                                  |   9 +-
+ cmd/bdinfo.c                                  |   5 +-
+ cmd/elf.c                                     |   2 +-
+ cmd/net-common.c                              | 109 ++
+ cmd/net-lwip.c                                |  45 +
+ cmd/net.c                                     | 115 ---
+ common/Kconfig                                |   3 +-
+ common/board_r.c                              |   4 +-
+ common/spl/Kconfig                            |   1 +
+ common/usb_kbd.c                              |   2 +-
+ configs/LicheePi_Zero_defconfig               |   2 +-
+ configs/M5249EVB_defconfig                    |   2 +-
+ configs/am335x_pdu001_defconfig               |   2 +-
+ configs/am62ax_evm_r5_defconfig               |   2 +-
+ configs/am62px_evm_r5_defconfig               |   2 +-
+ configs/am62x_beagleplay_r5_defconfig         |   2 +-
+ configs/amcore_defconfig                      |   2 +-
+ configs/amd_versal2_mini_defconfig            |   2 +-
+ configs/amd_versal2_mini_emmc_defconfig       |   2 +-
+ configs/amd_versal2_mini_ospi_defconfig       |   2 +-
+ configs/amd_versal2_mini_qspi_defconfig       |   2 +-
+ configs/anbernic-rgxx3-rk3566_defconfig       |   2 +-
+ configs/ap143_defconfig                       |   2 +-
+ configs/ap152_defconfig                       |   2 +-
+ configs/apple_m1_defconfig                    |   2 +-
+ configs/astro_mcf5373l_defconfig              |   2 +-
+ configs/at91sam9rlek_dataflash_defconfig      |   2 +-
+ configs/at91sam9rlek_mmc_defconfig            |   2 +-
+ configs/at91sam9rlek_nandflash_defconfig      |   2 +-
+ configs/bcm7260_defconfig                     |   2 +-
+ configs/bcm7445_defconfig                     |   2 +-
+ configs/bcm968380gerg_ram_defconfig           |   2 +-
+ configs/bcmns_defconfig                       |   2 +-
+ configs/chromebook_samus_tpl_defconfig        |   2 +-
+ configs/cortina_presidio-asic-base_defconfig  |   2 +-
+ configs/cortina_presidio-asic-pnand_defconfig |   2 +-
+ configs/durian_defconfig                      |   2 +-
+ configs/e850-96_defconfig                     |   2 +-
+ configs/ea-lpc3250devkitv2_defconfig          |   2 +-
+ configs/efi-x86_app32_defconfig               |   2 +-
+ configs/efi-x86_app64_defconfig               |   2 +-
+ configs/emsdp_defconfig                       |   2 +-
+ configs/evb-ast2500_defconfig                 |   1 +
+ configs/evb-ast2600_defconfig                 |   1 +
+ configs/evb-px5_defconfig                     |   2 +-
+ configs/generic-rk3568_defconfig              |   2 +-
+ configs/generic-rk3588_defconfig              |   2 +-
+ configs/hc2910_2aghd05_defconfig              |   2 +-
+ configs/igep00x0_defconfig                    |   2 +-
+ configs/imx6q_bosch_acc_defconfig             |   2 +-
+ configs/imx6ulz_smm_m2_defconfig              |   2 +-
+ configs/iot_devkit_defconfig                  |   2 +-
+ configs/j722s_evm_r5_defconfig                |   2 +-
+ configs/legoev3_defconfig                     |   2 +-
+ configs/mk808_defconfig                       |   2 +-
+ configs/mx23evk_defconfig                     |   2 +-
+ configs/mx28evk_defconfig                     |   2 +-
+ configs/mx6memcal_defconfig                   |   2 +-
+ configs/mx6ulz_14x14_evk_defconfig            |   2 +-
+ configs/mx7ulp_com_defconfig                  |   2 +-
+ configs/mx7ulp_evk_defconfig                  |   2 +-
+ configs/mx7ulp_evk_plugin_defconfig           |   2 +-
+ configs/netgear_cg3100d_ram_defconfig         |   2 +-
+ configs/nsim_700_defconfig                    |   2 +-
+ configs/nsim_700be_defconfig                  |   2 +-
+ configs/nsim_hs38be_defconfig                 |   2 +-
+ configs/openpiton_riscv64_defconfig           |   2 +-
+ configs/openpiton_riscv64_spl_defconfig       |   2 +-
+ configs/origen_defconfig                      |   2 +-
+ configs/pe2201_defconfig                      |   2 +-
+ configs/pinecube_defconfig                    |   2 +-
+ configs/pm9261_defconfig                      |   2 +-
+ configs/qemu_arm64_lwip_defconfig             |   9 +
+ configs/s5p4418_nanopi2_defconfig             |   2 +-
+ configs/s5p_goni_defconfig                    |   2 +-
+ configs/s5pc210_universal_defconfig           |   2 +-
+ configs/sama5d27_giantboard_defconfig         |   2 +-
+ configs/sama5d29_curiosity_mmc1_defconfig     |   2 +-
+ configs/sama5d29_curiosity_mmc_defconfig      |   2 +-
+ .../sama5d29_curiosity_qspiflash_defconfig    |   2 +-
+ configs/sama7g54_curiosity_mmc_defconfig      |   2 +-
+ .../sama7g54_curiosity_nandflash_defconfig    |   2 +-
+ .../sama7g54_curiosity_qspiflash_defconfig    |   2 +-
+ configs/sipeed_maix_bitm_defconfig            |   2 +-
+ configs/sipeed_maix_smode_defconfig           |   2 +-
+ configs/stemmy_defconfig                      |   2 +-
+ configs/stm32f429-discovery_defconfig         |   2 +-
+ configs/stm32f429-evaluation_defconfig        |   2 +-
+ configs/stm32f469-discovery_defconfig         |   2 +-
+ configs/stm32h743-disco_defconfig             |   2 +-
+ configs/stm32h743-eval_defconfig              |   2 +-
+ configs/stm32h750-art-pi_defconfig            |   2 +-
+ configs/stm32mp25_defconfig                   |   2 +-
+ configs/stmark2_defconfig                     |   2 +-
+ configs/th1520_lpi4a_defconfig                |   2 +-
+ configs/thunderx_88xx_defconfig               |   2 +-
+ configs/tools-only_defconfig                  |  34 +-
+ configs/topic_miami_defconfig                 |   2 +-
+ configs/topic_miamilite_defconfig             |   2 +-
+ configs/topic_miamiplus_defconfig             |   2 +-
+ configs/total_compute_defconfig               |   2 +-
+ configs/trats2_defconfig                      |   2 +-
+ configs/trats_defconfig                       |   2 +-
+ configs/xenguest_arm64_defconfig              |   2 +-
+ configs/xenguest_arm64_virtio_defconfig       |   2 +-
+ configs/xilinx_versal_mini_defconfig          |   2 +-
+ configs/xilinx_versal_mini_emmc0_defconfig    |   2 +-
+ configs/xilinx_versal_mini_emmc1_defconfig    |   2 +-
+ configs/xilinx_versal_mini_ospi_defconfig     |   2 +-
+ configs/xilinx_versal_mini_qspi_defconfig     |   2 +-
+ configs/xilinx_versal_net_mini_defconfig      |   2 +-
+ configs/xilinx_versal_net_mini_emmc_defconfig |   2 +-
+ configs/xilinx_versal_net_mini_ospi_defconfig |   2 +-
+ configs/xilinx_versal_net_mini_qspi_defconfig |   2 +-
+ configs/xilinx_zynqmp_mini_defconfig          |   2 +-
+ configs/xilinx_zynqmp_mini_emmc0_defconfig    |   2 +-
+ configs/xilinx_zynqmp_mini_emmc1_defconfig    |   2 +-
+ configs/xilinx_zynqmp_mini_nand_defconfig     |   2 +-
+ .../xilinx_zynqmp_mini_nand_single_defconfig  |   2 +-
+ configs/xilinx_zynqmp_mini_qspi_defconfig     |   2 +-
+ configs/zynq_cse_nand_defconfig               |   2 +-
+ configs/zynq_cse_nor_defconfig                |   2 +-
+ configs/zynq_cse_qspi_defconfig               |   2 +-
+ drivers/dfu/Kconfig                           |   1 +
+ drivers/fastboot/Kconfig                      |   1 +
+ drivers/net/Kconfig                           |  16 +-
+ drivers/net/Makefile                          |   1 +
+ drivers/net/eepro100.c                        |   2 +-
+ drivers/net/phy/Kconfig                       |   2 +-
+ drivers/net/rtl8139.c                         |   2 +-
+ drivers/net/sandbox-lwip.c                    |  85 ++
+ drivers/usb/gadget/Kconfig                    |   2 +-
+ include/net-common.h                          | 509 ++++++++++
+ include/net-legacy.h                          | 541 ++++++++++
+ include/net-lwip.h                            |  41 +
+ include/net.h                                 | 943 +-----------------
+ lib/Makefile                                  |   2 +
+ lib/binman.c                                  |   1 +
+ lib/lwip/Makefile                             |  55 +
+ lib/lwip/lwip/src/apps/tftp/tftp.c            | 104 +-
+ .../lwip/src/include/lwip/apps/tftp_client.h  |   1 +
+ lib/lwip/u-boot/arch/cc.h                     |  45 +
+ lib/lwip/u-boot/arch/sys_arch.h               |   0
+ lib/lwip/u-boot/limits.h                      |   0
+ lib/lwip/u-boot/lwipopts.h                    | 157 +++
+ lib/tiny-printf.c                             |   3 +-
+ net/Kconfig                                   |  81 +-
+ net/Makefile                                  |  20 +-
+ net/eth-uclass.c                              |  38 +-
+ net/lwip/Kconfig                              |  49 +
+ net/lwip/Makefile                             |   8 +
+ net/lwip/dhcp.c                               | 136 +++
+ net/lwip/dns.c                                | 127 +++
+ net/lwip/eth_internal.h                       |  35 +
+ net/lwip/net-lwip.c                           | 307 ++++++
+ net/lwip/ping.c                               | 177 ++++
+ net/lwip/tftp.c                               | 290 ++++++
+ net/lwip/wget.c                               | 357 +++++++
+ net/net-common.c                              |  13 +
+ net/net.c                                     |  12 -
+ test/boot/bootdev.c                           |  11 +-
+ test/boot/bootflow.c                          |   7 +-
+ test/cmd/Makefile                             |   2 +
+ test/dm/Makefile                              |   2 +
+ 175 files changed, 3607 insertions(+), 1346 deletions(-)
+ create mode 100644 cmd/net-common.c
+ create mode 100644 cmd/net-lwip.c
+ create mode 100644 configs/qemu_arm64_lwip_defconfig
+ create mode 100644 drivers/net/sandbox-lwip.c
+ create mode 100644 include/net-common.h
+ create mode 100644 include/net-legacy.h
+ create mode 100644 include/net-lwip.h
+ create mode 100644 lib/lwip/Makefile
+ create mode 100644 lib/lwip/u-boot/arch/cc.h
+ create mode 100644 lib/lwip/u-boot/arch/sys_arch.h
+ create mode 100644 lib/lwip/u-boot/limits.h
+ create mode 100644 lib/lwip/u-boot/lwipopts.h
+ create mode 100644 net/lwip/Kconfig
+ create mode 100644 net/lwip/Makefile
+ create mode 100644 net/lwip/dhcp.c
+ create mode 100644 net/lwip/dns.c
+ create mode 100644 net/lwip/eth_internal.h
+ create mode 100644 net/lwip/net-lwip.c
+ create mode 100644 net/lwip/ping.c
+ create mode 100644 net/lwip/tftp.c
+ create mode 100644 net/lwip/wget.c
+ create mode 100644 net/net-common.c
+
+-- 
+2.40.1
+
