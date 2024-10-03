@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79B12CFA749
-	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 04:59:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AE66CFA749
+	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 04:59:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D1A3E8901D;
-	Fri,  4 Oct 2024 06:57:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 48C0C89051;
+	Fri,  4 Oct 2024 06:57:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GirikEDM";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HN6mVnpS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC8FC88D8F; Thu,  3 Oct 2024 23:57:53 +0200 (CEST)
-Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
- [IPv6:2607:f8b0:4864:20::833])
+ id A4F0888C6D; Thu,  3 Oct 2024 23:58:25 +0200 (CEST)
+Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
+ [IPv6:2607:f8b0:4864:20::82f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8AF7A88C6D
- for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 23:57:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 79A2288CC5
+ for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 23:58:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qt1-x833.google.com with SMTP id
- d75a77b69052e-4582f9abb43so9834031cf.2
- for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 14:57:51 -0700 (PDT)
+Received: by mail-qt1-x82f.google.com with SMTP id
+ d75a77b69052e-45aeed46f5eso7192281cf.3
+ for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 14:58:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1727992670; x=1728597470; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1727992702; x=1728597502; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PkPWAznF12MpobvBhfpS2LY6JX1lTBHDNTnBRZ9Q+9g=;
- b=GirikEDMc9SzYF9eluREi3OJuhxYBbq8X7vTivczmVWhAykWWrZqsYxX6WxuMQTUzb
- AsDId6+qRgx8XIQGYOrODMKSAWqzO2vvnMxrXKvAo7UhimjdfqoxCrCKyHTvu7AUkbRQ
- 7kXmNJiKNnqHHqvrSDt0NX6yFVrk+x97zD4aJz2Dt+UF7sMSpY/GE92evh3jZLHgEqev
- fXmsP5WX3KYjNmt9ZunB8CalwZ2TPLK33KdWLDYKScta0egSVNeZHRX+lKkFTNWS3fK6
- 99sQxB6WB8PXrXIe3X6HeuS9mABnLvd0kjuNgkXtF+g1Wjg7tKZPsGJTZp8sI5WIUpwd
- oj0w==
+ bh=u5eBTRw7307Fu1Y+274QcTRFVeiGoUy0zoTb4jHMxBE=;
+ b=HN6mVnpSw/k/+zh2UFlIB1O/2UEQVV4wH9+kVsEjNpIrnaXUqlNN0bAvbw5s4ZA8V2
+ oifPFWse2a4nHM2xyY02z4HEAxrcz0Mcs2diakVJqZAZUHXqavg+IHz0bRA6uA10nK+f
+ D9OHbWbe6Ql/vS/gYgP3W+55GIoDUk70480+wI39ye+JtUbWf+pPK8AkJiBNQHo/VXC7
+ I5+fdMfaBlVTfdomSdq312W1tj9+W88JkIAceivPWLEp2i6jo6GM7RgnxeTlknJ0hiAO
+ d1TNiZ7+MsIcx6PY6NSCOWgLvYFxL8Aa4HGU4alxqFNYmaVzxmDgP2+5kEYIkLRH9OEn
+ fP1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727992670; x=1728597470;
+ d=1e100.net; s=20230601; t=1727992702; x=1728597502;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=PkPWAznF12MpobvBhfpS2LY6JX1lTBHDNTnBRZ9Q+9g=;
- b=VH5ARKeu0sf+X2DuXOdmBNdLzeFbEGVmoUzL3xIABTAL2pASbWtgrvNVAcTtC1L/lF
- 76j1K0FgkjrDPH77Yyc5bOBWXACcD3jlgzDHq6JKkc6Wv1v3BY3iL0JfabHyXgueRjOV
- WkCo9+x3iLm1Dj8D1MzfwK/XzN0K6LnGnOnktUE///MUNqmNA6w7ZZkNHLeu57HCFAaY
- B+8VYM4Hi+yUFYsCkqRTc83ykh+EVnpTUXhB7izAKBAb3ai0rIlFoF95leI9xd6O/wP1
- fxsc5ysNMuTqwP1N1lfY+MDZtOP1cNEnL4Eik6dhBVVR9Y+26F4sm47+eqtWlN0lJrJZ
- XPYQ==
-X-Gm-Message-State: AOJu0YzcK2R/wT4LpH6gwShsdlmDAfDL1xL8C/rc84XgiZrsu6RA7DdO
- WESvdEILF5AF2caxdmXZQl2eLnwa3vIf6UxNh0dle18+4yoZMUgkYGFREhQtN1mPSESCzrDLEPa
- x
-X-Google-Smtp-Source: AGHT+IEqOeGkgdjgFhbbWAusNRQcFEXPcrAcHSQmjV1equS5r+55lHJBYd7U/ad2K8HOYHSwiNCC8A==
-X-Received: by 2002:a05:622a:1998:b0:453:5cb9:51a9 with SMTP id
- d75a77b69052e-45d9ba9ceecmr9432491cf.14.1727992669975; 
- Thu, 03 Oct 2024 14:57:49 -0700 (PDT)
+ bh=u5eBTRw7307Fu1Y+274QcTRFVeiGoUy0zoTb4jHMxBE=;
+ b=oq2ksbPpOF+r0dK0C9WJoQ5z9Qbp0DprL6Up5ZywC8crRW1GBW+9Hc8nwxrCdn5mw4
+ oWmB5up9aqqmqLArpg1vGSFpYEPt2Z+Bxgl5joKryT4QXdemC///z9TAKsmE/05g8fxa
+ 9k4o/sg7qwQqNUmT7+7Yperc6DAu+7fvJ/9CcqvmDmEDwSzb9ptrPkFwLdn2c3RdB8vU
+ 1nLfQGl22sggscP2j2z8KVImUc0Zjv5qgZ8g8fbfmSk+HKN3R1zldJAKZ9zVktSosMvi
+ UaU8l+KVxjI2RqiSIzdXxeYu7SZahXfrgltL+WoQgMSpPLmWCiuv1TW3WMH60mSguRRg
+ T9wg==
+X-Gm-Message-State: AOJu0YwueLQJb3vkBOkJNiqWFE/WpSgbmpRIEz/ntPL/XKHI1mMQ4bwM
+ aRlfhawMISZRB4/Wam0o2l0ckAlTjSCALxEJt50bJMadb1kjRnOkT49dwabsscIh+HVdBwFjkZx
+ 4
+X-Google-Smtp-Source: AGHT+IF24ZsG9rN3ca/AbMRouwOoQJbTz5wMaks4aEWkaa0Nx7YIFK7cZ/XsN3F8Sf8cD5HQK9tBAA==
+X-Received: by 2002:ac8:5a46:0:b0:45d:5786:80b4 with SMTP id
+ d75a77b69052e-45d9ba6449bmr8964251cf.26.1727992702010; 
+ Thu, 03 Oct 2024 14:58:22 -0700 (PDT)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-45d92ddf5c4sm9001541cf.18.2024.10.03.14.57.46
+ d75a77b69052e-45d92ddf5c4sm9001541cf.18.2024.10.03.14.58.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Oct 2024 14:57:49 -0700 (PDT)
+ Thu, 03 Oct 2024 14:58:21 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: manish.pandey2@arm.com, Raymond Mao <raymond.mao@linaro.org>,
@@ -78,24 +78,23 @@ Cc: manish.pandey2@arm.com, Raymond Mao <raymond.mao@linaro.org>,
  Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sumit Garg <sumit.garg@linaro.org>, Sean Anderson <seanga2@gmail.com>,
- Andrew Davis <afd@ti.com>, Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Sean Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Andrew Davis <afd@ti.com>,
  Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
  Alexander Gendin <agendin@matrox.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Jonathan Humphreys <j-humphreys@ti.com>, Marek Vasut <marex@denx.de>,
  Paul Barker <paul.barker.ct@bp.renesas.com>,
- Ian Roberts <ian.roberts@timesys.com>, Jonas Karlman <jonas@kwiboo.se>,
  Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Linus Walleij <linus.walleij@linaro.org>,
- Greg Malysa <greg.malysa@timesys.com>,
+ Linus Walleij <linus.walleij@linaro.org>, Jonas Karlman <jonas@kwiboo.se>,
  Kongyang Liu <seashell11234455@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Eddie James <eajames@linux.ibm.com>
-Subject: [PATCH v8 12/27] public_key: move common functions to public key
- helper
-Date: Thu,  3 Oct 2024 14:50:25 -0700
-Message-Id: <20241003215112.3103601-13-raymond.mao@linaro.org>
+ Greg Malysa <greg.malysa@timesys.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>
+Subject: [PATCH v8 13/27] x509: move common functions to x509 helper
+Date: Thu,  3 Oct 2024 14:50:26 -0700
+Message-Id: <20241003215112.3103601-14-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20241003215112.3103601-1-raymond.mao@linaro.org>
 References: <20241003215112.3103601-1-raymond.mao@linaro.org>
@@ -118,9 +117,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move public_key_free and public_key_signature_free as helper
-functions that can be shared by legacy crypto lib and MbedTLS
-implementation.
+Move x509_check_for_self_signed as a common helper function
+that can be shared by legacy crypto lib and MbedTLS implementation.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
@@ -136,115 +134,161 @@ Changes in v7
 Changes in v8
 - None
 
- lib/crypto/Makefile            |  4 +++-
- lib/crypto/public_key.c        | 31 ---------------------------
- lib/crypto/public_key_helper.c | 39 ++++++++++++++++++++++++++++++++++
- 3 files changed, 42 insertions(+), 32 deletions(-)
- create mode 100644 lib/crypto/public_key_helper.c
+ lib/crypto/Makefile          |  1 +
+ lib/crypto/x509_helper.c     | 64 ++++++++++++++++++++++++++++++++++++
+ lib/crypto/x509_public_key.c | 56 +------------------------------
+ 3 files changed, 66 insertions(+), 55 deletions(-)
+ create mode 100644 lib/crypto/x509_helper.c
 
 diff --git a/lib/crypto/Makefile b/lib/crypto/Makefile
-index bec1bc95a65..4ad1849040d 100644
+index 4ad1849040d..946cc3a7b59 100644
 --- a/lib/crypto/Makefile
 +++ b/lib/crypto/Makefile
-@@ -7,7 +7,9 @@ obj-$(CONFIG_$(SPL_)ASYMMETRIC_KEY_TYPE) += asymmetric_keys.o
+@@ -37,6 +37,7 @@ x509_key_parser-y := \
+ 	x509.asn1.o \
+ 	x509_akid.asn1.o \
+ 	x509_cert_parser.o \
++	x509_helper.o \
+ 	x509_public_key.o
  
- asymmetric_keys-y := asymmetric_type.o
- 
--obj-$(CONFIG_$(SPL_)ASYMMETRIC_PUBLIC_KEY_SUBTYPE) += public_key.o
-+obj-$(CONFIG_$(SPL_)ASYMMETRIC_PUBLIC_KEY_SUBTYPE) += \
-+	public_key_helper.o \
-+	public_key.o
- 
- #
- # RSA public key parser
-diff --git a/lib/crypto/public_key.c b/lib/crypto/public_key.c
-index 6efe951c057..408742907f1 100644
---- a/lib/crypto/public_key.c
-+++ b/lib/crypto/public_key.c
-@@ -51,38 +51,7 @@ static void public_key_describe(const struct key *asymmetric_key,
- }
- #endif
- 
--/*
-- * Destroy a public key algorithm key.
-- */
--void public_key_free(struct public_key *key)
--{
--	if (key) {
--		kfree(key->key);
--		kfree(key->params);
--		kfree(key);
--	}
--}
--EXPORT_SYMBOL_GPL(public_key_free);
--
- #ifdef __UBOOT__
--/*
-- * from <linux>/crypto/asymmetric_keys/signature.c
-- *
-- * Destroy a public key signature.
-- */
--void public_key_signature_free(struct public_key_signature *sig)
--{
--	int i;
--
--	if (sig) {
--		for (i = 0; i < ARRAY_SIZE(sig->auth_ids); i++)
--			free(sig->auth_ids[i]);
--		free(sig->s);
--		free(sig->digest);
--		free(sig);
--	}
--}
--EXPORT_SYMBOL_GPL(public_key_signature_free);
- 
- /**
-  * public_key_verify_signature - Verify a signature using a public key.
-diff --git a/lib/crypto/public_key_helper.c b/lib/crypto/public_key_helper.c
+ $(obj)/x509_cert_parser.o: \
+diff --git a/lib/crypto/x509_helper.c b/lib/crypto/x509_helper.c
 new file mode 100644
-index 00000000000..2c55922bdcb
+index 00000000000..87e8ff67ae1
 --- /dev/null
-+++ b/lib/crypto/public_key_helper.c
-@@ -0,0 +1,39 @@
++++ b/lib/crypto/x509_helper.c
+@@ -0,0 +1,64 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * X509 helper functions
 + *
-+ * Copyright (c) 2012 Red Hat, Inc. All Rights Reserved.
++ * Copyright (C) 2012 Red Hat, Inc. All Rights Reserved.
 + * Written by David Howells (dhowells@redhat.com)
 + */
-+#include <linux/compat.h>
++#include <linux/err.h>
 +#include <crypto/public_key.h>
++#include <crypto/x509_parser.h>
 +
 +/*
-+ * Destroy a public key algorithm key.
++ * Check for self-signedness in an X.509 cert and if found, check the signature
++ * immediately if we can.
 + */
-+void public_key_free(struct public_key *key)
++int x509_check_for_self_signed(struct x509_certificate *cert)
 +{
-+	if (key) {
-+		kfree(key->key);
-+		kfree(key->params);
-+		kfree(key);
-+	}
-+}
++	int ret = 0;
 +
-+/*
-+ * from <linux>/crypto/asymmetric_keys/signature.c
-+ *
-+ * Destroy a public key signature.
-+ */
-+void public_key_signature_free(struct public_key_signature *sig)
-+{
-+	int i;
++	if (cert->raw_subject_size != cert->raw_issuer_size ||
++	    memcmp(cert->raw_subject, cert->raw_issuer,
++		   cert->raw_issuer_size))
++		goto not_self_signed;
 +
-+	if (sig) {
-+		for (i = 0; i < ARRAY_SIZE(sig->auth_ids); i++)
-+			kfree(sig->auth_ids[i]);
-+		kfree(sig->s);
-+		kfree(sig->digest);
-+		kfree(sig);
++	if (cert->sig->auth_ids[0] || cert->sig->auth_ids[1]) {
++		/*
++		 * If the AKID is present it may have one or two parts. If
++		 * both are supplied, both must match.
++		 */
++		bool a = asymmetric_key_id_same(cert->skid,
++						cert->sig->auth_ids[1]);
++		bool b = asymmetric_key_id_same(cert->id,
++						cert->sig->auth_ids[0]);
++
++		if (!a && !b)
++			goto not_self_signed;
++
++		ret = -EKEYREJECTED;
++		if (((a && !b) || (b && !a)) &&
++		    cert->sig->auth_ids[0] && cert->sig->auth_ids[1])
++			goto out;
 +	}
++
++	ret = -EKEYREJECTED;
++	if (strcmp(cert->pub->pkey_algo, cert->sig->pkey_algo))
++		goto out;
++
++	ret = public_key_verify_signature(cert->pub, cert->sig);
++	if (ret == -ENOPKG) {
++		cert->unsupported_sig = true;
++		goto not_self_signed;
++	}
++	if (ret < 0)
++		goto out;
++
++	pr_devel("Cert Self-signature verified");
++	cert->self_signed = true;
++
++out:
++	return ret;
++
++not_self_signed:
++	return 0;
 +}
+diff --git a/lib/crypto/x509_public_key.c b/lib/crypto/x509_public_key.c
+index a10145a7cdc..4ba13c1adc3 100644
+--- a/lib/crypto/x509_public_key.c
++++ b/lib/crypto/x509_public_key.c
+@@ -139,61 +139,7 @@ error:
+ 	return ret;
+ }
+ 
+-/*
+- * Check for self-signedness in an X.509 cert and if found, check the signature
+- * immediately if we can.
+- */
+-int x509_check_for_self_signed(struct x509_certificate *cert)
+-{
+-	int ret = 0;
+-
+-	pr_devel("==>%s()\n", __func__);
+-
+-	if (cert->raw_subject_size != cert->raw_issuer_size ||
+-	    memcmp(cert->raw_subject, cert->raw_issuer,
+-		   cert->raw_issuer_size) != 0)
+-		goto not_self_signed;
+-
+-	if (cert->sig->auth_ids[0] || cert->sig->auth_ids[1]) {
+-		/* If the AKID is present it may have one or two parts.  If
+-		 * both are supplied, both must match.
+-		 */
+-		bool a = asymmetric_key_id_same(cert->skid, cert->sig->auth_ids[1]);
+-		bool b = asymmetric_key_id_same(cert->id, cert->sig->auth_ids[0]);
+-
+-		if (!a && !b)
+-			goto not_self_signed;
+-
+-		ret = -EKEYREJECTED;
+-		if (((a && !b) || (b && !a)) &&
+-		    cert->sig->auth_ids[0] && cert->sig->auth_ids[1])
+-			goto out;
+-	}
+-
+-	ret = -EKEYREJECTED;
+-	if (strcmp(cert->pub->pkey_algo, cert->sig->pkey_algo) != 0)
+-		goto out;
+-
+-	ret = public_key_verify_signature(cert->pub, cert->sig);
+-	if (ret < 0) {
+-		if (ret == -ENOPKG) {
+-			cert->unsupported_sig = true;
+-			ret = 0;
+-		}
+-		goto out;
+-	}
+-
+-	pr_devel("Cert Self-signature verified");
+-	cert->self_signed = true;
+-
+-out:
+-	pr_devel("<==%s() = %d\n", __func__, ret);
+-	return ret;
+-
+-not_self_signed:
+-	pr_devel("<==%s() = 0 [not]\n", __func__);
+-	return 0;
+-}
++#endif /* !CONFIG_IS_ENABLED(MBEDTLS_LIB_X509) */
+ 
+ #ifndef __UBOOT__
+ /*
 -- 
 2.25.1
 
