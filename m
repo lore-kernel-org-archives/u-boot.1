@@ -4,72 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D485ACF8574
-	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 10:24:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC150CF34A3
+	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 12:42:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3312388418;
-	Thu,  3 Oct 2024 12:24:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 2874D88C8F;
+	Thu,  3 Oct 2024 14:42:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qwVREBGT";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="LKZS0r/9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D73B88B63; Thu,  3 Oct 2024 12:24:48 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 32AE788CBD; Thu,  3 Oct 2024 14:42:45 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7EA3688216
- for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 12:24:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 21EC188B89
+ for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 14:42:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 493AOho9038813;
- Thu, 3 Oct 2024 05:24:43 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1727951083;
- bh=zJ3rvVkUUffnButUrs1OxLLqBJdvNqEB6fVA5kES1rE=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=qwVREBGTfv949udK5ZHzw91DrMSfPdsNKT4QQd+KUjgnHkKzVxk6/vhDDeRNa/hAh
- 14k9ecLg5iV2JaOqMM3QRCfKz6H9/34nSO5RIHYZgAoFERESXW506RA0x8ybHZFga8
- Q8QpeIvDwgoqJ1MNK1By7HgYzfes3GnF5rTwSUaA=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 493AOhH0088344
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 3 Oct 2024 05:24:43 -0500
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 3
- Oct 2024 05:24:42 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 3 Oct 2024 05:24:42 -0500
-Received: from localhost (uda0497581.dhcp.ti.com [10.24.68.185])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 493AOgAQ073267;
- Thu, 3 Oct 2024 05:24:42 -0500
-Date: Thu, 3 Oct 2024 15:54:41 +0530
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-To: "Kumar, Udit" <u-kumar1@ti.com>
-CC: Jaehoon Chung <jh80.chung@samsung.com>, <u-boot@lists.denx.de>, Neha
- Malcom Francis <n-francis@ti.com>, Keerthy J <j-keerthy@ti.com>, Aniket
- Limaye <a-limaye@ti.com>, Tom Rini <trini@konsulko.com>,
- Vignesh Raghavendra <vigneshr@ti.com>, Andrew Davis <afd@ti.com>,
- Nishanth Menon <nm@ti.com>
-Subject: Re: [PATCH v3 5/7] arm: mach-k3: j721s2_init: Initialize AVS Class 0
-Message-ID: <20241003102441.3mw7c6c6mxt7mu3r@uda0497581>
-References: <20240813-b4-upstream-j721s2-avs-v3-0-5115d93cdeb2@ti.com>
- <20240813-b4-upstream-j721s2-avs-v3-5-5115d93cdeb2@ti.com>
- <9ea12c2e-3fbf-4d32-9702-a97852a8ccde@ti.com>
- <20241001084852.c4xc6y4c4gyunzmp@uda0497581>
- <b618ac7d-1432-4802-ac0f-7612088e6542@ti.com>
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-42cbface8d6so11792835e9.3
+ for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 05:42:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1727959362; x=1728564162;
+ darn=lists.denx.de; 
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=4LPtWXGds18JOEz3tiXNxR2r/aIYBAVjICBfp0WguFw=;
+ b=LKZS0r/9HgryVrCCw5Adj7W/iLrVf8wsjX5sbbO+DREoO/tgDznzQOkhpa6JayT348
+ scywufKJMUHn03HvxeWeekfVV5gmcw/A98MHI6eJdO8v0m2FoV/DYLG2iQI+9PPE5IOk
+ BRC9RenTazIoM3DG7NrpTzAa2E8t+CQq24n/NgvROd+0IYrJyig3fznlYEOduE88jrwf
+ pLJO3lQwxLAO2t39PRzfE76A6KMg2xpqo5XyCWc3POu3zzGVINzUl7fHGHYXdlKEvwwW
+ enKHorHBN7vHBfzVrnDG4kJ+NC6pJyKMpiRu2LFokCc8sQ2edaPRdmMSPspVLSAw0Lp5
+ 2h2A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727959362; x=1728564162;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=4LPtWXGds18JOEz3tiXNxR2r/aIYBAVjICBfp0WguFw=;
+ b=vkX/jBoxIAT7JJK21Oq4M/tvkfT4xM9ctHCVJbvdH5PM6063hn9fpXNaJFFGvu50Xa
+ 1ABWKQQ1EW8eJcP/yTNRUGwmAyGT+meqvAxK+bQ+y7YxSaaLE+1v4b1DQCYpstmOvGZg
+ OsaAgslcqD/BPQbqKvFuMkXipgUHpNvZTsg0BSwRXCXMKsBko+P/1YAaaUNRGoBVB13x
+ ScmJ55rgQdvCVUC0C9TYGaOYN5hwxoEXnNaE9jauRA4u9KwpkknUaj415oB5zB6oyPBl
+ 9EHlmZP1Hib38T1MC+bNqGtCdBRNdck3iA7EM5XfrMlHX0YzPtRqoZZfpZGyrndLxUY/
+ Y2cA==
+X-Gm-Message-State: AOJu0Yyn0eBFVQFX6agnj8OYbK+MTN2MRwO9fRnm8kIjZdEqG+KEjh3W
+ cf6jSHuEVn/T57ndR9VVLVuMX+kqBpfHnuP0smVsAVNLnuqZFzsYx+Y8iqdf9Fw=
+X-Google-Smtp-Source: AGHT+IHiahhudqIs1o4LdfOfLTeYBuJ3Y4cnUcR9Lpcf7grXHCfD7pSu839JAI98f4IXU1myisK+2Q==
+X-Received: by 2002:a05:600c:3b2a:b0:428:d31:ef25 with SMTP id
+ 5b1f17b1804b1-42f777ba2dcmr62247495e9.12.1727959362349; 
+ Thu, 03 Oct 2024 05:42:42 -0700 (PDT)
+Received: from mkorpershoek-xps13.carmes.etincelle-coworking.com
+ ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-37d082a6c2fsm1202430f8f.72.2024.10.03.05.42.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 03 Oct 2024 05:42:41 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Date: Thu, 03 Oct 2024 14:42:39 +0200
+Subject: [PATCH] boot: android: Fix ramdisk loading for v2 header
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <b618ac7d-1432-4802-ac0f-7612088e6542@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20241003-android-fix-boot-v2-v1-1-13e8e44af4b7@baylibre.com>
+X-B4-Tracking: v=1; b=H4sIAD6R/mYC/x2MSQqAMAwAvyI5G+iiIn5FPLQmai6ttFIE8e8Wj
+ 8Mw80DmJJxhah5IXCRLDBV028B6uLAzClUGo0ynlbLoAqUohJvc6GO8sBh05EajB+tJ9VDLM3H
+ V/3Ve3vcDwk84t2UAAAA=
+To: Tom Rini <trini@konsulko.com>, Roman Stratiienko <r.stratiienko@gmail.com>
+Cc: u-boot@lists.denx.de, Guillaume La Roque <glaroque@baylibre.com>, 
+ Julien Masson <jmasson@baylibre.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+X-Mailer: b4 0.14.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,60 +95,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Udit,
+Before
+commit da3447d09fa0 ("android: Fix ramdisk loading for bootimage v3+"),
+the ramdisk was loaded from img_data.ramdisk_ptr, ignoring offset
+provided via mkbootimg.
 
-On 06:45-20241002, Kumar, Udit wrote:
-> 
-> On 10/1/2024 2:18 PM, Manorit Chawdhry wrote:
-> > Hi Udit,
-> > 
-> > On 08:46-20240815, Kumar, Udit wrote:
-> > > On 8/13/2024 11:40 AM, Manorit Chawdhry wrote:
-> > > > Initialize AVS Class 0.
-> > > > 
-> > > > Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
-> > > > ---
-> > > >    arch/arm/mach-k3/j721s2/j721s2_init.c | 10 ++++++++++
-> > > >    1 file changed, 10 insertions(+)
-> > > > 
-> > > > diff --git a/arch/arm/mach-k3/j721s2/j721s2_init.c b/arch/arm/mach-k3/j721s2/j721s2_init.c
-> > > > index 05453fcad41a..5f5961a2c17a 100644
-> > > > --- a/arch/arm/mach-k3/j721s2/j721s2_init.c
-> > > > +++ b/arch/arm/mach-k3/j721s2/j721s2_init.c
-> > > > @@ -315,6 +315,9 @@ void do_dt_magic(void)
-> > > >    #ifdef CONFIG_SPL_BUILD
-> > > >    void board_init_f(ulong dummy)
-> > > >    {
-> > > > +	struct udevice *dev;
-> > > > +	int ret;
-> > > > +
-> > > >    	k3_spl_init();
-> > > >    #if defined(CONFIG_SPL_OF_LIST) && defined(CONFIG_TI_I2C_BOARD_DETECT)
-> > > >    	do_dt_magic();
-> > > > @@ -325,6 +328,13 @@ void board_init_f(ulong dummy)
-> > > >    		setup_navss_nb();
-> > > >    	setup_qos();
-> > > > +
-> > > > +	if (IS_ENABLED(CONFIG_CPU_V7R) && IS_ENABLED(CONFIG_K3_AVS0)) {
-> > > > +		ret = uclass_get_device_by_driver(UCLASS_MISC, DM_DRIVER_GET(k3_avs),
-> > > > +						  &dev);
-> > > Can we remove this ret, Something like
-> > I would say we can let this remain, general convention of this file is
-> > to have ret itself, I know it's only used in one place as of now but I
-> > feel keeping it consistent is better IMO.
-> 
-> 
-> I still suggest to remove non needed variable .
-> 
-> To make it consistent , please think to change at other places :)
+commit da3447d09fa0 ("android: Fix ramdisk loading for bootimage v3+")
+rightfully fixes this by switching to use img_data.ramdisk_addr instead.
 
-We are printing the ret value later, there is no point cleaning this up.
+However, it does not copy the ramdisk content to img_data.ramdisk_addr
+in case we use boot image v2.
 
-Regards,
-Manorit
+Because of this, we can no longer boot Android on Khadas vim3 board:
 
-> 
-> 
-> > 
-> > Regards,
-> > Manorit
+[    3.940361] RAMDISK: Couldn't find valid RAM disk image starting at 0.
+
+Add the missing memcpy() to fix the issue.
+
+Fixes: da3447d09fa0 ("android: Fix ramdisk loading for bootimage v3+")
+Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+---
+Note that on default AOSP boot images, there is another bug: the
+ramdisk offset is wronly configured:
+
+$ file boot.img
+boot.img: Android bootimg, kernel (0x11080000), ramdisk (0x11000000),
+page size: 2048
+
+With this, we have a maximum ramdisk size of 0x80000 bytes (512KiB)
+which is not enough. The kernel would overlap on the ramdisk address.
+
+This can be fixed by repacking the boot image:
+$ unpack_bootimg --boot_img boot.img --out out --format=mkbootimg | \
+  tee mkbootimg_args
+
+$ vim mkbootimg_args # change --ramdisk_offset to 0x20000000
+
+$ sh -c "mkbootimg $(cat mkbootimg_args) -o boot_repacked.img"
+---
+ boot/image-android.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/boot/image-android.c b/boot/image-android.c
+index 774565fd1fea..8934491c35f2 100644
+--- a/boot/image-android.c
++++ b/boot/image-android.c
+@@ -409,6 +409,10 @@ int android_image_get_ramdisk(const void *hdr, const void *vendor_boot_img,
+ 			       (ramdisk_ptr), (void *)img_data.bootconfig_addr,
+ 			       img_data.bootconfig_size);
+ 		}
++	} else {
++		ramdisk_ptr = img_data.ramdisk_addr;
++		memcpy((void *)(ramdisk_ptr), (void *)img_data.ramdisk_ptr,
++		       img_data.ramdisk_size);
+ 	}
+ 
+ 	printf("RAM disk load addr 0x%08lx size %u KiB\n",
+
+---
+base-commit: 9cfe0cab3bf135a505e1e163ca442a4e4064d58e
+change-id: 20241003-android-fix-boot-v2-ada82163bd05
+
+Best regards,
+-- 
+Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
