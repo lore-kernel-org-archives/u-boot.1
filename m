@@ -4,58 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7F75CF34A9
-	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 13:16:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B104CCF34A9
+	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 13:20:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4EB4F88D9E;
-	Thu,  3 Oct 2024 15:16:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EA26488C78;
+	Thu,  3 Oct 2024 15:19:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1727961376;
-	bh=h8edzmT4ERjPglriw/h8FuHsEcAB2bCX3UNl1SWRbeg=;
+	s=phobos-20191101; t=1727961599;
+	bh=qMItSw8Ok4fBK8kIBePhHMwOO2oDzNiElGQenycfDoQ=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Mg88Ze4OxBRYb2p/z+fs3VtEVZ891l23CO2M7gzMcP2dXuplQ+mdx1EWK+6MuPwlD
-	 6r8wEmEJDlyy0HDFSNGFDL0ajefG48LvJAS1r7RuTQYbQ1m1VzslPpLBeOr/IISEII
-	 Sa9+CVoi5Ve1IboeRGf/EVETqp8zxnaCKjGS4uTLC2AZxbIczjMLm4PTW+RjfOvLJk
-	 wSi6vkSmhJF+0Bz6id/5vohAC053TN/fl12TcCqUr/bXP2CiGqqfTTR7DrdmC2ZbbW
-	 szCcfYxJOIeSg/Dbe4UYxvjvdvLRdIBHxRsLwJpZwfwepfetT8wQmFmwR0iQQ9vV99
-	 xo8kNtWEAszCQ==
+	b=wdi0FeX2AQSpNoFwaxbhBgTaZ5Qq3qhqHMJdIAGAcKe37coLRQewid4FZax8AONDb
+	 O98YOWBgUI2IbFezigRmc1KV0xqfZHK92wOlls7JQsKVCOmpQrDLFbWTI7r4Uow16d
+	 wPdNQ7fp1eUdY/ezqKPuL2SJ4Yxy6c/mAllgKwc7SbQFPxEJEmicKN8dZU+RvM8aFj
+	 FKW+fIqYrEhxOz5KfDWqAV5rESDDMkRM2x6FxlOXGWtnuG7YFoqoY7t+3KQJUpoBfC
+	 Jm64Nqq7gZNXimnCwqlc8CND2XrQcB6jtpJkj6vOQMQBJSqBinV5dfIOFaBJfJMbyW
+	 OwC1ICpFmPbUw==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 36A2E88B5F;
- Thu,  3 Oct 2024 15:16:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id E387088B5F;
+ Thu,  3 Oct 2024 15:19:58 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1727961374;
- bh=h8edzmT4ERjPglriw/h8FuHsEcAB2bCX3UNl1SWRbeg=;
+ s=phobos-20191101; t=1727961599;
+ bh=qMItSw8Ok4fBK8kIBePhHMwOO2oDzNiElGQenycfDoQ=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=bI0kKfEXlZohswXYKy1ebLkLMmFID059pJH6bd0Pl4+ZsTy4kfHfwIAQQySmwyQyR
- 9ulznMCHfBZDqzRL2+eB8KdZ9qoWNdqvrVZtanjtxHqDz1iBc8M+otwI90woWJAstF
- GOQdv1IeDXqm9QvwhdRlQMpRRMjKXYBM9zoggQmPgYhlWOaQq5oDBYfNSnKyI26rIq
- Mqbu2iwmYm/aj9XaOLYeym5GCpCv53sL0Ir4lUfA3JvLrJ20UdYWbEmClxkxWf4Vwj
- YFeSDPmbd7sL1/qhcgghS1YoW3VBNkQWkbzx55nJ2wP/guP20guyMmr85sjV6qB105
- IMG9ME/y5HIpQ==
-Message-ID: <2e0928c8-e03a-44ae-aa36-3d664ed5bc6a@denx.de>
-Date: Thu, 3 Oct 2024 14:08:16 +0200
+ b=jtSpJBXV2SPWZLTEwsExMi3vJPlfzESNttRiJRfUsfOZUMTPgtp5J+6owrM0Vzn7k
+ nsr0fMMQuhAIV6m69qpoiXMqnyGlkvU+pSthKjEpVI02jn5q7aU7lMJ5OLSaqec3RS
+ viwVqgfk0S36XAqYjXkkifLYPXpgqFK1togLS4CXX8DjYtSzj0lbvF0k3oVPAvFnxe
+ SObbhmOgbcYZY8rzwQ2PrEKoUFxX3vPqwY2b4SEPkI/dWHxJBwSYjtxFuFM1dUWQlK
+ gr0q7To1B6s2Y/nBSzuUT7Icl9rXqK+E5o756zswW99W7AF857FnlA37wb6Nv2U34q
+ lJnf2GbAp/M4g==
+Message-ID: <ed50e1a7-193c-493c-a1ee-42d404049c59@denx.de>
+Date: Thu, 3 Oct 2024 15:19:58 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/7] usb: onboard-hub: Add reset-gpio support
-To: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: "Simek, Michal" <michal.simek@amd.com>,
- "fabrice.gasnier@foss.st.com" <fabrice.gasnier@foss.st.com>,
- "git (AMD-Xilinx)" <git@amd.com>
-References: <20241001050529.17922-1-venkatesh.abbarapu@amd.com>
- <20241001050529.17922-2-venkatesh.abbarapu@amd.com>
- <6056a273-2699-4e94-93e8-ddc96084bbba@denx.de>
- <SA1PR12MB8697873F2C2EF86E6E9DAF9B98712@SA1PR12MB8697.namprd12.prod.outlook.com>
+Subject: Re: [PATCH v3 2/3] usb: dwc3: fix dcache flush range calculation
+To: neil.armstrong@linaro.org, Tom Rini <trini@konsulko.com>,
+ Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Bin Meng <bmeng.cn@gmail.com>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+References: <20241002-u-boot-dwc3-gadget-dcache-fixup-v3-0-5398088ef93c@linaro.org>
+ <20241002-u-boot-dwc3-gadget-dcache-fixup-v3-2-5398088ef93c@linaro.org>
+ <e895c917-ca32-4b59-a5d6-7d8e9ce19d84@denx.de>
+ <0643911e-e0fa-4faa-aee6-36f536691129@linaro.org>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <SA1PR12MB8697873F2C2EF86E6E9DAF9B98712@SA1PR12MB8697.namprd12.prod.outlook.com>
+In-Reply-To: <0643911e-e0fa-4faa-aee6-36f536691129@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -74,23 +75,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/3/24 6:40 AM, Abbarapu, Venkatesh wrote:
-> Hi Marek,
-
-Hi,
-
->>> @@ -30,7 +40,24 @@ static int usb_onboard_hub_probe(struct udevice *dev)
->>>    	if (ret)
->>>    		dev_err(dev, "can't enable vdd-supply: %d\n", ret);
+On 10/3/24 2:49 PM, Neil Armstrong wrote:
+> On 02/10/2024 16:55, Marek Vasut wrote:
+>> On 10/2/24 4:39 PM, Neil Armstrong wrote:
+>>> The current flush operation will omit doing a flush/invalidate on
+>>> the first and last bytes if the base address and size are not aligned
+>>> with DMA_MINALIGN.
 >>>
->>> -	return ret;
->>> +	hub->reset_gpio = devm_gpiod_get_optional(dev, "reset",
->>> +						  GPIOD_IS_OUT |
->> GPIOD_ACTIVE_LOW);
->>> +	/* property is optional, don't return error! */
->>> +	if (hub->reset_gpio) {
+>>> This causes operation failures Qualcomm platforms.
+>>>
+>>> Take in account the alignment and size of the buffer and also
+>>> flush the previous and last cacheline.
+>>>
+>>> Remove CACHELINE_SIZE which was the same as DMA_MINALIGN.
 >>
->> if (!hub->reset_gpio)
->>     return 0;
-> <Venkatesh> As reset_gpio is optional property,  by returning 0 the i2c sequence wont be executed.
-The code in if (hub->reset_gpio) { ... } only toggles the GPIO reset ?
+>> It isn't the same, CACHELINE_SIZE was set to CONFIG_SYS_CACHELINE_SIZE 
+>> (CPU L1 cache cacheline length) while ARCH_DMA_MINALIGN is DMA engine 
+>> alignment requirement (from times where there used to be one DMA 
+>> engine on most devices). You likely want a 
+>> max(CONFIG_SYS_CACHELINE_SIZE, dwc3-buffer-alignment-requirement) to 
+>> really correctly align the buffer.
+> 
+> It is definitely true for platforms declaring dma_alloc_coherent() (arm, 
+> riscv, x86)
+> except nios2 but there's 0 chance dwc3 appears on a nios2 platform.
+There is real chance of that, because on modern SoCFPGA platforms 
+(Agilex) you can have the FPGA content access the SoC peripherals, and 
+one of the SoC peripherals is DWC3 controller. If anyone would actually 
+synthesize it is another question ... but it is an FPGA, so that option 
+exists.
