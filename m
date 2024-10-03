@@ -4,81 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9946DCF854E
-	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 01:35:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE886CF854E
+	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 01:40:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A48D488E18;
-	Thu,  3 Oct 2024 03:35:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3328988F75;
+	Thu,  3 Oct 2024 03:40:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FAYfB7+Z";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dUCfMIgX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0BC488E88; Thu,  3 Oct 2024 03:35:25 +0200 (CEST)
-Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
- [IPv6:2607:f8b0:4864:20::f2e])
+ id 301A188F5B; Thu,  3 Oct 2024 03:40:53 +0200 (CEST)
+Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
+ [IPv6:2607:f8b0:4864:20::730])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 58F3988DB7
- for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 03:35:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 900EA88F75
+ for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 03:40:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2e.google.com with SMTP id
- 6a1803df08f44-6cb2a6d3144so2422716d6.2
- for <u-boot@lists.denx.de>; Wed, 02 Oct 2024 18:35:23 -0700 (PDT)
+Received: by mail-qk1-x730.google.com with SMTP id
+ af79cd13be357-7a9ab721058so127553285a.1
+ for <u-boot@lists.denx.de>; Wed, 02 Oct 2024 18:40:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1727919322; x=1728524122; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1727919649; x=1728524449; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=g0Nyvjpxo3FJBcVAJtR/Gw3cWC4t1luSndB4/lAzod4=;
- b=FAYfB7+ZjgeYySQLDZgyJCfISbdew90julb8Z8CnooVdV4OSzXFHvtecLdQaoD/E+V
- ItJP5LeI6h1tkzSODCnKj5kHjxUD8SLt+nLj6OU6BKwzxBV1pwgzF2kmGkgWNPLthy5s
- fyLHM9qKTWHb8GiGbGzkp2oF+jZM9BZ1icdyI=
+ bh=ESA552XbigyntHzkWx/dpCjjQNhEWRrw8jclxt6TObY=;
+ b=dUCfMIgXsRw8b8CZTp2veD42c8MdRlr8AM3jW3Xcz9lKI9aRcRiZd8Wj2/Lp6KJYU/
+ Dnyx6kpUvjTXyhInlOUpGR1WjOJJLz6lc+IkvzHx8X8MdcSIOCCmyI+Xq3WKvGszHn3J
+ kNfaLpJtvkdJsyVAkN3x0IzUipkw0mCaB1Te0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727919322; x=1728524122;
+ d=1e100.net; s=20230601; t=1727919649; x=1728524449;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=g0Nyvjpxo3FJBcVAJtR/Gw3cWC4t1luSndB4/lAzod4=;
- b=xR0yhvZH9wVQZWBp3vUiY1/D0F8f1mqCGcy1Ya7BQCMK482MlnCjTIxG3C04l9OZx1
- i25GRnTmx7sUSfjTb7xFIhdYAWObz0IDCyOTywYvMopvbD8/p6M0hPqgYxXrDv6oxShL
- j24iA4Wj531PAiM8eQfSccjIuqSaPDNAigHVB9uxUeRDPxkBiVd3BEBuOCSq7WqeFIVc
- UbZnr51lqrckLo6rk1S2/Zsrq8h14gv3NENeUHfJIYbIpn7A1pfIRGih9nnsG3CPgSYY
- dYTvMLNIDXyK6x8nqv8KvWM9I/YxJWRor4orb9/Lwr4WxWqK0pK+i+QoG6ihMD4ZMbhz
- jTRQ==
+ bh=ESA552XbigyntHzkWx/dpCjjQNhEWRrw8jclxt6TObY=;
+ b=nSZJkkxysQnrpGnFxCDMwQICQjN8RVrFZASsHb8D89qxcKhf4MwRHR356HQnMj9gIj
+ x5SLPlvfbY3WfbqQdILiUWuVcxb/fJsbnZDTi5IRcDRkha7JuqxMWclab57dwlWBna5+
+ 7Ot3T1JPH8aGfeuzrEzfmnC0/czDC1/kmmG7WTGVZJkNtmR1UqiIFCSjivJE7CLgo38n
+ T53Oh2wSouPdX/NDQPT8+yzQrLX4FbTA0M38ZB2IHWJ7o8ME4uTZUNaf6qfbvjUPJ7SC
+ yeLjZEs/iD7asy7uLK8+50p50kj6hZElUlMiUWRvMzLE4xFjZYBFUaKYPOr55RqYKOho
+ VimQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUDYglsbhyJwqzYFOiFVS75xCfnC3+PXFORzfYlx+0+jczE92izvxS+hyJHl935DYC/bFjydWc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy8Zoed6+UTWk5A/zxOiN1PTj4p9qayyR7LuCc5PLTTmOK8ywbQ
- rZ0VSGuRs+tRZZaVGUC3jQYhmbQx3PSLzAdBDQx/bJ28vzXc8Qpz7un6LeFBz8Q=
-X-Google-Smtp-Source: AGHT+IG+yfNcDvPh5txv01p+r+kl/LnBh/G8Ac/JIRXBzMk3JcX8Uv4pDK2F7Nw4MaOLtuAdQcXQ0A==
-X-Received: by 2002:a05:6214:2c08:b0:6cb:7107:a3e6 with SMTP id
- 6a1803df08f44-6cb81a4414emr75785456d6.34.1727919321939; 
- Wed, 02 Oct 2024 18:35:21 -0700 (PDT)
+ AJvYcCVQBio2BIIF/Sdv3W6VupL28qPJVJkfdgvtioJV7Q3hQTgSaB2X6Atb4LwUPe8jZvfgpxuxccA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw6gOQHXGfuwTqq1k90l54EJAmxos/kiXV+u0u3UVfpSGWMtktT
+ z1wx3iKUjK1fF5aDj1vYmtASQIbYWbtqfIisLPyP6C2uJ/J4oLQFgh6CGvuvICY=
+X-Google-Smtp-Source: AGHT+IG2FmV+3zUN5+NHhmxkcWuJ/qOWUMeV+VlNOQgTcQhi20Y6rE6nuP0f0GUT/NI5fwkC4qKcSA==
+X-Received: by 2002:a05:620a:3197:b0:7a9:95f6:e372 with SMTP id
+ af79cd13be357-7ae67e2a0f8mr334410485a.2.1727919649342; 
+ Wed, 02 Oct 2024 18:40:49 -0700 (PDT)
 Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6cb9381f2a8sm1085936d6.138.2024.10.02.18.35.18
+ af79cd13be357-7ae6b3dc045sm186885a.122.2024.10.02.18.40.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Oct 2024 18:35:20 -0700 (PDT)
-Date: Wed, 2 Oct 2024 19:35:16 -0600
+ Wed, 02 Oct 2024 18:40:48 -0700 (PDT)
+Date: Wed, 2 Oct 2024 19:40:42 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: Patrick Rudolph <patrick.rudolph@9elements.com>, u-boot@lists.denx.de,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>,
- Peter Robinson <pbrobinson@gmail.com>
-Subject: Re: [PATCH v6 25/37] board: emulation: Add QEMU sbsa support
-Message-ID: <20241003013516.GR4737@bill-the-cat>
-References: <20241002094832.24933-1-patrick.rudolph@9elements.com>
- <20241002094832.24933-26-patrick.rudolph@9elements.com>
- <CAFLszTh-cEBp0-HP5XMONdwSUBepKWNgJSHLJfQ2VYW9FgJq=Q@mail.gmail.com>
+Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
+ Ben Wolsieffer <benwolsieffer@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Chris Morgan <macromorgan@hotmail.com>, Dragan Simic <dsimic@manjaro.org>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Matteo Lisi <matteo.lisi@engicam.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Max Krummenacher <max.krummenacher@toradex.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Sam Day <me@samcday.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Thierry Reding <treding@nvidia.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ u-boot-amlogic@groups.io, u-boot-qcom@groups.io,
+ u-boot@dh-electronics.com, uboot-stm32@st-md-mailman.stormreply.com
+Subject: Re: [PATCH v3 2/4] power: regulator: Convert
+ regulators_enable_boot_on/off() to regulator_post_probe
+Message-ID: <20241003014042.GS4737@bill-the-cat>
+References: <20240926231457.2933914-1-marex@denx.de>
+ <20240926231457.2933914-2-marex@denx.de>
+ <CAFLszThbZ5t+siC0Gz_7KaecTTwUA6J2uTdtHEaYoK+V6Rm_7A@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="TWNqZVJ7+CYguupf"
+ protocol="application/pgp-signature"; boundary="qc4D5VO3myZMzcuS"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTh-cEBp0-HP5XMONdwSUBepKWNgJSHLJfQ2VYW9FgJq=Q@mail.gmail.com>
+In-Reply-To: <CAFLszThbZ5t+siC0Gz_7KaecTTwUA6J2uTdtHEaYoK+V6Rm_7A@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,199 +117,210 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---TWNqZVJ7+CYguupf
+--qc4D5VO3myZMzcuS
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 02, 2024 at 04:55:34PM -0600, Simon Glass wrote:
-> Hi Patrick,
+On Wed, Oct 02, 2024 at 04:55:39PM -0600, Simon Glass wrote:
+> Hi,
 >=20
-> On Wed, 2 Oct 2024 at 03:52, Patrick Rudolph
-> <patrick.rudolph@9elements.com> wrote:
+> On Thu, 26 Sept 2024 at 17:15, Marek Vasut <marex@denx.de> wrote:
 > >
-> > Add support for Arm sbsa [1] v0.3+ that is supported by QEMU [2].
+> > Turn regulators_enable_boot_on() and regulators_enable_boot_off() into
+> > empty functions. Implement matching functionality in regulator_post_pro=
+be()
+> > instead. The regulator_post_probe() is called for all regulators after =
+they
+> > probe, and regulators that have regulator-always-on or regulator-boot-o=
+n DT
+> > properties now always probe due to DM_FLAG_PROBE_AFTER_BIND being set on
+> > such regulators in regulator_post_bind().
 > >
-> > Unlike other Arm based platforms the machine only provides a minimal
-> > FDT that contains number of CPUs, ammount of memory and machine-version.
-> > The boot firmware has to provide ACPI tables to the OS.
-> > Due to this design a full DTB is added here as well that allows U-Boot's
-> > driver to properly function. The DTB is appended at the end of the U-Bo=
-ot
-> > image and will be merged with the QEMU provided DTB.
+> > Finally, fold regulator_unset() functionality into regulator_autoset().
 > >
-> > In addition provide documentation how to use, enable binman to fabricat=
-e both
-> > ROMs that are required to boot and add ACPI tables to make it full comp=
-atible
-> > to the EDK2 reference implementation.
-> >
-> > The board was tested using Fedora 40 Aarch64 Workstation. It's able
-> > to boot from USB and AHCI or network.
-> >
-> > Tested and found working:
-> > - serial
-> > - PCI
-> > - xHCI
-> > - Bochs display
-> > - AHCI
-> > - network using e1000e
-> > - CPU init
-> > - Booting Fedora 40
-> >
-> > 1: Server Base System Architecture (SBSA)
-> > 2: https://www.qemu.org/docs/master/system/arm/sbsa.html
-> >
-> > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-> > Cc: Peter Robinson <pbrobinson@gmail.com>
+> > Signed-off-by: Marek Vasut <marex@denx.de>
+> > ---
+> > Cc: Ben Wolsieffer <benwolsieffer@gmail.com>
+> > Cc: Caleb Connolly <caleb.connolly@linaro.org>
+> > Cc: Chris Morgan <macromorgan@hotmail.com>
+> > Cc: Dragan Simic <dsimic@manjaro.org>
+> > Cc: Eugen Hristev <eugen.hristev@collabora.com>
+> > Cc: Francesco Dolcini <francesco.dolcini@toradex.com>
+> > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> > Cc: Jaehoon Chung <jh80.chung@samsung.com>
+> > Cc: Jagan Teki <jagan@amarulasolutions.com>
+> > Cc: Jonas Karlman <jonas@kwiboo.se>
+> > Cc: Kever Yang <kever.yang@rock-chips.com>
+> > Cc: Matteo Lisi <matteo.lisi@engicam.com>
+> > Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> > Cc: Max Krummenacher <max.krummenacher@toradex.com>
+> > Cc: Neil Armstrong <neil.armstrong@linaro.org>
+> > Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> > Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> > Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
+> > Cc: Quentin Schulz <quentin.schulz@cherry.de>
+> > Cc: Sam Day <me@samcday.com>
 > > Cc: Simon Glass <sjg@chromium.org>
+> > Cc: Sumit Garg <sumit.garg@linaro.org>
+> > Cc: Svyatoslav Ryhel <clamor95@gmail.com>
+> > Cc: Thierry Reding <treding@nvidia.com>
 > > Cc: Tom Rini <trini@konsulko.com>
+> > Cc: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+> > Cc: u-boot-amlogic@groups.io
+> > Cc: u-boot-qcom@groups.io
+> > Cc: u-boot@dh-electronics.com
+> > Cc: u-boot@lists.denx.de
+> > Cc: uboot-stm32@st-md-mailman.stormreply.com
 > > ---
-> > Changelog v3:
-> > - Add GIC and GIC-ITS to devicetree
-> > - Select GICv3 driver
-> > - Drop acpi_fill_madt and use driver model instead
-> > Changelog v4:
-> > - Drop CPU platform code
-> > - Enhance the DT to allow MADT generation from DT
-> > Changelog v5:
-> > - Add full DT and place it at the end of U-Boot
-> > - Merge DT with QEMU's DT
-> > - Drop DT generation code
-> > - Fix flash region length
-> > - Drop enable_caches()
-> > - Support platforms that do not pass FDT in x0
-> > Changelog v6:
-> > - Update header order
-> > - Drop pad-byte from DT
-> > - select BINMAN_FDT
-> > - select E1000_NO_NVM
-> > - drop config.h include
-> > - drop a few CFG_ defines that were used for SPL
+> > V2: Rebase on current u-boot/next
+> > V3: No change
+> > ---
+> >  drivers/power/regulator/regulator-uclass.c | 60 +++++++---------------
+> >  1 file changed, 19 insertions(+), 41 deletions(-)
 > >
-> > ---
-> >  arch/arm/Kconfig                            |   3 +-
-> >  arch/arm/dts/qemu-sbsa.dts                  | 136 ++++++
-> >  arch/arm/include/asm/arch-qemu-sbsa/boot0.h |  34 ++
-> >  arch/arm/mach-qemu/Kconfig                  |  36 +-
-> >  board/emulation/qemu-arm/MAINTAINERS        |   2 +
-> >  board/emulation/qemu-sbsa/Kconfig           |  57 +++
-> >  board/emulation/qemu-sbsa/Makefile          |   8 +
-> >  board/emulation/qemu-sbsa/acpi.c            | 192 ++++++++
-> >  board/emulation/qemu-sbsa/dsdt.asl          | 483 ++++++++++++++++++++
-> >  board/emulation/qemu-sbsa/lowlevel_init.S   |  22 +
-> >  board/emulation/qemu-sbsa/qemu-sbsa.c       | 311 +++++++++++++
-> >  board/emulation/qemu-sbsa/qemu-sbsa.env     |  14 +
-> >  board/emulation/qemu-sbsa/qemu-sbsa.h       |  38 ++
-> >  board/emulation/qemu-sbsa/smc.c             |  71 +++
-> >  configs/qemu-arm-sbsa_defconfig             |  10 +
-> >  doc/board/emulation/index.rst               |   1 +
-> >  doc/board/emulation/qemu-sbsa.rst           |  98 ++++
-> >  doc/develop/driver-model/virtio.rst         |   1 +
-> >  include/configs/qemu-sbsa.h                 |  95 ++++
-> >  19 files changed, 1605 insertions(+), 7 deletions(-)
-> >  create mode 100644 arch/arm/dts/qemu-sbsa.dts
-> >  create mode 100644 arch/arm/include/asm/arch-qemu-sbsa/boot0.h
-> >  create mode 100644 board/emulation/qemu-sbsa/Kconfig
-> >  create mode 100644 board/emulation/qemu-sbsa/Makefile
-> >  create mode 100644 board/emulation/qemu-sbsa/acpi.c
-> >  create mode 100644 board/emulation/qemu-sbsa/dsdt.asl
-> >  create mode 100644 board/emulation/qemu-sbsa/lowlevel_init.S
-> >  create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.c
-> >  create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.env
-> >  create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.h
-> >  create mode 100644 board/emulation/qemu-sbsa/smc.c
-> >  create mode 100644 configs/qemu-arm-sbsa_defconfig
-> >  create mode 100644 doc/board/emulation/qemu-sbsa.rst
-> >  create mode 100644 include/configs/qemu-sbsa.h
->=20
-> With the tweaks below:
->=20
-> Reviewed-by: Simon Glass <sjg@chromium.org>
->=20
-> [..]
->=20
-> > diff --git a/arch/arm/dts/qemu-sbsa.dts b/arch/arm/dts/qemu-sbsa.dts
-> > new file mode 100644
-> > index 0000000000..f743ea3863
-> > --- /dev/null
-> > +++ b/arch/arm/dts/qemu-sbsa.dts
-> > @@ -0,0 +1,136 @@
-> > +// SPDX-License-Identifier: GPL-2.0+ OR MIT
-> > +/*
-> > + * Devicetree with onboard devices for qemu_sbsa-ref for internal use =
-only!
-> > + * DO NOT PASS TO THE OS!
-> > + *
-> > + * As QEMU provides only a minimal devicetree this one is merged with
-> > + * it and then fixed at runtime.
-> > + *
-> > + * Copyright 2024 9elements GmbH
-> > + */
-> > +#include "configs/qemu-sbsa.h"
+> > diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power=
+/regulator/regulator-uclass.c
+> > index 1a970004540..9fcc4bd85b9 100644
+> > --- a/drivers/power/regulator/regulator-uclass.c
+> > +++ b/drivers/power/regulator/regulator-uclass.c
+> > @@ -314,6 +314,11 @@ int regulator_autoset(struct udevice *dev)
+> >                         return ret;
+> >         }
+> >
+> > +       if (uc_pdata->force_off) {
+> > +               ret =3D regulator_set_enable(dev, false);
+> > +               goto out;
+> > +       }
 > > +
-> > +/dts-v1/;
+> >         if (!uc_pdata->always_on && !uc_pdata->boot_on) {
+> >                 ret =3D -EMEDIUMTYPE;
+> >                 goto out;
+> > @@ -518,56 +523,28 @@ static int regulator_pre_probe(struct udevice *de=
+v)
+> >         return 0;
+> >  }
+> >
+> > -int regulators_enable_boot_on(bool verbose)
+> > +static int regulator_post_probe(struct udevice *dev)
+> >  {
+> > -       struct udevice *dev;
+> > -       struct uclass *uc;
+> >         int ret;
+> >
+> > -       ret =3D uclass_get(UCLASS_REGULATOR, &uc);
+> > -       if (ret)
+> > +       ret =3D regulator_autoset(dev);
+> > +       if (ret && ret !=3D -EMEDIUMTYPE && ret !=3D -EALREADY && ret !=
+=3D ENOSYS)
+> >                 return ret;
+> > -       for (uclass_first_device(UCLASS_REGULATOR, &dev);
+> > -            dev;
+> > -            uclass_next_device(&dev)) {
+> > -               ret =3D regulator_autoset(dev);
+> > -               if (ret =3D=3D -EMEDIUMTYPE || ret =3D=3D -EALREADY) {
+> > -                       ret =3D 0;
+> > -                       continue;
+> > -               }
+> > -               if (verbose)
+> > -                       regulator_show(dev, ret);
+> > -               if (ret =3D=3D -ENOSYS)
+> > -                       ret =3D 0;
+> > -       }
+> >
+> > -       return ret;
+> > +       if (_DEBUG)
+> > +               regulator_show(dev, ret);
 > > +
-> > +#define MAKE_PROP(x) (x>>32) (x&0xffffffff)
-> > +
-> > +/ {
-> > +       #address-cells =3D <2>;
-> > +       #size-cells =3D <2>;
-> > +       interrupt-parent =3D <&intc>;
-> > +       compatible =3D "linux,sbsa-ref";
-> > +
-> > +       binman: binman {
-> > +               multiple-images;
-> > +       };
-> > +
-> > +       cpus {
-> > +               /* Filled by fdtdec_board_setup() */
-> > +       };
-> > +
-> > +       memory {
-> > +               /* Filled by fdtdec_board_setup() */
-> > +       };
-> > +
-> > +       soc {
-> > +               compatible =3D "simple-bus";
-> > +               #address-cells =3D <2>;
-> > +               #size-cells =3D <2>;
-> > +               ranges;
-> > +
-> > +               uart0 {
-> > +                       compatible =3D "arm,pl011";
-> > +                       status =3D "okay";
-> > +                       reg =3D <MAKE_PROP(SBSA_UART_BASE_ADDR)
+> > +       return 0;
+> >  }
+> >
+> > -int regulators_enable_boot_off(bool verbose)
+> > +int regulators_enable_boot_on(bool verbose)
+> >  {
+> > -       struct udevice *dev;
+> > -       struct uclass *uc;
+> > -       int ret;
+> > -
+> > -       ret =3D uclass_get(UCLASS_REGULATOR, &uc);
+> > -       if (ret)
+> > -               return ret;
+> > -       for (uclass_first_device(UCLASS_REGULATOR, &dev);
+> > -            dev;
+> > -            uclass_next_device(&dev)) {
+> > -               ret =3D regulator_unset(dev);
+> > -               if (ret =3D=3D -EMEDIUMTYPE) {
+> > -                       ret =3D 0;
+> > -                       continue;
+> > -               }
+> > -               if (verbose)
+> > -                       regulator_show(dev, ret);
+> > -               if (ret =3D=3D -ENOSYS)
+> > -                       ret =3D 0;
+> > -       }
+> > +       return 0;
+> > +}
+> >
+> > -       return ret;
+> > +int regulators_enable_boot_off(bool verbose)
+> > +{
+> > +       return 0;
+> >  }
+> >
+> >  UCLASS_DRIVER(regulator) =3D {
+> > @@ -575,5 +552,6 @@ UCLASS_DRIVER(regulator) =3D {
+> >         .name           =3D "regulator",
+> >         .post_bind      =3D regulator_post_bind,
+> >         .pre_probe      =3D regulator_pre_probe,
+> > +       .post_probe     =3D regulator_post_probe,
+> >         .per_device_plat_auto   =3D sizeof(struct dm_regulator_uclass_p=
+lat),
+> >  };
+> > --
+> > 2.45.2
+> >
 >=20
-> Can you use
->=20
-> reg =3D /bits 64/ <0x60000000>
->=20
-> instead?
->=20
-> Same for those below.
+> I thought I objected to this patch, but it seems to be in -next? Does
+> anyone know what has happened here?
 
-Isn't that less readable ?
+Yes, you missed me noting that this fixes real problems and has been
+needing to be fixed for a while. I said you should provide your
+alternative approach and we'll get this sorted out in -next and I took
+the work-around for master so the release wouldn't be broken.
+
+> I am seeing these errors now when running sandbox 'u-boot -D':
+>=20
+>        i2c_emul_find() No emulators for device 'sandbox_pmic'
+>   sandbox_pmic_write() write error to device: 0000000018c49db0 register: =
+0x0!
+>        out_set_value() PMIC write failed: -5
+>        i2c_emul_find() No emulators for device 'sandbox_pmic'
+>   sandbox_pmic_write() write error to device: 0000000018c49db0 register: =
+0x0!
+>        out_set_value() PMIC write failed: -5
+
+I suppose the good news is that perhaps this is also related to the
+problem that Svyatoslav was reporting.
 
 --=20
 Tom
 
---TWNqZVJ7+CYguupf
+--qc4D5VO3myZMzcuS
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmb99NAACgkQFHw5/5Y0
-tyywmAv+IVpiW/f3pFwoaSuMQExjkvuMxX91AfBvNm7Q4fPFxbcycod8TCvNlWLG
-8WnGLTYcI3Fxh/9GeV+/W620CkdZYcjcaCWzsGzK4/pUjppHuRbU5pA12i4o80O9
-wv5K1DknWPKgveoa1LmVhNl5Pnwj8nPUfOZ8P879/bsJMe7Z+0qSq+7c0U95ItkF
-VnN+QyRvkG+PwEzf1elLA+kZMJ7FhCkN9oKHfGGkpFdv3V9k1MKFRJNwD4pDvNSA
-3eEWGAdEXfAvdA9Tt5YPLjjUi29cgxBRd7y5kntpnrSAmGXySKLOLc7iqA6bPrvK
-KLIrSACIJCRiztPBsE6JFGukAN5ewPW8OTkDy8ANQse1qV1dkJHS4cGSvt8nIxIW
-R3WG0iOGAHzvG1te6CzwYDqKQO0R6WHalrupBrFI5PQ5gz1nDwCgfmlvH0kt1x7W
-VSmgDW0uPB9O014DpRNNglduKEfaV9RVB3txF0vzYDUf5ulPcBHcrH2OL9FWChJa
-MzvBjRfO
-=+xL3
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmb99hoACgkQFHw5/5Y0
+tyzThQv+Im6I/qpTYIKuSWPpHMaDiZ8wmr1qhQUJIL5Lg2PI+h/rc10L9xvVclXO
+yraqCA2hIAEXsE4ZyQ3RDzudkDIo9yA7CGHzSSaPAlTDc7eZqQH88ydVFSBhR1QM
+jwojLuk9bev6KhtWyxR+InJS8OYSR7buX/15AR6JegRBYBhAwAd+aqNEljleXJP2
+YAspMvX2d5GnmVDy8ZWK8ZzcVtY6oGplk/GhkiIm4PtOb3c/tDHPs8Ta7OmgCBrW
+OacFPMtoAaXHPvzx8lg/b45VQ+TiJsNWEbnrjJ+Oj6KmK1A4U2zik3UmWna7VUQ4
+O9CBNNhiXLfM0ZtJwNpf37u0FGEU0TGtKtG5cV/9T4yMz+5c7i+og1QYj/vaqa0H
+XOpwKpyEAiA6hH+fyqCaKY7WNcfWyR+IoLNRb2103SfLt4/t6xYseGUBHVy899Di
+DXNCbI8vBtd4hmpZmNx4JrU7abi4BYqDvdBlEzCTERnePHti3EzRf064IbbdQrK1
+5X6W6nMM
+=KYFZ
 -----END PGP SIGNATURE-----
 
---TWNqZVJ7+CYguupf--
+--qc4D5VO3myZMzcuS--
