@@ -4,71 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B280CF34AD
-	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 13:49:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEAA9CF34AD
+	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 13:51:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C75888D14;
-	Thu,  3 Oct 2024 15:49:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0A12A88B0B;
+	Thu,  3 Oct 2024 15:51:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="V/sEyano";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="c39c+3ML";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C169F885B3; Thu,  3 Oct 2024 15:49:32 +0200 (CEST)
-Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
- [IPv6:2607:f8b0:4864:20::832])
+ id 1C05188DB2; Thu,  3 Oct 2024 15:51:01 +0200 (CEST)
+Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
+ [IPv6:2607:f8b0:4864:20::72a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6843988D14
- for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 15:49:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A03D885B3
+ for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 15:50:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qt1-x832.google.com with SMTP id
- d75a77b69052e-45d8f781d05so9569151cf.2
- for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 06:49:30 -0700 (PDT)
+Received: by mail-qk1-x72a.google.com with SMTP id
+ af79cd13be357-7a9acc6f22dso98372485a.0
+ for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 06:50:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727963369; x=1728568169; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1727963457; x=1728568257; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=y72AJbCrxDvMjkmg9IxxIQzqB708Ldx4RLybsBeW7Sc=;
- b=V/sEyanoZrrnFum6uvsC26uf+eN1dK/X7YhxjPm0g0mG+xWLXjmhx19yml5ZhuffVm
- tHNCM7j0Cz25h99NsJ2b+yZDcAGvXaZOY4bnBBvK2PX9ejiCRxlfsypc6UzoUggKyyni
- 0BA5b6/u/i2c6Ku+lurNS94Cgn54nCAJhzW50=
+ bh=wRxV7099VlVV4RWU9tLwhVcJdMqu26Xnc0FCifhsEb4=;
+ b=c39c+3MLJFqJQGeNzyltEdYhAgPCXdKfBkZVtW4Plr7FV1Q5j26tRIbdKzJnPE+Bf5
+ pVx1y1+/mBkwmoYAvprQrVNIdy8guZJRXuMC0pnXh3PWHlOB6LIE7CAmPm83nN7liOyc
+ 4OEDGeNnkkiBXgdH1FaxGifjVqOK/KHZOfqEI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727963369; x=1728568169;
+ d=1e100.net; s=20230601; t=1727963457; x=1728568257;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=y72AJbCrxDvMjkmg9IxxIQzqB708Ldx4RLybsBeW7Sc=;
- b=fn7yYA4lwP3wuAFoqNtCEX26GWP7z6vixNe8r4NN1StRWDcysNto+I16l/iAkvZ6pc
- PYdMLneEq1lJafTeMinpg7QXqPDkz4ld0ZA2Qf5XHk/7XCQm9ZYRrwtP36RtN8DXmm78
- /lPk46zJzSSTJYrqXhyTU6QD101Uzf6ioIN7SmLLr1qUpZy/XU7iERw5oKXedq7KYQ8r
- QNsVeS58KuYzZ0TvK6/epuaFku+6CC/wq1ZFe9JjQEpukiZ2CklzCmsVmeACIsHT6cg4
- kNf1RqNzk8GO12uCZ66meO/H/wf8X6nzoJ0kRGLBJGP2qhTS2w+ciEsH94pTG3JpXj+o
- A0Lw==
+ bh=wRxV7099VlVV4RWU9tLwhVcJdMqu26Xnc0FCifhsEb4=;
+ b=YdiBZrt7BSWmlPESyF2Dv1HsOGfgPThZjZVPV83mmKTieunVcvMiqog2rs5tLioXZr
+ Els3e2Lhi881sw4XGYN+LLsGpgGnntvDAYIzwRTkqf+DU4Kma9CbpJrlbMTdm28G0svd
+ YyZleSlK4DCFcR9gXq7GNsmvLwabxL9QkNfLuII6uvRt15LGMvlA3h2WcEG+x2ni1rd5
+ Ho4FpdoGdn5AUzQcJ8rsPu9KkVYDG56DobM6eynCTzMop8KnnUuQLFmHI2k4lCVzAlTr
+ i1+E1zhci2Zkv1gHcHRnsUQwhCSKU4X5RIVDcfeeqJWsdS1+ZY2uNZcKAEWjO51I7/lM
+ Db6w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUYl+svZ0f9cuSHneGFRgAEBGmNddKDe2J2OLVrPJqxsfqEKPeFx2WztjhmjF0ZGPPI6xK8/SM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw99WUtp4swoz0yAwnzz9uWc6YXHPE3OCEHfL+Al4N3EXq3PTUs
- MllRwLyA2tIy/84vGMoml9f0OEPAp6X8FWB2m7ocu1hgI9A9ywDU5ypb19ZrhS6GDdWvWtcl26y
- yP/ayAa3AJ8K7jJqKMJeGeKy6ClDL9d1LJASu5jklVowVjpQ=
-X-Google-Smtp-Source: AGHT+IEoq3cBBTsCiFXyMIHd2wElH3xqGKCtD6aDhZzXh/S5dq7+xfLRkbUXUqiJHrLJhGRTc4TIT2vb+UZXN2ogwYM=
-X-Received: by 2002:a05:6214:3bc9:b0:6c6:9bb9:b435 with SMTP id
- 6a1803df08f44-6cb81bba100mr81042696d6.53.1727963369206; Thu, 03 Oct 2024
- 06:49:29 -0700 (PDT)
+ AJvYcCXK1Us9LDvu16kHblTfyIg9kZCbyVhVYIEpP+z6q37UjU78LwJjf9Dr0aZr5MjtBTcT25IoUY0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxflTxGThBsco+vaUgZgW05IPBOuPAQXeR3mGVmcZzQyXPQmgCq
+ 6v57TBO5mjn6grhymM+XM9cjargpiFXfn18RgvOxjc52aYqiatZHr+nHbMqsfLMssSNY7LxSviW
+ lpR7oVpnMf0S+SbPs5ofzHAxrpSNncUTMP3rbWJ0CFwyCrng=
+X-Google-Smtp-Source: AGHT+IFnV9n+CbMQvl+28zn2NCxftKQsmWt+nWohElrJWdE0r08QtFGqJL+xReHxb0QzciecH7X3iRMqm8e2SwlHuJ4=
+X-Received: by 2002:a05:6214:398f:b0:6cb:2fa7:48cd with SMTP id
+ 6a1803df08f44-6cb81a48e95mr87714616d6.36.1727963455877; Thu, 03 Oct 2024
+ 06:50:55 -0700 (PDT)
 MIME-Version: 1.0
 References: <20241002094832.24933-1-patrick.rudolph@9elements.com>
- <20241002094832.24933-15-patrick.rudolph@9elements.com>
- <CAC_iWj+7uvnJp17LiFpc7TZYGdoH9Y_kroWLPGVzC2m5BeTAhA@mail.gmail.com>
-In-Reply-To: <CAC_iWj+7uvnJp17LiFpc7TZYGdoH9Y_kroWLPGVzC2m5BeTAhA@mail.gmail.com>
+ <20241002094832.24933-26-patrick.rudolph@9elements.com>
+ <CAFLszTh-cEBp0-HP5XMONdwSUBepKWNgJSHLJfQ2VYW9FgJq=Q@mail.gmail.com>
+ <20241003013516.GR4737@bill-the-cat>
+In-Reply-To: <20241003013516.GR4737@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 3 Oct 2024 07:49:18 -0600
-Message-ID: <CAFLszTiKi7+8NmihLqdvuS6fH6Jp2+4PZG6GHK1wNoRnQZx0SA@mail.gmail.com>
-Subject: Re: [PATCH v6 14/37] efi_loader: Allocate and write ACPI tables
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 3 Oct 2024 07:50:45 -0600
+Message-ID: <CAFLszTgoD6YDpGTJLPxfqXoudR=TDDDAHQMUJzK+mxntpfhk4w@mail.gmail.com>
+Subject: Re: [PATCH v6 25/37] board: emulation: Add QEMU sbsa support
+To: Tom Rini <trini@konsulko.com>
 Cc: Patrick Rudolph <patrick.rudolph@9elements.com>, u-boot@lists.denx.de, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>, 
+ Peter Robinson <pbrobinson@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,182 +89,179 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi Tom,
 
-On Wed, 2 Oct 2024 at 23:45, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+On Wed, 2 Oct 2024 at 19:35, Tom Rini <trini@konsulko.com> wrote:
 >
-> Hi Patrick,
+> On Wed, Oct 02, 2024 at 04:55:34PM -0600, Simon Glass wrote:
+> > Hi Patrick,
+> >
+> > On Wed, 2 Oct 2024 at 03:52, Patrick Rudolph
+> > <patrick.rudolph@9elements.com> wrote:
+> > >
+> > > Add support for Arm sbsa [1] v0.3+ that is supported by QEMU [2].
+> > >
+> > > Unlike other Arm based platforms the machine only provides a minimal
+> > > FDT that contains number of CPUs, ammount of memory and machine-version.
+> > > The boot firmware has to provide ACPI tables to the OS.
+> > > Due to this design a full DTB is added here as well that allows U-Boot's
+> > > driver to properly function. The DTB is appended at the end of the U-Boot
+> > > image and will be merged with the QEMU provided DTB.
+> > >
+> > > In addition provide documentation how to use, enable binman to fabricate both
+> > > ROMs that are required to boot and add ACPI tables to make it full compatible
+> > > to the EDK2 reference implementation.
+> > >
+> > > The board was tested using Fedora 40 Aarch64 Workstation. It's able
+> > > to boot from USB and AHCI or network.
+> > >
+> > > Tested and found working:
+> > > - serial
+> > > - PCI
+> > > - xHCI
+> > > - Bochs display
+> > > - AHCI
+> > > - network using e1000e
+> > > - CPU init
+> > > - Booting Fedora 40
+> > >
+> > > 1: Server Base System Architecture (SBSA)
+> > > 2: https://www.qemu.org/docs/master/system/arm/sbsa.html
+> > >
+> > > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+> > > Cc: Peter Robinson <pbrobinson@gmail.com>
+> > > Cc: Simon Glass <sjg@chromium.org>
+> > > Cc: Tom Rini <trini@konsulko.com>
+> > > ---
+> > > Changelog v3:
+> > > - Add GIC and GIC-ITS to devicetree
+> > > - Select GICv3 driver
+> > > - Drop acpi_fill_madt and use driver model instead
+> > > Changelog v4:
+> > > - Drop CPU platform code
+> > > - Enhance the DT to allow MADT generation from DT
+> > > Changelog v5:
+> > > - Add full DT and place it at the end of U-Boot
+> > > - Merge DT with QEMU's DT
+> > > - Drop DT generation code
+> > > - Fix flash region length
+> > > - Drop enable_caches()
+> > > - Support platforms that do not pass FDT in x0
+> > > Changelog v6:
+> > > - Update header order
+> > > - Drop pad-byte from DT
+> > > - select BINMAN_FDT
+> > > - select E1000_NO_NVM
+> > > - drop config.h include
+> > > - drop a few CFG_ defines that were used for SPL
+> > >
+> > > ---
+> > >  arch/arm/Kconfig                            |   3 +-
+> > >  arch/arm/dts/qemu-sbsa.dts                  | 136 ++++++
+> > >  arch/arm/include/asm/arch-qemu-sbsa/boot0.h |  34 ++
+> > >  arch/arm/mach-qemu/Kconfig                  |  36 +-
+> > >  board/emulation/qemu-arm/MAINTAINERS        |   2 +
+> > >  board/emulation/qemu-sbsa/Kconfig           |  57 +++
+> > >  board/emulation/qemu-sbsa/Makefile          |   8 +
+> > >  board/emulation/qemu-sbsa/acpi.c            | 192 ++++++++
+> > >  board/emulation/qemu-sbsa/dsdt.asl          | 483 ++++++++++++++++++++
+> > >  board/emulation/qemu-sbsa/lowlevel_init.S   |  22 +
+> > >  board/emulation/qemu-sbsa/qemu-sbsa.c       | 311 +++++++++++++
+> > >  board/emulation/qemu-sbsa/qemu-sbsa.env     |  14 +
+> > >  board/emulation/qemu-sbsa/qemu-sbsa.h       |  38 ++
+> > >  board/emulation/qemu-sbsa/smc.c             |  71 +++
+> > >  configs/qemu-arm-sbsa_defconfig             |  10 +
+> > >  doc/board/emulation/index.rst               |   1 +
+> > >  doc/board/emulation/qemu-sbsa.rst           |  98 ++++
+> > >  doc/develop/driver-model/virtio.rst         |   1 +
+> > >  include/configs/qemu-sbsa.h                 |  95 ++++
+> > >  19 files changed, 1605 insertions(+), 7 deletions(-)
+> > >  create mode 100644 arch/arm/dts/qemu-sbsa.dts
+> > >  create mode 100644 arch/arm/include/asm/arch-qemu-sbsa/boot0.h
+> > >  create mode 100644 board/emulation/qemu-sbsa/Kconfig
+> > >  create mode 100644 board/emulation/qemu-sbsa/Makefile
+> > >  create mode 100644 board/emulation/qemu-sbsa/acpi.c
+> > >  create mode 100644 board/emulation/qemu-sbsa/dsdt.asl
+> > >  create mode 100644 board/emulation/qemu-sbsa/lowlevel_init.S
+> > >  create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.c
+> > >  create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.env
+> > >  create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.h
+> > >  create mode 100644 board/emulation/qemu-sbsa/smc.c
+> > >  create mode 100644 configs/qemu-arm-sbsa_defconfig
+> > >  create mode 100644 doc/board/emulation/qemu-sbsa.rst
+> > >  create mode 100644 include/configs/qemu-sbsa.h
+> >
+> > With the tweaks below:
+> >
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> >
+> > [..]
+> >
+> > > diff --git a/arch/arm/dts/qemu-sbsa.dts b/arch/arm/dts/qemu-sbsa.dts
+> > > new file mode 100644
+> > > index 0000000000..f743ea3863
+> > > --- /dev/null
+> > > +++ b/arch/arm/dts/qemu-sbsa.dts
+> > > @@ -0,0 +1,136 @@
+> > > +// SPDX-License-Identifier: GPL-2.0+ OR MIT
+> > > +/*
+> > > + * Devicetree with onboard devices for qemu_sbsa-ref for internal use only!
+> > > + * DO NOT PASS TO THE OS!
+> > > + *
+> > > + * As QEMU provides only a minimal devicetree this one is merged with
+> > > + * it and then fixed at runtime.
+> > > + *
+> > > + * Copyright 2024 9elements GmbH
+> > > + */
+> > > +#include "configs/qemu-sbsa.h"
+> > > +
+> > > +/dts-v1/;
+> > > +
+> > > +#define MAKE_PROP(x) (x>>32) (x&0xffffffff)
+> > > +
+> > > +/ {
+> > > +       #address-cells = <2>;
+> > > +       #size-cells = <2>;
+> > > +       interrupt-parent = <&intc>;
+> > > +       compatible = "linux,sbsa-ref";
+> > > +
+> > > +       binman: binman {
+> > > +               multiple-images;
+> > > +       };
+> > > +
+> > > +       cpus {
+> > > +               /* Filled by fdtdec_board_setup() */
+> > > +       };
+> > > +
+> > > +       memory {
+> > > +               /* Filled by fdtdec_board_setup() */
+> > > +       };
+> > > +
+> > > +       soc {
+> > > +               compatible = "simple-bus";
+> > > +               #address-cells = <2>;
+> > > +               #size-cells = <2>;
+> > > +               ranges;
+> > > +
+> > > +               uart0 {
+> > > +                       compatible = "arm,pl011";
+> > > +                       status = "okay";
+> > > +                       reg = <MAKE_PROP(SBSA_UART_BASE_ADDR)
+> >
+> > Can you use
+> >
+> > reg = /bits 64/ <0x60000000>
+> >
+> > instead?
+> >
+> > Same for those below.
 >
-> We've been back and forth on this, but we still disagree on the
-> allocations etc, but I don't think it's that important to keep the
-> patch out due to this.
->
-> Can we move the table generation to the ACPI subsystem?
-> efi_acpi_register() will convert the memory as needed, so I was
-> wondering why the creation itself can't be done there. If you simply
-> fill table_start_high/table_end_hi, EFI will install the config tables
-> properly
+> Isn't that less readable ?
 
-Yes, that's a good idea. The whole function can just move to
-lib/acpi/acpi_writer.c perhaps?
+Which bit of it is less readable?
+
+But I very much doubt upstream would accept it with a macro. Other
+64-bit boards seem to use '/bits/ 64'.
 
 Regards,
 SImon
-
->
-> Thanks
-> /Ilias
->
-> On Wed, 2 Oct 2024 at 12:52, Patrick Rudolph
-> <patrick.rudolph@9elements.com> wrote:
-> >
-> > Allocate memory for ACPI tables inside the efi_loader and write out
-> > the tables similar to SMBIOS tables. When ACPI is enabled and wasn't
-> > installed in other places, install the ACPI table in EFI. Since EFI
-> > is necessary to pass the ACPI table location when FDT isn't used,
-> > there's no need to install it separately.
-> >
-> > When CONFIG_BLOBLIST_TABLES is set the tables will be stored in a
-> > bloblist. The tables are still passed to the OS using EFI.
-> >
-> > This allows non x86 platforms to boot using ACPI only in case the
-> > EFI loader is being used.
-> >
-> > TEST: Booted QEMU SBSA (no QFW) using EFI and ACPI only.
-> >
-> > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-> > Cc: Simon Glass <sjg@chromium.org>
-> > Cc: Tom Rini <trini@konsulko.com>
-> > ---
-> > Changelog v3:
-> > - Drop memalign and use efi_allocate_pages
-> > - Use log_debug instead of debug
-> > - Clarify commit message
-> > - Skip writing ACPI tables on sandbox
-> > - Rename function
-> > - Add function comment
-> >
-> > Changelog v6:
-> > - Update header order
-> >
-> > ---
-> >  lib/efi_loader/efi_acpi.c        | 76 ++++++++++++++++++++++++++++++++
-> >  test/py/tests/test_event_dump.py |  1 +
-> >  2 files changed, 77 insertions(+)
-> >
-> > diff --git a/lib/efi_loader/efi_acpi.c b/lib/efi_loader/efi_acpi.c
-> > index 67bd7f8ca2..c11abe17b6 100644
-> > --- a/lib/efi_loader/efi_acpi.c
-> > +++ b/lib/efi_loader/efi_acpi.c
-> > @@ -6,15 +6,23 @@
-> >   */
-> >
-> >  #include <efi_loader.h>
-> > +#include <bloblist.h>
-> >  #include <log.h>
-> > +#include <malloc.h>
-> >  #include <mapmem.h>
-> >  #include <acpi/acpi_table.h>
-> >  #include <asm/global_data.h>
-> > +#include <asm/io.h>
-> > +#include <linux/sizes.h>
-> > +#include <linux/log2.h>
-> >
-> >  DECLARE_GLOBAL_DATA_PTR;
-> >
-> >  static const efi_guid_t acpi_guid = EFI_ACPI_TABLE_GUID;
-> >
-> > +enum {
-> > +       TABLE_SIZE      = SZ_64K,
-> > +};
-> >  /*
-> >   * Install the ACPI table as a configuration table.
-> >   *
-> > @@ -47,3 +55,71 @@ efi_status_t efi_acpi_register(void)
-> >         return efi_install_configuration_table(&acpi_guid,
-> >                                                (void *)(ulong)addr);
-> >  }
-> > +
-> > +/*
-> > + * Allocate memory for ACPI tables and write ACPI tables to the
-> > + * allocated buffer.
-> > + *
-> > + * Return:     status code
-> > + */
-> > +static int alloc_write_acpi_tables(void)
-> > +{
-> > +       u64 table_addr, table_end;
-> > +       u64 new_acpi_addr = 0;
-> > +       efi_uintn_t pages;
-> > +       efi_status_t ret;
-> > +       void *addr;
-> > +
-> > +       if (!IS_ENABLED(CONFIG_GENERATE_ACPI_TABLE))
-> > +               return 0;
-> > +
-> > +       if (IS_ENABLED(CONFIG_X86) ||
-> > +           IS_ENABLED(CONFIG_QFW_ACPI) ||
-> > +           IS_ENABLED(CONFIG_SANDBOX)) {
-> > +               log_debug("Skipping writing ACPI tables as already done\n");
-> > +               return 0;
-> > +       }
-> > +
-> > +       /* Align the table to a 4KB boundary to keep EFI happy */
-> > +       if (IS_ENABLED(CONFIG_BLOBLIST_TABLES)) {
-> > +               addr = bloblist_add(BLOBLISTT_ACPI_TABLES, TABLE_SIZE,
-> > +                                   ilog2(SZ_4K));
-> > +
-> > +               if (!addr)
-> > +                       return log_msg_ret("mem", -ENOMEM);
-> > +       } else {
-> > +               pages = efi_size_in_pages(TABLE_SIZE);
-> > +
-> > +               ret = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES,
-> > +                                        EFI_ACPI_RECLAIM_MEMORY,
-> > +                                        pages, &new_acpi_addr);
-> > +               if (ret != EFI_SUCCESS)
-> > +                       return log_msg_ret("mem", -ENOMEM);
-> > +
-> > +               addr = (void *)(uintptr_t)new_acpi_addr;
-> > +       }
-> > +
-> > +       table_addr = virt_to_phys(addr);
-> > +
-> > +       gd->arch.table_start_high = table_addr;
-> > +
-> > +       table_end = write_acpi_tables(table_addr);
-> > +       if (!table_end) {
-> > +               log_err("Can't create ACPI configuration table\n");
-> > +               return -EINTR;
-> > +       }
-> > +
-> > +       log_debug("- wrote 'acpi' to %llx, end %llx\n", table_addr, table_end);
-> > +       if (table_end - table_addr > TABLE_SIZE) {
-> > +               log_err("Out of space for configuration tables: need %llx, have %x\n",
-> > +                       table_end - table_addr, TABLE_SIZE);
-> > +               return log_msg_ret("acpi", -ENOSPC);
-> > +       }
-> > +       gd->arch.table_end_high = table_end;
-> > +
-> > +       log_debug("- done writing tables\n");
-> > +
-> > +       return 0;
-> > +}
-> > +
-> > +EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, alloc_write_acpi_tables);
-> > diff --git a/test/py/tests/test_event_dump.py b/test/py/tests/test_event_dump.py
-> > index e282c67335..459bfa26bb 100644
-> > --- a/test/py/tests/test_event_dump.py
-> > +++ b/test/py/tests/test_event_dump.py
-> > @@ -18,6 +18,7 @@ def test_event_dump(u_boot_console):
-> >  --------------------  ------------------------------  ------------------------------
-> >  EVT_FT_FIXUP          bootmeth_vbe_ft_fixup           .*boot/vbe_request.c:.*
-> >  EVT_FT_FIXUP          bootmeth_vbe_simple_ft_fixup    .*boot/vbe_simple_os.c:.*
-> > +EVT_LAST_STAGE_INIT   alloc_write_acpi_tables         .*lib/efi_loader/efi_acpi.c:.*
-> >  EVT_LAST_STAGE_INIT   install_smbios_table            .*lib/efi_loader/efi_smbios.c:.*
-> >  EVT_MISC_INIT_F       sandbox_early_getopt_check      .*arch/sandbox/cpu/start.c:.*
-> >  EVT_TEST              h_adder_simple                  .*test/common/event.c:'''
-> > --
-> > 2.46.2
-> >
