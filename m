@@ -4,142 +4,142 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 993BECF34C8
-	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 21:28:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62B96CF34C9
+	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 21:28:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 93F1188DDA;
-	Thu,  3 Oct 2024 23:28:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0BF7188D47;
+	Thu,  3 Oct 2024 23:28:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="DmD7P+nf";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="hcWw5odW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 35E0988D47; Thu,  3 Oct 2024 23:28:15 +0200 (CEST)
+ id 0E81888D8F; Thu,  3 Oct 2024 23:28:17 +0200 (CEST)
 Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on2062a.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2613::62a])
+ (mail-vi1eur05on20627.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::627])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2509788D5A
- for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 23:28:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9CF9088B2D
+ for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 23:28:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=m/K3hFm92KUvEayJ+evW+0ExHSwsfoMtDNkIeF7SK+KdYWQkDafjmIYJ5jit24JLyh6rh/lFALkhBXqmaxfJE9pWOLYxIs7p9bLdKBLh6HH/x+XXh1OdxUkUS5f9yrFrMrcTywqD0owt9um1vGnioY6DjRHzQMryKB050JzjNFvcdByXilWoP6SKFfwM17qRDk61jIJtLGZPWvdQZAQlS2YIh+gyqaMy+d9hN5c4zPyyzOKKv5omqP0ygH2CV2gSmPCUrgourq6fDPEfYPUKCzeogf6bYov5KwlfC7r+a/yfhT8zyPJ26wF9/zyWZFsK97WQvWGysm1z6QZF+NdT7w==
+ b=l4D0DN051ImCUPe05UDHqHicEV3NygY5k9HUNVgbvT8wVbe8JtpnwyfCFaNVM/yiUvY82CHO9BRaX3oEFiyT9lb/XW8StCJbLwZ3zF1xg2+MmJxocF0vxDGe3+KW9ivPajd1py+pW/ATmMuKXBiI3uC/P66zslYmz4xKLkPizK+HPcJyAXl1KkFj5YJsdW2KoReVbnHEZBi7C4uEfz6ba1+Q53wsNzVAs+ARlqFftmLaCFI8+JS4xZSUwHA48qwFuArlxWJVLUCzxHRQ+6gf/HA25otnv9Atzc0oBBGOBMF0LlrXytZqocbYJwDqSW4FQWc58M/5ZgLmfZlLuKlLJA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ZP95F6x76/ofVIQ12frDG5SSDUQM5/fneKppbdTqAt4=;
- b=IxX55Vni4Hk4IVicVFzRcVvaKYcrCt8HphdyilNRU4iK5Dt6kmn/2NUvlHbCGpWFH5Vh4NWaJ5tKlRR6VgSihSNt1hUhS4D3+l45lo2neFAgzWdKUwPgSDVS3EXzEeGtoMDOXSjwOAHd8I0/YOmK60Knd14ov2hPRwsZLwqYfkO05Ni/EF2OpE/GiRlT+ivOZOkdAzSB8gtBmyD5gfmRQCLbxEMWUZVUBmU6BWROxPKhv9GDwiU133qZLanjsj4sN+yu7stHZCWZ5TuNkuv9YsNaRsJpgEZor1yrc/6R/7tVyh0XNj2E3BW6MgiKUkCFXGEZikMAcBA3NctBzABAPQ==
+ bh=GVZVOhuOTlDpm3QwjiSCpmTK23isKmqk3ualVy5lEdM=;
+ b=iwin/jvh1vw2VGV4Y9nhoQNeUqAoxS5uIOPAFe19HHzVuPhWGAhBfgGA+Aa1qbz6QAuCxtztlTf6v938vZa56xpQUvOjNlIG5lwDzhd1ZZboy+vRkEQkiEk4DCqpYs8thmWPPCadVvq2M31G0erlDd+gDGqFFZRvLZa3ZXr6tqnJR77mBaXjiBiBBSDDVc8xprI/9asiH+iYTiLkE/rA34xJ1fZY15x9F+8sq+ACJPMHEnXxTHVsKr7keekAELsaDAYggHSeXkItlW505K9DCEx43pDdARMWfcCZUrGZRWJRZTifzRjeMLSNU/esR0c2ciudiLb5DwjzqgZtyCS+JA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
  dkim=pass header.d=prevas.dk; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ZP95F6x76/ofVIQ12frDG5SSDUQM5/fneKppbdTqAt4=;
- b=DmD7P+nf/kUCvsmERNvbqji7d+xGGSRblGYXITkdD0f/p77AaOQEzp8723wMMZjXf/nzwMdsoDXn3IKyoNW57FuiAfHB1DzzekZDbpjTv+9rrYhWMd3eC3tO7nwI1mhQJ9VAgoGvmD0VMej6HND9mAaVOQTNwWN3Ie5yzwuUBT4=
+ bh=GVZVOhuOTlDpm3QwjiSCpmTK23isKmqk3ualVy5lEdM=;
+ b=hcWw5odW5i6v2AQKJmNhVyvkg4ctG6fjbXIL4R5vDqaRrnwYbMGBnAlh/vP2SKrY1Wd+Bm48U1pZZUlpmIC/rJwg09lNCevSWQsIE156+eb90t0lAC9XBbQ8QOC0/xazpdoNOPzuUn3nsQdZm7VSjO2kQnTOw7g21PslMGjJUGc=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=prevas.dk;
 Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
  by DB9PR10MB8118.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:4c5::15)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8048.9; Thu, 3 Oct
- 2024 21:28:11 +0000
+ 2024 21:28:13 +0000
 Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::9fcc:5df3:197:6691]) by DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::9fcc:5df3:197:6691%3]) with mapi id 15.20.8048.007; Thu, 3 Oct 2024
- 21:28:11 +0000
+ 21:28:13 +0000
 From: Rasmus Villemoes <ravi@prevas.dk>
 To: u-boot@lists.denx.de
 Cc: Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>,
  Rasmus Villemoes <ravi@prevas.dk>
-Subject: [PATCH 01/13] doc: cyclic: remove reference to WATCHDOG_RESET
-Date: Thu,  3 Oct 2024 23:27:50 +0200
-Message-ID: <20241003212802.3810-2-ravi@prevas.dk>
+Subject: [PATCH 02/13] cyclic: introduce u-boot/schedule.h
+Date: Thu,  3 Oct 2024 23:27:51 +0200
+Message-ID: <20241003212802.3810-3-ravi@prevas.dk>
 X-Mailer: git-send-email 2.46.2
 In-Reply-To: <20241003212802.3810-1-ravi@prevas.dk>
 References: <20241003212802.3810-1-ravi@prevas.dk>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: MM0P280CA0044.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:190:b::12) To DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+X-ClientProxiedBy: MM0P280CA0007.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:190:a::22) To DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
  (2603:10a6:10:45a::14)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|DB9PR10MB8118:EE_
-X-MS-Office365-Filtering-Correlation-Id: 543a9b3c-4dc5-4f42-e7b5-08dce3f24870
+X-MS-Office365-Filtering-Correlation-Id: bd60eedb-7e03-41e1-efc6-08dce3f24948
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|1800799024|366016|52116014|376014|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?RlWrGkIvcTzBoWXMLvtPY7HrazrENoDQMofpTIrNxco6Zfoo4Pn9hVou+d0I?=
- =?us-ascii?Q?JAyhOXEHR7yiTWWLA33/sBWWwnVPNmYyBjn9QeO5F1t8Hc3rCTpnwxlmrTvw?=
- =?us-ascii?Q?DQ+lUt21lzN84hcHJU+kPe360DbdDUi7LDdl4KvbAerX8+DfMLDYl00SQRLk?=
- =?us-ascii?Q?O8tU0v3mMCvgfvWPs03UbkONVxgPkXUZByWO08fzCDfkzfbiQFxAubKjTT20?=
- =?us-ascii?Q?8/QRL2dtYzj1ZKqAy3Ln/qcF5aNt6MYw4yOzAaBe/WZow9SI8wZS6Ac8g3vo?=
- =?us-ascii?Q?c3J2ZVcPk8FjMMdJASBOuVQwcX/p43is2K+FSP2uGDBH5HjIEvsDrJ7MFd4/?=
- =?us-ascii?Q?usWmFTY+uSb+vsm1aGYefSV3+x+wus74PdlEEIlELVAG0K24s9Hofou/60KT?=
- =?us-ascii?Q?fjt41pJj1F8828mZKjz1PPE0tjsXsPU20TPKCzHzZ6h11jgh5aszNx9zPFkY?=
- =?us-ascii?Q?1VNJT0tt21kWDjqiKE7QZW6PEzNo20+tsTztM+1p0tMN1nJvtAsN+N50Is7r?=
- =?us-ascii?Q?GOcmSzV/NRfEqb/iYsT5OicBrIJfDLXsUiCK1Yp1JiohX3lyhBPILvzCnxCn?=
- =?us-ascii?Q?f5U9rk7j7NePFFZJpLc/PKX6yu9UgO5qwMUsCj8YesVGt4qE7Kx0p0eE6XRe?=
- =?us-ascii?Q?TlQ34r7HjIHr8hCx7AOogFqvBp5DV0dka/6e49XfhfLzcQvR4d1CnUvPMPQD?=
- =?us-ascii?Q?x3c1Alj7BpOSGrHt2ivjONleBvDF/XbXfW6oFL5Lu/8EL7vKIvGdJa5ES/d/?=
- =?us-ascii?Q?h0BrKdpGijaiplRZNth/mbxfrfcaFesKdaflF4nCV5BZEjdZ5aSv9eFX6ogr?=
- =?us-ascii?Q?kPE9jj/sdqxO0uyPaIn0qZ5HD37VBB9aGblbmhSiK0bYBMdvwTS8y9xHsRw6?=
- =?us-ascii?Q?3bz+lTvQc4PF4Q9+EntUdanOs99gcAjhayev7/jUPCUnAk/nSzhzYEGJMXG3?=
- =?us-ascii?Q?FaytvSWwbHwzSqdib68qL5TyXdwGVPhZZc5eq8BwHeufmxRkRlr/9wBAG8sL?=
- =?us-ascii?Q?YtTQkK4ZVpwHOrCo8i/IvjIANOMVM6cLlgp5KJxQLj5gDu5KrpToGsmQElsR?=
- =?us-ascii?Q?emieLSRTSoRIQlXn33QvTLfei6HcyugpVKwEe1E1qtYB0V3eUubE4omFphXR?=
- =?us-ascii?Q?7lW/MCXUWWJwKve+0bkhg/WTwcqqsSmezznAG0CdQQvkG9z0mZ0U+8llCVBn?=
- =?us-ascii?Q?vOdyY0L/vSojywNe9k+R7GPf+G4G+oNLYUPqsA7rR9LGad3jXHjq9WhvNkol?=
- =?us-ascii?Q?xSFlawCbyw47I3ZMSCqp5btVhwV7c/igGrOMX30s+RpIyc6Nd1qu1jL/TfNC?=
- =?us-ascii?Q?bVbt4eKiaEbVaMp9Ys7cz43ohrSVAM3H3Ajyzk0d+Exu+A=3D=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?+G+lJVZrx1kd5/VhgW9VOUamkpjOe6bc4B9J5iBDIhvdsnW6ZXcyOG3t1kls?=
+ =?us-ascii?Q?2lLe6YdLdKXztagZ9UH72C9nPR8CNmu+Fh71nqdDj1RmvAIOUebuAGx5fV24?=
+ =?us-ascii?Q?sJPlQo3jlDwH34DQjtny6si24cqSt8Wbi86vUn+hphzNxTT5+neAPRzlwefY?=
+ =?us-ascii?Q?X/x0Nf5+9t5iYmELhqqAZyrXOpQ30NdvQJmP9UQCVCSxhmuStRGcSDMFpXrw?=
+ =?us-ascii?Q?1fpsfHttV9xPDS5SSpS+0MLfuN/02ciRDIv4pDXh37elciNUcie3r+DOIAW0?=
+ =?us-ascii?Q?7dmODzFWu4AxUBdzUe5BRuNum5qSJGgq3TCkZTaD14YT7igyfWTWpjfEAMJY?=
+ =?us-ascii?Q?lZoBlPouR/FtMP6FGvIwy50mDgVLfGKxPR8msHTlHGADJdImJmgvN8N4yehu?=
+ =?us-ascii?Q?iY7/Yd9z8NWU8m6Zh7WarhY+NG5Q2gJI+jTbXYQWYUjd7OkyF1jgPwrNYpR3?=
+ =?us-ascii?Q?PXaK36DfQuZEMo2LSiAI0Ic3fdftnO5/vwphrh3XRfI4HUOifB1dEPva/lb1?=
+ =?us-ascii?Q?xctvHt5Uz8xL7F2fpg2bjzrLB+VRPulKpdbLJaHtfLqHLPuQEpfJWniPZu7y?=
+ =?us-ascii?Q?d4W9K83Go4Q8yzX8Jsrmqtk1gSXCKQtXC9lCGp+ilnSyVvh4azf/rm8aQrn1?=
+ =?us-ascii?Q?5vLXwfIoxK70Qp9UEJaFNI+Shp6VoQZQy1XN0cDZWa223xB7NVoHtSIHc/+R?=
+ =?us-ascii?Q?tPSp2bv6OvUnBv28abKGMENa/tf5efs6NsRIp5J3P0UTXVX9Ps3phRpWRuL4?=
+ =?us-ascii?Q?ypHq4vcPRnzlUnpazE+bYh+9bHw1dYOln2742pMawkZnGt5EvmNk2x+8OC5K?=
+ =?us-ascii?Q?eEFkZkQJqqg+YE0Uq6VhcxdfyBxIdj4W0lbJee3IjOj325Lm+HqyADqzuyp0?=
+ =?us-ascii?Q?H78TILJViYAzdjaZeK0JQ9E7GZNB5HxP8DwIxr+kIKyIkpveG8KVQkYIgpt1?=
+ =?us-ascii?Q?hVW7yaX5H6Ik39HXkIpqsfkpGWW2pU70NPuZDv80R32G+hArn5bwlGOnGMYH?=
+ =?us-ascii?Q?4+lupsc0Wj/CxMKamkCbThp5AYMcgRZalE0zjLF705QZ34lBspjHNN/Pp/mV?=
+ =?us-ascii?Q?VirCNW9z0pzY82G0g/27v0obX4x/tCJVV8xuv6G0TGlwJUym1Uaq1fEGXk5q?=
+ =?us-ascii?Q?qZV6d2Y4W/IxR6wNnwJ5bB2aM5vot6WwJhSpGY5LebMMwquZ8uE9fA3k/WLY?=
+ =?us-ascii?Q?tqW+08lNMAYFFRvJhFsVo4KR/+12nTWp2q5bkhAfNM7axlY9ZnqEya+CorUs?=
+ =?us-ascii?Q?yUDuNtMcoGYC6ATLKCLZ6ziwRt40PHQVugRh/jHkvE0Irod6Uwmkf+ViKl4X?=
+ =?us-ascii?Q?SL2ugmEgqD0ggD55bRRCaWgbrCFRpZU9SYDDQfMENjIcXg=3D=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
  SFS:(13230040)(1800799024)(366016)(52116014)(376014)(38350700014); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?PMtBGE4ijVKF23zBbMbAPGBHGeIgnn92Ltd6FRPIqO7OHU5pgpkQ89hurrqQ?=
- =?us-ascii?Q?K/0CaNW9okgIwVZ5HVekyv/cbjieoILkXQoKpPaZIUaPANAk9Gvv2H9fmFVu?=
- =?us-ascii?Q?W6nwjN0zBzQLU1y+vY5f7B4lUmYeYjXRI4gXh8gtK7Ah9r128WqLjn/di5nX?=
- =?us-ascii?Q?VO46wfKtefb0CVt2pNe1C7lsQXhgvXdKsSi/mRa6GhpOWO8S1ZwDM58sDoTX?=
- =?us-ascii?Q?+CBXFcVeEWpVVCJEv7HTTLw2KuDqPI5H73h+YGFILTwJgrTpzVRxtDM9kIhw?=
- =?us-ascii?Q?bF0i5dI1AK8jMpBMoQVWJK75x1u6jYvXY5JzekXTjYguB3Wtn0IEJwyuO2ZQ?=
- =?us-ascii?Q?SwvTDOwoS1E9YwodPFexKq0MZqAZ5dDNS+wQB+TVIO+mZKp8fqy8GfqXF77p?=
- =?us-ascii?Q?BWZG1zqMl4HKvFTeiLHN0ZGsCTGlubXMTtV1+pz8HJFkIN2dKm5L0JMSUA2L?=
- =?us-ascii?Q?PmXdF5LNwf4Vc0V7QPsJu1eBZ8Jg1GPnJ8R06gcNnwUrcBTpORPuGUKfTHvn?=
- =?us-ascii?Q?MstgT5miEXJMkfUeWCxqWN20Yl3XMQlkOqz3OU3lE+dVbsU5RLbkHJwNPAtJ?=
- =?us-ascii?Q?zV8QDaQCCmLFQFdeBPJkQlUJ+wsrtvQykC0FNlBSbhaNXFEeo1XsXab7oJ4l?=
- =?us-ascii?Q?7nlsPI9QTIAtt0EPhSgX1UOlcPi6Ju/8uZlyMPhLzGE2oS/7d9G2rnWR+x/x?=
- =?us-ascii?Q?Eu6SDrF+vIfhHRp/VhwyLN6r8htt/A+1hCSG6j8N6DPt0Qr+Xr5ERErh1z+3?=
- =?us-ascii?Q?dih60LR1+QToWvifYjfjlF4wyeCuzBsOynPdhiOpo0EnE9tBzfjyNKYuyxqe?=
- =?us-ascii?Q?Fkh8mH9QiMBFip8VRPo5GMhQ3/Ze96hpEAncXaQ/WBxcRn7ZrryThmR6cffa?=
- =?us-ascii?Q?+fMGdriiTE2APRKEgY3mQrvOwtwI1Q1Q+aUHhGG6wJ23knoeGizSeutkCRjx?=
- =?us-ascii?Q?JCpEHRtJjFOuTOf8biwJEER2JYxXFFiRbR5bgJNv5LdWx9qOodcTlb8upZjv?=
- =?us-ascii?Q?meLwzBW8XUxV73BMzrkjASLDc1KKlRdEZs7Hy9iACYdX1h8LPw8axBB9u8Dv?=
- =?us-ascii?Q?NeM/Cr8q0diI9Gxt+fh497vpG1glk+SXPRxL0fEjg5ARMoVjk0hUVaZQ8o55?=
- =?us-ascii?Q?0JGd+jqlfXH5DS6eePampN9OernEHmworDiPK4dleO38YFNBTNP7IX3a2/0d?=
- =?us-ascii?Q?am6XregLhKoLOOwgAnI8HxRagUo5y0qNo3CIXFr8O2bLQ8s85xf6AA+Z7W5Q?=
- =?us-ascii?Q?jMwmy90CzTS+Gg/xaecyLDZBcFalV9h8lWM1rGtUOpSZ993a4i8dRrIVonXP?=
- =?us-ascii?Q?dOk15VcsA31c7L4DiWXoSd0EdbIewZ0lQekCcqml3ykB5/NkH2kcdis/29be?=
- =?us-ascii?Q?781sT5GRWFwrraoFA45bIE5w8ZxmBiTUTV2bNJ53FBMCa2fixQOrlrd7tLOk?=
- =?us-ascii?Q?6tMi4t0HgOAIR3AK0wgR47lKRw1theD6XNbD60jOqdU+mIx6eh5OtCUPFMjo?=
- =?us-ascii?Q?9F4FeKJA6iSLe5iEtok1eWjUNUnvqotMFofrWPwPsFF96HQwfHaUfi5vhEdA?=
- =?us-ascii?Q?PZ2FwHY16iCIr8WGBIA7O3D/OJO1zHDgdKxvNP17/lXtwIRmI1cGChtWK8pC?=
- =?us-ascii?Q?9A=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?9sQfsC+av/ilLXwfbPVoY2DBG8JuHZUfZA4TgsYaqhUgRNcpRQ09xQTk2eh9?=
+ =?us-ascii?Q?QFzkinGvkmRhGPHLX37EfBZE+kk3DwUEGrPaqrgi3IaGPCaav08yoOTJ4tl4?=
+ =?us-ascii?Q?cWkLRpY1BoFgQohR579PcuCwiiu06vKRwnCBGDrhlqwxbwqJ0zTk8wbP/HI0?=
+ =?us-ascii?Q?wnSv8Wg4NIPbCPo+a6iVYAyXSWON0zo7VO+fqU0x0YswJn+n5pv0MFOp+d8T?=
+ =?us-ascii?Q?j5zzSx5Wa/iYr+/3JqOFgIB4NhgYLaoGLL0VRCHwkftRJwvBWhpLDe9dZ4NL?=
+ =?us-ascii?Q?N/kqib18DT0Eo/TOyeKQn+n2QiV/PKrPqE2/7TyF5WzNw2nAYsmXkekz8w6D?=
+ =?us-ascii?Q?U1wHbG/GS16bWxoYXyEb4KyAfWEL1syHrdtYK8gonuRqv5Ei2leapvBxY0dK?=
+ =?us-ascii?Q?b3yhYH94O+IQRv+RYNorKOLbRWOOXbA5VqBK1+r5N62+6xp9+1y0aab0TFWR?=
+ =?us-ascii?Q?QkmNpCmOuXTYxznBAdmC2iabSICnxKpmaOrIJi2pw8aikyf0vCPQpxAm/e7q?=
+ =?us-ascii?Q?qdiOuYWHWtsaqg79eW+ui0aRIjKFfKCa6I9H5oJ6wL+DC9g2NFwszGnu3zrf?=
+ =?us-ascii?Q?B8UhiONFG6OjcrpMHMW37gZdLUN2IUdx/ZBnntEegaCa2ONh5vmxaevZXhBk?=
+ =?us-ascii?Q?e7P7yjAPeThGfhGyeDxVsr4OtaoSKb1SD33H7hEU8U1BqQ2Tg+Pkf2QrGCEW?=
+ =?us-ascii?Q?qw8MZLq8fiXuXNWGt+7+Hcb9tTOWCRmvL5ZebVcI0HR6BgUKWIjFwv1R0L30?=
+ =?us-ascii?Q?Acs4J4ZEpCBlfzxAgvvq5r+HU0G/mMpGdDkqQ9rQec851xv4TPwZrQdtyEbw?=
+ =?us-ascii?Q?7jXlr/jFefx8scAWOTX53+y4hkKetUXMC224bwvc+A6p1NldxuJ4O6cp7qL6?=
+ =?us-ascii?Q?TSa1cPT/lmNPY1ObKJ6daZaKmOYG64Ue2wgCXztFJBLSFPXpkNwHd2cL/+Q7?=
+ =?us-ascii?Q?ZjasCzvhtDQghXfc0mSN5ojiRRRxhrdpNwiEid3H1vaoWe15ZkWbAZk8DGR9?=
+ =?us-ascii?Q?ZBmZWKUcwgJCWorLCPK45xYZBAHbIY4SSSO6OrzgNLSCHDiAARJr0Jf4mJ84?=
+ =?us-ascii?Q?CCd130PaCi4BY81P0TaNbpagqC9PCQox2IrnfVMad/qnPIh0XfpTum8d7f/J?=
+ =?us-ascii?Q?xD9T5b16dnOSfJNssqWGVgVWbTIy5iZ1EzPl5pNMb5VpCB5XSWO9ADp1SRHW?=
+ =?us-ascii?Q?YIsoxqkMLSqEQ9iueR7H08iCoYwtH9geqADrWvjeRuh1ibKDh/Co8XW3RnIU?=
+ =?us-ascii?Q?2j9EdDGXa1vw+3nhYJAjWR72hqvuoehk5UuEG6kUFw/Z0zaPoN/whQqfMp9S?=
+ =?us-ascii?Q?l4IP1yze7gOdeJ8Vpz6klNXNxb5OciJqHNsN6gSCFIc8mhoRfpp0rhT6EQve?=
+ =?us-ascii?Q?1JPvDuKsoH9ZTax3uih0W1iREV5Qozi+y1iRGxkSZkbYuZayHFTC/MrDW+0U?=
+ =?us-ascii?Q?9VZ2e5AyWbvQe9c6XtojJKPUmr8FM4RMlCCGWkt9uuuNAUAAzX5Ra7fQYYCR?=
+ =?us-ascii?Q?XNhmyKxzbrdBX8UmUbBoJSyA66IZZ9PThoqNalQicgQtLuxHVTEU4rbLjUHH?=
+ =?us-ascii?Q?XTgWScREo7JZGHd5QZKvF7cjeKGAaBDaxM5FtNhO9tRJTGZKiZBAFlYEXDg7?=
+ =?us-ascii?Q?+w=3D=3D?=
 X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 543a9b3c-4dc5-4f42-e7b5-08dce3f24870
+X-MS-Exchange-CrossTenant-Network-Message-Id: bd60eedb-7e03-41e1-efc6-08dce3f24948
 X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Oct 2024 21:28:11.7853 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Oct 2024 21:28:13.1766 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: hEhcjIKZOkdXkYQ/I1ETL/SbkMc838rJkLe3z35MXEViUTBLlIk1HcVhHs7eYAllKyrirbSNApEZ7qJgeZUhR4uLrGq14BqcwoUFamHrtjA=
+X-MS-Exchange-CrossTenant-UserPrincipalName: qieM6AqLx3cwKQPXsJqQHQOHo/A9VuLiZgChNkN6DYz9OSGJu3isGNLvYQP+16hXUIdj2gzVWvfvSwMRrxd9xL+lBzpcGFsY3GjvOxwxz2M=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR10MB8118
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -157,36 +157,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-WATCHDOG_RESET is no more. Replace the reference by schedule().
+I noticed an "unnecessary" include of <cyclic.h> in
+global_data.h, in the sense that nothing in cyclic.h is needed in
+order to define 'struct global_data'.
 
-While here, rearrange the sentence a bit so that "cyclic_run()"
-becomes the object and "the main function responsible for calling all
-registered cyclic functions" a parenthetical rather than the other way
-around, which at least to me makes it more readable.
+Well, it's not unnecessary, as it implicitly ensures that everybody
+gets a declaration of schedule(), and schedule() is (obviously) called
+all over the tree. Almost none of those places directly include
+<cyclic.h>, but for historical reasons, many do include
+<watchdog.h> (most schedule() instances are replacements of
+WATCHDOG_RESET()).
+
+However, very few TUs actually need the declarations of the
+cyclic_register() and struct cyclic_info, and they also don't really
+need anything from the watchdog.h header.
+
+So introduce a new header which just contains a declaration of
+schedule(), which can then be included from all the places that do
+call schedule(). I removed the direct reference to cyclic_run(),
+because we shouldn't have two public functions for doing roughly the
+same without being very explicit about when one should call one or the
+other.
+
+Testing of later patches that explicitly include <schedule.h> when
+schedule() is used revealed a problem with host tool build on win32,
+which apparently picked up a host <schedule.h>. To avoid that problem,
+put the new header in include/u-boot/ and hence make the include
+statements say <u-boot/schedule.h>.
 
 Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
 ---
- doc/develop/cyclic.rst | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ common/cyclic.c           |  1 +
+ include/cyclic.h          | 12 +-----------
+ include/u-boot/schedule.h | 24 ++++++++++++++++++++++++
+ 3 files changed, 26 insertions(+), 11 deletions(-)
+ create mode 100644 include/u-boot/schedule.h
 
-diff --git a/doc/develop/cyclic.rst b/doc/develop/cyclic.rst
-index 893c269099a..6f1da6f0d9b 100644
---- a/doc/develop/cyclic.rst
-+++ b/doc/develop/cyclic.rst
-@@ -49,8 +49,8 @@ executed all 10ms.
- How is this cyclic functionality integrated /  executed?
- --------------------------------------------------------
+diff --git a/common/cyclic.c b/common/cyclic.c
+index ec38fad6775..38d815bec35 100644
+--- a/common/cyclic.c
++++ b/common/cyclic.c
+@@ -15,6 +15,7 @@
+ #include <linux/errno.h>
+ #include <linux/list.h>
+ #include <asm/global_data.h>
++#include <u-boot/schedule.h>
  
--The cyclic infrastructure integrates the main function responsible for
--calling all registered cyclic functions cyclic_run() into the common
--WATCHDOG_RESET macro. This guarantees that cyclic_run() is executed
--very often, which is necessary for the cyclic functions to get scheduled
--and executed at their configured periods.
-+The cyclic infrastructure integrates cyclic_run(), the main function
-+responsible for calling all registered cyclic functions, into the
-+common schedule() function. This guarantees that cyclic_run() is
-+executed very often, which is necessary for the cyclic functions to
-+get scheduled and executed at their configured periods.
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+diff --git a/include/cyclic.h b/include/cyclic.h
+index cd95b691d48..e8de616dcd5 100644
+--- a/include/cyclic.h
++++ b/include/cyclic.h
+@@ -13,6 +13,7 @@
+ 
+ #include <linux/list.h>
+ #include <asm/types.h>
++#include <u-boot/schedule.h> // to be removed later
+ 
+ /**
+  * struct cyclic_info - Information about cyclic execution function
+@@ -94,13 +95,6 @@ struct hlist_head *cyclic_get_list(void);
+  */
+ void cyclic_run(void);
+ 
+-/**
+- * schedule() - Schedule all potentially waiting tasks
+- *
+- * Basically a wrapper for cyclic_run(), pontentially enhanced by some
+- * other parts, that need to get handled periodically.
+- */
+-void schedule(void);
+ #else
+ 
+ static inline void cyclic_register(struct cyclic_info *cyclic, cyclic_func_t func,
+@@ -116,10 +110,6 @@ static inline void cyclic_run(void)
+ {
+ }
+ 
+-static inline void schedule(void)
+-{
+-}
+-
+ static inline int cyclic_unregister_all(void)
+ {
+ 	return 0;
+diff --git a/include/u-boot/schedule.h b/include/u-boot/schedule.h
+new file mode 100644
+index 00000000000..4fd34c41229
+--- /dev/null
++++ b/include/u-boot/schedule.h
+@@ -0,0 +1,24 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++
++#ifndef _U_BOOT_SCHEDULE_H
++#define _U_BOOT_SCHEDULE_H
++
++#if CONFIG_IS_ENABLED(CYCLIC)
++/**
++ * schedule() - Schedule all potentially waiting tasks
++ *
++ * Run all pending tasks registered via the cyclic framework, and
++ * potentially perform other actions that need to be done
++ * periodically.
++ */
++void schedule(void);
++
++#else
++
++static inline void schedule(void)
++{
++}
++
++#endif
++
++#endif
 -- 
 2.46.2
 
