@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA386CF34B7
-	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 15:47:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CF44CF34B0
+	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 15:47:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3479988E7E;
-	Thu,  3 Oct 2024 17:47:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 98BF288F16;
+	Thu,  3 Oct 2024 17:47:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="arNkhDz4";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Bm/oftUZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 634C788E6C; Thu,  3 Oct 2024 17:47:14 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 3737088EFB; Thu,  3 Oct 2024 17:47:17 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51D1D8843A
- for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 17:47:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3048E88E7A
+ for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 17:47:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-42cae4eb026so11220255e9.0
- for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 08:47:12 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-42e7b7bef42so10367375e9.3
+ for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 08:47:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1727970431; x=1728575231; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1727970434; x=1728575234; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=V2/npB77HLvelb5+ykN3cF3n0km3w96Ew+Z8Xb4Vtao=;
- b=arNkhDz4WHJ26NjXjUwzXh0Boo9SPeT2Yuj79A+HZD7uVZQU4svIqZSSgzOoksoz3s
- I+dU/tQ+LrVc06+dqK2gfsYJr26/nniH7Vc2HQvZtGzbWvxEQh2kZ4wzJGQR4rGuccay
- xEh/f+DCOWzMNVmZpkVuxj1X5lohAqdZuBfUPmE6kv5QBxWpymeduNja1lRVxJwqbQ7C
- ZsBzRu6dXEOcgMR5qYaJ1v1T2m1VJelAbdPuxzWc+Gh6otiEBkqYTqQQexJosOd3G2tN
- PZgG6sqTqizN/cwPzFtwe+kazXYi27wq+WjIcLAT+ZaQXaxit+FmudRu9+GXruwpKldO
- T+UA==
+ bh=3gZH2S/lRugyMaJdrxgxyJb4FoaPWxYOGvbloJ82+kU=;
+ b=Bm/oftUZW11Qk6B/asNaQLHQ2RuMnCAnBqRLHNObF8J6+mLfhT0jU1u2SLy3WjPYpf
+ 2glTOYPnEHzgZ7VS+J3ZdENxUFP7t5U9n8YRySUq1pO5yBmTDURs/r+EYBz+gLbhSlrh
+ GkGVGWgLT182XOGkMWa0OkiNVEe10naTKcnMfLgTPEDSE92Uiaax37aM1y9ND4xV9rrG
+ roAvj/v5+voIK6thaAZsv/pDYRDszoYl+BvK9sxhUwuIhs5HIeTIRMZZ0jiN1/4rgqFS
+ cIWPD03sF6hdqbkqFsHLxW0Z81Ulr+lK3NUZQpKdsCmc664aOYkbyR0LOKeM3rAgj4DP
+ 4mKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727970431; x=1728575231;
+ d=1e100.net; s=20230601; t=1727970434; x=1728575234;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=V2/npB77HLvelb5+ykN3cF3n0km3w96Ew+Z8Xb4Vtao=;
- b=dRaD0EgqVgrqZ67nD779YkhBthMmxqpWqz0QrcTs70dm05eQ5KzFF1SlZLQKi6MCyR
- pq/IsH1vuIqeWdBujdfxC0oTcr+kT+mYgB8Zpn4R+uHdBCJT7YOhxkNUJgGo8sPoe8Xb
- AhG938+rZ2eDXUidQPSZesjwIHVhQPJJTsa8KU7tyscGMTTaHRKMYl3eKP/XuWFsj2tT
- HL9yyJXsXJM4n41h7MdPfafwNE76mBHEiFPiZjBo9LOVEQ60Hq9nq2zoIO49hzFoB0MU
- MdxOG9+fuV46f4OeeiqfcJLb10Kfj6HX1zUZdPCG/OHgvYq3sLL0Q6vsobo414QfDUKS
- +QvA==
-X-Gm-Message-State: AOJu0YwATMa54SjS5gSGq6iUJrjGSo69eNYEUGyXA3XK0GXrjAxzdwoL
- ML5RL8qPwhDE3tumEA6bmSjbPWbk+Tw7D1hV00cUbhVjjivxKvY6fKPPUGfC7PwbXcJHYqVoK4X
- 0n+u/S+KP
-X-Google-Smtp-Source: AGHT+IGPkQqeRHBIvxkamwsnYzydyALM+B6hHwi04Rkes3o6i1dtsfU/6YdEJpyI4bfiHhBMSF1NtA==
-X-Received: by 2002:a5d:484d:0:b0:37c:cc60:2c68 with SMTP id
- ffacd0b85a97d-37cfb8b152dmr4206687f8f.5.1727970431022; 
- Thu, 03 Oct 2024 08:47:11 -0700 (PDT)
+ bh=3gZH2S/lRugyMaJdrxgxyJb4FoaPWxYOGvbloJ82+kU=;
+ b=afW+z/ADVC5+Lzt2lXE+XP8Xq5eotF+SGilXG+vByP4WAe0RZdQp2kQOFOw5Kl21I4
+ ULEvoa4M+OkqYUIRkhhDuM1ADzk/8uWkRFwYzd0c2fvyH7/PSuPqecjLazqY8gcMQZqk
+ JISh5RMaSD002c4+/nTzmIwl0mb9HGcjxr+M9A7c3TVpyNEjFbkn697e+3sD7Su3N0Aj
+ lYRT/n0D/Nm1Q/taMiGNxG8fPSCxAIjBS+TtpFNQR0Fso5Lk6+xrfe+sBm0WFfSDQhEe
+ 8j+28LyYWrqS16rEBpho9Up0ZXGzitS6DvlG0ncFw8wLpvhLms9SA3oWNSe5kYx62+0U
+ QFcQ==
+X-Gm-Message-State: AOJu0Yx2/YjgEkgGCbpU4iavUjtYM5AazemcnD+9Z7m9bk6p/tj9DN8h
+ zSZSp8lqYgmmK9nS41T2nMe1eJP6a4nHDOpYam8jjt//OQw9GlM227tC7UrN4nkNWMPFD37NUtS
+ OOWQEFrLH
+X-Google-Smtp-Source: AGHT+IGWz+gl6RNt7D1Z4bKTEvDShesFRRKCItzIT/EZxsk85Z2BP3H5+YpkNNHpNNCjdt9Sg9aXZA==
+X-Received: by 2002:a05:6000:2cb:b0:37c:d507:b44b with SMTP id
+ ffacd0b85a97d-37cfb8cb57emr5410880f8f.26.1727970433888; 
+ Thu, 03 Oct 2024 08:47:13 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:d888:7a58:deed:47d6])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d08245059sm1541748f8f.55.2024.10.03.08.47.09
+ ffacd0b85a97d-37d08245059sm1541748f8f.55.2024.10.03.08.47.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Oct 2024 08:47:10 -0700 (PDT)
+ Thu, 03 Oct 2024 08:47:13 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -77,9 +77,9 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>
-Subject: [PATCH v11 16/29] net-lwip: add ping command
-Date: Thu,  3 Oct 2024 17:46:20 +0200
-Message-Id: <47c1f64132e420a17a2f4c9e33f937f0b0217ec1.1727968902.git.jerome.forissier@linaro.org>
+Subject: [PATCH v11 17/29] net-lwip: add dns command
+Date: Thu,  3 Oct 2024 17:46:21 +0200
+Message-Id: <4e217dadcb2d832482487d25ceee63368e99bff8.1727968902.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1727968902.git.jerome.forissier@linaro.org>
 References: <cover.1727968902.git.jerome.forissier@linaro.org>
@@ -101,270 +101,219 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for the the ping command with NET_LWIP. The implementation
-is derived from lwIP's contrib/apps/ping/ping.c.
+Add CMD_DNS when NET_LWIP is enabled to provide the dns command using
+lwIP.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 ---
- cmd/Kconfig        |  11 +--
- cmd/net-lwip.c     |   8 ++
+ cmd/Kconfig        |  11 ++--
+ cmd/net-lwip.c     |   8 +++
  include/net-lwip.h |   1 +
  net/lwip/Makefile  |   1 +
- net/lwip/ping.c    | 177 +++++++++++++++++++++++++++++++++++++++++++++
- 5 files changed, 193 insertions(+), 5 deletions(-)
- create mode 100644 net/lwip/ping.c
+ net/lwip/dns.c     | 127 +++++++++++++++++++++++++++++++++++++++++++++
+ 5 files changed, 143 insertions(+), 5 deletions(-)
+ create mode 100644 net/lwip/dns.c
 
 diff --git a/cmd/Kconfig b/cmd/Kconfig
-index f1372a025b7..d784a454915 100644
+index d784a454915..b50fff78a68 100644
 --- a/cmd/Kconfig
 +++ b/cmd/Kconfig
-@@ -2018,11 +2018,6 @@ config CMD_WGET
- 	  wget is a simple command to download kernel, or other files,
- 	  from a http server over TCP.
+@@ -2036,11 +2036,6 @@ config CMD_SNTP
+ 	help
+ 	  Synchronize RTC via network
  
--config CMD_PING
--	bool "ping"
+-config CMD_DNS
+-	bool "dns"
 -	help
--	  Send ICMP ECHO_REQUEST to network host
+-	  Lookup the IP of a hostname
 -
- config CMD_PING6
- 	bool "ping6"
- 	depends on IPV6
-@@ -2116,6 +2111,12 @@ config CMD_MDIO
- 	  The MDIO interface is orthogonal to the MII interface and extends
- 	  it by adding access to more registers through indirect addressing.
+ config CMD_LINK_LOCAL
+ 	bool "linklocal"
+ 	select LIB_RAND
+@@ -2088,6 +2083,12 @@ config CMD_DHCP
+ 	help
+ 	  Boot image via network using DHCP/TFTP protocol
  
-+config CMD_PING
-+	bool "ping"
-+	select PROT_RAW_LWIP if NET_LWIP
++config CMD_DNS
++	bool "dns"
++	select PROT_DNS_LWIP if NET_LWIP
 +	help
-+	  Send ICMP ECHO_REQUEST to network host
++	  Lookup the IP of a hostname
 +
- config CMD_TFTPBOOT
- 	bool "tftp"
- 	select PROT_UDP_LWIP if NET_LWIP
+ config CMD_MII
+ 	bool "mii"
+ 	imply CMD_MDIO
 diff --git a/cmd/net-lwip.c b/cmd/net-lwip.c
-index 80f0872bb8f..feed719beef 100644
+index feed719beef..c021da6a674 100644
 --- a/cmd/net-lwip.c
 +++ b/cmd/net-lwip.c
-@@ -12,6 +12,14 @@ U_BOOT_CMD(
+@@ -27,3 +27,11 @@ U_BOOT_CMD(
+ 	"[loadAddress] [[hostIPaddr:]bootfilename]"
  );
  #endif
- 
-+#if defined(CONFIG_CMD_PING)
++
++#if defined(CONFIG_CMD_DNS)
 +U_BOOT_CMD(
-+	ping,	2,	1,	do_ping,
-+	"send ICMP ECHO_REQUEST to network host",
-+	"pingAddress"
++	dns,	3,	1,	do_dns,
++	"lookup the IP of a hostname",
++	"hostname [envvar]"
 +);
 +#endif
-+
- #if defined(CONFIG_CMD_TFTPBOOT)
- U_BOOT_CMD(
- 	tftpboot,	3,	0,	do_tftpb,
 diff --git a/include/net-lwip.h b/include/net-lwip.h
-index 37744b0e2cd..9aa371e962c 100644
+index 9aa371e962c..ff9d03b23e8 100644
 --- a/include/net-lwip.h
 +++ b/include/net-lwip.h
-@@ -17,5 +17,6 @@ struct netif *net_lwip_get_netif(void);
+@@ -17,6 +17,7 @@ struct netif *net_lwip_get_netif(void);
  int net_lwip_rx(struct udevice *udev, struct netif *netif);
  
  int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
-+int do_ping(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
++int do_dns(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ int do_ping(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
  
  #endif /* __NET_LWIP_H__ */
 diff --git a/net/lwip/Makefile b/net/lwip/Makefile
-index 4e92a101ddb..b5af37a9b18 100644
+index b5af37a9b18..645d8a8c457 100644
 --- a/net/lwip/Makefile
 +++ b/net/lwip/Makefile
-@@ -2,4 +2,5 @@ ccflags-y += -I$(srctree)/lib/lwip/lwip/src/include -I$(srctree)/lib/lwip/u-boot
+@@ -2,5 +2,6 @@ ccflags-y += -I$(srctree)/lib/lwip/lwip/src/include -I$(srctree)/lib/lwip/u-boot
  
  obj-$(CONFIG_$(SPL_)DM_ETH) += net-lwip.o
  obj-$(CONFIG_CMD_DHCP) += dhcp.o
-+obj-$(CONFIG_CMD_PING) += ping.o
++obj-$(CONFIG_CMD_DNS) += dns.o
+ obj-$(CONFIG_CMD_PING) += ping.o
  obj-$(CONFIG_CMD_TFTPBOOT) += tftp.o
-diff --git a/net/lwip/ping.c b/net/lwip/ping.c
+diff --git a/net/lwip/dns.c b/net/lwip/dns.c
 new file mode 100644
-index 00000000000..8dafa25959f
+index 00000000000..4b937feaee1
 --- /dev/null
-+++ b/net/lwip/ping.c
-@@ -0,0 +1,177 @@
++++ b/net/lwip/dns.c
+@@ -0,0 +1,127 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/* Copyright (C) 2024 Linaro Ltd. */
 +
 +#include <command.h>
 +#include <console.h>
-+#include <dm/device.h>
-+#include <linux/delay.h>
-+#include <linux/errno.h>
-+#include <lwip/icmp.h>
-+#include <lwip/inet_chksum.h>
-+#include <lwip/raw.h>
++#include <lwip/dns.h>
 +#include <lwip/timeouts.h>
 +#include <net.h>
 +#include <time.h>
 +
-+#define PING_DELAY_MS 1000
-+#define PING_COUNT 5
-+/* Ping identifier - must fit on a u16_t */
-+#define PING_ID 0xAFAF
++#define DNS_RESEND_MS 1000
++#define DNS_TIMEOUT_MS 10000
 +
-+struct ping_ctx {
-+	ip_addr_t target;
-+	struct raw_pcb *pcb;
-+	struct icmp_echo_hdr *iecho;
-+	uint16_t seq_num;
-+	bool alive;
++struct dns_cb_arg {
++	ip_addr_t host_ipaddr;
++	const char *var;
++	bool done;
 +};
 +
-+static u8_t ping_recv(void *arg, struct raw_pcb *pcb, struct pbuf *p,
-+		      const ip_addr_t *addr)
++static void do_dns_tmr(void *arg)
 +{
-+	struct ping_ctx *ctx = arg;
-+	struct icmp_echo_hdr *iecho = ctx->iecho;
-+
-+	if (addr->addr != ctx->target.addr)
-+		return 0;
-+
-+	if ((p->tot_len >= (IP_HLEN + sizeof(struct icmp_echo_hdr))) &&
-+	    pbuf_remove_header(p, IP_HLEN) == 0) {
-+		iecho = (struct icmp_echo_hdr *)p->payload;
-+
-+		if ((iecho->id == PING_ID) &&
-+		    (iecho->seqno == lwip_htons(ctx->seq_num))) {
-+			ctx->alive = true;
-+			printf("host %s is alive\n", ipaddr_ntoa(addr));
-+			pbuf_free(p);
-+			return 1; /* eat the packet */
-+		}
-+		/* not eaten, restore original packet */
-+		pbuf_add_header(p, IP_HLEN);
-+	}
-+
-+	return 0; /* don't eat the packet */
++	dns_tmr();
 +}
 +
-+static int ping_raw_init(struct ping_ctx *ctx)
++static void dns_cb(const char *name, const ip_addr_t *ipaddr, void *arg)
 +{
-+	ctx->pcb = raw_new(IP_PROTO_ICMP);
-+	if (!ctx->pcb)
-+		return -ENOMEM;
++	struct dns_cb_arg *dns_cb_arg = arg;
++	char *ipstr = ip4addr_ntoa(ipaddr);
 +
-+	raw_recv(ctx->pcb, ping_recv, ctx);
-+	raw_bind(ctx->pcb, IP_ADDR_ANY);
++	dns_cb_arg->done = true;
 +
-+	return 0;
-+}
-+
-+static void ping_raw_stop(struct ping_ctx *ctx)
-+{
-+	if (ctx->pcb)
-+		raw_remove(ctx->pcb);
-+}
-+
-+static void ping_prepare_echo(struct ping_ctx *ctx)
-+{
-+	struct icmp_echo_hdr *iecho = ctx->iecho;
-+
-+	ICMPH_TYPE_SET(iecho, ICMP_ECHO);
-+	ICMPH_CODE_SET(iecho, 0);
-+	iecho->chksum = 0;
-+	iecho->id = PING_ID;
-+	iecho->seqno = lwip_htons(ctx->seq_num);
-+
-+	iecho->chksum = inet_chksum(iecho, sizeof(*iecho));
-+}
-+
-+static void ping_send_icmp(struct ping_ctx *ctx)
-+{
-+	struct pbuf *p;
-+	size_t ping_size = sizeof(struct icmp_echo_hdr);
-+
-+	p = pbuf_alloc(PBUF_IP, (u16_t)ping_size, PBUF_RAM);
-+	if (!p)
++	if (!ipaddr) {
++		printf("DNS: host not found\n");
++		dns_cb_arg->host_ipaddr.addr = 0;
 +		return;
-+
-+	if ((p->len == p->tot_len) && !p->next) {
-+		ctx->iecho = (struct icmp_echo_hdr *)p->payload;
-+		ping_prepare_echo(ctx);
-+		raw_sendto(ctx->pcb, p, &ctx->target);
 +	}
 +
-+	pbuf_free(p);
++	if (dns_cb_arg->var)
++		env_set(dns_cb_arg->var, ipstr);
++
++	printf("%s\n", ipstr);
 +}
 +
-+static void ping_send(void *arg)
++static int dns_loop(struct udevice *udev, const char *name, const char *var)
 +{
-+	struct ping_ctx *ctx = arg;
-+
-+	ctx->seq_num++;
-+	if (ctx->seq_num <= PING_COUNT) {
-+		ping_send_icmp(ctx);
-+		sys_timeout(PING_DELAY_MS, ping_send, ctx);
-+	}
-+}
-+
-+static int ping_loop(struct udevice *udev, const ip_addr_t* addr)
-+{
-+	struct ping_ctx ctx = {};
++	struct dns_cb_arg dns_cb_arg = { };
++	bool has_server = false;
 +	struct netif *netif;
++	ip_addr_t ipaddr;
++	ip_addr_t ns;
++	ulong start;
++	char *nsenv;
 +	int ret;
++
++	dns_cb_arg.var = var;
 +
 +	netif = net_lwip_new_netif(udev);
 +	if (!netif)
-+		return CMD_RET_FAILURE;
++		return -1;
 +
-+	printf("Using %s device\n", udev->name);
++	dns_init();
 +
-+	ret = ping_raw_init(&ctx);
-+	if (ret < 0) {
-+		net_lwip_remove_netif(netif);
-+		return ret;
++	nsenv = env_get("dnsip");
++	if (nsenv && ipaddr_aton(nsenv, &ns)) {
++		dns_setserver(0, &ns);
++		has_server = true;
 +	}
 +
-+	ctx.target = *addr;
++	nsenv = env_get("dnsip2");
++	if (nsenv && ipaddr_aton(nsenv, &ns)) {
++		dns_setserver(1, &ns);
++		has_server = true;
++	}
 +
-+	ping_send(&ctx);
++	if (!has_server) {
++		log_err("No valid name server (dnsip/dnsip2)\n");
++		net_lwip_remove_netif(netif);
++		return CMD_RET_FAILURE;
++	}
 +
-+	do {
-+		sys_check_timeouts();
-+		net_lwip_rx(udev, netif);
-+		if (ctx.alive)
-+			break;
-+		if (ctrlc()) {
-+			printf("\nAbort\n");
-+			break;
-+		}
-+	} while (ctx.seq_num <= PING_COUNT);
++	dns_cb_arg.done = false;
 +
-+	sys_untimeout(ping_send, &ctx);
-+	ping_raw_stop(&ctx);
++	ret = dns_gethostbyname(name, &ipaddr, dns_cb, &dns_cb_arg);
++
++	if (ret == ERR_OK) {
++		dns_cb(name, &ipaddr, &dns_cb_arg);
++	} else if (ret == ERR_INPROGRESS) {
++		start = get_timer(0);
++		sys_timeout(DNS_RESEND_MS, do_dns_tmr, NULL);
++		do {
++			net_lwip_rx(udev, netif);
++			if (dns_cb_arg.done)
++				break;
++			sys_check_timeouts();
++			if (ctrlc()) {
++				printf("\nAbort\n");
++				break;
++			}
++		} while (get_timer(start) < DNS_TIMEOUT_MS);
++		sys_untimeout(do_dns_tmr, NULL);
++	}
 +
 +	net_lwip_remove_netif(netif);
 +
-+	if (ctx.alive)
-+		return 0;
++	if (dns_cb_arg.done && dns_cb_arg.host_ipaddr.addr != 0)
++		return CMD_RET_SUCCESS;
 +
-+	printf("ping failed; host %s is not alive\n", ipaddr_ntoa(addr));
-+	return -1;
++	return CMD_RET_FAILURE;
 +}
 +
-+int do_ping(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
++int do_dns(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
 +{
-+	ip_addr_t addr;
++	char *name;
++	char *var = NULL;
 +
-+	if (argc < 2)
++	if (argc == 1 || argc > 3)
 +		return CMD_RET_USAGE;
 +
-+	if (!ipaddr_aton(argv[1], &addr))
-+		return CMD_RET_USAGE;
++	name = argv[1];
++
++	if (argc == 3)
++		var = argv[2];
 +
 +	eth_set_current();
 +
-+	if (ping_loop(eth_get_dev(), &addr) < 0)
-+		return CMD_RET_FAILURE;
-+
-+	return CMD_RET_SUCCESS;
++	return dns_loop(eth_get_dev(), name, var);
 +}
 -- 
 2.40.1
