@@ -4,78 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD069CF34B0
-	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 14:39:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8021CF34B0
+	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 14:44:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6CE4688DB8;
-	Thu,  3 Oct 2024 16:39:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 19D6788DB8;
+	Thu,  3 Oct 2024 16:44:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QvC/DPeS";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RFXPSbzW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6536D88DB8; Thu,  3 Oct 2024 16:39:46 +0200 (CEST)
-Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
- [IPv6:2607:f8b0:4864:20::729])
+ id 91D4A88DCF; Thu,  3 Oct 2024 16:44:03 +0200 (CEST)
+Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
+ [IPv6:2607:f8b0:4864:20::72e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5973888B2
- for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 16:39:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8BE7388CD9
+ for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 16:43:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x729.google.com with SMTP id
- af79cd13be357-7a99e8d5df1so106904885a.2
- for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 07:39:43 -0700 (PDT)
+Received: by mail-qk1-x72e.google.com with SMTP id
+ af79cd13be357-7ac83a98e5eso95482585a.0
+ for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 07:43:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1727966383; x=1728571183; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1727966634; x=1728571434; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=vueclIcO804lRIh5Xr1Z40NG/LOjoRQGIJe4B+0i8zc=;
- b=QvC/DPeSvhpEAk+65dn38wZiZT/dq9RCL+nSpsscKcOWhTMi5Rf+J928jcZUCO0wsQ
- jjg83aTGXEJ2zAduX9ZsNE2ytK3eeVm5zHmMQ3ia/auW4BN6lkr/JnP337ccyruA12wq
- EDrBaRby2ZZ5srhB+0+HcSKeui2ASFyLMJhjA=
+ bh=SM6bhybhlUos1oUayuZxd/b/lkkpuL4HcrOm7XRUMTo=;
+ b=RFXPSbzWx08bBmSzKqI319n/DObeh++zydogxt7qwX68L9dCyzVXz/W+39Tr2+DcJm
+ ZvFHN7O7jgOFlavK4p9eJXvuzYDqhVkaArVJkhus/8E46IPugMe7zwZQcExJ3jc6duxP
+ xrcgG0/vS9jyOQHzZIQ5HrSqMoPH9aSPdZ9Kg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727966383; x=1728571183;
+ d=1e100.net; s=20230601; t=1727966634; x=1728571434;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vueclIcO804lRIh5Xr1Z40NG/LOjoRQGIJe4B+0i8zc=;
- b=ZHlcU4c4vYAGDWeHM/ewtadd2qS25+9+iW7ichtCJLgMsskKPJZxh33Kf/HrlxOC4f
- 36DZyG7cyTml8k/Nmdklul57RpCi1VtdteDkeurDMa2YLzTE0JtLPf1v1j/rfdpKw3u0
- 7nOBmc+4d0WYmlW264E/LS9aJUnyt4sISIB3XdkxN98IKFcEt+3nITNGNHIPgjExplgi
- 1O828UDLq4t7fK1slKftDjSjRMU1xote+LvhmYXmKKsjOitA6y092CKUUj7FFAcRp4MJ
- hMbexO8npiwcfrnrTphDxkHRQlBt6vgEbNqIW7jjDKTzRhlKmZbwp/tWkxkH8XsIA68P
- DAjA==
+ bh=SM6bhybhlUos1oUayuZxd/b/lkkpuL4HcrOm7XRUMTo=;
+ b=BUpYkNX1lAwlQvTlDzTaokQNGZRBjLNfT4XQ2WKnjFPfRR00dgYyGOR0b6aZ1Oc/Ol
+ E9wbK8wRY+zneic1Sc1nIjOpkIau9EUFkqY1e3bXN3CQ6nlt6WEorFAgWWzsxl7oPpjD
+ avqT+xOeYenNp7h1n7aQpEY4fwsQ/QwrtEKmmy15ak4xrw3CBpzCY5q2SaoFz+XfTFhR
+ 3m2Ic+bY2Kb+Ql/q5nDwqrNAvq1wkMfxZTc7DQMQeWnuJdG8Jid/YFr66No3lLfwAa2l
+ suyXFQv69GbSlPMdcgq+rpLw4Sd4wJsu/8zPskNqUSGEkJlsiu0+OI17M7jhio5zydkt
+ BgZQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUUYiEtoa6OzzB4uNejilYoYQg7fbiDKsV7oB7iwg01unj3n0FZL0/wn4H2enxmiVc8lGfqATA=@lists.denx.de
-X-Gm-Message-State: AOJu0YyDc33EFtfmmZQuQNKt+2/9gHR83olC+uGIVlN/IV+8mvXwiokn
- ZtYZFgshYUunfWUpQ2GdGhE3nELxs30RKmALa3dvuUiumNKHnt27o7Y8S9Bm4zY=
-X-Google-Smtp-Source: AGHT+IGe4RZ/e4uzIGKiOukrO9o8mtgYMlLe0mW6Umk0VfC6yzY+za0ar5xkCQFURZvTvEpzt6RuHw==
-X-Received: by 2002:a05:620a:460f:b0:7a9:d0ec:2d8f with SMTP id
- af79cd13be357-7ae626c298emr1133694985a.24.1727966382685; 
- Thu, 03 Oct 2024 07:39:42 -0700 (PDT)
+ AJvYcCVqSff+YTeViO0isDaOL5VKOCTASWdt342qowg5WpAomp3aUgnjHZ95DmOPy46HZAYIHEn/1iI=@lists.denx.de
+X-Gm-Message-State: AOJu0YzgxgccxshePrUFsSDNABajOApRow+mPOsm9Q48/P7zVlswP5GA
+ RFabceJO0Qhs39EQ0PPbcyZgNli2rQrZNL0tUrITE+fdaqyjRr32z1fOUe7MI/I=
+X-Google-Smtp-Source: AGHT+IFxYCT8k7Es8p9ohYJN+Z4JaaoJ9XjijGivI29UZUnzaPghJrcu5Nb/3iCwoRRsbnYRHrSk1A==
+X-Received: by 2002:a05:620a:17a1:b0:7a9:b80b:81e with SMTP id
+ af79cd13be357-7ae67e3435bmr559102785a.10.1727966634335; 
+ Thu, 03 Oct 2024 07:43:54 -0700 (PDT)
 Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7ae6b3d4261sm55522885a.96.2024.10.03.07.39.41
+ af79cd13be357-7ae6b29f068sm56270285a.23.2024.10.03.07.43.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Oct 2024 07:39:41 -0700 (PDT)
-Date: Thu, 3 Oct 2024 08:39:39 -0600
+ Thu, 03 Oct 2024 07:43:53 -0700 (PDT)
+Date: Thu, 3 Oct 2024 08:43:51 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Martyn Welch <martyn.welch@collabora.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/4] boot: pxe_utils: Add fallback support
-Message-ID: <20241003143939.GT4737@bill-the-cat>
-References: <20241002132633.246942-1-martyn.welch@collabora.com>
- <20241002191638.GQ4737@bill-the-cat>
- <1024259d3b2e3ed5d6828c12bac32630e2361c04.camel@collabora.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Patrick Rudolph <patrick.rudolph@9elements.com>, u-boot@lists.denx.de,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>,
+ Peter Robinson <pbrobinson@gmail.com>
+Subject: Re: [PATCH v6 25/37] board: emulation: Add QEMU sbsa support
+Message-ID: <20241003144351.GU4737@bill-the-cat>
+References: <20241002094832.24933-1-patrick.rudolph@9elements.com>
+ <20241002094832.24933-26-patrick.rudolph@9elements.com>
+ <CAFLszTh-cEBp0-HP5XMONdwSUBepKWNgJSHLJfQ2VYW9FgJq=Q@mail.gmail.com>
+ <20241003013516.GR4737@bill-the-cat>
+ <CAFLszTgoD6YDpGTJLPxfqXoudR=TDDDAHQMUJzK+mxntpfhk4w@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="lN6VxpDtH92vIgKZ"
+ protocol="application/pgp-signature"; boundary="MSDw9Zuew2jQu3rD"
 Content-Disposition: inline
-In-Reply-To: <1024259d3b2e3ed5d6828c12bac32630e2361c04.camel@collabora.com>
+In-Reply-To: <CAFLszTgoD6YDpGTJLPxfqXoudR=TDDDAHQMUJzK+mxntpfhk4w@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,82 +99,220 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---lN6VxpDtH92vIgKZ
+--MSDw9Zuew2jQu3rD
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Oct 03, 2024 at 10:00:33AM +0100, Martyn Welch wrote:
-> On Wed, 2024-10-02 at 13:16 -0600, Tom Rini wrote:
-> > On Wed, Oct 02, 2024 at 02:26:30PM +0100, Martyn Welch wrote:
-> > > When configured correctly, we can detect when boot fails after the
-> > > boot
-> > > process has been handed over to the kernel through the use of U-
-> > > Boot's
-> > > bootcount support. In some instances, such as when we are
-> > > performing
-> > > atomic updates via a system such as OSTree, it is desirable to
-> > > provide a
-> > > fallback option so that we can return to a previous (hopefully
-> > > working)
-> > > state.
-> > >=20
-> > > Add a "fallback" option to the supported extlinux configuration
-> > > options
-> > > that points to a label like "default" so that we can utilise this
-> > > in
-> > > later commits.
-> > >=20
-> > > Signed-off-by: Martyn Welch <martyn.welch@collabora.com>
-> >=20
-> > Is "fallback" part of the nominal extlinux specification?
-> >=20
+On Thu, Oct 03, 2024 at 07:50:45AM -0600, Simon Glass wrote:
+> Hi Tom,
 >=20
-> When looking at options to implement this functionality, I did spend
-> some time looking for an extlinux specification. The best I could find
-> was:
+> On Wed, 2 Oct 2024 at 19:35, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Wed, Oct 02, 2024 at 04:55:34PM -0600, Simon Glass wrote:
+> > > Hi Patrick,
+> > >
+> > > On Wed, 2 Oct 2024 at 03:52, Patrick Rudolph
+> > > <patrick.rudolph@9elements.com> wrote:
+> > > >
+> > > > Add support for Arm sbsa [1] v0.3+ that is supported by QEMU [2].
+> > > >
+> > > > Unlike other Arm based platforms the machine only provides a minimal
+> > > > FDT that contains number of CPUs, ammount of memory and machine-ver=
+sion.
+> > > > The boot firmware has to provide ACPI tables to the OS.
+> > > > Due to this design a full DTB is added here as well that allows U-B=
+oot's
+> > > > driver to properly function. The DTB is appended at the end of the =
+U-Boot
+> > > > image and will be merged with the QEMU provided DTB.
+> > > >
+> > > > In addition provide documentation how to use, enable binman to fabr=
+icate both
+> > > > ROMs that are required to boot and add ACPI tables to make it full =
+compatible
+> > > > to the EDK2 reference implementation.
+> > > >
+> > > > The board was tested using Fedora 40 Aarch64 Workstation. It's able
+> > > > to boot from USB and AHCI or network.
+> > > >
+> > > > Tested and found working:
+> > > > - serial
+> > > > - PCI
+> > > > - xHCI
+> > > > - Bochs display
+> > > > - AHCI
+> > > > - network using e1000e
+> > > > - CPU init
+> > > > - Booting Fedora 40
+> > > >
+> > > > 1: Server Base System Architecture (SBSA)
+> > > > 2: https://www.qemu.org/docs/master/system/arm/sbsa.html
+> > > >
+> > > > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+> > > > Cc: Peter Robinson <pbrobinson@gmail.com>
+> > > > Cc: Simon Glass <sjg@chromium.org>
+> > > > Cc: Tom Rini <trini@konsulko.com>
+> > > > ---
+> > > > Changelog v3:
+> > > > - Add GIC and GIC-ITS to devicetree
+> > > > - Select GICv3 driver
+> > > > - Drop acpi_fill_madt and use driver model instead
+> > > > Changelog v4:
+> > > > - Drop CPU platform code
+> > > > - Enhance the DT to allow MADT generation from DT
+> > > > Changelog v5:
+> > > > - Add full DT and place it at the end of U-Boot
+> > > > - Merge DT with QEMU's DT
+> > > > - Drop DT generation code
+> > > > - Fix flash region length
+> > > > - Drop enable_caches()
+> > > > - Support platforms that do not pass FDT in x0
+> > > > Changelog v6:
+> > > > - Update header order
+> > > > - Drop pad-byte from DT
+> > > > - select BINMAN_FDT
+> > > > - select E1000_NO_NVM
+> > > > - drop config.h include
+> > > > - drop a few CFG_ defines that were used for SPL
+> > > >
+> > > > ---
+> > > >  arch/arm/Kconfig                            |   3 +-
+> > > >  arch/arm/dts/qemu-sbsa.dts                  | 136 ++++++
+> > > >  arch/arm/include/asm/arch-qemu-sbsa/boot0.h |  34 ++
+> > > >  arch/arm/mach-qemu/Kconfig                  |  36 +-
+> > > >  board/emulation/qemu-arm/MAINTAINERS        |   2 +
+> > > >  board/emulation/qemu-sbsa/Kconfig           |  57 +++
+> > > >  board/emulation/qemu-sbsa/Makefile          |   8 +
+> > > >  board/emulation/qemu-sbsa/acpi.c            | 192 ++++++++
+> > > >  board/emulation/qemu-sbsa/dsdt.asl          | 483 ++++++++++++++++=
+++++
+> > > >  board/emulation/qemu-sbsa/lowlevel_init.S   |  22 +
+> > > >  board/emulation/qemu-sbsa/qemu-sbsa.c       | 311 +++++++++++++
+> > > >  board/emulation/qemu-sbsa/qemu-sbsa.env     |  14 +
+> > > >  board/emulation/qemu-sbsa/qemu-sbsa.h       |  38 ++
+> > > >  board/emulation/qemu-sbsa/smc.c             |  71 +++
+> > > >  configs/qemu-arm-sbsa_defconfig             |  10 +
+> > > >  doc/board/emulation/index.rst               |   1 +
+> > > >  doc/board/emulation/qemu-sbsa.rst           |  98 ++++
+> > > >  doc/develop/driver-model/virtio.rst         |   1 +
+> > > >  include/configs/qemu-sbsa.h                 |  95 ++++
+> > > >  19 files changed, 1605 insertions(+), 7 deletions(-)
+> > > >  create mode 100644 arch/arm/dts/qemu-sbsa.dts
+> > > >  create mode 100644 arch/arm/include/asm/arch-qemu-sbsa/boot0.h
+> > > >  create mode 100644 board/emulation/qemu-sbsa/Kconfig
+> > > >  create mode 100644 board/emulation/qemu-sbsa/Makefile
+> > > >  create mode 100644 board/emulation/qemu-sbsa/acpi.c
+> > > >  create mode 100644 board/emulation/qemu-sbsa/dsdt.asl
+> > > >  create mode 100644 board/emulation/qemu-sbsa/lowlevel_init.S
+> > > >  create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.c
+> > > >  create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.env
+> > > >  create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.h
+> > > >  create mode 100644 board/emulation/qemu-sbsa/smc.c
+> > > >  create mode 100644 configs/qemu-arm-sbsa_defconfig
+> > > >  create mode 100644 doc/board/emulation/qemu-sbsa.rst
+> > > >  create mode 100644 include/configs/qemu-sbsa.h
+> > >
+> > > With the tweaks below:
+> > >
+> > > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > >
+> > > [..]
+> > >
+> > > > diff --git a/arch/arm/dts/qemu-sbsa.dts b/arch/arm/dts/qemu-sbsa.dts
+> > > > new file mode 100644
+> > > > index 0000000000..f743ea3863
+> > > > --- /dev/null
+> > > > +++ b/arch/arm/dts/qemu-sbsa.dts
+> > > > @@ -0,0 +1,136 @@
+> > > > +// SPDX-License-Identifier: GPL-2.0+ OR MIT
+> > > > +/*
+> > > > + * Devicetree with onboard devices for qemu_sbsa-ref for internal =
+use only!
+> > > > + * DO NOT PASS TO THE OS!
+> > > > + *
+> > > > + * As QEMU provides only a minimal devicetree this one is merged w=
+ith
+> > > > + * it and then fixed at runtime.
+> > > > + *
+> > > > + * Copyright 2024 9elements GmbH
+> > > > + */
+> > > > +#include "configs/qemu-sbsa.h"
+> > > > +
+> > > > +/dts-v1/;
+> > > > +
+> > > > +#define MAKE_PROP(x) (x>>32) (x&0xffffffff)
+> > > > +
+> > > > +/ {
+> > > > +       #address-cells =3D <2>;
+> > > > +       #size-cells =3D <2>;
+> > > > +       interrupt-parent =3D <&intc>;
+> > > > +       compatible =3D "linux,sbsa-ref";
+> > > > +
+> > > > +       binman: binman {
+> > > > +               multiple-images;
+> > > > +       };
+> > > > +
+> > > > +       cpus {
+> > > > +               /* Filled by fdtdec_board_setup() */
+> > > > +       };
+> > > > +
+> > > > +       memory {
+> > > > +               /* Filled by fdtdec_board_setup() */
+> > > > +       };
+> > > > +
+> > > > +       soc {
+> > > > +               compatible =3D "simple-bus";
+> > > > +               #address-cells =3D <2>;
+> > > > +               #size-cells =3D <2>;
+> > > > +               ranges;
+> > > > +
+> > > > +               uart0 {
+> > > > +                       compatible =3D "arm,pl011";
+> > > > +                       status =3D "okay";
+> > > > +                       reg =3D <MAKE_PROP(SBSA_UART_BASE_ADDR)
+> > >
+> > > Can you use
+> > >
+> > > reg =3D /bits 64/ <0x60000000>
+> > >
+> > > instead?
+> > >
+> > > Same for those below.
+> >
+> > Isn't that less readable ?
 >=20
-> https://wiki.syslinux.org/wiki/index.php
->=20
-> Putting aside the difference in syntax from that used by the syslinux
-> project, of the 22 keywords currently supported by U-Boot, only 13 of
-> them are mentioned there (surprisingly the syslinux documentation
-> doesn't include "title" as an option).
->=20
-> I'd come to the conclusion that U-Boot already provides a greatly
-> extended version of the syntax, made suitable for booting in a wider
-> variety of instances than catered for by the syslinux project.
->=20
-> Though I admit, I could have missed another better source to
-> documentation. Is that the one you're thinking of or is there a better
-> one?
+> Which bit of it is less readable?
 
-I was thinking of https://systemd.io/BOOT_LOADER_SPECIFICATION/ which is
-now https://uapi-group.org/specifications/specs/boot_loader_specification/
-and only has 11 keywords. So, yeah, I guess this is another place where
-we'll keep doing what's needed to make things more useful and see what
-happens down the road. I'm fine with what's being added in this series.
-Thanks!
+Having hex spelled out rather than a macro that's clear what's being
+generated.
+
+> But I very much doubt upstream would accept it with a macro. Other
+> 64-bit boards seem to use '/bits/ 64'.
+
+What upstream are you referring to here? I'm not sure what other project
+will want a device tree for the "no device tree only acpi" virtual
+reference platform.
 
 --=20
 Tom
 
---lN6VxpDtH92vIgKZ
+--MSDw9Zuew2jQu3rD
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmb+rKQACgkQFHw5/5Y0
-tyzFDwwArQILzDS7F0UQXRLwMdskchkvIPW5jS28PoIARXac26FWRk22N6pTrWSL
-ltNaBuapwmaQNhRjnqD1XHz/ZLpEyOod/rTV9Avz7EcD//OoVVFGhIgrSU/9MoWD
-wHICgbFZdd+oluFWenEayLkXV5xgbkzJ7dXXTAvGw+sg9TqayTw9vgcMDyXfBUXG
-eHeHrRurMWm20tJ8sZ/jBUDYu5GTksRwJMZpvq72YD/8/eicp+v88OElWHVsgaUO
-H+JkqKiDE9f9OFG+rh2uVeCy7j9a9LhAFD5NZOvjjauo85csdmDIHRjCHZLN0mK7
-N1I1xEe7B9zzo1oet8iXzDgA8TuDQq6Pl9dgv4XXzwGjYWg4PgOVS9SIJIN510bi
-Wj4EAfYW2+qczBl2iV2FpT4MwmP9lHAkEjSDjCikJGR2thHZYxioxWD/m0M2F8ye
-YblrTCxYmOl24K8hACwn8tSiy+mB9yPWHbAr/DxIQiwPKLx9Tnwvp2SqpVb22oyH
-7HikLt4c
-=dsA3
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmb+racACgkQFHw5/5Y0
+tywgkQv/acK3vL2EWbcwrJN4VJ32gxTZvhu22RoTp1Mg4lugtoIRuyl8/TpUk+Ox
+X6MpAjbWqUaDqSl8mOZicHvPLg5N5OJrC6zDpdPPLcNn5wXBB2t5rRQKjqRSTbAF
+qq/M0rDChaXAWin2piQ3C5ZZQZ61eXyLSWWHJVGceIIpjGd0MsqAMcJBGP2A+9Wq
+iYmMKCcx9ERYQPtU/APXeoGyxagviY2g7FphSgWctCf93M9UTO0YMXRnSAFUNQkr
+EhVeTDfJbiQYs0u2bG4bFTf0GD7aXQOXFdocNtg8Fn2QS/qOmeKIajYbxYG0Oyjg
+zvitzr13hHR1Zs5LH9bh11xPJGveBwt4kCRfEXCiZKrX1CqjEYw6ewC7xc0Ug7E+
+X3AnsjUDPRZxiM/IQxGT2wMlvfB5FrAvzv1gWJ8j4PhYxzU46Ru0E3L0kYZvIbS1
++XbW2XyE9EOWtc8Re4tA9uaXREpC9w+EWR+kw4z7G6yQSNGOtrnan+5BDWL546gJ
+TAe8Jh/X
+=UXuX
 -----END PGP SIGNATURE-----
 
---lN6VxpDtH92vIgKZ--
+--MSDw9Zuew2jQu3rD--
