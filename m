@@ -4,61 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B104CCF34A9
-	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 13:20:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C1FACF34AD
+	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 13:29:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA26488C78;
-	Thu,  3 Oct 2024 15:19:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id B8CBB88875;
+	Thu,  3 Oct 2024 15:29:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1727961599;
-	bh=qMItSw8Ok4fBK8kIBePhHMwOO2oDzNiElGQenycfDoQ=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=wdi0FeX2AQSpNoFwaxbhBgTaZ5Qq3qhqHMJdIAGAcKe37coLRQewid4FZax8AONDb
-	 O98YOWBgUI2IbFezigRmc1KV0xqfZHK92wOlls7JQsKVCOmpQrDLFbWTI7r4Uow16d
-	 wPdNQ7fp1eUdY/ezqKPuL2SJ4Yxy6c/mAllgKwc7SbQFPxEJEmicKN8dZU+RvM8aFj
-	 FKW+fIqYrEhxOz5KfDWqAV5rESDDMkRM2x6FxlOXGWtnuG7YFoqoY7t+3KQJUpoBfC
-	 Jm64Nqq7gZNXimnCwqlc8CND2XrQcB6jtpJkj6vOQMQBJSqBinV5dfIOFaBJfJMbyW
-	 OwC1ICpFmPbUw==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FW4iDNNa";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id E9DB588D65; Thu,  3 Oct 2024 15:29:55 +0200 (CEST)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id E387088B5F;
- Thu,  3 Oct 2024 15:19:58 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1727961599;
- bh=qMItSw8Ok4fBK8kIBePhHMwOO2oDzNiElGQenycfDoQ=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=jtSpJBXV2SPWZLTEwsExMi3vJPlfzESNttRiJRfUsfOZUMTPgtp5J+6owrM0Vzn7k
- nsr0fMMQuhAIV6m69qpoiXMqnyGlkvU+pSthKjEpVI02jn5q7aU7lMJ5OLSaqec3RS
- viwVqgfk0S36XAqYjXkkifLYPXpgqFK1togLS4CXX8DjYtSzj0lbvF0k3oVPAvFnxe
- SObbhmOgbcYZY8rzwQ2PrEKoUFxX3vPqwY2b4SEPkI/dWHxJBwSYjtxFuFM1dUWQlK
- gr0q7To1B6s2Y/nBSzuUT7Icl9rXqK+E5o756zswW99W7AF857FnlA37wb6Nv2U34q
- lJnf2GbAp/M4g==
-Message-ID: <ed50e1a7-193c-493c-a1ee-42d404049c59@denx.de>
-Date: Thu, 3 Oct 2024 15:19:58 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 01E9F8870D
+ for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 15:29:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-5398b2f43b9so1927953e87.1
+ for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 06:29:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1727962193; x=1728566993; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Pvhetk/vqvPZWBMNWE5+2PObRRGPpvq2W4bQ6nMsCWo=;
+ b=FW4iDNNa0UdVqIFnGd1QWyCnXGbGSk7OivTbIH8fV4/DidMRhGfELwMx0uFnd5dbGE
+ cW6iECNLuWTyvymuEghlqMF/L09qA/DgTmw2nL7TpyK6kAArllVnl7VF5QkIpewSdoiG
+ gR/2RT0Y1ukwyZp1On3IDzYkw0/aiPCvqy39iyieJxp6nUkvYNcSqlVdMkSlgn1ymtHl
+ b5jtaXJJ3pu1gDyLooFWIk9WWzbN9WRNlj9cI6F6XkJrHUQU/DGoaZjThdP81/ryrIoD
+ Sk262LHtQ3wVu4+oV/Zhu3ep8b7tCCQt6cYfvm5jvOY+y7VeVEc8ydPqVbKCg4GD1yn8
+ hfbQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727962193; x=1728566993;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Pvhetk/vqvPZWBMNWE5+2PObRRGPpvq2W4bQ6nMsCWo=;
+ b=bqYC6zPj+Uj3IL1BATtLnlD98X3jdG7JdZKf0kpdiGhCvsrdh9g1xtbqGhnwWgvBTp
+ WLT2vXQZRCo2TQyPi7B6YvKhN1cr7Ay3QHeoxn9P2qkxYyT/HcrwdgSAEgoKgK308FUY
+ arUAh0ksucxWZ33mGEhepKaa6TRPVnLWyldQPhJci/O4dgBzr2maXEc9HLBJlEIENvjG
+ zbjcNW9pOWf0m01MZqFFt98OfT9Z8yd7pCtdQgTi4dkjS6yf5s7CScoeyxTIOOYXpMtc
+ IUWB7cD9G7c9uR1KT9mZMz9MXvQFm9fR9DHJqC0UambNKXM2z4Iwm54iSeFW7xywqmBL
+ TGPQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUgFUtdY9GIanxb4eYJMiyqKmH5JxL0FUMJXn+8+nhZ2ed+h2cssiJY7FOoReW1LHsooQlYdas=@lists.denx.de
+X-Gm-Message-State: AOJu0YxXTz16V7i1N8qmHUVJf8Ttt8NJaVG2wPvPM5HvDFl3cKwD1rav
+ vWVzs7khTroz7HI7dw/8/PTT8+nPFL3Ji5m/dB7qnWVi/BXd1N0yxeRQZW4PrkSBcMc6LBgddYh
+ Dri7AaToQa6ctd/e/V+UwICSwr4k=
+X-Google-Smtp-Source: AGHT+IFVSCiJOT0pQ5VBJMAxP1ob78nYZDHjHUbL01RdhP7htj6v4ll/h0VntXq3YTSTqpObq7ZcuzpE5rWpXPj0P2k=
+X-Received: by 2002:a05:6512:334d:b0:539:933c:51c6 with SMTP id
+ 2adb3069b0e04-539a62772ffmr873306e87.29.1727962193009; Thu, 03 Oct 2024
+ 06:29:53 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/3] usb: dwc3: fix dcache flush range calculation
-To: neil.armstrong@linaro.org, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Bin Meng <bmeng.cn@gmail.com>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-References: <20241002-u-boot-dwc3-gadget-dcache-fixup-v3-0-5398088ef93c@linaro.org>
- <20241002-u-boot-dwc3-gadget-dcache-fixup-v3-2-5398088ef93c@linaro.org>
- <e895c917-ca32-4b59-a5d6-7d8e9ce19d84@denx.de>
- <0643911e-e0fa-4faa-aee6-36f536691129@linaro.org>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <0643911e-e0fa-4faa-aee6-36f536691129@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20241001130758.9810-1-peng.fan@oss.nxp.com>
+In-Reply-To: <20241001130758.9810-1-peng.fan@oss.nxp.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 3 Oct 2024 10:29:41 -0300
+Message-ID: <CAOMZO5B8afcDSK+APn4wVRALeT1=27RmfgXaWjKZ06RoEWOAqw@mail.gmail.com>
+Subject: Re: [PATCH V2 1/5] mmc: fsl_esdhc_imx: Enable AHB/IPG clk with clk
+ bulk API
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Cc: sbabic@denx.de, u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
+ uboot-imx@nxp.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,32 +92,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/3/24 2:49 PM, Neil Armstrong wrote:
-> On 02/10/2024 16:55, Marek Vasut wrote:
->> On 10/2/24 4:39 PM, Neil Armstrong wrote:
->>> The current flush operation will omit doing a flush/invalidate on
->>> the first and last bytes if the base address and size are not aligned
->>> with DMA_MINALIGN.
->>>
->>> This causes operation failures Qualcomm platforms.
->>>
->>> Take in account the alignment and size of the buffer and also
->>> flush the previous and last cacheline.
->>>
->>> Remove CACHELINE_SIZE which was the same as DMA_MINALIGN.
->>
->> It isn't the same, CACHELINE_SIZE was set to CONFIG_SYS_CACHELINE_SIZE 
->> (CPU L1 cache cacheline length) while ARCH_DMA_MINALIGN is DMA engine 
->> alignment requirement (from times where there used to be one DMA 
->> engine on most devices). You likely want a 
->> max(CONFIG_SYS_CACHELINE_SIZE, dwc3-buffer-alignment-requirement) to 
->> really correctly align the buffer.
-> 
-> It is definitely true for platforms declaring dma_alloc_coherent() (arm, 
-> riscv, x86)
-> except nios2 but there's 0 chance dwc3 appears on a nios2 platform.
-There is real chance of that, because on modern SoCFPGA platforms 
-(Agilex) you can have the FPGA content access the SoC peripherals, and 
-one of the SoC peripherals is DWC3 controller. If anyone would actually 
-synthesize it is another question ... but it is an FPGA, so that option 
-exists.
+On Tue, Oct 1, 2024 at 9:04=E2=80=AFAM Peng Fan (OSS) <peng.fan@oss.nxp.com=
+> wrote:
+
+>  #if CONFIG_IS_ENABLED(CLK)
+>         /* Assigned clock already set clock */
+> -       ret =3D clk_get_by_name(dev, "per", &priv->per_clk);
+> +       ret =3D clk_get_bulk(dev, &priv->clk_bulk);
+>         if (ret) {
+> -               printf("Failed to get per_clk\n");
+> +               dev_err(dev, "Failed to get clks: %d\n", ret);
+>                 return ret;
+>         }
+> -       ret =3D clk_enable(&priv->per_clk);
+> +
+> +       ret =3D clk_enable_bulk(&priv->clk_bulk);
+>         if (ret) {
+> -               printf("Failed to enable per_clk\n");
+> +               dev_err(dev, "Failed to enable clks: %d\n", ret);
+> +               return ret;
+> +       }
+> +
+> +       ret =3D clk_get_by_name(dev, "per", &priv->per_clk);
+
+Now that you use clk_get_bulk(), why must the 'per' clock be retrieved
+separately?
+
+I expect that clk_get_bulk() gets all the clocks.
