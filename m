@@ -4,78 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C1FACF34AD
-	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 13:29:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B280CF34AD
+	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 13:49:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8CBB88875;
-	Thu,  3 Oct 2024 15:29:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7C75888D14;
+	Thu,  3 Oct 2024 15:49:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FW4iDNNa";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="V/sEyano";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E9DB588D65; Thu,  3 Oct 2024 15:29:55 +0200 (CEST)
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [IPv6:2a00:1450:4864:20::12b])
+ id C169F885B3; Thu,  3 Oct 2024 15:49:32 +0200 (CEST)
+Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
+ [IPv6:2607:f8b0:4864:20::832])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01E9F8870D
- for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 15:29:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6843988D14
+ for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 15:49:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-5398b2f43b9so1927953e87.1
- for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 06:29:53 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qt1-x832.google.com with SMTP id
+ d75a77b69052e-45d8f781d05so9569151cf.2
+ for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 06:49:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1727962193; x=1728566993; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Pvhetk/vqvPZWBMNWE5+2PObRRGPpvq2W4bQ6nMsCWo=;
- b=FW4iDNNa0UdVqIFnGd1QWyCnXGbGSk7OivTbIH8fV4/DidMRhGfELwMx0uFnd5dbGE
- cW6iECNLuWTyvymuEghlqMF/L09qA/DgTmw2nL7TpyK6kAArllVnl7VF5QkIpewSdoiG
- gR/2RT0Y1ukwyZp1On3IDzYkw0/aiPCvqy39iyieJxp6nUkvYNcSqlVdMkSlgn1ymtHl
- b5jtaXJJ3pu1gDyLooFWIk9WWzbN9WRNlj9cI6F6XkJrHUQU/DGoaZjThdP81/ryrIoD
- Sk262LHtQ3wVu4+oV/Zhu3ep8b7tCCQt6cYfvm5jvOY+y7VeVEc8ydPqVbKCg4GD1yn8
- hfbQ==
+ d=chromium.org; s=google; t=1727963369; x=1728568169; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=y72AJbCrxDvMjkmg9IxxIQzqB708Ldx4RLybsBeW7Sc=;
+ b=V/sEyanoZrrnFum6uvsC26uf+eN1dK/X7YhxjPm0g0mG+xWLXjmhx19yml5ZhuffVm
+ tHNCM7j0Cz25h99NsJ2b+yZDcAGvXaZOY4bnBBvK2PX9ejiCRxlfsypc6UzoUggKyyni
+ 0BA5b6/u/i2c6Ku+lurNS94Cgn54nCAJhzW50=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727962193; x=1728566993;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Pvhetk/vqvPZWBMNWE5+2PObRRGPpvq2W4bQ6nMsCWo=;
- b=bqYC6zPj+Uj3IL1BATtLnlD98X3jdG7JdZKf0kpdiGhCvsrdh9g1xtbqGhnwWgvBTp
- WLT2vXQZRCo2TQyPi7B6YvKhN1cr7Ay3QHeoxn9P2qkxYyT/HcrwdgSAEgoKgK308FUY
- arUAh0ksucxWZ33mGEhepKaa6TRPVnLWyldQPhJci/O4dgBzr2maXEc9HLBJlEIENvjG
- zbjcNW9pOWf0m01MZqFFt98OfT9Z8yd7pCtdQgTi4dkjS6yf5s7CScoeyxTIOOYXpMtc
- IUWB7cD9G7c9uR1KT9mZMz9MXvQFm9fR9DHJqC0UambNKXM2z4Iwm54iSeFW7xywqmBL
- TGPQ==
+ d=1e100.net; s=20230601; t=1727963369; x=1728568169;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=y72AJbCrxDvMjkmg9IxxIQzqB708Ldx4RLybsBeW7Sc=;
+ b=fn7yYA4lwP3wuAFoqNtCEX26GWP7z6vixNe8r4NN1StRWDcysNto+I16l/iAkvZ6pc
+ PYdMLneEq1lJafTeMinpg7QXqPDkz4ld0ZA2Qf5XHk/7XCQm9ZYRrwtP36RtN8DXmm78
+ /lPk46zJzSSTJYrqXhyTU6QD101Uzf6ioIN7SmLLr1qUpZy/XU7iERw5oKXedq7KYQ8r
+ QNsVeS58KuYzZ0TvK6/epuaFku+6CC/wq1ZFe9JjQEpukiZ2CklzCmsVmeACIsHT6cg4
+ kNf1RqNzk8GO12uCZ66meO/H/wf8X6nzoJ0kRGLBJGP2qhTS2w+ciEsH94pTG3JpXj+o
+ A0Lw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUgFUtdY9GIanxb4eYJMiyqKmH5JxL0FUMJXn+8+nhZ2ed+h2cssiJY7FOoReW1LHsooQlYdas=@lists.denx.de
-X-Gm-Message-State: AOJu0YxXTz16V7i1N8qmHUVJf8Ttt8NJaVG2wPvPM5HvDFl3cKwD1rav
- vWVzs7khTroz7HI7dw/8/PTT8+nPFL3Ji5m/dB7qnWVi/BXd1N0yxeRQZW4PrkSBcMc6LBgddYh
- Dri7AaToQa6ctd/e/V+UwICSwr4k=
-X-Google-Smtp-Source: AGHT+IFVSCiJOT0pQ5VBJMAxP1ob78nYZDHjHUbL01RdhP7htj6v4ll/h0VntXq3YTSTqpObq7ZcuzpE5rWpXPj0P2k=
-X-Received: by 2002:a05:6512:334d:b0:539:933c:51c6 with SMTP id
- 2adb3069b0e04-539a62772ffmr873306e87.29.1727962193009; Thu, 03 Oct 2024
- 06:29:53 -0700 (PDT)
+ AJvYcCUYl+svZ0f9cuSHneGFRgAEBGmNddKDe2J2OLVrPJqxsfqEKPeFx2WztjhmjF0ZGPPI6xK8/SM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw99WUtp4swoz0yAwnzz9uWc6YXHPE3OCEHfL+Al4N3EXq3PTUs
+ MllRwLyA2tIy/84vGMoml9f0OEPAp6X8FWB2m7ocu1hgI9A9ywDU5ypb19ZrhS6GDdWvWtcl26y
+ yP/ayAa3AJ8K7jJqKMJeGeKy6ClDL9d1LJASu5jklVowVjpQ=
+X-Google-Smtp-Source: AGHT+IEoq3cBBTsCiFXyMIHd2wElH3xqGKCtD6aDhZzXh/S5dq7+xfLRkbUXUqiJHrLJhGRTc4TIT2vb+UZXN2ogwYM=
+X-Received: by 2002:a05:6214:3bc9:b0:6c6:9bb9:b435 with SMTP id
+ 6a1803df08f44-6cb81bba100mr81042696d6.53.1727963369206; Thu, 03 Oct 2024
+ 06:49:29 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241001130758.9810-1-peng.fan@oss.nxp.com>
-In-Reply-To: <20241001130758.9810-1-peng.fan@oss.nxp.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 3 Oct 2024 10:29:41 -0300
-Message-ID: <CAOMZO5B8afcDSK+APn4wVRALeT1=27RmfgXaWjKZ06RoEWOAqw@mail.gmail.com>
-Subject: Re: [PATCH V2 1/5] mmc: fsl_esdhc_imx: Enable AHB/IPG clk with clk
- bulk API
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Cc: sbabic@denx.de, u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
- uboot-imx@nxp.com
+References: <20241002094832.24933-1-patrick.rudolph@9elements.com>
+ <20241002094832.24933-15-patrick.rudolph@9elements.com>
+ <CAC_iWj+7uvnJp17LiFpc7TZYGdoH9Y_kroWLPGVzC2m5BeTAhA@mail.gmail.com>
+In-Reply-To: <CAC_iWj+7uvnJp17LiFpc7TZYGdoH9Y_kroWLPGVzC2m5BeTAhA@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 3 Oct 2024 07:49:18 -0600
+Message-ID: <CAFLszTiKi7+8NmihLqdvuS6fH6Jp2+4PZG6GHK1wNoRnQZx0SA@mail.gmail.com>
+Subject: Re: [PATCH v6 14/37] efi_loader: Allocate and write ACPI tables
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Patrick Rudolph <patrick.rudolph@9elements.com>, u-boot@lists.denx.de, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,30 +86,182 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Oct 1, 2024 at 9:04=E2=80=AFAM Peng Fan (OSS) <peng.fan@oss.nxp.com=
-> wrote:
+Hi Ilias,
 
->  #if CONFIG_IS_ENABLED(CLK)
->         /* Assigned clock already set clock */
-> -       ret =3D clk_get_by_name(dev, "per", &priv->per_clk);
-> +       ret =3D clk_get_bulk(dev, &priv->clk_bulk);
->         if (ret) {
-> -               printf("Failed to get per_clk\n");
-> +               dev_err(dev, "Failed to get clks: %d\n", ret);
->                 return ret;
->         }
-> -       ret =3D clk_enable(&priv->per_clk);
-> +
-> +       ret =3D clk_enable_bulk(&priv->clk_bulk);
->         if (ret) {
-> -               printf("Failed to enable per_clk\n");
-> +               dev_err(dev, "Failed to enable clks: %d\n", ret);
-> +               return ret;
-> +       }
-> +
-> +       ret =3D clk_get_by_name(dev, "per", &priv->per_clk);
+On Wed, 2 Oct 2024 at 23:45, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> Hi Patrick,
+>
+> We've been back and forth on this, but we still disagree on the
+> allocations etc, but I don't think it's that important to keep the
+> patch out due to this.
+>
+> Can we move the table generation to the ACPI subsystem?
+> efi_acpi_register() will convert the memory as needed, so I was
+> wondering why the creation itself can't be done there. If you simply
+> fill table_start_high/table_end_hi, EFI will install the config tables
+> properly
 
-Now that you use clk_get_bulk(), why must the 'per' clock be retrieved
-separately?
+Yes, that's a good idea. The whole function can just move to
+lib/acpi/acpi_writer.c perhaps?
 
-I expect that clk_get_bulk() gets all the clocks.
+Regards,
+SImon
+
+>
+> Thanks
+> /Ilias
+>
+> On Wed, 2 Oct 2024 at 12:52, Patrick Rudolph
+> <patrick.rudolph@9elements.com> wrote:
+> >
+> > Allocate memory for ACPI tables inside the efi_loader and write out
+> > the tables similar to SMBIOS tables. When ACPI is enabled and wasn't
+> > installed in other places, install the ACPI table in EFI. Since EFI
+> > is necessary to pass the ACPI table location when FDT isn't used,
+> > there's no need to install it separately.
+> >
+> > When CONFIG_BLOBLIST_TABLES is set the tables will be stored in a
+> > bloblist. The tables are still passed to the OS using EFI.
+> >
+> > This allows non x86 platforms to boot using ACPI only in case the
+> > EFI loader is being used.
+> >
+> > TEST: Booted QEMU SBSA (no QFW) using EFI and ACPI only.
+> >
+> > Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+> > Cc: Simon Glass <sjg@chromium.org>
+> > Cc: Tom Rini <trini@konsulko.com>
+> > ---
+> > Changelog v3:
+> > - Drop memalign and use efi_allocate_pages
+> > - Use log_debug instead of debug
+> > - Clarify commit message
+> > - Skip writing ACPI tables on sandbox
+> > - Rename function
+> > - Add function comment
+> >
+> > Changelog v6:
+> > - Update header order
+> >
+> > ---
+> >  lib/efi_loader/efi_acpi.c        | 76 ++++++++++++++++++++++++++++++++
+> >  test/py/tests/test_event_dump.py |  1 +
+> >  2 files changed, 77 insertions(+)
+> >
+> > diff --git a/lib/efi_loader/efi_acpi.c b/lib/efi_loader/efi_acpi.c
+> > index 67bd7f8ca2..c11abe17b6 100644
+> > --- a/lib/efi_loader/efi_acpi.c
+> > +++ b/lib/efi_loader/efi_acpi.c
+> > @@ -6,15 +6,23 @@
+> >   */
+> >
+> >  #include <efi_loader.h>
+> > +#include <bloblist.h>
+> >  #include <log.h>
+> > +#include <malloc.h>
+> >  #include <mapmem.h>
+> >  #include <acpi/acpi_table.h>
+> >  #include <asm/global_data.h>
+> > +#include <asm/io.h>
+> > +#include <linux/sizes.h>
+> > +#include <linux/log2.h>
+> >
+> >  DECLARE_GLOBAL_DATA_PTR;
+> >
+> >  static const efi_guid_t acpi_guid = EFI_ACPI_TABLE_GUID;
+> >
+> > +enum {
+> > +       TABLE_SIZE      = SZ_64K,
+> > +};
+> >  /*
+> >   * Install the ACPI table as a configuration table.
+> >   *
+> > @@ -47,3 +55,71 @@ efi_status_t efi_acpi_register(void)
+> >         return efi_install_configuration_table(&acpi_guid,
+> >                                                (void *)(ulong)addr);
+> >  }
+> > +
+> > +/*
+> > + * Allocate memory for ACPI tables and write ACPI tables to the
+> > + * allocated buffer.
+> > + *
+> > + * Return:     status code
+> > + */
+> > +static int alloc_write_acpi_tables(void)
+> > +{
+> > +       u64 table_addr, table_end;
+> > +       u64 new_acpi_addr = 0;
+> > +       efi_uintn_t pages;
+> > +       efi_status_t ret;
+> > +       void *addr;
+> > +
+> > +       if (!IS_ENABLED(CONFIG_GENERATE_ACPI_TABLE))
+> > +               return 0;
+> > +
+> > +       if (IS_ENABLED(CONFIG_X86) ||
+> > +           IS_ENABLED(CONFIG_QFW_ACPI) ||
+> > +           IS_ENABLED(CONFIG_SANDBOX)) {
+> > +               log_debug("Skipping writing ACPI tables as already done\n");
+> > +               return 0;
+> > +       }
+> > +
+> > +       /* Align the table to a 4KB boundary to keep EFI happy */
+> > +       if (IS_ENABLED(CONFIG_BLOBLIST_TABLES)) {
+> > +               addr = bloblist_add(BLOBLISTT_ACPI_TABLES, TABLE_SIZE,
+> > +                                   ilog2(SZ_4K));
+> > +
+> > +               if (!addr)
+> > +                       return log_msg_ret("mem", -ENOMEM);
+> > +       } else {
+> > +               pages = efi_size_in_pages(TABLE_SIZE);
+> > +
+> > +               ret = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES,
+> > +                                        EFI_ACPI_RECLAIM_MEMORY,
+> > +                                        pages, &new_acpi_addr);
+> > +               if (ret != EFI_SUCCESS)
+> > +                       return log_msg_ret("mem", -ENOMEM);
+> > +
+> > +               addr = (void *)(uintptr_t)new_acpi_addr;
+> > +       }
+> > +
+> > +       table_addr = virt_to_phys(addr);
+> > +
+> > +       gd->arch.table_start_high = table_addr;
+> > +
+> > +       table_end = write_acpi_tables(table_addr);
+> > +       if (!table_end) {
+> > +               log_err("Can't create ACPI configuration table\n");
+> > +               return -EINTR;
+> > +       }
+> > +
+> > +       log_debug("- wrote 'acpi' to %llx, end %llx\n", table_addr, table_end);
+> > +       if (table_end - table_addr > TABLE_SIZE) {
+> > +               log_err("Out of space for configuration tables: need %llx, have %x\n",
+> > +                       table_end - table_addr, TABLE_SIZE);
+> > +               return log_msg_ret("acpi", -ENOSPC);
+> > +       }
+> > +       gd->arch.table_end_high = table_end;
+> > +
+> > +       log_debug("- done writing tables\n");
+> > +
+> > +       return 0;
+> > +}
+> > +
+> > +EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, alloc_write_acpi_tables);
+> > diff --git a/test/py/tests/test_event_dump.py b/test/py/tests/test_event_dump.py
+> > index e282c67335..459bfa26bb 100644
+> > --- a/test/py/tests/test_event_dump.py
+> > +++ b/test/py/tests/test_event_dump.py
+> > @@ -18,6 +18,7 @@ def test_event_dump(u_boot_console):
+> >  --------------------  ------------------------------  ------------------------------
+> >  EVT_FT_FIXUP          bootmeth_vbe_ft_fixup           .*boot/vbe_request.c:.*
+> >  EVT_FT_FIXUP          bootmeth_vbe_simple_ft_fixup    .*boot/vbe_simple_os.c:.*
+> > +EVT_LAST_STAGE_INIT   alloc_write_acpi_tables         .*lib/efi_loader/efi_acpi.c:.*
+> >  EVT_LAST_STAGE_INIT   install_smbios_table            .*lib/efi_loader/efi_smbios.c:.*
+> >  EVT_MISC_INIT_F       sandbox_early_getopt_check      .*arch/sandbox/cpu/start.c:.*
+> >  EVT_TEST              h_adder_simple                  .*test/common/event.c:'''
+> > --
+> > 2.46.2
+> >
