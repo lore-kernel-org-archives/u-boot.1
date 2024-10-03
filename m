@@ -4,71 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C3F1CF8555
-	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 02:53:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87B72CF8552
+	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 02:53:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3A12890BB;
-	Thu,  3 Oct 2024 04:52:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3909089065;
+	Thu,  3 Oct 2024 04:52:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="q+Qml8zo";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KOCyix3V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 957188912B; Thu,  3 Oct 2024 04:52:42 +0200 (CEST)
-Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
- [IPv6:2607:f8b0:4864:20::f2b])
+ id 783A689131; Thu,  3 Oct 2024 04:52:44 +0200 (CEST)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 27728890AD
- for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 04:52:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 54054890EB
+ for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 04:52:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-6cb2ad51162so4219636d6.3
- for <u-boot@lists.denx.de>; Wed, 02 Oct 2024 19:52:40 -0700 (PDT)
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-6cb25aad5dfso4949766d6.3
+ for <u-boot@lists.denx.de>; Wed, 02 Oct 2024 19:52:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1727923959; x=1728528759; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1727923961; x=1728528761; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=EPy87y54G95W8xHR891OEMztFrHa3Bx7E6QiGfNLqFI=;
- b=q+Qml8zoE0n9CXqXg4I61YmIKa1SW2oC6jjhhUYN8VBDE3ZRNOPGXSh5H5uci4YBY7
- BhWajne1+ntA7nZAbTK11Pazr4How86wvfICSpteKFr55uERRLMjwV6bMH4aW8SioiP1
- tJjQFJd6NWQM862qvc8jfUu8NBV7+vHcLdcS0=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=99Qh+7ONHJaN5kXT++F/z7oUd/xW93PLhngdYIezVNc=;
+ b=KOCyix3V/kYOZC7CO8yuyEJSb6aPSJkTMtbxNkNL4Zdn+Tc14VxLyibzMzTMK8hBs6
+ kaHY+YyIIH1W5W+OI2MSD2MIqNowqmG2mjXjwsOSF5tG/3FWFn9g91VvIWopIc1F54Ej
+ IIE5VlYWCq3IyX+lupNkeDNNODvDE2IQ7zIbg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727923959; x=1728528759;
+ d=1e100.net; s=20230601; t=1727923961; x=1728528761;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=EPy87y54G95W8xHR891OEMztFrHa3Bx7E6QiGfNLqFI=;
- b=oF+DlVStrVnWZvHTAH9FdKHb2BO9F/REHGulWFZL5kN7CCJJ7r9JyVvdhT4qebORk+
- kJkG9iwLvOPgqK1cMBk03J+aQ+PlLxb+NqEpX/g40++X4Mxxhrd0xXv9YVa6uta/gtWD
- Z6vnJWQDrvboDdJSx+cL9ApzlOzZ5yls6X4kjdc2gdPFx7OP3QCLCO4ilj+pYDMEKEGT
- ivSkhsfE8TLRCGmLOjTC5l0C8HIlS+kP45stt6AeogGVNQ8+jxY+drD3pwv1SIM+It2M
- plQGtFiBsTdV9weL2hcsuyA8VAk7Zf/aWOsmpR4bV/3g6VRIV5KGxvJG3dc7Lm2mukKm
- MWjQ==
-X-Gm-Message-State: AOJu0Yw6vX03SM9FS+pgY5CpwfEM/4NoxnzA0EF3I25U9rRTDl6DbLhF
- e3iRjfbJ34OPOVx0IccG7el20mH/hkkytfaud+R9R9Fmn8t9oBSpaTov7SyvC6rAVqu44veDjca
- AxYE=
-X-Google-Smtp-Source: AGHT+IGom6nU1omNZKtlFbZWuvszh2MmzWzZoxJUYF3NhGzHlezNnJ9DDxWbauCVsn8LVykhxd50Ww==
-X-Received: by 2002:a05:6214:428f:b0:6cb:22ea:5e00 with SMTP id
- 6a1803df08f44-6cb81a3ab01mr86790016d6.30.1727923959009; 
- Wed, 02 Oct 2024 19:52:39 -0700 (PDT)
+ bh=99Qh+7ONHJaN5kXT++F/z7oUd/xW93PLhngdYIezVNc=;
+ b=paZSNg1wk0eKohZi+TbVPcYtxk887jwYMOuR3MHShmLPUrmlILnkNSPWv5xV6AvzUw
+ 5WCxDSbBFrNVgmkidmUMN7nBKGrjHdU3kAnq6zBlCRbQQD/KlBESvXn3F/ld1ZqvA1m/
+ eONKjaQ4yP923z6A3+0bk5+9oIYQcjRwInj48ccu4yI+d0nze8T50qQ3/GB6VPIRzNES
+ kEByQUQxK11kcklCtcASqJRNTFAu6ppHe1ViWMTurKlyqBAaaPNb0tQOQ27eUzxfELlu
+ 83PYosS7o2Bkb3FhkVCP8Qh8WbQdHFp+wBcCnQK0aps0npBSxwwTxwLhq5eUXC4Il4hY
+ tdeA==
+X-Gm-Message-State: AOJu0Yyl9/SQyDUrjqd2BR7y/M5esKN+qhz2VNORbhJmOhzzhQ8s5vnZ
+ IBnhpNWoWRlxVGMubq4z8o0twl6hTkzN4WF3TnaCHyTLJiIp0grscmEIywzv5RQ=
+X-Google-Smtp-Source: AGHT+IG52T8LbmcWhFqSNjdgi7j9vD5ot1CmWN9h6JkEw5jY08eJal2RI9oklzKS5cIu/LZrVyxFGA==
+X-Received: by 2002:a05:6214:5d8a:b0:6cb:3c08:1721 with SMTP id
+ 6a1803df08f44-6cb81ccc006mr68438546d6.48.1727923961302; 
+ Wed, 02 Oct 2024 19:52:41 -0700 (PDT)
 Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6cb938211f0sm1606826d6.142.2024.10.02.19.52.37
+ 6a1803df08f44-6cb938211f0sm1606826d6.142.2024.10.02.19.52.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Oct 2024 19:52:38 -0700 (PDT)
+ Wed, 02 Oct 2024 19:52:40 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, 
- Joakim Tjernlund <joakim.tjernlund@infinera.com>
-In-Reply-To: <20240920161521.917955-1-joakim.tjernlund@infinera.com>
-References: <CAFLszTj0HNbEy7VSaDA=Vd05+EWT1rxcDOBxu6e=BY1aQ54ZPg@mail.gmail.com>
- <20240920161521.917955-1-joakim.tjernlund@infinera.com>
-Subject: Re: [PATCH] Add mkimage secp521r1 ECDSA curve support
-Message-Id: <172792395764.1516896.6388761340807753857.b4-ty@konsulko.com>
-Date: Wed, 02 Oct 2024 20:52:37 -0600
+To: Jagan Teki <jagan@amarulasolutions.com>, 
+ Bastien Curutchet <bastien.curutchet@bootlin.com>
+Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ Herve Codina <herve.codina@bootlin.com>, 
+ Christopher Cordahi <christophercordahi@nanometrics.ca>
+In-Reply-To: <20240920082806.74253-1-bastien.curutchet@bootlin.com>
+References: <20240920082806.74253-1-bastien.curutchet@bootlin.com>
+Subject: Re: [PATCH] spi: davinci: Drop the preload of TX buffer before
+ read/writes operations
+Message-Id: <172792395919.1516896.4432938741386278871.b4-ty@konsulko.com>
+Date: Wed, 02 Oct 2024 20:52:39 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -89,11 +92,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 20 Sep 2024 18:14:35 +0200, Joakim Tjernlund wrote:
+On Fri, 20 Sep 2024 10:28:06 +0200, Bastien Curutchet wrote:
 
-> Adds support for secp521r1 ECDSA in mkimage
+> A write to the TX buffer is performed before entering the loop to "avoid
+> clock starvation". This sometimes results in subsequent writes in
+> davinci_spi_xfer_data() to occur while the TXFULL bit is asserted,
+> leading to write failures.
 > 
+> Remove the preload of the TX buffer.
 > 
+> [...]
 
 Applied to u-boot/next, thanks!
 
