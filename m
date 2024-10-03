@@ -4,99 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 894CCCFA745
-	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 05:01:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC269CFA749
+	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 05:01:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA2358911E;
-	Fri,  4 Oct 2024 06:57:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 435F98911B;
+	Fri,  4 Oct 2024 06:57:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WkjGxAhG";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hK7Hvrho";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ACB0387BF4; Fri,  4 Oct 2024 00:02:45 +0200 (CEST)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+ id 2858187BF4; Fri,  4 Oct 2024 00:03:18 +0200 (CEST)
+Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
+ [IPv6:2607:f8b0:4864:20::82f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 71CF188CC5
- for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 00:02:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2DEC188D94
+ for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 00:03:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-7ae3e3db294so84764585a.2
- for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 15:02:43 -0700 (PDT)
+Received: by mail-qt1-x82f.google.com with SMTP id
+ d75a77b69052e-45d8f781d05so14235301cf.2
+ for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 15:03:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1727992962; x=1728597762; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1727992993; x=1728597793; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ogpAL5OWdHqEz0W+SP94H3IGBFnb9UrrFaQ9n/v5a8s=;
- b=WkjGxAhGw2Q9weJRuoXX3vDZNP19COxGaYywwoGRfgU7vb/besMEzsv3ouiix4d9/A
- GbgDSB033qjz4gTfb0hOGSjebIc/QPtPPQcUxp1FNMXfdZ1tDbIbLHzIS+6ZMG793Tf5
- EDOtTzdf0jnXOQ8hJzrhWuCvs2SVMjVwPOGLTfGl6MajQPvrdPL5r9mZetc7LyEXsCqb
- XV0ik9XUUmE/R8LbzEYdpn2B1oAYxlyZhQkifUEsTQMR/kWHj1adxj626QlHv4muVO6v
- UgEU0Exl2QyrxIuUmNbThtRqRgcW9GQktvOG5CQZ1fQIb4C9UAgX9x6KWCvcshocTjHm
- P0DQ==
+ bh=g33bt9BCdR+eNArNjlr8skVBpdilcPL72pJ6E/NWBmk=;
+ b=hK7Hvrhocz+WkW3AMhSqKHn/mm2+x2CjQudmXYL9DVxgU8ffNq+LC+PBPNIWo/912n
+ QzIAOINeAj4ntigIGEzMqNxfD90A/AmW1Fnp/Oqm8GyvRET2Se7ftYRAGYyJ0cM8DZ6u
+ m7ZWnsFFo/V1cssvRah5rlKJqjtkoIyLZGmjIR3xeDtkqJvB7bP+PPZPzGrLyZPZwpl0
+ j5htfeZz0UkNyg6gxf7sG5I1MDbnqSGC9CxwM0ABvsLmt6g9QGXtM0v+qy1TNz7Gmi9V
+ 60SDxMzzaJqmXJiF1DyOM3QiVs0we7oina0HLY/JDdo4/RxtV5QM3KJjwnwpxirq3boD
+ WBRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727992962; x=1728597762;
+ d=1e100.net; s=20230601; t=1727992993; x=1728597793;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ogpAL5OWdHqEz0W+SP94H3IGBFnb9UrrFaQ9n/v5a8s=;
- b=WOzpUTuK+q0vt/9N7mA3F8xq3U7GRy4m1RmPzw+limRGpccf8x8Ntvk/0c/Af7mAMY
- VIPnGAPe15I0LTACXTttSPFYGXgqPqhvE626rz8Bnp7f9HQ3woj2AwM8dZ51iYuIiXdJ
- hYF9/Sw8XGxtQzhT0X9CtPRoUug6HZ89W8/tLt+67UESlbizSKl++HAC5AQNyccuqaeU
- RJVeMBfZtxMhQdb2e6ZODUmETh3QZOXhl7M8OK1S5PckRHofgTsOo2wWyz8Pd+V0eoKf
- UQI3eW6nJ6HhM9qtzaADxzUEWleAg3wpiOclLh0P/x0pGCYVBuc5TBkg4/WCDOLSI7lK
- nr9Q==
-X-Gm-Message-State: AOJu0Yxqfy58JJbPOyX7VmCD5krP4zXkbIiJyCwLWhXBCKpePotVu2TS
- UN7M2vrDQr29BdbaJrLPz5AfQgJep/e9wmengiAL14HhqqPdy2sszvXEzNi3TE8Nzt8kQIn4p9R
- 1
-X-Google-Smtp-Source: AGHT+IGsoDxxFMAHMQyPuNxZ00XO5py1yoPe3l2uTjWtl1E8pOu5Duef3s1Gs/LpcZwPRhWGBxH62g==
-X-Received: by 2002:a05:620a:31a5:b0:7a9:c129:297a with SMTP id
- af79cd13be357-7ae6f44cb1fmr122149985a.32.1727992961972; 
- Thu, 03 Oct 2024 15:02:41 -0700 (PDT)
+ bh=g33bt9BCdR+eNArNjlr8skVBpdilcPL72pJ6E/NWBmk=;
+ b=sE7elxlpyPtoRbd/oJomCF69ETfeh+G28071qY2PA4XOc2Ujd8gJU9d/Ihi+nFkTVI
+ dpYr6ENicDjINleHq3qVeoahfkw6Lna2fwPi2u+eeeyZ5bDB2Pu+26b9yB1lhgTm0bpI
+ 0FMN2ir7QKWtA6GHI+4rRh51CToNRLtInz02ySYcLUtJd0/V3bRSuhAktA7XegX7/izF
+ mlcMZUn/8E4lNeNuB3B1pDk+81moU7DjeqWf5tjnZDXqqjHMql2Vtq/U6ScmXG15Z6w1
+ F/dZnsLHrMjLUU/ZbjW9t8QCyAgsus/+SuEJBBjZK+1DgsPUMN/+x9FbQbEM8BKeU+hZ
+ w0LQ==
+X-Gm-Message-State: AOJu0YxXzxn+I5hHCnzERII08+mJkPWt6GXns7Of0J9Zxq1+3QZEKKrA
+ FpbK/a2J3T/ANEn1y3btzK4jDjcp3+5qK41QakSKzDsa28nr27qbx8VRf2wjut+CkGBL9GNr0Kb
+ X
+X-Google-Smtp-Source: AGHT+IG+Rzxl1TnqEf6HAbzUla1a6OI+n8oGfYwsEZv7/3l3SH6Xm13BxX/3G1cDt7LNh9ZOHr/uIg==
+X-Received: by 2002:ac8:5715:0:b0:458:2479:b599 with SMTP id
+ d75a77b69052e-45d9ba7b2f0mr8480151cf.36.1727992992812; 
+ Thu, 03 Oct 2024 15:03:12 -0700 (PDT)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-45d92ddf5c4sm9001541cf.18.2024.10.03.15.02.39
+ d75a77b69052e-45d92ddf5c4sm9001541cf.18.2024.10.03.15.03.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Oct 2024 15:02:41 -0700 (PDT)
+ Thu, 03 Oct 2024 15:03:12 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: manish.pandey2@arm.com, Raymond Mao <raymond.mao@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
  Mario Six <mario.six@gdsys.cc>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
  Michal Simek <michal.simek@amd.com>,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
  Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sean Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Andrew Davis <afd@ti.com>,
- Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
+ Sean Anderson <seanga2@gmail.com>, Andrew Davis <afd@ti.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Sumit Garg <sumit.garg@linaro.org>, Bryan Brattlof <bb@ti.com>,
+ "Leon M. Busch-George" <leon@georgemail.eu>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
  Alexander Gendin <agendin@matrox.com>,
- Jonathan Humphreys <j-humphreys@ti.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>, Marek Vasut <marex@denx.de>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Linus Walleij <linus.walleij@linaro.org>,
- Kongyang Liu <seashell11234455@gmail.com>,
- Greg Malysa <greg.malysa@timesys.com>, Jonas Karlman <jonas@kwiboo.se>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Eddie James <eajames@linux.ibm.com>
-Subject: [PATCH v8 21/27] mbedtls: add MSCode parser porting layer
-Date: Thu,  3 Oct 2024 14:50:34 -0700
-Message-Id: <20241003215112.3103601-22-raymond.mao@linaro.org>
+ Jonathan Humphreys <j-humphreys@ti.com>, Marek Vasut <marex@denx.de>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Greg Malysa <greg.malysa@timesys.com>,
+ Kongyang Liu <seashell11234455@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Eddie James <eajames@linux.ibm.com>
+Subject: [PATCH v8 22/27] lib/crypto: Adapt mscode_parser to MbedTLS
+Date: Thu,  3 Oct 2024 14:50:35 -0700
+Message-Id: <20241003215112.3103601-23-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20241003215112.3103601-1-raymond.mao@linaro.org>
 References: <20241003215112.3103601-1-raymond.mao@linaro.org>
@@ -119,24 +116,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add porting layer for MSCode on top of MbedTLS ASN1 library.
-Introduce _MBEDTLS kconfigs for MSCode MbedTLS implementation.
+Previous patch has introduced MbedTLS porting layer for mscode parser,
+here to adjust the header and makefiles accordingly.
+Adding _LEGACY Kconfig for legacy mscode implementation.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 Changes in v2
 - Move the porting layer to MbedTLS dir.
 Changes in v3
-- None.
+- Update commit message.
 Changes in v4
-- Introduce _LEGACY and _MBEDTLS kconfigs for MSCode legacy and
-  MbedTLS implementations respectively.
-- Fix a few code style.
+- Control building legacy library via '_LEGACY' Kconfig.
 Changes in v5
-- Correct kconfig dependence.
-- Refactored MbedTLS makefile.
-- Move mscode legacy kconfig to the next patch.
+- Add kconfig for legacy mscode parser.
+- Correct header file include directories.
 Changes in v6
 - None.
 Changes in v7
@@ -144,180 +138,66 @@ Changes in v7
 Changes in v8
 - None
 
- lib/mbedtls/Kconfig         |   9 +++
- lib/mbedtls/Makefile        |   1 +
- lib/mbedtls/mscode_parser.c | 123 ++++++++++++++++++++++++++++++++++++
- 3 files changed, 133 insertions(+)
- create mode 100644 lib/mbedtls/mscode_parser.c
+ include/crypto/mscode.h | 4 ++++
+ lib/crypto/Makefile     | 2 +-
+ lib/mbedtls/Kconfig     | 9 +++++++++
+ 3 files changed, 14 insertions(+), 1 deletion(-)
 
+diff --git a/include/crypto/mscode.h b/include/crypto/mscode.h
+index 551058b96e6..678e69001b9 100644
+--- a/include/crypto/mscode.h
++++ b/include/crypto/mscode.h
+@@ -9,6 +9,10 @@
+ #ifndef __UBOOT__
+ #include <crypto/hash_info.h>
+ #endif
++#if CONFIG_IS_ENABLED(MBEDTLS_LIB_X509)
++#include <mbedtls/asn1.h>
++#include <mbedtls/oid.h>
++#endif
+ 
+ struct pefile_context {
+ #ifndef __UBOOT__
+diff --git a/lib/crypto/Makefile b/lib/crypto/Makefile
+index 7129315393f..3caa45dc2a8 100644
+--- a/lib/crypto/Makefile
++++ b/lib/crypto/Makefile
+@@ -63,7 +63,7 @@ obj-$(CONFIG_$(SPL_)PKCS7_VERIFY) += pkcs7_verify.o
+ #
+ # Signed PE binary-wrapped key handling
+ #
+-obj-$(CONFIG_$(SPL_)MSCODE_PARSER) += mscode.o
++obj-$(CONFIG_$(SPL_)MSCODE_PARSER_LEGACY) += mscode.o
+ 
+ mscode-y := \
+ 	mscode_parser.o \
 diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
-index 189bb3186b6..fd7263f9616 100644
+index fd7263f9616..efeaed50385 100644
 --- a/lib/mbedtls/Kconfig
 +++ b/lib/mbedtls/Kconfig
-@@ -303,6 +303,7 @@ config MBEDTLS_LIB_X509
+@@ -120,6 +120,7 @@ config LEGACY_CRYPTO_CERT
  		ASYMMETRIC_PUBLIC_KEY_SUBTYPE
- 	select X509_CERTIFICATE_PARSER_MBEDTLS if X509_CERTIFICATE_PARSER
- 	select PKCS7_MESSAGE_PARSER_MBEDTLS if PKCS7_MESSAGE_PARSER
-+	select MSCODE_PARSER_MBEDTLS if MSCODE_PARSER
- 	select SPL_ASYMMETRIC_PUBLIC_KEY_MBEDTLS if \
+ 	select X509_CERTIFICATE_PARSER_LEGACY if X509_CERTIFICATE_PARSER
+ 	select PKCS7_MESSAGE_PARSER_LEGACY if PKCS7_MESSAGE_PARSER
++	select MSCODE_PARSER_LEGACY if MSCODE_PARSER
+ 	select SPL_ASYMMETRIC_PUBLIC_KEY_LEGACY if \
  		SPL_ASYMMETRIC_PUBLIC_KEY_SUBTYPE
  	help
-@@ -333,6 +334,14 @@ config PKCS7_MESSAGE_PARSER_MBEDTLS
- 	  This option chooses MbedTLS certificate library for PKCS7 message
+@@ -150,6 +151,14 @@ config PKCS7_MESSAGE_PARSER_LEGACY
+ 	  This option chooses legacy certificate library for PKCS7 message
  	  parser.
  
-+config MSCODE_PARSER_MBEDTLS
-+	bool "MS authenticode parser with MbedTLS certificate library"
-+	depends on MBEDTLS_LIB_X509 && MSCODE_PARSER
-+	select ASN1_DECODER_MBEDTLS
++config MSCODE_PARSER_LEGACY
++	bool "MS authenticode parser with legacy certificate library"
++	depends on LEGACY_CRYPTO_CERT && MSCODE_PARSER
++	select ASN1_DECODER_LEGACY
 +	help
-+	  This option chooses MbedTLS certificate library for MS authenticode
++	  This option chooses legacy certificate library for MS authenticode
 +	  parser.
 +
  if SPL
  
- config SPL_ASYMMETRIC_PUBLIC_KEY_MBEDTLS
-diff --git a/lib/mbedtls/Makefile b/lib/mbedtls/Makefile
-index 128a29c512f..488b66402b3 100644
---- a/lib/mbedtls/Makefile
-+++ b/lib/mbedtls/Makefile
-@@ -17,6 +17,7 @@ obj-$(CONFIG_$(SPL_)ASYMMETRIC_PUBLIC_KEY_MBEDTLS) += \
- obj-$(CONFIG_$(SPL_)X509_CERTIFICATE_PARSER_MBEDTLS) += \
- 	x509_cert_parser.o
- obj-$(CONFIG_$(SPL_)PKCS7_MESSAGE_PARSER_MBEDTLS) += pkcs7_parser.o
-+obj-$(CONFIG_$(SPL_)MSCODE_PARSER_MBEDTLS) += mscode_parser.o
- 
- # MbedTLS crypto library
- obj-$(CONFIG_MBEDTLS_LIB) += mbedtls_lib_crypto.o
-diff --git a/lib/mbedtls/mscode_parser.c b/lib/mbedtls/mscode_parser.c
-new file mode 100644
-index 00000000000..c3805c6503c
---- /dev/null
-+++ b/lib/mbedtls/mscode_parser.c
-@@ -0,0 +1,123 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * MSCode parser using MbedTLS ASN1 library
-+ *
-+ * Copyright (c) 2024 Linaro Limited
-+ * Author: Raymond Mao <raymond.mao@linaro.org>
-+ */
-+
-+#include <linux/kernel.h>
-+#include <linux/err.h>
-+#include <crypto/pkcs7.h>
-+#include <crypto/mscode.h>
-+
-+/*
-+ * Parse a Microsoft Individual Code Signing blob
-+ *
-+ * U.P.SEQUENCE {
-+ *    U.P.OBJECTIDENTIFIER 1.3.6.1.4.1.311.2.1.15 (SPC_PE_IMAGE_DATA_OBJID)
-+ *    U.P.SEQUENCE {
-+ *       U.P.BITSTRING NaN : 0 unused bit(s);
-+ *       [C.P.0] {
-+ *          [C.P.2] {
-+ *             [C.P.0] <arbitrary string>
-+ *          }
-+ *       }
-+ *    }
-+ * }
-+ * U.P.SEQUENCE {
-+ *    U.P.SEQUENCE {
-+ *       U.P.OBJECTIDENTIFIER <digest algorithm OID>
-+ *       U.P.NULL
-+ *    }
-+ *    U.P.OCTETSTRING <PE image digest>
-+ * }
-+ *
-+ * @ctx: PE file context.
-+ * @content_data: content data pointer.
-+ * @data_len: content data length.
-+ * @asn1hdrlen: ASN1 header length.
-+ */
-+int mscode_parse(void *ctx, const void *content_data, size_t data_len,
-+		 size_t asn1hdrlen)
-+{
-+	struct pefile_context *_ctx = ctx;
-+	unsigned char *p = (unsigned char *)content_data;
-+	unsigned char *end = (unsigned char *)content_data + data_len;
-+	size_t len = 0;
-+	int ret;
-+	unsigned char *inner_p;
-+	size_t seq_len = 0;
-+
-+	ret = mbedtls_asn1_get_tag(&p, end, &seq_len,
-+				   MBEDTLS_ASN1_CONSTRUCTED |
-+				   MBEDTLS_ASN1_SEQUENCE);
-+	if (ret)
-+		return ret;
-+
-+	inner_p = p;
-+	ret = mbedtls_asn1_get_tag(&inner_p, inner_p + seq_len, &len,
-+				   MBEDTLS_ASN1_OID);
-+	if (ret)
-+		return ret;
-+
-+	/* Sanity check on the PE Image Data OID (1.3.6.1.4.1.311.2.1.15) */
-+	if (MBEDTLS_OID_CMP_RAW(MBEDTLS_OID_MICROSOFT_PEIMAGEDATA, inner_p,
-+				len))
-+		return -EINVAL;
-+
-+	p += seq_len;
-+	ret = mbedtls_asn1_get_tag(&p, end, &seq_len,
-+				   MBEDTLS_ASN1_CONSTRUCTED |
-+				   MBEDTLS_ASN1_SEQUENCE);
-+	if (ret)
-+		return ret;
-+
-+	ret = mbedtls_asn1_get_tag(&p, p + seq_len, &seq_len,
-+				   MBEDTLS_ASN1_CONSTRUCTED |
-+				   MBEDTLS_ASN1_SEQUENCE);
-+	if (ret)
-+		return ret;
-+
-+	inner_p = p;
-+
-+	/*
-+	 * Check if the inner sequence contains a supported hash
-+	 * algorithm OID
-+	 */
-+	ret = mbedtls_asn1_get_tag(&inner_p, inner_p + seq_len, &len,
-+				   MBEDTLS_ASN1_OID);
-+	if (ret)
-+		return ret;
-+
-+	if (!MBEDTLS_OID_CMP_RAW(MBEDTLS_OID_DIGEST_ALG_MD5, inner_p, len))
-+		_ctx->digest_algo = "md5";
-+	else if (!MBEDTLS_OID_CMP_RAW(MBEDTLS_OID_DIGEST_ALG_SHA1, inner_p,
-+				      len))
-+		_ctx->digest_algo = "sha1";
-+	else if (!MBEDTLS_OID_CMP_RAW(MBEDTLS_OID_DIGEST_ALG_SHA224, inner_p,
-+				      len))
-+		_ctx->digest_algo = "sha224";
-+	else if (!MBEDTLS_OID_CMP_RAW(MBEDTLS_OID_DIGEST_ALG_SHA256, inner_p,
-+				      len))
-+		_ctx->digest_algo = "sha256";
-+	else if (!MBEDTLS_OID_CMP_RAW(MBEDTLS_OID_DIGEST_ALG_SHA384, inner_p,
-+				      len))
-+		_ctx->digest_algo = "sha384";
-+	else if (!MBEDTLS_OID_CMP_RAW(MBEDTLS_OID_DIGEST_ALG_SHA512, inner_p,
-+				      len))
-+		_ctx->digest_algo = "sha512";
-+
-+	if (!_ctx->digest_algo)
-+		return -EINVAL;
-+
-+	p += seq_len;
-+	ret = mbedtls_asn1_get_tag(&p, end, &len, MBEDTLS_ASN1_OCTET_STRING);
-+	if (ret)
-+		return ret;
-+
-+	_ctx->digest = p;
-+	_ctx->digest_len = len;
-+
-+	return 0;
-+}
+ config SPL_ASYMMETRIC_PUBLIC_KEY_LEGACY
 -- 
 2.25.1
 
