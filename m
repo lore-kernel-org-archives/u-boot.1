@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10FD4CF34B6
-	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 15:49:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 524B4CF34B6
+	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 15:49:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 83FB888EF8;
-	Thu,  3 Oct 2024 17:47:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E692888E7A;
+	Thu,  3 Oct 2024 17:47:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wC9oPP7W";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XE91zOjv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C7E9888F65; Thu,  3 Oct 2024 17:47:35 +0200 (CEST)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
+ id 4A23C88F95; Thu,  3 Oct 2024 17:47:37 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E4BA88E7A
- for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 17:47:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5AB6888F5E
+ for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 17:47:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-37cd8a5aac9so709273f8f.2
- for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 08:47:33 -0700 (PDT)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-42cbface8d6so14487815e9.3
+ for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 08:47:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1727970452; x=1728575252; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1727970454; x=1728575254; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YReqvMd/BxfFFS2kjHJgaJSXZI3pm+qMN/lkAT63YpM=;
- b=wC9oPP7W654EgF92w53jOfNWTbxfssbU4FGH5nA2hdwbzq+f3NIJNHhtvJa3iHbUqW
- k90Z5WShD2RzWvpdhawe4yfhIT2KnLpXPbz0hQZ+lziO11elDiJQwxSdXFGBf/v+Kwlz
- bES8R8Ohb1OVjSl7SLDmfG5vG8Og9aL6ldBU8OkdTxraf70YleA2S1nAuHR5eTgJS3Kq
- zPlMEZtvHwCEJj5UOzupjkVrf0oKLLIPwVEHjRecviTdkzWTumYhTnxcrNHbDPhwCZ4r
- j0dVdUEoS163QTD/dA8mfgkPXSfW3lJ96tI1Wv++DCE+RMW7VkdnFLWfwxYJkZFA5pg4
- AB7g==
+ bh=iR7fwaiaf6ymrpq1AznpcyUra4kodMDvFIUQi7Nly3U=;
+ b=XE91zOjvGjM+wN6SuJYG6SgZ7syfCeGLdhtHaTgMUFqLX3xfPHsmk+7BrNR+TfpRcP
+ VS+gkyvZlMYAFU1atDYRyehMBaP8u6CThQST5DQHZrlwgxaOzIFbqUslDGLZtdQYpKfH
+ cupHVE5CNHhErFP8Aoscq1l+UKQHeuC34l7e8w1u1OHTIn0nP/6QwDeBIKQCU/dl0O05
+ 2jj6ULrFTryCffZ5EQ9f+ChnuEO02bCtsKeCn+1CL/Me1D41fiy4ksBMSAuBWW5709IV
+ OGB/4wzbsz51+9V0yjXDwZKac4Zp7xUtcGeAIG/Oltp0LlnUhVjRc4OtgfJ+Mu3SKV7f
+ T1bw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727970452; x=1728575252;
+ d=1e100.net; s=20230601; t=1727970454; x=1728575254;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YReqvMd/BxfFFS2kjHJgaJSXZI3pm+qMN/lkAT63YpM=;
- b=ONZD3LMyf6kQkJle7c752mwfmG6t8WrIveAAW+WHI0NLon9o2Bg9SA0m8t1aOKM21D
- sYNss7rpwCTmfmVaJKXKtUNogtdiDv9kcLGLQC+JgKYjtbnW4grlHjgvwb1hwla75n0C
- rh1j7fx9KyZLlKcvrezCfOKIuiTdFtGznf6A/OmENRigs2YR/X031mORwP4xvCQqD1pc
- kLQ38DkwTQPoZf9F52vP2Cs3g1WI688s30UyA0DrudpvyPhl3Ih9k00NbhZCB0e7O6C5
- 0Xe1NiUr9VAh6Tr4ZaC0BNn+7/PhikrcEsI3BKpmNUQTqGJpmZGHTtqpR6QgW0Ty0Mev
- yd/w==
-X-Gm-Message-State: AOJu0Yyyi9+J6tfpL/vEht074RwdxxSERX4MhpFTzbxZgh/TIZ/wlKLK
- t9wplMKncz0U8v7medHx1DWWupQ1tDDNW7WVEInyFsuWpgjRQFFL8eOTn2g0QrnnOIKNK+qqz+4
- fqAja3sBn
-X-Google-Smtp-Source: AGHT+IEoFUeewcJsM8zD7qhRG+f7oAOEdR+zcsmCFmjJE4gwLaOTLMsBi778x+Lxa7lueuGLiI2+6A==
-X-Received: by 2002:adf:a152:0:b0:37c:d179:2f77 with SMTP id
- ffacd0b85a97d-37cfb8a48fdmr4977874f8f.12.1727970452319; 
- Thu, 03 Oct 2024 08:47:32 -0700 (PDT)
+ bh=iR7fwaiaf6ymrpq1AznpcyUra4kodMDvFIUQi7Nly3U=;
+ b=rvxusypdwmTcT7fLy1oumcXc6BwlGt1VKMn/f+Dd2h3SlQqIaWzo0gx54y/edZnyfJ
+ x+tNZTz18XoIfPX3kgAzU9AMiFH/nE7KZ3Cpnm22D5XDRVJM/HmmuS1ieWoOsbuV28Nm
+ IsXt+yRNFX1xoriXIySCtCkkXujhH7iJ8x9qF9gAklIJOWqQd/eMWQmCBNoTf6SJyGnW
+ KERM7PjXLlEcRBloTvSufjotC3GplsriRJUpjPsh2cMD73ZAR5xXSlIUg/RT6CP08rKL
+ 8Z1gIRZWt8xVFA/g28Uooui67hy55DQkLJqV6c8Hvd8sCiTE1YU0EGldarhhzxlmpGka
+ GmNQ==
+X-Gm-Message-State: AOJu0YwN5C43XtTzUS3p8LzqHxcBL9yv/qt7VBggRxZ+CdTMePMjRNQH
+ OhvZFDZ0ghJSZi4kLtG6A4l7naWAfZKwpkCpvCWkOFmxoCNKbGVVq36j4fjxRQmx/KVOH4JiWqH
+ aKoD4VqSK
+X-Google-Smtp-Source: AGHT+IE8Ippuv4xFZkJWmuNMuzV1y6NJB9H4eBpC4rrHi0jJC9IAeALxFeOttzoooLs8Cphk4uQZZA==
+X-Received: by 2002:a05:6000:1211:b0:37c:d1ea:f1ce with SMTP id
+ ffacd0b85a97d-37cfb9d318amr5296393f8f.25.1727970454109; 
+ Thu, 03 Oct 2024 08:47:34 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:d888:7a58:deed:47d6])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d08245059sm1541748f8f.55.2024.10.03.08.47.30
+ ffacd0b85a97d-37d08245059sm1541748f8f.55.2024.10.03.08.47.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Oct 2024 08:47:31 -0700 (PDT)
+ Thu, 03 Oct 2024 08:47:33 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -73,11 +73,15 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Anton Antonov <Anton.Antonov@arm.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH v11 25/29] CI: add qemu_arm64_lwip to the test matrix
-Date: Thu,  3 Oct 2024 17:46:29 +0200
-Message-Id: <b7cc4bc4d5aea1310401c107f7836a9eadd6a493.1727968902.git.jerome.forissier@linaro.org>
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Sumit Garg <sumit.garg@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Robert Marko <robert.marko@sartura.hr>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Andrew Davis <afd@ti.com>
+Subject: [PATCH v11 26/29] MAINTAINERS: net-lwip: add myself as a maintainer
+Date: Thu,  3 Oct 2024 17:46:30 +0200
+Message-Id: <97a2a2f8bceaf42aef74ea2daef9d1d6bb4445ac.1727968902.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1727968902.git.jerome.forissier@linaro.org>
 References: <cover.1727968902.git.jerome.forissier@linaro.org>
@@ -99,39 +103,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Build and run qemu_arm64_lwip_defconfig in CI. This tests the lightweight
-IP (lwIP) implementation of the dhcp, tftpboot and ping commands.
+Add myself as a maintainer for the lwIP network stack integration code
+and network commands as well as the sandbox ethernet driver for lwIP.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 ---
- .azure-pipelines.yml | 7 +++++++
- 1 file changed, 7 insertions(+)
+ MAINTAINERS | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-index 93111eb6127..59fddb96a48 100644
---- a/.azure-pipelines.yml
-+++ b/.azure-pipelines.yml
-@@ -238,6 +238,10 @@ stages:
-           cd \${WORK_DIR}
-           git config --global --add safe.directory \${WORK_DIR}
-           git clone --depth=1 https://source.denx.de/u-boot/u-boot-test-hooks /tmp/uboot-test-hooks
-+          # qemu_arm64_lwip_defconfig is the same as qemu_arm64 but with NET_LWIP enabled.
-+          # The test config and the boardenv file from qemu_arm64 can be re-used so create symlinks
-+          ln -s conf.qemu_arm64_na /tmp/uboot-test-hooks/bin/travis-ci/conf.qemu_arm64_lwip_na
-+          ln -s u_boot_boardenv_qemu_arm64_na.py /tmp/uboot-test-hooks/py/travis-ci/u_boot_boardenv_qemu_arm64_lwip_na.py
-           ln -s travis-ci /tmp/uboot-test-hooks/bin/\`hostname\`
-           ln -s travis-ci /tmp/uboot-test-hooks/py/\`hostname\`
-           grub-mkimage --prefix=\"\" -o ~/grub_x86.efi -O i386-efi normal echo lsefimmap lsefi lsefisystab efinet tftp minicmd
-@@ -415,6 +419,9 @@ stages:
-         qemu_arm64:
-           TEST_PY_BD: "qemu_arm64"
-           TEST_PY_TEST_SPEC: "not sleep"
-+        qemu_arm64_lwip:
-+          TEST_PY_BD: "qemu_arm64_lwip"
-+          TEST_PY_TEST_SPEC: "test_net_dhcp or test_net_ping or test_net_tftpboot"
-         qemu_m68k:
-           TEST_PY_BD: "M5208EVBE"
-           TEST_PY_ID: "--id qemu"
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 7ab39d91a55..27d6de67b21 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1352,6 +1352,17 @@ F:	drivers/net/
+ F:	include/net.h
+ F:	net/
+ 
++NETWORK (LWIP)
++M:	Jerome Forissier <jerome.forissier@linaro.org>
++S:	Maintained
++F:	cmd/net-lwip.c
++F:	configs/qemu_arm64_lwip_defconfig
++F:	drivers/net/sandbox-lwip.c
++F:	include/net-lwip.h
++F:	lib/lwip/Makefile
++F:	lib/lwip/u-boot/
++F:	net/lwip/
++
+ NIOS
+ M:	Thomas Chou <thomas@wytron.com.tw>
+ S:	Maintained
 -- 
 2.40.1
 
