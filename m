@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4F5DCFA745
-	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 05:02:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89767CFA745
+	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 05:02:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 742B588F95;
+	by phobos.denx.de (Postfix) with ESMTP id C839C890AD;
 	Fri,  4 Oct 2024 06:57:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WoZp1V+C";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YfuBA6oD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CBCDD88D7F; Fri,  4 Oct 2024 00:05:40 +0200 (CEST)
-Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
- [IPv6:2607:f8b0:4864:20::829])
+ id 9D71288D7F; Fri,  4 Oct 2024 00:06:18 +0200 (CEST)
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD46488D94
- for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 00:05:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6DEFB88D94
+ for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 00:06:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qt1-x829.google.com with SMTP id
- d75a77b69052e-4581e7f31eeso11112221cf.0
- for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 15:05:38 -0700 (PDT)
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-6cb399056b4so11302616d6.0
+ for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 15:06:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1727993137; x=1728597937; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1727993175; x=1728597975; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UP2fvAgPN+fmqR4PGJist9b0sruintAhJQAjyc30bWE=;
- b=WoZp1V+CSosjSMbu8q+AbiO+CnAcwkSAEqE0qLvcnLRVNrU7xfryD8AdgxPfB82/AR
- +EeqCcFJVYyFfKUsDP49MJZeTnPq9VzspfL9hg0QfhrBed0D1rZ7ev0VuayrJUGJm+hI
- 93vgY08/TkcUrBEZhJIYG/xeZB5v5p9oyGKWcIVnd8TPQMAscLKOua3zExxUQmTqRdkj
- +pliIdQaXFAktxmskiur6O9DvXSmfzR93TuU4Rlg3aXZZtUYhMOAS0VcGDPd3b+b4s/2
- JclzDs1LkeNWGa8FWlZqSxB5h+a8PZTfjzhx+0EoI58RDYT62uqilon/D/6fhJwVynDz
- P88A==
+ bh=NNNpZDhxGI6dxoYja7UkxJFzNuRudv341H/vEtfWniU=;
+ b=YfuBA6oDccJGSJavI/VFoknMDIO+LycORI1W8ks3w1JpJ+vEtc4N6FoP/xFcRRw0lL
+ TgO7m18mIl3iH5CQWRV9OHyjvNoMzgaPeBRykI6dSr28lleNPBevZuxIMd0eZYlJlSoe
+ B5JT6PBi6QSLyZCaaasOY16fgWR2FH1rRp5hure0Uml+Fq/pSQcvf7/4m3kdzF0KeWpq
+ tbSLEVsp92l4Ys+CYhvecNvz0nIx/SvgTfLBFZUCYCWTFqnr3+GHRybNKolsM4TRF4uK
+ KwWNI3L/McXJ0ILtYxICm3CHJIiGqdG8bmd6uFqGbXOgIF0MlK3ELDkrOsBx9lG4szog
+ cTFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727993137; x=1728597937;
+ d=1e100.net; s=20230601; t=1727993175; x=1728597975;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UP2fvAgPN+fmqR4PGJist9b0sruintAhJQAjyc30bWE=;
- b=IHQWCanzkw4TUBgQUjiO62KJ64s3gKWWs2Ht31HPz8YZC+IkmI6YdCR9esalXx/rqU
- VwbGc6tdKJwOH1V1KEcuZFp5RFV3gIwL/KCN1n97BRqYfjugEd67nwjSoAA37jr+1PF7
- KrM8MyoTmPap7YGYr9TBNS+XqJYYhrfeL5FlurJanc9+mO712IOHJHCvXSvZGsWfQ7Fr
- e36dGltgDm5tDRa3Mb9E9LGVsVvmjaobexv4LpymZIo6+9Q7HBBVy30MhctDYalf+wN8
- yz3xROwRKPrZT0yOAmjEJZ02MNcZzJodXPx7wHc56Ku2UfZ9svRAPAAxZkzW8h7uk3MR
- Fgmg==
-X-Gm-Message-State: AOJu0YxWg6+9b8NrgGeLyhYLtCNc/R6A91lThTd10vWHRiXlD8Kg84fh
- 1cOucPw+AxTvOSo7N8bjyXD5WNDPuwlam82tf63D5VIK1ho/O+Uml9US1k+ScDByIsAtru7Wxvz
- o
-X-Google-Smtp-Source: AGHT+IFz5iQJlRsyHJXggGj4JDBCkZOzgRAQkj0i6YXbJUYBFHLa+WqiqrY74WZVmxUgd3abldOoIA==
-X-Received: by 2002:ac8:5792:0:b0:45b:1d3:d9a8 with SMTP id
- d75a77b69052e-45d9ba85fdcmr10226361cf.27.1727993137251; 
- Thu, 03 Oct 2024 15:05:37 -0700 (PDT)
+ bh=NNNpZDhxGI6dxoYja7UkxJFzNuRudv341H/vEtfWniU=;
+ b=Gx0LbEtDStRHoM4F3W8XBQtaHzAzrtmuKK2gug6Bdmp2AD66/Hdp06HgHVJGWHI2PZ
+ 35qnoYoNO5eoph0NUS21Mgae0gq5+uVd5nMejt5NAQEUSMYzLrSdlcIuqQsvw9B2Af1w
+ gI8knIWI8xaOlMSW5vY5AYLMeiZXmn/wHNgnpzEaHCRoS/Nql+FUDmTLTIRvOaeJzF1H
+ o7mTo7P94xB0jIfR1tM/W8Botg+d7T/D4hL6o1a2H9Q+gf4wkogt1q19OPTvHBlPZ522
+ qpCG9P9zkVu5J4y7pllct4boyo2zOK94MbGmIcHYHO/VOp28aYLI0diA5W7GhoVxHQ4M
+ bBBA==
+X-Gm-Message-State: AOJu0YxAbogoA+fZ0B2ncrOawXYvD5eXd/WRcz1+Xod3aMayr+Gkn7m2
+ 3AXegRzEqpGeMIQ4ld0H+wA9McJCWjihNfrxIyrrViYzuWzqYI3g4Y3ffnN0CJZqB3wDex7HnML
+ +
+X-Google-Smtp-Source: AGHT+IGGzMSqpj987GOKDYGILzhRlGO2O2MeZNYVKopKQ3250xs0/QUT9a5eTPus6TdMZ7txxQMbIw==
+X-Received: by 2002:a05:6214:588a:b0:6cb:5aa6:97a with SMTP id
+ 6a1803df08f44-6cb9a30ce97mr11829056d6.24.1727993175135; 
+ Thu, 03 Oct 2024 15:06:15 -0700 (PDT)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-45d92ddf5c4sm9001541cf.18.2024.10.03.15.05.33
+ d75a77b69052e-45d92ddf5c4sm9001541cf.18.2024.10.03.15.06.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Oct 2024 15:05:36 -0700 (PDT)
+ Thu, 03 Oct 2024 15:06:14 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: manish.pandey2@arm.com, Raymond Mao <raymond.mao@linaro.org>,
@@ -78,21 +78,22 @@ Cc: manish.pandey2@arm.com, Raymond Mao <raymond.mao@linaro.org>,
  Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sean Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Andrew Davis <afd@ti.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Sean Anderson <seanga2@gmail.com>,
+ Andrew Davis <afd@ti.com>, Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
  Alexander Gendin <agendin@matrox.com>,
- Jonathan Humphreys <j-humphreys@ti.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Marek Vasut <marex@denx.de>, Paul Barker <paul.barker.ct@bp.renesas.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Jonas Karlman <jonas@kwiboo.se>, Kongyang Liu <seashell11234455@gmail.com>,
- Greg Malysa <greg.malysa@timesys.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Eddie James <eajames@linux.ibm.com>
-Subject: [PATCH v8 26/27] test: Remove ASN1 library test
-Date: Thu,  3 Oct 2024 14:50:39 -0700
-Message-Id: <20241003215112.3103601-27-raymond.mao@linaro.org>
+ Jonathan Humphreys <j-humphreys@ti.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Marek Vasut <marex@denx.de>,
+ Linus Walleij <linus.walleij@linaro.org>,
+ Kongyang Liu <seashell11234455@gmail.com>,
+ Greg Malysa <greg.malysa@timesys.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Anand Moon <linux.amoon@gmail.com>
+Subject: [PATCH v8 27/27] configs: enable MbedTLS as default setting
+Date: Thu,  3 Oct 2024 14:50:40 -0700
+Message-Id: <20241003215112.3103601-28-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20241003215112.3103601-1-raymond.mao@linaro.org>
 References: <20241003215112.3103601-1-raymond.mao@linaro.org>
@@ -115,43 +116,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With MBEDTLS_LIB_X509 enabled, we don't build the original ASN1 lib,
-So remove it from test.
+Enable MbedTLS as default setting for qemu arm64 and sandbox.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 Changes in v2
-- Initial patch.
+- None.
 Changes in v3
 - None.
 Changes in v4
 - None.
 Changes in v5
-- None.
+- Remove unused config MBEDTLS_LIB_TLS.
+- Remove EFI_SECURE_BOOT from the default config.
 Changes in v6
-- None.
+- Remove MBEDTLS_LIB_CRYPTO and MBEDTLS_LIB_X509.
 Changes in v7
 - None.
 Changes in v8
 - None
 
- test/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ configs/qemu_arm64_defconfig | 1 +
+ configs/sandbox_defconfig    | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/test/Kconfig b/test/Kconfig
-index e2ec0994a2e..558a9cd49b4 100644
---- a/test/Kconfig
-+++ b/test/Kconfig
-@@ -32,7 +32,7 @@ if UT_LIB
- 
- config UT_LIB_ASN1
- 	bool "Unit test for asn1 compiler and decoder function"
--	depends on SANDBOX
-+	depends on SANDBOX && !MBEDTLS_LIB_X509
- 	default y
- 	imply ASYMMETRIC_KEY_TYPE
- 	imply ASYMMETRIC_PUBLIC_KEY_SUBTYPE
+diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
+index 088ba39f18e..6d18a8571ca 100644
+--- a/configs/qemu_arm64_defconfig
++++ b/configs/qemu_arm64_defconfig
+@@ -68,5 +68,6 @@ CONFIG_TPM2_MMIO=y
+ CONFIG_USB_EHCI_HCD=y
+ CONFIG_USB_EHCI_PCI=y
+ CONFIG_SEMIHOSTING=y
++CONFIG_MBEDTLS_LIB=y
+ CONFIG_TPM=y
+ CONFIG_EFI_HTTP_BOOT=y
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index a50fbce8d06..0ecdeebb45f 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -345,6 +345,7 @@ CONFIG_FS_CBFS=y
+ CONFIG_FS_CRAMFS=y
+ CONFIG_ADDR_MAP=y
+ CONFIG_CMD_DHRYSTONE=y
++CONFIG_MBEDTLS_LIB=y
+ CONFIG_ECDSA=y
+ CONFIG_ECDSA_VERIFY=y
+ CONFIG_TPM=y
 -- 
 2.25.1
 
