@@ -4,83 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 602ECCF34B0
-	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 15:48:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 631F5CF34B6
+	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 15:48:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3FE0288F08;
-	Thu,  3 Oct 2024 17:47:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9ABDC88F0A;
+	Thu,  3 Oct 2024 17:47:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GvUjdLrE";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kMqHK3W7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9038C88F0C; Thu,  3 Oct 2024 17:47:23 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 331FC88E7A; Thu,  3 Oct 2024 17:47:25 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4EF7388EE8
- for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 17:47:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4545788EFA
+ for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 17:47:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-42cc8782869so11173555e9.2
- for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 08:47:21 -0700 (PDT)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-42cb0f28bfbso9380935e9.1
+ for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 08:47:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1727970440; x=1728575240; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1727970442; x=1728575242; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Y3DgJBEUpqOFtghcTQksmrU3/9ps6EIq+mtZv3cEV6U=;
- b=GvUjdLrEIagILneklc+suidLWJrWtE8H2q758GML9liAgif0fDdIGDfqxpYkV0wt+4
- WtJBsIxghHlIMbvthu8Uq9lsD+nZXe9OSCQQlfQKNwVmbNBsECNTZZ+zMR2Po0Nibo5c
- Xk2g2W6+9vzFtJ+OytqaOO/HKKceAUqCWnJfVYrpUucUsQO0JnVzdLo08+g6nS08WJbG
- nJT3N+s4OOwLDu0Oae2HnWHjfUNC5B3I5Yx/UB+q/61YcpP93xVbTSqETB+3e04S4ud2
- IYEF4Z1qVGUCjzjvq0W69TvMFbXKYg9EYQePjndUwkqc63IfmkOJ8QX2bP/N97OR/bqV
- szoQ==
+ bh=OU2VUMRGCTc+MvFx1Y4JV6qJNct5kwe7bvtCsqQAkio=;
+ b=kMqHK3W7c+OpAPM5MklH60oUf08xss+mUhEVs3x2jAWgQijaBLPXxSJ13Md5C7JX7F
+ yqp+U7Nmbph5rSbOepaCeyIRislv2IfwsVbB2PNgdFrnBHWMiewZFifg2SUeOrUcsV9O
+ E9FwNiET94Ln9LSYinyMB4gM2ORdwNXwXVNl36x4ZN5jJQ6s0XGY/S6jyNw87Jf4Lr2L
+ tl41A1+AryQBJQiArnMASYHkiXVJNY5avAauWumu0Zf/yQ0iaK3ojCFASBArsD0RrjxP
+ h77ZtNq9D+u2GgzegOJwITUXCPYYn8wV1jhdLZ/VGqmzjdZ4Fsa4fLjUkAe/Y0O8ycng
+ zXsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727970440; x=1728575240;
+ d=1e100.net; s=20230601; t=1727970442; x=1728575242;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Y3DgJBEUpqOFtghcTQksmrU3/9ps6EIq+mtZv3cEV6U=;
- b=AkPbKrvyRZj9zgPkoGb3nxCICEfYCjO/U6xFRVMAeMSML03Ean0HXxTii4siaqJ0Wx
- DVmU2bHD7qyhgCKA5Da/ARrIPhxKXpSaC/4optaiEb19kV8Wy65Ouo4IbpPLcx+MIeHE
- hsWGvG4S+m9UVirxPvcpFcUKLB06pTy6B4svwesNEuMPnbL4yBEHJyJg8GLiNlMAEC0B
- a6kWTthqPlud4IexTYWoIF+sCbuN52LRh3igR+E2QKmufVRw0FvA7rZJdg6JIB1NskEu
- q5y+lcm4D/FRpKrx6M1GGLbvXvOza6o+QiY0fOeVJdMRY7UdO8P88X3p6rWCYrU86eqp
- XJ9Q==
-X-Gm-Message-State: AOJu0YyWu+xP0SyEC5+VtUI2b5FHNCoSzOMSsujPJh1f4FLfTxTxKIUr
- UBr+BYdB0lUrLT1lS8d5+q52pEw7PSn6ZPvannAxfoe47gf1Y8YJJsEW/KifqDSMUQ98m3obrdK
- 2Dle6pCd6
-X-Google-Smtp-Source: AGHT+IFcOyE9lAtUYdIZCsnbDwKtgO2UY1gx+t1H/FCx2Sc/eO4KIOaWstpSfjW1mPiOUJ92WCwKVA==
-X-Received: by 2002:adf:eac9:0:b0:37c:d001:856d with SMTP id
- ffacd0b85a97d-37cfba059d3mr4596737f8f.42.1727970440006; 
- Thu, 03 Oct 2024 08:47:20 -0700 (PDT)
+ bh=OU2VUMRGCTc+MvFx1Y4JV6qJNct5kwe7bvtCsqQAkio=;
+ b=mXhmtZXrxqANSVTDFdpnVEsnZ0ndBfJjYM329QbuXMI6ZRAtKc6nNtXs3t6o9T5GoW
+ NJoUM4P+XFntmE+dIqTj3GAPZN5cNq7P+9r9RsivkkQUCccQRAQ2y9i6iBfcrYhOLIBS
+ slw50Qo3BOsLevrYRzY7hbtpVgt7bbfGigtw/W53zx2taP2IatRWVbWK8WxepjcuvQk7
+ 3MOPq4q/gjyJm1Bl+SSqpecpksIxzggb+s/F2SKG5LzhfLUnDz7Tg4/AVS/MtdTUdm+F
+ 57fu5DQOAA4kPU28lfqLbMaXog7mkOFd2tGzahjx1JAstLMN3MmDd9JlmsTpovrihUr4
+ Kqjw==
+X-Gm-Message-State: AOJu0Yxxw2N3B9IV113AddE3gxay7YahUJ0/skm0/rxqOI+wbJwfTfhH
+ N0z4S/YMdW3qwRrYeBDuPGc24PKzdq2JlahqGCd4IZ/+HOg4/iWE6rmRDGoMX83qAq03DsWXNZd
+ GgA4TuU8n
+X-Google-Smtp-Source: AGHT+IGHFiFjZIGqzuEMCgaszGqF5KrBpVUZDGj/PUm6z4gm/kiFEnMYUDTvcKfXJnvTHyUno7Tj2Q==
+X-Received: by 2002:a05:600c:46d1:b0:42c:bf0b:c489 with SMTP id
+ 5b1f17b1804b1-42f777c27f1mr53152185e9.18.1727970442011; 
+ Thu, 03 Oct 2024 08:47:22 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:d888:7a58:deed:47d6])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d08245059sm1541748f8f.55.2024.10.03.08.47.17
+ ffacd0b85a97d-37d08245059sm1541748f8f.55.2024.10.03.08.47.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Oct 2024 08:47:18 -0700 (PDT)
+ Thu, 03 Oct 2024 08:47:21 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
  Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
  Anton Antonov <Anton.Antonov@arm.com>,
+ Jonathan Humphreys <j-humphreys@ti.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jonathan Humphreys <j-humphreys@ti.com>
-Subject: [PATCH v11 19/29] net-lwip: add wget command
-Date: Thu,  3 Oct 2024 17:46:23 +0200
-Message-Id: <38cb9b1122ebec2f34e1a8273c0e58da47e77f36.1727968902.git.jerome.forissier@linaro.org>
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v11 20/29] net-lwip: lwIP wget supports user defined port in
+ the uri, so allow it.
+Date: Thu,  3 Oct 2024 17:46:24 +0200
+Message-Id: <c14ec8b9788c30c205f7b605c9d2b46ebdcdcc91.1727968902.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1727968902.git.jerome.forissier@linaro.org>
 References: <cover.1727968902.git.jerome.forissier@linaro.org>
@@ -102,488 +100,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for the wget command with NET_LWIP. The command normally
-expects a URL: wget [loadaddr] url, but it also accepts the legacy
-syntax: wget [loadaddr] [server:]file.
-The server IP may alternatively be supplied via ${httpserverip} which
-has higher priority than ${serverip}.
+From: Jonathan Humphreys <j-humphreys@ti.com>
 
-Based on code initially developed by Maxim U.
-
-Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-Co-developed-by: Maxim Uvarov <muvarov@gmail.com>
-Cc: Maxim Uvarov <muvarov@gmail.com>
+Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 ---
- cmd/Kconfig        |  18 ++-
- cmd/net-lwip.c     |   8 +
- include/net-lwip.h |  18 +++
- net/lwip/Makefile  |   1 +
- net/lwip/wget.c    | 363 +++++++++++++++++++++++++++++++++++++++++++++
- 5 files changed, 400 insertions(+), 8 deletions(-)
- create mode 100644 net/lwip/wget.c
+ net/lwip/wget.c | 6 ------
+ 1 file changed, 6 deletions(-)
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index b50fff78a68..8444ae45bb5 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -2010,14 +2010,6 @@ config SYS_DISABLE_AUTOLOAD
- 	  is complete.  Enable this option to disable this behavior and instead
- 	  require files to be loaded over the network by subsequent commands.
- 
--config CMD_WGET
--	bool "wget"
--	select PROT_TCP
--	default y if SANDBOX
--	help
--	  wget is a simple command to download kernel, or other files,
--	  from a http server over TCP.
--
- config CMD_PING6
- 	bool "ping6"
- 	depends on IPV6
-@@ -2125,6 +2117,16 @@ config CMD_TFTPBOOT
- 	help
- 	  tftpboot - load file via network using TFTP protocol
- 
-+config CMD_WGET
-+	bool "wget"
-+	default y if SANDBOX
-+	select PROT_TCP if NET
-+	select PROT_TCP_LWIP if NET_LWIP
-+	select PROT_DNS_LWIP if NET_LWIP
-+	help
-+	  wget is a simple command to download kernel, or other files,
-+	  from a http server over TCP.
-+
- endif  # if CMD_NET
- 
- config CMD_PXE
-diff --git a/cmd/net-lwip.c b/cmd/net-lwip.c
-index c021da6a674..42f8bd6b259 100644
---- a/cmd/net-lwip.c
-+++ b/cmd/net-lwip.c
-@@ -35,3 +35,11 @@ U_BOOT_CMD(
- 	"hostname [envvar]"
- );
- #endif
-+
-+#if defined(CONFIG_CMD_WGET)
-+U_BOOT_CMD(
-+	wget,   3,      1,      do_wget,
-+	"boot image via network using HTTP protocol",
-+	"[loadAddress] URL"
-+);
-+#endif
-diff --git a/include/net-lwip.h b/include/net-lwip.h
-index ff9d03b23e8..1c3583f82a1 100644
---- a/include/net-lwip.h
-+++ b/include/net-lwip.h
-@@ -16,8 +16,26 @@ void net_lwip_remove_netif(struct netif *netif);
- struct netif *net_lwip_get_netif(void);
- int net_lwip_rx(struct udevice *udev, struct netif *netif);
- 
-+/**
-+ * wget_with_dns() - runs dns host IP address resulution before wget
-+ *
-+ * @dst_addr:	destination address to download the file
-+ * @uri:	uri string of target file of wget
-+ * Return:	downloaded file size, negative if failed
-+ */
-+
-+int wget_with_dns(ulong dst_addr, char *uri);
-+/**
-+ * wget_validate_uri() - varidate the uri
-+ *
-+ * @uri:	uri string of target file of wget
-+ * Return:	true if uri is valid, false if uri is invalid
-+ */
-+bool wget_validate_uri(char *uri);
-+
- int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
- int do_dns(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
- int do_ping(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
-+int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[]);
- 
- #endif /* __NET_LWIP_H__ */
-diff --git a/net/lwip/Makefile b/net/lwip/Makefile
-index 645d8a8c457..f2558f8763a 100644
---- a/net/lwip/Makefile
-+++ b/net/lwip/Makefile
-@@ -5,3 +5,4 @@ obj-$(CONFIG_CMD_DHCP) += dhcp.o
- obj-$(CONFIG_CMD_DNS) += dns.o
- obj-$(CONFIG_CMD_PING) += ping.o
- obj-$(CONFIG_CMD_TFTPBOOT) += tftp.o
-+obj-$(CONFIG_CMD_WGET) += wget.o
 diff --git a/net/lwip/wget.c b/net/lwip/wget.c
-new file mode 100644
-index 00000000000..e8768fc2acd
---- /dev/null
+index e8768fc2acd..b495ebd1aa9 100644
+--- a/net/lwip/wget.c
 +++ b/net/lwip/wget.c
-@@ -0,0 +1,363 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/* Copyright (C) 2024 Linaro Ltd. */
-+
-+#include <command.h>
-+#include <console.h>
-+#include <display_options.h>
-+#include <efi_loader.h>
-+#include <image.h>
-+#include <lwip/apps/http_client.h>
-+#include <lwip/timeouts.h>
-+#include <mapmem.h>
-+#include <net.h>
-+#include <time.h>
-+
-+#define SERVER_NAME_SIZE 200
-+#define HTTP_PORT_DEFAULT 80
-+#define PROGRESS_PRINT_STEP_BYTES (100 * 1024)
-+
-+enum done_state {
-+        NOT_DONE = 0,
-+        SUCCESS = 1,
-+        FAILURE = 2
-+};
-+
-+struct wget_ctx {
-+	char *path;
-+	ulong daddr;
-+	ulong saved_daddr;
-+	ulong size;
-+	ulong prevsize;
-+	ulong start_time;
-+	enum done_state done;
-+};
-+
-+static int parse_url(char *url, char *host, u16 *port, char **path)
-+{
-+	char *p, *pp;
-+	long lport;
-+
-+	p = strstr(url, "http://");
-+	if (!p) {
-+		log_err("only http:// is supported\n");
-+		return -EINVAL;
-+	}
-+
-+	p += strlen("http://");
-+
-+	/* Parse hostname */
-+	pp = strchr(p, ':');
-+	if (!pp)
-+		pp = strchr(p, '/');
-+	if (!pp)
-+		return -EINVAL;
-+
-+	if (p + SERVER_NAME_SIZE <= pp)
-+		return -EINVAL;
-+
-+	memcpy(host, p, pp - p);
-+	host[pp - p] = '\0';
-+
-+	if (*pp == ':') {
-+		/* Parse port number */
-+		p = pp + 1;
-+		lport = simple_strtol(p, &pp, 10);
-+		if (pp && *pp != '/')
-+			return -EINVAL;
-+		if (lport > 65535)
-+			return -EINVAL;
-+		*port = (u16)lport;
-+	} else {
-+		*port = HTTP_PORT_DEFAULT;
-+	}
-+	if (*pp != '/')
-+		return -EINVAL;
-+	*path = pp;
-+
-+	return 0;
-+}
-+
-+/*
-+ * Legacy syntax support
-+ * Convert [<server_name_or_ip>:]filename into a URL if needed
-+ */
-+static int parse_legacy_arg(char *arg, char *nurl, size_t rem)
-+{
-+	char *p = nurl;
-+	size_t n;
-+	char *col = strchr(arg, ':');
-+	char *env;
-+	char *server;
-+	char *path;
-+
-+	if (strstr(arg, "http") == arg) {
-+		n = snprintf(nurl, rem, "%s", arg);
-+		if (n < 0 || n > rem)
-+			return -1;
-+		return 0;
-+	}
-+
-+	n = snprintf(p, rem, "%s", "http://");
-+	if (n < 0 || n > rem)
-+		return -1;
-+	p += n;
-+	rem -= n;
-+
-+	if (col) {
-+		n = col - arg;
-+		server = arg;
-+		path = col + 1;
-+	} else {
-+		env = env_get("httpserverip");
-+		if (!env)
-+			env = env_get("serverip");
-+		if (!env) {
-+			log_err("error: httpserver/serverip has to be set\n");
-+			return -1;
-+		}
-+		n = strlen(env);
-+		server = env;
-+		path = arg;
-+	}
-+
-+	if (rem < n)
-+		return -1;
-+	strncpy(p, server, n);
-+	p += n;
-+	rem -= n;
-+	if (rem < 1)
-+		return -1;
-+	*p = '/';
-+	p++;
-+	rem--;
-+	n = strlen(path);
-+	if (rem < n)
-+		return -1;
-+	strncpy(p, path, n);
-+	p += n;
-+	rem -= n;
-+	if (rem < 1)
-+		return -1;
-+	*p = '\0';
-+
-+	return 0;
-+}
-+
-+static err_t httpc_recv_cb(void *arg, struct altcp_pcb *pcb, struct pbuf *pbuf,
-+			   err_t err)
-+{
-+	struct wget_ctx *ctx = arg;
-+	struct pbuf *buf;
-+
-+	if (!pbuf)
-+		return ERR_BUF;
-+
-+	if (!ctx->start_time)
-+		ctx->start_time = get_timer(0);
-+
-+	for (buf = pbuf; buf; buf = buf->next) {
-+		memcpy((void *)ctx->daddr, buf->payload, buf->len);
-+		ctx->daddr += buf->len;
-+		ctx->size += buf->len;
-+		if (ctx->size - ctx->prevsize > PROGRESS_PRINT_STEP_BYTES) {
-+			printf("#");
-+			ctx->prevsize = ctx->size;
-+		}
-+	}
-+
-+	altcp_recved(pcb, pbuf->tot_len);
-+	pbuf_free(pbuf);
-+	return ERR_OK;
-+}
-+
-+static void httpc_result_cb(void *arg, httpc_result_t httpc_result,
-+			    u32_t rx_content_len, u32_t srv_res, err_t err)
-+{
-+	struct wget_ctx *ctx = arg;
-+	ulong elapsed;
-+
-+	if (httpc_result != HTTPC_RESULT_OK) {
-+		log_err("\nHTTP client error %d\n", httpc_result);
-+		ctx->done = FAILURE;
-+		return;
-+	}
-+	if (srv_res != 200) {
-+		log_err("\nHTTP server error %d\n", srv_res);
-+		ctx->done = FAILURE;
-+		return;
-+	}
-+
-+	elapsed = get_timer(ctx->start_time);
-+	if (!elapsed)
-+		elapsed = 1;
-+	if (rx_content_len > PROGRESS_PRINT_STEP_BYTES)
-+		printf("\n");
-+	printf("%u bytes transferred in %lu ms (", rx_content_len, elapsed);
-+	print_size(rx_content_len / elapsed * 1000, "/s)\n");
-+	printf("Bytes transferred = %lu (%lx hex)\n", ctx->size, ctx->size);
-+	efi_set_bootdev("Net", "", ctx->path, map_sysmem(ctx->saved_daddr, 0),
-+			rx_content_len);
-+	if (env_set_hex("filesize", rx_content_len) ||
-+	    env_set_hex("fileaddr", ctx->saved_daddr)) {
-+		log_err("Could not set filesize or fileaddr\n");
-+		ctx->done = FAILURE;
-+		return;
-+	}
-+
-+	ctx->done = SUCCESS;
-+}
-+
-+static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
-+{
-+	char server_name[SERVER_NAME_SIZE];
-+	httpc_connection_t conn;
-+	httpc_state_t *state;
-+	struct netif *netif;
-+	struct wget_ctx ctx;
-+	char *path;
-+	u16 port;
-+
-+	ctx.daddr = dst_addr;
-+	ctx.saved_daddr = dst_addr;
-+	ctx.done = NOT_DONE;
-+	ctx.size = 0;
-+	ctx.prevsize = 0;
-+	ctx.start_time = 0;
-+
-+	if (parse_url(uri, server_name, &port, &path))
-+		return CMD_RET_USAGE;
-+
-+	netif = net_lwip_new_netif(udev);
-+	if (!netif)
-+		return -1;
-+
-+	memset(&conn, 0, sizeof(conn));
-+	conn.result_fn = httpc_result_cb;
-+	ctx.path = path;
-+	if (httpc_get_file_dns(server_name, port, path, &conn, httpc_recv_cb,
-+			       &ctx, &state)) {
-+		net_lwip_remove_netif(netif);
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	while (!ctx.done) {
-+		net_lwip_rx(udev, netif);
-+		sys_check_timeouts();
-+		if (ctrlc())
-+			break;
-+	}
-+
-+	net_lwip_remove_netif(netif);
-+
-+	if (ctx.done == SUCCESS)
-+		return 0;
-+
-+	return -1;
-+}
-+
-+int wget_with_dns(ulong dst_addr, char *uri)
-+{
-+	eth_set_current();
-+
-+	return wget_loop(eth_get_dev(), dst_addr, uri);
-+}
-+
-+int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
-+{
-+	char *end;
-+	char *url;
-+	ulong dst_addr;
-+	char nurl[1024];
-+
-+	if (argc < 2 || argc > 3)
-+		return CMD_RET_USAGE;
-+
-+	dst_addr = hextoul(argv[1], &end);
-+        if (end == (argv[1] + strlen(argv[1]))) {
-+		if (argc < 3)
-+			return CMD_RET_USAGE;
-+		url = argv[2];
-+	} else {
-+		dst_addr = image_load_addr;
-+		url = argv[1];
-+	}
-+
-+	if (parse_legacy_arg(url, nurl, sizeof(nurl)))
-+	    return CMD_RET_FAILURE;
-+
-+	if (wget_with_dns(dst_addr, nurl))
-+		return CMD_RET_FAILURE;
-+
-+	return CMD_RET_SUCCESS;
-+}
-+
-+/**
-+ * wget_validate_uri() - validate the uri for wget
-+ *
-+ * @uri:	uri string
-+ *
-+ * This function follows the current U-Boot wget implementation.
-+ * scheme: only "http:" is supported
-+ * authority:
-+ *   - user information: not supported
-+ *   - host: supported
-+ *   - port: not supported(always use the default port)
-+ *
-+ * Uri is expected to be correctly percent encoded.
-+ * This is the minimum check, control codes(0x1-0x19, 0x7F, except '\0')
-+ * and space character(0x20) are not allowed.
-+ *
-+ * TODO: stricter uri conformance check
-+ *
-+ * Return:	true on success, false on failure
-+ */
-+bool wget_validate_uri(char *uri)
-+{
-+	char c;
-+	bool ret = true;
-+	char *str_copy, *s, *authority;
-+
-+	for (c = 0x1; c < 0x21; c++) {
-+		if (strchr(uri, c)) {
-+			log_err("invalid character is used\n");
-+			return false;
-+		}
-+	}
-+	if (strchr(uri, 0x7f)) {
-+		log_err("invalid character is used\n");
-+		return false;
-+	}
-+
-+	if (strncmp(uri, "http://", 7)) {
-+		log_err("only http:// is supported\n");
-+		return false;
-+	}
-+	str_copy = strdup(uri);
-+	if (!str_copy)
-+		return false;
-+
-+	s = str_copy + strlen("http://");
-+	authority = strsep(&s, "/");
-+	if (!s) {
-+		log_err("invalid uri, no file path\n");
-+		ret = false;
-+		goto out;
-+	}
-+	s = strchr(authority, '@');
-+	if (s) {
-+		log_err("user information is not supported\n");
-+		ret = false;
-+		goto out;
-+	}
-+	s = strchr(authority, ':');
-+	if (s) {
-+		log_err("user defined port is not supported\n");
-+		ret = false;
-+		goto out;
-+	}
-+
-+out:
-+	free(str_copy);
-+
-+	return ret;
-+}
+@@ -349,12 +349,6 @@ bool wget_validate_uri(char *uri)
+ 		ret = false;
+ 		goto out;
+ 	}
+-	s = strchr(authority, ':');
+-	if (s) {
+-		log_err("user defined port is not supported\n");
+-		ret = false;
+-		goto out;
+-	}
+ 
+ out:
+ 	free(str_copy);
 -- 
 2.40.1
 
