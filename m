@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 356F4CF34A9
-	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 15:25:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99300CF34B0
+	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 15:25:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD7D088F3A;
-	Thu,  3 Oct 2024 17:24:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 23F7188E19;
+	Thu,  3 Oct 2024 17:24:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zdf4OVRh";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nr7MaAHN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 72E7D88F07; Thu,  3 Oct 2024 17:24:21 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id 71E3F88641; Thu,  3 Oct 2024 17:24:24 +0200 (CEST)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81B1688E94
- for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 17:24:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E14F488F0A
+ for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 17:24:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-37cd8972738so858281f8f.3
- for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 08:24:19 -0700 (PDT)
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-37cd0b5515fso713955f8f.2
+ for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 08:24:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1727969058; x=1728573858; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1727969060; x=1728573860; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=nw/+cdQPG/ROM9iilfJJB8oj5oic8yJ+2SSNidMrUsc=;
- b=zdf4OVRhaoVoYKl4EB+cGuF9SN7P3rcd0Rk4BCS3o0J8OJ12gOspQZmwarFVMbgqjg
- uhu2cpycR7FxTMHoOAt0jMaObJLReeCredGux1fnbTi5tBwz0ta+EWdsRMkOiaY7iatq
- TanUQjP6EU91wNRfwX1b4c1g4N/QpGlkMdiuXJimFMaSJRNAjCP8LHwGNeKTesuIVZ17
- aKCZspuwvCyZOXDnY/Jye1EvRuk7KZeepTDWUMkWt81jqc5DhoMPCZEfoqQ48sW3ZxFi
- geWGWUBCXFuxiEhvv+JWRccKqfEv7MrvsUb9mqmoTAH/viDSzd+gnWRI+HEppOtjSJHw
- 9Z4Q==
+ bh=vlz3ngfSd00AiIHBl1lrcajvkbsIxEryhXrcWbIeGOM=;
+ b=nr7MaAHNZGob6yvWy/0WN+TpSDM3RWix1VRU5i+13W8jTja5Wx7UZ+YH2sCzoplZF9
+ Wc0oEceINzwwIE6MaXh8LELmZtjsDu6NI1A0axuH7AhQRv6g017E+3Drfu7ZUKhcDOKE
+ GolLZeWoFounuhqwM2i9dVxazHyqS5RMj/qOhvWK78xTpxF1cTC4+asweKDweuRca8O5
+ X6exeoGKve2HbZ36oIZFDs2YZjucfsStVa0sScND+PvN6PwvZefPxv+8fZAZbHmrL2nB
+ vr2EvYEaKrPl2Rj47GVhZLgsv7nwPI8gS1hEMvcsJqN7mytpYQtxcrTEBRoY8SDutU81
+ ed5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727969058; x=1728573858;
+ d=1e100.net; s=20230601; t=1727969060; x=1728573860;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=nw/+cdQPG/ROM9iilfJJB8oj5oic8yJ+2SSNidMrUsc=;
- b=BrJQP4XwuefwR5DrJwfGwFPQZcxH3sKTVw34qgBsW6Y7hEqEvIasMhMZdFTeG057qP
- dcJ4t3Y2DCK7mcUsrz2NJSH+/uwqnkmiZ/PGJLd7rmQlYN4eJIRoA7UPiNRKycR98yUB
- YjJNhxuS3nJiQNW0FAqfHIDTT1DqIfJwE0I8idC0xCr0noOXcFOkWeAjVkpHLTA1U7Qm
- /TVNookXYrst1vCBmho3iXHt7rjoATuiV2R8d56p82Wy3ulsSby2AcW3ZioDlMdIAYy9
- hO2E3uQNVGdRdgAohMPH64Cdbg7SQov5pN6rRd0x8FPE35FD2yNpY4BW88flL6AuEGvv
- 1NgQ==
-X-Gm-Message-State: AOJu0Yx7jq0Tv0FLvfjOBzRkprWhqSnXCCYfAXbXhR0MGDxfNQg5azEb
- PKIm3Re4Jz2+A0w57gMZSnlCBKQhzcpxqEx8JuwNlFtdSjtpJ1SCHiaqGYXHKkImkGBjZqzKm55
- ClJ1EzkiP
-X-Google-Smtp-Source: AGHT+IHlHN0zwvcZOZctt41/uAmZlZCIxIzKR2mYjyfgBQQv0kamptOmlnHN/0Kasdt3cPL/QOqftg==
-X-Received: by 2002:a05:6000:a84:b0:374:cd96:f73 with SMTP id
- ffacd0b85a97d-37cfb8b6405mr3844807f8f.3.1727969058241; 
- Thu, 03 Oct 2024 08:24:18 -0700 (PDT)
+ bh=vlz3ngfSd00AiIHBl1lrcajvkbsIxEryhXrcWbIeGOM=;
+ b=i9xpbd3wn58KcLigCORy/Q0pgvnnbI4SGvR16zKU/Pkxd4qmo+7sVv+YesdmU6sUx5
+ +LoTvcTaRcI2+MJav80QLkoRiaqbRCjbt+k22j21AIx6rCFBs1d9EiQbqBTtvZ4c9uWw
+ 1CbNpZ5beeW/V7eHoswGB98MHtqIg6llB2skhBBkLWBT1VuNU218uXfMDHiRK0LssiqT
+ QIrRel9r2jH5Dj1vigzMUaYBGlcK2eZprCY19GmRwnU+Ww/AXs734SbDoXauXJQvvAIa
+ XkmuJkQs/gq6MjlDTWfUJ0cipuEx+l177aUnm+htsj3C1+qqK1t9FFRYNqHIs9DFbk58
+ RlPQ==
+X-Gm-Message-State: AOJu0YzNDgyPZUqQiRdHvCZKvG0DrFWxNi7SpgdnSZlNsVjQDGtAZIgE
+ 3X15087anQUAhHVv0wCN9D6QYAo15vYE1r/oEYTHo60/qXJ3YqzX9kDAR7DTNfZzBSTD3RInSUR
+ 9OObw7rPb
+X-Google-Smtp-Source: AGHT+IFyosDBQwSPQeopOJ7ZC6yfeihcPFNCy720OWDePE4s/pl9wPlIWSSFtuJOr7ODS2J1ySHvlg==
+X-Received: by 2002:adf:9b96:0:b0:37c:d515:7662 with SMTP id
+ ffacd0b85a97d-37cfb8a5d09mr4387712f8f.1.1727969060048; 
+ Thu, 03 Oct 2024 08:24:20 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:d888:7a58:deed:47d6])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d081f7482sm1506220f8f.8.2024.10.03.08.24.15
+ ffacd0b85a97d-37d081f7482sm1506220f8f.8.2024.10.03.08.24.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Oct 2024 08:24:16 -0700 (PDT)
+ Thu, 03 Oct 2024 08:24:19 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -73,13 +73,15 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Anton Antonov <Anton.Antonov@arm.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
- Sean Anderson <seanga2@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH v11 10/29] net: move copy_filename() to new file
- net/net-common.c
-Date: Thu,  3 Oct 2024 17:22:56 +0200
-Message-Id: <bc7f7365861fb75269f30300d341dafea92d76b5.1727968902.git.jerome.forissier@linaro.org>
+ Ramon Fried <rfried.dev@gmail.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
+ Fabio Estevam <festevam@denx.de>, Michal Simek <michal.simek@amd.com>
+Subject: [PATCH v11 11/29] net: eth-uclass: add function eth_start_udev()
+Date: Thu,  3 Oct 2024 17:22:57 +0200
+Message-Id: <d8af90bf9124a6c04f1ed2d291a99e1e7f909bac.1727968902.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1727968902.git.jerome.forissier@linaro.org>
 References: <cover.1727968902.git.jerome.forissier@linaro.org>
@@ -101,70 +103,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-copy_filename() can be useful when NET_LWIP is enabled, therefore
-move it out of net/net.c which is built only when networking choice
-is NET.
+Add a function to start a given network device, and update eth_init()
+to use it.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 ---
- net/Makefile     |  2 ++
- net/net-common.c | 13 +++++++++++++
- net/net.c        | 12 ------------
- 3 files changed, 15 insertions(+), 12 deletions(-)
- create mode 100644 net/net-common.c
+ include/net-common.h |  1 +
+ net/eth-uclass.c     | 38 +++++++++++++++++++++++++-------------
+ 2 files changed, 26 insertions(+), 13 deletions(-)
 
-diff --git a/net/Makefile b/net/Makefile
-index 70eec8caf0d..a9cecee637a 100644
---- a/net/Makefile
-+++ b/net/Makefile
-@@ -42,3 +42,5 @@ obj-$(CONFIG_CMD_WGET) += wget.o
- CFLAGS_eth_common.o += -Wno-format-extra-args
+diff --git a/include/net-common.h b/include/net-common.h
+index 543f528a4a4..6bc76658d9d 100644
+--- a/include/net-common.h
++++ b/include/net-common.h
+@@ -192,6 +192,7 @@ int eth_env_set_enetaddr_by_index(const char *base_name, int index,
+ int usb_ether_init(void);
  
- endif
-+
-+obj-y += net-common.o
-diff --git a/net/net-common.c b/net/net-common.c
-new file mode 100644
-index 00000000000..a7f767d5e9c
---- /dev/null
-+++ b/net/net-common.c
-@@ -0,0 +1,13 @@
-+// SPDX-License-Identifier: GPL-2.0
-+
-+void copy_filename(char *dst, const char *src, int size)
-+{
-+	if (src && *src && (*src == '"')) {
-+		++src;
-+		--size;
-+	}
-+
-+	while ((--size > 0) && src && *src && (*src != '"'))
-+		*dst++ = *src++;
-+	*dst = '\0';
-+}
-diff --git a/net/net.c b/net/net.c
-index 1e0b7c85624..c1d10a77b9e 100644
---- a/net/net.c
-+++ b/net/net.c
-@@ -1689,18 +1689,6 @@ void net_set_udp_header(uchar *pkt, struct in_addr dest, int dport, int sport,
- 	ip->udp_xsum = 0;
+ int eth_init(void);			/* Initialize the device */
++int eth_start_udev(struct udevice *dev); /* ->start() if not already running */
+ int eth_send(void *packet, int length);	   /* Send a packet */
+ #if defined(CONFIG_API) || defined(CONFIG_EFI_LOADER)
+ int eth_receive(void *packet, int length); /* Receive a packet*/
+diff --git a/net/eth-uclass.c b/net/eth-uclass.c
+index e34d7af0229..5555f82f23e 100644
+--- a/net/eth-uclass.c
++++ b/net/eth-uclass.c
+@@ -284,6 +284,27 @@ static int on_ethaddr(const char *name, const char *value, enum env_op op,
  }
+ U_BOOT_ENV_CALLBACK(ethaddr, on_ethaddr);
  
--void copy_filename(char *dst, const char *src, int size)
--{
--	if (src && *src && (*src == '"')) {
--		++src;
--		--size;
--	}
--
--	while ((--size > 0) && src && *src && (*src != '"'))
--		*dst++ = *src++;
--	*dst = '\0';
--}
--
- int is_serverip_in_cmd(void)
++int eth_start_udev(struct udevice *dev)
++{
++	struct eth_device_priv *priv = dev_get_uclass_priv(dev);
++	int ret;
++
++	if (priv->running)
++		return 0;
++
++	if (!device_active(dev))
++		return -EINVAL;
++
++	ret = eth_get_ops(dev)->start(dev);
++	if (ret < 0)
++		return ret;
++
++	priv->state = ETH_STATE_ACTIVE;
++	priv->running = true;
++
++	return 0;
++}
++
+ int eth_init(void)
  {
- 	return !!strchr(net_boot_file_name, ':');
+ 	struct udevice *current = NULL;
+@@ -328,20 +349,11 @@ int eth_init(void)
+ 		if (current) {
+ 			debug("Trying %s\n", current->name);
+ 
+-			if (device_active(current)) {
+-				ret = eth_get_ops(current)->start(current);
+-				if (ret >= 0) {
+-					struct eth_device_priv *priv =
+-						dev_get_uclass_priv(current);
+-
+-					priv->state = ETH_STATE_ACTIVE;
+-					priv->running = true;
+-					ret = 0;
+-					goto end;
+-				}
+-			} else {
++			ret = eth_start_udev(current);
++			if (ret < 0)
+ 				ret = eth_errno;
+-			}
++			else
++				break;
+ 
+ 			debug("FAIL\n");
+ 		} else {
 -- 
 2.40.1
 
