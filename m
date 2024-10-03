@@ -4,83 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00CDFCF34B2
-	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 16:10:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D85DCF34B0
+	for <u-boot@archiver.kernel.org>; Thu,  3 Oct 2024 16:11:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6BDF088ED2;
-	Thu,  3 Oct 2024 18:10:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 03E6F88ED2;
+	Thu,  3 Oct 2024 18:11:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uH4A8M0r";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wPUSRyA+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1CBB288EFA; Thu,  3 Oct 2024 18:10:14 +0200 (CEST)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id 2536D882EF; Thu,  3 Oct 2024 17:47:08 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 039E488670
- for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 18:10:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BC17C88E5F
+ for <u-boot@lists.denx.de>; Thu,  3 Oct 2024 17:47:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-a8d29b7edc2so152093266b.1
- for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 09:10:10 -0700 (PDT)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-42f6bec84b5so11127295e9.1
+ for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 08:47:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1727971810; x=1728576610; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ztNfIxIpNV95OLEL5FGjkq6MF3gFHw8nDedoni0UZsA=;
- b=uH4A8M0ry0/mizA92xfiKDMEnE5RqGZiOMx+mDkMM1gXXEgseqRAGKyBTaI42yGr2C
- T3iWctabQ+8W6T8yd9lncOFNRE8SQYVZIs+TFBwNbZG+fChT3KwHDPd6o5uf0lviKP24
- AmRHnO0l2iTCk/H/oTptT3xuqqQEXM4AINuU5+nq9LOWLE8P44aXu43wbLok6FUsYbQr
- Zvec0PC20iyTZaVr15F98qizPZP9F4CCBU3qbNd4+ZWrRuEa0g1DKTrRO2JiolFvniU6
- Dwxf0FnLfR0ZPqkUqbII3d1l5S6muX3ldW+iND65FDZv3t53hDiomi6D4dX4HshOX4SV
- dBFg==
+ d=linaro.org; s=google; t=1727970422; x=1728575222; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=D6T8MPFWQVifW4AmTfng+k+WEPqiE2ByoBIjEqOxYuo=;
+ b=wPUSRyA+ZmcRhxVciF4KqlJvGu1k41fj6FZ92/XKSBBlVbomBSWXItXDrLHeF9XQ6z
+ JYhNyoCXRO7IZ2rf64yyTTvkkdOdcK8ZDbVHtAK5zT5fK7+E8rfCSM2ZrzFeM6VPd8WZ
+ OjAxXgWiVIcpz7CpjbPWalRBcNJtGBxbuTgjYUP8dM7VX2r4TyZfPHrhO4ZZo89Y2cue
+ UyeDMzDXxvnFWIcOZbdAEVr/2WTm9OBTnGnJpCOMbt81qpY+0O6aS6ki77rJxuBYy0Z4
+ lvYzoeUuYLfe6wrTZ4fFR4a64evyYdZ/beLTUPRFfl088wkHmHyI6xPg1WF/KEOGkeAn
+ Df2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727971810; x=1728576610;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ztNfIxIpNV95OLEL5FGjkq6MF3gFHw8nDedoni0UZsA=;
- b=QL75YDsU/zCqNDgZGD1dKAlcCwWXIAwUqoIfxuAARYDKOvzlbNLVkMfX2jAb0OKCp0
- u9fQwfYxfr6F1zExcbc64nJNm2A5wctSMC7hE8Qg6PEuUBjnENNdYPJK27uUjHLA5K8l
- ++KDWetS29GtAfIct7YhsPdGLWFejjsw5z88B4Xl6WztDUXMwWLl5fRG+oxGeuNK0GV+
- 4aPOT0LGq0GwYUP+FWfBoEUTevW6XShx9JIO9uK5qMxhS/GeuPMos/d2+arFQjQ7WD7c
- /T4Zez48xk/nV/2Wmf9JdFSnebHfQEX6zzjYOEMRgYlSuIqGSEk2n77xbYND2cAiCrQa
- TGVw==
-X-Gm-Message-State: AOJu0Yw28iNNnUEj2AVwM6JB3XpYgEfuEXH1+/mBbDAWPhSINmtl/5Nf
- mrBYcgqONCfkiVVlLxeZycYDIprRJAukFwrYoYtNuSSk0dfA4LoqVfNLtcB5yYo=
-X-Google-Smtp-Source: AGHT+IE80kDvJruwNwXmDYfxyh1KNstqW17MvVCeXR+jQcXeNO6vbfMxU/OosgfU8uE+54z7DdKEAQ==
-X-Received: by 2002:a17:907:3d8b:b0:a86:b762:52ec with SMTP id
- a640c23a62f3a-a98f83706d4mr497532366b.51.1727971810087; 
- Thu, 03 Oct 2024 09:10:10 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:13c0:464a:f75d:87c6?
- ([2a01:e0a:3cb:7bb0:13c0:464a:f75d:87c6])
+ d=1e100.net; s=20230601; t=1727970422; x=1728575222;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=D6T8MPFWQVifW4AmTfng+k+WEPqiE2ByoBIjEqOxYuo=;
+ b=bSP/n6eeZgT+aTDoM2c51VS7s2QnTdG6qKnJzsdbBWuRhqXnRHHRerYPuZnamqq1RE
+ AD6LoKQcrOvvCoZxdO5qJL7G4VhLNqZlWOH3jFDmNy4o+PQcC7VHfFq10q5RYKq2zknj
+ bCO95MKrcFXSN6I4EMwM1v2X8qunkU2w4J4cJtqKewFbaKSa2L/uO4lKw8zZq39/UW+M
+ b9bDexXu2dPEcjq9wHp44S1V874uHG8ZISZpLpx2VyK6S8k4/CQZ/ZzRFqipT+b1y4Lx
+ 5FM2R9YOwjGeGa5SEK3X5Iz1YkC1CMp2sJnJ2DaoXc3MO5bPYgziy0gxroE98Vk2A1W1
+ in+Q==
+X-Gm-Message-State: AOJu0YwAmcFcw6glnjz3ep+TbP8vzJ2zTk437mIkqCPDNvnl9pdzO82h
+ kONNMT2e+ldpev4d9g5gmvpBs+FUHy9ERliFpegYgUGaV7RbvVTArCQp4jCZAtyPTthIPONhiHv
+ uvdZVunNy
+X-Google-Smtp-Source: AGHT+IFscSBut1Td4Abr/7RpYLgxksCfoMaRlJr9KfCejjku5zeDO+op4Yf4neEzcXz0Lo5M3IlUKw==
+X-Received: by 2002:a05:600c:3515:b0:42c:b1e1:a45b with SMTP id
+ 5b1f17b1804b1-42f7c76d5dfmr40532115e9.19.1727970422133; 
+ Thu, 03 Oct 2024 08:47:02 -0700 (PDT)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:d888:7a58:deed:47d6])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a99103bbb7bsm105146666b.140.2024.10.03.09.10.09
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 03 Oct 2024 09:10:09 -0700 (PDT)
-Message-ID: <6f68e8ec-e174-42d6-bd21-30203552594f@linaro.org>
-Date: Thu, 3 Oct 2024 18:10:08 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v11 00/29] Introduce the lwIP network stack
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, Javier Tia <javier.tia@linaro.org>,
- Raymond Mao <raymond.mao@linaro.org>, Maxim Uvarov <muvarov@gmail.com>,
- Tim Harvey <tharvey@gateworks.com>, Anton Antonov <Anton.Antonov@arm.com>
-References: <cover.1727968902.git.jerome.forissier@linaro.org>
- <CAC_iWjLv4VHRDEZ6qLxp9ZWr91b=WBmhr1H99qwF3du-o1EDfw@mail.gmail.com>
-Content-Language: en-US
+ ffacd0b85a97d-37d08245059sm1541748f8f.55.2024.10.03.08.46.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 03 Oct 2024 08:47:00 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <CAC_iWjLv4VHRDEZ6qLxp9ZWr91b=WBmhr1H99qwF3du-o1EDfw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
+To: u-boot@lists.denx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
+ Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
+ Anton Antonov <Anton.Antonov@arm.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
+ Matteo Lisi <matteo.lisi@engicam.com>, Tom Rini <trini@konsulko.com>,
+ Gilles Talis <gilles.talis@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Marek Vasut <marex@denx.de>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Nishanth Menon <nm@ti.com>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Padmarao Begari <padmarao.begari@amd.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ James Hilliard <james.hilliard1@gmail.com>,
+ Petr Zejdl <petr.zejdl@cern.ch>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>,
+ Sean Anderson <sean.anderson@seco.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Artur Rojek <artur@conclusive.pl>, Janne Grunau <j@jannau.net>,
+ Neal Gompa <neal@gompa.dev>, Yang Xiwen <forbidden405@outlook.com>,
+ Boon Khai Ng <boon.khai.ng@intel.com>,
+ Robert Marko <robert.marko@sartura.hr>, Philip Oberfichtner <pro@denx.de>,
+ Jonas Karlman <jonas@kwiboo.se>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>
+Subject: [PATCH v11 13/29] net-lwip: add DHCP support and dhcp commmand
+Date: Thu,  3 Oct 2024 17:46:17 +0200
+Message-Id: <122c4866fe98a74dc22b18b048b462cb3564c73a.1727968902.git.jerome.forissier@linaro.org>
+X-Mailer: git-send-email 2.40.1
+In-Reply-To: <cover.1727968902.git.jerome.forissier@linaro.org>
+References: <cover.1727968902.git.jerome.forissier@linaro.org>
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Thu, 03 Oct 2024 18:11:48 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,590 +121,941 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Add what it takes to enable NETDEVICES with NET_LWIP and enable DHCP as
+well as the dhcp command. CMD_TFTPBOOT is selected by BOOTMETH_EFI due
+to this code having an implicit dependency on do_tftpb().
 
+Note that PXE is likely non-fonctional with NET_LWIP (or at least not
+100% functional) because DHCP option 209 is not supported by the lwIP
+library. Therefore, BOOTP_PXE_DHCP_OPTION cannot be enabled.
 
-On 10/3/24 18:00, Ilias Apalodimas wrote:
-> Hi Jerome,
-> 
-> I'll have a look, but there seems to be reviewed-by and acked-by tags missing?
-> Any chance you lost those during rebasing ?
+Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+---
+ board/engicam/imx8mp/icore_mx8mp.c            |   2 +-
+ .../imx8mp_debix_model_a.c                    |   2 +-
+ board/ti/am335x/board.c                       |   3 +-
+ board/xilinx/common/board.c                   |   3 +-
+ cmd/Kconfig                                   | 100 +++---
+ cmd/Makefile                                  |   6 +-
+ cmd/elf.c                                     |   2 +-
+ cmd/net-lwip.c                                |  13 +
+ common/board_r.c                              |   4 +-
+ common/usb_kbd.c                              |   2 +-
+ drivers/net/Kconfig                           |   2 +-
+ include/net-common.h                          |   3 +
+ include/net-legacy.h                          |   3 -
+ include/net-lwip.h                            |   3 +
+ lib/tiny-printf.c                             |   3 +-
+ net/Makefile                                  |  14 +-
+ net/lwip/Makefile                             |   5 +
+ net/lwip/dhcp.c                               | 127 ++++++++
+ net/lwip/eth_internal.h                       |  35 +++
+ net/lwip/net-lwip.c                           | 291 ++++++++++++++++++
+ net/lwip/tftp.c                               |  11 +
+ 21 files changed, 572 insertions(+), 62 deletions(-)
+ create mode 100644 cmd/net-lwip.c
+ create mode 100644 net/lwip/Makefile
+ create mode 100644 net/lwip/dhcp.c
+ create mode 100644 net/lwip/eth_internal.h
+ create mode 100644 net/lwip/net-lwip.c
+ create mode 100644 net/lwip/tftp.c
 
-I only dropped your R-b from the MAINTAINERS patch because I changed it slightly.
-Now I see you Acked it so that's good :) 
-
+diff --git a/board/engicam/imx8mp/icore_mx8mp.c b/board/engicam/imx8mp/icore_mx8mp.c
+index e2ed70caa43..bfdc447c478 100644
+--- a/board/engicam/imx8mp/icore_mx8mp.c
++++ b/board/engicam/imx8mp/icore_mx8mp.c
+@@ -33,7 +33,7 @@ static void setup_fec(void)
+ 	setbits_le32(&gpr->gpr[1], BIT(22));
+ }
+ 
+-#if CONFIG_IS_ENABLED(NET)
++#if CONFIG_IS_ENABLED(NET) || CONFIG_IS_ENABLED(NET_LWIP)
+ int board_phy_config(struct phy_device *phydev)
+ {
+ 	if (phydev->drv->config)
+diff --git a/board/polyhex/imx8mp_debix_model_a/imx8mp_debix_model_a.c b/board/polyhex/imx8mp_debix_model_a/imx8mp_debix_model_a.c
+index 112770ba493..c709d017483 100644
+--- a/board/polyhex/imx8mp_debix_model_a/imx8mp_debix_model_a.c
++++ b/board/polyhex/imx8mp_debix_model_a/imx8mp_debix_model_a.c
+@@ -29,7 +29,7 @@ static void setup_fec(void)
+ 	setbits_le32(&gpr->gpr[1], BIT(22));
+ }
+ 
+-#if CONFIG_IS_ENABLED(NET)
++#if CONFIG_IS_ENABLED(NET) || CONFIG_IS_ENABLED(NET_LWIP)
+ int board_phy_config(struct phy_device *phydev)
+ {
+ 	if (phydev->drv->config)
+diff --git a/board/ti/am335x/board.c b/board/ti/am335x/board.c
+index 681002ba1da..249c9fd2e7e 100644
+--- a/board/ti/am335x/board.c
++++ b/board/ti/am335x/board.c
+@@ -900,7 +900,8 @@ int board_late_init(void)
+ #endif
+ 
+ /* CPSW plat */
+-#if CONFIG_IS_ENABLED(NET) && !CONFIG_IS_ENABLED(OF_CONTROL)
++#if (CONFIG_IS_ENABLED(NET) || CONFIG_IS_ENABLED(NET_LWIP)) && \
++    !CONFIG_IS_ENABLED(OF_CONTROL)
+ struct cpsw_slave_data slave_data[] = {
+ 	{
+ 		.slave_reg_ofs  = CPSW_SLAVE0_OFFSET,
+diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
+index 5e5eb49ddf3..b6a2381c909 100644
+--- a/board/xilinx/common/board.c
++++ b/board/xilinx/common/board.c
+@@ -491,7 +491,8 @@ int board_late_init_xilinx(void)
+ 				ret |= env_set_by_index("uuid", id, uuid);
+ 			}
+ 
+-			if (!CONFIG_IS_ENABLED(NET))
++			if (!(CONFIG_IS_ENABLED(NET) ||
++			      CONFIG_IS_ENABLED(NET_LWIP)))
+ 				continue;
+ 
+ 			for (i = 0; i < EEPROM_HDR_NO_OF_MAC_ADDR; i++) {
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 3beddd72583..d09c237a52f 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -1798,12 +1798,16 @@ config CMD_AB_SELECT
+ 
+ endmenu
+ 
+-if NET
++if NET || NET_LWIP
+ 
+ menuconfig CMD_NET
+ 	bool "Network commands"
+ 	default y
+ 
++endif
++
++if NET
++
+ if CMD_NET
+ 
+ config CMD_BOOTP
+@@ -1812,12 +1816,6 @@ config CMD_BOOTP
+ 	help
+ 	  bootp - boot image via network using BOOTP/TFTP protocol
+ 
+-config CMD_DHCP
+-	bool "dhcp"
+-	depends on CMD_BOOTP
+-	help
+-	  Boot image via network using DHCP/TFTP protocol
+-
+ config CMD_DHCP6
+ 	bool "dhcp6"
+ 	depends on IPV6
+@@ -1961,12 +1959,6 @@ config BOOTP_VCI_STRING
+ 	default "U-Boot.arm" if ARM
+ 	default "U-Boot"
+ 
+-config CMD_TFTPBOOT
+-	bool "tftpboot"
+-	default y
+-	help
+-	  tftpboot - load file via network using TFTP protocol
+-
+ config CMD_TFTPPUT
+ 	bool "tftp put"
+ 	depends on CMD_TFTPBOOT
+@@ -2026,29 +2018,6 @@ config CMD_WGET
+ 	  wget is a simple command to download kernel, or other files,
+ 	  from a http server over TCP.
+ 
+-config CMD_MII
+-	bool "mii"
+-	imply CMD_MDIO
+-	help
+-	  If set, allows 802.3(clause 22) MII Management functions interface access
+-	  The management interface specified in Clause 22 provides
+-	  a simple, two signal, serial interface to connect a
+-	  Station Management entity and a managed PHY for providing access
+-	  to management parameters and services.
+-	  The interface is referred to as the MII management interface.
+-
+-config MII_INIT
+-	bool "Call mii_init() in the mii command"
+-	depends on CMD_MII && (MPC8XX_FEC || FSLDMAFE || MCFFEC)
+-
+-config CMD_MDIO
+-	bool "mdio"
+-	depends on PHYLIB
+-	help
+-	  If set, allows Enable 802.3(clause 45) MDIO interface registers access
+-	  The MDIO interface is orthogonal to the MII interface and extends
+-	  it by adding access to more registers through indirect addressing.
+-
+ config CMD_PING
+ 	bool "ping"
+ 	help
+@@ -2097,7 +2066,7 @@ config IPV6_ROUTER_DISCOVERY
+ 	help
+ 	  Will automatically perform router solicitation on first IPv6
+ 	  network operation
+-endif
++endif  # if CMD_NET
+ 
+ config CMD_ETHSW
+ 	bool "ethsw"
+@@ -2107,6 +2076,56 @@ config CMD_ETHSW
+ 	  operations such as enabling / disabling a port and
+ 	  viewing/maintaining the filtering database (FDB)
+ 
++config CMD_WOL
++	bool "wol"
++	help
++	  Wait for wake-on-lan Magic Packet
++
++endif  # if NET
++
++if NET || NET_LWIP
++
++if CMD_NET
++
++config CMD_DHCP
++	bool "dhcp"
++	select PROT_DHCP_LWIP if NET_LWIP
++	help
++	  Boot image via network using DHCP/TFTP protocol
++
++config CMD_MII
++	bool "mii"
++	imply CMD_MDIO
++	help
++	  If set, allows 802.3(clause 22) MII Management functions interface access
++	  The management interface specified in Clause 22 provides
++	  a simple, two signal, serial interface to connect a
++	  Station Management entity and a managed PHY for providing access
++	  to management parameters and services.
++	  The interface is referred to as the MII management interface.
++
++config MII_INIT
++	bool "Call mii_init() in the mii command"
++	depends on CMD_MII && (MPC8XX_FEC || FSLDMAFE || MCFFEC)
++
++config CMD_MDIO
++	bool "mdio"
++	depends on PHYLIB
++	help
++	  If set, allows Enable 802.3(clause 45) MDIO interface registers access
++	  The MDIO interface is orthogonal to the MII interface and extends
++	  it by adding access to more registers through indirect addressing.
++
++config CMD_TFTPBOOT
++	bool "tftp"
++	select PROT_UDP_LWIP if NET_LWIP
++	default n
++	help
++	  tftpboot - load file via network using TFTP protocol
++	  Currently a placeholder (not implemented) when NET_LWIP=y.
++
++endif  # if CMD_NET
++
+ config CMD_PXE
+ 	bool "pxe"
+ 	select PXE_UTILS
+@@ -2114,12 +2133,7 @@ config CMD_PXE
+ 	help
+ 	  Boot image via network using PXE protocol
+ 
+-config CMD_WOL
+-	bool "wol"
+-	help
+-	  Wait for wake-on-lan Magic Packet
+-
+-endif
++endif  # if NET || NET_LWIP
+ 
+ menu "Misc commands"
+ 
+diff --git a/cmd/Makefile b/cmd/Makefile
+index 91227f1249c..1c8cc42503d 100644
+--- a/cmd/Makefile
++++ b/cmd/Makefile
+@@ -127,7 +127,11 @@ obj-y += legacy-mtd-utils.o
+ endif
+ obj-$(CONFIG_CMD_MUX) += mux.o
+ obj-$(CONFIG_CMD_NAND) += nand.o
+-obj-$(CONFIG_CMD_NET) += net.o
++ifdef CONFIG_CMD_NET
++obj-$(CONFIG_NET) += net.o
++obj-$(CONFIG_NET_LWIP) += net-lwip.o
++CFLAGS_net-lwip.o := -I$(srctree)/lib/lwip/lwip/src/include -I$(srctree)/lib/lwip/u-boot
++endif
+ obj-$(CONFIG_ENV_SUPPORT) += nvedit.o
+ obj-$(CONFIG_CMD_NVEDIT_EFI) += nvedit_efi.o
+ obj-$(CONFIG_CMD_ONENAND) += onenand.o
+diff --git a/cmd/elf.c b/cmd/elf.c
+index f07e344a596..e4c68744d5f 100644
+--- a/cmd/elf.c
++++ b/cmd/elf.c
+@@ -130,7 +130,7 @@ int do_bootvx(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	else
+ 		addr = hextoul(argv[1], NULL);
+ 
+-#if defined(CONFIG_CMD_NET)
++#if defined(CONFIG_CMD_NET) && !defined(CONFIG_NET_LWIP)
+ 	/*
+ 	 * Check to see if we need to tftp the image ourselves
+ 	 * before starting
+diff --git a/cmd/net-lwip.c b/cmd/net-lwip.c
+new file mode 100644
+index 00000000000..82edb5fd2e6
+--- /dev/null
++++ b/cmd/net-lwip.c
+@@ -0,0 +1,13 @@
++// SPDX-License-Identifier: GPL-2.0+
++/* Copyright (C) 2024 Linaro Ltd. */
++
++#include <command.h>
++#include <net.h>
++
++#if defined(CONFIG_CMD_DHCP)
++U_BOOT_CMD(
++        dhcp,   3,      1,      do_dhcp,
++        "boot image via network using DHCP/TFTP protocol",
++        "[loadAddress] [[hostIPaddr:]bootfilename]"
++);
++#endif
+diff --git a/common/board_r.c b/common/board_r.c
+index 4faaa202421..49347370a1f 100644
+--- a/common/board_r.c
++++ b/common/board_r.c
+@@ -472,7 +472,7 @@ static int initr_status_led(void)
+ }
+ #endif
+ 
+-#ifdef CONFIG_CMD_NET
++#if defined(CONFIG_CMD_NET)
+ static int initr_net(void)
+ {
+ 	puts("Net:   ");
+@@ -738,7 +738,7 @@ static init_fnc_t init_sequence_r[] = {
+ #ifdef CONFIG_PCI_ENDPOINT
+ 	pci_ep_init,
+ #endif
+-#ifdef CONFIG_CMD_NET
++#if defined(CONFIG_CMD_NET)
+ 	INIT_FUNC_WATCHDOG_RESET
+ 	initr_net,
+ #endif
+diff --git a/common/usb_kbd.c b/common/usb_kbd.c
+index bbfee23bc26..36107a3b278 100644
+--- a/common/usb_kbd.c
++++ b/common/usb_kbd.c
+@@ -423,7 +423,7 @@ static int usb_kbd_testc(struct stdio_dev *sdev)
+ 	 */
+ 	unsigned long poll_delay = CONFIG_SYS_HZ / 50;
+ 
+-#ifdef CONFIG_CMD_NET
++#if defined(CONFIG_CMD_NET) && !defined(CONFIG_NET_LWIP)
+ 	/*
+ 	 * If net_busy_flag is 1, NET transfer is running,
+ 	 * then we check key-pressed every second (first check may be
+diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
+index 9c042808b44..25084b4103d 100644
+--- a/drivers/net/Kconfig
++++ b/drivers/net/Kconfig
+@@ -97,7 +97,7 @@ config DSA_SANDBOX
+ 
+ menuconfig NETDEVICES
+ 	bool "Network device support"
+-	depends on NET
++	depends on NET || NET_LWIP
+ 	select DM_ETH
+ 	help
+ 	  You must select Y to enable any network device support
+diff --git a/include/net-common.h b/include/net-common.h
+index 6bc76658d9d..cbcac178c82 100644
+--- a/include/net-common.h
++++ b/include/net-common.h
+@@ -118,6 +118,9 @@ extern int		net_restart_wrap;	/* Tried all network devices */
+ extern uchar               *net_rx_packets[PKTBUFSRX]; /* Receive packets */
+ extern const u8		net_bcast_ethaddr[ARP_HLEN];	/* Ethernet broadcast address */
+ extern char	net_boot_file_name[1024];/* Boot File name */
++extern struct in_addr	net_ip;		/* Our    IP addr (0 = unknown) */
++/* Indicates whether the pxe path prefix / config file was specified in dhcp option */
++extern char *pxelinux_configfile;
+ 
+ /**
+  * compute_ip_checksum() - Compute IP checksum
+diff --git a/include/net-legacy.h b/include/net-legacy.h
+index 19c991e12f6..bdca904a0f8 100644
+--- a/include/net-legacy.h
++++ b/include/net-legacy.h
+@@ -285,12 +285,9 @@ extern char	net_hostname[32];	/* Our hostname */
+ #ifdef CONFIG_NET
+ extern char	net_root_path[CONFIG_BOOTP_MAX_ROOT_PATH_LEN];	/* Our root path */
+ #endif
+-/* Indicates whether the pxe path prefix / config file was specified in dhcp option */
+-extern char *pxelinux_configfile;
+ /** END OF BOOTP EXTENTIONS **/
+ extern u8		net_ethaddr[ARP_HLEN];		/* Our ethernet address */
+ extern u8		net_server_ethaddr[ARP_HLEN];	/* Boot server enet address */
+-extern struct in_addr	net_ip;		/* Our    IP addr (0 = unknown) */
+ extern struct in_addr	net_server_ip;	/* Server IP addr (0 = unknown) */
+ extern uchar		*net_tx_packet;		/* THE transmit packet */
+ extern uchar		*net_rx_packets[PKTBUFSRX]; /* Receive packets */
+diff --git a/include/net-lwip.h b/include/net-lwip.h
+index 5c3f9e7e86c..cfd06726577 100644
+--- a/include/net-lwip.h
++++ b/include/net-lwip.h
+@@ -10,5 +10,8 @@ struct netif *net_lwip_new_netif(struct udevice *udev);
+ struct netif *net_lwip_new_netif_noip(struct udevice *udev);
+ void net_lwip_remove_netif(struct netif *netif);
+ struct netif *net_lwip_get_netif(void);
++int net_lwip_rx(struct udevice *udev, struct netif *netif);
++
++int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ 
+ #endif /* __NET_LWIP_H__ */
+diff --git a/lib/tiny-printf.c b/lib/tiny-printf.c
+index 9a70c6095b3..f6727360097 100644
+--- a/lib/tiny-printf.c
++++ b/lib/tiny-printf.c
+@@ -269,7 +269,8 @@ static int _vprintf(struct printf_info *info, const char *fmt, va_list va)
+ 				}
+ 				break;
+ 			case 'p':
+-				if (CONFIG_IS_ENABLED(NET) || _DEBUG) {
++				if (CONFIG_IS_ENABLED(NET) ||
++				    CONFIG_IS_ENABLED(NET_LWIP) || _DEBUG) {
+ 					pointer(info, fmt, va_arg(va, void *));
+ 					/*
+ 					 * Skip this because it pulls in _ctype which is
+diff --git a/net/Makefile b/net/Makefile
+index a9cecee637a..68370595a8e 100644
+--- a/net/Makefile
++++ b/net/Makefile
+@@ -12,11 +12,6 @@ obj-$(CONFIG_CMD_BOOTP) += bootp.o
+ obj-$(CONFIG_CMD_CDP)  += cdp.o
+ obj-$(CONFIG_CMD_DNS)  += dns.o
+ obj-$(CONFIG_DM_DSA)   += dsa-uclass.o
+-obj-$(CONFIG_$(SPL_)DM_ETH) += eth-uclass.o
+-obj-$(CONFIG_$(SPL_TPL_)BOOTDEV_ETH) += eth_bootdev.o
+-obj-$(CONFIG_DM_MDIO)  += mdio-uclass.o
+-obj-$(CONFIG_DM_MDIO_MUX) += mdio-mux-uclass.o
+-obj-$(CONFIG_$(SPL_)DM_ETH) += eth_common.o
+ obj-$(CONFIG_CMD_LINK_LOCAL) += link_local.o
+ obj-$(CONFIG_IPV6)     += ndisc.o
+ obj-$(CONFIG_$(SPL_)DM_ETH) += net.o
+@@ -43,4 +38,13 @@ CFLAGS_eth_common.o += -Wno-format-extra-args
+ 
+ endif
+ 
++ifeq ($(filter y,$(CONFIG_NET) $(CONFIG_NET_LWIP)),y)
++obj-$(CONFIG_$(SPL_TPL_)BOOTDEV_ETH) += eth_bootdev.o
++obj-$(CONFIG_DM_MDIO)  += mdio-uclass.o
++obj-$(CONFIG_DM_MDIO_MUX) += mdio-mux-uclass.o
++obj-$(CONFIG_$(SPL_)DM_ETH) += eth-uclass.o
++obj-$(CONFIG_$(SPL_)DM_ETH) += eth_common.o
+ obj-y += net-common.o
++endif
++
++obj-$(CONFIG_NET_LWIP) += lwip/
+diff --git a/net/lwip/Makefile b/net/lwip/Makefile
+new file mode 100644
+index 00000000000..4e92a101ddb
+--- /dev/null
++++ b/net/lwip/Makefile
+@@ -0,0 +1,5 @@
++ccflags-y += -I$(srctree)/lib/lwip/lwip/src/include -I$(srctree)/lib/lwip/u-boot
++
++obj-$(CONFIG_$(SPL_)DM_ETH) += net-lwip.o
++obj-$(CONFIG_CMD_DHCP) += dhcp.o
++obj-$(CONFIG_CMD_TFTPBOOT) += tftp.o
+diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
+new file mode 100644
+index 00000000000..be458d554cb
+--- /dev/null
++++ b/net/lwip/dhcp.c
+@@ -0,0 +1,127 @@
++// SPDX-License-Identifier: GPL-2.0+
++/* Copyright (C) 2024 Linaro Ltd. */
++
++#include <command.h>
++#include <console.h>
++#include <dm/device.h>
++#include <linux/delay.h>
++#include <linux/errno.h>
++#include <lwip/dhcp.h>
++#include <lwip/dns.h>
++#include <lwip/timeouts.h>
++#include <net.h>
++#include <time.h>
++
++#define DHCP_TIMEOUT_MS 10000
++
++#ifdef CONFIG_CMD_TFTPBOOT
++/* Boot file obtained from DHCP (if present) */
++static char boot_file_name[DHCP_BOOT_FILE_LEN];
++#endif
++
++static void call_lwip_dhcp_fine_tmr(void *ctx)
++{
++	dhcp_fine_tmr();
++	sys_timeout(10, call_lwip_dhcp_fine_tmr, NULL);
++}
++
++static int dhcp_loop(struct udevice *udev)
++{
++	char *ipstr = "ipaddr\0\0";
++	char *maskstr = "netmask\0\0";
++	char *gwstr = "gatewayip\0\0";
++	unsigned long start;
++	struct netif *netif;
++	struct dhcp *dhcp;
++	bool bound;
++	int idx;
++
++	idx = dev_seq(udev);
++	if (idx < 0 || idx > 99) {
++		log_err("unexpected idx %d\n", idx);
++		return CMD_RET_FAILURE;
++	}
++
++	netif = net_lwip_new_netif_noip(udev);
++	if (!netif)
++		return CMD_RET_FAILURE;
++
++	start = get_timer(0);
++	dhcp_start(netif);
++	call_lwip_dhcp_fine_tmr(NULL);
++
++	/* Wait for DHCP to complete */
++	do {
++		net_lwip_rx(udev, netif);
++		sys_check_timeouts();
++		bound = dhcp_supplied_address(netif);
++		if (bound)
++			break;
++		if (ctrlc()) {
++			printf("Abort\n");
++			break;
++		}
++		mdelay(1);
++	} while (get_timer(start) < DHCP_TIMEOUT_MS);
++
++	sys_untimeout(call_lwip_dhcp_fine_tmr, NULL);
++
++	if (!bound) {
++		net_lwip_remove_netif(netif);
++		return CMD_RET_FAILURE;
++	}
++
++	dhcp = netif_dhcp_data(netif);
++
++	env_set("bootfile", dhcp->boot_file_name);
++
++	if (idx > 0) {
++		sprintf(ipstr, "ipaddr%d", idx);
++		sprintf(maskstr, "netmask%d", idx);
++		sprintf(gwstr, "gatewayip%d", idx);
++	} else {
++		net_ip.s_addr = dhcp->offered_ip_addr.addr;
++	}
++
++	env_set(ipstr, ip4addr_ntoa(&dhcp->offered_ip_addr));
++	env_set(maskstr, ip4addr_ntoa(&dhcp->offered_sn_mask));
++	env_set("serverip", ip4addr_ntoa(&dhcp->server_ip_addr));
++	if (dhcp->offered_gw_addr.addr != 0)
++		env_set(gwstr, ip4addr_ntoa(&dhcp->offered_gw_addr));
++
++#ifdef CONFIG_PROT_DNS_LWIP
++	env_set("dnsip", ip4addr_ntoa(dns_getserver(0)));
++	env_set("dnsip2", ip4addr_ntoa(dns_getserver(1)));
++#endif
++#ifdef CONFIG_CMD_TFTPBOOT
++	if (dhcp->boot_file_name[0] != '\0')
++		strncpy(boot_file_name, dhcp->boot_file_name,
++			sizeof(boot_file_name));
++#endif
++
++	printf("DHCP client bound to address %pI4 (%lu ms)\n",
++	       &dhcp->offered_ip_addr, get_timer(start));
++
++	net_lwip_remove_netif(netif);
++	return CMD_RET_SUCCESS;
++}
++
++int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
++{
++	eth_set_current();
++
++	return dhcp_loop(eth_get_dev());
++}
++
++int dhcp_run(ulong addr, const char *fname, bool autoload)
++{
++	char *dhcp_argv[] = {"dhcp", NULL, };
++	struct cmd_tbl cmdtp = {};	/* dummy */
++
++	if (autoload) {
++		/* Will be supported when TFTP is added */
++		return -EOPNOTSUPP;
++	}
++
++	return do_dhcp(&cmdtp, 0, 1, dhcp_argv);
++}
+diff --git a/net/lwip/eth_internal.h b/net/lwip/eth_internal.h
+new file mode 100644
+index 00000000000..0b829a8d388
+--- /dev/null
++++ b/net/lwip/eth_internal.h
+@@ -0,0 +1,35 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * (C) Copyright 2001-2015
++ * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
++ * Joe Hershberger, National Instruments
++ */
++
++#ifndef __ETH_INTERNAL_H
++#define __ETH_INTERNAL_H
++
++/* Do init that is common to driver model and legacy networking */
++void eth_common_init(void);
++
++/**
++ * eth_env_set_enetaddr_by_index() - set the MAC address environment variable
++ *
++ * This sets up an environment variable with the given MAC address (@enetaddr).
++ * The environment variable to be set is defined by <@base_name><@index>addr.
++ * If @index is 0 it is omitted. For common Ethernet this means ethaddr,
++ * eth1addr, etc.
++ *
++ * @base_name:	Base name for variable, typically "eth"
++ * @index:	Index of interface being updated (>=0)
++ * @enetaddr:	Pointer to MAC address to put into the variable
++ * Return: 0 if OK, other value on error
++ */
++int eth_env_set_enetaddr_by_index(const char *base_name, int index,
++				 uchar *enetaddr);
++
++int eth_mac_skip(int index);
++void eth_current_changed(void);
++void eth_set_dev(struct udevice *dev);
++void eth_set_current_to_next(void);
++
++#endif
+diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
+new file mode 100644
+index 00000000000..ca5426d058b
+--- /dev/null
++++ b/net/lwip/net-lwip.c
+@@ -0,0 +1,291 @@
++// SPDX-License-Identifier: GPL-2.0
++
++/* Copyright (C) 2024 Linaro Ltd. */
++
++#include <command.h>
++#include <dm/device.h>
++#include <dm/uclass.h>
++#include <lwip/ip4_addr.h>
++#include <lwip/err.h>
++#include <lwip/netif.h>
++#include <lwip/pbuf.h>
++#include <lwip/etharp.h>
++#include <lwip/init.h>
++#include <lwip/prot/etharp.h>
++#include <net.h>
++
++/* xx:xx:xx:xx:xx:xx\0 */
++#define MAC_ADDR_STRLEN 18
++
++#if defined(CONFIG_API) || defined(CONFIG_EFI_LOADER)
++void (*push_packet)(void *, int len) = 0;
++#endif
++int net_restart_wrap;
++static uchar net_pkt_buf[(PKTBUFSRX) * PKTSIZE_ALIGN + PKTALIGN];
++uchar *net_rx_packets[PKTBUFSRX];
++uchar *net_rx_packet;
++const u8 net_bcast_ethaddr[6] = { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff };
++char *pxelinux_configfile;
++/* Our IP addr (0 = unknown) */
++struct in_addr	net_ip;
++
++static err_t linkoutput(struct netif *netif, struct pbuf *p)
++{
++	struct udevice *udev = netif->state;
++	void *pp = NULL;
++	int err;
++
++	if ((unsigned long)p->payload % PKTALIGN) {
++		/*
++		 * Some net drivers have strict alignment requirements and may
++		 * fail or output invalid data if the packet is not aligned.
++		 */
++		pp = memalign(PKTALIGN, p->len);
++		if (!pp)
++			return ERR_ABRT;
++		memcpy(pp, p->payload, p->len);
++	}
++
++	err = eth_get_ops(udev)->send(udev, pp ? pp : p->payload, p->len);
++	free(pp);
++	if (err) {
++		log_err("send error %d\n", err);
++		return ERR_ABRT;
++	}
++
++	return ERR_OK;
++}
++
++static err_t net_lwip_if_init(struct netif *netif)
++{
++#if LWIP_IPV4
++	netif->output = etharp_output;
++#endif
++	netif->linkoutput = linkoutput;
++	netif->mtu = 1500;
++	netif->flags = NETIF_FLAG_BROADCAST | NETIF_FLAG_ETHARP | NETIF_FLAG_LINK_UP;
++
++	return ERR_OK;
++}
++
++static void eth_init_rings(void)
++{
++	int i;
++
++	for (i = 0; i < PKTBUFSRX; i++)
++		net_rx_packets[i] = net_pkt_buf + i  * PKTSIZE_ALIGN;
++}
++
++struct netif *net_lwip_get_netif(void)
++{
++	struct netif *netif, *found = NULL;
++
++	NETIF_FOREACH(netif) {
++		if (!found)
++			found = netif;
++		else
++			printf("Error: more than one netif in lwIP\n");
++	}
++	return found;
++}
++
++static int get_udev_ipv4_info(struct udevice *dev, ip4_addr_t *ip,
++			      ip4_addr_t *mask, ip4_addr_t *gw)
++{
++	char *ipstr = "ipaddr\0\0";
++	char *maskstr = "netmask\0\0";
++	char *gwstr = "gatewayip\0\0";
++	int idx = dev_seq(dev);
++	char *env;
++
++	if (idx < 0 || idx > 99) {
++		log_err("unexpected idx %d\n", idx);
++		return -1;
++	}
++
++	if (idx) {
++		sprintf(ipstr, "ipaddr%d", idx);
++		sprintf(maskstr, "netmask%d", idx);
++		sprintf(gwstr, "gatewayip%d", idx);
++	}
++
++	ip4_addr_set_zero(ip);
++	ip4_addr_set_zero(mask);
++	ip4_addr_set_zero(gw);
++
++	env = env_get(ipstr);
++	if (env)
++		ip4addr_aton(env, ip);
++
++	env = env_get(maskstr);
++	if (env)
++		ip4addr_aton(env, mask);
++
++	env = env_get(gwstr);
++	if (env)
++		ip4addr_aton(env, gw);
++
++	return 0;
++}
++
++static struct netif *new_netif(struct udevice *udev, bool with_ip)
++{
++	unsigned char enetaddr[ARP_HLEN];
++	char hwstr[MAC_ADDR_STRLEN];
++	ip4_addr_t ip, mask, gw;
++	struct netif *netif;
++	int ret = 0;
++	static bool first_call = true;
++
++	if (!udev)
++		return NULL;
++
++	if (first_call) {
++		eth_init_rings();
++		/* Pick a valid active device, if any */
++		eth_init();
++		lwip_init();
++		first_call = false;
++	}
++
++	if (eth_start_udev(udev) < 0) {
++		log_err("Could not start %s\n", udev->name);
++		return NULL;
++	}
++
++	netif_remove(net_lwip_get_netif());
++
++	ip4_addr_set_zero(&ip);
++	ip4_addr_set_zero(&mask);
++	ip4_addr_set_zero(&gw);
++
++	if (with_ip)
++		if (get_udev_ipv4_info(udev, &ip, &mask, &gw) < 0)
++			return NULL;
++
++	eth_env_get_enetaddr_by_index("eth", dev_seq(udev), enetaddr);
++	ret = snprintf(hwstr, MAC_ADDR_STRLEN, "%pM",  enetaddr);
++	if (ret < 0 || ret >= MAC_ADDR_STRLEN)
++		return NULL;
++
++	netif = calloc(1, sizeof(struct netif));
++	if (!netif)
++		return NULL;
++
++	netif->name[0] = 'e';
++	netif->name[1] = 't';
++
++	string_to_enetaddr(hwstr, netif->hwaddr);
++	netif->hwaddr_len = ETHARP_HWADDR_LEN;
++	debug("adding lwIP netif for %s with hwaddr:%s ip:%s ", udev->name,
++	      hwstr, ip4addr_ntoa(&ip));
++	debug("mask:%s ", ip4addr_ntoa(&mask));
++	debug("gw:%s\n", ip4addr_ntoa(&gw));
++
++	if (!netif_add(netif, &ip, &mask, &gw, udev, net_lwip_if_init,
++		       netif_input)) {
++		printf("error: netif_add() failed\n");
++		free(netif);
++		return NULL;
++	}
++
++	netif_set_up(netif);
++	netif_set_link_up(netif);
++	/* Routing: use this interface to reach the default gateway */
++	netif_set_default(netif);
++
++	return netif;
++}
++
++struct netif *net_lwip_new_netif(struct udevice *udev)
++{
++	return new_netif(udev, true);
++}
++
++struct netif *net_lwip_new_netif_noip(struct udevice *udev)
++{
++
++	return new_netif(udev, false);
++}
++
++void net_lwip_remove_netif(struct netif *netif)
++{
++	netif_remove(netif);
++	free(netif);
++}
++
++int net_init(void)
++{
++	eth_set_current();
++
++	net_lwip_new_netif(eth_get_dev());
++
++	return 0;
++}
++
++static struct pbuf *alloc_pbuf_and_copy(uchar *data, int len)
++{
++        struct pbuf *p, *q;
++
++        /* We allocate a pbuf chain of pbufs from the pool. */
++        p = pbuf_alloc(PBUF_RAW, len, PBUF_POOL);
++        if (!p) {
++                LINK_STATS_INC(link.memerr);
++                LINK_STATS_INC(link.drop);
++                return NULL;
++        }
++
++        for (q = p; q != NULL; q = q->next) {
++                memcpy(q->payload, data, q->len);
++                data += q->len;
++        }
++
++        LINK_STATS_INC(link.recv);
++
++        return p;
++}
++
++int net_lwip_rx(struct udevice *udev, struct netif *netif)
++{
++	struct pbuf *pbuf;
++	uchar *packet;
++	int flags;
++	int len;
++	int i;
++
++	if (!eth_is_active(udev))
++		return -EINVAL;
++
++	flags = ETH_RECV_CHECK_DEVICE;
++	for (i = 0; i < ETH_PACKETS_BATCH_RECV; i++) {
++		len = eth_get_ops(udev)->recv(udev, flags, &packet);
++		flags = 0;
++
++		if (len > 0) {
++			pbuf = alloc_pbuf_and_copy(packet, len);
++			if (pbuf)
++				netif->input(pbuf, netif);
++		}
++		if (len >= 0 && eth_get_ops(udev)->free_pkt)
++			eth_get_ops(udev)->free_pkt(udev, packet, len);
++		if (len <= 0)
++			break;
++	}
++	if (len == -EAGAIN)
++		len = 0;
++
++	return len;
++}
++
++void net_process_received_packet(uchar *in_packet, int len)
++{
++#if defined(CONFIG_API) || defined(CONFIG_EFI_LOADER)
++	if (push_packet)
++		(*push_packet)(in_packet, len);
++#endif
++}
++
++u32_t sys_now(void)
++{
++	return get_timer(0);
++}
+diff --git a/net/lwip/tftp.c b/net/lwip/tftp.c
+new file mode 100644
+index 00000000000..1fa246f55d9
+--- /dev/null
++++ b/net/lwip/tftp.c
+@@ -0,0 +1,11 @@
++// SPDX-License-Identifier: GPL-2.0+
++/* Copyright (C) 2024 Linaro Ltd. */
++
++#include <command.h>
++#include <net-lwip.h>
++
++int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
++{
++	/* Not implemented */
++	return CMD_RET_FAILURE;
++}
 -- 
-Jerome
+2.40.1
 
-> 
-> Thanks
-> /Ilias
-> On Thu, 3 Oct 2024 at 18:23, Jerome Forissier
-> <jerome.forissier@linaro.org> wrote:
->>
->> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
->> library for the network stack" [1]. The goal is to introduce the lwIP TCP/IP
->> stack [2] [3] as an alternative to the current implementation in net/,
->> selectable with Kconfig, and ultimately keep only lwIP if possible. Some
->> reasons for doing so are:
->> - Make the support of HTTPS in the wget command easier. Javier T. and
->> Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
->> so. With that it becomes possible to fetch and launch a distro installer
->> such as Debian etc. using a secure, authenticated connection directly
->> from the U-Boot shell. Several use cases:
->>   * Authentication: prevent MITM attack (third party replacing the
->> binary with a different one)
->>   * Confidentiality: prevent third parties from grabbing a copy of the
->> image as it is being downloaded
->>   * Allow connection to servers that do not support plain HTTP anymore
->> (this is becoming more and more common on the Internet these days)
->> - Possibly benefit from additional features implemented in lwIP
->> - Less code to maintain in U-Boot
->>
->> Prior to applying this series, the lwIP stack needs to be added as a
->> Git subtree with the following command:
->>
->>  $ git subtree add --squash --prefix lib/lwip/lwip \
->>    https://github.com/lwip-tcpip/lwip.git  STABLE-2_2_0_RELEASE
->>
->> Notes
->>
->> 1. A number of features are currently incompatible with NET_LWIP:
->> DFU_TFTP, FASTBOOT, SPL_NET, ETH_SANDBOX, ETH_SANDBOX_RAW, DM_ETH. They
->> all make assumptions on how the network stack is implemented and/or
->> pull sybols that are not trivially exported from lwIP. Some interface
->> rework may be needed.
->>
->> 2. Due to the above, and in order to provide some level of testing of the
->> lwIP code in CI even when the legacy NET is the default, a new QEMU
->> configuration is introduced (qemu_arm64_lwip_defconfig) which is
->> based on qemu_arm64_defconfig with NET_LWIP and CMD_*_LWIP enabled.
->> In addition to that, this series has some [TESTING] patches
->> which make NET_LWIP the default.
->>
->> [1] https://lore.kernel.org/all/20231127125726.3735-1-maxim.uvarov@linaro.org/
->> [2] https://www.nongnu.org/lwip/
->> [3] https://en.wikipedia.org/wiki/LwIP
->>
->> Changes in v11:
->>
->> - Rebased onto next
->> - "Miscellaneous fixes" removed (patches were merged in next). The
->> series still begins with small fixes posted separately [1] [2] [3].
->> - Add (some) support for CMD_PXE and therefore drop patch "[TESTING]
->> configs: set CONFIG_NET=y when PXE is enabled". This is build-tested
->> only and it is very likely that some work is needed to make it useful.
->> For example, adding the code for DHCP option 209 to lwIP so that
->> BOOTP_PXE_DHCP_OPTION can be supported.
->> - SANDBOX is now supported, but with the dm eth and wget tests
->> disabled.
->> - Move eth_set_enable_bootdevs() declaration to net-common.h
->> Fixes warning with snow_defconfig:
->> test/test-main.c:310:17: warning: implicit declaration of function ‘eth_set_enable_bootdevs’ [....]
->> - Do eth_init() and eth_init_rings() only once, and do not forget
->> lwip_init()! Fixes TFTP stalls on TI K3 (reported by Tom R. and
->> tested by Ilias A.)
->> - Set MEM_ALIGNMENT to 8 in lib/lwip/u-boot/lwipopts.h. Fixes TFTP
->> random crashes on TI K3 (Ilias A.)
->> - net_lwip_rx(): call free_pkt() even when recv() has returned 0,
->> as required by the driver model documentation (and imx8mp_evk). Fixes
->> a regression introduced in v9. Goes together with patch [2].
->> - Add "lwip: tftp: bind to TFTP port only when in server mode" to
->> fix an issue with interrupted tftp commands (the tftp command hangs
->> if it is interrupted with Ctrl-C and started again).
->> - TFTP: fix uninitialized "ret" variable in do_tftpb(); print "Abort"
->> on Ctrl-C.
->> - MAINTAINERS: remove README and add sandbox ethernet driver to the
->> list of maintained files.
->> - AFAICT, CI should be all good except qemu_xtensa_dc233c which is
->> broken when NET_LWIP=y (QEMU just hangs with no output). I could
->> not find or build a suitable GDB binary to debug that.
->>
->> [1] https://patchwork.ozlabs.org/project/uboot/patch/20241002144845.1439316-1-jerome.forissier@linaro.org/
->> [2] https://patchwork.ozlabs.org/project/uboot/patch/20240927142038.879037-1-jerome.forissier@linaro.org/
->> [3] https://patchwork.ozlabs.org/project/uboot/patch/20241003142030.1610222-1-jerome.forissier@linaro.org/
->>
->> Changes in v10:
->>
->> - Rebase onto next
->> - URL for lwIP changed in cover letter: using GitHub now since all
->> tags have suddenly disappeared from the repository on gnu.org.
->> - Post fixes as a separate series [1] or individual patches [2] [3]
->> - Add "if NET_LWIP" to net/lwip/Kconfig to fix a kconfig warning
->>   when doing the full branch build with buildman ("[NEW]")
->> - net/ is added to libs-y only when NET or NET_LWIP, not NO_NET
->> - Apply review tags
->>
->> [1] http://patchwork.ozlabs.org/project/uboot/list/?series=422079
->> https://lists.denx.de/pipermail/u-boot/2024-September/563904.html
->> [2] http://patchwork.ozlabs.org/project/uboot/list/?series=421962
->> [3] http://patchwork.ozlabs.org/project/uboot/list/?series=421959
->>
->> Changes in v9:
->>
->> - Rebased onto master, reordered commits to put some fixes that are not
->> strictly related to lwIP first.
->> - New commit "test/py: test_efi_loader: add missing dependency on
->> cmd_tftpboot" (Tom R.)
->> - test_efi_loader.py: add missing dependency on cmd_wget (Tom R.)
->> - wget: fix divide by zero when transfer takes less than 1ms (Tom R.)
->> - New commit "configs: use syntax CONFIG_FOO=n in tools-only_defconfig"
->> (Tom R.)
->> - Make TCP_WND configurable (via CONFIG_LWIP_TCP_WND) because a large
->> value is needed for good performance especially with latency but
->> transfers stall in QEMU (-net user) when the value is larger than a few
->> KB (Anton A., offlist)
->> - Added [TESTING] commits to run CI with NET_LWIP enabled by default
->> except for SANDBOX and platforms that enable PXE, and fixed a number of
->> issues:
->>   * coreboot_defconfig: 'implicit declaration' warnings on
->>     ip_checksum_ok() and compute_ip_checksum()
->>   * Fix EFI net tests (bootefi selftest) by adding missing
->>     push_packed() call to net_process_received_packet()
->>   * qemu_arm64: fix test_efi_loader.py failures (skip HTTP test
->>     by default since it needs a HTTP server; fix a bug in the dhcp
->>     command which would not set the "serverip" variable)
->>   * QEMU CI tests for r2dplus_i82557c, r2dplus_rtl8139:
->>     Fixed receive errors due to calling free_pkt() with a
->>     length of zero. r2dplus_tulip: fixed "dm_pci_phys_to_bus:
->>     invalid physical address" caused by too late eth_init_rings().
->> With that the CI status is all GREEN:
->> https://dev.azure.com/u-boot/u-boot/_build/results?buildId=9225&view=results
->>
->> Changes in v8:
->>
->> - Fix bootefi with tftp and wget. It would previously fail with an
->> error message: "No UEFI binary known at 200000". Tested on Raspberry
->> 3B+. Also fix the legacy wget. (Tom R.)
->> - wget: add "Bytes transferred =" message and accept legacy syntax
->> for better compatibility which also makes it easier to add a test to
->> the test suite
->> - wget: When no server name or address is supplied, use
->> ${httpserverip} then ${serverip}.
->> - wget: start the timer used for measuring throughput when the first
->> data block is received. In other words: do not include DNS resolution
->> and TCP connection time in measurement. It gives better numbers ;)
->> but more importantly is how the legacy code works.
->> - wget: handle non-200 result codes from the server as errors.
->> - tftp: when no server name or ip is supplied, use ${tftpserverip}
->> then fall back to ${serverip}.
->> - New commit: "test/py: add HTTP (wget) test"
->> - New commit: "net: wget: removed unused function wget_success()"
->> - Change back all !CONFIG_IS_ENABLED(NO_NET) tests to
->> (CONFIG_IS_ENABLED(NET) || CONFIG_IS_ENABLED(NET_LWIP)) since the
->> NO_NET case is wrong when CONFIG_SPL_BUILD or CONFIG_TPL_BUILD is
->> defined (Tom R.)
->>
->> Changes in v7:
->>
->> - Rebased onto master
->> - Updated binary size comparisons in this cover letter. Note that
->> the increase for imx8mp_evk_defconfig  was wrong due to a configuration
->> error.
->>
->> Changes in v6:
->>
->> - Rebased on next
->> - "flash: prefix error codes with FL_"
->> Update drivers/mtd/altera_qspi.c too (Tom R.)
->> - "net: introduce alternative implementation as net-lwip/"
->> Introduce a "Networking" top-level menu in the main Kconfig. Avoids
->> having a lot of network-related symbols on the first screen of
->> menuconfig. The "Networking stack" choice as well as the applicable
->> symbols (depending on the selected choice) are now all inside this
->> "Networking" menu. (Michal S.)
->> For PROT_DHCP_LWIP and PROT_DNS_LWIP, use "select" PROT_UDP_LWIP
->> rather than "depends on".
->> Move NET_RANDOM_ETHADDR to the common ('if NET || NET_LWIP') block.
->> Move SYS_RX_ETH_BUFFER out of 'if NET || NET_LWIP' since it is used
->> unguarded in some code (e.g., am62x_beagleplay_r5) (Tom R.).
->> - "net: split include/net.h into net{,-common,-legacy,-lwip}.h"
->> Move net_random_ethaddr() to net-common.h.
->> - "net: eth-uclass: add function eth_start_udev()"
->> Fix typo and apply Tom R.'s R-b.
->> - "net-lwip: add DHCP support and dhcp commmand"
->> Convert !CONFIG_IS_ENABLED(NET) to
->> CONFIG_IS_ENABLED(NO_NET) in board/xilinx/common/board.c
->> to fix an issue with device having no MAC address (thanks Michal S.).
->> Do the same at other places (icore_mx8mp.c, imx8mp_debix_model_a.c,
->> board/ti/am335x/board.c, tiny-printf.c).
->> Move CMD_MII and CMD_MDIO into 'if NET || NET_LWIP'.
->> - "net-lwip: add TFTP support and tftpboot command":
->> Fix help string.
->> - "net: split cmd/net.c into cmd/net.c and cmd/net-common.c":
->> Apply Ilias' R-b.
->> - "net-lwip: add TFTP_BLOCKSIZE"
->> Apply Ilias' R-b. I moved the TFTP_BLOCKSIZE Kconfig into this commit
->> where it belongs (it was previously in "net" split ... net.h").
->>
->> Changes in v5:
->>
->> - Rebased on next
->> - Refactor Kconfig options to avoid duplicates
->> - Library functions use a more consistent naming (dhcp_loop(),
->> ping_loop() etc.) and take a struct udevice * parameter (Heinrich S.)
->> - Do not use net_process_receive_packet() for input anymore. Instead of
->> calling eth_rx() which would invoke net_process_receive_packet(), we
->> call a new net_lwip_rx(udev) function which invokes the device recv()
->> and pushes the packets up the lwIP stack. Thus everything is tied to
->> a udevice now. (Heinrich S.)
->> - Add "configs: replace '# CONFIG_NET is not set' with CONFIG_NO_NET=y"
->> (Tom R.)
->> - tftp: unify display with legacy command: add throughput, 65 hashes per
->> line, one every 10 blocks received (Tom R.)
->> - Moved net-lwip/* to net/lwip/* (Simon G.)
->> - Rename static function low_level_output() to linkoutput() since it is
->> the name used in the lwIP netif struct.
->> - Fixed off-by-one in parse_url() which could cause wget to fail when
->> passed a URL with a host name (as opposed to a URL with an IP address).
->> - Improved TFTP performance by adding support for the blksize option
->> (patches "lwip: tftp: add support of blksize option to client" and
->> "net-lwip: add TFTP_BLOCKSIZE) (Tom R.)
->> - Add an optional port number to the tftp command for easier testing
->> (syntax: tftp [[ip:[port:]]filename])
->> - wget: display an "unsupported URI" error if uri is not http://
->> (Jon H.)
->> - Adjusted the lwIP TCP options in lib/lwip/u-boot/lwipopts.h for
->> better performance, in particular TCP_WND.
->> - Add "net: fec_mxc_init(): do not ignore return status of fec_open()"
->> - Set the proper environment variables when DHCP succeeds (ipaddr%d
->> etc.) and read the proper ones for the given device in new_netif(),
->> allowing correct behavior when several adapters are available (tested
->> on i.MX8M Plus).
->> - Fix an alignment issue with outgoing packets (see the linkoutput()
->> function). With that the i.MX8M Plus ENET1 interface works properly.
->> (reported by Tim H.).
->> - Add review tags
->>
->> Changes in v4:
->>
->> - Fixed the DHCP algorithm which was missing a sys_timeout() call in
->> the "fine timer" callback. This should close the issue that Tom R.
->> reported with his Raspberry Pi 3 (it does fix it on mine).
->> - The DHCP exchange timeout is increased from 2 to 10 seconds
->> - The DHCP exchange can be interrupted with Ctrl-C.
->> - "net: introduce alternative implementation as net-lwip/": rework
->> dependencies. A few symbols have 'depends on !NET_LWIP' and in addition
->> 'NET_LWIP depends on !SANDBOX'. Sandbox, DSA and fastboot are
->> unsupported, because they are deeply welded to the current stack.
->> - All network commands (dns, ping, tftp and wget):
->>   * Get rid of global variables (Ilias A.)
->>   * Use printf() rather than log_info()
->> - "net-lwip: add ping command": use packet count instead of
->> timeout, fix code style (Ilias A.)
->> - Add "net: split cmd/net.c into cmd/net.c and cmd/net-common.c"
->> extracted from the wget patch (Ilias A.).
->> - Add "net: split include/net.h into net{,-common,-legacy,-lwip}.h"
->> (Ilias A.)
->> - Add "flash: prefix error codes with FL_" which is required to
->> avoid name clashes when splitting net.h
->> - Reworked the initialization of the lwIP stack. One and only
->> one network interface (struct netif) is added for the duration
->> of the command that uses that interface. That's commit "net-lwip:
->> add DHCP support and dhcp commmand".
->> - Drop "test: dm: dsa, eth: disable tests when CONFIG_NET_LWIP=y",
->> not needed now that NET_LWIP depend on !SANDBOX.
->> - qemu_arm64_lwip_defconfig now enables CMD_DNS and CMD_WGET (so
->> that all the supported network commands are available).
->>
->> Changes in v3:
->>
->> - Make NET_LWIP a Kconfig choice in patch "net: introduce alternative
->> implementation as net-lwip/" (Tom R.)
->> - Drop the patch introducing lwIP as a Git subtree and document the git
->> command in the cover letter instead (Tom R.)
->> - "net-lwip: add TFTP support and tftpboot command": use the same
->> "Bytes transferred =" message as in the legacy implementation (Tom R.,
->> Maxim U.)
->> - Drop "test/py: net: add _lwip variants of dhcp, ping and tftpboot
->> tests" which is not needed anymore.
->> - Add missing kfree() calls in cmd/net-common.c and fix the parsing of
->> decimal address in net-lwip/wget.c (patch "net-lwip: add wget command")
->> (Maxim U.)
->> - "net-lwip: add ping command": drop the ICMP payload (Ilias A.). Set
->> the sequence number to zero when entering ping_loop().
->>
->> Changes in v2:
->>
->> ** Address comments from Ilias A.
->>
->> - "net-lwip: add wget command"
->> Implement the wget_with_dns() function to do most of the wget work and
->> call it from do_wget(). This allows to simplify patch "net-lwip: add
->> support for EFI_HTTP_BOOT".
->>
->> - "net-lwip: import net command from cmd/net.c"
->> Move a few functions from cmd/net.c to a new file cmd/net-common.c
->> rather than duplicating then in cmd/net-lwip.c.
->>
->> - "net-lwip: add support for EFI_HTTP_BOOT"
->> Since wget_with_dns() is now implemented in "net-lwip: add wget command",
->> just enable the wget command when the lwIP stack is enabled and
->> EFI_HTTP_BOOT is requested.
->>
->> ** Address comments from Tom R.
->>
->> - "net-lwip: add DHCP support and dhcp commmand",
->>   "net-lwip: add TFTP support and tftpboot command",
->>   "net-lwip: add ping command",
->>   "net-lwip: add dns command",
->>   "net-lwip: add wget command"
->> Do not introduce new CMD_XXX_LWIP symbols and use existing CMD_XXX
->> instead.
->>
->> - "configs: add qemu_arm64_lwip_defconfig"
->> Use #include <configs/qemu_arm64_defconfig>.
->>
->> - "net-lwip: import lwIP library under lib/lwip"
->> Patch removed and replaced by the introduction of a Git subtree:
->> "Squashed 'lib/lwip/lwip/' content from commit 0a0452b2c3".
->>
->> Note that I have not yet addressed your comments on "test: dm: dsa,
->> eth: disable tests when CONFIG_NET_LWIP=y"). I need some more time
->> for that and I think running CI on this v2 will help better understand
->> what is needed for v3.
->>
->> ** Miscellaneous improvements
->>
->> - "net: introduce alternative implementation as net-lwip/":
->>
->> * Make DFU_OVER_TFTP not DFU_TFTP incompatible with NET_LWIP. It seems
->> quite natural to supplement "depends on NET" with "&& !NET_LWIP".
->> * Make PROT_*_LWIP not visible by removing the Kconfig prompt.
->>
->>
->> Jerome Forissier (28):
->>   net: recv(): return -EAGAIN instead of 0 when no cleanup is expected
->>   Make AVB_VERIFY depend on FASTBOOT
->>   linker_lists: set LINKER_LIST_ALIGN to 8 for CPU_MIPS64
->>   sandbox: add dummy driver ETH_SANDBOX_LWIP
->>   test: boot: fix bootdev_test_any for when DSA_SANDBOX is disabled
->>   test: boot: fix bootflow_cmd_label for when DSA_SANDBOX is disabled
->>   net: introduce alternative implementation as net-lwip/
->>   configs: replace '# CONFIG_NET is not set' with CONFIG_NO_NET=y
->>   net: split include/net.h into net{,-common,-legacy,-lwip}.h
->>   net: move copy_filename() to new file net/net-common.c
->>   net: eth-uclass: add function eth_start_udev()
->>   net-lwip: build lwIP
->>   net-lwip: add DHCP support and dhcp commmand
->>   lwip: tftp: bind to TFTP port only when in server mode
->>   net-lwip: add TFTP support and tftpboot command
->>   net-lwip: add ping command
->>   net-lwip: add dns command
->>   net: split cmd/net.c into cmd/net.c and cmd/net-common.c
->>   net-lwip: add wget command
->>   cmd: bdinfo: enable -e when CONFIG_CMD_NET_LWIP=y
->>   configs: add qemu_arm64_lwip_defconfig
->>   lwip: tftp: add support of blksize option to client
->>   net-lwip: add TFTP_BLOCKSIZE
->>   CI: add qemu_arm64_lwip to the test matrix
->>   MAINTAINERS: net-lwip: add myself as a maintainer
->>   configs: use syntax CONFIG_FOO=n in tools-only_defconfig
->>   [TESTING] configs: set CONFIG_NET=y for FTGMAC100
->>   [TESTING] Kconfig: enable NET_LWIP by default
->>
->> Jonathan Humphreys (1):
->>   net-lwip: lwIP wget supports user defined port in the uri, so allow
->>     it.
->>
->>  .azure-pipelines.yml                          |   7 +
->>  Kconfig                                       |  29 +
->>  MAINTAINERS                                   |  11 +
->>  Makefile                                      |   6 +-
->>  arch/Kconfig                                  |   2 +-
->>  board/engicam/imx8mp/icore_mx8mp.c            |   2 +-
->>  .../imx8mp_debix_model_a.c                    |   2 +-
->>  board/ti/am335x/board.c                       |   3 +-
->>  board/xilinx/common/board.c                   |   3 +-
->>  boot/Kconfig                                  |   4 +-
->>  cmd/Kconfig                                   | 140 +--
->>  cmd/Makefile                                  |   9 +-
->>  cmd/bdinfo.c                                  |   5 +-
->>  cmd/elf.c                                     |   2 +-
->>  cmd/net-common.c                              | 109 ++
->>  cmd/net-lwip.c                                |  45 +
->>  cmd/net.c                                     | 115 ---
->>  common/Kconfig                                |   3 +-
->>  common/board_r.c                              |   4 +-
->>  common/spl/Kconfig                            |   1 +
->>  common/usb_kbd.c                              |   2 +-
->>  configs/LicheePi_Zero_defconfig               |   2 +-
->>  configs/M5249EVB_defconfig                    |   2 +-
->>  configs/am335x_pdu001_defconfig               |   2 +-
->>  configs/am62ax_evm_r5_defconfig               |   2 +-
->>  configs/am62px_evm_r5_defconfig               |   2 +-
->>  configs/am62x_beagleplay_r5_defconfig         |   2 +-
->>  configs/amcore_defconfig                      |   2 +-
->>  configs/amd_versal2_mini_defconfig            |   2 +-
->>  configs/amd_versal2_mini_emmc_defconfig       |   2 +-
->>  configs/amd_versal2_mini_ospi_defconfig       |   2 +-
->>  configs/amd_versal2_mini_qspi_defconfig       |   2 +-
->>  configs/anbernic-rgxx3-rk3566_defconfig       |   2 +-
->>  configs/ap143_defconfig                       |   2 +-
->>  configs/ap152_defconfig                       |   2 +-
->>  configs/apple_m1_defconfig                    |   2 +-
->>  configs/astro_mcf5373l_defconfig              |   2 +-
->>  configs/at91sam9rlek_dataflash_defconfig      |   2 +-
->>  configs/at91sam9rlek_mmc_defconfig            |   2 +-
->>  configs/at91sam9rlek_nandflash_defconfig      |   2 +-
->>  configs/bcm7260_defconfig                     |   2 +-
->>  configs/bcm7445_defconfig                     |   2 +-
->>  configs/bcm968380gerg_ram_defconfig           |   2 +-
->>  configs/bcmns_defconfig                       |   2 +-
->>  configs/chromebook_samus_tpl_defconfig        |   2 +-
->>  configs/cortina_presidio-asic-base_defconfig  |   2 +-
->>  configs/cortina_presidio-asic-pnand_defconfig |   2 +-
->>  configs/durian_defconfig                      |   2 +-
->>  configs/e850-96_defconfig                     |   2 +-
->>  configs/ea-lpc3250devkitv2_defconfig          |   2 +-
->>  configs/efi-x86_app32_defconfig               |   2 +-
->>  configs/efi-x86_app64_defconfig               |   2 +-
->>  configs/emsdp_defconfig                       |   2 +-
->>  configs/evb-ast2500_defconfig                 |   1 +
->>  configs/evb-ast2600_defconfig                 |   1 +
->>  configs/evb-px5_defconfig                     |   2 +-
->>  configs/generic-rk3568_defconfig              |   2 +-
->>  configs/generic-rk3588_defconfig              |   2 +-
->>  configs/hc2910_2aghd05_defconfig              |   2 +-
->>  configs/igep00x0_defconfig                    |   2 +-
->>  configs/imx6q_bosch_acc_defconfig             |   2 +-
->>  configs/imx6ulz_smm_m2_defconfig              |   2 +-
->>  configs/iot_devkit_defconfig                  |   2 +-
->>  configs/j722s_evm_r5_defconfig                |   2 +-
->>  configs/legoev3_defconfig                     |   2 +-
->>  configs/mk808_defconfig                       |   2 +-
->>  configs/mx23evk_defconfig                     |   2 +-
->>  configs/mx28evk_defconfig                     |   2 +-
->>  configs/mx6memcal_defconfig                   |   2 +-
->>  configs/mx6ulz_14x14_evk_defconfig            |   2 +-
->>  configs/mx7ulp_com_defconfig                  |   2 +-
->>  configs/mx7ulp_evk_defconfig                  |   2 +-
->>  configs/mx7ulp_evk_plugin_defconfig           |   2 +-
->>  configs/netgear_cg3100d_ram_defconfig         |   2 +-
->>  configs/nsim_700_defconfig                    |   2 +-
->>  configs/nsim_700be_defconfig                  |   2 +-
->>  configs/nsim_hs38be_defconfig                 |   2 +-
->>  configs/openpiton_riscv64_defconfig           |   2 +-
->>  configs/openpiton_riscv64_spl_defconfig       |   2 +-
->>  configs/origen_defconfig                      |   2 +-
->>  configs/pe2201_defconfig                      |   2 +-
->>  configs/pinecube_defconfig                    |   2 +-
->>  configs/pm9261_defconfig                      |   2 +-
->>  configs/qemu_arm64_lwip_defconfig             |   9 +
->>  configs/s5p4418_nanopi2_defconfig             |   2 +-
->>  configs/s5p_goni_defconfig                    |   2 +-
->>  configs/s5pc210_universal_defconfig           |   2 +-
->>  configs/sama5d27_giantboard_defconfig         |   2 +-
->>  configs/sama5d29_curiosity_mmc1_defconfig     |   2 +-
->>  configs/sama5d29_curiosity_mmc_defconfig      |   2 +-
->>  .../sama5d29_curiosity_qspiflash_defconfig    |   2 +-
->>  configs/sama7g54_curiosity_mmc_defconfig      |   2 +-
->>  .../sama7g54_curiosity_nandflash_defconfig    |   2 +-
->>  .../sama7g54_curiosity_qspiflash_defconfig    |   2 +-
->>  configs/sipeed_maix_bitm_defconfig            |   2 +-
->>  configs/sipeed_maix_smode_defconfig           |   2 +-
->>  configs/stemmy_defconfig                      |   2 +-
->>  configs/stm32f429-discovery_defconfig         |   2 +-
->>  configs/stm32f429-evaluation_defconfig        |   2 +-
->>  configs/stm32f469-discovery_defconfig         |   2 +-
->>  configs/stm32h743-disco_defconfig             |   2 +-
->>  configs/stm32h743-eval_defconfig              |   2 +-
->>  configs/stm32h750-art-pi_defconfig            |   2 +-
->>  configs/stm32mp25_defconfig                   |   2 +-
->>  configs/stmark2_defconfig                     |   2 +-
->>  configs/th1520_lpi4a_defconfig                |   2 +-
->>  configs/thunderx_88xx_defconfig               |   2 +-
->>  configs/tools-only_defconfig                  |  34 +-
->>  configs/topic_miami_defconfig                 |   2 +-
->>  configs/topic_miamilite_defconfig             |   2 +-
->>  configs/topic_miamiplus_defconfig             |   2 +-
->>  configs/total_compute_defconfig               |   2 +-
->>  configs/trats2_defconfig                      |   2 +-
->>  configs/trats_defconfig                       |   2 +-
->>  configs/xenguest_arm64_defconfig              |   2 +-
->>  configs/xenguest_arm64_virtio_defconfig       |   2 +-
->>  configs/xilinx_versal_mini_defconfig          |   2 +-
->>  configs/xilinx_versal_mini_emmc0_defconfig    |   2 +-
->>  configs/xilinx_versal_mini_emmc1_defconfig    |   2 +-
->>  configs/xilinx_versal_mini_ospi_defconfig     |   2 +-
->>  configs/xilinx_versal_mini_qspi_defconfig     |   2 +-
->>  configs/xilinx_versal_net_mini_defconfig      |   2 +-
->>  configs/xilinx_versal_net_mini_emmc_defconfig |   2 +-
->>  configs/xilinx_versal_net_mini_ospi_defconfig |   2 +-
->>  configs/xilinx_versal_net_mini_qspi_defconfig |   2 +-
->>  configs/xilinx_zynqmp_mini_defconfig          |   2 +-
->>  configs/xilinx_zynqmp_mini_emmc0_defconfig    |   2 +-
->>  configs/xilinx_zynqmp_mini_emmc1_defconfig    |   2 +-
->>  configs/xilinx_zynqmp_mini_nand_defconfig     |   2 +-
->>  .../xilinx_zynqmp_mini_nand_single_defconfig  |   2 +-
->>  configs/xilinx_zynqmp_mini_qspi_defconfig     |   2 +-
->>  configs/zynq_cse_nand_defconfig               |   2 +-
->>  configs/zynq_cse_nor_defconfig                |   2 +-
->>  configs/zynq_cse_qspi_defconfig               |   2 +-
->>  drivers/dfu/Kconfig                           |   1 +
->>  drivers/fastboot/Kconfig                      |   1 +
->>  drivers/net/Kconfig                           |  16 +-
->>  drivers/net/Makefile                          |   1 +
->>  drivers/net/eepro100.c                        |   2 +-
->>  drivers/net/phy/Kconfig                       |   2 +-
->>  drivers/net/rtl8139.c                         |   2 +-
->>  drivers/net/sandbox-lwip.c                    |  85 ++
->>  drivers/usb/gadget/Kconfig                    |   2 +-
->>  include/net-common.h                          | 509 ++++++++++
->>  include/net-legacy.h                          | 541 ++++++++++
->>  include/net-lwip.h                            |  41 +
->>  include/net.h                                 | 943 +-----------------
->>  lib/Makefile                                  |   2 +
->>  lib/binman.c                                  |   1 +
->>  lib/lwip/Makefile                             |  55 +
->>  lib/lwip/lwip/src/apps/tftp/tftp.c            | 104 +-
->>  .../lwip/src/include/lwip/apps/tftp_client.h  |   1 +
->>  lib/lwip/u-boot/arch/cc.h                     |  45 +
->>  lib/lwip/u-boot/arch/sys_arch.h               |   0
->>  lib/lwip/u-boot/limits.h                      |   0
->>  lib/lwip/u-boot/lwipopts.h                    | 157 +++
->>  lib/tiny-printf.c                             |   3 +-
->>  net/Kconfig                                   |  81 +-
->>  net/Makefile                                  |  20 +-
->>  net/eth-uclass.c                              |  38 +-
->>  net/lwip/Kconfig                              |  49 +
->>  net/lwip/Makefile                             |   8 +
->>  net/lwip/dhcp.c                               | 136 +++
->>  net/lwip/dns.c                                | 127 +++
->>  net/lwip/eth_internal.h                       |  35 +
->>  net/lwip/net-lwip.c                           | 307 ++++++
->>  net/lwip/ping.c                               | 177 ++++
->>  net/lwip/tftp.c                               | 290 ++++++
->>  net/lwip/wget.c                               | 357 +++++++
->>  net/net-common.c                              |  13 +
->>  net/net.c                                     |  12 -
->>  test/boot/bootdev.c                           |  11 +-
->>  test/boot/bootflow.c                          |   7 +-
->>  test/cmd/Makefile                             |   2 +
->>  test/dm/Makefile                              |   2 +
->>  175 files changed, 3607 insertions(+), 1346 deletions(-)
->>  create mode 100644 cmd/net-common.c
->>  create mode 100644 cmd/net-lwip.c
->>  create mode 100644 configs/qemu_arm64_lwip_defconfig
->>  create mode 100644 drivers/net/sandbox-lwip.c
->>  create mode 100644 include/net-common.h
->>  create mode 100644 include/net-legacy.h
->>  create mode 100644 include/net-lwip.h
->>  create mode 100644 lib/lwip/Makefile
->>  create mode 100644 lib/lwip/u-boot/arch/cc.h
->>  create mode 100644 lib/lwip/u-boot/arch/sys_arch.h
->>  create mode 100644 lib/lwip/u-boot/limits.h
->>  create mode 100644 lib/lwip/u-boot/lwipopts.h
->>  create mode 100644 net/lwip/Kconfig
->>  create mode 100644 net/lwip/Makefile
->>  create mode 100644 net/lwip/dhcp.c
->>  create mode 100644 net/lwip/dns.c
->>  create mode 100644 net/lwip/eth_internal.h
->>  create mode 100644 net/lwip/net-lwip.c
->>  create mode 100644 net/lwip/ping.c
->>  create mode 100644 net/lwip/tftp.c
->>  create mode 100644 net/lwip/wget.c
->>  create mode 100644 net/net-common.c
->>
->> --
->> 2.40.1
->>
