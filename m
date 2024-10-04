@@ -4,92 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 570E4CFA76F
-	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 12:02:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 973CDCFA76F
+	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 12:03:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FA4688B63;
-	Fri,  4 Oct 2024 14:01:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1EC3A88B86;
+	Fri,  4 Oct 2024 14:03:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TYMofpr9";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cISUWQIO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A06388B86; Fri,  4 Oct 2024 14:01:58 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 6297688C44; Fri,  4 Oct 2024 14:03:00 +0200 (CEST)
+Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
+ [IPv6:2607:f8b0:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F8C788965
- for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 14:01:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BE94C88B63
+ for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 14:02:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-42cb1e623d1so20203125e9.0
- for <u-boot@lists.denx.de>; Fri, 04 Oct 2024 05:01:56 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pg1-x52b.google.com with SMTP id
+ 41be03b00d2f7-7d50a42ce97so858972a12.0
+ for <u-boot@lists.denx.de>; Fri, 04 Oct 2024 05:02:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728043315; x=1728648115; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=cRg7jjM2E5jytvD98QdgNk4TkKSDLyzn//VDsqRzWAg=;
- b=TYMofpr9slSHAahcxcO/puJVW3UPVzJAT1MtoyMeDfxAR/KM/vuFSzI1YnEOhIibM5
- fib0qKbxy7JY4fWE/6HQS5SXty/hTNTw1Y40FfVNxEu3EFc5kMIcf9fkDiTdUFCuUxIa
- hNP8HtmxtwuMpq1WdjMrj2wnzTAIeX4Qc9SJuLyiLyzDchoosMsmylNtYI0U37o8g6rk
- rCxBDiVjJ/jLzbnhx0zG1TnpJyXBqQb0q0sVQknkVJvdRgRynaevUmQPzhUz3JTqw3Ms
- AYgUrkUDTKTwAQHqIypx1ycr9LyNL3zTZr6OAIMOPlRRMkHn9FiEPBdQGG4dGBS/vPJb
- 91+Q==
+ d=linaro.org; s=google; t=1728043376; x=1728648176; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZSDHj969japCRlswWmJ7kUWUI6FnRItHR9Vd9TAnmmk=;
+ b=cISUWQIOOeFUJ88Cc9UbVmp4nCqJZDpJEf/o8VGY7SzELqwpV/84/NcT3jY5R5THQK
+ FVeHW3qCGfOghxKjAxvVAr55IfJh8Zs6/gILo8Alpi2C70qZAQNcxOWNPybgGstgZITk
+ UPPwjOw4O+zO2ay9u4buTuFD+z5oHxk99XvMtkiIxrwILWk0Qjoy3XTQySMeLGLePdHq
+ lccNI6zrcDaRk2Z3pMwCYR1D8LnZfdDadk5th1nprHcAVghQQPF0aCbNAvBWWvS5Xyse
+ uiVrimszlTe+qoWYj5IHf3YkMCwWOtUwqFx2X/9hXU4bzvsUVvidxyKZKdWhRy028qeI
+ KouQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728043315; x=1728648115;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=cRg7jjM2E5jytvD98QdgNk4TkKSDLyzn//VDsqRzWAg=;
- b=f5GZncCeQ/IKZoV15kv/6KGp/QQMHi4Q6M4JJCEc7Mbreh/LsPlXdd2mZqfFpsWWFG
- OiMF8RmvZBxDiHtsTh5wZVr+ddWlKtWQsrIezXrTWzSuw7S+VczP1OW8j3PNEnsPhydw
- aCOmNWX8mbcCU4jYFXaK3XCK2y3hHPCvvhahdkZH+XCLsYmAFtU7xGnJD9HMTl4LN1wP
- FAyEp4pstV+zZCZGQTyNo4DkCvUkHZz+9l/dtqQD+HrA9Nx5wXRePdaaZ2sRRRxXQh9e
- SaqizcHvvIrehwgoICwFYVZENVO4eapwmT5z8DpIgi2ELfabYQJh62kBkrTOySmYPfwS
- wt+w==
-X-Gm-Message-State: AOJu0Yz6JIZnrdbZ89CUEIhSA4yn7rmytmnAYfY8rQGTWaLqkoonC7If
- rIpgQ/VOoCANJAzD/RIz/vZQRkjnKnmg7nd+vxy8xuC5TqGYWjFyIjKGcx2d+6Q=
-X-Google-Smtp-Source: AGHT+IEIPFX5pbVneBUdR2xrO01KMdwnwQrFt6F3fGr1449Z0x5OfiZXXt6V4ngNG6S5K1HTwyo0tQ==
-X-Received: by 2002:adf:ebcb:0:b0:37c:d179:2f72 with SMTP id
- ffacd0b85a97d-37d0e6f2853mr1504415f8f.3.1728043315239; 
- Fri, 04 Oct 2024 05:01:55 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:c79f:f6d3:6b70:dbe?
- ([2a01:e0a:3cb:7bb0:c79f:f6d3:6b70:dbe])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d0822b970sm3123497f8f.43.2024.10.04.05.01.54
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 04 Oct 2024 05:01:54 -0700 (PDT)
-Message-ID: <6d9bfd36-848a-4c9b-b5cb-929752bf3c7a@linaro.org>
-Date: Fri, 4 Oct 2024 14:01:53 +0200
+ d=1e100.net; s=20230601; t=1728043376; x=1728648176;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ZSDHj969japCRlswWmJ7kUWUI6FnRItHR9Vd9TAnmmk=;
+ b=U4igZ62RutV+5Ihc758deYKTqvBzRfGKAGHsDcCRvrF0jSBykPZ75K54XEJ4JZHFiR
+ RoZiLlDJm5Sza2Sxl/lcliIIKThfM8vkNGSpWmL0yDBWzf6fyE5zreddXP86sFILHxeT
+ U/Z6RisNdWWrFOphYXVCbY0SLpP9LeF+Pqz8veNUlWHTJT7UW6iR4RVWNEGnRNxaEPIO
+ DOEJ8YZd0ezI7RvRQcSe5VAcYCw4FGHEP8ggVAfGICtEfF4NUNL154kZ9GBi9Rffszge
+ PdsAIs3oA/Q8Da1F10Ze/7aD/gbtF6t+t06uBnDj2XWcvyZ9bnKC5UiGOShqRdw+keNv
+ gICg==
+X-Gm-Message-State: AOJu0YymKaiaHBKgB1sAV5TIg8F0hAwXXNqHHfuBEOp3UTWE1KeVpR9L
+ fKL/wx4GBq+HX64Wg6pujtKhSiQ6rQay6bQHPOyQsUlzRE/c4gdBrPt1YWyj9Np0cc90I76I8jg
+ 4/0+r6LzQGCvN6732hvgf1Z4clgK4ji9gbkOcRA==
+X-Google-Smtp-Source: AGHT+IHhkv/NGDourPgLh7RuCDS2zEmyH+HLfD12RN4YHoUUL2yrAbwfqWKG8Fa1rH+ML4/nhr4Rs8XH8GNlSdEqsyA=
+X-Received: by 2002:a17:90b:302:b0:2d8:d098:4f31 with SMTP id
+ 98e67ed59e1d1-2e1e626c06amr2547358a91.17.1728043375978; Fri, 04 Oct 2024
+ 05:02:55 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v11 06/29] test: boot: fix bootflow_cmd_label for when
- DSA_SANDBOX is disabled
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, Javier Tia <javier.tia@linaro.org>,
- Raymond Mao <raymond.mao@linaro.org>, Maxim Uvarov <muvarov@gmail.com>,
- Tim Harvey <tharvey@gateworks.com>, Anton Antonov <Anton.Antonov@arm.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Francis Laniel <francis.laniel@amarulasolutions.com>
 References: <cover.1727968902.git.jerome.forissier@linaro.org>
- <2e8206d8bbd7d3140cf2734ca9b3fcd12ced4f14.1727968902.git.jerome.forissier@linaro.org>
- <CAC_iWjLTVV=QpfgGMTSJ205JGRzNDkBuJeO9GwEW4D4PhrJWrw@mail.gmail.com>
- <e9c3ac80-84f0-4900-85fc-b9af4ebc5363@linaro.org>
- <CAC_iWjLS21x3ZOGDnvWWj4y1Hfs_vuw=YnMRZCSAaL42mYYGXg@mail.gmail.com>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <CAC_iWjLS21x3ZOGDnvWWj4y1Hfs_vuw=YnMRZCSAaL42mYYGXg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+ <6ebffbe03de27d5177bec361fdc5e26816ceb849.1727968902.git.jerome.forissier@linaro.org>
+In-Reply-To: <6ebffbe03de27d5177bec361fdc5e26816ceb849.1727968902.git.jerome.forissier@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 4 Oct 2024 15:02:19 +0300
+Message-ID: <CAC_iWjKkhhAvkk=2DNScZWFOLjL_ZR9EJ519AnOa0EZON=Nx0A@mail.gmail.com>
+Subject: Re: [PATCH v11 15/29] net-lwip: add TFTP support and tftpboot command
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Javier Tia <javier.tia@linaro.org>, 
+ Raymond Mao <raymond.mao@linaro.org>, Maxim Uvarov <muvarov@gmail.com>, 
+ Tim Harvey <tharvey@gateworks.com>, Anton Antonov <Anton.Antonov@arm.com>, 
+ Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,81 +96,461 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, 3 Oct 2024 at 18:47, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
+>
+> Implement do_tftpb(). This implementation of the tftp command
+> supports an optional port number. For example:
+>
+>  tftp 192.168.0.30:9069:file.bin
+>
+> It also supports taking the server IP from ${tftpserverip} if
+> defined, before falling back to ${serverip}.
+>
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> ---
+>  cmd/Kconfig          |   3 +-
+>  cmd/net-lwip.c       |   8 ++
+>  include/net-common.h |   4 +
+>  include/net-lwip.h   |   4 +
+>  lib/binman.c         |   1 +
+>  net/lwip/dhcp.c      |  11 +-
+>  net/lwip/net-lwip.c  |  16 +++
+>  net/lwip/tftp.c      | 283 ++++++++++++++++++++++++++++++++++++++++++-
+>  8 files changed, 324 insertions(+), 6 deletions(-)
+>
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index d09c237a52f..f1372a025b7 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -2119,10 +2119,9 @@ config CMD_MDIO
+>  config CMD_TFTPBOOT
+>         bool "tftp"
+>         select PROT_UDP_LWIP if NET_LWIP
+> -       default n
+> +       default y
+>         help
+>           tftpboot - load file via network using TFTP protocol
+> -         Currently a placeholder (not implemented) when NET_LWIP=y.
+>
+>  endif  # if CMD_NET
+>
+> diff --git a/cmd/net-lwip.c b/cmd/net-lwip.c
+> index 82edb5fd2e6..80f0872bb8f 100644
+> --- a/cmd/net-lwip.c
+> +++ b/cmd/net-lwip.c
+> @@ -11,3 +11,11 @@ U_BOOT_CMD(
+>          "[loadAddress] [[hostIPaddr:]bootfilename]"
+>  );
+>  #endif
+> +
+> +#if defined(CONFIG_CMD_TFTPBOOT)
+> +U_BOOT_CMD(
+> +       tftpboot,       3,      0,      do_tftpb,
+> +       "boot image via network using TFTP protocol\n",
+> +       "[loadAddress] [[hostIPaddr:]bootfilename]"
+> +);
+> +#endif
+> diff --git a/include/net-common.h b/include/net-common.h
+> index cbcac178c82..fd7c5e7b488 100644
+> --- a/include/net-common.h
+> +++ b/include/net-common.h
+> @@ -459,6 +459,10 @@ static inline struct in_addr env_get_ip(char *var)
+>
+>  int net_init(void);
+>
+> +/* NET compatibility */
+> +enum proto_t;
+> +int net_loop(enum proto_t protocol);
+> +
+>  /**
+>   * dhcp_run() - Run DHCP on the current ethernet device
+>   *
+> diff --git a/include/net-lwip.h b/include/net-lwip.h
+> index cfd06726577..37744b0e2cd 100644
+> --- a/include/net-lwip.h
+> +++ b/include/net-lwip.h
+> @@ -6,6 +6,10 @@
+>  #include <lwip/ip4.h>
+>  #include <lwip/netif.h>
+>
+> +enum proto_t {
+> +       TFTPGET
+> +};
+> +
+>  struct netif *net_lwip_new_netif(struct udevice *udev);
+>  struct netif *net_lwip_new_netif_noip(struct udevice *udev);
+>  void net_lwip_remove_netif(struct netif *netif);
+> diff --git a/lib/binman.c b/lib/binman.c
+> index 9047f5275f3..93d85548116 100644
+> --- a/lib/binman.c
+> +++ b/lib/binman.c
+> @@ -137,6 +137,7 @@ int binman_init(void)
+>  {
+>         int ret;
+>
+> +       return 0;
+>         binman = malloc(sizeof(struct binman_info));
+>         if (!binman)
+>                 return log_msg_ret("space for binman", -ENOMEM);
+> diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
+> index be458d554cb..14685cf7825 100644
+> --- a/net/lwip/dhcp.c
+> +++ b/net/lwip/dhcp.c
+> @@ -116,11 +116,20 @@ int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>  int dhcp_run(ulong addr, const char *fname, bool autoload)
+>  {
+>         char *dhcp_argv[] = {"dhcp", NULL, };
+> +#ifdef CONFIG_CMD_TFTPBOOT
+> +       char *tftp_argv[] = {"tftpboot", boot_file_name, NULL, };
+> +#endif
+>         struct cmd_tbl cmdtp = {};      /* dummy */
+>
+>         if (autoload) {
+> -               /* Will be supported when TFTP is added */
+> +#ifdef CONFIG_CMD_TFTPBOOT
+> +               /* Assume DHCP was already performed */
+> +               if (boot_file_name[0])
+> +                       return do_tftpb(&cmdtp, 0, 2, tftp_argv);
+> +               return 0;
+> +#else
+>                 return -EOPNOTSUPP;
+> +#endif
+>         }
+>
+>         return do_dhcp(&cmdtp, 0, 1, dhcp_argv);
+> diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
+> index ca5426d058b..6a27d71de73 100644
+> --- a/net/lwip/net-lwip.c
+> +++ b/net/lwip/net-lwip.c
+> @@ -28,6 +28,7 @@ const u8 net_bcast_ethaddr[6] = { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff };
+>  char *pxelinux_configfile;
+>  /* Our IP addr (0 = unknown) */
+>  struct in_addr net_ip;
+> +char net_boot_file_name[1024];
+>
+>  static err_t linkoutput(struct netif *netif, struct pbuf *p)
+>  {
+> @@ -285,6 +286,21 @@ void net_process_received_packet(uchar *in_packet, int len)
+>  #endif
+>  }
+>
+> +int net_loop(enum proto_t protocol)
+> +{
+> +       char *argv[1];
+> +
+> +       switch (protocol) {
+> +       case TFTPGET:
+> +               argv[0] = "tftpboot";
+> +               return do_tftpb(NULL, 0, 1, argv);
+> +       default:
+> +               return -EINVAL;
+> +       }
+> +
+> +       return -EINVAL;
+> +}
+> +
+>  u32_t sys_now(void)
+>  {
+>         return get_timer(0);
+> diff --git a/net/lwip/tftp.c b/net/lwip/tftp.c
+> index 1fa246f55d9..26978643313 100644
+> --- a/net/lwip/tftp.c
+> +++ b/net/lwip/tftp.c
+> @@ -2,10 +2,287 @@
+>  /* Copyright (C) 2024 Linaro Ltd. */
+>
+>  #include <command.h>
+> -#include <net-lwip.h>
+> +#include <console.h>
+> +#include <display_options.h>
+> +#include <dm/device.h>
+> +#include <efi_loader.h>
+> +#include <image.h>
+> +#include <linux/delay.h>
+> +#include <lwip/apps/tftp_client.h>
+> +#include <lwip/timeouts.h>
+> +#include <mapmem.h>
+> +#include <net.h>
+> +#include <time.h>
+> +
+> +#define PROGRESS_PRINT_STEP_BYTES (10 * 1024)
+> +
+> +enum done_state {
+> +       NOT_DONE = 0,
+> +       SUCCESS,
+> +       FAILURE,
+> +       ABORTED
+> +};
+> +
+> +struct tftp_ctx {
+> +       ulong daddr;
+> +       ulong size;
+> +       ulong block_count;
+> +       ulong start_time;
+> +       enum done_state done;
+> +};
+> +
+> +static void *tftp_open(const char *fname, const char *mode, u8_t is_write)
+> +{
+> +       return NULL;
+> +}
+> +
+> +static void tftp_close(void *handle)
+> +{
+> +       struct tftp_ctx *ctx = handle;
+> +       ulong elapsed;
+> +
+> +       if (ctx->done == FAILURE || ctx->done == ABORTED) {
+> +               /* Closing after an error or Ctrl-C */
+> +               return;
+> +       }
+> +       ctx->done = SUCCESS;
+> +
+> +       elapsed = get_timer(ctx->start_time);
+> +       if (elapsed > 0) {
+> +               puts("\n\t ");  /* Line up with "Loading: " */
+> +               print_size(ctx->size / elapsed * 1000, "/s");
+> +       }
+> +       puts("\ndone\n");
+> +       printf("Bytes transferred = %lu (%lx hex)\n", ctx->size, ctx->size);
+> +
+> +       if (env_set_hex("filesize", ctx->size)) {
+> +               log_err("filesize not updated\n");
+> +               return;
+> +       }
+> +}
+> +
+> +static int tftp_read(void *handle, void *buf, int bytes)
+> +{
+> +       return 0;
+> +}
+> +
+> +static int tftp_write(void *handle, struct pbuf *p)
+> +{
+> +       struct tftp_ctx *ctx = handle;
+> +       struct pbuf *q;
+> +
+> +       for (q = p; q != NULL; q = q->next) {
+> +               memcpy((void *)ctx->daddr, q->payload, q->len);
+> +               ctx->daddr += q->len;
+> +               ctx->size += q->len;
+> +               ctx->block_count++;
+> +               if (ctx->block_count % 10 == 0) {
+> +                       putc('#');
+> +                       if (ctx->block_count % (65 * 10) == 0)
+> +                               puts("\n\t ");
+> +               }
+> +       }
+> +
+> +       return 0;
+> +}
+> +
+> +static void tftp_error(void *handle, int err, const char *msg, int size)
+> +{
+> +       struct tftp_ctx *ctx = handle;
+> +       char message[100];
+> +
+> +       ctx->done = FAILURE;
+> +       memset(message, 0, sizeof(message));
+> +       memcpy(message, msg, LWIP_MIN(sizeof(message) - 1, (size_t)size));
+> +
+> +       printf("\nTFTP error: %d (%s)\n", err, message);
+> +}
+> +
+> +static const struct tftp_context tftp_context = {
+> +       tftp_open,
+> +       tftp_close,
+> +       tftp_read,
+> +       tftp_write,
+> +       tftp_error
+> +};
+> +
+> +static int tftp_loop(struct udevice *udev, ulong addr, char *fname,
+> +                    ip_addr_t srvip, uint16_t srvport)
+> +{
+> +       struct netif *netif;
+> +       struct tftp_ctx ctx;
+> +       err_t err;
+> +
+> +       if (!fname || addr == 0)
+> +               return -1;
+> +
+> +       if (!srvport)
+> +               srvport = TFTP_PORT;
+> +
+> +       netif = net_lwip_new_netif(udev);
+> +       if (!netif)
+> +               return -1;
+> +
+> +       ctx.done = NOT_DONE;
+> +       ctx.size = 0;
+> +       ctx.block_count = 0;
+> +       ctx.daddr = addr;
+> +
+> +       printf("Using %s device\n", udev->name);
+> +       printf("TFTP from server %s; our IP address is %s\n",
+> +                ip4addr_ntoa(&srvip), env_get("ipaddr"));
+> +       printf("Filename '%s'.\n", fname);
+> +       printf("Load address: 0x%lx\n", ctx.daddr);
+> +       printf("Loading: ");
+> +
+> +       err = tftp_init_client(&tftp_context);
+> +       if (!(err == ERR_OK || err == ERR_USE))
+> +               log_err("tftp_init_client err: %d\n", err);
+> +
+> +       ctx.start_time = get_timer(0);
+> +       err = tftp_get(&ctx, &srvip, srvport, fname, TFTP_MODE_OCTET);
+> +       /* might return different errors, like routing problems */
+> +       if (err != ERR_OK) {
+> +               printf("tftp_get() error %d\n", err);
+> +               net_lwip_remove_netif(netif);
+> +               return -1;
+> +       }
+> +
+> +       while (!ctx.done) {
+> +               net_lwip_rx(udev, netif);
+> +               sys_check_timeouts();
+> +               if (ctrlc()) {
+> +                       printf("\nAbort\n");
+> +                       ctx.done = ABORTED;
+> +                       break;
+> +               }
+> +       }
+> +
+> +       tftp_cleanup();
+> +
+> +       net_lwip_remove_netif(netif);
+> +
+> +       if (ctx.done == SUCCESS) {
+> +               if (env_set_hex("fileaddr", addr)) {
+> +                       log_err("fileaddr not updated\n");
+> +                       return -1;
+> +               }
+> +               efi_set_bootdev("Net", "", fname, map_sysmem(addr, 0),
+> +                               ctx.size);
+> +               return 0;
+> +       }
+> +
+> +       return -1;
+> +}
+>
+>  int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>  {
+> -       /* Not implemented */
+> -       return CMD_RET_FAILURE;
+> +       int ret = CMD_RET_SUCCESS;
+> +       char *arg = NULL;
+> +       char *words[3] = { };
+> +       char *fname = NULL;
+> +       char *server_ip = NULL;
+> +       char *server_port = NULL;
+> +       char *end;
+> +       ip_addr_t srvip;
+> +       uint16_t port = TFTP_PORT;
+> +       ulong laddr;
+> +       ulong addr;
+> +       int i;
+> +
+> +       laddr = env_get_ulong("loadaddr", 16, image_load_addr);
+> +
+> +       switch (argc) {
+> +       case 1:
+> +               fname = env_get("bootfile");
+> +               break;
+> +       case 2:
+> +               /*
+> +                * Only one arg - accept two forms:
+> +                * Just load address, or just boot file name. The latter
+> +                * form must be written in a format which can not be
+> +                * mis-interpreted as a valid number.
+> +                */
+> +               addr = hextoul(argv[1], &end);
+> +               if (end == (argv[1] + strlen(argv[1]))) {
+> +                       laddr = addr;
+> +                       fname = env_get("bootfile");
+> +               } else {
+> +                       arg = strdup(argv[1]);
+> +               }
+> +               break;
+> +       case 3:
+> +               laddr = hextoul(argv[1], NULL);
+> +               arg = strdup(argv[2]);
+> +               break;
+> +       default:
+> +               ret = CMD_RET_USAGE;
+> +               goto out;
+> +       }
+> +
+> +       if (!arg)
+> +               arg = net_boot_file_name;
+> +
+> +       if (arg) {
+> +               /* Parse [ip:[port:]]fname */
+> +               i = 0;
+> +               while ((*(words + i) = strsep(&arg,":")))
+> +                       i++;
+> +
+> +               switch (i) {
+> +               case 3:
+> +                       server_ip = words[0];
+> +                       server_port = words[1];
+> +                       fname = words[2];
+> +                       break;
+> +               case 2:
+> +                       server_ip = words[0];
+> +                       fname = words[1];
+> +                       break;
+> +               case 1:
+> +                       fname = words[0];
+> +                       break;
+> +               default:
+> +                       break;
+> +               }
+> +       }
+> +
+> +       if (!server_ip)
+> +               server_ip = env_get("tftpserverip");
+> +       if (!server_ip)
+> +               server_ip = env_get("serverip");
+> +       if (!server_ip) {
+> +               log_err("error: tftpserverip/serverip has to be set\n");
+> +               ret = CMD_RET_FAILURE;
+> +               goto out;
+> +       }
+> +
+> +       if (server_port)
+> +               port = dectoul(server_port, NULL);
+> +
+> +       if (!ipaddr_aton(server_ip, &srvip)) {
+> +               log_err("error: ipaddr_aton\n");
+> +               ret = CMD_RET_FAILURE;
+> +               goto out;
+> +       }
+> +
+> +       if (!fname) {
+> +               log_err("error: no file name\n");
+> +               ret = CMD_RET_FAILURE;
+> +               goto out;
+> +       }
+> +
+> +       if (!laddr) {
+> +               log_err("error: no load address\n");
+> +               ret = CMD_RET_FAILURE;
+> +               goto out;
+> +       }
+> +
+> +       eth_set_current();
+> +
+> +       if (tftp_loop(eth_get_dev(), laddr, fname, srvip, port) < 0)
+> +               ret = CMD_RET_FAILURE;
+> +out:
+> +       free(arg);
+> +       return ret;
+>  }
+> --
+> 2.40.1
+>
 
-
-On 10/4/24 11:37, Ilias Apalodimas wrote:
-> On Fri, 4 Oct 2024 at 11:46, Jerome Forissier
-> <jerome.forissier@linaro.org> wrote:
->>
->>
->>
->> On 10/4/24 08:55, Ilias Apalodimas wrote:
->>> Hi Jerome,
->>>
->>> On Thu, 3 Oct 2024 at 18:23, Jerome Forissier
->>> <jerome.forissier@linaro.org> wrote:
->>>>
->>>> When DSA_SANDBOX is not set, the sandbox tests fail as follows:
->>>>
->>>>  $ ./test/py/test.py --build-dir=$(pwd) -k bootdev_test_any
->>>>  [...]
->>>>  Scanning for bootflows with label '9'
->>>>  [...]
->>>>  Cannot find '9' (err=-19)
->>>>
->>>> This is due to the device list containing two less entries than
->>>> expected. Therefore, look for label '7' when DSA_SANDBOX is disabled.
->>>>
->>>> The actual use case is NET_LWIP=y (to be introduced in later patches)
->>>> which implies DSA_SANDBOX=n for the time being.
->>>>
->>>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
->>>> ---
->>>>  test/boot/bootflow.c | 7 +++++--
->>>>  1 file changed, 5 insertions(+), 2 deletions(-)
->>>>
->>>> diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
->>>> index 6ad63afe90a..c440b8eb778 100644
->>>> --- a/test/boot/bootflow.c
->>>> +++ b/test/boot/bootflow.c
->>>> @@ -109,9 +109,12 @@ static int bootflow_cmd_label(struct unit_test_state *uts)
->>>>          * 8   [   ]      OK  mmc       mmc2.bootdev
->>>>          * 9   [ + ]      OK  mmc       mmc1.bootdev
->>>>          * a   [   ]      OK  mmc       mmc0.bootdev
->>>> +        *
->>>> +        * However with CONFIG_DSA_SANDBOX=n we have two less (dsa-test@0 and
->>>> +        * dsa-test@1).
->>>>          */
->>>> -       ut_assertok(run_command("bootflow scan -lH 9", 0));
->>>> -       ut_assert_nextline("Scanning for bootflows with label '9'");
->>>
->>> Shouldn't this under and #ifdef, IS_ENABLED etc?
->>
->> In theory yes, but we can avoid the conditional by using index 7 which is always
->> valid, i.e., in all configurations we have at least 7 devices (even 8 actually).
-> 
-> Ok, but I *think* Simon was trying to match the exact out put here,
-> not 'at least 7'.
-> 
-> I think we are better off being strict on this test
-
-No because there are 10 entries according to the comment ("a" hex being
-mmc0.bootdev). Simon, what do you suggest?
-
-Thanks,
--- 
-Jerome
-
-> 
-> Thanks
-> /Ilias
->>
->>>
->>>> +       ut_assertok(run_command("bootflow scan -lH 7", 0));
->>>> +       ut_assert_nextline("Scanning for bootflows with label '7'");
->>>>         ut_assert_skip_to_line("(1 bootflow, 1 valid)");
->>>>
->>>>         ut_assertok(run_command("bootflow scan -lH 0", 0));
->>>> --
->>>> 2.40.1
->>>>
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Tested-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
