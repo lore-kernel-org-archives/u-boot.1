@@ -4,59 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4DBDCF34D6
-	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 00:11:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FF09CF34DD
+	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 01:29:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A93CB88CB8;
-	Fri,  4 Oct 2024 02:11:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id A68B488B86;
+	Fri,  4 Oct 2024 03:29:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1728000693;
-	bh=a68fXC63Ot66c4RegCu9ddStsqXg2mbhrsS9sFX1HWE=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=k3oNzB04h9lloT78Jclfyh0yqueFtjmuhv4YVt2lr3+w8zXhiLy/O5d/4lw03V82j
-	 ijTyRnreMBSUJ5Y+dE2oDY1PKjY2OxGWuemMeHEq3++X1dL7eIyGfDfALlksOaUjUN
-	 IkIwJcaC7M0AzH0pFoE1k2+f4DChQnAma5/xphWFf+crvx51MnC7aYoNzg+MiNIFA6
-	 bZ0p+/gzm8t+YnUIPqYDbNxXuFyVvQUbzUKskaMu7DDKvVhj3fJiBVDmbQr+oAQIQV
-	 jYUdQDA+SVloC8KiMpR8thKUZ1kE7qS3X/SBLWVsc2izjkK6qqS++DOYLqz8Dd+Hxh
-	 IPvFgCg4opvbg==
-Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NQ9BA4xK";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id B8FF588BEF; Fri,  4 Oct 2024 03:29:12 +0200 (CEST)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 997B28657F;
- Fri,  4 Oct 2024 02:11:31 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1728000692;
- bh=a68fXC63Ot66c4RegCu9ddStsqXg2mbhrsS9sFX1HWE=;
- h=From:To:Cc:Subject:Date:From;
- b=s51+z+p/bvfH3qM/GNb+LNulFtDz1vmf3cOXWrGqkV57rSnlCACY/jw2+/oQmdD/k
- WJEXXV/M/xv0s5LZ01uSTU4srpIJA3EnSKxHfVXrQYGRbgXfnzoQH4OSAkBvJRtxo4
- sli4qD6bmCot7uQDX+cW4PI7CFvky+6CHPOVHVOn16+i7u4Br9BJ0cR1vGoSrnHG2c
- 1i60p0OInZzaq742VxGdmLwqaGAq0q9FuBkBnIzuqw06S+VHLwi1drvzY356uak//t
- Ev1b2IR7P8Qoe2O00qJK0JbBWDebcBxcuRzRxDYUtEoGAwtPHXdnst0KYsMM9ka5i2
- iXtHIAleZYDhQ==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Sumit Garg <sumit.garg@linaro.org>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- Fabio Estevam <festevam@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Jonas Karlman <jonas@kwiboo.se>,
- Lothar Rubusch <l.rubusch@gmail.com>, Michal Simek <michal.simek@amd.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@denx.de>,
- Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
-Subject: [PATCH v2] dts: Deduplicate dtbs target
-Date: Fri,  4 Oct 2024 02:10:42 +0200
-Message-ID: <20241004001118.322531-1-marex@denx.de>
-X-Mailer: git-send-email 2.45.2
+ by phobos.denx.de (Postfix) with ESMTPS id 5438A888B2
+ for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 03:29:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6cb37b34a87so10528576d6.0
+ for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 18:29:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1728005349; x=1728610149; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=vvMH3Qa+LQ4S59FO8lTfjFp+2P8Sal03oWm05geOLbc=;
+ b=NQ9BA4xKn/U9d+dbwL3o0Hn3iN0R9yPgrzn41rFgG1DIxoGbslL0pso7wNad3c/QRf
+ j3MWFwoO8K9GGTVX0d5qmFg8eznfbUeCyUTVXSZYXGvmTumtcAwHCwufIKfJGshT6BA8
+ +CBkDSGUFTeor+vi2F8xqXDLJiC+UrznOqyPs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728005349; x=1728610149;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vvMH3Qa+LQ4S59FO8lTfjFp+2P8Sal03oWm05geOLbc=;
+ b=F5ZaKuDHxI4FbzdYbKOGIPXSEub9bJOP3qYZLABhDEtb0PQeXwMiHvzobRly9bJfZO
+ Ghry5wJZVg6LUzqFVpT7J1jnmkRjlN4aiEte5wmkO7U6iuJlvwxZvXFjh3p2RRLU/PHS
+ +rTU9PjGlnCVWfMMjSR1cUxLcu05HmYLY/p8hA+WdxywB466e2mXzsgXU2HjDnglJz0U
+ 0TbveHeX6n9p2qpO6bzgo/WmuN/tPa19pxESPeUrrvV+59ho6IynF87q6j4ppJyEG48I
+ PWUY1Qc3kmY/mIQU9oU6T5WRZx76dyuqgSK5lk55VDyfcSqpRf5DY9MLAtAiKrjy65A6
+ GFUA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWiI+rHIAs4vLRuv1yRp3djl7KaQAHGoAk2mDL9IhYcfqWKCDm7otcEVbnR0gzCASgY8nKoznk=@lists.denx.de
+X-Gm-Message-State: AOJu0YyfzwxlB24Z6pjCV9TIiUuHQpfFKlAKEqsRymvbCzYhRSULo1qN
+ 9PycHwhyvQkb5L8tAtU7JmsXfSRxyCFY5JgxqYCqet6Kb4yb9vzPab2aASCEkNCV/DQaLER9Pzf
+ ZMR1bbGYUoXkk/oe9tBDHYmuP46p3yVZh0Pg5
+X-Google-Smtp-Source: AGHT+IFj9d85f1eQtHSkGvhdDNbkjJt9EH31b/BnJ1YBDDiqHP6jaUY8+wnu6eqM+gDybRwbnBYQBhNpSHze/gepBBQ=
+X-Received: by 2002:a05:6214:5d0e:b0:6cb:9058:37ff with SMTP id
+ 6a1803df08f44-6cb9a44227amr19887356d6.14.1728005349116; Thu, 03 Oct 2024
+ 18:29:09 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241002094832.24933-1-patrick.rudolph@9elements.com>
+ <20241002094832.24933-26-patrick.rudolph@9elements.com>
+ <CAFLszTh-cEBp0-HP5XMONdwSUBepKWNgJSHLJfQ2VYW9FgJq=Q@mail.gmail.com>
+ <20241003013516.GR4737@bill-the-cat>
+ <CAFLszTgoD6YDpGTJLPxfqXoudR=TDDDAHQMUJzK+mxntpfhk4w@mail.gmail.com>
+ <20241003144351.GU4737@bill-the-cat>
+ <CAFLszThJ8ZUpq9_VVTxw6YwCmKqx1gghwinPx-=Srqc5k02UCw@mail.gmail.com>
+ <20241003191751.GV4737@bill-the-cat>
+ <CAFLszTi5nj-tXuO+UGJSPbJxqFtwQXkN8UsjT2hi1LF6zGLFHg@mail.gmail.com>
+ <20241003222516.GW4737@bill-the-cat>
+In-Reply-To: <20241003222516.GW4737@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 3 Oct 2024 19:28:58 -0600
+Message-ID: <CAFLszTgwkZCu9J5Yr0+0xeB4rgeekLAuzXiY1fmEzD4stoPDWQ@mail.gmail.com>
+Subject: Re: [PATCH v6 25/37] board: emulation: Add QEMU sbsa support
+To: Tom Rini <trini@konsulko.com>
+Cc: Patrick Rudolph <patrick.rudolph@9elements.com>, u-boot@lists.denx.de, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>, 
+ Peter Robinson <pbrobinson@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,342 +95,139 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The dtbs: target is almost identical in all architecture Makefiles.
-All architecture Makefiles include scripts/Makefile.dts . Deduplicate
-the dtbs: target into scripts/Makefile.dts . No functional change.
+Hi Tom,
 
-Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-Cc: Fabio Estevam <festevam@gmail.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Jonas Karlman <jonas@kwiboo.se>
-Cc: Lothar Rubusch <l.rubusch@gmail.com>
-Cc: Michal Simek <michal.simek@amd.com>
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Stefano Babic <sbabic@denx.de>
-Cc: Sumit Garg <sumit.garg@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@dh-electronics.com
-Cc: u-boot@lists.denx.de
----
-V2: Add RB from Sumit
-NOTE: I am sending this separately
----
- arch/arc/dts/Makefile            | 9 +--------
- arch/arm/dts/Makefile            | 8 --------
- arch/m68k/dts/Makefile           | 9 +--------
- arch/microblaze/dts/Makefile     | 9 +--------
- arch/mips/dts/Makefile           | 8 --------
- arch/nios2/dts/Makefile          | 9 +--------
- arch/powerpc/dts/Makefile        | 8 --------
- arch/riscv/dts/Makefile          | 9 +--------
- arch/sandbox/dts/Makefile        | 9 +--------
- arch/sh/dts/Makefile             | 8 --------
- arch/x86/dts/Makefile            | 8 --------
- arch/xtensa/dts/Makefile         | 8 --------
- dts/upstream/src/arm/Makefile    | 8 --------
- dts/upstream/src/arm64/Makefile  | 8 --------
- dts/upstream/src/xtensa/Makefile | 8 --------
- scripts/Makefile.dts             | 8 ++++++++
- 16 files changed, 14 insertions(+), 120 deletions(-)
+On Thu, 3 Oct 2024 at 16:25, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Thu, Oct 03, 2024 at 02:46:03PM -0600, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Thu, 3 Oct 2024 at 13:17, Tom Rini <trini@konsulko.com> wrote:
+> [snip]
+> > > We don't, but this isn't quite a normal board?
+> >
+> > Don't be surprised if this becomes more common. For better or worse,
+> > ARM has decided on ACPI for its servers and RISC-V is following. We
+> > also have the EFI app, which has a devicetree, although of course no
+> > actual addresses.
+>
+> True. And U-Boot being able to take and reasonably as far as the OS is
+> concerned be the UEFI implementation in UEFI+ACPI boot opens us up to
+> being able to be part of the software stack that's certified for
+> SystemReady ES and SR. On that real hardware we can certainly expect to
+> mandate that the previous part of the firmware stack gives us a device
+> tree. It will be TF-A and so the "pass over a device tree" part
+> shouldn't be an issue. And since yes, really (and for the future
+> record), real hardware isn't allowed to fake this out like we're
+> allowing here, today.
 
-diff --git a/arch/arc/dts/Makefile b/arch/arc/dts/Makefile
-index 532a8131c59..fe6ad7b849a 100644
---- a/arch/arc/dts/Makefile
-+++ b/arch/arc/dts/Makefile
-@@ -10,12 +10,5 @@ dtb-$(CONFIG_TARGET_IOT_DEVKIT) +=  iot_devkit.dtb
- 
- include $(srctree)/scripts/Makefile.dts
- 
--targets += $(dtb-y)
--
-+# Add any required device tree compiler flags here
- DTC_FLAGS += -R 4 -p 0x1000
--
--PHONY += dtbs
--dtbs: $(addprefix $(obj)/, $(dtb-y))
--	@:
--
--clean-files := *.dtb
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index d69b53ce8f7..e1cf4a43c23 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -1305,16 +1305,8 @@ dtb-$(CONFIG_TARGET_CORSTONE1000) += corstone1000-mps3.dtb \
- 
- include $(srctree)/scripts/Makefile.dts
- 
--targets += $(dtb-y)
--
- # Add any required device tree compiler flags here
- DTC_FLAGS += -a 0x8
- 
- DTC_FLAGS_imx8mp-dhcom-som-overlay-rev100 += -Wno-avoid_default_addr_size -Wno-reg_format
- DTC_FLAGS_imx8mp-dhcom-pdk3-overlay-rev100 += -Wno-avoid_default_addr_size -Wno-reg_format
--
--PHONY += dtbs
--dtbs: $(addprefix $(obj)/, $(dtb-y))
--	@:
--
--clean-files := *.dtb *.dtbo *_HS
-diff --git a/arch/m68k/dts/Makefile b/arch/m68k/dts/Makefile
-index 7988522eb98..8b354b9c570 100644
---- a/arch/m68k/dts/Makefile
-+++ b/arch/m68k/dts/Makefile
-@@ -20,12 +20,5 @@ dtb-$(CONFIG_TARGET_STMARK2) += stmark2.dtb
- 
- include $(srctree)/scripts/Makefile.dts
- 
--targets += $(dtb-y)
--
-+# Add any required device tree compiler flags here
- DTC_FLAGS += -R 4 -p 0x1000
--
--PHONY += dtbs
--dtbs: $(addprefix $(obj)/, $(dtb-y))
--	@:
--
--clean-files := *.dtb
-diff --git a/arch/microblaze/dts/Makefile b/arch/microblaze/dts/Makefile
-index 427a8f9aaca..9be902d3bb1 100644
---- a/arch/microblaze/dts/Makefile
-+++ b/arch/microblaze/dts/Makefile
-@@ -4,12 +4,5 @@ dtb-y += $(shell echo $(CONFIG_DEFAULT_DEVICE_TREE)).dtb
- 
- include $(srctree)/scripts/Makefile.dts
- 
--targets += $(dtb-y)
--
-+# Add any required device tree compiler flags here
- DTC_FLAGS += -R 4 -p 0x1000
--
--PHONY += dtbs
--dtbs: $(addprefix $(obj)/, $(dtb-y))
--	@:
--
--clean-files := *.dtb
-diff --git a/arch/mips/dts/Makefile b/arch/mips/dts/Makefile
-index 14fbce597b9..752e771514f 100644
---- a/arch/mips/dts/Makefile
-+++ b/arch/mips/dts/Makefile
-@@ -39,13 +39,5 @@ dtb-$(CONFIG_SOC_SERVAL) += serval_pcb105.dtb serval_pcb106.dtb
- 
- include $(srctree)/scripts/Makefile.dts
- 
--targets += $(dtb-y)
--
- # Add any required device tree compiler flags here
- DTC_FLAGS +=
--
--PHONY += dtbs
--dtbs: $(addprefix $(obj)/, $(dtb-y))
--	@:
--
--clean-files := *.dtb
-diff --git a/arch/nios2/dts/Makefile b/arch/nios2/dts/Makefile
-index 2b29fa90f6c..d77db9762a1 100644
---- a/arch/nios2/dts/Makefile
-+++ b/arch/nios2/dts/Makefile
-@@ -4,12 +4,5 @@ dtb-y += $(CONFIG_DEFAULT_DEVICE_TREE:"%"=%).dtb
- 
- include $(srctree)/scripts/Makefile.dts
- 
--targets += $(dtb-y)
--
-+# Add any required device tree compiler flags here
- DTC_FLAGS += -R 4 -p 0x1000
--
--PHONY += dtbs
--dtbs: $(addprefix $(obj)/, $(dtb-y))
--	@:
--
--clean-files := *.dtb
-diff --git a/arch/powerpc/dts/Makefile b/arch/powerpc/dts/Makefile
-index 321c644804e..766b0c05951 100644
---- a/arch/powerpc/dts/Makefile
-+++ b/arch/powerpc/dts/Makefile
-@@ -35,13 +35,5 @@ dtb-$(CONFIG_TARGET_CMPCPRO) += cmpcpro.dtb
- 
- include $(srctree)/scripts/Makefile.dts
- 
--targets += $(dtb-y)
--
- # Add any required device tree compiler flags here
- DTC_FLAGS +=
--
--PHONY += dtbs
--dtbs: $(addprefix $(obj)/, $(dtb-y))
--	@:
--
--clean-files := *.dtb
-diff --git a/arch/riscv/dts/Makefile b/arch/riscv/dts/Makefile
-index c4c44057bad..f3dfd751cb4 100644
---- a/arch/riscv/dts/Makefile
-+++ b/arch/riscv/dts/Makefile
-@@ -15,12 +15,5 @@ dtb-$(CONFIG_TARGET_ASPEED_AST2700_IBEX) += ast2700-ibex.dtb
- 
- include $(srctree)/scripts/Makefile.dts
- 
--targets += $(dtb-y)
--
-+# Add any required device tree compiler flags here
- DTC_FLAGS += -R 4 -p 0x1000
--
--PHONY += dtbs
--dtbs: $(addprefix $(obj)/, $(dtb-y))
--	@:
--
--clean-files := *.dtb
-diff --git a/arch/sandbox/dts/Makefile b/arch/sandbox/dts/Makefile
-index f810b4752f5..1c9fb4a4566 100644
---- a/arch/sandbox/dts/Makefile
-+++ b/arch/sandbox/dts/Makefile
-@@ -10,12 +10,5 @@ dtb-$(CONFIG_CMD_EXTENSION) += overlay0.dtbo overlay1.dtbo
- 
- include $(srctree)/scripts/Makefile.dts
- 
--targets += $(dtb-y)
--
-+# Add any required device tree compiler flags here
- DTC_FLAGS += -R 4 -p 0x1000
--
--PHONY += dtbs
--dtbs: $(addprefix $(obj)/, $(dtb-y))
--	@:
--
--clean-files := *.dtb *.dtbo
-diff --git a/arch/sh/dts/Makefile b/arch/sh/dts/Makefile
-index 144fd3e7d22..e9153e42534 100644
---- a/arch/sh/dts/Makefile
-+++ b/arch/sh/dts/Makefile
-@@ -2,13 +2,5 @@ dtb-y += sh7751-r2dplus.dtb
- 
- include $(srctree)/scripts/Makefile.dts
- 
--targets += $(dtb-y)
--
- # Add any required device tree compiler flags here
- DTC_FLAGS +=
--
--PHONY += dtbs
--dtbs: $(addprefix $(obj)/, $(dtb-y))
--	@:
--
--clean-files := *.dtb *_HS
-diff --git a/arch/x86/dts/Makefile b/arch/x86/dts/Makefile
-index cd77f4c4e81..9a46726e026 100644
---- a/arch/x86/dts/Makefile
-+++ b/arch/x86/dts/Makefile
-@@ -24,12 +24,4 @@ dtb-y += bayleybay.dtb \
- 
- include $(srctree)/scripts/Makefile.dts
- 
--targets += $(dtb-y)
--
- DTC_FLAGS += -R 4 -p $(if $(CONFIG_EFI_APP),0x8000,0x1000)
--
--PHONY += dtbs
--dtbs: $(addprefix $(obj)/, $(dtb-y))
--	@:
--
--clean-files := *.dtb
-diff --git a/arch/xtensa/dts/Makefile b/arch/xtensa/dts/Makefile
-index c22c50ac4e5..aa582b85e5c 100644
---- a/arch/xtensa/dts/Makefile
-+++ b/arch/xtensa/dts/Makefile
-@@ -4,12 +4,4 @@ dtb-$(CONFIG_XTENSA) += ml605.dtb ml605_nommu.dtb kc705.dtb kc705_nommu.dtb
- 
- include $(srctree)/scripts/Makefile.dts
- 
--targets += $(dtb-y)
--
- DTC_FLAGS +=
--
--PHONY += dtbs
--dtbs: $(addprefix $(obj)/, $(dtb-y))
--	@:
--
--clean-files := *.dtb
-diff --git a/dts/upstream/src/arm/Makefile b/dts/upstream/src/arm/Makefile
-index 9a8f6aa3584..c86a2be5d85 100644
---- a/dts/upstream/src/arm/Makefile
-+++ b/dts/upstream/src/arm/Makefile
-@@ -2,13 +2,5 @@
- 
- include $(srctree)/scripts/Makefile.dts
- 
--targets += $(dtb-y)
--
- # Add any required device tree compiler flags here
- DTC_FLAGS += -a 0x8
--
--PHONY += dtbs
--dtbs: $(addprefix $(obj)/, $(dtb-y))
--	@:
--
--clean-files := */*.dtb */*.dtbo
-diff --git a/dts/upstream/src/arm64/Makefile b/dts/upstream/src/arm64/Makefile
-index 26a83d3d29d..b6db0dc6b26 100644
---- a/dts/upstream/src/arm64/Makefile
-+++ b/dts/upstream/src/arm64/Makefile
-@@ -2,17 +2,9 @@
- 
- include $(srctree)/scripts/Makefile.dts
- 
--targets += $(dtb-y)
--
- # Add any required device tree compiler flags here
- DTC_FLAGS += -a 0x8
- 
- ifdef CONFIG_RCAR_64
- DTC_FLAGS += -R 4 -p 0x1000
- endif
--
--PHONY += dtbs
--dtbs: $(addprefix $(obj)/, $(dtb-y))
--	@:
--
--clean-files := */*.dtb */*.dtbo
-diff --git a/dts/upstream/src/xtensa/Makefile b/dts/upstream/src/xtensa/Makefile
-index 2a81acb32bc..c86a2be5d85 100644
---- a/dts/upstream/src/xtensa/Makefile
-+++ b/dts/upstream/src/xtensa/Makefile
-@@ -2,13 +2,5 @@
- 
- include $(srctree)/scripts/Makefile.dts
- 
--targets += $(dtb-y)
--
- # Add any required device tree compiler flags here
- DTC_FLAGS += -a 0x8
--
--PHONY += dtbs
--dtbs: $(addprefix $(obj)/, $(dtb-y))
--	@:
--
--clean-files := *.dtb *.dtbo */*.dtb */*.dtbo
-diff --git a/scripts/Makefile.dts b/scripts/Makefile.dts
-index 790f3c508f1..1fe142f2bbf 100644
---- a/scripts/Makefile.dts
-+++ b/scripts/Makefile.dts
-@@ -14,3 +14,11 @@ dtb-vendor_dts := $(patsubst %.dts,%.dtb,$(wildcard $(dt_dir)/$(subst ",,$(CONFI
- dtb-y += $(subst $(dt_dir)/,,$(dtb-vendor_dts))
- 
- endif
-+
-+targets += $(dtb-y)
-+
-+PHONY += dtbs
-+dtbs: $(addprefix $(obj)/, $(dtb-y))
-+	@:
-+
-+clean-files := *.dtb *.dtbo */*.dtb */*.dtbo *_HS
--- 
-2.45.2
+Indeed.
 
+>
+> Heck, it's possible that down the line and it's important to a lot more
+> people, we can get the TF-A build for QEMU SBSA to have an option to
+> include a device tree for U-Boot, because it's an important part of the
+> stack for that project to be able to validate too.
+
+We'll see!
+
+>
+> > > > Breaking down the SBSA_UART_BASE_ADDR:
+> > > >
+> > > > - this is in the uart0 node so obviously relates to the UART
+> > > > - it is a reg property, so BASE_ADDR is obvious
+> > > > - SBSA is the board name, which is in the filename, so don't really add anything
+> > > >
+> > > > Normally where the devicetree needs a value defined, we put it in the
+> > > > dt-bindings directory. But even then, we don't typically put addresses
+> > > > there. It is just for cases where we need the code and the devicetree
+> > > > to be in sync about a property value. With addresses, the code reads
+> > > > them from the devicetree, so doesn't need to have a #define to access
+> > > > them...in fact that would defeat the purpose.
+> > > >
+> > > > If we did this sort of thing with other boards, we would have a heap
+> > > > of binding files containing addresses that are only used in one place.
+> > > > I just don't see the point.
+> > > >
+> > > > However for SBSA_PCIE_MMIO_BASE_ADDR I see that it is used in the .asl
+> > > > and the memory map, so it seems fair enough to define that, at least
+> > > > unless/until we can refer to devicetree addresses in the .asl file.
+> > > > Even with this one though, I would expect something like:
+> > > >
+> > > > ranges = <0x02000000>, /bits/ 64 <SBSA_PCIE_MMIO_BASE_ADDR
+> > > >
+> > > > SBSA_PCIE_MMIO_BASE_ADDR>;
+> > > >
+> > > > But in this case I can see how a macro might be more convenient and
+> > > > I'm not sure I have a strong opinion here.
+> > >
+> > > If you're strongly against using the macros here, OK, fine. But since
+> > > this tree is only going to be read by humans in U-Boot, and consumed by
+> > > U-Boot, I think it makes sense to deviate from the norms a little, in
+> > > favour of human readability.
+> >
+> > How about only using them when there is code that need the same address?
+> >
+> > There are two lots of macros so just to check we are talking about the
+> > same thing:
+> >
+> > - xxx_BASE_ADDR - IMO they should be open-coded into the devicetree if
+> > it is the only user
+> > - MAKE_PROP - IMO we should use /bit/ 64 instead
+>
+> OK.
+>
+> > > > > > But I very much doubt upstream would accept it with a macro. Other
+> > > > > > 64-bit boards seem to use '/bits/ 64'.
+> > > > >
+> > > > > What upstream are you referring to here? I'm not sure what other project
+> > > > > will want a device tree for the "no device tree only acpi" virtual
+> > > > > reference platform.
+> > > >
+> > > > It depends if they want to run U-Boot or not. U-Boot always needs a
+> > > > devicetree, as you know. It cannot use ACPI tables to configure itself
+> > > > and I would rather it doesn't start.
+> > > >
+> > > > I don't actually see any reason why this devicetree could not be
+> > > > upstreamed, except that QEMU actually creates a Linux devicetree right
+> > > > now (on the ARM side) and takes no notice of what U-Boot needs... I
+> > > > don't see any U-Boot patches from the maintainers, for example,
+> > > > although I may have missed some. It seems very focussed on UEFI. I
+> > > > would love that to change, as QEMU is widely used in U-Boot on ARM...
+> > >
+> > > I feel like we're lost the point here. This platform in question is the
+> > > "never use device tree, only use ACPI" reference platform.
+> >
+> > never use device tree for Linux
+> >
+> > (U-Boot always uses it)
+>
+> True.
+>
+> > > This is not
+> > > the regular "virt" platform, even. U-Boot needs a device tree because
+> > > internally we use it for configuration. I do not see the QEMU project
+> > > agreeing to have this platform generate a device tree for us to consume
+> > > in this case, declaring instead that it's a U-Boot internal need and
+> > > that no, it's fine if U-Boot can't use it. _We_ want it because it makes
+> > > testing of the aarch64 + ACPI use case easy because it provides us with
+> > > the ability to use the reference platform too and make sure that we
+> > > aren't breaking the OS in unexpected ways.
+> >
+> > OK, well as you say this is not really the main issue, so that's fine.
+> > I agree (and was lamenting) that QEMU seems unwilling at present to do
+> > anything to assist U-Boot.
+>
+> At least today, I don't think this is even a QEMU issue, honestly. A
+> point could be made in the future that EDKII will ignore TF-A passing a
+> device tree, and that also needs to be confirmed / validated because
+> <physical hardware platform> supports EDKII or U-Boot for ES/SR
+> certification. That's a much stronger I think position to start from in
+> asking QEMU to pass along the device tree that it could make.
+
+Yes, sure. I do feel that if there were a few more U-Boot users in the
+QEMU world then it might have already happened. I am almost tempted to
+send a patch to add a pre-built u-boot.bin to QEMU :-)
+
+Regards,
+Simon
