@@ -4,58 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B392CFA774
-	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 12:32:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45D0FCFA773
+	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 12:43:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F58688B0B;
-	Fri,  4 Oct 2024 14:32:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 97F7E88B0A;
+	Fri,  4 Oct 2024 14:43:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1728045157;
-	bh=RQzwKiM2+JSxXUUg5xLONzl6pHJVc3RZAWUUFGjkoh8=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=ukHvrs7VIjA8G9FO4iMqUE3m+J/QMB9+kz/evmpYooFeZM39IwYvJK9QMdRpRsm+k
-	 AE+ehbgPpSmXs2bESHfVOkX/3WyC2lEgGVfZl6ohBM6ozkLiac4JcOgdEdkVdT34Iq
-	 11I3sfTcB+ZxV9WFLAgN6TAQFeqbG9mRTZimZXHBJQaFYjjErM8HYm4Gj08MSRvMPy
-	 QZrpljVTu366NBA9T8nc4mmlhQyo88p6BHtMZ9Hiq0z9C/GXccOrwB0snxabShzrWG
-	 jjTEzTE/RxwnsfM6R+tkX/4PBqd/uvlXyXcE4XRmLF6NPPKR4iSk5v8L6jULH+ULUd
-	 +qLt/w4GAFsYw==
-Received: from mail.denx.de (unknown
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sA59mwSl";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 0B26B88B78; Fri,  4 Oct 2024 14:43:13 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: festevam@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id A1E5788AE8;
- Fri,  4 Oct 2024 14:32:36 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1728045157;
- bh=RQzwKiM2+JSxXUUg5xLONzl6pHJVc3RZAWUUFGjkoh8=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=z0HOhRs1v1JuJBCpp6kKNu2prgD/ahylhgrPZmu/u442XRmE7F4IZu/NRuXPRTh59
- +QYrKdxEAubihdUMmiOyV8sJNSzvGuds63rVSlFZ6q8qa8+a8NPUXOz7ga/B2nU+ZH
- rKwhcijv4BIHZAHGxOMgjUliuyw/9jWkNHQ6yBFSMM9S0vSsyyt/ac/2bVIEFsjJtL
- t8KaAbRTDwDfAbcGwT5ZzYInJktpHRukIg0jabcw6qfNKeorhZ2gf7bCnwC6akt/uP
- jCL94kr8qERT2w3RcJcmMJNVk9d01FNv8XFrsLzWOqQBz5j9fG3NZ9a2tVslQWCp1V
- I2fOwQddtjomA==
+ by phobos.denx.de (Postfix) with ESMTPS id 71A6588AFF
+ for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 14:43:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-42cacabd2e0so17883405e9.3
+ for <u-boot@lists.denx.de>; Fri, 04 Oct 2024 05:43:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1728045790; x=1728650590; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=soc+Vx70ja8GTV/MYfzfale+0qPGEW+X+vmjgZMqoNo=;
+ b=sA59mwSlN6ENcCsIjxLpt76DZ6B/SPnqQQTh/ufgnKUN9BGE8kXO79D5dyC7nu4MbH
+ E3Desr8gY6ia9hkPT7zlwI6I738avF52r0TfuYYwdfu9Vzjkn0e4x56egsZOhka5YaRL
+ N5Mve1iD86dCTgav8GY6Omd8ht5Du98cbW+weRwYWLGobBA7qZg2o3MtpkKLN7Uw7qmq
+ lC6dFrNd+mEdxHpdFtb7MIObGb4Pw4zawVfO0nwzsAOx1ED2PTmQ9aS9coUQllPIm9Nw
+ B2/4Lf3hkfWWQfwJx6Uwn1L3griI2BCN0l7/C31f/JeCWk78UCQhFbCTejan0YnRvtXd
+ cTbg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728045790; x=1728650590;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=soc+Vx70ja8GTV/MYfzfale+0qPGEW+X+vmjgZMqoNo=;
+ b=KVe35CklkpB/XsgtmprZv1ImcKNjPLM/Yh9h0h0wHgOYo2fsij17Fh6ZvkrfkWeKqz
+ 1kcvj9GQdxzaO4TQZ94Gjhx2kuvIvzHMhkbDe+fg4bGRZ59Rxv2rP6r79B6P16yEO0Ti
+ cALosFQNQK0L6bdEBwUiETEtUQZmKZeFijOddcCWwb/B7Vff5wfwN7DrGhCyzkUJhOxm
+ iGSVv4ytrTCK6cCRll+X7d33m2UbRJ1UDtys+5we9A4faxgQW/x+zWUt1ChrII7emb5l
+ fAH6x6C/fYbKxuxd23lcLgaNeW2WKjwEXlouhRntImKW0c74VME7lR7EJw2zQdzThJYg
+ /Xkw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVb4zgWiqqWrD8/9X2x5pyd8r9YGut7WvZxH3wKw1heaN50mNt0J3FqX5yMEbPBtsXKIqCyNmA=@lists.denx.de
+X-Gm-Message-State: AOJu0YwZBeqK322i+pnVuCMfAztar6YDI3hPtlaiV3WOrhFBEgR3dT/x
+ ZJJJpWxGiMJsZnEbXYwHU5ZB1XlXiF18WBa5i78DRRu6LJiOZrayaN8Y9HJCEug=
+X-Google-Smtp-Source: AGHT+IFhROAWt7YKAI3XmUFyv/c4ukf897TBzJ+3feSdlDIFMXzKHivg2+/UfDdipm23CFQ/Sbh80w==
+X-Received: by 2002:a05:600c:4f86:b0:42c:b3e5:f68c with SMTP id
+ 5b1f17b1804b1-42f85aa6caamr18097735e9.4.1728045789876; 
+ Fri, 04 Oct 2024 05:43:09 -0700 (PDT)
+Received: from [192.168.2.2] ([82.195.86.106])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-42f86b1d80esm14815385e9.19.2024.10.04.05.43.08
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 04 Oct 2024 05:43:09 -0700 (PDT)
+Message-ID: <6485a86a-2d52-48c3-96f5-514f2b21b4a0@linaro.org>
+Date: Fri, 4 Oct 2024 14:43:08 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/4] Qualcomm smartphone support
+To: Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20240831-qcom-phones-v1-0-08614edd8e35@linaro.org>
+ <172788075725.935801.3270533991443988203.b4-ty@linaro.org>
+Content-Language: en-US
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <172788075725.935801.3270533991443988203.b4-ty@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Date: Fri, 04 Oct 2024 09:32:36 -0300
-From: Fabio Estevam <festevam@denx.de>
-To: Stefan Roese <sr@denx.de>
-Cc: Fabio Estevam <festevam@gmail.com>, jh80.chung@samsung.com,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v3] da9063: Add watchdog support
-In-Reply-To: <3ec25b5a-2c9b-46fe-a9b9-0b99f72d83a9@denx.de>
-References: <20240917135550.3164425-1-festevam@gmail.com>
- <3ec25b5a-2c9b-46fe-a9b9-0b99f72d83a9@denx.de>
-Message-ID: <5293f5a0d44059960aa2d5e8b114456f@denx.de>
-X-Sender: festevam@denx.de
-User-Agent: Roundcube Webmail/1.3.6
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,21 +97,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Stefan,
 
-On 20/09/2024 07:00, Stefan Roese wrote:
 
->> Changes since v2:
->> - Use u8 instead of char. (Stefan)
->> - Keep the Copyright header from Linux. (Stfan)
+On 02/10/2024 16:52, Caleb Connolly wrote:
 > 
-> Reviewed-by: Stefan Roese <sr@denx.de>
+> On Sat, 31 Aug 2024 17:48:50 +0100, Caleb Connolly wrote:
+>> Improve support for running U-Boot on Qualcomm smartphones, with:
+>>
+>> * A boot menu which can be entered by holding power during boot
+>> * Hang on panic (so errors can be read on the display)
+>> * Serial gadget which can be enabled by holding volume down or via
+>>    boot menu
+>>
+>> [...]
+> 
+> Applied, thanks!
 
-Would it be OK if I take this patch via the u-boot-imx tree?
+This was a bit pre-emptive, resending this series to get acks from Tom 
+and Simon.
+> 
+> [1/4] board/qualcomm: introduce phone config
+>        https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/bcb278fbc218
+> [2/4] cli_hush: run bootmenu on retry
+>        https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/963c141c3195
+> [3/4] bootretry: check for bootretry variable changes
+>        https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/c2147f6b396f
+> [4/4] doc: board/qualcomm: describe phone support and bringup
+>        https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/12901f5bff70
+> 
+> Best regards,
 
-I have a patch that adds the DA9063 watchdog support to the imx6q-lxr2 
-board.
+-- 
+// Caleb (they/them)
 
-Thanks,
-
-Fabio Estevam
