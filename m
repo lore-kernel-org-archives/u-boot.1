@@ -4,63 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 938D5CFA76E
-	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 11:35:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 570E4CFA76F
+	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 12:02:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1148588CD9;
-	Fri,  4 Oct 2024 13:35:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 8FA4688B63;
+	Fri,  4 Oct 2024 14:01:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1728041727;
-	bh=bt5dPgGabo7/baA8784OIasFR48iwvi/V1ZjLtzxQpA=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=SiEYMuPpA32GtTgFjI9aL0Z8zmK3ajGDuSIQuIb2SmG4tO19FbVGq4/CQPfKIL+oh
-	 OT113lfytAt8rEE6kMpKP5fViXFA/YvVsgdXGliZAQY1Ak61lkCLDPB1c3fuZf+GF4
-	 yFwFmRRsr6ii9nC8Wcbp4Tk5rXRLVsdXVaY0YBKzkfS6LhNvsKoBAoGa3NKtFV6qGa
-	 FQvyK8OFEZC+VVvKRDPr5aBH0OqWc9qNmQ9zLGI1pwMANAwCrdSzvNR242XmylnXBq
-	 hsNzxJuicTbE6jLDmqhpRr7fggZ1ndvr4sckvM5D9jIJln2zNVt4i/DW467ND1YQgV
-	 6/pUZrhWBeykA==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TYMofpr9";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 2A06388B86; Fri,  4 Oct 2024 14:01:58 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id CE03088B89;
- Fri,  4 Oct 2024 13:35:24 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1728041725;
- bh=bt5dPgGabo7/baA8784OIasFR48iwvi/V1ZjLtzxQpA=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=XATfUHocViZQMLOL4+zgMfyBRicSCIPnIMCBCUuz/TlwwSrzgPN/pzunGLaXJjZGz
- PR7baqvBwQ7SvCuPe1YxaPh2ZExTtisJSJJAhJ1XvQSGGR+XpmccOjH81V59LQ7vhf
- DR1HMNBAuXWvMBrSp/MyXrekTu5CNFwiKnEWIAGd2mxG4QN1ETK+ud8uMBMLe8xLPo
- eSLhjD14nRJeXKgyeThtnuXlSYIk2bROGcC+NG0TuK6JE4Di3Hn/HTtWkHoSkFyF2l
- KAYqGIViWjTnvDrLpr6xSI7CzVmfD+Ytj0qrQuiUBwOmqoAV7oXFAAJc0JDeK8cCQx
- txFhtRoWBFvRw==
-Message-ID: <02fe6fab-7e8c-4408-950f-e6df2a258b16@denx.de>
-Date: Fri, 4 Oct 2024 13:21:57 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 0F8C788965
+ for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 14:01:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-42cb1e623d1so20203125e9.0
+ for <u-boot@lists.denx.de>; Fri, 04 Oct 2024 05:01:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1728043315; x=1728648115; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=cRg7jjM2E5jytvD98QdgNk4TkKSDLyzn//VDsqRzWAg=;
+ b=TYMofpr9slSHAahcxcO/puJVW3UPVzJAT1MtoyMeDfxAR/KM/vuFSzI1YnEOhIibM5
+ fib0qKbxy7JY4fWE/6HQS5SXty/hTNTw1Y40FfVNxEu3EFc5kMIcf9fkDiTdUFCuUxIa
+ hNP8HtmxtwuMpq1WdjMrj2wnzTAIeX4Qc9SJuLyiLyzDchoosMsmylNtYI0U37o8g6rk
+ rCxBDiVjJ/jLzbnhx0zG1TnpJyXBqQb0q0sVQknkVJvdRgRynaevUmQPzhUz3JTqw3Ms
+ AYgUrkUDTKTwAQHqIypx1ycr9LyNL3zTZr6OAIMOPlRRMkHn9FiEPBdQGG4dGBS/vPJb
+ 91+Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728043315; x=1728648115;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=cRg7jjM2E5jytvD98QdgNk4TkKSDLyzn//VDsqRzWAg=;
+ b=f5GZncCeQ/IKZoV15kv/6KGp/QQMHi4Q6M4JJCEc7Mbreh/LsPlXdd2mZqfFpsWWFG
+ OiMF8RmvZBxDiHtsTh5wZVr+ddWlKtWQsrIezXrTWzSuw7S+VczP1OW8j3PNEnsPhydw
+ aCOmNWX8mbcCU4jYFXaK3XCK2y3hHPCvvhahdkZH+XCLsYmAFtU7xGnJD9HMTl4LN1wP
+ FAyEp4pstV+zZCZGQTyNo4DkCvUkHZz+9l/dtqQD+HrA9Nx5wXRePdaaZ2sRRRxXQh9e
+ SaqizcHvvIrehwgoICwFYVZENVO4eapwmT5z8DpIgi2ELfabYQJh62kBkrTOySmYPfwS
+ wt+w==
+X-Gm-Message-State: AOJu0Yz6JIZnrdbZ89CUEIhSA4yn7rmytmnAYfY8rQGTWaLqkoonC7If
+ rIpgQ/VOoCANJAzD/RIz/vZQRkjnKnmg7nd+vxy8xuC5TqGYWjFyIjKGcx2d+6Q=
+X-Google-Smtp-Source: AGHT+IEIPFX5pbVneBUdR2xrO01KMdwnwQrFt6F3fGr1449Z0x5OfiZXXt6V4ngNG6S5K1HTwyo0tQ==
+X-Received: by 2002:adf:ebcb:0:b0:37c:d179:2f72 with SMTP id
+ ffacd0b85a97d-37d0e6f2853mr1504415f8f.3.1728043315239; 
+ Fri, 04 Oct 2024 05:01:55 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:c79f:f6d3:6b70:dbe?
+ ([2a01:e0a:3cb:7bb0:c79f:f6d3:6b70:dbe])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-37d0822b970sm3123497f8f.43.2024.10.04.05.01.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 04 Oct 2024 05:01:54 -0700 (PDT)
+Message-ID: <6d9bfd36-848a-4c9b-b5cb-929752bf3c7a@linaro.org>
+Date: Fri, 4 Oct 2024 14:01:53 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/7] usb: onboard-hub: Add reset-gpio support
-To: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: "Simek, Michal" <michal.simek@amd.com>,
- "fabrice.gasnier@foss.st.com" <fabrice.gasnier@foss.st.com>,
- "git (AMD-Xilinx)" <git@amd.com>
-References: <20241001050529.17922-1-venkatesh.abbarapu@amd.com>
- <20241001050529.17922-2-venkatesh.abbarapu@amd.com>
- <6056a273-2699-4e94-93e8-ddc96084bbba@denx.de>
- <SA1PR12MB8697873F2C2EF86E6E9DAF9B98712@SA1PR12MB8697.namprd12.prod.outlook.com>
- <2e0928c8-e03a-44ae-aa36-3d664ed5bc6a@denx.de>
- <SA1PR12MB8697682FEEE48B015EE82E0398712@SA1PR12MB8697.namprd12.prod.outlook.com>
- <c40f47cb-7245-43b7-9b01-6b8d1cdff04c@denx.de>
- <SA1PR12MB869735B41B6F7A86520E2D3D98722@SA1PR12MB8697.namprd12.prod.outlook.com>
+Subject: Re: [PATCH v11 06/29] test: boot: fix bootflow_cmd_label for when
+ DSA_SANDBOX is disabled
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, Javier Tia <javier.tia@linaro.org>,
+ Raymond Mao <raymond.mao@linaro.org>, Maxim Uvarov <muvarov@gmail.com>,
+ Tim Harvey <tharvey@gateworks.com>, Anton Antonov <Anton.Antonov@arm.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>
+References: <cover.1727968902.git.jerome.forissier@linaro.org>
+ <2e8206d8bbd7d3140cf2734ca9b3fcd12ced4f14.1727968902.git.jerome.forissier@linaro.org>
+ <CAC_iWjLTVV=QpfgGMTSJ205JGRzNDkBuJeO9GwEW4D4PhrJWrw@mail.gmail.com>
+ <e9c3ac80-84f0-4900-85fc-b9af4ebc5363@linaro.org>
+ <CAC_iWjLS21x3ZOGDnvWWj4y1Hfs_vuw=YnMRZCSAaL42mYYGXg@mail.gmail.com>
 Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <SA1PR12MB869735B41B6F7A86520E2D3D98722@SA1PR12MB8697.namprd12.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <CAC_iWjLS21x3ZOGDnvWWj4y1Hfs_vuw=YnMRZCSAaL42mYYGXg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -78,72 +106,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/4/24 5:02 AM, Abbarapu, Venkatesh wrote:
-> Hi Marek,
-> 
->> -----Original Message-----
->> From: Marek Vasut <marex@denx.de>
->> Sent: Thursday, October 3, 2024 10:35 PM
->> To: Abbarapu, Venkatesh <venkatesh.abbarapu@amd.com>; u-boot@lists.denx.de
->> Cc: Simek, Michal <michal.simek@amd.com>; fabrice.gasnier@foss.st.com; git
->> (AMD-Xilinx) <git@amd.com>
->> Subject: Re: [PATCH v3 1/7] usb: onboard-hub: Add reset-gpio support
+
+
+On 10/4/24 11:37, Ilias Apalodimas wrote:
+> On Fri, 4 Oct 2024 at 11:46, Jerome Forissier
+> <jerome.forissier@linaro.org> wrote:
 >>
->> On 10/3/24 4:54 PM, Abbarapu, Venkatesh wrote:
->>> Hi Marek,
+>>
+>>
+>> On 10/4/24 08:55, Ilias Apalodimas wrote:
+>>> Hi Jerome,
 >>>
->>>> -----Original Message-----
->>>> From: Marek Vasut <marex@denx.de>
->>>> Sent: Thursday, October 3, 2024 5:38 PM
->>>> To: Abbarapu, Venkatesh <venkatesh.abbarapu@amd.com>;
->>>> u-boot@lists.denx.de
->>>> Cc: Simek, Michal <michal.simek@amd.com>;
->>>> fabrice.gasnier@foss.st.com; git
->>>> (AMD-Xilinx) <git@amd.com>
->>>> Subject: Re: [PATCH v3 1/7] usb: onboard-hub: Add reset-gpio support
+>>> On Thu, 3 Oct 2024 at 18:23, Jerome Forissier
+>>> <jerome.forissier@linaro.org> wrote:
 >>>>
->>>> On 10/3/24 6:40 AM, Abbarapu, Venkatesh wrote:
->>>>> Hi Marek,
+>>>> When DSA_SANDBOX is not set, the sandbox tests fail as follows:
 >>>>
->>>> Hi,
+>>>>  $ ./test/py/test.py --build-dir=$(pwd) -k bootdev_test_any
+>>>>  [...]
+>>>>  Scanning for bootflows with label '9'
+>>>>  [...]
+>>>>  Cannot find '9' (err=-19)
 >>>>
->>>>>>> @@ -30,7 +40,24 @@ static int usb_onboard_hub_probe(struct udevice
->> *dev)
->>>>>>>      	if (ret)
->>>>>>>      		dev_err(dev, "can't enable vdd-supply: %d\n", ret);
->>>>>>>
->>>>>>> -	return ret;
->>>>>>> +	hub->reset_gpio = devm_gpiod_get_optional(dev, "reset",
->>>>>>> +						  GPIOD_IS_OUT |
->>>>>> GPIOD_ACTIVE_LOW);
->>>>>>> +	/* property is optional, don't return error! */
->>>>>>> +	if (hub->reset_gpio) {
->>>>>>
->>>>>> if (!hub->reset_gpio)
->>>>>>       return 0;
->>>>> <Venkatesh> As reset_gpio is optional property,  by returning 0 the
->>>>> i2c sequence
->>>> wont be executed.
->>>> The code in if (hub->reset_gpio) { ... } only toggles the GPIO reset ?
->>> <Venkatesh> Yes...if(hub->reset_gpio) only toggles the GPIO reset.
->> So you can return 0 if reset_gpio is NULL and exit early . What's the problem ?
-> <Venkatesh> if reset_gpio is NULL by returning 0 we miss the below code which does i2c initialization sequence.
-> Need to toggle the gpio and then does the i2c sequence if the reset_gpio is present, else we do the i2c initialization sequence.
+>>>> This is due to the device list containing two less entries than
+>>>> expected. Therefore, look for label '7' when DSA_SANDBOX is disabled.
+>>>>
+>>>> The actual use case is NET_LWIP=y (to be introduced in later patches)
+>>>> which implies DSA_SANDBOX=n for the time being.
+>>>>
+>>>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+>>>> ---
+>>>>  test/boot/bootflow.c | 7 +++++--
+>>>>  1 file changed, 5 insertions(+), 2 deletions(-)
+>>>>
+>>>> diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
+>>>> index 6ad63afe90a..c440b8eb778 100644
+>>>> --- a/test/boot/bootflow.c
+>>>> +++ b/test/boot/bootflow.c
+>>>> @@ -109,9 +109,12 @@ static int bootflow_cmd_label(struct unit_test_state *uts)
+>>>>          * 8   [   ]      OK  mmc       mmc2.bootdev
+>>>>          * 9   [ + ]      OK  mmc       mmc1.bootdev
+>>>>          * a   [   ]      OK  mmc       mmc0.bootdev
+>>>> +        *
+>>>> +        * However with CONFIG_DSA_SANDBOX=n we have two less (dsa-test@0 and
+>>>> +        * dsa-test@1).
+>>>>          */
+>>>> -       ut_assertok(run_command("bootflow scan -lH 9", 0));
+>>>> -       ut_assert_nextline("Scanning for bootflows with label '9'");
+>>>
+>>> Shouldn't this under and #ifdef, IS_ENABLED etc?
+>>
+>> In theory yes, but we can avoid the conditional by using index 7 which is always
+>> valid, i.e., in all configurations we have at least 7 devices (even 8 actually).
+> 
+> Ok, but I *think* Simon was trying to match the exact out put here,
+> not 'at least 7'.
+> 
+> I think we are better off being strict on this test
 
-Please show me the i2c sequence that is missed in this patch hunk:
+No because there are 10 entries according to the comment ("a" hex being
+mmc0.bootdev). Simon, what do you suggest?
 
-+	if (hub->reset_gpio) {
-+		ret = dm_gpio_set_value(hub->reset_gpio, 1);
-+		if (ret)
-+			return ret;
-+
-+		udelay(data->reset_us);
-+
-+		ret = dm_gpio_set_value(hub->reset_gpio, 0);
-+		if (ret)
-+			return ret;
-+
-+		udelay(data->power_on_delay_us);
-+	}
-+
-+	return 0;
+Thanks,
+-- 
+Jerome
+
+> 
+> Thanks
+> /Ilias
+>>
+>>>
+>>>> +       ut_assertok(run_command("bootflow scan -lH 7", 0));
+>>>> +       ut_assert_nextline("Scanning for bootflows with label '7'");
+>>>>         ut_assert_skip_to_line("(1 bootflow, 1 valid)");
+>>>>
+>>>>         ut_assertok(run_command("bootflow scan -lH 0", 0));
+>>>> --
+>>>> 2.40.1
+>>>>
