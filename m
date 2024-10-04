@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CC08CFA773
-	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 12:47:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B4D8CFA775
+	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 12:47:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 748D288DA9;
-	Fri,  4 Oct 2024 14:47:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D5D8C88F95;
+	Fri,  4 Oct 2024 14:47:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qNt8ABRJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LsiwWcYD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3090988DA9; Fri,  4 Oct 2024 14:47:04 +0200 (CEST)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id 88D0588E7A; Fri,  4 Oct 2024 14:47:05 +0200 (CEST)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40EDD88CEB
- for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 14:47:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F4BA88CD9
+ for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 14:46:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-37cea34cb57so1376948f8f.0
- for <u-boot@lists.denx.de>; Fri, 04 Oct 2024 05:47:02 -0700 (PDT)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-37cc846fbc4so1614149f8f.2
+ for <u-boot@lists.denx.de>; Fri, 04 Oct 2024 05:46:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728046022; x=1728650822; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1728046018; x=1728650818; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=j7yg/K63bTckbXZjnzgr8WwMPKXmfjLKJbA5QWoIgDI=;
- b=qNt8ABRJLuCSes6HasFu3EHK4wB5MnBGa9Lmw7J9SvmJzqO72HPoDJ9bcd+Kn9UG9Z
- XSTN4cc47RO2qs6hK31SjdXH5hyilANc06Hq2zWeicLtRRebWtTe2m7FxA1hnjVeaYEJ
- 6AZ9+vd8wOpi/QVkdQ44lQuchLBL6eWqZcmZWPFx6rqPr0vjBxcgLQe7dZxmO8zzALOe
- QdSmWvcbENupYv/1ot5g5fVOrvrX28Hy5jwRhmqIWWGWyzfVUShxVGBFtn7HmAtrye2h
- 3hw4L8+v79jUcZDPSxQBzEmfrXFit0RmRfkgArIoeHak1USh9Reydfio4ODK2uxQN/jG
- CwNw==
+ :reply-to; bh=Vn2+BfheutMf+l9eZe69ihwSZBxCdMOQTK106+Jm50Y=;
+ b=LsiwWcYDfdQnv7KzRN57whywXQwEKGbINYxhJ45fm9OQBVWnfFMNROoo3U+eC/dmFE
+ RUzLCsef7K9jKy0id7cg4LvdNw0iN2XmMoBzzopvxj0IdvSm0+GEq0jsWhMbzNsGtFsM
+ j3jZ7PpxIj+8OK2fantOKyryr1Jx6QXox1/UBqo5eQBNsHMXk49/4cI20y622QujP92E
+ bj/O2cgnCt0hwndLXSDyEqhgYWXn35hTC9CCeg29UWBSZV1lX4uw5/7kHXV2n/OrTYzy
+ La9XHVKCfdWH6koa2bJdDoeQpbRXloFakTKxhFf/cGL2JXKmS2YZnC0HscsPby1F39/p
+ 6Eog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728046022; x=1728650822;
+ d=1e100.net; s=20230601; t=1728046018; x=1728650818;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=j7yg/K63bTckbXZjnzgr8WwMPKXmfjLKJbA5QWoIgDI=;
- b=f02BWnT518KK1J2/H1y65wkvlTKU+PFKi/I/qhUl+2nX+G7oM+HZn11qoTQ+fGDgyB
- 6CiVlaMiE5TjHcWlWDHh7g5cJAr9MBV7gioTtvCisbfjrKRgU7m52kk8xfUvVz4RLOT7
- IYzfLxXdc8/x3buYl6UGQpGgsjJZn3g3MQow8RYtb8uh1pdw1VJcWbmATeYfmFMgUdYi
- uuCUdIZZFrNtsBt2WMqtY8WmELrYYnFrSK++7TyUNoIwO6dA/c2cM8+UXu4R2daCrcxp
- mltje4CDhCpD8NNn4e40yleL60JYnV/vN6FxrYj5JGSLBwuMfBSsOToJG924COxLCf4p
- KQeA==
+ bh=Vn2+BfheutMf+l9eZe69ihwSZBxCdMOQTK106+Jm50Y=;
+ b=uqJ8wZ/8eew5FPmsgmbM1lP1S98LEZnAgyLR6243vNSyoWYzHVqe2zRol2sKrJuTp5
+ iO+1Y0DYOun7Ay9K5fqBwXLe0o1eGt5jn29ewKgCneeW4/1UOULU8+Y8TGsJ1PhhgWLs
+ KSlWyemInj3EObcgPohHKSI1FRnAPy9JM45A4OQQEhEk/9xlwlzRcamz1Npb2thNH95J
+ KhYANVY4kUQb4GdbMGD+1qBdwc25KIMhe071RRrI9UFaan9YQeE4gem0mQsqZYSp9EbC
+ qOGK1TIx74FgvcfLoFIeAfFurj8cSUB5H9GTL6cjIOQkzbaw0AXs9zs5QXLU/PAZ5V8Y
+ 7tvw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV1p+f3js7nQbH/45NtScIJ/qd1FQh1SGjsP7L3PzskMJst3/pVrk3b60hQGFQ1y6kV1tkcL0M=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz91fz8aWT/n6Nqk1rIQlOSfXR/0np5Dj7DxeudUI+ZX3mkkdPs
- 12RRNkJcmqHfjJLq44X3o2Rq+NOhe1CKP+Duhp3gjTPQyXxmGiHwfT4lmUE4+Xo=
-X-Google-Smtp-Source: AGHT+IHb333W7mx08fg5/CU5gvM3e5CpC1uR2QqWhgm+TX7lwYR5usmZUP28fASyZ9bx1fr1qpuTxA==
-X-Received: by 2002:a5d:5ccf:0:b0:374:c949:836d with SMTP id
- ffacd0b85a97d-37d0e7b9d9emr1650035f8f.37.1728046021653; 
- Fri, 04 Oct 2024 05:47:01 -0700 (PDT)
+ AJvYcCWITBhMSSiSbxud9kJ1g5E3FJJiBSj2l2xBm3Imrk74bPifK7iJp4aVfv7rgMX3MikJxOJX3Qg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz1Mwa2wwmWBjVVdGznDxKgzeE5zSo/leh4BCfXraq1GXJt5K8e
+ 9xfjR2ENUiv8tNPrQ+ZYAlvx+6aqM3OWJs/AAja50PPo+/aawDiUBtIdAGg2HF0=
+X-Google-Smtp-Source: AGHT+IFGxcmDuO2LEviHT3zi5gO6hP2SwSu+b8kYA/JNYFGyvP4U4BVrnCv7UHt+zkgQaQ+0Lr7caA==
+X-Received: by 2002:a5d:4587:0:b0:37c:d2c7:70a5 with SMTP id
+ ffacd0b85a97d-37d0eae68demr1682233f8f.57.1728046017877; 
+ Fri, 04 Oct 2024 05:46:57 -0700 (PDT)
 Received: from [192.168.2.2] ([82.195.86.106])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d082d116asm3177348f8f.90.2024.10.04.05.47.00
+ ffacd0b85a97d-37d082d116asm3177348f8f.90.2024.10.04.05.46.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Oct 2024 05:47:01 -0700 (PDT)
+ Fri, 04 Oct 2024 05:46:57 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Fri, 04 Oct 2024 14:46:52 +0200
-Subject: [PATCH v2 3/4] bootretry: check for bootretry variable changes
+Date: Fri, 04 Oct 2024 14:46:50 +0200
+Subject: [PATCH v2 1/4] board/qualcomm: introduce phone config
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241004-qcom-phones-v2-3-c7ab67ac3043@linaro.org>
+Message-Id: <20241004-qcom-phones-v2-1-c7ab67ac3043@linaro.org>
 References: <20241004-qcom-phones-v2-0-c7ab67ac3043@linaro.org>
 In-Reply-To: <20241004-qcom-phones-v2-0-c7ab67ac3043@linaro.org>
 To: Caleb Connolly <caleb.connolly@linaro.org>, 
@@ -80,21 +80,21 @@ To: Caleb Connolly <caleb.connolly@linaro.org>,
  Simon Glass <sjg@chromium.org>
 Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1156;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3156;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=nU03hvEw0ouppXvKET2WJ2tdYr2DZyukndQI6MSww20=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBm/+O9coKoUybq/TVOhWwYdsUGCD5RR7BfUe/81
- GcP87CHqAeJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZv/jvQAKCRAFgzErGV9k
- tiblD/4jtVlZPiOAK0H7+EXMzfK+Ouh+C8b8emYiPd2QeL59KPTrGCeJBMcv20ZfCllCzgK0qhC
- M1n/hMeq1iLyFfNMZJpeIKkYXYLLYzc4JBfZf7N+F5RfcYs4aoRnWg++Rdkv4R1tzDRwTH5YAex
- TxppuxYZ72SwLVJHth22s6i5BpIBUeXbAlciBCo65FSaqRREJJtQd0vRNuSINZ2G68w7ahp+dxQ
- oU+/VEcmmDwANuBYeMEptAqFMs0NqfeZiFGPX0f1qGY6UwABMKtDSauZb8L9njGBE91fWkg5XAR
- w27Z7gC8j/uEq2SfgLP1rkoWN8QURR5nFpiVCnPw2nfxIVeN9fm1Th5WVfBI8HAUWdF0x7JlzVP
- jJWemXu2S8vjIvKgYz/qv16vsiQOk/Zo7hMTKg9fv1lv/RMRd0/WXGXFzKF3+gTmyC+S5MoHA6r
- YTB0R0LgijNBMh0mse+FS/tDurgKu+w89aTEeFrw+LGy6c2XtNeJ5KEE7o8oyJsLgi2bPZUgLCN
- wMgvtjzkuPmWuLXmKhZ9xFUGiEUICeeES6XrTAYwUPyKzUn5gLpgWSPU1JtyGaVoVq4UmMiaOLR
- 9Z+1THnMVdpJfo6DCPJQrZnGhkwXrx3ds/2btgbDCqgKafjrwgevDz6yfXV1qqG6dorbBggy9VP
- LN3bKpXUMAyIAXg==
+ bh=oaxI/EQz3tOWK4aTm6eAN5u+sr/5yFWJiMS39p/B9h4=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBm/+O99EHIDPkb2geiMmBYbaNUfXVpbX+f6ZdHG
+ bYrDabJpfuJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZv/jvQAKCRAFgzErGV9k
+ thJ1EACHy6OGsqshwi1XEtWkUEfPNiXQf31vHhk5U+Egjxd7HgwZW6ClutpFIvHk1NOLlY9iiVm
+ zswTcx5muhGPaPAaZS2SwVVCPHNNqxzpr9gBIGIFGHTLhi/r9oI1VYqPxog7L6o6ZzkeHFmRzuK
+ SAfAnjdH+2G7eM/ppdhgpg0j7A2Zme+ZNXb7/LOeTAatEyjbhVA6Tqoe5CMkbYAXCnbaN7LJCX7
+ 5mam5NKXlIzA6LXHBAZmWLV3bh7P7dd9N9sGFFCMZr0ooi3O0iWx8Cfg3DG3M5tYsGLqbkzhSb/
+ 1GtUpDBAfy7Rgh7s1o8V3NeZg9Uja6xdQ0VFMmgWCS/4/qvvxk9qXT0OGNJdTb2nrtwWlbFBA7I
+ 6yfan5s8AZQAN5QbvzF/TyJGSRHKAHRiIQY0Up9lmCST58CCwdeeLnFL/JO29h33ZJ3p+ElUC1J
+ QOES1sAFc3Mk/0REnepYWufHncQgY2fdsrgT6JNAuTsNJSrZOjBRavqcvOy1NEXyytZaRgTkXvz
+ AvR6qruedJQGqshhNA6DquRWw7nMuLG0r6eeiYePOjKPq0n++u9HwxaLKaVycAl0k3YBxE0BeBX
+ 6qLMTuyDZ3giLuQ/VbEFaujCH2OZCvm229IwpFhK4n/gjZMrfNSttoCHJ5b+5u6Hjh6YWjf8k+H
+ OR4x5oZ6XVcM4Ew==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -113,37 +113,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-To enable more complex sequencing of the bootmenu, autoboot, and
-bootretry, handle changes to the bootretry variable between tries. This
-makes it possible to turn bootretry off (e.g. to drop to a shell) and
-then back on again.
-
-This makes it possible to have a persistent bootmenu (the only way to
-navigate U-Boot on devices like smartphones which lack a physical
-keyboard) by having bootcmd be defined to launch the bootmenu. This
-allows for menu options like enabling USB mass storage gadget to return
-back to the boot menu once the gadget is shut down.
+Phones don't have keyboards! Introduce a phone-specific config fragment
+and associated environment file to make U-Boot more useful on these
+devices. This allows for navigating via the buttons and enabling
+various USB gadget modes or displaying info about U-Boot.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- boot/bootretry.c | 2 ++
- 1 file changed, 2 insertions(+)
+ board/qualcomm/qcom-phone.config | 12 ++++++++++
+ board/qualcomm/qcom-phone.env    | 49 ++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 61 insertions(+)
 
-diff --git a/boot/bootretry.c b/boot/bootretry.c
-index 587b2de7d6b0..a60767eaa2ee 100644
---- a/boot/bootretry.c
-+++ b/boot/bootretry.c
-@@ -36,8 +36,10 @@ void bootretry_init_cmd_timeout(void)
-  * reset command line timeout to retry_time seconds
-  */
- void bootretry_reset_cmd_timeout(void)
- {
-+	/* Parse changes to bootretry */
-+	bootretry_init_cmd_timeout();
- 	endtime = endtick(retry_time);
- }
- 
- int bootretry_tstc_timeout(void)
+diff --git a/board/qualcomm/qcom-phone.config b/board/qualcomm/qcom-phone.config
+new file mode 100644
+index 000000000000..388d4c3e7398
+--- /dev/null
++++ b/board/qualcomm/qcom-phone.config
+@@ -0,0 +1,12 @@
++# Settings for phones
++CONFIG_USE_DEFAULT_ENV_FILE=y
++CONFIG_DEFAULT_ENV_FILE="board/qualcomm/qcom-phone.env"
++CONFIG_PANIC_HANG=y
++CONFIG_CMD_PAUSE=y
++CONFIG_BOOTSTD=y
++CONFIG_BOOT_RETRY=y
++CONFIG_BOOT_RETRY_TIME=1
++CONFIG_BUTTON_REMAP_PHONE_KEYS=y
++
++# Many phones don't actually define a serial port in their DTS
++# CONFIG_REQUIRE_SERIAL_CONSOLE is not set
+diff --git a/board/qualcomm/qcom-phone.env b/board/qualcomm/qcom-phone.env
+new file mode 100644
+index 000000000000..2a0791c888c6
+--- /dev/null
++++ b/board/qualcomm/qcom-phone.env
+@@ -0,0 +1,49 @@
++bootdelay=0
++bootretry=1
++stdin=serial,button-kbd
++stdout=serial,vidconsole
++stderr=serial,vidconsole
++
++# Fastboot is keen to use the address from kconfig, but we
++# allocate its buffer at runtime.
++fastboot=fastboot -l $fastboot_addr_r usb 0
++
++# Shortcut to enable USB serial gadget and disable bootretry
++serial_gadget=setenv stdin serial,button-kbd,usbacm; \
++	setenv stdout serial,vidconsole,usbacm; \
++	setenv stderr serial,vidconsole,usbacm; \
++	setenv bootretry -1; \
++	echo Enabled U-Boot console serial gadget
++
++# bootretry will run this command over and over, if we fail once
++# then bail out to the boot menu instead (with a pause to read
++# the error message)
++bootcmd=bootefi bootmgr; pause; run menucmd
++
++# When entering the menu (either from button press or failed boot)
++# remap bootcmd so it will re-open the menu and we won't get stuck
++# at the console with no way to type
++menucmd=setenv bootcmd run menucmd; bootmenu -1
++
++# Pause is used so the output can be read on the display
++bootmenu_0=Boot=bootefi bootmgr; pause
++bootmenu_1=Enable serial console gadget=run serial_gadget
++bootmenu_2=Enable USB mass storage=ums 0 scsi 0
++bootmenu_3=Reset device=reset
++bootmenu_4=Dump clocks=clk dump; pause
++bootmenu_5=Dump environment=printenv; pause
++bootmenu_6=Board info=bdinfo; pause
++bootmenu_7=Dump bootargs=fdt print /chosen bootargs; pause
++bootmenu_8=Enable fastboot mode=run fastboot
++# Disabling bootretry means we'll just drop the shell
++bootmenu_9=Drop to shell=setenv bootretry -1
++
++# Allow holding the power button while U-Boot loads to enter
++# the boot menu
++button_cmd_0_name=pwrkey
++button_cmd_0=run menucmd
++
++# Hold volume down to drop to a shell with the USB serial gadget
++# enabled for debugging
++button_cmd_1_name=Volume down
++button_cmd_1=run serial_gadget
 
 -- 
 2.46.2
