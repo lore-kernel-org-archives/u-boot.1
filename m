@@ -4,67 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A5D2CFA779
-	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 13:21:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F65ECF34C5
+	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 13:53:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B1CD88B78;
-	Fri,  4 Oct 2024 15:21:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id C2C59889EB;
+	Fri,  4 Oct 2024 15:53:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="JKIwucdG";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 93DF888966; Fri,  4 Oct 2024 15:21:23 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1728050001;
+	bh=U1zyNBuI57a3nA8Lh936xecyk9NIF0Dhm47dRUl9Udk=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=W/+m6IXj8xH5kt7gkzL1BK1soLqmKJfEuWK3O6P+FAqEtZ4uccH3DIYI1PKT3froa
+	 HrRviyONJPa3AswQYokLV5C2JfumLmFkhpMF5xeXN5UsLUmZnbXjuygyJe/qI12V+j
+	 6F09I8UU3DylX2B+ysEqB/sAiIywTPc4Bm0R38zzHgOpUdCBMD6n2gnpbMSv1mZlmQ
+	 6IYjXcr9mFpwIaNpaN7EPR/vkduwML4+aaDDNnbgncx5ehnWCeJo6pHachQkEGt74+
+	 0yoQ+3oOX85/wqboMzLyIzbdfeo7hwV+cvagf92U63DDHMGyWOzyzpYfAMdCBmRc4/
+	 oc10cCaex7Wbw==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31D7488DD0
- for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 15:21:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=p-mantena@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 494DLG3V050828;
- Fri, 4 Oct 2024 08:21:16 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1728048076;
- bh=jqq75sgrjRy5WZX60+VQcc70iIPg+wK4KaOidnosWn4=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=JKIwucdGiORPYpfMAI56NWiwPtv68FBWs9IPeNMgc/UnY9IiSfd3d9XlzHbcFcCzl
- TrNineOxbfOrxNIDntEjgLMbcwOYikwCiXGZLoCyQG16OBwNh2ui+j2CB+rpgNIk1I
- Kvw4nOiazmj1TRbEI9KTansBqwWZ1qoVUAJRlxPw=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 494DLFp8007711
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 4 Oct 2024 08:21:15 -0500
-Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 4
- Oct 2024 08:21:15 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 4 Oct 2024 08:21:15 -0500
-Received: from prasanth-server.dhcp.ti.com (prasanth-server.dhcp.ti.com
- [172.24.227.197])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 494DKx3g061378;
- Fri, 4 Oct 2024 08:21:13 -0500
-From: Prasanth Babu Mantena <p-mantena@ti.com>
-To: <trini@konsulko.com>, <sjg@chromium.org>, <alpernebiyasak@gmail.com>
-CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
- <n-francis@ti.com>, <vaishnav.a@ti.com>, <s-k6@ti.com>
-Subject: [PATCH 4/4] dma: ti: k3-udma: Move DMA channel[0] allocation to probe
- and add udma_remove()
-Date: Fri, 4 Oct 2024 18:50:57 +0530
-Message-ID: <20241004132057.1449909-5-p-mantena@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241004132057.1449909-1-p-mantena@ti.com>
-References: <20241004132057.1449909-1-p-mantena@ti.com>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 512CD881C1;
+ Fri,  4 Oct 2024 15:53:20 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1728050000;
+ bh=U1zyNBuI57a3nA8Lh936xecyk9NIF0Dhm47dRUl9Udk=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=H6KCSUyRVlEnOqRyxi6TfE6ANT8ZsenpZ/6CTeqc8Ecs5ttDa6QHRcZuTvLe3AAiA
+ Y6m6MNdXjDTmXd5C+7t6GJXONjnf4LR6SMLgaBPmQ/31KPxcGWWDOd+afPGNI9gctX
+ WaYUzwnYqocf2TQzvjh7kmZNWdHFmnMql5boXFLSHGhOEMyCbmF0soQ0jgatNcAL48
+ 0gkdzixAAbqK0vQ6zJXk8Dj2ejCCKjrJcYI3Z46Fb4cSWnB0K1BTL15SnxxBjMX/sI
+ d/QMN5zOH8s5r1nfb02jfomYESXwfMCiPaLWZ+QpfT1ZbjynWrEcpfI6+lGJctXUDz
+ 0T5RkmnoIsmSQ==
+Message-ID: <d542e169-cc19-4349-bfbe-4d3937da63a8@denx.de>
+Date: Fri, 4 Oct 2024 15:51:35 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/7] usb: onboard-hub: Add reset-gpio support
+To: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Cc: "Simek, Michal" <michal.simek@amd.com>,
+ "fabrice.gasnier@foss.st.com" <fabrice.gasnier@foss.st.com>,
+ "git (AMD-Xilinx)" <git@amd.com>
+References: <20241001050529.17922-1-venkatesh.abbarapu@amd.com>
+ <20241001050529.17922-2-venkatesh.abbarapu@amd.com>
+ <6056a273-2699-4e94-93e8-ddc96084bbba@denx.de>
+ <SA1PR12MB8697873F2C2EF86E6E9DAF9B98712@SA1PR12MB8697.namprd12.prod.outlook.com>
+ <2e0928c8-e03a-44ae-aa36-3d664ed5bc6a@denx.de>
+ <SA1PR12MB8697682FEEE48B015EE82E0398712@SA1PR12MB8697.namprd12.prod.outlook.com>
+ <c40f47cb-7245-43b7-9b01-6b8d1cdff04c@denx.de>
+ <SA1PR12MB869735B41B6F7A86520E2D3D98722@SA1PR12MB8697.namprd12.prod.outlook.com>
+ <02fe6fab-7e8c-4408-950f-e6df2a258b16@denx.de>
+ <SA1PR12MB86972BBB9F22E0C98AA541A198722@SA1PR12MB8697.namprd12.prod.outlook.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <SA1PR12MB86972BBB9F22E0C98AA541A198722@SA1PR12MB8697.namprd12.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,124 +80,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Santhosh Kumar K <s-k6@ti.com>
-
-Currently, the allocation of DMA channel[0] for memcpy is happening
-in udma_transfer() for every transfer, which leads to a huge overhead
-for each transfer, especially in case of nand page reads. So, move this
-allocation to udma_probe(), as a result, the allocation is done once
-during probe.
-
-Introduce udma_remove() for the cleanup of allocated channel during
-probe.
-
-Signed-off-by: Santhosh Kumar K <s-k6@ti.com>
-Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
----
- drivers/dma/ti/k3-udma.c | 64 ++++++++++++++++++++++++----------------
- 1 file changed, 39 insertions(+), 25 deletions(-)
-
-diff --git a/drivers/dma/ti/k3-udma.c b/drivers/dma/ti/k3-udma.c
-index 0543f5f4c8..e0328536a2 100644
---- a/drivers/dma/ti/k3-udma.c
-+++ b/drivers/dma/ti/k3-udma.c
-@@ -2190,37 +2190,12 @@ static int udma_transfer(struct udevice *dev, int direction,
- 	/* Channel0 is reserved for memcpy */
- 	struct udma_chan *uc = &ud->channels[0];
- 	dma_addr_t paddr = 0;
--	int ret;
--
--	switch (ud->match_data->type) {
--	case DMA_TYPE_UDMA:
--		ret = udma_alloc_chan_resources(uc);
--		break;
--	case DMA_TYPE_BCDMA:
--		ret = bcdma_alloc_chan_resources(uc);
--		break;
--	default:
--		return -EINVAL;
--	};
--	if (ret)
--		return ret;
- 
- 	udma_prep_dma_memcpy(uc, dst, src, len);
- 	udma_start(uc);
- 	udma_poll_completion(uc, &paddr);
- 	udma_stop(uc);
- 
--	switch (ud->match_data->type) {
--	case DMA_TYPE_UDMA:
--		udma_free_chan_resources(uc);
--		break;
--	case DMA_TYPE_BCDMA:
--		bcdma_free_bchan_resources(uc);
--		break;
--	default:
--		return -EINVAL;
--	};
--
- 	return 0;
- }
- 
-@@ -2590,6 +2565,7 @@ static int udma_probe(struct udevice *dev)
- 	struct udevice *tmp;
- 	struct udevice *tisci_dev = NULL;
- 	struct udma_tisci_rm *tisci_rm = &ud->tisci_rm;
-+	struct udma_chan *uc;
- 	ofnode navss_ofnode = ofnode_get_parent(dev_ofnode(dev));
- 
- 	ud->match_data = (void *)dev_get_driver_data(dev);
-@@ -2714,6 +2690,42 @@ static int udma_probe(struct udevice *dev)
- 
- 	uc_priv->supported = DMA_SUPPORTS_MEM_TO_MEM | DMA_SUPPORTS_MEM_TO_DEV;
- 
-+	uc = &ud->channels[0];
-+	switch (ud->match_data->type) {
-+	case DMA_TYPE_UDMA:
-+		ret = udma_alloc_chan_resources(uc);
-+		break;
-+	case DMA_TYPE_BCDMA:
-+		ret = bcdma_alloc_chan_resources(uc);
-+		break;
-+	default:
-+		return -EINVAL;
-+	};
-+
-+	if (ret) {
-+		dev_err(dev, " Channel 0 allocation failure %d\n", ret);
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static int udma_remove(struct udevice *dev)
-+{
-+	struct udma_dev *ud = dev_get_priv(dev);
-+	struct udma_chan *uc = &ud->channels[0];
-+
-+	switch (ud->match_data->type) {
-+	case DMA_TYPE_UDMA:
-+		udma_free_chan_resources(uc);
-+		break;
-+	case DMA_TYPE_BCDMA:
-+		bcdma_free_bchan_resources(uc);
-+		break;
-+	default:
-+		return -EINVAL;
-+	};
-+
- 	return 0;
- }
- 
-@@ -2855,5 +2867,7 @@ U_BOOT_DRIVER(ti_edma3) = {
- 	.of_match = udma_ids,
- 	.ops	= &udma_ops,
- 	.probe	= udma_probe,
-+	.remove = udma_remove,
- 	.priv_auto	= sizeof(struct udma_dev),
-+	.flags  = DM_FLAG_OS_PREPARE,
- };
--- 
-2.34.1
-
+On 10/4/24 2:03 PM, Abbarapu, Venkatesh wrote:
+> Hi,
+> 
+>> -----Original Message-----
+>> From: Marek Vasut <marex@denx.de>
+>> Sent: Friday, October 4, 2024 4:52 PM
+>> To: Abbarapu, Venkatesh <venkatesh.abbarapu@amd.com>; u-boot@lists.denx.de
+>> Cc: Simek, Michal <michal.simek@amd.com>; fabrice.gasnier@foss.st.com; git
+>> (AMD-Xilinx) <git@amd.com>
+>> Subject: Re: [PATCH v3 1/7] usb: onboard-hub: Add reset-gpio support
+>>
+>> On 10/4/24 5:02 AM, Abbarapu, Venkatesh wrote:
+>>> Hi Marek,
+>>>
+>>>> -----Original Message-----
+>>>> From: Marek Vasut <marex@denx.de>
+>>>> Sent: Thursday, October 3, 2024 10:35 PM
+>>>> To: Abbarapu, Venkatesh <venkatesh.abbarapu@amd.com>;
+>>>> u-boot@lists.denx.de
+>>>> Cc: Simek, Michal <michal.simek@amd.com>;
+>>>> fabrice.gasnier@foss.st.com; git
+>>>> (AMD-Xilinx) <git@amd.com>
+>>>> Subject: Re: [PATCH v3 1/7] usb: onboard-hub: Add reset-gpio support
+>>>>
+>>>> On 10/3/24 4:54 PM, Abbarapu, Venkatesh wrote:
+>>>>> Hi Marek,
+>>>>>
+>>>>>> -----Original Message-----
+>>>>>> From: Marek Vasut <marex@denx.de>
+>>>>>> Sent: Thursday, October 3, 2024 5:38 PM
+>>>>>> To: Abbarapu, Venkatesh <venkatesh.abbarapu@amd.com>;
+>>>>>> u-boot@lists.denx.de
+>>>>>> Cc: Simek, Michal <michal.simek@amd.com>;
+>>>>>> fabrice.gasnier@foss.st.com; git
+>>>>>> (AMD-Xilinx) <git@amd.com>
+>>>>>> Subject: Re: [PATCH v3 1/7] usb: onboard-hub: Add reset-gpio
+>>>>>> support
+>>>>>>
+>>>>>> On 10/3/24 6:40 AM, Abbarapu, Venkatesh wrote:
+>>>>>>> Hi Marek,
+>>>>>>
+>>>>>> Hi,
+>>>>>>
+>>>>>>>>> @@ -30,7 +40,24 @@ static int usb_onboard_hub_probe(struct
+>>>>>>>>> udevice
+>>>> *dev)
+>>>>>>>>>       	if (ret)
+>>>>>>>>>       		dev_err(dev, "can't enable vdd-supply: %d\n", ret);
+>>>>>>>>>
+>>>>>>>>> -	return ret;
+>>>>>>>>> +	hub->reset_gpio = devm_gpiod_get_optional(dev, "reset",
+>>>>>>>>> +						  GPIOD_IS_OUT |
+>>>>>>>> GPIOD_ACTIVE_LOW);
+>>>>>>>>> +	/* property is optional, don't return error! */
+>>>>>>>>> +	if (hub->reset_gpio) {
+>>>>>>>>
+>>>>>>>> if (!hub->reset_gpio)
+>>>>>>>>        return 0;
+>>>>>>> <Venkatesh> As reset_gpio is optional property,  by returning 0
+>>>>>>> the i2c sequence
+>>>>>> wont be executed.
+>>>>>> The code in if (hub->reset_gpio) { ... } only toggles the GPIO reset ?
+>>>>> <Venkatesh> Yes...if(hub->reset_gpio) only toggles the GPIO reset.
+>>>> So you can return 0 if reset_gpio is NULL and exit early . What's the problem ?
+>>> <Venkatesh> if reset_gpio is NULL by returning 0 we miss the below code which
+>> does i2c initialization sequence.
+>>> Need to toggle the gpio and then does the i2c sequence if the reset_gpio is
+>> present, else we do the i2c initialization sequence.
+>>
+>> Please show me the i2c sequence that is missed in this patch hunk:
+>>
+>> +	if (hub->reset_gpio) {
+>> +		ret = dm_gpio_set_value(hub->reset_gpio, 1);
+>> +		if (ret)
+>> +			return ret;
+>> +
+>> +		udelay(data->reset_us);
+>> +
+>> +		ret = dm_gpio_set_value(hub->reset_gpio, 0);
+>> +		if (ret)
+>> +			return ret;
+>> +
+>> +		udelay(data->power_on_delay_us);
+>> +	}
+>> +
+>> +	return 0;
+> 
+> The i2c sequence change is part of   [PATCH v4 4/7] usb: onboard-hub: Add i2c initialization for usb5744 hub of the series
+> 
+> +	if (data->init) {
+> +		ret = data->init(dev);
+> +		if (ret) {
+> +			dev_err(dev, "onboard i2c init failed: %d\n", ret);
+> +			goto err;
+> +		}
+> +	}
+> +
+>   	return 0;
+> +err:
+> +	dm_gpio_set_value(hub->reset_gpio, 0);
+> +	return ret;
+>   }
+This does not seem to be part of the if (hub->reset_gpio) { ... } code 
+block ?
