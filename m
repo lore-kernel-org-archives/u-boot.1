@@ -4,78 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A045CF8856
-	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 19:15:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB6A8CF885B
+	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 21:52:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C546588ADC;
-	Fri,  4 Oct 2024 21:15:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id BC63A889C3;
+	Fri,  4 Oct 2024 23:52:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sD+wAJrH";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id BEF5188C98; Fri,  4 Oct 2024 21:15:10 +0200 (CEST)
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
- [IPv6:2607:f8b0:4864:20::f29])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1728078752;
+	bh=RVyuTUn67HA7hQbF+5Qh5gIYt//nUfRU5BmjQN1Fvjk=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=nzP1sNV1V6PqDkoG75VCWBTCUzVPCPIVgMh1256W12QtIQQegEdVW1SkbLg7AkaQL
+	 v4ZASWBEwY4Ke3OHGr/UI0Li2SV9YVT4RemhoSHtkNNufE0rGozGSfDVNhqqlXbCJ8
+	 GZ+x7VRFetju0FCCHveVy+Vio69/4TsqIRtGFK7U5+0Idqv9b01I7C3bi/RaRKF8q/
+	 KJ4h2StGEFz1vEAv9ee/mpZD5ms5QJ/y0wCHZW7cCSBHfeWSn08vnOPpF1XyhA46Ez
+	 V+0wFhL/ZAMmLKepFfrQjWZTm7TnXJ1e4vr/jKuV5Wo41ljVWxAIZV5Ko/tntvabk+
+	 R34CXDbsBJAgg==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C3FA88AC2
- for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 21:15:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-6c5acb785f2so14371866d6.0
- for <u-boot@lists.denx.de>; Fri, 04 Oct 2024 12:15:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1728069307; x=1728674107; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=W09rrDYuUBiX/otwULsya9N8kFz8RlUfaHZjr0+DRgg=;
- b=sD+wAJrHrsKTqX9coYRny3VDdFce7J2B6bV681idJYDEGVOLC9SLtbYNrd8VV25EU7
- aGVWEiGKrfFPsIIbZLUyNVUTayDMecfuK0jGkQ+7Oq/miyWZ9dgr86ewhtIfFZxLRnII
- spNv/NPLtrnYo0m/CV09mkI372IBYC1zmUDg8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728069307; x=1728674107;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=W09rrDYuUBiX/otwULsya9N8kFz8RlUfaHZjr0+DRgg=;
- b=OVjmeEI+MR9fuQkqLIx07LNqzy7CVAZ3cNFKzFDOT/0UYKFlSsafwSiEmEC/lT6frF
- EKQPxS5PWGndz9NeOHgyz7WkUK2CZ4QyycVjoPSFtVIKRGdJjuR4Sw+k3+Nq9L1/ugif
- bswZSh8FFT/tOCls2en82P3cCj0esC2frbs5JCgCxcqpUTq36Z9vINX0ZSXtPLMXyrJO
- k60EVHx2hfnnAiwQ/E56q0WyUBBbAw9vpoB6eoth8JFFx65qBTmQfba/aMrU/4N+qY+7
- 8T+75ATP6s28g9AasT7GUSqA1Y4R1Rat5lVvsz+3/+ZAKKA7hlRjXomCC4RUvaQdsKhG
- dFmw==
-X-Gm-Message-State: AOJu0YxNjuKw8T6CSnM9o/64CQ4BLMI2vtWHO9uMVMpoIqLkJmNSdJy5
- Y0lqbmJ8yzzLzgQgB0domyyfas3ktKQAQcbhYvIG118IDsrSRinAS4Slw3IV/Hc=
-X-Google-Smtp-Source: AGHT+IGEpXYtafaUPfJKcr3ARFnyG0NDfseMRBi9kUnpMJhfHWhCWpAFqIrKnmjNaB0qDre3SpbiAw==
-X-Received: by 2002:a05:6214:5d8a:b0:6c7:c6f7:48a5 with SMTP id
- 6a1803df08f44-6cb9a47e144mr48303046d6.25.1728069306999; 
- Fri, 04 Oct 2024 12:15:06 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6cba475eea6sm1784616d6.113.2024.10.04.12.15.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Oct 2024 12:15:05 -0700 (PDT)
-Date: Fri, 4 Oct 2024 13:15:01 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
- Anton Antonov <Anton.Antonov@arm.com>
-Subject: Re: [PATCH v11 00/29] Introduce the lwIP network stack
-Message-ID: <20241004191501.GJ4737@bill-the-cat>
-References: <cover.1727968902.git.jerome.forissier@linaro.org>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id E797E889C5;
+ Fri,  4 Oct 2024 23:52:30 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1728078751;
+ bh=RVyuTUn67HA7hQbF+5Qh5gIYt//nUfRU5BmjQN1Fvjk=;
+ h=From:To:Cc:Subject:Date:From;
+ b=X53W/cpKDYZ+ui7NZWxIB/lgegIaze5IFBCOFogQJc9jbzYZ/45PlMDLNHQx9nVhD
+ +JKq1XEjKBF1MfAqYJBRpHS0LNS+XXMja3uxIHLpU1cHitor1tfEUcz160y3vYTN8T
+ NKS2pJfoK3pLBMofW/eawxbVbDb+DhQOhBA2wpoJzkyMfl9TevC8wRt4ULXQOkXmKz
+ g7r8t4Ml0O3t9lwPClmLT/mFCLDfSnIXr/rvO2AXDPxLxEJ2jkBXSTBxF26M++ph8k
+ XtHrtUdnmjjgx2nQMsreMy3rVr7FKyNbCIrD+44OfkodTHijuztSAaRYGjZyy00fUH
+ 2AIsaS8zBrNWQ==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH] ARM: stm32: Update MAINTAINERS file globs for STM32MP DHSOM
+Date: Fri,  4 Oct 2024 23:51:46 +0200
+Message-ID: <20241004215213.252840-1-marex@denx.de>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="25HinYAUWTbwUdo7"
-Content-Disposition: inline
-In-Reply-To: <cover.1727968902.git.jerome.forissier@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,65 +66,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Update the MAINTAINERS file glob to cover all of STM32MP DHSOM related files.
 
---25HinYAUWTbwUdo7
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@dh-electronics.com
+Cc: uboot-stm32@st-md-mailman.stormreply.com
+---
+ board/dhelectronics/dh_stm32mp1/MAINTAINERS | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-On Thu, Oct 03, 2024 at 05:22:46PM +0200, Jerome Forissier wrote:
+diff --git a/board/dhelectronics/dh_stm32mp1/MAINTAINERS b/board/dhelectronics/dh_stm32mp1/MAINTAINERS
+index 865588f5b8b..d6c33c15aac 100644
+--- a/board/dhelectronics/dh_stm32mp1/MAINTAINERS
++++ b/board/dhelectronics/dh_stm32mp1/MAINTAINERS
+@@ -2,8 +2,7 @@ DH_STM32MP1_PDK2 BOARD
+ M:	Marek Vasut <marex@denx.de>
+ L:	u-boot@dh-electronics.com
+ S:	Maintained
+-F:	arch/arm/dts/stm32mp15xx-dhcom*
++F:	arch/arm/dts/stm32mp*dhco*
+ F:	board/dhelectronics/dh_stm32mp1/
+-F:	configs/stm32mp15_dhcom_basic_defconfig
+-F:	configs/stm32mp15_dhcor_basic_defconfig
++F:	configs/stm32*_dhco*defconfig
+ F:	include/configs/stm32mp15_dh_dhsom.h
+-- 
+2.45.2
 
-> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
-> library for the network stack" [1]. The goal is to introduce the lwIP TCP=
-/IP
-> stack [2] [3] as an alternative to the current implementation in net/,
-> selectable with Kconfig, and ultimately keep only lwIP if possible. Some
-> reasons for doing so are:
-> - Make the support of HTTPS in the wget command easier. Javier T. and
-> Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
-> so. With that it becomes possible to fetch and launch a distro installer
-> such as Debian etc. using a secure, authenticated connection directly
-> from the U-Boot shell. Several use cases:
->   * Authentication: prevent MITM attack (third party replacing the
-> binary with a different one)
->   * Confidentiality: prevent third parties from grabbing a copy of the
-> image as it is being downloaded
->   * Allow connection to servers that do not support plain HTTP anymore
-> (this is becoming more and more common on the Internet these days)
-> - Possibly benefit from additional features implemented in lwIP
-> - Less code to maintain in U-Boot
->=20
-> Prior to applying this series, the lwIP stack needs to be added as a
-> Git subtree with the following command:
->=20
->  $ git subtree add --squash --prefix lib/lwip/lwip \
->    https://github.com/lwip-tcpip/lwip.git  STABLE-2_2_0_RELEASE=20
-
-Tested-by: Tom Rini <trini@konsulko.com> # Raspberry Pi 3 (32b, 64b,
-arm64), Raspberry Pi 4 (32b, 64b, arm64), am64x_evm, am62x_evm,
-am62x_beagleplay.
-
-And the Pi targets were built with gcc-13 and llvm-17.
-
---=20
-Tom
-
---25HinYAUWTbwUdo7
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcAPq8ACgkQFHw5/5Y0
-tyyzuAv8CrW5Vd3Q74jF7uMLoIbiCxu52jBhzbMosot/04FeJ8CMYDff6jxmcgVj
-mFPrA4BRVUU04m7tz/i29e6gOxrJwgJrGSOzUWJX4rTS6YhtrJvvKUdphPefnQR5
-hygrvF7DKnITuAt0Nif1KyxNNCJq5IulvPtkZKCPiEv8ERklEKsp8WLcKTL0+Nqu
-Rf+7QN4qhk/Lm3ANFZDgBKsqajCydTZy2h2XAjbp+fABv6SUlecLXD6PtyMPJVdI
-GdSWFm5bbiyoroTbTmNnNKEEYLhQyLGoh3VmsjBnd5KKVRmyGWcoz93mImddye1J
-6ktD4yXp+lP2D9pkBIRUEEJkiT/wkeXiavEcAzrvlQ5A0Refob8iZUFiLqwckAtO
-6kGrBU0DD0tModJhUkCFe1nKvTJaBU3/W8HxBWn6KIZPoCXQyiVizO+AxUh9DnoB
-gkSe8PvhwSV7jDG6NIlJ5cO5+Sd9Ddtjas/HqAlfC8J4kWgmW/Ugn7wzGKzVN6hV
-fUVyIbRJ
-=Fv4t
------END PGP SIGNATURE-----
-
---25HinYAUWTbwUdo7--
