@@ -4,81 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D807DCFA769
-	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 11:00:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEA1DCFA76A
+	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 11:20:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BC58888B7;
-	Fri,  4 Oct 2024 13:00:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=suse.com
+	by phobos.denx.de (Postfix) with ESMTP id 0D54388B0B;
+	Fri,  4 Oct 2024 13:20:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="gVIDnW2E";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1728040848;
+	bh=jNahWsXET12VmtjufckFcaIDHLxRR9fUfPwU4IG/ETE=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=cSVq68rW+RiqmXcMvytI3sTC9OUkOGGuJXzKYKprVvJZLiKivyd3gRG39HDIDAwTl
+	 ILtpLj0ImZu6FQv8n+AjdNRUxYkrX9PSyGwO4OYOn3I3QnVSg80u75h8z33xwV8PfB
+	 tko6C5RvD3Z4p7jKGzCMQ3qo1WnQAP6zuOfRJXZh4RjIwsOl4pe5IFJDaUZZjK3jvf
+	 MxS3unkt4dDOqSaL40YutbMOJ/PRaxJb12q/nV+PKt++j9Zm16RLLn16GDipawdx2F
+	 BuJmtBNtE8QCBF7ya2Q5YYPA7jQ00c2Vo/ut86Bwm5xEqRxEnhlHDmuWuJHgNegdgk
+	 onp4ojtsVFgdQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 656AD88936; Fri,  4 Oct 2024 13:00:56 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E793588C44; Fri,  4 Oct 2024 13:20:46 +0200 (CEST)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
+ [IPv6:2001:67c:2050:101:465::107])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 686C78888F
- for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 13:00:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=suse.com
+ by phobos.denx.de (Postfix) with ESMTPS id ABEC288AE8
+ for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 13:20:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mbrugger@suse.com
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-42cb1758e41so15915215e9.1
- for <u-boot@lists.denx.de>; Fri, 04 Oct 2024 04:00:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=suse.com; s=google; t=1728039653; x=1728644453; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=gHqnwYNeMPEGE0vKH2SvoaTdqtiId3i91NmlPjxI9Lc=;
- b=gVIDnW2Ei5RdzC62Vg6MoWWG++ZmrYtWe5m+7Ho9ZGjVRkAJepXhtzhFQJwqUI+/HT
- PwZB0u2giFqcI3Wiuo5Q49Ju/R+O6vYN3mnikROuV8VN+6nbc9iGwRv6sHm7Lr0xmWrD
- qVrkANd3vkQCIE5Y+ll+hvQ7BH0H02YkMJQSKI9BQrAYzt++HqmkFvvo0U9PRwk3px4F
- mLNYY22B+P4dEbJd/02uSSQzgYk1WHcj3qAHUVN15cJEjjD/QjqB4NZL+G7WS9skkqga
- shjtRRIlj+/gFM8yK9T+oNTf1XvDCCJxEpxSKpXM4FNpXpiOeWCBhlGoBxKT4LJAGwKT
- yp3g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728039653; x=1728644453;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=gHqnwYNeMPEGE0vKH2SvoaTdqtiId3i91NmlPjxI9Lc=;
- b=mG9RhEpSs8LlPBdum4WUZgmBTJE1Qnr80Y1aWuY+7h/AmqVZcHkzxkAFl94H3xSr1O
- nf5gAJDRKTaeSqSRGj+yuGJaxriYpBAmi/B3e5yv6gH//toPIweWcbYqECnSsm2cYCzq
- fUg0UFoQsi+MU8pHT+WG3qrOIy4rFRMTNT3WFN6QxhjGO3NFx2xZXOw9EyJ0XE7t32dJ
- ydqlgHNsLm+dipbkhCoqR+x0Gmo+ccGurEhjExB7R1XH1Xl+Iy/hFc8NapMoOgiWPTxE
- 1VkeKhik0m7ngqTwBrzUlcnXGH2BQ1Uwy8ZugtmyjYNpJxjg/Cb8OSs/BS2eU69BKO0G
- J47w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWOGN8JKvAwCLYi6u+rmhAA3q/YzCcWCinPTZaqJ5IDYeS0bUiCc2AtNIPBZOkDuVQxhmtloKk=@lists.denx.de
-X-Gm-Message-State: AOJu0YxjdLOcNSQ1mXP2l9vNFr78KjMrk4iSxnLuHkL4gDd7D/K+phob
- YNkogWV7abwdk3zlgwma1MJGICXpebYSuFbNfhyCY24TQomB16oM837vztSRFd6JWgYkwVP+//n
- /soA=
-X-Google-Smtp-Source: AGHT+IGC25+6qLpcrsNnBDq/1repV6yeU/t9Vn9qaZpKmtQjNCMabialSRq0OkuIo9MRu5ZMQbUIig==
-X-Received: by 2002:a05:600c:3b82:b0:42f:8287:c235 with SMTP id
- 5b1f17b1804b1-42f85aa194fmr15451375e9.1.1728039652809; 
- Fri, 04 Oct 2024 04:00:52 -0700 (PDT)
-Received: from [192.168.1.144] ([207.188.162.240])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d081f7482sm3057542f8f.8.2024.10.04.04.00.37
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 04 Oct 2024 04:00:45 -0700 (PDT)
-Message-ID: <b3489099-1b76-4e3f-822e-5d7ae89d49b1@suse.com>
-Date: Fri, 4 Oct 2024 13:00:34 +0200
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4XKmLf222Yz9sRQ;
+ Fri,  4 Oct 2024 13:20:42 +0200 (CEST)
+Message-ID: <e0305d38-09df-4182-bdfa-4782090b4f47@denx.de>
+Date: Fri, 4 Oct 2024 13:20:41 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] board: rpi: Pass CMA through from firmware DT
-To: Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de
-References: <20241004084124.416695-1-pbrobinson@gmail.com>
-Content-Language: en-GB
-From: Matthias Brugger <mbrugger@suse.com>
-In-Reply-To: <20241004084124.416695-1-pbrobinson@gmail.com>
+Subject: Re: [PATCH 00/13] disentangling cyclic API from schedule()
+To: Rasmus Villemoes <ravi@prevas.dk>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>
+References: <20241003212802.3810-1-ravi@prevas.dk>
+Content-Language: en-US
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <20241003212802.3810-1-ravi@prevas.dk>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-Rspamd-Queue-Id: 4XKmLf222Yz9sRQ
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,44 +70,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Rasmus,
 
-
-On 4/10/24 10:41, Peter Robinson wrote:
-> For a lot of usecases, such as display, camera, media
-> the Raspberry Pi needs a lot more CMA than distros
-> configure as default so we should pass this parameter
-> through so things work as expected. Fix a spelling
-> mistake while we're at it.
+On 10/3/24 23:27, Rasmus Villemoes wrote:
+> These patches are part of a longer-term plan to properly deal with the
+> HW_WATCHDOG vs WATCHDOG dichotomy, and getting rid of the legacy
+> HW_WATCHDOG concept completely. As part of that, clean up which
+> headers include other headers.
 > 
-> Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
-
-Acked-by: Matthias Brugger <mbrugger@suse.com>
-
-> ---
->   board/raspberrypi/rpi/rpi.c | 5 ++++-
->   1 file changed, 4 insertions(+), 1 deletion(-)
+> While schedule(), the artist formerly known as WATCHDOG_RESET(), is
+> obviously called all over the tree, very few TUs make use of the
+> cyclic API (cyclic_register etc.). And there's really no reason at all
+> for global_data.h to include cyclic.h - except that some places
+> implicitly rely on getting their declaration of schedule() through
+> that include.
 > 
-> diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
-> index ab5ea85cf9f..d4dbd96bc96 100644
-> --- a/board/raspberrypi/rpi/rpi.c
-> +++ b/board/raspberrypi/rpi/rpi.c
-> @@ -540,7 +540,7 @@ void  update_fdt_from_fw(void *fdt, void *fw_fdt)
->   	if (fdt == fw_fdt)
->   		return;
->   
-> -	/* The firmware provides a more precie model; so copy that */
-> +	/* The firmware provides a more precise model; so copy that */
->   	copy_property(fdt, fw_fdt, "/", "model");
->   
->   	/* memory reserve as suggested by the firmware */
-> @@ -561,6 +561,9 @@ void  update_fdt_from_fw(void *fdt, void *fw_fdt)
->   
->   	/* address of the PHY device as provided by the firmware  */
->   	copy_property(fdt, fw_fdt, "ethernet0/mdio@e14/ethernet-phy@1", "reg");
-> +
-> +	/* copy the CMA memory setting from the firmware DT to linux */
-> +	copy_property(fdt, fw_fdt, "cma", "size");
->   }
->   
->   int ft_board_setup(void *blob, struct bd_info *bd)
+> So this introduces a separate mostly trivial header that just serves
+> to declare schedule(). Then we can get rid of things that include
+> cyclic.h just to get that declaration.
+> 
+> A next, mostly mechanical step, could be to change almost all includes
+> of watchdog.h (which most TUs that used to have a WATCHDOG_RESET()
+> invocation has) to u-boot/schedule.h, because again, most of those TUs
+> are not really concerned with implementing init_func_watchdog_init or
+> need to call it. But that is for later.
+> 
+> CI seems happy: https://github.com/u-boot/u-boot/pull/673
+> 
+> Rasmus Villemoes (13):
+>    doc: cyclic: remove reference to WATCHDOG_RESET
+>    cyclic: introduce u-boot/schedule.h
+>    led: include cyclic.h in led_sw_blink.c
+>    m68k: asm/ptrace.h: include linux/types.h
+>    fs/cramfs: use schedule instead of cyclic_run as callback
+>    test: dm: wdt: replace cyclic_run() by schedule()
+>    cyclic: make cyclic_run static
+>    watchdog.h: change include of cyclic.h to u-boot/schedule.h
+>    lib/sha*: include u-boot/schedule.h instead of cyclic.h
+>    i2c: rzg2l: include u-boot/schedule.h
+>    ddr: altera: include u-boot/schedule.h
+>    boot: cedit: include u-boot/schedule.h
+>    global_data.h: remove unnecesary include of cyclic.h
+> 
+>   arch/m68k/include/asm/ptrace.h    |  2 ++
+>   boot/cedit.c                      |  1 +
+>   common/cyclic.c                   |  3 ++-
+>   doc/develop/cyclic.rst            | 10 +++++-----
+>   drivers/ddr/altera/sdram_n5x.c    |  1 +
+>   drivers/ddr/altera/sdram_soc64.c  |  1 +
+>   drivers/i2c/rz_riic.c             |  1 +
+>   drivers/led/led_sw_blink.c        |  1 +
+>   fs/cramfs/uncompress.c            |  4 ++--
+>   include/asm-generic/global_data.h |  1 -
+>   include/cyclic.h                  | 24 +-----------------------
+>   include/u-boot/schedule.h         | 24 ++++++++++++++++++++++++
+>   include/watchdog.h                |  2 +-
+>   lib/sha1.c                        |  2 +-
+>   lib/sha256.c                      |  2 +-
+>   lib/sha512.c                      |  2 +-
+>   test/dm/wdt.c                     | 10 +++++-----
+>   17 files changed, 50 insertions(+), 41 deletions(-)
+>   create mode 100644 include/u-boot/schedule.h
 
+Thanks for this work - really appreciated. I'm leaving for vacation
+pretty soon. Will take a closer look at these patches in roughly 2
+weeks.
+
+Thanks,
+Stefan
