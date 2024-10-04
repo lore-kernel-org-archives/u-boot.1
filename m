@@ -4,79 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B1EBCF8853
-	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 17:14:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BDA5CF8840
+	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 17:14:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 326E988CC1;
-	Fri,  4 Oct 2024 19:14:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8E27788DB2;
+	Fri,  4 Oct 2024 19:14:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Mx+65VSq";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZUEO6MO/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0D13889DA; Fri,  4 Oct 2024 19:14:38 +0200 (CEST)
-Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
- [IPv6:2607:f8b0:4864:20::72f])
+ id 06A8988EA8; Fri,  4 Oct 2024 19:14:50 +0200 (CEST)
+Received: from mail-qt1-x82d.google.com (mail-qt1-x82d.google.com
+ [IPv6:2607:f8b0:4864:20::82d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A823788C98
- for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 19:14:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8EBAD88D2C
+ for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 19:14:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72f.google.com with SMTP id
- af79cd13be357-7ae3fcec5feso224108785a.0
- for <u-boot@lists.denx.de>; Fri, 04 Oct 2024 10:14:36 -0700 (PDT)
+Received: by mail-qt1-x82d.google.com with SMTP id
+ d75a77b69052e-45cac3368f0so13915811cf.0
+ for <u-boot@lists.denx.de>; Fri, 04 Oct 2024 10:14:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1728062075; x=1728666875; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1728062085; x=1728666885; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=uD/uMPA+cRo81oQs06iKcGcTNb4l4MYljlBt7zP64LM=;
- b=Mx+65VSqFi9KPaPgBzK++V/+rqWRcKlzmJ6HFA+zjCy1SFkFYIksvwa6YBu3b/bMJG
- w5ZcQHvUNuLQ3LYrE/6jLD0G3B8AsgSFrJY17YxAL51GtBkppEjcYHdDoFt/iR5xZaU6
- lQSdT7DJ/StBonSeBQf49/lROtrXn6TwrfYEQ=
+ bh=kenh3nTg2RdVTAsQN/rpHDjZoKTSp6S8l9mFOjWFfAI=;
+ b=ZUEO6MO/m7BAfHIQtb8t+QSEiLPVDvck5nptRL8vAv5WZL46kP5yzS24e13X0d1V3K
+ XBdBXNIdcT/C5JWz+Zsr02mOk0TqFkvlHbhIGDwJwQX5E6XRLzYR+/I+pkvMB2yURBYC
+ jKI6zKwZ2LYdxtl7SqjulPLDvsygYail63/VM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728062075; x=1728666875;
+ d=1e100.net; s=20230601; t=1728062085; x=1728666885;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uD/uMPA+cRo81oQs06iKcGcTNb4l4MYljlBt7zP64LM=;
- b=rZrMQU143jozYmJi7eXasNhIWfNbM/80iT9g6S2tN77D062W8tbnFIyzN+FXXyfI0s
- lAeaNfo/2fuZtmzsVgXCYrq703UKj465L5S9Kgf9w57jR83q3iP9HzQFbA0StRkJXA4g
- FqZpewRT8BvHdPrXmuTsOFzqW/OTeXZOLs7+PK0B70q/lpo5GHOngRzMKXKGtuiyTcaC
- l9qRYP4+b9EkgY3OXKbu3UkYnhWytw4V12zfohVSeQoujtWmEy/TOuhVuFLEK4g5lExx
- PC5u7LtOWp6ev3np/n07LBge6hBU0Q+81eyrSTG/0crrzlf4bpN9kW/E2ukXnNm7DM6h
- 4Y1Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW/1NFv/l+F1HwyRt+NoAuz0nGYASH543Tn6VTFllfVV5vMRehEg7elEkbjdfVqreBAd+5FIsU=@lists.denx.de
-X-Gm-Message-State: AOJu0YyzpYCBtQhU1B5WyHu+k3ioRevH6ZtRuncGuqjTDuX9TbPyYb/y
- /9aFaJXLR+5LV5VQ5sGuh8KrJaGPcp2yQI5hWu8An6umPmOmEzuDdQwgwVxfmnU=
-X-Google-Smtp-Source: AGHT+IELB08uihQDLV/ZZkQEWA25YvfmYwNTiHty64U8JJy3ISbChj8qSE3xINU3Acinb2fcBE12mg==
-X-Received: by 2002:a05:620a:400d:b0:7a9:acd5:1b21 with SMTP id
- af79cd13be357-7ae6f486943mr637890085a.50.1728062075398; 
- Fri, 04 Oct 2024 10:14:35 -0700 (PDT)
+ bh=kenh3nTg2RdVTAsQN/rpHDjZoKTSp6S8l9mFOjWFfAI=;
+ b=pH8OEdiFTgwI2qob5C4G22rQWXSAnh9sV7FJsq7FatdnNBav9ZtUFBA5kRuhpCH3nu
+ YdpLVxETa4VYIBMXibo9McpCwg2zldX0Du+rZ8nJbUu9nTfmmHMLuaoZWsuhNRihA/TC
+ bDpBioM/wQm/X7cn9FvSUUvCfjwel+VANUT4l8Etc6jBPa1c2+OxgWM5XxyHF2lcoV2d
+ 4/gHOycUFRMkxJXjD24AA0c2/rzVInn+Cw2NZw9BOFte4mcIMWhOtRlHwfO4TCNIMFub
+ yrbacqOtaKBDpKmO06MUen7kjf5OWaL3tOidUcT3d3UK5SUhEXmdWLdD8RE4cMWf1z0m
+ FyIA==
+X-Gm-Message-State: AOJu0YzE4nBHU38pjVEKQ8F2so9e39Mvcy5VYllBi1fCYDqowOwJ06FR
+ z5ywDPxLhEHi6c5PDv1jQwsv52Wu8QqHjxPVQCW1gNaDCFF0A8Kzbz3uePtFliM3SY93fWODwr7
+ f
+X-Google-Smtp-Source: AGHT+IEK2sTMIUPwTGeDsuuYwTx431qeccgflUfBp7TjzXA+LCqPZjCRttbG5bWrmsV2Z2kMhDuzog==
+X-Received: by 2002:a05:622a:12:b0:458:1d11:6064 with SMTP id
+ d75a77b69052e-45d9ba2d37fmr60970971cf.3.1728062085442; 
+ Fri, 04 Oct 2024 10:14:45 -0700 (PDT)
 Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7ae7562cd4fsm2806885a.50.2024.10.04.10.14.34
+ d75a77b69052e-45da74b2051sm923271cf.7.2024.10.04.10.14.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Oct 2024 10:14:34 -0700 (PDT)
-Date: Fri, 4 Oct 2024 11:14:31 -0600
+ Fri, 04 Oct 2024 10:14:44 -0700 (PDT)
+Date: Fri, 4 Oct 2024 11:14:41 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 2/4] cli_hush: run bootmenu on retry
-Message-ID: <20241004171431.GB4737@bill-the-cat>
-References: <20241004-qcom-phones-v2-0-c7ab67ac3043@linaro.org>
- <20241004-qcom-phones-v2-2-c7ab67ac3043@linaro.org>
+To: Rasmus Villemoes <ravi@prevas.dk>
+Cc: u-boot@lists.denx.de, Stefan Roese <sr@denx.de>
+Subject: Re: [PATCH 04/13] m68k: asm/ptrace.h: include linux/types.h
+Message-ID: <20241004171441.GC4737@bill-the-cat>
+References: <20241003212802.3810-1-ravi@prevas.dk>
+ <20241003212802.3810-5-ravi@prevas.dk>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Q3/qoJeGw+cBXVJh"
+ protocol="application/pgp-signature"; boundary="TLNuCOavVDwpHasO"
 Content-Disposition: inline
-In-Reply-To: <20241004-qcom-phones-v2-2-c7ab67ac3043@linaro.org>
+In-Reply-To: <20241003212802.3810-5-ravi@prevas.dk>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,74 +92,44 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Q3/qoJeGw+cBXVJh
+--TLNuCOavVDwpHasO
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Oct 04, 2024 at 02:46:51PM +0200, Caleb Connolly wrote:
-> When CONFIG_BOOT_RETRY is enabled, make hush shell always run the
-> bootcmd. This is an improvement over failing to build.
->=20
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->  common/cli_hush.c          | 2 +-
->  common/cli_hush_upstream.c | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
->=20
-> diff --git a/common/cli_hush.c b/common/cli_hush.c
-> index a6a8edce1f43..3c6fd6f00a1d 100644
-> --- a/common/cli_hush.c
-> +++ b/common/cli_hush.c
-> @@ -1028,9 +1028,9 @@ static void get_user_input(struct in_str *i)
->  	  puts("\nTimeout waiting for command\n");
->  #  ifdef CONFIG_RESET_TO_RETRY
->  	  do_reset(NULL, 0, 0, NULL);
->  #  else
-> -#	error "This currently only works with CONFIG_RESET_TO_RETRY enabled"
-> +	strcpy(console_buffer, "run bootcmd\n");
->  #  endif
->  	}
->  #endif
->  	if (n =3D=3D -1 ) {
-> diff --git a/common/cli_hush_upstream.c b/common/cli_hush_upstream.c
-> index ab5aa5f9b36a..93eb0d85a95a 100644
-> --- a/common/cli_hush_upstream.c
-> +++ b/common/cli_hush_upstream.c
-> @@ -2907,9 +2907,9 @@ static void get_user_input(struct in_str *i)
->  		puts("\nTimeout waiting for command\n");
->  #  ifdef CONFIG_RESET_TO_RETRY
->  		do_reset(NULL, 0, 0, NULL);
->  #  else
-> -#	error "This currently only works with CONFIG_RESET_TO_RETRY enabled"
-> +	strcpy(console_buffer, "run bootcmd\n");
->  #  endif
->  	}
->  # endif
->  	if (n =3D=3D -1 ) {
+On Thu, Oct 03, 2024 at 11:27:53PM +0200, Rasmus Villemoes wrote:
 
-Lets add RETRY_BOOTCMD or something instead, I feel like there's some
-locked-down systems that rely on this behavior.
+> Modifying a generic header like watchdog.h, removing not directly used
+> #includes, can apparently break the build of m68k, because the
+> asm/ptrace.h header relies on whoever includes it to already have
+> included something that defines the type ulong.
+>=20
+> Make the asm/ptrace.h header self-contained by including the proper
+> header.
+>=20
+> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---Q3/qoJeGw+cBXVJh
+--TLNuCOavVDwpHasO
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcAInAACgkQFHw5/5Y0
-tyxVbwv+NYFmxnKLvR9pxM/t5k+JwVp9hVVImo5O9uI78W5Owmh68nOOX1SWPRJH
-L4RAMTYD6iHsePzmfosNBD3wkl9Si9E+DIEzFOa1veS41EBPIbEmp8EPvjI9RsMn
-gw5YzzG+YBhzDKsjSSvJgjya4fSOEL13dWH7Q0gWFkpsdTWBRkweh8+oNsq5tXnp
-MsrlQY3Iy9+cgu0LKYW8es8GsLJEhDOr6BbhRqRybj0moQlh+xEEcUUl/J8hb8IE
-5bS/fMwYLur5UawNh2tJpq2Y698GPrZjA5VlUWvZqhMWPCtn1HsdAMUBVCFh3C91
-TjciLuQVwlD2S95kuZgPGuwry4Rzx7Tud5wKVFfbtaZXFAcV18d8Eru9Ks8HDVL2
-+BGOnWU1UrPrAyMw6Rh0uLCf9FHm8NgQw1i5cqr23PYAuJbJLLB9C/RhgeKeT7UL
-9/4lpg8gn5csaBlO4CA7B/lxArjfnu5b/Ti3Dt05qWnfTHXBfiRegDo1XgBwKsW4
-a+u5OquD
-=auj2
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcAIoEACgkQFHw5/5Y0
+tyx7BQwAiQ+LVV9K/IiTRsHswHGQkwRvHxxa/cmOa6TUAKoJv2FOFfqVZbS6IZt5
+fLLQRcC8GQgcK7WzanKg5q32PJavGEgmnd5J/eEmCpXk7I8q/dm+VI2WmQI9XTm5
+QhIc9lyWnvXI6/0aohlFv8Fa9kYFNAzWt5AgE949y29ziqDkcY6jw/dZa+D6UIAV
+YmL2IFSN5sEkIi2qEFOandG3rgMl8ZoREaQ5qzVCkDyPZ+yrZ1ahPXbKi4e4PclU
+rGHVDmdLRoi5RsMLEE0tEyjeOVhkuxW1HJIkxZmG4gZ+h0rFt8bCiuEXf3bIlyKm
+ykVjNBog3jQUi0+iauTkHDrqW84j6JU/yex1NVVF6/wWFWVr/kFvoLyMrZJ3n8Gy
+GfSQyAt9tuA+r1kOduUlYiMIMdoCbzSkr4vDM4jMOTdVydRwCFa/6yfTlYUYyNxC
+I0eRWS/sai03uO1MHHfts197aLobJGsVtjzQYczJfM3gkpfT+iw7rJhxSwxGe4PP
+74wmTeGy
+=ckRs
 -----END PGP SIGNATURE-----
 
---Q3/qoJeGw+cBXVJh--
+--TLNuCOavVDwpHasO--
