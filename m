@@ -4,102 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89767CFA745
-	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 05:02:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF216CFA749
+	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 05:06:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C839C890AD;
-	Fri,  4 Oct 2024 06:57:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3AEA189009;
+	Fri,  4 Oct 2024 07:06:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YfuBA6oD";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D71288D7F; Fri,  4 Oct 2024 00:06:18 +0200 (CEST)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1728018385;
+	bh=2dB9GfzL6dm6eGUibDPMQ8z154PyijUqU8ufdA/7/i0=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=wAZgcF5aAcfRER/YjxriI9oTTKaFVNvQJ91cizoAiV3+tu9tZYJ9qH3DPjfCwYKXB
+	 dDivE/OryasHglKcOWF1XDqBFw1hDu+kAJ78U+n/PhfsM/UqPg2xd+Go65mrpcVjja
+	 xUabHJgFkBcgTjCz4cyJMxlRQBGtTrVv1PVD3MtEkEeHE2bxVMqVTJSJlp85lnG6iW
+	 4j1pc4DHIihHjJ9jPMrBfCyDSStr+QK1qgqDyrMsVCHxbY4YtTdUu3BolNLyc4iHA/
+	 aXWDb9A1GoT1HvqZzmFmMMRt0dgUhqEwHIwxFs/otR638oe6HBwykChJSXkc1gAteH
+	 WTgaPbXxpGbtg==
+Received: from [192.168.1.107] (82-131-157-225.pool.digikabel.hu
+ [82.131.157.225])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6DEFB88D94
- for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 00:06:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6cb399056b4so11302616d6.0
- for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 15:06:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1727993175; x=1728597975; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=NNNpZDhxGI6dxoYja7UkxJFzNuRudv341H/vEtfWniU=;
- b=YfuBA6oDccJGSJavI/VFoknMDIO+LycORI1W8ks3w1JpJ+vEtc4N6FoP/xFcRRw0lL
- TgO7m18mIl3iH5CQWRV9OHyjvNoMzgaPeBRykI6dSr28lleNPBevZuxIMd0eZYlJlSoe
- B5JT6PBi6QSLyZCaaasOY16fgWR2FH1rRp5hure0Uml+Fq/pSQcvf7/4m3kdzF0KeWpq
- tbSLEVsp92l4Ys+CYhvecNvz0nIx/SvgTfLBFZUCYCWTFqnr3+GHRybNKolsM4TRF4uK
- KwWNI3L/McXJ0ILtYxICm3CHJIiGqdG8bmd6uFqGbXOgIF0MlK3ELDkrOsBx9lG4szog
- cTFw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727993175; x=1728597975;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=NNNpZDhxGI6dxoYja7UkxJFzNuRudv341H/vEtfWniU=;
- b=Gx0LbEtDStRHoM4F3W8XBQtaHzAzrtmuKK2gug6Bdmp2AD66/Hdp06HgHVJGWHI2PZ
- 35qnoYoNO5eoph0NUS21Mgae0gq5+uVd5nMejt5NAQEUSMYzLrSdlcIuqQsvw9B2Af1w
- gI8knIWI8xaOlMSW5vY5AYLMeiZXmn/wHNgnpzEaHCRoS/Nql+FUDmTLTIRvOaeJzF1H
- o7mTo7P94xB0jIfR1tM/W8Botg+d7T/D4hL6o1a2H9Q+gf4wkogt1q19OPTvHBlPZ522
- qpCG9P9zkVu5J4y7pllct4boyo2zOK94MbGmIcHYHO/VOp28aYLI0diA5W7GhoVxHQ4M
- bBBA==
-X-Gm-Message-State: AOJu0YxAbogoA+fZ0B2ncrOawXYvD5eXd/WRcz1+Xod3aMayr+Gkn7m2
- 3AXegRzEqpGeMIQ4ld0H+wA9McJCWjihNfrxIyrrViYzuWzqYI3g4Y3ffnN0CJZqB3wDex7HnML
- +
-X-Google-Smtp-Source: AGHT+IGGzMSqpj987GOKDYGILzhRlGO2O2MeZNYVKopKQ3250xs0/QUT9a5eTPus6TdMZ7txxQMbIw==
-X-Received: by 2002:a05:6214:588a:b0:6cb:5aa6:97a with SMTP id
- 6a1803df08f44-6cb9a30ce97mr11829056d6.24.1727993175135; 
- Thu, 03 Oct 2024 15:06:15 -0700 (PDT)
-Received: from ubuntu.localdomain
- (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-45d92ddf5c4sm9001541cf.18.2024.10.03.15.06.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Oct 2024 15:06:14 -0700 (PDT)
-From: Raymond Mao <raymond.mao@linaro.org>
-To: u-boot@lists.denx.de
-Cc: manish.pandey2@arm.com, Raymond Mao <raymond.mao@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
- Mario Six <mario.six@gdsys.cc>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Michal Simek <michal.simek@amd.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Sumit Garg <sumit.garg@linaro.org>, Sean Anderson <seanga2@gmail.com>,
- Andrew Davis <afd@ti.com>, Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Alexander Gendin <agendin@matrox.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Jonathan Humphreys <j-humphreys@ti.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>, Marek Vasut <marex@denx.de>,
- Linus Walleij <linus.walleij@linaro.org>,
- Kongyang Liu <seashell11234455@gmail.com>,
- Greg Malysa <greg.malysa@timesys.com>, Jonas Karlman <jonas@kwiboo.se>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Anand Moon <linux.amoon@gmail.com>
-Subject: [PATCH v8 27/27] configs: enable MbedTLS as default setting
-Date: Thu,  3 Oct 2024 14:50:40 -0700
-Message-Id: <20241003215112.3103601-28-raymond.mao@linaro.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20241003215112.3103601-1-raymond.mao@linaro.org>
-References: <20241003215112.3103601-1-raymond.mao@linaro.org>
+ (No client certificate requested) (Authenticated sender: hs@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 603BC88AE8;
+ Fri,  4 Oct 2024 07:06:23 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1728018384;
+ bh=2dB9GfzL6dm6eGUibDPMQ8z154PyijUqU8ufdA/7/i0=;
+ h=Date:Subject:To:Cc:References:From:Reply-To:In-Reply-To:From;
+ b=X1PZpO64eBevdGVNe2GHIEDl3eOxYp/9a4Juhooo2sUI95pmXi3uXyoo6yEo7C+YQ
+ u6RiCU1ovQCGf8O47B9uiS92FSHAIp8h8Ncvp8F6rG8joBwvdDwUQMY/OL1RCB/tSw
+ zlu1ddNnsJJHMLVwJrcL5Vf+ucfJTOj9P4u5pSv5N4w6qFzm3L908oUNEYhfZhIeT+
+ dTIqkKD+Ub0ZWBP8IaKKNGMyNFoJvXALFQWGNk/HOMP4CE5zrZQJUdJ/CDmb945pf9
+ 3V+Ic1zsOSgIhgZ7THHMvXdXzXdsH2p05BCC7JcBkRJA1OVtuxPhwb+aAA6zq4gJoP
+ Lnz/+Lc/Cty4Q==
+Message-ID: <ac403d08-cacc-9074-f3aa-df2e87a2d32a@denx.de>
+Date: Fri, 4 Oct 2024 07:04:19 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH] sandbox: i2c: Make sure phandle dependency is probed
+Content-Language: en-US
+To: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+References: <20241003203736.298649-1-marex@denx.de>
+ <80e7d47f-335d-4c81-ac7c-3af531474e50@denx.de>
+From: Heiko Schocher <hs@denx.de>
+In-Reply-To: <80e7d47f-335d-4c81-ac7c-3af531474e50@denx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 04 Oct 2024 06:57:18 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,59 +65,79 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable MbedTLS as default setting for qemu arm64 and sandbox.
+Hi Marek!
 
-Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
-Changes in v2
-- None.
-Changes in v3
-- None.
-Changes in v4
-- None.
-Changes in v5
-- Remove unused config MBEDTLS_LIB_TLS.
-- Remove EFI_SECURE_BOOT from the default config.
-Changes in v6
-- Remove MBEDTLS_LIB_CRYPTO and MBEDTLS_LIB_X509.
-Changes in v7
-- None.
-Changes in v8
-- None
+On 03.10.24 22:47, Marek Vasut wrote:
+> On 10/3/24 10:37 PM, Marek Vasut wrote:
+>> This driver depends on i2c emulator via DT phandle. Make sure the
+>> dependency is probed before this driver is probed, not when it is
+>> first used during transfer. This fixes the following i2c_emul_find()
+>> error:
+>>
+>> "
+>> $ ./u-boot -Dc ""
+>> ...
+>>         i2c_emul_find() No emulators for device 'sandbox_pmic'
+>>    sandbox_pmic_write() write error to device: 0000000018c568d0 register: 0x0!
+>>         out_set_value() PMIC write failed: -5
+>>         i2c_emul_find() No emulators for device 'sandbox_pmic'
+>>    sandbox_pmic_write() write error to device: 0000000018c568d0 register: 0x0!
+>>         out_set_value() PMIC write failed: -5
+>> ...
+>> "
+>>
+>> Signed-off-by: Marek Vasut <marex@denx.de>
+>> ---
+>> Cc: Heiko Schocher <hs@denx.de>
+>> Cc: Simon Glass <sjg@chromium.org>
+>> Cc: Tom Rini <trini@konsulko.com>
+>> Cc: u-boot@lists.denx.de
+>> ---
+>>   drivers/i2c/sandbox_i2c.c | 9 +++++++++
+>>   1 file changed, 9 insertions(+)
+>>
+>> diff --git a/drivers/i2c/sandbox_i2c.c b/drivers/i2c/sandbox_i2c.c
+>> index 74bb5e93397..9a39ac14fb4 100644
+>> --- a/drivers/i2c/sandbox_i2c.c
+>> +++ b/drivers/i2c/sandbox_i2c.c
+>> @@ -80,6 +80,14 @@ static int sandbox_i2c_xfer(struct udevice *bus, struct i2c_msg *msg,
+>>       return ops->xfer(emul, msg, nmsgs);
+>>   }
+>> +static int sandbox_i2c_probe(struct udevice *dev)
+>> +{
+>> +    struct udevice *emul;
+>> +
+>> +    return uclass_get_device_by_phandle(UCLASS_I2C_EMUL, dev,
+>> +                        "sandbox,emul", &emul);
+>> +}
+> Hmmm, no, this does not do it, but it does show what the issue is -- sandbox_i2c_xfer is misused to 
+> defer access to this emulator until the first I2C transfer, so the emulator can hopefully probe in 
+> the meantime. This is fragile and now it broke. What I am not quite sure about is why this 
+> uclass_get_device_by_phandle() returns -2 here instead of probing the emulator ?
 
- configs/qemu_arm64_defconfig | 1 +
- configs/sandbox_defconfig    | 1 +
- 2 files changed, 2 insertions(+)
+Hmm... -2 means it does not find such a device ... why, I don;t know ...
+do you have a chance to debug?
 
-diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
-index 088ba39f18e..6d18a8571ca 100644
---- a/configs/qemu_arm64_defconfig
-+++ b/configs/qemu_arm64_defconfig
-@@ -68,5 +68,6 @@ CONFIG_TPM2_MMIO=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_PCI=y
- CONFIG_SEMIHOSTING=y
-+CONFIG_MBEDTLS_LIB=y
- CONFIG_TPM=y
- CONFIG_EFI_HTTP_BOOT=y
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index a50fbce8d06..0ecdeebb45f 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -345,6 +345,7 @@ CONFIG_FS_CBFS=y
- CONFIG_FS_CRAMFS=y
- CONFIG_ADDR_MAP=y
- CONFIG_CMD_DHRYSTONE=y
-+CONFIG_MBEDTLS_LIB=y
- CONFIG_ECDSA=y
- CONFIG_ECDSA_VERIFY=y
- CONFIG_TPM=y
+Just a fast grep (I must admit, never looked into this parts...))
+may it helps if you use
+
+int i2c_emul_find(struct udevice *dev, struct udevice **emulp)
+
+found in file:
+
+./drivers/i2c/i2c-emul-uclass.c
+
+instead?
+
+bye,
+Heiko
 -- 
-2.25.1
-
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
