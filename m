@@ -4,54 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7954ACFA74B
-	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 06:22:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 010FFCFA749
+	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 06:24:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED18A88CEB;
-	Fri,  4 Oct 2024 08:22:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 904DD88DB2;
+	Fri,  4 Oct 2024 08:24:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="J9UHumur";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qZ8eO25Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 282C788F55; Fri,  4 Oct 2024 08:22:05 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 065F688CE5; Fri,  4 Oct 2024 08:24:41 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5193888CE5
- for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 08:22:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 442A8882B7
+ for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 08:24:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=a5dc=RA=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1728022916;
- bh=QcBP3KxPJB6guzRVkHYDgcYBMPdpo9zsXnWjk2WyRlM=;
- b=J9UHumurBs4jieTdf2aMJuk4GQLpEqXUWeADDQFRDmo/BwAg051UEldoRHUGVMVwl8lVQOPet
- +PVONbJ7QCNqAOXV3YiUNVgqqVgXvZkykvQOH/57OxIR4b4EHDaLY40UrnB28smIAN0SdUKWzxH
- 7Wni56oKwv6IIPeGZVpeBMMSWGP2howE32fAc2rEcWp2DqBf7ejXfTV6if7tvEBNIRG4nwXfBMg
- QSDMb2LJq0ispZ+co56KkD23VYnpeyC/43UoYzVAM/T3nU15BtwLo1wl8P4VuTJFtuQzOZh11AW
- R/HdjE61kAf6VDKes6On53oudbodXEdROv7uAjjnN52A==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Kever Yang <kever.yang@rock-chips.com>
-Cc: u-boot@lists.denx.de,
-	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH] rockchip: Provid SPL control over otp presence
-Date: Fri,  4 Oct 2024 06:21:34 +0000
-Message-ID: <20241004062136.491995-1-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.46.2
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4946OZGw010045;
+ Fri, 4 Oct 2024 01:24:35 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1728023075;
+ bh=9J49XhVvpSqwcJ5B9FZmGzMYXn42PQ7QKeuR03ZHjws=;
+ h=From:Subject:Date:To:CC;
+ b=qZ8eO25YkYfcaah6rBF2hGSe/QbwqBBXoWsqaiLTyKYC1hL5cmrl9GnPBT0HLZqpT
+ E6794+PgOwjhrN5hp7VO0kdPXR7oxhnoxBxQwKwxYvuNgxRxTr480rCfzBTsiRYh4Y
+ 44tT+HSlvjh//uCXzG1CvI0CcDt0ozOr4StFYH3g=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4946OZrU116761
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 4 Oct 2024 01:24:35 -0500
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 4
+ Oct 2024 01:24:35 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 4 Oct 2024 01:24:35 -0500
+Received: from [127.0.1.1] (uda0497581.dhcp.ti.com [10.24.68.185])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4946OVYv100112;
+ Fri, 4 Oct 2024 01:24:32 -0500
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+Subject: [PATCH v4 0/7] Add AVS support for J721S2
+Date: Fri, 4 Oct 2024 11:54:28 +0530
+Message-ID: <20241004-b4-upstream-j721s2-avs-v4-0-6d71c6bab9f4@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 66ff898304584f0e26fead7a
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAByK/2YC/3XNSw7CIBSF4a0YxmLgAm1x5D6MA8rDYtJHoBJN0
+ 71La2LjoMP/Jvc7E4o2eBvR+TChYJOPvu9y8OMB6UZ1d4u9yY2AACeUEVxz/BziGKxq8aMEGgG
+ rFHGlaVUa5iwUCuXnIVjnXyt8veVufBz78F53El2uXxJIsUcmivNcKQhnWkhZyMvoT7pv0eIl2
+ AwB1a4B2TBOcuKAEWnIn8E2o6Js12DZEJQKI5k2toafMc/zByYMkahBAQAA
+To: Jaehoon Chung <jh80.chung@samsung.com>
+CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Keerthy J
+ <j-keerthy@ti.com>, Udit Kumar <u-kumar1@ti.com>, Aniket Limaye
+ <a-limaye@ti.com>, Tom Rini <trini@konsulko.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Andrew Davis <afd@ti.com>,
+ Nishanth Menon <nm@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>
+X-Mailer: b4 0.15-dev
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1728023071; l=1871;
+ i=m-chawdhry@ti.com; s=20231127; h=from:subject:message-id;
+ bh=v3uIVB+0BvRBm7nyObW5u1WIBXfbQavLHAKJlCD2ii0=;
+ b=2hS3BD8xWKJjFt/80GWKcWj1EJeucy1fxh8Wwf96G52xlCT5kUJXy7rWxbJqXQRQcgW378jNY
+ txBMUzq7TeDCAJbZmLAuDBNFg6Yyk815Kn7oYrtLvI6ZFOF22tpBCID
+X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
+ pk=fsr6Tm39TvsTgfyfFQLk+nnqIz2sBA1PthfqqfiiYSs=
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,42 +92,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The series "rockchip: Add efuse and otp support to more SoCs" [1],
-merged in v2023.04, refactored and extended the Rockchip efuse and otp
-driver to support reading eFUSE/OTP for all supported Rockchip SoCs.
+This series adds support for AVS on J721S2.
 
-Due to use of different licenses the drivers were never combined into a
-single driver, however anything non SoC specific should be applied to
-both drivers.
+AVS Test for J721S2: https://gist.github.com/manorit2001/b2fd9f6764a863294d4aa0755c83c84f
+Boot Test results: https://gist.github.com/manorit2001/15e45f6c421aeeb93effde023a537762
 
-The commit fe38b88453d2 ("rockchip: Provided SPL control over efuse
-presence") changed Makefile options for only one of the two drivers,
-apply same change to keep these two drivers in sync.
-
-[1] https://lore.kernel.org/r/20230222224436.1570224-1-jonas@kwiboo.se/
-
-Fixes: fe38b88453d2 ("rockchip: Provided SPL control over efuse presence")
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
 ---
-The request to correct this in the original patch was ignored, so here
-is a fix to keep both drivers in sync.
----
- drivers/misc/Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Changes in v4:
 
-diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
-index ff984d7b191e..f7fd1d5caeea 100644
---- a/drivers/misc/Makefile
-+++ b/drivers/misc/Makefile
-@@ -69,7 +69,7 @@ obj-$(CONFIG_QFW_SMBIOS) += qfw_smbios.o
- obj-$(CONFIG_SANDBOX) += qfw_sandbox.o
- endif
- obj-$(CONFIG_$(SPL_TPL_)ROCKCHIP_EFUSE) += rockchip-efuse.o
--obj-$(CONFIG_ROCKCHIP_OTP) += rockchip-otp.o
-+obj-$(CONFIG_$(SPL_TPL_)ROCKCHIP_OTP) += rockchip-otp.o
- obj-$(CONFIG_$(SPL_TPL_)ROCKCHIP_IODOMAIN) += rockchip-io-domain.o
- obj-$(CONFIG_SANDBOX) += syscon_sandbox.o misc_sandbox.o
- obj-$(CONFIG_SIFIVE_OTP) += sifive-otp.o
+* Udit
+- Use the compatible for finding the node rather than alias.
+- Remove debug print
+- Add ret value in error prints
+
+- Link to v3: https://lore.kernel.org/r/20240813-b4-upstream-j721s2-avs-v3-0-5115d93cdeb2@ti.com
+
+---
+Manorit Chawdhry (7):
+      power: pmic: tps65941: Add DM_PMIC dependency
+      drivers: misc: k3_avs: Check return code while programming AVS
+      arm: dts: k3-j7*-r5: Add MPU clock in clocks property
+      drivers: misc: k3_avs: Extract MPU clk and dev ID from DT
+      arm: mach-k3: j721s2_init: Initialize AVS Class 0
+      arm: dts: j721s2: Add VTM node in R5
+      configs: j721s2_evm_r5_defconfig: Add AVS Configs
+
+ arch/arm/dts/k3-am69-r5-sk.dts                  |  3 +-
+ arch/arm/dts/k3-j7200-r5-common-proc-board.dts  |  3 +-
+ arch/arm/dts/k3-j721e-r5.dtsi                   |  3 +-
+ arch/arm/dts/k3-j721s2-r5-common-proc-board.dts |  9 ++++++
+ arch/arm/dts/k3-j721s2-r5.dtsi                  |  3 +-
+ arch/arm/dts/k3-j784s4-r5-evm.dts               |  3 +-
+ arch/arm/mach-k3/j721s2/j721s2_init.c           | 10 +++++++
+ configs/am68_sk_r5_defconfig                    |  4 +++
+ configs/j721s2_evm_r5_defconfig                 |  6 ++++
+ drivers/misc/k3_avs.c                           | 40 ++++++++++++++++++++++++-
+ drivers/power/pmic/Kconfig                      |  1 +
+ 11 files changed, 79 insertions(+), 6 deletions(-)
+---
+base-commit: 3a0b829efc35227b1079a444f00e0729502197ad
+change-id: 20240130-b4-upstream-j721s2-avs-8c187d3fe26a
+
+Best regards,
 -- 
-2.46.2
+Manorit Chawdhry <m-chawdhry@ti.com>
 
