@@ -4,76 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61453CFA749
-	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 06:12:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7954ACFA74B
+	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 06:22:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DBC3688A0E;
-	Fri,  4 Oct 2024 08:12:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id ED18A88CEB;
+	Fri,  4 Oct 2024 08:22:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UvCgS90S";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="J9UHumur";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3DFEC88FE3; Fri,  4 Oct 2024 08:12:07 +0200 (CEST)
-Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
- [IPv6:2607:f8b0:4864:20::1029])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 282C788F55; Fri,  4 Oct 2024 08:22:05 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3B9C88FAF
- for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 08:12:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5193888CE5
+ for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 08:22:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-2e09fe0a878so1307804a91.1
- for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 23:12:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728022323; x=1728627123; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vuGMIgMa0HjIW6TI0gkGBb9CFzueAG68RbqfwgXk9GU=;
- b=UvCgS90SZMrzby1NYJESBGhWxMXp6aZXcz5i+HTe3BM9IGsjhNOGQCFMSySrL3L4os
- OQ9Je57AxHrKs+RYNxvAsGhAiv+L+KlKz6nbUnd/Kurj/qclZEXCUW4EK0c51bef/ylz
- ueSc/py6qW14d/K5v8Gamplyv8SSTMWWZziZyLziSZOiXJTxMV18tvif9FeK3hkKu/sm
- pfR3TveYAF0Gjak48Zy4CpyYL77+ZkoD0jZVHBPSU3liu4XpR/OBSAw2wV5ZYn9kDRS7
- wfVw8vHL6X4ir35zqK8NG6zDa1CMe0sucglm+VFTgCG1JY5XMNSXc+uVMRcCXTbYQMLA
- rqMg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728022323; x=1728627123;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=vuGMIgMa0HjIW6TI0gkGBb9CFzueAG68RbqfwgXk9GU=;
- b=qcWp/NRbhWiMwHQyQhwTYcQqp1W9YhblmUh/aoOF/Hvfq4qvLieOfUvIDGGfzZq61g
- rwRn7a++C7hkIyAhRQLg/5g2xw6gQ2H0JXkW5eKcMLGkSIe8AeIIXkb1KgNQFPHb7i23
- aPCu+HDx96MLO7jJOYLq3YSm4hl/HG4xvWqY5U5WSlmoc+sU9SyHQN5B00fP9VUTWH6n
- U0okSenjplKNOIjU/WVAF2oEgCtPfyM01rW7a9aUEXmNffAN5p0upIKB6fBJfn+PBl6l
- VrpnutkP2Y+dARb8xH6UippxKxygRL3FWxWApDvj/JRhf6dYPz9erapNCayPkXP3ozkX
- VNYQ==
-X-Gm-Message-State: AOJu0YzZAjhM465iBDvEdg0xvWq0uDVsuTyAWaPvig/hIr57recktbgJ
- PX10dEE70F5OsiVlq5Ng62pLZyNxA+nQ/kssYVVh0QC+c1oQH6Tlgp8CahPgJTM5VGI+OYx12VC
- gcZrQebCauknBLZmPk1Q1HgXLZvTwiHNfQf3Qbb7YDda6cvaoKss=
-X-Google-Smtp-Source: AGHT+IFIXDaEyHnMzhwfLU+Jgs9zqJYEgB7wUppqORaYkhpgcig+JhZZfhxyOBJ2OOgTCdbWgH59zcBK8xjovcdcjDM=
-X-Received: by 2002:a17:90a:458b:b0:2d3:d09a:630e with SMTP id
- 98e67ed59e1d1-2e1e6212e23mr2176065a91.1.1728022323273; Thu, 03 Oct 2024
- 23:12:03 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=a5dc=RA=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1728022916;
+ bh=QcBP3KxPJB6guzRVkHYDgcYBMPdpo9zsXnWjk2WyRlM=;
+ b=J9UHumurBs4jieTdf2aMJuk4GQLpEqXUWeADDQFRDmo/BwAg051UEldoRHUGVMVwl8lVQOPet
+ +PVONbJ7QCNqAOXV3YiUNVgqqVgXvZkykvQOH/57OxIR4b4EHDaLY40UrnB28smIAN0SdUKWzxH
+ 7Wni56oKwv6IIPeGZVpeBMMSWGP2howE32fAc2rEcWp2DqBf7ejXfTV6if7tvEBNIRG4nwXfBMg
+ QSDMb2LJq0ispZ+co56KkD23VYnpeyC/43UoYzVAM/T3nU15BtwLo1wl8P4VuTJFtuQzOZh11AW
+ R/HdjE61kAf6VDKes6On53oudbodXEdROv7uAjjnN52A==
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Kever Yang <kever.yang@rock-chips.com>
+Cc: u-boot@lists.denx.de,
+	Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH] rockchip: Provid SPL control over otp presence
+Date: Fri,  4 Oct 2024 06:21:34 +0000
+Message-ID: <20241004062136.491995-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.46.2
 MIME-Version: 1.0
-References: <cover.1727968902.git.jerome.forissier@linaro.org>
- <c29c2aa6fc0f1a97afff121e2f42abcac5b671f2.1727968902.git.jerome.forissier@linaro.org>
-In-Reply-To: <c29c2aa6fc0f1a97afff121e2f42abcac5b671f2.1727968902.git.jerome.forissier@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 4 Oct 2024 09:11:27 +0300
-Message-ID: <CAC_iWj+Q9VSVPqGBveYm5+PYQXm0CKRg5==z=VJPd0G4-7U0ug@mail.gmail.com>
-Subject: Re: [PATCH v11 14/29] lwip: tftp: bind to TFTP port only when in
- server mode
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Javier Tia <javier.tia@linaro.org>, 
- Raymond Mao <raymond.mao@linaro.org>, Maxim Uvarov <muvarov@gmail.com>, 
- Tim Harvey <tharvey@gateworks.com>, Anton Antonov <Anton.Antonov@arm.com>, 
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 66ff898304584f0e26fead7a
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,49 +68,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jerome,
+The series "rockchip: Add efuse and otp support to more SoCs" [1],
+merged in v2023.04, refactored and extended the Rockchip efuse and otp
+driver to support reading eFUSE/OTP for all supported Rockchip SoCs.
 
-On Thu, 3 Oct 2024 at 18:47, Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
->
-> The TFTP app should not bind to the TFTP server port when configured as
-> a client. Instead, the local port should be chosen from the dynamic
-> range (49152 ~ 65535) so that if the application is stopped and started
-> again, the remote server will not consider the new packets as part of
-> the same context (which would cause an error since a new RRQ would be
-> unexpected).
->
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> ---
->  lib/lwip/lwip/src/apps/tftp/tftp.c | 10 ++++++----
->  1 file changed, 6 insertions(+), 4 deletions(-)
->
-> diff --git a/lib/lwip/lwip/src/apps/tftp/tftp.c b/lib/lwip/lwip/src/apps/tftp/tftp.c
-> index ddfdbfc0c1b..74fc1fbe586 100644
-> --- a/lib/lwip/lwip/src/apps/tftp/tftp.c
-> +++ b/lib/lwip/lwip/src/apps/tftp/tftp.c
-> @@ -454,10 +454,12 @@ tftp_init_common(u8_t mode, const struct tftp_context *ctx)
->      return ERR_MEM;
->    }
->
-> -  ret = udp_bind(pcb, IP_ANY_TYPE, TFTP_PORT);
-> -  if (ret != ERR_OK) {
-> -    udp_remove(pcb);
-> -    return ret;
-> +  if (mode == LWIP_TFTP_MODE_SERVER) {
-> +    ret = udp_bind(pcb, IP_ANY_TYPE, TFTP_PORT);
-> +    if (ret != ERR_OK) {
-> +      udp_remove(pcb);
-> +      return ret;
-> +    }
+Due to use of different licenses the drivers were never combined into a
+single driver, however anything non SoC specific should be applied to
+both drivers.
 
-This should be sent to lwip as well right?
+The commit fe38b88453d2 ("rockchip: Provided SPL control over efuse
+presence") changed Makefile options for only one of the two drivers,
+apply same change to keep these two drivers in sync.
 
->    }
->
->    tftp_state.handle    = NULL;
-> --
-> 2.40.1
->
+[1] https://lore.kernel.org/r/20230222224436.1570224-1-jonas@kwiboo.se/
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Fixes: fe38b88453d2 ("rockchip: Provided SPL control over efuse presence")
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+The request to correct this in the original patch was ignored, so here
+is a fix to keep both drivers in sync.
+---
+ drivers/misc/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
+index ff984d7b191e..f7fd1d5caeea 100644
+--- a/drivers/misc/Makefile
++++ b/drivers/misc/Makefile
+@@ -69,7 +69,7 @@ obj-$(CONFIG_QFW_SMBIOS) += qfw_smbios.o
+ obj-$(CONFIG_SANDBOX) += qfw_sandbox.o
+ endif
+ obj-$(CONFIG_$(SPL_TPL_)ROCKCHIP_EFUSE) += rockchip-efuse.o
+-obj-$(CONFIG_ROCKCHIP_OTP) += rockchip-otp.o
++obj-$(CONFIG_$(SPL_TPL_)ROCKCHIP_OTP) += rockchip-otp.o
+ obj-$(CONFIG_$(SPL_TPL_)ROCKCHIP_IODOMAIN) += rockchip-io-domain.o
+ obj-$(CONFIG_SANDBOX) += syscon_sandbox.o misc_sandbox.o
+ obj-$(CONFIG_SIFIVE_OTP) += sifive-otp.o
+-- 
+2.46.2
+
