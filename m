@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2F76CFA749
-	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 06:25:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20963CFA749
+	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 06:25:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04C6B89095;
-	Fri,  4 Oct 2024 08:25:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 692B688CE5;
+	Fri,  4 Oct 2024 08:25:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="eLiy32Xc";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="kWoa09Wz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 484578907B; Fri,  4 Oct 2024 08:24:59 +0200 (CEST)
+ id 1CA04882B7; Fri,  4 Oct 2024 08:25:02 +0200 (CEST)
 Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8ABD4882B7
- for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 08:24:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BE9E58907B
+ for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 08:24:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=m-chawdhry@ti.com
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4946Otbf112792;
- Fri, 4 Oct 2024 01:24:55 -0500
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4946OwuV112809;
+ Fri, 4 Oct 2024 01:24:58 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1728023095;
- bh=N9P2VcGy9UIv8XgwOMRmhP8S/jSDbzYM/jSjFt29F5M=;
+ s=ti-com-17Q1; t=1728023098;
+ bh=h8qu5qsiaPxZrcxMBdzzgAP414UVWrBw5rMXYAcwWDE=;
  h=From:Date:Subject:References:In-Reply-To:To:CC;
- b=eLiy32XcmBK9K6mD9XW+/nH2UlFNkm9MtGJMB9mJn3SZ0II6eY348xQ2Q/RxnjSLV
- t/ZAG7ZosiTC0ZanazQflQvEUHxjP+p2uOWxb9BfDbJzPDDzQj2T3HJ3wdZb2FablL
- WLp3Jb0+9W+c6Y27ihNNgY2uAiOIDS3sXdX/hsrA=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4946Ot1q020436
+ b=kWoa09WzYmbgRLAVcxVE6q/KTSWm1K9QHxq6ARfkv171rrVyIlHOsKdlwQJY+FhXD
+ VQ8ekM4IS5bvfO8QUD6TYuMDJdsS7FqfO8vj63Glhgk9a9sZyEJSLwkK20LbpY7cf4
+ sIWR5ONGAX5lwG7+8APt/inLtwYB6ebCz6FW99A8=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4946OwgQ020512
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 4 Oct 2024 01:24:55 -0500
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 4 Oct 2024 01:24:58 -0500
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 4
- Oct 2024 01:24:55 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2024 01:24:58 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 4 Oct 2024 01:24:54 -0500
+ Frontend Transport; Fri, 4 Oct 2024 01:24:57 -0500
 Received: from [127.0.1.1] (uda0497581.dhcp.ti.com [10.24.68.185])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4946OVZ3100112;
- Fri, 4 Oct 2024 01:24:51 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4946OVZ4100112;
+ Fri, 4 Oct 2024 01:24:55 -0500
 From: Manorit Chawdhry <m-chawdhry@ti.com>
-Date: Fri, 4 Oct 2024 11:54:34 +0530
-Subject: [PATCH v4 6/7] arm: dts: j721s2: Add VTM node in R5
+Date: Fri, 4 Oct 2024 11:54:35 +0530
+Subject: [PATCH v4 7/7] configs: j721s2_evm_r5_defconfig: Add AVS Configs
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20241004-b4-upstream-j721s2-avs-v4-6-6d71c6bab9f4@ti.com>
+Message-ID: <20241004-b4-upstream-j721s2-avs-v4-7-6d71c6bab9f4@ti.com>
 References: <20241004-b4-upstream-j721s2-avs-v4-0-6d71c6bab9f4@ti.com>
 In-Reply-To: <20241004-b4-upstream-j721s2-avs-v4-0-6d71c6bab9f4@ti.com>
 To: Jaehoon Chung <jh80.chung@samsung.com>
@@ -66,11 +66,11 @@ CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Keerthy J
  <vigneshr@ti.com>, Andrew Davis <afd@ti.com>,
  Nishanth Menon <nm@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>
 X-Mailer: b4 0.15-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1728023071; l=958;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1728023071; l=1498;
  i=m-chawdhry@ti.com; s=20231127; h=from:subject:message-id;
- bh=EHVNMl7+9MDr8tYB8Y4dhFCr1HundAvvwBqWvviHn7w=;
- b=nTKeywu0bMtnYIy88BskbIDAX++WHbgDBf8tHiJu30tKvhhvwGNdGsS1bfPbd2748SA7EUiBZ
- y9vrfkO8uhzAwMfE1RytX8gronYnjBRr53shbLTlr0bGVOpoFt3JDXE
+ bh=4UL6EopTHFAzctIUaApMv+bWJ0+CIrAZEA+8WyBLiMQ=;
+ b=KZfne6aTw3P3baoE3eicFZ2CLuFe2TwoeHoIJxOX+R3bBcxzwZ1G4vLcZASGbkPbCNLrY8TnL
+ adoY70hxJD4CimIfFjNgPI13sKacJmdp75sVRmEdRZYvgijh3/Ux1/E
 X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
  pk=fsr6Tm39TvsTgfyfFQLk+nnqIz2sBA1PthfqqfiiYSs=
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
@@ -90,37 +90,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add bootph-pre-ram property to VTM node and the pmic node.
+Add AVS and PMIC regulator configs
 
-Reviewed-by: Udit Kumar <u-kumar1@ti.com>
 Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
 ---
+ configs/am68_sk_r5_defconfig    | 4 ++++
+ configs/j721s2_evm_r5_defconfig | 6 ++++++
+ 2 files changed, 10 insertions(+)
 
-Notes:
-    Patches are posted to Linux [0]
-    
-    [0]: https://lore.kernel.org/linux-arm-kernel/20240814-b4-upstream-bootph-all-v4-0-f2b462000f25@ti.com/#
-
- arch/arm/dts/k3-j721s2-r5-common-proc-board.dts | 9 +++++++++
- 1 file changed, 9 insertions(+)
-
-diff --git a/arch/arm/dts/k3-j721s2-r5-common-proc-board.dts b/arch/arm/dts/k3-j721s2-r5-common-proc-board.dts
-index e92b1917df4e..506ad9b7910d 100644
---- a/arch/arm/dts/k3-j721s2-r5-common-proc-board.dts
-+++ b/arch/arm/dts/k3-j721s2-r5-common-proc-board.dts
-@@ -10,3 +10,12 @@
- #include "k3-j721s2-ddr.dtsi"
- #include "k3-j721s2-common-proc-board-u-boot.dtsi"
- #include "k3-j721s2-r5.dtsi"
+diff --git a/configs/am68_sk_r5_defconfig b/configs/am68_sk_r5_defconfig
+index e9b6882c1f68..f4800ef1b8ac 100644
+--- a/configs/am68_sk_r5_defconfig
++++ b/configs/am68_sk_r5_defconfig
+@@ -5,6 +5,10 @@ CONFIG_ARCH_K3=y
+ CONFIG_SOC_K3_J721S2=y
+ CONFIG_TARGET_J721S2_R5_EVM=y
+ 
++CONFIG_K3_AVS0=n
++CONFIG_DM_REGULATOR_TPS65941=n
++CONFIG_PMIC_TPS65941=n
 +
-+&tps659411 {
-+	bootph-pre-ram;
-+};
-+
-+&wkup_vtm0 {
-+	bootph-pre-ram;
-+	vdd-supply-2 = <&bucka1234>;
-+};
+ CONFIG_DEFAULT_DEVICE_TREE="k3-am68-sk-r5-base-board"
+ CONFIG_SPL_OF_LIST="k3-am68-sk-r5-base-board"
+ CONFIG_OF_LIST="k3-am68-sk-r5-base-board"
+diff --git a/configs/j721s2_evm_r5_defconfig b/configs/j721s2_evm_r5_defconfig
+index b6adb6a77d7e..ad7653c8f99b 100644
+--- a/configs/j721s2_evm_r5_defconfig
++++ b/configs/j721s2_evm_r5_defconfig
+@@ -112,6 +112,7 @@ CONFIG_DM_MAILBOX=y
+ CONFIG_K3_SEC_PROXY=y
+ CONFIG_FS_LOADER=y
+ CONFIG_SPL_FS_LOADER=y
++CONFIG_K3_AVS0=y
+ CONFIG_SUPPORT_EMMC_BOOT=y
+ CONFIG_SPL_MMC_HS400_SUPPORT=y
+ CONFIG_MMC_SDHCI=y
+@@ -141,6 +142,11 @@ CONFIG_SPL_PINCTRL=y
+ CONFIG_PINCTRL_SINGLE=y
+ CONFIG_POWER_DOMAIN=y
+ CONFIG_TI_POWER_DOMAIN=y
++CONFIG_DM_PMIC=y
++CONFIG_PMIC_TPS65941=y
++CONFIG_DM_REGULATOR=y
++CONFIG_SPL_DM_REGULATOR=y
++CONFIG_DM_REGULATOR_TPS65941=y
+ CONFIG_K3_SYSTEM_CONTROLLER=y
+ CONFIG_REMOTEPROC_TI_K3_ARM64=y
+ CONFIG_RESET_TI_SCI=y
 
 -- 
 2.46.0
