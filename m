@@ -4,83 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C811CF8842
-	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 14:33:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3083ECF8842
+	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 14:39:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 939E6889E9;
-	Fri,  4 Oct 2024 16:33:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7BF3288B86;
+	Fri,  4 Oct 2024 16:39:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="llEuEPjN";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="czC4wiGM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1FEF9889EF; Fri,  4 Oct 2024 16:33:38 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A9E3F88B89; Fri,  4 Oct 2024 16:39:21 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9848E889C5
- for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 16:33:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3710788A24
+ for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 16:39:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-42e748f78d6so20143745e9.0
- for <u-boot@lists.denx.de>; Fri, 04 Oct 2024 07:33:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728052415; x=1728657215; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=7ItnNQHnhoU1rlx6sspqSM+/nHjfAl6OYCsqekYSpxI=;
- b=llEuEPjNsWW+Enu7UPRb4MYiFbuGNYQZRsZg5UefOegmt2PACTx9OrE/DIxlPc9k5X
- osZRI3OtFjpk6fPcjMjdQFtvj0TJY82NI8JWIfEXiGeoK0YbxA347UhkhJ6ECOy2Bxpy
- tcb9Wy/0y3y63NQnbFzluCIZrVrV1QTekmjXk8ykEb5Bu1KeTbzY4TvPSpNRLUkcfsht
- nVsWtcSdjDpoA9CPLdQGvOrQ0pSO62bCYGvSqTWIRKTjlkmPzg/USbEgC/JK6UBVg/hs
- LR08sI7crXyywfDTBChbtH+dqkVd0vFERsrt7joGAADg7FPX+E/fTPkWu6lfXaU1CtFU
- vnJA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728052415; x=1728657215;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=7ItnNQHnhoU1rlx6sspqSM+/nHjfAl6OYCsqekYSpxI=;
- b=Ih4Lych6A4W8sNEhvJAs+zrLZjoe8IaTc1YoSA7rottpO9xURNu5vi1CFojE8whaWU
- 4DH9quRfj7Fk2n7rPV6TMNs4OePqV4lDalwvFyUjZX/FWT+EsWWIHSQTlygpl9oPihCi
- U4cEBHOJECek8u+uzyJKkknGawIS+ZYRZefr455vTN5A7dy8SIPNHYBkgsa9ziIde2xY
- +T3rKtpBRYMXqyjgiG6DSzF0yW36baRLcR81gIPIZphPO7ZkL/tyROp5HZ++OECtLFHM
- bUwedIQcLiwwhvvrpdb3RJW5mXdJzkCrA0mdaxDn5k/UYtnH61PV0LIEWGFPgDfFs/Sj
- zPzQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXHleMq0quoQ08URsii+W+XS9q98EOKkLwVIPAZqCcRiovQLz9sPCWmDWYEBS+rEI7U54B/lLQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YwsC+/w9PVBN2R0kNPhc4B4wJNQvobn0+G52u85MPTND5JvaVBT
- yKNWxde+AOKlOOJpKOLfSyZ7xRRQbuvUcIxc/zbuq4+AV9cfdgYKl2QPWOuSWp8=
-X-Google-Smtp-Source: AGHT+IFGQsx22+LHLndcqmHiSk+vwVlO+ff4swHrvvtp4s4xyN7Ff7diNQl+Bcv9s4xsVUVXqIeYsg==
-X-Received: by 2002:a05:600c:1e22:b0:426:614b:1a72 with SMTP id
- 5b1f17b1804b1-42f85ac08d3mr22761925e9.17.1728052414912; 
- Fri, 04 Oct 2024 07:33:34 -0700 (PDT)
-Received: from [192.168.2.2] ([82.195.86.106])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42f86b444f1sm16869445e9.38.2024.10.04.07.33.34
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 04 Oct 2024 07:33:34 -0700 (PDT)
-Message-ID: <3f1dfd9d-93cb-46ac-abe3-ff2254bbb6cf@linaro.org>
-Date: Fri, 4 Oct 2024 16:33:33 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 494EdFG9071763;
+ Fri, 4 Oct 2024 09:39:15 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1728052755;
+ bh=r+zCO5qDw9X0tueP3d4rZSla22qn3RPSsWyIW47amG0=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=czC4wiGMhQn6hoQp0JOXvWCoSR/LHQoKo5C82bTVCxCIubv7mtoGhgT7w5jocMFUd
+ Jsvqq5UZuv4OzBxXfEVjW9MtcImEO9dEA30E4TG4btWjT0ODgd3zfLIUp6ZxqCd8o/
+ 00JXNfQgKMgvXf+cWXYWfXaNU+9yUXfjn8wEUiH4=
+Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 494EdFKN046120;
+ Fri, 4 Oct 2024 09:39:15 -0500
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 4
+ Oct 2024 09:39:14 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 4 Oct 2024 09:39:15 -0500
+Received: from [10.250.151.109] ([10.250.151.109])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 494EdBFh020717;
+ Fri, 4 Oct 2024 09:39:12 -0500
+Message-ID: <3f9a080d-5752-4766-9ae1-2a1049d82cca@ti.com>
+Date: Fri, 4 Oct 2024 20:09:11 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] wget: rework the logic to validate the load address
-To: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Ramon Fried <rfried.dev@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Vaishnav Achath <vaishnav.a@ti.com>
-References: <20240916152025.75789-1-sughosh.ganu@linaro.org>
- <20240916152025.75789-3-sughosh.ganu@linaro.org>
+Subject: Re: [PATCH 1/4] mach-k3: common.c: Add dma device remove in spl exit
+To: Prasanth Babu Mantena <p-mantena@ti.com>, <trini@konsulko.com>,
+ <sjg@chromium.org>, <alpernebiyasak@gmail.com>
+CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <n-francis@ti.com>,
+ <vaishnav.a@ti.com>, <s-k6@ti.com>
+References: <20241004132057.1449909-1-p-mantena@ti.com>
+ <20241004132057.1449909-2-p-mantena@ti.com>
 Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20240916152025.75789-3-sughosh.ganu@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20241004132057.1449909-2-p-mantena@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,95 +81,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Prasant,
+
+Thanks for series,
+
+Could we update the subject of patch something like
+
+Remove dma device in spl exit, Sorry but
+
+Add dma device remove in spl exit looks little confusing , are we adding 
+or removing ?
 
 
-On 16/09/2024 17:20, Sughosh Ganu wrote:
-> Use the lmb_read_check() function to verify if it is safe to use a
-> region of memory to load data from the wget command. The current logic
-> checks the amount of free memory available, starting from the 'load
-> address'. This call fails if the same region of memory has been used
-> earlier. This used to work earlier as the LMB memory map had a local
-> scope and was not persistent. Fix this issue by using the
-> lmb_read_check() call instead which only returns an error in case the
-> memory region has been marked for not allowing re-use.
-> 
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-
-This fixes Qualcomm platforms which use LMB to allocate $loaddaddr and 
-friends.
-
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
+On 10/4/2024 6:50 PM, Prasanth Babu Mantena wrote:
+> While exiting from spl, remove any dma device active through
+> spl_board_prepare_for_boot(). This is required for cleaning up
+> any dma channels being used in spl and avoid issues with overlapping
+> channel allocation in the next stage bootloaders.
+>
+> Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
 > ---
-> 
-> Note: To be applied on next, on top of
-> https://patchwork.ozlabs.org/project/uboot/patch/20240913073251.2286529-2-prasad.kummari@amd.com/
-> 
->   net/wget.c | 36 +-----------------------------------
->   1 file changed, 1 insertion(+), 35 deletions(-)
-> 
-> diff --git a/net/wget.c b/net/wget.c
-> index 4a168641c6..a88c31f236 100644
-> --- a/net/wget.c
-> +++ b/net/wget.c
-> @@ -64,26 +64,6 @@ static unsigned int retry_tcp_ack_num;	/* TCP retry acknowledge number*/
->   static unsigned int retry_tcp_seq_num;	/* TCP retry sequence number */
->   static int retry_len;			/* TCP retry length */
+>   arch/arm/mach-k3/common.c | 23 ++++++++++++++++++++++-
+>   1 file changed, 22 insertions(+), 1 deletion(-)
+>
+> diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
+> index df48ec8d47..982dc76b00 100644
+> --- a/arch/arm/mach-k3/common.c
+> +++ b/arch/arm/mach-k3/common.c
+> @@ -28,6 +28,8 @@
+>   #include <env.h>
+>   #include <elf.h>
+>   #include <soc.h>
+> +#include <dm/uclass-internal.h>
+> +#include <dm/device-internal.h>
 >   
-> -static ulong wget_load_size;
-> -
-> -/**
-> - * wget_init_max_size() - initialize maximum load size
-> - *
-> - * Return:	0 if success, -1 if fails
-> - */
-> -static int wget_init_load_size(void)
-> -{
-> -	phys_size_t max_size;
-> -
-> -	max_size = lmb_get_free_size(image_load_addr);
-> -	if (!max_size)
-> -		return -1;
-> -
-> -	wget_load_size = max_size;
-> -
-> -	return 0;
-> -}
-> -
->   /**
->    * store_block() - store block in memory
->    * @src: source of data
-> @@ -97,13 +77,8 @@ static inline int store_block(uchar *src, unsigned int offset, unsigned int len)
->   	uchar *ptr;
+>   #include <asm/arch/k3-qos.h>
 >   
->   	if (CONFIG_IS_ENABLED(LMB)) {
-> -		ulong end_addr = image_load_addr + wget_load_size;
-> -
-> -		if (!end_addr)
-> -			end_addr = ULONG_MAX;
-> -
->   		if (store_addr < image_load_addr ||
-> -		    store_addr + len > end_addr) {
-> +		    lmb_read_check(store_addr, len)) {
->   			printf("\nwget error: ");
->   			printf("trying to overwrite reserved memory...\n");
->   			return -1;
-> @@ -493,15 +468,6 @@ void wget_start(void)
->   	debug_cond(DEBUG_WGET,
->   		   "\nwget:Load address: 0x%lx\nLoading: *\b", image_load_addr);
+> @@ -246,12 +248,31 @@ void spl_enable_cache(void)
+>   #endif
+>   }
 >   
-> -	if (CONFIG_IS_ENABLED(LMB)) {
-> -		if (wget_init_load_size()) {
-> -			printf("\nwget error: ");
-> -			printf("trying to overwrite reserved memory...\n");
-> -			net_set_state(NETLOOP_FAIL);
-> -			return;
-> -		}
-> -	}
-> -
->   	net_set_timeout_handler(wget_timeout, wget_timeout_handler);
->   	tcp_set_tcp_handler(wget_handler);
->   
+> -#if !(defined(CONFIG_SYS_ICACHE_OFF) && defined(CONFIG_SYS_DCACHE_OFF))
+> +static __maybe_unused void k3_dma_remove(void)
+> +{
+> +	struct udevice *dev;
+> +	int rc;
+> +
+> +	rc = uclass_find_device(UCLASS_DMA, 0, &dev);
 
--- 
-// Caleb (they/them)
+Are you thinking to have DMA device optional ?
 
+Second question, if we enabled multiple DMAs in u-boot, then would you 
+like to remove all ?
+
+
+> +	if (!rc && dev) {
+> +		rc = device_remove(dev, DM_REMOVE_NORMAL);
+> +		if (rc)
+> +			pr_warn("Cannot remove dma device '%s' (err=%d)\n",
+> +				dev->name, rc);
+> +	}
+> +}
+> +
+>   void spl_board_prepare_for_boot(void)
+>   {
+> +#if !(defined(CONFIG_SYS_ICACHE_OFF) && defined(CONFIG_SYS_DCACHE_OFF))
+>   	dcache_disable();
+> +#endif
+
+Please suggest , why we are protecting dcache_disable with flags ?
+
+
+> +#if IS_ENABLED(CONFIG_SPL_DMA) && IS_ENABLED(CONFIG_SPL_DM_DEVICE_REMOVE)
+> +	k3_dma_remove();
+> +#endif
+>   }
+>   
+> +#if !(defined(CONFIG_SYS_ICACHE_OFF) && defined(CONFIG_SYS_DCACHE_OFF))
+>   void spl_board_prepare_for_linux(void)
+>   {
+>   	dcache_disable();
