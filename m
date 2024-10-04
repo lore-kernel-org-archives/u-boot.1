@@ -4,56 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF216CFA749
-	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 05:06:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56E64CFA749
+	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 05:40:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3AEA189009;
-	Fri,  4 Oct 2024 07:06:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 882FA88113;
+	Fri,  4 Oct 2024 07:40:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1728018385;
-	bh=2dB9GfzL6dm6eGUibDPMQ8z154PyijUqU8ufdA/7/i0=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=wAZgcF5aAcfRER/YjxriI9oTTKaFVNvQJ91cizoAiV3+tu9tZYJ9qH3DPjfCwYKXB
-	 dDivE/OryasHglKcOWF1XDqBFw1hDu+kAJ78U+n/PhfsM/UqPg2xd+Go65mrpcVjja
-	 xUabHJgFkBcgTjCz4cyJMxlRQBGtTrVv1PVD3MtEkEeHE2bxVMqVTJSJlp85lnG6iW
-	 4j1pc4DHIihHjJ9jPMrBfCyDSStr+QK1qgqDyrMsVCHxbY4YtTdUu3BolNLyc4iHA/
-	 aXWDb9A1GoT1HvqZzmFmMMRt0dgUhqEwHIwxFs/otR638oe6HBwykChJSXkc1gAteH
-	 WTgaPbXxpGbtg==
-Received: from [192.168.1.107] (82-131-157-225.pool.digikabel.hu
- [82.131.157.225])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TlpNg+Pb";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 1B40588001; Fri,  4 Oct 2024 07:40:32 +0200 (CEST)
+Received: from mail-vk1-xa35.google.com (mail-vk1-xa35.google.com
+ [IPv6:2607:f8b0:4864:20::a35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 603BC88AE8;
- Fri,  4 Oct 2024 07:06:23 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1728018384;
- bh=2dB9GfzL6dm6eGUibDPMQ8z154PyijUqU8ufdA/7/i0=;
- h=Date:Subject:To:Cc:References:From:Reply-To:In-Reply-To:From;
- b=X1PZpO64eBevdGVNe2GHIEDl3eOxYp/9a4Juhooo2sUI95pmXi3uXyoo6yEo7C+YQ
- u6RiCU1ovQCGf8O47B9uiS92FSHAIp8h8Ncvp8F6rG8joBwvdDwUQMY/OL1RCB/tSw
- zlu1ddNnsJJHMLVwJrcL5Vf+ucfJTOj9P4u5pSv5N4w6qFzm3L908oUNEYhfZhIeT+
- dTIqkKD+Ub0ZWBP8IaKKNGMyNFoJvXALFQWGNk/HOMP4CE5zrZQJUdJ/CDmb945pf9
- 3V+Ic1zsOSgIhgZ7THHMvXdXzXdsH2p05BCC7JcBkRJA1OVtuxPhwb+aAA6zq4gJoP
- Lnz/+Lc/Cty4Q==
-Message-ID: <ac403d08-cacc-9074-f3aa-df2e87a2d32a@denx.de>
-Date: Fri, 4 Oct 2024 07:04:19 +0200
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 53DAD88CEB
+ for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 07:40:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-vk1-xa35.google.com with SMTP id
+ 71dfb90a1353d-50792ed3b0bso518960e0c.1
+ for <u-boot@lists.denx.de>; Thu, 03 Oct 2024 22:40:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1728020427; x=1728625227; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=CCHNanpUXIkB6k3Ji6JgL/MjuWWQ6P38iTYemVm6Gj0=;
+ b=TlpNg+PbhOUDd3KHmXqxruVFUy5U9WeMZszn9vOhWYIlkJKyphUJWy2q59kVYN1bjE
+ QoyvXk2VPgN7D0TCl3J2bj54gpk75LeqGl7uCJG9Jj0rO/XbMr+DyOoa6F126e5G36jb
+ efGzKJMHpl5RjbbqWQcAV4gq6Qxl8KvX4o+iaJd4FP+Js/sIEiIey2BqjrFccdWQcxrW
+ oyg3QAXGD0QJTBKt+kc75kjjH2GvxSOwXoLuAlWx+NgTqnvlzSiDcIcl8FswOc8UdATn
+ yZ4PQcyDGlwgVfbH3An/tGZ2bVj5+Z8jDj3CPezwlseBlqudj/zWDoLNcDgVTgQgHow7
+ cpKw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728020427; x=1728625227;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=CCHNanpUXIkB6k3Ji6JgL/MjuWWQ6P38iTYemVm6Gj0=;
+ b=mvOMiNBcqnW0VtQkc3V4Q+2dhCwIp1UYStdnFBVLNR5KMggr/1CUOSf00aAAk0yrJF
+ cg4CU3tEPASEqkjFArxzMI+zboMJ+DvXKPCi2WzXeZOCde/nYj1d15BHmUr5d0nHePNj
+ A2sgRmbuttr7L4Du/gwa6RlKSX02SwQ54Vr/f3gB5Jd6PqrU3+f5O0R6Sp+mVAUPOoRr
+ NhCMaFbfrGSTAm6F7qmLmAqLxglBzTcr7aX6RGDteru/uPnhgazOEJ+x1nfOqLwuptYl
+ ldXTw4gph72BhiXPSvSkafKIm9587fNrVTzTs42cZC49E1E62pzrdcbBsebkGxEkR6We
+ 0d7w==
+X-Gm-Message-State: AOJu0YwaJZ1+te8kWuBwzEwz95GcGZx4fSBXF2QSZA2NTO1GkzCfHS79
+ WzurPMkXK0FtWKZtfkpo4tGJ6MVp05hEYrUlmy1NSQTaR9UdlzKmaAemDo6MW+VOwOh5907PalR
+ tnzJJ4af5fVM/baMQRhuPYx7zZE5/N/wJlTYYrg==
+X-Google-Smtp-Source: AGHT+IFJK5ABdL4ZSpkCVCf0ve772KCMRbSqmjnZPQPa2od9PIY+DOJe+V89/sAxq+dnVZs5u9XwlIZz2Eb8cZOU5qM=
+X-Received: by 2002:a05:6122:3d15:b0:50c:79a4:c4a with SMTP id
+ 71dfb90a1353d-50c855966e4mr1142625e0c.13.1728020426820; Thu, 03 Oct 2024
+ 22:40:26 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH] sandbox: i2c: Make sure phandle dependency is probed
-Content-Language: en-US
-To: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-References: <20241003203736.298649-1-marex@denx.de>
- <80e7d47f-335d-4c81-ac7c-3af531474e50@denx.de>
-From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <80e7d47f-335d-4c81-ac7c-3af531474e50@denx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <20240927214955.394224-1-marex@denx.de>
+ <20240927214955.394224-2-marex@denx.de>
+ <CAFA6WYPPXDJC4kSiBAR=jL-Z0v3a8+=_=+hLx+Ug0+yu407y3Q@mail.gmail.com>
+ <75eb6eb6-dd55-4509-a041-a5941286493f@denx.de>
+ <CAFA6WYM8KJQkTQ6YtMC7ByKU-h1Yss9K50veWmsnni3gYsgj_w@mail.gmail.com>
+ <066867d2-6d16-4ebe-9a42-8ce58d3889ec@denx.de>
+ <CAFA6WYNy+XzWvMcfJqmLRfinKUPnvx7Ha42xOxF4a=izPKMr4Q@mail.gmail.com>
+ <609e203a-45cd-4155-8f0a-26f3f1e8c497@denx.de>
+In-Reply-To: <609e203a-45cd-4155-8f0a-26f3f1e8c497@denx.de>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Fri, 4 Oct 2024 11:10:15 +0530
+Message-ID: <CAFA6WYOgEUXVPfkaja4ZXekyet5n7E5MUKyUQY-qXjPzFtxttA@mail.gmail.com>
+Subject: Re: [PATCH 2/3] dts: Add ability to build DTOs only from
+ arch/$(ARCH)/dts
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Fabio Estevam <festevam@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Jonas Karlman <jonas@kwiboo.se>, 
+ Lothar Rubusch <l.rubusch@gmail.com>, Michal Simek <michal.simek@amd.com>, 
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@denx.de>,
+ Tom Rini <trini@konsulko.com>, 
+ u-boot@dh-electronics.com, Jan Kiszka <jan.kiszka@siemens.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,79 +98,57 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek!
+On Fri, 4 Oct 2024 at 07:15, Marek Vasut <marex@denx.de> wrote:
+>
+> On 10/3/24 9:58 AM, Sumit Garg wrote:
+>
+> [...]
+>
+> >>> IMHO, the OF_UPSTREAM migration can wait until all the required DT
+> >>> sources (.dts and .dtso) are present upstream. If we start to mix and
+> >>> match DT sources then it is going to turn into maintainers' hardship
+> >>> again. However, I am still open to further convincing arguments for
+> >>> this.
+> >> With some Linux kernel architectures, it takes months to get a singular
+> >> patch review out of the maintainers.
+> >
+> > Okay I see the pain but we already have that rule for .dts files for
+> > OF_UPSTREAM switch but having a different rule for .dtso files is
+> > going to make maintainability complex.
+>
+> What kind of rule is that ?
+>
+> If the rule for .dts files is either dts/upstream or arch/*/dts, then
+> the rule for .dtso is either dts/upstream+fallback to arch/*/dts or only
+> arch/*/dts .
 
-On 03.10.24 22:47, Marek Vasut wrote:
-> On 10/3/24 10:37 PM, Marek Vasut wrote:
->> This driver depends on i2c emulator via DT phandle. Make sure the
->> dependency is probed before this driver is probed, not when it is
->> first used during transfer. This fixes the following i2c_emul_find()
->> error:
->>
->> "
->> $ ./u-boot -Dc ""
->> ...
->>         i2c_emul_find() No emulators for device 'sandbox_pmic'
->>    sandbox_pmic_write() write error to device: 0000000018c568d0 register: 0x0!
->>         out_set_value() PMIC write failed: -5
->>         i2c_emul_find() No emulators for device 'sandbox_pmic'
->>    sandbox_pmic_write() write error to device: 0000000018c568d0 register: 0x0!
->>         out_set_value() PMIC write failed: -5
->> ...
->> "
->>
->> Signed-off-by: Marek Vasut <marex@denx.de>
->> ---
->> Cc: Heiko Schocher <hs@denx.de>
->> Cc: Simon Glass <sjg@chromium.org>
->> Cc: Tom Rini <trini@konsulko.com>
->> Cc: u-boot@lists.denx.de
->> ---
->>   drivers/i2c/sandbox_i2c.c | 9 +++++++++
->>   1 file changed, 9 insertions(+)
->>
->> diff --git a/drivers/i2c/sandbox_i2c.c b/drivers/i2c/sandbox_i2c.c
->> index 74bb5e93397..9a39ac14fb4 100644
->> --- a/drivers/i2c/sandbox_i2c.c
->> +++ b/drivers/i2c/sandbox_i2c.c
->> @@ -80,6 +80,14 @@ static int sandbox_i2c_xfer(struct udevice *bus, struct i2c_msg *msg,
->>       return ops->xfer(emul, msg, nmsgs);
->>   }
->> +static int sandbox_i2c_probe(struct udevice *dev)
->> +{
->> +    struct udevice *emul;
->> +
->> +    return uclass_get_device_by_phandle(UCLASS_I2C_EMUL, dev,
->> +                        "sandbox,emul", &emul);
->> +}
-> Hmmm, no, this does not do it, but it does show what the issue is -- sandbox_i2c_xfer is misused to 
-> defer access to this emulator until the first I2C transfer, so the emulator can hopefully probe in 
-> the meantime. This is fragile and now it broke. What I am not quite sure about is why this 
-> uclass_get_device_by_phandle() returns -2 here instead of probing the emulator ?
+Yeah that the rule difference we will have after this patch for .dtso
+but I can live with that given it being gated behind the Kconfig
+option below.
 
-Hmm... -2 means it does not find such a device ... why, I don;t know ...
-do you have a chance to debug?
+>
+> > The Linux kernel
+> > sub-architecture maintainers remain the same for both .dts and .dtso
+> > files.
+>
+> Well, yes.
+>
+> >> For systems which already have DTs
+> >> upstream and only have DTOs left, the OF_UPSTREAM conversion and DTO
+> >> upstreaming can be done in parallel, hence expedite the process.
+> >
+> > Fair enough, let's try to find a middle ground to gate the local DTOs
+> > behind a config to make the use of local DTOs explicit. How about
+> > CONFIG_OF_UPSTREAM_LOCAL_DTOS?
+> Do you think another Kconfig option is really necessary ? I don't mind
+> adding one if you think that would make a difference, but I don't see it
+> as strictly necessary.
 
-Just a fast grep (I must admit, never looked into this parts...))
-may it helps if you use
+Yeah I think it will make explicit the usage of local DTOs vs upstream DTOs.
 
-int i2c_emul_find(struct udevice *dev, struct udevice **emulp)
-
-found in file:
-
-./drivers/i2c/i2c-emul-uclass.c
-
-instead?
-
-bye,
-Heiko
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+-Sumit
