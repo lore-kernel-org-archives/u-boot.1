@@ -4,82 +4,168 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 973CDCFA76F
-	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 12:03:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B9FCCFA771
+	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 12:03:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1EC3A88B86;
-	Fri,  4 Oct 2024 14:03:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 96CCA88B86;
+	Fri,  4 Oct 2024 14:03:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cISUWQIO";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="tVQJAU84";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6297688C44; Fri,  4 Oct 2024 14:03:00 +0200 (CEST)
-Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
- [IPv6:2607:f8b0:4864:20::52b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4950488B63; Fri,  4 Oct 2024 14:03:43 +0200 (CEST)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on2060c.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:200a::60c])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE94C88B63
- for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 14:02:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E75F688C98
+ for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 14:03:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x52b.google.com with SMTP id
- 41be03b00d2f7-7d50a42ce97so858972a12.0
- for <u-boot@lists.denx.de>; Fri, 04 Oct 2024 05:02:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728043376; x=1728648176; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ZSDHj969japCRlswWmJ7kUWUI6FnRItHR9Vd9TAnmmk=;
- b=cISUWQIOOeFUJ88Cc9UbVmp4nCqJZDpJEf/o8VGY7SzELqwpV/84/NcT3jY5R5THQK
- FVeHW3qCGfOghxKjAxvVAr55IfJh8Zs6/gILo8Alpi2C70qZAQNcxOWNPybgGstgZITk
- UPPwjOw4O+zO2ay9u4buTuFD+z5oHxk99XvMtkiIxrwILWk0Qjoy3XTQySMeLGLePdHq
- lccNI6zrcDaRk2Z3pMwCYR1D8LnZfdDadk5th1nprHcAVghQQPF0aCbNAvBWWvS5Xyse
- uiVrimszlTe+qoWYj5IHf3YkMCwWOtUwqFx2X/9hXU4bzvsUVvidxyKZKdWhRy028qeI
- KouQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728043376; x=1728648176;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ZSDHj969japCRlswWmJ7kUWUI6FnRItHR9Vd9TAnmmk=;
- b=U4igZ62RutV+5Ihc758deYKTqvBzRfGKAGHsDcCRvrF0jSBykPZ75K54XEJ4JZHFiR
- RoZiLlDJm5Sza2Sxl/lcliIIKThfM8vkNGSpWmL0yDBWzf6fyE5zreddXP86sFILHxeT
- U/Z6RisNdWWrFOphYXVCbY0SLpP9LeF+Pqz8veNUlWHTJT7UW6iR4RVWNEGnRNxaEPIO
- DOEJ8YZd0ezI7RvRQcSe5VAcYCw4FGHEP8ggVAfGICtEfF4NUNL154kZ9GBi9Rffszge
- PdsAIs3oA/Q8Da1F10Ze/7aD/gbtF6t+t06uBnDj2XWcvyZ9bnKC5UiGOShqRdw+keNv
- gICg==
-X-Gm-Message-State: AOJu0YymKaiaHBKgB1sAV5TIg8F0hAwXXNqHHfuBEOp3UTWE1KeVpR9L
- fKL/wx4GBq+HX64Wg6pujtKhSiQ6rQay6bQHPOyQsUlzRE/c4gdBrPt1YWyj9Np0cc90I76I8jg
- 4/0+r6LzQGCvN6732hvgf1Z4clgK4ji9gbkOcRA==
-X-Google-Smtp-Source: AGHT+IHhkv/NGDourPgLh7RuCDS2zEmyH+HLfD12RN4YHoUUL2yrAbwfqWKG8Fa1rH+ML4/nhr4Rs8XH8GNlSdEqsyA=
-X-Received: by 2002:a17:90b:302:b0:2d8:d098:4f31 with SMTP id
- 98e67ed59e1d1-2e1e626c06amr2547358a91.17.1728043375978; Fri, 04 Oct 2024
- 05:02:55 -0700 (PDT)
+ spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=notYXZksiKwFSvuFKC2WyQlDT3MSVhHewRF0Q0jrxBOxksNzh8+Ys6ACQjNpAGy+pQwgEQs8N+r4DvOZsVod4+vhN1duh5+aWDzSGeQvfKMk/2hc5ZH5HfkyHvvmH4njvzAwlWP1rjuW2WF2ntZpe9IkAk1OQKoY3SNYp3nHsPTY2eTkmFb1ubWAof2H8p52fSQFB2j2MBAOtHRCOxNTGMOMfd877bT3kVYm27/rTnKp7lt0pbEHGZeEBjKJiys0zEhStpv/rv8Rmfh1pEwnURizkkZWzGI3ozcxch4s8J8zPSROdKcjzbVesD50PtTWx4jTpNek36AEryYTSoSwfA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=61rdq7D3Q/zPV5eeyBS2KKeFFWsFoPqYp7jbhUU2CDY=;
+ b=XfwZ1/1y+kTnBDj9G69CVzEixwLXYVpvxIGXfTugmUoZV9GNJgAJbHWsPJBtimUlH9PQxEqPW12cMG00M3GAZJ1TvqTuM6RmYVl9CAMq/xs+q1imlH2docyNaXJc0W6rDYtibMGAK0QTAn/KtcGw3eqMWSMpgon91gMKP2jM/123nicMdJVyzqPQo7z3pp+4u54cr2EtxQuDc+R62t4ln3fgm9m99pPFUjxVtToEMseMcbK+BP1mv1mDn5VUvWbBfj/hKt6Zk9A/oe1NkKc1A90hFowD2tNnbbiAhQigzMak5ekK8HNI/Vr+e7OHpcVEMqq8DaukMs98skkdXArBdQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=61rdq7D3Q/zPV5eeyBS2KKeFFWsFoPqYp7jbhUU2CDY=;
+ b=tVQJAU84eHq+05k1zbM+8fXQpMYf0VN4MTGCOFEfLk2bBHgmHSxA/AP/q2OTR8xLZlfrJM0OZZCHBn/Z6K/0oMHJ2IrKsrod/hTHPj6pVxYb/Lmzl9exMYVGyQV/SEldYeEwIo03B3ufYc7ZETsLHuL1cU2NLONt63ONVu9uNr0=
+Received: from SA1PR12MB8697.namprd12.prod.outlook.com (2603:10b6:806:385::10)
+ by IA1PR12MB6091.namprd12.prod.outlook.com (2603:10b6:208:3ed::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8026.18; Fri, 4 Oct
+ 2024 12:03:33 +0000
+Received: from SA1PR12MB8697.namprd12.prod.outlook.com
+ ([fe80::dbf9:f1d1:7c67:f88c]) by SA1PR12MB8697.namprd12.prod.outlook.com
+ ([fe80::dbf9:f1d1:7c67:f88c%6]) with mapi id 15.20.8026.017; Fri, 4 Oct 2024
+ 12:03:32 +0000
+From: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>
+To: Marek Vasut <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: "Simek, Michal" <michal.simek@amd.com>, "fabrice.gasnier@foss.st.com"
+ <fabrice.gasnier@foss.st.com>, "git (AMD-Xilinx)" <git@amd.com>
+Subject: RE: [PATCH v3 1/7] usb: onboard-hub: Add reset-gpio support
+Thread-Topic: [PATCH v3 1/7] usb: onboard-hub: Add reset-gpio support
+Thread-Index: AQHbE8Cw1wwSjzBcqEOkNkd+RtrWkrJxyouAgAKoQHCAAH+OAIAALk6wgAAknwCAAKXiUIAAjJWAgAAKrLA=
+Date: Fri, 4 Oct 2024 12:03:32 +0000
+Message-ID: <SA1PR12MB86972BBB9F22E0C98AA541A198722@SA1PR12MB8697.namprd12.prod.outlook.com>
+References: <20241001050529.17922-1-venkatesh.abbarapu@amd.com>
+ <20241001050529.17922-2-venkatesh.abbarapu@amd.com>
+ <6056a273-2699-4e94-93e8-ddc96084bbba@denx.de>
+ <SA1PR12MB8697873F2C2EF86E6E9DAF9B98712@SA1PR12MB8697.namprd12.prod.outlook.com>
+ <2e0928c8-e03a-44ae-aa36-3d664ed5bc6a@denx.de>
+ <SA1PR12MB8697682FEEE48B015EE82E0398712@SA1PR12MB8697.namprd12.prod.outlook.com>
+ <c40f47cb-7245-43b7-9b01-6b8d1cdff04c@denx.de>
+ <SA1PR12MB869735B41B6F7A86520E2D3D98722@SA1PR12MB8697.namprd12.prod.outlook.com>
+ <02fe6fab-7e8c-4408-950f-e6df2a258b16@denx.de>
+In-Reply-To: <02fe6fab-7e8c-4408-950f-e6df2a258b16@denx.de>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: SA1PR12MB8697:EE_|IA1PR12MB6091:EE_
+x-ms-office365-filtering-correlation-id: d73a1ef6-1ad6-40cf-628e-08dce46c9186
+x-ld-processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230040|376014|366016|1800799024|38070700018;
+x-microsoft-antispam-message-info: =?utf-8?B?cm1SNHA5OG1JenRhNFprZm5BSTYvTXpLVk9tZVZ5RHpjL2hZeFZJeFBmMURP?=
+ =?utf-8?B?Wno4Vnh4czVNaGVJMWwzM1ZWd3ZlQWpMMGFkRUdQU09qWVdWeUtkckVrSVJ6?=
+ =?utf-8?B?YkszMHBySDBtTXJyRTJreHNIZmF4b2dQNXBVTHhjRFdxWnd3Sk1CdUJwd0l3?=
+ =?utf-8?B?NjJpRkVGeGpVSmZtVW53Zkc4ZlUxT01tOHJQeVh0NXF4NHN5U2NOVnJFTkMz?=
+ =?utf-8?B?dE5ic1RkbUZiUnI3LzR3ejk2R1NYMDhwNDNXSk84aDZLZFBkMmc3NGdtZldi?=
+ =?utf-8?B?N3RhQ291eDZMNHJjSUhTZHpmUUV2Ui9TaUtLd2Z1NHpBU2lwN01YdjVVVHc4?=
+ =?utf-8?B?QU40TXlLV1VqVTYrTzRjVit6aTBwQ29YNHZiYTFsK1R1K0hKcHNWVmtNOWt4?=
+ =?utf-8?B?SWhXVGJhWkpIcEt1U0pSZEZHRVVYdjM2THhKelZ1eTM3WFBDZHEyc0dPSHAw?=
+ =?utf-8?B?TmJXN0NCMDVSUUlJTDBRZjhkU0Zmb3A4czI2SmMvVThhaloyNzdYdXpDWFFn?=
+ =?utf-8?B?allxZEwrUFdodEdYSDFubnlwSHFFTm1GZ2d1dXBQeVk4dmkxKzh3SDI1RDEr?=
+ =?utf-8?B?YXdHY0RHallQd0x1WU1KRXhGR2E1dkVrdGU2ODBXTDR1a3BRT1NDcG5uVTFI?=
+ =?utf-8?B?Y3VXajNia2hxZmI0U0ZIT01XeE5uK0xXWHRLdFk5bGdDdU9oTlVGa0RKWGF2?=
+ =?utf-8?B?YlBZdlZDME9YTkdBZkIvTTkzUFcwcXdOUElNamdFSDJDYzdQQkZtUUZvOW40?=
+ =?utf-8?B?TW9HU2wzeGFtb1Z2QzM0MXRqSHQ4WjQxUlR2MURxK1UyaHdWQWVMOURCeFdJ?=
+ =?utf-8?B?NE9kNENzTU8rNXZBelVFRjRML0NIMFBocFBlOWR3ZHhlT01rUDdtSkUyQm5o?=
+ =?utf-8?B?ZGFqbXZCWE90Q3RMaFJjdXVOMmdLN3JjbDBPUG43RXFFdy84emhyVnB2a1pL?=
+ =?utf-8?B?Q1RRWnpwdXJuRFVSOFhYZXgrS0gvY2xacVZHajJXZTlKbmJ6U0p5NG9GS243?=
+ =?utf-8?B?YU1abmlMbDYzeFBMb2JPRnJhS2trQWNLNG1ZK0kyeG4rLzlRc09xNnV5ZER4?=
+ =?utf-8?B?UC82YVA5WlVNaUQzOS94L0JqVmZWS1kweXorclZlb1BaYVRCZkJGWHpPNExN?=
+ =?utf-8?B?S29XTlhOTlZIUHc3V0dtYk9JZTJaUCtuTVFTTUhXSE0wV0M3WFlOWnlTUTlt?=
+ =?utf-8?B?Q0Q4VDMzNElFZ0JuaENUMit1dHNwckpvZVhFc3lCZTBUOVhDeDFDY0VvcG9F?=
+ =?utf-8?B?OExxejZqNUZGRXJDNWwzYnJDWklTSW1GTUNLbVFFVU9GUExZcGNOVStPcEJ4?=
+ =?utf-8?B?OUF0cTFQUjBBbDBuSEdtUjhrdUlidElxWTRrbUY2ZEc3c08yeHJ2akVXU2lK?=
+ =?utf-8?B?ejJwMENwemR6bXBIYmd5aWEvVmxwS3dONDJTU21oVWNzaXF5Yjc5M1FSeTNI?=
+ =?utf-8?B?V3Z2YnkxRHZLYi9TNkxyUjVxVmJyQURHSlJSWG53S0JYaVdkMVFNd3Q2cXFo?=
+ =?utf-8?B?dWVkd1ZZTTJ6cElxU0grSzdYaFBzZlYxaGlVc2JmYWc3MlNnWDZ0R1R2eUM3?=
+ =?utf-8?B?cnUwU2IrdzJtNHJKd3hoa2NocnlKdEU0Nmg4TWFWVE9SOE85V1B4L2NXK0wr?=
+ =?utf-8?B?bk4zc0w2UitldWlWQTJKb25Za2lpWk9DYk9tYWpETktvU2lWUmdCdzJ2cjd4?=
+ =?utf-8?B?MmZwNGZBTDkvQnloMmQ2MlNiZ0c5UDI3dFd2OUZFYWY0bDhRa3N6T08vS05W?=
+ =?utf-8?B?ZktwQkcxNXE2UG9yenV2b0d4WGFRZCs0SXA3THdWTzRjeFhyTWZ4TEpYc0dN?=
+ =?utf-8?B?OGxVbE5lK3ZERWNteURmQT09?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SA1PR12MB8697.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(1800799024)(38070700018); DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?N25FNnp3REl4ZGp1YzdvUEUyMk0vSFk5YWlUQklFMFFTMlVDc1VwL2xrUWJv?=
+ =?utf-8?B?NVNVdUx1NXFhcFhWOFJhQlFlM1NRTFVHTjFFM0tReFRTajBSeFZxOG1HOTFT?=
+ =?utf-8?B?V3hjZXAwaUtJQmNMUXBsWi9IbCtNQWFOZW5qbFA2c3lVM2w4WmVtcFQ2RmhB?=
+ =?utf-8?B?Q1VndHJQQlBUWTFXVVovelVXcDZGN2FKQ0lrQWNQRUNEYmRtQUdTclBLbDBn?=
+ =?utf-8?B?TGRTVlNuZXJWNUE3ek9IWFhWaE5tVEIzWFc0dzViNytRTkxyMC9yZXdWV1A0?=
+ =?utf-8?B?R2gwY3ROajdMUlBkOFlScFMrNmpLRHpmdHRnRlVod0ZPVXFITW5XOTZ6dURl?=
+ =?utf-8?B?bkNWWXlVMEx2SmdGUGxmbU5wSEZORGcySnVhbmF3VXFRUkh5WGxKcCtxM3Fa?=
+ =?utf-8?B?Ty8zQVNwdUM3RnRRL2t3T0xrZjNKbXVIZG9MVnJNa1BoMEFpL216QmpoL2dx?=
+ =?utf-8?B?QkdCamhST0FzQkttQlZXY29IanJIYjdnN2NQZVcvd2lyTXdzaFV5RkpFQUNp?=
+ =?utf-8?B?R3o1R2ZHU0tqWkc4WFppcmxsTTM5djhudUdpekdETXNldWJOSmRnWVB1Nkxy?=
+ =?utf-8?B?VWdGYW5GZ2Jxd0x2WFdzUzB6eGRsSmppNmEvNUw1Wkd2VmJ0RXVQZTJ4SEx1?=
+ =?utf-8?B?cjRiekx2VkVNQzh5eXVhRldxN3hiaUVkTkVXM0ZQRGgrUW5EM2dSUXhQS295?=
+ =?utf-8?B?Z3dsQXBYNmNaZERYOWwxT2Y5MjA1RE1PdXBvSmdtUWowMlgydGJTOFVPWHVZ?=
+ =?utf-8?B?NTYxTlBIYm5kNUd6dVQ3cXBjRHlCamVSNjk2bU9VTmw5cStjQkhsK2Z3V0NE?=
+ =?utf-8?B?RWFROFFJYXRWNzBialFYUnhuYkI5bFpaSC91STBlNkpWQ2xQeHFodmxMZURH?=
+ =?utf-8?B?WElqQm9nYko5MFRJdzV5TFVYYlRYclc2U2xoNUR4Qmk2QUhrWFZmaGY5VGlD?=
+ =?utf-8?B?VzFTSk1sTXB4aStnUVdwTEpUSmxaR1dJQUVkcjhBUGw0VjI4M1VyVWZnSUdS?=
+ =?utf-8?B?UDZqVERjTFl2TFA0eURQQnlFdW5ocXpCQnJGbHQrK3BFMmNpdnFIYWdtREcz?=
+ =?utf-8?B?WWVENENDV2hDdHlqY3crU2xVeWtoR09UZVhZbUV1QitVN2FRMEd6TmhlRUtO?=
+ =?utf-8?B?N2dBK3RLY3lpZHZtSjJPY2hUVFNIY0VyMWg0WVViRnp6d0ovNEJMU25hN0Qy?=
+ =?utf-8?B?U2VUd2lwU1drUzNjZStJZGJJbXJWeGY1ckd3bUZ2SzFRbFRteWJPT25SaFoy?=
+ =?utf-8?B?V2V1aFRIeVIrZ1JRYnFFQzkyUitwQlc3VWRZNWJlTW4xYktlam1NMEdUcE5m?=
+ =?utf-8?B?bXVidk1KRXVlM1hPSFFpam5tdlQ0Y3pxcjNwUW1Ia1I0Qm5SL0hGbkRIOElh?=
+ =?utf-8?B?WkJkV1NzMUVyakV3US9ZbUpITExQQnhFRytWRkdCM0ZLVGs1TGIySWJkd29F?=
+ =?utf-8?B?L1Q2YzVmOE92cnhTNzE4cldiSGFMM1Zhb282U0I3RFVSeldNYVc3TWxmREw5?=
+ =?utf-8?B?RWZVWmo4TmlKYUFwSUNHZ2xKbGsvMlNka3ZidTFwOTl0VFdFQm1WbXlQb3Ev?=
+ =?utf-8?B?VmJ5Y3ZhRXZCU2dqUmp2K1BDZlN3YjhCc0FKc1VmckthcHhEVVlzejNXRUI4?=
+ =?utf-8?B?a0hlWFp0b0FjeXArVFYzNkhpSFF3OGh0Rm5scFhwc2p1bVJDUmF3M3VwTDR4?=
+ =?utf-8?B?ZXlQRHp2RFBWVzJDRVNYY0tHZFpvYThHYTJ0ZTEyVHp5UGkvUlVPMGg4NFZk?=
+ =?utf-8?B?K1QwWHBOalVMOGNYK3ZvOExuaFJ6TzFKUTBHVEYrUCtWUEZ1WDZWc2xnTjhE?=
+ =?utf-8?B?MksyamRqUk5SWTMzVzJxU3c0K0djOVprZE8za2tuWEw3SVl3OFZJM28wMHl3?=
+ =?utf-8?B?amJYWkE0VGppRlhYUXcyenJSY2dLY09Db3pjaytwVFZDdFY5SXVHYmxlNU9l?=
+ =?utf-8?B?QUsrbjJQWTBObjdVWTg4alZWcm0yU0IwcFgxdmlhb0l1ekFrTWNtRzVHdmpJ?=
+ =?utf-8?B?enFoTmNKSGhnOW1zS3BhUG5HNW5iQkcwbkdYVUs3M2xMdkJPVW1KcXpJV0s5?=
+ =?utf-8?B?SDcvVjhWdGI5cUEySUNwSm5rU1NORHdXckdnSDJlSXBEUncrd2hmU2kySVMz?=
+ =?utf-8?Q?qQ0g=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-References: <cover.1727968902.git.jerome.forissier@linaro.org>
- <6ebffbe03de27d5177bec361fdc5e26816ceb849.1727968902.git.jerome.forissier@linaro.org>
-In-Reply-To: <6ebffbe03de27d5177bec361fdc5e26816ceb849.1727968902.git.jerome.forissier@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 4 Oct 2024 15:02:19 +0300
-Message-ID: <CAC_iWjKkhhAvkk=2DNScZWFOLjL_ZR9EJ519AnOa0EZON=Nx0A@mail.gmail.com>
-Subject: Re: [PATCH v11 15/29] net-lwip: add TFTP support and tftpboot command
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Javier Tia <javier.tia@linaro.org>, 
- Raymond Mao <raymond.mao@linaro.org>, Maxim Uvarov <muvarov@gmail.com>, 
- Tim Harvey <tharvey@gateworks.com>, Anton Antonov <Anton.Antonov@arm.com>, 
- Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: SA1PR12MB8697.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d73a1ef6-1ad6-40cf-628e-08dce46c9186
+X-MS-Exchange-CrossTenant-originalarrivaltime: 04 Oct 2024 12:03:32.8260 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 5UdO4Aov4NJkWifcg5/1xYhSx+a0JYMnpnOFOIw6GfO4b6M9hZfFlFaxXemUV7xmU0CNx8eeUQkrhpNxO6l37A==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6091
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,461 +182,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 3 Oct 2024 at 18:47, Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
->
-> Implement do_tftpb(). This implementation of the tftp command
-> supports an optional port number. For example:
->
->  tftp 192.168.0.30:9069:file.bin
->
-> It also supports taking the server IP from ${tftpserverip} if
-> defined, before falling back to ${serverip}.
->
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> ---
->  cmd/Kconfig          |   3 +-
->  cmd/net-lwip.c       |   8 ++
->  include/net-common.h |   4 +
->  include/net-lwip.h   |   4 +
->  lib/binman.c         |   1 +
->  net/lwip/dhcp.c      |  11 +-
->  net/lwip/net-lwip.c  |  16 +++
->  net/lwip/tftp.c      | 283 ++++++++++++++++++++++++++++++++++++++++++-
->  8 files changed, 324 insertions(+), 6 deletions(-)
->
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index d09c237a52f..f1372a025b7 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -2119,10 +2119,9 @@ config CMD_MDIO
->  config CMD_TFTPBOOT
->         bool "tftp"
->         select PROT_UDP_LWIP if NET_LWIP
-> -       default n
-> +       default y
->         help
->           tftpboot - load file via network using TFTP protocol
-> -         Currently a placeholder (not implemented) when NET_LWIP=y.
->
->  endif  # if CMD_NET
->
-> diff --git a/cmd/net-lwip.c b/cmd/net-lwip.c
-> index 82edb5fd2e6..80f0872bb8f 100644
-> --- a/cmd/net-lwip.c
-> +++ b/cmd/net-lwip.c
-> @@ -11,3 +11,11 @@ U_BOOT_CMD(
->          "[loadAddress] [[hostIPaddr:]bootfilename]"
->  );
->  #endif
-> +
-> +#if defined(CONFIG_CMD_TFTPBOOT)
-> +U_BOOT_CMD(
-> +       tftpboot,       3,      0,      do_tftpb,
-> +       "boot image via network using TFTP protocol\n",
-> +       "[loadAddress] [[hostIPaddr:]bootfilename]"
-> +);
-> +#endif
-> diff --git a/include/net-common.h b/include/net-common.h
-> index cbcac178c82..fd7c5e7b488 100644
-> --- a/include/net-common.h
-> +++ b/include/net-common.h
-> @@ -459,6 +459,10 @@ static inline struct in_addr env_get_ip(char *var)
->
->  int net_init(void);
->
-> +/* NET compatibility */
-> +enum proto_t;
-> +int net_loop(enum proto_t protocol);
-> +
->  /**
->   * dhcp_run() - Run DHCP on the current ethernet device
->   *
-> diff --git a/include/net-lwip.h b/include/net-lwip.h
-> index cfd06726577..37744b0e2cd 100644
-> --- a/include/net-lwip.h
-> +++ b/include/net-lwip.h
-> @@ -6,6 +6,10 @@
->  #include <lwip/ip4.h>
->  #include <lwip/netif.h>
->
-> +enum proto_t {
-> +       TFTPGET
-> +};
-> +
->  struct netif *net_lwip_new_netif(struct udevice *udev);
->  struct netif *net_lwip_new_netif_noip(struct udevice *udev);
->  void net_lwip_remove_netif(struct netif *netif);
-> diff --git a/lib/binman.c b/lib/binman.c
-> index 9047f5275f3..93d85548116 100644
-> --- a/lib/binman.c
-> +++ b/lib/binman.c
-> @@ -137,6 +137,7 @@ int binman_init(void)
->  {
->         int ret;
->
-> +       return 0;
->         binman = malloc(sizeof(struct binman_info));
->         if (!binman)
->                 return log_msg_ret("space for binman", -ENOMEM);
-> diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
-> index be458d554cb..14685cf7825 100644
-> --- a/net/lwip/dhcp.c
-> +++ b/net/lwip/dhcp.c
-> @@ -116,11 +116,20 @@ int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
->  int dhcp_run(ulong addr, const char *fname, bool autoload)
->  {
->         char *dhcp_argv[] = {"dhcp", NULL, };
-> +#ifdef CONFIG_CMD_TFTPBOOT
-> +       char *tftp_argv[] = {"tftpboot", boot_file_name, NULL, };
-> +#endif
->         struct cmd_tbl cmdtp = {};      /* dummy */
->
->         if (autoload) {
-> -               /* Will be supported when TFTP is added */
-> +#ifdef CONFIG_CMD_TFTPBOOT
-> +               /* Assume DHCP was already performed */
-> +               if (boot_file_name[0])
-> +                       return do_tftpb(&cmdtp, 0, 2, tftp_argv);
-> +               return 0;
-> +#else
->                 return -EOPNOTSUPP;
-> +#endif
->         }
->
->         return do_dhcp(&cmdtp, 0, 1, dhcp_argv);
-> diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
-> index ca5426d058b..6a27d71de73 100644
-> --- a/net/lwip/net-lwip.c
-> +++ b/net/lwip/net-lwip.c
-> @@ -28,6 +28,7 @@ const u8 net_bcast_ethaddr[6] = { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff };
->  char *pxelinux_configfile;
->  /* Our IP addr (0 = unknown) */
->  struct in_addr net_ip;
-> +char net_boot_file_name[1024];
->
->  static err_t linkoutput(struct netif *netif, struct pbuf *p)
->  {
-> @@ -285,6 +286,21 @@ void net_process_received_packet(uchar *in_packet, int len)
->  #endif
->  }
->
-> +int net_loop(enum proto_t protocol)
-> +{
-> +       char *argv[1];
-> +
-> +       switch (protocol) {
-> +       case TFTPGET:
-> +               argv[0] = "tftpboot";
-> +               return do_tftpb(NULL, 0, 1, argv);
-> +       default:
-> +               return -EINVAL;
-> +       }
-> +
-> +       return -EINVAL;
-> +}
-> +
->  u32_t sys_now(void)
->  {
->         return get_timer(0);
-> diff --git a/net/lwip/tftp.c b/net/lwip/tftp.c
-> index 1fa246f55d9..26978643313 100644
-> --- a/net/lwip/tftp.c
-> +++ b/net/lwip/tftp.c
-> @@ -2,10 +2,287 @@
->  /* Copyright (C) 2024 Linaro Ltd. */
->
->  #include <command.h>
-> -#include <net-lwip.h>
-> +#include <console.h>
-> +#include <display_options.h>
-> +#include <dm/device.h>
-> +#include <efi_loader.h>
-> +#include <image.h>
-> +#include <linux/delay.h>
-> +#include <lwip/apps/tftp_client.h>
-> +#include <lwip/timeouts.h>
-> +#include <mapmem.h>
-> +#include <net.h>
-> +#include <time.h>
-> +
-> +#define PROGRESS_PRINT_STEP_BYTES (10 * 1024)
-> +
-> +enum done_state {
-> +       NOT_DONE = 0,
-> +       SUCCESS,
-> +       FAILURE,
-> +       ABORTED
-> +};
-> +
-> +struct tftp_ctx {
-> +       ulong daddr;
-> +       ulong size;
-> +       ulong block_count;
-> +       ulong start_time;
-> +       enum done_state done;
-> +};
-> +
-> +static void *tftp_open(const char *fname, const char *mode, u8_t is_write)
-> +{
-> +       return NULL;
-> +}
-> +
-> +static void tftp_close(void *handle)
-> +{
-> +       struct tftp_ctx *ctx = handle;
-> +       ulong elapsed;
-> +
-> +       if (ctx->done == FAILURE || ctx->done == ABORTED) {
-> +               /* Closing after an error or Ctrl-C */
-> +               return;
-> +       }
-> +       ctx->done = SUCCESS;
-> +
-> +       elapsed = get_timer(ctx->start_time);
-> +       if (elapsed > 0) {
-> +               puts("\n\t ");  /* Line up with "Loading: " */
-> +               print_size(ctx->size / elapsed * 1000, "/s");
-> +       }
-> +       puts("\ndone\n");
-> +       printf("Bytes transferred = %lu (%lx hex)\n", ctx->size, ctx->size);
-> +
-> +       if (env_set_hex("filesize", ctx->size)) {
-> +               log_err("filesize not updated\n");
-> +               return;
-> +       }
-> +}
-> +
-> +static int tftp_read(void *handle, void *buf, int bytes)
-> +{
-> +       return 0;
-> +}
-> +
-> +static int tftp_write(void *handle, struct pbuf *p)
-> +{
-> +       struct tftp_ctx *ctx = handle;
-> +       struct pbuf *q;
-> +
-> +       for (q = p; q != NULL; q = q->next) {
-> +               memcpy((void *)ctx->daddr, q->payload, q->len);
-> +               ctx->daddr += q->len;
-> +               ctx->size += q->len;
-> +               ctx->block_count++;
-> +               if (ctx->block_count % 10 == 0) {
-> +                       putc('#');
-> +                       if (ctx->block_count % (65 * 10) == 0)
-> +                               puts("\n\t ");
-> +               }
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +static void tftp_error(void *handle, int err, const char *msg, int size)
-> +{
-> +       struct tftp_ctx *ctx = handle;
-> +       char message[100];
-> +
-> +       ctx->done = FAILURE;
-> +       memset(message, 0, sizeof(message));
-> +       memcpy(message, msg, LWIP_MIN(sizeof(message) - 1, (size_t)size));
-> +
-> +       printf("\nTFTP error: %d (%s)\n", err, message);
-> +}
-> +
-> +static const struct tftp_context tftp_context = {
-> +       tftp_open,
-> +       tftp_close,
-> +       tftp_read,
-> +       tftp_write,
-> +       tftp_error
-> +};
-> +
-> +static int tftp_loop(struct udevice *udev, ulong addr, char *fname,
-> +                    ip_addr_t srvip, uint16_t srvport)
-> +{
-> +       struct netif *netif;
-> +       struct tftp_ctx ctx;
-> +       err_t err;
-> +
-> +       if (!fname || addr == 0)
-> +               return -1;
-> +
-> +       if (!srvport)
-> +               srvport = TFTP_PORT;
-> +
-> +       netif = net_lwip_new_netif(udev);
-> +       if (!netif)
-> +               return -1;
-> +
-> +       ctx.done = NOT_DONE;
-> +       ctx.size = 0;
-> +       ctx.block_count = 0;
-> +       ctx.daddr = addr;
-> +
-> +       printf("Using %s device\n", udev->name);
-> +       printf("TFTP from server %s; our IP address is %s\n",
-> +                ip4addr_ntoa(&srvip), env_get("ipaddr"));
-> +       printf("Filename '%s'.\n", fname);
-> +       printf("Load address: 0x%lx\n", ctx.daddr);
-> +       printf("Loading: ");
-> +
-> +       err = tftp_init_client(&tftp_context);
-> +       if (!(err == ERR_OK || err == ERR_USE))
-> +               log_err("tftp_init_client err: %d\n", err);
-> +
-> +       ctx.start_time = get_timer(0);
-> +       err = tftp_get(&ctx, &srvip, srvport, fname, TFTP_MODE_OCTET);
-> +       /* might return different errors, like routing problems */
-> +       if (err != ERR_OK) {
-> +               printf("tftp_get() error %d\n", err);
-> +               net_lwip_remove_netif(netif);
-> +               return -1;
-> +       }
-> +
-> +       while (!ctx.done) {
-> +               net_lwip_rx(udev, netif);
-> +               sys_check_timeouts();
-> +               if (ctrlc()) {
-> +                       printf("\nAbort\n");
-> +                       ctx.done = ABORTED;
-> +                       break;
-> +               }
-> +       }
-> +
-> +       tftp_cleanup();
-> +
-> +       net_lwip_remove_netif(netif);
-> +
-> +       if (ctx.done == SUCCESS) {
-> +               if (env_set_hex("fileaddr", addr)) {
-> +                       log_err("fileaddr not updated\n");
-> +                       return -1;
-> +               }
-> +               efi_set_bootdev("Net", "", fname, map_sysmem(addr, 0),
-> +                               ctx.size);
-> +               return 0;
-> +       }
-> +
-> +       return -1;
-> +}
->
->  int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
->  {
-> -       /* Not implemented */
-> -       return CMD_RET_FAILURE;
-> +       int ret = CMD_RET_SUCCESS;
-> +       char *arg = NULL;
-> +       char *words[3] = { };
-> +       char *fname = NULL;
-> +       char *server_ip = NULL;
-> +       char *server_port = NULL;
-> +       char *end;
-> +       ip_addr_t srvip;
-> +       uint16_t port = TFTP_PORT;
-> +       ulong laddr;
-> +       ulong addr;
-> +       int i;
-> +
-> +       laddr = env_get_ulong("loadaddr", 16, image_load_addr);
-> +
-> +       switch (argc) {
-> +       case 1:
-> +               fname = env_get("bootfile");
-> +               break;
-> +       case 2:
-> +               /*
-> +                * Only one arg - accept two forms:
-> +                * Just load address, or just boot file name. The latter
-> +                * form must be written in a format which can not be
-> +                * mis-interpreted as a valid number.
-> +                */
-> +               addr = hextoul(argv[1], &end);
-> +               if (end == (argv[1] + strlen(argv[1]))) {
-> +                       laddr = addr;
-> +                       fname = env_get("bootfile");
-> +               } else {
-> +                       arg = strdup(argv[1]);
-> +               }
-> +               break;
-> +       case 3:
-> +               laddr = hextoul(argv[1], NULL);
-> +               arg = strdup(argv[2]);
-> +               break;
-> +       default:
-> +               ret = CMD_RET_USAGE;
-> +               goto out;
-> +       }
-> +
-> +       if (!arg)
-> +               arg = net_boot_file_name;
-> +
-> +       if (arg) {
-> +               /* Parse [ip:[port:]]fname */
-> +               i = 0;
-> +               while ((*(words + i) = strsep(&arg,":")))
-> +                       i++;
-> +
-> +               switch (i) {
-> +               case 3:
-> +                       server_ip = words[0];
-> +                       server_port = words[1];
-> +                       fname = words[2];
-> +                       break;
-> +               case 2:
-> +                       server_ip = words[0];
-> +                       fname = words[1];
-> +                       break;
-> +               case 1:
-> +                       fname = words[0];
-> +                       break;
-> +               default:
-> +                       break;
-> +               }
-> +       }
-> +
-> +       if (!server_ip)
-> +               server_ip = env_get("tftpserverip");
-> +       if (!server_ip)
-> +               server_ip = env_get("serverip");
-> +       if (!server_ip) {
-> +               log_err("error: tftpserverip/serverip has to be set\n");
-> +               ret = CMD_RET_FAILURE;
-> +               goto out;
-> +       }
-> +
-> +       if (server_port)
-> +               port = dectoul(server_port, NULL);
-> +
-> +       if (!ipaddr_aton(server_ip, &srvip)) {
-> +               log_err("error: ipaddr_aton\n");
-> +               ret = CMD_RET_FAILURE;
-> +               goto out;
-> +       }
-> +
-> +       if (!fname) {
-> +               log_err("error: no file name\n");
-> +               ret = CMD_RET_FAILURE;
-> +               goto out;
-> +       }
-> +
-> +       if (!laddr) {
-> +               log_err("error: no load address\n");
-> +               ret = CMD_RET_FAILURE;
-> +               goto out;
-> +       }
-> +
-> +       eth_set_current();
-> +
-> +       if (tftp_loop(eth_get_dev(), laddr, fname, srvip, port) < 0)
-> +               ret = CMD_RET_FAILURE;
-> +out:
-> +       free(arg);
-> +       return ret;
->  }
-> --
-> 2.40.1
->
-
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Tested-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+SGksDQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogTWFyZWsgVmFzdXQg
+PG1hcmV4QGRlbnguZGU+DQo+IFNlbnQ6IEZyaWRheSwgT2N0b2JlciA0LCAyMDI0IDQ6NTIgUE0N
+Cj4gVG86IEFiYmFyYXB1LCBWZW5rYXRlc2ggPHZlbmthdGVzaC5hYmJhcmFwdUBhbWQuY29tPjsg
+dS1ib290QGxpc3RzLmRlbnguZGUNCj4gQ2M6IFNpbWVrLCBNaWNoYWwgPG1pY2hhbC5zaW1la0Bh
+bWQuY29tPjsgZmFicmljZS5nYXNuaWVyQGZvc3Muc3QuY29tOyBnaXQNCj4gKEFNRC1YaWxpbngp
+IDxnaXRAYW1kLmNvbT4NCj4gU3ViamVjdDogUmU6IFtQQVRDSCB2MyAxLzddIHVzYjogb25ib2Fy
+ZC1odWI6IEFkZCByZXNldC1ncGlvIHN1cHBvcnQNCj4gDQo+IE9uIDEwLzQvMjQgNTowMiBBTSwg
+QWJiYXJhcHUsIFZlbmthdGVzaCB3cm90ZToNCj4gPiBIaSBNYXJlaywNCj4gPg0KPiA+PiAtLS0t
+LU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiA+PiBGcm9tOiBNYXJlayBWYXN1dCA8bWFyZXhAZGVu
+eC5kZT4NCj4gPj4gU2VudDogVGh1cnNkYXksIE9jdG9iZXIgMywgMjAyNCAxMDozNSBQTQ0KPiA+
+PiBUbzogQWJiYXJhcHUsIFZlbmthdGVzaCA8dmVua2F0ZXNoLmFiYmFyYXB1QGFtZC5jb20+Ow0K
+PiA+PiB1LWJvb3RAbGlzdHMuZGVueC5kZQ0KPiA+PiBDYzogU2ltZWssIE1pY2hhbCA8bWljaGFs
+LnNpbWVrQGFtZC5jb20+Ow0KPiA+PiBmYWJyaWNlLmdhc25pZXJAZm9zcy5zdC5jb207IGdpdA0K
+PiA+PiAoQU1ELVhpbGlueCkgPGdpdEBhbWQuY29tPg0KPiA+PiBTdWJqZWN0OiBSZTogW1BBVENI
+IHYzIDEvN10gdXNiOiBvbmJvYXJkLWh1YjogQWRkIHJlc2V0LWdwaW8gc3VwcG9ydA0KPiA+Pg0K
+PiA+PiBPbiAxMC8zLzI0IDQ6NTQgUE0sIEFiYmFyYXB1LCBWZW5rYXRlc2ggd3JvdGU6DQo+ID4+
+PiBIaSBNYXJlaywNCj4gPj4+DQo+ID4+Pj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4g
+Pj4+PiBGcm9tOiBNYXJlayBWYXN1dCA8bWFyZXhAZGVueC5kZT4NCj4gPj4+PiBTZW50OiBUaHVy
+c2RheSwgT2N0b2JlciAzLCAyMDI0IDU6MzggUE0NCj4gPj4+PiBUbzogQWJiYXJhcHUsIFZlbmth
+dGVzaCA8dmVua2F0ZXNoLmFiYmFyYXB1QGFtZC5jb20+Ow0KPiA+Pj4+IHUtYm9vdEBsaXN0cy5k
+ZW54LmRlDQo+ID4+Pj4gQ2M6IFNpbWVrLCBNaWNoYWwgPG1pY2hhbC5zaW1la0BhbWQuY29tPjsN
+Cj4gPj4+PiBmYWJyaWNlLmdhc25pZXJAZm9zcy5zdC5jb207IGdpdA0KPiA+Pj4+IChBTUQtWGls
+aW54KSA8Z2l0QGFtZC5jb20+DQo+ID4+Pj4gU3ViamVjdDogUmU6IFtQQVRDSCB2MyAxLzddIHVz
+Yjogb25ib2FyZC1odWI6IEFkZCByZXNldC1ncGlvDQo+ID4+Pj4gc3VwcG9ydA0KPiA+Pj4+DQo+
+ID4+Pj4gT24gMTAvMy8yNCA2OjQwIEFNLCBBYmJhcmFwdSwgVmVua2F0ZXNoIHdyb3RlOg0KPiA+
+Pj4+PiBIaSBNYXJlaywNCj4gPj4+Pg0KPiA+Pj4+IEhpLA0KPiA+Pj4+DQo+ID4+Pj4+Pj4gQEAg
+LTMwLDcgKzQwLDI0IEBAIHN0YXRpYyBpbnQgdXNiX29uYm9hcmRfaHViX3Byb2JlKHN0cnVjdA0K
+PiA+Pj4+Pj4+IHVkZXZpY2UNCj4gPj4gKmRldikNCj4gPj4+Pj4+PiAgICAgIAlpZiAocmV0KQ0K
+PiA+Pj4+Pj4+ICAgICAgCQlkZXZfZXJyKGRldiwgImNhbid0IGVuYWJsZSB2ZGQtc3VwcGx5OiAl
+ZFxuIiwgcmV0KTsNCj4gPj4+Pj4+Pg0KPiA+Pj4+Pj4+IC0JcmV0dXJuIHJldDsNCj4gPj4+Pj4+
+PiArCWh1Yi0+cmVzZXRfZ3BpbyA9IGRldm1fZ3Bpb2RfZ2V0X29wdGlvbmFsKGRldiwgInJlc2V0
+IiwNCj4gPj4+Pj4+PiArCQkJCQkJICBHUElPRF9JU19PVVQgfA0KPiA+Pj4+Pj4gR1BJT0RfQUNU
+SVZFX0xPVyk7DQo+ID4+Pj4+Pj4gKwkvKiBwcm9wZXJ0eSBpcyBvcHRpb25hbCwgZG9uJ3QgcmV0
+dXJuIGVycm9yISAqLw0KPiA+Pj4+Pj4+ICsJaWYgKGh1Yi0+cmVzZXRfZ3Bpbykgew0KPiA+Pj4+
+Pj4NCj4gPj4+Pj4+IGlmICghaHViLT5yZXNldF9ncGlvKQ0KPiA+Pj4+Pj4gICAgICAgcmV0dXJu
+IDA7DQo+ID4+Pj4+IDxWZW5rYXRlc2g+IEFzIHJlc2V0X2dwaW8gaXMgb3B0aW9uYWwgcHJvcGVy
+dHksICBieSByZXR1cm5pbmcgMA0KPiA+Pj4+PiB0aGUgaTJjIHNlcXVlbmNlDQo+ID4+Pj4gd29u
+dCBiZSBleGVjdXRlZC4NCj4gPj4+PiBUaGUgY29kZSBpbiBpZiAoaHViLT5yZXNldF9ncGlvKSB7
+IC4uLiB9IG9ubHkgdG9nZ2xlcyB0aGUgR1BJTyByZXNldCA/DQo+ID4+PiA8VmVua2F0ZXNoPiBZ
+ZXMuLi5pZihodWItPnJlc2V0X2dwaW8pIG9ubHkgdG9nZ2xlcyB0aGUgR1BJTyByZXNldC4NCj4g
+Pj4gU28geW91IGNhbiByZXR1cm4gMCBpZiByZXNldF9ncGlvIGlzIE5VTEwgYW5kIGV4aXQgZWFy
+bHkgLiBXaGF0J3MgdGhlIHByb2JsZW0gPw0KPiA+IDxWZW5rYXRlc2g+IGlmIHJlc2V0X2dwaW8g
+aXMgTlVMTCBieSByZXR1cm5pbmcgMCB3ZSBtaXNzIHRoZSBiZWxvdyBjb2RlIHdoaWNoDQo+IGRv
+ZXMgaTJjIGluaXRpYWxpemF0aW9uIHNlcXVlbmNlLg0KPiA+IE5lZWQgdG8gdG9nZ2xlIHRoZSBn
+cGlvIGFuZCB0aGVuIGRvZXMgdGhlIGkyYyBzZXF1ZW5jZSBpZiB0aGUgcmVzZXRfZ3BpbyBpcw0K
+PiBwcmVzZW50LCBlbHNlIHdlIGRvIHRoZSBpMmMgaW5pdGlhbGl6YXRpb24gc2VxdWVuY2UuDQo+
+IA0KPiBQbGVhc2Ugc2hvdyBtZSB0aGUgaTJjIHNlcXVlbmNlIHRoYXQgaXMgbWlzc2VkIGluIHRo
+aXMgcGF0Y2ggaHVuazoNCj4gDQo+ICsJaWYgKGh1Yi0+cmVzZXRfZ3Bpbykgew0KPiArCQlyZXQg
+PSBkbV9ncGlvX3NldF92YWx1ZShodWItPnJlc2V0X2dwaW8sIDEpOw0KPiArCQlpZiAocmV0KQ0K
+PiArCQkJcmV0dXJuIHJldDsNCj4gKw0KPiArCQl1ZGVsYXkoZGF0YS0+cmVzZXRfdXMpOw0KPiAr
+DQo+ICsJCXJldCA9IGRtX2dwaW9fc2V0X3ZhbHVlKGh1Yi0+cmVzZXRfZ3BpbywgMCk7DQo+ICsJ
+CWlmIChyZXQpDQo+ICsJCQlyZXR1cm4gcmV0Ow0KPiArDQo+ICsJCXVkZWxheShkYXRhLT5wb3dl
+cl9vbl9kZWxheV91cyk7DQo+ICsJfQ0KPiArDQo+ICsJcmV0dXJuIDA7DQoNClRoZSBpMmMgc2Vx
+dWVuY2UgY2hhbmdlIGlzIHBhcnQgb2YgICBbUEFUQ0ggdjQgNC83XSB1c2I6IG9uYm9hcmQtaHVi
+OiBBZGQgaTJjIGluaXRpYWxpemF0aW9uIGZvciB1c2I1NzQ0IGh1YiBvZiB0aGUgc2VyaWVzDQoN
+CisJaWYgKGRhdGEtPmluaXQpIHsNCisJCXJldCA9IGRhdGEtPmluaXQoZGV2KTsNCisJCWlmIChy
+ZXQpIHsNCisJCQlkZXZfZXJyKGRldiwgIm9uYm9hcmQgaTJjIGluaXQgZmFpbGVkOiAlZFxuIiwg
+cmV0KTsNCisJCQlnb3RvIGVycjsNCisJCX0NCisJfQ0KKw0KIAlyZXR1cm4gMDsNCitlcnI6DQor
+CWRtX2dwaW9fc2V0X3ZhbHVlKGh1Yi0+cmVzZXRfZ3BpbywgMCk7DQorCXJldHVybiByZXQ7DQog
+fQ0KDQpUaGFua3MNClZlbmthdGVzaA0K
