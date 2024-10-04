@@ -4,61 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27035CFA76E
-	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 11:35:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 938D5CFA76E
+	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 11:35:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68E6B88C98;
-	Fri,  4 Oct 2024 13:35:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1148588CD9;
+	Fri,  4 Oct 2024 13:35:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1728041726;
-	bh=tkQX4BaBF+HS7v6Kze+Oi+eK/076M9KujGcjm0XFQYs=;
+	s=phobos-20191101; t=1728041727;
+	bh=bt5dPgGabo7/baA8784OIasFR48iwvi/V1ZjLtzxQpA=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=bnqeLkRA82c4/BWSwGfp7oyubYusaNDxhCGrXz9UUkkh0MVw3CqMdbgNVKLrpNNDA
-	 4c67q0zBo1AI3ADDDw6M4gY64OhY0UNGJwrQmMp65iCOl0HgR1Tle49XH6NoJM3ZxP
-	 NtBlRzKOCiZdGS50FqWTz2KCwqaZda/WZZ34YoozOSVnxIIPNw6SuKRHASzG6k20W5
-	 gymcWuhBVmOi235U7gorir6/d1Opr5PeodX2S0YEYGMvSuJfiZRGKXqPyxMUGlJHDH
-	 zCzACe+kzvAbd3yrN4jLb1+LC53eI78QPKlGWcmDTUdQUTZYPf4rMUBpZZSuFUztXe
-	 AZjTspit6t5xg==
+	b=SiEYMuPpA32GtTgFjI9aL0Z8zmK3ajGDuSIQuIb2SmG4tO19FbVGq4/CQPfKIL+oh
+	 OT113lfytAt8rEE6kMpKP5fViXFA/YvVsgdXGliZAQY1Ak61lkCLDPB1c3fuZf+GF4
+	 yFwFmRRsr6ii9nC8Wcbp4Tk5rXRLVsdXVaY0YBKzkfS6LhNvsKoBAoGa3NKtFV6qGa
+	 FQvyK8OFEZC+VVvKRDPr5aBH0OqWc9qNmQ9zLGI1pwMANAwCrdSzvNR242XmylnXBq
+	 hsNzxJuicTbE6jLDmqhpRr7fggZ1ndvr4sckvM5D9jIJln2zNVt4i/DW467ND1YQgV
+	 6/pUZrhWBeykA==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 0B5AE88B86;
- Fri,  4 Oct 2024 13:35:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id CE03088B89;
+ Fri,  4 Oct 2024 13:35:24 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1728041724;
- bh=tkQX4BaBF+HS7v6Kze+Oi+eK/076M9KujGcjm0XFQYs=;
+ s=phobos-20191101; t=1728041725;
+ bh=bt5dPgGabo7/baA8784OIasFR48iwvi/V1ZjLtzxQpA=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=SdfpT28F0i8sHP+bbw+uM+HKf4mxagMZjXllnHHKUQdIa3HnxjcHfQBk8hK/PvUHq
- 6ucfwJUfEAUtp/e1mwgyMiQtE4DPs5Ww9Ei+1aIIs6rebDxlUkfn3R6bEVM90gG9mO
- rIaelTLIHf856KWIICicFAVfqVynJ+cmsQj/94LBSH3bRi6OoLF/5vtwCYe1K0UVc2
- 8CJ6KGGzklLVxaRSBm7JJbf3jMBaTyYF+1Wog9gEdu+H/JIAt/7gkan4riFUlyTnNa
- fI5ZBE3heh7GEEPo1F4XRs1HgFP8cH45dPYo09eK16ID2OzoOPQa5q068cWYNQNTq7
- 088rqH24nn8EQ==
-Message-ID: <45b93c6f-f16d-4db8-b4e1-e4e2f3803e68@denx.de>
-Date: Fri, 4 Oct 2024 13:19:18 +0200
+ b=XATfUHocViZQMLOL4+zgMfyBRicSCIPnIMCBCUuz/TlwwSrzgPN/pzunGLaXJjZGz
+ PR7baqvBwQ7SvCuPe1YxaPh2ZExTtisJSJJAhJ1XvQSGGR+XpmccOjH81V59LQ7vhf
+ DR1HMNBAuXWvMBrSp/MyXrekTu5CNFwiKnEWIAGd2mxG4QN1ETK+ud8uMBMLe8xLPo
+ eSLhjD14nRJeXKgyeThtnuXlSYIk2bROGcC+NG0TuK6JE4Di3Hn/HTtWkHoSkFyF2l
+ KAYqGIViWjTnvDrLpr6xSI7CzVmfD+Ytj0qrQuiUBwOmqoAV7oXFAAJc0JDeK8cCQx
+ txFhtRoWBFvRw==
+Message-ID: <02fe6fab-7e8c-4408-950f-e6df2a258b16@denx.de>
+Date: Fri, 4 Oct 2024 13:21:57 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/3] usb: dwc3: fix dcache flush range calculation
-To: neil.armstrong@linaro.org, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Bin Meng <bmeng.cn@gmail.com>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-References: <20241002-u-boot-dwc3-gadget-dcache-fixup-v3-0-5398088ef93c@linaro.org>
- <20241002-u-boot-dwc3-gadget-dcache-fixup-v3-2-5398088ef93c@linaro.org>
- <e895c917-ca32-4b59-a5d6-7d8e9ce19d84@denx.de>
- <0643911e-e0fa-4faa-aee6-36f536691129@linaro.org>
- <ed50e1a7-193c-493c-a1ee-42d404049c59@denx.de>
- <38d30bce-269c-4caf-b198-e0d72ec58930@linaro.org>
+Subject: Re: [PATCH v3 1/7] usb: onboard-hub: Add reset-gpio support
+To: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Cc: "Simek, Michal" <michal.simek@amd.com>,
+ "fabrice.gasnier@foss.st.com" <fabrice.gasnier@foss.st.com>,
+ "git (AMD-Xilinx)" <git@amd.com>
+References: <20241001050529.17922-1-venkatesh.abbarapu@amd.com>
+ <20241001050529.17922-2-venkatesh.abbarapu@amd.com>
+ <6056a273-2699-4e94-93e8-ddc96084bbba@denx.de>
+ <SA1PR12MB8697873F2C2EF86E6E9DAF9B98712@SA1PR12MB8697.namprd12.prod.outlook.com>
+ <2e0928c8-e03a-44ae-aa36-3d664ed5bc6a@denx.de>
+ <SA1PR12MB8697682FEEE48B015EE82E0398712@SA1PR12MB8697.namprd12.prod.outlook.com>
+ <c40f47cb-7245-43b7-9b01-6b8d1cdff04c@denx.de>
+ <SA1PR12MB869735B41B6F7A86520E2D3D98722@SA1PR12MB8697.namprd12.prod.outlook.com>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <38d30bce-269c-4caf-b198-e0d72ec58930@linaro.org>
+In-Reply-To: <SA1PR12MB869735B41B6F7A86520E2D3D98722@SA1PR12MB8697.namprd12.prod.outlook.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -77,38 +78,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/4/24 9:16 AM, neil.armstrong@linaro.org wrote:
-> On 03/10/2024 15:19, Marek Vasut wrote:
->> On 10/3/24 2:49 PM, Neil Armstrong wrote:
->>> On 02/10/2024 16:55, Marek Vasut wrote:
->>>> On 10/2/24 4:39 PM, Neil Armstrong wrote:
->>>>> The current flush operation will omit doing a flush/invalidate on
->>>>> the first and last bytes if the base address and size are not aligned
->>>>> with DMA_MINALIGN.
->>>>>
->>>>> This causes operation failures Qualcomm platforms.
->>>>>
->>>>> Take in account the alignment and size of the buffer and also
->>>>> flush the previous and last cacheline.
->>>>>
->>>>> Remove CACHELINE_SIZE which was the same as DMA_MINALIGN.
->>>>
->>>> It isn't the same, CACHELINE_SIZE was set to 
->>>> CONFIG_SYS_CACHELINE_SIZE (CPU L1 cache cacheline length) while 
->>>> ARCH_DMA_MINALIGN is DMA engine alignment requirement (from times 
->>>> where there used to be one DMA engine on most devices). You likely 
->>>> want a max(CONFIG_SYS_CACHELINE_SIZE, dwc3-buffer-alignment- 
->>>> requirement) to really correctly align the buffer.
->>>
->>> It is definitely true for platforms declaring dma_alloc_coherent() 
->>> (arm, riscv, x86)
->>> except nios2 but there's 0 chance dwc3 appears on a nios2 platform.
->> There is real chance of that, because on modern SoCFPGA platforms 
->> (Agilex) you can have the FPGA content access the SoC peripherals, and 
->> one of the SoC peripherals is DWC3 controller. If anyone would 
->> actually synthesize it is another question ... but it is an FPGA, so 
->> that option exists.
+On 10/4/24 5:02 AM, Abbarapu, Venkatesh wrote:
+> Hi Marek,
 > 
-> Guess I'll switch to CACHELINE_SIZE instead of DMA_MINALIGN for nios2.
-I think max(CONFIG_SYS_CACHELINE_SIZE, ARCH_DMA_MINALIGN) should cover 
-all the cases ?
+>> -----Original Message-----
+>> From: Marek Vasut <marex@denx.de>
+>> Sent: Thursday, October 3, 2024 10:35 PM
+>> To: Abbarapu, Venkatesh <venkatesh.abbarapu@amd.com>; u-boot@lists.denx.de
+>> Cc: Simek, Michal <michal.simek@amd.com>; fabrice.gasnier@foss.st.com; git
+>> (AMD-Xilinx) <git@amd.com>
+>> Subject: Re: [PATCH v3 1/7] usb: onboard-hub: Add reset-gpio support
+>>
+>> On 10/3/24 4:54 PM, Abbarapu, Venkatesh wrote:
+>>> Hi Marek,
+>>>
+>>>> -----Original Message-----
+>>>> From: Marek Vasut <marex@denx.de>
+>>>> Sent: Thursday, October 3, 2024 5:38 PM
+>>>> To: Abbarapu, Venkatesh <venkatesh.abbarapu@amd.com>;
+>>>> u-boot@lists.denx.de
+>>>> Cc: Simek, Michal <michal.simek@amd.com>;
+>>>> fabrice.gasnier@foss.st.com; git
+>>>> (AMD-Xilinx) <git@amd.com>
+>>>> Subject: Re: [PATCH v3 1/7] usb: onboard-hub: Add reset-gpio support
+>>>>
+>>>> On 10/3/24 6:40 AM, Abbarapu, Venkatesh wrote:
+>>>>> Hi Marek,
+>>>>
+>>>> Hi,
+>>>>
+>>>>>>> @@ -30,7 +40,24 @@ static int usb_onboard_hub_probe(struct udevice
+>> *dev)
+>>>>>>>      	if (ret)
+>>>>>>>      		dev_err(dev, "can't enable vdd-supply: %d\n", ret);
+>>>>>>>
+>>>>>>> -	return ret;
+>>>>>>> +	hub->reset_gpio = devm_gpiod_get_optional(dev, "reset",
+>>>>>>> +						  GPIOD_IS_OUT |
+>>>>>> GPIOD_ACTIVE_LOW);
+>>>>>>> +	/* property is optional, don't return error! */
+>>>>>>> +	if (hub->reset_gpio) {
+>>>>>>
+>>>>>> if (!hub->reset_gpio)
+>>>>>>       return 0;
+>>>>> <Venkatesh> As reset_gpio is optional property,  by returning 0 the
+>>>>> i2c sequence
+>>>> wont be executed.
+>>>> The code in if (hub->reset_gpio) { ... } only toggles the GPIO reset ?
+>>> <Venkatesh> Yes...if(hub->reset_gpio) only toggles the GPIO reset.
+>> So you can return 0 if reset_gpio is NULL and exit early . What's the problem ?
+> <Venkatesh> if reset_gpio is NULL by returning 0 we miss the below code which does i2c initialization sequence.
+> Need to toggle the gpio and then does the i2c sequence if the reset_gpio is present, else we do the i2c initialization sequence.
+
+Please show me the i2c sequence that is missed in this patch hunk:
+
++	if (hub->reset_gpio) {
++		ret = dm_gpio_set_value(hub->reset_gpio, 1);
++		if (ret)
++			return ret;
++
++		udelay(data->reset_us);
++
++		ret = dm_gpio_set_value(hub->reset_gpio, 0);
++		if (ret)
++			return ret;
++
++		udelay(data->power_on_delay_us);
++	}
++
++	return 0;
