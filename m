@@ -4,76 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20963CFA749
-	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 06:25:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0A5DCFA74A
+	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 06:29:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 692B688CE5;
-	Fri,  4 Oct 2024 08:25:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 6187A89015;
+	Fri,  4 Oct 2024 08:29:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="kWoa09Wz";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="U16422up";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1CA04882B7; Fri,  4 Oct 2024 08:25:02 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 2D91388E3F; Fri,  4 Oct 2024 08:29:04 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE9E58907B
- for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 08:24:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1301189034
+ for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 08:28:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4946OwuV112809;
- Fri, 4 Oct 2024 01:24:58 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1728023098;
- bh=h8qu5qsiaPxZrcxMBdzzgAP414UVWrBw5rMXYAcwWDE=;
- h=From:Date:Subject:References:In-Reply-To:To:CC;
- b=kWoa09WzYmbgRLAVcxVE6q/KTSWm1K9QHxq6ARfkv171rrVyIlHOsKdlwQJY+FhXD
- VQ8ekM4IS5bvfO8QUD6TYuMDJdsS7FqfO8vj63Glhgk9a9sZyEJSLwkK20LbpY7cf4
- sIWR5ONGAX5lwG7+8APt/inLtwYB6ebCz6FW99A8=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4946OwgQ020512
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 4 Oct 2024 01:24:58 -0500
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 4
- Oct 2024 01:24:58 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 4 Oct 2024 01:24:57 -0500
-Received: from [127.0.1.1] (uda0497581.dhcp.ti.com [10.24.68.185])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4946OVZ4100112;
- Fri, 4 Oct 2024 01:24:55 -0500
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-Date: Fri, 4 Oct 2024 11:54:35 +0530
-Subject: [PATCH v4 7/7] configs: j721s2_evm_r5_defconfig: Add AVS Configs
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=a5dc=RA=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1728023328;
+ bh=zEexWGtToM65E6oRPV4MWbU5LbaAB03aRLbQHKe6C9M=;
+ b=U16422upYlQZnVVEQ8IIQExmHAWFibagO5Zu7E01erx444wPfb2nZmEZDiJfjCWTZLxWJDt2l
+ 03oQcRPkc8UdEGBmK9rbZE4N2ftqSLXpJX+mwauYFzTvNbUmxYXy1oKO84IeLxl0CVIPlsiR2P7
+ 5ds1BiRgbzRZ1JkSDFV5x+sMP1OvvYb3r3uDs3IgL115RTrPV01LdmiZhGMEGAN/jZwDA3MSqRn
+ mUmdgmXYWo8hRs6GumT3RVG9/GeSoZ0ImWdNMnErIx2TpYiopqnvMxWpvjucbc3OpwRJt0d6+EV
+ afQc/3EjOLTDVIKeJkFn1T67Yv/QUQ+DfmZSzLayhhhA==
+Message-ID: <77265bf8-875e-47dd-92d2-30dcf1bfe73b@kwiboo.se>
+Date: Fri, 4 Oct 2024 08:28:40 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 18/18] rockchip: Provided SPL control over efuse
+ presence
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Caleb Connolly
+ <caleb.connolly@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Kever Yang <kever.yang@rock-chips.com>, =?UTF-8?Q?Marek_Beh=C3=BAn?=
+ <kabel@kernel.org>, Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
+ Stefan Roese <sr@denx.de>, Wan Yee Lau <wan.yee.lau@intel.com>,
+ u-boot@lists.denx.de
+References: <20240920072444.134997-1-sjg@chromium.org>
+ <20240920072444.134997-19-sjg@chromium.org>
+ <538c3d08-4426-4981-bf78-b906a92516e8@kwiboo.se>
+ <20241003222544.GY4737@bill-the-cat>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20241003222544.GY4737@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-ID: <20241004-b4-upstream-j721s2-avs-v4-7-6d71c6bab9f4@ti.com>
-References: <20241004-b4-upstream-j721s2-avs-v4-0-6d71c6bab9f4@ti.com>
-In-Reply-To: <20241004-b4-upstream-j721s2-avs-v4-0-6d71c6bab9f4@ti.com>
-To: Jaehoon Chung <jh80.chung@samsung.com>
-CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Keerthy J
- <j-keerthy@ti.com>, Udit Kumar <u-kumar1@ti.com>, Aniket Limaye
- <a-limaye@ti.com>, Tom Rini <trini@konsulko.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, Andrew Davis <afd@ti.com>,
- Nishanth Menon <nm@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>
-X-Mailer: b4 0.15-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1728023071; l=1498;
- i=m-chawdhry@ti.com; s=20231127; h=from:subject:message-id;
- bh=4UL6EopTHFAzctIUaApMv+bWJ0+CIrAZEA+8WyBLiMQ=;
- b=KZfne6aTw3P3baoE3eicFZ2CLuFe2TwoeHoIJxOX+R3bBcxzwZ1G4vLcZASGbkPbCNLrY8TnL
- adoY70hxJD4CimIfFjNgPI13sKacJmdp75sVRmEdRZYvgijh3/Ux1/E
-X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
- pk=fsr6Tm39TvsTgfyfFQLk+nnqIz2sBA1PthfqqfiiYSs=
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 66ff8b1f04584f0e26feae6b
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,54 +81,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add AVS and PMIC regulator configs
+Hi Tom,
 
-Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
----
- configs/am68_sk_r5_defconfig    | 4 ++++
- configs/j721s2_evm_r5_defconfig | 6 ++++++
- 2 files changed, 10 insertions(+)
+On 2024-10-04 00:25, Tom Rini wrote:
+> On Fri, Sep 20, 2024 at 05:08:52PM +0200, Jonas Karlman wrote:
+>> Hi Simon,
+>>
+>> On 2024-09-20 09:24, Simon Glass wrote:
+>>> This driver should not generally be present in SPL, even if misc devices
+>>> are enabled. Update the Makefile rule accordingly.
+>>>
+>>> Signed-off-by: Simon Glass <sjg@chromium.org>
+>>> ---
+>>>
+>>> (no changes since v1)
+>>>
+>>>  drivers/misc/Makefile | 2 +-
+>>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>>
+>>> diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
+>>> index e53d52c47b3..ff984d7b191 100644
+>>> --- a/drivers/misc/Makefile
+>>> +++ b/drivers/misc/Makefile
+>>> @@ -68,7 +68,7 @@ obj-$(CONFIG_QFW_MMIO) += qfw_mmio.o
+>>>  obj-$(CONFIG_QFW_SMBIOS) += qfw_smbios.o
+>>>  obj-$(CONFIG_SANDBOX) += qfw_sandbox.o
+>>>  endif
+>>> -obj-$(CONFIG_ROCKCHIP_EFUSE) += rockchip-efuse.o
+>>> +obj-$(CONFIG_$(SPL_TPL_)ROCKCHIP_EFUSE) += rockchip-efuse.o
+>>>  obj-$(CONFIG_ROCKCHIP_OTP) += rockchip-otp.o
+>>
+>> Please also include similar change for ROCKCHIP_OTP, the EFUSE and OTP
+>> drivers provide same functionality, just for different Rockchip SoCs.
+> 
+> This is reasonable as a clean-up I believe (and possibly post "xPL"
+> series being merged), to reduce churn.
+> 
 
-diff --git a/configs/am68_sk_r5_defconfig b/configs/am68_sk_r5_defconfig
-index e9b6882c1f68..f4800ef1b8ac 100644
---- a/configs/am68_sk_r5_defconfig
-+++ b/configs/am68_sk_r5_defconfig
-@@ -5,6 +5,10 @@ CONFIG_ARCH_K3=y
- CONFIG_SOC_K3_J721S2=y
- CONFIG_TARGET_J721S2_R5_EVM=y
- 
-+CONFIG_K3_AVS0=n
-+CONFIG_DM_REGULATOR_TPS65941=n
-+CONFIG_PMIC_TPS65941=n
-+
- CONFIG_DEFAULT_DEVICE_TREE="k3-am68-sk-r5-base-board"
- CONFIG_SPL_OF_LIST="k3-am68-sk-r5-base-board"
- CONFIG_OF_LIST="k3-am68-sk-r5-base-board"
-diff --git a/configs/j721s2_evm_r5_defconfig b/configs/j721s2_evm_r5_defconfig
-index b6adb6a77d7e..ad7653c8f99b 100644
---- a/configs/j721s2_evm_r5_defconfig
-+++ b/configs/j721s2_evm_r5_defconfig
-@@ -112,6 +112,7 @@ CONFIG_DM_MAILBOX=y
- CONFIG_K3_SEC_PROXY=y
- CONFIG_FS_LOADER=y
- CONFIG_SPL_FS_LOADER=y
-+CONFIG_K3_AVS0=y
- CONFIG_SUPPORT_EMMC_BOOT=y
- CONFIG_SPL_MMC_HS400_SUPPORT=y
- CONFIG_MMC_SDHCI=y
-@@ -141,6 +142,11 @@ CONFIG_SPL_PINCTRL=y
- CONFIG_PINCTRL_SINGLE=y
- CONFIG_POWER_DOMAIN=y
- CONFIG_TI_POWER_DOMAIN=y
-+CONFIG_DM_PMIC=y
-+CONFIG_PMIC_TPS65941=y
-+CONFIG_DM_REGULATOR=y
-+CONFIG_SPL_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_TPS65941=y
- CONFIG_K3_SYSTEM_CONTROLLER=y
- CONFIG_REMOTEPROC_TI_K3_ARM64=y
- CONFIG_RESET_TI_SCI=y
+I was to quick before reading this and have already sent a fix to keep
+these two drivers in sync.
 
--- 
-2.46.0
+https://lore.kernel.org/r/20241004062136.491995-1-jonas@kwiboo.se/
 
+Regards,
+Jonas
