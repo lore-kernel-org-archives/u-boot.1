@@ -4,89 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8382CF8843
-	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 14:59:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2053CF8849
+	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 15:37:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 530B388A4C;
-	Fri,  4 Oct 2024 16:59:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E7FE088B0B;
+	Fri,  4 Oct 2024 17:37:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="erKP2F3m";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id F224988CD1; Fri,  4 Oct 2024 16:59:25 +0200 (CEST)
-Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
- [IPv6:2607:f8b0:4864:20::832])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1728056243;
+	bh=CUgCtroVkOT/9C24CghBrSnp6Tz4evQ7xX1MTiUPhDA=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=wqWSjJE6IErAOqYQWaJh1PjhAgyf6nSX78aDPYCXnhWulU0LL+OR/gk+0+jhv/Y2L
+	 HIs2Q6IxxbTWM1O8l2rwdzRDRt0jnLldiZv3RjhThJwUnSx3cfo3wmle/KK6Rok9X6
+	 VNPWPY+HBmovNL3sQ1fVgxSq5OmXQHN9UP8gHtPbiOhrpKM7hVrIj57OnEy9H2ck8S
+	 pm+nBN8Hi1P/M3QpMrteH4aRpkurFCt0xDZ/cJIL1xyYeiaxgS5H3lBaM8U5ZIKb87
+	 +CAApYGxlkxABe/8vGTZwQI+tE/8ipf00bCw2Td01sVNoG8bfLyNhcvFSWmU9XNC7h
+	 Qpt4cTGg2zjWw==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 72EFE87F19
- for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 16:59:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x832.google.com with SMTP id
- d75a77b69052e-4581e7f31eeso17688881cf.0
- for <u-boot@lists.denx.de>; Fri, 04 Oct 2024 07:59:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1728053962; x=1728658762; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=XF/wuD6cFivD8pHUXcyzeXvz4bn9dKHqt7fZdG+dPtM=;
- b=erKP2F3m9TGnHPZ7QAsbf9gxjvDnjev4ngtWMqoHh52wfm49vipi87b8PRlzDCvvUs
- q3lu7r+Xn2WtOXvnkeRJwtjx7PAsb+53ipMYrPYFQnn/vc3c0+AtpHqsA4et0fARC2/X
- VrqBTa0Prtdr2dcp8M0KEpjLn7/Cagjysrc4o=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728053962; x=1728658762;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XF/wuD6cFivD8pHUXcyzeXvz4bn9dKHqt7fZdG+dPtM=;
- b=fm+dm9iJo0d7OFAsp6JAFq1AYhGB/bm/iwRHwiN9h8aLtw4fWUqZAlQYsf0FMKCsoU
- RkVl2tIuUGeQ2ht6+7tmeo5R2pBixQlYdm5rtym4P+XHoPcJhRaFKslVla0RAhcl51kM
- vzoI/aihENeBgcyVJmlCMBF7O1uBHyhx5p2pMQVOhSTHWJY/s7xQRDzDAxkeST05MbrA
- PZ4rivfLZini+q8zQF62YCcHEJEFUTjFFebwCVQugMoUz794QWQNNW0VIu5SA6AnCvvG
- 25V2f+quwl11musmtnF4zZ2MK5sc41qwyDlKAYlzxdAdsk+Dw9+TrgY3fUmPVo4qbO4D
- Phww==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWy5K0CgBGP4q8D68kSdP6A6xQkkmjHpM4OtgIe/CjJJrSYnI5840kwxt9R6sPnsciTZHpafXY=@lists.denx.de
-X-Gm-Message-State: AOJu0YzWKU/pWhbjcjjgKnx6fsw0cwOXlIxkRFiJz57Byd+Y6Kh2NUUJ
- qteTsPE7VkvYVVmqq0epOMxQnUs+Jh4BoRjkUPSHxGvX8q0un1Aez7bXFRax36k=
-X-Google-Smtp-Source: AGHT+IH8NvAjWZBZs+zFmJahXMSfWqT2AArwagirbl1aZEcFtDFZZ8Jyc1x5RxyJ7wTsDH7d4PTmIQ==
-X-Received: by 2002:ac8:7c55:0:b0:458:59e3:2b52 with SMTP id
- d75a77b69052e-45d9bb4956dmr46644891cf.55.1728053962305; 
- Fri, 04 Oct 2024 07:59:22 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-45d92e137c8sm15624821cf.37.2024.10.04.07.59.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Oct 2024 07:59:21 -0700 (PDT)
-Date: Fri, 4 Oct 2024 08:59:17 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Simon Glass <sjg@chromium.org>, Caleb Connolly <caleb.connolly@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Kever Yang <kever.yang@rock-chips.com>,
- Marek =?iso-8859-1?Q?Beh=FAn?= <kabel@kernel.org>,
- Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
- Stefan Roese <sr@denx.de>, Wan Yee Lau <wan.yee.lau@intel.com>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v2 18/18] rockchip: Provided SPL control over efuse
- presence
-Message-ID: <20241004145917.GA4737@bill-the-cat>
-References: <20240920072444.134997-1-sjg@chromium.org>
- <20240920072444.134997-19-sjg@chromium.org>
- <538c3d08-4426-4981-bf78-b906a92516e8@kwiboo.se>
- <20241003222544.GY4737@bill-the-cat>
- <77265bf8-875e-47dd-92d2-30dcf1bfe73b@kwiboo.se>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 8909388915;
+ Fri,  4 Oct 2024 17:37:21 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1728056241;
+ bh=CUgCtroVkOT/9C24CghBrSnp6Tz4evQ7xX1MTiUPhDA=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=OQMZr1LH6kZf8gvqeF0bXjyfHk3gBpa0tVqOJ1XlTWlP6Mda+3CrWae+hnhtLSMgn
+ aBGhFvDHjzaY2brq6tum7GPEnf7csmkZLhMq90tgH4P2V8AJ23Jq6od9CLff7P4j8W
+ S1TIsE37Wk3jZSA0zUhQ2mV/iwpkND30IEZ6BQCklQuqdl7lEFcoxMmkvoUNjBuWMa
+ dev7Nd08KgLD1UeLKm1yqEoxC4g2WMU248OxUI+mFtefbYJhDcfWKHPDURKlAyw+yL
+ wBvqrVD7XczcyFzGDkokR1o4Gsnnl5mWuWOtpey2JfTMQma6224R/G9WYPTwACRteI
+ 1EKfm/6bg+F9A==
+Message-ID: <a8defc1b-ff26-4ccd-a2bc-dd10bf351684@denx.de>
+Date: Fri, 4 Oct 2024 17:36:43 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="xtpIi6MXZ2gLQd5q"
-Content-Disposition: inline
-In-Reply-To: <77265bf8-875e-47dd-92d2-30dcf1bfe73b@kwiboo.se>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/7] usb: onboard-hub: Add reset-gpio support
+To: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Cc: "Simek, Michal" <michal.simek@amd.com>,
+ "fabrice.gasnier@foss.st.com" <fabrice.gasnier@foss.st.com>,
+ "git (AMD-Xilinx)" <git@amd.com>
+References: <20241001050529.17922-1-venkatesh.abbarapu@amd.com>
+ <20241001050529.17922-2-venkatesh.abbarapu@amd.com>
+ <6056a273-2699-4e94-93e8-ddc96084bbba@denx.de>
+ <SA1PR12MB8697873F2C2EF86E6E9DAF9B98712@SA1PR12MB8697.namprd12.prod.outlook.com>
+ <2e0928c8-e03a-44ae-aa36-3d664ed5bc6a@denx.de>
+ <SA1PR12MB8697682FEEE48B015EE82E0398712@SA1PR12MB8697.namprd12.prod.outlook.com>
+ <c40f47cb-7245-43b7-9b01-6b8d1cdff04c@denx.de>
+ <SA1PR12MB869735B41B6F7A86520E2D3D98722@SA1PR12MB8697.namprd12.prod.outlook.com>
+ <02fe6fab-7e8c-4408-950f-e6df2a258b16@denx.de>
+ <SA1PR12MB86972BBB9F22E0C98AA541A198722@SA1PR12MB8697.namprd12.prod.outlook.com>
+ <d542e169-cc19-4349-bfbe-4d3937da63a8@denx.de>
+ <SA1PR12MB8697DB9C1D374C9D86B4A72D98722@SA1PR12MB8697.namprd12.prod.outlook.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <SA1PR12MB8697DB9C1D374C9D86B4A72D98722@SA1PR12MB8697.namprd12.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,77 +82,152 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 10/4/24 4:57 PM, Abbarapu, Venkatesh wrote:
+> Hi,
+> 
+>> -----Original Message-----
+>> From: Marek Vasut <marex@denx.de>
+>> Sent: Friday, October 4, 2024 7:22 PM
+>> To: Abbarapu, Venkatesh <venkatesh.abbarapu@amd.com>; u-boot@lists.denx.de
+>> Cc: Simek, Michal <michal.simek@amd.com>; fabrice.gasnier@foss.st.com; git
+>> (AMD-Xilinx) <git@amd.com>
+>> Subject: Re: [PATCH v3 1/7] usb: onboard-hub: Add reset-gpio support
+>>
+>> On 10/4/24 2:03 PM, Abbarapu, Venkatesh wrote:
+>>> Hi,
+>>>
+>>>> -----Original Message-----
+>>>> From: Marek Vasut <marex@denx.de>
+>>>> Sent: Friday, October 4, 2024 4:52 PM
+>>>> To: Abbarapu, Venkatesh <venkatesh.abbarapu@amd.com>;
+>>>> u-boot@lists.denx.de
+>>>> Cc: Simek, Michal <michal.simek@amd.com>;
+>>>> fabrice.gasnier@foss.st.com; git
+>>>> (AMD-Xilinx) <git@amd.com>
+>>>> Subject: Re: [PATCH v3 1/7] usb: onboard-hub: Add reset-gpio support
+>>>>
+>>>> On 10/4/24 5:02 AM, Abbarapu, Venkatesh wrote:
+>>>>> Hi Marek,
+>>>>>
+>>>>>> -----Original Message-----
+>>>>>> From: Marek Vasut <marex@denx.de>
+>>>>>> Sent: Thursday, October 3, 2024 10:35 PM
+>>>>>> To: Abbarapu, Venkatesh <venkatesh.abbarapu@amd.com>;
+>>>>>> u-boot@lists.denx.de
+>>>>>> Cc: Simek, Michal <michal.simek@amd.com>;
+>>>>>> fabrice.gasnier@foss.st.com; git
+>>>>>> (AMD-Xilinx) <git@amd.com>
+>>>>>> Subject: Re: [PATCH v3 1/7] usb: onboard-hub: Add reset-gpio
+>>>>>> support
+>>>>>>
+>>>>>> On 10/3/24 4:54 PM, Abbarapu, Venkatesh wrote:
+>>>>>>> Hi Marek,
+>>>>>>>
+>>>>>>>> -----Original Message-----
+>>>>>>>> From: Marek Vasut <marex@denx.de>
+>>>>>>>> Sent: Thursday, October 3, 2024 5:38 PM
+>>>>>>>> To: Abbarapu, Venkatesh <venkatesh.abbarapu@amd.com>;
+>>>>>>>> u-boot@lists.denx.de
+>>>>>>>> Cc: Simek, Michal <michal.simek@amd.com>;
+>>>>>>>> fabrice.gasnier@foss.st.com; git
+>>>>>>>> (AMD-Xilinx) <git@amd.com>
+>>>>>>>> Subject: Re: [PATCH v3 1/7] usb: onboard-hub: Add reset-gpio
+>>>>>>>> support
+>>>>>>>>
+>>>>>>>> On 10/3/24 6:40 AM, Abbarapu, Venkatesh wrote:
+>>>>>>>>> Hi Marek,
+>>>>>>>>
+>>>>>>>> Hi,
+>>>>>>>>
+>>>>>>>>>>> @@ -30,7 +40,24 @@ static int usb_onboard_hub_probe(struct
+>>>>>>>>>>> udevice
+>>>>>> *dev)
+>>>>>>>>>>>        	if (ret)
+>>>>>>>>>>>        		dev_err(dev, "can't enable vdd-supply: %d\n", ret);
+>>>>>>>>>>>
+>>>>>>>>>>> -	return ret;
+>>>>>>>>>>> +	hub->reset_gpio = devm_gpiod_get_optional(dev, "reset",
+>>>>>>>>>>> +						  GPIOD_IS_OUT |
+>>>>>>>>>> GPIOD_ACTIVE_LOW);
+>>>>>>>>>>> +	/* property is optional, don't return error! */
+>>>>>>>>>>> +	if (hub->reset_gpio) {
+>>>>>>>>>>
+>>>>>>>>>> if (!hub->reset_gpio)
+>>>>>>>>>>         return 0;
+>>>>>>>>> <Venkatesh> As reset_gpio is optional property,  by returning 0
+>>>>>>>>> the i2c sequence
+>>>>>>>> wont be executed.
+>>>>>>>> The code in if (hub->reset_gpio) { ... } only toggles the GPIO reset ?
+>>>>>>> <Venkatesh> Yes...if(hub->reset_gpio) only toggles the GPIO reset.
+>>>>>> So you can return 0 if reset_gpio is NULL and exit early . What's the problem ?
+>>>>> <Venkatesh> if reset_gpio is NULL by returning 0 we miss the below
+>>>>> code which
+>>>> does i2c initialization sequence.
+>>>>> Need to toggle the gpio and then does the i2c sequence if the
+>>>>> reset_gpio is
+>>>> present, else we do the i2c initialization sequence.
+>>>>
+>>>> Please show me the i2c sequence that is missed in this patch hunk:
+>>>>
+>>>> +	if (hub->reset_gpio) {
+>>>> +		ret = dm_gpio_set_value(hub->reset_gpio, 1);
+>>>> +		if (ret)
+>>>> +			return ret;
+>>>> +
+>>>> +		udelay(data->reset_us);
+>>>> +
+>>>> +		ret = dm_gpio_set_value(hub->reset_gpio, 0);
+>>>> +		if (ret)
+>>>> +			return ret;
+>>>> +
+>>>> +		udelay(data->power_on_delay_us);
+>>>> +	}
+>>>> +
+>>>> +	return 0;
+>>>
+>>> The i2c sequence change is part of   [PATCH v4 4/7] usb: onboard-hub: Add i2c
+>> initialization for usb5744 hub of the series
+>>>
+>>> +	if (data->init) {
+>>> +		ret = data->init(dev);
+>>> +		if (ret) {
+>>> +			dev_err(dev, "onboard i2c init failed: %d\n", ret);
+>>> +			goto err;
+>>> +		}
+>>> +	}
+>>> +
+>>>    	return 0;
+>>> +err:
+>>> +	dm_gpio_set_value(hub->reset_gpio, 0);
+>>> +	return ret;
+>>>    }
+>> This does not seem to be part of the if (hub->reset_gpio) { ... } code block ?
+> Yes...this is not part of the if (hub->reset_gpio) {...} code block.
+> As I explained above if reset_gpio is NULL by returning 0 we miss the code which
+>   does i2c initialization sequence which is part of [PATCH v4 4/7] usb: onboard-hub: Add i2c
+>   initialization for usb5744 hub of the series.
+> 
+> The sequence is "Toggle the gpio and then do the i2c initialization sequence if the
+> reset_gpio is present, else we do only the i2c initialization sequence".
+In that case, pull the GPIO handling into a dedicated function:
 
---xtpIi6MXZ2gLQd5q
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+usb_onboard_hub_reset()
+{
+  reset_gpio = devm_gpiod_get_optional(...)
+  if (!reset_gpio)
+    return 0;
+  // toggle reset here
+  ...
+  hub->reset_gpio = reset_gpio;
+  return 0;
+}
 
-On Fri, Oct 04, 2024 at 08:28:40AM +0200, Jonas Karlman wrote:
-> Hi Tom,
->=20
-> On 2024-10-04 00:25, Tom Rini wrote:
-> > On Fri, Sep 20, 2024 at 05:08:52PM +0200, Jonas Karlman wrote:
-> >> Hi Simon,
-> >>
-> >> On 2024-09-20 09:24, Simon Glass wrote:
-> >>> This driver should not generally be present in SPL, even if misc devi=
-ces
-> >>> are enabled. Update the Makefile rule accordingly.
-> >>>
-> >>> Signed-off-by: Simon Glass <sjg@chromium.org>
-> >>> ---
-> >>>
-> >>> (no changes since v1)
-> >>>
-> >>>  drivers/misc/Makefile | 2 +-
-> >>>  1 file changed, 1 insertion(+), 1 deletion(-)
-> >>>
-> >>> diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
-> >>> index e53d52c47b3..ff984d7b191 100644
-> >>> --- a/drivers/misc/Makefile
-> >>> +++ b/drivers/misc/Makefile
-> >>> @@ -68,7 +68,7 @@ obj-$(CONFIG_QFW_MMIO) +=3D qfw_mmio.o
-> >>>  obj-$(CONFIG_QFW_SMBIOS) +=3D qfw_smbios.o
-> >>>  obj-$(CONFIG_SANDBOX) +=3D qfw_sandbox.o
-> >>>  endif
-> >>> -obj-$(CONFIG_ROCKCHIP_EFUSE) +=3D rockchip-efuse.o
-> >>> +obj-$(CONFIG_$(SPL_TPL_)ROCKCHIP_EFUSE) +=3D rockchip-efuse.o
-> >>>  obj-$(CONFIG_ROCKCHIP_OTP) +=3D rockchip-otp.o
-> >>
-> >> Please also include similar change for ROCKCHIP_OTP, the EFUSE and OTP
-> >> drivers provide same functionality, just for different Rockchip SoCs.
-> >=20
-> > This is reasonable as a clean-up I believe (and possibly post "xPL"
-> > series being merged), to reduce churn.
-> >=20
->=20
-> I was to quick before reading this and have already sent a fix to keep
-> these two drivers in sync.
->=20
-> https://lore.kernel.org/r/20241004062136.491995-1-jonas@kwiboo.se/
+usb_onboard_hub_probe()
+{
+...
+   ret = usb_onboard_hub_reset()
+   if (ret) ...
 
-Ah, thanks.
-
---=20
-Tom
-
---xtpIi6MXZ2gLQd5q
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcAAr4ACgkQFHw5/5Y0
-tyydvgv/Qy1zvB8S5JXmC5zqdVERBHjfq3cHM+ZP4w1RXWWY3x33ji9it4Y2742L
-qIY5ZPtAAkYNqgzR8vRW8MhGjlRSDEKWewdziXhgElEVTFvD8oO3b32s1GHZPQ2X
-xXNeCU57ZlQTlsgv/1CpRn7DKFyczt+j/YGxZtTEQCoD/d2dkS6acBnSifTgEdJZ
-36jiHeG0Y6PskWhPkjLrSo+a5MxoE3YQHii7U1Aq/yF13dxzlZ2sAJl2QDiS0ycI
-uEmC0NSEAe73lS1DQX6FcX74OWbzJYjdc9bqPzAgMSVoLsj+FPKXTQ5r//2YLtPS
-VcYOArouPssF7WN4Zz+k8YliU0REbXa0dvOlkvPDaRlrUrOQbZfvXt4+nhVrG7C2
-gaWNAuq63bBR2d8vlz1IedHED8HfoQkQ6oFWxWMTUTkfibMlGjaTsT0sdEFq45ac
-A1qWMpOxyzZZLhelTxg6zm6OmoJJS96drAPa8H+8RW2m7nYp6pKIlSPFrsxNBxo7
-hZVxNx1W
-=E0HR
------END PGP SIGNATURE-----
-
---xtpIi6MXZ2gLQd5q--
+   // do i2c stuff later
+   return 0;
+}
