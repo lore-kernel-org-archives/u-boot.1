@@ -4,81 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5F39CFA74C
-	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 09:38:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C15DCFA74C
+	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 09:56:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1DF9C88875;
-	Fri,  4 Oct 2024 11:38:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9DEE288B99;
+	Fri,  4 Oct 2024 11:56:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="h2+2jYsc";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Q7RrOGVS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99DE588580; Fri,  4 Oct 2024 11:38:15 +0200 (CEST)
-Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
- [IPv6:2607:f8b0:4864:20::529])
+ id AFC3888BDE; Fri,  4 Oct 2024 11:56:09 +0200 (CEST)
+Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
+ [IPv6:2a00:1450:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 54F558899C
- for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 11:38:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5541A88B86
+ for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 11:56:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x529.google.com with SMTP id
- 41be03b00d2f7-7db1f0e1641so572528a12.1
- for <u-boot@lists.denx.de>; Fri, 04 Oct 2024 02:38:13 -0700 (PDT)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-2facf48157dso21387291fa.2
+ for <u-boot@lists.denx.de>; Fri, 04 Oct 2024 02:56:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728034692; x=1728639492; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1728035767; x=1728640567; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xYnTS8RHQM3oXL3sRihWNXdysht3eLew3mo97X/d/0k=;
- b=h2+2jYscopcpRWeK+OnDBKz5tdyicv+N1K+3KtnL7E4F+WA0fHQwBSUsfyPRaKS2WS
- Ej2SAF4CCJn+XiovjnW1Tded0RdihIAmpWYYTMeVO7+QsDZjuaYpUEf4CUmnBMzZUS6R
- voCU+x0E85XvtZuOlUuhtn9HbJW3YhWDXRv9f9+fiWhNsZ0/zgetunGnwg3avOYJP8wv
- CLAmwzDTJOO4dooPRA1S4AhV4zqYFTkHfMKmlKDCx+g9G+1oDu5NM1oZxhcizguP0eAo
- 0Um3Cn9R8tXkDmMvH3RRkJdVMtMLx3MA/7u9Ye0/GmVwXPITyTiQXNCtSppknew9C/9l
- q2YA==
+ bh=FwVakM+pkUcZkt4Atl/43RbWpjfUB5qyeLJY3QZvWI4=;
+ b=Q7RrOGVSHEAjCDQyv/L5uPrUCJnkIngcarYFcA7u5MkNPq1qkVNHyd5A7gwZnFIgM1
+ xxFJqpA4fzEbRX1m/OCvg4k7x/YeHN/rIDTu+23Nn8uKWxrRXs2Aq1qDz023JeAwAEfn
+ 5+Aj34y2u6u/4zkOhXtZqAAY9HZE2Ooy/WEtUSFv33tk8zjJ4Azqtax1zP+6lkCJVtwi
+ vVdvWsuoutz0CkFjLUbFmYflPSjAqISFpPzRERuE7Ac5dwnx0WLYtu0cgqtlELWq6ifT
+ TPYWNkkiLlrf7CZTv9uSuj3gcERQXT9gQSKZiNB7ZAEKdmP1Zx3IOH9isCEw4OiCgjoj
+ Drow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728034692; x=1728639492;
+ d=1e100.net; s=20230601; t=1728035767; x=1728640567;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=xYnTS8RHQM3oXL3sRihWNXdysht3eLew3mo97X/d/0k=;
- b=gBBgXIWZjDHCeNAGoLfuFlQx5wKptm2Wa//DD0y2bAVKBlTEhShO2GiA02kLF0IiAP
- ixNVMV2j/2jf9B3jIWZnCSM9Vy3hJEZTt6vF0V2vfiwjtyc2ec0DT5+WqjsJAPSPT5pp
- kq33QuF1gXxXhNE34kJyFXyLzpgfE6m875AIaOQe0qEcTd67/2rxdr81zKuxyv5S+Zc3
- DumYh24aSA05e4TEK4CazP9yVgZOolUQL+VDZnFTDpqA4spscqibGWhkbYbso2vq3o7e
- YACdPsACfWx5bSwk/zc2V3dMT7CRsVm5v4TzKQQ+UtdOOUmJa7sOz4LiiKSS4GyshaQK
- w9yw==
-X-Gm-Message-State: AOJu0YwFLYMUucpBHKEATlXE2U6GfMZj9Eys5ZSjihuoD91ANkNnQcKr
- WOjHA7oN0CLFh+UB9eryKzJBiCDhteDd1emOHcXDAVON/g6I4QuVUTbK7hutKaEbqdXKXDiQdtR
- NXQ/A3xH73tVwho406t9Cp+lIpRowFmvG1ndSgw==
-X-Google-Smtp-Source: AGHT+IHzc1W9JlyawXB+nBpMh1Rs4/15DP42V57PAR/XqBEEFCGzOC9o89f9mXnsgXbnDTwY01s6U4ZLmjp4/muYrAY=
-X-Received: by 2002:a05:6a20:e615:b0:1d2:e8a5:689b with SMTP id
- adf61e73a8af0-1d6dfa38d59mr3193004637.14.1728034691692; Fri, 04 Oct 2024
- 02:38:11 -0700 (PDT)
+ bh=FwVakM+pkUcZkt4Atl/43RbWpjfUB5qyeLJY3QZvWI4=;
+ b=GwH1X5UvDC1wJGeJ5O2wd5eXD2BafOKWDhGujru07iNHcLh2dGjJ1mrclo/agohgf7
+ pogHv+Xb05UtbJjsYhqCIo/MDFhI9hLFtFCOUMDqS6+GEx6SSSeja0atKV27Gkyp00bb
+ V/rBrzNb+K2a3Rxi1bCRrjdE3Kc3TBuRJ0FtRYt/OMGLpjVi/os7VOLhOC/U+KZa7gdn
+ vLGdpM15fZo1PdOtbrQkDOIGNj0p6HEHPnPkPq0K9HOWy7YBKZ2XBqVsdhh/CnHyen4O
+ kJfgwL9GHDm/IMtMUbknJtoxFpYyJyGTaTnXkoH0POrfuvJ5OGPtoEg90tHeUa05nwby
+ UC7Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW3MVSRo29qBAgOF0OyjW59AYSnyNVW3DO3lz9gNbHnEmjfxp/AhS0tGbaeJYqX5vkmUOsfgfw=@lists.denx.de
+X-Gm-Message-State: AOJu0YyxGhmYdvFAHEWIeazkeXqFLwzdyV+g9gI+8v3lJg7HpO8t7U9b
+ ywaim14Z077CmL1CYIxAbe6QP7CfoisF34zAtuALhMBZlaG5H+OfitpirM6ncDxzcXDmhTJ9Sy1
+ bhtE6Kw2YIaVtxFKVxCb/jklo1go8zw==
+X-Google-Smtp-Source: AGHT+IHhnkNQIHa0SO2K43BDWx3i33oAk9w6i2jnP2G2F3qRHeCL2uJacA3mszoX2EETXxMqS0ThENQ26pQxa1yU6Ks=
+X-Received: by 2002:a05:651c:316:b0:2fa:dc24:a346 with SMTP id
+ 38308e7fff4ca-2faf3c1c72bmr8677371fa.21.1728035766188; Fri, 04 Oct 2024
+ 02:56:06 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1727968902.git.jerome.forissier@linaro.org>
- <2e8206d8bbd7d3140cf2734ca9b3fcd12ced4f14.1727968902.git.jerome.forissier@linaro.org>
- <CAC_iWjLTVV=QpfgGMTSJ205JGRzNDkBuJeO9GwEW4D4PhrJWrw@mail.gmail.com>
- <e9c3ac80-84f0-4900-85fc-b9af4ebc5363@linaro.org>
-In-Reply-To: <e9c3ac80-84f0-4900-85fc-b9af4ebc5363@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 4 Oct 2024 12:37:35 +0300
-Message-ID: <CAC_iWjLS21x3ZOGDnvWWj4y1Hfs_vuw=YnMRZCSAaL42mYYGXg@mail.gmail.com>
-Subject: Re: [PATCH v11 06/29] test: boot: fix bootflow_cmd_label for when
- DSA_SANDBOX is disabled
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Javier Tia <javier.tia@linaro.org>, 
- Raymond Mao <raymond.mao@linaro.org>, Maxim Uvarov <muvarov@gmail.com>, 
- Tim Harvey <tharvey@gateworks.com>, Anton Antonov <Anton.Antonov@arm.com>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Francis Laniel <francis.laniel@amarulasolutions.com>
+References: <20241002180853.227389-1-pbrobinson@gmail.com>
+ <D4MWH0M95LGZ.2J0ZCBEC3YUJJ@cknow.org>
+In-Reply-To: <D4MWH0M95LGZ.2J0ZCBEC3YUJJ@cknow.org>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Fri, 4 Oct 2024 10:55:54 +0100
+Message-ID: <CALeDE9Oov_V+_BWVZX4fRxsxZsbpXh2B3XxmQ-aFPqsek5b5cQ@mail.gmail.com>
+Subject: Re: [PATCH] Update the ARM trusted firmware git URL
+To: Diederik de Haas <didi.debian@cknow.org>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,70 +88,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 4 Oct 2024 at 11:46, Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
->
->
->
-> On 10/4/24 08:55, Ilias Apalodimas wrote:
-> > Hi Jerome,
-> >
-> > On Thu, 3 Oct 2024 at 18:23, Jerome Forissier
-> > <jerome.forissier@linaro.org> wrote:
-> >>
-> >> When DSA_SANDBOX is not set, the sandbox tests fail as follows:
-> >>
-> >>  $ ./test/py/test.py --build-dir=$(pwd) -k bootdev_test_any
-> >>  [...]
-> >>  Scanning for bootflows with label '9'
-> >>  [...]
-> >>  Cannot find '9' (err=-19)
-> >>
-> >> This is due to the device list containing two less entries than
-> >> expected. Therefore, look for label '7' when DSA_SANDBOX is disabled.
-> >>
-> >> The actual use case is NET_LWIP=y (to be introduced in later patches)
-> >> which implies DSA_SANDBOX=n for the time being.
-> >>
-> >> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> >> ---
-> >>  test/boot/bootflow.c | 7 +++++--
-> >>  1 file changed, 5 insertions(+), 2 deletions(-)
-> >>
-> >> diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-> >> index 6ad63afe90a..c440b8eb778 100644
-> >> --- a/test/boot/bootflow.c
-> >> +++ b/test/boot/bootflow.c
-> >> @@ -109,9 +109,12 @@ static int bootflow_cmd_label(struct unit_test_state *uts)
-> >>          * 8   [   ]      OK  mmc       mmc2.bootdev
-> >>          * 9   [ + ]      OK  mmc       mmc1.bootdev
-> >>          * a   [   ]      OK  mmc       mmc0.bootdev
-> >> +        *
-> >> +        * However with CONFIG_DSA_SANDBOX=n we have two less (dsa-test@0 and
-> >> +        * dsa-test@1).
-> >>          */
-> >> -       ut_assertok(run_command("bootflow scan -lH 9", 0));
-> >> -       ut_assert_nextline("Scanning for bootflows with label '9'");
-> >
-> > Shouldn't this under and #ifdef, IS_ENABLED etc?
->
-> In theory yes, but we can avoid the conditional by using index 7 which is always
-> valid, i.e., in all configurations we have at least 7 devices (even 8 actually).
+Hey,
 
-Ok, but I *think* Simon was trying to match the exact out put here,
-not 'at least 7'.
-
-I think we are better off being strict on this test
-
-Thanks
-/Ilias
->
+> > The primary upstream URL for tf-a has moved, in some cases
+> > things like tags are not always pushed to the old URL so
+> > update the URLs to the primary upstream project URL.
 > >
-> >> +       ut_assertok(run_command("bootflow scan -lH 7", 0));
-> >> +       ut_assert_nextline("Scanning for bootflows with label '7'");
-> >>         ut_assert_skip_to_line("(1 bootflow, 1 valid)");
-> >>
-> >>         ut_assertok(run_command("bootflow scan -lH 0", 0));
-> >> --
-> >> 2.40.1
-> >>
+> > Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
+> > ---
+> >  board/rockchip/evb_rk3399/README       | 2 +-
+> >  board/sunxi/README.sunxi64             | 2 +-
+> >  common/spl/Kconfig                     | 2 +-
+> >  doc/README.rockchip                    | 2 +-
+> >  doc/README.uniphier                    | 2 +-
+> >  doc/board/armltd/juno.rst              | 2 +-
+> >  doc/board/bsh/imx8mn_bsh_smm_s2.rst    | 2 +-
+> >  doc/board/hisilicon/hikey.rst          | 4 ++--
+> >  doc/board/hisilicon/hikey960.rst       | 4 ++--
+> >  doc/board/kontron/pitx-imx8m.rst       | 2 +-
+> >  doc/board/rockchip/rockchip.rst        | 2 +-
+> >  doc/board/variscite/imx8mn_var_som.rst | 2 +-
+> >  include/atf_common.h                   | 2 +-
+> >  tools/binman/entries.rst               | 2 +-
+> >  tools/binman/etype/atf_bl31.py         | 2 +-
+> >  tools/binman/fip_util.py               | 4 ++--
+> >  16 files changed, 19 insertions(+), 19 deletions(-)
+> >
+> > diff --git a/board/rockchip/evb_rk3399/README b/board/rockchip/evb_rk3399/README
+> > index c6f58203ebe..c7caf1756d6 100644
+> > --- a/board/rockchip/evb_rk3399/README
+> > +++ b/board/rockchip/evb_rk3399/README
+> > @@ -31,7 +31,7 @@ Get the Source and prebuild binary
+> >
+> >    > mkdir ~/evb_rk3399
+> >    > cd ~/evb_rk3399
+> > -  > git clone https://github.com/ARM-software/arm-trusted-firmware.git
+> > +  > git clone https://github.com/TrustedFirmware-A/trusted-firmware-a.git
+> >    > git clone https://github.com/rockchip-linux/rkbin.git
+> >    > git clone https://github.com/rockchip-linux/rkdeveloptool.git
+> >
+>
+> I already mentioned this on IRC, but figured that this may be a better
+> way to communicate it.
+
+Yes, you didn't mention me so I didn't see a ping on the channel :)
+
+> This patch seems incomplete as the git repo's name has changed, but not
+> all the instructions which reference it.
+
+Thanks for catching this, will review and do a follow up.
+
+> So for example in this patch, this is the code that follows:
+>
+> > Compile ATF
+> > ===========
+> >
+> >   > cd arm-trusted-firmware
+> >   > make realclean
+>
+> That ``cd`` command doesn't work as it should be ``cd trusted-firmware-a``.
+>
+> This is just an example as this issue is present in more files (which
+> were modified by this patch).
+>
+> Optionally you could consider if in f.e. ``tools/binman/fip_util.py``
+> ``srcdir (str): 'arm-trusted-firmware' source directory``
+>
+> should be updated to trusted-firmware-a. Not an error and probably
+> everyone understands what is meant, but for consistency it could be
+> beneficial if they're all updated.
+>
+> > diff --git a/doc/README.rockchip b/doc/README.rockchip
+> > index 84caff8a24d..5fcbbd1d990 100644
+> > --- a/doc/README.rockchip
+> > +++ b/doc/README.rockchip
+> > @@ -73,7 +73,7 @@ Building
+> >
+> >     - Compile ATF
+> >
+> > -     => git clone https://github.com/ARM-software/arm-trusted-firmware.git
+> > +     => git clone https://github.com/TrustedFirmware-A/trusted-firmware-a.git
+> >       => cd arm-trusted-firmware
+> >
+> >       (export cross compiler path for Cortex-M0 MCU likely arm-none-eabi-)
+>
+> This is one of those others that should be updated (and is directly
+> visible on
+> https://source.denx.de/u-boot/u-boot/-/commit/0ec0207fe07356bddb10db717e21c261bebfb989
+>
+> Cheers,
+>   Diederik
