@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31060CFA76E
-	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 11:30:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3934ECFA76B
+	for <u-boot@archiver.kernel.org>; Fri,  4 Oct 2024 11:30:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5DDE788B86;
-	Fri,  4 Oct 2024 13:30:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C238F88B86;
+	Fri,  4 Oct 2024 13:30:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="o6U6OGQW";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="M78ZBk2Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF53C88B89; Fri,  4 Oct 2024 13:30:11 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id 8F0DA88C98; Fri,  4 Oct 2024 13:30:54 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3150288B63
- for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 13:30:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6BC2888B86
+ for <u-boot@lists.denx.de>; Fri,  4 Oct 2024 13:30:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 494BU3Ve019242;
- Fri, 4 Oct 2024 06:30:03 -0500
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 494BUl5A081770;
+ Fri, 4 Oct 2024 06:30:47 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1728041403;
- bh=E/fUCRhTe7ONahk5ofhoiFqfsngGrDYedNIr/iIUNnc=;
+ s=ti-com-17Q1; t=1728041447;
+ bh=LHvR9or07DZ0iVnntL4JRid75yiYnIxyOooYBCoBLC0=;
  h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=o6U6OGQWNDl/vtFzafgB0bj9HtmHz9QeklmHA0th6WZAjASAm9J80NGxCpMo/QU2X
- 1o7FsSFQkbyv7Iu2UvOk/CL5ftBXbdu42GDjFp+pQvlSFLGCN3dyoryUUMjDWG9S/2
- MhPx/qJA1yzleake3IuTmtVNcykZzHS5SWBg1+oI=
-Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 494BU2JB028450
+ b=M78ZBk2YQntP6u+NuaIQfjt8rj6OitzsV/NRmLnVMmQ5671/ijVwDLNcM0fO/Hvl+
+ 739bQW2NrEkLz3GIYLpJvLU8CdPIZRL1Igem3zVAbg4mi3COcp/+u1M6SoeM6eeKm1
+ +uNDuLh4Tkpjs9Cv0bA047+Uh7mBpBGB/B9O+DPQ=
+Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 494BUlfo039819
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 4 Oct 2024 06:30:03 -0500
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 4 Oct 2024 06:30:47 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 4
- Oct 2024 06:30:01 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2024 06:30:46 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 4 Oct 2024 06:30:01 -0500
+ Frontend Transport; Fri, 4 Oct 2024 06:30:47 -0500
 Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 494BU1br067952;
- Fri, 4 Oct 2024 06:30:01 -0500
-Date: Fri, 4 Oct 2024 06:30:01 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 494BUl0f004251;
+ Fri, 4 Oct 2024 06:30:47 -0500
+Date: Fri, 4 Oct 2024 06:30:47 -0500
 From: Nishanth Menon <nm@ti.com>
 To: Manorit Chawdhry <m-chawdhry@ti.com>
 CC: Jaehoon Chung <jh80.chung@samsung.com>, <u-boot@lists.denx.de>, Neha
@@ -57,15 +57,14 @@ CC: Jaehoon Chung <jh80.chung@samsung.com>, <u-boot@lists.denx.de>, Neha
  <u-kumar1@ti.com>, Aniket Limaye <a-limaye@ti.com>, Tom Rini
  <trini@konsulko.com>, Vignesh Raghavendra <vigneshr@ti.com>, Andrew Davis
  <afd@ti.com>
-Subject: Re: [PATCH v4 3/7] arm: dts: k3-j7*-r5: Add MPU clock in clocks
- property
-Message-ID: <20241004113001.h4cshh74q2bqfhqj@frolic>
+Subject: Re: [PATCH v4 7/7] configs: j721s2_evm_r5_defconfig: Add AVS Configs
+Message-ID: <20241004113047.byyl7ms7yr7hkq72@footgear>
 References: <20241004-b4-upstream-j721s2-avs-v4-0-6d71c6bab9f4@ti.com>
- <20241004-b4-upstream-j721s2-avs-v4-3-6d71c6bab9f4@ti.com>
+ <20241004-b4-upstream-j721s2-avs-v4-7-6d71c6bab9f4@ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20241004-b4-upstream-j721s2-avs-v4-3-6d71c6bab9f4@ti.com>
+In-Reply-To: <20241004-b4-upstream-j721s2-avs-v4-7-6d71c6bab9f4@ti.com>
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,99 +83,56 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 11:54-20241004, Manorit Chawdhry wrote:
-> MPU clock had been missing. Distinguish multiple clocks with clock-names
-> and add MPU clock as well.
+> Add AVS and PMIC regulator configs
 > 
 > Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
-
-We have been a bit hacky with GTC - do we want to pull it out as a
-separate IP?
 > ---
->  arch/arm/dts/k3-am69-r5-sk.dts                 | 3 ++-
->  arch/arm/dts/k3-j7200-r5-common-proc-board.dts | 3 ++-
->  arch/arm/dts/k3-j721e-r5.dtsi                  | 3 ++-
->  arch/arm/dts/k3-j721s2-r5.dtsi                 | 3 ++-
->  arch/arm/dts/k3-j784s4-r5-evm.dts              | 3 ++-
->  5 files changed, 10 insertions(+), 5 deletions(-)
+>  configs/am68_sk_r5_defconfig    | 4 ++++
+>  configs/j721s2_evm_r5_defconfig | 6 ++++++
+>  2 files changed, 10 insertions(+)
+> 
+> diff --git a/configs/am68_sk_r5_defconfig b/configs/am68_sk_r5_defconfig
+> index e9b6882c1f68..f4800ef1b8ac 100644
+> --- a/configs/am68_sk_r5_defconfig
+> +++ b/configs/am68_sk_r5_defconfig
+> @@ -5,6 +5,10 @@ CONFIG_ARCH_K3=y
+>  CONFIG_SOC_K3_J721S2=y
+>  CONFIG_TARGET_J721S2_R5_EVM=y
+>  
+> +CONFIG_K3_AVS0=n
+> +CONFIG_DM_REGULATOR_TPS65941=n
+> +CONFIG_PMIC_TPS65941=n
+> +
+>  CONFIG_DEFAULT_DEVICE_TREE="k3-am68-sk-r5-base-board"
+>  CONFIG_SPL_OF_LIST="k3-am68-sk-r5-base-board"
+>  CONFIG_OF_LIST="k3-am68-sk-r5-base-board"
+> diff --git a/configs/j721s2_evm_r5_defconfig b/configs/j721s2_evm_r5_defconfig
+> index b6adb6a77d7e..ad7653c8f99b 100644
+> --- a/configs/j721s2_evm_r5_defconfig
+> +++ b/configs/j721s2_evm_r5_defconfig
+> @@ -112,6 +112,7 @@ CONFIG_DM_MAILBOX=y
+>  CONFIG_K3_SEC_PROXY=y
+>  CONFIG_FS_LOADER=y
+>  CONFIG_SPL_FS_LOADER=y
+> +CONFIG_K3_AVS0=y
+>  CONFIG_SUPPORT_EMMC_BOOT=y
+>  CONFIG_SPL_MMC_HS400_SUPPORT=y
+>  CONFIG_MMC_SDHCI=y
+> @@ -141,6 +142,11 @@ CONFIG_SPL_PINCTRL=y
+>  CONFIG_PINCTRL_SINGLE=y
+>  CONFIG_POWER_DOMAIN=y
+>  CONFIG_TI_POWER_DOMAIN=y
+> +CONFIG_DM_PMIC=y
+> +CONFIG_PMIC_TPS65941=y
+> +CONFIG_DM_REGULATOR=y
+> +CONFIG_SPL_DM_REGULATOR=y
+> +CONFIG_DM_REGULATOR_TPS65941=y
+>  CONFIG_K3_SYSTEM_CONTROLLER=y
+>  CONFIG_REMOTEPROC_TI_K3_ARM64=y
+>  CONFIG_RESET_TI_SCI=y
 
-What about other boards? I think it might be time we refactor r5 view as
-a include file?
 
-> 
-> diff --git a/arch/arm/dts/k3-am69-r5-sk.dts b/arch/arm/dts/k3-am69-r5-sk.dts
-> index 4d6aab5ccc38..13809f82d99a 100644
-> --- a/arch/arm/dts/k3-am69-r5-sk.dts
-> +++ b/arch/arm/dts/k3-am69-r5-sk.dts
-> @@ -26,7 +26,8 @@
->  		power-domains = <&k3_pds 61 TI_SCI_PD_EXCLUSIVE>,
->  				<&k3_pds 202 TI_SCI_PD_EXCLUSIVE>;
->  		resets = <&k3_reset 202 0>;
-> -		clocks = <&k3_clks 61 0>;
-> +		clocks = <&k3_clks 61 0>, <&k3_clks 202 0>;
-> +		clock-names = "gtc", "core";
->  		assigned-clocks = <&k3_clks 61 0>, <&k3_clks 202 0>;
->  		assigned-clock-parents = <&k3_clks 61 2>;
->  		assigned-clock-rates = <200000000>, <2000000000>;
-> diff --git a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-> index 94760c78dd35..f8df14935dbc 100644
-> --- a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-> +++ b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-> @@ -23,7 +23,8 @@
->  				<&k3_pds 202 TI_SCI_PD_EXCLUSIVE>,
->  				<&k3_pds 4 TI_SCI_PD_EXCLUSIVE>;
->  		resets = <&k3_reset 202 0>;
-> -		clocks = <&k3_clks 61 1>;
-> +		clocks = <&k3_clks 61 1>, <&k3_clks 202 2>;
-> +		clock-names = "gtc", "core";
->  		assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>, <&k3_clks 323 0>;
->  		assigned-clock-parents= <0>, <0>, <&k3_clks 323 2>;
->  		assigned-clock-rates = <2000000000>, <200000000>;
-> diff --git a/arch/arm/dts/k3-j721e-r5.dtsi b/arch/arm/dts/k3-j721e-r5.dtsi
-> index fd0d921272c5..688a6cf40892 100644
-> --- a/arch/arm/dts/k3-j721e-r5.dtsi
-> +++ b/arch/arm/dts/k3-j721e-r5.dtsi
-> @@ -20,7 +20,8 @@
->  				<&k3_pds 202 TI_SCI_PD_EXCLUSIVE>,
->  				<&k3_pds 4 TI_SCI_PD_EXCLUSIVE>;
->  		resets = <&k3_reset 202 0>;
-> -		clocks = <&k3_clks 61 1>;
-> +		clocks = <&k3_clks 61 1>, <&k3_clks 202 2>;
-> +		clock-names = "gtc", "core";
->  		assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>;
->  		assigned-clock-rates = <2000000000>, <200000000>;
->  		ti,sci = <&dmsc>;
-> diff --git a/arch/arm/dts/k3-j721s2-r5.dtsi b/arch/arm/dts/k3-j721s2-r5.dtsi
-> index caf696c2d960..634676c8491e 100644
-> --- a/arch/arm/dts/k3-j721s2-r5.dtsi
-> +++ b/arch/arm/dts/k3-j721s2-r5.dtsi
-> @@ -20,7 +20,8 @@
->  				<&k3_pds 202 TI_SCI_PD_EXCLUSIVE>,
->  				<&k3_pds 4 TI_SCI_PD_EXCLUSIVE>;
->  		resets = <&k3_reset 202 0>;
-> -		clocks = <&k3_clks 61 1>;
-> +		clocks = <&k3_clks 61 1>, <&k3_clks 202 0>;
-> +		clock-names = "gtc", "core";
->  		assigned-clocks = <&k3_clks 61 1>, <&k3_clks 202 0>;
->  		assigned-clock-parents = <&k3_clks 61 3>;
->  		assigned-clock-rates = <200000000>, <2000000000>;
-> diff --git a/arch/arm/dts/k3-j784s4-r5-evm.dts b/arch/arm/dts/k3-j784s4-r5-evm.dts
-> index d2c752293630..8b8b0e70047e 100644
-> --- a/arch/arm/dts/k3-j784s4-r5-evm.dts
-> +++ b/arch/arm/dts/k3-j784s4-r5-evm.dts
-> @@ -26,7 +26,8 @@
->  		power-domains = <&k3_pds 61 TI_SCI_PD_EXCLUSIVE>,
->  				<&k3_pds 202 TI_SCI_PD_EXCLUSIVE>;
->  		resets = <&k3_reset 202 0>;
-> -		clocks = <&k3_clks 61 0>;
-> +		clocks = <&k3_clks 61 0>, <&k3_clks 202 0>;
-> +		clock-names = "gtc", "core";
->  		assigned-clocks = <&k3_clks 61 0>, <&k3_clks 202 0>;
->  		assigned-clock-parents = <&k3_clks 61 2>;
->  		assigned-clock-rates = <200000000>, <2000000000>;
-> 
-> -- 
-> 2.46.0
-> 
+Why are we mixing two different boards?
 
 -- 
 Regards,
