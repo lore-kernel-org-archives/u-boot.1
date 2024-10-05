@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F9A3CFA756
-	for <u-boot@archiver.kernel.org>; Sat,  5 Oct 2024 16:47:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1AABCFB422
+	for <u-boot@archiver.kernel.org>; Sat,  5 Oct 2024 16:48:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB6F6889BD;
-	Sat,  5 Oct 2024 18:47:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7DF06889BD;
+	Sat,  5 Oct 2024 18:48:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="C17SfCo/";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VmW84aUw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7CFE2889BD; Sat,  5 Oct 2024 18:47:31 +0200 (CEST)
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [IPv6:2a00:1450:4864:20::22a])
+ id 6A7EA889C3; Sat,  5 Oct 2024 18:48:27 +0200 (CEST)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94A6F8897F
- for <u-boot@lists.denx.de>; Sat,  5 Oct 2024 18:47:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 73458889BD
+ for <u-boot@lists.denx.de>; Sat,  5 Oct 2024 18:48:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-2fac6b3c220so42041611fa.2
- for <u-boot@lists.denx.de>; Sat, 05 Oct 2024 09:47:29 -0700 (PDT)
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-53992157528so3459492e87.2
+ for <u-boot@lists.denx.de>; Sat, 05 Oct 2024 09:48:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1728146849; x=1728751649; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1728146905; x=1728751705; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kc8vLHHmyLxk9MtHgruyX7LPn+tG15aLyVe5K+AplLo=;
- b=C17SfCo/QCV6ifMKuyrJ6DAItM04qYOWE8eOVVnnc4ahn/EGQnP8lAhwQ8D4wfxZ3Q
- j6w8Aaz46WG0h7AXwhdcvHNV4RjvvHQ/4ZKk6Mg0jOtvjNxD/opr62RapI37mB6Xm/1m
- h50GJ4TZFinBoTPUO/eVPzcnyCRN4aZg10kzqoQlwEWGlGdpYbczr2y0TtByrJTxYMa3
- mUyIjpGztT77KxRdfxsmEmuUj+J7r0yo982/KdrgY64xeKbDRahv4NPjz6Y9LAkUQ02c
- DGREos5wba2LhcXvgbg2w+Y1Opvbr1JYUn8jpsj8sp1lyPPymSahGg2lgsmjAGr1QU/I
- 2frg==
+ bh=dtwg0OVyEGztyOjzTiYcd14kX0rztXz8eu5ayq8UnLw=;
+ b=VmW84aUwntpkn+9DKBnMS7w4nmYPF95cx1xpaDoKfv4fLepkNRGTKHpZ5y3gfShZKT
+ iquRZiOW4ix9gRaFqyq3lkqHRbf2ADUpFOP28lb6zAex1W2wimiJrwa6o7Xgg1rX7BIv
+ pGjy0IfrvaUOxTiztQfD8XaE6dt3VJLwlaMjiRoEZkeKkqpestG+xzk4q3v7XFWUEIDf
+ CLzuPduUTfm407YUUZNMboo4SClN6GD9Wr+Ycz1zGWF9SulC+0y3A/EgTAD94UosHjDZ
+ E+GBFq6bhPe15HPMo60PExj1EvCo4KL/lrr+mxxauhSofz6edHA2ermT3kaC/QZrNNlB
+ GVCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728146849; x=1728751649;
+ d=1e100.net; s=20230601; t=1728146905; x=1728751705;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=kc8vLHHmyLxk9MtHgruyX7LPn+tG15aLyVe5K+AplLo=;
- b=dNbDHJEnbhv1/Quc/bSi2++5YpvwljpgOPwiZGkpYmMpyFDYkY9MEf1Qw6dMKCK5Bb
- 6duOLun8keOGs/KDRAPbN6grcS+3/228DG6n3IMkxko76maAIESe6RPDNPFkAL38v6JR
- dfm1o4qgsm+pbnMfxHlz2/dSJ5peSf/IPeMNjUYtLyBwWMpusu1WSkbLKq+N6cy0nJZd
- nWvQ1S+lC/512th3HLtDxiuSEyyYwZidQvhiq1PBe/F4ckdWWaynRh6Of2/OPjO0g3yR
- k+3WQI+QvoHPBQT4G7poWmlqC+jDWj2gCQgb7g4Z90iCZK7LWkP8NjOo5aQAIVG3k65l
- FrvA==
-X-Gm-Message-State: AOJu0YwdsPWUtXJ9pPhjXxY3V6/dZRhq4I1Df/ZcFP8d7by/P3l2o4HR
- Qix93wNyy6QFM2VS8Bprf9JhjrHojt/Ui0KOKRXbg0AcxG4kEA4a+vLwbBoKCkmhsEGAHHDkf0u
- a5AkWNOgIN14mDh6P7qMcyyVn5I4=
-X-Google-Smtp-Source: AGHT+IEbQKyfr988ZxL1z8Ny8jdC6L1fNPClAi6kt0rcpvapF0/vLE8ipvKAhWr3J3zS3ceGOCoR7Yy3aLI4NTY19ug=
-X-Received: by 2002:a05:651c:19ab:b0:2fa:c455:23c with SMTP id
- 38308e7fff4ca-2faf3d79741mr43985631fa.42.1728146848612; Sat, 05 Oct 2024
- 09:47:28 -0700 (PDT)
+ bh=dtwg0OVyEGztyOjzTiYcd14kX0rztXz8eu5ayq8UnLw=;
+ b=r1O+GVnPHWxktPr+L1IxMPvsYNRHbEomF7X6LQ7yZkVogVhcSzIahvOLniFYeuvXuF
+ Li4MsY8QCOGy8wBp+p0FLqu7zmzeqoaG7d994+XVeIjPb99Oy1Ylnplkv5eE3uouqWO4
+ 15UG1uWCovbJdO5sHnO5ysEZdVldQ66ppJHZG9bfiLeJeTO1o4V44OACBdfk5tGRQ2Et
+ aKF8/1TAAGMpp3aPu7KgBfaIdfGHlvzLWFhDwOTMpbYDNsP0Odfaeb8xLo19n+e1YcYu
+ dh3z1M05GalSHpMceZ+rrXeHqudyc5344CrKxD6K+H9lxDG3Uc5n3QdqsrXVvkaaox98
+ /hdA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXuGUCX200V6CU6Z8lasYBS0Tf78HU5nut6p6t8J9ZRwFZasHK3Zc6X7qQEEVu6PZuqdFyBcuA=@lists.denx.de
+X-Gm-Message-State: AOJu0YwlcQzU/4H/pqX+NlMhCP0FzWY+1vqvioG1RF7PaVM3yb/iZn9w
+ k2Lzd/0R9eyEnT5X3MJ+ohTHUK/Wj8rb+ASDDLZTwXYkJO6BQBhdDf8LgwPDZm0Z39xtyHnZBSy
+ NPY3jKMkCfi9ke5bGt6522kZ4qHk=
+X-Google-Smtp-Source: AGHT+IFDbkLSdlU+06qtB0jIFKgcFWIXpPVVAvkWzyfaWKhf874wnY9NsWsR/c82an1GJml1+cSD0DDCp0onHDtUpuc=
+X-Received: by 2002:a05:6512:159e:b0:530:ae4a:58d0 with SMTP id
+ 2adb3069b0e04-539ab8593fdmr2653892e87.8.1728146904570; Sat, 05 Oct 2024
+ 09:48:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240929013226.2750458-1-alice.guo@oss.nxp.com>
-In-Reply-To: <20240929013226.2750458-1-alice.guo@oss.nxp.com>
+References: <20241001130758.9810-1-peng.fan@oss.nxp.com>
+In-Reply-To: <20241001130758.9810-1-peng.fan@oss.nxp.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 5 Oct 2024 13:47:17 -0300
-Message-ID: <CAOMZO5DBt2+YEatfLO6QhYoSDQdLNdJhrGjVRXGHbqRb1BRS4w@mail.gmail.com>
-Subject: Re: [PATCH v2] gpio: adp5585: Add SPL config for ADP5585 driver
-To: alice.guo@oss.nxp.com
-Cc: u-boot@lists.denx.de, trini@konsulko.com, marek.vasut+renesas@mailbox.org, 
- clamor95@gmail.com, paul.barker.ct@bp.renesas.com, michal.simek@amd.com, 
- andre.przywara@arm.com, ye.li@nxp.com, jim.t90615@gmail.com, 
- billy_tsai@aspeedtech.com, kabel@kernel.org, caleb.connolly@linaro.org, 
- biju.das.jz@bp.renesas.com, sr@denx.de, piotr.wojtaszczyk@timesys.com, 
- Alice Guo <alice.guo@nxp.com>, Peng Fan <peng.fan@nxp.com>
+Date: Sat, 5 Oct 2024 13:48:13 -0300
+Message-ID: <CAOMZO5DFG1hGCx8zvXdKygYN_y0L_MOS+ZvxvdahiYeO2vvotA@mail.gmail.com>
+Subject: Re: [PATCH V2 1/5] mmc: fsl_esdhc_imx: Enable AHB/IPG clk with clk
+ bulk API
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Cc: sbabic@denx.de, u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
+ uboot-imx@nxp.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -92,17 +92,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Sep 28, 2024 at 10:33=E2=80=AFPM <alice.guo@oss.nxp.com> wrote:
+On Tue, Oct 1, 2024 at 9:04=E2=80=AFAM Peng Fan (OSS) <peng.fan@oss.nxp.com=
+> wrote:
 >
-> From: Ye Li <ye.li@nxp.com>
+> From: Peng Fan <peng.fan@nxp.com>
 >
-> So we can disable to build ADP5585 in SPL to save size
+> With partition reset supported for i.MX8QM/QXP/95 and etc, when linux
+> mmc runtime suspended, the mmc clks are gated off. While at same time
+> system controller reset Cortex-A cores because of various reasons(
+> WDOG timeout and etc), with SPL run again, only enable PER clk is not
+> enough, also need to enable AHB/IPG clk, here use clk bulk API to enable
+> all the clocks.
 >
-> Signed-off-by: Ye Li <ye.li@nxp.com>
-> Signed-off-by: Alice Guo <alice.guo@nxp.com>
-> Reviewed-by: Peng Fan <peng.fan@nxp.com>
+> Signed-off-by: Peng Fan <peng.fan@nxp.com>
 > ---
-> Changes for v2:
->  - added my Signed-off-by
+>
+> V2:
+>  Update commit log and use clk bulk API per Fabio.
 
-Applied to u-boot-imx/next, thanks.
+Applied all to u-boot-imx/next, thanks.
