@@ -4,60 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58A45CFB421
-	for <u-boot@archiver.kernel.org>; Sat,  5 Oct 2024 16:51:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5628CFB423
+	for <u-boot@archiver.kernel.org>; Sat,  5 Oct 2024 17:03:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6F0D88D36;
-	Sat,  5 Oct 2024 18:51:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 70099889BD;
+	Sat,  5 Oct 2024 19:03:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1728147093;
-	bh=1CfsrESq0i+GZTzXxZ4aOU1Ctfniw5YiRIeDvCkKcIY=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=JAeIa/bRuZSJceK/E638H6wHPrfUqYFj+ipI/VsRTtFTys4ujBcVFIor1gQ++98+o
-	 9NMw6JQFRnbI3IEURJzDHeDISVikpl3m0lZGRODFfx1LI7XkfKJDhDNGNnd5yniwin
-	 yrAJPqd2TEUDuIYQ/UBmAaB7ABN10j/mnif3qawT1x53+uGsz/RdzDHTNKUbkuO5YA
-	 DPBHXfwszBBUI+fS+bISxsHKZN77K/9ZTr7QA3ybMpJZsmPdh60Kv7VfDU4hm8FuCn
-	 gvBqDMg05m1NS9EBG1A52gGFPWZGHJr+36SZY+eMaE4QmtlbVHEALPClsRd0VYohGL
-	 WdAM701GL8EbQ==
-Received: from mail.denx.de (unknown
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="MCKJu/24";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 062C0889C3; Sat,  5 Oct 2024 19:03:05 +0200 (CEST)
+Received: from mail-ed1-x544.google.com (mail-ed1-x544.google.com
+ [IPv6:2a00:1450:4864:20::544])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: festevam@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 3A17488CC1;
- Sat,  5 Oct 2024 18:51:32 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1728147092;
- bh=1CfsrESq0i+GZTzXxZ4aOU1Ctfniw5YiRIeDvCkKcIY=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=zO6smVvuwlzVy1uVlkOQAFAfqu2EQKSCwMTUmn17wrHbZj7RuL/hMzCX4mpq6v1JU
- OGa8g2r1pRjx6MZwatYpPCpht4GIsp6snXZwfDl47IndfzrsiOhGv1jhyuwKZDzEJe
- JE4pbt9UvQ+R/cNAiKzcnCShogvGUKkYPZyYt4RJ1YPrH1R8YQ5ld1JS3nbPnuHjrI
- voXmV9hcwi+hWQ1z3LJljMnydrmyzwySmkNaVBo0VNLGEq3aK0vLFC+4Rcd35rFcg5
- RMF3mJ2RsWhU1v1B2KmntO+NmY7BRe16+Gs9tbmk20r2YNMMUtgg/KJWgRkCEpvaxN
- h4P7LcJLZI7ag==
+ by phobos.denx.de (Postfix) with ESMTPS id ADE078897F
+ for <u-boot@lists.denx.de>; Sat,  5 Oct 2024 19:03:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-ed1-x544.google.com with SMTP id
+ 4fb4d7f45d1cf-5c89f3f28b6so4224257a12.2
+ for <u-boot@lists.denx.de>; Sat, 05 Oct 2024 10:03:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1728147782; x=1728752582;
+ darn=lists.denx.de; 
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=cyFloGHRgea2WGeAx3KhLkFnPMpq0xrYxK42Q0gH23I=;
+ b=MCKJu/24nbE3aaeWegQTLrvdLEKdpn74y9toY66GMXiDfhUES53Wq2nw/tLi6pG1+u
+ w4I694qyN5ZfxpJQc+Dukna3CQ35yNKcdL5XStTpDXN92a/Kfr1zr2Uo3Q9vyViqcOWT
+ 911hn+fD7AitNjl1KXDt3b3SYX61CyYG3S5zQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728147782; x=1728752582;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=cyFloGHRgea2WGeAx3KhLkFnPMpq0xrYxK42Q0gH23I=;
+ b=D0UUo3Pt568R2Ulaz+92Wv74lQZdY2mxu45G1KNKmYA+SWM6Z7tga6qp/HFNRWpThu
+ gAHYmt+jf+abSBpwNHnsB9eedw8r2N0apeGQlYHk9/cYVsXsgAbGw/TfJY1o8MpYE3se
+ 47zuHULnNK0KMz4DSruVTWsrWy+20MBlYuKXoJh1ZZP59y2yOsPo/bsuQ3NPNOV73KHV
+ 9ZE6JQVNnzHXNkHkdNUQLOZ7ScxA7syg6q0sDy1QeivDlJQLqbVdJNKrpCHrYD6vbaR3
+ VcjD0cUmjwWNJWQk+lhWVZFzea80HYS1RxHHV09vaXW/JO7wKZn3Zz/Xa/97x6Of/fXL
+ hzEg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWoddnnTMJCQEvXR33yVH28ttcCV+XQd6bvH3Gh/CrM+JnTHs8GQGTmm5oTKpB3QSCgWKgPEcY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz/i8p4tCSuvw6x2KdTe+Uav2P3VxVAu0A94Eyk4peXeTF2+4Rq
+ YoDPw5hVQAImvS8GekToOC3Y7YVUXtv1qMCBomvRCrEPLT2jHL2nELs1S8EhlY3ijeIy8Y2+V8V
+ fhYWkNwoGfHdV6cYGurFE2U2GMi+nki10DpJ1xA==
+X-Google-Smtp-Source: AGHT+IEKVRxw0h+HCgHvMK6HEcDMgAOWTVS/dEPfVQ4wMrAqa5lz0zJ3FNMT2HDwQYTjofsLV3o65T0FeaS2Ak/Ssp8=
+X-Received: by 2002:a05:6402:3210:b0:5c7:927:6a5e with SMTP id
+ 4fb4d7f45d1cf-5c8d2e36dfamr5092667a12.21.1728147781881; Sat, 05 Oct 2024
+ 10:03:01 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
-Date: Sat, 05 Oct 2024 13:51:32 -0300
-From: Fabio Estevam <festevam@denx.de>
-To: Stefan Roese <sr@denx.de>
-Cc: Fabio Estevam <festevam@gmail.com>, jh80.chung@samsung.com,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v3] da9063: Add watchdog support
-In-Reply-To: <fa3f9053-0f40-402d-bf59-18398a9318f6@denx.de>
-References: <20240917135550.3164425-1-festevam@gmail.com>
- <3ec25b5a-2c9b-46fe-a9b9-0b99f72d83a9@denx.de>
- <5293f5a0d44059960aa2d5e8b114456f@denx.de>
- <fa3f9053-0f40-402d-bf59-18398a9318f6@denx.de>
-Message-ID: <a0e0fd38e4596321d4c227c356f8c6b5@denx.de>
-X-Sender: festevam@denx.de
-User-Agent: Roundcube Webmail/1.3.6
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Sat, 5 Oct 2024 19:02:51 +0200
+Message-ID: <CAOf5uwkVkZAz9d1oxW1EL+qYjWjm4mzfwxhLQ6nYhxQ2Yd4uCw@mail.gmail.com>
+Subject: [PULL] Pull request for u-boot-nand-20241005
+To: Tom Rini <trini@konsulko.com>, U-Boot-Denx <u-boot@lists.denx.de>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,10 +82,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Stefan,
+Hi Tom
 
-On 04/10/2024 09:43, Stefan Roese wrote:
+The following changes since commit af69289d61876d8e62449ee2da2dc6683bcb8198:
 
-> Sure, please pull it in if this makes sense for you.
+  Update directories for new name of TF-A directories (2024-10-04
+09:00:47 -0600)
 
-Applied to u-boot-imx/next, thanks.
+are available in the Git repository at:
+
+  git@source.denx.de:u-boot/custodians/u-boot-nand-flash.git
+u-boot-nand-20241005
+
+for you to fetch changes up to abd7258222188be745b6f3f698dd983d6ffc5755:
+
+These are a number of assorted upstream Linux fixes to the
+BRCMNAND driver.
+
+This patch set lowers the hamming distance between the Linux
+and U-Boot drivers a bit as well, while we deviate quite
+a bit it is still possible to bring fixes over thanks to
+exercises like this.
+
+The patches pass the pipeline CI:
+https://source.denx.de/u-boot/custodians/u-boot-nand-flash/-/pipelines/22535
+
+----------------------------------------------------------------
+Linus Walleij (1):
+      mtd: rawnand: brcmnand: Add read data bus interface
+
+William Zhang (6):
+      mtd: rawnand: brcmnand: Fix ECC level field setting for v7.2 controller
+      mtd: rawnand: brcmnand: Fix potential false time out warning
+      mtd: rawnand: brcmnand: Fix potential out-of-bounds access in oob write
+      mtd: rawnand: brcmnand: Fix mtd oobsize
+      mtd: rawnand: brcmnand: Support write protection setting from dts
+      mtd: rawnand: brcmnand: Add support for getting ecc setting from strap
+
+ drivers/mtd/nand/raw/brcmnand/brcmnand.c | 209 ++++++++++++++++++++++++-------
+ drivers/mtd/nand/raw/brcmnand/brcmnand.h |   2 +
+ 2 files changed, 166 insertions(+), 45 deletions(-)
+
+-- 
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
+
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
