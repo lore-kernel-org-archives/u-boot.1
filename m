@@ -4,68 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5628CFB423
-	for <u-boot@archiver.kernel.org>; Sat,  5 Oct 2024 17:03:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52BA6CFB420
+	for <u-boot@archiver.kernel.org>; Sat,  5 Oct 2024 17:04:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70099889BD;
-	Sat,  5 Oct 2024 19:03:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D85D088A1B;
+	Sat,  5 Oct 2024 19:04:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="MCKJu/24";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="J2zuXceU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 062C0889C3; Sat,  5 Oct 2024 19:03:05 +0200 (CEST)
-Received: from mail-ed1-x544.google.com (mail-ed1-x544.google.com
- [IPv6:2a00:1450:4864:20::544])
+ id BFC5688A24; Sat,  5 Oct 2024 19:04:44 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ADE078897F
- for <u-boot@lists.denx.de>; Sat,  5 Oct 2024 19:03:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D5E26889BD
+ for <u-boot@lists.denx.de>; Sat,  5 Oct 2024 19:04:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ed1-x544.google.com with SMTP id
- 4fb4d7f45d1cf-5c89f3f28b6so4224257a12.2
- for <u-boot@lists.denx.de>; Sat, 05 Oct 2024 10:03:02 -0700 (PDT)
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-5c42f406e29so3994483a12.2
+ for <u-boot@lists.denx.de>; Sat, 05 Oct 2024 10:04:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1728147782; x=1728752582;
+ d=amarulasolutions.com; s=google; t=1728147882; x=1728752682;
  darn=lists.denx.de; 
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=cyFloGHRgea2WGeAx3KhLkFnPMpq0xrYxK42Q0gH23I=;
- b=MCKJu/24nbE3aaeWegQTLrvdLEKdpn74y9toY66GMXiDfhUES53Wq2nw/tLi6pG1+u
- w4I694qyN5ZfxpJQc+Dukna3CQ35yNKcdL5XStTpDXN92a/Kfr1zr2Uo3Q9vyViqcOWT
- 911hn+fD7AitNjl1KXDt3b3SYX61CyYG3S5zQ=
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/LWbIDOE049/z1cRX+hvLHCu0SlvvFGrK+fj+P84TWU=;
+ b=J2zuXceU553pZJL8KT3Pk8nXHh3TqS7dts+Tld1ZQPYwqFqk793D15iIOgznN2CBtg
+ eXsUvxA7ENECZh6/jknlxbaSEkJKJBOFZJzfnsGjTGnUeFzAwNEJou52UHxitgVbezmJ
+ 2mVtqShgCu1Zy8WEMf9+o27ly1HcMoWcluIy0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728147782; x=1728752582;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=cyFloGHRgea2WGeAx3KhLkFnPMpq0xrYxK42Q0gH23I=;
- b=D0UUo3Pt568R2Ulaz+92Wv74lQZdY2mxu45G1KNKmYA+SWM6Z7tga6qp/HFNRWpThu
- gAHYmt+jf+abSBpwNHnsB9eedw8r2N0apeGQlYHk9/cYVsXsgAbGw/TfJY1o8MpYE3se
- 47zuHULnNK0KMz4DSruVTWsrWy+20MBlYuKXoJh1ZZP59y2yOsPo/bsuQ3NPNOV73KHV
- 9ZE6JQVNnzHXNkHkdNUQLOZ7ScxA7syg6q0sDy1QeivDlJQLqbVdJNKrpCHrYD6vbaR3
- VcjD0cUmjwWNJWQk+lhWVZFzea80HYS1RxHHV09vaXW/JO7wKZn3Zz/Xa/97x6Of/fXL
- hzEg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWoddnnTMJCQEvXR33yVH28ttcCV+XQd6bvH3Gh/CrM+JnTHs8GQGTmm5oTKpB3QSCgWKgPEcY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz/i8p4tCSuvw6x2KdTe+Uav2P3VxVAu0A94Eyk4peXeTF2+4Rq
- YoDPw5hVQAImvS8GekToOC3Y7YVUXtv1qMCBomvRCrEPLT2jHL2nELs1S8EhlY3ijeIy8Y2+V8V
- fhYWkNwoGfHdV6cYGurFE2U2GMi+nki10DpJ1xA==
-X-Google-Smtp-Source: AGHT+IEKVRxw0h+HCgHvMK6HEcDMgAOWTVS/dEPfVQ4wMrAqa5lz0zJ3FNMT2HDwQYTjofsLV3o65T0FeaS2Ak/Ssp8=
-X-Received: by 2002:a05:6402:3210:b0:5c7:927:6a5e with SMTP id
- 4fb4d7f45d1cf-5c8d2e36dfamr5092667a12.21.1728147781881; Sat, 05 Oct 2024
- 10:03:01 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1728147882; x=1728752682;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=/LWbIDOE049/z1cRX+hvLHCu0SlvvFGrK+fj+P84TWU=;
+ b=dxoJU1SJ4+3Bi+VKgOQzeco4jaUr2ZLd0Y2B2xNZ57FroBeih9t56NFu7eyj1z0Rs4
+ zfqD+NFqCQnS4SD24pCMunLnGmEC6V2oznu45YaPqu1Z/JnLrIWoLIaRZ299V6f9W3/e
+ FD1q0yQuiLSB3GdLwLgYWy6/uA61SPQXSjctUzzp1ufTwwKVhItD1tNRLBZbyTk+aLZ9
+ 8J9y+zK700M7T4PscpSKEPO8f8GiJjSMCD72J+sSj5pRcLgTzuZgz0l1lKFB+yItJ7Uu
+ TvnmGyn+TnUgzzH/WJ65Y08EP0aQ/aSWeMhZpOyrfd1g6TWgXFwEdP1iMKojMze1/nnR
+ DuFA==
+X-Gm-Message-State: AOJu0YwvDdkPe51H9xhNbzgCtY5hDGH7kJPasHNROpLqcrLuKZQpZCUP
+ 55NR2+nkZXGB8fzb/fI1b0IY4j2+DBShFRxP2hiDcN9Acb8gCFyTCWj7hlCvwWa110YLKS30Ctj
+ V09LpzMcXTZwjGUJH3kpipBxBDK6kK4uxoRdprA==
+X-Google-Smtp-Source: AGHT+IFlwmMg7TvrAYt8lId7Pbx593wOzmncmsVKLeSBjvo+Im82GdjUi5jc2j+ZfmukmzU1J51R1Rv6+iUMRl3MpoM=
+X-Received: by 2002:a17:907:3f96:b0:a99:4262:cc16 with SMTP id
+ a640c23a62f3a-a994262cce4mr152576666b.27.1728147882175; Sat, 05 Oct 2024
+ 10:04:42 -0700 (PDT)
 MIME-Version: 1.0
+References: <20240911-brcmnand-fixes-v1-0-be112a20aaf1@linaro.org>
+ <CACRpkdaHpgCT28uKerpfoDxMPRhzr862zf7=pgO7CacOEZFUjg@mail.gmail.com>
+ <CAOf5uw=hF8f4LKkhvPwOe56L-mMNEaXiQP8eXXcGQ1v+zFSZog@mail.gmail.com>
+ <CACRpkdZEgCc8KsGUNkdABnebHLUwz49cM9EaaBViSA4NWcQ0dQ@mail.gmail.com>
+In-Reply-To: <CACRpkdZEgCc8KsGUNkdABnebHLUwz49cM9EaaBViSA4NWcQ0dQ@mail.gmail.com>
 From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Sat, 5 Oct 2024 19:02:51 +0200
-Message-ID: <CAOf5uwkVkZAz9d1oxW1EL+qYjWjm4mzfwxhLQ6nYhxQ2Yd4uCw@mail.gmail.com>
-Subject: [PULL] Pull request for u-boot-nand-20241005
-To: Tom Rini <trini@konsulko.com>, U-Boot-Denx <u-boot@lists.denx.de>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Date: Sat, 5 Oct 2024 19:04:28 +0200
+Message-ID: <CAOf5uwkFk58FurpFZy09rYuaadUD5wXEkxCdjPfBHR=pqMGu5g@mail.gmail.com>
+Subject: Re: [PATCH 0/7] mtd: nand: brcmnand: Backported fixes from Linux
+To: Linus Walleij <linus.walleij@linaro.org>
+Cc: U-Boot-Denx <u-boot@lists.denx.de>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Anand Gore <anand.gore@broadcom.com>, 
+ William Zhang <william.zhang@broadcom.com>,
+ Kursad Oney <kursad.oney@broadcom.com>, 
+ Philippe Reynes <philippe.reynes@softathome.com>, 
+ Florian Fainelli <florian.fainelli@broadcom.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Kamal Dasu <kamal.dasu@broadcom.com>, David Regan <dregan@broadcom.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,48 +96,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom
+Hi
 
-The following changes since commit af69289d61876d8e62449ee2da2dc6683bcb8198:
+On Mon, Sep 30, 2024 at 2:54=E2=80=AFPM Linus Walleij <linus.walleij@linaro=
+.org> wrote:
+>
+> On Sat, Sep 28, 2024 at 2:51=E2=80=AFAM Michael Nazzareno Trimarchi
+> <michael@amarulasolutions.com> wrote:
+>
+> > I have already seen all of them and I follow the thread
+> >
+> > We will pick them up
+>
+> Thanks Michael, I will send out the remaining patches adding BCMBCA
+> support to the NAND driver as well.
+>
+> Yours,
+> Linus Walleij
 
-  Update directories for new name of TF-A directories (2024-10-04
-09:00:47 -0600)
+First series applied and sent to Tom
 
-are available in the Git repository at:
+Michael
 
-  git@source.denx.de:u-boot/custodians/u-boot-nand-flash.git
-u-boot-nand-20241005
 
-for you to fetch changes up to abd7258222188be745b6f3f698dd983d6ffc5755:
-
-These are a number of assorted upstream Linux fixes to the
-BRCMNAND driver.
-
-This patch set lowers the hamming distance between the Linux
-and U-Boot drivers a bit as well, while we deviate quite
-a bit it is still possible to bring fixes over thanks to
-exercises like this.
-
-The patches pass the pipeline CI:
-https://source.denx.de/u-boot/custodians/u-boot-nand-flash/-/pipelines/22535
-
-----------------------------------------------------------------
-Linus Walleij (1):
-      mtd: rawnand: brcmnand: Add read data bus interface
-
-William Zhang (6):
-      mtd: rawnand: brcmnand: Fix ECC level field setting for v7.2 controller
-      mtd: rawnand: brcmnand: Fix potential false time out warning
-      mtd: rawnand: brcmnand: Fix potential out-of-bounds access in oob write
-      mtd: rawnand: brcmnand: Fix mtd oobsize
-      mtd: rawnand: brcmnand: Support write protection setting from dts
-      mtd: rawnand: brcmnand: Add support for getting ecc setting from strap
-
- drivers/mtd/nand/raw/brcmnand/brcmnand.c | 209 ++++++++++++++++++++++++-------
- drivers/mtd/nand/raw/brcmnand/brcmnand.h |   2 +
- 2 files changed, 166 insertions(+), 45 deletions(-)
-
--- 
+--=20
 Michael Nazzareno Trimarchi
 Co-Founder & Chief Executive Officer
 M. +39 347 913 2170
