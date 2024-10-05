@@ -4,64 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3795CCFB42B
-	for <u-boot@archiver.kernel.org>; Sat,  5 Oct 2024 19:14:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D003CFB42B
+	for <u-boot@archiver.kernel.org>; Sat,  5 Oct 2024 19:34:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 078CD88CBB;
-	Sat,  5 Oct 2024 21:14:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux.intel.com
+	by phobos.denx.de (Postfix) with ESMTP id 04A28889C3;
+	Sat,  5 Oct 2024 21:34:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="n+ksTh5c";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Lhg7HsTv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D2D8288CBB; Sat,  5 Oct 2024 21:14:37 +0200 (CEST)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.16])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id ED270889C3; Sat,  5 Oct 2024 21:34:48 +0200 (CEST)
+Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
+ [IPv6:2607:f8b0:4864:20::72f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 730DE88AFF
- for <u-boot@lists.denx.de>; Sat,  5 Oct 2024 21:14:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=linux.intel.com
-Authentication-Results: phobos.denx.de; spf=none
- smtp.mailfrom=andriy.shevchenko@linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1728155675; x=1759691675;
- h=from:to:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=cLGI/fDGoLN0LtoJ4QAyOjUu51mdp89HSDyVWxHZKkU=;
- b=n+ksTh5c3iyc6PGKPBSbvidLAkgDnwOzYht0WGcORTrV2SPDjvVfBVCX
- rHAzkB+YibbrWtl8FF/TluhLwSh/elAk1FBk6G7ferg9E2+f+FlPKmjcL
- BEDD3Rd3DhcykXRlGI9W6c1sS2UZMDfwty8u2TjRSDuF6gtbdWmpOG2+L
- Y3pnjXUgxlQdiM9WgCaDSkQ3t18l+dwX011hvX/NDaOsePXEFu6Laaaoi
- 9PzCZwtzIYaJBpE/6gVT8aljsostmRNYKbyu4MD2ccg04vbWoao7yMIpP
- DprSyaTbr3matvUhrzbWk8AqCvsYphRGnMnjZFZZOE0osT+Ol9Vj+MIp/ w==;
-X-CSE-ConnectionGUID: rSzNZUUeTNed4uzn+G5Cew==
-X-CSE-MsgGUID: wWwPm2xZQKuf8S1R5NSKkA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11216"; a="27442441"
-X-IronPort-AV: E=Sophos;i="6.11,181,1725346800"; d="scan'208";a="27442441"
-Received: from fmviesa009.fm.intel.com ([10.60.135.149])
- by orvoesa108.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Oct 2024 12:14:33 -0700
-X-CSE-ConnectionGUID: 7akJ4CLuTZm4VlTc+Xp4aw==
-X-CSE-MsgGUID: rx+a66dPTeiFDsxe45ziBQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.11,181,1725346800"; d="scan'208";a="75040860"
-Received: from black.fi.intel.com ([10.237.72.28])
- by fmviesa009.fm.intel.com with ESMTP; 05 Oct 2024 12:14:32 -0700
-Received: by black.fi.intel.com (Postfix, from userid 1003)
- id DA5EB178; Sat, 05 Oct 2024 22:14:31 +0300 (EEST)
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: Tom Rini <trini@konsulko.com>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>, u-boot@lists.denx.de
-Subject: [PATCH v1 1/1] cmd: irq: Move do_irqinfo() prototype to a header file
-Date: Sat,  5 Oct 2024 22:14:29 +0300
-Message-ID: <20241005191429.1927741-1-andriy.shevchenko@linux.intel.com>
-X-Mailer: git-send-email 2.43.0.rc1.1336.g36b5255a03ac
+ by phobos.denx.de (Postfix) with ESMTPS id D9B21889C3
+ for <u-boot@lists.denx.de>; Sat,  5 Oct 2024 21:34:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x72f.google.com with SMTP id
+ af79cd13be357-7a9b3cd75e5so321472085a.0
+ for <u-boot@lists.denx.de>; Sat, 05 Oct 2024 12:34:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1728156886; x=1728761686; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=yYl/A+04S4ahIseLCriKrjx96OphSp7ZeTGQh+FVEZw=;
+ b=Lhg7HsTvCbWdLOenyvKNNLvIps4s9C3kGnR0/2Jms6ToawUJkHe5t32aO/GI9xt66r
+ wwPbNyCHtoUI0P9Rl7SXltN7z4PFGhMjGspEeuELGRBDWTXtp/kJyw+puhDRVRKEcyR+
+ g357+t8nJ9UvTcwAI/FNuaGufQP0MUcbJ+4PU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728156886; x=1728761686;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=yYl/A+04S4ahIseLCriKrjx96OphSp7ZeTGQh+FVEZw=;
+ b=WUu3sxrP+5PyzrUF46mKpJKBLgHSpatr0dGOCF6wKc8olBJkuNrpwhBTH39V7Tbg/h
+ uM11hDlusXh+NnJrOHHyr5QkPNqQRk5n8573MfKrxGxA7Tl4w/hiUTdRj5zEPEEvQ6q/
+ JpwHyH4yqdRPnTULys7wlKnbyuLlecDBiBUghkAagSHC9u8BzRYFoeCvD1axjP7z+7sp
+ SGetu2qmfXMkUxPd6czJ/Fd4a5UixpOtO98zbDL4g3YuEBcTjjd8P1WNbR4i2KZ6NsRN
+ n/erxR4HQR794wcqT/wrCYz97rMHodzOJdsAZozau8QxxRj6BVsDNphx6HO0eIrdu80U
+ fYew==
+X-Gm-Message-State: AOJu0YxhXLGHd/J4sDiTIvjzMfAUwx7s7d0EUFZKZjdTE6vwbjF9rtxT
+ pJls6Nn1nyLlmY9HYSjfxJ2pav/qiSRRT/WQfOZSVgKS2vNZ2q65oCHwPdggBps=
+X-Google-Smtp-Source: AGHT+IHpHBkFAAut9snqzZ0xMs8oQXDFPu6rugphO+lrNXqqMLt8Xc0z9efVH21GbnW+z2GC62SpkQ==
+X-Received: by 2002:a05:620a:4085:b0:7a9:ac2d:596c with SMTP id
+ af79cd13be357-7ae6f45442fmr1269974185a.32.1728156885670; 
+ Sat, 05 Oct 2024 12:34:45 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7ae75620040sm103340585a.18.2024.10.05.12.34.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 05 Oct 2024 12:34:43 -0700 (PDT)
+Date: Sat, 5 Oct 2024 13:34:39 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ u-boot@dh-electronics.com, uboot-stm32@st-md-mailman.stormreply.com
+Subject: Re: [PATCH v2] ARM: stm32: Update MAINTAINERS file globs for STM32MP
+ DHSOM
+Message-ID: <20241005193439.GM4737@bill-the-cat>
+References: <20241004235641.395703-1-marex@denx.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="xbxJOVqNvJwcRRzd"
+Content-Disposition: inline
+In-Reply-To: <20241004235641.395703-1-marex@denx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,43 +92,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move do_irqinfo() prototype to a header file, otherwise compiler is not
-happy:
 
-  arch/x86/lib/interrupts.c:130:5: warning: no previous prototype for ‘do_irqinfo’ [-Wmissing-prototypes]
+--xbxJOVqNvJwcRRzd
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
----
- cmd/irq.c          | 3 ---
- include/irq_func.h | 3 +++
- 2 files changed, 3 insertions(+), 3 deletions(-)
+On Sat, Oct 05, 2024 at 01:56:21AM +0200, Marek Vasut wrote:
 
-diff --git a/cmd/irq.c b/cmd/irq.c
-index 655aba576a8b..da223b4b2cce 100644
---- a/cmd/irq.c
-+++ b/cmd/irq.c
-@@ -29,9 +29,6 @@ U_BOOT_CMD(
- 	"[on, off]"
- );
- 
--/* Implemented in $(CPU)/interrupts.c */
--int do_irqinfo(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
--
- U_BOOT_CMD(
- 	irqinfo,    1,    1,     do_irqinfo,
- 	"print information about IRQs",
-diff --git a/include/irq_func.h b/include/irq_func.h
-index c7c4babbfc90..28ec0bd83038 100644
---- a/include/irq_func.h
-+++ b/include/irq_func.h
-@@ -23,4 +23,7 @@ void reset_timer(void);
- void enable_interrupts(void);
- int disable_interrupts(void);
- 
-+/* Implemented in $(CPU)/interrupts.c */
-+int do_irqinfo(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
-+
- #endif
--- 
-2.43.0.rc1.1336.g36b5255a03ac
+> Update the MAINTAINERS file glob to cover all of STM32MP DHSOM related fi=
+les.
+>=20
+> Signed-off-by: Marek Vasut <marex@denx.de>
 
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+--=20
+Tom
+
+--xbxJOVqNvJwcRRzd
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcBlMwACgkQFHw5/5Y0
+tyyY2Qv/cQQRr9lU4X8bvIJJArf4r9zUQGbK+ymr6VVHcV8pz8vtmO5RzA00JZmU
+H4M9Mk9SdYdJ4szDchJRxxZIMPDlT1c4HeQsRr48mptKbb7L9/rqLgh86OU0WrZl
+cMiOFPPcovR2ORLRamjD2k/fPbQ2HPTXjeO4nRpsz/4p1wxiUUl+OJ1S/ClTO3zN
+siKGYfBzWXNuZfFEjtM7fbjmYxZMKyydxw4N8FMXEdFjMjmybpELzbRo0d7IPrrD
+U0sQLLVEcXIwmty3GLw1nfihm8p8+0VaezOL29+BPoHfvu2Tvmyo0D52NkaP+Apg
+8qVRC/O4xKrip1aSO7t7dp74kbO5D2/2MoQuWRlKdWDZ+2cBVzyaae5G/eDRz+L/
+s2hFYcTvZuT8hvsQAm4Ex0BSk/W3jxiF1EfmfsJ7U1ybrqEeI0hrRwZy24eGlSvF
+U+3rW5TxL96Gjube7sstgt0FELNScS6XmkkTivx3iiIhP8CTpbB1yRr4/cNgL5+F
+thresb70
+=vYP1
+-----END PGP SIGNATURE-----
+
+--xbxJOVqNvJwcRRzd--
