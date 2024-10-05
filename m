@@ -4,50 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20254CF887E
-	for <u-boot@archiver.kernel.org>; Sat,  5 Oct 2024 14:34:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19136CF34C4
+	for <u-boot@archiver.kernel.org>; Sat,  5 Oct 2024 14:37:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 05D6888B55;
-	Sat,  5 Oct 2024 16:34:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9C33D889AE;
+	Sat,  5 Oct 2024 16:37:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1728138851;
-	bh=qnilx8kuWD+cQ/PTZTJZbA14c6pwRcF5wKRFwnGyROI=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=ZT5Ki/nM3sGRNBuCT2qIetEhiiaVsK/x0G0PyKf7O/rx5UKKVcaUH8Z9HKMPFzTFw
-	 THNQvIIIcPJXMEafl2Mcn7lKGNIP2sQTOwzbx+BkFuEnij3774HElq/2jWPWuURxAL
-	 cAiLg2488ICWXC6h48q7dMM0cUQq+FksLCf6ib2gYri9ZlPY0JevtPrU0czX2Jwim4
-	 rK5c3BL2viWW5gqZ+QjdTnlRaFSHVBHs8nLRlpF3FZOKDlePD2NpnLkXm6ib1YiDp/
-	 vM+85W+fzF3/7cBkQLtXEv1N9QYjx/aL7FPx76aYwwbetoVbuSPmbxgCa670DKob1E
-	 HPWbjq3PWnzAw==
-Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+	s=phobos-20191101; t=1728139059;
+	bh=DFfPr9VpQWrDHoXLj3GkQ8jLAPiXqBSeoCfeN4NceXM=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=qyAqT7g9Jk4VHbHwX3htCk66ttJ3qRnHYuBntHgRAjbI3ymNgVqkSX+VObc0sY9t0
+	 SYFo2OC3Q52NhZym0cnpk0yhrdaeRAHs3Us6JU+173HqQoCm7sRgI6j09T9uEHrU32
+	 Kp75qo4dPMVxeLRI9zB2hP9N6iKtzuH7aSO2+EnG13Sy0qg2+6KDJBpudVKRXlF7sO
+	 sIboHjyr8h3CutZmANWtHw294L0psVlf/AmeADHVOIpoF6Ra5v5vEe/RpB3gHsfTpR
+	 lptjJ5eqWFJBrCe9S9bW/TLOL1xDEkmT7LTtOTmqlM7HsA/9IL5fR8V0z1QdGCSV3y
+	 gECg8+Hpidtfg==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 6C48F88B0C;
- Sat,  5 Oct 2024 16:34:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 77A858898B;
+ Sat,  5 Oct 2024 16:37:38 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1728138850;
- bh=qnilx8kuWD+cQ/PTZTJZbA14c6pwRcF5wKRFwnGyROI=;
- h=From:To:Cc:Subject:Date:From;
- b=XpUHwx1MXwCb1BrJrlBVleFN1kLAkQe50QWaSHkutpAY+emXRoBgRE3hKVD4sonH2
- iHnzLjZwhgg7JJaZatoYtMayUxPb4MeCI6XoLqlsfk4xGReN0mGNaQ+NHWYqvKqoJx
- IfEM1nb/gq13k2XVebTWs9M0kFMwXOAHUpJD191tUwYxHtmzqDP2V1+4C4a0pEG9LE
- S7Yu22inByB1G5ozhUjiUGMoLR3Fb6tKQgr3hP2+pEpiTKX51qIaOCX15bMQ0YRDrY
- j/RWtCsTz8kQ4YscBLedk7dQUgm1yHyPVKZ6eXrzjy0i9e9cd7vzZ/rcTcgu3u2XeR
- 5GrfhD6VwN+Ig==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Heiko Schocher <hs@denx.de>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] sandbox: dts: Add missing sandbox,
- emul phandle to sandbox-pmic
-Date: Sat,  5 Oct 2024 16:33:37 +0200
-Message-ID: <20241005143356.10069-1-marex@denx.de>
-X-Mailer: git-send-email 2.45.2
+ s=phobos-20191101; t=1728139058;
+ bh=DFfPr9VpQWrDHoXLj3GkQ8jLAPiXqBSeoCfeN4NceXM=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=aQgcMHcZlqAbCeuuEZyQzxzP+2H4cvE/o0RSU8excDUtiIdPoOjPpd5exNWZlRe03
+ QbFos7FvRVKZu/SgoFVqJDvuOzkaiLAOQCs+IRxvN4O+Fr8q6ybBIYml2QbNHr/dSs
+ /8f1VBD6y9QJiMKS+m7bywhWkJxKSid+Gi8JeeNFZ4qVscdsZez5q7Ycrag7KlNiXT
+ GiaTR7Ic7LHfBnhcFN3gMVKpn7xAafwpZD7RxsvU9ebPuddhwmUN5LTkFboc26fvgw
+ txOCKO0cX8WtMcLGHLVDbKlnCkqrhjd/nqQpji/ZgFwJsyJjolMPRPBE3WPDcbP0kA
+ ayU1tLpkUbwIw==
+Message-ID: <017a2c6c-9140-47f9-93fc-26111feba3da@denx.de>
+Date: Sat, 5 Oct 2024 16:37:07 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] sandbox: i2c: Make sure phandle dependency is probed
+To: hs@denx.de, u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+References: <20241003203736.298649-1-marex@denx.de>
+ <80e7d47f-335d-4c81-ac7c-3af531474e50@denx.de>
+ <ac403d08-cacc-9074-f3aa-df2e87a2d32a@denx.de>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <ac403d08-cacc-9074-f3aa-df2e87a2d32a@denx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -65,44 +70,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This phandle was missing in the sandbox DT, add it, otherwise sandbox-i2c
-driver cannot look up the emulator via i2c_emul_find(). This fixes the
-following i2c_emul_find() error:
+On 10/4/24 7:04 AM, Heiko Schocher wrote:
+> Hi Marek!
+> 
+> On 03.10.24 22:47, Marek Vasut wrote:
+>> On 10/3/24 10:37 PM, Marek Vasut wrote:
+>>> This driver depends on i2c emulator via DT phandle. Make sure the
+>>> dependency is probed before this driver is probed, not when it is
+>>> first used during transfer. This fixes the following i2c_emul_find()
+>>> error:
+>>>
+>>> "
+>>> $ ./u-boot -Dc ""
+>>> ...
+>>>         i2c_emul_find() No emulators for device 'sandbox_pmic'
+>>>    sandbox_pmic_write() write error to device: 0000000018c568d0 
+>>> register: 0x0!
+>>>         out_set_value() PMIC write failed: -5
+>>>         i2c_emul_find() No emulators for device 'sandbox_pmic'
+>>>    sandbox_pmic_write() write error to device: 0000000018c568d0 
+>>> register: 0x0!
+>>>         out_set_value() PMIC write failed: -5
+>>> ...
+>>> "
+>>>
+>>> Signed-off-by: Marek Vasut <marex@denx.de>
+>>> ---
+>>> Cc: Heiko Schocher <hs@denx.de>
+>>> Cc: Simon Glass <sjg@chromium.org>
+>>> Cc: Tom Rini <trini@konsulko.com>
+>>> Cc: u-boot@lists.denx.de
+>>> ---
+>>>   drivers/i2c/sandbox_i2c.c | 9 +++++++++
+>>>   1 file changed, 9 insertions(+)
+>>>
+>>> diff --git a/drivers/i2c/sandbox_i2c.c b/drivers/i2c/sandbox_i2c.c
+>>> index 74bb5e93397..9a39ac14fb4 100644
+>>> --- a/drivers/i2c/sandbox_i2c.c
+>>> +++ b/drivers/i2c/sandbox_i2c.c
+>>> @@ -80,6 +80,14 @@ static int sandbox_i2c_xfer(struct udevice *bus, 
+>>> struct i2c_msg *msg,
+>>>       return ops->xfer(emul, msg, nmsgs);
+>>>   }
+>>> +static int sandbox_i2c_probe(struct udevice *dev)
+>>> +{
+>>> +    struct udevice *emul;
+>>> +
+>>> +    return uclass_get_device_by_phandle(UCLASS_I2C_EMUL, dev,
+>>> +                        "sandbox,emul", &emul);
+>>> +}
+>> Hmmm, no, this does not do it, but it does show what the issue is -- 
+>> sandbox_i2c_xfer is misused to defer access to this emulator until the 
+>> first I2C transfer, so the emulator can hopefully probe in the 
+>> meantime. This is fragile and now it broke. What I am not quite sure 
+>> about is why this uclass_get_device_by_phandle() returns -2 here 
+>> instead of probing the emulator ?
+> 
+> Hmm... -2 means it does not find such a device ... why, I don;t know ...
+> do you have a chance to debug?
+It seems I was too hasty with this patch, now superseded by:
 
-"
-$ ./u-boot -Dc ""
-...
-       i2c_emul_find() No emulators for device 'sandbox_pmic'
-  sandbox_pmic_write() write error to device: 0000000018c568d0 register: 0x0!
-       out_set_value() PMIC write failed: -5
-       i2c_emul_find() No emulators for device 'sandbox_pmic'
-  sandbox_pmic_write() write error to device: 0000000018c568d0 register: 0x0!
-       out_set_value() PMIC write failed: -5
-...
-"
-
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: Heiko Schocher <hs@denx.de>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
- arch/sandbox/dts/sandbox_pmic.dtsi | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/arch/sandbox/dts/sandbox_pmic.dtsi b/arch/sandbox/dts/sandbox_pmic.dtsi
-index 565c382ed45..ff2cb42844c 100644
---- a/arch/sandbox/dts/sandbox_pmic.dtsi
-+++ b/arch/sandbox/dts/sandbox_pmic.dtsi
-@@ -10,6 +10,7 @@
- 
- &sandbox_pmic {
- 	compatible = "sandbox,pmic";
-+	sandbox,emul = <&emul_pmic0>;
- 
- 	buck1 {
- 		regulator-name = "SUPPLY_1.2V";
--- 
-2.45.2
-
+[PATCH] sandbox: dts: Add missing sandbox,emul phandle to sandbox-pmic
