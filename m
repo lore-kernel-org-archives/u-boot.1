@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0E05CF8851
-	for <u-boot@archiver.kernel.org>; Sat,  5 Oct 2024 04:59:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D6C5CF887E
+	for <u-boot@archiver.kernel.org>; Sat,  5 Oct 2024 14:28:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B5DFF88D1A;
-	Sat,  5 Oct 2024 06:59:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B02FE88A1B;
+	Sat,  5 Oct 2024 16:28:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GT9p8RWO";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JLDLL61u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 108E388D7D; Sat,  5 Oct 2024 06:59:55 +0200 (CEST)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
+ id 2245D88A1B; Sat,  5 Oct 2024 16:28:25 +0200 (CEST)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B352888902
- for <u-boot@lists.denx.de>; Sat,  5 Oct 2024 06:59:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7809288A0E
+ for <u-boot@lists.denx.de>; Sat,  5 Oct 2024 16:28:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-5366fd6fdf1so3851910e87.0
- for <u-boot@lists.denx.de>; Fri, 04 Oct 2024 21:59:52 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a8d51a7d6f5so455537266b.2
+ for <u-boot@lists.denx.de>; Sat, 05 Oct 2024 07:28:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1728104392; x=1728709192; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UGS6O/vT28hSHOYDqgzVyQr0w/CGqGKcySuZ3m+hsHU=;
- b=GT9p8RWO6j7N4H0wIcz9zwhGSmhT3Y8ZX1Ci/zO5+cjOTwe5EdLN1gWRHP3CO2TrEP
- RqtgADIW5G7qZgukf/kTN2fLRAG8WIWtLNJ1LpXddzcPdAFLeRCOTBTFvnhGWio1cvjV
- bYN4Fbvb7DXF+HBS7jPXnkhG9wRuSV6+bz+kC1P8bnYmFZFUvU3W1edjZ053nT/8b2N2
- vAfRdbdAyWHE3A6nYlqf40tU9TsyV7HmIXZM9AOsPX8dQA3y+Hm5toTEbxl+yZfUstlB
- Rm+ehTJvtqIesGgD+zFUILW9XKkYNmLSHq7isNRrL4E/79xINxbfhUPQ3Rcpg8nurR5c
- LdeQ==
+ d=linaro.org; s=google; t=1728138502; x=1728743302; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=UJqx36LTRFanznV9SQT/K9dn0QODsB2BTgV3CsGwE/o=;
+ b=JLDLL61uap0zMjea/S4X3n188AqfDalA+u6AJeY0PbRJv1a1ItDu2hUNuIzrMsi2Zi
+ kV+1bGFH4LyLrz+NpazmXrPE3UlHUgBl4K0wjwPfigAj0OyBPWjSWNSCf+OiMcGHA5RN
+ V6Lliv9PzdMXQq0Hx/e84T8/j0r183qADPePAzG1elf/QiB/fWo/RvDEEtMky/SvmS85
+ Jr3zcWAq33iB9v4k6vYBfXmv3m8Y66pOg/MNkMQpPcK/XDUVhGgXBiUvpLjcqeGrPIAi
+ QlaLkqtwowFhBwvuK1z2D4v9nRFFHXjCYbVVyO5qzwg5eecUinChoscTzKC+HEP5qJt/
+ SKfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728104392; x=1728709192;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UGS6O/vT28hSHOYDqgzVyQr0w/CGqGKcySuZ3m+hsHU=;
- b=hvdjmV8aN6JT7zEZwScA4/Y5038oDEsB0ylmEVGRtFmaOo/AemCN0SMmGz/HADUolt
- 4OC9sPl9p3DwZrm2/scpPq/e2oe7j6AgmxNLdIWTFUckM5gRAAGK5jQzenZtworb2cD1
- QslS0ov4VRCBlwzT4bJh08mjV5BOP6ybBcWabL4cDkaK/hokCFnaqS3uJzy64CFDDKJw
- yM0Xov1VGZPyIgi7bHCUWZX1WJq4zb+rChfBoWmVIocljeOYNcMuN3EHK1L69T0eHxWC
- wu9mZEXiFAr/f6XgiwcY4jrHn9vGx2ljTH15rT/X20JtkMX1RyhB642chFXUb3zsl6zn
- d8qw==
+ d=1e100.net; s=20230601; t=1728138502; x=1728743302;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=UJqx36LTRFanznV9SQT/K9dn0QODsB2BTgV3CsGwE/o=;
+ b=uiOjfTrhmX8VgEBdtdx+31USPCdrqybaXDDxIDM3ATWhP0tUhl8woCO04Rrj4kjwmT
+ 4aQ8BTRMLjHZwARdJoh8vboOR8hfjP5tFZE5FTq8KEK3FzN/Ej9h1zokAQEVozHRGOfp
+ NgKgVy0j036s4xaatBbbRQ/RZ435VDGN8mJ6f4LAodIPRXdAdH3V3icFUglrEekfPMjM
+ 4/Ff5O2XTcRsT4No2HPtGxo/JI19tU0QjdKAkZmQWQF4HKyohg7HQ0F3H48UEfr6fRwg
+ MUzeVNNDBsmTI7O1LnNsIlKdxsn3aO6GVC+/IiZ+DXGcMQZxEPcibeos7OhaHQ1ISatR
+ Ts/Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV/vwGQ59HGZlf7XlpPbIcRckc3gE1+u3F/Td+XZFqY9K0XkewGyPRmUi9tuqmvWy9Cp3dtv5M=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx4xF3jhGYwX925z4kwFJz6xR5n0cQOiGQJ9k9xy6Sr4sXLgWGr
- B34T6SFPWnY/CCMyDYwP4AeDoe3Zx/tKSv9vNcSyTlLZF1pst3Mu4aVoPJ49WGtXesA1GL96wr/
- ryziEyJz8K6hHBKu4YIMMIVjjyuw=
-X-Google-Smtp-Source: AGHT+IGpqFWer2jDPpv9wdv0A3xmpQfrBfCw9HJ+43pEm0k/cCE72FcoMEoRlgsgArD6ROyTTc2oulroho6sa7z5omI=
-X-Received: by 2002:ac2:4e0c:0:b0:530:aa3f:7889 with SMTP id
- 2adb3069b0e04-539ab8c4e17mr3168192e87.56.1728104391664; Fri, 04 Oct 2024
- 21:59:51 -0700 (PDT)
+ AJvYcCV8Rcg0NFGeeNq/VW7GwIUOC0fG0ONoRv7ntqptkvJf6v6YKQ9ecsMrcnUb20Tsp8LWnSxDRf4=@lists.denx.de
+X-Gm-Message-State: AOJu0YybbdpnuIuzpPnakmL+XlnwUrsghzaxsxsLkgmKgIxlP+gSPGOP
+ +Ir4XOu7R2cYfyXk1yr940HXNLCX2XzcT+1omO/mLN/uVVFgadx5waqCQeJUTE0=
+X-Google-Smtp-Source: AGHT+IGtdPGumZIjsATBJ/K9jNG8jxQtANIre/eZcJRIYN2sBEEVds3uJqRS5MhYbQ9fzrg3pd3hRQ==
+X-Received: by 2002:a17:907:d1a:b0:a99:3c13:9131 with SMTP id
+ a640c23a62f3a-a993c1391eamr206895166b.25.1728138500302; 
+ Sat, 05 Oct 2024 07:28:20 -0700 (PDT)
+Received: from hera (ppp176092143132.access.hol.gr. [176.92.143.132])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a992e7d65acsm137178466b.184.2024.10.05.07.28.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 05 Oct 2024 07:28:19 -0700 (PDT)
+Date: Sat, 5 Oct 2024 17:28:16 +0300
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, u-boot-amlogic@groups.io,
+ u-boot@lists.denx.de, da@libre.computer
+Subject: Re: [PATCH 1/2] ARM: meson: add support for Libre Computer
+ aml-a311d-cc
+Message-ID: <ZwFNAHBcMuxbSrDr@hera>
+References: <20240920-u-boot-topic-libre-computer-solitude-alta-v1-0-8915b108840b@linaro.org>
+ <20240920-u-boot-topic-libre-computer-solitude-alta-v1-1-8915b108840b@linaro.org>
 MIME-Version: 1.0
-References: <ZQ2PR01MB1307BD4AFB3EAB5254E979C8E6712@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
-In-Reply-To: <ZQ2PR01MB1307BD4AFB3EAB5254E979C8E6712@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
-From: E Shattow <lucent@gmail.com>
-Date: Fri, 4 Oct 2024 21:59:40 -0700
-Message-ID: <CANV2PTMT+NB9JPEAhN59LJSV1xoH_NmPdFQoL0mCHyU-SDHJ9g@mail.gmail.com>
-Subject: Re: [PATCH v1 00/12] Support OF_UPSTREAM for StarFive JH7110
-To: Hal Feng <hal.feng@starfivetech.com>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, 
- Emil Renner Berthing <emil.renner.berthing@canonical.com>, 
- Minda Chen <minda.chen@starfivetech.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
- Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>, 
- Sumit Garg <sumit.garg@linaro.org>, Rick Chen <rick@andestech.com>, 
- H Bell <dmoo_dv@protonmail.com>, Nam Cao <namcao@linutronix.de>, 
- Bo Gan <ganboing@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240920-u-boot-topic-libre-computer-solitude-alta-v1-1-8915b108840b@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,58 +95,337 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Thanks Neil,
 
-On Thu, Oct 3, 2024 at 10:23=E2=80=AFAM Hal Feng <hal.feng@starfivetech.com=
-> wrote:
+
+On Fri, Sep 20, 2024 at 03:33:33PM +0200, Neil Armstrong wrote:
+> Add support for the Libre Computer aml-a311d-cc "Alta" board:
+> https://libre.computer/products/aml-a311d-cc/
 >
-> > On 01.10.24 01:56, Heinrich Schuchardt wrote:
-> > Another approach would be to build all device-trees into U-Boot and use=
- the
-> > EEPROM information to select the correct one at runtime.
-> >
-> > This approach is selected by Wandboard defconfig and other boards by
-> > specifying CONFIG_MULTI_DTB_FIT and CONFIG_OF_LIST. The choice of the
-> > device-tree is made in board_fit_config_name_match().
-> >
-> > The advantage from the standpoint of a Linux distro would be that one d=
-istro
-> > image can be provided that will run on all JH7110 boards.
+> The Alta board has a Credit Card form factor, similar to the
+> the prvevious "Le Potato" card, but with the Amlogic A311D SoC,
+> MIPI DSI and CSI connectors. PoE header and a single USB2 Type-C
+> connector replacing the microUSB one for power and USB 2.0.
 >
-> That is a good idea. I will try to do this after my five-day vacation.
-> By the way, I wanna know whether jh7110-milkv-mars-cm.dts and
-> jh7110-milkv-mars-cm-lite.dts are in the process of upstreaming?
-> I don't see them in the kernel mainline.
+> The board has an embedded SPI NOR flash, and EFI Capsule support
+> is added.
 >
-> Thanks for your suggestions.
+> The GUID is dynamically generated for the board, to get it:
+> => efidebug capsule esrt
+> ========================================
+> ESRT: fw_resource_count=1
+> ESRT: fw_resource_count_max=1
+> ESRT: fw_resource_version=1
+> [entry 0]==============================
+> ESRT: fw_class=17E07D9D-4D91-53F4-8780-1D91F279C1A5
+> ESRT: fw_type=unknown
+> ESRT: fw_version=0
+> ESRT: lowest_supported_fw_version=0
+> ESRT: capsule_flags=0
+> ESRT: last_attempt_version=0
+> ESRT: last_attempt_status=success
+> ========================================
 >
-> Best regards,
-> Hal
+> On the host (with the aml_encrypt_g12a result binary):
+> $ eficapsule --guid 17E07D9D-4D91-53F4-8780-1D91F279C1A5 -i 1 u-boot.bin u-boot.cap
+>
+> On the board (from USB disk containing u-boot.cap at root):
+> => load usb 0:1 $kernel_addr_r u-boot.cap
+> => efidebug capsule update $kernel_addr_r
+>
+> The binary will then be flashed on the SPI.
+>
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+> ---
+>  .../dts/meson-g12b-a311d-libretech-cc-u-boot.dtsi  |  15 +++
+>  board/libre-computer/aml-a311d-cc/MAINTAINERS      |   7 ++
+>  board/libre-computer/aml-a311d-cc/Makefile         |   6 ++
+>  board/libre-computer/aml-a311d-cc/aml-a311d-cc.c   |  44 +++++++++
+>  configs/aml-a311d-cc_defconfig                     | 108 +++++++++++++++++++++
+>  doc/board/amlogic/aml-a311d-cc.rst                 |  46 +++++++++
+>  doc/board/amlogic/index.rst                        |   1 +
+>  7 files changed, 227 insertions(+)
+>
+> diff --git a/arch/arm/dts/meson-g12b-a311d-libretech-cc-u-boot.dtsi b/arch/arm/dts/meson-g12b-a311d-libretech-cc-u-boot.dtsi
+> new file mode 100644
+> index 00000000000..cbada739042
+> --- /dev/null
+> +++ b/arch/arm/dts/meson-g12b-a311d-libretech-cc-u-boot.dtsi
+> @@ -0,0 +1,15 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +/*
+> + * Copyright (c) 2023 Neil Armstrong <neil.armstrong@linaro.org>
+> + */
+> +
+> +#include "meson-g12-common-u-boot.dtsi"
+> +
+> +&sd_emmc_c {
+> +	pinctrl-0 = <&emmc_ctrl_pins>, <&emmc_data_4b_pins>;
+> +	bus-width = <4>;
+> +};
+> +
+> +&spifc {
+> +	status = "okay";
+> +};
+> diff --git a/board/libre-computer/aml-a311d-cc/MAINTAINERS b/board/libre-computer/aml-a311d-cc/MAINTAINERS
+> new file mode 100644
+> index 00000000000..b4b77acd23b
+> --- /dev/null
+> +++ b/board/libre-computer/aml-a311d-cc/MAINTAINERS
+> @@ -0,0 +1,7 @@
+> +LIBRE-COMPUTER AML-A311D-CC
+> +M:	Neil Armstrong <neil.armstrong@linaro.org>
+> +S:	Maintained
+> +L:	u-boot-amlogic@groups.io
+> +F:	board/amlogic/aml-a311d-cc/
+> +F:	configs/aml-a311d-cc_defconfig
+> +F:	doc/board/amlogic/aml-a311d-cc.rst
+> diff --git a/board/libre-computer/aml-a311d-cc/Makefile b/board/libre-computer/aml-a311d-cc/Makefile
+> new file mode 100644
+> index 00000000000..461955def3a
+> --- /dev/null
+> +++ b/board/libre-computer/aml-a311d-cc/Makefile
+> @@ -0,0 +1,6 @@
+> +# SPDX-License-Identifier: GPL-2.0+
+> +#
+> +# (C) Copyright 2016 BayLibre, SAS
+> +# Author: Neil Armstrong <narmstrong@baylibre.com>
+> +
+> +obj-y	:= aml-a311d-cc.o
+> diff --git a/board/libre-computer/aml-a311d-cc/aml-a311d-cc.c b/board/libre-computer/aml-a311d-cc/aml-a311d-cc.c
+> new file mode 100644
+> index 00000000000..e45cfd5d8a3
+> --- /dev/null
+> +++ b/board/libre-computer/aml-a311d-cc/aml-a311d-cc.c
+> @@ -0,0 +1,44 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright (C) 2016 BayLibre, SAS
+> + * Author: Neil Armstrong <narmstrong@baylibre.com>
+> + */
+> +
+> +#include <dm.h>
+> +#include <env.h>
+> +#include <init.h>
+> +#include <net.h>
+> +#include <efi_loader.h>
+> +#include <asm/io.h>
+> +#include <asm/arch/eth.h>
+> +
+> +struct efi_fw_image fw_images[] = {
+> +	{
+> +		.fw_name = u"AML_A311D_CC_BOOT",
+> +		.image_index = 1,
+> +	},
+> +};
+> +
+> +struct efi_capsule_update_info update_info = {
+> +	.dfu_string = "sf 0:0=u-boot-bin raw 0 0x10000",
+> +	.num_images = ARRAY_SIZE(fw_images),
+> +	.images = fw_images,
+> +};
+> +
+> +
+> +#if IS_ENABLED(CONFIG_SET_DFU_ALT_INFO)
+> +void set_dfu_alt_info(char *interface, char *devstr)
+> +{
+> +	if (strcmp(interface, "ram") == 0)
+> +		env_set("dfu_alt_info", "fitimage ram 0x08080000 0x4000000");
+> +	else if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
+> +		env_set("dfu_alt_info", update_info.dfu_string);
+> +}
+> +#endif
+> +
+> +int misc_init_r(void)
+> +{
+> +	meson_generate_serial_ethaddr();
+> +
+> +	return 0;
+> +}
+> diff --git a/configs/aml-a311d-cc_defconfig b/configs/aml-a311d-cc_defconfig
+> new file mode 100644
+> index 00000000000..c8e22200419
+> --- /dev/null
+> +++ b/configs/aml-a311d-cc_defconfig
+> @@ -0,0 +1,108 @@
+> +CONFIG_ARM=y
+> +CONFIG_SYS_VENDOR="libre-computer"
+> +CONFIG_SYS_BOARD="aml-a311d-cc"
+> +CONFIG_ARCH_MESON=y
+> +CONFIG_TEXT_BASE=0x01000000
+> +CONFIG_NR_DRAM_BANKS=1
+> +CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+> +CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x20000000
+> +CONFIG_ENV_SIZE=0x2000
+> +CONFIG_ENV_OFFSET=0xFFFF0000
+> +CONFIG_ENV_SECT_SIZE=0x10000
+> +CONFIG_DM_GPIO=y
+> +CONFIG_DEFAULT_DEVICE_TREE="amlogic/meson-g12b-a311d-libretech-cc"
+> +CONFIG_OF_LIBFDT_OVERLAY=y
+> +CONFIG_DM_RESET=y
+> +CONFIG_MESON_G12A=y
+> +CONFIG_DEBUG_UART_BASE=0xff803000
+> +CONFIG_DEBUG_UART_CLOCK=24000000
+> +CONFIG_IDENT_STRING="aml-a311d-cc"
+> +CONFIG_SYS_LOAD_ADDR=0x1000000
+> +CONFIG_DEBUG_UART=y
+> +CONFIG_REMAKE_ELF=y
+> +CONFIG_FIT=y
+> +CONFIG_FIT_SIGNATURE=y
+> +CONFIG_FIT_VERBOSE=y
+> +CONFIG_LEGACY_IMAGE_FORMAT=y
+> +CONFIG_OF_BOARD_SETUP=y
+> +# CONFIG_DISPLAY_CPUINFO is not set
+> +CONFIG_MISC_INIT_R=y
+> +CONFIG_SYS_MAXARGS=32
+> +# CONFIG_CMD_BDI is not set
+> +# CONFIG_CMD_IMI is not set
+> +CONFIG_CMD_DFU=y
+> +CONFIG_CMD_NVEDIT_EFI=y
+> +CONFIG_CMD_GPIO=y
+> +# CONFIG_CMD_LOADS is not set
+> +CONFIG_CMD_MMC=y
+> +CONFIG_CMD_SF_TEST=y
+> +CONFIG_CMD_SPI=y
+> +CONFIG_CMD_USB=y
+> +CONFIG_CMD_USB_MASS_STORAGE=y
+> +CONFIG_CMD_EFIDEBUG=y
+> +# CONFIG_CMD_SETEXPR is not set
+> +CONFIG_CMD_REGULATOR=y
+> +CONFIG_OF_CONTROL=y
+> +CONFIG_ENV_IS_IN_SPI_FLASH=y
+> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> +CONFIG_ADC=y
+> +CONFIG_SARADC_MESON=y
+> +CONFIG_BUTTON=y
+> +CONFIG_BUTTON_ADC=y
+> +CONFIG_DFU_RAM=y
+> +CONFIG_DFU_SF=y
+> +CONFIG_SET_DFU_ALT_INFO=y
+> +CONFIG_MMC_MESON_GX=y
+> +CONFIG_MTD=y
+> +CONFIG_DM_MTD=y
+> +CONFIG_DM_SPI_FLASH=y
+> +CONFIG_SPI_FLASH_GIGADEVICE=y
+> +CONFIG_SPI_FLASH_SPANSION=y
+> +CONFIG_PHY_REALTEK=y
+> +CONFIG_DM_MDIO=y
+> +CONFIG_DM_MDIO_MUX=y
+> +CONFIG_ETH_DESIGNWARE_MESON8B=y
+> +CONFIG_MDIO_MUX_MESON_G12A=y
+> +CONFIG_MESON_G12A_USB_PHY=y
+> +CONFIG_PINCTRL=y
+> +CONFIG_PINCTRL_MESON_G12A=y
+> +CONFIG_POWER_DOMAIN=y
+> +CONFIG_MESON_EE_POWER_DOMAIN=y
+> +CONFIG_DM_REGULATOR=y
+> +CONFIG_DM_REGULATOR_FIXED=y
+> +CONFIG_DEBUG_UART_ANNOUNCE=y
+> +CONFIG_DEBUG_UART_SKIP_INIT=y
+> +CONFIG_MESON_SERIAL=y
+> +CONFIG_SPI=y
+> +CONFIG_DM_SPI=y
+> +CONFIG_MESON_SPIFC=y
+> +CONFIG_SYSINFO=y
+> +CONFIG_SYSINFO_SMBIOS=y
+> +CONFIG_USB=y
+> +CONFIG_DM_USB_GADGET=y
+> +CONFIG_USB_XHCI_HCD=y
+> +CONFIG_USB_XHCI_DWC3=y
+> +CONFIG_USB_DWC3=y
+> +# CONFIG_USB_DWC3_GADGET is not set
+> +CONFIG_USB_DWC3_MESON_G12A=y
+> +CONFIG_USB_KEYBOARD=y
+> +CONFIG_USB_GADGET=y
+> +CONFIG_USB_GADGET_VENDOR_NUM=0x1b8e
+> +CONFIG_USB_GADGET_PRODUCT_NUM=0xfada
+> +CONFIG_USB_GADGET_DWC2_OTG=y
+> +CONFIG_USB_GADGET_DWC2_OTG_PHY_BUS_WIDTH_8=y
+> +CONFIG_USB_GADGET_DOWNLOAD=y
+> +CONFIG_VIDEO=y
+> +# CONFIG_VIDEO_BPP8 is not set
+> +# CONFIG_VIDEO_BPP16 is not set
+> +CONFIG_SYS_WHITE_ON_BLACK=y
+> +CONFIG_VIDEO_MESON=y
+> +CONFIG_VIDEO_DT_SIMPLEFB=y
+> +CONFIG_SPLASH_SCREEN=y
+> +CONFIG_SPLASH_SCREEN_ALIGN=y
+> +CONFIG_VIDEO_BMP_RLE8=y
+> +CONFIG_BMP_16BPP=y
+> +CONFIG_BMP_24BPP=y
+> +CONFIG_BMP_32BPP=y
+> +CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
+> +CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+> diff --git a/doc/board/amlogic/aml-a311d-cc.rst b/doc/board/amlogic/aml-a311d-cc.rst
+> new file mode 100644
+> index 00000000000..25c1e01906a
+> --- /dev/null
+> +++ b/doc/board/amlogic/aml-a311d-cc.rst
+> @@ -0,0 +1,46 @@
+> +.. SPDX-License-Identifier: GPL-2.0+
+> +
+> +U-Boot for Libre Computer AML-A311D-CC 'Alta' (A311D)
+> +=====================================================
+> +
+> +AML-A311D-CC is a Single Board Computer manufactured by Libre Computer Technology with
+> +the following specifications:
+> +
+> + - Amlogic A311D Arm Cortex-A53 dual-core + Cortex-A73 quad-core SoC
+> + - 2 or 4GB LPDDR4 SDRAM
+> + - Gigabit Ethernet
+> + - HDMI 2.1 display
+> + - 40-pin GPIO header
+> + - 4 x USB 3.0 Host, 1 x USB 2.0 Type-C
+> + - eMMC 5.x SM Interface for Libre Computer Modules
+> + - microSD
+> + - Infrared receiver
+> +
+> +Schematics are available on the manufacturer website.
+> +
+> +U-Boot Compilation
+> +------------------
+> +
+> +.. code-block:: bash
+> +
+> +    $ export CROSS_COMPILE=aarch64-none-elf-
+> +    $ make aml-a311d-cc_defconfig
+> +    $ make
+> +
+> +U-Boot Signing with Pre-Built FIP repo
+> +--------------------------------------
+> +
+> +.. code-block:: bash
+> +
+> +    $ git clone https://github.com/LibreELEC/amlogic-boot-fip --depth=1
+> +    $ cd amlogic-boot-fip
+> +    $ mkdir my-output-dir
+> +    $ ./build-fip.sh aml-a311d-cc /path/to/u-boot/u-boot.bin my-output-dir
+> +
+> +Then write U-Boot to SD or eMMC with:
+> +
+> +.. code-block:: bash
+> +
+> +    $ DEV=/dev/boot_device
+> +    $ dd if=fip/u-boot.bin.sd.bin of=$DEV conv=fsync,notrunc bs=512 skip=1 seek=1
+> +    $ dd if=fip/u-boot.bin.sd.bin of=$DEV conv=fsync,notrunc bs=1 count=440
+> diff --git a/doc/board/amlogic/index.rst b/doc/board/amlogic/index.rst
+> index 46f44bf34ec..de91b21f977 100644
+> --- a/doc/board/amlogic/index.rst
+> +++ b/doc/board/amlogic/index.rst
+> @@ -85,6 +85,7 @@ Board Documentation
+>  .. toctree::
+>     :maxdepth: 1
+>
+> +   aml-a311d-cc
+>     bananapi-cm4io
+>     bananapi-m2pro
+>     bananapi-m2s
+>
+> --
+> 2.34.1
+>
 
-There is not any jh7110-milkv-mars-cm.dts and
-jh7110-milkv-mars-cmlite.dts patch for Linux kernel upstream yet.
+Board boots fine, I haven't tested everything though
 
-Now may be a good time to do so, since Star64 was accepted and makes
-use of the common jh7110 dtsi that was introduced with devicetree of
-Milk-V Mars to Linux kernel. First this can go in U-Boot as the
-jh7110-milkv-mars.dts is good for Milk-V Mars CM and CM Lite, with
-addition of some GPIO assignments. This can be stubbed out by
-including jh7110-milkv-mars.dts until there are accepted upstream
-devicetree files for Mars CM and CM Lite. There are different GPIO
-assignments depending if it is U-Boot phase or Linux phase of the boot
-process; per the vendor sources. It is enough to pass a loaded
-jh7110-milkv-mars.dts to Linux on Mars CM and CM Lite hardware, if
-this GPIO assignment was done at U-Boot time and since then there is
-never any MMC reset while in Linux kernel:
+Tested-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-https://github.com/milkv-mars/mars-buildroot-sdk/commit/880a249518f72ecf1e2=
-947dfeb2c66e5035fce90
-
-https://github.com/milkv-mars/mars-buildroot-sdk/commit/042ea06598995db99dd=
-bbbb252ee439c42b9c1a9
-
-Much of the above diff listings can be ignored as already implemented
-or not needed, however, provided for reference what I am talking about
-for GPIO assignments 22 24 62 depending on the phase of boot process.
-
--E
