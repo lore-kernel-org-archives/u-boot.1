@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 099A3CFA756
-	for <u-boot@archiver.kernel.org>; Sat,  5 Oct 2024 16:47:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F9A3CFA756
+	for <u-boot@archiver.kernel.org>; Sat,  5 Oct 2024 16:47:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6CD48889C3;
-	Sat,  5 Oct 2024 18:46:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CB6F6889BD;
+	Sat,  5 Oct 2024 18:47:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZyP+0bsK";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="C17SfCo/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1AEB488B23; Sat,  5 Oct 2024 18:46:58 +0200 (CEST)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
+ id 7CFE2889BD; Sat,  5 Oct 2024 18:47:31 +0200 (CEST)
+Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
+ [IPv6:2a00:1450:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D577D889BD
- for <u-boot@lists.denx.de>; Sat,  5 Oct 2024 18:46:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 94A6F8897F
+ for <u-boot@lists.denx.de>; Sat,  5 Oct 2024 18:47:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-539983beb19so3933278e87.3
- for <u-boot@lists.denx.de>; Sat, 05 Oct 2024 09:46:55 -0700 (PDT)
+Received: by mail-lj1-x22a.google.com with SMTP id
+ 38308e7fff4ca-2fac6b3c220so42041611fa.2
+ for <u-boot@lists.denx.de>; Sat, 05 Oct 2024 09:47:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1728146815; x=1728751615; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1728146849; x=1728751649; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kqino+hV0YflxPFz8hWuXGu7Z1WLh5o9NECmz/Pd9YQ=;
- b=ZyP+0bsK1jYR+a/VzyGDa+UCboU5T7R0uwbLbPUNZmgeDmqTngx6hfynDE1l7/8L5D
- PXtqWPBb4rFZMLfUCjFf//kgDWy7ymtjgs5PyJYU6uSjdbFkt9tkkrvaZ4aKhf5w/NrE
- DF1oKxI8Hna2+2oRzHB1Xe6QdGpHugNrBOW9RDPwaWiueHHDuQ0uI4LOYqyvACoeT0L/
- y0GQjthSxJJLR5ZHIbzG34EXE3hgzzFw/v/oIo3dHxQnMpLQACfvrpRAWqEyXM79g/Zg
- jAEbhX5+1mnEU9dz87qOqj9/e2bvnMdwdeXFqpYU/x+l/9fYIC2HVqv/noScU/oLFB5D
- pU3w==
+ bh=kc8vLHHmyLxk9MtHgruyX7LPn+tG15aLyVe5K+AplLo=;
+ b=C17SfCo/QCV6ifMKuyrJ6DAItM04qYOWE8eOVVnnc4ahn/EGQnP8lAhwQ8D4wfxZ3Q
+ j6w8Aaz46WG0h7AXwhdcvHNV4RjvvHQ/4ZKk6Mg0jOtvjNxD/opr62RapI37mB6Xm/1m
+ h50GJ4TZFinBoTPUO/eVPzcnyCRN4aZg10kzqoQlwEWGlGdpYbczr2y0TtByrJTxYMa3
+ mUyIjpGztT77KxRdfxsmEmuUj+J7r0yo982/KdrgY64xeKbDRahv4NPjz6Y9LAkUQ02c
+ DGREos5wba2LhcXvgbg2w+Y1Opvbr1JYUn8jpsj8sp1lyPPymSahGg2lgsmjAGr1QU/I
+ 2frg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728146815; x=1728751615;
+ d=1e100.net; s=20230601; t=1728146849; x=1728751649;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=kqino+hV0YflxPFz8hWuXGu7Z1WLh5o9NECmz/Pd9YQ=;
- b=mA6E4TfTEf9Ln/SWUwggf8jufSyBWn2N2zjEYIvt+twmje9WkREz9zUZZTalSmJ+jw
- NfdqpVo0QKvgglT6a1HeJBM0jontpHuwwYrJHfqvnsimnDPNEOhjgdc3tAxhXEzdqvVt
- Lc5gx9TNoxyOpT27/LL+XI5Vw/liyXMQPDWZebTK59HMWwheZSkNXGi3J6SMtPXhv/qm
- TGHsFzs5gzR1TjXqlzIqzIJ89pvwY1m1V7f4xdKvvVe+fv5I87bnWfPIa7RCqAI3nl+V
- 1ho69Vdu5qEg8+SQGRNHEELNG2qDVVL7srIaCbf6g8H5Sh+GAE2KJIYpzNkaYkjDqBvA
- uaYA==
-X-Gm-Message-State: AOJu0Yyz05C+uyrz6YLUF1eB4RhxnjhKN0YFUPZWgZ2HFbk5ovpVo/1V
- 3qh0rg5kg+FRGG44l3sf0p8Ski8XNsI5dZgWW2PQlN413N1ZxKouJNZlw7Ffs09fHHzmZzj1jB0
- m68dJMOlbCmnIM9itIcW5lZJb5dE=
-X-Google-Smtp-Source: AGHT+IGxMPJDt+vWpjhlB7bAL4olsCWTGtUJaHgUBa/IM60sdL2pawH/NnKYnikYpMzeFKMCrLWFtsLcx8GSvKTigno=
-X-Received: by 2002:a05:6512:2211:b0:539:a4ef:675a with SMTP id
- 2adb3069b0e04-539ab87e1f6mr3423472e87.34.1728146814977; Sat, 05 Oct 2024
- 09:46:54 -0700 (PDT)
+ bh=kc8vLHHmyLxk9MtHgruyX7LPn+tG15aLyVe5K+AplLo=;
+ b=dNbDHJEnbhv1/Quc/bSi2++5YpvwljpgOPwiZGkpYmMpyFDYkY9MEf1Qw6dMKCK5Bb
+ 6duOLun8keOGs/KDRAPbN6grcS+3/228DG6n3IMkxko76maAIESe6RPDNPFkAL38v6JR
+ dfm1o4qgsm+pbnMfxHlz2/dSJ5peSf/IPeMNjUYtLyBwWMpusu1WSkbLKq+N6cy0nJZd
+ nWvQ1S+lC/512th3HLtDxiuSEyyYwZidQvhiq1PBe/F4ckdWWaynRh6Of2/OPjO0g3yR
+ k+3WQI+QvoHPBQT4G7poWmlqC+jDWj2gCQgb7g4Z90iCZK7LWkP8NjOo5aQAIVG3k65l
+ FrvA==
+X-Gm-Message-State: AOJu0YwdsPWUtXJ9pPhjXxY3V6/dZRhq4I1Df/ZcFP8d7by/P3l2o4HR
+ Qix93wNyy6QFM2VS8Bprf9JhjrHojt/Ui0KOKRXbg0AcxG4kEA4a+vLwbBoKCkmhsEGAHHDkf0u
+ a5AkWNOgIN14mDh6P7qMcyyVn5I4=
+X-Google-Smtp-Source: AGHT+IEbQKyfr988ZxL1z8Ny8jdC6L1fNPClAi6kt0rcpvapF0/vLE8ipvKAhWr3J3zS3ceGOCoR7Yy3aLI4NTY19ug=
+X-Received: by 2002:a05:651c:19ab:b0:2fa:c455:23c with SMTP id
+ 38308e7fff4ca-2faf3d79741mr43985631fa.42.1728146848612; Sat, 05 Oct 2024
+ 09:47:28 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240928235325.358821-1-marex@denx.de>
-In-Reply-To: <20240928235325.358821-1-marex@denx.de>
+References: <20240929013226.2750458-1-alice.guo@oss.nxp.com>
+In-Reply-To: <20240929013226.2750458-1-alice.guo@oss.nxp.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 5 Oct 2024 13:46:43 -0300
-Message-ID: <CAOMZO5BpoyobGyRmUqUpbR47mNjKP09oO=C+XT5+TtgtiZOKjQ@mail.gmail.com>
-Subject: Re: [PATCH] arm64: dts: imx8mp: Add support for DH electronics i.MX8M
- Plus DHCOM PicoITX
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Stefano Babic <sbabic@denx.de>, 
- Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
+Date: Sat, 5 Oct 2024 13:47:17 -0300
+Message-ID: <CAOMZO5DBt2+YEatfLO6QhYoSDQdLNdJhrGjVRXGHbqRb1BRS4w@mail.gmail.com>
+Subject: Re: [PATCH v2] gpio: adp5585: Add SPL config for ADP5585 driver
+To: alice.guo@oss.nxp.com
+Cc: u-boot@lists.denx.de, trini@konsulko.com, marek.vasut+renesas@mailbox.org, 
+ clamor95@gmail.com, paul.barker.ct@bp.renesas.com, michal.simek@amd.com, 
+ andre.przywara@arm.com, ye.li@nxp.com, jim.t90615@gmail.com, 
+ billy_tsai@aspeedtech.com, kabel@kernel.org, caleb.connolly@linaro.org, 
+ biju.das.jz@bp.renesas.com, sr@denx.de, piotr.wojtaszczyk@timesys.com, 
+ Alice Guo <alice.guo@nxp.com>, Peng Fan <peng.fan@nxp.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -90,17 +92,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Sep 28, 2024 at 8:54=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
+On Sat, Sep 28, 2024 at 10:33=E2=80=AFPM <alice.guo@oss.nxp.com> wrote:
 >
-> Add support for DH electronics i.MX8M Plus DHCOM SoM on PicoITX carrier b=
-oard.
-> This system is populated with serial console, EQoS ethernet, eMMC, SD, SP=
-I NOR,
-> LEDs and USB 3.0 host used in USB 2.0 mode on PicoITX.
+> From: Ye Li <ye.li@nxp.com>
 >
-> Matching Linux kernel patch has been posted:
-> https://lore.kernel.org/imx/20240928234949.357893-2-marex@denx.de/
+> So we can disable to build ADP5585 in SPL to save size
 >
-> Signed-off-by: Marek Vasut <marex@denx.de>
+> Signed-off-by: Ye Li <ye.li@nxp.com>
+> Signed-off-by: Alice Guo <alice.guo@nxp.com>
+> Reviewed-by: Peng Fan <peng.fan@nxp.com>
+> ---
+> Changes for v2:
+>  - added my Signed-off-by
 
 Applied to u-boot-imx/next, thanks.
