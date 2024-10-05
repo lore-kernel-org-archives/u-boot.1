@@ -4,58 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A9F8CF8852
-	for <u-boot@archiver.kernel.org>; Sat,  5 Oct 2024 00:09:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7EB2CF8868
+	for <u-boot@archiver.kernel.org>; Sat,  5 Oct 2024 01:13:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 757FD88F4E;
-	Sat,  5 Oct 2024 02:09:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BA98A88EFB;
+	Sat,  5 Oct 2024 03:13:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1728086978;
-	bh=OXIvlpLgZIZoSLge8h04Mu5hEaHCLEnFmlmc/2dv74c=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=IPgG0shNJZ4v9gubPt5EvnIrdBND5CkOp32rU2OJvWllIP0rV4Z7BZVaP/y9p6ut9
-	 +c4hS+yiXW16bft9iU6AtpjH9D69986DpVHTt4ErEOlWqtKsSMp7v5pXKlapZd6pya
-	 DVbz0aP1iUxNziQyr5Tg26CbIARLkRZYsfrrC7ZzCJt2qM6crTxa+Dfoe6RSpVnPGH
-	 sFwUcKEl2VGXYjnrliY8EtfDA/8EyyJUCYOK7mWioSvs7i+1tHuhWiC6mnIE3m9hTC
-	 dp4NMkynnB1ddETKptyCeGElMxH7imEv0bplwZErHUoF0k4PneX8LjbeCgARcFSK7y
-	 NnGBKgGctiQ4A==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+	s=phobos-20191101; t=1728090818;
+	bh=foZXNqsgAgZGFuDp5yAdEubcV+RvzHRlBDkOYlAy+qc=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=r2ZQDIRcQ2vpSu2054Qk1t40sGpjt51BQwgqgdp7h8/dm75J/KDPSgbwbSz3MWtXo
+	 keP+qGic1/29WehMDaA5pyNsY4+t1s6ZjAAVxX+yBqpufCSqRDXilHvpYfnSHvr9j7
+	 nR3jVZl3gR8CAiLP0tsx0xqtixzz3c8ESyahw6kDDVd2E8jFCVlpysNNwr3QtBlUL0
+	 r1lzR5keu4VIUXnWTqkTXM9u6UrvkJywigdgPAx+dFW1HGxvO3Af+x3rohTIsuZzzH
+	 w2P6KSBXZPOyVdaE7n922p95tkPl1CNt1aWYZ1NLpQX3jyGrzsjwdCyA3y6P1pBl/P
+	 PKMFyKHKOOztg==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 8895688DB2;
- Sat,  5 Oct 2024 02:09:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 6172F88B0B;
+ Sat,  5 Oct 2024 03:13:36 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1728086977;
- bh=OXIvlpLgZIZoSLge8h04Mu5hEaHCLEnFmlmc/2dv74c=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=kKpfOHdcQ+wqmKWCL55tGcfWEGw65RaHDZqLEaUq+eaO36B9lMcvqXkGsiyMfeSXt
- 3H3gAPM0NIIcOBT0GnRurC8kWb0P76tp0mirdenEs5VV2BKuOpxZKNuqUw/uU37LZU
- k0x6XkqEKo1dT/mCNOOCOzUqy0nzLzTM1DGvt8sykbWoDlOzPH0IS32HkMRPWVmZ2V
- 7RnDYLYYnWw8ZDfHqxpsVgAqSvTmihgSTW2C04nBmAlvN+sJIRbMUN41FzO96uwr+M
- N9vWG0Avdu+XfVpkWwUDJUdesdkxmK3EwssNL9kp2H3Xe0e7BAnqXrNhjbTCasGXGt
- LOuXVQeXTSIug==
-Message-ID: <d6c5d0bf-0fbf-4312-94be-8f6acc999e7d@denx.de>
-Date: Sat, 5 Oct 2024 01:57:49 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ARM: stm32: Update MAINTAINERS file globs for STM32MP
- DHSOM
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@dh-electronics.com,
- uboot-stm32@st-md-mailman.stormreply.com
-References: <20241004215213.252840-1-marex@denx.de>
- <20241004221421.GK4737@bill-the-cat>
-Content-Language: en-US
+ s=phobos-20191101; t=1728090817;
+ bh=foZXNqsgAgZGFuDp5yAdEubcV+RvzHRlBDkOYlAy+qc=;
+ h=From:To:Cc:Subject:Date:From;
+ b=lyMEzvEnm/BVOKP5QYNthD3hHkEUbaIn1hRqyaq+H3WR+wkdU5HlEHU01wQFbS0gU
+ 65FXH/FaDjh4ilf1lNpLgaIUZzQz0+mZkNIPaAqm/pQi1SjChV8IQu3zj+C+adhKLz
+ g3d54E4Wl8tHT8VSo0WtceThT8gx+5xDu2h0ECw5UY1VdWx/Qx/bTc+KclD/jlSZyM
+ 6UWwC2Fc2X27aYQDSlQ15nLXAy51UoauyKfcUVF0walVWzIQ5IRq7xgs9dHnLPsZw8
+ ns90gCD99qHXG3zfGlN5cSIDsKBgGi6/5OSAUtFNosWbbK+JjjCyPERMihUYeC38Ts
+ tKTaCS6GtK1rw==
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20241004221421.GK4737@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Fabio Estevam <festevam@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Jonas Karlman <jonas@kwiboo.se>,
+ Lothar Rubusch <l.rubusch@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@denx.de>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@dh-electronics.com
+Subject: [PATCH v2 1/2] dts: Add ability to build fallback DTBOs from
+ arch/$(ARCH)/dts
+Date: Sat,  5 Oct 2024 03:12:46 +0200
+Message-ID: <20241005011315.436233-1-marex@denx.de>
+X-Mailer: git-send-email 2.45.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,37 +74,151 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/5/24 12:14 AM, Tom Rini wrote:
-> On Fri, Oct 04, 2024 at 11:51:46PM +0200, Marek Vasut wrote:
->> Update the MAINTAINERS file glob to cover all of STM32MP DHSOM related files.
->>
->> Signed-off-by: Marek Vasut <marex@denx.de>
->> ---
->> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
->> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
->> Cc: Tom Rini <trini@konsulko.com>
->> Cc: u-boot@dh-electronics.com
->> Cc: uboot-stm32@st-md-mailman.stormreply.com
->> ---
->>   board/dhelectronics/dh_stm32mp1/MAINTAINERS | 5 ++---
->>   1 file changed, 2 insertions(+), 3 deletions(-)
->>
->> diff --git a/board/dhelectronics/dh_stm32mp1/MAINTAINERS b/board/dhelectronics/dh_stm32mp1/MAINTAINERS
->> index 865588f5b8b..d6c33c15aac 100644
->> --- a/board/dhelectronics/dh_stm32mp1/MAINTAINERS
->> +++ b/board/dhelectronics/dh_stm32mp1/MAINTAINERS
->> @@ -2,8 +2,7 @@ DH_STM32MP1_PDK2 BOARD
->>   M:	Marek Vasut <marex@denx.de>
->>   L:	u-boot@dh-electronics.com
->>   S:	Maintained
->> -F:	arch/arm/dts/stm32mp15xx-dhcom*
->> +F:	arch/arm/dts/stm32mp*dhco*
->>   F:	board/dhelectronics/dh_stm32mp1/
->> -F:	configs/stm32mp15_dhcom_basic_defconfig
->> -F:	configs/stm32mp15_dhcor_basic_defconfig
->> +F:	configs/stm32*_dhco*defconfig
->>   F:	include/configs/stm32mp15_dh_dhsom.h
-> 
-> Do you want to try the "N:	some-regex" syntax to see if that makes
-> it less likely to regress in the future? If not, this is fine.
-Fixed in V2
+Currently the enablement of OF_UPSTREAM results on the build system
+searching for DTs only in dts/upstream/ . There are platforms which
+use U-Boot specific DTBOs applied on top of U-Boot control DT during
+SPL stage, and source DTs for these are located in arch/$(ARCH)/dtb.
+
+Add dedicated 'dtbos' target which builds only .dtbos and not .dtbs and
+in case CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS is enabled, build
+this target for arch/$(ARCH)/dtb to generate local U-Boot specific DTBOs.
+
+Adjust top level Makefile so binman would search for .dtb and .dtbo in
+both OF_UPSTREAM specific paths and arch/$(ARCH)/dtb for the .dtbo case
+in case CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS is enabled.
+
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Jonas Karlman <jonas@kwiboo.se>
+Cc: Lothar Rubusch <l.rubusch@gmail.com>
+Cc: Michal Simek <michal.simek@amd.com>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Stefano Babic <sbabic@denx.de>
+Cc: Sumit Garg <sumit.garg@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@dh-electronics.com
+Cc: u-boot@lists.denx.de
+---
+V2: Gate this functionality behind CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS
+---
+NOTE: Depends on https://lore.kernel.org/u-boot/20241004001118.322531-1-marex@denx.de/
+---
+ Makefile             |  4 ++++
+ dts/Kconfig          | 16 ++++++++++++++++
+ dts/Makefile         | 14 +++++++++++++-
+ scripts/Makefile.dts |  6 ++++++
+ 4 files changed, 39 insertions(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index af24de4165e..a5258e8cb3f 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1375,7 +1375,11 @@ of_list := "$(ext_dtb_list)"
+ of_list_dirs := $(dir $(EXT_DTB))
+ else
+ of_list := $(CONFIG_OF_LIST)
++ifneq ($(CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS),)
++of_list_dirs := $(dt_dir) arch/$(ARCH)/dts
++else
+ of_list_dirs := $(dt_dir)
++endif
+ default_dt := $(if $(DEVICE_TREE),$(DEVICE_TREE),$(CONFIG_DEFAULT_DEVICE_TREE))
+ endif
+ 
+diff --git a/dts/Kconfig b/dts/Kconfig
+index 569d4be338e..385058b429f 100644
+--- a/dts/Kconfig
++++ b/dts/Kconfig
+@@ -125,6 +125,22 @@ config OF_UPSTREAM_VENDOR
+ 	help
+ 	  Select the vendor to build all devicetree files for.
+ 
++config OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS
++	bool "Build local DTBOs as fallback for DTBOs missing upstream"
++	default n
++	depends on OF_UPSTREAM
++	help
++	  Enable building DTBOs from arch/$(ARCH)/dts as a fallback for
++	  DTBOs which are not part of Linux kernel upstream yet. This is
++	  a stopgap measure to expedite OF_UPSTREAM switch for platforms
++	  which already have main DT in Linux kernel upstream, but still
++	  have leftover DTBOs in U-Boot tree.
++
++	  Do not use this option, upstream your DTs and DTBOs instead.
++	  If the upstreaming is in progress, use with utmost caution.
++
++	  If unsure, say N.
++
+ choice
+ 	prompt "Provider of DTB for DT control"
+ 	depends on OF_CONTROL
+diff --git a/dts/Makefile b/dts/Makefile
+index d6c2c9daf31..32c749a043a 100644
+--- a/dts/Makefile
++++ b/dts/Makefile
+@@ -11,12 +11,18 @@ DEVICE_TREE := unset
+ endif
+ 
+ ifeq ($(CONFIG_OF_UPSTREAM),y)
++ifneq ($(CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS),)
++local_dtbos := local-dtbos
++else
++local_dtbos :=
++endif
+ ifeq ($(CONFIG_ARM64),y)
+ dt_dir := dts/upstream/src/arm64
+ else
+ dt_dir := dts/upstream/src/$(ARCH)
+ endif
+ else
++local_dtbos :=
+ dt_dir := arch/$(ARCH)/dts
+ endif
+ 
+@@ -40,7 +46,7 @@ endif
+ 
+ targets += dt.dtb
+ 
+-$(DTB): arch-dtbs
++$(DTB): arch-dtbs $(local_dtbos)
+ 	$(Q)test -e $@ || (						\
+ 	echo >&2;							\
+ 	echo >&2 "Device Tree Source ($@) is not correctly specified.";	\
+@@ -53,6 +59,12 @@ PHONY += arch-dtbs
+ arch-dtbs:
+ 	$(Q)$(MAKE) $(build)=$(dt_dir) dtbs
+ 
++ifneq ($(CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS),)
++PHONY += local-dtbos
++local-dtbos:
++	$(Q)$(MAKE) $(build)=arch/$(ARCH)/dts dtbos
++endif
++
+ ifeq ($(CONFIG_SPL_BUILD),y)
+ obj-$(CONFIG_OF_EMBED) := dt-spl.dtb.o
+ # support "out-of-tree" build for dtb-spl
+diff --git a/scripts/Makefile.dts b/scripts/Makefile.dts
+index 1fe142f2bbf..3ab67b3c247 100644
+--- a/scripts/Makefile.dts
++++ b/scripts/Makefile.dts
+@@ -21,4 +21,10 @@ PHONY += dtbs
+ dtbs: $(addprefix $(obj)/, $(dtb-y))
+ 	@:
+ 
++ifneq ($(CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS),)
++PHONY += dtbos
++dtbos: $(addprefix $(obj)/, $(filter-out %.dtb,$(dtb-y)))
++	@:
++endif
++
+ clean-files := *.dtb *.dtbo */*.dtb */*.dtbo *_HS
+-- 
+2.45.2
+
