@@ -4,73 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B14FACFB421
-	for <u-boot@archiver.kernel.org>; Sat,  5 Oct 2024 16:50:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58A45CFB421
+	for <u-boot@archiver.kernel.org>; Sat,  5 Oct 2024 16:51:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4885A88CC9;
-	Sat,  5 Oct 2024 18:50:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D6F0D88D36;
+	Sat,  5 Oct 2024 18:51:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="d5kCGWME";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 116E488D03; Sat,  5 Oct 2024 18:50:56 +0200 (CEST)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1728147093;
+	bh=1CfsrESq0i+GZTzXxZ4aOU1Ctfniw5YiRIeDvCkKcIY=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=JAeIa/bRuZSJceK/E638H6wHPrfUqYFj+ipI/VsRTtFTys4ujBcVFIor1gQ++98+o
+	 9NMw6JQFRnbI3IEURJzDHeDISVikpl3m0lZGRODFfx1LI7XkfKJDhDNGNnd5yniwin
+	 yrAJPqd2TEUDuIYQ/UBmAaB7ABN10j/mnif3qawT1x53+uGsz/RdzDHTNKUbkuO5YA
+	 DPBHXfwszBBUI+fS+bISxsHKZN77K/9ZTr7QA3ybMpJZsmPdh60Kv7VfDU4hm8FuCn
+	 gvBqDMg05m1NS9EBG1A52gGFPWZGHJr+36SZY+eMaE4QmtlbVHEALPClsRd0VYohGL
+	 WdAM701GL8EbQ==
+Received: from mail.denx.de (unknown
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F66E88CC1
- for <u-boot@lists.denx.de>; Sat,  5 Oct 2024 18:50:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-53991d05416so3677583e87.2
- for <u-boot@lists.denx.de>; Sat, 05 Oct 2024 09:50:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1728147053; x=1728751853; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=je3Kkt98H6xwXiXWHt5Y+N9Pxkx4x8fbfugAojXA8RQ=;
- b=d5kCGWME8wx+cpDhBaIl9LZGhfQNoDg0Qi+lpqjtJGmF7dMMmSsEmBnhsMAn+YURmK
- c5DJ8J6w6MxUROL6BRp2kUYHo+/m2mkb4ZfFdh0+q7FR7kVKFMZDYFDcYMZDMhVD5XeI
- R84pA0gMLH65ImodBoPihzM5GBKsja6VINW2OW9jKq3i4hzuHPnRg7yDMfLaY0R3iyyd
- ZaxAzEHhTfV4ok7EdXl8+qfQ7OjjH9CGAaQCnGGbTx/bjdL2NIfIxNgtFjGTvz4Rl5Ky
- HMom+EG3wBPpUkPmnW2EJ1QHe5mwiqzBiG+vTJAm26A6IV97zLbxC/uYcb0C1tGKdxQQ
- FC8g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728147053; x=1728751853;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=je3Kkt98H6xwXiXWHt5Y+N9Pxkx4x8fbfugAojXA8RQ=;
- b=DQXyFHSXE9+WyMtveRoBHuGjo3TrZCv0QE8QPR4g4Sq461W5ogCaV9nFe0Fr/76TSh
- 2Z1U1KPJ2vsp7VbqZn1QCTF1d4d19pJuvWGNfCVdJZ5IegWF8Gnw+dOHyU+g3JhFubo3
- TLBkazuyrNhX+6/QM3W0tcLPtvTwgIxnaY15k5aUgLahCrcqZwDuQVFpFVNQXXoTf23q
- F/MR0qHsGnVmiLrdtiE5cNrbpWNFMbmrzmZkWQJWMlV8XmOZoxn/OXl6red/KQ7Qsmc6
- +QvX5NM6ENajWDZmTR5GeJpSk/orhwTETpEReYFna7FJd1qzxr8QMjODhBVQQ67yRcRl
- 2VCQ==
-X-Gm-Message-State: AOJu0Yz2v81naM7Z2rnOvvNVTrzFGm7WxMRF1Hdq4JMw3+Lnh4M1cArs
- uDbjZWg+fwLQo+FWMluHsdMtiE8obJd0D3wN9dTLiFm24QRgf020/sj2uVe3BV52mECChLqAv2e
- 4dHoplhUDW9XKjBudWRbxoB3qUxY9dRJ5
-X-Google-Smtp-Source: AGHT+IEGL6Yc3+xdal9Wg+Fi7bsZ62qA3d9j6U+J3lCKizZbJHjA9P7p/An0AFIgK4Z0nPTQdIRJNzCBxEkjcbQNYec=
-X-Received: by 2002:a05:6512:138d:b0:533:4497:9f29 with SMTP id
- 2adb3069b0e04-539ab87dd29mr4585246e87.31.1728147053251; Sat, 05 Oct 2024
- 09:50:53 -0700 (PDT)
+ (Authenticated sender: festevam@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 3A17488CC1;
+ Sat,  5 Oct 2024 18:51:32 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1728147092;
+ bh=1CfsrESq0i+GZTzXxZ4aOU1Ctfniw5YiRIeDvCkKcIY=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=zO6smVvuwlzVy1uVlkOQAFAfqu2EQKSCwMTUmn17wrHbZj7RuL/hMzCX4mpq6v1JU
+ OGa8g2r1pRjx6MZwatYpPCpht4GIsp6snXZwfDl47IndfzrsiOhGv1jhyuwKZDzEJe
+ JE4pbt9UvQ+R/cNAiKzcnCShogvGUKkYPZyYt4RJ1YPrH1R8YQ5ld1JS3nbPnuHjrI
+ voXmV9hcwi+hWQ1z3LJljMnydrmyzwySmkNaVBo0VNLGEq3aK0vLFC+4Rcd35rFcg5
+ RMF3mJ2RsWhU1v1B2KmntO+NmY7BRe16+Gs9tbmk20r2YNMMUtgg/KJWgRkCEpvaxN
+ h4P7LcJLZI7ag==
 MIME-Version: 1.0
-References: <20241004125450.1923873-1-festevam@gmail.com>
-In-Reply-To: <20241004125450.1923873-1-festevam@gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 5 Oct 2024 13:50:42 -0300
-Message-ID: <CAOMZO5AMH-26eA8ReR7Pw3fipM1rKX1t9Y7vvgdmdB+HrPYHkg@mail.gmail.com>
-Subject: Re: [PATCH] lxr2: Add DA9063 watchdog support
-To: sbabic@denx.de
-Cc: u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+Date: Sat, 05 Oct 2024 13:51:32 -0300
+From: Fabio Estevam <festevam@denx.de>
+To: Stefan Roese <sr@denx.de>
+Cc: Fabio Estevam <festevam@gmail.com>, jh80.chung@samsung.com,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v3] da9063: Add watchdog support
+In-Reply-To: <fa3f9053-0f40-402d-bf59-18398a9318f6@denx.de>
+References: <20240917135550.3164425-1-festevam@gmail.com>
+ <3ec25b5a-2c9b-46fe-a9b9-0b99f72d83a9@denx.de>
+ <5293f5a0d44059960aa2d5e8b114456f@denx.de>
+ <fa3f9053-0f40-402d-bf59-18398a9318f6@denx.de>
+Message-ID: <a0e0fd38e4596321d4c227c356f8c6b5@denx.de>
+X-Sender: festevam@denx.de
+User-Agent: Roundcube Webmail/1.3.6
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,16 +74,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Oct 4, 2024 at 9:54=E2=80=AFAM Fabio Estevam <festevam@gmail.com> w=
-rote:
->
-> From: Fabio Estevam <festevam@denx.de>
->
-> The LXR2 board has a DA9063 that can provide watchdog functionality.
->
-> The DA9063 watchdog can cause a full POR reset, which is preferred
-> over the built-in i.MX6 watchdog.
->
-> Signed-off-by: Fabio Estevam <festevam@denx.de>
+Hi Stefan,
+
+On 04/10/2024 09:43, Stefan Roese wrote:
+
+> Sure, please pull it in if this makes sense for you.
 
 Applied to u-boot-imx/next, thanks.
