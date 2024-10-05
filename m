@@ -4,84 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E9B0CF34C4
-	for <u-boot@archiver.kernel.org>; Sat,  5 Oct 2024 15:23:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E439CFA756
+	for <u-boot@archiver.kernel.org>; Sat,  5 Oct 2024 16:44:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9968A88A24;
-	Sat,  5 Oct 2024 17:23:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 82FA5889C3;
+	Sat,  5 Oct 2024 18:44:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="l3DSGWdw";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CP6zy71I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A082188835; Sat,  5 Oct 2024 17:23:03 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id 31FA9889C5; Sat,  5 Oct 2024 18:44:46 +0200 (CEST)
+Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
+ [IPv6:2607:f8b0:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B64F688A24
- for <u-boot@lists.denx.de>; Sat,  5 Oct 2024 17:23:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 9FA6F889BD
+ for <u-boot@lists.denx.de>; Sat,  5 Oct 2024 18:44:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-5c89bdb9019so3630188a12.0
- for <u-boot@lists.denx.de>; Sat, 05 Oct 2024 08:23:00 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-20b4a0940e3so29772025ad.0
+ for <u-boot@lists.denx.de>; Sat, 05 Oct 2024 09:44:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1728141780; x=1728746580;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZDlZBjXmbCSe66kUHKn9bqR4tF4jVKVaj5oHwLG5wxs=;
- b=l3DSGWdwEmoOiru3kZQLlqMBvtCSYL1FQqxzwPjEFkyZJOerAqKqpvfMl+Qs7qO8CT
- QLl5nEwDZdLxheQJ23YoD6Sv3hzJr+E8qVbTpm39QXO/t+fO14/BLYMgQH7VqHsl54xI
- m5acl4xFQkqBZJ1E1JvumH+T4ncwT585w/aYI=
+ d=gmail.com; s=20230601; t=1728146682; x=1728751482; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=bygjjYhZgVtuaJrx5VH3+I4AF6AurVUIyYYz8JbkCp4=;
+ b=CP6zy71IW6oRBNa2NjpcvtmlqUR0T+yIlHRFUpO/AwK0NHZg2WvyYGdNq9dD//OwYi
+ 1+hVwhPUAVDNJJ2hFFA3jcN44eo1eY9HNfXuLA99M2JGoBbIPR8ZoE2xGujdT/S4aPHf
+ 6nwvjtog3AUVTRwjRq+d5yTna5fmOVvi6YRuUV7itR/ZoU1nNlWx7wGoGfDsvyvQjhza
+ fprCZKcwV90aApZsKnAZ6zPmsfgHGwpc7TwCh6AEpSwz3Qx9Jqc+exd9QE2hH3aonIgB
+ vF3EBc00gpiLT3VaBkCUo0Tzipj6nswsv59UldtbezgSEJBvoM1F76WaAOJn7Mbm7SXH
+ JpGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728141780; x=1728746580;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ZDlZBjXmbCSe66kUHKn9bqR4tF4jVKVaj5oHwLG5wxs=;
- b=j0lyu7JNHu7Y4PCquMcYWRtGoKb7zdUiQvqKcXTKLy6iaXBkObstK0TIawazkI5KZs
- Vf9nDQrRsC7zlVo25e7eg4j8cOsFEiqL7HydMZraA7QzhQCxKRwhUPY8JjV2NLXkLw/S
- tPOj4/OsLHnX4SKS5+sC+cf62KkLdMfrKmYcIGt2yD95sbgBsebTePTNKbCgmol5HGs3
- JtKLzNiRpYyzjaO2wyCxDB9BVeohm4iS5AwbcTFJB6DdAmN9rC7cUvXDr61pBEdxh4Ot
- iT0Qgv0B8zTpxEWJcT1aNtLkMZgGREd0mb3yCSrI/hGt5phwtJssEjbMRT08YcSjyDdh
- fgBA==
-X-Gm-Message-State: AOJu0YyMUdDa7GZ2Q1nvrUkSXRINgYnyH8cgzh5dCwexQMQSUpx9PFQ5
- HIJk23yNbk/CGf68F0zi/zaBJ2THtDVJmtdtWg3jKzpf9wNG/Z5YGP3qbv1NSyqNhpP9GOx4m39
- xRRq1OnqB0VpbxVPE771jmiDF2l6RTkgTsWZ+hw==
-X-Google-Smtp-Source: AGHT+IESv2aGTQOkWySz2fOjk/w29tO8ijHQ7iTCc8O1SRq3ODYyQqMoXN1wd3EU8/vBROzSC9tBNo8BxbgNfa4lYd4=
-X-Received: by 2002:a05:6402:34d0:b0:5c5:cf0b:b515 with SMTP id
- 4fb4d7f45d1cf-5c8d2dfbf13mr5052927a12.1.1728141780128; Sat, 05 Oct 2024
- 08:23:00 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1728146682; x=1728751482;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bygjjYhZgVtuaJrx5VH3+I4AF6AurVUIyYYz8JbkCp4=;
+ b=LqhaDvQOGBjn3WYgMdoPHIztByYk9d+4mk+hjsRYSpiK3w8pGU02QP57hd6eV4LFmC
+ t9ZKZkqDr8rwNMQW+KGWBwzJPBE8mz5114k4Oil7eOUxH7Ok6Z+qaCDdDYSsHZVIwl2r
+ o56pJpSgdy5uy80zWVv9DTbp9afYj6cT4IwxU3sGcEAYAaHbB6TKX6L8VR3x59jSks9e
+ RiCQm5ltCsPIkVfldxLBaUuXRV4NB/m3ef/mffHGsxTMOor153v3LLWn3ubb/bfKfh5c
+ 7qAWozwkj8cMDgPYDHgcwO7xeTAN70LpAyfHJnUWl1ctmwIbQ7RzqDy1i0pgqu2bofz+
+ pwDQ==
+X-Gm-Message-State: AOJu0YyAran2cVtFZlf+W5awwEVkv3C4/z81ic6LIIgql1gJB5tXszDE
+ 20JxDs1ezVvkNhRa0rZJ8CZ3yVilsZaH009SlwiID8dyYYLHdTD2
+X-Google-Smtp-Source: AGHT+IFRvgE8NSXV8QY+ayVEq+2lOlC7oIsiS3T8ys1FDRtxJ3S1tuhr6hYZZTKesoxq6SiH/7ZR3Q==
+X-Received: by 2002:a17:903:1c1:b0:206:c12d:abad with SMTP id
+ d9443c01a7336-20bfe04d596mr88257495ad.34.1728146682011; 
+ Sat, 05 Oct 2024 09:44:42 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:a990:ca6c:4a16:562b])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-20c13994f84sm15000185ad.290.2024.10.05.09.44.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 05 Oct 2024 09:44:41 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: [GIT PULL] Please pull u-boot-imx-next-20241005
+Date: Sat,  5 Oct 2024 13:44:38 -0300
+Message-Id: <20241005164438.2065748-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20240919035512.13854-1-dinesh.maniyam@intel.com>
- <20240919035512.13854-17-dinesh.maniyam@intel.com>
-In-Reply-To: <20240919035512.13854-17-dinesh.maniyam@intel.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Sat, 5 Oct 2024 17:22:48 +0200
-Message-ID: <CAOf5uwk+CHPbGvLH=pjqbh1qiKg-xXMXFCP7iS9hXcHf9xDFmQ@mail.gmail.com>
-Subject: Re: [PATCH 16/19] drivers: mtd: nand: spl: Add support for nand SPL
- load image
-To: dinesh.maniyam@intel.com
-Cc: u-boot@lists.denx.de, Marek <marex@denx.de>, 
- Simon <simon.k.r.goldschmidt@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Johan Jonker <jbx6244@gmail.com>, Michal Simek <michal.simek@amd.com>,
- Arseniy Krasnov <avkrasnov@salutedevices.com>, 
- Alexander Dahl <ada@thorsis.com>, William Zhang <william.zhang@broadcom.com>, 
- Igor Prusov <ivprusov@salutedevices.com>, Tien Fong <tien.fong.chee@intel.com>,
- Kok Kiang <kok.kiang.hea@intel.com>, Boon Khai <boon.khai.ng@intel.com>, 
- Alif <alif.zakuan.yuslaimi@intel.com>, Teik Heng <teik.heng.chong@intel.com>, 
- Hazim <muhammad.hazim.izzat.zamri@intel.com>, 
- Tingting Meng <tingting.meng@intel.com>, Jit Loon Lim <jit.loon.lim@intel.com>,
- Sieu Mun Tang <sieu.mun.tang@intel.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,152 +88,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Dinesh
+Hi Tom,
 
-On Thu, Sep 19, 2024 at 5:56=E2=80=AFAM <dinesh.maniyam@intel.com> wrote:
->
-> From: Dinesh Maniyam <dinesh.maniyam@intel.com>
->
-> This patch is add support for spl nand to load binary image from NAND
-> to RAM.
->
-> Signed-off-by: Dinesh Maniyam <dinesh.maniyam@intel.com>
-> ---
->  drivers/mtd/nand/raw/cadence_spl.c | 96 ++++++++++++++++++++++++++++++
->  1 file changed, 96 insertions(+)
->  create mode 100644 drivers/mtd/nand/raw/cadence_spl.c
->
-> diff --git a/drivers/mtd/nand/raw/cadence_spl.c b/drivers/mtd/nand/raw/ca=
-dence_spl.c
-> new file mode 100644
-> index 0000000000..841801420d
-> --- /dev/null
-> +++ b/drivers/mtd/nand/raw/cadence_spl.c
-> @@ -0,0 +1,96 @@
-> +// SPDX-License-Identifier:     GPL-2.0
-> +/*
-> + * Copyright (C) 2024 Intel Corporation <www.intel.com>
-> + */
-> +
-> +#include <cadence-nand.h>
-> +#include <dm.h>
-> +#include <hang.h>
-> +#include <malloc.h>
-> +#include <memalign.h>
-> +#include <nand.h>
-> +#include <linux/bitfield.h>
-> +
-> +int nand_spl_load_image(u32 offset, u32 len, void *dst)
-> +{
-> +       size_t count =3D len, actual =3D 0, page_align_overhead =3D 0;
-> +       u32 page_align_offset =3D 0;
-> +       u8 *page_buffer;
-> +       int err =3D 0;
-> +       struct mtd_info *mtd;
-> +
-> +       if (!len || !dst)
-> +               return -EINVAL;
-> +
-> +       mtd =3D get_nand_dev_by_index(nand_curr_device);
-> +       if (!mtd)
-> +               hang();
-> +
-> +       if ((offset & (mtd->writesize - 1)) !=3D 0) {
-> +               page_buffer =3D malloc_cache_aligned(mtd->writesize);
-> +               if (!page_buffer) {
-> +                       debug("Error: allocating buffer\n");
-> +                       return -ENOMEM;
-> +               }
-> +
-> +               page_align_overhead =3D offset % mtd->writesize;
-> +               page_align_offset =3D (offset / mtd->writesize) * mtd->wr=
-itesize;
-> +               count =3D mtd->writesize;
-> +
-> +               err =3D nand_read_skip_bad(mtd, page_align_offset, &count=
-,
-> +                                        &actual, mtd->size, page_buffer)=
-;
-> +
-> +               if (err) {
-> +                       free(page_buffer);
-> +                       return err;
-> +               }
-> +
-> +               count -=3D page_align_overhead;
-> +               count =3D min((size_t)len, count);
-> +               memcpy(dst, page_buffer + page_align_overhead, count);
-> +               free(page_buffer);
-> +
-> +               len -=3D count;
-> +               if (!len)
-> +                       return err;
-> +
-> +               offset +=3D count;
-> +               dst +=3D count;
-> +               count =3D len;
-> +       }
-> +
-> +       return nand_read_skip_bad(mtd, offset, &count, &actual, mtd->size=
-, dst);
-> +}
-> +
+Please pull from u-boot-imx/next, thanks.
 
-We should rethink that way we have nand_spl_load_image and create a way
-to unify more SoC
+The following changes since commit 00292c6b39b3f7dcb34e8c3ae6ef276ac862a146:
 
-> +/*
-> + * The offset at which the image to be loaded from NAND is located is
-> + * retrieved from the itb header. The presence of bad blocks in the area
-> + * of the NAND where the itb image is located could invalidate the offse=
-t
-> + * which must therefore be adjusted taking into account the state of the
-> + * sectors concerned
-> + */
-> +u32 nand_spl_adjust_offset(u32 sector, u32 offs)
-> +{
-> +       u32 sector_align_offset, sector_align_end_offset;
-> +       struct mtd_info *mtd;
-> +
-> +       mtd =3D get_nand_dev_by_index(nand_curr_device);
-> +       if (!mtd)
-> +               hang();
-> +
-> +       sector_align_offset =3D sector & (~(mtd->erasesize - 1));
-> +
-> +       sector_align_end_offset =3D (sector + offs) & (~(mtd->erasesize -=
- 1));
-> +
-> +       while (sector_align_offset <=3D sector_align_end_offset) {
-> +               if (nand_block_isbad(mtd, sector_align_offset)) {
-> +                       offs +=3D mtd->erasesize;
-> +                       sector_align_end_offset +=3D mtd->erasesize;
-> +               }
-> +               sector_align_offset +=3D mtd->erasesize;
-> +       }
-> +
-> +       return offs;
-> +}
-> +
+  Merge tag 'u-boot-dfu-next-20241003' of https://source.denx.de/u-boot/custodians/u-boot-dfu into next (2024-10-03 16:09:40 -0600)
 
-Here the same
+are available in the Git repository at:
 
-Michael
-> +void nand_deselect(void) {}
-> --
-> 2.26.2
->
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-next-20241005
 
+for you to fetch changes up to ef815d75514da91dd98f9e3278d810439fd1f1ea:
 
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
+  lxr2: Add DA9063 watchdog support (2024-10-04 09:55:26 -0300)
 
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+u-boot-imx-next-20241005
+------------------------
+
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/22526
+
+- Add DA9063 watchdog support for the imx6q-lxr2 board.
+- Add support for DH electronics i.MX8M Plus DHCOM PicoITX
+- Add DH i.MX8MP DHCOM SoM on DRC02 carrier board
+- Several fsl_esdhc_imx improvements.
+- Pas no-mmc-hs400 to mmc2 on imx8mm-cl-iot-gate.
+----------------------------------------------------------------
+Fabio Estevam (2):
+      da9063: Add watchdog support
+      lxr2: Add DA9063 watchdog support
+
+Marek Vasut (3):
+      arm64: dts: imx8mp: Add support for DH electronics i.MX8M Plus DHCOM PicoITX
+      arm64: dts: imx8mp: Add DH i.MX8MP DHCOM SoM on DRC02 carrier board
+      ARM: imx: Drop bogus newline
+
+Peng Fan (2):
+      mmc: fsl_esdhc_imx: Enable AHB/IPG clk with clk bulk API
+      mmc: fsl_esdhc_imx: Reset tuning logic
+
+Vitor Soares (1):
+      arm: imx: imx8m: soc: Fix VPU fdt disable fixup
+
+Ye Li (4):
+      gpio: adp5585: Add SPL config for ADP5585 driver
+      mmc: fsl_esdhc_imx: Send 80 clocks before IDLE command
+      mmc: fsl_esdhc_imx: Fix host_caps issue for non-DM driver
+      mmc: fsl_esdhc_imx: Avoid resource leak
+
+Ying-Chun Liu (PaulLiu) (1):
+      arch: arm: dts: imx8mm-cl-iot-gate.dts: add no-mmc-hs400 to mmc2
+
+ arch/arm/dts/Makefile                         |   2 +
+ arch/arm/dts/imx8mm-cl-iot-gate.dts           |   1 +
+ arch/arm/dts/imx8mp-dhcom-drc02-u-boot.dtsi   |   6 +
+ arch/arm/dts/imx8mp-dhcom-drc02.dts           | 230 +++++++++++++++++++++
+ arch/arm/dts/imx8mp-dhcom-picoitx-u-boot.dtsi |   6 +
+ arch/arm/dts/imx8mp-dhcom-picoitx.dts         | 152 ++++++++++++++
+ arch/arm/mach-imx/cmd_mfgprot.c               |   2 +-
+ arch/arm/mach-imx/imx8m/soc.c                 |   1 +
+ configs/imx8mp_dhcom_drc02_defconfig          | 277 ++++++++++++++++++++++++++
+ configs/imx8mp_dhcom_picoitx_defconfig        | 273 +++++++++++++++++++++++++
+ configs/lxr2_defconfig                        |   3 +
+ drivers/gpio/Kconfig                          |   6 +
+ drivers/gpio/Makefile                         |   2 +-
+ drivers/mmc/fsl_esdhc_imx.c                   |  44 +++-
+ drivers/power/pmic/da9063.c                   |  12 +-
+ drivers/watchdog/Kconfig                      |   6 +
+ drivers/watchdog/Makefile                     |   1 +
+ drivers/watchdog/da9063-wdt.c                 | 149 ++++++++++++++
+ include/fsl_esdhc_imx.h                       |   1 +
+ 19 files changed, 1159 insertions(+), 15 deletions(-)
+ create mode 100644 arch/arm/dts/imx8mp-dhcom-drc02-u-boot.dtsi
+ create mode 100644 arch/arm/dts/imx8mp-dhcom-drc02.dts
+ create mode 100644 arch/arm/dts/imx8mp-dhcom-picoitx-u-boot.dtsi
+ create mode 100644 arch/arm/dts/imx8mp-dhcom-picoitx.dts
+ create mode 100644 configs/imx8mp_dhcom_drc02_defconfig
+ create mode 100644 configs/imx8mp_dhcom_picoitx_defconfig
+ create mode 100644 drivers/watchdog/da9063-wdt.c
