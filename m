@@ -4,64 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8169BCFB43F
-	for <u-boot@archiver.kernel.org>; Sat,  5 Oct 2024 23:19:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E0C9CFB43F
+	for <u-boot@archiver.kernel.org>; Sat,  5 Oct 2024 23:19:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C918588AB6;
-	Sun,  6 Oct 2024 01:19:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3199688B0A;
+	Sun,  6 Oct 2024 01:19:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="t1uAZ7Fa";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="FaOXZIim";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DDD8388B23; Sun,  6 Oct 2024 01:19:12 +0200 (CEST)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100000.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::])
+ id E4EA588B0A; Sun,  6 Oct 2024 01:19:15 +0200 (CEST)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170130004.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E95C388AB6
- for <u-boot@lists.denx.de>; Sun,  6 Oct 2024 01:19:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0ED7988B55
+ for <u-boot@lists.denx.de>; Sun,  6 Oct 2024 01:19:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=cZWzbZBR0xsIbHD0XmWHLXlzwRrlHb89W4cK3zuqdxumpYnRp+4UwY4ae/5ebSXSMEGEYEKFHPk1aewzR4w9kVY71o/hVP6XJFqvw+kMIHbF/WxA+fTscOF8PV3BAOLvmJg6RslAS351tfls57wVua1SKaLZQRDYbozvkTxIgXHFQZNq0ZRv8aLSFvc6jPSaEY9MZdTLkrBQfZzp2KgU+S7F9ODffI7JGwHypO8XsoLbXkmytddH4cHspolJl+dhBlqAb4PGFNUhGBHe/AnvGIsqFe/ARnLb6Ez2/vOgYC6Ith/n3fU49Y48c/YQhXKSgaCQIzNkKlbPb9YWlni/4g==
+ b=utIhkp8efL23g+DCUQv7XzNsgdBJB7pdljVEn7T6JB6V+dgRO36nm3bPF6MGNiFEAfSHzK2NNhL6uBNB+rdCU5PmgMPaID5h/xpja4gKX1TKb53t5CCOuie7+j9AugxWMDR1JPJTs4a3HJh1w6HXJV2WSuBjHHqdEXg4J7aXQtOrNgBzMceZQD5wbaaxiRR2AN8vau771ISuoW4DeOIp6IAWkXISa0gXEcKXoCWs7ZGnjxUadWgSWpDjln7/0ZsF8pv550hZSBZ/8NWDyrbyS69kC+o7mC6BFusn5FpoiU7GFpRvmeR3bLs+w+4hLxbmwtzuIB1un0CCvpj7kqkMcg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=65dEpqvxWuwo7LGpXopNuC/8ln2EKUrot5Vr3WbeIus=;
- b=T9pHli72Xp245ZYZcuvFve4nlO9KA0iW7q4LEuEAAbSCnpoCCKkgjV6rAKqXTgPUi6bFr4o82FjOcdSmiYM0z0IwD8ALtKXjqYemlXpJSyvZ2DFl4te5Sg6QcMDAFXkuuRmzfqLXswUHFo9qXFSZThi7I91ge26sHmepyrxaeyRcZbtuksjDVa4jEj0VwPGn/WZ3AiwgVdAlrLGcA/t+TWs51Iqi9mhk4CLYcEQ6zgmwMhhw1BXcgJyJY/otVD+qfwXupLsB2tIHogYk5UZXiOxS3wdsImMf51xATcTvhC7f2Hj82SRvhu/+bcfLdoAwaOLkaiEDjN8j+e795x2gTg==
+ bh=TQzaVs1KVYxPFZltB9PEPAQ6hJ2AYyI4dvdNLYV70D0=;
+ b=TduwDHHovKHr1UOhdqIhDeD2qp+eG4/k9+O73B7xgousDv3HTwxVV/QMVC/uib+J4iRJJsJkVHGQKiqxWVhMJlCVEj5dEoU5DbTNnwxi959kP2L0mgsBThAUcX0P11Z6461rLyhcfrq7zwMZbeGKPatEijqAOo7AcpakcpMVfAbK8C24MBYviZFBWlhukoVvDWtUE23VeEU51G9NFux6gPzTQBq5120iFitODnX0Mu/x59azhjBmlaWDS5tyTciWizkoqErx0PBMGVy3vc3AFBNDy0FVFnpXI4k5EX7dk5E6ymVv53TBMkJoCdCxC+bnYdVoJU3/izU/eMaNKJQw/Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=65dEpqvxWuwo7LGpXopNuC/8ln2EKUrot5Vr3WbeIus=;
- b=t1uAZ7FaNO56DMkD7iTK9HW9pKfJaT1uuMgPPyg690PVQYXCOeK304UNhGX1TaCC96RFlDW7YskuWg3jP40jsapCBTy3xHY7vAUPYZzZtHgH0RJmRf7IIfA2pRqHm+HVOY0fYCBsJ+2S2tfweFOmuR/+vv8qRht8Hm3Ek4YTJ0/7BPv7yoq8pFouqbfAnhDHoCYoyPm5lxreMlwL4xkogt34s4p/s3lci5Wmv0Y5V3h98a2AlmNJsIMGmj2EYC/CJ/BtKqg55ehtzYQGDU7wU2ZaQWOIwnZwRfHiNyVqvsrUFZiYPzmtKwsSVMv5JEe8P0jINcEc11yKnd9yBVQR1g==
+ bh=TQzaVs1KVYxPFZltB9PEPAQ6hJ2AYyI4dvdNLYV70D0=;
+ b=FaOXZIimahctPBIhCwJUbomvPM+yjPVyEjW06lKwJUn+dO/k3tWJuv3A6ZctPxletoqMYhum4wYNyMgG/mFnHRgthc7OMZ23qgMB1uT5pJmn8OydLZfsrWTERO+4l5dL+CMnklaFINW5Kp+W1Q04RnV8Ak2TkUPJ95q9K+7fyIETvSAXx2DNdUW6INPnTPAAwLcbboQUNscb09CGPHQu3TXiTrZ+KlaYWGjnXStATSI2ndKg2Xw9DRRwS05sl5u8t6aS3C5yVNDgGasTzGCxi7unDELR3xHgmxqAiLFsjViVxNwGGBb7WFtIBQTr7981y1oA2sue4VQ/Wm9SyOAdHw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
  by AS8PR04MB8104.eurprd04.prod.outlook.com (2603:10a6:20b:3b1::8)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8026.20; Sat, 5 Oct
- 2024 23:19:08 +0000
+ 2024 23:19:12 +0000
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::165a:30a2:5835:9630%6]) with mapi id 15.20.8026.019; Sat, 5 Oct 2024
- 23:19:08 +0000
+ 23:19:12 +0000
 From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
 To: festevam@gmail.com, sbabic@denx.de, u-boot@lists.denx.de,
  Tom Rini <trini@konsulko.com>
-Cc: uboot-imx@nxp.com, Ye Li <ye.li@nxp.com>, Alice Guo <alice.guo@nxp.com>,
- Marek Vasut <marex@denx.de>, Peng Fan <peng.fan@nxp.com>
-Subject: [PATCH 1/2] misc: ele_mu: Update ELE MU to get TR/RR number from HW
-Date: Sun,  6 Oct 2024 08:22:50 +0800
-Message-Id: <20241006002252.14895-1-peng.fan@oss.nxp.com>
+Cc: uboot-imx@nxp.com, Peng Fan <peng.fan@nxp.com>,
+ Alice Guo <alice.guo@nxp.com>, Marek Vasut <marex@denx.de>
+Subject: [PATCH 2/2] misc: ele_mu: Clear RR when initialize MU
+Date: Sun,  6 Oct 2024 08:22:51 +0800
+Message-Id: <20241006002252.14895-2-peng.fan@oss.nxp.com>
 X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20241006002252.14895-1-peng.fan@oss.nxp.com>
+References: <20241006002252.14895-1-peng.fan@oss.nxp.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-ClientProxiedBy: SG2PR01CA0121.apcprd01.prod.exchangelabs.com
@@ -71,76 +73,76 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|AS8PR04MB8104:EE_
-X-MS-Office365-Filtering-Correlation-Id: a49b9e9c-1579-484c-c677-08dce5941d2a
+X-MS-Office365-Filtering-Correlation-Id: 3e4be6e2-2bb6-4c39-8810-08dce5941f2b
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|1800799024|376014|52116014|366016|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?RNk4dfmlcypInGDd0CQp1pPM++WnIJs4oKzpaBSe0w1sucVWKGWL5odFtIrZ?=
- =?us-ascii?Q?xHLPp54hNz4JbhoOkpQ7BE2fU0qdJUJvkpQ1WdgyzthhNfSWydpckkqy9SoZ?=
- =?us-ascii?Q?kUGC40FfEpjtVQu6tD+2u4UcxC8vZ1lpJiyGNPOxscp0XTpJhW+EGqnimqDh?=
- =?us-ascii?Q?iL8TP82zsJjBgVWGyCH05T4HNYJVIQWw67J1qnqLCo2CzkdLBsox3adRTGMY?=
- =?us-ascii?Q?ZBvpskOkb6thPDXr2vDeJqGkz0kzTgHUzySHS5Ix1wR8PPSJNTFni3+UwduV?=
- =?us-ascii?Q?XqbRVuTBq8lG/AXfcMIdoVEyYYl9r+x8qnEWSZPfApOrgXI+m5YbWbj970kX?=
- =?us-ascii?Q?mrOBOmtNkIWt2irAgciwtmpanb2NmTUQ/riP3U07qvtwnoNNBD/A5EnAtVjl?=
- =?us-ascii?Q?gp4mM39g9PfEC2vRTeaH3V40BzUNXCGcyymRrHlX3xdUG2dWOoMlkR4Qd0AV?=
- =?us-ascii?Q?F5yCpuwKebonppyvbiuEI9zkiV7l2zIBpiPxxSkwTspqagY/HXwNtAoZB6c1?=
- =?us-ascii?Q?IO2gXjy7RAXicvV9XIV4MNkAal4KtH4kSNjHSAV1yzzHrEEZBhJMve/NkamQ?=
- =?us-ascii?Q?W9/JvSuuSqxChZOuh2whT0yPSzlYRvSZvebxVfQ5UOZkSQHvtjEwSQtWJGgE?=
- =?us-ascii?Q?MOIiim1fR/Gro+NuGYGDRR87hrTNhtteuXWdsMFlGmSDdbYc30o7MbYU2K2w?=
- =?us-ascii?Q?YmZHWMnAXMOmA/Kd3UURcHBHL8MOga0bW3edUfp6aAuv8jPhCFsdAG5iJ4Vo?=
- =?us-ascii?Q?QjpTG+BQ2MqueYS6BrMYoNHlnQNcC4gvLOd/nlAM1Z7bfGHqy41vD93unEKY?=
- =?us-ascii?Q?D0ZRr7W8Zxc2GBlsZtPLZuZ90wjW2jQNBcCRkOOY27MXvLP0PFYsFlR8lkpt?=
- =?us-ascii?Q?ehAiF7yjbsNwZFWb/nNBQUCgkBASpACLh5MrPMq4KiJzFwVSZZTJBATe2Lbc?=
- =?us-ascii?Q?WhBu3i/iEyqzWXYuO+BZwA/U0HTdBRM/ShpHxpX3lGe41LIa6X1ffklvx6US?=
- =?us-ascii?Q?1f+nrm0ThRN4feB8iwWrV/+qiw8szFC+RGG8Af21sHGfRvJ+jf1W9/Vb9Moh?=
- =?us-ascii?Q?zLt9eut/O8la9MWVEQnzMQlU7IBsDbG39HWZJYe+CMfcOCF6RC4NnfZut9tN?=
- =?us-ascii?Q?utYcMkpmzYfqhuRX6aKoOzQN/PGt6z9wdeC78wGD3obnkacSMrAXZKwfKtf4?=
- =?us-ascii?Q?nHy8J6hVxo7Fqf7DN8SrSnazEYQ/x1fD71RFLZGo3fSRkkPBhfAg597CSAn6?=
- =?us-ascii?Q?pss3Cvt87eLsjwbdEjuHdb8mbN6PIWtR5w8DZUWVfCwpWmSBa33xdQ2Ux8RH?=
- =?us-ascii?Q?5byhnhahGIeX+DEEmam6+O3wVM1GdaYF4gM1bk0ANdnXyA=3D=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?apZGTtmk8dmLtVYdiVpH7kGOto2GO/z/WmHHMlihsJCLE9RQorvqbxXc0tcY?=
+ =?us-ascii?Q?nevIdpuEbFVNY16pyQ0et6dguEdvNHV+K9TClHsOiRBDUXJIMSVh6phKg6P0?=
+ =?us-ascii?Q?zXGYjsjRaV7/nLWH0n8RX2V3MAyeHHjZ23tlWF0ugrdstUDf6OVRM0TB3MLD?=
+ =?us-ascii?Q?0yL/x2ryDiVWNm7SN8HhN5D1BpYj0trFissNM0hsmF2abOjuJ/PVW/zVtBiC?=
+ =?us-ascii?Q?ewITIKTfSM38WrHgx0Rh1J7ZKjhA2xy8/rV+hcPT6A8LKvkFdPCwHQr2c4+P?=
+ =?us-ascii?Q?E76uh40odIwsX5remrhKKib9K1Be0T+UFYtQnlYKLpK69mkkiG4/BlzpK2S0?=
+ =?us-ascii?Q?CrBlrf2J3/fjstuUm9nq7wSTpylFungH2YlXkVSqkQJK5g6WTnyxcjEimylM?=
+ =?us-ascii?Q?BE897sqkxP1DkwY3GKehP5zJOncBD/dQu0msgk11BdTHqkvpCmZ7STk6p65V?=
+ =?us-ascii?Q?0AQ9ozqTEHb/M6HiQTLcCmRNrKk9zEGmkM9Br0CR+lVS8I+7pWYk8vjtZx2H?=
+ =?us-ascii?Q?k/vNW+/49OSeoh2n3vaBZNQw98nk9jRdc/qe/DEJuZO+CxbcA28uvFbk/hkU?=
+ =?us-ascii?Q?vB4D/O4Yj4JlaXCeOleKgl+8BZ72y5ND1lsozlp34ZMRFlVZ/prPXjATg+Ew?=
+ =?us-ascii?Q?fJSkreInlaNcNa/0TTVevcqkCOtMZaWeDGi0fYlt5otNoNiI6oegO+SaZSTb?=
+ =?us-ascii?Q?dUbPbrfdhk+N1e55PptLY9DpHvrVjnDFP72o1Qpz1OSkg6a4WGhjt0X+lENz?=
+ =?us-ascii?Q?iLBuRi1XpWnojmxHA+++F41s8fJ+KP0pOW/NJlvAEkfOBORtWvDwGKNuEvNf?=
+ =?us-ascii?Q?/qiTr1XrQ2OPVnXSrm0CPgeOsyhlewRnSbyHpHT8smoG4CIRng63CCPGgjOE?=
+ =?us-ascii?Q?HOkDXrBuz5wNbpKcfCb7wyF2ZcybuslLcNi2vqZogCiXS96CacSuMzRLH4TM?=
+ =?us-ascii?Q?7L4CEW2T8pgYQFS7dSDvRYqRalu8GVp4S6WIvgSp6aPQXp04G9scJ0nYoZZM?=
+ =?us-ascii?Q?oZYfRjp8QYY+fFdm/NP0gi34zYgH14f7GV7zuS53CUvpmZnQWgoo/wb1bqb9?=
+ =?us-ascii?Q?NUckdGVYSkBtRD2pUAy/XwXQTCZdSOU3yJvF9fqiB/jH/BwwaJBOh0DnHoRV?=
+ =?us-ascii?Q?J4SIiBcdiMioqHYGBxWSu0IvOtQOtxtmBFuUqm4HDmBpaeE4RF/2BPUPeYQO?=
+ =?us-ascii?Q?w20j6ikC8LqGV9WKWtlpGKjkJDWGi8nIawZfRd9Zk4RjpFd1Y8ByVQqMSjnq?=
+ =?us-ascii?Q?2wujjKejO8fFiJqscLb36MwRbnTXc0r1Zzf2Y9U9xT8S/dye+x5dKKkVL5c+?=
+ =?us-ascii?Q?R6c5Q7Xt5GUesZ0KdcNsmcMPdYJ/iyffb1SusKqLkSipfQ=3D=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(1800799024)(376014)(52116014)(366016)(38350700014); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?3zuHorsztleDbs3lcGjKV+haefKbQvQA10bDjzkQ6LtCfj2T02hRGCw87YLr?=
- =?us-ascii?Q?7lek1AWeS0rnnJ7BO7OdtrukJPySPkrD51AKY6509ij5NUukFUGqACIrLcoT?=
- =?us-ascii?Q?9iAqjC+He72zejx+U6mjEPmskhWv5R0ZXcEoXEThxJQZcnO+LT20baVZwJ+A?=
- =?us-ascii?Q?a/S6VOrZdm1ozfIlKKxI+U3tpJAtrHQh2nxpzIygEQP15MIm8ygHQSn5v+6g?=
- =?us-ascii?Q?jwuwgfWwzsyZYPNmmbtXCthR1S7nvH4WmUNzdwSvB/9jMhKKvcUX/thJm9gt?=
- =?us-ascii?Q?kKF/Hs2k8SWiRr7AWi57kJbDRiU9+wESqwT8h2TgKwQqJt7J4GybrzCroZ78?=
- =?us-ascii?Q?HJh9XNh2Er9bQ2Lvo4xqjXvmB7Fp+DDlxKU23/0BOYb2TdJOxEwtZtK+k4Xn?=
- =?us-ascii?Q?FM/VSyclu1hzJskvNsGw6766DSV4OGGwFvtDuKwlvOYSEJVc2yIE/uCfYMsR?=
- =?us-ascii?Q?S4jZflkGyK5M1VWrU8tB9SKu9K+hrq2EKucGW7Ae/r4wPFB+Owx4ZhJLw7k9?=
- =?us-ascii?Q?vqY+dwPqwZXP00vAAYhh6su6OYFxkNyUm9ORLysAIR2vRnHMEc1ujOmWMOVL?=
- =?us-ascii?Q?hVuA9satALI6hTEMaQKxmTpgThWjNFU+3xvtm/MuTEFk8uY4vx5dTJnRYTm6?=
- =?us-ascii?Q?cWPK5jDdSV7JNY48uJCnTng5vpe1u3O7cXsd2B2ni+EIM+5GB5wcZflfizbs?=
- =?us-ascii?Q?ri9fsa3PY2vyEuZI9yW0Tey8NSJFFMHV6GwQ6pKnWEexjQ361jlruk2KtoF5?=
- =?us-ascii?Q?dAfgw1d7vyKM0MrQfmpL70Y8VOpryDmo+kqCiJgKIpfVBxsRoD2dni0RMHvj?=
- =?us-ascii?Q?6i93TcF3BZtVHDRYB6XT3945gC1S9ql2K0jVVR+M7XNNuNCfKiAtUI8oZfbu?=
- =?us-ascii?Q?KM24GIB5jQ9U4eFfcp9YFexdaZJapJ4xQgxbX7IUo1F5a8KrgH4aMM9/Jms6?=
- =?us-ascii?Q?SK0IhwuruDwBMGGGSd8RF+0SqxldDmT7v7alSbMwZsg61TJApHMX5CFvDT1p?=
- =?us-ascii?Q?usit6sNsXHuBxnNyWpzXNQ1rvFlq1Hqp/ev7eMSo4dcMiwxBpHqj8ogZ7MGC?=
- =?us-ascii?Q?Wc4M+X2wGj0wzzX+qsT64I2Og9q+Zyrhu77RsocgNQFJpIXm8eQNrassWDkd?=
- =?us-ascii?Q?9D+dxCPRSFCgXJ3IgBWVofvgvWi6qdqCrKeXu7CJzKDmk0sTkV+gALaJXQJJ?=
- =?us-ascii?Q?lFlx1f6PWlPO2F2Kajvp7eDZxdlu3yOzGrG8YnjGD2d9IEDV7kNWgZZiSvu5?=
- =?us-ascii?Q?KYO4oUXZivzQ5F4V+h62R4FVcngrfDyS8ztwSrSpQLvvmieU7WaA8Exy55Wd?=
- =?us-ascii?Q?PTzLNzOkZPbDlDiHR69Bg8M5FzvSgXo8roA7dtg408vgqVN6TNP/W4KBSJdf?=
- =?us-ascii?Q?W/NRAr8ilsTLduemflYs3iGBIUy/WvXxPACQXHEWXvePf2imvYvELx3KAzON?=
- =?us-ascii?Q?92YJ/0VH5hdvPvKkj60V9nw/nCDic86wTsZd3X8axt7vfKDLFvz3kCTZAB3o?=
- =?us-ascii?Q?48aXv5nEwQEy1A8p7ugIFudjAkugML086QYXWil+JB6NWytNHl8FOL/8g5AH?=
- =?us-ascii?Q?pYK9ns7mZQmJRT/ttaRLLjx6eocuX3h83Kk+cuLv?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?iY0hbUh6YmtckouUFrdTaEg50WtxFrTPUTQshjcHu8KvKCxKTjyDfp15rH5/?=
+ =?us-ascii?Q?KbZQsrXkdFeiN6PVA8FGF72KVqrb6bhNVjnnkCS74YOKo1Lc60CB9R3cUJmH?=
+ =?us-ascii?Q?YzokUCrR/TamubLLK9LrAoVLfgf0dSLxt1huKEW5sil/yRlClFCqv8ni6Jwf?=
+ =?us-ascii?Q?wDnhLX01M4KHX47L+miNV/aY2jxDKACXoyDNPmGzAjNX3Z3OoYsl0Xdt89fA?=
+ =?us-ascii?Q?2Ci71nkyYWEitYDGCAGD6jYF1VnIb+X3OPMdIBWX8vkJH0Zhe3dHNLd7PsZw?=
+ =?us-ascii?Q?bjz2WVN1z4fSKqzvtcYtUtp+XhQurt5j82ZN1+NMU561yH7kaQZtObCQk0LH?=
+ =?us-ascii?Q?f6TMN1vKfgD0lRt2qXg03gUi/r6i+e6SWlV2+PqDVUdtkDPNGwYlXO2NK30h?=
+ =?us-ascii?Q?fgN147jvfUdZGNMz4iJqKTzmR6ieSJ7I4tVRwfCgMV8sj1s1bsUaHCGaQ73C?=
+ =?us-ascii?Q?HjMC6ok26Fm/7c9s/Iaw/V2DKjA4FYBIB3f/nF1itfslxVoY5DPboY+c3kZR?=
+ =?us-ascii?Q?UXnTc6FMEh49nOmX4EIIfaR+8Tl7XUB0hw91l4RG5hRDmjuf4LCkXo7/LtZO?=
+ =?us-ascii?Q?sGadT8yP7F2CqharbK4Y0cCmFbtXO7SDcqNlWP9Q2fmCzwHWAgmSNfoR8ft2?=
+ =?us-ascii?Q?uGG7yyElolWka0kP2eUkhfudPyV3Rkmp8iRk7djBaCNTPHB3XcJstf/Upjty?=
+ =?us-ascii?Q?Baey6p4UtvvrCH1negzAqNndO0CdYkpcopBAOfuNXl/HjjBOhefHzGrOVYbh?=
+ =?us-ascii?Q?UGtepFHwazvY2valMhiiBG4RO58z9uDWGoRTyhNL/C7YkkgAK8SKXOvKOo9I?=
+ =?us-ascii?Q?m9dMiY6CtHso5mbFOJIo0Rfr+0GwfaLJkoyOvx+X1sKAR7ux7kUvS/Wyc5s8?=
+ =?us-ascii?Q?F0EBjqxcYgaCJilLzz8bmPsePOTSYJAUxKIAmgRApgQiNcm7ZRlbWblIk1K2?=
+ =?us-ascii?Q?0NamCH1nEpOw4DF5w5WdFbVYZsSAu1tckoug03uBTA/QnVtc/401sfKQrgwl?=
+ =?us-ascii?Q?YOEyjrsW+DtOS4PwB4KrHSsz+wtEo5P127bzlthGmwRk6tnsX16qx48ooVqU?=
+ =?us-ascii?Q?9Tpi84QIWcm1+hgVH4ETQTqL59Px2lTuaFwz4qJ5U07L/waHUutRuk5YO7nt?=
+ =?us-ascii?Q?NJxrM+7UW6FicQkG9rNs2WxYLRPRikKKJ8VvvzazGMecoJFf0HamB0xIv22z?=
+ =?us-ascii?Q?wPqU+QJAwuWW1JrZxXVOngozu634JjOIP4ZJgo3C12V5Y62ZQHxzLEG9zEDO?=
+ =?us-ascii?Q?kc1ooHgCKNLlbgFmZJIwzNRrNZFhRZ73Ypf643G65D/yCyDkrQAnMphX4Gcw?=
+ =?us-ascii?Q?nfgMOighyDnzidDKdbCBoEW7Ibw5lO/5dBo5O2t3kx8Ve5SvSlurFIr8etas?=
+ =?us-ascii?Q?ZzuKzQbaeOIMCs31xDxqkLnxKM5JFYMYj9S+uYMsBGZIUxSt4EwPQzhLEZgg?=
+ =?us-ascii?Q?1rJGsaYc7PafRGWkuzRHWl5TNLZouThVevrDEYwmp2a+WReVbwGa74jo4Zix?=
+ =?us-ascii?Q?ZlfZIZftPGifqgM843GQcUyzIs5zb76XDXo6zNNwbScTt5ZCk9kdQp1ZdiHa?=
+ =?us-ascii?Q?8yAzjbkwejLyvV+66apYUvybHmUNkAE9LGtmvlZM?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a49b9e9c-1579-484c-c677-08dce5941d2a
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3e4be6e2-2bb6-4c39-8810-08dce5941f2b
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Oct 2024 23:19:08.8863 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Oct 2024 23:19:12.3758 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 7816ki5s7n/wgdL/AwcXkAvecCHoEPKB7cylIKR8DOE0UJkLPsvh7gDsvBzBQEd3Tyt4Cz0RbxVfB6zigbfNsQ==
+X-MS-Exchange-CrossTenant-UserPrincipalName: ce3dsezkSIQ7QCgdO+QJv+eYGixTCMdsDAxgU1O1L+fy9P0r7Qo1aff1L29DxOSEltZ0QWrIiHOmoAjsyygSDg==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8104
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -158,116 +160,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ye Li <ye.li@nxp.com>
+From: Peng Fan <peng.fan@nxp.com>
 
-The MU parameter register can provide the TR and RR number.
-For i.MX95 which has 8 RR is different with i.MX93 and i.MX8ULP,
-so update the driver to read the PAR for exact TR and RR number.
-
-Also update compatible string for i.MX95 ELE MU.
+When OS is doing ELE API call, before OS get the response, OS is force
+reseted, then it is possible that MU RR has data during initialization
+in SPL stage. So clear the RR registers, otherwise SPL ELE API call will
+work abnormal.
 
 Cc: Alice Guo <alice.guo@nxp.com>
 Cc: Marek Vasut <marex@denx.de>
-Reviewed-by: Peng Fan <peng.fan@nxp.com>
-Signed-off-by: Ye Li <ye.li@nxp.com>
+Signed-off-by: Peng Fan <peng.fan@nxp.com>
 ---
- drivers/misc/imx_ele/ele_mu.c | 25 +++++++++++++++----------
- 1 file changed, 15 insertions(+), 10 deletions(-)
+ drivers/misc/imx_ele/ele_mu.c | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
 diff --git a/drivers/misc/imx_ele/ele_mu.c b/drivers/misc/imx_ele/ele_mu.c
-index 0cf81f33ba5..f5ba3a4ffa5 100644
+index f5ba3a4ffa5..cdb85b999db 100644
 --- a/drivers/misc/imx_ele/ele_mu.c
 +++ b/drivers/misc/imx_ele/ele_mu.c
-@@ -21,8 +21,6 @@ struct imx8ulp_mu {
- 
- #define MU_SR_TE0_MASK		BIT(0)
- #define MU_SR_RF0_MASK		BIT(0)
--#define MU_TR_COUNT		8
--#define MU_RR_COUNT		4
- 
+@@ -25,9 +25,20 @@ struct imx8ulp_mu {
  void mu_hal_init(ulong base)
  {
-@@ -36,10 +34,11 @@ int mu_hal_sendmsg(ulong base, u32 reg_index, u32 msg)
- {
  	struct mu_type *mu_base = (struct mu_type *)base;
- 	u32 mask = MU_SR_TE0_MASK << reg_index;
--	u32 val;
-+	u32 val, tr_num;
- 	int ret;
++	u32 rr_num = (readl(&mu_base->par) & 0xFF00) >> 8;
++	int i;
  
--	assert(reg_index < MU_TR_COUNT);
-+	tr_num = readl(&mu_base->par) & 0xFF;
-+	assert(reg_index < tr_num);
- 
- 	debug("sendmsg tsr 0x%x\n", readl(&mu_base->tsr));
- 
-@@ -61,11 +60,12 @@ int mu_hal_receivemsg(ulong base, u32 reg_index, u32 *msg)
- {
- 	struct mu_type *mu_base = (struct mu_type *)base;
- 	u32 mask = MU_SR_RF0_MASK << reg_index;
--	u32 val;
-+	u32 val, rr_num;
- 	int ret;
- 	u32 count = 10;
- 
--	assert(reg_index < MU_RR_COUNT);
-+	rr_num = (readl(&mu_base->par) & 0xFF00) >> 8;
-+	assert(reg_index < rr_num);
- 
- 	debug("receivemsg rsr 0x%x\n", readl(&mu_base->rsr));
- 
-@@ -96,7 +96,7 @@ static int imx8ulp_mu_read(struct mu_type *base, void *data)
- {
- 	struct ele_msg *msg = (struct ele_msg *)data;
- 	int ret;
--	u8 count = 0;
-+	u8 count = 0, rr_num;
- 
- 	if (!msg)
- 		return -EINVAL;
-@@ -113,9 +113,11 @@ static int imx8ulp_mu_read(struct mu_type *base, void *data)
- 		return -EINVAL;
- 	}
- 
-+	rr_num = (readl(&base->par) & 0xFF00) >> 8;
+ 	writel(0, &mu_base->tcr);
+ 	writel(0, &mu_base->rcr);
 +
- 	/* Read remaining words */
- 	while (count < msg->size) {
--		ret = mu_hal_receivemsg((ulong)base, count % MU_RR_COUNT,
-+		ret = mu_hal_receivemsg((ulong)base, count % rr_num,
- 					&msg->data[count - 1]);
- 		if (ret)
- 			return ret;
-@@ -129,7 +131,7 @@ static int imx8ulp_mu_write(struct mu_type *base, void *data)
- {
- 	struct ele_msg *msg = (struct ele_msg *)data;
- 	int ret;
--	u8 count = 0;
-+	u8 count = 0, tr_num;
- 
- 	if (!msg)
- 		return -EINVAL;
-@@ -144,9 +146,11 @@ static int imx8ulp_mu_write(struct mu_type *base, void *data)
- 		return ret;
- 	count++;
- 
-+	tr_num = readl(&base->par) & 0xFF;
++	while (true) {
++		/* If there is pending RX data, clear them by read them out */
++		if (!(readl(&mu_base->sr) & BIT(6)))
++			return;
 +
- 	/* Write remaining words */
- 	while (count < msg->size) {
--		ret = mu_hal_sendmsg((ulong)base, count % MU_TR_COUNT,
-+		ret = mu_hal_sendmsg((ulong)base, count % tr_num,
- 				     msg->data[count - 1]);
- 		if (ret)
- 			return ret;
-@@ -229,6 +233,7 @@ static struct misc_ops imx8ulp_mu_ops = {
- static const struct udevice_id imx8ulp_mu_ids[] = {
- 	{ .compatible = "fsl,imx8ulp-mu" },
- 	{ .compatible = "fsl,imx93-mu-s4" },
-+	{ .compatible = "fsl,imx95-mu-ele" },
- 	{ }
- };
++		for (i = 0; i < rr_num; i++)
++			readl(&mu_base->rr[i]);
++	}
+ }
  
+ int mu_hal_sendmsg(ulong base, u32 reg_index, u32 msg)
 -- 
 2.35.3
 
