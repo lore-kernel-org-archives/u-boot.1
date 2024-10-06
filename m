@@ -4,40 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3685CCFB424
-	for <u-boot@archiver.kernel.org>; Sun,  6 Oct 2024 22:22:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EA85CFB43F
+	for <u-boot@archiver.kernel.org>; Sun,  6 Oct 2024 22:28:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7479A88875;
-	Mon,  7 Oct 2024 00:22:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id B8C9E88ABF;
+	Mon,  7 Oct 2024 00:28:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FC398860B; Mon,  7 Oct 2024 00:22:32 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 0E460889E1
- for <u-boot@lists.denx.de>; Mon,  7 Oct 2024 00:22:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 024E8FEC;
- Sun,  6 Oct 2024 15:22:59 -0700 (PDT)
-Received: from localhost.localdomain (usa-sjc-mx-foss1.foss.arm.com
- [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 543933F73F;
- Sun,  6 Oct 2024 15:22:28 -0700 (PDT)
-From: Andre Przywara <andre.przywara@arm.com>
-To: Jagan Teki <jagan@amarulasolutions.com>
-Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Chen-Yu Tsai <wens@csie.org>, linux-sunxi@lists.linux.dev
-Subject: [PATCH] clk: sunxi: a80: Fix reset description
-Date: Sun,  6 Oct 2024 23:21:48 +0100
-Message-ID: <20241006222148.16456-1-andre.przywara@arm.com>
-X-Mailer: git-send-email 2.46.2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1728253727;
+	bh=bssUfIRKxBBRenpyHu9OZbMJWyPhX98G5rpKEyEwPc4=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=npep/HuKHWyFoD/Yyd4sHLXGpI4uCw5EU44+fX4M4DEFbMVG7AsI2s87HjFDbnx0p
+	 bZ4GjNBk5QTDAMOYMRtoD/SmA46XIBOCj0upABClQUmwdh8SkwcJWIQJLQanzOTa/q
+	 13TXDOsQeykY4YK2C/aNPvkTeMpE+9mQNM244iNougi5jvXEurYZcahqnCXExA78R/
+	 Lcl4wPtxkvfnjbNWgo3TJxfgTiwuIBgJjMijlVOquO+3eNqEYBzvtBjG8EKBV4fQE4
+	 wESSjhH0zV+sHMU0lxUk3IA79r/8FTeVOtzE9We+Ortc6NW7++z9MiIKzbng9CcWHu
+	 upG/eSKRYscjg==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 5F7A788AB2;
+ Mon,  7 Oct 2024 00:28:45 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1728253726;
+ bh=bssUfIRKxBBRenpyHu9OZbMJWyPhX98G5rpKEyEwPc4=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=HMgrX+j2rySPEJPckpeXC+pEyRcNk/jNK9QnCNEug26hPu41BGzuUyOzTnV40qR2y
+ rX6ouh1qcukmtAaJX4b/00sXsyM62K+PD2LN3zvJnpJwzb5opaYUwSUUn1wSVkKC9o
+ KyiRkJDBDNCeh6wwN8TsEx/Y5HySvLX1ouDYXrvVfpkC+29vdX9GYjVPd2ArhE6bjn
+ eM0E1QBEksFXZo79RW5O5CWbDIJrfxPB9hQUTrG0tQ8YZekKxiYEuhP2oKDK3bbnsB
+ 9VUr2IWQhlv3xjQ/ss/a5p0RROJYC4e6AQcBIiT2JSRO+ILn0J4NFrjwmJi55MwahU
+ AJ4/CsgQKPGbg==
+Message-ID: <f2f2ff63-e186-4065-8e75-7e0064d16037@denx.de>
+Date: Mon, 7 Oct 2024 00:28:44 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1] imx: Kconfig: make IMX8_ROMAPI configurable
+To: Tom Rini <trini@konsulko.com>, alice.guo@oss.nxp.com
+Cc: u-boot@lists.denx.de, sbabic@denx.de, festevam@gmail.com,
+ uboot-imx@nxp.com, peng.fan@nxp.com, fedor.ross@ifm.com, ye.li@nxp.com,
+ seanga2@gmail.com, Alice Guo <alice.guo@nxp.com>
+References: <20241005233116.2781053-1-alice.guo@oss.nxp.com>
+ <20241006212332.GQ4737@bill-the-cat>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20241006212332.GQ4737@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -54,42 +71,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Clock gates and reset lines share a common structure in the sunxi clock
-driver descriptions, but use different flags to tell them apart.
-
-The description of the Allwinner A80 MMC clock reset lines was
-erroneously using the "GATE" macro, which made the reset driver ignore
-that entry, complaining with:
-sunxi_set_reset: (RST-reset:#0) unhandled
-
-Change that to the correct "RESET" macro, to make the reset driver
-happy.
-
-Fixes e0c7ce7e52b7 ("sunxi: clk: A80: add MMC clock support")
-Signed-off-by: Andre Przywara <andre.przywara@arm.com>
----
- drivers/clk/sunxi/clk_a80.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/drivers/clk/sunxi/clk_a80.c b/drivers/clk/sunxi/clk_a80.c
-index e26d42a5e71..4e37fa39986 100644
---- a/drivers/clk/sunxi/clk_a80.c
-+++ b/drivers/clk/sunxi/clk_a80.c
-@@ -77,10 +77,10 @@ static const struct ccu_clk_gate a80_mmc_gates[] = {
- };
- 
- static const struct ccu_reset a80_mmc_resets[] = {
--	[0]			= GATE(0x0, BIT(18)),
--	[1]			= GATE(0x4, BIT(18)),
--	[2]			= GATE(0x8, BIT(18)),
--	[3]			= GATE(0xc, BIT(18)),
-+	[0]			= RESET(0x0, BIT(18)),
-+	[1]			= RESET(0x4, BIT(18)),
-+	[2]			= RESET(0x8, BIT(18)),
-+	[3]			= RESET(0xc, BIT(18)),
- };
- 
- static const struct ccu_clk_gate a80_usb_gates[] = {
--- 
-2.46.2
-
+On 10/6/24 11:23 PM, Tom Rini wrote:
+> On Sun, Oct 06, 2024 at 07:31:16AM +0800, alice.guo@oss.nxp.com wrote:
+> 
+>> From: Peng Fan <peng.fan@nxp.com>
+>>
+>> Make CONFIG_IMX8_ROMAPI could be configured in defconfig.
+>>
+>> Signed-off-by: Peng Fan <peng.fan@nxp.com>
+>> Signed-off-by: Alice Guo <alice.guo@nxp.com>
+>> Reviewed-by: Ye Li <ye.li@nxp.com>
+>> ---
+>>   arch/arm/mach-imx/Kconfig | 3 ++-
+>>   1 file changed, 2 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/arch/arm/mach-imx/Kconfig b/arch/arm/mach-imx/Kconfig
+>> index 134e42028c..9d3aafd2f8 100644
+>> --- a/arch/arm/mach-imx/Kconfig
+>> +++ b/arch/arm/mach-imx/Kconfig
+>> @@ -179,7 +179,8 @@ config DDRMC_VF610_CALIBRATION
+>>   	  the ddrmc_cr_setting on relevant board file.
+>>   
+>>   config IMX8_ROMAPI
+>> -	def_bool y
+>> +	bool "Enable i.MX ROMAPI"
+>> +	default y
+>>   	depends on IMX8MN || IMX8MP || IMX8ULP || IMX9
+> 
+> Since there's no help here, is this truly configurable, or is this
+> something that should be select'd based on the SoC and presumably some
+> of the newer IMX9 parts cannot use this?
+I can imagine the MX95 calls into this custom ELE firmware stuff instead 
+of ROMAPI ?
