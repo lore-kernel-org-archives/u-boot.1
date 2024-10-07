@@ -4,80 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30F97CFB448
-	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 15:25:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB022CFB448
+	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 16:06:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68F4E88B3F;
-	Mon,  7 Oct 2024 17:24:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 0DB5788CD9;
+	Mon,  7 Oct 2024 18:06:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mLkBo8Ng";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id E793288DCD; Mon,  7 Oct 2024 17:24:25 +0200 (CEST)
-Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
- [IPv6:2607:f8b0:4864:20::f2e])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1728317188;
+	bh=63xurK2ZWcMFP0pG/ZE1lWWdsIcNF8LS8hK+NwdcpRc=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=DnZm94Sv4yhgFw8sDHYoWGj/lXx9G3E1MN084jlvz+09+bqkqAkbC9l0+SYIOUt2j
+	 TAuPK6mLIt0fuhFb9bTRPAa9yENFn4W68heL4jJco0AtgcTmsjjmBtpaFYamhQ7UTD
+	 b8hiZAkWiPXyidgvQHW3ytaMyUurYMPUSffS0wbCpslk37G2FI6yxS8bQX4a4GiZr3
+	 kX2nZgALVRBEdNe7fw3OUXvyd2rGGk0F/OqcPWLi5bULwmUB+Vp5qQKvCPNhxjg7nm
+	 khG19qEynNe182KCq6mxmNa1ceo2YbyXB5yLrvKpWZygI643ZJHVFZFPQ5c5K1XR4v
+	 JmYabzdzvgWeA==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC16688DE5
- for <u-boot@lists.denx.de>; Mon,  7 Oct 2024 17:24:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2e.google.com with SMTP id
- 6a1803df08f44-6cb2824ddc2so36814126d6.1
- for <u-boot@lists.denx.de>; Mon, 07 Oct 2024 08:24:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728314660; x=1728919460; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=J3OJAtLtzmZ5rGDY3PnOo1eygelxfOnEod7KIbR9qQI=;
- b=mLkBo8NgnDzTURISSZ7JtjTjTkS9OItgRSv+bv7NGGkD5h2vqE6owSrYiaXCIpJZgV
- +V8tfcF7rTQDAxHjHg6ylun8AMpp+ftf5aoBUxd+ZoA6odfsXVJLzZKin68SzWlzwtlW
- GbdEO/MFU8gfjK2nPwsrj/rKvQfyCbFTEZhF4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728314660; x=1728919460;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=J3OJAtLtzmZ5rGDY3PnOo1eygelxfOnEod7KIbR9qQI=;
- b=D4ErrRRi2weSgBX/L2bQkMm+PSzKaZxQyhapEOZ0pyQD/hx6k5KRaowGImta1T6AwS
- VY+WG3qfNiErQGzywamMS7ody6a4JYmMKACopBP62luY2C+Ojmy+U6Pv1zUmbMH6+Yf3
- AbqNjj8Yro6AWS9uxN0pUUvE2lds/8vbLwK+BoBXz9ZolbPlGCHPLlUJ3YQF7Umpq5bj
- GYjofSe5X10CQlzv0qEa0zBPyhb2cxhSM1OgV0hvin3U1k+uuUxc5eROcFR6ZYHmneq5
- o+2sLNwHOIGRQch9c4FecMEli9uTzUiRxQjOs5BLIYQELnppNX60k2u5BTkDDBdr5OTr
- wWZA==
-X-Gm-Message-State: AOJu0YzjAgxw5qQr8iwCMESEiCsDDEvTGYot8kwramWn2ukmLzPIP1a+
- nE5RT8h5HwRvDzKO9KIWoQFQe95WfAcb1Un4KPl2+5edWQ0WZ1vCRN+banlqmAc3FCkj6QIqf8c
- nXwIuVXVITo5+wCjdaV0o4YPIDyZPCe6pJ3Vh
-X-Google-Smtp-Source: AGHT+IFfLvdcjqAW02MLleunyTHZHz6+OAfwS3RO5h5FamSwmdo+j9dbjinSFTXnk4AFioP7Y8cwYsyvfe9cYzGk/o4=
-X-Received: by 2002:a05:6214:488d:b0:6cb:7104:f115 with SMTP id
- 6a1803df08f44-6cb9a1f83fbmr186120376d6.11.1728314660608; Mon, 07 Oct 2024
- 08:24:20 -0700 (PDT)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id B091E87E30;
+ Mon,  7 Oct 2024 18:06:25 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1728317186;
+ bh=63xurK2ZWcMFP0pG/ZE1lWWdsIcNF8LS8hK+NwdcpRc=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=H++W6CbQ8UbcVMk9wjlzKec2yoQVpphChN6A9eIWlgvKfdtstVmz6OSw8/9zcc8am
+ pHsQwXSz0gyrUvIO1/M4MXYEA1KS3V2KBNEr9Nzq+jswOhQUMg/OIckLfPBqet1ho6
+ y2xoJJeVXeZ3nog8OioHvssHlamMr1X1LC8Kqoq3ARo7rXUc5SY5HOMEkCWSF5ds2C
+ NjI3Na8l2PjmM4jAobv4S4GKcf6LbpoqgNSgDLu06LL7rJ2ypwhvfUvDhPAGWEdlOa
+ t2/fwysyAdNUmduLfflGyoiZYAdI5eQ77IMAuPrla6zWOIACCb6bmF4UMdZGa/PYdS
+ Uq678Yc7ZPWTA==
+Message-ID: <06ff501e-ebf2-402a-a058-5bbffd00f545@denx.de>
+Date: Mon, 7 Oct 2024 17:40:48 +0200
 MIME-Version: 1.0
-References: <20241004230756.371153-1-marex@denx.de>
- <20241004230756.371153-2-marex@denx.de>
-In-Reply-To: <20241004230756.371153-2-marex@denx.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 7 Oct 2024 09:24:10 -0600
-Message-ID: <CAFLszTjiuQZc2S+uEppNLCboGVFPc=n-kRZH-Vxw85AUfawsgQ@mail.gmail.com>
-Subject: Re: [PATCH 2/2] Makefile: Drop SPL_FIT_GENERATOR support
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Peter Robinson <pbrobinson@gmail.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Sean Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
- Tom Rini <trini@konsulko.com>, 
- u-boot@dh-electronics.com, uboot-stm32@st-md-mailman.stormreply.com
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 1/7] usb: onboard-hub: Add reset-gpio support
+To: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Cc: "Simek, Michal" <michal.simek@amd.com>,
+ "fabrice.gasnier@foss.st.com" <fabrice.gasnier@foss.st.com>,
+ "git (AMD-Xilinx)" <git@amd.com>
+References: <20241007044547.23896-1-venkatesh.abbarapu@amd.com>
+ <20241007044547.23896-2-venkatesh.abbarapu@amd.com>
+ <eb74b41b-9546-4c68-a724-00c2e33c9deb@denx.de>
+ <SA1PR12MB8697CE2214E5DD0A5A764833987D2@SA1PR12MB8697.namprd12.prod.outlook.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <SA1PR12MB8697CE2214E5DD0A5A764833987D2@SA1PR12MB8697.namprd12.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,38 +74,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 4 Oct 2024 at 17:08, Marek Vasut <marex@denx.de> wrote:
->
-> The SPL_FIT_GENERATOR is long superseded by binman, drop SPL_FIT_GENERATOR
-> support as there are no more users.
->
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
-> Cc: AKASHI Takahiro <akashi.tkhro@gmail.com>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Peter Robinson <pbrobinson@gmail.com>
-> Cc: Quentin Schulz <quentin.schulz@cherry.de>
-> Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-> Cc: Sean Anderson <seanga2@gmail.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Sumit Garg <sumit.garg@linaro.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@dh-electronics.com
-> Cc: u-boot@lists.denx.de
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
-> NOTE: Depends on https://lore.kernel.org/u-boot/20241004225916.361000-1-marex@denx.de/
-> ---
->  Makefile                | 18 ------------------
->  boot/Kconfig            | 15 ---------------
->  doc/usage/fit/howto.rst |  4 ----
->  3 files changed, 37 deletions(-)
+On 10/7/24 5:03 PM, Abbarapu, Venkatesh wrote:
 
-Double yay. I didn't know that the last user was gone.
+[...]
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+>>>    static int usb_onboard_hub_probe(struct udevice *dev)
+>>>    {
+>>>    	struct onboard_hub *hub = dev_get_priv(dev); @@ -30,7 +67,11 @@
+>>> static int usb_onboard_hub_probe(struct udevice *dev)
+>>>    	if (ret)
+>>>    		dev_err(dev, "can't enable vdd-supply: %d\n", ret);
+>>>
+>>> -	return ret;
+>>> +	ret = usb_onboard_hub_reset(dev);
+>>
+>> return usb_onboard_hub_reset(dev);
+> <Venkatesh> By adding the "return usb_onboard_hub_reset(dev);" we miss the code which  does i2c initialization sequence which is part of [PATCH v4 4/7] usb: onboard-hub: Add i2c  initialization for usb5744 hub of the series.
+Surely this can be solved in 4/7 ?
