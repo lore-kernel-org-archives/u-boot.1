@@ -4,81 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37CD8CFB43F
-	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 09:42:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3261DCFB440
+	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 09:51:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39DBB889FC;
-	Mon,  7 Oct 2024 11:42:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A54FC889E1;
+	Mon,  7 Oct 2024 11:51:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GR3EV/vb";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RgcZJ2z1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD7F6884DB; Mon,  7 Oct 2024 11:42:36 +0200 (CEST)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id E1DE588AB9; Mon,  7 Oct 2024 11:51:12 +0200 (CEST)
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
+ [IPv6:2607:f8b0:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB852888EB
- for <u-boot@lists.denx.de>; Mon,  7 Oct 2024 11:42:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B3AA6889AA
+ for <u-boot@lists.denx.de>; Mon,  7 Oct 2024 11:51:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-37d1eda8c7cso651032f8f.3
- for <u-boot@lists.denx.de>; Mon, 07 Oct 2024 02:42:34 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-20b5affde14so31412415ad.3
+ for <u-boot@lists.denx.de>; Mon, 07 Oct 2024 02:51:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728294154; x=1728898954; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=thaYmYO0xbXl1CGK8cciXePNLK3whxHXeRIVQ2I8dTU=;
- b=GR3EV/vbuJHDjgRybs3Q9HQvUk4zgcOw9C5waUjJuI23igcQEF4AWo5J1e4BZwfYGa
- hZArLtft6wmk4JaQaoU3OBb5jZ5XPCF/sFyTtUVVt6lKN59CkyYyrvaq5Kx2ykHnq+9D
- WYJUBPvrG2qryY4LHoAmobwbYVz6jAgsdUD2fzHtUOhrLlIlV4IbCh9pA1JUG+AfQ872
- ay6jVEk9oBvFksNTWPu4K3pts4O+CVL4keYg1/Xs7Q5be6jgmUGzb6kC5slD2uEvxc2u
- rrDhEsYbjVfpqXrCCOgYUZdV6maKe1PH4P060QWdmXyr9UiB4YSs1KezaSufebBfq5sY
- P04Q==
+ d=linaro.org; s=google; t=1728294669; x=1728899469; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=u+XmQYflNq0jmdr+0Ma06wbL2ZgkxEH6wn4p46iAz8A=;
+ b=RgcZJ2z1ZU9vNOX2BWSJccan9QkKysew7748fnJZO/RKTkPalA7Ei6fS268qTDfNMb
+ NcMJKgN970QtDLBbxYxM4DTY/g3vZfA12QlMXJZMMDMUrYCdlQhDv3qt91GPHTgk7Upa
+ vaefxNMDMCxn7HdPORxz2xVERgULKa/daHA6rGR8j3hw11PKAl14Cv33lsXeE7Mi9umo
+ HskPoQfYes/Lh5KZ7TCaZE2WvfI8cWwjZvuOaSdllAIzbDigzL9PPkxQOxBlGFORMO3/
+ D0ppOe6Jk2H0/Z/aGwtmaWu1UnuieOJ2I0qSnNfShek69IFa+Ch9hPA4atJYBJThwb/i
+ 04zg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728294154; x=1728898954;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1728294669; x=1728899469;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=thaYmYO0xbXl1CGK8cciXePNLK3whxHXeRIVQ2I8dTU=;
- b=HMOVZFF7wmyiWTSmdGtP0+smvKZQB6/95Jl10SGSSOSuaAM0Woy+CEVu1aFjOzx5UW
- ZUw1+NoouzagERYDS1cggWLFGKzL4iyV6LZ+fQ58+ofabvjvXogylU3E/l7tYaF6u8xH
- TA0ZYC6FhcRTLuNZNkrl2ou1ItpgQGYlhI+hdGJzCsey/fhrtUBHd/Pi+r+3CzAhS/jd
- wScfU1t5ftFRBAU64UlT2OiMfZZP1VU65njzqARrA6rnT9eqvFHjIBc1VPHl6Bnka0QK
- KzTSy9enOkpB1NKv9VxM9Py96GCssst7s1xY1z6LHLUKWX0NucqD9A76dNMXltqekdh8
- Abcw==
-X-Gm-Message-State: AOJu0YwDStNO5BnP24W5wJwVAas81+G4VpnNLBCObYQ+Y/kRijB5nzCx
- Y6rpz0zzLvQss1MeaKR5wrJinezUcBHvaE15qcOUaB9T7G+/ERicEAY6KfpRBNFV//UUfygvqKP
- NVgM+6Q==
-X-Google-Smtp-Source: AGHT+IGXJ665kYJt21Mo5M/OIjddioJN/1A4ZX7QbSPKXuk38SVesYQp32U8RswQe91YGYvqjIkzLQ==
-X-Received: by 2002:a5d:51c7:0:b0:374:c05f:231d with SMTP id
- ffacd0b85a97d-37d0e4e447bmr5968063f8f.0.1728294154039; 
- Mon, 07 Oct 2024 02:42:34 -0700 (PDT)
-Received: from builder.. ([2a01:e0a:3cb:7bb0:287a:3d8d:7a32:9534])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d1698fcacsm5273659f8f.116.2024.10.07.02.42.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Oct 2024 02:42:33 -0700 (PDT)
-From: Jerome Forissier <jerome.forissier@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Alexander Gendin <agendin@matrox.com>,
- Dan Carpenter <dan.carpenter@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>
-Subject: [PATCH] linker_lists: set LINKER_LIST_ALIGN to 8 if 64BIT
-Date: Mon,  7 Oct 2024 11:42:06 +0200
-Message-Id: <20241007094206.2928071-1-jerome.forissier@linaro.org>
-X-Mailer: git-send-email 2.40.1
+ bh=u+XmQYflNq0jmdr+0Ma06wbL2ZgkxEH6wn4p46iAz8A=;
+ b=VACjkYOWm/xfH+RM+sglf07V2RRm4RdJq/eZPzgSWptmwjdITNz8GZkLIvl7k6mZrm
+ GatJdPL2I/GZkH0Awv8+/WUCJL8FQffkUATgfo1uYbGBewoHT6z0IneTgVut+7WDEREy
+ RmZxwgCIsmBcmNh9vv0ZjXNGmfp4mRxZYIWhIVV1Haz5QzsyEdfOTUyIYEBWo1wYVXkd
+ e1pkdjxhYbqVMFKlE1zQtLOTjhAv/u+g/oZTqaAVUvL4m2xp8WSgprUoSCdG/rqpY7wR
+ XZ0cKuhXluVyVeioKNqAQGt+FUMuD6gmy7VvqOcbIePRvcC3ZdBdsMVCcBJE8tO4WInD
+ cteQ==
+X-Gm-Message-State: AOJu0YypgqIyTi79Laqj1CEruyNmz5ec4IyRjzo5KPxpdGGwBYCAbMWs
+ wngf81noVTG+IYHYzLYyY6GAwLkMC750Ge5nnKE7ysxNhaK0ao97fjGxAO1/0iDSOr4OHSIvsw6
+ y8W5AKupRZ/5K/3viR9N4cJQhMVwlpjU5vRFIJQ==
+X-Google-Smtp-Source: AGHT+IGpE6J8P3wX6Fyz3I8qn/DK2Q/P2h89DxJFakr4zyip0SgYdz62F6mhdXTW14WMaHEyhsuOaKI1LZ6VBesJ10Q=
+X-Received: by 2002:a17:90a:17e3:b0:2d3:c87e:b888 with SMTP id
+ 98e67ed59e1d1-2e1e636f481mr13744674a91.27.1728294669162; Mon, 07 Oct 2024
+ 02:51:09 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241007094206.2928071-1-jerome.forissier@linaro.org>
+In-Reply-To: <20241007094206.2928071-1-jerome.forissier@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 7 Oct 2024 12:50:32 +0300
+Message-ID: <CAC_iWjJST9aiZQoppzBaEOi=o+1TWGB_mB5idZepQNNiRWHtEg@mail.gmail.com>
+Subject: Re: [PATCH] linker_lists: set LINKER_LIST_ALIGN to 8 if 64BIT
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Alexander Gendin <agendin@matrox.com>, 
+ Dan Carpenter <dan.carpenter@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,42 +89,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-CPU_MIPS64 needs 8-byte alignment on the linker lists, otherwise an
-exception may occur. In fact all 64BIT architectures should default
-to 8; that's what this patch does.
-Fixes an issue found on malta64 with QEMU:
+On Mon, 7 Oct 2024 at 12:42, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
+>
+> CPU_MIPS64 needs 8-byte alignment on the linker lists, otherwise an
+> exception may occur. In fact all 64BIT architectures should default
+> to 8; that's what this patch does.
+> Fixes an issue found on malta64 with QEMU:
+>
+>  Breakpoint 1, lists_driver_lookup_name (name=0xffffffffbe043578 "root_driver") at /home/uboot/u-boot/drivers/core/lists.c:31
+>  31                      if (!strcmp(name, entry->name))
+>  [...]
+>  ld      a1,0(s0)
+>
+>  (gdb) p/x &entry->name
+>  0xffffffffbe04b0d4
+>  (gdb) p/x $s0
+>  0xffffffffbe04b0d4
+>
+>  $ grep __u_boot_list /tmp/malta64/u-boot.objdump
+>  4 __u_boot_list 000018e0  ffffffffbe04a4d4  ffffffffbe04a4d4  0004a584  2**2
+>
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> ---
+>  arch/Kconfig | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/arch/Kconfig b/arch/Kconfig
+> index 8f1f4667012..72bf4029251 100644
+> --- a/arch/Kconfig
+> +++ b/arch/Kconfig
+> @@ -45,7 +45,7 @@ config SYS_CACHELINE_SIZE
+>  config LINKER_LIST_ALIGN
+>         int
+>         default 32 if SANDBOX
+> -       default 8 if ARM64 || X86
+> +       default 8 if 64BIT
+>         default 4
+>         help
+>           Force the each linker list to be aligned to this boundary. This
+> --
+> 2.40.1
+>
 
- Breakpoint 1, lists_driver_lookup_name (name=0xffffffffbe043578 "root_driver") at /home/uboot/u-boot/drivers/core/lists.c:31
- 31                      if (!strcmp(name, entry->name))
- [...]
- ld      a1,0(s0)
-
- (gdb) p/x &entry->name
- 0xffffffffbe04b0d4
- (gdb) p/x $s0
- 0xffffffffbe04b0d4
-
- $ grep __u_boot_list /tmp/malta64/u-boot.objdump
- 4 __u_boot_list 000018e0  ffffffffbe04a4d4  ffffffffbe04a4d4  0004a584  2**2
-
-Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
----
- arch/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/arch/Kconfig b/arch/Kconfig
-index 8f1f4667012..72bf4029251 100644
---- a/arch/Kconfig
-+++ b/arch/Kconfig
-@@ -45,7 +45,7 @@ config SYS_CACHELINE_SIZE
- config LINKER_LIST_ALIGN
- 	int
- 	default 32 if SANDBOX
--	default 8 if ARM64 || X86
-+	default 8 if 64BIT
- 	default 4
- 	help
- 	  Force the each linker list to be aligned to this boundary. This
--- 
-2.40.1
-
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
