@@ -4,76 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4D50CFB43F
-	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 11:48:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4304CFB440
+	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 11:51:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1602A88ABF;
-	Mon,  7 Oct 2024 13:48:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2AAFC889AA;
+	Mon,  7 Oct 2024 13:51:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MqK2p12d";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="BmD1joDX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA65688B3F; Mon,  7 Oct 2024 13:48:31 +0200 (CEST)
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [IPv6:2a00:1450:4864:20::132])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7853588ABF; Mon,  7 Oct 2024 13:51:25 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9F89883D4
- for <u-boot@lists.denx.de>; Mon,  7 Oct 2024 13:48:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E4406883D4
+ for <u-boot@lists.denx.de>; Mon,  7 Oct 2024 13:51:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-539908f238fso4692287e87.2
- for <u-boot@lists.denx.de>; Mon, 07 Oct 2024 04:48:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1728301709; x=1728906509; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=OKG+JIu4hWoVqCjBNu7HJ3Xnb22/39Rvf9KKtDhzszI=;
- b=MqK2p12djMslkrrGAqLj1VZ7MECHDd+k0vRw5Q+1g8Y9G3av2IUqLhcPZMijN1It47
- 3VSe/R8CDXr87TifgO6STOOFMVN2p91VHpP9jq8WEkEfbrKJ2MbbpeGOcamiS6PkKiYI
- kFRjyz7L0e9BX1YCBOY0mWcXONM9gNxPjBVxGlKYKVGAB28lyW0gtleRlVi8g+o001NE
- I1XFPMzGjzYWYymEAZikaKnuFHU8li4NXP7EnWRHNaSwMgOdDy/f+j0AGPKaGFW62DIm
- n9tGC5RkJxsKYOyPW4voBrJ89jJqEimLXVya+FciuZQYSvvhlvUOlBx/D8JBIkt1RJwr
- uo7Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728301709; x=1728906509;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=OKG+JIu4hWoVqCjBNu7HJ3Xnb22/39Rvf9KKtDhzszI=;
- b=DdINCazkkp/wjrO7jh1MwP56ph6v3/+HaB/N83U9v7c2AThRBjqywUOxvweb2IfHg1
- 4Pwogde27vCnPMWZRgc6KCFnyGAfws5Wt43Y2Joj4TjzbBfUGAz1ysL84X9AWMkvMNzM
- ciOM52Hx2rZq8uVP8ufKEZhSNfqlbPARksyZQlsUXBE8cvNJn28f8LBGLvQdM2XumjK9
- Y2Mr4EaGcknSRH59gozxq51WGZiXewBOOrDlZGIaR11tv+mozoCsfN2ZtPBzkDSQT1hQ
- vvYObvqsfYgqEg18EaUZOWLQT/Pa1tLjr4z1kiRKpXtKEz473KWVfRncb6k4hTGWmqS8
- dEIw==
-X-Gm-Message-State: AOJu0YxOplutvTp8n53gfr1CI+/L1c6lD+XoGH1EgI7I/BONIdY6/J6G
- dlT/Z5HQ19hC/jSv0Hvy3Oa10/SVyAWVw+E8VZzvtZojoKuMXPHBH5Htq/hyq3vp2yHG2Hv+hdf
- TOZBxLohxn0rTjdyOT0OtJWR3cB0=
-X-Google-Smtp-Source: AGHT+IEKSNn9eaeXvqVPdAOABVLFoI03SuKpdAkA/kfa/oPI6xGWVt25ZaEuzj0/fPXmuA56TkqHRmxcODga+Aktumw=
-X-Received: by 2002:a05:6512:b25:b0:52c:9468:c991 with SMTP id
- 2adb3069b0e04-539ab878145mr5272601e87.14.1728301708795; Mon, 07 Oct 2024
- 04:48:28 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 497BpLqu014903;
+ Mon, 7 Oct 2024 06:51:21 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1728301881;
+ bh=n2mNlNIxEu/6PGkxyZwqZP42EgKo8reDIM18clGszLY=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=BmD1joDXVaP+eQFAeceyVaQo4pxAwM4B83zMa3vRviHhAY1fvFiBgrLF7laG/10IP
+ EqpUy86pVkCXRsst7BRXsX+yKefeIRC9qvp8JMyMdSMLzEFqxxqdOsoyreXnuRbs2a
+ 6NsG5ctpj/x/fR1OFiZzpKkqdwdrNG0cCnFGSa+o=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 497BpLxM028459
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 7 Oct 2024 06:51:21 -0500
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 7
+ Oct 2024 06:51:20 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 7 Oct 2024 06:51:20 -0500
+Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 497BpKGO117644;
+ Mon, 7 Oct 2024 06:51:20 -0500
+Date: Mon, 7 Oct 2024 06:51:20 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Manorit Chawdhry <m-chawdhry@ti.com>
+CC: Jaehoon Chung <jh80.chung@samsung.com>, <u-boot@lists.denx.de>, Neha
+ Malcom Francis <n-francis@ti.com>, Keerthy J <j-keerthy@ti.com>, Udit Kumar
+ <u-kumar1@ti.com>, Aniket Limaye <a-limaye@ti.com>, Tom Rini
+ <trini@konsulko.com>, Vignesh Raghavendra <vigneshr@ti.com>, Andrew Davis
+ <afd@ti.com>
+Subject: Re: [PATCH v4 3/7] arm: dts: k3-j7*-r5: Add MPU clock in clocks
+ property
+Message-ID: <20241007115120.kvtqmy42vhtxu2qv@create>
+References: <20241004-b4-upstream-j721s2-avs-v4-0-6d71c6bab9f4@ti.com>
+ <20241004-b4-upstream-j721s2-avs-v4-3-6d71c6bab9f4@ti.com>
+ <20241004113001.h4cshh74q2bqfhqj@frolic>
+ <20241007054848.ci5tls5wqrozxqnm@uda0497581>
 MIME-Version: 1.0
-References: <20241005233116.2781053-1-alice.guo@oss.nxp.com>
-In-Reply-To: <20241005233116.2781053-1-alice.guo@oss.nxp.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 7 Oct 2024 08:48:17 -0300
-Message-ID: <CAOMZO5BkHsSJ3mPMQUuXnYaCkEQ9LgjY+PetS1xWqdeQBKiowg@mail.gmail.com>
-Subject: Re: [PATCH v1] imx: Kconfig: make IMX8_ROMAPI configurable
-To: alice.guo@oss.nxp.com
-Cc: u-boot@lists.denx.de, sbabic@denx.de, uboot-imx@nxp.com, 
- trini@konsulko.com, marek.vasut+renesas@mailbox.org, peng.fan@nxp.com, 
- fedor.ross@ifm.com, ye.li@nxp.com, seanga2@gmail.com, 
- Alice Guo <alice.guo@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20241007054848.ci5tls5wqrozxqnm@uda0497581>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,10 +85,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Oct 5, 2024 at 8:32=E2=80=AFPM <alice.guo@oss.nxp.com> wrote:
->
-> From: Peng Fan <peng.fan@nxp.com>
->
-> Make CONFIG_IMX8_ROMAPI could be configured in defconfig.
+On 11:18-20241007, Manorit Chawdhry wrote:
+> Hi Nishanth,
+> 
+> On 06:30-20241004, Nishanth Menon wrote:
+> > On 11:54-20241004, Manorit Chawdhry wrote:
+> > > MPU clock had been missing. Distinguish multiple clocks with clock-names
+> > > and add MPU clock as well.
+> > > 
+> > > Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> > 
+> > We have been a bit hacky with GTC - do we want to pull it out as a
+> > separate IP?
+> 
+> Could you explain it a bit more..
 
-Please state a clear motivation for doing this and send a v2.
+I was thinking more like GTC as a device node by itself. I am a bit
+split about the actual benefit of doing so, though..
+
+-- 
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
