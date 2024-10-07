@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03EC5CFB43F
-	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 10:08:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF8B0CFB441
+	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 10:09:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8DC7D889E1;
-	Mon,  7 Oct 2024 12:08:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1CF3788B78;
+	Mon,  7 Oct 2024 12:09:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fTOgU69j";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vuzAGNMX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 230148863E; Mon,  7 Oct 2024 12:08:21 +0200 (CEST)
-Received: from mail-vs1-xe32.google.com (mail-vs1-xe32.google.com
- [IPv6:2607:f8b0:4864:20::e32])
+ id 2EA9B88CA8; Mon,  7 Oct 2024 12:09:19 +0200 (CEST)
+Received: from mail-ua1-x934.google.com (mail-ua1-x934.google.com
+ [IPv6:2607:f8b0:4864:20::934])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA9B088B39
- for <u-boot@lists.denx.de>; Mon,  7 Oct 2024 12:08:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B452F88B78
+ for <u-boot@lists.denx.de>; Mon,  7 Oct 2024 12:09:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe32.google.com with SMTP id
- ada2fe7eead31-4a3cb61d179so1452923137.3
- for <u-boot@lists.denx.de>; Mon, 07 Oct 2024 03:08:16 -0700 (PDT)
+Received: by mail-ua1-x934.google.com with SMTP id
+ a1e0cc1a2514c-84eaa16442aso1029966241.2
+ for <u-boot@lists.denx.de>; Mon, 07 Oct 2024 03:09:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728295695; x=1728900495; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1728295754; x=1728900554; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=itSUuj6/aLWCAQ1C2aJ5Ny91rrBDpz23HgyNmsgFTpg=;
- b=fTOgU69jDAzcF4XpLIH+XyyWVHIaDsXDTBaK0rOiBMZH0OONDj+fbIyCJF7b8wHOHD
- al/iLLRecWuc1dueadG1EdgwSmXynxHI1/iWknnLawW5QkaPM8wKg8a5A7PzNPW/wXzv
- f+2jMw5mxcYphXPXp4tVzhXj6eRNi/k28wUsQ73whU9kwigbA5hDchXZyN9FUepPf/OU
- m+aa+sXkRGLDDWKd5OrIeRB6AuJaDJjqYSQgzkXEWxdEerDORkqnL25tfIT6ejtdbED/
- UqvsSQWLzidmhmWUdUjd9H4FoGqwQoLRfXhuXJjZKwg8ypPMsWd8cArmJLyE0VuDmQse
- qrGw==
+ bh=tZlO5wIOb2VIXNSw81yUVqR91itFEPppaYyHsa8O9tI=;
+ b=vuzAGNMXrO8ADjlS7gKkZKmphXo4BfY40WRAUvFQzSpOg7W+V3bhLyVb+en/i++Qgq
+ lXlb0ZKaBaWZ+jOcfDzTmUiTrB+nKpVcxyQi5FlJ2hLwvw3MCc9wOfgT06XobnqmcZ6t
+ i5ZShAwR/K2LnZY3VvkTP0scF0oyoYWgpuCXQms1dlIK1VkozzJiulKD5LE0fTFAwhiR
+ oY3EGiA8doERWuKy1v97NNlqSHlbzQW4Uo7dIQm6wxjbOuj+hvWsr+6McbuQ5YKVk8rE
+ PPRGy0viKmLVxWvJJAoCwWKU/lmghg2RDoKPpzqmrPRQ5f4KWFBRArSmZU43176TZmbi
+ 6vrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728295695; x=1728900495;
+ d=1e100.net; s=20230601; t=1728295754; x=1728900554;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=itSUuj6/aLWCAQ1C2aJ5Ny91rrBDpz23HgyNmsgFTpg=;
- b=Nmrl7YAntg7ug0syY0Pmqo9irDDU0sfYALwvY3E91a2x1P3oVm6NYnU8ltZDCLlBdf
- PHkdlmWXUKu3vrs96f3SAFn4ulSleWOsAuPmadt281uwzp8F9XTf57rur8cbooCyJ0LI
- LGHSDUoGkdLDeRbPVIR16+HxSPJP72/HkzbOQGClEFQE09csFjlk9NzqaLF33jiSCqub
- mZRmMnEfIFGLxI9UoDOFTz1cSqNjyLguk+xNAlQhdpttcCj2n+wCz23N4WzPr/0P/dVS
- iGbA4uyBjwuIyczQNcirBmN1PToFRS+JXUulN7axL7FF5nbjvLX9z6NDKFHS/GQuucBC
- BRig==
-X-Gm-Message-State: AOJu0Yx+i2jO2jjRh4zQ1zVanRvVYLiN+3BFY7JI0XQC6VVZLT9qS4ke
- HjeNGbvXJnPCPkJSaIOJtSdI8sYZjt0HAlbsfF+ahO8YAimLpdsRv1Wy3UoeeDL2G3MyTUrdgnF
- bSKhSP8Yob+xLptHcUsYnJj6ReN5JxAxdeqmOVQ==
-X-Google-Smtp-Source: AGHT+IH+7XOsafF+teWXZ6IAQrECOAMvw6g8Sc/qcLQIXY7Te7UkxSiM2vevQuPfnwZ2rluGj7lCTWel+9IF6z7O23I=
-X-Received: by 2002:a05:6102:6c6:b0:4a3:ba8c:879 with SMTP id
- ada2fe7eead31-4a40574f974mr6450870137.2.1728295695480; Mon, 07 Oct 2024
- 03:08:15 -0700 (PDT)
+ bh=tZlO5wIOb2VIXNSw81yUVqR91itFEPppaYyHsa8O9tI=;
+ b=e5Z6Fmuu6AdMrbc1ujN+4X1FjSrv1VSrxsifSup8cyoT3i3oy5+r89lUWsceV3ydCW
+ ZNKfcc3mA6CueKb4dz9AR7xn26Ga33JegYzQ+OkmDN81m/glkdGjzBEH/14wDoNj5W9D
+ 1rxUepzjTWcXKviuj54l4noEYZXef+HlxOPUbTsiHSivQBKDMijAITRN6CVuUr6wY/RN
+ qbZUCeHG31sV+9PEGH3TsG9SmEh3q9JuyG7lNhzRgukCprwIdzVIo9JjsGz7bt4Kv0fo
+ 4MAuOgoby8Kd8TkmzfHcnxsVAsmyD7QvRTCl7wcScDP1FLzrYPglcAL0LnJ/575VV8X3
+ 7Uzw==
+X-Gm-Message-State: AOJu0YxYSPySXPBJvYBXYlnqR2CsWGYw2FqX8kCzVi3PYcLNa1nl/HB6
+ XG9kQwYI+xbIMwrqZtO8w/AdimHX1sDOn4zAn49nTjKFwar8SZei5rKlR3Es4fZnxkWdZHqr6jL
+ r5jk9Xa9LvQiYqXDY1XyC13p0x1YXNaLOvSOeTg==
+X-Google-Smtp-Source: AGHT+IGNvJVppHb+64OMxLOAjetR4VQrumIsjFmEKQoRzEVAAInwv5vsEKyFaZyWVi8axEnev9tGYO+W35PdCAz0xxM=
+X-Received: by 2002:a05:6102:548b:b0:4a3:e18e:1f60 with SMTP id
+ ada2fe7eead31-4a4058e6fa2mr6112375137.20.1728295754444; Mon, 07 Oct 2024
+ 03:09:14 -0700 (PDT)
 MIME-Version: 1.0
 References: <20241005011315.436233-1-marex@denx.de>
-In-Reply-To: <20241005011315.436233-1-marex@denx.de>
+ <20241005011315.436233-2-marex@denx.de>
+In-Reply-To: <20241005011315.436233-2-marex@denx.de>
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Mon, 7 Oct 2024 15:38:04 +0530
-Message-ID: <CAFA6WYO8LQGdPFp2ph2YXphfa5DPKkK5eChU6kbOCboEHe8UgA@mail.gmail.com>
-Subject: Re: [PATCH v2 1/2] dts: Add ability to build fallback DTBOs from
- arch/$(ARCH)/dts
+Date: Mon, 7 Oct 2024 15:39:03 +0530
+Message-ID: <CAFA6WYMH4vBC8iUJA64t1HTy+iTAooe2x0HS0PQA3j9QFxo_Xw@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] arm64: dts: imx: Switch to using upstream DT on DH
+ i.MX8MP DHCOM PDK2/PDK3
 To: Marek Vasut <marex@denx.de>
 Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
  Caleb Connolly <caleb.connolly@linaro.org>, 
@@ -95,22 +96,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
-
 On Sat, 5 Oct 2024 at 06:43, Marek Vasut <marex@denx.de> wrote:
 >
-> Currently the enablement of OF_UPSTREAM results on the build system
-> searching for DTs only in dts/upstream/ . There are platforms which
-> use U-Boot specific DTBOs applied on top of U-Boot control DT during
-> SPL stage, and source DTs for these are located in arch/$(ARCH)/dtb.
->
-> Add dedicated 'dtbos' target which builds only .dtbos and not .dtbs and
-> in case CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS is enabled, build
-> this target for arch/$(ARCH)/dtb to generate local U-Boot specific DTBOs.
->
-> Adjust top level Makefile so binman would search for .dtb and .dtbo in
-> both OF_UPSTREAM specific paths and arch/$(ARCH)/dtb for the .dtbo case
-> in case CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS is enabled.
+> Enable OF_UPSTREAM to use upstream DT and add freescale/ prefix to the
+> DEFAULT_DEVICE_TREE. And thereby directly build DTB from dts/upstream/src/
+> including *-u-boot.dtsi and DTBOs from arch/$(ARCH)/dts/ directory.
 >
 > Signed-off-by: Marek Vasut <marex@denx.de>
 > ---
@@ -131,134 +121,584 @@ On Sat, 5 Oct 2024 at 06:43, Marek Vasut <marex@denx.de> wrote:
 > Cc: u-boot@dh-electronics.com
 > Cc: u-boot@lists.denx.de
 > ---
-> V2: Gate this functionality behind CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS
+> V2: Enable CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS
 > ---
-> NOTE: Depends on https://lore.kernel.org/u-boot/20241004001118.322531-1-marex@denx.de/
-> ---
->  Makefile             |  4 ++++
->  dts/Kconfig          | 16 ++++++++++++++++
->  dts/Makefile         | 14 +++++++++++++-
->  scripts/Makefile.dts |  6 ++++++
->  4 files changed, 39 insertions(+), 1 deletion(-)
+>  arch/arm/dts/Makefile               |   2 -
+>  arch/arm/dts/imx8mp-dhcom-pdk2.dts  | 158 --------------
+>  arch/arm/dts/imx8mp-dhcom-pdk3.dts  | 317 ----------------------------
+>  configs/imx8mp_dhcom_pdk2_defconfig |   6 +-
+>  configs/imx8mp_dhcom_pdk3_defconfig |   6 +-
+>  5 files changed, 8 insertions(+), 481 deletions(-)
+>  delete mode 100644 arch/arm/dts/imx8mp-dhcom-pdk2.dts
+>  delete mode 100644 arch/arm/dts/imx8mp-dhcom-pdk3.dts
 >
-> diff --git a/Makefile b/Makefile
-> index af24de4165e..a5258e8cb3f 100644
-> --- a/Makefile
-> +++ b/Makefile
-> @@ -1375,7 +1375,11 @@ of_list := "$(ext_dtb_list)"
->  of_list_dirs := $(dir $(EXT_DTB))
->  else
->  of_list := $(CONFIG_OF_LIST)
-> +ifneq ($(CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS),)
-> +of_list_dirs := $(dt_dir) arch/$(ARCH)/dts
-> +else
->  of_list_dirs := $(dt_dir)
-> +endif
->  default_dt := $(if $(DEVICE_TREE),$(DEVICE_TREE),$(CONFIG_DEFAULT_DEVICE_TREE))
->  endif
->
-> diff --git a/dts/Kconfig b/dts/Kconfig
-> index 569d4be338e..385058b429f 100644
-> --- a/dts/Kconfig
-> +++ b/dts/Kconfig
-> @@ -125,6 +125,22 @@ config OF_UPSTREAM_VENDOR
->         help
->           Select the vendor to build all devicetree files for.
->
-> +config OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS
-> +       bool "Build local DTBOs as fallback for DTBOs missing upstream"
-> +       default n
-> +       depends on OF_UPSTREAM
-> +       help
-> +         Enable building DTBOs from arch/$(ARCH)/dts as a fallback for
-> +         DTBOs which are not part of Linux kernel upstream yet. This is
-> +         a stopgap measure to expedite OF_UPSTREAM switch for platforms
-> +         which already have main DT in Linux kernel upstream, but still
-> +         have leftover DTBOs in U-Boot tree.
-> +
-> +         Do not use this option, upstream your DTs and DTBOs instead.
-> +         If the upstreaming is in progress, use with utmost caution.
-> +
-> +         If unsure, say N.
-> +
->  choice
->         prompt "Provider of DTB for DT control"
->         depends on OF_CONTROL
-> diff --git a/dts/Makefile b/dts/Makefile
-> index d6c2c9daf31..32c749a043a 100644
-> --- a/dts/Makefile
-> +++ b/dts/Makefile
-> @@ -11,12 +11,18 @@ DEVICE_TREE := unset
->  endif
->
->  ifeq ($(CONFIG_OF_UPSTREAM),y)
-> +ifneq ($(CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS),)
-
-Since CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS already has a
-dependency on CONFIG_OF_UPSTREAM via Kconfig, can we avoid the nested
-ifeq sequence here? This will avoid a redundant local_dtbos
-assignment...
-
-> +local_dtbos := local-dtbos
-> +else
-> +local_dtbos :=
-> +endif
->  ifeq ($(CONFIG_ARM64),y)
->  dt_dir := dts/upstream/src/arm64
->  else
->  dt_dir := dts/upstream/src/$(ARCH)
->  endif
->  else
-> +local_dtbos :=
-
-...here.
-
-With that fixed, feel free to add:
 
 Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 
 -Sumit
 
->  dt_dir := arch/$(ARCH)/dts
->  endif
->
-> @@ -40,7 +46,7 @@ endif
->
->  targets += dt.dtb
->
-> -$(DTB): arch-dtbs
-> +$(DTB): arch-dtbs $(local_dtbos)
->         $(Q)test -e $@ || (                                             \
->         echo >&2;                                                       \
->         echo >&2 "Device Tree Source ($@) is not correctly specified."; \
-> @@ -53,6 +59,12 @@ PHONY += arch-dtbs
->  arch-dtbs:
->         $(Q)$(MAKE) $(build)=$(dt_dir) dtbs
->
-> +ifneq ($(CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS),)
-> +PHONY += local-dtbos
-> +local-dtbos:
-> +       $(Q)$(MAKE) $(build)=arch/$(ARCH)/dts dtbos
-> +endif
-> +
->  ifeq ($(CONFIG_SPL_BUILD),y)
->  obj-$(CONFIG_OF_EMBED) := dt-spl.dtb.o
->  # support "out-of-tree" build for dtb-spl
-> diff --git a/scripts/Makefile.dts b/scripts/Makefile.dts
-> index 1fe142f2bbf..3ab67b3c247 100644
-> --- a/scripts/Makefile.dts
-> +++ b/scripts/Makefile.dts
-> @@ -21,4 +21,10 @@ PHONY += dtbs
->  dtbs: $(addprefix $(obj)/, $(dtb-y))
->         @:
->
-> +ifneq ($(CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS),)
-> +PHONY += dtbos
-> +dtbos: $(addprefix $(obj)/, $(filter-out %.dtb,$(dtb-y)))
-> +       @:
-> +endif
-> +
->  clean-files := *.dtb *.dtbo */*.dtb */*.dtbo *_HS
+> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+> index 83e38f0352a..ed97e1c26de 100644
+> --- a/arch/arm/dts/Makefile
+> +++ b/arch/arm/dts/Makefile
+> @@ -969,8 +969,6 @@ dtb-$(CONFIG_ARCH_IMX8M) += \
+>         imx8mp-dhcom-pdk-overlay-eth2xfast.dtbo \
+>         imx8mp-debix-model-a.dtb \
+>         imx8mp-dhcom-drc02.dtb \
+> -       imx8mp-dhcom-pdk2.dtb \
+> -       imx8mp-dhcom-pdk3.dtb \
+>         imx8mp-dhcom-pdk3-overlay-rev100.dtbo \
+>         imx8mp-dhcom-picoitx.dtb \
+>         imx8mp-icore-mx8mp-edimm2.2.dtb \
+> diff --git a/arch/arm/dts/imx8mp-dhcom-pdk2.dts b/arch/arm/dts/imx8mp-dhcom-pdk2.dts
+> deleted file mode 100644
+> index 8f4eff37c40..00000000000
+> --- a/arch/arm/dts/imx8mp-dhcom-pdk2.dts
+> +++ /dev/null
+> @@ -1,158 +0,0 @@
+> -// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> -/*
+> - * Copyright (C) 2022 Marek Vasut <marex@denx.de>
+> - *
+> - * DHCOM iMX8MP variant:
+> - * DHCM-iMX8ML8-C160-R409-F1638-SPI16-GE-CAN2-SD-RTC-WBTA-ADC-T-RGB-CSI2-HS-I-01D2
+> - * DHCOM PCB number: 660-100 or newer
+> - * PDK2 PCB number: 516-400 or newer
+> - */
+> -
+> -/dts-v1/;
+> -
+> -#include <dt-bindings/leds/common.h>
+> -#include <dt-bindings/phy/phy-imx8-pcie.h>
+> -#include "imx8mp-dhcom-som.dtsi"
+> -
+> -/ {
+> -       model = "DH electronics i.MX8M Plus DHCOM Premium Developer Kit (2)";
+> -       compatible = "dh,imx8mp-dhcom-pdk2", "dh,imx8mp-dhcom-som",
+> -                    "fsl,imx8mp";
+> -
+> -       chosen {
+> -               stdout-path = &uart1;
+> -       };
+> -
+> -       gpio-keys {
+> -               compatible = "gpio-keys";
+> -
+> -               button-0 {
+> -                       gpios = <&gpio1 9 GPIO_ACTIVE_LOW>; /* GPIO A */
+> -                       label = "TA1-GPIO-A";
+> -                       linux,code = <KEY_A>;
+> -                       pinctrl-0 = <&pinctrl_dhcom_a>;
+> -                       pinctrl-names = "default";
+> -                       wakeup-source;
+> -               };
+> -
+> -               button-1 {
+> -                       gpios = <&gpio1 8 GPIO_ACTIVE_LOW>; /* GPIO B */
+> -                       label = "TA2-GPIO-B";
+> -                       linux,code = <KEY_B>;
+> -                       pinctrl-0 = <&pinctrl_dhcom_b>;
+> -                       pinctrl-names = "default";
+> -                       wakeup-source;
+> -               };
+> -
+> -               button-2 {
+> -                       gpios = <&gpio5 2 GPIO_ACTIVE_LOW>; /* GPIO C */
+> -                       label = "TA3-GPIO-C";
+> -                       linux,code = <KEY_C>;
+> -                       pinctrl-0 = <&pinctrl_dhcom_c>;
+> -                       pinctrl-names = "default";
+> -                       wakeup-source;
+> -               };
+> -
+> -               button-3 {
+> -                       gpios = <&gpio4 27 GPIO_ACTIVE_LOW>; /* GPIO D */
+> -                       label = "TA4-GPIO-D";
+> -                       linux,code = <KEY_D>;
+> -                       pinctrl-0 = <&pinctrl_dhcom_d>;
+> -                       pinctrl-names = "default";
+> -                       wakeup-source;
+> -               };
+> -       };
+> -
+> -       led {
+> -               compatible = "gpio-leds";
+> -
+> -               led-0 {
+> -                       color = <LED_COLOR_ID_GREEN>;
+> -                       default-state = "off";
+> -                       function = LED_FUNCTION_INDICATOR;
+> -                       gpios = <&gpio5 22 GPIO_ACTIVE_HIGH>; /* GPIO E */
+> -                       pinctrl-0 = <&pinctrl_dhcom_e>;
+> -                       pinctrl-names = "default";
+> -               };
+> -
+> -               led-1 {
+> -                       color = <LED_COLOR_ID_GREEN>;
+> -                       default-state = "off";
+> -                       function = LED_FUNCTION_INDICATOR;
+> -                       gpios = <&gpio5 23 GPIO_ACTIVE_HIGH>; /* GPIO F */
+> -                       pinctrl-0 = <&pinctrl_dhcom_f>;
+> -                       pinctrl-names = "default";
+> -               };
+> -
+> -               led-2 {
+> -                       color = <LED_COLOR_ID_GREEN>;
+> -                       default-state = "off";
+> -                       function = LED_FUNCTION_INDICATOR;
+> -                       gpios = <&gpio1 11 GPIO_ACTIVE_HIGH>; /* GPIO H */
+> -                       pinctrl-0 = <&pinctrl_dhcom_h>;
+> -                       pinctrl-names = "default";
+> -               };
+> -
+> -               led-3 {
+> -                       color = <LED_COLOR_ID_GREEN>;
+> -                       default-state = "off";
+> -                       function = LED_FUNCTION_INDICATOR;
+> -                       gpios = <&gpio1 5 GPIO_ACTIVE_HIGH>; /* GPIO I */
+> -                       pinctrl-0 = <&pinctrl_dhcom_i>;
+> -                       pinctrl-names = "default";
+> -               };
+> -       };
+> -};
+> -
+> -&fec { /* Second ethernet */
+> -       pinctrl-0 = <&pinctrl_fec_rgmii>;
+> -       phy-handle = <&ethphypdk>;
+> -       phy-mode = "rgmii";
+> -
+> -       mdio {
+> -               ethphypdk: ethernet-phy@7 { /* KSZ 9021 */
+> -                       compatible = "ethernet-phy-ieee802.3-c22";
+> -                       pinctrl-0 = <&pinctrl_ethphy1>;
+> -                       pinctrl-names = "default";
+> -                       interrupt-parent = <&gpio4>;
+> -                       interrupts = <3 IRQ_TYPE_LEVEL_LOW>;
+> -                       max-speed = <100>;
+> -                       reg = <7>;
+> -                       reset-assert-us = <1000>;
+> -                       reset-deassert-us = <1000>;
+> -                       reset-gpios = <&gpio4 2 GPIO_ACTIVE_LOW>;
+> -                       rxc-skew-ps = <3000>;
+> -                       rxd0-skew-ps = <0>;
+> -                       rxd1-skew-ps = <0>;
+> -                       rxd2-skew-ps = <0>;
+> -                       rxd3-skew-ps = <0>;
+> -                       rxdv-skew-ps = <0>;
+> -                       txc-skew-ps = <3000>;
+> -                       txd0-skew-ps = <0>;
+> -                       txd1-skew-ps = <0>;
+> -                       txd2-skew-ps = <0>;
+> -                       txd3-skew-ps = <0>;
+> -                       txen-skew-ps = <0>;
+> -               };
+> -       };
+> -};
+> -
+> -&flexcan1 {
+> -       status = "okay";
+> -};
+> -
+> -&usb3_1 {
+> -       fsl,over-current-active-low;
+> -};
+> -
+> -&iomuxc {
+> -       /*
+> -        * GPIO_A,B,C,D are connected to buttons.
+> -        * GPIO_E,F,H,I are connected to LEDs.
+> -        * GPIO_M is connected to CLKOUT2.
+> -        */
+> -       pinctrl-0 = <&pinctrl_hog_base
+> -                    &pinctrl_dhcom_g &pinctrl_dhcom_j
+> -                    &pinctrl_dhcom_k &pinctrl_dhcom_l
+> -                    &pinctrl_dhcom_int>;
+> -};
+> diff --git a/arch/arm/dts/imx8mp-dhcom-pdk3.dts b/arch/arm/dts/imx8mp-dhcom-pdk3.dts
+> deleted file mode 100644
+> index 867d238f2b5..00000000000
+> --- a/arch/arm/dts/imx8mp-dhcom-pdk3.dts
+> +++ /dev/null
+> @@ -1,317 +0,0 @@
+> -// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> -/*
+> - * Copyright (C) 2023 Marek Vasut <marex@denx.de>
+> - *
+> - * DHCOM iMX8MP variant:
+> - * DHCM-iMX8ML8-C160-R409-F1638-SPI16-GE-CAN2-SD-RTC-WBTA-ADC-T-RGB-CSI2-HS-I-01D2
+> - * DHCOM PCB number: 660-100 or newer
+> - * PDK3 PCB number: 669-100 or newer
+> - */
+> -
+> -/dts-v1/;
+> -
+> -#include <dt-bindings/leds/common.h>
+> -#include <dt-bindings/phy/phy-imx8-pcie.h>
+> -#include "imx8mp-dhcom-som.dtsi"
+> -
+> -/ {
+> -       model = "DH electronics i.MX8M Plus DHCOM Premium Developer Kit (3)";
+> -       compatible = "dh,imx8mp-dhcom-pdk3", "dh,imx8mp-dhcom-som",
+> -                    "fsl,imx8mp";
+> -
+> -       chosen {
+> -               stdout-path = &uart1;
+> -       };
+> -
+> -       clk_ext_audio_codec: clock-codec {
+> -               #clock-cells = <0>;
+> -               clock-frequency = <24000000>;
+> -               compatible = "fixed-clock";
+> -       };
+> -
+> -       clk_xtal25: clk-xtal25 {
+> -               compatible = "fixed-clock";
+> -               #clock-cells = <0>;
+> -               clock-frequency = <25000000>;
+> -       };
+> -
+> -       connector {
+> -               compatible = "usb-c-connector";
+> -               label = "USB-C";
+> -               data-role = "dual";
+> -
+> -               ports {
+> -                       #address-cells = <1>;
+> -                       #size-cells = <0>;
+> -
+> -                       port@0 {
+> -                               reg = <0>;
+> -
+> -                               usb_c_0_hs_ep: endpoint {
+> -                                       remote-endpoint = <&dwc3_0_hs_ep>;
+> -                               };
+> -                       };
+> -
+> -                       port@1 {
+> -                               reg = <1>;
+> -
+> -                               usb_c_0_ss_ep: endpoint {
+> -                                       remote-endpoint = <&ptn5150_in_ep>;
+> -                               };
+> -                       };
+> -               };
+> -       };
+> -
+> -       gpio-keys {
+> -               compatible = "gpio-keys";
+> -
+> -               button-0 {
+> -                       gpios = <&gpio1 9 GPIO_ACTIVE_LOW>; /* GPIO A */
+> -                       label = "TA1-GPIO-A";
+> -                       linux,code = <KEY_A>;
+> -                       pinctrl-0 = <&pinctrl_dhcom_a>;
+> -                       pinctrl-names = "default";
+> -                       wakeup-source;
+> -               };
+> -
+> -               button-1 {
+> -                       gpios = <&gpio1 8 GPIO_ACTIVE_LOW>; /* GPIO B */
+> -                       label = "TA2-GPIO-B";
+> -                       linux,code = <KEY_B>;
+> -                       pinctrl-0 = <&pinctrl_dhcom_b>;
+> -                       pinctrl-names = "default";
+> -                       wakeup-source;
+> -               };
+> -
+> -               button-2 {
+> -                       gpios = <&gpio5 2 GPIO_ACTIVE_LOW>; /* GPIO C */
+> -                       label = "TA3-GPIO-C";
+> -                       linux,code = <KEY_C>;
+> -                       pinctrl-0 = <&pinctrl_dhcom_c>;
+> -                       pinctrl-names = "default";
+> -                       wakeup-source;
+> -               };
+> -
+> -               button-3 {
+> -                       gpios = <&gpio5 22 GPIO_ACTIVE_LOW>; /* GPIO E */
+> -                       label = "TA4-GPIO-E";
+> -                       linux,code = <KEY_E>;
+> -                       pinctrl-0 = <&pinctrl_dhcom_e>;
+> -                       pinctrl-names = "default";
+> -                       wakeup-source;
+> -               };
+> -       };
+> -
+> -       led {
+> -               compatible = "gpio-leds";
+> -
+> -               led-0 {
+> -                       color = <LED_COLOR_ID_GREEN>;
+> -                       default-state = "off";
+> -                       function = LED_FUNCTION_INDICATOR;
+> -                       function-enumerator = <0>;
+> -                       gpios = <&gpio4 27 GPIO_ACTIVE_HIGH>; /* GPIO D */
+> -                       pinctrl-0 = <&pinctrl_dhcom_d>;
+> -                       pinctrl-names = "default";
+> -               };
+> -
+> -               led-1 {
+> -                       color = <LED_COLOR_ID_GREEN>;
+> -                       default-state = "off";
+> -                       function = LED_FUNCTION_INDICATOR;
+> -                       function-enumerator = <1>;
+> -                       gpios = <&gpio5 23 GPIO_ACTIVE_HIGH>; /* GPIO F */
+> -                       pinctrl-0 = <&pinctrl_dhcom_f>;
+> -                       pinctrl-names = "default";
+> -               };
+> -
+> -               led-2 {
+> -                       color = <LED_COLOR_ID_GREEN>;
+> -                       default-state = "off";
+> -                       function = LED_FUNCTION_INDICATOR;
+> -                       function-enumerator = <2>;
+> -                       gpios = <&gpio1 0 GPIO_ACTIVE_HIGH>; /* GPIO G */
+> -                       pinctrl-0 = <&pinctrl_dhcom_g>;
+> -                       pinctrl-names = "default";
+> -               };
+> -
+> -               led-3 {
+> -                       color = <LED_COLOR_ID_GREEN>;
+> -                       default-state = "off";
+> -                       function = LED_FUNCTION_INDICATOR;
+> -                       function-enumerator = <3>;
+> -                       gpios = <&gpio1 5 GPIO_ACTIVE_HIGH>; /* GPIO I */
+> -                       pinctrl-0 = <&pinctrl_dhcom_i>;
+> -                       pinctrl-names = "default";
+> -               };
+> -       };
+> -
+> -       reg_avdd: regulator-avdd {      /* AUDIO_VDD */
+> -               compatible = "regulator-fixed";
+> -               regulator-always-on;
+> -               regulator-min-microvolt = <3300000>;
+> -               regulator-max-microvolt = <3300000>;
+> -               regulator-name = "AUDIO_VDD";
+> -       };
+> -};
+> -
+> -&i2c5 {
+> -       i2cmux@70 {
+> -               compatible = "nxp,pca9540";
+> -               reg = <0x70>;
+> -               #address-cells = <1>;
+> -               #size-cells = <0>;
+> -
+> -               i2cmuxed0: i2c@0 {
+> -                       #address-cells = <1>;
+> -                       #size-cells = <0>;
+> -                       reg = <0>;
+> -
+> -                       typec@3d {
+> -                               compatible = "nxp,ptn5150";
+> -                               reg = <0x3d>;
+> -                               interrupt-parent = <&gpio4>;
+> -                               interrupts = <25 IRQ_TYPE_EDGE_FALLING>;
+> -                               pinctrl-names = "default";
+> -                               pinctrl-0 = <&pinctrl_ptn5150>;
+> -                               status = "okay";
+> -
+> -                               ports {
+> -                                       #address-cells = <1>;
+> -                                       #size-cells = <0>;
+> -
+> -                                       port@0 {
+> -                                               reg = <0>;
+> -
+> -                                               ptn5150_in_ep: endpoint {
+> -                                                       remote-endpoint = <&usb_c_0_ss_ep>;
+> -                                               };
+> -                                       };
+> -
+> -                                       port@1 {
+> -                                               reg = <1>;
+> -
+> -                                               ptn5150_out_ep: endpoint {
+> -                                                       remote-endpoint = <&dwc3_0_ss_ep>;
+> -                                               };
+> -                                       };
+> -                               };
+> -                       };
+> -
+> -                       power-sensor@40 {
+> -                           compatible = "ti,ina238";
+> -                           reg = <0x40>;
+> -                           shunt-resistor = <20000>;   /* 0.02 R */
+> -                           ti,shunt-gain = <1>;        /* Drop cca. 40mV */
+> -                       };
+> -
+> -                       eeprom_board: eeprom@54 {
+> -                               compatible = "atmel,24c04";
+> -                               pagesize = <16>;
+> -                               reg = <0x54>;
+> -                       };
+> -
+> -                       pcieclk: clk@6b {
+> -                               compatible = "skyworks,si52144";
+> -                               reg = <0x6b>;
+> -                               clocks = <&clk_xtal25>;
+> -                               #clock-cells = <1>;
+> -                       };
+> -               };
+> -
+> -               i2cmuxed1: i2c@1 {      /* HDMI DDC I2C */
+> -                       #address-cells = <1>;
+> -                       #size-cells = <0>;
+> -                       reg = <1>;
+> -               };
+> -       };
+> -};
+> -
+> -&fec { /* Second ethernet */
+> -       pinctrl-0 = <&pinctrl_fec_rgmii>;
+> -       phy-handle = <&ethphypdk>;
+> -       phy-mode = "rgmii-id";
+> -
+> -       mdio {
+> -               ethphypdk: ethernet-phy@7 { /* Micrel KSZ9131RNXI */
+> -                       compatible = "ethernet-phy-id0022.1642",
+> -                                    "ethernet-phy-ieee802.3-c22";
+> -                       interrupt-parent = <&gpio4>;
+> -                       interrupts = <3 IRQ_TYPE_LEVEL_LOW>;
+> -                       pinctrl-0 = <&pinctrl_ethphy1>;
+> -                       pinctrl-names = "default";
+> -                       reg = <7>;
+> -                       reset-assert-us = <1000>;
+> -                       /* RESET_N signal rise time ~100ms */
+> -                       reset-deassert-us = <120000>;
+> -                       reset-gpios = <&gpio4 2 GPIO_ACTIVE_LOW>;
+> -                       status = "okay";
+> -               };
+> -       };
+> -};
+> -
+> -&flexcan1 {
+> -       status = "okay";
+> -};
+> -
+> -&pcie_phy {
+> -       clocks = <&pcieclk 1>;
+> -       clock-names = "ref";
+> -       fsl,refclk-pad-mode = <IMX8_PCIE_REFCLK_PAD_INPUT>;
+> -       status = "okay";
+> -};
+> -
+> -&pcie {
+> -       fsl,max-link-speed = <3>;
+> -       reset-gpio = <&gpio1 6 GPIO_ACTIVE_LOW>;
+> -       status = "okay";
+> -};
+> -
+> -&usb_dwc3_0 {
+> -       usb-role-switch;
+> -
+> -       port {
+> -               #address-cells = <1>;
+> -               #size-cells = <0>;
+> -
+> -               dwc3_0_hs_ep: endpoint@0 {
+> -                       reg = <0>;
+> -                       remote-endpoint = <&usb_c_0_hs_ep>;
+> -               };
+> -
+> -               dwc3_0_ss_ep: endpoint@1 {
+> -                       reg = <1>;
+> -                       remote-endpoint = <&ptn5150_out_ep>;
+> -               };
+> -       };
+> -};
+> -
+> -&usb3_1 {
+> -       fsl,disable-port-power-control;
+> -       fsl,permanently-attached;
+> -};
+> -
+> -&usb_dwc3_1 {
+> -       /* This port has USB5734 Hub connected to it, PWR/OC pins are unused */
+> -       /delete-property/ pinctrl-names;
+> -       /delete-property/ pinctrl-0;
+> -};
+> -
+> -&iomuxc {
+> -       /*
+> -        * GPIO_A,B,C,E are connected to buttons.
+> -        * GPIO_D,F,G,I are connected to LEDs.
+> -        * GPIO_H is connected to USB Hub RESET_N.
+> -        * GPIO_M is connected to CLKOUT2.
+> -        */
+> -       pinctrl-0 = <&pinctrl_hog_base
+> -                    &pinctrl_dhcom_h &pinctrl_dhcom_j &pinctrl_dhcom_k
+> -                    &pinctrl_dhcom_l
+> -                    &pinctrl_dhcom_int>;
+> -
+> -       pinctrl_ptn5150: ptn5150grp {
+> -               fsl,pins = <
+> -                       MX8MP_IOMUXC_SAI2_TXC__GPIO4_IO25               0x40000000
+> -               >;
+> -       };
+> -};
+> diff --git a/configs/imx8mp_dhcom_pdk2_defconfig b/configs/imx8mp_dhcom_pdk2_defconfig
+> index f807b0cfc37..d527ca92c83 100644
+> --- a/configs/imx8mp_dhcom_pdk2_defconfig
+> +++ b/configs/imx8mp_dhcom_pdk2_defconfig
+> @@ -12,7 +12,7 @@ CONFIG_ENV_SIZE=0x10000
+>  CONFIG_ENV_OFFSET=0xFE0000
+>  CONFIG_ENV_SECT_SIZE=0x1000
+>  CONFIG_DM_GPIO=y
+> -CONFIG_DEFAULT_DEVICE_TREE="imx8mp-dhcom-pdk2"
+> +CONFIG_DEFAULT_DEVICE_TREE="freescale/imx8mp-dhcom-pdk2"
+>  CONFIG_SPL_TEXT_BASE=0x920000
+>  CONFIG_TARGET_IMX8MP_DH_DHCOM_PDK2=y
+>  CONFIG_DM_RESET=y
+> @@ -48,7 +48,7 @@ CONFIG_USE_BOOTARGS=y
+>  CONFIG_USE_BOOTCOMMAND=y
+>  CONFIG_BOOTCOMMAND="run dh_update_env distro_bootcmd ; reset"
+>  CONFIG_USE_PREBOOT=y
+> -CONFIG_DEFAULT_FDT_FILE="imx8mp-dhcom-pdk2.dtb"
+> +CONFIG_DEFAULT_FDT_FILE="freescale/imx8mp-dhcom-pdk2.dtb"
+>  CONFIG_SYS_CBSIZE=2048
+>  CONFIG_SYS_PBSIZE=2081
+>  CONFIG_CONSOLE_MUX=y
+> @@ -144,6 +144,8 @@ CONFIG_MMC_SPEED_MODE_SET=y
+>  CONFIG_PARTITION_TYPE_GUID=y
+>  CONFIG_OF_CONTROL=y
+>  CONFIG_SPL_OF_CONTROL=y
+> +CONFIG_OF_UPSTREAM=y
+> +CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS=y
+>  CONFIG_ENV_OVERWRITE=y
+>  CONFIG_ENV_IS_NOWHERE=y
+>  CONFIG_ENV_IS_IN_SPI_FLASH=y
+> diff --git a/configs/imx8mp_dhcom_pdk3_defconfig b/configs/imx8mp_dhcom_pdk3_defconfig
+> index 05895d6dd6f..5a41f140bb5 100644
+> --- a/configs/imx8mp_dhcom_pdk3_defconfig
+> +++ b/configs/imx8mp_dhcom_pdk3_defconfig
+> @@ -12,7 +12,7 @@ CONFIG_ENV_SIZE=0x10000
+>  CONFIG_ENV_OFFSET=0xFE0000
+>  CONFIG_ENV_SECT_SIZE=0x1000
+>  CONFIG_DM_GPIO=y
+> -CONFIG_DEFAULT_DEVICE_TREE="imx8mp-dhcom-pdk3"
+> +CONFIG_DEFAULT_DEVICE_TREE="freescale/imx8mp-dhcom-pdk3"
+>  CONFIG_SPL_TEXT_BASE=0x920000
+>  CONFIG_TARGET_IMX8MP_DH_DHCOM_PDK2=y
+>  CONFIG_DM_RESET=y
+> @@ -50,7 +50,7 @@ CONFIG_USE_BOOTCOMMAND=y
+>  CONFIG_BOOTCOMMAND="run dh_update_env distro_bootcmd ; reset"
+>  CONFIG_USE_PREBOOT=y
+>  CONFIG_PREBOOT="gpio clear GPIO1_11 ; sleep 0.1 ; gpio set GPIO1_11 ; sleep 0.1 ; i2c dev 4 && i2c mw 0x70 0 4 && i2c probe 0x2d && i2c mw 0x2d 0xaa55.2 0"
+> -CONFIG_DEFAULT_FDT_FILE="imx8mp-dhcom-pdk3.dtb"
+> +CONFIG_DEFAULT_FDT_FILE="freescale/imx8mp-dhcom-pdk3.dtb"
+>  CONFIG_SYS_CBSIZE=2048
+>  CONFIG_SYS_PBSIZE=2081
+>  CONFIG_CONSOLE_MUX=y
+> @@ -147,6 +147,8 @@ CONFIG_MMC_SPEED_MODE_SET=y
+>  CONFIG_PARTITION_TYPE_GUID=y
+>  CONFIG_OF_CONTROL=y
+>  CONFIG_SPL_OF_CONTROL=y
+> +CONFIG_OF_UPSTREAM=y
+> +CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS=y
+>  CONFIG_ENV_OVERWRITE=y
+>  CONFIG_ENV_IS_NOWHERE=y
+>  CONFIG_ENV_IS_IN_SPI_FLASH=y
 > --
 > 2.45.2
 >
