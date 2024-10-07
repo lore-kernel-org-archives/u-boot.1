@@ -4,78 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CFAECFB43F
-	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 13:03:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 609FDCFB43F
+	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 13:05:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A540D888EB;
-	Mon,  7 Oct 2024 15:03:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id AD728888EB;
+	Mon,  7 Oct 2024 15:05:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="TkC/3KhV";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="e2FT0Lu2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D549B889E1; Mon,  7 Oct 2024 15:03:09 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 71496889E1; Mon,  7 Oct 2024 15:05:54 +0200 (CEST)
+Received: from NAM04-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam04on20612.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2409::612])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92679880F4
- for <u-boot@lists.denx.de>; Mon,  7 Oct 2024 15:03:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 250B7880F4
+ for <u-boot@lists.denx.de>; Mon,  7 Oct 2024 15:05:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=devarsht@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 497D34mH036204;
- Mon, 7 Oct 2024 08:03:04 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1728306184;
- bh=kYHXqFYw3bXCmPd0LpjpUx/vBS46cpKHUWxXzjAsE9w=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=TkC/3KhViIpl4+lKZmUF6RqT1R5aoAJkumGfCb1k/hBHNuiE7JQsAQR7/G2p2aOpN
- VVTNqOTq9NNvdMzBj76tEpztxcc0kL0zhkA7IQaTLZthTq2aBgkcLfzpDddUJjPMIa
- EyKXHcZ20WRFd6VRUxxAkD0uBjZ6tm6xS8IeRyFI=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 497D34YJ070723
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 7 Oct 2024 08:03:04 -0500
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 7
- Oct 2024 08:03:03 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 7 Oct 2024 08:03:03 -0500
-Received: from [172.24.227.193] (devarsht.dhcp.ti.com [172.24.227.193] (may be
- forged))
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 497D30XX078214;
- Mon, 7 Oct 2024 08:03:00 -0500
-Message-ID: <dadefe22-2662-ddd1-cace-15d70f632232@ti.com>
-Date: Mon, 7 Oct 2024 18:32:59 +0530
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=a65GzJVsUkC/gtdcHqOwntijFudb6AF2aWzCqbWPRfWiv/hAmK4Igz/SGEtKRzR69Fu/wux6D19XcxNMd1yasoVqVe8ZzqSBwi/aBub9uZ3rYIM6mB87HoiEwzWquPCZq2w5it8QB/gGJzyYbJtW6nYflADbiccB7nO0hwzUjM0xM8GzHq8GHQzceLJkHovnNjaovde6Aw556iZBzeSGcj1BMBZQuzk1K8D9oNg/ib2DnNuX5qvu4RNIeVqlJHTMrlO3TWVqMvaN96d0t69TLLyPDwKUr0XUp68WKfl8qNn22C/XKOecmQh6FxjKmCKlvMsXPkuZCE2TVG2oofeEVA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=xH8SEKknLT+OWeVKwn1Tc6k1eS0YjfXZBRoZBlACdQc=;
+ b=u8BvuGxOpWHygFCAADCqU2kuahE1HtFR9cWUAiy3NmtVLGwh/6t2LqbUdrGNV+xEuQKwUkrkhDDK+3PIGvA+nRPFNWP5PT6IGO0z0r63OGHVj3yhaPNPf2CycusOyYUy/4wriZpvS3rCJ4syWC2bb+SA4q3duHxZVY1IZmCU4qYjRq2pTysDz4LGVB9l4lSstNJb9X2zl8u+x/Anq0oFLkXO4BjQcz+SheYeoLHHoif6hEfqIj7pD3F+M2j4V90a1E+r/H0eTthANX1iedmIY2aYLZPQXUbINQbqbptJRr9iSo9aze8FTrw4sk/smUWTE8YxskawAcy+mSbIQq58Dg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=xH8SEKknLT+OWeVKwn1Tc6k1eS0YjfXZBRoZBlACdQc=;
+ b=e2FT0Lu2k8JDgVVY8seAO7pfHxYGz3Ucp9sxMWkyxrUD5UEto5NZPiPq8ido93tHw4UoUTc4w3ZP8sta42VErqVh71mx9MU4Ez7K+8wC/ljfp47s8BjjKfCf4cC+PSNhHLgyItLYuvfRbw/pxPgDuPegGJ7cFA4s6Mu85zFjjwY=
+Received: from CY5PR18CA0009.namprd18.prod.outlook.com (2603:10b6:930:5::24)
+ by CH2PR12MB4165.namprd12.prod.outlook.com (2603:10b6:610:a4::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8026.22; Mon, 7 Oct
+ 2024 13:05:35 +0000
+Received: from CY4PEPF0000FCC1.namprd03.prod.outlook.com
+ (2603:10b6:930:5:cafe::7f) by CY5PR18CA0009.outlook.office365.com
+ (2603:10b6:930:5::24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8026.21 via Frontend
+ Transport; Mon, 7 Oct 2024 13:05:34 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CY4PEPF0000FCC1.mail.protection.outlook.com (10.167.242.103) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8048.13 via Frontend Transport; Mon, 7 Oct 2024 13:05:34 +0000
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 7 Oct
+ 2024 08:05:30 -0500
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>, Simon Glass <sjg@chromium.org>
+CC: AKASHI Takahiro <akashi.tkhro@gmail.com>, Andrew Davis <afd@ti.com>, Bryan
+ Brattlof <bb@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, Ilias
+ Apalodimas <ilias.apalodimas@linaro.org>, "Leon M. Busch-George"
+ <leon@georgemail.eu>, Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Sean
+ Anderson <sean.anderson@seco.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] binman: Add option for pointing to external description
+Date: Mon, 7 Oct 2024 15:05:24 +0200
+Message-ID: <fbed0251437b61a2f7a85596d7403b5b9c8237c1.1728306322.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Subject: Re: [PATCH 1/1] rpi: Fix build error when CONFIG_VIDEO is disabled
- for Raspberry Pi
-Content-Language: en-US
-To: Martin Stolpe <martinstolpe@gmail.com>
-CC: "Ivan T. Ivanov" <iivanov@suse.de>, <u-boot@lists.denx.de>, Francois
- Berder <fberder@outlook.fr>, Matthias Brugger <mbrugger@suse.com>, Nikhil M
- Jain <n-jain1@ti.com>, Peter Robinson <pbrobinson@gmail.com>, Rasmus
- Villemoes <rasmus.villemoes@prevas.dk>, Tom Rini <trini@konsulko.com>
-References: <20240920063204.1049202-1-martin.stolpe@gmail.com>
- <20240920063204.1049202-2-martin.stolpe@gmail.com>
- <20240920081625.z3fwz6n7o2zxd4gf@localhost.localdomain>
- <CAPHZmLbcfMVOydp9jCY0mWKdKPePBp+3rfttMyKbHT-CbB7kjA@mail.gmail.com>
- <e27aef89-8038-9099-58ed-b927cce54579@ti.com>
- <CAPHZmLZopucK5uMwENuF83pRMLYR2A5sC7fes4-1JXE4jX7=rw@mail.gmail.com>
- <08a38499-c36d-4bf7-adcc-d3f547f3afc8@ti.com>
- <CAPHZmLaVVSckGeqU09WMy0s4rGA-w6pQ9ObPuh3SBf8uTBaD9Q@mail.gmail.com>
-From: Devarsh Thakkar <devarsht@ti.com>
-In-Reply-To: <CAPHZmLaVVSckGeqU09WMy0s4rGA-w6pQ9ObPuh3SBf8uTBaD9Q@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1863; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=Naq2odIf0LDA0TUu4Jj25FTvwkEw3Jmp2HTIX25W8k8=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhnTmO1P6qnZKbC8/3NWQWbL3UaW08K2nVToH1+1YtSZGK
+ 9qiRP57RywLgyATg6yYIou0zZUzeytnTBG+eFgOZg4rE8gQBi5OAZjIo1yG+e4Moi3tTn12bycl
+ 7V/Fr6GpHrHJhmGu+OH1EUxyibyap2O8Yud9mbdQ6G45AA==
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000FCC1:EE_|CH2PR12MB4165:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8cbccd25-4354-468b-ff72-08dce6d0bb05
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|82310400026|36860700013|376014|7416014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?YbnSTqLcL2Mqj6oezL9zokJCTIeeKH8cRRXtEP+CTDlVP03yv3C5kSpjqf/w?=
+ =?us-ascii?Q?18LBHRyNPeYDMK1x6U2D2wpqoEcNfeAnlSu65YUd9KvEL3IQ3VVpnr5A1Ccq?=
+ =?us-ascii?Q?FBMx6Yw3+gqTqKc4TFl2Gj8IH9vEsoGHVRV8KG3PyxQqujEPMcuP3Aj1jDul?=
+ =?us-ascii?Q?g4w5ub9d2kmPv4xNEO50rULQ5oG8iXb/Uzqp/Azw92Jfrxx6yCobo4JkbdvB?=
+ =?us-ascii?Q?e+KiEXTFRTM8HFpgMKch9oQRR/TzSThgvQgpAcZVGHlrl+k0ZIX32wyK2mRk?=
+ =?us-ascii?Q?H0vVA41CblVidZGYCemW2+F5X8ACK1PHRCe7qTkXgjEEudFP/vtP6kiGl1SY?=
+ =?us-ascii?Q?Z97QBF99mJOZrjNymzAOK56BPqVPaVOnKaUDoJ+vRGFvNKTBKMWsrJvfzWBo?=
+ =?us-ascii?Q?Ak1W3kKuTWb26rOltWIIBluJ86kR6sfBEqaAlwZ35/2m9ef8oQm4+gUZHhBJ?=
+ =?us-ascii?Q?9Tz+4iMKAhvHXO0T23u9esvtai1bsi5u6hIvBNnG0w9y6kELbYaltgQLOvXS?=
+ =?us-ascii?Q?0AFHih3wMb8LTb62xrXEWrptY6UwWVpZBa9D1BxGYm28V5desKIRtcxAnMyH?=
+ =?us-ascii?Q?YskhHnjShu+ueJ6Y/Ub9LauVP+oDftnIh0typHjFJYhXSyRepqLI0alWaKnb?=
+ =?us-ascii?Q?oWEYJRAv/yrZ6g3l6kZ97+2eb2KIK7zwKbL6vFPIyEaUQVJ1kCN7VvrFiLpV?=
+ =?us-ascii?Q?IztLdmjVYcF1vfVVCuHykDQ/zIBJMtQKQedNiGFDfh1hWH9i7d1QKDzK8WVV?=
+ =?us-ascii?Q?SwOdP25Y7CNixPoYL0dpQQYEufO64ekrG4mycWCkqbD8rCZkb9/w/qd4dtx6?=
+ =?us-ascii?Q?Bd2H4zkhu9Ruz13ceAexiQ31Fqjvf3B85ZJ09JSZ4FxRGL/LmQWVUFlIi8II?=
+ =?us-ascii?Q?+pFN+8iLJEMN3HD8fz0GW1mRsViuq4qWlIayOdbgcawiw/1Y40NDniiJsgFv?=
+ =?us-ascii?Q?P3JKkNLVZvDVruzaStI6EauNCUtnzI1Ox4O8VruwmkacLl+StktT3remLYLl?=
+ =?us-ascii?Q?TqiYwMxjavtESLAmoJSzVe5GfLgTddLjt6VUluVZBDZJWwcyMz8oVLcSOXbM?=
+ =?us-ascii?Q?5y3MMzaoHWAa4Squu0Gd7Fp12DdPj+DqU+wGedXqDQFpkMoTyATKuNQC2SR6?=
+ =?us-ascii?Q?3tWEUOkO4eWTw9BdwkiU4D5KWIWtvAxhRQhEf9O9RqDnQcr+/7JFhBnQYRTO?=
+ =?us-ascii?Q?m9CRB5gcx7fSLKfjv1IxrfMIGeerEOFcBIVKaKmMfyK33ZtMqLoij2kX1KQf?=
+ =?us-ascii?Q?VVq9D+gSzw4dlsu3wFT7W3xKUfXKNuI7hfWdt6pE8D9xxpPxbyEtc4MPih8l?=
+ =?us-ascii?Q?i4nz+Vl+x/hak5sIvrGdhKBZVqUxadurf2RPMnaGgfWTKOrdYVfXsKvsuov+?=
+ =?us-ascii?Q?RIy/PKNhpRlDfXtjgMC5AEasMJG7?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(36860700013)(376014)(7416014); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Oct 2024 13:05:34.2898 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8cbccd25-4354-468b-ff72-08dce6d0bb05
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000FCC1.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4165
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,79 +153,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Martin,
+Adding binman node with target images description can be unwanted feature
+but as of today there is no way to disable it.
+Also on size constrained systems it is not useful to add binman description
+to DTB.
+Introduce BINMAN_EXTERNAL_DTB Kconfig symbol which allows separate DTB for
+target from DTB for binman itself.
 
-On 07/10/24 18:24, Martin Stolpe wrote:
-> Hi Devarsh,
-> 
-> Am Do., 26. Sept. 2024 um 18:45 Uhr schrieb Devarsh Thakkar <devarsht@ti.com
->> :
-> 
->>
->> Thanks for taking a look, I have posted them to the list [1], it would
->> be great if you could provide a Reviewed-by or Tested-by too.
->>
-> 
-> I've tried to compile the project for am64x_evm_a53 with the patches
-> applied and I've added the following line to
-> am64x_evm_a53_defconfig: CONFIG_OF_BOARD_SETUP=y
-> When I then try to compile U-Boot using the following command:
-> make am64x_evm_a53_defconfig; make
-> 
-> I get the following error message:
-> aarch64-linux-gnu-ld.bfd: boot/image-fdt.o: in function
-> `image_setup_libfdt':
-> /home/mstolpe/repositories/build_base_station/build/workspace/sources/u-boot-copy/boot/image-fdt.c:633:(.text.image_setup_libfdt+0x150):
-> undefined reference to `ft_board_setup'
-> aarch64-linux-gnu-ld.bfd: cmd/fdt.o: in function `do_fdt':
-> /home/mstolpe/repositories/build_base_station/build/workspace/sources/u-boot-copy/cmd/fdt.c:687:(.text.do_fdt+0xf98):
-> undefined reference to `ft_board_setup'
-> Segmentation fault (core dumped)
-> make: *** [Makefile:1801: u-boot] Error 139
-> make: *** Deleting file 'u-boot'
-> 
-> I guess this shouldn't happen?
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
-I think this is expected as you are trying to enable CONFIG_OF_BOARD_SETUP but
-AM64 platform does not implement ft_board_setup.
+ Makefile    |  2 +-
+ lib/Kconfig | 10 ++++++++++
+ 2 files changed, 11 insertions(+), 1 deletion(-)
 
-Platforms need to implement ft_board_setup for platform specific knobs (for
-e.g. simplefb for splash etc) if using CONFIG_OF_BOARD_SETUP as per below
-snippet in boot/image-fdt.c :
+diff --git a/Makefile b/Makefile
+index af24de4165e4..8043016ac279 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1384,7 +1384,7 @@ cmd_binman = $(srctree)/tools/binman/binman $(if $(BINMAN_DEBUG),-D) \
+ 		$(foreach f,$(BINMAN_TOOLPATHS),--toolpath $(f)) \
+                 --toolpath $(objtree)/tools \
+ 		$(if $(BINMAN_VERBOSE),-v$(BINMAN_VERBOSE)) \
+-		build -u -d u-boot.dtb -O . -m \
++		build -u -d $(CONFIG_BINMAN_EXTERNAL_DTB) -O . -m \
+ 		--allow-missing $(if $(BINMAN_ALLOW_MISSING),--ignore-missing) \
+ 		-I . -I $(srctree) -I $(srctree)/board/$(BOARDDIR) \
+ 		$(foreach f,$(of_list_dirs),-I $(f)) -a of-list=$(of_list) \
+diff --git a/lib/Kconfig b/lib/Kconfig
+index 1448b4ac2d64..491f265012b8 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -45,6 +45,16 @@ config BINMAN_FDT
+ 	  locate entries in the firmware image. See binman.h for the available
+ 	  functionality.
+ 
++config BINMAN_EXTERNAL_DTB
++	string "External binman description"
++	depends on BINMAN
++	default "u-boot.dtb"
++	help
++	  This enables option to point to different DTB file with binman node which
++	  is outside of DTB used by the firmware. Use this option if information
++	  about generated images shouldn't be the part of target binary. Or on system
++	  with limited storage.
++
+ config CC_OPTIMIZE_LIBS_FOR_SPEED
+ 	bool "Optimize libraries for speed"
+ 	help
+-- 
+2.43.0
 
-        if (IS_ENABLED(CONFIG_OF_BOARD_SETUP)) {
-
-                const char *skip_board_fixup;
-
-
-
-                skip_board_fixup = env_get("skip_board_fixup");
-
-                if (skip_board_fixup && ((int)simple_strtol(skip_board_fixup,
-NULL, 10) == 1)) {
-                        printf("skip board fdt fixup\n");
-
-                } else {
-
-                        fdt_ret = ft_board_setup(blob, gd->bd);
-
-                        if (fdt_ret) {
-
-                                printf("ERROR: board-specific fdt fixup
-failed: %s\n",
-                                       fdt_strerror(fdt_ret));
-
-                                goto err;
-
-                        }
-
-                }
-
-        }
-
-Regards
-Devarsh
-> 
-> BR
-> Martin
-> 
