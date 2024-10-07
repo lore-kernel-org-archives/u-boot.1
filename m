@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4304CFB440
-	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 11:51:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 456DECFB43F
+	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 11:53:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2AAFC889AA;
-	Mon,  7 Oct 2024 13:51:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CA70C88C63;
+	Mon,  7 Oct 2024 13:52:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="BmD1joDX";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Me2XR8pT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7853588ABF; Mon,  7 Oct 2024 13:51:25 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 1B27288CA2; Mon,  7 Oct 2024 13:52:57 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E4406883D4
- for <u-boot@lists.denx.de>; Mon,  7 Oct 2024 13:51:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 49AD9883D4
+ for <u-boot@lists.denx.de>; Mon,  7 Oct 2024 13:52:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
 Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 497BpLqu014903;
- Mon, 7 Oct 2024 06:51:21 -0500
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 497BqpJY018078;
+ Mon, 7 Oct 2024 06:52:51 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1728301881;
- bh=n2mNlNIxEu/6PGkxyZwqZP42EgKo8reDIM18clGszLY=;
+ s=ti-com-17Q1; t=1728301972;
+ bh=ZZdEPIPkx3NFWpy+d+cYujtlmuXWm8vMbJNhDmaqyoA=;
  h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=BmD1joDXVaP+eQFAeceyVaQo4pxAwM4B83zMa3vRviHhAY1fvFiBgrLF7laG/10IP
- EqpUy86pVkCXRsst7BRXsX+yKefeIRC9qvp8JMyMdSMLzEFqxxqdOsoyreXnuRbs2a
- 6NsG5ctpj/x/fR1OFiZzpKkqdwdrNG0cCnFGSa+o=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 497BpLxM028459
+ b=Me2XR8pTmRSukP7Jk+tIhO7hDbevxj3lO5c3ILL2BI1zPSmZVmg0Kt2npQVHav9jg
+ eY04gHWQOPKB4gaSGxxGM2oyYWoSMGfe+zxKq6KAlpt9cWvEBgkiukB6NwiPP4DMp2
+ Y6O2d+JZs/iDNJJMCI1zzsJDyTOKn1sXoGD4bjsw=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 497BqpGD029408
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 7 Oct 2024 06:51:21 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 7 Oct 2024 06:52:51 -0500
+Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 7
- Oct 2024 06:51:20 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2024 06:52:50 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 7 Oct 2024 06:51:20 -0500
+ Frontend Transport; Mon, 7 Oct 2024 06:52:50 -0500
 Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 497BpKGO117644;
- Mon, 7 Oct 2024 06:51:20 -0500
-Date: Mon, 7 Oct 2024 06:51:20 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 497BqoV3119375;
+ Mon, 7 Oct 2024 06:52:50 -0500
+Date: Mon, 7 Oct 2024 06:52:50 -0500
 From: Nishanth Menon <nm@ti.com>
 To: Manorit Chawdhry <m-chawdhry@ti.com>
 CC: Jaehoon Chung <jh80.chung@samsung.com>, <u-boot@lists.denx.de>, Neha
@@ -57,17 +57,17 @@ CC: Jaehoon Chung <jh80.chung@samsung.com>, <u-boot@lists.denx.de>, Neha
  <u-kumar1@ti.com>, Aniket Limaye <a-limaye@ti.com>, Tom Rini
  <trini@konsulko.com>, Vignesh Raghavendra <vigneshr@ti.com>, Andrew Davis
  <afd@ti.com>
-Subject: Re: [PATCH v4 3/7] arm: dts: k3-j7*-r5: Add MPU clock in clocks
- property
-Message-ID: <20241007115120.kvtqmy42vhtxu2qv@create>
+Subject: Re: [PATCH v4 7/7] configs: j721s2_evm_r5_defconfig: Add AVS Configs
+Message-ID: <20241007115250.2bwywrskv66o3j6o@trekker>
 References: <20241004-b4-upstream-j721s2-avs-v4-0-6d71c6bab9f4@ti.com>
- <20241004-b4-upstream-j721s2-avs-v4-3-6d71c6bab9f4@ti.com>
- <20241004113001.h4cshh74q2bqfhqj@frolic>
- <20241007054848.ci5tls5wqrozxqnm@uda0497581>
+ <20241004-b4-upstream-j721s2-avs-v4-7-6d71c6bab9f4@ti.com>
+ <20241004113047.byyl7ms7yr7hkq72@footgear>
+ <20241007060412.zxl6pluad4bs2mu6@uda0497581>
+ <20241007060524.gpmik3rsitjqehbe@uda0497581>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20241007054848.ci5tls5wqrozxqnm@uda0497581>
+In-Reply-To: <20241007060524.gpmik3rsitjqehbe@uda0497581>
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,24 +85,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11:18-20241007, Manorit Chawdhry wrote:
-> Hi Nishanth,
-> 
-> On 06:30-20241004, Nishanth Menon wrote:
-> > On 11:54-20241004, Manorit Chawdhry wrote:
-> > > MPU clock had been missing. Distinguish multiple clocks with clock-names
-> > > and add MPU clock as well.
-> > > 
-> > > Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+On 11:35-20241007, Manorit Chawdhry wrote:
+> On 11:34-20241007, Manorit Chawdhry wrote:
+> > Hi Nishanth,
 > > 
-> > We have been a bit hacky with GTC - do we want to pull it out as a
-> > separate IP?
+> > On 06:30-20241004, Nishanth Menon wrote:
+> > > On 11:54-20241004, Manorit Chawdhry wrote:
+> > > > Add AVS and PMIC regulator configs
+> > > > 
+> > > > Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> > > > ---
+> > > >  configs/am68_sk_r5_defconfig    | 4 ++++
+> > > >  configs/j721s2_evm_r5_defconfig | 6 ++++++
+> > > >  2 files changed, 10 insertions(+)
+> > > > 
+> > > > diff --git a/configs/am68_sk_r5_defconfig b/configs/am68_sk_r5_defconfig
+> > > > index e9b6882c1f68..f4800ef1b8ac 100644
+> > > > --- a/configs/am68_sk_r5_defconfig
+> > > > +++ b/configs/am68_sk_r5_defconfig
+> > > > @@ -5,6 +5,10 @@ CONFIG_ARCH_K3=y
+> > > >  CONFIG_SOC_K3_J721S2=y
+> > > >  CONFIG_TARGET_J721S2_R5_EVM=y
+> > > >  
+> > > > +CONFIG_K3_AVS0=n
+> > > > +CONFIG_DM_REGULATOR_TPS65941=n
+> > > > +CONFIG_PMIC_TPS65941=n
+> > > > +
+> > > >  CONFIG_DEFAULT_DEVICE_TREE="k3-am68-sk-r5-base-board"
+> > > >  CONFIG_SPL_OF_LIST="k3-am68-sk-r5-base-board"
+> > > >  CONFIG_OF_LIST="k3-am68-sk-r5-base-board"
+> > > > diff --git a/configs/j721s2_evm_r5_defconfig b/configs/j721s2_evm_r5_defconfig
+> > > > index b6adb6a77d7e..ad7653c8f99b 100644
+> > > > --- a/configs/j721s2_evm_r5_defconfig
+> > > > +++ b/configs/j721s2_evm_r5_defconfig
+> > > > @@ -112,6 +112,7 @@ CONFIG_DM_MAILBOX=y
+> > > >  CONFIG_K3_SEC_PROXY=y
+> > > >  CONFIG_FS_LOADER=y
+> > > >  CONFIG_SPL_FS_LOADER=y
+> > > > +CONFIG_K3_AVS0=y
+> > > >  CONFIG_SUPPORT_EMMC_BOOT=y
+> > > >  CONFIG_SPL_MMC_HS400_SUPPORT=y
+> > > >  CONFIG_MMC_SDHCI=y
+> > > > @@ -141,6 +142,11 @@ CONFIG_SPL_PINCTRL=y
+> > > >  CONFIG_PINCTRL_SINGLE=y
+> > > >  CONFIG_POWER_DOMAIN=y
+> > > >  CONFIG_TI_POWER_DOMAIN=y
+> > > > +CONFIG_DM_PMIC=y
+> > > > +CONFIG_PMIC_TPS65941=y
+> > > > +CONFIG_DM_REGULATOR=y
+> > > > +CONFIG_SPL_DM_REGULATOR=y
+> > > > +CONFIG_DM_REGULATOR_TPS65941=y
+> > > >  CONFIG_K3_SYSTEM_CONTROLLER=y
+> > > >  CONFIG_REMOTEPROC_TI_K3_ARM64=y
+> > > >  CONFIG_RESET_TI_SCI=y
+> > > 
+> > > 
+> > > Why are we mixing two different boards?
+> > > 
+> > 
+> > AM68 includes J721s2 defconfig for re-usability so if some board related
+> > feature is being enabled on J721s2, that needs to be taken care that it
+> > doesn't get enabled on AM68 if it doesn't support.
 > 
-> Could you explain it a bit more..
+> Board related in the sense that AVS requires PMIC support but that isn't
+> available yet so can't add the support for the same.
 
-I was thinking more like GTC as a device node by itself. I am a bit
-split about the actual benefit of doing so, though..
-
+The commit message definitely needs to be updated to the effect.
 -- 
 Regards,
 Nishanth Menon
