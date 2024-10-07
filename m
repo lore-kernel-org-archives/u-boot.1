@@ -4,115 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2412CFB43F
-	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 12:15:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50458CFB440
+	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 12:15:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 689D1889E1;
-	Mon,  7 Oct 2024 14:15:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D90BD88D1C;
+	Mon,  7 Oct 2024 14:15:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dsuPGBPG";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id DBB4A88B78; Mon,  7 Oct 2024 14:15:35 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1728303349;
+	bh=T2bJXd7OPJSW9tx8esSiL2+3BF+QpGWg4DU0ai6OW/E=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=jup21cJ7KG7I71u44wT3ieYcwfTTCB4JYSYnSkeAMow7W7e84bnoI4kyuPEwgitF+
+	 Ued2YjWy3AiqoWGAX54d2kneMVe9v6JTogY8bHfV2fdaP452oNdE4QBTQLozTSGCb9
+	 7kkr2bexcVak5cNGg19ixf4P32UP65o+VvHFkV9LNz61BDwCEamBDt7H5n/rmzA9bJ
+	 5xsb0NRM3sc6qfM6eG2r8St3CzhKln494bHpZreeG4zyf+menb/9WP5SxvIfY4Pgi1
+	 jsE8JiwLyHIyxSWNVh8nbZNpvaukd+z4Q6XFkuAtX52znoY0y5Y7O9YRgPMFlMaVjB
+	 RQZH4ckeFxW1A==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D1D988663
- for <u-boot@lists.denx.de>; Mon,  7 Oct 2024 14:15:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-42cbc38a997so26866205e9.1
- for <u-boot@lists.denx.de>; Mon, 07 Oct 2024 05:15:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728303333; x=1728908133; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=q5Xh85VeTWgyH5dbwyTj6B+PUtS1Xnmn8VhVU7dW9Xw=;
- b=dsuPGBPGu/W2zFUp9OmXYXkYqoB/qxengRP4IGvaF56hbupxTFf4ghaaUA3JBNMAZt
- Je40VNVULcchCoFbteRWopKasggP8065yaCc0N001Pjs9qr5edD9JvdNLsBQYZzgG/iV
- +5wXoTNVDGw1QzOZwX86kkpG3RyMiVuY0FnzIiffLOBIUMcuJw0Qtq8gXpd5RVsfKAkW
- zJBH0dQUC+30v9DCokVUcKea8uSZM+5Az9gsy6jl7YNSPBPRW1cRudN+JTzA0ADm7iEu
- wbSJuQ4LYDUaQUI253vqK3IbR9ZKKx8Mg4wzLSzK5rjkV0yoXg/OmHzGzPXZ5miHsiH1
- IobQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728303333; x=1728908133;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=q5Xh85VeTWgyH5dbwyTj6B+PUtS1Xnmn8VhVU7dW9Xw=;
- b=ctnHioiSfAvwaVvVq249XCfyq3dJ2BBRGPj1taNTavcqRCfEU7xOlpRwigGRXV2aOt
- GCiK4yLMxlYRVnEdN6tQ4JJHKAN/UpTQvBYqxwM5hz+iQIoFlOgc36UDQ9cCux+3k8wI
- /6WywRAYHdpJ6LmPI6tUT2U1etZ6leWKBFxofP7FoguxY5+ClrIeprj8oB1U/txQVPKv
- QgQIUesjMrAtUbgIztD7fLCFyK7c3Cou0bac9PYGzwN0ckI5TEorfHUDCcQT525nIzjh
- GSdKRlKO0Xz8Bii6ea/RVHaZmk2GGxH/hztaDRqPdZBK+KRMwYrzy96msYP/t1SybsTk
- aDkA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW9+ZaZITND7aI1cGaDHYP/l3wiLsrCjax7fek0qQwP6GF+m8XXUPdP2X6Jsfb+mP5XkI9R4S8=@lists.denx.de
-X-Gm-Message-State: AOJu0YxR2R7mm9lyOTZRcXSSnmzJl4UPQOOvzEmfJtt9Ue6dowIlvdk8
- tpgHWPAYLXmYISIxPmqcPdGncINjknrmmDABYqk8Vb94IrLURFeIIUG9lcBzBg8=
-X-Google-Smtp-Source: AGHT+IHCmPKq/SQ+DRzrsDkUIyn7IIJesr/dzCvJAGLlrqDU3tjVcXqwyselAUcZ07ICNrhvlqptKg==
-X-Received: by 2002:a7b:c5c3:0:b0:426:64c1:8388 with SMTP id
- 5b1f17b1804b1-42f892fd471mr55805575e9.17.1728303332996; 
- Mon, 07 Oct 2024 05:15:32 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:982:cbb0:a99f:3c24:fa3b:1e7?
- ([2a01:e0a:982:cbb0:a99f:3c24:fa3b:1e7])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d1690f24fsm5622798f8f.1.2024.10.07.05.15.32
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 07 Oct 2024 05:15:32 -0700 (PDT)
-Message-ID: <f92b4033-b94d-4034-a93b-60b498bb644a@linaro.org>
-Date: Mon, 7 Oct 2024 14:15:31 +0200
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id F206088D15;
+ Mon,  7 Oct 2024 14:15:47 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1728303348;
+ bh=T2bJXd7OPJSW9tx8esSiL2+3BF+QpGWg4DU0ai6OW/E=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=VLW2vfDVSl1RzuPxF4iaRaoYxrfBNoq3+pr/ndDqiE1253wAP3RCDHBcCyOg0IUIf
+ HfVMnXofiZYuq3NAq+9kyPfXUK0tyxLXPP89Mx4YMSn841wVLukABl5tKZBCO2aaNC
+ xLeEh9JkJ4o6xM3O6sviQ9s6m7EwG7uwjlZVmpVjKRCbFIxLgC3Q2NiNm3elpLdLlL
+ hVjVIF40cleSX/YOETFAMpOf5fa5502r2+fYDe6xyxCcP7fYWj+DxYAzHQ0o7zyEQM
+ tjEpzUJE5T/D68JG4om4bTVvTGjVwpaefwGv8UbAARwnetcL0nJGkTPn7X5FEkr+uG
+ nKVr1Q+FZ5bGQ==
+Message-ID: <eb74b41b-9546-4c68-a724-00c2e33c9deb@denx.de>
+Date: Mon, 7 Oct 2024 14:08:57 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: neil.armstrong@linaro.org
-Subject: Re: [PATCH v3 00/13] ufs: enhancements to support Qualcomm UFS
- controllers
-To: Neha Malcom Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>
-Cc: Michal Simek <michal.simek@amd.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, bmeng.cn@gmail.com,
- u-boot@lists.denx.de, u-boot-qcom@groups.io,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-References: <20240930-topic-ufs-enhancements-v3-0-58234f84ab89@linaro.org>
- <9a25aaeb-98c1-4f21-8789-03582b8a4431@linaro.org>
- <41d7be2a-1411-4cea-949f-8e447bc83687@ti.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <41d7be2a-1411-4cea-949f-8e447bc83687@ti.com>
+Subject: Re: [PATCH v5 1/7] usb: onboard-hub: Add reset-gpio support
+To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
+Cc: michal.simek@amd.com, fabrice.gasnier@foss.st.com, git@amd.com
+References: <20241007044547.23896-1-venkatesh.abbarapu@amd.com>
+ <20241007044547.23896-2-venkatesh.abbarapu@amd.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20241007044547.23896-2-venkatesh.abbarapu@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,96 +64,82 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 07/10/2024 10:17, Neha Malcom Francis wrote:
-> Hi Neil
+On 10/7/24 6:45 AM, Venkatesh Yadav Abbarapu wrote:
+> As part of the reset, sets the direction of the pin to output before
+> toggling the pin. Delay of millisecond is added in between low and
+> high to meet the setup and hold time requirement of the reset.
 > 
-> On 07/10/24 13:43, Neil Armstrong wrote:
->> Hi Bhupesh, Neha Malcom Francis,
->>
->> On 30/09/2024 14:44, Neil Armstrong wrote:
->>> This serie regroups all the fixes and base enhancements required to
->>> support the Qualcomm UFS controllers in U-Boot.
->>>
->>> This syncs headers & defines from Linux, and includes 2 set of
->>> fixes that were sent separately:
->>> - ufs: core: remove link_startup_again logic
->>> - ufs: properly fix cache operations
->>>
->>> Without those 2 sets, UFS cannot initialize on Qualcomm controlers
->>> since v5, and a numerous of Cache issues makes any UFS controller
->>> fail to initialize.
->>>
->>> Since UFS core hasn't changed for a while, and since UFS is core
->>> technology for the Qualcomm SoCs, I volunteer maintaininig the
->>> UFS subsystem if Bhupesh & Neha Malcom Francis are ok with that.
->>>
->>> It has been reported to show regressions on:
+> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+> ---
+>   common/usb_onboard_hub.c | 49 +++++++++++++++++++++++++++++++++++++++-
+>   1 file changed, 48 insertions(+), 1 deletion(-)
 > 
-> Both of the links are saying that there are "no regressions" seen.
+> diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c
+> index 68a04ac041..4317e81ed8 100644
+> --- a/common/usb_onboard_hub.c
+> +++ b/common/usb_onboard_hub.c
+> @@ -7,14 +7,51 @@
+>    * Mostly inspired by Linux kernel v6.1 onboard_usb_hub driver
+>    */
+>   
+> +#include <asm/gpio.h>
+>   #include <dm.h>
+>   #include <dm/device_compat.h>
+> +#include <linux/delay.h>
+>   #include <power/regulator.h>
+>   
+>   struct onboard_hub {
+>   	struct udevice *vdd;
+> +	struct gpio_desc *reset_gpio;
+>   };
+>   
+> +struct onboard_hub_data {
+> +	unsigned long reset_us;
+> +	unsigned long power_on_delay_us;
+> +};
+> +
+> +int usb_onboard_hub_reset(struct udevice *dev)
+> +{
+> +	struct onboard_hub_data *data =
+> +		(struct onboard_hub_data *)dev_get_driver_data(dev);
+> +	struct onboard_hub *hub = dev_get_priv(dev);
+> +	int ret;
+> +
+> +	hub->reset_gpio = devm_gpiod_get_optional(dev, "reset",
+> +						  GPIOD_IS_OUT | GPIOD_ACTIVE_LOW);
+> +
+> +	/* property is optional, don't return error! */
+> +	if (!hub->reset_gpio)
+> +		return 0;
+> +
+> +	ret = dm_gpio_set_value(hub->reset_gpio, 1);
+> +	if (ret)
+> +		return ret;
+> +
+> +	udelay(data->reset_us);
+> +
+> +	ret = dm_gpio_set_value(hub->reset_gpio, 0);
+> +	if (ret)
+> +		return ret;
+> +
+> +	udelay(data->power_on_delay_us);
+> +
+> +	return 0;
+> +}
+> +
+>   static int usb_onboard_hub_probe(struct udevice *dev)
+>   {
+>   	struct onboard_hub *hub = dev_get_priv(dev);
+> @@ -30,7 +67,11 @@ static int usb_onboard_hub_probe(struct udevice *dev)
+>   	if (ret)
+>   		dev_err(dev, "can't enable vdd-supply: %d\n", ret);
+>   
+> -	return ret;
+> +	ret = usb_onboard_hub_reset(dev);
 
-Yes it's a typo, I was meaning "It has been reported to show no regressions on"
-
-> 
->>> - TI K3 platforms (j721s2, j721e, j7200, j784s4) [1]
->>> - AMD platform (amd_versal2_virt_defconfig) [2]
->>>
->>> [1] https://lore.kernel.org/all/38f599a8-7094-4a04-8ff6-96fc8b9d168a@ti.com/
->>> [2] https://lore.kernel.org/all/SA1PR12MB869713CA620F99077B75EF0E98632@SA1PR12MB8697.namprd12.prod.outlook.com/
->>
->> Is it ok for me to apply the patches ?
->>
->> Thanks,
->> Neil
->>
->>>
->>> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
->>> ---
->>> Changes in v3:
->>> - Fixup patch 9
->>> - Link to v2: https://lore.kernel.org/r/20240920-topic-ufs-enhancements-v2-0-65ae61e73eaa@linaro.org
->>>
->>> Changes in v2:
->>> - Added review and tested-by tags
->>> - Updated patch 12 message with more explanations
->>> - Synced patch 9 again with Linux 6.11
->>> - Updated patches 7, 8, 9 and 10 with informations about the origins of the changes
->>> - Link to v1: https://lore.kernel.org/r/20240910-topic-ufs-enhancements-v1-0-3ee0bffacc64@linaro.org
->>>
->>> ---
->>> Bhupesh Sharma (5):
->>>        ufs/ufs.h: Add definition of 'ufshcd_rmwl()'
->>>        ufs: Clear UECPA once due to LINERESET has happened during LINK_STARTUP
->>>        ufs: Sync possible UFS Quirks with Linux UFS driver
->>>        ufs: Add missing memory barriers
->>>        ufs: Fix debug message in 'ufs_start'
->>>
->>> Marek Vasut (2):
->>>        ufs: Add UFSHCD_QUIRK_BROKEN_64BIT_ADDRESS
->>>        ufs: Add UFSHCD_QUIRK_HIBERN_FASTAUTO
->>>
->>> Neil Armstrong (6):
->>>        ufs: allocate descriptors with size aligned with DMA_MINALIGN
->>>        ufs: fix dcache flush and invalidate range calculation
->>>        ufs: split flush and invalidate to only invalidate when required
->>>        ufs: use dcache helpers for scsi_cmd data and only invalidate if necessary
->>>        ufs: core: remove link_startup_again logic
->>>        MAINTAINERS: Add myself to the list of UFS maintainers
->>>
->>>   MAINTAINERS       |   1 +
->>>   drivers/ufs/ufs.c |  98 +++++++++++++++-----------
->>>   drivers/ufs/ufs.h | 203 ++++++++++++++++++++++++++++++++++++++++++++++++------
->>>   3 files changed, 241 insertions(+), 61 deletions(-)
->>> ---
->>> base-commit: ddbcafeb53e7093c58488596bfce6d8823777c3a
->>> change-id: 20240910-topic-ufs-enhancements-fe8ef9ce39d8
->>>
->>> Best regards,
->>
-> 
-
+return usb_onboard_hub_reset(dev);
