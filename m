@@ -4,87 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02680CFB43F
-	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 09:00:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37CD8CFB43F
+	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 09:42:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C677888B2;
-	Mon,  7 Oct 2024 11:00:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 39DBB889FC;
+	Mon,  7 Oct 2024 11:42:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PPMCD7kU";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GR3EV/vb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B6D2188D33; Mon,  7 Oct 2024 11:00:10 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id DD7F6884DB; Mon,  7 Oct 2024 11:42:36 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3AB11888B2
- for <u-boot@lists.denx.de>; Mon,  7 Oct 2024 11:00:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EB852888EB
+ for <u-boot@lists.denx.de>; Mon,  7 Oct 2024 11:42:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a99422929b2so202855366b.0
- for <u-boot@lists.denx.de>; Mon, 07 Oct 2024 02:00:08 -0700 (PDT)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-37d1eda8c7cso651032f8f.3
+ for <u-boot@lists.denx.de>; Mon, 07 Oct 2024 02:42:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728291607; x=1728896407; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=iOfD0wsC3+w30mtKcsr9flwgN/37VeqIUUtRgySBCFM=;
- b=PPMCD7kUPoJyZdS0frlrjSJd9EStZ2irmwdmXJdG+3hpSpVVPRW00VXmjOeRF8Xzqd
- xiHOKWM9+Ym4QTTPTv8VW579zqkb6zu19Z0M5Due/SVspoYou1RY47vFJd/PtLI5PBOF
- 4G4PsL/wofYNeeOFPzyXZ+0zFbLUNSuvjPLF8FSeqKiBuI+FkWLo2ZhSznxT/7iYl3qf
- cwRq2TJIgeeaZoelj9Q8jjfN9HeVwi/6gXNjucxkkIfboVzIursVSXVjFhonJ++MjFEM
- jAhvw7Jz4oDyMCDtnatzaKwOGFGtOLTzIYlKqthCU/Q4+IhoI1vcy/RslEI3yfSVcPcp
- O/Fw==
+ d=linaro.org; s=google; t=1728294154; x=1728898954; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=thaYmYO0xbXl1CGK8cciXePNLK3whxHXeRIVQ2I8dTU=;
+ b=GR3EV/vbuJHDjgRybs3Q9HQvUk4zgcOw9C5waUjJuI23igcQEF4AWo5J1e4BZwfYGa
+ hZArLtft6wmk4JaQaoU3OBb5jZ5XPCF/sFyTtUVVt6lKN59CkyYyrvaq5Kx2ykHnq+9D
+ WYJUBPvrG2qryY4LHoAmobwbYVz6jAgsdUD2fzHtUOhrLlIlV4IbCh9pA1JUG+AfQ872
+ ay6jVEk9oBvFksNTWPu4K3pts4O+CVL4keYg1/Xs7Q5be6jgmUGzb6kC5slD2uEvxc2u
+ rrDhEsYbjVfpqXrCCOgYUZdV6maKe1PH4P060QWdmXyr9UiB4YSs1KezaSufebBfq5sY
+ P04Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728291607; x=1728896407;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=iOfD0wsC3+w30mtKcsr9flwgN/37VeqIUUtRgySBCFM=;
- b=H2pCYk91zcnSkrvbdS6zAOq4vgdTrP3ys/5GQuEhHzQ1sAzODzzrKhG63LV05btt6U
- VNx4ZD62tqlQX97TNlk61Agp1k3GlC2lCxWTwT09l7lbDpc++9jX1lZhtpX3lb1xr8a8
- 3/0srZSV0OW9LRAJ3m0Uwoz99l8HT/X2O4gd6wPm0Mqw4twZfs5Z7+ZuFWTKOpB9mNqw
- FJL6cW6aplmINL2ibqm+sD6+X4kpByW24KhRzRD/uoLqT/Ttk0UlIxQO3D7zTDBpXrFi
- F5WFz+oaFTLB045TghQi+jKV1viYRhpQrDDeATnl6PRPpJrDAzXnWS863zskrFWsdgud
- aKKA==
-X-Gm-Message-State: AOJu0YxFhPH89qD/mlaNPohu/HBaqlop34nst/dxtMKSLuRJKjtYSTA0
- +rpoQzi7Ol1Zh2z7Tpal9qgok9kDsM2cy04Zhx+E1Jsd2Ua9VeeN/up9y6jOCDg=
-X-Google-Smtp-Source: AGHT+IGgeRGS64gdi1GTvTpQlRKcbOKZAp/+cDoFct4BDg2lOELltsHzq5/eVgOJR2eGW8WDFC2iAQ==
-X-Received: by 2002:a17:907:7da4:b0:a99:41e4:4a80 with SMTP id
- a640c23a62f3a-a9941e45074mr692118166b.32.1728291607242; 
- Mon, 07 Oct 2024 02:00:07 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:6f4b:a50f:5140:7b75?
- ([2a01:e0a:3cb:7bb0:6f4b:a50f:5140:7b75])
+ d=1e100.net; s=20230601; t=1728294154; x=1728898954;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=thaYmYO0xbXl1CGK8cciXePNLK3whxHXeRIVQ2I8dTU=;
+ b=HMOVZFF7wmyiWTSmdGtP0+smvKZQB6/95Jl10SGSSOSuaAM0Woy+CEVu1aFjOzx5UW
+ ZUw1+NoouzagERYDS1cggWLFGKzL4iyV6LZ+fQ58+ofabvjvXogylU3E/l7tYaF6u8xH
+ TA0ZYC6FhcRTLuNZNkrl2ou1ItpgQGYlhI+hdGJzCsey/fhrtUBHd/Pi+r+3CzAhS/jd
+ wScfU1t5ftFRBAU64UlT2OiMfZZP1VU65njzqARrA6rnT9eqvFHjIBc1VPHl6Bnka0QK
+ KzTSy9enOkpB1NKv9VxM9Py96GCssst7s1xY1z6LHLUKWX0NucqD9A76dNMXltqekdh8
+ Abcw==
+X-Gm-Message-State: AOJu0YwDStNO5BnP24W5wJwVAas81+G4VpnNLBCObYQ+Y/kRijB5nzCx
+ Y6rpz0zzLvQss1MeaKR5wrJinezUcBHvaE15qcOUaB9T7G+/ERicEAY6KfpRBNFV//UUfygvqKP
+ NVgM+6Q==
+X-Google-Smtp-Source: AGHT+IGXJ665kYJt21Mo5M/OIjddioJN/1A4ZX7QbSPKXuk38SVesYQp32U8RswQe91YGYvqjIkzLQ==
+X-Received: by 2002:a5d:51c7:0:b0:374:c05f:231d with SMTP id
+ ffacd0b85a97d-37d0e4e447bmr5968063f8f.0.1728294154039; 
+ Mon, 07 Oct 2024 02:42:34 -0700 (PDT)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:287a:3d8d:7a32:9534])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a996167411csm12675066b.14.2024.10.07.02.00.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 07 Oct 2024 02:00:06 -0700 (PDT)
-Message-ID: <1db50d22-8de3-4fb0-9490-60a42cb5e241@linaro.org>
-Date: Mon, 7 Oct 2024 11:00:05 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v11 25/29] CI: add qemu_arm64_lwip to the test matrix
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
- Anton Antonov <Anton.Antonov@arm.com>, Simon Glass <sjg@chromium.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-References: <cover.1727968902.git.jerome.forissier@linaro.org>
- <b7cc4bc4d5aea1310401c107f7836a9eadd6a493.1727968902.git.jerome.forissier@linaro.org>
- <20241004182535.GG4737@bill-the-cat>
-Content-Language: en-US
+ ffacd0b85a97d-37d1698fcacsm5273659f8f.116.2024.10.07.02.42.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 07 Oct 2024 02:42:33 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20241004182535.GG4737@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+To: u-boot@lists.denx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Alexander Gendin <agendin@matrox.com>,
+ Dan Carpenter <dan.carpenter@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>
+Subject: [PATCH] linker_lists: set LINKER_LIST_ALIGN to 8 if 64BIT
+Date: Mon,  7 Oct 2024 11:42:06 +0200
+Message-Id: <20241007094206.2928071-1-jerome.forissier@linaro.org>
+X-Mailer: git-send-email 2.40.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,30 +95,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+CPU_MIPS64 needs 8-byte alignment on the linker lists, otherwise an
+exception may occur. In fact all 64BIT architectures should default
+to 8; that's what this patch does.
+Fixes an issue found on malta64 with QEMU:
 
+ Breakpoint 1, lists_driver_lookup_name (name=0xffffffffbe043578 "root_driver") at /home/uboot/u-boot/drivers/core/lists.c:31
+ 31                      if (!strcmp(name, entry->name))
+ [...]
+ ld      a1,0(s0)
 
-On 10/4/24 20:25, Tom Rini wrote:
-> On Thu, Oct 03, 2024 at 05:46:29PM +0200, Jerome Forissier wrote:
->> Build and run qemu_arm64_lwip_defconfig in CI. This tests the lightweight
->> IP (lwIP) implementation of the dhcp, tftpboot and ping commands.
->>
->> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
->> ---
->>  .azure-pipelines.yml | 7 +++++++
->>  1 file changed, 7 insertions(+)
-> 
-> This should be in .gitlab-ci.yml too.
+ (gdb) p/x &entry->name
+ 0xffffffffbe04b0d4
+ (gdb) p/x $s0
+ 0xffffffffbe04b0d4
 
-Updated in v12.
+ $ grep __u_boot_list /tmp/malta64/u-boot.objdump
+ 4 __u_boot_list 000018e0  ffffffffbe04a4d4  ffffffffbe04a4d4  0004a584  2**2
 
-> Generally it's close enough to get
-> without testing (and using the linter if needed), but I'm sure Ilias can
-> push something through the tpm tree for testing if you want, and we
-> should get you added to source.denx.de (please go sign up) and access to
-> the -net tree, really, anyhow.
+Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+---
+ arch/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-I have registered on source.denx.de.
-
-Thanks Tom,
+diff --git a/arch/Kconfig b/arch/Kconfig
+index 8f1f4667012..72bf4029251 100644
+--- a/arch/Kconfig
++++ b/arch/Kconfig
+@@ -45,7 +45,7 @@ config SYS_CACHELINE_SIZE
+ config LINKER_LIST_ALIGN
+ 	int
+ 	default 32 if SANDBOX
+-	default 8 if ARM64 || X86
++	default 8 if 64BIT
+ 	default 4
+ 	help
+ 	  Force the each linker list to be aligned to this boundary. This
 -- 
-Jerome
+2.40.1
+
