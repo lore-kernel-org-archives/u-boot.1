@@ -4,64 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAFF3CFB441
-	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 13:26:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D0B7CFB43F
+	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 13:31:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85A8688D47;
-	Mon,  7 Oct 2024 15:26:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gehealthcare.com
+	by phobos.denx.de (Postfix) with ESMTP id B171188B3F;
+	Mon,  7 Oct 2024 15:31:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gehealthcare.com header.i=@gehealthcare.com header.b="EgjT6haP";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bOsRW4CI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 751D6888EB; Mon,  7 Oct 2024 15:02:13 +0200 (CEST)
-Received: from mx0a-00176a03.pphosted.com (mx0a-00176a03.pphosted.com
- [67.231.149.52])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id F2A2288CBF; Mon,  7 Oct 2024 15:31:15 +0200 (CEST)
+Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
+ [IPv6:2a00:1450:4864:20::232])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8DDD7889E1
- for <u-boot@lists.denx.de>; Mon,  7 Oct 2024 15:02:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=gehealthcare.com
+ by phobos.denx.de (Postfix) with ESMTPS id 9731288AE4
+ for <u-boot@lists.denx.de>; Mon,  7 Oct 2024 15:31:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=brian.ruley@gehealthcare.com
-Received: from pps.filterd (m0047961.ppops.net [127.0.0.1])
- by m0047961.ppops.net-00176a03. (8.18.1.2/8.18.1.2) with ESMTP id
- 497AtguS000766
- for <u-boot@lists.denx.de>; Mon, 7 Oct 2024 09:02:09 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- gehealthcare.com; h=cc:content-transfer-encoding:date:from
- :message-id:mime-version:subject:to; s=outbound; bh=5doGfiLmzBZj
- FILQuH56clmBSB2lyRKQfUt4cagUoxM=; b=EgjT6haPYF+2hP80WHqw265pJAC2
- uNnSPodUGQ2R9CakZ2VUdQ7lEpe1cD0Tf+VhltgHCQzG7J+FBYRPpV97fEONZ1WO
- L6jWvMRpLhuRi1j2ojq8UWIk3NgGgrcfnvMoRoXkOJNztnKauNXLClvVEF/HMRZQ
- CP3T5ttbsv1WSsRf19GmEY7CXjBTbmXlhay0QDeghzn2PK+i3q9U0erhPgUkCBpS
- brS1R8FAo6IJD5nuznGUKppkyPgXYqGEk4c3LZ1bx4kRo4ftkB81kvNrwBj+qv6f
- BE20+Xt2GEh8xb++TB6o8tGjJHM6dWNlnOvM23vlpN09yzMI8xO7n3jSNg==
-From: Brian Ruley <brian.ruley@gehealthcare.com>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Cc: ian.ray@gehealthcare.com, Brian Ruley <brian.ruley@gehealthcare.com>,
- u-boot@lists.denx.de
-Subject: [PATCH] WIP: binman: expand test coverage to nxpimx8mcst
-Date: Mon,  7 Oct 2024 16:01:09 +0300
-Message-Id: <20241007130109.227305-1-brian.ruley@gehealthcare.com>
-X-Mailer: git-send-email 2.39.5
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-2facf48157dso43599041fa.2
+ for <u-boot@lists.denx.de>; Mon, 07 Oct 2024 06:31:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1728307873; x=1728912673; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=OitCTedIlIlJ19e0OU5Mk1mSU43pDxWZ/EQgxXkbLSk=;
+ b=bOsRW4CIbQS8jd0jxyNYSxb+fU6fpiwQYRz08vwJvmXiUtaLxdhFhl3qcWWde+X3s+
+ G0MMO8XXvf0BUPZEbGaJy/ri4qgjIjRniPzCuYdA8umWqtqRMK3xfhj4LpUxXUDT3zsc
+ fvi/5xXFqAwGJPWQPEHrOetuSraID7toFTyyIYmerqulHVsDpoTOA9iMTzDI9tIa6dUk
+ cOilnBNLpArlF7m+cCWm8VAG6EiXH6QizQC7BR/re3ob7kPEXDkzc0ULwuNJ8hYf2xrc
+ UttE15m9x4bv8g4yfcjs5Xfu8N76wBtsumv46cC1pbcnSAUFGyIozrhwdlsgCCyCnOGq
+ Tk3g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728307873; x=1728912673;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=OitCTedIlIlJ19e0OU5Mk1mSU43pDxWZ/EQgxXkbLSk=;
+ b=oRO3asJabCSMieJrtKJkyyscQWXtg7wXKqthfy1Nb/Fqe5f7NeKsfY+9Jtr6aTsQkW
+ i7OjOZa4w6SktfprRR2mTIeSZwywProobnh7i5B3+l0yLuMtPuuKluCaXdaLjIC6ICC9
+ ZAn+31uDRTJGUigsfc4/eso4kV8H3h4d7h50iypTp6Za1mAjlNfNcAIH+UqTkWC2y+yD
+ dRutxU3WxQlEkQnzi+h0DNFJvOZM+Oxb0vl4iLD+Ebe4k9rh0mtXhJKWfz9S6FfZYoEU
+ 5ky7T2xXP+ein6xiUZSjdXCBdrNK6PlLt1qQlJE0f78ZFjTqJWbxjRA5JTzwCDLbn8QI
+ YcbA==
+X-Gm-Message-State: AOJu0YwT1dQlYu7ZE3ZKQsp78G/WUAAhGB0JP8mlYgKOn/XIw7kD8Dt/
+ euumrwGPjHcIOY6CcEEstZQ8eRtMWUpA2sdPTv9JOc8EsNGDMkUEZlKuqXqi16cs6MAI+oSRDyB
+ bop/dIA==
+X-Google-Smtp-Source: AGHT+IE1jgMyorX12mxXrEyI9l+pqZ55KdHjr5C6jpaVDqnDUOE0B/hof0YDwmay3q3Tt+VZu0yXjQ==
+X-Received: by 2002:a05:651c:b0d:b0:2f6:1d35:1491 with SMTP id
+ 38308e7fff4ca-2faf3c136dbmr60929831fa.15.1728307872434; 
+ Mon, 07 Oct 2024 06:31:12 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:6f4b:a50f:5140:7b75?
+ ([2a01:e0a:3cb:7bb0:6f4b:a50f:5140:7b75])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5c8e0594921sm3251629a12.8.2024.10.07.06.31.11
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 07 Oct 2024 06:31:12 -0700 (PDT)
+Message-ID: <e6fed00d-55b4-4055-a175-45c3d7edcd9c@linaro.org>
+Date: Mon, 7 Oct 2024 15:31:11 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: 6sK6m5w6qPjPAf2pEvRuLYYozM46YR59
-X-Proofpoint-ORIG-GUID: 6sK6m5w6qPjPAf2pEvRuLYYozM46YR59
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1051,Hydra:6.0.680,FMLib:17.12.62.30
- definitions=2024-10-07_03,2024-10-07_01,2024-09-30_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0
- spamscore=0 mlxscore=0
- clxscore=1015 priorityscore=1501 phishscore=0 malwarescore=0
- mlxlogscore=932 suspectscore=0 impostorscore=0 lowpriorityscore=0
- adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2409260000 definitions=main-2410070092
-X-Mailman-Approved-At: Mon, 07 Oct 2024 15:25:58 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v11 00/29] Introduce the lwIP network stack
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
+ Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
+ Anton Antonov <Anton.Antonov@arm.com>
+References: <cover.1727968902.git.jerome.forissier@linaro.org>
+ <20241004183043.GI4737@bill-the-cat>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20241004183043.GI4737@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,107 +99,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add coverage for IMX8M code siging. Create PKI tree and other assets
-required by `cst' using `hab4_pki_tree.sh' script in `cst_3.4.1' [1].
 
-[1] https://www.nxp.com/webapp/Download?colCode=IMX_CST_TOOL_NEW
 
-Signed-off-by: Brian Ruley <brian.ruley@gehealthcare.com>
----
- tools/binman/ftest.py                   |  4 ++
- tools/binman/test/336_nxp_imx8mcst.dts  | 58 +++++++++++++++++++++++++
- tools/binman/test/cst/keys/key_pass.txt |  2 +
- 3 files changed, 64 insertions(+)
- create mode 100644 tools/binman/test/336_nxp_imx8mcst.dts
- create mode 100644 tools/binman/test/cst/keys/key_pass.txt
+On 10/4/24 20:30, Tom Rini wrote:
+> On Thu, Oct 03, 2024 at 05:22:46PM +0200, Jerome Forissier wrote:
+> 
+>> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
+>> library for the network stack" [1]. The goal is to introduce the lwIP TCP/IP
+>> stack [2] [3] as an alternative to the current implementation in net/,
+>> selectable with Kconfig, and ultimately keep only lwIP if possible. Some
+>> reasons for doing so are:
+>> - Make the support of HTTPS in the wget command easier. Javier T. and
+>> Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
+>> so. With that it becomes possible to fetch and launch a distro installer
+>> such as Debian etc. using a secure, authenticated connection directly
+>> from the U-Boot shell. Several use cases:
+>>   * Authentication: prevent MITM attack (third party replacing the
+>> binary with a different one)
+>>   * Confidentiality: prevent third parties from grabbing a copy of the
+>> image as it is being downloaded
+>>   * Allow connection to servers that do not support plain HTTP anymore
+>> (this is becoming more and more common on the Internet these days)
+>> - Possibly benefit from additional features implemented in lwIP
+>> - Less code to maintain in U-Boot
+>>
+>> Prior to applying this series, the lwIP stack needs to be added as a
+>> Git subtree with the following command:
+>>
+>>  $ git subtree add --squash --prefix lib/lwip/lwip \
+>>    https://github.com/lwip-tcpip/lwip.git  STABLE-2_2_0_RELEASE 
+> 
+> So, assuming the outstanding questions raised on v11 are easy enough to
+> resolve, I think v12 should be posted with being merged in mind (and so
+> no TESTING patches, etc, since I'll "b4 shazam -SM" it. Thanks for
+> working on this so hard!
 
-diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index 93f3d22cf5..f1c052a7f8 100644
---- a/tools/binman/ftest.py
-+++ b/tools/binman/ftest.py
-@@ -7690,6 +7690,10 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-             # Make sure the other node is gone
-             self.assertIsNone(dtb.GetNode('/node/other-node'))
- 
-+    def testNxpImx8mCst(self):
-+        """Test that binman can sign an iMX8M image"""
-+        self._DoTestFile('336_nxp_imx8mcst.dts')
-+
- 
- if __name__ == "__main__":
-     unittest.main()
-diff --git a/tools/binman/test/336_nxp_imx8mcst.dts b/tools/binman/test/336_nxp_imx8mcst.dts
-new file mode 100644
-index 0000000000..6cfefdae2a
---- /dev/null
-+++ b/tools/binman/test/336_nxp_imx8mcst.dts
-@@ -0,0 +1,58 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+/dts-v1/;
-+
-+/ {
-+	#address-cells = <1>;
-+	#size-cells = <1>;
-+
-+	binman {
-+		nxp-imx8mcst {
-+			args;	/* Needed by mkimage etype superclass */
-+			filename = "test-fit.signed.bin";
-+			nxp,loader-address = <0x10>;
-+            nxp,srk-table = "tools/binman/test/cst/crts/SRK_table.bin";
-+            nxp,img-crt = "tools/binman/test/cst/crts/IMG1_1_sha256_4096_65537_v3_usr_crt.pem";
-+            nxp,csf-crt = "tools/binman/test/cst/crts/CSF1_1_sha256_4096_65537_v3_usr_crt.pem";
-+
-+            fit {
-+                description = "test desc";
-+			    filename = "test-fit.itb";
-+                #address-cells = <1>;
-+
-+                images {
-+                    u-boot {
-+                        description = "test u-boot";
-+                        type = "standalone";
-+                        arch = "arm64";
-+                        os = "u-boot";
-+                        compression = "none";
-+                        load = <00000000>;
-+                        entry = <00000000>;
-+
-+                        u-boot-nodtb {
-+                        };
-+                    };
-+
-+                    fdt-1 {
-+                        description = "test fdt";
-+                        type = "flat_dt";
-+                        compression = "none";
-+
-+                        u-boot-dtb {
-+                        };
-+                    };
-+                };
-+
-+                configurations {
-+                    default = "config-1";
-+                    config-1 {
-+                        description = "test config";
-+                        fdt = "fdt-1";
-+                        firmware = "u-boot";
-+                    };
-+                };
-+            };
-+        };
-+	};
-+};
-diff --git a/tools/binman/test/cst/keys/key_pass.txt b/tools/binman/test/cst/keys/key_pass.txt
-new file mode 100644
-index 0000000000..dec2cbe1fa
---- /dev/null
-+++ b/tools/binman/test/cst/keys/key_pass.txt
-@@ -0,0 +1,2 @@
-+test
-+test
+Sure. Thanks for reviewing and testing!
+
 -- 
-2.39.5
-
+Jerome
