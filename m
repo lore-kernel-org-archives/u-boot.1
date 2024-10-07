@@ -4,85 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D0B7CFB43F
-	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 13:31:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E112ECFB441
+	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 13:31:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B171188B3F;
-	Mon,  7 Oct 2024 15:31:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1D5DE88D3A;
+	Mon,  7 Oct 2024 15:31:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bOsRW4CI";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="X/JmdA+E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F2A2288CBF; Mon,  7 Oct 2024 15:31:15 +0200 (CEST)
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [IPv6:2a00:1450:4864:20::232])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8818788AE4; Mon,  7 Oct 2024 15:31:20 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9731288AE4
- for <u-boot@lists.denx.de>; Mon,  7 Oct 2024 15:31:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 55E7C88D15
+ for <u-boot@lists.denx.de>; Mon,  7 Oct 2024 15:31:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-2facf48157dso43599041fa.2
- for <u-boot@lists.denx.de>; Mon, 07 Oct 2024 06:31:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728307873; x=1728912673; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=OitCTedIlIlJ19e0OU5Mk1mSU43pDxWZ/EQgxXkbLSk=;
- b=bOsRW4CIbQS8jd0jxyNYSxb+fU6fpiwQYRz08vwJvmXiUtaLxdhFhl3qcWWde+X3s+
- G0MMO8XXvf0BUPZEbGaJy/ri4qgjIjRniPzCuYdA8umWqtqRMK3xfhj4LpUxXUDT3zsc
- fvi/5xXFqAwGJPWQPEHrOetuSraID7toFTyyIYmerqulHVsDpoTOA9iMTzDI9tIa6dUk
- cOilnBNLpArlF7m+cCWm8VAG6EiXH6QizQC7BR/re3ob7kPEXDkzc0ULwuNJ8hYf2xrc
- UttE15m9x4bv8g4yfcjs5Xfu8N76wBtsumv46cC1pbcnSAUFGyIozrhwdlsgCCyCnOGq
- Tk3g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728307873; x=1728912673;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=OitCTedIlIlJ19e0OU5Mk1mSU43pDxWZ/EQgxXkbLSk=;
- b=oRO3asJabCSMieJrtKJkyyscQWXtg7wXKqthfy1Nb/Fqe5f7NeKsfY+9Jtr6aTsQkW
- i7OjOZa4w6SktfprRR2mTIeSZwywProobnh7i5B3+l0yLuMtPuuKluCaXdaLjIC6ICC9
- ZAn+31uDRTJGUigsfc4/eso4kV8H3h4d7h50iypTp6Za1mAjlNfNcAIH+UqTkWC2y+yD
- dRutxU3WxQlEkQnzi+h0DNFJvOZM+Oxb0vl4iLD+Ebe4k9rh0mtXhJKWfz9S6FfZYoEU
- 5ky7T2xXP+ein6xiUZSjdXCBdrNK6PlLt1qQlJE0f78ZFjTqJWbxjRA5JTzwCDLbn8QI
- YcbA==
-X-Gm-Message-State: AOJu0YwT1dQlYu7ZE3ZKQsp78G/WUAAhGB0JP8mlYgKOn/XIw7kD8Dt/
- euumrwGPjHcIOY6CcEEstZQ8eRtMWUpA2sdPTv9JOc8EsNGDMkUEZlKuqXqi16cs6MAI+oSRDyB
- bop/dIA==
-X-Google-Smtp-Source: AGHT+IE1jgMyorX12mxXrEyI9l+pqZ55KdHjr5C6jpaVDqnDUOE0B/hof0YDwmay3q3Tt+VZu0yXjQ==
-X-Received: by 2002:a05:651c:b0d:b0:2f6:1d35:1491 with SMTP id
- 38308e7fff4ca-2faf3c136dbmr60929831fa.15.1728307872434; 
- Mon, 07 Oct 2024 06:31:12 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:6f4b:a50f:5140:7b75?
- ([2a01:e0a:3cb:7bb0:6f4b:a50f:5140:7b75])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c8e0594921sm3251629a12.8.2024.10.07.06.31.11
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 07 Oct 2024 06:31:12 -0700 (PDT)
-Message-ID: <e6fed00d-55b4-4055-a175-45c3d7edcd9c@linaro.org>
-Date: Mon, 7 Oct 2024 15:31:11 +0200
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1728307871; x=1728912671; i=xypron.glpk@gmx.de;
+ bh=gYi6m5PDZZOxu/sOz0rzRaSNWQNmuoX3c8DY08LZ9uQ=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=X/JmdA+Ei7eMXP8mLNwXDxdqOl4ZyxQfQAVIcQb6+gq1MYPUzaBNtF5Uc7d/GB31
+ +naZMb64PKivsgNlcC8y0tPR/QHyxexZkxavwCyoWZF57jAcGlVvG4p3PzEz/5o79
+ W/rraeWB2r/lvzTt6ZPs3twx/WpCNnJHxyMXgy7Yf6Wwh5KjcRokffQimXEqRk8M9
+ XUuX/3C7FOGigTyDQFwjty8E07SqLSLHgXUXEhegLRhUnVPsOnG7UtszX5U9qxNGV
+ 0TM1wk3fi11IEyOgEcCJIT5ixZA9CvHulo3xaeRfD9W02FCLLq4a0ev01brKhQq6I
+ zQCl8UcWn4vben5fhA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1M2wGi-1t17D82bdM-008hMA; Mon, 07
+ Oct 2024 15:31:10 +0200
+Message-ID: <86b48670-ada7-4245-b12f-9b6e423e3db5@gmx.de>
+Date: Mon, 7 Oct 2024 15:31:01 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v11 00/29] Introduce the lwIP network stack
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
- Anton Antonov <Anton.Antonov@arm.com>
-References: <cover.1727968902.git.jerome.forissier@linaro.org>
- <20241004183043.GI4737@bill-the-cat>
+Subject: Re: [PATCH] linker_lists: set LINKER_LIST_ALIGN to 8 if 64BIT
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Alexander Gendin <agendin@matrox.com>,
+ Dan Carpenter <dan.carpenter@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, u-boot@lists.denx.de
+References: <20241007094206.2928071-1-jerome.forissier@linaro.org>
+ <4f24827f-22d9-49d3-995c-6e2c3ed6859e@linaro.org>
 Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20241004183043.GI4737@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <4f24827f-22d9-49d3-995c-6e2c3ed6859e@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:uS5FAF1EhQrNKUxr26tMB9J9ooN7Hda2VsJLywg4wbiy4GubUQp
+ TZy+WJzt4MaszrkUrvo3oKcCnK/9tRnUzP7q66kgLC/fkDeI5rbze0O0FfJBk9glcS0hvsp
+ E5wfyOND9vdWJD34R+o/7Z36sY/MbK5O32c2MHbpE/z5mJmwTCCgrRZlnX7F9UQoqXJ07VE
+ jIC+oj1pKA/40KuhYX7Yw==
+UI-OutboundReport: notjunk:1;M01:P0:dLCHeBo3cX4=;XwAXzbmwFfQto+PV9YuZXHW/1Je
+ IMEUsoeld3mUf41Ecy990lpSE4wR1R0IgLA2NhKB0iLxFVTC27rcT926/AP+GaBS9U4pySPTP
+ DuTJ9kdS0CubQ1FkbLCsejWn8cplBc5sPO4bD+EQzkQxUMY9gIwHqj1VNylrw4brswlPj/Adp
+ 8Pp1EEo+L6B+WTzl5SEswj4OEhNQQeORbLQCRock9V+cNvQu46PGfP20VExJdoHrYIjnXx94k
+ HWVClcwHrs3A+g87/T96T+vJ9CrvR7ISQ9Hsla9rYR2lnP4PTg8rNOkFc4b8Z2QlRo5r9cn5d
+ 4KnW8oGWj1kLXsPBJcOmLMOqWn4oaSbYWQTo4BSo3w8Xf8J7d388EyDj7jWRP4A4xt5JB8b1+
+ CeVIRGmam/dg6qQQEp/T6DwZ1UEZ9VCi8ihoNA6l9Pc17sJYhiui0TmWZBFiyIHa+80z93hy6
+ dGrRY2Z5zWCJhFmTp+qMyZOuZYDZ2/0GNxq+2TNbjcCmFYBvBFUucItb9CYM9lCDx/RMGiYZz
+ yu+D/V8OnsgpYfIQ12WrJnO65cqE/+rWsC8vYPaUw1O7KYLDJtfL76sClFOtATctJoH4dAVfd
+ BLersi+cBn54Rq5lhD6wz/uAWhtTdOr1Df3ROSpHtwiNnchDpQRZi00gkjxHVgKLwVaKajysp
+ aS1l6mz38eUpSCBCdymVYqxRicz45ZjzqwS2YLYCFCGcpz8vr83g0iktQLn9XrYj6Sm1eroEm
+ mEDnOEq7Y1EnknoH4CIq9a3GQDgZ9ZeVaAYdfGo7jalWFeKzZ/Oolc3yW+wUalHyDQWCI5BMC
+ MlblO0fGPAuSTr8mmKHv45bg==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,42 +94,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 10/4/24 20:30, Tom Rini wrote:
-> On Thu, Oct 03, 2024 at 05:22:46PM +0200, Jerome Forissier wrote:
-> 
->> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
->> library for the network stack" [1]. The goal is to introduce the lwIP TCP/IP
->> stack [2] [3] as an alternative to the current implementation in net/,
->> selectable with Kconfig, and ultimately keep only lwIP if possible. Some
->> reasons for doing so are:
->> - Make the support of HTTPS in the wget command easier. Javier T. and
->> Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
->> so. With that it becomes possible to fetch and launch a distro installer
->> such as Debian etc. using a secure, authenticated connection directly
->> from the U-Boot shell. Several use cases:
->>   * Authentication: prevent MITM attack (third party replacing the
->> binary with a different one)
->>   * Confidentiality: prevent third parties from grabbing a copy of the
->> image as it is being downloaded
->>   * Allow connection to servers that do not support plain HTTP anymore
->> (this is becoming more and more common on the Internet these days)
->> - Possibly benefit from additional features implemented in lwIP
->> - Less code to maintain in U-Boot
+On 07.10.24 14:55, Jerome Forissier wrote:
+>
+>
+> On 10/7/24 11:42, Jerome Forissier wrote:
+>> CPU_MIPS64 needs 8-byte alignment on the linker lists, otherwise an
+>> exception may occur. In fact all 64BIT architectures should default
+>> to 8; that's what this patch does.
+>> Fixes an issue found on malta64 with QEMU:
 >>
->> Prior to applying this series, the lwIP stack needs to be added as a
->> Git subtree with the following command:
+>>   Breakpoint 1, lists_driver_lookup_name (name=3D0xffffffffbe043578 "ro=
+ot_driver") at /home/uboot/u-boot/drivers/core/lists.c:31
+>>   31                      if (!strcmp(name, entry->name))
+>>   [...]
+>>   ld      a1,0(s0)
 >>
->>  $ git subtree add --squash --prefix lib/lwip/lwip \
->>    https://github.com/lwip-tcpip/lwip.git  STABLE-2_2_0_RELEASE 
-> 
-> So, assuming the outstanding questions raised on v11 are easy enough to
-> resolve, I think v12 should be posted with being merged in mind (and so
-> no TESTING patches, etc, since I'll "b4 shazam -SM" it. Thanks for
-> working on this so hard!
+>>   (gdb) p/x &entry->name
+>>   0xffffffffbe04b0d4
+>>   (gdb) p/x $s0
+>>   0xffffffffbe04b0d4
+>>
+>>   $ grep __u_boot_list /tmp/malta64/u-boot.objdump
+>>   4 __u_boot_list 000018e0  ffffffffbe04a4d4  ffffffffbe04a4d4  0004a58=
+4  2**2
+>>
+>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+>> ---
+>>   arch/Kconfig | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/arch/Kconfig b/arch/Kconfig
+>> index 8f1f4667012..72bf4029251 100644
+>> --- a/arch/Kconfig
+>> +++ b/arch/Kconfig
+>> @@ -45,7 +45,7 @@ config SYS_CACHELINE_SIZE
+>>   config LINKER_LIST_ALIGN
+>>   	int
+>>   	default 32 if SANDBOX
+>> -	default 8 if ARM64 || X86
+>> +	default 8 if 64BIT
+>>   	default 4
+>>   	help
+>>   	  Force the each linker list to be aligned to this boundary. This
+>
+> Superseded by https://patchwork.ozlabs.org/project/uboot/patch/202410070=
+94206.2928071-1-jerome.forissier@linaro.org/
 
-Sure. Thanks for reviewing and testing!
+It seems you are pointing to this very patch. You probably wanted to
+respond to an earlier version.
 
--- 
-Jerome
+Best regards
+
+Heinrich
