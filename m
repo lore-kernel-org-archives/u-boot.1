@@ -4,73 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D275CFB43F
-	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 08:18:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02680CFB43F
+	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 09:00:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 815F1888B2;
-	Mon,  7 Oct 2024 10:18:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 2C677888B2;
+	Mon,  7 Oct 2024 11:00:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="p5rJaKJZ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PPMCD7kU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 49B7388D7F; Mon,  7 Oct 2024 10:18:04 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id B6D2188D33; Mon,  7 Oct 2024 11:00:10 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1FBE3884DB
- for <u-boot@lists.denx.de>; Mon,  7 Oct 2024 10:18:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3AB11888B2
+ for <u-boot@lists.denx.de>; Mon,  7 Oct 2024 11:00:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4978HtFB025467;
- Mon, 7 Oct 2024 03:17:55 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1728289075;
- bh=03W+xwmwBu9f/QyyIxV0Ecc8GX82d5+8OGfYXnbPClo=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=p5rJaKJZgL0z6hHj9hkxkHOlSLwXb2JhfjfnvwTVQhk8poBN6zcRvuMVPnfu4Tdpv
- 3Ra5hmBqX5Nl4UF49ntmZxme9/GbpzZFU/oZSAcjvDvNhl7ISOdUrFgXRg9zvJqdHx
- NT8F2gYjqNoqDWNgeqmKT5VMUupBTxamkczqsi9E=
-Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4978HtGW057487
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 7 Oct 2024 03:17:55 -0500
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 7
- Oct 2024 03:17:54 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 7 Oct 2024 03:17:54 -0500
-Received: from [172.24.227.36]
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36]
- (may be forged))
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4978HptT002240;
- Mon, 7 Oct 2024 03:17:52 -0500
-Message-ID: <41d7be2a-1411-4cea-949f-8e447bc83687@ti.com>
-Date: Mon, 7 Oct 2024 13:47:51 +0530
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a99422929b2so202855366b.0
+ for <u-boot@lists.denx.de>; Mon, 07 Oct 2024 02:00:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1728291607; x=1728896407; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=iOfD0wsC3+w30mtKcsr9flwgN/37VeqIUUtRgySBCFM=;
+ b=PPMCD7kUPoJyZdS0frlrjSJd9EStZ2irmwdmXJdG+3hpSpVVPRW00VXmjOeRF8Xzqd
+ xiHOKWM9+Ym4QTTPTv8VW579zqkb6zu19Z0M5Due/SVspoYou1RY47vFJd/PtLI5PBOF
+ 4G4PsL/wofYNeeOFPzyXZ+0zFbLUNSuvjPLF8FSeqKiBuI+FkWLo2ZhSznxT/7iYl3qf
+ cwRq2TJIgeeaZoelj9Q8jjfN9HeVwi/6gXNjucxkkIfboVzIursVSXVjFhonJ++MjFEM
+ jAhvw7Jz4oDyMCDtnatzaKwOGFGtOLTzIYlKqthCU/Q4+IhoI1vcy/RslEI3yfSVcPcp
+ O/Fw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728291607; x=1728896407;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=iOfD0wsC3+w30mtKcsr9flwgN/37VeqIUUtRgySBCFM=;
+ b=H2pCYk91zcnSkrvbdS6zAOq4vgdTrP3ys/5GQuEhHzQ1sAzODzzrKhG63LV05btt6U
+ VNx4ZD62tqlQX97TNlk61Agp1k3GlC2lCxWTwT09l7lbDpc++9jX1lZhtpX3lb1xr8a8
+ 3/0srZSV0OW9LRAJ3m0Uwoz99l8HT/X2O4gd6wPm0Mqw4twZfs5Z7+ZuFWTKOpB9mNqw
+ FJL6cW6aplmINL2ibqm+sD6+X4kpByW24KhRzRD/uoLqT/Ttk0UlIxQO3D7zTDBpXrFi
+ F5WFz+oaFTLB045TghQi+jKV1viYRhpQrDDeATnl6PRPpJrDAzXnWS863zskrFWsdgud
+ aKKA==
+X-Gm-Message-State: AOJu0YxFhPH89qD/mlaNPohu/HBaqlop34nst/dxtMKSLuRJKjtYSTA0
+ +rpoQzi7Ol1Zh2z7Tpal9qgok9kDsM2cy04Zhx+E1Jsd2Ua9VeeN/up9y6jOCDg=
+X-Google-Smtp-Source: AGHT+IGgeRGS64gdi1GTvTpQlRKcbOKZAp/+cDoFct4BDg2lOELltsHzq5/eVgOJR2eGW8WDFC2iAQ==
+X-Received: by 2002:a17:907:7da4:b0:a99:41e4:4a80 with SMTP id
+ a640c23a62f3a-a9941e45074mr692118166b.32.1728291607242; 
+ Mon, 07 Oct 2024 02:00:07 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:6f4b:a50f:5140:7b75?
+ ([2a01:e0a:3cb:7bb0:6f4b:a50f:5140:7b75])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a996167411csm12675066b.14.2024.10.07.02.00.06
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 07 Oct 2024 02:00:06 -0700 (PDT)
+Message-ID: <1db50d22-8de3-4fb0-9490-60a42cb5e241@linaro.org>
+Date: Mon, 7 Oct 2024 11:00:05 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 00/13] ufs: enhancements to support Qualcomm UFS
- controllers
-To: <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>, Bhupesh Sharma
- <bhupesh.linux@gmail.com>
-CC: Michal Simek <michal.simek@amd.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, <bmeng.cn@gmail.com>,
- <u-boot@lists.denx.de>, <u-boot-qcom@groups.io>, Venkatesh Yadav Abbarapu
- <venkatesh.abbarapu@amd.com>
-References: <20240930-topic-ufs-enhancements-v3-0-58234f84ab89@linaro.org>
- <9a25aaeb-98c1-4f21-8789-03582b8a4431@linaro.org>
+Subject: Re: [PATCH v11 25/29] CI: add qemu_arm64_lwip to the test matrix
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
+ Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
+ Anton Antonov <Anton.Antonov@arm.com>, Simon Glass <sjg@chromium.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+References: <cover.1727968902.git.jerome.forissier@linaro.org>
+ <b7cc4bc4d5aea1310401c107f7836a9eadd6a493.1727968902.git.jerome.forissier@linaro.org>
+ <20241004182535.GG4737@bill-the-cat>
 Content-Language: en-US
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <9a25aaeb-98c1-4f21-8789-03582b8a4431@linaro.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20241004182535.GG4737@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,92 +101,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Neil
 
-On 07/10/24 13:43, Neil Armstrong wrote:
-> Hi Bhupesh, Neha Malcom Francis,
-> 
-> On 30/09/2024 14:44, Neil Armstrong wrote:
->> This serie regroups all the fixes and base enhancements required to
->> support the Qualcomm UFS controllers in U-Boot.
->>
->> This syncs headers & defines from Linux, and includes 2 set of
->> fixes that were sent separately:
->> - ufs: core: remove link_startup_again logic
->> - ufs: properly fix cache operations
->>
->> Without those 2 sets, UFS cannot initialize on Qualcomm controlers
->> since v5, and a numerous of Cache issues makes any UFS controller
->> fail to initialize.
->>
->> Since UFS core hasn't changed for a while, and since UFS is core
->> technology for the Qualcomm SoCs, I volunteer maintaininig the
->> UFS subsystem if Bhupesh & Neha Malcom Francis are ok with that.
->>
->> It has been reported to show regressions on:
 
-Both of the links are saying that there are "no regressions" seen.
-
->> - TI K3 platforms (j721s2, j721e, j7200, j784s4) [1]
->> - AMD platform (amd_versal2_virt_defconfig) [2]
+On 10/4/24 20:25, Tom Rini wrote:
+> On Thu, Oct 03, 2024 at 05:46:29PM +0200, Jerome Forissier wrote:
+>> Build and run qemu_arm64_lwip_defconfig in CI. This tests the lightweight
+>> IP (lwIP) implementation of the dhcp, tftpboot and ping commands.
 >>
->> [1] https://lore.kernel.org/all/38f599a8-7094-4a04-8ff6-96fc8b9d168a@ti.com/
->> [2] 
->> https://lore.kernel.org/all/SA1PR12MB869713CA620F99077B75EF0E98632@SA1PR12MB8697.namprd12.prod.outlook.com/
-> 
-> Is it ok for me to apply the patches ?
-> 
-> Thanks,
-> Neil
-> 
->>
->> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 >> ---
->> Changes in v3:
->> - Fixup patch 9
->> - Link to v2: 
->> https://lore.kernel.org/r/20240920-topic-ufs-enhancements-v2-0-65ae61e73eaa@linaro.org
->>
->> Changes in v2:
->> - Added review and tested-by tags
->> - Updated patch 12 message with more explanations
->> - Synced patch 9 again with Linux 6.11
->> - Updated patches 7, 8, 9 and 10 with informations about the origins of the 
->> changes
->> - Link to v1: 
->> https://lore.kernel.org/r/20240910-topic-ufs-enhancements-v1-0-3ee0bffacc64@linaro.org
->>
->> ---
->> Bhupesh Sharma (5):
->>        ufs/ufs.h: Add definition of 'ufshcd_rmwl()'
->>        ufs: Clear UECPA once due to LINERESET has happened during LINK_STARTUP
->>        ufs: Sync possible UFS Quirks with Linux UFS driver
->>        ufs: Add missing memory barriers
->>        ufs: Fix debug message in 'ufs_start'
->>
->> Marek Vasut (2):
->>        ufs: Add UFSHCD_QUIRK_BROKEN_64BIT_ADDRESS
->>        ufs: Add UFSHCD_QUIRK_HIBERN_FASTAUTO
->>
->> Neil Armstrong (6):
->>        ufs: allocate descriptors with size aligned with DMA_MINALIGN
->>        ufs: fix dcache flush and invalidate range calculation
->>        ufs: split flush and invalidate to only invalidate when required
->>        ufs: use dcache helpers for scsi_cmd data and only invalidate if necessary
->>        ufs: core: remove link_startup_again logic
->>        MAINTAINERS: Add myself to the list of UFS maintainers
->>
->>   MAINTAINERS       |   1 +
->>   drivers/ufs/ufs.c |  98 +++++++++++++++-----------
->>   drivers/ufs/ufs.h | 203 ++++++++++++++++++++++++++++++++++++++++++++++++------
->>   3 files changed, 241 insertions(+), 61 deletions(-)
->> ---
->> base-commit: ddbcafeb53e7093c58488596bfce6d8823777c3a
->> change-id: 20240910-topic-ufs-enhancements-fe8ef9ce39d8
->>
->> Best regards,
+>>  .azure-pipelines.yml | 7 +++++++
+>>  1 file changed, 7 insertions(+)
 > 
+> This should be in .gitlab-ci.yml too.
 
+Updated in v12.
+
+> Generally it's close enough to get
+> without testing (and using the linter if needed), but I'm sure Ilias can
+> push something through the tpm tree for testing if you want, and we
+> should get you added to source.denx.de (please go sign up) and access to
+> the -net tree, really, anyhow.
+
+I have registered on source.denx.de.
+
+Thanks Tom,
 -- 
-Thanking You
-Neha Malcom Francis
+Jerome
