@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8540CF887C
-	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 20:56:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5166CF8870
+	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 20:56:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7041C88D7E;
+	by phobos.denx.de (Postfix) with ESMTP id C61F988D97;
 	Mon,  7 Oct 2024 22:56:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="J2qn+tFz";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="igcFmjde";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63D2088D25; Mon,  7 Oct 2024 22:56:02 +0200 (CEST)
+ id B582C88D4A; Mon,  7 Oct 2024 22:56:04 +0200 (CEST)
 Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on2070d.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2613::70d])
+ (mail-vi1eur05on2072f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::72f])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 10BFD88D29
- for <u-boot@lists.denx.de>; Mon,  7 Oct 2024 22:56:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F59C88618
+ for <u-boot@lists.denx.de>; Mon,  7 Oct 2024 22:56:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=H29v/vYRGwsTLg/ypRW2CR3IprunACmfMfm5qEhHJI2ZYmr2o9Z8iGcmr3hNZ7vvlYPBiksyx7DA2Nh+BQD56uCNrsxYKk75eqs4dY6/HaBISQyE/nzCxGySkpKuCMA3nANnPjoCqpPMnfrzXEN0ava7ZYa/rhXCRzcHwpZE5BsJ4hgOKCfjO8dSabrz5yWdDpf/BAWYgInTQSXcO54QevF2Yme3aUo8Ukpzoud3LUaTEg5tQTCvpDsISEio++3en/09GRjFTmpVK3N39OH4LiPx0ID9+O9qnljKhRoxHT5Fjh+gf5HmOvIjwCHmB0EYj1wfyBX17gDSMaC8Fcae0g==
+ b=m/0p5wLilByINFeZRQeDQlecCN8nG4iwVG6kBjyO/omMqMYDvZyOLUA39Rt9b9r9+Ege/G9Fmj5QosFInXCKXeS34kW5s3HUojY4yZs5ii0PETaLWG1AOKg5UdL6WLwy0wOWNtE7qrk7YfNtrwfpz4NEyHg2JG15v9pEANguyf2gcfT1kEVr9KR5kCSuLOB/t7VSMiSpV46WRrtGTH1u28RCUK/zB+tQj6ty+KRbRBUUpV59NN/3Ya2tL5ql9RsRcbWzzkPHeLEUsbEUpjSNBnFV+/z2+nhnkFEhfc66/LbmVl9O+5CL6yxy7cMIhpsMpRYq1ago46OOdOSVVkEZ2A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=82R868Zmi0AyBMAG4qhHZLHpzeBbdCvMiOZOEegeDDE=;
- b=nIi9cgzAdbU24AyFqqob7IslZ7179h2CDSdDF4M1OT+sLWHBthkkddSUYALsWjWfSKP4YJkp+YKj+XJgCjinY5hpbiTuQhE6PCV5sPdJ7jzfCMZqMJUIhlnTt2r8cF0KND4+4msw9mY5gpOZQKZpWpISaN1tbn41ejUWs1W5LVhQrvFIi2Yh9PWRxIrg1f2xXm7FI9hI2C9YchS8T9LTZ+Qq2XuvvRK8JPIUUnooRybZOcrECAnlyhixy6DmP/i/wJhikdVVMSYqlCygqMrlHLn6GzkwzZDpXvxEdsP7RimUowSEI/tABWGdKVEvsIqsHKmjDJlambTWQ9GmpSNSoQ==
+ bh=4ojSuyDkqSAezgM+ZRwYsie5vYL4/5jxFNtlaPhB9l0=;
+ b=Eg28akKhG6F3Cyjdo+E2YpLWICdfCSFdL7ijVbSFk06i4jh9Wf3Xpw1AAHCCuVyZ+M1l16MQpmsjpuC27sJhbiuIWylEyvZlMesdDquneIR52lVedMDnRgX9r/FwMLMFFw/XUPKyJHtp4Lbn6lowYc57bb/fitVkUmrzq0MLERksDNWQtulhKSx2FU3d9+ohV4iNgpaIGtPngj1X61VOv+LYSCZhGB66MhX5+ZbzkNIfb3ZDafINiep0x6nhPZYI+XnXE214gWU970DYaTI4tgibn3evf9flKZYgyJpEIJVNMDXIuoOjLna9jvxRkDBfQBeC5EspUIdhwe2rCtsBoQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=82R868Zmi0AyBMAG4qhHZLHpzeBbdCvMiOZOEegeDDE=;
- b=J2qn+tFzRab7erlYaog+k/Q/0g7VCy8ebTjtjJE6pByvN7vVS2hgfHBYVZ1ey1gzpI9IbyPwS4ejbHJIexFf06PuhXsMApqq5eDVUuLnZ0m00WftwtUPD28GmGfSRH9sNKf/UwJIFRIFeUBbE2VL7J6qsMe2B6iIQgZysFMfqUf9Q9wGRTF/ps+GvMN2fAxjJwujK9ZVCsZHDwBoy3B8kFz+s2OWEHvAy3WmxGuiYIRyXTqzfvXWfK3KEgRJuoRsKtlouSZ8QGj+FtetAjvglKKmTYnInxBYnzwWycUS9UaMpRL5GHT/nbcXxeHQA5WPgaDDozUoARaVK4DoYOaBOw==
+ bh=4ojSuyDkqSAezgM+ZRwYsie5vYL4/5jxFNtlaPhB9l0=;
+ b=igcFmjdeuQMTskt5Mmjgpeve6XwfMufAz7vj91YPwr/gx03jqCw1QbHQ3rqzAMNXG1GcKv78pofCnyKqAGYHhkcKT9ZhN+qWbUayTydM+771RGpZhmu/DS41gXHeFKF05Epgkpi0G37bTu8DYPFP03TBXCvQrWYmW2zk/mcvJVrCCnZSNd7ZT+DKiMdjFCTEvJVswBc6g2Oryu6/v4coaiQ4pmqzRWw+hssXn8aTo1dXgWpala2E3PsSRvKbb6UIjY7nWrrVPDo2/USgeZtqd/ormi8e1sAKp8Mjzj8kO8LkAwuTjnTC0KSm/h+jclaRcDNylI143Bo398JRpJ7+CA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
  by PA4PR08MB7644.eurprd08.prod.outlook.com (2603:10a6:102:262::13)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8026.20; Mon, 7 Oct
- 2024 20:55:58 +0000
+ 2024 20:56:00 +0000
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0%2]) with mapi id 15.20.8026.020; Mon, 7 Oct 2024
- 20:55:58 +0000
+ 20:56:00 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Joe Hershberger <joe.hershberger@ni.com>,
@@ -68,10 +68,9 @@ To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>,
  Yasuharu Shibata <yasuharu.shibata@gmail.com>, u-boot@lists.denx.de
-Subject: [PATCH v10 03/13] net/tcp: put connection specific data into a
- tcp_stream structure
-Date: Mon,  7 Oct 2024 23:55:33 +0300
-Message-ID: <20241007205543.1632499-4-mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH v10 04/13] net/tcp: add connection info to tcp_stream structure
+Date: Mon,  7 Oct 2024 23:55:34 +0300
+Message-ID: <20241007205543.1632499-5-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241007205543.1632499-1-mikhail.kshevetskiy@iopsys.eu>
 References: <20241007205543.1632499-1-mikhail.kshevetskiy@iopsys.eu>
@@ -83,76 +82,76 @@ X-ClientProxiedBy: LO2P265CA0394.GBRP265.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|PA4PR08MB7644:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0e088fa8-7493-4e0b-1465-08dce71271b7
+X-MS-Office365-Filtering-Correlation-Id: 0cad9063-5798-418d-d05b-08dce71272d6
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|1800799024|52116014|376014|7416014|366016|921020|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?65JYjiq0o4SiAORiI5MEm0/L6d4DYlj/c4wO8n/n378S9RnZEtV0KyoRmxyX?=
- =?us-ascii?Q?6awf7IWTwSPRB9mzk6HMLSjp6IFeMKpE0dTOCMtDAnaFzv5y7qBAXZxrVmHM?=
- =?us-ascii?Q?9wWAv8uWjMpGwtfsyZQn7gwMRFUdX1dYtseytpuxT9b6+HZQHI+Nst7uHTaR?=
- =?us-ascii?Q?BMOhTI2dHFa7bF9vm3HrEvlq0tV4Hk28StxqL6guqsUdOklMAT3RFDOqBNSQ?=
- =?us-ascii?Q?QxpzsHbVTZ5PNNklzD459RNE2+N1PLN3QHz5wGDqgzYF8TEkt0tflEadTYKJ?=
- =?us-ascii?Q?iNsUb4LgFDXUdn1kweT2lKXRYLqq0Hr1sAfcOuu9g65mHk9MZtGK/F31UaoQ?=
- =?us-ascii?Q?ZMBYx4V7ZY+1SQtPuYpOy2Z91F7hffSTL5N2vjtp/gskSFBDqDuUmDSM5q1Y?=
- =?us-ascii?Q?9TD/ZZVKnwhuVG27t+0DW7fXqwsOhtbv61qLW68xaPr2xEIJnrAE7tqJb7rf?=
- =?us-ascii?Q?6jmFF8YPU2cNOh3MhYAkiss+ykGz5kCa7lV3mxK++TXA1L3CDhBp2hdhWEYA?=
- =?us-ascii?Q?DoBu5z0XaKjKzPo7X2pD9wCR6zFBczTILB7Rou2XLSoSehHdZT4QTl6CPCnJ?=
- =?us-ascii?Q?snnapdglgHnMoT4pGGs1W79I9YU19pySkDYxz7rifRTq9Boao9WM1Vr5j3Pd?=
- =?us-ascii?Q?StD+5K0JLEMBITLI4zbSPZHmODJR/MoZLgobm9aZ/uArYyxuKH9Qb7n03dou?=
- =?us-ascii?Q?L6aWRBwVeVDtwFi6+FHFijgs63PJBBIQuFCI6dkj3Q5+BDLu+35w9Y7gwAy1?=
- =?us-ascii?Q?sCCnht+JJOJzLTnzJ/XcATRM5NHd/bVgk1QUmtU00cne/1k+SW4ylteTtvLC?=
- =?us-ascii?Q?Xwc0d9jqc5m9hM2hWoosaiWUcUelfzYFTZMN8ru3MQNde+vTK8tev5s8xpX9?=
- =?us-ascii?Q?XHxDEKu5gpRBb4pK9rumogHA7XLJHFTGNX/vtStchgNsxHvLUX8DRdK25Q0W?=
- =?us-ascii?Q?qF7vw6PIkmEFYnARHIGQ7XDFR+FqTsFkK++e0Avf3xf8vIXG7NYAeLzXBXz4?=
- =?us-ascii?Q?NbBMnLteKPVlr0AsiX6Z1WAWAtMsCFRjCpZGE4TC9PzM7t84nCSqZg+v4RZI?=
- =?us-ascii?Q?mzif7IgwiG6lAt6GO0Ct22Z400FYxxHf4/wsrW1MAaRb/hToqFj3ZyEIEWH7?=
- =?us-ascii?Q?TW/M/vKOoRN78avriKavQIzjtsYk0yiQb5moVGGViJN6vTATgZ3M+v3Kn0PS?=
- =?us-ascii?Q?hVMXbO2EUEmCt3YXrUOsFUM7QizPLjgnSkoUbnKfUL3j4tEwNmyjufsawQN2?=
- =?us-ascii?Q?FD+KK77Eh5ncA7bawGO4T+j2aevBP/2tZL/Nqski5zwalHf/rMIKTxT/g7R4?=
- =?us-ascii?Q?bG9OTL8Pc47Eyuu/gdm8ap4tgbBK838HYEVM0HLXaDdQ/A=3D=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?S8uUMRbnNbhy0+06azS6vJne3YRmfkv2+e8EBrhz4DeT/LK3EwEqSkDGRsof?=
+ =?us-ascii?Q?18cfAWzBkyOhHIaS1GsCIvLtzMjJpAy2WBA/C2FPOntGX6RDokfsNpN+wIkd?=
+ =?us-ascii?Q?Rvh5DNqmQZ/3MGzWGqPmc8Kywpua3MtUyY0Tj1ZdmGPCSvMgT+ZxG4mZQFgh?=
+ =?us-ascii?Q?lmeZLDM1YLATuWjiZ74NizVdn6GOZvqcJUsSA6/1Lyzh85cWJAG6bJTNK7Bm?=
+ =?us-ascii?Q?cEsRLkhJBO++VgnteFEBf79enOu5EbZuPBunhTWAVm0DEVc/gtuH6MrKKijL?=
+ =?us-ascii?Q?RObkKpkz6FK5T+PF8A0TjLTBQZKury+Pn2IEaIHeynA9i8xnwvLdzeilOmIM?=
+ =?us-ascii?Q?3dhInbqLXi/uYURn1cRuDFX+e/CJyHGHltg9tC3f6uL5fbG/tqhuQF7CKZXl?=
+ =?us-ascii?Q?+hY+fanFPRIUFl6P+nUqncNR3N1Jr2X4Al+1qd4H4QcIBa/0sbjl6/Xvf1ox?=
+ =?us-ascii?Q?utnZGYHZwdl7lGtZP+JhhGBFtfkt6UY1bC+kkhpgKECiUbvyyqBMinrqODLu?=
+ =?us-ascii?Q?IDg88AYoDHqaicaYNf2z93z/o2PhvAzrdilDqmfAtfR2plEYVzWlvUN683xi?=
+ =?us-ascii?Q?PEfa/UOoxlamdTvMKM1QtyhwcX6AblkaACmS75aUzX1O4TNPRyUweSc2Hf9o?=
+ =?us-ascii?Q?9kTyAEGN4YYRz+QKcEH4KGbOoV2kgyOvwbNCoohPpkhygZydGuE4pBtQdJRF?=
+ =?us-ascii?Q?dbzvaL/xTfOM2w+NQ0tqahEshUqyKGRasHNknnRntL9YQZCwtIHdSsCb7/Tw?=
+ =?us-ascii?Q?+faKuCcBj825MKZ3aiUfzKml08THXR3Y1IuTjPhu2yUo5ETuY3VpZT8SnL0W?=
+ =?us-ascii?Q?+ARawXSIqU52pesodxSz3vvIzDJDMv2kyV6o7G3awtSzTFqwke5aEDZKt/Jz?=
+ =?us-ascii?Q?M14Urs4BjBb/0RxsQYPEoF/lYBIzEm5LIaC/4uf7ZD3eC1LKnYpvNWxj2Ukd?=
+ =?us-ascii?Q?S+1fkUOEgEgY1Ah27nohmaTwf9G/nju1wPRPWi2vQkVNJMGjHz9LFqorB1UU?=
+ =?us-ascii?Q?oTtCA8zXD4gt58OfpSmEvXarxrk/50aVXkwkOorx+w+wSk4eexqiRr6WcXGL?=
+ =?us-ascii?Q?4aB41+LH1mdb8EHW4z2TOWP+zY2PLZz05sEabDaE+fFTd2SdmYn9LDPQk/Fu?=
+ =?us-ascii?Q?s3cvx+Y7oAaswUx9UtndkQQlmUjLHGejF4vYXnzrZ9vVhtBfI1Y/VORKqopD?=
+ =?us-ascii?Q?LmSPYG7Ul70EYzUMBPAQ01ObwQQPmq+/SN3Nuw4t2YOxr+IOAhiyTAL0m02R?=
+ =?us-ascii?Q?j7k00fPGtpFTekokbpje21dekxx0zJ0eTaC8yJKLOq58l9PzLxpjwG6MIS0K?=
+ =?us-ascii?Q?dYTK3TvJyn5sxKEtiQbm0tiIRzIehXSbUu31fLqX4D51qw=3D=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(1800799024)(52116014)(376014)(7416014)(366016)(921020)(38350700014);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?w5WmqSo/mwxC1a0Jl4pRdtPlBFV5rFnYZiGqjOs46qFLwjucsz8y/8uAEePg?=
- =?us-ascii?Q?Z5Ho7hjR2S+9UlrG5v3Hk/MzV0JT2zLxM3ncgfeLORNGq6gkt4iUwSfRO6aA?=
- =?us-ascii?Q?AT++EmBcmlvmmUaoFoLwBPfzR1oSW1/FwOKL4vJMcMVYGC61ypcDNId3xK8e?=
- =?us-ascii?Q?+mcA6/Gw6TbHbnBuOE3P3thpU9r1iHm9XOeAVlKnJXTTUU3VNptmIVIqpmAz?=
- =?us-ascii?Q?+MxOwkm94P3ALx2VTy2LvJ7iOC9vputIL6wH8Tl+4OOSJ2nIoUgbbc6kkfdB?=
- =?us-ascii?Q?kWOoVgNlEqLzu2IgfK4+UquHwiMMFhl6xtvx7jHaRX+LLf5SPYydORoe/ll1?=
- =?us-ascii?Q?Ckxe3v5+dLkoLoFLVxqVYfVB8LUE+RevF+07RdrIMNgRVag8pzUrTnJTBbbu?=
- =?us-ascii?Q?RResETJk7S4nauTUnqonrhDJlrgiVEHtdZuA5W1J6fwuwVAkEhW+3wN2CFtg?=
- =?us-ascii?Q?8RlThvoa104US/Jgdrn4DQKiweetH3cXBKpBmKl2QptK3SFxhD9D9viN2evz?=
- =?us-ascii?Q?XZI7pRZP40rNKVcAeHbfKAUSvSvsFqlDui48EKKu6sHRDKuUUPqYex3yCKYX?=
- =?us-ascii?Q?bApuvvtcy5ytjD/lXu1kt3Q8Vq2TYIG5xso7GXxpk6pa1Qpd3Y8f4F+26DvP?=
- =?us-ascii?Q?dgYj31/rjVgiZF/g+er8VGCBxv29D3bTFqE00mUh4o0VfNwNuBp6S3zec/k+?=
- =?us-ascii?Q?PpI/teosT+/SUFDk4lp1FCdfNFrYqaqzLxT4fhki1dMjfdv6yj7jnWkX0niR?=
- =?us-ascii?Q?D8FkbxsAIOcu3mErmINb+9jiXGwH2+QgLTvKykSFp8xHZfThJQsoabTISj2F?=
- =?us-ascii?Q?2t8yhrqgqTJgDKPFIh+RXyoo+21AyboABpsn0ooOzia4iNgOrFRGP7MR623/?=
- =?us-ascii?Q?SfusvOOomaECCH3kKQpeZQ7+I6WKvfYLsD1pHG0PuZ3ODKRglshqB6JNSarE?=
- =?us-ascii?Q?erNs8ECUbk06iUGhzdo4AtjhauD/oRMqBbQHf8pNlniY4n4ZFHxo/EpWBf2J?=
- =?us-ascii?Q?QWFx0XJZ+CP9v96BeCOHm+fIVkAEUG0sco5dvgREF/BOaNHOiVpywZ4NcFzA?=
- =?us-ascii?Q?V84BNRcZMivYNe5uDl2xCkutgXNRo3iDsLVNiZzmpgMAt7RRGgXbRx1nmdTv?=
- =?us-ascii?Q?oq+YvIE+Ry51kAksJwDo+LAE/rY+MtvQz9svHphyMHffjHUHTCtaKn58J9g9?=
- =?us-ascii?Q?/0ts+LBUnHsOsI3xj4l7T6GeC4UQBGdMZNGi43Njp92gvnPq1WvDvwRUtItu?=
- =?us-ascii?Q?Ej9e/glKjT/RUWUK3s9JzFucT4BUF3tcofqu9lNk0uqbn1oh0oXkVCVSMa5f?=
- =?us-ascii?Q?4aGOwaKqUF4Zs5d6cnt9pl3Yca8GGXLINOCeSQdMD2EZ2fUAQBMwxLF1FsNv?=
- =?us-ascii?Q?D27K4pjZL/3S6thb/tuKaCV/MWEi+Dipj184In69F+h5I1LM0U0JrwcGM5dr?=
- =?us-ascii?Q?zFItgA4Pz5Q9hp8H7/OHZVqAWUdDPk0EWps3vnGUfSlW46B8oHwYvXvvgqhS?=
- =?us-ascii?Q?M9l6K5YR0uWipVaFvfHR1uVipr+2gVhqlCnlWKc/YItPRxkwhKZ3q+90pHtz?=
- =?us-ascii?Q?9S8oc4BaC6NGiJdCdb25x2psBohpEXJFeMygFNLQorycXHUg1IVAAARHAYNA?=
- =?us-ascii?Q?+A1MiwywYko2l36ApejJVUM=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?c6h+N/JCfZPtDTWp0wisFUFI1SVENS/QdHk/GfoOwC10JNfcAD5orfgV04m9?=
+ =?us-ascii?Q?U4avo9E55vzo3RPC7CmCGtnqnmsLiTWIwTEcn0gsjKMiyLnIdzNW18CPykaF?=
+ =?us-ascii?Q?1AAhhmtBcs55A7emoe3bot6t+5MSdYu7AjVpUW9HXPSWDwtF8Oq1N4b54Z+p?=
+ =?us-ascii?Q?c9YrOmmd84T4Lrw2LAd+4k1nH0oSjZoQGrUXIby4TuFjemEGO/lnkpAC8xwL?=
+ =?us-ascii?Q?geBLamIBwfSy/HDS0jItE9HMMQgGMqhqAYJHz1xS5TI8Arzq4f15Ds0jnxNP?=
+ =?us-ascii?Q?Io9Yxa7vXww25Z/l1kE1AmZBDhmm/c5XQ4E0WWZb6GNL3cnoiTGOxQRxpfw8?=
+ =?us-ascii?Q?nY7mOy4vwsQClaK0p1Tn1E87gCfXajJ2FlnFEz47/d8A1dbAi7ZhrXolTdBe?=
+ =?us-ascii?Q?sacIJrwTOt9F2BKShdCKw0jLfAXXj0FeRU5oquHgFY1U5Q1yWYEVfiIJkNur?=
+ =?us-ascii?Q?uFrveVE7emCKMrhv0VPZMLdng4EzkB8mQQolyhFqveyLqrqJv3ldTAHwwzDI?=
+ =?us-ascii?Q?9qz0CoFCNLx6g9LYd6BN0BJArJagfZ6WCjD7sO/L3/kgXTBdrA7q3ZE3Cf+F?=
+ =?us-ascii?Q?xgV1QEzwkFK+vPi9Lw66SGWLDNcsdCz/w7udKGfL7aINj2L5vgEPWswN1EYK?=
+ =?us-ascii?Q?QT/LvQIhWZ8MVvUdbk6qTHyNFpxt9bJQy0Y6/OBT7JQ4Z9+7Ysf8FMkxGS12?=
+ =?us-ascii?Q?zpQOuZV7hBhiPQBJ7T0xeS0GrVhy/yj+/XoSuuWKITb5BacDuAVxkTi/V5g0?=
+ =?us-ascii?Q?wqjJZ0C2T/0L+6BXqY6pyz07HLcYLH6W/sNyPgL5eZ0WEuCT9kXcNvge0LtP?=
+ =?us-ascii?Q?XcHf+liFvFi82JfTOKeiRn7vB85WIeNwa+1AvMcLBvk3VbEgZLacaYJ9mm2B?=
+ =?us-ascii?Q?EgRKDrBd0X37I2m+4N+KO+HgR7ibTuOudpbqw5/FZuLnfOGYvt8PAPSDhxfC?=
+ =?us-ascii?Q?37iWjnrILFofFcFibaATiCRP32OzYW0Jt3OE5tf0sGrIkEjw1MRcVRosunH9?=
+ =?us-ascii?Q?cpIHYt7PtU+5hcTdtCBaPm2jq+8RfDn/rxoE/SbCpBDZl8Hsfg1TOZ+8oZyI?=
+ =?us-ascii?Q?0NtmaxUVvlk2NqDRdz5OWFjZmFiDLYFpNcvWd9uRQ1VOzot8LFhY2P5n6aer?=
+ =?us-ascii?Q?xWZssx02N1gSauZBmvObU3Z0jPLN1N5MkQauZrErlEnnnTXLjTixMU/GDPa6?=
+ =?us-ascii?Q?U+vJW0kz9rUhHtjEhkKzn+tQpQzAXvjGBTRngrSanG8MX2mr/kZ0DjiUr/Uq?=
+ =?us-ascii?Q?axjeu8Xyr6S/rEudiUCNGnIeaTZTGaSr9MpkRNypTeTh1XDgBPqPsIhi0uDa?=
+ =?us-ascii?Q?U/ts1Xo+jrlY7OoDsCeLuH33bouPiTualQo55E9lw8vf91TIyl8VUeTianov?=
+ =?us-ascii?Q?SNliU9VJgFIREttjN9KIoxQxHNvZ750JPdPcWe7nVep4KLz6zkA7w4Zvu27y?=
+ =?us-ascii?Q?Tnl6aVhrrvvoxHw0RCkxnf+3fyrt3icJrW0ndgVU7+cQhuG10ncBsUBQ5U8Y?=
+ =?us-ascii?Q?21VsRINFSEdHl5gaRS7StgQtQ1WB3kPAe0zp/BCYLIvYPKvvxEeBQTwjd+ko?=
+ =?us-ascii?Q?AllVrx8P6cqGcl4pLnDo1JAYm7Tzht7Kv8Rls9xRLFGbKBY9m4UK+q9YChuP?=
+ =?us-ascii?Q?uw=3D=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0e088fa8-7493-4e0b-1465-08dce71271b7
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0cad9063-5798-418d-d05b-08dce71272d6
 X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Oct 2024 20:55:58.5032 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Oct 2024 20:56:00.3411 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: vs8mfXN8aW/V6OkYRH2yrIdttf8chDTKGHhIWtgk9GzeSwKZxLuycNVkbs5tnkjiPM5oZFz069QD27Ggk1o1xWE9BwxTlq52slozZh1xT5Y=
+X-MS-Exchange-CrossTenant-UserPrincipalName: KYeSL8ZNZuICFDKETDKJsVsZJdxdQkaa2fMVBz/tcf8EuTabi0hRQcs0FVMt7EtDowJ/Hauj0UZS6hGlpy21oEWUa5dkdrY2qZdQCTiC8rI=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR08MB7644
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -170,670 +169,751 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-no functional changes
+Changes:
+ * Avoid use net_server_ip in tcp code, use tcp_stream data instead
+ * Ignore packets from other connections if connection already created.
+   This prevents us from connection break caused by other tcp stream.
 
 Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- include/net/tcp.h |  37 +++++++-
- net/net.c         |  11 ++-
- net/tcp.c         | 231 +++++++++++++++++++++++-----------------------
- net/wget.c        |   3 +-
- 4 files changed, 163 insertions(+), 119 deletions(-)
+ include/net.h      |   5 +-
+ include/net/tcp.h  |  57 +++++++++++++++++---
+ net/fastboot_tcp.c |  50 +++++++++--------
+ net/net.c          |  12 ++---
+ net/tcp.c          | 131 ++++++++++++++++++++++++++++++++++-----------
+ net/wget.c         |  52 +++++++-----------
+ 6 files changed, 204 insertions(+), 103 deletions(-)
 
+diff --git a/include/net.h b/include/net.h
+index bb2ae20f52a..b0ce13e0a9d 100644
+--- a/include/net.h
++++ b/include/net.h
+@@ -667,6 +667,7 @@ int net_send_ip_packet(uchar *ether, struct in_addr dest, int dport, int sport,
+ /**
+  * net_send_tcp_packet() - Transmit TCP packet.
+  * @payload_len: length of payload
++ * @dhost: Destination host
+  * @dport: Destination TCP port
+  * @sport: Source TCP port
+  * @action: TCP action to be performed
+@@ -675,8 +676,8 @@ int net_send_ip_packet(uchar *ether, struct in_addr dest, int dport, int sport,
+  *
+  * Return: 0 on success, other value on failure
+  */
+-int net_send_tcp_packet(int payload_len, int dport, int sport, u8 action,
+-			u32 tcp_seq_num, u32 tcp_ack_num);
++int net_send_tcp_packet(int payload_len, struct in_addr dhost, int dport,
++			int sport, u8 action, u32 tcp_seq_num, u32 tcp_ack_num);
+ int net_send_udp_packet(uchar *ether, struct in_addr dest, int dport,
+ 			int sport, int payload_len);
+ 
 diff --git a/include/net/tcp.h b/include/net/tcp.h
-index c29d4ce24a7..14aee64cb1c 100644
+index 14aee64cb1c..f224d0cae2f 100644
 --- a/include/net/tcp.h
 +++ b/include/net/tcp.h
-@@ -277,9 +277,40 @@ enum tcp_state {
- 	TCP_FIN_WAIT_2
+@@ -279,6 +279,9 @@ enum tcp_state {
+ 
+ /**
+  * struct tcp_stream - TCP data stream structure
++ * @rhost:		Remote host, network byte order
++ * @rport:		Remote port, host byte order
++ * @lport:		Local port, host byte order
+  *
+  * @state:		TCP connection state
+  *
+@@ -291,6 +294,10 @@ enum tcp_state {
+  * @lost:		Used for SACK
+  */
+ struct tcp_stream {
++	struct in_addr	rhost;
++	u16		rport;
++	u16		lport;
++
+ 	/* TCP connection state */
+ 	enum tcp_state	state;
+ 
+@@ -305,16 +312,53 @@ struct tcp_stream {
+ 	struct tcp_sack_v lost;
  };
  
--enum tcp_state tcp_get_tcp_state(void);
--void tcp_set_tcp_state(enum tcp_state new_state);
--int tcp_set_tcp_header(uchar *pkt, int dport, int sport, int payload_len,
-+/**
-+ * struct tcp_stream - TCP data stream structure
+-struct tcp_stream *tcp_stream_get(void);
++void tcp_init(void);
++
++typedef int tcp_incoming_filter(struct in_addr rhost,
++				u16 rport, u16 sport);
++
++/*
++ * This function sets user callback used to accept/drop incoming
++ * connections. Callback should:
++ *  + Check TCP stream endpoint and make connection verdict
++ *    - return non-zero value to accept connection
++ *    - return zero to drop connection
 + *
-+ * @state:		TCP connection state
-+ *
-+ * @seq_init:		Initial receive sequence number
-+ * @ack_edge:		Receive next
-+ *
-+ * @loc_timestamp:	Local timestamp
-+ * @rmt_timestamp:	Remote timestamp
-+ *
-+ * @lost:		Used for SACK
++ * WARNING: If callback is NOT defined, all incoming connections
++ *          will be dropped.
 + */
-+struct tcp_stream {
-+	/* TCP connection state */
-+	enum tcp_state	state;
++void tcp_set_incoming_filter(tcp_incoming_filter *filter);
 +
-+	u32		seq_init;
-+	u32		ack_edge;
++/*
++ * tcp_stream_get -- Get or create TCP stream
++ * @is_new:	if non-zero and no stream found, then create a new one
++ * @rhost:	Remote host, network byte order
++ * @rport:	Remote port, host byte order
++ * @lport:	Local port, host byte order
++ *
++ * Returns: TCP stream structure or NULL (if not found/created)
++ */
++struct tcp_stream *tcp_stream_get(int is_new, struct in_addr rhost,
++				  u16 rport, u16 lport);
 +
-+	/* TCP option timestamp */
-+	u32		loc_timestamp;
-+	u32		rmt_timestamp;
++/*
++ * tcp_stream_connect -- Create new TCP stream for remote connection.
++ * @rhost:	Remote host, network byte order
++ * @rport:	Remote port, host byte order
++ *
++ * Returns: TCP new stream structure or NULL (if not created).
++ *          Random local port will be used.
++ */
++struct tcp_stream *tcp_stream_connect(struct in_addr rhost, u16 rport);
 +
-+	/* TCP sliding window control used to request re-TX */
-+	struct tcp_sack_v lost;
-+};
-+
-+struct tcp_stream *tcp_stream_get(void);
-+
-+enum tcp_state tcp_get_tcp_state(struct tcp_stream *tcp);
-+void tcp_set_tcp_state(struct tcp_stream *tcp, enum tcp_state new_state);
-+int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int dport,
-+		       int sport, int payload_len,
++enum tcp_state tcp_stream_get_state(struct tcp_stream *tcp);
+ 
+-enum tcp_state tcp_get_tcp_state(struct tcp_stream *tcp);
+-void tcp_set_tcp_state(struct tcp_stream *tcp, enum tcp_state new_state);
+-int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int dport,
+-		       int sport, int payload_len,
++int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int payload_len,
  		       u8 action, u32 tcp_seq_num, u32 tcp_ack_num);
  
  /**
+  * rxhand_tcp() - An incoming packet handler.
++ * @tcp: TCP stream
+  * @pkt: pointer to the application packet
+  * @dport: destination TCP port
+  * @sip: source IP address
+@@ -324,8 +368,7 @@ int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int dport,
+  * @action: TCP action (SYN, ACK, FIN, etc)
+  * @len: packet length
+  */
+-typedef void rxhand_tcp(uchar *pkt, u16 dport,
+-			struct in_addr sip, u16 sport,
++typedef void rxhand_tcp(struct tcp_stream *tcp, uchar *pkt,
+ 			u32 tcp_seq_num, u32 tcp_ack_num,
+ 			u8 action, unsigned int len);
+ void tcp_set_tcp_handler(rxhand_tcp *f);
+diff --git a/net/fastboot_tcp.c b/net/fastboot_tcp.c
+index d1fccbc7238..4d34fdc5a45 100644
+--- a/net/fastboot_tcp.c
++++ b/net/fastboot_tcp.c
+@@ -8,14 +8,14 @@
+ #include <net/fastboot_tcp.h>
+ #include <net/tcp.h>
+ 
+-static char command[FASTBOOT_COMMAND_LEN] = {0};
+-static char response[FASTBOOT_RESPONSE_LEN] = {0};
++#define FASTBOOT_TCP_PORT	5554
++
++static char command[FASTBOOT_COMMAND_LEN];
++static char response[FASTBOOT_RESPONSE_LEN];
+ 
+ static const unsigned short handshake_length = 4;
+ static const uchar *handshake = "FB01";
+ 
+-static u16 curr_sport;
+-static u16 curr_dport;
+ static u32 curr_tcp_seq_num;
+ static u32 curr_tcp_ack_num;
+ static unsigned int curr_request_len;
+@@ -25,34 +25,37 @@ static enum fastboot_tcp_state {
+ 	FASTBOOT_DISCONNECTING
+ } state = FASTBOOT_CLOSED;
+ 
+-static void fastboot_tcp_answer(u8 action, unsigned int len)
++static void fastboot_tcp_answer(struct tcp_stream *tcp, u8 action,
++				unsigned int len)
+ {
+ 	const u32 response_seq_num = curr_tcp_ack_num;
+ 	const u32 response_ack_num = curr_tcp_seq_num +
+ 		  (curr_request_len > 0 ? curr_request_len : 1);
+ 
+-	net_send_tcp_packet(len, htons(curr_sport), htons(curr_dport),
++	net_send_tcp_packet(len, tcp->rhost, tcp->rport, tcp->lport,
+ 			    action, response_seq_num, response_ack_num);
+ }
+ 
+-static void fastboot_tcp_reset(void)
++static void fastboot_tcp_reset(struct tcp_stream *tcp)
+ {
+-	fastboot_tcp_answer(TCP_RST, 0);
++	fastboot_tcp_answer(tcp, TCP_RST, 0);
+ 	state = FASTBOOT_CLOSED;
+ }
+ 
+-static void fastboot_tcp_send_packet(u8 action, const uchar *data, unsigned int len)
++static void fastboot_tcp_send_packet(struct tcp_stream *tcp, u8 action,
++				     const uchar *data, unsigned int len)
+ {
+ 	uchar *pkt = net_get_async_tx_pkt_buf();
+ 
+ 	memset(pkt, '\0', PKTSIZE);
+ 	pkt += net_eth_hdr_size() + IP_TCP_HDR_SIZE + TCP_TSOPT_SIZE + 2;
+ 	memcpy(pkt, data, len);
+-	fastboot_tcp_answer(action, len);
++	fastboot_tcp_answer(tcp, action, len);
+ 	memset(pkt, '\0', PKTSIZE);
+ }
+ 
+-static void fastboot_tcp_send_message(const char *message, unsigned int len)
++static void fastboot_tcp_send_message(struct tcp_stream *tcp,
++				      const char *message, unsigned int len)
+ {
+ 	__be64 len_be = __cpu_to_be64(len);
+ 	uchar *pkt = net_get_async_tx_pkt_buf();
+@@ -63,12 +66,11 @@ static void fastboot_tcp_send_message(const char *message, unsigned int len)
+ 	memcpy(pkt, &len_be, 8);
+ 	pkt += 8;
+ 	memcpy(pkt, message, len);
+-	fastboot_tcp_answer(TCP_ACK | TCP_PUSH, len + 8);
++	fastboot_tcp_answer(tcp, TCP_ACK | TCP_PUSH, len + 8);
+ 	memset(pkt, '\0', PKTSIZE);
+ }
+ 
+-static void fastboot_tcp_handler_ipv4(uchar *pkt, u16 dport,
+-				      struct in_addr sip, u16 sport,
++static void fastboot_tcp_handler_ipv4(struct tcp_stream *tcp, uchar *pkt,
+ 				      u32 tcp_seq_num, u32 tcp_ack_num,
+ 				      u8 action, unsigned int len)
+ {
+@@ -77,8 +79,6 @@ static void fastboot_tcp_handler_ipv4(uchar *pkt, u16 dport,
+ 	u8 tcp_fin = action & TCP_FIN;
+ 	u8 tcp_push = action & TCP_PUSH;
+ 
+-	curr_sport = sport;
+-	curr_dport = dport;
+ 	curr_tcp_seq_num = tcp_seq_num;
+ 	curr_tcp_ack_num = tcp_ack_num;
+ 	curr_request_len = len;
+@@ -89,17 +89,17 @@ static void fastboot_tcp_handler_ipv4(uchar *pkt, u16 dport,
+ 			if (len != handshake_length ||
+ 			    strlen(pkt) != handshake_length ||
+ 			    memcmp(pkt, handshake, handshake_length) != 0) {
+-				fastboot_tcp_reset();
++				fastboot_tcp_reset(tcp);
+ 				break;
+ 			}
+-			fastboot_tcp_send_packet(TCP_ACK | TCP_PUSH,
++			fastboot_tcp_send_packet(tcp, TCP_ACK | TCP_PUSH,
+ 						 handshake, handshake_length);
+ 			state = FASTBOOT_CONNECTED;
+ 		}
+ 		break;
+ 	case FASTBOOT_CONNECTED:
+ 		if (tcp_fin) {
+-			fastboot_tcp_answer(TCP_FIN | TCP_ACK, 0);
++			fastboot_tcp_answer(tcp, TCP_FIN | TCP_ACK, 0);
+ 			state = FASTBOOT_DISCONNECTING;
+ 			break;
+ 		}
+@@ -111,12 +111,12 @@ static void fastboot_tcp_handler_ipv4(uchar *pkt, u16 dport,
+ 
+ 			// Only single packet messages are supported ATM
+ 			if (strlen(pkt) != command_size) {
+-				fastboot_tcp_reset();
++				fastboot_tcp_reset(tcp);
+ 				break;
+ 			}
+ 			strlcpy(command, pkt, len + 1);
+ 			fastboot_command_id = fastboot_handle_command(command, response);
+-			fastboot_tcp_send_message(response, strlen(response));
++			fastboot_tcp_send_message(tcp, response, strlen(response));
+ 			fastboot_handle_boot(fastboot_command_id,
+ 					     strncmp("OKAY", response, 4) == 0);
+ 		}
+@@ -129,17 +129,21 @@ static void fastboot_tcp_handler_ipv4(uchar *pkt, u16 dport,
+ 
+ 	memset(command, 0, FASTBOOT_COMMAND_LEN);
+ 	memset(response, 0, FASTBOOT_RESPONSE_LEN);
+-	curr_sport = 0;
+-	curr_dport = 0;
+ 	curr_tcp_seq_num = 0;
+ 	curr_tcp_ack_num = 0;
+ 	curr_request_len = 0;
+ }
+ 
++static int incoming_filter(struct in_addr rhost, u16 rport, u16 lport)
++{
++	return (lport == FASTBOOT_TCP_PORT);
++}
++
+ void fastboot_tcp_start_server(void)
+ {
+ 	printf("Using %s device\n", eth_get_name());
+ 	printf("Listening for fastboot command on tcp %pI4\n", &net_ip);
+ 
++	tcp_set_incoming_filter(incoming_filter);
+ 	tcp_set_tcp_handler(fastboot_tcp_handler_ipv4);
+ }
 diff --git a/net/net.c b/net/net.c
-index 1e0b7c85624..1bbf0556cef 100644
+index 1bbf0556cef..c95a40f1a2b 100644
 --- a/net/net.c
 +++ b/net/net.c
 @@ -419,7 +419,7 @@ int net_init(void)
  		/* Only need to setup buffer pointers once. */
  		first_call = 0;
  		if (IS_ENABLED(CONFIG_PROT_TCP))
--			tcp_set_tcp_state(TCP_CLOSED);
-+			tcp_set_tcp_state(tcp_stream_get(), TCP_CLOSED);
+-			tcp_set_tcp_state(tcp_stream_get(), TCP_CLOSED);
++			tcp_init();
  	}
  
  	return net_init_loop();
-@@ -920,6 +920,9 @@ int net_send_ip_packet(uchar *ether, struct in_addr dest, int dport, int sport,
- 	uchar *pkt;
- 	int eth_hdr_size;
- 	int pkt_hdr_size;
-+#if defined(CONFIG_PROT_TCP)
-+	struct tcp_stream *tcp;
-+#endif
+@@ -904,10 +904,10 @@ int net_send_udp_packet(uchar *ether, struct in_addr dest, int dport, int sport,
+ }
  
- 	/* make sure the net_tx_packet is initialized (net_init() was called) */
- 	assert(net_tx_packet != NULL);
-@@ -946,8 +949,12 @@ int net_send_ip_packet(uchar *ether, struct in_addr dest, int dport, int sport,
+ #if defined(CONFIG_PROT_TCP)
+-int net_send_tcp_packet(int payload_len, int dport, int sport, u8 action,
+-			u32 tcp_seq_num, u32 tcp_ack_num)
++int net_send_tcp_packet(int payload_len, struct in_addr dhost, int dport,
++			int sport, u8 action, u32 tcp_seq_num, u32 tcp_ack_num)
+ {
+-	return net_send_ip_packet(net_server_ethaddr, net_server_ip, dport,
++	return net_send_ip_packet(net_server_ethaddr, dhost, dport,
+ 				  sport, payload_len, IPPROTO_TCP, action,
+ 				  tcp_seq_num, tcp_ack_num);
+ }
+@@ -949,12 +949,12 @@ int net_send_ip_packet(uchar *ether, struct in_addr dest, int dport, int sport,
  		break;
  #if defined(CONFIG_PROT_TCP)
  	case IPPROTO_TCP:
-+		tcp = tcp_stream_get();
-+		if (tcp == NULL)
-+			return -EINVAL;
-+
+-		tcp = tcp_stream_get();
++		tcp = tcp_stream_get(0, dest, dport, sport);
+ 		if (tcp == NULL)
+ 			return -EINVAL;
+ 
  		pkt_hdr_size = eth_hdr_size
--			+ tcp_set_tcp_header(pkt + eth_hdr_size, dport, sport,
-+			+ tcp_set_tcp_header(tcp, pkt + eth_hdr_size, dport, sport,
+-			+ tcp_set_tcp_header(tcp, pkt + eth_hdr_size, dport, sport,
++			+ tcp_set_tcp_header(tcp, pkt + eth_hdr_size,
  					     payload_len, action, tcp_seq_num,
  					     tcp_ack_num);
  		break;
 diff --git a/net/tcp.c b/net/tcp.c
-index 724536cb352..6646f171b83 100644
+index 6646f171b83..0c32c5d7c92 100644
 --- a/net/tcp.c
 +++ b/net/tcp.c
-@@ -24,19 +24,8 @@
- #include <net.h>
- #include <net/tcp.h>
+@@ -26,6 +26,7 @@
  
--/*
-- * TCP sliding window  control used by us to request re-TX
-- */
--static struct tcp_sack_v tcp_lost;
--
--/* TCP option timestamp */
--static u32 loc_timestamp;
--static u32 rmt_timestamp;
--
--static u32 tcp_seq_init;
--static u32 tcp_ack_edge;
--
  static int tcp_activity_count;
-+static struct tcp_stream tcp_stream;
+ static struct tcp_stream tcp_stream;
++static tcp_incoming_filter *incoming_filter;
  
  /*
   * TCP lengths are stored as a rounded up number of 32 bit words.
-@@ -48,9 +37,6 @@ static int tcp_activity_count;
- #define SHIFT_TO_TCPHDRLEN_FIELD(x) ((x) << 4)
- #define GET_TCP_HDR_LEN_IN_BYTES(x) ((x) >> 2)
- 
--/* TCP connection state */
--static enum tcp_state current_tcp_state;
--
+@@ -40,40 +41,95 @@ static struct tcp_stream tcp_stream;
  /* Current TCP RX packet handler */
  static rxhand_tcp *tcp_packet_handler;
  
-@@ -60,22 +46,30 @@ static inline s32 tcp_seq_cmp(u32 a, u32 b)
- }
- 
- /**
-- * tcp_get_tcp_state() - get current TCP state
-+ * tcp_get_tcp_state() - get TCP stream state
-+ * @tcp: tcp stream
-  *
-- * Return: Current TCP state
-+ * Return: TCP stream state
-  */
--enum tcp_state tcp_get_tcp_state(void)
-+enum tcp_state tcp_get_tcp_state(struct tcp_stream *tcp)
- {
--	return current_tcp_state;
-+	return tcp->state;
- }
- 
- /**
-- * tcp_set_tcp_state() - set current TCP state
-+ * tcp_set_tcp_state() - set TCP stream state
-+ * @tcp: tcp stream
-  * @new_state: new TCP state
-  */
--void tcp_set_tcp_state(enum tcp_state new_state)
-+void tcp_set_tcp_state(struct tcp_stream *tcp,
-+		       enum tcp_state new_state)
- {
--	current_tcp_state = new_state;
-+	tcp->state = new_state;
++#define RANDOM_PORT_START 1024
++#define RANDOM_PORT_RANGE 0x4000
++
++/**
++ * random_port() - make port a little random (1024-17407)
++ *
++ * Return: random port number from 1024 to 17407
++ *
++ * This keeps the math somewhat trivial to compute, and seems to work with
++ * all supported protocols/clients/servers
++ */
++static uint random_port(void)
++{
++	return RANDOM_PORT_START + (get_timer(0) % RANDOM_PORT_RANGE);
 +}
 +
-+struct tcp_stream *tcp_stream_get(void)
-+{
-+	return &tcp_stream;
+ static inline s32 tcp_seq_cmp(u32 a, u32 b)
+ {
+ 	return (s32)(a - b);
  }
  
- static void dummy_handler(uchar *pkt, u16 dport,
-@@ -138,29 +132,30 @@ u16 tcp_set_pseudo_header(uchar *pkt, struct in_addr src, struct in_addr dest,
- 
  /**
-  * net_set_ack_options() - set TCP options in acknowledge packets
-+ * @tcp: tcp stream
-  * @b: the packet
+- * tcp_get_tcp_state() - get TCP stream state
++ * tcp_stream_get_state() - get TCP stream state
+  * @tcp: tcp stream
   *
-  * Return: TCP header length
+  * Return: TCP stream state
   */
--int net_set_ack_options(union tcp_build_pkt *b)
-+int net_set_ack_options(struct tcp_stream *tcp, union tcp_build_pkt *b)
+-enum tcp_state tcp_get_tcp_state(struct tcp_stream *tcp)
++enum tcp_state tcp_stream_get_state(struct tcp_stream *tcp)
  {
- 	b->sack.hdr.tcp_hlen = SHIFT_TO_TCPHDRLEN_FIELD(LEN_B_TO_DW(TCP_HDR_SIZE));
- 
- 	b->sack.t_opt.kind = TCP_O_TS;
- 	b->sack.t_opt.len = TCP_OPT_LEN_A;
--	b->sack.t_opt.t_snd = htons(loc_timestamp);
--	b->sack.t_opt.t_rcv = rmt_timestamp;
-+	b->sack.t_opt.t_snd = htons(tcp->loc_timestamp);
-+	b->sack.t_opt.t_rcv = tcp->rmt_timestamp;
- 	b->sack.sack_v.kind = TCP_1_NOP;
- 	b->sack.sack_v.len = 0;
- 
- 	if (IS_ENABLED(CONFIG_PROT_TCP_SACK)) {
--		if (tcp_lost.len > TCP_OPT_LEN_2) {
-+		if (tcp->lost.len > TCP_OPT_LEN_2) {
- 			debug_cond(DEBUG_DEV_PKT, "TCP ack opt lost.len %x\n",
--				   tcp_lost.len);
--			b->sack.sack_v.len = tcp_lost.len;
-+				   tcp->lost.len);
-+			b->sack.sack_v.len = tcp->lost.len;
- 			b->sack.sack_v.kind = TCP_V_SACK;
--			b->sack.sack_v.hill[0].l = htonl(tcp_lost.hill[0].l);
--			b->sack.sack_v.hill[0].r = htonl(tcp_lost.hill[0].r);
-+			b->sack.sack_v.hill[0].l = htonl(tcp->lost.hill[0].l);
-+			b->sack.sack_v.hill[0].r = htonl(tcp->lost.hill[0].r);
- 
- 			/*
- 			 * These SACK structures are initialized with NOPs to
-@@ -168,17 +163,17 @@ int net_set_ack_options(union tcp_build_pkt *b)
- 			 * SACK structures used for both header padding and
- 			 * internally.
- 			 */
--			b->sack.sack_v.hill[1].l = htonl(tcp_lost.hill[1].l);
--			b->sack.sack_v.hill[1].r = htonl(tcp_lost.hill[1].r);
--			b->sack.sack_v.hill[2].l = htonl(tcp_lost.hill[2].l);
--			b->sack.sack_v.hill[2].r = htonl(tcp_lost.hill[2].r);
-+			b->sack.sack_v.hill[1].l = htonl(tcp->lost.hill[1].l);
-+			b->sack.sack_v.hill[1].r = htonl(tcp->lost.hill[1].r);
-+			b->sack.sack_v.hill[2].l = htonl(tcp->lost.hill[2].l);
-+			b->sack.sack_v.hill[2].r = htonl(tcp->lost.hill[2].r);
- 			b->sack.sack_v.hill[3].l = TCP_O_NOP;
- 			b->sack.sack_v.hill[3].r = TCP_O_NOP;
- 		}
- 
- 		b->sack.hdr.tcp_hlen = SHIFT_TO_TCPHDRLEN_FIELD(ROUND_TCPHDR_LEN(TCP_HDR_SIZE +
- 										 TCP_TSOPT_SIZE +
--										 tcp_lost.len));
-+										 tcp->lost.len));
- 	} else {
- 		b->sack.sack_v.kind = 0;
- 		b->sack.hdr.tcp_hlen = SHIFT_TO_TCPHDRLEN_FIELD(ROUND_TCPHDR_LEN(TCP_HDR_SIZE +
-@@ -194,13 +189,14 @@ int net_set_ack_options(union tcp_build_pkt *b)
+ 	return tcp->state;
  }
  
  /**
-- * net_set_ack_options() - set TCP options in SYN packets
-+ * net_set_syn_options() - set TCP options in SYN packets
-+ * @tcp: tcp stream
-  * @b: the packet
+- * tcp_set_tcp_state() - set TCP stream state
++ * tcp_stream_set_state() - set TCP stream state
+  * @tcp: tcp stream
+  * @new_state: new TCP state
   */
--void net_set_syn_options(union tcp_build_pkt *b)
-+void net_set_syn_options(struct tcp_stream *tcp, union tcp_build_pkt *b)
+-void tcp_set_tcp_state(struct tcp_stream *tcp,
+-		       enum tcp_state new_state)
++static void tcp_stream_set_state(struct tcp_stream *tcp,
++				 enum tcp_state new_state)
  {
- 	if (IS_ENABLED(CONFIG_PROT_TCP_SACK))
--		tcp_lost.len = 0;
-+		tcp->lost.len = 0;
+ 	tcp->state = new_state;
+ }
  
- 	b->ip.hdr.tcp_hlen = 0xa0;
+-struct tcp_stream *tcp_stream_get(void)
++void tcp_init(void)
++{
++	incoming_filter = NULL;
++	tcp_stream.state = TCP_CLOSED;
++}
++
++void tcp_set_incoming_filter(tcp_incoming_filter *filter)
++{
++	incoming_filter = filter;
++}
++
++static struct tcp_stream *tcp_stream_add(struct in_addr rhost,
++					 u16 rport, u16 lport)
++{
++	struct tcp_stream *tcp = &tcp_stream;
++
++	if (tcp->state != TCP_CLOSED)
++		return NULL;
++
++	memset(tcp, 0, sizeof(struct tcp_stream));
++	tcp->rhost.s_addr = rhost.s_addr;
++	tcp->rport = rport;
++	tcp->lport = lport;
++	tcp->state = TCP_CLOSED;
++	tcp->lost.len = TCP_OPT_LEN_2;
++	return tcp;
++}
++
++struct tcp_stream *tcp_stream_get(int is_new, struct in_addr rhost,
++				  u16 rport, u16 lport)
+ {
+-	return &tcp_stream;
++	struct tcp_stream *tcp = &tcp_stream;
++
++	if (tcp->rhost.s_addr == rhost.s_addr &&
++	    tcp->rport == rport &&
++	    tcp->lport == lport)
++		return tcp;
++
++	if (!is_new || !incoming_filter) ||
++	    !incoming_filter(rhost, rport, lport))
++		return NULL;
++
++	return tcp_stream_add(rhost, rport, lport);
+ }
  
-@@ -219,14 +215,15 @@ void net_set_syn_options(union tcp_build_pkt *b)
- 	}
- 	b->ip.t_opt.kind = TCP_O_TS;
- 	b->ip.t_opt.len = TCP_OPT_LEN_A;
--	loc_timestamp = get_ticks();
--	rmt_timestamp = 0;
-+	tcp->loc_timestamp = get_ticks();
-+	tcp->rmt_timestamp = 0;
- 	b->ip.t_opt.t_snd = 0;
- 	b->ip.t_opt.t_rcv = 0;
+-static void dummy_handler(uchar *pkt, u16 dport,
+-			  struct in_addr sip, u16 sport,
++static void dummy_handler(struct tcp_stream *tcp, uchar *pkt,
+ 			  u32 tcp_seq_num, u32 tcp_ack_num,
+ 			  u8 action, unsigned int len)
+ {
+@@ -222,8 +278,7 @@ void net_set_syn_options(struct tcp_stream *tcp, union tcp_build_pkt *b)
  	b->ip.end = TCP_O_END;
  }
  
--int tcp_set_tcp_header(uchar *pkt, int dport, int sport, int payload_len,
-+int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int dport,
-+		       int sport, int payload_len,
+-int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int dport,
+-		       int sport, int payload_len,
++int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int payload_len,
  		       u8 action, u32 tcp_seq_num, u32 tcp_ack_num)
  {
  	union tcp_build_pkt *b = (union tcp_build_pkt *)pkt;
-@@ -249,21 +246,21 @@ int tcp_set_tcp_header(uchar *pkt, int dport, int sport, int payload_len,
- 			   &net_server_ip, &net_ip,
+@@ -243,7 +298,7 @@ int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int dport,
+ 	case TCP_SYN:
+ 		debug_cond(DEBUG_DEV_PKT,
+ 			   "TCP Hdr:SYN (%pI4, %pI4, sq=%u, ak=%u)\n",
+-			   &net_server_ip, &net_ip,
++			   &tcp->rhost, &net_ip,
  			   tcp_seq_num, tcp_ack_num);
  		tcp_activity_count = 0;
--		net_set_syn_options(b);
-+		net_set_syn_options(tcp, b);
- 		tcp_seq_num = 0;
- 		tcp_ack_num = 0;
- 		pkt_hdr_len = IP_TCP_O_SIZE;
--		if (current_tcp_state == TCP_SYN_SENT) {  /* Too many SYNs */
-+		if (tcp->state == TCP_SYN_SENT) {  /* Too many SYNs */
- 			action = TCP_FIN;
--			current_tcp_state = TCP_FIN_WAIT_1;
-+			tcp->state = TCP_FIN_WAIT_1;
- 		} else {
--			tcp_lost.len = TCP_OPT_LEN_2;
--			current_tcp_state = TCP_SYN_SENT;
-+			tcp->lost.len = TCP_OPT_LEN_2;
-+			tcp->state = TCP_SYN_SENT;
- 		}
- 		break;
- 	case TCP_SYN | TCP_ACK:
- 	case TCP_ACK:
--		pkt_hdr_len = IP_HDR_SIZE + net_set_ack_options(b);
-+		pkt_hdr_len = IP_HDR_SIZE + net_set_ack_options(tcp, b);
+ 		net_set_syn_options(tcp, b);
+@@ -264,13 +319,13 @@ int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int dport,
  		b->ip.hdr.tcp_flags = action;
  		debug_cond(DEBUG_DEV_PKT,
  			   "TCP Hdr:ACK (%pI4, %pI4, s=%u, a=%u, A=%x)\n",
-@@ -276,20 +273,20 @@ int tcp_set_tcp_header(uchar *pkt, int dport, int sport, int payload_len,
- 			   &net_server_ip, &net_ip, tcp_seq_num, tcp_ack_num);
+-			   &net_server_ip, &net_ip, tcp_seq_num, tcp_ack_num,
++			   &tcp->rhost, &net_ip, tcp_seq_num, tcp_ack_num,
+ 			   action);
+ 		break;
+ 	case TCP_FIN:
+ 		debug_cond(DEBUG_DEV_PKT,
+ 			   "TCP Hdr:FIN  (%pI4, %pI4, s=%u, a=%u)\n",
+-			   &net_server_ip, &net_ip, tcp_seq_num, tcp_ack_num);
++			   &tcp->rhost, &net_ip, tcp_seq_num, tcp_ack_num);
  		payload_len = 0;
  		pkt_hdr_len = IP_TCP_HDR_SIZE;
--		current_tcp_state = TCP_FIN_WAIT_1;
-+		tcp->state = TCP_FIN_WAIT_1;
- 		break;
- 	case TCP_RST | TCP_ACK:
+ 		tcp->state = TCP_FIN_WAIT_1;
+@@ -279,7 +334,7 @@ int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int dport,
  	case TCP_RST:
  		debug_cond(DEBUG_DEV_PKT,
  			   "TCP Hdr:RST  (%pI4, %pI4, s=%u, a=%u)\n",
- 			   &net_server_ip, &net_ip, tcp_seq_num, tcp_ack_num);
--		current_tcp_state = TCP_CLOSED;
-+		tcp->state = TCP_CLOSED;
+-			   &net_server_ip, &net_ip, tcp_seq_num, tcp_ack_num);
++			   &tcp->rhost, &net_ip, tcp_seq_num, tcp_ack_num);
+ 		tcp->state = TCP_CLOSED;
  		break;
  	/* Notify connection closing */
- 	case (TCP_FIN | TCP_ACK):
- 	case (TCP_FIN | TCP_ACK | TCP_PUSH):
--		if (current_tcp_state == TCP_CLOSE_WAIT)
--			current_tcp_state = TCP_CLOSING;
-+		if (tcp->state == TCP_CLOSE_WAIT)
-+			tcp->state = TCP_CLOSING;
+@@ -290,7 +345,7 @@ int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int dport,
  
  		debug_cond(DEBUG_DEV_PKT,
  			   "TCP Hdr:FIN ACK PSH(%pI4, %pI4, s=%u, a=%u, A=%x)\n",
-@@ -297,7 +294,7 @@ int tcp_set_tcp_header(uchar *pkt, int dport, int sport, int payload_len,
+-			   &net_server_ip, &net_ip,
++			   &tcp->rhost, &net_ip,
  			   tcp_seq_num, tcp_ack_num, action);
  		fallthrough;
  	default:
--		pkt_hdr_len = IP_HDR_SIZE + net_set_ack_options(b);
-+		pkt_hdr_len = IP_HDR_SIZE + net_set_ack_options(tcp, b);
+@@ -298,7 +353,7 @@ int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int dport,
  		b->ip.hdr.tcp_flags = action | TCP_PUSH | TCP_ACK;
  		debug_cond(DEBUG_DEV_PKT,
  			   "TCP Hdr:dft  (%pI4, %pI4, s=%u, a=%u, A=%x)\n",
-@@ -308,9 +305,9 @@ int tcp_set_tcp_header(uchar *pkt, int dport, int sport, int payload_len,
- 	pkt_len	= pkt_hdr_len + payload_len;
- 	tcp_len	= pkt_len - IP_HDR_SIZE;
+-			   &net_server_ip, &net_ip,
++			   &tcp->rhost, &net_ip,
+ 			   tcp_seq_num, tcp_ack_num, action);
+ 	}
  
--	tcp_ack_edge = tcp_ack_num;
-+	tcp->ack_edge = tcp_ack_num;
+@@ -308,8 +363,8 @@ int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int dport,
+ 	tcp->ack_edge = tcp_ack_num;
  	/* TCP Header */
--	b->ip.hdr.tcp_ack = htonl(tcp_ack_edge);
-+	b->ip.hdr.tcp_ack = htonl(tcp->ack_edge);
- 	b->ip.hdr.tcp_src = htons(sport);
- 	b->ip.hdr.tcp_dst = htons(dport);
+ 	b->ip.hdr.tcp_ack = htonl(tcp->ack_edge);
+-	b->ip.hdr.tcp_src = htons(sport);
+-	b->ip.hdr.tcp_dst = htons(dport);
++	b->ip.hdr.tcp_src = htons(tcp->lport);
++	b->ip.hdr.tcp_dst = htons(tcp->rport);
  	b->ip.hdr.tcp_seq = htonl(tcp_seq_num);
-@@ -344,78 +341,79 @@ int tcp_set_tcp_header(uchar *pkt, int dport, int sport, int payload_len,
+ 
+ 	/*
+@@ -332,10 +387,10 @@ int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int dport,
+ 	b->ip.hdr.tcp_xsum = 0;
+ 	b->ip.hdr.tcp_ugr = 0;
+ 
+-	b->ip.hdr.tcp_xsum = tcp_set_pseudo_header(pkt, net_ip, net_server_ip,
++	b->ip.hdr.tcp_xsum = tcp_set_pseudo_header(pkt, net_ip, tcp->rhost,
+ 						   tcp_len, pkt_len);
+ 
+-	net_set_ip_header((uchar *)&b->ip, net_server_ip, net_ip,
++	net_set_ip_header((uchar *)&b->ip, tcp->rhost, net_ip,
+ 			  pkt_len, IPPROTO_TCP);
+ 
  	return pkt_hdr_len;
- }
- 
--static void tcp_update_ack_edge(void)
-+static void tcp_update_ack_edge(struct tcp_stream *tcp)
- {
--	if (tcp_seq_cmp(tcp_ack_edge, tcp_lost.hill[0].l) >= 0) {
--		tcp_ack_edge = tcp_lost.hill[0].r;
-+	if (tcp_seq_cmp(tcp->ack_edge, tcp->lost.hill[0].l) >= 0) {
-+		tcp->ack_edge = tcp->lost.hill[0].r;
- 
--		memmove(&tcp_lost.hill[0], &tcp_lost.hill[1],
-+		memmove(&tcp->lost.hill[0], &tcp->lost.hill[1],
- 			(TCP_SACK_HILLS - 1) * sizeof(struct sack_edges));
- 
--		tcp_lost.len -= TCP_OPT_LEN_8;
--		tcp_lost.hill[TCP_SACK_HILLS - 1].l = TCP_O_NOP;
--		tcp_lost.hill[TCP_SACK_HILLS - 1].r = TCP_O_NOP;
-+		tcp->lost.len -= TCP_OPT_LEN_8;
-+		tcp->lost.hill[TCP_SACK_HILLS - 1].l = TCP_O_NOP;
-+		tcp->lost.hill[TCP_SACK_HILLS - 1].r = TCP_O_NOP;
- 	}
- }
- 
- /**
-  * tcp_hole() - Selective Acknowledgment (Essential for fast stream transfer)
-+ * @tcp: tcp stream
-  * @tcp_seq_num: TCP sequence start number
-  * @len: the length of sequence numbers
-  */
--void tcp_hole(u32 tcp_seq_num, u32 len)
-+void tcp_hole(struct tcp_stream *tcp, u32 tcp_seq_num, u32 len)
- {
- 	int i, j, cnt, cnt_move;
- 
--	cnt = (tcp_lost.len - TCP_OPT_LEN_2) / TCP_OPT_LEN_8;
-+	cnt = (tcp->lost.len - TCP_OPT_LEN_2) / TCP_OPT_LEN_8;
- 	for (i = 0; i < cnt; i++) {
--		if (tcp_seq_cmp(tcp_lost.hill[i].r, tcp_seq_num) < 0)
-+		if (tcp_seq_cmp(tcp->lost.hill[i].r, tcp_seq_num) < 0)
- 			continue;
--		if (tcp_seq_cmp(tcp_lost.hill[i].l, tcp_seq_num + len) > 0)
-+		if (tcp_seq_cmp(tcp->lost.hill[i].l, tcp_seq_num + len) > 0)
- 			break;
- 
--		if (tcp_seq_cmp(tcp_lost.hill[i].l, tcp_seq_num) > 0)
--			tcp_lost.hill[i].l = tcp_seq_num;
--		if (tcp_seq_cmp(tcp_lost.hill[i].l, tcp_seq_num) < 0) {
--			len += tcp_seq_num - tcp_lost.hill[i].l;
--			tcp_seq_num = tcp_lost.hill[i].l;
-+		if (tcp_seq_cmp(tcp->lost.hill[i].l, tcp_seq_num) > 0)
-+			tcp->lost.hill[i].l = tcp_seq_num;
-+		if (tcp_seq_cmp(tcp->lost.hill[i].l, tcp_seq_num) < 0) {
-+			len += tcp_seq_num - tcp->lost.hill[i].l;
-+			tcp_seq_num = tcp->lost.hill[i].l;
- 		}
--		if (tcp_seq_cmp(tcp_lost.hill[i].r, tcp_seq_num + len) >= 0) {
--			tcp_update_ack_edge();
-+		if (tcp_seq_cmp(tcp->lost.hill[i].r, tcp_seq_num + len) >= 0) {
-+			tcp_update_ack_edge(tcp);
- 			return;
- 		}
- 
- 		/* check overlapping with next hills */
- 		cnt_move = 0;
--		tcp_lost.hill[i].r = tcp_seq_num + len;
-+		tcp->lost.hill[i].r = tcp_seq_num + len;
- 		for (j = i + 1; j < cnt; j++) {
--			if (tcp_seq_cmp(tcp_lost.hill[j].l, tcp_lost.hill[i].r) > 0)
-+			if (tcp_seq_cmp(tcp->lost.hill[j].l, tcp->lost.hill[i].r) > 0)
- 				break;
- 
--			tcp_lost.hill[i].r = tcp_lost.hill[j].r;
-+			tcp->lost.hill[i].r = tcp->lost.hill[j].r;
- 			cnt_move++;
- 		}
- 
- 		if (cnt_move > 0) {
- 			if (cnt > i + cnt_move + 1)
--				memmove(&tcp_lost.hill[i + 1],
--					&tcp_lost.hill[i + cnt_move + 1],
-+				memmove(&tcp->lost.hill[i + 1],
-+					&tcp->lost.hill[i + cnt_move + 1],
- 					cnt_move * sizeof(struct sack_edges));
- 
- 			cnt -= cnt_move;
--			tcp_lost.len = TCP_OPT_LEN_2 + cnt * TCP_OPT_LEN_8;
-+			tcp->lost.len = TCP_OPT_LEN_2 + cnt * TCP_OPT_LEN_8;
- 			for (j = cnt; j < TCP_SACK_HILLS; j++) {
--				tcp_lost.hill[j].l = TCP_O_NOP;
--				tcp_lost.hill[j].r = TCP_O_NOP;
-+				tcp->lost.hill[j].l = TCP_O_NOP;
-+				tcp->lost.hill[j].r = TCP_O_NOP;
- 			}
- 		}
- 
--		tcp_update_ack_edge();
-+		tcp_update_ack_edge(tcp);
- 		return;
- 	}
- 
- 	if (i == TCP_SACK_HILLS) {
--		tcp_update_ack_edge();
-+		tcp_update_ack_edge(tcp);
- 		return;
- 	}
- 
-@@ -428,23 +426,24 @@ void tcp_hole(u32 tcp_seq_num, u32 len)
- 	}
- 
- 	if (cnt_move > 0)
--		memmove(&tcp_lost.hill[i + 1],
--			&tcp_lost.hill[i],
-+		memmove(&tcp->lost.hill[i + 1],
-+			&tcp->lost.hill[i],
- 			cnt_move * sizeof(struct sack_edges));
- 
--	tcp_lost.hill[i].l = tcp_seq_num;
--	tcp_lost.hill[i].r = tcp_seq_num + len;
--	tcp_lost.len = TCP_OPT_LEN_2 + cnt * TCP_OPT_LEN_8;
-+	tcp->lost.hill[i].l = tcp_seq_num;
-+	tcp->lost.hill[i].r = tcp_seq_num + len;
-+	tcp->lost.len = TCP_OPT_LEN_2 + cnt * TCP_OPT_LEN_8;
- 
--	tcp_update_ack_edge();
-+	tcp_update_ack_edge(tcp);
- };
- 
- /**
-  * tcp_parse_options() - parsing TCP options
-+ * @tcp: tcp stream
-  * @o: pointer to the option field.
-  * @o_len: length of the option field.
-  */
--void tcp_parse_options(uchar *o, int o_len)
-+void tcp_parse_options(struct tcp_stream *tcp, uchar *o, int o_len)
- {
- 	struct tcp_t_opt  *tsopt;
- 	uchar *p = o;
-@@ -467,7 +466,7 @@ void tcp_parse_options(uchar *o, int o_len)
- 			break;
- 		case TCP_O_TS:
- 			tsopt = (struct tcp_t_opt *)p;
--			rmt_timestamp = tsopt->t_snd;
-+			tcp->rmt_timestamp = tsopt->t_snd;
- 			break;
- 		}
- 
-@@ -479,7 +478,8 @@ void tcp_parse_options(uchar *o, int o_len)
- 	}
- }
- 
--static u8 tcp_state_machine(u8 tcp_flags, u32 tcp_seq_num, int payload_len)
-+static u8 tcp_state_machine(struct tcp_stream *tcp, u8 tcp_flags,
-+			    u32 tcp_seq_num, int payload_len)
- {
- 	u8 tcp_fin = tcp_flags & TCP_FIN;
- 	u8 tcp_syn = tcp_flags & TCP_SYN;
-@@ -500,21 +500,21 @@ static u8 tcp_state_machine(u8 tcp_flags, u32 tcp_seq_num, int payload_len)
- 	debug_cond(DEBUG_INT_STATE, "TCP STATE ENTRY %x\n", action);
- 	if (tcp_rst) {
- 		action = TCP_DATA;
--		current_tcp_state = TCP_CLOSED;
-+		tcp->state = TCP_CLOSED;
- 		net_set_state(NETLOOP_FAIL);
- 		debug_cond(DEBUG_INT_STATE, "TCP Reset %x\n", tcp_flags);
- 		return TCP_RST;
- 	}
- 
--	switch  (current_tcp_state) {
-+	switch  (tcp->state) {
- 	case TCP_CLOSED:
- 		debug_cond(DEBUG_INT_STATE, "TCP CLOSED %x\n", tcp_flags);
- 		if (tcp_syn) {
- 			action = TCP_SYN | TCP_ACK;
--			tcp_seq_init = tcp_seq_num;
--			tcp_ack_edge = tcp_seq_num + 1;
--			tcp_lost.len = TCP_OPT_LEN_2;
--			current_tcp_state = TCP_SYN_RECEIVED;
-+			tcp->seq_init = tcp_seq_num;
-+			tcp->ack_edge = tcp_seq_num + 1;
-+			tcp->lost.len = TCP_OPT_LEN_2;
-+			tcp->state = TCP_SYN_RECEIVED;
- 		} else if (tcp_ack || tcp_fin) {
- 			action = TCP_DATA;
- 		}
-@@ -525,12 +525,12 @@ static u8 tcp_state_machine(u8 tcp_flags, u32 tcp_seq_num, int payload_len)
- 			   tcp_flags, tcp_seq_num);
- 		if (tcp_fin) {
- 			action = action | TCP_PUSH;
--			current_tcp_state = TCP_CLOSE_WAIT;
-+			tcp->state = TCP_CLOSE_WAIT;
- 		} else if (tcp_ack || (tcp_syn && tcp_ack)) {
- 			action |= TCP_ACK;
--			tcp_seq_init = tcp_seq_num;
--			tcp_ack_edge = tcp_seq_num + 1;
--			current_tcp_state = TCP_ESTABLISHED;
-+			tcp->seq_init = tcp_seq_num;
-+			tcp->ack_edge = tcp_seq_num + 1;
-+			tcp->state = TCP_ESTABLISHED;
- 
- 			if (tcp_syn && tcp_ack)
- 				action |= TCP_PUSH;
-@@ -541,15 +541,15 @@ static u8 tcp_state_machine(u8 tcp_flags, u32 tcp_seq_num, int payload_len)
- 	case TCP_ESTABLISHED:
- 		debug_cond(DEBUG_INT_STATE, "TCP_ESTABLISHED %x\n", tcp_flags);
- 		if (payload_len > 0) {
--			tcp_hole(tcp_seq_num, payload_len);
-+			tcp_hole(tcp, tcp_seq_num, payload_len);
- 			tcp_fin = TCP_DATA;  /* cause standalone FIN */
- 		}
- 
- 		if ((tcp_fin) &&
- 		    (!IS_ENABLED(CONFIG_PROT_TCP_SACK) ||
--		     tcp_lost.len <= TCP_OPT_LEN_2)) {
-+		     tcp->lost.len <= TCP_OPT_LEN_2)) {
- 			action = action | TCP_FIN | TCP_PUSH | TCP_ACK;
--			current_tcp_state = TCP_CLOSE_WAIT;
-+			tcp->state = TCP_CLOSE_WAIT;
- 		} else if (tcp_ack) {
- 			action = TCP_DATA;
- 		}
-@@ -567,7 +567,7 @@ static u8 tcp_state_machine(u8 tcp_flags, u32 tcp_seq_num, int payload_len)
- 		debug_cond(DEBUG_INT_STATE, "TCP_FIN_WAIT_2 (%x)\n", tcp_flags);
- 		if (tcp_ack) {
- 			action = TCP_PUSH | TCP_ACK;
--			current_tcp_state = TCP_CLOSED;
-+			tcp->state = TCP_CLOSED;
- 			puts("\n");
- 		} else if (tcp_syn) {
- 			action = TCP_DATA;
-@@ -578,20 +578,20 @@ static u8 tcp_state_machine(u8 tcp_flags, u32 tcp_seq_num, int payload_len)
- 	case TCP_FIN_WAIT_1:
- 		debug_cond(DEBUG_INT_STATE, "TCP_FIN_WAIT_1 (%x)\n", tcp_flags);
- 		if (tcp_fin) {
--			tcp_ack_edge++;
-+			tcp->ack_edge++;
- 			action = TCP_ACK | TCP_FIN;
--			current_tcp_state = TCP_FIN_WAIT_2;
-+			tcp->state = TCP_FIN_WAIT_2;
- 		}
- 		if (tcp_syn)
- 			action = TCP_RST;
- 		if (tcp_ack)
--			current_tcp_state = TCP_CLOSED;
-+			tcp->state = TCP_CLOSED;
- 		break;
- 	case TCP_CLOSING:
- 		debug_cond(DEBUG_INT_STATE, "TCP_CLOSING (%x)\n", tcp_flags);
- 		if (tcp_ack) {
- 			action = TCP_PUSH;
--			current_tcp_state = TCP_CLOSED;
-+			tcp->state = TCP_CLOSED;
- 			puts("\n");
- 		} else if (tcp_syn) {
- 			action = TCP_RST;
-@@ -615,6 +615,7 @@ void rxhand_tcp_f(union tcp_build_pkt *b, unsigned int pkt_len)
- 	u8  tcp_action = TCP_DATA;
+@@ -616,19 +671,26 @@ void rxhand_tcp_f(union tcp_build_pkt *b, unsigned int pkt_len)
  	u32 tcp_seq_num, tcp_ack_num;
  	int tcp_hdr_len, payload_len;
-+	struct tcp_stream *tcp;
+ 	struct tcp_stream *tcp;
++	struct in_addr src;
  
  	/* Verify IP header */
  	debug_cond(DEBUG_DEV_PKT,
-@@ -643,11 +644,15 @@ void rxhand_tcp_f(union tcp_build_pkt *b, unsigned int pkt_len)
+ 		   "TCP RX in RX Sum (to=%pI4, from=%pI4, len=%d)\n",
+ 		   &b->ip.hdr.ip_src, &b->ip.hdr.ip_dst, pkt_len);
+ 
+-	b->ip.hdr.ip_src = net_server_ip;
++	/*
++	 * src IP address will be destroyed by TCP checksum verification
++	 * algorithm (see tcp_set_pseudo_header()), so remember it before
++	 * it was garbaged.
++	 */
++	src.s_addr = b->ip.hdr.ip_src.s_addr;
++
+ 	b->ip.hdr.ip_dst = net_ip;
+ 	b->ip.hdr.ip_sum = 0;
+ 	if (tcp_rx_xsum != compute_ip_checksum(b, IP_HDR_SIZE)) {
+ 		debug_cond(DEBUG_DEV_PKT,
+ 			   "TCP RX IP xSum Error (%pI4, =%pI4, len=%d)\n",
+-			   &net_ip, &net_server_ip, pkt_len);
++			   &net_ip, &src, pkt_len);
  		return;
  	}
  
-+	tcp = tcp_stream_get();
-+	if (tcp == NULL)
-+		return;
-+
+@@ -640,12 +702,15 @@ void rxhand_tcp_f(union tcp_build_pkt *b, unsigned int pkt_len)
+ 						 pkt_len)) {
+ 		debug_cond(DEBUG_DEV_PKT,
+ 			   "TCP RX TCP xSum Error (%pI4, %pI4, len=%d)\n",
+-			   &net_ip, &net_server_ip, tcp_len);
++			   &net_ip, &src, tcp_len);
+ 		return;
+ 	}
+ 
+-	tcp = tcp_stream_get();
+-	if (tcp == NULL)
++	tcp = tcp_stream_get(b->ip.hdr.tcp_flags & TCP_SYN,
++			     src,
++			     ntohs(b->ip.hdr.tcp_src),
++			     ntohs(b->ip.hdr.tcp_dst));
++	if (!tcp)
+ 		return;
+ 
  	tcp_hdr_len = GET_TCP_HDR_LEN_IN_BYTES(b->ip.hdr.tcp_hlen);
- 	payload_len = tcp_len - tcp_hdr_len;
+@@ -676,9 +741,9 @@ void rxhand_tcp_f(union tcp_build_pkt *b, unsigned int pkt_len)
+ 			   "TCP Notify (action=%x, Seq=%u,Ack=%u,Pay%d)\n",
+ 			   tcp_action, tcp_seq_num, tcp_ack_num, payload_len);
  
- 	if (tcp_hdr_len > TCP_HDR_SIZE)
--		tcp_parse_options((uchar *)b + IP_TCP_HDR_SIZE,
-+		tcp_parse_options(tcp, (uchar *)b + IP_TCP_HDR_SIZE,
- 				  tcp_hdr_len - TCP_HDR_SIZE);
- 	/*
- 	 * Incoming sequence and ack numbers are server's view of the numbers.
-@@ -657,7 +662,7 @@ void rxhand_tcp_f(union tcp_build_pkt *b, unsigned int pkt_len)
- 	tcp_ack_num = ntohl(b->ip.hdr.tcp_ack);
+-		(*tcp_packet_handler) ((uchar *)b + pkt_len - payload_len, b->ip.hdr.tcp_dst,
+-				       b->ip.hdr.ip_src, b->ip.hdr.tcp_src, tcp_seq_num,
+-				       tcp_ack_num, tcp_action, payload_len);
++		(*tcp_packet_handler) (tcp, (uchar *)b + pkt_len - payload_len,
++				       tcp_seq_num, tcp_ack_num, tcp_action,
++				       payload_len);
  
- 	/* Packets are not ordered. Send to app as received. */
--	tcp_action = tcp_state_machine(b->ip.hdr.tcp_flags,
-+	tcp_action = tcp_state_machine(tcp, b->ip.hdr.tcp_flags,
- 				       tcp_seq_num, payload_len);
- 
- 	tcp_activity_count++;
-@@ -678,7 +683,7 @@ void rxhand_tcp_f(union tcp_build_pkt *b, unsigned int pkt_len)
  	} else if (tcp_action != TCP_DATA) {
  		debug_cond(DEBUG_DEV_PKT,
- 			   "TCP Action (action=%x,Seq=%u,Ack=%u,Pay=%d)\n",
--			   tcp_action, tcp_ack_num, tcp_ack_edge, payload_len);
-+			   tcp_action, tcp_ack_num, tcp->ack_edge, payload_len);
- 
- 		/*
+@@ -689,9 +754,13 @@ void rxhand_tcp_f(union tcp_build_pkt *b, unsigned int pkt_len)
  		 * Warning: Incoming Ack & Seq sequence numbers are transposed
-@@ -687,6 +692,6 @@ void rxhand_tcp_f(union tcp_build_pkt *b, unsigned int pkt_len)
- 		net_send_tcp_packet(0, ntohs(b->ip.hdr.tcp_src),
- 				    ntohs(b->ip.hdr.tcp_dst),
+ 		 * here to outgoing Seq & Ack sequence numbers
+ 		 */
+-		net_send_tcp_packet(0, ntohs(b->ip.hdr.tcp_src),
+-				    ntohs(b->ip.hdr.tcp_dst),
++		net_send_tcp_packet(0, tcp->rhost, tcp->rport, tcp->lport,
  				    (tcp_action & (~TCP_PUSH)),
--				    tcp_ack_num, tcp_ack_edge);
-+				    tcp_ack_num, tcp->ack_edge);
+ 				    tcp_ack_num, tcp->ack_edge);
  	}
  }
++
++struct tcp_stream *tcp_stream_connect(struct in_addr rhost, u16 rport)
++{
++	return tcp_stream_add(rhost, rport, random_port());
++}
 diff --git a/net/wget.c b/net/wget.c
-index b4251e0f293..99ffa90c494 100644
+index 99ffa90c494..9c68a9d43cc 100644
 --- a/net/wget.c
 +++ b/net/wget.c
-@@ -321,7 +321,8 @@ static void wget_handler(uchar *pkt, u16 dport,
+@@ -28,9 +28,8 @@ static const char http_eom[] = "\r\n\r\n";
+ static const char http_ok[] = "200";
+ static const char content_len[] = "Content-Length";
+ static const char linefeed[] = "\r\n";
+-static struct in_addr web_server_ip;
+-static int our_port;
+ static int wget_timeout_count;
++struct tcp_stream *tcp;
+ 
+ struct pkt_qd {
+ 	uchar *pkt;
+@@ -110,22 +109,19 @@ static void wget_send_stored(void)
+ 	int len = retry_len;
+ 	unsigned int tcp_ack_num = retry_tcp_seq_num + (len == 0 ? 1 : len);
+ 	unsigned int tcp_seq_num = retry_tcp_ack_num;
+-	unsigned int server_port;
+ 	uchar *ptr, *offset;
+ 
+-	server_port = env_get_ulong("httpdstp", 10, SERVER_PORT) & 0xffff;
+-
+ 	switch (current_wget_state) {
+ 	case WGET_CLOSED:
+ 		debug_cond(DEBUG_WGET, "wget: send SYN\n");
+ 		current_wget_state = WGET_CONNECTING;
+-		net_send_tcp_packet(0, server_port, our_port, action,
++		net_send_tcp_packet(0, tcp->rhost, tcp->rport, tcp->lport, action,
+ 				    tcp_seq_num, tcp_ack_num);
+ 		packets = 0;
+ 		break;
+ 	case WGET_CONNECTING:
+ 		pkt_q_idx = 0;
+-		net_send_tcp_packet(0, server_port, our_port, action,
++		net_send_tcp_packet(0, tcp->rhost, tcp->rport, tcp->lport, action,
+ 				    tcp_seq_num, tcp_ack_num);
+ 
+ 		ptr = net_tx_packet + net_eth_hdr_size() +
+@@ -140,14 +136,14 @@ static void wget_send_stored(void)
+ 
+ 		memcpy(offset, &bootfile3, strlen(bootfile3));
+ 		offset += strlen(bootfile3);
+-		net_send_tcp_packet((offset - ptr), server_port, our_port,
++		net_send_tcp_packet((offset - ptr), tcp->rhost, tcp->rport, tcp->lport,
+ 				    TCP_PUSH, tcp_seq_num, tcp_ack_num);
+ 		current_wget_state = WGET_CONNECTED;
+ 		break;
+ 	case WGET_CONNECTED:
+ 	case WGET_TRANSFERRING:
+ 	case WGET_TRANSFERRED:
+-		net_send_tcp_packet(0, server_port, our_port, action,
++		net_send_tcp_packet(0, tcp->rhost, tcp->rport, tcp->lport, action,
+ 				    tcp_seq_num, tcp_ack_num);
+ 		break;
+ 	}
+@@ -304,10 +300,8 @@ static void wget_connected(uchar *pkt, unsigned int tcp_seq_num,
+ 
+ /**
+  * wget_handler() - TCP handler of wget
++ * @tcp: TCP stream
+  * @pkt: pointer to the application packet
+- * @dport: destination TCP port
+- * @sip: source IP address
+- * @sport: source TCP port
+  * @tcp_seq_num: TCP sequential number
+  * @tcp_ack_num: TCP acknowledgment number
+  * @action: TCP action (SYN, ACK, FIN, etc)
+@@ -316,13 +310,11 @@ static void wget_connected(uchar *pkt, unsigned int tcp_seq_num,
+  * In the "application push" invocation, the TCP header with all
+  * its information is pointed to by the packet pointer.
+  */
+-static void wget_handler(uchar *pkt, u16 dport,
+-			 struct in_addr sip, u16 sport,
++static void wget_handler(struct tcp_stream *tcp, uchar *pkt,
  			 u32 tcp_seq_num, u32 tcp_ack_num,
  			 u8 action, unsigned int len)
  {
--	enum tcp_state wget_tcp_state = tcp_get_tcp_state();
-+	struct tcp_stream *tcp = tcp_stream_get();
-+	enum tcp_state wget_tcp_state = tcp_get_tcp_state(tcp);
+-	struct tcp_stream *tcp = tcp_stream_get();
+-	enum tcp_state wget_tcp_state = tcp_get_tcp_state(tcp);
++	enum tcp_state wget_tcp_state = tcp_stream_get_state(tcp);
  
  	net_set_timeout_handler(wget_timeout, wget_timeout_handler);
  	packets++;
+@@ -409,26 +401,13 @@ static void wget_handler(uchar *pkt, u16 dport,
+ 	}
+ }
+ 
+-#define RANDOM_PORT_START 1024
+-#define RANDOM_PORT_RANGE 0x4000
+-
+-/**
+- * random_port() - make port a little random (1024-17407)
+- *
+- * Return: random port number from 1024 to 17407
+- *
+- * This keeps the math somewhat trivial to compute, and seems to work with
+- * all supported protocols/clients/servers
+- */
+-static unsigned int random_port(void)
+-{
+-	return RANDOM_PORT_START + (get_timer(0) % RANDOM_PORT_RANGE);
+-}
+-
+ #define BLOCKSIZE 512
+ 
+ void wget_start(void)
+ {
++	struct in_addr web_server_ip;
++	unsigned int server_port;
++
+ 	image_url = strchr(net_boot_file_name, ':');
+ 	if (image_url > 0) {
+ 		web_server_ip = string_to_ip(net_boot_file_name);
+@@ -472,8 +451,6 @@ void wget_start(void)
+ 	wget_timeout_count = 0;
+ 	current_wget_state = WGET_CLOSED;
+ 
+-	our_port = random_port();
+-
+ 	/*
+ 	 * Zero out server ether to force arp resolution in case
+ 	 * the server ip for the previous u-boot command, for example dns
+@@ -482,6 +459,13 @@ void wget_start(void)
+ 
+ 	memset(net_server_ethaddr, 0, 6);
+ 
++	server_port = env_get_ulong("httpdstp", 10, SERVER_PORT) & 0xffff;
++	tcp = tcp_stream_connect(web_server_ip, server_port);
++	if (tcp == NULL) {
++		net_set_state(NETLOOP_FAIL);
++		return;
++	}
++
+ 	wget_send(TCP_SYN, 0, 0, 0);
+ }
+ 
 -- 
 2.45.2
 
