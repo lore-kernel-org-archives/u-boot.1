@@ -4,57 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89A5ECFB43F
-	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 12:02:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 975C2CFB440
+	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 12:08:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E730188B39;
-	Mon,  7 Oct 2024 14:02:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id EEA7788B11;
+	Mon,  7 Oct 2024 14:08:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="iKKsLDHK";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RKfh+B9A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B4A1688CFD; Mon,  7 Oct 2024 14:02:42 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EC7FE88B39; Mon,  7 Oct 2024 14:08:02 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F13288B39
- for <u-boot@lists.denx.de>; Mon,  7 Oct 2024 14:02:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id C314488AE4
+ for <u-boot@lists.denx.de>; Mon,  7 Oct 2024 14:08:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 064525C5A64;
- Mon,  7 Oct 2024 12:02:35 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 08701C4CECF;
- Mon,  7 Oct 2024 12:02:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1728302558;
- bh=p+6CxIA4QOiM4h7t7t++AQVuQM6kgXCAVEWplCWeDf0=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=iKKsLDHKvGICu0fCUF+m1JFc7GTQItwjQofNHGl2q6OGgS32I2BGeJf9WFUD1FRYL
- a2fX5PPFbR0EoxwOsr4qLotlSjK3rj0cbNwKLbsnxPSeUUBLEDClLxM9zX41Lo9zaI
- 1+4T+TCK1ek4iT7/YMB0pm+JJEvj3zEZC3XqaD4xDkbB5PZ/9pqVEevFQPZ5JqElcO
- IWQ8RKANuG9HFElqXAa6io1ute2iMP1cNKyoUCaKKFoRDJJTwQe+ilNbBDMCYmb8cE
- 9LNIipbSGq+tbxylTAKBaF9rna3ZYkxKG2LaExkFskei43CYpuju9blfFhGHmk/mar
- 5HdC+nJKXtkFA==
-Message-ID: <edcf5ebf-d0d1-4722-b61e-016cadb12e63@kernel.org>
-Date: Mon, 7 Oct 2024 15:02:34 +0300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 497C7sr5084985;
+ Mon, 7 Oct 2024 07:07:54 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1728302874;
+ bh=OuhxcRYYubleFz7nOJpTyFGCWHzhmKgMgGFQGmClz9c=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=RKfh+B9AQollvsdSf+KZLb9cqIPfnXFyEWRhFXLHGvKO30QypoByKMPZhVZlZpXgN
+ 4f6fq+z3jyvSt1H9/EmAyR1LDXXQtIeXTV4+JjTWVxW6jGS383LH3fYkGhPbBttLiA
+ Na8bpkpODOk4iwnuJi3tl/7fmL7jpbpideo73U+U=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 497C7sUU072775
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 7 Oct 2024 07:07:54 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 7
+ Oct 2024 07:07:53 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 7 Oct 2024 07:07:53 -0500
+Received: from localhost (uda0492258.dhcp.ti.com [10.24.72.81])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 497C7qZv014886;
+ Mon, 7 Oct 2024 07:07:53 -0500
+Date: Mon, 7 Oct 2024 17:37:52 +0530
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+To: Roger Quadros <rogerq@kernel.org>
+CC: Siddharth Vadapalli <s-vadapalli@ti.com>, <trini@konsulko.com>,
+ <lukma@denx.de>, <mkorpershoek@baylibre.com>, <marex@denx.de>,
+ <vigneshr@ti.com>, <u-boot@lists.denx.de>, <srk@ti.com>
 Subject: Re: [PATCH] usb: gadget: cdns3: Fix cdns3_ep_config() by setting
  ep.maxpacket
-To: Siddharth Vadapalli <s-vadapalli@ti.com>, trini@konsulko.com,
- lukma@denx.de, mkorpershoek@baylibre.com, marex@denx.de, vigneshr@ti.com
-Cc: u-boot@lists.denx.de, srk@ti.com
+Message-ID: <fcebed5a-e191-4e5c-befe-217a9040dbe7@ti.com>
 References: <20241007104239.1624430-1-s-vadapalli@ti.com>
-Content-Language: en-US
-From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <20241007104239.1624430-1-s-vadapalli@ti.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+ <edcf5ebf-d0d1-4722-b61e-016cadb12e63@kernel.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <edcf5ebf-d0d1-4722-b61e-016cadb12e63@kernel.org>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,79 +82,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, Oct 07, 2024 at 03:02:34PM +0300, Roger Quadros wrote:
 
+Hello Roger,
 
-On 07/10/2024 13:42, Siddharth Vadapalli wrote:
-> The function cdns3_ep_config() calculates the maximum packet size based
-> on the Endpoint Type and the Gadget Speed and stores it in the variable
-> "max_packet_size". This value is then programmed in the USB Controller
-> for the corresponding Endpoint. This may result in a mismatch between
-> the maximum packet size programmed in the USB controller and the maximum
-> packet size seen by the UDC Core via "maxpacket" member of "struct usb_ep".
-> Additionally, since TD_SIZE is calculated in cdns3_ep_run_transfer() on the
-> basis of the maximum packet size stored in the "maxpacket" member of
-> "struct usb_ep", it may lead to an incorrect value of TD_SIZE when compared
-> with what the USB controller actually expects (max_packet_size).
+> On 07/10/2024 13:42, Siddharth Vadapalli wrote:
+> > The function cdns3_ep_config() calculates the maximum packet size based
+> > on the Endpoint Type and the Gadget Speed and stores it in the variable
+> > "max_packet_size". This value is then programmed in the USB Controller
+> > for the corresponding Endpoint. This may result in a mismatch between
+> > the maximum packet size programmed in the USB controller and the maximum
+> > packet size seen by the UDC Core via "maxpacket" member of "struct usb_ep".
+> > Additionally, since TD_SIZE is calculated in cdns3_ep_run_transfer() on the
+> > basis of the maximum packet size stored in the "maxpacket" member of
+> > "struct usb_ep", it may lead to an incorrect value of TD_SIZE when compared
+> > with what the USB controller actually expects (max_packet_size).
+> > 
+
+[...]
+
+> > diff --git a/drivers/usb/cdns3/gadget.c b/drivers/usb/cdns3/gadget.c
+> > index ac7e469469..b0b08768d9 100644
+> > --- a/drivers/usb/cdns3/gadget.c
+> > +++ b/drivers/usb/cdns3/gadget.c
+> > @@ -1637,6 +1637,14 @@ void cdns3_ep_config(struct cdns3_endpoint *priv_ep)
+> >  	else
+> >  		priv_ep->trb_burst_size = 16;
+> >  
+> > +	/*
+> > +	 * The Endpoint is configured to handle a maximum packet size of
+> > +	 * max_packet_size. Hence, set priv_ep->endpoint.maxpacket to
+> > +	 * max_packet_size. This is necessary to ensure that the TD_SIZE
+> > +	 * is calculated correctly in cdns3_ep_run_transfer().
+> > +	 */
+> > +	usb_ep_set_maxpacket_limit(&priv_ep->endpoint, max_packet_size);
+> > +
 > 
-> Fix this by using usb_ep_set_maxpacket_limit().
+> from include/linux/usb/gadget.h
 > 
-> Fixes: 7e91f6ccdc84 ("usb: Add Cadence USB3 host and gadget driver")
-> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
-> ---
+>  * struct usb_ep - device side representation of USB endpoint
+> ...
+>  * @maxpacket:The maximum packet size used on this endpoint.  The initial
+>  *      value can sometimes be reduced (hardware allowing), according to
+>  *      the endpoint descriptor used to configure the endpoint.
+>  * @maxpacket_limit:The maximum packet size value which can be handled by this
+>  *      endpoint. It's set once by UDC driver when endpoint is initialized, and
+>  *      should not be changed. Should not be confused with maxpacket.
 > 
-> Hello,
+> What you want to change is ep->maxpacket and not ep->maxpacket_limit as that is
+> fixed for a particular UDC.
 > 
-> This patch is based on commit
-> dd4d130c8e clk: renesas: rcar-gen3: Fix SSCG caching replacement with MDSEL/PE caching
-> of the master branch of U-Boot.
-> 
-> Patch has been tested on AM642-EVM.
-> 
-> Regards,
-> Siddharth.
-> 
->  drivers/usb/cdns3/gadget.c | 8 ++++++++
->  1 file changed, 8 insertions(+)
-> 
-> diff --git a/drivers/usb/cdns3/gadget.c b/drivers/usb/cdns3/gadget.c
-> index ac7e469469..b0b08768d9 100644
-> --- a/drivers/usb/cdns3/gadget.c
-> +++ b/drivers/usb/cdns3/gadget.c
-> @@ -1637,6 +1637,14 @@ void cdns3_ep_config(struct cdns3_endpoint *priv_ep)
->  	else
->  		priv_ep->trb_burst_size = 16;
->  
-> +	/*
-> +	 * The Endpoint is configured to handle a maximum packet size of
-> +	 * max_packet_size. Hence, set priv_ep->endpoint.maxpacket to
-> +	 * max_packet_size. This is necessary to ensure that the TD_SIZE
-> +	 * is calculated correctly in cdns3_ep_run_transfer().
-> +	 */
-> +	usb_ep_set_maxpacket_limit(&priv_ep->endpoint, max_packet_size);
-> +
+> how about?
+> 	priv-ep->endpoint.maxpacket = max_packet_size;
 
-from include/linux/usb/gadget.h
+Yes, this is accurate. I will post the v2 patch with this change. Thank
+you for reviewing the patch.
 
- * struct usb_ep - device side representation of USB endpoint
-...
- * @maxpacket:The maximum packet size used on this endpoint.  The initial
- *      value can sometimes be reduced (hardware allowing), according to
- *      the endpoint descriptor used to configure the endpoint.
- * @maxpacket_limit:The maximum packet size value which can be handled by this
- *      endpoint. It's set once by UDC driver when endpoint is initialized, and
- *      should not be changed. Should not be confused with maxpacket.
-
-What you want to change is ep->maxpacket and not ep->maxpacket_limit as that is
-fixed for a particular UDC.
-
-how about?
-	priv-ep->endpoint.maxpacket = max_packet_size;
-
-
->  	ret = cdns3_ep_onchip_buffer_reserve(priv_dev, buffering + 1,
->  					     !!priv_ep->dir);
->  	if (ret) {
-
--- 
-cheers,
--roger
+Regards,
+Siddharth.
