@@ -4,73 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2962CFB446
-	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 15:24:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6978BCFB448
+	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 15:24:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5423C88D9B;
-	Mon,  7 Oct 2024 17:24:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BC25A88D82;
+	Mon,  7 Oct 2024 17:24:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Gt6VVC79";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KphOPFLL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4BC3488D63; Mon,  7 Oct 2024 17:24:00 +0200 (CEST)
+ id 1BB7588D61; Mon,  7 Oct 2024 17:24:09 +0200 (CEST)
 Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
  [IPv6:2607:f8b0:4864:20::f2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CBFE088D86
- for <u-boot@lists.denx.de>; Mon,  7 Oct 2024 17:23:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 23B85886A7
+ for <u-boot@lists.denx.de>; Mon,  7 Oct 2024 17:24:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-6cb2ad51162so41572196d6.3
- for <u-boot@lists.denx.de>; Mon, 07 Oct 2024 08:23:57 -0700 (PDT)
+ 6a1803df08f44-6cb2f344dbbso35892656d6.3
+ for <u-boot@lists.denx.de>; Mon, 07 Oct 2024 08:24:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728314637; x=1728919437; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1728314645; x=1728919445; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=rCEiPxgAeWQV+tXdWpwd+T+F3mbv20gdYUhlQ5nWnok=;
- b=Gt6VVC79hMEqd7jccoD6MZAj5bGXu9xsMfol2+WMIn9MQYlcU09fFqMEsCqDtgpk3G
- bxf2gSuTgvuiEPQbunEboame4oJJglfXUp69b2AmEzeyMfySlhFmfN5cyy5meymCq0cE
- or2/wZVZDxQTw8rqBpHD2IZJrQSH0RTIUM/W0=
+ bh=OhuqJybY3WtgkyW67E50yfFoPjW9N0JQcc8/GW8eDUU=;
+ b=KphOPFLL0+aZTRuAi2iuRVYEpeFaUKQpJyTQh12bGPqzBGUuVzoJukr2dwwQzv+hLA
+ 7DFbKph6LHWa8VfrbrYruzhJOQpkFMqetXuhQuCgEwMg5dmToB/vYiTfOOqZ9AHMY9Wu
+ Y2MavEvOhkQUSnC7yYumOmvpVZ6Wp9oe8jwGk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728314637; x=1728919437;
+ d=1e100.net; s=20230601; t=1728314645; x=1728919445;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=rCEiPxgAeWQV+tXdWpwd+T+F3mbv20gdYUhlQ5nWnok=;
- b=uHAsIeo++tFOh9l0e+2feqtrwQbN93Lsh/yIiZsggqZDHQZi6m/BX7C+d1PblNDPvd
- byd1FokkHvD0KlWmJbsFVwVb1fG65/AgwUxC1HCM0fARMZaF7ZwPq6UdC4/jzmQs4iWl
- 0r5n7KBdrt4ALRv9Uv4tN90wuOLEwpSSXg6wrDzGjB7Z1q4TVtJZjbexYKn/UY9Eueb6
- tLKONx1j+qB0RpNj2bxPu34X9XK4IScthr262apcucxePXUe5GUrPwmmnhB9Pakkpb8x
- uRM2rtdOR+U0XzwgHUcnz9IRF0KQNEqxBhNYVnI4vfOrHiOsNPu/umVm2IhxAxSTa5L3
- pEOw==
+ bh=OhuqJybY3WtgkyW67E50yfFoPjW9N0JQcc8/GW8eDUU=;
+ b=fAnSrZS62QW+8DWLfViTyUFFik7FIs6w6TnQS5JBDJaepaCvP+YVZmS4rrZNAKBvRd
+ cwx5TUtq+4nDDhbCgCvYmbUhmhxn+cuWmGg4ivIVbwCS+EtILU98MH1ez6ejz8tD9awE
+ 8gTtnnU5H6fUeO6JPl9+lWGo4jc+ih5LBnVFvpoEiBLj76ihWAsVnbi5mNxTBpQQJeAd
+ IdPb9lhxtZ8JvtuH+LahIzB8ZOYyIyAZ//mmBAqSmb26dj8U2rHy3MQXbKCrvw5Lb1zS
+ wTVDC43QXD4Gh+Ky94/izTynkI0sIZ9fuo4Elr+faVc+O7kAJZqBnbahgQm7ehkvgbLo
+ tRrw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUAA0Q+WMsvmB13YxM3uEG2lhC0VGj6/Qy2lByvea4SoKiS4P2UL0EA0w0n1vD0POITlHKXHVM=@lists.denx.de
-X-Gm-Message-State: AOJu0YykhEyiy8/DWBkF0q9aVJTpa1eIbXQcl8CwOfpAQyBHfD6qWurt
- gxJ7y4RQTNMtHroY+bdScfpHkmpdaAWMXt3lfrq/ftwABNCT0j3baKOSnuFMXtnQPj9MWMqPKWG
- 5E9HHzOs5Pp9+R8MhGij1/orDtuO+W9hHd00X
-X-Google-Smtp-Source: AGHT+IEeZYVq1ymEtEC42NAcRYnIwXoDSozCX6Hu8JJby+UTSU+FaRvIoJIjKgi/Qi4AJHKR6jWFNyRq8u7/xAbdQoc=
-X-Received: by 2002:a05:6214:5541:b0:6cb:48de:1df3 with SMTP id
- 6a1803df08f44-6cb9a1ef806mr171965276d6.11.1728314636666; Mon, 07 Oct 2024
- 08:23:56 -0700 (PDT)
+ AJvYcCVp38EmNqN0YeJG5lcSYhEoGbXmpisJUMG/Y8Rg7ZQ1h9rcpUp6/wsk6j1rbAi96nNCML6C9hw=@lists.denx.de
+X-Gm-Message-State: AOJu0YznzMWEPwtBGcKJdyJpFNHm+ZcbwtGVjlGqNDbVW9FNRX1YxQCu
+ lKkY7yq+H+jwbFjx7AgKfwYkgFCC6PhWAhAVgBndXzt1/HGeOgatpA5PYtot4mioUcm7fAImCxx
+ cWw/SN9sX5AfcRFIs2L87uS/aQPm4JwjVNCGDQCxHPsXxd+c=
+X-Google-Smtp-Source: AGHT+IHaE9EQRctAwLBx4B9FynqN3UegJs4MOfF8ZwVe2WHOm5iv7dmwMCI1wP8IYwKAjzwHWJNOfEF63A4INIeTOPY=
+X-Received: by 2002:a05:6214:3f83:b0:6cb:99db:bdbf with SMTP id
+ 6a1803df08f44-6cb9a4e7955mr194637386d6.43.1728314645061; Mon, 07 Oct 2024
+ 08:24:05 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241004-b4-upstream-j721s2-avs-v4-0-6d71c6bab9f4@ti.com>
-In-Reply-To: <20241004-b4-upstream-j721s2-avs-v4-0-6d71c6bab9f4@ti.com>
+References: <cover.1727968902.git.jerome.forissier@linaro.org>
+ <2e8206d8bbd7d3140cf2734ca9b3fcd12ced4f14.1727968902.git.jerome.forissier@linaro.org>
+ <CAC_iWjLTVV=QpfgGMTSJ205JGRzNDkBuJeO9GwEW4D4PhrJWrw@mail.gmail.com>
+ <e9c3ac80-84f0-4900-85fc-b9af4ebc5363@linaro.org>
+ <CAC_iWjLS21x3ZOGDnvWWj4y1Hfs_vuw=YnMRZCSAaL42mYYGXg@mail.gmail.com>
+ <6d9bfd36-848a-4c9b-b5cb-929752bf3c7a@linaro.org>
+In-Reply-To: <6d9bfd36-848a-4c9b-b5cb-929752bf3c7a@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 7 Oct 2024 09:23:46 -0600
-Message-ID: <CAFLszThMT+kN_u=ch-6m+3Ja615PwYjHd_La2KRhOzktXD21jg@mail.gmail.com>
-Subject: Re: [PATCH v4 0/7] Add AVS support for J721S2
-To: Manorit Chawdhry <m-chawdhry@ti.com>
-Cc: Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de, 
- Neha Malcom Francis <n-francis@ti.com>, Keerthy J <j-keerthy@ti.com>,
- Udit Kumar <u-kumar1@ti.com>, 
- Aniket Limaye <a-limaye@ti.com>, Tom Rini <trini@konsulko.com>, 
- Vignesh Raghavendra <vigneshr@ti.com>, Andrew Davis <afd@ti.com>,
- Nishanth Menon <nm@ti.com>
+Date: Mon, 7 Oct 2024 09:23:52 -0600
+Message-ID: <CAFLszTjGMeLky3xHAAn=52EsyayM7Ungb8ZD5f8gbobQ1zR8Ug@mail.gmail.com>
+Subject: Re: [PATCH v11 06/29] test: boot: fix bootflow_cmd_label for when
+ DSA_SANDBOX is disabled
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>, 
+ Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>, 
+ Anton Antonov <Anton.Antonov@arm.com>, Tom Rini <trini@konsulko.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,60 +96,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Manorit,
+Hi Jerome,
 
-On Fri, 4 Oct 2024 at 00:24, Manorit Chawdhry <m-chawdhry@ti.com> wrote:
+On Fri, 4 Oct 2024 at 06:01, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
 >
-> This series adds support for AVS on J721S2.
+>
+>
+> On 10/4/24 11:37, Ilias Apalodimas wrote:
+> > On Fri, 4 Oct 2024 at 11:46, Jerome Forissier
+> > <jerome.forissier@linaro.org> wrote:
+> >>
+> >>
+> >>
+> >> On 10/4/24 08:55, Ilias Apalodimas wrote:
+> >>> Hi Jerome,
+> >>>
+> >>> On Thu, 3 Oct 2024 at 18:23, Jerome Forissier
+> >>> <jerome.forissier@linaro.org> wrote:
+> >>>>
+> >>>> When DSA_SANDBOX is not set, the sandbox tests fail as follows:
+> >>>>
+> >>>>  $ ./test/py/test.py --build-dir=$(pwd) -k bootdev_test_any
+> >>>>  [...]
+> >>>>  Scanning for bootflows with label '9'
+> >>>>  [...]
+> >>>>  Cannot find '9' (err=-19)
+> >>>>
+> >>>> This is due to the device list containing two less entries than
+> >>>> expected. Therefore, look for label '7' when DSA_SANDBOX is disabled.
+> >>>>
+> >>>> The actual use case is NET_LWIP=y (to be introduced in later patches)
+> >>>> which implies DSA_SANDBOX=n for the time being.
+> >>>>
+> >>>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> >>>> ---
+> >>>>  test/boot/bootflow.c | 7 +++++--
+> >>>>  1 file changed, 5 insertions(+), 2 deletions(-)
+> >>>>
+> >>>> diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
+> >>>> index 6ad63afe90a..c440b8eb778 100644
+> >>>> --- a/test/boot/bootflow.c
+> >>>> +++ b/test/boot/bootflow.c
+> >>>> @@ -109,9 +109,12 @@ static int bootflow_cmd_label(struct unit_test_state *uts)
+> >>>>          * 8   [   ]      OK  mmc       mmc2.bootdev
+> >>>>          * 9   [ + ]      OK  mmc       mmc1.bootdev
+> >>>>          * a   [   ]      OK  mmc       mmc0.bootdev
+> >>>> +        *
+> >>>> +        * However with CONFIG_DSA_SANDBOX=n we have two less (dsa-test@0 and
+> >>>> +        * dsa-test@1).
+> >>>>          */
+> >>>> -       ut_assertok(run_command("bootflow scan -lH 9", 0));
+> >>>> -       ut_assert_nextline("Scanning for bootflows with label '9'");
+> >>>
+> >>> Shouldn't this under and #ifdef, IS_ENABLED etc?
+> >>
+> >> In theory yes, but we can avoid the conditional by using index 7 which is always
+> >> valid, i.e., in all configurations we have at least 7 devices (even 8 actually).
+> >
+> > Ok, but I *think* Simon was trying to match the exact out put here,
+> > not 'at least 7'.
+> >
+> > I think we are better off being strict on this test
+>
+> No because there are 10 entries according to the comment ("a" hex being
+> mmc0.bootdev). Simon, what do you suggest?
 
-What is AVS? You should write an abbreviation out in full at least
-once in the series.
+I don't think this is a huge deal.
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
+BTW, 'fewer', not 'less', if you can count them
+
 
 >
-> AVS Test for J721S2: https://gist.github.com/manorit2001/b2fd9f6764a863294d4aa0755c83c84f
-> Boot Test results: https://gist.github.com/manorit2001/15e45f6c421aeeb93effde023a537762
->
-> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
-> ---
-> Changes in v4:
->
-> * Udit
-> - Use the compatible for finding the node rather than alias.
-> - Remove debug print
-> - Add ret value in error prints
->
-> - Link to v3: https://lore.kernel.org/r/20240813-b4-upstream-j721s2-avs-v3-0-5115d93cdeb2@ti.com
->
-> ---
-> Manorit Chawdhry (7):
->       power: pmic: tps65941: Add DM_PMIC dependency
->       drivers: misc: k3_avs: Check return code while programming AVS
->       arm: dts: k3-j7*-r5: Add MPU clock in clocks property
->       drivers: misc: k3_avs: Extract MPU clk and dev ID from DT
->       arm: mach-k3: j721s2_init: Initialize AVS Class 0
->       arm: dts: j721s2: Add VTM node in R5
->       configs: j721s2_evm_r5_defconfig: Add AVS Configs
->
->  arch/arm/dts/k3-am69-r5-sk.dts                  |  3 +-
->  arch/arm/dts/k3-j7200-r5-common-proc-board.dts  |  3 +-
->  arch/arm/dts/k3-j721e-r5.dtsi                   |  3 +-
->  arch/arm/dts/k3-j721s2-r5-common-proc-board.dts |  9 ++++++
->  arch/arm/dts/k3-j721s2-r5.dtsi                  |  3 +-
->  arch/arm/dts/k3-j784s4-r5-evm.dts               |  3 +-
->  arch/arm/mach-k3/j721s2/j721s2_init.c           | 10 +++++++
->  configs/am68_sk_r5_defconfig                    |  4 +++
->  configs/j721s2_evm_r5_defconfig                 |  6 ++++
->  drivers/misc/k3_avs.c                           | 40 ++++++++++++++++++++++++-
->  drivers/power/pmic/Kconfig                      |  1 +
->  11 files changed, 79 insertions(+), 6 deletions(-)
-> ---
-> base-commit: 3a0b829efc35227b1079a444f00e0729502197ad
-> change-id: 20240130-b4-upstream-j721s2-avs-8c187d3fe26a
->
-> Best regards,
+> Thanks,
 > --
-> Manorit Chawdhry <m-chawdhry@ti.com>
+> Jerome
 >
-
-Regards,
-Simon
+> >
+> > Thanks
+> > /Ilias
+> >>
+> >>>
+> >>>> +       ut_assertok(run_command("bootflow scan -lH 7", 0));
+> >>>> +       ut_assert_nextline("Scanning for bootflows with label '7'");
+> >>>>         ut_assert_skip_to_line("(1 bootflow, 1 valid)");
+> >>>>
+> >>>>         ut_assertok(run_command("bootflow scan -lH 0", 0));
+> >>>> --
+> >>>> 2.40.1
+> >>>>
