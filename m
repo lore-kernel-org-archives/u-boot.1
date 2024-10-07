@@ -4,56 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E47BCFB440
-	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 12:16:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14950CFB440
+	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 12:19:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F0AE88D82;
-	Mon,  7 Oct 2024 14:15:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 872CE88AB9;
+	Mon,  7 Oct 2024 14:19:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1728303352;
-	bh=s6pCy6tZYIW8THqLIfTGxI9ELjb8L1H7pPC0fBPOzP8=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=azKG4QKXb+e1k4S/oRHOGojfEFpG3oly5j/Z1o+fJXeRj9WXEEW03D103SbMWALIO
-	 BbL1+7hUtUBb9fWW2Y6cX2NAYwUJ9HtpgtRHq56IAyzUL2KQVAPXryc/pAlm7SJkGb
-	 Cw9/WYB2sqgoqoxE03ufi1KDcAHZwAPwBMKHfHXhN9LV4D/xVbAXcy7npePx6XOivS
-	 4UhFCbZ7m30zpwldPdRMncZSyfP1b4myCiivX5G5/KomWDqC60lo5IGViqOk57swvS
-	 SdtXvdGEdHUXXiINyBJvSZaXDGSqoVzE71XEZwrUygpZRj4ilz14s5mXykFFzh0uMC
-	 GAlR4c1DhgVyA==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="f3AlEykG";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 7734788B11; Mon,  7 Oct 2024 14:19:41 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 5528488D4F;
- Mon,  7 Oct 2024 14:15:50 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1728303350;
- bh=s6pCy6tZYIW8THqLIfTGxI9ELjb8L1H7pPC0fBPOzP8=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=p+gKJtvVK4DznkT/2HvarfRbP6DQ+KH2zAH3SjMXQQos0ItQkX9Wn+FGDXMWZ1M/s
- PLm5uhaxDEz2oqeHwkVsCR5C/ISSU9bsxceh+qZ61/bbvsY/rRBVp1JL6HlPXCUDo+
- tBXYdiHCWUYvpnS4ZWW87aedZToSC9XTrREl36VQKI/5M4/Azvl6q2Cu+UxWf6ByzP
- 07N/YgljGwa5aXfCvpcO/UON8nh73Dxg3LRKB2HluTuPnWE3V9l6WVprfNN22u1b3n
- 2FaHZcJFWIulbggP1AZnt/v6FxIKFQSu9qfOVpBbwIz9psWWXJp2ZNcLGGHpI16+pZ
- 4Ilc/LvLk94aw==
-Message-ID: <6c8ab321-af54-4ea1-b72c-fb18cfa1f650@denx.de>
-Date: Mon, 7 Oct 2024 14:10:37 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 04C35889E1
+ for <u-boot@lists.denx.de>; Mon,  7 Oct 2024 14:19:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 497CJWTR023386;
+ Mon, 7 Oct 2024 07:19:32 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1728303572;
+ bh=/J4Nd0urbGjgnTs57CTXn3ClKxPyAlZ6Cj5nZse1Wko=;
+ h=From:To:CC:Subject:Date;
+ b=f3AlEykGHpOkZdWie4h/pW9o6ZVFuUwccnoVI2ElvfTp+wC4L6VKHc4YpEfNyA+hm
+ NrA+2AO14pvJuSChnJqsP4lte4wPmFzTpS0U+4J06hDpXXeHk5dp99jPl1nBs1rbRN
+ vbeRbWwTug76pljvJ4oG6NXaUenYgWo1oQw4LiC8=
+Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 497CJWpd045098
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 7 Oct 2024 07:19:32 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 7
+ Oct 2024 07:19:31 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 7 Oct 2024 07:19:31 -0500
+Received: from uda0492258.dhcp.ti.com (uda0492258.dhcp.ti.com [10.24.72.81])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 497CJSwp121622;
+ Mon, 7 Oct 2024 07:19:28 -0500
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+To: <trini@konsulko.com>, <lukma@denx.de>, <mkorpershoek@baylibre.com>,
+ <marex@denx.de>, <rogerq@kernel.org>, <vigneshr@ti.com>
+CC: <u-boot@lists.denx.de>, <srk@ti.com>, <s-vadapalli@ti.com>
+Subject: [PATCH v2] usb: gadget: cdns3: Fix cdns3_ep_config() by setting
+ ep.maxpacket
+Date: Mon, 7 Oct 2024 17:49:27 +0530
+Message-ID: <20241007121927.1680039-1-s-vadapalli@ti.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 5/7] usb: onboard-hub: Bail out if peer hub is already
- probed
-To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
-Cc: michal.simek@amd.com, fabrice.gasnier@foss.st.com, git@amd.com
-References: <20241007044547.23896-1-venkatesh.abbarapu@amd.com>
- <20241007044547.23896-6-venkatesh.abbarapu@amd.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20241007044547.23896-6-venkatesh.abbarapu@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,10 +79,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/7/24 6:45 AM, Venkatesh Yadav Abbarapu wrote:
-> The .bind function is implemented to bind the correct
-> "half" of the hub that the driver wants to bind,
-> and returning -ENODEV for the other "half".
-> 
-> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Reviewed-by: Marek Vasut <marex@denx.de>
+The function cdns3_ep_config() calculates the maximum packet size based
+on the Endpoint Type and the Gadget Speed and stores it in the variable
+"max_packet_size". This value is then programmed in the USB Controller
+for the corresponding Endpoint. This may result in a mismatch between
+the maximum packet size programmed in the USB controller and the maximum
+packet size seen by the UDC Core via "maxpacket" member of "struct usb_ep".
+Additionally, since TD_SIZE is calculated in cdns3_ep_run_transfer() on the
+basis of the maximum packet size stored in the "maxpacket" member of
+"struct usb_ep", it may lead to an incorrect value of TD_SIZE when compared
+with what the USB controller actually expects (max_packet_size).
+
+Fix this.
+
+Fixes: 7e91f6ccdc84 ("usb: Add Cadence USB3 host and gadget driver")
+Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+---
+
+Hello,
+
+This patch is based on commit
+dd4d130c8e clk: renesas: rcar-gen3: Fix SSCG caching replacement with MDSEL/PE caching
+of the master branch of U-Boot.
+
+v1:
+https://patchwork.ozlabs.org/project/uboot/patch/20241007104239.1624430-1-s-vadapalli@ti.com/
+Changes since v1:
+- Based on Roger's feedback at:
+  https://patchwork.ozlabs.org/project/uboot/patch/20241007104239.1624430-1-s-vadapalli@ti.com/#3389960
+  rather than using usb_ep_set_maxpacket_limit() which changes
+  "maxpacket_limit" in addition to "maxpacket", only update the "maxpacket"
+  member of usb_ep.
+
+Regards,
+Siddharth.
+
+ drivers/usb/cdns3/gadget.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/drivers/usb/cdns3/gadget.c b/drivers/usb/cdns3/gadget.c
+index ac7e469469..a30c40ef80 100644
+--- a/drivers/usb/cdns3/gadget.c
++++ b/drivers/usb/cdns3/gadget.c
+@@ -1637,6 +1637,14 @@ void cdns3_ep_config(struct cdns3_endpoint *priv_ep)
+ 	else
+ 		priv_ep->trb_burst_size = 16;
+ 
++	/*
++	 * The Endpoint is configured to handle a maximum packet size of
++	 * max_packet_size. Hence, set priv_ep->endpoint.maxpacket to
++	 * max_packet_size. This is necessary to ensure that the TD_SIZE
++	 * is calculated correctly in cdns3_ep_run_transfer().
++	 */
++	priv_ep->endpoint.maxpacket = max_packet_size;
++
+ 	ret = cdns3_ep_onchip_buffer_reserve(priv_dev, buffering + 1,
+ 					     !!priv_ep->dir);
+ 	if (ret) {
+-- 
+2.40.1
+
