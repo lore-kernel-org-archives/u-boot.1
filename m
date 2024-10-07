@@ -4,81 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C46ECFB458
-	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 20:02:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAC34CF886B
+	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 20:16:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B56B488CBF;
-	Mon,  7 Oct 2024 22:02:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 152CD8899C;
+	Mon,  7 Oct 2024 22:16:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WzTb7dbX";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="o9Vm4YMV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FB5B889E1; Mon,  7 Oct 2024 22:02:09 +0200 (CEST)
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
+ id AD39B88B11; Mon,  7 Oct 2024 22:16:35 +0200 (CEST)
+Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
+ [IPv6:2607:f8b0:4864:20::b34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D7D888B9E
- for <u-boot@lists.denx.de>; Mon,  7 Oct 2024 22:02:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A12508852B
+ for <u-boot@lists.denx.de>; Mon,  7 Oct 2024 22:16:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-7ac83a98e5eso426337485a.0
- for <u-boot@lists.denx.de>; Mon, 07 Oct 2024 13:02:05 -0700 (PDT)
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-yb1-xb34.google.com with SMTP id
+ 3f1490d57ef6-e28a083d531so2636502276.2
+ for <u-boot@lists.denx.de>; Mon, 07 Oct 2024 13:16:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1728331324; x=1728936124; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=M8UNHNTv612wSf1PJXwfCDiWSKqQ6BtOHWtMHXS4Wp0=;
- b=WzTb7dbXRf/amfT6tGSvIYfJ9dXXn+id0yJ+7+sNqOVTrES80JUd1QS96KtaDl6ynR
- bmcBZRlFTcpIePF2OlYF/hkqkLAHyXy4hdC7mDGtAxIayrhOstx/ThJ69/eaoouDGD4k
- 1ALKuxkWj4zWoIQ7jhqn1JBLhjzm6ax5xSChw=
+ d=gateworks.com; s=google; t=1728332192; x=1728936992; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=+kzWMb8PnOgGUnCo+FUnHUHYAZj9YPhaWHyVPybO1t0=;
+ b=o9Vm4YMVtw8NYdC3C5uoGDG8wJ14ErTH3gnjGRNoNsS+bEX7+Vu61NCagINR9EZ+qw
+ PPMSWRv8J0k0OE81bfWeRTKDiByA6jrexnfNeexEVzfTpO9qYerEByqRv03cMfSM8B9z
+ QqgPkFzDi12GIAMd0y7TG8gsn8F/CQOeWHzSxI0Yz37KedG236rtu5pfDeMI2eV4QU7f
+ ZRsyKuWwofF5hCeUbkXrM4CujYg9c2g4x+3xgzjpS8vd9NBJUQfp2s++04Nv8kyPFCs5
+ 5Fm0vTR2mXcKb3B/h4huSRK+v4PNDDB/II0R7RKyphHazhL2QogQp5Zwu5S9N9Q5W63b
+ 6uZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728331324; x=1728936124;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=M8UNHNTv612wSf1PJXwfCDiWSKqQ6BtOHWtMHXS4Wp0=;
- b=Td9/Hg+z7ArLBQyU1OmhRh2S15nPq1uIlLsjIxuEecWlFbOvx7WS4MedEBtQL5R5iM
- atgs0I9cHCx+5py8/uT1O1xtekU7KrgoMDPcNMqaxNolkwlUynkU0Dcrj506a1jzFx2i
- eEQg1MSkLeq1/1xgYHiWmALlJOPSm/gRktkMdLCUynaiJ7/j1QBv9Sr9b6ecK5QpbgfO
- zrLyDeORcKmIOtHUdqRvspZSJ9loK67xQsfInKkQXdQj38BcLNdM+iilA667/ugqjJI/
- 2QRotSAQgS+uHXvIjWAnMoj+bTWfmozDdheJvprOM7AfOmheaI09doFF8eBVT0Waaajo
- TiQw==
-X-Gm-Message-State: AOJu0YwPCtVD00hP++/pyzI99gM4u67LT7cdLdZ267i4WTHm4LZ1wxMi
- sG0o2uGEVFt/qbtgq/ZdAH08SGMm3BOezZitDZSOhakdVO5W1yBqlpcSn3qD4DU=
-X-Google-Smtp-Source: AGHT+IEK8jDMn7olUb1h++4pLt+FvGzB1XV4IHJQdxoGVsuDOAiqM6LHXjDd+X2yu8yTdTGqBvBGLw==
-X-Received: by 2002:a05:620a:1a92:b0:7a6:6b97:4da2 with SMTP id
- af79cd13be357-7ae85f146f3mr139247985a.11.1728331323922; 
- Mon, 07 Oct 2024 13:02:03 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-45da75ed832sm29320141cf.74.2024.10.07.13.02.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Oct 2024 13:02:02 -0700 (PDT)
-Date: Mon, 7 Oct 2024 14:01:58 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Richard Weinberger <richard@nod.at>
-Cc: u-boot <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
- Joao Marcos Costa <jmcosta944@gmail.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>
-Subject: Re: New Defects reported by Coverity Scan for Das U-Boot
-Message-ID: <20241007200158.GD4737@bill-the-cat>
-References: <20241007171505.GC4737@bill-the-cat>
- <642493278.20599.1728325064957.JavaMail.zimbra@nod.at>
+ d=1e100.net; s=20230601; t=1728332192; x=1728936992;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=+kzWMb8PnOgGUnCo+FUnHUHYAZj9YPhaWHyVPybO1t0=;
+ b=B8UbYKElgrPI1WpO3FdxTmqu6xNwcUcv25D2ikikbi2vLWTF76839y3bjf4qxzf8Sm
+ QFQJ2D+D5I50e1Mzhh2wEbUXmgI5FOdoWIg7+yB61wjJ62EB8ewQPKx1UDf0fAxyJ22+
+ yL0Thle9rQ3IZ/gSxh+gDPH4snJyPYSRJ5IYbeCq0KyMrvD8EVydmy9B/UsfBI23z4RQ
+ aYVxRq+9wclpeXU5BxR/uIzvksCn+OybI5iiObEm1qOBFWmAUm4qCOBednGirbFHxP/d
+ lBEeeKkoJWxM1eXvjqERhZENZXgCotJlF1HNBp62HMfx2xtozEZyc+ahC3tF5K8CTek7
+ Me/w==
+X-Gm-Message-State: AOJu0YypoEZrBcvaN2UyqGR/y9ZsKPudLb/rohB9CUGgUO9wrMV1YQ9N
+ EhwveAf5XT5CDlgmOto4t9Msd2q/RFBLVrYgXEYdDXhW6TKId33RLYOdUSvKNRnxm0qj3hr2Ntf
+ Rtmf0XEtbY6PSx+2ppnkDLImXA61zsLeKDfTe3jXWKIjh+ibvoX4=
+X-Google-Smtp-Source: AGHT+IFA+4aAYDsvUj1SAjlgPfQCFOENfOj0e010UZx/jwKUwep4vBy7L13arn12vC5NRhR3lvSzzlwVSie6pxt8YZY=
+X-Received: by 2002:a05:6902:230c:b0:e28:ea75:5a24 with SMTP id
+ 3f1490d57ef6-e28ea755ac7mr1071388276.30.1728332192124; Mon, 07 Oct 2024
+ 13:16:32 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ceWm+GfkXbINttHi"
-Content-Disposition: inline
-In-Reply-To: <642493278.20599.1728325064957.JavaMail.zimbra@nod.at>
-X-Clacks-Overhead: GNU Terry Pratchett
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Mon, 7 Oct 2024 13:16:20 -0700
+Message-ID: <CAJ+vNU3wz22Ni+Kqy=NuFiEYPdrRkzjRJDNhYGJcCdDsLpbvBQ@mail.gmail.com>
+Subject: modify live DT with OF_LIVE breaking phy_connect?
+To: u-boot <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,58 +81,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Greetings,
 
---ceWm+GfkXbINttHi
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I have a need to adjust the U-Boot device-tree live with some board
+revision specific fixups. It would seem I need to enable OF_LIVE to do
+so but when I do this on imx8mm U-Boot proper seems to fail
+phy_connect() called from the network device probe.
 
-On Mon, Oct 07, 2024 at 08:17:44PM +0200, Richard Weinberger wrote:
-> ----- Urspr=FCngliche Mail -----
-> > Von: "Tom Rini" <trini@konsulko.com>
-> > An: "u-boot" <u-boot@lists.denx.de>
-> > CC: "Simon Glass" <sjg@chromium.org>, "Joao Marcos Costa" <jmcosta944@g=
-mail.com>, "Thomas Petazzoni"
-> > <thomas.petazzoni@bootlin.com>, "Jerome Forissier" <jerome.forissier@li=
-naro.org>, "Sughosh Ganu"
-> > <sughosh.ganu@linaro.org>, "Caleb Connolly" <caleb.connolly@linaro.org>=
-, "richard" <richard@nod.at>
-> > Gesendet: Montag, 7. Oktober 2024 19:15:05
-> > Betreff: Fwd: New Defects reported by Coverity Scan for Das U-Boot
->=20
-> > Now that I've merged next to master, there's a number of issues to
-> > address.
->=20
-> AFAICT, all issues in fs/{ext4, squashfs} are not new.
-> Looks more like Coverity re-scanned these files because they have been to=
-uched
-> by my fixes.
+The board I'm working with is an imx8mm-venice board and using
+imx8mm_venice_defconfig (without OF_LIVE) results in:
+U-Boot 2024.10-00735-gc530f6079c70 (Oct 07 2024 - 12:58:38 -0700)
 
-Quite likely, yeah.
+CPU:   Freescale i.MX8MMQ rev1.0 1600 MHz (running at 1200 MHz)
+CPU:   Industrial temperature grade (-40C to 105C) at 44C
+Reset cause: POR
+Model: Gateworks Venice GW73xx-0x i.MX8MM Development Kit
+DRAM:  4 GiB
+Core:  226 devices, 32 uclasses, devicetree: separate
+WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeout)
+MMC:   FSL_SDHC: 0, FSL_SDHC: 1, FSL_SDHC: 2
+Loading Environment from MMC... Reading from redundant MMC(2)... OK
+In:    serial@30890000
+Out:   serial@30890000
+Err:   serial@30890000
+SEC0:  RNG instantiated
+Net:   GPY111 eth0: ethernet@30be0000 [PRIME]
+GSC     : boot watchdog disabled
+Thermal protection:enabled at 96C
+Hit any key to stop autoboot:  0
 
-> Later this week I'll have more time to triage these issues and post fixes.
+Yet as soon as I enable OF_LIVE:
 
-Thanks!
+U-Boot 2024.10-00735-gc530f6079c70 (Oct 07 2024 - 12:59:35 -0700)
 
---=20
-Tom
+CPU:   Freescale i.MX8MMQ rev1.0 1600 MHz (running at 1200 MHz)
+CPU:   Industrial temperature grade (-40C to 105C) at 49C
+Reset cause: POR
+Model: Gateworks Venice GW73xx-0x i.MX8MM Development Kit
+DRAM:  4 GiB
+Core:  214 devices, 32 uclasses, devicetree: separate
+WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeout)
+MMC:   FSL_SDHC: 0, FSL_SDHC: 1, FSL_SDHC: 2
+Loading Environment from MMC... Reading from redundant MMC(2)... OK
+In:    serial@30890000
+Out:   serial@30890000
+Err:   serial@30890000
+SEC0:  RNG instantiated
+Net:   Could not get PHY for mdio: addr 0
+Could not get PHY for FEC0: addr 0
+Could not get PHY for mdio: addr 0
+Could not get PHY for FEC0: addr 0
+No ethernet found.
+^^^ phy_connect failing
 
---ceWm+GfkXbINttHi
-Content-Type: application/pgp-signature; name="signature.asc"
+Any idea what I'm missing here?
 
------BEGIN PGP SIGNATURE-----
+Are there other ways I should be modifying the live dt in U-Boot?
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcEPjMACgkQFHw5/5Y0
-tyx7lAwAk0RRd9xG+mLUN8HEyzCtvVbkLP8RwWlf31Qb7uHwDtwQ3dCFY4Auwgrb
-/hZi7BufP8jyeTEegUi+xDQEIhb0F7yhO0V1T4jd+H9pyMlUZEJZjvBlpp7XVe0K
-iJqV+5rcswmXaZS/47JKi6hft01yjnit3AbDEZCm6/5s67vy8qkJA8aSGER+VADm
-jWaV4KxzYTsFtaJnaYXpJmBy9RowQsa+sVyqXP7d9HMzmtn6qEzprG/uZg6T4aDy
-b4eXeTbtDMxpXPgfIQRGlW8mdDTIvYfwyi9e6OquM/03TCtIAjp0fEgrFJLsp4tw
-fy5UYz8wWDBYET3mlwRfsBUF1Wb03L9kDIttEUmigkedk+JaXwXIpBvPydvxwtS8
-PHB/9esHEyOdqjmOiE07tL28Ai4anL+Je8uzxBbX3zzT7KJ+Ure9rxY92JwELjP4
-ErYxwsVxbDjOMTILn8HHmewRNyZLgJ4cBve3HdZ+sPqPO6mxhcm3zxwxzHLzXhZI
-Kq/9z9Wm
-=1tUx
------END PGP SIGNATURE-----
+Best Regards,
 
---ceWm+GfkXbINttHi--
+Tim
