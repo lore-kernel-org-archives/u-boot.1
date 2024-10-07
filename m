@@ -4,61 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E71B7CFB43F
-	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 12:02:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89A5ECFB43F
+	for <u-boot@archiver.kernel.org>; Mon,  7 Oct 2024 12:02:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76A2F88B11;
-	Mon,  7 Oct 2024 14:02:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id E730188B39;
+	Mon,  7 Oct 2024 14:02:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1728302541;
-	bh=KVlgw/Jjn/S0vSk0c/74WWvzxbHbBIlY8VrnjAhbiWk=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=WRNV0A7OZq6CzbjM9c8GjKCCicbNg388ie4oEfDZG+nUFS0Zg8/rBh/Eg+NOXO+5h
-	 c9HmPyeoVH+BYKrPYl/lsnG7Bepkuc32ub5Z4+jkABTwvaTCGfe+cnt3MiUdfMQbMN
-	 3B6EqACIgqgoPpNjFv9R+6+X4SNx+CZdUmqnAfLQvhiDVpHCjlvHmq4OGs0DF1sgIE
-	 oPggmy6r84tuS9DNUFnA8BUfQsa1gSohNUORSMv/tzsVfZiyFZ2dnHZMcWODTZEiSM
-	 Lz7ciowcI4SwUFr601qJO4JuHXvzrDE31GtMJ+1TWv9p1TUisYOyiQ21mtldA6XamT
-	 PlpiRuM067vCg==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="iKKsLDHK";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id B4A1688CFD; Mon,  7 Oct 2024 14:02:42 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 89ED988B39;
- Mon,  7 Oct 2024 14:02:19 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1728302540;
- bh=KVlgw/Jjn/S0vSk0c/74WWvzxbHbBIlY8VrnjAhbiWk=;
+ by phobos.denx.de (Postfix) with ESMTPS id 7F13288B39
+ for <u-boot@lists.denx.de>; Mon,  7 Oct 2024 14:02:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 064525C5A64;
+ Mon,  7 Oct 2024 12:02:35 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 08701C4CECF;
+ Mon,  7 Oct 2024 12:02:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1728302558;
+ bh=p+6CxIA4QOiM4h7t7t++AQVuQM6kgXCAVEWplCWeDf0=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=cA19VxTQjJgJdJLUtOmxaNSRVB4bFTGkdGkeRAtJCYYWSlJrAdvEsK32bSnEFKfg1
- M11SD5n9hA6l8zhmkjXfZ1zm8hALrKkPH/k73agVFFdQ3CJiz8CmWY8P1kfDp4ourl
- RbH6j4SCIshXVhJiRC9elPGEaevy8+EK5FvUV+MHjtBK0EHUng4+FyXn4vMrHYDn5H
- jU+Hnn8Jm6hB6Ip8YuiMNy/VmLiBwJL1lfS1TH5iRLMd2Es3Wg127y6/bfpXkJHLi2
- tAp4y+5z7h1fm/Qrvz0TjjvxzwxxMF92anawpxKVVUFaSJ8dRSw+QMd1goVke6df+y
- YCLTMfvKT6HyQ==
-Message-ID: <27ae6d7f-6e83-4b38-8f03-65e7f73756da@denx.de>
-Date: Mon, 7 Oct 2024 13:32:47 +0200
+ b=iKKsLDHKvGICu0fCUF+m1JFc7GTQItwjQofNHGl2q6OGgS32I2BGeJf9WFUD1FRYL
+ a2fX5PPFbR0EoxwOsr4qLotlSjK3rj0cbNwKLbsnxPSeUUBLEDClLxM9zX41Lo9zaI
+ 1+4T+TCK1ek4iT7/YMB0pm+JJEvj3zEZC3XqaD4xDkbB5PZ/9pqVEevFQPZ5JqElcO
+ IWQ8RKANuG9HFElqXAa6io1ute2iMP1cNKyoUCaKKFoRDJJTwQe+ilNbBDMCYmb8cE
+ 9LNIipbSGq+tbxylTAKBaF9rna3ZYkxKG2LaExkFskei43CYpuju9blfFhGHmk/mar
+ 5HdC+nJKXtkFA==
+Message-ID: <edcf5ebf-d0d1-4722-b61e-016cadb12e63@kernel.org>
+Date: Mon, 7 Oct 2024 15:02:34 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] imx: Kconfig: make IMX8_ROMAPI configurable
-To: Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
- "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "sbabic@denx.de" <sbabic@denx.de>, "festevam@gmail.com"
- <festevam@gmail.com>, dl-uboot-imx <uboot-imx@nxp.com>,
- "Ross, Fedor" <fedor.ross@ifm.com>, Ye Li <ye.li@nxp.com>,
- "seanga2@gmail.com" <seanga2@gmail.com>, Alice Guo <alice.guo@nxp.com>
-References: <20241005233116.2781053-1-alice.guo@oss.nxp.com>
- <20241006212332.GQ4737@bill-the-cat>
- <f2f2ff63-e186-4065-8e75-7e0064d16037@denx.de>
- <PAXPR04MB84599FA214B38FBB3AFF1E4F887D2@PAXPR04MB8459.eurprd04.prod.outlook.com>
+Subject: Re: [PATCH] usb: gadget: cdns3: Fix cdns3_ep_config() by setting
+ ep.maxpacket
+To: Siddharth Vadapalli <s-vadapalli@ti.com>, trini@konsulko.com,
+ lukma@denx.de, mkorpershoek@baylibre.com, marex@denx.de, vigneshr@ti.com
+Cc: u-boot@lists.denx.de, srk@ti.com
+References: <20241007104239.1624430-1-s-vadapalli@ti.com>
 Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <PAXPR04MB84599FA214B38FBB3AFF1E4F887D2@PAXPR04MB8459.eurprd04.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <20241007104239.1624430-1-s-vadapalli@ti.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -76,53 +71,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/7/24 1:23 PM, Peng Fan wrote:
-> Hi Marek,
 
-Hi,
 
->> Subject: Re: [PATCH v1] imx: Kconfig: make IMX8_ROMAPI
->> configurable
->>
->> On 10/6/24 11:23 PM, Tom Rini wrote:
->>> On Sun, Oct 06, 2024 at 07:31:16AM +0800, alice.guo@oss.nxp.com
->> wrote:
->>>
->>>> From: Peng Fan <peng.fan@nxp.com>
->>>>
->>>> Make CONFIG_IMX8_ROMAPI could be configured in defconfig.
->>>>
->>>> Signed-off-by: Peng Fan <peng.fan@nxp.com>
->>>> Signed-off-by: Alice Guo <alice.guo@nxp.com>
->>>> Reviewed-by: Ye Li <ye.li@nxp.com>
->>>> ---
->>>>    arch/arm/mach-imx/Kconfig | 3 ++-
->>>>    1 file changed, 2 insertions(+), 1 deletion(-)
->>>>
->>>> diff --git a/arch/arm/mach-imx/Kconfig b/arch/arm/mach-
->> imx/Kconfig
->>>> index 134e42028c..9d3aafd2f8 100644
->>>> --- a/arch/arm/mach-imx/Kconfig
->>>> +++ b/arch/arm/mach-imx/Kconfig
->>>> @@ -179,7 +179,8 @@ config DDRMC_VF610_CALIBRATION
->>>>    	  the ddrmc_cr_setting on relevant board file.
->>>>
->>>>    config IMX8_ROMAPI
->>>> -	def_bool y
->>>> +	bool "Enable i.MX ROMAPI"
->>>> +	default y
->>>>    	depends on IMX8MN || IMX8MP || IMX8ULP || IMX9
->>>
->>> Since there's no help here, is this truly configurable, or is this
->>> something that should be select'd based on the SoC and presumably
->> some
->>> of the newer IMX9 parts cannot use this?
->> I can imagine the MX95 calls into this custom ELE firmware stuff
->> instead of ROMAPI ?
+On 07/10/2024 13:42, Siddharth Vadapalli wrote:
+> The function cdns3_ep_config() calculates the maximum packet size based
+> on the Endpoint Type and the Gadget Speed and stores it in the variable
+> "max_packet_size". This value is then programmed in the USB Controller
+> for the corresponding Endpoint. This may result in a mismatch between
+> the maximum packet size programmed in the USB controller and the maximum
+> packet size seen by the UDC Core via "maxpacket" member of "struct usb_ep".
+> Additionally, since TD_SIZE is calculated in cdns3_ep_run_transfer() on the
+> basis of the maximum packet size stored in the "maxpacket" member of
+> "struct usb_ep", it may lead to an incorrect value of TD_SIZE when compared
+> with what the USB controller actually expects (max_packet_size).
 > 
-> True. i.MX95 A55 code no need ROMAPI.
+> Fix this by using usb_ep_set_maxpacket_limit().
 > 
-> But it is still good to make this option configurable, because there
-> is case that people no need romapi.
-I have a bit of a design question instead -- does U-Boot have to make 
-use of SCMI and ELE firmware at all ? Can this dependency be avoided?
+> Fixes: 7e91f6ccdc84 ("usb: Add Cadence USB3 host and gadget driver")
+> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+> ---
+> 
+> Hello,
+> 
+> This patch is based on commit
+> dd4d130c8e clk: renesas: rcar-gen3: Fix SSCG caching replacement with MDSEL/PE caching
+> of the master branch of U-Boot.
+> 
+> Patch has been tested on AM642-EVM.
+> 
+> Regards,
+> Siddharth.
+> 
+>  drivers/usb/cdns3/gadget.c | 8 ++++++++
+>  1 file changed, 8 insertions(+)
+> 
+> diff --git a/drivers/usb/cdns3/gadget.c b/drivers/usb/cdns3/gadget.c
+> index ac7e469469..b0b08768d9 100644
+> --- a/drivers/usb/cdns3/gadget.c
+> +++ b/drivers/usb/cdns3/gadget.c
+> @@ -1637,6 +1637,14 @@ void cdns3_ep_config(struct cdns3_endpoint *priv_ep)
+>  	else
+>  		priv_ep->trb_burst_size = 16;
+>  
+> +	/*
+> +	 * The Endpoint is configured to handle a maximum packet size of
+> +	 * max_packet_size. Hence, set priv_ep->endpoint.maxpacket to
+> +	 * max_packet_size. This is necessary to ensure that the TD_SIZE
+> +	 * is calculated correctly in cdns3_ep_run_transfer().
+> +	 */
+> +	usb_ep_set_maxpacket_limit(&priv_ep->endpoint, max_packet_size);
+> +
+
+from include/linux/usb/gadget.h
+
+ * struct usb_ep - device side representation of USB endpoint
+...
+ * @maxpacket:The maximum packet size used on this endpoint.  The initial
+ *      value can sometimes be reduced (hardware allowing), according to
+ *      the endpoint descriptor used to configure the endpoint.
+ * @maxpacket_limit:The maximum packet size value which can be handled by this
+ *      endpoint. It's set once by UDC driver when endpoint is initialized, and
+ *      should not be changed. Should not be confused with maxpacket.
+
+What you want to change is ep->maxpacket and not ep->maxpacket_limit as that is
+fixed for a particular UDC.
+
+how about?
+	priv-ep->endpoint.maxpacket = max_packet_size;
+
+
+>  	ret = cdns3_ep_onchip_buffer_reserve(priv_dev, buffering + 1,
+>  					     !!priv_ep->dir);
+>  	if (ret) {
+
+-- 
+cheers,
+-roger
