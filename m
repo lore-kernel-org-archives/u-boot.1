@@ -4,53 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37DA0CEF178
-	for <u-boot@archiver.kernel.org>; Tue,  8 Oct 2024 13:51:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EAD8CEF177
+	for <u-boot@archiver.kernel.org>; Tue,  8 Oct 2024 13:51:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B213488D91;
-	Tue,  8 Oct 2024 15:51:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1A4BA88ED5;
+	Tue,  8 Oct 2024 15:51:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1728395494;
-	bh=vvF8/Rswa1aMAG/aikxBleIccSBWgx9uUlas2IcDRjw=;
+	s=phobos-20191101; t=1728395495;
+	bh=mz+MLSy9NRhu32wW1wG9M+GcttChJeHih87wSLsQtRg=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=FPzd/b1rbFBnUtwZ+NUf/t1FEG7xpYYkSqy+81DdldPJleP6gQV2Qf65hSe9yWoKS
-	 4KSBJdtETQSbaleemCYWl/s1WES1b7mlb1rPa5D3BO8++J6+J/LMZuVaTpzWoNjNWf
-	 eZ4/R/GLZCi9SOT/M2tD1PdrPrYsOKBrmY/amNepP4xWq7nnbR4qJ9mDvdfxOTJIHX
-	 o4z5b+XtDs/mrCFijrZ9Al9Y6xhjV6N1y+WH9ooSlpiLRNWiLZiRZl42gjNr6iCMJU
-	 z21cczHC2iSEybeM9muI7iyCo8gU1gblMjtJP8vCd+82sBUp2gRzjVYIlPI1xXB0JA
-	 xvBROh9mnbbsw==
+	b=AARzHX9uaaWEugzk6OtRQwZyG4J3GFZ7lRX6wk7B5P3BQ6WdUyuSxVZZ74yZ3RRT0
+	 J3D3M8jycfG8XG9zqFASWmzbYj6P7HFlu/5v8SQgda7ftzPrtK4zmJEf3CbSorymX3
+	 8D3KMHxQBvvCidZfdPQ5Y0kf0F1GBFG3PHyWgG5j812RHU+Na9BmrfM+yV+R/DKLAT
+	 kRzLG0xMrS/r708ndq69qX5v9h+rfKSbZUVspTNDevEHZLZu6ZGmPaz9cU8i/CKh6B
+	 k0bHMSmMRxVNkuH5ffMlHT1Am5hcV1lPyOSjjZF4CtE+/8A4adLTFVUccWbtM7Uwbg
+	 h6jkYFy/VASTQ==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id E944988D27;
- Tue,  8 Oct 2024 15:51:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 9CAED88D39;
+ Tue,  8 Oct 2024 15:51:33 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1728395493;
- bh=vvF8/Rswa1aMAG/aikxBleIccSBWgx9uUlas2IcDRjw=;
+ s=phobos-20191101; t=1728395494;
+ bh=mz+MLSy9NRhu32wW1wG9M+GcttChJeHih87wSLsQtRg=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=EQ0DyXD86wybWz/zwuxM1DTecjU/oT3+tu1ws+D9hE3Uzy8GwKrknYsea9Kn9nT7b
- m+ezEMG8YIrs2rylkgHAkUpBeVZBnZZGYEk6pAn4vVKOC9UDcdlmTZMkC2ovlARHtP
- qdYIUqWQ2xZdlBsDppXYTZDsvcFWXe/h5z7bGgRlSLAQ6tbrndQJcfuyM1oq/AA1pg
- 3F9EkLAHldExYVgdbGyR0Td9y+8o89w/TurLntF8NHfZzdEz1EcjZnVPzGxSMBPo7D
- 1LVEhQBYBKV5LNw6USsTHdu9Eu8OKJqLoRqT32czCXFkifv+eXZJi/Yxc/Df47aQ/X
- MZzFxUkUeB1XQ==
-Message-ID: <2edafd93-9ac7-4700-b1f6-db163b7be3cc@denx.de>
-Date: Tue, 8 Oct 2024 15:49:01 +0200
+ b=bndv9pGdgEYlXAgywsewnUHz51cyj6zn4VjUVLOnFrrfPxYBnzC64SFdyPeDUb8KZ
+ dTaebgp4ztulhPInQPKS2v9BPIpx8jGHnHHiUm5wMHdM8Au66sJ6RmNEyNVQ7Mmwyf
+ O35n+uK7JPTxkfFrutpTz+IUgn/9Efpt+URiMfP4hmp7IJpTr8sdijCalaXbM5gtEY
+ /xV82TP9sjm3Co4gVlZtfN9YVESMplMmkW36FpwgiSnwGbt2OefqZV4A9EkE7idepI
+ gXrohXkmm+ejleSJyB6b3cfp83Kg4qmXQKhl85akZCrsqlzCN8UiNRXuGdUJetyGF4
+ MO/uEtTRhx+4A==
+Message-ID: <f3a4c5ad-5549-4dcf-aff4-a5e3031c2dd8@denx.de>
+Date: Tue, 8 Oct 2024 15:49:49 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 1/7] usb: onboard-hub: Add reset-gpio support
+Subject: Re: [PATCH v6 4/7] usb: onboard-hub: Add i2c initialization for
+ usb5744 hub
 To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
 Cc: michal.simek@amd.com, fabrice.gasnier@foss.st.com, git@amd.com
 References: <20241008045808.28757-1-venkatesh.abbarapu@amd.com>
- <20241008045808.28757-2-venkatesh.abbarapu@amd.com>
+ <20241008045808.28757-5-venkatesh.abbarapu@amd.com>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20241008045808.28757-2-venkatesh.abbarapu@amd.com>
+In-Reply-To: <20241008045808.28757-5-venkatesh.abbarapu@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -73,16 +74,9 @@ On 10/8/24 6:58 AM, Venkatesh Yadav Abbarapu wrote:
 
 [...]
 
-> @@ -38,6 +75,12 @@ static int usb_onboard_hub_remove(struct udevice *dev)
->   	struct onboard_hub *hub = dev_get_priv(dev);
->   	int ret;
->   
-> +	if (hub->reset_gpio) {
-> +		struct gpio_desc *hub_reset_gpio = hub->reset_gpio;
-> +
-> +		dm_gpio_free(hub_reset_gpio->dev, hub_reset_gpio);
-
-dm_gpio_free(hub_reset_gpio->dev, hub->reset_gpio); , no need for the 
-extra local variable.
-
-[...]
+> @@ -95,6 +198,7 @@ static int usb_onboard_hub_remove(struct udevice *dev)
+>   static const struct onboard_hub_data usb5744_data = {
+>   	.reset_us = 10000,
+>   	.power_on_delay_us = 10000,
+> +	.init = usb5744_i2c_init,
+Keep the list sorted.
