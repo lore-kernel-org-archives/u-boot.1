@@ -4,97 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD080CEFC30
-	for <u-boot@archiver.kernel.org>; Tue,  8 Oct 2024 16:23:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4563CEFC31
+	for <u-boot@archiver.kernel.org>; Tue,  8 Oct 2024 16:39:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A50688D9E;
-	Tue,  8 Oct 2024 18:23:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D9B8988E84;
+	Tue,  8 Oct 2024 18:39:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IqPIK0DK";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id ABF4A88C63; Tue,  8 Oct 2024 18:23:51 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1728405548;
+	bh=Y1tvEfG0GA+oom4jQEfEIBx6ObA6iJOF6xLI1blJPys=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=uPWQp0AHh4GvF/IPR1nD+sppEYt+v3DqGRiUWli5+qCgPokunydBrp4uKpoIfSXTy
+	 EPU78EQwYeGQ7G4bs9a5RiWNvjOUxUbzDvgjdhT7vuuW47WdTlClMvnMWtXIIsowqr
+	 2mcGJZsBn3e2vwf3hxHfkxPYPwCIv0zIwlY21hvjC8q25G5Y0n62dqK3FrJCuokOnY
+	 5Q3LhOt1TYXW3EJzAUc5a9O2rTSAz2tOQ9kn7YeC2NS6BsBHmXgnvGxqYWjWro/9tp
+	 uZ0v/yiLzLDXg3ooApS+NU24AAU6Lf4otIw54q7uNV/dRcC3109+0rsgu/iZlJdnH6
+	 WvaHmpE1faVQg==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D75E888D9E
- for <u-boot@lists.denx.de>; Tue,  8 Oct 2024 18:23:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-43056d99a5aso3921135e9.0
- for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 09:23:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728404627; x=1729009427; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=a7OGYqGu5EZtnsKA8EOPjldtYVA6bSkYUKohrOQPTGg=;
- b=IqPIK0DK0tm+o3qjWjiwtN5ZO7ZL65BdyZYFlnATqtUnJOFDJ4ZsE2ioqhnu8cODGH
- Caj0/xa48YYiP06KKIecwUHjOZy2jaBIMBmetIjKrK4VIUFvaOcgE4T+exmhGvLJ2YC9
- m3QgeGYxuFav/BBUCH5gBG7H52cd+EK6sRKFLNYyXJIfYjhxG7oG2xSV6PcFn2PmlJGt
- EuKA+Dhsp7uLnv7QXvdnnjp2HWfB8owaT+7ltwwAmnF35F3ytsaW0qQJ0hm0f8y9Pj3g
- EVDKNc0fCXPsgjR2tgB38f2XHGJHlaQKytqFs3mcLfvYaz8Vj9Vt3ymuEAUgqj2v6wOA
- 4o4Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728404627; x=1729009427;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=a7OGYqGu5EZtnsKA8EOPjldtYVA6bSkYUKohrOQPTGg=;
- b=XpYmvCYFy/rElkuDusxq/6Xhd8SFjJpv3yoWNS35c5rui2lGpdsqIrxG4vejyRfw1x
- lGvQUQ3jYmPzCW6yEu/iXc6QP+L/AcU2Sj9B2yOQ4ENnaCkLv/nzgve7QSraid8OQ5lC
- ILuEgyKw3+0nwZQXp39N2gnz4wZSkL32XwRbwLgWKaO1Rk0Cop3clcUjB2pziivslyh0
- YHoGz0Y+OZp7mLyEOZtbRrPu8K69rlhT2+GwsQB683O3yDZFWfjOjLj91exuvet2n8uR
- wBaNtJShABUEGIOI/BVp+Jvf2/QpWy9phBSUNMRdsw7f6KZBeBTLZ3JtzTrzoN0dlMDi
- fs9A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVKlytZStWbGcLvlx9WDdH8EcQKl2zdPKnY+hZXknDXT0DmWnJc/Sz65zPZ9BWbAgMoHt9Pk6A=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyej4mHI8PRXO8K5MCgZZftnp/I98e+C/1US8zdj7fCFpzkVNRy
- 8rEv+EbVomDA0OODQ67dwQQBghOAPzeGEaKyS1e/BWr/zPI0iF+unI7K0CW3VWU=
-X-Google-Smtp-Source: AGHT+IFcbE8qdwlN5iQXHW4F0szPzEucIVp7WUWHzd+M9Hw4IS0IWTZA5wocptODo3G83so661qNmA==
-X-Received: by 2002:a05:600c:5104:b0:42c:b991:98bc with SMTP id
- 5b1f17b1804b1-42f94b71121mr24737175e9.0.1728404627134; 
- Tue, 08 Oct 2024 09:23:47 -0700 (PDT)
-Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42f89e89b42sm112810205e9.13.2024.10.08.09.23.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Oct 2024 09:23:46 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Tue, 08 Oct 2024 18:23:42 +0200
-Subject: [PATCH] dts: meson-g12-common-u-boot: do not disable canvas
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id E987F88DD9;
+ Tue,  8 Oct 2024 18:39:05 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1728405546;
+ bh=Y1tvEfG0GA+oom4jQEfEIBx6ObA6iJOF6xLI1blJPys=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=WkhIGqDhrBCZw2JmUnVYO2IoMYyEjvzwgtBtLHEqxOJcSp1VTpTlieUS39U5oQza3
+ s8VU36IC2jMcR0JKu/lEtuTT1tw/aKs3B4D/lO95KHyTjok8MJ+JR0p6gR1pwwlwOw
+ ix1oQrV0Dzs64vD0qeB0et9nVuB3S4mURAwCoZVkN5ryqr24ndzp0SA3mcgCpMjZn/
+ 5jUGC26U6hRYTk6yRU9j+rCU5Wt5yi2d4d9ifRRqHSwQUHXKWCDca9wkkYCRYkwNQi
+ RvRGp0vnyPIyd8j7MxooSSZpAVC0rJ30UzZK0Zv5VCljRFO0mxrDHujplAbH60A1SJ
+ VQWUg3HVl/E1g==
+Message-ID: <46e6d21c-869a-4e73-beda-897b04127239@denx.de>
+Date: Tue, 8 Oct 2024 18:15:45 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20241008-u-boot-topic-g12-do-not-disable-canvas-v1-1-b89659370012@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAI1cBWcC/x2NMQrDMAwAvxI0V2CbDmm+EjLItpwKghWsNBRC/
- l7T8W64u8C4CRtMwwWNTzHR2sE/Bkhvqiuj5M4QXHh650b8YFQ98NBdEq4+YFasXWQxihtjonq
- SISd2r+JHjlSgx/bGRb7/0bzc9w9/xlqveAAAAA==
-To: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>
-Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, 
- Neil Armstrong <neil.armstrong@linaro.org>
-X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=939;
- i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=w5EYAVkbofpjTS78oTwVI+hLmHoyio61nDbw2Z4MH+8=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBnBVyRSzo2sjPxK6urSmcBDnsevue7ah4auY8yYUUu
- o9srrEuJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZwVckQAKCRB33NvayMhJ0U51D/
- 0VVgMK+OjtJSL6Jvf3M/M1v4HGhYjCXvIfuni6imgaM+hmPJJYEk+P1N8w6WmuvVcYurM6C+wLE3za
- s+p+4YcwFVPi706OdzKdUQPCPexE7q1FyuUw8EeAhZkYG4TJQfcCn1BfJb7XzETKLP+No59N1Egehd
- 8YAKNL56kEbC1yMX6FgSz6csFiFxZZe9pDz+RprzfbLTszkxGrTIYKDzlOb3aSO8WzS2ljkt4KtZYK
- krI/jtpnkgZmUCFo4MG4NUIPLmPfcuIqc91ZB3+fGpd1cSp3goVdxK2cXkIV9sR5H0eIm6dMuYvivt
- 6/3+cenazhW+nOf+a5/O8qtGlXhV1Tbst7Jp1bWxqrEBEjwS8nGFOn4+NMfiXE3SU5m7aaxXTBW2L2
- FVj2+1phpOGVi79cY1kJ5VhxPDI5LMw4MibiTgABPTFxT3Zpt18LoJUpJ+ukvhgEiWEiZiSNkRQcbI
- 6qfQXbZJsVzc3GhAMtLSXLXMA/XmQxWqZb9UVG7Qz3s3BuQiCzGKpnM6T0S0Kd0wdsAatYQkCFKPVg
- FgjTPECwtFUNOvpS55jNpGC7YKA1CPmXVa1zoeHM4e/WVZ6O38qEcbru6KlkXX//Qf7kKbZN+A5HyR
- MMm3OojDPk4Z8gIHINK4QVd3RGgU32INBXbqg6zG7iYm/UikS2jX1PwdNh4g==
-X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
- fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 4/7] usb: onboard-hub: Add i2c initialization for
+ usb5744 hub
+To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
+Cc: michal.simek@amd.com, fabrice.gasnier@foss.st.com, git@amd.com
+References: <20241008154139.31204-1-venkatesh.abbarapu@amd.com>
+ <20241008154139.31204-5-venkatesh.abbarapu@amd.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20241008154139.31204-5-venkatesh.abbarapu@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,36 +70,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We were disabling canvas, which causes meson vpu probe failure,
-just stop and leave canvas alone.
-
-Fixes: ce9fa7bffc5 ("ARM: dts: meson-g12a: add U-Boot specific DT for graphics")
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
----
- arch/arm/dts/meson-g12-common-u-boot.dtsi | 4 ----
- 1 file changed, 4 deletions(-)
-
-diff --git a/arch/arm/dts/meson-g12-common-u-boot.dtsi b/arch/arm/dts/meson-g12-common-u-boot.dtsi
-index 8070b62af5b..6629f3256a8 100644
---- a/arch/arm/dts/meson-g12-common-u-boot.dtsi
-+++ b/arch/arm/dts/meson-g12-common-u-boot.dtsi
-@@ -17,10 +17,6 @@
- 	};
- };
- 
--&canvas {
--	status = "disabled";
--};
--
- &vpu {
- 	reg = <0x0 0xff900000 0x0 0x100000>,
- 	      <0x0 0xff63c000 0x0 0x1000>,
-
----
-base-commit: 28dc47038edc4e93f32d75a357131bcf01a18d85
-change-id: 20241008-u-boot-topic-g12-do-not-disable-canvas-ece09f18ebaf
-
-Best regards,
--- 
-Neil Armstrong <neil.armstrong@linaro.org>
-
+On 10/8/24 5:41 PM, Venkatesh Yadav Abbarapu wrote:
+> Add i2c initialization hook and set usb5744 platform
+> data with function having required i2c initialization sequence.
+> 
+> Apart from the USB command attach, prevent the hub from suspend.
+> when the “USB Attach with SMBUS (0xAA56)” command is issued to the hub,
+> the hub is getting enumerated and then it puts in a suspend mode.
+> This causes the hub to NAK any SMBUS access made by the SMBUS Master
+> during this period and not able to see the hub's slave address while
+> running the "i2c probe" command.
+> 
+> Prevent the MCU from the putting the HUB in suspend mode through register
+> write. The BYPASS_UDC_SUSPEND bit (Bit 3) of the RuntimeFlags2 register at
+> address 0x411D controls this aspect of the hub. The BYPASS_UDC_SUSPEND
+> bit in register 0x411Dh must be set to ensure that the MCU is always
+> enabled and ready to respond to SMBus runtime commands. This register
+> needs to be written before the USB attach command is issued.
+> The byte sequence is as follows:
+> Slave addr: 0x2d           00 00 05 00 01 41 1D 08
+> Slave addr: 0x2d           99 37 00
+> Slave addr: 0x2d           AA 56 00
+> 
+> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Reviewed-by: Marek Vasut <marex@denx.de>
