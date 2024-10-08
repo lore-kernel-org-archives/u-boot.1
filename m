@@ -4,56 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF456CEFC54
-	for <u-boot@archiver.kernel.org>; Tue,  8 Oct 2024 20:07:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 541E1CEFC53
+	for <u-boot@archiver.kernel.org>; Tue,  8 Oct 2024 20:18:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D19A88B63;
-	Tue,  8 Oct 2024 22:07:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id BA9E088F94;
+	Tue,  8 Oct 2024 22:18:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="iqdFUsuK";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="DsIsF0jD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82C7688F6C; Tue,  8 Oct 2024 22:07:07 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 094C288FA1; Tue,  8 Oct 2024 22:18:30 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A516188FA8
- for <u-boot@lists.denx.de>; Tue,  8 Oct 2024 22:07:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 61DD988F47
+ for <u-boot@lists.denx.de>; Tue,  8 Oct 2024 22:18:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=ecb7=RF=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1728418018; bh=fX/EfU88UeJd7w3MtheQuj+S/27b8gVA+dUPKnojykU=;
- b=iqdFUsuKUrXoGkALxQsyBWOGZ/vg2xIbaY/ekV//GNL6kfAICClbGp7ezo3pVCF6Cn6VMS4rf
- ZXfbpBzveBt6CwPci1yD7YwDOjMN4gz5v3TDPVNBFDIGWZyS6c2PGNwALDIFo4G2nEN4pnTsHqw
- 3OfThn4xbPWINwqvg4PkbejtC36ZFEuAPOZYjkEj6AuU66jYTt99QvXfbEqLgwJFSi6q+/NVd+f
- dEBVpRBAvg/vDUY4dFqsKO1gYj2mjkKzEsZZJlxwrwhzH4bMnLdcH1YEV4r2SG03HVXegTlHkSV
- Xg9BPz+X95jddackcETJqxxGN5ZlVuhJ140yvPs2InuQ==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Jonas Karlman <jonas@kwiboo.se>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v2 3/3] board: rockchip: Add Hardkernel ODROID-M1S
-Date: Tue,  8 Oct 2024 20:06:35 +0000
-Message-ID: <20241008200641.2203023-4-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.46.2
-In-Reply-To: <20241008200641.2203023-1-jonas@kwiboo.se>
-References: <20241008200641.2203023-1-jonas@kwiboo.se>
+ spf=pass smtp.mailfrom=ddrokosov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id E5F15100008;
+ Tue,  8 Oct 2024 23:18:24 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru E5F15100008
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1728418704;
+ bh=xvCNYDOt7bkNJlCvGjE0DnRCwyi1iy7IXkDx3hTqiIA=;
+ h=From:Date:Subject:MIME-Version:Content-Type:Message-ID:To:From;
+ b=DsIsF0jDSdgIuWSLDImi9R3psqPm1Lh4qW2zPd9cPTE2iHINTvHnLqg0gkUJ7J+Kl
+ jP8bBSt4lKA8kOZzsufOaLku+xnbxLA7VBBinkEObEbWQt5oZyIg7AI0TTvYhmGwAn
+ jneR2WckNd8FPVn9g9mf96MfkZ7JcB8qNOzWb82fRWt0FlkFNfccDLBptg90DXAX97
+ yVNo1dsgl5liz7kXwbcau3XJMy+zPnCbW8M+GAfofa3X8RnhIr5rzJAnunaFPR536v
+ p+PXGSZqsQJCxDFBQo3B0s0ZAcFKPP3UDB8DppsRRywmubtnxAcJCqnmBjDnh0qKIn
+ nVXo/cHSdvKrw==
+Received: from smtp.sberdevices.ru (unknown [172.16.192.103])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Tue,  8 Oct 2024 23:18:24 +0300 (MSK)
+From: Dmitry Rokosov <ddrokosov@salutedevices.com>
+Date: Tue, 8 Oct 2024 23:18:04 +0300
+Subject: [PATCH v3 1/6] include/android_ab: move ab_select_slot()
+ documentation to @ notation
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 207.246.76.47
-X-ForwardEmail-ID: 670590e17d6a06543222dc27
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20241008-android_ab_master-v3-1-f292c45a33e4@salutedevices.com>
+References: <20241008-android_ab_master-v3-0-f292c45a33e4@salutedevices.com>
+In-Reply-To: <20241008-android_ab_master-v3-0-f292c45a33e4@salutedevices.com>
+To: Igor Opaniuk <igor.opaniuk@gmail.com>, Mattijs Korpershoek
+ <mkorpershoek@baylibre.com>, Sam Protsenko <semen.protsenko@linaro.org>, "Tom
+ Rini" <trini@konsulko.com>, "Andrew F. Davis" <afd@ti.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>, Mario Six
+ <mario.six@gdsys.cc>
+CC: <u-boot@lists.denx.de>, <u-boot-amlogic@groups.io>, <rockosov@gmail.com>, 
+ <kernel@salutedevices.com>, Dmitry Rokosov <ddrokosov@salutedevices.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1728418703; l=5778;
+ i=ddrokosov@salutedevices.com; s=20241008; h=from:subject:message-id;
+ bh=hakh7FlSOyijBR2x3swZ7TSCfY2c3naOzKoKmxp26Z0=;
+ b=FYEKVB9m0i/GSa2ewxzqh2//VXZCjzlkaXL0nERN3fgV49aDkG46Wq7VF+r380oy7eXmZ3Mhm
+ pUAVaYmHDzMAR8LbsN3N8OL3PRaF+z99XKsWJdyZn4UI4Nt55u7vZXv
+X-Developer-Key: i=ddrokosov@salutedevices.com; a=ed25519;
+ pk=J6t8z4aofCVwzR1Xs7royc+IGyQcL0cTby92cz3i8B4=
+X-Originating-IP: [172.28.129.94]
+X-ClientProxiedBy: p-i-exch-a-m1.sberdevices.ru (172.24.196.116) To
+ p-i-exch-a-m1.sberdevices.ru (172.24.196.116)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 188309 [Oct 08 2024]
+X-KSMG-AntiSpam-Version: 6.1.0.4
+X-KSMG-AntiSpam-Envelope-From: ddrokosov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 39 0.3.39
+ e168d0b3ce73b485ab2648dd465313add1404cce,
+ {Tracking_from_domain_doesnt_match_to}, 127.0.0.199:7.1.2;
+ smtp.sberdevices.ru:7.1.1,5.0.1; salutedevices.com:7.1.1;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1, FromAlignment: s
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean
+X-KSMG-LinksScanning: Clean
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2024/10/08 14:43:00 #26717371
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,208 +109,148 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Hardkernel ODROID-M1S is a single-board computer based on Rockchip
-RK3566 SoC. It features e.g. 4/8 GB LPDDR4 RAM, 64 GB eMMC, SD-card,
-GbE LAN, HDMI 2.0, M.2 NVMe and USB 2.0/3.0.
+There are new function documentation requirements in U-Boot, so apply
+these changes for android_ab.
 
-Features tested on a ODROID-M1S 8GB rev1.0 20230906:
-- SD-card boot
-- eMMC boot
-- Ethernet
-- PCIe/NVMe
-- USB gadget
-- USB host
-
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
 ---
-v2: Fix clean apply on master branch
----
- arch/arm/dts/rk3566-odroid-m1s-u-boot.dtsi |  3 +
- arch/arm/mach-rockchip/rk3568/Kconfig      |  6 ++
- board/hardkernel/odroid_m1s/Kconfig        | 12 +++
- board/hardkernel/odroid_m1s/MAINTAINERS    |  6 ++
- configs/odroid-m1s-rk3566_defconfig        | 93 ++++++++++++++++++++++
- doc/board/rockchip/rockchip.rst            |  1 +
- 6 files changed, 121 insertions(+)
- create mode 100644 arch/arm/dts/rk3566-odroid-m1s-u-boot.dtsi
- create mode 100644 board/hardkernel/odroid_m1s/Kconfig
- create mode 100644 board/hardkernel/odroid_m1s/MAINTAINERS
- create mode 100644 configs/odroid-m1s-rk3566_defconfig
+ boot/android_ab.c    | 43 ++++++++++++++++++++++++-------------------
+ include/android_ab.h |  7 ++++---
+ 2 files changed, 28 insertions(+), 22 deletions(-)
 
-diff --git a/arch/arm/dts/rk3566-odroid-m1s-u-boot.dtsi b/arch/arm/dts/rk3566-odroid-m1s-u-boot.dtsi
-new file mode 100644
-index 000000000000..6e8307e3bdf6
---- /dev/null
-+++ b/arch/arm/dts/rk3566-odroid-m1s-u-boot.dtsi
-@@ -0,0 +1,3 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+#include "rk356x-u-boot.dtsi"
-diff --git a/arch/arm/mach-rockchip/rk3568/Kconfig b/arch/arm/mach-rockchip/rk3568/Kconfig
-index 899cf909fbb9..e646f714c929 100644
---- a/arch/arm/mach-rockchip/rk3568/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3568/Kconfig
-@@ -22,6 +22,11 @@ config TARGET_ODROID_M1_RK3568
- 	help
- 	  Hardkernel ODROID-M1 single board computer with a RK3568B2 SoC.
+diff --git a/boot/android_ab.c b/boot/android_ab.c
+index 1196a189ed5349ca5c088e3b6ef1796b11c69a84..0045c8133a8e164f1fdd4c0f9b683de0f13f26e0 100644
+--- a/boot/android_ab.c
++++ b/boot/android_ab.c
+@@ -13,13 +13,13 @@
+ #include <u-boot/crc.h>
  
-+config TARGET_ODROID_M1S_RK3566
-+	bool "ODROID-M1S"
-+	help
-+	  Hardkernel ODROID-M1S single board computer with a RK3566 SoC.
-+
- config TARGET_POWKIDDY_X55_RK3566
- 	bool "Powkiddy X55"
- 	help
-@@ -62,6 +67,7 @@ config TEXT_BASE
- source "board/rockchip/evb_rk3568/Kconfig"
- source "board/anbernic/rgxx3_rk3566/Kconfig"
- source "board/hardkernel/odroid_m1/Kconfig"
-+source "board/hardkernel/odroid_m1s/Kconfig"
- source "board/pine64/quartz64_rk3566/Kconfig"
- source "board/powkiddy/x55/Kconfig"
- source "board/radxa/zero3-rk3566/Kconfig"
-diff --git a/board/hardkernel/odroid_m1s/Kconfig b/board/hardkernel/odroid_m1s/Kconfig
-new file mode 100644
-index 000000000000..5e0d2ca6d08b
---- /dev/null
-+++ b/board/hardkernel/odroid_m1s/Kconfig
-@@ -0,0 +1,12 @@
-+if TARGET_ODROID_M1S_RK3566
-+
-+config SYS_BOARD
-+	default "odroid_m1s"
-+
-+config SYS_VENDOR
-+	default "hardkernel"
-+
-+config SYS_CONFIG_NAME
-+	default "odroid_m1"
-+
-+endif
-diff --git a/board/hardkernel/odroid_m1s/MAINTAINERS b/board/hardkernel/odroid_m1s/MAINTAINERS
-new file mode 100644
-index 000000000000..0c8d11249bff
---- /dev/null
-+++ b/board/hardkernel/odroid_m1s/MAINTAINERS
-@@ -0,0 +1,6 @@
-+ODROID-M1S
-+M:	Jonas Karlman <jonas@kwiboo.se>
-+S:	Maintained
-+F:	board/hardkernel/odroid_m1s/
-+F:	configs/odroid-m1s-rk3566_defconfig
-+F:	arch/arm/dts/rk3566-odroid-m1s-u-boot.dtsi
-diff --git a/configs/odroid-m1s-rk3566_defconfig b/configs/odroid-m1s-rk3566_defconfig
-new file mode 100644
-index 000000000000..21f4fcb9d7be
---- /dev/null
-+++ b/configs/odroid-m1s-rk3566_defconfig
-@@ -0,0 +1,93 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_COUNTER_FREQUENCY=24000000
-+CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-odroid-m1s"
-+CONFIG_ROCKCHIP_RK3568=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_TARGET_ODROID_M1S_RK3566=y
-+CONFIG_DEBUG_UART_BASE=0xFE660000
-+CONFIG_DEBUG_UART_CLOCK=24000000
-+CONFIG_SYS_LOAD_ADDR=0xc00800
-+CONFIG_PCI=y
-+CONFIG_DEBUG_UART=y
-+CONFIG_AHCI=y
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_SPL_FIT_SIGNATURE=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_DEFAULT_FDT_FILE="rockchip/rk3566-odroid-m1s.dtb"
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_SPL_MAX_SIZE=0x40000
-+CONFIG_SPL_PAD_TO=0x7f8000
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_ATF=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PCI=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_ROCKUSB=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_CMD_INI=y
-+CONFIG_CMD_PMIC=y
-+CONFIG_CMD_REGULATOR=y
-+CONFIG_CMD_CRAMFS=y
-+# CONFIG_SPL_DOS_PARTITION is not set
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_OF_LIVE=y
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_SPL_DM_SEQ_ALIAS=y
-+CONFIG_SPL_REGMAP=y
-+CONFIG_SPL_SYSCON=y
-+CONFIG_AHCI_PCI=y
-+CONFIG_DWC_AHCI=y
-+CONFIG_SPL_CLK=y
-+# CONFIG_USB_FUNCTION_FASTBOOT is not set
-+CONFIG_ROCKCHIP_GPIO=y
-+CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
-+CONFIG_MISC=y
-+CONFIG_SUPPORT_EMMC_RPMB=y
-+CONFIG_MMC_DW=y
-+CONFIG_MMC_DW_ROCKCHIP=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SDMA=y
-+CONFIG_MMC_SDHCI_ROCKCHIP=y
-+CONFIG_PHY_REALTEK=y
-+CONFIG_DWC_ETH_QOS=y
-+CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-+CONFIG_NVME_PCI=y
-+CONFIG_PCIE_DW_ROCKCHIP=y
-+CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-+CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-+CONFIG_SPL_PINCTRL=y
-+CONFIG_DM_PMIC=y
-+CONFIG_PMIC_RK8XX=y
-+CONFIG_REGULATOR_RK8XX=y
-+CONFIG_SPL_RAM=y
-+CONFIG_SCSI=y
-+CONFIG_BAUDRATE=1500000
-+CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_SYSRESET=y
-+CONFIG_USB=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_EHCI_GENERIC=y
-+CONFIG_USB_OHCI_HCD=y
-+CONFIG_USB_OHCI_GENERIC=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_DOWNLOAD=y
-+CONFIG_USB_FUNCTION_ROCKUSB=y
-+CONFIG_FS_CRAMFS=y
-+CONFIG_ERRNO_STR=y
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index a50e3d2b8f38..7b11a2e0a358 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -98,6 +98,7 @@ List of mainline supported Rockchip boards:
+ /**
+- * Compute the CRC-32 of the bootloader control struct.
++ * ab_control_compute_crc() - Compute the CRC32 of the bootloader control.
++ *
++ * @abc: Bootloader control block
+  *
+  * Only the bytes up to the crc32_le field are considered for the CRC-32
+  * calculation.
+  *
+- * @param[in] abc bootloader control block
+- *
+  * Return: crc32 sum
+  */
+ static uint32_t ab_control_compute_crc(struct bootloader_control *abc)
+@@ -28,14 +28,14 @@ static uint32_t ab_control_compute_crc(struct bootloader_control *abc)
+ }
  
- * rk3566
-      - Anbernic RGxx3 (anbernic-rgxx3-rk3566)
-+     - Hardkernel ODROID-M1S (odroid-m1s-rk3566)
-      - Pine64 PineTab2 (pinetab2-rk3566)
-      - Pine64 Quartz64-A Board (quartz64-a-rk3566)
-      - Pine64 Quartz64-B Board (quartz64-b-rk3566)
+ /**
+- * Initialize bootloader_control to the default value.
++ * ab_control_default() - Initialize bootloader_control to the default value.
++ *
++ * @abc: Bootloader control block
+  *
+  * It allows us to boot all slots in order from the first one. This value
+  * should be used when the bootloader message is corrupted, but not when
+  * a valid message indicates that all slots are unbootable.
+  *
+- * @param[in] abc bootloader control block
+- *
+  * Return: 0 on success and a negative on error
+  */
+ static int ab_control_default(struct bootloader_control *abc)
+@@ -67,7 +67,13 @@ static int ab_control_default(struct bootloader_control *abc)
+ }
+ 
+ /**
+- * Load the boot_control struct from disk into newly allocated memory.
++ * ab_control_create_from_disk() - Load the boot_control from disk into memory.
++ *
++ * @dev_desc: Device where to read the boot_control struct from
++ * @part_info: Partition in 'dev_desc' where to read from, normally
++ *             the "misc" partition should be used
++ * @abc: pointer to pointer to bootloader_control data
++ * @offset: boot_control struct offset
+  *
+  * This function allocates and returns an integer number of disk blocks,
+  * based on the block size of the passed device to help performing a
+@@ -75,10 +81,6 @@ static int ab_control_default(struct bootloader_control *abc)
+  * The boot_control struct offset (2 KiB) must be a multiple of the device
+  * block size, for simplicity.
+  *
+- * @param[in] dev_desc Device where to read the boot_control struct from
+- * @param[in] part_info Partition in 'dev_desc' where to read from, normally
+- *			the "misc" partition should be used
+- * @param[out] pointer to pointer to bootloader_control data
+  * Return: 0 on success and a negative on error
+  */
+ static int ab_control_create_from_disk(struct blk_desc *dev_desc,
+@@ -122,15 +124,17 @@ static int ab_control_create_from_disk(struct blk_desc *dev_desc,
+ }
+ 
+ /**
+- * Store the loaded boot_control block.
++ * ab_control_store() - Store the loaded boot_control block.
++ *
++ * @dev_desc: Device where we should write the boot_control struct
++ * @part_info: Partition on the 'dev_desc' where to write
++ * @abc Pointer to the boot control struct and the extra bytes after
++ *      it up to the nearest block boundary
++ * @offset: boot_control struct offset
+  *
+  * Store back to the same location it was read from with
+  * ab_control_create_from_misc().
+  *
+- * @param[in] dev_desc Device where we should write the boot_control struct
+- * @param[in] part_info Partition on the 'dev_desc' where to write
+- * @param[in] abc Pointer to the boot control struct and the extra bytes after
+- *                it up to the nearest block boundary
+  * Return: 0 on success and a negative on error
+  */
+ static int ab_control_store(struct blk_desc *dev_desc,
+@@ -160,12 +164,13 @@ static int ab_control_store(struct blk_desc *dev_desc,
+ }
+ 
+ /**
+- * Compare two slots.
++ * ab_compare_slots() - Compare two slots.
++ *
++ * @a: The first bootable slot metadata
++ * @b: The second bootable slot metadata
+  *
+  * The function determines slot which is should we boot from among the two.
+  *
+- * @param[in] a The first bootable slot metadata
+- * @param[in] b The second bootable slot metadata
+  * Return: Negative if the slot "a" is better, positive of the slot "b" is
+  *         better or 0 if they are equally good.
+  */
+diff --git a/include/android_ab.h b/include/android_ab.h
+index dbf20343da62447a237ec845e216517d34455ad3..1e53879a25f145a9d18ac0a6553d8c217123aa6f 100644
+--- a/include/android_ab.h
++++ b/include/android_ab.h
+@@ -18,7 +18,10 @@ struct disk_partition;
+ #define NUM_SLOTS 2
+ 
+ /**
+- * Select the slot where to boot from.
++ * ab_select_slot() - Select the slot where to boot from.
++ *
++ * @dev_desc: Place to store the device description pointer
++ * @part_info: Place to store the partition information
+  *
+  * On Android devices with more than one boot slot (multiple copies of the
+  * kernel and system images) selects which slot should be used to boot from and
+@@ -28,8 +31,6 @@ struct disk_partition;
+  * registered before returning from this function so it isn't selected
+  * indefinitely.
+  *
+- * @param[in] dev_desc Place to store the device description pointer
+- * @param[in] part_info Place to store the partition information
+  * Return: The slot number (>= 0) on success, or a negative on error
+  */
+ int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
+
 -- 
-2.46.2
+2.43.0
 
