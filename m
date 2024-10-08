@@ -4,62 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4F1ACF0427
-	for <u-boot@archiver.kernel.org>; Tue,  8 Oct 2024 21:39:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0229CF0427
+	for <u-boot@archiver.kernel.org>; Tue,  8 Oct 2024 21:48:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C49F788FD5;
-	Tue,  8 Oct 2024 23:39:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 5DF5288DED;
+	Tue,  8 Oct 2024 23:48:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="YOa6L7yL";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="mHXIcEC0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D72CF88FD6; Tue,  8 Oct 2024 23:39:17 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id 1E11688E19; Tue,  8 Oct 2024 23:48:24 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 572F388FD5
- for <u-boot@lists.denx.de>; Tue,  8 Oct 2024 23:39:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EE86F88DBF
+ for <u-boot@lists.denx.de>; Tue,  8 Oct 2024 23:48:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=ecb7=RF=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1728423543;
- bh=A99IlZIQBc1PuxlDULbMWv9wr4Rvz6aUC5LFkmmfQYA=;
- b=YOa6L7yLTOQogMwU9+ZBe6FNUjsSc4d//8Zf4n5RHxyNKBpmHmo/occtKKEG9QSJfKQdFLTFM
- lTBi9mtrfzh9waHGzLVuDX/w+76HbMpjYWbOt9DLD0Fjkb+gpCdsipnQgQmoc9c6f/Z+uWlf5+8
- T8wVX/FtBx0mqJJ33WAb37B+ldrmIaQHZ3MG3vlynqyJ87G4qoaJLK6/Eh22x46418K84u80q3J
- kGMfX156/n5BRQT7/kfxlAw7J48yv3lA4z8GszWLK4SOTMpL2dbjjW3CHOkhX20AMN3ihLtaeFO
- pxVmyLmkydVGV7vINUb7Z2VO/ldmwF4tN7W0hX2CAqTQ==
-Message-ID: <313d1b40-f37b-42f4-bf77-182bb868eea3@kwiboo.se>
-Date: Tue, 8 Oct 2024 23:38:57 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1728424094; x=1729028894; i=xypron.glpk@gmx.de;
+ bh=PvDScJ9vsMFZImKDY8uyuNpIBQtihlHAWguQcg+uNR8=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=mHXIcEC0fII4kPkrM+0f54uHVPoIupBbKArjpv5fTTkBPaEHZouQF8RPJxzS7i8R
+ 7lhTlC0dGh6RaeF2mQmE4pf9DFu5UG6X+/3Q3c10RVJc0WZ1JimPg46KXTuXXOUav
+ xqo8b5mqbTOSNDup0KvL8gTZ9/sryuQu2actZ1odhSuIe7lrQTfN7isW6xnCKPTqw
+ Qlj1yIfA0F3s/DYbqJNjniZB+EpW/IUs06ih5CdoJyvtsV3FLtxq0H1T/+6Cg3nsR
+ HceLdvroSHMj20uZg7DFweXL6UHouAIua8muec+VAgD5gqvbtMZL/lJiIz2Gv/GUw
+ a4RpL/BWW20kGOPM3Q==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.143.105] ([46.114.109.97]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MN5if-1tEaYl1y9l-00NtxN; Tue, 08
+ Oct 2024 23:48:14 +0200
+Message-ID: <4027a24c-e5e3-4fcb-bb57-cd391a970bd5@gmx.de>
+Date: Tue, 8 Oct 2024 23:48:13 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] arm64: dts: rockchip: Add Hardkernel ODROID-M1S
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
- Heiko Stuebner <heiko@sntech.de>
-References: <20241008200641.2203023-1-jonas@kwiboo.se>
- <20241008200641.2203023-3-jonas@kwiboo.se>
- <CALeDE9Oi5fgYW2OeHsWG3Bu=C4oacyrqjZwG2fQcn88Y8+i4Vg@mail.gmail.com>
+Subject: Re: [PATCH v2 00/14] Make EFI memory allocations synchronous with LMB
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>, u-boot@lists.denx.de
+References: <20241008181435.1753814-1-sughosh.ganu@linaro.org>
 Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <CALeDE9Oi5fgYW2OeHsWG3Bu=C4oacyrqjZwG2fQcn88Y8+i4Vg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 6705a67406ac2fc4dcc6816c
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20241008181435.1753814-1-sughosh.ganu@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:JxvGl1tc0n4hialoUTGTeKriDC+ZFis1gPEv5jHu01nCC2VKfFB
+ iwriS7CWbd/NxrVtcOOl50lm36LH7RJiXOrtLikW9ifFl9mafZZgeXwe396RhchN0aGjL0o
+ WrDDFSGlvhB5pxtsZvyciFEFrSol9ear+ABwkdri8jT1a8g46GKaYVmdWUk3evFsZIMYpe5
+ tfC94gCiPFjoQUvsbRu9Q==
+UI-OutboundReport: notjunk:1;M01:P0:CpkYhz6B5S0=;Igtu380vyqOfIUwJ9D9hy5JHphZ
+ CSdp5SQksou2euGHPLq9DMXd/BJS4ufPJfOOLCkf3CozkACbkhCSkHYVEuJ/EIvagfyU3osgT
+ oAszjDtmRjodYwIR9HxJNBdqAK9WKb+SFrltNX8oi5DgZxR6zCGg0KTJET9CiQEbfovdajChq
+ nUNeMQqu5K3dJkJY+KNJkzuXhyj7ZrTgYZ+XydaU2l781AAUYmeM6jBQjzoE8KOMBcPL8MKvY
+ lUsEnVPHuxNSyKjDwN4T7+OfkF/tiU00v7EJB2uI64mxGz4AeSn31Ea0SLB+QuBZcWJ8aznhA
+ xqWfMpidC8F3ex7uVD/4KZmFBiOf4gKS796p1tpWC0u2AD4VQpaj2xLUmJBfhB4lNl6Bpj/i3
+ dmio7b53XbDySfkqTJGm6SLnl6pHqXhgORxsDpEHdnAZ8KkMnexnYvP1iQHojKJYTHiYW9wah
+ otZDFQ2qHek4mG7hC6S5DLaDdqDbYLA6rY3ZJmpXkVlPyKNu3Rib79DiS0Gok+6bzOdsCm8n8
+ 3zqi63puUBcnYsNgB5MsIwUgX5Zcw4Zksmmp/Bw1OXo1awO1srzdb0CsQhmm+m1jzlrZo8mF4
+ vvuMlUs6vzgvizK51ex1J3rWMBtlVuVW/OPH8DsQOyv/b01/8/cIwEV9k5/zM++j1ulvHQ2Sz
+ xP62xlxCOzdnQZX1TgPKF+WuGVhIM5htdXlRwJay2Mc4b11OJcgUkcZXflHIG5mr1j+HuKe0E
+ ac8veh/x12lGvMBt4jlvgKDBfnHbqN+wpAGpv5m7Y8oYJ9Nt5yOOnpIIOIiT/pQW/Pz+T6hfJ
+ vizjs4RdC3i/xCQPEvlNKTJQ==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,47 +92,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peter,
+On 10/8/24 20:14, Sughosh Ganu wrote:
+> This is part two of the series to have the EFI and LMB modules have a
+> coherent view of memory. Part one of this goal was to change the LMB
+> module to have a global and persistent memory map. Those patches have
+> now been applied to the next branch.
+>
+> These patches are changing the EFI memory allocation API's such that
+> they rely on the LMB module to allocate RAM memory. This fixes the
+> current scenario where the EFI memory module has no visibility of the
+> allocations/reservations made by the LMB module. One thing to note
+> here is that this is limited to the RAM memory region, i.e. the
+> EFI_CONVENTIONAL_MEMORY type. Any other memory type that is to be
+> added to the EFI memory map, still gets handled by the EFI memory
+> module.
 
-On 2024-10-08 23:22, Peter Robinson wrote:
-> On Tue, 8 Oct 2024 at 21:07, Jonas Karlman <jonas@kwiboo.se> wrote:
->>
->> The Hardkernel ODROID-M1S is a single-board computer based on Rockchip
->> RK3566 SoC. It features e.g. 4/8 GB LPDDR4 RAM, 64 GB eMMC, SD-card,
->> GbE LAN, HDMI 2.0, M.2 NVMe and USB 2.0/3.0.
->>
->> Add initial support for eMMC, SD-card, Ethernet, HDMI, PCIe and USB.
->>
->> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->> Link: https://lore.kernel.org/r/20240827211825.1419820-5-jonas@kwiboo.se
->> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
->>
->> [ upstream commit: 10dc64fe0f980c47c7e747885ddf7a8c12780337 ]
->>
->> (cherry picked from commit f811548e758b52896f725753086c42b49dc42c0d)
-> 
-> Will this not just come through with the dts sync process?
+With this series the UEFI SCT fails in the MemoryAllocationServicesTest
+on arm64 when running on sandbox64_defconfig:
 
-The Linux DTs is synced to U-Boot before/during merge window closes, so
-for U-Boot v2025.01 dts/upstream will only sync Linux v6.11 DTs.
+UEFI image [0x00000000182e5000:0x00000000183b7fff] pc=3D0x99d4out of
+memory 'c=3D0x99d4
+UEFI image [0x0000000014139000:0x000000001416dfff]out of memory
+'0x0000000014139000:0x000000001416dfff]
+UEFI image [0x00000000140fc000:0x0000000014100fff]out of memory
+'0x00000000140fc000:0x0000000014100fff]
 
-This board was merged into Linux v6.12-rc1, so we need to be pick DT
-from devicetree-rebasing v6.12-rc1-dts or wait for next dts/upstream
-sync in time for v2025.04.
+Without this series the test runs fine.
 
-This patch picks the DT so that we can add the board for v2025.01.
+Some guidance for running the SCT is provided in
+https://github.com/U-Boot-EFI/u-boot-sct-results.
 
-Regards,
-Jonas
+Best regards
 
-> 
->> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->> ---
->> v2: No change
->> ---
->>  .../src/arm64/rockchip/rk3566-odroid-m1s.dts  | 663 ++++++++++++++++++
->>  1 file changed, 663 insertions(+)
->>  create mode 100644 dts/upstream/src/arm64/rockchip/rk3566-odroid-m1s.dts
->>
-
-[snip]
+Heinrich
