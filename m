@@ -4,46 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AFF5CEFC43
-	for <u-boot@archiver.kernel.org>; Tue,  8 Oct 2024 19:18:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB4B4CEFC42
+	for <u-boot@archiver.kernel.org>; Tue,  8 Oct 2024 19:27:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 15D8D88EEF;
-	Tue,  8 Oct 2024 21:18:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 376BE88EE2;
+	Tue,  8 Oct 2024 21:27:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="qOeBH/Qw";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="sMw2S5Rx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67B2288B1F; Tue,  8 Oct 2024 21:18:53 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id A9F4D88F0A; Tue,  8 Oct 2024 21:27:37 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB9A888EEF
- for <u-boot@lists.denx.de>; Tue,  8 Oct 2024 21:18:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 791E58852B
+ for <u-boot@lists.denx.de>; Tue,  8 Oct 2024 21:27:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=SRS0=ecb7=RF=kwiboo.se=jonas@fe-bounces.kwiboo.se
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1728415122;
- bh=RB+Vfo6km66Y4e9lWGgKUv5n5DwySN0S7Km6kiyZrsU=;
- b=qOeBH/Qwr8eRyki+NfzkE97MuurPdD1HSyda/6+qvs2EiTSATp3O0gzCtDbWtbWb4nUKy26jb
- upOsiX5sJverNKwBX5eHZgVF2y40kL1ym5zUaSIYu82mKB0D37OhBypfxp10PVeOiQvDGMfFhLZ
- T2G0RIeAfU18IOY0I2Qci0x8UlOCBNUYJZd2cdhSvF1Jr46+Sk+W73RhHqDcfF2G8VCKqyWrij7
- pvRMbTCjfSbIZcIChKDpDz6jZ4gABHjV+LqN4ldnXLZXq4cbsJE/5pOk+v6hz2B+pkf4Y5r/+V8
- nfBT6MeVBKteXKNhY72WuoxVZ8WHZDIl21AAjy0qhcxQ==
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1728415647;
+ bh=YZOsBcFOKv+nRGg+G9Xh5GPJWcGLVtJoEe4Y8ToJDjk=;
+ b=sMw2S5RxYuPgxo+pYXO4on7HLoUwO/IX3rT8Zo3t6Zk6cEUKgCvwyOIk45mLmy23XTj+jfkVJ
+ d7UcC+jBmcaYrhufH82MwIkFRHkgwwzzMVJoLgHm4tdtQ+eChSL3fAZ8Hj8gV0eGjoE4vgKh8xt
+ htQWmyMRdiMHPqp4ZW+6/MNlh/OTrRpK0UVN7nboD6liXUfCfIfvUuVLPezbJx+w8RdRyTZq5++
+ TnHe+fVMQkM4qc3PbOdG0fghnI5Y8yqUG4p9mUErMLupdNFy1ZDqj2nvOPKdnNTov3W/NZqR4Z9
+ TqcsHgNR+uGA3JDWBvsJZXgGdoxgiCK9jllMiwGpGKZg==
 From: Jonas Karlman <jonas@kwiboo.se>
-To: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Tom Rini <trini@konsulko.com>, Sam Protsenko <semen.protsenko@linaro.org>,
- Minkyu Kang <mk7.kang@samsung.com>
+To: Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
+ Tianling Shen <cnsztl@gmail.com>, David Bauer <mail@david-bauer.net>
 Cc: Jonas Karlman <jonas@kwiboo.se>,
 	u-boot@lists.denx.de
-Subject: [PATCH v2] Revert "mmc: dw_mmc: Extract FIFO data transfer into a
- separate routine"
-Date: Tue,  8 Oct 2024 19:18:31 +0000
-Message-ID: <20241008191834.2190270-1-jonas@kwiboo.se>
+Subject: [PATCH] rockchip: Migrate to use USB_DWC3_GENERIC on RK3328
+Date: Tue,  8 Oct 2024 19:27:16 +0000
+Message-ID: <20241008192719.2192430-1-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.46.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -52,8 +50,8 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 670585917d6a06543222cc1c
+ 207.246.76.47
+X-ForwardEmail-ID: 6705879d94f108ef872130e3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,174 +68,140 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The commit 0252924ac6d4 ("mmc: dw_mmc: Extract FIFO data transfer into a
-separate routine") unintentionally changed behavior of the FIFO data
-transfer routine.
+After the full convertion of usb gadget interrupt handling to
+usb_gadget_generic_ops, it is now possible to use DM_USB_GADGET,
+DWC2_OTG and DWC3_GENERIC together without causing a build error.
 
-When data is read and size reaches 0 the original loop would wait on
-DWMCI_INTMSK_DTO or timeout. The remaining size to read and buf position
-is no longer tracked across dwmci_data_transfer_fifo() calls and because
-of this an extra call to fifo() and dwmci_fifo_ready() may now trigger a
-FIFO underflow timeout error and slows down FIFO reading.
+Change to use USB_DWC3_GENERIC instead of USB_XHCI_DWC3 to complte the
+migration initiated in commit 1bc4e8eb1d7f ("rockchip: Migrate to use
+DM_USB_GADGET on RK3328"). No functional change is intended.
 
-  Buswidth = 4, clock: 50000000
-  Sending CMD16
-  Sending CMD17
-  dwmci_fifo_ready: FIFO underflow timeout
-  Sending CMD16
-  Sending CMD18
-  dwmci_fifo_ready: FIFO underflow timeout
-  Sending CMD12
-  ## Checking hash(es) for config config-1 ... OK
-
-This reverts commit 0252924ac6d4af69061bb9589d16b30c5bdb7178 to restore
-the old working behavior.
-
-Fixes: 0252924ac6d4 ("mmc: dw_mmc: Extract FIFO data transfer into a separate routine")
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
-Changes in v2:
-- Change to revert the offending commit, both size and buf where reset
-  between fifo() calls, easier to do a full revert.
-- R-b tag not collected because of this being a different patch.
-
-Reading FIT from SD-card take ~20-30 seconds on a Rockchip RK3328 board
-without this reverted, and goes back to sub second once reverted.
+This has been tested on a Orange Pi R1 Plus LTS and a NanoPi R2S Plus.
 ---
- drivers/mmc/dw_mmc.c | 103 ++++++++++++++++++++++---------------------
- 1 file changed, 52 insertions(+), 51 deletions(-)
+ configs/evb-rk3328_defconfig                  | 3 +--
+ configs/nanopi-r2c-plus-rk3328_defconfig      | 3 +--
+ configs/nanopi-r2c-rk3328_defconfig           | 3 +--
+ configs/nanopi-r2s-rk3328_defconfig           | 3 +--
+ configs/orangepi-r1-plus-lts-rk3328_defconfig | 3 +--
+ configs/orangepi-r1-plus-rk3328_defconfig     | 3 +--
+ 6 files changed, 6 insertions(+), 12 deletions(-)
 
-diff --git a/drivers/mmc/dw_mmc.c b/drivers/mmc/dw_mmc.c
-index 8551eac70185..e1110cace897 100644
---- a/drivers/mmc/dw_mmc.c
-+++ b/drivers/mmc/dw_mmc.c
-@@ -214,66 +214,24 @@ static unsigned int dwmci_get_timeout(struct mmc *mmc, const unsigned int size)
- 	return timeout;
- }
- 
--static int dwmci_data_transfer_fifo(struct dwmci_host *host,
--				    struct mmc_data *data, u32 mask)
-+static int dwmci_data_transfer(struct dwmci_host *host, struct mmc_data *data)
- {
--	const u32 int_rx = mask & (DWMCI_INTMSK_RXDR | DWMCI_INTMSK_DTO);
--	const u32 int_tx = mask & DWMCI_INTMSK_TXDR;
-+	struct mmc *mmc = host->mmc;
- 	int ret = 0;
--	u32 len = 0, size, i;
--	u32 *buf;
--
--	size = (data->blocksize * data->blocks) / 4;
--	if (!host->fifo_mode || !size)
--		return 0;
-+	u32 timeout, mask, size, i, len = 0;
-+	u32 *buf = NULL;
-+	ulong start = get_timer(0);
- 
-+	size = data->blocksize * data->blocks;
- 	if (data->flags == MMC_DATA_READ)
- 		buf = (unsigned int *)data->dest;
- 	else
- 		buf = (unsigned int *)data->src;
- 
--	if (data->flags == MMC_DATA_READ && int_rx) {
--		dwmci_writel(host, DWMCI_RINTSTS, int_rx);
--		while (size) {
--			ret = dwmci_fifo_ready(host, DWMCI_FIFO_EMPTY, &len);
--			if (ret < 0)
--				break;
--
--			len = (len >> DWMCI_FIFO_SHIFT) & DWMCI_FIFO_MASK;
--			len = min(size, len);
--			for (i = 0; i < len; i++)
--				*buf++ = dwmci_readl(host, DWMCI_DATA);
--			size = size > len ? (size - len) : 0;
--		}
--	} else if (data->flags == MMC_DATA_WRITE && int_tx) {
--		while (size) {
--			ret = dwmci_fifo_ready(host, DWMCI_FIFO_FULL, &len);
--			if (ret < 0)
--				break;
--
--			len = host->fifo_depth - ((len >> DWMCI_FIFO_SHIFT) &
--						  DWMCI_FIFO_MASK);
--			len = min(size, len);
--			for (i = 0; i < len; i++)
--				dwmci_writel(host, DWMCI_DATA, *buf++);
--			size = size > len ? (size - len) : 0;
--		}
--		dwmci_writel(host, DWMCI_RINTSTS, DWMCI_INTMSK_TXDR);
--	}
--
--	return ret;
--}
--
--static int dwmci_data_transfer(struct dwmci_host *host, struct mmc_data *data)
--{
--	struct mmc *mmc = host->mmc;
--	int ret = 0;
--	u32 timeout, mask, size;
--	ulong start = get_timer(0);
--
--	size = data->blocksize * data->blocks;
- 	timeout = dwmci_get_timeout(mmc, size);
- 
-+	size /= 4;
-+
- 	for (;;) {
- 		mask = dwmci_readl(host, DWMCI_RINTSTS);
- 		/* Error during data transfer */
-@@ -283,7 +241,50 @@ static int dwmci_data_transfer(struct dwmci_host *host, struct mmc_data *data)
- 			break;
- 		}
- 
--		ret = dwmci_data_transfer_fifo(host, data, mask);
-+		if (host->fifo_mode && size) {
-+			len = 0;
-+			if (data->flags == MMC_DATA_READ &&
-+			    (mask & (DWMCI_INTMSK_RXDR | DWMCI_INTMSK_DTO))) {
-+				dwmci_writel(host, DWMCI_RINTSTS,
-+					     mask & (DWMCI_INTMSK_RXDR |
-+						     DWMCI_INTMSK_DTO));
-+				while (size) {
-+					ret = dwmci_fifo_ready(host,
-+							DWMCI_FIFO_EMPTY,
-+							&len);
-+					if (ret < 0)
-+						break;
-+
-+					len = (len >> DWMCI_FIFO_SHIFT) &
-+						    DWMCI_FIFO_MASK;
-+					len = min(size, len);
-+					for (i = 0; i < len; i++)
-+						*buf++ =
-+						dwmci_readl(host, DWMCI_DATA);
-+					size = size > len ? (size - len) : 0;
-+				}
-+			} else if (data->flags == MMC_DATA_WRITE &&
-+				   (mask & DWMCI_INTMSK_TXDR)) {
-+				while (size) {
-+					ret = dwmci_fifo_ready(host,
-+							DWMCI_FIFO_FULL,
-+							&len);
-+					if (ret < 0)
-+						break;
-+
-+					len = host->fifo_depth - ((len >>
-+						   DWMCI_FIFO_SHIFT) &
-+						   DWMCI_FIFO_MASK);
-+					len = min(size, len);
-+					for (i = 0; i < len; i++)
-+						dwmci_writel(host, DWMCI_DATA,
-+							     *buf++);
-+					size = size > len ? (size - len) : 0;
-+				}
-+				dwmci_writel(host, DWMCI_RINTSTS,
-+					     DWMCI_INTMSK_TXDR);
-+			}
-+		}
- 
- 		/* Data arrived correctly */
- 		if (mask & DWMCI_INTMSK_DTO) {
+diff --git a/configs/evb-rk3328_defconfig b/configs/evb-rk3328_defconfig
+index bfb85223437d..b3790c4d4ae2 100644
+--- a/configs/evb-rk3328_defconfig
++++ b/configs/evb-rk3328_defconfig
+@@ -88,13 +88,12 @@ CONFIG_SYSRESET=y
+ CONFIG_USB=y
+ CONFIG_DM_USB_GADGET=y
+ CONFIG_USB_XHCI_HCD=y
+-CONFIG_USB_XHCI_DWC3=y
+ CONFIG_USB_EHCI_HCD=y
+ CONFIG_USB_EHCI_GENERIC=y
+ CONFIG_USB_OHCI_HCD=y
+ CONFIG_USB_OHCI_GENERIC=y
+ CONFIG_USB_DWC3=y
+-# CONFIG_USB_DWC3_GADGET is not set
++CONFIG_USB_DWC3_GENERIC=y
+ CONFIG_USB_GADGET=y
+ CONFIG_USB_GADGET_DWC2_OTG=y
+ CONFIG_USB_FUNCTION_ROCKUSB=y
+diff --git a/configs/nanopi-r2c-plus-rk3328_defconfig b/configs/nanopi-r2c-plus-rk3328_defconfig
+index f311a0a80ba7..19fab59eff01 100644
+--- a/configs/nanopi-r2c-plus-rk3328_defconfig
++++ b/configs/nanopi-r2c-plus-rk3328_defconfig
+@@ -94,13 +94,12 @@ CONFIG_SYSRESET=y
+ CONFIG_USB=y
+ CONFIG_DM_USB_GADGET=y
+ CONFIG_USB_XHCI_HCD=y
+-CONFIG_USB_XHCI_DWC3=y
+ CONFIG_USB_EHCI_HCD=y
+ CONFIG_USB_EHCI_GENERIC=y
+ CONFIG_USB_OHCI_HCD=y
+ CONFIG_USB_OHCI_GENERIC=y
+ CONFIG_USB_DWC3=y
+-# CONFIG_USB_DWC3_GADGET is not set
++CONFIG_USB_DWC3_GENERIC=y
+ CONFIG_USB_GADGET=y
+ CONFIG_USB_GADGET_DWC2_OTG=y
+ CONFIG_USB_FUNCTION_ROCKUSB=y
+diff --git a/configs/nanopi-r2c-rk3328_defconfig b/configs/nanopi-r2c-rk3328_defconfig
+index 533dc1029f73..65ffdd34d4d1 100644
+--- a/configs/nanopi-r2c-rk3328_defconfig
++++ b/configs/nanopi-r2c-rk3328_defconfig
+@@ -94,13 +94,12 @@ CONFIG_SYSRESET=y
+ CONFIG_USB=y
+ CONFIG_DM_USB_GADGET=y
+ CONFIG_USB_XHCI_HCD=y
+-CONFIG_USB_XHCI_DWC3=y
+ CONFIG_USB_EHCI_HCD=y
+ CONFIG_USB_EHCI_GENERIC=y
+ CONFIG_USB_OHCI_HCD=y
+ CONFIG_USB_OHCI_GENERIC=y
+ CONFIG_USB_DWC3=y
+-# CONFIG_USB_DWC3_GADGET is not set
++CONFIG_USB_DWC3_GENERIC=y
+ CONFIG_USB_GADGET=y
+ CONFIG_USB_GADGET_DWC2_OTG=y
+ CONFIG_USB_FUNCTION_ROCKUSB=y
+diff --git a/configs/nanopi-r2s-rk3328_defconfig b/configs/nanopi-r2s-rk3328_defconfig
+index 2591a9cc8ab2..751da1c446d8 100644
+--- a/configs/nanopi-r2s-rk3328_defconfig
++++ b/configs/nanopi-r2s-rk3328_defconfig
+@@ -94,13 +94,12 @@ CONFIG_SYSRESET=y
+ CONFIG_USB=y
+ CONFIG_DM_USB_GADGET=y
+ CONFIG_USB_XHCI_HCD=y
+-CONFIG_USB_XHCI_DWC3=y
+ CONFIG_USB_EHCI_HCD=y
+ CONFIG_USB_EHCI_GENERIC=y
+ CONFIG_USB_OHCI_HCD=y
+ CONFIG_USB_OHCI_GENERIC=y
+ CONFIG_USB_DWC3=y
+-# CONFIG_USB_DWC3_GADGET is not set
++CONFIG_USB_DWC3_GENERIC=y
+ CONFIG_USB_GADGET=y
+ CONFIG_USB_GADGET_DWC2_OTG=y
+ CONFIG_USB_FUNCTION_ROCKUSB=y
+diff --git a/configs/orangepi-r1-plus-lts-rk3328_defconfig b/configs/orangepi-r1-plus-lts-rk3328_defconfig
+index 14cdbd813c81..7786a3514b4d 100644
+--- a/configs/orangepi-r1-plus-lts-rk3328_defconfig
++++ b/configs/orangepi-r1-plus-lts-rk3328_defconfig
+@@ -104,13 +104,12 @@ CONFIG_SYSRESET=y
+ CONFIG_USB=y
+ CONFIG_DM_USB_GADGET=y
+ CONFIG_USB_XHCI_HCD=y
+-CONFIG_USB_XHCI_DWC3=y
+ CONFIG_USB_EHCI_HCD=y
+ CONFIG_USB_EHCI_GENERIC=y
+ CONFIG_USB_OHCI_HCD=y
+ CONFIG_USB_OHCI_GENERIC=y
+ CONFIG_USB_DWC3=y
+-# CONFIG_USB_DWC3_GADGET is not set
++CONFIG_USB_DWC3_GENERIC=y
+ CONFIG_USB_GADGET=y
+ CONFIG_USB_GADGET_DWC2_OTG=y
+ CONFIG_USB_FUNCTION_ROCKUSB=y
+diff --git a/configs/orangepi-r1-plus-rk3328_defconfig b/configs/orangepi-r1-plus-rk3328_defconfig
+index 7fe58e7a1467..e2b9ce705ecb 100644
+--- a/configs/orangepi-r1-plus-rk3328_defconfig
++++ b/configs/orangepi-r1-plus-rk3328_defconfig
+@@ -104,13 +104,12 @@ CONFIG_SYSRESET=y
+ CONFIG_USB=y
+ CONFIG_DM_USB_GADGET=y
+ CONFIG_USB_XHCI_HCD=y
+-CONFIG_USB_XHCI_DWC3=y
+ CONFIG_USB_EHCI_HCD=y
+ CONFIG_USB_EHCI_GENERIC=y
+ CONFIG_USB_OHCI_HCD=y
+ CONFIG_USB_OHCI_GENERIC=y
+ CONFIG_USB_DWC3=y
+-# CONFIG_USB_DWC3_GADGET is not set
++CONFIG_USB_DWC3_GENERIC=y
+ CONFIG_USB_GADGET=y
+ CONFIG_USB_GADGET_DWC2_OTG=y
+ CONFIG_USB_FUNCTION_ROCKUSB=y
 -- 
 2.46.2
 
