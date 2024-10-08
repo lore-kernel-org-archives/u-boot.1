@@ -4,56 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED81ECED25F
-	for <u-boot@archiver.kernel.org>; Tue,  8 Oct 2024 04:37:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 758C2CED266
+	for <u-boot@archiver.kernel.org>; Tue,  8 Oct 2024 04:48:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 451A088D15;
-	Tue,  8 Oct 2024 06:37:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id BFEAC88210;
+	Tue,  8 Oct 2024 06:48:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1728362248;
-	bh=mj35ubIgAYXGxLEVfh3kHt16bBpWkeUlCI8XvR+h31s=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=b70zgJGPvaHsdrbvnVL57fjkiLkHGYw35A23j4s7iBuN2LPrwxig+VgFyKEOtjKq4
-	 Mcc3JVKA/BM6QHueDwBxMrgjRRvf8Lzk/jsqmvVkC8sw7CUzLLkYFWmdl7S0Ex8RCE
-	 kKRCYvhxoEEouzivPuxBktczZ3/5RbvZjwvgprAUUHJAAYYtFjYtey+2LfJBu4N/1n
-	 iNNtyXvpDmjBTeuJihy1E/lRX3MGBf695hA+VQdpjSgQ0MsVUYnOXWvfuzpI1b9DGS
-	 1skUQb3SxZ0HfmXlvG5roNlUpADUEOyxQ06yF6SY4ovN6hqpmyMLdo9LbKz7/lvnsP
-	 McXVxTMIVxTYA==
-Received: from [192.168.1.107] (82-131-157-225.pool.digikabel.hu
- [82.131.157.225])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 359B3881A2;
- Tue,  8 Oct 2024 06:37:26 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1728362246;
- bh=mj35ubIgAYXGxLEVfh3kHt16bBpWkeUlCI8XvR+h31s=;
- h=Date:Subject:To:Cc:References:Reply-To:From:In-Reply-To:From;
- b=f5YFhUiiv1PespxpJpb/ema0tsaE4BzrrTMxKiceXmVX8bCHlh8Ivz4tAI75Rxg+r
- QSHoXzeC3FPIhF82RrKd2rc11Tgyev1qEeczWYgIX6J28YjM6vOSvq8TBbs1Awky+M
- +z5oVsVMoE8pGD9YujI8Rkph652oE5NI3WNxSqanXml/Yef7XmFhCJF/LUSV9Vz9NJ
- sLWg9EGid/WicVKuxy3MVz6fTIjgnhqS+bw+/YFwxTlb3P/82P2ylXvOA4v+eGnY09
- z0JvFfa5+pt5YCh4NhWsNWdBk2uXnX6JTyn9Ia7qqtE3j+AKoBFZ+IeGNx8mohLNZU
- HZoROjuJSzrRg==
-Message-ID: <29042d19-5572-7801-8b89-f32a4ae8c8c6@denx.de>
-Date: Tue, 8 Oct 2024 06:35:20 +0200
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="L7xIbXKR";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id AA93388DBA; Tue,  8 Oct 2024 06:48:32 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 933B7881A2
+ for <u-boot@lists.denx.de>; Tue,  8 Oct 2024 06:48:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4984mRqF093006;
+ Mon, 7 Oct 2024 23:48:27 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1728362907;
+ bh=PPzGFKtwDIpvWLAmqm3xYmkMet2ip8DKszOugfZcmis=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=L7xIbXKReUI2Pdrh1bfYNOdhlM/6j5fNJZNq3oUjZDlRc7sA+YcEYmas/SGbYqudt
+ q6bCoR+PWZJigo2ZkVdzbG+oxXwibBfn0EIqfkxVDSrk1spNuFqkXe4Wc7uxFLw+Vt
+ ZvuKfQbusCHP83avQp+3+jJQa9bP+1Yt7xTtJfZA=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4984mRVw095347;
+ Mon, 7 Oct 2024 23:48:27 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 7
+ Oct 2024 23:48:26 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 7 Oct 2024 23:48:26 -0500
+Received: from localhost (uda0497581.dhcp.ti.com [10.24.68.185])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4984mQkw066134;
+ Mon, 7 Oct 2024 23:48:26 -0500
+Date: Tue, 8 Oct 2024 10:18:25 +0530
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+To: Simon Glass <sjg@chromium.org>
+CC: Jaehoon Chung <jh80.chung@samsung.com>, <u-boot@lists.denx.de>, Neha
+ Malcom Francis <n-francis@ti.com>, Keerthy J <j-keerthy@ti.com>, Udit Kumar
+ <u-kumar1@ti.com>, Aniket Limaye <a-limaye@ti.com>, Tom Rini
+ <trini@konsulko.com>, Vignesh Raghavendra <vigneshr@ti.com>, Andrew Davis
+ <afd@ti.com>, Nishanth Menon <nm@ti.com>
+Subject: Re: [PATCH v4 0/7] Add AVS support for J721S2
+Message-ID: <20241008044825.w6ldvvoibk5zrk32@uda0497581>
+References: <20241004-b4-upstream-j721s2-avs-v4-0-6d71c6bab9f4@ti.com>
+ <CAFLszThMT+kN_u=ch-6m+3Ja615PwYjHd_La2KRhOzktXD21jg@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH] sandbox: dts: Add missing sandbox,emul phandle to
- sandbox-pmic
-Content-Language: en-US
-To: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-References: <20241005143356.10069-1-marex@denx.de>
-From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <20241005143356.10069-1-marex@denx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <CAFLszThMT+kN_u=ch-6m+3Ja615PwYjHd_La2KRhOzktXD21jg@mail.gmail.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,46 +77,81 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Marek,
+Hi Simon,
 
-On 05.10.24 16:33, Marek Vasut wrote:
-> This phandle was missing in the sandbox DT, add it, otherwise sandbox-i2c
-> driver cannot look up the emulator via i2c_emul_find(). This fixes the
-> following i2c_emul_find() error:
+On 09:23-20241007, Simon Glass wrote:
+> Hi Manorit,
 > 
-> "
-> $ ./u-boot -Dc ""
-> ...
->         i2c_emul_find() No emulators for device 'sandbox_pmic'
->    sandbox_pmic_write() write error to device: 0000000018c568d0 register: 0x0!
->         out_set_value() PMIC write failed: -5
->         i2c_emul_find() No emulators for device 'sandbox_pmic'
->    sandbox_pmic_write() write error to device: 0000000018c568d0 register: 0x0!
->         out_set_value() PMIC write failed: -5
-> ...
-> "
+> On Fri, 4 Oct 2024 at 00:24, Manorit Chawdhry <m-chawdhry@ti.com> wrote:
+> >
+> > This series adds support for AVS on J721S2.
 > 
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
-> Cc: Heiko Schocher <hs@denx.de>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> ---
->   arch/sandbox/dts/sandbox_pmic.dtsi | 1 +
->   1 file changed, 1 insertion(+)
+> What is AVS? You should write an abbreviation out in full at least
+> once in the series.
 
-Reviewed-by: Heiko Schocher <hs@denx.de>
+Totally missed this part, let me take that up in the next revision!
 
-bye,
-Heiko
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+But basically it is Adaptive voltage scaling. This allows us to run
+our CPU with the optimal voltage for that particular silicon which would
+have been written in efuse during manufacturing itself. This helps in
+saving power during runtime [0]
+
+[0]: https://www.ti.com/lit/pdf/spruj28 (Section 5.2.4.1 AVS Support)
+
+Regards,
+Manorit
+
+> 
+> >
+> > AVS Test for J721S2: https://gist.github.com/manorit2001/b2fd9f6764a863294d4aa0755c83c84f
+> > Boot Test results: https://gist.github.com/manorit2001/15e45f6c421aeeb93effde023a537762
+> >
+> > Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> > ---
+> > Changes in v4:
+> >
+> > * Udit
+> > - Use the compatible for finding the node rather than alias.
+> > - Remove debug print
+> > - Add ret value in error prints
+> >
+> > - Link to v3: https://lore.kernel.org/r/20240813-b4-upstream-j721s2-avs-v3-0-5115d93cdeb2@ti.com
+> >
+> > ---
+> > Manorit Chawdhry (7):
+> >       power: pmic: tps65941: Add DM_PMIC dependency
+> >       drivers: misc: k3_avs: Check return code while programming AVS
+> >       arm: dts: k3-j7*-r5: Add MPU clock in clocks property
+> >       drivers: misc: k3_avs: Extract MPU clk and dev ID from DT
+> >       arm: mach-k3: j721s2_init: Initialize AVS Class 0
+> >       arm: dts: j721s2: Add VTM node in R5
+> >       configs: j721s2_evm_r5_defconfig: Add AVS Configs
+> >
+> >  arch/arm/dts/k3-am69-r5-sk.dts                  |  3 +-
+> >  arch/arm/dts/k3-j7200-r5-common-proc-board.dts  |  3 +-
+> >  arch/arm/dts/k3-j721e-r5.dtsi                   |  3 +-
+> >  arch/arm/dts/k3-j721s2-r5-common-proc-board.dts |  9 ++++++
+> >  arch/arm/dts/k3-j721s2-r5.dtsi                  |  3 +-
+> >  arch/arm/dts/k3-j784s4-r5-evm.dts               |  3 +-
+> >  arch/arm/mach-k3/j721s2/j721s2_init.c           | 10 +++++++
+> >  configs/am68_sk_r5_defconfig                    |  4 +++
+> >  configs/j721s2_evm_r5_defconfig                 |  6 ++++
+> >  drivers/misc/k3_avs.c                           | 40 ++++++++++++++++++++++++-
+> >  drivers/power/pmic/Kconfig                      |  1 +
+> >  11 files changed, 79 insertions(+), 6 deletions(-)
+> > ---
+> > base-commit: 3a0b829efc35227b1079a444f00e0729502197ad
+> > change-id: 20240130-b4-upstream-j721s2-avs-8c187d3fe26a
+> >
+> > Best regards,
+> > --
+> > Manorit Chawdhry <m-chawdhry@ti.com>
+> >
+> 
+> Regards,
+> Simon
