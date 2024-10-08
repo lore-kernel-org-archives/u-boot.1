@@ -4,153 +4,138 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB899CEFC25
-	for <u-boot@archiver.kernel.org>; Tue,  8 Oct 2024 15:33:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40506CEFC21
+	for <u-boot@archiver.kernel.org>; Tue,  8 Oct 2024 15:42:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3169388DCF;
-	Tue,  8 Oct 2024 17:33:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 7F96488ED8;
+	Tue,  8 Oct 2024 17:42:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="ai2gb7xP";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="b396JFGa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 18E6088E26; Tue,  8 Oct 2024 17:33:02 +0200 (CEST)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170120003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
+ id 0620F88EB5; Tue,  8 Oct 2024 17:42:09 +0200 (CEST)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on20623.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:200a::623])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0EE1F88DCF
- for <u-boot@lists.denx.de>; Tue,  8 Oct 2024 17:33:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9732588E8E
+ for <u-boot@lists.denx.de>; Tue,  8 Oct 2024 17:42:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=nxp.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=peng.fan@nxp.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=RdiesxCjGRXNeNyHFYzHsPjzVY+TU7wUfb28M7d6IaZC/DCt0KgAN6vhuZwCE4xQAF9eJ/cH6mVv/xWpJ2guH/4RTtUSxg9QorWnoQiyOJlVvKPMnRcudnmMhcQUBpgA4mT75zdOE8H15YlHUNnUxWRCu52+tbSqiS740Lw54fsEYHm8mK34QQtaYtVxYcgJPjZPJwXpceDYrD2dC3WEiq27wxNCDBNMUxlIAaaRlWMN4QAFgzJIXtV90Wivqcj3BjQ5f+oUm/SWoBBDvwj5+YHhu2SXwdXQSFNJBvfpi4urjo4Aqi046MRMOvjajoiA37WsNSeW+kNrVcySE0ytgg==
+ b=ZrL6haA7KS0Xv80gVh7ffCeNRZq7aqmDJOq7/26ikk0y/7MXWOGQlCMSdaaD0F7jxmqZHQVgT8LuX0gCszP/Lis/62kHfbpUSn+VND0+CtgtTNxvVImtwQdfJOcGnK69WqoTf77qQZTKyZsQ6cOm9cwlOMQwzWJgytaKWfwsMaJ5W1rD/7buy7/tMvbplMBOozDM+fzbFyQ60S7s1T0DGZKqEMpsouy6yz9LiJtuzbl7M0wbIYBT3JPuoQXbnAi0SKolrI9jJZOF7ZKt1NDHOxB6i0rPpAusgVdxFar2JUrNV+diFHrrRRWIlIb4s7iuKJyDPYquAo/Ofpcw/1oGXA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0BVnmXyL7IDTzQAAunOJ2+r3iG039y8iEa5DKrTSUBg=;
- b=XEGVUlA3ds0WHuhG8DedPpYuhjEgyGSYWe5OJofZLiMTSnQnrEjfNCCiKPCh0BeqFOtqnbuCq3Ja2IKBjmR1YaPF7NiJTFRjMNKJdcuCLmenhIo98kR4p9ew9/nmTR28/FyNPZFtY0NTpoS3Ofgw3Q6AYM+UejnuvliueDhvJHcsGyXXfuZRpcD6NuWLP9/TcKFCt+olZYumo5AQCrLlYfRaAIfMpwhvsd+3vT3Yq4/DmZklavWYQ3SUhnnCqQlYio7shsngoRThEyTgg2lDV/1iccq/fPyrXs2hUoYWc4bci+zalg8g8jC1ZSV9bZK2/9yJyqyVyEUtKjOtrfkWog==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
+ bh=VWykq/MFKhZ8kh7o55J4Rcx4+FCpLsD0rk/WiKzlpE4=;
+ b=mLirMbbR0LCBpzvU51PY7BIqGj4EO5oq2oWNkiGOnucyJsMYLKNuoV18fnpaic7VcGFhOWsu61OCfDbJhnBUT6WVEot1ethDuCfL3P3yt50WUg2HdixAWv7SqKoVfk6B5nGNzCtsT8EUNT+tN0OMO3vUb69UbYhGI6nNUC1EHA2gtEEQwjZuFoiEOkV4zFwdYzYzqZDIRj/XJkaNPsb4NSRjBgMLwp4fNOYt67MR8x2nk2SYSVRkTr+LCdRGtV17f7U34i6tpAWX7MNEGYotInL0etTycxIEMl9RGsnPA8XShNzZcwARjvqNcReJAMrD5QXutBtxV5uadhOjOmzbvQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0BVnmXyL7IDTzQAAunOJ2+r3iG039y8iEa5DKrTSUBg=;
- b=ai2gb7xPoTuuNgUQ08C+tPwBhuJY+CuzzIsftGk4EODQiJ+3GeyKnglBcZfCna3xnc8vq4SJw9kgU2duO9WkhKAaHh+5w0Ry4IE0CGW7hlSVRSu2iwBK0XqzPHKi3YBVCMU14XT2ZlPYqJyzemsUfZpUcx/uljHocDW098OyGJbrmnhz3GerUx1lkuOfF7ttEioh8rRF5UmRVkL+xyFrskXnKGhgpfIFsxNNn1hIybHEKs9PDrmJiaZhgRwwfOT+dN4J0rgxdNUExcovx+M+jdm/a+XVWoZu89GTrkk02Spfu/R/fc1hE3v8m8Zy6vdnWLCWtSD3h11XG8TipOhHrA==
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by DB8PR04MB6972.eurprd04.prod.outlook.com (2603:10a6:10:11c::22)
+ bh=VWykq/MFKhZ8kh7o55J4Rcx4+FCpLsD0rk/WiKzlpE4=;
+ b=b396JFGaep2oUQllHLeQ5Ni+vMzYlS7x1Bv4xaM7vNol5W6hdtjHBbHirQAmAcIYbtIJtne7znQftKGj7TeJGy/bPZsVieJ0visTlzRx0OMiuktN07QpboP3Na3BMwA7Ti0mTZthRyYNK/XTIvWoj0XECgFLVZ78Jy3vTRI60ug=
+Received: from SJ0PR03CA0262.namprd03.prod.outlook.com (2603:10b6:a03:3a0::27)
+ by IA1PR12MB8336.namprd12.prod.outlook.com (2603:10b6:208:3fc::22)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8026.22; Tue, 8 Oct
- 2024 15:32:55 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%6]) with mapi id 15.20.8026.020; Tue, 8 Oct 2024
- 15:32:55 +0000
-From: Peng Fan <peng.fan@nxp.com>
-To: Tom Rini <trini@konsulko.com>
-CC: Marek Vasut <marex@denx.de>, "Alice Guo (OSS)" <alice.guo@oss.nxp.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "sbabic@denx.de"
- <sbabic@denx.de>, "festevam@gmail.com" <festevam@gmail.com>, dl-uboot-imx
- <uboot-imx@nxp.com>, "Ross, Fedor" <fedor.ross@ifm.com>, Ye Li
- <ye.li@nxp.com>, "seanga2@gmail.com" <seanga2@gmail.com>, Alice Guo
- <alice.guo@nxp.com>
-Subject: RE: [PATCH v1] imx: Kconfig: make IMX8_ROMAPI configurable
-Thread-Topic: [PATCH v1] imx: Kconfig: make IMX8_ROMAPI configurable
-Thread-Index: AQHbF37kzuMw1Gz0EUuu/Vr5DDF+e7J6PP8AgAASNwCAAAYXAIAA2ENggAAquwCAATdiwIAAUOQAgAAepnA=
-Date: Tue, 8 Oct 2024 15:32:55 +0000
-Message-ID: <PAXPR04MB8459220EACE6B95C44B6E5AA887E2@PAXPR04MB8459.eurprd04.prod.outlook.com>
-References: <20241005233116.2781053-1-alice.guo@oss.nxp.com>
- <20241006212332.GQ4737@bill-the-cat>
- <f2f2ff63-e186-4065-8e75-7e0064d16037@denx.de>
- <20241006225032.GS4737@bill-the-cat>
- <PAXPR04MB8459A51F5CCFC565F8E395FF887D2@PAXPR04MB8459.eurprd04.prod.outlook.com>
- <20241007141730.GT4737@bill-the-cat>
- <PAXPR04MB8459AC6BFC8402C2607A5817887E2@PAXPR04MB8459.eurprd04.prod.outlook.com>
- <20241008134130.GB14210@bill-the-cat>
-In-Reply-To: <20241008134130.GB14210@bill-the-cat>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nxp.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAXPR04MB8459:EE_|DB8PR04MB6972:EE_
-x-ms-office365-filtering-correlation-id: 16121596-ff5b-4687-677c-08dce7ae7b37
-x-ld-processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|366016|376014|1800799024|38070700018;
-x-microsoft-antispam-message-info: =?us-ascii?Q?zdW0WSfa6t0XXbK5po2cjCjx/JmIpse1M/v+4n8dMglSq7HIc82Pu2hD+uqj?=
- =?us-ascii?Q?pydL1JcJ0dor5zP7aWq4rYELOueeTsuC9d+nPnVTvIlnF5zJcQL5kEDXX8ts?=
- =?us-ascii?Q?a0VSEPg2+2ogeEQiojJx1WIA2TJLtvhq2TGqHc+zIXvNptI2zGgMaBegA8ZT?=
- =?us-ascii?Q?iGlRUDira5m5MIo3eOFi5IfsLA66xbb+rWS1fhaCDtQpxFkxoHZE+j0kMsmT?=
- =?us-ascii?Q?eYjIGEHNo2J/04GRt3YESoPKuHksgNB4kfyRi3LXkxfTh1H9aLvLuZhEl3Ri?=
- =?us-ascii?Q?91/K73KctQq5NcdpRgVKUVPvD6NSCtSfXOvw52f59jRDKEkLnEd5lTosntel?=
- =?us-ascii?Q?W899r5SLS4LP1ImlnzQ+JCAkx9o09ck8Xm16dAzBvfyd+q755krqNMRalf74?=
- =?us-ascii?Q?JBmbwp1KubHeGw0rPASehtQcG7TUhHVZRNfyew1/w5o6epAKBhEkti2qdeEM?=
- =?us-ascii?Q?dZle7md2HFP3ZuzUlBlvtI8vLJOvVGVtPRViiHxBn859igKvn7o/OhQjYXv6?=
- =?us-ascii?Q?tsiLFU7uFndP0VkYHw/l/R9wKCBZvzSg+vfHJt+aagnuB8hOTgpwLuhUSwUD?=
- =?us-ascii?Q?FgUHcqKDiDoqOdRmrWUTqc2yWxi2cKmrvg/TQPsox0t0hF3YyjmZFjhIqUVi?=
- =?us-ascii?Q?VaXpeEABed7DZHglRxr6FZO8bRA63U0pcdQmHWuYlsSBlGKPPf4WrEjTxvwE?=
- =?us-ascii?Q?3nHDP7vLZMzSVUO41AlK5GZ7Yw3yvzQ0eBGAdklXffGyKvjIQKdn1ZcvJzsA?=
- =?us-ascii?Q?uZ9212gCsd/gNELLcNMU+XVKgWusx6s76M8ikX0tA1vaI/A7ceZ41B4Sf6rH?=
- =?us-ascii?Q?EA2A+2ZRDdBB6nhe0Af56zNK5w/t9Z2wyAu9+0elhoRpyjmGpvKUIIoCb+Mv?=
- =?us-ascii?Q?7PpyhLLhiKyEXh9u1+0qscRfDRn12Mgh16r1NPpU1A5N48QjMjdm6+9Rlf2B?=
- =?us-ascii?Q?r9gVnzDDAvsnoX/SqNg3kmr5sW9Y/ttcygFhJAJWs6UW1qEFoZlTrKeZLO/i?=
- =?us-ascii?Q?yuhVftO3Rop2JWQDM3bbajGX7VkPKiJKcw+QVJzVVUOcSnSHSVkkzaRYn8Y1?=
- =?us-ascii?Q?CUA0cGAtGVcjOh+ZiZJKTdwW9IijMY2JaHxECx/KSufl+3+x5ONavNO9Sfa2?=
- =?us-ascii?Q?vVjQOOKTB6pHvVctAwLBIz3yDwHp+1ci3d5ezlFqfdRKkQWQAKe0MRAruIQX?=
- =?us-ascii?Q?RqmwNbgLfCp7XTl1iJIYbls1Mvy+GmLm26cLtvPYtBe5iLSsRrsU+ZbbeLqs?=
- =?us-ascii?Q?yOEsiqdaiTv/yPZzFNFnkl8Y18qCe9vljmx4KqcJy1ASpcvgJUqOtoEvCFGx?=
- =?us-ascii?Q?Oj1Fxyw+NWCpDsijfgmcgyFwrO/HDExK6e6ys1G+4SBjkg=3D=3D?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024)(38070700018); DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?g98FUkDyAVnZv4JdKvNjNvbKAeFG7MYOd6QU+lG18escZqYcdF3Mf3Lwmxsf?=
- =?us-ascii?Q?giXQ0TwUdzgrh/5zu7gEV8zvJtQEC/ugzMjX5DHJbbDTNPCt22Fo2lM68z/1?=
- =?us-ascii?Q?TdOi6HHKmbxKoUwfS9aORFEyHpQbx3W2I5I6HC6mmpSxjx4lZL0Pw7iMVFBv?=
- =?us-ascii?Q?6hqjr5eQBu1nkKhiNiSLiwIYHRTVBNsFrisZNyFyPScFAoz/jpuMMwj+qX5w?=
- =?us-ascii?Q?73pGJigw6INyDVVOgWTpejkomgakWtbhOcX1BwdAhNQx48ssyazEvhECMH/8?=
- =?us-ascii?Q?z3glgOz9Wyfur48GqBRW4Wqu26DO/CFdr9x/+h76ahyyC8SmCljYf4fLL5G9?=
- =?us-ascii?Q?+heiBRkt8uC+QQq0Rc6U4U8UuIhwPBWuKnF3jqFbBGD/fIgWM5SFPpapHO+z?=
- =?us-ascii?Q?2zvyYAUWlnhnDpoK8wFtmCyC8Zs6E+zKBw6dv8t/748xqRGTO4AmEkHUq2fQ?=
- =?us-ascii?Q?ptC675dSaM52/LsDT1MetP5i2eBAl9xffI8frcLwd7i5uuxWEJ7bDClD07fm?=
- =?us-ascii?Q?z3TaBrsa9EXkU+ZPZsuU8r0ttazXEkVDT72C6gW4q3IiQ1oYhxLklxWvsk+y?=
- =?us-ascii?Q?0lzqu0TnvmUipc5fYUtOQS6qiJ2foJU3jppCeGRbYiJqh4yTdhEF74+ELmUC?=
- =?us-ascii?Q?IRwHzUJIkHF7nEHmXU5P5h3rvFGiyIUpLgctD8mrQsRfu7gGVEf813I+GWHu?=
- =?us-ascii?Q?B6VTkTuak8U45ojh4zHjDz7bPEMxYOSMzLZa62sXRj2ZfVXplLryKf7WrJnT?=
- =?us-ascii?Q?4Mhu9JyO6BXqtgx4f++VtqFsqVUXW0Kt4/2NM3cp0dMXkUVIS4JO8TyPCYR4?=
- =?us-ascii?Q?4YZvNGJ4AtQ358SX5r1QrtTc9PSjVLdjdM2rLdWbIucSn9PVhaY9uJCNfZH1?=
- =?us-ascii?Q?EIpT9H+kQ0Ckjr6MYaU8MoCXhgPmQKnTBrQN4vJdIzGRouDtVAngwxZcmBoB?=
- =?us-ascii?Q?7gvwYJGuk5tzqRzno8zi1yOoczpWJAULyGchfRu1Hh5pLtD0w8pToQp/+ZCh?=
- =?us-ascii?Q?yqSZ8xMJ0ZJtxtjqwrbIjwWsAJibnd/0BDdrNW/+kO35zKPdZEDaFOLdMqPf?=
- =?us-ascii?Q?DzCu6dj34iCao/HlMt+kdXhPPtHO1If9dsJPrnGrWLWvwKnpEs9COugeOOE5?=
- =?us-ascii?Q?G1elLAmSAXUEqpiwjwfqx9MmH1KgzyvNVgCMM3iCk49m4CzDXNXEYmESZXNP?=
- =?us-ascii?Q?wd2ocPZiIqRxvddBLZM3mymlF9lt7WFqMVCIJltle5Bd2D5rloA9nE7k2RvD?=
- =?us-ascii?Q?f4i3xP6rkkxgtnCPmhuv93el0lSULKDivvQOmHi1Spu3PvYukqcBnidRinA2?=
- =?us-ascii?Q?ybziWAuDJaFxRZAoP8DfKWlaUyuWjSBeGD2EHczVSBJ11bIkdpyczaf63c+y?=
- =?us-ascii?Q?f5MK0NIdkJQqXNO3ewU14WkUg+AibIalBwyKX2Kas+/F37hIoTxLTfqAPEj1?=
- =?us-ascii?Q?2ZMY2ylfWWVG/NCHugYemwvalO8JPCQd8iaTGx2ds3aemNcEy0O8MWqw/acg?=
- =?us-ascii?Q?ww5XriReCc2nljRLz23UfgAGC7qVzFmcCKqShozaViqVuH+58yuEYEoGjvsZ?=
- =?us-ascii?Q?HTAtMBGdMVBcUjgVr6k=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8026.23; Tue, 8 Oct
+ 2024 15:42:01 +0000
+Received: from SJ1PEPF0000231E.namprd03.prod.outlook.com
+ (2603:10b6:a03:3a0:cafe::3e) by SJ0PR03CA0262.outlook.office365.com
+ (2603:10b6:a03:3a0::27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8048.17 via Frontend
+ Transport; Tue, 8 Oct 2024 15:42:00 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SJ1PEPF0000231E.mail.protection.outlook.com (10.167.242.230) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8048.13 via Frontend Transport; Tue, 8 Oct 2024 15:42:00 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 8 Oct
+ 2024 10:41:58 -0500
+Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Tue, 8 Oct 2024 10:41:56 -0500
+From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <michal.simek@amd.com>, <marex@denx.de>, <fabrice.gasnier@foss.st.com>,
+ <git@amd.com>
+Subject: [PATCH v7 0/7] Add the USB5744 hub driver as per new DT binding
+Date: Tue, 8 Oct 2024 21:11:32 +0530
+Message-ID: <20241008154139.31204-1-venkatesh.abbarapu@amd.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 16121596-ff5b-4687-677c-08dce7ae7b37
-X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Oct 2024 15:32:55.6779 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: U+TInjHY+BiFtDaT5cjYQwVCLVgVRTze/EwaXSHyTT0r6jf6IS7tRfE2bL/1LoohNp2QBPlqWcC7O+/qGySRoQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR04MB6972
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Received-SPF: None (SATLEXMB04.amd.com: venkatesh.abbarapu@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF0000231E:EE_|IA1PR12MB8336:EE_
+X-MS-Office365-Filtering-Correlation-Id: b2a971b9-f917-4326-7044-08dce7afbff4
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|376014|1800799024|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?Nkp4ckJPQVFWc2JlNmNKYTh4Sy8yU2tVNENDcjEvQ1hkQzBDWWhKSGo1S1Iw?=
+ =?utf-8?B?dm5SdlJUUHRWZzNZRXpaSjRkdTdzYVdKZkY5cEdiVXByRUU5VnQvK25HMmNr?=
+ =?utf-8?B?MmZNRkVOS0NDUy9KclJOUXpncTRmWlVEbzExdEVxQmh4RkpBdU1EUmhadFM5?=
+ =?utf-8?B?eHJTT21KRnRSSklDaFp1aHFtSnFhUXFBWGxjVGgvL0tRdi9KUUpZck9sWWVt?=
+ =?utf-8?B?U2tqUmRxb010WG4rb1ROZEcwZFAya0lXQVNDM2pRbTRDMmNJN2NaQUJPVlFE?=
+ =?utf-8?B?MmdkRkZjZURGSnhpL2wyUy9YdVN1OWRHQ2RtbmRwVFFMRkUrc0kzN1lDQ0pa?=
+ =?utf-8?B?aWVjeHhtUGlZeGFYVEFsSzBYbStRVWRiU3NuZFR1Y1dVdGszNEJOdHZTZ0VU?=
+ =?utf-8?B?MVAvVVZpcERqYmxGQU1rZ211UU5BRjlmMHJoUE9zS3hjSklpMDVYKzZWUUtS?=
+ =?utf-8?B?cGNNS1p4dVNkOXZ1WXhOckdodnhGRytZc1lzem5sTGxuUzFjN1VOZHNFcG9Y?=
+ =?utf-8?B?d3JhWTJjdllhem5qUlAzbkZnem9FOFEwZXR4WEo5S0lxUnpySnUyd0tjVm10?=
+ =?utf-8?B?NWlLSncyUnpZS2dpT1c0WDJRYk5GelBJY25mK3RaZUp5aTZ4cTdLd21WNk1r?=
+ =?utf-8?B?aU9iM1pQZVg3aWZEOGRyZUVMZkplbXNTd1N0ZlREeVpCZVlyT0tzQ29SNUFJ?=
+ =?utf-8?B?eVlZVzVxakFJRlhBd0JOclhaRGRVM2wwRjU5WjVWUjVZRC9KdW1tMUEvREEw?=
+ =?utf-8?B?eHprbitRYVdhV2hnK2NRWFdMbEVyMklxUE0zTmpmcEw5b3R1dEpUak9vdHpk?=
+ =?utf-8?B?VTlCWXcwTUx3SmYrdm5yamllMVpjLzJETWpoV3c0bVU2RVc0S1FMNWF6Tmpl?=
+ =?utf-8?B?OHM0ekp4RXR0czdmc2RkWlU3blJMVFY1MWVLYXFxdUpSMkxZQy95VExZYkds?=
+ =?utf-8?B?M2p4OUdXRkdycWV6Sm5BZGNnK0NlS21PdndGZFpIVUR0aEVUejBFcitkeDN2?=
+ =?utf-8?B?b2NRVWovU0VrM1I5d3hPU3REeHFZTEtCWjFqYm5wM21NQ2tSWFA4bk9JWUZa?=
+ =?utf-8?B?OVRhWkxhQmg1OFR6ckZRU3VJWnhjYUl1ZnNuV0xHdUxycDVXMkQxWko3Y3RM?=
+ =?utf-8?B?WlBPZ2Z6QTkyLzVkT2t0THFsb1FNMHJpdE0wYW4xY0lldDI0K0I0UjlyeWdM?=
+ =?utf-8?B?VDZ1N0FYMVZUS2dxSEF6Z0pNK0dOZHUvVFVOU0o1R2ZTb1h0Nk9PVUpUak0x?=
+ =?utf-8?B?TU5DVXVJK0hOb0JVZkptUFVub2p2OFdPQUx1TVpZaUQ3M0tYVzV0TXBpNHhD?=
+ =?utf-8?B?aG4yMzFDVkY5d1R6OVRrMm5XWVVjeUppaGZQVncrTHRsbEJVdVBZTzQvUzI5?=
+ =?utf-8?B?WXFZRUJBM2ZoTWZoTDhjZndINkh4UGRsWlV4VS9yS2VlbVdEb2JCU2o1TVRn?=
+ =?utf-8?B?TkdSeWJNRnIwbURCTDBGQm9uNmN1WkkvMVU2SjB4akgwYkxVK1BuOUdoZmtX?=
+ =?utf-8?B?YjVpSlNGazRJSlFaR3krR1dldGlPYkpuVWorS1UrWkovTkxYSGZvUCt0THpj?=
+ =?utf-8?B?cEFuQnlVVWJob2FKdUtsVWtzaENubnpDZWk3Kzh1WW5HbnJOM0RuTUVKeGFu?=
+ =?utf-8?B?WHlQaGplcXovZjlWTXk4ZlE0RFk1ZmQ3ZmJuMTI3REF1bGpCZnRHZXA4SVRs?=
+ =?utf-8?B?RG1SRlo5eERtZ0RpVGNQeXNYYzl4VVgzR3EzaCtNR0ZhVjNrVjVZdXg2ZUl1?=
+ =?utf-8?B?Y2EvTUZwNjZXZ3YxQWhHbWExV29Wc2c1UE0wTGtQekdmSndLTS9TOExiVStD?=
+ =?utf-8?Q?NyZBM5hUwXBx4lWp7jHrAo8s6/xqe27fj1IqM=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(376014)(1800799024)(82310400026); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Oct 2024 15:42:00.4122 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b2a971b9-f917-4326-7044-08dce7afbff4
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF0000231E.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB8336
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -167,157 +152,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Subject: Re: [PATCH v1] imx: Kconfig: make IMX8_ROMAPI
-> configurable
->=20
-> On Tue, Oct 08, 2024 at 08:54:38AM +0000, Peng Fan wrote:
-> > > Subject: Re: [PATCH v1] imx: Kconfig: make IMX8_ROMAPI
-> configurable
-> > >
-> > > On Mon, Oct 07, 2024 at 11:46:03AM +0000, Peng Fan wrote:
-> > > >
-> > > >
-> > > > > -----Original Message-----
-> > > > > From: Tom Rini <trini@konsulko.com>
-> > > > > Sent: Monday, October 7, 2024 6:51 AM
-> > > > > To: Marek Vasut <marex@denx.de>
-> > > > > Cc: Alice Guo (OSS) <alice.guo@oss.nxp.com>; u-
-> > > boot@lists.denx.de;
-> > > > > sbabic@denx.de; festevam@gmail.com; dl-uboot-imx <uboot-
-> > > > > imx@nxp.com>; Peng Fan <peng.fan@nxp.com>; Ross, Fedor
-> > > > > <fedor.ross@ifm.com>; Ye Li <ye.li@nxp.com>;
-> > > seanga2@gmail.com;
-> > > > > Alice Guo <alice.guo@nxp.com>
-> > > > > Subject: Re: [PATCH v1] imx: Kconfig: make IMX8_ROMAPI
-> > > configurable
-> > > > >
-> > > > > On Mon, Oct 07, 2024 at 12:28:44AM +0200, Marek Vasut
-> wrote:
-> > > > > > On 10/6/24 11:23 PM, Tom Rini wrote:
-> > > > > > > On Sun, Oct 06, 2024 at 07:31:16AM +0800,
-> > > > > alice.guo@oss.nxp.com wrote:
-> > > > > > >
-> > > > > > > > From: Peng Fan <peng.fan@nxp.com>
-> > > > > > > >
-> > > > > > > > Make CONFIG_IMX8_ROMAPI could be configured in
-> > > defconfig.
-> > > > > > > >
-> > > > > > > > Signed-off-by: Peng Fan <peng.fan@nxp.com>
-> > > > > > > > Signed-off-by: Alice Guo <alice.guo@nxp.com>
-> > > > > > > > Reviewed-by: Ye Li <ye.li@nxp.com>
-> > > > > > > > ---
-> > > > > > > >   arch/arm/mach-imx/Kconfig | 3 ++-
-> > > > > > > >   1 file changed, 2 insertions(+), 1 deletion(-)
-> > > > > > > >
-> > > > > > > > diff --git a/arch/arm/mach-imx/Kconfig b/arch/arm/mach-
-> > > > > imx/Kconfig
-> > > > > > > > index 134e42028c..9d3aafd2f8 100644
-> > > > > > > > --- a/arch/arm/mach-imx/Kconfig
-> > > > > > > > +++ b/arch/arm/mach-imx/Kconfig
-> > > > > > > > @@ -179,7 +179,8 @@ config
-> DDRMC_VF610_CALIBRATION
-> > > > > > > >   	  the ddrmc_cr_setting on relevant board file.
-> > > > > > > >   config IMX8_ROMAPI
-> > > > > > > > -	def_bool y
-> > > > > > > > +	bool "Enable i.MX ROMAPI"
-> > > > > > > > +	default y
-> > > > > > > >   	depends on IMX8MN || IMX8MP || IMX8ULP ||
-> > > IMX9
-> > > > > > >
-> > > > > > > Since there's no help here, is this truly configurable, or
-> > > > > > > is this something that should be select'd based on the SoC
-> > > > > > > and
-> > > > > presumably
-> > > > > > > some of the newer IMX9 parts cannot use this?
-> > > > > > I can imagine the MX95 calls into this custom ELE firmware
-> > > > > > stuff instead of ROMAPI ?
-> > > > >
-> > > > > Alright. Perhaps this should be depending on the above and
-> > > > > !main-ELE- symbol instead.
-> > > >
-> > > > Nope. To i.MX93, ELE and ROMAPI are both valid. There is case
-> that
-> > > > ROMAPI needs to be false while ELE is still true.
-> > >
-> > > Alright, but where is the choice made? As in, can a normal i.MX93
-> > > board use one or the other, or will it depend on specific SoCs in
-> > > the family?
-> > > And is disabling this option even valid on the i.MX8 families?
-> >
-> > Sorry, my last statement was wrong. This is only to disable ROMAPI
-> for
-> > i.MX95. Downstream only has below:
-> > ./configs/imx95_19x19_evk_lvds_defconfig:222:CONFIG_IMX8_ROM
-> API=3Dn
-> > ./configs/imx95_19x19_verdin_android_trusty_defconfig:221:CONFI
-> G_IMX8_
-> > ROMAPI=3Dn
-> > ./configs/imx95_15x15_evk_android_dual_defconfig:217:CONFIG_IM
-> X8_ROMAP
-> >
-> I=3Dn ./configs/imx95_19x19_evk_defconfig:222:CONFIG_IMX8_ROMAPI
-> =3Dn
-> > ./configs/imx95_19x19_evk_android_uuu_defconfig:222:CONFIG_IM
-> X8_ROMAPI
-> > =3Dn
-> > ./configs/imx95_19x19_verdin_fspi_defconfig:226:CONFIG_IMX8_RO
-> MAPI=3Dn
-> > ./configs/imx95_19x19_evk_android_dual_defconfig:222:CONFIG_IM
-> X8_ROMAP
-> >
-> I=3Dn ./configs/imx95_15x15_evk_defconfig:217:CONFIG_IMX8_ROMAPI
-> =3Dn
-> > ./configs/imx95_15x15_evk_android_uuu_defconfig:217:CONFIG_IM
-> X8_ROMAPI
-> > =3Dn
-> > ./configs/imx95_19x19_evk_android_trusty_secure_unlock_dual_def
-> config:
-> > 222:CONFIG_IMX8_ROMAPI=3Dn
-> > ./configs/imx95_19x19_verdin_android_uuu_defconfig:221:CONFIG_
-> IMX8_ROM
-> > API=3Dn
-> > ./configs/imx95_15x15_evk_lvds_defconfig:218:CONFIG_IMX8_ROM
-> API=3Dn
-> > ./configs/imx95_19x19_verdin_android_trusty_dual_defconfig:221:C
-> ONFIG_
-> > IMX8_ROMAPI=3Dn
-> > ./configs/imx95_19x19_verdin_defconfig:221:CONFIG_IMX8_ROMAP
-> I=3Dn
-> > ./configs/imx95_15x15_evk_android_trusty_dual_defconfig:217:CON
-> FIG_IMX
-> > 8_ROMAPI=3Dn
-> > ./configs/imx95_15x15_evk_android_defconfig:217:CONFIG_IMX8_R
-> OMAPI=3Dn
-> > ./configs/imx95_19x19_evk_android_rpmsg_defconfig:222:CONFIG_I
-> MX8_ROMA
-> > PI=3Dn
-> > ./configs/imx95_19x19_evk_android_trusty_defconfig:222:CONFIG_I
-> MX8_ROM
-> > API=3Dn
-> > ./configs/imx95_19x19_evk_fspi_defconfig:227:CONFIG_IMX8_ROM
-> API=3Dn
-> > ./configs/imx95_19x19_evk_android_defconfig:222:CONFIG_IMX8_R
-> OMAPI=3Dn
-> > ./configs/imx95_19x19_evk_android_trusty_dual_defconfig:222:CON
-> FIG_IMX
-> > 8_ROMAPI=3Dn
-> > ./configs/imx95_19x19_verdin_android_defconfig:221:CONFIG_IMX8
-> _ROMAPI=3D
-> > n
->=20
-> So it sounds like this is not something to be prompted for and must be
-> selected / def_bool'd appropriately.
+Add the usb5744/usb2744 hub driver which does the reset gpio toggling
+and the i2c initialization sequence.
 
-Yeah, change to the following should be fine as of now and put this
-into the i.MX95 patchset.
+Tested the USB5744/USB2744 usb hub for usb0, usb1 with the
+DT nodes on KR260 board.
 
-config IMX8_ROMAPI
--       def_bool y
-+       def_bool y if (!IMX95)
+Changes in v2:
+- Added the power_on_reset_us variable, for post-reset time.
+- Removed the DM_REGULATOR ifdef around the regulator API's.
+- Rename the i2c_init and fixed the return for the API's.
 
-Thanks,
-Peng.
+Changes in v3:
+- Rename i2c_init to init.
+- Fixed the return values for the dev_read_phandle_with_args API.
+- Removed the unneccessary cast uint8_t *.
 
->=20
-> --
-> Tom
+Changes in v4:
+- Fixed the indentation issues.
+- Fixed the Reverse xmas tree for indentation.
+- Replaced dev_dbg to dev_err in all places.
+
+Changes in v5:
+- Add new API for usb_onboard_hub_reset.
+
+Changes in v6:
+- Add return for usb_onboard_hub_reset in probe.
+
+Changes in v7:
+- Sort the structure onboard_hub_data data.
+- Remove the variable gpio_desc * for dm_gpio_free().
+
+Venkatesh Yadav Abbarapu (7):
+  usb: onboard-hub: Add reset-gpio support
+  usb: onboard-hub: Fix the return values of regulator APIs
+  usb: onboard-hub: add support for Microchip USB5744
+  usb: onboard-hub: Add i2c initialization for usb5744 hub
+  usb: onboard-hub: Bail out if peer hub is already probed
+  configs: zynqmp_kria: Enable the USB onboard hub
+  arm64: zynqmp: Update the usb5744 hub node as per binding
+
+ arch/arm/dts/zynqmp-sck-kr-g-revA.dtso |  48 +++++++
+ arch/arm/dts/zynqmp-sck-kr-g-revB.dtso |  48 +++++++
+ arch/arm/dts/zynqmp-sck-kv-g-revA.dtso |  18 +++
+ arch/arm/dts/zynqmp-sck-kv-g-revB.dtso |  25 +++-
+ common/usb_onboard_hub.c               | 190 ++++++++++++++++++++++++-
+ configs/xilinx_zynqmp_kria_defconfig   |  11 +-
+ 6 files changed, 329 insertions(+), 11 deletions(-)
+
+-- 
+2.17.1
+
