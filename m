@@ -4,44 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF298CEFC39
-	for <u-boot@archiver.kernel.org>; Tue,  8 Oct 2024 18:17:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AFF5CEFC43
+	for <u-boot@archiver.kernel.org>; Tue,  8 Oct 2024 19:18:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C97A288F67;
-	Tue,  8 Oct 2024 20:15:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 15D8D88EEF;
+	Tue,  8 Oct 2024 21:18:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="qOeBH/Qw";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5B6C88F67; Tue,  8 Oct 2024 20:15:36 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 9E94288E26
- for <u-boot@lists.denx.de>; Tue,  8 Oct 2024 20:15:34 +0200 (CEST)
+ id 67B2288B1F; Tue,  8 Oct 2024 21:18:53 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id CB9A888EEF
+ for <u-boot@lists.denx.de>; Tue,  8 Oct 2024 21:18:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A9E47113E;
- Tue,  8 Oct 2024 11:16:03 -0700 (PDT)
-Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 40CBA3F64C;
- Tue,  8 Oct 2024 11:15:31 -0700 (PDT)
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v2 14/14] efi_memory: rename variable to highlight overlap
- with free memory
-Date: Tue,  8 Oct 2024 23:44:35 +0530
-Message-Id: <20241008181435.1753814-15-sughosh.ganu@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241008181435.1753814-1-sughosh.ganu@linaro.org>
-References: <20241008181435.1753814-1-sughosh.ganu@linaro.org>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=ecb7=RF=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1728415122;
+ bh=RB+Vfo6km66Y4e9lWGgKUv5n5DwySN0S7Km6kiyZrsU=;
+ b=qOeBH/Qwr8eRyki+NfzkE97MuurPdD1HSyda/6+qvs2EiTSATp3O0gzCtDbWtbWb4nUKy26jb
+ upOsiX5sJverNKwBX5eHZgVF2y40kL1ym5zUaSIYu82mKB0D37OhBypfxp10PVeOiQvDGMfFhLZ
+ T2G0RIeAfU18IOY0I2Qci0x8UlOCBNUYJZd2cdhSvF1Jr46+Sk+W73RhHqDcfF2G8VCKqyWrij7
+ pvRMbTCjfSbIZcIChKDpDz6jZ4gABHjV+LqN4ldnXLZXq4cbsJE/5pOk+v6hz2B+pkf4Y5r/+V8
+ nfBT6MeVBKteXKNhY72WuoxVZ8WHZDIl21AAjy0qhcxQ==
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Tom Rini <trini@konsulko.com>, Sam Protsenko <semen.protsenko@linaro.org>,
+ Minkyu Kang <mk7.kang@samsung.com>
+Cc: Jonas Karlman <jonas@kwiboo.se>,
+	u-boot@lists.denx.de
+Subject: [PATCH v2] Revert "mmc: dw_mmc: Extract FIFO data transfer into a
+ separate routine"
+Date: Tue,  8 Oct 2024 19:18:31 +0000
+Message-ID: <20241008191834.2190270-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.46.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 670585917d6a06543222cc1c
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,158 +70,174 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The functions to add a memory region to the EFI memory map have a
-variable, overlap_only_ram, which is used to indicate if a new memory
-region needs to be carved out from the free, or conventional
-memory. The name overlap_only_ram is a bit confusing, as other
-allocated memory regions, like boot-services code and data are also
-part of the RAM memory. Rename the variable to highlight the fact that
-it is the free/conventional memory that is being referred to in this
-context.
+The commit 0252924ac6d4 ("mmc: dw_mmc: Extract FIFO data transfer into a
+separate routine") unintentionally changed behavior of the FIFO data
+transfer routine.
 
-Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+When data is read and size reaches 0 the original loop would wait on
+DWMCI_INTMSK_DTO or timeout. The remaining size to read and buf position
+is no longer tracked across dwmci_data_transfer_fifo() calls and because
+of this an extra call to fifo() and dwmci_fifo_ready() may now trigger a
+FIFO underflow timeout error and slows down FIFO reading.
+
+  Buswidth = 4, clock: 50000000
+  Sending CMD16
+  Sending CMD17
+  dwmci_fifo_ready: FIFO underflow timeout
+  Sending CMD16
+  Sending CMD18
+  dwmci_fifo_ready: FIFO underflow timeout
+  Sending CMD12
+  ## Checking hash(es) for config config-1 ... OK
+
+This reverts commit 0252924ac6d4af69061bb9589d16b30c5bdb7178 to restore
+the old working behavior.
+
+Fixes: 0252924ac6d4 ("mmc: dw_mmc: Extract FIFO data transfer into a separate routine")
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
-Changes since V1: New patch
+Changes in v2:
+- Change to revert the offending commit, both size and buf where reset
+  between fifo() calls, easier to do a full revert.
+- R-b tag not collected because of this being a different patch.
 
- include/efi_loader.h        | 16 +++++++-----
- lib/efi_loader/efi_memory.c | 51 ++++++++++++++++++++-----------------
- 2 files changed, 37 insertions(+), 30 deletions(-)
+Reading FIT from SD-card take ~20-30 seconds on a Rockchip RK3328 board
+without this reverted, and goes back to sub second once reverted.
+---
+ drivers/mmc/dw_mmc.c | 103 ++++++++++++++++++++++---------------------
+ 1 file changed, 52 insertions(+), 51 deletions(-)
 
-diff --git a/include/efi_loader.h b/include/efi_loader.h
-index 0d5555c7597..c3512c63a50 100644
---- a/include/efi_loader.h
-+++ b/include/efi_loader.h
-@@ -788,15 +788,17 @@ efi_status_t efi_add_memory_map(u64 start, u64 size, int memory_type);
- /**
-  * efi_add_memory_map_pg() - add pages to the memory map
-  *
-- * @start:		start address, must be a multiple of EFI_PAGE_SIZE
-- * @pages:		number of pages to add
-- * @memory_type:	type of memory added
-- * @overlap_only_ram:	region may only overlap RAM
-- * Return:		status code
-+ * @start:			start address, must be a multiple of
-+ *				EFI_PAGE_SIZE
-+ * @pages:			number of pages to add
-+ * @memory_type:		type of memory added
-+ * @overlap_only_freemem:	region may only overlap free(conventional)
-+ *				memory
-+ * Return:			status code
-  */
- efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
--					  int memory_type,
--					  bool overlap_only_ram);
-+				   int memory_type,
-+				   bool overlap_only_freemem);
+diff --git a/drivers/mmc/dw_mmc.c b/drivers/mmc/dw_mmc.c
+index 8551eac70185..e1110cace897 100644
+--- a/drivers/mmc/dw_mmc.c
++++ b/drivers/mmc/dw_mmc.c
+@@ -214,66 +214,24 @@ static unsigned int dwmci_get_timeout(struct mmc *mmc, const unsigned int size)
+ 	return timeout;
+ }
  
- /* Called by board init to initialize the EFI drivers */
- efi_status_t efi_driver_init(void);
-diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-index 0f25094dbf8..97b89a97a2e 100644
---- a/lib/efi_loader/efi_memory.c
-+++ b/lib/efi_loader/efi_memory.c
-@@ -173,17 +173,19 @@ static void efi_mem_sort(void)
- /**
-  * efi_mem_carve_out() - unmap memory region
-  *
-- * @map:		memory map
-- * @carve_desc:		memory region to unmap
-- * @overlap_only_ram:	the carved out region may only overlap RAM
-- * Return:		the number of overlapping pages which have been
-- *			removed from the map,
-- *			EFI_CARVE_NO_OVERLAP, if the regions don't overlap,
-- *			EFI_CARVE_OVERLAPS_NONRAM, if the carve and map overlap,
-- *			and the map contains anything but free ram
-- *			(only when overlap_only_ram is true),
-- *			EFI_CARVE_LOOP_AGAIN, if the mapping list should be
-- *			traversed again, as it has been altered.
-+ * @map:			memory map
-+ * @carve_desc:			memory region to unmap
-+ * @overlap_only_freemem:	the carved out region may only overlap free,
-+ *				or conventional memory
-+ * Return:			the number of overlapping pages which have been
-+ *				removed from the map,
-+ *				EFI_CARVE_NO_OVERLAP, if the regions don't
-+ *				overlap, EFI_CARVE_OVERLAPS_NONRAM, if the carve
-+ *				and map overlap, and the map contains anything
-+ *				but free ram(only when overlap_only_freemem is
-+ *				true),
-+ *				EFI_CARVE_LOOP_AGAIN, if the mapping list should
-+ *				be traversed again, as it has been altered.
-  *
-  * Unmaps all memory occupied by the carve_desc region from the list entry
-  * pointed to by map.
-@@ -193,7 +195,7 @@ static void efi_mem_sort(void)
-  */
- static s64 efi_mem_carve_out(struct efi_mem_list *map,
- 			     struct efi_mem_desc *carve_desc,
--			     bool overlap_only_ram)
-+			     bool overlap_only_freemem)
+-static int dwmci_data_transfer_fifo(struct dwmci_host *host,
+-				    struct mmc_data *data, u32 mask)
++static int dwmci_data_transfer(struct dwmci_host *host, struct mmc_data *data)
  {
- 	struct efi_mem_list *newmap;
- 	struct efi_mem_desc *map_desc = &map->desc;
-@@ -208,7 +210,7 @@ static s64 efi_mem_carve_out(struct efi_mem_list *map,
- 		return EFI_CARVE_NO_OVERLAP;
+-	const u32 int_rx = mask & (DWMCI_INTMSK_RXDR | DWMCI_INTMSK_DTO);
+-	const u32 int_tx = mask & DWMCI_INTMSK_TXDR;
++	struct mmc *mmc = host->mmc;
+ 	int ret = 0;
+-	u32 len = 0, size, i;
+-	u32 *buf;
+-
+-	size = (data->blocksize * data->blocks) / 4;
+-	if (!host->fifo_mode || !size)
+-		return 0;
++	u32 timeout, mask, size, i, len = 0;
++	u32 *buf = NULL;
++	ulong start = get_timer(0);
  
- 	/* We're overlapping with non-RAM, warn the caller if desired */
--	if (overlap_only_ram && (map_desc->type != EFI_CONVENTIONAL_MEMORY))
-+	if (overlap_only_freemem && (map_desc->type != EFI_CONVENTIONAL_MEMORY))
- 		return EFI_CARVE_OVERLAPS_NONRAM;
++	size = data->blocksize * data->blocks;
+ 	if (data->flags == MMC_DATA_READ)
+ 		buf = (unsigned int *)data->dest;
+ 	else
+ 		buf = (unsigned int *)data->src;
  
- 	/* Sanitize carve_start and carve_end to lie within our bounds */
-@@ -258,15 +260,17 @@ static s64 efi_mem_carve_out(struct efi_mem_list *map,
- /**
-  * efi_add_memory_map_pg() - add pages to the memory map
-  *
-- * @start:		start address, must be a multiple of EFI_PAGE_SIZE
-- * @pages:		number of pages to add
-- * @memory_type:	type of memory added
-- * @overlap_only_ram:	region may only overlap RAM
-- * Return:		status code
-+ * @start:			start address, must be a multiple of
-+ *				EFI_PAGE_SIZE
-+ * @pages:			number of pages to add
-+ * @memory_type:		type of memory added
-+ * @overlap_only_freemem:	region may only overlap free(conventional)
-+ *				memory
-+ * Return:			status code
-  */
- efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
--					  int memory_type,
--					  bool overlap_only_ram)
-+				   int memory_type,
-+				   bool overlap_only_freemem)
- {
- 	struct efi_mem_list *lmem;
- 	struct efi_mem_list *newlist;
-@@ -275,7 +279,8 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
- 	struct efi_event *evt;
+-	if (data->flags == MMC_DATA_READ && int_rx) {
+-		dwmci_writel(host, DWMCI_RINTSTS, int_rx);
+-		while (size) {
+-			ret = dwmci_fifo_ready(host, DWMCI_FIFO_EMPTY, &len);
+-			if (ret < 0)
+-				break;
+-
+-			len = (len >> DWMCI_FIFO_SHIFT) & DWMCI_FIFO_MASK;
+-			len = min(size, len);
+-			for (i = 0; i < len; i++)
+-				*buf++ = dwmci_readl(host, DWMCI_DATA);
+-			size = size > len ? (size - len) : 0;
+-		}
+-	} else if (data->flags == MMC_DATA_WRITE && int_tx) {
+-		while (size) {
+-			ret = dwmci_fifo_ready(host, DWMCI_FIFO_FULL, &len);
+-			if (ret < 0)
+-				break;
+-
+-			len = host->fifo_depth - ((len >> DWMCI_FIFO_SHIFT) &
+-						  DWMCI_FIFO_MASK);
+-			len = min(size, len);
+-			for (i = 0; i < len; i++)
+-				dwmci_writel(host, DWMCI_DATA, *buf++);
+-			size = size > len ? (size - len) : 0;
+-		}
+-		dwmci_writel(host, DWMCI_RINTSTS, DWMCI_INTMSK_TXDR);
+-	}
+-
+-	return ret;
+-}
+-
+-static int dwmci_data_transfer(struct dwmci_host *host, struct mmc_data *data)
+-{
+-	struct mmc *mmc = host->mmc;
+-	int ret = 0;
+-	u32 timeout, mask, size;
+-	ulong start = get_timer(0);
+-
+-	size = data->blocksize * data->blocks;
+ 	timeout = dwmci_get_timeout(mmc, size);
  
- 	EFI_PRINT("%s: 0x%llx 0x%llx %d %s\n", __func__,
--		  start, pages, memory_type, overlap_only_ram ? "yes" : "no");
-+		  start, pages, memory_type, overlap_only_freemem ?
-+		  "yes" : "no");
- 
- 	if (memory_type >= EFI_MAX_MEMORY_TYPE)
- 		return EFI_INVALID_PARAMETER;
-@@ -312,7 +317,7 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
- 			s64 r;
- 
- 			r = efi_mem_carve_out(lmem, &newlist->desc,
--					      overlap_only_ram);
-+					      overlap_only_freemem);
- 			switch (r) {
- 			case EFI_CARVE_OUT_OF_RESOURCES:
- 				free(newlist);
-@@ -348,7 +353,7 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
++	size /= 4;
++
+ 	for (;;) {
+ 		mask = dwmci_readl(host, DWMCI_RINTSTS);
+ 		/* Error during data transfer */
+@@ -283,7 +241,50 @@ static int dwmci_data_transfer(struct dwmci_host *host, struct mmc_data *data)
+ 			break;
  		}
- 	} while (carve_again);
  
--	if (overlap_only_ram && (carved_pages != pages)) {
-+	if (overlap_only_freemem && (carved_pages != pages)) {
- 		/*
- 		 * The payload wanted to have RAM overlaps, but we overlapped
- 		 * with an unallocated region. Error out.
+-		ret = dwmci_data_transfer_fifo(host, data, mask);
++		if (host->fifo_mode && size) {
++			len = 0;
++			if (data->flags == MMC_DATA_READ &&
++			    (mask & (DWMCI_INTMSK_RXDR | DWMCI_INTMSK_DTO))) {
++				dwmci_writel(host, DWMCI_RINTSTS,
++					     mask & (DWMCI_INTMSK_RXDR |
++						     DWMCI_INTMSK_DTO));
++				while (size) {
++					ret = dwmci_fifo_ready(host,
++							DWMCI_FIFO_EMPTY,
++							&len);
++					if (ret < 0)
++						break;
++
++					len = (len >> DWMCI_FIFO_SHIFT) &
++						    DWMCI_FIFO_MASK;
++					len = min(size, len);
++					for (i = 0; i < len; i++)
++						*buf++ =
++						dwmci_readl(host, DWMCI_DATA);
++					size = size > len ? (size - len) : 0;
++				}
++			} else if (data->flags == MMC_DATA_WRITE &&
++				   (mask & DWMCI_INTMSK_TXDR)) {
++				while (size) {
++					ret = dwmci_fifo_ready(host,
++							DWMCI_FIFO_FULL,
++							&len);
++					if (ret < 0)
++						break;
++
++					len = host->fifo_depth - ((len >>
++						   DWMCI_FIFO_SHIFT) &
++						   DWMCI_FIFO_MASK);
++					len = min(size, len);
++					for (i = 0; i < len; i++)
++						dwmci_writel(host, DWMCI_DATA,
++							     *buf++);
++					size = size > len ? (size - len) : 0;
++				}
++				dwmci_writel(host, DWMCI_RINTSTS,
++					     DWMCI_INTMSK_TXDR);
++			}
++		}
+ 
+ 		/* Data arrived correctly */
+ 		if (mask & DWMCI_INTMSK_DTO) {
 -- 
-2.34.1
+2.46.2
 
