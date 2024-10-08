@@ -4,98 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E377CEF16C
-	for <u-boot@archiver.kernel.org>; Tue,  8 Oct 2024 12:58:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67938CEF16B
+	for <u-boot@archiver.kernel.org>; Tue,  8 Oct 2024 12:58:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 832CF888BE;
-	Tue,  8 Oct 2024 14:58:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E49F888C3D;
+	Tue,  8 Oct 2024 14:58:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zZNNr3Eh";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="2HeDg5GH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B10288A43; Tue,  8 Oct 2024 14:58:28 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id 4C2E988413; Tue,  8 Oct 2024 14:58:51 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CFD188413
- for <u-boot@lists.denx.de>; Tue,  8 Oct 2024 14:58:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 92DBF88C60
+ for <u-boot@lists.denx.de>; Tue,  8 Oct 2024 14:58:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-37cc84c12c2so3003403f8f.3
- for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 05:58:26 -0700 (PDT)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-42cacabd2e0so52313575e9.3
+ for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 05:58:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728392298; x=1728997098; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=gcWlVXet1XNhlBgukl4wg1CgmrOvAOhAbQW4Tt42w3Q=;
- b=zZNNr3EhAJaHOMSAVTICzJ1Tv1iLb8zJyY61XghUrW9yWhOmq30lcXYA3P5+/3SkAG
- AuK1jULVLRb6CihdYDSsyEUJblf2V7dDBMRF59PcBblWIc2YLzDMwwnyzlPcZM26Gi4d
- SN2/P6j3oXuSuk6WQA1/ErMLmGKMTfFaGAvePOexVfQz93Gvi7Fz1G+3OxkFS/OOmGeU
- ykrV/ZTOzEIfv/yLpxGcYHNQJ3ebJ91AJYlJe3JFfG0amzv+ZBQ637OLxoFoLzJhY5Gx
- ahkx7D7nnRViT7HOPtsbFwnsqSHMzzWZoN8sgVla1cc4Fhx4v41G0uHzZhPx86r4U7eL
- QPyw==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1728392322; x=1728997122;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=INVOyxuIjhUwsmO2R43X5p+2WKi13itdvbVplw4vil4=;
+ b=2HeDg5GHHZ/F99P7KErrWrRbIkw5WeY36Juv2vAOTrkB/Do4CKSorfuqF1vVpvAyLI
+ 754oLwOexA3uyFkxcIOAa+OmgSVXp4dF43oFOoVYAYtZZE5yxqxvmDjXAM/U3EnaJKD6
+ XOVlZAjw0EfNJSCSsRJYxC5WDXcHmh8zC/eeq7pDd2gchT2hqh+2XDYgVOuklO+Pyme4
+ w1BDCujYByF+8rKvyHQUhIpxzkhPFQse5qib70TBtIIGdHcxcmOh8EFZTrDi8NDhvgDb
+ OD23fwB4KUdFGiosWDsc4Ji0jPPtfmTO8lI2ij02vg4/4/XGL067JQkxGNfnU75qBT1q
+ mUmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728392298; x=1728997098;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=gcWlVXet1XNhlBgukl4wg1CgmrOvAOhAbQW4Tt42w3Q=;
- b=rb+806Y2J9dWDZpIExlYcHwM8XcgCnexCpFnXJnea6KNbG9O+t1OB3nBeLTqUtxahG
- Z8jo5K73qoYF3bXOKbzvt2jc8onpVKRk/CHVfo7eXSZTYSdTgjZdCgGgQw10jjkFpeni
- itGENugvEnAjfqMeQC58nQcqlf5zFGo5zfAyoZ680mKYmPlWQsLfpJjTwIg9aWGc5Sn6
- N2Vgs3fgvH4IEuzejISV3Uc0ViVnlvr8kIlEQKpmaB2iSk277hda5Rr2WMB8CwzT61Ds
- W6PYPHS466OVSyaavDR2hWKCWaMCalPgcLE+x5xHWgJFEJqZAT/CR3HXFjHmj/51k5sH
- VKPQ==
+ d=1e100.net; s=20230601; t=1728392322; x=1728997122;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=INVOyxuIjhUwsmO2R43X5p+2WKi13itdvbVplw4vil4=;
+ b=IFbLa3Sd2lw6u0M1wL1gvqCbSU/6Ynu9OSDp4SVJRWlTRVCF/fyTN4d2GQkuVRErbA
+ TUuN1n4XqFh5Ugq8HzorH0kNk6oygnCcXimEjeNlcwVhJpaK8niAkYErwBjJs6ws8ZZ/
+ gXM0i0nygVKQT1TqrqDz9bTiH3k4vnhSyMZhKQgJkbTx2abKIm1rNrvjacIVPfwzBhT8
+ dW12nddmNg0lErrn1jdY0JP+/aAR30j5gmvofMEicy9zpypjrVX5QAr3Y+qw3Sux2EJX
+ J/3zWXfYCw/p+jLCFvgYmSs0voWVjZdh+Ltogb0xn0H7bNhfhgkoSNWR16MWXLLWqnLY
+ PP/Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVd0snXy5Yc4YXrL/40qoP6NxQItmXDKCqdVd9nbgQ+AeR6JUJNcwFE5+vL5/1D5LTvAIjXPow=@lists.denx.de
-X-Gm-Message-State: AOJu0YxfKhv9PhcGjlIuotkmHVodKo1lM7e4cuyX8tPMGxloe8RLBcXm
- icFuNYekwGrZsPPtRdMydnVWifQOHLFViaDb6I062ggGs3rtLkWfxKiYN7NVqoY=
-X-Google-Smtp-Source: AGHT+IGLFMCVYA9GJaKhXSMQNoogw+EYsUoTgQJpkxi2CZcMedFrgEwu4/GV2XFZ5jJEA9hmnNvsGA==
-X-Received: by 2002:adf:a198:0:b0:37c:d20d:447c with SMTP id
- ffacd0b85a97d-37d0e779f64mr8866519f8f.29.1728392298571; 
- Tue, 08 Oct 2024 05:58:18 -0700 (PDT)
-Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:8261:5fff:fe11:bdda])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d16972a69sm8062855f8f.97.2024.10.08.05.58.17
+ AJvYcCXdNrFs4lpq5r4XrMp0AK+FjtaEZpQoBdHZCRT5RA9BtrB8eWJReeKfpYbXvfL6uBWCRqpTpII=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy1Kx6lDqpSEnome+zscV57edx19YkvGVFgqJB0nGJSnDY/sgQ1
+ KmjahkAphVt2ee08xqnJJKBzAgu7/QXnR9XkzSnrxEWzVBPZtn6RCFRe50bdxYo=
+X-Google-Smtp-Source: AGHT+IHmjIv6g2tVnQk/gyt2XAMGhXUbvhAvRKBy2/qavJtAbnMV+eYqsKX0mgVSZLMzBjp2lvj65g==
+X-Received: by 2002:a05:6000:10a:b0:37c:c4f8:5e06 with SMTP id
+ ffacd0b85a97d-37d0e6f26ffmr9579571f8f.20.1728392322170; 
+ Tue, 08 Oct 2024 05:58:42 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-37d169733c5sm8058908f8f.110.2024.10.08.05.58.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Oct 2024 05:58:18 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Tue, 08 Oct 2024 14:58:16 +0200
-Subject: [PATCH] video: meson: dw-hdmi: do not fail probe if HDMI regulator
- is already enabled
+ Tue, 08 Oct 2024 05:58:41 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: bigunclemax@gmail.com
+Cc: bigunclemax@gmail.com, Marek Vasut <marex@denx.de>, Tom Rini
+ <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v1] eth: asix88179: drop ADVERTISE_LPACK and
+ ADVERTISE_NPAGE advertise flags
+In-Reply-To: <20240919135851.153120-1-bigunclemax@gmail.com>
+References: <20240919135851.153120-1-bigunclemax@gmail.com>
+Date: Tue, 08 Oct 2024 14:58:38 +0200
+Message-ID: <87iku2g39d.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20241008-u-boot-video-fix-hdmi-supply-already-on-v1-1-3a12c73ff3f1@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAGcsBWcC/x2NzQqDMBAGX0X23A+SIP17ldLDxqx1wSYhqVIR3
- 72hx4FhZqcqRaXSvdupyKpVU2xgTx0NE8eXQENjcsb11pgrFviUPlg1SMKoX0zhrahLzvMGnot
- w2JAi5Mw3Ht3FW/HUarlIs/+nx/M4foKyiIl5AAAA
-To: Anatolij Gustschin <agust@denx.de>, Tom Rini <trini@konsulko.com>
-Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, 
- Neil Armstrong <neil.armstrong@linaro.org>
-X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=987;
- i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=wSeYiPwevyPWKoX50LCHlizqsN1l/u61R9C7SSOu2ws=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBnBSxpMEWEFlhytL+M6w+nVX8qKuQnlsHycAvWS0jT
- NKqFaouJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZwUsaQAKCRB33NvayMhJ0UkgEA
- Cjf5Zr2He5xW0PmEy8enFXBs3J5Op+CYVgLaOeB0eXt/cnXYKvbKDz9S/z4iv+mIznFrHTKjETHCte
- k7+SR1QavtkuH5DMY5dycSsERvlixjXaQLhzMUHQYSMqaBbi7TYVTgmcCVSeVFaC7vY6xcpn4vB7bH
- vv65/fmTnSNmJsV6UGY5RBsCQPHyxzho6/QPlUljzofizrlwA/SzFP9N8OqhmQmPszGW0SomXEo4WW
- DUHmqMBRNFf2XDNGVJ9a68e7A2Zzz0lNzMgRK5Tp+pLVg6qj982l2XDRHeKxYua4yxLZ3M6mJx/HZm
- g/W8CB1bpPePsW8hR8Jx7Phd29VP0d8ugTzvngsvexdBULmpRzsisNPFRsX0N0509zY/vMRWLH5iM3
- mVG40XUx3IeLhc9l83kgXP1ryDP5OqKDOxW5wKlcNdcrfwqkHa2oLleAUuHfrkB1HEs2ocVSOdk+u/
- TO4WwULBfl+9N6GFxkjMPHdCDZb2kVE+oV6Bsy/IzugfNtwwff+D9cMn3rrmjtptgYXpKFPaWjjOGn
- pF8e1VxJeMR09l8VDRea6lDDLNPD6pPP6GWJFJKR3/r/BcABvLsEteeSY8M/KzQHWHWvcUr3NBSd28
- jdHecjKzOAhn/niuupUSaONMw7F86IKuvq3LWd34l93lnc21ehIg4nVJkZMg==
-X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
- fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,35 +93,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If the regulator is already enabled, this happens if the regulator
-is set in regulator-always-on, regulator_set_enable() return -EALREADY.
+Hi Maksim,
 
-Ignore the -EALREADY return since it's not an error.
+Thank you for the patch and sorry for the review delay.
 
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
----
- drivers/video/meson/meson_dw_hdmi.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On jeu., sept. 19, 2024 at 16:58, bigunclemax@gmail.com wrote:
 
-diff --git a/drivers/video/meson/meson_dw_hdmi.c b/drivers/video/meson/meson_dw_hdmi.c
-index 587df7beb9b..ee219ce6ec4 100644
---- a/drivers/video/meson/meson_dw_hdmi.c
-+++ b/drivers/video/meson/meson_dw_hdmi.c
-@@ -419,7 +419,7 @@ static int meson_dw_hdmi_probe(struct udevice *dev)
- 
- 	if (!ret) {
- 		ret = regulator_set_enable(supply, true);
--		if (ret)
-+		if (ret && ret != -EALREADY)
- 			return ret;
- 	}
- #endif
+> From: Maksim Kiselev <bigunclemax@gmail.com>
+>
+> Some USB-ETH adapters based on the AX88179 (ex. D-link DUB-2312)
+> has link issue if ADVERTISE_NPAGE flag is set.
 
----
-base-commit: 28dc47038edc4e93f32d75a357131bcf01a18d85
-change-id: 20241008-u-boot-video-fix-hdmi-supply-already-on-e6a9af27b1eb
+Do you see the issue only if ADVERTISE_NPAGE is set? What about
+ADVERTISE_LPACK ?
 
-Best regards,
--- 
-Neil Armstrong <neil.armstrong@linaro.org>
+Could you detail a bit what you mean by link issue?
 
+>
+> Also Linux drivers for ASIX chips doesn't use these flags.
+
+I've double checked this looking on master,
+commit 87d6aab2389e ("Merge tag 'for_linus' of git://git.kernel.org/pub/scm/linux/kernel/git/mst/vhost")
+
+I inspected asix_devices.c and ax88179_178a.c and I could indeed not
+find anything related to ADVERTISE_LPACK and ADVERTISE_NPAGE.
+
+I'm not super knowledgeable on network so I'd like someone else to test
+this as well, if possible.
+
+>
+> Signed-off-by: Maksim Kiselev <bigunclemax@gmail.com>
+> ---
+>  drivers/usb/eth/asix88179.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/drivers/usb/eth/asix88179.c b/drivers/usb/eth/asix88179.c
+> index 4bd3b9d10d..1f469a1a7d 100644
+> --- a/drivers/usb/eth/asix88179.c
+> +++ b/drivers/usb/eth/asix88179.c
+> @@ -345,8 +345,8 @@ static int asix_basic_reset(struct ueth_data *dev,
+>  	asix_write_cmd(dev, AX_ACCESS_MAC, AX_MEDIUM_STATUS_MODE, 2, 2, tmp16);
+>  
+>  	u16 adv = 0;
+> -	adv = ADVERTISE_ALL | ADVERTISE_CSMA | ADVERTISE_LPACK |
+> -	      ADVERTISE_NPAGE | ADVERTISE_PAUSE_ASYM | ADVERTISE_PAUSE_CAP;
+> +	adv = ADVERTISE_ALL | ADVERTISE_CSMA | ADVERTISE_PAUSE_ASYM |
+> +	      ADVERTISE_PAUSE_CAP;
+>  	asix_write_cmd(dev, AX_ACCESS_PHY, 0x03, MII_ADVERTISE, 2, &adv);
+>  
+>  	adv = ADVERTISE_1000FULL;
+> -- 
+> 2.45.2
