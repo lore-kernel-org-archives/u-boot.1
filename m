@@ -4,84 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1BEBCED628
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 08:56:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F017CED635
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 09:15:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 611668918B;
-	Wed,  9 Oct 2024 10:56:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0076989191;
+	Wed,  9 Oct 2024 11:15:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cShx3iEN";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="B71N2axp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17A858918B; Wed,  9 Oct 2024 10:56:15 +0200 (CEST)
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [IPv6:2a00:1450:4864:20::22c])
+ id 2697E8916A; Wed,  9 Oct 2024 11:15:26 +0200 (CEST)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC48F89186
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 10:56:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 37BCC8916C
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 11:15:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-2fadb636abaso65633871fa.3
- for <u-boot@lists.denx.de>; Wed, 09 Oct 2024 01:56:11 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-37cdac05af9so6066512f8f.0
+ for <u-boot@lists.denx.de>; Wed, 09 Oct 2024 02:15:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1728464171; x=1729068971; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=AW3bJ3haELYF/L+9diubZ362nk+ggWnqFG8JPKUARMs=;
- b=cShx3iENK89PUVbRtGOg3mrjoNKLx/LXdNWIZBEPQrcPp2+7CRxFlv9fdgf3ae/Ncc
- 9sXBA/6QyVqLCyl8BDvnpUeKOWY90mh8n3NQZaxY8zRsM+taqDg0p6MPwEXNsTo9WlHt
- xfA7Xua4Ik5x6pX5t1vxqNfLPuHK45LaPdadjsqjZYZTODuioIhf8U2+2mj79SqPnioG
- V7o6fIesL4X5/5FCWmhRe/PiZgdt35Hm3BrQ4LdqNG3Jhi1rpVqrE4KLq98oEHi7f00A
- RGlEpbnyp+kAqxtWtRk0fZTm9IHV5F/u+gTQZ/3nW4s7sJVHBubhbUazgqMHFftbauJN
- KYJw==
+ d=linaro.org; s=google; t=1728465324; x=1729070124; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=eDwNUDP4H+tYsTjvteRwPnLJvmXBQqk9NeBIefz3auQ=;
+ b=B71N2axpSYrADVBB0aIi557mPp1mEOhZ23bsrtLMEdiTvLHzsjSitV/g5gcxJwvzB5
+ ir82cpKUJqCuHpEk/SjhvzBbAUhTq8woKLUFPHPnF/Vu27McRMvtdL8G8HwX3RAf5CQ/
+ X1a2o08+MKrlyU1AqoPqZHvjRQSHLxwic+FHBTYDELQMsUbzTuOV4sivcjWVj4fanPZ2
+ WAIHn3c9Rmu+VYlGDHI8oTFBjep1Hw32xyMtFaoOaW6x9WlEoIz39FjnLvWjFc1mUr41
+ uPtub92obCj1AZ3bPQRAKi1IE1vVMrTPwmCowLO+FjqujjLX2D7r+zz39zUJEmN43rUr
+ AZkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728464171; x=1729068971;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1728465324; x=1729070124;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=AW3bJ3haELYF/L+9diubZ362nk+ggWnqFG8JPKUARMs=;
- b=JiNMgLWCWxgf+Hcm2UytEOsd2BvEgYvskLfim4a9FrrE+xUpiasV/cPGeFGY99yr9X
- ZU3VKaIm3BPoEsyGr4T8ABdTe92k/lkh4haCX1vcoIrNSu5CBoc992bp8mt7C1EPViXo
- 7n7ZR26wR5bIHEfgJcU3y4eLbP1v1FuIJT5FqqXkTrQz7w5IwOOPB18AJ1JfjJa0DmHX
- NgLEslhrg1SJxSHEYPMFO/Au69N7YXZvSY9//ne9UWAziHJKqoVnjOxVgbfIACoAqsIj
- AIdef431SWzGkn/Bswd0KaTQHwxwB+jkSflnPdRLep1kdW+5aZIKIvk5JTnWuwIqsJyy
- GrTA==
-X-Gm-Message-State: AOJu0YykOFIO9gQB9jkTJqasz0zval7U8xl4bY8SQJDMF6VGvGJ7WbS/
- dhdeuTOEisW/7Je87CJb6bTwGwdSEQpaaJ72uqQ/C3usYHkxpwiYJqqcWDiOQWWAHYYQHEiEuUl
- jl4CRDfmK+vKkOAWAGNyZum1+eUY=
-X-Google-Smtp-Source: AGHT+IHrzpMlu1FxbK+73Vl3MjxtqC6ECO1MnqCdeVlin2fBGV/f2RFDK1xwtqT514juzWuieH0W4kMSqapVOIj8Zr0=
-X-Received: by 2002:a05:651c:b20:b0:2fa:d296:6fbf with SMTP id
- 38308e7fff4ca-2fb187120b8mr11121261fa.1.1728464170842; Wed, 09 Oct 2024
- 01:56:10 -0700 (PDT)
+ bh=eDwNUDP4H+tYsTjvteRwPnLJvmXBQqk9NeBIefz3auQ=;
+ b=dnTtdQUbE+wiWqif1jzARfSa2W780qboBED3bqBu3sdyni8hIaYcGdgDumCNQ5dIZt
+ NSNAefg4A2fJeeMKXxxsedeflvEjMcvPmR5hibk5+3eZzRMxejJO3MzaXyNH8vdGKMpJ
+ yVjvH204B4ccskEDrYRcd8oKSkklv34QZDn+nT3i1+1qYwhT2C4NM3ym6gZ+6G4vj8lm
+ sk6yMGTzeWPX9j0NRMx1w3H5zrBocyO+Q/HbKWDgtBdwR4e2u2TNgCy1qn96Y8tU/CGA
+ uqEqz59nB1gOJBvj2nAY2ZX+UkPrhU1jJpWVfYKKx+nHu0AwwyM4HxKMCvi8D1uY2hAF
+ /Ttw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCULA4ESGn/fAT332Axr3XIHLKtOConZoRrfnRl4zR+hwPEwDb4z4sulVK+dxr0Mr97R8c5BpC8=@lists.denx.de
+X-Gm-Message-State: AOJu0YyRh1IIh/U21CU0gHG1SVpROokFBfUrFZgPXek8dd4YtMcdsTE6
+ /j6oYD2MNAqFhXpnYvUyP1JtEpqtusiGPnyD9mFcTeThLlpSVg8h7FltL2e5Iic=
+X-Google-Smtp-Source: AGHT+IHgItw8ojQNW3ruLMKSzWiZREHmW+1sMJlnqWGZcEEA29GJ8gv5u9yDl7G4Xg+BPe9bylAJ1w==
+X-Received: by 2002:adf:f850:0:b0:37c:c51b:8d9c with SMTP id
+ ffacd0b85a97d-37d3aae2866mr1459753f8f.38.1728465323570; 
+ Wed, 09 Oct 2024 02:15:23 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-37d1690f270sm9865471f8f.21.2024.10.09.02.15.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 09 Oct 2024 02:15:22 -0700 (PDT)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [PATCH 0/2] ARM: mach-meson: fix HDMI since DT update to v6.11
+Date: Wed, 09 Oct 2024 11:15:19 +0200
+Message-Id: <20241009-u-boot-topic-fix-hdmi-v1-0-2479cd90c4ea@linaro.org>
 MIME-Version: 1.0
-References: <20241004230756.371153-1-marex@denx.de>
- <20241004230756.371153-2-marex@denx.de>
-In-Reply-To: <20241004230756.371153-2-marex@denx.de>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Wed, 9 Oct 2024 09:55:59 +0100
-Message-ID: <CALeDE9N-qXAWKT4hyOMsRetW6XnWSfwFiM2Nr79u3iwymtp5mQ@mail.gmail.com>
-Subject: Re: [PATCH 2/2] Makefile: Drop SPL_FIT_GENERATOR support
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Sean Anderson <seanga2@gmail.com>, 
- Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
- Tom Rini <trini@konsulko.com>, 
- u-boot@dh-electronics.com, uboot-stm32@st-md-mailman.stormreply.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAKdJBmcC/x2MywqAIBAAfyX23IKV2ONXokPqlnsoQy2C6N+Tj
+ sMw80CkwBRhKB4IdHFkv2eoygKMm/eVkG1mqEUtKyF6PFF7nzD5gw0ufKOzG6PWTW9s1yopFeT
+ 2CJTd/x2n9/0AAjvBE2cAAAA=
+To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>
+Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.14.1
+X-Developer-Signature: v=1; a=openpgp-sha256; l=757;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=l8XmijvTwm7w6IFh5f/hbeLXZrLruekZ0b7APjEkvUg=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBnBkmpxUSEdZRLhfrlK5id0Wc/9lEeuVe/qDpfHzV9
+ t2sd2/6JAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZwZJqQAKCRB33NvayMhJ0aRHD/
+ 9ipDxV9NvPhyRjezNZejvaKQgqEyEZkIJB31pCb8rcB3RX6Kv+9gydMrnCSJesauzizUn1roGQXdy5
+ 6FycVlQ5NCe2NWO6SCyhSmLiR0dGwl4M5+YXdNKU6xDpw9QSeJoDoiD+nlHdzomGePGkoMkJJKV+UE
+ 9PRYQLjAETycrDy/nUJa7PEWAE+JsCL+XSspZ0hrkxOgSe3LuorNRglZpVKFtSTRDhlBObYuP6qpTv
+ QXb3hoOG99o1tuIfvKE6vIq92Y0oC07n+kGNs72kcA3cBhvOrWC6ldENVGRFn3yn5piUmVu30glrrc
+ VFoR6fqKudeoFeI5onY9fY5aILXZTauIo2Dvz+Vq6rkaMl7IrFLoDRuvUMKAXntxV0rickbdlAC9sJ
+ evz8sKxDZbzd6AiEPfSOyYUemDb3u0b9phfBAAy8TG6MyByY+y79JWwlukTCOO4b5Ltx9xOObaeGhp
+ dJ4QFGHxDpoaZ3F28L1k6BZ2UwObb2/NrOdNS0DYwnze5MGZ3Kn8l4NG/h1bTJbbaTONTYQrT/+vYx
+ AFNJac80Xw90nMLg4Mwz54DhyzpvBBSUaWaWXW4dN2KUMdHDsledjIDrhDxpdFUZ2vt7ddL5OcbuJc
+ hJNbdJV7CLq32/lvn2/SsHvI+hWC8yLN3lsejQ3GmKfQJEiy+STDGBI+bQIQ==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,117 +112,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 5 Oct 2024 at 00:08, Marek Vasut <marex@denx.de> wrote:
->
-> The SPL_FIT_GENERATOR is long superseded by binman, drop SPL_FIT_GENERATOR
-> support as there are no more users.
->
-> Signed-off-by: Marek Vasut <marex@denx.de>
+The DT was updated with unhandled clocks and a shared
+power domain, causing a probe failure and a green output.
 
-Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
-> ---
-> Cc: AKASHI Takahiro <akashi.tkhro@gmail.com>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Peter Robinson <pbrobinson@gmail.com>
-> Cc: Quentin Schulz <quentin.schulz@cherry.de>
-> Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-> Cc: Sean Anderson <seanga2@gmail.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Sumit Garg <sumit.garg@linaro.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@dh-electronics.com
-> Cc: u-boot@lists.denx.de
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
-> NOTE: Depends on https://lore.kernel.org/u-boot/20241004225916.361000-1-marex@denx.de/
-> ---
->  Makefile                | 18 ------------------
->  boot/Kconfig            | 15 ---------------
->  doc/usage/fit/howto.rst |  4 ----
->  3 files changed, 37 deletions(-)
->
-> diff --git a/Makefile b/Makefile
-> index a70926ec2fa..45592eb2bac 100644
-> --- a/Makefile
-> +++ b/Makefile
-> @@ -1139,13 +1139,6 @@ ifeq ($(CONFIG_OF_EMBED)$(CONFIG_EFI_APP),y)
->         @echo >&2 "CONFIG_OF_SEPARATE for boards in mainline."
->         @echo >&2 "See doc/develop/devicetree/control.rst for more info."
->         @echo >&2 "===================================================="
-> -endif
-> -ifneq ($(CONFIG_SPL_FIT_GENERATOR),)
-> -       @echo >&2 "===================== WARNING ======================"
-> -       @echo >&2 "This board uses CONFIG_SPL_FIT_GENERATOR. Please migrate"
-> -       @echo >&2 "to binman instead, to avoid the proliferation of"
-> -       @echo >&2 "arch-specific scripts with no tests."
-> -       @echo >&2 "===================================================="
->  endif
->         $(call deprecated,CONFIG_WDT,DM watchdog,v2019.10,\
->                 $(CONFIG_WATCHDOG)$(CONFIG_HW_WATCHDOG))
-> @@ -1413,17 +1406,6 @@ OBJCOPYFLAGS_u-boot.ldr.srec := -I binary -O srec
->  u-boot.ldr.hex u-boot.ldr.srec: u-boot.ldr FORCE
->         $(call if_changed,objcopy)
->
-> -# Boards with more complex image requirements can provide an .its source file
-> -# or a generator script
-> -# NOTE: Please do not use this. We are migrating away from Makefile rules to use
-> -# binman instead.
-> -ifneq ($(CONFIG_USE_SPL_FIT_GENERATOR),)
-> -U_BOOT_ITS := u-boot.its
-> -$(U_BOOT_ITS): $(U_BOOT_ITS_DEPS) FORCE
-> -       $(srctree)/$(CONFIG_SPL_FIT_GENERATOR) \
-> -       $(patsubst %,$(dt_dir)/%.dtb,$(subst ",,$(CONFIG_OF_LIST))) > $@
-> -endif
-> -
->  ifdef CONFIG_SPL_LOAD_FIT
->  MKIMAGEFLAGS_u-boot.img = -f auto -A $(ARCH) -T firmware -C none -O u-boot \
->         -a $(CONFIG_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
-> diff --git a/boot/Kconfig b/boot/Kconfig
-> index 51e6cd6cb1d..4314227d5f8 100644
-> --- a/boot/Kconfig
-> +++ b/boot/Kconfig
-> @@ -282,21 +282,6 @@ config SPL_FIT_IMAGE_POST_PROCESS
->           injected into the FIT creation (i.e. the blobs would have been pre-
->           processed before being added to the FIT image).
->
-> -config USE_SPL_FIT_GENERATOR
-> -       bool "Use a script to generate the .its script"
-> -       depends on SPL_FIT
-> -       default y if SPL_FIT && ARCH_ZYNQMP
-> -
-> -config SPL_FIT_GENERATOR
-> -       string ".its file generator script for U-Boot FIT image"
-> -       depends on USE_SPL_FIT_GENERATOR
-> -       default "arch/arm/mach-zynqmp/mkimage_fit_atf.sh" if SPL_LOAD_FIT && ARCH_ZYNQMP
-> -       help
-> -         Specifies a (platform specific) script file to generate the FIT
-> -         source file used to build the U-Boot FIT image file. This gets
-> -         passed a list of supported device tree file stub names to
-> -         include in the generated image.
-> -
->  if VPL
->
->  config VPL_FIT
-> diff --git a/doc/usage/fit/howto.rst b/doc/usage/fit/howto.rst
-> index 280eff724f6..675c9aa5bb0 100644
-> --- a/doc/usage/fit/howto.rst
-> +++ b/doc/usage/fit/howto.rst
-> @@ -57,10 +57,6 @@ own subnode under the /images node, which should then be referenced from one or
->  multiple /configurations subnodes. The required images must be enumerated in
->  the "loadables" property as a list of strings.
->
-> -CONFIG_SPL_FIT_GENERATOR can point to a script which generates this image source
-> -file during the build process. It gets passed a list of device tree files (taken
-> -from the CONFIG_OF_LIST symbol).
-> -
->  The SPL also records to a DT all additional images (called loadables) which are
->  loaded. The information about loadables locations is passed via the DT node with
->  fit-images name.
-> --
-> 2.45.2
->
+Add the missing clocks and avoid enabling a power domain twice.
+
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
+Neil Armstrong (2):
+      clk: meson: gxbb: add HDMI clocks
+      power/domain: meson-ee-pwrc: make sure to not enable a domain twice
+
+ drivers/clk/meson/gxbb.c             | 50 +++++++++++++++++++++++++++++++++++-
+ drivers/power/domain/meson-ee-pwrc.c | 15 +++++++++--
+ 2 files changed, 62 insertions(+), 3 deletions(-)
+---
+base-commit: 28dc47038edc4e93f32d75a357131bcf01a18d85
+change-id: 20241009-u-boot-topic-fix-hdmi-bb39cd876446
+
+Best regards,
+-- 
+Neil Armstrong <neil.armstrong@linaro.org>
+
