@@ -4,52 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A11ABCEDD90
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 13:16:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87027CEDD90
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 13:16:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3905A891F2;
-	Wed,  9 Oct 2024 15:16:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A523589227;
+	Wed,  9 Oct 2024 15:16:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="Ab9L6J88";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="Egsx7eEQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B23CD8921C; Wed,  9 Oct 2024 15:16:15 +0200 (CEST)
+ id 51D6689227; Wed,  9 Oct 2024 15:16:17 +0200 (CEST)
 Received: from bali.collaboradmins.com (bali.collaboradmins.com
  [IPv6:2a01:4f8:201:9162::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C4528919E
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 15:16:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E06C89216
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 15:16:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=martyn.welch@collabora.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1728479773;
- bh=YCGi8+wmxBDtT1bdIrNRLyiiZVGVsTLJ8pgwzoj3/zU=;
- h=From:To:Cc:Subject:Date:From;
- b=Ab9L6J88EBviCStQPWELl5NHKFvv5+W6esafBtdDYcC94LzjIOTwn+RRavHwLg3aV
- zwY9SxxQafu6CrWKjOOghpZLfNyTFT7CpHrcN23a03/+VWp5pyK2D/WhhYmYDIykgH
- 31IxlYxBWdC7s/ic1xUrEW1EHLFLlxz7h9mvMaTw3L1RxdstPMm0iqf87aP7ajzB0t
- QwQ3wuSw6MgoMalPaq8G4hX+rEKTMuWn3RicAO4heryDTwkaSDfrR7W7IYOv2Q5NWu
- PW0SwC7kMHivjuYyNeUqlEMLbWEKENFflILwUufkyWxX0fIdoUOje/pDJaewPalLD9
- 19lA18cMe86Uw==
+ s=mail; t=1728479775;
+ bh=XnU03SXPu9+3LNJQ1VU/S9zqKcPaZxPFiA95gW24l0M=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=Egsx7eEQ+zaztN91Pcj5Qdv5KMga09jhiQRO4NFm3AWup/ow8+asjQcfqAp3Lpb/7
+ Izw3DogwSrNaKb45tkVUqA8vL/bjVNXYUs+vsv953/VkERU2L0r9+qynVLWdMOF3gC
+ Moglah2iRFDOpEQyOCkwEq9VCXZupc5xIP7egjNzhrIgHWIBTdCd3jLB7CuwmPvSn9
+ 5/clutvs0JCarVf/VUDeNirwcPUoMpv5FjQhmj7ZVXk83Jqo8I5QUHyVOKPXCVr8nV
+ faimI1bgPkIwsHPZIpEfsZ7hJNve5+SvtDXPimoesSZVXLbKsiDUwatCqhmgfwmG9H
+ 4OGzj32Avbk/w==
 Received: from pan.lan (unknown [IPv6:2a00:23c6:c32f:9100::16d])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested) (Authenticated sender: martyn)
- by bali.collaboradmins.com (Postfix) with ESMTPSA id F1DFA17E35F5;
- Wed,  9 Oct 2024 15:16:12 +0200 (CEST)
+ by bali.collaboradmins.com (Postfix) with ESMTPSA id B639417E35F6;
+ Wed,  9 Oct 2024 15:16:14 +0200 (CEST)
 From: Martyn Welch <martyn.welch@collabora.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Martyn Welch <martyn.welch@collabora.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-Subject: [PATCH v2 1/4] boot: pxe_utils: Add fallback support
-Date: Wed,  9 Oct 2024 14:15:38 +0100
-Message-ID: <20241009131548.929439-1-martyn.welch@collabora.com>
+To: Simon Glass <sjg@chromium.org>,
+	Tom Rini <trini@konsulko.com>
+Cc: Martyn Welch <martyn.welch@collabora.com>,
+	u-boot@lists.denx.de
+Subject: [PATCH v2 2/4] boot: Add logic to enable booting from fallback option
+Date: Wed,  9 Oct 2024 14:15:39 +0100
+Message-ID: <20241009131548.929439-2-martyn.welch@collabora.com>
 X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20241009131548.929439-1-martyn.welch@collabora.com>
+References: <20241009131548.929439-1-martyn.welch@collabora.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -68,16 +71,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When configured correctly, we can detect when boot fails after the boot
-process has been handed over to the kernel through the use of U-Boot's
-bootcount support. In some instances, such as when we are performing
-atomic updates via a system such as OSTree, it is desirable to provide a
-fallback option so that we can return to a previous (hopefully working)
-state.
-
-Add a "fallback" option to the supported extlinux configuration options
-that points to a label like "default" so that we can utilise this in
-later commits.
+The "fallback" extlinux config option allows us to set an alternative
+default boot option for when it has been detected that the default is
+failing. Implement the logic required to boot from this option when
+desired.
 
 Signed-off-by: Martyn Welch <martyn.welch@collabora.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
@@ -86,94 +83,154 @@ Reviewed-by: Simon Glass <sjg@chromium.org>
 Changes since v1:
  - None
 
- boot/pxe_utils.c    | 15 +++++++++++++++
- doc/README.pxe      |  5 +++++
- include/pxe_utils.h |  2 ++
- 3 files changed, 22 insertions(+)
+ boot/bootmeth_extlinux.c |  2 +-
+ boot/bootmeth_pxe.c      |  2 +-
+ boot/pxe_utils.c         | 14 +++++++++++++-
+ cmd/pxe.c                |  4 ++--
+ cmd/sysboot.c            |  2 +-
+ include/pxe_utils.h      | 10 +++++++++-
+ 6 files changed, 27 insertions(+), 7 deletions(-)
 
+diff --git a/boot/bootmeth_extlinux.c b/boot/bootmeth_extlinux.c
+index fbb05ef928..26c61a65e2 100644
+--- a/boot/bootmeth_extlinux.c
++++ b/boot/bootmeth_extlinux.c
+@@ -149,7 +149,7 @@ static int extlinux_boot(struct udevice *dev, struct bootflow *bflow)
+ 	info.dev = dev;
+ 	info.bflow = bflow;
+ 	ret = pxe_setup_ctx(&ctx, &cmdtp, extlinux_getfile, &info, true,
+-			    bflow->fname, false);
++			    bflow->fname, false, false);
+ 	if (ret)
+ 		return log_msg_ret("ctx", -EINVAL);
+ 
+diff --git a/boot/bootmeth_pxe.c b/boot/bootmeth_pxe.c
+index 03d2589c26..05c6bece2c 100644
+--- a/boot/bootmeth_pxe.c
++++ b/boot/bootmeth_pxe.c
+@@ -150,7 +150,7 @@ static int extlinux_pxe_boot(struct udevice *dev, struct bootflow *bflow)
+ 	info.bflow = bflow;
+ 	info.cmdtp = &cmdtp;
+ 	ret = pxe_setup_ctx(ctx, &cmdtp, extlinux_pxe_getfile, &info, false,
+-			    bflow->subdir, false);
++			    bflow->subdir, false, false);
+ 	if (ret)
+ 		return log_msg_ret("ctx", -EINVAL);
+ 
 diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
-index 4e27842b08..a80119c9a3 100644
+index a80119c9a3..d6a4b2cb85 100644
 --- a/boot/pxe_utils.c
 +++ b/boot/pxe_utils.c
-@@ -781,6 +781,7 @@ enum token_type {
- 	T_IPAPPEND,
- 	T_BACKGROUND,
- 	T_KASLRSEED,
-+	T_FALLBACK,
- 	T_INVALID
- };
+@@ -1436,6 +1436,16 @@ struct pxe_menu *parse_pxefile(struct pxe_context *ctx, unsigned long menucfg)
  
-@@ -814,6 +815,7 @@ static const struct token keywords[] = {
- 	{"ipappend", T_IPAPPEND,},
- 	{"background", T_BACKGROUND,},
- 	{"kaslrseed", T_KASLRSEED,},
-+	{"fallback", T_FALLBACK,},
- 	{NULL, T_INVALID}
- };
- 
-@@ -1356,6 +1358,18 @@ static int parse_pxefile_top(struct pxe_context *ctx, char *p, unsigned long bas
- 
- 			break;
- 
-+		case T_FALLBACK:
-+			err = parse_sliteral(&p, &label_name);
+ 	buf = map_sysmem(menucfg, 0);
+ 	r = parse_pxefile_top(ctx, buf, menucfg, cfg, 1);
 +
-+			if (label_name) {
-+				if (cfg->fallback_label)
-+					free(cfg->fallback_label);
++	if (ctx->use_fallback) {
++		if (cfg->fallback_label) {
++			printf("Setting use of fallback\n");
++			cfg->default_label = cfg->fallback_label;
++		} else {
++			printf("Selected fallback option, but not set\n");
++		}
++	}
 +
-+				cfg->fallback_label = label_name;
-+			}
-+
-+			break;
-+
- 		case T_INCLUDE:
- 			err = handle_include(ctx, &p,
- 					     base + ALIGN(strlen(b), 4), cfg,
-@@ -1395,6 +1409,7 @@ void destroy_pxe_menu(struct pxe_menu *cfg)
+ 	unmap_sysmem(buf);
+ 	if (r < 0) {
+ 		destroy_pxe_menu(cfg);
+@@ -1586,7 +1596,8 @@ void handle_pxe_menu(struct pxe_context *ctx, struct pxe_menu *cfg)
  
- 	free(cfg->title);
- 	free(cfg->default_label);
-+	free(cfg->fallback_label);
+ int pxe_setup_ctx(struct pxe_context *ctx, struct cmd_tbl *cmdtp,
+ 		  pxe_getfile_func getfile, void *userdata,
+-		  bool allow_abs_path, const char *bootfile, bool use_ipv6)
++		  bool allow_abs_path, const char *bootfile, bool use_ipv6,
++		  bool use_fallback)
+ {
+ 	const char *last_slash;
+ 	size_t path_len = 0;
+@@ -1597,6 +1608,7 @@ int pxe_setup_ctx(struct pxe_context *ctx, struct cmd_tbl *cmdtp,
+ 	ctx->userdata = userdata;
+ 	ctx->allow_abs_path = allow_abs_path;
+ 	ctx->use_ipv6 = use_ipv6;
++	ctx->use_fallback = use_fallback;
  
- 	list_for_each_safe(pos, n, &cfg->labels) {
- 		label = list_entry(pos, struct pxe_label, list);
-diff --git a/doc/README.pxe b/doc/README.pxe
-index 172201093d..af2e64a577 100644
---- a/doc/README.pxe
-+++ b/doc/README.pxe
-@@ -120,6 +120,11 @@ Unrecognized commands are ignored.
- default <label>	    - the label named here is treated as the default and is
- 		      the first label 'pxe boot' attempts to boot.
+ 	/* figure out the boot directory, if there is one */
+ 	if (bootfile && strlen(bootfile) >= MAX_TFTP_PATH_LEN)
+diff --git a/cmd/pxe.c b/cmd/pxe.c
+index ae02c28c07..982e2b1e7e 100644
+--- a/cmd/pxe.c
++++ b/cmd/pxe.c
+@@ -138,7 +138,7 @@ int pxe_get(ulong pxefile_addr_r, char **bootdirp, ulong *sizep, bool use_ipv6)
+ 	int i;
  
-+fallback <label>    - the label named here is treated as a fallback option that
-+		      may be attempted should it be detected that booting of
-+		      the default has failed to complete, for example via
-+		      U-Boot's boot count limit functionality.
-+
- menu title <string> - sets a title for the menu of labels being displayed.
+ 	if (pxe_setup_ctx(&ctx, cmdtp, do_get_tftp, NULL, false,
+-			  env_get("bootfile"), use_ipv6))
++			  env_get("bootfile"), use_ipv6, false))
+ 		return -ENOMEM;
  
- menu include <path> - use tftp to retrieve the pxe file at <path>, which
+ 	if (IS_ENABLED(CONFIG_BOOTP_PXE_DHCP_OPTION) &&
+@@ -288,7 +288,7 @@ do_pxe_boot(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	}
+ 
+ 	if (pxe_setup_ctx(&ctx, cmdtp, do_get_tftp, NULL, false,
+-			  env_get("bootfile"), use_ipv6)) {
++			  env_get("bootfile"), use_ipv6, false)) {
+ 		printf("Out of memory\n");
+ 		return CMD_RET_FAILURE;
+ 	}
+diff --git a/cmd/sysboot.c b/cmd/sysboot.c
+index 0ea08fd7b5..8a060780ca 100644
+--- a/cmd/sysboot.c
++++ b/cmd/sysboot.c
+@@ -105,7 +105,7 @@ static int do_sysboot(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	}
+ 
+ 	if (pxe_setup_ctx(&ctx, cmdtp, sysboot_read_file, &info, true,
+-			  filename, false)) {
++			  filename, false, false)) {
+ 		printf("Out of memory\n");
+ 		return CMD_RET_FAILURE;
+ 	}
 diff --git a/include/pxe_utils.h b/include/pxe_utils.h
-index 9f19593048..a408fb7f13 100644
+index a408fb7f13..68ac40b64a 100644
 --- a/include/pxe_utils.h
 +++ b/include/pxe_utils.h
-@@ -62,6 +62,7 @@ struct pxe_label {
-  *
-  * title - the name of the menu as given by a 'menu title' line.
-  * default_label - the name of the default label, if any.
-+ * fallback_label - the name of the fallback label, if any.
-  * bmp - the bmp file name which is displayed in background
-  * timeout - time in tenths of a second to wait for a user key-press before
-  *           booting the default label.
-@@ -73,6 +74,7 @@ struct pxe_label {
- struct pxe_menu {
- 	char *title;
- 	char *default_label;
-+	char *fallback_label;
- 	char *bmp;
- 	int timeout;
- 	int prompt;
+@@ -96,6 +96,8 @@ typedef int (*pxe_getfile_func)(struct pxe_context *ctx, const char *file_path,
+  *	allocated
+  * @pxe_file_size: Size of the PXE file
+  * @use_ipv6: TRUE : use IPv6 addressing, FALSE : use IPv4 addressing
++ * @use_fallback: TRUE : use "fallback" option as default, FALSE : use
++ *	"default" option as default
+  */
+ struct pxe_context {
+ 	struct cmd_tbl *cmdtp;
+@@ -116,6 +118,7 @@ struct pxe_context {
+ 	char *bootdir;
+ 	ulong pxe_file_size;
+ 	bool use_ipv6;
++	bool use_fallback;
+ };
+ 
+ /**
+@@ -215,12 +218,17 @@ int format_mac_pxe(char *outbuf, size_t outbuf_len);
+  *	none
+  * @use_ipv6: TRUE : use IPv6 addressing
+  *            FALSE : use IPv4 addressing
++ * @use_fallback: TRUE : Use "fallback" option instead of "default" should no
++ *                       other choice be selected
++ *                FALSE : Use "default" option should no other choice be
++ *                        selected
+  * Return: 0 if OK, -ENOMEM if out of memory, -E2BIG if bootfile is larger than
+  *	MAX_TFTP_PATH_LEN bytes
+  */
+ int pxe_setup_ctx(struct pxe_context *ctx, struct cmd_tbl *cmdtp,
+ 		  pxe_getfile_func getfile, void *userdata,
+-		  bool allow_abs_path, const char *bootfile, bool use_ipv6);
++		  bool allow_abs_path, const char *bootfile, bool use_ipv6,
++		  bool use_fallback);
+ 
+ /**
+  * pxe_destroy_ctx() - Destroy a PXE context
 -- 
 2.45.2
 
