@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A327CEDD99
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 14:04:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F159DCEDD99
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 14:04:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 132DB89233;
-	Wed,  9 Oct 2024 16:03:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A66478924D;
+	Wed,  9 Oct 2024 16:03:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KBpuUWXF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="x21rreQi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6EEA8923D; Wed,  9 Oct 2024 16:03:44 +0200 (CEST)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id B6A278924B; Wed,  9 Oct 2024 16:03:46 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD69D8922E
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 16:03:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E63F989241
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 16:03:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-37d47b38336so27047f8f.3
- for <u-boot@lists.denx.de>; Wed, 09 Oct 2024 07:03:42 -0700 (PDT)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-42e5e758093so60969285e9.1
+ for <u-boot@lists.denx.de>; Wed, 09 Oct 2024 07:03:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728482621; x=1729087421; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1728482622; x=1729087422; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AsvDa2UFAwg5RxlQg5tgb1hlxzko3UPk9gKM3nWPpnE=;
- b=KBpuUWXFhlLopF8s2jQTHORQkeJqB7wSg6qrCav42tqophqG8GNXptzq1pxPSkdYKy
- NLyVTQQPjOvyDXQyScs68EjzXr8ebI7Qwlb8+kg2Ujnrs4ysWFfHXDR/KuoJL7tXln2w
- QHtbcLWrVmXELOgLZR9PpBoBtxTVV2hPBxb8dUavuNFmIxwIuKJDBdWUOd/jU75PKSHd
- qJ1kFcGyVydjOxNyE9yrQfGn8IG3Vl5bG0Hg6w0owL6vjt9mYLwBurzuogc2oR/WDa2z
- eoQiOckm4mIwthisHNpHUZTqdvYQBcwprdGITJM4G6Z0dazzhF1EKqpRm2nTyJ2KwHwd
- QPiA==
+ bh=1f3amPh9ObQpkp4lRVh54Ids70l7HQ905iISzEE+AaE=;
+ b=x21rreQiMmtykeBdtCbAKLxeXIqDU8WZ2AJLXHniAEyt2B1QeR4GV7gMaknh6sKTYK
+ hiE49Gj8BFcauZGUbGckFzRIFzal2WcdAAPwh8jkxbGHtVaj1dpWxZOgueDKhyhT6occ
+ 8nJk4bH6oOFYKfBvp1eXy5VvJsQM4k+IuVvdrAP9+na8T4q2Cv3nkd4xybAajWFLXYCM
+ 1UijcIVxGpvfQdJTq0LYPpWphuEncsyxvr/D33c+BHtmOPKpqbz7QM24A3BkDIHyuYmA
+ rKzlR89h9Ltqqd8UzMmcZn/BiD8Livdk/Q3Yzg6pF6MJ+n18p9fYENC4sXZWQqkrSPqA
+ zr1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728482621; x=1729087421;
+ d=1e100.net; s=20230601; t=1728482622; x=1729087422;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AsvDa2UFAwg5RxlQg5tgb1hlxzko3UPk9gKM3nWPpnE=;
- b=tihw7xLPcSqX2KKmA5+jP1zBc9AHPplbWhBI7PXjL7QrnUwohzR/XCAlDr0bvtQcLv
- jCEoue3zpk0wj3RAjo8VP1fEmZpdh3QN+pGQxSn+7HTyfA9q+dUop2UcacbCXVOmDzz8
- Cez6UXm430AFDPLaI4idOTyvlikDqmSlYWSp9yhLueHmFPSkbzVfkmMC5epLGFrCaISg
- 3pDiRKNiLhg3wTrP7o8sIe9KpGg7qrPjj1uZsLSyZppd/VW4ye/alWUi5W5hUOtwFWGK
- P7utdoIL8kvQwNED1/pPXa5Bo/E5mBb0qBT7ZTB5bLAxF+bKF2+N8pgxFp+gAn/LXQIq
- fXnw==
-X-Gm-Message-State: AOJu0YzZw2nPf5OszUJLvPeadOSHjLkXR0mkBNBQbjX5VPoZLe9z2ZSB
- IPtwKPUc8mkCIvQQFKEbPoPqkqa6EdIiB0QIphPEFS8ksWfp5eSn3E6NludDooQ9h6O6zEvzD8X
- mgWlB/Q==
-X-Google-Smtp-Source: AGHT+IFAp7LaTYZ8GWS7hy17PkjDsKz+vHA61oJBURVo9+RC4khJJDUTvkLa95/hQ6QcbOctyZ05Zg==
-X-Received: by 2002:a05:6000:1803:b0:367:9881:7d66 with SMTP id
- ffacd0b85a97d-37d3aa6befdmr1688933f8f.41.1728482620295; 
- Wed, 09 Oct 2024 07:03:40 -0700 (PDT)
+ bh=1f3amPh9ObQpkp4lRVh54Ids70l7HQ905iISzEE+AaE=;
+ b=uSkcsxZuDPdsIHjXWZyCBU/orcr/LoEOfGHfpbSULNUdJ0WtNs5kdmdv9n+g1ZpoyQ
+ tQtv0hnY/FqEAmRueMl23yrFCWCoPas/dFyyk7A0RgMS/n4/Ifkdf80dna2Yer9tXy1e
+ GjKA2aoZkUfm3Dhph9/kgNjr1uWvyFIZqcWwZhTGo4ppcRWuP8mjxqJdA3kx9avKkNDw
+ DCr0KnpxJc3T8H2zqWlFzsBLtcX/AjpFIxyYqxJJirSZdwvo5gpQXcBrV54FXJRwjU/0
+ X6CF8QjtcYycFwyWyrddlplmO8DlauvgXp9X4xByV1HO9IJ9bX4i6a67raTeaonH6ZIE
+ EgKw==
+X-Gm-Message-State: AOJu0YxRnC4HMR7Z/iNAavWAh3DopiYrRKXidsQvHCLExcT6AlTYY07F
+ SZHYs4K0PpDf4Z+q4DrIG35JlIEAHTdCzet/xrWUHjPsKO1T2vSXNiVkGhaybJvMpuH0euKGKNd
+ JCJlctw==
+X-Google-Smtp-Source: AGHT+IH6i9kSzipMRukHqV/j9QNxQy+aZjWMPyfWLkNJ5aeC5YRut4x2CMAqhmY6WlEu36BmDKkWhg==
+X-Received: by 2002:a05:600c:1f11:b0:426:689b:65b7 with SMTP id
+ 5b1f17b1804b1-430d59b7820mr19811905e9.25.1728482622087; 
+ Wed, 09 Oct 2024 07:03:42 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:9b46:2ad8:5153:1163])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d1690f0b2sm10581728f8f.9.2024.10.09.07.03.38
+ ffacd0b85a97d-37d1690f0b2sm10581728f8f.9.2024.10.09.07.03.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Oct 2024 07:03:39 -0700 (PDT)
+ Wed, 09 Oct 2024 07:03:41 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -73,17 +73,12 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Anton Antonov <Anton.Antonov@arm.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Yang Xiwen <forbidden405@outlook.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Philip Oberfichtner <pro@denx.de>, Robert Marko <robert.marko@sartura.hr>,
- Boon Khai Ng <boon.khai.ng@intel.com>,
- Christophe ROULLIER <christophe.roullier@foss.st.com>,
- Marek Vasut <marex@denx.de>, Gabor Juhos <j4g8y7@gmail.com>
-Subject: [PATCH v12 02/21] sandbox: add dummy driver ETH_SANDBOX_LWIP
-Date: Wed,  9 Oct 2024 16:02:52 +0200
-Message-Id: <fca7514c15bfa3654c0be7bb6c9ba63770389dc0.1728482473.git.jerome.forissier@linaro.org>
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Subject: [PATCH v12 03/21] test: boot: fix bootdev_test_any for when
+ DSA_SANDBOX is disabled
+Date: Wed,  9 Oct 2024 16:02:53 +0200
+Message-Id: <adbd7e6b79450ed136b27920f25ac7ef4b79a340.1728482473.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1728482473.git.jerome.forissier@linaro.org>
 References: <cover.1728482473.git.jerome.forissier@linaro.org>
@@ -105,149 +100,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce ETH_SANDBOX_LWIP which enables a mock driver similar to
-ETH_SANDOX but without the dependencies on the legacy network stack
-(NET) so that it may be enabled when the lwIP stack (NET_LWIP) is
-introduced. The driver does nothing at this stage but its presence
-will allow dm_test_iommu_noiommu [1] to pass.
+When DSA_SANDBOX is not set, the sandbox tests fail as follows:
 
-[1] ./u-boot -T -c "ut dm dm_test_iommu_noiommu"
+ $ ./test/py/test.py --build-dir=$(pwd) -k bootdev_test_any
+ [...]
+ Test: bootdev_test_any: bootdev.c
+ test/boot/bootdev.c:156, bootdev_test_any(): "mmc2" = media->name: Expected "mmc2", got "mmc0"
+ [...]
+
+This is due to the device list containing two less entries than
+expected. Therefore, adjust the expected index to be two less when
+DSA_SANDBOX is disabled.
+
+The actual use case is NET_LWIP=y (to be introduced in later patches)
+which implies DSA_SANDBOX=n for the time being.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- drivers/net/Kconfig        | 11 +++++
- drivers/net/Makefile       |  1 +
- drivers/net/sandbox-lwip.c | 85 ++++++++++++++++++++++++++++++++++++++
- 3 files changed, 97 insertions(+)
- create mode 100644 drivers/net/sandbox-lwip.c
+ test/boot/bootdev.c | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
-index e7d0ddfe25a..2f39ec05ac7 100644
---- a/drivers/net/Kconfig
-+++ b/drivers/net/Kconfig
-@@ -350,6 +350,17 @@ config ETH_SANDBOX
+diff --git a/test/boot/bootdev.c b/test/boot/bootdev.c
+index c635d06ec25..369105ca4cf 100644
+--- a/test/boot/bootdev.c
++++ b/test/boot/bootdev.c
+@@ -128,6 +128,7 @@ BOOTSTD_TEST(bootdev_test_labels, UTF_DM | UTF_SCAN_FDT | UTF_ETH_BOOTDEV);
+ static int bootdev_test_any(struct unit_test_state *uts)
+ {
+ 	struct udevice *dev, *media;
++	char *seq;
+ 	int mflags;
  
- 	  This driver is particularly useful in the test/dm/eth.c tests
- 
-+config ETH_SANDBOX_LWIP
-+	depends on SANDBOX
-+	depends on NET_LWIP
-+	default y
-+	bool "Sandbox: Mocked Ethernet driver (for NET_LWIP)"
-+	help
-+	  This driver is meant as a replacement for ETH_SANDBOX when
-+	  the network stack is NET_LWIP rather than NET. It currently
-+	  does nothing, i.e. it drops the sent packets and never receives
-+	  data.
+ 	/*
+@@ -147,8 +148,16 @@ static int bootdev_test_any(struct unit_test_state *uts)
+ 	 * 8   [   ]      OK  mmc       mmc2.bootdev
+ 	 * 9   [ + ]      OK  mmc       mmc1.bootdev
+ 	 * a   [   ]      OK  mmc       mmc0.bootdev
++	 *
++	 * However if DSA_SANDBOX is disabled the dsa-test@{0,1} devices
++	 * are not there.
+ 	 */
+-	ut_assertok(bootdev_find_by_any("8", &dev, &mflags));
++	if (CONFIG_IS_ENABLED(DSA_SANDBOX))
++		seq = "8";
++	else
++		seq = "6";
 +
- config ETH_SANDBOX_RAW
- 	depends on SANDBOX
- 	default y
-diff --git a/drivers/net/Makefile b/drivers/net/Makefile
-index 4946a63f80f..f5ab1f5dedf 100644
---- a/drivers/net/Makefile
-+++ b/drivers/net/Makefile
-@@ -39,6 +39,7 @@ obj-$(CONFIG_ETH_DESIGNWARE_SOCFPGA) += dwmac_socfpga.o
- obj-$(CONFIG_ETH_SANDBOX) += sandbox.o
- obj-$(CONFIG_ETH_SANDBOX_RAW) += sandbox-raw-bus.o
- obj-$(CONFIG_ETH_SANDBOX_RAW) += sandbox-raw.o
-+obj-$(CONFIG_ETH_SANDBOX_LWIP) += sandbox-lwip.o
- obj-$(CONFIG_FEC_MXC) += fec_mxc.o
- obj-$(CONFIG_FMAN_ENET) += fm/
- obj-$(CONFIG_FMAN_ENET) += fsl_mdio.o
-diff --git a/drivers/net/sandbox-lwip.c b/drivers/net/sandbox-lwip.c
-new file mode 100644
-index 00000000000..3721033c310
---- /dev/null
-+++ b/drivers/net/sandbox-lwip.c
-@@ -0,0 +1,85 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (c) 2015 National Instruments
-+ *
-+ * (C) Copyright 2015
-+ * Joe Hershberger <joe.hershberger@ni.com>
-+ */
-+
-+#include <dm.h>
-+#include <log.h>
-+#include <malloc.h>
-+#include <net.h>
-+#include <asm/eth.h>
-+#include <asm/global_data.h>
-+#include <asm/test.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+static int sb_lwip_eth_start(struct udevice *dev)
-+{
-+	debug("eth_sandbox_lwip: Start\n");
-+
-+	return 0;
-+}
-+
-+static int sb_lwip_eth_send(struct udevice *dev, void *packet, int length)
-+{
-+	debug("eth_sandbox_lwip: Send packet %d\n", length);
-+
-+	return -ENOTSUPP;
-+}
-+
-+static int sb_lwip_eth_recv(struct udevice *dev, int flags, uchar **packetp)
-+{
-+	return -EAGAIN;
-+}
-+
-+static int sb_lwip_eth_free_pkt(struct udevice *dev, uchar *packet, int length)
-+{
-+	return 0;
-+}
-+
-+static void sb_lwip_eth_stop(struct udevice *dev)
-+{
-+}
-+
-+static int sb_lwip_eth_write_hwaddr(struct udevice *dev)
-+{
-+	return 0;
-+}
-+
-+static const struct eth_ops sb_eth_ops = {
-+	.start			= sb_lwip_eth_start,
-+	.send			= sb_lwip_eth_send,
-+	.recv			= sb_lwip_eth_recv,
-+	.free_pkt		= sb_lwip_eth_free_pkt,
-+	.stop			= sb_lwip_eth_stop,
-+	.write_hwaddr		= sb_lwip_eth_write_hwaddr,
-+};
-+
-+static int sb_lwip_eth_remove(struct udevice *dev)
-+{
-+	return 0;
-+}
-+
-+static int sb_lwip_eth_of_to_plat(struct udevice *dev)
-+{
-+	return 0;
-+}
-+
-+static const struct udevice_id sb_eth_ids[] = {
-+	{ .compatible = "sandbox,eth" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(eth_sandbox) = {
-+	.name	= "eth_lwip_sandbox",
-+	.id	= UCLASS_ETH,
-+	.of_match = sb_eth_ids,
-+	.of_to_plat = sb_lwip_eth_of_to_plat,
-+	.remove	= sb_lwip_eth_remove,
-+	.ops	= &sb_eth_ops,
-+	.priv_auto	= 0,
-+	.plat_auto	= sizeof(struct eth_pdata),
-+};
++	ut_assertok(bootdev_find_by_any(seq, &dev, &mflags));
+ 	ut_asserteq(UCLASS_BOOTDEV, device_get_uclass_id(dev));
+ 	ut_asserteq(BOOTFLOW_METHF_SINGLE_DEV, mflags);
+ 	media = dev_get_parent(dev);
 -- 
 2.40.1
 
