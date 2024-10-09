@@ -4,68 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2399ACF042D
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 01:53:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DE87CF042D
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 01:53:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7BE3589056;
-	Wed,  9 Oct 2024 03:51:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E848489032;
+	Wed,  9 Oct 2024 03:51:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Yv/YhH1S";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BJxT4tGz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 55B7589032; Wed,  9 Oct 2024 03:51:36 +0200 (CEST)
-Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
- [IPv6:2607:f8b0:4864:20::433])
+ id 97EE18905C; Wed,  9 Oct 2024 03:51:38 +0200 (CEST)
+Received: from mail-pg1-x532.google.com (mail-pg1-x532.google.com
+ [IPv6:2607:f8b0:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D4078903B
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 03:51:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 72C558903A
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 03:51:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x433.google.com with SMTP id
- d2e1a72fcca58-71e15fe56c9so969816b3a.3
- for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 18:51:34 -0700 (PDT)
+Received: by mail-pg1-x532.google.com with SMTP id
+ 41be03b00d2f7-7e6d04f74faso307408a12.1
+ for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 18:51:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728438692; x=1729043492; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1728438695; x=1729043495; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6UoeL/85EUuhnXx49i45aFvSJPulakwArYxzFJdgAuA=;
- b=Yv/YhH1SoeJCuhi89Vci8pytRSRr+/6FTluICjc+Jnw429peVeIR+TUIqTNh+jzAFf
- FPDpytJchvjaUqJ2OIEwWUvyDkXHBipODmRCUc+jgOdJ6epqKIZOOaGpdqAJEfuIurKs
- FbRcQtS8WlNgrdFeQfwPINPXpKNOK1zTxhvt4=
+ bh=ivWlL46QbFrMyyUPZL1W/0nfabQpO9M/+SIKuwPgoWM=;
+ b=BJxT4tGzUxZsf7sGB5KJ0PTAINHNlqH739rleyrqJtJKUHrpsIFn+2JIviBlznKoee
+ UCXrwn7ZLtLK4RGpg38esDKafGdkaRD4NLybTLVPUumL9DeqDB1CtpzcQ03z31lqb9MV
+ rvbrD7ezP9QRPYa8toHWpT/Ik/d7lOnrQQnag=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728438692; x=1729043492;
+ d=1e100.net; s=20230601; t=1728438695; x=1729043495;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=6UoeL/85EUuhnXx49i45aFvSJPulakwArYxzFJdgAuA=;
- b=VP4qmeayp6Va3hFTkLiXmBEIFolY2Om6oqHmdTQoq9kJZ/NunlVGzKwAPXVkM3528a
- irTdfrL8UEvtzt3P7p0SRzb4XDeWfPfIAkKCH/F3y9OJeAbH4UxEyC+HMFNElvwQWj1e
- cmbg5s2diodBJDWhwk/iboVR7NGSX+1vpCGyTcB7MAcxY3YJavgeUpdBc3JDu7SWXCzT
- OJzW1R10WINFFgHsuoI1PNk5wFhRtc+JyLUIT671MOn0MRTtZU/QJ5jF6QbJygRLDNEH
- h7Cw+F5e2eAU806rNNmsOp1yfHvfKlfvGedJFyjJE5MJMPKR4XTkkx2ZZCRfFU8F79K6
- KY2A==
+ bh=ivWlL46QbFrMyyUPZL1W/0nfabQpO9M/+SIKuwPgoWM=;
+ b=mIe2mnTBNTgcpCYTPfpA2zFUHlpgNvndM6/jA70QWXhfpX2bydiZjwdCLhDc8FL6TR
+ uKgFrcdeyEPSyk81bglnraBg4aaNjr+yo5zVaj0Fj6Cy/GIYmvvVGRpHM9qPsYDQQ5I+
+ jqgASSiclHjiqiE2CqydwP6pumShK2LdXWJYWH1+c8OIs0VsL6xPCRMRg8nWF+Gu5bZw
+ JhTArMIVjmzFx/OZF4YszqPqXQ+jj3JTT1hDt8gWhfsitgssYAjiUdf8BG6ckGk97DaK
+ ALk/8Cox8JjAO2Sz5QoEfZcFovYQEFtOX67qPjXExI4RbE564piuU2cHq8htwAY+pS+D
+ a6fg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVOyJUWUR+coOYSGC4RU3G/pC/3rfWyy/XreKansIOMIq7PV/PdBaZ9lccb9AVosh6bCt+jDpk=@lists.denx.de
-X-Gm-Message-State: AOJu0YwWrcEFKG8FhkMnEZpZArxO6+W1lPJtUjzfTxBJQsVKkLV5VIP+
- MAt50jZu6nsyfzBLBjvN4rwOIoKMTF52RpxhIbTXCL5NODQjzYyen+9s8CjXEtiXfn6aAnFyCti
- 8hYx5qo07OrPfTvCDHET8qRslJ+RFOqbYQQMB
-X-Google-Smtp-Source: AGHT+IEeAy8k2zR6cyaSb4MhdsS1rfYIyTUNBc4CqN8whHo8SB6HUzv5jfD0UTSHfu/UO/DqVwIZShoU9prUXneVWz8=
-X-Received: by 2002:a05:6a21:114d:b0:1d6:e22e:1571 with SMTP id
- adf61e73a8af0-1d8a3bc46eamr1251425637.1.1728438692724; Tue, 08 Oct 2024
- 18:51:32 -0700 (PDT)
+ AJvYcCUkrL1yyXvWfP5VDHNbEqUq/7HLLl7Ge0DWBzHHh6MfRiodnoloZDPxuVyCyZvghl+qj3OEm9Y=@lists.denx.de
+X-Gm-Message-State: AOJu0YyJ7tWI1Hz0SaMcoih6iw7UUur1mjtz5SYefz7tOOPnx5kNoIOo
+ 8K/jjUmE+zmlFEZX0kh3CYSlX1FCZmcuedduR3kQwledkRwFl1OEOw7e43NFHTxEQLpIceAfkHt
+ KfofVDy4kMOWGqYGBUV+yXwbL1EQPZ2RbPVw8
+X-Google-Smtp-Source: AGHT+IFTlC3Pqxq0y/G+AWjjo8VoDYxfKzuNo9eqlBRbs7j7mfhwnyauYjs0iUVi9GoDM42NhL7/v7DWXQ6xkRojsqE=
+X-Received: by 2002:a05:6a21:a4ca:b0:1cc:d9dc:5637 with SMTP id
+ adf61e73a8af0-1d8a35411b9mr1254690637.23.1728438695051; Tue, 08 Oct 2024
+ 18:51:35 -0700 (PDT)
 MIME-Version: 1.0
 References: <20241002132633.246942-1-martyn.welch@collabora.com>
- <20241002132633.246942-3-martyn.welch@collabora.com>
-In-Reply-To: <20241002132633.246942-3-martyn.welch@collabora.com>
+In-Reply-To: <20241002132633.246942-1-martyn.welch@collabora.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 8 Oct 2024 19:51:01 -0600
-Message-ID: <CAFLszTgYxVUzvkwynZcdsQfLKTAypqBdqA=gOHpdJydzmZoJ6g@mail.gmail.com>
-Subject: Re: [PATCH 3/4] bootstd: Add command to enable setting of bootmeth
- specific properties
+Date: Tue, 8 Oct 2024 19:51:08 -0600
+Message-ID: <CAFLszTgzYA9GA9j6pjiQKR3naaCYAYheaOf7_Z8maP5nejJvrg@mail.gmail.com>
+Subject: Re: [PATCH 1/4] boot: pxe_utils: Add fallback support
 To: Martyn Welch <martyn.welch@collabora.com>
 Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -87,31 +85,22 @@ X-Virus-Status: Clean
 
 On Wed, 2 Oct 2024 at 07:26, Martyn Welch <martyn.welch@collabora.com> wrote:
 >
-> We have previously added logic to allow a "fallback" option to be
-> specified in the extlinux configuration. Provide a command that allows
-> us to set this as the preferred default option when booting.
+> When configured correctly, we can detect when boot fails after the boot
+> process has been handed over to the kernel through the use of U-Boot's
+> bootcount support. In some instances, such as when we are performing
+> atomic updates via a system such as OSTree, it is desirable to provide a
+> fallback option so that we can return to a previous (hopefully working)
+> state.
 >
-> Combined with the bootcount functionality, this allows the "altbootcmd"
-> to provide a means of falling back to a previously known good state
-> after a failed update. For example, if "bootcmd" is set to:
->
->     bootflow scan -lb
->
-> We would set "altbootcmd" to:
->
->     bootmeth set extlinux fallback 1; bootflow scan -lb
->
-> Causing the boot process to boot from the fallback option.
+> Add a "fallback" option to the supported extlinux configuration options
+> that points to a label like "default" so that we can utilise this in
+> later commits.
 >
 > Signed-off-by: Martyn Welch <martyn.welch@collabora.com>
 > ---
->  boot/bootmeth-uclass.c   | 25 ++++++++++++++
->  boot/bootmeth_extlinux.c | 73 +++++++++++++++++++++++++++++++++++++++-
->  cmd/bootmeth.c           | 25 ++++++++++++--
->  include/bootmeth.h       | 31 +++++++++++++++++
->  4 files changed, 151 insertions(+), 3 deletions(-)
+>  boot/pxe_utils.c    | 15 +++++++++++++++
+>  doc/README.pxe      |  5 +++++
+>  include/pxe_utils.h |  2 ++
+>  3 files changed, 22 insertions(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-But please update the documentation too - for the command and for the
-new bootstd feature
