@@ -4,82 +4,156 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B5BCCF0449
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 10:41:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9A8ACF044D
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 10:51:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B3F8589026;
-	Wed,  9 Oct 2024 12:41:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 240E489184;
+	Wed,  9 Oct 2024 12:51:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bAzk8p9C";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="dtulQLlK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C9D0891B1; Wed,  9 Oct 2024 12:41:46 +0200 (CEST)
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
- [IPv6:2607:f8b0:4864:20::62c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DCEBE891B2; Wed,  9 Oct 2024 12:51:09 +0200 (CEST)
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com
+ (mail-db8eur05on20700.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2614::700])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC8E1880A5
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 12:41:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0565A891AB
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 12:51:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-20b86298710so57039115ad.1
- for <u-boot@lists.denx.de>; Wed, 09 Oct 2024 03:41:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728470502; x=1729075302; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vIr9YUXyYDbI4+dpT7kc+gggr/Vn6R88qF8QZjhOWmI=;
- b=bAzk8p9CKcUG0uqtb7CPxehMMQ9sEnxI1e7UOBG4jYSz/Vo1eMiVrYenYmoxb7oKPH
- vVNw/gMIFw8JOq25Q2O1Q4YycFPlI3vuXm4vx/RuFd9ViFQUkdeZ3wYOTfqJtAv0EDU/
- fqXrBsOSibvP3/JZvwNGeaPGTsHRsqeUqDBhz8EQyLE0XbN0As4DDWhn68En1KHwg+K5
- cR5bGYgjQfgqW+GhqjoAvV2zhwoSwCKXmJHWIlOtKFsEg8V7+Ex+PknA7iFMSPxTUAm4
- IKmPvLV5FdBUdJZhy3XOcrBgNs7aOik7MbArOWd3bxg8C/aM9okLMFNe37uJw432YwzH
- d2Og==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728470502; x=1729075302;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=vIr9YUXyYDbI4+dpT7kc+gggr/Vn6R88qF8QZjhOWmI=;
- b=c2O3N3QyHEIdB3ixP4wdKnnn5yvoJgFFj1f7NI2q2UJWZJvdi7dQnpi+2LPEfCNQcG
- Si7fiMQddcVMSRbZkbstwS400RO4MOeXwy0exHe2BI80oFhXXZWUllgb3vV4wKViBtRD
- 6+FRNSYuFmCsI0J/s7Wnn7HSiCiFeFQDINZ+Zh2PKGmJSF7uQ0Nj4M7MiwGTvVwJ9dz1
- KVBrPGqEsUOtgxmbQpsA3K2mUq9lVu3PZD/i6DVYkgt30oqDee5fqBS3MX934zMNCoUO
- krb6eysBqGv6l6M2/Hq56fGh3tGzT0MJkpK66tGJwxirzAr6T7Vfs/YAqGn/aYVEg0iW
- +U1g==
-X-Gm-Message-State: AOJu0YxTgnImvtjxUD5Euh9H9WfO4tVQDsxicdV7KdbuioxTYJSozsIU
- g+KCAS5W7lJG3qEzUhxyc/kjOY9ahMHON0Ev5wcT+rAirnH4JFmmM+9HfCGufoSDaDsPwNvgaz4
- /5fRPTSkNPXKaKCYZyxNI7b23jq3ikoH4/Tk1Tg==
-X-Google-Smtp-Source: AGHT+IFnY1ADbnBKxg7UWTIwztQBHyO3Dtt2BjrJJpVX0paplYyYb4gmXHvlim5/z/AOyfQ0uVVdIiO0XvRHIcuDOMA=
-X-Received: by 2002:a17:902:c94d:b0:20b:6624:70a7 with SMTP id
- d9443c01a7336-20c637368e1mr32631085ad.21.1728470502265; Wed, 09 Oct 2024
- 03:41:42 -0700 (PDT)
-MIME-Version: 1.0
-References: <20241009015020.25817-1-sjg@chromium.org>
- <20241009015020.25817-7-sjg@chromium.org>
-In-Reply-To: <20241009015020.25817-7-sjg@chromium.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 9 Oct 2024 13:41:06 +0300
-Message-ID: <CAC_iWjKh7_OKKMi9K6eMaiYUN-Nxf+ZQ0NuW9BYzK3u4F0Krcg@mail.gmail.com>
-Subject: Re: [PATCH 6/6] cmd: Add a command to show the memory map
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Tom Rini <trini@konsulko.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Alexander Gendin <agendin@matrox.com>,
- Emil Kronborg <emil.kronborg@protonmail.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=vbGM7D4uT50JTqz8qSumbreY9W32iheRjzQ71v19kk7uwRaTex1lt7DaoQQV6GP4c8ybZeToGKcrCd0cdoyLajJwo92YcjJuLPb96WPAuVDMCBSr7BZc8faD9ymmKsq6aL7T2lk9D9T2ORwjK3HRshA1Cm2NAJlCLTOakX0Imbee9OWFhp0RbR1pUkA/d9LN/yrPlFuLCfLf306YwlKlcSsdfQ7O0hJYh/w+ENhJEUZD6dFBxsxL3fm8zhKGDu+/IVW8xXJyq9raB1YpLtq4qZ8zQsRFzUIvFl2cXeP4+s0gIeFKKvCSxi0hykRzNdGJi5Pyy9NYGddboButBCJtjA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=BEz99YBS3mgQpsbqTk31psHOSp1vBUbPdtOGEPpO9Vk=;
+ b=kx6+ABJKlyfI2u2rCvfCLTvo9fpTOzK2QzBz0BEVnakxOyUMozJ5W3Zvx/Vg5YL6FuLRvUJRkPOLu6SULkHasSVyVXV5ZV3visoCUsvmU0eKSztfyHvc9x48kGm5N5VTiATdme0FcGYRMxoftL5ZgnkexDYXRh3gSw3ZfaS3kjHlaIhVh6X/qYhHi1oGu5bajmwL+WGRANGSnTztMM8CYQq3bLQvyTL5vqx7ZSwB9x9Gs0roM5BG6tkauSAyXiUm+ml9P/mKs1wt4/8jAemi/X4PTeVzVO984Dp/z3SfhSvguaBet/3GefexHBDBFPIg455jCeRpiJGu3Ljd+2Uojw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
+ dkim=pass header.d=iopsys.eu; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=BEz99YBS3mgQpsbqTk31psHOSp1vBUbPdtOGEPpO9Vk=;
+ b=dtulQLlKppiYEqYe68H4XRA5uDcOMRg7Y0yRbTgR6JHZ9NrcEvvfGhNjdiYfo/aqTLNbGeGkzNsD1rZcYEDRvbZEPBNMMbx6Yhl5U461Ekp1Z3kDS7VgqYnJj+OPVWgQxRuirzGlhiKRJfUjhkq8XDfmAej4egJ1NI65B/auFX8nJNIct/d2pnvLNYNlqJh134eIET6BfQ56loJk2vaSiLJ65/OrJS2SKe7ARBUMkLVHO2n1YJuNLq+q010Yb37RHKIJQaI2oUoLYoBjK8lDn84izBSbr7BiLLHDF4MngaDf//8BHjXmOBuyegbhLvrtf1OoJTD19GLTCAdTSTkQ5A==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=iopsys.eu;
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
+ by AS8PR08MB10026.eurprd08.prod.outlook.com (2603:10a6:20b:632::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8026.22; Wed, 9 Oct
+ 2024 10:51:04 +0000
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0%2]) with mapi id 15.20.8026.020; Wed, 9 Oct 2024
+ 10:51:04 +0000
+From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maxim Moskalets <maximmosk4@gmail.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Tom Fitzhenry <tom@tom-fitzhenry.me.uk>
-Content-Type: text/plain; charset="UTF-8"
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Sean Anderson <seanga2@gmail.com>, Anand Moon <linux.amoon@gmail.com>,
+ Baruch Siach <baruch@tkos.co.il>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Yasuharu Shibata <yasuharu.shibata@gmail.com>, u-boot@lists.denx.de
+Subject: [PATCH v11 01/13] net/tcp: fix TCP options processing
+Date: Wed,  9 Oct 2024 13:50:42 +0300
+Message-ID: <20241009105054.1879054-2-mikhail.kshevetskiy@iopsys.eu>
+X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20241009105054.1879054-1-mikhail.kshevetskiy@iopsys.eu>
+References: <20241009105054.1879054-1-mikhail.kshevetskiy@iopsys.eu>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: MM0P280CA0081.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:190:8::31) To GV2PR08MB8121.eurprd08.prod.outlook.com
+ (2603:10a6:150:7d::22)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|AS8PR08MB10026:EE_
+X-MS-Office365-Filtering-Correlation-Id: cff889b1-d519-4fa5-588c-08dce8504585
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|7416014|366016|52116014|1800799024|38350700014|921020; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?wNsHi0bjAnqK9GLpgDXjN43j9we8g2GMZEr1iGNUiDl4s6MRKUnEasXyXfIu?=
+ =?us-ascii?Q?M2h/zHGRlMP+4gf2IvrBvYzJ1RDY3MVdUowktbHo0mVZg0GlEKIvTer6h7+G?=
+ =?us-ascii?Q?PRSHuOJGNN+CnG/PgmvnZA/0eQxfzuYxdHqYBLkjxj7mNTFyicxBsNiWMlvN?=
+ =?us-ascii?Q?Af25kmC/nPchQzJVc1TfAM19A0ClHm3JJcRwKl6j42BQCOI2lTAmYQHZsJs1?=
+ =?us-ascii?Q?r7ZWPFhwOamKKwwVkXxuZTr8+ltFGb+Hz55kB9unEmTTAgQ6iHC9aem03+Hf?=
+ =?us-ascii?Q?1L9phHcSMy95I1TZkrTl3iwUTO7o1tpCjGsOHDZbK7s4F+qbgjV0naxqQCfn?=
+ =?us-ascii?Q?xVDdvv51a/xOrPX9qLogM4Svyk23ka9AuV7CAcyhjFYAhDTmoq5Q/lDtst2U?=
+ =?us-ascii?Q?ljUnQDf6Oz032Guyzmw/gh+qg4UnjpzUWY8sV0iSldiJ9YmJDW3LqsEKyhzw?=
+ =?us-ascii?Q?eyB79/ZQV2Um35Ys9tHNbh49Zdvq/GTE5xdsyHYfFupJj6UvNnqfpMltqqEX?=
+ =?us-ascii?Q?p0p9oTpAfhMqbVZpw3Sj1Oc9SC1SBU6K+kySPlUyL6rRA3BbOn78DHLxmmC/?=
+ =?us-ascii?Q?hOxqwZto3KVDxAV88hYCa7A3lHQ3zA6TgZwxD37Qj+OhMOm59sQOXe/1Kpbw?=
+ =?us-ascii?Q?wjbl9PUXk9P/C9OapJgi38zjEaqsLmEyZ+Rz2wYuWlMwOd5lEdwbCmx4AYwS?=
+ =?us-ascii?Q?C8bbgsB1CWXTfGcebZzLhGFbsoM5inQ2X7cXyn10B9e4L+MR1PlWF1/J/wO4?=
+ =?us-ascii?Q?+vdd09OwwKXkxken/32xUjDd3a2AvtmB/68tuqhz/TdzU2c4iQIMw/7VqTRs?=
+ =?us-ascii?Q?Jq01zHpCeck/fe9zNhWmA/ZnJ+5g9lcHXNbq/Suw17fHz9GZloMSrS6VNhoc?=
+ =?us-ascii?Q?fuZc4Fs55rbchQyP04w/nU0t9RcU4C74Rge01sggdY3GL66Vj+2QzjpdaoKy?=
+ =?us-ascii?Q?4BykCFijytpDESi2KjtpHkBSKoGBQJWGFYflgIO3Skzy9JtCj2WBeYYTKyiF?=
+ =?us-ascii?Q?+CkPz9oGAvuywYHX41kz2aBaZkkSRHEZqXmm2hreIeB40zTL/S29WvnKI8za?=
+ =?us-ascii?Q?LzLpAXdnrbDHNFYajIx3an1MYwn5BQI+1ssiN4wRrswmKSPi7PylmFXtNz37?=
+ =?us-ascii?Q?Ef9EKyuKHkCD05ro+ByjBdD/WjkezCDAk6IkRLz+VIp1aXSBGaBjVo3+MLI/?=
+ =?us-ascii?Q?tMjxqt/SPGc6+pYwdFV9lzHS55bGSItol3QZGm+zjmtLxTCFCoyTq0phZHV1?=
+ =?us-ascii?Q?K6RdMaQZfGxJoX6BbWn7RKnCGxjOAQIioXG0T+wWYStYitiZq6bqYnOjLWnf?=
+ =?us-ascii?Q?7NPDYi9K+qoAw8fE6GBZqngk3DuTq5Z/6Z3kT+NvoszRE0/X86Vs4wbL5qGu?=
+ =?us-ascii?Q?pKeQfCU=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(7416014)(366016)(52116014)(1800799024)(38350700014)(921020);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?BIxddQyitM1fhYt3n1f8O4LeNJ3xxlGaWp0JdXuHUrH9Il93zAK7p5VZft9T?=
+ =?us-ascii?Q?BK6pOyr9m2E6Rh2jIYoM5vojWv1bxNWWnj0iCrEedMpNW2R+oND5sxr8boOH?=
+ =?us-ascii?Q?7bjdJwDrAyoV8sSJjEf1IJpLUNtccZ3hBTlvWMJli+C582IO1e0M8VzR/VMU?=
+ =?us-ascii?Q?wRCmgUx49fGsvb1Zwr9LAae9epUF+RI5sNPxEisqtc/l7H/KZyGTw339jORp?=
+ =?us-ascii?Q?dGVuqy2l1+tnZ+oWKhJ4GSx4LUD+85GRbVM7JNwtC+DCvfWYQ+pGU5/O3LbD?=
+ =?us-ascii?Q?6E9r6WQ4N4EQNbw3WrgN8WM+ZtRSGIbtVrPYvPY4GiA+pDdxaUrMWvwX914k?=
+ =?us-ascii?Q?df2ucjYJvyBIS7AyQDRpH/E/guDjR+cdnFjLQ7593ox/MKfLJKy1KM2bBRji?=
+ =?us-ascii?Q?0WU2NvwiRrwU9rLFoe6m9Qr+OUW8Z6hQpKgoBABOXZmKDTqlc6YSVsX/25tW?=
+ =?us-ascii?Q?HmP9tneB21dDZwh8EneVjo93NR5xozhUhol8lPovVKJbaQO5nqv2rdrkGrDG?=
+ =?us-ascii?Q?UrHoT30gwCa0bnWqTIo+gJPAst4qcxvHcnZOLSnP2bzVKTOOdkDBuweu8K7e?=
+ =?us-ascii?Q?Y/T6gDVUfsP/Srig87DvtxhV9w9nLylZ3x7Te9JuPVWU83TMkjS+o8Lam6qx?=
+ =?us-ascii?Q?c+goGlk46gvGPrDVNmpG9OQuoiqQQcc6X3pFY0+s4gJsPOpwxXF7pZZOsEjn?=
+ =?us-ascii?Q?aNy1pxiolHwn/W3Zc9d9EXCIuw9/5NPA8JDVv/htj0K3rEokpF8Y0WTVpAG3?=
+ =?us-ascii?Q?54w7QUlpkQKWvj8zdqylBKd0Q+6oU91zbR/2+6tquR05WJxNhuao9+wdyDjZ?=
+ =?us-ascii?Q?gr3JhLO+Mm+Y2IKVStYtKchakry3e4+YXuZzZCOrFWyri+EfsR1cRuBOuZOi?=
+ =?us-ascii?Q?WeiCCA4+LQj7l2eqSJ07zX2K5jloolSC1WuP+DO4aCe1lgCb0VX8wx+d6TOU?=
+ =?us-ascii?Q?bpSGqgn9+1juFGJCJsVYUNxIBH1DrqH3pHLLH7xIa6JIfGWnFmAldkpp4yJc?=
+ =?us-ascii?Q?2zO4nbpatrdx254w+U9irE9P3AYxxb1A7+NNH8g29zIOyNqNKaXDNibDRF+5?=
+ =?us-ascii?Q?fDYLEdmMWq71YwlJLrDyO2IZfhQMR4eTgY99vvV+8QRBhqomUowYZq6Ki88k?=
+ =?us-ascii?Q?PecS1Q5TaaZUUQgDX+1fOKGYVlhd13F4lNFDO+j/nuYLDgIRyedHj3cmUMvx?=
+ =?us-ascii?Q?dDtlvwyvVQc0B+VgxNws6D2aEIxgXx4TCTpwPuTVV2jVCDFGa2x1hw/5c6A3?=
+ =?us-ascii?Q?iNWFiWDAlf0EA9rEWnC82Jhl7J+RvADqtq5JY3HlXviq8QI+Iu6H3SNIiEg7?=
+ =?us-ascii?Q?vqKVx+6MImDLVJDcNtdtxXpHez8zdE8Pf3O/A2mTlb30VX+2Ssu1Y7xJtEW+?=
+ =?us-ascii?Q?Z9Qk2MqgZ5rNF3qRsR0rrA9Gh+3kwQR/mylx8H1lSYN4ye5vThQaprYDWENn?=
+ =?us-ascii?Q?oaXxbeEfrRHKt1FHhf1IrLNGPv93dBDVwmp7hYSwuX83an7CLOgIZdxixZsW?=
+ =?us-ascii?Q?jz8r/+RXZIf1q7+0woiuabBq/MXPf9gtx4RDMaODDJyu+WO8RndCQ9zjOi6r?=
+ =?us-ascii?Q?4hLMfQo9c4GiegwVM9pxL21e/nFNwWOsbyar8iIDWPG9B1GhO+u/1LeSBFvT?=
+ =?us-ascii?Q?44CoXc07A0apSIKbjCja5vs=3D?=
+X-OriginatorOrg: iopsys.eu
+X-MS-Exchange-CrossTenant-Network-Message-Id: cff889b1-d519-4fa5-588c-08dce8504585
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Oct 2024 10:51:04.2617 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: W2zvTP5j4NU52jE9ln9s6x41l77tLh19e+qjv0RCoELGuZA7A/oj/7yk8vix+YwBJcfPyw3fDzVIjXcFKlQP6jSvUov5ozOMWugOhF+ceIk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB10026
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,339 +170,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Current TCP code may miss an option if TCP_O_NOP option was used before
+it for proper aligning.
 
-We already have a mem info command, which is pretty useless. Can't we
-reuse that ?
+Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+---
+ net/tcp.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-Thanks
-/Ilias
+diff --git a/net/tcp.c b/net/tcp.c
+index b0cc8a1fe3e..3e3118de450 100644
+--- a/net/tcp.c
++++ b/net/tcp.c
+@@ -475,7 +475,7 @@ void tcp_parse_options(uchar *o, int o_len)
+ 	 * NOPs are options with a zero length, and thus are special.
+ 	 * All other options have length fields.
+ 	 */
+-	for (p = o; p < (o + o_len); p = p + p[1]) {
++	for (p = o; p < (o + o_len); ) {
+ 		if (!p[1])
+ 			return; /* Finished processing options */
+ 
+@@ -490,12 +490,14 @@ void tcp_parse_options(uchar *o, int o_len)
+ 		case TCP_O_TS:
+ 			tsopt = (struct tcp_t_opt *)p;
+ 			rmt_timestamp = tsopt->t_snd;
+-			return;
++			break;
+ 		}
+ 
+ 		/* Process optional NOPs */
+ 		if (p[0] == TCP_O_NOP)
+ 			p++;
++		else
++			p += p[1];
+ 	}
+ }
+ 
+-- 
+2.45.2
 
-On Wed, 9 Oct 2024 at 04:50, Simon Glass <sjg@chromium.org> wrote:
->
-> U-Boot has a fairly rigid memory map which is normally not visible
-> unless debugging is enabled in board_f.c
->
-> Add a 'memmap' command which shows it. This command does not cover
-> arch-specific pieces but gives a good overview of where things are.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->
->  cmd/Kconfig              |  10 ++++
->  cmd/Makefile             |   1 +
->  cmd/memmap.c             |  66 +++++++++++++++++++++
->  doc/usage/cmd/memmap.rst | 123 +++++++++++++++++++++++++++++++++++++++
->  doc/usage/index.rst      |   1 +
->  test/cmd/Makefile        |   3 +-
->  test/cmd/memmap.c        |  35 +++++++++++
->  7 files changed, 238 insertions(+), 1 deletion(-)
->  create mode 100644 cmd/memmap.c
->  create mode 100644 doc/usage/cmd/memmap.rst
->  create mode 100644 test/cmd/memmap.c
->
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index dd33266cec7..d4a29217323 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -921,6 +921,16 @@ config CMD_MEM_SEARCH
->           pressing return will show the next 10 matches. Environment variables
->           are set for use with scripting (memmatches, memaddr, mempos).
->
-> +config CMD_MEMMAP
-> +       bool "memmap - Memory map"
-> +       default y if SANDBOX
-> +       help
-> +         memmap command
-> +
-> +         This shows the location of areas of memory used by U-Boot. This includes
-> +         the malloc() region, U-Boot's code and data, bloblist and anything else
-> +         that prevents a particular region being used for loading images.
-> +
->  config CMD_MX_CYCLIC
->         bool "Enable cyclic md/mw commands"
->         depends on CMD_MEMORY
-> diff --git a/cmd/Makefile b/cmd/Makefile
-> index 91227f1249c..4f05dafaaad 100644
-> --- a/cmd/Makefile
-> +++ b/cmd/Makefile
-> @@ -109,6 +109,7 @@ obj-y += load.o
->  obj-$(CONFIG_CMD_LOG) += log.o
->  obj-$(CONFIG_CMD_LSBLK) += lsblk.o
->  obj-$(CONFIG_CMD_MD5SUM) += md5sum.o
-> +obj-$(CONFIG_CMD_MEMMAP) += memmap.o
->  obj-$(CONFIG_CMD_MEMORY) += mem.o
->  obj-$(CONFIG_CMD_IO) += io.o
->  obj-$(CONFIG_CMD_MII) += mii.o
-> diff --git a/cmd/memmap.c b/cmd/memmap.c
-> new file mode 100644
-> index 00000000000..d83c04467e9
-> --- /dev/null
-> +++ b/cmd/memmap.c
-> @@ -0,0 +1,66 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright 2024 Google LLC
-> + * Written by Simon Glass <sjg@chromium.org>
-> + */
-> +
-> +#include <bloblist.h>
-> +#include <bootstage.h>
-> +#include <command.h>
-> +#include <malloc.h>
-> +#include <mapmem.h>
-> +#include <asm/global_data.h>
-> +
-> +DECLARE_GLOBAL_DATA_PTR;
-> +
-> +static void print_region(const char *name, ulong base, ulong size, ulong *uptop)
-> +{
-> +       ulong end = base + size;
-> +
-> +       printf("%-12s %8lx %8lx %8lx", name, base, size, end);
-> +       if (*uptop)
-> +               printf(" %8lx", *uptop - end);
-> +       putc('\n');
-> +       *uptop = base;
-> +}
-> +
-> +static int do_memmap(struct cmd_tbl *cmdtp, int flag, int argc,
-> +                    char *const argv[])
-> +{
-> +       ulong upto, stk_bot;
-> +
-> +       printf("%-12s %8s %8s %8s %8s\n", "Region", "Base", "Size", "End",
-> +              "Gap");
-> +       printf("------------------------------------------------\n");
-> +       upto = 0;
-> +       if (IS_ENABLED(CONFIG_VIDEO))
-> +               print_region("video", gd_video_bottom(),
-> +                            gd_video_size(), &upto);
-> +       if (IS_ENABLED(CONFIG_TRACE))
-> +               print_region("trace", map_to_sysmem(gd_trace_buff()),
-> +                            gd_trace_size(), &upto);
-> +       print_region("code", gd->relocaddr, gd->mon_len, &upto);
-> +       print_region("malloc", mem_malloc_start,
-> +                    mem_malloc_end - mem_malloc_start, &upto);
-> +       print_region("board_info", map_to_sysmem(gd->bd),
-> +                    sizeof(struct bd_info), &upto);
-> +       print_region("global_data", map_to_sysmem(gd),
-> +                    sizeof(struct global_data), &upto);
-> +       print_region("devicetree", map_to_sysmem(gd->fdt_blob),
-> +                    fdt_totalsize(gd->fdt_blob), &upto);
-> +       if (IS_ENABLED(CONFIG_BOOTSTAGE))
-> +               print_region("bootstage", map_to_sysmem(gd_bootstage()),
-> +                            bootstage_get_size(false), &upto);
-> +       if (IS_ENABLED(CONFIG_BLOBLIST))
-> +               print_region("bloblist", map_to_sysmem(gd_bloblist()),
-> +                            bloblist_get_total_size(), &upto);
-> +       stk_bot = gd->start_addr_sp - CONFIG_STACK_SIZE;
-> +       print_region("stack", stk_bot, CONFIG_STACK_SIZE, &upto);
-> +       print_region("free", gd->ram_base, stk_bot, &upto);
-> +
-> +       return 0;
-> +}
-> +
-> +U_BOOT_CMD(
-> +       memmap, 1, 1, do_memmap, "Show a map of U-Boot's memory usage", ""
-> +);
-> diff --git a/doc/usage/cmd/memmap.rst b/doc/usage/cmd/memmap.rst
-> new file mode 100644
-> index 00000000000..2f0888a9691
-> --- /dev/null
-> +++ b/doc/usage/cmd/memmap.rst
-> @@ -0,0 +1,123 @@
-> +.. SPDX-License-Identifier: GPL-2.0+:
-> +
-> +.. index::
-> +   single: memmap (command)
-> +
-> +memmap command
-> +==============
-> +
-> +Synopsis
-> +--------
-> +
-> +::
-> +
-> +    memmap
-> +
-> +Description
-> +-----------
-> +
-> +The memmap command shows the layout of memory used by U-Boot and the region
-> +which is free for use by images.
-> +
-> +The layout of memory is set up before relocation, within the init sequence in
-> +``board_init_f()``, specifically the various ``reserve_...()`` functions. This
-> +'reservation' of memory starts from the top of RAM and proceeds downwards,
-> +ending with the stack. This results in the maximum possible amount of memory
-> +being left free for image-loading.
-> +
-> +The memmap command writes its outputs in 5 columns:
-> +
-> +Region
-> +   Name of the region
-> +
-> +Base
-> +    Base address of the region, i.e. where it starts in memory
-> +
-> +Size
-> +    Size of the region, which may be a little smaller than the actual size
-> +    reserved, e.g. due to alignment
-> +
-> +End
-> +    End of the region. The last byte of the region is one lower than the address
-> +    shown here
-> +
-> +Gap
-> +    Gap between the end of this region and the base of the one above
-> +
-> +Regions shown are:
-> +
-> +video
-> +    Memory reserved for video framebuffers. This reservation happens in the
-> +    bind() methods of all video drivers which are present before relocation,
-> +    so the size depends on that maximum amount of memory which all such drivers
-> +    want to reserve. This may be significantly greater than the amount actually
-> +    needed, if the display is ultimately set to a smaller resolution or colour
-> +    depth than the maximum supported.
-> +
-> +code
-> +    U-Boot's code and Block-Starting Symbol (BSS) region. Before relocation,
-> +    U-Boot copies its code to a high region and sets up a BSS immediately after
-> +    that. The size of this region is generally therefore ``__bss_end`` -
-> +    ``__image_copy_start``
-> +
-> +malloc
-> +    Contains the malloc() heap. The size of this is set by
-> +    ``CONFIG_SYS_MALLOC_LEN``.
-> +
-> +board_info
-> +    Contains the ``bd_info`` structure, with some information about the current
-> +    board.
-> +
-> +global_data
-> +    Contains the global-data structure, pointed to by ``gd``. This includes
-> +    various pointers, values and flags which control U-Boot.
-> +
-> +devicetree
-> +    Contains the flatted devicetree blob (FDT) being used by U-Boot to configure
-> +    itself and its devices.
-> +
-> +bootstage
-> +    Contains the bootstage records, which keep track of boot time as U-Boot
-> +    executes. The size of this is determined by
-> +    ``CONFIG_BOOTSTAGE_RECORD_COUNT``, with each record taking approximately
-> +    32 bytes.
-> +
-> +bloblist
-> +    Contains the bloblist, which is a list of tables and other data created by
-> +    U-Boot while executed. The size of this is determined by
-> +    ``CONFIG_BLOBLIST_SIZE``.
-> +
-> +stack
-> +    Contains U-Boot's stack, growing downwards from the top. The nominal size of
-> +    this region is set by ``CONFIG_STACK_SIZE`` but there is no actual limit
-> +    enforced, so the stack can grow behind that. Images should be loaded lower
-> +    in memory to avoid any conflict.
-> +
-> +free
-> +    Free memory, which is available for loading images. The base address of
-> +    this is ``gd->ram_base`` which is generally set by ``CFG_SYS_SDRAM_BASE``.
-> +
-> +Example
-> +-------
-> +
-> +::
-> +
-> +    => memmap
-> +    Region           Base     Size      End      Gap
-> +    ------------------------------------------------
-> +    video         f000000  1000000 10000000
-> +    code          ec3a000   3c5d28  efffd28      2d8
-> +    malloc        8c38000  6002000  ec3a000        0
-> +    board_info    8c37f90       68  8c37ff8        8
-> +    global_data   8c37d80      208  8c37f88        8
-> +    devicetree    8c33000     4d7d  8c37d7d        3
-> +    bootstage     8c32c20      3c8  8c32fe8       18
-> +    bloblist      8c32000      400  8c32400      820
-> +    stack         7c31ff0  1000000  8c31ff0       10
-> +    free                0  7c31ff0  7c31ff0        0
-> +
-> +
-> +Return value
-> +------------
-> +
-> +The return value $? is always 0 (true).
-> diff --git a/doc/usage/index.rst b/doc/usage/index.rst
-> index 70563374899..dd2b5807a4f 100644
-> --- a/doc/usage/index.rst
-> +++ b/doc/usage/index.rst
-> @@ -83,6 +83,7 @@ Shell commands
->     cmd/loads
->     cmd/loadx
->     cmd/loady
-> +   cmd/memmap
->     cmd/mbr
->     cmd/md
->     cmd/mmc
-> diff --git a/test/cmd/Makefile b/test/cmd/Makefile
-> index 8f2134998ad..3f6ae59f3d4 100644
-> --- a/test/cmd/Makefile
-> +++ b/test/cmd/Makefile
-> @@ -18,8 +18,9 @@ obj-$(CONFIG_CMD_FDT) += fdt.o
->  obj-$(CONFIG_CONSOLE_TRUETYPE) += font.o
->  obj-$(CONFIG_CMD_HISTORY) += history.o
->  obj-$(CONFIG_CMD_LOADM) += loadm.o
-> -obj-$(CONFIG_CMD_MEM_SEARCH) += mem_search.o
-> +obj-$(CONFIG_CMD_MEMMAP) += memmap.o
->  obj-$(CONFIG_CMD_MEMORY) += mem_copy.o
-> +obj-$(CONFIG_CMD_MEM_SEARCH) += mem_search.o
->  ifdef CONFIG_CMD_PCI
->  obj-$(CONFIG_CMD_PCI_MPS) += pci_mps.o
->  endif
-> diff --git a/test/cmd/memmap.c b/test/cmd/memmap.c
-> new file mode 100644
-> index 00000000000..f12d7174838
-> --- /dev/null
-> +++ b/test/cmd/memmap.c
-> @@ -0,0 +1,35 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Test for 'memmap' command
-> + *
-> + * Copyright 2024 Google LLC
-> + * Written by Simon Glass <sjg@chromium.org>
-> + */
-> +
-> +#include <dm/test.h>
-> +#include <test/cmd.h>
-> +#include <test/ut.h>
-> +
-> +/* Test 'memmap' command */
-> +static int cmd_test_memmap(struct unit_test_state *uts)
-> +{
-> +       ut_assertok(run_command("memmap", 0));
-> +       ut_assert_nextline("Region           Base     Size      End      Gap");
-> +       ut_assert_nextlinen("-");
-> +
-> +       /* For now we don't worry about checking the values */
-> +       ut_assert_nextlinen("video");
-> +       ut_assert_nextlinen("code");
-> +       ut_assert_nextlinen("malloc");
-> +       ut_assert_nextlinen("board_info");
-> +       ut_assert_nextlinen("global_data");
-> +       ut_assert_nextlinen("devicetree");
-> +       ut_assert_nextlinen("bootstage");
-> +       ut_assert_nextlinen("bloblist");
-> +       ut_assert_nextlinen("stack");
-> +       ut_assert_nextlinen("free");
-> +       ut_assert_console_end();
-> +
-> +       return 0;
-> +}
-> +CMD_TEST(cmd_test_memmap, UTF_CONSOLE);
-> --
-> 2.43.0
->
