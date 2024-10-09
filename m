@@ -4,97 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26D33CF07A5
-	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 05:23:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7A96CF07A3
+	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 05:23:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A2D278902E;
-	Thu, 10 Oct 2024 07:23:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1EBF98904D;
+	Thu, 10 Oct 2024 07:23:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tB17c/Bz";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ClaDU8/P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9153288CC9; Wed,  9 Oct 2024 17:08:49 +0200 (CEST)
-Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
- [IPv6:2607:f8b0:4864:20::434])
+ id 2C38088770; Wed,  9 Oct 2024 17:32:46 +0200 (CEST)
+Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
+ [IPv6:2607:f8b0:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A505288C4A
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 17:08:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BC8C188CA8
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 17:32:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-71df04d3cd1so4245388b3a.2
- for <u-boot@lists.denx.de>; Wed, 09 Oct 2024 08:08:45 -0700 (PDT)
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-71e06ba441cso2707915b3a.1
+ for <u-boot@lists.denx.de>; Wed, 09 Oct 2024 08:32:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728486524; x=1729091324; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1728487961; x=1729092761; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=KkZbT8qEeF38Ru5DqnWFClejVoQcv7bznD/HMmA7ar0=;
- b=tB17c/BzfFI0DkKBkKPOw/JbEKrcEJm4KokitoRpNJ2EFuaGHVtlD7YL3FBhGb5Hj0
- 8xHkGBdMHXLaB82/PYA72i9hTWK2vGA4/Ny4XafV3ClT5xZO8vW95Y5WD6KHZU8wt96h
- CStvF50eqQWcaM/hAaF3wgt/VIzQvc7aaEMOnS4FFuiXMen7wNAYHRhcHKM9X6+dJVY7
- ohazMie+dM06Q3ONu/731vc9ng/Fnd2KW8VMrhFghGlbcT8BnKBMzoyFwwQAWKhR9LJJ
- AyGXHwntlirBqPzDjFLER6O67YoNqCrmQSrcW1tGBBQaQsgL0j+BXkK51X2Tc6pc3iNm
- Q3rw==
+ bh=A0kreBFcOqs4PaVT77RR6ICgg9QK0eWztZH7Jmemssg=;
+ b=ClaDU8/PvkcLQfP6AUchaeb8CbeLZWIzfVljiOXbnA4L/CPT0P4bXWS+HWCE3ca5Zg
+ fZUp3Kr6GtucwT4JpeI6IZD781eWzrYDJ/ojjRv+8YQeL+cg/2szQq8N6LQfj6DF7FXG
+ /tGdVuP8XG6NPyii1uXitafWizr4lFI/9rBgZGYm+sRP9nixElTS6XoqUG5NF4Gn71le
+ E8S4/4XsGCqAnM2SZPTtQor22bDZARuLE+p9R1Xt0sptqsauQGrPsWVMRw793I5EL2Qc
+ d32fN84t6CHVxHj6g69lp3pLMnPsOA9MeNl/CvOj/36btAtIB4gHL5WfWd1r5GNcu3t4
+ APKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728486524; x=1729091324;
+ d=1e100.net; s=20230601; t=1728487961; x=1729092761;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=KkZbT8qEeF38Ru5DqnWFClejVoQcv7bznD/HMmA7ar0=;
- b=bQ4YkzKrw/0doMk4vp4EqDu4naURCnb2B62QddaYbme03v8yeyIe4EpHKq3B+E3xmk
- YzeCQtrxD8Z9Q419l3XKEn7MHJ4nNDfUUtC4WGoYwWlmZJ9NCeDAgyU/JKS62gcc3eWr
- 3ztpzVicIyd4qj7Ac9wtL7iygC5ZOJ1w8D2pQN3R468w2oFZ43gzTge0nVT+OcmlxnGX
- pDub7M23aqgeBKzA4jusVaFgFrMAeb4eZLoS/f8ivmYfmPhpaATbFDuaFLAPqgzHqAto
- 86SPTik4mvTjBTAcGcfjt1xe9NACtBR9/DGpSiTezC7fOueKZJ7rDbUxj6uZmiuVVNBk
- qnIQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWUDak/XPtPc8nJKhxjQkZvBq6SJN0VSqeLQ3zhBU2mBLXFMKMlLGBFnR5FvD82Q1KDzjD7foc=@lists.denx.de
-X-Gm-Message-State: AOJu0YwSccZGH9PY/MlbSfQBZPdzO/qwfUxQVhaTWpT2waNykYUzOJQw
- rdqJCES6mZfrdti23hnVdfTYdjirWSkGcoQIZA1Cn/y5BT9z2GEGNkYx61Ru3hXvFYiXHbsAB5t
- e4CJXTI7PTZf0ZMd6Ye/ainIACrsfFu3ASk362w==
-X-Google-Smtp-Source: AGHT+IEze2ooPGZ6/ALL18WTxBNokzV211Gt7PzNYFwHMO0mk+RDWjHrB7+JvfzKrs/TTfWGn+TAMLKZVFx/09ormS0=
-X-Received: by 2002:a05:6a00:3d55:b0:71d:fb29:9f07 with SMTP id
- d2e1a72fcca58-71e1db8ee24mr4360247b3a.15.1728486523875; Wed, 09 Oct 2024
- 08:08:43 -0700 (PDT)
+ bh=A0kreBFcOqs4PaVT77RR6ICgg9QK0eWztZH7Jmemssg=;
+ b=gjoBnnnU5TUpyDPSyPad+7XhL+qAg/3d4lt0L2+W9/3plFbnqtjHRVjU84M72YFIQO
+ FuneqF0NnT8MdMq8Cqkzr+mZu2iMHfCATivr9UdP4crxE9ThlJJQCan7hjP9Y0DUzZZX
+ xPWsxBsWbpbAsjhAzpZS72UhFaIqJ2JCYFR3V9t1FLweenNQKMCeHx0lx9hBjHwszYMH
+ u+bJGZ/q4KxLQ+wYix7/RnzQgf30Yeodz/+Kf5HFyiQaPqXYEESg+fTMbkz1r2cJ9h6y
+ 1hH1tUDfzj3MOqA2oq+ialGcoh0bVm1Xu89AXAIqxTmbxfGY5LMqlcfZWcQYhBcgzyQd
+ NPSQ==
+X-Gm-Message-State: AOJu0Yyh8+1BR9dBWMQ3v11uRVDMsXDofPxQC4SMILKwijF+3aUa8O+C
+ vdBC32qWe9V7w25WG/L/LSfTlbkAiNi1U/MVH1AgQEHlDohmRO2ptj6ZIOd8KOLog4VJw7mTOX6
+ r902wk5t/4Sc3RA/jUoU7GaItjPHYC12EptS8hg==
+X-Google-Smtp-Source: AGHT+IE5NJIGqrLzRsQTV3KX4mTeg0wAXDoR2mvVnyU6HahPv+Z6dwl6Qi3U3tuKtZMqFWybmSMpZ9V/vpyCYk2M7Ds=
+X-Received: by 2002:a05:6a00:816:b0:71e:19d0:2988 with SMTP id
+ d2e1a72fcca58-71e1db85912mr4230863b3a.14.1728487961057; Wed, 09 Oct 2024
+ 08:32:41 -0700 (PDT)
 MIME-Version: 1.0
 References: <20241003215112.3103601-1-raymond.mao@linaro.org>
- <CAFLszTiDw-a=yYv_ueXRpfqHd2ngsQCPSWgeamxbMyCpPEKcZQ@mail.gmail.com>
- <CAC_iWj+OFJOhQxnfFf4hP469e9rJdrVAb8+H_vpguAiuf2D-sQ@mail.gmail.com>
-In-Reply-To: <CAC_iWj+OFJOhQxnfFf4hP469e9rJdrVAb8+H_vpguAiuf2D-sQ@mail.gmail.com>
+ <20241003215112.3103601-4-raymond.mao@linaro.org>
+ <20241009143824.GJ14210@bill-the-cat>
+In-Reply-To: <20241009143824.GJ14210@bill-the-cat>
 From: Raymond Mao <raymond.mao@linaro.org>
-Date: Wed, 9 Oct 2024 11:08:31 -0400
-Message-ID: <CAEfUkU+C3yANU7BAeRb5u8bnUczgEk+HLhnZc31dgWf-F6u0sQ@mail.gmail.com>
-Subject: Re: [PATCH v8 00/27] Integrate MbedTLS v3.6 LTS with U-Boot
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- manish.pandey2@arm.com, 
- Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
- Mario Six <mario.six@gdsys.cc>, 
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Michal Simek <michal.simek@amd.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Peng Fan <peng.fan@nxp.com>, 
+Date: Wed, 9 Oct 2024 11:32:29 -0400
+Message-ID: <CAEfUkUJXa55pJP-DypJy-FGhpkQiSFAS3QB+6s5+55PWmwbZ7Q@mail.gmail.com>
+Subject: Re: [PATCH v8 03/27] lib: Adapt digest header files to MbedTLS
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, manish.pandey2@arm.com, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Stefan Bosch <stefan_b@posteo.net>, Mario Six <mario.six@gdsys.cc>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
+ Michal Simek <michal.simek@amd.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Simon Glass <sjg@chromium.org>, Peng Fan <peng.fan@nxp.com>, 
  Jaehoon Chung <jh80.chung@samsung.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Sean Anderson <seanga2@gmail.com>, 
- Sumit Garg <sumit.garg@linaro.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Andrew Davis <afd@ti.com>, Bryan Brattlof <bb@ti.com>,
- "Leon M. Busch-George" <leon@georgemail.eu>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Alexander Gendin <agendin@matrox.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Jonathan Humphreys <j-humphreys@ti.com>, 
- Paul Barker <paul.barker.ct@bp.renesas.com>, Marek Vasut <marex@denx.de>, 
- Linus Walleij <linus.walleij@linaro.org>, Ian Roberts <ian.roberts@timesys.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Jonas Karlman <jonas@kwiboo.se>, Greg Malysa <greg.malysa@timesys.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Sumit Garg <sumit.garg@linaro.org>, Sean Anderson <seanga2@gmail.com>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Andrew Davis <afd@ti.com>,
+ Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Alexander Gendin <agendin@matrox.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Jonathan Humphreys <j-humphreys@ti.com>, Marek Vasut <marex@denx.de>, 
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Greg Malysa <greg.malysa@timesys.com>, 
+ Kever Yang <kever.yang@rock-chips.com>,
  Kongyang Liu <seashell11234455@gmail.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Eddie James <eajames@linux.ibm.com>
+ Linus Walleij <linus.walleij@linaro.org>, Jonas Karlman <jonas@kwiboo.se>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>
 X-Mailman-Approved-At: Thu, 10 Oct 2024 07:23:03 +0200
 Content-Type: text/plain; charset="UTF-8"
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
@@ -114,163 +110,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi Tom,
 
-On Wed, 9 Oct 2024 at 05:50, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-wrote:
+On Wed, 9 Oct 2024 at 10:38, Tom Rini <trini@konsulko.com> wrote:
 
-> Hi Simon,
+> On Thu, Oct 03, 2024 at 02:50:16PM -0700, Raymond Mao wrote:
 >
-> On Wed, 9 Oct 2024 at 04:52, Simon Glass <sjg@chromium.org> wrote:
+> > Adapt digest header files to support both original libs and MbedTLS
+> > by switching on/off MBEDTLS_LIB_CRYPTO.
+> > Introduce <alg>_LEGACY kconfig for legacy hash implementations.
+> > sha256.o should depend on SHA256 kconfig only but not SUPPORT_EMMC_RPMB,
+> > SHA256 should be selected when SUPPORT_EMMC_RPMB is enabled instead.
 > >
-> > On Thu, 3 Oct 2024 at 15:51, Raymond Mao <raymond.mao@linaro.org> wrote:
-> > >
-> > > Integrate MbedTLS v3.6 LTS (currently v3.6.0) with U-Boot.
-> > >
-> > > Motivations:
-> > > ------------
-> > >
-> > > 1. MbedTLS is well maintained with LTS versions.
-> > > 2. LWIP is integrated with MbedTLS and easily to enable HTTPS.
-> > > 3. MbedTLS recently switched license back to GPLv2.
-> > >
-> > > Prerequisite:
-> > > -------------
-> > >
-> > > This patch series requires mbedtls git repo to be added as a
-> > > subtree to the main U-Boot repo via:
-> > >     $ git subtree add --prefix lib/mbedtls/external/mbedtls \
-> > >           https://github.com/Mbed-TLS/mbedtls.git \
-> > >           v3.6.0 --squash
-> > > Moreover, due to the Windows-style files from mbedtls git repo,
-> > > we need to convert the CRLF endings to LF and do a commit manually:
-> > >     $ git add --renormalize .
-> > >     $ git commit
-> > >
-> > > New Kconfig options:
-> > > --------------------
-> > >
-> > > `MBEDTLS_LIB` is for MbedTLS general switch.
-> > > `MBEDTLS_LIB_CRYPTO` is for replacing original digest and crypto libs
-> with
-> > > MbedTLS.
-> > > `MBEDTLS_LIB_CRYPTO_ALT` is for using original U-Boot crypto libs as
-> > > MbedTLS crypto alternatives.
-> > > `MBEDTLS_LIB_X509` is for replacing original X509, PKCS7, MSCode, ASN1,
-> > > and Pubkey parser with MbedTLS.
-> > > By default `MBEDTLS_LIB_CRYPTO_ALT` and `MBEDTLS_LIB_X509` are selected
-> > > when `MBEDTLS_LIB` is enabled.
-> > > `LEGACY_CRYPTO` is introduced as a main switch for legacy crypto
-> library.
-> > > `LEGACY_CRYPTO_BASIC` is for the basic crypto functionalities and
-> > > `LEGACY_CRYPTO_CERT` is for the certificate related functionalities.
-> > > For each of the algorithm, a pair of `<alg>_LEGACY` and `<alg>_MBEDTLS`
-> > > Kconfig options are introduced. Meanwhile, `SPL_` Kconfig options are
-> > > introduced.
-> > >
-> > > In this patch set, MBEDTLS_LIB, MBEDTLS_LIB_CRYPTO and MBEDTLS_LIB_X509
-> > > are by default enabled in qemu_arm64_defconfig and sandbox_defconfig
-> > > for testing purpose.
-> > >
-> > > Patches for external MbedTLS project:
-> > > -------------------------------------
-> > >
-> > > Since U-Boot uses Microsoft Authentication Code to verify PE/COFFs
-> > > executables which is not supported by MbedTLS at the moment,
-> > > addtional patches for MbedTLS are created to adapt with the EFI loader:
-> > > 1. Decoding of Microsoft Authentication Code.
-> > > 2. Decoding of PKCS#9 Authenticate Attributes.
-> > > 3. Extending MbedTLS PKCS#7 lib to support multiple signer's
-> certificates.
-> > > 4. MbedTLS native test suites for PKCS#7 signer's info.
-> > >
-> > > All above 4 patches (tagged with `mbedtls/external`) are submitted to
-> > > MbedTLS project and being reviewed, eventually they should be part of
-> > > MbedTLS LTS release.
-> > > But before that, please merge them into U-Boot, otherwise the building
-> > > will be broken when MBEDTLS_LIB_X509 is enabled.
-> > >
-> > > See below PR link for the reference:
-> > > https://github.com/Mbed-TLS/mbedtls/pull/9001
-> > >
-> > > Miscellaneous:
-> > > --------------
-> > >
-> > > Optimized MbedTLS library size by tailoring the config file
-> > > and disabling all unnecessary features for EFI loader.
-> > > From v2, original libs (rsa, asn1_decoder, rsa_helper, md5, sha1,
-> sha256,
-> > > sha512) are completely replaced when MbedTLS is enabled.
-> > > From v3, the size-growth is slightly reduced by refactoring Hash
-> functions.
-> > > From v6, smaller implementations for SHA256 and SHA512 are enabled and
-> > > target size reduce significantly.
-> > > Target(QEMU arm64) size-growth when enabling MbedTLS:
-> > > v1: 6.03%
-> > > v2: 4.66%
-> > > v3 - v5: 4.55%
-> > > v6: 2.90%
-> > >
-> > > Please see the latest output from buildman for size-growth on QEMU
-> arm64,
-> > > Sandbox and Nanopi A64. [1]
-> > >
-> > > Tests done:
-> > > -----------
-> > >
-> > > EFI Secure Boot test (EFI variables loading and verifying, EFI signed
-> image
-> > > verifying and booting) via U-Boot console.
-> > > EFI Secure Boot and Capsule sandbox test passed.
-> > >
-> > > Known issues:
-> > > -------------
-> > >
-> > > None.
-> > >
-> > > [1]: buildman output for size comparison (With both `MBEDTLS_LIB` and
-> > > `MBEDTLS_LIB_CRYPTO` selected)
-> > > (qemu_arm64, sandbox and nanopi_a64)
-> > > ```
-> > >    aarch64: (for 2/2 boards) all -1568.0 bss -8.0 data -64.0 rodata
-> +200.0 text -1696.0
-> > >             qemu_arm64     : all +4472 bss -16 data -64 rodata +200
-> text +4352
-> > >                u-boot: add: 29/-14, grow: 6/-13 bytes: 12812/-8084
-> (4728)
-> > >                  function                                   old
->  new   delta
-> > >                  mbedtls_internal_sha1_process                -
-> 4540   +4540
+> > `IS_ENABLED` or `CONFIG_IS_ENABLED` is not applicable here, since
+> > including <linux/kconfig.h> causes undefined reference on schedule()
+> > with sandbox build, as <linux/kconfig.h> includes <generated/autoconf.h>
+> > which enables `CONFIG_HW_WATCHDOG` and `CONFIG_WATCHDOG` but no
+> schedule()
+> > are defined in sandbox build,
+> > Thus we use `#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)` instead.
 > >
-> > I am not going to review this version as others are on top of this. It
-> > looks reasonable to me. We do need to tidy up the hashing in
-> > common/hash.c at some point but this series doesn't add to the pain
-> > there.
+> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 >
-> I don't have time to review those things in depth. OTOH we have enough
-> testing on the CI to make sure cryptography is working and I do like
-> the state of the patches as well.
+> There's three platforms where we see something like:
+>        arm: (for 1/1 boards) all +5651.0 data +112.0 rodata +139.0 text
+> +5400.0
+>             o4-imx6ull-nano: all +5651 data +112 rodata +139 text +5400
+>                u-boot: add: 23/0, grow: 1/0 bytes: 1172/0 (1172)
+>                  function                                   old     new
+>  delta
+>                  hash_command                               108     296
+> +188
+>                  sha1_finish                                  -     156
+> +156
+>                  static.sha1_update                           -     114
+> +114
+>                  hash_algo                                    -     112
+> +112
+>                  sha1_padding                                 -      64
+>  +64
+>                  hash_lookup_algo                             -      60
+>  +60
+>                  sha1_starts                                  -      52
+>  +52
+>                  crc16_ccitt_wd_buf                           -      36
+>  +36
+>                  sha256_csum_wd                               -      34
+>  +34
+>                  sha1_csum_wd                                 -      34
+>  +34
+>                  hash_finish_sha256                           -      34
+>  +34
+>                  hash_finish_sha1                             -      34
+>  +34
+>                  crc32_wd_buf                                 -      34
+>  +34
+>                  hash_finish_crc32                            -      28
+>  +28
+>                  hash_finish_crc16_ccitt                      -      28
+>  +28
+>                  hash_init_sha256                             -      22
+>  +22
+>                  hash_init_sha1                               -      22
+>  +22
+>                  hash_update_crc32                            -      20
+>  +20
+>                  hash_update_crc16_ccitt                      -      20
+>  +20
+>                  hash_init_crc32                              -      20
+>  +20
+>                  hash_init_crc16_ccitt                        -      20
+>  +20
+>                  hash_update_sha256                           -      16
+>  +16
+>                  hash_update_sha1                             -      16
+>  +16
+>                  sha1_update                                  -       8
+>   +8
 >
-> The current code leave mbedTLS hashing algorithms as a choice, but set
-> the existing hashing algos as the default, since they are smaller and
-> work with offloading. Since using new algorithms from mbedTLS might
-> have valid use cases, I suggest we pull this and clean up the hash
-> subsystem, to include all 4 options
-> - mbedTLS in sw
-> - U-Boot hashes in sw
-> - Mix of mbedTLS & hardware offloading
-> - Mix of U-Boot hashing & hardware offloading (already works)
+> This is because:
+> > diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
+> > index 982e84dc3bc..5d7fd904950 100644
+> > --- a/drivers/mmc/Kconfig
+> > +++ b/drivers/mmc/Kconfig
+> > @@ -119,6 +119,7 @@ config MMC_HW_PARTITIONING
+> >  config SUPPORT_EMMC_RPMB
+> >       bool "Support eMMC replay protected memory block (RPMB)"
+> >       imply CMD_MMC_RPMB
+> > +     select SHA256
+> >       help
+> >         Enable support for reading, writing and programming the
+> >         key for the Replay Protection Memory Block partition in eMMC.
 >
+> Wasn't true / required before now, no hashing algorithms were enabled.
+> This was fine because:
+> [snip]
+> > diff --git a/lib/Makefile b/lib/Makefile
+> > index c4950b78a29..33755778283 100644
+> > --- a/lib/Makefile
+> > +++ b/lib/Makefile
+> > @@ -50,7 +50,6 @@ obj-$(CONFIG_XXHASH) += xxhash.o
+> >  obj-y += net_utils.o
+> >  obj-$(CONFIG_PHYSMEM) += physmem.o
+> >  obj-y += rc4.o
+> > -obj-$(CONFIG_SUPPORT_EMMC_RPMB) += sha256.o
+> >  obj-$(CONFIG_RBTREE) += rbtree.o
+> >  obj-$(CONFIG_BITREVERSE) += bitrev.o
+> >  obj-y += list_sort.o
 >
-The patch set has these already with combinations of kconfigs:
-- mbedTLS in sw (set CONFIG_MBEDTLS_LIB=y && MBEDTLS_LIB_CRYPTO=y,
-  tested via github CI)
-- U-Boot hashes in sw (default when setting CONFIG_MBEDTLS_LIB=y only,
-  tested via github CI)
-- Mix of mbedTLS & hardware offloading (I didn't test this but it should
-work as
-  it was when SHA_HW_ACCEL=y)
+> Got us the library access without bringing in everything else. And since
+> two of the platforms that are hitting this now are "nano" this is an
+> important thing to figure out how to continue to support. If there's
+> just no way around it, we can likely live with the size increase, but
+> I'd like to see this looked in to specifically first, thanks!
+>
+> To address this, I think there are two options.
+1. Introduce SUPPORT_EMMC_RPMB into the MbedTLS sub makefile.
+2. Make MBEDTLS_LIB_CRYPTO depends on !SUPPORT_EMMC_RPMB.
+1) looks to be ugly, I prefer 2) if you agree.
 
 Regards,
 Raymond
