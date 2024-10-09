@@ -4,69 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A46A7CF042D
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 01:53:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 599DBCF042D
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 01:53:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C5118903C;
-	Wed,  9 Oct 2024 03:51:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D69DB8906A;
+	Wed,  9 Oct 2024 03:51:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y5nXyvZo";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HEf1jdD+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0391189063; Wed,  9 Oct 2024 03:51:39 +0200 (CEST)
-Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
- [IPv6:2607:f8b0:4864:20::533])
+ id 261E989038; Wed,  9 Oct 2024 03:51:42 +0200 (CEST)
+Received: from mail-pg1-x52a.google.com (mail-pg1-x52a.google.com
+ [IPv6:2607:f8b0:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D2ABA8903B
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 03:51:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B9C778903B
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 03:51:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x533.google.com with SMTP id
- 41be03b00d2f7-7e9ad969a4fso3942265a12.3
- for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 18:51:36 -0700 (PDT)
+Received: by mail-pg1-x52a.google.com with SMTP id
+ 41be03b00d2f7-7ae3d7222d4so5297702a12.3
+ for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 18:51:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728438695; x=1729043495; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1728438698; x=1729043498; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bqLBCifbMznPq1/MScGG98NOlqP3ZVMj00IY9NauynY=;
- b=Y5nXyvZo4WTHK53bxk7SXaoLC74I9MXWYD6k9Zy2jccZy04yKlGbrOyLzkcL3oxRvw
- VgGdt2BYAPUTK0vbNfEqOBYGyju6j7tM64SfCkSITeyIDpWbK7aRLo2s7KgofcdXoKyL
- 1yit1xuF1XIKXf4QTj/9fMPFUjbR1J+UvbQVo=
+ bh=ZzUgwlLY6P7dAegTe0qQFbSVBjaboKfyf050HWroIAE=;
+ b=HEf1jdD+FMSJRAu/BzwWAaFE+qkZbRB690ix7FqY965lc/zMQY+QLIYYA9sM8WAYyC
+ P4yO82HcLMkPWfbWuKn/k19zuMU+6GuBI4bU+E9GCCledkI86SfsT1npUTemZr8gbPt+
+ autZ6+PxKkyia/Q+VJr+EmI46QTFLaTq2Tyws=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728438695; x=1729043495;
+ d=1e100.net; s=20230601; t=1728438698; x=1729043498;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=bqLBCifbMznPq1/MScGG98NOlqP3ZVMj00IY9NauynY=;
- b=pUnMvr1vRRQLtHGQZmec+cfiYl62GwoG/2FeUt8umLlFx8C+nJzdMq2J9w0E9N68p8
- hsXSzhf8uRq2LETSUyPdtLUI26LBPA5tUFfyUgGezHSZHiIivgfrhZi0uFnkJIQZ36GR
- 6g2WDqNwjEeDwVvDiBV9Td95n8WJ00B+fPSpirRRB/x+7Uvg9IXbkw/zP+XRY7yqUgSB
- wY9Wd44h+C2Ei2dAt+TFC01UN8AzM12PP9Q/VuokMTjVpQkcMsXZb80a5Kq4YNn14jHa
- xNf7tqL/mo0WtKA6l68NhIzjFrbBAUt0t4yvrNVUdDIEBD3cLVicQ4Uw2R83hfOlir5h
- +mMA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWCmX770dd6lQYW0uqAkk7SNqWjIc4u9wCmGx2YyxuT6Gb9eZ4lDeWcL8evTk7peYpjUcoqx5E=@lists.denx.de
-X-Gm-Message-State: AOJu0YzvjqHhCDc3kfdAHbUCQWHr8qtY6z7Sod+MQZWs/72dEhEihJQ/
- O34xECshkZq/HHPCbH3N3nliuQ9ZIOTLlhHsOKQoROvFpCadt6S+4Qll2phmM8VBYjbhddv1Yy3
- Y3ycECGXlOFMjqIrGX+21TvPHbXZ7ecqYNt3/8r0GQYIBGlcGwg==
-X-Google-Smtp-Source: AGHT+IHAyicvgni9pUgmFWj0CF66LD6KWb/LXsupeQnNMOIHd1NgHg91KeCJtJpk4/Nye5YMPpxvXkhXT782vmgwLjI=
-X-Received: by 2002:a05:6a21:2fc7:b0:1d7:c3e2:4e1f with SMTP id
- adf61e73a8af0-1d8a3c2f0acmr1308648637.25.1728438695386; Tue, 08 Oct 2024
- 18:51:35 -0700 (PDT)
+ bh=ZzUgwlLY6P7dAegTe0qQFbSVBjaboKfyf050HWroIAE=;
+ b=b+BN2RSynQuB2nRQa15OwVUuWOsTTywbKSuXbSne53rVQD+Z4jc5YzcOAmur/9nrIQ
+ bdCvUeEyU2SKzITdbL81hDNCix47HMymVpqVHhi9DiE7tUtB0t2w1UhtNAlLXJnbx0ML
+ ipxIiNvzJ6B0ySZyDVbVpjqYIhYbPAngzBtmLZb5JCPe2ovSj269fSvjcdc31bdXErMD
+ wy2ILu8KRNgcQdBCWpWLln8iCS2ufZgT4zNm/mGX8vWCuj645YDy6VmBfVzwg6N/8q6q
+ IrFnfR3nDqmLV2IJ9MnFMxeJxjxs0p8XX5CJiKsb3UpzuDJSFf/QprmEM8VRya5anhiM
+ Nkig==
+X-Gm-Message-State: AOJu0YwTfnQa+27SU14Zq+RGVwEpsAy6j18M7ti6u3rWraZPJYxFGkZn
+ Y+H+0N90OUF3TPpGwi+qQL7Cfy9Yu2+wcLIaiVEfcuyZ3wjrVsfhNoNKmmQ8k9iCsWVQ4O02EVm
+ H61F6zm+IKxVTVdaiAGiwFlhPDQzGcHVts1i0BFJPW2zPVF23eg==
+X-Google-Smtp-Source: AGHT+IGGFcXrCWzhvCT3cwZA9m9y+0WW63e/xje5Xxfniz/iqfM9dS3a1I97fGzsp4UrFa++JqixFe2svlddgebtPx0=
+X-Received: by 2002:a05:6a21:2d89:b0:1d2:e92f:2f48 with SMTP id
+ adf61e73a8af0-1d8a3c4991amr1568187637.40.1728438698330; Tue, 08 Oct 2024
+ 18:51:38 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241002132633.246942-1-martyn.welch@collabora.com>
- <20241002132633.246942-2-martyn.welch@collabora.com>
-In-Reply-To: <20241002132633.246942-2-martyn.welch@collabora.com>
+References: <20240916082446.32082-1-al.kochet@gmail.com>
+ <20240916082446.32082-3-al.kochet@gmail.com>
+In-Reply-To: <20240916082446.32082-3-al.kochet@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 8 Oct 2024 19:51:02 -0600
-Message-ID: <CAFLszTjjQHJEtxgkJp9qBApB=H8QDf4Cr3D_rSsVh_e-NhDc+Q@mail.gmail.com>
-Subject: Re: [PATCH 2/4] boot: Add logic to enable booting from fallback option
-To: Martyn Welch <martyn.welch@collabora.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Date: Tue, 8 Oct 2024 19:50:56 -0600
+Message-ID: <CAFLszTjxq7MfUKjW4VETkt-SpZs+seK8F71EwG5hfOe9DsUKWg@mail.gmail.com>
+Subject: Re: [PATCH 2/3] image-host: fix 'unknown error' error message
+To: al.kochet@gmail.com
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,21 +82,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 2 Oct 2024 at 07:26, Martyn Welch <martyn.welch@collabora.com> wrote:
+On Mon, 16 Sept 2024 at 02:25, <al.kochet@gmail.com> wrote:
 >
-> The "fallback" extlinux config option allows us to set an alternative
-> default boot option for when it has been detected that the default is
-> failing. Implement the logic required to boot from this option when
-> desired.
+> From: Alexander Kochetkov <al.kochet@gmail.com>
 >
-> Signed-off-by: Martyn Welch <martyn.welch@collabora.com>
+> Fix error message like this:
+> Can't add verification data for node 'fdt-1' (<unknown error>)
+>
+> We get unknown error because we decode error as fdt error
+> but actually it is system error.
+>
+> Signed-off-by: Alexander Kochetkov <al.kochet@gmail.com>
 > ---
->  boot/bootmeth_extlinux.c |  2 +-
->  boot/bootmeth_pxe.c      |  2 +-
->  boot/pxe_utils.c         | 14 +++++++++++++-
->  cmd/pxe.c                |  4 ++--
->  cmd/sysboot.c            |  2 +-
->  include/pxe_utils.h      | 10 +++++++++-
->  6 files changed, 27 insertions(+), 7 deletions(-)
+>  tools/image-host.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+
+>
+> diff --git a/tools/image-host.c b/tools/image-host.c
+> index 7bfc0cb6b1..ac14d9aa86 100644
+> --- a/tools/image-host.c
+> +++ b/tools/image-host.c
+> @@ -1333,7 +1333,7 @@ int fit_add_verification_data(const char *keydir, const char *keyfile,
+>                 if (ret) {
+>                         fprintf(stderr, "Can't add verification data for node '%s' (%s)\n",
+>                                 fdt_get_name(fit, noffset, NULL),
+> -                               fdt_strerror(ret));
+> +                               strerror(-ret));
+>                         return ret;
+>                 }
+>         }
+> --
+> 2.17.1
+>
