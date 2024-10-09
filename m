@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34888CEDD90
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 13:14:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA2B1CEDD90
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 13:14:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 075BB89201;
+	by phobos.denx.de (Postfix) with ESMTP id 709DE89208;
 	Wed,  9 Oct 2024 15:13:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XF6qIyIw";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CWU88qqn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9919B88FAF; Wed,  9 Oct 2024 11:19:11 +0200 (CEST)
-Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
- [IPv6:2607:f8b0:4864:20::52e])
+ id 7D94488FAF; Wed,  9 Oct 2024 11:19:55 +0200 (CEST)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5017689184
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 11:19:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E232789184
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 11:19:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x52e.google.com with SMTP id
- 41be03b00d2f7-7e9ff6fb4c6so5185350a12.3
- for <u-boot@lists.denx.de>; Wed, 09 Oct 2024 02:19:07 -0700 (PDT)
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-20b7259be6fso73043905ad.0
+ for <u-boot@lists.denx.de>; Wed, 09 Oct 2024 02:19:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728465546; x=1729070346; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1728465590; x=1729070390; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=SxRgrLAHeDP0frVbhkv1BQJdoCo4kxpENkGJqBsdP/0=;
- b=XF6qIyIwmeIVxuIXwy7qSJjFCEAxuXYwsahaeo+CEln7109cXb39PDnbcG2JuIdGBJ
- 2bKEKGafXDIqKfUPIVvTcA1an1i6jYL9LBeFI6f5FqDmaARk1gl/mHZuwx6SeRpvRJoE
- zQn8D2SQY5omPd9Er3SMmz8d9f6TUyYaZYuBdwJcw0LqwHgTqMQkziKzTPUgFMhb2ZiL
- wbUSwbLkDx5egWHE0LspUvbdOCvSbfAiQIUN36yj7PNLbn8Tah1iymi/zZ9+7RFhufol
- KWQMLkqRLqG+x8rnlgokjO+bcM8kkouKJSUvI/bwAJabJ5sdD7IVHMuH1hUqe87xfW+C
- HCKA==
+ bh=A3l2fCGqfxiPd4jMbPenhN4M3S/ot+HcA6XUmwmz4PU=;
+ b=CWU88qqneGTDpnjgscCsi7mjCnfsBvdflUz6SI8N7rDxf0dXQPYbOxrePI0xcGjB5z
+ tFU4e5dKlwdKbETewbWIVast2nPgayE69vKhPx80oYVZJ9hktpUM6+4Q3h4mnSRXiPAO
+ a4JsFXMx9KdxQ1uPCjmxRVXO0HEFLMNjZ6nSTJUkpUdaOb/tO+qZ6Ab6N4tuyJCssjJE
+ CLlmMwOiKkATX12ZTC+ZfJILi/Rr7P7XcwuOaV6V/IG37qwTV7QZhYvdjJfOEYKTWo32
+ GctlPQhR9B1iE6RyucIBSpR9g66xbWYtUkO6jEZZK3e3rQDcIAjP0Cy450fVAq95U20N
+ oXrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728465546; x=1729070346;
+ d=1e100.net; s=20230601; t=1728465590; x=1729070390;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=SxRgrLAHeDP0frVbhkv1BQJdoCo4kxpENkGJqBsdP/0=;
- b=LDizud99y1aggtn1LsS0qHOfnCuCLVM2CPXaZxqfMAOa5CWr9eIXoVA4c0SOZdqw48
- bhPyGPxd++boW9mBhu+bsixVaLh2cZg7YAWxj+Wa6g1kvT7C6USzxN6n4sn9f02Gkh6+
- 9RRO9IIYR0QQqA/rWhEBNne6uXyHbN1tUqP0c0W5MJS0vHKcwrbMDeog1qkfz7wM/MtX
- DgG7r1ZLboHpzKtV0P+ITebu++BuA3OFRvJnNzqOW+PECZgVj+fsDtE6KK959k88sQFk
- PEKFkOWsxsTaHlkwK38xwlpQUG10IgIFsTEy0qjKX/n3VBQgsxZdYDadWqDZ1AhzJ6N2
- ZmEA==
-X-Gm-Message-State: AOJu0Yxzgb44aGtNes7YSc52b/f7qZjqvbah025Y/xBiRveUXJDMPLo7
- Jwd11nJBcuwsbkrY3ATWOWRyOPW1NMbK8AYWq2p7GqKTtG7vknMPutczFSyi4HRiFD+WU7zCdL1
- ejMf1sHKWgCjxhEPlcaCll2LMFibd5raeaCvZBQ==
-X-Google-Smtp-Source: AGHT+IHTmRnhXnMpoBXGJgsfTZxrrAWvVoeF8ZB9Aq/EpUPlOId01lojzN+YHnNUWYVIjzKucOx3CKRjWXgfB+SVLuk=
-X-Received: by 2002:a17:902:f60d:b0:20b:ad74:c84f with SMTP id
- d9443c01a7336-20c6377bdc1mr34779405ad.26.1728465545818; Wed, 09 Oct 2024
- 02:19:05 -0700 (PDT)
+ bh=A3l2fCGqfxiPd4jMbPenhN4M3S/ot+HcA6XUmwmz4PU=;
+ b=uH2lXLy7ut9i//DF5NfycIDh+itPk+At8dPMJzfmx9gv/bMJnAPNIEuQWwQwlW07zA
+ NhKdC1q9pRfN1Zj0bCE7tsUjYTllRIOQ8BRx1dLtFW8u4BOXeXPnuVJbEPyw7zQIXk8W
+ WnJRiUn2DBZUM0+S4KRYSzJAqX1RK/no9K3uHgNT4kSmSqk0JBTgf4bc0e4BwF8yMrHj
+ yHlrAFGud9XIy3Le7wyYSGOZzRzw1F2jrj+9QJmt42DTiqeh3L14eACuCL0jFw2TdOnX
+ KqmgaEeYO419uANvq3BzMDiAO2rbzk7vH+7JpYJrKVo1d4BzWA2BVeAhEBYd8fNQASX+
+ /cFw==
+X-Gm-Message-State: AOJu0YyQGSl5lBLsRRjOgZjOJiceAeLA9nnUgDLr0mLHf7IUPjNf7r2Q
+ DNqD6xMOWi+1NpGzZkTLtgwcxcW7rodKhyhk3ABfKQAQQuv2p+Rtj+hKdBb/RF2capjPgjCeyto
+ GBvSWlDq48yNFJZXjvY5ngimxb+xtHeCJd0DbdA==
+X-Google-Smtp-Source: AGHT+IF/dTlJBm2+8S8t/wulrcsxjwdvuBVNxYQaerlDsajpl6Gpxtwt2ASBb3eHbo5Yu9xiYPjcOXBRdt9shwJ2n1g=
+X-Received: by 2002:a17:902:fc44:b0:205:68a4:b2d8 with SMTP id
+ d9443c01a7336-20c636d7991mr27545745ad.11.1728465590418; Wed, 09 Oct 2024
+ 02:19:50 -0700 (PDT)
 MIME-Version: 1.0
 References: <20241003215112.3103601-1-raymond.mao@linaro.org>
- <20241003215112.3103601-23-raymond.mao@linaro.org>
-In-Reply-To: <20241003215112.3103601-23-raymond.mao@linaro.org>
+ <20241003215112.3103601-17-raymond.mao@linaro.org>
+In-Reply-To: <20241003215112.3103601-17-raymond.mao@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 9 Oct 2024 12:18:29 +0300
-Message-ID: <CAC_iWjLMStirH10UnL1cLtTtshA4rdbrGwaobVZZrtVk2F_0Bw@mail.gmail.com>
-Subject: Re: [PATCH v8 22/27] lib/crypto: Adapt mscode_parser to MbedTLS
+Date: Wed, 9 Oct 2024 12:19:14 +0300
+Message-ID: <CAC_iWj+vGgqQUStEScuXp4Fs1pqGtHjkYXC49h9wK4aRKfxjng@mail.gmail.com>
+Subject: Re: [PATCH v8 16/27] lib/crypto: Adapt public_key header with MbedTLS
 To: Raymond Mao <raymond.mao@linaro.org>
 Cc: u-boot@lists.denx.de, manish.pandey2@arm.com, 
  Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
@@ -76,19 +76,21 @@ Cc: u-boot@lists.denx.de, manish.pandey2@arm.com,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
  Peng Fan <peng.fan@nxp.com>, 
  Jaehoon Chung <jh80.chung@samsung.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Sean Anderson <seanga2@gmail.com>,
- Andrew Davis <afd@ti.com>, Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Sumit Garg <sumit.garg@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Sumit Garg <sumit.garg@linaro.org>, Sean Anderson <seanga2@gmail.com>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Andrew Davis <afd@ti.com>,
  Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>, 
  Alexander Gendin <agendin@matrox.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Jonathan Humphreys <j-humphreys@ti.com>, Marek Vasut <marex@denx.de>, 
+ Jonathan Humphreys <j-humphreys@ti.com>,
  Paul Barker <paul.barker.ct@bp.renesas.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Marek Vasut <marex@denx.de>, Jonas Karlman <jonas@kwiboo.se>, 
+ Kongyang Liu <seashell11234455@gmail.com>,
  Greg Malysa <greg.malysa@timesys.com>, 
- Kongyang Liu <seashell11234455@gmail.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Eddie James <eajames@linux.ibm.com>
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Wed, 09 Oct 2024 15:13:35 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -107,13 +109,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 4 Oct 2024 at 01:03, Raymond Mao <raymond.mao@linaro.org> wrote:
+On Fri, 4 Oct 2024 at 00:59, Raymond Mao <raymond.mao@linaro.org> wrote:
 >
-> Previous patch has introduced MbedTLS porting layer for mscode parser,
+> Previous patch has introduced MbedTLS porting layer for public key,
 > here to adjust the header and makefiles accordingly.
-> Adding _LEGACY Kconfig for legacy mscode implementation.
 >
 > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 > ---
 > Changes in v2
 > - Move the porting layer to MbedTLS dir.
@@ -122,8 +124,8 @@ On Fri, 4 Oct 2024 at 01:03, Raymond Mao <raymond.mao@linaro.org> wrote:
 > Changes in v4
 > - Control building legacy library via '_LEGACY' Kconfig.
 > Changes in v5
-> - Add kconfig for legacy mscode parser.
 > - Correct header file include directories.
+> - Kconfig rename.
 > Changes in v6
 > - None.
 > Changes in v7
@@ -131,66 +133,64 @@ On Fri, 4 Oct 2024 at 01:03, Raymond Mao <raymond.mao@linaro.org> wrote:
 > Changes in v8
 > - None
 >
->  include/crypto/mscode.h | 4 ++++
->  lib/crypto/Makefile     | 2 +-
->  lib/mbedtls/Kconfig     | 9 +++++++++
->  3 files changed, 14 insertions(+), 1 deletion(-)
+>  include/crypto/public_key.h  | 6 ++++++
+>  lib/crypto/Makefile          | 5 ++---
+>  lib/crypto/asymmetric_type.c | 2 +-
+>  3 files changed, 9 insertions(+), 4 deletions(-)
 >
-> diff --git a/include/crypto/mscode.h b/include/crypto/mscode.h
-> index 551058b96e6..678e69001b9 100644
-> --- a/include/crypto/mscode.h
-> +++ b/include/crypto/mscode.h
-> @@ -9,6 +9,10 @@
->  #ifndef __UBOOT__
->  #include <crypto/hash_info.h>
->  #endif
+> diff --git a/include/crypto/public_key.h b/include/crypto/public_key.h
+> index 3ba90fcc348..25cfb68adce 100644
+> --- a/include/crypto/public_key.h
+> +++ b/include/crypto/public_key.h
+> @@ -12,6 +12,12 @@
+>
+>  #ifdef __UBOOT__
+>  #include <linux/types.h>
 > +#if CONFIG_IS_ENABLED(MBEDTLS_LIB_X509)
-> +#include <mbedtls/asn1.h>
-> +#include <mbedtls/oid.h>
+> +#include <library/common.h>
+> +#include <mbedtls/pk.h>
+> +#include <mbedtls/x509_crt.h>
+> +#include <mbedtls/md.h>
 > +#endif
->
->  struct pefile_context {
->  #ifndef __UBOOT__
+>  #else
+>  #include <linux/keyctl.h>
+>  #endif
 > diff --git a/lib/crypto/Makefile b/lib/crypto/Makefile
-> index 7129315393f..3caa45dc2a8 100644
+> index 16059088f26..7e877214aa8 100644
 > --- a/lib/crypto/Makefile
 > +++ b/lib/crypto/Makefile
-> @@ -63,7 +63,7 @@ obj-$(CONFIG_$(SPL_)PKCS7_VERIFY) += pkcs7_verify.o
+> @@ -7,9 +7,8 @@ obj-$(CONFIG_$(SPL_)ASYMMETRIC_KEY_TYPE) += asymmetric_keys.o
+>
+>  asymmetric_keys-y := asymmetric_type.o
+>
+> -obj-$(CONFIG_$(SPL_)ASYMMETRIC_PUBLIC_KEY_SUBTYPE) += \
+> -       public_key_helper.o \
+> -       public_key.o
+> +obj-$(CONFIG_$(SPL_)ASYMMETRIC_PUBLIC_KEY_SUBTYPE) += public_key_helper.o
+> +obj-$(CONFIG_$(SPL_)ASYMMETRIC_PUBLIC_KEY_LEGACY) += public_key.o
+>
 >  #
->  # Signed PE binary-wrapped key handling
->  #
-> -obj-$(CONFIG_$(SPL_)MSCODE_PARSER) += mscode.o
-> +obj-$(CONFIG_$(SPL_)MSCODE_PARSER_LEGACY) += mscode.o
->
->  mscode-y := \
->         mscode_parser.o \
-> diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
-> index fd7263f9616..efeaed50385 100644
-> --- a/lib/mbedtls/Kconfig
-> +++ b/lib/mbedtls/Kconfig
-> @@ -120,6 +120,7 @@ config LEGACY_CRYPTO_CERT
->                 ASYMMETRIC_PUBLIC_KEY_SUBTYPE
->         select X509_CERTIFICATE_PARSER_LEGACY if X509_CERTIFICATE_PARSER
->         select PKCS7_MESSAGE_PARSER_LEGACY if PKCS7_MESSAGE_PARSER
-> +       select MSCODE_PARSER_LEGACY if MSCODE_PARSER
->         select SPL_ASYMMETRIC_PUBLIC_KEY_LEGACY if \
->                 SPL_ASYMMETRIC_PUBLIC_KEY_SUBTYPE
->         help
-> @@ -150,6 +151,14 @@ config PKCS7_MESSAGE_PARSER_LEGACY
->           This option chooses legacy certificate library for PKCS7 message
->           parser.
->
-> +config MSCODE_PARSER_LEGACY
-> +       bool "MS authenticode parser with legacy certificate library"
-> +       depends on LEGACY_CRYPTO_CERT && MSCODE_PARSER
-> +       select ASN1_DECODER_LEGACY
-> +       help
-> +         This option chooses legacy certificate library for MS authenticode
-> +         parser.
-> +
->  if SPL
->
->  config SPL_ASYMMETRIC_PUBLIC_KEY_LEGACY
+>  # RSA public key parser
+> diff --git a/lib/crypto/asymmetric_type.c b/lib/crypto/asymmetric_type.c
+> index 24c2d15ef97..95b82cd8e84 100644
+> --- a/lib/crypto/asymmetric_type.c
+> +++ b/lib/crypto/asymmetric_type.c
+> @@ -12,7 +12,6 @@
+>  #include <keys/asymmetric-subtype.h>
+>  #include <keys/asymmetric-parser.h>
+>  #endif
+> -#include <crypto/public_key.h>
+>  #ifdef __UBOOT__
+>  #include <linux/bug.h>
+>  #include <linux/compat.h>
+> @@ -26,6 +25,7 @@
+>  #include <linux/slab.h>
+>  #include <linux/ctype.h>
+>  #endif
+> +#include <crypto/public_key.h>
+>  #ifdef __UBOOT__
+>  #include <keys/asymmetric-type.h>
+>  #else
 > --
 > 2.25.1
 >
