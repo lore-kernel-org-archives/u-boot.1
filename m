@@ -4,74 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BED31CF042D
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 01:50:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1587CF042B
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 01:50:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B48288FDC;
-	Wed,  9 Oct 2024 03:50:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 95B8488FFC;
+	Wed,  9 Oct 2024 03:50:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aNgPhOR6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="J6qbY8de";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD74D88FD1; Wed,  9 Oct 2024 03:50:32 +0200 (CEST)
-Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
- [IPv6:2607:f8b0:4864:20::12f])
+ id 70E0288FED; Wed,  9 Oct 2024 03:50:34 +0200 (CEST)
+Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
+ [IPv6:2607:f8b0:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9493288FDA
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 03:50:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3ABD388FE8
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 03:50:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12f.google.com with SMTP id
- e9e14a558f8ab-3a34802247eso35608025ab.0
- for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 18:50:30 -0700 (PDT)
+Received: by mail-il1-x136.google.com with SMTP id
+ e9e14a558f8ab-3a0be4d803eso18338545ab.0
+ for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 18:50:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728438629; x=1729043429; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1728438631; x=1729043431; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ozWclEMjbjwC5DUkOadZ9YV74jfOgwNTVjadGrUpDaU=;
- b=aNgPhOR69LSje0iftpUHcwmoy9tgDeZUH7Z6TSdAUqMj+bgZP+z36sXQTTBU53dYG0
- zvk9NlBlp5u2LFHmXFh7U0Zdj8FerwYWXDCV93Q82rCKDdv3tgkO91mXGzGdjGSeL8Xr
- ZP0AEkPflx2+5JuaDhXwk8RYx96j4Yt1XrFx0=
+ bh=4KTSVBtL/3dolKT8qng2VPYKUHr0yGyrmDrTfIYe4H8=;
+ b=J6qbY8deKWT5chjSh9V4Rn0mPOxeDvJwyTOPPKDIILVuzHVm2IRJ3CAaBn+mH+VfcQ
+ oBjm+6arHRc2bdaIgGjeh+4p/ypNpLe21h9Y4JltfjldF9n3P6OcE96qAhKALT45GAmW
+ c3UnuBm5afN9m62Ch3JeToLBUKdIa3Rr5o2IY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728438629; x=1729043429;
+ d=1e100.net; s=20230601; t=1728438631; x=1729043431;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ozWclEMjbjwC5DUkOadZ9YV74jfOgwNTVjadGrUpDaU=;
- b=bmlU/EW/H/t3n093DqLPlVYkuYc2yg6bOpSZVdxW5IZIFuukjyIxA3mo8n6LnhPzSp
- PDTS6SEIPy5lmQBtJRaFz5OxLatBWp5SuoVPRV1+WZI/21eGRfC3a5pc4E4pETkUEKDc
- P2IlP3yPDqvHRzymjHBhmhUhqVgilH6T5/DMK3afAiYc0TRL3zKaJp4RUWcdhu54PuI7
- 0HgTE+Fjv6L6AXATqEoDvyMMQaPpeWM/FlGlylj5bRBrwCO6Z0WWXAZmvd+ybQzpa7r1
- uPSsqsZzF2BVL6iwIQAizZhta9nJN/Cb5DaGZl81X2S9OCaraP7DtyUqdT9dPk+Z1hSN
- Vl0w==
-X-Gm-Message-State: AOJu0YzUoTSrLm6VsdWBnntbBJdImF9fZGdlf15VPoRJdEGvJgGke1xm
- oQgrhcTgbY6Ro/upZXoqZljsMFGEkQrHZHkNNFjgGAOuI/3+Eydzr5OxKFCS3W2xY63pgYqBdsF
- OLw==
-X-Google-Smtp-Source: AGHT+IEWMlqcS7ybBDkWzxYg1wPkbsG4M7BwdIT07He2y94OOnsuR/hV+X4hMCFHcT4Q2vNEGAT+ZQ==
-X-Received: by 2002:a05:6e02:178d:b0:3a3:9337:4ce2 with SMTP id
- e9e14a558f8ab-3a397cda124mr7447155ab.2.1728438629199; 
- Tue, 08 Oct 2024 18:50:29 -0700 (PDT)
+ bh=4KTSVBtL/3dolKT8qng2VPYKUHr0yGyrmDrTfIYe4H8=;
+ b=JCaQ2mzG83CNpD7DQZHivUjRz3sY6cxnUCUoysxilAe/uBQJAkX+owl225QWF+BRpS
+ gJ/C7UKWGAFMYWbl6BTSN0pBQ64LZ05KR6I817XXppEVZF2kZ6wcNeNd6Quv15/xpN5f
+ FuuA7Ufhw2f8EycEz2AXEXkmhtnbk3uOXAgoU+yhHwNSbF0q45OagbuaGBbYdqfdLxbH
+ LstWH4B40iYowKIgy/5SYkt93D7s3yo+FT4Tioem0hbDnhSNXD+A+2ECkr2zLNEHCUiw
+ 5yDYVAzUot+YlH+/to0bCWg4PZ7kj5eirNc3Jlz+p2J5gDhaD5L6djy1BHcbzpfmk8hS
+ H9AQ==
+X-Gm-Message-State: AOJu0Yyt1S5b/Kqxx+2+F/b5kIkVvQz+iYvmFp5ZZYSb85mEEtaMvZAx
+ Na4sCrEpJ1G54opQxsL+y1uVkrFBK66NcXKfjKowlXTVewX8MPt8TK98RtHQxx/9R9A6EmZ1gja
+ qfQ==
+X-Google-Smtp-Source: AGHT+IGlVgTnNpMnlRIrTEos6zSxejhmlOCx4yYPA0dFQyRp6YuhGioJDpjYUTrDX2AE1Gj1E0KApw==
+X-Received: by 2002:a05:6e02:1d98:b0:3a2:6cd7:3250 with SMTP id
+ e9e14a558f8ab-3a397cecd9fmr7306875ab.10.1728438630756; 
+ Tue, 08 Oct 2024 18:50:30 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3a37a868967sm20677585ab.67.2024.10.08.18.50.28
+ e9e14a558f8ab-3a37a868967sm20677585ab.67.2024.10.08.18.50.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Oct 2024 18:50:28 -0700 (PDT)
+ Tue, 08 Oct 2024 18:50:30 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Devarsh Thakkar <devarsht@ti.com>, Jonas Karlman <jonas@kwiboo.se>,
- Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>,
- This contributor prefers not to receive mails <noreply@example.com>
-Subject: [PATCH 1/6] common: Fix up malloc() comment in reserve_noncached()
-Date: Tue,  8 Oct 2024 19:50:13 -0600
-Message-ID: <20241009015020.25817-2-sjg@chromium.org>
+ Artur Rojek <artur@conclusive.pl>, Devarsh Thakkar <devarsht@ti.com>,
+ Eugene Uriev <eugeneuriev@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Richard Weinberger <richard@nod.at>, Sean Anderson <seanga2@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: [PATCH 2/6] common: Tidy up how malloc() is inited
+Date: Tue,  8 Oct 2024 19:50:14 -0600
+Message-ID: <20241009015020.25817-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241009015020.25817-1-sjg@chromium.org>
 References: <20241009015020.25817-1-sjg@chromium.org>
@@ -93,31 +97,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The function name has changed, so update it.
+The call to malloc() is a bit strange. The naming of the arguments
+suggests that an address is passed, but in fact it is a pointer, at
+least in the board_init_r() function and SPL equivalent.
+
+Update it to work as described. Add a function comment as well.
+
+Note that this does adjustment does not extend into the malloc()
+implementation itself, apart from changing mem_malloc_init(), since
+there are lots of casts and pointers and integers are used
+interchangeably.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- common/board_f.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ common/board_r.c  | 3 +--
+ common/dlmalloc.c | 8 +++++---
+ common/spl/spl.c  | 4 +---
+ include/malloc.h  | 8 ++++++++
+ 4 files changed, 15 insertions(+), 8 deletions(-)
 
-diff --git a/common/board_f.c b/common/board_f.c
-index 154675d0e40..2e04a47b546 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -501,9 +501,9 @@ static unsigned long reserve_stack_aligned(size_t size)
- static int reserve_noncached(void)
+diff --git a/common/board_r.c b/common/board_r.c
+index 4faaa202421..fbb10fea494 100644
+--- a/common/board_r.c
++++ b/common/board_r.c
+@@ -203,8 +203,7 @@ static int initr_malloc(void)
+ 	 */
+ 	start = gd->relocaddr - TOTAL_MALLOC_LEN;
+ 	gd_set_malloc_start(start);
+-	mem_malloc_init((ulong)map_sysmem(start, TOTAL_MALLOC_LEN),
+-			TOTAL_MALLOC_LEN);
++	mem_malloc_init(start, TOTAL_MALLOC_LEN);
+ 	return 0;
+ }
+ 
+diff --git a/common/dlmalloc.c b/common/dlmalloc.c
+index 1ac7ce3f43c..cc4d3a0a028 100644
+--- a/common/dlmalloc.c
++++ b/common/dlmalloc.c
+@@ -16,6 +16,8 @@
+ #include <asm/global_data.h>
+ 
+ #include <malloc.h>
++#include <mapmem.h>
++#include <string.h>
+ #include <asm/io.h>
+ #include <valgrind/memcheck.h>
+ 
+@@ -598,9 +600,9 @@ void *sbrk(ptrdiff_t increment)
+ 
+ void mem_malloc_init(ulong start, ulong size)
  {
- 	/*
--	 * The value of gd->start_addr_sp must match the value of malloc_start
--	 * calculated in board_r.c:initr_malloc(), which is passed to
--	 * dlmalloc.c:mem_malloc_init() and then used by
-+	 * The value of gd->start_addr_sp must match the value of
-+	 * mem_malloc_start calculated in board_r.c:initr_malloc(), which is
-+	 * passed to dlmalloc.c:mem_malloc_init() and then used by
- 	 * cache.c:noncached_init()
- 	 *
- 	 * These calculations must match the code in cache.c:noncached_init()
+-	mem_malloc_start = start;
+-	mem_malloc_end = start + size;
+-	mem_malloc_brk = start;
++	mem_malloc_start = (ulong)map_sysmem(start, size);
++	mem_malloc_end = mem_malloc_start + size;
++	mem_malloc_brk = mem_malloc_start;
+ 
+ #ifdef CONFIG_SYS_MALLOC_DEFAULT_TO_INIT
+ 	malloc_init();
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index c13b2b8f714..fc8b38862e8 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -679,9 +679,7 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+ 	spl_set_bd();
+ 
+ 	if (IS_ENABLED(CONFIG_SPL_SYS_MALLOC)) {
+-		mem_malloc_init((ulong)map_sysmem(SPL_SYS_MALLOC_START,
+-						  SPL_SYS_MALLOC_SIZE),
+-				SPL_SYS_MALLOC_SIZE);
++		mem_malloc_init(SPL_SYS_MALLOC_START, SPL_SYS_MALLOC_SIZE);
+ 		gd->flags |= GD_FLG_FULL_MALLOC_INIT;
+ 	}
+ 	if (!(gd->flags & GD_FLG_SPL_INIT)) {
+diff --git a/include/malloc.h b/include/malloc.h
+index 07d3e90a855..9e0be482416 100644
+--- a/include/malloc.h
++++ b/include/malloc.h
+@@ -981,6 +981,14 @@ extern ulong mem_malloc_start;
+ extern ulong mem_malloc_end;
+ extern ulong mem_malloc_brk;
+ 
++/**
++ * mem_malloc_init() - Set up the malloc() pool
++ *
++ * Sets the region of memory to be used for all future calls to malloc(), etc.
++ *
++ * @start: Start address
++ * @size: Size in bytes
++ */
+ void mem_malloc_init(ulong start, ulong size);
+ 
+ #ifdef __cplusplus
 -- 
 2.43.0
 
