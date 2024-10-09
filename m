@@ -4,89 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C303CEE352
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 21:40:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCBB9CEE359
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 22:10:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E141A88CAE;
-	Wed,  9 Oct 2024 23:40:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 3BD6788CAE;
+	Thu, 10 Oct 2024 00:10:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="SpGcXe2b";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="N+hmxpKZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B569788CC9; Wed,  9 Oct 2024 23:40:44 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E4BBF88D13; Thu, 10 Oct 2024 00:10:17 +0200 (CEST)
+Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
+ [IPv6:2a00:1450:4864:20::236])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2072E88CA0
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 23:40:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E8B9388AE8
+ for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 00:10:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
- [209.85.218.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 9AD203F48A
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 21:40:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1728510041;
- bh=LeX/PI7OIdlTEOtusxuhz6s7jWJ9m+vy68HM/K01kqk=;
- h=Message-ID:Date:MIME-Version:To:Cc:From:Subject:Content-Type;
- b=SpGcXe2bgpm1ybtsaxH0h64gLRjty0JUr0hLxgnIOaoQVOaMdMxGUCUh903TLO//8
- 1L2rV34Co4WnQMH2nUhkKQs/m1DZ02cH+h2DEm8L/rqH7P7VhZxLeRURnpvIOcV4Qw
- Txx2DLvU4zU+S+iMGikSLXC0T4NBDSl/101U0ZDy6UNaQJs7/I/L1kYDWv2Ls/VcKV
- Hf1PI6y/rcNT0pQOm8jUiYcCVwnQqUvZuE9qChEn54fW/AX+UjEyKS4rYtm16l4s54
- gLT69BVZ2l05QksfEx+q2TEfS7fVdWvnctto8ufKp5fg3nu8TatQJiRW7YjnGEV31J
- 92iGSWBk1nRCQ==
-Received: by mail-ej1-f70.google.com with SMTP id
- a640c23a62f3a-a996be26171so150813766b.0
- for <u-boot@lists.denx.de>; Wed, 09 Oct 2024 14:40:41 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-2fac9eaeafcso2661461fa.3
+ for <u-boot@lists.denx.de>; Wed, 09 Oct 2024 15:10:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1728511815; x=1729116615; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=SqkVFJ8PUS4R/bLHf9ZJAJ6wpSMwcyj5H6IHD+gGt8Q=;
+ b=N+hmxpKZ18UnEOxWZw+xr/bcrlX3DvvXKakHX6Hup2rVYW1VEo7zuahJ+/x5QjicvP
+ Hs88m4ekfou42UTRxFiAPMDLRxD7hvQzTx0TSILJ+Uip/d0r1ssrBIWqkf0pOOCNJGrt
+ P6MkXEgxIh/4p9CDM3EzhW2uye+tmKsKBqJkbaB/DAU/4n/8kg3OoOp+xbvI9IARyQyG
+ 9EcB0EY2wj33Sq65t3WLXLuXNACifQIHU079OYUmR+ToHeySHi5ClfgxXYc1SMoPs6QT
+ bdHXa/Me6EqdX9CkNa7vCYNFMzREPvfj8LkQenCudLzqMrPX38SK/EuzmqA33tApMr9s
+ Ut1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728510041; x=1729114841;
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=LeX/PI7OIdlTEOtusxuhz6s7jWJ9m+vy68HM/K01kqk=;
- b=l499RKsCiS5/Pz/4i9zdHhWyoZzRiRDZHoeWFQJCSayAvIK7XTzM7/B8KqdUsb69Rb
- VjlWZ8rGlK8cwlFzvponRejVM4IFS0gMShRqf8/aoPxTue8GbKarRXKWEwuAUGELHUHU
- eU32kMP3xhkTFI3vsWMrKqrdX73I1+X2pJmCqM93dXPx55wAbawZpMVThJVh73YLNptg
- /fPC6ULMw9GhiAVkrZk9ff6RfI9x7yV2XcZRORA9Md/jaap0vgodoWHDw9Jx7ZP8Sppk
- y7RzER1SwsGYRr8Bw3A2bkGkS6/9icRsFy3hqd3lk/OxMhfU5DudsdLW4gvlTLojX1Wv
- +Ozg==
-X-Gm-Message-State: AOJu0YxfFD8MJBQrHxVnQMPCE/zdrPiOjL4Xzbbz9AENaaNBB//CNtOq
- wA2ILpOMAPFUgtCi8E0qCkdwsrigfefHxtxujZAiJmp3NZ3cCmpEEAvGZZMw1ASObH2qerEsNFJ
- +2suVmizW9+SBrt+wPySBlxeWV5die4YS/2BNC16q4esZDLb9WSb78ELE2bRXQU/+sUM=
-X-Received: by 2002:a17:907:7ba9:b0:a99:6265:ed35 with SMTP id
- a640c23a62f3a-a99a10e876amr96601066b.10.1728510041063; 
- Wed, 09 Oct 2024 14:40:41 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEiE8fKWKiePn4jnySl8lMk9aYaqPlVHbqUIoM/a8nsCi3iCcPxjh7NIe+x9YmeKVT+67AW/g==
-X-Received: by 2002:a17:907:7ba9:b0:a99:6265:ed35 with SMTP id
- a640c23a62f3a-a99a10e876amr96599366b.10.1728510040641; 
- Wed, 09 Oct 2024 14:40:40 -0700 (PDT)
-Received: from ?IPV6:2a02:3035:6e0:3cab:4823:b867:e230:71c3?
- ([2a02:3035:6e0:3cab:4823:b867:e230:71c3])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a99501181a6sm510932566b.139.2024.10.09.14.40.39
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 09 Oct 2024 14:40:40 -0700 (PDT)
-Message-ID: <fbb5acff-f3b3-4c3d-8d96-bc95bfe470a8@canonical.com>
-Date: Wed, 9 Oct 2024 23:40:38 +0200
+ d=1e100.net; s=20230601; t=1728511815; x=1729116615;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=SqkVFJ8PUS4R/bLHf9ZJAJ6wpSMwcyj5H6IHD+gGt8Q=;
+ b=f5BYHSZLmmntyYNdFDioMuFS0wdQrOFdNIAvNZJZB9C5v9aSUopaeIE0WcXCTQ871x
+ 2f08HOdVQwFbnbCBfKHMBw3LyOJmGtv90Mg21IkGXAXLlSwH0j2jSTnsuWlRH2w4k8H/
+ zU23waMwH6TpXOknyvu3oPMiqxfPV8ubBRBVf9wPDI65IsPpDkVVFu3s0WYyeSKPirNS
+ zRSNg76DAz1VOHKId/r2esGu1X+qZEaTys24jN3F3KSP8K6mVMv4HZi/zmiGydqWGs8s
+ m4jYXBvue4WzjSQWFPoJhj76LmVA4w5e6l3CLRRAAV4RIEJUUU+x7ZxVWnxoI6Dj+MUp
+ b39A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWXumSFngyC9HiTIZTgxu0mQxoC6+8AEzlaiZpdZyGiN225ZI2j0RL7NlZEkFiJeLNaeo8i+eo=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy7vVLrclQcXXB33yA4J6yNm3nDrhtDO7Pg95G7mVaWjkQRpea0
+ dBiURZ86ATa066m5bpnVFG2SYatAbWGfmIdUfpM3duOASSUHdE8EsRzH1MlSmfRSh7JkegWoRmj
+ lSfpUpTbVY4TGpIm2iC7zIeHf+gk=
+X-Google-Smtp-Source: AGHT+IHvztpuAQ81j/ulDWPBX/ILXaT9O6G/WEGYfNTnUbJSaliHcDECH3jIHaU1omyg9TKG6URdlcR82nmx2yZvRJE=
+X-Received: by 2002:a05:651c:2208:b0:2fa:c4d4:ec44 with SMTP id
+ 38308e7fff4ca-2fb187ac4a8mr25215641fa.28.1728511814584; Wed, 09 Oct 2024
+ 15:10:14 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: Pull request efi-2025-01-rc1
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20241009145703.1970034-1-p-mantena@ti.com>
+In-Reply-To: <20241009145703.1970034-1-p-mantena@ti.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Wed, 9 Oct 2024 23:10:03 +0100
+Message-ID: <CALeDE9O9STcttgbMe9NgLzaLJM97FVmXE5Ncb_Nc+W9d+tROAg@mail.gmail.com>
+Subject: Re: [PATCH v2 0/4] Cleanup dma device in spl and move dma channel[0]
+To: Prasanth Babu Mantena <p-mantena@ti.com>
+Cc: trini@konsulko.com, sjg@chromium.org, alpernebiyasak@gmail.com, 
+ u-boot@lists.denx.de, vigneshr@ti.com, u-kumar1@ti.com, n-francis@ti.com, 
+ vaishnav.a@ti.com, s-k6@ti.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,97 +89,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
+Hi Prasanth,
 
-The following changes since commit fbe16bc28014dc1ed957f5fee7e53d6eee781aa9:
+> The channel allocation and deallocation for dma copy was happening on every
+> dma transfer. This is a overhead for transactions like NAND, which does
+> page reads recursively for complete data.
+>
+> So, moving the dma allocation to probe and implement corresponding
+> remove function and cleanup dma device while exiting from spl.
+>
+> Enable SPL_DM_DEVICE_REMOVE, for device removal capability in SPL.
+>
+> v2 <==> v1
+> ==========
+> 1> Improve subject of commit.
+> 2> Add warning on dma device not found.
+> 3> Do channel allocation only for udma and bcdma. Passthrough for all other types.
+>
+> Prasanth Babu Mantena (2):
+>   mach-k3: common.c: Remove dma device in spl exit
+>   configs: k3: Enable device removal in SPL
+>
+> Santhosh Kumar K (2):
+>   dma: ti: k3-udma: Move udma_probe() below all APIs
+>   dma: ti: k3-udma: Move DMA channel[0] allocation to probe and add
+>     udma_remove()
+>
+>  arch/arm/mach-k3/common.c        |  25 ++-
+>  configs/am62ax_evm_a53_defconfig |   1 +
+>  configs/am62ax_evm_r5_defconfig  |   1 +
+>  configs/am62x_evm_a53_defconfig  |   1 +
+>  configs/am62x_evm_r5_defconfig   |   1 +
+>  configs/j7200_evm_a72_defconfig  |   1 +
+>  configs/j7200_evm_r5_defconfig   |   1 +
+>  configs/j721e_evm_a72_defconfig  |   1 +
+>  configs/j721e_evm_r5_defconfig   |   1 +
+>  configs/j721s2_evm_a72_defconfig |   1 +
+>  configs/j721s2_evm_r5_defconfig  |   1 +
+>  configs/j784s4_evm_a72_defconfig |   1 +
+>  configs/j784s4_evm_r5_defconfig  |   1 +
 
-   arch: arm: dts: k3-j7200-r5-evm: Enable AVS feature (2024-10-08 
-10:23:36 -0600)
+Is there any reason why devices like j721e_beagleboneai64 and
+m62x_beagleplay and other TI devices aren't changed as part of this
+change?
 
-are available in the Git repository at:
-
-   https://source.denx.de/u-boot/custodians/u-boot-efi.git 
-tags/efi-2025-01-rc1
-
-for you to fetch changes up to be5e7c11ff7df70b7c2adfdfd114ae25573996c8:
-
-   sandbox: enable clk command on the sandbox (2024-10-09 15:48:42 +0200)
-
-Gitlab CI showed no issues:
-https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/22597
-
-----------------------------------------------------------------
-Pull request efi-2025-01-rc1
-
-Documentation:
-
-* Move the generic memory-documentation to doc/
-* Fix typo boormethod
-
-UEFI:
-
-* Delete rng-seed if having EFI RNG protocol
-* Don't call restart_uboot in EFI watchdog test
-* Simplify building EFI binaries in Makefile
-* Show FirmwareVendor and FirmwareRevision in helloworld
-* Add debug output for efi bootmeth
-
-Other:
-
-* CONFIG_CMD_CLK should depend on CONFIG_CLK
-* simplify clk command
-* enable clk command on the sandbox
-
-----------------------------------------------------------------
-Heinrich Schuchardt (6):
-       efi_leader: delete rng-seed if having EFI RNG protocol
-       test: don't call restart_uboot in EFI watchdog test
-       boot: typo boormethod
-       cmd/Kconfig: CONFIG_CMD_CLK should depend on CONFIG_CLK
-       cmd: clk: simplify clk command
-       sandbox: enable clk command on the sandbox
-
-Simon Glass (7):
-       doc: Move the generic memory-documentation to doc/
-       efi_loader: Rename and move CMD_BOOTEFI_HELLO_COMPILE
-       efi: arm: x86: riscv: Drop crt0/relocal extra- rules
-       efi_loader: Shorten the app rules
-       efi_loader: Shorten the app rules further
-       efi_loader: Show FirmwareVendor and FirmwareRevision in helloworld
-       bootstd: Add debugging for efi bootmeth
-
-  README                             | 45 ----------------------------------
-  arch/arm/lib/Makefile              |  8 -------
-  arch/riscv/lib/Makefile            |  4 ----
-  arch/x86/lib/Makefile              | 16 -------------
-  boot/bootmeth_efi.c                | 11 +++++++--
-  boot/bootstd-uclass.c              |  2 +-
-  cmd/Kconfig                        | 23 ++++--------------
-  cmd/clk.c                          | 14 -----------
-  configs/octeontx2_95xx_defconfig   |  2 +-
-  configs/octeontx2_96xx_defconfig   |  2 +-
-  configs/octeontx_81xx_defconfig    |  2 +-
-  configs/octeontx_83xx_defconfig    |  2 +-
-  configs/sandbox64_defconfig        |  1 +
-  configs/sandbox_defconfig          |  1 +
-  configs/sandbox_flattree_defconfig |  1 +
-  configs/sandbox_noinst_defconfig   |  1 +
-  configs/sandbox_spl_defconfig      |  1 +
-  configs/sandbox_vpl_defconfig      |  1 +
-  doc/develop/index.rst              |  1 +
-  doc/develop/memory.rst             | 49 
-++++++++++++++++++++++++++++++++++++++
-  doc/develop/uefi/uefi.rst          |  2 +-
-  include/efi_loader.h               |  2 +-
-  lib/efi_loader/Kconfig             | 12 ++++++++++
-  lib/efi_loader/Makefile            | 46 
-+++++++++++------------------------
-  lib/efi_loader/efi_dt_fixup.c      | 15 ++++++++----
-  lib/efi_loader/efi_helper.c        |  2 +-
-  lib/efi_loader/helloworld.c        | 37 ++++++++++++++++++++++++++++
-  test/py/tests/test_efi_fit.py      |  2 +-
-  test/py/tests/test_efi_loader.py   |  2 +-
-  test/py/tests/test_efi_selftest.py |  2 +-
-  30 files changed, 153 insertions(+), 156 deletions(-)
-  create mode 100644 doc/develop/memory.rst
-
+Peter
