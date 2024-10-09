@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30466CEDDA4
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 14:52:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01B28CEDDA4
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 14:52:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C211D891A9;
-	Wed,  9 Oct 2024 16:50:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2AD8D89196;
+	Wed,  9 Oct 2024 16:50:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rl/KZx63";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cAYQ9PyU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 777258919B; Wed,  9 Oct 2024 16:50:42 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 1641C88CF1; Wed,  9 Oct 2024 16:50:43 +0200 (CEST)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00BF188CF1
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 16:50:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F1F989189
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 16:50:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-42cc43454d5so55806425e9.3
- for <u-boot@lists.denx.de>; Wed, 09 Oct 2024 07:50:39 -0700 (PDT)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-37cc9aeb01dso4537068f8f.2
+ for <u-boot@lists.denx.de>; Wed, 09 Oct 2024 07:50:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728485439; x=1729090239; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1728485440; x=1729090240; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3pyPnWroAAxeaL2wHrl7qplR/MmloZWJr7yEfC4wNrE=;
- b=rl/KZx63aAfLzX1VRY26UWJ/lG/Km+WaGBwm6+jWGg1zAWraqqQX3VQCxAMAIs1Spi
- L8Sk0OGa53KSzCg92yZ1ta9QASJNoguF9AdrLxmcUFsr6g1yEQUi1VMEGs3b1gSnAgmv
- BjayO6+InYwGYBCdwNcDgdE0kujwk9iNCdmy1LSuhjhPTIEf8Xg3GFoVegXz0dkU2dmx
- Pz6ZAktaDw9DlNDt9Kb3gFemFsiSmsWGve84sfoUIEjCE5AH4qBfSg2/UlKLkk44vJ22
- 6A4yBEkeVLCNSGeWol/FZi8V9RKhZsx5ByrB71GJA7Nhl3JYYgO3TwVmJ4ZYNfcwaJbI
- 4KAA==
+ bh=5G+9QtFQpBdFjhMWrV1vO4Z5+gjUnIBRwFl+FYgTv68=;
+ b=cAYQ9PyUa0uCVoE1YP+jGl1IEOriBSVOakVNhTEyYBJT8w77+E0CyESOx61C2KNdTw
+ vlRGUzslXZgNErYbbTEjhTIVESvUC1NRz1k5AQUg2fvXwZDQQaUuCjuG37p1UBcOOBS9
+ lhxIdm/Tg9W6dXhf6tFiJkBLgASxKwRvqfmry8CvniyNFplGBnqReFQ19TDSDKP99Bno
+ HiJ0656xP21ytTiS0CNlZhgC+OTPNhbWAa4N1vFd1TdtlU+Qt7vaQPggYo8Q1TgwjU7k
+ SiThol/IBPeCGx5mHvk8i2xhWJntyPEI1hJKL3I0TcLRmuuZzS91QyCEPzd40UxL8xCf
+ /N7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728485439; x=1729090239;
+ d=1e100.net; s=20230601; t=1728485440; x=1729090240;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3pyPnWroAAxeaL2wHrl7qplR/MmloZWJr7yEfC4wNrE=;
- b=h9GRbkvZLT6o5trDtRz0mjDCsig2uqpIltajxmiekJkWwB2gNwV9HX3Xjx/ZFzf9AD
- jx5FJSPe471g1XgJKql+Srfvi4GUx6VTKuVQga+ki6M85p3o0szlZKbyQJQIe4JZQVA5
- vIlyq9Xta90r5s+rC7A06AKiCUtby8oHMSPI/ZtJq8L+zSpTrwyDQpoD5ztn5aROCHQ1
- mtDpFXX1w9hczbcMQACa95XI/ZsZI7bfacm55SDtp7rSsTlAd4OfsoeFW9beEg8QBqup
- HSHUDQQVD8vmNllkYAxVFQbTm8Yh+ExUibYfD/QPVOskmP+6DC11MkWrmcg4R0tw4EU+
- O4ig==
-X-Gm-Message-State: AOJu0Yxz227rU3Bhww+WN4VkQ94Nh36G4jh68Zy18CmMiuzQ30zsVXNq
- OGTRX6Fcqt176g3JAbiKwVK+VQUq2sNk3Sb7r8oR7qMIMrlfKNJ1kX6kwk94M/dtq/QAekfSvBh
- f8F8jEnPT
-X-Google-Smtp-Source: AGHT+IG48wR3ZHI+6iSBvmT/EwjXcEEDPKFaU+mMqq7u5Oi2xVpKKlPHNCxCjn3ew30v+NAKvhNQCg==
-X-Received: by 2002:a05:600c:45d1:b0:426:6308:e2f0 with SMTP id
- 5b1f17b1804b1-430d729f2cdmr20739315e9.26.1728485439157; 
- Wed, 09 Oct 2024 07:50:39 -0700 (PDT)
+ bh=5G+9QtFQpBdFjhMWrV1vO4Z5+gjUnIBRwFl+FYgTv68=;
+ b=VA9PVBYWvZt6WlvU+WyC2D2kJTwSjS5ZP/o1WYMB7C/ZK6LOhKycixWxPtaCxxs5Ai
+ WVrLmVUXDxAVCHYGBq36z6bgQUD3mbGF+2YQSXaoy1nlNXmI2kNOd4TvJARpX05IL8NG
+ hCk0wsvLdiNkDNqfSpdHGGfnH/gklrczXbbNNoq0whP7zappEfFiLVTi+aUc7y9N1EPo
+ Jh8LsS+/MgiJjNHZS7yi9uU358DIUuV8hq5RRMhHBDjORoL1GACPWgOOpmXZ571Oq7Xl
+ jXUBFV5xwvKR9lfV1lGtc0FWPdCCVuqw9nN/9sMROwWXlQa76OKy4BN9K6RKQ2+Qcyfh
+ ZHYQ==
+X-Gm-Message-State: AOJu0Yzh3eOUwKs0FZOV2J+MMvBLDvLUU3uXoYInkFQAPqoBEhGW0o9l
+ lgzHz5IbguDsVMvcN0JUTeRLl5ZPguqm8luv1M1rVUMNduKS5x7allnG7/Mki7+sz5qVK51RHC0
+ b0utFmr+L
+X-Google-Smtp-Source: AGHT+IH93+SiiTEHs2FednmxSvOvVETvkkVlmS43tuTA9oLs29DF5c2CbDK8thafR2u8cgCMR29Vyw==
+X-Received: by 2002:a5d:4991:0:b0:37c:cc67:8b1f with SMTP id
+ ffacd0b85a97d-37d3aab7873mr1726593f8f.48.1728485440347; 
+ Wed, 09 Oct 2024 07:50:40 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:9b46:2ad8:5153:1163])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d1691b5ddsm10700957f8f.47.2024.10.09.07.50.38
+ ffacd0b85a97d-37d1691b5ddsm10700957f8f.47.2024.10.09.07.50.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Oct 2024 07:50:38 -0700 (PDT)
+ Wed, 09 Oct 2024 07:50:40 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -72,11 +72,13 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
  Anton Antonov <Anton.Antonov@arm.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v12 18/21] net: lwip: tftp: add support of blksize option to
- client
-Date: Wed,  9 Oct 2024 16:49:59 +0200
-Message-Id: <6de92bad17c86e300e3ae4d1b8b67569b350410c.1728482473.git.jerome.forissier@linaro.org>
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Anand Moon <linux.amoon@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Baruch Siach <baruch@tkos.co.il>
+Subject: [PATCH v12 19/21] net: lwip: add TFTP_BLOCKSIZE
+Date: Wed,  9 Oct 2024 16:50:00 +0200
+Message-Id: <faa422f4ae8cbeec2ac339d1959085f0d1fd6441.1728482473.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1728482473.git.jerome.forissier@linaro.org>
 References: <cover.1728482473.git.jerome.forissier@linaro.org>
@@ -98,233 +100,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The TFTP protocol uses a default block size of 512 bytes. This value is
-sub-optimal for ethernet devices, which have a MTU (Maximum Transmission
-Unit) of 1500 bytes. When taking into acount the overhead of the IP and
-UDP layers, this leaves 1468 bytes for the TFTP payload.
+Add support for setting the TFTP block size. The default value (1468)
+is fine for Ethernet and allows a better throughput than the TFTP
+default (512), if the server supports the blksize option of course.
 
-This patch introduces a new function: tftp_client_set_blksize() which
-may be used to change the block size from the default. It has to be
-called after tftp_client_init() and before tftp_get(). If the server
-does not support the option, the client will still accept to receive
-512-byte blocks.
-
-Submitted upstream: https://savannah.nongnu.org/patch/index.php?10462
+I tested this change with qemu_arm64_lwip_defconfig. The throughput is
+now 875 KiB/s vs. 313 KiB/s before. That is still a low number, but I
+think we can't expect more without implementing the windowsize option.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- lib/lwip/lwip/src/apps/tftp/tftp.c            | 94 +++++++++++++++++--
- .../lwip/src/include/lwip/apps/tftp_client.h  |  1 +
- 2 files changed, 89 insertions(+), 6 deletions(-)
+ net/Kconfig     | 20 ++++++++++----------
+ net/lwip/tftp.c |  2 ++
+ 2 files changed, 12 insertions(+), 10 deletions(-)
 
-diff --git a/lib/lwip/lwip/src/apps/tftp/tftp.c b/lib/lwip/lwip/src/apps/tftp/tftp.c
-index 74fc1fbe586..8e0c071772a 100644
---- a/lib/lwip/lwip/src/apps/tftp/tftp.c
-+++ b/lib/lwip/lwip/src/apps/tftp/tftp.c
-@@ -57,7 +57,7 @@
- #include "lwip/timeouts.h"
- #include "lwip/debug.h"
+diff --git a/net/Kconfig b/net/Kconfig
+index 16a9de47e94..76ab7d91eeb 100644
+--- a/net/Kconfig
++++ b/net/Kconfig
+@@ -60,16 +60,6 @@ config SYS_FAULT_ECHO_LINK_DOWN
+ 	  this option is active, then CONFIG_SYS_FAULT_MII_ADDR also needs to
+ 	  be configured.
  
--#define TFTP_MAX_PAYLOAD_SIZE 512
-+#define TFTP_DEFAULT_BLOCK_SIZE 512
- #define TFTP_HEADER_LENGTH    4
+-config TFTP_BLOCKSIZE
+-	int "TFTP block size"
+-	default 1468
+-	help
+-	  Default TFTP block size.
+-	  The MTU is typically 1500 for ethernet, so a TFTP block of
+-	  1468 (MTU minus eth.hdrs) provides a good throughput with
+-	  almost-MTU block sizes.
+-	  You can also activate CONFIG_IP_DEFRAG to set a larger block.
+-
+ config TFTP_PORT
+ 	bool "Set TFTP UDP source/destination ports via the environment"
+ 	help
+@@ -254,6 +244,16 @@ config NET_RANDOM_ETHADDR
+ 	  generated. It will be saved to the appropriate environment variable,
+ 	  too.
  
- #define TFTP_RRQ   1
-@@ -65,6 +65,7 @@
- #define TFTP_DATA  3
- #define TFTP_ACK   4
- #define TFTP_ERROR 5
-+#define TFTP_OACK  6
- 
- enum tftp_error {
-   TFTP_ERROR_FILE_NOT_FOUND    = 1,
-@@ -88,9 +89,11 @@ struct tftp_state {
-   int timer;
-   int last_pkt;
-   u16_t blknum;
-+  u16_t blksize;
-   u8_t retries;
-   u8_t mode_write;
-   u8_t tftp_mode;
-+  bool wait_oack;
- };
- 
- static struct tftp_state tftp_state;
-@@ -137,10 +140,24 @@ send_request(const ip_addr_t *addr, u16_t port, u16_t opcode, const char* fname,
- {
-   size_t fname_length = strlen(fname)+1;
-   size_t mode_length = strlen(mode)+1;
--  struct pbuf* p = init_packet(opcode, 0, fname_length + mode_length - 2);
-+  size_t blksize_length = 0;
-+  struct pbuf* p;
-   char* payload;
-   err_t ret;
- 
-+  if (tftp_state.blksize) {
-+    blksize_length = 14; /* maximum (blksize is a u16_t): 'blksize\0XXXXX\0' */
-+    if (tftp_state.blksize < 10000)
-+	    blksize_length--;
-+    if (tftp_state.blksize < 1000)
-+	    blksize_length--;
-+    if (tftp_state.blksize < 100)
-+	    blksize_length--;
-+    if (tftp_state.blksize < 10)
-+	    blksize_length--;
-+  }
++config TFTP_BLOCKSIZE
++	int "TFTP block size"
++	default 1468
++	help
++	  Default TFTP block size.
++	  The MTU is typically 1500 for ethernet, so a TFTP block of
++	  1468 (MTU minus eth.hdrs) provides a good throughput with
++	  almost-MTU block sizes.
++	  You can also activate CONFIG_IP_DEFRAG to set a larger block.
 +
-+  p = init_packet(opcode, 0, fname_length + mode_length + blksize_length - 2);
-   if (p == NULL) {
-     return ERR_MEM;
-   }
-@@ -148,7 +165,10 @@ send_request(const ip_addr_t *addr, u16_t port, u16_t opcode, const char* fname,
-   payload = (char*) p->payload;
-   MEMCPY(payload+2,              fname, fname_length);
-   MEMCPY(payload+2+fname_length, mode,  mode_length);
-+  if (tftp_state.blksize)
-+    sprintf(payload+2+fname_length+mode_length, "blksize%c%d%c", 0, tftp_state.blksize, 0);
+ endif   # if NET || NET_LWIP
  
-+  tftp_state.wait_oack = true;
-   ret = udp_sendto(tftp_state.upcb, p, addr, port);
-   pbuf_free(p);
-   return ret;
-@@ -221,14 +241,14 @@ send_data(const ip_addr_t *addr, u16_t port)
-     pbuf_free(tftp_state.last_data);
-   }
+ config SYS_RX_ETH_BUFFER
+diff --git a/net/lwip/tftp.c b/net/lwip/tftp.c
+index 26978643313..f4d0a6aa19a 100644
+--- a/net/lwip/tftp.c
++++ b/net/lwip/tftp.c
+@@ -139,6 +139,8 @@ static int tftp_loop(struct udevice *udev, ulong addr, char *fname,
+ 	if (!(err == ERR_OK || err == ERR_USE))
+ 		log_err("tftp_init_client err: %d\n", err);
  
--  tftp_state.last_data = init_packet(TFTP_DATA, tftp_state.blknum, TFTP_MAX_PAYLOAD_SIZE);
-+  tftp_state.last_data = init_packet(TFTP_DATA, tftp_state.blknum, TFTP_DEFAULT_BLOCK_SIZE);
-   if (tftp_state.last_data == NULL) {
-     return;
-   }
- 
-   payload = (u16_t *) tftp_state.last_data->payload;
- 
--  ret = tftp_state.ctx->read(tftp_state.handle, &payload[2], TFTP_MAX_PAYLOAD_SIZE);
-+  ret = tftp_state.ctx->read(tftp_state.handle, &payload[2], TFTP_DEFAULT_BLOCK_SIZE);
-   if (ret < 0) {
-     send_error(addr, port, TFTP_ERROR_ACCESS_VIOLATION, "Error occurred while reading the file.");
-     close_handle();
-@@ -239,6 +259,28 @@ send_data(const ip_addr_t *addr, u16_t port)
-   resend_data(addr, port);
- }
- 
-+static u16_t payload_size(void)
-+{
-+  if (tftp_state.blksize)
-+    return tftp_state.blksize;
-+  return TFTP_DEFAULT_BLOCK_SIZE;
-+}
++	tftp_client_set_blksize(CONFIG_TFTP_BLOCKSIZE);
 +
-+static const char *
-+find_option(struct pbuf *p, const char *option)
-+{
-+  int i;
-+  u16_t optlen = strlen(option);
-+  const char *b = p->payload;
-+
-+  for (i = 0; i + optlen + 1 < p->len; i++) {
-+    if (lwip_strnstr(b + i, option, optlen))
-+      return b + i + optlen + 2;
-+  }
-+
-+  return NULL;
-+}
-+
- static void
- tftp_recv(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *addr, u16_t port)
- {
-@@ -338,6 +380,15 @@ tftp_recv(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *addr
-       }
- 
-       blknum = lwip_ntohs(sbuf[1]);
-+      if (tftp_state.blksize && tftp_state.wait_oack) {
-+        /*
-+         * Data received while we are expecting an OACK for our blksize option.
-+         * This means the server doesn't support it, let's switch back to the
-+         * default block size.
-+         */
-+       tftp_state.blksize = 0;
-+       tftp_state.wait_oack = false;
-+      }
-       if (blknum == tftp_state.blknum) {
-         pbuf_remove_header(p, TFTP_HEADER_LENGTH);
- 
-@@ -349,7 +400,7 @@ tftp_recv(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *addr
-           send_ack(addr, port, blknum);
-         }
- 
--        if (p->tot_len < TFTP_MAX_PAYLOAD_SIZE) {
-+        if (p->tot_len < payload_size()) {
-           close_handle();
-         } else {
-           tftp_state.blknum++;
-@@ -386,7 +437,7 @@ tftp_recv(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *addr
-       lastpkt = 0;
- 
-       if (tftp_state.last_data != NULL) {
--        lastpkt = tftp_state.last_data->tot_len != (TFTP_MAX_PAYLOAD_SIZE + TFTP_HEADER_LENGTH);
-+        lastpkt = tftp_state.last_data->tot_len != (TFTP_DEFAULT_BLOCK_SIZE + TFTP_HEADER_LENGTH);
-       }
- 
-       if (!lastpkt) {
-@@ -405,6 +456,25 @@ tftp_recv(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *addr
-         close_handle();
-       }
-       break;
-+    case PP_HTONS(TFTP_OACK): {
-+      const char *optval = find_option(p, "blksize");
-+      u16_t srv_blksize = 0;
-+      tftp_state.wait_oack = false;
-+      if (optval) {
-+	if (!tftp_state.blksize) {
-+	  /* We did not request this option */
-+          send_error(addr, port, TFTP_ERROR_ILLEGAL_OPERATION, "blksize unexpected");
-+	}
-+	srv_blksize = atoi(optval);
-+	if (srv_blksize <= 0 || srv_blksize > tftp_state.blksize) {
-+	  send_error(addr, port, TFTP_ERROR_ILLEGAL_OPERATION, "Invalid blksize");
-+	}
-+	LWIP_DEBUGF(TFTP_DEBUG | LWIP_DBG_STATE, ("tftp: accepting blksize=%d\n", srv_blksize));
-+	tftp_state.blksize = srv_blksize;
-+      }
-+      send_ack(addr, port, 0);
-+      break;
-+    }
-     default:
-       send_error(addr, port, TFTP_ERROR_ILLEGAL_OPERATION, "Unknown operation");
-       break;
-@@ -495,6 +565,18 @@ tftp_init_client(const struct tftp_context *ctx)
-   return tftp_init_common(LWIP_TFTP_MODE_CLIENT, ctx);
- }
- 
-+/** @ingroup tftp
-+ * Set the block size to be used by the TFTP client. The server may choose to
-+ * accept a lower value.
-+ * @param blksize Block size in bytes
-+ */
-+void
-+tftp_client_set_blksize(u16_t blksize)
-+{
-+  if (blksize != TFTP_DEFAULT_BLOCK_SIZE)
-+    tftp_state.blksize = blksize;
-+}
-+
- /** @ingroup tftp
-  * Deinitialize ("turn off") TFTP client/server.
-  */
-diff --git a/lib/lwip/lwip/src/include/lwip/apps/tftp_client.h b/lib/lwip/lwip/src/include/lwip/apps/tftp_client.h
-index 24dbda6a8c9..e1e21d06b67 100644
---- a/lib/lwip/lwip/src/include/lwip/apps/tftp_client.h
-+++ b/lib/lwip/lwip/src/include/lwip/apps/tftp_client.h
-@@ -44,6 +44,7 @@ enum tftp_transfer_mode {
- };
- 
- err_t tftp_init_client(const struct tftp_context* ctx);
-+void tftp_client_set_blksize(u16_t blksize);
- err_t tftp_get(void* handle, const ip_addr_t *addr, u16_t port, const char* fname, enum tftp_transfer_mode mode);
- err_t tftp_put(void* handle, const ip_addr_t *addr, u16_t port, const char* fname, enum tftp_transfer_mode mode);
- 
+ 	ctx.start_time = get_timer(0);
+ 	err = tftp_get(&ctx, &srvip, srvport, fname, TFTP_MODE_OCTET);
+ 	/* might return different errors, like routing problems */
 -- 
 2.40.1
 
