@@ -4,89 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDB6BCF042D
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 01:50:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BED31CF042D
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 01:50:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E001F88FE1;
-	Wed,  9 Oct 2024 03:50:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3B48288FDC;
+	Wed,  9 Oct 2024 03:50:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="P7LP5tOr";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aNgPhOR6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CFC3F88FE1; Wed,  9 Oct 2024 03:50:30 +0200 (CEST)
-Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
- [IPv6:2607:f8b0:4864:20::12b])
+ id AD74D88FD1; Wed,  9 Oct 2024 03:50:32 +0200 (CEST)
+Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
+ [IPv6:2607:f8b0:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0FDF88F4B
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 03:50:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9493288FDA
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 03:50:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12b.google.com with SMTP id
- e9e14a558f8ab-3a2761f1227so21776465ab.0
- for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 18:50:28 -0700 (PDT)
+Received: by mail-il1-x12f.google.com with SMTP id
+ e9e14a558f8ab-3a34802247eso35608025ab.0
+ for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 18:50:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728438627; x=1729043427; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=0xg3SvAjxl9c72FE84Z8FFdcNYwxEbk/XBy0TOFSjsg=;
- b=P7LP5tOrDo5X5RBudZHvpatI9NBwnfoCGSS8hEGHofhBV8iaB8eF9rLct3moAvh2ug
- V/lamk5QC9tpeE/vgs/fEPoHm0zA2eDyyd9aLjvVNEzhPJC001t3DHeZxLbBOEEm1Vce
- Orhh4sWQHapEAdFjAYUaBw9vizL3IScc5Wbu0=
+ d=chromium.org; s=google; t=1728438629; x=1729043429; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ozWclEMjbjwC5DUkOadZ9YV74jfOgwNTVjadGrUpDaU=;
+ b=aNgPhOR69LSje0iftpUHcwmoy9tgDeZUH7Z6TSdAUqMj+bgZP+z36sXQTTBU53dYG0
+ zvk9NlBlp5u2LFHmXFh7U0Zdj8FerwYWXDCV93Q82rCKDdv3tgkO91mXGzGdjGSeL8Xr
+ ZP0AEkPflx2+5JuaDhXwk8RYx96j4Yt1XrFx0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728438627; x=1729043427;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=0xg3SvAjxl9c72FE84Z8FFdcNYwxEbk/XBy0TOFSjsg=;
- b=qhIap29EduTiPw023UZdCoT44IKrGGPUvBIFADCUd/hVWw49IyBKuia/yojJbSEVus
- RgAPsFiohU6OIJJPvJcp21R8Wor89Ycjn2/PWupP2om9m+E1r2I2kky3icp4XN35r60l
- 8pec+6BlNEA6cPxenCCzdbjbX87B/Lt1yB12SDQ/nTvA2S0H1UGa+7o9g3jgEkwxJXwY
- SI5ERBXPb4Lv+0tvmhliVmbHa/OA9hSOMzQvkglZC9gz3VNHmYsg9Z8EmGOBrPkjDOsY
- wpDRg7MWz8KbSLpEMJtyjy4bv1jVerrFkczAl2BCaM5i54kSHuaztL2sjgoDXinr/WE9
- xcMw==
-X-Gm-Message-State: AOJu0YxBXYefXMwI5rtavWKW4jfeI9aORTpHbe70bu76dTQh8NKBLokf
- gz6uGa7AJVE1Y5OThdT2dhviEKRxthBLf3o5+BMpEQ58anX7WNS6xPnmyOgV8glZ6ddTNGo+YHX
- 9PA==
-X-Google-Smtp-Source: AGHT+IFumcq9tMc183erPaYLwG4eFeD4I7aKYFS717yHMJvV9dG/YOw2u0VEmr9jNInu6VNuLpyuRQ==
-X-Received: by 2002:a05:6e02:1561:b0:3a3:4175:79d2 with SMTP id
- e9e14a558f8ab-3a397cf240bmr9313065ab.14.1728438627215; 
- Tue, 08 Oct 2024 18:50:27 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1728438629; x=1729043429;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ozWclEMjbjwC5DUkOadZ9YV74jfOgwNTVjadGrUpDaU=;
+ b=bmlU/EW/H/t3n093DqLPlVYkuYc2yg6bOpSZVdxW5IZIFuukjyIxA3mo8n6LnhPzSp
+ PDTS6SEIPy5lmQBtJRaFz5OxLatBWp5SuoVPRV1+WZI/21eGRfC3a5pc4E4pETkUEKDc
+ P2IlP3yPDqvHRzymjHBhmhUhqVgilH6T5/DMK3afAiYc0TRL3zKaJp4RUWcdhu54PuI7
+ 0HgTE+Fjv6L6AXATqEoDvyMMQaPpeWM/FlGlylj5bRBrwCO6Z0WWXAZmvd+ybQzpa7r1
+ uPSsqsZzF2BVL6iwIQAizZhta9nJN/Cb5DaGZl81X2S9OCaraP7DtyUqdT9dPk+Z1hSN
+ Vl0w==
+X-Gm-Message-State: AOJu0YzUoTSrLm6VsdWBnntbBJdImF9fZGdlf15VPoRJdEGvJgGke1xm
+ oQgrhcTgbY6Ro/upZXoqZljsMFGEkQrHZHkNNFjgGAOuI/3+Eydzr5OxKFCS3W2xY63pgYqBdsF
+ OLw==
+X-Google-Smtp-Source: AGHT+IEWMlqcS7ybBDkWzxYg1wPkbsG4M7BwdIT07He2y94OOnsuR/hV+X4hMCFHcT4Q2vNEGAT+ZQ==
+X-Received: by 2002:a05:6e02:178d:b0:3a3:9337:4ce2 with SMTP id
+ e9e14a558f8ab-3a397cda124mr7447155ab.2.1728438629199; 
+ Tue, 08 Oct 2024 18:50:29 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3a37a868967sm20677585ab.67.2024.10.08.18.50.25
+ e9e14a558f8ab-3a37a868967sm20677585ab.67.2024.10.08.18.50.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Oct 2024 18:50:26 -0700 (PDT)
+ Tue, 08 Oct 2024 18:50:28 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Alexander Gendin <agendin@matrox.com>, Andrew Davis <afd@ti.com>,
- Artur Rojek <artur@conclusive.pl>, Devarsh Thakkar <devarsht@ti.com>,
- Emil Kronborg <emil.kronborg@protonmail.com>,
- Eugene Uriev <eugeneuriev@gmail.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Joao Paulo Goncalves <joao.goncalves@toradex.com>,
- Jonas Karlman <jonas@kwiboo.se>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maxim Moskalets <maximmosk4@gmail.com>, Nishanth Menon <nm@ti.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Devarsh Thakkar <devarsht@ti.com>, Jonas Karlman <jonas@kwiboo.se>,
  Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>,
- Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- This contributor prefers not to receive mails <noreply@example.com>,
- Tom Fitzhenry <tom@tom-fitzhenry.me.uk>
-Subject: [PATCH 0/6] Allow showing the memory map
-Date: Tue,  8 Oct 2024 19:50:12 -0600
-Message-ID: <20241009015020.25817-1-sjg@chromium.org>
+ This contributor prefers not to receive mails <noreply@example.com>
+Subject: [PATCH 1/6] common: Fix up malloc() comment in reserve_noncached()
+Date: Tue,  8 Oct 2024 19:50:13 -0600
+Message-ID: <20241009015020.25817-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20241009015020.25817-1-sjg@chromium.org>
+References: <20241009015020.25817-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -105,40 +93,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This little series adds a new 'memmap' command, intended to show the
-layout of memory within U-Boot and how much memory is available for
-loading images.
+The function name has changed, so update it.
 
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-Simon Glass (6):
-  common: Fix up malloc() comment in reserve_noncached()
-  common: Tidy up how malloc() is inited
-  am65x: Use map_to_sysmem() to convert from pointer
-  global_data: Add some more accessors
-  bootstage: Allow counting memory without strings
-  cmd: Add a command to show the memory map
+ common/board_f.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
- arch/arm/mach-k3/am65x/am654_init.c |  11 +--
- cmd/Kconfig                         |  10 +++
- cmd/Makefile                        |   1 +
- cmd/memmap.c                        |  66 +++++++++++++++
- common/board_f.c                    |   8 +-
- common/board_r.c                    |   3 +-
- common/bootstage.c                  |  16 ++--
- common/dlmalloc.c                   |   8 +-
- common/spl/spl.c                    |   4 +-
- doc/usage/cmd/memmap.rst            | 123 ++++++++++++++++++++++++++++
- doc/usage/index.rst                 |   1 +
- include/asm-generic/global_data.h   |  30 +++++++
- include/bootstage.h                 |   5 +-
- include/malloc.h                    |   8 ++
- test/cmd/Makefile                   |   3 +-
- test/cmd/memmap.c                   |  35 ++++++++
- 16 files changed, 305 insertions(+), 27 deletions(-)
- create mode 100644 cmd/memmap.c
- create mode 100644 doc/usage/cmd/memmap.rst
- create mode 100644 test/cmd/memmap.c
-
+diff --git a/common/board_f.c b/common/board_f.c
+index 154675d0e40..2e04a47b546 100644
+--- a/common/board_f.c
++++ b/common/board_f.c
+@@ -501,9 +501,9 @@ static unsigned long reserve_stack_aligned(size_t size)
+ static int reserve_noncached(void)
+ {
+ 	/*
+-	 * The value of gd->start_addr_sp must match the value of malloc_start
+-	 * calculated in board_r.c:initr_malloc(), which is passed to
+-	 * dlmalloc.c:mem_malloc_init() and then used by
++	 * The value of gd->start_addr_sp must match the value of
++	 * mem_malloc_start calculated in board_r.c:initr_malloc(), which is
++	 * passed to dlmalloc.c:mem_malloc_init() and then used by
+ 	 * cache.c:noncached_init()
+ 	 *
+ 	 * These calculations must match the code in cache.c:noncached_init()
 -- 
 2.43.0
 
