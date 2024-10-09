@@ -4,71 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D43BCF042F
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 01:59:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E67D5CF042F
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 02:00:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7729B89155;
-	Wed,  9 Oct 2024 03:57:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8F64B89170;
+	Wed,  9 Oct 2024 03:57:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="h2hGB1WZ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Cxni3nKX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 909758914F; Wed,  9 Oct 2024 03:57:35 +0200 (CEST)
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
+ id 5D35F89156; Wed,  9 Oct 2024 03:57:39 +0200 (CEST)
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
+ [IPv6:2607:f8b0:4864:20::f2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6A2FD885F4
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 03:57:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 55CA08914D
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 03:57:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-7acdd65fbceso494283785a.3
- for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 18:57:33 -0700 (PDT)
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-6cb2f272f8bso55057366d6.0
+ for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 18:57:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728439052; x=1729043852; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1728439056; x=1729043856; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=inc9DbOOFM/mCOsAsgy3mpPCE5+6FEheJNVKjIGmqbE=;
- b=h2hGB1WZ8KlJUIukutIFP2JHdAXtmFtZTe9VGSHl5jCtcAkWpH2vUlZykS7gHuUM+4
- gp2mPk3uPZcR4deOOEcLQWbMz+YeFoO8wdd846EWM7+nd4f+6wqjWc3qFTz27yDIqNfD
- v0tu4Lh1kwyLMQCfRSU0uN+L2T6O6vzdnBtkY=
+ bh=sEhQc3cQiJT5xvctmikPxeam7xx+bKN513P6/xcFIzI=;
+ b=Cxni3nKXzRIbDjVQWQlJQ8hVV6/ClXplLYdlWvWJ5mZZ1DY9CodoDNgkfiGpQhD4Un
+ ZjMzTjtqoT8mSZVuqowrymN+8mrSxarF80gTdpylz++5/wtQtM7W9f+q/nObVYQWTc/Y
+ d/8MheER4qtJxchYtrq62+47D6T/kba1vHUdw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728439052; x=1729043852;
+ d=1e100.net; s=20230601; t=1728439056; x=1729043856;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=inc9DbOOFM/mCOsAsgy3mpPCE5+6FEheJNVKjIGmqbE=;
- b=LREfJZluvpWFIdrpT2NbccXjKAOSzNYDP5sLoGAAqOVG712wnKkLzh5ODvVI8M/kKo
- i8f8VWpHPPtIH4ZIfioJR54pe0D3fhpSSbxQXBuDhgnT66MoRCNkXuQCvNWR1FmsXb2A
- STK6S6VxgndYts2eInS7nXLZT7rHwmLrNVgdoZRCP4ujYduvWDpEKreMyYBkad12f74W
- uEhW0i79WLgF8AxLJFkSgFDSiVkyC3jah0FNaV3D1RN+TxJGRKJtrKZtuCWUWRQ8ccXN
- yQAn8eOiwZTVtFiRlcZGXL5QpEfYA4nvoM65JFKZvcqRwDJZ1hgA6Q5+nSfU/Qcted0q
- mHZA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW4BtfJAgRTa1qfhenDM9e4IqFAYJvLRpt9bpnJrUckSlnZ5am4b5OkV6tdHUUrG21dV82q8AA=@lists.denx.de
-X-Gm-Message-State: AOJu0YxF9kkekgO3Khu9Ztb34uoQhYSBPZkKmCwnMK41R7bWYbggv7Ym
- HFVUN1sdHOT866d99WDBCEL7GRUtpJ1q+yFp/a75/ahx3wXRW2y/iD0cJjsqHc2y7RwD+9X/1J2
- S65sUk84Kp1vWVDo+f9pJHK7VBdxlVe7Rb1QX
-X-Google-Smtp-Source: AGHT+IH036+bHAy6I1IXM0LL739mj2uuZhZYgfiTYu+Yo5R/Sx895xJdQk9LVDMWaaTKQvIYDdOv67ZhSxxCAlDcobg=
-X-Received: by 2002:a05:6214:4345:b0:6cb:50d0:56ae with SMTP id
- 6a1803df08f44-6cbc932ef6dmr16821266d6.29.1728439052257; Tue, 08 Oct 2024
- 18:57:32 -0700 (PDT)
+ bh=sEhQc3cQiJT5xvctmikPxeam7xx+bKN513P6/xcFIzI=;
+ b=Sz2NMN6mIhuNsTXpVmI0R0tVyiCe1fDQT+dNgNrNB0InOHQm3lxBNRV+kEn3kY9nfi
+ acetN3B/c4gns+NmYA/fy188wmWKGofac0GeSECGOXSrePk1D2K3lQTm676oxssFROKO
+ C0ktvfxu3EjMjPRkRdPHJkYXhy64P9/fo4kSVulSpSC71gS4jRnrT8v+L8Rqw1ptB9CC
+ LBTI5caXdyqSvcA5CFBgeTiRAPcZ4LOrfnhqETol+p/qXoLd3a2yPP7XCqH/H43LDasm
+ li1fBwOy4iQRjxeAsQNSZjQLcma4ifuF9Rho85pds3iRI3sXFYUukB0Y93nZVQ2qlpfr
+ He+A==
+X-Gm-Message-State: AOJu0Yxs3alRIv5cjINtHm94E/cxE5RiX10JdI1JqW5x3L4Uhu2Zux6G
+ YOv2q0TX5tLrL4bGitXT3C3rd8hb4rIIVa/X6RY4pCADQEQyTywNLExQAqFQQ0L0MSC9KjWdBIL
+ C1wuIweKAwrKOHX8rxQUV+wQc2YUahjHdFRxf
+X-Google-Smtp-Source: AGHT+IG2c9xtqJ8Xc4XmvgP3Sz3VDuMPfQ3NyPCo/ugXlwCwtAFBwQkK0MVahGbT64pL2qMXD0VzPTo5ZKvCI2cYmaI=
+X-Received: by 2002:a05:6214:2b9b:b0:6c3:5e7c:8613 with SMTP id
+ 6a1803df08f44-6cbc9304727mr15883236d6.16.1728439056294; Tue, 08 Oct 2024
+ 18:57:36 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241008191834.2190270-1-jonas@kwiboo.se>
-In-Reply-To: <20241008191834.2190270-1-jonas@kwiboo.se>
+References: <20240929092739.2513768-1-daniel@0x0f.com>
+ <172839506989.112860.11166419458122902632.b4-ty@konsulko.com>
+In-Reply-To: <172839506989.112860.11166419458122902632.b4-ty@konsulko.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 8 Oct 2024 19:57:21 -0600
-Message-ID: <CAFLszTh-9XqRK1ETioXw=25fmzfdXnsXEwxtqjvUCKjytWJSUQ@mail.gmail.com>
-Subject: Re: [PATCH v2] Revert "mmc: dw_mmc: Extract FIFO data transfer into a
- separate routine"
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
- Tom Rini <trini@konsulko.com>, Sam Protsenko <semen.protsenko@linaro.org>, 
- Minkyu Kang <mk7.kang@samsung.com>, u-boot@lists.denx.de
+Date: Tue, 8 Oct 2024 19:57:25 -0600
+Message-ID: <CAFLszTiY7=hcg=5t6w0RfXs=C3NUMQXJkVs8PZyE281NTK_D3A@mail.gmail.com>
+Subject: Re: [PATCH] cmd: Make bootvx independent of bootelf
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Daniel Palmer <daniel@0x0f.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,43 +82,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 8 Oct 2024 at 13:18, Jonas Karlman <jonas@kwiboo.se> wrote:
->
-> The commit 0252924ac6d4 ("mmc: dw_mmc: Extract FIFO data transfer into a
-> separate routine") unintentionally changed behavior of the FIFO data
-> transfer routine.
->
-> When data is read and size reaches 0 the original loop would wait on
-> DWMCI_INTMSK_DTO or timeout. The remaining size to read and buf position
-> is no longer tracked across dwmci_data_transfer_fifo() calls and because
-> of this an extra call to fifo() and dwmci_fifo_ready() may now trigger a
-> FIFO underflow timeout error and slows down FIFO reading.
->
->   Buswidth = 4, clock: 50000000
->   Sending CMD16
->   Sending CMD17
->   dwmci_fifo_ready: FIFO underflow timeout
->   Sending CMD16
->   Sending CMD18
->   dwmci_fifo_ready: FIFO underflow timeout
->   Sending CMD12
->   ## Checking hash(es) for config config-1 ... OK
->
-> This reverts commit 0252924ac6d4af69061bb9589d16b30c5bdb7178 to restore
-> the old working behavior.
->
-> Fixes: 0252924ac6d4 ("mmc: dw_mmc: Extract FIFO data transfer into a separate routine")
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> ---
-> Changes in v2:
-> - Change to revert the offending commit, both size and buf where reset
->   between fifo() calls, easier to do a full revert.
-> - R-b tag not collected because of this being a different patch.
->
-> Reading FIT from SD-card take ~20-30 seconds on a Rockchip RK3328 board
-> without this reverted, and goes back to sub second once reverted.
-> ---
->  drivers/mmc/dw_mmc.c | 103 ++++++++++++++++++++++---------------------
->  1 file changed, 52 insertions(+), 51 deletions(-)
+Hi,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Tue, 8 Oct 2024 at 07:45, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Sun, 29 Sep 2024 18:27:39 +0900, Daniel Palmer wrote:
+>
+> > There are lots of usecases for running baremetal ELF
+> > binaries via bootelf but if you enable bootelf you
+> > get bootvx as well and you probably don't want or need
+> > it.
+> >
+> > Hide bootvx behind it's own configuration option.
+> >
+> > [...]
+>
+> Applied to u-boot/master, thanks!
+
+It looks like my review here was missed?
+
+Regards,
+SImon
