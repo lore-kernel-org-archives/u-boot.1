@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BF50CEDD93
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 13:34:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 730EACEDD97
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 13:50:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 998FF891FC;
-	Wed,  9 Oct 2024 15:34:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=devpi.de
+	by phobos.denx.de (Postfix) with ESMTP id 94B8289229;
+	Wed,  9 Oct 2024 15:50:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=devpi.de header.i=@devpi.de header.b="eC335JDr";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XljitVMz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9463891E6; Wed,  9 Oct 2024 15:34:47 +0200 (CEST)
-Received: from smtp6.goneo.de (smtp6.goneo.de [IPv6:2001:1640:5::8:31])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7F7468922B; Wed,  9 Oct 2024 15:50:18 +0200 (CEST)
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [IPv6:2a00:1450:4864:20::235])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1A8F891FC
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 15:34:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 885F5891F1
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 15:50:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=devpi.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=lehmanju@devpi.de
-Received: from hub1.goneo.de (hub1.goneo.de [85.220.129.52])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits))
- (No client certificate requested)
- by smtp6.goneo.de (Postfix) with ESMTPS id 7F1C7240EDD;
- Wed,  9 Oct 2024 15:34:44 +0200 (CEST)
-Received: from hub1.goneo.de (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits))
- (No client certificate requested)
- by hub1.goneo.de (Postfix) with ESMTPS id D314224087A;
- Wed,  9 Oct 2024 15:34:42 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=devpi.de; s=DKIM001;
- t=1728480882;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=h08xnNDbihJk6S0nSkxnn1G79bBYZ6fseMvpM4o5G3k=;
- b=eC335JDrZou3+EuVEEWneI7GznEWcdeCYBcRKZwsbZoikZPhV2lRQuk7VbPE3QKDBFM/LJ
- 7mEnmXxVa1Tt6R9VTg1Qa3Ivn7E44p5IbDnxOk2/kTm8bUk9pPnTh1i6xLFzpU8VIVCsPd
- EjRgEbK9A1Fm73t/uF6XLUjZ1kd4uJ4PDRvWmEFaCIkOhjzEXZZhSsIw8iUnw5bbPzbdfb
- ny9CQ2Qg0fK1RzcKwZ6kyt1FBPpzJ6/Iuvr2cDii2unBFakJYT9ZZZavqgGJ35FF1aVb/l
- l5evGaGwYBb4lBDvek6KNk/ANo5FyTf9jI1FyF5FC8yPgGUGirFElbho8ej0Aw==
-Received: from [IPV6:2003:cb:ef39:8710::193]
- (p200300cbef3987100000000000000193.dip0.t-ipconnect.de
- [IPv6:2003:cb:ef39:8710::193])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by hub1.goneo.de (Postfix) with ESMTPSA id 93FE0240802;
- Wed,  9 Oct 2024 15:34:42 +0200 (CEST)
-Message-ID: <efa678ca-97e8-4dc0-8969-eb97cc97c542@devpi.de>
-Date: Wed, 9 Oct 2024 15:34:42 +0200
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-2fac275471dso8976661fa.0
+ for <u-boot@lists.denx.de>; Wed, 09 Oct 2024 06:50:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1728481815; x=1729086615; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VeKyTmgEKq3XdCHdF7vO/gqYPIjgUYH7UOMxZbFUhT8=;
+ b=XljitVMzHYalyxndZgjpbjrMRiZzVlqeR2y+5mWp/7dnJEG/SvbeMe4elFiHgc1kQO
+ vk8HDcRdSdfUpn4Y6+pqcS1gCObd+H/7hS2LTu/aPZEwO29eYfc0myfrZBJo/qnsjD8M
+ 7GnIjLrLzmhn9qVcYdyC998w1KwbrXmjvgH07RrW7nlO9PD396oa0RjmkmDKWzNV0ypy
+ plD1pSk6kCJhlBpXcGdaXyFsegaXaEEcZ5ZZ6shIjoK5LHm3U8ioz0tIrARwgn3tLtSs
+ IEdnC9VJdcxUAeA9rrdTFbxEuoFbxCnJ1P3Dcd/YBfFSvW+9kXOnd1tx0c9HO+xmakSF
+ pTDQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728481815; x=1729086615;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=VeKyTmgEKq3XdCHdF7vO/gqYPIjgUYH7UOMxZbFUhT8=;
+ b=JnhA/O7GAWldowXF5GStdaMeg882yW0VKtxmtxtmHnhREUlUlp/PjN+eceP+NJIzGp
+ YS4WzrHvxaG2X2aqX9oS50tKVmH4Jh73I3vrA4Aaef8vr/2mcPSEYHF3Qp/n//h6fmjd
+ ved8on6miKDUCgH7QUW651qcPsIwAEZwokOQBjECQX3P7x6Lfzrik7Wx4ueVKgbOmS/B
+ 1qH84bFiqVwUZOZUEsjtUI4QVzcdUUo7npdfpbGkb0tVba6gE6XOK3ER4LO1mpIIGL9r
+ uIjO8ENxCIZaxbRasla0BDCLuuIhDmNRUyIYZcRIZD+L6ansr7mUjDmammjxgw0Uufq2
+ DdpA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXWF1il/mcHF3NrkKIBXVxCK9+ihgKoQPJ9w/1cNKqUKLnIwaDHHzG7j6wOwL9zPYsOxTpqdTo=@lists.denx.de
+X-Gm-Message-State: AOJu0YzCfGuJo5KNi9SmjQy3zACcNs2I9OKzMRFUgNb3NaDt+sGgKqqi
+ Yl2k0KCyK86H6gJcwJDpTFgHqRwI/Fwsic6DAdxwOIjM6oY2MHnYwDO9Bv3Xd6oul3PGF8qyMNh
+ m1RthgITWWH4OSRLbFiTsl77LDPg=
+X-Google-Smtp-Source: AGHT+IGxzZ0OV3+egcHzsZ+UQqrDFtzhExQJilFCeJXJdjV2/lOVhO3GY/OhJJQwXoU8SAmWVcMlKKWzwKx1u4njBhQ=
+X-Received: by 2002:a2e:be8c:0:b0:2fa:cfba:fb65 with SMTP id
+ 38308e7fff4ca-2fb0de6977cmr23425711fa.3.1728481814470; Wed, 09 Oct 2024
+ 06:50:14 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] clk: stub: add sm8150 compatible id
-To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>
-Cc: u-boot@lists.denx.de
-References: <20241009-clk-stub-sm8150-v1-1-697313752979@devpi.de>
-Content-Language: en-US
-From: Julius Lehmann <lehmanju@devpi.de>
-In-Reply-To: <20241009-clk-stub-sm8150-v1-1-697313752979@devpi.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Rspamd-UID: 6b2ca4
-X-Rspamd-UID: 1b3024
+References: <20241009-imx93qsb-v1-0-50a4ac53ccc4@nxp.com>
+ <20241009-imx93qsb-v1-2-50a4ac53ccc4@nxp.com>
+In-Reply-To: <20241009-imx93qsb-v1-2-50a4ac53ccc4@nxp.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Wed, 9 Oct 2024 10:50:02 -0300
+Message-ID: <CAOMZO5D43j6qRuzSd2hC+JRdQav6YT135vd7ioVMOVd+czhkZQ@mail.gmail.com>
+Subject: Re: [PATCH 2/2] imx: Support i.MX93 9X9 QSB board
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Cc: Stefano Babic <sbabic@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,36 +91,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 09.10.24 11:49, Julius Lehmann wrote:
-> Add support for sm8150 clock controller to clk stub driver.
->
-> ---
-> Simple patch to extend the clk stub driver to support binding to sm8150 clock controllers.
->
-> Signed-off-by: Julius Lehmann <lehmanju@devpi.de>
-> ---
->   drivers/clk/clk-stub.c | 1 +
->   1 file changed, 1 insertion(+)
->
-> diff --git a/drivers/clk/clk-stub.c b/drivers/clk/clk-stub.c
-> index ea817031fa6c0cc1ea21000273b5651be5d05e65..76df9e3aba0e664fdaab8431f7909dda52ceb795 100644
-> --- a/drivers/clk/clk-stub.c
-> +++ b/drivers/clk/clk-stub.c
-> @@ -50,6 +50,7 @@ static struct clk_ops stub_clk_ops = {
->   
->   static const struct udevice_id stub_clk_ids[] = {
->   	{ .compatible = "qcom,rpmcc" },
-> +	{ .compatible = "qcom,sm8150-rpmh-clk" }
-crap, missed a "," here, will fix this in v2
->   	{ .compatible = "qcom,sm8250-rpmh-clk" },
->   	{ .compatible = "qcom,sm8550-rpmh-clk" },
->   	{ .compatible = "qcom,sm8650-rpmh-clk" },
->
-> ---
-> base-commit: d0f74bd417daf6492975ce346843ba0767caf51c
-> change-id: 20241009-clk-stub-sm8150-b7a29e0f43ba
-> prerequisite-message-id: 20240909-b4-clk-stub-v3-0-ef09307534d5@linaro.org
-> prerequisite-patch-id: 01b791d83c26250b3ff485045b88d5889f911bb8
-> prerequisite-patch-id: 66febbc73195c71535e2423d14f1ff6994ac36cd
->
-> Best regards,
+On Wed, Oct 9, 2024 at 4:27=E2=80=AFAM Peng Fan (OSS) <peng.fan@oss.nxp.com=
+> wrote:
+
+> +&usdhc2 {
+> +       bootph-pre-ram;
+> +       bootph-some-ram;
+> +       fsl,signal-voltage-switch-extra-delay-ms =3D <8>;
+
+Why is 'fsl,signal-voltage-switch-extra-delay-ms' a U-Boot-only property?
+
+How does kernel handle usdhc2 without this property?
+
+> +#include <usb.h>
+> +#include <dwc3-uboot.h>
+
+I don't see USB support in this file.
+
+> +
+> +DECLARE_GLOBAL_DATA_PTR;
+> +
+> +#define UART_PAD_CTRL  (PAD_CTL_DSE(6) | PAD_CTL_FSEL2)
+> +#define WDOG_PAD_CTRL  (PAD_CTL_DSE(6) | PAD_CTL_ODE | PAD_CTL_PUE | PAD=
+_CTL_PE)
+> +
+> +static iomux_v3_cfg_t const uart_pads[] =3D {
+> +       MX93_PAD_UART1_RXD__LPUART1_RX | MUX_PAD_CTRL(UART_PAD_CTRL),
+> +       MX93_PAD_UART1_TXD__LPUART1_TX | MUX_PAD_CTRL(UART_PAD_CTRL),
+> +};
+> +
+> +int board_early_init_f(void)
+> +{
+> +       imx_iomux_v3_setup_multiple_pads(uart_pads, ARRAY_SIZE(uart_pads)=
+);
+
+With DM_SERIAL, there is no need for UART board code and watchdog
+IOMUX settings.
+
+
+> +int board_phy_config(struct phy_device *phydev)
+> +{
+> +       if (phydev->drv->config)
+> +               phydev->drv->config(phydev);
+
+Is this really needed?
+
+> +       val =3D ret;
+> +
+> +       if (is_voltage_mode(VOLT_LOW_DRIVE)) {
+> +               buck_val =3D 0x0c; /* 0.8v for Low drive mode */
+
+The unit for Volt is V with a capital letter. Please fix it globally.
+
+> +.. SPDX-License-Identifier: GPL-2.0+
+> +
+> +imx93_9x9_qsb
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +
+> +U-Boot for the NXP i.MX93 Quick Starter Board
+
+In the commit log you put "Quick Start". Please be consistent.
+
+> +Build U-Boot
+> +------------
+> +
+> +.. code-block:: bash
+> +
+> +   $ export CROSS_COMPILE=3Daarch64-poky-linux-
+> +   $ make imx93_9x9_qsb_defconfig
+
+Please also explain when imx93_9x9_qsb_inline_ecc_defconfig could be
+used, the difference between the two defconfigs, etc.
+
+> +config IMX9_DRAM_INLINE_ECC
+> +       bool "Enable DDR INLINE ECC feature"
+> +       default n
+
+default n is already the default. Just remove it.
+
+> +/* Initial environment variables */
+> +#define CFG_EXTRA_ENV_SETTINGS         \
+> +       BOOTENV \
+> +       "prepare_mcore=3Dsetenv mcore_clk clk-imx93.mcore_booted;\0" \
+> +       "scriptaddr=3D0x83500000\0" \
+> +       "kernel_addr_r=3D" __stringify(CONFIG_SYS_LOAD_ADDR) "\0" \
+> +       "image=3DImage\0" \
+
+Please move it to a .env file instead.
