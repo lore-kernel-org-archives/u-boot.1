@@ -4,73 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF8D8CF042D
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 01:56:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B8B2CF042D
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 01:56:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29529890CC;
-	Wed,  9 Oct 2024 03:55:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 81DB2890D9;
+	Wed,  9 Oct 2024 03:55:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NuyhzMWz";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EWzaJcPy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7984B890C9; Wed,  9 Oct 2024 03:55:33 +0200 (CEST)
-Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
- [IPv6:2607:f8b0:4864:20::431])
+ id 15146890DA; Wed,  9 Oct 2024 03:55:44 +0200 (CEST)
+Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
+ [IPv6:2607:f8b0:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A82F89017
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 03:55:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F3F6789017
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 03:55:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-71def715ebdso3104732b3a.2
- for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 18:55:31 -0700 (PDT)
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-71def715ebdso3104830b3a.2
+ for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 18:55:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728438930; x=1729043730; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ssE3YN2d1hqlssUsax134Jo6cDyIuD45xldJatWeChE=;
- b=NuyhzMWzct8cSCzU7yj5Ekk7MAy1ZJH/JCicqWRErZZXDq2MMdFYGRUGgSiJVKwQDr
- FhCLutsXn/EA7Bk5yooAd7Zmy5p1tTEa96cz4Pbl2blXGRdh+OQtOiP2M/P82+k+ILMv
- SEyrTAV/14TcHj9Ie5+gOVzESZUbCpw+C6x5Q=
+ d=chromium.org; s=google; t=1728438938; x=1729043738; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=aGDawDTk3FRyp0+xN5V9DS9UMt3QXW0jFt5A1qhOstQ=;
+ b=EWzaJcPy39opAaTUNrbI4hML5QbBIlpKMQ4YUTQal7iR3KeNAHwH9UkxCLXiVQ1la7
+ U1kM2Aikn/7tzahbDydyfH3sfYrtpyr+B+693bv2XO+RXLbTR3n90ZdEYyGznJXJfYr1
+ 13DdfG3SIRLYV+A7p2SzKSZpxDRtBv0QVNM5c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728438930; x=1729043730;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ssE3YN2d1hqlssUsax134Jo6cDyIuD45xldJatWeChE=;
- b=Q8/FxxMp9mpx/giEO8er9fTmgQmXRNRiHMQMiCRb52/3ih/WOVXEzeqm/UZI7boL7V
- ACsRyDRAW1+uGUxJFhEfvA8rVRI4ZucF4O8yXbCq2i+yJWIQwkDe7O66DKNOZi3j8bLp
- 9bomUfg9I9u0DL7IT4EQJXJmBpsNB9pHrgENmpxul8GwHnBJl+i3Cz9Lmf6SF45n6Y+A
- UX6FOTrB5UeThc6habbFbB7wRjUKBAx5U032Fzb0PbUxj6KJpfqDQfeKgjS5erlKdKfi
- 34XqZqh+nJH9f/USqU7l+fPEGr9NVLrXEIEkBs0f4xYvo46WtSF3Fw0tREcRT9NdEeR8
- yE2w==
+ d=1e100.net; s=20230601; t=1728438938; x=1729043738;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=aGDawDTk3FRyp0+xN5V9DS9UMt3QXW0jFt5A1qhOstQ=;
+ b=oJr3BFjXbeOkQC0v7Ox+/TSps46GuMfDB56tcq6shaowKS6eY5bdksRFUCCvroPEYt
+ P1e8mQEKPbKVpVVrbUVjm9pvP/hwHa/Nchu3rgulrpeyI04UeShzaJEXNksj2alcMGEp
+ sIRwNf9rzYDYHSGMMcRQqbcEfaYG6G6OX1k2PctL2xa+9Z8DukKAGLP8aXvta5bXGSuv
+ BEgjNHMYS5cQl5E3Okq1x6wlPLGQEJDtcAKrOJFCmuT+zgNPF+2ekoYnuwmuMv9o8Pwp
+ +3+eHixNXVzK3M4hbwurtx5laYVORyHmCmFdZSUCTBX5oKMzSL/eWqqDxDg+4yUKZtsH
+ 8ojg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXnqm3xItQZG2BBg64/Lkdx9NA680RxeALVICKhOHxs/hTccUHIxo/CHx5x8GfHNUXqIHo/jlM=@lists.denx.de
-X-Gm-Message-State: AOJu0YwbTDZwOGpQOx99dp2RTgxIAtqwz57JKuSby/CQx76AgLJLrFf6
- HiHjNnYGNVk0RrQORdc8WI7COeUvG4I9Ozl1MrID//86150HCGguHmlOP0T8fs89GDveiaZtMfM
- Y5BVgAGx61h+XvdVOffzlqf37yqsjCzCMemjoGB/HSuTgAQBj+w==
-X-Google-Smtp-Source: AGHT+IGxiNXPstqPFqL0GD+ubXMDi0CvjGS466HTQn5OVstRkOhzFeIPIatF2+h0aruWUY4Iv1T6W4aPUdsOvZT3XZs=
-X-Received: by 2002:a05:6a00:1894:b0:71d:ee1b:c851 with SMTP id
- d2e1a72fcca58-71e1db737ddmr1402901b3a.7.1728438929680; Tue, 08 Oct 2024
- 18:55:29 -0700 (PDT)
+ AJvYcCVF8ixNz9Nsqb0y27YwGGCFAEcaDPNy2u9hfvMyVWXvH8FxqCD4IgV2z7lo1CHeoFXZzQnpodU=@lists.denx.de
+X-Gm-Message-State: AOJu0YyJiL11W0uTLnI6PRMxvLMJug4/4BEJeG4lvqS7QTcrbyqeEwWw
+ V9qE+JCNsz79vDdAGjjAIVvYPb5wXm9isq1rxknBKrZ2o9FLsAyuaD/G3Z+Fn78BuQnK7Hsj9q7
+ FbrHyPT8kcQo5MGya4hqbc+OF9QJha1InAu5tKhVNQ6fmfAwrOw==
+X-Google-Smtp-Source: AGHT+IH+VmJGLSivg4ezaAPoZLElEDqrdNxhCzvcF3rXG8i+Pmi74s4ZwjbI9fzrfpBKxmpsjq+sMMCLYgf+Uui2lPg=
+X-Received: by 2002:a05:6a21:2d89:b0:1d6:e673:9bf6 with SMTP id
+ adf61e73a8af0-1d8a3be3701mr1852880637.10.1728438938495; Tue, 08 Oct 2024
+ 18:55:38 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241005191353.1927660-1-andriy.shevchenko@linux.intel.com>
- <20241005191353.1927660-5-andriy.shevchenko@linux.intel.com>
-In-Reply-To: <20241005191353.1927660-5-andriy.shevchenko@linux.intel.com>
+References: <20241007130109.227305-1-brian.ruley@gehealthcare.com>
+In-Reply-To: <20241007130109.227305-1-brian.ruley@gehealthcare.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 8 Oct 2024 19:55:16 -0600
-Message-ID: <CAFLszThNc-N9+PC9AvSknpGZ66GsfW1Tscd3c5XRvx8kjdBj+g@mail.gmail.com>
-Subject: Re: [PATCH v1 4/4] x86: cpu: Add missing header inclusion
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Bin Meng <bmeng.cn@gmail.com>
+Date: Tue, 8 Oct 2024 19:55:26 -0600
+Message-ID: <CAFLszTj26G9WatN_fmksAkT4wiZfQ=sAnT8Ny5bZAfc55eYgCw@mail.gmail.com>
+Subject: Re: [PATCH] WIP: binman: expand test coverage to nxpimx8mcst
+To: Brian Ruley <brian.ruley@gehealthcare.com>
+Cc: Tom Rini <trini@konsulko.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ ian.ray@gehealthcare.com, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,43 +84,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 5 Oct 2024 at 13:14, Andy Shevchenko
-<andriy.shevchenko@linux.intel.com> wrote:
+Hi Brian,
+
+On Mon, 7 Oct 2024 at 07:02, Brian Ruley <brian.ruley@gehealthcare.com> wrote:
 >
-> Without asm/cpu_x86.h inclusion a compiler is not happy:
+> Add coverage for IMX8M code siging. Create PKI tree and other assets
+> required by `cst' using `hab4_pki_tree.sh' script in `cst_3.4.1' [1].
 >
->   arch/x86/cpu/cpu_x86.c:14:5: warning: no previous prototype for =E2=80=
-=98cpu_x86_bind=E2=80=99 [-Wmissing-prototypes]
->   arch/x86/cpu/cpu_x86.c:29:5: warning: no previous prototype for =E2=80=
-=98cpu_x86_get_vendor=E2=80=99 [-Wmissing-prototypes]
->   arch/x86/cpu/cpu_x86.c:41:5: warning: no previous prototype for =E2=80=
-=98cpu_x86_get_desc=E2=80=99 [-Wmissing-prototypes]
->   arch/x86/cpu/cpu_x86.c:55:5: warning: no previous prototype for =E2=80=
-=98cpu_x86_get_count=E2=80=99 [-Wmissing-prototypes]
+> [1] https://www.nxp.com/webapp/Download?colCode=IMX_CST_TOOL_NEW
 >
-> Add missing header inclusion.
->
-> Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+> Signed-off-by: Brian Ruley <brian.ruley@gehealthcare.com>
 > ---
->  arch/x86/cpu/cpu_x86.c | 1 +
->  1 file changed, 1 insertion(+)
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
-
+>  tools/binman/ftest.py                   |  4 ++
+>  tools/binman/test/336_nxp_imx8mcst.dts  | 58 +++++++++++++++++++++++++
+>  tools/binman/test/cst/keys/key_pass.txt |  2 +
+>  3 files changed, 64 insertions(+)
+>  create mode 100644 tools/binman/test/336_nxp_imx8mcst.dts
+>  create mode 100644 tools/binman/test/cst/keys/key_pass.txt
 >
-> diff --git a/arch/x86/cpu/cpu_x86.c b/arch/x86/cpu/cpu_x86.c
-> index 6c53f0ea821f..6c32ae499df3 100644
-> --- a/arch/x86/cpu/cpu_x86.c
-> +++ b/arch/x86/cpu/cpu_x86.c
-> @@ -7,6 +7,7 @@
->  #include <dm.h>
->  #include <errno.h>
->  #include <asm/cpu.h>
-> +#include <asm/cpu_x86.h>
->  #include <asm/global_data.h>
+> diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+> index 93f3d22cf5..f1c052a7f8 100644
+> --- a/tools/binman/ftest.py
+> +++ b/tools/binman/ftest.py
+> @@ -7690,6 +7690,10 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+>              # Make sure the other node is gone
+>              self.assertIsNone(dtb.GetNode('/node/other-node'))
 >
->  DECLARE_GLOBAL_DATA_PTR;
+> +    def testNxpImx8mCst(self):
+> +        """Test that binman can sign an iMX8M image"""
+> +        self._DoTestFile('336_nxp_imx8mcst.dts')
+> +
+>
+>  if __name__ == "__main__":
+>      unittest.main()
+> diff --git a/tools/binman/test/336_nxp_imx8mcst.dts b/tools/binman/test/336_nxp_imx8mcst.dts
+> new file mode 100644
+> index 0000000000..6cfefdae2a
+> --- /dev/null
+> +++ b/tools/binman/test/336_nxp_imx8mcst.dts
+> @@ -0,0 +1,58 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +
+> +/dts-v1/;
+> +
+> +/ {
+> +       #address-cells = <1>;
+> +       #size-cells = <1>;
+> +
+> +       binman {
+> +               nxp-imx8mcst {
+> +                       args;   /* Needed by mkimage etype superclass */
+> +                       filename = "test-fit.signed.bin";
+> +                       nxp,loader-address = <0x10>;
+> +            nxp,srk-table = "tools/binman/test/cst/crts/SRK_table.bin";
+> +            nxp,img-crt = "tools/binman/test/cst/crts/IMG1_1_sha256_4096_65537_v3_usr_crt.pem";
+> +            nxp,csf-crt = "tools/binman/test/cst/crts/CSF1_1_sha256_4096_65537_v3_usr_crt.pem";
+
+Please can you check the indentation?
+
+I don't see the .pem files in your patch?
+
+Also we should really tidy up the etype so that it can read keys from
+the input path, or perhaps use an entryarg to point to the file.
+Having paths in the image description is not ideal.
+
+> +
+> +            fit {
+> +                description = "test desc";
+> +                           filename = "test-fit.itb";
+> +                #address-cells = <1>;
+> +
+> +                images {
+> +                    u-boot {
+> +                        description = "test u-boot";
+> +                        type = "standalone";
+> +                        arch = "arm64";
+> +                        os = "u-boot";
+> +                        compression = "none";
+> +                        load = <00000000>;
+> +                        entry = <00000000>;
+> +
+> +                        u-boot-nodtb {
+> +                        };
+> +                    };
+> +
+> +                    fdt-1 {
+> +                        description = "test fdt";
+> +                        type = "flat_dt";
+> +                        compression = "none";
+> +
+> +                        u-boot-dtb {
+> +                        };
+> +                    };
+> +                };
+> +
+> +                configurations {
+> +                    default = "config-1";
+> +                    config-1 {
+> +                        description = "test config";
+> +                        fdt = "fdt-1";
+> +                        firmware = "u-boot";
+> +                    };
+> +                };
+> +            };
+> +        };
+> +       };
+> +};
+> diff --git a/tools/binman/test/cst/keys/key_pass.txt b/tools/binman/test/cst/keys/key_pass.txt
+> new file mode 100644
+> index 0000000000..dec2cbe1fa
+> --- /dev/null
+> +++ b/tools/binman/test/cst/keys/key_pass.txt
+> @@ -0,0 +1,2 @@
+> +test
+> +test
 > --
-> 2.43.0.rc1.1336.g36b5255a03ac
+> 2.39.5
 >
+
+Regards,
+Simon
