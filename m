@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9638ECF042F
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 01:58:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6BCBCF042F
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 01:58:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3897889110;
-	Wed,  9 Oct 2024 03:57:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9D59F88DBF;
+	Wed,  9 Oct 2024 03:57:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fSaFzS0u";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="S1CAIuIE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2037489126; Wed,  9 Oct 2024 03:57:05 +0200 (CEST)
-Received: from mail-vs1-xe36.google.com (mail-vs1-xe36.google.com
- [IPv6:2607:f8b0:4864:20::e36])
+ id 1D8B988FCE; Wed,  9 Oct 2024 03:57:25 +0200 (CEST)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E5C0890F7
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 03:57:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0598482BA7
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 03:57:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-vs1-xe36.google.com with SMTP id
- ada2fe7eead31-4a3075662b6so2208569137.1
- for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 18:57:03 -0700 (PDT)
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-6cb97afcec9so44522506d6.2
+ for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 18:57:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728439022; x=1729043822; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1728439042; x=1729043842; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=n4r1ZLz7BBtjCnUFs8BOd/sFDM2Oe4ncTeL5RTkav7Y=;
- b=fSaFzS0uXok831niIf1bnucUIDyIdgE7oOWz8ZUbYsWx5kFe/DFNouwMu5eH8NAB3j
- 6Zdkj9F4HJ+oyn7Kv9mjDYjDu/dVyF1wpUpLzupxa2+y5mxUfKaD0y9m++2nCRA4EkMv
- Sn5BX8gAxDjfCdOJW5TGkVE9J9I7OSCg9zT50=
+ bh=QrToeNnLWhFCXBrJowlGUS3xYHP8LEVTARehmFhUZ4M=;
+ b=S1CAIuIEyDZJoW7mJst5x4OOimnnNmi7i9IeauOhrZXNuio9tnc0qou3EqYW3EYK1p
+ o0+pfqLJOLljB3vei2STKN4IFeWnKpmFyf1AL5BP7LYAbivnxcVlH0yUbxPFum6DNSZ2
+ 8TNH8s58rV04pUn6gmNQWKZ9FZpzqH+Wml6To=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728439022; x=1729043822;
+ d=1e100.net; s=20230601; t=1728439042; x=1729043842;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=n4r1ZLz7BBtjCnUFs8BOd/sFDM2Oe4ncTeL5RTkav7Y=;
- b=GIvLiVAxt81I/kbenEuvcSZGS3BgMs/zaykuj48rBd44Dla1F6h4I7GGO3i4MYEnVB
- HsElREARzEiP/xg5Cb49Cv/yzvkvooh0PYM5aeJbejdM9CDWm9me0SFvkSVh83BVi0H5
- MGs4Szhiv7RlhdA9V3uzcIIake2Vvn05P3bMJ/IJWdiqpqBG154FZoKROMKBEj68Q9Ef
- 6Dk3NpSbxeQ7Q1MQlqyfOVhI7zkAFLSHY5mC7+cibIfmGXJrcXThx+M/oiGTwIkFDRkd
- N/j+kK1eAhkFu/GjeV7aN76HeBoPmhAWktJN/KWg6oNoTold23JTE/Lwa5MDdRQ8meDw
- Wk8A==
+ bh=QrToeNnLWhFCXBrJowlGUS3xYHP8LEVTARehmFhUZ4M=;
+ b=MKyGtCXVkhIQkuRCA6TU5U0e8U11tG2k696+1jWDJJzs6J2BsSZLqBrmC45y3w6WQr
+ vWzp060Lla9GO6utprb6Y9l5nuFB4VtpWvckfpxaEBipg422q7Oz0jgdFuwtHrv+54OB
+ kcvrhWOZf0NXfhjNHVMcqfdEKG53IEX1WnWSqhfoNTny9P8taYn9FxRjS+2jJ8EIlUKF
+ VVr/QTzfTIYMGLie2ibcFQ3UhAq3AmIaywVaZveFwVVJF9sRHx767+rpQYNA+htWw1IP
+ xSrHf2o+ZN+cAHXf+qX3xTbImF3DL3IVlqRxzHYatMIq333TeYSYQBJe7ve/95Y7SpTz
+ thQw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWTYo9N+5oa634K0+poQlvaes5rwlM7D/AMAKYiZ5FPRHvy6KXK0AlPHcWdOaYdGiEkjGBkNDw=@lists.denx.de
-X-Gm-Message-State: AOJu0YyKmJR6mOKlVm8/OBrLZryu4qobILP6pXB0E2XxZVlKFWkUSXxV
- bybuMne4gzS8YqBcaXOfWohUCTft/TL7yl1O/VvNH34Og8DF5WtKy/0Gp7mi2uF77+v8qDrfUfS
- eqD4hbBehEcV1i4BVfbzKc039hiQ+TFufJINp
-X-Google-Smtp-Source: AGHT+IF+Yiwei8AxJ/IG6XNTm74bjruuKA8bMjEMYFHOIh9qZQs7O2zazbPrb0+tcf3ObvFZ09+BcLhz/a8CMjZtr70=
-X-Received: by 2002:a05:6102:370c:b0:4a3:3d4f:edd2 with SMTP id
- ada2fe7eead31-4a448d7d503mr1226488137.17.1728439021866; Tue, 08 Oct 2024
- 18:57:01 -0700 (PDT)
+ AJvYcCVCGixHNnmWVG/dWQzJEhAwnOYVa2xR25Uy8ewxxMRC8r2a3fWc0kUaD/QQaIERZlBqMnlSPKQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YzywW9CM3X9irRrtZxmVHzaT+BC1F/TBYNYf+l146FOVC4e888R
+ g/q/OJgBvn33zHnv3ydldNpFzSpA9etgC4O/DILkYACP/Lbj7gFKPdSQk0La0F2+Nl29j/ZCEkm
+ ivCOPk2IGY6XTEUsbrakOXr8nvUQfStBnt11i
+X-Google-Smtp-Source: AGHT+IFxmwduG9fUnrkNd1X4nGAgCXedTXlCGuOpGBBqnlMYtQJq18wkHkuzgZHE6VobpEvW4eh845LT6ko0F8TtWpM=
+X-Received: by 2002:a05:6214:5404:b0:6cb:83a5:8403 with SMTP id
+ 6a1803df08f44-6cbc95d8082mr15947626d6.50.1728439041966; Tue, 08 Oct 2024
+ 18:57:21 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241008-android_ab_master-v3-0-f292c45a33e4@salutedevices.com>
- <20241008-android_ab_master-v3-2-f292c45a33e4@salutedevices.com>
-In-Reply-To: <20241008-android_ab_master-v3-2-f292c45a33e4@salutedevices.com>
+References: <20241006095228.2800776-1-alice.guo@oss.nxp.com>
+ <20241007170551.GB4737@bill-the-cat>
+ <PAXPR04MB8459A692CF21AA616DCDA7BA887E2@PAXPR04MB8459.eurprd04.prod.outlook.com>
+In-Reply-To: <PAXPR04MB8459A692CF21AA616DCDA7BA887E2@PAXPR04MB8459.eurprd04.prod.outlook.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 8 Oct 2024 19:56:46 -0600
-Message-ID: <CAFLszTjW+a=jNvktZdix4LZmkVBr6WmyzQMuramf5rqMN_-Xsw@mail.gmail.com>
-Subject: Re: [PATCH v3 2/6] treewide: bcb: move ab_select command to bcb
- subcommands
-To: Dmitry Rokosov <ddrokosov@salutedevices.com>
-Cc: Igor Opaniuk <igor.opaniuk@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, Tom Rini <trini@konsulko.com>, 
- "Andrew F. Davis" <afd@ti.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Mario Six <mario.six@gdsys.cc>, 
- u-boot@lists.denx.de, u-boot-amlogic@groups.io, rockosov@gmail.com, 
- kernel@salutedevices.com
+Date: Tue, 8 Oct 2024 19:57:11 -0600
+Message-ID: <CAFLszTiAU2QR2nkuk+tX3XTCy1YU8V0V1tP2i8OHODs_HXx0BQ@mail.gmail.com>
+Subject: Re: [PATCH v1] arm: global_data: add scmi pointer
+To: Peng Fan <peng.fan@nxp.com>
+Cc: Tom Rini <trini@konsulko.com>, "Alice Guo (OSS)" <alice.guo@oss.nxp.com>, 
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "judge.packham@gmail.com" <judge.packham@gmail.com>, 
+ Alice Guo <alice.guo@nxp.com>, "xypron.glpk@gmx.de" <xypron.glpk@gmx.de>,
+ Ye Li <ye.li@nxp.com>, 
+ "festevam@gmail.com" <festevam@gmail.com>, "marex@denx.de" <marex@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,35 +90,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 8 Oct 2024 at 14:18, Dmitry Rokosov <ddrokosov@salutedevices.com> wrote:
->
-> To enhance code organization, it is beneficial to consolidate all A/B
-> BCB management routines into a single super-command.
-> The 'bcb' command is an excellent candidate for this purpose.
->
-> This patch integrates the separate 'ab_select' command into the 'bcb'
-> group as the 'ab_select' subcommand, maintaining the same parameter list
-> for consistency.
->
-> Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
-> ---
->  MAINTAINERS                               |  1 -
->  cmd/Kconfig                               | 15 +------
->  cmd/Makefile                              |  1 -
->  cmd/ab_select.c                           | 66 -------------------------------
->  cmd/bcb.c                                 | 63 +++++++++++++++++++++++++++++
->  configs/am57xx_hs_evm_usb_defconfig       |  1 -
->  configs/khadas-vim3_android_ab_defconfig  |  1 -
->  configs/khadas-vim3l_android_ab_defconfig |  1 -
->  configs/sandbox64_defconfig               |  4 +-
->  configs/sandbox_defconfig                 |  4 +-
->  doc/android/ab.rst                        | 12 +++---
->  include/configs/khadas-vim3_android.h     |  2 +-
->  include/configs/khadas-vim3l_android.h    |  2 +-
->  include/configs/meson64_android.h         |  4 +-
->  include/configs/ti_omap5_common.h         |  4 +-
->  test/py/tests/test_android/test_ab.py     |  8 ++--
->  16 files changed, 85 insertions(+), 104 deletions(-)
->
+Hi Peng,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Mon, 7 Oct 2024 at 20:59, Peng Fan <peng.fan@nxp.com> wrote:
+>
+> > Subject: Re: [PATCH v1] arm: global_data: add scmi pointer
+> >
+> > On Sun, Oct 06, 2024 at 05:52:28PM +0800, alice.guo@oss.nxp.com
+> > wrote:
+> > > From: Peng Fan <peng.fan@nxp.com>
+> > >
+> > > Add scmi device and channel pointer for i.MX9.
+> > >
+> > > Signed-off-by: Peng Fan <peng.fan@nxp.com>
+> > > Signed-off-by: Alice Guo <alice.guo@nxp.com>
+> > > Reviewed-by: Ye Li <ye.li@nxp.com>
+> > > ---
+> > >  arch/arm/include/asm/global_data.h | 3 +++
+> > >  1 file changed, 3 insertions(+)
+> > >
+> > > diff --git a/arch/arm/include/asm/global_data.h
+> > > b/arch/arm/include/asm/global_data.h
+> > > index 45401d5e3c..d04359f167 100644
+> > > --- a/arch/arm/include/asm/global_data.h
+> > > +++ b/arch/arm/include/asm/global_data.h
+> > > @@ -108,6 +108,9 @@ struct arch_global_data {  #ifdef
+> > CONFIG_SMBIOS
+> > >     ulong smbios_start;             /* Start address of SMBIOS
+> > table */
+> > >  #endif
+> > > +#if defined(CONFIG_SCMI_FIRMWARE) && defined(CONFIG_IMX9)
+> > > +   struct udevice *scmi_dev;
+> > > +#endif
+> > >  };
+> > >
+> > >  #include <asm-generic/global_data.h>
+> >
+> > But why is this only needed for i.MX9 families and not other users?
+>
+> i.MX95 has some code that communicates with SCMI platform,
+> but no scmi driver for those code, saying rom pass info. So we need
+> a global scmi_dev.
+
+Would it be OK to find the device using uclass_first_device(UCLASS_SMCI) ?
+
+i.e. can we do without a pointer in global_data ?
+
+If we do need it, I think it is better to have the condition just be
+SCMI_FIRMWARE (and live with the extra 8 bytes in global_data). We
+really should not have SoC-specific options in global_data, or even
+drivers for that matter.
+
+Regards,
+Simon
+e
