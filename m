@@ -4,52 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87027CEDD90
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 13:16:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66C34CEDD89
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 13:16:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A523589227;
-	Wed,  9 Oct 2024 15:16:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2132989230;
+	Wed,  9 Oct 2024 15:16:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="Egsx7eEQ";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="qRtCRY8f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 51D6689227; Wed,  9 Oct 2024 15:16:17 +0200 (CEST)
+ id 2B0E48922D; Wed,  9 Oct 2024 15:16:19 +0200 (CEST)
 Received: from bali.collaboradmins.com (bali.collaboradmins.com
  [IPv6:2a01:4f8:201:9162::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E06C89216
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 15:16:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EEDFF89224
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 15:16:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=martyn.welch@collabora.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1728479775;
- bh=XnU03SXPu9+3LNJQ1VU/S9zqKcPaZxPFiA95gW24l0M=;
+ s=mail; t=1728479776;
+ bh=HvAWIj58KLhzUQ5ctIjajSNErhZSfWx0wQZQoKuxiio=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Egsx7eEQ+zaztN91Pcj5Qdv5KMga09jhiQRO4NFm3AWup/ow8+asjQcfqAp3Lpb/7
- Izw3DogwSrNaKb45tkVUqA8vL/bjVNXYUs+vsv953/VkERU2L0r9+qynVLWdMOF3gC
- Moglah2iRFDOpEQyOCkwEq9VCXZupc5xIP7egjNzhrIgHWIBTdCd3jLB7CuwmPvSn9
- 5/clutvs0JCarVf/VUDeNirwcPUoMpv5FjQhmj7ZVXk83Jqo8I5QUHyVOKPXCVr8nV
- faimI1bgPkIwsHPZIpEfsZ7hJNve5+SvtDXPimoesSZVXLbKsiDUwatCqhmgfwmG9H
- 4OGzj32Avbk/w==
+ b=qRtCRY8fHp2l4Sfn40OUmO3QWb4fz5ecYhUVNuVl2+5x8NsCSFPOwtUizSw+KUFDV
+ V1L4uVCSFdjqNT+xPkuF0QjI6wa+Bdl/wpJZnqtaK/rZBgJQ49lKL9OMCFJA8kUK2c
+ /0alQqPTGRVhSN+eE45saDJqFqWhGDTGo1gQyLkhDveqFPMfinIT84xnpHXAYrIuTt
+ /Y5IFDomQ1GJivEibMwhdkzn1KCuz90acoLVsWkBNr/fu2Ms3mNOJ5GOiUUMZR8YgB
+ 3KbWIezlatzxMC5MSCOIs1nLSNY2HeP2O823jLvgneq9I77qDZPwnJnems3svoO8GP
+ s5QOC/s/99Pvw==
 Received: from pan.lan (unknown [IPv6:2a00:23c6:c32f:9100::16d])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested) (Authenticated sender: martyn)
- by bali.collaboradmins.com (Postfix) with ESMTPSA id B639417E35F6;
- Wed,  9 Oct 2024 15:16:14 +0200 (CEST)
+ by bali.collaboradmins.com (Postfix) with ESMTPSA id 7815017E35F5;
+ Wed,  9 Oct 2024 15:16:16 +0200 (CEST)
 From: Martyn Welch <martyn.welch@collabora.com>
 To: Simon Glass <sjg@chromium.org>,
 	Tom Rini <trini@konsulko.com>
 Cc: Martyn Welch <martyn.welch@collabora.com>,
 	u-boot@lists.denx.de
-Subject: [PATCH v2 2/4] boot: Add logic to enable booting from fallback option
-Date: Wed,  9 Oct 2024 14:15:39 +0100
-Message-ID: <20241009131548.929439-2-martyn.welch@collabora.com>
+Subject: [PATCH v2 3/4] bootstd: Add command to enable setting of bootmeth
+ specific properties
+Date: Wed,  9 Oct 2024 14:15:40 +0100
+Message-ID: <20241009131548.929439-3-martyn.welch@collabora.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241009131548.929439-1-martyn.welch@collabora.com>
 References: <20241009131548.929439-1-martyn.welch@collabora.com>
@@ -71,166 +72,359 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The "fallback" extlinux config option allows us to set an alternative
-default boot option for when it has been detected that the default is
-failing. Implement the logic required to boot from this option when
-desired.
+We have previously added logic to allow a "fallback" option to be
+specified in the extlinux configuration. Provide a command that allows
+us to set this as the preferred default option when booting.
 
-Signed-off-by: Martyn Welch <martyn.welch@collabora.com>
+Combined with the bootcount functionality, this allows the "altbootcmd"
+to provide a means of falling back to a previously known good state
+after a failed update. For example, if "bootcmd" is set to:
+
+    bootflow scan -lb
+
+We would set "altbootcmd" to:
+
+    bootmeth set extlinux fallback 1; bootflow scan -lb
+
+Causing the boot process to boot from the fallback option.
+
 Reviewed-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Martyn Welch <martyn.welch@collabora.com>
 ---
 
 Changes since v1:
- - None
+ - Addition of documentation of bootmeth sub command and bootstd
+   feature.
 
- boot/bootmeth_extlinux.c |  2 +-
- boot/bootmeth_pxe.c      |  2 +-
- boot/pxe_utils.c         | 14 +++++++++++++-
- cmd/pxe.c                |  4 ++--
- cmd/sysboot.c            |  2 +-
- include/pxe_utils.h      | 10 +++++++++-
- 6 files changed, 27 insertions(+), 7 deletions(-)
+ boot/bootmeth-uclass.c           | 25 +++++++++++
+ boot/bootmeth_extlinux.c         | 73 +++++++++++++++++++++++++++++++-
+ cmd/bootmeth.c                   | 25 ++++++++++-
+ doc/develop/bootstd/overview.rst | 10 ++++-
+ doc/usage/cmd/bootmeth.rst       | 38 ++++++++++++++++-
+ include/bootmeth.h               | 31 ++++++++++++++
+ 6 files changed, 196 insertions(+), 6 deletions(-)
 
-diff --git a/boot/bootmeth_extlinux.c b/boot/bootmeth_extlinux.c
-index fbb05ef928..26c61a65e2 100644
---- a/boot/bootmeth_extlinux.c
-+++ b/boot/bootmeth_extlinux.c
-@@ -149,7 +149,7 @@ static int extlinux_boot(struct udevice *dev, struct bootflow *bflow)
- 	info.dev = dev;
- 	info.bflow = bflow;
- 	ret = pxe_setup_ctx(&ctx, &cmdtp, extlinux_getfile, &info, true,
--			    bflow->fname, false);
-+			    bflow->fname, false, false);
- 	if (ret)
- 		return log_msg_ret("ctx", -EINVAL);
+diff --git a/boot/bootmeth-uclass.c b/boot/bootmeth-uclass.c
+index c0abadef97..5b5fea39b3 100644
+--- a/boot/bootmeth-uclass.c
++++ b/boot/bootmeth-uclass.c
+@@ -251,6 +251,31 @@ int bootmeth_set_order(const char *order_str)
+ 	return 0;
+ }
  
-diff --git a/boot/bootmeth_pxe.c b/boot/bootmeth_pxe.c
-index 03d2589c26..05c6bece2c 100644
---- a/boot/bootmeth_pxe.c
-+++ b/boot/bootmeth_pxe.c
-@@ -150,7 +150,7 @@ static int extlinux_pxe_boot(struct udevice *dev, struct bootflow *bflow)
- 	info.bflow = bflow;
- 	info.cmdtp = &cmdtp;
- 	ret = pxe_setup_ctx(ctx, &cmdtp, extlinux_pxe_getfile, &info, false,
--			    bflow->subdir, false);
-+			    bflow->subdir, false, false);
- 	if (ret)
- 		return log_msg_ret("ctx", -EINVAL);
- 
-diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
-index a80119c9a3..d6a4b2cb85 100644
---- a/boot/pxe_utils.c
-+++ b/boot/pxe_utils.c
-@@ -1436,6 +1436,16 @@ struct pxe_menu *parse_pxefile(struct pxe_context *ctx, unsigned long menucfg)
- 
- 	buf = map_sysmem(menucfg, 0);
- 	r = parse_pxefile_top(ctx, buf, menucfg, cfg, 1);
++int bootmeth_set_property(const char *name, const char *property, const char *value)
++{
++	int ret;
++	int len;
++	struct udevice *dev;
++	const struct bootmeth_ops *ops;
 +
-+	if (ctx->use_fallback) {
-+		if (cfg->fallback_label) {
-+			printf("Setting use of fallback\n");
-+			cfg->default_label = cfg->fallback_label;
-+		} else {
-+			printf("Selected fallback option, but not set\n");
-+		}
++	len = strlen(name);
++
++	ret = uclass_find_device_by_namelen(UCLASS_BOOTMETH, name, len,
++					    &dev);
++	if (ret) {
++		printf("Unknown bootmeth '%s'\n", name);
++		return ret;
 +	}
 +
- 	unmap_sysmem(buf);
- 	if (r < 0) {
- 		destroy_pxe_menu(cfg);
-@@ -1586,7 +1596,8 @@ void handle_pxe_menu(struct pxe_context *ctx, struct pxe_menu *cfg)
- 
- int pxe_setup_ctx(struct pxe_context *ctx, struct cmd_tbl *cmdtp,
- 		  pxe_getfile_func getfile, void *userdata,
--		  bool allow_abs_path, const char *bootfile, bool use_ipv6)
-+		  bool allow_abs_path, const char *bootfile, bool use_ipv6,
-+		  bool use_fallback)
++	ops = bootmeth_get_ops(dev);
++	if (!ops->set_property) {
++		printf("set_property not found\n");
++		return -ENODEV;
++	}
++
++	return ops->set_property(dev, property, value);
++}
++
+ int bootmeth_setup_fs(struct bootflow *bflow, struct blk_desc *desc)
  {
- 	const char *last_slash;
- 	size_t path_len = 0;
-@@ -1597,6 +1608,7 @@ int pxe_setup_ctx(struct pxe_context *ctx, struct cmd_tbl *cmdtp,
- 	ctx->userdata = userdata;
- 	ctx->allow_abs_path = allow_abs_path;
- 	ctx->use_ipv6 = use_ipv6;
-+	ctx->use_fallback = use_fallback;
+ 	int ret;
+diff --git a/boot/bootmeth_extlinux.c b/boot/bootmeth_extlinux.c
+index 26c61a65e2..be8fbf4df6 100644
+--- a/boot/bootmeth_extlinux.c
++++ b/boot/bootmeth_extlinux.c
+@@ -21,6 +21,39 @@
+ #include <mmc.h>
+ #include <pxe_utils.h>
  
- 	/* figure out the boot directory, if there is one */
- 	if (bootfile && strlen(bootfile) >= MAX_TFTP_PATH_LEN)
-diff --git a/cmd/pxe.c b/cmd/pxe.c
-index ae02c28c07..982e2b1e7e 100644
---- a/cmd/pxe.c
-+++ b/cmd/pxe.c
-@@ -138,7 +138,7 @@ int pxe_get(ulong pxefile_addr_r, char **bootdirp, ulong *sizep, bool use_ipv6)
- 	int i;
- 
- 	if (pxe_setup_ctx(&ctx, cmdtp, do_get_tftp, NULL, false,
--			  env_get("bootfile"), use_ipv6))
-+			  env_get("bootfile"), use_ipv6, false))
- 		return -ENOMEM;
- 
- 	if (IS_ENABLED(CONFIG_BOOTP_PXE_DHCP_OPTION) &&
-@@ -288,7 +288,7 @@ do_pxe_boot(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	}
- 
- 	if (pxe_setup_ctx(&ctx, cmdtp, do_get_tftp, NULL, false,
--			  env_get("bootfile"), use_ipv6)) {
-+			  env_get("bootfile"), use_ipv6, false)) {
- 		printf("Out of memory\n");
- 		return CMD_RET_FAILURE;
- 	}
-diff --git a/cmd/sysboot.c b/cmd/sysboot.c
-index 0ea08fd7b5..8a060780ca 100644
---- a/cmd/sysboot.c
-+++ b/cmd/sysboot.c
-@@ -105,7 +105,7 @@ static int do_sysboot(struct cmd_tbl *cmdtp, int flag, int argc,
- 	}
- 
- 	if (pxe_setup_ctx(&ctx, cmdtp, sysboot_read_file, &info, true,
--			  filename, false)) {
-+			  filename, false, false)) {
- 		printf("Out of memory\n");
- 		return CMD_RET_FAILURE;
- 	}
-diff --git a/include/pxe_utils.h b/include/pxe_utils.h
-index a408fb7f13..68ac40b64a 100644
---- a/include/pxe_utils.h
-+++ b/include/pxe_utils.h
-@@ -96,6 +96,8 @@ typedef int (*pxe_getfile_func)(struct pxe_context *ctx, const char *file_path,
-  *	allocated
-  * @pxe_file_size: Size of the PXE file
-  * @use_ipv6: TRUE : use IPv6 addressing, FALSE : use IPv4 addressing
-+ * @use_fallback: TRUE : use "fallback" option as default, FALSE : use
-+ *	"default" option as default
-  */
- struct pxe_context {
- 	struct cmd_tbl *cmdtp;
-@@ -116,6 +118,7 @@ struct pxe_context {
- 	char *bootdir;
- 	ulong pxe_file_size;
- 	bool use_ipv6;
++struct extlinux_plat {
 +	bool use_fallback;
++};
++
++enum extlinux_option_type {
++	EO_FALLBACK,
++	EO_INVALID
++};
++
++struct extlinux_option {
++	char *name;
++	enum extlinux_option_type option;
++};
++
++static const struct extlinux_option options[] = {
++	{"fallback", EO_FALLBACK},
++	{NULL, EO_INVALID}
++};
++
++static enum extlinux_option_type get_option(const char *option)
++{
++	int i = 0;
++
++	while (options[i].name) {
++		if (!strcmp(options[i].name, option))
++			return options[i].option;
++
++		i++;
++	}
++
++	return EO_INVALID;
++};
++
+ static int extlinux_get_state_desc(struct udevice *dev, char *buf, int maxsize)
+ {
+ 	if (IS_ENABLED(CONFIG_SANDBOX)) {
+@@ -142,14 +175,18 @@ static int extlinux_boot(struct udevice *dev, struct bootflow *bflow)
+ 	struct cmd_tbl cmdtp = {};	/* dummy */
+ 	struct pxe_context ctx;
+ 	struct extlinux_info info;
++	struct extlinux_plat *plat;
+ 	ulong addr;
+ 	int ret;
+ 
+ 	addr = map_to_sysmem(bflow->buf);
+ 	info.dev = dev;
+ 	info.bflow = bflow;
++
++	plat = dev_get_plat(dev);
++
+ 	ret = pxe_setup_ctx(&ctx, &cmdtp, extlinux_getfile, &info, true,
+-			    bflow->fname, false, false);
++			    bflow->fname, false, plat->use_fallback);
+ 	if (ret)
+ 		return log_msg_ret("ctx", -EINVAL);
+ 
+@@ -160,6 +197,38 @@ static int extlinux_boot(struct udevice *dev, struct bootflow *bflow)
+ 	return 0;
+ }
+ 
++static int extlinux_set_property(struct udevice *dev, const char *property, const char *value)
++{
++	struct extlinux_plat *plat;
++	static enum extlinux_option_type option;
++
++	plat = dev_get_plat(dev);
++
++	option = get_option(property);
++	if (option == EO_INVALID) {
++		printf("Invalid option\n");
++		return -EINVAL;
++	}
++
++	switch (option) {
++	case EO_FALLBACK:
++		if (!strcmp(value, "1")) {
++			plat->use_fallback = true;
++		} else if (!strcmp(value, "0")) {
++			plat->use_fallback = false;
++		} else {
++			printf("Unexpected value '%s'\n", value);
++			return -EINVAL;
++		}
++		break;
++	default:
++		printf("Unrecognised property '%s'\n", property);
++		return -EINVAL;
++	}
++
++	return 0;
++}
++
+ static int extlinux_bootmeth_bind(struct udevice *dev)
+ {
+ 	struct bootmeth_uc_plat *plat = dev_get_uclass_plat(dev);
+@@ -176,6 +245,7 @@ static struct bootmeth_ops extlinux_bootmeth_ops = {
+ 	.read_bootflow	= extlinux_read_bootflow,
+ 	.read_file	= bootmeth_common_read_file,
+ 	.boot		= extlinux_boot,
++	.set_property	= extlinux_set_property,
  };
  
- /**
-@@ -215,12 +218,17 @@ int format_mac_pxe(char *outbuf, size_t outbuf_len);
-  *	none
-  * @use_ipv6: TRUE : use IPv6 addressing
-  *            FALSE : use IPv4 addressing
-+ * @use_fallback: TRUE : Use "fallback" option instead of "default" should no
-+ *                       other choice be selected
-+ *                FALSE : Use "default" option should no other choice be
-+ *                        selected
-  * Return: 0 if OK, -ENOMEM if out of memory, -E2BIG if bootfile is larger than
-  *	MAX_TFTP_PATH_LEN bytes
-  */
- int pxe_setup_ctx(struct pxe_context *ctx, struct cmd_tbl *cmdtp,
- 		  pxe_getfile_func getfile, void *userdata,
--		  bool allow_abs_path, const char *bootfile, bool use_ipv6);
-+		  bool allow_abs_path, const char *bootfile, bool use_ipv6,
-+		  bool use_fallback);
+ static const struct udevice_id extlinux_bootmeth_ids[] = {
+@@ -190,4 +260,5 @@ U_BOOT_DRIVER(bootmeth_1extlinux) = {
+ 	.of_match	= extlinux_bootmeth_ids,
+ 	.ops		= &extlinux_bootmeth_ops,
+ 	.bind		= extlinux_bootmeth_bind,
++	.plat_auto	= sizeof(struct extlinux_plat)
+ };
+diff --git a/cmd/bootmeth.c b/cmd/bootmeth.c
+index ebf8b7e253..2f41fa1bec 100644
+--- a/cmd/bootmeth.c
++++ b/cmd/bootmeth.c
+@@ -103,10 +103,31 @@ static int do_bootmeth_order(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	return 0;
+ }
  
++static int do_bootmeth_set(struct cmd_tbl *cmdtp, int flag, int argc,
++			     char *const argv[])
++{
++	int ret;
++
++	if (argc < 4) {
++		printf("Required parameters not provided\n");
++		return CMD_RET_FAILURE;
++	}
++
++	ret = bootmeth_set_property(argv[1], argv[2], argv[3]);
++	if (ret) {
++		printf("Failed (err=%d)\n", ret);
++		return CMD_RET_FAILURE;
++	}
++
++	return 0;
++}
++
+ U_BOOT_LONGHELP(bootmeth,
+ 	"list [-a]     - list available bootmeths (-a all)\n"
+-	"bootmeth order [<bd> ...]  - select bootmeth order / subset to use");
++	"bootmeth order [<bd> ...]  - select bootmeth order / subset to use\n"
++	"bootmeth set <bootmeth> <property> <value> - set optional property");
+ 
+ U_BOOT_CMD_WITH_SUBCMDS(bootmeth, "Boot methods", bootmeth_help_text,
+ 	U_BOOT_SUBCMD_MKENT(list, 2, 1, do_bootmeth_list),
+-	U_BOOT_SUBCMD_MKENT(order, CONFIG_SYS_MAXARGS, 1, do_bootmeth_order));
++	U_BOOT_SUBCMD_MKENT(order, CONFIG_SYS_MAXARGS, 1, do_bootmeth_order),
++	U_BOOT_SUBCMD_MKENT(set, CONFIG_SYS_MAXARGS, 1, do_bootmeth_set));
+diff --git a/doc/develop/bootstd/overview.rst b/doc/develop/bootstd/overview.rst
+index c6f003851b..a2913cd47b 100644
+--- a/doc/develop/bootstd/overview.rst
++++ b/doc/develop/bootstd/overview.rst
+@@ -103,6 +103,12 @@ provide a `read_bootflow()` method which checks whatever bootdevs it likes, then
+ returns the bootflow, if found. Some of these bootmeths may be very slow, if
+ they scan a lot of devices.
+ 
++The extlinux bootmeth also allows for bootmeth specific configuration to be
++set. A bootmeth that wishes to support this provides the `set_property()`
++method. This allows string properties and values to be passed to the bootmeth.
++It is up to the bootmeth to determine what action to take when this method is
++called.
++
+ 
+ Boot process
+ ------------
+@@ -459,8 +465,8 @@ Three commands are available:
+     See :doc:`/usage/cmd/bootflow`
+ 
+ `bootmeth`
+-    Allow listing of available bootmethds and setting the order in which they
+-    are tried. See :doc:`/usage/cmd/bootmeth`
++    Allow listing of available bootmethds, setting the order in which they are
++    tried and bootmeth specific configuration. See :doc:`/usage/cmd/bootmeth`
+ 
+ .. _BootflowStates:
+ 
+diff --git a/doc/usage/cmd/bootmeth.rst b/doc/usage/cmd/bootmeth.rst
+index c3d2ec1574..4f899d92b2 100644
+--- a/doc/usage/cmd/bootmeth.rst
++++ b/doc/usage/cmd/bootmeth.rst
+@@ -12,7 +12,8 @@ Synopsis
+ ::
+ 
+     bootmeth list [-a]          - list selected bootmeths (-a for all)
+-    bootmeth order "[<bm> ...]" - select the order of bootmeths\n"
++    bootmeth order "[<bm> ...]" - select the order of bootmeths
++    bootmeth set <bootmeth> <property> <value> - set optional property
+ 
+ 
+ Description
+@@ -112,3 +113,38 @@ which are not::
+         -    4  efi_mgr             EFI bootmgr flow
+     -----  ---  ------------------  ------------------
+     (5 bootmeths)
++
++
++bootmeth set
++~~~~~~~~~~~~
++
++Allows setting of bootmeth specific configuration. This allows finer grain
++control over the boot process in specific instances.
++
++
++Supported Configuration Options
++-------------------------------
++
++The following configuration options are currently supported:
++
++========  ===================  ======  ===============================
++Property  Supported Bootmeths  Values  Description
++========  ===================  ======  ===============================
++fallback  extlinux             0 | 1     Enable or disable fallback path
++========  ===================  ======  ===============================
++
++
++Bootmeth set Example
++--------------------
++
++With the bootcount functionality enabled, when the bootlimit is reached, the
++`altbootcmd` environment variable lists the command used for booting rather
++than `bootcmd`. We can set the fallback configuration to cause the fallback
++boot option to be preferred, to revert to a previous known working boot option
++after a failed update for example. So if `bootcmd` is set to::
++
++    bootflow scan -lb
++
++We would set "altbootcmd" to::
++
++    bootmeth set extlinux fallback 1; bootflow scan -lb
+diff --git a/include/bootmeth.h b/include/bootmeth.h
+index 4d8ca48efd..a08ebf005a 100644
+--- a/include/bootmeth.h
++++ b/include/bootmeth.h
+@@ -146,6 +146,22 @@ struct bootmeth_ops {
+ 	 *	something changes, other -ve on other error
+ 	 */
+ 	int (*boot)(struct udevice *dev, struct bootflow *bflow);
++
++	/**
++	 * set_property() - set the bootmeth property
++	 *
++	 * This allows the setting of boot method specific properties to enable
++	 * automated finer grain control of the boot process
++	 *
++	 * @name: String containing the name of the relevant boot method
++	 * @property: String containing the name of the property to set
++	 * @value: String containing the value to be set for the specified
++	 *         property
++	 * Return: 0 if OK, -ENODEV if an unknown bootmeth or property is
++	 *      provided, -ENOENT if there are no bootmeth devices
++	 */
++	int (*set_property)(struct udevice *dev, const char *property,
++			    const char *value);
+ };
+ 
+ #define bootmeth_get_ops(dev)  ((struct bootmeth_ops *)(dev)->driver->ops)
+@@ -290,6 +306,21 @@ int bootmeth_setup_iter_order(struct bootflow_iter *iter, bool include_global);
+  */
+ int bootmeth_set_order(const char *order_str);
+ 
++/**
++ * bootmeth_set_property() - Set the bootmeth property
++ *
++ * This allows the setting of boot method specific properties to enable
++ * automated finer grain control of the boot process
++ *
++ * @name: String containing the name of the relevant boot method
++ * @property: String containing the name of the property to set
++ * @value: String containing the value to be set for the specified property
++ * Return: 0 if OK, -ENODEV if an unknown bootmeth or property is provided,
++ * -ENOENT if there are no bootmeth devices
++ */
++int bootmeth_set_property(const char *name, const char *property,
++			  const char *value);
++
  /**
-  * pxe_destroy_ctx() - Destroy a PXE context
+  * bootmeth_setup_fs() - Set up read to read a file
+  *
 -- 
 2.45.2
 
