@@ -4,91 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B6EBCF0450
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 11:09:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BD2ECEDD87
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 11:56:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 77B9C8917F;
-	Wed,  9 Oct 2024 13:09:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A61C5890B4;
+	Wed,  9 Oct 2024 13:56:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="qibZOZXl";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="JgccfPbh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C860E891B0; Wed,  9 Oct 2024 13:09:06 +0200 (CEST)
+ id 7F84E88216; Wed,  9 Oct 2024 13:56:03 +0200 (CEST)
 Received: from smtp-relay-internal-1.canonical.com
  (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B802E88FA4
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 13:09:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7D11E890B4
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 13:56:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71])
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 860103FE09
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 11:09:01 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 637473F73D
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 11:56:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1728472141;
- bh=EzonidVe1YA55e4IorHfgR/UMct6mL5llTrqQYNTVuM=;
+ s=20210705; t=1728474960;
+ bh=o1HdoP3cYdWfFiN8NMMFtTWEL5zReIZ8LkMqeaEav/A=;
  h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=qibZOZXlYWkuQMLDtUcIiHXYNTF3kIwzFNueJ7PaLFcze7I2lwhp5ISyby36gqKSS
- hD2JNIJOXiu5WrvS+aS+2ruaiXVdygrGAhv2WrQuN/UhzbS7yqudSW4zRHbNkOxwOw
- V7UI4JQQOXwiDI5EpsdPvg6tvccpzpBcz6RV27bYwwiJRNBdEi8aXNbF9dG7j7OrD7
- Fz0E9MgFeY5B3wc8r+SVEgmyTONbmCrtcf0RP5SscVTQvAqDabwMu44LG3S6B6S1wX
- X+XnNVl2/f3pbnWuoyDXWM1PGOcnx64EuxdBV6KjRdWY8lACORnkLyjOSD3vtdMnQS
- yhUPUk4BfStpg==
-Received: by mail-wr1-f71.google.com with SMTP id
- ffacd0b85a97d-37cd08d3678so353996f8f.1
- for <u-boot@lists.denx.de>; Wed, 09 Oct 2024 04:09:01 -0700 (PDT)
+ b=JgccfPbhvB3zuPbc6+RvbiavwamuscBc4nKzmFfjfmnMDhgGN0NiCr8w6l0wzkd1m
+ dVjouedvNmGhX1zwt+v6uULOMsC2vj1y/fvzzSasnrqCP9f4Tj089rhLfzmqROBlZt
+ JVV73eX5D3Y4oTgSrv/CFri/6U3jD+3nb2cnqxN5OqfCjQqX7HjuXCiflhd2+E48mO
+ i+oYGmB2DOf/0nbSQxmkYJGfVK3EU1h/IRNY2kZDUHFdv8+04aCek3gzAC53NmP07N
+ qp3vBHuRKBtNXqtD76Y9pr5ZYJGn6gGw12lXqR8w6UYZxiVmG1BH+GOUJ2cOFNw3WM
+ Nc0BIhARTqpBw==
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-42cb998fd32so52541235e9.1
+ for <u-boot@lists.denx.de>; Wed, 09 Oct 2024 04:56:00 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728472139; x=1729076939;
+ d=1e100.net; s=20230601; t=1728474960; x=1729079760;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=EzonidVe1YA55e4IorHfgR/UMct6mL5llTrqQYNTVuM=;
- b=m3cxtYkGPOpvYsg5CGrUFApaiCelgtNF4CqPDi/4oFVqrYQFemd4Lbc+XE7FNki+di
- oKn55nQ+oErcylQz0ARBrHo+5ChgDCt2Ti/WpZxWMbUuwqEb2GlAMz6eWJ/cug0RrCOR
- BVkf671DEwu784BoafKx2hfjcqSFrWW35wdOSc1Mi+W1HCtJzR16gVBib7C92W40sn+F
- MbMi0KXU4hX/maCsn6uwv9xkJRaB6/nZCmHPxBekSlyGyMggT3o644jMx22s8sR8KUaL
- I8X3TCsEsFVimk5ghv7iSnOk6fW/MxptJEaXtDZ4VcAFOouCGFdVDGPOQMUwBGIpK4+l
- 20Aw==
+ bh=o1HdoP3cYdWfFiN8NMMFtTWEL5zReIZ8LkMqeaEav/A=;
+ b=J3R9Ler6zzt5c9qhQlpLKekUMB839Tf77EndprUqEUwt/XtIyYfrhl1IThbjICtvpD
+ gr7F37CFWrUcoLv6Rk19DOjLj8Q/jXGIABrZmPUKBd9DtTsVdo1sDZa3qInY5XOWY6ca
+ +W4mw1TxzY0XZZYb+yQXA7/UzN7tuv9ADQeU4olQppv4x1ZbYctwBu6BRLplhV8O4lMs
+ 6j9NDpipzh1AfGw47bIiqkjVTVbkHqxqBjNwE6b8NQ10k1WXnBZTKkSW0bMpl2pDSYgQ
+ +ExkkUnavGLTZNZR7zvmhMEv7+cDCiZHjo0vNHvAHDfOGjp54zBdZQ3Rj6871izHUfMR
+ Qq8A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU4lGYneKgfsG+RrgoQ4m0TnLPzSAjXrhMZwDo2MY93683nK042HdxZtvKauEs3e0I62RTRQOA=@lists.denx.de
-X-Gm-Message-State: AOJu0YwIaEaQ/KFpDOXVpVfTrMnwyQECYSprxowawtDnJ+Q/XvKkqExU
- eZx5u4M7ml67RmAHQYIdEZYMRy4KtEncb71VbBwzLrn8xTJdVuGg+wiNc1A8bGhpSWrvJa54877
- ixuZsoUDyXgS2I3iTO5bc5rIRnxCOqYY8hZWxUatv3G6EVbGYhpT44RrxVvuD1F4KtTg=
-X-Received: by 2002:a05:6000:d0c:b0:374:b6e4:16a7 with SMTP id
- ffacd0b85a97d-37d291de867mr3509762f8f.8.1728472139394; 
- Wed, 09 Oct 2024 04:08:59 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IExtgnsnwcVTHDP1Rs2AOzXbW+O9XR/TWoSIrBuHdibM3rJ4xAk5+lIFtK8x1xCdv/9oDGjSg==
-X-Received: by 2002:a05:6000:d0c:b0:374:b6e4:16a7 with SMTP id
- ffacd0b85a97d-37d291de867mr3509742f8f.8.1728472138962; 
- Wed, 09 Oct 2024 04:08:58 -0700 (PDT)
+ AJvYcCXTvcbYUOZ9mE6MAru9bNydbodAbrS7okGmrsCQkP/Ni9XBEWl5sFRHtp+243p4ee5RctXRcIk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyq+kOUcB0vREIje4v5o1llOTj7qgvM9CoER5njXoWblL541ztv
+ GuNli3JrBYj5fs8YtRVUelhrb7ky9C9jDYCWc/Y9LfmUi0i95IINmLi9T78FqqU41xXUZPrhnwd
+ nIDwm/lOzMLlVQh8yqQw7AV/FNBSJ6saoa7XhdOHr9uC2rYP/JAiTpL/A8z3GUQMcBIY=
+X-Received: by 2002:a05:600c:1c14:b0:426:6710:223c with SMTP id
+ 5b1f17b1804b1-430ccf09d61mr18711245e9.9.1728474959816; 
+ Wed, 09 Oct 2024 04:55:59 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGSsQTcErF6Vkhe1L38XkxaHPtQ3OBTbwQGSGzKs4f+bj0CHmEFC1rAhSPhIFrpkZUBNtlpdQ==
+X-Received: by 2002:a05:600c:1c14:b0:426:6710:223c with SMTP id
+ 5b1f17b1804b1-430ccf09d61mr18710985e9.9.1728474959417; 
+ Wed, 09 Oct 2024 04:55:59 -0700 (PDT)
 Received: from localhost.localdomain ([2a02:3035:6e0:2015:3f67:bd94:474d:9e87])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-430ccf43da8sm16695965e9.11.2024.10.09.04.08.57
+ ffacd0b85a97d-37d1690f34asm10272726f8f.3.2024.10.09.04.55.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Oct 2024 04:08:58 -0700 (PDT)
+ Wed, 09 Oct 2024 04:55:58 -0700 (PDT)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Yasuharu Shibata <yasuharu.shibata@gmail.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 1/1] net/wget: set filesize
-Date: Wed,  9 Oct 2024 13:08:54 +0200
-Message-ID: <20241009110854.9907-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] efi_loader: Show the FirmwareVendor and FirmwareRevision
+ in helloworld
+Date: Wed,  9 Oct 2024 13:55:52 +0200
+Message-ID: <20241009115552.31455-1-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -108,35 +102,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-After downloading a file with wget the file size may be needed in follow up
-actions, e.g.
+From: Simon Glass <sjg@chromium.org>
 
-* write file to device
-* calculate hash
+Show the firmware vendor and revision to make it clear which firmware is
+used, e.g. whether U-Boot is providing the boot services.
 
-Let wget set the environment variable filesize.
+The output will look like
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+    Firmware vendor: Das U-Boot
+    Firmware revision: 20241000
+
+Signed-off-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
-v2:
-	rework commit message
----
- net/wget.c | 1 +
- 1 file changed, 1 insertion(+)
+ lib/efi_loader/helloworld.c | 37 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 37 insertions(+)
 
-diff --git a/net/wget.c b/net/wget.c
-index b4251e0f293..c9b8fc9109c 100644
---- a/net/wget.c
-+++ b/net/wget.c
-@@ -404,6 +404,7 @@ static void wget_handler(uchar *pkt, u16 dport,
- 		efi_set_bootdev("Net", "", image_url,
- 				map_sysmem(image_load_addr, 0),
- 				net_boot_file_size);
-+		env_set_hex("filesize", net_boot_file_size);
- 		break;
- 	}
+diff --git a/lib/efi_loader/helloworld.c b/lib/efi_loader/helloworld.c
+index 586177de0c8..f9154386472 100644
+--- a/lib/efi_loader/helloworld.c
++++ b/lib/efi_loader/helloworld.c
+@@ -71,6 +71,33 @@ static void uint2dec(u32 value, u16 **buf)
+ 	*buf = pos;
  }
+ 
++/*
++ * Print an unsigned 32bit value as hexadecimal number to an u16 string
++ *
++ * @value:	value to be printed
++ * @buf:	pointer to buffer address
++ *		on return position of terminating zero word
++ */
++static void uint2hex(u32 value, u16 **buf)
++{
++	u16 *pos = *buf;
++	int i;
++	u16 c;
++
++	for (i = 0; i < 8; ++i) {
++		/* Write current digit */
++		c = value >> 28;
++		value <<= 4;
++		if (c < 10)
++			c += '0';
++		else
++			c += 'a' - 10;
++		*pos++ = c;
++	}
++	*pos = 0;
++	*buf = pos;
++}
++
+ /**
+  * print_uefi_revision() - print UEFI revision number
+  */
+@@ -96,6 +123,16 @@ static void print_uefi_revision(void)
+ 	con_out->output_string(con_out, u"Running on UEFI ");
+ 	con_out->output_string(con_out, rev);
+ 	con_out->output_string(con_out, u"\r\n");
++
++	con_out->output_string(con_out, u"Firmware vendor: ");
++	con_out->output_string(con_out, systable->fw_vendor);
++	con_out->output_string(con_out, u"\r\n");
++
++	buf = rev;
++	uint2hex(systable->fw_revision, &buf);
++	con_out->output_string(con_out, u"Firmware revision: ");
++	con_out->output_string(con_out, rev);
++	con_out->output_string(con_out, u"\r\n");
+ }
+ 
+ /**
 -- 
 2.45.2
 
