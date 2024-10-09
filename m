@@ -4,68 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCF0CCF042E
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 01:57:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F5F0CF042F
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 01:57:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A4A9890A9;
-	Wed,  9 Oct 2024 03:56:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9C9A389111;
+	Wed,  9 Oct 2024 03:56:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MiVhhkl3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dliYSXYj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D04D88910D; Wed,  9 Oct 2024 03:56:54 +0200 (CEST)
-Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
- [IPv6:2607:f8b0:4864:20::42c])
+ id 01D238911D; Wed,  9 Oct 2024 03:56:58 +0200 (CEST)
+Received: from mail-pg1-x532.google.com (mail-pg1-x532.google.com
+ [IPv6:2607:f8b0:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB4B8890F7
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 03:56:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C0661890F7
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 03:56:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x42c.google.com with SMTP id
- d2e1a72fcca58-71dfe07489dso2438203b3a.3
- for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 18:56:52 -0700 (PDT)
+Received: by mail-pg1-x532.google.com with SMTP id
+ 41be03b00d2f7-7e9ff6fb4c6so4774807a12.3
+ for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 18:56:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728439011; x=1729043811; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1728439014; x=1729043814; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/45cPSRzL344eaB+MP3SxFhqrWBCfc0SAG9JhQRFHbM=;
- b=MiVhhkl3OAG4KEqdVtRcQjuXhm3OAluRBkdpeW0ZcHzR0omqyyJtud265FyPNNpeeN
- zRFgBNLD0+eDf78+QK/PfdGjC3c7qonmHat0c5KlB23hG1tbcxhIsgR7wx3XGvr9EKeE
- 4AfFwJQmgdkgSYH/dwx7y+OjYJQL2X8LyufKI=
+ bh=sLmhiLEjmSXGM257WVCNlBgqBs0zS55SeP+GGKBzM5Q=;
+ b=dliYSXYjfaGhDlooiuld/7cbRRK5SNo2aODIS7L32J3anH6A3Zjohu0iIAQS5xD0fn
+ kUdy92djO+VdyZZ3WZDPpiHu0P/bD6p5NGbFnjfP8L4S7IvVQ+03BsrwMlb9RpuDVxD/
+ ULJvSodE1zUcIN++d2yNHdtz2UrjXW0yvdMSQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728439011; x=1729043811;
+ d=1e100.net; s=20230601; t=1728439014; x=1729043814;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=/45cPSRzL344eaB+MP3SxFhqrWBCfc0SAG9JhQRFHbM=;
- b=s2kXXtCuN0CosC24L5UOKcFLJiGTSnxxy6+OX/6/ZWWJPdGt4zjKlGruIBv6ujdRDw
- 6yguU5mtXWKPEA7Y3bZT7PWXlkIG7RvPz2Y/5atwefaGahqMRiAVsTltKVq4vn7bOvrT
- QyhqpPPttN/VR8F8DuTxkymwVC7dlfVRE482eVjFhdeQLHBo7KbT9rx6v/7s8PKqeD/y
- ManU9L7FeQLEsIKEhInvsLxVfsS2qYk0gqnd7B/u38iu2q/OPDkkB7EhByXZbi6ZY64b
- umUton8fTkiuxFHoLsfb+k/ymBmYna9wq+xhRK4ZwtwECjTYp7opmlGfqKePIQs5focK
- l+oA==
-X-Gm-Message-State: AOJu0YzPUuIYAlipqAx6LJhRhLgxAWjcxefcEbcu1JO43+GU0ObmGR/I
- udvaGySWYnw5GT+xG1jPurNRlRvSoOYeyGov9CjJt3Kx14B5y0DlpnfTREC9kiSGo5n48NXRwh9
- qUMTn3eymEoqZ+oP7yHIDNuYz/Vo3GOL2koBY
-X-Google-Smtp-Source: AGHT+IEnJtjxkqjtuYUtRX/R+vs75hiCOou3KlHhoSiv+uaOSwKnBD3G57iMeJwNtZE2N0OAphen3G4ndkURlXwA0wc=
-X-Received: by 2002:a05:6a00:1894:b0:71e:66b:c7eb with SMTP id
- d2e1a72fcca58-71e1dbc9dc4mr1431547b3a.23.1728439011160; Tue, 08 Oct 2024
- 18:56:51 -0700 (PDT)
+ bh=sLmhiLEjmSXGM257WVCNlBgqBs0zS55SeP+GGKBzM5Q=;
+ b=DyyX6MLcWmaekUJbYGQvWnO7UikwvPAjyFWMLLxndjjXGGr8KwW7Ydy2q2+bJo/HSL
+ Cp20n367BRmQGNJAFui2EMFHw9MP9VoBKooWmAP5GVjOEZ1aV05Tt16hLWFRu+lCXLF2
+ YuNdMotZsJJaWqVH6Kleiu33JjcGAM4MNN5qIe1VZe8W8uv+9sf0FE5p1jQjU4PJschg
+ 0J4SK4zIBjh/YvgWBN7xnwTlOyxUN3juTq+YzSUPMbw6ErXpgtbKT9zfFabSvGpxpY8Z
+ U7h+D8lxnX0oZZgnzR9WNta0lYsRbB8Akji3/9MHynpZZvHI1I7oaQmHMrEGF9C+zI6l
+ Xg4A==
+X-Gm-Message-State: AOJu0Yw1Md9OUot6ogWW2d7ZjvFU87tfeFMpUG/17x/KnC/QDDVTJMGR
+ sEpE5aok7XjlegYDwHNl8I4ikBPh537mQnXc8dhskJ5HS7xvafzZOBinhENYANdhnDv/XVq2/43
+ UQLobKjBtCVFKwjQ7BQMq/weQhwYAEXd++HpUtydc4m3DYIstbg==
+X-Google-Smtp-Source: AGHT+IGES+BCNLljNx5I6ut2elN4xMgOqhMnQ6naFw4EURe6wxR9L8+SZKMgerwiD1+DZX1Vwl9wiHAWRd9YdyQe72g=
+X-Received: by 2002:a05:6a21:6e4a:b0:1d6:97f2:71b4 with SMTP id
+ adf61e73a8af0-1d8a3be3888mr1607663637.1.1728439014341; Tue, 08 Oct 2024
+ 18:56:54 -0700 (PDT)
 MIME-Version: 1.0
-References: <f148161ee489d19d708df1b4fa7477821e06bb55.1727694230.git.michal.simek@amd.com>
- <9715605c232ce38a36a200204c14208b9d76cd83.1727694230.git.michal.simek@amd.com>
-In-Reply-To: <9715605c232ce38a36a200204c14208b9d76cd83.1727694230.git.michal.simek@amd.com>
+References: <CAJ+vNU3wz22Ni+Kqy=NuFiEYPdrRkzjRJDNhYGJcCdDsLpbvBQ@mail.gmail.com>
+In-Reply-To: <CAJ+vNU3wz22Ni+Kqy=NuFiEYPdrRkzjRJDNhYGJcCdDsLpbvBQ@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 8 Oct 2024 19:56:39 -0600
-Message-ID: <CAFLszTjrWaRyWXi45s2uNAXwhV4Lk1Vm2H7JH5i8xKRuPy4n-Q@mail.gmail.com>
-Subject: Re: [PATCH 2/2] arm64: versal: Wire USB0 in distro boot
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, git@xilinx.com, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>
+Date: Tue, 8 Oct 2024 19:56:41 -0600
+Message-ID: <CAFLszThkQ4pVmko8PPK5Yyt5RXFQkSatMycjH7GU5eN-_8L7ZA@mail.gmail.com>
+Subject: Re: modify live DT with OF_LIVE breaking phy_connect?
+To: Tim Harvey <tharvey@gateworks.com>
+Cc: u-boot <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,50 +81,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michal,
+Hi Tim,
 
-On Mon, 30 Sept 2024 at 05:05, Michal Simek <michal.simek@amd.com> wrote:
+On Mon, 7 Oct 2024 at 14:16, Tim Harvey <tharvey@gateworks.com> wrote:
 >
-> For unknown reason USB host hasn't been described for distro boot that's
-> why wire it now.
+> Greetings,
 >
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> ---
+> I have a need to adjust the U-Boot device-tree live with some board
+> revision specific fixups. It would seem I need to enable OF_LIVE to do
+> so but when I do this on imx8mm U-Boot proper seems to fail
+> phy_connect() called from the network device probe.
 >
->  include/configs/xilinx_versal.h | 7 +++++++
->  1 file changed, 7 insertions(+)
+> The board I'm working with is an imx8mm-venice board and using
+> imx8mm_venice_defconfig (without OF_LIVE) results in:
+> U-Boot 2024.10-00735-gc530f6079c70 (Oct 07 2024 - 12:58:38 -0700)
 >
-> diff --git a/include/configs/xilinx_versal.h b/include/configs/xilinx_versal.h
-> index 212dc9df2a2e..64f123424cf7 100644
-> --- a/include/configs/xilinx_versal.h
-> +++ b/include/configs/xilinx_versal.h
-> @@ -48,6 +48,12 @@
->  # define BOOT_TARGET_DEVICES_MMC(func)
->  #endif
+> CPU:   Freescale i.MX8MMQ rev1.0 1600 MHz (running at 1200 MHz)
+> CPU:   Industrial temperature grade (-40C to 105C) at 44C
+> Reset cause: POR
+> Model: Gateworks Venice GW73xx-0x i.MX8MM Development Kit
+> DRAM:  4 GiB
+> Core:  226 devices, 32 uclasses, devicetree: separate
+> WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeout)
+> MMC:   FSL_SDHC: 0, FSL_SDHC: 1, FSL_SDHC: 2
+> Loading Environment from MMC... Reading from redundant MMC(2)... OK
+> In:    serial@30890000
+> Out:   serial@30890000
+> Err:   serial@30890000
+> SEC0:  RNG instantiated
+> Net:   GPY111 eth0: ethernet@30be0000 [PRIME]
+> GSC     : boot watchdog disabled
+> Thermal protection:enabled at 96C
+> Hit any key to stop autoboot:  0
 >
-> +#if defined(CONFIG_USB_STORAGE)
-> +# define BOOT_TARGET_DEVICES_USB(func) func(USB, usb, 0)
-> +#else
-> +# define BOOT_TARGET_DEVICES_USB(func)
-> +#endif
-> +
->  #if defined(CONFIG_CMD_PXE) && defined(CONFIG_CMD_DHCP)
->  # define BOOT_TARGET_DEVICES_PXE(func) func(PXE, pxe, na)
->  #else
-> @@ -118,6 +124,7 @@
->         BOOT_TARGET_DEVICES_XSPI(func) \
->         BOOT_TARGET_DEVICES_USB_DFU(func) \
->         BOOT_TARGET_DEVICES_USB_THOR(func) \
-> +       BOOT_TARGET_DEVICES_USB(func) \
->         BOOT_TARGET_DEVICES_PXE(func) \
->         BOOT_TARGET_DEVICES_DHCP(func)
+> Yet as soon as I enable OF_LIVE:
 >
-> --
-> 2.43.0
+> U-Boot 2024.10-00735-gc530f6079c70 (Oct 07 2024 - 12:59:35 -0700)
 >
+> CPU:   Freescale i.MX8MMQ rev1.0 1600 MHz (running at 1200 MHz)
+> CPU:   Industrial temperature grade (-40C to 105C) at 49C
+> Reset cause: POR
+> Model: Gateworks Venice GW73xx-0x i.MX8MM Development Kit
+> DRAM:  4 GiB
+> Core:  214 devices, 32 uclasses, devicetree: separate
+> WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeout)
+> MMC:   FSL_SDHC: 0, FSL_SDHC: 1, FSL_SDHC: 2
+> Loading Environment from MMC... Reading from redundant MMC(2)... OK
+> In:    serial@30890000
+> Out:   serial@30890000
+> Err:   serial@30890000
+> SEC0:  RNG instantiated
+> Net:   Could not get PHY for mdio: addr 0
+> Could not get PHY for FEC0: addr 0
+> Could not get PHY for mdio: addr 0
+> Could not get PHY for FEC0: addr 0
+> No ethernet found.
+> ^^^ phy_connect failing
+>
+> Any idea what I'm missing here?
+>
+> Are there other ways I should be modifying the live dt in U-Boot?
 
-I wonder if these could move to boostd? It would require implementing
-something for dfu and thor, though.
+I am not sure, but the best option would be to debug the PHY stuff and
+try to see what is going wrong.
+
+Since the number of devices is smaller, I suspect that there is some
+code which doesn't use the ofnode API. But it is hard to say what is
+going on.
+
+For modifying the devicetree, you can do it just before relocation
+using the flattree if you like. The reason livetree is better is that
+the nodes don't move around when changes are made.
 
 Regards,
 Simon
