@@ -4,68 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ABBCCF042B
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 01:52:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED431CF042D
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 01:52:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 689AE8901A;
-	Wed,  9 Oct 2024 03:51:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C043C89045;
+	Wed,  9 Oct 2024 03:51:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Rr36gsq6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JQbyR/mk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 54E2E88FD2; Wed,  9 Oct 2024 03:51:24 +0200 (CEST)
-Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
- [IPv6:2607:f8b0:4864:20::533])
+ id 1AFBE89041; Wed,  9 Oct 2024 03:51:29 +0200 (CEST)
+Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
+ [IPv6:2607:f8b0:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D232C88FD1
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 03:51:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E3F298902F
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 03:51:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x533.google.com with SMTP id
- 41be03b00d2f7-7c3e1081804so3118716a12.3
- for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 18:51:20 -0700 (PDT)
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-71df2b0a2f7so3150495b3a.3
+ for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 18:51:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728438679; x=1729043479; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1728438685; x=1729043485; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=7IWHDokjrLe87+OmJa/3dPHNvlACMIGL5GNAYzaqy8w=;
- b=Rr36gsq6PGoYdHw7tWU5dtmFf7EY3VOOw/Ub741TRu/S0Rk3KWMXBoL9UxkRq7kLOM
- 8kvktnLNIN2XLDM4OaF7jCejyZG9X5DVWGEzwcUU6RioJrbJtOGT2HofT6mDp/ACSUvk
- neZhPkeT/D66JGwkW/ld4bAjGQxseCi3lfYZM=
+ bh=NJ5cDL4miaJjjv6S00TmgFKZzM/J8OYIsLSlnVrl3V0=;
+ b=JQbyR/mk1BDxsRqADiQ95cOyinTirg+hG4WUp5ire14FPQbVBPOiIbbTdjdSfYzQFH
+ NgxMj8fdYc8PMGYX+6EIFvgthqx4nnPy49dP679xoGUB1XzpdjMRU+iQ/JKmP+GHXWsD
+ ZJqtKQk4iOXPruj3WQx9L4Pc2qCdaaKyW6bK0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728438679; x=1729043479;
+ d=1e100.net; s=20230601; t=1728438685; x=1729043485;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=7IWHDokjrLe87+OmJa/3dPHNvlACMIGL5GNAYzaqy8w=;
- b=rsFwnr5xnHKUmDMCu3uiggo87ZRYwY797A0iuk+pP5jzVCTyogrBm2/DX3XG2OvPSp
- JPikm3byXQEyJ9gZb45XH8mAhB6BYoyIm912dsAQ09ilOvUPJMWTz3YgUcMJLWj0ziZH
- QSGp6tV7wJClnqF2B8J+7hpjub+JAIMM9aERKp2k5fhgC6UnHF1+IMvGHtpFrha+fR6h
- 2vyoc8JIWFk1kbVI4UiDWV0yu+ELIFT1I0y23YGgIAQNKvs8uffypHI/1nvPa6QZ5Iyr
- ECzoSyEAXltpmOVeLuymCAMw4QEDeUm4sfIeemmy6LTq29cClIISn1yvYl7Lg6Ouqop2
- puIg==
-X-Gm-Message-State: AOJu0Yy8uERKE6mLDAOdN6TuIRFJvjkAHhLRV37y/T5Upyy1IMKmI6pe
- UHsqGDk6rnxy1MJ7XseLlOzO3COuSKyKZgCfYWglump89S9aSYEfIpPw6NdPaqGAaa/gjIfAD4V
- BSxwwqwQ9r6gAU97MetF3SICOGh4vXMedgH49Fz5Q8Buvo2Dobg==
-X-Google-Smtp-Source: AGHT+IGhOtilvkxrMLT2VX9xgdvHqU/XXfTFx2JugcERv5J05LIR8dUoSKehkHEfNjeIilsG2oGMbghinzHrESVhUnk=
-X-Received: by 2002:a05:6a20:c791:b0:1ce:d9a2:66ed with SMTP id
- adf61e73a8af0-1d8a3c4e29cmr1211266637.48.1728438679387; Tue, 08 Oct 2024
- 18:51:19 -0700 (PDT)
+ bh=NJ5cDL4miaJjjv6S00TmgFKZzM/J8OYIsLSlnVrl3V0=;
+ b=vDKUSgWueirPq3NFw7hEBRKv6u2SHd3LgL/Rga4L6p3fG5LcFffq1WCpPO6mIxkGI/
+ OH0GweLe84NYCXEtiz8O/hsrZhFJ98dSeMuhw0zUJyocHYn7zFM94MCWMJK9yKi9MMtD
+ Q9nmCV8ZZcpnPxBUIsSZl23h7YkUz54v52qkI4k0WnjoC3hAJlJTQ+feixlk/4xn4NNW
+ yqHd/sMGPckCvs7wWJ9J7szeYrABYJTIv2e/9LwRDVKgQCIiVU5IA+y3Etaly4xl+G8R
+ /GXDjTRlYjg1UzQ3wCHapVyiZA9zxlTJWyNBAC3D4R7SihkOE/GsnARk8sW7OaLrb69N
+ Q0Pw==
+X-Gm-Message-State: AOJu0YxI5tyYKEz+LPzLY+M5/kQWB/HVivqLD7mbJiMTksg5ym7WaaAU
+ V72IehktVfw8dqeEuCKspgX+4p6SgVW2XrengqmF8Gigimx/3nfOMvjI53LSuVYB/65MmKeG1/s
+ rXUPjMwfotSz/Hmlq0LSTH5Se+t2fGQ77Nqlm
+X-Google-Smtp-Source: AGHT+IGQSVFgY/MrtvqtOC6t1nAU9N+8sIx0Z896YFCRedLDdyPeqcaPXsUyvU38gTz+mqfXMnRrba8I6TbhUapsB1I=
+X-Received: by 2002:a05:6a00:22c6:b0:71d:fb83:62ef with SMTP id
+ d2e1a72fcca58-71e1db88990mr1367100b3a.14.1728438685430; Tue, 08 Oct 2024
+ 18:51:25 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241003141029.920035-1-ravi@prevas.dk>
- <20241003141029.920035-5-ravi@prevas.dk>
-In-Reply-To: <20241003141029.920035-5-ravi@prevas.dk>
+References: <cover.1727968902.git.jerome.forissier@linaro.org>
+ <ec9e9d1eff4404d2615e825d2f35af0720c29a92.1727968902.git.jerome.forissier@linaro.org>
+In-Reply-To: <ec9e9d1eff4404d2615e825d2f35af0720c29a92.1727968902.git.jerome.forissier@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 8 Oct 2024 19:51:03 -0600
-Message-ID: <CAFLszTgDpHJuT+_u3oxPYkHUSE7RF2SQmD8BF0p67qiib3dbEA@mail.gmail.com>
-Subject: Re: [PATCH 4/4] serial: embed the rx buffer in struct serial_dev_priv
-To: Rasmus Villemoes <ravi@prevas.dk>
-Cc: u-boot@lists.denx.de, Stefan Roese <sr@denx.de>,
- Tom Rini <trini@konsulko.com>
+Date: Tue, 8 Oct 2024 19:51:09 -0600
+Message-ID: <CAFLszTjdoSzuttwotYwB3Km-fvd_FHuLmzkCay88hTWWFCiR6w@mail.gmail.com>
+Subject: Re: [PATCH v11 05/29] test: boot: fix bootdev_test_any for when
+ DSA_SANDBOX is disabled
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>, 
+ Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>, 
+ Anton Antonov <Anton.Antonov@arm.com>, Tom Rini <trini@konsulko.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,60 +88,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 3 Oct 2024 at 08:11, Rasmus Villemoes <ravi@prevas.dk> wrote:
+On Thu, 3 Oct 2024 at 09:23, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
 >
-> The initialization of upriv->buf doesn't check for a NULL return. But
-> there's actually no point in doing a separate, unconditional malloc()
-> in post_probe; we can just make serial_dev_priv contain the rx buffer
-> itself, and let the (larger) allocation be handled by the driver core
-> when it allocates the ->per_device_auto. The total run-time memory
-> used is mostly the same, we reduce the code size a little, and as a
-> bonus, struct serial_dev_priv does not contain the unused members when
-> !SERIAL_RX_BUFFER.
+> When DSA_SANDBOX is not set, the sandbox tests fail as follows:
 >
-> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+>  $ ./test/py/test.py --build-dir=$(pwd) -k bootdev_test_any
+>  [...]
+>  Test: bootdev_test_any: bootdev.c
+>  test/boot/bootdev.c:156, bootdev_test_any(): "mmc2" = media->name: Expected "mmc2", got "mmc0"
+>  [...]
+>
+> This is due to the device list containing two less entries than
+> expected. Therefore, adjust the expected index to be two less when
+> DSA_SANDBOX is disabled.
+>
+> The actual use case is NET_LWIP=y (to be introduced in later patches)
+> which implies DSA_SANDBOX=n for the time being.
+>
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 > ---
->  drivers/serial/serial-uclass.c | 5 -----
->  include/serial.h               | 4 +++-
->  2 files changed, 3 insertions(+), 6 deletions(-)
+>  test/boot/bootdev.c | 11 ++++++++++-
+>  1 file changed, 10 insertions(+), 1 deletion(-)
 >
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
 
-> diff --git a/drivers/serial/serial-uclass.c b/drivers/serial/serial-uclass.c
-> index 484f0f7d3e8..d737e25223d 100644
-> --- a/drivers/serial/serial-uclass.c
-> +++ b/drivers/serial/serial-uclass.c
-> @@ -588,11 +588,6 @@ static int serial_post_probe(struct udevice *dev)
->         sdev.getc = serial_stub_getc;
->         sdev.tstc = serial_stub_tstc;
+> diff --git a/test/boot/bootdev.c b/test/boot/bootdev.c
+> index c635d06ec25..369105ca4cf 100644
+> --- a/test/boot/bootdev.c
+> +++ b/test/boot/bootdev.c
+> @@ -128,6 +128,7 @@ BOOTSTD_TEST(bootdev_test_labels, UTF_DM | UTF_SCAN_FDT | UTF_ETH_BOOTDEV);
+>  static int bootdev_test_any(struct unit_test_state *uts)
+>  {
+>         struct udevice *dev, *media;
+> +       char *seq;
+>         int mflags;
 >
-> -#if CONFIG_IS_ENABLED(SERIAL_RX_BUFFER)
-> -       /* Allocate the RX buffer */
-> -       upriv->buf = malloc(CONFIG_SERIAL_RX_BUFFER_SIZE);
-> -#endif
-> -
->         stdio_register_dev(&sdev, &upriv->sdev);
->  #endif
->         return 0;
-> diff --git a/include/serial.h b/include/serial.h
-> index 14563239b7d..eabc49f820f 100644
-> --- a/include/serial.h
-> +++ b/include/serial.h
-> @@ -298,9 +298,11 @@ struct dm_serial_ops {
->  struct serial_dev_priv {
->         struct stdio_dev *sdev;
->
-> -       char *buf;
-> +#if CONFIG_IS_ENABLED(SERIAL_RX_BUFFER)
-> +       char buf[CONFIG_SERIAL_RX_BUFFER_SIZE];
->         uint rd_ptr;
->         uint wr_ptr;
-> +#endif
->  };
->
->  /* Access the serial operations for a device */
+>         /*
+> @@ -147,8 +148,16 @@ static int bootdev_test_any(struct unit_test_state *uts)
+>          * 8   [   ]      OK  mmc       mmc2.bootdev
+>          * 9   [ + ]      OK  mmc       mmc1.bootdev
+>          * a   [   ]      OK  mmc       mmc0.bootdev
+> +        *
+> +        * However if DSA_SANDBOX is disabled the dsa-test@{0,1} devices
+> +        * are not there.
+>          */
+> -       ut_assertok(bootdev_find_by_any("8", &dev, &mflags));
+> +       if (CONFIG_IS_ENABLED(DSA_SANDBOX))
+> +               seq = "8";
+> +       else
+> +               seq = "6";
+> +
+> +       ut_assertok(bootdev_find_by_any(seq, &dev, &mflags));
+>         ut_asserteq(UCLASS_BOOTDEV, device_get_uclass_id(dev));
+>         ut_asserteq(BOOTFLOW_METHF_SINGLE_DEV, mflags);
+>         media = dev_get_parent(dev);
 > --
-> 2.46.2
+> 2.40.1
 >
