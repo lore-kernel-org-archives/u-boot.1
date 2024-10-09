@@ -4,82 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09859CF042D
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 01:52:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEE52CF042D
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 01:52:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2FAD98904D;
-	Wed,  9 Oct 2024 03:51:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B28BF8902E;
+	Wed,  9 Oct 2024 03:51:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hhLbqsXA";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GlR/DcCM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2652689043; Wed,  9 Oct 2024 03:51:29 +0200 (CEST)
-Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
- [IPv6:2607:f8b0:4864:20::52e])
+ id E995489050; Wed,  9 Oct 2024 03:51:30 +0200 (CEST)
+Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
+ [IPv6:2607:f8b0:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D20158902E
+ by phobos.denx.de (Postfix) with ESMTPS id E8D4E89030
  for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 03:51:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x52e.google.com with SMTP id
- 41be03b00d2f7-7db1f13b14aso4960354a12.1
+Received: by mail-pg1-x534.google.com with SMTP id
+ 41be03b00d2f7-7c3e1081804so3118742a12.3
  for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 18:51:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1728438685; x=1729043485; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=rYZ2GYv8+O1pJZTUfA88BiNvJ2UJbJP5vIc1sWs7ZO8=;
- b=hhLbqsXANGwGaQBBTa6gg91dVez7C+/Ih/BmxCfdOmYFrUh48IawlWMhCq9wdfvEhI
- soDQ7OLRIfXdD6Xj1QItrvbWTtteX2WfrUqrTVq1kDl+Pf/NNKXinaG9BilM53U7iGO2
- qAI+DPSGwI/xr1S04CByDQ3DiauIdeMsBFDYc=
+ bh=3/ArSs3bCFRkTtIEBNxCvhP1X1bz07Jqe1q2SzEl/eo=;
+ b=GlR/DcCMo6b6Gzd4eORml1IQlhoGsqE9GhefyZVwezHu2ayFvCr5sjVZ0qhbNLlsuh
+ xIkYI174yoNV9AAWSjknSQUO4qR4DKB8qAkJ0C7okFPmfdsJXakJ1AY2FpjyLiijBvnK
+ aXahYgMlDbwhQWgqfV8NuS42ym0XERz/AfVRc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1728438685; x=1729043485;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=rYZ2GYv8+O1pJZTUfA88BiNvJ2UJbJP5vIc1sWs7ZO8=;
- b=vx/0hzGO1jzjBI5jpO2hh6Wz2x0W7fbebAAHzuSD2tmVqBwUv/OdcqrfgMxUm9SHmK
- 2usmbUYVCZqoMmG2gJq6BN/8/Wc801Wt0gA2nmFwR27c7naX5y+Qbx0zpjKaXHWYb+Ab
- zeC/envdy5GaGoN4wxyTAfUCHDnRYgxO69YG4zBz+mTfUl9Z0W59asY1Nc1SifXk7oOq
- 7cyae/yHdjC9vmk79V/vMWkbnt47ze1E5XH1OEWI5OXAWV3qlZwPUyqFupPfGbhzBONa
- LoGD3lpoDR2+K7YfgXiVirKksMyd2UXPDlt2Png/e0WH5BUlbxSfquqHwDM6t2wKOTod
- BC0w==
+ bh=3/ArSs3bCFRkTtIEBNxCvhP1X1bz07Jqe1q2SzEl/eo=;
+ b=LXsvD2ZT4crHtQaAA6rFxTBCUhWk1gnpaKkAx+loVMLjn0wOft22bNbMm2C6irXMU7
+ fpWA2I3VvKbEhusuZCAl21kPFxtC6BvF9xY5gFRcQy6jUaj/NMaen/9DPhhgRAVZZifl
+ tNGhzLQBjaMDbSMs2UpesMwDBgKIkJ2m6mmQCDvte7yzKL0lvnvC0eJu8nvnfYl8cWaZ
+ FhnVgUXTjT+XkMuRc1avG4rXR7ovIqQtz3xytTQ5qzf8M/Qf5+lKOv467TX7+VfoJtjA
+ 218GReevSEBD5Ior72SRIN9MIcNTAv5QRrZQolEAmXz2iRy/vU4QEpDvFzTAAIXBLPQi
+ JWFA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWiDtsHEyGklgWzqwGlVk2hAhIR2OC3GrRHywklrFq+YTlgTq58+teNg+kgGlvPyeRDFRxgxlk=@lists.denx.de
-X-Gm-Message-State: AOJu0YzP92Ap/3RMdoX86teRRryhb8pCysYN2i+/QGwmg4nVSVJju0VU
- YGd2/75y4sH2TLbeOQsHutwNm7nu542v8VDL8tYWMn2fL0/y1BzBpNqvKcec1OF0nhH0jOhscQn
- DNg7ePJlxFXe0fkQtRo/MxdVfDx3BQYIk60ST
-X-Google-Smtp-Source: AGHT+IHqIul6RRuxjijF2kbE9uiZdQoBkLSMuLWqH+y5bFflIVwQietYESIn2fe8W+wMQom6hF772tDzdYAVdsJEgaE=
-X-Received: by 2002:a05:6a21:a4c1:b0:1d5:14ff:a153 with SMTP id
- adf61e73a8af0-1d8a3bfecd2mr1732628637.12.1728438685435; Tue, 08 Oct 2024
+ AJvYcCUwLKWQThmGp5XJJ+LF6XuzBIyFE3AHb85N7Z0fnpzh2AIIg/2oMoRbAht/7MlwWQ2J/WgPSE8=@lists.denx.de
+X-Gm-Message-State: AOJu0YzNhLBcEstu2CLdLk/yO9ebHe0+sHkL9vpTZw/UGbSNEtyXFrpQ
+ 0f/O4H+h8960WtWcADflwiPdCsI++37pyDQ8OvLwLMdU9qqSg46tSaTnF3g1vPC865bdH/XYfR3
+ jSlGr4nB1tKuCfbTB7vFl2/rgdfhNQ2eu4DJr
+X-Google-Smtp-Source: AGHT+IFNg2Wvg83yJiEgJVUenVf/0ZYeAfSeJY7WpBHMpz1WWu0InZ/7/2Tk+Qc5zXFGnJusEHXri58SbrgJOq/F0A0=
+X-Received: by 2002:a05:6a21:2d89:b0:1d6:d330:2417 with SMTP id
+ adf61e73a8af0-1d8a3c48d2bmr1542523637.40.1728438685428; Tue, 08 Oct 2024
  18:51:25 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241001204444.917238-1-mikhail.kshevetskiy@iopsys.eu>
-In-Reply-To: <20241001204444.917238-1-mikhail.kshevetskiy@iopsys.eu>
+References: <20241002132633.246942-1-martyn.welch@collabora.com>
+ <20241002132633.246942-4-martyn.welch@collabora.com>
+In-Reply-To: <20241002132633.246942-4-martyn.welch@collabora.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 8 Oct 2024 19:50:59 -0600
-Message-ID: <CAFLszTiJMO+0+tMVPCM8Ho95TzvfqCgYvSLBJzmNbPJXJk-rYQ@mail.gmail.com>
-Subject: Re: [RESEND PATCH v4 00/10] mtd: spinand: initial support of ecc
- engines
-To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Cc: Tom Rini <trini@konsulko.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>, 
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- Jagan Teki <jagan@amarulasolutions.com>, 
- William Zhang <william.zhang@broadcom.com>,
- Dmitry Rokosov <ddrokosov@sberdevices.ru>, 
- Igor Prusov <ivprusov@salutedevices.com>, Bruce Suen <bruce_suen@163.com>, 
- Alexey Romanov <avromanov@salutedevices.com>,
- Chuanhong Guo <gch981213@gmail.com>, 
- Martin Kurbanov <mmkurbanov@sberdevices.ru>,
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Max Krummenacher <max.krummenacher@toradex.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>, u-boot@lists.denx.de
+Date: Tue, 8 Oct 2024 19:51:00 -0600
+Message-ID: <CAFLszTjOfohC+yJDwM43N-K5J3LYFKZC8Omw-n8=ZOisHyF7tw@mail.gmail.com>
+Subject: Re: [PATCH 4/4] test: Add tests for the bootmeth set command
+To: Martyn Welch <martyn.welch@collabora.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,72 +84,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mikhail,
-
-On Tue, 1 Oct 2024 at 14:45, Mikhail Kshevetskiy
-<mikhail.kshevetskiy@iopsys.eu> wrote:
+On Wed, 2 Oct 2024 at 07:26, Martyn Welch <martyn.welch@collabora.com> wrote:
 >
-> This patch series:
->  * sync spinand driver code with linux-6.10
->  * sync spinand flash support with linux-6.10
->  * add initial support of ecc engines
+> We have added a "set" sub command to bootmeth, add some tests to check
+> it's operation.
 >
-> Up to now only software ecc is supported, but other engines can be add quite easily
-
-Is there a uclass for ECC?
-
->
-> Changes v2
->  * update description of some patches
->
-> Changes v3:
->  * split some patches to a smaller one for more easy checking/verification
->  * sync spinand flash support with linux-6.10
->  * add some ecc engine comments (taken from linux driver)
->  * slightly change patch order
->
-> Changes v4:
->  * avoid double increments of error counters
->
-> Mikhail Kshevetskiy (10):
->   mtd: spinand: Use the spi-mem dirmap API
->   mtd: spinand: Add a NAND page I/O request type
->   mtd: spinand: add missed add missed MODULE_DEVICE_TABLE()
->   mtd: spinand: simulate behavior of linux's function spinand_wait()
->   mtd: spinand: more use of spinand_to_{something} helpers
->   mtd: spinand: replace enable_ecc variable with disable_ecc and update
->     corresponding logic
->   mtd: spinand: minor refactoring
->   mtd: spinand: more refactoring
->   mtd: spinand: sync supported flashes with linux-6.10
->   mtd: nand: add initial ecc engine support
->
->  drivers/mtd/nand/Makefile             |   2 +-
->  drivers/mtd/nand/core.c               | 130 +++++-
->  drivers/mtd/nand/ecc.c                | 249 ++++++++++
->  drivers/mtd/nand/spi/Makefile         |   4 +-
->  drivers/mtd/nand/spi/alliancememory.c | 155 ++++++
->  drivers/mtd/nand/spi/ato.c            |  84 ++++
->  drivers/mtd/nand/spi/core.c           | 649 ++++++++++++++++----------
->  drivers/mtd/nand/spi/esmt.c           |  16 +-
->  drivers/mtd/nand/spi/foresee.c        |  97 ++++
->  drivers/mtd/nand/spi/gigadevice.c     | 194 +++++++-
->  drivers/mtd/nand/spi/macronix.c       |  32 +-
->  drivers/mtd/nand/spi/micron.c         |   2 +-
->  drivers/mtd/nand/spi/toshiba.c        |  43 +-
->  drivers/mtd/nand/spi/winbond.c        |  67 ++-
->  include/linux/mtd/nand.h              | 279 ++++++++++-
->  include/linux/mtd/spinand.h           |  47 +-
->  include/spi-mem.h                     |   2 +
->  17 files changed, 1778 insertions(+), 274 deletions(-)
->  create mode 100644 drivers/mtd/nand/ecc.c
->  create mode 100644 drivers/mtd/nand/spi/alliancememory.c
->  create mode 100644 drivers/mtd/nand/spi/ato.c
->  create mode 100644 drivers/mtd/nand/spi/foresee.c
->
-> --
-> 2.45.2
+> Signed-off-by: Martyn Welch <martyn.welch@collabora.com>
+> ---
+>  test/boot/bootmeth.c | 47 ++++++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 47 insertions(+)
 >
 
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
