@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F2A0CF0449
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 10:38:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9105FCF044A
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 10:39:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F6DD88FAB;
-	Wed,  9 Oct 2024 12:38:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8FE9D8918D;
+	Wed,  9 Oct 2024 12:39:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UccW00mB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gEehvPaF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E7B088FB9; Wed,  9 Oct 2024 12:38:44 +0200 (CEST)
-Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
- [IPv6:2607:f8b0:4864:20::533])
+ id DFDF689165; Wed,  9 Oct 2024 12:39:15 +0200 (CEST)
+Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
+ [IPv6:2607:f8b0:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C309888F55
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 12:38:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D6472880A5
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 12:39:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x533.google.com with SMTP id
- 41be03b00d2f7-7e9e38dd5f1so4997723a12.0
- for <u-boot@lists.denx.de>; Wed, 09 Oct 2024 03:38:41 -0700 (PDT)
+Received: by mail-pg1-x531.google.com with SMTP id
+ 41be03b00d2f7-7e9fd82f1a5so2493961a12.1
+ for <u-boot@lists.denx.de>; Wed, 09 Oct 2024 03:39:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728470320; x=1729075120; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1728470351; x=1729075151; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6EkYCaHOYt8g5EWf9JQLNGdXlMD47XjFEruP6dUk9EU=;
- b=UccW00mBsaPgvcZQTI7GW1aASdw1tWLr0KHCDqdmqNnPvN/r1fiKM70ylzFH0u9eSr
- sueDZ8C5KUdVLEmizDBnD12cBb6KBzREgjJ8/W2vb38sTvSN8Gd9+Li/vRUfbFqniihq
- 704QnQhUNVoYcnY9iqr7+BnApS1Bw+p5MHD2c/ghAz3eGAIlzjnE+MsW4vxhPJASHfOy
- lfiJd0vnS5sdYnh3pGbx966NdamyV7hzTeLRcjcGfHXaWCRlA2PWX54+bMRq1SuUF4OB
- 3mYWTjGY+1h11bX5XRpbe6VOu/al3/DCGFR0zWZyzOurYgtoLl7ECh/g2uyVXVYCavbk
- p3Dg==
+ bh=Ljs55rF7lzpu2WItsIIWrQYsRPGiDLPqLB+i6hL38cM=;
+ b=gEehvPaFRvgq5PEfCW/bLoGHJNVA2uwjcwo4Fy3O0xiM8EjIIhw8O+VYbMT/j5pdTm
+ jgSaR04yXK3sjQB1PycK6RKJ09CCoVDrbPsmtr6yr6VUQu71wBc6BH+fxbYxljwEvPUd
+ HFt8So67ogiscUUpe5tp3ODKLa41niLwUCeGxma8XBmPx/vmoOnSgBphtasYdXwOXorK
+ VzV4TOxT1FHsh0ecVAOWVJm/P8tJ39MGyzShI+HazlpB1hzcsdKtQ3DJmnBpEZsUBJih
+ i786UIpMEv4MLwspXOnHz2VAgiwYDFPc3W9pYNjpYOmLGyl85SJXYdxRSuFR3TKNpkKT
+ 5yag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728470320; x=1729075120;
+ d=1e100.net; s=20230601; t=1728470351; x=1729075151;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=6EkYCaHOYt8g5EWf9JQLNGdXlMD47XjFEruP6dUk9EU=;
- b=oIjnrtYckjQrrzXcTLCLNT37hOrl71iGEHbQUpYYBXFj3fTXnHD1zUsQtWkigWoMn6
- M2FgejCxxdX/yjJtWlnaQ6I4CgVdVGcnWxdmIgdwXldeeVatRKoUj9YrxTurd5ypdwTh
- YZOEWYcW/xJXhbV1iYFLHJJ9V6NYLi5o1cHZjhv8cISEa/iENkE0Bzq31yeTwtZdF4e4
- pf6B9kcqaCo/U8L0FH7hPuPz059CPX7kFtt4zLOR3a5uki3hVLc6nTrRyt72cmExpDB/
- qE4TGP1ffc9/CiO/+7gjTNmcyR0AAcUzMZontZKKQZduId75ABdqfJiAPzykLw16pnYe
- nFBg==
-X-Gm-Message-State: AOJu0Yw9SF7lBIzGzThg9G99EiZ0xwjPNtroW0jetGSPZdDf9zA7YS6D
- CtX783lRUaHpAwal+umK6pP2Z1tXNRZjcxzF/2EGKwoNfdr+NGzoexkZU1DUfPWayWGaMYyt61I
- LHYU6/v/UPzmqztN3NoLrWMK6ZsJ9ExIzMyVDPw==
-X-Google-Smtp-Source: AGHT+IELjQSuiCtab1kpjAhWMqEm5nytmKBXXobgWYon/3HMRImS+BZny3+26qjhoME8XaenD1Imxgl/MwwuyPIKn5s=
-X-Received: by 2002:a17:90b:4a05:b0:2e2:a6ef:d7a6 with SMTP id
- 98e67ed59e1d1-2e2a6efd982mr2213075a91.36.1728470320281; Wed, 09 Oct 2024
- 03:38:40 -0700 (PDT)
+ bh=Ljs55rF7lzpu2WItsIIWrQYsRPGiDLPqLB+i6hL38cM=;
+ b=hhp4oTMyQNpHBW2Hw372Gsm7BqxxPRgPsXvzSjCk5B1dflb3bRc9jTrL1RZzXoZmdp
+ pV6z2lTc3LQO42t9begy+jn2svwBA4RoX53+wldNZTVi8bkscgzZtag+Nar07jCodJvD
+ VU5RyyEoQP6EbiEvg57XXwOF/+fp3cUjWKXQsOnzAU/YHd4a2r5aarRjtg/ZpIQgZQZl
+ W8SzyxurmcLyQLvJqnOJzujWmEeOphjNE3hNTUUsoufGmCi4173GoSx2OcNiQ2vJj7zZ
+ y2EvS/YtKT080haJIDSMXgpBaCbcHWy2ffN+Gd8YMHpUarpMG7rohxbfgOM6J1qwF0HH
+ ImrA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVzYdPUublLOm4m1XyUZpVqzn+5Kis8JPHa8itwHYf6ZpsXC4xvpuhHyA2RZe0V7MdH/LYC2Yg=@lists.denx.de
+X-Gm-Message-State: AOJu0YyfnImrKAJ1oO+7rQ+BLcekiNCUG3al5FLS+SgZ8xpD0+Sbo9SG
+ jnADbgm7S0IZCfBHXFC2aowT8k9+UOH5pxw0nYUI/vHjkk56YigD9sj+qz0thDivSQwyZ2c7qGv
+ Ae4gmBGpkxBI8MnRv/q1HLdoQNcEBHsrvDLYboQ==
+X-Google-Smtp-Source: AGHT+IG16Tre2kbk5DpLMaGjQfS4PxcrTrq3Q9wyarUrYh7wEZeZOxG5R+Wn0FozqX6Q5hIo/lHOQ5UgrwGwrQ3T5i8=
+X-Received: by 2002:a17:90b:23d2:b0:2e2:8d60:d0a1 with SMTP id
+ 98e67ed59e1d1-2e2a21dc707mr2096975a91.6.1728470351452; Wed, 09 Oct 2024
+ 03:39:11 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241009015020.25817-1-sjg@chromium.org>
- <20241009015020.25817-3-sjg@chromium.org>
-In-Reply-To: <20241009015020.25817-3-sjg@chromium.org>
+References: <20241008230205.108375-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20241008230205.108375-1-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 9 Oct 2024 13:38:03 +0300
-Message-ID: <CAC_iWjJN4gDmf9tgd6ZSF6aZHwosqrVYu6+G7R+JywOUO9ifPw@mail.gmail.com>
-Subject: Re: [PATCH 2/6] common: Tidy up how malloc() is inited
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Tom Rini <trini@konsulko.com>, Artur Rojek <artur@conclusive.pl>, 
- Devarsh Thakkar <devarsht@ti.com>, Eugene Uriev <eugeneuriev@gmail.com>,
- Jonas Karlman <jonas@kwiboo.se>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Richard Weinberger <richard@nod.at>, 
- Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Wed, 9 Oct 2024 13:38:35 +0300
+Message-ID: <CAC_iWjK+WdgwyGeGfR+7rhYX_Jyhj5uO=OB+3RS=-dWuJUsgaw@mail.gmail.com>
+Subject: Re: [PATCH] net: correct wget_connected debug messages
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Yasuharu Shibata <yasuharu.shibata@gmail.com>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,110 +93,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
-
-On Wed, 9 Oct 2024 at 04:50, Simon Glass <sjg@chromium.org> wrote:
+On Wed, 9 Oct 2024 at 02:02, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> The call to malloc() is a bit strange. The naming of the arguments
-> suggests that an address is passed, but in fact it is a pointer, at
-> least in the board_init_r() function and SPL equivalent.
+> * Remove duplicate debug message in wget_connected()
+> * Correct typo 'Connctd'
 >
-> Update it to work as described. Add a function comment as well.
->
-> Note that this does adjustment does not extend into the malloc()
-> implementation itself, apart from changing mem_malloc_init(), since
-> there are lots of casts and pointers and integers are used
-> interchangeably.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
+>  net/wget.c | 8 ++------
+>  1 file changed, 2 insertions(+), 6 deletions(-)
 >
->  common/board_r.c  | 3 +--
->  common/dlmalloc.c | 8 +++++---
->  common/spl/spl.c  | 4 +---
->  include/malloc.h  | 8 ++++++++
->  4 files changed, 15 insertions(+), 8 deletions(-)
+> diff --git a/net/wget.c b/net/wget.c
+> index b4251e0f293..f978adc9f0a 100644
+> --- a/net/wget.c
+> +++ b/net/wget.c
+> @@ -248,7 +248,7 @@ static void wget_connected(uchar *pkt, unsigned int tcp_seq_num,
+>                         wget_send(action, tcp_seq_num, tcp_ack_num, len);
+>                 } else {
+>                         debug_cond(DEBUG_WGET,
+> -                                  "wget: Connctd pkt %p  hlen %x\n",
+> +                                  "wget: Connected Pkt %p hlen %x\n",
+>                                    pkt, hlen);
 >
-> diff --git a/common/board_r.c b/common/board_r.c
-> index 4faaa202421..fbb10fea494 100644
-> --- a/common/board_r.c
-> +++ b/common/board_r.c
-> @@ -203,8 +203,7 @@ static int initr_malloc(void)
->          */
->         start = gd->relocaddr - TOTAL_MALLOC_LEN;
->         gd_set_malloc_start(start);
-> -       mem_malloc_init((ulong)map_sysmem(start, TOTAL_MALLOC_LEN),
-> -                       TOTAL_MALLOC_LEN);
-> +       mem_malloc_init(start, TOTAL_MALLOC_LEN);
->         return 0;
->  }
+>                         pos = strstr((char *)pkt, content_len);
+> @@ -273,10 +273,6 @@ static void wget_connected(uchar *pkt, unsigned int tcp_seq_num,
+>                                 }
+>                         }
 >
-> diff --git a/common/dlmalloc.c b/common/dlmalloc.c
-> index 1ac7ce3f43c..cc4d3a0a028 100644
-> --- a/common/dlmalloc.c
-> +++ b/common/dlmalloc.c
-> @@ -16,6 +16,8 @@
->  #include <asm/global_data.h>
+> -                       debug_cond(DEBUG_WGET,
+> -                                  "wget: Connected Pkt %p hlen %x\n",
+> -                                  pkt, hlen);
+> -
+>                         for (i = 0; i < pkt_q_idx; i++) {
+>                                 int err;
 >
->  #include <malloc.h>
-> +#include <mapmem.h>
-> +#include <string.h>
->  #include <asm/io.h>
->  #include <valgrind/memcheck.h>
->
-> @@ -598,9 +600,9 @@ void *sbrk(ptrdiff_t increment)
->
->  void mem_malloc_init(ulong start, ulong size)
->  {
-> -       mem_malloc_start = start;
-> -       mem_malloc_end = start + size;
-> -       mem_malloc_brk = start;
-> +       mem_malloc_start = (ulong)map_sysmem(start, size);
-> +       mem_malloc_end = mem_malloc_start + size;
-> +       mem_malloc_brk = mem_malloc_start;
->
->  #ifdef CONFIG_SYS_MALLOC_DEFAULT_TO_INIT
->         malloc_init();
-> diff --git a/common/spl/spl.c b/common/spl/spl.c
-> index c13b2b8f714..fc8b38862e8 100644
-> --- a/common/spl/spl.c
-> +++ b/common/spl/spl.c
-> @@ -679,9 +679,7 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
->         spl_set_bd();
->
->         if (IS_ENABLED(CONFIG_SPL_SYS_MALLOC)) {
-> -               mem_malloc_init((ulong)map_sysmem(SPL_SYS_MALLOC_START,
-> -                                                 SPL_SYS_MALLOC_SIZE),
-> -                               SPL_SYS_MALLOC_SIZE);
-> +               mem_malloc_init(SPL_SYS_MALLOC_START, SPL_SYS_MALLOC_SIZE);
->                 gd->flags |= GD_FLG_FULL_MALLOC_INIT;
->         }
->         if (!(gd->flags & GD_FLG_SPL_INIT)) {
-> diff --git a/include/malloc.h b/include/malloc.h
-> index 07d3e90a855..9e0be482416 100644
-> --- a/include/malloc.h
-> +++ b/include/malloc.h
-> @@ -981,6 +981,14 @@ extern ulong mem_malloc_start;
->  extern ulong mem_malloc_end;
->  extern ulong mem_malloc_brk;
->
-> +/**
-> + * mem_malloc_init() - Set up the malloc() pool
-> + *
-> + * Sets the region of memory to be used for all future calls to malloc(), etc.
-> + *
-> + * @start: Start address
-> + * @size: Size in bytes
-> + */
->  void mem_malloc_init(ulong start, ulong size);
->
->  #ifdef __cplusplus
+> @@ -288,7 +284,7 @@ static void wget_connected(uchar *pkt, unsigned int tcp_seq_num,
+>                                           pkt_q[i].len);
+>                                 unmap_sysmem(ptr1);
+>                                 debug_cond(DEBUG_WGET,
+> -                                          "wget: Connctd pkt Q %p len %x\n",
+> +                                          "wget: Conncted pkt Q %p len %x\n",
+>                                            pkt_q[i].pkt, pkt_q[i].len);
+>                                 if (err) {
+>                                         wget_loop_state = NETLOOP_FAIL;
 > --
-> 2.43.0
+> 2.45.2
 >
-
-This looks ok as long as map_sysmem() is a 1:1 mapping for non-sandbox
-archs. NXP seems to be calling these with an address already.
-I guess since we only define an alternative map_sysmem() for sandbox this is ok
 
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
