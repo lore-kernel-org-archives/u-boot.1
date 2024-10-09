@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 026C3CF042B
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 01:56:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CBC1CF042D
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 01:56:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42EED890D5;
-	Wed,  9 Oct 2024 03:55:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 997C9890C9;
+	Wed,  9 Oct 2024 03:55:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="diS5Lb7v";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jad8hDpS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7CEB890A9; Wed,  9 Oct 2024 03:55:50 +0200 (CEST)
-Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
- [IPv6:2607:f8b0:4864:20::52d])
+ id 703AE890A9; Wed,  9 Oct 2024 03:55:55 +0200 (CEST)
+Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
+ [IPv6:2607:f8b0:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6354890F3
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 03:55:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F878890F4
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 03:55:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-7e9f8d67df9so2560193a12.1
- for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 18:55:46 -0700 (PDT)
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-71e1a715c72so640895b3a.1
+ for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 18:55:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728438945; x=1729043745; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1728438951; x=1729043751; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=VLaTh7jOM3JKspE7a/n+hb/l5+aep67p/dSLDIsP70s=;
- b=diS5Lb7v4n7cybkHlci2wYT+2pcKjgRoau3CzS/TXvvXwlsqu0TIGnp0jnaL+ascEE
- DrStv3oLztku37pzz/vQxxSo50BGUfBC0i1u1OwpQC9WxgHKIMtOGOiC2Xj8+TETbnvm
- Ob6eWqmyno2+hTERYWZc11/qotdpSvveH6hH4=
+ bh=GYF2xGRS0sBsGJt+Sp96Ctkpk59whpdDrMVamaNcbEg=;
+ b=jad8hDpSROOd5c7nenHdSUHCZADCMv6+QB9d0KKQY5VDv07gXxbIYoZwtHE1Q1Pu+v
+ NbXsyTf8CvBg4YE4Tb3P11tvoLMzX8tXDOOc/rxgOaoxuhLSabY8U8FtzZvQPfa56Q/h
+ yBufWTDDvp180SB7ImmI88SFWH7lIBdtE4gRw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728438945; x=1729043745;
+ d=1e100.net; s=20230601; t=1728438951; x=1729043751;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=VLaTh7jOM3JKspE7a/n+hb/l5+aep67p/dSLDIsP70s=;
- b=Hyf6n1eK+/oNg7vtx5pmqfHCqeu5rRdjLR2J/sDhqiqmZeIpo5aRpq8q3HVRecLJx8
- Zi2mFRdTcHmpxDsNU7m04JvKW4DfDLb+5T2U22TUoKf+r7n2bWqWZ6jAJUKx8q0iKj5p
- ih8fDUuLZwpjMrpZ1ScSTwX6UBWUY9196ZBNeSlfrhF7qVNB29K+9fH8X07/CuWkovtJ
- 6cXK7rzOR24LZUlpjGgJuorjvll7cIRA2wH7i8set9dz4SgIIS+cKpIOYEiHs2o5eJZU
- JJc25U/dWyK9pOWIV3zCBNJN/Y5DMlbBcxQz9btezTVCYS/X5QaFwLDzLcVg9sYHdLvA
- 7Fqg==
-X-Gm-Message-State: AOJu0Yz+QG4w3Fmx018QQptMQsPLc4Yfe7vXHRlP6X2dNF6eFU8H5CvB
- 5x592ji9BIZfIwuF+Sg4nruSLdkHU1mdS6GkJ97n0apf6BJ2bn5k8hEBf5/cT+WR4FYEXEDAPU3
- vOdLKJ5hLm2xK4UYazSQgqIaHqc76isMxQcIG
-X-Google-Smtp-Source: AGHT+IF9v4wyLC0oR8kHSj1/XkUmrRscuY0qsSDxacPez23tdgPqMdYT5BiVV4SyLIN2U0y3KCKLlzWSe69lMsGuWFQ=
-X-Received: by 2002:a05:6a20:d046:b0:1cf:e5e4:d225 with SMTP id
- adf61e73a8af0-1d8a3c3b55bmr1156253637.37.1728438945554; Tue, 08 Oct 2024
- 18:55:45 -0700 (PDT)
+ bh=GYF2xGRS0sBsGJt+Sp96Ctkpk59whpdDrMVamaNcbEg=;
+ b=B2pEGphjcJBi0HlFytKdRWXhtfLTui7ByFzak4Nudtndk1hnEyy1iRuQAW6OSX4VhL
+ LCAmuW+ijfH2Fl7PRtafY5/uRio5PlMWyhpyQ1yAcvAcAV8PsfhcdJJ4W6IZ5o1zFBrH
+ O496g/BYm/aBCjGvnPFCikZ7Uuw6oab6g3W+2ak/7ywzSsmdP5Glx6seOh56x8BiXLi9
+ QMfRLuFv/26yR/0Clm0NjAGlG1iC/39hbQa4yCc2AtT8LPqgYX034R2ucKSEkaERT4bh
+ trP4ooW1kW/7EkTbITsxZ6EAPkcqQbQVjNfic4hxLrAYAr+FjaXfz5oywCVPbYHBgjss
+ sB2Q==
+X-Gm-Message-State: AOJu0YxZYGbF9ix3jO6PepKxwqjQiRRli45nkXrE/w5ynbc/hvKwW+kk
+ loStB4sKexH03VLylh+qPsKPoykt1gJLpNyfhrWvywNH3tyJReiSzmR0LzlvDDiAgN0y1VbKQrR
+ X1RM2AcuagSklPKOUyuphZMphvtNrKJr1VbpF
+X-Google-Smtp-Source: AGHT+IFig1myFhQYQzXWkk2b6Otbb+TR7wv1BPCZhFzLoiwKeXVf0yzs42cCSUcGa1Zc2UHPDnjN06NWgkrDqOaVzmY=
+X-Received: by 2002:a05:6a00:4b50:b0:71e:135a:ae5f with SMTP id
+ d2e1a72fcca58-71e1db77064mr1498144b3a.11.1728438951177; Tue, 08 Oct 2024
+ 18:55:51 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241004225916.361000-1-marex@denx.de>
- <20241004225916.361000-3-marex@denx.de>
-In-Reply-To: <20241004225916.361000-3-marex@denx.de>
+References: <fbed0251437b61a2f7a85596d7403b5b9c8237c1.1728306322.git.michal.simek@amd.com>
+In-Reply-To: <fbed0251437b61a2f7a85596d7403b5b9c8237c1.1728306322.git.michal.simek@amd.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 8 Oct 2024 19:55:29 -0600
-Message-ID: <CAFLszTgyKe1penWB-TYm8y73=OWw6BuZdxJ4maRobgz37EF=3g@mail.gmail.com>
-Subject: Re: [PATCH 3/3] ARM: dts: stm32: Generate u-boot.itb using binman on
- DH STM32 DHSOM
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Sean Anderson <seanga2@gmail.com>, 
- Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com, 
- uboot-stm32@st-md-mailman.stormreply.com
+Date: Tue, 8 Oct 2024 19:55:31 -0600
+Message-ID: <CAFLszTiBHjqc-xeqsC51hFUed8bigv8+WsC9hUnv_tEC2RahcQ@mail.gmail.com>
+Subject: Re: [PATCH] binman: Add option for pointing to external description
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@xilinx.com, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, Andrew Davis <afd@ti.com>,
+ Bryan Brattlof <bb@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ "Leon M. Busch-George" <leon@georgemail.eu>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Sean Anderson <sean.anderson@seco.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,49 +88,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 4 Oct 2024 at 16:59, Marek Vasut <marex@denx.de> wrote:
->
-> Describe the u-boot.its generation in stm32mp15xx-dhsom-u-boot.dtsi
-> binman {} DT node as a replacement for current CONFIG_SPL_FIT_SOURCE
-> use, dispose of both u-boot-dhcom.its and u-boot-dhcor.its.
->
-> Use fdt-SEQ/config-SEQ to generate a list of fdt-N fitImage images {} and
-> matching configuration {} node entries. The configuration node entry names
-> no longer encode _somrevN_boardrevN suffix, which was never really used, so
-> drop this functionality by default. Rework board_fit_config_name_match() to
-> match on the new configuration node entry names.
->
-> Users who do need the match on _somrevN_boardrevN can either replace the
-> fdt-SEQ/config-SEQ with fixed fdt-N/config-N nodes which each encode the
-> matching 'description = "NAME_somrevN_boardrevN"' to restore the old
-> behavior verbatim, or better use SPL DT overlays for U-Boot control DT
-> the same way e.g. i.MX8MP DHCOM does to support multiple SoM and board
-> variants.
->
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Sean Anderson <seanga2@gmail.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@dh-electronics.com
-> Cc: u-boot@lists.denx.de
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
->  arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi    |  1 +
->  arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi    |  1 +
->  arch/arm/dts/stm32mp15xx-dhsom-u-boot.dtsi    | 53 +++++++++++
->  board/dhelectronics/dh_stm32mp1/board.c       | 19 +++-
->  .../dh_stm32mp1/u-boot-dhcom.its              | 91 -------------------
->  .../dh_stm32mp1/u-boot-dhcor.its              | 70 --------------
->  configs/stm32mp15_dhcom_basic_defconfig       |  2 -
->  configs/stm32mp15_dhcor_basic_defconfig       |  2 -
->  8 files changed, 70 insertions(+), 169 deletions(-)
->  create mode 100644 arch/arm/dts/stm32mp15xx-dhsom-u-boot.dtsi
->  delete mode 100644 board/dhelectronics/dh_stm32mp1/u-boot-dhcom.its
->  delete mode 100644 board/dhelectronics/dh_stm32mp1/u-boot-dhcor.its
+Hi Michal,
 
-For the use of Binman:
+On Mon, 7 Oct 2024 at 07:05, Michal Simek <michal.simek@amd.com> wrote:
+>
+> Adding binman node with target images description can be unwanted feature
+> but as of today there is no way to disable it.
+> Also on size constrained systems it is not useful to add binman description
+> to DTB.
+> Introduce BINMAN_EXTERNAL_DTB Kconfig symbol which allows separate DTB for
+> target from DTB for binman itself.
+>
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> ---
+>
+>  Makefile    |  2 +-
+>  lib/Kconfig | 10 ++++++++++
+>  2 files changed, 11 insertions(+), 1 deletion(-)
+>
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Doesn't this defeat one of the purposes of Binman, i.e. to document
+images? We do want the .dts to include the image description. What
+sort of problem is this causing?
+
+Regards,
+Simon
