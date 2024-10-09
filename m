@@ -4,65 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 498C5CF042B
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 01:55:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D52CCF042B
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 01:55:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 617598909B;
-	Wed,  9 Oct 2024 03:53:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BF87789098;
+	Wed,  9 Oct 2024 03:53:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CeEZ5rRI";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YwFSyG4I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE0B68909B; Wed,  9 Oct 2024 03:53:06 +0200 (CEST)
-Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
- [IPv6:2607:f8b0:4864:20::42a])
+ id 491E0890CA; Wed,  9 Oct 2024 03:53:10 +0200 (CEST)
+Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
+ [IPv6:2607:f8b0:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E20A8906D
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 03:53:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2011B8909E
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 03:53:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x42a.google.com with SMTP id
- d2e1a72fcca58-71df67c67fcso2490174b3a.2
- for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 18:53:04 -0700 (PDT)
+Received: by mail-pf1-x42c.google.com with SMTP id
+ d2e1a72fcca58-71de9e1f374so3303524b3a.1
+ for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 18:53:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728438783; x=1729043583; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1728438786; x=1729043586; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=JOY5HiPIwLJoIP5wbC4dEJl6JKdVKNK4UW6y3rEcKK4=;
- b=CeEZ5rRIO2HICE/40SqRm4HU+qlyPcjeOFRt4LzUWmIoZ9Q0SpuKETbX572kUIHEGy
- 1lyzsUnNjUuPPBDvf6+JsJYp3eJakf4jWEdBwCdnSrGlJyd4qHd7tRluT7K/hWsvrbbN
- 0cpyYGpu7bR+HY/bJfpp6cg0wZkynX+RNR0+s=
+ bh=RH5JqgfHCfJ7Yws+qV4Pv2NTUxppE4KhMDccikR2XuA=;
+ b=YwFSyG4IER1ruV3wL2YviDDWxgVhlqRmzBlkHid5vcgWfc1BivNE98NnQy04fRkgd8
+ ZdM6agYn1UUfCq0Tz9/iWsOf7vmUnk72yPp3KGegwKOCHcbWyL3B7ZMO5kH/ulrX5AIv
+ tHKvOrYyeP7rYvPzeZ5XphDIhH1AvW3wlHx9k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728438783; x=1729043583;
+ d=1e100.net; s=20230601; t=1728438786; x=1729043586;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=JOY5HiPIwLJoIP5wbC4dEJl6JKdVKNK4UW6y3rEcKK4=;
- b=MS9CeTWMjDfncW35xhF55GVjfjT6++OocNDC9SurlCe6eVTxIrd1werx9UEeeEeOCa
- QaQnC8zSPU8Tpegd9lpnN2pTW3PGAaUlt5SraeLigbLiliwoLzsET/t87sPx7NYUnOEh
- qrye4PSzMNwjpoPwYpv1riaOxNHGGBMePQLVOABV+VIPBIXnZLYRgCwbSuBm2+rmNMAL
- UuBBU97WXYFG8PEXg2SicgZWHxUlrYkJuCtNU8Evg7rxzR6nbsVXOAcOkClHTIKtSTJC
- fF7epI6OKEENythfiOo/DkuHzIbreRpPxtRK4lFuamM1ihuJOyXX+fZqfM8j9AbMKIdN
- pxgg==
-X-Gm-Message-State: AOJu0YyQWz+DbueCLoOW0CMsujjIAJH4KK7xh7BHeGXQKjJEjcfRsvbV
- MTEcdFDBpQaQbAVkQIX9WwmBsnEOy2kqN1tLkJaBc4NAWFav1PS80b9dhVk0W0a43kn0gOcch9+
- N8VdV7EbQz0yuwMKfJiJ9FJXXvv19WMMFME/d
-X-Google-Smtp-Source: AGHT+IHeN46kZ5wI77QqISXpd2rYb9XQY2AU7hkcGkVk3GQWmc2ju03q5ouBUeGUZp44ViWRji99HVlDhFws1GcuZFc=
-X-Received: by 2002:a05:6a00:1406:b0:71e:104d:62fe with SMTP id
- d2e1a72fcca58-71e1dbb5ad8mr1386945b3a.20.1728438783054; Tue, 08 Oct 2024
- 18:53:03 -0700 (PDT)
+ bh=RH5JqgfHCfJ7Yws+qV4Pv2NTUxppE4KhMDccikR2XuA=;
+ b=P/Xlz6Zv5sAFLT2sFlSSYL2mQdHJg5TC9zCO8EW8FSUeqnMTpwlS6URf/wHGbuRkuK
+ thWY6rPb8Fy+5YNnEnigv2HbhXRmpyDN3kUgob+pWHb2yTMkq8SZ/UYK336RIMU6NC7D
+ ZpwRdD7Uy/j+OR7mawDdz0U74E1rK/vG/SN6d3LSuj/lMJUZ0MUJj9psYBO0IiH3mtb6
+ ROmcknxJOOQvqeCfaHcai2CS/YADfwDOScuYaBHFo8nTUxhUGyGaG0Vv5wO3FoxPAca2
+ /2VtW9/F4A2nAKV6ghrklCWSyCuWXibl6S5Yfi9w9tIFFYfRVDx0Lad/N601Bg9bmNz6
+ g5Sg==
+X-Gm-Message-State: AOJu0YzqDvJbY2N0wHEUb/QlGEAelu0P9G4bgX3V9kViCGXfyMZGNBn2
+ WFaeoNY1glNZpL+mrvfzIADDDMuiJVM3BUiaisaE1wyZttPXhRDYvlPOE/+Hvy5nkFE9lJ+YyVb
+ uKIri/NFvK3LmTaGFNYl3lTPkczKgBSWqek8axir00U9HvO2IJg==
+X-Google-Smtp-Source: AGHT+IHK3kh+Feb9p1FfKWnvDZR94rSBtQnfR73lGiqyz+UfnNz1ef8bYet9zoquB6z8cnzoKfj6cYGir2Ju0wkYzw4=
+X-Received: by 2002:a05:6a20:ce45:b0:1cf:38b0:57ff with SMTP id
+ adf61e73a8af0-1d8a3c7792amr1447687637.48.1728438786703; Tue, 08 Oct 2024
+ 18:53:06 -0700 (PDT)
 MIME-Version: 1.0
 References: <20241003212802.3810-1-ravi@prevas.dk>
- <20241003212802.3810-4-ravi@prevas.dk>
-In-Reply-To: <20241003212802.3810-4-ravi@prevas.dk>
+ <20241003212802.3810-6-ravi@prevas.dk>
+In-Reply-To: <20241003212802.3810-6-ravi@prevas.dk>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 8 Oct 2024 19:52:39 -0600
-Message-ID: <CAFLszTiTvhbUOkQ7+XMcy_Bznia2H4TX7o9zURzdfhXei6npow@mail.gmail.com>
-Subject: Re: [PATCH 03/13] led: include cyclic.h in led_sw_blink.c
+Date: Tue, 8 Oct 2024 19:52:40 -0600
+Message-ID: <CAFLszTjpaMS6PdVtc3WEvUHVB+Fjbmv4kA0ucC7fRwBPSjthng@mail.gmail.com>
+Subject: Re: [PATCH 05/13] fs/cramfs: use schedule instead of cyclic_run as
+ callback
 To: Rasmus Villemoes <ravi@prevas.dk>
 Cc: u-boot@lists.denx.de, Stefan Roese <sr@denx.de>,
  Tom Rini <trini@konsulko.com>
@@ -83,34 +84,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 3 Oct 2024 at 15:28, Rasmus Villemoes <ravi@prevas.dk> wrote:
+On Thu, 3 Oct 2024 at 15:29, Rasmus Villemoes <ravi@prevas.dk> wrote:
 >
-> This makes use of the cyclic API but relies on implicitly getting the
-> appropriate declarations through some nested include. Include the
-> cyclic.h header directly.
+> Prior to commit 29caf9305b6f ("cyclic: Use schedule() instead of
+> WATCHDOG_RESET()") we had
+>
+> /* Currently only needed for fs/cramfs/uncompress.c */
+> static inline void watchdog_reset_func(void)
+> {
+>        WATCHDOG_RESET();
+> }
+>
+> and .outcb was set to that watchdog_reset_func().  Said commit changed
+> that .outcb to cyclic_run instead of schedule, which would otherwise
+> match all the other WATCHDOG_RESET replacements done. As the
+> HW_WATCHDOG case is not handled by cyclic_run, this seems to be an
+> oversight.
 >
 > Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
 > ---
->  drivers/led/led_sw_blink.c | 1 +
->  1 file changed, 1 insertion(+)
->
+>  fs/cramfs/uncompress.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
 
 
-> diff --git a/drivers/led/led_sw_blink.c b/drivers/led/led_sw_blink.c
-> index 9e36edbee47..6976b84544e 100644
-> --- a/drivers/led/led_sw_blink.c
-> +++ b/drivers/led/led_sw_blink.c
-> @@ -5,6 +5,7 @@
->   * Author: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+>
+> diff --git a/fs/cramfs/uncompress.c b/fs/cramfs/uncompress.c
+> index 2141edf22e4..97af8cb2b4f 100644
+> --- a/fs/cramfs/uncompress.c
+> +++ b/fs/cramfs/uncompress.c
+> @@ -21,9 +21,9 @@
 >   */
 >
-> +#include <cyclic.h>
->  #include <dm.h>
->  #include <led.h>
->  #include <time.h>
+>  #include <stdio.h>
+> -#include <cyclic.h>
+>  #include <malloc.h>
+>  #include <watchdog.h>
+> +#include <u-boot/schedule.h>
+>  #include <u-boot/zlib.h>
+>
+>  static z_stream stream;
+> @@ -63,7 +63,7 @@ int cramfs_uncompress_init (void)
+>         stream.avail_in = 0;
+>
+>  #if defined(CONFIG_HW_WATCHDOG) || defined(CONFIG_WATCHDOG)
+> -       stream.outcb = (cb_func)cyclic_run;
+> +       stream.outcb = (cb_func)schedule;
+>  #else
+>         stream.outcb = Z_NULL;
+>  #endif /* CONFIG_HW_WATCHDOG */
 > --
 > 2.46.2
 >
