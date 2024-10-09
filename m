@@ -4,70 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE241CEE34F
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 21:14:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60EF9CEE350
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 21:14:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 404AE88D38;
-	Wed,  9 Oct 2024 23:14:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A73B988D8F;
+	Wed,  9 Oct 2024 23:14:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BFjUbPDD";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PlQ0ZG+o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B52A788D5B; Wed,  9 Oct 2024 23:14:05 +0200 (CEST)
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
- [IPv6:2607:f8b0:4864:20::f29])
+ id 0AD3588DCF; Wed,  9 Oct 2024 23:14:12 +0200 (CEST)
+Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
+ [IPv6:2607:f8b0:4864:20::b29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 944AA88CAE
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 23:14:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F0AE88C98
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 23:14:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-6cbcc2bd800so2571126d6.0
- for <u-boot@lists.denx.de>; Wed, 09 Oct 2024 14:14:03 -0700 (PDT)
+Received: by mail-yb1-xb29.google.com with SMTP id
+ 3f1490d57ef6-e290554afb4so224407276.0
+ for <u-boot@lists.denx.de>; Wed, 09 Oct 2024 14:14:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728508442; x=1729113242; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1728508448; x=1729113248; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ghvtyQccgVn17rEGgzmVL1TPZSwkQrky+4OpnjbxUr0=;
- b=BFjUbPDD2qsB7nQVMWaExeICMa/Fx7iZ1Q9CuOYRsEYpqKsafSBCf1t7JVCYYeUo1m
- WKuf1eTegeFk46j32ow7emZEpmqZMtEVLB72EAowSZHoTyZeDSMcI0C4Rfmg2RnWP3vM
- 2nF/8iKWxdkX1b3rI40yErCOvI9LfvZJKaeus=
+ bh=B1ZzFY8ew3PgEyyA7L8n1a58td38iOPZJavZPfRIK2o=;
+ b=PlQ0ZG+oedSPbxxmAN6HNa2BZLHNMbpKu4PCIGwWsqn/5l9NnJWhJHIdk60jdiJOpS
+ 07nyQY7d+mkvWs1bbodhjTz6/sZw0rCViRuDOxc3DYRe4gil57Eom1/nEOA8Cp5JjQy2
+ Qw5pKMFU/4YWlOpEFwQ4m0ZVauWgYHHMRJk90=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728508442; x=1729113242;
+ d=1e100.net; s=20230601; t=1728508448; x=1729113248;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ghvtyQccgVn17rEGgzmVL1TPZSwkQrky+4OpnjbxUr0=;
- b=PfrqHEWidoSj0B9nui+8U/L9X19PLogfZi0dDcBtUbdIr80oJE1809g4/KuA3tatMd
- kcnxhNx+GcitAdIPQj/qFbg6MoKYIaekrCY/FWv0ZtXGUrfX0rkAKBSi24Of17DGW6gu
- RNPTeveCzpejfHtSY3Ke3gWkckK2cOTIIzbj3KnQV7shhm69w7q9PgN5awmU5IHJbArC
- 7QuDnChexwFkkJB+Be+MezuaVUtgRkGSHVnZHaVB+5lY6v/1tqWsAdjBqx8cA/uKW7PG
- s6l11EAeJgcULquHgEFUL1iW2mrxLvdOOvi6ynfEoxuUmlfK0wqaNfg9vAz9H4ARGs9V
- oUzg==
-X-Gm-Message-State: AOJu0Yx+BI66h+lmFvc4hoOkmxpkmqHSVSKafNcaglvKyzbZYJmR0hgP
- DOSjt+JdnXzYhRZU1qRAuAxPqtTw+9rELlbu5EUvtkqqzhbAHnAK/D7Rr7dtFvIAAQZSZYkjZ71
- iKPLeVneobaIiVCJMDDgmvn38BN7/qWkCP6wz
-X-Google-Smtp-Source: AGHT+IGx0IneXM30EUXKb0Pj9P3EXI5cD+ZHdl+7ybZmSVAXx4FMmpPcjT43EToFyVzA03xqp6dbvhTOrpxbqfNmHjc=
-X-Received: by 2002:a05:6214:5c02:b0:6cb:d3e2:ea0d with SMTP id
- 6a1803df08f44-6cbe522d3cbmr14976106d6.12.1728508442482; Wed, 09 Oct 2024
- 14:14:02 -0700 (PDT)
+ bh=B1ZzFY8ew3PgEyyA7L8n1a58td38iOPZJavZPfRIK2o=;
+ b=Xx8ipDMaACI/+HYjepbtVmQzPATm5aWGAZfm8zqwRlGvfeulSJtg3IbUGu7cM6RlmH
+ PtML8QMphvBMBd4XcYQsRJ9TwtAcdfdY3hOK5RP0x5FXSmJKJ5iInNHY1Xi3Bs2p/s7v
+ 3xvwI1AWF3jGR4BTc0/ifcJwv13pKmfGmYSNxEfaeBRcViVMZ9D3HvAisSs6H4COenNF
+ J+z0Ldqm8xU6ZqI2xBy15VJyfO+9h77isyOQ/UMMk+Jw9X072jLig44aw4lXq4wE213o
+ FutsCjQmshGvu4zJDUMojUy+f0rLs700CRIeb4QzUg86FKJJHUhSHvEfiL3DRLZUMGZb
+ vfhw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWYD5Q3/R6BcoZf70uKPIiU3LBXNv/auV7GhOuqzxBdz860/17W3JQvOuUJpYXpl46585TUP+g=@lists.denx.de
+X-Gm-Message-State: AOJu0YyPHOLXRkVNwHjcmDAtV8At4OvCQ7iFmA8KZXrgMKdHe+5W/Iff
+ BmJiKtTnpLyj3nc/vsVOMfgsj62GSNKSkS4j7kCA0wEF7SV/+jABHx+DeNw5ODo4Q/GBDSjcJba
+ wpZiIwyF8mrDGf32FBBIHmp0/vDG47f3qQy9N
+X-Google-Smtp-Source: AGHT+IGMmgFMOhIRUZWbRUVbY8B2v8wdTyV6Y3CTd9wc4tIg5PMLFEwTYB+eogyHnkvX7GhhXaqpNO/01ajFFW+4VR8=
+X-Received: by 2002:a05:6902:c06:b0:e22:5c14:4c4 with SMTP id
+ 3f1490d57ef6-e28fe4f1395mr3223189276.56.1728508448391; Wed, 09 Oct 2024
+ 14:14:08 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241003212802.3810-1-ravi@prevas.dk>
- <20241003212802.3810-3-ravi@prevas.dk>
- <CAFLszTiiCgKGrn2vuMSfrg9Et=Oi+VcEEycQjYK7qS7zAQEesA@mail.gmail.com>
- <875xq15yaq.fsf@prevas.dk>
-In-Reply-To: <875xq15yaq.fsf@prevas.dk>
+References: <20241008-android_ab_master-v3-0-f292c45a33e4@salutedevices.com>
+ <20241008-android_ab_master-v3-4-f292c45a33e4@salutedevices.com>
+ <CAFLszTh7qjUN__MvAbcMPL+W4V=mfBrgt9zcg8zyfx+WBN=9bg@mail.gmail.com>
+ <20241009132614.mlkpfkdni4cp2tgg@CAB-WSD-L081021>
+In-Reply-To: <20241009132614.mlkpfkdni4cp2tgg@CAB-WSD-L081021>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 9 Oct 2024 15:13:51 -0600
-Message-ID: <CAFLszTgDUaiwUda9bf4rvxGO8sWgX9b0bsPZS+4jGz9MZ2eWTA@mail.gmail.com>
-Subject: Re: [PATCH 02/13] cyclic: introduce u-boot/schedule.h
-To: Rasmus Villemoes <ravi@prevas.dk>
-Cc: u-boot@lists.denx.de, Stefan Roese <sr@denx.de>,
- Tom Rini <trini@konsulko.com>
+Date: Wed, 9 Oct 2024 15:13:57 -0600
+Message-ID: <CAFLszTgr-qHXF2QU7toZXOU0FgRMPU0XXnQ6SzMq32a_pguAww@mail.gmail.com>
+Subject: Re: [PATCH v3 4/6] cmd: bcb: introduce 'ab_dump' command to print BCB
+ block content
+To: Dmitry Rokosov <ddrokosov@salutedevices.com>
+Cc: Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ "Andrew F. Davis" <afd@ti.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Mario Six <mario.six@gdsys.cc>, 
+ u-boot@lists.denx.de, u-boot-amlogic@groups.io, rockosov@gmail.com, 
+ kernel@salutedevices.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,38 +93,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rasmus,
+Hi Dmitry,
 
-On Wed, 9 Oct 2024 at 05:08, Rasmus Villemoes <ravi@prevas.dk> wrote:
+On Wed, 9 Oct 2024 at 07:26, Dmitry Rokosov <ddrokosov@salutedevices.com> wrote:
 >
-> Simon Glass <sjg@chromium.org> writes:
+> Hello Simon,
 >
-> > On Thu, 3 Oct 2024 at 15:28, Rasmus Villemoes <ravi@prevas.dk> wrote:
->
-> >>  common/cyclic.c           |  1 +
-> >>  include/cyclic.h          | 12 +-----------
-> >>  include/u-boot/schedule.h | 24 ++++++++++++++++++++++++
-> >>  3 files changed, 26 insertions(+), 11 deletions(-)
-> >>  create mode 100644 include/u-boot/schedule.h
+> On Tue, Oct 08, 2024 at 07:57:15PM -0600, Simon Glass wrote:
+> > On Tue, 8 Oct 2024 at 14:18, Dmitry Rokosov <ddrokosov@salutedevices.com> wrote:
+> > >
+> > > It's really helpful to have the ability to dump BCB block for debugging
+> > > A/B logic on the board supported this partition schema.
+> > >
+> > > Command 'bcb ab_dump' prints all fields of bootloader_control struct
+> > > including slot_metadata for all presented slots.
+> > >
+> > > Output example:
+> > > =====
+> > > > board# bcb ab_dump ubi 0#misc
+> > > > Read 512 bytes from volume misc to 000000000bf07580
+> > > > Read 512 bytes from volume misc to 000000000bf42f40
+> > > > Bootloader Control:       [misc]
+> > > > Active Slot:              _a
+> > > > Magic Number:             0x42414342
+> > > > Version:                  1
+> > > > Number of Slots:          2
+> > > > Recovery Tries Remaining: 0
+> > > > CRC:                      0x2c8b50bc (Valid)
+> > > >
+> > > > Slot[0] Metadata:
+> > > >       - Priority:         15
+> > > >       - Tries Remaining:  0
+> > > >       - Successful Boot:  1
+> > > >       - Verity Corrupted: 0
+> > > >
+> > > > Slot[1] Metadata:
+> > > >       - Priority:         14
+> > > >       - Tries Remaining:  7
+> > > >       - Successful Boot:  0
+> > > >       - Verity Corrupted: 0
+> > > ====
+> > >
+> > > Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
+> > > ---
+> > >  boot/android_ab.c    | 68 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+> > >  cmd/bcb.c            | 35 +++++++++++++++++++++++++++
+> > >  include/android_ab.h | 10 ++++++++
+> > >  3 files changed, 113 insertions(+)
+> > >
 > >
 > > Reviewed-by: Simon Glass <sjg@chromium.org>
 > >
-> > But could it just be include/schedule.h ?
+> > Can you also update the test?
 >
-> I think the last paragraph in the commit message should answer that:
+> I apologize, but I didn't quite understand your point. Could you please
+> clarify? This patch series includes additional tests for the 'ab_dump'
+> subcommand. For more details, please refer to:
 >
-> >> Testing of later patches that explicitly include <schedule.h> when
-> >> schedule() is used revealed a problem with host tool build on win32,
-> >> which apparently picked up a host <schedule.h>. To avoid that problem,
-> >> put the new header in include/u-boot/ and hence make the include
-> >> statements say <u-boot/schedule.h>.
->
-> So I tried that at first, and it worked fine for all my local builds,
-> but the CI told me it couldn't. I can try to find the old github PR
-> where I got the CI to tell me this (it's months ago I started doing
-> this), but I don't know if the azure logs still exist.
+> https://lore.kernel.org/all/20241008-android_ab_master-v3-6-f292c45a33e4@salutedevices.com/
 
-Ah yes, thanks.
+OK, thank you. Sometimes it is easier (for reviewers) if you update
+the test in the same commit.
 
 Regards,
 Simon
