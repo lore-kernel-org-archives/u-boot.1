@@ -4,67 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB52ECF042F
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 01:59:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D43BCF042F
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 01:59:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D4F3389118;
-	Wed,  9 Oct 2024 03:57:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7729B89155;
+	Wed,  9 Oct 2024 03:57:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mkEywzxA";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="h2hGB1WZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 216DD89144; Wed,  9 Oct 2024 03:57:35 +0200 (CEST)
-Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
- [IPv6:2607:f8b0:4864:20::f36])
+ id 909758914F; Wed,  9 Oct 2024 03:57:35 +0200 (CEST)
+Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
+ [IPv6:2607:f8b0:4864:20::72c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BED928913C
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 03:57:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6A2FD885F4
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 03:57:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf36.google.com with SMTP id
- 6a1803df08f44-6cbbe3f6931so12663596d6.0
- for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 18:57:31 -0700 (PDT)
+Received: by mail-qk1-x72c.google.com with SMTP id
+ af79cd13be357-7acdd65fbceso494283785a.3
+ for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 18:57:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728439051; x=1729043851; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1728439052; x=1729043852; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1NX8eytFp1hR/Qnkv06nHIgA7I/OokWp5jhWHmdhIGo=;
- b=mkEywzxAjhfnOLh8jAocUbNTniooOngYXRVquFVFqK0PgbTtcK+6zn8cXw2cD1+QGz
- 2VE8TJiwx8b1jGURcNogBUdwzRZYLccz2NXCjt+ODCGsTWsRhcZoalkGrhUpViLRIWxG
- rVuPdylVLqbl+hHgxv1Ov2yC8VaoIbXz12kX0=
+ bh=inc9DbOOFM/mCOsAsgy3mpPCE5+6FEheJNVKjIGmqbE=;
+ b=h2hGB1WZ8KlJUIukutIFP2JHdAXtmFtZTe9VGSHl5jCtcAkWpH2vUlZykS7gHuUM+4
+ gp2mPk3uPZcR4deOOEcLQWbMz+YeFoO8wdd846EWM7+nd4f+6wqjWc3qFTz27yDIqNfD
+ v0tu4Lh1kwyLMQCfRSU0uN+L2T6O6vzdnBtkY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728439051; x=1729043851;
+ d=1e100.net; s=20230601; t=1728439052; x=1729043852;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=1NX8eytFp1hR/Qnkv06nHIgA7I/OokWp5jhWHmdhIGo=;
- b=UgFPrTKMDzrU0gIKOQe/pk05/4dZPUC/wLXuhjb1pV4MH2wfXPTr7V3++TOzLNN9pH
- grCubnf04q34mt9TnQS07tgS+GrDkyGI5EYxJOf1dOvdhL3xzlp60ZWRw7sg3vRh+E8W
- v4uIPMLHSzNbXJ+6/XFNTu9g/eE24lSEr0/UWwwsP/Aqw/TCH1t5n29iXS75zfVqd2Sz
- COAJbMS7IUNgyCvE0qc6DtNsvlXbVrrrlTc8O+X7pI38zaCF75BHPu1veJzqRZG/KYQ7
- Z9llMY64RlPlttosYeKINtQIQk6XlG8vQX1ncTBt80ppf4CFMvd4TMaheoMEYMKZVfKS
- y/Tw==
-X-Gm-Message-State: AOJu0YzfJv7FX36B047fRhUF5Tb+67Awh8HD5OIo4g3kydPleTImR+ic
- 9/p8g07lahleLy7t7nyHnZZV2Ah+AXpr6pPU5NaS9q5xlYyk0OZ5sQVBQXOWbfvPUpCVwxbDfOO
- 34drUjkbILjIw8Sqf+1TFzzNwFL3kDv+Wy4nQ/YCFL2xrcEihbQ==
-X-Google-Smtp-Source: AGHT+IF5bHS9NpXGXC+qcTOdfjSW3K4s+tLcZuDhhDQXq9jDakoisNs4E3Q6Td4eqfTLXEmKfaCblZnrOcgoODD7NSY=
-X-Received: by 2002:ad4:438f:0:b0:6cb:c9bb:8545 with SMTP id
- 6a1803df08f44-6cbc9bb8671mr13018606d6.11.1728439050757; Tue, 08 Oct 2024
- 18:57:30 -0700 (PDT)
+ bh=inc9DbOOFM/mCOsAsgy3mpPCE5+6FEheJNVKjIGmqbE=;
+ b=LREfJZluvpWFIdrpT2NbccXjKAOSzNYDP5sLoGAAqOVG712wnKkLzh5ODvVI8M/kKo
+ i8f8VWpHPPtIH4ZIfioJR54pe0D3fhpSSbxQXBuDhgnT66MoRCNkXuQCvNWR1FmsXb2A
+ STK6S6VxgndYts2eInS7nXLZT7rHwmLrNVgdoZRCP4ujYduvWDpEKreMyYBkad12f74W
+ uEhW0i79WLgF8AxLJFkSgFDSiVkyC3jah0FNaV3D1RN+TxJGRKJtrKZtuCWUWRQ8ccXN
+ yQAn8eOiwZTVtFiRlcZGXL5QpEfYA4nvoM65JFKZvcqRwDJZ1hgA6Q5+nSfU/Qcted0q
+ mHZA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW4BtfJAgRTa1qfhenDM9e4IqFAYJvLRpt9bpnJrUckSlnZ5am4b5OkV6tdHUUrG21dV82q8AA=@lists.denx.de
+X-Gm-Message-State: AOJu0YxF9kkekgO3Khu9Ztb34uoQhYSBPZkKmCwnMK41R7bWYbggv7Ym
+ HFVUN1sdHOT866d99WDBCEL7GRUtpJ1q+yFp/a75/ahx3wXRW2y/iD0cJjsqHc2y7RwD+9X/1J2
+ S65sUk84Kp1vWVDo+f9pJHK7VBdxlVe7Rb1QX
+X-Google-Smtp-Source: AGHT+IH036+bHAy6I1IXM0LL739mj2uuZhZYgfiTYu+Yo5R/Sx895xJdQk9LVDMWaaTKQvIYDdOv67ZhSxxCAlDcobg=
+X-Received: by 2002:a05:6214:4345:b0:6cb:50d0:56ae with SMTP id
+ 6a1803df08f44-6cbc932ef6dmr16821266d6.29.1728439052257; Tue, 08 Oct 2024
+ 18:57:32 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241008120813.622408-1-andrew.goodbody@linaro.org>
-In-Reply-To: <20241008120813.622408-1-andrew.goodbody@linaro.org>
+References: <20241008191834.2190270-1-jonas@kwiboo.se>
+In-Reply-To: <20241008191834.2190270-1-jonas@kwiboo.se>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 8 Oct 2024 19:57:20 -0600
-Message-ID: <CAFLszTjkBfFrGWOtdaLCbA=AF7B+Z+bz9fb0TbB6WwO2dUMWMA@mail.gmail.com>
-Subject: Re: [PATCH] test: Fix skip check for sleep command test
-To: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: u-boot@lists.denx.de, Bin Meng <bmeng.cn@gmail.com>, 
- Love Kumar <love.kumar@amd.com>, Tom Rini <trini@konsulko.com>
+Date: Tue, 8 Oct 2024 19:57:21 -0600
+Message-ID: <CAFLszTh-9XqRK1ETioXw=25fmzfdXnsXEwxtqjvUCKjytWJSUQ@mail.gmail.com>
+Subject: Re: [PATCH v2] Revert "mmc: dw_mmc: Extract FIFO data transfer into a
+ separate routine"
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Tom Rini <trini@konsulko.com>, Sam Protsenko <semen.protsenko@linaro.org>, 
+ Minkyu Kang <mk7.kang@samsung.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,17 +86,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 8 Oct 2024 at 06:09, Andrew Goodbody <andrew.goodbody@linaro.org> wrote:
+On Tue, 8 Oct 2024 at 13:18, Jonas Karlman <jonas@kwiboo.se> wrote:
 >
-> When the config option CMD_MISC was renamed to CMD_SLEEP the check
-> in the test for the sleep command was not updated. Do that now.
+> The commit 0252924ac6d4 ("mmc: dw_mmc: Extract FIFO data transfer into a
+> separate routine") unintentionally changed behavior of the FIFO data
+> transfer routine.
 >
-> Fixes: 16060854095 ("cmd: Rename CMD_MISC to CMD_SLEEP")
-> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> When data is read and size reaches 0 the original loop would wait on
+> DWMCI_INTMSK_DTO or timeout. The remaining size to read and buf position
+> is no longer tracked across dwmci_data_transfer_fifo() calls and because
+> of this an extra call to fifo() and dwmci_fifo_ready() may now trigger a
+> FIFO underflow timeout error and slows down FIFO reading.
+>
+>   Buswidth = 4, clock: 50000000
+>   Sending CMD16
+>   Sending CMD17
+>   dwmci_fifo_ready: FIFO underflow timeout
+>   Sending CMD16
+>   Sending CMD18
+>   dwmci_fifo_ready: FIFO underflow timeout
+>   Sending CMD12
+>   ## Checking hash(es) for config config-1 ... OK
+>
+> This reverts commit 0252924ac6d4af69061bb9589d16b30c5bdb7178 to restore
+> the old working behavior.
+>
+> Fixes: 0252924ac6d4 ("mmc: dw_mmc: Extract FIFO data transfer into a separate routine")
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 > ---
+> Changes in v2:
+> - Change to revert the offending commit, both size and buf where reset
+>   between fifo() calls, easier to do a full revert.
+> - R-b tag not collected because of this being a different patch.
 >
->  test/py/tests/test_sleep.py | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
+> Reading FIT from SD-card take ~20-30 seconds on a Rockchip RK3328 board
+> without this reverted, and goes back to sub second once reverted.
+> ---
+>  drivers/mmc/dw_mmc.c | 103 ++++++++++++++++++++++---------------------
+>  1 file changed, 52 insertions(+), 51 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
