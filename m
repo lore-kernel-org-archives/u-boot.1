@@ -4,171 +4,169 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4962FCED62A
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 08:18:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09BCFCED628
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 08:21:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A72EF8911E;
-	Wed,  9 Oct 2024 10:18:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 896528915F;
+	Wed,  9 Oct 2024 10:21:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="go4iHqNm";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="uNKXZv5K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E7368915B; Wed,  9 Oct 2024 10:18:51 +0200 (CEST)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on2071e.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2613::71e])
+ id 0068E89160; Wed,  9 Oct 2024 10:21:44 +0200 (CEST)
+Received: from EUR03-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur03on20705.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260c::705])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1FFF289137
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 10:18:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E5E708902A
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 10:21:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=KDNQWQC/KKP0/QOlp+WVacpqWqZ8KbkwpgDfAgttYi7vmLf1C8/Ds0aHht5bkMW4c5XxbdNpQsIC1uJi79CDYluka25hjVPeEV8O55UyPKjI6U6u1R4wXyYYlOApqhTI93UATbDarlVXz3o2lttA34H2ax3w8qzwhav1Vj30NIf3gJxBEPu+K/p0mOdOxRoYiQW5RjsaDkCDx5AYKxr5x6q8sa7dk6ub/GOdl5B9DrLy/oDsfSQ/EgmsKIMHKq2+0nSXJQsXAsFsIme5sWt1qtKTRmmTFRWgaxWllHE/e3c5OLnvO0cZDbBIrvTuemrd6PUyL2QGUuM16ufTwfXz1g==
+ b=TL+6a1LOYyDLox/IBM6MSFq+5NvBm3LJEDT1rbciU61NxiFmWAVy8eqlqMDuw4s3zIJTpHH1qYzPjtj6a6U1v+vroGSU/jad7SPJVyC+CaiOtTglE0lxmEQ3HHdXNHiLDye4SXnXoZgShncC43gnm4Y8Hv1T3jv4t9dnU6qVqxTOptud3AOe1Dhd91FtsiizHv0+EIQPliLpieFPV7Q03ReroGTazZJqC4KwXgFWQi2PuWRi8gSvsbRLy/Ots/Aod4+MCxAMpWrRoVKkoEaecVuFb5wa7qEB8Ut5t3fHeSk3iTY/A02NxxhJTVgSySMfaAlPcCea4a/1XIQMTD76og==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5Wc56kZnqX9xGekEr4tpiTCkbYNGmPTK7nbMxa8GeGg=;
- b=yHYoB8hx8ayiYU+57YZ9vwhpOTbaX6tnpKrNpt8+RcucFehOoNGd6QL4uC+3JvLvPXdYoUNJFqGMztkH5Emtnx4HhV7LrjBW5z0ljhWYAPL3Kn5tTwId8jOGSJMvpiFGnNl5Onyre6yqSv+R0uk+PQVEMBabgELKyQcuLAp17FwKiltZsVJ6dNHcKbrzhi9Y1mhVN3CRxGtIYsUkSlMoJ93iQo1bI0xKSaMmmYlVZaKe0o5AJ8A92O863+1sjaDIVRd0R9QhoFcT+SadoC0XCQYeJnvrJubt4M/EdHOG02DJdtuWcHTrPEVru43+TuvoAdnI0bBXddJJXQ2XQw9UMg==
+ bh=O8A/WIthcMbxFz1RyN+sG0aC8Se9Z9p2UWAfzmAjRGA=;
+ b=H+if9E2dEdtXTULPZ8jJawJf9aI5b/5l09qDwHkuCHGL4BvtkKMDTCblnvBDHphkskeEdHZNiDGKDNhGWw5D9LQHKtjLF9mpochsbtb3zEFKi01h0ehA5gyidfvjHpXyIDKz2nXGTNdVlDIABwyg8W7Fd35Gj3Kc35dh4lXkcEqpG7ZrLXlVAdaHOuRut1DbJmf1T2kRMtrLcsvGsxXmrYAekahP7mKvJeTCZNkBrU5PGj/OZEE/hjjpkHDYtEKCyRxYolA5NBUcq/iYnBYBU62Vlp64xH/UhnHmTGrlxZEzblIdXFz7PQOjxLnEj4VZunQouUY9u5L3RivY1aqt3w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5Wc56kZnqX9xGekEr4tpiTCkbYNGmPTK7nbMxa8GeGg=;
- b=go4iHqNmqpUteTn7T6HWoQVyGR93UWpOMIIQbeYo6zuwxqzHJkH0iKshSLcpnDETmhy4s68QbfHlg3RibMfj3Wqij6izLNfh/lufcq5dWcbjIRsJp7BokRf4OCm3PEtuGr18hhzXVyepfNHjuL18shDwr8R0i5kVv7vfE0K/JSlqq3Jc436Y//BGVcWnbggB3GnF8AE6AMGgoJAyBnzGDdTkmC895mWcCEoDHud9UjE28FrwFiK9J4ds3YaTg3PwJC5/Ir7d4w1F8U8RZsuXEHfWhrkWQhUdAkNaqGmYT6obWZr6sJ24k3I5vKBTtKZtK2lVbPnrucPKF615fI7sVA==
+ bh=O8A/WIthcMbxFz1RyN+sG0aC8Se9Z9p2UWAfzmAjRGA=;
+ b=uNKXZv5KvLi2bzwXkhPiWYCxm5lZCTggopW+0vNa8c//nVGqXaQX6QHg9bKl8W7258jejSXACKRqwhUlWst2Bk7LzPdiFmdjZLatntWbuS8pSsUIgw7K8oGW6/omjwuY8iRLlJ2YUIub8k9MOWUiQOOTJdW2HfiB43B1RPE6lXrJk3c5+w5q7IDPyDCHVYI5Q4VeshxAY+mLeAoaFfVOcZtvOoudRLGzRAxsT16CpHiTZJ7RcMTK33z4fYEZbBeGMyIBimWqp6q+XtMLdEGcY/DkgcOf9hsMOAiy8Gxf2yNfDLnn39Q+Xal6vihzNeQUs2/F5O0YA+fL1BCOP3zROg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
- by GVXPR08MB7799.eurprd08.prod.outlook.com (2603:10a6:150:3::9) with
- Microsoft SMTP Server (version=TLS1_2,
+ by AS8PR08MB10142.eurprd08.prod.outlook.com (2603:10a6:20b:633::21)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8026.23; Wed, 9 Oct
- 2024 08:18:44 +0000
+ 2024 08:21:39 +0000
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0%2]) with mapi id 15.20.8026.020; Wed, 9 Oct 2024
- 08:18:43 +0000
-Message-ID: <3d2ace19-e688-4bff-8c02-6d8259b8c7d1@iopsys.eu>
-Date: Wed, 9 Oct 2024 11:18:41 +0300
+ 08:21:39 +0000
+Message-ID: <f5fe4549-645a-45d0-9869-fc1c6e355cb3@iopsys.eu>
+Date: Wed, 9 Oct 2024 11:21:37 +0300
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RESEND PATCH v4 00/10] mtd: spinand: initial support of ecc
- engines
+Subject: Re: [PATCH v10 00/13] net: tcp: improve tcp support
 To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- Jagan Teki <jagan@amarulasolutions.com>,
- William Zhang <william.zhang@broadcom.com>,
- Dmitry Rokosov <ddrokosov@sberdevices.ru>,
- Igor Prusov <ivprusov@salutedevices.com>, Bruce Suen <bruce_suen@163.com>,
- Alexey Romanov <avromanov@salutedevices.com>,
- Chuanhong Guo <gch981213@gmail.com>,
- Martin Kurbanov <mmkurbanov@sberdevices.ru>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Max Krummenacher <max.krummenacher@toradex.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>, u-boot@lists.denx.de
-References: <20241001204444.917238-1-mikhail.kshevetskiy@iopsys.eu>
- <CAFLszTiJMO+0+tMVPCM8Ho95TzvfqCgYvSLBJzmNbPJXJk-rYQ@mail.gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Sean Anderson <seanga2@gmail.com>, Baruch Siach <baruch@tkos.co.il>,
+ Anand Moon <linux.amoon@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Yasuharu Shibata <yasuharu.shibata@gmail.com>, u-boot@lists.denx.de
+References: <20241007205543.1632499-1-mikhail.kshevetskiy@iopsys.eu>
+ <CAFLszThjoOakb6FgrdkhvjAn1fL00wZeTGRewWUedqSO3E6+dQ@mail.gmail.com>
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 Content-Language: en-US, ru-RU
-In-Reply-To: <CAFLszTiJMO+0+tMVPCM8Ho95TzvfqCgYvSLBJzmNbPJXJk-rYQ@mail.gmail.com>
+In-Reply-To: <CAFLszThjoOakb6FgrdkhvjAn1fL00wZeTGRewWUedqSO3E6+dQ@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: GV3PEPF00002E3C.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:158:401::45) To GV2PR08MB8121.eurprd08.prod.outlook.com
+X-ClientProxiedBy: GV2PEPF0000385A.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:144:1:0:9:0:9) To GV2PR08MB8121.eurprd08.prod.outlook.com
  (2603:10a6:150:7d::22)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|GVXPR08MB7799:EE_
-X-MS-Office365-Filtering-Correlation-Id: f8108556-85f9-44be-e0e2-08dce83afd28
+X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|AS8PR08MB10142:EE_
+X-MS-Office365-Filtering-Correlation-Id: a84ec363-5cb3-4b9a-2526-08dce83b6606
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|7416014|376014|1800799024|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?eFVoUUVXNU9hVEFBVERpa3o5Qi90ZTFTaDdQQUxpaDRyQ1lGOUtRVktSNzZO?=
- =?utf-8?B?Z04rNlQyRks1bVpFejdrUnhRSkh1Ykg2SU5QckNCSUhOOWJUb1RvQVF1dlB6?=
- =?utf-8?B?ZTJZemoxN01ROVhRQVJZOWVSMU5VeGFsL0NoZFdKNTVaMFEvQy80Ulp0azh5?=
- =?utf-8?B?OFpmaHBEVkZPK1EybjlxZTZSc1ROSXEvUU9ubHdvWURGZEpMT0s3Unc1eHA5?=
- =?utf-8?B?WWs0NjFDeXd2SWxpUWlLbG9kb0x3RTlYWE56Z1J3UitHLzlkNlBLMWd4ckRQ?=
- =?utf-8?B?KzJSS1JZNThtYU4xcXc0TE9pb0VJRlRQOVZNcDVWakNVZU1xdFRqSDRwdGd4?=
- =?utf-8?B?c2MxVVloR2xha3FkQlJtaVRZbzN6VXdFbVVNemxtOW43bGt2YUtLTzdmYklX?=
- =?utf-8?B?NGRzaGhsOEQ2M2tCeWVmUllNc1ZyQ2srZm0yK2M2ZjJWdGk1VzltRU1kU3VP?=
- =?utf-8?B?TDJaZGc1eHRycDZ4cVVYNTFWY3p3U1lPb3JhbHZCN3J3aUhHNlVaaFZGTlBN?=
- =?utf-8?B?NnE5WDNJN2tZSUo4Yy9PaG1McEJZcWpKT3hVZjY5bk1HZ2ZZNlZwdTJRWnM4?=
- =?utf-8?B?dkNEdlZ0bUUwSUs1TTNWQlFaSmJxMW51MWMrZU56ZUpMeVZpQmFjdjJPTG9l?=
- =?utf-8?B?VDFUSDJmNDJObDFSWVN5b1Y0cmVnbDdaOFRYdTI4T0pVSHBxT2RFY0pmWkZT?=
- =?utf-8?B?VXZZUUNWWWo0c1ZBYnlLbWhJLzFHTEU5SUZCVjhGbjZmRzU5WmpESm9FNWRk?=
- =?utf-8?B?WXJ6Yi9xZHRocWZKZkw4clMyS3BNVVU2SE5ySWpBdnNLWDV1eVZtSDRQa2FQ?=
- =?utf-8?B?ZTJoSEllOUM4UFVzS3lDa3hnV0t1L2FTVFlyTitDMDJvOVdqQVd3OTIvWXIr?=
- =?utf-8?B?Tld2OVV4bGN5NWRYVmJWQkt4OFU3SHZIdlV1RFYyRXJhUU5xMENMVDNVQko5?=
- =?utf-8?B?TllPbHJEN2wySWNjMCttRHhEZDBhbjE4ckZWSTY1dllLUTVYbm1xd1lkK2NZ?=
- =?utf-8?B?TjZUQmtTQXlERlJ1eWdablZXempnOGx0RmJoWjRueldtK0VpYmJ3VFR2cEQz?=
- =?utf-8?B?bHpNSmVCemIxSWs0VlJYenRBbEp3c2dScldqVTZrQ0FEVlVQeXNBQ0F1TDZa?=
- =?utf-8?B?N2g3VkVKK1YxaTcwdWU5STdPS1JDMmVYbEFMNTlMeUVCZzNiMXBRU1lnUlpB?=
- =?utf-8?B?dTNaN2NMNjVENEJVdjU5U28yOTZRMVBiMFJzYTFQMFJSLy9RVWJ1OVNpWnNJ?=
- =?utf-8?B?bUJtRWFXY0tlOUJtV2dLOGw5NXZNTGswKzZWLzN4cEM3Tno5bWVsUWZQaVpo?=
- =?utf-8?B?b1pEK05POUJFaVh0cko3MFpmM1BNbWFQcHlla2NnRURxVjRGbDNSQjVHcFhw?=
- =?utf-8?B?STdua0JOa1I2d2lKN0t3TWJmQ2RIeFVaemh4U0h3RU9YM21KQTZCVXVxUjNE?=
- =?utf-8?B?ZmJHZ1AzR1BXejFQWStFa0ZqNVFKUkViUlpVQXlGaS9COGR6MmRGNVQ2V21Q?=
- =?utf-8?B?cVJkRHQ3bnkxc2hRaW1wbkdFeXlhbS9pSURIbWMyU3BCWUk3ejZ4TmFIQ0VG?=
- =?utf-8?B?d1NXWmZ6NXlHcTBmUlpmUGMzbHNDZzFrQjFFMSt4SDh0cWVyYkZUbWxXcmQ4?=
- =?utf-8?B?NWNuUllacHBnRkhKMy9iaDRPTkYra3ZySFZUbllTdjdPWlZFSWdUTndoQ0tR?=
- =?utf-8?B?NVNYdmNQUE1sRWQzMEtMbzAxODZqZHhXNFBudVJ5bUJQcmo4NjA4Z0ZRPT0=?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|7416014|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?YVJyU2llbytJZ3VtSWFKd21mQWZPRG1Sb3ZmL081c250MEhjUGltWFRxenlC?=
+ =?utf-8?B?QmJKQUQzZmEzRTVjWStIUk9CbXNtSzhUb25WY1RaamhSUkRSSFBKcXRqYS9n?=
+ =?utf-8?B?ajFqQ0hWSlhwNTU0cEE4bTVsWWgwK0VMc2NQWjJ3bkZrR3ZiZkxUTFhVK3ZV?=
+ =?utf-8?B?bEhGSWp1bnFaN2pnODR0TWhzOXdLT1FSaEdlMG5TdGo0TnRReWM2TU05cDd6?=
+ =?utf-8?B?c1ZEK2RWUTBWc1hHWlM0WUhDUU1jRHF4MlJHSUhLaHYxUUwvS3V5RHVQUUNZ?=
+ =?utf-8?B?SFhGekJVQ2JpSlBCeldFd1V3TGhZcHJFWWdBa09nRGFrV2JLZW5QL0srSTZJ?=
+ =?utf-8?B?NDFYNmNuRVJNd1d0c1lKYUl5MFJDNzVSTHdieW9aSHdUK3JoaGdHUzFjd2Qy?=
+ =?utf-8?B?R2hndHNTSUVJdnJoMTVIY0VtY2tINTBYMXJMNDdEV05pdStGQUkrWlY5Sk1W?=
+ =?utf-8?B?ck5IUEVUVDdQTHQ0aC9aYmF1SmRTKzAwdGlscHV1S3M1alp5OTFXWmc3MVRx?=
+ =?utf-8?B?N2NWbUNpTU9pUHNjd0NudUYzaE1ITkNHa2ZoalozZEFzbEYvVlQvenV3blBV?=
+ =?utf-8?B?Z0ZtSkVNWEVQSVBwYVBWNnIreHJzeXgyd3VOdlNWNFJtZEZZQkYyRGV0QnA2?=
+ =?utf-8?B?d0pqaFFXNDVCRG41TDJxSWllU3pvbnpBclBBdlRSbFJoSVllQnY3SmZ3U0pt?=
+ =?utf-8?B?b1pHeHF0Rjl0bXUzTDhPWHQ2dlJ4QU83bHlLT2pRVG51REF5MFZpMU9tc1FE?=
+ =?utf-8?B?TlRJSmRxK3Q3b2htTDV0VGZQbHFrdEg2WGxJUTZ6dXFSdTZZUWJEdzVUODN1?=
+ =?utf-8?B?Zk84VzM0ZVRoY21BQ3Y3dVVTRlVQbGhlYjA0ckZKbzR0Sk4vclFjN2pEVVdp?=
+ =?utf-8?B?U01VOWhxMlc4RFN1c0V2d0xGYjR2eU53YWhxYmtWZ2ZOUHFHeEhqWHVJc3RY?=
+ =?utf-8?B?M1Z0Y3pvYUx6WmdzV3FEV09HT0NOUXZndk5RS2Vtd09DOEFodFRYSGpaWFNT?=
+ =?utf-8?B?K2ZXay82eUFIRXdjVzFtZVBzZm1JZW5QaWViaWxvTzQ2cmtwQWo0ZHJFN3NL?=
+ =?utf-8?B?THdtWVUvVjJQK0Jzak9IbG1OQTI4ZjZocGRQMEE5aEhzQVRqcW5YNFR2cGM1?=
+ =?utf-8?B?NVU3TlVWOUI2aGVNcVQ5dFdOL1p4c1BUYWlLRFhkM1g3a29QMXdYbHkyY0tm?=
+ =?utf-8?B?UEo1SUZXQ2k3Sk5oNG1SZG9PM2JXMjNwS3NGTkljY3ZvMU5LdlRERHhna1FU?=
+ =?utf-8?B?R3d4cEFWRVVTOEwzRFQxakI5Nzk0cDlJWWtCR0JEN01LTWNhUHlaUHJ0WGhm?=
+ =?utf-8?B?cmJPOWNhUVBQMGhRNXZBK096MU1sMHlJR1A4T1Axc2orbHo2SnZuaXQzOVpa?=
+ =?utf-8?B?M1lnUkt5dDRDdnc2MjAvNEtoeERKTmNSem5iRGZ5eHpUSVA2ZE94eldrMjhT?=
+ =?utf-8?B?bGNEK1NGQUlWb1B1bEFYeHFVMWo4VHdqK0xscExpYWlldktGNWhvN1ZiUmpr?=
+ =?utf-8?B?ZnNhOVVSWm5VU3FyV0hRY2NmZDhWRmJUNmN2ZVF1UDBWMnBWOURUY2toc3JY?=
+ =?utf-8?B?WGxoeGtJTDhFZkMxMWFacnh4aTk0V29aelg5eVNZZGJTT3EzRkYvWExiK0Jj?=
+ =?utf-8?B?QlhYY3JLVnhpV2h6Qy9wdlZrbUpoS2pKSWdTQStmaDZoeTdWd3FOdUQ1dVNv?=
+ =?utf-8?B?WVVyWi91bS84Nld5eHVJYlROY3pwSHdscGJrTDJuSENmOWkyUHkxSTdBPT0=?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(376014)(1800799024)(366016); DIR:OUT; SFP:1102; 
+ SFS:(13230040)(376014)(1800799024)(7416014)(366016); DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VnY4QXM0WThYc2c2ZWhUTFFhVGJMWWdwVzl1MGZ0czNSOTFvNVRjMExibHQy?=
- =?utf-8?B?bWtpNWQ3aVRUU2RSYVpYdjlBeFRTRzhCbG5oUTBnckJjVnEwZDdvVUtja282?=
- =?utf-8?B?V21kOGVtU3MybnV0dEtVd3FzVG1qcjVENlpoLzFWR1Jpb0wxSlhldXp5OTNa?=
- =?utf-8?B?VGg1Qm5CMDlSWHo1TmhkWHBpWXZHdE1SYmlqaDFxR1lRMSttV3VtbENQZ2dS?=
- =?utf-8?B?aWJwL0F6NmEzWms1L1lEcmswdzJMOElFNURwTHJ4cUZVV3FlWmwvbWlRRVd2?=
- =?utf-8?B?WFh3N28zMnNUTkdSdmFLOGYrbWxqTFd3MGViV1djMENEOGtrb2k0bEl3c1ZZ?=
- =?utf-8?B?RUlzWEkxc3NJVzhhYk52U1BqL2VBaHJTVHpMZzBGU2ZFQWhMT2trSGxPWTM0?=
- =?utf-8?B?SWlEakhEUzdRbmhjUUlDcnNsVXhxMk0wR2VYSzM2YmJNRVBKVDkwdjVweXQr?=
- =?utf-8?B?YzByYTlqY0p2Y0QxVXI3eUtTVnFScUE3M2EvaHd6UnQvVW5qdzNWY0J0Z01N?=
- =?utf-8?B?SFZYOUZEV1RobXRZdDYwT0gydVByY0lhb1R5RVVNcmNpWHI2M2NHd2xtanpJ?=
- =?utf-8?B?TEVvd3RMUGpjNnE4Slh0U3grcGhKUER6UkJsNG5KSEpYUVhGMUxwQmtwRHpS?=
- =?utf-8?B?UzkrMUcwWlFmb281RTRnSTVoTXhYdGpZZXlFMDdUeWFYOHd1TEdaMUdOLzFo?=
- =?utf-8?B?dUNiS3FxV0pHa0FuRVIyK0FpRlpUcGs3UDB6VlB2b1NtTHBTQ085Mlc2aU5w?=
- =?utf-8?B?VS9TeFJ4MEEzdnpZeERUOU5xcGpyWnZXOWRpQWc0QURucWpzUVl1aTQwSEpk?=
- =?utf-8?B?cWtFa01CeDgzOTNSSEhUNFhqMEtHVXhqMDFWSkI1WjFML2JINGFUaDJ0RXBp?=
- =?utf-8?B?YzNCM1pmZlZKNE14MWsxRlQwRTlGUW5vajRwVU1NZ3Y5VGFzTlk2bzFCU3Zz?=
- =?utf-8?B?ekJJTnZUcXlNbC9ub0hocCs5QStHZEQzSE9Mb2syc0xqWXY4M2phNjJadmp0?=
- =?utf-8?B?V0YyUU54OEJpZU9rTGZLWFhqM0JtZjFzdGhTd1FEOGZqY3RUUkNSS2QxZU5G?=
- =?utf-8?B?eHZiR3ZTSTNVUlpFMHM0VVNLd0VCbnd4NURaWHpwQlNjZy8wL3FnTllMZkxX?=
- =?utf-8?B?eGxlOGhCV2h2VDl6Qmx2WFNnZGxyNDRObU9JVEdPTTJ2TVU5eUo3cldrMXcr?=
- =?utf-8?B?dVpKYzdMQUhyRmZTY09KZENOTzliQmh3N0swcFh6OW9OSUhrdXJ6M2E0UzNp?=
- =?utf-8?B?RW52SWdITm95czUwaUZLSHpBSDExTkNKRXFXZ2RhQS91MHJwcGJ4VW9HZndO?=
- =?utf-8?B?TEJrdFpnYmN5ZUs4Kzh5ZlpZY3kzdjV6RlMzc3lydGkwamxscVJPMS81RzZz?=
- =?utf-8?B?cGV3bWhqZm50Rmt2YXhOeXZ4RlV0aDlsWmxUeFhiRFFEOHRTdFFhT0ZTOFln?=
- =?utf-8?B?TU9XNzZMM0lTOEJwSXRkM2x3K0V3NVlFKzhoU1Exc3d6elI1b0dyNkFhWCtP?=
- =?utf-8?B?cnloS0lSOWJzTlpTUEZGbllQem42eWZMM01RclBQcEJETEhsVmFxUkJ0WjQz?=
- =?utf-8?B?ZDl2ejg3ZzdHdStrK1VIQjNNczFDczd2cmVldlNLZzV3SjRrYXhrd1VaSVdt?=
- =?utf-8?B?SHVVNGVTeXNxSGtPenJRT0VkaDNWUHVnbE9mRUV3MnptbTk2b29HVWlQTGdE?=
- =?utf-8?B?eWlPUjRCekNLNUhvd0xOVFRCYWtSWUdmcFhDS2c1aVIvOTArb3BwVHQ1U29Q?=
- =?utf-8?B?WUJMaGJRTEhWbFZBSExCRGNNamhCRXZOUHVrMkZLcnBjUy9WNVV4bk1jR09Q?=
- =?utf-8?B?RXRORTVDYllYWHRLbDBWMjIyaHduTWFqL1RvT3lxUTUvcUhrWXhnb1UzOGE4?=
- =?utf-8?B?eUdWMHhKVlJXUTZ3QWY4M2d1T3F0N1A4UFk5cUswSDBpRzBZWGxsUHY5ZXk2?=
- =?utf-8?B?Mjcwd2dTbnlUa0x4N2p5ZDJCMW51Rm1abWxwcUJMaGkrNWlxOG80VnMvVGVK?=
- =?utf-8?B?NW5HQXM2WksxY2F1YzJVM1lhLy9nV2hoWlRwSThabnJWRExLM3QybXd4T08x?=
- =?utf-8?B?TnBGL05HUzd3d2xzNndSTVgxaFREbzhMSmcvVXpCbmRqRkRvU2srNk5LNTZU?=
- =?utf-8?B?RmRVQVh1LzFkK3d6VE54TmJCRmFwRGVyQnM1VmNNdUFDL2E1TjRUUnNOUjBN?=
- =?utf-8?B?Z1E9PQ==?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?K1hZdU9hQVNTSXZFMEp3ZGJ4L2o3bkpBK2d4UjNDREoyazcwdFNockp5bDBJ?=
+ =?utf-8?B?Yy94ZFRQWXdDRzdSeFQvWVNLRXhmaXV3VzBFOUUyKzRiM0xlQkVYV1gzWkJi?=
+ =?utf-8?B?S1pLV2x0dnZZS2UyRCt3b2U1aERvMnNIcVd3RTJ4VkQrNTNlYWJxQmpJTDBX?=
+ =?utf-8?B?c1NLdmVOYUFnTTlIQUVlS09tZDVvbTlZUTR6MVJqbHY5aGMyRzMzNEgxRDRH?=
+ =?utf-8?B?OFdDU3phUFlxc2xPcGd6bGlESDNJWGxEa2VWdllHbzlkN0NzdTYzdUUyVy9X?=
+ =?utf-8?B?Zy9GRGJvRmd2c0Y0TVlsOCtIWDRDeHNxNWV1bURZK3YrNFdTQ2tXUWJPS0kv?=
+ =?utf-8?B?NWQ4elZzdkxDaEcwZmFGa3BqTHZmelFETnQ1SGE4c1B5K1VrTmtpcGQxVTFP?=
+ =?utf-8?B?dy82RzVVK3VSdWtVUDRia0pUUms4MS9IZWROVVlTd3NWVG1zN3ROMGxwb0ZL?=
+ =?utf-8?B?dzdtWTMwUVVFckswR25VcUlaUjMvTTVIQi9NdU5FNnpCTld0UjNLb3FLL3Vi?=
+ =?utf-8?B?NVpwcUlQYy83OWdkZjJpTVhpZVlyZnVtbUkwb1dydHJuNkYvbFVoSDF2b0JU?=
+ =?utf-8?B?elJQclIwN0M4TlRCeXhTcFdWRSsvUUQxMkNCZXVhQVJ5UU5sMnl0YnF1Y25S?=
+ =?utf-8?B?blF3LzVzUE5mYzUrK3c2Ym1RSW15R0Z5TkNycElnU3MxYVVxSjhzQWZPY2di?=
+ =?utf-8?B?UFVOZHNmQUJGdjBVQktHKzJiaVVvYWdaTVRXK0JjSWFjeUhJVExNQ1A4ZUw4?=
+ =?utf-8?B?TTRyV29UVnl3dVZ3dmVrM0c0MnZra2xIYlZCN3MvY3I2WWpveXY2WUtOZ0dO?=
+ =?utf-8?B?b1pubDl5RjNhN2YveUx5dUo0cmpNaTNlcEVPdHNZRHFBeG9QeENmeEJKZVFw?=
+ =?utf-8?B?OXFnRjFKL0VoQ2dBMEErMjUvcVFoMXZReGUvY3hBQmxYK0JrRDA1blJnYWtU?=
+ =?utf-8?B?ZWwxSFd1VkJVbXZKQnBWSkQ2b0dpQ040QlpDWlV6ZkV6dkhvOTNSZTRmbXNt?=
+ =?utf-8?B?SVpWMG54NE5sdW9SU0l2OW94UmZLUXBITUxaWFd1Zm9icWFGZVJLVmd5QzlI?=
+ =?utf-8?B?ajY4dzV6ckQ1dlRkK2ZsdG1KVlRwWnlhcmpvdlhDYmJWaHcxTWVWb3k0YXA1?=
+ =?utf-8?B?aHNsMVZLK2hsa2piNmpKd0l0UlBKS0xJamQvOE1zYnN0emwrd1hEYjEwVUd3?=
+ =?utf-8?B?RjErUWh3WFgvMUJySDk4ZUEySTJwdUFabmRRUHlYQklPQ1Q2VWJ2YjZGUDBG?=
+ =?utf-8?B?UHo1dFQxMzFRa0JvQzc0b3hqQWVYcTR1R3dZZk01ZHFyQjdWZ3ZMYXpUbncr?=
+ =?utf-8?B?ZnNESGJsblp0MDRkNHRhSjhGUmU0UllJVDVHZERGVm1uNzhvS2NRQWs2bmlv?=
+ =?utf-8?B?dVJiRTlSOWEveCt1MnI2TDBwb3AwWk5iazV1YWRjb3BDT0Rtc0RLUXFtQjla?=
+ =?utf-8?B?eEhMd3dXZUVmS2JhbXZYdmZwR285dDY3cVh1TGg0djVnWithYXNlSlhRS1lJ?=
+ =?utf-8?B?b2l2UEJFM3RwOGFyMCtZblMweFRBOU1kU3ZydURyL3R3cHBFWW9GSFg3Z1VN?=
+ =?utf-8?B?bXZubTAvbWdXVkljT1pWckhxNE9JRnBXN3hZQXo4YUVUUWVXVWdCTXowSWZD?=
+ =?utf-8?B?NjVrZW1xbDNNeHVsSmhrU1l5SHlvaWlhSkk2cGN1aHhpYTFoenNpYStSR21q?=
+ =?utf-8?B?VTd4Wm9rS2tIVnh6eTJXei9pM215OWNwN09Jczd2Q2t2OE1MYmVvcndjSGZI?=
+ =?utf-8?B?b05YQ2NZUWg0SDBwZGRCTkltV0JlbWNNZ3lra3hjdVIvRnNVM3RrUXJ5K29w?=
+ =?utf-8?B?WWdPUG1ZVWltTUZJV3FGRWU5L09YdEZINmNrRm9LV0RTOHRlU1k3Y0NnRkxi?=
+ =?utf-8?B?Yy85RnM2SnVJQ0ZhMDB4VzFxN2xiVGlSM3Rjdjlzc0Q0R3JxOCtJK2ZBcHpj?=
+ =?utf-8?B?aHlWS0VHREc5c2tpdlFTQXZEU0laK2pHbyt2dEo2UmQyVnJqQXUwaURqemp3?=
+ =?utf-8?B?NDdnRjBlc0ZYL2hhcDhlWkMycm5CQW96R01mcTZGUTZFNGlIcG9Kam9DYXRR?=
+ =?utf-8?B?R0ZHWWZYQnhvYzJvamJiU3lENDZXSnYwcTlVem53VXp6SnNYK0NVRFozcHBW?=
+ =?utf-8?B?d2ZBcHY5eDluU0JPb0xITk9xYzhXb1NsZHRVQkJwQ0NYUzR3MUhETWdVb1ha?=
+ =?utf-8?Q?lWEf36TAS9bbg07oTi154Vc=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: f8108556-85f9-44be-e0e2-08dce83afd28
+X-MS-Exchange-CrossTenant-Network-Message-Id: a84ec363-5cb3-4b9a-2526-08dce83b6606
 X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Oct 2024 08:18:43.5148 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Oct 2024 08:21:39.3395 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 37IgYIMUB3YL8SWSU1SWTXukhcvycb+EFsiKvSUglKJYdvIxojQdSsG2mfLq+SCMVlVNXZlvjYK02AhRhhILY4byamL3cDu6FEOUlwwB/vk=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR08MB7799
+X-MS-Exchange-CrossTenant-UserPrincipalName: x1104tK3gP+7KI6Bjd0CH89uewwgSawwBKUbzyNPXl2swigZV8AaAQft7eCrNewa3CIsFrZlbu/Cvxa65ok3qXXtJp64Vf20JvVcwPeueDg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB10142
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -185,72 +183,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Will try to fix spelling. Unfortunately my english is not very well.
 
-On 09.10.2024 04:50, Simon Glass wrote:
+On 09.10.2024 04:57, Simon Glass wrote:
 > Hi Mikhail,
 >
-> On Tue, 1 Oct 2024 at 14:45, Mikhail Kshevetskiy
+> On Mon, 7 Oct 2024 at 14:55, Mikhail Kshevetskiy
 > <mikhail.kshevetskiy@iopsys.eu> wrote:
->> This patch series:
->>  * sync spinand driver code with linux-6.10
->>  * sync spinand flash support with linux-6.10
->>  * add initial support of ecc engines
->>
->> Up to now only software ecc is supported, but other engines can be add quite easily
-> Is there a uclass for ECC?
-no uclass. Is it needed?
-I tried to make the code similar to linux as much as possible
+>> U-Boot support of LWIP is not ready for a moment, but we already have
+>> some kind of tcp support. Unfrotunately this support is really bad.
+> spelling
 >
->> Changes v2
->>  * update description of some patches
+>> Some of the known issues:
+>>  * tcp packet from other connection can break a current one
+>>  * tcp send sequence always starts from zero
+>>  * bad tcp options processing
+>>  * strange assumptions on packet size for selectiv acknowledge
+> spelling
+>
+>>  * tcp interface assumes one of the two scenarios:
+>>      - data downloading from remote host to a board
+>>      - request-response exchange with a small packets
+>>    so it's not possible to upload large amount of data from the
+>>    board to remote host.
+>>  * wget test generate bad tcp stream, test should fail but it passes instead
+>>
+>> This series of patches fixes all of the above issuess.
+> spelling
+>
+>> The benefits:
+>>  * A lot of bug was fixed
+>>  * Better and more reliable TCP state machine
+>>  * Tcp cliens becomes smaller/simpler
+> spelling
+>
+>>  * Data uploading was fixed (now it's possible to transmit a huge amount of
+>>    data from the board to remote host)
+>>  * Netcat over tcp was implemented. Netcat supports data downloading/uploading
+>>    from/to remote host in client/server mode.
+>>  * An example web-server implementation. This code can be used as a base
+>>    for web-based firmware uploading used by some vendors.
+>>
+>> Modification was verified with
+>>  * firmware downloading via u-boot wget command
+>>  * fastboot over tcp
+>>  * netcat linux client
+>>  * Firefox/Chrome/Edge using example web-server implementation
+>>
+>> Changes v2:
+>>  * cover letter was added
+>>  * some patches were removed
 >>
 >> Changes v3:
->>  * split some patches to a smaller one for more easy checking/verification
->>  * sync spinand flash support with linux-6.10
->>  * add some ecc engine comments (taken from linux driver)
->>  * slightly change patch order
+>>  * better cover letter
 >>
 >> Changes v4:
->>  * avoid double increments of error counters
+>>  * fix bug in debug output
+>>  * add more comments
+>>  * codestyle fixes
 >>
->> Mikhail Kshevetskiy (10):
->>   mtd: spinand: Use the spi-mem dirmap API
->>   mtd: spinand: Add a NAND page I/O request type
->>   mtd: spinand: add missed add missed MODULE_DEVICE_TABLE()
->>   mtd: spinand: simulate behavior of linux's function spinand_wait()
->>   mtd: spinand: more use of spinand_to_{something} helpers
->>   mtd: spinand: replace enable_ecc variable with disable_ecc and update
->>     corresponding logic
->>   mtd: spinand: minor refactoring
->>   mtd: spinand: more refactoring
->>   mtd: spinand: sync supported flashes with linux-6.10
->>   mtd: nand: add initial ecc engine support
+>> Changes v5:
+>>  * old patches were ocasionally sent with v4
+>>  * add back web-server patches
+>>  * fix bug in debug output
+>>  * add more comments
+>>  * codestyle fixes
 >>
->>  drivers/mtd/nand/Makefile             |   2 +-
->>  drivers/mtd/nand/core.c               | 130 +++++-
->>  drivers/mtd/nand/ecc.c                | 249 ++++++++++
->>  drivers/mtd/nand/spi/Makefile         |   4 +-
->>  drivers/mtd/nand/spi/alliancememory.c | 155 ++++++
->>  drivers/mtd/nand/spi/ato.c            |  84 ++++
->>  drivers/mtd/nand/spi/core.c           | 649 ++++++++++++++++----------
->>  drivers/mtd/nand/spi/esmt.c           |  16 +-
->>  drivers/mtd/nand/spi/foresee.c        |  97 ++++
->>  drivers/mtd/nand/spi/gigadevice.c     | 194 +++++++-
->>  drivers/mtd/nand/spi/macronix.c       |  32 +-
->>  drivers/mtd/nand/spi/micron.c         |   2 +-
->>  drivers/mtd/nand/spi/toshiba.c        |  43 +-
->>  drivers/mtd/nand/spi/winbond.c        |  67 ++-
->>  include/linux/mtd/nand.h              | 279 ++++++++++-
->>  include/linux/mtd/spinand.h           |  47 +-
->>  include/spi-mem.h                     |   2 +
->>  17 files changed, 1778 insertions(+), 274 deletions(-)
->>  create mode 100644 drivers/mtd/nand/ecc.c
->>  create mode 100644 drivers/mtd/nand/spi/alliancememory.c
->>  create mode 100644 drivers/mtd/nand/spi/ato.c
->>  create mode 100644 drivers/mtd/nand/spi/foresee.c
+>> Changes v6:
+>>  * fix the wget test
+>>  * improve description of "simplify tcp header filling code" patch
 >>
->> --
->> 2.45.2
+>> Changes v7:
+>>  * fix include ordering
+>>  * improve option descriptions
+>>  * fix a lot of extra brackets and comparisons against NULL / 0
+>>  * add empty lines before final returns
+>>  * fixed a bug with zero size httpd uploads
 >>
+>> Changes v8:
+>>  * [tcp] add function to restart rx inactivity timeout. This may help
+>>         in the cases where remote peer waits for u-boot data, but u-boot
+>>         is busy with long executing action
+>>  * [httpd] add function returning underlying tcp stream from request id.
+>>         This (with the above change) allows avoid connection break
+>>         for the long processing post requests.
+>>
+>> Changes v9:
+>>  * rebase all changes on top of origin/next
+>>  * update test/cmd/wget patch description (bad tcp ack/seq issue was already
+>>    fixed in origin/next)
+>>  * tcp: add rx/tx packet counters to a tcp_stream structure
+>>  * wget: use tcp rx packet counter instead of own one
+>>  * netcat: use tcp rx/tx packet counters instead of own one
+>>
+>> Changes v10:
+>>  * netcat: fix bug appeared after rx/tx packet counter addition
+>>  * rebased on top of v2024.10
+> Is this series ready to go in?
+
+I think it's ready.
+
+>
 > Regards,
-> Simon
+> SImon
