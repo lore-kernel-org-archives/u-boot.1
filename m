@@ -4,72 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23270CF042F
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 02:00:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB69ACF0430
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 02:10:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 67DFF8914D;
-	Wed,  9 Oct 2024 03:58:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 3B1528900A;
+	Wed,  9 Oct 2024 04:10:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LGQAOZob";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sSFDT+4a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8684A8914C; Wed,  9 Oct 2024 03:58:35 +0200 (CEST)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
+ id 276DE8900A; Wed,  9 Oct 2024 04:10:05 +0200 (CEST)
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7FCAC8914F
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 03:58:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EB76689040
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 04:10:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-6cbc7c77c99so5097226d6.3
- for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 18:58:33 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-6cbcc2bd80fso697126d6.1
+ for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 19:10:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728439112; x=1729043912; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Np2ClKCeUVs3r0lL3RqwmARurCd57lMTZqK4j7mfFsw=;
- b=LGQAOZobrQ+rBM+N4y4Fw75PSmBoHR/7P6bQ3JwvzXqKmXR6Q70iQ+08MuYptkqM+T
- fvtDV7P5aFvbsgxkRlJTo+ZiaC32/ZwWg8mwWG5dFolBZ1LD5MZcyWlFYdSOi3FYF4Tj
- 4s2r0OQCxo5uiMF10nfyPZULZpBcgGpHKLDw4=
+ d=konsulko.com; s=google; t=1728439801; x=1729044601; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=IHKWHWtUBhLTtPbTbiIFskxjZP2O38auuKkfOYQJ3Qw=;
+ b=sSFDT+4aDU0UXZt/fPdlcxZCUWNekRS8rCXnzZTBN5xHyJK55r+fFH/LYkGvklifCm
+ 6e4n9A6pwkZTYVQt4KudFBPKWNZjOCI+++NrjQRkQtrpEdtLQE8TVhq2E8Z4tjAfsXY6
+ c17ulGxY5NpV0xvyp+htoliNrRM+3o1Qq1t9Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728439112; x=1729043912;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Np2ClKCeUVs3r0lL3RqwmARurCd57lMTZqK4j7mfFsw=;
- b=ZzaqTw1OzE0fC3Ezli8Fz5WLOtKoHJoifXeRq9/IxVLV6zRPek+e7ZmDbogsMUx0vb
- wBFL/S81tMGWmypohA9ZDrf3l257pHe2ZS8wlABbknh0+p7KG7yB/uP7N3vTknWhFdo+
- GZCzvwKf6n78S48gbwELT1Y+bYE7mBYP19E00bl4nhaRGLhDazM2V5ZXd/FPULnUTkQe
- fCvnhtAD02BjJZHleDER9SCKoNviqXwXRdB0Wm12ir2p7dGWzl0bvCYef8+Zs1VZrykL
- 2jyWz6c2hyR/YQif0eOEedFfmlB71iYQyUDsebogn9chCwDQy0mftrOHx8p0cR484bU3
- DpjQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWaWdARfN4b7TXXS6SfHNLU2bspzIDwmjhwi3PFW4j0JJxLykKd3vV08yndP8HihlBn4LhXcMQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YyHaBjPEKkQ6ZogQlHqDtp4rNrDsnh8wg6Ns2eSmbZKAQUxVnB1
- WC/0b7HTWfxQtWGuW5wiUu3EjqDi2z+9sSCO3VEgQMVGuW5FATQ8QuIHIDbq0Bc0tjmuDZPyQ4f
- InG7NccpQgNCY93TzZFGOc5EmoFrMP6PqKAED
-X-Google-Smtp-Source: AGHT+IG0PHsxvWresrb755IM5L9ghbGWDKfvXp84YOUfUu+FR68fhnJgyG3PC5KVqRWbiMa8MwjzqyOLkDGib+DhbIU=
-X-Received: by 2002:a05:6214:4402:b0:6ca:756d:68a8 with SMTP id
- 6a1803df08f44-6cbc9304943mr15719826d6.15.1728439112492; Tue, 08 Oct 2024
- 18:58:32 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1728439801; x=1729044601;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=IHKWHWtUBhLTtPbTbiIFskxjZP2O38auuKkfOYQJ3Qw=;
+ b=sb0qgOPNHYe7MKXJgrX8mYI2yfR8qDFR0v7idcVQ5bvEz8YtlBH2kCn57Wunz97eXA
+ MzquB4KKHzl9z/QftjjjBc+ZI+mMNv6MZm4pZ9TCDhSTZiOj1GwkrHon+YeYxNgselt0
+ 3YDJZ2g/sZeS7Dw0p+N+4AOTV9OmJvn2K6d1Mu9pzefCKbzJQFaZBU3x/Ua4bQ15yX5y
+ jp+SdWlfaUegpREadlz591Zzsex4hqSIgLdJnkxmXHIIOo3WlLdB36ysz6ORZotuJMl2
+ cXYxoVrVIpSRTPyAMRC1tJUAnxLIS5xxtBAtlqO3djxUC9KDbaJCCOyn49iC+N3uS322
+ TscA==
+X-Gm-Message-State: AOJu0YyQHtX6uakbjJvbTPG/OrXJMxG51A3hy1gdar54R6NPWCJGu9fP
+ ENw6mqU967CptFlbh3140fHHwykC00LoMoESu/nP6DZaroJ7qYfk0MPFtlMhecA=
+X-Google-Smtp-Source: AGHT+IEjPq4GpY2ne4CRmcoQqkz9wrEyMmNmXzHl9r3vnwqMfj5Nn16fRSKHmMPdUovEoQaeuQ99yg==
+X-Received: by 2002:a05:6214:4699:b0:6cb:3c3a:69b9 with SMTP id
+ 6a1803df08f44-6cbc955e719mr18374396d6.38.1728439800891; 
+ Tue, 08 Oct 2024 19:10:00 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6cbbc88d927sm12055296d6.12.2024.10.08.19.09.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 08 Oct 2024 19:09:59 -0700 (PDT)
+Date: Tue, 8 Oct 2024 20:09:57 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Daniel Palmer <daniel@0x0f.com>
+Subject: Re: [PATCH] cmd: Make bootvx independent of bootelf
+Message-ID: <20241009020957.GH14210@bill-the-cat>
+References: <20240929092739.2513768-1-daniel@0x0f.com>
+ <172839506989.112860.11166419458122902632.b4-ty@konsulko.com>
+ <CAFLszTiY7=hcg=5t6w0RfXs=C3NUMQXJkVs8PZyE281NTK_D3A@mail.gmail.com>
 MIME-Version: 1.0
-References: <20241008223219.105369-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20241008223219.105369-1-heinrich.schuchardt@canonical.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 8 Oct 2024 19:58:21 -0600
-Message-ID: <CAFLszTiO24nm_zNhbH0-tarax9QGtFvFen9-c0nBSpGraLLBcg@mail.gmail.com>
-Subject: Re: [PATCH 1/1] sandbox: add bootmethod EFI boot-manager
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Mark Kettenis <kettenis@openbsd.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="yroSlIWUz+Z6qf54"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTiY7=hcg=5t6w0RfXs=C3NUMQXJkVs8PZyE281NTK_D3A@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,20 +91,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 8 Oct 2024 at 16:32, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> The EFI boot-manager is the default method to boot EFI binaries.
-> We should be able to use it on the Sandbox.
->
-> * Enable EFI boot-manager bootmethod on the sandbox.
-> * Adjust unit tests to reflect the additional boot method.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  arch/sandbox/dts/test.dts |  4 ++++
->  test/boot/bootmeth.c      | 28 +++++++++++++++++-----------
->  2 files changed, 21 insertions(+), 11 deletions(-)
->
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+--yroSlIWUz+Z6qf54
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Oct 08, 2024 at 07:57:25PM -0600, Simon Glass wrote:
+> Hi,
+>=20
+> On Tue, 8 Oct 2024 at 07:45, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Sun, 29 Sep 2024 18:27:39 +0900, Daniel Palmer wrote:
+> >
+> > > There are lots of usecases for running baremetal ELF
+> > > binaries via bootelf but if you enable bootelf you
+> > > get bootvx as well and you probably don't want or need
+> > > it.
+> > >
+> > > Hide bootvx behind it's own configuration option.
+> > >
+> > > [...]
+> >
+> > Applied to u-boot/master, thanks!
+>=20
+> It looks like my review here was missed?
+
+I guess you sent it in between when I b4'd it and then pushed it.
+
+--=20
+Tom
+
+--yroSlIWUz+Z6qf54
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcF5fUACgkQFHw5/5Y0
+tyy8IAwAjnn5Kk48U/c2R9xdDtTyFJkCeUUZGy6UdS1AzSzKg49h9LoE9WVQt+pT
+C4Ow6W5pYWXRKorrmordom6X3vu1W0yOQlsmtOIHmEOrB8cUGE9i36K1auXZASMW
+SNzzU0C+YdB7j1Dzfho2XZQi5mxD9uXImyLrTtY3DFWsuZBqOFQg7rgMwE+4My4u
+hW7fWOGvOLwLrY6EC76/dSsVVkOel+7G0uwuUOh+dOXFeg29nZf5cHCL5G4rM6pp
+aKX7ZTb704ihGtV2gx65j/jaTvcrbMITR9WMvPGcUQ4fxFSrncgmRVADfx4K3RPx
+f0TWYsWHsqLfsiaUMYudG9OwcDX6CF8MyRnTmiWkzWYXOf0N0kITsXbzlxEaF52H
+QjnKzcdgGbfoN0xkXCuFLFcKhL6aOBqI7MVlVs3/J9VrMCmPbjEWpI7rQuDYvA7i
+X3giHYwR6Gup+0FzeEcot1BIGhsRZ6zrS7AaW91c6P6TzX8jh5ZwUFsscWEYBnFp
+fvuUBx0T
+=XHUu
+-----END PGP SIGNATURE-----
+
+--yroSlIWUz+Z6qf54--
