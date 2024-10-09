@@ -4,66 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DE87CF042D
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 01:53:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A46A7CF042D
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 01:53:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E848489032;
-	Wed,  9 Oct 2024 03:51:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6C5118903C;
+	Wed,  9 Oct 2024 03:51:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BJxT4tGz";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y5nXyvZo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97EE18905C; Wed,  9 Oct 2024 03:51:38 +0200 (CEST)
-Received: from mail-pg1-x532.google.com (mail-pg1-x532.google.com
- [IPv6:2607:f8b0:4864:20::532])
+ id 0391189063; Wed,  9 Oct 2024 03:51:39 +0200 (CEST)
+Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
+ [IPv6:2607:f8b0:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 72C558903A
+ by phobos.denx.de (Postfix) with ESMTPS id D2ABA8903B
  for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 03:51:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x532.google.com with SMTP id
- 41be03b00d2f7-7e6d04f74faso307408a12.1
+Received: by mail-pg1-x533.google.com with SMTP id
+ 41be03b00d2f7-7e9ad969a4fso3942265a12.3
  for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 18:51:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1728438695; x=1729043495; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ivWlL46QbFrMyyUPZL1W/0nfabQpO9M/+SIKuwPgoWM=;
- b=BJxT4tGzUxZsf7sGB5KJ0PTAINHNlqH739rleyrqJtJKUHrpsIFn+2JIviBlznKoee
- UCXrwn7ZLtLK4RGpg38esDKafGdkaRD4NLybTLVPUumL9DeqDB1CtpzcQ03z31lqb9MV
- rvbrD7ezP9QRPYa8toHWpT/Ik/d7lOnrQQnag=
+ bh=bqLBCifbMznPq1/MScGG98NOlqP3ZVMj00IY9NauynY=;
+ b=Y5nXyvZo4WTHK53bxk7SXaoLC74I9MXWYD6k9Zy2jccZy04yKlGbrOyLzkcL3oxRvw
+ VgGdt2BYAPUTK0vbNfEqOBYGyju6j7tM64SfCkSITeyIDpWbK7aRLo2s7KgofcdXoKyL
+ 1yit1xuF1XIKXf4QTj/9fMPFUjbR1J+UvbQVo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1728438695; x=1729043495;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ivWlL46QbFrMyyUPZL1W/0nfabQpO9M/+SIKuwPgoWM=;
- b=mIe2mnTBNTgcpCYTPfpA2zFUHlpgNvndM6/jA70QWXhfpX2bydiZjwdCLhDc8FL6TR
- uKgFrcdeyEPSyk81bglnraBg4aaNjr+yo5zVaj0Fj6Cy/GIYmvvVGRpHM9qPsYDQQ5I+
- jqgASSiclHjiqiE2CqydwP6pumShK2LdXWJYWH1+c8OIs0VsL6xPCRMRg8nWF+Gu5bZw
- JhTArMIVjmzFx/OZF4YszqPqXQ+jj3JTT1hDt8gWhfsitgssYAjiUdf8BG6ckGk97DaK
- ALk/8Cox8JjAO2Sz5QoEfZcFovYQEFtOX67qPjXExI4RbE564piuU2cHq8htwAY+pS+D
- a6fg==
+ bh=bqLBCifbMznPq1/MScGG98NOlqP3ZVMj00IY9NauynY=;
+ b=pUnMvr1vRRQLtHGQZmec+cfiYl62GwoG/2FeUt8umLlFx8C+nJzdMq2J9w0E9N68p8
+ hsXSzhf8uRq2LETSUyPdtLUI26LBPA5tUFfyUgGezHSZHiIivgfrhZi0uFnkJIQZ36GR
+ 6g2WDqNwjEeDwVvDiBV9Td95n8WJ00B+fPSpirRRB/x+7Uvg9IXbkw/zP+XRY7yqUgSB
+ wY9Wd44h+C2Ei2dAt+TFC01UN8AzM12PP9Q/VuokMTjVpQkcMsXZb80a5Kq4YNn14jHa
+ xNf7tqL/mo0WtKA6l68NhIzjFrbBAUt0t4yvrNVUdDIEBD3cLVicQ4Uw2R83hfOlir5h
+ +mMA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUkrL1yyXvWfP5VDHNbEqUq/7HLLl7Ge0DWBzHHh6MfRiodnoloZDPxuVyCyZvghl+qj3OEm9Y=@lists.denx.de
-X-Gm-Message-State: AOJu0YyJ7tWI1Hz0SaMcoih6iw7UUur1mjtz5SYefz7tOOPnx5kNoIOo
- 8K/jjUmE+zmlFEZX0kh3CYSlX1FCZmcuedduR3kQwledkRwFl1OEOw7e43NFHTxEQLpIceAfkHt
- KfofVDy4kMOWGqYGBUV+yXwbL1EQPZ2RbPVw8
-X-Google-Smtp-Source: AGHT+IFTlC3Pqxq0y/G+AWjjo8VoDYxfKzuNo9eqlBRbs7j7mfhwnyauYjs0iUVi9GoDM42NhL7/v7DWXQ6xkRojsqE=
-X-Received: by 2002:a05:6a21:a4ca:b0:1cc:d9dc:5637 with SMTP id
- adf61e73a8af0-1d8a35411b9mr1254690637.23.1728438695051; Tue, 08 Oct 2024
+ AJvYcCWCmX770dd6lQYW0uqAkk7SNqWjIc4u9wCmGx2YyxuT6Gb9eZ4lDeWcL8evTk7peYpjUcoqx5E=@lists.denx.de
+X-Gm-Message-State: AOJu0YzvjqHhCDc3kfdAHbUCQWHr8qtY6z7Sod+MQZWs/72dEhEihJQ/
+ O34xECshkZq/HHPCbH3N3nliuQ9ZIOTLlhHsOKQoROvFpCadt6S+4Qll2phmM8VBYjbhddv1Yy3
+ Y3ycECGXlOFMjqIrGX+21TvPHbXZ7ecqYNt3/8r0GQYIBGlcGwg==
+X-Google-Smtp-Source: AGHT+IHAyicvgni9pUgmFWj0CF66LD6KWb/LXsupeQnNMOIHd1NgHg91KeCJtJpk4/Nye5YMPpxvXkhXT782vmgwLjI=
+X-Received: by 2002:a05:6a21:2fc7:b0:1d7:c3e2:4e1f with SMTP id
+ adf61e73a8af0-1d8a3c2f0acmr1308648637.25.1728438695386; Tue, 08 Oct 2024
  18:51:35 -0700 (PDT)
 MIME-Version: 1.0
 References: <20241002132633.246942-1-martyn.welch@collabora.com>
-In-Reply-To: <20241002132633.246942-1-martyn.welch@collabora.com>
+ <20241002132633.246942-2-martyn.welch@collabora.com>
+In-Reply-To: <20241002132633.246942-2-martyn.welch@collabora.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 8 Oct 2024 19:51:08 -0600
-Message-ID: <CAFLszTgzYA9GA9j6pjiQKR3naaCYAYheaOf7_Z8maP5nejJvrg@mail.gmail.com>
-Subject: Re: [PATCH 1/4] boot: pxe_utils: Add fallback support
+Date: Tue, 8 Oct 2024 19:51:02 -0600
+Message-ID: <CAFLszTjjQHJEtxgkJp9qBApB=H8QDf4Cr3D_rSsVh_e-NhDc+Q@mail.gmail.com>
+Subject: Re: [PATCH 2/4] boot: Add logic to enable booting from fallback option
 To: Martyn Welch <martyn.welch@collabora.com>
 Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -85,22 +86,19 @@ X-Virus-Status: Clean
 
 On Wed, 2 Oct 2024 at 07:26, Martyn Welch <martyn.welch@collabora.com> wrote:
 >
-> When configured correctly, we can detect when boot fails after the boot
-> process has been handed over to the kernel through the use of U-Boot's
-> bootcount support. In some instances, such as when we are performing
-> atomic updates via a system such as OSTree, it is desirable to provide a
-> fallback option so that we can return to a previous (hopefully working)
-> state.
->
-> Add a "fallback" option to the supported extlinux configuration options
-> that points to a label like "default" so that we can utilise this in
-> later commits.
+> The "fallback" extlinux config option allows us to set an alternative
+> default boot option for when it has been detected that the default is
+> failing. Implement the logic required to boot from this option when
+> desired.
 >
 > Signed-off-by: Martyn Welch <martyn.welch@collabora.com>
 > ---
->  boot/pxe_utils.c    | 15 +++++++++++++++
->  doc/README.pxe      |  5 +++++
->  include/pxe_utils.h |  2 ++
->  3 files changed, 22 insertions(+)
+>  boot/bootmeth_extlinux.c |  2 +-
+>  boot/bootmeth_pxe.c      |  2 +-
+>  boot/pxe_utils.c         | 14 +++++++++++++-
+>  cmd/pxe.c                |  4 ++--
+>  cmd/sysboot.c            |  2 +-
+>  include/pxe_utils.h      | 10 +++++++++-
+>  6 files changed, 27 insertions(+), 7 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
