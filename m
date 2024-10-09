@@ -4,91 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3C0BCEE35E
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 22:39:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EFD7CED611
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 22:58:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E4AC88CF1;
-	Thu, 10 Oct 2024 00:39:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4D35488E15;
+	Thu, 10 Oct 2024 00:58:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JEDiPK3X";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UOcPzSC5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C640A88CF1; Thu, 10 Oct 2024 00:39:15 +0200 (CEST)
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
- [IPv6:2607:f8b0:4864:20::72e])
+ id 6EE6B88E14; Thu, 10 Oct 2024 00:58:20 +0200 (CEST)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B3D688C7E
- for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 00:39:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5758A88DD4
+ for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 00:58:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72e.google.com with SMTP id
- af79cd13be357-7b10e800ba9so87332685a.1
- for <u-boot@lists.denx.de>; Wed, 09 Oct 2024 15:39:13 -0700 (PDT)
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-6cb97afcec9so2749176d6.2
+ for <u-boot@lists.denx.de>; Wed, 09 Oct 2024 15:58:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1728513552; x=1729118352; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=FROpe/wmKwpJC1w4ZvkaIf1nXSQXIrnfn8JcBeVbLV0=;
- b=JEDiPK3XCw4CzT1ef9aABkdZGfmUprR6uTdqPwjvlVahb9/6Agz6/huM6oh8awDMER
- oBm814LYimkzlEJafWDAhVdcHVvcUzfIio+Ccl9QbjrWmBnuKlODGtloraJ5vDjuy7dV
- MeTMTyL3M3p3gLKBtRfTToOthVbPw05Xp/B7I=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728513552; x=1729118352;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1728514697; x=1729119497; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FROpe/wmKwpJC1w4ZvkaIf1nXSQXIrnfn8JcBeVbLV0=;
- b=COmGlxuNsINs8jNoCqWylSi0sSqqxti2+mlaHfXMqdiUUunTimtNROz55b7obHFX4G
- J1eBvu1QFqv+niR5KBYVOJ2BQTcuKBqanhOY2jwUQx30Q0ECPYyR4pd6HMl/H255fX7h
- srce5Uk09+enganja+TUIxVCaWZ6SBBi0J1kd6ZGfQ/PxUVY+TLwkINrwb36hNEz5vt2
- PF56PZ/jYrOSvYpiGdZER62uvNYUazP6fCCMkEXvrHlRcLue5QJLud5i5tAa30csTe5b
- cE0oK0T16+ooWyx5lwfrL4NEkiNnDobM4NC9CcUcPXdpIfVhIggo9iWzR6Rus13RhnDm
- MxYw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUbEIvCTiuvDoCf6faZk2zEOEyxlIBILTsSE+/ylY1W74qbry86mqLZ1VngH3cvxI4NKQVRKq8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw439cCFu41iMzXf8YQ/rS+b57cUIUrdnUNd0Sg1nEhDIB8QGbK
- lsz/Ezvfqcj5IG5j7ey9lji2McLqFGBE4gxiHkLtERar2EU6wApkjmyKxYXC2IE=
-X-Google-Smtp-Source: AGHT+IHr2umgqgSWdc0IWs6CY9g4M2RbZ2p2bstql4d3vQuIup5SHJcdHZszofhJFtMPm6pf1ehSww==
-X-Received: by 2002:a05:620a:2802:b0:7ac:9bdd:6e78 with SMTP id
- af79cd13be357-7b1124d215amr198205785a.14.1728513552138; 
- Wed, 09 Oct 2024 15:39:12 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b11495810esm344485a.89.2024.10.09.15.39.09
+ bh=QH9GA8wHaP72s8KRp2MvsE+N6dxNbMmhtiNUaNDtFWg=;
+ b=UOcPzSC5beDbWW8HeHTTXwFPb1D/IOge04n5fxGJMfju5pDissVLcRWqQX2l6zlJss
+ 2DWwX2tDDOZMC6hYaz7+LQB8LlWQ6GwQezS05FvGLSZaX4N2nLiQBw9IHcs6V/+6Pvzw
+ nbyfufbRhUI0EmRX5Dl6gwpsH20yID9rZY+G0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728514697; x=1729119497;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=QH9GA8wHaP72s8KRp2MvsE+N6dxNbMmhtiNUaNDtFWg=;
+ b=Dkqnf5vRZC5SN9rImIx/WaoKW+qlr0h2vs5Mf4pq4mBB+cXnwuExwTIGwLtTp1HA5A
+ kEw4BJFlG2o04pot7Gvup1Of32NWIxnodK58jvVr6njPEW9vTHc/IxPixOO5AIzRepYk
+ q8yc9dOSBWeUHknpWyjlNHwonLOi7oeKUfJTaXXOGdLdb0DEQK+C5tT8TCi0/xlLtKYe
+ SUPMdk8hfnruX2pSfAmm+aDJv/LmOZdXtBrhb556A2A3No575RrTutSE0eh8zvnkN3Cd
+ Dx8gqmsBqqDQtFv62UlO3AUfdQOVk6ldk46a51LnlvidJEkgLuUAhmM/RtkvMn//CXDZ
+ ZmQw==
+X-Gm-Message-State: AOJu0Yw2IAxv+jiODLQU6/xS7tIaK2jUIrPz5y7QHrjm2CjlNSgY6eXG
+ jtwRXc5fdwSztXxfoD23s4XG/SxZNVLqlx8DgHAzu/9q+sU8H1D87Ifjd/CwypU=
+X-Google-Smtp-Source: AGHT+IFQro09jn6HOFrh4ViCumObm52ebizYYkdeKcd0+Ui++A1vq1n3aFjiBmjI2qqb+G9NiaXs9g==
+X-Received: by 2002:a05:6214:3bc4:b0:6cb:3da9:f3b3 with SMTP id
+ 6a1803df08f44-6cbc95ae6abmr71038506d6.38.1728514697263; 
+ Wed, 09 Oct 2024 15:58:17 -0700 (PDT)
+Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6cbc459e16fsm18035126d6.83.2024.10.09.15.58.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Oct 2024 15:39:11 -0700 (PDT)
-Date: Wed, 9 Oct 2024 16:39:07 -0600
+ Wed, 09 Oct 2024 15:58:16 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Alexander Gendin <agendin@matrox.com>,
- Emil Kronborg <emil.kronborg@protonmail.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maxim Moskalets <maximmosk4@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Tom Fitzhenry <tom@tom-fitzhenry.me.uk>
-Subject: Re: [PATCH 6/6] cmd: Add a command to show the memory map
-Message-ID: <20241009223907.GN14210@bill-the-cat>
-References: <20241009015020.25817-1-sjg@chromium.org>
- <20241009015020.25817-7-sjg@chromium.org>
- <CAC_iWjKh7_OKKMi9K6eMaiYUN-Nxf+ZQ0NuW9BYzK3u4F0Krcg@mail.gmail.com>
- <CAFLszTjBQaoF9g0nky5mAA429gzA8QvzjxHxooDaRo1=BB+stg@mail.gmail.com>
+To: Jagan Teki <jagan@amarulasolutions.com>, 
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Alex Nemirovsky <alex.nemirovsky@cortina-access.com>, 
+ John Watts <contact@jookia.org>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20240427-spikconfig-v1-0-8a54772522f4@jookia.org>
+References: <20240427-spikconfig-v1-0-8a54772522f4@jookia.org>
+Subject: Re: [PATCH 0/4] spi: Various Kconfig fixes
+Message-Id: <172851469550.3580955.13258224579239542355.b4-ty@konsulko.com>
+Date: Wed, 09 Oct 2024 16:58:15 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="vCsAIzRbG4/genUH"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTjBQaoF9g0nky5mAA429gzA8QvzjxHxooDaRo1=BB+stg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,49 +93,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Sat, 27 Apr 2024 15:40:39 +1000, John Watts wrote:
 
---vCsAIzRbG4/genUH
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> I'm doing some SPI work so I tried to compile all the drivers on my
+> sunxi board to try and avoid some regressions. This failed, so here are
+> some fixes for this.
+> 
+> 
 
-On Wed, Oct 09, 2024 at 03:14:25PM -0600, Simon Glass wrote:
-> Hi Ilias,
->=20
-> On Wed, 9 Oct 2024 at 04:41, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > Hi Simon,
-> >
-> > We already have a mem info command, which is pretty useless. Can't we
-> > reuse that ?
->=20
-> I am not too keen on using that as 'info' is pretty vague. We could
-> perhaps create a 'mem' command with 'info' as one subcommand and 'map'
-> as another?
+Applied to u-boot/master, thanks!
 
-Are we talking about "meminfo" which literally only prints gd->ram_size?
-If so, I don't think it's worth worrying about enhancing that.
-
---=20
+-- 
 Tom
 
---vCsAIzRbG4/genUH
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcHBgcACgkQFHw5/5Y0
-tyyo5wv/dvEdnzan3l+dm9Vs4oNJ66qltyjphDz6BZVZF3iZc+VQ89Ys22NesBlZ
-EvtXd7qLiu5uuwhuP7P9O37NUBJV2pkm9VNlb3ErEjWhsmDsm6GrQUZJITBJ5uvN
-iXjbYqmlDS+5/V2Sv8xdoVqQbJXHyokEEhWTL1nTIOtVQ5dK/uLZ77lLJwwXbm6+
-vbXd9wTJ44CdYV55rlQ/gxnl7SaFSXnJKxfaO27UN2WdHaBzYN7npr2pKYZmax0L
-TenXXpowEW2En/pFeAaF/c/ZVaq7O/872TP7+J4eQhNFZ/3oBY7doRArSpiBK1Nr
-37nAMqLW1MKW3Gpit3h7nkGrCUFq0Fi4tYUESA5VRaNflqKwnIhdGo3u5unlmVC1
-7+7iKHOO5WnA8DzTFHpeo+LV1TAoNGq5JtfZtcf4aaQt5d6QKq01Y9C9etTSC0jn
-mGtAp4gir5s0oSAn45WboJKZZzX978XHjEfCJfGSlCsSgCUF0OkFeRXHpZhcZCIe
-nxoCFpWC
-=+SW/
------END PGP SIGNATURE-----
-
---vCsAIzRbG4/genUH--
