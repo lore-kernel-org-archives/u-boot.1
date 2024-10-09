@@ -4,69 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B8B2CF042D
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 01:56:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8252BCF042D
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 01:56:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81DB2890D9;
-	Wed,  9 Oct 2024 03:55:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D5694890FD;
+	Wed,  9 Oct 2024 03:55:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EWzaJcPy";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="V2RMz53O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15146890DA; Wed,  9 Oct 2024 03:55:44 +0200 (CEST)
-Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
- [IPv6:2607:f8b0:4864:20::42a])
+ id BB41D890C9; Wed,  9 Oct 2024 03:55:47 +0200 (CEST)
+Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
+ [IPv6:2607:f8b0:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F3F6789017
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 03:55:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 46E8B890C9
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 03:55:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x42a.google.com with SMTP id
- d2e1a72fcca58-71def715ebdso3104830b3a.2
- for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 18:55:39 -0700 (PDT)
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-71de9e1f431so3750375b3a.3
+ for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 18:55:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728438938; x=1729043738; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1728438941; x=1729043741; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=aGDawDTk3FRyp0+xN5V9DS9UMt3QXW0jFt5A1qhOstQ=;
- b=EWzaJcPy39opAaTUNrbI4hML5QbBIlpKMQ4YUTQal7iR3KeNAHwH9UkxCLXiVQ1la7
- U1kM2Aikn/7tzahbDydyfH3sfYrtpyr+B+693bv2XO+RXLbTR3n90ZdEYyGznJXJfYr1
- 13DdfG3SIRLYV+A7p2SzKSZpxDRtBv0QVNM5c=
+ bh=U1MwVQUd1fL55Z0iAuZnuX5KOA5pwczGH3sbIIaPSoI=;
+ b=V2RMz53OKCUE/Ir3GxeqjLA8YF9u2+rtnpF2UloCCgDdFliSqCD+zxL4XDqB0XYUqO
+ 3okTyqinkc7hTGcJXBYhEIZT9HsWFlDs7k2esf1O6LfZlBrbRaY8dj/3xqwUVkPrtLpF
+ 9rH0as9XrGfs8Hx+dsJyQ9BbN8pXC6f0N5qZo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728438938; x=1729043738;
+ d=1e100.net; s=20230601; t=1728438941; x=1729043741;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=aGDawDTk3FRyp0+xN5V9DS9UMt3QXW0jFt5A1qhOstQ=;
- b=oJr3BFjXbeOkQC0v7Ox+/TSps46GuMfDB56tcq6shaowKS6eY5bdksRFUCCvroPEYt
- P1e8mQEKPbKVpVVrbUVjm9pvP/hwHa/Nchu3rgulrpeyI04UeShzaJEXNksj2alcMGEp
- sIRwNf9rzYDYHSGMMcRQqbcEfaYG6G6OX1k2PctL2xa+9Z8DukKAGLP8aXvta5bXGSuv
- BEgjNHMYS5cQl5E3Okq1x6wlPLGQEJDtcAKrOJFCmuT+zgNPF+2ekoYnuwmuMv9o8Pwp
- +3+eHixNXVzK3M4hbwurtx5laYVORyHmCmFdZSUCTBX5oKMzSL/eWqqDxDg+4yUKZtsH
- 8ojg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVF8ixNz9Nsqb0y27YwGGCFAEcaDPNy2u9hfvMyVWXvH8FxqCD4IgV2z7lo1CHeoFXZzQnpodU=@lists.denx.de
-X-Gm-Message-State: AOJu0YyJiL11W0uTLnI6PRMxvLMJug4/4BEJeG4lvqS7QTcrbyqeEwWw
- V9qE+JCNsz79vDdAGjjAIVvYPb5wXm9isq1rxknBKrZ2o9FLsAyuaD/G3Z+Fn78BuQnK7Hsj9q7
- FbrHyPT8kcQo5MGya4hqbc+OF9QJha1InAu5tKhVNQ6fmfAwrOw==
-X-Google-Smtp-Source: AGHT+IH+VmJGLSivg4ezaAPoZLElEDqrdNxhCzvcF3rXG8i+Pmi74s4ZwjbI9fzrfpBKxmpsjq+sMMCLYgf+Uui2lPg=
-X-Received: by 2002:a05:6a21:2d89:b0:1d6:e673:9bf6 with SMTP id
- adf61e73a8af0-1d8a3be3701mr1852880637.10.1728438938495; Tue, 08 Oct 2024
- 18:55:38 -0700 (PDT)
+ bh=U1MwVQUd1fL55Z0iAuZnuX5KOA5pwczGH3sbIIaPSoI=;
+ b=FU593WezwP47yVP1CEOmRQY2bSJpvL61yKzQ8FNGU20loGak94fmsPrJausYaUbNUl
+ ZgAWT78m1sJHO1BscrGrFJpYOWx5GxtanJwf1xPRwb8rmpUUDnPEzI6QlHBwShm9k5p/
+ XzaDx2jitjCSJE2rXOLGwHCGT2u9wvBxvuciloQpqbYbLneZHfLjJsH6xknEwDkFur1Q
+ ZQxpQo9suKA9CsfeMC6dfyJKJLqrUqb61nwuq3LJvnBX0lyN5TrGquLQVcIs7YdBIZNn
+ F5T7iApWrjhCgA5g6J6A40X5UfQjsK/i9mfglU3+/fY/gNBKJR9FeP11OI7rdilQFr6B
+ GhLA==
+X-Gm-Message-State: AOJu0Yy6rbFQ8W+cu9ORUx8BX1gWTMo3+Ks3jc1IBZG5fK+pwRe3xpPB
+ 40P4YDzgEV1BLRnfxESMEVzKaLVUyZdQyk9ekyv2tfzbXTlUYJU6mAe6Be9avBiDYj5CPGHaCiN
+ pUDolIFQqvtlRrhrgvZb7Ky689fopenFehZcb
+X-Google-Smtp-Source: AGHT+IEnsEEpBktUmsHwSKaLSy0KtIXVc2B7fpHcon4egqxh3apRBghQ2vXvjgjKjkdueSjmW1jT1E2sVqDivt6OJQQ=
+X-Received: by 2002:a05:6a21:1743:b0:1d8:831:ac7f with SMTP id
+ adf61e73a8af0-1d8a3bfd869mr1627547637.12.1728438940809; Tue, 08 Oct 2024
+ 18:55:40 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241007130109.227305-1-brian.ruley@gehealthcare.com>
-In-Reply-To: <20241007130109.227305-1-brian.ruley@gehealthcare.com>
+References: <cover.1727968902.git.jerome.forissier@linaro.org>
+ <1cc1dda87239c68cfa30430f08911b78cf4c69fd.1727968902.git.jerome.forissier@linaro.org>
+In-Reply-To: <1cc1dda87239c68cfa30430f08911b78cf4c69fd.1727968902.git.jerome.forissier@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 8 Oct 2024 19:55:26 -0600
-Message-ID: <CAFLszTj26G9WatN_fmksAkT4wiZfQ=sAnT8Ny5bZAfc55eYgCw@mail.gmail.com>
-Subject: Re: [PATCH] WIP: binman: expand test coverage to nxpimx8mcst
-To: Brian Ruley <brian.ruley@gehealthcare.com>
-Cc: Tom Rini <trini@konsulko.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- ian.ray@gehealthcare.com, u-boot@lists.denx.de
+Date: Tue, 8 Oct 2024 19:55:27 -0600
+Message-ID: <CAFLszThck=mi1xcMRsPGQ4ANs_qT4Ro7LZ6OPiEnaguXcYAVQg@mail.gmail.com>
+Subject: Re: [PATCH v11 04/29] sandbox: add dummy driver ETH_SANDBOX_LWIP
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>, 
+ Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>, 
+ Anton Antonov <Anton.Antonov@arm.com>, Tom Rini <trini@konsulko.com>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
+ Yang Xiwen <forbidden405@outlook.com>, Kever Yang <kever.yang@rock-chips.com>, 
+ Philip Oberfichtner <pro@denx.de>, Boon Khai Ng <boon.khai.ng@intel.com>, 
+ Robert Marko <robert.marko@sartura.hr>, Jonas Karlman <jonas@kwiboo.se>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Marek Vasut <marex@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,123 +91,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Brian,
-
-On Mon, 7 Oct 2024 at 07:02, Brian Ruley <brian.ruley@gehealthcare.com> wrote:
+On Thu, 3 Oct 2024 at 09:23, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
 >
-> Add coverage for IMX8M code siging. Create PKI tree and other assets
-> required by `cst' using `hab4_pki_tree.sh' script in `cst_3.4.1' [1].
+> Introduce ETH_SANDBOX_LWIP which enables a mock driver similar to
+> ETH_SANDOX but without the dependencies on the legacy network stack
+> (NET) so that it may be enabled when the lwIP stack (NET_LWIP) is
+> introduced. The driver does nothing at this stage but its presence
+> will allow dm_test_iommu_noiommu [1] to pass.
 >
-> [1] https://www.nxp.com/webapp/Download?colCode=IMX_CST_TOOL_NEW
+> [1] ./u-boot -T -c "ut dm dm_test_iommu_noiommu"
 >
-> Signed-off-by: Brian Ruley <brian.ruley@gehealthcare.com>
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 > ---
->  tools/binman/ftest.py                   |  4 ++
->  tools/binman/test/336_nxp_imx8mcst.dts  | 58 +++++++++++++++++++++++++
->  tools/binman/test/cst/keys/key_pass.txt |  2 +
->  3 files changed, 64 insertions(+)
->  create mode 100644 tools/binman/test/336_nxp_imx8mcst.dts
->  create mode 100644 tools/binman/test/cst/keys/key_pass.txt
->
-> diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-> index 93f3d22cf5..f1c052a7f8 100644
-> --- a/tools/binman/ftest.py
-> +++ b/tools/binman/ftest.py
-> @@ -7690,6 +7690,10 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
->              # Make sure the other node is gone
->              self.assertIsNone(dtb.GetNode('/node/other-node'))
->
-> +    def testNxpImx8mCst(self):
-> +        """Test that binman can sign an iMX8M image"""
-> +        self._DoTestFile('336_nxp_imx8mcst.dts')
-> +
->
->  if __name__ == "__main__":
->      unittest.main()
-> diff --git a/tools/binman/test/336_nxp_imx8mcst.dts b/tools/binman/test/336_nxp_imx8mcst.dts
-> new file mode 100644
-> index 0000000000..6cfefdae2a
-> --- /dev/null
-> +++ b/tools/binman/test/336_nxp_imx8mcst.dts
-> @@ -0,0 +1,58 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +
-> +/dts-v1/;
-> +
-> +/ {
-> +       #address-cells = <1>;
-> +       #size-cells = <1>;
-> +
-> +       binman {
-> +               nxp-imx8mcst {
-> +                       args;   /* Needed by mkimage etype superclass */
-> +                       filename = "test-fit.signed.bin";
-> +                       nxp,loader-address = <0x10>;
-> +            nxp,srk-table = "tools/binman/test/cst/crts/SRK_table.bin";
-> +            nxp,img-crt = "tools/binman/test/cst/crts/IMG1_1_sha256_4096_65537_v3_usr_crt.pem";
-> +            nxp,csf-crt = "tools/binman/test/cst/crts/CSF1_1_sha256_4096_65537_v3_usr_crt.pem";
+>  drivers/net/Kconfig        | 11 +++++
+>  drivers/net/Makefile       |  1 +
+>  drivers/net/sandbox-lwip.c | 85 ++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 97 insertions(+)
+>  create mode 100644 drivers/net/sandbox-lwip.c
 
-Please can you check the indentation?
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-I don't see the .pem files in your patch?
-
-Also we should really tidy up the etype so that it can read keys from
-the input path, or perhaps use an entryarg to point to the file.
-Having paths in the image description is not ideal.
-
-> +
-> +            fit {
-> +                description = "test desc";
-> +                           filename = "test-fit.itb";
-> +                #address-cells = <1>;
-> +
-> +                images {
-> +                    u-boot {
-> +                        description = "test u-boot";
-> +                        type = "standalone";
-> +                        arch = "arm64";
-> +                        os = "u-boot";
-> +                        compression = "none";
-> +                        load = <00000000>;
-> +                        entry = <00000000>;
-> +
-> +                        u-boot-nodtb {
-> +                        };
-> +                    };
-> +
-> +                    fdt-1 {
-> +                        description = "test fdt";
-> +                        type = "flat_dt";
-> +                        compression = "none";
-> +
-> +                        u-boot-dtb {
-> +                        };
-> +                    };
-> +                };
-> +
-> +                configurations {
-> +                    default = "config-1";
-> +                    config-1 {
-> +                        description = "test config";
-> +                        fdt = "fdt-1";
-> +                        firmware = "u-boot";
-> +                    };
-> +                };
-> +            };
-> +        };
-> +       };
-> +};
-> diff --git a/tools/binman/test/cst/keys/key_pass.txt b/tools/binman/test/cst/keys/key_pass.txt
-> new file mode 100644
-> index 0000000000..dec2cbe1fa
-> --- /dev/null
-> +++ b/tools/binman/test/cst/keys/key_pass.txt
-> @@ -0,0 +1,2 @@
-> +test
-> +test
-> --
-> 2.39.5
->
-
-Regards,
-Simon
+I hope that you can get a few tests in there soon.
