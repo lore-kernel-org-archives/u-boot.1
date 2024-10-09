@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D33C6CF044D
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 10:52:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B2C0CF044D
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 10:52:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E61C891B6;
-	Wed,  9 Oct 2024 12:51:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9A506891C1;
+	Wed,  9 Oct 2024 12:51:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="zFu8hMpp";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="EJXqCX5m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3128C891DE; Wed,  9 Oct 2024 12:51:16 +0200 (CEST)
+ id 07122891B6; Wed,  9 Oct 2024 12:51:18 +0200 (CEST)
 Received: from EUR03-DBA-obe.outbound.protection.outlook.com
- (mail-dbaeur03on2071d.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260d::71d])
+ (mail-dbaeur03on20729.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260d::729])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ECFB7891C1
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 12:51:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D2441891B3
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 12:51:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=gG3RrqczuwiWqAQUuT0w90QFYkakcEtif50kyLvLlYhXUs3MuEHo1W1MSODTlZDmSp/+FIr05GkAUHp7yQ/h1kh/oHaauDg/5I6Kv0HBrN3x7A1Zlgu804HV8IxhoqPGCKh1R2XdxOL6fpYdQ4WUkRgrXPmWPAd3Q9kfa9D7DfH/lcE3PHhfqxeu8fG4Ta1OIcv8SDXQaWcBNd1/v7g3LShIqO9di4i29CCzWdV0tnoyXyTZ9tc3oqJfdTBNcQPycaEKe0ZgQOGU46TXtXHcVNgzduL8+eJvzjazWs/reJWMA70A+TGCdmjX/f007e0al4UpRlXc2psvqWX1DJ3DnQ==
+ b=fT1bebsdGZR8dQAPXZrdwAvYMrx8ROmHdRpJL010mbBdiBIuywakn13T+QsjLJMVl0AnisCX+9lSeUFgVGh/VQGh+dUcye0tjwyPbraFBIrNuOZWaL6VWv8VIEUcDSi8MtLG0K8MVNalBGCOUHj+Y4pCHOlm+UVn2lsr++51WcKKLsqlBN1hk1RlupiANWk96Wdk9gTTIs5X9WW31xmvPVGmwgYmIFBCsb8IoAkgVqnmU/J9T7xquORb2zNiINkOeV0SUh0f4h/1ybp4CxSOS8dsEmGlk5xO7WtR0FXpuJmB8wiKgMAHsbArOZ5EDBMZRSPUNQaY0jm2mFU9dAPAnw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4ojSuyDkqSAezgM+ZRwYsie5vYL4/5jxFNtlaPhB9l0=;
- b=Xh8oeTdXNgo17eIwoaglrf0MKL16lxO9cVVD/8JdwUI/eSB34CCKq9JQacqUJfr7IjqrAEGe0sa5AmyFO+9HlQ01fenXqbk9zblFqBKe/ZXrYUr36HjdECrjLtXHeBlNUU3umwkcdMGZSlR6D2SDXZmtdqDqujoqhC8DqLFFsFQY3JRbEJTddpwqH177J5G9BgfqzUbLonpJnrD9W4fPJyOG6r48/3YVRSys4qk8AGowfxtkuxWmDjE35N1a5BsghBlNSzRe8S1Hywd8KdLrLKfaaVDyeCUWKK7j37m7ob8umeuIl9JZ84mUHwvrA5YEkxeDWuia1as5DZQO6a/8Nw==
+ bh=/mnwthLZ9/YH1Z74Tgym8Cy9mr2IxJj2MmAo6CW5IWI=;
+ b=nRVvLcwKu0COiDXF81z+1Ryyuad8CzBqrYjJEcDeipSFgwKWO026g9cpsdmDtaxhjNHriwzZiCPnwS6XQPa1ZAn+fM9jmgIDqyR4Z2xUlELhhYveRx+657DTR9nJohrnhSsn2ufKD54n8jyupk8IIrTVT+sFQUQ/yfkQKFGB7+/Vk3DMyBj2/lTKKf6qruwWxpA0vmve4iiCYSoW04AXE4vFO42zFN/rFq1K1wfcr8agP1GhyVz3jXtVLHCOUgXFkPv0fhmpaoHWqM5wyV98xKsmsqeFG7It//ySkJNbqrr8zFGxkoOJtOxkOVfA3juT+8HBM2wPhsJRXz6s72xUiA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4ojSuyDkqSAezgM+ZRwYsie5vYL4/5jxFNtlaPhB9l0=;
- b=zFu8hMppwVfuZDrl3ksHcXS08Wz1SlT/srWsdzQ7RGCp6cQLT0C71X+A64z44fkyqLQyKpRqfDDjb7JQAJPQmqxtaZuxAOrvbO8oELm0z17cjPjCfYP2kcOxoEVtDVSpmN2JrM8C3/hVzOtZL0T1Q4zwFJvpoH7QKmRhgI5VgD7xreywtJO8Wy1KcPhHALF4fSME6BUohvVrvYwVlUpeJM54tdXlOkooUEqY3xAIsTCfn75WncVbwF9bXtHC1nVnatzPW2iHFRwZRprJzuSf/QgKil1x9iI2+FI57xidDqEYsFiUpyNLlt7R8wldGFjy8CrHmTQZEpdThZ01gTbJMw==
+ bh=/mnwthLZ9/YH1Z74Tgym8Cy9mr2IxJj2MmAo6CW5IWI=;
+ b=EJXqCX5mxogVyiFrTH/BDku0mmX4AQ2bCHzJgvy0/dEpkCEhmCxbZsYEZnRy6r19H3cNe9RGhWyiZHuyekeirkrn3Nn9SDmx4QjGP2NS9fAFK/se0tPNu8v0Y6J+jOnMnbyXGq5ZUDryi1Y+GsL2PvOw1Ncu9+XvqAM8kfaZkPGEMHXfM70GNRVebjM/YJOSVGM+8M3naDkvTDqwMevPJ4LzXVlnoAG18Qp/zkggnRYNxjmrSvI2VqMFjEIUoUtcVstYFGQsFfixY4m0ZLYbbJS8u2sYXmMgm/ICjWr70pIMNT6iEFfke/mHREd8psKafw9kxKpt21lbsqTXpoNWvw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
  by GVXPR08MB10543.eurprd08.prod.outlook.com (2603:10a6:150:15b::20)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8026.23; Wed, 9 Oct
- 2024 10:51:08 +0000
+ 2024 10:51:11 +0000
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0%2]) with mapi id 15.20.8026.020; Wed, 9 Oct 2024
- 10:51:08 +0000
+ 10:51:11 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Joe Hershberger <joe.hershberger@ni.com>,
@@ -68,9 +68,10 @@ To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>,
  Yasuharu Shibata <yasuharu.shibata@gmail.com>, u-boot@lists.denx.de
-Subject: [PATCH v11 04/13] net/tcp: add connection info to tcp_stream structure
-Date: Wed,  9 Oct 2024 13:50:45 +0300
-Message-ID: <20241009105054.1879054-5-mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH v11 06/13] net/tcp: improve tcp framework,
+ use better state machine
+Date: Wed,  9 Oct 2024 13:50:47 +0300
+Message-ID: <20241009105054.1879054-7-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241009105054.1879054-1-mikhail.kshevetskiy@iopsys.eu>
 References: <20241009105054.1879054-1-mikhail.kshevetskiy@iopsys.eu>
@@ -82,76 +83,77 @@ X-ClientProxiedBy: MM0P280CA0081.SWEP280.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|GVXPR08MB10543:EE_
-X-MS-Office365-Filtering-Correlation-Id: d11276e7-b9bb-4094-b075-08dce8504820
+X-MS-Office365-Filtering-Correlation-Id: 1205aeae-6dd7-48cc-3d45-08dce85049d9
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|376014|7416014|52116014|366016|1800799024|38350700014|921020; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?hqQYNZqXBhWctLj/xhTs0rFhLbXvwdSY1orl5QYYBYgUg6P/+b39IuBWnWCr?=
- =?us-ascii?Q?pzylN6ugGxAOY6fGM82uCC/5GX5mznzt/INpGAlRHsHGxpTZP0iDVbgvnOgP?=
- =?us-ascii?Q?BbgOJxZkPBbSlsum/5HQ5G+e35kq7z/1AfWJet532CK0RVoum3CTgPDLaZjJ?=
- =?us-ascii?Q?K4vumEHetWf0wRWECzpMF8mSMGVS5lRIbbN2wZ5tt/qLL/nJ9UgFFMsedsdA?=
- =?us-ascii?Q?PpJByrinNsAiUFIeOkfYNh+UKYMLxHlKyoia3IMIrvEPyWT/d5SWdeDEeFCb?=
- =?us-ascii?Q?0VAAdySGBOdg//NFgZ5CjLZMvjy7aNrOOtaA4dL419anLsP/lIqG+422O7Eq?=
- =?us-ascii?Q?jyhbc/kM0LI6/q2VSBCO06LTi1/AoxR4BeFacjtXNhhFXtn4cNAXBTXDDv45?=
- =?us-ascii?Q?IFzA3v6TuUJjJrL2mfYrzcD2MtdpvjSXd4DvMK/m7HiyG0hbHjUNSXOCnuic?=
- =?us-ascii?Q?Zv7BwVrZuopnE/PMG8L8D8FTe3vBahDPZassnwrze9ti2ME7QdFLTPv5cBZ6?=
- =?us-ascii?Q?8SFT9Rb2YotQn4Q3yt460uuMmCSfFbrWxT4P5urhmHvnUuYeKQN+31zKmlwX?=
- =?us-ascii?Q?GAcw+elt21NV35fsstX1cjsIANTgOdh3Eqa3RcSfAU87wFIOd9OGbT8BSxNS?=
- =?us-ascii?Q?YYhS7ZSm407eYFWMNyFF44qBEro88VtuLpTBVDpRVk0qLcI+lV8d+a0zz5WF?=
- =?us-ascii?Q?Dx9XQmT9YjFEDs3Hay5tC/dcv7/F7MzltnHhzadUqgwSN6fW0mjVcxl4x44G?=
- =?us-ascii?Q?+6sa4piepVU5MXfKXFqtGh1P+yib75qlLfRYowlC2K9CFZ1k5He+ZryXT1FG?=
- =?us-ascii?Q?Ks0JCBULxBEiZdNQRzYhsiUeeBido/Ne7bobNe5KTF6dUXQpkJMAzmBgbmqD?=
- =?us-ascii?Q?KTOSJOWNvarD5JBocCXWoa0Jvt+1c/AjkyolBrNatA8TxshmVcki0+IwbbUV?=
- =?us-ascii?Q?x9/L9qzCfXoLiBJwU6VxFXDCouhYOTcz77E/QxQGhlBnwScMg3o0dhJz8/2Q?=
- =?us-ascii?Q?tiJ4SMeXaXHB350upq19y9NNSDVvg6DmfJnfTzwTw5XiyeDlPGk7B4culf/3?=
- =?us-ascii?Q?5opEnV5bz2g+390G5x8NYYQ+sE8Fw50dFXKpUfWU0dmhwg+JoGWekWOq+Sk2?=
- =?us-ascii?Q?7SuTQrvs5Xnq3sWidWAFohzgE3C+oZO2Gun1hbFCdJu1GTdvdrW9WiP7nl7P?=
- =?us-ascii?Q?2LtZ2eN/nTrseiTLWdnW4QDkCzGy7/0kz98IHn9CEbdDJEAUrChTSiud3vsY?=
- =?us-ascii?Q?nKKDA6WBInSxf6M7yBuNU65V4kdPyNF/y/bBlSy3qz2N7koNscS4YSqeAFbt?=
- =?us-ascii?Q?U5LaO/k1hC1dhBQc8REi0qjK1n3dOpREm/ZxsX2MtjQH9w=3D=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?5LoK1h2gKg2/CVm7G/pS4N29be9s+pLeHziEUBxyyBJ2OdjTx1a6UFPzHeEw?=
+ =?us-ascii?Q?aZgL+tM4nRwro7lPEhHDJghBKP5ngHxIIrHQ8L654xwrBjdd7WbbnIscM1J0?=
+ =?us-ascii?Q?ee6j66BTsqFRSpWFPfFWReYoixwRTncWEPMfXJOpiDGLjHh190Z6TPTsWol0?=
+ =?us-ascii?Q?oa3P8EV1GKZNOMH7IpqJza1GPx3kSMffxzBDHUYTUla8cI4UYd7jaKqzpnt7?=
+ =?us-ascii?Q?9WKyrlN806VBkWtYoSa8HGhKnwQ1DS+hGizxXx915uYe3Df6GeXrJXqs75NH?=
+ =?us-ascii?Q?uDvXLYNhKCbR9dpFfcyAEQMXZPSg+FhjZmvuboREefHL0dGksD3ndDgs21md?=
+ =?us-ascii?Q?Pj3ZshDiJrecVohRVa/o5/n2fbRkWdkguXrP3b8/nAPZVZVK1ccxxen7D32G?=
+ =?us-ascii?Q?Ij3MwmLLBl42vV9LUyPXqbTsvHmVGJEF5/YD6sU8rpgnwy3i8ZrVB38EvFD+?=
+ =?us-ascii?Q?ky3ImrVHKwJ4wjx2b8ZgtxWTY3XFaY6sIDTTfyc2VDCelsy2/ZHWlLkh7oKw?=
+ =?us-ascii?Q?UJ71xkQExmm+LGs3xM4zwjZKqR7WP2BAuV8TClkU8Udo/BKTGC3eca0lBCbY?=
+ =?us-ascii?Q?m56+Hn99d2drz3oHp3FKHVqS4VJYYBXQMt3aEN5KCT/Wk0lkckf2EdBEU1r0?=
+ =?us-ascii?Q?NoEfqHfjGz+2OpyLvlrU02wjAVVXFn0RLPzwvZB0Fzk0yfSFn0BezK/1EmPc?=
+ =?us-ascii?Q?/D/AVBvmF17+D2evuSUFZs0Arjy4JaaP+/ie9EeGJfLg+qcKK1cfGc0Ve157?=
+ =?us-ascii?Q?jpFKT5rvgRTSXVBpwv28wIpD+LBZCLgLA+yFPZcTB8l/zknLYQouQGhfewfb?=
+ =?us-ascii?Q?l8CPmmBxHN/HoxzNwnUqcdopqSHZK83/4IOVsCED9WpbdRCnn74Q8OCIPHCk?=
+ =?us-ascii?Q?sr7je1VgwXVipKFQ4lx92xvbJ9LJVexWW9s9lmap8kcSmpGBFpEg5MyP45AF?=
+ =?us-ascii?Q?3rvm4xIKD0dDnEcQI1IxrHq2TmgUoshp8lnUvBAMy6qUslL6wpgmP7BzCgIJ?=
+ =?us-ascii?Q?F6ztO6mvsmAiq/B72yh5Of85dYhHl+XAL/skAYCIR1wFrmPGFh03vIySehBN?=
+ =?us-ascii?Q?7GlNaXX3vdowVAyu47BnesIAbqk45JqBbOwSGF83MoL8CdKfOs3S4yMeNXhn?=
+ =?us-ascii?Q?A8GJBC+PEvSwA/XmhaJvbkJCxLjoH74gLMYquouLUPrn9Zn4lnwDcjcNQeN8?=
+ =?us-ascii?Q?jOnChdJu0PovsETgUZjNkMMH4qQ+F9eMRbeHxYO7s5Iq2qB6foCLzUH3rlAW?=
+ =?us-ascii?Q?eaE4WiRe2P4RRzsVDsX0B8uYrtaYZ9xJgmJEuqX6Gs5pufxQ8TY7PNyBSeWo?=
+ =?us-ascii?Q?oVw+NIFx8unKsM5ZQshM+3i+Dunx14bozD/VskaV+7YS1ZUC08Wv4lgmnaJR?=
+ =?us-ascii?Q?ufo92yA=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(376014)(7416014)(52116014)(366016)(1800799024)(38350700014)(921020);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?LIWeeL+NYoA5tqmsFS+s6XdDVK/h/kFI7WJXC1RIzV1yRoYYov5lLajKehV1?=
- =?us-ascii?Q?OE7GrYi+YfpEK8Za+PXy+2aNpSccfRv1JcWZ9NLGDdhtrfNAAfQKxOuQejCs?=
- =?us-ascii?Q?VyX3NGJHAOA3yiQTW/8c/zV7HKr9V57s38nFErAeL1wk1EX44i0UDuH3J2U0?=
- =?us-ascii?Q?iTCiK7eviBkn1+fvKXitHqUqeRKFQpwEw0b196nVEeGz8AlTK9y0wcH1EJJw?=
- =?us-ascii?Q?P5xrRqx5VdmSN9ug5WrhVw+gvItqVp2nY0KOUOJJRFiKoBlB/+WSgpn9j6WX?=
- =?us-ascii?Q?o/gBqw8YAtq/vQr+GYwOzsjGIDShQM1X1Sf7Mj4H3ivq8k76ApRATRpS1Ssn?=
- =?us-ascii?Q?A/Rl97Ci/eG4cgP1+PJ4PfhTbDICRFnC4FZpYpn4jCPRGPzslCHWqS1xRtP4?=
- =?us-ascii?Q?kvolPLb60eWSoCdcq7rViEI40bRFMvWmgumGLj0NcVN4XVZJ8X9x16TE7S3M?=
- =?us-ascii?Q?IWG5+KBgR51jP3HlgXtshIqr+2fCjEpJ1noNs/Wuiw5wC1Lepi5JJXDK3ojk?=
- =?us-ascii?Q?BF41DQBTXzz88YByTeZKfB1I0zXqfJ0IV7T2+mfHWBijBTBe07YvkgEAFegV?=
- =?us-ascii?Q?jQF+Nvm0WpQM9Vsx1SaGRhsXYqcahJjMwPa7b7JETEqyccfNB/lRTgAFcBN/?=
- =?us-ascii?Q?1Xs8lQr8u7ng/H8Su4ctgN+OK5f+e4LsnO2P67HDHsbPaivi8gxYz4J4AzVC?=
- =?us-ascii?Q?8d15e5tD8iiO8sQlC36ZCfhuKN27NB0cmEaULOUNTOwB5dC/vARo1W2VdH8F?=
- =?us-ascii?Q?1pIpf+/4Ytpi8LvM6AAMaU9MfBbegm/5QECtaG2iIbU+eDJWFJEJKIFVhHOs?=
- =?us-ascii?Q?AbH+duPe8tp7QRoUBFL7L8ZnnXwJqtiqp0PgMawjkSGj20H1JNkdN646Ptvn?=
- =?us-ascii?Q?R4VO9fET2VNvbF0CbCzIeaZoqPumQL5aI5hsC7FtGocuJDJsaBo7Y8dVUi6D?=
- =?us-ascii?Q?Q5jxmlx5wOzHPGHQuzkvPnIHVV3nYZByvzXdEw+SgEHJ9dxkzFQp78EOeQfY?=
- =?us-ascii?Q?P3UQu74R1ZP4kX/5vq/OyeUT6XA6VqQTWsiFQ48T60hZv7JIxSbFNl5fPs5f?=
- =?us-ascii?Q?fwxNf+47wsC6si5XUEI0THJwrkm65SynvxkJk4+sOATsiZL1jmNCOKuw9v5u?=
- =?us-ascii?Q?JXSw4bG9PPCxpg36v0kzQNrACRkBGdya/6pVBe03pRllpcWLYpAGaAvMqX6L?=
- =?us-ascii?Q?m9V88gXa2dgKJxYbz3N98A+clKfa0BIgevhM9p2NdSrmh4IL8jAsbKBGPa3N?=
- =?us-ascii?Q?bgkC9sDZpDlHshpd5A9qL3jC7xrvyLNTcLvPAry+SVwL+xOnsG6vkRxOZe5q?=
- =?us-ascii?Q?QFfbgVkX1UcS3r8lBHx0K5rHTEumn46P7kuHkFsYA5O8QSQFj8CHECzRgUXQ?=
- =?us-ascii?Q?/ZhPCJkIjDZ8e/282oysakMdBXQ21uHYlKLv2iGUZq0upqm5yoT2jWTWkMMJ?=
- =?us-ascii?Q?Q/YUQmQCz6lkNRZLxIuRi7Jibj4emUjtiq9tvQ4b4W254APaQRzZnroaURcA?=
- =?us-ascii?Q?hTP9l13cFQnKaiXLlYGnQsu+MCKx8bKGHntY9M+V+2m8u+eZc3QTYX0WU2m1?=
- =?us-ascii?Q?2/aU4+e9SIPS1lxr7tDb3VEDxH+LN3ksAafHFDjZ9XlO+YaN2OMcBvZUJihv?=
- =?us-ascii?Q?lQ=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?4qzf5S6rZB2IRPQtFTPBiZUdPWT+2rqFNkvk+wPl5CaDy2zmVYUvWyyQbOUr?=
+ =?us-ascii?Q?rV3vwZWIcujwYHyBcUE6vSDbgt4CBSZrMUbZ50LHggvMGkLFMzvhfWW4ziFe?=
+ =?us-ascii?Q?KjSWgwxIma8jrR86n6uIopZTXkc/0ESBwuxYnf7mr4ZYrE1NOoHzplM9JO3D?=
+ =?us-ascii?Q?TtdnJUJHLNlTnt/JWKFAnX8IAmwTwEiX2uDcVByh5oU3umNTYjXuF8Md/i5d?=
+ =?us-ascii?Q?Z6OKzrTYFJQtP6mTI4YqmWqa0k1mnia2H2ga/YzyK30DJ18NUTwUVBLPxQPW?=
+ =?us-ascii?Q?oTrUAMiq0iuUoP9DPekctDl2CPfG4HR8Wk0TERoeY5UEuN0hfxft5EejA65M?=
+ =?us-ascii?Q?VLBKnGUYWVGc5VkMdfgErD/MlY5PkO1z5zh1u/yOoA7qcXibKS/5NZQNmeqq?=
+ =?us-ascii?Q?U6P0budtsrJuzN3r4H9iWls41CiFTxjGB32e+4B10V9PB3mwXXVzj75ftUF3?=
+ =?us-ascii?Q?EKrvvICHiYKRas9Lvvqx0hCRCSdD+m2vFyXpgooofWa/P5l5w6uGddp57Yvu?=
+ =?us-ascii?Q?DJm7XdBV4Lr+mqd55jvYbyugm384C4q1Fyzn5V/JQQudcPhQOJ02TDBelxJa?=
+ =?us-ascii?Q?1xYuvdZwav6k4ehfG19H2AOz59Om7ZCvAKdpEcB+v1JbyjK8dSNP5z4H9v+J?=
+ =?us-ascii?Q?x+dlex65f+LuD7kzvwxxKyZwklaCKLDsmGWgxJNMOGWxYOyzFohxYJjxFML1?=
+ =?us-ascii?Q?JxZK4rXFOOc5BQKv0iTSMG/S827StOyUzckKkPsyzdkyRE3a1+KoM758uluB?=
+ =?us-ascii?Q?P6bz0C+8nraPRxKOgRsok4H7bNAquO428LRKr0r9mxwkipmDFuK6CDrqr6yI?=
+ =?us-ascii?Q?JiiL7xbMKkvb0HLKUdl4kYxhj3V9X4IpsR0WDYe2t3N8GUesvAw+Kig/8lgS?=
+ =?us-ascii?Q?X3kfDsCj9OKzIThH186L1k9++gnbOuZlJFAzSc/i+nPs9dNGKuvmMD/dVeaA?=
+ =?us-ascii?Q?IS3OGq46vNoA0fHLAjIHCjkLpGsWTQqqT2fzXl9avB4uYV6wvKD8o2zK55gE?=
+ =?us-ascii?Q?3erfrY58CKE+ejB0Awv8POxseZHvSshOf595bGwbgw3ncvKt55+bDZacBVJo?=
+ =?us-ascii?Q?n2nhg6CSd8SrnO0fc3d0YVBg2L5g8bqvcc7G/vXucXpo8x38VeyTonfpxYqv?=
+ =?us-ascii?Q?ymMnVZirF3z2RCkhawDQPGgvAONzEhYbiqS4pHplx16n54M0+kD8DzKFxKjL?=
+ =?us-ascii?Q?6aDj+ryZXgxFwf4bXsWkdmZscfp9Oi8WKKSctfqXXn26cen2FWzQx7Vah/XU?=
+ =?us-ascii?Q?P+jVpsDM3gKFiKpIQCheHJD0JLyDzEKDPCMH2/KeihSbS7KDl1i5wWOzotDH?=
+ =?us-ascii?Q?SBNxHtq8cguiiAOdgRb5e/vySiNRm4khteDpaC96MJZZ8bmMvaxbjkbsZ7YZ?=
+ =?us-ascii?Q?gFR+s3TV0zLWf4OF6Is7e5MS2hl7DtaQtkyfMTzhCUxW/2bgbIMtnAVyZoeT?=
+ =?us-ascii?Q?oJVIqDDFAGqz43nd6CJhP4zhckPLTERiYQfrHCWdBZcPhcPmNJrHhYVp+7ot?=
+ =?us-ascii?Q?o8n4F6CcbvKiBfku+fBx9ebXdstaY1K4wchPDEdK1d09U4vctiXYQ+MnvrDu?=
+ =?us-ascii?Q?kl6aA7AYHozWITWgHbIfrtwJO6ofmHifyH89k9LBhXs+Edm2FsbgLGIRCw+6?=
+ =?us-ascii?Q?uA=3D=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: d11276e7-b9bb-4094-b075-08dce8504820
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1205aeae-6dd7-48cc-3d45-08dce85049d9
 X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Oct 2024 10:51:08.6374 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Oct 2024 10:51:11.8053 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: FQz1YPd+kf7W2fZECecdvm1KY1Fl2+y4eqjUAHdB9Mlr49R9cyuVgXjeUMFLX8bazgzVt8CxWnb39wYIj+lL1q8QplzO841YiX0+TPDdKko=
+X-MS-Exchange-CrossTenant-UserPrincipalName: /TUX/5DVP71NaSdWKp1VrILNHqa8qR726lOHbT2wy5EWMRiGnzw3qLwGjXWFDisB1J10L3MZNyIiuAdhKbimMDbiSEIyUmTbpDjl9f7oIZY=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR08MB10543
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -170,406 +172,732 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 Changes:
- * Avoid use net_server_ip in tcp code, use tcp_stream data instead
- * Ignore packets from other connections if connection already created.
-   This prevents us from connection break caused by other tcp stream.
+ * Fix initial send sequence always zero issue
+ * Use state machine close to RFC 9293. This should make TCP
+   transfers more reliable (now we can upload a huge array
+   of data from the board to external server)
+ * Improve TCP framework a lot. This should make tcp client
+   code much more simple.
+ * rewrite wget with new tcp stack
+ * rewrite fastboot_tcp with new tcp stack
+
+It's quite hard to fix the initial send sequence (ISS) issue
+with the separate patch. A naive attempt to fix an issue
+inside the tcp_set_tcp_header() function will break tcp packet
+retransmit logic in wget and other clients.
+
+Example:
+  Wget stores tcp_seq_num value before tcp_set_tcp_header() will
+  be called and (on failure) retransmit the packet with the stored
+  tcp_seq_num value. Thus:
+    * the same ISS must allways be used (current case)
+    * or tcp clients needs to generate a proper ISS when
+      required.
+
+A proper ISS fix will require a big redesing comparable with
+a this one.
 
 Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- include/net.h      |   5 +-
- include/net/tcp.h  |  57 +++++++++++++++++---
- net/fastboot_tcp.c |  50 +++++++++--------
- net/net.c          |  12 ++---
- net/tcp.c          | 131 ++++++++++++++++++++++++++++++++++-----------
- net/wget.c         |  52 +++++++-----------
- 6 files changed, 204 insertions(+), 103 deletions(-)
+ include/net/tcp.h  | 198 +++++++++--
+ include/net/wget.h |   8 -
+ net/fastboot_tcp.c | 193 +++++-----
+ net/net.c          |   4 +
+ net/tcp.c          | 860 ++++++++++++++++++++++++++++++++++-----------
+ net/wget.c         | 461 +++++++-----------------
+ 6 files changed, 1050 insertions(+), 674 deletions(-)
 
-diff --git a/include/net.h b/include/net.h
-index bb2ae20f52a..b0ce13e0a9d 100644
---- a/include/net.h
-+++ b/include/net.h
-@@ -667,6 +667,7 @@ int net_send_ip_packet(uchar *ether, struct in_addr dest, int dport, int sport,
- /**
-  * net_send_tcp_packet() - Transmit TCP packet.
-  * @payload_len: length of payload
-+ * @dhost: Destination host
-  * @dport: Destination TCP port
-  * @sport: Source TCP port
-  * @action: TCP action to be performed
-@@ -675,8 +676,8 @@ int net_send_ip_packet(uchar *ether, struct in_addr dest, int dport, int sport,
-  *
-  * Return: 0 on success, other value on failure
-  */
--int net_send_tcp_packet(int payload_len, int dport, int sport, u8 action,
--			u32 tcp_seq_num, u32 tcp_ack_num);
-+int net_send_tcp_packet(int payload_len, struct in_addr dhost, int dport,
-+			int sport, u8 action, u32 tcp_seq_num, u32 tcp_ack_num);
- int net_send_udp_packet(uchar *ether, struct in_addr dest, int dport,
- 			int sport, int payload_len);
- 
 diff --git a/include/net/tcp.h b/include/net/tcp.h
-index 14aee64cb1c..f224d0cae2f 100644
+index 0694af9d5b1..b0d003bd2d8 100644
 --- a/include/net/tcp.h
 +++ b/include/net/tcp.h
-@@ -279,6 +279,9 @@ enum tcp_state {
- 
- /**
-  * struct tcp_stream - TCP data stream structure
-+ * @rhost:		Remote host, network byte order
-+ * @rport:		Remote port, host byte order
-+ * @lport:		Local port, host byte order
-  *
-  * @state:		TCP connection state
-  *
-@@ -291,6 +294,10 @@ enum tcp_state {
-  * @lost:		Used for SACK
+@@ -265,6 +265,7 @@ union tcp_build_pkt {
+  * @TCP_CLOSING: Rec FIN, sent FIN, ACK waiting for ACK
+  * @TCP_FIN_WAIT_1: Sent FIN waiting for response
+  * @TCP_FIN_WAIT_2: Rec ACK from FIN sent, waiting for FIN
++ * @TCP_LAST_ACK: Waiting for ACK of the connection termination
   */
- struct tcp_stream {
-+	struct in_addr	rhost;
-+	u16		rport;
-+	u16		lport;
+ enum tcp_state {
+ 	TCP_CLOSED,
+@@ -274,7 +275,20 @@ enum tcp_state {
+ 	TCP_CLOSE_WAIT,
+ 	TCP_CLOSING,
+ 	TCP_FIN_WAIT_1,
+-	TCP_FIN_WAIT_2
++	TCP_FIN_WAIT_2,
++	TCP_LAST_ACK,
++};
 +
- 	/* TCP connection state */
- 	enum tcp_state	state;
- 
-@@ -305,16 +312,53 @@ struct tcp_stream {
- 	struct tcp_sack_v lost;
++/**
++ * enum tcp_status - TCP stream status for connection
++ * @TCP_ERR_OK: no rx/tx errors
++ * @TCP_ERR_TOUT: rx/tx timeout happened
++ * @TCP_ERR_RST: connection was reset
++ */
++enum tcp_status {
++	TCP_ERR_OK = 0,
++	TCP_ERR_TOUT,
++	TCP_ERR_RST,
  };
  
--struct tcp_stream *tcp_stream_get(void);
-+void tcp_init(void);
-+
-+typedef int tcp_incoming_filter(struct in_addr rhost,
-+				u16 rport, u16 sport);
-+
-+/*
-+ * This function sets user callback used to accept/drop incoming
-+ * connections. Callback should:
-+ *  + Check TCP stream endpoint and make connection verdict
-+ *    - return non-zero value to accept connection
-+ *    - return zero to drop connection
-+ *
-+ * WARNING: If callback is NOT defined, all incoming connections
-+ *          will be dropped.
-+ */
-+void tcp_set_incoming_filter(tcp_incoming_filter *filter);
-+
-+/*
-+ * tcp_stream_get -- Get or create TCP stream
-+ * @is_new:	if non-zero and no stream found, then create a new one
-+ * @rhost:	Remote host, network byte order
-+ * @rport:	Remote port, host byte order
-+ * @lport:	Local port, host byte order
-+ *
-+ * Returns: TCP stream structure or NULL (if not found/created)
-+ */
-+struct tcp_stream *tcp_stream_get(int is_new, struct in_addr rhost,
-+				  u16 rport, u16 lport);
-+
-+/*
-+ * tcp_stream_connect -- Create new TCP stream for remote connection.
-+ * @rhost:	Remote host, network byte order
-+ * @rport:	Remote port, host byte order
-+ *
-+ * Returns: TCP new stream structure or NULL (if not created).
-+ *          Random local port will be used.
-+ */
-+struct tcp_stream *tcp_stream_connect(struct in_addr rhost, u16 rport);
-+
-+enum tcp_state tcp_stream_get_state(struct tcp_stream *tcp);
- 
--enum tcp_state tcp_get_tcp_state(struct tcp_stream *tcp);
--void tcp_set_tcp_state(struct tcp_stream *tcp, enum tcp_state new_state);
--int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int dport,
--		       int sport, int payload_len,
-+int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int payload_len,
- 		       u8 action, u32 tcp_seq_num, u32 tcp_ack_num);
- 
  /**
-  * rxhand_tcp() - An incoming packet handler.
-+ * @tcp: TCP stream
-  * @pkt: pointer to the application packet
-  * @dport: destination TCP port
-  * @sip: source IP address
-@@ -324,8 +368,7 @@ int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int dport,
-  * @action: TCP action (SYN, ACK, FIN, etc)
-  * @len: packet length
+@@ -283,51 +297,154 @@ enum tcp_state {
+  * @rport:		Remote port, host byte order
+  * @lport:		Local port, host byte order
+  *
++ * @priv:		User private data (not used by tcp module)
++ *
++ * @max_retry_count:	Maximum retransmit attempts (default 3)
++ * @initial_timeout:	Timeout from initial TX to reTX (default 2 sec)
++ * @rx_inactiv_timeout:	Maximum time from last rx till connection drop
++ *			  (default 30 sec)
++ *
++ * @on_closed:		User callback, called just before destroying TCP stream
++ * @on_established:	User callback, called when TCP stream enters
++ *			  TCP_ESTABLISHED state
++ * @on_rcv_nxt_update:	User callback, called when all data in the segment
++ *			  [0..rx_bytes - 1] was received
++ * @on_snd_una_update:	User callback, called when all data in the segment
++ *			  [0..tx_bytes - 1] were transferred and acknowledged
++ * @rx:			User callback, called on receive of segment
++ *			  [rx_offs..rx_offs+len-1]. If NULL -- all incoming data
++ *			  will be ignored. User SHOULD store the segment and
++ *			  return the number of accepted bytes.
++ *			  WARNING: Previous segmengs may not be received yet
++ * @tx:			User callback, called on transmit/retransmit of segment
++ *			  [tx_offs..tx_offs+maxlen-1]. If NULL -- no data will
++ *			  be transmitted. User SHOULD fill provided buffer and
++ *			  return the number of bytes in the buffer.
++ *			  WARNING: do not use tcp_stream_close() from this
++ *			    callback (it will break stream). Better use
++ *			    on_snd_una_update() callback for such purposes.
++ *
++ * @time_last_rx:	Arrival time of last valid incoming package (ticks)
++ * @time_start:		Timeout start time (ticks)
++ * @time_delta:		Timeout duration (ticks)
++ * @time_handler	Timeout handler for a stream
++ *
+  * @state:		TCP connection state
++ * @status:		TCP stream status (OK or ERR)
++ * @rx_packets:		total number of received packets
++ * @tx_packets:		total number of transmitted packets
++ *
++ * @fin_rx:		Non-zero if TCP_FIN was received
++ * @fin_rx_seq:		TCP sequence of rx FIN bit
++ * @fin_tx:		Non-zero if TCP_FIN was sent (or planned to send)
++ * @fin_tx_seq:		TCP sequence of tx FIN bit
++ *
++ * @iss:		Initial send sequence number
++ * @snd_una:		Send unacknowledged
++ * @snd_nxt:		Send next
++ * @snd_wnd:		Send window (in bytes)
++ * @snd_wl1:		Segment sequence number used for last window update
++ * @snd_wl2:		Segment acknowledgment number used for last window update
+  *
+  * @irs:		Initial receive sequence number
+  * @rcv_nxt:		Receive next
++ * @rcv_wnd:		Receive window (in bytes)
+  *
+  * @loc_timestamp:	Local timestamp
+  * @rmt_timestamp:	Remote timestamp
+  *
++ * @rmt_win_scale:	Remote window scale factor
++ *
+  * @lost:		Used for SACK
++ *
++ * @retry_cnt:		Number of retry attempts remaining. Only SYN, FIN
++ *			  or DATA segments are tried to retransmit.
++ * @retry_timeout:	Current retry timeout (ms)
++ * @retry_action:	TCP flags used for sending
++ * @retry_seq_num:	TCP sequence for retransmit
++ * retry_tx_len:	Number of data to transmit
++ * @retry_tx_offs:	Position in the TX stream
   */
--typedef void rxhand_tcp(uchar *pkt, u16 dport,
--			struct in_addr sip, u16 sport,
-+typedef void rxhand_tcp(struct tcp_stream *tcp, uchar *pkt,
- 			u32 tcp_seq_num, u32 tcp_ack_num,
- 			u8 action, unsigned int len);
- void tcp_set_tcp_handler(rxhand_tcp *f);
+ struct tcp_stream {
+ 	struct in_addr	rhost;
+ 	u16		rport;
+ 	u16		lport;
+ 
+-	/* TCP connection state */
++	void		*priv;
++
++	int		max_retry_count;
++	int		initial_timeout;
++	int		rx_inactiv_timeout;
++
++	void		(*on_closed)(struct tcp_stream *tcp);
++	void		(*on_established)(struct tcp_stream *tcp);
++	void		(*on_rcv_nxt_update)(struct tcp_stream *tcp, u32 rx_bytes);
++	void		(*on_snd_una_update)(struct tcp_stream *tcp, u32 tx_bytes);
++	u32		(*rx)(struct tcp_stream *tcp, u32 rx_offs, void *buf, u32 len);
++	u32		(*tx)(struct tcp_stream *tcp, u32 tx_offs, void *buf, u32 maxlen);
++
++	ulong		time_last_rx;
++	ulong		time_start;
++	ulong		time_delta;
++	void		(*time_handler)(struct tcp_stream *tcp);
++
+ 	enum tcp_state	state;
++	enum tcp_status	status;
++	u32		rx_packets;
++	u32		tx_packets;
++
++	int		fin_rx;
++	u32		fin_rx_seq;
++
++	int		fin_tx;
++	u32		fin_tx_seq;
++
++	u32		iss;
++	u32		snd_una;
++	u32		snd_nxt;
++	u32		snd_wnd;
++	u32		snd_wl1;
++	u32		snd_wl2;
+ 
+ 	u32		irs;
+ 	u32		rcv_nxt;
++	u32		rcv_wnd;
+ 
+ 	/* TCP option timestamp */
+ 	u32		loc_timestamp;
+ 	u32		rmt_timestamp;
+ 
++	/* TCP window scale */
++	u8		rmt_win_scale;
++
+ 	/* TCP sliding window control used to request re-TX */
+ 	struct tcp_sack_v lost;
++
++	/* used for data retransmission */
++	int		retry_cnt;
++	int		retry_timeout;
++	u8		retry_action;
++	u32		retry_seq_num;
++	u32		retry_tx_len;
++	u32		retry_tx_offs;
+ };
+ 
+ void tcp_init(void);
+ 
+-typedef int tcp_incoming_filter(struct in_addr rhost,
+-				u16 rport, u16 sport);
+-
+ /*
+- * This function sets user callback used to accept/drop incoming
+- * connections. Callback should:
++ * This function sets user callback called on TCP stream creation.
++ * Callback should:
+  *  + Check TCP stream endpoint and make connection verdict
+  *    - return non-zero value to accept connection
+  *    - return zero to drop connection
++ *  + Setup TCP stream callbacks like: on_closed(), on_established(),
++ *    n_rcv_nxt_update(), on_snd_una_update(), rx() and tx().
++ *  + Setup other stream related data
+  *
+- * WARNING: If callback is NOT defined, all incoming connections
+- *          will be dropped.
++ * WARNING: User MUST setup TCP stream on_create handler. Without it
++ *          no connection (including outgoung) will be created.
+  */
+-void tcp_set_incoming_filter(tcp_incoming_filter *filter);
++void tcp_stream_set_on_create_handler(int (*on_create)(struct tcp_stream *));
+ 
+ /*
+  * tcp_stream_get -- Get or create TCP stream
+@@ -351,27 +468,52 @@ struct tcp_stream *tcp_stream_get(int is_new, struct in_addr rhost,
+  */
+ struct tcp_stream *tcp_stream_connect(struct in_addr rhost, u16 rport);
+ 
+-enum tcp_state tcp_stream_get_state(struct tcp_stream *tcp);
++/*
++ * tcp_stream_put -- Return stream to a TCP subsystem. Subsystem will
++ *                   check stream and destroy it (if stream was already
++ *                   closed). Otherwize no stream change will happen.
++ * @tcp:	TCP stream to put
++ */
++void tcp_stream_put(struct tcp_stream *tcp);
+ 
+-int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int payload_len,
+-		       u8 action, u32 tcp_seq_num, u32 tcp_ack_num);
++/*
++ * tcp_stream_restart_rx_timer -- Restart RX inactivity timer. Usually there
++ *                                is no needs to call this function. Timer
++ *                                will be restarted on receiving of any valid
++ *                                tcp packet belonging to a stream.
++ *
++ *                                This function may be used to prevent connection
++ *                                break in the following case:
++ *                                  - u-boot is busy with very long data processing
++ *                                  - remote side waits for u-boot reply
++ *
++ * @tcp:	TCP stream to put
++ */
++void tcp_stream_restart_rx_timer(struct tcp_stream *tcp);
+ 
+-/**
+- * rxhand_tcp() - An incoming packet handler.
+- * @tcp: TCP stream
+- * @pkt: pointer to the application packet
+- * @dport: destination TCP port
+- * @sip: source IP address
+- * @sport: source TCP port
+- * @tcp_seq_num: TCP sequential number
+- * @tcp_ack_num: TCP acknowledgment number
+- * @action: TCP action (SYN, ACK, FIN, etc)
+- * @len: packet length
++enum tcp_state  tcp_stream_get_state(struct tcp_stream *tcp);
++enum tcp_status tcp_stream_get_status(struct tcp_stream *tcp);
++
++
++/*
++ * tcp_stream_rx_offs(),
++ * tcp_stream_tx_offs()  -- Returns offset of first unacknowledged byte
++ *                          in receive/transmit stream correspondingly.
++ *                          The result is NOT affected by sin/fin flags.
++ * @tcp:	TCP stream
+  */
+-typedef void rxhand_tcp(struct tcp_stream *tcp, uchar *pkt,
+-			u32 tcp_seq_num, u32 tcp_ack_num,
+-			u8 action, unsigned int len);
+-void tcp_set_tcp_handler(rxhand_tcp *f);
++u32 tcp_stream_rx_offs(struct tcp_stream *tcp);
++u32 tcp_stream_tx_offs(struct tcp_stream *tcp);
++
++/* reset tcp stream */
++void tcp_stream_reset(struct tcp_stream *tcp);
++/* force TCP stream closing, do NOT use from tcp->tx callback */
++void tcp_stream_close(struct tcp_stream *tcp);
++
++void tcp_streams_poll(void);
++
++int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int payload_len,
++		       u8 action, u32 tcp_seq_num, u32 tcp_ack_num);
+ 
+ void rxhand_tcp_f(union tcp_build_pkt *b, unsigned int len);
+ 
+diff --git a/include/net/wget.h b/include/net/wget.h
+index 6714f7ea573..9a423b30414 100644
+--- a/include/net/wget.h
++++ b/include/net/wget.h
+@@ -8,14 +8,6 @@
+  */
+ void wget_start(void);
+ 
+-enum wget_state {
+-	WGET_CLOSED,
+-	WGET_CONNECTING,
+-	WGET_CONNECTED,
+-	WGET_TRANSFERRING,
+-	WGET_TRANSFERRED
+-};
+-
+ #define DEBUG_WGET		0	/* Set to 1 for debug messages */
+ #define WGET_RETRY_COUNT	30
+ #define WGET_TIMEOUT		2000UL
 diff --git a/net/fastboot_tcp.c b/net/fastboot_tcp.c
-index d1fccbc7238..4d34fdc5a45 100644
+index 4d34fdc5a45..101d598012e 100644
 --- a/net/fastboot_tcp.c
 +++ b/net/fastboot_tcp.c
-@@ -8,14 +8,14 @@
- #include <net/fastboot_tcp.h>
- #include <net/tcp.h>
+@@ -10,140 +10,109 @@
  
--static char command[FASTBOOT_COMMAND_LEN] = {0};
--static char response[FASTBOOT_RESPONSE_LEN] = {0};
-+#define FASTBOOT_TCP_PORT	5554
-+
-+static char command[FASTBOOT_COMMAND_LEN];
-+static char response[FASTBOOT_RESPONSE_LEN];
+ #define FASTBOOT_TCP_PORT	5554
  
+-static char command[FASTBOOT_COMMAND_LEN];
+-static char response[FASTBOOT_RESPONSE_LEN];
+-
  static const unsigned short handshake_length = 4;
  static const uchar *handshake = "FB01";
  
--static u16 curr_sport;
--static u16 curr_dport;
- static u32 curr_tcp_seq_num;
- static u32 curr_tcp_ack_num;
- static unsigned int curr_request_len;
-@@ -25,34 +25,37 @@ static enum fastboot_tcp_state {
- 	FASTBOOT_DISCONNECTING
- } state = FASTBOOT_CLOSED;
+-static u32 curr_tcp_seq_num;
+-static u32 curr_tcp_ack_num;
+-static unsigned int curr_request_len;
+-static enum fastboot_tcp_state {
+-	FASTBOOT_CLOSED,
+-	FASTBOOT_CONNECTED,
+-	FASTBOOT_DISCONNECTING
+-} state = FASTBOOT_CLOSED;
+-
+-static void fastboot_tcp_answer(struct tcp_stream *tcp, u8 action,
+-				unsigned int len)
+-{
+-	const u32 response_seq_num = curr_tcp_ack_num;
+-	const u32 response_ack_num = curr_tcp_seq_num +
+-		  (curr_request_len > 0 ? curr_request_len : 1);
++static char rxbuf[sizeof(u64) + FASTBOOT_COMMAND_LEN + 1];
++static char txbuf[sizeof(u64) + FASTBOOT_RESPONSE_LEN + 1];
  
--static void fastboot_tcp_answer(u8 action, unsigned int len)
-+static void fastboot_tcp_answer(struct tcp_stream *tcp, u8 action,
-+				unsigned int len)
+-	net_send_tcp_packet(len, tcp->rhost, tcp->rport, tcp->lport,
+-			    action, response_seq_num, response_ack_num);
+-}
++static u32 data_read;
++static u32 tx_last_offs, tx_last_len;
+ 
+-static void fastboot_tcp_reset(struct tcp_stream *tcp)
++static void tcp_stream_on_rcv_nxt_update(struct tcp_stream *tcp, u32 rx_bytes)
  {
- 	const u32 response_seq_num = curr_tcp_ack_num;
- 	const u32 response_ack_num = curr_tcp_seq_num +
- 		  (curr_request_len > 0 ? curr_request_len : 1);
- 
--	net_send_tcp_packet(len, htons(curr_sport), htons(curr_dport),
-+	net_send_tcp_packet(len, tcp->rhost, tcp->rport, tcp->lport,
- 			    action, response_seq_num, response_ack_num);
- }
- 
--static void fastboot_tcp_reset(void)
-+static void fastboot_tcp_reset(struct tcp_stream *tcp)
- {
--	fastboot_tcp_answer(TCP_RST, 0);
-+	fastboot_tcp_answer(tcp, TCP_RST, 0);
- 	state = FASTBOOT_CLOSED;
- }
- 
--static void fastboot_tcp_send_packet(u8 action, const uchar *data, unsigned int len)
-+static void fastboot_tcp_send_packet(struct tcp_stream *tcp, u8 action,
-+				     const uchar *data, unsigned int len)
- {
- 	uchar *pkt = net_get_async_tx_pkt_buf();
- 
- 	memset(pkt, '\0', PKTSIZE);
- 	pkt += net_eth_hdr_size() + IP_TCP_HDR_SIZE + TCP_TSOPT_SIZE + 2;
- 	memcpy(pkt, data, len);
--	fastboot_tcp_answer(action, len);
-+	fastboot_tcp_answer(tcp, action, len);
- 	memset(pkt, '\0', PKTSIZE);
- }
- 
--static void fastboot_tcp_send_message(const char *message, unsigned int len)
-+static void fastboot_tcp_send_message(struct tcp_stream *tcp,
-+				      const char *message, unsigned int len)
- {
- 	__be64 len_be = __cpu_to_be64(len);
- 	uchar *pkt = net_get_async_tx_pkt_buf();
-@@ -63,12 +66,11 @@ static void fastboot_tcp_send_message(const char *message, unsigned int len)
- 	memcpy(pkt, &len_be, 8);
- 	pkt += 8;
- 	memcpy(pkt, message, len);
--	fastboot_tcp_answer(TCP_ACK | TCP_PUSH, len + 8);
-+	fastboot_tcp_answer(tcp, TCP_ACK | TCP_PUSH, len + 8);
- 	memset(pkt, '\0', PKTSIZE);
- }
- 
--static void fastboot_tcp_handler_ipv4(uchar *pkt, u16 dport,
--				      struct in_addr sip, u16 sport,
-+static void fastboot_tcp_handler_ipv4(struct tcp_stream *tcp, uchar *pkt,
- 				      u32 tcp_seq_num, u32 tcp_ack_num,
- 				      u8 action, unsigned int len)
- {
-@@ -77,8 +79,6 @@ static void fastboot_tcp_handler_ipv4(uchar *pkt, u16 dport,
- 	u8 tcp_fin = action & TCP_FIN;
- 	u8 tcp_push = action & TCP_PUSH;
- 
--	curr_sport = sport;
--	curr_dport = dport;
- 	curr_tcp_seq_num = tcp_seq_num;
- 	curr_tcp_ack_num = tcp_ack_num;
- 	curr_request_len = len;
-@@ -89,17 +89,17 @@ static void fastboot_tcp_handler_ipv4(uchar *pkt, u16 dport,
- 			if (len != handshake_length ||
- 			    strlen(pkt) != handshake_length ||
- 			    memcmp(pkt, handshake, handshake_length) != 0) {
--				fastboot_tcp_reset();
-+				fastboot_tcp_reset(tcp);
- 				break;
- 			}
--			fastboot_tcp_send_packet(TCP_ACK | TCP_PUSH,
-+			fastboot_tcp_send_packet(tcp, TCP_ACK | TCP_PUSH,
- 						 handshake, handshake_length);
- 			state = FASTBOOT_CONNECTED;
- 		}
- 		break;
- 	case FASTBOOT_CONNECTED:
- 		if (tcp_fin) {
--			fastboot_tcp_answer(TCP_FIN | TCP_ACK, 0);
-+			fastboot_tcp_answer(tcp, TCP_FIN | TCP_ACK, 0);
- 			state = FASTBOOT_DISCONNECTING;
- 			break;
- 		}
-@@ -111,12 +111,12 @@ static void fastboot_tcp_handler_ipv4(uchar *pkt, u16 dport,
- 
- 			// Only single packet messages are supported ATM
- 			if (strlen(pkt) != command_size) {
--				fastboot_tcp_reset();
-+				fastboot_tcp_reset(tcp);
- 				break;
- 			}
- 			strlcpy(command, pkt, len + 1);
- 			fastboot_command_id = fastboot_handle_command(command, response);
--			fastboot_tcp_send_message(response, strlen(response));
-+			fastboot_tcp_send_message(tcp, response, strlen(response));
- 			fastboot_handle_boot(fastboot_command_id,
- 					     strncmp("OKAY", response, 4) == 0);
- 		}
-@@ -129,17 +129,21 @@ static void fastboot_tcp_handler_ipv4(uchar *pkt, u16 dport,
- 
- 	memset(command, 0, FASTBOOT_COMMAND_LEN);
- 	memset(response, 0, FASTBOOT_RESPONSE_LEN);
--	curr_sport = 0;
--	curr_dport = 0;
- 	curr_tcp_seq_num = 0;
- 	curr_tcp_ack_num = 0;
- 	curr_request_len = 0;
- }
- 
-+static int incoming_filter(struct in_addr rhost, u16 rport, u16 lport)
-+{
-+	return (lport == FASTBOOT_TCP_PORT);
-+}
+-	fastboot_tcp_answer(tcp, TCP_RST, 0);
+-	state = FASTBOOT_CLOSED;
+-}
++	u64	cmd_size;
++	__be64	len_be;
++	char	saved;
++	int	fastboot_command_id, len;
 +
++	if (!data_read && rx_bytes >= handshake_length) {
++		if (memcmp(rxbuf, handshake, handshake_length)) {
++			printf("fastboot: bad handshake\n");
++			tcp_stream_close(tcp);
++			return;
++		}
+ 
+-static void fastboot_tcp_send_packet(struct tcp_stream *tcp, u8 action,
+-				     const uchar *data, unsigned int len)
+-{
+-	uchar *pkt = net_get_async_tx_pkt_buf();
++		tx_last_offs = 0;
++		tx_last_len = handshake_length;
++		memcpy(txbuf, handshake, handshake_length);
++
++		data_read += handshake_length;
++		rx_bytes -= handshake_length;
++		if (rx_bytes > 0)
++			memmove(rxbuf, rxbuf + handshake_length, rx_bytes);
++		return;
++	}
+ 
+-	memset(pkt, '\0', PKTSIZE);
+-	pkt += net_eth_hdr_size() + IP_TCP_HDR_SIZE + TCP_TSOPT_SIZE + 2;
+-	memcpy(pkt, data, len);
+-	fastboot_tcp_answer(tcp, action, len);
+-	memset(pkt, '\0', PKTSIZE);
++	if (rx_bytes < sizeof(u64))
++		return;
++
++	memcpy(&cmd_size, rxbuf, sizeof(u64));
++	cmd_size = __be64_to_cpu(cmd_size);
++	if (rx_bytes < sizeof(u64) + cmd_size)
++		return;
++
++	saved = rxbuf[sizeof(u64) + cmd_size];
++	rxbuf[sizeof(u64) + cmd_size] = '\0';
++	fastboot_command_id = fastboot_handle_command(rxbuf + sizeof(u64),
++						      txbuf + sizeof(u64));
++	fastboot_handle_boot(fastboot_command_id,
++			     strncmp("OKAY", txbuf + sizeof(u64), 4) != 0);
++	rxbuf[sizeof(u64) + cmd_size] = saved;
++
++	len = strlen(txbuf + sizeof(u64));
++	len_be = __cpu_to_be64(len);
++	memcpy(txbuf, &len_be, sizeof(u64));
++
++	tx_last_offs += tx_last_len;
++	tx_last_len = len + sizeof(u64);
++
++	data_read += sizeof(u64) + cmd_size;
++	rx_bytes -= sizeof(u64) + cmd_size;
++	if (rx_bytes > 0)
++		memmove(rxbuf, rxbuf + sizeof(u64) + cmd_size, rx_bytes);
+ }
+ 
+-static void fastboot_tcp_send_message(struct tcp_stream *tcp,
+-				      const char *message, unsigned int len)
++static u32 tcp_stream_rx(struct tcp_stream *tcp, u32 rx_offs, void *buf, u32 len)
+ {
+-	__be64 len_be = __cpu_to_be64(len);
+-	uchar *pkt = net_get_async_tx_pkt_buf();
+-
+-	memset(pkt, '\0', PKTSIZE);
+-	pkt += net_eth_hdr_size() + IP_TCP_HDR_SIZE + TCP_TSOPT_SIZE + 2;
+-	// Put first 8 bytes as a big endian message length
+-	memcpy(pkt, &len_be, 8);
+-	pkt += 8;
+-	memcpy(pkt, message, len);
+-	fastboot_tcp_answer(tcp, TCP_ACK | TCP_PUSH, len + 8);
+-	memset(pkt, '\0', PKTSIZE);
++	memcpy(rxbuf + rx_offs - data_read, buf, len);
++
++	return len;
+ }
+ 
+-static void fastboot_tcp_handler_ipv4(struct tcp_stream *tcp, uchar *pkt,
+-				      u32 tcp_seq_num, u32 tcp_ack_num,
+-				      u8 action, unsigned int len)
++static u32 tcp_stream_tx(struct tcp_stream *tcp, u32 tx_offs, void *buf, u32 maxlen)
+ {
+-	int fastboot_command_id;
+-	u64 command_size;
+-	u8 tcp_fin = action & TCP_FIN;
+-	u8 tcp_push = action & TCP_PUSH;
+-
+-	curr_tcp_seq_num = tcp_seq_num;
+-	curr_tcp_ack_num = tcp_ack_num;
+-	curr_request_len = len;
+-
+-	switch (state) {
+-	case FASTBOOT_CLOSED:
+-		if (tcp_push) {
+-			if (len != handshake_length ||
+-			    strlen(pkt) != handshake_length ||
+-			    memcmp(pkt, handshake, handshake_length) != 0) {
+-				fastboot_tcp_reset(tcp);
+-				break;
+-			}
+-			fastboot_tcp_send_packet(tcp, TCP_ACK | TCP_PUSH,
+-						 handshake, handshake_length);
+-			state = FASTBOOT_CONNECTED;
+-		}
+-		break;
+-	case FASTBOOT_CONNECTED:
+-		if (tcp_fin) {
+-			fastboot_tcp_answer(tcp, TCP_FIN | TCP_ACK, 0);
+-			state = FASTBOOT_DISCONNECTING;
+-			break;
+-		}
+-		if (tcp_push) {
+-			// First 8 bytes is big endian message length
+-			command_size = __be64_to_cpu(*(u64 *)pkt);
+-			len -= 8;
+-			pkt += 8;
+-
+-			// Only single packet messages are supported ATM
+-			if (strlen(pkt) != command_size) {
+-				fastboot_tcp_reset(tcp);
+-				break;
+-			}
+-			strlcpy(command, pkt, len + 1);
+-			fastboot_command_id = fastboot_handle_command(command, response);
+-			fastboot_tcp_send_message(tcp, response, strlen(response));
+-			fastboot_handle_boot(fastboot_command_id,
+-					     strncmp("OKAY", response, 4) == 0);
+-		}
+-		break;
+-	case FASTBOOT_DISCONNECTING:
+-		if (tcp_push)
+-			state = FASTBOOT_CLOSED;
+-		break;
+-	}
++	/* by design: tx_offs >= tx_last_offs */
++	if (tx_offs >= tx_last_offs + tx_last_len)
++		return 0;
+ 
+-	memset(command, 0, FASTBOOT_COMMAND_LEN);
+-	memset(response, 0, FASTBOOT_RESPONSE_LEN);
+-	curr_tcp_seq_num = 0;
+-	curr_tcp_ack_num = 0;
+-	curr_request_len = 0;
++	maxlen = tx_last_offs + tx_last_len - tx_offs;
++	memcpy(buf, txbuf + (tx_offs - tx_last_offs), maxlen);
++
++	return maxlen;
+ }
+ 
+-static int incoming_filter(struct in_addr rhost, u16 rport, u16 lport)
++static int tcp_stream_on_create(struct tcp_stream *tcp)
+ {
+-	return (lport == FASTBOOT_TCP_PORT);
++	if (tcp->lport != FASTBOOT_TCP_PORT)
++		return 0;
++
++	data_read = 0;
++	tx_last_offs = 0;
++	tx_last_len = 0;
++
++	tcp->on_rcv_nxt_update = tcp_stream_on_rcv_nxt_update;
++	tcp->rx = tcp_stream_rx;
++	tcp->tx = tcp_stream_tx;
++
++	return 1;
+ }
+ 
  void fastboot_tcp_start_server(void)
  {
++	memset(net_server_ethaddr, 0, 6);
++	tcp_stream_set_on_create_handler(tcp_stream_on_create);
++
  	printf("Using %s device\n", eth_get_name());
  	printf("Listening for fastboot command on tcp %pI4\n", &net_ip);
- 
-+	tcp_set_incoming_filter(incoming_filter);
- 	tcp_set_tcp_handler(fastboot_tcp_handler_ipv4);
+-
+-	tcp_set_incoming_filter(incoming_filter);
+-	tcp_set_tcp_handler(fastboot_tcp_handler_ipv4);
  }
 diff --git a/net/net.c b/net/net.c
-index 1bbf0556cef..c95a40f1a2b 100644
+index c95a40f1a2b..4b0b0061ba7 100644
 --- a/net/net.c
 +++ b/net/net.c
-@@ -419,7 +419,7 @@ int net_init(void)
- 		/* Only need to setup buffer pointers once. */
- 		first_call = 0;
- 		if (IS_ENABLED(CONFIG_PROT_TCP))
--			tcp_set_tcp_state(tcp_stream_get(), TCP_CLOSED);
-+			tcp_init();
- 	}
+@@ -651,6 +651,9 @@ restart:
+ 		 *	errors that may have happened.
+ 		 */
+ 		eth_rx();
++#if defined(CONFIG_PROT_TCP)
++		tcp_streams_poll();
++#endif
  
- 	return net_init_loop();
-@@ -904,10 +904,10 @@ int net_send_udp_packet(uchar *ether, struct in_addr dest, int dport, int sport,
- }
- 
- #if defined(CONFIG_PROT_TCP)
--int net_send_tcp_packet(int payload_len, int dport, int sport, u8 action,
--			u32 tcp_seq_num, u32 tcp_ack_num)
-+int net_send_tcp_packet(int payload_len, struct in_addr dhost, int dport,
-+			int sport, u8 action, u32 tcp_seq_num, u32 tcp_ack_num)
- {
--	return net_send_ip_packet(net_server_ethaddr, net_server_ip, dport,
-+	return net_send_ip_packet(net_server_ethaddr, dhost, dport,
- 				  sport, payload_len, IPPROTO_TCP, action,
- 				  tcp_seq_num, tcp_ack_num);
- }
-@@ -949,12 +949,12 @@ int net_send_ip_packet(uchar *ether, struct in_addr dest, int dport, int sport,
- 		break;
- #if defined(CONFIG_PROT_TCP)
- 	case IPPROTO_TCP:
--		tcp = tcp_stream_get();
-+		tcp = tcp_stream_get(0, dest, dport, sport);
- 		if (tcp == NULL)
- 			return -EINVAL;
- 
- 		pkt_hdr_size = eth_hdr_size
--			+ tcp_set_tcp_header(tcp, pkt + eth_hdr_size, dport, sport,
-+			+ tcp_set_tcp_header(tcp, pkt + eth_hdr_size,
+ 		/*
+ 		 *	Abort if ctrl-c was pressed.
+@@ -957,6 +960,7 @@ int net_send_ip_packet(uchar *ether, struct in_addr dest, int dport, int sport,
+ 			+ tcp_set_tcp_header(tcp, pkt + eth_hdr_size,
  					     payload_len, action, tcp_seq_num,
  					     tcp_ack_num);
++		tcp_stream_put(tcp);
  		break;
+ #endif
+ 	default:
 diff --git a/net/tcp.c b/net/tcp.c
-index 6646f171b83..0c32c5d7c92 100644
+index 7e445eaffd6..6bb68a04c5d 100644
 --- a/net/tcp.c
 +++ b/net/tcp.c
-@@ -26,6 +26,7 @@
+@@ -24,9 +24,26 @@
+ #include <net.h>
+ #include <net/tcp.h>
  
- static int tcp_activity_count;
+-static int tcp_activity_count;
++/*
++ * The start sequence number increment for the two sequently created
++ * connections within the same timer tick. This number must be:
++ *  - prime (to increase the time before the same number will be generated)
++ *  - larger than typical MTU (to avoid similar numbers for two sequently
++ *    created connections)
++ */
++#define TCP_START_SEQ_INC	2153	/* just large prime number */
++
++#define TCP_SEND_RETRY		3
++#define TCP_SEND_TIMEOUT	2000UL
++#define TCP_RX_INACTIVE_TIMEOUT	30000UL
++#define TCP_RCV_WND_SIZE	(PKTBUFSRX * TCP_MSS)
++
++#define TCP_PACKET_OK		0
++#define TCP_PACKET_DROP		1
++
  static struct tcp_stream tcp_stream;
-+static tcp_incoming_filter *incoming_filter;
+-static tcp_incoming_filter *incoming_filter;
++
++static int (*tcp_stream_on_create)(struct tcp_stream *tcp);
  
  /*
   * TCP lengths are stored as a rounded up number of 32 bit words.
-@@ -40,40 +41,95 @@ static struct tcp_stream tcp_stream;
- /* Current TCP RX packet handler */
- static rxhand_tcp *tcp_packet_handler;
+@@ -35,12 +52,10 @@ static tcp_incoming_filter *incoming_filter;
+  */
+ #define LEN_B_TO_DW(x) ((x) >> 2)
+ #define ROUND_TCPHDR_LEN(x) (LEN_B_TO_DW((x) + 3))
++#define ROUND_TCPHDR_BYTES(x) (((x) + 3) & ~3)
+ #define SHIFT_TO_TCPHDRLEN_FIELD(x) ((x) << 4)
+ #define GET_TCP_HDR_LEN_IN_BYTES(x) ((x) >> 2)
  
-+#define RANDOM_PORT_START 1024
-+#define RANDOM_PORT_RANGE 0x4000
-+
-+/**
-+ * random_port() - make port a little random (1024-17407)
-+ *
-+ * Return: random port number from 1024 to 17407
-+ *
-+ * This keeps the math somewhat trivial to compute, and seems to work with
-+ * all supported protocols/clients/servers
-+ */
-+static uint random_port(void)
-+{
-+	return RANDOM_PORT_START + (get_timer(0) % RANDOM_PORT_RANGE);
-+}
-+
- static inline s32 tcp_seq_cmp(u32 a, u32 b)
- {
+-/* Current TCP RX packet handler */
+-static rxhand_tcp *tcp_packet_handler;
+-
+ #define RANDOM_PORT_START 1024
+ #define RANDOM_PORT_RANGE 0x4000
+ 
+@@ -62,6 +77,22 @@ static inline s32 tcp_seq_cmp(u32 a, u32 b)
  	return (s32)(a - b);
  }
  
++static inline u32 tcp_get_start_seq(void)
++{
++	static u32	tcp_seq_inc;
++	u32		tcp_seq;
++
++	tcp_seq = (get_timer(0) & 0xffffffff) + tcp_seq_inc;
++	tcp_seq_inc += TCP_START_SEQ_INC;
++
++	return tcp_seq;
++}
++
++static inline ulong msec_to_ticks(ulong msec)
++{
++	return msec * CONFIG_SYS_HZ / 1000;
++}
++
  /**
-- * tcp_get_tcp_state() - get TCP stream state
-+ * tcp_stream_get_state() - get TCP stream state
+  * tcp_stream_get_state() - get TCP stream state
   * @tcp: tcp stream
-  *
-  * Return: TCP stream state
-  */
--enum tcp_state tcp_get_tcp_state(struct tcp_stream *tcp)
-+enum tcp_state tcp_stream_get_state(struct tcp_stream *tcp)
- {
- 	return tcp->state;
- }
- 
- /**
-- * tcp_set_tcp_state() - set TCP stream state
-+ * tcp_stream_set_state() - set TCP stream state
-  * @tcp: tcp stream
-  * @new_state: new TCP state
-  */
--void tcp_set_tcp_state(struct tcp_stream *tcp,
--		       enum tcp_state new_state)
-+static void tcp_stream_set_state(struct tcp_stream *tcp,
-+				 enum tcp_state new_state)
- {
+@@ -84,31 +115,90 @@ static void tcp_stream_set_state(struct tcp_stream *tcp,
  	tcp->state = new_state;
  }
  
--struct tcp_stream *tcp_stream_get(void)
-+void tcp_init(void)
+-void tcp_init(void)
++/**
++ * tcp_stream_get_status() - get TCP stream status
++ * @tcp: tcp stream
++ *
++ * Return: TCP stream status
++ */
++enum tcp_status tcp_stream_get_status(struct tcp_stream *tcp)
+ {
+-	incoming_filter = NULL;
+-	tcp_stream.state = TCP_CLOSED;
++	return tcp->status;
+ }
+ 
+-void tcp_set_incoming_filter(tcp_incoming_filter *filter)
++/**
++ * tcp_stream_set_status() - set TCP stream state
++ * @tcp: tcp stream
++ * @new_satus: new TCP stream status
++ */
++static void tcp_stream_set_status(struct tcp_stream *tcp,
++				  enum tcp_state new_status)
+ {
+-	incoming_filter = filter;
++	tcp->status = new_status;
+ }
+ 
+-static struct tcp_stream *tcp_stream_add(struct in_addr rhost,
+-					 u16 rport, u16 lport)
++void tcp_stream_restart_rx_timer(struct tcp_stream *tcp)
+ {
+-	struct tcp_stream *tcp = &tcp_stream;
+-
+-	if (tcp->state != TCP_CLOSED)
+-		return NULL;
++	tcp->time_last_rx = get_timer(0);
++}
+ 
++static void tcp_stream_init(struct tcp_stream *tcp,
++			    struct in_addr rhost, u16 rport, u16 lport)
 +{
-+	incoming_filter = NULL;
-+	tcp_stream.state = TCP_CLOSED;
+ 	memset(tcp, 0, sizeof(struct tcp_stream));
+ 	tcp->rhost.s_addr = rhost.s_addr;
+ 	tcp->rport = rport;
+ 	tcp->lport = lport;
+ 	tcp->state = TCP_CLOSED;
+ 	tcp->lost.len = TCP_OPT_LEN_2;
++	tcp->rcv_wnd = TCP_RCV_WND_SIZE;
++	tcp->max_retry_count = TCP_SEND_RETRY;
++	tcp->initial_timeout = TCP_SEND_TIMEOUT;
++	tcp->rx_inactiv_timeout = TCP_RX_INACTIVE_TIMEOUT;
++	tcp_stream_restart_rx_timer(tcp);
 +}
 +
-+void tcp_set_incoming_filter(tcp_incoming_filter *filter)
++static void tcp_stream_destroy(struct tcp_stream *tcp)
 +{
-+	incoming_filter = filter;
++	if (tcp->on_closed)
++		tcp->on_closed(tcp);
++	memset(tcp, 0, sizeof(struct tcp_stream));
++}
++
++void tcp_init(void)
++{
++	static int initialized;
++	struct tcp_stream *tcp = &tcp_stream;
++
++	tcp_stream_on_create = NULL;
++	if (!initialized) {
++		initialized = 1;
++		memset(tcp, 0, sizeof(struct tcp_stream));
++	}
++
++	tcp_stream_set_state(tcp, TCP_CLOSED);
++	tcp_stream_set_status(tcp, TCP_ERR_RST);
++	tcp_stream_destroy(tcp);
++}
++
++void tcp_stream_set_on_create_handler(int (*on_create)(struct tcp_stream *))
++{
++	tcp_stream_on_create = on_create;
 +}
 +
 +static struct tcp_stream *tcp_stream_add(struct in_addr rhost,
@@ -577,343 +905,1421 @@ index 6646f171b83..0c32c5d7c92 100644
 +{
 +	struct tcp_stream *tcp = &tcp_stream;
 +
-+	if (tcp->state != TCP_CLOSED)
++	if (!tcp_stream_on_create ||
++	    tcp->state != TCP_CLOSED)
 +		return NULL;
 +
-+	memset(tcp, 0, sizeof(struct tcp_stream));
-+	tcp->rhost.s_addr = rhost.s_addr;
-+	tcp->rport = rport;
-+	tcp->lport = lport;
-+	tcp->state = TCP_CLOSED;
-+	tcp->lost.len = TCP_OPT_LEN_2;
-+	return tcp;
++	tcp_stream_init(tcp, rhost, rport, lport);
++	if (!tcp_stream_on_create(tcp))
++		return NULL;
++
+ 	return tcp;
+ }
+ 
+@@ -122,30 +212,206 @@ struct tcp_stream *tcp_stream_get(int is_new, struct in_addr rhost,
+ 	    tcp->lport == lport)
+ 		return tcp;
+ 
+-	if (!is_new || !incoming_filter) ||
+-	    !incoming_filter(rhost, rport, lport))
+-		return NULL;
++	return is_new ? tcp_stream_add(rhost, rport, lport) : NULL;
++}
+ 
+-	return tcp_stream_add(rhost, rport, lport);
++void tcp_stream_put(struct tcp_stream *tcp)
++{
++	if (tcp->state == TCP_CLOSED)
++		tcp_stream_destroy(tcp);
+ }
+ 
+-static void dummy_handler(struct tcp_stream *tcp, uchar *pkt,
+-			  u32 tcp_seq_num, u32 tcp_ack_num,
+-			  u8 action, unsigned int len)
++u32 tcp_stream_rx_offs(struct tcp_stream *tcp)
+ {
++	u32 ret;
++
++	switch (tcp->state) {
++	case TCP_CLOSED:
++	case TCP_SYN_SENT:
++	case TCP_SYN_RECEIVED:
++		return 0;
++	default:
++		break;
++	}
++
++	ret = tcp->rcv_nxt - tcp->irs - 1;
++	if (tcp->fin_rx && (tcp->rcv_nxt == tcp->fin_rx_seq))
++		ret--;
++
++	return ret;
+ }
+ 
+-/**
+- * tcp_set_tcp_handler() - set a handler to receive data
+- * @f: handler
+- */
+-void tcp_set_tcp_handler(rxhand_tcp *f)
++u32 tcp_stream_tx_offs(struct tcp_stream *tcp)
+ {
+-	debug_cond(DEBUG_INT_STATE, "--- net_loop TCP handler set (%p)\n", f);
+-	if (!f)
+-		tcp_packet_handler = dummy_handler;
+-	else
+-		tcp_packet_handler = f;
++	u32 ret;
++
++	switch (tcp->state) {
++	case TCP_CLOSED:
++	case TCP_SYN_SENT:
++	case TCP_SYN_RECEIVED:
++		return 0;
++	default:
++		break;
++	}
++
++	ret = tcp->snd_una - tcp->iss - 1;
++	if (tcp->fin_tx && (tcp->snd_una == tcp->fin_tx_seq + 1))
++		ret--;
++
++	return ret;
 +}
 +
-+struct tcp_stream *tcp_stream_get(int is_new, struct in_addr rhost,
-+				  u16 rport, u16 lport)
- {
--	return &tcp_stream;
-+	struct tcp_stream *tcp = &tcp_stream;
++static void tcp_stream_set_time_handler(struct tcp_stream *tcp, ulong msec,
++					void (*handler)(struct tcp_stream *))
++{
++	if (!msec) {
++		tcp->time_handler = NULL;
++		return;
++	}
 +
-+	if (tcp->rhost.s_addr == rhost.s_addr &&
-+	    tcp->rport == rport &&
-+	    tcp->lport == lport)
-+		return tcp;
++	tcp->time_handler = handler;
++	tcp->time_start = get_timer(0);
++	tcp->time_delta = msec_to_ticks(msec);
++}
 +
-+	if (!is_new || !incoming_filter) ||
-+	    !incoming_filter(rhost, rport, lport))
-+		return NULL;
++static void tcp_send_packet(struct tcp_stream *tcp, u8 action,
++			    u32 tcp_seq_num, u32 tcp_ack_num, u32 tx_len)
++{
++	tcp->tx_packets++;
++	net_send_tcp_packet(tx_len, tcp->rhost, tcp->rport,
++			    tcp->lport, action, tcp_seq_num,
++			    tcp_ack_num);
++}
 +
-+	return tcp_stream_add(rhost, rport, lport);
++static void tcp_send_repeat(struct tcp_stream *tcp)
++{
++	uchar *ptr;
++	u32 tcp_opts_size;
++
++	if (!tcp->retry_cnt) {
++		puts("\nTCP: send retry counter exceeded\n");
++		tcp_send_packet(tcp, TCP_RST, tcp->retry_seq_num,
++				tcp->rcv_nxt, 0);
++		tcp_stream_set_status(tcp, TCP_ERR_TOUT);
++		tcp_stream_set_state(tcp, TCP_CLOSED);
++		tcp_stream_destroy(tcp);
++		return;
++	}
++	tcp->retry_cnt--;
++	tcp->retry_timeout += tcp->initial_timeout;
++
++	if (tcp->retry_tx_len > 0) {
++		tcp_opts_size = ROUND_TCPHDR_BYTES(TCP_TSOPT_SIZE +
++						   tcp->lost.len);
++		ptr = net_tx_packet + net_eth_hdr_size() +
++			IP_TCP_HDR_SIZE + tcp_opts_size;
++
++		if (tcp->retry_tx_len > TCP_MSS - tcp_opts_size)
++			tcp->retry_tx_len = TCP_MSS - tcp_opts_size;
++
++		/* refill packet data */
++		tcp->tx(tcp, tcp->retry_tx_offs, ptr, tcp->retry_tx_len);
++	}
++	tcp_send_packet(tcp, tcp->retry_action, tcp->retry_seq_num,
++			tcp->rcv_nxt, tcp->retry_tx_len);
++
++	tcp_stream_set_time_handler(tcp, tcp->retry_timeout, tcp_send_repeat);
++}
++
++static void tcp_send_packet_with_retry(struct tcp_stream *tcp, u8 action,
++				       u32 tcp_seq_num, u32 tx_len, u32 tx_offs)
++{
++	tcp->retry_cnt = tcp->max_retry_count;
++	tcp->retry_timeout = tcp->initial_timeout;
++	tcp->retry_action = action;
++	tcp->retry_seq_num = tcp_seq_num;
++	tcp->retry_tx_len = tx_len;
++	tcp->retry_tx_offs = tx_offs;
++
++	tcp_send_packet(tcp, action, tcp_seq_num, tcp->rcv_nxt, tx_len);
++	tcp_stream_set_time_handler(tcp, tcp->retry_timeout, tcp_send_repeat);
++}
++
++static inline u8 tcp_stream_fin_needed(struct tcp_stream *tcp, u32 tcp_seq_num)
++{
++	return (tcp->fin_tx && (tcp_seq_num == tcp->fin_tx_seq)) ? TCP_FIN : 0;
++}
++
++static void tcp_steam_tx_try(struct tcp_stream *tcp)
++{
++	uchar *ptr;
++	u32 tx_offs, tx_len, tcp_opts_size;
++
++	if (tcp->state != TCP_ESTABLISHED ||
++	    tcp->time_handler ||
++	    !tcp->tx)
++		return;
++
++	tcp_opts_size = ROUND_TCPHDR_BYTES(TCP_TSOPT_SIZE + tcp->lost.len);
++	tx_len = TCP_MSS - tcp_opts_size;
++	if (tcp->fin_tx) {
++		/* do not try to send beyonds FIN packet limits */
++		if (tcp_seq_cmp(tcp->snd_una, tcp->fin_tx_seq) >= 0)
++			return;
++
++		tx_len = tcp->fin_tx_seq - tcp->snd_una;
++		if (tx_len > TCP_MSS - tcp_opts_size)
++			tx_len = TCP_MSS - tcp_opts_size;
++	}
++
++	tx_offs = tcp_stream_tx_offs(tcp);
++	ptr = net_tx_packet + net_eth_hdr_size() +
++		IP_TCP_HDR_SIZE + tcp_opts_size;
++
++	/* fill packet data and adjust size */
++	tx_len = tcp->tx(tcp, tx_offs, ptr, tx_len);
++	if (!tx_len)
++		return;
++
++	if (tcp_seq_cmp(tcp->snd_una + tx_len, tcp->snd_nxt) > 0)
++		tcp->snd_nxt = tcp->snd_una + tx_len;
++
++	tcp_send_packet_with_retry(tcp, TCP_ACK | TCP_PUSH,
++				   tcp->snd_una, tx_len, tx_offs);
++}
++
++static void tcp_stream_poll(struct tcp_stream *tcp, ulong time)
++{
++	ulong	delta;
++	void	(*handler)(struct tcp_stream *tcp);
++
++	if (tcp->state == TCP_CLOSED)
++		return;
++
++	/* handle rx inactivity timeout */
++	delta = msec_to_ticks(tcp->rx_inactiv_timeout);
++	if (time - tcp->time_last_rx >= delta) {
++		puts("\nTCP: rx inactivity timeout exceeded\n");
++		tcp_stream_reset(tcp);
++		tcp_stream_set_status(tcp, TCP_ERR_TOUT);
++		tcp_stream_destroy(tcp);
++		return;
++	}
++
++	/* handle retransmit timeout */
++	if (tcp->time_handler &&
++	    time - tcp->time_start >= tcp->time_delta) {
++		handler = tcp->time_handler;
++		tcp->time_handler = NULL;
++		handler(tcp);
++	}
++
++	tcp_steam_tx_try(tcp);
++}
++
++void tcp_streams_poll(void)
++{
++	ulong			time;
++	struct tcp_stream	*tcp;
++
++	time = get_timer(0);
++	tcp = &tcp_stream;
++	tcp_stream_poll(tcp, time);
  }
  
--static void dummy_handler(uchar *pkt, u16 dport,
--			  struct in_addr sip, u16 sport,
-+static void dummy_handler(struct tcp_stream *tcp, uchar *pkt,
- 			  u32 tcp_seq_num, u32 tcp_ack_num,
- 			  u8 action, unsigned int len)
- {
-@@ -222,8 +278,7 @@ void net_set_syn_options(struct tcp_stream *tcp, union tcp_build_pkt *b)
- 	b->ip.end = TCP_O_END;
+ /**
+@@ -240,7 +506,6 @@ int net_set_ack_options(struct tcp_stream *tcp, union tcp_build_pkt *b)
+ 	 * This returns the actual rounded up length of the
+ 	 * TCP header to add to the total packet length
+ 	 */
+-
+ 	return GET_TCP_HDR_LEN_IN_BYTES(b->sack.hdr.tcp_hlen);
  }
  
--int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int dport,
--		       int sport, int payload_len,
-+int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int payload_len,
- 		       u8 action, u32 tcp_seq_num, u32 tcp_ack_num)
- {
- 	union tcp_build_pkt *b = (union tcp_build_pkt *)pkt;
-@@ -243,7 +298,7 @@ int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int dport,
- 	case TCP_SYN:
- 		debug_cond(DEBUG_DEV_PKT,
+@@ -300,18 +565,8 @@ int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int payload_len,
  			   "TCP Hdr:SYN (%pI4, %pI4, sq=%u, ak=%u)\n",
--			   &net_server_ip, &net_ip,
-+			   &tcp->rhost, &net_ip,
+ 			   &tcp->rhost, &net_ip,
  			   tcp_seq_num, tcp_ack_num);
- 		tcp_activity_count = 0;
+-		tcp_activity_count = 0;
  		net_set_syn_options(tcp, b);
-@@ -264,13 +319,13 @@ int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int dport,
- 		b->ip.hdr.tcp_flags = action;
- 		debug_cond(DEBUG_DEV_PKT,
- 			   "TCP Hdr:ACK (%pI4, %pI4, s=%u, a=%u, A=%x)\n",
--			   &net_server_ip, &net_ip, tcp_seq_num, tcp_ack_num,
-+			   &tcp->rhost, &net_ip, tcp_seq_num, tcp_ack_num,
- 			   action);
+-		tcp_seq_num = 0;
+-		tcp_ack_num = 0;
+ 		pkt_hdr_len = IP_TCP_O_SIZE;
+-		if (tcp->state == TCP_SYN_SENT) {  /* Too many SYNs */
+-			action = TCP_FIN;
+-			tcp->state = TCP_FIN_WAIT_1;
+-		} else {
+-			tcp->lost.len = TCP_OPT_LEN_2;
+-			tcp->state = TCP_SYN_SENT;
+-		}
  		break;
- 	case TCP_FIN:
- 		debug_cond(DEBUG_DEV_PKT,
- 			   "TCP Hdr:FIN  (%pI4, %pI4, s=%u, a=%u)\n",
--			   &net_server_ip, &net_ip, tcp_seq_num, tcp_ack_num);
-+			   &tcp->rhost, &net_ip, tcp_seq_num, tcp_ack_num);
+ 	case TCP_SYN | TCP_ACK:
+ 	case TCP_ACK:
+@@ -328,21 +583,16 @@ int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int payload_len,
+ 			   &tcp->rhost, &net_ip, tcp_seq_num, tcp_ack_num);
  		payload_len = 0;
  		pkt_hdr_len = IP_TCP_HDR_SIZE;
- 		tcp->state = TCP_FIN_WAIT_1;
-@@ -279,7 +334,7 @@ int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int dport,
+-		tcp->state = TCP_FIN_WAIT_1;
+ 		break;
+ 	case TCP_RST | TCP_ACK:
  	case TCP_RST:
  		debug_cond(DEBUG_DEV_PKT,
  			   "TCP Hdr:RST  (%pI4, %pI4, s=%u, a=%u)\n",
--			   &net_server_ip, &net_ip, tcp_seq_num, tcp_ack_num);
-+			   &tcp->rhost, &net_ip, tcp_seq_num, tcp_ack_num);
- 		tcp->state = TCP_CLOSED;
+ 			   &tcp->rhost, &net_ip, tcp_seq_num, tcp_ack_num);
+-		tcp->state = TCP_CLOSED;
  		break;
  	/* Notify connection closing */
-@@ -290,7 +345,7 @@ int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int dport,
- 
+ 	case (TCP_FIN | TCP_ACK):
+ 	case (TCP_FIN | TCP_ACK | TCP_PUSH):
+-		if (tcp->state == TCP_CLOSE_WAIT)
+-			tcp->state = TCP_CLOSING;
+-
  		debug_cond(DEBUG_DEV_PKT,
  			   "TCP Hdr:FIN ACK PSH(%pI4, %pI4, s=%u, a=%u, A=%x)\n",
--			   &net_server_ip, &net_ip,
-+			   &tcp->rhost, &net_ip,
- 			   tcp_seq_num, tcp_ack_num, action);
- 		fallthrough;
- 	default:
-@@ -298,7 +353,7 @@ int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int dport,
- 		b->ip.hdr.tcp_flags = action | TCP_PUSH | TCP_ACK;
- 		debug_cond(DEBUG_DEV_PKT,
- 			   "TCP Hdr:dft  (%pI4, %pI4, s=%u, a=%u, A=%x)\n",
--			   &net_server_ip, &net_ip,
-+			   &tcp->rhost, &net_ip,
- 			   tcp_seq_num, tcp_ack_num, action);
- 	}
+ 			   &tcp->rhost, &net_ip,
+@@ -382,7 +632,7 @@ int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int payload_len,
+ 	 * it is, then the u-boot tftp or nfs kernel netboot should be
+ 	 * considered.
+ 	 */
+-	b->ip.hdr.tcp_win = htons(PKTBUFSRX * TCP_MSS >> TCP_SCALE);
++	b->ip.hdr.tcp_win = htons(tcp->rcv_wnd >> TCP_SCALE);
  
-@@ -308,8 +363,8 @@ int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int dport,
- 	tcp->ack_edge = tcp_ack_num;
- 	/* TCP Header */
- 	b->ip.hdr.tcp_ack = htonl(tcp->ack_edge);
--	b->ip.hdr.tcp_src = htons(sport);
--	b->ip.hdr.tcp_dst = htons(dport);
-+	b->ip.hdr.tcp_src = htons(tcp->lport);
-+	b->ip.hdr.tcp_dst = htons(tcp->rport);
- 	b->ip.hdr.tcp_seq = htonl(tcp_seq_num);
- 
- 	/*
-@@ -332,10 +387,10 @@ int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int dport,
  	b->ip.hdr.tcp_xsum = 0;
  	b->ip.hdr.tcp_ugr = 0;
+@@ -501,6 +751,7 @@ void tcp_hole(struct tcp_stream *tcp, u32 tcp_seq_num, u32 len)
+ void tcp_parse_options(struct tcp_stream *tcp, uchar *o, int o_len)
+ {
+ 	struct tcp_t_opt  *tsopt;
++	struct tcp_scale  *wsopt;
+ 	uchar *p = o;
  
--	b->ip.hdr.tcp_xsum = tcp_set_pseudo_header(pkt, net_ip, net_server_ip,
-+	b->ip.hdr.tcp_xsum = tcp_set_pseudo_header(pkt, net_ip, tcp->rhost,
- 						   tcp_len, pkt_len);
- 
--	net_set_ip_header((uchar *)&b->ip, net_server_ip, net_ip,
-+	net_set_ip_header((uchar *)&b->ip, tcp->rhost, net_ip,
- 			  pkt_len, IPPROTO_TCP);
- 
- 	return pkt_hdr_len;
-@@ -616,19 +671,26 @@ void rxhand_tcp_f(union tcp_build_pkt *b, unsigned int pkt_len)
- 	u32 tcp_seq_num, tcp_ack_num;
- 	int tcp_hdr_len, payload_len;
- 	struct tcp_stream *tcp;
-+	struct in_addr src;
- 
- 	/* Verify IP header */
- 	debug_cond(DEBUG_DEV_PKT,
- 		   "TCP RX in RX Sum (to=%pI4, from=%pI4, len=%d)\n",
- 		   &b->ip.hdr.ip_src, &b->ip.hdr.ip_dst, pkt_len);
- 
--	b->ip.hdr.ip_src = net_server_ip;
-+	/*
-+	 * src IP address will be destroyed by TCP checksum verification
-+	 * algorithm (see tcp_set_pseudo_header()), so remember it before
-+	 * it was garbaged.
-+	 */
-+	src.s_addr = b->ip.hdr.ip_src.s_addr;
-+
- 	b->ip.hdr.ip_dst = net_ip;
- 	b->ip.hdr.ip_sum = 0;
- 	if (tcp_rx_xsum != compute_ip_checksum(b, IP_HDR_SIZE)) {
- 		debug_cond(DEBUG_DEV_PKT,
- 			   "TCP RX IP xSum Error (%pI4, =%pI4, len=%d)\n",
--			   &net_ip, &net_server_ip, pkt_len);
-+			   &net_ip, &src, pkt_len);
- 		return;
- 	}
- 
-@@ -640,12 +702,15 @@ void rxhand_tcp_f(union tcp_build_pkt *b, unsigned int pkt_len)
- 						 pkt_len)) {
- 		debug_cond(DEBUG_DEV_PKT,
- 			   "TCP RX TCP xSum Error (%pI4, %pI4, len=%d)\n",
--			   &net_ip, &net_server_ip, tcp_len);
-+			   &net_ip, &src, tcp_len);
- 		return;
- 	}
- 
--	tcp = tcp_stream_get();
--	if (tcp == NULL)
-+	tcp = tcp_stream_get(b->ip.hdr.tcp_flags & TCP_SYN,
-+			     src,
-+			     ntohs(b->ip.hdr.tcp_src),
-+			     ntohs(b->ip.hdr.tcp_dst));
-+	if (!tcp)
- 		return;
- 
- 	tcp_hdr_len = GET_TCP_HDR_LEN_IN_BYTES(b->ip.hdr.tcp_hlen);
-@@ -676,9 +741,9 @@ void rxhand_tcp_f(union tcp_build_pkt *b, unsigned int pkt_len)
- 			   "TCP Notify (action=%x, Seq=%u,Ack=%u,Pay%d)\n",
- 			   tcp_action, tcp_seq_num, tcp_ack_num, payload_len);
- 
--		(*tcp_packet_handler) ((uchar *)b + pkt_len - payload_len, b->ip.hdr.tcp_dst,
--				       b->ip.hdr.ip_src, b->ip.hdr.tcp_src, tcp_seq_num,
--				       tcp_ack_num, tcp_action, payload_len);
-+		(*tcp_packet_handler) (tcp, (uchar *)b + pkt_len - payload_len,
-+				       tcp_seq_num, tcp_ack_num, tcp_action,
-+				       payload_len);
- 
- 	} else if (tcp_action != TCP_DATA) {
- 		debug_cond(DEBUG_DEV_PKT,
-@@ -689,9 +754,13 @@ void rxhand_tcp_f(union tcp_build_pkt *b, unsigned int pkt_len)
- 		 * Warning: Incoming Ack & Seq sequence numbers are transposed
- 		 * here to outgoing Seq & Ack sequence numbers
- 		 */
--		net_send_tcp_packet(0, ntohs(b->ip.hdr.tcp_src),
--				    ntohs(b->ip.hdr.tcp_dst),
-+		net_send_tcp_packet(0, tcp->rhost, tcp->rport, tcp->lport,
- 				    (tcp_action & (~TCP_PUSH)),
- 				    tcp_ack_num, tcp->ack_edge);
+ 	/*
+@@ -515,10 +766,13 @@ void tcp_parse_options(struct tcp_stream *tcp, uchar *o, int o_len)
+ 		case TCP_O_END:
+ 			return;
+ 		case TCP_O_MSS:
+-		case TCP_O_SCL:
+ 		case TCP_P_SACK:
+ 		case TCP_V_SACK:
+ 			break;
++		case TCP_O_SCL:
++			wsopt = (struct tcp_scale *)p;
++			tcp->rmt_win_scale = wsopt->scale;
++			break;
+ 		case TCP_O_TS:
+ 			tsopt = (struct tcp_t_opt *)p;
+ 			tcp->rmt_timestamp = tsopt->t_snd;
+@@ -533,129 +787,333 @@ void tcp_parse_options(struct tcp_stream *tcp, uchar *o, int o_len)
  	}
  }
-+
-+struct tcp_stream *tcp_stream_connect(struct in_addr rhost, u16 rport)
+ 
+-static u8 tcp_state_machine(struct tcp_stream *tcp, u8 tcp_flags,
+-			    u32 tcp_seq_num, int payload_len)
++static int tcp_seg_in_wnd(struct tcp_stream *tcp,
++			  u32 tcp_seq_num, int payload_len)
 +{
-+	return tcp_stream_add(rhost, rport, random_port());
++	if (!payload_len && !tcp->rcv_wnd) {
++		if (tcp_seq_num == tcp->rcv_nxt)
++			return 1;
++	}
++	if (!payload_len && tcp->rcv_wnd > 0) {
++		if (tcp_seq_cmp(tcp->rcv_nxt, tcp_seq_num) <= 0 &&
++		    tcp_seq_cmp(tcp_seq_num, tcp->rcv_nxt + tcp->rcv_wnd) < 0)
++			return 1;
++	}
++	if (payload_len > 0 && tcp->rcv_wnd > 0) {
++		if (tcp_seq_cmp(tcp->rcv_nxt, tcp_seq_num) <= 0 &&
++		    tcp_seq_cmp(tcp_seq_num, tcp->rcv_nxt + tcp->rcv_wnd) < 0)
++			return 1;
++		tcp_seq_num += payload_len - 1;
++		if (tcp_seq_cmp(tcp->rcv_nxt, tcp_seq_num) <= 0 &&
++		    tcp_seq_cmp(tcp_seq_num, tcp->rcv_nxt + tcp->rcv_wnd) < 0)
++			return 1;
++	}
++
++	return 0;
 +}
-diff --git a/net/wget.c b/net/wget.c
-index 99ffa90c494..9c68a9d43cc 100644
---- a/net/wget.c
-+++ b/net/wget.c
-@@ -28,9 +28,8 @@ static const char http_eom[] = "\r\n\r\n";
- static const char http_ok[] = "200";
- static const char content_len[] = "Content-Length";
- static const char linefeed[] = "\r\n";
--static struct in_addr web_server_ip;
--static int our_port;
- static int wget_timeout_count;
-+struct tcp_stream *tcp;
++
++static int tcp_rx_check_ack_num(struct tcp_stream *tcp, u32 tcp_seq_num,
++				u32 tcp_ack_num, u32 tcp_win_size)
+ {
+-	u8 tcp_fin = tcp_flags & TCP_FIN;
+-	u8 tcp_syn = tcp_flags & TCP_SYN;
+-	u8 tcp_rst = tcp_flags & TCP_RST;
+-	u8 tcp_push = tcp_flags & TCP_PUSH;
+-	u8 tcp_ack = tcp_flags & TCP_ACK;
+-	u8 action = TCP_DATA;
++	u32 old_offs, new_offs;
++	u8 action;
  
- struct pkt_qd {
- 	uchar *pkt;
-@@ -110,22 +109,19 @@ static void wget_send_stored(void)
- 	int len = retry_len;
- 	unsigned int tcp_ack_num = retry_tcp_seq_num + (len == 0 ? 1 : len);
- 	unsigned int tcp_seq_num = retry_tcp_ack_num;
--	unsigned int server_port;
- 	uchar *ptr, *offset;
++	switch (tcp->state) {
++	case TCP_SYN_RECEIVED:
++		if (tcp_seq_cmp(tcp->snd_una, tcp_ack_num) >= 0 ||
++		    tcp_seq_cmp(tcp_ack_num, tcp->snd_nxt) > 0) {
++			// segment acknowledgment is not acceptable
++			tcp_send_packet(tcp, TCP_RST, tcp_ack_num, 0, 0);
++			return TCP_PACKET_DROP;
++		}
++
++		tcp_stream_set_state(tcp, TCP_ESTABLISHED);
++		tcp->snd_wnd = tcp_win_size;
++		tcp->snd_wl1 = tcp_seq_num;
++		tcp->snd_wl2 = tcp_ack_num;
++
++		if (tcp->on_established)
++			tcp->on_established(tcp);
++
++		fallthrough;
++
++	case TCP_ESTABLISHED:
++	case TCP_FIN_WAIT_1:
++	case TCP_FIN_WAIT_2:
++	case TCP_CLOSE_WAIT:
++	case TCP_CLOSING:
++		if (tcp_seq_cmp(tcp_ack_num, tcp->snd_nxt) > 0) {
++			// ACK acks something not yet sent
++			action = tcp_stream_fin_needed(tcp, tcp->snd_una) | TCP_ACK;
++			tcp_send_packet(tcp, action, tcp->snd_una, tcp->rcv_nxt, 0);
++			return TCP_PACKET_DROP;
++		}
++
++		if (tcp_seq_cmp(tcp->snd_una, tcp_ack_num) < 0) {
++			old_offs = tcp_stream_tx_offs(tcp);
++			tcp->snd_una = tcp_ack_num;
++			new_offs = tcp_stream_tx_offs(tcp);
++			if (tcp->time_handler &&
++			    tcp_seq_cmp(tcp->snd_una, tcp->retry_seq_num) > 0) {
++				tcp_stream_set_time_handler(tcp, 0, NULL);
++			}
++			if (tcp->on_snd_una_update &&
++			    old_offs != new_offs)
++				tcp->on_snd_una_update(tcp, new_offs);
++		}
++
++		if (tcp_seq_cmp(tcp->snd_una, tcp_ack_num) <= 0) {
++			if (tcp_seq_cmp(tcp->snd_wl1, tcp_seq_num) < 0 ||
++			    (tcp->snd_wl1 == tcp_seq_num &&
++			     tcp_seq_cmp(tcp->snd_wl2, tcp_seq_num) <= 0)) {
++				tcp->snd_wnd = tcp_win_size;
++				tcp->snd_wl1 = tcp_seq_num;
++				tcp->snd_wl2 = tcp_ack_num;
++			}
++		}
++
++		if (tcp->state == TCP_FIN_WAIT_1) {
++			if (tcp->snd_una == tcp->snd_nxt)
++				tcp_stream_set_state(tcp, TCP_FIN_WAIT_2);
++		}
++
++		if (tcp->state == TCP_CLOSING) {
++			if (tcp->snd_una == tcp->snd_nxt)
++				tcp_stream_set_state(tcp, TCP_CLOSED);
++		}
++		return TCP_PACKET_OK;
++
++	case TCP_LAST_ACK:
++		if (tcp_ack_num == tcp->snd_nxt)
++			tcp_stream_set_state(tcp, TCP_CLOSED);
++		return TCP_PACKET_OK;
++
++	default:
++		return TCP_PACKET_DROP;
++	}
++}
++
++static int tcp_rx_user_data(struct tcp_stream *tcp, u32 tcp_seq_num,
++			    char *buf, int len)
++{
++	u32 tmp_len, buf_offs, old_offs, new_offs;
++	u8 action;
++
++	if (!len)
++		return TCP_PACKET_OK;
++
++	switch (tcp->state) {
++	case TCP_ESTABLISHED:
++	case TCP_FIN_WAIT_1:
++	case TCP_FIN_WAIT_2:
++		break;
++	default:
++		return TCP_PACKET_DROP;
++	}
++
++	tmp_len = len;
++	old_offs = tcp_stream_rx_offs(tcp);
++	buf_offs = tcp_seq_num - tcp->irs - 1;
++	if (tcp->rx)
++		tmp_len = tcp->rx(tcp, buf_offs, buf, len);
++	if (tmp_len)
++		tcp_hole(tcp, tcp_seq_num, tmp_len);
++
++	new_offs = tcp_stream_rx_offs(tcp);
++	if (tcp->on_rcv_nxt_update && old_offs != new_offs)
++		tcp->on_rcv_nxt_update(tcp, new_offs);
++
++	action = tcp_stream_fin_needed(tcp, tcp->snd_una) | TCP_ACK;
++	tcp_send_packet(tcp, action, tcp->snd_una, tcp->rcv_nxt, 0);
++
++	return TCP_PACKET_OK;
++}
++
++void tcp_rx_state_machine(struct tcp_stream *tcp,
++			  union tcp_build_pkt *b, unsigned int pkt_len)
++{
++	int tcp_len = pkt_len - IP_HDR_SIZE;
++	u32 tcp_seq_num, tcp_ack_num, tcp_win_size;
++	int tcp_hdr_len, payload_len;
++	u8  tcp_flags, action;
++
++	tcp_hdr_len = GET_TCP_HDR_LEN_IN_BYTES(b->ip.hdr.tcp_hlen);
++	payload_len = tcp_len - tcp_hdr_len;
++
++	if (tcp_hdr_len > TCP_HDR_SIZE)
++		tcp_parse_options(tcp, (uchar *)b + IP_TCP_HDR_SIZE,
++				  tcp_hdr_len - TCP_HDR_SIZE);
+ 	/*
+-	 * tcp_flags are examined to determine TX action in a given state
+-	 * tcp_push is interpreted to mean "inform the app"
+-	 * urg, ece, cer and nonce flags are not supported.
+-	 *
+-	 * exe and crw are use to signal and confirm knowledge of congestion.
+-	 * This TCP only sends a file request and acks. If it generates
+-	 * congestion, the network is broken.
++	 * Incoming sequence and ack numbers are server's view of the numbers.
++	 * The app must swap the numbers when responding.
+ 	 */
+-	debug_cond(DEBUG_INT_STATE, "TCP STATE ENTRY %x\n", action);
+-	if (tcp_rst) {
+-		action = TCP_DATA;
+-		tcp->state = TCP_CLOSED;
+-		net_set_state(NETLOOP_FAIL);
+-		debug_cond(DEBUG_INT_STATE, "TCP Reset %x\n", tcp_flags);
+-		return TCP_RST;
+-	}
++	tcp_seq_num = ntohl(b->ip.hdr.tcp_seq);
++	tcp_ack_num = ntohl(b->ip.hdr.tcp_ack);
++	tcp_win_size = ntohs(b->ip.hdr.tcp_win) << tcp->rmt_win_scale;
  
--	server_port = env_get_ulong("httpdstp", 10, SERVER_PORT) & 0xffff;
+-	switch  (tcp->state) {
++	tcp_flags = b->ip.hdr.tcp_flags;
++
++//	printf("pkt: seq=%d, ack=%d, flags=%x, len=%d\n",
++//		tcp_seq_num - tcp->irs, tcp_ack_num - tcp->iss, tcp_flags, pkt_len);
++//	printf("tcp: rcv_nxt=%d, snd_una=%d, snd_nxt=%d\n\n",
++//		tcp->rcv_nxt - tcp->irs, tcp->snd_una - tcp->iss, tcp->snd_nxt - tcp->iss);
++
++	switch (tcp->state) {
+ 	case TCP_CLOSED:
+-		debug_cond(DEBUG_INT_STATE, "TCP CLOSED %x\n", tcp_flags);
+-		if (tcp_syn) {
+-			action = TCP_SYN | TCP_ACK;
+-			tcp->irs = tcp_seq_num;
+-			tcp->rcv_nxt = tcp_seq_num + 1;
+-			tcp->lost.len = TCP_OPT_LEN_2;
+-			tcp->state = TCP_SYN_RECEIVED;
+-		} else if (tcp_ack || tcp_fin) {
+-			action = TCP_DATA;
++		if (tcp_flags & TCP_RST)
++			return;
++
++		if (tcp_flags & TCP_ACK) {
++			tcp_send_packet(tcp, TCP_RST, tcp_ack_num, 0, 0);
++			return;
+ 		}
+-		break;
+-	case TCP_SYN_RECEIVED:
++
++		if (!(tcp_flags & TCP_SYN))
++			return;
++
++		tcp->irs = tcp_seq_num;
++		tcp->rcv_nxt = tcp->irs + 1;
++
++		tcp->iss = tcp_get_start_seq();
++		tcp->snd_una = tcp->iss;
++		tcp->snd_nxt = tcp->iss + 1;
++		tcp->snd_wnd = tcp_win_size;
++
++		tcp_stream_restart_rx_timer(tcp);
++
++		tcp_stream_set_state(tcp, TCP_SYN_RECEIVED);
++		tcp_send_packet_with_retry(tcp, TCP_SYN | TCP_ACK,
++					   tcp->iss, 0, 0);
++		return;
++
+ 	case TCP_SYN_SENT:
+-		debug_cond(DEBUG_INT_STATE, "TCP_SYN_SENT | TCP_SYN_RECEIVED %x, %u\n",
+-			   tcp_flags, tcp_seq_num);
+-		if (tcp_fin) {
+-			action = action | TCP_PUSH;
+-			tcp->state = TCP_CLOSE_WAIT;
+-		} else if (tcp_ack || (tcp_syn && tcp_ack)) {
+-			action |= TCP_ACK;
+-			tcp->irs = tcp_seq_num;
+-			tcp->rcv_nxt = tcp_seq_num + 1;
+-			tcp->state = TCP_ESTABLISHED;
 -
- 	switch (current_wget_state) {
- 	case WGET_CLOSED:
- 		debug_cond(DEBUG_WGET, "wget: send SYN\n");
- 		current_wget_state = WGET_CONNECTING;
--		net_send_tcp_packet(0, server_port, our_port, action,
-+		net_send_tcp_packet(0, tcp->rhost, tcp->rport, tcp->lport, action,
- 				    tcp_seq_num, tcp_ack_num);
- 		packets = 0;
- 		break;
- 	case WGET_CONNECTING:
- 		pkt_q_idx = 0;
--		net_send_tcp_packet(0, server_port, our_port, action,
-+		net_send_tcp_packet(0, tcp->rhost, tcp->rport, tcp->lport, action,
- 				    tcp_seq_num, tcp_ack_num);
+-			if (tcp_syn && tcp_ack)
+-				action |= TCP_PUSH;
+-		} else {
+-			action = TCP_DATA;
++		if (!(tcp_flags & TCP_ACK))
++			return;
++
++		if (tcp_seq_cmp(tcp_ack_num, tcp->iss) <= 0 ||
++		    tcp_seq_cmp(tcp_ack_num, tcp->snd_nxt) > 0) {
++			if (!(tcp_flags & TCP_RST))
++				tcp_send_packet(tcp, TCP_RST, tcp_ack_num, 0, 0);
++			return;
+ 		}
+-		break;
++
++		if (tcp_flags & TCP_RST) {
++			tcp_stream_set_status(tcp, TCP_ERR_RST);
++			tcp_stream_set_state(tcp, TCP_CLOSED);
++			return;
++		}
++
++		if (!(tcp_flags & TCP_SYN))
++			return;
++
++		/* stop retransmit of SYN */
++		tcp_stream_set_time_handler(tcp, 0, NULL);
++
++		tcp->irs = tcp_seq_num;
++		tcp->rcv_nxt = tcp->irs + 1;
++		tcp->snd_una = tcp_ack_num;
++
++		tcp_stream_restart_rx_timer(tcp);
++
++		/* our SYN has been ACKed */
++		tcp_stream_set_state(tcp, TCP_ESTABLISHED);
++
++		if (tcp->on_established)
++			tcp->on_established(tcp);
++
++		action = tcp_stream_fin_needed(tcp, tcp->snd_una) | TCP_ACK;
++		tcp_send_packet(tcp, action, tcp->snd_una, tcp->rcv_nxt, 0);
++		tcp_rx_user_data(tcp, tcp_seq_num,
++				 ((char *)b) + pkt_len - payload_len,
++				 payload_len);
++		return;
++
++	case TCP_SYN_RECEIVED:
+ 	case TCP_ESTABLISHED:
+-		debug_cond(DEBUG_INT_STATE, "TCP_ESTABLISHED %x\n", tcp_flags);
+-		if (payload_len > 0) {
+-			tcp_hole(tcp, tcp_seq_num, payload_len);
+-			tcp_fin = TCP_DATA;  /* cause standalone FIN */
++	case TCP_FIN_WAIT_1:
++	case TCP_FIN_WAIT_2:
++	case TCP_CLOSE_WAIT:
++	case TCP_CLOSING:
++	case TCP_LAST_ACK:
++		if (!tcp_seg_in_wnd(tcp, tcp_seq_num, payload_len)) {
++			if (tcp_flags & TCP_RST)
++				return;
++			action = tcp_stream_fin_needed(tcp, tcp->snd_una) | TCP_ACK;
++			tcp_send_packet(tcp, action, tcp->snd_una, tcp->rcv_nxt, 0);
++			return;
+ 		}
  
- 		ptr = net_tx_packet + net_eth_hdr_size() +
-@@ -140,14 +136,14 @@ static void wget_send_stored(void)
+-		if ((tcp_fin) &&
+-		    (!IS_ENABLED(CONFIG_PROT_TCP_SACK) ||
+-		     tcp->lost.len <= TCP_OPT_LEN_2)) {
+-			action = action | TCP_FIN | TCP_PUSH | TCP_ACK;
+-			tcp->state = TCP_CLOSE_WAIT;
+-		} else if (tcp_ack) {
+-			action = TCP_DATA;
++		tcp_stream_restart_rx_timer(tcp);
++
++		if (tcp_flags & TCP_RST) {
++			tcp_stream_set_status(tcp, TCP_ERR_RST);
++			tcp_stream_set_state(tcp, TCP_CLOSED);
++			return;
+ 		}
  
- 		memcpy(offset, &bootfile3, strlen(bootfile3));
- 		offset += strlen(bootfile3);
--		net_send_tcp_packet((offset - ptr), server_port, our_port,
-+		net_send_tcp_packet((offset - ptr), tcp->rhost, tcp->rport, tcp->lport,
- 				    TCP_PUSH, tcp_seq_num, tcp_ack_num);
- 		current_wget_state = WGET_CONNECTED;
- 		break;
- 	case WGET_CONNECTED:
- 	case WGET_TRANSFERRING:
- 	case WGET_TRANSFERRED:
--		net_send_tcp_packet(0, server_port, our_port, action,
-+		net_send_tcp_packet(0, tcp->rhost, tcp->rport, tcp->lport, action,
- 				    tcp_seq_num, tcp_ack_num);
- 		break;
+-		if (tcp_syn)
+-			action = TCP_ACK + TCP_RST;
+-		else if (tcp_push)
+-			action = action | TCP_PUSH;
+-		break;
+-	case TCP_CLOSE_WAIT:
+-		debug_cond(DEBUG_INT_STATE, "TCP_CLOSE_WAIT (%x)\n", tcp_flags);
+-		action = TCP_DATA;
+-		break;
+-	case TCP_FIN_WAIT_2:
+-		debug_cond(DEBUG_INT_STATE, "TCP_FIN_WAIT_2 (%x)\n", tcp_flags);
+-		if (tcp_ack) {
+-			action = TCP_PUSH | TCP_ACK;
+-			tcp->state = TCP_CLOSED;
+-			puts("\n");
+-		} else if (tcp_syn) {
+-			action = TCP_DATA;
+-		} else if (tcp_fin) {
+-			action = TCP_DATA;
++		if (tcp_flags & TCP_SYN) {
++			tcp_send_packet(tcp, TCP_RST, tcp_ack_num, 0, 0);
++			tcp_stream_set_status(tcp, TCP_ERR_RST);
++			tcp_stream_set_state(tcp, TCP_CLOSED);
++			return;
+ 		}
+-		break;
+-	case TCP_FIN_WAIT_1:
+-		debug_cond(DEBUG_INT_STATE, "TCP_FIN_WAIT_1 (%x)\n", tcp_flags);
+-		if (tcp_fin) {
+-			tcp->rcv_nxt++;
+-			action = TCP_ACK | TCP_FIN;
+-			tcp->state = TCP_FIN_WAIT_2;
++
++		if (!(tcp_flags & TCP_ACK))
++			return;
++
++		if (tcp_rx_check_ack_num(tcp, tcp_seq_num, tcp_ack_num,
++					 tcp_win_size) == TCP_PACKET_DROP) {
++			return;
+ 		}
+-		if (tcp_syn)
+-			action = TCP_RST;
+-		if (tcp_ack)
+-			tcp->state = TCP_CLOSED;
+-		break;
+-	case TCP_CLOSING:
+-		debug_cond(DEBUG_INT_STATE, "TCP_CLOSING (%x)\n", tcp_flags);
+-		if (tcp_ack) {
+-			action = TCP_PUSH;
+-			tcp->state = TCP_CLOSED;
+-			puts("\n");
+-		} else if (tcp_syn) {
+-			action = TCP_RST;
+-		} else if (tcp_fin) {
+-			action = TCP_DATA;
++
++		if (tcp_rx_user_data(tcp, tcp_seq_num,
++				     ((char *)b) + pkt_len - payload_len,
++				     payload_len) == TCP_PACKET_DROP) {
++			return;
++		}
++
++		if (tcp_flags & TCP_FIN) {
++			tcp->fin_rx = 1;
++			tcp->fin_rx_seq = tcp_seq_num + payload_len + 1;
++			tcp_hole(tcp, tcp_seq_num + payload_len, 1);
++			action = tcp_stream_fin_needed(tcp, tcp->snd_una) | TCP_ACK;
++			tcp_send_packet(tcp, action, tcp->snd_una, tcp->rcv_nxt, 0);
++		}
++
++		if (tcp->fin_rx &&
++		    tcp->fin_rx_seq == tcp->rcv_nxt) {
++			/* all rx data were processed */
++			switch (tcp->state) {
++			case TCP_ESTABLISHED:
++				tcp_stream_set_state(tcp, TCP_LAST_ACK);
++				tcp_send_packet_with_retry(tcp, TCP_ACK | TCP_FIN,
++							   tcp->snd_nxt, 0, 0);
++				tcp->snd_nxt++;
++				break;
++
++			case TCP_FIN_WAIT_1:
++				if (tcp_ack_num == tcp->snd_nxt)
++					tcp_stream_set_state(tcp, TCP_CLOSED);
++				else
++					tcp_stream_set_state(tcp, TCP_CLOSING);
++				break;
++
++			case TCP_FIN_WAIT_2:
++				tcp_stream_set_state(tcp, TCP_CLOSED);
++				break;
++
++			default:
++				break;
++			}
++		}
++
++		if (tcp->state == TCP_FIN_WAIT_1 &&
++		    tcp_stream_fin_needed(tcp, tcp->snd_una)) {
++			/* all tx data were acknowledged */
++			tcp_send_packet_with_retry(tcp, TCP_ACK | TCP_FIN,
++						   tcp->snd_una, 0, 0);
+ 		}
+-		break;
  	}
-@@ -304,10 +300,8 @@ static void wget_connected(uchar *pkt, unsigned int tcp_seq_num,
+-	return action;
+ }
  
  /**
-  * wget_handler() - TCP handler of wget
-+ * @tcp: TCP stream
-  * @pkt: pointer to the application packet
-- * @dport: destination TCP port
-- * @sip: source IP address
-- * @sport: source TCP port
-  * @tcp_seq_num: TCP sequential number
-  * @tcp_ack_num: TCP acknowledgment number
-  * @action: TCP action (SYN, ACK, FIN, etc)
-@@ -316,13 +310,11 @@ static void wget_connected(uchar *pkt, unsigned int tcp_seq_num,
-  * In the "application push" invocation, the TCP header with all
-  * its information is pointed to by the packet pointer.
-  */
--static void wget_handler(uchar *pkt, u16 dport,
--			 struct in_addr sip, u16 sport,
-+static void wget_handler(struct tcp_stream *tcp, uchar *pkt,
- 			 u32 tcp_seq_num, u32 tcp_ack_num,
- 			 u8 action, unsigned int len)
+@@ -667,9 +1125,6 @@ void rxhand_tcp_f(union tcp_build_pkt *b, unsigned int pkt_len)
  {
--	struct tcp_stream *tcp = tcp_stream_get();
--	enum tcp_state wget_tcp_state = tcp_get_tcp_state(tcp);
-+	enum tcp_state wget_tcp_state = tcp_stream_get_state(tcp);
+ 	int tcp_len = pkt_len - IP_HDR_SIZE;
+ 	u16 tcp_rx_xsum = b->ip.hdr.ip_sum;
+-	u8  tcp_action = TCP_DATA;
+-	u32 tcp_seq_num, tcp_ack_num;
+-	int tcp_hdr_len, payload_len;
+ 	struct tcp_stream *tcp;
+ 	struct in_addr src;
  
- 	net_set_timeout_handler(wget_timeout, wget_timeout_handler);
- 	packets++;
-@@ -409,26 +401,13 @@ static void wget_handler(uchar *pkt, u16 dport,
+@@ -713,54 +1168,59 @@ void rxhand_tcp_f(union tcp_build_pkt *b, unsigned int pkt_len)
+ 	if (!tcp)
+ 		return;
+ 
+-	tcp_hdr_len = GET_TCP_HDR_LEN_IN_BYTES(b->ip.hdr.tcp_hlen);
+-	payload_len = tcp_len - tcp_hdr_len;
++	tcp->rx_packets++;
++	tcp_rx_state_machine(tcp, b, pkt_len);
++	tcp_stream_put(tcp);
++}
+ 
+-	if (tcp_hdr_len > TCP_HDR_SIZE)
+-		tcp_parse_options(tcp, (uchar *)b + IP_TCP_HDR_SIZE,
+-				  tcp_hdr_len - TCP_HDR_SIZE);
+-	/*
+-	 * Incoming sequence and ack numbers are server's view of the numbers.
+-	 * The app must swap the numbers when responding.
+-	 */
+-	tcp_seq_num = ntohl(b->ip.hdr.tcp_seq);
+-	tcp_ack_num = ntohl(b->ip.hdr.tcp_ack);
++struct tcp_stream *tcp_stream_connect(struct in_addr rhost, u16 rport)
++{
++	struct tcp_stream *tcp;
+ 
+-	/* Packets are not ordered. Send to app as received. */
+-	tcp_action = tcp_state_machine(tcp, b->ip.hdr.tcp_flags,
+-				       tcp_seq_num, payload_len);
++	tcp = tcp_stream_add(rhost, rport, random_port());
++	if (!tcp)
++		return NULL;
+ 
+-	tcp_activity_count++;
+-	if (tcp_activity_count > TCP_ACTIVITY) {
+-		puts("| ");
+-		tcp_activity_count = 0;
+-	}
++	tcp->iss = tcp_get_start_seq();
++	tcp->snd_una = tcp->iss;
++	tcp->snd_nxt = tcp->iss + 1;
+ 
+-	if ((tcp_action & TCP_PUSH) || payload_len > 0) {
+-		debug_cond(DEBUG_DEV_PKT,
+-			   "TCP Notify (action=%x, Seq=%u,Ack=%u,Pay%d)\n",
+-			   tcp_action, tcp_seq_num, tcp_ack_num, payload_len);
++	tcp_stream_set_state(tcp, TCP_SYN_SENT);
++	tcp_send_packet_with_retry(tcp, TCP_SYN, tcp->snd_una, 0, 0);
+ 
+-		(*tcp_packet_handler) (tcp, (uchar *)b + pkt_len - payload_len,
+-				       tcp_seq_num, tcp_ack_num, tcp_action,
+-				       payload_len);
++	return tcp;
++}
+ 
+-	} else if (tcp_action != TCP_DATA) {
+-		debug_cond(DEBUG_DEV_PKT,
+-			   "TCP Action (action=%x,Seq=%u,Ack=%u,Pay=%d)\n",
+-			   tcp_action, tcp_ack_num, tcp->rcv_nxt, payload_len);
+-
+-		/*
+-		 * Warning: Incoming Ack & Seq sequence numbers are transposed
+-		 * here to outgoing Seq & Ack sequence numbers
+-		 */
+-		net_send_tcp_packet(0, tcp->rhost, tcp->rport, tcp->lport,
+-				    (tcp_action & (~TCP_PUSH)),
+-				    tcp_ack_num, tcp->rcv_nxt);
+-	}
++void tcp_stream_reset(struct tcp_stream *tcp)
++{
++	if (tcp->state == TCP_CLOSED)
++		return;
++
++	tcp_stream_set_time_handler(tcp, 0, NULL);
++	tcp_send_packet(tcp, TCP_RST, tcp->snd_una, 0, 0);
++	tcp_stream_set_status(tcp, TCP_ERR_RST);
++	tcp_stream_set_state(tcp, TCP_CLOSED);
+ }
+ 
+-struct tcp_stream *tcp_stream_connect(struct in_addr rhost, u16 rport)
++void tcp_stream_close(struct tcp_stream *tcp)
+ {
+-	return tcp_stream_add(rhost, rport, random_port());
++	switch (tcp->state) {
++	case TCP_SYN_SENT:
++		tcp_stream_reset(tcp);
++		break;
++	case TCP_SYN_RECEIVED:
++	case TCP_ESTABLISHED:
++		tcp->fin_tx = 1;
++		tcp->fin_tx_seq = tcp->snd_nxt;
++		if (tcp_stream_fin_needed(tcp, tcp->snd_una)) {
++			/* all tx data were acknowledged */
++			tcp_send_packet_with_retry(tcp, TCP_ACK | TCP_FIN,
++						   tcp->snd_una, 0, 0);
++		}
++		tcp_stream_set_state(tcp, TCP_FIN_WAIT_1);
++		tcp->snd_nxt++;
++		break;
++	default:
++		break;
++	}
+ }
+diff --git a/net/wget.c b/net/wget.c
+index 9c68a9d43cc..b8c5e240537 100644
+--- a/net/wget.c
++++ b/net/wget.c
+@@ -22,48 +22,25 @@ DECLARE_GLOBAL_DATA_PTR;
+ /* The default, change with environment variable 'httpdstp' */
+ #define SERVER_PORT		80
+ 
++#define HASHES_PER_LINE		65
++
++#define HTTP_MAX_HDR_LEN	2048
++
+ static const char bootfile1[] = "GET ";
+ static const char bootfile3[] = " HTTP/1.0\r\n\r\n";
+ static const char http_eom[] = "\r\n\r\n";
+-static const char http_ok[] = "200";
+-static const char content_len[] = "Content-Length";
++static const char http_ok[] = " 200 ";
++static const char content_len[] = "Content-Length:";
+ static const char linefeed[] = "\r\n";
+-static int wget_timeout_count;
+-struct tcp_stream *tcp;
+-
+-struct pkt_qd {
+-	uchar *pkt;
+-	unsigned int tcp_seq_num;
+-	unsigned int len;
+-};
+-
+-/*
+- * This is a control structure for out of order packets received.
+- * The actual packet bufers are in the kernel space, and are
+- * expected to be overwritten by the downloaded image.
+- */
+-#define PKTQ_SZ (PKTBUFSRX / 4)
+-static struct pkt_qd pkt_q[PKTQ_SZ];
+-static int pkt_q_idx;
++static struct in_addr web_server_ip;
++static unsigned int server_port;
+ static unsigned long content_length;
+-static unsigned int packets;
+-
+-static unsigned int initial_data_seq_num;
+-static unsigned int next_data_seq_num;
+-
+-static enum  wget_state current_wget_state;
++static u32 http_hdr_size;
++static int wget_tsize_num_hash;
+ 
+ static char *image_url;
+-static unsigned int wget_timeout = WGET_TIMEOUT;
+-
+ static enum net_loop_state wget_loop_state;
+ 
+-/* Timeout retry parameters */
+-static u8 retry_action;			/* actions for TCP retry */
+-static unsigned int retry_tcp_ack_num;	/* TCP retry acknowledge number*/
+-static unsigned int retry_tcp_seq_num;	/* TCP retry sequence number */
+-static int retry_len;			/* TCP retry length */
+-
+ /**
+  * store_block() - store block in memory
+  * @src: source of data
+@@ -73,7 +50,6 @@ static int retry_len;			/* TCP retry length */
+ static inline int store_block(uchar *src, unsigned int offset, unsigned int len)
+ {
+ 	ulong store_addr = image_load_addr + offset;
+-	ulong newsize = offset + len;
+ 	uchar *ptr;
+ 
+ 	if (CONFIG_IS_ENABLED(LMB)) {
+@@ -89,324 +65,157 @@ static inline int store_block(uchar *src, unsigned int offset, unsigned int len)
+ 	memcpy(ptr, src, len);
+ 	unmap_sysmem(ptr);
+ 
+-	if (net_boot_file_size < (offset + len))
+-		net_boot_file_size = newsize;
+-
+ 	return 0;
+ }
+ 
+-/**
+- * wget_send_stored() - wget response dispatcher
+- *
+- * WARNING, This, and only this, is the place in wget.c where
+- * SEQUENCE NUMBERS are swapped between incoming (RX)
+- * and outgoing (TX).
+- * Procedure wget_handler() is correct for RX traffic.
+- */
+-static void wget_send_stored(void)
++static void show_block_marker(u32 packets)
+ {
+-	u8 action = retry_action;
+-	int len = retry_len;
+-	unsigned int tcp_ack_num = retry_tcp_seq_num + (len == 0 ? 1 : len);
+-	unsigned int tcp_seq_num = retry_tcp_ack_num;
+-	uchar *ptr, *offset;
+-
+-	switch (current_wget_state) {
+-	case WGET_CLOSED:
+-		debug_cond(DEBUG_WGET, "wget: send SYN\n");
+-		current_wget_state = WGET_CONNECTING;
+-		net_send_tcp_packet(0, tcp->rhost, tcp->rport, tcp->lport, action,
+-				    tcp_seq_num, tcp_ack_num);
+-		packets = 0;
+-		break;
+-	case WGET_CONNECTING:
+-		pkt_q_idx = 0;
+-		net_send_tcp_packet(0, tcp->rhost, tcp->rport, tcp->lport, action,
+-				    tcp_seq_num, tcp_ack_num);
+-
+-		ptr = net_tx_packet + net_eth_hdr_size() +
+-			IP_TCP_HDR_SIZE + TCP_TSOPT_SIZE + 2;
+-		offset = ptr;
+-
+-		memcpy(offset, &bootfile1, strlen(bootfile1));
+-		offset += strlen(bootfile1);
+-
+-		memcpy(offset, image_url, strlen(image_url));
+-		offset += strlen(image_url);
+-
+-		memcpy(offset, &bootfile3, strlen(bootfile3));
+-		offset += strlen(bootfile3);
+-		net_send_tcp_packet((offset - ptr), tcp->rhost, tcp->rport, tcp->lport,
+-				    TCP_PUSH, tcp_seq_num, tcp_ack_num);
+-		current_wget_state = WGET_CONNECTED;
+-		break;
+-	case WGET_CONNECTED:
+-	case WGET_TRANSFERRING:
+-	case WGET_TRANSFERRED:
+-		net_send_tcp_packet(0, tcp->rhost, tcp->rport, tcp->lport, action,
+-				    tcp_seq_num, tcp_ack_num);
+-		break;
++	int cnt;
++
++	if (content_length != -1) {
++		if (net_boot_file_size > content_length)
++			content_length = net_boot_file_size;
++
++		cnt = net_boot_file_size * 50 / content_length;
++		while (wget_tsize_num_hash < cnt) {
++			putc('#');
++			wget_tsize_num_hash++;
++		}
++	} else {
++		if ((packets % 10) == 0)
++			putc('#');
++		else if (((packets + 1) % (10 * HASHES_PER_LINE)) == 0)
++			puts("\n");
  	}
  }
  
--#define RANDOM_PORT_START 1024
--#define RANDOM_PORT_RANGE 0x4000
--
--/**
-- * random_port() - make port a little random (1024-17407)
-- *
-- * Return: random port number from 1024 to 17407
-- *
-- * This keeps the math somewhat trivial to compute, and seems to work with
-- * all supported protocols/clients/servers
-- */
--static unsigned int random_port(void)
--{
--	return RANDOM_PORT_START + (get_timer(0) % RANDOM_PORT_RANGE);
+-static void wget_send(u8 action, unsigned int tcp_seq_num,
+-		      unsigned int tcp_ack_num, int len)
++static void tcp_stream_on_closed(struct tcp_stream *tcp)
+ {
+-	retry_action = action;
+-	retry_tcp_ack_num = tcp_ack_num;
+-	retry_tcp_seq_num = tcp_seq_num;
+-	retry_len = len;
++	if (tcp->status != TCP_ERR_OK)
++		wget_loop_state = NETLOOP_FAIL;
+ 
+-	wget_send_stored();
 -}
++	net_set_state(wget_loop_state);
++	if (wget_loop_state != NETLOOP_SUCCESS) {
++		printf("\nwget: Transfer Fail, TCP status - %d\n", tcp->status);
++		return;
++	}
+ 
+-void wget_fail(char *error_message, unsigned int tcp_seq_num,
+-	       unsigned int tcp_ack_num, u8 action)
+-{
+-	printf("wget: Transfer Fail - %s\n", error_message);
+-	net_set_timeout_handler(0, NULL);
+-	wget_send(action, tcp_seq_num, tcp_ack_num, 0);
++	printf("\nPackets received %d, Transfer Successful\n", tcp->rx_packets);
++	efi_set_bootdev("Net", "", image_url,
++			map_sysmem(image_load_addr, 0),
++			net_boot_file_size);
+ }
+ 
+-/*
+- * Interfaces of U-BOOT
+- */
+-static void wget_timeout_handler(void)
++static void tcp_stream_on_rcv_nxt_update(struct tcp_stream *tcp, u32 rx_bytes)
+ {
+-	if (++wget_timeout_count > WGET_RETRY_COUNT) {
+-		puts("\nRetry count exceeded; starting again\n");
+-		wget_send(TCP_RST, 0, 0, 0);
+-		net_start_again();
+-	} else {
+-		puts("T ");
+-		net_set_timeout_handler(wget_timeout +
+-					WGET_TIMEOUT * wget_timeout_count,
+-					wget_timeout_handler);
+-		wget_send_stored();
++	char	*pos, *tail;
++	uchar	saved, *ptr;
++	int i;
++
++	if (http_hdr_size) {
++		net_boot_file_size = rx_bytes - http_hdr_size;
++		show_block_marker(tcp->rx_packets);
++		return;
+ 	}
+-}
+ 
+-#define PKT_QUEUE_OFFSET 0x20000
+-#define PKT_QUEUE_PACKET_SIZE 0x800
++	ptr = map_sysmem(image_load_addr, rx_bytes + 1);
+ 
+-static void wget_connected(uchar *pkt, unsigned int tcp_seq_num,
+-			   u8 action, unsigned int tcp_ack_num, unsigned int len)
+-{
+-	uchar *pkt_in_q;
+-	char *pos;
+-	int hlen, i;
+-	uchar *ptr1;
++	saved = ptr[rx_bytes];
++	ptr[rx_bytes] = '\0';
++	pos = strstr((char *)ptr, http_eom);
++	ptr[rx_bytes] = saved;
+ 
+-	pkt[len] = '\0';
+-	pos = strstr((char *)pkt, http_eom);
++	if (!pos) {
++		if (rx_bytes < HTTP_MAX_HDR_LEN &&
++		    tcp->state == TCP_ESTABLISHED)
++			goto end;
++
++		printf("ERROR: misssed HTTP header\n");
++		tcp_stream_close(tcp);
++		wget_loop_state = NETLOOP_FAIL;
++		goto end;
++	}
++
++	http_hdr_size = pos - (char *)ptr + strlen(http_eom);
++	*pos = '\0';
++
++	pos = strstr((char *)ptr, linefeed);
++	if (pos)
++		i = pos - (char *)ptr;
++	else
++		i = http_hdr_size - strlen(http_eom);
++	printf("%.*s\n", i,  ptr);
++
++	if (!strstr((char *)ptr, http_ok)) {
++		debug_cond(DEBUG_WGET, "wget: Connected Bad Xfer\n");
++		tcp_stream_close(tcp);
++		wget_loop_state = NETLOOP_FAIL;
++		goto end;
++	}
+ 
++	debug_cond(DEBUG_WGET, "wget: Connctd pkt %p  hlen %x\n",
++		   ptr, http_hdr_size);
++
++	pos = strstr((char *)ptr, content_len);
+ 	if (!pos) {
+-		debug_cond(DEBUG_WGET,
+-			   "wget: Connected, data before Header %p\n", pkt);
+-		pkt_in_q = (void *)image_load_addr + PKT_QUEUE_OFFSET +
+-			(pkt_q_idx * PKT_QUEUE_PACKET_SIZE);
++		content_length = -1;
++	} else {
++		pos += strlen(content_len) + 1;
++		content_length = simple_strtoul(pos, &tail, 10);
++		if (*tail != '\r' && *tail != '\n' && *tail != '\0')
++			content_length = -1;
++		printf("%s %d\n", content_len, (int)content_length);
++	}
+ 
+-		ptr1 = map_sysmem((ulong)pkt_in_q, len);
+-		memcpy(ptr1, pkt, len);
+-		unmap_sysmem(ptr1);
++	net_boot_file_size = rx_bytes - http_hdr_size;
++	memmove(ptr, ptr + http_hdr_size, net_boot_file_size);
+ 
+-		pkt_q[pkt_q_idx].pkt = pkt_in_q;
+-		pkt_q[pkt_q_idx].tcp_seq_num = tcp_seq_num;
+-		pkt_q[pkt_q_idx].len = len;
+-		pkt_q_idx++;
++end:
++	unmap_sysmem(ptr);
+ 
+-		if (pkt_q_idx >= PKTQ_SZ) {
+-			printf("wget: Fatal error, queue overrun!\n");
+-			net_set_state(NETLOOP_FAIL);
++	wget_loop_state = NETLOOP_SUCCESS;
++}
+ 
+-			return;
+-		}
+-	} else {
+-		debug_cond(DEBUG_WGET, "wget: Connected HTTP Header %p\n", pkt);
+-		/* sizeof(http_eom) - 1 is the string length of (http_eom) */
+-		hlen = pos - (char *)pkt + sizeof(http_eom) - 1;
+-		pos = strstr((char *)pkt, linefeed);
+-		if (pos > 0)
+-			i = pos - (char *)pkt;
+-		else
+-			i = hlen;
+-		printf("%.*s", i,  pkt);
 -
+-		current_wget_state = WGET_TRANSFERRING;
+-
+-		initial_data_seq_num = tcp_seq_num + hlen;
+-		next_data_seq_num    = tcp_seq_num + len;
+-
+-		if (strstr((char *)pkt, http_ok) == 0) {
+-			debug_cond(DEBUG_WGET,
+-				   "wget: Connected Bad Xfer\n");
+-			wget_loop_state = NETLOOP_FAIL;
+-			wget_send(action, tcp_seq_num, tcp_ack_num, len);
+-		} else {
+-			debug_cond(DEBUG_WGET,
+-				   "wget: Connctd pkt %p  hlen %x\n",
+-				   pkt, hlen);
+-
+-			pos = strstr((char *)pkt, content_len);
+-			if (!pos) {
+-				content_length = -1;
+-			} else {
+-				pos += sizeof(content_len) + 2;
+-				strict_strtoul(pos, 10, &content_length);
+-				debug_cond(DEBUG_WGET,
+-					   "wget: Connected Len %lu\n",
+-					   content_length);
+-			}
+-
+-			net_boot_file_size = 0;
+-
+-			if (len > hlen) {
+-				if (store_block(pkt + hlen, 0, len - hlen) != 0) {
+-					wget_loop_state = NETLOOP_FAIL;
+-					wget_fail("wget: store error\n", tcp_seq_num, tcp_ack_num, action);
+-					net_set_state(NETLOOP_FAIL);
+-					return;
+-				}
+-			}
++static u32 tcp_stream_rx(struct tcp_stream *tcp, u32 rx_offs, void *buf, u32 len)
++{
++	store_block(buf, rx_offs - http_hdr_size, len);
+ 
+-			debug_cond(DEBUG_WGET,
+-				   "wget: Connected Pkt %p hlen %x\n",
+-				   pkt, hlen);
+-
+-			for (i = 0; i < pkt_q_idx; i++) {
+-				int err;
+-
+-				ptr1 = map_sysmem((ulong)pkt_q[i].pkt,
+-						  pkt_q[i].len);
+-				err = store_block(ptr1,
+-					  pkt_q[i].tcp_seq_num -
+-					  initial_data_seq_num,
+-					  pkt_q[i].len);
+-				unmap_sysmem(ptr1);
+-				debug_cond(DEBUG_WGET,
+-					   "wget: Connctd pkt Q %p len %x\n",
+-					   pkt_q[i].pkt, pkt_q[i].len);
+-				if (err) {
+-					wget_loop_state = NETLOOP_FAIL;
+-					wget_fail("wget: store error\n", tcp_seq_num, tcp_ack_num, action);
+-					net_set_state(NETLOOP_FAIL);
+-					return;
+-				}
+-			}
+-		}
+-	}
+-	wget_send(action, tcp_seq_num, tcp_ack_num, len);
++	return len;
+ }
+ 
+-/**
+- * wget_handler() - TCP handler of wget
+- * @tcp: TCP stream
+- * @pkt: pointer to the application packet
+- * @tcp_seq_num: TCP sequential number
+- * @tcp_ack_num: TCP acknowledgment number
+- * @action: TCP action (SYN, ACK, FIN, etc)
+- * @len: packet length
+- *
+- * In the "application push" invocation, the TCP header with all
+- * its information is pointed to by the packet pointer.
+- */
+-static void wget_handler(struct tcp_stream *tcp, uchar *pkt,
+-			 u32 tcp_seq_num, u32 tcp_ack_num,
+-			 u8 action, unsigned int len)
++static u32 tcp_stream_tx(struct tcp_stream *tcp, u32 tx_offs, void *buf, u32 maxlen)
+ {
+-	enum tcp_state wget_tcp_state = tcp_stream_get_state(tcp);
+-
+-	net_set_timeout_handler(wget_timeout, wget_timeout_handler);
+-	packets++;
+-
+-	switch (current_wget_state) {
+-	case WGET_CLOSED:
+-		debug_cond(DEBUG_WGET, "wget: Handler: Error!, State wrong\n");
+-		break;
+-	case WGET_CONNECTING:
+-		debug_cond(DEBUG_WGET,
+-			   "wget: Connecting In len=%x, Seq=%u, Ack=%u\n",
+-			   len, tcp_seq_num, tcp_ack_num);
+-		if (!len) {
+-			if (wget_tcp_state == TCP_ESTABLISHED) {
+-				debug_cond(DEBUG_WGET,
+-					   "wget: Cting, send, len=%x\n", len);
+-				wget_send(action, tcp_seq_num, tcp_ack_num,
+-					  len);
+-			} else {
+-				printf("%.*s", len,  pkt);
+-				wget_fail("wget: Handler Connected Fail\n",
+-					  tcp_seq_num, tcp_ack_num, action);
+-			}
+-		}
+-		break;
+-	case WGET_CONNECTED:
+-		debug_cond(DEBUG_WGET, "wget: Connected seq=%u, len=%x\n",
+-			   tcp_seq_num, len);
+-		if (!len) {
+-			wget_fail("Image not found, no data returned\n",
+-				  tcp_seq_num, tcp_ack_num, action);
+-		} else {
+-			wget_connected(pkt, tcp_seq_num, action, tcp_ack_num, len);
+-		}
+-		break;
+-	case WGET_TRANSFERRING:
+-		debug_cond(DEBUG_WGET,
+-			   "wget: Transferring, seq=%x, ack=%x,len=%x\n",
+-			   tcp_seq_num, tcp_ack_num, len);
+-
+-		if (next_data_seq_num != tcp_seq_num) {
+-			debug_cond(DEBUG_WGET, "wget: seq=%x packet was lost\n", next_data_seq_num);
+-			return;
+-		}
+-		next_data_seq_num = tcp_seq_num + len;
++	int ret;
+ 
+-		if (store_block(pkt, tcp_seq_num - initial_data_seq_num, len) != 0) {
+-			wget_fail("wget: store error\n",
+-				  tcp_seq_num, tcp_ack_num, action);
+-			net_set_state(NETLOOP_FAIL);
+-			return;
+-		}
++	if (tx_offs)
++		return 0;
+ 
+-		switch (wget_tcp_state) {
+-		case TCP_FIN_WAIT_2:
+-			wget_send(TCP_ACK, tcp_seq_num, tcp_ack_num, len);
+-			fallthrough;
+-		case TCP_SYN_SENT:
+-		case TCP_SYN_RECEIVED:
+-		case TCP_CLOSING:
+-		case TCP_FIN_WAIT_1:
+-		case TCP_CLOSED:
+-			net_set_state(NETLOOP_FAIL);
+-			break;
+-		case TCP_ESTABLISHED:
+-			wget_send(TCP_ACK, tcp_seq_num, tcp_ack_num,
+-				  len);
+-			wget_loop_state = NETLOOP_SUCCESS;
+-			break;
+-		case TCP_CLOSE_WAIT:     /* End of transfer */
+-			current_wget_state = WGET_TRANSFERRED;
+-			wget_send(action | TCP_ACK | TCP_FIN,
+-				  tcp_seq_num, tcp_ack_num, len);
+-			break;
+-		}
+-		break;
+-	case WGET_TRANSFERRED:
+-		printf("Packets received %d, Transfer Successful\n", packets);
+-		net_set_state(wget_loop_state);
+-		efi_set_bootdev("Net", "", image_url,
+-				map_sysmem(image_load_addr, 0),
+-				net_boot_file_size);
+-		break;
+-	}
++	ret = snprintf(buf, maxlen, "%s%s%s", bootfile1, image_url, bootfile3);
++
++	return ret;
++}
++
++static int tcp_stream_on_create(struct tcp_stream *tcp)
++{
++	if (tcp->rhost.s_addr != web_server_ip.s_addr ||
++	    tcp->rport != server_port)
++		return 0;
++
++	tcp->max_retry_count = WGET_RETRY_COUNT;
++	tcp->initial_timeout = WGET_TIMEOUT;
++	tcp->on_closed = tcp_stream_on_closed;
++	tcp->on_rcv_nxt_update = tcp_stream_on_rcv_nxt_update;
++	tcp->rx = tcp_stream_rx;
++	tcp->tx = tcp_stream_tx;
++
++	return 1;
+ }
+ 
  #define BLOCKSIZE 512
  
  void wget_start(void)
  {
-+	struct in_addr web_server_ip;
-+	unsigned int server_port;
-+
+-	struct in_addr web_server_ip;
+-	unsigned int server_port;
++	struct tcp_stream *tcp;
+ 
  	image_url = strchr(net_boot_file_name, ':');
  	if (image_url > 0) {
- 		web_server_ip = string_to_ip(net_boot_file_name);
-@@ -472,8 +451,6 @@ void wget_start(void)
- 	wget_timeout_count = 0;
- 	current_wget_state = WGET_CLOSED;
+@@ -445,12 +254,6 @@ void wget_start(void)
+ 	debug_cond(DEBUG_WGET,
+ 		   "\nwget:Load address: 0x%lx\nLoading: *\b", image_load_addr);
  
--	our_port = random_port();
+-	net_set_timeout_handler(wget_timeout, wget_timeout_handler);
+-	tcp_set_tcp_handler(wget_handler);
+-
+-	wget_timeout_count = 0;
+-	current_wget_state = WGET_CLOSED;
 -
  	/*
  	 * Zero out server ether to force arp resolution in case
  	 * the server ip for the previous u-boot command, for example dns
-@@ -482,6 +459,13 @@ void wget_start(void)
+@@ -459,14 +262,20 @@ void wget_start(void)
  
  	memset(net_server_ethaddr, 0, 6);
  
-+	server_port = env_get_ulong("httpdstp", 10, SERVER_PORT) & 0xffff;
-+	tcp = tcp_stream_connect(web_server_ip, server_port);
-+	if (tcp == NULL) {
-+		net_set_state(NETLOOP_FAIL);
-+		return;
-+	}
++	net_boot_file_size = 0;
++	http_hdr_size = 0;
++	wget_tsize_num_hash = 0;
++	wget_loop_state = NETLOOP_FAIL;
 +
- 	wget_send(TCP_SYN, 0, 0, 0);
+ 	server_port = env_get_ulong("httpdstp", 10, SERVER_PORT) & 0xffff;
++	tcp_stream_set_on_create_handler(tcp_stream_on_create);
+ 	tcp = tcp_stream_connect(web_server_ip, server_port);
+-	if (tcp == NULL) {
++	if (!tcp) {
++		printf("No free tcp streams\n");
+ 		net_set_state(NETLOOP_FAIL);
+ 		return;
+ 	}
+-
+-	wget_send(TCP_SYN, 0, 0, 0);
++	tcp_stream_put(tcp);
  }
  
+ #if (IS_ENABLED(CONFIG_CMD_DNS))
 -- 
 2.45.2
 
