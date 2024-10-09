@@ -4,87 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3627CEDD99
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 14:04:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 197F2CEDD99
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 14:06:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA4F28924F;
-	Wed,  9 Oct 2024 16:03:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 8CB2F89241;
+	Wed,  9 Oct 2024 16:05:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="htWuWAQ+";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="LUwSWd0x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A85358924E; Wed,  9 Oct 2024 16:03:48 +0200 (CEST)
+ id CCCF78922E; Wed,  9 Oct 2024 16:05:56 +0200 (CEST)
 Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
  [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0D2989249
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 16:03:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4BCE58921D
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 16:05:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+ spf=pass smtp.mailfrom=glaroque@baylibre.com
 Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-37ccd50faafso4457596f8f.3
- for <u-boot@lists.denx.de>; Wed, 09 Oct 2024 07:03:46 -0700 (PDT)
+ ffacd0b85a97d-37ccd81de57so615986f8f.0
+ for <u-boot@lists.denx.de>; Wed, 09 Oct 2024 07:05:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728482625; x=1729087425; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=kDutgpxnTxwKCYIiIQtKGwPjtjM6oNAFy+W630CdG0w=;
- b=htWuWAQ+F3ZenDoTfaCz1N0X5k6QOQS86SO8sGL4CtHaDOWjpcTy4l/S0uV8jTeWCn
- KI2qlFzdL2eKQcjm/Rvxxvh5wR2x9nXNN+28aKdo3nDCIXkFfKLGsKx/a9nuTj0+hqmX
- yfTXtNi7JfmMI9jxGOtq+HQBSl5x8MfBBxVJMiEKgqJvUbYONsyjKaZ+C3BmOV8DO8Ai
- 0DcxhVKX6v6TDRZuwpfiKhPoo+FUL0/1h+TTGVkOWOBio4X+PvlHd5T3l6rNgLgUdRyd
- x1AEW1WbROLQVKD1ghgITEpZN6DRl9xU4yiCy6Zje6E5je+5xOwN132U9aeBWP/BaNmr
- bvqg==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1728482754; x=1729087554;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=nEXYhGUpt3lex8EEnhqZVXPY4Fe5dox/5PvVm9sdB54=;
+ b=LUwSWd0x3dGizxj9ju6gVOdbJ2p4YkBy0jzHIthRJajDX0/Q5fg2mfTmsnRCljLNNj
+ +UJ0erIZ2NJ5EW/+tPGRrl3wZCIzANVnlA5MWkta541LC4p+jVPb6LehHPmQelIIthNO
+ fXV47vpAXnjavu9HFa/fSTqNmoQFPme3hWwHLBTOqyxIhwIssipso6/ntrIrzDONv1E0
+ ObrwE5+zZw1P7prY0XYlvhribJdSDDiGczN7bcSgqYgymFKtVMqdFe3m1b95jnkiKL0Q
+ mxf+q4egGc6KUUlSRbyd9qvtc4Ks2ywPG68EJO0Q2OdVjk+ZRQvRrETJuOVPTJWe/bp9
+ ffrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728482625; x=1729087425;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=kDutgpxnTxwKCYIiIQtKGwPjtjM6oNAFy+W630CdG0w=;
- b=OKqeiIPXIgZ545NV0YDP/dyHK9CsiQi8UvKsSIt2bib3/j8pUbfiWXk5GUK4cM/6fV
- joc2uTEj+2NMg5Z8QWc+/X/QeQA8niWHO85NwDmon9n31tfapM+znJXaK35Wb+SJtlZz
- oom+ISAlGrU/rfs+mXn+u19Gjud5elsG1pfYOElS3ymV8SMgGMk/p9nECZrLCZdOF/fY
- +wTstcbb2S8/j9sDmiwMD5ExHeG/jBLzQjtafYqNEIijwY7hWP7kGBCe9CIk/6/h8zF0
- Z8UrfwhHOBs7Reu0UVUEIsaVR9yQnlvPKicQb9lpDJQX2WX+p62U+kuAUOtj+bZS50fC
- mhKA==
-X-Gm-Message-State: AOJu0Yy748fKucWEsK4vDCrYDwqmNn1wdKngb6lendL82B5y6f0n2c79
- 2qQA026XDmw96rmzG2CQwFxFWJeC0VIyiJRkZ/F5ARak5zp2Hyn70chf0OWLuN8EsZyPCGTsCdv
- dRHVA0A==
-X-Google-Smtp-Source: AGHT+IGb4cK960dl0XzMoKbW9lgwB/qoS7yNvn8HL3uAUDu6CzaWqjkONeuaO3EAVvBLVrbaPwcilQ==
-X-Received: by 2002:a5d:650e:0:b0:37d:3a76:be9f with SMTP id
- ffacd0b85a97d-37d3a9f8712mr1620277f8f.25.1728482624573; 
- Wed, 09 Oct 2024 07:03:44 -0700 (PDT)
-Received: from builder.. ([2a01:e0a:3cb:7bb0:9b46:2ad8:5153:1163])
+ d=1e100.net; s=20230601; t=1728482754; x=1729087554;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=nEXYhGUpt3lex8EEnhqZVXPY4Fe5dox/5PvVm9sdB54=;
+ b=URQO7L1XrZVQMziJ+CMOIAKJjw3F7Wh4AhebqaUzLyhQ1eOSFpOavhOlk8BtvPFJlc
+ WdThX/tKino2GefT94TKkyQTiRVeeHqD/otpuk6aec8qkPfHQIkriheBCE4wJ17LEaZI
+ 3FqhDYTkvP0Jwcodmu+IuZwRLrRGwqfZ5CJFy1hNKygexDBIlyJmT+opz8Uwcc1THOmA
+ pLpAOYEh5hB5GagaM+wC/DJVFkqdk45A5dLBEPGuSDZk5ie3MMOCV4CatQZTfvdEn/mb
+ a+oLvQ/2oiXasUrw2NJKn35/KP5xgHtO9dnK2u0SyJ94ejbgKofVJLMDZZKLgQX9yxzT
+ 0exQ==
+X-Gm-Message-State: AOJu0YygfuVTiPbDxWo8NaI53OJxZIG3ZU6uR0YL6/nDFfpccra+5ZU5
+ 9L3Z5M0DFvlTGstu7Xc3MqxdPZY4y4LU8xuanmk5moy3Q476i3iQ1hk4+yGP1cM=
+X-Google-Smtp-Source: AGHT+IFzHvvQumDNsZK2t0ahDm1BDv9AAfzjxmRaHuZG0eXmO1tB/UF8hlRYjojmyz9Y9jiYoWQcag==
+X-Received: by 2002:adf:9c0a:0:b0:374:cee6:c298 with SMTP id
+ ffacd0b85a97d-37d293405c3mr4172533f8f.21.1728482753496; 
+ Wed, 09 Oct 2024 07:05:53 -0700 (PDT)
+Received: from ?IPV6:2a05:6e02:10a5:e010:591a:75a8:66a2:c5c3?
+ ([2a05:6e02:10a5:e010:591a:75a8:66a2:c5c3])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d1690f0b2sm10581728f8f.9.2024.10.09.07.03.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Oct 2024 07:03:43 -0700 (PDT)
-From: Jerome Forissier <jerome.forissier@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
- Anton Antonov <Anton.Antonov@arm.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>
-Subject: [PATCH v12 04/21] test: boot: fix bootflow_cmd_label for when
- DSA_SANDBOX is disabled
-Date: Wed,  9 Oct 2024 16:02:54 +0200
-Message-Id: <efb9f4894e0715b0b7619d699b4a288a37d4bc15.1728482473.git.jerome.forissier@linaro.org>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <cover.1728482473.git.jerome.forissier@linaro.org>
-References: <cover.1728482473.git.jerome.forissier@linaro.org>
+ ffacd0b85a97d-37d1691a4d8sm10529099f8f.36.2024.10.09.07.05.52
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 09 Oct 2024 07:05:52 -0700 (PDT)
+Message-ID: <c3dae5c8-6465-471c-b262-99b925eeac37@baylibre.com>
+Date: Wed, 9 Oct 2024 16:05:51 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 0/6] android_ab: introduce bcb ab_dump command and
+ provide several bcb fixes
+To: Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Tom Rini <trini@konsulko.com>,
+ "Andrew F. Davis" <afd@ti.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Mario Six <mario.six@gdsys.cc>
+Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, rockosov@gmail.com,
+ kernel@salutedevices.com
+References: <20241008-android_ab_master-v3-0-f292c45a33e4@salutedevices.com>
+Content-Language: en-US
+From: Guillaume LA ROQUE <glaroque@baylibre.com>
+In-Reply-To: <20241008-android_ab_master-v3-0-f292c45a33e4@salutedevices.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,49 +102,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When DSA_SANDBOX is not set, the sandbox tests fail as follows:
+Hi,
 
- $ ./test/py/test.py --build-dir=$(pwd) -k bootdev_test_any
- [...]
- Scanning for bootflows with label '9'
- [...]
- Cannot find '9' (err=-19)
+just test this series on Khadas vim3 board and it's working fine
 
-This is due to the device list containing two less entries than
-expected. Therefore, look for label '7' when DSA_SANDBOX is disabled.
+bcb ab_dump mmc 2#misc
+Bootloader Control:       [misc]
+Active Slot:              _a
+Magic Number:             0x42414342
+Version:                  1
+Number of Slots:          2
+Recovery Tries Remaining: 0
+CRC:                      0xd438d1b9 (Valid)
 
-The actual use case is NET_LWIP=y (to be introduced in later patches)
-which implies DSA_SANDBOX=n for the time being.
+Slot[0] Metadata:
+         - Priority:         15
+         - Tries Remaining:  6
+         - Successful Boot:  0
+         - Verity Corrupted: 0
 
-Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
----
- test/boot/bootflow.c | 12 ++++++++++--
- 1 file changed, 10 insertions(+), 2 deletions(-)
+Slot[1] Metadata:
+         - Priority:         15
+         - Tries Remaining:  7
+         - Successful Boot:  0
+         - Verity Corrupted: 0
 
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index 6ad63afe90a..154dea70a59 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -109,9 +109,17 @@ static int bootflow_cmd_label(struct unit_test_state *uts)
- 	 * 8   [   ]      OK  mmc       mmc2.bootdev
- 	 * 9   [ + ]      OK  mmc       mmc1.bootdev
- 	 * a   [   ]      OK  mmc       mmc0.bootdev
-+	 *
-+	 * However with CONFIG_DSA_SANDBOX=n we have two fewer (dsa-test@0 and
-+	 * dsa-test@1).
- 	 */
--	ut_assertok(run_command("bootflow scan -lH 9", 0));
--	ut_assert_nextline("Scanning for bootflows with label '9'");
-+	if (CONFIG_IS_ENABLED(DSA_SANDBOX)) {
-+		ut_assertok(run_command("bootflow scan -lH 9", 0));
-+		ut_assert_nextline("Scanning for bootflows with label '9'");
-+	} else {
-+		ut_assertok(run_command("bootflow scan -lH 7", 0));
-+		ut_assert_nextline("Scanning for bootflows with label '7'");
-+	}
- 	ut_assert_skip_to_line("(1 bootflow, 1 valid)");
- 
- 	ut_assertok(run_command("bootflow scan -lH 0", 0));
--- 
-2.40.1
+
+Thanks for your patches.
+
+Tested-by: Guillaume La Roque <glaroque@baylibre.com>
+
+
+Le 08/10/2024 à 22:18, Dmitry Rokosov a écrit :
+> The patch series include changes:
+>      - move ab_select_slot() documentation to @ notation
+>      - move ab_select command to bcb subcommands
+>      - introduce the ab_dump command to print the content of the BCB
+>        block; it's useful for debugging A/B logic on supported boards
+>      - fix the slot suffix format in the ABC block to align with official
+>        Android BCB specifications
+>      - add a test for the ab_dump command to verify the accuracy of each
+>        field within the ABC data displayed, it's also useful for testing
+>        slot_suffix problem code paths
+>
+> Changes v3 since v2 at [2]:
+>      - return "Legend" block for bcb command
+>      - additionally, verify the CONFIG_ANDROID_AB configuration alongside
+>        CONFIG_CMD_BCB to ensure that the A/B scheme is used for the
+>        designated board.
+>
+> Changes v2 since v1 at [1]:
+>      - move ab_select_slot() documentation to @ notation
+>      - move ab_select command to bcb subcommands per Simon and Mattijs
+>        suggestions
+>      - redesign ab_dump as bcb subcommand
+>      - use spaces instead of tabs in the ab_dump command output
+>      - print hex values in the lowercase
+>      - add RvB tags
+>
+> Links:
+>      [1] https://lore.kernel.org/all/20240725194716.32232-1-ddrokosov@salutedevices.com/
+>      [2] https://lore.kernel.org/all/20240911214945.15873-1-ddrokosov@salutedevices.com/
+>
+> Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
+> ---
+> Dmitry Rokosov (6):
+>        include/android_ab: move ab_select_slot() documentation to @ notation
+>        treewide: bcb: move ab_select command to bcb subcommands
+>        cmd: bcb: change strcmp() usage style in the do_bcb_ab_select()
+>        cmd: bcb: introduce 'ab_dump' command to print BCB block content
+>        common: android_ab: fix slot suffix for abc block
+>        test/py: introduce test for ab_dump command
+>
+>   MAINTAINERS                               |   1 -
+>   boot/android_ab.c                         | 116 ++++++++++++++++++++++++------
+>   cmd/Kconfig                               |  15 +---
+>   cmd/Makefile                              |   1 -
+>   cmd/ab_select.c                           |  66 -----------------
+>   cmd/bcb.c                                 |  98 +++++++++++++++++++++++++
+>   configs/am57xx_hs_evm_usb_defconfig       |   1 -
+>   configs/khadas-vim3_android_ab_defconfig  |   1 -
+>   configs/khadas-vim3l_android_ab_defconfig |   1 -
+>   configs/sandbox64_defconfig               |   4 +-
+>   configs/sandbox_defconfig                 |   4 +-
+>   doc/android/ab.rst                        |  12 ++--
+>   include/android_ab.h                      |  17 ++++-
+>   include/configs/khadas-vim3_android.h     |   2 +-
+>   include/configs/khadas-vim3l_android.h    |   2 +-
+>   include/configs/meson64_android.h         |   4 +-
+>   include/configs/ti_omap5_common.h         |   4 +-
+>   test/py/tests/test_android/test_ab.py     |  31 ++++++--
+>   18 files changed, 252 insertions(+), 128 deletions(-)
+> ---
+> base-commit: fbe16bc28014dc1ed957f5fee7e53d6eee781aa9
+> change-id: 20241008-android_ab_master-d86d71c839ae
+>
+> Best regards,
+
 
