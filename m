@@ -4,97 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC33CCED635
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 09:15:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43C04CEFC5D
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 09:39:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DE8A891A1;
-	Wed,  9 Oct 2024 11:15:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A825C89189;
+	Wed,  9 Oct 2024 11:39:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zdrfw7Zn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ya/hz2BX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 419DA8916C; Wed,  9 Oct 2024 11:15:29 +0200 (CEST)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id 300BC8918A; Wed,  9 Oct 2024 11:39:27 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1ACBD8918D
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 11:15:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BE6B889166
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 11:39:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-37d3ae4a048so302753f8f.3
- for <u-boot@lists.denx.de>; Wed, 09 Oct 2024 02:15:25 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-37cfa129074so4386327f8f.1
+ for <u-boot@lists.denx.de>; Wed, 09 Oct 2024 02:39:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728465324; x=1729070124; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=5Csy28MuwfyyOvD8LsV7L/AQigjp27hsbdzLrGJx/8A=;
- b=zdrfw7ZnMCPZjgCV6IhKwGDAlvyn4+Pa0Qv9vR2ie4j15hXM498HDa+SyYhhVrnHxg
- +bqm+eGQfrVBTjI56khtkBvlmaHeGzeAGD6MIBHMA9XObw7VLI8aVq+l6DvMIlsFQQQM
- rvDQmdqQlQZLhLmOwQ8V55YHXCRjIfrL3bIDRfFh0vY92EauDHvLWxzRSIu4bUY38t7f
- Y3bc83Ww5nPERsMeSQc0aAbeL1OAOcFCSaKboJnozweMZ/vefLJB6osqZSKeaSG5241B
- 3B5vJVcDX08r38A8z+E2TR226xcJNEYvZcahiB4BDxgFTZ4uT/ki4MC/KhvFHz4IXkx7
- LEHA==
+ d=linaro.org; s=google; t=1728466764; x=1729071564; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=j1NHtOpwoy0Ff0Bk9iINYGT8eF3f+iD2om/Szcp8A/g=;
+ b=ya/hz2BX9VeG/PVwS9p1xzSjU2yXZ+IFmrtQvtINUhBb5oduCnPiW6vAPdvOO2hdHV
+ ZUrUUrGM+4uTgGSzajtKwFVtAlEcA7KVGirnzegGJejOw0pDhs6QF45nFDDebYLuylh8
+ h2ofpzA4zeAJ1IEpCVXVXj52B3ytuD7jk+2HR4SahLQK5v/97UmDUkCV96J41E3I2lgD
+ XvheiWMDYlZdSWtb7TJzEeU6nT6H6TX6qB4PQFe+foRUjIQOtDlGrM3oKrxxPM2FHw64
+ xHZbtF73ELzQdjLJX1cWoRshTpw6ZydcNYO2JHkHSenkCtCHRHuZFx6Oy/9zjmCDLkJH
+ /voQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728465324; x=1729070124;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=5Csy28MuwfyyOvD8LsV7L/AQigjp27hsbdzLrGJx/8A=;
- b=MyWPG/B2iuleljke//RwEBatfBVacxqdkhRccbbQe2RJZdo756uXFWNhSqv6jEfJE+
- oFzo1esqYnLV6CqzIhg91vQcacyR+t2bXqdp6RGYrJK87RnzFjEfPVYvew6lxy1Hx2ED
- sXb3oD6S2wqlqvxcgM/Zh5mkcnHcbNOkKyiwpXD3SNrDVfnGTtri0XbnkbpiCgqbv9dg
- 54R4e9VuYlwIYzJyTmK8kvGna9nt95QFzp3mtXSvS4tDOrZyW+EP1YGwo+yaW1h83e7y
- e8J1b5msPCNT0mwjS+XFs9YeC8Xh6ceBjsbYBbyujwfDGWhFduAJujBJRYG6bePC/5+g
- 3P8w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUT8eWJW4JsEdO8BXmIooWcTnos9Wi7/tKb6UK3sEBgQHkoLT6l0zgzXeE+sEFFZqQmzmKPPTM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw6GFBPLiFszPd0IPLPRhfNQ6EHQ8P8Rzqfy151LccE8c7QCKVL
- QlssZkBEIpnhxDpB74wUJQFQt8Rx36yCEyfQhqRP11Aj61XrkTupBJBBp4EegHQ=
-X-Google-Smtp-Source: AGHT+IGHNow1LZ+mSeFnZzPM+q52K4hqeNHttaBPX51tsvqfw87Jl93w5RxoL0CmooZ71XeCViGVpA==
-X-Received: by 2002:a5d:5e05:0:b0:37d:41df:136b with SMTP id
- ffacd0b85a97d-37d41df1952mr553215f8f.13.1728465324551; 
- Wed, 09 Oct 2024 02:15:24 -0700 (PDT)
-Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
+ d=1e100.net; s=20230601; t=1728466764; x=1729071564;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=j1NHtOpwoy0Ff0Bk9iINYGT8eF3f+iD2om/Szcp8A/g=;
+ b=BpN5q5ynQvARPrjszqMviF3DcMqyD3QKXuQ3w4fgG1fiSSMausSHtg/0qPdz17GpHN
+ SGrDxS0nAYloFliMHV4OG55gZ0N7p/zXSunNMkOkbzvZWZQMynqNnfESEOnC3JI7zezP
+ LronwUgxu0kXrEWe3D31Y4n+TVRiXc258nzfbf1Pp4JPyH7QdnnTbbr7Dnlh4JX1217n
+ MxzqXxa+fW96PD95Ss4isJuRyUveFH1EYscDhLBOU1sp3lCkPsZDSTQ0X/1xJuIQIO1P
+ UQfO+Q1h7Pnx7S4okMFKRsehXebVpEaElyjqcFFPWel7L9/9vDx7ll5ACkxsmMzyt3aA
+ roMw==
+X-Gm-Message-State: AOJu0Yz5XHlAQPmIOhGKHa0HtqYSAMA1piw3R56DHGtujGKtaAw/+pkf
+ w+WUZTD4Fdgt9gQ1I857UhLH+hA/YuekP8l3SDduSAH7sWryFeMN1HV5Ef63t28=
+X-Google-Smtp-Source: AGHT+IEnuARcKQnrcrV4tnb2CscGqK47ychVovw7UXVlE0n0AC1PQRcwYQokiDhBy8XHyqexO9jPXA==
+X-Received: by 2002:adf:9b97:0:b0:37d:ff4:dc64 with SMTP id
+ ffacd0b85a97d-37d3aa8e572mr1097359f8f.25.1728466764100; 
+ Wed, 09 Oct 2024 02:39:24 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:3363:964:de3b:212f?
+ ([2a01:e0a:3cb:7bb0:3363:964:de3b:212f])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d1690f270sm9865471f8f.21.2024.10.09.02.15.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Oct 2024 02:15:23 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Wed, 09 Oct 2024 11:15:20 +0200
-Subject: [PATCH 1/2] clk: meson: gxbb: add HDMI clocks
+ ffacd0b85a97d-37d32ea1d98sm2982728f8f.68.2024.10.09.02.39.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 09 Oct 2024 02:39:23 -0700 (PDT)
+Message-ID: <a40b7d94-008b-435f-9034-3872c82919fc@linaro.org>
+Date: Wed, 9 Oct 2024 11:39:23 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v11 01/29] net: recv(): return -EAGAIN instead of 0 when
+ no cleanup is expected
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
+ Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
+ Anton Antonov <Anton.Antonov@arm.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Maxim Uvarov <maxim.uvarov@linaro.org>
+References: <cover.1727968902.git.jerome.forissier@linaro.org>
+ <f980100c26995da542aff85bf89788e19aceb7b6.1727968902.git.jerome.forissier@linaro.org>
+ <CAFLszTg3rconzzG89SddKT1cSQy0DgHkJsE9hNzbXZLBHaaxxA@mail.gmail.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <CAFLszTg3rconzzG89SddKT1cSQy0DgHkJsE9hNzbXZLBHaaxxA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241009-u-boot-topic-fix-hdmi-v1-1-2479cd90c4ea@linaro.org>
-References: <20241009-u-boot-topic-fix-hdmi-v1-0-2479cd90c4ea@linaro.org>
-In-Reply-To: <20241009-u-boot-topic-fix-hdmi-v1-0-2479cd90c4ea@linaro.org>
-To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>
-Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, 
- Neil Armstrong <neil.armstrong@linaro.org>
-X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4868;
- i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=3+iO8mS/jDInPmOoQBtOKqpVI8i1i3gSENKmC1sDqiE=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBnBkmper93Fd2VNWuWmhCoXzbYrcv3EE/IOKsndnHX
- T1LcOLWJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZwZJqQAKCRB33NvayMhJ0WEND/
- 4rHOR5h5mpGdJQ3UuKnF0ZbFkUK5wa/ZFw7+GN6qdKHdv4p+YSCwtk3r8yuaRZC8n8INA0K/QXGr7D
- anCypah9FUs3ZwPiR8+jb4chpNfyQY0uzQq1Vp+pHOWtzkXJ/ZNEme+kJEaiupZdQUxQt1Uybnk4UG
- U4cU+IV+jtMGPoI3Kup4X+HBi6itIRjoR/B78v2UZ+mJ8Be0mcxv+B9fPNU4f99EerewT5zoVhipjz
- VNVHtWIOBj2aa7Yhrvqo1/Nm29IOeFgqlzfX10ISiV+AAjCP7Rx152gV8+mz+mwp2wfuZr3jJp6vKS
- kRYB3YPegmn1frLYApwniN8jcynyXHMRktesf9A3MglRJYC1WF9uleYvw92z/b6l2bSzS37zOMrk5r
- fz3k2HKG4s5577zDQRboNc6Gj0w6vQz+exQLdzmr6ZQ5p9EqffEbD77SGwmsMcTwWc/VzMiT78Zt2m
- vz42v2lN2M//TAq86Ka4j19hNnndLfHQa1mDKctJNRXbdb3sCO2ml5Rtv9+bfGVDPJrfem5Zj+hTNd
- 8NfkRSTnvaw/Lxhh3Kg5S/X+yOooE3KkFZDySSi9xVJDZDqnYbO/Cq7EufCKQjmDQaXWrN16hsQX3E
- DBkhPRTuQW5L7nedawCImryxYDBkR1VB3OR00NVdK0yY5FO/bw9E3p8IXtGw==
-X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
- fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,168 +103,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Align with g12a driver to handle the CLKID_HDMI, CLKID_HDMI_SEL
-and CLKID_HDMI_DIV clocks since they were added to the upstream
-GXBB/GXL Devicetree on v6.11 with [1]
 
-[1] https://lore.kernel.org/all/20240626152733.1350376-1-jbrunet@baylibre.com/
 
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
----
- drivers/clk/meson/gxbb.c | 50 +++++++++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 49 insertions(+), 1 deletion(-)
+On 10/9/24 03:51, Simon Glass wrote:
+> On Thu, 3 Oct 2024 at 09:23, Jerome Forissier
+> <jerome.forissier@linaro.org> wrote:
+>>
+>> Note: patch posted separately [0].
+>>
+>> [0] http://patchwork.ozlabs.org/project/uboot/patch/20240927142038.879037-1-jerome.forissier@linaro.org/
+>>
+>> Some drivers do not behave properly when free_pkt() is called with a
+>> length of zero. It is an issue I observed when developing the lwIP
+>> series [1] (see "QEMU CI tests for r2dplus_i82557c, r2dplus_rtl8139"
+>> in the change log) and which I fixed incorrectly by not calling
+>> free_pkt() when recv() returns 0. That turned out to be wrong for two
+>> reasons:
+>>
+>> 1. The DM documentation [2] clearly requires it:
+>>
+>>   "The **recv** function polls for availability of a new packet. [...]
+>>    If there is an error [...], return 0 if you require the packet to
+>>    be cleaned up normally, or a negative error code otherwise (cleanup
+>>    not necessary or already done).
+>>
+>>    If **free_pkt** is defined, U-Boot will call it after a received
+>>    packet has been processed [...]. free_pkt() will be called after
+>>    recv(), for the same packet [...]"
+>>
+>> 2. The imx8mp_evk platform will fail with OOM errors if free_pkt() is
+>>    not called after recv() returns 0:
+>>
+>>    u-boot=> tftp 192.168.0.16:50M
+>>    Using ethernet@30be0000 device
+>>    TFTP from server 192.168.0.16; our IP address is 192.168.0.48
+>>    Filename '50M'.
+>>    Load address: 0x40480000
+>>    Loading: #######################fecmxc_recv: error allocating packetp
+>>    fecmxc_recv: error allocating packetp
+>>    fecmxc_recv: error allocating packetp
+>>    ...
+>>
+>> Therefore, make recv() return -EINVAL instead of 0 when no packet is
+>> available and the driver doesn't expect free_pkt() to be called
+>> subsequently.
+> 
+> Do you mean -EAGAIN ? Otherwise, it seems like this comment relates to
+> a different patch.
 
-diff --git a/drivers/clk/meson/gxbb.c b/drivers/clk/meson/gxbb.c
-index 72ad4fd0e85..51f124869c9 100644
---- a/drivers/clk/meson/gxbb.c
-+++ b/drivers/clk/meson/gxbb.c
-@@ -66,6 +66,8 @@
- #define CLKID_VDEC_HEVC_SEL	  154
- #define CLKID_VDEC_HEVC_DIV	  155
- 
-+#define CLKID_XTAL				0x10000000
-+
- #define XTAL_RATE 24000000
- 
- struct meson_clk {
-@@ -192,6 +194,7 @@ static struct meson_gate gates[] = {
- 	MESON_GATE(CLKID_VAPB_0, HHI_VAPBCLK_CNTL, 8),
- 	MESON_GATE(CLKID_VAPB_1, HHI_VAPBCLK_CNTL, 24),
- 	MESON_GATE(CLKID_VAPB, HHI_VAPBCLK_CNTL, 30),
-+	MESON_GATE(CLKID_HDMI, HHI_HDMI_CLK_CNTL, 8),
- };
- 
- static int meson_set_gate_by_id(struct clk *clk, unsigned long id, bool on)
-@@ -267,6 +270,12 @@ static struct parm meson_vapb_1_div_parm = {
- 
- int meson_vapb_1_div_parent = CLKID_VAPB_1_SEL;
- 
-+static struct parm meson_hdmi_div_parm = {
-+	HHI_HDMI_CLK_CNTL, 0, 7,
-+};
-+
-+int meson_hdmi_div_parent = CLKID_HDMI_SEL;
-+
- static ulong meson_div_get_rate(struct clk *clk, unsigned long id)
- {
- 	struct meson_clk *priv = dev_get_priv(clk->dev);
-@@ -292,6 +301,10 @@ static ulong meson_div_get_rate(struct clk *clk, unsigned long id)
- 		parm = &meson_vapb_1_div_parm;
- 		parent = meson_vapb_1_div_parent;
- 		break;
-+	case CLKID_HDMI_DIV:
-+		parm = &meson_hdmi_div_parm;
-+		parent = meson_hdmi_div_parent;
-+		break;
- 	default:
- 		return -ENOENT;
- 	}
-@@ -347,6 +360,10 @@ static ulong meson_div_set_rate(struct clk *clk, unsigned long id, ulong rate,
- 		parm = &meson_vapb_1_div_parm;
- 		parent = meson_vapb_1_div_parent;
- 		break;
-+	case CLKID_HDMI_DIV:
-+		parm = &meson_hdmi_div_parm;
-+		parent = meson_hdmi_div_parent;
-+		break;
- 	default:
- 		return -ENOENT;
- 	}
-@@ -443,6 +460,17 @@ static int meson_vapb_0_1_mux_parents[] = {
- 	CLKID_FCLK_DIV7,
- };
- 
-+static struct parm meson_hdmi_mux_parm = {
-+	HHI_HDMI_CLK_CNTL, 9, 2,
-+};
-+
-+static int meson_hdmi_mux_parents[] = {
-+	CLKID_XTAL,
-+	CLKID_FCLK_DIV4,
-+	CLKID_FCLK_DIV3,
-+	CLKID_FCLK_DIV5,
-+};
-+
- static ulong meson_mux_get_parent(struct clk *clk, unsigned long id)
- {
- 	struct meson_clk *priv = dev_get_priv(clk->dev);
-@@ -475,6 +503,10 @@ static ulong meson_mux_get_parent(struct clk *clk, unsigned long id)
- 		parm = &meson_vapb_1_mux_parm;
- 		parents = meson_vapb_0_1_mux_parents;
- 		break;
-+	case CLKID_HDMI_SEL:
-+		parm = &meson_hdmi_mux_parm;
-+		parents = meson_hdmi_mux_parents;
-+		break;
- 	default:
- 		return -ENOENT;
- 	}
-@@ -532,6 +564,10 @@ static ulong meson_mux_set_parent(struct clk *clk, unsigned long id,
- 		parm = &meson_vapb_1_mux_parm;
- 		parents = meson_vapb_0_1_mux_parents;
- 		break;
-+	case CLKID_HDMI_SEL:
-+		parm = &meson_hdmi_mux_parm;
-+		parents = meson_hdmi_mux_parents;
-+		break;
- 	default:
- 		/* Not a mux */
- 		return -ENOENT;
-@@ -572,7 +608,7 @@ static unsigned long meson_clk81_get_rate(struct clk *clk)
- 	unsigned long parent_rate;
- 	uint reg;
- 	int parents[] = {
--		-1,
-+		CLKID_XTAL,
- 		-1,
- 		CLKID_FCLK_DIV7,
- 		CLKID_MPLL1,
-@@ -727,6 +763,9 @@ static ulong meson_clk_get_rate_by_id(struct clk *clk, unsigned long id)
- 	ulong rate;
- 
- 	switch (id) {
-+	case CLKID_XTAL:
-+		rate = XTAL_RATE;
-+		break;
- 	case CLKID_FIXED_PLL:
- 	case CLKID_SYS_PLL:
- 		rate = meson_pll_get_rate(clk, id);
-@@ -769,10 +808,14 @@ static ulong meson_clk_get_rate_by_id(struct clk *clk, unsigned long id)
- 	case CLKID_VAPB_1:
- 		rate = meson_div_get_rate(clk, CLKID_VAPB_1_DIV);
- 		break;
-+	case CLKID_HDMI:
-+		rate = meson_div_get_rate(clk, CLKID_HDMI_DIV);
-+		break;
- 	case CLKID_VPU_0_DIV:
- 	case CLKID_VPU_1_DIV:
- 	case CLKID_VAPB_0_DIV:
- 	case CLKID_VAPB_1_DIV:
-+	case CLKID_HDMI_DIV:
- 		rate = meson_div_get_rate(clk, id);
- 		break;
- 	case CLKID_VPU:
-@@ -781,6 +824,7 @@ static ulong meson_clk_get_rate_by_id(struct clk *clk, unsigned long id)
- 	case CLKID_VAPB_SEL:
- 	case CLKID_VAPB_0_SEL:
- 	case CLKID_VAPB_1_SEL:
-+	case CLKID_HDMI_SEL:
- 		rate = meson_mux_get_rate(clk, id);
- 		break;
- 	default:
-@@ -851,7 +895,11 @@ static ulong meson_clk_set_rate_by_id(struct clk *clk, unsigned long id,
- 	case CLKID_VPU_1_DIV:
- 	case CLKID_VAPB_0_DIV:
- 	case CLKID_VAPB_1_DIV:
-+	case CLKID_HDMI_DIV:
- 		return meson_div_set_rate(clk, id, rate, current_rate);
-+	case CLKID_HDMI:
-+		return meson_clk_set_rate_by_id(clk, CLKID_HDMI_DIV,
-+						rate, current_rate);
- 	default:
- 		return -ENOENT;
- 	}
+Yes, good catch. I will fix the description and resend patch [1] as v2.
 
+[1] https://patchwork.ozlabs.org/project/uboot/patch/20240927142038.879037-1-jerome.forissier@linaro.org/
+
+> 
+>>
+>> [1] https://lists.denx.de/pipermail/u-boot/2024-August/562861.html
+>> [2] doc/develop/driver-model/ethernet.rst
+>>
+>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+>> ---
+>>  drivers/net/eepro100.c | 2 +-
+>>  drivers/net/rtl8139.c  | 2 +-
+>>  2 files changed, 2 insertions(+), 2 deletions(-)
+>>
+> 
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Thanks,
 -- 
-2.34.1
+Jerome
 
+> 
+>> diff --git a/drivers/net/eepro100.c b/drivers/net/eepro100.c
+>> index d18a8d577ca..f64dbb7d6a1 100644
+>> --- a/drivers/net/eepro100.c
+>> +++ b/drivers/net/eepro100.c
+>> @@ -678,7 +678,7 @@ static int eepro100_recv_common(struct eepro100_priv *priv, uchar **packetp)
+>>         status = le16_to_cpu(desc->status);
+>>
+>>         if (!(status & RFD_STATUS_C))
+>> -               return 0;
+>> +               return -EAGAIN;
+>>
+>>         /* Valid frame status. */
+>>         if (status & RFD_STATUS_OK) {
+>> diff --git a/drivers/net/rtl8139.c b/drivers/net/rtl8139.c
+>> index 2e0afad089f..5f4b1e2d3a0 100644
+>> --- a/drivers/net/rtl8139.c
+>> +++ b/drivers/net/rtl8139.c
+>> @@ -433,7 +433,7 @@ static int rtl8139_recv_common(struct rtl8139_priv *priv, unsigned char *rxdata,
+>>         int length = 0;
+>>
+>>         if (inb(priv->ioaddr + RTL_REG_CHIPCMD) & RTL_REG_CHIPCMD_RXBUFEMPTY)
+>> -               return 0;
+>> +               return -EAGAIN;
+>>
+>>         priv->rxstatus = inw(priv->ioaddr + RTL_REG_INTRSTATUS);
+>>         /* See below for the rest of the interrupt acknowledges.  */
+>> --
+>> 2.40.1
+>>
