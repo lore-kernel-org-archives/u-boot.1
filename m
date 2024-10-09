@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1A7FCF042F
-	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 01:59:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC993CF042E
+	for <u-boot@archiver.kernel.org>; Wed,  9 Oct 2024 01:59:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18E9089141;
+	by phobos.denx.de (Postfix) with ESMTP id 73CE189145;
 	Wed,  9 Oct 2024 03:57:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QWw3HjbZ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dA5r25EH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 203D88913B; Wed,  9 Oct 2024 03:57:34 +0200 (CEST)
-Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
- [IPv6:2607:f8b0:4864:20::f33])
+ id B57F38913B; Wed,  9 Oct 2024 03:57:34 +0200 (CEST)
+Received: from mail-qt1-x834.google.com (mail-qt1-x834.google.com
+ [IPv6:2607:f8b0:4864:20::834])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E90389148
- for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 03:57:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9ABAC8914E
+ for <u-boot@lists.denx.de>; Wed,  9 Oct 2024 03:57:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf33.google.com with SMTP id
- 6a1803df08f44-6cb2aac40faso3266506d6.1
- for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 18:57:29 -0700 (PDT)
+Received: by mail-qt1-x834.google.com with SMTP id
+ d75a77b69052e-45aeed46f5eso29986131cf.3
+ for <u-boot@lists.denx.de>; Tue, 08 Oct 2024 18:57:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728439048; x=1729043848; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1728439049; x=1729043849; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=NNPZS3qeSE+1XE0Qe3KcTlsJLPX8S+uk6X0bbeGPdRU=;
- b=QWw3HjbZKzxfQEK/SwTxjLQtu9cVeDHITnds4UNH5yGxG/ynBydwneIcExZ945Vp/o
- yAXo054l/hfHUVmrTdwzFzillVqKrucM0APT5/4mmfPkbKW6TOcJ3qV7mJMaakQx/2X6
- 8y1SvipfSIp7fsOZ29tRfoKXzLLKpX0R1z7gk=
+ bh=lMRRBbnui9V0AF2ORfPwlOsOLmaANhx0mzLtrFg/ibM=;
+ b=dA5r25EHkFHLwzA8KheDPVlwaoxTdXFqgwB8EPbt60hlNakE7wwJZPWHc8vZ+dLR9m
+ BMtglWYRG/vSt1ziA/dTDJsyFqj4gBYDHpzkJtEBq/ZpokqCkGWl4W6tuc/7dLpooVZs
+ hTGKIOFvt7rxz6ooxDBxtujlU6GdU0dU1xaBA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728439048; x=1729043848;
+ d=1e100.net; s=20230601; t=1728439049; x=1729043849;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=NNPZS3qeSE+1XE0Qe3KcTlsJLPX8S+uk6X0bbeGPdRU=;
- b=KOPxwKZ8zFtxkFYjv5nS0UF7+Fpj7YSITSPuMvDOPggV/4RAF2bKkLe8l/lnejK/YX
- 6eA8G+1G3GxhloaX/r1Whp7DSVPSKimmCcGfO+HMKxOAF4tuFskbXTrKl7qFa/Q3mBFl
- JR3x8qpeQkeUoYnwm+/5mQ05u3cWnHjmFM19UFeGRHsXQcEMVI5B4qHuWUAd3t4v9WX8
- 87+iEChhHcVguNGcuhHj1GJGeso2d0l5cA3r45txPX/ZXydmTRKvUO1LjGpP4swJm3JI
- tqScJK+iScD2IH8dDKeyaUf9eKhQ149kEmI8LNew9zuKMXXo3bwxonIrhsEmv3OvJkBM
- 7xUw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV62F3s1Ii5evrSQRU/4YQ2aJsi5UJZ6/aho9Ncg3reSYqmP+fJuixJecJiDV4R2eRz6ltumY8=@lists.denx.de
-X-Gm-Message-State: AOJu0YxsRbjdxdE2/+oyhKQ7yeYnF4KmumVM7KkTgIFRKR6haJ0eU/Bk
- sH0NWPRdu41tSDP2EEXwimzHVpe+G12dGlvUvAIike/w+Eahut3nBc0wRR2EDq4yX/JjYNdEndg
- Yk85SGvQDGstpx8h2om/EAqrbtQVPCgoVZUYY
-X-Google-Smtp-Source: AGHT+IHAGjKiMPvWyE2C6xhlitS9G6uT54VPI8FH8J7/zvVd+oSzKz4J2ul32GIDYkScdiF2KShcHni7D0nQ7RtSlLM=
-X-Received: by 2002:a05:6214:2587:b0:6c3:6344:d4e1 with SMTP id
- 6a1803df08f44-6cbba982f95mr73533656d6.20.1728439048024; Tue, 08 Oct 2024
- 18:57:28 -0700 (PDT)
+ bh=lMRRBbnui9V0AF2ORfPwlOsOLmaANhx0mzLtrFg/ibM=;
+ b=bK8+EXzW+7vIOHCU/dfTUZM7gBCd8q/45HH/jVObkReKiEsYyQsEfaED4gVU3siRNc
+ UWKWpXB9nLT1tfWrw5BABqQRRG5xdfuhUXHGU7ieoB/NrueIFwx6jVrwOznKncikD/X2
+ lgOBmnknp61oQwQle7eirI3UqRhi1QxejEyhXNu1Q6IqgvvJ+KKD2hq4gQncictsMUnm
+ ZLfVYbmOgmgRo/i04ykAuPAM5RbztSYciKW5yShQb1pQTs3ODA5Lj5g+a11IzMDWGgfr
+ ZMocuTQ0VBvXrQao6NSqT4IBRnITtNMVMTwctsbz4yOnjURd8JPe6lcZcMjF9A03pM6V
+ hrPw==
+X-Gm-Message-State: AOJu0YxrGooldpXr8DD9WF0Gi4Cn+Ug1kn5xwCMSAYpmEZdfagbJ/7/z
+ +257wlHa9cC6/9AbBjdUySOHTc8A9M9iT0LLEjl2e74M+jlaYgoUtHQa+4mskyXGoh/3hXW5BJN
+ tk1hItjy8wg+B1i8A2LMzg+dwLwGB4zPVeP/U
+X-Google-Smtp-Source: AGHT+IHcVR2qblVosMCFxWtj2wre9i++0U6v6vmScF3j5BRQ8hRAcCaj+lr3D+VM9W925v0QguLojciCa4nn2i92dmg=
+X-Received: by 2002:a05:622a:1c18:b0:458:3be2:d2d6 with SMTP id
+ d75a77b69052e-45fb0e4f093mr16493231cf.47.1728439049422; Tue, 08 Oct 2024
+ 18:57:29 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240930161006.41052-1-brian.ruley@gehealthcare.com>
- <20241001135810.96-1-brian.ruley@gehealthcare.com>
- <20241001135810.96-2-brian.ruley@gehealthcare.com>
-In-Reply-To: <20241001135810.96-2-brian.ruley@gehealthcare.com>
+References: <20241008094646.4052174-1-jerome.forissier@linaro.org>
+In-Reply-To: <20241008094646.4052174-1-jerome.forissier@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 8 Oct 2024 19:57:17 -0600
-Message-ID: <CAFLszTgppFmNC2NL+fcE9Zg530oA1Hs3VDpfUK3yOd0swp3UDg@mail.gmail.com>
-Subject: Re: [PATCH v4 2/2] binman: add fast authentication method for i.MX8M
- signing
-To: Brian Ruley <brian.ruley@gehealthcare.com>
-Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>,
- ian.ray@gehealthcare.com, Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
+Date: Tue, 8 Oct 2024 19:57:18 -0600
+Message-ID: <CAFLszTiDKovJh7CbEzuHDbp2e9R+ePJsZJuYiRbyzeQSdX8sUw@mail.gmail.com>
+Subject: Re: [PATCH] net: wget: check strict_strtoul() return value
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Yasuharu Shibata <yasuharu.shibata@gmail.com>, Marek Vasut <marex@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,29 +86,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 1 Oct 2024 at 07:58, Brian Ruley <brian.ruley@gehealthcare.com> wrote:
+On Tue, 8 Oct 2024 at 03:47, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
 >
-> Using the PKI tree with SRKs as intermediate CA isn't necessary or even
-> desirable in some situations (boot time, for example). Add the possibility
-> to use the "fast authentication" method where the image and CSF are both
-> signed using the SRK [1, p.63].
+> Check the return value of strict_strtoul() when processing the
+> Content-Length header as recommended by Coverity [1].
 >
-> [1] https://community.nxp.com/pwmxy87654/attachments/pwmxy87654/imx-processors/202591/1/CST_UG.pdf
+> [1] https://lists.denx.de/pipermail/u-boot/2024-October/567050.html
 >
-> Signed-off-by: Brian Ruley <brian.ruley@gehealthcare.com>
-> Cc: Marek Vasut <marex@denx.de>
+> Reported-by: Coverity (CID 510464)
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 > ---
-> Changes for v2:
-> - fixed default key length (s/2048/4096) for srk-crt node
-> Changes for v3:
-> - code formatting
-> Changes for v4:
-> - fix spelling in commit message
-> - code formatting
+>  net/wget.c | 7 ++++++-
+>  1 file changed, 6 insertions(+), 1 deletion(-)
 >
->  tools/binman/etype/nxp_imx8mcst.py | 34 +++++++++++++++++++++++-------
->  1 file changed, 26 insertions(+), 8 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
-(since I am seeing progress on testing, thank you)
+
+> diff --git a/net/wget.c b/net/wget.c
+> index b4251e0f293..a3821495e03 100644
+> --- a/net/wget.c
+> +++ b/net/wget.c
+> @@ -256,7 +256,12 @@ static void wget_connected(uchar *pkt, unsigned int tcp_seq_num,
+>                                 content_length = -1;
+>                         } else {
+>                                 pos += sizeof(content_len) + 2;
+> -                               strict_strtoul(pos, 10, &content_length);
+> +                               if (strict_strtoul(pos, 10, &content_length) < 0) {
+> +                                       wget_loop_state = NETLOOP_FAIL;
+> +                                       wget_fail("wget: bad Content-Length\n", tcp_seq_num, tcp_ack_num, action);
+> +                                       net_set_state(NETLOOP_FAIL);
+> +                                       return;
+> +                               }
+>                                 debug_cond(DEBUG_WGET,
+>                                            "wget: Connected Len %lu\n",
+>                                            content_length);
+> --
+> 2.40.1
+>
