@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00284CEDDB1
-	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 01:52:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CBB2CEDDB1
+	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 01:52:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F7B888FB5;
-	Thu, 10 Oct 2024 03:52:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1B7EA88E52;
+	Thu, 10 Oct 2024 03:52:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="de4nhjYF";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BQ/jmrjS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5FF3A88F48; Thu, 10 Oct 2024 03:51:58 +0200 (CEST)
-Received: from mail-il1-x135.google.com (mail-il1-x135.google.com
- [IPv6:2607:f8b0:4864:20::135])
+ id 0CC7588FA5; Thu, 10 Oct 2024 03:52:00 +0200 (CEST)
+Received: from mail-io1-xd43.google.com (mail-io1-xd43.google.com
+ [IPv6:2607:f8b0:4864:20::d43])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2035388DD4
- for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 03:51:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2DDB388F2F
+ for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 03:51:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x135.google.com with SMTP id
- e9e14a558f8ab-3a3938e73d3so2215315ab.1
- for <u-boot@lists.denx.de>; Wed, 09 Oct 2024 18:51:56 -0700 (PDT)
+Received: by mail-io1-xd43.google.com with SMTP id
+ ca18e2360f4ac-82ce603d8daso15569139f.0
+ for <u-boot@lists.denx.de>; Wed, 09 Oct 2024 18:51:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728525115; x=1729129915; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1728525116; x=1729129916; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=X2J8sBMzjLz+fBQ2gejZ11xpYqgv0f98X7vavTrJ48s=;
- b=de4nhjYF4MJmCqAEJqq4NnogzNW+YA7/LoUSeyBjZbkfZQK7Td3LYxjJ5dBL1s8CL3
- OG1TpOFO23H/wZZBqXagz4fbp+r1gO/4aYFTbFucDXmiOxyOxOgmNvz3qqeq+vB7ShGE
- FEC4vh/A3H6q6i2OKo07N6S1QKpkNWIcYwhJ8=
+ bh=hN3oZRVXBSUfc3ijv79WBIcrS4HB9uBgXbrWTo5s0xk=;
+ b=BQ/jmrjSFZbi+Kv80gxOsPRog6h3PeYkqDV1VV+LD6w2pDFngYP/yEWGAa7Tvpboke
+ 1O12xHFz4VFYAP99P8p5alYOmfdN1Pgd85xVzPcz0n/hQhQ7HrV2YPWedrhGvMnm4Joe
+ wx6KjX+bEAjZJFnSe2cvkfYRVg4t2JL5tnnFU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728525115; x=1729129915;
+ d=1e100.net; s=20230601; t=1728525116; x=1729129916;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=X2J8sBMzjLz+fBQ2gejZ11xpYqgv0f98X7vavTrJ48s=;
- b=Bj0dVXSynS9YUw151A3qnxb3MtyvvkYhWUQfqifvHlK9cZeeiw7Yczb67eRqg2HT9p
- 8z+YncsdXQA/JihGz/KH1u8+G40ZCNZExu/GNJz6wqpVnCI96WOt9VFTP6nztFd7tUrP
- ytSTxgf0FxbJMO5/56QawZ0EkQNDZ5t5/JCXsEce9nz8Tsc7Ll3knysSUBFN0ZLpBmYH
- g8gcktffUNytn2r1IGb7MDtg+q88iaf56sQntgGOj+lLkCkSg9uas0nlO9OYqMBDb/ei
- RM7DXTUqI+1kXHI9MyBBN1ZQoUWYmqtkjmONm7hGF/zvAOk7KRiIH0qS3LPKZVwWaf7k
- tuxg==
-X-Gm-Message-State: AOJu0YwQ3GvZuPGZiQ8uHAYISt8blCCO6Bhr5j0mGSJI3xDmWyW8dYFH
- oyYqed21wz1tvVTO1irB4OWAf7ncznQWSRQcVq+Nfjr11S0BWlewBO4MaKFXLTexMq89spwi6YH
- z0A==
-X-Google-Smtp-Source: AGHT+IHOARfHqxoI+MhfJ+CU5eUPqasdGJf3Nf2jVWzFbuOXgo547c2opKd8BQLSyKEO+LRG08lw/w==
-X-Received: by 2002:a05:6e02:1609:b0:3a0:92b1:ec4c with SMTP id
- e9e14a558f8ab-3a397d2c52amr48811965ab.23.1728525114748; 
- Wed, 09 Oct 2024 18:51:54 -0700 (PDT)
+ bh=hN3oZRVXBSUfc3ijv79WBIcrS4HB9uBgXbrWTo5s0xk=;
+ b=paQa3nOP3wNkz4xHzBvitpZtd0nkQJWcpcWA6UaEfyGYMk/D84s+Awnq9t2sSWUv2F
+ 8G3eeBqr6aLHMAhJyPf7AsTDDO4otXLa8EAlmT6NRAjMuqYQ1npKKbl06OunIbUy8fZc
+ NWaF8Kv8OP7HeGqFmmR/orRf1Cj6aqygmTHGaEbYZNUfXt+rAfLHKJBod54C/Djd6Zmt
+ TaWbsUMoT0se3XiU+1c2GO/u3/JzZwW/T3k5MZT1sIeVyVpcECwtIkDBfcF7NwoOsCUN
+ hZNwAg3PfsKe8yfxdtCFUbg7ScHe7FE7mYy0OuwZ5EqXcf9LT3E1lfwn632Mb2ik2Oa9
+ dP/w==
+X-Gm-Message-State: AOJu0YzC6JfLVQ7MgRqQ6fKqKofEouSF3On9QCyCdZth/zPX+gR76r+O
+ YESZ8qUjJnZMbNcGFyh6E1r7ZcobhfpmGHmof5WQW3S9Z/FMCcCMlVOzFpWi6y7rR5A4M/JrpYI
+ 8iQN3
+X-Google-Smtp-Source: AGHT+IEv2eTKs6Qj6H/3A29+9HSbvz/2pdiTs6o+ZIgdEUv5SfZHtNUfztmOqqUez3YT/9Na8G2n/Q==
+X-Received: by 2002:a05:6602:3fc4:b0:82d:821:969d with SMTP id
+ ca18e2360f4ac-8353d4bb89dmr442127939f.9.1728525115623; 
+ Wed, 09 Oct 2024 18:51:55 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4dbadaa947fsm61870173.126.2024.10.09.18.51.54
+ 8926c6da1cb9f-4dbadaa947fsm61870173.126.2024.10.09.18.51.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Oct 2024 18:51:54 -0700 (PDT)
+ Wed, 09 Oct 2024 18:51:55 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v7 04/11] test: Introduce the concept of a role
-Date: Wed,  9 Oct 2024 19:51:38 -0600
-Message-Id: <20241010015145.1977999-5-sjg@chromium.org>
+Subject: [PATCH v7 05/11] test: Introduce lab mode
+Date: Wed,  9 Oct 2024 19:51:39 -0600
+Message-Id: <20241010015145.1977999-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241010015145.1977999-1-sjg@chromium.org>
 References: <20241010015145.1977999-1-sjg@chromium.org>
@@ -89,100 +89,147 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In Labgrid there is the concept of a 'role', which is similar to the
-U-Boot board ID in U-Boot's pytest subsystem.
+There is quite a bit of code in pytest to try to start up U-Boot on a
+board, with timeouts, expects, etc.
 
-The role indicates both the target and information about the U-Boot
-build to use. It can also provide any amount of other configuration.
-The information is obtained using the 'labgrid-client query' operation.
+This is tedious to maintain and is peripheral to the test system's
+purpose. It seems better to put this logic in the lab itself, where is
+can provide such support.
 
-Make use of this in tests, so that only the role is required in gitlab
-and other situations. The board type and other things can be queried
-as needed.
+With Labgrid we can use the UbootStrategy class to get the board into a
+useful state, however it needs to do it. Then it can report to pytest
+by writing a suitable string along with the U-Boot version it detected.
 
-Use a new 'u-boot-test-getrole' script to obtain the requested
-information.
-
-With this it is possible to run lab tests in gitlab with just a single
-'ROLE' variable for each board.
+Add support for detecting 'lab mode' and simply assume that all is well
+in that case. Collect the version string when Labgrid says it is ready.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v5)
+(no changes since v1)
 
-Changes in v5:
-- Add a few more comments
-- Comment out the debugging, which might be useful later
+ test/py/u_boot_console_base.py | 68 ++++++++++++++++++++++++++--------
+ 1 file changed, 53 insertions(+), 15 deletions(-)
 
- test/py/conftest.py | 38 ++++++++++++++++++++++++++++++++++----
- 1 file changed, 34 insertions(+), 4 deletions(-)
-
-diff --git a/test/py/conftest.py b/test/py/conftest.py
-index 7a52b966154..4a45e080df9 100644
---- a/test/py/conftest.py
-+++ b/test/py/conftest.py
-@@ -23,6 +23,7 @@ from pathlib import Path
- import pytest
- import re
- from _pytest.runner import runtestprotocol
-+import subprocess
- import sys
- from u_boot_spawn import BootFail, Timeout, Unexpected, handle_exception
+diff --git a/test/py/u_boot_console_base.py b/test/py/u_boot_console_base.py
+index 311e649d55b..573d76dd832 100644
+--- a/test/py/u_boot_console_base.py
++++ b/test/py/u_boot_console_base.py
+@@ -23,13 +23,21 @@ pattern_stop_autoboot_prompt = re.compile('Hit any key to stop autoboot: ')
+ pattern_unknown_command = re.compile('Unknown command \'.*\' - try \'help\'')
+ pattern_error_notification = re.compile('## Error: ')
+ pattern_error_please_reset = re.compile('### ERROR ### Please RESET the board ###')
+-pattern_ready_prompt = re.compile('U-Boot is ready')
++pattern_ready_prompt = re.compile('{lab ready in (.*)s: (.*)}')
++pattern_lab_mode = re.compile('{lab mode.*}')
  
-@@ -80,6 +81,7 @@ def pytest_addoption(parser):
-     parser.addoption('--gdbserver', default=None,
-         help='Run sandbox under gdbserver. The argument is the channel '+
-         'over which gdbserver should communicate, e.g. localhost:1234')
-+    parser.addoption('--role', help='U-Boot board role (for Labgrid)')
-     parser.addoption('--use-running-system', default=False, action='store_true',
-         help="Assume that U-Boot is ready and don't wait for a prompt")
+ PAT_ID = 0
+ PAT_RE = 1
  
-@@ -131,12 +133,40 @@ def get_details(config):
-             str: Build directory
-             str: Source directory
-     """
--    board_type = config.getoption('board_type')
--    board_identity = config.getoption('board_identity')
-+    role = config.getoption('role')
+ # Timeout before expecting the console to be ready (in milliseconds)
+-TIMEOUT_MS = 30000
++TIMEOUT_MS = 30000                  # Standard timeout
 +
-+    # Get a few provided parameters
-     build_dir = config.getoption('build_dir')
-+    if role:
-+        # When using a role, build_dir and build_dir_extra are normally not set,
-+        # since they are picked up from Labgrid via the u-boot-test-getrole
-+        # script
-+        board_identity = role
-+        cmd = ['u-boot-test-getrole', role, '--configure']
-+        env = os.environ.copy()
-+        if build_dir:
-+            env['U_BOOT_BUILD_DIR'] = build_dir
-+        proc = subprocess.run(cmd, capture_output=True, encoding='utf-8',
-+                              env=env)
-+        if proc.returncode:
-+            raise ValueError(proc.stderr)
-+        # For debugging
-+        # print('conftest: lab:', proc.stdout)
-+        vals = {}
-+        for line in proc.stdout.splitlines():
-+            item, value = line.split(' ', maxsplit=1)
-+            k = item.split(':')[-1]
-+            vals[k] = value
-+        # For debugging
-+        # print('conftest: lab info:', vals)
-+        board_type, default_build_dir, source_dir = (vals['board'],
-+            vals['build_dir'], vals['source_dir'])
-+    else:
-+        board_type = config.getoption('board_type')
-+        board_identity = config.getoption('board_identity')
++# Timeout for board preparation in lab mode. This needs to be enough to build
++# U-Boot, write it to the board and then boot the board. Since this process is
++# under the control of another program (e.g. Labgrid), it will failure sooner
++# if something goes way. So use a very long timeout here to cover all possible
++# situations.
++TIMEOUT_PREPARE_MS = 3 * 60 * 1000
  
--    source_dir = os.path.dirname(os.path.dirname(TEST_PY_DIR))
--    default_build_dir = source_dir + '/build-' + board_type
-+        source_dir = os.path.dirname(os.path.dirname(TEST_PY_DIR))
-+        default_build_dir = source_dir + '/build-' + board_type
-     if not build_dir:
-         build_dir = default_build_dir
+ bad_pattern_defs = (
+     ('spl_signon', pattern_u_boot_spl_signon),
+@@ -143,6 +151,7 @@ class ConsoleBase(object):
  
+         self.at_prompt = False
+         self.at_prompt_logevt = None
++        self.lab_mode = False
+ 
+     def get_spawn(self):
+         # This is not called, ssubclass must define this.
+@@ -176,40 +185,69 @@ class ConsoleBase(object):
+             self.p.close()
+         self.logstream.close()
+ 
++    def set_lab_mode(self):
++        """Select lab mode
++
++        This tells us that we will get a 'lab ready' message when the board is
++        ready for use. We don't need to look for signon messages.
++        """
++        self.log.info(f'test.py: Lab mode is active')
++        self.p.timeout = TIMEOUT_PREPARE_MS
++        self.lab_mode = True
++
+     def wait_for_boot_prompt(self, loop_num = 1):
+         """Wait for the boot up until command prompt. This is for internal use only.
+         """
+         try:
++            self.log.info('Waiting for U-Boot to be ready')
+             bcfg = self.config.buildconfig
+             config_spl_serial = bcfg.get('config_spl_serial', 'n') == 'y'
+             env_spl_skipped = self.config.env.get('env__spl_skipped', False)
+             env_spl_banner_times = self.config.env.get('env__spl_banner_times', 1)
+ 
+-            while loop_num > 0:
++            while not self.lab_mode and loop_num > 0:
+                 loop_num -= 1
+                 while config_spl_serial and not env_spl_skipped and env_spl_banner_times > 0:
+-                    m = self.p.expect([pattern_u_boot_spl_signon] +
+-                                      self.bad_patterns)
+-                    if m != 0:
++                    m = self.p.expect([pattern_u_boot_spl_signon,
++                                       pattern_lab_mode] + self.bad_patterns)
++                    if m == 1:
++                        self.set_lab_mode()
++                        break
++                    elif m != 0:
+                         raise BootFail('Bad pattern found on SPL console: ' +
+-                                        self.bad_pattern_ids[m - 1])
++                                       self.bad_pattern_ids[m - 1])
+                     env_spl_banner_times -= 1
+ 
+-                m = self.p.expect([pattern_u_boot_main_signon] + self.bad_patterns)
+-                if m != 0:
+-                    raise BootFail('Bad pattern found on console: ' +
+-                                    self.bad_pattern_ids[m - 1])
+-            self.u_boot_version_string = self.p.after
++                if not self.lab_mode:
++                    m = self.p.expect([pattern_u_boot_main_signon,
++                                       pattern_lab_mode] + self.bad_patterns)
++                    if m == 1:
++                        self.set_lab_mode()
++                    elif m != 0:
++                        raise BootFail('Bad pattern found on console: ' +
++                                       self.bad_pattern_ids[m - 1])
++            if not self.lab_mode:
++                self.u_boot_version_string = self.p.after
+             while True:
+                 m = self.p.expect([self.prompt_compiled, pattern_ready_prompt,
+                     pattern_stop_autoboot_prompt] + self.bad_patterns)
+-                if m == 0 or m == 1:
++                if m == 0:
++                    self.log.info(f'Found ready prompt {m}')
++                    break
++                elif m == 1:
++                    m = pattern_ready_prompt.search(self.p.after)
++                    self.u_boot_version_string = m.group(2)
++                    self.log.info(f'Lab: Board is ready')
++                    self.p.timeout = TIMEOUT_MS
+                     break
+                 if m == 2:
++                    self.log.info(f'Found autoboot prompt {m}')
+                     self.p.send(' ')
+                     continue
+-                raise BootFail('Bad pattern found on console: ' +
+-                                self.bad_pattern_ids[m - 3])
++                if not self.lab_mode:
++                    raise BootFail('Missing prompt / ready message on console: ' +
++                                   self.bad_pattern_ids[m - 3])
++            self.log.info(f'U-Boot is ready')
+ 
+         finally:
+             self.log.timestamp()
 -- 
 2.34.1
 
