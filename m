@@ -4,91 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A12A4CF11E1
-	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 12:24:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3771ACF11E9
+	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 12:50:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 159C788E15;
-	Thu, 10 Oct 2024 14:24:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 6A0208900E;
+	Thu, 10 Oct 2024 14:50:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="uZ6IYqSD";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fcgJmOXI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B459B88F2C; Thu, 10 Oct 2024 14:24:09 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0B388891D2; Thu, 10 Oct 2024 08:48:20 +0200 (CEST)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B41FB88C98
- for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 14:24:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 75F1C88FE4
+ for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 08:48:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 54EE93F277
- for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 12:23:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1728563035;
- bh=t/qiFgiJrlq3b5IzBwkExHqYXJmXiZ8GJMgbr6c5W7w=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=uZ6IYqSDC7YDZq+91cUCCveYCR0WlsEh+KOZ3jKndsja2YbzT2gN5Hip6iglkexKK
- xSdKN3SlZ+9MK2L5p47k7v/8MVRRjI0nfhDuXgjKZDB/c2fVKm2BKZZJgMnw/F6a65
- /U5pqmRwksw8O9YLXq/uJC2GiATd8dhgQuwfldzmHsQvX87DQqdZLqhkBEtTVBFh8j
- KqHodke0ZduVLGTMBje9Xi5ixnDoIuUlKhmYR6gNqsm60Iw8tbhoSA2dWURVJL8tO4
- 1V1vfPjXEAXZT1c6MBnxSFTTC+fOmhn4Nycs0RrPBN8GnXjs1L9lMXakFiyanLEvEd
- CfZWSi61/fr7A==
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-37d5116f0a6so103656f8f.0
- for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 05:23:55 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-208cf673b8dso5646305ad.3
+ for <u-boot@lists.denx.de>; Wed, 09 Oct 2024 23:48:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1728542896; x=1729147696; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=aIxyhojGcpWhUuirLy7IjT+VizkSjmARx2LyEK4jLsI=;
+ b=fcgJmOXIAtIJMjSFCitIjuttkHKpKGrR9KFdOx7FoT7SVRiF7aldfL4fAwFnEBTRDz
+ HOu5/JH2OHw43MEch8nvu8TXfwDEB+2Vbi9AlYGgShZ/aqIJVKlc7+xQH2g5kJwRMN4D
+ 9PlLdmSPduv86+kfHmbv43MijGo31/VMEn9DtZuyuxOMgFwjwONnMDVxbcg0/lYMnhkJ
+ PjuizEz6+n8TcaKboRZ480jY8duxXYVg/Khlb/7QPJdZGbkaous/O11t19qXY5i/K57D
+ pIHr7uMUlnA7bGCFkliDT/oXKNveWsvot/NGAhb8rix/dB5aft/7trQk42iWjirfD+qS
+ pfWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728563035; x=1729167835;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=t/qiFgiJrlq3b5IzBwkExHqYXJmXiZ8GJMgbr6c5W7w=;
- b=gxbfQszJA2Pp2GTCarNz22xtMoNey4KHoazUBohxbheBHLVBtg3pO5EMljmuP9BAuv
- qj/BH3sOWrz+ClswqsK4vAQyat551MTfB8aCvx+DKLYueEm4jzDMQ41JHlHS3cNkjjiM
- 3QzNjRFXTpTqfRyPuDmb7NSmitD6Oa3RjH9Q+OIZ3N6sZzS0BxHevVmQPB31ueDzkL5t
- Z3mN4XDWR0C6LhHNWbba7r3es0fOQ5FPcYpuaozOAt6BQBtzrKfpovyWAjYDN6Wqyqgf
- Bn0ny17TOx0Qlg7fv13L6V1jW+FNL2I24WTAVoTtNJonGuvvgjRN1aPaDa7X63KamV58
- LRuw==
-X-Gm-Message-State: AOJu0Yw0U5ZKCtDk/b/uGHSXsBUhuJoDFuv+ZdvpudSly4ehx0XUmY8f
- IoRflKwVAE+MgGy1M4cL9cSOdwfwZJU63JNRZzhJjRTu0dqr7pr7YIA8zrG14wD1sKBlH3vpG8r
- SageJViRgwfg8E5DeL/ndR1LEPdc3tUiYEimD3+T8u9jWdUFfgwzjm6YXD+3P2VCdTVknTsSw4p
- dJ+w==
-X-Received: by 2002:a05:6000:d83:b0:37d:4ebe:1646 with SMTP id
- ffacd0b85a97d-37d4ebe16dbmr825932f8f.48.1728563034842; 
- Thu, 10 Oct 2024 05:23:54 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHgncPaQQQF2CDHeHWeCEvGDVNfNlHHN+Xio6lBaHI5HYX00HGe1pn7bR2pr4hn7Ui16bsp9g==
-X-Received: by 2002:a05:6000:d83:b0:37d:4ebe:1646 with SMTP id
- ffacd0b85a97d-37d4ebe16dbmr825922f8f.48.1728563034463; 
- Thu, 10 Oct 2024 05:23:54 -0700 (PDT)
-Received: from ?IPV6:2a02:3035:6e0:3cab:665b:d600:7ca:1c20?
- ([2a02:3035:6e0:3cab:665b:d600:7ca:1c20])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d4b6cfb43sm1410662f8f.56.2024.10.10.05.23.53
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 10 Oct 2024 05:23:54 -0700 (PDT)
-Message-ID: <8669aceb-dcc2-467f-98bf-816ab6a165a9@canonical.com>
-Date: Thu, 10 Oct 2024 14:23:52 +0200
+ d=1e100.net; s=20230601; t=1728542896; x=1729147696;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=aIxyhojGcpWhUuirLy7IjT+VizkSjmARx2LyEK4jLsI=;
+ b=uSF89PDMsdEIBrvyvQqsHG79FLdRXRSXQCdXWY/PrXcn9kXqOXgfLug1A6qdPeDI2L
+ KWmCBbupYHh3gR7DTJSj9M5GjrgozKs0BiZLm+sre0tDspk7Mywc3mJODa3raq2Noc5b
+ /HT2AGEayA1tCdDD/KVtneLyDitTz6Xfkk8+lhNx/gL3qVEMLXUzuVjDwZcyDLnNE9U6
+ jZMomScAVXMGFWnfmEV1yGxgEGflL7AOSSFX/Tnxg8kxZs2DTIUxzsfy1sxBKLJQRrPu
+ 5U2Nql4XzUzYIqthbf259cu/lGyDz3drRXo1Es2vhAwNXdZ0b6rbL/i0yeL+q4LnYpyL
+ eroA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWQncP72JBXdh77yrndNUlwkz8PnYFHQwt/Qs+PzopKSmkHSmWCtT+n6b9IEgxQzWRZKHCt00I=@lists.denx.de
+X-Gm-Message-State: AOJu0YyqcNMmZPXFajjXwGndU73AvI5Gr9m8Bxv5sUErZuCk8VN5Oztj
+ 2A/tswLd6qx/1ANW5qiwaF7fjgSw16zpmjXnTTyQ+2BLydD6Azg5Ko7Q1h2D/9udEx2iSbRQwxz
+ zkUeXf2zmokDf9A/HAN1t/U/zwBqzGuTztecbuf66GGkOZiyp3eY=
+X-Google-Smtp-Source: AGHT+IG4DpPTyZYweRmlzZcDKceTnuJIvygBq45ZhzvcazxahrOXyVAVMV/7wIx40cnFoTwEaMURyZaJLvk63lIXyXM=
+X-Received: by 2002:a17:902:f685:b0:202:1bb6:1897 with SMTP id
+ d9443c01a7336-20c6370fed3mr90184825ad.14.1728542895822; Wed, 09 Oct 2024
+ 23:48:15 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/1] ata: sata_rescan must scan for block devices
-To: Arthur Heymans <arthurphilippeheymans@gmail.com>
-Cc: u-boot@lists.denx.de
-References: <CAC8Nb8Q0ACFhUxvmFM5YRSE=b9XEQQH--RQ1iZdva4LNzXDBRQ@mail.gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CAC8Nb8Q0ACFhUxvmFM5YRSE=b9XEQQH--RQ1iZdva4LNzXDBRQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20241003215112.3103601-1-raymond.mao@linaro.org>
+ <20241003215112.3103601-4-raymond.mao@linaro.org>
+ <20241009143824.GJ14210@bill-the-cat>
+ <CAEfUkUJXa55pJP-DypJy-FGhpkQiSFAS3QB+6s5+55PWmwbZ7Q@mail.gmail.com>
+ <CAC_iWj+dBpgCM-WaJBgRyXmn1jWO--tGRTXjAT0hJL5G0V8D0g@mail.gmail.com>
+ <20241009175243.GL14210@bill-the-cat>
+In-Reply-To: <20241009175243.GL14210@bill-the-cat>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 10 Oct 2024 09:47:39 +0300
+Message-ID: <CAC_iWjK6G_4NdkZx53-5MbL5hooXPUwfoemiV+gTMg_X8eA93g@mail.gmail.com>
+Subject: Re: [PATCH v8 03/27] lib: Adapt digest header files to MbedTLS
+To: Tom Rini <trini@konsulko.com>
+Cc: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de,
+ manish.pandey2@arm.com, 
+ Stefan Bosch <stefan_b@posteo.net>, Mario Six <mario.six@gdsys.cc>, 
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
+ Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Sumit Garg <sumit.garg@linaro.org>, Sean Anderson <seanga2@gmail.com>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Andrew Davis <afd@ti.com>,
+ Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Alexander Gendin <agendin@matrox.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Jonathan Humphreys <j-humphreys@ti.com>, Marek Vasut <marex@denx.de>, 
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Greg Malysa <greg.malysa@timesys.com>, 
+ Kever Yang <kever.yang@rock-chips.com>,
+ Kongyang Liu <seashell11234455@gmail.com>, 
+ Linus Walleij <linus.walleij@linaro.org>, Jonas Karlman <jonas@kwiboo.se>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Thu, 10 Oct 2024 14:50:10 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,25 +115,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10.10.24 13:48, Arthur Heymans wrote:
-> Hi
-> 
-> The addition of the line
-> 
-> ret = device_chld_unbind(dev, NULL);
-> 
-> Broke booting from sata with qemu q35 with coreboot + u-boot for me.
-> 
-> Kind regards
+Hi Tom
 
-Hello Arthur,
+On Wed, 9 Oct 2024 at 20:52, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Wed, Oct 09, 2024 at 08:32:29PM +0300, Ilias Apalodimas wrote:
+> > On Wed, 9 Oct 2024 at 18:32, Raymond Mao <raymond.mao@linaro.org> wrote:
+> > >
+> > > Hi Tom,
+> > >
+> > > On Wed, 9 Oct 2024 at 10:38, Tom Rini <trini@konsulko.com> wrote:
+> > >>
+> > >> On Thu, Oct 03, 2024 at 02:50:16PM -0700, Raymond Mao wrote:
+> > >>
+> > >> > Adapt digest header files to support both original libs and MbedTLS
+> > >> > by switching on/off MBEDTLS_LIB_CRYPTO.
+> > >> > Introduce <alg>_LEGACY kconfig for legacy hash implementations.
+> > >> > sha256.o should depend on SHA256 kconfig only but not SUPPORT_EMMC_RPMB,
+> > >> > SHA256 should be selected when SUPPORT_EMMC_RPMB is enabled instead.
+> > >> >
+> > >> > `IS_ENABLED` or `CONFIG_IS_ENABLED` is not applicable here, since
+> > >> > including <linux/kconfig.h> causes undefined reference on schedule()
+> > >> > with sandbox build, as <linux/kconfig.h> includes <generated/autoconf.h>
+> > >> > which enables `CONFIG_HW_WATCHDOG` and `CONFIG_WATCHDOG` but no schedule()
+> > >> > are defined in sandbox build,
+> > >> > Thus we use `#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)` instead.
+> > >> >
+> > >> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > >> > Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > >>
+> > >> There's three platforms where we see something like:
+> > >>        arm: (for 1/1 boards) all +5651.0 data +112.0 rodata +139.0 text +5400.0
+> > >>             o4-imx6ull-nano: all +5651 data +112 rodata +139 text +5400
+> > >>                u-boot: add: 23/0, grow: 1/0 bytes: 1172/0 (1172)
+> > >>                  function                                   old     new   delta
+> > >>                  hash_command                               108     296    +188
+> > >>                  sha1_finish                                  -     156    +156
+> > >>                  static.sha1_update                           -     114    +114
+> > >>                  hash_algo                                    -     112    +112
+> > >>                  sha1_padding                                 -      64     +64
+> > >>                  hash_lookup_algo                             -      60     +60
+> > >>                  sha1_starts                                  -      52     +52
+> > >>                  crc16_ccitt_wd_buf                           -      36     +36
+> > >>                  sha256_csum_wd                               -      34     +34
+> > >>                  sha1_csum_wd                                 -      34     +34
+> > >>                  hash_finish_sha256                           -      34     +34
+> > >>                  hash_finish_sha1                             -      34     +34
+> > >>                  crc32_wd_buf                                 -      34     +34
+> > >>                  hash_finish_crc32                            -      28     +28
+> > >>                  hash_finish_crc16_ccitt                      -      28     +28
+> > >>                  hash_init_sha256                             -      22     +22
+> > >>                  hash_init_sha1                               -      22     +22
+> > >>                  hash_update_crc32                            -      20     +20
+> > >>                  hash_update_crc16_ccitt                      -      20     +20
+> > >>                  hash_init_crc32                              -      20     +20
+> > >>                  hash_init_crc16_ccitt                        -      20     +20
+> > >>                  hash_update_sha256                           -      16     +16
+> > >>                  hash_update_sha1                             -      16     +16
+> > >>                  sha1_update                                  -       8      +8
+> > >>
+> > >> This is because:
+> > >> > diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
+> > >> > index 982e84dc3bc..5d7fd904950 100644
+> > >> > --- a/drivers/mmc/Kconfig
+> > >> > +++ b/drivers/mmc/Kconfig
+> > >> > @@ -119,6 +119,7 @@ config MMC_HW_PARTITIONING
+> > >> >  config SUPPORT_EMMC_RPMB
+> > >> >       bool "Support eMMC replay protected memory block (RPMB)"
+> > >> >       imply CMD_MMC_RPMB
+> > >> > +     select SHA256
+> > >> >       help
+> > >> >         Enable support for reading, writing and programming the
+> > >> >         key for the Replay Protection Memory Block partition in eMMC.
+> > >>
+> > >> Wasn't true / required before now, no hashing algorithms were enabled.
+> > >> This was fine because:
+> > >> [snip]
+> > >> > diff --git a/lib/Makefile b/lib/Makefile
+> > >> > index c4950b78a29..33755778283 100644
+> > >> > --- a/lib/Makefile
+> > >> > +++ b/lib/Makefile
+> > >> > @@ -50,7 +50,6 @@ obj-$(CONFIG_XXHASH) += xxhash.o
+> > >> >  obj-y += net_utils.o
+> > >> >  obj-$(CONFIG_PHYSMEM) += physmem.o
+> > >> >  obj-y += rc4.o
+> > >> > -obj-$(CONFIG_SUPPORT_EMMC_RPMB) += sha256.o
+> > >> >  obj-$(CONFIG_RBTREE) += rbtree.o
+> > >> >  obj-$(CONFIG_BITREVERSE) += bitrev.o
+> > >> >  obj-y += list_sort.o
+> > >>
+> > >> Got us the library access without bringing in everything else. And since
+> > >> two of the platforms that are hitting this now are "nano" this is an
+> > >> important thing to figure out how to continue to support. If there's
+> > >> just no way around it, we can likely live with the size increase, but
+> > >> I'd like to see this looked in to specifically first, thanks!
+> > >>
+> > > To address this, I think there are two options.
+> > > 1. Introduce SUPPORT_EMMC_RPMB into the MbedTLS sub makefile.
+> > > 2. Make MBEDTLS_LIB_CRYPTO depends on !SUPPORT_EMMC_RPMB.
+> > > 1) looks to be ugly, I prefer 2) if you agree.
+> >
+> > 2 is not a good idea either. We can't just drop RPMB support when
+> > mbedTLS is enabled
+>
+> To be clear, while I hope we can do something about this growth, I would
+> rather live with it (as it's not an unreasonable amount) than do 2, and
+> if 1 is too ugly, probably skip that as well.
 
-Sorry to hear this. I would need a reproducible example for further 
-analysis.
+Yep, I agree. That was pretty clear from your first email as well. I
+just pointed out that option 2 was just as bad
 
-Could you, please, share an image, the U-Boot .config file and HEAD 
-commit hash, as well as the QEMU command.
+> If it's not a matter of
+> loosening some select statements, or maybe introducing a library type
+> symbol we can see if anyone else more motivated has a better idea as
+> it's literally 3 platforms (ev-imx280-nano-x-mb is the other nano, and
+> then uniphier_v8 where it's arguably a missing feature anyhow) rather
+> than a large number of them. And not even other "mini" or "nano"
+> configs.
+>
+> --
+> Tom
 
-Best regards
-
-Heinrich
+Cheers
+/Ilias
