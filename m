@@ -4,46 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5802CF11F4
-	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 13:25:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6EE7CF11F4
+	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 13:25:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 170508935D;
-	Thu, 10 Oct 2024 15:25:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BE627891E9;
+	Thu, 10 Oct 2024 15:25:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="TDun4AaC";
+	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="DGtNEbAd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94FD98935D; Thu, 10 Oct 2024 15:25:16 +0200 (CEST)
-Received: from mx2.securetransport.de (mx2.securetransport.de [188.68.39.254])
- by phobos.denx.de (Postfix) with ESMTP id 91708892D0
- for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 15:25:06 +0200 (CEST)
+ id A56988927F; Thu, 10 Oct 2024 15:25:24 +0200 (CEST)
+Received: from mx2.securetransport.de (mx2.securetransport.de
+ [IPv6:2a03:4000:13:6c7::1])
+ by phobos.denx.de (Postfix) with ESMTP id B849789347
+ for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 15:25:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
- s=dhelectronicscom; t=1728566700;
- bh=X21axcoNujiobbRy7J7c9xPljPwPuGoN39IQKIY6thU=;
- h=From:To:CC:Subject:Date:From;
- b=TDun4AaCy3V9x/UwL9sRn4YmwE4xjcz8SKte1H3WL+1nubsuzAC/jHZyyPtc0xMv4
- nOh104BWALu569MmYr17MvaXgax0CzvWk15UmKWFBkmLM5Q/vL5VEqmWkkVkXQnall
- gkZdxQWId2RLNwLQp/Z5LW4WPimrvNnhbUkQbUaeIB6Dcvrti0UKRN0yeUkvc6I+EI
- hNVT2lIsNd/t2BPC9ZQfI1cHf09aeEGlB23mPdGU38nt/rjVXsiL6y3RSJMnr6b8JU
- OR9lqhVQDTXVhjEw7mo4WvNHqYetL1DTUke3UE84UlU01ujuPUvLXr9sXBk8dF7B+l
- XxUtxvAU6BE8Q==
+ s=dhelectronicscom; t=1728566709;
+ bh=Kbs5wNG0oX5zdBrCDk2J5dQ4K9z4NHfY+EsN5r42G+M=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References:From;
+ b=DGtNEbAdlUeD4MU70/GyPtBjVFSLVcATmnD5iWeWhY4t9b7TOF4c5X6aEyR7rLcY/
+ ZcSZiHO8vfXC7WeZ/8ZGFQ+qJ3e+PkPjEnPBzB+93BpeIRMxfu6NAU90A19SMqc7GF
+ 4K1xhSRA7qG9RSRlMSX0Wb0wslVrY/pVAlYzpRGVscn447MmarD9jV/1Nhzb69+PSd
+ kmA+8mNQ7nH2WYRcfhr5pe0DmMYvOoy6Sp6fZEWCUgz6J+fIGAcTW4RGGErfBYUvrz
+ 6NKUMswetg2H02zx8UAzbihMXmleeNEsMCGzRdxPHjNlMrsIvDgU0owGDaZUWiB/4U
+ g1bYz/1SruQaQ==
 From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
 To: <u-boot@lists.denx.de>
 CC: Christoph Niedermaier <cniedermaier@dh-electronics.com>, NXP i.MX U-Boot
  Team <uboot-imx@nxp.com>, Marek Vasut <marex@denx.de>, Fabio Estevam
  <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>, Tom Rini
  <trini@konsulko.com>, <u-boot@dh-electronics.com>
-Subject: [PATCH 1/2] arm64: imx8mp: Read MAC address from M24C32-D
- write-lockable page on DH i.MX8MP DHCOM if available
-Date: Thu, 10 Oct 2024 15:23:36 +0200
-Message-ID: <20241010132337.3259-1-cniedermaier@dh-electronics.com>
+Subject: [PATCH 2/2] arm64: imx8mp: Read item and serial number from EEPROM ID
+ page on DH i.MX8MP DHCOM
+Date: Thu, 10 Oct 2024 15:23:37 +0200
+Message-ID: <20241010132337.3259-2-cniedermaier@dh-electronics.com>
 X-klartext: yes
+In-Reply-To: <20241010132337.3259-1-cniedermaier@dh-electronics.com>
+References: <20241010132337.3259-1-cniedermaier@dh-electronics.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -63,27 +66,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The i.MX8M Plus DHCOM currently supports parsing ethernet MAC address
-from multiple sources in the following priority order:
-
-1) U-Boot environment 'ethaddr'/'eth1addr' environment variable
-2) SoC OTP fuses
-3) On-SoM EEPROM
-
 The new i.MX8M Plus DHCOM rev.200 is populated with M24C32-D EEPROM
-which contains additional write-lockable page, which can also be
-populated with a structure containing ethernet MAC address.
+which contains additional write-lockable page called ID page, which
+is populated with a structure containing the item and serial number.
 
-Add support for parsing the content of this new write-lockable page
-and place it between 2) and 3) on the priority list. The new entry is
-2.5) On-SoM EEPROM write-lockable page
-
-Because the write-lockable page is not present on rev.100 i.MX8MP DHCOM
-SoM, test whether EEPROM ID page exists in DT and whether it is enabled
-first. If so, read the entire ID page out, validate it, and determine
-whether EEPROM MAC address is populated in it in DH specific format. If
-so, use the MAC address. There may be multiple EEPROMs with an ID page
-on this platform, always use the first one.
+Extend the support for parsing the item and serial number of the
+EEPROM ID page. Write the item and serial number to the U-Boot
+environment if the aren't there. If the environment is already
+there compare it with the one from the EEPROM ID page and output
+a warning if it differs.
 
 Signed-off-by: Christoph Niedermaier <cniedermaier@dh-electronics.com>
 ---
@@ -94,209 +85,170 @@ Cc: Stefano Babic <sbabic@denx.de>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@dh-electronics.com
 ---
- board/dhelectronics/common/dh_common.c        | 113 ++++++++++++++++++
- board/dhelectronics/common/dh_common.h        |  23 ++++
- .../dh_imx8mp/imx8mp_dhcom_pdk2.c             |   6 +
- 3 files changed, 142 insertions(+)
+ board/dhelectronics/common/dh_common.c        | 51 ++++++++++++++++++
+ board/dhelectronics/common/dh_common.h        |  2 +
+ .../dh_imx8mp/imx8mp_dhcom_pdk2.c             | 53 +++++++++++++++++++
+ 3 files changed, 106 insertions(+)
 
 diff --git a/board/dhelectronics/common/dh_common.c b/board/dhelectronics/common/dh_common.c
-index 32c50b4f0f..8ea70fc984 100644
+index 8ea70fc984..4c31b32e0c 100644
 --- a/board/dhelectronics/common/dh_common.c
 +++ b/board/dhelectronics/common/dh_common.c
-@@ -7,9 +7,22 @@
- #include <dm.h>
- #include <i2c_eeprom.h>
- #include <net.h>
-+#include <u-boot/crc.h>
+@@ -11,6 +11,23 @@
  
  #include "dh_common.h"
  
-+struct eeprom_id_page {
-+	u8	id[3];		/* Identifier 'D', 'H', 'E' - 'D' is at index 0 */
-+	u8	version;	/* 0x10 -- Version 1.0 */
-+	u8	data_crc16[2];	/* [1] is MSbyte */
-+	u8	header_crc8;
-+	u8	mac0[6];
-+	u8	mac1[6];
-+	u8	item_prefix;	/* H/F is coded in MSbits, Vendor coding starts at LSbits */
-+	u8	item_num[3];	/* [2] is MSbyte */
-+	u8	serial[9];	/* [8] is MSbyte */
-+} __packed;
++/* DH item: Vendor coding */
++#define ITEM_PREFIX_NXP		0x01
++#define ITEM_PREFIX_NXP_CHR	'I'
++#define ITEM_PREFIX_ST		0x02
++#define ITEM_PREFIX_ST_CHR	'S'
 +
- bool dh_mac_is_in_env(const char *env)
- {
- 	unsigned char enetaddr[6];
-@@ -30,6 +43,106 @@ int dh_get_mac_is_enabled(const char *alias)
- 	return 0;
- }
++/*
++ * DH item: Finished state coding
++ * Bit = 0 means half finished
++ *         Prefix is 'H'
++ * Bit = 1 means finished with a customer image flashed
++ *         Prefix is 'F'
++ */
++#define ITEM_PREFIX_FIN_BIT		BIT(7)
++#define ITEM_PREFIX_FIN_HALF_CHR	'H'
++#define ITEM_PREFIX_FIN_FLASHED_CHR	'F'
++
+ struct eeprom_id_page {
+ 	u8	id[3];		/* Identifier 'D', 'H', 'E' - 'D' is at index 0 */
+ 	u8	version;	/* 0x10 -- Version 1.0 */
+@@ -54,6 +71,7 @@ int dh_get_value_from_eeprom_id_page(enum eip_request_values request, u8 *data,
+ 	ofnode node;
+ 	u16 c16;
+ 	u8 c8;
++	char soc;
  
-+int dh_get_value_from_eeprom_id_page(enum eip_request_values request, u8 *data,
-+				     int data_len, const char *alias)
-+{
-+	struct eeprom_id_page *eipp;
-+	struct udevice *dev;
-+	static u8 eipa[32];
-+	char path[128];
-+	int len, ret;
-+	ofnode node;
-+	u16 c16;
-+	u8 c8;
-+
-+	eipp = (struct eeprom_id_page *)eipa;
-+
-+	if (!(eipp->id[0] == 'D' && eipp->id[1] == 'H' && eipp->id[2] == 'E')) {
-+		node = ofnode_path(alias);
-+		if (!ofnode_valid(node)) {
-+			printf("%s: ofnode for %s not found!", __func__, alias);
-+			return -ENOENT;
-+		}
-+
-+		ret = ofnode_get_path(node, path, sizeof(path));
-+		if (ret)
-+			return ret;
-+
-+		len = strlen(path);
-+		if (len <= 0)
+ 	eipp = (struct eeprom_id_page *)eipa;
+ 
+@@ -136,6 +154,39 @@ int dh_get_value_from_eeprom_id_page(enum eip_request_values request, u8 *data,
+ 		else
+ 			return -EINVAL;
+ 		break;
++	case ITEM_NUMBER:
++		if (data_len >= 8) { /* String with 7 characters + string termination */
++			switch (eipp->item_prefix & 0xf) {
++			case ITEM_PREFIX_NXP:
++				soc = ITEM_PREFIX_NXP_CHR;
++				break;
++			case ITEM_PREFIX_ST:
++				soc = ITEM_PREFIX_ST_CHR;
++				break;
++			default:
++				return -EINVAL;
++			}
++			snprintf(data, data_len, "%c%c%05d",
++				 (eipp->item_prefix & ITEM_PREFIX_FIN_BIT) ?
++				 ITEM_PREFIX_FIN_FLASHED_CHR : ITEM_PREFIX_FIN_HALF_CHR,
++				 soc, (eipp->item_num[0] << 16) | (eipp->item_num[1] << 8)
++				       | eipp->item_num[2]);
++		} else {
 +			return -EINVAL;
-+
-+		if (path[len - 1] == '0')
-+			path[len - 1] = '8';
-+		else if (path[len - 1] == '3')
-+			path[len - 1] = 'b';
-+		else
-+			return -ENOENT;
-+
-+		node = ofnode_path(path);
-+		if (!ofnode_valid(node))	/* ID page not present in DT */
-+			return -ENOENT;
-+
-+		if (!ofnode_is_enabled(node))	/* ID page not enabled in DT */
-+			return -ENOENT;
-+
-+		ret = uclass_get_device_by_ofnode(UCLASS_I2C_EEPROM, node, &dev);
-+		if (ret) {
-+			printf("%s: Cannot find ID page! ret = %d\n", __func__, ret);
-+			return ret;
 +		}
-+
-+		ret = i2c_eeprom_read(dev, 0x0, eipa, sizeof(eipa));
-+		if (ret) {
-+			printf("%s: Error reading ID page! ret = %d\n", __func__, ret);
-+			return ret;
-+		}
-+	}
-+
-+	/* Validate header checksum */
-+	c8 = crc8(0xff, eipa, offsetof(struct eeprom_id_page, header_crc8));
-+	if (eipp->header_crc8 != c8)
-+		return -EINVAL;
-+
-+	/* Validate header magic */
-+	if (eipp->id[0] != 'D' || eipp->id[1] != 'H' || eipp->id[2] != 'E')
-+		return -EINVAL;
-+
-+	/* Validate header version */
-+	if (eipp->version != 0x10)
-+		return -EINVAL;
-+
-+	/* Validate structure checksum */
-+	c16 = crc16(0xffff, eipa + offsetof(struct eeprom_id_page, mac0),
-+		    sizeof(*eipp) - offsetof(struct eeprom_id_page, mac0));
-+	if (((eipp->data_crc16[1] << 8) | eipp->data_crc16[0]) != c16)
-+		return -EINVAL;
-+
-+	/* Copy requested data */
-+	switch (request) {
-+	case MAC0:
-+		if (!is_valid_ethaddr(eipp->mac0))
-+			return -EINVAL;
-+		if (data_len >= sizeof(eipp->mac0))
-+			memcpy(data, eipp->mac0, sizeof(eipp->mac0));
-+		else
-+			return -EINVAL;
 +		break;
-+	case MAC1:
-+		if (!is_valid_ethaddr(eipp->mac1))
++	case SN:
++		/*
++		 * data_len must be greater than the size of eipp->serial,
++		 * because there is a string termination needed.
++		 */
++		if (data_len > sizeof(eipp->serial)) {
++			data[sizeof(eipp->serial)] = 0;
++			memcpy(data, eipp->serial, sizeof(eipp->serial));
++		} else {
 +			return -EINVAL;
-+		if (data_len >= sizeof(eipp->mac1))
-+			memcpy(data, eipp->mac1, sizeof(eipp->mac1));
-+		else
-+			return -EINVAL;
++		}
 +		break;
-+	default:
-+		return -EINVAL;
-+	}
-+
-+	return 0;
-+}
-+
- int dh_get_mac_from_eeprom(unsigned char *enetaddr, const char *alias)
- {
- 	struct udevice *dev;
+ 	default:
+ 		return -EINVAL;
+ 	}
 diff --git a/board/dhelectronics/common/dh_common.h b/board/dhelectronics/common/dh_common.h
-index a2de5b1553..4c22ece435 100644
+index 4c22ece435..1baa45e340 100644
 --- a/board/dhelectronics/common/dh_common.h
 +++ b/board/dhelectronics/common/dh_common.h
-@@ -3,6 +3,11 @@
-  * Copyright 2022 DENX Software Engineering GmbH, Philip Oberfichtner <pro@denx.de>
-  */
+@@ -6,6 +6,8 @@
+ enum eip_request_values {
+ 	MAC0,
+ 	MAC1,
++	ITEM_NUMBER,
++	SN,
+ };
  
-+enum eip_request_values {
-+	MAC0,
-+	MAC1,
-+};
-+
  /*
-  * dh_mac_is_in_env - Check if MAC address is already set
-  *
-@@ -28,6 +33,24 @@ int dh_get_mac_is_enabled(const char *alias);
-  */
- int dh_get_mac_from_eeprom(unsigned char *enetaddr, const char *alias);
- 
-+/*
-+ * dh_get_value_from_eeprom_id_page() - Get value from EEPROM ID page
-+ * @eip_request_values:	Requested value as enum
-+ * @data:		Buffer where value is to be stored
-+ * @data_len:		Length of the value buffer
-+ * @alias:		Alias for EEPROM device tree node
-+ *
-+ * Gets the value specified by the parameter eip_request_values from the ID
-+ * page of the specified EEPROM. The EEPROM device is selected via alias
-+ * device tree name (parameter alias). The data is written to the specified
-+ * data buffer (parameter data). If the length of the data (parameter data_len)
-+ * is not sufficient to copy the data into the buffer, an error is returned.
-+ *
-+ * Return: 0 if OK, other value on error
-+ */
-+int dh_get_value_from_eeprom_id_page(enum eip_request_values request, u8 *data,
-+				     int data_len, const char *alias);
-+
- /*
-  * dh_setup_mac_address - Try to get MAC address from various locations and write it to env
-  *
 diff --git a/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c b/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
-index 78aae41235..9a8f09fcd4 100644
+index 9a8f09fcd4..8970c8fc2d 100644
 --- a/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
 +++ b/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
-@@ -53,6 +53,9 @@ static int dh_imx8_setup_ethaddr(void)
- 	if (!dh_imx_get_mac_from_fuse(enetaddr))
- 		goto out;
+@@ -116,6 +116,56 @@ int dh_setup_mac_address(void)
+ 	return ret;
+ }
  
-+	if (!dh_get_value_from_eeprom_id_page(MAC0, enetaddr, sizeof(enetaddr), "eeprom0"))
-+		goto out;
++void dh_add_item_number_and_serial_to_env(void)
++{
++	char item_number[8];	/* String with 7 characters + string termination */
++	char *item_number_env;
++	char serial[10];	/* String with 9 characters + string termination */
++	char *serial_env;
++	int ret;
 +
- 	if (!dh_get_mac_from_eeprom(enetaddr, "eeprom0"))
- 		goto out;
- 
-@@ -75,6 +78,9 @@ static int dh_imx8_setup_eth1addr(void)
- 	if (!dh_imx_get_mac_from_fuse(enetaddr))
- 		goto increment_out;
- 
-+	if (!dh_get_value_from_eeprom_id_page(MAC1, enetaddr, sizeof(enetaddr), "eeprom0"))
-+		goto out;
++	ret = dh_get_value_from_eeprom_id_page(ITEM_NUMBER, item_number, sizeof(item_number),
++					       "eeprom0");
++	if (ret) {
++		/*
++		 * The function only returns the value -ENOENT for SoM rev.100, because
++		 * the EEPROM ID page isn't available there. Therefore the output makes
++		 * no sense and will be suppressed here.
++		 */
++		if (ret != -ENOENT)
++			printf("%s: Unable to get item number form EEPROM ID page! ret = %d\n",
++			       __func__, ret);
++	} else {
++		item_number_env = env_get("vendor_item_number");
++		if (!item_number_env)
++			env_set("vendor_item_number", item_number);
++		else
++			if (strcmp(item_number_env, item_number) != 0)
++				printf("Warning: Environment vendor_item_number differs from EEPROM ID page value (%s != %s)\n",
++				       item_number_env, item_number);
++	}
 +
- 	if (!dh_get_mac_from_eeprom(enetaddr, "eeprom1"))
- 		goto out;
++	ret = dh_get_value_from_eeprom_id_page(SN, serial, sizeof(serial), "eeprom0");
++	if (ret) {
++		/*
++		 * The function only returns the value -ENOENT for SoM rev.100, because
++		 * the EEPROM ID page isn't available there. Therefore the output makes
++		 * no sense and will be suppressed here.
++		 */
++		if (ret != -ENOENT)
++			printf("%s: Unable to get serial form EEPROM ID page! ret = %d\n",
++			       __func__, ret);
++	} else {
++		serial_env = env_get("SN");
++		if (!serial_env)
++			env_set("SN", serial);
++		else
++			if (strcmp(serial_env, serial) != 0)
++				printf("Warning: Environment SN differs from EEPROM ID page value (%s != %s)\n",
++				       serial_env, serial);
++	}
++}
++
+ int board_init(void)
+ {
+ 	return 0;
+@@ -124,6 +174,9 @@ int board_init(void)
+ int board_late_init(void)
+ {
+ 	dh_setup_mac_address();
++
++	dh_add_item_number_and_serial_to_env();
++
+ 	return 0;
+ }
  
 -- 
 2.30.2
