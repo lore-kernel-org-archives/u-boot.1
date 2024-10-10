@@ -4,89 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A746BCF11FE
-	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 15:27:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 385CDCF11FF
+	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 15:55:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2466A8904D;
-	Thu, 10 Oct 2024 17:27:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9412C88EB5;
+	Thu, 10 Oct 2024 17:55:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vwSmArXO";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="CDJQUgSJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D03D589092; Thu, 10 Oct 2024 17:27:03 +0200 (CEST)
-Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
- [IPv6:2607:f8b0:4864:20::42f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0A2A388EE6; Thu, 10 Oct 2024 17:55:54 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 85C7D89045
- for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 17:27:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3621488B64
+ for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 17:55:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pf1-x42f.google.com with SMTP id
- d2e1a72fcca58-71df8585a42so802650b3a.3
- for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 08:27:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728574020; x=1729178820; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vgK3iX6dLVw+T2tXHFBp5Zw9LH43Q9vy/tlFaz73zOg=;
- b=vwSmArXOPlswArx3HxzIaYZhRUmnb3/AOqGXtszR43df0+hr0Lry0IcftgmpRigofy
- Ablv3U+hflg3Jyf2gdS72eFwAiaf0opW+ewQBl3aZjxhhYcyzwaWsvqHv9Sx+/7y8bPi
- uccHpS+szQdwjZhOEmjUgK6SiQ+Zx9hr0SCCuFKvD/bRYXbQsTqHVdSZ+YBqw2RcwXxb
- u18v21QYIBVKA20GRTzTJk/aUDiTQ6flyosL4HdG2Yc+8Lb884OuaD+JfnE+hOqrFuUp
- ggKzQc6GwbVUPwn+FOPl9dX+Dz4+Bk4a1t28/HAMIMbXWYb2S/sz/nz4dngrKw9Wb6p8
- euzA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728574020; x=1729178820;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=vgK3iX6dLVw+T2tXHFBp5Zw9LH43Q9vy/tlFaz73zOg=;
- b=B543V8Oy3/jDjT5daQ57qeFKKk/DsDfTwdvQvYYgzhL7j5qSB6HxITwhTKDV3tqGyw
- ZoQqmLs/CvP6mp1t5o5SkP7KJAbfvymp+T2Xv+9LKsrY9TkSjTaVc+ljKnTH/qbmBw4v
- jU2kwW0qcgVlXypSPdTBoHHawWWCIVrv3mM7cDBsSAoR9wjaPhgpwh4GZxEXvyy1uLNl
- E8SouNUN9eOHnPVBs2UCPBcHCdDLRaKuF25n/fqVp6bjTiVyHo1OHE3/eW4A7OeCiOAz
- inuN4fRnhK3AxBfExgaSKf37+2wLbrUkE/snExFiLzxqmM0Wmg8fhhJ/4KHG8Yjkv7O+
- XAYg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW6Y+nVRURc2cShIB1Rid1FgSediY0S7tQcfYepiPbB+gKNRpsHTV4UICJKW+0VQnnPLxJm70Q=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywdgq5ZwEgyJuz9VGgrW6iFth8eMdmI/VzFmQv/TijYZwr6bEgY
- tR7nSxBX77n2yjRcegpBnN6Lo2Y96gVuVW7MnxTlgyDn2LaSM+GrEcuqFtRhshvryWjutoPqzmb
- rbmeLxojpVDGn0jbgFYpiKSZabPIpEnI1joPk1Q==
-X-Google-Smtp-Source: AGHT+IHJ3ZPBwYIjf6iD58EeTfTk0IucZdHKFT6Bk/bRLK/Er2ntCp4wugiXFxKkKDe0aIDvHT3/+PbnO0hoZr27uyI=
-X-Received: by 2002:a05:6a21:6e4a:b0:1d5:144b:593f with SMTP id
- adf61e73a8af0-1d8a3c20776mr9724529637.28.1728574020068; Thu, 10 Oct 2024
- 08:27:00 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49AFtiKY129455;
+ Thu, 10 Oct 2024 10:55:44 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1728575744;
+ bh=stOqvU5JfAOo26ScgxEwPM9W9oSZfiSwNR2Mq0qs/Pg=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=CDJQUgSJdOFeu1ot/njnYP46/YcWagmmWen9UQzldz/VCj/DDTGwcie+/aV0z5paP
+ 9MLaMyMYcvWGbg9IEzAW5jOVkNl8+DWWXtzO5u9fuVkBlK4OG5EUnWnBoP4rNW7NaK
+ ZksZ2Hif9VUGRvKqntYkgpdJRxoh9LJ6dO26q4Z4=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 49AFtimf012226
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 10 Oct 2024 10:55:44 -0500
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 10
+ Oct 2024 10:55:43 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 10 Oct 2024 10:55:43 -0500
+Received: from [10.249.141.75] ([10.249.141.75])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49AFtPg3085247;
+ Thu, 10 Oct 2024 10:55:35 -0500
+Message-ID: <3170149c-2e82-48f3-8477-e82acf6c58dd@ti.com>
+Date: Thu, 10 Oct 2024 21:25:22 +0530
 MIME-Version: 1.0
-References: <20241009015020.25817-1-sjg@chromium.org>
- <20241009015020.25817-7-sjg@chromium.org>
- <CAC_iWjKh7_OKKMi9K6eMaiYUN-Nxf+ZQ0NuW9BYzK3u4F0Krcg@mail.gmail.com>
- <CAFLszTjBQaoF9g0nky5mAA429gzA8QvzjxHxooDaRo1=BB+stg@mail.gmail.com>
- <20241009223907.GN14210@bill-the-cat>
- <CAC_iWjK8Bb16aLAKtmYB0Aof4CJP-AAdsMTEYvnFeMeXaiWM9w@mail.gmail.com>
- <CAFLszThoXsWuPu=b+FT0wuURR1rxTE6RWZhUhET9mHbQ+j63ZA@mail.gmail.com>
-In-Reply-To: <CAFLszThoXsWuPu=b+FT0wuURR1rxTE6RWZhUhET9mHbQ+j63ZA@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 10 Oct 2024 18:26:23 +0300
-Message-ID: <CAC_iWjKKqsJh7yUv-kRe5WiGA02c4YU4Yj83UXVXjki+CO9X1Q@mail.gmail.com>
-Subject: Re: [PATCH 6/6] cmd: Add a command to show the memory map
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Alexander Gendin <agendin@matrox.com>,
- Emil Kronborg <emil.kronborg@protonmail.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maxim Moskalets <maximmosk4@gmail.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Tom Fitzhenry <tom@tom-fitzhenry.me.uk>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] boardf: Modify DRAM message
+To: Neha Malcom Francis <n-francis@ti.com>, <trini@konsulko.com>
+CC: <sjg@chromium.org>, <devarsht@ti.com>, <jonas@kwiboo.se>, <richard@nod.at>,
+ <raymond.mao@linaro.org>, <u-boot@lists.denx.de>, <u-kumar1@ti.com>
+References: <20241010070909.288313-1-n-francis@ti.com>
+Content-Language: en-US
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20241010070909.288313-1-n-francis@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,50 +80,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
 
-
-On Thu, 10 Oct 2024 at 18:10, Simon Glass <sjg@chromium.org> wrote:
+On 10/10/2024 12:39 PM, Neha Malcom Francis wrote:
+> The message "DRAM:  2 GiB (effective 32 GiB)" can be a little confusing,
+> modify the message to show exactly what is meant:
 >
-> Hi,
->
-> On Thu, 10 Oct 2024 at 06:02, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > On Thu, 10 Oct 2024 at 01:39, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Wed, Oct 09, 2024 at 03:14:25PM -0600, Simon Glass wrote:
-> > > > Hi Ilias,
-> > > >
-> > > > On Wed, 9 Oct 2024 at 04:41, Ilias Apalodimas
-> > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > >
-> > > > > Hi Simon,
-> > > > >
-> > > > > We already have a mem info command, which is pretty useless. Can't we
-> > > > > reuse that ?
-> > > >
-> > > > I am not too keen on using that as 'info' is pretty vague. We could
-> > > > perhaps create a 'mem' command with 'info' as one subcommand and 'map'
-> > > > as another?
-> > >
-> > > Are we talking about "meminfo" which literally only prints gd->ram_size?
-> > > If so, I don't think it's worth worrying about enhancing that.
-> >
-> > Yes, that's the one
->
-> So, you mean to just delete that command and make it show the memory
-> map instead? Or show the memory size at the top, before the memory
-> map?
-
-I meant the latter, but if you and Tom agree that we should leave it
-as is, I don't mind adding a new command. I assume that the list above
-is non exhaustive, so in the future we could expand it with lmb
-reservations etc?
+> "DRAM:  2 GiB (available for U-Boot out of total 32 GiB)"
 
 
-Thanks
-/Ilias
+Still confusing for me atleast :) can this be
+
+"DRAM: 2 GiB available for U-Boot, out of total 32 GiB"
+
+
 >
-> Regards,
-> Simon
+> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+> ---
+>   common/board_f.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/common/board_f.c b/common/board_f.c
+> index 154675d0e40..b7add8f7d3d 100644
+> --- a/common/board_f.c
+> +++ b/common/board_f.c
+> @@ -254,7 +254,7 @@ static int show_dram_config(void)
+>   
+>   	print_size(gd->ram_size, "");
+>   	if (!sizes_near(gd->ram_size, size)) {
+> -		printf(" (effective ");
+> +		printf(" (available for U-Boot out of total ");
+>   		print_size(size, ")");
+>   	}
+>   	board_add_ram_info(0);
