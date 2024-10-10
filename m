@@ -4,49 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0003CF07A8
-	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 05:57:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 991E0CF07A8
+	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 05:57:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D1F068918D;
-	Thu, 10 Oct 2024 07:56:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 668ED890FD;
+	Thu, 10 Oct 2024 07:56:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=jan.kiszka@siemens.com header.b="aJEE636Q";
+	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=jan.kiszka@siemens.com header.b="irp4WD2C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4EB5289139; Thu, 10 Oct 2024 07:56:03 +0200 (CEST)
+ id 6CB67890B4; Thu, 10 Oct 2024 07:56:03 +0200 (CEST)
 Received: from mta-64-228.siemens.flowmailer.net
  (mta-64-228.siemens.flowmailer.net [185.136.64.228])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 24005890F8
- for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 07:55:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0CAD9889FC
+ for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 07:55:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jan.kiszka@siemens.com
 Received: by mta-64-228.siemens.flowmailer.net with ESMTPSA id
- 2024101005555837385f0616cdb3b522 for <u-boot@lists.denx.de>;
- Thu, 10 Oct 2024 07:55:59 +0200
+ 202410100555564dd4f75067c2912a69 for <u-boot@lists.denx.de>;
+ Thu, 10 Oct 2024 07:55:56 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
  d=siemens.com; i=jan.kiszka@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=NrOyHsHnUQd9bJrX18sWYtDhoGTDFlA1hXeabaqwqsU=;
- b=aJEE636QwaG7CwX+Nk/l+Uk7/OzPsiRMN/8n1z3qBLYyJ+LDg7pxDbSOUK5rAI8jugaaSb
- Vj0hRyR8YeCE+ETWyoTI3xrU5PBW/hoJu4QjfWZ0mtIBxSyUYFi0uDynu1+XI7bobR3TAxdw
- +XaFzvq230zg0Dk4rhPgZtakN2G6ipuJkE8yWqchqEJVd2RB0pc7sY/I+pZ+h6jNFXE35lLq
- S71yP0t1xRd50IMDdaPA2jW5v//Dq6QU1ZnMrGpKCh+xic7uDNMUnkPYWKDjw8u7wSQeII2B
- 9P9RZZwWG9WDHgYxLJp5lmnmR1nCZ2DYyFSxdqqCccTmTQEJEaMsN8vA==;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=8N6JsJffiqZcNLH5puxmfuVPd6b/ao21N9gTgL9WFXU=;
+ b=irp4WD2Cs1vJ3HBytYSBVvj0xRPVfzUhp2uwWzaJTLoaxKfNK4QN3t3f9SnnkiWQWkkusf
+ 08nfTNP2trNU+miv/CPd1rwLatBTkWMHGKU3uUbWoTDmB8zgT+V/Evi+R5/1A64O3rvSiDMA
+ CpRUKstnJKdbKZOXNF1+j0WvkyBLLFss1bmE5JnRAW9L/Sh/OfuISzTgX1KwG6LXz/MPYbz7
+ PtKxZj8pvR2OtjBCQB553M6zobxdVQV6rySUVb4203chSK/+FhPMaypZbvImgusO6mKv9zLh
+ JezdmGwbTE33oQRriEJvNiL1mI8HO5hSHtVKlpz9RaBhkwa+YTrycshQ==;
 From: Jan Kiszka <jan.kiszka@siemens.com>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Bryan Brattlof <bb@ti.com>,
-	Nishanth Menon <nm@ti.com>
-Subject: [PATCH 10/11] sysinfo: Add driver for IOT2050 boards
-Date: Thu, 10 Oct 2024 07:55:54 +0200
-Message-ID: <9441245e18d8e2015880f52016fc9a7dd8cb77e9.1728539755.git.jan.kiszka@siemens.com>
-In-Reply-To: <cover.1728539755.git.jan.kiszka@siemens.com>
-References: <cover.1728539755.git.jan.kiszka@siemens.com>
+Cc: Bryan Brattlof <bb@ti.com>, Nishanth Menon <nm@ti.com>,
+ Baocheng Su <baocheng.su@siemens.com>, Li Hua Qian <huaqian.li@siemens.com>
+Subject: [PATCH 00/11] boards: siemens: iot2050: SM variant, sysinfo support,
+ fixes & cleanups
+Date: Thu, 10 Oct 2024 07:55:44 +0200
+Message-ID: <cover.1728539755.git.jan.kiszka@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
@@ -67,279 +66,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Li Hua Qian <huaqian.li@siemens.com>
+This series depends on:
+https://patchwork.ozlabs.org/project/uboot/patch/a54b501a-9a98-426c-a5ca-faf547411a30@siemens.com/
 
-This brings a sysinfo driver and DT entry for the IOT2050 board series.
-It translates the board information passed from SE-Boot to SPL into
-values that can be retrieved via the sysinfo API. Will is already used
-to fill the SMBIOS table when booting via EFI.
+This adds support for the new IOT2050 SM variant, introduces a sysinfo
+driver which also permits SMBIOS support and switches the board to
+OF_UPSTREAM. There are some further fixes for the boards included as well.
 
-Signed-off-by: Li Hua Qian <huaqian.li@siemens.com>
-[Jan: split-off as separate patch, cleanup]
-Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
----
- .../dts/k3-am65-iot2050-common-u-boot.dtsi    |  18 +++
- configs/iot2050_defconfig                     |   1 +
+Not yet included is configuration support for DMA isolation via the PVU as
+this depends on not yet merged DT bindings and another overlay.
+
+Not a merge-dependency but still needed to restore full support for the
+IOT2050:
+https://patchwork.ozlabs.org/project/uboot/patch/6c201a24-422a-41f7-846c-1ad5b0ebc7e2@siemens.com/
+
+Jan
+
+
+CC: Baocheng Su <baocheng.su@siemens.com>
+CC: Li Hua Qian <huaqian.li@siemens.com>
+
+Baocheng Su (5):
+  board: siemens: iot2050: Fix coding style
+  board: siemens: iot2050: Control pcie power for all variants
+  board: siemens: iot2050: Pass DDR size from FSBL
+  board: siemens: iot2050: Generalize the fdt fixup
+  dts: iot2050: Support new IOT2050-SM variant
+
+Jan Kiszka (4):
+  board: siemens: iot2050: Fix mistake in list of writable env vars
+  board: siemens: iot2050: Stop using special spl DT sources
+  board: siemens: iot2050: Migrate to OF_UPSTREAM
+  smbios: Fill UUID from sysinfo when available
+
+Li Hua Qian (2):
+  sysinfo: Add driver for IOT2050 boards
+  board: siemens: iot2050: Use sysinfo for board initialization
+
+ arch/arm/dts/Makefile                         |   8 -
+ arch/arm/dts/k3-am65-iot2050-boot-image.dtsi  |  19 +-
+ arch/arm/dts/k3-am65-iot2050-common-pg1.dtsi  |  46 --
+ arch/arm/dts/k3-am65-iot2050-common-pg2.dtsi  |  51 --
+ .../dts/k3-am65-iot2050-common-u-boot.dtsi    |  18 +
+ arch/arm/dts/k3-am65-iot2050-common.dtsi      | 738 ------------------
+ arch/arm/dts/k3-am65-iot2050-spl.dts          |  17 -
+ .../dts/k3-am6528-iot2050-basic-common.dtsi   |  61 --
+ arch/arm/dts/k3-am6528-iot2050-basic-pg2.dts  |  24 -
+ arch/arm/dts/k3-am6528-iot2050-basic.dts      |  24 -
+ .../k3-am6548-iot2050-advanced-common.dtsi    |  52 --
+ ...50-advanced-m2-bkey-ekey-pcie-overlay.dtso |  27 -
+ ...iot2050-advanced-m2-bkey-usb3-overlay.dtso |  47 --
+ .../arm/dts/k3-am6548-iot2050-advanced-m2.dts | 119 ---
+ .../dts/k3-am6548-iot2050-advanced-pg2.dts    |  29 -
+ .../k3-am6548-iot2050-advanced-sm-u-boot.dtsi |   1 +
+ arch/arm/dts/k3-am6548-iot2050-advanced.dts   |  24 -
+ arch/arm/mach-k3/am65x/Kconfig                |   2 +
+ board/siemens/iot2050/board.c                 | 226 ++++--
+ configs/iot2050_defconfig                     |   7 +-
+ doc/board/siemens/iot2050.rst                 |   7 +-
  drivers/sysinfo/Kconfig                       |   7 +
  drivers/sysinfo/Makefile                      |   1 +
- drivers/sysinfo/iot2050.c                     | 143 ++++++++++++++++++
- drivers/sysinfo/iot2050.h                     |  26 ++++
- 6 files changed, 196 insertions(+)
+ drivers/sysinfo/iot2050.c                     | 143 ++++
+ drivers/sysinfo/iot2050.h                     |  26 +
+ include/configs/iot2050.h                     |   5 +-
+ include/sysinfo.h                             |   1 +
+ lib/smbios.c                                  |   4 +
+ 28 files changed, 372 insertions(+), 1362 deletions(-)
+ delete mode 100644 arch/arm/dts/k3-am65-iot2050-common-pg1.dtsi
+ delete mode 100644 arch/arm/dts/k3-am65-iot2050-common-pg2.dtsi
+ delete mode 100644 arch/arm/dts/k3-am65-iot2050-common.dtsi
+ delete mode 100644 arch/arm/dts/k3-am65-iot2050-spl.dts
+ delete mode 100644 arch/arm/dts/k3-am6528-iot2050-basic-common.dtsi
+ delete mode 100644 arch/arm/dts/k3-am6528-iot2050-basic-pg2.dts
+ delete mode 100644 arch/arm/dts/k3-am6528-iot2050-basic.dts
+ delete mode 100644 arch/arm/dts/k3-am6548-iot2050-advanced-common.dtsi
+ delete mode 100644 arch/arm/dts/k3-am6548-iot2050-advanced-m2-bkey-ekey-pcie-overlay.dtso
+ delete mode 100644 arch/arm/dts/k3-am6548-iot2050-advanced-m2-bkey-usb3-overlay.dtso
+ delete mode 100644 arch/arm/dts/k3-am6548-iot2050-advanced-m2.dts
+ delete mode 100644 arch/arm/dts/k3-am6548-iot2050-advanced-pg2.dts
+ create mode 120000 arch/arm/dts/k3-am6548-iot2050-advanced-sm-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/k3-am6548-iot2050-advanced.dts
  create mode 100644 drivers/sysinfo/iot2050.c
  create mode 100644 drivers/sysinfo/iot2050.h
 
-diff --git a/arch/arm/dts/k3-am65-iot2050-common-u-boot.dtsi b/arch/arm/dts/k3-am65-iot2050-common-u-boot.dtsi
-index b6d2c816acc..55337179f9f 100644
---- a/arch/arm/dts/k3-am65-iot2050-common-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am65-iot2050-common-u-boot.dtsi
-@@ -14,6 +14,24 @@
- 		spi0 = &ospi0;
- 	};
- 
-+	sysinfo {
-+		compatible = "siemens,sysinfo-iot2050";
-+		/* TI_SRAM_SCRATCH_BOARD_EEPROM_START */
-+		offset = <0x40280000>;
-+		bootph-all;
-+
-+		smbios {
-+			system {
-+				manufacturer = "SIEMENS AG";
-+				product = "SIMATIC IOT2050";
-+			};
-+
-+			baseboard {
-+				manufacturer = "SIEMENS AG";
-+			};
-+		};
-+	};
-+
- 	leds {
- 		bootph-all;
- 		status-led-red {
-diff --git a/configs/iot2050_defconfig b/configs/iot2050_defconfig
-index 2624f0cb573..574e232d119 100644
---- a/configs/iot2050_defconfig
-+++ b/configs/iot2050_defconfig
-@@ -141,6 +141,7 @@ CONFIG_SOC_TI=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_CADENCE_QSPI=y
-+CONFIG_SYSINFO=y
- CONFIG_SYSRESET=y
- CONFIG_SPL_SYSRESET=y
- CONFIG_SYSRESET_TI_SCI=y
-diff --git a/drivers/sysinfo/Kconfig b/drivers/sysinfo/Kconfig
-index 2030e4babc9..df83df69ffb 100644
---- a/drivers/sysinfo/Kconfig
-+++ b/drivers/sysinfo/Kconfig
-@@ -31,6 +31,13 @@ config SYSINFO_RCAR3
- 	help
- 	  Support querying SoC version information for Renesas R-Car Gen3.
- 
-+config SYSINFO_IOT2050
-+	bool "Enable sysinfo driver for the Siemens IOT2050"
-+	depends on TARGET_IOT2050_A53
-+	default y if TARGET_IOT2050_A53
-+	help
-+	  Support querying device information for Siemens IOT2050.
-+
- config SYSINFO_SANDBOX
- 	bool "Enable sysinfo driver for the Sandbox board"
- 	help
-diff --git a/drivers/sysinfo/Makefile b/drivers/sysinfo/Makefile
-index 680dde77fe8..26ca3150999 100644
---- a/drivers/sysinfo/Makefile
-+++ b/drivers/sysinfo/Makefile
-@@ -5,6 +5,7 @@
- obj-y += sysinfo-uclass.o
- obj-$(CONFIG_SYSINFO_GAZERBEAM) += gazerbeam.o
- obj-$(CONFIG_SYSINFO_GPIO) += gpio.o
-+obj-$(CONFIG_SYSINFO_IOT2050) += iot2050.o
- obj-$(CONFIG_SYSINFO_RCAR3) += rcar3.o
- obj-$(CONFIG_SYSINFO_SANDBOX) += sandbox.o
- obj-$(CONFIG_SYSINFO_SMBIOS) += smbios.o
-diff --git a/drivers/sysinfo/iot2050.c b/drivers/sysinfo/iot2050.c
-new file mode 100644
-index 00000000000..5359d6b8d62
---- /dev/null
-+++ b/drivers/sysinfo/iot2050.c
-@@ -0,0 +1,143 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (c) Siemens AG, 2024
-+ */
-+
-+#include <dm.h>
-+#include <sysinfo.h>
-+#include <net.h>
-+#include <asm/arch/hardware.h>
-+
-+#include "iot2050.h"
-+
-+#define IOT2050_INFO_MAGIC		0x20502050
-+
-+struct iot2050_info {
-+	u32 magic;
-+	u16 size;
-+	char name[20 + 1];
-+	char serial[16 + 1];
-+	char mlfb[18 + 1];
-+	char uuid[32 + 1];
-+	char a5e[18 + 1];
-+	u8 mac_addr_cnt;
-+	u8 mac_addr[8][ARP_HLEN];
-+	char seboot_version[40 + 1];
-+	u8 padding[3];
-+	u32 ddr_size_mb;
-+} __packed;
-+
-+/**
-+ * struct sysinfo_iot2050_priv - sysinfo private data
-+ * @info: iot2050 board info
-+ */
-+struct sysinfo_iot2050_priv {
-+	struct iot2050_info *info;
-+};
-+
-+static int sysinfo_iot2050_detect(struct udevice *dev)
-+{
-+	struct sysinfo_iot2050_priv *priv = dev_get_priv(dev);
-+
-+	if (priv->info == NULL || priv->info->magic != IOT2050_INFO_MAGIC)
-+		return -EFAULT;
-+
-+	return 0;
-+}
-+
-+static int sysinfo_iot2050_get_str(struct udevice *dev, int id, size_t size,
-+				   char *val)
-+{
-+	struct sysinfo_iot2050_priv *priv = dev_get_priv(dev);
-+	char byte_str[3] = {0};
-+	unsigned int n;
-+
-+	switch (id) {
-+	case BOARD_NAME:
-+		strncpy(val, priv->info->name, size);
-+		break;
-+	case BOARD_SERIAL:
-+		strncpy(val, priv->info->serial, size);
-+		break;
-+	case BOARD_MLFB:
-+		strncpy(val, priv->info->mlfb, size);
-+		break;
-+	case BOARD_UUID:
-+		for (n = 0; n < min(size, (size_t)16); n++) {
-+			memcpy(byte_str, priv->info->uuid + n * 2, 2);
-+			val[n] = (char)hextoul(byte_str, NULL);
-+		}
-+		break;
-+	case BOARD_A5E:
-+		strncpy(val, priv->info->a5e, size);
-+		break;
-+	case BOARD_SEBOOT_VER:
-+		strncpy(val, priv->info->seboot_version, size);
-+		break;
-+	case BOARD_MAC_ADDR_1:
-+	case BOARD_MAC_ADDR_2:
-+	case BOARD_MAC_ADDR_3:
-+	case BOARD_MAC_ADDR_4:
-+	case BOARD_MAC_ADDR_5:
-+	case BOARD_MAC_ADDR_6:
-+	case BOARD_MAC_ADDR_7:
-+	case BOARD_MAC_ADDR_8:
-+		memcpy(val, priv->info->mac_addr[id - BOARD_MAC_ADDR_START],
-+		       ARP_HLEN);
-+		return 0;
-+	case BOARD_DDR_SIZE:
-+		memcpy(val, &priv->info->ddr_size_mb,
-+		       sizeof(priv->info->ddr_size_mb));
-+		return 0;
-+	default:
-+		return -EINVAL;
-+	};
-+
-+	val[size - 1] = '\0';
-+	return 0;
-+}
-+
-+static int sysinfo_iot2050_get_int(struct udevice *dev, int id, int *val)
-+{
-+	struct sysinfo_iot2050_priv *priv = dev_get_priv(dev);
-+
-+	switch (id) {
-+	case BOARD_MAC_ADDR_CNT:
-+		*val = priv->info->mac_addr_cnt;
-+		return 0;
-+	default:
-+		return -EINVAL;
-+	};
-+}
-+
-+static const struct sysinfo_ops sysinfo_iot2050_ops = {
-+	.detect = sysinfo_iot2050_detect,
-+	.get_str = sysinfo_iot2050_get_str,
-+	.get_int = sysinfo_iot2050_get_int,
-+};
-+
-+static int sysinfo_iot2050_probe(struct udevice *dev)
-+{
-+	struct sysinfo_iot2050_priv *priv = dev_get_priv(dev);
-+	unsigned long offset;
-+
-+	offset = dev_read_u32_default(dev, "offset",
-+				      TI_SRAM_SCRATCH_BOARD_EEPROM_START);
-+	priv->info = (struct iot2050_info *)offset;
-+
-+	return 0;
-+}
-+
-+static const struct udevice_id sysinfo_iot2050_ids[] = {
-+	{ .compatible = "siemens,sysinfo-iot2050" },
-+	{ /* sentinel */ }
-+};
-+
-+U_BOOT_DRIVER(sysinfo_iot2050) = {
-+	.name           = "sysinfo_iot2050",
-+	.id             = UCLASS_SYSINFO,
-+	.of_match       = sysinfo_iot2050_ids,
-+	.ops		= &sysinfo_iot2050_ops,
-+	.priv_auto	= sizeof(struct sysinfo_iot2050_priv),
-+	.probe          = sysinfo_iot2050_probe,
-+};
-diff --git a/drivers/sysinfo/iot2050.h b/drivers/sysinfo/iot2050.h
-new file mode 100644
-index 00000000000..f659a8282b5
---- /dev/null
-+++ b/drivers/sysinfo/iot2050.h
-@@ -0,0 +1,26 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (c) Siemens AG, 2024
-+ */
-+
-+#include <sysinfo.h>
-+
-+enum sysinfo_id_iot2050 {
-+	BOARD_MLFB		= SYSINFO_ID_SMBIOS_SYSTEM_VERSION,
-+	BOARD_SERIAL		= SYSINFO_ID_SMBIOS_SYSTEM_SERIAL,
-+	BOARD_UUID		= SYSINFO_ID_SMBIOS_SYSTEM_UUID,
-+	BOARD_A5E		= SYSINFO_ID_SMBIOS_BASEBOARD_PRODUCT,
-+	BOARD_NAME		= SYSINFO_ID_SMBIOS_BASEBOARD_VERSION,
-+	BOARD_SEBOOT_VER	= SYSINFO_ID_USER + 0,
-+	BOARD_MAC_ADDR_CNT	= SYSINFO_ID_USER + 1,
-+	BOARD_MAC_ADDR_1	= SYSINFO_ID_USER + 2,
-+	BOARD_MAC_ADDR_START	= BOARD_MAC_ADDR_1,
-+	BOARD_MAC_ADDR_2	= SYSINFO_ID_USER + 3,
-+	BOARD_MAC_ADDR_3	= SYSINFO_ID_USER + 4,
-+	BOARD_MAC_ADDR_4	= SYSINFO_ID_USER + 5,
-+	BOARD_MAC_ADDR_5	= SYSINFO_ID_USER + 6,
-+	BOARD_MAC_ADDR_6	= SYSINFO_ID_USER + 7,
-+	BOARD_MAC_ADDR_7	= SYSINFO_ID_USER + 8,
-+	BOARD_MAC_ADDR_8	= SYSINFO_ID_USER + 9,
-+	BOARD_DDR_SIZE		= SYSINFO_ID_USER + 10,
-+};
 -- 
 2.43.0
 
