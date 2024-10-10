@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E334CEDDB1
-	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 01:53:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3267CEDDA9
+	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 01:53:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 08F8488F2A;
+	by phobos.denx.de (Postfix) with ESMTP id 7C1E288F42;
 	Thu, 10 Oct 2024 03:52:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="V56ho2qi";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aM3g3oRk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F8D988FB5; Thu, 10 Oct 2024 03:52:01 +0200 (CEST)
-Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
- [IPv6:2607:f8b0:4864:20::d33])
+ id 19D0488FE1; Thu, 10 Oct 2024 03:52:02 +0200 (CEST)
+Received: from mail-il1-x134.google.com (mail-il1-x134.google.com
+ [IPv6:2607:f8b0:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3053788F95
+ by phobos.denx.de (Postfix) with ESMTPS id E802988E52
  for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 03:51:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd33.google.com with SMTP id
- ca18e2360f4ac-831e62bfa98so17825239f.1
+Received: by mail-il1-x134.google.com with SMTP id
+ e9e14a558f8ab-3a3a380fd55so2003895ab.1
  for <u-boot@lists.denx.de>; Wed, 09 Oct 2024 18:51:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1728525118; x=1729129918; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZIloWi3xAFqTUKgN3BVeaBy+vuVeMO0tCQQmE+ZfZzw=;
- b=V56ho2qig4iqIFX6rV2CUZd0L2oUOMKTpyetrqgyBefMweKeHVWtCYna/eJ8Om4s9u
- LDGiGlq0799PI10V5GdlJebGnNFA/OFgD5AFn/2bQF1cXEkgi7kgLsSELJHW4sVSodQE
- Vj+YxllIjmObohtVZKZbfBb9tDPW2Ey4hPgOc=
+ bh=oFI866TF45D7ljdK27ND/b5YW74dHVFGsJeT2aNOoAo=;
+ b=aM3g3oRkS9AH7nm2bNZA2MT1ih/CENBb3cC1vJWkJ8q0G/NZyYgaLoNo7Zm5RbYSKz
+ 53YX6z/hq4SXGxBApEFuN/BdEg0PuNidcvrkelM8XXvXqr84G7ra98ju2oZYiMG72KDa
+ Vity/YcTXBdPreocIFaPpyY5zPO/4ze1KUxxo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1728525118; x=1729129918;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZIloWi3xAFqTUKgN3BVeaBy+vuVeMO0tCQQmE+ZfZzw=;
- b=fVwSxXg19hG4pcrFVFwyG5RMUTrEnZXzceyKFSZ7h3qBhr+cRyc/fXfvknPR14WY0l
- K1bil5NDu9fyoIwEfMJj97UiCBVz7e/WD29H0kr8Kfhby3sLkS08ZtDbFU0lMh1bykAn
- xk7ORn1QOA0f8LLeacTxKtJ40XOeSM1HL+b3YQ7FzLSfebol7oW5HnesJZ3lV0F8UgM+
- 2xSJQm2ghSXWGkoZmlLBWdQdDMEI/n/22p0DF7SqhmaXgajGcMwWSZg/6Xnf1uS12Gt8
- qxwuycJo7TZAP501MQ8uChP6+HjNDnqmwmLbfMl4scLwDFhTH686mCX7yZSREZFG2O20
- kOoA==
-X-Gm-Message-State: AOJu0YxoUdDZd3YIsZ4Et+FHivofKzRBdmfinjLheAMdQ17LC5YuDDPq
- jht7MGUwUFEVnNZgsoGITc4DNf11vnNJ7OTGOmF3F9H7rEbNSD9GHWEtrDdU2QH65f7ZT+OMzOu
- N3w==
-X-Google-Smtp-Source: AGHT+IFAbwIPW1GduTTeNFhx7/8LEvFRKJuYjkNGzravyNr70SY9ged3Dk4lY0cvCJRlCkywZP52CQ==
-X-Received: by 2002:a05:6602:26ca:b0:82a:545b:113f with SMTP id
- ca18e2360f4ac-8353d5256abmr601467539f.12.1728525117670; 
- Wed, 09 Oct 2024 18:51:57 -0700 (PDT)
+ bh=oFI866TF45D7ljdK27ND/b5YW74dHVFGsJeT2aNOoAo=;
+ b=I3cCnuuA/6DsaE+BEqtGj7OqeYQ8dDydoMMN/p8PBbcVCVFMjvgFzUdFfCk7uORB6b
+ 8apZO5e/CIcRZDaPR71t1gg8SUSt8JEtICRw1FMQ0CWN1TIXuIzuJI8GZAOOEfmGuCSr
+ 35puiMOczOhh3Efddhx+eaZ54rUHR8lWoXzOou7APxU4653nVua9fV8D1+xv+uSJhS4a
+ VrcnB/4y/SOv1qu+eDQ7xWzHagermWLdelJzzAcmnI43Oe1jEAgPZPFauwH2HyXgOpIY
+ +YylofHCZi7NDO0aSzLZLGgD8ulvN1ACEsFfsi3G4bW+EMu5Ng/TkWY07zwa2VfN023W
+ Kyzw==
+X-Gm-Message-State: AOJu0YweG8aJjvzNjORrBrrBvYRUVhvZUJdxWI9iwohv25qBCzARNU01
+ 4wmUWduvFR2h3jaxybuiTuCBt4Xv8irLknClUp6hGhpGDGx4uBLVoc97AVIxp+Dh3gPBZQxMi34
+ iQA==
+X-Google-Smtp-Source: AGHT+IG7dPGVdhIEBND2gOlq2U48F9X3FjyMRn1+/2DOHTXW5ohw0qSXj49DJOo/GeVxr2aDAn9H0A==
+X-Received: by 2002:a05:6e02:1c05:b0:3a0:c85c:f18b with SMTP id
+ e9e14a558f8ab-3a397ced693mr46595025ab.13.1728525118622; 
+ Wed, 09 Oct 2024 18:51:58 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4dbadaa947fsm61870173.126.2024.10.09.18.51.56
+ 8926c6da1cb9f-4dbadaa947fsm61870173.126.2024.10.09.18.51.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Oct 2024 18:51:57 -0700 (PDT)
+ Wed, 09 Oct 2024 18:51:58 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v7 07/11] test: Avoid double echo when starting up
-Date: Wed,  9 Oct 2024 19:51:41 -0600
-Message-Id: <20241010015145.1977999-8-sjg@chromium.org>
+Subject: [PATCH v7 08/11] test: Try to shut down the lab console gracefully
+Date: Wed,  9 Oct 2024 19:51:42 -0600
+Message-Id: <20241010015145.1977999-9-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241010015145.1977999-1-sjg@chromium.org>
 References: <20241010015145.1977999-1-sjg@chromium.org>
@@ -89,13 +89,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There is a very annoying bug at present where the terminal echos part
-of the first command sent to the board. This happens because the
-terminal is still set to echo for a period until Labgrid starts up and
-can change this.
+Send the Labgrid quit characters to ask it to exit gracefully. This
+typically allows it to power off the board being used. Only do this when
+labgrid is being used (detected with an env var).
 
-Fix this by disabling echo (and other terminal features) as soon as the
-spawn happens.
+If that doesn't work, try the less graceful approach.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
@@ -103,50 +101,56 @@ Signed-off-by: Simon Glass <sjg@chromium.org>
 (no changes since v6)
 
 Changes in v6:
-- Rebase without an earlier patch
+- Avoid doing the special shutdown unless USE_LABGRID is enabled
 
-Changes in v2:
-- Only disable echo if a terminal is detected
-
- test/py/u_boot_spawn.py | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+ test/py/u_boot_spawn.py | 22 +++++++++++++++++++---
+ 1 file changed, 19 insertions(+), 3 deletions(-)
 
 diff --git a/test/py/u_boot_spawn.py b/test/py/u_boot_spawn.py
-index 24d369035e5..f2398098a00 100644
+index f2398098a00..72d3d5e77b1 100644
 --- a/test/py/u_boot_spawn.py
 +++ b/test/py/u_boot_spawn.py
-@@ -11,6 +11,8 @@ import pty
- import pytest
- import signal
- import select
-+import sys
-+import termios
+@@ -16,6 +16,9 @@ import termios
  import time
  import traceback
  
-@@ -115,11 +117,23 @@ class Spawn:
-             finally:
-                 os._exit(255)
- 
-+        old = None
-         try:
-+            if os.isatty(sys.stdout.fileno()):
-+                new = termios.tcgetattr(self.fd)
-+                old = new
-+                new[3] = new[3] & ~(termios.ICANON | termios.ISIG)
-+                new[3] = new[3] & ~termios.ECHO
-+                new[6][termios.VMIN] = 0
-+                new[6][termios.VTIME] = 0
-+                termios.tcsetattr(self.fd, termios.TCSANOW, new)
++# Character to send (twice) to exit the terminal
++EXIT_CHAR = 0x1d    # FS (Ctrl + ])
 +
-             self.poll = select.poll()
-             self.poll.register(self.fd, select.POLLIN | select.POLLPRI | select.POLLERR |
-                                select.POLLHUP | select.POLLNVAL)
-         except:
-+            if old:
-+                termios.tcsetattr(self.fd, termios.TCSANOW, old)
-             self.close()
-             raise
+ class Timeout(Exception):
+     """An exception sub-class that indicates that a timeout occurred."""
+ 
+@@ -303,15 +306,28 @@ class Spawn:
+             None.
+ 
+         Returns:
+-            Nothing.
++            str: Type of closure completed
+         """
+-
++        # For Labgrid, ask it is exit gracefully, so it can transition the board
++        # to the final state (like 'off') before exiting.
++        if os.environ.get('USE_LABGRID'):
++            self.send(chr(EXIT_CHAR) * 2)
++
++            # Wait about 10 seconds for Labgrid to close and power off the board
++            for _ in range(100):
++                if not self.isalive():
++                    return 'normal'
++                time.sleep(0.1)
++
++        # That didn't work, so try closing the PTY
+         os.close(self.fd)
+         for _ in range(100):
+             if not self.isalive():
+-                break
++                return 'break'
+             time.sleep(0.1)
+ 
++        return 'timeout'
++
+     def get_expect_output(self):
+         """Return the output read by expect()
  
 -- 
 2.34.1
