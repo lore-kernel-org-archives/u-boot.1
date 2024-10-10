@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 963F2CFC5E2
-	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 17:10:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B3BECFC5E7
+	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 17:10:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1CBE58911E;
-	Thu, 10 Oct 2024 19:10:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 86BCF89114;
+	Thu, 10 Oct 2024 19:10:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hiWAZayh";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AJQDhDvM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E75F289170; Thu, 10 Oct 2024 19:09:59 +0200 (CEST)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+ id 1DFA3891D8; Thu, 10 Oct 2024 19:10:02 +0200 (CEST)
+Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
+ [IPv6:2607:f8b0:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E2D5188FEC
- for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 19:09:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0E80988FEC
+ for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 19:10:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-7b117fab020so42087285a.1
- for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 10:09:57 -0700 (PDT)
+Received: by mail-il1-x131.google.com with SMTP id
+ e9e14a558f8ab-3a39cabb9faso4495765ab.3
+ for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 10:09:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1728580197; x=1729184997; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1728580199; x=1729184999; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MzlOG0uj5LDRBRg6ZOajAlfgip/Cq5G7LarbF21cMt4=;
- b=hiWAZayhoj7wzouS2mQvL1C5jMAy2xVBP/kdGCpWfaTVlTrauEGK5RUijdSxkQxx2+
- TkUwgSAT+Wt4q3aQYnxBGStSPBS6sQy78sGXmKdAuHhmi2kDc3AsgKNBaKMYotObvrEa
- hTy0AHkkLGjUNhTwbbyPzX0mYMdWbDS8ylOp4=
+ bh=MT+6/K+3tpmASm3n3NDJsBEBK1H4vsAvvR8EZy46znM=;
+ b=AJQDhDvM+fvuELWqtAhT4cLP5jN/l2aMXDGUx7ZtM42jFMoEFyNpsr2Bp4LfUizZL5
+ Y4KKVr+G/rJQYN8ffHCjIWwa+kxHEmOZkpvgtzn8B1nBo74YHCowx3so0QDtHR2+RX6U
+ hxUo+UYGDh5JSwdCnEE1EZ9KxMA5lxuY6+fqE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728580197; x=1729184997;
+ d=1e100.net; s=20230601; t=1728580199; x=1729184999;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MzlOG0uj5LDRBRg6ZOajAlfgip/Cq5G7LarbF21cMt4=;
- b=pD4r3cBSpJXXhmBLYbrWPAimqyl5USwvap1Dkqpck/xELQF3mLwr6xE7LrqL8AMY/a
- sE2Zx+lpouNiMgDph0T3UZ+tcC0KEW3wlLnxqfQuAzwhw8E4+Y9LSPz/NA2BHF4q2Pe/
- KdfPtgGBzCBTERFoDYZ9QV1dalL+L5n/RSLSh7fOYjUv8SfjjeLcanlOcXxGVZ9qR4sa
- nQQCsV/hhtTHBg+OrLh03mt3cyKBC8GYJ43lTjQ8ORM6hlx0eSHStfj2OcDKmFuYd/X7
- NQ/xyogjWLWtzeAK79+SErLiVvYWsm1uAD9r31n5OipEw9fAXDfg5xil7hv2quXpiD0j
- jZJg==
-X-Gm-Message-State: AOJu0YzbUN8a+6OXtqsZu9SOJr7WdprR88CyRHhASxEtslZmHEpvKX0G
- nVmFNNguDUXX9Y3MzvUW+NOJkALuqUy2t+z0/cCGLjmWh5F0ZlI286wgZRvhNFc=
-X-Google-Smtp-Source: AGHT+IFeEkGr3KJSSVRPRp/1TlbMog0I4PYZoJl88qCYK1VfyCN8FtKkp0zonV2OxOLH9LhnTxynSQ==
-X-Received: by 2002:a05:620a:4709:b0:7af:c632:dac0 with SMTP id
- af79cd13be357-7b11961998dmr111771885a.50.1728580196805; 
- Thu, 10 Oct 2024 10:09:56 -0700 (PDT)
+ bh=MT+6/K+3tpmASm3n3NDJsBEBK1H4vsAvvR8EZy46znM=;
+ b=TEshm4nxyNG6aqxD+UjVpPrctJEfcW4WqBrsqtT4R4Hg7ZJ4T8LJpiQZ+pN7VKI9OC
+ RWZWXEiFVwgihQawK+0nEJLKkd93UnA2qG3x7Gzr//+7i7aqFKBrZzt/m+QZ+thu+7Oc
+ Uf1fs1lKld6LwNHjKQRdirq2GTVTWbp9XXF3nsugzMEYBQC6bzR0zk+1vAJ6NOdUBn+t
+ 1ZhHYho/XFJL8Jv9wiPg8BWw6+DtXYWHkSHmvP8rrL/U8SuGhoPqJrdl0Lg/tc8wqaGe
+ KdCCQikbMmL/Ny+YlM5A+uallh3q8aVzWzzGBUkY/0mkgsDQiGxEZvpoHHGG2rQv5WFy
+ Uvew==
+X-Gm-Message-State: AOJu0YwV+mFrgvo2W+qzQg8T2Jef4VjEL66rEc6J752llIqfCn3F48W7
+ hCXaclbT//Qda6RN7hNqwaRln68NDTbNR66BLxhCYCab25l4ZWV9qmG5WUz+Sa8=
+X-Google-Smtp-Source: AGHT+IGrCJyLX4LqjwEXUAowLIGV9YQ3qNczLqP2YSWBOjXYWO9aqzRkMIesDGjMQzF2b+5twgMFxg==
+X-Received: by 2002:a05:6e02:1d83:b0:3a0:9238:d38 with SMTP id
+ e9e14a558f8ab-3a3b51589bbmr2683695ab.10.1728580198743; 
+ Thu, 10 Oct 2024 10:09:58 -0700 (PDT)
 Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b114956069sm60577185a.74.2024.10.10.10.09.54
+ af79cd13be357-7b114956069sm60577185a.74.2024.10.10.10.09.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Oct 2024 10:09:55 -0700 (PDT)
+ Thu, 10 Oct 2024 10:09:58 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>
 Cc: Andre Przywara <andre.przywara@arm.com>, 
@@ -68,11 +68,12 @@ Cc: Andre Przywara <andre.przywara@arm.com>,
  Jonas Karlman <jonas@kwiboo.se>, Michal Simek <michal.simek@amd.com>, 
  Neal Frager <neal.frager@amd.com>, Prasad Kummari <prasad.kummari@amd.com>, 
  Teik Heng Chong <teik.heng.chong@intel.com>, Vignesh R <vigneshr@ti.com>
-In-Reply-To: <20240906211022.193224-1-marex@denx.de>
-References: <20240906211022.193224-1-marex@denx.de>
-Subject: Re: [PATCH] mtd: spi-nor-ids: Deduplicate mx25u25635f entry
-Message-Id: <172858019461.3696879.1075772767290978660.b4-ty@konsulko.com>
-Date: Thu, 10 Oct 2024 11:09:54 -0600
+In-Reply-To: <20240906211105.193254-1-marex@denx.de>
+References: <20240906211105.193254-1-marex@denx.de>
+Subject: Re: [PATCH] mtd: spi-nor-ids: Extend w25q16cl entry with locking
+ support
+Message-Id: <172858019696.3696879.4075776337512505642.b4-ty@konsulko.com>
+Date: Thu, 10 Oct 2024 11:09:56 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -93,10 +94,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 06 Sep 2024 23:10:10 +0200, Marek Vasut wrote:
+On Fri, 06 Sep 2024 23:10:42 +0200, Marek Vasut wrote:
 
-> The mx25u25635f entry exists twice in spi_nor_ids, remove the less
-> complete variant of the entry and keep only one copy of it.
+> The w25q16cl does support locking the same way w25q16dw does,
+> fill in the missing flags.
 > 
 > 
 
