@@ -4,93 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D62CCCF11C3
-	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 10:21:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8061CCF11D5
+	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 12:02:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 163F788EFB;
-	Thu, 10 Oct 2024 12:20:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 9CFFD88BC2;
+	Thu, 10 Oct 2024 14:02:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="oW12eFtQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MDrlnh5X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62C0788F2A; Thu, 10 Oct 2024 12:20:57 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id D4F7388E21; Thu, 10 Oct 2024 14:02:31 +0200 (CEST)
+Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
+ [IPv6:2607:f8b0:4864:20::52b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04CD888EB5
- for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 12:20:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id B09378837D
+ for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 14:02:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ddrokosov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 7E595100009;
- Thu, 10 Oct 2024 13:20:52 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 7E595100009
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1728555652;
- bh=rASYDwPLjIJ7B1QaU9Y7M282q10+qMGDRaeFL+IOMCE=;
- h=Date:From:To:Subject:Message-ID:MIME-Version:Content-Type:From;
- b=oW12eFtQVl7dtuKBNXQZDi8cQi0jSnmAEnn8tE7jDw0V1fLhpAGRILykhlFTVnbIa
- 9BX/xGJThAta17ifmC8ndNrm+3Zri+7JAPAOOhIHe5x3f/9D89har3WlmqUhnveK0H
- g9L+LktLSCFMPb09ExYAIOcfPsHOKg9BAw/3P62htYYLvyesjK701O8uRNmtdBrns2
- lvN1qdSOKVA8xUZwx6700EsH5oQKwj7xqo5UUagp/DzMS2QzD9+MUlgAyp4572u/uy
- ov2Z6vbcKrB4ll6p6ix34sramLj2aNe8AW4GWWgXULMHngxYC65v+ouknS07UZPogU
- rMCsbyu+G2Rig==
-Received: from smtp.sberdevices.ru (unknown [172.16.192.103])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Thu, 10 Oct 2024 13:20:52 +0300 (MSK)
-Date: Thu, 10 Oct 2024 13:20:51 +0300
-From: Dmitry Rokosov <ddrokosov@salutedevices.com>
-To: Simon Glass <sjg@chromium.org>
-CC: Igor Opaniuk <igor.opaniuk@gmail.com>, Mattijs Korpershoek
- <mkorpershoek@baylibre.com>, Sam Protsenko <semen.protsenko@linaro.org>, "Tom
- Rini" <trini@konsulko.com>, "Andrew F. Davis" <afd@ti.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Mario Six <mario.six@gdsys.cc>,
- <u-boot@lists.denx.de>, <u-boot-amlogic@groups.io>, <rockosov@gmail.com>,
- <kernel@salutedevices.com>
-Subject: Re: [PATCH v3 4/6] cmd: bcb: introduce 'ab_dump' command to print
- BCB block content
-Message-ID: <20241010102051.q67usj6oaykjaixx@CAB-WSD-L081021>
-References: <20241008-android_ab_master-v3-0-f292c45a33e4@salutedevices.com>
- <20241008-android_ab_master-v3-4-f292c45a33e4@salutedevices.com>
- <CAFLszTh7qjUN__MvAbcMPL+W4V=mfBrgt9zcg8zyfx+WBN=9bg@mail.gmail.com>
- <20241009132614.mlkpfkdni4cp2tgg@CAB-WSD-L081021>
- <CAFLszTgr-qHXF2QU7toZXOU0FgRMPU0XXnQ6SzMq32a_pguAww@mail.gmail.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pg1-x52b.google.com with SMTP id
+ 41be03b00d2f7-656d8b346d2so522303a12.2
+ for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 05:02:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1728561748; x=1729166548; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Y9Z/dtgZUEmfdtYGG5Lhq6BUh8icZiSHj4HDxYVajWY=;
+ b=MDrlnh5XRMLHmPiRjm5+FCR4Hy5SbSjNOxJv395fJDwesvzgMW7jhc2VoLWs5XfQ3Y
+ eg4BPqn0K2RZKk6d1/YrEvJuESGcy5tEa7iz2VmZrH6hSRWjG20oOIT9ctNM7CJwWhLe
+ mMLjRAZu4UGnHKYow/rVF9e7TRrD30BQFtpOGzQjfyaxBXcd2FvKECfwZskIRav70jaM
+ Gm0vLudVqZARHITYglOncCSpplfBC4Q3fqDMFd8EB0pkI5PnKnE/ziCPd3ygx/XvFI0I
+ Z+412iKYomyx1mROnXyJXNNsINduomj7pvfRj0YIT0fj+YxfugbS6okFcmgvXAB43ZKS
+ HkGw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728561748; x=1729166548;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Y9Z/dtgZUEmfdtYGG5Lhq6BUh8icZiSHj4HDxYVajWY=;
+ b=dDyXD5DBelTi5fpUHLg15hHuRcLV8bllrW6VMO64MH4ZHbQtZ5oSD1o1lipdOO6kdK
+ /IuxVLgI6hEht0DI0Pt3+NSCL3TkreFN1B2OSExJDfVpQD+CeapsqOjMx4vq6G2dsjx0
+ 7vdH2sPTvPGPxgYFYXi0ui2iNIOY8P/XA2qlnOBIoDymbUy+OoUzEEP6cWWWpj51ZCQN
+ V1CY/PnUiqF72nxL6AT1UdIy0xvLDOzS2W/8GSmEp11u9+H/lNbk7zDTDHHxuFxUz3qs
+ kvMH0qO2tbVmDzsUu9RS+S/uWbgdBqKYBt0XmmwNwTzR6NCbVWJPvoCEXQzOJknRVatK
+ hehg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXonIPpBMu48JQ2cGCrVLf6njPSBygb7JW7yRwpyThOZLi2SecL7E0cVTA/xd/WE0CD7zt6Q4c=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy0nWzSgfPChTUjP0vbTumKjgPjUxp48mqIr1MFZGoKrjhA8orn
+ pLDW5806alr3gp2Tmar+MbAFkAZBHCDrY8qHfsp/ZpooFVsgp1XM8JgS2f/s2feZhmJa5Ve6eJN
+ 787K3zVpT0ugI8NtGcOq55/4l3VfoO02JcNAeAw==
+X-Google-Smtp-Source: AGHT+IEZ8FqSoDGY/A5IRjtamdRjkfhvQ4rGZGIfpuoB9glgBg0agyrKPXxVA8PcV29REbj+eMyr3MXa9qzxqmEXsFw=
+X-Received: by 2002:a17:90a:8d81:b0:2e2:a667:1a18 with SMTP id
+ 98e67ed59e1d1-2e2a6671befmr6699406a91.5.1728561748128; Thu, 10 Oct 2024
+ 05:02:28 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTgr-qHXF2QU7toZXOU0FgRMPU0XXnQ6SzMq32a_pguAww@mail.gmail.com>
-User-Agent: NeoMutt/20220415
-X-Originating-IP: [172.28.226.150]
-X-ClientProxiedBy: p-i-exch-a-m2.sberdevices.ru (172.24.196.120) To
- p-i-exch-a-m1.sberdevices.ru (172.24.196.116)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 188352 [Oct 10 2024]
-X-KSMG-AntiSpam-Version: 6.1.0.4
-X-KSMG-AntiSpam-Envelope-From: ddrokosov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 39 0.3.39
- e168d0b3ce73b485ab2648dd465313add1404cce, {Tracking_uf_ne_domains},
- {Track_E25351}, {Tracking_from_domain_doesnt_match_to},
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; smtp.sberdevices.ru:5.0.1,7.1.1;
- 127.0.0.199:7.1.2; lore.kernel.org:7.1.1;
- salutedevices.com:7.1.1, FromAlignment: s
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean, bases: 2024/10/10 08:57:00
-X-KSMG-LinksScanning: Clean, bases: 2024/10/10 08:56:00
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2024/10/10 09:24:00 #26730447
-X-KSMG-AntiVirus-Status: Clean, skipped
+References: <20241009015020.25817-1-sjg@chromium.org>
+ <20241009015020.25817-7-sjg@chromium.org>
+ <CAC_iWjKh7_OKKMi9K6eMaiYUN-Nxf+ZQ0NuW9BYzK3u4F0Krcg@mail.gmail.com>
+ <CAFLszTjBQaoF9g0nky5mAA429gzA8QvzjxHxooDaRo1=BB+stg@mail.gmail.com>
+ <20241009223907.GN14210@bill-the-cat>
+In-Reply-To: <20241009223907.GN14210@bill-the-cat>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 10 Oct 2024 15:01:51 +0300
+Message-ID: <CAC_iWjK8Bb16aLAKtmYB0Aof4CJP-AAdsMTEYvnFeMeXaiWM9w@mail.gmail.com>
+Subject: Re: [PATCH 6/6] cmd: Add a command to show the memory map
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Alexander Gendin <agendin@matrox.com>,
+ Emil Kronborg <emil.kronborg@protonmail.com>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Tom Fitzhenry <tom@tom-fitzhenry.me.uk>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,74 +101,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Oct 09, 2024 at 03:13:57PM -0600, Simon Glass wrote:
-> Hi Dmitry,
-> 
-> On Wed, 9 Oct 2024 at 07:26, Dmitry Rokosov <ddrokosov@salutedevices.com> wrote:
+On Thu, 10 Oct 2024 at 01:39, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Wed, Oct 09, 2024 at 03:14:25PM -0600, Simon Glass wrote:
+> > Hi Ilias,
 > >
-> > Hello Simon,
-> >
-> > On Tue, Oct 08, 2024 at 07:57:15PM -0600, Simon Glass wrote:
-> > > On Tue, 8 Oct 2024 at 14:18, Dmitry Rokosov <ddrokosov@salutedevices.com> wrote:
-> > > >
-> > > > It's really helpful to have the ability to dump BCB block for debugging
-> > > > A/B logic on the board supported this partition schema.
-> > > >
-> > > > Command 'bcb ab_dump' prints all fields of bootloader_control struct
-> > > > including slot_metadata for all presented slots.
-> > > >
-> > > > Output example:
-> > > > =====
-> > > > > board# bcb ab_dump ubi 0#misc
-> > > > > Read 512 bytes from volume misc to 000000000bf07580
-> > > > > Read 512 bytes from volume misc to 000000000bf42f40
-> > > > > Bootloader Control:       [misc]
-> > > > > Active Slot:              _a
-> > > > > Magic Number:             0x42414342
-> > > > > Version:                  1
-> > > > > Number of Slots:          2
-> > > > > Recovery Tries Remaining: 0
-> > > > > CRC:                      0x2c8b50bc (Valid)
-> > > > >
-> > > > > Slot[0] Metadata:
-> > > > >       - Priority:         15
-> > > > >       - Tries Remaining:  0
-> > > > >       - Successful Boot:  1
-> > > > >       - Verity Corrupted: 0
-> > > > >
-> > > > > Slot[1] Metadata:
-> > > > >       - Priority:         14
-> > > > >       - Tries Remaining:  7
-> > > > >       - Successful Boot:  0
-> > > > >       - Verity Corrupted: 0
-> > > > ====
-> > > >
-> > > > Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
-> > > > ---
-> > > >  boot/android_ab.c    | 68 ++++++++++++++++++++++++++++++++++++++++++++++++++++
-> > > >  cmd/bcb.c            | 35 +++++++++++++++++++++++++++
-> > > >  include/android_ab.h | 10 ++++++++
-> > > >  3 files changed, 113 insertions(+)
-> > > >
+> > On Wed, 9 Oct 2024 at 04:41, Ilias Apalodimas
+> > <ilias.apalodimas@linaro.org> wrote:
 > > >
-> > > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > > Hi Simon,
 > > >
-> > > Can you also update the test?
+> > > We already have a mem info command, which is pretty useless. Can't we
+> > > reuse that ?
 > >
-> > I apologize, but I didn't quite understand your point. Could you please
-> > clarify? This patch series includes additional tests for the 'ab_dump'
-> > subcommand. For more details, please refer to:
-> >
-> > https://lore.kernel.org/all/20241008-android_ab_master-v3-6-f292c45a33e4@salutedevices.com/
-> 
-> OK, thank you. Sometimes it is easier (for reviewers) if you update
-> the test in the same commit.
+> > I am not too keen on using that as 'info' is pretty vague. We could
+> > perhaps create a 'mem' command with 'info' as one subcommand and 'map'
+> > as another?
+>
+> Are we talking about "meminfo" which literally only prints gd->ram_size?
+> If so, I don't think it's worth worrying about enhancing that.
 
-Should I resend the patch series with ab_dump implementation and tests
-in the same commit?
+Yes, that's the one
 
-I can prepare new version, if needed, no problem.
-
--- 
-Thank you,
-Dmitry
+Thanks
+/Ilias
+>
+> --
+> Tom
