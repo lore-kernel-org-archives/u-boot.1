@@ -4,82 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 612F7CF11FD
-	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 15:10:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A746BCF11FE
+	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 15:27:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 38F388918B;
-	Thu, 10 Oct 2024 17:10:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 2466A8904D;
+	Thu, 10 Oct 2024 17:27:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FTq6mvLS";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vwSmArXO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C0FD89167; Thu, 10 Oct 2024 17:10:41 +0200 (CEST)
-Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
- [IPv6:2607:f8b0:4864:20::f36])
+ id D03D589092; Thu, 10 Oct 2024 17:27:03 +0200 (CEST)
+Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
+ [IPv6:2607:f8b0:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E2738911E
- for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 17:10:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 85C7D89045
+ for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 17:27:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf36.google.com with SMTP id
- 6a1803df08f44-6cbce8d830dso8376886d6.1
- for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 08:10:39 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-71df8585a42so802650b3a.3
+ for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 08:27:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728573038; x=1729177838; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1728574020; x=1729178820; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Rq1F3RiqpBqt3VnXLmx8jquQS9LdbNMMWNaVhowSr1I=;
- b=FTq6mvLSDET82NcBiItIY5FW4lvYKti85mVUkb/pdQ2T1QvrM2CEVfSQIu/h/wM+hR
- QKDbASCuUSzlsdsbTxFkbHjpXTl6DxxfVoBwcshHiMTI6sS6gSFPc1h5UzzarI9xxSkm
- l14hijPwwhDMk8ZBgaam/vn+5twH8Mn7Q5MTQ=
+ bh=vgK3iX6dLVw+T2tXHFBp5Zw9LH43Q9vy/tlFaz73zOg=;
+ b=vwSmArXOPlswArx3HxzIaYZhRUmnb3/AOqGXtszR43df0+hr0Lry0IcftgmpRigofy
+ Ablv3U+hflg3Jyf2gdS72eFwAiaf0opW+ewQBl3aZjxhhYcyzwaWsvqHv9Sx+/7y8bPi
+ uccHpS+szQdwjZhOEmjUgK6SiQ+Zx9hr0SCCuFKvD/bRYXbQsTqHVdSZ+YBqw2RcwXxb
+ u18v21QYIBVKA20GRTzTJk/aUDiTQ6flyosL4HdG2Yc+8Lb884OuaD+JfnE+hOqrFuUp
+ ggKzQc6GwbVUPwn+FOPl9dX+Dz4+Bk4a1t28/HAMIMbXWYb2S/sz/nz4dngrKw9Wb6p8
+ euzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728573038; x=1729177838;
+ d=1e100.net; s=20230601; t=1728574020; x=1729178820;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Rq1F3RiqpBqt3VnXLmx8jquQS9LdbNMMWNaVhowSr1I=;
- b=tioyOW7ltVEqyVGUM8CIJOfip826GJ9mU0YGaWaizsTmwhGq7uV4hVt9UrziJaPCWd
- 7ewrPZ+wmHyQKtVC6b/j+Bf5n/JROBi7Coqk1dndKry9Jf98HxaXC//Mc8dWOoOTnU8f
- gHq31adZ6ayRJ111Gy09tmo4T/OMkf1+aq1OtMpt3GSRQElupK0Pz5yM6lCxg/+r8mTZ
- AVoGPzewQ7CoiWGBwLspocQNHXboel54+r+ySNuNoP4mAZQV9pe2OLmSIjvuqc2u7aAN
- EhGLwZl9AazBeSCx2aLay6PuM5WaWefInTSqOVLS4p+JDgmVA4C9hOQ7m4DSodyTLl1e
- 6y9A==
+ bh=vgK3iX6dLVw+T2tXHFBp5Zw9LH43Q9vy/tlFaz73zOg=;
+ b=B543V8Oy3/jDjT5daQ57qeFKKk/DsDfTwdvQvYYgzhL7j5qSB6HxITwhTKDV3tqGyw
+ ZoQqmLs/CvP6mp1t5o5SkP7KJAbfvymp+T2Xv+9LKsrY9TkSjTaVc+ljKnTH/qbmBw4v
+ jU2kwW0qcgVlXypSPdTBoHHawWWCIVrv3mM7cDBsSAoR9wjaPhgpwh4GZxEXvyy1uLNl
+ E8SouNUN9eOHnPVBs2UCPBcHCdDLRaKuF25n/fqVp6bjTiVyHo1OHE3/eW4A7OeCiOAz
+ inuN4fRnhK3AxBfExgaSKf37+2wLbrUkE/snExFiLzxqmM0Wmg8fhhJ/4KHG8Yjkv7O+
+ XAYg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWu4iZdAsGmneRS5I3McmojqylIYa4ev8j6mzz8uw9YJvBGqafmR9gnU6jg5/usjFyi2zHeG6s=@lists.denx.de
-X-Gm-Message-State: AOJu0YzloXmUMccXprsFr4jbR5l68RIN4WsRDTgvbloyOzgRIlRnPH/E
- MYGuDnQ1OSfqaR83t5EeSUdBkbJnVQY0g06vsayx63tth39gB5/cNN4KQW3p/o9Rdh2PF78/F8C
- j8XFHV0RTHbnrDnpWhFsSn5cpsw1ETLFJVenu
-X-Google-Smtp-Source: AGHT+IGQRJw/Yd1phuU6scbBihTnR4lBY8zIRoLguMErIx1MxoFrHWZETe1fezHIY2wItMomqggbxVtUDd1SFQCqAvs=
-X-Received: by 2002:ad4:588e:0:b0:6cb:ce41:20c1 with SMTP id
- 6a1803df08f44-6cbce4120d1mr71880116d6.14.1728573008234; Thu, 10 Oct 2024
- 08:10:08 -0700 (PDT)
+ AJvYcCW6Y+nVRURc2cShIB1Rid1FgSediY0S7tQcfYepiPbB+gKNRpsHTV4UICJKW+0VQnnPLxJm70Q=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywdgq5ZwEgyJuz9VGgrW6iFth8eMdmI/VzFmQv/TijYZwr6bEgY
+ tR7nSxBX77n2yjRcegpBnN6Lo2Y96gVuVW7MnxTlgyDn2LaSM+GrEcuqFtRhshvryWjutoPqzmb
+ rbmeLxojpVDGn0jbgFYpiKSZabPIpEnI1joPk1Q==
+X-Google-Smtp-Source: AGHT+IHJ3ZPBwYIjf6iD58EeTfTk0IucZdHKFT6Bk/bRLK/Er2ntCp4wugiXFxKkKDe0aIDvHT3/+PbnO0hoZr27uyI=
+X-Received: by 2002:a05:6a21:6e4a:b0:1d5:144b:593f with SMTP id
+ adf61e73a8af0-1d8a3c20776mr9724529637.28.1728574020068; Thu, 10 Oct 2024
+ 08:27:00 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241007205543.1632499-1-mikhail.kshevetskiy@iopsys.eu>
- <CAFLszThjoOakb6FgrdkhvjAn1fL00wZeTGRewWUedqSO3E6+dQ@mail.gmail.com>
- <f5fe4549-645a-45d0-9869-fc1c6e355cb3@iopsys.eu>
-In-Reply-To: <f5fe4549-645a-45d0-9869-fc1c6e355cb3@iopsys.eu>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 10 Oct 2024 09:09:57 -0600
-Message-ID: <CAFLszTjC99uGBu1LGf-x0n5j+DnjXneEg+By=Sr_NtOLJy-i4Q@mail.gmail.com>
-Subject: Re: [PATCH v10 00/13] net: tcp: improve tcp support
-To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Cc: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+References: <20241009015020.25817-1-sjg@chromium.org>
+ <20241009015020.25817-7-sjg@chromium.org>
+ <CAC_iWjKh7_OKKMi9K6eMaiYUN-Nxf+ZQ0NuW9BYzK3u4F0Krcg@mail.gmail.com>
+ <CAFLszTjBQaoF9g0nky5mAA429gzA8QvzjxHxooDaRo1=BB+stg@mail.gmail.com>
+ <20241009223907.GN14210@bill-the-cat>
+ <CAC_iWjK8Bb16aLAKtmYB0Aof4CJP-AAdsMTEYvnFeMeXaiWM9w@mail.gmail.com>
+ <CAFLszThoXsWuPu=b+FT0wuURR1rxTE6RWZhUhET9mHbQ+j63ZA@mail.gmail.com>
+In-Reply-To: <CAFLszThoXsWuPu=b+FT0wuURR1rxTE6RWZhUhET9mHbQ+j63ZA@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 10 Oct 2024 18:26:23 +0300
+Message-ID: <CAC_iWjKKqsJh7yUv-kRe5WiGA02c4YU4Yj83UXVXjki+CO9X1Q@mail.gmail.com>
+Subject: Re: [PATCH 6/6] cmd: Add a command to show the memory map
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Alexander Gendin <agendin@matrox.com>,
+ Emil Kronborg <emil.kronborg@protonmail.com>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
  Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Sean Anderson <seanga2@gmail.com>, 
- Baruch Siach <baruch@tkos.co.il>, Anand Moon <linux.amoon@gmail.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Yasuharu Shibata <yasuharu.shibata@gmail.com>, u-boot@lists.denx.de
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Tom Fitzhenry <tom@tom-fitzhenry.me.uk>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,36 +103,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mikhail,
+Hi Simon,
 
-On Wed, 9 Oct 2024 at 02:21, Mikhail Kshevetskiy
-<mikhail.kshevetskiy@iopsys.eu> wrote:
+
+On Thu, 10 Oct 2024 at 18:10, Simon Glass <sjg@chromium.org> wrote:
 >
-> Will try to fix spelling. Unfortunately my english is not very well.
-
-Your English is fine and we don't normally worry about that sort of
-thing too much. It's just that they looked like typos rather than
-grammar, etc.
-
+> Hi,
 >
-> On 09.10.2024 04:57, Simon Glass wrote:
-> > Hi Mikhail,
+> On Thu, 10 Oct 2024 at 06:02, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
 > >
-> > On Mon, 7 Oct 2024 at 14:55, Mikhail Kshevetskiy
-> > <mikhail.kshevetskiy@iopsys.eu> wrote:
-> >> U-Boot support of LWIP is not ready for a moment, but we already have
-> >> some kind of tcp support. Unfrotunately this support is really bad.
-> > spelling
+> > On Thu, 10 Oct 2024 at 01:39, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Wed, Oct 09, 2024 at 03:14:25PM -0600, Simon Glass wrote:
+> > > > Hi Ilias,
+> > > >
+> > > > On Wed, 9 Oct 2024 at 04:41, Ilias Apalodimas
+> > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > >
+> > > > > Hi Simon,
+> > > > >
+> > > > > We already have a mem info command, which is pretty useless. Can't we
+> > > > > reuse that ?
+> > > >
+> > > > I am not too keen on using that as 'info' is pretty vague. We could
+> > > > perhaps create a 'mem' command with 'info' as one subcommand and 'map'
+> > > > as another?
+> > >
+> > > Are we talking about "meminfo" which literally only prints gd->ram_size?
+> > > If so, I don't think it's worth worrying about enhancing that.
 > >
-[..]
-
-
-> >> Changes v10:
-> >>  * netcat: fix bug appeared after rx/tx packet counter addition
-> >>  * rebased on top of v2024.10
-> > Is this series ready to go in?
+> > Yes, that's the one
 >
-> I think it's ready.
+> So, you mean to just delete that command and make it show the memory
+> map instead? Or show the memory size at the top, before the memory
+> map?
 
-Regards,
-Simon
+I meant the latter, but if you and Tom agree that we should leave it
+as is, I don't mind adding a new command. I assume that the list above
+is non exhaustive, so in the future we could expand it with lmb
+reservations etc?
+
+
+Thanks
+/Ilias
+>
+> Regards,
+> Simon
