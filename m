@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26753CFC5F0
-	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 18:25:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12AD9CFC5EB
+	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 18:25:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D2AE89124;
-	Thu, 10 Oct 2024 20:25:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A52E0891D8;
+	Thu, 10 Oct 2024 20:25:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CPanOVsF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OA0h11kR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7CCF789155; Thu, 10 Oct 2024 20:25:35 +0200 (CEST)
-Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
- [IPv6:2607:f8b0:4864:20::f2a])
+ id 2E47388FE1; Thu, 10 Oct 2024 20:25:44 +0200 (CEST)
+Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
+ [IPv6:2607:f8b0:4864:20::835])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D25E8910B
- for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 20:25:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 95DFB891E9
+ for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 20:25:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2a.google.com with SMTP id
- 6a1803df08f44-6cbd092f7f0so7784976d6.0
- for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 11:25:33 -0700 (PDT)
+Received: by mail-qt1-x835.google.com with SMTP id
+ d75a77b69052e-4603f64ef17so10577171cf.0
+ for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 11:25:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1728584732; x=1729189532; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1728584738; x=1729189538; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=aKOht5lJBrhtTUhmzsBGpj1JwxtkxIGIK5yUv7edctI=;
- b=CPanOVsFpGnuFDldIeVuzU4ZOkIIcb6/5FKOaEKQPUOZ2DcD0bjGbQKxVV/w5OoUh7
- xdZYT0Cwjbu3m62ewNqO/KLa4gjMi37m82XyPyWxP7xgZjF1wiAnsgCYj45F9SzCN/HX
- 9/h5VDCrVt+hoQ+rACBBjA5EqCUhbBx5s+ZTw=
+ bh=EV7PZYpLmHioffO+mjdHtaVqVBxWUxhz10zqxOakpgA=;
+ b=OA0h11kRRPv8/tEPoj97UPtj9NOR1A7Nl5twBEluUwR0+6+FVQOpPl27C0L8R0fZ0Q
+ 4lgxUnkobSWwEP8IydVCmpm6hbaWxPMSByV7q7hy467sVrBv7pOViLMGhyoMoq+U/J6h
+ hEGin+GN6DOmTRo0V+Nxu+aK5vaS3wZjjGtGw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728584732; x=1729189532;
+ d=1e100.net; s=20230601; t=1728584738; x=1729189538;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aKOht5lJBrhtTUhmzsBGpj1JwxtkxIGIK5yUv7edctI=;
- b=vhFGi24Zl+DykzATYkHIZ560rcp0qRMeQzhL3x+N6zDf/Mdpb19HtQVEd2V946MPId
- oSOG4OiHp4tv6wGeHIT/7rvcCTcZUPErx3hPXBn06qPER5IwEUD4URl7YkD5Aj3Gvgxt
- Wq3spi+omNUcMXt/1ukP8n+OwTT97UctjH8ONHRFW/x+adI0u972bS2dzwjBRXQ24O49
- KARo5iz4LBMiVbBGYgELTGFZCv6yb8sZUcYZG5FDCRUIJ0QSoP4AAMUSgQSVXLDvuKyI
- C8XfPwUy2TTjgv+JU2aQkjlxZw0bk2qtRvZPvOHAZ2HOk0zMi8ptCp45solc08RVYVDL
- 8UAg==
+ bh=EV7PZYpLmHioffO+mjdHtaVqVBxWUxhz10zqxOakpgA=;
+ b=gIUr9MchEVkgCZBEEoG2cl4qHQzi7lbNC/shNjKS9iOwFJNlxBeRhDJvfRzN+sVB5d
+ AJ594/30GSf10unD3h6lDkoTaJkgYvqXemduh3g5zbNSnPEFYKep7UjI+JrtmcYxY0kV
+ 5E/oZOS3degUiZE6yvYK0QD3tQthzlLpllrFYR/Gq8bHOpsbWFaKCiooFOJw9eFT3Q/0
+ UVwxzkIFQ7mwV8hg+3PlsgtVnDKWBq1e5embdJcY6OpJ7OBng0qv+apxpl6F+xMEPdkz
+ KExc1I9JhCRrl5Jwjbo9E+DVd+rKNxNbDWb1/koQxi9vdql9wjJt0VeAdxbg5+B5aV9n
+ sGeg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWk/56zVtiiUt+5REcT+NBFhl4df5BnWAqPwtrRi7zHw+dR0ezwyoB7sczcnpCNk/TaFIEuA7Y=@lists.denx.de
-X-Gm-Message-State: AOJu0YxKp1eJZB6BVcwn+Mu2xj7AUJruT8zrmiV7gsrDGLfwpQZ2pwRr
- FciNXW0KLlBfnFzUTUlRHooJyP6MWwuJpmi+RLZJl0tF9rOIcp4rRVjB2BYHxdM=
-X-Google-Smtp-Source: AGHT+IF2hDvHX2VyJKolUsoPSKJBbtB3NJcqci2kQwlp5wOetPKW/OhYMwFLsG+6UdeDTlXuybVDbg==
-X-Received: by 2002:a05:6214:5d0c:b0:6cb:8282:d02f with SMTP id
- 6a1803df08f44-6cbe4a2be52mr71679076d6.6.1728584732033; 
- Thu, 10 Oct 2024 11:25:32 -0700 (PDT)
+ AJvYcCWSzhDd078bdYGPMv9SjUMx70NOrQzVUFGPj4UB2TiCuC1vxLeSnZOjiWTSnSenBph8iqS7YMo=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz8kTXvc5HmkK1A0fPBdnhinoUsxcwF8OiLMGY8vKRLNEPmBUf1
+ 40SrtIANH8QtJKXrwVMTyBylroMY1oCzOLu6a1V/Pw8I4C0S9F9qthwiteAUvQ0=
+X-Google-Smtp-Source: AGHT+IHHvGOyWceEO/cc+/oG8uV/O8mhjXNDWvh+rCnI3UQAdPTjqkAJGzxOp5H0PLEkyEjw4ZI8Aw==
+X-Received: by 2002:ac8:5710:0:b0:45c:9c44:ae8e with SMTP id
+ d75a77b69052e-4603f6077aamr74753361cf.22.1728584738065; 
+ Thu, 10 Oct 2024 11:25:38 -0700 (PDT)
 Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6cbe863042esm7683736d6.120.2024.10.10.11.25.30
+ d75a77b69052e-46042892a05sm7697861cf.80.2024.10.10.11.25.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Oct 2024 11:25:31 -0700 (PDT)
-Date: Thu, 10 Oct 2024 12:25:28 -0600
+ Thu, 10 Oct 2024 11:25:37 -0700 (PDT)
+Date: Thu, 10 Oct 2024 12:25:34 -0600
 From: Tom Rini <trini@konsulko.com>
 To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
 Cc: festevam@gmail.com, sbabic@denx.de, u-boot@lists.denx.de,
  Jaehoon Chung <jh80.chung@samsung.com>, uboot-imx@nxp.com,
  Joy Zou <joy.zou@nxp.com>, Ye Li <ye.li@nxp.com>,
  Peng Fan <peng.fan@nxp.com>
-Subject: Re: [PATCH 1/2] power: pmic: Support pmic pf0900
-Message-ID: <20241010182528.GR14210@bill-the-cat>
+Subject: Re: [PATCH 2/2] power: regulator: Support pmic pf0900
+Message-ID: <20241010182534.GS14210@bill-the-cat>
 References: <20240930032244.20286-1-peng.fan@oss.nxp.com>
+ <20240930032244.20286-2-peng.fan@oss.nxp.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="cBWHuNSTTzgRkfc7"
+ protocol="application/pgp-signature"; boundary="IM51slTVZIBpG6ld"
 Content-Disposition: inline
-In-Reply-To: <20240930032244.20286-1-peng.fan@oss.nxp.com>
+In-Reply-To: <20240930032244.20286-2-peng.fan@oss.nxp.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,75 +96,60 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---cBWHuNSTTzgRkfc7
+--IM51slTVZIBpG6ld
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Sep 30, 2024 at 11:22:42AM +0800, Peng Fan (OSS) wrote:
+On Mon, Sep 30, 2024 at 11:22:43AM +0800, Peng Fan (OSS) wrote:
 
 > From: Joy Zou <joy.zou@nxp.com>
 >=20
-> Support NXP pmic pf0900
+> Add regulator driver for NXP PF0900
 >=20
-> Reviewed-by: Ye Li <ye.li@nxp.com>
 > Signed-off-by: Joy Zou <joy.zou@nxp.com>
+> Reviewed-by: Ye Li <ye.li@nxp.com>
 > Signed-off-by: Peng Fan <peng.fan@nxp.com>
 > ---
->  drivers/power/pmic/Kconfig  |  15 ++
->  drivers/power/pmic/Makefile |   1 +
->  drivers/power/pmic/pf0900.c | 174 +++++++++++++++++++++++
->  include/power/pf0900.h      | 269 ++++++++++++++++++++++++++++++++++++
->  4 files changed, 459 insertions(+)
->  create mode 100644 drivers/power/pmic/pf0900.c
->  create mode 100644 include/power/pf0900.h
+>  drivers/power/regulator/Kconfig  |  15 ++
+>  drivers/power/regulator/Makefile |   1 +
+>  drivers/power/regulator/pf0900.c | 304 +++++++++++++++++++++++++++++++
+>  3 files changed, 320 insertions(+)
+>  create mode 100644 drivers/power/regulator/pf0900.c
 
-No MAINTAINERS update for this file. And=20
+In addition to the MAINTAINERS comment:
+CHECK: Macro argument reuse '_range' - possible side-effects?
+#280: FILE: drivers/power/regulator/pf0900.c:59:
++#define PCA_DATA(_name, enreg, enmask, vreg, vmask, _range) \
++{ \
++       .name =3D (_name), .enable_reg =3D (enreg), .enablemask =3D (enmask=
+), \
++       .volt_reg =3D (vreg), .volt_mask =3D (vmask), .ranges =3D (_range),=
+ \
++       .numranges =3D ARRAY_SIZE(_range) \
++}
 
-[snip]
-> +static u8 crc8_j1850(u8 *data, u8 length)
-> +{
-> +	u8 t_crc;
-> +	u8 i, j;
-> +
-> +	t_crc =3D 0xFF;
-> +	for (i =3D 0; i < length; i++) {
-> +		t_crc ^=3D data[i];
-> +		for (j =3D 0; j < 8; j++) {
-> +			if ((t_crc & 0x80) !=3D 0) {
-> +				t_crc <<=3D 1;
-> +				t_crc ^=3D 0x1D;
-> +			} else {
-> +				t_crc <<=3D 1;
-> +			}
-> +		}
-> +	}
-> +	return t_crc;
-> +}
-
-This gets repeated in other drivers and I gather this is "CRC8 SAE
-J1850" algorithm? This should get put in lib/crc8.c and re-used as
-needed.
+And it's that last _range that I believe is being noted.
 
 --=20
 Tom
 
---cBWHuNSTTzgRkfc7
+--IM51slTVZIBpG6ld
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcIHBgACgkQFHw5/5Y0
-tywNFwv9FLeNDlJzrOKEvLU+uXDtDHx+PpYiNdVOian62zJ49cOjX8YmwzQbvUCr
-ko5hXyZbAzTWk3u0g2EgXsFS45jFBvmiydsyEVcZpdhYFAZyOOyO3PpmUNl2OjfA
-/d9LBIrZRpYtvjjJiDqZv+LMEyBZ0A6rt5uqWZnBRhvvcieNNcWecxjXHNJroYoU
-ohh7mmaovv8CKCOs5nwn9FvTtKCSuCzjLHjbAF1on0LREIJVt6wAhLWwH8dFsMXY
-ULiJAfQBgmDuxD9W8TasCTviTNsG/pJHjslIL/077HZ7ZIkGh7ScIpaED9aGxJ/s
-ti6oJuX761zwUOg3HWQCWtaLJ5gUFH2jFD9doa1Tn3NQVChehtJPw2nds2Fsr1m2
-y58p9VVVxWmDARU+cyM5wQby5F5E56NUGcYbrOZ1B2Lo8pDspqA+9nQb2+MCvC1v
-sVGVO80HIcCptn04GMGaWx8qa4p26G0iVecXNWIFjO5r3pHS0Be8UHY1qFifGKJ/
-McHtDWNw
-=e5qN
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcIHB4ACgkQFHw5/5Y0
+tyz3awwAgbGf1KGUeleZwTXUkNr+EiVc1c3OxNd+GaDPldz0efUPjLI1fmv26T8M
+eu6YdUIKNIdC2qFHcDPVRllhpC+HkNbVeHG63HNxcC3cUYvrEl/zbnrrIy5Rjler
+DNiVM/DzkF+bAxIcS9jbNuSpzIad6WyNEz+NMaW4LOjn4AZHyd6XA9Q4boMRuOz9
+Yoecw+7uDh5FNi6ezjPoxPHLWMypJpIOz9upbZGdEeRpxzXqB4/kvkCQzeXVqUi9
+TkespNZcZ1dOFAwcFgProhc/58/uz0Q9D5UPS4jdfOzxnCmaNdcZhUlNCMuD87gm
+NNy/qDKLgz+4Ug9LH03e5xIgLEydBAQ96vD4qSWJOxp4V75uEUwTsjh2Z/+TZJm3
+4bBSHFQkm/xskNDpGiFT6ZFmUwXrC2v1NbC7+ysYaYLP4lylojgwDHMVSTiUO7hE
+lI5go0HLYQg72QrMXpCdXges1164RjrfppJvE9/+koHqSS/B3aYdK/7esCbG+w5L
+NsvTtY1Z
+=uAyK
 -----END PGP SIGNATURE-----
 
---cBWHuNSTTzgRkfc7--
+--IM51slTVZIBpG6ld--
