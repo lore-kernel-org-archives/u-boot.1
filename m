@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0097BCFC5F7
-	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 18:59:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C875ECFC5F7
+	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 19:01:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7FB158925B;
-	Thu, 10 Oct 2024 20:59:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 335F28925B;
+	Thu, 10 Oct 2024 21:01:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rDTUoQDO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Kj+4VdZ1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8092E8925B; Thu, 10 Oct 2024 20:59:18 +0200 (CEST)
-Received: from mail-ua1-x92a.google.com (mail-ua1-x92a.google.com
- [IPv6:2607:f8b0:4864:20::92a])
+ id EAF3189268; Thu, 10 Oct 2024 21:01:17 +0200 (CEST)
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE3298925A
- for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 20:59:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CF0908925A
+ for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 21:01:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ua1-x92a.google.com with SMTP id
- a1e0cc1a2514c-84fcfe29e09so394814241.2
- for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 11:59:15 -0700 (PDT)
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-3e4d5aef2f8so783826b6e.2
+ for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 12:01:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1728586755; x=1729191555; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1728586874; x=1729191674; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=H/MSwJgelFz7QMSThqa9SIfm9SrAX18WLcfezxSipvQ=;
- b=rDTUoQDOLczZlhPg1XMLPd9f7gwR6ZlOfBPeGmIskFpMciZaDDEp+F5R9gYGHB6gPs
- +StHOMRxi36wwIusgn20JG9LFn2roQYA/Oj1DxSIuDCxJFRkd6Whdg60UNqnY36/iM7n
- QgxcxrZxU94koIIUQsV4RhWqg2jI+AfwX8Tp4=
+ bh=z8vTWUNOxOswosyLq6RVt4SjoT1i+0tI9tpj6jdSo98=;
+ b=Kj+4VdZ1r86Cv354RWNU5F/HgiRQu7Wm7FFDD1t6OScWz6q6r4wuvSBc2Z1lC7rM9S
+ 6aUyTgkrZDpemmjIO/WdekK5l5k7Yb1SLKc2ZNM/LtAygBHa5z5G3tWGKX+bWyBg/Q7K
+ yQdgeFVMcD8gxmeeOdCrYlwLzzLFEoLmhhU0I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728586755; x=1729191555;
+ d=1e100.net; s=20230601; t=1728586874; x=1729191674;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=H/MSwJgelFz7QMSThqa9SIfm9SrAX18WLcfezxSipvQ=;
- b=ZrcFwBciCDjOE3SJHQjUroLeto4fLdZ91weilLi91Q04agfaR+Pw5Eq458GkPTp0kw
- qRlMN5K2ZypmD4w/WhnwyqnNaPZUDKjQYiTCqzgzPZJkPq3755UrDDw0aJWl9l5uNFh3
- FEfuGdjq39YHb5jQfA+5rcQPJV73RC+CTrwEjzwv8ber8OoeG1tDdPtaY4Tkv3AZ5tEa
- 3LY7xcEwBIZay8nBKAAxI9f0uJW2A1xyty7MMZO1TeXg+X0FBjOUnXa7wOUQQbY4jHMG
- L+3SuQkBD7zqhFje7Xzawgk8a7ZX4Lp/VIzF1QtLioziuTzTIS+7IhHIb8FXqmV8EUDW
- tvHQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUzBXPQsdbRIK6mvVJZ0ZJIXHlnGKo/+rrJOsyUj5yunKdYva/Bj/xERM2z8WFJgwiki3Bm1tI=@lists.denx.de
-X-Gm-Message-State: AOJu0YyVrNtcKaB3xKlGPYVz3rtHxGExXnlbine2Ve/J/All2G8zSd9F
- h4b67zGGyrPoNzb9vRtjenfpFRb0hXdNOTNGxjGjQtRTeSMg2U2f2bbg3pxqxip/c0luAdLXAyY
- iiqmstc8Q
-X-Google-Smtp-Source: AGHT+IFrjoOhvEY4f5DuuB0tKqlehhjp/gCvN1JGQ5VfvJ3dVj1GdShq/yEEk5WHEXvW15yOT2MaZA==
-X-Received: by 2002:a05:6122:179b:b0:50a:c02e:788d with SMTP id
- 71dfb90a1353d-50d17dace30mr563781e0c.7.1728586754583; 
- Thu, 10 Oct 2024 11:59:14 -0700 (PDT)
+ bh=z8vTWUNOxOswosyLq6RVt4SjoT1i+0tI9tpj6jdSo98=;
+ b=IUMp2QIdBcm9ODJ2bBaFJYFlIhjE2ShtGeq/GVVApMlLoUsUiA1iXKpLYT9pZuEwta
+ RIh2iDEt3LYpzN8xG65l73hFwHDUF79A8D8j4lq6yOgBcGguHbclXQycAMjFS64k5oIu
+ lupfJJOVO40Qauqq8Adb21xSHyEjqyc5BzRujU6KoBVifFIu7zQtsI1rwv2T9qWsUtSx
+ 7zykcJpj8A0++NIgQsEChL2uX7XwqboOpKuWQVRDT0qhpzea6/URHqdr7VryluyvzBCI
+ wWvnvTGL74Tq9p95Ed8rm036PHFmo6G+61XP+nVCtMdRWOEMolHhRykKzTr5oBJxro6U
+ zuSg==
+X-Gm-Message-State: AOJu0Yxho3xJ7/hFmn8oefe4H62I44Xobr5T4HHJbWS08lsoQbEP+gAj
+ MHlMxjPmXhzlEHUgtY3s8sktku96s1GoyaBjcc6S2YIF25BuZas1rdEpD2C6XhA=
+X-Google-Smtp-Source: AGHT+IFxy8l+gYbRv4FLjZzHAPd06rv+Tc/tEY7aOoqCxKdJ0Ls1BJZK5uH35ikhiXwJNMnFt7LZxw==
+X-Received: by 2002:a05:6808:10d0:b0:3e5:3d32:90 with SMTP id
+ 5614622812f47-3e5c90f0157mr92212b6e.25.1728586874476; 
+ Thu, 10 Oct 2024 12:01:14 -0700 (PDT)
 Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6cbe85b955csm7960726d6.56.2024.10.10.11.59.12
+ d75a77b69052e-46042802400sm8081281cf.42.2024.10.10.12.01.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Oct 2024 11:59:13 -0700 (PDT)
-Date: Thu, 10 Oct 2024 12:59:10 -0600
+ Thu, 10 Oct 2024 12:01:13 -0700 (PDT)
+Date: Thu, 10 Oct 2024 13:01:10 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: Bin Meng <bmeng@tinylab.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH] tools: docker: Drop the git user name and email
- configuration
-Message-ID: <20241010185910.GU14210@bill-the-cat>
-References: <20240104132817.278079-1-bmeng@tinylab.org>
- <20240106174108.GY1610741@bill-the-cat>
- <CAFLszTiHj8yUuABQsHyAME6V2mdgM5SqocOBAdGksy+B0O9E3A@mail.gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>
+Subject: Re: [PATCH v3 3/3] RFC: CI: Skip building dtc for world builds
+Message-ID: <20241010190110.GV14210@bill-the-cat>
+References: <20240815195746.749042-1-sjg@chromium.org>
+ <20240815195746.749042-4-sjg@chromium.org>
+ <CAFLszThRC=YvhPaiQD2bnvNFsGZZVexa3cx=NZ6PaBEdB-7Z2A@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="oJyJIL4S1axRWpE+"
+ protocol="application/pgp-signature"; boundary="A/ar6sCq9jLZp8+s"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTiHj8yUuABQsHyAME6V2mdgM5SqocOBAdGksy+B0O9E3A@mail.gmail.com>
+In-Reply-To: <CAFLszThRC=YvhPaiQD2bnvNFsGZZVexa3cx=NZ6PaBEdB-7Z2A@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,78 +96,51 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---oJyJIL4S1axRWpE+
+--A/ar6sCq9jLZp8+s
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Oct 10, 2024 at 12:50:18PM -0600, Simon Glass wrote:
+On Thu, Oct 10, 2024 at 12:50:11PM -0600, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Sat, 6 Jan 2024 at 10:41, Tom Rini <trini@konsulko.com> wrote:
+> On Thu, 15 Aug 2024 at 13:58, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > On Thu, Jan 04, 2024 at 09:28:17PM +0800, Bin Meng wrote:
+> > This is quite a significant waste of time in the world builds as dtc is
+> > built separately for each board. Skip this to speed up the builds.
 > >
-> > > Since commit b45ab9ca6621 ("CI: Update to QEMU 8.0.3"), the manual
-> > > patch applying was removed, hence there is no need to do a git user
-> > > name and email configuration.
-> > >
-> > > Signed-off-by: Bin Meng <bmeng@tinylab.org>
-> > >
-> > > ---
-> > >
-> > >  tools/docker/Dockerfile | 3 ---
-> > >  1 file changed, 3 deletions(-)
-> > >
-> > > diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-> > > index c4a2596b48..c12ed0fd9b 100644
-> > > --- a/tools/docker/Dockerfile
-> > > +++ b/tools/docker/Dockerfile
-> > > @@ -179,9 +179,6 @@ RUN git clone git://git.savannah.gnu.org/grub.git=
- /tmp/grub && \
-> > >  RUN git clone https://gitlab.com/qemu-project/qemu.git /tmp/qemu && \
-> > >       cd /tmp/qemu && \
-> > >       git checkout v8.0.3 && \
-> > > -     # config user.name and user.email to make 'git am' happy
-> > > -     git config user.name u-boot && \
-> > > -     git config user.email u-boot@denx.de && \
-> > >       ./configure --prefix=3D/opt/qemu --target-list=3D"aarch64-softm=
-mu,arm-softmmu,i386-softmmu,m68k-softmmu,mips-softmmu,mips64-softmmu,mips64=
-el-softmmu,mipsel-softmmu,ppc-softmmu,riscv32-softmmu,riscv64-softmmu,sh4-s=
-oftmmu,x86_64-softmmu,xtensa-softmmu" && \
-> > >       make -j$(nproc) all install && \
-> > >       rm -rf /tmp/qemu
-> >
-> > I'll apply this next time I update / respin the images but I hadn't
-> > dropped this part just to make the next time we do need to backport a
-> > patch easier.
+> > Unfortunately the newer dtc produces a lot of warnings, which causes CI
+> > to fail. I am not sure what we can do about this.
 >=20
-> I just found this comment, but it looks like the code is still there?
+> What do you think about this one?
+>=20
+> We could install an older dtc in the container, perhaps?
 
-Yeah, I don't know quite what I was trying to say before, but, yes, I'm
-keeping the git config lines because it's more likely than not that
-we'll have backports to QEMU needed in the future and keeping that will
-make it easier.
+Is backporting applying whatever dtc flags we need to ignore problems
+that Linux isn't enforcing so difficult? That would then tell us just
+how much work it is / isn't to deal with the rest of the dts files (or
+poke maintainers to switch to OF_UPSTREAM where the issues are likely
+fixed).
 
 --=20
 Tom
 
---oJyJIL4S1axRWpE+
+--A/ar6sCq9jLZp8+s
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcII/oACgkQFHw5/5Y0
-tyz6VAv/avzYhyErO/UDS3UhMSFPzNFaeyCgTSSDuFOAG0/+BEmUFtGWo48XUGxb
-RkH1B4HVJ+KsNfEU0PjuRfKkIWLNROORPpuiZPPRavI3SZfOESnxKfARh4ZpReyc
-CZ91YvXEf/zj3BujOrnOjkKYScAQOyEZXayRzHiWH61Xd/OgK0tpVNTaunsjMxZC
-YBWmzw/xrxOO/EFXbe/D/3LaPGk5G8W8WjXCz3QyFxvnbePQ/1QiXanRhW1B3dki
-M8dJmYMW5rtDidpA15Y5ZQQf+TgOcUUWMXTLAImiozXIYzyfSVvN6N3bDjArgUGJ
-Lgc8J1Fo0ahIfPfCtC3hdza37w/K7Oe9jlh0BIJh225sNieysA+jdM2/o2pkoldl
-gEVQLQBqUrPXOmRCikkrQ1UxHGhJJ6vYm6AliBjD1yy7nwELla30HN8MbJkVuge3
-2/nY/0LXigil77ao8isJlnxoAOwibJOn+GXy6CJ5P6e7m+wCnKXJv24OgqV1aXYH
-qgv5GZdn
-=+Nm7
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcIJHYACgkQFHw5/5Y0
+tyy4bwv/ef/kFmHe6bAGlbr1EtVX8c8hfcT5ssp+rvEwAKs1LB0ae+yMY2FWALeJ
+WzeIvNu8XSTuMNSD9x1rna7ktKcgHKGQFKFI3KPjuM5FtXqDObkFSyYwTdk8Uvhb
+IiyvdYBfwCz39iHOM87xPnmWwzYXjTA1A/FY5IgF73fJsb0sQa4M6DTKxHO5HhLF
+OblSMi8AHFXIx31MogJZnLkINQgGHH2vjQh3Cu64hihmmTfqexkqgSv0KMTdtZJ5
+6+l9paE6aeYV6gQJn5Amu6s9Me5g3u+DKDd1L847VZ97j4Tg8p6K2G/6RVANLdRn
+BbmdV+A6c4nJtNRezIPfsZ5SSu4DwcExeYzf8SlI6314ud1obbpIIv0yswzcTpe6
+cvaztSaYlNzJ6SViPhQSnBloU7QEyngKarwDy56tbhZsPNNxhOTF5UHaC+dQaXUU
+aNQb4aI59ytDR92JLu/s8xP/UAwvjzHso+jTGhEvZDFR7XGUV3m6dOqwxUFFF2qi
+hQbBGcqV
+=MsZS
 -----END PGP SIGNATURE-----
 
---oJyJIL4S1axRWpE+--
+--A/ar6sCq9jLZp8+s--
