@@ -4,93 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1106CF11F5
-	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 13:29:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0709DCF11F5
+	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 13:54:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6509089277;
-	Thu, 10 Oct 2024 15:29:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 847E188995;
+	Thu, 10 Oct 2024 15:54:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PDVY2SgO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bk9fJRR6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 278308928E; Thu, 10 Oct 2024 15:29:41 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 456D088997; Thu, 10 Oct 2024 15:54:18 +0200 (CEST)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F13E8928E
- for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 15:29:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D410F88770
+ for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 15:54:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-430ee5c9570so10110615e9.3
- for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 06:29:30 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-6e214c3d045so8231777b3.0
+ for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 06:54:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728566970; x=1729171770; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=TTYD8S+6c+6pNuMKoLqs1+DIh/qLUGJkS1CmG9skUao=;
- b=PDVY2SgOytFp90njsITkzSFJx53WJAg3wzCE6qocH0etYrGd/Wlk/T7FOkejjJ8kMl
- xzvwY7E35yk5IdavdTpjmJGZ60oaAtVPc7O7JixvDPubYLY91bMew5qpZ7LHO6MX3Fv4
- P7A0rsU9FyMORmtiHsjt49cuC4G7kZ29Oqs2b9QuYT0PZRVTl4SZM6nVgJN7fx0uY2DF
- Ih/uL6HnNrwlbHbX37gTniYfW/RxKuhC7Zh1iKwh+J/7SIiXI/+xoITJdfiAWfAoBTHf
- sD/XwTDsplSU875IGtIpW7llEwKbYvFgwDKTWKZd9pmlxLDj2smer47yUzO2UFnQq6PI
- 7ctQ==
+ d=konsulko.com; s=google; t=1728568454; x=1729173254; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=VnTBQjXMJYeenJZMvO/e1ZSzg0YqneNpu+AQHdS2Mik=;
+ b=bk9fJRR6R78dywsGvT3s7FH18Sba2oxjS7r5sQPheYYzuy/AtLP8QQ2xkbRsqCcD7U
+ 2BFDuAIJFV2vGUMzmCw1fK9jQLzwP9J4G/jKaRo4VE2gqARXXbfi3VjD/1N7yHaNERM2
+ ivw7tTU4d7C1PhQMuVCN7rGhcBV+gc4NyVhgQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728566970; x=1729171770;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=TTYD8S+6c+6pNuMKoLqs1+DIh/qLUGJkS1CmG9skUao=;
- b=AtGIrvRU+bIgO+v1jQ3Hexo3SQF4sSp/Zrwo/YPH/h+02+t4/jXjF0apqK2SUjWWIy
- PTUjpiot1Wi273bpsZ8rUZyxTA3j2PbXK3dBOU/v5kVF0Cx1gt7U2fgO5cb8gZJiemRT
- Ky69IPqIkJ5+YMpmlZoQQP4MTq20HLhNqvNbpipMR9b+LHvU7DSe8KdJx0HuLGeGEeV2
- +E6lmlwHgbSZ9QzaGTTrp1oPy/4lhaXD8a5eQqX3fjuTEqYDlbQiGmzC/XobEyQdpdmT
- n0jWxceuzc97JQR1tEnYeJY20x5Ndx1LWy/OYWxTldRHGnrYBz0sQTG0ohu/SZGkFOSW
- P0uw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWF7cdwSo0JLdNSiqX0bdfEO77gRHxgnAdHJMVLGOUGv7hSPrUryndezYUM/DR0/oiJZw6nGtM=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywve3pDOkDtmbVFkMxQi7rtIn9TlNP0ll7jlQVE1Do/M2a69FJL
- DpaK4/2cz2gYUMvd7JI1+hTGwB2fxUKRlw9wbPuOS/10/o5vaZiqJ4dQtw1oW5c=
-X-Google-Smtp-Source: AGHT+IHVijPLVGTekf61wsmRzufGm3ynuXies4Wd6lEI/CaNL8FeB0CpPVdqOLi19W3hdgtrwcbCjg==
-X-Received: by 2002:a05:600c:4f0c:b0:428:d31:ef25 with SMTP id
- 5b1f17b1804b1-430ccf1d787mr63057305e9.12.1728566969656; 
- Thu, 10 Oct 2024 06:29:29 -0700 (PDT)
-Received: from [192.168.7.95] ([212.114.21.58])
+ d=1e100.net; s=20230601; t=1728568454; x=1729173254;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VnTBQjXMJYeenJZMvO/e1ZSzg0YqneNpu+AQHdS2Mik=;
+ b=PxmpchWCEAdNxPLateAmmQUW/7vFFkitP4WSvROwC2KCk7s2nVTb590yA9ZWLm+iUZ
+ Ghyr0/P6+/zHWNNDSgrHZPJPSrKvjAcfx3poUsytncqxDFd/Qb9iFSN8Z32lCkg/mHO2
+ 1YpNDzGuSq7o2r+ho6ZqyDFbZhcQk4/vYmA103SBvLQ6YOxLRxxaP8zXmy0LlfrdVag5
+ HZNND1FnTReJodjFjOZR7QSX8xaLjKxOSZDrfYk+5l/iIPYPrjGpJj9llwFjoK98dg3w
+ TLdpmiGrh8MF1zrbYhOB2B07DFOU1YhWi9wzOLQb9Gth9VebHvffoq5nhYg4I/KlnLZY
+ Gsqw==
+X-Gm-Message-State: AOJu0YwWJr0W44ImDLE/PCz9fw3SLdtSYaUDoDmjdnCdap6gRFixySE6
+ krThdbOFr0HSCfcYs5/36vQJAhE7HZIuXjIioCkloiYUGQl3rqHZQv/qBb0drP4=
+X-Google-Smtp-Source: AGHT+IFiBYvUEjQ+eW7v5ERMhYqLu6b2dtJsb98+eVxe8QS2LxP7YSs1XBDT6N2YY7D5C2HidVGHcQ==
+X-Received: by 2002:a05:690c:f85:b0:6e2:ada7:ab3e with SMTP id
+ 00721157ae682-6e32217aec7mr62907367b3.30.1728568454579; 
+ Thu, 10 Oct 2024 06:54:14 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-431182ffd14sm16563525e9.18.2024.10.10.06.29.29
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 10 Oct 2024 06:29:29 -0700 (PDT)
-Message-ID: <d66901bb-e1da-4ee3-b546-19c817adcbfe@linaro.org>
-Date: Thu, 10 Oct 2024 15:29:28 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v11 03/29] linker_lists: set LINKER_LIST_ALIGN to 8 for
- CPU_MIPS64
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ 6a1803df08f44-6cbe8679d3csm5471366d6.137.2024.10.10.06.54.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 10 Oct 2024 06:54:14 -0700 (PDT)
+Date: Thu, 10 Oct 2024 07:54:11 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
- Anton Antonov <Anton.Antonov@arm.com>, Simon Glass <sjg@chromium.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Dan Carpenter <dan.carpenter@linaro.org>,
- Alexander Gendin <agendin@matrox.com>, u-boot@lists.denx.de
-References: <cover.1727968902.git.jerome.forissier@linaro.org>
- <1699de5384a71c0d0ad535cdc48cc2b95087719d.1727968902.git.jerome.forissier@linaro.org>
- <5c4686da-f39f-4a48-ba57-4d2f7fb3e66a@gmx.de>
- <c9f50143-4e49-43df-913e-43bf5f5484cc@linaro.org>
- <20241004182822.GH4737@bill-the-cat>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20241004182822.GH4737@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+ Simon Glass <sjg@chromium.org>
+Subject: Re: Pull request efi-2025-01-rc1
+Message-ID: <20241010135411.GO14210@bill-the-cat>
+References: <fbb5acff-f3b3-4c3d-8d96-bc95bfe470a8@canonical.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="LZ9okY9ZEZTOOcFU"
+Content-Disposition: inline
+In-Reply-To: <fbb5acff-f3b3-4c3d-8d96-bc95bfe470a8@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,75 +92,55 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--LZ9okY9ZEZTOOcFU
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 10/4/24 20:28, Tom Rini wrote:
-> On Fri, Oct 04, 2024 at 02:55:58PM +0200, Jerome Forissier wrote:
->>
->>
->> On 10/4/24 14:04, Heinrich Schuchardt wrote:
->>> On 03.10.24 17:22, Jerome Forissier wrote:
->>>> Note: Patch posted separately [0].
->>>>
->>>> [0] https://patchwork.ozlabs.org/project/uboot/patch/20241003142030.1610222-1-jerome.forissier@linaro.org/
->>>>
->>>> CPU_MIPS64 needs 8-byte alignment on the linker lists, otherwise an
->>>> exception may occur. Fixes an issue found on malta64 with QEMU:
->>>>
->>>>   Breakpoint 1, lists_driver_lookup_name (name=0xffffffffbe043578 "root_driver") at /home/uboot/u-boot/drivers/core/lists.c:31
->>>>   31                      if (!strcmp(name, entry->name))
->>>>   [...]
->>>>   ld      a1,0(s0)
->>>>
->>>>   (gdb) p/x &entry->name
->>>>   0xffffffffbe04b0d4
->>>>   (gdb) p/x $s0
->>>>   0xffffffffbe04b0d4
->>>>
->>>>   $ grep __u_boot_list /tmp/malta64/u-boot.objdump
->>>>   4 __u_boot_list 000018e0  ffffffffbe04a4d4  ffffffffbe04a4d4  0004a584  2**2
->>>>
->>>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
->>>> ---
->>>>   arch/Kconfig | 2 +-
->>>>   1 file changed, 1 insertion(+), 1 deletion(-)
->>>>
->>>> diff --git a/arch/Kconfig b/arch/Kconfig
->>>> index 8f1f4667012..8f4df849801 100644
->>>> --- a/arch/Kconfig
->>>> +++ b/arch/Kconfig
->>>> @@ -45,7 +45,7 @@ config SYS_CACHELINE_SIZE
->>>>   config LINKER_LIST_ALIGN
->>>>       int
->>>>       default 32 if SANDBOX
->>>> -    default 8 if ARM64 || X86
->>>> +    default 8 if ARM64 || X86 || CPU_MIPS64
->>>
->>> Shouldn't we set 8 byte alignment on all 64bit architectures including
->>> riscv64?
->>>
->>>     default 8 if 64BIT
->>
->> Makes sense.
->>
->>>
->>> @Simon
->>> I would not know why 32bit X86 should need 8 byte alignment.
->>> I am a bit astonished that you chose 32 byte alignment for the Sandbox.
->>> Is there any justification to use more than 4 on the 32bit Sandbox and
->>> more than 8 on the 64bit Sandbox? If yes, we should document it via a
->>> comment.
->>
->> I tried running what CI does manually (.azure_pipelines.yml) with
->> "default 32 if SANDBOX" removed, and I got SIGSEGV with
->> TEST_PY_BD=sandbox. OTOH, TEST_PY_BD=sandbox64 worked fine but it might
->> have been a fluke.
-> 
-> I think we can leave sandbox as a future cleanup, and perhaps file an
-> issue at https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/ so
-> it doesn't get lost.
+On Wed, Oct 09, 2024 at 11:40:38PM +0200, Heinrich Schuchardt wrote:
 
-https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/29
+> Dear Tom,
+>=20
+> The following changes since commit fbe16bc28014dc1ed957f5fee7e53d6eee781a=
+a9:
+>=20
+>   arch: arm: dts: k3-j7200-r5-evm: Enable AVS feature (2024-10-08 10:23:36
+> -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-efi.git
+> tags/efi-2025-01-rc1
+>=20
+> for you to fetch changes up to be5e7c11ff7df70b7c2adfdfd114ae25573996c8:
+>=20
+>   sandbox: enable clk command on the sandbox (2024-10-09 15:48:42 +0200)
+>=20
+> Gitlab CI showed no issues:
+> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/22597
+>=20
 
-Thanks,
--- 
-Jerome
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--LZ9okY9ZEZTOOcFU
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcH3HUACgkQFHw5/5Y0
+tywh7wwAp1zEOh0VES469sNOUs45p/e8+C3ciqVqCxDhJFnsbCadqtn4uMXufETk
+Nk9DFHWrw/72I85hdx7PcRR5/x4O1Wtb+3wiyd3Xi9e3bIvvMnwR+J/YveHy3CxZ
+WNoiUtA1laA9UEKlroYNb0KApX8Pdz+789eC0MgRW9iP86qTQYpDMTu+vJUaS6HR
+B3sSKHw72DGFRWv6qJbCO596JaKr8F+IIb1hg5Y4e67Q603PkAgkW3FL0Q8X26Q8
+AEo/1yXs/0Y/asQM1rrZjjaHKUrQShYpHGMphJQSGCoRC6b0j/TXYreZph2rxw5j
+XKX6LRbbisYh+EM0rlPpITeaRu+89y3OebCTD+JYJy5ibG7nV3myJ37grBm9dxGW
++SCY2lR3XLLvZe4YtkoaX2Nw7OjmbXailQGR33u2HWuZy+Y5+YtEPMA6faFaYXUS
+yRT+mql2miMdeYL0FrodoYCIfKZe3NLqJ+2HoG6P9UcfCgBtc9/BQMpyLXRr4H5g
+kEvcpUFz
+=EaQS
+-----END PGP SIGNATURE-----
+
+--LZ9okY9ZEZTOOcFU--
