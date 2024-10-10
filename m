@@ -4,47 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 684A5CF07A5
-	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 05:56:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED3A7CF07A8
+	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 05:56:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 490CF890B9;
+	by phobos.denx.de (Postfix) with ESMTP id ADFC889124;
 	Thu, 10 Oct 2024 07:56:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=jan.kiszka@siemens.com header.b="kp+XRAVh";
+	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=jan.kiszka@siemens.com header.b="ghyJo37N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D64568911A; Thu, 10 Oct 2024 07:56:00 +0200 (CEST)
-Received: from mta-64-228.siemens.flowmailer.net
- (mta-64-228.siemens.flowmailer.net [185.136.64.228])
+ id E96848911E; Thu, 10 Oct 2024 07:56:00 +0200 (CEST)
+Received: from mta-65-225.siemens.flowmailer.net
+ (mta-65-225.siemens.flowmailer.net [185.136.65.225])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 450208909B
+ by phobos.denx.de (Postfix) with ESMTPS id A20DB890BF
  for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 07:55:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jan.kiszka@siemens.com
-Received: by mta-64-228.siemens.flowmailer.net with ESMTPSA id
- 20241010055556d4faaae2c5c3a88cfc for <u-boot@lists.denx.de>;
+Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id
+ 20241010055557cfe829235669ea392e for <u-boot@lists.denx.de>;
  Thu, 10 Oct 2024 07:55:57 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
  d=siemens.com; i=jan.kiszka@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=crvIBNMRVdst8Ptbi0etmgNingRc1mo0IL2pglxwKus=;
- b=kp+XRAVhjPZD/4F5I4t+nqVTgEkxFMxZCHWMsvtsbMqmQvY+BxsDo70PI76BsCZhd4bL20
- +OHYtHJ66h/0esNdEBU5IeJzJRxWIncKdLSZH2Mvy9IUwbaZF70J92KKV9SZWV5Uymy44ZtI
- DrX+yuxw5r4PxQ5eLReH+dZXLI1IjF9n5//TZmGfvVe0B+Mpn7udn/SUrlborDpfXCvAwFc7
- v2zKQDZNsqMbGhhMzBisXEuBQzaDB3tzHw+lUHL9wGGr13SH+5sHitPxjFX3EOGfzRguAESq
- qiSurbfBsZDiV1/OcOnc1HxqQINji6vMwFRwuQbWwmuuqxIS+6I/Dkfg==;
+ bh=Lv0ut2tY6XlI1jFjodmFd39h11wE5epFQMypq6ar62Q=;
+ b=ghyJo37Nurt/bom38O75V155gi8Gr6IHa18szpnFpuO2Y1Ib9vqKoSNi6YFoSgJh3HH032
+ z0m79buiWcqOGkwlyW6/EMhhrQtrn/otDxPakJaA08cFCtt44+RBi4ON3pHVC3t7TrJieB4L
+ yzhmrqZLJZZLMmCqvTGneRafHt7P78MBkErNJwm7++boKVTAajeRbu5aeOkO30wI9TCc5Vru
+ +4JWrVH9ObURrSA6QNszpk2vfZKjC4H76g7CtNyj/ow47N/La4Gqx3z+YWVjVjBWj41B13D1
+ o0S7Cejc75+ieTuuxMbdHdmjZsvsQPnMSsVw6/nYYpGesTsbKrlAdTaA==;
 From: Jan Kiszka <jan.kiszka@siemens.com>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bryan Brattlof <bb@ti.com>,
 	Nishanth Menon <nm@ti.com>
-Subject: [PATCH 02/11] board: siemens: iot2050: Fix coding style
-Date: Thu, 10 Oct 2024 07:55:46 +0200
-Message-ID: <c6b3339edb040c3afabf282b36cbb3cb13b1961a.1728539755.git.jan.kiszka@siemens.com>
+Subject: [PATCH 03/11] board: siemens: iot2050: Control pcie power for all
+ variants
+Date: Thu, 10 Oct 2024 07:55:47 +0200
+Message-ID: <b770395ca5c7d41eab30aaaa7ad7e97a48595eec.1728539755.git.jan.kiszka@siemens.com>
 In-Reply-To: <cover.1728539755.git.jan.kiszka@siemens.com>
 References: <cover.1728539755.git.jan.kiszka@siemens.com>
 MIME-Version: 1.0
@@ -69,27 +70,53 @@ X-Virus-Status: Clean
 
 From: Baocheng Su <baocheng.su@siemens.com>
 
-Add a space after the 'if'
+The power control pin of pcie interface not only works for M.2 interface
+but also for miniPCIE, so promote this logic to all variants to
+workaround the module hang issue.
 
 Signed-off-by: Baocheng Su <baocheng.su@siemens.com>
 Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
 ---
- board/siemens/iot2050/board.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ board/siemens/iot2050/board.c | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
 
 diff --git a/board/siemens/iot2050/board.c b/board/siemens/iot2050/board.c
-index ed292c364a5..e5c7ce58b06 100644
+index e5c7ce58b06..85cb999f17f 100644
 --- a/board/siemens/iot2050/board.c
 +++ b/board/siemens/iot2050/board.c
-@@ -220,7 +220,7 @@ void set_board_info_env(void)
- 	if (board_is_advanced()) {
- 		if (board_is_pg1())
- 			fdtfile = "ti/k3-am6548-iot2050-advanced.dtb";
--		else if(board_is_m2())
-+		else if (board_is_m2())
- 			fdtfile = "ti/k3-am6548-iot2050-advanced-m2.dtb";
- 		else
- 			fdtfile = "ti/k3-am6548-iot2050-advanced-pg2.dtb";
+@@ -185,6 +185,12 @@ static void remove_mmc1_target(void)
+ 	free(boot_targets);
+ }
+ 
++static void enable_pcie_connector_power(void)
++{
++	set_pinvalue("gpio@601000_17", "P3V3_PCIE_CON_EN", 1);
++	udelay(4 * 100);
++}
++
+ void set_board_info_env(void)
+ {
+ 	struct iot2050_info *info = IOT2050_INFO_DATA;
+@@ -288,10 +294,6 @@ static void m2_connector_setup(void)
+ 	struct m2_config_pins config_pins;
+ 	unsigned int n;
+ 
+-	/* enable M.2 connector power */
+-	set_pinvalue("gpio@601000_17", "P3V3_M2_EN", 1);
+-	udelay(4 * 100);
+-
+ 	if (m2_manual_config < CONNECTOR_MODE_INVALID) {
+ 		mode_info = " [manual mode]";
+ 		connector_mode = m2_manual_config;
+@@ -429,6 +431,8 @@ int board_late_init(void)
+ 	/* change CTRL_MMR register to let serdes0 not output USB3.0 signals. */
+ 	writel(0x3, SERDES0_LANE_SELECT);
+ 
++	enable_pcie_connector_power();
++
+ 	if (board_is_m2())
+ 		m2_connector_setup();
+ 
 -- 
 2.43.0
 
