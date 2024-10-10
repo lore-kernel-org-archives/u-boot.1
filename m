@@ -4,79 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BE4ACF07BF
-	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 08:09:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 614EDCF07BF
+	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 08:28:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B937E89025;
-	Thu, 10 Oct 2024 10:09:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id DBA1788D38;
+	Thu, 10 Oct 2024 10:28:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="K+qDC+Xu";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 0030D89241; Thu, 10 Oct 2024 10:09:20 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD1C989025
- for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 10:09:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-37ce9644daaso378323f8f.3
- for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 01:09:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1728547758; x=1729152558;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=iD+DMtVCqso+YzMLLnKry5Oy3qdDRY/Zl3EBQvqH/94=;
- b=K+qDC+XuI1n/csLsFiRwyKmw3MysnYLXIKgcSGlesqEanXAMqC6qhnEIVzVX8aurRF
- 7E5GQaNKIjok27EuIDmQuCm3PiUWPdxdHqnNkh5A8QDb5cuMBPIpgTwvxGWev9c6NOVJ
- AYFDLkneNOR1bjf13Tc6ZBamrRkTyTEOWy597dPQn25KeJG0bv+ojoqT5WQFyzh6Byb1
- 5dFlzE7OurWWwzDUHdV6qPOVdJWoMvK6ZW0+oy6dVNQaxjkYFhbVSGXTu8NOelPGsQad
- KAex77AoM5pQ5qhuqpcfSwHj8f+MgHQhwv8W8G6WajVKYQtiF5gqPfkPBcDCzEizF1FO
- iXdw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728547758; x=1729152558;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=iD+DMtVCqso+YzMLLnKry5Oy3qdDRY/Zl3EBQvqH/94=;
- b=fyi1mbYZqFdwwYGVeUMBq+IWG/R0R3HYRCQxLrD/nSoXoXQsQYWaznztDqw/dAVJ6q
- 8k1Qg3JSxun2ZbKHzM6gHrvHZrkLvDdZsAzHSSwAiSpWkEwyhHiMl4AhqCYGNcbkvoGQ
- Np0RRQDduBa3tbj/PFXoMhSRbmY872u3RR2OVz3fRCCL42B48VO7NjdYhAjYzfLOuHqd
- bTp6PjeatJCaCRKSW1LfVj4cnJj1IgADFciMfHZF32kQGUhDsw9by0xAcFAGpybcKT+w
- e7U9LSfFi5TqnjJ+R/RCc0PDSHm0Ju+Dl3dBIbg22HhmIKzjSyUjqJEjvVxdj5lK3KN9
- kndg==
-X-Gm-Message-State: AOJu0YzYiqNNmwHGEB4FPzjaGU3Mx4bHAYRfLKu/6Iur9OsxDZUrbo7n
- awasR+V7dl5GjNcubvQrDGfuQKcvLVOvjKAgPHDDNzs7F3CrJ3d28ZICEySR7C8=
-X-Google-Smtp-Source: AGHT+IF4nB6seNEIdCljyDytx7Luanrn423DwI2hClHuYGJWrb8LQwT468SMgqWuigpo6NdOpBLxPg==
-X-Received: by 2002:a5d:5350:0:b0:37d:493c:f7b8 with SMTP id
- ffacd0b85a97d-37d493cfacemr979593f8f.2.1728547757877; 
- Thu, 10 Oct 2024 01:09:17 -0700 (PDT)
-Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d4b6bd399sm798092f8f.26.2024.10.10.01.09.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Oct 2024 01:09:17 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Neil Armstrong <neil.armstrong@linaro.org>, Lukasz Majewski
- <lukma@denx.de>, Tom Rini <trini@konsulko.com>, Jagan Teki
- <jagan@amarulasolutions.com>, Vignesh R <vigneshr@ti.com>
-Cc: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2 1/2] spi: add DM_SPI_FLASH compatibility inline
- functions
-In-Reply-To: <20241001-uboot-topic-dfu-sf-dt-v2-1-67f7acfa3ff5@linaro.org>
-References: <20241001-uboot-topic-dfu-sf-dt-v2-0-67f7acfa3ff5@linaro.org>
- <20241001-uboot-topic-dfu-sf-dt-v2-1-67f7acfa3ff5@linaro.org>
-Date: Thu, 10 Oct 2024 10:09:16 +0200
-Message-ID: <87v7y09y6r.fsf@baylibre.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1728548920;
+	bh=q02Gnul8yFcHY62hUdaeKNzvA4QRdQK6PIasK2rkLwY=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=nPGHA+psEFvapLflePW7wJw+rv4PA8012n70ufya12BlEa40qf3WWqLgNri2nIrMD
+	 zcowObGXfGjIug0r9LSDuQU8z1XTH+0VVbuWllhkkEXq2qId0F2dynN/FjcEyb5wkL
+	 Utv9SOYGPareua60SSCrikmKH9HZZsQAbOW3wLoIh8Mqlm2kXezfCwXgbfSTbqaAht
+	 cn4D3a2+dxYJG88r043SwmtI+iQLSpL4KxsIWEDEYPLSnRGq+3Ef8TRj4EORyrWO88
+	 AntciFQYtTEsBY/Xu2++SMpUsVawaYbGyGHvYuFyb6yqWr32ytzHo++zKGmWTX7/fO
+	 BLi302A70qvLw==
+Received: from localhost.localdomain (85-66-232-204.pool.digikabel.hu
+ [85.66.232.204])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested) (Authenticated sender: hs@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 4AA9B88A9D;
+ Thu, 10 Oct 2024 10:28:39 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1728548920;
+ bh=q02Gnul8yFcHY62hUdaeKNzvA4QRdQK6PIasK2rkLwY=;
+ h=From:To:Cc:Subject:Date:From;
+ b=OCo3SDPckoBoWwL3B+GBhiElIyX1I8mI3ix3Gq8vyIsJqTWxDqXCaNnie77BZJjjJ
+ 4+7Dx3CcQPesD9qQNBWRqvSb6e6T7h2WYhd2ea69ugOqhTnmEnz+dUe/MyG8XlN8YI
+ +bahz5KhIrY8U541S7zh0DX5Jk6kiwSukNXMj9y7rOoncBp9aAEEIg7h9gJLIvXBrw
+ c3jcMVNCJREY2sF+VUfEnwrcAJKqmBcvM7k70g4wZDuaL7rZRR10VJ8IdgRMZO6nx3
+ yKP6JOH7bZiAaW6i2/3m534VULzo6v/Yf61GJxcV3dGGay3y6EGvS11GMPY6uggnWt
+ 9reO6eNnaKrIw==
+From: Heiko Schocher <hs@denx.de>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Heiko Schocher <hs@denx.de>, Fabio Estevam <festevam@denx.de>,
+ Fabio Estevam <festevam@gmail.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Marek Vasut <marex@denx.de>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Stefano Babic <sbabic@denx.de>, Tim Harvey <tharvey@gateworks.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [RFC PATCH v1] dts: imx8mp-u-boot.dtsi align flash.bin
+Date: Thu, 10 Oct 2024 10:28:31 +0200
+Message-Id: <20241010082831.19983-1-hs@denx.de>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,80 +69,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jagan, Vignesh,
+trying to load current flash.bin with uuu tool
+leads in not booting U-Boot as missing some bytes.
 
-On mar., oct. 01, 2024 at 18:06, Neil Armstrong <neil.armstrong@linaro.org> wrote:
+Align flash.bin in this case to 0x800 bytes, to
+make uuu and ROM api happy.
 
-> To smoothly handle the transition from the legacy SPI FLASH
-> API to the the driver model API, add the DM functions
-> as dummy inline functions.
->
-> Today, client code uses #if/#else conditionals, but it's better
-> to use if(IS_ENABLED()) to make sure all code builds fine
-> and avoid configuration hell, leaving the compiler remove
-> the dead code.
->
-> An example is cmd/sf, which could make use of those dummy
-> functions to drop the conditional compilation.
->
-> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+Signed-off-by: Heiko Schocher <hs@denx.de>
+---
+I am unsure about the value of 0x800 which is twice the
+value the code in spl_romapi_load_image_stream(), requests
+from romapi which in my case on imx8mp is 0x400...
 
-I'd like to submit this through u-boot-dfu but before that i'd prefer to
-have an Acked-by from one of you.
+May I oversee something?
 
-Any opinion on this ?
+ arch/arm/dts/imx8mp-u-boot.dtsi | 1 +
+ 1 file changed, 1 insertion(+)
 
-Thank you for your time!
+diff --git a/arch/arm/dts/imx8mp-u-boot.dtsi b/arch/arm/dts/imx8mp-u-boot.dtsi
+index 56749ccacd..3c0bf8c4d6 100644
+--- a/arch/arm/dts/imx8mp-u-boot.dtsi
++++ b/arch/arm/dts/imx8mp-u-boot.dtsi
+@@ -85,6 +85,7 @@
+ 	filename = "flash.bin";
+ 	section {
+ 		pad-byte = <0x00>;
++		align-size = <0x800>;
+ 
+ #ifdef CONFIG_IMX_HAB
+ 		nxp-imx8mcst@0 {
+-- 
+2.20.1
 
-> ---
->  include/spi_flash.h | 34 ++++++++++++++++++++++++++++++++++
->  1 file changed, 34 insertions(+)
->
-> diff --git a/include/spi_flash.h b/include/spi_flash.h
-> index 10d19fd4b11..2e703e85250 100644
-> --- a/include/spi_flash.h
-> +++ b/include/spi_flash.h
-> @@ -139,6 +139,40 @@ int sandbox_sf_bind_emul(struct sandbox_state *state, int busnum, int cs,
->  void sandbox_sf_unbind_emul(struct sandbox_state *state, int busnum, int cs);
->  
->  #else
-> +/* Compatibility functions for when DM_SPI_FLASH is disabled */
-> +static inline int spi_flash_probe_bus_cs(unsigned int busnum, unsigned int cs,
-> +					 struct udevice **devp)
-> +{
-> +	return -ENODEV;
-> +}
-> +
-> +static inline int spi_flash_read_dm(struct udevice *dev, u32 offset, size_t len,
-> +				    void *buf)
-> +{
-> +	return -ENODEV;
-> +}
-> +
-> +static inline int spi_flash_write_dm(struct udevice *dev, u32 offset, size_t len,
-> +				     const void *buf)
-> +{
-> +	return -ENODEV;
-> +}
-> +
-> +static inline int spi_flash_erase_dm(struct udevice *dev, u32 offset, size_t len)
-> +{
-> +	return -ENODEV;
-> +}
-> +
-> +static inline int spl_flash_get_sw_write_prot(struct udevice *dev)
-> +{
-> +	return -ENODEV;
-> +}
-> +
-> +static inline int spi_flash_std_probe(struct udevice *dev)
-> +{
-> +	return -ENODEV;
-> +}
-> +
->  struct spi_flash *spi_flash_probe(unsigned int bus, unsigned int cs,
->  		unsigned int max_hz, unsigned int spi_mode);
->  
->
-> -- 
-> 2.34.1
