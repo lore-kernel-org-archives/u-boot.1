@@ -4,89 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E85B2CF11DA
-	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 12:17:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A12A4CF11E1
+	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 12:24:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35F3588C98;
-	Thu, 10 Oct 2024 14:17:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 159C788E15;
+	Thu, 10 Oct 2024 14:24:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="jwxtye9m";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="uZ6IYqSD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A33588CA1; Thu, 10 Oct 2024 14:17:51 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B459B88F2C; Thu, 10 Oct 2024 14:24:09 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 11CA888C63
- for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 14:17:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B41FB88C98
+ for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 14:24:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-4311695c6c2so5683165e9.1
- for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 05:17:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1728562668; x=1729167468;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=yct/5vTfEK0KbuV0R39yqWSGgpQy682lpprL4gUtnyM=;
- b=jwxtye9mpv3Tq0qevVj+TAyhcEAyYTriXHFBfAVjoaLFOxfITAPWPlA00rqwg4RpV0
- OJT5iI0+lRrE9x4BiCXGDn4GSkR6/mWHeT2wXOMR0S6rsaKu+miMZNDGFb7/zfwac/7v
- a+2XQKDqXb996emMiQKgG44e3vaZU7r0NgFcsa9Fg6G8/4x37vt4YHgb+zaGbEzQMWJG
- b1BYN4sSoLvZQltKPQt4Gu6BFVVrWBCH0OtJ4Kj43Ib3rNCN+nntYa58o++qYxZeL/6A
- tU3Bn14a6CQf/xg0SC96D+8+yGspDcF7kQY3c/5G1jWjby+bNDbnKAAaMkwfqSFbT+qr
- cuPg==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 54EE93F277
+ for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 12:23:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1728563035;
+ bh=t/qiFgiJrlq3b5IzBwkExHqYXJmXiZ8GJMgbr6c5W7w=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=uZ6IYqSDC7YDZq+91cUCCveYCR0WlsEh+KOZ3jKndsja2YbzT2gN5Hip6iglkexKK
+ xSdKN3SlZ+9MK2L5p47k7v/8MVRRjI0nfhDuXgjKZDB/c2fVKm2BKZZJgMnw/F6a65
+ /U5pqmRwksw8O9YLXq/uJC2GiATd8dhgQuwfldzmHsQvX87DQqdZLqhkBEtTVBFh8j
+ KqHodke0ZduVLGTMBje9Xi5ixnDoIuUlKhmYR6gNqsm60Iw8tbhoSA2dWURVJL8tO4
+ 1V1vfPjXEAXZT1c6MBnxSFTTC+fOmhn4Nycs0RrPBN8GnXjs1L9lMXakFiyanLEvEd
+ CfZWSi61/fr7A==
+Received: by mail-wr1-f69.google.com with SMTP id
+ ffacd0b85a97d-37d5116f0a6so103656f8f.0
+ for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 05:23:55 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728562668; x=1729167468;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=yct/5vTfEK0KbuV0R39yqWSGgpQy682lpprL4gUtnyM=;
- b=UjVeNS2/fxrk4PlqUyNHF+WReiOSsc5WF4mCDOwImAL2pHwWVNge9Ax0eNffesfYzE
- zpPqqVAx8ycQ4/Pa6M7/fzXEk+ViWWJA50YEuCF9K8LJHZBnQl73cc5AUX/hGZzas4M8
- 2THs8CvdAyXxF3KjB8toYR4QUJWhQ2EBTFVOusCA57eFZp14NbUe0BgkVr/eoHSql9po
- mRBRTND7xqV+QMEHySJvYp4mRYa1C6Un2cwSdhGu3vNiplOoXSFswko4EUNl6IMAPuTr
- 1qkGoAu1qdoMvR53RgAq4m404DPr8ITUt6L9PKbTpuKTzI9aOxOrangjk25RCp/JVrtR
- 6iIg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWn7tzp3pOhDTYJqzIWFaoHaWYzih5XvtthhVQDb304lUbguJXYjNQaBCjXHaEJTd7lTWUKwLA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz2LjYb7Q18RJ6QDA61Bub1XxhkVC8+W4YVMZJMSC4fHymOuEoF
- ssJ9ogc+/tulFhZ/MpWc2h2BhuOPE1TofqPkf/Ld9BqWUssq0k/PAmhhReVYv0k=
-X-Google-Smtp-Source: AGHT+IECXvqbNp7uku69+CANRCG2CY3TCHqI7JQuc+QtLMQlZIODyZ1EqzstcNY7XENW/ve/OTmaaw==
-X-Received: by 2002:a05:600c:1c14:b0:42f:8fcd:486c with SMTP id
- 5b1f17b1804b1-430d70b3f8dmr44462405e9.33.1728562668359; 
- Thu, 10 Oct 2024 05:17:48 -0700 (PDT)
-Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ d=1e100.net; s=20230601; t=1728563035; x=1729167835;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=t/qiFgiJrlq3b5IzBwkExHqYXJmXiZ8GJMgbr6c5W7w=;
+ b=gxbfQszJA2Pp2GTCarNz22xtMoNey4KHoazUBohxbheBHLVBtg3pO5EMljmuP9BAuv
+ qj/BH3sOWrz+ClswqsK4vAQyat551MTfB8aCvx+DKLYueEm4jzDMQ41JHlHS3cNkjjiM
+ 3QzNjRFXTpTqfRyPuDmb7NSmitD6Oa3RjH9Q+OIZ3N6sZzS0BxHevVmQPB31ueDzkL5t
+ Z3mN4XDWR0C6LhHNWbba7r3es0fOQ5FPcYpuaozOAt6BQBtzrKfpovyWAjYDN6Wqyqgf
+ Bn0ny17TOx0Qlg7fv13L6V1jW+FNL2I24WTAVoTtNJonGuvvgjRN1aPaDa7X63KamV58
+ LRuw==
+X-Gm-Message-State: AOJu0Yw0U5ZKCtDk/b/uGHSXsBUhuJoDFuv+ZdvpudSly4ehx0XUmY8f
+ IoRflKwVAE+MgGy1M4cL9cSOdwfwZJU63JNRZzhJjRTu0dqr7pr7YIA8zrG14wD1sKBlH3vpG8r
+ SageJViRgwfg8E5DeL/ndR1LEPdc3tUiYEimD3+T8u9jWdUFfgwzjm6YXD+3P2VCdTVknTsSw4p
+ dJ+w==
+X-Received: by 2002:a05:6000:d83:b0:37d:4ebe:1646 with SMTP id
+ ffacd0b85a97d-37d4ebe16dbmr825932f8f.48.1728563034842; 
+ Thu, 10 Oct 2024 05:23:54 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHgncPaQQQF2CDHeHWeCEvGDVNfNlHHN+Xio6lBaHI5HYX00HGe1pn7bR2pr4hn7Ui16bsp9g==
+X-Received: by 2002:a05:6000:d83:b0:37d:4ebe:1646 with SMTP id
+ ffacd0b85a97d-37d4ebe16dbmr825922f8f.48.1728563034463; 
+ Thu, 10 Oct 2024 05:23:54 -0700 (PDT)
+Received: from ?IPV6:2a02:3035:6e0:3cab:665b:d600:7ca:1c20?
+ ([2a02:3035:6e0:3cab:665b:d600:7ca:1c20])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-431182d7929sm14982945e9.4.2024.10.10.05.17.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Oct 2024 05:17:47 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Dmitry Rokosov <ddrokosov@salutedevices.com>, Simon Glass
- <sjg@chromium.org>
-Cc: Igor Opaniuk <igor.opaniuk@gmail.com>, Sam Protsenko
- <semen.protsenko@linaro.org>, Tom
- Rini <trini@konsulko.com>, "Andrew F. Davis" <afd@ti.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Mario Six <mario.six@gdsys.cc>,
- u-boot@lists.denx.de, u-boot-amlogic@groups.io, rockosov@gmail.com,
- kernel@salutedevices.com
-Subject: Re: [PATCH v3 4/6] cmd: bcb: introduce 'ab_dump' command to print
- BCB block content
-In-Reply-To: <20241010102051.q67usj6oaykjaixx@CAB-WSD-L081021>
-References: <20241008-android_ab_master-v3-0-f292c45a33e4@salutedevices.com>
- <20241008-android_ab_master-v3-4-f292c45a33e4@salutedevices.com>
- <CAFLszTh7qjUN__MvAbcMPL+W4V=mfBrgt9zcg8zyfx+WBN=9bg@mail.gmail.com>
- <20241009132614.mlkpfkdni4cp2tgg@CAB-WSD-L081021>
- <CAFLszTgr-qHXF2QU7toZXOU0FgRMPU0XXnQ6SzMq32a_pguAww@mail.gmail.com>
- <20241010102051.q67usj6oaykjaixx@CAB-WSD-L081021>
-Date: Thu, 10 Oct 2024 14:17:47 +0200
-Message-ID: <87set49mok.fsf@baylibre.com>
+ ffacd0b85a97d-37d4b6cfb43sm1410662f8f.56.2024.10.10.05.23.53
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 10 Oct 2024 05:23:54 -0700 (PDT)
+Message-ID: <8669aceb-dcc2-467f-98bf-816ab6a165a9@canonical.com>
+Date: Thu, 10 Oct 2024 14:23:52 +0200
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/1] ata: sata_rescan must scan for block devices
+To: Arthur Heymans <arthurphilippeheymans@gmail.com>
+Cc: u-boot@lists.denx.de
+References: <CAC8Nb8Q0ACFhUxvmFM5YRSE=b9XEQQH--RQ1iZdva4LNzXDBRQ@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAC8Nb8Q0ACFhUxvmFM5YRSE=b9XEQQH--RQ1iZdva4LNzXDBRQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,84 +105,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Dmitry,
+On 10.10.24 13:48, Arthur Heymans wrote:
+> Hi
+> 
+> The addition of the line
+> 
+> ret = device_chld_unbind(dev, NULL);
+> 
+> Broke booting from sata with qemu q35 with coreboot + u-boot for me.
+> 
+> Kind regards
 
-On jeu., oct. 10, 2024 at 13:20, Dmitry Rokosov <ddrokosov@salutedevices.com> wrote:
+Hello Arthur,
 
-> On Wed, Oct 09, 2024 at 03:13:57PM -0600, Simon Glass wrote:
->> Hi Dmitry,
->> 
->> On Wed, 9 Oct 2024 at 07:26, Dmitry Rokosov <ddrokosov@salutedevices.com> wrote:
->> >
->> > Hello Simon,
->> >
->> > On Tue, Oct 08, 2024 at 07:57:15PM -0600, Simon Glass wrote:
->> > > On Tue, 8 Oct 2024 at 14:18, Dmitry Rokosov <ddrokosov@salutedevices.com> wrote:
->> > > >
->> > > > It's really helpful to have the ability to dump BCB block for debugging
->> > > > A/B logic on the board supported this partition schema.
->> > > >
->> > > > Command 'bcb ab_dump' prints all fields of bootloader_control struct
->> > > > including slot_metadata for all presented slots.
->> > > >
->> > > > Output example:
->> > > > =====
->> > > > > board# bcb ab_dump ubi 0#misc
->> > > > > Read 512 bytes from volume misc to 000000000bf07580
->> > > > > Read 512 bytes from volume misc to 000000000bf42f40
->> > > > > Bootloader Control:       [misc]
->> > > > > Active Slot:              _a
->> > > > > Magic Number:             0x42414342
->> > > > > Version:                  1
->> > > > > Number of Slots:          2
->> > > > > Recovery Tries Remaining: 0
->> > > > > CRC:                      0x2c8b50bc (Valid)
->> > > > >
->> > > > > Slot[0] Metadata:
->> > > > >       - Priority:         15
->> > > > >       - Tries Remaining:  0
->> > > > >       - Successful Boot:  1
->> > > > >       - Verity Corrupted: 0
->> > > > >
->> > > > > Slot[1] Metadata:
->> > > > >       - Priority:         14
->> > > > >       - Tries Remaining:  7
->> > > > >       - Successful Boot:  0
->> > > > >       - Verity Corrupted: 0
->> > > > ====
->> > > >
->> > > > Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
->> > > > ---
->> > > >  boot/android_ab.c    | 68 ++++++++++++++++++++++++++++++++++++++++++++++++++++
->> > > >  cmd/bcb.c            | 35 +++++++++++++++++++++++++++
->> > > >  include/android_ab.h | 10 ++++++++
->> > > >  3 files changed, 113 insertions(+)
->> > > >
->> > >
->> > > Reviewed-by: Simon Glass <sjg@chromium.org>
->> > >
->> > > Can you also update the test?
->> >
->> > I apologize, but I didn't quite understand your point. Could you please
->> > clarify? This patch series includes additional tests for the 'ab_dump'
->> > subcommand. For more details, please refer to:
->> >
->> > https://lore.kernel.org/all/20241008-android_ab_master-v3-6-f292c45a33e4@salutedevices.com/
->> 
->> OK, thank you. Sometimes it is easier (for reviewers) if you update
->> the test in the same commit.
->
-> Should I resend the patch series with ab_dump implementation and tests
-> in the same commit?
->
-> I can prepare new version, if needed, no problem.
+Sorry to hear this. I would need a reproducible example for further 
+analysis.
 
-No need to resend a new version just for this, since it's already
-been reviewed.
+Could you, please, share an image, the U-Boot .config file and HEAD 
+commit hash, as well as the QEMU command.
 
-Keep the suggestion in mind for future series!
+Best regards
 
->
-> -- 
-> Thank you,
-> Dmitry
+Heinrich
