@@ -4,71 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E787D2444F
-	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 21:34:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 471A5D24454
+	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 21:34:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 693BC88A3C;
+	by phobos.denx.de (Postfix) with ESMTP id B9B4489286;
 	Thu, 10 Oct 2024 23:34:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SS2L5bxr";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jLLF82Ts";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB4958927D; Thu, 10 Oct 2024 23:34:17 +0200 (CEST)
-Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
- [IPv6:2607:f8b0:4864:20::f2b])
+ id 204E6889EF; Thu, 10 Oct 2024 23:34:19 +0200 (CEST)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7609689278
- for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 23:34:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 14F6588ADC
+ for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 23:34:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-6cbe9914487so6214956d6.1
- for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 14:34:15 -0700 (PDT)
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-6cbe68f787dso7644366d6.2
+ for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 14:34:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1728596054; x=1729200854; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1728596056; x=1729200856; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iGPubamaesOe0EcVQajpIeyZ83FK6HS9KIHVPD7RvO8=;
- b=SS2L5bxrMVbx0noWfs7y2eRGNDknWECtfEXT8q2LonmMx8iOTZ2yTbmZnp+t3uun/W
- Nq2n5lXNBNiVvLVy0cYS4JGvupaapPUE7guLelqinQlLQubf5j50MPgzwevng6rJIwet
- 7GkxMZtOE0koQe8M0nm1ucDvnEEqVXGlZwhcc=
+ bh=ophOOmuj5rkZF3RoFq0gsClc2g0nBWMLc8KidgKK5hE=;
+ b=jLLF82TsBgFbyXvqwiLvwmlNUZcYgpZhOzK6kxrurkFi2kK21AQ4l5to6YlquitjsO
+ X8EYQfPLyWDqL5S0+QxywUgt02KYaSdZ5UTZPSgVnixWohpSx10kvXVMYSHRFwkSKUwP
+ sJuSCayTqJht0dHmk0exK0kzGHdj1kcTeqVWk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728596054; x=1729200854;
+ d=1e100.net; s=20230601; t=1728596056; x=1729200856;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=iGPubamaesOe0EcVQajpIeyZ83FK6HS9KIHVPD7RvO8=;
- b=Z8Kgk/Wha8ZpRbMq/gRgwbw49cARt0jMi+HDoCOuaDQ1FVzF9pjCeYcE3nSZGeLmnu
- 0gMseJ3zQfV8mCC0ZJhI4VdRQqmkTd3r3T99Q2hNaxR7aEKFvVecYs8Orep9G9XzGouS
- dXbBIFmRVBZUnGWWawY/E5NnhZVUndkNYKXwx6VYl0Zv0azoEsfhOkYqVXZyPyRvpJyt
- 2hXmMWSKK83rApbh3S+ZD1Pb4y9Sux9nyFYlpXHI9MtQM3Ez4vdseLZ7cq8i6uA1AB5e
- 7aU5j0Qsde9gekV8AVRrMU9B/xqhvEafghxnomv/LkO4GjTJEApS6jUSxv4PSZ05SKyq
- ntCw==
-X-Gm-Message-State: AOJu0YxBNpy4EBCxCXgQlWXCSQ4DDz3zWhFdZnBuvNK/1kAwp1l8XBmr
- vjq1CuM9R3HTwFtEZjcCF1aeoCsGi118OHcwTTDUZ7d65HVkv3clxYZZEEIf4ACRskq46VuiH/d
- BItf/zRtf
-X-Google-Smtp-Source: AGHT+IHcMfxi+oBjbXp6xiCKPsXka0GgHxhawWPxw2CmR9k14+b7GjhlECl5SizGhbFCIObT5sJxpg==
-X-Received: by 2002:a05:6214:449d:b0:6cb:e6b2:4a84 with SMTP id
- 6a1803df08f44-6cbeffa2e2bmr5689436d6.14.1728596054341; 
- Thu, 10 Oct 2024 14:34:14 -0700 (PDT)
+ bh=ophOOmuj5rkZF3RoFq0gsClc2g0nBWMLc8KidgKK5hE=;
+ b=sKmEjzUtF1LUriBoKi8AOVWcJnTjs5N8iHKXfNZvKLIYeH+PSW1I4MCNJSn8/cvNHP
+ KOvbiRdlpUp/e6reEzOYk3qqpcEOxEGCTytO94HXmfV1+DvVC8F4+2sk65SUOb63mzod
+ 2QZsDRuudysvKJN5UsW1JY2gREDzHWt5LRZiRtPvxnXDWC9026LTDTK9BUh550hcjNOP
+ 6PxsfLZeXT2a9lch7XoUXGbRyhiw82hKiwZf62ngIRU8pRRLAssIHX5eSD9qBV6OzN0n
+ U2fU60lGn3gKtQASDXTXvAP2md6Varfl7xRmc4rPnAqQ+N5N4jbHMu2ceNDv+1HiEOxY
+ tjyQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXRGUCahJQfNaxL94E83QFmk0b6SX72TIkfREyS/yvfq9tIgKqVOTLKszYiaLWjeGhcCTWwa2k=@lists.denx.de
+X-Gm-Message-State: AOJu0Yybw0KVi85LnjMmGEcZ/4O/gsAjMLOvPPyQdy+WNqXg2vs1jTMf
+ gXbPK//LjTfZzKWkzGdZG0se0f7oct3oF8VK/BP25TxFpwbReP/OIHxUAEclTXw=
+X-Google-Smtp-Source: AGHT+IF3VKCHLPVE+XxlviU89Dz8VtAusXI2SKhoX5XvdpGkLiBHhvMRjJa/gq2nJylfm9iLmm/UqA==
+X-Received: by 2002:a05:6214:5912:b0:6cb:7415:4ce1 with SMTP id
+ 6a1803df08f44-6cbf00444e1mr6947086d6.13.1728596055910; 
+ Thu, 10 Oct 2024 14:34:15 -0700 (PDT)
 Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6cbe85aa56dsm9096566d6.26.2024.10.10.14.34.12
+ 6a1803df08f44-6cbe85aa56dsm9096566d6.26.2024.10.10.14.34.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Oct 2024 14:34:13 -0700 (PDT)
+ Thu, 10 Oct 2024 14:34:15 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Sidharth Prabukumar <sidharth.prabukumar@gmail.com>
-Cc: Jaehoon Chung <jh80.chung@samsung.com>
-In-Reply-To: <20230924223022.313107-1-sidharth.prabukumar@gmail.com>
-References: <20230924223022.313107-1-sidharth.prabukumar@gmail.com>
-Subject: Re: [PATCH] power: mp5416: Fix LDO SVAL for MP5416 PMIC
-Message-Id: <172859605292.435814.12556248001988584974.b4-ty@konsulko.com>
-Date: Thu, 10 Oct 2024 15:34:12 -0600
+To: festevam@gmail.com, sbabic@denx.de, jh80.chung@samsung.com, 
+ "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Cc: uboot-imx@nxp.com, u-boot@lists.denx.de, Joy Zou <joy.zou@nxp.com>, 
+ Ye Li <ye.li@nxp.com>, Peng Fan <peng.fan@nxp.com>
+In-Reply-To: <20240923131133.27546-1-peng.fan@oss.nxp.com>
+References: <20240923131133.27546-1-peng.fan@oss.nxp.com>
+Subject: Re: [PATCH 1/3] power: regulator: pca9450: Update the BUCK1
+ voltage range
+Message-Id: <172859605453.435814.2897334517443568438.b4-ty@konsulko.com>
+Date: Thu, 10 Oct 2024 15:34:14 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -89,10 +93,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 24 Sep 2023 18:30:22 -0400, Sidharth Prabukumar wrote:
+On Mon, 23 Sep 2024 21:11:31 +0800, Peng Fan (OSS) wrote:
 
-> The MP5416 PMIC's LDO set-value formula is incorrect. This patch fixes
-> it by using the correct formula.
+> The pmic could be trimed with updated BUCK1 range, so update the range
+> for trimed pmic. The default value of Toff_Deb is used to distinguish
+> the non-trimed and trimed pmic.
 > 
 > 
 
