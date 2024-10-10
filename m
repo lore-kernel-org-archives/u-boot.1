@@ -4,68 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BD55D2444D
-	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 20:30:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB7FDD2444F
+	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 21:21:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A213E892A4;
-	Thu, 10 Oct 2024 22:30:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id DDCB28926F;
+	Thu, 10 Oct 2024 23:21:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="bOLNruwu";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="D23zArw8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 51FE688C7E; Thu, 10 Oct 2024 22:30:19 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 88BB88926F; Thu, 10 Oct 2024 23:21:53 +0200 (CEST)
+Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
+ [IPv6:2a00:1450:4864:20::236])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 089A989270
- for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 22:30:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DBD9E8926A
+ for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 23:21:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49AKTsbd007259;
- Thu, 10 Oct 2024 15:29:54 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1728592194;
- bh=gNHD9Q7TL7YFdJzC+Dv9eYdRiQQTolaH+N+divuFQjs=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=bOLNruwuhRNJvvfG6cIIH6AuxSl5Dna4TQAVZS5B1043q9PJxlwdxPfP1R76hxD3J
- hEE6wJfV+1lTvE9fih/GOXFSAA297dqH7eYqW3SkKZTfviFTxHog592AhRbGIGhBK9
- 1i9BEMDsK+9AxHldsI5JPxUOoQ38qmXfhj0VOAQ8=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 49AKTsFv042356
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 10 Oct 2024 15:29:54 -0500
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 10
- Oct 2024 15:29:53 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 10 Oct 2024 15:29:53 -0500
-Received: from [10.249.42.149] ([10.249.42.149])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49AKTr1C007051;
- Thu, 10 Oct 2024 15:29:53 -0500
-Message-ID: <f194f14a-c7c3-4aed-b4b8-f093f64c7b69@ti.com>
-Date: Thu, 10 Oct 2024 15:29:53 -0500
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-2facf48157dso15727991fa.2
+ for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 14:21:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1728595310; x=1729200110; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=wiNI9rcEkc0/RDy4p5fZE9bfV+F9JtxpGPiE2f+y2HY=;
+ b=D23zArw8PqKiHUL3Nx6hHeLga0dgyfV8rWG1ABN2z3U1hSBXV0bJ9hIsWCWORp1L6p
+ wPB09/t2WcGaQeXFPqfreZIAl6v34HMuS/pntIzPmtphhApgK/sDC8iCPVbvuyH2Z/wJ
+ hZ7zfElQ5pZZEqxA2Yxh5cCa1iMi0Xc60p3FbgasvOOkVsZPJQ8oaPwtY3zQv0e1c27g
+ N0w/3ahcohIpPRjxaNAKAZy7TWr5LHZJFmq3agUJCLKui/+rBI+E08wLrnoG7Raa0Y23
+ OCDS+1wHxbSqyPxpTKPThl/wy9+0foy2xMuNN/6xpCwddAr0KExrJ70VZmMUXKmd7Y+o
+ iG5g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728595310; x=1729200110;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=wiNI9rcEkc0/RDy4p5fZE9bfV+F9JtxpGPiE2f+y2HY=;
+ b=GSIpWJiwfEtvMDjay7p87a9mUqiwczVNBzKh/ZFZDYyqsyFg8SYqyxGaYMd3UZ1jv4
+ tFBMNtH1wC2xBEFFW5zBuR/yiHdoVml9uvf6KHk6dKwTo5DnNMGgQz+IaDQuupoua4ik
+ Uj2qCvm7D/ZhNtpRaUABErakY47Le/wnGVOBls0Dk/9yyaxh9a5OT7akEAfZnW1aJo7L
+ jubPdJ924U0pcrABWNM9m2BwlrPbENXRozGcyN45xRerL6Q+b/K5uxYJYMJeyfBpCW9x
+ OzNv/rjDE+4QyiInmVdT2VKc3uQ0NZM51Yn3RhjawKcLdUkkmVkugEQFAWOwgRxe6QwG
+ WKKQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWYWU75nBbRCpsh6iGrK+4dKLVAT/q/NlSWRmQ5KlHrcPuLIbXGZ47PB7EXZncP7HKYJmz7rR8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyia05YU0I/P1F9zxeqDOtBf/Klez62lilyrpVdp/0su33cedHf
+ PE/yzNCejMi59zOGbj4frkHs/31XSbll+LxgwVMjMstRN7XnB3mkCFPk9/76bplMpdWps0Ikpvs
+ izdj0/sQjf0jNpxQiB2D5ZRGuiv2eoQ==
+X-Google-Smtp-Source: AGHT+IGl8U6MM5DWWPZIB5HHKQZB5T+6SvAFRDts+oOVJTSvtdYxn+3azeVbbwB1W1+8MMWoBWAegVkui+1cWKSUiKo=
+X-Received: by 2002:a2e:be84:0:b0:2fb:2e27:5324 with SMTP id
+ 38308e7fff4ca-2fb326ff3admr1008721fa.4.1728595309802; Thu, 10 Oct 2024
+ 14:21:49 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] boardf: Modify DRAM message
-To: Simon Glass <sjg@chromium.org>, Neha Malcom Francis <n-francis@ti.com>
-CC: <trini@konsulko.com>, <devarsht@ti.com>, <jonas@kwiboo.se>,
- <richard@nod.at>, <raymond.mao@linaro.org>, <u-kumar1@ti.com>,
- <u-boot@lists.denx.de>
-References: <20241010070909.288313-1-n-francis@ti.com>
- <CAFLszTjJ1GJNd5Fn8U2O5WSnKMn99XW_pGLmejkYy_PBfxSEGg@mail.gmail.com>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <CAFLszTjJ1GJNd5Fn8U2O5WSnKMn99XW_pGLmejkYy_PBfxSEGg@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20240930032244.20286-1-peng.fan@oss.nxp.com>
+In-Reply-To: <20240930032244.20286-1-peng.fan@oss.nxp.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 10 Oct 2024 18:21:37 -0300
+Message-ID: <CAOMZO5ABWwjBHC+qxDi=ibPxgtwKe7rVTxJZWdyqTXp3MZeVmw@mail.gmail.com>
+Subject: Re: [PATCH 1/2] power: pmic: Support pmic pf0900
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Cc: sbabic@denx.de, u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, uboot-imx@nxp.com,
+ Joy Zou <joy.zou@nxp.com>, 
+ Ye Li <ye.li@nxp.com>, Peng Fan <peng.fan@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,51 +92,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/10/24 1:50 PM, Simon Glass wrote:
-> Hi Neha,
-> 
-> On Thu, 10 Oct 2024 at 01:09, Neha Malcom Francis <n-francis@ti.com> wrote:
->>
->> The message "DRAM:  2 GiB (effective 32 GiB)" can be a little confusing,
->> modify the message to show exactly what is meant:
->>
->> "DRAM:  2 GiB (available for U-Boot out of total 32 GiB)"
->>
->> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
->> ---
->>   common/board_f.c | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/common/board_f.c b/common/board_f.c
->> index 154675d0e40..b7add8f7d3d 100644
->> --- a/common/board_f.c
->> +++ b/common/board_f.c
->> @@ -254,7 +254,7 @@ static int show_dram_config(void)
->>
->>          print_size(gd->ram_size, "");
->>          if (!sizes_near(gd->ram_size, size)) {
->> -               printf(" (effective ");
->> +               printf(" (available for U-Boot out of total ");
->>                  print_size(size, ")");
->>          }
->>          board_add_ram_info(0);
->> --
->> 2.34.1
->>
-> 
-> I've forgotten why the first number can be so much lower than the
-> second. What is causing that?
-> 
-> This is quite a long string...could we say "(total 32 GiB)" ? Then
-> perhaps add something to doc/ to talk about the banner that U-Boot
-> prints?
-> 
+On Sun, Sep 29, 2024 at 11:19=E2=80=AFPM Peng Fan (OSS) <peng.fan@oss.nxp.c=
+om> wrote:
 
-Why not just only print the total number? The amount available to
-U-Boot seems like an internal detail, I'd guess most folks just what
-to see at a glance how much DDR was detected on their system.
+> +static int pf0900_read(struct udevice *dev, uint reg, u8 *buff,
+> +                      int len)
+> +{
+> +       u8 crcBuf[3];
 
-Andrew
-
-> Regards,
-> Simon
+crc_buf[3] instead to avoid CamelCase.
