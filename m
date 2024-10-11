@@ -4,61 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CD80D24468
-	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 03:13:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E24BD24471
+	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 05:10:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 41E45892A2;
-	Fri, 11 Oct 2024 05:13:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id EE74A89297;
+	Fri, 11 Oct 2024 07:10:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1728616406;
-	bh=iAKrNAx/Ivh4wmGhZqO/Y88aM2omgozqeCsJeLMqXyA=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=N/OXoK8J2+fgPMBF/kM2cW9Oip692XNnsxO0NsHgKS3U5ZzTdyr8/DH8nDq3hhGvy
-	 Ptouql7BUTLmMtKD2pK1++bk6rOTBGQtOAO1ThLCa76gJtPbx7VLO6ZUo7Ji7i5aG0
-	 xnDZBeVCjs+J3y7q+tnzZ1OgmmcIWzgQ6S92t85MrZV/I5kKUHmjP5nWMaukmoVcN+
-	 7oh5dEY9cbYSm18dXDDutznFidFoXsGCyDDxqT+ljpE94eULeGVy0H9sVDQX30dgID
-	 /80htcnX9e46O8axJmT4ru4rUke+MFVKYt3yNy81DZXonU6E4ww1Vb9umpYZBATnBX
-	 EsK37c6ABU6gw==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="FXZLqflf";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 19F44892A9; Fri, 11 Oct 2024 02:03:38 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 4DC9289278;
- Fri, 11 Oct 2024 05:13:25 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1728616405;
- bh=iAKrNAx/Ivh4wmGhZqO/Y88aM2omgozqeCsJeLMqXyA=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=saKKdqb96LaR5ZHeayUHZlGtw9ILrc1FsODOrgCKj+qJMKlpY43KWQLTJbRDYWN6x
- cUiaXCCl9ioq1UxX5/G6ensIAV79E0GpMYj+3N/bfP9aKn+4zS6gUblTAcy8SPl2le
- dWgm4NmTpkl245rJpKb8lvURLekakigJ+oaXtn7tBh0gCliJnaK5I3JitH7OgGraNK
- bJpSl5AW+zfa/dill00TwpB1JJv7/vK0nf2V3eIasLhOGpnfrUidVer9NtX/hmpgZX
- AmTUF/eMvb20ETmL+KwPz8vV3b5O7PKYCyX3g0rNjjww+JbXxcR/89h5t7kyTdxv8v
- BH8f2Wn8iw3gg==
-Message-ID: <0a2e3963-1019-41ce-9bb7-671cb74661ef@denx.de>
-Date: Fri, 11 Oct 2024 05:13:24 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id B351D892AA
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 02:03:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49B03VHh122067;
+ Thu, 10 Oct 2024 19:03:31 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1728605011;
+ bh=GR/PFm5C34ojj+8k8idzAqxrALnIXv0eLiPtvHat574=;
+ h=From:To:CC:Subject:Date;
+ b=FXZLqflfmS7zH0tNB0UaQGmmzKHQIxCgzHvoLXJT77rHsEfn8eaElaMP83WBlP9om
+ tgIYCMk6J+CWN2EhqOZD1sf2Vyzh/npolraRfkE2UNS7OkJ6GqLwgNpMvuDd6+Y2hr
+ fKt3hlWQO5JEokNWnxHsTlfvTsvCCMU3HCObMDec=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49B03Vcq004223;
+ Thu, 10 Oct 2024 19:03:31 -0500
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 10
+ Oct 2024 19:03:30 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 10 Oct 2024 19:03:30 -0500
+Received: from judy-hp.dhcp.ti.com (judy-hp.dhcp.ti.com [128.247.81.105])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49B03U3s096589;
+ Thu, 10 Oct 2024 19:03:30 -0500
+From: Judith Mendez <jm@ti.com>
+To: Joe Hershberger <joe.hershberger@ni.com>, Tom Rini <trini@konsulko.com>
+CC: Mattijs Korpershoek <mkorpershoek@baylibre.com>, <u-boot@lists.denx.de>,
+ Judith Mendez <jm@ti.com>
+Subject: [PATCH] TI: include: env: ti_common: move fdtoverlay_addr_r to fix
+ ramdisk size
+Date: Thu, 10 Oct 2024 19:03:22 -0500
+Message-ID: <20241011000322.538287-1-jm@ti.com>
+X-Mailer: git-send-email 2.46.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] usb: dwc3-generic: fix CONFIG_DM_REGULATOR-off case
-To: Jan Kiszka <jan.kiszka@siemens.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>
-References: <6c201a24-422a-41f7-846c-1ad5b0ebc7e2@siemens.com>
- <f7ba8d78-e6d9-4f44-8d49-c7f805d60c5b@linaro.org>
- <55c65001-bc56-4b48-9645-1e5f735fe06b@siemens.com>
- <c9d41382-0590-41d5-9bcf-9729bd5bf03d@linaro.org>
- <8d9f785c-2640-47d4-9639-dd0384daf1be@siemens.com>
- <8f61a744-63c1-4cf9-ab96-4aa867f10973@siemens.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <8f61a744-63c1-4cf9-ab96-4aa867f10973@siemens.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Mailman-Approved-At: Fri, 11 Oct 2024 07:10:14 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,80 +78,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/10/24 7:36 AM, Jan Kiszka wrote:
-> On 30.09.24 06:54, Jan Kiszka wrote:
->> On 09.08.24 17:19, Caleb Connolly wrote:
->>>
->>>
->>> On 09/08/2024 07:19, Jan Kiszka wrote:
->>>> On 08.08.24 16:27, Caleb Connolly wrote:
->>>>> Hi Jan,
->>>>>
->>>>> On 08/08/2024 10:51, Jan Kiszka wrote:
->>>>>> From: Jan Kiszka <jan.kiszka@siemens.com>
->>>>>>
->>>>>> When DM_REGULATOR is disabled, all calls will return -ENOSYS. Account
->>>>>> for that so that targets like the IOT2050 will work again.
->>>>>>
->>>>>> Fixes: de451d5d5b6f ("usb: dwc3-generic: support external vbus
->>>>>> regulator")
->>>>>> Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
->>>>>> ---
->>>>>>     drivers/usb/dwc3/dwc3-generic.c | 6 +++---
->>>>>>     1 file changed, 3 insertions(+), 3 deletions(-)
->>>>>>
->>>>>> diff --git a/drivers/usb/dwc3/dwc3-generic.c
->>>>>> b/drivers/usb/dwc3/dwc3-generic.c
->>>>>> index a9ba315463c..2ab41cbae45 100644
->>>>>> --- a/drivers/usb/dwc3/dwc3-generic.c
->>>>>> +++ b/drivers/usb/dwc3/dwc3-generic.c
->>>>>> @@ -246,12 +246,12 @@ static int dwc3_generic_host_probe(struct
->>>>>> udevice *dev)
->>>>>>             return rc;
->>>>>>           rc = device_get_supply_regulator(dev, "vbus-supply",
->>>>>> &priv->vbus_supply);
->>>>>> -    if (rc)
->>>>>> +    if (rc && rc != -ENOSYS)
->>>>>>             debug("%s: No vbus regulator found: %d\n", dev->name, rc);
->>>>>>     -    /* Only returns an error if regulator is valid and failed to
->>>>>> enable due to a driver issue */
->>>>>> +    /* Does not return an error if regulator is invalid - but does so
->>>>>> when DM_REGULATOR is disabled */
->>>>>>         rc = regulator_set_enable_if_allowed(priv->vbus_supply, true);
->>>>>> -    if (rc)
->>>>>> +    if (rc && rc != -ENOSYS)
->>>>>
->>>>> regulator_set_enable_if_allowed() will return 0 if the call to
->>>>> regulator_set_enable() returns -ENOSYS
->>>>>
->>>>> Maybe it would make sense to have the stub implementation of
->>>>> regulator_set_enable_if_allowed() return 0?
->>>>>
->>>>
->>>> Possible. Would that be the only case where a stub should not return
->>>> ENOSYS? All do so far.
->>>>
->>>>> Somewhat confusing to check for -ENOSYS here imo, since it isn't really
->>>>> obvious when that would be the case.
->>>>
->>>> But that would still leave is a with a misleading message, even if it is
->>>> just a debug output. The absence of a regulator is not per se a bug to
->>>> my understanding.
->>>
->>> Ah good point.
->>>
->>> Alternatively, maybe it would be easier to gate this code block with if
->>> (CONFIG_IS_ENABLED(DM_REGULATOR)?
->>>
->>> But yeah maybe fine as is.
->>>
->>> Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
->>
->> Can this regression fix be merged now, or should I add that gating?
->>
-> 
-> This now also missed the v2024.10 release - can we please merge it now?
-Sorry. Applied to usb/master .
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
-If there is a critical patch before release, please, ping me directly if 
-there is a chance it will be missed.
+When booting Android with adtbo_idx set, we observe the
+following crash:
+
+   ** Booting bootflow 'mmc@fa10000.bootdev.whole' with android
+   ## Booting Android Image at 0x82000000 ...
+   Kernel load addr 0x92000000 size 20195 KiB
+   Kernel extra command line: console=ttyS2,115200 cma=768M 8250.
+	nr_uarts=10 printk.devkmsg=on init=/init quiet firmware_class.
+	path=/vendor/firmware mem_sleep_default=deep bootconfig
+   RAM disk load addr 0x88080000 size 16901 KiB
+   "Synchronous Abort" handler, esr 0x96000005, far 0x155b104c8
+   elr: 0000000080808560 lr : 0000000080808558 (reloc)
+   elr: 00000000ffebf560 lr : 00000000ffebf558
+   x0 : 00000000fff99000 x1 : 00000000fff9553c
+   x2 : 000000000000000a x3 : 0000000002800000
+   x4 : 0000000002800000 x5 : 0000000000000020
+
+This happens because the memory at fdtoverlay_addr_r is bogus.
+In fact:
+
+=> printenv fdtoverlay_addr_r
+fdtoverlay_addr_r=0x89000000
+
+And the ramdisk address range is:
+[0x88080000; 0x88080000 + 16901 KiB]
+
+Which is equal to:
+[0x88080000; 0x89101400]
+
+So, if we represent the addresses:
+fdtaddr             0x88000000
+ramdisk             0x88080000
+fdtoverlay_addr_r   0x89000000
+ramisk (end)        0x89101400
+
+We see that fdtoverlay_addr_r in fact has been overridden by
+the Android ramdisk.
+
+The maximum ramdisk size is 0x1080000 (15,5 MiB) and a compressed
+Android vendor ramdisk is 15MiB:
+$ file vendor_ramdisk.img
+vendor_ramdisk.img: LZ4 compressed data (v0.1-v0.9)
+$ du -sh vendor_ramdisk.img
+15M     vendor_ramdisk.img
+
+When it gets decompressed, it uses 16.5MiB, exceeding the
+maximum ramdisk size.
+
+Increase the maximum ramdisk size to 20.5MiB by moving
+fdtoverlay_addr_r higher up in the address space to fix the crash.
+
+Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Signed-off-by: Judith Mendez <jm@ti.com>
+---
+ include/env/ti/ti_common.env | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/env/ti/ti_common.env b/include/env/ti/ti_common.env
+index 7029d12bf20..a15af79d9c3 100644
+--- a/include/env/ti/ti_common.env
++++ b/include/env/ti/ti_common.env
+@@ -3,7 +3,7 @@ kernel_addr_r=0x82000000
+ fdtaddr=0x88000000
+ dtboaddr=0x89000000
+ fdt_addr_r=0x88000000
+-fdtoverlay_addr_r=0x89000000
++fdtoverlay_addr_r=0x89500000
+ rdaddr=0x88080000
+ ramdisk_addr_r=0x88080000
+ scriptaddr=0x80000000
+
+base-commit: a404065479be2c1fe1167c3c91367e8194a69d1b
+-- 
+2.46.2
+
