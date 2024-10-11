@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5EF2D0EE3F
-	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 21:57:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA83DD0EE3F
+	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 22:02:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F478893EB;
-	Fri, 11 Oct 2024 23:57:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3519E893E8;
+	Sat, 12 Oct 2024 00:02:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Tr7V7sY7";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="HWsguge1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A1CEC893E4; Fri, 11 Oct 2024 23:57:03 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ id B3AEB893EB; Sat, 12 Oct 2024 00:02:05 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97030893E4
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 23:57:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B036D893E4
+ for <u-boot@lists.denx.de>; Sat, 12 Oct 2024 00:02:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1728683819; x=1729288619; i=xypron.glpk@gmx.de;
- bh=szZet1P2s381fZ0ugoKMk8Tz/AFfFPPtyfq67/CYRo8=;
+ s=s31663417; t=1728684117; x=1729288917; i=xypron.glpk@gmx.de;
+ bh=dn25WLxeiXDVlV69TDTdxh6xUKEVztOlKLFVZgHS2Xs=;
  h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
  Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
  content-transfer-encoding:content-type:date:from:message-id:
  mime-version:reply-to:subject:to;
- b=Tr7V7sY73Oy2WM6PlpeCzb3bFFyWYe0hi4HDKBQ94N1ccwXtgTEl9ONUtogfkT3H
- C5qXMMK10D2iqtZHoeRofwkYMLC5X6n3STXi/EyW8fwJrUh8LnrJnqE6ys/acpxd5
- SwFWP+zwtyY1xmZggI2I2wyRefhOpg9PYuoAfFsOmvRpG8hO7dPA/87BcRKQf+i3J
- 8pcuMS+U40cGZOKNl5JNOqAvdQEuy/nYIp4fKopHX6S1vO7LyeBxwji5rWizohlis
- VzSX6VxQFjtApunH7Ac+UcYRrg+pYHA8xfcOdbX+Z7eZBlj0dFNooGaFQf7gU+QzI
- HC6+Xr3fmxC0dyTsfQ==
+ b=HWsguge1gqloDGJegpK7KUSSaSdIi1vJgfCHG02YACi/+/vTZsfQlbTAB/PTadDQ
+ m3CtoQX5gbpDFrdOJL+KmXEwxJgO91SYwXYn6wFwygZAcU43jxJanbs6Yr+nH1Xm4
+ 1Dm3eDzZdf15SzUGDRCLSEO8un5rWHropQQ0Q09UE1RAWpwHAv98IwvD+BROib1Qc
+ vi42KTaJQqiz9WcF4t6ANDGHkC6M+edY5PbyJrx4sn6DDzAqjhCBv9q+t3WoP9riC
+ TRkT7N5NJSaht+FTTbEGtamnxinl3iJNVxL8ulgRBg/VU1abwzVlkQawDgjjTkrY9
+ F8TyQjBPhkh44RjLKw==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [127.0.0.1] ([46.114.104.96]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MRTN9-1tMFZe049N-00Jlbk; Fri, 11
- Oct 2024 23:56:59 +0200
-Date: Fri, 11 Oct 2024 23:56:56 +0200
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mr9Fs-1tnHSE3Kti-00j6NH; Sat, 12
+ Oct 2024 00:01:57 +0200
+Date: Sat, 12 Oct 2024 00:01:54 +0200
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
 To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
 CC: Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Sughosh Ganu <sughosh.ganu@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v4_2/5=5D_efi=3A_Show_the_locat?=
- =?US-ASCII?Q?ion_of_the_bounce_buffer_when_debugging?=
+ Francis Laniel <francis.laniel@amarulasolutions.com>
+Subject: Re: [PATCH v4 4/5] efi: Reserve some memory for initial use
 User-Agent: K-9 Mail for Android
-In-Reply-To: <20241011212126.747741-3-sjg@chromium.org>
+In-Reply-To: <20241011212126.747741-5-sjg@chromium.org>
 References: <20241011212126.747741-1-sjg@chromium.org>
- <20241011212126.747741-3-sjg@chromium.org>
-Message-ID: <A51D5AB2-A3A6-44E9-BE35-45B79081EB9E@gmx.de>
+ <20241011212126.747741-5-sjg@chromium.org>
+Message-ID: <71ECC011-77EC-4308-AFE5-0E301BC27F84@gmx.de>
 MIME-Version: 1.0
 Content-Type: text/plain;
  charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:JTrwcnW9Tlr7+lSUlbFDSCDOJ9pYUx+0ejouBKMkBgLNbsceSR9
- I2cArpVEKiUdfO5p38fTiwCVaRXfXWBJYxtqznFmA4W/6PqQN/6yPia/speDOODkq2HAVp1
- zF8ymAw70gYHkM3eRplCp6bjbc973HsDUGXc+KZCIW2LK1b5CAkmfMdpEChyvmoN5edXk97
- luP7KwxgqtWvAOQDkicRg==
-UI-OutboundReport: notjunk:1;M01:P0:HKpHrWszx7o=;iME5wd7E/CqvMo8xXHc23agcpFY
- zKQtuZU97O5V+0DGgqwTDDDARYx/2jKODsH3vpsK4hb6OrPRfY/GDkptGau0n3BklBqVs439u
- HQIYkPKrU2RaUlovdlnoyLr+xOGQHfg/056wpZehT2/ocexpiI63l/1KAWo5kj3tVMYt5T5kT
- qpgW7o6xSFPrVoWMaVXMDMifJyK5h2oeG/iOeWBxqyAFxa71cEtO9mNrhX+xEW0AA+ykSFyal
- mMV6d4VVymlbjIw1ynlCuzcFOdGRw+5Cv6e/qb8x6Kkg45dbGCCfMe2dpeibeO1t0jt1L+CXR
- x2xK4MMbM7P9XFt6SmwQgiNL5iiE0UPLBNtshCQACQazgYZiau5FoZRi2OMVtllR+rs/JSzax
- tS3jyIC6oEIRTyrXMQSNYxCTLxE2xDcpDFobwnXIKdqj+i6SYzL+Y2Yy/EBnMDr6GqnxMa/kz
- cECGfyaVk3RJcX0OA5aUKfWFAzw4mDKmUarjsJFxW2Zo1mnMT3fmSKypsubnJPSPL49QPGOlD
- aBdCarRinZw3LuZmdRa6yjQc5l6URNukC3uw5UKFGmfiUYC4cDKKFZJ7gvPd9UbMx6LVMCyNX
- hyfywGujmDjs1q7r0WZNfOO2CfCc92rtZk28JLzsLbeYWJUA2qYroBS0+CQYojr1yShSTfz/C
- 4hn4CZFeFEpDDm3PlZxonfeDXpXMobE1/Y3vAXBqmSNWrlZsC8lycpDGusn65OSQfnxMpaDyx
- DmotQgLKiIfZl+ygcTyvdO32jfAfMBaVLjXdq3gWYITZhvB6yZNTwXSy9cXirZ7754g6qtYQh
- ZAyrskeiY/botWfAeka3D8MA==
+X-Provags-ID: V03:K1:W58Ds9hZlsbS2/jK+IYkHROtx3hKt156jZH5UQu9acWXXJoI9cV
+ 5DmMVLUquTJL6LLhvaJcAyP000kOYEn0bnpJZetzTcN+E1LwwMlIrFIRbGmKqzIFyNlZZ4T
+ 4vG59uTu5wbP75avGEYqOA2oPSRTG5XSS6c6vfg4BctRoOTvCuQ1isUMXf/XtSP7B6M4dp5
+ OCFitP8nBzOI99TATl5JQ==
+UI-OutboundReport: notjunk:1;M01:P0:i/RRv2+ndj4=;uD+bSIuENQZdQlPcI53RNhB146f
+ phzY0S6yxFk6A26Eji0MvJYSog4Z3B5GbfyDtAhgSXIDV4EfPWTxmEmtzYPn8CCs9+5yXOCHE
+ Vqj+Z2hiaFoUplyLScfPa4DUKLUpcgE2VuPmwmSxmfF5a2ENLeMLatG7C99vosjzFWAdnVax2
+ 1s0MMfXVCGCAxWvk79YBdcuKSVKJ/dfGZ/mRQp8h7Dh9nVlZHVuPl2s1utgl53OBq8Kp2yTsD
+ tJ6MIcV5BMg9hh2C1ouhFUCl4PYbddxQI1RRnfEA2F7cHuMCksreb69qOtBxdXVMqcvXJzrLC
+ edkB9No+mQeVZIDQ0rUgi6YMh7zzMmqdMFaDRaSiOUo49UZ3LlBmp+8dUyhM/lgKKjfsU+Vfr
+ eTXWahmKhZc0Z1UPTRrRUOqAtqrE1z1yGJICmLCkt7/pHwkpFswZBtf5TfK01SqC0poglG0Kd
+ 98WPzVlXKwA2JC7hNXHfq8fPBFq6MuDrCMnyOpmyg5F+hFiCLI6qDx2r5VXuZhPR/rOGa4nmL
+ UeX5JxdxF/KMNOhjUv8gyQdhblpzvP31UY2ZD1wINi24FnaCkmPw8KNAaqMZtn3Ze6DuPk5Gy
+ GaELTk8f/Y9nqQm/1j0Ma2xJaBqcSTr6G8YL0KpcGptd3y0jgf5Me8kXATn+lOxWKWEpEJPty
+ oAupdGDG43gM9vAyspDQs3usodm1LbOn7yv5C4Ylg8F7ZwoPieDdFYetVHUIaEp0xQ17NmtMZ
+ LPhvdRUe8OuzGy8f05jx4soq9Ewgwnj/0Yn3ws00qFrcDhVrsNdYh70ecKr53pA4DoxzSY+pr
+ nWpPjNsmoZuipmrDQrAtIaaA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,118 +94,108 @@ X-Virus-Status: Clean
 
 
 
-Am 11=2E Oktober 2024 23:21:23 MESZ schrieb Simon Glass <sjg@chromium=2Eor=
+Am 11=2E Oktober 2024 23:21:25 MESZ schrieb Simon Glass <sjg@chromium=2Eor=
 g>:
->The EFI_LOADER_BOUNCE_BUFFER feature was added many years ago=2E It is
->still needed and 24 boards (lx2160ardb_tfa_stmm,
->lx2162aqds_tfa_SECURE_BOOT and the like) use it=2E
+>The 'point of cooperation' is where U-Boot starts allowing EFI to use
+>memory outside of the U-Boot region=2E Until that point, it is desirable
+>to keep more below U-Boot free for loading images=2E
 >
->This feature uses EFI page allocation to create a 64MB buffer 'in space'
->without any knowledge of where boards intend to load their images=2E This
->may result in image corruption or other problems=2E
->
->For example, if the feature is enabled on qemu_arm64 it puts the EFI
->bounce buffer at 1045MB, with the kernel at 1028MB and the ramdisk at
->1088MB=2E The kernel is probably smaller than 27MB but the buffer does
->overlap the ramdisk=2E
->
->The solution is probably to use BOUNCE_BUFFER instead, with the EFI
->version being dropped=2E For now, show the address of the EFI bounce
->buffer so people have a better chance to debug any problem=2E
->
->Signed-off-by: Simon Glass <sjg@chromium=2Eorg>
->---
->In response to questions on how to show this problem:
->
->First, add CONFIG_EFI_LOADER_BOUNCE_BUFFER=3Dy to
->configs/qemu_arm64_defconfig and build
->
->Then, to run:
->qemu-system-aarch64 -machine virt -nographic -cpu cortex-a57 \
->   -bios u-boot=2Ebin
->
->U-Boot 2024=2E10-00809-gae29e5f76e4a-dirty (Oct 11 2024 - 11:48:46 -0600)
->
->DRAM:  128 MiB
->Core:  51 devices, 14 uclasses, devicetree: board
->Flash: 64 MiB
->Loading Environment from Flash=2E=2E=2E *** Warning - bad CRC, using defa=
-ult environment
->
->In:    serial,usbkbd
->Out:   serial,vidconsole
->Err:   serial,vidconsole
->No USB controllers found
->Net:   eth0: virtio-net#32
->
->starting USB=2E=2E=2E
->No USB controllers found
->Hit any key to stop autoboot:  0
->=3D> bootefi hello
->Enabling coop memory
->No EFI system partition
->No EFI system partition
->Failed to persist EFI variables
->Missing TPMv2 device for EFI_TCG_PROTOCOL
->Missing RNG device for EFI_RNG_PROTOCOL
->Warning: EFI bounce buffer 000000004157f000-000000004557f000
->Not loaded from disk
->Booting /MemoryMapped(0x0,0x47763730,0x31b0)
->EFI: Call: efi_load_image(false, efi_root, file_path, source_buffer, sour=
-ce_size, &handle)
->EFI: 0 returned by efi_load_image(false, efi_root, file_path, source_buff=
-er, source_size, &handle)
->Hello, world!
->Running on UEFI 2=2E10
->Firmware vendor: Das U-Boot
->Firmware revision: 20241000
->Have device tree
->Load options: <none>
->File path: <none>
->Boot device: /MemoryMapped(0x0,0x47763730,0x31b0)
->=3D> print kernel_addr_r
->kernel_addr_r=3D0x40400000
->=3D> print ramdisk_addr_r
->ramdisk_addr_r=3D0x44000000
->=3D>
->
->The EFI bounce buffer overlaps with the ramdisk=2E
->
->Changes in v4:
->- Reword the commit message since this feature is needed
->
-> lib/efi_loader/efi_bootbin=2Ec | 9 +++++++++
-> 1 file changed, 9 insertions(+)
->
->diff --git a/lib/efi_loader/efi_bootbin=2Ec b/lib/efi_loader/efi_bootbin=
-=2Ec
->index a87006b3c0e=2E=2Eeefdd660cee 100644
->--- a/lib/efi_loader/efi_bootbin=2Ec
->+++ b/lib/efi_loader/efi_bootbin=2Ec
->@@ -209,6 +209,15 @@ efi_status_t efi_binary_run(void *image, size_t size=
-, void *fdt)
-> 		return -1;
-> 	}
->=20
->+#ifdef CONFIG_EFI_LOADER_BOUNCE_BUFFER
->+	/*
->+	 * Add a warning about this buffer, since it may conflict with other
->+	 * things
->+	 */
->+	log_debug("Warning: EFI bounce buffer %p-%p\n", efi_bounce_buffer,
->+		  efi_bounce_buffer + EFI_LOADER_BOUNCE_BUFFER_SIZE);
->+#endif
+>Reserve a small region for this purpose=2E
 
-Adding a debug message here is ok=2E
+Your commit message provides no clue why this should be needed=2E
 
-But writing "warning" in a debug message which is just printing an address=
- for a configuration selected item looks weird to me=2E
+If we ensure thst LMB is up before EFI initialization, the EFI subsystem w=
+ill be able to allocate memory from there=2E
 
 Best regards
 
 Heinrich
 
+
+>
+>Signed-off-by: Simon Glass <sjg@chromium=2Eorg>
+>---
+>
+>(no changes since v1)
+>
+> include/asm-generic/global_data=2Eh |  6 ++++++
+> lib/efi_loader/efi_memory=2Ec       | 21 +++++++++++++++++++++
+> test/py/tests/test_event_dump=2Epy  |  1 +
+> 3 files changed, 28 insertions(+)
+>
+>diff --git a/include/asm-generic/global_data=2Eh b/include/asm-generic/gl=
+obal_data=2Eh
+>index d6c15e2c406=2E=2E20705be14dd 100644
+>--- a/include/asm-generic/global_data=2Eh
+>+++ b/include/asm-generic/global_data=2Eh
+>@@ -443,6 +443,12 @@ struct global_data {
+> 	 */
+> 	struct upl *upl;
+> #endif
+>+#if CONFIG_IS_ENABLED(EFI_LOADER)
+>+	/**
+>+	 * @efi_region: Start of EFI's early-memory region
+>+	 */
+>+	ulong efi_region;
+>+#endif
+> };
+> #ifndef DO_DEPS_ONLY
+> static_assert(sizeof(struct global_data) =3D=3D GD_SIZE);
+>diff --git a/lib/efi_loader/efi_memory=2Ec b/lib/efi_loader/efi_memory=2E=
+c
+>index 50cb2f3898b=2E=2E9cc33397371 100644
+>--- a/lib/efi_loader/efi_memory=2Ec
+>+++ b/lib/efi_loader/efi_memory=2Ec
+>@@ -24,6 +24,12 @@ DECLARE_GLOBAL_DATA_PTR;
+> /* Magic number identifying memory allocated from pool */
+> #define EFI_ALLOC_POOL_MAGIC 0x1fe67ddf6491caa2
+>=20
+>+/*
+>+ * Amount of memory to reserve for EFI before relocation=2E This must be=
+ a
+>+ * multiple of EFI_PAGE_SIZE
+>+ */
+>+#define EFI_EARLY_REGION_SIZE	SZ_256K
 >+
-> 	ret =3D efi_install_fdt(fdt);
-> 	if (ret !=3D EFI_SUCCESS)
-> 		return ret;
+> efi_uintn_t efi_memory_map_key;
+>=20
+> struct efi_mem_list {
+>@@ -944,3 +950,18 @@ int efi_memory_init(void)
+>=20
+> 	return 0;
+> }
+>+
+>+static int reserve_efi_region(void)
+>+{
+>+	/*
+>+	 * Reserve some memory for EFI=2E Since pool allocations consume 4KB ea=
+ch
+>+	 * and there are three allocations, allow 16KB of memory, enough for
+>+	 * four=2E This can be increased as needed=2E
+>+	 */
+>+	gd->efi_region =3D ALIGN_DOWN(gd->start_addr_sp - EFI_EARLY_REGION_SIZE=
+,
+>+				    SZ_4K);
+>+	gd->start_addr_sp =3D gd->efi_region;
+>+
+>+	return 0;
+>+}
+>+EVENT_SPY_SIMPLE(EVT_RESERVE, reserve_efi_region);
+>diff --git a/test/py/tests/test_event_dump=2Epy b/test/py/tests/test_even=
+t_dump=2Epy
+>index e282c67335c=2E=2Ee36fc6a1586 100644
+>--- a/test/py/tests/test_event_dump=2Epy
+>+++ b/test/py/tests/test_event_dump=2Epy
+>@@ -20,5 +20,6 @@ EVT_FT_FIXUP          bootmeth_vbe_ft_fixup           =
+=2E*boot/vbe_request=2Ec:=2E*
+> EVT_FT_FIXUP          bootmeth_vbe_simple_ft_fixup    =2E*boot/vbe_simpl=
+e_os=2Ec:=2E*
+> EVT_LAST_STAGE_INIT   install_smbios_table            =2E*lib/efi_loader=
+/efi_smbios=2Ec:=2E*
+> EVT_MISC_INIT_F       sandbox_early_getopt_check      =2E*arch/sandbox/c=
+pu/start=2Ec:=2E*
+>+EVT_RESERVE           reserve_efi_region              =2E*lib/efi_loader=
+/efi_memory=2Ec:=2E*
+> EVT_TEST              h_adder_simple                  =2E*test/common/ev=
+ent=2Ec:'''
+>     assert re=2Ematch(expect, out, re=2EMULTILINE) is not None
