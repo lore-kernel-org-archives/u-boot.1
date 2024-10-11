@@ -4,77 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24503D0EE1E
-	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 18:06:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D868DD0EE19
+	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 18:10:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6EE6C893AD;
-	Fri, 11 Oct 2024 20:06:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 53A6A893C6;
+	Fri, 11 Oct 2024 20:10:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=devpi.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MeW9EYXe";
+	dkim=pass (2048-bit key; unprotected) header.d=devpi.de header.i=@devpi.de header.b="YpJrZOOA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31A36893CA; Fri, 11 Oct 2024 20:06:24 +0200 (CEST)
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [IPv6:2a00:1450:4864:20::22a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 07E34893CB; Fri, 11 Oct 2024 20:10:37 +0200 (CEST)
+Received: from smtp052.goneo.de (smtp052.goneo.de [85.220.129.60])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4EC3F893AD
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 20:06:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AEC92893C2
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 20:10:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=devpi.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-2fad5024b8dso27084021fa.1
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 11:06:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1728669981; x=1729274781; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=zYweDjW8AF+NHSJGTlEUAEsVXzacEJx2R+zHvuCiwbg=;
- b=MeW9EYXe1/XVW0e7RnzHaFtyE7JBWFZ8XWWSqHLaxAvW7g8SKGZqXYcig8R9C2T79L
- 1jDidW14hkiYCWOIR68Y6E7eMFLhgS9iN6jl+JUVbTA2rzfnyQ8oD4skkzY/dzjDdEfC
- VYeHN3lpvAuHZ4Up54cMJ4pFZrqzZs2XLO6DrHaVQ/HP3Aur4V5c12B44D73vntd17ey
- 1UsI7U7ifebrm8TMsR+RG+WjRnCqKxUvvgtEe5xCaRjzBMlbvT6dvKkLfm+DpkTFy+ja
- cOkGKHELvepF6uy/Zom3KPGgk/4yIBf4STGV0Ctc1ukRW5DEkTLkgl7Vo+4ArQVyQKOo
- 567g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728669981; x=1729274781;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=zYweDjW8AF+NHSJGTlEUAEsVXzacEJx2R+zHvuCiwbg=;
- b=DBZfIEVQUXKHsK1/AZ4HWxJfR33w5vUtaSJvyvKEaFRe4Yw1zqeP164OuIjBu2jmn/
- CB5fTXF4gZMl/f5FTOAAQRPpNJlQkjRsDTQm+YjvhdrVnzGvqbvNjx/dE6AYOPWyLl8y
- 73Ab1nojfx1LhkQrxhKcz4VZORc9NH7Ek/HfDgh4xkvHsEQKcMYqYpwWDzPN7eJOoTuN
- swvZY5w1Lbi4CpnwzsPFjIpsDKeJQlSAIl8+1qr3+e5K9iCvIcVmJgf1paOLsFM8nYxF
- t7T1XoKx/Vebm0bQ+vZHVZLsTA+NAgy2Ebvdz42nIL6qwko212dew5iMYn4zxNg6XW+w
- p2fg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWKRFpbmQiKgM8dOWXpo1oGQAz8LbUr/g80r+DRauVRzSBAaW0S5HTvb9k4uJqMxzDyM2gs/w0=@lists.denx.de
-X-Gm-Message-State: AOJu0YxEcyr4P0CUC+iG/fa72AdWGIW/IHqFBv4I0Yhz8qEDExSVE+RU
- orxDZNziilKllXki88eOV74gEtpbEFGu06f9X5JbyEAkezZRK+Or3Pt/TiLytdKVHcRi6RIgOOK
- RMliqQetjuVs0BC4JZ6ttSqTr7nE=
-X-Google-Smtp-Source: AGHT+IG7d+UrtTsjKp/nPhc0XlZLEgZJfDWxbdAFQWD7FvyGQzgePheVje8ZiEJzBUeyn0/67TSgvECRSVui05C2TsM=
-X-Received: by 2002:a2e:712:0:b0:2f5:11f6:1b24 with SMTP id
- 38308e7fff4ca-2fb327423bdmr15287091fa.18.1728669981270; Fri, 11 Oct 2024
- 11:06:21 -0700 (PDT)
+ spf=pass smtp.mailfrom=lehmanju@devpi.de
+Received: from hub1.goneo.de (hub1.goneo.de [85.220.129.52])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
+ (No client certificate requested)
+ by smtp5.goneo.de (Postfix) with ESMTPS id 77A5E240E20;
+ Fri, 11 Oct 2024 20:10:34 +0200 (CEST)
+Received: from hub1.goneo.de (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
+ (No client certificate requested)
+ by hub1.goneo.de (Postfix) with ESMTPS id 89630240564;
+ Fri, 11 Oct 2024 20:10:32 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=devpi.de; s=DKIM001;
+ t=1728670232;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=YaG2c3yoSTl/5/DpRCOnBKCgNeufi6m0xpmnmRIYd0o=;
+ b=YpJrZOOA7ln4c0rvRCkp1Ve6b/ng/PiLR0o2IHtLgjgbgxRe7RiaejiIqMYNfS+30fxo1Y
+ BB5MWDDQU+2j+JhERtjEZ+KbUzZ/SaM9Updmsb5MmhZ6FtBd0mHyQAMMC/X7g/wugGZ5fM
+ gLCrV0UcAQRpBjFlllbqbbctjSVTAzMXtAjmqYbL8eqdvfPuRY6JzrddJolo8lxGnh6Kst
+ L1D3bPPFeKHkHr86iMa9q6XKC9T5eoVyYoG30rxy0jpCU8YfnzSJoTkeJ2VrYebq02gams
+ sseH9ezunAVXbuR35mCdmwqDpTSMXSMdpcNg50VsijtcLXYFvkaVsBTERJGwoA==
+Received: from [IPV6:2003:cb:ef39:8710::193]
+ (p200300cbef3987100000000000000193.dip0.t-ipconnect.de
+ [IPv6:2003:cb:ef39:8710::193])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by hub1.goneo.de (Postfix) with ESMTPSA id EE4292405B9;
+ Fri, 11 Oct 2024 20:10:31 +0200 (CEST)
+Message-ID: <659abbc2-037f-4f62-9f62-e17ff1972223@devpi.de>
+Date: Fri, 11 Oct 2024 20:10:31 +0200
 MIME-Version: 1.0
-References: <20241011105827.7729-1-peng.fan@oss.nxp.com>
- <20241011165616.GW14210@bill-the-cat>
-In-Reply-To: <20241011165616.GW14210@bill-the-cat>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 11 Oct 2024 15:06:10 -0300
-Message-ID: <CAOMZO5CSK74_TcubtN1W1MpVmTwTmbv_XfhaOexpdvoc5WGb=w@mail.gmail.com>
-Subject: Re: [PATCH] cpu: imx8_cpu: Avoid revision to corrupt device tree
-To: Tom Rini <trini@konsulko.com>
-Cc: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, Simon Glass <sjg@chromium.org>,
- sbabic@denx.de, 
- u-boot@lists.denx.de, uboot-imx@nxp.com, gilles.talis@nxp.com, 
- Peng Fan <peng.fan@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 00/13] ufs: enhancements to support Qualcomm UFS
+ controllers
+To: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini
+ <trini@konsulko.com>, Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>
+Cc: Michal Simek <michal.simek@amd.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, bmeng.cn@gmail.com,
+ u-boot@lists.denx.de, u-boot-qcom@groups.io,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+References: <20240930-topic-ufs-enhancements-v3-0-58234f84ab89@linaro.org>
+Content-Language: en-US
+From: Julius Lehmann <lehmanju@devpi.de>
+In-Reply-To: <20240930-topic-ufs-enhancements-v3-0-58234f84ab89@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Rspamd-UID: 7aaefa
+X-Rspamd-UID: 73a96a
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,9 +94,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Why isn't this padding and alignment with the BSS being taken care of in
-> either the linker script or the binman dts?
+On 30.09.24 14:44, Neil Armstrong wrote:
+> This serie regroups all the fixes and base enhancements required to
+> support the Qualcomm UFS controllers in U-Boot.
+> 
+> This syncs headers & defines from Linux, and includes 2 set of
+> fixes that were sent separately:
+> - ufs: core: remove link_startup_again logic
+> - ufs: properly fix cache operations
+> 
+> Without those 2 sets, UFS cannot initialize on Qualcomm controlers
+> since v5, and a numerous of Cache issues makes any UFS controller
+> fail to initialize.
+> 
+> Since UFS core hasn't changed for a while, and since UFS is core
+> technology for the Qualcomm SoCs, I volunteer maintaininig the
+> UFS subsystem if Bhupesh & Neha Malcom Francis are ok with that.
+> 
+> It has been reported to show regressions on:
+> - TI K3 platforms (j721s2, j721e, j7200, j784s4) [1]
+> - AMD platform (amd_versal2_virt_defconfig) [2]
+> 
+> [1] https://lore.kernel.org/all/38f599a8-7094-4a04-8ff6-96fc8b9d168a@ti.com/
+> [2] https://lore.kernel.org/all/SA1PR12MB869713CA620F99077B75EF0E98632@SA1PR12MB8697.namprd12.prod.outlook.com/
+> 
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+> ---
+> Changes in v3:
+> - Fixup patch 9
+> - Link to v2: https://lore.kernel.org/r/20240920-topic-ufs-enhancements-v2-0-65ae61e73eaa@linaro.org
+> 
+> Changes in v2:
+> - Added review and tested-by tags
+> - Updated patch 12 message with more explanations
+> - Synced patch 9 again with Linux 6.11
+> - Updated patches 7, 8, 9 and 10 with informations about the origins of the changes
+> - Link to v1: https://lore.kernel.org/r/20240910-topic-ufs-enhancements-v1-0-3ee0bffacc64@linaro.org
+> 
+> ---
+> Bhupesh Sharma (5):
+>        ufs/ufs.h: Add definition of 'ufshcd_rmwl()'
+>        ufs: Clear UECPA once due to LINERESET has happened during LINK_STARTUP
+>        ufs: Sync possible UFS Quirks with Linux UFS driver
+>        ufs: Add missing memory barriers
+>        ufs: Fix debug message in 'ufs_start'
+> 
+> Marek Vasut (2):
+>        ufs: Add UFSHCD_QUIRK_BROKEN_64BIT_ADDRESS
+>        ufs: Add UFSHCD_QUIRK_HIBERN_FASTAUTO
+> 
+> Neil Armstrong (6):
+>        ufs: allocate descriptors with size aligned with DMA_MINALIGN
+>        ufs: fix dcache flush and invalidate range calculation
+>        ufs: split flush and invalidate to only invalidate when required
+>        ufs: use dcache helpers for scsi_cmd data and only invalidate if necessary
+>        ufs: core: remove link_startup_again logic
+>        MAINTAINERS: Add myself to the list of UFS maintainers
+> 
+>   MAINTAINERS       |   1 +
+>   drivers/ufs/ufs.c |  98 +++++++++++++++-----------
+>   drivers/ufs/ufs.h | 203 ++++++++++++++++++++++++++++++++++++++++++++++++------
+>   3 files changed, 241 insertions(+), 61 deletions(-)
+> ---
+> base-commit: ddbcafeb53e7093c58488596bfce6d8823777c3a
+> change-id: 20240910-topic-ufs-enhancements-fe8ef9ce39d8
+> 
 
-Peng, in addition to Tom's comment: which commit caused the problem?
+tested the whole series in combination with 
+https://lore.kernel.org/u-boot/20240910-topic-ufs-qcom-controller-v1-0-54c0d2231b10@linaro.org/ 
+on a SM8150 tablet
 
-Please add a Fixes tag.
+Tested-by: Julius Lehmann <lehmanju@devpi.de>
+
+> Best regards,
+
