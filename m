@@ -4,75 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15F50D0D7AB
-	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 14:50:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D56FFD0D79F
+	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 14:50:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78C238934F;
-	Fri, 11 Oct 2024 16:49:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F2EF38936A;
+	Fri, 11 Oct 2024 16:50:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RrxXMzGX";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xtHTadky";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CDDE98934A; Fri, 11 Oct 2024 16:49:58 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 0EF0C8936A; Fri, 11 Oct 2024 16:50:01 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 93086892F8
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 16:49:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EF562892F8
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 16:49:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=linus.walleij@linaro.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-5c920611a86so2751509a12.0
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 07:49:56 -0700 (PDT)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-5c89e66012aso2981838a12.2
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 07:49:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728658196; x=1729262996; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=LPEmfYA/cUnYLvoG/1t8re3fZki3W4KQo2K5uvA2baw=;
- b=RrxXMzGXrK6xVb0bM+ZbIUMVboY1zGFlfMe/GT3p29LDSnjihsoh1kIT673wU2EF1d
- 6Oe6iK1FFLvG1mUHyhLxm34N+G+K/UQsQjEb+x8OjozHrc+IW8rZ/aSMq7xmwAcm6lAs
- jQQcQylEaU7BhZy7xp811Xc0AGbH18+/3zOCfd0cQrU9W3R/N6iX4jkSywb44I+WiZJ7
- T7CHOpYacrVmWN20wxUTxqq4vBIWcygrNerMkEKpsCyxGRJIN0RjCTVv2oajq7n5xDzD
- N9hvcMFrDMc9yj9NHHwRsV+oUOQQLr1pJgOmFYtFlaTDueiVwlzYyKRcKmFrOoa1VfiT
- 1Fcg==
+ d=linaro.org; s=google; t=1728658198; x=1729262998; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=PPMQ77CzsI908RmYEkGH9OurPrHcLN6r8qHnSlgAoQg=;
+ b=xtHTadkyHorsolfZc0ELlZCZC1Mv/6vUarIX/66QgTF9OEEsLdcycIrxgDISQavVcH
+ c+2ZdkC4ooX1QKLg2C/RoM3Kw7zzAUlHUiu6fatNtEMbLvUGeLHX6haw6pd7yYw6Uky1
+ C60LhlP6lpLJ2Iy5OcM4b5W+zTN03Q1yrrTYbdOdsBZSRFLu8U+RSbnMRf5pr2DZUbEj
+ upEqDxZPXvAYqABpLCWu7ziWPXoDB4Lwek+bBOGyIVHmX3yfT9FasuSP7tVXzZCfXVAD
+ Y+gtktZuqqjAAIg7ih5zeLMQ57r/EgMpNqRsQK4niNj4FipvZNyXL88UnA2kUxnqLzu8
+ NbXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728658196; x=1729262996;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=LPEmfYA/cUnYLvoG/1t8re3fZki3W4KQo2K5uvA2baw=;
- b=sCHwxBpzK+ImCCABRzHwdr9n2b7BRtyLqh0f7ybwAHrkWNkKeraPcB0sg8KYOOJvT6
- kqg9+31aVdTtb4k9t5M5qIZMywu6rE+GMU2AKuMP6cY+76vUBE/OxEM9usBuZLY4kp2E
- kJl4F2spw1gXnd+xOgu4ApZgK0D4+tCtQ//heE5hUeuU/Gy8PfH/zxbOimNMAkGy+hA3
- Yx8xUCRCFYL8qupEHsi/j//vkTAtQgqJWqwIrjKP/aHEyQJAmjxV3tZUp6RLkY2Pgwnj
- y0SnWhcu9t5wM8eoIe/KMryab/liQnvo8L7MArOfOlN4A5cTco2rdfPN52SO6O436fpN
- Yhjg==
-X-Gm-Message-State: AOJu0YzmDwQvjEJzfMef8aC1u1E3sDGoJPWdxG6ehs3WNpts01sh8a2B
- AIIQK0mrCO+9nbKZqzcIQvHQosXnNmY1WWD3IjirR/ixR3700YN3HSU5k5QUT7o=
-X-Google-Smtp-Source: AGHT+IHRWLob/4RFQAihZcb/NcfoL+Z0tI0PPCRHjIGbGqDdkRD8mbty6um4x5KqmoARXUChd8BrEQ==
-X-Received: by 2002:a05:6402:2748:b0:5c9:4a9b:31f9 with SMTP id
- 4fb4d7f45d1cf-5c94a9b5292mr1969237a12.35.1728658195982; 
- Fri, 11 Oct 2024 07:49:55 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1728658198; x=1729262998;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=PPMQ77CzsI908RmYEkGH9OurPrHcLN6r8qHnSlgAoQg=;
+ b=tsF9zdktLIqObfcG72jknl7fvyoZMxtibTLMscBUxEMKS/Dsafjtrvs98fbg6G76Pm
+ UADGuw3Gu097xVbxGxRgJexXqeXCmG97BF3Cu1naCfpVKdOzx+YWOkvq9aV7LDvHnrA9
+ P2FT9TYiFO8BTudLiJGfQtURskhSjG87NpRXpsPJNVPNpz9Fln5siKtcvKrYSQdEL6zU
+ 1JlZ7xziCCjD4yclZ1LTcy2tmbER36GvtpsCJ4TlxLiGshd7dan9VJOVYuHuoVXeH70x
+ gevhy6CiWSKnMNqTvRvDkG7y5GB9VoHTFRvs6JaAb9EP9CN/I8k7RYVafb+iKef+D85I
+ Vhdw==
+X-Gm-Message-State: AOJu0YzglP98KuhTyJ5/iG/DY2+XjpZAZm5MkwPXd8rz3fGXq7t1Off3
+ cLB1Z1J84lrdAaVWqrtEYKQ/VcbNw1hAaMhM/fGKwqRFxsvN9YHYlrbKCKkkDsE=
+X-Google-Smtp-Source: AGHT+IEsrbcJ+XZoGki0qWtd7aB5whYp9rPTAFjCnsf4/kgesT/nTy0gbAWI9dXfyrQ729/RIqKgFA==
+X-Received: by 2002:a05:6402:5c9:b0:5c8:a0fd:63d6 with SMTP id
+ 4fb4d7f45d1cf-5c948d24835mr2056879a12.20.1728658198217; 
+ Fri, 11 Oct 2024 07:49:58 -0700 (PDT)
 Received: from lino.lan ([85.235.12.238]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c9372940e3sm2006113a12.81.2024.10.11.07.49.54
+ 4fb4d7f45d1cf-5c9372940e3sm2006113a12.81.2024.10.11.07.49.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Oct 2024 07:49:55 -0700 (PDT)
+ Fri, 11 Oct 2024 07:49:56 -0700 (PDT)
 From: Linus Walleij <linus.walleij@linaro.org>
-Subject: [PATCH v2 0/4] mtd: rawnand: brcmnand: Add BCMBCA support
-Date: Fri, 11 Oct 2024 16:49:53 +0200
-Message-Id: <20241011-bcmbca-nand-support-v2-0-1fe928e5b933@linaro.org>
+Date: Fri, 11 Oct 2024 16:49:54 +0200
+Subject: [PATCH v2 1/4] mtd: rawnand: brcmnand: Add BCMBCA RAW NAND driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIABE7CWcC/32NTQ6CMBBGr0Jm7ZgClUZX3sOw6M8Ik2hLpkg0h
- LtbOYDL95LvfStkEqYMl2oFoYUzp1igOVTgRxsHQg6FoVGNVudWofNP5y1GGwPm1zQlmVFrbag
- 2nXMuQFlOQnd+79VbX3jkPCf57CdL/bP/e0uNCqlrje9Ogc7aXB8craRjkgH6bdu+FHwc6LcAA
- AA=
+Message-Id: <20241011-bcmbca-nand-support-v2-1-1fe928e5b933@linaro.org>
+References: <20241011-bcmbca-nand-support-v2-0-1fe928e5b933@linaro.org>
+In-Reply-To: <20241011-bcmbca-nand-support-v2-0-1fe928e5b933@linaro.org>
 To: u-boot@lists.denx.de, 
  Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
  Michael Trimarchi <michael@amarulasolutions.com>, 
@@ -80,8 +78,7 @@ To: u-boot@lists.denx.de,
  William Zhang <william.zhang@broadcom.com>, 
  Kursad Oney <kursad.oney@broadcom.com>, 
  Philippe Reynes <philippe.reynes@softathome.com>
-Cc: Linus Walleij <linus.walleij@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Linus Walleij <linus.walleij@linaro.org>
 X-Mailer: b4 0.14.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,45 +96,208 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This adds support for the NAND controller on the Broadcom
-BCA (Broadband Access) platforms.
+The Broadcom BCA platforms are broadband access SoCs.
+This is a port of the upstream Linux driver to U-Boot.
+It was based on drivers/mtd/nand/raw/brcmnand/bcmbca_nand.c
+from Linux v6.11.
 
-This requires the series with brcmnand fixes that I sent
-separately to be merged first. See:
-https://patchwork.ozlabs.org/project/uboot/list/?series=424109
-
-The development was done on the Genexis XG6846B which is
-a derivative of the BCM96846 reference design, but probably
-has a different flash layout, be sure to check the last
-patch in the series for a comment on that.
-
+Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
 Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
 ---
-Changes in v2:
-- Switch to using OF_UPSTREAM instead of syncing DTS files.
-- Mention the Linux version the BCMBCA NAND driver is based on.
-- Link to v1: https://lore.kernel.org/r/20240930-bcmbca-nand-support-v1-0-e637c65de947@linaro.org
-
----
-Linus Walleij (4):
-      mtd: rawnand: brcmnand: Add BCMBCA RAW NAND driver
-      drivers: nand: bcmbca: Enable on BCM6846
-      board: bcm96846: Enable NAND options
-      board: bcm96846: Switch to using OF_UPSTREAM
-
- arch/arm/dts/bcm6846.dtsi                   | 103 -------------------
- arch/arm/dts/bcm96846.dts                   |  30 ------
- arch/arm/mach-bcmbca/bcm6846/Kconfig        |   4 +
- configs/bcm96846_defconfig                  |  15 ++-
  drivers/mtd/nand/raw/Kconfig                |   7 ++
  drivers/mtd/nand/raw/brcmnand/Makefile      |   1 +
  drivers/mtd/nand/raw/brcmnand/bcmbca_nand.c | 152 ++++++++++++++++++++++++++++
- 7 files changed, 178 insertions(+), 134 deletions(-)
----
-base-commit: a404065479be2c1fe1167c3c91367e8194a69d1b
-change-id: 20240930-bcmbca-nand-support-4447e176bbbd
+ 3 files changed, 160 insertions(+)
 
-Best regards,
+diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
+index 9f3f1267cbd1..c345fc1f1fba 100644
+--- a/drivers/mtd/nand/raw/Kconfig
++++ b/drivers/mtd/nand/raw/Kconfig
+@@ -120,6 +120,13 @@ config NAND_BRCMNAND
+ 	  Enable the driver for NAND flash on platforms using a Broadcom NAND
+ 	  controller.
+ 
++config NAND_BRCMNAND_BCMBCA
++	bool "Support Broadcom NAND controller on BCMBCA platforms"
++	depends on NAND_BRCMNAND && ARCH_BCMBCA
++	help
++	  Enable support for broadcom nand driver on BCA (broadband
++	  access) platforms such as BCM6846.
++
+ config NAND_BRCMNAND_6368
+ 	bool "Support Broadcom NAND controller on bcm6368"
+ 	depends on NAND_BRCMNAND && ARCH_BMIPS
+diff --git a/drivers/mtd/nand/raw/brcmnand/Makefile b/drivers/mtd/nand/raw/brcmnand/Makefile
+index 0c6325aaa618..24d0d5684490 100644
+--- a/drivers/mtd/nand/raw/brcmnand/Makefile
++++ b/drivers/mtd/nand/raw/brcmnand/Makefile
+@@ -6,6 +6,7 @@ obj-$(CONFIG_NAND_BRCMNAND_6753) += bcm6753_nand.o
+ obj-$(CONFIG_NAND_BRCMNAND_68360) += bcm68360_nand.o
+ obj-$(CONFIG_NAND_BRCMNAND_6838) += bcm6838_nand.o
+ obj-$(CONFIG_NAND_BRCMNAND_6858) += bcm6858_nand.o
++obj-$(CONFIG_NAND_BRCMNAND_BCMBCA) += bcmbca_nand.o
+ obj-$(CONFIG_NAND_BRCMNAND_IPROC) += iproc_nand.o
+ obj-$(CONFIG_NAND_BRCMNAND) += brcmnand.o
+ obj-$(CONFIG_NAND_BRCMNAND) += brcmnand_compat.o
+diff --git a/drivers/mtd/nand/raw/brcmnand/bcmbca_nand.c b/drivers/mtd/nand/raw/brcmnand/bcmbca_nand.c
+new file mode 100644
+index 000000000000..2753783ae70f
+--- /dev/null
++++ b/drivers/mtd/nand/raw/brcmnand/bcmbca_nand.c
+@@ -0,0 +1,152 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++#include <asm/io.h>
++#include <memalign.h>
++#include <nand.h>
++#include <linux/bitops.h>
++#include <linux/err.h>
++#include <linux/errno.h>
++#include <linux/io.h>
++#include <linux/ioport.h>
++#include <dm.h>
++#include <linux/printk.h>
++
++#include "brcmnand.h"
++
++struct bcmbca_nand_soc {
++	struct brcmnand_soc soc;
++	void __iomem *base;
++};
++
++#define BCMBCA_NAND_INT			0x00
++#define BCMBCA_NAND_STATUS_SHIFT	0
++#define BCMBCA_NAND_STATUS_MASK		(0xfff << BCMBCA_NAND_STATUS_SHIFT)
++
++#define BCMBCA_NAND_INT_EN		0x04
++#define BCMBCA_NAND_ENABLE_SHIFT	0
++#define BCMBCA_NAND_ENABLE_MASK		(0xffff << BCMBCA_NAND_ENABLE_SHIFT)
++
++enum {
++	BCMBCA_NP_READ		= BIT(0),
++	BCMBCA_BLOCK_ERASE	= BIT(1),
++	BCMBCA_COPY_BACK	= BIT(2),
++	BCMBCA_PAGE_PGM		= BIT(3),
++	BCMBCA_CTRL_READY	= BIT(4),
++	BCMBCA_DEV_RBPIN	= BIT(5),
++	BCMBCA_ECC_ERR_UNC	= BIT(6),
++	BCMBCA_ECC_ERR_CORR	= BIT(7),
++};
++
++#if defined(CONFIG_ARM64)
++#define ALIGN_REQ		8
++#else
++#define ALIGN_REQ		4
++#endif
++
++static inline bool bcmbca_nand_is_buf_aligned(void *flash_cache,  void *buffer)
++{
++	return IS_ALIGNED((uintptr_t)buffer, ALIGN_REQ) &&
++				IS_ALIGNED((uintptr_t)flash_cache, ALIGN_REQ);
++}
++
++static bool bcmbca_nand_intc_ack(struct brcmnand_soc *soc)
++{
++	struct bcmbca_nand_soc *priv =
++			container_of(soc, struct bcmbca_nand_soc, soc);
++	void __iomem *mmio = priv->base + BCMBCA_NAND_INT;
++	u32 val = brcmnand_readl(mmio);
++
++	if (val & (BCMBCA_CTRL_READY << BCMBCA_NAND_STATUS_SHIFT)) {
++		/* Ack interrupt */
++		val &= ~BCMBCA_NAND_STATUS_MASK;
++		val |= BCMBCA_CTRL_READY << BCMBCA_NAND_STATUS_SHIFT;
++		brcmnand_writel(val, mmio);
++		return true;
++	}
++
++	return false;
++}
++
++static void bcmbca_nand_intc_set(struct brcmnand_soc *soc, bool en)
++{
++	struct bcmbca_nand_soc *priv =
++			container_of(soc, struct bcmbca_nand_soc, soc);
++	void __iomem *mmio = priv->base + BCMBCA_NAND_INT_EN;
++	u32 val = brcmnand_readl(mmio);
++
++	/* Don't ack any interrupts */
++	val &= ~BCMBCA_NAND_STATUS_MASK;
++
++	if (en)
++		val |= BCMBCA_CTRL_READY << BCMBCA_NAND_ENABLE_SHIFT;
++	else
++		val &= ~(BCMBCA_CTRL_READY << BCMBCA_NAND_ENABLE_SHIFT);
++
++	brcmnand_writel(val, mmio);
++}
++
++static void bcmbca_read_data_bus(struct brcmnand_soc *soc,
++				 void __iomem *flash_cache,  u32 *buffer, int fc_words)
++{
++	/*
++	 * memcpy can do unaligned aligned access depending on source
++	 * and dest address, which is incompatible with nand cache. Fallback
++	 * to the memcpy_fromio in such case
++	 */
++	if (bcmbca_nand_is_buf_aligned((void __force *)flash_cache, buffer))
++		memcpy((void *)buffer, (void __force *)flash_cache, fc_words * 4);
++	else
++		memcpy_fromio((void *)buffer, flash_cache, fc_words * 4);
++}
++
++static int bcmbca_nand_probe(struct udevice *dev)
++{
++	struct udevice *pdev = dev;
++	struct bcmbca_nand_soc *priv = dev_get_priv(dev);
++	struct brcmnand_soc *soc;
++	struct resource res;
++
++	soc = &priv->soc;
++
++	dev_read_resource_byname(pdev, "nand-int-base", &res);
++	priv->base = devm_ioremap(dev, res.start, resource_size(&res));
++	if (IS_ERR(priv->base))
++		return PTR_ERR(priv->base);
++
++	soc->ctlrdy_ack = bcmbca_nand_intc_ack;
++	soc->ctlrdy_set_enabled = bcmbca_nand_intc_set;
++	soc->read_data_bus = bcmbca_read_data_bus;
++
++	/* Disable and ack all interrupts  */
++	brcmnand_writel(0, priv->base + BCMBCA_NAND_INT_EN);
++	brcmnand_writel(0, priv->base + BCMBCA_NAND_INT);
++
++	return brcmnand_probe(pdev, soc);
++}
++
++static const struct udevice_id bcmbca_nand_dt_ids[] = {
++	{
++		.compatible = "brcm,nand-bcm63138",
++	},
++	{ /* sentinel */ }
++};
++
++U_BOOT_DRIVER(bcmbca_nand) = {
++	.name = "bcmbca-nand",
++	.id = UCLASS_MTD,
++	.of_match = bcmbca_nand_dt_ids,
++	.probe = bcmbca_nand_probe,
++	.priv_auto	= sizeof(struct bcmbca_nand_soc),
++};
++
++void board_nand_init(void)
++{
++	struct udevice *dev;
++	int ret;
++
++	ret = uclass_get_device_by_driver(UCLASS_MTD,
++					  DM_DRIVER_GET(bcmbca_nand), &dev);
++	if (ret && ret != -ENODEV)
++		pr_err("Failed to initialize %s. (error %d)\n", dev->name,
++		       ret);
++}
+
 -- 
-Linus Walleij <linus.walleij@linaro.org>
+2.46.2
 
