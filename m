@@ -4,71 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04655D0EE3F
-	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 21:40:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FD93D0EE3F
+	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 21:40:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6319A893E4;
-	Fri, 11 Oct 2024 23:40:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C31F4893F3;
+	Fri, 11 Oct 2024 23:40:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RE6HM9+U";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HRrUYH7K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 02B9E8939B; Fri, 11 Oct 2024 23:40:39 +0200 (CEST)
-Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
- [IPv6:2607:f8b0:4864:20::12d])
+ id E2CE3893F6; Fri, 11 Oct 2024 23:40:40 +0200 (CEST)
+Received: from mail-il1-x132.google.com (mail-il1-x132.google.com
+ [IPv6:2607:f8b0:4864:20::132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C5DFC8939B
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 23:40:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CDFB2893D6
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 23:40:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12d.google.com with SMTP id
- e9e14a558f8ab-3a3a7d5a156so9337265ab.0
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 14:40:36 -0700 (PDT)
+Received: by mail-il1-x132.google.com with SMTP id
+ e9e14a558f8ab-3a3b0247d67so7497085ab.3
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 14:40:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728682835; x=1729287635; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=TxBb80cSKDgl1xaduxfmBvIvnrDlHCXS+nbwPN14dWs=;
- b=RE6HM9+UkDW0fAGp7oP8jcYx4TXjAMXvSMJMP7xi/n/Vaa5wGQeDCA4YHYv2NE/5P4
- nDV77lk5ce0qz9ruSfUcButehpjx8LQ0aMsMDolzgDu3Q45dbOsP+vWGBFPobL2P8her
- 4jXCSJvc/8olmc4L3h2NHV7aBRCG/J1AyMRIw=
+ d=chromium.org; s=google; t=1728682837; x=1729287637; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rL50ks0y0EhyXTrxGqLT47sxa2NDBH9aWXpHla4eNwo=;
+ b=HRrUYH7KSTLdVpvgpJgsrKi06NNqELGv+yBnLUFERSvKqkwj6hnJLFGBH0PGQmUZjl
+ bKHH2MioR1WhbBux4rgFyM1w4DFPBuuaVqtssnBRv6lLvWiuCfCcI5zC5dV0BFWjvnu5
+ udPWmp7mFklXWkufn9dQp6VIO8H5u/Lc1Ooxc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728682835; x=1729287635;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=TxBb80cSKDgl1xaduxfmBvIvnrDlHCXS+nbwPN14dWs=;
- b=v0Tq4QcK9VHr2Pec1UulnVFxUOBQQeWfpn3Thsk99U4xp/G+geg/yk+cAQrxVYscwE
- qlQ864Ur8lZpYilNNim2RPdDPlFI9zS2a5hwOP4mhHBVwT7zT7vah9evkDw4UE+huUTZ
- Jaxl/kphAQY08bWdLHWw/gE2FldBBwmui3qwGfAll0821+IF+a8/aM69Y87kgwOLbaDV
- aPzNTy9p7aU9QK9lAX4VAc6+zqa+EHJ+A90zw91b64FfaywXmtAT3R7wAinnhVUyD7qX
- 67biGD3Zg6drskhjdOucAWITd8YIu90qL1kSIO3NxXdHlB6T1kbeLc9kH9ioZO2QCcBC
- FX+Q==
-X-Gm-Message-State: AOJu0Yx8j1Jp9CttVhDFTYQLTugRPHaB3KcJkUmYdlA6ETu0hayO2M4F
- w7Rg46cdXBwttmk87bhfscvlOFmaGRh2BT6oRLS8K8MwUrJ5XvSaBV9JyvQDGX6ld/MNi5Ry71T
- CXw==
-X-Google-Smtp-Source: AGHT+IEdQTBPk9KztTmudt4PpBWuwGNu2ddmYyS168FRDOnHv5UdLAlXUfeH08eVfbCJJzKSY9zPBg==
-X-Received: by 2002:a05:6e02:3cc2:b0:3a3:a307:6851 with SMTP id
- e9e14a558f8ab-3a3bce0858dmr6384025ab.22.1728682835322; 
- Fri, 11 Oct 2024 14:40:35 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1728682837; x=1729287637;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=rL50ks0y0EhyXTrxGqLT47sxa2NDBH9aWXpHla4eNwo=;
+ b=myXL1LclkvqYRXRHz/IGlu7Ih2kHL4/6D2q49a93B6SwnfmmyT3HHMSxhbsayZj13L
+ 6rbEQkOYWtZay+b7KbvCBGLhqR6pXyTqWNlyBJW2UxwDmyB0Kl0BC0jiziqJI1cYrLl9
+ s+K13apMW+VKA+M6zTEX1Kg7YJyF87QTK6LLjeDQqbsFTE/sezALliQ0OKNEec1jYK8u
+ b8hgP3GrEup0tK5E5581kTM0yMmQHGVhoF3eT64KZng7UZy8Tnub1MBkmc0OmwTfwRq5
+ dk7M9vP50zcDRR8a49ZsETwbqHqna2NLXMA8T3IgxK8DiqDXgobH3OPxesXhOVCd5A3G
+ QaHw==
+X-Gm-Message-State: AOJu0YzUmIIJ4/uubMG4uafhlJtswtSSCOzqHZstt88GXpdaUCcTWmxs
+ vC6UaXbXno3NxodKDopbmJAIfFXEg+Ff9+SqIf3/hpq4lIhaMcTzK47LaDo1YfJ/uuTYjq6DOjE
+ KhA==
+X-Google-Smtp-Source: AGHT+IFZDE5wkQCqrMYdcI9u3eC+KuwxMzAjpTbUX82efXaWDxh8tXPDPrXqo/5ft9SJ3/b4SYGLJQ==
+X-Received: by 2002:a05:6e02:1446:b0:3a3:67b1:3080 with SMTP id
+ e9e14a558f8ab-3a3bcdbb5acmr7585325ab.7.1728682837360; 
+ Fri, 11 Oct 2024 14:40:37 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3a3afdae0f1sm8830475ab.11.2024.10.11.14.40.34
+ e9e14a558f8ab-3a3afdae0f1sm8830475ab.11.2024.10.11.14.40.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Oct 2024 14:40:34 -0700 (PDT)
+ Fri, 11 Oct 2024 14:40:36 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 0/7] Allow showing the memory map
-Date: Fri, 11 Oct 2024 15:40:24 -0600
-Message-Id: <20241011214032.760072-1-sjg@chromium.org>
+Subject: [PATCH v2 1/7] common: Fix up malloc() comment in reserve_noncached()
+Date: Fri, 11 Oct 2024 15:40:25 -0600
+Message-Id: <20241011214032.760072-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20241011214032.760072-1-sjg@chromium.org>
+References: <20241011214032.760072-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -87,45 +90,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This little series adds a new 'memmap' command, intended to show the
-layout of memory within U-Boot and how much memory is available for
-loading images.
+The function name has changed, so update it.
 
-Changes in v2:
-- Split into its own patch
-- Modify the existing 'meminfo' command instead
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-Simon Glass (7):
-  common: Fix up malloc() comment in reserve_noncached()
-  common: Tidy up how malloc() is inited
-  am65x: Use map_to_sysmem() to convert from pointer
-  global_data: Add some more accessors
-  bootstage: Allow counting memory without strings
-  cmd: Move meminfo command into its own file
-  cmd: Update the meminfo command to show the memory map
+(no changes since v1)
 
- arch/arm/mach-k3/am65x/am654_init.c |  11 +--
- cmd/Kconfig                         |   1 +
- cmd/Makefile                        |   1 +
- cmd/mem.c                           |  19 -----
- cmd/meminfo.c                       |  72 ++++++++++++++++
- common/board_f.c                    |   8 +-
- common/board_r.c                    |   3 +-
- common/bootstage.c                  |  16 ++--
- common/dlmalloc.c                   |   8 +-
- common/spl/spl.c                    |   4 +-
- doc/usage/cmd/meminfo.rst           | 126 ++++++++++++++++++++++++++++
- doc/usage/index.rst                 |   1 +
- include/asm-generic/global_data.h   |  30 +++++++
- include/bootstage.h                 |   5 +-
- include/malloc.h                    |   8 ++
- test/cmd/Makefile                   |   3 +-
- test/cmd/meminfo.c                  |  38 +++++++++
- 17 files changed, 308 insertions(+), 46 deletions(-)
- create mode 100644 cmd/meminfo.c
- create mode 100644 doc/usage/cmd/meminfo.rst
- create mode 100644 test/cmd/meminfo.c
+ common/board_f.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
+diff --git a/common/board_f.c b/common/board_f.c
+index 154675d0e40..2e04a47b546 100644
+--- a/common/board_f.c
++++ b/common/board_f.c
+@@ -501,9 +501,9 @@ static unsigned long reserve_stack_aligned(size_t size)
+ static int reserve_noncached(void)
+ {
+ 	/*
+-	 * The value of gd->start_addr_sp must match the value of malloc_start
+-	 * calculated in board_r.c:initr_malloc(), which is passed to
+-	 * dlmalloc.c:mem_malloc_init() and then used by
++	 * The value of gd->start_addr_sp must match the value of
++	 * mem_malloc_start calculated in board_r.c:initr_malloc(), which is
++	 * passed to dlmalloc.c:mem_malloc_init() and then used by
+ 	 * cache.c:noncached_init()
+ 	 *
+ 	 * These calculations must match the code in cache.c:noncached_init()
 -- 
 2.34.1
 
