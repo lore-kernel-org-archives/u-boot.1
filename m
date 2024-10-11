@@ -4,94 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62B66D0D79F
-	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 14:45:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15F50D0D7AB
+	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 14:50:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B66F6892F8;
-	Fri, 11 Oct 2024 16:45:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 78C238934F;
+	Fri, 11 Oct 2024 16:49:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="JlSKJfFN";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RrxXMzGX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D5378931F; Fri, 11 Oct 2024 16:45:26 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id CDDE98934A; Fri, 11 Oct 2024 16:49:58 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D46F890FD
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 16:45:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id 93086892F8
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 16:49:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ddrokosov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 25CC210000B;
- Fri, 11 Oct 2024 17:45:20 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 25CC210000B
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1728657920;
- bh=okmdvEherz+gJD2zQiYiqmmEiKyC6LL5ZKLRSoxV51U=;
- h=Date:From:To:Subject:Message-ID:MIME-Version:Content-Type:From;
- b=JlSKJfFNswtYh8rldqaZbO+2thhX5VazaZA8xFdU05pS9mMpWovmX2pfIMolIhJp2
- LyDp4o9PH5i95JjaDXto/qLVQBZ/xOV47Dw5HPFHhkFZtboAgrO6aMUJ/xxVeBakPA
- ehASG/5y3IBqB5bwFEaZUEJ6zAJpIcygeKJckwx4mw7CMr2jln46N2QhaBgf3jHX21
- 4+H4BFqE52jxkiL78BjRVc2MUO3oIt4raJBQJ33tbdMrQKJPe5qIwZZhO6Z27BczDL
- 8j3C/sttwyxKydjW3Rj42DZIV9nXkl9y09c028TATMVNVgZ0WTdyfrfM9FGr46epQS
- Imu11YwSv6tvw==
-Received: from smtp.sberdevices.ru (unknown [172.16.192.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Fri, 11 Oct 2024 17:45:19 +0300 (MSK)
-Date: Fri, 11 Oct 2024 17:45:19 +0300
-From: Dmitry Rokosov <ddrokosov@salutedevices.com>
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-CC: <u-boot-amlogic@groups.io>, Simon Glass <sjg@chromium.org>, Igor Opaniuk
- <igor.opaniuk@gmail.com>, Sam Protsenko <semen.protsenko@linaro.org>, "Tom
- Rini" <trini@konsulko.com>, "Andrew F. Davis" <afd@ti.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Mario Six <mario.six@gdsys.cc>,
- <u-boot@lists.denx.de>, <rockosov@gmail.com>, <kernel@salutedevices.com>
-Subject: Re: [PATCH v3 4/6] cmd: bcb: introduce 'ab_dump' command to print
- BCB block content
-Message-ID: <20241011144519.xukl22ksrjsqz55l@CAB-WSD-L081021>
-References: <20241008-android_ab_master-v3-0-f292c45a33e4@salutedevices.com>
- <20241008-android_ab_master-v3-4-f292c45a33e4@salutedevices.com>
- <CAFLszTh7qjUN__MvAbcMPL+W4V=mfBrgt9zcg8zyfx+WBN=9bg@mail.gmail.com>
- <20241009132614.mlkpfkdni4cp2tgg@CAB-WSD-L081021>
- <CAFLszTgr-qHXF2QU7toZXOU0FgRMPU0XXnQ6SzMq32a_pguAww@mail.gmail.com>
- <20241010102051.q67usj6oaykjaixx@CAB-WSD-L081021>
- <17FD1697482D61A4.19251@groups.io> <87bjzqhg7g.fsf@baylibre.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=linus.walleij@linaro.org
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-5c920611a86so2751509a12.0
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 07:49:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1728658196; x=1729262996; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=LPEmfYA/cUnYLvoG/1t8re3fZki3W4KQo2K5uvA2baw=;
+ b=RrxXMzGXrK6xVb0bM+ZbIUMVboY1zGFlfMe/GT3p29LDSnjihsoh1kIT673wU2EF1d
+ 6Oe6iK1FFLvG1mUHyhLxm34N+G+K/UQsQjEb+x8OjozHrc+IW8rZ/aSMq7xmwAcm6lAs
+ jQQcQylEaU7BhZy7xp811Xc0AGbH18+/3zOCfd0cQrU9W3R/N6iX4jkSywb44I+WiZJ7
+ T7CHOpYacrVmWN20wxUTxqq4vBIWcygrNerMkEKpsCyxGRJIN0RjCTVv2oajq7n5xDzD
+ N9hvcMFrDMc9yj9NHHwRsV+oUOQQLr1pJgOmFYtFlaTDueiVwlzYyKRcKmFrOoa1VfiT
+ 1Fcg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728658196; x=1729262996;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=LPEmfYA/cUnYLvoG/1t8re3fZki3W4KQo2K5uvA2baw=;
+ b=sCHwxBpzK+ImCCABRzHwdr9n2b7BRtyLqh0f7ybwAHrkWNkKeraPcB0sg8KYOOJvT6
+ kqg9+31aVdTtb4k9t5M5qIZMywu6rE+GMU2AKuMP6cY+76vUBE/OxEM9usBuZLY4kp2E
+ kJl4F2spw1gXnd+xOgu4ApZgK0D4+tCtQ//heE5hUeuU/Gy8PfH/zxbOimNMAkGy+hA3
+ Yx8xUCRCFYL8qupEHsi/j//vkTAtQgqJWqwIrjKP/aHEyQJAmjxV3tZUp6RLkY2Pgwnj
+ y0SnWhcu9t5wM8eoIe/KMryab/liQnvo8L7MArOfOlN4A5cTco2rdfPN52SO6O436fpN
+ Yhjg==
+X-Gm-Message-State: AOJu0YzmDwQvjEJzfMef8aC1u1E3sDGoJPWdxG6ehs3WNpts01sh8a2B
+ AIIQK0mrCO+9nbKZqzcIQvHQosXnNmY1WWD3IjirR/ixR3700YN3HSU5k5QUT7o=
+X-Google-Smtp-Source: AGHT+IHRWLob/4RFQAihZcb/NcfoL+Z0tI0PPCRHjIGbGqDdkRD8mbty6um4x5KqmoARXUChd8BrEQ==
+X-Received: by 2002:a05:6402:2748:b0:5c9:4a9b:31f9 with SMTP id
+ 4fb4d7f45d1cf-5c94a9b5292mr1969237a12.35.1728658195982; 
+ Fri, 11 Oct 2024 07:49:55 -0700 (PDT)
+Received: from lino.lan ([85.235.12.238]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5c9372940e3sm2006113a12.81.2024.10.11.07.49.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 11 Oct 2024 07:49:55 -0700 (PDT)
+From: Linus Walleij <linus.walleij@linaro.org>
+Subject: [PATCH v2 0/4] mtd: rawnand: brcmnand: Add BCMBCA support
+Date: Fri, 11 Oct 2024 16:49:53 +0200
+Message-Id: <20241011-bcmbca-nand-support-v2-0-1fe928e5b933@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <87bjzqhg7g.fsf@baylibre.com>
-User-Agent: NeoMutt/20220415
-X-Originating-IP: [172.28.226.150]
-X-ClientProxiedBy: p-i-exch-a-m1.sberdevices.ru (172.24.196.116) To
- p-i-exch-a-m1.sberdevices.ru (172.24.196.116)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 188387 [Oct 11 2024]
-X-KSMG-AntiSpam-Version: 6.1.0.4
-X-KSMG-AntiSpam-Envelope-From: ddrokosov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 39 0.3.39
- e168d0b3ce73b485ab2648dd465313add1404cce, {Tracking_uf_ne_domains},
- {Track_E25351}, {Tracking_from_domain_doesnt_match_to},
- smtp.sberdevices.ru:7.1.1,5.0.1; salutedevices.com:7.1.1;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; lore.kernel.org:7.1.1;
- 127.0.0.199:7.1.2, FromAlignment: s
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean, bases: 2024/10/11 13:07:00
-X-KSMG-LinksScanning: Clean, bases: 2024/10/11 13:07:00
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2024/10/11 09:57:00 #26735895
-X-KSMG-AntiVirus-Status: Clean, skipped
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIABE7CWcC/32NTQ6CMBBGr0Jm7ZgClUZX3sOw6M8Ik2hLpkg0h
+ LtbOYDL95LvfStkEqYMl2oFoYUzp1igOVTgRxsHQg6FoVGNVudWofNP5y1GGwPm1zQlmVFrbag
+ 2nXMuQFlOQnd+79VbX3jkPCf57CdL/bP/e0uNCqlrje9Ogc7aXB8craRjkgH6bdu+FHwc6LcAA
+ AA=
+To: u-boot@lists.denx.de, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Anand Gore <anand.gore@broadcom.com>, 
+ William Zhang <william.zhang@broadcom.com>, 
+ Kursad Oney <kursad.oney@broadcom.com>, 
+ Philippe Reynes <philippe.reynes@softathome.com>
+Cc: Linus Walleij <linus.walleij@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.14.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,46 +99,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Mattijs,
+This adds support for the NAND controller on the Broadcom
+BCA (Broadband Access) platforms.
 
-On Fri, Oct 11, 2024 at 04:22:43PM +0200, Mattijs Korpershoek wrote:
-> Hi Dmitry,
-> 
-> On jeu., oct. 10, 2024 at 14:17, "Mattijs Korpershoek via groups.io" <mkorpershoek=baylibre.com@groups.io> wrote:
-> 
-> [...]
-> 
-> >>> > >
-> >>> > > Reviewed-by: Simon Glass <sjg@chromium.org>
-> >>> > >
-> >>> > > Can you also update the test?
-> >>> >
-> >>> > I apologize, but I didn't quite understand your point. Could you please
-> >>> > clarify? This patch series includes additional tests for the 'ab_dump'
-> >>> > subcommand. For more details, please refer to:
-> >>> >
-> >>> > https://lore.kernel.org/all/20241008-android_ab_master-v3-6-f292c45a33e4@salutedevices.com/
-> >>> 
-> >>> OK, thank you. Sometimes it is easier (for reviewers) if you update
-> >>> the test in the same commit.
-> >>
-> >> Should I resend the patch series with ab_dump implementation and tests
-> >> in the same commit?
-> >>
-> >> I can prepare new version, if needed, no problem.
-> >
-> > No need to resend a new version just for this, since it's already
-> > been reviewed.
-> >
-> > Keep the suggestion in mind for future series!
-> 
-> If you do need to re-spin this as v4, you can squash the test commit
-> with this one if you wish.
+This requires the series with brcmnand fixes that I sent
+separately to be merged first. See:
+https://patchwork.ozlabs.org/project/uboot/list/?series=424109
 
-Of course, I can re-spin that.
-I believe I can save all RvB trailers during the squashing process.
-Could you please clarify if my understanding is correct? 
+The development was done on the Genexis XG6846B which is
+a derivative of the BCM96846 reference design, but probably
+has a different flash layout, be sure to check the last
+patch in the series for a comment on that.
 
+Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
+---
+Changes in v2:
+- Switch to using OF_UPSTREAM instead of syncing DTS files.
+- Mention the Linux version the BCMBCA NAND driver is based on.
+- Link to v1: https://lore.kernel.org/r/20240930-bcmbca-nand-support-v1-0-e637c65de947@linaro.org
+
+---
+Linus Walleij (4):
+      mtd: rawnand: brcmnand: Add BCMBCA RAW NAND driver
+      drivers: nand: bcmbca: Enable on BCM6846
+      board: bcm96846: Enable NAND options
+      board: bcm96846: Switch to using OF_UPSTREAM
+
+ arch/arm/dts/bcm6846.dtsi                   | 103 -------------------
+ arch/arm/dts/bcm96846.dts                   |  30 ------
+ arch/arm/mach-bcmbca/bcm6846/Kconfig        |   4 +
+ configs/bcm96846_defconfig                  |  15 ++-
+ drivers/mtd/nand/raw/Kconfig                |   7 ++
+ drivers/mtd/nand/raw/brcmnand/Makefile      |   1 +
+ drivers/mtd/nand/raw/brcmnand/bcmbca_nand.c | 152 ++++++++++++++++++++++++++++
+ 7 files changed, 178 insertions(+), 134 deletions(-)
+---
+base-commit: a404065479be2c1fe1167c3c91367e8194a69d1b
+change-id: 20240930-bcmbca-nand-support-4447e176bbbd
+
+Best regards,
 -- 
-Thank you,
-Dmitry
+Linus Walleij <linus.walleij@linaro.org>
+
