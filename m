@@ -4,74 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24215D24456
-	for <u-boot@archiver.kernel.org>; Thu, 10 Oct 2024 22:05:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CD80D24468
+	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 03:13:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F5AE89283;
-	Fri, 11 Oct 2024 00:05:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 41E45892A2;
+	Fri, 11 Oct 2024 05:13:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="rgYUdRF/";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C88489289; Fri, 11 Oct 2024 00:05:18 +0200 (CEST)
-Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
- [IPv6:2607:f8b0:4864:20::b29])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1728616406;
+	bh=iAKrNAx/Ivh4wmGhZqO/Y88aM2omgozqeCsJeLMqXyA=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=N/OXoK8J2+fgPMBF/kM2cW9Oip692XNnsxO0NsHgKS3U5ZzTdyr8/DH8nDq3hhGvy
+	 Ptouql7BUTLmMtKD2pK1++bk6rOTBGQtOAO1ThLCa76gJtPbx7VLO6ZUo7Ji7i5aG0
+	 xnDZBeVCjs+J3y7q+tnzZ1OgmmcIWzgQ6S92t85MrZV/I5kKUHmjP5nWMaukmoVcN+
+	 7oh5dEY9cbYSm18dXDDutznFidFoXsGCyDDxqT+ljpE94eULeGVy0H9sVDQX30dgID
+	 /80htcnX9e46O8axJmT4ru4rUke+MFVKYt3yNy81DZXonU6E4ww1Vb9umpYZBATnBX
+	 EsK37c6ABU6gw==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5847789283
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 00:05:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-yb1-xb29.google.com with SMTP id
- 3f1490d57ef6-e290d5f83bcso1152806276.0
- for <u-boot@lists.denx.de>; Thu, 10 Oct 2024 15:05:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1728597914; x=1729202714; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2OVQ6Bmh2YqBb9ST+gEGYgDeoqM72w81bsLF+DUmhZc=;
- b=rgYUdRF/TYtz1vn3C+hfJRfQYLW4QstaCa/s+chdQ+e71ZsFjTrHhwUKG7IYVyro50
- G66P/aZlcbiAlvDG4v3C0SVuEi3G+NvGVeArWMn593hl1B7Oc1zhhi8QgO7Vh6Tuas/U
- Q7usNKXS2mkRyqIibQOi0VymhkrDcoE/vWK+Yp6G0ohQg1IBP4XvUZcGvqOA6Ar5OpLf
- HbQbdySifbelgn8uc5F55eImOtFHbBtSF7zRJryrZa2U6tp94EYaQbkme72ydRyhWbBo
- 3s7exUndSSTQVvkywM/mxle3/1EcGFNrrpHy5SAw5HH4T9wibdX97y902t+K4cixUzml
- TMSA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728597914; x=1729202714;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=2OVQ6Bmh2YqBb9ST+gEGYgDeoqM72w81bsLF+DUmhZc=;
- b=Pka+eS0qab4o3pumDkiifL7V4OLZ0zhgtbRrl55i9Y7LkQhn1l7+qU+ihEqIY62DFA
- rupodz1tEHAQG20KLjDBdvCUvMMtHxbD1z9Gja1/OgM3X+b7lDg1Xoq/YRoDDwXJK/R4
- wlQrzzMme3Yln+aJH5125045gs6lVzDCb5gg8Lv/elF+DYftcLYDjKpnXZlBAqYDcOta
- sKm71EShoGlQtBZx+Ek63Hj4Flic+EmTf67hWoVe1wQ9WRpH4VA4PpeOZV2IpeT4Ea0C
- TjmxKv5JzgNDv5vBLjkGgDjnyS97+4PxQOG2lOfiiGCWVSrR57epRJUyl/XEGEE99g5V
- /KHw==
-X-Gm-Message-State: AOJu0Yze0y606qrgxJM+ze5hgo3QgstebBwWi7wXPzZ82B021CfXXZvA
- OPAMDdigWCArOrlZFWT8+Zc6g56BVVMpgfYV40P5M/KpPveWDkuQsEyaObA4/71BSco2ozBZFHN
- c3lQe3QnpbGYecm9ApQSmFBOnuBu0Mri3X+SOM2T9TDyFzLFC+4Y=
-X-Google-Smtp-Source: AGHT+IFdMz+tnEPRyg0k6Hmx5Vdyg8ie5VMcRh/0c1QQ4KxbfoIpzBf+vWxZ0P4nKpB1Fz2QkO6UxHyjNxylaMUsM1s=
-X-Received: by 2002:a05:6902:15c5:b0:e29:1374:6dff with SMTP id
- 3f1490d57ef6-e2919db6c80mr397772276.33.1728597914150; Thu, 10 Oct 2024
- 15:05:14 -0700 (PDT)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 4DC9289278;
+ Fri, 11 Oct 2024 05:13:25 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1728616405;
+ bh=iAKrNAx/Ivh4wmGhZqO/Y88aM2omgozqeCsJeLMqXyA=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=saKKdqb96LaR5ZHeayUHZlGtw9ILrc1FsODOrgCKj+qJMKlpY43KWQLTJbRDYWN6x
+ cUiaXCCl9ioq1UxX5/G6ensIAV79E0GpMYj+3N/bfP9aKn+4zS6gUblTAcy8SPl2le
+ dWgm4NmTpkl245rJpKb8lvURLekakigJ+oaXtn7tBh0gCliJnaK5I3JitH7OgGraNK
+ bJpSl5AW+zfa/dill00TwpB1JJv7/vK0nf2V3eIasLhOGpnfrUidVer9NtX/hmpgZX
+ AmTUF/eMvb20ETmL+KwPz8vV3b5O7PKYCyX3g0rNjjww+JbXxcR/89h5t7kyTdxv8v
+ BH8f2Wn8iw3gg==
+Message-ID: <0a2e3963-1019-41ce-9bb7-671cb74661ef@denx.de>
+Date: Fri, 11 Oct 2024 05:13:24 +0200
 MIME-Version: 1.0
-References: <CAJ+vNU3wz22Ni+Kqy=NuFiEYPdrRkzjRJDNhYGJcCdDsLpbvBQ@mail.gmail.com>
- <CAFLszThkQ4pVmko8PPK5Yyt5RXFQkSatMycjH7GU5eN-_8L7ZA@mail.gmail.com>
-In-Reply-To: <CAFLszThkQ4pVmko8PPK5Yyt5RXFQkSatMycjH7GU5eN-_8L7ZA@mail.gmail.com>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Thu, 10 Oct 2024 15:05:02 -0700
-Message-ID: <CAJ+vNU0auiPUeqbAAFy2K4LhVk3ufU586gJYsZJ4f06wedyfCA@mail.gmail.com>
-Subject: Re: modify live DT with OF_LIVE breaking phy_connect?
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] usb: dwc3-generic: fix CONFIG_DM_REGULATOR-off case
+To: Jan Kiszka <jan.kiszka@siemens.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>
+References: <6c201a24-422a-41f7-846c-1ad5b0ebc7e2@siemens.com>
+ <f7ba8d78-e6d9-4f44-8d49-c7f805d60c5b@linaro.org>
+ <55c65001-bc56-4b48-9645-1e5f735fe06b@siemens.com>
+ <c9d41382-0590-41d5-9bcf-9729bd5bf03d@linaro.org>
+ <8d9f785c-2640-47d4-9639-dd0384daf1be@siemens.com>
+ <8f61a744-63c1-4cf9-ab96-4aa867f10973@siemens.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <8f61a744-63c1-4cf9-ab96-4aa867f10973@siemens.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,104 +75,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Oct 8, 2024 at 6:56=E2=80=AFPM Simon Glass <sjg@chromium.org> wrote=
-:
->
-> Hi Tim,
->
-> On Mon, 7 Oct 2024 at 14:16, Tim Harvey <tharvey@gateworks.com> wrote:
-> >
-> > Greetings,
-> >
-> > I have a need to adjust the U-Boot device-tree live with some board
-> > revision specific fixups. It would seem I need to enable OF_LIVE to do
-> > so but when I do this on imx8mm U-Boot proper seems to fail
-> > phy_connect() called from the network device probe.
-> >
-> > The board I'm working with is an imx8mm-venice board and using
-> > imx8mm_venice_defconfig (without OF_LIVE) results in:
-> > U-Boot 2024.10-00735-gc530f6079c70 (Oct 07 2024 - 12:58:38 -0700)
-> >
-> > CPU:   Freescale i.MX8MMQ rev1.0 1600 MHz (running at 1200 MHz)
-> > CPU:   Industrial temperature grade (-40C to 105C) at 44C
-> > Reset cause: POR
-> > Model: Gateworks Venice GW73xx-0x i.MX8MM Development Kit
-> > DRAM:  4 GiB
-> > Core:  226 devices, 32 uclasses, devicetree: separate
-> > WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeo=
-ut)
-> > MMC:   FSL_SDHC: 0, FSL_SDHC: 1, FSL_SDHC: 2
-> > Loading Environment from MMC... Reading from redundant MMC(2)... OK
-> > In:    serial@30890000
-> > Out:   serial@30890000
-> > Err:   serial@30890000
-> > SEC0:  RNG instantiated
-> > Net:   GPY111 eth0: ethernet@30be0000 [PRIME]
-> > GSC     : boot watchdog disabled
-> > Thermal protection:enabled at 96C
-> > Hit any key to stop autoboot:  0
-> >
-> > Yet as soon as I enable OF_LIVE:
-> >
-> > U-Boot 2024.10-00735-gc530f6079c70 (Oct 07 2024 - 12:59:35 -0700)
-> >
-> > CPU:   Freescale i.MX8MMQ rev1.0 1600 MHz (running at 1200 MHz)
-> > CPU:   Industrial temperature grade (-40C to 105C) at 49C
-> > Reset cause: POR
-> > Model: Gateworks Venice GW73xx-0x i.MX8MM Development Kit
-> > DRAM:  4 GiB
-> > Core:  214 devices, 32 uclasses, devicetree: separate
-> > WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeo=
-ut)
-> > MMC:   FSL_SDHC: 0, FSL_SDHC: 1, FSL_SDHC: 2
-> > Loading Environment from MMC... Reading from redundant MMC(2)... OK
-> > In:    serial@30890000
-> > Out:   serial@30890000
-> > Err:   serial@30890000
-> > SEC0:  RNG instantiated
-> > Net:   Could not get PHY for mdio: addr 0
-> > Could not get PHY for FEC0: addr 0
-> > Could not get PHY for mdio: addr 0
-> > Could not get PHY for FEC0: addr 0
-> > No ethernet found.
-> > ^^^ phy_connect failing
-> >
-> > Any idea what I'm missing here?
-> >
-> > Are there other ways I should be modifying the live dt in U-Boot?
->
+On 10/10/24 7:36 AM, Jan Kiszka wrote:
+> On 30.09.24 06:54, Jan Kiszka wrote:
+>> On 09.08.24 17:19, Caleb Connolly wrote:
+>>>
+>>>
+>>> On 09/08/2024 07:19, Jan Kiszka wrote:
+>>>> On 08.08.24 16:27, Caleb Connolly wrote:
+>>>>> Hi Jan,
+>>>>>
+>>>>> On 08/08/2024 10:51, Jan Kiszka wrote:
+>>>>>> From: Jan Kiszka <jan.kiszka@siemens.com>
+>>>>>>
+>>>>>> When DM_REGULATOR is disabled, all calls will return -ENOSYS. Account
+>>>>>> for that so that targets like the IOT2050 will work again.
+>>>>>>
+>>>>>> Fixes: de451d5d5b6f ("usb: dwc3-generic: support external vbus
+>>>>>> regulator")
+>>>>>> Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
+>>>>>> ---
+>>>>>>     drivers/usb/dwc3/dwc3-generic.c | 6 +++---
+>>>>>>     1 file changed, 3 insertions(+), 3 deletions(-)
+>>>>>>
+>>>>>> diff --git a/drivers/usb/dwc3/dwc3-generic.c
+>>>>>> b/drivers/usb/dwc3/dwc3-generic.c
+>>>>>> index a9ba315463c..2ab41cbae45 100644
+>>>>>> --- a/drivers/usb/dwc3/dwc3-generic.c
+>>>>>> +++ b/drivers/usb/dwc3/dwc3-generic.c
+>>>>>> @@ -246,12 +246,12 @@ static int dwc3_generic_host_probe(struct
+>>>>>> udevice *dev)
+>>>>>>             return rc;
+>>>>>>           rc = device_get_supply_regulator(dev, "vbus-supply",
+>>>>>> &priv->vbus_supply);
+>>>>>> -    if (rc)
+>>>>>> +    if (rc && rc != -ENOSYS)
+>>>>>>             debug("%s: No vbus regulator found: %d\n", dev->name, rc);
+>>>>>>     -    /* Only returns an error if regulator is valid and failed to
+>>>>>> enable due to a driver issue */
+>>>>>> +    /* Does not return an error if regulator is invalid - but does so
+>>>>>> when DM_REGULATOR is disabled */
+>>>>>>         rc = regulator_set_enable_if_allowed(priv->vbus_supply, true);
+>>>>>> -    if (rc)
+>>>>>> +    if (rc && rc != -ENOSYS)
+>>>>>
+>>>>> regulator_set_enable_if_allowed() will return 0 if the call to
+>>>>> regulator_set_enable() returns -ENOSYS
+>>>>>
+>>>>> Maybe it would make sense to have the stub implementation of
+>>>>> regulator_set_enable_if_allowed() return 0?
+>>>>>
+>>>>
+>>>> Possible. Would that be the only case where a stub should not return
+>>>> ENOSYS? All do so far.
+>>>>
+>>>>> Somewhat confusing to check for -ENOSYS here imo, since it isn't really
+>>>>> obvious when that would be the case.
+>>>>
+>>>> But that would still leave is a with a misleading message, even if it is
+>>>> just a debug output. The absence of a regulator is not per se a bug to
+>>>> my understanding.
+>>>
+>>> Ah good point.
+>>>
+>>> Alternatively, maybe it would be easier to gate this code block with if
+>>> (CONFIG_IS_ENABLED(DM_REGULATOR)?
+>>>
+>>> But yeah maybe fine as is.
+>>>
+>>> Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
+>>
+>> Can this regression fix be merged now, or should I add that gating?
+>>
+> 
+> This now also missed the v2024.10 release - can we please merge it now?
+Sorry. Applied to usb/master .
 
-Hi Simon, thanks for the response.
-
-> I am not sure, but the best option would be to debug the PHY stuff and
-> try to see what is going wrong.
->
-> Since the number of devices is smaller, I suspect that there is some
-> code which doesn't use the ofnode API. But it is hard to say what is
-> going on.
->
-
-ok, I will look into that
-
-> For modifying the devicetree, you can do it just before relocation
-> using the flattree if you like. The reason livetree is better is that
-> the nodes don't move around when changes are made.
->
-
-Where is relocation done in this case where I'm using SPL and U-Boot
-proper for imx8m based boards?
-
-If I want to utilize dt overlays in U-Boot proper can you point me to
-what is needed or some examples?
-
-I'm intending to detect the presence of an add-in card that has a port
-expander on it so as to allow that port expander to be accessed via
-U-Boot. As a bit of a hack I'm currently using flat dt (!OF_LIVE) and
-putting the port expander in the board dt and attempting to disable it
-via dt modification in board_init(). As a better approach I could
-attempt to add it to dt but using an overlay would make so much more
-sense.
-
-Best Regards,
-
-Tim
+If there is a critical patch before release, please, ping me directly if 
+there is a chance it will be missed.
