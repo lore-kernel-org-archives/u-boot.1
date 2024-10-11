@@ -4,83 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D3DAD0D783
-	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 12:33:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FCB8CFD37C
+	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 12:33:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C876892FD;
-	Fri, 11 Oct 2024 14:33:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id BAC22892B9;
+	Fri, 11 Oct 2024 14:33:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="kV+fS8Ky";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EJq9PyA9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5806D892F5; Fri, 11 Oct 2024 14:33:09 +0200 (CEST)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
+ id 9E962892D3; Fri, 11 Oct 2024 14:33:56 +0200 (CEST)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25119892D3
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 14:33:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B45258929A
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 14:33:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-53993564cb1so2460219e87.2
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 05:33:07 -0700 (PDT)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-5398f3be400so2242496e87.0
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 05:33:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1728649986; x=1729254786;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vBfvldiZ8QX2wgZZGzdxxENfG3m83nuiyFdmeQgYnhE=;
- b=kV+fS8Ky/aPbrtUNrTWLpU7f7pI9r3387VlkYkujpcud/bnfmvHez4NOs6S89EPADH
- w1NBRdoiiujIQRhuY9ZtrnOjIWImP065KSXKZYga/jADy8IaOJYz/LPE8COOwLOnA4vN
- leLxX0USqfzksR1MKcc2XrawjKF7TNaQPH2Ef/p7v5QP8LqeTyMPEtO8IANCvn2BpwAP
- tz4tcpHpZ9bXsDcFjsxxXhduTQ0vcKgrY/hUtbiVET47OFJ1z70wnzZc7STrn5kGnj+P
- spSKIFrW7f+yw1AKlwOHf+tdwAFZ+emvfp1UKIuzvz4iF+WzKbd6psuLb98tEYIbR/+3
- K36A==
+ d=gmail.com; s=20230601; t=1728650034; x=1729254834; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ptKaSfYMfxwKB7T+P7Dbt68P8Z/tvtY7JbUy03KsLqY=;
+ b=EJq9PyA9ReMK7gTFM+svWBX3pxLvaX4+5vc+5vVTOlIlvsHBTRJAfPLvORkPb4ch7K
+ 1n0D1zNG7ETmo5GeLP3LSCUAsTOeb65/VYLaGZhkCEGm53DTVtbi0JLLO8lLUgoqZwB9
+ wN+cKbtjCUyCMdd8aYO3+jaZlyEp0uB6pd5dyTQoZPpx3ThcVa2BHpQaxmCPNcE2aPpk
+ Lxuji7jzLi8RjM4oyd8wHjuqiVAYt5aWlMILiJuYnG6ymHVimnAtNkC+8plq6UeaTRNE
+ O/wDA1TTA2HdyriySrG7AnggQlU3IfWFQC7cHVomi7rlR+VS5GbVQiNIXevTXSTQxBJ+
+ 5bUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728649986; x=1729254786;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=vBfvldiZ8QX2wgZZGzdxxENfG3m83nuiyFdmeQgYnhE=;
- b=NwHql09/f/d1UD6g/df+gomqAx4oyXPYrEd0O8drHKejnGLf0lKKD4DFEEV4Ulag8R
- Q33/MkNBdecbLX9yO+cqi2S2D9USuqVpIjOh9eJpYPIvhyiYpyPnONcVTwBDZ88moyKF
- 5kXN4vFUxOHKC1ySsBe8Kagwlf5UOvrwRMjyHmIeDLIhApsXm03NSu/x//7arFqXENjc
- BvceaIehqghk0kRNqnZIKwIxkkudePsnfAnoS5rujTYPgtComchZOCVGpQBWrggwPpkK
- bVupg8KZaDimEaWZZeAQ2dMXmGvEqL8qXnEpfNLG3+MYNdbpukOoRzXY6jCqfuD6j0Qy
- M1yg==
-X-Gm-Message-State: AOJu0Yxi2cAR+kbQd+WuYaIZnXDOPLwVVXJDklzoC9lMjXC2NVkWLGkA
- B1Tfo75lYmATJGe+fM0rWW7OrOslbPmmo/fkvDLIwwfiO74Eox/OB2gS06OOwEDIRoC3vz6JHLR
- u
-X-Google-Smtp-Source: AGHT+IGFxPf1Z+VxzVlZL6fyuFhTgNOS1fDxASO9+scjxAe9XOZp+nPFDjUjDeSYcfxhdM88DzI9LA==
-X-Received: by 2002:a05:6512:1113:b0:533:42ae:c985 with SMTP id
- 2adb3069b0e04-539da3d603emr1535732e87.25.1728649986254; 
- Fri, 11 Oct 2024 05:33:06 -0700 (PDT)
-Received: from mkorpershoek-xps13.home
- ([2a01:cb19:8941:9800:3dae:610e:6435:d98e])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-431183062b5sm40925315e9.26.2024.10.11.05.33.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Oct 2024 05:33:05 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: trini@konsulko.com, lukma@denx.de, marex@denx.de, rogerq@kernel.org, 
- vigneshr@ti.com, Siddharth Vadapalli <s-vadapalli@ti.com>
-Cc: u-boot@lists.denx.de, srk@ti.com
-In-Reply-To: <20241007121927.1680039-1-s-vadapalli@ti.com>
-References: <20241007121927.1680039-1-s-vadapalli@ti.com>
-Subject: Re: [PATCH v2] usb: gadget: cdns3: Fix cdns3_ep_config() by
- setting ep.maxpacket
-Message-Id: <172864998471.10995.7784088919446282474.b4-ty@baylibre.com>
-Date: Fri, 11 Oct 2024 14:33:04 +0200
+ d=1e100.net; s=20230601; t=1728650034; x=1729254834;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ptKaSfYMfxwKB7T+P7Dbt68P8Z/tvtY7JbUy03KsLqY=;
+ b=nxyEp8Bfqy8/vbyAmd2UBMal9V/zBHx3elSHUR9pdQSFkM1FuAb3XjdTisoS//Krcg
+ fe3Jg7mY57p5XM3JqXZmSeoqNKeGOWTLj5xpH3FuGY6EBrVY1Uw3jURIfpSnrjRclwAg
+ ZC3lFAulchsg236pSyz0w62fhZ+kaXD9lEEwjj4DR18cJxFf2FWmRM0cRHXe5mFM9LVm
+ wngjc5/BSIPt8yDpLt9Lz+Oqlz/mhES4X9SI/OKGluocr+yWaBeOCAfsEDkK3YqB5dbP
+ JgpQX5cnhXGut9iBvlKh7GGBqUdTSVbCJDua8lxNC+I3KjPOECAilNuM5Q4MdJBQVJk6
+ Z0Xw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWiKdmwWyAz8BGiVhxOQiLkvDdZ/GddwJdanK+3w7kHSSuYBV0epnNwTpww95fDAp9jYvCQ2DA=@lists.denx.de
+X-Gm-Message-State: AOJu0YzJ+FR6YQ5PhZFNtAejVSWLQnBQgmRH6Vk6H+fnAZx4WKmjEKxg
+ KF1VtxzJSLJEawfMgs3s5CiIGuOgMc82OHHIqSj8U0S0m+6UUzgnd2zC7m2RUFzJaxVLmCBEm0o
+ x+0bThoznIkWJG9iK7AEB86Rcdt4=
+X-Google-Smtp-Source: AGHT+IENQR5gCflujL5Huwm0QYPcrdKgKtFhgAre6sIlzq93MRztoVUl79VvuRjCzKQ4AWRBWvhZ4yXrQq/P4MzQivU=
+X-Received: by 2002:a05:6512:3ca1:b0:52e:e3c3:643f with SMTP id
+ 2adb3069b0e04-539da3c1c66mr1197547e87.2.1728650033594; Fri, 11 Oct 2024
+ 05:33:53 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.0
+References: <20240920063204.1049202-1-martin.stolpe@gmail.com>
+ <20240920063204.1049202-2-martin.stolpe@gmail.com>
+ <20240920081625.z3fwz6n7o2zxd4gf@localhost.localdomain>
+ <CAPHZmLbcfMVOydp9jCY0mWKdKPePBp+3rfttMyKbHT-CbB7kjA@mail.gmail.com>
+ <e27aef89-8038-9099-58ed-b927cce54579@ti.com>
+ <CAPHZmLZopucK5uMwENuF83pRMLYR2A5sC7fes4-1JXE4jX7=rw@mail.gmail.com>
+ <08a38499-c36d-4bf7-adcc-d3f547f3afc8@ti.com>
+ <CAPHZmLaVVSckGeqU09WMy0s4rGA-w6pQ9ObPuh3SBf8uTBaD9Q@mail.gmail.com>
+ <dadefe22-2662-ddd1-cace-15d70f632232@ti.com>
+ <CAPHZmLY7UHGdsdKtEDCL2xRpBiPuDS8Hc-roGtt1+5F3zZnAnQ@mail.gmail.com>
+In-Reply-To: <CAPHZmLY7UHGdsdKtEDCL2xRpBiPuDS8Hc-roGtt1+5F3zZnAnQ@mail.gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Fri, 11 Oct 2024 13:33:42 +0100
+Message-ID: <CALeDE9MeiBg0yTYxN_O6KwHkeqmvD4N1gd0FTfdT=ydNVNg2Fw@mail.gmail.com>
+Subject: Re: [PATCH 1/1] rpi: Fix build error when CONFIG_VIDEO is disabled
+ for Raspberry Pi
+To: Martin Stolpe <martinstolpe@gmail.com>
+Cc: Devarsh Thakkar <devarsht@ti.com>, "Ivan T. Ivanov" <iivanov@suse.de>,
+ u-boot@lists.denx.de, 
+ Francois Berder <fberder@outlook.fr>, Matthias Brugger <mbrugger@suse.com>,
+ Nikhil M Jain <n-jain1@ti.com>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,26 +101,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On Fri, 11 Oct 2024 at 13:22, Martin Stolpe <martinstolpe@gmail.com> wrote:
+>
+> Hi,
+>
+> Sorry if this is a stupid question but what do I have to do to add a " Reviewed-by" from myself to this patch series?
 
-On Mon, 07 Oct 2024 17:49:27 +0530, Siddharth Vadapalli wrote:
-> The function cdns3_ep_config() calculates the maximum packet size based
-> on the Endpoint Type and the Gadget Speed and stores it in the variable
-> "max_packet_size". This value is then programmed in the USB Controller
-> for the corresponding Endpoint. This may result in a mismatch between
-> the maximum packet size programmed in the USB controller and the maximum
-> packet size seen by the UDC Core via "maxpacket" member of "struct usb_ep".
-> Additionally, since TD_SIZE is calculated in cdns3_ep_run_transfer() on the
-> basis of the maximum packet size stored in the "maxpacket" member of
-> "struct usb_ep", it may lead to an incorrect value of TD_SIZE when compared
-> with what the USB controller actually expects (max_packet_size).
-> 
-> [...]
-
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu)
-
-[1/1] usb: gadget: cdns3: Fix cdns3_ep_config() by setting ep.maxpacket
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/c54c72dec7948093b200ae1290575a1e9abbbb40
-
---
-Mattijs
+Just reply all with the reviewed-by and patchwork will automatically
+apply it when I accept it, I think there needs to be a new v2 of this
+patch.
