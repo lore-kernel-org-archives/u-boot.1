@@ -4,82 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6657D0D79F
-	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 14:42:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62B66D0D79F
+	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 14:45:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F9E489360;
-	Fri, 11 Oct 2024 16:42:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B66F6892F8;
+	Fri, 11 Oct 2024 16:45:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FrM2EAYC";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="JlSKJfFN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AABEF8932C; Fri, 11 Oct 2024 16:42:19 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5D5378931F; Fri, 11 Oct 2024 16:45:26 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 994AE892F8
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 16:42:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D46F890FD
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 16:45:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-430ee5c9570so22865535e9.3
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 07:42:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728657735; x=1729262535; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=CLXdBPDRSmqEjjNZKvk7ZTzEERtGuAWK9DyddN5WdBA=;
- b=FrM2EAYCNF1TIBXTVIZRCLXPq2albJrYdNwOdnYsCWGDr75vlAaLigHaVvsX0BPCmK
- mIruMgHtxnLYDfOiUU76mZxDDz5WL5ik9FUvypm2UpA4e6ATFpkrLDMUqMB6SY9+qz0N
- 7D7k3JaKnQbyEKowYCely+N+a7OMa8fXWclQaOR1Txmo7BHLe2x8faI4iAKAOc+oLu+G
- CJWX4zR2Wu5jwFQt/IrD8D3+dPUmznoote33eVallXL/5gIwVSltiP3O83B5EzZ5y4D6
- HXNb682ykZtbO+qA9RLhyf/n4rD7uIjIflqT5yodD4C4NjnJFo5tVYLE4m+nCl/ZOdXk
- 4XwA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728657735; x=1729262535;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=CLXdBPDRSmqEjjNZKvk7ZTzEERtGuAWK9DyddN5WdBA=;
- b=A0X47snRb+sLthTnlb6kiIvlPZInrjnQ0ofPQnqXMe7BZ7aFX2h1sJfMbpbdsJ6T+w
- ret36S+wdKpgXa6aT3BXxXSRBJ3TYYLU+0Nd5cd8sKi/UUtqkArPNvDV+gj4kFeJHe3e
- zK7uOFRLWPDidERE9YLn69y1xJxPPjNRFXLB1hT+io66w6XCwzsgZwLAAhPv5FJJYwik
- 5PVGJPfNN/nSmxmC78sQ3ZGE655OidvsBYKqIBCS5cpYhYvASVGekom39mv1llSuWIoA
- RwQykOq9aoWtFf/KxqLzLaV0faEPMas8if8xaHmwUVWArqnV22CUqbWxAoAZE1okTExn
- KXIg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUUIhAJsibz1TANxyGvr3ln53K1CyGnakoNprJAkSL+pm8rIjJv0LlNMBsWCVFlxTZw3U7dXBE=@lists.denx.de
-X-Gm-Message-State: AOJu0YyaH5ze0AqkWh6b0p1UxAbtsSp2kk+mfjaQAeZTf2jKIH//8gGH
- n05I7+cAymLrR/AMCIcOSufeEIhOiI9fN0L+IN6pxKTiHOhVxoPVNgCMTVUra0Y=
-X-Google-Smtp-Source: AGHT+IH2lZqK3X61ypK5hclLt3Xn/kifXG0kvpIpzDSMGs23/KMRXA7tLSHV27u1TjUkNw6NtUlsew==
-X-Received: by 2002:a05:600c:1e16:b0:42c:bcc8:5882 with SMTP id
- 5b1f17b1804b1-4311dea3584mr28230705e9.7.1728657735062; 
- Fri, 11 Oct 2024 07:42:15 -0700 (PDT)
-Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:8261:5fff:fe11:bdda])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-431182ffd14sm43951385e9.18.2024.10.11.07.42.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Oct 2024 07:42:14 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>
-Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de
-In-Reply-To: <20241009-u-boot-topic-fix-hdmi-v1-0-2479cd90c4ea@linaro.org>
-References: <20241009-u-boot-topic-fix-hdmi-v1-0-2479cd90c4ea@linaro.org>
-Subject: Re: [PATCH 0/2] ARM: mach-meson: fix HDMI since DT update to v6.11
-Message-Id: <172865773433.2734796.4668834305012644771.b4-ty@linaro.org>
-Date: Fri, 11 Oct 2024 16:42:14 +0200
+ spf=pass smtp.mailfrom=ddrokosov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 25CC210000B;
+ Fri, 11 Oct 2024 17:45:20 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 25CC210000B
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1728657920;
+ bh=okmdvEherz+gJD2zQiYiqmmEiKyC6LL5ZKLRSoxV51U=;
+ h=Date:From:To:Subject:Message-ID:MIME-Version:Content-Type:From;
+ b=JlSKJfFNswtYh8rldqaZbO+2thhX5VazaZA8xFdU05pS9mMpWovmX2pfIMolIhJp2
+ LyDp4o9PH5i95JjaDXto/qLVQBZ/xOV47Dw5HPFHhkFZtboAgrO6aMUJ/xxVeBakPA
+ ehASG/5y3IBqB5bwFEaZUEJ6zAJpIcygeKJckwx4mw7CMr2jln46N2QhaBgf3jHX21
+ 4+H4BFqE52jxkiL78BjRVc2MUO3oIt4raJBQJ33tbdMrQKJPe5qIwZZhO6Z27BczDL
+ 8j3C/sttwyxKydjW3Rj42DZIV9nXkl9y09c028TATMVNVgZ0WTdyfrfM9FGr46epQS
+ Imu11YwSv6tvw==
+Received: from smtp.sberdevices.ru (unknown [172.16.192.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Fri, 11 Oct 2024 17:45:19 +0300 (MSK)
+Date: Fri, 11 Oct 2024 17:45:19 +0300
+From: Dmitry Rokosov <ddrokosov@salutedevices.com>
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+CC: <u-boot-amlogic@groups.io>, Simon Glass <sjg@chromium.org>, Igor Opaniuk
+ <igor.opaniuk@gmail.com>, Sam Protsenko <semen.protsenko@linaro.org>, "Tom
+ Rini" <trini@konsulko.com>, "Andrew F. Davis" <afd@ti.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Mario Six <mario.six@gdsys.cc>,
+ <u-boot@lists.denx.de>, <rockosov@gmail.com>, <kernel@salutedevices.com>
+Subject: Re: [PATCH v3 4/6] cmd: bcb: introduce 'ab_dump' command to print
+ BCB block content
+Message-ID: <20241011144519.xukl22ksrjsqz55l@CAB-WSD-L081021>
+References: <20241008-android_ab_master-v3-0-f292c45a33e4@salutedevices.com>
+ <20241008-android_ab_master-v3-4-f292c45a33e4@salutedevices.com>
+ <CAFLszTh7qjUN__MvAbcMPL+W4V=mfBrgt9zcg8zyfx+WBN=9bg@mail.gmail.com>
+ <20241009132614.mlkpfkdni4cp2tgg@CAB-WSD-L081021>
+ <CAFLszTgr-qHXF2QU7toZXOU0FgRMPU0XXnQ6SzMq32a_pguAww@mail.gmail.com>
+ <20241010102051.q67usj6oaykjaixx@CAB-WSD-L081021>
+ <17FD1697482D61A4.19251@groups.io> <87bjzqhg7g.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.1
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <87bjzqhg7g.fsf@baylibre.com>
+User-Agent: NeoMutt/20220415
+X-Originating-IP: [172.28.226.150]
+X-ClientProxiedBy: p-i-exch-a-m1.sberdevices.ru (172.24.196.116) To
+ p-i-exch-a-m1.sberdevices.ru (172.24.196.116)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 188387 [Oct 11 2024]
+X-KSMG-AntiSpam-Version: 6.1.0.4
+X-KSMG-AntiSpam-Envelope-From: ddrokosov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 39 0.3.39
+ e168d0b3ce73b485ab2648dd465313add1404cce, {Tracking_uf_ne_domains},
+ {Track_E25351}, {Tracking_from_domain_doesnt_match_to},
+ smtp.sberdevices.ru:7.1.1,5.0.1; salutedevices.com:7.1.1;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; lore.kernel.org:7.1.1;
+ 127.0.0.199:7.1.2, FromAlignment: s
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean, bases: 2024/10/11 13:07:00
+X-KSMG-LinksScanning: Clean, bases: 2024/10/11 13:07:00
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2024/10/11 09:57:00 #26735895
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,23 +108,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hello Mattijs,
 
-On Wed, 09 Oct 2024 11:15:19 +0200, Neil Armstrong wrote:
-> The DT was updated with unhandled clocks and a shared
-> power domain, causing a probe failure and a green output.
+On Fri, Oct 11, 2024 at 04:22:43PM +0200, Mattijs Korpershoek wrote:
+> Hi Dmitry,
 > 
-> Add the missing clocks and avoid enabling a power domain twice.
+> On jeu., oct. 10, 2024 at 14:17, "Mattijs Korpershoek via groups.io" <mkorpershoek=baylibre.com@groups.io> wrote:
 > 
+> [...]
 > 
+> >>> > >
+> >>> > > Reviewed-by: Simon Glass <sjg@chromium.org>
+> >>> > >
+> >>> > > Can you also update the test?
+> >>> >
+> >>> > I apologize, but I didn't quite understand your point. Could you please
+> >>> > clarify? This patch series includes additional tests for the 'ab_dump'
+> >>> > subcommand. For more details, please refer to:
+> >>> >
+> >>> > https://lore.kernel.org/all/20241008-android_ab_master-v3-6-f292c45a33e4@salutedevices.com/
+> >>> 
+> >>> OK, thank you. Sometimes it is easier (for reviewers) if you update
+> >>> the test in the same commit.
+> >>
+> >> Should I resend the patch series with ab_dump implementation and tests
+> >> in the same commit?
+> >>
+> >> I can prepare new version, if needed, no problem.
+> >
+> > No need to resend a new version just for this, since it's already
+> > been reviewed.
+> >
+> > Keep the suggestion in mind for future series!
+> 
+> If you do need to re-spin this as v4, you can squash the test commit
+> with this one if you wish.
 
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-amlogic (u-boot-amlogic-next)
-
-[1/2] clk: meson: gxbb: add HDMI clocks
-      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/2958fd431af7d08a0b15881b59b0df2e32963ba8
-[2/2] power/domain: meson-ee-pwrc: make sure to not enable a domain twice
-      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/25b489e2cb816f52467138665b9b6203c358f03b
+Of course, I can re-spin that.
+I believe I can save all RvB trailers during the squashing process.
+Could you please clarify if my understanding is correct? 
 
 -- 
-Neil
-
+Thank you,
+Dmitry
