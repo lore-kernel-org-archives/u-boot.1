@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CE39CFD31D
-	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 10:36:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F395ECFD316
+	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 10:36:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 67AA78932D;
-	Fri, 11 Oct 2024 12:34:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D078789340;
+	Fri, 11 Oct 2024 12:34:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="a/hyrTaX";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="CHGnbfOl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B052F89327; Fri, 11 Oct 2024 12:34:52 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 99B98892E3; Fri, 11 Oct 2024 12:34:54 +0200 (CEST)
+Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
+ [IPv6:2a00:1450:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A9E358931E
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 12:34:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E1D9892E3
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 12:34:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=9elements.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a9953bdc341so175093266b.2
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 03:34:50 -0700 (PDT)
+Received: by mail-lj1-x234.google.com with SMTP id
+ 38308e7fff4ca-2fabb837ddbso27973351fa.1
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 03:34:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1728642890; x=1729247690; darn=lists.denx.de;
+ d=9elements.com; s=google; t=1728642892; x=1729247692; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=nloMzF7nCdp69ohm7b64TFd9QODroRHTcjmOy2DXE34=;
- b=a/hyrTaXtcWIfKaVyYLfqiK+z4g5Qa0pfryB8WbmlVx/0P2jUupnE56x7CF5ZXi7UM
- LzzJbEwNlDR6uAqHMgHdC9XcPo65kn86/pFmMaXLjwZJ0pMBge5bUWe4Aa4Syc4Drryo
- j4ttPi0Uf6Q5F7GcwUmVZGFAKSFAHn1fvF6eMPkAFfjbd1DoNYjxRq8uekPGKbEqUQw+
- l0hpFsYiiANdDK+bATFwKmzRf6A/mG0Lfnccow6k7QcxuC3AGBi+PL4fVvcf616+cFGY
- 1aQq4zeYaxEEzHypiYgcslgfoMs3sdv6j6ZMYnjuwXDwCb9Iy/3hIEFhbGXjago3V0AE
- T08A==
+ bh=uUSwEThMcuBbj+N1L6I/K35sdbHKZ32fPMo+DGkXuf8=;
+ b=CHGnbfOllou9Fhrxz7xSg+mVyvm7ARQY0q4yyNodeJsZv8BxXpoLJiZlYvWWIwDyo3
+ i9i5VTj+T1JcW4kbgmn5iKix+DjbitYwtfzOtsr3j4KlWT32NQ7THZD3OXHC2m/UQ80N
+ RHWy1Gfto0UcSF/UM8IcEN/jXD9sbQokhERyUEoFYERcJqB6H1rxvtLdBVP1fk8OqWXX
+ LyeVxV+ccjSAqnStC6NGR4xiPtS2wO931zfdsl8B7mlffRHm0NZb6nsYT43wdYee/eiT
+ wq10d93DaVk5uznW7/Fsgmx8eOuqK30+0sU6o0yge2Dz3wxFHZyGEBQumTBHNk5PAnrR
+ qohg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728642890; x=1729247690;
+ d=1e100.net; s=20230601; t=1728642892; x=1729247692;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=nloMzF7nCdp69ohm7b64TFd9QODroRHTcjmOy2DXE34=;
- b=GtHdkFfo57W5nsto2oa1rl4KEAktNNHEO4ePKRK6OIknM3jje4DI6Sw13xc2ty5bpo
- 7qJBt+49LqD9PAzoiZCjw+zKeXxacXvwxU5Ic3cJ6yqQg4k5cdv0MHX0nABqSxIZOFEB
- TiuA5CAARln5Uk8qe0o7mtZsnwnTuwJlsbeFVCXREqUluNfITGq8VZF1Rxd0kF26Yj83
- 8hdx9AevlhrU7jXLE1A60VCrpkTCktn9HMqgvKVL0TvDM1YFsD5fg6PNNT6I1Co1xhwc
- vNp/My4O5JCs6skhY7dh9QsKzBd6Iqwgysp9b6JF55jKCP0a5sSA8Trcibi9zfDAany+
- 19YQ==
-X-Gm-Message-State: AOJu0YwVCHsAQgoOCVtKClUWvpW2dx9zG/4PIFMauYD12t6Ps5fOHwtE
- e3bg4JIxO7Tr6cDA6pWIbqCRTaI+SHkC5G+nihJjGvezytZqS5z6kPyW2aCTHQPet/Mw0sqMl4i
- E+F0=
-X-Google-Smtp-Source: AGHT+IGcdCLsO2XLLYhuzW+nnoLqDuc8/dZlCnHCP1BF7nczi0qOEyQK9b/IjVTmsh5zkqgVR4iCaA==
-X-Received: by 2002:a17:907:7da5:b0:a99:4b56:cf76 with SMTP id
- a640c23a62f3a-a99b9585d90mr162759066b.47.1728642890057; 
- Fri, 11 Oct 2024 03:34:50 -0700 (PDT)
+ bh=uUSwEThMcuBbj+N1L6I/K35sdbHKZ32fPMo+DGkXuf8=;
+ b=gbWv8t1A+V8A6AMlwYrmbm9tbK6KeScDiGAxdeL8HOpWoOAzxs0z+3aEuu7nemNk/I
+ k/7e+eeQT00u/TB/8Isri7CvaRU9lmg/WRIB8uJsB4Q6BYsUDoalDu3wz2SRi2CK8HJJ
+ GJTwWWtpZw15YMNlQRCwYr9uE9HXWkgLsii/G3aJ4RiyDAinsfaQbi9tE844HNFCkaqX
+ qxa5k/W/oYi8ug556ZVdnbuiOcZenqZeCEjRV2Y3kgJ2Uxr0TmvkxLQ8TaxiUMAlXEAs
+ Yt44zJOQF5J4JhlfK//PUJFlXi1h4P31enKlniOCFxu5ZhQSBGa4PJC21UGUOKLrRAc5
+ thow==
+X-Gm-Message-State: AOJu0Yx5dBE+ml+rKdHHfM6T2lhYUeShVTKa/VBRTo78drXYoIZvF2vD
+ /SxZPWYGetrW4UYmm3d1C1Q2iLkfcxAG0n+db6UcrfpRwOrkuBqI3wGjpXbv8Z7YWGenkiqgv/d
+ M6Ws=
+X-Google-Smtp-Source: AGHT+IH4y4ylU18NQAIc28EH6L38OZBoUapnaIhOtyha0y0119PJDLMVKWiaj2w+ImRUXOm/YDGCMw==
+X-Received: by 2002:a05:6512:2824:b0:52c:9ae0:beed with SMTP id
+ 2adb3069b0e04-539da592f6amr1626123e87.52.1728642891835; 
+ Fri, 11 Oct 2024 03:34:51 -0700 (PDT)
 Received: from fedora.sec.9e.network
  (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a99a80f29besm195353466b.211.2024.10.11.03.34.49
+ a640c23a62f3a-a99a80f29besm195353466b.211.2024.10.11.03.34.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Oct 2024 03:34:49 -0700 (PDT)
+ Fri, 11 Oct 2024 03:34:51 -0700 (PDT)
 From: Patrick Rudolph <patrick.rudolph@9elements.com>
 To: u-boot@lists.denx.de,
 	Simon Glass <sjg@chromium.org>
 Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v7 14/37] acpi: Allocate and write ACPI tables
-Date: Fri, 11 Oct 2024 12:22:55 +0200
-Message-ID: <20241011102419.12523-15-patrick.rudolph@9elements.com>
+Subject: [PATCH v7 15/37] acpi: Add processor device
+Date: Fri, 11 Oct 2024 12:22:56 +0200
+Message-ID: <20241011102419.12523-16-patrick.rudolph@9elements.com>
 X-Mailer: git-send-email 2.46.2
 In-Reply-To: <20241011102419.12523-1-patrick.rudolph@9elements.com>
 References: <20241011102419.12523-1-patrick.rudolph@9elements.com>
@@ -95,139 +95,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Allocate memory for ACPI tables in generic acpi code. When ACPI wasn't
-installed in other places, install the ACPI table using either BLOBLISTs
-or EFI allocate pages.
+Add a new method to write the processor device identified by _HID
+ACPI0007, that is preferred over the Processor OpCode since ACPI 6.0.
 
-This allows non x86 platforms to boot using ACPI only in case the
-EFI loader is being used, since EFI is necessary to advertise the location
-of the ACPI tables in memory.
-
-TEST: Booted QEMU SBSA (no QFW) using EFI and ACPI only.
+Fixes booting arm using ACPI only since the Processor OpCode isn't
+found valid by the Linux kernel.
 
 Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 Cc: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>
 ---
- lib/acpi/acpi_table.c            | 80 +++++++++++++++++++++++++++++++-
- test/py/tests/test_event_dump.py |  1 +
- 2 files changed, 80 insertions(+), 1 deletion(-)
+ include/acpi/acpigen.h | 12 ++++++++++++
+ lib/acpi/acpigen.c     | 11 +++++++++++
+ 2 files changed, 23 insertions(+)
 
-diff --git a/lib/acpi/acpi_table.c b/lib/acpi/acpi_table.c
-index d6357bdc4d..d8112e58ca 100644
---- a/lib/acpi/acpi_table.c
-+++ b/lib/acpi/acpi_table.c
-@@ -5,8 +5,11 @@
-  * Copyright 2019 Google LLC
-  */
+diff --git a/include/acpi/acpigen.h b/include/acpi/acpigen.h
+index 3aa94d70b9..16df85b9c1 100644
+--- a/include/acpi/acpigen.h
++++ b/include/acpi/acpigen.h
+@@ -833,6 +833,7 @@ void acpigen_write_dsm_end(struct acpi_ctx *ctx);
+  *
+  * This emits a Processor package header with the required information. The
+  * caller must complete the information and call acpigen_pop_len() at the end
++ * Deprecated since ACPI 6.0.
+  *
+  * @ctx: ACPI context pointer
+  * @cpuindex: CPU number
+@@ -842,6 +843,17 @@ void acpigen_write_dsm_end(struct acpi_ctx *ctx);
+ void acpigen_write_processor(struct acpi_ctx *ctx, uint cpuindex,
+ 			     u32 pblock_addr, uint pblock_len);
  
--#include <dm.h>
-+#include <bloblist.h>
- #include <cpu.h>
-+#include <dm.h>
-+#include <efi_api.h>
-+#include <efi_loader.h>
- #include <log.h>
- #include <mapmem.h>
- #include <tables_csum.h>
-@@ -16,6 +19,14 @@
- #include <acpi/acpi_device.h>
- #include <asm/global_data.h>
- #include <dm/acpi.h>
-+#include <linux/sizes.h>
-+#include <linux/log2.h>
++/**
++ * acpigen_write_processor_device() - Write a Processor device
++ *
++ * Write a device with _HID ACPI0007 identifying a processor.
++ * Replacement for the Processor OpCode.
++ *
++ * @ctx: ACPI context pointer
++ * @cpuindex: CPU number
++ */
++void acpigen_write_processor_device(struct acpi_ctx *ctx, uint cpuindex);
 +
-+enum {
-+	TABLE_SIZE	= SZ_64K,
-+};
-+
-+DECLARE_GLOBAL_DATA_PTR;
- 
- /*
-  * OEM_REVISION is 32-bit unsigned number. It should be increased only when
-@@ -752,3 +763,70 @@ static int acpi_write_iort(struct acpi_ctx *ctx, const struct acpi_writer *entry
+ /**
+  * acpigen_write_processor_package() - Write a package containing the processors
+  *
+diff --git a/lib/acpi/acpigen.c b/lib/acpi/acpigen.c
+index ecff5a50d5..fa9dad32a3 100644
+--- a/lib/acpi/acpigen.c
++++ b/lib/acpi/acpigen.c
+@@ -361,6 +361,17 @@ void acpigen_write_processor(struct acpi_ctx *ctx, uint cpuindex,
+ 	acpigen_emit_byte(ctx, pblock_len);
  }
  
- ACPI_WRITER(5iort, "IORT", acpi_write_iort, 0);
-+
-+/*
-+ * Allocate memory for ACPI tables and write ACPI tables to the
-+ * allocated buffer.
-+ *
-+ * Return:	status code
-+ */
-+static int alloc_write_acpi_tables(void)
++void acpigen_write_processor_device(struct acpi_ctx *ctx, uint cpuindex)
 +{
-+	u64 table_addr, table_end;
-+	u64 new_acpi_addr = 0;
-+	efi_uintn_t pages;
-+	efi_status_t ret;
-+	void *addr;
++	char pscope[16];
 +
-+	if (IS_ENABLED(CONFIG_X86) ||
-+	    IS_ENABLED(CONFIG_QFW_ACPI) ||
-+	    IS_ENABLED(CONFIG_SANDBOX)) {
-+		log_debug("Skipping writing ACPI tables as already done\n");
-+		return 0;
-+	}
-+
-+	/* Align the table to a 4KB boundary to keep EFI happy */
-+	if (IS_ENABLED(CONFIG_BLOBLIST_TABLES)) {
-+		addr = bloblist_add(BLOBLISTT_ACPI_TABLES, TABLE_SIZE,
-+				    ilog2(SZ_4K));
-+
-+		if (!addr)
-+			return log_msg_ret("mem", -ENOMEM);
-+	} else if (IS_ENABLED(CONFIG_EFI_LOADER)) {
-+		pages = efi_size_in_pages(TABLE_SIZE);
-+
-+		ret = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES,
-+					 EFI_ACPI_RECLAIM_MEMORY,
-+					 pages, &new_acpi_addr);
-+		if (ret != EFI_SUCCESS)
-+			return log_msg_ret("mem", -ENOMEM);
-+
-+		addr = (void *)(uintptr_t)new_acpi_addr;
-+	} else {
-+		return log_msg_ret("mem", -ENOMEM);
-+	}
-+
-+	table_addr = virt_to_phys(addr);
-+
-+	gd->arch.table_start_high = table_addr;
-+
-+	table_end = write_acpi_tables(table_addr);
-+	if (!table_end) {
-+		log_err("Can't create ACPI configuration table\n");
-+		return -EINTR;
-+	}
-+
-+	log_debug("- wrote 'acpi' to %llx, end %llx\n", table_addr, table_end);
-+	if (table_end - table_addr > TABLE_SIZE) {
-+		log_err("Out of space for configuration tables: need %llx, have %x\n",
-+			table_end - table_addr, TABLE_SIZE);
-+		return log_msg_ret("acpi", -ENOSPC);
-+	}
-+	gd->arch.table_end_high = table_end;
-+
-+	log_debug("- done writing tables\n");
-+
-+	return 0;
++	snprintf(pscope, sizeof(pscope), ACPI_CPU_STRING, cpuindex);
++	acpigen_write_device(ctx, pscope);
++	acpigen_write_name_string(ctx, "_HID", "ACPI0007");
++	acpigen_write_name_integer(ctx, "_UID", cpuindex);
++	acpigen_pop_len(ctx); /* Device */
 +}
 +
-+EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, alloc_write_acpi_tables);
-diff --git a/test/py/tests/test_event_dump.py b/test/py/tests/test_event_dump.py
-index e282c67335..45143c1c7d 100644
---- a/test/py/tests/test_event_dump.py
-+++ b/test/py/tests/test_event_dump.py
-@@ -18,6 +18,7 @@ def test_event_dump(u_boot_console):
- --------------------  ------------------------------  ------------------------------
- EVT_FT_FIXUP          bootmeth_vbe_ft_fixup           .*boot/vbe_request.c:.*
- EVT_FT_FIXUP          bootmeth_vbe_simple_ft_fixup    .*boot/vbe_simple_os.c:.*
-+EVT_LAST_STAGE_INIT   alloc_write_acpi_tables         .*lib/acpi/acpi_table.c:.*
- EVT_LAST_STAGE_INIT   install_smbios_table            .*lib/efi_loader/efi_smbios.c:.*
- EVT_MISC_INIT_F       sandbox_early_getopt_check      .*arch/sandbox/cpu/start.c:.*
- EVT_TEST              h_adder_simple                  .*test/common/event.c:'''
+ void acpigen_write_processor_package(struct acpi_ctx *ctx,
+ 				     const char *const name,
+ 				     const uint first_core,
 -- 
 2.46.2
 
