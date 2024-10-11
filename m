@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E506CFD342
-	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 11:04:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7228BCFD342
+	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 11:06:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D55AD892EF;
-	Fri, 11 Oct 2024 13:04:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id AABA8892EF;
+	Fri, 11 Oct 2024 13:06:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bQG0/Oqt";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MtQpmPsK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A6A1892F6; Fri, 11 Oct 2024 13:04:15 +0200 (CEST)
-Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
- [IPv6:2607:f8b0:4864:20::629])
+ id E6728892EF; Fri, 11 Oct 2024 13:06:48 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 37854892C6
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 13:04:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B7EB892C6
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 13:06:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-20c767a9c50so16245205ad.1
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 04:04:13 -0700 (PDT)
+ spf=pass smtp.mailfrom=gilles.talis@gmail.com
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-a993f6916daso329236666b.1
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 04:06:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728644652; x=1729249452; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ZxH0wB+ONHHJQsHvwG9WpCYZg6FxF/9WzYBCu7VeEmA=;
- b=bQG0/OqteSI+tdQbHeQt3/Rnhpj5V+gMg3Cd8ARAd/hlkRa7PqtbPm3tW29qwCjoUv
- t8qccFmTUC9hGvJBI6JShw2dgVxRFQVnrGtbnqXD/9C/4sa6MFTCcVSX8gUqEjt9WV7t
- 4e6x99CLGQeq5s69VCFWiYodWJ3qaQz0UNn9x/OZrrFHFWdVDaUYqeqBLX1DIMnaUCmO
- +SYYRFfySiUxTkj8GmfkpM1yfPd2wDgrKYdEYAWyJ3Y8buCDOJDtUyyxbka882p7lL7t
- dnM9uz8sX5lNIQ7K7m0upkP9KJi1/uPVjVJeJk9ux7LIsSBXncHOCeUhbLHoz07WaBNy
- 1Rcg==
+ d=gmail.com; s=20230601; t=1728644805; x=1729249605; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=el7QvebJBqJazeio0zbC//yyMZERhus2FJwWCLkrKA0=;
+ b=MtQpmPsKDHQN2hDwmCy39KpxlK2aHhEWL3BZIEc4ifp6DViZIZW6VVuI5J/wN8ZQfw
+ 7uSaxscX00h+/QdSA7YMTkx0zu2pqumgqSbjLLb+RNQQ0WL9OR2PTaV0eX93bZITmwwU
+ 1NjiQZnmp5iHAqckXXMP38exQx5IHfB0bxntdv+F2x4HvuZZAi3UHEYCle0/Tg81nmVE
+ 2n1ZRPgWvmHEwHNTmp+I8sIwHAq3ymNrsa6LiGZVDHmvmuXVaa1EFebE7Xnb0Cg1IKBQ
+ UTeRhDWlqEs9QJ0LnlmmKxhj7OHi5w2xnGe1D7qEuPXuVuORjxh6nvpjNhKO6+2J4apm
+ Lf/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728644652; x=1729249452;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ZxH0wB+ONHHJQsHvwG9WpCYZg6FxF/9WzYBCu7VeEmA=;
- b=Pa+jvJptbeGQewLEk6YUd2ZZhPHomi7UXV6J8NIRK2GCxLBZBsEGtPyAWAukg/2Qtk
- VxFaxABwYcWvj4ePo4/2asQrVAFfY4rK8wwH5MVoBjVhPBLCsRWlnI7N3ZhahXtUvthS
- OcuFkyAcU8WPIbdXeTx521Sc55MXfoNhmC2nFT6YTr2XlOTISA6s2cj0bJnU5XDJ/eo/
- 4oWogxrYxevDESD3jIO7VBg2bNCS0lkyUsi3vrYPLmyetwUlThGqMFetGrO3or50S5ow
- L+SuPKOK5wPb1StX3doedI2Pl116igCN9J6wirMRtYxYOQWvGo0tQujX309n4uK6NNZX
- u2kg==
-X-Gm-Message-State: AOJu0YxkmngyWz75n28W3dxn8KoveNdk70IrE95kbx4bZa9UhlB1oOE/
- 72ALJlwhaD8L76nFiCYfSjwDCUoD9/BqChKA/gfsWjyySSeNs2Bp2qpeDeeXwB500CbR08U62oG
- IaJKklkpOnXWtnwSWCorcU3LAmwgNLHdqwVj8lw==
-X-Google-Smtp-Source: AGHT+IGhJ3GAK/V7zlFlMZcx/xNgU9gAt3fqI6RS8H4U5Se4+an+YErbdKahXVYABH0hBrvxP6Uxad4eTOUrpPoHLtw=
-X-Received: by 2002:a17:903:110c:b0:20c:6bff:fcae with SMTP id
- d9443c01a7336-20ca142b864mr34711325ad.5.1728644651749; Fri, 11 Oct 2024
- 04:04:11 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1728644805; x=1729249605;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=el7QvebJBqJazeio0zbC//yyMZERhus2FJwWCLkrKA0=;
+ b=hygdl99fkGamfuGYc6b1rHl5G7pVCdYc/6BGv0Vez3918Ed341F/i0RbYzx+lR5BZA
+ 6J8du0DJOVx6mvKhupz8/UTOhhFNJtUHYk9Z6gzeeStRAhKJxTjgmrZoINQyU7XwLrWG
+ Y3I7megjILJLaKTX82bhwsJNHd8REzuggPFKJ6u/tDIkMf0svIlJzf9PsBXbdDjfG19c
+ sHQ1eV1ZkUdUAk9/+xOIcZonl7PQC+CFVRdeYvh2hka0qaRBidabphTXNVxTnkVRf99V
+ Y+HnqLx3W96gqkTsrFuxaKFuXrto7voy4RHiVLAoKDpO4dd9CM0rHZIiqdbOwpMbys9B
+ X4ag==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUkFrHKMhy/G2XzLDltP0HL7n260CFtdc6Ni9buqk/lNyQyvTsDUX9tqV491FsbcKEBOB0U2n4=@lists.denx.de
+X-Gm-Message-State: AOJu0YwXpBTlDh5+gZ+jUCUtTBU088H8G391nEc6PMZkzqe3HKCW7/sb
+ VqHqd0lqXSKZb2HEc7g7yP9Wckamld06Oda10OjeyCIF3Xm+2DNgVM5V0i6Kpxt5svOnagW+4iS
+ iyfmIV2BKfj3Nw8BP/Irk0Y9nURU=
+X-Google-Smtp-Source: AGHT+IGGhec0SMqqnLjGSUjJYD6ZvGBOuayONKb2dTcCUHwMTsoYVcFMg9iMbvVm5Pv+0CuP6LV3zCXEiUEn5OTpDXo=
+X-Received: by 2002:a17:907:7fa8:b0:a99:4f28:c437 with SMTP id
+ a640c23a62f3a-a99b9305edcmr163148866b.7.1728644805289; Fri, 11 Oct 2024
+ 04:06:45 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241008181435.1753814-1-sughosh.ganu@linaro.org>
- <20241008181435.1753814-14-sughosh.ganu@linaro.org>
-In-Reply-To: <20241008181435.1753814-14-sughosh.ganu@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 11 Oct 2024 14:03:35 +0300
-Message-ID: <CAC_iWjLwV-NXU1TuYFRy-fyUon5-_eeNvAcpf_CdZjkyoE9PcQ@mail.gmail.com>
-Subject: Re: [PATCH v2 13/14] lmb: remove call to efi_lmb_reserve()
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Bin Meng <bmeng.cn@gmail.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Jonas Karlman <jonas@kwiboo.se>
+References: <20241011112402.3168-1-peng.fan@oss.nxp.com>
+In-Reply-To: <20241011112402.3168-1-peng.fan@oss.nxp.com>
+From: Gilles Talis <gilles.talis@gmail.com>
+Date: Fri, 11 Oct 2024 07:06:33 -0400
+Message-ID: <CAKcgs2w1nhEMunjEms3ddzGb9wLZLvUo_XSxmEPbsz+3Jh+13Q@mail.gmail.com>
+Subject: Re: [PATCH] clk: imx8mp: Add i.MX8MP Dummy clk
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Cc: festevam@gmail.com, sbabic@denx.de, u-boot@lists.denx.de, 
+ uboot-imx@nxp.com, gilles.talis@nxp.com, Peng Fan <peng.fan@nxp.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,76 +90,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 8 Oct 2024 at 21:15, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
->
-> The EFI memory allocations are now being done through the LMB
-> module. With this change, there is no need to get the EFI memory map
-> and set aside EFI allocated memory.
->
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> ---
-> Changes since V1:
-> * Do not remove the inclusion of efi_loader.h as it is now needed for
->   the lmb_map_update_notify()
->
->  lib/lmb.c | 35 -----------------------------------
->  1 file changed, 35 deletions(-)
->
-> diff --git a/lib/lmb.c b/lib/lmb.c
-> index 82dfd36364b..82fa9cd14b9 100644
-> --- a/lib/lmb.c
-> +++ b/lib/lmb.c
-> @@ -208,38 +208,6 @@ static void lmb_fix_over_lap_regions(struct alist *lmb_rgn_lst,
->         lmb_remove_region(lmb_rgn_lst, r2);
->  }
->
-> -/**
-> - * efi_lmb_reserve() - add reservations for EFI memory
-> - *
-> - * Add reservations for all EFI memory areas that are not
-> - * EFI_CONVENTIONAL_MEMORY.
-> - *
-> - * Return:     0 on success, 1 on failure
-> - */
-> -static __maybe_unused int efi_lmb_reserve(void)
-> -{
-> -       struct efi_mem_desc *memmap = NULL, *map;
-> -       efi_uintn_t i, map_size = 0;
-> -       efi_status_t ret;
-> -
-> -       ret = efi_get_memory_map_alloc(&map_size, &memmap);
-> -       if (ret != EFI_SUCCESS)
-> -               return 1;
-> -
-> -       for (i = 0, map = memmap; i < map_size / sizeof(*map); ++map, ++i) {
-> -               if (map->type != EFI_CONVENTIONAL_MEMORY) {
-> -                       lmb_reserve_flags(map_to_sysmem((void *)(uintptr_t)
-> -                                                       map->physical_start),
-> -                                         map->num_pages * EFI_PAGE_SIZE,
-> -                                         map->type == EFI_RESERVED_MEMORY_TYPE
-> -                                             ? LMB_NOMAP : LMB_NONE);
-> -               }
-> -       }
-> -       efi_free_pool(memmap);
-> -
-> -       return 0;
-> -}
-> -
->  static void lmb_reserve_uboot_region(void)
->  {
->         int bank;
-> @@ -286,9 +254,6 @@ static void lmb_reserve_common(void *fdt_blob)
->
->         if (CONFIG_IS_ENABLED(OF_LIBFDT) && fdt_blob)
->                 boot_fdt_add_mem_rsv_regions(fdt_blob);
-> -
-> -       if (CONFIG_IS_ENABLED(EFI_LOADER))
-> -               efi_lmb_reserve();
->  }
->
->  static __maybe_unused void lmb_reserve_common_spl(void)
-> --
-> 2.34.1
->
+Hi Peng,
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Le ven. 11 oct. 2024 =C3=A0 06:20, Peng Fan (OSS) <peng.fan@oss.nxp.com> a =
+=C3=A9crit :
+>
+> From: Peng Fan <peng.fan@nxp.com>
+>
+> i.MX8MP SDHC use CLK_IMX8MP_DUMMY clk entry. Without the clk, the bulk
+> api will return failure.
+>
+> The correct entry should be replaced with IMX8MP_IPG_ROOT clk in device
+> tree. This will be done in Kernel device tree and sync to U-Boot in
+> future.
+>
+> Fixes: 76332fae769 ("mmc: fsl_esdhc_imx: Enable AHB/IPG clk with clk bulk=
+ API")
+> Reported-by: Gilles Talis <gilles.talis@nxp.com>
+> Signed-off-by: Peng Fan <peng.fan@nxp.com>
+> ---
+>  drivers/clk/imx/clk-imx8mp.c | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/drivers/clk/imx/clk-imx8mp.c b/drivers/clk/imx/clk-imx8mp.c
+> index 34d91cd6880..1d04090ca00 100644
+> --- a/drivers/clk/imx/clk-imx8mp.c
+> +++ b/drivers/clk/imx/clk-imx8mp.c
+> @@ -197,6 +197,8 @@ static int imx8mp_clk_probe(struct udevice *dev)
+>
+>         base =3D (void *)ANATOP_BASE_ADDR;
+>
+> +       clk_dm(IMX8MP_CLK_DUMMY, clk_register_fixed_rate(NULL, "dummy", 0=
+));
+> +
+>         clk_dm(IMX8MP_DRAM_PLL_REF_SEL, imx_clk_mux("dram_pll_ref_sel", b=
+ase + 0x50, 0, 2, pll_ref_sels, ARRAY_SIZE(pll_ref_sels)));
+>         clk_dm(IMX8MP_ARM_PLL_REF_SEL, imx_clk_mux("arm_pll_ref_sel", bas=
+e + 0x84, 0, 2, pll_ref_sels, ARRAY_SIZE(pll_ref_sels)));
+>         clk_dm(IMX8MP_SYS_PLL1_REF_SEL, imx_clk_mux("sys_pll1_ref_sel", b=
+ase + 0x94, 0, 2, pll_ref_sels, ARRAY_SIZE(pll_ref_sels)));
+> --
+> 2.35.3
+>
+I confirm that the issue I was seeing on my i.MX8MP-based board goes
+away with this patch.
+
+Tested-by: Gilles TALIS <gilles.talis@gmail.com>
