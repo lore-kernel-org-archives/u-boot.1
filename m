@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA83DD0EE3F
-	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 22:02:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 968A2D1A426
+	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 22:16:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3519E893E8;
-	Sat, 12 Oct 2024 00:02:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id F3BB28939F;
+	Sat, 12 Oct 2024 00:16:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="HWsguge1";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="l4gbrpcw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B3AEB893EB; Sat, 12 Oct 2024 00:02:05 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6F35A893F7; Sat, 12 Oct 2024 00:16:43 +0200 (CEST)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B036D893E4
- for <u-boot@lists.denx.de>; Sat, 12 Oct 2024 00:02:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A99A98906C
+ for <u-boot@lists.denx.de>; Sat, 12 Oct 2024 00:16:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1728684117; x=1729288917; i=xypron.glpk@gmx.de;
- bh=dn25WLxeiXDVlV69TDTdxh6xUKEVztOlKLFVZgHS2Xs=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
- Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=HWsguge1gqloDGJegpK7KUSSaSdIi1vJgfCHG02YACi/+/vTZsfQlbTAB/PTadDQ
- m3CtoQX5gbpDFrdOJL+KmXEwxJgO91SYwXYn6wFwygZAcU43jxJanbs6Yr+nH1Xm4
- 1Dm3eDzZdf15SzUGDRCLSEO8un5rWHropQQ0Q09UE1RAWpwHAv98IwvD+BROib1Qc
- vi42KTaJQqiz9WcF4t6ANDGHkC6M+edY5PbyJrx4sn6DDzAqjhCBv9q+t3WoP9riC
- TRkT7N5NJSaht+FTTbEGtamnxinl3iJNVxL8ulgRBg/VU1abwzVlkQawDgjjTkrY9
- F8TyQjBPhkh44RjLKw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([46.114.104.96]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mr9Fs-1tnHSE3Kti-00j6NH; Sat, 12
- Oct 2024 00:01:57 +0200
-Date: Sat, 12 Oct 2024 00:01:54 +0200
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Francis Laniel <francis.laniel@amarulasolutions.com>
-Subject: Re: [PATCH v4 4/5] efi: Reserve some memory for initial use
-User-Agent: K-9 Mail for Android
-In-Reply-To: <20241011212126.747741-5-sjg@chromium.org>
-References: <20241011212126.747741-1-sjg@chromium.org>
- <20241011212126.747741-5-sjg@chromium.org>
-Message-ID: <71ECC011-77EC-4308-AFE5-0E301BC27F84@gmx.de>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-6cbcc2bd800so22354386d6.0
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 15:16:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1728684999; x=1729289799; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=aK+qm4/YKBxR+ylO/mCAXjUsh6jMyivBp1QoyUctD/Q=;
+ b=l4gbrpcwKa3p/Pypc/BFup0Q7SNsrWYZgatThXyJOILfvcu9BzNpRPP0gt2USL1/yu
+ HvE+sJBHyJIB27PVuWj2/ietw2di/IOEX6YNGf2abNR8l4xpXBFMlT/0TOspDDHHEG77
+ YRTYO8L0gv+qOHgM6P9wHK1aVqvt+YakhXotU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728684999; x=1729289799;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=aK+qm4/YKBxR+ylO/mCAXjUsh6jMyivBp1QoyUctD/Q=;
+ b=jSr2K69kBZAaeVih1GViKtquZrTsErt0NSgloPgBu3pszhQrU/U8AhA2sOdP/OuKk1
+ ZbLCfc2Ld6fLmWJMqAUGPmz3HGcxJXhUEM1gR3ytfeC8KPOwWJqkMjuUfNN3ab9iwPmC
+ d2Mr7BQU8vtw4HqW2n1OeQSAfV1CMlzA6aHcSBmEVIRDeoQ1ZRPe8uPkNYaLPKN7wHfx
+ ER6svthpeZawZpwAFpEffFF0JOBRw3rExSg+TnaIksbGn9L1yHjnZ2vfEKd65Eln+jIX
+ QIgOfgZ5vpPDLBz5bHv4GfsXQyRc8sVzSxjstDI3wYP16G+ZNK6iAztoLoArrwnPv2km
+ IFxg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUJpCQwIYCMJKSl9HWzug/eaRyPcNCdAt7FmjqvFdTm0zRhGdQugV3UY1n5r7wnuh4YGE1uW9A=@lists.denx.de
+X-Gm-Message-State: AOJu0YxG3K3OOX418gILo9wGiQ8F9XsGKflDV++SleTkDk95BmbRlINq
+ xZHz4kKJX1XqdIi40EWmgwwRYGgq4czF54VBIu2mgcLHCEEiRU2Z+rQ/MwVmfJzYBUatUl4tzM0
+ WaCjDM8y8wfrLG4ajsugT1/Hmr7wJye+v2ydD
+X-Google-Smtp-Source: AGHT+IHjsYhEnHQMSOHffVW8dArcFTy8ddU6KQ7+fzj6ouURknPJ+f41gfUBlv49MR1IF4d0l5r8uXcs6GXZDb0rAUA=
+X-Received: by 2002:a05:6214:20e8:b0:6cb:5bde:d78 with SMTP id
+ 6a1803df08f44-6cbe520243bmr153437846d6.3.1728684999427; Fri, 11 Oct 2024
+ 15:16:39 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
+References: <20240926215950.1265143-1-sjg@chromium.org>
+ <20240926215950.1265143-9-sjg@chromium.org>
+ <08596845-c0b1-4557-9993-cde57420560d@gmx.de>
+ <20241001002442.GC4737@bill-the-cat>
+ <79d98f61-7659-47a3-938f-1eb79f402edf@gmx.de>
+ <20241001180235.GH4737@bill-the-cat>
+ <e02a9912-7260-4e0a-81d8-c7814907a791@gmx.de>
+In-Reply-To: <e02a9912-7260-4e0a-81d8-c7814907a791@gmx.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 11 Oct 2024 16:16:28 -0600
+Message-ID: <CAFLszTj6Zuj0b3kEA4OKOQY_D5XMWmtbn+HJXik+xSrB7LUjLA@mail.gmail.com>
+Subject: Re: [PATCH v6 08/12] efi_loader: Disable ANSI output for tests
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:W58Ds9hZlsbS2/jK+IYkHROtx3hKt156jZH5UQu9acWXXJoI9cV
- 5DmMVLUquTJL6LLhvaJcAyP000kOYEn0bnpJZetzTcN+E1LwwMlIrFIRbGmKqzIFyNlZZ4T
- 4vG59uTu5wbP75avGEYqOA2oPSRTG5XSS6c6vfg4BctRoOTvCuQ1isUMXf/XtSP7B6M4dp5
- OCFitP8nBzOI99TATl5JQ==
-UI-OutboundReport: notjunk:1;M01:P0:i/RRv2+ndj4=;uD+bSIuENQZdQlPcI53RNhB146f
- phzY0S6yxFk6A26Eji0MvJYSog4Z3B5GbfyDtAhgSXIDV4EfPWTxmEmtzYPn8CCs9+5yXOCHE
- Vqj+Z2hiaFoUplyLScfPa4DUKLUpcgE2VuPmwmSxmfF5a2ENLeMLatG7C99vosjzFWAdnVax2
- 1s0MMfXVCGCAxWvk79YBdcuKSVKJ/dfGZ/mRQp8h7Dh9nVlZHVuPl2s1utgl53OBq8Kp2yTsD
- tJ6MIcV5BMg9hh2C1ouhFUCl4PYbddxQI1RRnfEA2F7cHuMCksreb69qOtBxdXVMqcvXJzrLC
- edkB9No+mQeVZIDQ0rUgi6YMh7zzMmqdMFaDRaSiOUo49UZ3LlBmp+8dUyhM/lgKKjfsU+Vfr
- eTXWahmKhZc0Z1UPTRrRUOqAtqrE1z1yGJICmLCkt7/pHwkpFswZBtf5TfK01SqC0poglG0Kd
- 98WPzVlXKwA2JC7hNXHfq8fPBFq6MuDrCMnyOpmyg5F+hFiCLI6qDx2r5VXuZhPR/rOGa4nmL
- UeX5JxdxF/KMNOhjUv8gyQdhblpzvP31UY2ZD1wINi24FnaCkmPw8KNAaqMZtn3Ze6DuPk5Gy
- GaELTk8f/Y9nqQm/1j0Ma2xJaBqcSTr6G8YL0KpcGptd3y0jgf5Me8kXATn+lOxWKWEpEJPty
- oAupdGDG43gM9vAyspDQs3usodm1LbOn7yv5C4Ylg8F7ZwoPieDdFYetVHUIaEp0xQ17NmtMZ
- LPhvdRUe8OuzGy8f05jx4soq9Ewgwnj/0Yn3ws00qFrcDhVrsNdYh70ecKr53pA4DoxzSY+pr
- nWpPjNsmoZuipmrDQrAtIaaA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,110 +93,277 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Heinrich, Tom,
 
-
-Am 11=2E Oktober 2024 23:21:25 MESZ schrieb Simon Glass <sjg@chromium=2Eor=
-g>:
->The 'point of cooperation' is where U-Boot starts allowing EFI to use
->memory outside of the U-Boot region=2E Until that point, it is desirable
->to keep more below U-Boot free for loading images=2E
+On Tue, 1 Oct 2024 at 16:18, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote=
+:
 >
->Reserve a small region for this purpose=2E
+> On 10/1/24 20:02, Tom Rini wrote:
+> > On Tue, Oct 01, 2024 at 04:34:54AM +0200, Heinrich Schuchardt wrote:
+> >> On 10/1/24 02:24, Tom Rini wrote:
+> >>> On Tue, Oct 01, 2024 at 01:38:56AM +0200, Heinrich Schuchardt wrote:
+> >>>> On 26.09.24 23:59, Simon Glass wrote:
+> >>>>> We don't want ANSI characters written in tests since it is a pain t=
+o
+> >>>>> check the output with ut_assert_nextline() et al.
+> >>>>>
+> >>>>> Provide a way to tests to request that ANSI characters not be sent.
+> >>>>>
+> >>>>> Add a proper function comment while we are here, to encourage other=
+s.
+> >>>>>
+> >>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
+> >>>>
+> >>>> Please, consider prior review before resubmitting patches.
+> >>>>
+> >>>> As responded to all prior submissions:
+> >>>>
+> >>>> We want to test the code running on actual machines.
+> >>>> We don't want to have sandbox code everywhere.
+> >>>>
+> >>>> I cannot see any test that is not passing due to the current behavio=
+r.
+> >>>
+> >>> The pytests for the EFI selftests are unreliable for me, on Raspberry=
+ Pi
+> >>> 3, more often in 32bit mode than 64bit mode, but I feel like I see it
+> >>> there too. And when they fail, the console log is full of ANSI escape
+> >>> sequences. Is this specific test a test you run regularly on real
+> >>> hardware?
+> >>>
+> >>
+> >> It is not only the EFI test but also pytest adding color to the consol=
+e
+> >> output.
+> >
+> > Alright, so at least for the problems I have _today_, I've figured it
+> > out, and the problem is that the watchdog test fails too quickly:
+> >
+> > [snip]
+> > test/py/tests/test_efi_selftest.py ..F
+> > test/py/u_boot_console_base.p
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D FAILURES =3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D
+> > ______________________ test_efi_selftest_watchdog_reboot ______________=
+_________
+> > test/py/tests/test_efi_selftest.py:61: in test_efi_selftest_watchdog_re=
+boot
+> >      u_boot_console.restart_uboot()
+> > test/py/u_boot_console_base.py:478: in restart_uboot
+> >      self.ensure_spawned(expect_reset)
+> > test/py/u_boot_console_base.py:442: in ensure_spawned
+> >      self.wait_for_boot_prompt(loop_num =3D loop_num)
+> > test/py/u_boot_console_base.py:195: in wait_for_boot_prompt
+> >      raise Exception('Bad pattern found on console: ' +
+> > E   Exception: Bad pattern found on console: spl_signon
+> > ----------------------------- Captured stdout call --------------------=
+---------
+> > =3D> setenv efi_selftest list
+> > =3D> =3D> bootefi selftest
+> >  7 [r [999;999H [6n 8No EFI system partition
+> > No EFI system partition
+> > Failed to persist EFI variables
+> > No EFI system partition
+> > Failed to persist EFI variables
+> > No EFI system partition
+> > Failed to persist EFI variables
+> >
+> > Available tests:
+> > 'block image transfer' - on request
+> > 'block device'
+> > 'configuration tables'
+> > 'controllers'
+> > 'crc32'
+> > 'device path'
+> > 'device path utilities protocol'
+> > 'conformance profile table'
+> > 'event groups'
+> > 'event services'
+> > 'exception' - on request
+> > 'ExitBootServices'
+> > 'device tree'
+> > 'graphical output'
+> > 'HII database protocols'
+> > 'load file protocol'
+> > 'loaded image'
+> > 'load image from file'
+> > 'mem'
+> > 'memory'
+> > 'open protocol'
+> > 'manage protocols'
+> > 'register protocol notify'
+> > 'reset system' - on request
+> > 'reset system runtime' - on request
+> > 'real time clock'
+> > 'simple network protocol'
+> > 'start image return'
+> > 'start image exit'
+> > 'text input' - on request
+> > 'extended text input' - on request
+> > 'text output'
+> > 'task priority levels'
+> > 'unicode collation'
+> > 'variables'
+> > 'variables at runtime'
+> > 'virtual address map'
+> > 'watchdog timer'
+> > 'watchdog reboot' - on request
+> > =3D> =3D> setenv efi_selftest watchdog reboot
+> > =3D> =3D> bootefi selftest
+> >  [1;37;40m
+> > Testing EFI API implementation
+> >  [0;37;40m [1;37;40m
+> > Selected test: 'watchdog reboot'
+> >  [0;37;40m [1;34;40m
+> > Setting up 'watchdog reboot'
+> >  [0;37;40m [1;32;40mSetting up 'watchdog reboot' succeeded
+> >  [0;37;40m [1;34;40m
+> > Executing 'watchdog reboot'
+> >  [0;37;40m
+> > EFI: Watchdog timeout
+> > resetting ...
+> > +u-boot-test-reset am64x_evm_a53 na
+> > Selected role am64-sk from configuration file
+> > Selected role am64-sk from configuration file
+> > connecting to NetworkSerialPort(target=3DTarget(name=3D'am64-sk', env=
+=3DEnvironment(config_file=3D'/home/trini/u-boot/lg_env.yaml')), name=3D'US=
+BSerialPort', state=3D<BindingState.bound: 1>, avail=3DTrue, host=3D'ti-lab=
+-host', port=3D57479, speed=3D115200, protocol=3D'rfc2217') calling microco=
+m -s 115200 -t ti-lab-host:57479
+> > connected to 192.168.116.10 (port 57479)
+> > Escape character: Ctrl-\
+> > Type the escape character to get to the prompt.
+> >
+> > U-Boot SPL 2024.10-rc5-00022-g17da9795c115 (Oct 01 2024 - 14:29:10 +000=
+0)
+> > SYSFW ABI: 3.1 (firmware rev 0x0009 '9.2.7--v09.02.07 (Kool Koala)')
+> > EEPROM not available at 0x50, trying to read at 0x51
+> > SPL initial stack usage: 13368 bytes
+> > Trying to boot from MMC2
+> > Loading Environment from MMC... MMC Device 0 not found
+> > *** Warning - No MMC card found, using default environment
+> >
+> > Starting ATF on ARM64 core...
+> >
+> > NOTICE:  BL31: v2.10.0(release):v2.10.0-729-gc8be7c08c
+> > NOTICE:  BL31: Built : 13:50:07, Apr 24 2024
+> > I/TC:
+> > I/TC: OP-TEE version: 4.2.0-22-g16fbd46d2 (gcc version 13.2.0 (GCC)) #2=
+ Wed Apr 24 19:50:23 UTC 2024 aarch64
+> > I/TC: WARNING: This OP-TEE configuration might be insecure!
+> > I/TC: WARNING: Please check https://optee.readthedocs.io/en/latest/arch=
+itecture/porting_guidelines.html
+> > I/TC: Primary CPU initializing
+> > I/TC: GIC redistributor base address not provided
+> > I/TC: Assuming default GIC group status and modifier
+> > I/TC: SYSFW ABI: 3.1 (firmware rev 0x0009 '9.2.7--v09.02.07 (Kool Koala=
+)')
+> > I/TC: HUK Initialized
+> > I/TC: Activated SA2UL device
+> > I/TC: Fixing SA2UL firewall owner for GP device
+> > I/TC: Enabled firewalls for SA2UL TRNG device
+> > I/TC: SA2UL TRNG initialized
+> > I/TC: SA2UL Drivers initialized
+> > I/TC: Primary CPU switching to normal world boot
+> >
+> > U-Boot SPL 2024.10-rc5-00022-g17da9795c115 (Oct 01 2024 - 14:31:31 +000=
+0)
+> > SYSFW ABI: 3.1 (firmware rev 0x0009 '9.2.7--v09.02.07 (Kool Koala)')
+> > Trying to boot from MMC2
+> > ?
+> > U-Boot SPL 2024.10-rc5-00022-g17da9795c115 (Oct 01 2024 - 14:29:10 +000=
+0)
+> > Resetting on cold boot to workaround ErrataID:i2331
+> > Please resend tiboot3.bin in case of UART/DFU boot
+> > resetting ...
+> >
+> > U-Boot SPL 2024.10-rc5-00022-g17da9795c115 (Oct 01 2024 - 14:29:10 +000=
+0)
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D short test summary info =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> > SKIPPED [47] test/py/conftest.py:512: board "am64x_evm_a53" not support=
+ed
+> > SKIPPED [5] test/py/conftest.py:531: .config feature "cmd_avb" not enab=
+led
+> > SKIPPED [1] test/py/conftest.py:531: .config feature "optee_ta_avb" not=
+ enabled
+> > SKIPPED [1] test/py/conftest.py:531: .config feature "cmd_bootstage" no=
+t enabled
+> > SKIPPED [2] test/py/conftest.py:531: .config feature "bootstage_stash" =
+not enabled
+> > SKIPPED [1] test/py/tests/test_dfu.py:114: got empty parameter set ['en=
+v__usb_dev_port'], function test_dfu at /home/trini/u-boot/u-boot/test/py/t=
+ests/test_dfu.py:113
+> > SKIPPED [1] test/py/tests/test_efi_fit.py:401: No env__efi_fit_tftp_fil=
+e binary specified in environment
+> > FAILED test/py/tests/test_efi_selftest.py::test_efi_selftest_watchdog_r=
+eboot
+> > !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!=
+!!!!!!!!!
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D 1 failed, 17 pas=
+sed, 58 skipped in 58.92s =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+> >
+> > I thought it was the escape sequences confusing the check rather than
+> > the platform takes longer than expected to provide whatever the expecte=
+d
+> > string is. Another TI K3 platform gets slightly farther along before
+> > failing the same way. I'm going back to looping over Pis to see if they
+> > fail in a way that they used to in my previous lab setup.
+> >
+>
+> The relevant error message is:
+>
+>      E   Exception: Bad pattern found on console: spl_signon
+>
+> The error occurs because the substring
+>
+>      U-Boot SPL 2024.10
+>
+> occurs multiple times during the reboot process. This is not expected in
+> wait_for_boot_prompt().
+>
+> The EFI test is resetting the board and then calling restart_uboot()
+> which by itself does another reset.
 
-Your commit message provides no clue why this should be needed=2E
+We had this discussion a while back and I was very-much opposed to
+restarting U-Boot within a test. It has set a bad precedent and now
+several tests do it.
 
-If we ensure thst LMB is up before EFI initialization, the EFI subsystem w=
-ill be able to allocate memory from there=2E
-
-Best regards
-
-Heinrich
-
+This is another EFI thing that I would like to resolve at some point.
+As previously mentioned, I understand we might be one test to check
+that U-Boot does actually kick up a firmware update when started, but
+I don't think we should be restarting willy-nilly.
 
 >
->Signed-off-by: Simon Glass <sjg@chromium=2Eorg>
->---
+> While the watchdog triggered reboot is running thee test environment may
+> need some time before triggering a reboot itself. This may lead to the
+> observed duplicate output of the U-Boot greeter which is recorded as an
+> error.
 >
->(no changes since v1)
+> Maybe we should directly call wait_for_boot_prompt(loop_num =3D 2).
 >
-> include/asm-generic/global_data=2Eh |  6 ++++++
-> lib/efi_loader/efi_memory=2Ec       | 21 +++++++++++++++++++++
-> test/py/tests/test_event_dump=2Epy  |  1 +
-> 3 files changed, 28 insertions(+)
 >
->diff --git a/include/asm-generic/global_data=2Eh b/include/asm-generic/gl=
-obal_data=2Eh
->index d6c15e2c406=2E=2E20705be14dd 100644
->--- a/include/asm-generic/global_data=2Eh
->+++ b/include/asm-generic/global_data=2Eh
->@@ -443,6 +443,12 @@ struct global_data {
-> 	 */
-> 	struct upl *upl;
-> #endif
->+#if CONFIG_IS_ENABLED(EFI_LOADER)
->+	/**
->+	 * @efi_region: Start of EFI's early-memory region
->+	 */
->+	ulong efi_region;
->+#endif
-> };
-> #ifndef DO_DEPS_ONLY
-> static_assert(sizeof(struct global_data) =3D=3D GD_SIZE);
->diff --git a/lib/efi_loader/efi_memory=2Ec b/lib/efi_loader/efi_memory=2E=
-c
->index 50cb2f3898b=2E=2E9cc33397371 100644
->--- a/lib/efi_loader/efi_memory=2Ec
->+++ b/lib/efi_loader/efi_memory=2Ec
->@@ -24,6 +24,12 @@ DECLARE_GLOBAL_DATA_PTR;
-> /* Magic number identifying memory allocated from pool */
-> #define EFI_ALLOC_POOL_MAGIC 0x1fe67ddf6491caa2
->=20
->+/*
->+ * Amount of memory to reserve for EFI before relocation=2E This must be=
- a
->+ * multiple of EFI_PAGE_SIZE
->+ */
->+#define EFI_EARLY_REGION_SIZE	SZ_256K
->+
-> efi_uintn_t efi_memory_map_key;
->=20
-> struct efi_mem_list {
->@@ -944,3 +950,18 @@ int efi_memory_init(void)
->=20
-> 	return 0;
-> }
->+
->+static int reserve_efi_region(void)
->+{
->+	/*
->+	 * Reserve some memory for EFI=2E Since pool allocations consume 4KB ea=
-ch
->+	 * and there are three allocations, allow 16KB of memory, enough for
->+	 * four=2E This can be increased as needed=2E
->+	 */
->+	gd->efi_region =3D ALIGN_DOWN(gd->start_addr_sp - EFI_EARLY_REGION_SIZE=
-,
->+				    SZ_4K);
->+	gd->start_addr_sp =3D gd->efi_region;
->+
->+	return 0;
->+}
->+EVENT_SPY_SIMPLE(EVT_RESERVE, reserve_efi_region);
->diff --git a/test/py/tests/test_event_dump=2Epy b/test/py/tests/test_even=
-t_dump=2Epy
->index e282c67335c=2E=2Ee36fc6a1586 100644
->--- a/test/py/tests/test_event_dump=2Epy
->+++ b/test/py/tests/test_event_dump=2Epy
->@@ -20,5 +20,6 @@ EVT_FT_FIXUP          bootmeth_vbe_ft_fixup           =
-=2E*boot/vbe_request=2Ec:=2E*
-> EVT_FT_FIXUP          bootmeth_vbe_simple_ft_fixup    =2E*boot/vbe_simpl=
-e_os=2Ec:=2E*
-> EVT_LAST_STAGE_INIT   install_smbios_table            =2E*lib/efi_loader=
-/efi_smbios=2Ec:=2E*
-> EVT_MISC_INIT_F       sandbox_early_getopt_check      =2E*arch/sandbox/c=
-pu/start=2Ec:=2E*
->+EVT_RESERVE           reserve_efi_region              =2E*lib/efi_loader=
-/efi_memory=2Ec:=2E*
-> EVT_TEST              h_adder_simple                  =2E*test/common/ev=
-ent=2Ec:'''
->     assert re=2Ematch(expect, out, re=2EMULTILINE) is not None
+> diff --git a/test/py/tests/test_efi_selftest.py
+> b/test/py/tests/test_efi_selftest.py
+> index 43f24245582..c3ee1888afb 100644
+> --- a/test/py/tests/test_efi_selftest.py
+> +++ b/test/py/tests/test_efi_selftest.py
+> @@ -58,7 +58,7 @@ def test_efi_selftest_watchdog_reboot(u_boot_console):
+>       u_boot_console.run_command(cmd=3D'bootefi selftest',
+> wait_for_prompt=3DFalse)
+>       if u_boot_console.p.expect(['resetting', 'U-Boot']):
+>           raise Exception('Reset failed in \'watchdog reboot\' test')
+> -    u_boot_console.restart_uboot()
+> +    u_boot_console.wait_for_boot_prompt(loop_num =3D 2)
+>
+>   @pytest.mark.buildconfigspec('cmd_bootefi_selftest')
+>   def test_efi_selftest_text_input(u_boot_console):
+>
+> Thanks for bringing the issue to my attention.
+
+Regards,
+Simon
