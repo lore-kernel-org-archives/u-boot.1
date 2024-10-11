@@ -4,85 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BC8AD0EE3F
-	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 22:28:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77B41D0EE3F
+	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 22:32:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD6C888D99;
-	Sat, 12 Oct 2024 00:28:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E62AC893BA;
+	Sat, 12 Oct 2024 00:32:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UNC4qYPD";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JEQ2gPka";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BBADE893CC; Sat, 12 Oct 2024 00:28:15 +0200 (CEST)
-Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
- [IPv6:2607:f8b0:4864:20::832])
+ id 08F6489402; Sat, 12 Oct 2024 00:32:35 +0200 (CEST)
+Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
+ [IPv6:2607:f8b0:4864:20::72a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CECE88D72
- for <u-boot@lists.denx.de>; Sat, 12 Oct 2024 00:28:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D97A488E74
+ for <u-boot@lists.denx.de>; Sat, 12 Oct 2024 00:32:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x832.google.com with SMTP id
- d75a77b69052e-460407b421bso18981991cf.3
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 15:28:13 -0700 (PDT)
+Received: by mail-qk1-x72a.google.com with SMTP id
+ af79cd13be357-7a9c3a4e809so189870785a.2
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 15:32:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1728685692; x=1729290492; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1728685952; x=1729290752; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=oqsidmOxJ87Q2oCtiUIpzxVTu+p8F3nRmLQ6R1uxIYg=;
- b=UNC4qYPDUnpQWWRFKl4ZW17t9hOPD1oR+nLTZOhGiY0B879AHzNjnY8HYao0aF/VaK
- JiZ59h5590sDp6zDB1KNA6K84BjuWVZv+XvOGExva0m2ZTWqWoW1dtoID1mQ0FFWnBY8
- YdsxsPrqcV9dJWPiIQWcTL0bZVJH+V6UaDQlc=
+ bh=BToncNPr8EW0DhvxJIp+f0LyfPT90zm+RurpEJ/XIB8=;
+ b=JEQ2gPkae7MNv2oCrc8XaXgYYwiKVjePbSSi+lq1qn3SKKIVSdgwiuvq/PiBDKuyDy
+ xKnE/wtRwLxiNUy1CxL25NrDF0j+Wm8FKuJhp5TWnYPcj8Jm43SkNXG0qFuYkSJ01jDB
+ XtP6uwd6x/3m6+4OJonX70t58VLXhljHQd33Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728685692; x=1729290492;
+ d=1e100.net; s=20230601; t=1728685952; x=1729290752;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oqsidmOxJ87Q2oCtiUIpzxVTu+p8F3nRmLQ6R1uxIYg=;
- b=Ae2ujH5tTX8zGxA6tqglkSOe4HqcWupkQZvg3i7cn0h++DnpHz7lKUUE2+Z8GJnmVM
- z30RZC/30JjKFDo2vuM0IY+7JEgKz4ZGZD5qhoF5niEeasVclRhVRUj31VHcPlu+B7bT
- CmSV0AnKdETu/btl7mapz5C2yAHZ7Uc5/fHxSmimCYDaAACgATxYsdm18DFm2nwKNnt7
- EUvbCx+p1/TeBFj/HMzl9GUCJ/DkNYBNZNqjhgUMI+EXcaCw6bxMm0aZCDRRqOsTs1Ul
- 8vxVyG3p3T3L/XdF82grxQlebUu+ZJfMQ7OnAWPlqkrmAfhu2tnnRU8d04ltIXeYwOtv
- Y3+w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUYvlen5G2WRfFwvFxtQiGc5Xsoz8Jr/kjeXhjmEt5AteiiJJeXXzIGGzVELbRD/7yVpsr/HbA=@lists.denx.de
-X-Gm-Message-State: AOJu0YxyPZ98ay/2Oe5DX00UKN+4yhRYCMmRr25eh8Zp+ek8zk0M7nSx
- vru82R/S9wZf6aK4TnvR2hBveWwCNhYNUxHiVypJFy9W/s4ib56AxHboBlf/4q0=
-X-Google-Smtp-Source: AGHT+IHm0I/o1ihyzFsVhTuHR4Vnl+eH47YxN7RpVFPbSwNIMUYR/t0ArSEVXhnJC61XPTmzMYysEA==
-X-Received: by 2002:a05:622a:1827:b0:45f:211:b319 with SMTP id
- d75a77b69052e-4604bbd9a36mr56956041cf.36.1728685692396; 
- Fri, 11 Oct 2024 15:28:12 -0700 (PDT)
+ bh=BToncNPr8EW0DhvxJIp+f0LyfPT90zm+RurpEJ/XIB8=;
+ b=OthHuScxALoV3ybViDvij+DloN7Ha7JD16b/b6ajZ9UqvK5/Y3s5Lv2C1kLvEF0CBE
+ C1b6GPE6i9am20oVTs4wuzaqme4lVGlMwTXg0Scosfu0bUtvkZ+LpNdFqa1GgEs3vd/T
+ WGy2WrsUWh2yx1zEpAfqFcgtf5ZF/5lkxm3w817QyVrhWUlEzY8pOgANo6M0wxEeXCXp
+ nil2B8eejTdwZLSoHcnVGaEL2FZjHrQ+YhsCFWaBpeDU68ON/XVwDo4UKnM/WCQUfoxu
+ 0JFT55afNJ+V78s0KYtWRbgWaMWktglqeDO40fVFQw+mJ0wW1k+korMW+0/ODvHUbsr8
+ LrXA==
+X-Gm-Message-State: AOJu0Yzj0KEpUqMsbAqY1CvEF43Zh+DDslTYoiWcEQvbIj1Km63HTPxq
+ th7UiscXEIWhz445dieUbLSeAPhsKcjjayJDCZ7A2whcPdqsFtSzHlDvG8m4KME=
+X-Google-Smtp-Source: AGHT+IHtrBfzLmjqCL7DpDT2OS7X4O2O4//P5Y+5VaXl1aZW4bVT17BAGyw1GUMHJdeBsq9C1rIZJw==
+X-Received: by 2002:a05:620a:178e:b0:7af:e995:7a67 with SMTP id
+ af79cd13be357-7b1210342c9mr117026285a.66.1728685951695; 
+ Fri, 11 Oct 2024 15:32:31 -0700 (PDT)
 Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4604287f9e3sm19994751cf.75.2024.10.11.15.28.10
+ d75a77b69052e-460427897e4sm20126841cf.8.2024.10.11.15.32.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Oct 2024 15:28:11 -0700 (PDT)
-Date: Fri, 11 Oct 2024 16:28:07 -0600
+ Fri, 11 Oct 2024 15:32:30 -0700 (PDT)
+Date: Fri, 11 Oct 2024 16:32:27 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v6 08/12] efi_loader: Disable ANSI output for tests
-Message-ID: <20241011222807.GZ14210@bill-the-cat>
-References: <20240926215950.1265143-1-sjg@chromium.org>
- <20240926215950.1265143-9-sjg@chromium.org>
- <08596845-c0b1-4557-9993-cde57420560d@gmx.de>
- <20241001002442.GC4737@bill-the-cat>
- <79d98f61-7659-47a3-938f-1eb79f402edf@gmx.de>
- <20241001180235.GH4737@bill-the-cat>
- <e02a9912-7260-4e0a-81d8-c7814907a791@gmx.de>
- <CAFLszTj6Zuj0b3kEA4OKOQY_D5XMWmtbn+HJXik+xSrB7LUjLA@mail.gmail.com>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [PATCH v6 12/12] test: efi: boot: Add a test for the efi bootmeth
+Message-ID: <20241011223227.GA630742@bill-the-cat>
+References: <20240926220226.1265965-9-sjg@chromium.org>
+ <20240926220226.1265965-13-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="8IHa1EVP5+pQhD7j"
+ protocol="application/pgp-signature"; boundary="eNSxdQ1PqFXy/fqE"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTj6Zuj0b3kEA4OKOQY_D5XMWmtbn+HJXik+xSrB7LUjLA@mail.gmail.com>
+In-Reply-To: <20240926220226.1265965-13-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,65 +93,137 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---8IHa1EVP5+pQhD7j
+--eNSxdQ1PqFXy/fqE
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Oct 11, 2024 at 04:16:28PM -0600, Simon Glass wrote:
+On Fri, Sep 27, 2024 at 12:02:23AM +0200, Simon Glass wrote:
 
-> Hi Heinrich, Tom,
+> Add a simple test of booting with the EFI bootmeth, which runs the app
+> and checks that it can call 'exit boot-services' (to check that all the
+> device-removal code doesn't break anything) and then exit back to
+> U-Boot.
 >=20
-> On Tue, 1 Oct 2024 at 16:18, Heinrich Schuchardt <xypron.glpk@gmx.de> wro=
-te:
+> This uses a disk image containing the testapp, ready for execution by
+> sandbox when needed.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+
+So lets go to the problem point. What asserts here fail due to ANSI
+escape codes being in the output and needing to be filtered out?
+
 [snip]
-> > The relevant error message is:
-> >
-> >      E   Exception: Bad pattern found on console: spl_signon
-> >
-> > The error occurs because the substring
-> >
-> >      U-Boot SPL 2024.10
-> >
-> > occurs multiple times during the reboot process. This is not expected in
-> > wait_for_boot_prompt().
-> >
-> > The EFI test is resetting the board and then calling restart_uboot()
-> > which by itself does another reset.
->=20
-> We had this discussion a while back and I was very-much opposed to
-> restarting U-Boot within a test. It has set a bad precedent and now
-> several tests do it.
->=20
-> This is another EFI thing that I would like to resolve at some point.
-> As previously mentioned, I understand we might be one test to check
-> that U-Boot does actually kick up a firmware update when started, but
-> I don't think we should be restarting willy-nilly.
-
-We should indeed not be restarting willy-nilly. And we don't. But the
-test for "can we restart the system" must restart the system. That's the
-test. It's not changing. Testing if we can restart the system by faking
-the restart is not testing restarting the system.
+> diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
+> index e05103188b4..da2ee1ab345 100644
+> --- a/test/boot/bootflow.c
+> +++ b/test/boot/bootflow.c
+> @@ -13,6 +13,7 @@
+>  #include <cli.h>
+>  #include <dm.h>
+>  #include <efi_default_filename.h>
+> +#include <efi_loader.h>
+>  #include <expo.h>
+>  #ifdef CONFIG_SANDBOX
+>  #include <asm/test.h>
+> @@ -31,6 +32,9 @@ extern U_BOOT_DRIVER(bootmeth_android);
+>  extern U_BOOT_DRIVER(bootmeth_cros);
+>  extern U_BOOT_DRIVER(bootmeth_2script);
+> =20
+> +/* Use this as the vendor for EFI to tell the app to exit boot services =
+*/
+> +static u16 __efi_runtime_data test_vendor[] =3D u"U-Boot testing";
+> +
+>  static int inject_response(struct unit_test_state *uts)
+>  {
+>  	/*
+> @@ -1205,3 +1209,62 @@ static int bootflow_android(struct unit_test_state=
+ *uts)
+>  	return 0;
+>  }
+>  BOOTSTD_TEST(bootflow_android, UTF_CONSOLE);
+> +
+> +/* Test EFI bootmeth */
+> +static int bootflow_efi(struct unit_test_state *uts)
+> +{
+> +	/* disable ethernet since the hunter will run dhcp */
+> +	test_set_eth_enable(false);
+> +
+> +	/* make USB scan without delays */
+> +	test_set_skip_delays(true);
+> +
+> +	bootstd_reset_usb();
+> +
+> +	/* Avoid outputting ANSI characters which mess with our asserts */
+> +	efi_console_set_ansi(false);
+> +
+> +	ut_assertok(bootstd_test_drop_bootdev_order(uts));
+> +	ut_assertok(run_command("bootflow scan", 0));
+> +	ut_assert_skip_to_line(
+> +		"Bus usb@1: scanning bus usb@1 for devices... 5 USB Device(s) found");
+> +
+> +	ut_assertok(run_command("bootflow list", 0));
+> +
+> +	ut_assert_nextlinen("Showing all");
+> +	ut_assert_nextlinen("Seq");
+> +	ut_assert_nextlinen("---");
+> +	ut_assert_nextlinen("  0  extlinux");
+> +	ut_assert_nextlinen(
+> +		"  1  efi          ready   usb_mass_    1  usb_mass_storage.lun0.boo /=
+EFI/BOOT/BOOTSBOX.EFI");
+> +	ut_assert_nextlinen("---");
+> +	ut_assert_skip_to_line("(2 bootflows, 2 valid)");
+> +	ut_assert_console_end();
+> +
+> +	ut_assertok(run_command("bootflow select 1", 0));
+> +	ut_assert_console_end();
+> +
+> +	systab.fw_vendor =3D test_vendor;
+> +
+> +	ut_asserteq(1, run_command("bootflow boot", 0));
+> +	ut_assert_nextline(
+> +		"** Booting bootflow 'usb_mass_storage.lun0.bootdev.part_1' with efi");
+> +	if (IS_ENABLED(CONFIG_LOGF_FUNC))
+> +		ut_assert_skip_to_line("       efi_run_image() Booting /\\EFI\\BOOT\\B=
+OOTSBOX.EFI");
+> +	else
+> +		ut_assert_skip_to_line("Booting /\\EFI\\BOOT\\BOOTSBOX.EFI");
+> +
+> +	/* TODO: Why the \r ? */
+> +	ut_assert_nextline("U-Boot test app for EFI_LOADER\r");
+> +	ut_assert_nextline("Exiting boot sevices");
+> +	if (IS_ENABLED(CONFIG_LOGF_FUNC))
+> +		ut_assert_nextline("     do_bootefi_exec() ## Application failed, r =
+=3D 5");
+> +	else
+> +		ut_assert_nextline("## Application failed, r =3D 5");
+> +	ut_assert_nextline("Boot failed (err=3D-22)");
+> +
+> +	ut_assert_console_end();
+> +
+> +	return 0;
+> +}
+> +BOOTSTD_TEST(bootflow_efi, UTF_CONSOLE);
 
 --=20
 Tom
 
---8IHa1EVP5+pQhD7j
+--eNSxdQ1PqFXy/fqE
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcJpnQACgkQFHw5/5Y0
-tyxTcAv/YOf9pJH8KbQAV91UdtbiCNeoezQrICpITUuUOBEJ2Hs5i+0q7Aa8ubVm
-w2fRThN4CuKwEqgYOf1jmxQ3o4leJXxBCZuuDYHaq7tmHeVuk1xPBdxkUzwqRIfk
-v2FLogl2Z2z3n4ixIh/72ZvtwBpGWszvwMiONxTubSjDIVNq+gAkcMeqhSvLHxGW
-n3P4DdCw4tjsR+6oyBjl3JcqKj3DI24aqydUHQ3NDmiY+GxmwlMPlXA+aCebcOpt
-QghXkXihjCCqjofh1lN5tF7kDlkW3XZW9s7Nc1oVvoApKwNVENi0Kq+eSyT9Qg8H
-eFkMup9sjR18mbCCL4b/Ty10MR9+hfuInlPS9n1IE6ojLpAFy+JSr8N7dycFCSTa
-ev3t+crhH8dI7GWOAsxMQ8LKQpcrNluYtM34Lg9AkKyo5KgsyFEYonQL16TOtiQJ
-GicvicyjRyIbuiptg401IX7348pEeYEmwvmBaCbMnWrqi4ZnXktWtJXo8t4/9+7W
-cZ4dMHKD
-=1zbz
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcJp3sACgkQFHw5/5Y0
+tyzILAv9Ht7nL0M5wmLQ1fxvWHET/fd5HQaA+w5xefvIiLyx/uLXFMJx4XYI3UfL
+DZQz4qWg7c4Qn29y4ltkr69Ock35DFH/aXaTQlmH6dZZAyUV8/LyVN14byCTF0rK
+/oNLiB92J89wr56X3edGpS0Zau6I5f6eZRt4I80TW+MWuUNaQKN38epWK1ULTtgb
+WjJEujBsyq+nEWPKyxj+KD1bZsCoSMvFlsRiFe/EBbAiFtoK5YdV/wrvY2bQAKYY
+1MF7JPCYnhfANqJlJyL39ZAgrhBuY+kqjHUZbBxxWLfF/A128nrqjHWqPk/7URwZ
+VF4RTmAlXkM0dGuPuKWRFF0qTBJWbzhDxe+IDEJH4/2hxJfm6A4SC3CgKw63cbQE
+iLJa3riGWVNIQsPLMmzi8nyYsjUdPFPFTcpiHbp5hTruN9yeGsPF7n7fMwjhluan
+G0QGVdrHUfl/qF+crQlBDLCuYBfb1fJIIs7dTe11ZE74JuediQQ+aWT6D+IdQOWN
+a/0mKuPm
+=WbES
 -----END PGP SIGNATURE-----
 
---8IHa1EVP5+pQhD7j--
+--eNSxdQ1PqFXy/fqE--
