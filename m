@@ -4,91 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA62FD0EE19
-	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 17:31:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 468D2D24470
+	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 17:34:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF51D88FCF;
-	Fri, 11 Oct 2024 19:31:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 903A989291;
+	Fri, 11 Oct 2024 19:34:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jCYfD2QW";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="G4kWRaay";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EAFD5893A6; Fri, 11 Oct 2024 19:31:35 +0200 (CEST)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B7D1B89321; Fri, 11 Oct 2024 19:34:00 +0200 (CEST)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D6E0F88966
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 19:31:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CF45288FCF
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 19:33:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-716a3e50a81so1360422a34.3
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 10:31:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1728667891; x=1729272691; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=TFri9wvnsjLlXJbnB5hi9y1bzVwL1eOv3imEt0wM8lc=;
- b=jCYfD2QWsnf1xdaKOHxVATQu8yag0yhdeQx5RBK6cCFdobIm3bW9867aLElDxigHIw
- bQOmbXRwpY6vwXQQbg6rxLGcFcrNkWfabAUa0IFx/eZeYR4uCUOPWRGEjsTx2n6WFQ2Q
- vscaL9BmqHPRR8huwQwlK5vzFihnrz4y3SUpc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728667891; x=1729272691;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TFri9wvnsjLlXJbnB5hi9y1bzVwL1eOv3imEt0wM8lc=;
- b=j07E1OTFY1n00C+jQVqovesGgVIhuf28SB5+iEDCpFybd7cJKjAK/VjfG653J7bzmE
- cnL4EQsKFglVzO4rZWHfnmrb6wQ+d/G0JZp7qdsuefxZ4oJ0yG252qlwmsuPMqoibF04
- jL5gQ/sp0yqBnuqQqqBMD7zkPVB1zkXKemvefDeIjmPk4oNuMbyBSYn7MaE+bczAs9nP
- TrGoh9/t2QadGG+cMhkCJeFOcr4vjpKW569oWsRSY25Nt5nZX0eVxMFlA0NyrfULcHoW
- iVgfjU0zg9JTCrjzTRUHrLrcnTzd9DEsEL1TvoTOWaZicDMrClt+sTNg22R7GSj5+q6J
- 2M+A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUkIjEOWIRJpS3kh9EmJ0kj7H2Pynw++irMgGQQGeH4BZgUNOhHdQV8ftcV5usGwA/Iaypx6f0=@lists.denx.de
-X-Gm-Message-State: AOJu0YznQA4pxLIopINVeFkSfNLYKsuFdc8uiVVUj4hz++gZ1umvdO6g
- O0JaxpPRqEC8ivzdJojJFl+Zm+z1jME+kW4OS5+YP41kP4lRh/YYl3Sms5FVS1s=
-X-Google-Smtp-Source: AGHT+IF0Yr7q0ALw7dnd3oRRegTSZ6/EezSQNKYxsZ1d1HgBXNTHlwAV9Oz9vVEoe1XbUy0tVqtoQQ==
-X-Received: by 2002:a05:6358:63a7:b0:1c3:71:1891 with SMTP id
- e5c5f4694b2df-1c32baa58d5mr210642555d.10.1728667891482; 
- Fri, 11 Oct 2024 10:31:31 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6cbe85a5816sm17177586d6.21.2024.10.11.10.31.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Oct 2024 10:31:30 -0700 (PDT)
-Date: Fri, 11 Oct 2024 11:31:25 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Oliver Gaskell <Oliver.Gaskell@analog.com>
-Cc: Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Greg Malysa <greg.malysa@timesys.com>,
- Ian Roberts <ian.roberts@timesys.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Marek Vasut <marex@denx.de>, Heiko Schocher <hs@denx.de>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Stefan Roese <sr@denx.de>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- u-boot@lists.denx.de, adsp-linux@analog.com,
- 20240828-sc5xx-upstreaming-patches-v1-0-44d9adfdf327@analog.com,
- Angelo Dureghello <angelo.dureghello@timesys.com>,
- Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
-Subject: Re: [PATCH v2 00/11] drivers: Driver support for ADI SC5xx SoCs
-Message-ID: <20241011173125.GA526760@bill-the-cat>
-References: <20240925-sc5xx-driver-series-v2-0-ad9287c25c08@analog.com>
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
+ [5.147.80.91])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 29BA73F1E0; 
+ Fri, 11 Oct 2024 17:33:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1728668038;
+ bh=vajMN3luEeO8eVYSxsf+bjIZOWBZpP4MbrZa3JhNWJU=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type;
+ b=G4kWRaaySzJYJyBArZ4LuQ0vHzsXsZKbaDJTe2mU+AMCqufUEMHbT540m4gWYo4V5
+ nokwsQJ8D/BJxixcK8N4Lp8ENJT7XqO0tqmRosejuco9czQmRm+3WOLGYfFSVQjGBB
+ 35Inl09mNkkWQ7rHFVNN5W4lYz7ERtfBriiO6GJiMTLp/Dacw3YXU5ASL/wkmLQhh5
+ IuErRDGFAodD58YZL5fSZAObcO/4rv6iiqS16AcKdjopDvMvUP/mxcm0M578GT01tY
+ +p2c5dB18vvrMltvqpQjHHkh1eTAINRoKpYLYZq8bc1osabftua/LtWGaRXee91/7e
+ YIHeoAwJMfbYQ==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
+ u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] efi_loader: provide variable BootOptionSupport
+Date: Fri, 11 Oct 2024 19:33:40 +0200
+Message-ID: <20241011173341.24330-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="eBgD3FCAOXmeOK3i"
-Content-Disposition: inline
-In-Reply-To: <20240925-sc5xx-driver-series-v2-0-ad9287c25c08@analog.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,52 +71,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The UEFI variable BootOptionSupport is required by the UEFI specification
+[1]. It reports if specific types of boot options are honored.
 
---eBgD3FCAOXmeOK3i
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+We don't support any of these extras. So we should set the value 0.
 
-On Wed, Sep 25, 2024 at 01:25:10PM +0100, Oliver Gaskell wrote:
+[1] 3.1.4 Boot Manager Capabilities, UEFI Specification 2.10 Errata A,
 
-> This series adds all of the supported peripheral drivers for the sc5xx
-> series of SoCs from Analog Devices and other drivers that are used by
-> the evaluation kits, such as a GPIO expander used by the EZLITE carrier
-> boards.
->=20
-> This series is based on my earlier patch series:
->   "arm: Initial support for Analog Devices SC5xx boards"
->   20240828-sc5xx-upstreaming-patches-v1-0-44d9adfdf327@analog.com
-> since both that series and this series modify MAINTAINERS.
->=20
-> Note that patches 05, 07 had Reviewed-by tags, but have had minor
-> changes since v1 so these weren't kept.
->=20
-> Signed-off-by: Oliver Gaskell <Oliver.Gaskell@analog.com>
+Cc: Vincent Stehlé <vincent.stehle@arm.com>
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ lib/efi_loader/efi_setup.c | 23 +++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
 
-Please rebase this on top of current master, thanks. Also check that
-each patch is only doing the correct MAINTAINERS change, that's where
-trying to apply this by hand failed for me.
+diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
+index a610e032d2f..05d035f4eb5 100644
+--- a/lib/efi_loader/efi_setup.c
++++ b/lib/efi_loader/efi_setup.c
+@@ -179,6 +179,22 @@ static efi_status_t efi_init_os_indications(void)
+ 				    &os_indications_supported, false);
+ }
+ 
++/**
++ * efi_init_boot_options_support() - indicate supported boot option types
++ */
++static efi_status_t efi_init_boot_options_support(void)
++{
++	u32 boot_options_support = 0;
++
++	return efi_set_variable_int(u"BootOptionSupport",
++				    &efi_global_variable_guid,
++				    EFI_VARIABLE_BOOTSERVICE_ACCESS |
++				    EFI_VARIABLE_RUNTIME_ACCESS |
++				    EFI_VARIABLE_READ_ONLY,
++				    sizeof(boot_options_support),
++				    &boot_options_support, false);
++}
++
+ /**
+  * efi_init_early() - handle initialization at early stage
+  *
+@@ -261,6 +277,13 @@ efi_status_t efi_init_obj_list(void)
+ 	if (ret != EFI_SUCCESS)
+ 		goto out;
+ 
++	/* Indicate supported boot option types */
++	if (IS_ENABLED(CONFIG_EFI_BOOTMGR)) {
++		ret = efi_init_boot_options_support();
++		if (ret != EFI_SUCCESS)
++			goto out;
++	}
++
+ 	/* Initialize system table */
+ 	ret = efi_initialize_system_table();
+ 	if (ret != EFI_SUCCESS)
+-- 
+2.45.2
 
---=20
-Tom
-
---eBgD3FCAOXmeOK3i
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcJYOcACgkQFHw5/5Y0
-tyx0sQv+JwqKWs6xjUt43IqkqvRTmNXIq1ETcXIpQAc+Dd57rMd1Ae7O86j+6hkA
-jXGU9gO89aUsMUhtK+kQ+EfT/1ky5c96js6RtUrt8jcRBm5aLS8q1hWYk/osJ3bT
-5qI/A6gOOhczg3JENa73I6Bf1SbgI+1Zs2Jlbz2vDKgLKG4i16BynkfGqicl+p1a
-6GzOJgba0Jsb5wtQEO8oC5M5DA1AtLuHoP6Jn2F5LWLi3vVSO89HXs8u3jy/5QZD
-g1It0AO1f4tuhtU7axnvpGMeXoClZZqMWcfbl1Ir7O+WxhVLYIabzQ1jmF4MlwHT
-7CHXy7/nLQx16HIUAXnJerXDKZOgVDorNkpiMmWiE09dq1NnoL5USrYaxOtR/Wb9
-AkBrVOaqmQJ8ExCG+rACd9Ur7dpkZoHxyy2ZGoazb2/hdNY/lHAvd++rMDO5xOxn
-+8dyGC/rNHeBKJQtxQfRRmjnCvlzRICIhKcclB3C6baeoql4gcRonvv/ML51GDuo
-I0wjER/q
-=zI3Z
------END PGP SIGNATURE-----
-
---eBgD3FCAOXmeOK3i--
