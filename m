@@ -4,93 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E303D0D7BF
-	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 15:39:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7492D0D7BB
+	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 15:40:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B625389291;
-	Fri, 11 Oct 2024 17:39:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=devpi.de
+	by phobos.denx.de (Postfix) with ESMTP id 54C6189291;
+	Fri, 11 Oct 2024 17:40:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=devpi.de header.i=@devpi.de header.b="rAcgYJfn";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="oRWNClQN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA22B89085; Fri, 11 Oct 2024 17:39:04 +0200 (CEST)
-Received: from smtp052.goneo.de (smtp5.goneo.de [IPv6:2001:1640:5::8:30])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CA4D389384; Fri, 11 Oct 2024 17:39:59 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6A0E689291
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 17:39:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 65AD389085
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 17:39:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=devpi.de
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=lehmanju@devpi.de
-Received: from hub2.goneo.de (hub2.goneo.de [85.220.129.53])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits))
- (No client certificate requested)
- by smtp5.goneo.de (Postfix) with ESMTPS id 12661240DE1;
- Fri, 11 Oct 2024 17:39:02 +0200 (CEST)
-Received: from hub2.goneo.de (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits))
- (No client certificate requested)
- by hub2.goneo.de (Postfix) with ESMTPS id 2BC80240562;
- Fri, 11 Oct 2024 17:39:00 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=devpi.de; s=DKIM001;
- t=1728661140;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=+o9dG6Vf8rp0ZJhGsvHHjhHY+M3CsvJe5aha1HugvTQ=;
- b=rAcgYJfnw68o3ArH8vdY/ZZM8mjPBIL+AMErVmIjvGKb7umyzscrBrwBgsjj7XtiSsyvc4
- JdtTyy0uUAYxJzmyBG2W5HzYr+hepnpxZEoVpRxl0H402mDl1SJlCF2mDL5z0kWL8dZNdo
- 63SoPFNd4WqhD9Ozp+7SDOeGzAJpgJ+YllVe/hgCplKFyLUPTPi438AdG4k53u2TwRrMDe
- 1ED363hPPFVu5Mp76CpfqPcKwMo+H03uSqTceQQCTkNcDuWNn6C0GcJbFcE91gg+4/u6V3
- +vy2fpQrFbTTt2DqcBTvva5qFRMjj4cL0vpvqBYAjER8Fq6TcEDx40hddTd+Jw==
-Received: from p200300cbef3987100000000000000193.dip0.t-ipconnect.de
- (p200300cbef3987100000000000000193.dip0.t-ipconnect.de
- [IPv6:2003:cb:ef39:8710::193])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by hub2.goneo.de (Postfix) with ESMTPSA id CF8E324052C;
- Fri, 11 Oct 2024 17:38:59 +0200 (CEST)
-From: Julius Lehmann <lehmanju@devpi.de>
-Date: Fri, 11 Oct 2024 17:38:47 +0200
-Subject: [PATCH v2] clk: stub: add sm8150 compatible id
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-4311e470fdaso7211525e9.3
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 08:39:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1728661197; x=1729265997;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ifhtpX2FWKYeMFuayx4+KN353bIWxGH8SpX81vEVpOw=;
+ b=oRWNClQN+BK3jXm4/eW8u8NYd5qTMj6G32WrfDzNDPil36UNJwHz7U3O0EBfHEyC+q
+ mdftkxvlaxW8+qKZwHqZ8blW85ITe4lo6sEaLoyuZGwLX1zXxE113s8acEV6mbfiS1xQ
+ /tgNoDBq+9JxE5X6Gpa8abX7M1Dbfb7hWC3Vr+vMvOQS7vve1P7hvKJMHcFm8fwqKiZi
+ +Mf6UCleX9Lf7mlC8LmNY74a7qTSDVp6uBpgAmtG4w5IbHGRMkzQIhMrtQ/BHGLSOhel
+ UdO3rxFUE6dfdtuW+zuVghGsaZAT/+jeWahkvYvGLv/rKeDAGCiaUwUFXKvRUdEwn5g6
+ +eqA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728661197; x=1729265997;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=ifhtpX2FWKYeMFuayx4+KN353bIWxGH8SpX81vEVpOw=;
+ b=Ov0NGJNCDvLwc6sHSTyulrZ/w5xs56MIbtINhmTp4tObB52HWp0eoxsC8K9ETZBF3A
+ yEVvtGUg8bm9nwdjdVO4ah+l/eIQpVg5GYINoMqo3eh6U8NNvka1JbqFnl2nto+bGn9n
+ D6Y4QeMCq01jS1juG29WPtqzM8qMXB8XIGNRXY44GHTFoEssVeMSEyGcV7opGDGohulu
+ BAQDkmd98UKAFx006wmYaUw3+SuKNWInNG+77Sll6jtY7ek344ni4ZYvr6grrGd4K0U9
+ bACkZdlWuNNp9lXDbdOVsk0tmLkwVgp95NeiyKpaoeMG1lr4/NTY+8sU2+Ty26d3yPkW
+ +GiQ==
+X-Gm-Message-State: AOJu0Yy5iJjVT5/W4LaBZPx8Fq/rQNsclekoNChTRtYXPloVr40a02OT
+ ErJSWcMj1y4M1f9O6X6jHZ8vFjJX+5gchrdhYwA5Cn5hLUCQd313xJZCNkbxbQk=
+X-Google-Smtp-Source: AGHT+IHR1GMwR2So/8n3IBFQYE1qisOvhOxV/oTe7+bCvv1bpXZptRf+ArV4Q8u8poQOlV28cfSRwg==
+X-Received: by 2002:a5d:5105:0:b0:37c:cbd4:ec9 with SMTP id
+ ffacd0b85a97d-37d5519997fmr2277452f8f.5.1728661196671; 
+ Fri, 11 Oct 2024 08:39:56 -0700 (PDT)
+Received: from localhost ([2a01:cb19:8941:9800:3dae:610e:6435:d98e])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-37d4b917df3sm4199704f8f.111.2024.10.11.08.39.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 11 Oct 2024 08:39:56 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Judith Mendez <jm@ti.com>, Joe Hershberger <joe.hershberger@ni.com>, Tom
+ Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Judith Mendez <jm@ti.com>
+Subject: Re: [PATCH] TI: include: env: ti_common: move fdtoverlay_addr_r to
+ fix ramdisk size
+In-Reply-To: <20241011000322.538287-1-jm@ti.com>
+References: <20241011000322.538287-1-jm@ti.com>
+Date: Fri, 11 Oct 2024 17:39:53 +0200
+Message-ID: <87zfnafy2e.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20241011-clk-stub-sm8150-v2-1-552bbeffe7fc@devpi.de>
-X-B4-Tracking: v=1; b=H4sIAIZGCWcC/3WPS47CMBBErxJ5PUbtX4xZcY8RC3/aYA2JwQ7RI
- JS744TFrGZZLfWrVy9SsSSs5NC9SME51ZTHFvhXR/zFjmekKbRMOHDJAAz11x9ap4ejddgzBdR
- pyw1ClMJZ0r5uBWP63Yjfp08ueH808PQ5kgFrtRu49TQsmIZ18o88CwoUIxgBWgkZ1PGaRlvyL
- pfzWuFsRerzMKTp0AWIWrogmQ429tJwo5VHIfv9agS6195GxTxZZS6pTrk8t7Uz22z+HTYzymh
- vtGBCq0Y1x4DzLe0CktOyLG9UZWrqOgEAAA==
-X-Change-ID: 20241009-clk-stub-sm8150-b7a29e0f43ba
-To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>
-Cc: u-boot@lists.denx.de, Julius Lehmann <lehmanju@devpi.de>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1354; i=lehmanju@devpi.de;
- h=from:subject:message-id; bh=FN2uEGkUX2b5dQ3xen+s9m/Cx83gOCfYVVgML6u3JeY=;
- b=owEBbQKS/ZANAwAKARK2S7xC0EEDAcsmYgBnCUaThbdcyF1P9rgct7yH9S5RkE3wPc4e7lrjJ
- TgGYWgM1VSJAjMEAAEKAB0WIQTCqoxFzEvlxm0XalUStku8QtBBAwUCZwlGkwAKCRAStku8QtBB
- A+EKD/9TsvP3uF4y/byM1OGcJ3KkDyvs045tdYUz7ZWZzqL0TFBC3UhvLsHzc7Ub98/aaEPFQsN
- ShHYBVRk+7kEq84GoJ5euGi5f3k4vwjuoa0aRZum4dy1gq6wOmllX/11dbr8WEZy4A3/K8uLnIR
- 39ZrKWef6Jtx5mpeRQFX9nLObj163S16yLtxl03ZyUamrZDGCZN5zb3zxSuokXhuvH0sNvvsVfX
- u2AX47Q8LM82Vh4rPCTXE5woMURBMco5f6O4/mD0GGlKykCgihX/ByL7Jy1X8+K55nP9wQE5PjZ
- d8SCLIsms7HE40JTZX7mStTLUveNIZf7VCkGah74y1ByMt2aFgKzllScCUGXH3nrRwqBekBgAg4
- hnjCW575ebPORHvmvdjCh1EEifWpbgckHtOQFZjIyFf9oUaw1vHkHZkyosyFoEiwTtDLMSjJ3h2
- tjyVVh6HdV6uz5FAb1+clzcqsv8dNIvgy68x4mlsiXPNz8RZlIAAJaRLvRC3uzGdiKqgjSyfrzF
- 3bBuSxq+f6Imywk+VIi2UNhnYpBCdSNJUYHZMj8WTWAhySsgOX88a50L748uVndmymYLabN4zDw
- n5cXPARC7487M4EGy07UUtmE54K2KxlX2EHl6x2S+/AA53vLBvq16XoOhjqGoEar9pWQkqxmKTK
- 7u3onSv7nTILttw==
-X-Developer-Key: i=lehmanju@devpi.de; a=openpgp;
- fpr=C2AA8C45CC4BE5C66D176A5512B64BBC42D04103
-X-Rspamd-UID: 48440d
-X-Rspamd-UID: 100319
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,41 +91,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for sm8150 clock controller to clk stub driver.
+Hi Judith,
 
----
-Simple patch to extend the clk stub driver to support binding to sm8150 clock controllers.
+Thank you for sending this patch.
 
-Signed-off-by: Julius Lehmann <lehmanju@devpi.de>
----
-Changes in v2:
-- fix: syntax typo, missing ","
-- Link to v1: https://lore.kernel.org/r/20241009-clk-stub-sm8150-v1-1-697313752979@devpi.de
----
- drivers/clk/clk-stub.c | 1 +
- 1 file changed, 1 insertion(+)
+On jeu., oct. 10, 2024 at 19:03, Judith Mendez <jm@ti.com> wrote:
 
-diff --git a/drivers/clk/clk-stub.c b/drivers/clk/clk-stub.c
-index ea817031fa6c0cc1ea21000273b5651be5d05e65..5fbbb07b7f7b93e619baf596064c4b3a3bfeecc0 100644
---- a/drivers/clk/clk-stub.c
-+++ b/drivers/clk/clk-stub.c
-@@ -50,6 +50,7 @@ static struct clk_ops stub_clk_ops = {
- 
- static const struct udevice_id stub_clk_ids[] = {
- 	{ .compatible = "qcom,rpmcc" },
-+	{ .compatible = "qcom,sm8150-rpmh-clk" },
- 	{ .compatible = "qcom,sm8250-rpmh-clk" },
- 	{ .compatible = "qcom,sm8550-rpmh-clk" },
- 	{ .compatible = "qcom,sm8650-rpmh-clk" },
+> From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>
+> When booting Android with adtbo_idx set, we observe the
+> following crash:
 
----
-base-commit: d0f74bd417daf6492975ce346843ba0767caf51c
-change-id: 20241009-clk-stub-sm8150-b7a29e0f43ba
-prerequisite-message-id: 20240909-b4-clk-stub-v3-0-ef09307534d5@linaro.org
-prerequisite-patch-id: 01b791d83c26250b3ff485045b88d5889f911bb8
-prerequisite-patch-id: 66febbc73195c71535e2423d14f1ff6994ac36cd
+In upstream/master, this is no such thing as adtbo_idx.
 
-Best regards,
--- 
-Julius Lehmann <lehmanju@devpi.de>
+This is only present in TI's U-Boot fork, via commit [1]
 
+[1] https://git.ti.com/cgit/ti-u-boot/ti-u-boot/commit/?h=ti-u-boot-2024.04&id=1c6cf852b8b8f869d2c5e39eb071ec3025bf739a
+
+>
+>    ** Booting bootflow 'mmc@fa10000.bootdev.whole' with android
+>    ## Booting Android Image at 0x82000000 ...
+>    Kernel load addr 0x92000000 size 20195 KiB
+>    Kernel extra command line: console=ttyS2,115200 cma=768M 8250.
+> 	nr_uarts=10 printk.devkmsg=on init=/init quiet firmware_class.
+> 	path=/vendor/firmware mem_sleep_default=deep bootconfig
+>    RAM disk load addr 0x88080000 size 16901 KiB
+>    "Synchronous Abort" handler, esr 0x96000005, far 0x155b104c8
+>    elr: 0000000080808560 lr : 0000000080808558 (reloc)
+>    elr: 00000000ffebf560 lr : 00000000ffebf558
+>    x0 : 00000000fff99000 x1 : 00000000fff9553c
+>    x2 : 000000000000000a x3 : 0000000002800000
+>    x4 : 0000000002800000 x5 : 0000000000000020
+>
+> This happens because the memory at fdtoverlay_addr_r is bogus.
+> In fact:
+>
+> => printenv fdtoverlay_addr_r
+> fdtoverlay_addr_r=0x89000000
+>
+> And the ramdisk address range is:
+> [0x88080000; 0x88080000 + 16901 KiB]
+>
+> Which is equal to:
+> [0x88080000; 0x89101400]
+>
+> So, if we represent the addresses:
+> fdtaddr             0x88000000
+> ramdisk             0x88080000
+> fdtoverlay_addr_r   0x89000000
+> ramisk (end)        0x89101400
+>
+> We see that fdtoverlay_addr_r in fact has been overridden by
+> the Android ramdisk.
+>
+> The maximum ramdisk size is 0x1080000 (15,5 MiB) and a compressed
+> Android vendor ramdisk is 15MiB:
+> $ file vendor_ramdisk.img
+> vendor_ramdisk.img: LZ4 compressed data (v0.1-v0.9)
+> $ du -sh vendor_ramdisk.img
+> 15M     vendor_ramdisk.img
+>
+> When it gets decompressed, it uses 16.5MiB, exceeding the
+> maximum ramdisk size.
+>
+> Increase the maximum ramdisk size to 20.5MiB by moving
+> fdtoverlay_addr_r higher up in the address space to fix the crash.
+
+I do think that reserving more room between the fdtoverlay_addr_r and
+the ramdisk address is probably a good idea for Linux as well, but I
+think that the commit message might need a rewrite ?
+
+>
+> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Signed-off-by: Judith Mendez <jm@ti.com>
+> ---
+>  include/env/ti/ti_common.env | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/include/env/ti/ti_common.env b/include/env/ti/ti_common.env
+> index 7029d12bf20..a15af79d9c3 100644
+> --- a/include/env/ti/ti_common.env
+> +++ b/include/env/ti/ti_common.env
+> @@ -3,7 +3,7 @@ kernel_addr_r=0x82000000
+>  fdtaddr=0x88000000
+>  dtboaddr=0x89000000
+>  fdt_addr_r=0x88000000
+> -fdtoverlay_addr_r=0x89000000
+> +fdtoverlay_addr_r=0x89500000
+>  rdaddr=0x88080000
+>  ramdisk_addr_r=0x88080000
+>  scriptaddr=0x80000000
+>
+> base-commit: a404065479be2c1fe1167c3c91367e8194a69d1b
+> -- 
+> 2.46.2
