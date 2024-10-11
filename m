@@ -4,90 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59639D0D7B8
-	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 15:06:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABC5BD0D7BA
+	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 15:31:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85CA989331;
-	Fri, 11 Oct 2024 17:06:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 174AB89331;
+	Fri, 11 Oct 2024 17:31:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="aOCKD7iG";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="kZUumVAc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E22A89155; Fri, 11 Oct 2024 17:06:40 +0200 (CEST)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3571289356; Fri, 11 Oct 2024 17:31:39 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C2C989333
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 17:06:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 42A6089319
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 17:31:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-2fad15b3eeeso19358171fa.2
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 08:06:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1728659197; x=1729263997;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=LnC10CaG24WPSzLSNKOFOgGsi6jjDThxQwiyj7ue9sI=;
- b=aOCKD7iGGF1mMhEOZAnk64Hj+G/rujvqLUewzjCVZybjDX6cl0z2pbo43lLW8dOzpT
- +zwuXC9JJ2ELMhzeJ3WnUaF9vN86rleX7ZGay1Ck8AxTUemKtNIQF2Jhuq6S09ls5qpZ
- TZwMvarNfkXkZUzIGmIuHsIXj9LowBIuNSpiidH7LhHJAgfUw/VHhvmBG3y/yICBAfWS
- raxy+D4Njpa/CmWK+tgkHQDq8BClBoyjJ8oQIHyOtVGgt9Ar/mr3xd0MUIZlJoofsSEQ
- KinWmv48j6+SRbbLSyG+9LrKRdA+agGO0eNROAPg4xSvMnDFY0cAQwDsuOggYOd9R5aD
- uEog==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728659197; x=1729263997;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=LnC10CaG24WPSzLSNKOFOgGsi6jjDThxQwiyj7ue9sI=;
- b=pVAYiO+dj5JqPe/Uk3WLLCzgcmW9hNYJbK/T7Tu2qG0fDpmyF3WjFAO/AJPqBkvSHI
- dJZBuzWlo1m0/N7t15pL4g3quVk5yqlzWtncuN1I79d1TSEXjAhkgLbFhDMOV3hA2jTB
- Qdy5k3Pbknh5nw06Tv6KcDMNKwIPej+S7BKnc97iljtF4Gk91qOivOV4k6tbdygYylt9
- mQ651p4hyl52wCMQJY1CH7Q3mI076Tpwu0pYoO+sk5wM2Hba837uE+p9AV1cHNf4Nx1K
- 84Bc9UCisgQz5MG+4lTlprneW3ETvWPsfgxju9IqfRAolqQoE59N21ejJRXWcByGpmHU
- UWkQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVm7LyQ7fpgsIS5LSbBlRMc2e8w+7NZP4JD7gCUCPOBlRNE8x/ePOK4bE+vcKAGKfh1QO21q2M=@lists.denx.de
-X-Gm-Message-State: AOJu0YzOOCYpepb0MXxeQy2B1qvwk+5ttNY7/vBdL0y4tFI1oSwWGa+x
- 9+17Bt2i0hV4POn+N2RzebnTmjQcXeVbL5/xEJZPyBGTWf0zNQNB2tXA8S5tgG/UsR/E+axhinf
- T
-X-Google-Smtp-Source: AGHT+IECnKBqoOc7k/CFj4x1daaYO3nw/jGKlt/7w1KCslOD5pYHxmM8tu+9qFbNR8DtXOtxcoFVgw==
-X-Received: by 2002:a2e:460a:0:b0:2fb:2f7c:28dd with SMTP id
- 38308e7fff4ca-2fb32740971mr12143731fa.18.1728659196758; 
- Fri, 11 Oct 2024 08:06:36 -0700 (PDT)
-Received: from localhost ([2a01:cb19:8941:9800:3dae:610e:6435:d98e])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d4b6a82f3sm4138899f8f.24.2024.10.11.08.06.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Oct 2024 08:06:34 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Dmitry Rokosov <ddrokosov@salutedevices.com>
-Cc: u-boot-amlogic@groups.io, Simon Glass <sjg@chromium.org>, Igor Opaniuk
- <igor.opaniuk@gmail.com>, Sam Protsenko <semen.protsenko@linaro.org>, Tom
- Rini <trini@konsulko.com>, "Andrew F. Davis" <afd@ti.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Mario Six <mario.six@gdsys.cc>,
- u-boot@lists.denx.de, rockosov@gmail.com, kernel@salutedevices.com
-Subject: Re: [PATCH v3 4/6] cmd: bcb: introduce 'ab_dump' command to print
- BCB block content
-In-Reply-To: <20241011144519.xukl22ksrjsqz55l@CAB-WSD-L081021>
-References: <20241008-android_ab_master-v3-0-f292c45a33e4@salutedevices.com>
- <20241008-android_ab_master-v3-4-f292c45a33e4@salutedevices.com>
- <CAFLszTh7qjUN__MvAbcMPL+W4V=mfBrgt9zcg8zyfx+WBN=9bg@mail.gmail.com>
- <20241009132614.mlkpfkdni4cp2tgg@CAB-WSD-L081021>
- <CAFLszTgr-qHXF2QU7toZXOU0FgRMPU0XXnQ6SzMq32a_pguAww@mail.gmail.com>
- <20241010102051.q67usj6oaykjaixx@CAB-WSD-L081021>
- <17FD1697482D61A4.19251@groups.io> <87bjzqhg7g.fsf@baylibre.com>
- <20241011144519.xukl22ksrjsqz55l@CAB-WSD-L081021>
-Date: Fri, 11 Oct 2024 17:06:30 +0200
-Message-ID: <8734l2he6h.fsf@baylibre.com>
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=0014bb5f26=patrick.delaunay@foss.st.com
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 49BCrEgr028633;
+ Fri, 11 Oct 2024 17:31:27 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ 9CoLkqNEZuu6mrwH7b6JinaJ50fIMiKU+K+FhVk6Q7o=; b=kZUumVAcifOwMSjl
+ mE4XE7f41Jk1I2fhm1xYO3zgBpP9nTgvBB36Q3YKHM+FMc0jIZcBw1kn2Pmxa8H1
+ dD7Onz6DuUB6b46WfGSIqmj2gPaPJYuBbYCFYxKPYBjs7mra1aIxsHrqcCeOhPcE
+ MwXKH71bWdsdOW+KbwsPt2k21/MJ1R2oTkXPBV9/MlvLMdVaEXLABIDb56VLhR1j
+ CO6GElZN1ruk6P0HWBA5iUT92Xsjpx5wYo4DLULP6p+D9Kjed+I4oOGQ59NfibLk
+ fd5zmCN8/zhICcc+9RaGrR/ecPCJ2s9M2Zg6BdBdZQdkxZWgGuJJMpe5WjI00N8p
+ X7qXaA==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4263439sc2-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 11 Oct 2024 17:31:26 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 0AA3A40050;
+ Fri, 11 Oct 2024 17:30:35 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0138829886B;
+ Fri, 11 Oct 2024 17:30:14 +0200 (CEST)
+Received: from [10.48.86.243] (10.48.86.243) by SHFDAG1NODE3.st.com
+ (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Fri, 11 Oct
+ 2024 17:30:13 +0200
+Message-ID: <dc0a0638-0724-46d1-99c7-ee8b84e5541b@foss.st.com>
+Date: Fri, 11 Oct 2024 17:30:12 +0200
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] ARM: stm32: Add script to install U-Boot from SD/eMMC to
+ SPI NOR on DH STM32MP15xx DHSOM
+To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
+CC: Patrice Chotard <patrice.chotard@foss.st.com>, Tom Rini
+ <trini@konsulko.com>, <u-boot@dh-electronics.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20240930192343.59359-1-marex@denx.de>
+Content-Language: en-US
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <20240930192343.59359-1-marex@denx.de>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.86.243]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,51 +91,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On ven., oct. 11, 2024 at 17:45, Dmitry Rokosov <ddrokosov@salutedevices.com> wrote:
+Hi,
 
-> Hello Mattijs,
+On 9/30/24 21:23, Marek Vasut wrote:
+> Make the dh_update_sd_to_sf script generic, rename it to dh_update_sdmmc_to_sf
+> and implement two specific dh_update_sd_to_sf and dh_update_emmc_to_sf scripts
+> which load U-Boot from either SD or eMMC and install it into SPI NOR.
 >
-> On Fri, Oct 11, 2024 at 04:22:43PM +0200, Mattijs Korpershoek wrote:
->> Hi Dmitry,
->> 
->> On jeu., oct. 10, 2024 at 14:17, "Mattijs Korpershoek via groups.io" <mkorpershoek=baylibre.com@groups.io> wrote:
->> 
->> [...]
->> 
->> >>> > >
->> >>> > > Reviewed-by: Simon Glass <sjg@chromium.org>
->> >>> > >
->> >>> > > Can you also update the test?
->> >>> >
->> >>> > I apologize, but I didn't quite understand your point. Could you please
->> >>> > clarify? This patch series includes additional tests for the 'ab_dump'
->> >>> > subcommand. For more details, please refer to:
->> >>> >
->> >>> > https://lore.kernel.org/all/20241008-android_ab_master-v3-6-f292c45a33e4@salutedevices.com/
->> >>> 
->> >>> OK, thank you. Sometimes it is easier (for reviewers) if you update
->> >>> the test in the same commit.
->> >>
->> >> Should I resend the patch series with ab_dump implementation and tests
->> >> in the same commit?
->> >>
->> >> I can prepare new version, if needed, no problem.
->> >
->> > No need to resend a new version just for this, since it's already
->> > been reviewed.
->> >
->> > Keep the suggestion in mind for future series!
->> 
->> If you do need to re-spin this as v4, you can squash the test commit
->> with this one if you wish.
+> Signed-off-by: Marek Vasut <marex@denx.de>
+> ---
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@dh-electronics.com
+> Cc: u-boot@lists.denx.de
+> Cc: uboot-stm32@st-md-mailman.stormreply.com
+> ---
+>   include/configs/stm32mp15_dh_dhsom.h | 16 +++++++++++++---
+>   1 file changed, 13 insertions(+), 3 deletions(-)
 >
-> Of course, I can re-spin that.
-> I believe I can save all RvB trailers during the squashing process.
-> Could you please clarify if my understanding is correct? 
+> diff --git a/include/configs/stm32mp15_dh_dhsom.h b/include/configs/stm32mp15_dh_dhsom.h
+> index de39b19219d..fa759c938b3 100644
+> --- a/include/configs/stm32mp15_dh_dhsom.h
+> +++ b/include/configs/stm32mp15_dh_dhsom.h
+> @@ -38,16 +38,26 @@
+>   		"setenv loadaddr1 && "					\
+>   		"setenv sblkcnt && "					\
+>   		"setenv ublkcnt\0"					\
+> -	"dh_update_sd_to_sf=" /* Erase SPI NOR and install U-Boot from SD */ \
+> +	"dh_update_sdmmc_to_sf=" /* Erase SPI NOR and install U-Boot from SD/eMMC */ \
+>   		"setexpr loadaddr1 ${loadaddr} + 0x1000000 && "		\
+> -		"load mmc 0:4 ${loadaddr1} /boot/u-boot-spl.stm32 && "	\
+> +		"load ${dh_update_iface} ${dh_update_dev} "		\
+> +			"${loadaddr1} /boot/u-boot-spl.stm32 && "	\
+>   		"env set filesize1 ${filesize} && "			\
+> -		"load mmc 0:4 ${loadaddr} /boot/u-boot.itb && "		\
+> +		"load ${dh_update_iface} ${dh_update_dev} "		\
+> +			"${loadaddr} /boot/u-boot.itb && "		\
+>   		"sf probe && sf erase 0 0x200000 && "			\
+>   		"sf update ${loadaddr1} 0 ${filesize1} && "		\
+>   		"sf update ${loadaddr1} 0x40000 ${filesize1} && "	\
+>   		"sf update ${loadaddr} 0x80000 ${filesize} && "		\
+>   		"env set filesize1 && env set loadaddr1\0"		\
+> +	"dh_update_sd_to_sf=" /* Erase SPI NOR and install U-Boot from SD */ \
+> +		"setenv dh_update_iface mmc && "			\
+> +		"setenv dh_update_dev 0:4 && "				\
+> +		"run dh_update_sdmmc_to_sf\0"				\
+> +	"dh_update_emmc_to_sf=" /* Erase SPI NOR and install U-Boot from eMMC */ \
+> +		"setenv dh_update_iface mmc && "			\
+> +		"setenv dh_update_dev 1:4 && "				\
+> +		"run dh_update_sdmmc_to_sf\0"				\
+>   	"stdin=serial\0"						\
+>   	"stdout=serial\0"						\
+>   	"stderr=serial\0"						\
+>
 
-Yes, I believe your understanding is correct
+ok I will merge it as it
 
->
-> -- 
-> Thank you,
-> Dmitry
+with 2 minor question
+
+a)  it is strange to define interface variable for macro
+     but use only with "mmc" device with
+
+> setenv dh_update_iface mmc
+
+it can be simplified with
+
+"load mmc ${dh_update_dev}
+
+or it is to prepare other device then "mmc" .....
+
+
+b) you are using "sf" command and not "mtd" to udpate SPI NOR ?
+
+
+the MTD command allows to use the MTD partition name, defined in DT,
+so no need to know offset in script (and avoid "sf probe")
+
+mtd erase fsbl1; mtd write fsbl1 ${loadaddr1} 0 ${filesize1} \
+mtd erase fsbl2; mtd write fsbl2 ${loadaddr1} 0 ${filesize1} \
+mtd erase uboot; mtd write uboot ${loadaddr} 0 ${filesize}
+
+
+
+Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+
+Thanks
+Patrick
+
