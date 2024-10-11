@@ -4,59 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18753D0EE19
-	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 18:17:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76205D0EE19
+	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 18:17:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 94CEE88C4A;
-	Fri, 11 Oct 2024 20:17:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id 0A2E588916;
+	Fri, 11 Oct 2024 20:17:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="gF7uiQyA";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="IwTuYjnJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB47A889B8; Fri, 11 Oct 2024 20:17:09 +0200 (CEST)
-Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8E681893D7; Fri, 11 Oct 2024 20:17:47 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39519893C6
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 20:17:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 92ED188881
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 20:17:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from [127.0.0.1] (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id 58210206DE;
- Fri, 11 Oct 2024 20:17:06 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1728670626;
- bh=ba3KKV6PCUlV6cXhIp5r4fCJfejyNPqPDgMDoSexHlw=; h=From:To:Subject;
- b=gF7uiQyAURkQKkH8EVWgiIFoJ44JBGUs09BegxYNkc0cQR+C2UdA15B5tHkVhWk+l
- dvE2MEjIx2JaBusjXFuwDfPmer0bM7ikFjAcpf89spGuvoSsic/e8kyfnVW3k7M7sh
- SWlEqG+6r8uChtLNOv8NJ2IPv0xikmoXHt7BGblWCOz+S6IFU84oZcNBwYQs+3qTB3
- lFvq/eu/IQp9OE0yvnjet+o6nY1rXoDbA1i6l2B60EETdTtn1v1sYO105waQZSm5RI
- ntNhaGz2WHXOxrxCb1fqgnbf2IHKTu8ca9k6SGmE6DX9q218cRJi6aWA/6vu5NaZn7
- TCwVbXG3mKsaA==
-Date: Fri, 11 Oct 2024 20:17:02 +0200
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Massimiliano Minella <massimiliano.minella@gmail.com>
-CC: Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>,
- u-boot@lists.denx.de, Lukas Funke <lukas.funke-oss@weidmueller.com>,
- Massimiliano Minella <massimiliano.minella@se.com>,
- Michal Simek <monstr@monstr.eu>
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v2=5D_cmd=3A_setexpr=3A_fix_no_mat?=
- =?US-ASCII?Q?ching_string_in_gsub_return_empty_value?=
-User-Agent: K-9 Mail for Android
-In-Reply-To: <CAGS_c3WoCApeh4QVDrG7=tF=wwEsFStKmRphzfVGTtwKT9yJhQ@mail.gmail.com>
-References: <20240208145827.3547501-1-massimiliano.minella@gmail.com>
- <CAHTX3dLUTJ=FKyZT1NaWMsGwKpUwy0MBMsra7YwNQCPERYNDoA@mail.gmail.com>
- <20241008172035.GA66965@francesco-nb>
- <CAGS_c3WoCApeh4QVDrG7=tF=wwEsFStKmRphzfVGTtwKT9yJhQ@mail.gmail.com>
-Message-ID: <E9E05009-AEA3-49F8-BF73-2864D29BC422@dolcini.it>
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=0014bb5f26=patrick.delaunay@foss.st.com
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 49BC8tOl019689;
+ Fri, 11 Oct 2024 20:17:35 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ wbI7ehi6VmsCuN61BvZShBdMN5lf8Lhu1hpdpUpoHYk=; b=IwTuYjnJBH8WawPy
+ jbCBNF7OBB/ntQFOIN4D4tW4f8f/RXPnNUK5ZQqlCD5kvGfHIMiyrwgv42dnFe+M
+ QKBIGzUxd4aiHsL//xtfqYOv2MZF3lFyM8aq4lu3HOH7AZvs7Q/c5HKEzeZ6xtDW
+ 9fYEmPjZnUEhIV78lqoIwg2mRtFN7O5D98h3b9QhyEIMCE0KjxKQR04kIARoRo6J
+ tOyoN+uup/QtuWUbxFZBzR9qugJP9Pk4E1+dOR0VJa0FmhSgiboQ8U8lo1EjDWEI
+ SWRoVSf6mMJf4JC4yM3K2KmwLDD32q77aYEyfxw2a7lnRiElBJNdjHIjDj1lqKu7
+ WmMsUw==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 426343a9kg-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 11 Oct 2024 20:17:35 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 93CF54005C;
+ Fri, 11 Oct 2024 20:16:30 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2C0612A438D;
+ Fri, 11 Oct 2024 20:16:01 +0200 (CEST)
+Received: from [10.48.86.243] (10.48.86.243) by SHFDAG1NODE3.st.com
+ (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Fri, 11 Oct
+ 2024 20:16:00 +0200
+Message-ID: <55842cb0-5199-429a-8e92-5bac71dea67c@foss.st.com>
+Date: Fri, 11 Oct 2024 20:15:59 +0200
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 3/3] ARM: dts: stm32: Generate u-boot.itb using binman
+ on DH STM32 DHSOM
+To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
+CC: Patrice Chotard <patrice.chotard@foss.st.com>, Sean Anderson
+ <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>, Tom Rini
+ <trini@konsulko.com>, <u-boot@dh-electronics.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20241005011647.436456-1-marex@denx.de>
+ <20241005011647.436456-3-marex@denx.de>
+Content-Language: en-US
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <20241005011647.436456-3-marex@denx.de>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.86.243]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,129 +93,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Il 11 ottobre 2024 18:01:22 CEST, Massimiliano Minella <massimiliano=2Emine=
-lla@gmail=2Ecom> ha scritto:
->Hello,
->
->On Tue, Oct 8, 2024 at 7:20=E2=80=AFPM Francesco Dolcini <francesco@dolci=
-ni=2Eit> wrote:
->>
->> +Tom
->>
->> Hello Massimiliano,
->>
->> On Tue, Sep 03, 2024 at 01:06:21PM +0200, Michal Simek wrote:
->> > HI,
->> >
->> > =C4=8Dt 8=2E 2=2E 2024 v 16:00 odes=C3=ADlatel Massimiliano Minella
->> > <massimiliano=2Eminella@gmail=2Ecom> napsal:
->> > >
->> > > From: Massimiliano Minella <massimiliano=2Eminella@se=2Ecom>
->> > >
->> > > In gsub, when the destination string is empty, the string 't' is
->> > > provided and the regular expression doesn't match, then the final r=
-esult
->> > > is an empty string=2E
->> > >
->> > > Example:
->> > >
->> > > =3D> echo ${foo}
->> > >
->> > > =3D> setenv foo
->> > > =3D> setexpr foo gsub e a bar
->> > > =3D> echo ${foo}
->> > >
->> > > =3D>
->> > >
->> > > The variable ${foo} should contain "bar" and the lack of match shou=
-ldn't
->> > > be considered an error=2E
->> > >
->> > > This patch fixes the erroneous behavior by removing the return
->> > > statement and breaking out of the loop in case of lack of match=2E
->> > >
->> > > Also add a test for the no match case=2E
->> > >
->> > > Signed-off-by: Massimiliano Minella <massimiliano=2Eminella@se=2Eco=
-m>
->> > > ---
->> > > Changes in V2:
->> > >  - update documentation to describe the behavior
->> > >
->> > >  cmd/setexpr=2Ec             |  9 ++++-----
->> > >  doc/usage/cmd/setexpr=2Erst |  1 +
->> > >  test/cmd/setexpr=2Ec        | 10 ++++++++++
->> > >  3 files changed, 15 insertions(+), 5 deletions(-)
->> > >
->> > > diff --git a/cmd/setexpr=2Ec b/cmd/setexpr=2Ec
->> > > index 233471f6cb=2E=2Eab76824a32 100644
->> > > --- a/cmd/setexpr=2Ec
->> > > +++ b/cmd/setexpr=2Ec
->> > > @@ -216,14 +216,12 @@ int setexpr_regex_sub(char *data, uint data_s=
-ize, char *nbuf, uint nbuf_size,
->> > >                 if (res =3D=3D 0) {
->> > >                         if (loop =3D=3D 0) {
->> > >                                 debug("%s: No match\n", data);
->> > > -                               return 1;
->> >
->> > This patch actually changed the return value from command=2E
->> > In board/xilinx/zynqmp/zynqmp_kria=2Eenv we have
->> >
->> > bootcmd=3Dsetenv model $board_name && if setexpr model gsub
->> > =2E*$k24_starter* $k24_starter || setexpr model gsub =2E*$k26_starter=
-*
->> > $k26_starter; then run som_cc_boot; else run som_mmc_boot; run
->> > som_cc_boot; fi
->> >
->> > and this patch actually breaked it because we rely on return value=2E
->> > Changing return value is not described and I want to know if this
->> > patch should be fixed
->> > or we should update our commands to match new return value=2E
->>
->> Massimilano, any comment on this?
->>
->> This change broke also our use case - our board is no longer booting
->> with v2024=2E10 U-Boot=2E I do not think we should change something lik=
-e
->> that without a clear reason and I was not able to understand it from th=
-e
->> commit message=2E
->
->The reason why I proposed the patch was that I found the behavior of sete=
-xpr
->gsub not consistent with the behavior of the same function in gawk, which=
-,
->according to the commit message that introduced gsub/sub, both commands a=
-re
->closely modeled after=2E Also I didn't see a particular reason for return=
-ing an
->empty string or throwing an error when doing a string substitution that p=
-rovides
->no match, so IMHO it was a bug=2E
->
->From a quick grep on the master branch it seems that the command is used =
-only in
->board/xilinx/zynqmp/zynqmp_kria=2Eenv and include/env/ti/ti_common=2Eenv=
-=2E In the
->first I see it has already been fixed and in the second the change has no
->impact=2E
->
->It's unfortunate that it broke the boot of your board, maybe something as=
- it has
->been done for the zynqmp_kria is feasible according to your use of the co=
-mmand?
+Hi,
 
-The U-Boot commands are used (also) outside of the U-Boot repository=2E In=
- my case it was a boot script that was relying on the previous return code=
-=2E
+On 10/5/24 03:15, Marek Vasut wrote:
+> Describe the u-boot.its generation in stm32mp15xx-dhsom-u-boot.dtsi
+> binman {} DT node as a replacement for current CONFIG_SPL_FIT_SOURCE
+> use, dispose of both u-boot-dhcom.its and u-boot-dhcor.its.
+>
+> Use fdt-SEQ/config-SEQ to generate a list of fdt-N fitImage images {} and
+> matching configuration {} node entries. The configuration node entry names
+> no longer encode _somrevN_boardrevN suffix, which was never really used, so
+> drop this functionality by default. Rework board_fit_config_name_match() to
+> match on the new configuration node entry names.
+>
+> Users who do need the match on _somrevN_boardrevN can either replace the
+> fdt-SEQ/config-SEQ with fixed fdt-N/config-N nodes which each encode the
+> matching 'description = "NAME_somrevN_boardrevN"' to restore the old
+> behavior verbatim, or better use SPL DT overlays for U-Boot control DT
+> the same way e.g. i.MX8MP DHCOM does to support multiple SoM and board
+> variants.
+>
+> Signed-off-by: Marek Vasut <marex@denx.de>
+> ---
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Sean Anderson <seanga2@gmail.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@dh-electronics.com
+> Cc: u-boot@lists.denx.de
+> Cc: uboot-stm32@st-md-mailman.stormreply.com
+> ---
+> V2: No change
+> ---
+>   arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi    |  1 +
+>   arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi    |  1 +
+>   arch/arm/dts/stm32mp15xx-dhsom-u-boot.dtsi    | 53 +++++++++++
+>   board/dhelectronics/dh_stm32mp1/board.c       | 19 +++-
+>   .../dh_stm32mp1/u-boot-dhcom.its              | 91 -------------------
+>   .../dh_stm32mp1/u-boot-dhcor.its              | 70 --------------
+>   configs/stm32mp15_dhcom_basic_defconfig       |  2 -
+>   configs/stm32mp15_dhcor_basic_defconfig       |  2 -
+>   8 files changed, 70 insertions(+), 169 deletions(-)
+>   create mode 100644 arch/arm/dts/stm32mp15xx-dhsom-u-boot.dtsi
+>   delete mode 100644 board/dhelectronics/dh_stm32mp1/u-boot-dhcom.its
+>   delete mode 100644 board/dhelectronics/dh_stm32mp1/u-boot-dhcor.its
+>
 
-Of course, I can adapt the script to work with the new semantic=2E And I h=
-ave also to consider that my boot script might be used on an older U-Boot, =
-so in practice I need to handle both, and I did it=2E
+Nice,
+I discover the binman FIT Substitutions with N / SEQ
 
-To me it was a bad decision to change the semantic here=2E My own issue is=
- solved, as I wrote, but I would advise to just revert it=2E
 
-Francesco=20
+Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+
+Thanks
+Patrick
+
+
 
 
