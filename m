@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9295FD0D79C
-	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 14:38:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3C2AD0D795
+	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 14:38:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 365F989342;
+	by phobos.denx.de (Postfix) with ESMTP id 9F4718935C;
 	Fri, 11 Oct 2024 16:38:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XJ0DubPE";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Kkn9ANYL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DAA1D89338; Fri, 11 Oct 2024 16:38:32 +0200 (CEST)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id 0337289336; Fri, 11 Oct 2024 16:38:33 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A16889336
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 16:38:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 86AD88931F
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 16:38:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-43120f65540so3735905e9.0
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 07:38:29 -0700 (PDT)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-4305413aec9so19133425e9.2
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 07:38:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1728657508; x=1729262308; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=is+Qmg++UbP3a7LbEEqkdEMgwsnrCh69hZqjp/yMHRk=;
- b=XJ0DubPE77LylDnaOmlUjMX2utg1vgcQNjXc8t6na4jP3uR0Zn/3a0XwmVbCGJy0no
- 99BYUdlimW3FHx1PB20g4AKsPqKw5isXwBZ2gIP36Ny0cUqcvhzHE8uKdSjBUjzOBF2N
- +fyiHfOUbaYtbWsnQEH6eLmkCeJb55Z0uO0Hf5XaiqAz3NFH8yfxt+CV5aN9+CK8bMrL
- UP1eB3bqJm98LcwyyrxpiS8V1r/7ARaZm6VRFbNJMLxSy8ZGOoXjtBu+T1Junzp9mFrL
- ctjMRGBnAnGHWLS4pegd0dnQ4o88DhVWjZlaFhh82Ne9pmSgqTB9WLMWNyCdYh8zwsyy
- stuQ==
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=YlRMSzP5woErb7cZnqB/1p9krWNZimLtVC4QYEvOS7g=;
+ b=Kkn9ANYLyho52rY5i99za9xPhBXAlvTMXM20XcYMV4gnuXv0+lHxpSS2GzXMFvdGBF
+ GwsjqjyNYBSSrwPAbPhvn9Un2k4RTvq6o+HUWz2XzXc8Uv67N9XDhy5EZCAYkiAi7xEJ
+ bt+b0z9EEHuDrxUgoNNbH5KyrsrYH6+DF1ae07o0om7U+YA9igo1YLP6iOrTAE6C5CWB
+ 2qpXh98mp1sk6kpGtqOLu37EoxN++gzlmQtiXHkQoaI0ztHW2RtjSXHEBnNH4xET2YaP
+ +6xBwIgOTqFXT8UN/WI/+t/0UyC85GQgFqjU1r2S7DpbHOF/D6UF5C5aKzUxBwdUcHPx
+ dssg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1728657508; x=1729262308;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=is+Qmg++UbP3a7LbEEqkdEMgwsnrCh69hZqjp/yMHRk=;
- b=EpqChY+1kk+FcvhRl1jcHc9OtLu5kJTa0w3c7cvdjZAXXhXED3X/aXB0pfnKCBXJqJ
- rcknUhNIGKL0I917o/0/2rX0zMoUkWJJfXD45zaKZNdh/zCc4gyupI0JC4H7AjvkkHVY
- LsDQSZvlq/LvpifuxIgu12DsOLVq/9d4DdfXXuxBhesMNkOb/YJX2K+qePdBBcEO9R79
- hG7tRVy0oB3or3ezlPSFal0K0ZNz9WocE8mUuiTr7Tg7e7VUWTSxjOGxFxodnNOcIm4Y
- XULG9jT4WsGQYGaZiVom3+H6u0YbSbUreDC1UlfI0G4018JVaXCc0ayF22AzIgLtYy7a
- tz0A==
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=YlRMSzP5woErb7cZnqB/1p9krWNZimLtVC4QYEvOS7g=;
+ b=EdXgjRtIYmQfPL6l+CkZzAZMex2W0RBXbRYnEkda6JoqE1OAnmQEpa1oF3Udz5ujWR
+ 13vpWRTU43bb3MfMehFPjWWZzfa3ShdnPivINCQ259vL6+78Exw35j74+CGQX6HiRTZM
+ ykjDTnyu6wwR7t8zz7RcNIHS5ALr3EuVFonY2mtI2GioKN6F858YVBZN7dGA2v4eX2eq
+ 8EaKHYVkKjxxbyx0aXONJnlOi6Tqf3dhq65QKBtQoeIoSDOhYhQGnvctTC2bmpS0SAWa
+ tLTgcwbeDQtPTmaEjOQkzhHpbJ8HEyw6gAbNmpiXLt0nEV2TdRhkzAijSULCIK5abxdl
+ v/0A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWI3Dqj3s8rrQWMwT2Tl6zjyXXobJxnvP4guwWsiKYh+bWaX1UOLHiVMRXgqXEdtRn6ZKvzhjs=@lists.denx.de
-X-Gm-Message-State: AOJu0YyO6QMdu3tzT5lQAMMXbeFUWr6cdOo499aGT5802I1T9GTwWJwR
- e5YqpkzwueO62szrSy92YQX3xIr9zEgQJOLhW9+n9JQMAspiS5fbRK69z6uJJ4o=
-X-Google-Smtp-Source: AGHT+IEw8Ebe5L2Qsgyp4g6hIl6Resb2P+DHNm6NnPiENP3/i7fdG+HLBQJpO9dBtM7XiPYWjqZXRw==
-X-Received: by 2002:a05:600c:1c9e:b0:42f:8515:e479 with SMTP id
- 5b1f17b1804b1-4311dea4233mr17594055e9.4.1728657508645; 
- Fri, 11 Oct 2024 07:38:28 -0700 (PDT)
+ AJvYcCWFpZKgdRVFFt8RIubFKS5jrAr+wPeES0YLl/r02SLniRTeI2CezDlRfOx26J5lo2iflhq3gHs=@lists.denx.de
+X-Gm-Message-State: AOJu0YwTioeSJUtxTLJmAeHRxzi7qjpxI8qZi85NR/NT89sFfRgFsnDP
+ GqfY4eLwqYAgc+MTGc83gKUcptVLwwdN/K+698GHbg21GuZi8KCQ5mXJYPphtds=
+X-Google-Smtp-Source: AGHT+IEMmOfKEKXmRhuHeLddmLKFvs0cX6dvQbsjS1FNfeGIjBidPRrmuJOaGtsmLqpwAK3bLBSoOw==
+X-Received: by 2002:a05:600c:468b:b0:42c:ba1f:5482 with SMTP id
+ 5b1f17b1804b1-4311df56381mr20243465e9.35.1728657507807; 
+ Fri, 11 Oct 2024 07:38:27 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:8261:5fff:fe11:bdda])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-430ccf5188dsm75991815e9.24.2024.10.11.07.38.27
+ 5b1f17b1804b1-430ccf5188dsm75991815e9.24.2024.10.11.07.38.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Oct 2024 07:38:28 -0700 (PDT)
+ Fri, 11 Oct 2024 07:38:27 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Fri, 11 Oct 2024 16:38:24 +0200
-Subject: [PATCH v4 1/3] usb: dwc3: allocate setup_buf with dma_alloc_coherent()
+Subject: [PATCH v4 0/3] dwc3: gadget: properly fix cache operations
+Date: Fri, 11 Oct 2024 16:38:23 +0200
+Message-Id: <20241011-u-boot-dwc3-gadget-dcache-fixup-v4-0-5f3498d8035b@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241011-u-boot-dwc3-gadget-dcache-fixup-v4-1-5f3498d8035b@linaro.org>
-References: <20241011-u-boot-dwc3-gadget-dcache-fixup-v4-0-5f3498d8035b@linaro.org>
-In-Reply-To: <20241011-u-boot-dwc3-gadget-dcache-fixup-v4-0-5f3498d8035b@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAF84CWcC/43Oyw6CMBAF0F8xXTumD1paV/6HcVHLAE0MJeWhh
+ vDvFhZG4wJ3c2eSc2ciHUaPHTnuJhJx9J0PTQrZfkdcbZsKwRcpE055RnNmYIBrCD0UdyegskW
+ FaXbW1QilfwwtoGVoeC61UoIkpY2YDmvD+ZJy7bs+xOdaOLJl+789MqAgtZUl5QqtxtPNNzaGQ
+ 4gVWfCRf4A82wZ5ApXUQhXKGJuzH1C8QUYp3wbF8qEwmmqNpRHuC5zn+QV2FCRBcQEAAA==
 To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>, 
  Lukasz Majewski <lukma@denx.de>, 
  Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
@@ -81,20 +83,20 @@ To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
 Cc: Caleb Connolly <caleb.connolly@linaro.org>, u-boot-qcom@groups.io, 
  u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3288;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1749;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=/YQoIhV2IWohezd877+6D9uRlBPbgPaoZkRO0x/uh9Q=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBnCThhzea0dODk0DPZKWz/z+vp46R/433sjtxpYJW8
- +1dSg1+JAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZwk4YQAKCRB33NvayMhJ0dBUEA
- C5/7vGv3b57Xjn40/ftwDbJH92m1UOzeiTPjPmr51wiBYlVz8oQdcN5S/ldj4RXYQ9yYsWp2HgkVdd
- BmpqhMEbWfSA3NI+/296IkGpJTeip02LLdPX8aTsYtMW7OvVfnbdjVVx9u2K8lVyVDy2ym5ZuxTtWx
- 0hbHYGb6NI1a3zH3cTxosFhVjczL8Udf42QNPXvcuI0koH0e/T672uw07RR1FKC7UeTAvZslLoRgYL
- dZ7eCcHp9L+HYOXHVKi6u1hQ9dTDxa1Tl2BWWLloEwj/KlR1lGDtYyKdjZDdo5cY3U9Cz+VlQ/YaW4
- uXhyhfAp3FFbf0YWLVz8F+teSslHeuPdVzvN+S7xG6PqYX//yCkKI1LxjwaVBFlewO6v88kfIpukKy
- 5Nvlq78/fnjMd6MgFBJwFyUJt3/nBXa+x++8JuiH3UEnC+pVnYGCU//GAwJ8bbxxnp7XvJFl3oDdTi
- bPoNO80WLUrnXC+TJIx10c2PGbbIvEq4QJlQIdl2LqjnTwJ441fPpMH9TU2SvASlnUIZKU6jdFyMYC
- 8Jgf89Yh0M6CGoIOYRpmaOruZHapGUUrH+CSwGYTGKfThsCWZDHAqSlYjIsvgu41empyu+rbQFwGVy
- YaZXbRlHMqua7P4y1Ly5A7pcVdjTmuZDbnelG90JOyKwyf+kPS5UOD9kr/gw==
+ bh=isgh+/0vJcc8OYyydcp1DZl8URJfcEfvDDMRIaTNcgU=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBnCThhdboWPUb5e1hGm7GA0WdzrfEiYtQ7H9goRUYg
+ oh7W/x+JAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZwk4YQAKCRB33NvayMhJ0b5BD/
+ 9XUFsx4XmK6/pagIXkLkf2CfQiXQY3t52hRWw/2Z16a7/JBLHW/JEoDJtW7kmNb0mw2MbAJyhxfBEK
+ iS5NqZIr8kONYCiZgl+LZ35jgwRECVJNMydsRlmsfozQ3GvxZXbWEw6LnBnxDEpC5MhiE582Owj6eY
+ GHEzDf64xXrxQ2hMgHkniqyvm28i2ID4ercJ/cRwYUSAid6ODmtkRyx1LpFin7ncyaCXvjhqGr6beR
+ y1HoU7Xxohh9hw9PdxjISYFkQ0orXImm7jcY4iHwXBfj19DWCfvHyeNkuGGTK/9CGZidWbxBfLGwMM
+ Z+IajiQL3lIZxNDmon+vcc7euPv4c5ICnnie8f4xz9q5WVn2xfcJ5SDeMd+W7dGUs8uywIvr7eQqUN
+ /Evx7DbhoD6ZUkEh/xR7nD1LaxMzceTOttzRqZbh9nuf4T+dZoWHfr2MyO71UkT/aGOoyyil3GRx2f
+ NE1rkviOdH/B3JlBKjQ/chjWVGr4Fsz2wOa3pzgLojBlU96e0mkGRJQO80UN6eu6XdwWSPnrwPFV4j
+ wKWY5Y/MdIS/H70N+wGrQWa+akJAXbRBLJqmahHX4DSQTT4/vBmzbUPr/JH7s6kij2kC4BO17wfKAy
+ tZdHgZERirVLObc/HP/Q8qzp950FhT+oY2tH0NMcxsg9zrGktbXCu74U8YPw==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
@@ -113,96 +115,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since setup_buf is also consumed by hardware DMA, aligns it's
-allocation like other hardware buffers by introduce setup_buf_addr
-populated by dma_alloc_coherent(), and use it to pass the physical
-address of the buffer to the hardware.
+We experience huge problems with cache handling on Qualcomm
+systems, and it appears the dcache handling in the DWC3 gadget
+code is quite wrong and causes operational issues.
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Reviewed-by: Marek Vasut <marex@denx.de>
+This serie fixes the dcache operations on unaligned data,
+and properly invalidate buffers when reading back data from
+hardware.
+
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- drivers/usb/dwc3/core.h   | 2 ++
- drivers/usb/dwc3/ep0.c    | 4 ++--
- drivers/usb/dwc3/gadget.c | 8 ++++----
- 3 files changed, 8 insertions(+), 6 deletions(-)
+Changes in v4:
+- Go back to CACHELINE_SIZE, and do not use DMA_MINALIGN since it's not valid for all platforms
+- Link to v3: https://lore.kernel.org/r/20241002-u-boot-dwc3-gadget-dcache-fixup-v3-0-5398088ef93c@linaro.org
 
-diff --git a/drivers/usb/dwc3/core.h b/drivers/usb/dwc3/core.h
-index 7374ce950da..b572ea340c8 100644
---- a/drivers/usb/dwc3/core.h
-+++ b/drivers/usb/dwc3/core.h
-@@ -670,6 +670,7 @@ struct dwc3_scratchpad_array {
-  * @ep0_trb: dma address of ep0_trb
-  * @ep0_usb_req: dummy req used while handling STD USB requests
-  * @ep0_bounce_addr: dma address of ep0_bounce
-+ * @setup_buf_addr: dma address of setup_buf
-  * @scratch_addr: dma address of scratchbuf
-  * @lock: for synchronizing
-  * @dev: pointer to our struct device
-@@ -757,6 +758,7 @@ struct dwc3 {
- 	dma_addr_t		ep0_trb_addr;
- 	dma_addr_t		ep0_bounce_addr;
- 	dma_addr_t		scratch_addr;
-+	dma_addr_t		setup_buf_addr;
- 	struct dwc3_request	ep0_usb_req;
- 
- 	/* device lock */
-diff --git a/drivers/usb/dwc3/ep0.c b/drivers/usb/dwc3/ep0.c
-index 24f516a131b..8ba5fcd5312 100644
---- a/drivers/usb/dwc3/ep0.c
-+++ b/drivers/usb/dwc3/ep0.c
-@@ -380,7 +380,7 @@ static int dwc3_ep0_handle_status(struct dwc3 *dwc,
- 	dep = dwc->eps[0];
- 	dwc->ep0_usb_req.dep = dep;
- 	dwc->ep0_usb_req.request.length = sizeof(*response_pkt);
--	dwc->ep0_usb_req.request.buf = dwc->setup_buf;
-+	dwc->ep0_usb_req.request.buf = (void *)dwc->setup_buf_addr;
- 	dwc->ep0_usb_req.request.complete = dwc3_ep0_status_cmpl;
- 
- 	return __dwc3_gadget_ep0_queue(dep, &dwc->ep0_usb_req);
-@@ -662,7 +662,7 @@ static int dwc3_ep0_set_sel(struct dwc3 *dwc, struct usb_ctrlrequest *ctrl)
- 	dep = dwc->eps[0];
- 	dwc->ep0_usb_req.dep = dep;
- 	dwc->ep0_usb_req.request.length = dep->endpoint.maxpacket;
--	dwc->ep0_usb_req.request.buf = dwc->setup_buf;
-+	dwc->ep0_usb_req.request.buf = (void *)dwc->setup_buf_addr;
- 	dwc->ep0_usb_req.request.complete = dwc3_ep0_set_sel_cmpl;
- 
- 	return __dwc3_gadget_ep0_queue(dep, &dwc->ep0_usb_req);
-diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
-index fe33e307d3e..19c3a5f5e58 100644
---- a/drivers/usb/dwc3/gadget.c
-+++ b/drivers/usb/dwc3/gadget.c
-@@ -2653,8 +2653,8 @@ int dwc3_gadget_init(struct dwc3 *dwc)
- 		goto err1;
- 	}
- 
--	dwc->setup_buf = memalign(CONFIG_SYS_CACHELINE_SIZE,
--				  DWC3_EP0_BOUNCE_SIZE);
-+	dwc->setup_buf = dma_alloc_coherent(DWC3_EP0_BOUNCE_SIZE,
-+					(unsigned long *)&dwc->setup_buf_addr);
- 	if (!dwc->setup_buf) {
- 		ret = -ENOMEM;
- 		goto err2;
-@@ -2701,7 +2701,7 @@ err4:
- 	dma_free_coherent(dwc->ep0_bounce);
- 
- err3:
--	kfree(dwc->setup_buf);
-+	dma_free_coherent(dwc->setup_buf);
- 
- err2:
- 	dma_free_coherent(dwc->ep0_trb);
-@@ -2723,7 +2723,7 @@ void dwc3_gadget_exit(struct dwc3 *dwc)
- 
- 	dma_free_coherent(dwc->ep0_bounce);
- 
--	kfree(dwc->setup_buf);
-+	dma_free_coherent(dwc->setup_buf);
- 
- 	dma_free_coherent(dwc->ep0_trb);
- 
+Changes in v3:
+- Cast addresses to (unsigned long) when calling invalidate_dcache_range()
+- Drop unused CACHELINE_SIZE
+- Fix warning by casting ctrl to uintptr_r when calling dwc3_invalidate_cache()
+- Link to v2: https://lore.kernel.org/r/20240724-u-boot-dwc3-gadget-dcache-fixup-v2-0-65836d699a71@linaro.org
 
+Changes in v2:
+- Fix typo in drivers/usb/dwc3/core.h and rewrite patch 1 commit message
+- Link to v1: https://lore.kernel.org/r/20240719-u-boot-dwc3-gadget-dcache-fixup-v1-0-58a5f026ea8e@linaro.org
+
+---
+Neil Armstrong (3):
+      usb: dwc3: allocate setup_buf with dma_alloc_coherent()
+      usb: dwc3: fix dcache flush range calculation
+      usb: dwc3: invalidate dcache on buffer used in interrupt handling
+
+ drivers/usb/dwc3/core.h   |  2 ++
+ drivers/usb/dwc3/ep0.c    |  6 ++++--
+ drivers/usb/dwc3/gadget.c | 10 ++++++----
+ drivers/usb/dwc3/io.h     | 13 ++++++++++++-
+ 4 files changed, 24 insertions(+), 7 deletions(-)
+---
+base-commit: ddbcafeb53e7093c58488596bfce6d8823777c3a
+change-id: 20240719-u-boot-dwc3-gadget-dcache-fixup-ea1e92758663
+
+Best regards,
 -- 
-2.34.1
+Neil Armstrong <neil.armstrong@linaro.org>
 
