@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D5B2CFD344
-	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 11:00:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC79BD2446F
+	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 11:03:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B23C9892E6;
-	Fri, 11 Oct 2024 12:59:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5C577892C6;
+	Fri, 11 Oct 2024 13:03:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Qpvx/MnT";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="u7P6Sdap";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 513EC892FB; Fri, 11 Oct 2024 12:59:59 +0200 (CEST)
-Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
- [IPv6:2607:f8b0:4864:20::1033])
+ id ADE19892D9; Fri, 11 Oct 2024 13:03:33 +0200 (CEST)
+Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
+ [IPv6:2607:f8b0:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DBB2F892A2
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 12:59:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 545BF892AB
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 13:03:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-2e3010478e6so252851a91.1
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 03:59:56 -0700 (PDT)
+Received: by mail-pf1-x430.google.com with SMTP id
+ d2e1a72fcca58-71e4244fdc6so232721b3a.0
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 04:03:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728644395; x=1729249195; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1728644610; x=1729249410; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=KIr0mZvQ0QQxgd4J0zuaMywhg4QnACYTh7WBjgt9Nr8=;
- b=Qpvx/MnTito2LCMSjL3WF8Tb66b3W+fuQo9cD8fTiKwxalyRzlonixGCv1qireylrS
- Z0Zb32GJDcxnkp7SSFXOMq3/+Tt+KYpEmZV7j/XEJsr61kT1tk4+QfzwNxX+ORaxtRpD
- UKTNq+cAc6qyGorJfyK8q1WY8Vc8ktwQyEIPFLROLNcHO/cWIJbA7RSQwHalsW6WtkRu
- 9PR6+wbt7wV4L7l6JCuYpuR0V1Me2Tjj46k+I/Gy0cF3ztSzSAXJISM5n3Vlmb8AgEZL
- HXAPMOyN2V2X7O5dC8OzrOTubm0Hyw/wz4v+RDPHEim0T2QNfujRFmBu/CuVx4M6NkeW
- EEsg==
+ bh=6JEhg+mj9URbUBX2kPVhJvAwK8GfGQuv4Vr45PNOhaE=;
+ b=u7P6SdapVz5EBzKXUUGUwufnubmtyphinn6OeYI5mKGTO3UzE/ySJIv82DQl/gMmpo
+ pLR9o9Yh/VS0taIfk55nRx8gCOgk/fJNDPB2XWQ5SbEcpkZLWvsGdhFeP6DBIK91nA+D
+ BsMjsXbMSB+D7BV8JlaMpmu+PdY5B9rZ9DgZoLylP8ZRFiIWNb5RVAwaft4NUEQ3NZzd
+ CXtdSAU0JvgpXdFAeuhDTXlN8YFX+nsCQke9a7vQErcmhlgmGwpqIhu1ERSrsSnmB8OC
+ klTRGUtwyCPuG9oRgTFswZ0Qp1WTpJZ065IYIUyfu0D7tJnpNXEK1OH1fHwuY8Oq8nZc
+ LDWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728644395; x=1729249195;
+ d=1e100.net; s=20230601; t=1728644610; x=1729249410;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=KIr0mZvQ0QQxgd4J0zuaMywhg4QnACYTh7WBjgt9Nr8=;
- b=nOw3Ak1G4Co2FoqEHf4o0yasNev8Ls2hrn6EjuWKhJytiQKy40qrKplnYEygsVi089
- q1ee5+/0k/LLplldY8iRL8X175er2BY0ahliWZN1OA5VlvO0LHt6YUPe6BiEL0g+oM8q
- uNKAbbz8Ul2P1BRh8VXk3CcC+NJxBAI8Q4gdVLhKqZwr/tmpv8ZfoISi0M4+dtZFjTjU
- RQqJG7Lq3/wtyeof5GwxT4geJviDlOrBjNwT9EQiedbiE/g3CbFso6n2YYXv2gwo3EY6
- Lp+pd/5Q5VAgk7oztXpkifn4xFHz449FWuKFIaefO5zW+8N355PN7u8NNmrJP6UUIecO
- cidg==
-X-Gm-Message-State: AOJu0Yw38qVaswpWRKfhbzviulupwDUrKz/r3T6oeFIWx2yt2t+QYHLy
- OrVqJv2jZTEFKQYxObWvnwyE3Tg7BRvDxZcKvWCX7f44FYFCsoK3JYdGMH9COvgUIyN+xUro3c6
- qDhAbLtvQPQ9t/IquwEaL58/fF6iQpk+0JV7EKg==
-X-Google-Smtp-Source: AGHT+IH4eJyuw7Ktkjgl0zyB574p4Xhzjr0MfnoCaSNBrFqP0FGHjv1JYZNa81WEOPna+rfTZ0HD9nwyP9WjKeDUBtM=
-X-Received: by 2002:a17:90a:fe01:b0:2e2:9522:279e with SMTP id
- 98e67ed59e1d1-2e2f0dfdcf2mr3129477a91.31.1728644395337; Fri, 11 Oct 2024
- 03:59:55 -0700 (PDT)
+ bh=6JEhg+mj9URbUBX2kPVhJvAwK8GfGQuv4Vr45PNOhaE=;
+ b=H9nNkDfkhZ4kBMTq6WXL0hodctbE2DvYPS0p51qBnO8hCI7i5BALmk5tNNxWuxkkq/
+ HrAoUxkR3aQormeHCnnM2xGvXZH7njMLjkJxIbFmYeyT+OkIV0SxF9epuOkkIPDN/SMj
+ X8hc+45vOkOI510IvQdO3xhf2CVns8S/5n3LNA0/7iXEvquGIPY4sLYzlidadR4hIx3F
+ EqP0DxZ5jj41t5O4f8Z5B7U5YtqFRp4OtXw7UexBWKt1PI8olo2Z0zw5Y7WH+wcIvxRL
+ n5qZhc5Cy25JpmL9Lg4HQ/2rwBZUDszFYW68ooQjMvAKHgrUVQUlX568nZcIMxLAVexF
+ Ibhg==
+X-Gm-Message-State: AOJu0YzLjlW5WECvCIc/dbXL+5kP4Nkkc7pY8QwQNYjBsb4Igb8JqFa5
+ 01kvlsuWBvdWdi/QQja7WUKu7VCBsNF9U0lF+/1ThDeujMex75wc3D2ZbmLLMAPifAQiK4K4MAH
+ gqSAXwoMO8ZRg3iTTfacK5tit8TTC65UbbZOj4A==
+X-Google-Smtp-Source: AGHT+IHkdZjVaWCiXBMbfZE0KSNMuqLu5ZxX3BZS3esYcWw+cg7rB2uKsnwWsOPjwZYHcavDKBfPZz08gkJhS/QFtk8=
+X-Received: by 2002:a05:6a20:db0a:b0:1d2:ba9c:6d9f with SMTP id
+ adf61e73a8af0-1d8bcf17e91mr3498500637.17.1728644609627; Fri, 11 Oct 2024
+ 04:03:29 -0700 (PDT)
 MIME-Version: 1.0
 References: <20241008181435.1753814-1-sughosh.ganu@linaro.org>
- <20241008181435.1753814-15-sughosh.ganu@linaro.org>
-In-Reply-To: <20241008181435.1753814-15-sughosh.ganu@linaro.org>
+ <20241008181435.1753814-13-sughosh.ganu@linaro.org>
+In-Reply-To: <20241008181435.1753814-13-sughosh.ganu@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 11 Oct 2024 13:59:18 +0300
-Message-ID: <CAC_iWj+YXbNakXZijoV8SFMRO0p17skLM5c5+VuO6ZDYXsoCYg@mail.gmail.com>
-Subject: Re: [PATCH v2 14/14] efi_memory: rename variable to highlight overlap
- with free memory
+Date: Fri, 11 Oct 2024 14:02:53 +0300
+Message-ID: <CAC_iWjJF5SBE07SPEik8abFGq3fyZvAo=gpM73=Ds=K2aiBaJQ@mail.gmail.com>
+Subject: Re: [PATCH v2 12/14] efi_memory: do not add RAM memory to the memory
+ map
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
@@ -94,168 +94,162 @@ Hi Sughosh,
 
 On Tue, 8 Oct 2024 at 21:15, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> The functions to add a memory region to the EFI memory map have a
-> variable, overlap_only_ram, which is used to indicate if a new memory
-> region needs to be carved out from the free, or conventional
-> memory.
-
-This is a bit confusing. Conventional memory is free memory.
-Isn't it this from conventional or non-conventional memory?
-
-> The name overlap_only_ram is a bit confusing, as other
-> allocated memory regions, like boot-services code and data are also
-> part of the RAM memory. Rename the variable to highlight the fact that
-> it is the free/conventional memory that is being referred to in this
-> context.
-
-overlap_conventional should be even better?
-
-Thanks
-/Ilias
+> The EFI_CONVENTIONAL_MEMORY type, which is the usable RAM memory is
+> now being managed by the LMB module. Remove the addition of this
+> memory type to the EFI memory map. This memory now gets added to the
+> EFI memory map as part of the LMB memory map update event handler.
 >
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 > ---
-> Changes since V1: New patch
+> Changes since V1: None
 >
->  include/efi_loader.h        | 16 +++++++-----
->  lib/efi_loader/efi_memory.c | 51 ++++++++++++++++++++-----------------
->  2 files changed, 37 insertions(+), 30 deletions(-)
+>  include/efi_loader.h        | 13 ++++---
+>  lib/efi_loader/efi_memory.c | 75 +++----------------------------------
+>  2 files changed, 12 insertions(+), 76 deletions(-)
 >
 > diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index 0d5555c7597..c3512c63a50 100644
+> index 081cb65d3f7..0d5555c7597 100644
 > --- a/include/efi_loader.h
 > +++ b/include/efi_loader.h
-> @@ -788,15 +788,17 @@ efi_status_t efi_add_memory_map(u64 start, u64 size, int memory_type);
->  /**
->   * efi_add_memory_map_pg() - add pages to the memory map
->   *
-> - * @start:             start address, must be a multiple of EFI_PAGE_SIZE
-> - * @pages:             number of pages to add
-> - * @memory_type:       type of memory added
-> - * @overlap_only_ram:  region may only overlap RAM
-> - * Return:             status code
-> + * @start:                     start address, must be a multiple of
-> + *                             EFI_PAGE_SIZE
-> + * @pages:                     number of pages to add
-> + * @memory_type:               type of memory added
-> + * @overlap_only_freemem:      region may only overlap free(conventional)
-> + *                             memory
-> + * Return:                     status code
->   */
->  efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
-> -                                         int memory_type,
-> -                                         bool overlap_only_ram);
-> +                                  int memory_type,
-> +                                  bool overlap_only_freemem);
+> @@ -798,10 +798,6 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
+>                                           int memory_type,
+>                                           bool overlap_only_ram);
 >
+> -/* Adds a conventional range into the EFI memory map */
+> -efi_status_t efi_add_conventional_memory_map(u64 ram_start, u64 ram_end,
+> -                                            u64 ram_top);
+> -
 >  /* Called by board init to initialize the EFI drivers */
 >  efi_status_t efi_driver_init(void);
+>  /* Called when a block device is added */
+> @@ -1186,9 +1182,14 @@ efi_status_t efi_console_get_u16_string
+>  efi_status_t efi_disk_get_device_name(const efi_handle_t handle, char *buf, int size);
+>
+>  /**
+> - * efi_add_known_memory() - add memory banks to EFI memory map
+> + * efi_add_known_memory() - add memory types to the EFI memory map
+> + *
+> + * This function is to be used to adding different memory types other
+
+/adding/add
+
+> + * than EFI_CONVENTIONAL_MEMORY to the EFI memory map. The conventional
+> + * memory is handled by the LMB module, and gets added to the memory
+
+no comma after module
+
+> + * map through the LMB module.
+>   *
+> - * This weak function may be overridden for specific architectures.
+> + * This function may be overridden for specific architectures.
+
+Since you are rewriting this I think for "architecture specific
+purposes" is better
+
+>   */
+>  void efi_add_known_memory(void);
+>
 > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> index 0f25094dbf8..97b89a97a2e 100644
+> index 974ecc51113..0f25094dbf8 100644
 > --- a/lib/efi_loader/efi_memory.c
 > +++ b/lib/efi_loader/efi_memory.c
-> @@ -173,17 +173,19 @@ static void efi_mem_sort(void)
->  /**
->   * efi_mem_carve_out() - unmap memory region
->   *
-> - * @map:               memory map
-> - * @carve_desc:                memory region to unmap
-> - * @overlap_only_ram:  the carved out region may only overlap RAM
-> - * Return:             the number of overlapping pages which have been
-> - *                     removed from the map,
-> - *                     EFI_CARVE_NO_OVERLAP, if the regions don't overlap,
-> - *                     EFI_CARVE_OVERLAPS_NONRAM, if the carve and map overlap,
-> - *                     and the map contains anything but free ram
-> - *                     (only when overlap_only_ram is true),
-> - *                     EFI_CARVE_LOOP_AGAIN, if the mapping list should be
-> - *                     traversed again, as it has been altered.
-> + * @map:                       memory map
-> + * @carve_desc:                        memory region to unmap
-> + * @overlap_only_freemem:      the carved out region may only overlap free,
-> + *                             or conventional memory
-> + * Return:                     the number of overlapping pages which have been
-> + *                             removed from the map,
-> + *                             EFI_CARVE_NO_OVERLAP, if the regions don't
-> + *                             overlap, EFI_CARVE_OVERLAPS_NONRAM, if the carve
-> + *                             and map overlap, and the map contains anything
-> + *                             but free ram(only when overlap_only_freemem is
-> + *                             true),
-> + *                             EFI_CARVE_LOOP_AGAIN, if the mapping list should
-> + *                             be traversed again, as it has been altered.
->   *
->   * Unmaps all memory occupied by the carve_desc region from the list entry
->   * pointed to by map.
-> @@ -193,7 +195,7 @@ static void efi_mem_sort(void)
->   */
->  static s64 efi_mem_carve_out(struct efi_mem_list *map,
->                              struct efi_mem_desc *carve_desc,
-> -                            bool overlap_only_ram)
-> +                            bool overlap_only_freemem)
->  {
->         struct efi_mem_list *newmap;
->         struct efi_mem_desc *map_desc = &map->desc;
-> @@ -208,7 +210,7 @@ static s64 efi_mem_carve_out(struct efi_mem_list *map,
->                 return EFI_CARVE_NO_OVERLAP;
+> @@ -780,82 +780,17 @@ efi_status_t efi_get_memory_map_alloc(efi_uintn_t *map_size,
+>  }
 >
->         /* We're overlapping with non-RAM, warn the caller if desired */
-> -       if (overlap_only_ram && (map_desc->type != EFI_CONVENTIONAL_MEMORY))
-> +       if (overlap_only_freemem && (map_desc->type != EFI_CONVENTIONAL_MEMORY))
->                 return EFI_CARVE_OVERLAPS_NONRAM;
->
->         /* Sanitize carve_start and carve_end to lie within our bounds */
-> @@ -258,15 +260,17 @@ static s64 efi_mem_carve_out(struct efi_mem_list *map,
 >  /**
->   * efi_add_memory_map_pg() - add pages to the memory map
+> - * efi_add_conventional_memory_map() - add a RAM memory area to the map
+> + * efi_add_known_memory() - add memory types to the EFI memory map
 >   *
-> - * @start:             start address, must be a multiple of EFI_PAGE_SIZE
-> - * @pages:             number of pages to add
-> - * @memory_type:       type of memory added
-> - * @overlap_only_ram:  region may only overlap RAM
+> - * @ram_start:         start address of a RAM memory area
+> - * @ram_end:           end address of a RAM memory area
+> - * @ram_top:           max address to be used as conventional memory
 > - * Return:             status code
-> + * @start:                     start address, must be a multiple of
-> + *                             EFI_PAGE_SIZE
-> + * @pages:                     number of pages to add
-> + * @memory_type:               type of memory added
-> + * @overlap_only_freemem:      region may only overlap free(conventional)
-> + *                             memory
-> + * Return:                     status code
+> - */
+> -efi_status_t efi_add_conventional_memory_map(u64 ram_start, u64 ram_end,
+> -                                            u64 ram_top)
+> -{
+> -       u64 pages;
+> -
+> -       /* Remove partial pages */
+> -       ram_end &= ~EFI_PAGE_MASK;
+> -       ram_start = (ram_start + EFI_PAGE_MASK) & ~EFI_PAGE_MASK;
+> -
+> -       if (ram_end <= ram_start) {
+> -               /* Invalid mapping */
+> -               return EFI_INVALID_PARAMETER;
+> -       }
+> -
+> -       pages = (ram_end - ram_start) >> EFI_PAGE_SHIFT;
+> -
+> -       efi_add_memory_map_pg(ram_start, pages,
+> -                             EFI_CONVENTIONAL_MEMORY, false);
+> -
+> -       /*
+> -        * Boards may indicate to the U-Boot memory core that they
+> -        * can not support memory above ram_top. Let's honor this
+> -        * in the efi_loader subsystem too by declaring any memory
+> -        * above ram_top as "already occupied by firmware".
+> -        */
+> -       if (ram_top < ram_start) {
+> -               /* ram_top is before this region, reserve all */
+> -               efi_add_memory_map_pg(ram_start, pages,
+> -                                     EFI_BOOT_SERVICES_DATA, true);
+> -       } else if (ram_top < ram_end) {
+> -               /* ram_top is inside this region, reserve parts */
+> -               pages = (ram_end - ram_top) >> EFI_PAGE_SHIFT;
+> -
+> -               efi_add_memory_map_pg(ram_top, pages,
+> -                                     EFI_BOOT_SERVICES_DATA, true);
+> -       }
+> -
+> -       return EFI_SUCCESS;
+> -}
+> -
+> -/**
+> - * efi_add_known_memory() - add memory banks to map
+> + * This function is to be used to adding different memory types other
+> + * than EFI_CONVENTIONAL_MEMORY to the EFI memory map. The conventional
+> + * memory is handled by the LMB module, and gets added to the memory
+> + * map through the LMB module.
+>   *
+>   * This function may be overridden for specific architectures.
 >   */
->  efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
-> -                                         int memory_type,
-> -                                         bool overlap_only_ram)
-> +                                  int memory_type,
-> +                                  bool overlap_only_freemem)
+>  __weak void efi_add_known_memory(void)
+
+ We can also get rid of this in the future. Any idea if we have
+platforms using it after the last 2 you removed?
+
+
 >  {
->         struct efi_mem_list *lmem;
->         struct efi_mem_list *newlist;
-> @@ -275,7 +279,8 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
->         struct efi_event *evt;
+> -       u64 ram_top = gd->ram_top & ~EFI_PAGE_MASK;
+> -       int i;
+> -
+> -       /*
+> -        * ram_top is just outside mapped memory. So use an offset of one for
+> -        * mapping the sandbox address.
+> -        */
+> -       ram_top = (uintptr_t)map_sysmem(ram_top - 1, 0) + 1;
+> -
+> -       /* Fix for 32bit targets with ram_top at 4G */
+> -       if (!ram_top)
+> -               ram_top = 0x100000000ULL;
+> -
+> -       /* Add RAM */
+> -       for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
+> -               u64 ram_end, ram_start;
+> -
+> -               ram_start = (uintptr_t)map_sysmem(gd->bd->bi_dram[i].start, 0);
+> -               ram_end = ram_start + gd->bd->bi_dram[i].size;
+> -
+> -               efi_add_conventional_memory_map(ram_start, ram_end, ram_top);
+> -       }
+>  }
 >
->         EFI_PRINT("%s: 0x%llx 0x%llx %d %s\n", __func__,
-> -                 start, pages, memory_type, overlap_only_ram ? "yes" : "no");
-> +                 start, pages, memory_type, overlap_only_freemem ?
-> +                 "yes" : "no");
->
->         if (memory_type >= EFI_MAX_MEMORY_TYPE)
->                 return EFI_INVALID_PARAMETER;
-> @@ -312,7 +317,7 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
->                         s64 r;
->
->                         r = efi_mem_carve_out(lmem, &newlist->desc,
-> -                                             overlap_only_ram);
-> +                                             overlap_only_freemem);
->                         switch (r) {
->                         case EFI_CARVE_OUT_OF_RESOURCES:
->                                 free(newlist);
-> @@ -348,7 +353,7 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
->                 }
->         } while (carve_again);
->
-> -       if (overlap_only_ram && (carved_pages != pages)) {
-> +       if (overlap_only_freemem && (carved_pages != pages)) {
->                 /*
->                  * The payload wanted to have RAM overlaps, but we overlapped
->                  * with an unallocated region. Error out.
+>  /**
 > --
 > 2.34.1
 >
+
+With the spelling nits fixed
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
