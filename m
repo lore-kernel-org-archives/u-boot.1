@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C01ABD0EE3F
-	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 21:41:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EC30D0EE3F
+	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 21:41:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EFE9C8940E;
-	Fri, 11 Oct 2024 23:40:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5ECD189413;
+	Fri, 11 Oct 2024 23:40:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mgHOq6lN";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="j6q9nF4x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 401E1893DE; Fri, 11 Oct 2024 23:40:44 +0200 (CEST)
-Received: from mail-il1-x130.google.com (mail-il1-x130.google.com
- [IPv6:2607:f8b0:4864:20::130])
+ id 6B1CC89407; Fri, 11 Oct 2024 23:40:45 +0200 (CEST)
+Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
+ [IPv6:2607:f8b0:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22E37893DA
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 23:40:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 496C0893D6
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 23:40:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x130.google.com with SMTP id
- e9e14a558f8ab-3a3bd664ebaso497305ab.2
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 14:40:42 -0700 (PDT)
+Received: by mail-il1-x131.google.com with SMTP id
+ e9e14a558f8ab-3a3bd664ebaso497335ab.2
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 14:40:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728682841; x=1729287641; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1728682842; x=1729287642; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZxL9UB0M4AHLMw+W9M04lCEBiKILByvygojnYHpOrGc=;
- b=mgHOq6lNm3UVFawIc1XK+jUsLauaIG1L0VWu3vHTIhVV70RQa944HRaeJACxFTZFCc
- aNp4oUj/gGkErTTdDgBKFsNwynd/q3WillRGVkn4e2Yt9pc/77Qdx4cA8XXKqstNJewm
- eNN7ZsjuZjm0ZgXeXMLF8WuVdQ4oiX5rad75g=
+ bh=A6ePxWlG4ffiLMC1LAsRw92IjHsxtWQIDqjO5XqetVs=;
+ b=j6q9nF4xuub4KIE1iLHAuMUQzX9GHH8yd/cm9j/cKxVoXhPRaCvVpGM1mVOSg9bFqF
+ FjVwvVGAZHjfHrXXTIm5G3aFbUgl3QEY90qIOu/hJsP7bYtxXxUu8qWP0yRAlmrJcBao
+ RPTktyl3K3vAPr1gKtfmzBuuZGaivbMrGqoZk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728682841; x=1729287641;
+ d=1e100.net; s=20230601; t=1728682842; x=1729287642;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZxL9UB0M4AHLMw+W9M04lCEBiKILByvygojnYHpOrGc=;
- b=qzcYH+WlFfMGjOJ7ZqZar7kekCEv9CdVY87u2o7BWyMIrWkS0hvMEJzesuGIo4bJzi
- FOIpx+47lcb6Pxh4PsKR5NZO4+wR7/bwJ6Wwe2xh8lLw3VY6OtKULzZyCpDcJFTDEeJh
- M3TyodIV+vBKiOiN/TcR6LM8lClnAef+tI73I4gveIGoslxakT4iLTWv+G01nt9VsNPa
- YofSTSXNLHXM6SFs2Zh2RTRydV6WDHnQOcFdAsEqFYI4ejkQ9rXOHHOMXCFdMhogLbKo
- 3RFXLWKcmizoF1I0p3XJjoobW9gkS0H7t2IiEEi6n5m1UxGWCJi9WJS07QfmifGkWSEp
- FqRw==
-X-Gm-Message-State: AOJu0YwaEy0lDm9R+PJKDz/rWG8fhbF6jAxHfB191tKar9dk4mMhhZxs
- sArDyO30vvwTDYCuzG4ChyT40IxOsufGwgRqM3WKFL/JpF9Fx0MDfEju5+RFAGJBkLHOglfdDqr
- 5XA==
-X-Google-Smtp-Source: AGHT+IH5oG1rGQTfaQnYnfGV+tkM22PHlLtU5qJIO0o4ltbISuckGfYdu6PkxJQezm5v5jrPGVmsSw==
-X-Received: by 2002:a05:6e02:1c4b:b0:3a3:b3f4:af4c with SMTP id
- e9e14a558f8ab-3a3b5ffd784mr28168345ab.25.1728682840701; 
- Fri, 11 Oct 2024 14:40:40 -0700 (PDT)
+ bh=A6ePxWlG4ffiLMC1LAsRw92IjHsxtWQIDqjO5XqetVs=;
+ b=rrATcJcw2pe8zQ0yQev1KYpNC92AwXKdRViPVtIK05bGH3XKrX2XPs3MHR5rBFC/qo
+ ik9oyehsH/v2gD155eTILYtjIGr4sGMHU7Dj173tGB/79sWjbyQJ6CSFZwkEQxGGtUxp
+ 4X2+bH+7NMSZTlEp3eGDixxBcnH75DfAD12rdI16XrLHnN26gnSU6bGENL/rSwO/cGuA
+ JCCjmpgVj05suamRrISeoFD8USrp1AeZTjBaBA645tbS8jADoY2mVgIDcAWvI8PNr0UW
+ C3+5fqt6xu7yP2TbH/5eXPgvX2xj+4zFZwelKMoAW/Q9r9GIVAg/BjDSxYjUA6CptwRs
+ uFCg==
+X-Gm-Message-State: AOJu0Yx+883GrEAqMdTUG73M3nYMv3zqR8JD+schaWt3yo5NKFktzl+W
+ 86lWMAa2e9GPCNfXh2/T9ThqS9PTnR04NuUFHW2ZC/ukm3L42x0EEJViy6/mLg2oS7mRr0CtTG8
+ u7A==
+X-Google-Smtp-Source: AGHT+IFFq/5DDp940YGxyerFtzlmaZPkxYZYeoKlfNC1x3y0LySdQtxD/QZ+MbK+FWP+OEoXLJb7gQ==
+X-Received: by 2002:a05:6e02:144e:b0:3a2:7651:9876 with SMTP id
+ e9e14a558f8ab-3a3b5f94b2cmr30310385ab.13.1728682841843; 
+ Fri, 11 Oct 2024 14:40:41 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3a3afdae0f1sm8830475ab.11.2024.10.11.14.40.39
+ e9e14a558f8ab-3a3afdae0f1sm8830475ab.11.2024.10.11.14.40.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Oct 2024 14:40:40 -0700 (PDT)
+ Fri, 11 Oct 2024 14:40:41 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 4/7] global_data: Add some more accessors
-Date: Fri, 11 Oct 2024 15:40:28 -0600
-Message-Id: <20241011214032.760072-5-sjg@chromium.org>
+Subject: [PATCH v2 5/7] bootstage: Allow counting memory without strings
+Date: Fri, 11 Oct 2024 15:40:29 -0600
+Message-Id: <20241011214032.760072-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241011214032.760072-1-sjg@chromium.org>
 References: <20241011214032.760072-1-sjg@chromium.org>
@@ -90,58 +90,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add accessors for bloblist, bootstage, trace and video to avoid needing
-more #ifdefs in the C code.
+The bootstage array includes pointers to strings but not the strings
+themselves. The strings are added when stashing, but including them in
+the size calculation gives an inflated view of the amount of space used
+by the array.
+
+Update this function so it can return the amount of memory used by the
+bootstage structures themselves, without the strings which they point
+to.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- include/asm-generic/global_data.h | 30 ++++++++++++++++++++++++++++++
- 1 file changed, 30 insertions(+)
+ common/board_f.c    |  2 +-
+ common/bootstage.c  | 16 +++++++++-------
+ include/bootstage.h |  5 +++--
+ 3 files changed, 13 insertions(+), 10 deletions(-)
 
-diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
-index d6c15e2c406..fcf9fa27117 100644
---- a/include/asm-generic/global_data.h
-+++ b/include/asm-generic/global_data.h
-@@ -544,6 +544,36 @@ static_assert(sizeof(struct global_data) == GD_SIZE);
- #define gd_set_upl(val)
+diff --git a/common/board_f.c b/common/board_f.c
+index 2e04a47b546..bf4252784a4 100644
+--- a/common/board_f.c
++++ b/common/board_f.c
+@@ -582,7 +582,7 @@ static int reserve_fdt(void)
+ static int reserve_bootstage(void)
+ {
+ #ifdef CONFIG_BOOTSTAGE
+-	int size = bootstage_get_size();
++	int size = bootstage_get_size(true);
+ 
+ 	gd->start_addr_sp = reserve_stack_aligned(size);
+ 	gd->boardf->new_bootstage = map_sysmem(gd->start_addr_sp, size);
+diff --git a/common/bootstage.c b/common/bootstage.c
+index 49acc9078a6..b1506120f9d 100644
+--- a/common/bootstage.c
++++ b/common/bootstage.c
+@@ -520,17 +520,19 @@ int _bootstage_unstash_default(void)
+ }
  #endif
  
-+#if CONFIG_IS_ENABLED(BLOBLIST)
-+#define gd_bloblist()		gd->bloblist
-+#else
-+#define gd_bloblist()		NULL
-+#endif
+-int bootstage_get_size(void)
++int bootstage_get_size(bool add_strings)
+ {
+-	struct bootstage_data *data = gd->bootstage;
+-	struct bootstage_record *rec;
+ 	int size;
+-	int i;
+ 
+ 	size = sizeof(struct bootstage_data);
+-	for (rec = data->record, i = 0; i < data->rec_count;
+-	     i++, rec++)
+-		size += strlen(rec->name) + 1;
++	if (add_strings) {
++		struct bootstage_data *data = gd->bootstage;
++		struct bootstage_record *rec;
++		int i;
 +
-+#if CONFIG_IS_ENABLED(BOOTSTAGE)
-+#define gd_bootstage()		gd->bootstage
-+#else
-+#define gd_bootstage()		NULL
-+#endif
-+
-+#if CONFIG_IS_ENABLED(TRACE)
-+#define gd_trace_buff()		gd->trace_buff
-+#define gd_trace_size()		CONFIG_TRACE_BUFFER_SIZE
-+#else
-+#define gd_trace_buff()		NULL
-+#define gd_trace_size()		0
-+#endif
-+
-+#if CONFIG_IS_ENABLED(VIDEO)
-+#define gd_video_top()		gd->video_top
-+#define gd_video_bottom()	gd->video_bottom
-+#define gd_video_size()		(gd->video_top - gd->video_bottom)
-+#else
-+#define gd_video_top()		0
-+#define gd_video_bottom()	0
-+#define gd_video_size()		0
-+#endif
-+
++		for (rec = data->record, i = 0; i < data->rec_count; i++, rec++)
++			size += strlen(rec->name) + 1;
++	}
+ 
+ 	return size;
+ }
+diff --git a/include/bootstage.h b/include/bootstage.h
+index 57792648c49..3300ca0248a 100644
+--- a/include/bootstage.h
++++ b/include/bootstage.h
+@@ -371,9 +371,10 @@ int bootstage_unstash(const void *base, int size);
  /**
-  * enum gd_flags - global data flags
+  * bootstage_get_size() - Get the size of the bootstage data
   *
++ * @add_strings: true to add the size of attached strings (for stashing)
+  * Return: size of boostage data in bytes
+  */
+-int bootstage_get_size(void);
++int bootstage_get_size(bool add_strings);
+ 
+ /**
+  * bootstage_init() - Prepare bootstage for use
+@@ -444,7 +445,7 @@ static inline int bootstage_unstash(const void *base, int size)
+ 	return 0;	/* Pretend to succeed */
+ }
+ 
+-static inline int bootstage_get_size(void)
++static inline int bootstage_get_size(bool add_strings)
+ {
+ 	return 0;
+ }
 -- 
 2.34.1
 
