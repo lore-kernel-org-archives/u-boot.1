@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32E46D0D7BB
-	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 15:51:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7511D0D7BB
+	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 15:51:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4031D89392;
+	by phobos.denx.de (Postfix) with ESMTP id AD39A893A3;
 	Fri, 11 Oct 2024 17:51:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="UD3M+A6d";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="tzCRdjWc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8E148939F; Fri, 11 Oct 2024 17:51:23 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id 8C77289386; Fri, 11 Oct 2024 17:51:24 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 919728937B
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 17:51:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E68D89392
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 17:51:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-37d3ecad390so1978782f8f.1
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 08:51:21 -0700 (PDT)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-43117ed8adbso20517605e9.2
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 08:51:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1728661871; x=1729266671;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1728661872; x=1729266672;
  darn=lists.denx.de; 
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=nFjJGnsC6gWU++GrMe+WK/ovj8M050EAJFUXFQHBgQk=;
- b=UD3M+A6d4I5bw8jPgQY5zVKL5fxMdrNITMu/Xey6uKpcxPpLh03FRPDkkH0Ar2uQDA
- 055ikavjtqhxy9tjoEgZIicURtOqoDuacitrtUOGGpvtJ3rx2TJSuAbHLKgCXGczLI+O
- /YhcOkLMpeiqi2VSTkWhQR/yqq5nALhJI0Etp0DAMU/lcBHTICXb/k2ldB+3W+g7ghVc
- cFGtZLztmpXyatqoKBEHp8dHrDBZoj7MqrK+toIEfU+rHlwTQ7UhhAoBmwlTScsF2+56
- tFufHGMSQ27PP3ATonLABRphopu+1BoAnPQEgjcZlYbamXuD//QBgu0mEIJQFtX4DTak
- anXA==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=st3gsl4Hv1L87ZmhBwuH6nFBVIE/pTqHf20GzKXC8XE=;
+ b=tzCRdjWcIxMrbq963hro0EG0Xfw7kw9V35PsVugSsTznTVpUANsU6e9GEsUJeVpE4j
+ KkwbiERx0NHxx6aUowrfgVUvz2R0mO3Yfj0jygueM+B5uHy4WRzdaWerutp4Hn/MbAY7
+ Kt247jmo1nd6J/mCeubkcNluQ5jNopBuIppxLt/yYbG+Z1u5gUIY+YjG32VjPXd/Y46J
+ M2fK3N7raR395wGNOS+san5tWgyikvQD0U6WSpBOqxX4mVYyKxR98kvoXwanEJ8exv5o
+ YaJ2m8NKNFaJMU1s5tgcH7n5TphcmWYkNTfy+ymZRDWgPJk1hS8j+YIpl/j6F+TWafFm
+ oo2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728661871; x=1729266671;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=nFjJGnsC6gWU++GrMe+WK/ovj8M050EAJFUXFQHBgQk=;
- b=Whi2B8u8BGofRKRdWDvedNVU6N3bxVtfKO3cVTD6hiOZH0giz3H7eoaphwmaRRTG4j
- PnM1AjOxZJM2G2riNxTA1sOYsYIDxUDL/5tKXMoufAM75j29tVm9GYn+Dp8JO/HbYpmu
- ziP35y1/m9OVrz4+etr9ghTEhPQGXDlQiUP9ScEqLq4v0AgjQ8obm3JSxrz04ZSuw1h5
- Uv+WAuDF1nDDGJ+i63tacIGxx7HCRAbjFxFiz8yijT1GreIQC3/6lmowOsD2ROHqMSMf
- rQ/539H7XeugJ3+g0lgkfNxPaIuBsRHeiao84I2ARcDfu74PvzS3d481/P6qqV7VG6/0
- 1hEw==
+ d=1e100.net; s=20230601; t=1728661872; x=1729266672;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=st3gsl4Hv1L87ZmhBwuH6nFBVIE/pTqHf20GzKXC8XE=;
+ b=ZTsUVC1cm7ii0PoNG37nkNfY1pcP58aAFtxzndH4Hbbd+34PXjCLo7VBw5xRp3cAGH
+ Kb3jPkhfpHfEq4Bwcc8FWVqPH5HNuTXUsi8Z2EaxPWezgIgOXLMg6tPqW7jnkAOQib9h
+ rN48rMaeZ5AnplpgR5te3jlN5nzzKdbuNSqEG/EWBFFJo9MbQaOXCYevTxzHMiSq8OVy
+ TZSSmB1DaKtMjcXyDSlWuBf5EPOkSOPC5dsz1W5vokmShbf9bqu0bNsBygw5tm2TRPrR
+ Wp7bTnnj4SkSgW1pmqKJsQKN5HvUt6TyPgnJCTMQkmOHji9jjh9r1XNEoEcUcY7tPvrF
+ XEuA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUBXxHgJpeR0TLnT0XU1SavP4uz+92mMYaC9U6/F58PWg3VqlISbQ8gjtTTewEYv8ydq5mgE/8=@lists.denx.de
-X-Gm-Message-State: AOJu0YxSpJmJwBM9wRkZxDd7F4KL2SrYx42PYZCprActBBCJh6f1y3MT
- gt8j/rTcdhXp0AL8N3x7gtWMNHJ7OnEysgZ0khNZGthS2TKyRW7t64EpMr5JazE=
-X-Google-Smtp-Source: AGHT+IGhWVfXo6SmgV0cKYw/w/km0nsPPOW+VHTSBvLmsyRjPiacH+9O8FU/ieo2NqyTP3GsYbmdxQ==
-X-Received: by 2002:a5d:58fc:0:b0:37c:fdc8:77ab with SMTP id
- ffacd0b85a97d-37d481650acmr5683597f8f.7.1728661870794; 
- Fri, 11 Oct 2024 08:51:10 -0700 (PDT)
+ AJvYcCVgxX0AoCjBieeUbggtefzxL/IDucytPzaD2/cBPqg13uPqeeenOYkGx8N77EyAUjHLbxvJMHo=@lists.denx.de
+X-Gm-Message-State: AOJu0YyWWPBMVJoC+SRB5rEDSOzioexVMgxO7vV5zCsTUUS5zKc9M8E8
+ bMUwSwgF9G4OrrqCmUyJg0ixMrUAPvHJhz0Mq87EUCfmQbADvaXhx5lSBRz34ss=
+X-Google-Smtp-Source: AGHT+IHKaqZDknRe25/ylaGTj6J8KLjhJqrN8L62hWfhu6Oix5rfoPkVlGqBEb+CXF9LoGovWwq9tw==
+X-Received: by 2002:a05:600c:21ce:b0:431:24c3:dbaa with SMTP id
+ 5b1f17b1804b1-43124c3dd9cmr4610915e9.2.1728661872590; 
+ Fri, 11 Oct 2024 08:51:12 -0700 (PDT)
 Received: from mkorpershoek-xps13.home
  ([2a01:cb19:8941:9800:3dae:610e:6435:d98e])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-431182d794asm45769005e9.1.2024.10.11.08.51.09
+ 5b1f17b1804b1-431182d794asm45769005e9.1.2024.10.11.08.51.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Oct 2024 08:51:10 -0700 (PDT)
+ Fri, 11 Oct 2024 08:51:12 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Subject: [PATCH 0/2] configs: khadas-vim3{l}: Android bootflow updates
-Date: Fri, 11 Oct 2024 17:51:01 +0200
-Message-Id: <20241011-yukawa-aosp-parts-v1-0-7d74aa13ff8e@baylibre.com>
+Date: Fri, 11 Oct 2024 17:51:03 +0200
+Subject: [PATCH 2/2] configs: meson64_android: Remove dtbo support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAGVJCWcC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIxNDA0ND3crS7MTyRN3E/OIC3YLEopJiXXPzFCNT00RDy+SURCWgvoKi1LT
- MCrCZ0bG1tQB0uq0HYwAAAA==
+Message-Id: <20241011-yukawa-aosp-parts-v1-2-7d74aa13ff8e@baylibre.com>
+References: <20241011-yukawa-aosp-parts-v1-0-7d74aa13ff8e@baylibre.com>
+In-Reply-To: <20241011-yukawa-aosp-parts-v1-0-7d74aa13ff8e@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>
 Cc: Guillaume La Roque <glaroque@baylibre.com>, u-boot@lists.denx.de, 
  u-boot-amlogic@groups.io, Mattijs Korpershoek <mkorpershoek@baylibre.com>
@@ -97,32 +96,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello, 2 small fixes for Khadas VIM3 and VIM3L to boot Android.
+The device tree overlays are not part of the
+Android Common Kernel code [1]
 
-Recently, some effort has been made to use the
-upstream android-mainline kernel on these boards [1].
+Historically, they existed to enable some Android specific
+features but they have been removed.
 
-To use android-mainline kernel, we should:
-* Increase the boot/recovery partition sizes (so that it fits)
-* Drop dtbo support, since these are not part of android-mainline
+Remove the dtbos logic since these files do no longer exist.
 
-[1] https://android-review.googlesource.com/c/kernel/common/+/3296472
-
+[1] https://android.googlesource.com/kernel/common/+/ac2ea0bb91a3b5f5e71eba66c441e58beca6767e/arch/arm64/boot/dts/amlogic/
 Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 ---
-Mattijs Korpershoek (2):
-      configs: khadas-vim3{l}: Increase boot/recovery partition size
-      configs: meson64_android: Remove dtbo support
+ include/configs/meson64_android.h | 26 +-------------------------
+ 1 file changed, 1 insertion(+), 25 deletions(-)
 
- include/configs/khadas-vim3_android.h  |  8 ++++----
- include/configs/khadas-vim3l_android.h |  8 ++++----
- include/configs/meson64_android.h      | 26 +-------------------------
- 3 files changed, 9 insertions(+), 33 deletions(-)
----
-base-commit: a404065479be2c1fe1167c3c91367e8194a69d1b
-change-id: 20241011-yukawa-aosp-parts-77d255a19cda
+diff --git a/include/configs/meson64_android.h b/include/configs/meson64_android.h
+index c0e977abb01f..fa520265800c 100644
+--- a/include/configs/meson64_android.h
++++ b/include/configs/meson64_android.h
+@@ -116,31 +116,7 @@
+ 	"fi; " \
+ 	"abootimg get dtb --index=$dtb_index dtb_start dtb_size; " \
+ 	"cp.b $dtb_start $fdt_addr_r $dtb_size; " \
+-	"fdt addr $fdt_addr_r  0x80000; " \
+-	"if test $board_name = sei510; then " \
+-		"echo \"  Reading DTBO for sei510...\"; " \
+-		"setenv dtbo_index 0;" \
+-	"elif test $board_name = sei610; then " \
+-		"echo \"  Reading DTBO for sei610...\"; " \
+-		"setenv dtbo_index 1;" \
+-	"elif test $board_name = vim3l; then " \
+-		"echo \"  Reading DTBO for vim3l...\"; " \
+-		"setenv dtbo_index 2;" \
+-	"elif test $board_name = vim3; then " \
+-		"echo \"  Reading DTBO for vim3...\"; " \
+-		"setenv dtbo_index 3;" \
+-	"else " \
+-		"echo Error: Android boot is not supported for $board_name; " \
+-		"exit; " \
+-	"fi; " \
+-	"part start mmc ${mmcdev} dtbo${slot_suffix} p_dtbo_start; " \
+-	"part size mmc ${mmcdev} dtbo${slot_suffix} p_dtbo_size; " \
+-	"mmc read ${dtboaddr} ${p_dtbo_start} ${p_dtbo_size}; " \
+-	"echo \"  Applying DTBOs...\"; " \
+-	"adtimg addr $dtboaddr; " \
+-	"adtimg get dt --index=$dtbo_index dtbo0_addr; " \
+-	"fdt apply $dtbo0_addr;" \
+-	"setenv bootargs \"$bootargs androidboot.dtbo_idx=$dtbo_index \";"\
++	"fdt addr $fdt_addr_r  0x80000; "
+ 
+ #define BOOT_CMD "bootm ${loadaddr} ${loadaddr} ${fdt_addr_r};"
+ 
 
-Best regards,
 -- 
-Mattijs Korpershoek <mkorpershoek@baylibre.com>
+2.46.2
 
