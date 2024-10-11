@@ -4,75 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CF58D2E9F0
-	for <u-boot@archiver.kernel.org>; Mon, 11 Nov 2024 14:27:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81F26D20698
+	for <u-boot@archiver.kernel.org>; Wed, 16 Oct 2024 03:43:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AF2E588F41;
-	Mon, 11 Nov 2024 15:27:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id D1BD088C3D;
+	Wed, 16 Oct 2024 05:43:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="NA1SWweR";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hhfNcV0v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C189F892A1; Mon, 11 Nov 2024 15:27:23 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B6B3E88ADC; Wed, 16 Oct 2024 04:26:18 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BEA6B88AE8
- for <u-boot@lists.denx.de>; Mon, 11 Nov 2024 15:27:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E8B387F7D
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 04:26:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1731335238; x=1731940038; i=xypron.glpk@gmx.de;
- bh=m/26UblB3AvOkWesLxqFE1tFcZlY1Tw6UekLlu5QQdk=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
- Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=NA1SWweR6piSQRdOzpwRqqCq5heIkyMjZ1WoXnmISktRunsvXix8mXKIxpy5x13a
- XgL0+kWy/WCNnSqkyMjpOygfO1xqmXODqWKugq9tS/UEyttU7ilgfyaoN1vHvrqWO
- /xR+ViBLpfjaL20hXfbEaPQGh45kFuul3VmMD3ZQBjbi/E8Z+ldEt9aJ9vzLcR2eI
- c0ssa+kaokUu5hDlpxZOHXqOVn1VtdBMjudehIuRrB2c+Nl/GkY1xiAuBTz10X4Ld
- VOWMheqO+8jokv6u1AA7tKj04pfl2eRM+Wa2YYDk5VKaAdyFYktmd5RYvB14qoM5q
- 8uM4qCBZ6BD1zVyhzA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([5.147.80.91]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mo6qv-1tYb0f14JP-00k0la; Mon, 11
- Nov 2024 15:27:18 +0100
-Date: Mon, 11 Nov 2024 15:27:16 +0100
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Quentin Schulz <foss+uboot@0leil.net>, Tom Rini <trini@konsulko.com>
-CC: Simon Glass <sjd@chromium.org>, u-boot@lists.denx.de,
- Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH] Makefile: fix empty MK_ARCH when using ccache
-User-Agent: Thunderbird for Android
-In-Reply-To: <20241111-mk_arch-ccache-v1-1-e27f5f605bc4@cherry.de>
-References: <20241111-mk_arch-ccache-v1-1-e27f5f605bc4@cherry.de>
-Message-ID: <9883B8AA-CA7D-4A59-ADB0-ABC86210273F@gmx.de>
+ spf=pass smtp.mailfrom=gerhardtbryce72@gmail.com
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a9a3da96a8aso22224766b.0
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 19:26:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1729045576; x=1729650376; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=6ct8vQGRsuka70RewQTjMuj4Vxg7UtvvoKH5sVqQygI=;
+ b=hhfNcV0vOgeFad8C0qRReDvIHLuposlpsPGeuog74VtUTtLcCtRFVLqevewB9fNGVX
+ nMbfJRAyciZct/j9kc72AQO/pS8L8yxgYOfHVnofFpZcc1Jgd8tfJ4pfdaoRno+M+94e
+ izWbx73UwtUucUbNRG9yBgtay23nQotZFV3HA1CnKNdDi1ems1CaXVb+ohCN4tOOvbpc
+ 5zMOZaKvFs+H2+4qYXsabWkuU0ImRoU8mArQ14yAYzya9XzRGOKfCmSCJgmGLf8MN1G0
+ qDweDNPba/9H+/3w6tCZX0q5IDFOmUIoJOyOPw4D6QqDC5yokeLDrgL74Zjz87z//PpF
+ X3Xg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729045576; x=1729650376;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=6ct8vQGRsuka70RewQTjMuj4Vxg7UtvvoKH5sVqQygI=;
+ b=m3b5r1/yr7F5XU/+5PjQAfrYE+FLHJUwrTfXq9T5CLh9UD5Z8HSQxBkTBe2dIcbJvn
+ khcSiKIt19r8rFZFf/QdXgGIfDo5b5b1xs1aGBKzx/j3tiT4h7VSE+geQmBpx74jwtbx
+ MjU3PJigVjizT8LiR5I5z4bMi3aiK0uHtKk5GyUwP9ZAYk+tX8nSnthOYe6joeIzhL3L
+ /bXEe7PyzLWl/MayDiPNomJ+uyXpZj/DF1lg9xy60PRynGskGt8TvlKo21GrcD8lGIYu
+ WxocpbC6ubCthdT15S3QIFSGXOWLwrc/OuY1duqWCxXKDImE/Vi9Oji4HCSehXRfQnIp
+ wJtw==
+X-Gm-Message-State: AOJu0Yz1nL3zCFu6sOFnuSbMITXnIRqU1mBpskVVTCRqWpj3kw/aBZBm
+ +P9sIcF2XEo0BUhsdxoJ2OYsvoU76RCeEabQWph2pLB91IDuA20nIGG1c/Uy580mjVzQ8sAsocg
+ etF5qtvHQrrP8kWigcJ+sLSmOMM70lirN
+X-Google-Smtp-Source: AGHT+IGDOqaF8JzjKLUvWW8pAXGuNIC4oURR2rMVx0ioo1euFaZaUh2dMgKoXX6YIgD9Q5rfT9J3pVtfrFuK8DGQhwY=
+X-Received: by 2002:a17:907:1c0a:b0:a77:ab9e:9202 with SMTP id
+ a640c23a62f3a-a9a33572723mr247151366b.4.1729045575575; Tue, 15 Oct 2024
+ 19:26:15 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:KUG+dm/9VYJbw1+JR37ENGvO3ecCgWjgSvXbvPgOEZoiU+QM27C
- 0NvDLgAJXisNytNLz6mR1lD+dpsQ2Nhkn8AfhTWzRAV8ZPCX2Fy18m/tTYA53cinQ/rV1ZA
- B2rA9qBnpQg4z90E9ntttFs97Xs3d7rIFKQY8cQWEfSWzggKaWfUfUvX45aDs9RSF8m2N1C
- n7AocPhv+QrM1DhS8xV3Q==
-UI-OutboundReport: notjunk:1;M01:P0:CtzElPWwyxw=;kNho5Fz1NYIMqfyFeh14q1lMcc7
- jlFcgw7X1QfS3++hoEKrqmF3txNYWFKGUQGx3Dbsj/l3MVFENhuf74dvZjbRoo+/eaUroDOr/
- 0ovA1ZvoNXAZgr47GQCRNRBOL+6+KsYgoj/oUh1rs7QCD3lOIpf4g1kaOsQTosrjvf5XRIXvM
- 37ex17aJPPgr+H1gbs+k/hRT8JECay8S5/nhwDcKNZlbLLuAh+iJZNnBLyniNiDltQ8nOpWrR
- K8yfSazhoOFjs3LuLvghLwv18yOuUq1Pn/aDvjp44EOrZxXHswRDR9nxgcaYa6wdw6kGkHGOi
- kCUWnxyCUlU6VYI0X55Se6y4oAnSSO7cI21ZFeokxh4MVqFAUDcliJbPLMOkGnXcq9Z+lNsxe
- rPg6/DYOCEgi2PX4qzEHOddTM6SxOxoHbXEtC+NOghrYHLtiYtfLfg8gOsBTL1ZXJ2qzAAiGV
- olIdMxaBasQUlTmoPCI/TfKjkCGOj1Pc+89/I72VBZlxx+3bkyIx4Iy7c5sVB+L3XjKqd+t/M
- lpvUOD+ngKRNHpJOjweBZRxMmBZB3fUa7oUF8x0AxNnCJvXrsnQv4weG5fLwTCFNrhQZilkJ6
- 7IUMD75c1wGCv+htvr2nW010Xuk4GCdgoRMTsJYZWsWjKDKjBp7WpNfbs9397Wguoe0Dz47z3
- 9L9M0Yhwb53r5C54ys/kpBgHacUTuMhr1w28sf5HzqX/mZhYEI8GlY3lX2CCpemE1F/sGRTHX
- Aq+i9Uz9lA7DyR/w0VfIZuWozP3+ynV047Zx8e91zCleaLc1QeTm1cYWQJzWUg8py1ldPgNf1
- +Zbti4U71StsrM8UGBVbGLVg==
+From: Bryce Gerhardt <gerhardtbryce72@gmail.com>
+Date: Fri, 11 Oct 2024 09:26:20 -0600
+Message-ID: <CAEsDzFZFaEYbZvSMCBw5RTswgHJbohVxUuLE1t_5BJq1KHO_Gg@mail.gmail.com>
+Subject: I'm using Gboard to type in English (US) (QWERTY). You can try it at:
+ https://gboard.app.goo.gl/cSdoq
+To: u-boot@lists.denx.de
+X-Mailman-Approved-At: Wed, 16 Oct 2024 05:43:46 +0200
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,77 +84,5 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 11=2E November 2024 14:20:49 MEZ schrieb Quentin Schulz <foss+uboot@0lei=
-l=2Enet>:
->From: Quentin Schulz <quentin=2Eschulz@cherry=2Ede>
->
->One can use ccache by prefixing the typical CROSS_COMPILE value with
->"ccache " (e=2Eg=2E "ccache aarch64-gnu-linux-" for Aarch64)=2E This howe=
-ver
->makes the MK_ARCH empty because sed won't find a match anymore since it
->expects the CROSS_COMPILE value to start with the actual toolchain (with
->an unlimited number of white spaces before)=2E
->
->This is failing builds since commit 7506c1566998 ("sandbox: Report host
->default-filename in native mode")=2E
->
->Add "ccache" prefix to ignore but participate in the matching regex used
->by sed to identify the target architecture=2E
->
->Signed-off-by: Quentin Schulz <quentin=2Eschulz@cherry=2Ede>
->---
->One can use ccache by prefixing the typical CROSS_COMPILE value with
->"ccache " (e=2Eg=2E "ccache aarch64-gnu-linux-" for Aarch64)=2E This howe=
-ver
->makes the MK_ARCH empty because sed won't find a match anymore since it
->expects the CROSS_COMPILE value to start with the actual toolchain (with
->an unlimited number of white spaces before)=2E
->
->This is failing builds since commit 7506c1566998 ("sandbox: Report host
->default-filename in native mode")=2E
->
->Add "ccache" prefix to ignore but participate in the matching regex used
->by sed to identify the target architecture=2E
->---
-> Makefile | 2 +-
-> 1 file changed, 1 insertion(+), 1 deletion(-)
->
->diff --git a/Makefile b/Makefile
->index 7275a02f24ca64ebd46c5dc6e769dcdee9917dca=2E=2E71743db16fca930567edd=
-67eb77f1c94e9b7b4e9 100644
->--- a/Makefile
->+++ b/Makefile
->@@ -21,7 +21,7 @@ include include/host_arch=2Eh
-> ifeq ("", "$(CROSS_COMPILE)")
->   MK_ARCH=3D"${shell uname -m}"
-> else
->-  MK_ARCH=3D"${shell echo $(CROSS_COMPILE) | sed -n 's/^[[:space:]]*\([^=
-\/]*\/\)*\([^-]*\)-[^[:space:]]*/\2/p'}"
->+  MK_ARCH=3D"${shell echo $(CROSS_COMPILE) | sed -n 's/^\(ccache\)\?[[:s=
-pace:]]*\([^\/]*\/\)*\([^-]*\)-[^[:space:]]*/\3/p'}"
-
-The target architecture cannot be determined in this way=2E
-
-You could use the riscv64 compiler to compile riscv32 when providing a gcc=
- flag=2E
-
-You should not make any assumptions about the naming scheme of vendor tool=
-chains=2E
-
-The correct way is to cross-compile a binary=2E Then use readelf to retrie=
-ve the target architecture=2E
-
-Best regards
-
-Heinrich
-
-> endif
-> unexport HOST_ARCH
-> ifeq ("x86_64", $(MK_ARCH))
->
->---
->base-commit: 9c25cd563179cf32cf3b119d5ae78ef8348d0335
->change-id: 20241111-mk_arch-ccache-7150482cfde8
->
->Best regards,
-
+I'm using Gboard to type in English (US) (QWERTY). You can try it at:
+https://gboard.app.goo.gl/cSdoq
