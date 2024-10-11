@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CA74CFD316
-	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 10:35:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB55BCFD31D
+	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 10:35:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3BC2289305;
-	Fri, 11 Oct 2024 12:34:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A177C8930A;
+	Fri, 11 Oct 2024 12:34:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="hYFHIb83";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="aICNXpT/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 11FDD890F7; Fri, 11 Oct 2024 12:34:34 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id F16E889300; Fri, 11 Oct 2024 12:34:35 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2592F890F7
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 12:34:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F3842892BF
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 12:34:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=9elements.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5c920611a86so2471443a12.0
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 03:34:32 -0700 (PDT)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-a9950d27234so271118166b.1
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 03:34:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1728642871; x=1729247671; darn=lists.denx.de;
+ d=9elements.com; s=google; t=1728642873; x=1729247673; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Rx79IlqaDN610Drjv1umSL9YAKOmzuPC7ZlaY5AwTmw=;
- b=hYFHIb83um1pPVC8znrreXXzL2D6YvR0ufgMNPHodxy0GfPeI3DuoD98m1SLfwBMjq
- JiwnVpq7jfeHJ/UTCA7yhq57fnB2dOPLcQFm3l7OVOsPDBxomZbV9n/AAo32MDCZoRRX
- 3NiJ/iO8lQsxx4/uATQCzAyyI0FHIepHfoqFESGXgZLjWmcU0CHlr0DAKuf4UTbR2ujs
- d9ALa0swSpb43pg9Stv1FO94KJX1E7AwZuw8uU1aDHacnkgvTITtTgFo/rXkA2DdlmkB
- ldNb6wh3LtYm49ArVWbvkKod9Ss+Ef2e3806ty4oFMIlfjbuPh3e2WjRLF9V1vu79oa4
- j0uw==
+ bh=i9nBxhtPGVmMhSR0ukLqkGhhFmF2hldHtTOvj4rFDYU=;
+ b=aICNXpT/XaXB8H3RvnUVYQmjRYE/p58sacbEq1VtuuvP3om44j3kkapEJHwZcMK4KQ
+ ikacL/tk8S75C1cQCkjj4Rq0vQcvHkB+RRt4IJt5uxYcMHZ6C0Qe22aZYyMsZLBuwd3R
+ LMP7ei6MpuGBeSWwfIcGsmAo0V6wt5CElbgXWXayb+PvVjeExbCULDPoUV3KqoR9w/9Y
+ LoGogxdyQbExyxSlCb/o0w7s9NiqoUMhN1PguYl25yWv7NCt+QDzDMbcnkcJBV+sA980
+ YA/UI3NBYqHDteO9jUDaZQUptTiInL1DTyhPJfc7uKTBwmxIfnNqSf6j3+FbRl9baUnw
+ 1s1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728642871; x=1729247671;
+ d=1e100.net; s=20230601; t=1728642873; x=1729247673;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Rx79IlqaDN610Drjv1umSL9YAKOmzuPC7ZlaY5AwTmw=;
- b=rfexEYTDe5qzFYxFXId/3q5C0/lySTAN9jAmOOMzyriUzd+BDKj1pDXhRxp3YLBJnh
- i2JgbhUFIMPXhMc28+Mt3IV1ANg4RqqboQPBNsn6hodupy6D8R0HvrJggqdk125Dytiq
- u/0UpydSMZ7eJwsmtJco5ipjKustqTP2CD1w6vvrLAIjqoV6G8K6zfKY43p5W5n4Kprd
- aHv6IKkVsLLD/fp9mR5GPTbR9VfBYV217ksMoC/6CAigu+JYsg/OK/L9n6E6XffCOBn1
- c1tLDmbsIQ/dzaPti6vHsKbyb8DWjPUVjtOS5TNiGoYRc1TrCMzHIs4YuCZbIyeAt5O+
- 1QSw==
-X-Gm-Message-State: AOJu0Yze+6zpEk/CAQz9iKavugV/G8BQswMQdwIeh+LzueJ8pKnneICb
- hDRV5rXsWSA7E7kc+pl25p98RGrzNgq7YX948RI+kg5DudMIDdVvDfhPOPzY+MPesWU7QKw01ZX
- gf2U=
-X-Google-Smtp-Source: AGHT+IFdk2OIs00j5ryxE7o/Qpd2YF/kHl1gyK25JDptp90FFms7+XhNgnxMy/Ji+hePpB+kQSuAYA==
-X-Received: by 2002:a17:906:cac9:b0:a99:7869:a1e3 with SMTP id
- a640c23a62f3a-a99b96ad6a9mr189593666b.40.1728642871551; 
- Fri, 11 Oct 2024 03:34:31 -0700 (PDT)
+ bh=i9nBxhtPGVmMhSR0ukLqkGhhFmF2hldHtTOvj4rFDYU=;
+ b=DnDy+naD8+UFOh7aR/krBiSljtludbKBEkNAFIXa+N6sgQSPvt3itSgvnliVicAYZ1
+ yJV91LFuijBMK42dCqeRqG/MgwTiPG/0WPhrQD34ezQYLX29x4+XUlv4MdetF7kkKGB/
+ eCL2RJJZJEJW4G+hlwooSBY5RaRDGcUrKJMk57CRA67JTqXA6SUhy1ZeWCNK9X49d2ZT
+ ydJeyFWzog8cu8p3+7hCX3/ZUaG8fQFAEugA8k40b1v22zalMHbpY8Ui1HLTUMgXYj/J
+ szqmDMENMyvhYQiSAzluAmwC/bvjdP4wlMrR7B+AsoQHiBlc9bHGb4k/WDgtgpYDmJwx
+ Xp0Q==
+X-Gm-Message-State: AOJu0YxpkI3rE6e8wNg+RCeog76e6U4OTv6oCJJFeJ2RvV9IkuaJ9RTx
+ rknCwYIAsxvg6GwtWQ+KoniOayhHb+9LFJL5k98G6961l1IGzRr2Wy+P7/KgiYtG6ONyL8neXMv
+ rEUs=
+X-Google-Smtp-Source: AGHT+IGuUIsvx7YAM9RsG7w/sSrNU4By+qGP+SnjrCCWRDofZFivpIrrmZt89eU3MraWKgY+Uv55bA==
+X-Received: by 2002:a17:907:2cc3:b0:a99:5985:bf13 with SMTP id
+ a640c23a62f3a-a99b9314b61mr186821366b.1.1728642873363; 
+ Fri, 11 Oct 2024 03:34:33 -0700 (PDT)
 Received: from fedora.sec.9e.network
  (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a99a80f29besm195353466b.211.2024.10.11.03.34.31
+ a640c23a62f3a-a99a80f29besm195353466b.211.2024.10.11.03.34.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Oct 2024 03:34:31 -0700 (PDT)
+ Fri, 11 Oct 2024 03:34:33 -0700 (PDT)
 From: Patrick Rudolph <patrick.rudolph@9elements.com>
 To: u-boot@lists.denx.de,
 	Simon Glass <sjg@chromium.org>
-Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
+Cc: Maximilian Brune <maximilian.brune@9elements.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v7 04/37] acpi: Fix typo
-Date: Fri, 11 Oct 2024 12:22:45 +0200
-Message-ID: <20241011102419.12523-5-patrick.rudolph@9elements.com>
+Subject: [PATCH v7 05/37] serial: serial_pl01x: Implement .getinfo() for PL01
+Date: Fri, 11 Oct 2024 12:22:46 +0200
+Message-ID: <20241011102419.12523-6-patrick.rudolph@9elements.com>
 X-Mailer: git-send-email 2.46.2
 In-Reply-To: <20241011102419.12523-1-patrick.rudolph@9elements.com>
 References: <20241011102419.12523-1-patrick.rudolph@9elements.com>
@@ -95,61 +95,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rename ACPI tables MADR to MADT.
+From: Maximilian Brune <maximilian.brune@9elements.com>
 
-Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+When ACPI is enabled on arm it will use the getinfo function to fill
+the SPCR ACPI table.
+
+Signed-off-by: Maximilian Brune <maximilian.brune@9elements.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
 ---
- include/acpi/acpi_table.h | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
+ boot/bootflow.c               |  8 ++++++--
+ drivers/serial/serial_pl01x.c | 24 ++++++++++++++++++++++++
+ include/serial.h              |  1 +
+ 3 files changed, 31 insertions(+), 2 deletions(-)
 
-diff --git a/include/acpi/acpi_table.h b/include/acpi/acpi_table.h
-index c356df72ba..a1bdab7305 100644
---- a/include/acpi/acpi_table.h
-+++ b/include/acpi/acpi_table.h
-@@ -386,20 +386,20 @@ struct __packed acpi_madt_lapic_nmi {
- 	u8 lint;		/* Local APIC LINT# */
+diff --git a/boot/bootflow.c b/boot/bootflow.c
+index 59d77d2385..d8807eb109 100644
+--- a/boot/bootflow.c
++++ b/boot/bootflow.c
+@@ -936,11 +936,15 @@ int bootflow_cmdline_auto(struct bootflow *bflow, const char *arg)
+ 		return ret;
+ 
+ 	*buf = '\0';
+-	if (!strcmp("earlycon", arg)) {
++	if (!strcmp("earlycon", arg) && info.type == SERIAL_CHIP_16550_COMPATIBLE) {
+ 		snprintf(buf, sizeof(buf),
+ 			 "uart8250,mmio32,%#lx,%dn8", info.addr,
+ 			 info.baudrate);
+-	} else if (!strcmp("console", arg)) {
++	} else if (!strcmp("earlycon", arg) && info.type == SERIAL_CHIP_PL01X) {
++		snprintf(buf, sizeof(buf),
++			 "pl011,mmio32,%#lx,%dn8", info.addr,
++			 info.baudrate);
++	} else if (!strcmp("console", arg) && info.type == SERIAL_CHIP_16550_COMPATIBLE) {
+ 		snprintf(buf, sizeof(buf),
+ 			 "ttyS0,%dn8", info.baudrate);
+ 	}
+diff --git a/drivers/serial/serial_pl01x.c b/drivers/serial/serial_pl01x.c
+index 80c35963b8..ab67922d18 100644
+--- a/drivers/serial/serial_pl01x.c
++++ b/drivers/serial/serial_pl01x.c
+@@ -19,6 +19,7 @@
+ #include <watchdog.h>
+ #include <asm/io.h>
+ #include <serial.h>
++#include <spl.h>
+ #include <dm/device_compat.h>
+ #include <dm/platform_data/serial_pl01x.h>
+ #include <linux/compiler.h>
+@@ -272,6 +273,28 @@ __weak struct serial_device *default_serial_console(void)
+ 	return &pl01x_serial_drv;
+ }
+ #else
++
++static int pl01x_serial_getinfo(struct udevice *dev,
++				struct serial_device_info *info)
++{
++	struct pl01x_serial_plat *plat = dev_get_plat(dev);
++
++	/* save code size */
++	if (!spl_in_proper())
++		return -ENOSYS;
++
++	info->type = SERIAL_CHIP_PL01X;
++	info->addr_space = SERIAL_ADDRESS_SPACE_MEMORY;
++	info->addr = plat->base;
++	info->size = 0x1000;
++	info->reg_width = 4;
++	info->reg_shift = 2;
++	info->reg_offset = 0;
++	info->clock = plat->clock;
++
++	return 0;
++}
++
+ int pl01x_serial_setbrg(struct udevice *dev, int baudrate)
+ {
+ 	struct pl01x_serial_plat *plat = dev_get_plat(dev);
+@@ -341,6 +364,7 @@ static const struct dm_serial_ops pl01x_serial_ops = {
+ 	.pending = pl01x_serial_pending,
+ 	.getc = pl01x_serial_getc,
+ 	.setbrg = pl01x_serial_setbrg,
++	.getinfo = pl01x_serial_getinfo,
  };
  
--/* flags for acpi_madr_gicc flags word */
-+/* flags for acpi_madt_gicc flags word */
- enum {
--	ACPI_MADRF_ENABLED	= BIT(0),
--	ACPI_MADRF_PERF		= BIT(1),
--	ACPI_MADRF_VGIC		= BIT(2),
-+	ACPI_MADTF_ENABLED	= BIT(0),
-+	ACPI_MADTF_PERF		= BIT(1),
-+	ACPI_MADTF_VGIC		= BIT(2),
+ #if CONFIG_IS_ENABLED(OF_REAL)
+diff --git a/include/serial.h b/include/serial.h
+index d129dc3253..d7a9a8cfb8 100644
+--- a/include/serial.h
++++ b/include/serial.h
+@@ -124,6 +124,7 @@ enum serial_stop {
+ enum serial_chip_type {
+ 	SERIAL_CHIP_UNKNOWN = -1,
+ 	SERIAL_CHIP_16550_COMPATIBLE,
++	SERIAL_CHIP_PL01X,
  };
  
- /**
-- * struct __packed acpi_madr_gicc - GIC CPU interface (type 0xb)
-+ * struct __packed acpi_madt_gicc - GIC CPU interface (type 0xb)
-  *
-  * This holds information about the Generic Interrupt Controller (GIC) CPU
-  * interface. See ACPI Spec v6.3 section 5.2.12.14
-  */
--struct acpi_madr_gicc {
-+struct acpi_madt_gicc {
- 	u8 type;
- 	u8 length;
- 	u16 reserved;
-@@ -421,12 +421,12 @@ struct acpi_madr_gicc {
- } __packed;
- 
- /**
-- * struct __packed acpi_madr_gicc - GIC distributor (type 0xc)
-+ * struct __packed acpi_madt_gicc - GIC distributor (type 0xc)
-  *
-  * This holds information about the Generic Interrupt Controller (GIC)
-  * Distributor interface. See ACPI Spec v6.3 section 5.2.12.15
-  */
--struct acpi_madr_gicd {
-+struct acpi_madt_gicd {
- 	u8 type;
- 	u8 length;
- 	u16 reserved;
+ enum adr_space_type {
 -- 
 2.46.2
 
