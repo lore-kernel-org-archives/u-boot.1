@@ -4,73 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B0FCD0EE3F
-	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 21:24:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8016D0EE3F
+	for <u-boot@archiver.kernel.org>; Fri, 11 Oct 2024 21:24:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB634893DB;
-	Fri, 11 Oct 2024 23:23:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3FDC7893FA;
+	Fri, 11 Oct 2024 23:23:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Fn8LTNrE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PAQ8rDCB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53173893E7; Fri, 11 Oct 2024 23:23:45 +0200 (CEST)
-Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
- [IPv6:2607:f8b0:4864:20::12b])
+ id B60A6893EC; Fri, 11 Oct 2024 23:23:46 +0200 (CEST)
+Received: from mail-il1-x12a.google.com (mail-il1-x12a.google.com
+ [IPv6:2607:f8b0:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3199893D2
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 23:23:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D7F3893DA
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 23:23:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12b.google.com with SMTP id
- e9e14a558f8ab-3a3a7b80447so9456165ab.1
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 14:23:42 -0700 (PDT)
+Received: by mail-il1-x12a.google.com with SMTP id
+ e9e14a558f8ab-3a39cabb9b8so8007555ab.1
+ for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 14:23:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728681821; x=1729286621; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1728681823; x=1729286623; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yZxLV9LPSThnc3VwGw32siFmYdhXdn2Qt1S+C96Ee24=;
- b=Fn8LTNrE20mEs0AsoMIgvFbY7WGjpTf92E87BYtHjBCAFmCFlCAjJZPc9ZINR9UJTb
- 3TnEf0+d2MwMkqWbXmo0+llEH4m7YF9hQpu5uw9IsX0mySYUAUzzWUdqWI9FEqKMpFAf
- Gj3Csmj4teFqMHR7S6HNgNM/IZhZNH0eQa+w0=
+ bh=wwNVWWybQFBd3j/dkMaJHg5S9menwyKZzi/Lk2dRQs8=;
+ b=PAQ8rDCBclbuDYQrxtl8qcZshthIWOwfYc0PbiCbvYsykk374z7b2jW6w2cvgpvhfS
+ 6S5BeMUzKt1/8DN0KHe8Veitn3oOWlUJXTlborRDRdmH2Tpp6HVd2r6pXkdnNsrttZnM
+ Nsk/rhfn9jEe5XfNP+jwUHqohd2xRP5606gVs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728681821; x=1729286621;
+ d=1e100.net; s=20230601; t=1728681823; x=1729286623;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yZxLV9LPSThnc3VwGw32siFmYdhXdn2Qt1S+C96Ee24=;
- b=tW4faUU63Z73hbgDPfJvTLlN+MTaO4KSq3GE/xYmsvPw94Ai4+pUuFYMMt5i2R6bH4
- V8U1qdW5G5GWpafUx9Rij6zy+XIU6P4+fxnzjABbkdZZDPD/k1OujtVPFKCJw6dVR04O
- kknaKDkReHSOHFMCLNu0tt38RILAQdENN0bkHyPZ5DEfpWn4YEm7DnvMl/ir/89sTrvX
- 6r04Xd07vvfN9R/TWBrhLOFWV8TMWp4PRJcdTtSwx68u1VCteDhoAKkHqNwYX/n81L5d
- dwqvZXdNW+27nqh4+pEDToHfjNskmplbNjC6I6AtJy8uKoXMlCBuxug44OAhd6TgYZMS
- 7fLQ==
-X-Gm-Message-State: AOJu0YxJ3LSHGSKLaZQGEwhX5FABSZZJxgU1tKcxehDuLbzk3eifbflN
- 1ubdsjx8+4LMgQg0liYSH7foEMxyXTcLRu/3ktIHpnR6piZcVrGab7yuwMU8slaRPEEszdHULKF
- fdQ==
-X-Google-Smtp-Source: AGHT+IGCF2eEr55+X/Xap3ZqZ181vMdEiQg5n8KEZVVVMiVyEQOhAZdKxcSGx+O3TvUpxkSB3XlHdg==
-X-Received: by 2002:a05:6e02:13a7:b0:3a0:9159:1561 with SMTP id
- e9e14a558f8ab-3a3b5f233e1mr47109715ab.2.1728681821597; 
- Fri, 11 Oct 2024 14:23:41 -0700 (PDT)
+ bh=wwNVWWybQFBd3j/dkMaJHg5S9menwyKZzi/Lk2dRQs8=;
+ b=Cp87ugm8OgxGcJAX5YdSkDVr388f5ATOyQQ3fK2O4rL1iBQe40RnGDRYTaXKmmfUSn
+ Niw0S04cEPUlQ+QLFyzXaTbjmN0vIANyyNPAe9Yj0lqKoUpe+b3gTEOadphLoDX+FGHU
+ lBW0jcP8yxDG5OM7r7WM5tpFzhfls0GtrB7hB01eerSu/1+3JTqIJhbvVmtZU9MqAPzX
+ KzK7ALDSGMaB2MSirj5FZVDeg6eJupwZNJDbDadtLmiCZLRLZtQuSU8BcBKEouQxqjq7
+ 7cmNnf3rfGBfmWd86VjkLDzyJpHZIPu42oAlhfbx5l+ERAdzzrijPCwyVZLXgFifkKF0
+ EmHw==
+X-Gm-Message-State: AOJu0YxKPS9Rh9QIT9vAOFyBactJFPuVgLzrw9C7rWpGlPcfS4mm2z+D
+ IaznNmsuNzguzP+u7BpkXJoxQr6k7QcJUS4oy1+256U2/ypInXma5sP3ZyTAFNX59J9HB05SVCy
+ rrg==
+X-Google-Smtp-Source: AGHT+IH6+KwDf8XFtB0P/NZe7gL2ubinpFJXXyCCYbUwETuqgWfPjVCnkgLO9zcu+d5gyFtd2fOvCQ==
+X-Received: by 2002:a05:6e02:1ca1:b0:3a0:c820:c5f0 with SMTP id
+ e9e14a558f8ab-3a3b6009616mr31115725ab.24.1728681822928; 
+ Fri, 11 Oct 2024 14:23:42 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4dbad9b13e5sm784789173.1.2024.10.11.14.23.40
+ 8926c6da1cb9f-4dbad9b13e5sm784789173.1.2024.10.11.14.23.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Oct 2024 14:23:41 -0700 (PDT)
+ Fri, 11 Oct 2024 14:23:42 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>,
- Francis Laniel <francis.laniel@amarulasolutions.com>
-Subject: [PATCH v4 4/5] efi: Reserve some memory for initial use
-Date: Fri, 11 Oct 2024 15:21:25 -0600
-Message-Id: <20241011212126.747741-5-sjg@chromium.org>
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Joao Marcos Costa <jmcosta944@gmail.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
+Subject: [PATCH v4 5/5] efi: Keep early allocations to the U-Boot region
+Date: Fri, 11 Oct 2024 15:21:26 -0600
+Message-Id: <20241011212126.747741-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241011212126.747741-1-sjg@chromium.org>
 References: <20241011212126.747741-1-sjg@chromium.org>
@@ -92,86 +96,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The 'point of cooperation' is where U-Boot starts allowing EFI to use
-memory outside of the U-Boot region. Until that point, it is desirable
-to keep more below U-Boot free for loading images.
+Adjust EFI_LOADER to use the provided region for early memory
+allocations, to avoid going outside the U-Boot region.
 
-Reserve a small region for this purpose.
+Expand the available memory when efi_init_obj_list() is called.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+Changes in v4:
+- Use a different technique to keep the memory-usage in place
+- Drop changes to pool allocation
+- Reorder the patches
+- Rewrite the cover letter
+- Make it a debug message for now
 
- include/asm-generic/global_data.h |  6 ++++++
- lib/efi_loader/efi_memory.c       | 21 +++++++++++++++++++++
- test/py/tests/test_event_dump.py  |  1 +
- 3 files changed, 28 insertions(+)
+Changes in v2:
+- Drop patch 'Show more information in efi index'
+- Drop patch 'Avoid pool allocation in efi_get_memory_map_alloc()'
+- Add the word 'warning', use log_warning() and show the end address
 
-diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
-index d6c15e2c406..20705be14dd 100644
---- a/include/asm-generic/global_data.h
-+++ b/include/asm-generic/global_data.h
-@@ -443,6 +443,12 @@ struct global_data {
- 	 */
- 	struct upl *upl;
- #endif
-+#if CONFIG_IS_ENABLED(EFI_LOADER)
-+	/**
-+	 * @efi_region: Start of EFI's early-memory region
-+	 */
-+	ulong efi_region;
-+#endif
- };
- #ifndef DO_DEPS_ONLY
- static_assert(sizeof(struct global_data) == GD_SIZE);
+ include/efi_loader.h        | 13 +++++++++++++
+ lib/efi_loader/efi_memory.c | 24 ++++++++++++++++++++++--
+ lib/efi_loader/efi_setup.c  |  5 +++++
+ 3 files changed, 40 insertions(+), 2 deletions(-)
+
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index 08e27e61b06..aa464e9d754 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -805,6 +805,19 @@ int efi_disk_probe(void *ctx, struct event *event);
+ int efi_disk_remove(void *ctx, struct event *event);
+ /* Called by board init to initialize the EFI memory map */
+ int efi_memory_init(void);
++
++/**
++ * efi_memory_coop() - Allow EFI to use all available memory
++ *
++ * Up until this function is called, only a small portion of memory is available
++ * for use by the EFI memory-allocator. This function is called at the
++ * 'point of cooperation', before jumping into an EFI app, which needs to be
++ * able to make use of all the memory in the machine
++ *
++ * Return: efi_status_t (EFI_SUCCESS on success)
++ */
++int efi_memory_coop(void);
++
+ /* Adds new or overrides configuration table entry to the system table */
+ efi_status_t efi_install_configuration_table(const efi_guid_t *guid, void *table);
+ /* Sets up a loaded image */
 diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-index 50cb2f3898b..9cc33397371 100644
+index 9cc33397371..2cd0b00e9eb 100644
 --- a/lib/efi_loader/efi_memory.c
 +++ b/lib/efi_loader/efi_memory.c
-@@ -24,6 +24,12 @@ DECLARE_GLOBAL_DATA_PTR;
- /* Magic number identifying memory allocated from pool */
- #define EFI_ALLOC_POOL_MAGIC 0x1fe67ddf6491caa2
+@@ -30,6 +30,9 @@ DECLARE_GLOBAL_DATA_PTR;
+  */
+ #define EFI_EARLY_REGION_SIZE	SZ_256K
  
-+/*
-+ * Amount of memory to reserve for EFI before relocation. This must be a
-+ * multiple of EFI_PAGE_SIZE
-+ */
-+#define EFI_EARLY_REGION_SIZE	SZ_256K
++/* Set when all memory has been added for use by EFI */
++static bool efi_full_memory;
 +
  efi_uintn_t efi_memory_map_key;
  
  struct efi_mem_list {
-@@ -944,3 +950,18 @@ int efi_memory_init(void)
+@@ -932,8 +935,25 @@ static void add_u_boot_and_runtime(void)
  
- 	return 0;
- }
+ int efi_memory_init(void)
+ {
+-	efi_add_known_memory();
++	efi_status_t ret;
 +
-+static int reserve_efi_region(void)
-+{
-+	/*
-+	 * Reserve some memory for EFI. Since pool allocations consume 4KB each
-+	 * and there are three allocations, allow 16KB of memory, enough for
-+	 * four. This can be increased as needed.
-+	 */
-+	gd->efi_region = ALIGN_DOWN(gd->start_addr_sp - EFI_EARLY_REGION_SIZE,
-+				    SZ_4K);
-+	gd->start_addr_sp = gd->efi_region;
++	/* restrict EFI to its own region until efi_memory_coop() is called */
++	ret = efi_add_memory_map_pg((ulong)map_sysmem(gd->efi_region, 0),
++				    EFI_EARLY_REGION_SIZE >> EFI_PAGE_SHIFT,
++				    EFI_CONVENTIONAL_MEMORY, false);
 +
-+	return 0;
++	return ret;
 +}
-+EVENT_SPY_SIMPLE(EVT_RESERVE, reserve_efi_region);
-diff --git a/test/py/tests/test_event_dump.py b/test/py/tests/test_event_dump.py
-index e282c67335c..e36fc6a1586 100644
---- a/test/py/tests/test_event_dump.py
-+++ b/test/py/tests/test_event_dump.py
-@@ -20,5 +20,6 @@ EVT_FT_FIXUP          bootmeth_vbe_ft_fixup           .*boot/vbe_request.c:.*
- EVT_FT_FIXUP          bootmeth_vbe_simple_ft_fixup    .*boot/vbe_simple_os.c:.*
- EVT_LAST_STAGE_INIT   install_smbios_table            .*lib/efi_loader/efi_smbios.c:.*
- EVT_MISC_INIT_F       sandbox_early_getopt_check      .*arch/sandbox/cpu/start.c:.*
-+EVT_RESERVE           reserve_efi_region              .*lib/efi_loader/efi_memory.c:.*
- EVT_TEST              h_adder_simple                  .*test/common/event.c:'''
-     assert re.match(expect, out, re.MULTILINE) is not None
+ 
++int efi_memory_coop(void)
++{
++	if (efi_full_memory)
++		return 0;
++	log_debug("Enabling coop memory\n");
++
++	efi_full_memory = true;
++
++	efi_add_known_memory();
+ 	add_u_boot_and_runtime();
+ 
+ #ifdef CONFIG_EFI_LOADER_BOUNCE_BUFFER
+@@ -943,7 +963,7 @@ int efi_memory_init(void)
+ 	if (efi_allocate_pages(EFI_ALLOCATE_MAX_ADDRESS, EFI_BOOT_SERVICES_DATA,
+ 			       (64 * 1024 * 1024) >> EFI_PAGE_SHIFT,
+ 			       &efi_bounce_buffer_addr) != EFI_SUCCESS)
+-		return -1;
++		return -ENOMEM;
+ 
+ 	efi_bounce_buffer = (void*)(uintptr_t)efi_bounce_buffer_addr;
+ #endif
+diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
+index a610e032d2f..40e23ca104c 100644
+--- a/lib/efi_loader/efi_setup.c
++++ b/lib/efi_loader/efi_setup.c
+@@ -228,6 +228,11 @@ efi_status_t efi_init_obj_list(void)
+ 	if (efi_obj_list_initialized != OBJ_LIST_NOT_INITIALIZED)
+ 		return efi_obj_list_initialized;
+ 
++	/* Allow EFI to use all memory */
++	ret = efi_memory_coop();
++	if (ret != EFI_SUCCESS)
++		goto out;
++
+ 	/* Set up console modes */
+ 	efi_setup_console_size();
+ 
 -- 
 2.34.1
 
