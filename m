@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 850E3D1A42C
-	for <u-boot@archiver.kernel.org>; Sat, 12 Oct 2024 03:15:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C065BD1A427
+	for <u-boot@archiver.kernel.org>; Sat, 12 Oct 2024 03:15:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A79A088CBF;
-	Sat, 12 Oct 2024 05:14:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1F36D88A4C;
+	Sat, 12 Oct 2024 05:14:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B735888B55; Sat, 12 Oct 2024 05:14:02 +0200 (CEST)
-Received: from CHN02-BJS-obe.outbound.protection.partner.outlook.cn
- (mail-bjschn02on20708.outbound.protection.partner.outlook.cn
- [IPv6:2406:e500:4440:2::708])
+ id D5D1288B55; Sat, 12 Oct 2024 05:14:03 +0200 (CEST)
+Received: from CHN02-SH0-obe.outbound.protection.partner.outlook.cn
+ (mail-sh0chn02on2072d.outbound.protection.partner.outlook.cn
+ [IPv6:2406:e500:4420:2::72d])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0691688C40
- for <u-boot@lists.denx.de>; Sat, 12 Oct 2024 05:13:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CE03F88C9C
+ for <u-boot@lists.denx.de>; Sat, 12 Oct 2024 05:13:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=minda.chen@starfivetech.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=AW9dI5nRoYLHby6D3r0jDdLXClqTLa7u+BdRZj2po+OIiHpFn4QdkbW1GPR8SqMQzzC6UQ4zYV+yWPAYG5fq7W28KsR2Z6r+QuK+OqMXOkpD+mGgSfpwe4ucoPe7EHtNdSeflgbRL2KF29fQTWnZ2oc0AHwMP+Af2QMOrGniN/iLHpEyKnIa/3Sb+rekHuFJ+EAOqrZ8uS5gIGOAoKkH47rjE6JU86rAiI+0m2+B0lLM1ChYzlBDwB4dnA1v4yKFmdPYkW5ZBzcmCZgk+b0A+E/Kc/pspuSceY0AgxYun9Ah1EiPRIWKHfseYpDGzmtqGQrHbCz7nmutEZ1NSrPXxQ==
+ b=hTAc+jA/ZtX4r54HwVZfgz7QkSb0wFS5buJkE5kdQCTRVotU/yEpvnEz3alCQ36kpHMh4yBL7zN3n8juCcmff8Mk6UPDcsqetWWpoYCNI4G0ERP6gyjN7UxlI6DAZ4uND/zwQ8LlLDDyRQG13Xae71acrzjSvfErJyN4tEGKXLryo7ZK9b3a+0WOO57zzYlcunx7qfjShy4hGO4pQRDR0xv9JL4MoE+FAUJNKX85Gfko6wxgeVSbwxgsyHdpohiGgjtesmX2leyUbdoUkGZ2J5JcYKtU9ePsyivfWCjj6oeFfljHcXKBiCy56zinThxzjgckLYINmOnMV3FFP/A2lA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=KyU8RrEQZjV3qU89E7IhqzAdLpaK8PGCPbb1rt+Klm0=;
- b=bVXgBWzFgmWNhyPJ7EhF7oneQ3WexBcxpcRYwDaGd/lCdHXeHI16x9DDe28L7iYHxqGNM/duRwp87f6aDFt16CxaLPuqABwu3cVhdbZ/Fi8qtk7N2eJrCQO7oX9TXNUpqoiQoaADiBtT2o01gU/5v1q5a0WpBP2rE4CxAjuSGcHr6f8+RRI6Kb5ydZgXvVxd9P29GIMOeps6hW/JWY3/rasop8sV/XqWICEWGVy/Pk3Evs2jSh8MoNxv6ysnXn4hEWmWmnDyF8tnPvKO0PQUP32DLZqzpgZF9GX3ntPplp2wUFPJHwWHivyLpT7DBHToToYxBYBbmTrBVHCd88rZlQ==
+ bh=CBbY04AM2fpxDBKDKIk+bYB3siZwaaUSrfxXQT7cJyQ=;
+ b=ng3c8cPxi4vAexu3Gksl2wjuUFEW24tWGMI5D7NVBnXKIKzwwT7462YoBYyz1vJF3GPJp6SI2I8DRs6dWaqWEoHgv/HYzKVR1lfCgClNkWYJaFYmXerYzYBRA7G5YnZNBS0ZxQTUWsoRIcYMSf8gb4t/PD+9K4t+LhamDXrYptGUzXNZony8zUcaewMEnwtUP18ol1+MtmmvaWNXvtZXyCBbc4hlYH2/1kp809/PuauHLq+7HFUITU/IpfUVtFkZXkPodJ/WndYBxoDV1itNtpw6r0TxzR1ezwjsTvW1sRySf7Kv19DnBmHDLwsSG0IDSNP6Sk37kJucQrTTG2Mffg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=starfivetech.com; dmarc=pass action=none
  header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
@@ -40,11 +40,11 @@ Received: from BJSPR01MB0850.CHNPR01.prod.partner.outlook.cn
  (2406:e500:c211:1d::17) by BJSPR01MB0850.CHNPR01.prod.partner.outlook.cn
  (2406:e500:c211:1d::17) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8048.18; Sat, 12 Oct
- 2024 03:13:49 +0000
+ 2024 03:13:51 +0000
 Received: from BJSPR01MB0850.CHNPR01.prod.partner.outlook.cn
  ([fe80::480b:a135:6e33:10ff]) by
  BJSPR01MB0850.CHNPR01.prod.partner.outlook.cn ([fe80::480b:a135:6e33:10ff%5])
- with mapi id 15.20.8048.017; Sat, 12 Oct 2024 03:13:49 +0000
+ with mapi id 15.20.8048.017; Sat, 12 Oct 2024 03:13:51 +0000
 From: Minda Chen <minda.chen@starfivetech.com>
 To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
  Roger Quadros <rogerq@kernel.org>, Rick Chen <rick@andestech.com>,
@@ -55,10 +55,10 @@ To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
 Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>, E Shattow <lucent@gmail.com>,
  Minda Chen <minda.chen@starfivetech.com>
-Subject: [PATCH v5 6/8] configs: starfive: Add visionfive2 cadence USB
- configuration
-Date: Sat, 12 Oct 2024 11:13:26 +0800
-Message-Id: <20241012031328.4268-7-minda.chen@starfivetech.com>
+Subject: [PATCH v5 8/8] MAINTAINERS: Update Starfive visionfive2 maintain
+ files.
+Date: Sat, 12 Oct 2024 11:13:28 +0800
+Message-Id: <20241012031328.4268-9-minda.chen@starfivetech.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20241012031328.4268-1-minda.chen@starfivetech.com>
 References: <20241012031328.4268-1-minda.chen@starfivetech.com>
@@ -69,54 +69,54 @@ X-ClientProxiedBy: SHXPR01CA0017.CHNPR01.prod.partner.outlook.cn
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: BJSPR01MB0850:EE_
-X-MS-Office365-Filtering-Correlation-Id: cb756ad0-dac5-4f6d-f654-08dcea6be43b
+X-MS-Office365-Filtering-Correlation-Id: 8e464b48-b352-48bc-2ef0-08dcea6be580
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|41320700013|366016|1800799024|52116014|7416014|921020|38350700014;
-X-Microsoft-Antispam-Message-Info: EqhKcMH5tMrY1u5AZWSFJCuEbHxruolNHjHtqwMBtbv/tWJp9xDxT+/4fbiIIX5yZ277LrY0b4adMlGURQXfsjQ0mWEpl1iuR9B8mgH938haX82T3thH38v2AV1NQMQbBqGjbCj2CjhKk5MU88EegbE3gQDYtmIbcmqtm5iDtc66BV1OnhnBE0jfAxywD2nphonL9pdGXu3zHAVirFNWEH1dfh3CmM6elXHVeJdW+PmcIov2voi6Qjd44Cbhk2CLwdu9/PZhkWltL5v/G/QVZnuE+KEaqbWJjeus9wdoHkIj3//dWR6qqUeJztpo+dXpI6tqWo/WM/lDqNFXLHkoF6x5FDw4dyqSlAnfQU0Xt0jkXieORV0HcolCUDkQDgYXfGPleLzzHshNdJeIXbG/91qe2TUV3T6u+/QfEcc+DiLEodQB8S0sGPAwIbTqtIPEm7/f1rqFaaj5JyJwwKqQYKBagXiuDhR3Eln0vi6R/VwCLLsscl7F04jqjEXna5alSPyT4fBWHZOE7+5GgKFHTWscMD1+JY3yysLsdo4lFacWtzYss2Sq29nnHpMWain5IHUdQFEt6OG+2QH3zeeXLxvqSDC1Xfh7Kps6CxfitmjqKC8zKXkdqNjR0EJaoWNShSUSE3RmrnZK/wtVM6lZng==
+X-Microsoft-Antispam-Message-Info: arRj9tPqYgng0Fy/EmJPviloX08RQaoDjHDcyPfJOU17ihKmMcm8UuEM7Vsh2+KiFoly8/u2JS+3szeAHLfYPUyIyDj8Kz8eomgECftblULQnW3pGwz6BQ72HMoUS8B42TODNpNPKeTIbu5WVdwkCPfHrafO8le9zb4hMGZ5PUJ0tjPurWireF3CopUTiBm3N3W5iYbb+oRPoQRImVIeOmGvpCeqtfpZJBntEyX6F64QnYjhKHRiFh9chX72BjBPWg9yfi7QTfIIYI5gRW0d40VndOksI/ct45tfgkLTjSswTOopgoJW8E+4QabwyAGEZU//12c/2pYYSuKwIQyGw6CjMyfWvs3NKVoEBjeb83t4LKyXpRLUbtA5QHrjEGx8ijWVqJkv4Unw/PvEoL8HNMdfHpUpErYTULiPq7jfHOAlrdepAVWvncORkY3ecO9HeLtTurHOAwK0I/G7rigw4EiKvN9TOQ7WJBIoWTxMlYkO+vRkI/Gdati/X3yW+Y6fJBEV2UKKeY7Jb4bZxNRVfzIDDtWQryAeh58Z6D98+Hwqv1I6pJfTKITK9i0plar7Zk1iqYtP2+PShC0Ibwvqy39EKtdW3cg4ayHfhJeW5qNZF7KsJvTyxj2r2MmMmzFuTEECZhNQaWs4tfrHezntYg==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:BJSPR01MB0850.CHNPR01.prod.partner.outlook.cn; PTR:;
  CAT:NONE;
  SFS:(13230040)(41320700013)(366016)(1800799024)(52116014)(7416014)(921020)(38350700014);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?qOgiF2MyDbLsm9AOE0qpIctdRgveyqQVuqZEyiuFd0POqScniiLkcQTNwSNg?=
- =?us-ascii?Q?eZveVa916C58OYRk0//oubbXeEC0I76pLJ+xJ+KHS18tVhtkFn6fB9iNlznl?=
- =?us-ascii?Q?jCulgdqwoBppBfiQv2j8DinYhdIh9YPZC+LGMJ+banjJF7613MJGlV+X3fAd?=
- =?us-ascii?Q?C99wa+d8FzqR2OuaVbV+KBFRvOdtwkA40yx+rHRk8vo69fLdMaQXAkn0/Gyu?=
- =?us-ascii?Q?usYN6awCUqp7G61Rbt6vnZNJZ0rfFZSs7MMa8bgUFuiwWhnn6/NW0eWZ0knu?=
- =?us-ascii?Q?DI8iXInSgI2+G8YaBQM2O5EyCbItPPUOMncGwV3zYvzniFUVsfrySqGg2sEB?=
- =?us-ascii?Q?4du84+lZZ0Ggb7h7sTFXTed7HrE8esiO/smviRwPokLNa4U94P0RFrrV73f1?=
- =?us-ascii?Q?++vtIbWMa2RS6EZC/X+L+3VINQmGLbBVOVrItbVl0+CFqWHeVqaNpQD0cjC/?=
- =?us-ascii?Q?X4mc+1Kq1/lzBOSP/yKIHsECbNnHZ8DsZa7/jXl1jXfFNGFuK7oCFlZSHX0b?=
- =?us-ascii?Q?A6+SoylBXaYSMJhdgiKLFiNAmQhYdhqQN7RRMxVSB3UQ7xsqkSFq9LFUDQqq?=
- =?us-ascii?Q?E02RcVS5AqTKxePfePm2eSQRL5hYZSkw4RBdJojsjbPtwD+nr/fJ9JlFkFXF?=
- =?us-ascii?Q?GbKjS0R0RK9E4H7c+dg6RMsQg5yrjIoxZt7kuYsGF6C3I7UQI3aUGKXQKkGH?=
- =?us-ascii?Q?upULF3mamWyBZrVYiT9JEUN8ABoEVW0KPTkdWeUCiWjObMObOoMhPViMjMtH?=
- =?us-ascii?Q?atyP6Z7TT8QeoSP+GsffPcaBa/WTdcL7tT8LiAzeSG7Oz/F0qRlXMck1s004?=
- =?us-ascii?Q?amx4HbFoOnPW0u+FER3Zi8Kt1htOwE9QeByzOH28qMnRM9MsOhoX9LZ4NJvw?=
- =?us-ascii?Q?wkdfOTtVSyL05CCvU3vKY+0QCWxCvw8+oQaT0HtBwaYsEKnzbEgYSJ95sGMy?=
- =?us-ascii?Q?fne2iwJb0iKZ2nu+/Dr2xJY+vgQcx3liQST5Dx7XMIF/MnQzMcK3VCrWZyfI?=
- =?us-ascii?Q?ZftcCv1xpGjBcwg+QiKzlJEdP7n2pJefe+P6WHd9c2Vo/KBWYka0PwdTEy1I?=
- =?us-ascii?Q?/0we7+e4p+9LPmDYzClA4+l+gBPUI3OiSHRkoJzss5hNDkLZpSCFOt8167Zm?=
- =?us-ascii?Q?YEmFk4RT6Ij+5TgsGmFk2cF1a9GFuiUAx075wpBZOPIUtZ84JxIqrtI4Wwn7?=
- =?us-ascii?Q?aLEwn+1b7G/G+L1WJ+w+OZzbiEWWNvwELKdxr99RmlTU1b582MwsyRyscc5g?=
- =?us-ascii?Q?a5CwT+tXss9Kl/NuL1OTEfC50L48ne8ejCRBeDrIJXn8cYqCr40cHrpQJzEO?=
- =?us-ascii?Q?NDY5jZuwwXtj7U+9q18RFlYcNr7IYCj9nreriMeUsz2ly8ofUtYX/nFCyuB5?=
- =?us-ascii?Q?17es4buGCUJYb6kIw27e6SBgzMGVNMzrHfJ8krHH/aGS16nphfKM7wt30l+j?=
- =?us-ascii?Q?QhdFN+kME5I6Z8V/KbM+ILyt7DnsbVcTMDa7p9We3UJOCOfH7DMk7PIhIAmo?=
- =?us-ascii?Q?OJdDUa6My3/wbDdphiqwZNIYFEYDSoMlotsFonkf0k9K7EQ5AsqqjqZUoeku?=
- =?us-ascii?Q?h0hvEcxdyoDDtWc+NVjkqfJI1cCCsD9w3Mz/gLHScqmTFiGND1fzQ2pPdZsu?=
- =?us-ascii?Q?2A=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?gK76IVveFk4cyoQeF6lbWMuIAyNep3BEYTeNBLT07cPPsdnzZ2w3l7WwLeLu?=
+ =?us-ascii?Q?x1rmhU89Slf8u5REVO4HlrbwJMpm/401T1WoeHlfu80Hq6687PDFbmH0lnrR?=
+ =?us-ascii?Q?5zED30oNkP9pPqAZErfnzs7Tw8ayCWMRhXbBqjDo7QFQ4ZZErses2nmOF7M2?=
+ =?us-ascii?Q?S52K38ryBDmoAt41P9haIsg74Y2hsEbVDITocX+WgK9+kgoCd8ZGMmse28Gy?=
+ =?us-ascii?Q?bPe60V/ToUD9GDyGXdapeRFxf69t8hYS3Lcc3cIRtp9t+9/gTgjQ0kpMP3bD?=
+ =?us-ascii?Q?1tmWvcM2r2TNlBhcoKlH9Wl/E0pY/xtewz1ag/k0DR5AeDIVr0xCCUkQhhkO?=
+ =?us-ascii?Q?orIFBUfAnkq9WpvqRxTGHL+rsdwJ8M+XWkvYvmwxN/nAy2vU3LIOUbWO5jtA?=
+ =?us-ascii?Q?U/C3QuzbEszkp/7InKLH7hcTVmJ41w8hDqd83aCbw8TyE05QerCfKfhxKsTC?=
+ =?us-ascii?Q?ydqj/yM0QhaRhbjTzCmLHC4zgl1f6SL6Czj+2RaKLIuUaGwotzPXJ02lpVEN?=
+ =?us-ascii?Q?avlZ4NLSWjPXVieRdqgcyJEZEOAm6FjT7jQqN9lzc1IRsMjao5+wvW+4N+U2?=
+ =?us-ascii?Q?fK+k8ZgB+2a76WFfmzG+D/c1WRT8/OB5qR+vzUurbqxOlXOnX2DY/mRxusf6?=
+ =?us-ascii?Q?q+vDasV+6ngUW8WX8sK49UDHbNdoF5q26FH+OYr3Nc2dVdsNjO6WqQC3qJMW?=
+ =?us-ascii?Q?Eb3LEKUk+8Cp6GE2pN+7v+nA7e88rgtcemTnYEXoMyxcc3cn0y5kETECUkMg?=
+ =?us-ascii?Q?9k7WUKmJuUNGo8pJ7lRwomprAO/EQ06Z+Gxd5cQenLGbiqLIKvUA7q2Dz5gX?=
+ =?us-ascii?Q?HrjjpohmG+B41Hoi7l8Vu1X1r1cRGL3U5zRRzkuQlG46WuyGmIzdxqcylLCJ?=
+ =?us-ascii?Q?cBglGqCKzcQPIXBw5z1LI3DNXmp8BulrtVijAMdvgP2urbjmx/UKxk1gg6Xt?=
+ =?us-ascii?Q?Bx7kaI4PiXIdXnjRDR3uAcL2iPwnDxrTACRsoOCYvtVeMCXtyiWnLLG/fqFN?=
+ =?us-ascii?Q?DQ6WCeqaBDKtT7RIzXYsNzUbYPDCcMODUkUpG0aQOoKYZDvbhzZzmVZtNENy?=
+ =?us-ascii?Q?1heyBs8vPCvlA7x2anHhivPrDwAvhWZcFBJd3VhA7WioBQv2ZRH8OyG4Z5Da?=
+ =?us-ascii?Q?MBsEH26/cfIQekrAEQLnaVwJkqrBaC+FPFIP8RAL/PweXTtIUMZpNV5HvZry?=
+ =?us-ascii?Q?eXf6H9FYYVpf3yyJDfhLwcmFYjKnfbwW1oyq7t0PXiud9Vb+dffRR5ttT9lP?=
+ =?us-ascii?Q?IAPSp7RldLVSUo1raOmGZhdG5sQi0t/VeF1RGz/9NS8dd/0aShhwZ3iLqc6P?=
+ =?us-ascii?Q?5ln5moMlO8/W6QQbzul4oES1buuVXFxR0s1jvbq8+hZcc6B49VC3qyUFb5eI?=
+ =?us-ascii?Q?hplamVQ90aByX6bEyWUL/IWmoPqDYzG5HDa8EkD7i+ixbvk89XR2wtV59clb?=
+ =?us-ascii?Q?1Wda0iUJbr2bCLpzTLzhxAoic6UofaodGPexRBEKrQpMzvAVPfzr8MZVhdku?=
+ =?us-ascii?Q?aJEFeXODwRkRyDf2Or7hXY4p6KJpzG3E1Ql9+nT8ol9nS6nuhUIDhDCpahuq?=
+ =?us-ascii?Q?QRB/CLh52ipIx65gXhvdBcz1rFJzT7OgBxqPQ1RrERQ/2T7gURfMOOmbfG+d?=
+ =?us-ascii?Q?Tw=3D=3D?=
 X-OriginatorOrg: starfivetech.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: cb756ad0-dac5-4f6d-f654-08dcea6be43b
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8e464b48-b352-48bc-2ef0-08dcea6be580
 X-MS-Exchange-CrossTenant-AuthSource: BJSPR01MB0850.CHNPR01.prod.partner.outlook.cn
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Oct 2024 03:13:49.2612 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Oct 2024 03:13:51.3944 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: /z+YorpyBpboxb1qB5ftFiiff+wpDI+4ze9rayLPvbMLDvJe1UUZ9565Qtlptcwlm8wPKraXWUDSZyDkiwIo2Za8OY2t8746lQqyw5Qcu5I=
+X-MS-Exchange-CrossTenant-UserPrincipalName: ueMKA8eVCqpZQUXt1RIMNn0jqNi+vL/OL2U8UJ2+g+Uz6m7asVMStohteURiR6iOXfV2tb7Ef1SvRy/sXk1f+XJSfP+aVjD3Y4h5T7h/5y0=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BJSPR01MB0850
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -134,55 +134,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add cadence USB confiuration.
+Add USB related files to Starfive visionfive2 MAINTAINERS.
 
 Signed-off-by: Minda Chen <minda.chen@starfivetech.com>
+Reviewed-by: Marek Vasut <marex@denx.de>
 ---
- configs/starfive_visionfive2_defconfig | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ board/starfive/visionfive2/MAINTAINERS | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_visionfive2_defconfig
-index 174ac24dc74..4329c8705ec 100644
---- a/configs/starfive_visionfive2_defconfig
-+++ b/configs/starfive_visionfive2_defconfig
-@@ -69,6 +69,7 @@ CONFIG_SYS_EEPROM_SIZE=512
- CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=4
- CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
- CONFIG_CMD_MEMINFO=y
-+# CONFIG_CMD_BIND is not set
- CONFIG_CMD_I2C=y
- CONFIG_CMD_PCI=y
- CONFIG_CMD_USB=y
-@@ -112,6 +113,9 @@ CONFIG_NVME_PCI=y
- CONFIG_DM_PCI_COMPAT=y
- CONFIG_PCI_REGION_MULTI_ENTRY=y
- CONFIG_PCIE_STARFIVE_JH7110=y
-+CONFIG_PHY=y
-+CONFIG_PHY_STARFIVE_JH7110_PCIE=y
-+CONFIG_PHY_STARFIVE_JH7110_USB2=y
- CONFIG_PINCTRL=y
- CONFIG_PINCONF=y
- CONFIG_SPL_PINCTRL=y
-@@ -127,13 +131,19 @@ CONFIG_CADENCE_QSPI=y
- CONFIG_SYSRESET=y
- CONFIG_TIMER_EARLY=y
- CONFIG_USB=y
-+CONFIG_DM_USB_GADGET=y
- CONFIG_USB_XHCI_HCD=y
- CONFIG_USB_XHCI_PCI=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_PCI=y
- CONFIG_USB_OHCI_HCD=y
- CONFIG_USB_OHCI_PCI=y
-+CONFIG_USB_CDNS3=y
-+CONFIG_USB_CDNS3_GADGET=y
-+CONFIG_USB_CDNS3_HOST=y
-+# CONFIG_USB_CDNS3_TI is not set
- CONFIG_USB_KEYBOARD=y
-+CONFIG_USB_GADGET=y
- # CONFIG_WATCHDOG is not set
- # CONFIG_WATCHDOG_AUTOSTART is not set
- CONFIG_WDT=y
+diff --git a/board/starfive/visionfive2/MAINTAINERS b/board/starfive/visionfive2/MAINTAINERS
+index d7f638f9b41..1faf83f581c 100644
+--- a/board/starfive/visionfive2/MAINTAINERS
++++ b/board/starfive/visionfive2/MAINTAINERS
+@@ -6,3 +6,5 @@ F:	board/starfive/visionfive2/
+ F:	include/configs/starfive-visionfive2.h
+ F:	configs/starfive_visionfive2_defconfig
+ F:	drivers/pci/pcie_starfive_jh7110.c
++F:	drivers/phy/starfive/
++F:	drivers/usb/cdns3/cdns3-starfive.c
 -- 
 2.17.1
 
