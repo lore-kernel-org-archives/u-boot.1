@@ -4,77 +4,145 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACC73D1A443
-	for <u-boot@archiver.kernel.org>; Sat, 12 Oct 2024 07:44:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 249DCD1A452
+	for <u-boot@archiver.kernel.org>; Sat, 12 Oct 2024 08:31:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F5F088D9F;
-	Sat, 12 Oct 2024 09:44:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 65A7988E3C;
+	Sat, 12 Oct 2024 10:31:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zMJsldxU";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="BrjXxySZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D243588E21; Sat, 12 Oct 2024 09:44:34 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A45DE88E3F; Sat, 12 Oct 2024 10:31:24 +0200 (CEST)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05on20618.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2612::618])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C693588970
- for <u-boot@lists.denx.de>; Sat, 12 Oct 2024 09:44:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 151EE88E33
+ for <u-boot@lists.denx.de>; Sat, 12 Oct 2024 10:31:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a991fedbd04so228897766b.3
- for <u-boot@lists.denx.de>; Sat, 12 Oct 2024 00:44:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728719072; x=1729323872; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ON65uTY4tpkfdRvOpftBmEebt9rZCBO6dVSrZOZV1bY=;
- b=zMJsldxUgmOVOMDjSRJMWVMivJu/Rc99NiUhPhja2E0k/PCKUcvR/gsLAEbMNV1iku
- dhGBO/izWh6dEFPu4hXhznSHdyDIWZmddCQ/cMQkx37yPBXCTCHHDRsUubXTWyqyAUQN
- yabEjZ8yNnnCLPFjy4cGYRtmrTq6skKCfbD6K4I7AegI335m2a0V3xeYCf6Y0CLbihpY
- Kr7OxNKEXiaV+etmvh++cyRnaxNzhh+9okN7LqN8UZVcFtmTnU7Z8BmoNeJHq3t8WMoi
- jHO/jInPZQPc83ZN4NYrqWbuYXTpE3e6u/81xDQuTatohq+dluymUF3jMfPXsXPR042J
- ak5Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728719072; x=1729323872;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ON65uTY4tpkfdRvOpftBmEebt9rZCBO6dVSrZOZV1bY=;
- b=KYpGCzENodaJ6vKtb8bEirEt1Q3Jw0SeogA899hKxyjBy8CsdKFtj4RQv+aG37ru5Z
- 5dm6nJwgltG752kS1bGXRxL7HHWdJpuKz1EsA+7WE4MkZOTEP8rFhMfXuF2owKTTBf++
- 9u7Bg744mnFQp/u6AF2f0Nn5oDuPRRduUgxpLQFEEe6GYmRz7CMFok3cZqNrrJLXQW34
- WKFMd9gOvgAuCTQTvWoiBrE82kyty368GcyT5doIgiG3sP4NSpewdkc1gmHRDjy7cOGV
- VQxwomaDW4OhhWP5Lclinh7YpMq/D7bXqR6ZqO0RFmHl2S4/Fhy15ZPoCe8H71w8bTLQ
- 52XQ==
-X-Gm-Message-State: AOJu0YxXIt7+RAulez1E/mk3FEk+OgpQDCOx0NhojDER0lII2K5RCaRT
- zckAvqzmdlwRFcIG7DjPzkeeRb2IUUFcHCZVaGzfstzEXHplESxrYuy12lmvr9Pdi686B+jBaUj
- 0J+rTV4NJSFKVyE03NeIWfNrAXasDxcnU64ln9g==
-X-Google-Smtp-Source: AGHT+IG3kKRGCKLXja9oihWH5UzH3r+yRgavJjb5e6J0bEdrKnpl/A6OYYlbIO+aUATzMICbS7OfPKxxdGg2CVombNU=
-X-Received: by 2002:aa7:d3cd:0:b0:5c9:2b2f:fee0 with SMTP id
- 4fb4d7f45d1cf-5c95ac64190mr1762930a12.30.1728719072055; Sat, 12 Oct 2024
- 00:44:32 -0700 (PDT)
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=GK3NC8fLfdClAK9AaUfkn8xeR2FqbQ9b4Av5QBSAW6yx8ABwcqpGjoKm30+urSCTWvJq2+ndYqOKHmavDWUSTitFsqM1RFCgM5aJvaTcicKwQjM+DXV9ZCrp8a1cMwvvJc9iRX3v+qYbar6Q/9+k94+uPR2JAbFzKoXpvsdLwp+CbQmo041xHXQbKvNkt5JgnhlQvsUxK10wDL4UL0MbxobvVVEBgRDYpd7x4nBv5HYQoQLBYTcYdXrleJbE1K32YrTPTSEXBrWCjL6W1QvjEFJnVXCZuFV91E6HtEB9z7Bzva4EDwOF4zIo6z1xhCmH+ufMIpfixkl838PnngLIbA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=oxB9ESYEpE7S9AEN9g5tLHKXvZy76hZ4kE0yFPRpzLA=;
+ b=qOkm5RsIUYBfZ9R/gLFaeg6H/dvORtr2KLAzJ9uLCQjBxcfUjXv1ai0aTxxpNU+gYWdmYVTzYDcKgNa3XYmxKagQXIYFBu73NLE2OSLhu/eOrh+vTkH/NQS4MIj+zfxTjuDfJPpDMs/9Wtb4UsSt7dzCge0Tljl3qbPyd57eujf7uf49aqukrvtPcqxdCMdxzYgiDu/VmFywUl3b9pOfvZQVDB5ODhjGIQnccxavenUX9Uih86MRVpnTwDPGkDiaRzPSuTMvgoJU8z3icmArZPeM4xqoX7wdZZJvP6Gds+0I1eXZgv5k134R1k0Ubphl9qeFs0gu8PDIuJDKmwRqSw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=oxB9ESYEpE7S9AEN9g5tLHKXvZy76hZ4kE0yFPRpzLA=;
+ b=BrjXxySZbD+xJ8yU4hmWC0012AdTeOGeSx8rFRRilAKVAaTC1HlBZb0+y5Pd5qVnfZF3Uzc3VpyFWOb8hYb1FALkq9IAH43z0dD0/pKduEVYEOE7kjRLnGidUX5DcP1Zdk8b55r66AMJGLq+aFOdF1KtZLIk2bO3zXFsmgBIQDAZVpeb4fBFoVPuZsyg6BBNTfeG9c2Gg4Bt9KRgE50LYoJH0Y0ntGwtKthKFmwgOjKU+UmUYNE3fs7o78yDYZiBTyuJeKxH3Ef2Y/1jq6RFqmpK/B1Yt1ObkNJfgHrQ93CblW0y3GUb3UVlwFc64sEcMvZxR51/4+nVwLjED/+X0A==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by DU0PR04MB9251.eurprd04.prod.outlook.com (2603:10a6:10:352::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8048.22; Sat, 12 Oct
+ 2024 08:31:19 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630%5]) with mapi id 15.20.8048.020; Sat, 12 Oct 2024
+ 08:31:19 +0000
+From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+To: festevam@gmail.com,
+	sbabic@denx.de,
+	u-boot@lists.denx.de
+Cc: uboot-imx@nxp.com, gilles.talis@nxp.com, Peng Fan <peng.fan@nxp.com>,
+ Gilles TALIS <gilles.talis@gmail.com>
+Subject: [PATCH V2] clk: imx8mp: Add i.MX8MP Dummy clk
+Date: Sat, 12 Oct 2024 17:34:10 +0800
+Message-Id: <20241012093410.9069-1-peng.fan@oss.nxp.com>
+X-Mailer: git-send-email 2.35.3
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SI2P153CA0021.APCP153.PROD.OUTLOOK.COM
+ (2603:1096:4:190::20) To PAXPR04MB8459.eurprd04.prod.outlook.com
+ (2603:10a6:102:1da::15)
 MIME-Version: 1.0
-References: <20241008181435.1753814-1-sughosh.ganu@linaro.org>
- <20241008181435.1753814-13-sughosh.ganu@linaro.org>
- <CAC_iWjJF5SBE07SPEik8abFGq3fyZvAo=gpM73=Ds=K2aiBaJQ@mail.gmail.com>
-In-Reply-To: <CAC_iWjJF5SBE07SPEik8abFGq3fyZvAo=gpM73=Ds=K2aiBaJQ@mail.gmail.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Sat, 12 Oct 2024 13:14:20 +0530
-Message-ID: <CADg8p94Z80m0qu0vXC6sEx0BdcfsPSjk7gh5yXeDsOCKTz49ww@mail.gmail.com>
-Subject: Re: [PATCH v2 12/14] efi_memory: do not add RAM memory to the memory
- map
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Bin Meng <bmeng.cn@gmail.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Jonas Karlman <jonas@kwiboo.se>
-Content-Type: text/plain; charset="UTF-8"
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|DU0PR04MB9251:EE_
+X-MS-Office365-Filtering-Correlation-Id: 73518505-6963-4f6d-f932-08dcea983eb3
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|52116014|376014|1800799024|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?wBMfSLwBfXbqq3F2YlHU6DvUyGIb+H97o64tPiXOIkg7hjS4sHWISt/Z9Lj7?=
+ =?us-ascii?Q?x9DwYV3X6+4ICHFuP9hR1WrJioe91TM1Fc46KXPVWTZav+M9aFVYa/8PM/j2?=
+ =?us-ascii?Q?rZN8efdCQnDI6YmcFun/lAHGjDDbCoODIeBr3oCCHjdonhgKkyCw1RkRWrMU?=
+ =?us-ascii?Q?wMD3rEp2X+E/7ayPcURjBl6G3mjWQuEQ0r43r1hF0G6ci0st2W6s0PQkq8Tf?=
+ =?us-ascii?Q?a7f57dY6Flb2pod9+eeyvw4kzNlV3rS+RO1YmL7ZwWF0pWw4OVdscuxDfAL2?=
+ =?us-ascii?Q?WKHGeGKsm/jvqJm4mp1qk/OD981ANrLZV/0pS2p6cZOKGVV4eaUsRbF/pjp9?=
+ =?us-ascii?Q?v5HiBAsW3giys+UoanJF/Tu+4OVFdxZFrTQTyhqa66UvVnwOFtguBqgdYfM5?=
+ =?us-ascii?Q?d/ZuA2Xoy0lXtqmJrJghce55ULLHNUSLqRZnNg5sDJC65vL3doBB4M7FZlQX?=
+ =?us-ascii?Q?Wck5K0Po+QvVjf+oX69woDJ/re6N5UL4Wr2SPzLnw5g7YdhpzvDkmStCBR65?=
+ =?us-ascii?Q?YRqT/ORni8fNx/6dlEgKxHFIp8CzMJ0bdMLc3qcgSbUtZOuGCxrf5FMUa3Vi?=
+ =?us-ascii?Q?4ZEXbKXdDCWQhAZVmHE05lKYv2oWChe7ICGBaOT8YVb1+Nt+eT15sH0avZS1?=
+ =?us-ascii?Q?z05H0QR2rlVDDehnw6WrMwABrzE/P6yWyChEOteo0fegtm31pgeANznwFVrw?=
+ =?us-ascii?Q?Ou4NqqXqyFeqfFgOAwPSexBal1amjxV7ymKyfylQvB+UKEuAFfGud08SMlBV?=
+ =?us-ascii?Q?6BJ25RyNO6ZIW0h8dpS3cfzo38YjnKkf4/eNi5cFYfeMFWKVarKHClndXM3b?=
+ =?us-ascii?Q?OMzxqZrp+fzPjN31ns8TYvO9nKwYDk+7y9nWf2U63ANDL6227lr5m5F1dX/F?=
+ =?us-ascii?Q?oC6XczJlgaM+g3FtxiDsgAwoAf6bq9ryiui2fg2fSY8YOqBMJeRX4Iqzsu3l?=
+ =?us-ascii?Q?iVqBGoxn7tfysU9BFLyuvSQm3IYRQO/+QelCl19MjWIfoIkpxQlU++u5QXht?=
+ =?us-ascii?Q?ikSZRK3FCBQQRQg8TpyC7JSdX/vFJJ6BVyb9/fu3IvZ5CuksMZ7t5nlzk3ns?=
+ =?us-ascii?Q?m1kDiTqBcxbnzOwg0gjkz+GXDjSVFlS0VLKGAx6vcP+SRHqH4tpBliAYjpfA?=
+ =?us-ascii?Q?//fRg/QlGv4DPR3YImiPEmCVeLqWvMJWCW9JBTchGN7wnedwgCsixd4HU7PD?=
+ =?us-ascii?Q?trbiyZsmFT8l5Pv3yWAOFuv+UZEqfbJp1CU41rPjSSMLif3ChpeiR9U3zdRC?=
+ =?us-ascii?Q?r82zgn2/U+qvICD5RsM7uuPK5p1Wm7zAiwhpgbYkXgtbdP/n0L5JgzkvPOkq?=
+ =?us-ascii?Q?9TJeWF8IiQ5JLiDFchRTpQKg4h6GDj4zgqc4QvRbe+59Fg=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(52116014)(376014)(1800799024)(38350700014); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?CMvffkDotPDf8YLQ/XRIHaeVnUVBTpsXPmthcQSYKFDbG4dV2xFiCtFcH+90?=
+ =?us-ascii?Q?XzoiucNH5rdXPBna7mRQUpJQSbEwLjIPfNdkl+haWvTJKhz36sz4QwmXIXop?=
+ =?us-ascii?Q?rX7aCOOJBvHDgiL9hJ4sTzoOle45Nez2/0oVyUwOTnvN9mX1lLGnQapLiW8g?=
+ =?us-ascii?Q?7zbyzAzHc2dqz5eb3Lh/lkq8cBDPylYsQFOcPD4cWIKFPcN3nMZFh3yidX54?=
+ =?us-ascii?Q?rJVbmXCjoDE9dBHHR/+xSoY3PuvEuO+ZyAmHFkkCEs6f9vnfNiBpaBaEXq/g?=
+ =?us-ascii?Q?rJRV1l09dPMd13f/Aj3xG68Yo89GSkC/0QZxBVOmeZnm1UjZZ63xkAFiMgut?=
+ =?us-ascii?Q?kYnWmkTa/o0W+SA2v/5opsX3p3LQkbVWULaVsugMKwhLdMKt7ubvHaIAav6A?=
+ =?us-ascii?Q?1Xl6UUJ1iI6A4jV/6uQn1PdKlGgE5qnaMzfrfv2c0kNMuND3VDRqz1CoBFaR?=
+ =?us-ascii?Q?KrPCuSyf1ze6wsy2fuApRFBVsZiW/beGddGLCv8h0cbrnT2o8jCrf1PBCeJm?=
+ =?us-ascii?Q?3pM3wbuVKEDyI0CaTgoBWiuoUzAfov3OOBMLNmqat69BySD9zLjMJI2/AHdv?=
+ =?us-ascii?Q?e9Ed5z3BsMVoZbjc15+0nw8amwjTMd+xlciHqbPDdJENh6KIIesb1zDIdzJ/?=
+ =?us-ascii?Q?aMgBOBCdvh7tW6XRLwam7IOVFhKWZihyOhEQ2LPHPp3mgyAvNuSIPmEn1BU3?=
+ =?us-ascii?Q?mAeMLCxPwN8cXMsPtnO69nGdl4057rWIOFNNIZMUCrSmUpwL0vVK4Y4AF/rl?=
+ =?us-ascii?Q?w0AkGS8NfQ1ZZGLVOyOy74DqzIYSlY1t5UkKPBtdgnC1gnhJzX6kCQjcseCq?=
+ =?us-ascii?Q?yHzzokaLd2UWDg+AA62k7+i/r0mn9bZ1mSwJ/3f6tiLAVQIGQcJVBwP/ppoA?=
+ =?us-ascii?Q?fS6hDfkM+oUlG6IVxyugmMvjNQBnIKm4Jkn9dpCFoy7xSk7gBdep8R6DTm0X?=
+ =?us-ascii?Q?59inJyAm+S9F5MdfqF3cwRkxfnwJhwbKXplLHhkNqf56Mn3tP/K2/DgTUxyc?=
+ =?us-ascii?Q?xMz+a+nEfdMhbMG6PVnREQUv7pXUt/TBLrMOQBm0rWj9X7VDoC7XAcJTDqJC?=
+ =?us-ascii?Q?fysA9eHKbjwBX8HNs7P9sCrmgfhd4P/gwSt6I82aj+PNpoIXSVX2rW8KJrX3?=
+ =?us-ascii?Q?yjltVRf5ecjlJMNqgegsq+GKnPTHtINQR6//4jT7h6uZGQUlCed8Q6o2u7Qi?=
+ =?us-ascii?Q?DNGWCSSswwGmAXxvUy+mpgUOw/LJxXYQDyh4QJ9WKArx3TFfkaEFa42WuznH?=
+ =?us-ascii?Q?FPcW64H4RDMe4z56DYqwT6/VDN5nvdkZy3fxKvUP/66rZMkIYSTKVAyNyEH5?=
+ =?us-ascii?Q?JyYEawJxqxSe2SpY8rPAWVj4Mp1vSvxAqkI5x26M8OiTkIt+SHttYbq0gfNk?=
+ =?us-ascii?Q?1NvHIcgLxM8bhROJzw47iM1nB9vj6U64dccQj6Nc8ZGWRVyMMe6XtDHvqy3p?=
+ =?us-ascii?Q?nYSeFCY4gWUqe5Lyd2yPI50B2zEWDGzL205tBV907NyR0rBnPUyaJfiCAHRi?=
+ =?us-ascii?Q?sU32zilsTFXY3Qotu4eeEv8UdJKpBubB34JZRXYFAUNJz45cy6rI+t7P2cr8?=
+ =?us-ascii?Q?iqEP51HTcZO4HPJmbsftLrW1a7hvqKhfcXP37c3b?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 73518505-6963-4f6d-f932-08dcea983eb3
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Oct 2024 08:31:19.0573 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: DeitAcgkW3bYJaG8/LGFxjKu3qTXqXiq18BFZOeSw5booa37yDEAnNHkeM+qKDmtcN8pnLpBn/XOUFR2tGwEPQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR04MB9251
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,184 +159,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 11 Oct 2024 at 16:33, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hi Sughosh,
->
-> On Tue, 8 Oct 2024 at 21:15, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> >
-> > The EFI_CONVENTIONAL_MEMORY type, which is the usable RAM memory is
-> > now being managed by the LMB module. Remove the addition of this
-> > memory type to the EFI memory map. This memory now gets added to the
-> > EFI memory map as part of the LMB memory map update event handler.
-> >
-> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > ---
-> > Changes since V1: None
-> >
-> >  include/efi_loader.h        | 13 ++++---
-> >  lib/efi_loader/efi_memory.c | 75 +++----------------------------------
-> >  2 files changed, 12 insertions(+), 76 deletions(-)
-> >
-> > diff --git a/include/efi_loader.h b/include/efi_loader.h
-> > index 081cb65d3f7..0d5555c7597 100644
-> > --- a/include/efi_loader.h
-> > +++ b/include/efi_loader.h
-> > @@ -798,10 +798,6 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
-> >                                           int memory_type,
-> >                                           bool overlap_only_ram);
-> >
-> > -/* Adds a conventional range into the EFI memory map */
-> > -efi_status_t efi_add_conventional_memory_map(u64 ram_start, u64 ram_end,
-> > -                                            u64 ram_top);
-> > -
-> >  /* Called by board init to initialize the EFI drivers */
-> >  efi_status_t efi_driver_init(void);
-> >  /* Called when a block device is added */
-> > @@ -1186,9 +1182,14 @@ efi_status_t efi_console_get_u16_string
-> >  efi_status_t efi_disk_get_device_name(const efi_handle_t handle, char *buf, int size);
-> >
-> >  /**
-> > - * efi_add_known_memory() - add memory banks to EFI memory map
-> > + * efi_add_known_memory() - add memory types to the EFI memory map
-> > + *
-> > + * This function is to be used to adding different memory types other
->
-> /adding/add
+From: Peng Fan <peng.fan@nxp.com>
 
-Okay
+i.MX8MP SDHC use CLK_IMX8MP_DUMMY clk entry. Without the clk, the bulk
+api will return failure.
 
->
-> > + * than EFI_CONVENTIONAL_MEMORY to the EFI memory map. The conventional
-> > + * memory is handled by the LMB module, and gets added to the memory
->
-> no comma after module
+The correct entry should be replaced with IMX8MP_IPG_ROOT clk in device
+tree. This will be done in Kernel device tree and sync to U-Boot in
+future:
+https://lore.kernel.org/all/20241012025221.1728438-1-peng.fan@oss.nxp.com/
 
-Okay
+Fixes: 76332fae769 ("mmc: fsl_esdhc_imx: Enable AHB/IPG clk with clk bulk API")
+Reported-by: Gilles Talis <gilles.talis@nxp.com>
+Tested-by: Gilles TALIS <gilles.talis@gmail.com>
+Signed-off-by: Peng Fan <peng.fan@nxp.com>
+---
 
->
-> > + * map through the LMB module.
-> >   *
-> > - * This weak function may be overridden for specific architectures.
-> > + * This function may be overridden for specific architectures.
->
-> Since you are rewriting this I think for "architecture specific
-> purposes" is better
+V2:
+ Add link to kernel patch
+ Add T-b
 
-Okay
+ drivers/clk/imx/clk-imx8mp.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
->
-> >   */
-> >  void efi_add_known_memory(void);
-> >
-> > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> > index 974ecc51113..0f25094dbf8 100644
-> > --- a/lib/efi_loader/efi_memory.c
-> > +++ b/lib/efi_loader/efi_memory.c
-> > @@ -780,82 +780,17 @@ efi_status_t efi_get_memory_map_alloc(efi_uintn_t *map_size,
-> >  }
-> >
-> >  /**
-> > - * efi_add_conventional_memory_map() - add a RAM memory area to the map
-> > + * efi_add_known_memory() - add memory types to the EFI memory map
-> >   *
-> > - * @ram_start:         start address of a RAM memory area
-> > - * @ram_end:           end address of a RAM memory area
-> > - * @ram_top:           max address to be used as conventional memory
-> > - * Return:             status code
-> > - */
-> > -efi_status_t efi_add_conventional_memory_map(u64 ram_start, u64 ram_end,
-> > -                                            u64 ram_top)
-> > -{
-> > -       u64 pages;
-> > -
-> > -       /* Remove partial pages */
-> > -       ram_end &= ~EFI_PAGE_MASK;
-> > -       ram_start = (ram_start + EFI_PAGE_MASK) & ~EFI_PAGE_MASK;
-> > -
-> > -       if (ram_end <= ram_start) {
-> > -               /* Invalid mapping */
-> > -               return EFI_INVALID_PARAMETER;
-> > -       }
-> > -
-> > -       pages = (ram_end - ram_start) >> EFI_PAGE_SHIFT;
-> > -
-> > -       efi_add_memory_map_pg(ram_start, pages,
-> > -                             EFI_CONVENTIONAL_MEMORY, false);
-> > -
-> > -       /*
-> > -        * Boards may indicate to the U-Boot memory core that they
-> > -        * can not support memory above ram_top. Let's honor this
-> > -        * in the efi_loader subsystem too by declaring any memory
-> > -        * above ram_top as "already occupied by firmware".
-> > -        */
-> > -       if (ram_top < ram_start) {
-> > -               /* ram_top is before this region, reserve all */
-> > -               efi_add_memory_map_pg(ram_start, pages,
-> > -                                     EFI_BOOT_SERVICES_DATA, true);
-> > -       } else if (ram_top < ram_end) {
-> > -               /* ram_top is inside this region, reserve parts */
-> > -               pages = (ram_end - ram_top) >> EFI_PAGE_SHIFT;
-> > -
-> > -               efi_add_memory_map_pg(ram_top, pages,
-> > -                                     EFI_BOOT_SERVICES_DATA, true);
-> > -       }
-> > -
-> > -       return EFI_SUCCESS;
-> > -}
-> > -
-> > -/**
-> > - * efi_add_known_memory() - add memory banks to map
-> > + * This function is to be used to adding different memory types other
-> > + * than EFI_CONVENTIONAL_MEMORY to the EFI memory map. The conventional
-> > + * memory is handled by the LMB module, and gets added to the memory
-> > + * map through the LMB module.
-> >   *
-> >   * This function may be overridden for specific architectures.
-> >   */
-> >  __weak void efi_add_known_memory(void)
->
->  We can also get rid of this in the future. Any idea if we have
-> platforms using it after the last 2 you removed?
+diff --git a/drivers/clk/imx/clk-imx8mp.c b/drivers/clk/imx/clk-imx8mp.c
+index 34d91cd6880..1d04090ca00 100644
+--- a/drivers/clk/imx/clk-imx8mp.c
++++ b/drivers/clk/imx/clk-imx8mp.c
+@@ -197,6 +197,8 @@ static int imx8mp_clk_probe(struct udevice *dev)
+ 
+ 	base = (void *)ANATOP_BASE_ADDR;
+ 
++	clk_dm(IMX8MP_CLK_DUMMY, clk_register_fixed_rate(NULL, "dummy", 0));
++
+ 	clk_dm(IMX8MP_DRAM_PLL_REF_SEL, imx_clk_mux("dram_pll_ref_sel", base + 0x50, 0, 2, pll_ref_sels, ARRAY_SIZE(pll_ref_sels)));
+ 	clk_dm(IMX8MP_ARM_PLL_REF_SEL, imx_clk_mux("arm_pll_ref_sel", base + 0x84, 0, 2, pll_ref_sels, ARRAY_SIZE(pll_ref_sels)));
+ 	clk_dm(IMX8MP_SYS_PLL1_REF_SEL, imx_clk_mux("sys_pll1_ref_sel", base + 0x94, 0, 2, pll_ref_sels, ARRAY_SIZE(pll_ref_sels)));
+-- 
+2.35.3
 
-Yes, this is being used by some x86 platform, which is adding other
-memory types to the EFI memory map.
-
--sughosh
-
->
->
-> >  {
-> > -       u64 ram_top = gd->ram_top & ~EFI_PAGE_MASK;
-> > -       int i;
-> > -
-> > -       /*
-> > -        * ram_top is just outside mapped memory. So use an offset of one for
-> > -        * mapping the sandbox address.
-> > -        */
-> > -       ram_top = (uintptr_t)map_sysmem(ram_top - 1, 0) + 1;
-> > -
-> > -       /* Fix for 32bit targets with ram_top at 4G */
-> > -       if (!ram_top)
-> > -               ram_top = 0x100000000ULL;
-> > -
-> > -       /* Add RAM */
-> > -       for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
-> > -               u64 ram_end, ram_start;
-> > -
-> > -               ram_start = (uintptr_t)map_sysmem(gd->bd->bi_dram[i].start, 0);
-> > -               ram_end = ram_start + gd->bd->bi_dram[i].size;
-> > -
-> > -               efi_add_conventional_memory_map(ram_start, ram_end, ram_top);
-> > -       }
-> >  }
-> >
-> >  /**
-> > --
-> > 2.34.1
-> >
->
-> With the spelling nits fixed
-> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
