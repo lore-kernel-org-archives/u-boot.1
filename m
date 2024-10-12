@@ -4,59 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02D68CF2584
-	for <u-boot@archiver.kernel.org>; Sat, 12 Oct 2024 21:26:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1C90CF2588
+	for <u-boot@archiver.kernel.org>; Sat, 12 Oct 2024 23:22:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 41C9188E42;
-	Sat, 12 Oct 2024 23:26:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id E754C88C7C;
+	Sun, 13 Oct 2024 01:22:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1728768370;
-	bh=LDD+O9N7ptFlqPuoBXV7Bu2tOLs6cH0fTYpLCH4gHXo=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=x5jymDXs25WSYrDErcwEcnrtncDuMgKWhahKoFMs5LHbwABcnraj+ab8IbaGgVg+4
-	 93e3+lu6QMRO4teQSoD664uibNbCM6RZcnrMEcKGhpvlLkLu+fgEqVeh0HpZQQ9h8G
-	 DCbEgds9wcvsM/MM2jwRPXHWO0r2Dl/9wXRbT5KEslqB0pz6tyo7V0tcixQ7FPALu5
-	 FKEF9wJH6hFwJuETXWW7arjmmvokaj5otyRfuiYZAo79cuKY9/M6EpwHdZ3gJdGwoD
-	 cgWDs43AgXG/63ovG7Q9iBLgeBMzMZKL620doIB73UJuHYezb5AsA8Aq64ovrqbiHq
-	 eVvoTK+chklCA==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YHefUJWV";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 43F6F88DA3; Sun, 13 Oct 2024 01:22:39 +0200 (CEST)
+Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
+ [IPv6:2607:f8b0:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 19E6888A1C;
- Sat, 12 Oct 2024 23:26:05 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1728768365;
- bh=LDD+O9N7ptFlqPuoBXV7Bu2tOLs6cH0fTYpLCH4gHXo=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=Qnj8PZDqxfsXJUz2DPnAQ1phfdi6lm0oNLg08YIi0z4zs2kx8K7g+N5qEOS+cSkeJ
- rekLFmeWspjrvjoYG7O9APhggbJNATvcyWNJjvNQwhHl88jY7iAuLcLAQngP9Tovx1
- 3KK/UZ3kwdOxDGfdeuDUqXoRKUmmuRcIV9NDBAa2XzOBjmC5xOnY1iHc/2+IjPORif
- AKTfini3bCx87DXYfpF9EbLQtqQhCy76IdMFz440kWpvor1l1EujkeenYnrqCfkner
- BT8ORws7Zgij8OMjBMj0BHDn7aejkD8R/OICqk1gTl4N6W7IWaKlwZBU3eVACpZqI6
- sERVEPr9aiYVQ==
-Message-ID: <934d25c2-39d8-4f51-b29e-8f20feb7431f@denx.de>
-Date: Sat, 12 Oct 2024 22:55:55 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 0191888B6D
+ for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 01:22:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x12d.google.com with SMTP id
+ e9e14a558f8ab-3a3bd664ebaso2007765ab.2
+ for <u-boot@lists.denx.de>; Sat, 12 Oct 2024 16:22:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1728775355; x=1729380155; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=qUcSZORqMkgHnK4dIyKtunfQM7FPn4uuLR5cPDv/PCo=;
+ b=YHefUJWVD4XktitwjGtS0R0CF1PuP1yFqancBaI4FMa5aHoPXm0SmCH4m/oVQ4V6Qt
+ f/op00W/J6sRHhZu0RIVtTtTf63IhrSik2i7eVH2vLSRlgfsXP1XMQJFc+gmHPZ2cPMs
+ Ip8DRKZr64E6rPAgTkE8Eu2EX4Ahi5YbWIDB4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728775355; x=1729380155;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=qUcSZORqMkgHnK4dIyKtunfQM7FPn4uuLR5cPDv/PCo=;
+ b=vxLoOWk8+JVxCwy28qBtQOfibqpCZzn/bXYrQit7EVOsGVHRMVjl+fr+YAGM1Q26w+
+ ov9c5aAoZ4tH0HsvyD5eSM0IYfBWyqVxLdI2WjIukBXb1M+WuHz7hPt+QXfATLGjsdD/
+ S7PIeF7OUCy6SLjC5ZNzsSrkUDa/DpZ61ONepyWDOZO7rjLYPW8nB+wsEbRTsnIfBa46
+ GWhhYfQQtoDFD32yo/jHv5AfUj7+1Wr/Kkd3q/XSNivTZbf+rbC8ly5fvdswhuMojdWu
+ STZo45dqjh5XhaJiGwdMgP0UHx8Y7vfr5t6MLj1Wwj4RUkkiMRoJvnpdun21t0sCdW4B
+ O78g==
+X-Gm-Message-State: AOJu0YzyhVBJc4QFBabOel+VMGSAvTZjesOnHi0tgDCisK3hcjfYyBsw
+ hINhAMRU2hTvnKUafTEooX43NaZ1yt2kJUuav0znJCdnUTCMqDWczylkSxvxGQ0ri75U8GuLgl0
+ =
+X-Google-Smtp-Source: AGHT+IGK1uWvA/LjWV4T7B3m8MW/QmFjMMA8UQUC6wEYKgPhKOP1zSkbjNljBA1aUY5IrHzdqbaPMw==
+X-Received: by 2002:a05:6e02:1c4b:b0:3a3:b3f4:af4c with SMTP id
+ e9e14a558f8ab-3a3b5ffd784mr49516235ab.25.1728775355612; 
+ Sat, 12 Oct 2024 16:22:35 -0700 (PDT)
+Received: from chromium.org ([2607:fb91:7ce:96a:8185:a50b:d0fe:b591])
+ by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4dbada84a35sm1228698173.117.2024.10.12.16.22.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 12 Oct 2024 16:22:34 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>,
+	Simon Glass <sjg@chromium.org>
+Subject: [PATCH 1/2] qconfig: Add an way to select defconfigs without stdin
+Date: Sat, 12 Oct 2024 17:22:29 -0600
+Message-ID: <20241012232231.5638-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] arm64: imx8mp: Read item and serial number from
- EEPROM ID page on DH i.MX8MP DHCOM
-To: Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- u-boot@lists.denx.de
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
- Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
-References: <20241010132337.3259-1-cniedermaier@dh-electronics.com>
- <20241010132337.3259-2-cniedermaier@dh-electronics.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20241010132337.3259-2-cniedermaier@dh-electronics.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,231 +86,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/10/24 3:23 PM, Christoph Niedermaier wrote:
-> The new i.MX8M Plus DHCOM rev.200 is populated with M24C32-D EEPROM
-> which contains additional write-lockable page called ID page, which
-> is populated with a structure containing the item and serial number.
-> 
-> Extend the support for parsing the item and serial number of the
-> EEPROM ID page. Write the item and serial number to the U-Boot
-> environment if the aren't there. If the environment is already
-> there compare it with the one from the EEPROM ID page and output
-> a warning if it differs.
-> 
-> Signed-off-by: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-> ---
-> Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-> Cc: Marek Vasut <marex@denx.de>
-> Cc: Fabio Estevam <festevam@gmail.com>
-> Cc: Stefano Babic <sbabic@denx.de>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@dh-electronics.com
-> ---
->   board/dhelectronics/common/dh_common.c        | 51 ++++++++++++++++++
->   board/dhelectronics/common/dh_common.h        |  2 +
->   .../dh_imx8mp/imx8mp_dhcom_pdk2.c             | 53 +++++++++++++++++++
->   3 files changed, 106 insertions(+)
-> 
-> diff --git a/board/dhelectronics/common/dh_common.c b/board/dhelectronics/common/dh_common.c
-> index 8ea70fc984..4c31b32e0c 100644
-> --- a/board/dhelectronics/common/dh_common.c
-> +++ b/board/dhelectronics/common/dh_common.c
-> @@ -11,6 +11,23 @@
->   
->   #include "dh_common.h"
->   
-> +/* DH item: Vendor coding */
-> +#define ITEM_PREFIX_NXP		0x01
-> +#define ITEM_PREFIX_NXP_CHR	'I'
-> +#define ITEM_PREFIX_ST		0x02
-> +#define ITEM_PREFIX_ST_CHR	'S'
+Sometimes it is useful to process just one or two defconfigs and it is
+convenient to do this just by listing them in the arguments. Add a -D
+option for this.
 
-#define DH_ITEM_... to namespace the macros, please fix globally.
+Update the docs to avoid mentioning boards which have been removed.
 
-> +/*
-> + * DH item: Finished state coding
-> + * Bit = 0 means half finished
-> + *         Prefix is 'H'
-> + * Bit = 1 means finished with a customer image flashed
-> + *         Prefix is 'F'
-> + */
-> +#define ITEM_PREFIX_FIN_BIT		BIT(7)
-> +#define ITEM_PREFIX_FIN_HALF_CHR	'H'
-> +#define ITEM_PREFIX_FIN_FLASHED_CHR	'F'
-> +
->   struct eeprom_id_page {
->   	u8	id[3];		/* Identifier 'D', 'H', 'E' - 'D' is at index 0 */
->   	u8	version;	/* 0x10 -- Version 1.0 */
-> @@ -54,6 +71,7 @@ int dh_get_value_from_eeprom_id_page(enum eip_request_values request, u8 *data,
->   	ofnode node;
->   	u16 c16;
->   	u8 c8;
-> +	char soc;
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-Reverse xmas tree ordering here please.
+ doc/develop/qconfig.rst |  7 +++++--
+ tools/qconfig.py        | 23 +++++++++++++++--------
+ 2 files changed, 20 insertions(+), 10 deletions(-)
 
->   	eipp = (struct eeprom_id_page *)eipa;
->   
-> @@ -136,6 +154,39 @@ int dh_get_value_from_eeprom_id_page(enum eip_request_values request, u8 *data,
->   		else
->   			return -EINVAL;
->   		break;
-> +	case ITEM_NUMBER:
-> +		if (data_len >= 8) { /* String with 7 characters + string termination */
+diff --git a/doc/develop/qconfig.rst b/doc/develop/qconfig.rst
+index a18f32470ca..3b995355967 100644
+--- a/doc/develop/qconfig.rst
++++ b/doc/develop/qconfig.rst
+@@ -62,10 +62,13 @@ or::
+ 
+    grep -l X86 configs/* | ./tools/qconfig.py -s -d -
+ 
++or::
++
++   ./tools/qconfig.py -s -D $(grep -l X86 configs/*)
++
+ To process CONFIG_CMD_FPGAD only for a subset of configs based on path match::
+ 
+-   ls configs/{hrcon*,iocon*,strider*} | \
+-       ./tools/qconfig.py -C CONFIG_CMD_FPGAD -d -
++   ./tools/qconfig.py -C CONFIG_CMD_FPGAD -D configs/{amd_versal2,am68_sk}*
+ 
+ 
+ Finding boards with particular CONFIG combinations
+diff --git a/tools/qconfig.py b/tools/qconfig.py
+index 058d72cf4bc..c5a33412c8c 100755
+--- a/tools/qconfig.py
++++ b/tools/qconfig.py
+@@ -125,23 +125,26 @@ def get_matched_defconfig(line):
+         pattern = os.path.join('configs', line)
+     return glob.glob(pattern) + glob.glob(pattern + '_defconfig')
+ 
+-def get_matched_defconfigs(defconfigs_file):
+-    """Get all the defconfig files that match the patterns in a file.
++def get_matched_defconfigs(defconfigs_in):
++    """Get all the defconfig files that match the patterns given.
+ 
+     Args:
+-        defconfigs_file (str): File containing a list of defconfigs to process,
+-            or '-' to read the list from stdin
++        defconfigs_file (str or list of str): File containing a list of
++            defconfigs to process, or '-' to read the list from stdin, or a
++            list of defconfig names
+ 
+     Returns:
+         list of str: A list of paths to defconfig files, with no duplicates
+     """
+     defconfigs = []
+     with ExitStack() as stack:
+-        if defconfigs_file == '-':
++        if isinstance(defconfigs_in, list):
++            inf = defconfigs_in
++        elif defconfigs_in == '-':
+             inf = sys.stdin
+-            defconfigs_file = 'stdin'
++            defconfigs_in = 'stdin'
+         else:
+-            inf = stack.enter_context(open(defconfigs_file, encoding='utf-8'))
++            inf = stack.enter_context(open(defconfigs_in, encoding='utf-8'))
+         for i, line in enumerate(inf):
+             line = line.strip()
+             if not line:
+@@ -150,7 +153,7 @@ def get_matched_defconfigs(defconfigs_file):
+                 line = line.split(' ')[0]  # handle 'git log' input
+             matched = get_matched_defconfig(line)
+             if not matched:
+-                print(f"warning: {defconfigs_file}:{i + 1}: no defconfig matched '{line}'",
++                print(f"warning: {defconfigs_in}:{i + 1}: no defconfig matched '{line}'",
+                       file=sys.stderr)
+ 
+             defconfigs += matched
+@@ -738,6 +741,8 @@ def move_config(args):
+ 
+     if args.defconfigs:
+         defconfigs = get_matched_defconfigs(args.defconfigs)
++    elif args.defconfiglist:
++        defconfigs = get_matched_defconfigs(args.defconfiglist)
+     else:
+         defconfigs = get_all_defconfigs()
+ 
+@@ -1532,6 +1537,8 @@ doc/develop/moveconfig.rst for documentation.'''
+                       help='a file containing a list of defconfigs to move, '
+                       "one per line (for example 'snow_defconfig') "
+                       "or '-' to read from stdin")
++    parser.add_argument('-D', '--defconfiglist', type=str, nargs='*',
++                        help='list of defconfigs to move')
+     parser.add_argument('-e', '--exit-on-error', action='store_true',
+                       default=False,
+                       help='exit immediately on any error')
+-- 
+2.43.0
 
-Invert this condition and reduce indent:
-
-if (data < 8)
-   return -EINVAL;
-
-switch ...
-...
-
-> +			switch (eipp->item_prefix & 0xf) {
-> +			case ITEM_PREFIX_NXP:
-> +				soc = ITEM_PREFIX_NXP_CHR;
-> +				break;
-> +			case ITEM_PREFIX_ST:
-> +				soc = ITEM_PREFIX_ST_CHR;
-> +				break;
-> +			default:
-> +				return -EINVAL;
-> +			}
-> +			snprintf(data, data_len, "%c%c%05d",
-> +				 (eipp->item_prefix & ITEM_PREFIX_FIN_BIT) ?
-> +				 ITEM_PREFIX_FIN_FLASHED_CHR : ITEM_PREFIX_FIN_HALF_CHR,
-> +				 soc, (eipp->item_num[0] << 16) | (eipp->item_num[1] << 8)
-> +				       | eipp->item_num[2]);
-> +		} else {
-> +			return -EINVAL;
-> +		}
-> +		break;
-> +	case SN:
-
-Use namespaced "DH_SERIAL_NUMBER":
-
-> +		/*
-> +		 * data_len must be greater than the size of eipp->serial,
-> +		 * because there is a string termination needed.
-> +		 */
-
-Invert this condition and reduce indent:
-
-if (data_len <= sizeof(eipp->serial))
-   return -EINVAL;
-
-...
-
-> +		if (data_len > sizeof(eipp->serial)) {
-> +			data[sizeof(eipp->serial)] = 0;
-> +			memcpy(data, eipp->serial, sizeof(eipp->serial));
-> +		} else {
-> +			return -EINVAL;
-> +		}
-> +		break;
->   	default:
->   		return -EINVAL;
->   	}
-> diff --git a/board/dhelectronics/common/dh_common.h b/board/dhelectronics/common/dh_common.h
-> index 4c22ece435..1baa45e340 100644
-> --- a/board/dhelectronics/common/dh_common.h
-> +++ b/board/dhelectronics/common/dh_common.h
-> @@ -6,6 +6,8 @@
->   enum eip_request_values {
->   	MAC0,
->   	MAC1,
-> +	ITEM_NUMBER,
-> +	SN,
-
-Why is this patch not squashed into 1/2 ? It seems to be changing the 
-same code.
-
->   };
->   
->   /*
-> diff --git a/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c b/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
-> index 9a8f09fcd4..8970c8fc2d 100644
-> --- a/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
-> +++ b/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
-> @@ -116,6 +116,56 @@ int dh_setup_mac_address(void)
->   	return ret;
->   }
->   
-> +void dh_add_item_number_and_serial_to_env(void)
-> +{
-> +	char item_number[8];	/* String with 7 characters + string termination */
-> +	char *item_number_env;
-> +	char serial[10];	/* String with 9 characters + string termination */
-> +	char *serial_env;
-> +	int ret;
-
-Reverse xmas tree please -- swap the first pair and second pair of 
-variables.
-
-> +
-> +	ret = dh_get_value_from_eeprom_id_page(ITEM_NUMBER, item_number, sizeof(item_number),
-> +					       "eeprom0");
-> +	if (ret) {
-> +		/*
-> +		 * The function only returns the value -ENOENT for SoM rev.100, because
-> +		 * the EEPROM ID page isn't available there. Therefore the output makes
-> +		 * no sense and will be suppressed here.
-> +		 */
-> +		if (ret != -ENOENT)
-> +			printf("%s: Unable to get item number form EEPROM ID page! ret = %d\n",
-> +			       __func__, ret);
-
-This will be printed on every device, even the ones without ID EEPROM, 
-correct ? This should not be printed on devices without ID EEPROM. Also,
-
-if (ret && ret != -ENOENT) {}
-
-works equally well without the extra indent.
-
-> +	} else {
-> +		item_number_env = env_get("vendor_item_number");
-> +		if (!item_number_env)
-> +			env_set("vendor_item_number", item_number);
-> +		else
-> +			if (strcmp(item_number_env, item_number) != 0)
-
-else if (strcmp(..., ...))
-   log_warning(...)
-
-> +				printf("Warning: Environment vendor_item_number differs from EEPROM ID page value (%s != %s)\n",
-> +				       item_number_env, item_number);
-> +	}
-> +
-> +	ret = dh_get_value_from_eeprom_id_page(SN, serial, sizeof(serial), "eeprom0");
-> +	if (ret) {
-> +		/*
-> +		 * The function only returns the value -ENOENT for SoM rev.100, because
-> +		 * the EEPROM ID page isn't available there. Therefore the output makes
-> +		 * no sense and will be suppressed here.
-> +		 */
-> +		if (ret != -ENOENT)
-> +			printf("%s: Unable to get serial form EEPROM ID page! ret = %d\n",
-> +			       __func__, ret);
-
-See above.
-
-Also, this shouldn't be repeatedly reading the EEPROM, the EEPROM read 
-operation is the slow part, the EEPROM is 32 bytes, so the EEPROM should 
-be read once and cached, and once the cache is populated all read 
-accesses to the EEPROM should use the cache.
-
-> +	} else {
-> +		serial_env = env_get("SN");
-> +		if (!serial_env)
-> +			env_set("SN", serial);
-> +		else
-> +			if (strcmp(serial_env, serial) != 0)
-> +				printf("Warning: Environment SN differs from EEPROM ID page value (%s != %s)\n",
-> +				       serial_env, serial);
-> +	}
-> +}
-> +
->   int board_init(void)
->   {
->   	return 0;
-[...]
