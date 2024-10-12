@@ -4,59 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64B66D1A431
-	for <u-boot@archiver.kernel.org>; Sat, 12 Oct 2024 03:38:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A3A2D1A42F
+	for <u-boot@archiver.kernel.org>; Sat, 12 Oct 2024 03:38:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D53A88C78;
-	Sat, 12 Oct 2024 05:38:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1676C88C40;
+	Sat, 12 Oct 2024 05:38:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1728704293;
-	bh=TX7iQHEOeEnsBTX2l48yQGl2rb/zweCvjXl4eRHQhuk=;
+	s=phobos-20191101; t=1728704295;
+	bh=bf70R09N/UD5oTh40y3rDf1gInc5OuiEgvd0HgydHcc=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=qK+bWxOXkIYUHF6JuVV3TGyjebdES7OV+5OhXatMDBYYrxLxaY3wdkGOhLAvJbulg
-	 3hc+k8xZoGjYqlKIT7OdG9cNTcFracQM3Gc5GLpAGJz0kl4X+iAVSMbGAIFiaJWj9r
-	 xIor9aHiMaXysaFh4NfoqNKVwfhXPRMnHaoq9lui77ssArgm3X6s+1AiUVkFYFcjsw
-	 u+HEBMZeB0V7p3vidMOaL7zemNzg/13zcr6Kou7C5GqdJZqKrxVyhyl0nsRTfRb4fo
-	 4UlncERI7JMiQG6f94elR8FvelR9yOgqozr91pMOIKTE2XzwR/oQ94yYRo9jeMtZaG
-	 guaqhmFpVC7SA==
+	b=hXQnDdmrdY+sKvbgqbHGUq00XwjsCSph2JJPJpZ0NmpGa28wWiRAM72Ie4aE5ttbW
+	 SWvQ/B2VRZdJClPWx7aaTm3IjhYyuGJI5M0y4Lar3cLYukd50h6pCq9XHA3o8aMn7Q
+	 sejf2fxF1V6lUu0WZzzLeDyFlBpkQL1uVYJ2zM/WqgmDe+WgBw1G7rFnTR1fzDu0uF
+	 MIsU39ee+s/lhcxZx4JyieY5z9FAUGn/kj+jntYRLCPk1fdE1TjZmx7FDehzYNnqeu
+	 ag4cu2OGFuGuhMj0vWukX72txqL6O7fPQoBZxmrx1+iV91JxpkooHQUKQ80YTi0KgM
+	 EmFxvGtwF15PA==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id E50FB88B5D;
- Sat, 12 Oct 2024 05:38:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 6A43688C60;
+ Sat, 12 Oct 2024 05:38:12 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1728704292;
- bh=TX7iQHEOeEnsBTX2l48yQGl2rb/zweCvjXl4eRHQhuk=;
+ s=phobos-20191101; t=1728704293;
+ bh=bf70R09N/UD5oTh40y3rDf1gInc5OuiEgvd0HgydHcc=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=SNKm8D+MNgME4w/mHApbUmxC5OhH+NjgX6uQiR2noyX2NhLJqyoy6/3DR1V+w1ZtG
- jTzXyiZ4keQPZXaCqS3fmOlbpCUBu0f9KiYCMlTCgsJrOOOEwjetrnsy3pUuEcawmU
- ZhV/MYkSwmU8dGnOkvyuDbvf5po85rsCx5XEQmamQdnD+Uf12K4AiQzuYTckz7hl7j
- KOwHN3/rgvr6xJUWN26HLoHStZCddzhlfrP9bJiRl2RkozmWudCnqpxwW/QQDsNFoj
- O77F/MH2e/A91ge8MNocPg3R+J/WKBBl+0UXMJk1mlUiNLvjllWxDjPpEZLtJ2Y+Nu
- js5Wb60nmkjrQ==
-Message-ID: <31f013c0-fce7-4d9f-83a5-c7067119a994@denx.de>
-Date: Sat, 12 Oct 2024 05:34:23 +0200
+ b=faP4imuELJTarCIYtnqPbFMEeIV3peT2IfwyjPBoIEYFncj0J+O6tm8KuFBzz0Tot
+ QZqQ8WncrygqJPPF5VwG7TSAX8Gu5UAsYbSbwqfDjQ1b86DdgSMtEZlEr6yEls9ltO
+ LrAbnfifOJCm9ndmNxwr0DbqprxODqPU5mUo2q52jLePsm9QxahtvqIc8Lq3USqwEm
+ 7/IVwW4ybMIEhnGDADq3ui6p6PzQzPSUNUOzLR/7aE5uX4fDYUn1RpxBAoQ4NkCRj2
+ ElqsHC9wlI77yvJ1g8+uvP7MBIZ0EOBz8gWAH9aWUuEGq8n9hzh6bU9tJGyCan0N4r
+ 9qbrt0Qh0HKTA==
+Message-ID: <2eaba59e-bc6d-4ffc-b4eb-0eebc0b090a9@denx.de>
+Date: Sat, 12 Oct 2024 05:37:37 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 4/8] usb: cdns: starfive: Add cdns USB driver
-To: Minda Chen <minda.chen@starfivetech.com>, Tom Rini <trini@konsulko.com>,
- Roger Quadros <rogerq@kernel.org>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Alexey Romanov <avromanov@salutedevices.com>,
- Sumit Garg <sumit.garg@linaro.org>, Mark Kettenis <kettenis@openbsd.org>,
- Nishanth Menon <nm@ti.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>, E Shattow <lucent@gmail.com>
-References: <20241012031328.4268-1-minda.chen@starfivetech.com>
- <20241012031328.4268-5-minda.chen@starfivetech.com>
+Subject: Re: [PATCH v4 2/3] usb: dwc3: fix dcache flush range calculation
+To: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini
+ <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Bin Meng <bmeng.cn@gmail.com>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+References: <20241011-u-boot-dwc3-gadget-dcache-fixup-v4-0-5f3498d8035b@linaro.org>
+ <20241011-u-boot-dwc3-gadget-dcache-fixup-v4-2-5f3498d8035b@linaro.org>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20241012031328.4268-5-minda.chen@starfivetech.com>
+In-Reply-To: <20241011-u-boot-dwc3-gadget-dcache-fixup-v4-2-5f3498d8035b@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -75,142 +73,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/12/24 5:13 AM, Minda Chen wrote:
-> Add cdns USB3 wrapper driver. And cdns core driver also get
-> dr mode from wrapper devcie dts node to make it is same with
-> Starfive cdns USB Linux kernel driver, preparing for enable
-> OF_UPSTREAM.
+On 10/11/24 4:38 PM, Neil Armstrong wrote:
+> The current flush operation will omit doing a flush/invalidate on
+> the first and last bytes if the base address and size are not aligned
+> with CACHELINE_SIZE.
 > 
-> Signed-off-by: Minda Chen <minda.chen@starfivetech.com>
+> This causes operation failures Qualcomm platforms.
+> 
+> Take in account the alignment and size of the buffer and also
+> flush the previous and last cacheline.
+> 
+> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 > ---
->   drivers/usb/cdns3/Kconfig          |   7 ++
->   drivers/usb/cdns3/Makefile         |   2 +
->   drivers/usb/cdns3/cdns3-starfive.c | 183 +++++++++++++++++++++++++++++
->   drivers/usb/cdns3/core.c           |   3 +
->   4 files changed, 195 insertions(+)
->   create mode 100644 drivers/usb/cdns3/cdns3-starfive.c
+>   drivers/usb/dwc3/io.h | 5 ++++-
+>   1 file changed, 4 insertions(+), 1 deletion(-)
 > 
-> diff --git a/drivers/usb/cdns3/Kconfig b/drivers/usb/cdns3/Kconfig
-> index 35b61497d9c..6c9595c3c49 100644
-> --- a/drivers/usb/cdns3/Kconfig
-> +++ b/drivers/usb/cdns3/Kconfig
-> @@ -55,4 +55,11 @@ config USB_CDNS3_TI
->   	help
->   	  Say 'Y' here if you are building for Texas Instruments
->   	  platforms that contain Cadence USB3 controller core. E.g.: J721e.
-> +
-> +config USB_CDNS3_STARFIVE
-> +	tristate "Cadence USB3 support on Starfive platforms"
-> +	default y if STARFIVE_JH7110
-> +	help
-> +	  Say 'Y' here if you are building for Starfive platforms
-> +	  that contain Cadence USB3 controller core. E.g.: JH7110.
->   endif
-
-Keep the list sorted.
-
-> diff --git a/drivers/usb/cdns3/Makefile b/drivers/usb/cdns3/Makefile
-> index 18d7190755d..03d1eadb2ff 100644
-> --- a/drivers/usb/cdns3/Makefile
-> +++ b/drivers/usb/cdns3/Makefile
-> @@ -9,3 +9,5 @@ cdns3-$(CONFIG_$(SPL_)USB_CDNS3_GADGET)	+= gadget.o ep0.o
->   cdns3-$(CONFIG_$(SPL_)USB_CDNS3_HOST)	+= host.o
+> diff --git a/drivers/usb/dwc3/io.h b/drivers/usb/dwc3/io.h
+> index 04791d4c9be..0ede323671b 100644
+> --- a/drivers/usb/dwc3/io.h
+> +++ b/drivers/usb/dwc3/io.h
+> @@ -50,6 +50,9 @@ static inline void dwc3_writel(void __iomem *base, u32 offset, u32 value)
 >   
->   obj-$(CONFIG_USB_CDNS3_TI)		+= cdns3-ti.o
+>   static inline void dwc3_flush_cache(uintptr_t addr, int length)
+>   {
+> -	flush_dcache_range(addr, addr + ROUND(length, CACHELINE_SIZE));
+> +	uintptr_t start_addr = (uintptr_t)addr & ~(CACHELINE_SIZE - 1);
+> +	uintptr_t end_addr = ALIGN((uintptr_t)addr + length, CACHELINE_SIZE);
 > +
-> +obj-$(CONFIG_USB_CDNS3_STARFIVE)	+= cdns3-starfive.o
+> +	flush_dcache_range((unsigned long)start_addr, (unsigned long)end_addr);
+>   }
+>   #endif /* __DRIVERS_USB_DWC3_IO_H */
 
-Keep the list sorted.
-
-> diff --git a/drivers/usb/cdns3/cdns3-starfive.c b/drivers/usb/cdns3/cdns3-starfive.c
-> new file mode 100644
-> index 00000000000..fad05451c80
-> --- /dev/null
-> +++ b/drivers/usb/cdns3/cdns3-starfive.c
-> @@ -0,0 +1,183 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * cdns3-starfive.c - StarFive specific Glue layer for Cadence USB Controller
-> + *
-> + * Copyright (C) 2024 StarFive Technology Co., Ltd.
-> + *
-> + * Author:	Minda Chen <minda.chen@starfivetech.com>
-> + */
-> +
-> +#include <asm/io.h>
-> +#include <clk.h>
-> +#include <dm.h>
-> +#include <dm/device_compat.h>
-> +#include <linux/bitops.h>
-> +#include <linux/usb/otg.h>
-> +#include <reset.h>
-> +#include <regmap.h>
-> +#include <syscon.h>
-> +#include <malloc.h>
-> +
-> +#include "core.h"
-> +
-> +#define USB_STRAP_HOST			BIT(17)
-> +#define USB_STRAP_DEVICE		BIT(18)
-> +#define USB_STRAP_MASK			GENMASK(18, 16)
-> +
-> +#define USB_SUSPENDM_HOST		BIT(19)
-> +#define USB_SUSPENDM_MASK		BIT(19)
-> +
-> +#define USB_MISC_CFG_MASK		GENMASK(23, 20)
-> +#define USB_SUSPENDM_BYPS		BIT(20)
-> +#define USB_PLL_EN			BIT(22)
-> +#define USB_REFCLK_MODE			BIT(23)
-> +
-> +struct cdns_starfive {
-> +	struct udevice *dev;
-> +	struct regmap *stg_syscon;
-> +	struct reset_ctl_bulk resets;
-> +	struct clk_bulk clks;
-> +	u32 stg_usb_mode;
-> +	enum usb_dr_mode mode;
-> +};
-> +
-> +static void cdns_mode_init(struct cdns_starfive *data, enum usb_dr_mode mode)
-> +{
-> +	unsigned int strap, suspendm;
-> +
-> +	regmap_update_bits(data->stg_syscon, data->stg_usb_mode,
-> +			   USB_MISC_CFG_MASK,
-> +			   USB_SUSPENDM_BYPS | USB_PLL_EN | USB_REFCLK_MODE);
-> +
-> +	switch (mode) {
-> +	case USB_DR_MODE_HOST:
-> +		strap = USB_STRAP_HOST;
-> +		suspendm = USB_SUSPENDM_HOST;
-> +		break;
-> +
-
-Drop the newline please.
-
-> +	case USB_DR_MODE_PERIPHERAL:
-> +		strap = USB_STRAP_DEVICE;
-> +		suspendm = 0;
-> +		break;
-> +	default:
-> +		return;
-> +	}
-> +
-> +	regmap_update_bits(data->stg_syscon, data->stg_usb_mode,
-> +			   USB_SUSPENDM_MASK | USB_STRAP_MASK,
-> +			   strap | suspendm);
-> +}
-
-[...]
-
-> diff --git a/drivers/usb/cdns3/core.c b/drivers/usb/cdns3/core.c
-> index cbe06a9e7b6..9d0a56fd0e7 100644
-> --- a/drivers/usb/cdns3/core.c
-> +++ b/drivers/usb/cdns3/core.c
-> @@ -410,6 +410,9 @@ int cdns3_bind(struct udevice *parent)
->   	name = ofnode_get_name(node);
->   	dr_mode = usb_get_dr_mode(node);
->   
-> +	if (dr_mode == USB_DR_MODE_UNKNOWN)
-> +		dr_mode = usb_get_dr_mode(dev_ofnode(parent));
-Separate patch for core changes please.
+You likely want a max(CONFIG_SYS_CACHELINE_SIZE, 
+dwc3-buffer-alignment-requirement) to really correctly align the buffer.
