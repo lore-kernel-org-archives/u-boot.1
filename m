@@ -4,75 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D6BACF2588
-	for <u-boot@archiver.kernel.org>; Sat, 12 Oct 2024 23:22:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FD09CF2591
+	for <u-boot@archiver.kernel.org>; Sun, 13 Oct 2024 04:40:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 563D488E12;
-	Sun, 13 Oct 2024 01:22:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 9C1BB88A7D;
+	Sun, 13 Oct 2024 06:40:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gkSlWsDW";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WzeoHwLI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B6FD88E3C; Sun, 13 Oct 2024 01:22:41 +0200 (CEST)
-Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
- [IPv6:2607:f8b0:4864:20::d35])
+ id 6473C88C78; Sat, 12 Oct 2024 20:54:01 +0200 (CEST)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EFB0288D29
- for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 01:22:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6DE1688B23
+ for <u-boot@lists.denx.de>; Sat, 12 Oct 2024 20:53:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd35.google.com with SMTP id
- ca18e2360f4ac-837ec133784so59258139f.3
- for <u-boot@lists.denx.de>; Sat, 12 Oct 2024 16:22:38 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=razmik.akopiyan@gmail.com
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-6cbe90c7c95so26573286d6.1
+ for <u-boot@lists.denx.de>; Sat, 12 Oct 2024 11:53:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728775357; x=1729380157; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7czEek8ysrKHJbVnAuV7qxEnk9+YKJO+m9Ma5UdxU98=;
- b=gkSlWsDWu7Ix1uK2XRQaLMorweqVPc+4ke26QaxrlwiLXGlr8rocCZ1OuO2b44BNor
- eBnsPusY+BaSr29sUgBLW2rrWM4WhtxlKXaxsO8jAUM6htV7ZjaDbhilka2nUZmC7hPz
- 1sjEOHzVKxWjV9Aznk9y/m8jVHGwXG0Ga5/mU=
+ d=gmail.com; s=20230601; t=1728759238; x=1729364038; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=ij23Fa6Ugn6W2mm1gOMsE69Zz13Pqk/mR2/JrR+uj0M=;
+ b=WzeoHwLIZ6tFFBhatA+dG1M3gwUn7EX82igbgDydvRKalyLiEVfb13JChZvg4AkUei
+ c5X1fYAawlq3E+M8G228RBKrVqDtkI0yoYJEO5w7l8T0CYbTyyUq+vpggxYr8vmwSmM+
+ bfklZE0lSIXwHDPiABVDnt0G6Aa7c2qm4YoG1Wwfody17tFvB8rz274C3FXsfXndkXhA
+ tOFezO3FX0D7ZZH91PMl2cem9fu6179eAstormfqNvxHGodmP1I9YxO9AJgbgybY67/L
+ YKsBOeVmUF3baHgvDE/ZEdy0P9zTUdWKP/srmHlu20PeBvGK2G1eYnOE6SukASqt2pNp
+ OX4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728775357; x=1729380157;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=7czEek8ysrKHJbVnAuV7qxEnk9+YKJO+m9Ma5UdxU98=;
- b=j1LIz4oEBO7BZkW4mIYBjeRdWJ67LSDO3x9EhP6GGJFN0AVyClLkt0QPGZYAS7OWv7
- izJaFRDOjCr9hvOEejrsVudtRUPXNOkdrreReCpQ1/fqjUPs0JrNgCa7doRvuZf8Ez51
- fJ3F0OoQT2RJVd2ToD+E7MXtYCSGv5p6mWn/rSRRVilLwXJQA6AnJos098a4MFo+TcBh
- huwDJ8JlEBu9qTnqtmb/cxgFhXPe5mURPl3MoQ1C0hUzAom6EEXIPB+G9mijnFUwMOD6
- chqaeywXXOGoYRAKZIDmsRz6b9nnk0F+Hfot9nMHIUSQHBM5NEWehS8VcFmths+pD4cx
- d6gg==
-X-Gm-Message-State: AOJu0YyCI1lJLKOcqd4tw2X4vZn52iB+IVX59aemoh8jYQIxwNHYx4/i
- e0EnhbUHA4uIAVlG7K2mLAlrspqTNa+kCGrils7mNU2/yv0utcw+ZthMFJuD8Gvcz7GUu8zjKds
- =
-X-Google-Smtp-Source: AGHT+IH3KD5UP86OwLcb75ADk+t7KLk8XdXmy7rD7hhHfnLEP/DTwSgMMPvE49vlpI0b5pu38/hzgw==
-X-Received: by 2002:a05:6e02:b4e:b0:3a0:9d2b:2420 with SMTP id
- e9e14a558f8ab-3a3b5fc58b5mr53222645ab.25.1728775357429; 
- Sat, 12 Oct 2024 16:22:37 -0700 (PDT)
-Received: from chromium.org ([2607:fb91:7ce:96a:8185:a50b:d0fe:b591])
- by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4dbada84a35sm1228698173.117.2024.10.12.16.22.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 12 Oct 2024 16:22:37 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
-	Simon Glass <sjg@chromium.org>
-Subject: [PATCH 2/2] qconfig: Ignore defconfigs containing #include
-Date: Sat, 12 Oct 2024 17:22:30 -0600
-Message-ID: <20241012232231.5638-2-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241012232231.5638-1-sjg@chromium.org>
-References: <20241012232231.5638-1-sjg@chromium.org>
+ d=1e100.net; s=20230601; t=1728759238; x=1729364038;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=ij23Fa6Ugn6W2mm1gOMsE69Zz13Pqk/mR2/JrR+uj0M=;
+ b=aGnG/lZUi1aIN4Q9eQNRX+XUmkq3RF8RWaeRebdddqlnn/dqsXCNuQC/afPFV1gwwv
+ GpuyFVhaU+dRY0L60UP6FewfvE64pRd0RXtDCfY1ySzt7RLPtsrva3Z/he8/j5hfZ6UU
+ q78dE/s7bzQtRfPjCtHy3yfQHoGgmN2XlFwQ8s+sjuii2p2xXRgFosJC4TEb/4F2fPbC
+ i/4YSnw8QfsyN44xpkTsxlTbT/3Y2J7vPy/k6nMOnM5PXpvv6Y3uvxtWFJeVK3gkhiqg
+ 68BpIgoIDhlsblEf5nY++R8D+tlbwO1mxqdThcUewMSZ15anephpZvOiIeQ8+c5/adzL
+ wa/g==
+X-Gm-Message-State: AOJu0YzHIuqQ74Pj+gQsQmx3D73VAKcnfQcDk/3bnJC2Yz2O+aRTZYNl
+ /KGd9tIYgepxJP5x5H5F53MnCJAJeqef+jC25y/1rMukkhlRcjEyJbx65QgqOj8oeozFqzfoTET
+ QNRPgiKtIuYZci0PHIVRPzf0yq2yk6Q==
+X-Google-Smtp-Source: AGHT+IGQvGQmfwGBftnEZujVgBvLhVWRg3UoYD/U13hJgaAwaVMNnjBCaqKI39BFsO+BWd9hluVK9ZhZznRKLaqo3Qg=
+X-Received: by 2002:a05:6214:451d:b0:6cc:458:8128 with SMTP id
+ 6a1803df08f44-6cc045884b4mr12752616d6.53.1728759238026; Sat, 12 Oct 2024
+ 11:53:58 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: Oldskige6666 <razmik.akopiyan@gmail.com>
+Date: Sat, 12 Oct 2024 22:53:47 +0400
+Message-ID: <CAJ2HA6umF_7HJ47f7XuX1DhuSpuNj-nwh8JQ435sjWOfSB04=g@mail.gmail.com>
+Subject: Re: [PATCH v2] configs: Transpeed 8K618-T: Add Transpeed 8K618-T
+ board support
+To: u-boot@lists.denx.de
+X-Mailman-Approved-At: Sun, 13 Oct 2024 06:40:11 +0200
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: base64
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,71 +85,4 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Running "tools/qconfig.py -s" will re-sync files with #include in them
-and so un-#include them.
-
-Ignore these and mark them as failures.
-
-Signed-off-by: Simon Glass <sjg@chromium.org>
-Fixes: https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/28
----
-
- tools/qconfig.py | 23 +++++++++++++++++++----
- 1 file changed, 19 insertions(+), 4 deletions(-)
-
-diff --git a/tools/qconfig.py b/tools/qconfig.py
-index c5a33412c8c..ed12044f345 100755
---- a/tools/qconfig.py
-+++ b/tools/qconfig.py
-@@ -32,6 +32,8 @@ from buildman import bsettings
- from buildman import kconfiglib
- from buildman import toolchain
- from u_boot_pylib import terminal
-+from u_boot_pylib.terminal import tprint
-+from u_boot_pylib import tools
- 
- SHOW_GNU_MAKE = 'scripts/show-gnu-make'
- SLEEP_TIME=0.03
-@@ -551,14 +553,25 @@ class Slot:
-         orig_defconfig = os.path.join('configs', self.defconfig)
-         new_defconfig = os.path.join(self.build_dir, 'defconfig')
-         updated = not filecmp.cmp(orig_defconfig, new_defconfig)
-+        success = True
- 
-         if updated:
--            self.log.append(
--                self.col.build(self.col.BLUE, 'defconfig updated', bright=True))
-+            # Files with #include get mangled as savedefconfig doesn't know how to
-+            # deal with them. Ignore them
-+            success = b'#include' not in tools.read_file(orig_defconfig)
-+            if success:
-+                self.log.append(
-+                    self.col.build(self.col.BLUE, 'defconfig updated',
-+                                   bright=True))
-+            else:
-+                self.log.append(
-+                    self.col.build(self.col.RED, 'ignored due to #include',
-+                                   bright=True))
-+                updated = False
- 
-         if not self.args.dry_run and updated:
-             shutil.move(new_defconfig, orig_defconfig)
--        self.finish(True)
-+        self.finish(success)
- 
-     def finish(self, success):
-         """Display log along with progress and go to the idle state.
-@@ -1666,7 +1679,9 @@ def move_done(progress):
-     """
-     col = progress.col
-     if progress.failed:
--        print(col.build(col.RED, f'{progress.failure_msg}see {FAILED_LIST}', True))
-+        if progress.good:
-+            tprint(f'{progress.good} OK, ', newline=False, colour=col.GREEN)
-+        tprint(f'{progress.failure_msg}see {FAILED_LIST}', colour=col.RED)
-     else:
-         # Add enough spaces to overwrite the progress indicator
-         print(col.build(
--- 
-2.43.0
-
+0JXRgtC+INC/0YDQvtGI0LjQstC60LAgPz8/IDhrNjE4LXQNCg==
