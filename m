@@ -4,102 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3FF1CF2568
-	for <u-boot@archiver.kernel.org>; Sat, 12 Oct 2024 13:58:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D95BCCF2584
+	for <u-boot@archiver.kernel.org>; Sat, 12 Oct 2024 21:24:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB8FF88E42;
-	Sat, 12 Oct 2024 15:57:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id EE4D688D13;
+	Sat, 12 Oct 2024 23:24:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="O30HvAFU";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CF9F889C3; Sat, 12 Oct 2024 15:57:32 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1728768267;
+	bh=/wX6btxw1MQax7PU/lGw6pN8dRQBqtrbTqOMdTLhyv4=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=dGl+lfevZaVRdyGktZnCW6ePm9LzLSgIqo4fHZNgVK4jPh1pYc3J6TLwoI1proM4j
+	 8ejgmxxa0+py9iMU2NLfKpOFMtzpIWUdOAUyPJKRmupVfUSTW6FGnluMq4h3YJbEvC
+	 bOErjP4sVQT1YJCQTLOhvWo0m/4El964kZ81W0eQzaOZLPrtKEdxV5Wk1E91mv1Y5U
+	 coviHPfV2IQXIKHc4LsuV3bllAKY7Hy+ZvBBuyj+taZAeKuaqrJ+/X1Yp0RKXAptP1
+	 A72hm/Wj5gHE1VQnoN663k+7OWNz+6BaKYpUc7NVEPq6xB+v1GIzlQxCwh/cvC2iOR
+	 XtLN4H5CJvjKA==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5DA088B23
- for <u-boot@lists.denx.de>; Sat, 12 Oct 2024 15:57:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-a99ea294480so61199566b.2
- for <u-boot@lists.denx.de>; Sat, 12 Oct 2024 06:57:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728741450; x=1729346250; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=cd5H1QdPdYTurC7eKdOorF59l0kwIdATGVIexsLuxOE=;
- b=O30HvAFUZv9A1KKWPrvE4N5r/XTw70R4PfmEcwvUb+YPlTsp7TtzuuCAuyJ990SgaJ
- HKlNxB5e1e1Hyv0Cj7B5Z/0RG2Fu1rpVa9ZyqNbJWQMJubY3v0/pVx2sD0FZeTM+OEy2
- UdkpfK826LYl0dtEGHIJ8ikrtGkPvxBBVN4W42damzl03PVkVD2K3lcLW4kFPzlhbW0L
- 75xVpvvzfvSbR+36/Zrs9ocbqtIiDgePh556dFDbXrpvUXIWfHDKABPzGYQ3bow8Pxe1
- G0zhI4/bbrFLbMXCVDxoC8CNUwQs8VR2kIV+OpfKLiJv9duCkopyaCCEriq6BMIG85dr
- sT8w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728741450; x=1729346250;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=cd5H1QdPdYTurC7eKdOorF59l0kwIdATGVIexsLuxOE=;
- b=n7QhHteIX5ig2fWspjcrfZi1LL2nSfXIMAK9yiYyr5XbobyR9KovXKxqy+B85ktPtj
- OroFc8dj6wsJFumgPaBIUPxjtLX4uwMhq/5GxKBYKVH35hiY9Qhkd5X4ddt8hIWt0512
- +7dqGu/y5WEM9nHkN+4p70y94bDR02rGyuBbjVgpCUlJJzpqY3+LuS8nyE3iOqV93QgX
- gZGCQiEiwDPlHe7sAgFo5ypbQv4gDfUwJ8It6LK001xASJWYntBZNfFN+5fFBlhqbvXY
- hmBrYTR+Nt/4vAuDNC9+7yhZvVeqTvsLO4RzvyNljlEwdmCyWAzcy7YJSsyHujeUN5H7
- yiJQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVKGo+G2XSUK4YEcYvAJDQ/xbQg1Hb5nInME/f7YjhM6ECVpYMWBX+ZD4YPMU8KDM4j/cs35Es=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzo8TguuqAFL8+R0Ooi56Thjp/79pvdfvlkTEpgZ5yuUZVEG9Mc
- HDAGdHTycgBW8Txu6t8EigoMg2efmDmtMnygdLl8FIK7PAAnL+Omw65kypWV2N4=
-X-Google-Smtp-Source: AGHT+IHaPNYiNfhPkXsptnKH6slI/mEK8Zqagz/lPtxc6q9yxCkUJQbQ80O5aVnRlsdcDnNd7t9QKw==
-X-Received: by 2002:a05:6402:4401:b0:5c9:446c:88f8 with SMTP id
- 4fb4d7f45d1cf-5c95ac156b3mr4955103a12.10.1728741450035; 
- Sat, 12 Oct 2024 06:57:30 -0700 (PDT)
-Received: from cymric.local ([2a02:8109:888d:ff00::2])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a99a7f2c1f4sm324955966b.87.2024.10.12.06.57.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 12 Oct 2024 06:57:29 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Sat, 12 Oct 2024 15:57:20 +0200
-Subject: [PATCH v4 4/4] qcom_defconfig: enable capsule update support
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 6160888A1C;
+ Sat, 12 Oct 2024 23:24:24 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1728768265;
+ bh=/wX6btxw1MQax7PU/lGw6pN8dRQBqtrbTqOMdTLhyv4=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=QaPc0biz1ZqJJ+qdPP59/IPEzrISZNYSGLBCQFj9kqMXmVpFJD0fUJKLi/h9o9Isg
+ Jv+2KIs5K40N347+woJoESaig41B2LNNq4tdEd/c4sT0iv24nITkBUlUvUHCaTb348
+ xY1bTt9PAa13qn9Gl6cLAH81zl1RjPOiL1mzCm5F3xJwaMrPptu/XXgaL2qKowudGi
+ NH5KxrwYt7laRG++1UQaE9zuvInnCiCZuEwBW7bHXRdzv/HUfNu8uU59ZHZA8k2h3f
+ ZVhOAoONEZBY+exHeQLaqAZaLFdn/A870FDP8LxqJDq0znkQQzkWTOhDOnL7xzEiNu
+ gntsALl/61gqA==
+Message-ID: <ccaff439-14f9-4bf1-b13e-79235de20f75@denx.de>
+Date: Sat, 12 Oct 2024 23:24:23 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH v1] dts: imx8mp-u-boot.dtsi align flash.bin
+To: Heiko Schocher <hs@denx.de>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Fabio Estevam <festevam@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Stefano Babic
+ <sbabic@denx.de>, Tim Harvey <tharvey@gateworks.com>,
+ Tom Rini <trini@konsulko.com>
+References: <20241010082831.19983-1-hs@denx.de>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20241010082831.19983-1-hs@denx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241012-b4-qcom-capsule-updates-v4-4-abd05f15255f@linaro.org>
-References: <20241012-b4-qcom-capsule-updates-v4-0-abd05f15255f@linaro.org>
-In-Reply-To: <20241012-b4-qcom-capsule-updates-v4-0-abd05f15255f@linaro.org>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Lukasz Majewski <lukma@denx.de>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
- u-boot-qcom@groups.io
-X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2357;
- i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=E+5vYobahjp/ayl7KfnhRZ4liQ12bdvr/8bB01S6W1U=;
- b=kA0DAAgBBYMxKxlfZLYByyZiAGcKgEOhodznmm58rgcW3oUe8EbwHLGctXQy3ApCz2eaH9pFy
- IkCMwQAAQgAHRYhBLZRoUY8ar7QaQxVzQWDMSsZX2S2BQJnCoBDAAoJEAWDMSsZX2S2uKIP/Rnn
- D8e2xh/9tyU8lgoBn0KdOJqJ4gFAwrY0dwk7kpGuynV0kgP3PHM6LctOzL0iXMumLPaZOyLm+fD
- 2bwBTgBxxin75Jp3UJJh2prYvSsgWLNr3lqLOn7hNn2ph9APbYGuIOktsN8REKBaed0n8H+g/Xl
- Swt9T7yD59priFCT4YYUakTtrRKD0naYp1WBcLRXIxho+hrShVAHAI8c5VGvCKeyboOfMRhhgQU
- HbPzGCYfAPhGArzkJyAxMm/1TVYHcKSY0Y5m5IodTg0yd0fQtG6KD0VqUD0z6scBBP48Wcon7zL
- eychlCjDcRXtPbMWlVMQxuiQfmEzX28dY1SqJA00YvqYyMQOWCumBhFJcRtQxHaFna/fksgX06C
- UYUS91MMCkO3Jr4xVhQ+HzEd1wzE1fJ4pt5hZp8TBfbnqyNjnBKkiiW6meCiNkXd+Jx7OBBLae9
- cg/4KUMLaSi2TuC2ZXPlHmAtXW6gOFiBoLMCQsBsbIes1hM7nX9doB6amMAfWci+SzAYl54fKLz
- 4HKJvSck+EmiYjI0kOh+NySPUVz1x/1nZdXVT1Zu+7D4AFmHQKnSyuPJjt7vSe62DwCrQ9oZzhN
- lWJMm9jYL87VJ4gr+ouwZHkN5MHwDwx0ayUBRcymXGTZ7cr0pSnG5Pagkyw+PgCPG+LaOu4Xnry
- Icz5j
-X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,84 +73,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable all the necessary options for capsule updates to work, as well as
-a few additional EFI features.
+On 10/10/24 10:28 AM, Heiko Schocher wrote:
+> trying to load current flash.bin with uuu tool
+> leads in not booting U-Boot as missing some bytes.
+> 
+> Align flash.bin in this case to 0x800 bytes, to
+> make uuu and ROM api happy.
+> 
+> Signed-off-by: Heiko Schocher <hs@denx.de>
+> ---
+> I am unsure about the value of 0x800 which is twice the
+> value the code in spl_romapi_load_image_stream(), requests
+> from romapi which in my case on imx8mp is 0x400...
+> 
+> May I oversee something?
+Was the flash.bin aligned differently before the binman conversion , or 
+did it work with UUU by sheer chance ? I don't see any alignment changes 
+during the binman conversion.
 
-Capsule updates themselves are only enabled for the RB3 Gen 2, since the
-exact details on where to flash U-Boot (or how to handle multiple boot
-methods) has not been finalised for other boards.
+tools/imx8mimage.c does contain
 
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
- configs/qcm6490_defconfig | 6 ++++++
- configs/qcom_defconfig    | 8 +++++++-
- 2 files changed, 13 insertions(+), 1 deletion(-)
+  33 #define ALIGN_SIZE              0x1000
 
-diff --git a/configs/qcm6490_defconfig b/configs/qcm6490_defconfig
-index 5ddc5ab3ef8c..ba26924da161 100644
---- a/configs/qcm6490_defconfig
-+++ b/configs/qcm6490_defconfig
-@@ -18,4 +18,10 @@ CONFIG_DEBUG_UART_CLOCK=14745600
- CONFIG_TEXT_BASE=0x9fc00000
- CONFIG_REMAKE_ELF=y
- 
- CONFIG_DEFAULT_DEVICE_TREE="qcom/qcs6490-rb3gen2"
-+
-+# Enable capsule updates
-+CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
-+CONFIG_EFI_CAPSULE_ON_DISK=y
-+CONFIG_EFI_IGNORE_OSINDICATIONS=y
-+CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index e7ed03ff0f24..4c8ff0e84372 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -20,21 +20,24 @@ CONFIG_LOG_MAX_LEVEL=9
- CONFIG_LOG_DEFAULT_LEVEL=4
- # CONFIG_DISPLAY_CPUINFO is not set
- CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_CMD_BOOTMENU=y
-+CONFIG_CMD_NVEDIT_EFI=y
- CONFIG_CMD_EEPROM=y
- CONFIG_SYS_I2C_EEPROM_BUS=2
- CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
- CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=5
- # CONFIG_CMD_BIND is not set
- CONFIG_CMD_CLK=y
-+CONFIG_CMD_DFU=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_UFS=y
- CONFIG_CMD_USB=y
- CONFIG_CMD_CAT=y
- CONFIG_CMD_BMP=y
-+CONFIG_CMD_EFIDEBUG=y
- CONFIG_CMD_REGULATOR=y
- CONFIG_CMD_LOG=y
- CONFIG_OF_LIVE=y
- CONFIG_USE_DEFAULT_ENV_FILE=y
-@@ -44,15 +47,18 @@ CONFIG_CLK=y
- CONFIG_CLK_QCOM_APQ8016=y
- CONFIG_CLK_QCOM_APQ8096=y
- CONFIG_CLK_QCOM_QCM2290=y
- CONFIG_CLK_QCOM_QCS404=y
--CONFIG_CLK_QCOM_SC7280=y
- CONFIG_CLK_QCOM_SDM845=y
- CONFIG_CLK_QCOM_SM6115=y
- CONFIG_CLK_QCOM_SM8150=y
- CONFIG_CLK_QCOM_SM8250=y
- CONFIG_CLK_QCOM_SM8550=y
- CONFIG_CLK_QCOM_SM8650=y
-+CONFIG_CLK_QCOM_SC7280=y
-+CONFIG_DFU_MMC=y
-+CONFIG_DFU_SCSI=y
-+CONFIG_SYS_DFU_DATA_BUF_SIZE=0x200000
- CONFIG_MSM_GPIO=y
- CONFIG_QCOM_PMIC_GPIO=y
- CONFIG_DM_I2C=y
- CONFIG_SYS_I2C_QUP=y
+But that should be called internally by binman anyway.
 
--- 
-2.46.2
-
+Is the flash.bin correct or is it already corrupted when generated by 
+this binman stuff ? You should be able to extract the u-boot.itb from 
+flash.bin and run mkimage -l on it to validate it.
