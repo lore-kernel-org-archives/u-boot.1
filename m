@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85BFED1A443
-	for <u-boot@archiver.kernel.org>; Sat, 12 Oct 2024 07:37:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88362D1A443
+	for <u-boot@archiver.kernel.org>; Sat, 12 Oct 2024 07:40:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E9AC688975;
-	Sat, 12 Oct 2024 09:37:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D3D0288E0F;
+	Sat, 12 Oct 2024 09:40:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oESPJeiS";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="AnrDS+kD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 896C888970; Sat, 12 Oct 2024 09:37:08 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id 1CE8788E11; Sat, 12 Oct 2024 09:40:37 +0200 (CEST)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E86F88D4F
- for <u-boot@lists.denx.de>; Sat, 12 Oct 2024 09:37:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2BA9F88970
+ for <u-boot@lists.denx.de>; Sat, 12 Oct 2024 09:40:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-5c9634c9160so67698a12.2
- for <u-boot@lists.denx.de>; Sat, 12 Oct 2024 00:37:06 -0700 (PDT)
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-5c721803a89so3786396a12.1
+ for <u-boot@lists.denx.de>; Sat, 12 Oct 2024 00:40:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728718626; x=1729323426; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1728718834; x=1729323634; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=F7gS1aLLokIMyuDjKLXrot8Zbl0XgIxMYtVfp5T10xU=;
- b=oESPJeiSQBZHvM0I2VwoCmXQ13zYl5bP3Slcyr2aWrE6yGQg5nGBpTHEDfjUxegSr1
- kM6ehGo+B9B4QHzEJmrZOdxw4XgPs0KkwJFapyfXOYo6VC/0lqqGDdBRRJo37dII4Aji
- Ear14Xwp9Ccsv4EtY4kuA3tgaXmLUN7geXkq50+LHWr5n+uToUgxeUyj2n7eZPry+IDw
- kXkTMABj/5sCrPugKmPtRq5025QzpBQb6BCVPF1eydrQT8l/ZLY24s6P2fhC6HH22hyK
- 2wgd9mvRMJjSic7gJ3+sZ1/I3ZecYm9t1MoFNYdpTzVCVt71K5xCY/x9Wmgq9/hRmnTO
- +ZNQ==
+ bh=FHfl0l7MNXKAVfkg95QuMt9xRD/1AiIhszx4jlSCnfQ=;
+ b=AnrDS+kD+X5kc4ZxCZwjUqhtuURG4PsgrCLRNkC2OI9ybPdfeiN1xa08fEgFx2C03i
+ S97aaeBEJUGJlBnuZwmewc/qLfzzd2TQAfKF7Er02xF/Ht+PjQIXJs/MD2NmLLmre+of
+ r0+gTb/lB7pnnbE8+ieVzXxtVwsseyv6UwWCkoQHo5ua23ylFddGlRhlGLFUsQRV1BEs
+ RAwsH9FEnLt1CX296uXRkneaylW5CDt3cpZa5iw1+J1j7GJzTBr800kVVt4YwtoaVB7s
+ oKMTNHR2JrqILrKyPrgQZWKY5FqDjJ0Z0UFV2R5U117j42PWe+JA4T+87UL9fo86gbHq
+ yggw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728718626; x=1729323426;
+ d=1e100.net; s=20230601; t=1728718834; x=1729323634;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=F7gS1aLLokIMyuDjKLXrot8Zbl0XgIxMYtVfp5T10xU=;
- b=MvlcbJgT0UJ70u+nSgyjXWqioiJL6K6cMzdd3Wl+eDq0ObVAse+3nGIpJThxW/0UiF
- CkzXhSbpcdD7u9tjHcJ5xXXf64sG+YGdtu9qNkK7Mg+7zgM6NhvwI428I5aVNeAtKCf5
- T9H5fEktvvOTi7qegZ8sZDrasi9F/uaU9jzia7gdNIiz2/yz08LB986cqNzEvCBBZ5oQ
- 13iqpFU0dGeZ6wwxDxN2U8ExkuJmRMBF0K8Y9hx1VVOdXoo7d9rMgzqF5MLVP4Fdvuuo
- XIHKn6ZVWycif9r3f6dj7pCeb5T4+almvSYkmucKboVBoBpUGfldrxBvUX9spUYr9CIz
- BqrQ==
-X-Gm-Message-State: AOJu0Yy8thZSOPLPPfQ7fM1cshv6b+9k97Q1CsQA9Wr6i59LN9ejAkPR
- XQ9lV0y1JVer/hDFrbMP+7+Y1j7QzJtUugz2rU6NlFJy0E78K9q+uoB2lS1qPTKg6QfPt6dZwQx
- sJb/5tfRpBpP3x43y0Vwi8p26Jg1aqd8qo3dJPw==
-X-Google-Smtp-Source: AGHT+IGkSt5GUEyl3AIfPr7eqISD881RCwjte6BCWoSuURRYTh8b0UHcxtgwqn2nIMD0IG7AoxxFfaItBS6RnSvwAXM=
-X-Received: by 2002:a05:6402:27cc:b0:5c9:492c:f80d with SMTP id
- 4fb4d7f45d1cf-5c9492cfae3mr3066520a12.19.1728718625819; Sat, 12 Oct 2024
- 00:37:05 -0700 (PDT)
+ bh=FHfl0l7MNXKAVfkg95QuMt9xRD/1AiIhszx4jlSCnfQ=;
+ b=ONx5WKva4DSm9ugwcaQULvMSiiKAhgQCj+6UoYxQhS4cRp60pWIViqjMbRyDehrAjn
+ ajXCgsMuNmTaTE6mAzqJYZdJOzN59WlmJ6FRfWcatnhZ3usdRhvQTTZbPTHlrdS894E6
+ QeGtOv/zvIfu20CYQwcYo0flrJXFNLsnOdyw3HKLBpaEZVquAar9VPdcZ2EjQV0eOypZ
+ D5MNGY2Ax2TVE2G2bEHAjpzSS6Gx+mZsXZWcq/RDeeIroahOMEvktwc6BgJNn28beI6o
+ AJ3yArnMR3Po0lAEXrPsWRDnln821xSOGFqMNdaPECPr80ys4gdzawLnYcqdrF0a7YHs
+ bCrA==
+X-Gm-Message-State: AOJu0YzP1xj+nmQFO/Fmqu5EBq3eJ9n6eiGzSJaEEa8UutckUc3f0zPP
+ TDoeVLgS76Obe7ZLnRc86YmtWhwZgXFvvwU7RNP5ANITMtUvs9e2LF7a7CGyLsUhC8Gl0+cBO9P
+ M0SfHSQedGjW9oCuvrwDH6lweaR8MiQWm9QyQttWZ7I2dGYQv
+X-Google-Smtp-Source: AGHT+IFzmsnREVloTNiP10ZXrsPFG1rGO0urHgthcRCqHmFkW7/IejngeskIJPC/doluCXW84pEiIIkdlMyhulOpSFo=
+X-Received: by 2002:a50:c907:0:b0:5c9:f49:fbc6 with SMTP id
+ 4fb4d7f45d1cf-5c95ac610b8mr923572a12.34.1728718834507; Sat, 12 Oct 2024
+ 00:40:34 -0700 (PDT)
 MIME-Version: 1.0
 References: <20241008181435.1753814-1-sughosh.ganu@linaro.org>
- <20241008181435.1753814-3-sughosh.ganu@linaro.org>
- <CAC_iWjKfPVRSwcinmTUv1QtrFpfgqY5fNH2BNXumx817Nw2yiQ@mail.gmail.com>
-In-Reply-To: <CAC_iWjKfPVRSwcinmTUv1QtrFpfgqY5fNH2BNXumx817Nw2yiQ@mail.gmail.com>
+ <20241008181435.1753814-5-sughosh.ganu@linaro.org>
+ <CAC_iWjKMoLz2=cwMP6gebeHYdf0XBXfai+ou5F0_6OVMchEGhQ@mail.gmail.com>
+In-Reply-To: <CAC_iWjKMoLz2=cwMP6gebeHYdf0XBXfai+ou5F0_6OVMchEGhQ@mail.gmail.com>
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Sat, 12 Oct 2024 13:06:54 +0530
-Message-ID: <CADg8p942QeT9qrLzto_sYM_LkQcjcS7v3Mfoi3evv1BqD_7oeQ@mail.gmail.com>
-Subject: Re: [PATCH v2 02/14] lmb: add a flag to allow suppressing memory map
- change notification
+Date: Sat, 12 Oct 2024 13:10:23 +0530
+Message-ID: <CADg8p963a4d5DLZ-ZvvR55HjAz4dT_gpvGrRVEp3RT7afFEwbw@mail.gmail.com>
+Subject: Re: [PATCH v2 04/14] lib: Kconfig: add a config symbol for getting
+ lmb memory map updates
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
@@ -91,65 +91,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 11 Oct 2024 at 15:48, Ilias Apalodimas
+On Fri, 11 Oct 2024 at 15:56, Ilias Apalodimas
 <ilias.apalodimas@linaro.org> wrote:
 >
 > Hi Sughosh
 >
-> On Tue, 8 Oct 2024 at 21:14, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> On Tue, 8 Oct 2024 at 21:15, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > >
-> > Add a flag LMB_NONOTIFY that can be passed to the LMB API's for
-> > reserving memory. This will then result in no notification being sent
-> > from the LMB module for the changes to the LMB's memory map.
+> > Add a Kconfig symbol to enable getting updates on any memory map
+> > changes that might be done by the LMB module. This notification
+> > mechanism can then be used to have a synchronous view of allocated and
+> > free memory.
 > >
-> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > ---
-> > Changes since V1: None
-> >
-> >  include/lmb.h | 1 +
-> >  lib/lmb.c     | 2 +-
-> >  2 files changed, 2 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/include/lmb.h b/include/lmb.h
-> > index 0e8426f4379..a76262d520d 100644
-> > --- a/include/lmb.h
-> > +++ b/include/lmb.h
-> > @@ -23,6 +23,7 @@ enum lmb_flags {
-> >         LMB_NONE                = 0,
-> >         LMB_NOMAP               = BIT(1),
-> >         LMB_NOOVERWRITE         = BIT(2),
-> > +       LMB_NONOTIFY            = BIT(3),
 >
-> I haven't gone through the rest of the series yet, but if if we remove
-> the notification event why we would we want the flag?
-> The LMB will directly update the mappings no?
+> Are there size concerns to enable or disable this? I think we should
+> always sync and get rid of this
 
-We are no longer using the event framework for notifying the EFI
-memory module of the changes to the LMB memory map, but the
-notification still ends up happening. The efi_add_memory_map_pg() does
-get called from lmb_map_update_notify().
+This is needed only for platforms that enable EFI_LOADER. I haven't
+checked if not having this check would result in any kind of build
+failures and/or size impact on platforms that do not enable
+EFI_LOADER. I will check this, and keep it if any build/size impact
+happens.
 
 -sughosh
 
 >
 > Thanks
 > /Ilias
-> >  };
+> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > ---
+> > Changes since V1:
+> > * Add a config for SPL stage
 > >
-> >  /**
-> > diff --git a/lib/lmb.c b/lib/lmb.c
-> > index 0763f6174c1..a4886db4c45 100644
-> > --- a/lib/lmb.c
-> > +++ b/lib/lmb.c
-> > @@ -30,7 +30,7 @@ static struct lmb lmb;
-> >  static void lmb_print_region_flags(enum lmb_flags flags)
-> >  {
-> >         u64 bitpos;
-> > -       const char *flag_str[] = { "none", "no-map", "no-overwrite" };
-> > +       const char *flag_str[] = { "none", "no-map", "no-overwrite", "no-notify" };
+> >  lib/Kconfig | 17 +++++++++++++++++
+> >  1 file changed, 17 insertions(+)
 > >
-> >         do {
-> >                 bitpos = flags ? fls(flags) - 1 : 0;
+> > diff --git a/lib/Kconfig b/lib/Kconfig
+> > index 1dd4f271595..61452f7ac94 100644
+> > --- a/lib/Kconfig
+> > +++ b/lib/Kconfig
+> > @@ -75,6 +75,23 @@ config LIB_UUID
+> >         bool
+> >         select SHA1
+> >
+> > +config MEM_MAP_UPDATE_NOTIFY
+> > +       bool "Get notified of any changes to the LMB memory map"
+> > +       default y if EFI_LOADER
+> > +       help
+> > +         Enable this option to get notification on any changes to the
+> > +         memory that is allocated or freed by the LMB module. This will
+> > +         allow different modules that allocate memory or maintain a memory
+> > +         map to have a synchronous view of available and allocated memory.
+> > +
+> > +config SPL_MEM_MAP_UPDATE_NOTIFY
+> > +       bool "Get notified of any changes to the LMB memory map in SPL"
+> > +       help
+> > +         Enable this option to get notification on any changes to the
+> > +         memory that is allocated or freed by the LMB module. This will
+> > +         allow different modules that allocate memory or maintain a memory
+> > +         map to have a synchronous view of available and allocated memory.
+> > +
+> >  config RANDOM_UUID
+> >         bool "GPT Random UUID generation"
+> >         select LIB_UUID
 > > --
 > > 2.34.1
 > >
