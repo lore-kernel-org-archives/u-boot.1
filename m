@@ -4,79 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFF03D1A428
-	for <u-boot@archiver.kernel.org>; Sat, 12 Oct 2024 05:47:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56DACD1A428
+	for <u-boot@archiver.kernel.org>; Sat, 12 Oct 2024 05:50:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A24E88D63;
-	Sat, 12 Oct 2024 07:47:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A6C4488C9C;
+	Sat, 12 Oct 2024 07:50:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="d3D1PUzu";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ARORrSEi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 50C1288D66; Sat, 12 Oct 2024 07:47:18 +0200 (CEST)
-Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
- [IPv6:2607:f8b0:4864:20::52b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E171088D94; Sat, 12 Oct 2024 07:50:18 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0EEC188C9C
- for <u-boot@lists.denx.de>; Sat, 12 Oct 2024 07:47:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D086188B64
+ for <u-boot@lists.denx.de>; Sat, 12 Oct 2024 07:50:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x52b.google.com with SMTP id
- 41be03b00d2f7-7ea56070f86so810823a12.0
- for <u-boot@lists.denx.de>; Fri, 11 Oct 2024 22:47:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728712034; x=1729316834; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=mtF2mv3LfYkpUkRcsJyC50L8mNnF4Wglza1yEU5BkLg=;
- b=d3D1PUzu8qNCggUry1ddpUm4IGJZSQ6ZSXOXNaVAcejQeDpxHoMEl5jwVYj2JMFsz0
- k6hqdcZs1kpov6SCeOKrQ7i1GIiOroXZD84Llz2UoFzlEetI/E+CQ4JDFb+IzFKC2LH5
- kKLNwZ4mVx9wguIE96Jyw9Qm7ADmL+pAA7OAdEdY80/mf8NtFQcc1QmavI5751nmVPTh
- wc5WjtD6VPd9FLiu+VVTXBvb7yGC9ajCP5GMpIF2nNnO2OzmyXbPiY9j+5F8sBavH7c5
- 5R5Eg3g0WqFbjfwlvPEdxG4AW3hPRpLtSn2Eqt5+QYQZ13cY0nuZ8MGsatdvzH/PxpcR
- f55w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728712034; x=1729316834;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=mtF2mv3LfYkpUkRcsJyC50L8mNnF4Wglza1yEU5BkLg=;
- b=bQ2ZWogOIObH20LzabcwwzqkozbCbVPK2bCSJ/KMWhZM9GbCvqebt/F9I+m41MoH5k
- CoVOgZQwwaYZWKQRD8AeYVHwil/CLXEZZxfmH5vLY5tRPAA3OWQk79rFl097zuRk49Sv
- 4QDap7b+9xq18ExfivqKjhuBJoMId1ibHcVYX/DNQg8v+jj2AJV6UMsL21H1ulDGql2+
- fB5769+glGpxD8MbjX3KCYuFiHgqFUIHAMAG5UUCVBxSiaVRMetw1NeXOL6fHoc59jel
- xMAvAFqrOR0SmeaBL8ckoYctVJ/qCC6IveYSdvu9edZ9TMrXFavT3Wzzyztf9ckwpOE6
- u28g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU5pTwkzPxIBOZpq+lGq/RaJTtHN0wd/WbSsDNI6tIuutDYmYRj7z2KwUDn3cfQpPJLYbgVzR0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxc00EHp4CyCZPwoV/thIXyLM2K2kqeq5jCbVC1v2KbPYTIjqvZ
- kQufIhMmeAE1kOKELMFsNdAWBC4ecAzdHMw7qOaelCa8zD9R9m9NzpjLTv09hcE11DP2TCY8d7M
- wAJLFbbGAhndgZ9BaF74afdi3cu3Y5G/yQMG7Zg==
-X-Google-Smtp-Source: AGHT+IEdTw06rGsUQ4nGIcHtfNekzXEBcFLPBZgyBL9o1DbkbqmYYeY0Fjsg78+Q4NofB8Wn8I5siJ+GDHlULQh19v0=
-X-Received: by 2002:a17:90a:ee8e:b0:2d8:85fc:464c with SMTP id
- 98e67ed59e1d1-2e2c8059fe0mr14335266a91.11.1728712034502; Fri, 11 Oct 2024
- 22:47:14 -0700 (PDT)
-MIME-Version: 1.0
-References: <20241011212126.747741-1-sjg@chromium.org>
- <20241011212126.747741-5-sjg@chromium.org>
- <71ECC011-77EC-4308-AFE5-0E301BC27F84@gmx.de>
- <20241012012716.GE14210@bill-the-cat>
-In-Reply-To: <20241012012716.GE14210@bill-the-cat>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sat, 12 Oct 2024 08:46:38 +0300
-Message-ID: <CAC_iWjL_YQ24ZecbN7oC-37PRR6iuUiiui-a0VPqSSVRunepdQ@mail.gmail.com>
-Subject: Re: [PATCH v4 4/5] efi: Reserve some memory for initial use
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49C5oChR017118;
+ Sat, 12 Oct 2024 00:50:12 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1728712212;
+ bh=jtiWAHIpLVm1oSNKKKVV+DfC8v1Bdd+B3UUa1/Ot6Wk=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=ARORrSEiOjz6sk/8WBFTPkddyGFGtGJ6C30YOaxB8pTwo46sPsfqkZzMK7Az2PXwc
+ Y1DJu2icni28LSeT9A7dBsMTRCD+AU/0XaPPpqymi9hFaqVlw5MxUk8WV5NrAf+OZb
+ +oPKld6dy4sqclcc/xq45UGmG5BSdzfXXjvnl+Bo=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 49C5oCxb084291
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Sat, 12 Oct 2024 00:50:12 -0500
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sat, 12
+ Oct 2024 00:50:11 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Sat, 12 Oct 2024 00:50:11 -0500
+Received: from localhost (uda0492258.dhcp.ti.com [10.24.72.81])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49C5oAMs017685;
+ Sat, 12 Oct 2024 00:50:11 -0500
+Date: Sat, 12 Oct 2024 11:20:10 +0530
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
 To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>
-Content-Type: text/plain; charset="UTF-8"
+CC: Siddharth Vadapalli <s-vadapalli@ti.com>, <nm@ti.com>, <n-francis@ti.com>, 
+ <a-limaye@ti.com>, <seanga2@gmail.com>, <sjg@chromium.org>,
+ <marex@denx.de>, <john@phrozen.org>, <ansuelsmth@gmail.com>,
+ <sumit.garg@linaro.org>, <u-boot@lists.denx.de>, <vigneshr@ti.com>,
+ <srk@ti.com>
+Subject: Re: [PATCH v2 1/2] pci: Add TI K3 Cadence PCIe Controller
+Message-ID: <b2abe750-3bbe-4c95-8bf1-b1567cb2bb1a@ti.com>
+References: <20241011130258.3452687-1-s-vadapalli@ti.com>
+ <20241011130258.3452687-2-s-vadapalli@ti.com>
+ <20241012011503.GC14210@bill-the-cat>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20241012011503.GC14210@bill-the-cat>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,39 +84,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom
+On Fri, Oct 11, 2024 at 07:15:03PM -0600, Tom Rini wrote:
 
-On Sat, 12 Oct 2024 at 04:27, Tom Rini <trini@konsulko.com> wrote:
->
-> On Sat, Oct 12, 2024 at 12:01:54AM +0200, Heinrich Schuchardt wrote:
-> >
-> >
-> > Am 11. Oktober 2024 23:21:25 MESZ schrieb Simon Glass <sjg@chromium.org>:
-> > >The 'point of cooperation' is where U-Boot starts allowing EFI to use
-> > >memory outside of the U-Boot region. Until that point, it is desirable
-> > >to keep more below U-Boot free for loading images.
-> > >
-> > >Reserve a small region for this purpose.
-> >
-> > Your commit message provides no clue why this should be needed.
->
-> The alternative here would be a patch to doc/develop/memory.rst saying
-> something to the effect of:
->
-> EFI pool allocations start at ... U-Boot stack pointer +
-> CONFIG_STACK_SIZE and grow downwards from there. These are done by ... a
-> brief description of how the pool allocations work ... Nominally, this
-> will extend for only a few pages worth of memory but depending on
-> requests made by EFI applications can grow larger. All of this is
-> covered by the LMB that covers U-Boot itself and is considered part of
-> the U-Boot memory map. It may be broken down in to further detail to the
-> memory map provided to the OS, in some cases.
+Hello Tom,
 
-I'll send a patch to update that next week. Perhaps even fold it in
-the LMB series
+> On Fri, Oct 11, 2024 at 06:32:57PM +0530, Siddharth Vadapalli wrote:
+> > Add support for the Cadence PCIe Controller present on TI's K3 SoCs.
+> > This driver is an adaptation of the Linux driver.
+> > 
+> > Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+> > ---
+> >  drivers/pci/Kconfig        |   6 +
+> >  drivers/pci/Makefile       |   1 +
+> >  drivers/pci/pcie_cdns_ti.c | 851 +++++++++++++++++++++++++++++++++++++
+> >  3 files changed, 858 insertions(+)
+> >  create mode 100644 drivers/pci/pcie_cdns_ti.c
+> 
+> Please update MAINTAINERS somewhere for this.
+> 
+> > +#define CDNS_PCIE_LM_BAR_CFG_CTRL_DISABLED		0x0
+> > +#define  CDNS_PCIE_LM_BAR_CFG_CTRL_MEM_32BITS		0x4
+> > +#define  CDNS_PCIE_LM_BAR_CFG_CTRL_PREFETCH_MEM_32BITS	0x5
+> > +#define  CDNS_PCIE_LM_BAR_CFG_CTRL_MEM_64BITS		0x6
+> > +#define  CDNS_PCIE_LM_BAR_CFG_CTRL_PREFETCH_MEM_64BITS	0x7
+> 
+> Here and maybe elsewhere, why the inconsistent indentation?
 
-Thanks
-/Ilias
->
-> --
-> Tom
+Thank you for reviewing the patch. I will add the MAINTAINERS entry and
+make the indentation consistent in the v3 series.
+
+Regards,
+Siddharth.
