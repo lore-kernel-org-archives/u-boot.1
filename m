@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05572CF2576
-	for <u-boot@archiver.kernel.org>; Sun, 13 Oct 2024 10:57:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B628CCF2579
+	for <u-boot@archiver.kernel.org>; Sun, 13 Oct 2024 10:57:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C24C488F55;
-	Sun, 13 Oct 2024 12:56:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A267E88F3C;
+	Sun, 13 Oct 2024 12:56:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 60DCF88F4E; Sun, 13 Oct 2024 12:56:13 +0200 (CEST)
+ id 6EB3888F57; Sun, 13 Oct 2024 12:56:15 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 661FB88F23
- for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 12:56:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 083B288F4D
+ for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 12:56:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 03E331007;
- Sun, 13 Oct 2024 03:56:39 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1ACBB1063;
+ Sun, 13 Oct 2024 03:56:42 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D068C3F71E;
- Sun, 13 Oct 2024 03:56:06 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E823A3F71E;
+ Sun, 13 Oct 2024 03:56:09 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
  Jonas Karlman <jonas@kwiboo.se>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v3 09/15] stm32mp: remove efi_add_known_memory() function
- definition
-Date: Sun, 13 Oct 2024 16:25:16 +0530
-Message-Id: <20241013105522.391414-10-sughosh.ganu@linaro.org>
+Subject: [PATCH v3 10/15] lmb: allow for boards to specify memory map
+Date: Sun, 13 Oct 2024 16:25:17 +0530
+Message-Id: <20241013105522.391414-11-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241013105522.391414-1-sughosh.ganu@linaro.org>
 References: <20241013105522.391414-1-sughosh.ganu@linaro.org>
@@ -57,39 +56,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The efi_add_known_memory() function for the stm32mp platforms is adding
-the EFI_CONVENTIONAL_MEMORY type. This memory is now being handled
-through the LMB module -- the lmb_add_memory() adds this memory to the
-memory map. Remove the definition of the now superfluous
-efi_add_known_memory() function.
+Some architectures have special or unique aspects which need
+consideration when adding memory ranges to the list of available
+memory map. Enable this config in such scenarios which allow
+architectures and boards to define their own memory map.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 Changes since V2: None
 
- arch/arm/mach-stm32mp/dram_init.c | 11 -----------
- 1 file changed, 11 deletions(-)
+ include/lmb.h |  2 ++
+ lib/Kconfig   | 18 ++++++++++++++++++
+ lib/lmb.c     |  3 +++
+ 3 files changed, 23 insertions(+)
 
-diff --git a/arch/arm/mach-stm32mp/dram_init.c b/arch/arm/mach-stm32mp/dram_init.c
-index 198785353f..3698fc49bf 100644
---- a/arch/arm/mach-stm32mp/dram_init.c
-+++ b/arch/arm/mach-stm32mp/dram_init.c
-@@ -86,14 +86,3 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+diff --git a/include/lmb.h b/include/lmb.h
+index 92e9aead76..a63c75eda8 100644
+--- a/include/lmb.h
++++ b/include/lmb.h
+@@ -166,6 +166,8 @@ long lmb_free(phys_addr_t base, phys_size_t size);
+ void lmb_dump_all(void);
+ void lmb_dump_all_force(void);
  
- 	return reg + size;
- }
--
--void efi_add_known_memory(void)
--{
--	if (IS_ENABLED(CONFIG_EFI_LOADER))
--		/*
--		 * Memory over ram_top is reserved to OPTEE.
--		 * Declare to EFI only memory area below ram_top
--		 */
--		efi_add_memory_map(gd->ram_base, gd->ram_top - gd->ram_base,
--				   EFI_CONVENTIONAL_MEMORY);
--}
++void lmb_arch_add_memory(void);
++
+ struct lmb *lmb_get(void);
+ int lmb_push(struct lmb *store);
+ void lmb_pop(struct lmb *store);
+diff --git a/lib/Kconfig b/lib/Kconfig
+index 61452f7ac9..100c4e5c25 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -1132,6 +1132,24 @@ config SPL_LMB
+ 	  SPL. This will require a malloc() implementation for defining
+ 	  the data structures needed for maintaining the LMB memory map.
+ 
++config LMB_ARCH_MEM_MAP
++	bool "Add an architecture specific memory map"
++	depends on LMB
++	help
++	  Some architectures have special or unique aspects which need
++	  consideration when adding memory ranges to the list of available
++	  memory map. Enable this config in such scenarios which allow
++	  architectures and boards to define their own memory map.
++
++config SPL_LMB_ARCH_MEM_MAP
++	bool "Add an architecture specific memory map"
++	depends on SPL_LMB
++	help
++	  Some architectures have special or unique scenarios which need
++	  consideration when adding memory ranges to the list of available
++	  memory map. Enable this config in such scenarios which allow
++	  architectures and boards to define their own memory map.
++
+ config PHANDLE_CHECK_SEQ
+ 	bool "Enable phandle check while getting sequence number"
+ 	help
+diff --git a/lib/lmb.c b/lib/lmb.c
+index a567c02784..c08ab2223a 100644
+--- a/lib/lmb.c
++++ b/lib/lmb.c
+@@ -331,6 +331,9 @@ void lmb_add_memory(void)
+ 	u64 ram_top = gd->ram_top;
+ 	struct bd_info *bd = gd->bd;
+ 
++	if (CONFIG_IS_ENABLED(LMB_ARCH_MEM_MAP))
++		return lmb_arch_add_memory();
++
+ 	/* Assume a 4GB ram_top if not defined */
+ 	if (!ram_top)
+ 		ram_top = 0x100000000ULL;
 -- 
 2.34.1
 
