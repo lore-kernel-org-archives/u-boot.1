@@ -4,76 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F5E6CF258E
-	for <u-boot@archiver.kernel.org>; Sun, 13 Oct 2024 20:20:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA5FACF258E
+	for <u-boot@archiver.kernel.org>; Sun, 13 Oct 2024 20:22:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B022D89030;
-	Sun, 13 Oct 2024 22:20:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6BEB388EAE;
+	Sun, 13 Oct 2024 22:22:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OoOa+7Q2";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OiUqHBP9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FEFC88FDC; Sun, 13 Oct 2024 22:20:13 +0200 (CEST)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
+ id 52BC38899C; Sun, 13 Oct 2024 22:22:11 +0200 (CEST)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 18EEE88FF1
- for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 22:20:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 708D788EAE
+ for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 22:22:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-539ebb5a20aso854863e87.2
- for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 13:20:11 -0700 (PDT)
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-539f72c8fc1so230974e87.1
+ for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 13:22:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1728850810; x=1729455610; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1728850928; x=1729455728; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DL8Ys2ljF6fFLy+ibQwW3myDBdYfeRedfeiVqdC7F80=;
- b=OoOa+7Q2Lyu2cpsWOt4J+wHvI+VrBG5T32MBWZYgXjoF0G3xksDwh0plJfqCerpFeq
- wAY5ywLJg1oGYmf4zGbRxGlHgelT2EuMw3PbYF82eRHeahPCeIEsF5HmquTnPFFTDAuC
- /U0HPMoHwLQTFS08ux/o9Ny+c53Qa2mIhBB2dB102lfHvfVL1yIN6uwdl7zR94d5MInH
- HYKNc4rV6KDZQlgM4Hv72LY4kFFjEpBVcw+eEH8EbwJ3FroLjSSD1KPgG/g9s3gpWqvU
- Z/H0ConIhYg+1zIaVnt3hQ9ymKIeGeMCOPnoQrkiFYlvwsMpSanlEovptdQSfuURImiK
- iu/A==
+ bh=pKVKuNs5U0g22n3JVM1B9vyvfnZhVlCXOesXevL9zu0=;
+ b=OiUqHBP9WXzQVb4vrJrIudfBYYYYJoDcNeChKWVu6JJrcoGXn7GiEL2TBb96lr8YNt
+ W6LMkMCzWM78x5doveoAs5nma3OOP8DWLZzWLNmEPZwKsjGqNfr/F3av/fzSUbVSX2HY
+ ncvy6GkRpG1b+YU5y6SVi8tPFlhvI4+CgQz1uUDTaLN+nKvPHVMu5Fdb6XB9k5yx6BTC
+ pfy5wbXolhtnvgB3w9DNwyvtSvHRUxaF86oEVYOLZ6vr9NG+V+Hl5RU0avtl4ZDS0Tgg
+ 3yRyjXfKfsmQcGBgJpYy7YbpilNqC83Aj5BAXOuZPco1KVs+x5c9ZaH2Ywr1XBiPUJ2D
+ 4MaA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728850810; x=1729455610;
+ d=1e100.net; s=20230601; t=1728850928; x=1729455728;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DL8Ys2ljF6fFLy+ibQwW3myDBdYfeRedfeiVqdC7F80=;
- b=h/L6heofc99earAuh5HToZn71YpgpJpfXcnidRu6d6zmgTNy12dytALTS9yLNM5Ch1
- 5AebeN6A4pGA6a0WWNiDeQPzbFN1HHZbMEkkvybwWUvdUXyrzugcEqhK5ghBl9d44bVm
- iEz1TQt/ktGM7sinuOkBsKWj+KMRKkBg+Jg6oGpF0nQZHxsiIJuD2ditF0QyTxwpzdO7
- VFlO8t2If+ufJpVaM6d3XvMbuRbsHpRmL+44JZHGa0O+5uPMXprE/49Y3SvJElZO+tCk
- rFrxqIthcB0vvKXG+1m/8jlViDSRUH1FlsfWiyXqeMf4qZpazkd3Fbl4DZ5z1TBFbLp/
- cKYA==
+ bh=pKVKuNs5U0g22n3JVM1B9vyvfnZhVlCXOesXevL9zu0=;
+ b=Lmovv/M6L+GdcwvzWfPbC/eRdtzKlkBb7BQvn7yTpJIygCLnbgbhIRG4NbQmP9J6fw
+ oZ6arYe/TW4qWLsSWsOspjRPv8i6f3A4iKRouBfG5PlKr7JFsVCAEAvOHlqTaWb97VT5
+ XLNDOJGX1B3O6gfRwL0PofU1zWzqZD7hYuoslnwKY3cuCABhPuhf7xJ7uwCnPOS9SULm
+ A2np1BoD1KQSYebRM1AOAwxoXYiYF+vZVcXXlC7peBhMIEqXNMvOfQHszxO1XuFXwCaE
+ Z8SQhF5/ETo1a2VXsw43nk7+kF1xJ3cl8Inc0kn4KbuG4KEekTiLCcmv1+CvSew9yy3E
+ Zb2A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWT53ekzOXEXQCz7Wp37GVHwDTIdYOYmiyeDEiVSW4wptY7Lwc0JyNxNCPvORSBb0r5fPuvPyw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy+q6PCXdYCqXsZsN1Kb3vssNhNZPpWZgqJthDjeqHdVkqnHncT
- rraLFt2tboZNyfEYGd7JHua2HU4dSxygrL7i2wmHFokJa0pu7c1Phh079uRVPkoiB139Qk1uwdH
- OnLopyO8kGwlywj1AkcedNpKHVc0=
-X-Google-Smtp-Source: AGHT+IGB49syxY96wimuSc36fgVB9E5k3foPcJxdmUyF1uugPZZF1XWpIr4F99uQ80C8SreR2YJQNndihgxuXArwO90=
-X-Received: by 2002:ac2:4c46:0:b0:539:968a:91a8 with SMTP id
- 2adb3069b0e04-539e571da42mr2587595e87.47.1728850810069; Sun, 13 Oct 2024
- 13:20:10 -0700 (PDT)
+ AJvYcCWxeepw9cEcjZUWsyOlxpexb5h8OWn6FxgI99j7diheFNLs2pio3Ct4HdG+DzN/VqmuK1XcMlI=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywyl0I/wopudHJ+KqE+VfNOk1tqf/HB0vflDd3Oe8yxnimzU7bz
+ DhDKYV2eBHXAArWpwFEqpPBUqZtqFtxw5Ikvsl1jjmJkcEXjdQhY0t1b8I0e+cDg8NZl3GCfg4Q
+ LAEG0DcJf8vx7/Mkpn92uFOLPp6g=
+X-Google-Smtp-Source: AGHT+IGcKdHd1hQzvcXRa/NZTiCFjemch2+/UATKXoQgfromdlyvs+EDyju2ufxuEBPhniMRBpGBZf90MfaI9blDcKQ=
+X-Received: by 2002:a05:6512:3e24:b0:539:f5b3:f87c with SMTP id
+ 2adb3069b0e04-539f5b3fa51mr538172e87.46.1728850927543; Sun, 13 Oct 2024
+ 13:22:07 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241006001652.14784-1-peng.fan@oss.nxp.com>
-In-Reply-To: <20241006001652.14784-1-peng.fan@oss.nxp.com>
+References: <20240930161006.41052-1-brian.ruley@gehealthcare.com>
+ <20241001135810.96-1-brian.ruley@gehealthcare.com>
+ <20241001135810.96-2-brian.ruley@gehealthcare.com>
+ <CAFLszTgppFmNC2NL+fcE9Zg530oA1Hs3VDpfUK3yOd0swp3UDg@mail.gmail.com>
+In-Reply-To: <CAFLszTgppFmNC2NL+fcE9Zg530oA1Hs3VDpfUK3yOd0swp3UDg@mail.gmail.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Sun, 13 Oct 2024 17:19:57 -0300
-Message-ID: <CAOMZO5DXoeDzBoBzS+k6VKEeumDVDaU+R6k-8UCtOq5N2Lv8+g@mail.gmail.com>
-Subject: Re: [PATCH 1/2] misc: ele_mu: Update ELE MU to get TR/RR number from
- HW
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Cc: sbabic@denx.de, u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- uboot-imx@nxp.com, Ye Li <ye.li@nxp.com>, Alice Guo <alice.guo@nxp.com>, 
- Marek Vasut <marex@denx.de>, Peng Fan <peng.fan@nxp.com>
+Date: Sun, 13 Oct 2024 17:21:56 -0300
+Message-ID: <CAOMZO5DS2hFGORNGqROoou=Bouy57waZkAHRu0W4=32NACL1gw@mail.gmail.com>
+Subject: Re: [PATCH v4 2/2] binman: add fast authentication method for i.MX8M
+ signing
+To: Simon Glass <sjg@chromium.org>
+Cc: Brian Ruley <brian.ruley@gehealthcare.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>,
+ ian.ray@gehealthcare.com, 
+ Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -92,20 +96,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Oct 5, 2024 at 8:13=E2=80=AFPM Peng Fan (OSS) <peng.fan@oss.nxp.com=
-> wrote:
+On Tue, Oct 8, 2024 at 11:17=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
+e:
 >
-> From: Ye Li <ye.li@nxp.com>
+> On Tue, 1 Oct 2024 at 07:58, Brian Ruley <brian.ruley@gehealthcare.com> w=
+rote:
+> >
+> > Using the PKI tree with SRKs as intermediate CA isn't necessary or even
+> > desirable in some situations (boot time, for example). Add the possibil=
+ity
+> > to use the "fast authentication" method where the image and CSF are bot=
+h
+> > signed using the SRK [1, p.63].
+> >
+> > [1] https://community.nxp.com/pwmxy87654/attachments/pwmxy87654/imx-pro=
+cessors/202591/1/CST_UG.pdf
+> >
+> > Signed-off-by: Brian Ruley <brian.ruley@gehealthcare.com>
+> > Cc: Marek Vasut <marex@denx.de>
+
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 >
-> The MU parameter register can provide the TR and RR number.
-> For i.MX95 which has 8 RR is different with i.MX93 and i.MX8ULP,
-> so update the driver to read the PAR for exact TR and RR number.
->
-> Also update compatible string for i.MX95 ELE MU.
->
-> Cc: Alice Guo <alice.guo@nxp.com>
-> Cc: Marek Vasut <marex@denx.de>
-> Reviewed-by: Peng Fan <peng.fan@nxp.com>
-> Signed-off-by: Ye Li <ye.li@nxp.com>
+> (since I am seeing progress on testing, thank you)
 
 Applied both, thanks.
