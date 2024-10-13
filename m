@@ -4,56 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADC0CCF2579
-	for <u-boot@archiver.kernel.org>; Sun, 13 Oct 2024 12:42:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1609ECF2579
+	for <u-boot@archiver.kernel.org>; Sun, 13 Oct 2024 13:25:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E36AA88EB7;
-	Sun, 13 Oct 2024 14:42:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id 3DF6B88ECE;
+	Sun, 13 Oct 2024 15:25:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="sZonhC9k";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cqxk/EoA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EBE4888EAF; Sun, 13 Oct 2024 14:42:20 +0200 (CEST)
-Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7BFD988E8E; Sun, 13 Oct 2024 09:25:19 +0200 (CEST)
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
+ [IPv6:2607:f8b0:4864:20::633])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E92788EB7
- for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 14:42:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CEE9988E6F
+ for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 09:25:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id 668FE1FA30;
- Sun, 13 Oct 2024 14:42:17 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1728823337;
- bh=SL7hPYP4nI36fOj800GBwDJP4zDoqOWUUk6QmJVWcss=; h=From:To:Subject;
- b=sZonhC9kgmRZY8oKuNDmKHgBd9/YL4ybffDU0F+un0/MPJB9x5GHYaiNEAcyUTIFc
- aG+S2QnBjG7ZmgZoMOPkAfiHw+R+vRgIqB0YtACctYshOvvVsUOPOcLij1WLAzRp2X
- E/sriaDqc738i2qxy5RD5ud0xIlvOEv9te2zdD9d0E2qLQ9Ni4fvMEePU44DuH/WuA
- s/TvrZoHZBKtXUgAFnV2OXVQLgL4rP7hCkjQf6UqwTPOnS4IcoIGaqr9MAFtAmZYg2
- KnCMM37RcLfM11q3k/CDGSICnb3txcTLKirbm7oU7bb9n3zUguP304VE08nI8e+022
- hdhmCxYfZX5QA==
-Date: Sun, 13 Oct 2024 14:42:13 +0200
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Heiko Schocher <hs@denx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Fabio Estevam <festevam@denx.de>, Fabio Estevam <festevam@gmail.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, Marek Vasut <marex@denx.de>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Stefano Babic <sbabic@denx.de>, Tim Harvey <tharvey@gateworks.com>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [RFC PATCH v1] dts: imx8mp-u-boot.dtsi align flash.bin
-Message-ID: <20241013124213.GA15299@francesco-nb>
-References: <20241010082831.19983-1-hs@denx.de>
+ spf=pass smtp.mailfrom=jj251510319013@gmail.com
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-20cb7139d9dso10798155ad.1
+ for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 00:25:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1728804315; x=1729409115; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=0JR0YjzByu8Q/5fwD+c6LnqdwrtAZnBeY2CzJ2Q8k9o=;
+ b=cqxk/EoAtrCdj0yxIWKRS/yiGgu0G9SpgYE0z03s69QY5VVhqxeqxtR9jdm4of7auM
+ mymkwi3YDCOUt3syGV4ICpeWrud9qlVr/qOF2lfAY1h3Nmex+hE0KIvn2mDBzaPm8OeJ
+ xmRPSKpLJk6gihdc8cLuq+jEnkU/AMwWAWofbL5/zkZd2X2jfQZKsatvhrwY+Uzp8yzC
+ YWTP+qrDLZDSzGnUdBE2zoO5iH8mf3w9FS3/YUP4xsp9jlIim44adifmrI6yh5r0L5Zj
+ mU0ut7YY/xKF8uXIoeRfQA48Elz+zNSIMgPnBVzqT/ZERxZPa5dWQQkrQiuDZxywij2d
+ ROaA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728804315; x=1729409115;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=0JR0YjzByu8Q/5fwD+c6LnqdwrtAZnBeY2CzJ2Q8k9o=;
+ b=cLpynFNG4TBb5X19EPMaAwpgwskuuybZilCBRvvX4CCDmIGRRsa6QRpw7vqHTpQWeO
+ 3gAbJtstQHRRoNYjp7zUufUhHwiCiD72vNhgbaqb5Xn3JHZQMzWJFkigWX4dvN57eoja
+ jgzlJPAJNje+WcP8DqQR7THEsWOD08U0jTBxMkdv9NKW47tlY/GG6beJOIPOuJzltOzA
+ /VZ8ErxNF4eu7dv67016u/oEik0yTMEAiVXIBhzg+x7VhNZ39GPx5zQzSDJ1RuiibwyA
+ NbJ8uYm6e48cCQ/oNjONhMSce+nSRwHNg+d5fB5lW2dzBCxMvRU5lCNzp9H/Ld0SW1cx
+ IbIA==
+X-Gm-Message-State: AOJu0YxE6SyQqTrqB91TqYyRBiDnXWJB3OMx1C/K+7cFj//3442+MTpI
+ vGBL96PhQ3u8Yt1uan2vNoa1bYjr82qD/CKJhdjcnQd9o08DLfv2YfT4dcVG
+X-Google-Smtp-Source: AGHT+IHcveUJWA62RnsI1cBOS8IktymUOT2oaas4R0o8TZ+7aPRsjm8u1CODfnmlwU0KO+pmLaP1IA==
+X-Received: by 2002:a17:902:f543:b0:20c:c01d:54a8 with SMTP id
+ d9443c01a7336-20cc01d5d28mr40757445ad.16.1728804314918; 
+ Sun, 13 Oct 2024 00:25:14 -0700 (PDT)
+Received: from aristo-b7flip.. ([124.218.37.86])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-20c8c212d19sm46306375ad.191.2024.10.13.00.25.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 13 Oct 2024 00:25:14 -0700 (PDT)
+From: Wei Ming Chen <jj251510319013@gmail.com>
+To: u-boot@lists.denx.de
+Cc: andy.tang@nxp.com, trini@konsulko.com, sjg@chromium.org,
+ Wei Ming Chen <jj251510319013@gmail.com>
+Subject: [PATCH] configs: ls1028a: Fix bootefi issue on Layerscape ls1028ardb
+ platform
+Date: Sun, 13 Oct 2024 15:24:35 +0800
+Message-Id: <20241013072435.1506107-1-jj251510319013@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20241010082831.19983-1-hs@denx.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sun, 13 Oct 2024 15:25:06 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,17 +92,167 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Oct 10, 2024 at 10:28:31AM +0200, Heiko Schocher wrote:
-> trying to load current flash.bin with uuu tool
-> leads in not booting U-Boot as missing some bytes.
-> 
-> Align flash.bin in this case to 0x800 bytes, to
-> make uuu and ROM api happy.
+Without this patch, there will be error indicating that
+"Cannot use 64 bit addresses with SDMA", and the booting
+process will stuck.
 
-Are you sure that the issue is on this? Can you check
-https://github.com/nxp-imx/mfgtools/issues/416 ?  Just sharing something
-related when using UUU on OE generated binaries to confirm you are
-not chasing the wrong issue here.
+please see full boot log below
 
-Francesco
+U-Boot 2022.04-g18185931 (Sep 11 2024 - 13:15:30 +0800)
+
+SoC:  LS1028AE Rev1.0 (0x870b0010)
+Clock Configuration:
+       CPU0(A72):1500 MHz  CPU1(A72):1500 MHz
+       Bus:      400  MHz  DDR:      1600 MT/s
+Reset Configuration Word (RCW):
+       00000000: 3c004010 00000030 00000000 00000000
+       00000010: 00000000 018f0000 0030c000 00000000
+       00000020: 020031a0 00002580 00000000 00003296
+       00000030: 00000000 00000010 00000000 00000000
+       00000040: 00000000 00000000 00000000 00000000
+       00000050: 00000000 00000000 00000000 00000000
+       00000060: 00000000 00000000 200e705a 00000000
+       00000070: bb580000 00000000
+Model: LS1028A RDB Board
+Board: LS1028AE Rev1.0-RDB, Version: C, boot from SD
+FPGA: v8 (RDB)
+SERDES1 Reference : Clock1 = 100.00MHz Clock2 = 100.00MHz
+DRAM:  3.9 GiB
+DDR    3.9 GiB (DDR4, 32-bit, CL=11, ECC on)
+Using SERDES1 Protocol: 47960 (0xbb58)
+PCIe1: pcie@3400000 Root Complex: no link
+PCIe2: pcie@3500000 Root Complex: x1 gen2
+Core:  45 devices, 22 uclasses, devicetree: separate
+WDT:   Started watchdog@c000000 with servicing (60s timeout)
+WDT:   Started watchdog@c010000 with servicing (60s timeout)
+MMC:   FSL_SDHC: 0, FSL_SDHC: 1
+Loading Environment from MMC... *** Warning - bad CRC, using default environment
+
+EEPROM: Invalid ID (ff ff ff ff)
+In:    serial
+Out:   serial
+Err:   serial
+SEC0:  RNG instantiated
+Net:
+Warning: enetc-0 (eth0) using random MAC address - d2:9b:a5:37:7b:b5
+eth0: enetc-0
+Warning: enetc-2 (eth1) using random MAC address - ca:57:11:de:de:cb
+, eth1: enetc-2, eth2: swp0, eth3: swp1, eth4: swp2, eth5: swp3
+Hit any key to stop autoboot:  0
+Trying load HDP firmware from SD..
+switch to partitions #0, OK
+mmc0 is current device
+Device: FSL_SDHC
+Manufacturer ID: 9f
+OEM: 5449
+Name: SD32G
+Bus Speed: 50000000
+Mode: SD High Speed (50MHz)
+Rd Block Len: 512
+SD version 3.0
+High Capacity: Yes
+Capacity: 28.9 GiB
+Bus Width: 4-bit
+Erase Group Size: 512 Bytes
+
+MMC read: dev # 0, block # 18944, count 512 ... 512 blocks read: OK
+Loading hdp firmware from 0x00000000a0000000 offset 0x0000000000002000
+Loading hdp firmware Complete
+switch to partitions #0, OK
+mmc0 is current device
+Scanning mmc 0:1...
+** Unable to read file / **
+Failed to load '/'
+libfdt fdt_check_header(): FDT_ERR_BADMAGIC
+Scanning disk mmc@2140000.blk...
+Scanning disk mmc@2150000.blk...
+Found 7 disks
+ERROR: invalid device tree
+Found EFI removable media binary efi/boot/bootaa64.efi
+981992 bytes read in 44 ms (21.3 MiB/s)
+libfdt fdt_check_header(): FDT_ERR_BADMAGIC
+WARNING could not find node vivante,gc: FDT_ERR_NOTFOUND.
+Booting /efi\boot\bootaa64.efi
+Cannot use 64 bit addresses with SDMA
+Error reading cluster
+** Unable to read file /efi/boot/grubaa64.efi **
+Unexpected return from initial read: Device Error, buffersize 29D790
+Failed to load image ぀￢ : Device Error
+start_image() returned Device Error
+EFI LOAD FAILED: continuing...
+switch to partitions #0, OK
+mmc1(part 0) is current device
+Scanning mmc 1:1...
+** Unable to read file / **
+Failed to load '/'
+libfdt fdt_check_header(): FDT_ERR_BADMAGIC
+BootOrder not defined
+EFI boot manager: Cannot load any image
+Scanning mmc 1:2...
+** Unable to read file / **
+Failed to load '/'
+libfdt fdt_check_header(): FDT_ERR_BADMAGIC
+BootOrder not defined
+EFI boot manager: Cannot load any image
+starting USB...
+Bus usb@3100000: Register 200017f NbrPorts 2
+Starting the controller
+USB XHCI 1.00
+Bus usb@3110000: Register 200017f NbrPorts 2
+Starting the controller
+USB XHCI 1.00
+scanning bus usb@3100000 for devices... 1 USB Device(s) found
+scanning bus usb@3110000 for devices... 1 USB Device(s) found
+       scanning usb for storage devices... 0 Storage Device(s) found
+
+Device 0: unknown device
+Trying load from SD ...
+switch to partitions #0, OK
+mmc0 is current device
+Device: FSL_SDHC
+Manufacturer ID: 9f
+OEM: 5449
+Name: SD32G
+Bus Speed: 50000000
+Mode: SD High Speed (50MHz)
+Rd Block Len: 512
+SD version 3.0
+High Capacity: Yes
+Capacity: 28.9 GiB
+Bus Width: 4-bit
+Erase Group Size: 512 Bytes
+
+MMC read: dev # 0, block # 32768, count 81920 ... 81920 blocks read: OK
+Wrong Image Format for bootm command
+ERROR: can't get kernel image!
+
+Signed-off-by: Wei Ming Chen <jj251510319013@gmail.com>
+---
+ configs/ls1028ardb_tfa_defconfig | 1 +
+ include/configs/ls1028ardb.h     | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/configs/ls1028ardb_tfa_defconfig b/configs/ls1028ardb_tfa_defconfig
+index 17230d0d97..90f22ea3ba 100644
+--- a/configs/ls1028ardb_tfa_defconfig
++++ b/configs/ls1028ardb_tfa_defconfig
+@@ -101,3 +101,4 @@ CONFIG_USB_ETHER_ASIX88179=y
+ CONFIG_USB_ETHER_RTL8152=y
+ CONFIG_WDT=y
+ CONFIG_WDT_SP805=y
++CONFIG_FSL_ESDHC_SUPPORT_ADMA2=y
+diff --git a/include/configs/ls1028ardb.h b/include/configs/ls1028ardb.h
+index d44ce45fd6..9c869ee684 100644
+--- a/include/configs/ls1028ardb.h
++++ b/include/configs/ls1028ardb.h
+@@ -53,6 +53,7 @@
+ #define CFG_EXTRA_ENV_SETTINGS		\
+ 	"board=ls1028ardb\0"			\
+ 	"hwconfig=fsl_ddr:bank_intlv=auto\0"	\
++	"fdtfile=fsl-ls1028a-rdb.dtb\0"         \
+ 	"ramdisk_addr=0x800000\0"		\
+ 	"ramdisk_size=0x2000000\0"		\
+ 	"bootm_size=0x10000000\0"		\
+-- 
+2.34.1
 
