@@ -4,55 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1059CF2579
-	for <u-boot@archiver.kernel.org>; Sun, 13 Oct 2024 17:43:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D4AECF2576
+	for <u-boot@archiver.kernel.org>; Sun, 13 Oct 2024 17:51:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7A0488F1B;
-	Sun, 13 Oct 2024 19:43:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=freemail.hu
+	by phobos.denx.de (Postfix) with ESMTP id A115488EE3;
+	Sun, 13 Oct 2024 19:51:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=freemail.hu header.i=@freemail.hu header.b="ZDT2ryMh";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="t0g0u604";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30D1F88F0C; Sun, 13 Oct 2024 19:43:13 +0200 (CEST)
-Received: from smtp-out.freemail.hu (fmfe11.freemail.hu [46.107.16.204])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D0DE488EE3; Sun, 13 Oct 2024 19:51:54 +0200 (CEST)
+Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
+ [IPv6:2607:f8b0:4864:20::730])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 236F588F1B
- for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 19:43:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BAA548898B
+ for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 19:51:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=freemail.hu
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=egyszeregy@freemail.hu
-Received: from localhost.localdomain
- (catv-178-48-208-49.catv.fixed.vodafone.hu [178.48.208.49])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp.freemail.hu (Postfix) with ESMTPSA id 4XRSPp006Rz72r;
- Sun, 13 Oct 2024 19:43:09 +0200 (CEST)
-From: egyszeregy@freemail.hu
-To: u-boot@lists.denx.de
-Cc: sbabic@denx.de, festevam@gmail.com, peng.fan@nxp.com,
- =?UTF-8?q?Benjamin=20Sz=C5=91ke?= <egyszeregy@freemail.hu>
-Subject: [PATCH] imx9: Improve boot device auto-selection
-Date: Sun, 13 Oct 2024 19:41:20 +0200
-Message-ID: <20241013174120.1872-1-egyszeregy@freemail.hu>
-X-Mailer: git-send-email 2.47.0.windows.1
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x730.google.com with SMTP id
+ af79cd13be357-7afc847094fso290801185a.2
+ for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 10:51:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1728841911; x=1729446711; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=uoenN7vQWQZYSpbSRYfNhRxGDhzjqbG+6v1FrQw6oRM=;
+ b=t0g0u604r0ICTB8y/7giCeM94E2pmlz/jIUPd/ClVDkJnTNxPkXKw9oVD8AsFTY026
+ xGmyTIiVY+mH25Qbt+IoJrlU3/EtaBuahnlUY806Hc2RcUkQQIqkjbo4oknyWjPdMH7u
+ IqyCj9JZjOan76ZOPA00kPT+XIpWCfzBWm3+4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728841911; x=1729446711;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=uoenN7vQWQZYSpbSRYfNhRxGDhzjqbG+6v1FrQw6oRM=;
+ b=EFRtIg6M+cZDuMsNEtaVHBFVTfju4Jr/URCFFr3HoFnR8Ij0iRuLZo+kY3QNqBdsD+
+ cAS6SLBA1uqIjD5/5aBFRl5UmDJvQFdWcsFnvM62yp28pjoTWqesdWCj9sxk6ka1weAR
+ ShVfRrNrJ9wSeW1/5Ex9X3mAPhWo4WVajCEekI0+bHtlQjg3c+BI2V13fJ/1ZTs/SFI/
+ jmGWRgN22UxEA6CEGWqu/0bg7LyifYOupVt/j31pDtCM8+yZSWjBiLZ7U3OeYBfE9P2y
+ Mi99TJ2U+t91/j1cUP/IHQwSFji/Em6+SUhLKQDoAYC2PtXpoTRAId0z0Wo/9+FUmPzP
+ h5hg==
+X-Gm-Message-State: AOJu0YxttCPhX1ekeNwHAsEyUXa6YuT+tyu3AaSxxlUsKmjOcVhXfjos
+ My5cwoStI9E3rCE6q9Z8TJ3+h1RnFH6hS9oMwuT9xSNuLcIGNDr5tdSG+QyiipE=
+X-Google-Smtp-Source: AGHT+IHphtRZs75KNljaqVwLusLmrLb51k9KQfpHlGTaFYiC/kz6z8OP1vsIgHn4qq6o+4BNsA4Zzw==
+X-Received: by 2002:a05:620a:2904:b0:79d:69b5:aaf7 with SMTP id
+ af79cd13be357-7b11a34b985mr1151103885a.11.1728841911539; 
+ Sun, 13 Oct 2024 10:51:51 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b11497d956sm335600785a.124.2024.10.13.10.51.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 13 Oct 2024 10:51:49 -0700 (PDT)
+Date: Sun, 13 Oct 2024 11:51:46 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>, Jonas Karlman <jonas@kwiboo.se>
+Subject: Re: [PATCH v3 02/15] lmb: add a flag to allow suppressing memory map
+ change notification
+Message-ID: <20241013175146.GN14210@bill-the-cat>
+References: <20241013105522.391414-1-sughosh.ganu@linaro.org>
+ <20241013105522.391414-3-sughosh.ganu@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=simple/relaxed; t=1728841390; 
- s=20181004; d=freemail.hu;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding;
- l=1937; bh=oOLLzQwkwjgkVwCKSI7zGossP1eqIjqGxR8QPfiYMzU=;
- b=ZDT2ryMhThoOC/wQCou8zYFhmN/CBKjrZYe9iW47m9NB4c84De4wQc0YyKgcQxd7
- mz6CJZgqS9yioMASrcaKZGRz83rn5cZhj6/gRFYbpqLfaRMjr3VMnt1N7YD8UgIWAGs
- RmZV9ysWcTL/llTWklcPzkz5PgHb7wHe7ZB73wyH5ondMawcHOEiDUEPvjgQoFSP10Q
- eRZxCwhFn0yk5hfzyzBWk5z6uDok8lTRBun2eUAx3BPR17FsV8Uxy8Ex/3/YKYqH9gl
- s5+9/A3x3XYUDbxBK64Axbkknlev5LZO87qc6TCSZ8sctKtJaqUK3I9sxOsS3WBsyqR
- J0G5gBB1fg==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="sOyOJH+eBctaetHK"
+Content-Disposition: inline
+In-Reply-To: <20241013105522.391414-3-sughosh.ganu@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,71 +93,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Benjamin Szőke <egyszeregy@freemail.hu>
 
-Improve "mmcautodetect=yes" boot device auto-selection to able
-to use it if CONFIG_ENV_IS_NOWHERE is enabled for i.MX9 SoC
-and i.MX93 EVK board.
+--sOyOJH+eBctaetHK
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Benjamin Szőke <egyszeregy@freemail.hu>
----
- arch/arm/mach-imx/imx9/soc.c          | 6 +++++-
- board/freescale/imx93_evk/imx93_evk.c | 2 +-
- include/configs/imx93_evk.h           | 6 ++++++
- 3 files changed, 12 insertions(+), 2 deletions(-)
+On Sun, Oct 13, 2024 at 04:25:09PM +0530, Sughosh Ganu wrote:
 
-diff --git a/arch/arm/mach-imx/imx9/soc.c b/arch/arm/mach-imx/imx9/soc.c
-index 7c28fa39e1..79ddbc7241 100644
---- a/arch/arm/mach-imx/imx9/soc.c
-+++ b/arch/arm/mach-imx/imx9/soc.c
-@@ -42,12 +42,16 @@ DECLARE_GLOBAL_DATA_PTR;
- 
- struct rom_api *g_rom_api = (struct rom_api *)0x1980;
- 
--#ifdef CONFIG_ENV_IS_IN_MMC
-+#if CONFIG_IS_ENABLED(ENV_IS_IN_MMC) || CONFIG_IS_ENABLED(ENV_IS_NOWHERE)
- __weak int board_mmc_get_env_dev(int devno)
- {
- 	return devno;
- }
- 
-+#ifndef CONFIG_SYS_MMC_ENV_DEV
-+#define CONFIG_SYS_MMC_ENV_DEV 0
-+#endif
-+
- int mmc_get_env_dev(void)
- {
- 	int ret;
-diff --git a/board/freescale/imx93_evk/imx93_evk.c b/board/freescale/imx93_evk/imx93_evk.c
-index 341831a7d3..c9171df330 100644
---- a/board/freescale/imx93_evk/imx93_evk.c
-+++ b/board/freescale/imx93_evk/imx93_evk.c
-@@ -58,7 +58,7 @@ int board_init(void)
- 
- int board_late_init(void)
- {
--#ifdef CONFIG_ENV_IS_IN_MMC
-+#if CONFIG_IS_ENABLED(ENV_IS_IN_MMC) || CONFIG_IS_ENABLED(ENV_IS_NOWHERE)
- 	board_late_mmc_env_init();
- #endif
- 
-diff --git a/include/configs/imx93_evk.h b/include/configs/imx93_evk.h
-index 53fb8c9b1b..2a9595a261 100644
---- a/include/configs/imx93_evk.h
-+++ b/include/configs/imx93_evk.h
-@@ -27,6 +27,12 @@
- #define BOOTENV
- #endif
- 
-+#if CONFIG_IS_ENABLED(ENV_IS_NOWHERE)
-+#ifndef CONFIG_SYS_MMC_ENV_DEV
-+#define CONFIG_SYS_MMC_ENV_DEV 0
-+#endif
-+#endif
-+
- /* Initial environment variables */
- #define CFG_EXTRA_ENV_SETTINGS		\
- 	BOOTENV \
--- 
-2.47.0.windows.1
+> Add a flag LMB_NONOTIFY that can be passed to the LMB API's for
+> reserving memory. This will then result in no notification being sent
+> from the LMB module for the changes to the LMB's memory map.
+>=20
+> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 
+Can you please elaborate on what we need this flag for, for example what
+the valid situation for it is? We should be updating (or adding comments
+such that updates are automatic..) to doc/api/lmb.rst as well. Thanks.
+
+--=20
+Tom
+
+--sOyOJH+eBctaetHK
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcMCKoACgkQFHw5/5Y0
+tyyrCQv8C59u39Uzf+oBb7cFg1npWJWAJQObksb00aFScfhBnQlpwOVEvGNckElQ
+uZDgxDxItgmWSex78zj5J0YUKaSObxzYkG5x5y3Bj95tY1ZqS8l4l0zcZRJWYQ+e
+rsDa8A2CJjsoQOM7WmvsworWU7hnlSPbAv0Ekg4iP0N8FGuK9ZFoPni8pupnJMCd
+g4riNB1RfL6F26jvbwkEFbTrqevmwi0/NkMqVYE4WWs7jmnd//7Mnz0jlXkU8PIp
+r8tVI2aT9SLsN055ERPDLUkTaymxtw0i1PVOE2k8YY7AZsyFu0RXhECB6YDCid6y
+EFC4ZSCJUs+7VFQWc84o25sIPZ3+08eDf7hSK6yWafDLFF/CU9ESPLDDHlN2US/N
+962lfzcvWtycYb+wO4QHetkNr1yyFeCxViozaRMWMt6R8fxLxVP0KDUwpJGsib4S
+TCyakc0MkYcyQX/LhX56xUgJBnRSx/0aew3kh2cQKeNCmx4VZqbPaCH3w4jJOHGY
+44IDE3vG
+=b0Dc
+-----END PGP SIGNATURE-----
+
+--sOyOJH+eBctaetHK--
