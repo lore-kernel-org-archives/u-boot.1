@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5A42CF2579
-	for <u-boot@archiver.kernel.org>; Sun, 13 Oct 2024 19:24:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD1BFCF2576
+	for <u-boot@archiver.kernel.org>; Sun, 13 Oct 2024 19:24:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA84288FF1;
-	Sun, 13 Oct 2024 21:24:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2F47888FA1;
+	Sun, 13 Oct 2024 21:24:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="mBFzQnJf";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="wNtp2DO+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F40288FC8; Sun, 13 Oct 2024 21:24:35 +0200 (CEST)
+ id 882DE88FFA; Sun, 13 Oct 2024 21:24:37 +0200 (CEST)
 Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64E2988F44
+ by phobos.denx.de (Postfix) with ESMTPS id 6F74788F95
  for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 21:24:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=sntech.de
@@ -31,26 +31,26 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sntech.de;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=fmfWDSvvKTGnSj75LCkdJoUso5I0/SOsRe/GJP2Pl/E=; b=mBFzQnJfRrJ+a+EHy3VrVVkli3
- TgHk6qgCj1BLOfBrFDNwnVjLDw5dhCrwl7ERkgaprsCUubSGWm2eHVemPE4V5gu2NZz5DMvwz5jdo
- YYVgZWirw9rEaxKxp2jbvuCyE4kZTsJXSU/CuqndswysOVvEPrIzYsg7oVrhpSvdQr7gBaNEEQS7G
- cEetVo62IoRdb+9i7IwQ3zqDUTRCaYdt0ECaIM6zxrTJ/iSzLQdfmMPe/QLc1PvNMMTsUCBPpomy0
- SiG+AAnmEP9b745OYejwOFkW7Wr+r7f8q2q4c/nu9nXZzf6QgeLRAkk4q5ZYvaK2KWne0d4uysO/7
- aVqqk4kA==;
+ bh=fbbLeh1+TCS1CW0YLtvWoFwnzXKFZOZJZbv6/6yM00g=; b=wNtp2DO+lon5jEQLcev7CwP34v
+ a+BP+30+jzon5RnMcssx0noMqdtJJGV3jsCjMR+yGB/2Ac267kV1RpiI427+H6iULpW7Zdd/n9v+Y
+ PCTuBQ40WlvCwU9dAwuVRWcIGhD43UULVycOxWer/f83KIl7Yr+ns16tSqSoUVP7Y1Q84ye5N3vje
+ +N6fjFZoEDY/3ved2M7Dl5bZ3Se1WabEEx1yw70eP+sb2J8V9fMl2waY5H7fT/xeyr4w3jQIAJoIB
+ S68kYUQAvfM2n/BB8mxVwXjh/UDJbLWnZE3LxaydIgD9eiMvI4DEtY7YLne1q3p37E6Mq3MBldw4s
+ mTscB5/A==;
 Received: from i53875b34.versanet.de ([83.135.91.52] helo=phil.lan)
  by gloria.sntech.de with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
  (envelope-from <heiko@sntech.de>)
- id 1t04CZ-000129-Fb; Sun, 13 Oct 2024 21:24:27 +0200
+ id 1t04CZ-000129-4s; Sun, 13 Oct 2024 21:24:27 +0200
 From: Heiko Stuebner <heiko@sntech.de>
 To: u-boot@lists.denx.de, kever.yang@rock-chips.com, philipp.tomsich@vrull.eu,
  sjg@chromium.org
 Cc: heiko@sntech.de,
 	ukleinek@debian.org
-Subject: [PATCH v2 02/18] arm64: dts: rockchip: enable second PCIe controller
- on the Qnap-TS433
-Date: Sun, 13 Oct 2024 21:24:08 +0200
-Message-ID: <20241013192424.84280-3-heiko@sntech.de>
+Subject: [PATCH v2 01/18] arm64: dts: rockchip: add PCIe supply regulator to
+ Qnap-TS433
+Date: Sun, 13 Oct 2024 21:24:07 +0200
+Message-ID: <20241013192424.84280-2-heiko@sntech.de>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241013192424.84280-1-heiko@sntech.de>
 References: <20241013192424.84280-1-heiko@sntech.de>
@@ -73,52 +73,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The TS433 uses both pcie controllers for sata and the 2nd network
-interface. Set the needed data-lanes in the pcie3 phy and enable
-the second pcie controller, as well as remove the bifurcation comment.
+Add the vcc3v3-supply regulator and its link to the pcie controllers.
 
 Tested-by: Uwe Kleine-König <ukleinek@debian.org>
 Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-Link: https://lore.kernel.org/r/20240723195538.1133436-3-heiko@sntech.de
+Link: https://lore.kernel.org/r/20240723195538.1133436-2-heiko@sntech.de
 
-[ upstream commit: 0f5f87a1d602a33028522784eb005647fa1b5c11 ]
+[ upstream commit: e0ec6d48226fb3d4df18895b56f0b7a94c0fe474 ]
 
-(cherry picked from commit 7d8f260e65cc84076ec9456954de0f136948a2c8)
+(cherry picked from commit 59939b4343db08fa08098238160007e6ded72be9)
 ---
- dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts | 10 +++++++++-
- 1 file changed, 9 insertions(+), 1 deletion(-)
+ .../src/arm64/rockchip/rk3568-qnap-ts433.dts  | 21 +++++++++++++++++++
+ 1 file changed, 21 insertions(+)
 
 diff --git a/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts b/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts
-index 07b4f095d76..9bf9c3b65ca 100644
+index 6a998166003..07b4f095d76 100644
 --- a/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts
 +++ b/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts
-@@ -78,17 +78,25 @@
- };
- 
- &pcie30phy {
-+	data-lanes = <1 2>;
- 	status = "okay";
- };
- 
- /* Connected to a JMicron AHCI SATA controller */
- &pcie3x1 {
--	/* The downstream dts has: rockchip,bifurcation, XXX: find out what this is about */
- 	reset-gpios = <&gpio0 RK_PC7 GPIO_ACTIVE_HIGH>;
- 	vpcie3v3-supply = <&vcc3v3_pcie>;
- 	status = "okay";
- };
- 
-+/* Connected to the 2.5G NIC for the upper network jack */
-+&pcie3x2 {
-+	num-lanes = <1>;
-+	reset-gpios = <&gpio2 RK_PD6 GPIO_ACTIVE_HIGH>;
-+	vpcie3v3-supply = <&vcc3v3_pcie>;
-+	status = "okay";
-+};
+@@ -12,6 +12,25 @@
+ / {
+ 	model = "Qnap TS-433-4G NAS System 4-Bay";
+ 	compatible = "qnap,ts433", "rockchip,rk3568";
 +
- &sdhci {
- 	bus-width = <8>;
- 	max-frequency = <200000000>;
++	dc_12v: regulator-dc-12v {
++		compatible = "regulator-fixed";
++		regulator-name = "dc_12v";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <12000000>;
++		regulator-max-microvolt = <12000000>;
++	};
++
++	vcc3v3_pcie: regulator-vcc3v3-pcie {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc3v3_pcie";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		enable-active-high;
++		gpios = <&gpio0 RK_PD4 GPIO_ACTIVE_HIGH>;
++		vin-supply = <&dc_12v>;
++	};
+ };
+ 
+ &gmac0 {
+@@ -62,9 +81,11 @@
+ 	status = "okay";
+ };
+ 
++/* Connected to a JMicron AHCI SATA controller */
+ &pcie3x1 {
+ 	/* The downstream dts has: rockchip,bifurcation, XXX: find out what this is about */
+ 	reset-gpios = <&gpio0 RK_PC7 GPIO_ACTIVE_HIGH>;
++	vpcie3v3-supply = <&vcc3v3_pcie>;
+ 	status = "okay";
+ };
+ 
 -- 
 2.45.2
 
