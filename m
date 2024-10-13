@@ -4,46 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D849ACF258E
-	for <u-boot@archiver.kernel.org>; Sun, 13 Oct 2024 21:10:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C5CFCF258E
+	for <u-boot@archiver.kernel.org>; Sun, 13 Oct 2024 21:11:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3ADF589103;
-	Sun, 13 Oct 2024 23:10:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DDB5E89069;
+	Sun, 13 Oct 2024 23:10:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1728853846;
-	bh=3ydDhu+rCssZMUVUSvszG+5v9Ou6HFWHbcRPlq6AScE=;
+	s=phobos-20191101; t=1728853847;
+	bh=k7VEGTX9HYGfi5ox+Iw8znuU+8MeGiTLZvM7roXZto4=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=PPLp5e4H3gyXUIBYql3fcdk8JnoShnCg341WbHg93hGWvJiNMjG5zZ/QG2MocHtkd
-	 z36jojs8Xu51k3x1PzwmnfyP8PZ0LsBt5JU7dglegRQ4/hMxaeVAXW0pF/V5cvudQy
-	 65cRrfFPsPb2Hlr9Ul4363vhh3Lrcze95dlfzhrbh56j2+CC96SW4BJQc7aSDqdZik
-	 jHxXL9iqtsfS+gK8bCFxePj/ziA+CkadxHlCjgn/2+iSPjtTaW7hBxZmAtSL9CQ0Oc
-	 rFZ5eobK15SOjNCkOFygk4J6+WHQv4GaJheu76td5cHNwfMnYF9Cei+AZ8KddVuZoa
-	 lQAZhhmnxnmIA==
+	b=moNelIW4b71rwUStIrJCr7mszXKI5lYMzRuqqOYb803J95GDu9VyZAi9dBdYqeNyP
+	 8J5OESE6iQ5mnxeM+2S6Ea8GaZUR85sg050lARf37qJ6IF3ikoAq8I5t7d0KGLo8Jd
+	 yLV2+cuWbRT5q0tGR/TCyxqGYBeHWcZGmotgGv/3mMdPXft4MbbScU892e1/IsEily
+	 IR0v3lyAztZw9LJ1yZi/AP/NBfFTtc2+16vQarzlfNXcHsFOzWiAWf8Hs4VX6UoPMR
+	 2JlkvtRlf+pof+ca0dvQb3RO5wEpWhyEaNMocwNfOsn4w9jN8Y9/STsq803UiYnn29
+	 hrRXLzJhsW5Dw==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id B8F17890D8;
- Sun, 13 Oct 2024 23:10:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 9C42D890E9;
+ Sun, 13 Oct 2024 23:10:44 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1728853844;
- bh=3ydDhu+rCssZMUVUSvszG+5v9Ou6HFWHbcRPlq6AScE=;
+ s=phobos-20191101; t=1728853845;
+ bh=k7VEGTX9HYGfi5ox+Iw8znuU+8MeGiTLZvM7roXZto4=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=oUvvMtASI12E3+QaIH02xlQU7gRh4d/4nqb9JIsRh6rJhJQQzeETlr2kxmzjIJru6
- WkKU16serfgWbr4LNoWyVqv5DPQ70MtqNk18j21fuuBbDSg8+7laUdYDslqadmBqu2
- CXYpjzhGEycwPTi3uK82GOWfNt/V7UpVHjlHb+MJT/KKjom9Dcvha/Umgmys5Td+eD
- h67l0BuQpeiuClxrkZuO4W6tVGNBHwOsjHRe4iupBgv61k/IWO56zalwNl0LrW36tH
- ht28KD2kDT8tIsmR1ND91HHdipNHMPFuHT4nrgs+SUi7Q5imT+uv6ktJ0OxH59uRUI
- l83sJVMiJ5ZAw==
-Message-ID: <39ec8f6b-3700-4a4d-9403-63be32a9c184@denx.de>
-Date: Sun, 13 Oct 2024 22:37:49 +0200
+ b=uXO45Xv0tCe8YUFYLgOmJ4xccFytszqZd3dSSQh9ClcK/DXLCckfHVw7R7Hbh2W/N
+ DONPIoTWtsLcdF8VVi4DM3m8y+yJU/l4TD4gi+IJHEOCLk8JfiCeTyjYMRVITBlPf6
+ MyiRXMLmp2F4VIz2tBHmSqKAtYi+UZCWMr2w/1V5DjOOqLhvXk107pXusQrN1tvHf+
+ IjjlZuRwW34wxdL8eexwZqt2KCUy8q1JtL7tuE1ghgxxuXMXRIPWRlygtmpTtRXok/
+ BK3/eZmIzkErzip/CgLiMd2Hn7Tn42y0/JE0yXwc+kDd+8tugtTEoEUqKMP/tPE2vq
+ TJyw5qdsh3c8w==
+Message-ID: <31cc8a21-6f40-4218-accc-a633d3b16e67@denx.de>
+Date: Sun, 13 Oct 2024 22:38:02 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 2/3] usb: dwc3: fix dcache flush range calculation
+Subject: Re: [PATCH v4 3/3] usb: dwc3: invalidate dcache on buffer used in
+ interrupt handling
 To: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini
  <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
@@ -51,14 +52,12 @@ To: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini
 Cc: Caleb Connolly <caleb.connolly@linaro.org>, u-boot-qcom@groups.io,
  u-boot@lists.denx.de
 References: <20241011-u-boot-dwc3-gadget-dcache-fixup-v4-0-5f3498d8035b@linaro.org>
- <20241011-u-boot-dwc3-gadget-dcache-fixup-v4-2-5f3498d8035b@linaro.org>
- <2eaba59e-bc6d-4ffc-b4eb-0eebc0b090a9@denx.de>
- <99d3fe30-78c0-4bed-9bbb-299c5058034b@linaro.org>
+ <20241011-u-boot-dwc3-gadget-dcache-fixup-v4-3-5f3498d8035b@linaro.org>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <99d3fe30-78c0-4bed-9bbb-299c5058034b@linaro.org>
+In-Reply-To: <20241011-u-boot-dwc3-gadget-dcache-fixup-v4-3-5f3498d8035b@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,54 +74,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/13/24 6:35 PM, Neil Armstrong wrote:
-> Hi,
+On 10/11/24 4:38 PM, Neil Armstrong wrote:
+> On Qualcomm systems, the setup buffer and even buffers are in
+> a bad state at interrupt handling, so invalidate the dcache lines
+> for the setup_buf and event buffer to make sure we read correct
+> data written by the hardware.
 > 
-> Le 12/10/2024 à 05:37, Marek Vasut a écrit :
->> On 10/11/24 4:38 PM, Neil Armstrong wrote:
->>> The current flush operation will omit doing a flush/invalidate on
->>> the first and last bytes if the base address and size are not aligned
->>> with CACHELINE_SIZE.
->>>
->>> This causes operation failures Qualcomm platforms.
->>>
->>> Take in account the alignment and size of the buffer and also
->>> flush the previous and last cacheline.
->>>
->>> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
->>> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
->>> ---
->>>   drivers/usb/dwc3/io.h | 5 ++++-
->>>   1 file changed, 4 insertions(+), 1 deletion(-)
->>>
->>> diff --git a/drivers/usb/dwc3/io.h b/drivers/usb/dwc3/io.h
->>> index 04791d4c9be..0ede323671b 100644
->>> --- a/drivers/usb/dwc3/io.h
->>> +++ b/drivers/usb/dwc3/io.h
->>> @@ -50,6 +50,9 @@ static inline void dwc3_writel(void __iomem *base, 
->>> u32 offset, u32 value)
->>>   static inline void dwc3_flush_cache(uintptr_t addr, int length)
->>>   {
->>> -    flush_dcache_range(addr, addr + ROUND(length, CACHELINE_SIZE));
->>> +    uintptr_t start_addr = (uintptr_t)addr & ~(CACHELINE_SIZE - 1);
->>> +    uintptr_t end_addr = ALIGN((uintptr_t)addr + length, 
->>> CACHELINE_SIZE);
->>> +
->>> +    flush_dcache_range((unsigned long)start_addr, (unsigned 
->>> long)end_addr);
->>>   }
->>>   #endif /* __DRIVERS_USB_DWC3_IO_H */
->>
->> You likely want a max(CONFIG_SYS_CACHELINE_SIZE, dwc3-buffer- 
->> alignment-requirement) to really correctly align the buffer.
+> This fixes the following error:
+> dwc3-generic-peripheral usb@a600000: UNKNOWN IRQ type -1
+> dwc3-generic-peripheral usb@a600000: UNKNOWN IRQ type 4673109
 > 
-> No this change is related to the system cacheline to properly flush/ 
-> invalidate the data
-> to the system memory, the dwc3 buffer alignment (if there's one) should 
-> be handled
-> when allocating the memory, but here we're using dma_alloc_coherent() which
-> use DMA_MINALIGN.
-
-OK
+> and invalid situation in dwc3_gadget_giveback() because setup_buf content
+> is read at 0s and leads to fatal crash fixed by [1].
+> 
+> [1] https://lore.kernel.org/all/20240528-topic-sm8x50-dwc3-gadget-crash-fix-v1-1-58434ab4b3d3@linaro.org/
+> 
+> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 
 Reviewed-by: Marek Vasut <marex@denx.de>
