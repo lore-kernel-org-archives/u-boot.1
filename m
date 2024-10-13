@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F2F7CF2579
-	for <u-boot@archiver.kernel.org>; Sun, 13 Oct 2024 19:26:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94F12CF2579
+	for <u-boot@archiver.kernel.org>; Sun, 13 Oct 2024 19:26:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 019A889005;
-	Sun, 13 Oct 2024 21:25:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6E25288FB5;
+	Sun, 13 Oct 2024 21:26:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="ajCxsLt4";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="p9cHxMAU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3606E89005; Sun, 13 Oct 2024 21:25:52 +0200 (CEST)
+ id 5079488FA0; Sun, 13 Oct 2024 21:25:57 +0200 (CEST)
 Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DFD1989005
- for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 21:25:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3366C88F44
+ for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 21:25:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=heiko@sntech.de
@@ -31,25 +31,26 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sntech.de;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Onyhz6zwxmGuFZVxwQi+e09RayKJfdqTAnAW/ZeO/yY=; b=ajCxsLt4fhnqAXrOecUmqu7wtl
- nslOo/U862shNzWzmRNG7Dwm5cItOAReqbQBPsBTWYn4D+svSMq/jmJv4rLohtzJaMA4FyLCYhgPO
- NjzjKub6P4FLrQM4sWuAPZdedXCvUPp2SV/Y9rKNFZ1Zd8HhyUhOxSMkEnXe0CmZJ5d7NpcmcZXte
- qLbK1HYXHzj2m5oqtiqOjCPLOwV9nk2l/ItdQIIv2UiOwKc1QHIYfrc7qrhNqjICzcabDs6M+sNQm
- /dzBizlCzSemZ8vKg44AdFwOaQIB4nOVCLUSD+OCelJAQYN9IdJrJc4sHyqV2fUv09981BfcQwj5U
- zoes09mw==;
+ bh=b8bkFxfEg4H9CU5JwXpA+vm+J1EEMir/9zJwBBRJTnM=; b=p9cHxMAU7/qV7aPNWdqP5p0BW+
+ k/d0SRF/kPRPWeZmLqQK5DjqHzTSY4rPK5PWui8kpT35oGJdn9TAe/QYENW2Wb0+NqAZGQISRSUG0
+ b4ZsDBPbVGFjOKAJOH9xoXe2MDtUZs28cVdzGl84Uoqiqw7wCQkk77cq7P/JygejrMrXjOnxuhUcJ
+ k2cVunOGmJwT1d9P9uOa0APmSDC6a1kHb/P1UFukG970T3lzZjOUzqzZLA+onaz9Tbon2At8kzBu2
+ fC3n9WAy6Vf3a1KqFlSXln6HohOXUrKIitseFEFJbxatThEiAVtUpr3qTtCzBOCNxLgdz36Al8HX0
+ LurPbrVg==;
 Received: from i53875b34.versanet.de ([83.135.91.52] helo=phil.lan)
  by gloria.sntech.de with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
  (envelope-from <heiko@sntech.de>)
- id 1t04Cc-000129-49; Sun, 13 Oct 2024 21:24:30 +0200
+ id 1t04Cc-000129-En; Sun, 13 Oct 2024 21:24:30 +0200
 From: Heiko Stuebner <heiko@sntech.de>
 To: u-boot@lists.denx.de, kever.yang@rock-chips.com, philipp.tomsich@vrull.eu,
  sjg@chromium.org
 Cc: heiko@sntech.de,
 	ukleinek@debian.org
-Subject: [PATCH v2 10/18] arm64: dts: rockchip: add gpio-keys to Qnap-TS433
-Date: Sun, 13 Oct 2024 21:24:16 +0200
-Message-ID: <20241013192424.84280-11-heiko@sntech.de>
+Subject: [PATCH v2 11/18] arm64: dts: rockchip: define cpu-supply on the
+ Qnap-TS433
+Date: Sun, 13 Oct 2024 21:24:17 +0200
+Message-ID: <20241013192424.84280-12-heiko@sntech.de>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241013192424.84280-1-heiko@sntech.de>
 References: <20241013192424.84280-1-heiko@sntech.de>
@@ -72,77 +73,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The TS433 has 3 buttons, power and copy in the front as well as a reset
-pinhole button on the back. The power-button is connected to the embedded
-controller while the other two buttons are just gpio connected.
+The TS433 seems to use a silergy,syr827 regulator for the cpu supply.
+At least that is the compatible used in the vendor devicetree, though
+it could very well also be another fan53555 clone.
 
-Add the gpio-keys definition for the two buttons we can handle right now.
+Define the needed regulator node and hook up the cpu-supply to the
+cpu cores.
 
 Tested-by: Uwe Kleine-König <ukleinek@debian.org>
 Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-Link: https://lore.kernel.org/r/20240723195538.1133436-11-heiko@sntech.de
+Link: https://lore.kernel.org/r/20240723195538.1133436-12-heiko@sntech.de
 
-[ upstream commit: 9b682d31b24f1f70b5b4d0618095d46e0722b9d8 ]
+[ upstream commit: 99b36ba910d896bddbb9a190ca686c6d9cd0325f ]
 
-(cherry picked from commit f0b858c751382ee9faf18f9b19b0817c6b50ac1c)
+(cherry picked from commit 2f0afd1a3cbf6f3192dc7a5c496affab718671b3)
 ---
- .../src/arm64/rockchip/rk3568-qnap-ts433.dts  | 29 +++++++++++++++++++
- 1 file changed, 29 insertions(+)
+ .../src/arm64/rockchip/rk3568-qnap-ts433.dts  | 41 +++++++++++++++++++
+ 1 file changed, 41 insertions(+)
 
 diff --git a/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts b/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts
-index 34fc31ea9a3..9f964b6f411 100644
+index 9f964b6f411..4bccefc0537 100644
 --- a/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts
 +++ b/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts
-@@ -6,6 +6,7 @@
- 
- /dts-v1/;
- 
-+#include <dt-bindings/input/input.h>
- #include <dt-bindings/leds/common.h>
- #include <dt-bindings/gpio/gpio.h>
- #include "rk3568.dtsi"
-@@ -24,6 +25,24 @@
- 		stdout-path = "serial2:115200n8";
+@@ -130,6 +130,16 @@
+ 		vin-supply = <&vcc5v0_usb>;
  	};
  
-+	keys {
-+		compatible = "gpio-keys";
-+		pinctrl-0 = <&copy_button_pin>, <&reset_button_pin>;
-+		pinctrl-names = "default";
-+
-+		key-copy {
-+			label = "copy";
-+			gpios = <&gpio0 RK_PB6 GPIO_ACTIVE_LOW>;
-+			linux,code = <KEY_COPY>;
-+		};
-+
-+		key-reset {
-+			label = "reset";
-+			gpios = <&gpio0 RK_PB5 GPIO_ACTIVE_LOW>;
-+			linux,code = <KEY_RESTART>;
-+		};
++	vcc5v0_sys: regulator-vcc5v0-sys {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc5v0_sys";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++		vin-supply = <&dc_12v>;
 +	};
 +
- 	leds {
- 		compatible = "gpio-leds";
- 
-@@ -202,6 +221,16 @@
+ 	vcc5v0_usb: regulator-vcc5v0-usb {
+ 		compatible = "regulator-fixed";
+ 		regulator-name = "vcc5v0_usb";
+@@ -156,6 +166,22 @@
+ 	status = "okay";
  };
  
- &pinctrl {
-+	keys {
-+		copy_button_pin: copy-button-pin {
-+			rockchip,pins = <0 RK_PB6 RK_FUNC_GPIO &pcfg_pull_up>;
-+		};
++&cpu0 {
++	cpu-supply = <&vdd_cpu>;
++};
 +
-+		reset_button_pin: reset-button-pin {
-+			rockchip,pins = <0 RK_PB5 RK_FUNC_GPIO &pcfg_pull_up>;
-+		};
++&cpu1 {
++	cpu-supply = <&vdd_cpu>;
++};
++
++&cpu2 {
++	cpu-supply = <&vdd_cpu>;
++};
++
++&cpu3 {
++	cpu-supply = <&vdd_cpu>;
++};
++
+ &gmac0 {
+ 	assigned-clocks = <&cru SCLK_GMAC0_RX_TX>, <&cru SCLK_GMAC0>;
+ 	assigned-clock-parents = <&cru SCLK_GMAC0_RGMII_SPEED>, <&cru CLK_MAC0_2TOP>;
+@@ -175,12 +201,27 @@
+ };
+ 
+ &i2c0 {
++	status = "okay";
++
+ 	pmic@20 {
+ 		compatible = "rockchip,rk809";
+ 		reg = <0x20>;
+ 		interrupt-parent = <&gpio0>;
+ 		interrupts = <3 IRQ_TYPE_LEVEL_LOW>;
+ 	};
++
++	vdd_cpu: regulator@40 {
++		compatible = "silergy,syr827";
++		reg = <0x40>;
++		fcs,suspend-voltage-selector = <1>;
++		regulator-name = "vdd_cpu";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <712500>;
++		regulator-max-microvolt = <1390000>;
++		regulator-ramp-delay = <2300>;
++		vin-supply = <&vcc5v0_sys>;
 +	};
-+
- 	leds {
- 		hdd1_led_pin: hdd1-led-pin {
- 			rockchip,pins = <1 RK_PD5 RK_FUNC_GPIO &pcfg_pull_up>;
+ };
+ 
+ &i2c1 {
 -- 
 2.45.2
 
