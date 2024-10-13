@@ -4,68 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C1EECF2576
-	for <u-boot@archiver.kernel.org>; Sun, 13 Oct 2024 19:37:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED083CF258D
+	for <u-boot@archiver.kernel.org>; Sun, 13 Oct 2024 20:19:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 94E8188FCF;
-	Sun, 13 Oct 2024 21:37:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 338DC89095;
+	Sun, 13 Oct 2024 22:19:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DDASAVes";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aQfM4vao";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8DB088FEA; Sun, 13 Oct 2024 21:37:19 +0200 (CEST)
-Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
- [IPv6:2607:f8b0:4864:20::82e])
+ id 858368905F; Sun, 13 Oct 2024 22:19:19 +0200 (CEST)
+Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
+ [IPv6:2607:f8b0:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9415988FC7
- for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 21:37:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6218D8906C
+ for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 22:19:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-460371bfda4so30840781cf.2
- for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 12:37:17 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-7e9e38dd5f1so2896779a12.0
+ for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 13:19:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728848236; x=1729453036; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=B00DG3RulDi8u9zhxCklWz7zuy/f9YHRT5Bt9r1ybmA=;
- b=DDASAVesGTyY1LwydBxq8Rs3aPP457M/H5133qwKJ0p6rMC75HI9jgFKbvdonWMItI
- 5gtyRsonhnM/+GNP2nAIP5TqyelqburPkzC5UKFneS8gy7ONvDGiptudRw0USugkJe5Y
- WIHgkw3rP41SIOA2yUUB79q8rJpXtlBiK0Sdo=
+ d=gmail.com; s=20230601; t=1728850755; x=1729455555; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=UIWVji2dH86/RewSpnRau8cc7bmX8Uc171vvqrlcz44=;
+ b=aQfM4vaos8Y9x2dINqgJzkQAHlrAHjerwUlZ2HiAiEvRAhbFGJMD6GxXuMlUEtdvu7
+ wH2d86OsdhFljkezakEGVPYtVl0y7uIGHu5FXUYn/Ro09wg/dbQPsM8dojVpLxwbIJql
+ TJT0TsefZ9plzscJ9aL+VmyBCj774JsnMIZFa6P172DTl8KIbzZhLYTJqUeMOWpgkgeI
+ aODq+5bJpfPHat+FAGb60QTmzlyNPmernnJpAQqnI37sVzjcrAeMlffbHAayP/QiIxki
+ LmDwzkE3iWp7CtGc+flBQWGJufkgpBSJ8+Dk4DfT11SvoIX+kuBjGJ/nNDTLmqNN6lWb
+ ZcUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728848236; x=1729453036;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1728850755; x=1729455555;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=B00DG3RulDi8u9zhxCklWz7zuy/f9YHRT5Bt9r1ybmA=;
- b=PF9ory/17D8W19ZPZIUpqCHG7WxLnvEKyXmXi4oGX12gW2epgNnsWf3IHqIvsfs6gm
- net2JMRHA+pVX8+8RBkPJEvzcRTSreci0nGXDycRQXpCZI7vBKZqXbocyCfRwRIIYa7e
- CYMhoEcS+QcK5lDhlyGFkCqoIXypJLr3qTHdHIZr9/BoQar0Ir4zidAsQgUDTluKBM//
- pY9sWtsRvcLAJdlgCeShN6WGBN2fCfHuQYFSLV/VH/AmXgJJUqsJ6oxftJdv6ALntq+R
- twrERld/PrnopqaJNUQ+X+AgCASNIvSu/DFFapOO9NBV3VxYK7P60baUEdPU6tFgxqoO
- FfJQ==
-X-Gm-Message-State: AOJu0YzoHMD7lhCrRH2k8c2AMFbBK/Nn/JiU3uehbrzFqy5Cbd1aROVn
- FbrnIbzlBwqnaNXY7HIKm47C5oeebBqxwwyzI6rOz0oxapZqrCPSDQ6ITSDe6+7710A2p+e8tk7
- 8n/nmIiQWJ+hj6k4BClN+RLD98+wPbnwmAhByaYsM25P5g9Bhv9TG
-X-Google-Smtp-Source: AGHT+IEkasB5EcvkY4U2EQbkZcENJz+r5dEwkXha3nmkadJxHMAK91YUt4Cvo6RIZza18LEJLx5doJxWx6PvqSMoZlQ=
-X-Received: by 2002:a05:6214:5b82:b0:6cb:d512:e6ea with SMTP id
- 6a1803df08f44-6cbeffff43bmr115985466d6.11.1728848236407; Sun, 13 Oct 2024
- 12:37:16 -0700 (PDT)
+ bh=UIWVji2dH86/RewSpnRau8cc7bmX8Uc171vvqrlcz44=;
+ b=uzDaQJ7eR10015MNMvPN9R+NWZT6fQTmtDM/BfJb0AzDut4kROR9TwKtcQka5tSMKs
+ N+sNO9pHQABCpGCWyQGoEA4FgMxhdHUFuyJHf1nztAMlRdENHHjz/7zE04qAgRlPOEgn
+ NPAWC2tfs1kdv5bxhroXLAtCcSiFbcpeU6uMibWVSC+8Jh/jlfzSaZ7q2UUbzbZFwYrK
+ obgDjSwQbywZDmeVU3UDtx7e0KbOZ478Yal0HS1p8sQDKzqcL11C6tJxruunYI6z4dnl
+ 44Stm3a+ogeaqIzU3NdnBDNpi+i0Ua+6EBBplrV2DWoyd/moLz7MpzO5o5wlO50LTcRN
+ Briw==
+X-Gm-Message-State: AOJu0YwoHHoduIabk/NkFC0WQhjDifNaGJTCuscJxc4EkKS1i+yTC6ea
+ 24aCpDtq3JtcfnYdJlnGO/ZcwsqrCHKRF4yMQVPnQpgH51qH561UmQRbnQ==
+X-Google-Smtp-Source: AGHT+IGpR8dvbEhPujskVVJGRyM1vy0NWRkcTnm88zG58xnSfZtAABrWVotOn0q9wu8S0hLMdaGSyg==
+X-Received: by 2002:a05:6a20:e687:b0:1d8:a2d8:d190 with SMTP id
+ adf61e73a8af0-1d8bcf9f091mr16867593637.39.1728850754811; 
+ Sun, 13 Oct 2024 13:19:14 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:e637:1c13:c5b:d24d])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-71e6550aa07sm751605b3a.49.2024.10.13.13.19.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 13 Oct 2024 13:19:14 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: [GIT PULL] Please pull u-boot-imx-master-20241013
+Date: Sun, 13 Oct 2024 17:19:10 -0300
+Message-Id: <20241013201910.1485853-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20241011102419.12523-1-patrick.rudolph@9elements.com>
- <20241011102419.12523-15-patrick.rudolph@9elements.com>
-In-Reply-To: <20241011102419.12523-15-patrick.rudolph@9elements.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 13 Oct 2024 13:37:04 -0600
-Message-ID: <CAFLszThPjsk6SwicqAXQN7pci4HVhV4RhnMAXDm2iOKMHcJcHw@mail.gmail.com>
-Subject: Re: [PATCH v7 14/37] acpi: Allocate and write ACPI tables
-To: Patrick Rudolph <patrick.rudolph@9elements.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,157 +88,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Patrick,
+Hi Tom,
 
-On Fri, 11 Oct 2024 at 04:34, Patrick Rudolph
-<patrick.rudolph@9elements.com> wrote:
->
-> Allocate memory for ACPI tables in generic acpi code. When ACPI wasn't
-> installed in other places, install the ACPI table using either BLOBLISTs
-> or EFI allocate pages.
->
-> This allows non x86 platforms to boot using ACPI only in case the
-> EFI loader is being used, since EFI is necessary to advertise the location
-> of the ACPI tables in memory.
->
-> TEST: Booted QEMU SBSA (no QFW) using EFI and ACPI only.
->
-> Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> ---
->  lib/acpi/acpi_table.c            | 80 +++++++++++++++++++++++++++++++-
->  test/py/tests/test_event_dump.py |  1 +
->  2 files changed, 80 insertions(+), 1 deletion(-)
->
-> diff --git a/lib/acpi/acpi_table.c b/lib/acpi/acpi_table.c
-> index d6357bdc4d..d8112e58ca 100644
-> --- a/lib/acpi/acpi_table.c
-> +++ b/lib/acpi/acpi_table.c
-> @@ -5,8 +5,11 @@
->   * Copyright 2019 Google LLC
->   */
->
-> -#include <dm.h>
-> +#include <bloblist.h>
->  #include <cpu.h>
-> +#include <dm.h>
-> +#include <efi_api.h>
-> +#include <efi_loader.h>
->  #include <log.h>
->  #include <mapmem.h>
->  #include <tables_csum.h>
-> @@ -16,6 +19,14 @@
->  #include <acpi/acpi_device.h>
->  #include <asm/global_data.h>
->  #include <dm/acpi.h>
-> +#include <linux/sizes.h>
-> +#include <linux/log2.h>
-> +
-> +enum {
-> +       TABLE_SIZE      = SZ_64K,
-> +};
-> +
-> +DECLARE_GLOBAL_DATA_PTR;
->
->  /*
->   * OEM_REVISION is 32-bit unsigned number. It should be increased only when
-> @@ -752,3 +763,70 @@ static int acpi_write_iort(struct acpi_ctx *ctx, const struct acpi_writer *entry
->  }
->
->  ACPI_WRITER(5iort, "IORT", acpi_write_iort, 0);
-> +
-> +/*
-> + * Allocate memory for ACPI tables and write ACPI tables to the
-> + * allocated buffer.
-> + *
-> + * Return:     status code
-> + */
-> +static int alloc_write_acpi_tables(void)
-> +{
-> +       u64 table_addr, table_end;
-> +       u64 new_acpi_addr = 0;
-> +       efi_uintn_t pages;
-> +       efi_status_t ret;
-> +       void *addr;
-> +
-> +       if (IS_ENABLED(CONFIG_X86) ||
-> +           IS_ENABLED(CONFIG_QFW_ACPI) ||
-> +           IS_ENABLED(CONFIG_SANDBOX)) {
-> +               log_debug("Skipping writing ACPI tables as already done\n");
-> +               return 0;
-> +       }
-> +
-> +       /* Align the table to a 4KB boundary to keep EFI happy */
-> +       if (IS_ENABLED(CONFIG_BLOBLIST_TABLES)) {
-> +               addr = bloblist_add(BLOBLISTT_ACPI_TABLES, TABLE_SIZE,
-> +                                   ilog2(SZ_4K));
-> +
-> +               if (!addr)
-> +                       return log_msg_ret("mem", -ENOMEM);
-> +       } else if (IS_ENABLED(CONFIG_EFI_LOADER)) {
-> +               pages = efi_size_in_pages(TABLE_SIZE);
-> +
-> +               ret = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES,
-> +                                        EFI_ACPI_RECLAIM_MEMORY,
-> +                                        pages, &new_acpi_addr);
-> +               if (ret != EFI_SUCCESS)
-> +                       return log_msg_ret("mem", -ENOMEM);
-> +
-> +               addr = (void *)(uintptr_t)new_acpi_addr;
+Please pull from u-boot-imx/master, thanks.
 
-Please remove the else () part, as discussed before. We don't need it
-as the bloblist is always used. We don't want it since EFI is not in
-chanre of creating the tables. It also duplicates code in efi_acpi.c
-which creates the mapping. You just need to set the table start and
-end:
+The following changes since commit 47e544f576699ca4630e20448db6a05178960697:
 
-gd->arch.table_start = addr;
-gd->arch.table_size = TABLE_SIZE;
+  Merge patch series "Tidy up use of 'SPL' and CONFIG_SPL_BUILD" (2024-10-11 12:23:25 -0600)
 
-> +       } else {
-> +               return log_msg_ret("mem", -ENOMEM);
-> +       }
-> +
-> +       table_addr = virt_to_phys(addr);
-> +
-> +       gd->arch.table_start_high = table_addr;
-> +
-> +       table_end = write_acpi_tables(table_addr);
-> +       if (!table_end) {
-> +               log_err("Can't create ACPI configuration table\n");
-> +               return -EINTR;
-> +       }
-> +
-> +       log_debug("- wrote 'acpi' to %llx, end %llx\n", table_addr, table_end);
-> +       if (table_end - table_addr > TABLE_SIZE) {
-> +               log_err("Out of space for configuration tables: need %llx, have %x\n",
-> +                       table_end - table_addr, TABLE_SIZE);
-> +               return log_msg_ret("acpi", -ENOSPC);
-> +       }
-> +       gd->arch.table_end_high = table_end;
-> +
-> +       log_debug("- done writing tables\n");
-> +
-> +       return 0;
-> +}
-> +
-> +EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, alloc_write_acpi_tables);
-> diff --git a/test/py/tests/test_event_dump.py b/test/py/tests/test_event_dump.py
-> index e282c67335..45143c1c7d 100644
-> --- a/test/py/tests/test_event_dump.py
-> +++ b/test/py/tests/test_event_dump.py
-> @@ -18,6 +18,7 @@ def test_event_dump(u_boot_console):
->  --------------------  ------------------------------  ------------------------------
->  EVT_FT_FIXUP          bootmeth_vbe_ft_fixup           .*boot/vbe_request.c:.*
->  EVT_FT_FIXUP          bootmeth_vbe_simple_ft_fixup    .*boot/vbe_simple_os.c:.*
-> +EVT_LAST_STAGE_INIT   alloc_write_acpi_tables         .*lib/acpi/acpi_table.c:.*
->  EVT_LAST_STAGE_INIT   install_smbios_table            .*lib/efi_loader/efi_smbios.c:.*
->  EVT_MISC_INIT_F       sandbox_early_getopt_check      .*arch/sandbox/cpu/start.c:.*
->  EVT_TEST              h_adder_simple                  .*test/common/event.c:'''
-> --
-> 2.46.2
->
+are available in the Git repository at:
 
-Regards,
-Simon
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20241013
+
+for you to fetch changes up to 19c0e50a6951b22cfe175986cc54bbbd2e85f30b:
+
+  clk: imx8mp: Add i.MX8MP Dummy clk (2024-10-13 09:46:05 -0300)
+
+u-boot-imx-master-20241013
+------------------------
+
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/22644
+
+- Add fast authentication method for i.MX8M signing.
+- Migrate imx8mp-debix-model-a to OF_UPSTREAM.
+- Update MAINTAINERS file globs for i.MX6/i.MX8MP DHSOM.
+- Improve ELE driver.
+- Add i.MX8MP Dummy clk to fix regression.
+----------------------------------------------------------------
+Brian Ruley (2):
+      binman: cosmetic: refactor `nxp_imx8mcst' etype code
+      binman: add fast authentication method for i.MX8M signing
+
+Gilles Talis (1):
+      arm64: imx: imx8mp-debix-model-a: Migrate to OF_UPSTREAM
+
+Marek Vasut (2):
+      ARM: imx: Update MAINTAINERS file globs for i.MX6 DHSOM
+      ARM: imx: Update MAINTAINERS file globs for i.MX8MP DHSOM
+
+Peng Fan (4):
+      misc: ele_mu: Clear RR when initialize MU
+      misc: ele_api: Update ELE read common fuse API
+      imx8: Correct the SCU API return value check
+      clk: imx8mp: Add i.MX8MP Dummy clk
+
+Ye Li (4):
+      misc: ele_mu: Update ELE MU to get TR/RR number from HW
+      misc: ele_api: Add read/write shadow fuse APIs
+      misc: fuse: Fix FSB redundancy fuse word check and clear res
+      misc: fuse: Update fuse driver
+
+ arch/arm/dts/Makefile                         |   1 -
+ arch/arm/dts/imx8mp-debix-model-a-u-boot.dtsi |  16 +-
+ arch/arm/dts/imx8mp-debix-model-a.dts         | 507 --------------------------
+ arch/arm/include/asm/mach-imx/ele_api.h       |   4 +
+ arch/arm/mach-imx/imx8/ahab.c                 |   8 +-
+ arch/arm/mach-imx/imx8/cpu.c                  |  35 +-
+ arch/arm/mach-imx/imx8m/Kconfig               |   1 +
+ board/dhelectronics/dh_imx6/MAINTAINERS       |   5 +-
+ board/dhelectronics/dh_imx8mp/MAINTAINERS     |   6 +-
+ configs/imx8mp_debix_model_a_defconfig        |   2 +-
+ drivers/clk/imx/clk-imx8mp.c                  |   2 +
+ drivers/misc/imx_ele/ele_api.c                |  79 +++-
+ drivers/misc/imx_ele/ele_mu.c                 |  36 +-
+ drivers/misc/imx_ele/fuse.c                   | 111 ++++--
+ tools/binman/etype/nxp_imx8mcst.py            |  54 ++-
+ 15 files changed, 267 insertions(+), 600 deletions(-)
+ delete mode 100644 arch/arm/dts/imx8mp-debix-model-a.dts
