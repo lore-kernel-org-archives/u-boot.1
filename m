@@ -4,67 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3ED8CF258E
-	for <u-boot@archiver.kernel.org>; Sun, 13 Oct 2024 22:51:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7FCFCF2591
+	for <u-boot@archiver.kernel.org>; Sun, 13 Oct 2024 23:46:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 179E488FDE;
-	Mon, 14 Oct 2024 00:51:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id DCD8B88FD8;
+	Mon, 14 Oct 2024 01:46:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="wsfX4FKU";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="VgVYfvqE";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 57BF089069; Mon, 14 Oct 2024 00:51:41 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0638288EAE
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 00:51:38 +0200 (CEST)
+ id DA9C089030; Mon, 14 Oct 2024 01:46:27 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 3CEF288FB3
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 01:46:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4XRbFk52vLz9sX2;
- Mon, 14 Oct 2024 00:51:38 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1728859898;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=4M5dSdyuqDPn6p4vD9RGjrfSjTS24PYxder4u7WCOpE=;
- b=wsfX4FKUxuWxNMNtppfGvEF/dZHfn+fAthwS0AnQLsJIkHor5RvqfyfgdksJzIADdAXyq1
- p07ikx9FaMFk1VknOHAkJiBsRpMrrYYc6w2gGX0tKfcfpeTyUWWDENCPY4+/CWYcKOu4U9
- aQTk36F3FZfMXNNYyF7/bei/Hg1+RzrgD4MS9Iuns7wiskgqYQ0mxjZMax9k3/Y7j9VKlN
- VI2l+K4dFzxjvq4APV9nY9Ps3KHz+IOfxwourJTKBhQ3jsXH0ek2pjnIux9iiGibFW8nDL
- 0o9NP+NhvTOB2j9WPfU15MIRfYoji2p/szN9AaKVpqDTjr4VX3Sc8ByAl91GDQ==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1728859896;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=4M5dSdyuqDPn6p4vD9RGjrfSjTS24PYxder4u7WCOpE=;
- b=VgVYfvqE8LQHO5KKDQueHX9CvWLyqufU4CW3kmOO9LuXktYN+JS+FvSZ9YMd4AR4cddo4G
- 5F9kSX+q6ZxnBPCsoTPRrZ6fO+gJDUew2gW1KHjLPRwok+PGTbvx5Ph2rnNWvyt0mTIN89
- uOcAafe1rejNywiwkI7uYEdJTMB//TNSPqeufFVAFdjziQGMQREiuPdCXwkThaSYjEMsAu
- AxiYh22q8Fr3YRQCetVeMQlmzDimTgLDlHoxcNFpa6C6EDixHj+tMzUyZKcpwRq81tm1Tq
- 1K9HC3RP+rcAr+Zix60jlDR1DAppS0sG5eUD6umcK1+kkCUjD9704qUceGl2LQ==
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PULL] u-boot-sh/master
-Date: Mon, 14 Oct 2024 00:51:07 +0200
-Message-ID: <20241013225123.427552-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3A099DA7;
+ Sun, 13 Oct 2024 16:46:53 -0700 (PDT)
+Received: from localhost.localdomain (usa-sjc-mx-foss1.foss.arm.com
+ [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B36F73F58B;
+ Sun, 13 Oct 2024 16:46:22 -0700 (PDT)
+From: Andre Przywara <andre.przywara@arm.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Chris Morgan <macromorgan@hotmail.com>, u-boot@lists.denx.de,
+ linux-sunxi@lists.linux.dev
+Subject: Pull request: u-boot-sunxi/master for 2025.01
+Date: Mon, 14 Oct 2024 00:45:31 +0100
+Message-ID: <20241013234531.9990-1-andre.przywara@arm.com>
+X-Mailer: git-send-email 2.46.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: ce8658e1c0216c91efc
-X-MBO-RS-META: 437tp7o9tpy4r4s6yeu8twxki51ixxz8
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,33 +54,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following changes since commit 47e544f576699ca4630e20448db6a05178960697:
+Hi Tom,
 
-  Merge patch series "Tidy up use of 'SPL' and CONFIG_SPL_BUILD" (2024-10-11 12:23:25 -0600)
+please pull the first sunxi changes for this cycle:
+
+This switches all boards with the Allwinner H616/H618/H313/H700 SoCs over to
+use OF_UPSTREAM. We are doing it for this SoC family only since the DTs
+between the U-Boot and the kernel repo are exactly identical, whereas other
+families have one compatibility fix in U-Boot to allow booting older kernels.
+Other will follow if this plays out well.
+
+The biggest chunk otherwise is adding support for an Anbernic game console,
+using the H700 SoC. For that we need to enhance the DRAM support code, and
+pick two DT commits from the mainline kernel/DT rebasing repo, followed
+by the defconfig patch.
+
+On top of that two small fixes for the old Allwinner A80.
+
+Gitlab CI passed, and I booted that briefly on some boards, including an
+H616 and an H618 one (with LPDDR4).
+
+Thanks,
+Andre
+
+===========================================================
+The following changes since commit f8efc68b30e29360f7a419fe4968432179d7368b:
+
+  Merge patch series "spi-nor: Add parallel and stacked memories support" (2024-10-09 09:02:22 -0600)
 
 are available in the Git repository at:
 
-  https://source.denx.de/u-boot/custodians/u-boot-sh.git master
+  https://source.denx.de/u-boot/custodians/u-boot-sunxi.git master
 
-for you to fetch changes up to edcb15c583bf259bc27db1e7073fc79784be8bf7:
+for you to fetch changes up to 2f7ab49644ed38b6e3fe5eb6cd3f7e3f683fc6a7:
 
-  clk: renesas: Synchronize R-Car R8A779H0 V4M clock tables with Linux 6.10.9 (2024-10-13 23:21:26 +0200)
+  sunxi: Add support for Anbernic RG35XX-2024 (2024-10-10 00:43:51 +0100)
 
 ----------------------------------------------------------------
-Marek Vasut (7):
-      sh: cache: Fill in invalidate_icache_all()
-      pinctrl: renesas: Synchronize R-Car R8A779G0 V4H PFC tables with Linux 6.10.9
-      pinctrl: renesas: Synchronize R-Car R8A779H0 V4M PFC tables with Linux 6.10.9
-      clk: renesas: Synchronize R-Car R8A779A0 V3U clock tables with Linux 6.10.9
-      clk: renesas: Synchronize R-Car R8A779F0 S4 clock tables with Linux 6.10.9
-      clk: renesas: Synchronize R-Car R8A779G0 V4H clock tables with Linux 6.10.9
-      clk: renesas: Synchronize R-Car R8A779H0 V4M clock tables with Linux 6.10.9
+Andre Przywara (3):
+      sunxi: H616: switch to OF_UPSTREAM
+      clk: sunxi: a80: Fix reset description
+      sunxi: power: axp809: Fix DCDC4 programming
 
- arch/sh/cpu/sh4/cache.c                 |  11 +-
- drivers/clk/renesas/r8a779a0-cpg-mssr.c |  31 +-
- drivers/clk/renesas/r8a779f0-cpg-mssr.c |  12 +-
- drivers/clk/renesas/r8a779g0-cpg-mssr.c |  18 +-
- drivers/clk/renesas/r8a779h0-cpg-mssr.c |  64 ++-
- drivers/pinctrl/renesas/pfc-r8a779g0.c  | 830 ++++++++++++++++++--------------
- drivers/pinctrl/renesas/pfc-r8a779h0.c  | 219 +++++++--
- 7 files changed, 755 insertions(+), 430 deletions(-)
+Chris Morgan (4):
+      sunxi: H616: DRAM: Add alternative pin mapping
+      arm64: dts: allwinner: h616: Change RG35XX Series from r_rsb to r_i2c
+      arm64: dts: allwinner: h616: Add r_i2c pinctrl nodes
+      sunxi: Add support for Anbernic RG35XX-2024
+
+Jernej Skrabec (4):
+      sunxi: H616: dram: LPDDR4: adjust settings
+      sunxi: H616: DRAM: Adjust configuration procedure
+      sunxi: H616: DRAM: Adjust size scan procedure
+      sunxi: H616: dram: Update mbus priorities
+
+ arch/arm/dts/Makefile                              |   7 -
+ arch/arm/dts/sun50i-h313-tanix-tx1.dts             | 183 ----
+ arch/arm/dts/sun50i-h616-bigtreetech-cb1-manta.dts |  35 -
+ arch/arm/dts/sun50i-h616-bigtreetech-cb1.dtsi      | 143 ----
+ arch/arm/dts/sun50i-h616-bigtreetech-pi.dts        |  63 --
+ arch/arm/dts/sun50i-h616-cpu-opp.dtsi              | 115 ---
+ arch/arm/dts/sun50i-h616-orangepi-zero.dtsi        | 131 ---
+ arch/arm/dts/sun50i-h616-orangepi-zero2.dts        | 145 ----
+ arch/arm/dts/sun50i-h616-x96-mate.dts              | 207 -----
+ arch/arm/dts/sun50i-h616.dtsi                      | 930 ---------------------
+ arch/arm/dts/sun50i-h618-longan-module-3h.dtsi     |  80 --
+ arch/arm/dts/sun50i-h618-longanpi-3h.dts           | 144 ----
+ arch/arm/dts/sun50i-h618-orangepi-zero2w.dts       | 181 ----
+ arch/arm/dts/sun50i-h618-orangepi-zero3.dts        | 101 ---
+ arch/arm/dts/sun50i-h618-transpeed-8k618-t.dts     | 189 -----
+ arch/arm/dts/sun50i-h700-anbernic-rg35xx-2024.dts  | 327 --------
+ arch/arm/dts/sun50i-h700-anbernic-rg35xx-h.dts     |  36 -
+ arch/arm/dts/sun50i-h700-anbernic-rg35xx-plus.dts  |  53 --
+ arch/arm/mach-sunxi/Kconfig                        |  18 +
+ arch/arm/mach-sunxi/dram_sun50i_h616.c             | 137 ++-
+ .../arm/mach-sunxi/dram_timings/h616_lpddr4_2133.c |   2 +-
+ board/sunxi/MAINTAINERS                            |   5 +
+ configs/anbernic_rg35xx_h700_defconfig             |  27 +
+ configs/orangepi_zero2_defconfig                   |   2 +-
+ configs/orangepi_zero2w_defconfig                  |   2 +-
+ configs/orangepi_zero3_defconfig                   |   2 +-
+ configs/tanix_tx1_defconfig                        |   2 +-
+ configs/transpeed-8k618-t_defconfig                |   2 +-
+ configs/x96_mate_defconfig                         |   2 +-
+ drivers/clk/sunxi/clk_a80.c                        |   8 +-
+ drivers/power/axp809.c                             |   2 +-
+ dts/upstream/src/arm64/allwinner/sun50i-h616.dtsi  |   2 +
+ .../allwinner/sun50i-h700-anbernic-rg35xx-2024.dts |   6 +-
+ include/dt-bindings/clock/sun50i-h616-ccu.h        | 116 ---
+ include/dt-bindings/reset/sun50i-h616-ccu.h        |  70 --
+ 35 files changed, 159 insertions(+), 3316 deletions(-)
+ delete mode 100644 arch/arm/dts/sun50i-h313-tanix-tx1.dts
+ delete mode 100644 arch/arm/dts/sun50i-h616-bigtreetech-cb1-manta.dts
+ delete mode 100644 arch/arm/dts/sun50i-h616-bigtreetech-cb1.dtsi
+ delete mode 100644 arch/arm/dts/sun50i-h616-bigtreetech-pi.dts
+ delete mode 100644 arch/arm/dts/sun50i-h616-cpu-opp.dtsi
+ delete mode 100644 arch/arm/dts/sun50i-h616-orangepi-zero.dtsi
+ delete mode 100644 arch/arm/dts/sun50i-h616-orangepi-zero2.dts
+ delete mode 100644 arch/arm/dts/sun50i-h616-x96-mate.dts
+ delete mode 100644 arch/arm/dts/sun50i-h616.dtsi
+ delete mode 100644 arch/arm/dts/sun50i-h618-longan-module-3h.dtsi
+ delete mode 100644 arch/arm/dts/sun50i-h618-longanpi-3h.dts
+ delete mode 100644 arch/arm/dts/sun50i-h618-orangepi-zero2w.dts
+ delete mode 100644 arch/arm/dts/sun50i-h618-orangepi-zero3.dts
+ delete mode 100644 arch/arm/dts/sun50i-h618-transpeed-8k618-t.dts
+ delete mode 100644 arch/arm/dts/sun50i-h700-anbernic-rg35xx-2024.dts
+ delete mode 100644 arch/arm/dts/sun50i-h700-anbernic-rg35xx-h.dts
+ delete mode 100644 arch/arm/dts/sun50i-h700-anbernic-rg35xx-plus.dts
+ create mode 100644 configs/anbernic_rg35xx_h700_defconfig
+ delete mode 100644 include/dt-bindings/clock/sun50i-h616-ccu.h
+ delete mode 100644 include/dt-bindings/reset/sun50i-h616-ccu.h
