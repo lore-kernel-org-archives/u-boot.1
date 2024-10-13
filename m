@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BC94CF2576
-	for <u-boot@archiver.kernel.org>; Sun, 13 Oct 2024 19:27:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5226ECF2579
+	for <u-boot@archiver.kernel.org>; Sun, 13 Oct 2024 19:27:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8938D890CA;
-	Sun, 13 Oct 2024 21:26:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E1CB088FFD;
+	Sun, 13 Oct 2024 21:26:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="nVBCNgdO";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="DKhRXsX8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 10192890C2; Sun, 13 Oct 2024 21:26:25 +0200 (CEST)
+ id 303BB89089; Sun, 13 Oct 2024 21:26:35 +0200 (CEST)
 Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E9BB088FA1
- for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 21:26:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DDF1B89093
+ for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 21:26:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=heiko@sntech.de
@@ -31,26 +31,26 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sntech.de;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4e2MAMQHF2yPvTu4ay8Lo1CpHqR8MhEC1jyh9YVObdM=; b=nVBCNgdOi/Ak8bXSFv3fhXp3D/
- Ss/IzzzWB+TbYOWbBYmjfj9EUT3RUVvScluVvjQOpZhMj6BovbtUgPUIc/iAbP1hq1EKlS4MCNW8W
- hV0WPeAItM8yeZhrc+30kBLcET6rNHoU8yjCKRNPYRNRvqx/n3IqI6aBQuBnidaF2Vy8iHijXEJUG
- g32soF+xLOnYOsGOdj6etnhWXiskV1EWH+/s0rY/HyKkJ47Mk15kEgqszyLDW6KMyKKushoU1HMBC
- ycfiK/i3U+BXrRTKbHUB0zhTXMK2QRFh7t1TB0JGerSPh4BxBBN8llNSsiGmHEXrrvs+lGRqoTCeg
- F+0zcsng==;
+ bh=oJ8k1ncuQCf0nm2tlnRWCA7CiBmEfst7McyhR/EMgRQ=; b=DKhRXsX8WWplGwhJOktnoTdZ92
+ kRRnlWWBp0LhQFDHkbE0t4Mn0hPksqkd6VoEs1r6ekpR5TuMfR+VszAvpclKo6i1yIMsIS2xVesdO
+ BTwr0c/apS/CCUCnMDxJaoU05IyY2IQNCtR0UJE87Cw5Sz0PEeZ4GMCzRmbX8XT+6/REZNs/WDvGY
+ XfJhNdoQrMj1rftZV1Y2LYGGP2a0dpYN1cq///fhQNgR/dvYEMHLsH763/fIXjxyhvWHbQvI4Jf5t
+ 9vgMqV0LRT8+WdcSFxSfMWksb1uT5vhK7Jk5gdPRrTgoTQx5pbKC1f8TzC0guo+8WTGftrLLc7f7E
+ ZqYt6CHQ==;
 Received: from i53875b34.versanet.de ([83.135.91.52] helo=phil.lan)
  by gloria.sntech.de with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
  (envelope-from <heiko@sntech.de>)
- id 1t04Ce-000129-4a; Sun, 13 Oct 2024 21:24:32 +0200
+ id 1t04Ce-000129-FG; Sun, 13 Oct 2024 21:24:32 +0200
 From: Heiko Stuebner <heiko@sntech.de>
 To: u-boot@lists.denx.de, kever.yang@rock-chips.com, philipp.tomsich@vrull.eu,
  sjg@chromium.org
 Cc: heiko@sntech.de,
 	ukleinek@debian.org
-Subject: [PATCH v2 16/18] arm64: dts: rockchip: actually enable pmu-io-domains
- on qnap-ts433
-Date: Sun, 13 Oct 2024 21:24:22 +0200
-Message-ID: <20241013192424.84280-17-heiko@sntech.de>
+Subject: [PATCH v2 17/18] arm64: dts: rockchip: add product-data eeproms to
+ QNAP TS433
+Date: Sun, 13 Oct 2024 21:24:23 +0200
+Message-ID: <20241013192424.84280-18-heiko@sntech.de>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241013192424.84280-1-heiko@sntech.de>
 References: <20241013192424.84280-1-heiko@sntech.de>
@@ -72,34 +72,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Contrary to the vendor-kernel the pmu-io-domains are not enabled by
-default. This resulted in the value not being set according to the
-regulator, which in turn made the gmac0 interface that is connected
-to the vccio4 supply inoperable.
+The device contains two i2c-connected eeproms holding some product-
+specific values. One sitting on the mainboard and one on the statically
+connected backplane.
 
-Fixes: 64b7f16fb394 ("arm64: dts: rockchip: add 2 pmu_io_domain supplies for Qnap-TS433")
+While the eeprom chips themself have a size of 512 byte, the eeprom data
+only uses 256 byte each, probably to stay compatible with other models.
+
 Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-Link: https://lore.kernel.org/r/20240805162052.3345768-1-heiko@sntech.de
+Link: https://lore.kernel.org/r/20240810211438.286441-3-heiko@sntech.de
 
-[ upstream commit: 40cc4257169712f0ae3835820a4c5afbdd1a16ff ]
+[ upstream commit: da6f4130234448122fe3e66c8116f7d9eea8a5c7 ]
 
-(cherry picked from commit f509fcb1fb82117e551b489592ac5714a6c5cd8d)
+(cherry picked from commit 0b3109708caf5002ba188ae28eae9ce46b2c39b4)
 ---
- dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts | 1 +
- 1 file changed, 1 insertion(+)
+ .../src/arm64/rockchip/rk3568-qnap-ts433.dts  | 20 +++++++++++++++++++
+ 1 file changed, 20 insertions(+)
 
 diff --git a/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts b/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts
-index 20e4fa6c185..90d8d526629 100644
+index 90d8d526629..e601d9271ba 100644
 --- a/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts
 +++ b/dts/upstream/src/arm64/rockchip/rk3568-qnap-ts433.dts
-@@ -532,6 +532,7 @@
- &pmu_io_domains {
- 	vccio4-supply = <&vcc_1v8>;
- 	vccio6-supply = <&vcc_1v8>;
-+	status = "okay";
+@@ -454,6 +454,26 @@
+ 		reg = <0x51>;
+ 		wakeup-source;
+ 	};
++
++	/* eeprom for vital-product-data on the mainboard */
++	eeprom@54 {
++		compatible = "giantec,gt24c04a", "atmel,24c04";
++		reg = <0x54>;
++		label = "VPD_MB";
++		num-addresses = <2>;
++		pagesize = <16>;
++		read-only;
++	};
++
++	/* eeprom for vital-product-data on the backplane */
++	eeprom@56 {
++		compatible = "giantec,gt24c04a", "atmel,24c04";
++		reg = <0x56>;
++		label = "VPD_BP";
++		num-addresses = <2>;
++		pagesize = <16>;
++		read-only;
++	};
  };
  
- &sata1 {
+ &mdio0 {
 -- 
 2.45.2
 
