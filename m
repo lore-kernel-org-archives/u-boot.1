@@ -4,81 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 164F6CF259D
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 02:46:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8680CCF259D
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 02:46:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8501488ED5;
-	Mon, 14 Oct 2024 04:44:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1A50D88EE3;
+	Mon, 14 Oct 2024 04:44:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=holbrook.no
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MDvrO/2p";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=holbrook.no header.i=@holbrook.no header.b="XCJl+XGy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D7B788F03; Sun, 13 Oct 2024 16:32:55 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 09C4188FEE; Sun, 13 Oct 2024 21:35:05 +0200 (CEST)
+Received: from jeffvader.in-berlin.de (jeffvader.in-berlin.de [217.197.91.175])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E385F88F3D
- for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 16:32:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C2FA88FA8
+ for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 21:35:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=holbrook.no
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=l.rubusch@gmail.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5c91bf96bdaso675815a12.3
- for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 07:32:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1728829969; x=1729434769; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xQ7+6wUVml1F1nrj+/F5LF75lop65H9uIc/wS2NCTtQ=;
- b=MDvrO/2p/o9sg3BAFusYRSHZrWx5uvZSDm4IjODWGM7hL7awuhiKuYYy9z19jb2iMt
- tQMs9eyBu2TIN5TGCCKfb88GrZ2fICmXU2YN/oDgxJPYDl87IYBmryQfPrFItWADXDa1
- 6A6oWKuUH8VHZ9IvI6m+p8M5zg08Hb9GfzeOsdfxmFuCOfZeFxU1Z3VkOt0zhNEVAR0T
- pn+oITGpinKhAp3T+RhRR8Bd+G/NuMou1XnHg5XqCOTGMhNqHdWQSyw7bOJivxfEvpL6
- bB/cBGIE16eAEqTGVizybjyBYPMl2nId7Gt+MC8RQoLEFpk3XSt3xiQWeIUBO3ucXdnZ
- x6PQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728829969; x=1729434769;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=xQ7+6wUVml1F1nrj+/F5LF75lop65H9uIc/wS2NCTtQ=;
- b=vQnLduE+hKA9bKXZR//K4xT0A5E0Z7p2rSasYLABu7xcIQHDE+cymtixNX0/Pai/Yr
- vwk+U21L+qrUnkiKQ3qoerMHlTzsmFkK2qHc9MidD1NL5awyctJy6UqZ77zX/eFIZjKz
- lgbJHh/l3DFtac23T+R+aIwMFBsAEyPSRsnPX/wCIxNYfkPqNgCWZeeRC3iur7h+l0so
- a2/bakCpau3Q4zW8OF7wDpvCBs4N4l0gSZXerNLjZP4LDj2SSUlguI7mpEQe4SLtfWb1
- AxGS8e//yqTXqFRjypUvS95+ZYZx4XnqZcEoGvpacjnjEdOVp7IaO3KLtApApmQMB8je
- 0NQw==
-X-Gm-Message-State: AOJu0YzrZDsae4UXRZly6aZOdx/btDfKGMdgJsMtO7swxIs+zGctUqGa
- CD3r0vpWeeNMdpJcqe1Jf2Fg7PNJc5cvucF1/PSIbVbxhzHb3MiRycej0g==
-X-Google-Smtp-Source: AGHT+IFRqnE764Td1acwUt/2aPjBK/JL4TG4qKWhfHZZo+vPz4wHZViqmi+alA5jxMrRmol6fN+ujA==
-X-Received: by 2002:a17:906:c105:b0:a86:a4cf:a197 with SMTP id
- a640c23a62f3a-a99b9314885mr286630766b.5.1728829969216; 
- Sun, 13 Oct 2024 07:32:49 -0700 (PDT)
-Received: from e8ff02ae9b18.v.cablecom.net (84-72-156-211.dclient.hispeed.ch.
- [84.72.156.211]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a99efcf15d1sm189886266b.102.2024.10.13.07.32.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 13 Oct 2024 07:32:48 -0700 (PDT)
-From: Lothar Rubusch <l.rubusch@gmail.com>
-To: u-boot@lists.denx.de, trini@konsulko.com, marex@denx.de,
- simon.k.r.goldschmidt@gmail.com, tien.fong.chee@intel.com,
- sumit.garg@linaro.org
-Cc: sjg@chromium.org, xypron.glpk@gmx.de, michal.simek@amd.com,
- jit.loon.lim@intel.com, barnas@google.com, l.rubusch@gmail.com,
- Lothar Rubusch <lothar.rubusch@enclustra.com>
-Subject: [PATCH 10/10] ARM: socfpga: update function call to modern API
-Date: Sun, 13 Oct 2024 14:32:32 +0000
-Message-Id: <20241013143232.2090645-11-l.rubusch@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20241013143232.2090645-1-l.rubusch@gmail.com>
-References: <20241013143232.2090645-1-l.rubusch@gmail.com>
+ spf=pass smtp.mailfrom=accounts-uboot@holbrook.no
+Received: from localhost (unknown [149.88.22.152])
+ by jeffvader.in-berlin.de (Postfix) with ESMTPSA id 808EC3A0B68
+ for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 21:35:01 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=holbrook.no; s=smtp;
+ t=1728848102; bh=vQuBwbGESRpTkLl4KapyTWAM/6zlQ/12crYTfk9Dx88=;
+ h=Date:From:To:Subject:From;
+ b=XCJl+XGyzZD+SjxXxpjcikfdKyzIAti2hXtUQrGA8v2JaCZoUWjOXRLtWLQ4WdgTd
+ StrE3u0JSKtJVmGks0tqlsxYA+T47cpy2qlOh1WDr9nVKCvZgqV3ZsuNqvzgmwAMKv
+ i4QmFBmSR8rN7Aeh78NP337GKj8RmdaL88xgoDq8VKkd4Av0yU5e8e6jGxx9YLGyVq
+ 6BSi5Orz3hD5XpPKiuuOAlfG8yGYMIQ+UyKcsGxb6FVP0MSbfEgW6l5zjfmxfOXa0L
+ qRzmmmR4WDn6U0TjlddeKiHQmPEWdD8XMHV3FkUJts2HllZbWti/ijKafYy3kH7L0j
+ RMYDYJXstBtbg==
+Date: Sun, 13 Oct 2024 20:34:58 +0100
+From: Louis Holbrook <accounts-uboot@holbrook.no>
+To: u-boot@lists.denx.de
+Subject: Mainline kernel bad magic for Pine64-A64-LTS
+Message-ID: <Zwwg4oXUq6aWlk69@holbrook.no>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 X-Mailman-Approved-At: Mon, 14 Oct 2024 04:44:22 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,31 +62,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Lothar Rubusch <lothar.rubusch@enclustra.com>
+(Also posted in pine64 forum
+https://forum.pine64.org/showthread.php?tid=19460)
 
-Remove arguments in the function call. The call's argument list differs
-from its definition, which breaks compilation. The removed arguments are
-obtained from device-tree declaration.
 
-Signed-off-by: Lothar Rubusch <lothar.rubusch@enclustra.com>
-Signed-off-by: Lothar Rubusch <l.rubusch@gmail.com>
----
- arch/arm/mach-socfpga/misc_arria10.c | 2 --
- 1 file changed, 2 deletions(-)
+In an attempt to troubleshoot failing to get generic alpine linux to
+run on PA64-2G-LTS, I've tried to reduce the problem to the smallest
+steps that are legible to me. 
 
-diff --git a/arch/arm/mach-socfpga/misc_arria10.c b/arch/arm/mach-socfpga/misc_arria10.c
-index c442af0288..1e20f77773 100644
---- a/arch/arm/mach-socfpga/misc_arria10.c
-+++ b/arch/arm/mach-socfpga/misc_arria10.c
-@@ -214,8 +214,6 @@ int qspi_flash_software_reset(void)
- 	/* Get the flash info */
- 	ret = spi_flash_probe_bus_cs(CONFIG_SF_DEFAULT_BUS,
- 				     CONFIG_SF_DEFAULT_CS,
--				     CONFIG_SF_DEFAULT_SPEED,
--				     CONFIG_SF_DEFAULT_MODE,
- 				     &flash);
- 
- 	if (ret) {
--- 
-2.25.1
+When booting the kernel, I get "Bad ARM64 Image Magic" I can't figure
+out what this means, and why it is happening. Sources I have searched
+seem to be board specific, and found nothing on this board. I've arrived
+at a point where I cannot find a way to reason further about it, so thus
+I am reaching out.
 
+I am currently loading the kernel and dtb manually at the uboot prompt:
+
+setenv bootargs loglevel=7 earlyprintk
+fatload mmc 0:1 0x42000000 boot/vmlinux
+fatload mmc 0:1 0x4a000000 boot/u-boot.dtb
+booti 0x42000000 - 0x4a000000
+
+My current configuration is:
+
+- linux 5.14 from mainline (git:7d2a07b769330c34b4deabeed939325c77a7ec2f)
+- u-boot v2024.10 from https://source.denx.de/u-boot/u-boot
+(git:f919c3a889f0ec7d63a48b5d0ed064386b0980bd)
+- dtb from the u-boot build
+- bl31.bin from PLAT=sun50i_a64
+https://git.trustedfirmware.org/TF-A/tru...ware-a.git lts-v2.10.6
+(git:f2aebf361050d69176d60016170291efa9e08a68)
+- scp.bin from https://github.com/crust-firmware/crust 0.6
+(git:ffe9f1ac9c675e6e67db9084bd19fbdeffd8e162)
+- u-boot-sunxi-with-spl.bin written to offset 8k
+- tried sd and emmc vfat single partition (whole disk) with
+	* boot/vmlinux
+	* boot/u-boot.dtb
+
+Files:
+
+- uboot defconfig:
+https://g33k.holbrook.no/c36cab0e6a15127...7b25f71bdd
+- uboot environment (saved from soc):
+https://g33k.holbrook.no/1c4d93e6510eb49...2329468b73
+- linux defconfig:
+https://g33k.holbrook.no/5bde4487e333f5a...19beb3382f
