@@ -4,76 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DC2BCF2579
-	for <u-boot@archiver.kernel.org>; Sun, 13 Oct 2024 16:15:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A2DDCF2576
+	for <u-boot@archiver.kernel.org>; Sun, 13 Oct 2024 16:35:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46FFC88FB5;
-	Sun, 13 Oct 2024 18:15:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7940188F03;
+	Sun, 13 Oct 2024 18:35:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MMJqQJjF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fbOsTdnN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 911B988EFD; Sun, 13 Oct 2024 18:15:28 +0200 (CEST)
-Received: from mail-qt1-x82d.google.com (mail-qt1-x82d.google.com
- [IPv6:2607:f8b0:4864:20::82d])
+ id E7B0088F55; Sun, 13 Oct 2024 18:35:23 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1627188881
- for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 18:15:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D5ABC88EFD
+ for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 18:35:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82d.google.com with SMTP id
- d75a77b69052e-460391553ecso34424181cf.1
- for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 09:15:26 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-43120f65540so14237135e9.0
+ for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 09:35:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1728836125; x=1729440925; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=nLsbhyassk1fa5AwCS98HTcJ7CXp1GIVfi1IA5QQofU=;
- b=MMJqQJjF5gVgZOaG8dBx/ah1KJza46GGIv6gU4u9IDj34kuasonw/wquAIYVvPSoB7
- tqssu1c+tlIZdlRgS0MuaLlwJL74u9s2PjI7/7yEYY83z3ITSno1Lp5iUSFm1FkRKrYT
- 5aYWg1CwA/vgDmZ/FBOSM0Y/qf6qifEI3kvcI=
+ d=linaro.org; s=google; t=1728837321; x=1729442121; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=bV8srbBtyKWvXBczF4Nd8zrfz4sXQVs2K/Dtc45JPrI=;
+ b=fbOsTdnNCuRwyzDbHKj0s98GyNHKyvnq9D60C4pFghRKSuHMGBPzmw6w0QrGiD5Dlo
+ cx1MblnrGwUiCWTNW2Gh1od5GkiE9TbLe7XBGjMVnycmMs3/EItGyhevvX90foZEPkfd
+ QXQAoHz9gcZoF/PatHFHIbqXzfNC3WAWUkuhSwWSnijH+Zh7rRo2TVDvslvaE9AzdyK9
+ MCT1cDJKQLN0oFJZAgG4rwWUg3RdFUZfIrtJEKldD3p8ppCHmgXvIjcAKR8H1nN9C5EV
+ eYzHyXJkBjpPatKdbz/63XpScCv4EZzhG00ZkMqeCp3aIdEszCjbwqxsVID/1uZJxkXV
+ UEHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728836125; x=1729440925;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=nLsbhyassk1fa5AwCS98HTcJ7CXp1GIVfi1IA5QQofU=;
- b=FN6yGi9Lr5tLXTY/Y87eIj9ZUjXZ31GJKrile0iK6jAKcRxKX8WlpCQg9fM48Vqu2m
- Sjm5aH/bqTt8auiNN06ONMeLQ26hJDQggZwUcJcLRCQ2iUJo6mBzs+knaUs97/tvS9O9
- 7vPKLsvjsIibLyaXMs2QvIcPsE/NVdo+McRIynNe7cMzFj0KhpzXAZC4H69fMAehCjvN
- mTDOq0CQsGWDYqtqdL71XlbrF1NTwSuaRRZUH1rrsG8dF1jDXd5HIYDPtsFU4yirkzC7
- dSYBvOkoNBlPkyl/nVVmPSQyotJPVHYeCeQYtjR48WbSnr8SvMfUF6lBpg0u8vSeQPsR
- up2A==
-X-Gm-Message-State: AOJu0YypVE7+oBGK/lbbYzyBy21zIfYTVnovkLaJCiii1f5Ws6USrNdE
- ppaH0VzyywwrtEr82srzEiOGtMNoTc8WF0gIWquJz1CRqOQGvzjwFQIpllsduR8=
-X-Google-Smtp-Source: AGHT+IFf+q4Ak4QDgGMm5Dq2fzCe4580OPqvkQhTQ+aoH4bC8SCanMRGBxM1yb6EH1BTOHcwXvWqdQ==
-X-Received: by 2002:ac8:5747:0:b0:458:355c:362c with SMTP id
- d75a77b69052e-4605846c6ccmr106536151cf.28.1728836124817; 
- Sun, 13 Oct 2024 09:15:24 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
+ d=1e100.net; s=20230601; t=1728837321; x=1729442121;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=bV8srbBtyKWvXBczF4Nd8zrfz4sXQVs2K/Dtc45JPrI=;
+ b=vBu+wI4Rvoy9DWpkJiyr4jc2AAgMfQrRPA53Ido64KSuLwyGTp30OkXmW5VdxEM2Ih
+ JCbxOmDsboDb26NI0axv1A3BpJm1Gx/GHdkOStnDDzTF18TygLJzJk2qbK4n18lTyq9Z
+ fxd7kmkA0cHtPfsBzRh8ogk/zd1ZIBC+lpnc8dLzxCVxhK747nqYfBvtzTOt59ycjxdX
+ g+HJWJ9rpFCBgMG4iPhM3OpkbDfZ3i2LdGVT2auLh4o4Uu2jKcYMmaTtq9mePu4YQFU6
+ z6BoErP2jByuzacSKXIS9SOZshmm3PQtrAD8hLcu0XiQznOVSeJN+Fv/fDdMKQltVrG+
+ SiUA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUbSuTOEVPgO9CqoCPJ5SJLESyo/rQZh+oBMdnIpy6s9DMSgP6wAaSuHx2AwxEbNCzSEN1d4PU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy7laojNpKwUZIGeKeNC0Iyet0bDBJmqXGVbm4/kpzPRWbrRDg+
+ kL2T2rFxedb8aZu2oKcqaIX4+Ya7/t3/z/JUzrQiB7bGwMHvNaRAGn+nULvMUJ4=
+X-Google-Smtp-Source: AGHT+IGr0Qs2LayVC1vSlvFR7HtyZSdKJE00WfgOoXADSCMeTlL6T5RRdO8VOOxVksGjqZDWm3inuw==
+X-Received: by 2002:a05:600c:3b1f:b0:426:6158:962d with SMTP id
+ 5b1f17b1804b1-43125609073mr50698765e9.23.1728837321244; 
+ Sun, 13 Oct 2024 09:35:21 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:982:cbb0:705a:8bb3:8b50:341e?
+ ([2a01:e0a:982:cbb0:705a:8bb3:8b50:341e])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-46042807aa1sm35734661cf.47.2024.10.13.09.15.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 13 Oct 2024 09:15:23 -0700 (PDT)
-Date: Sun, 13 Oct 2024 10:15:20 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH 2/2] qconfig: Ignore defconfigs containing #include
-Message-ID: <20241013161520.GM14210@bill-the-cat>
-References: <20241012232231.5638-1-sjg@chromium.org>
- <20241012232231.5638-2-sjg@chromium.org>
+ 5b1f17b1804b1-430d748f0a5sm129877495e9.48.2024.10.13.09.35.18
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 13 Oct 2024 09:35:20 -0700 (PDT)
+Message-ID: <99d3fe30-78c0-4bed-9bbb-299c5058034b@linaro.org>
+Date: Sun, 13 Oct 2024 18:35:18 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="LaY2oJ+gMqWxsFRm"
-Content-Disposition: inline
-In-Reply-To: <20241012232231.5638-2-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 2/3] usb: dwc3: fix dcache flush range calculation
+To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Bin Meng <bmeng.cn@gmail.com>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+References: <20241011-u-boot-dwc3-gadget-dcache-fixup-v4-0-5f3498d8035b@linaro.org>
+ <20241011-u-boot-dwc3-gadget-dcache-fixup-v4-2-5f3498d8035b@linaro.org>
+ <2eaba59e-bc6d-4ffc-b4eb-0eebc0b090a9@denx.de>
+Content-Language: en-GB
+From: Neil Armstrong <neil.armstrong@linaro.org>
+In-Reply-To: <2eaba59e-bc6d-4ffc-b4eb-0eebc0b090a9@denx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,47 +102,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
---LaY2oJ+gMqWxsFRm
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Le 12/10/2024 à 05:37, Marek Vasut a écrit :
+> On 10/11/24 4:38 PM, Neil Armstrong wrote:
+>> The current flush operation will omit doing a flush/invalidate on
+>> the first and last bytes if the base address and size are not aligned
+>> with CACHELINE_SIZE.
+>>
+>> This causes operation failures Qualcomm platforms.
+>>
+>> Take in account the alignment and size of the buffer and also
+>> flush the previous and last cacheline.
+>>
+>> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+>> ---
+>>   drivers/usb/dwc3/io.h | 5 ++++-
+>>   1 file changed, 4 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/drivers/usb/dwc3/io.h b/drivers/usb/dwc3/io.h
+>> index 04791d4c9be..0ede323671b 100644
+>> --- a/drivers/usb/dwc3/io.h
+>> +++ b/drivers/usb/dwc3/io.h
+>> @@ -50,6 +50,9 @@ static inline void dwc3_writel(void __iomem *base, u32 offset, u32 value)
+>>   static inline void dwc3_flush_cache(uintptr_t addr, int length)
+>>   {
+>> -    flush_dcache_range(addr, addr + ROUND(length, CACHELINE_SIZE));
+>> +    uintptr_t start_addr = (uintptr_t)addr & ~(CACHELINE_SIZE - 1);
+>> +    uintptr_t end_addr = ALIGN((uintptr_t)addr + length, CACHELINE_SIZE);
+>> +
+>> +    flush_dcache_range((unsigned long)start_addr, (unsigned long)end_addr);
+>>   }
+>>   #endif /* __DRIVERS_USB_DWC3_IO_H */
+> 
+> You likely want a max(CONFIG_SYS_CACHELINE_SIZE, dwc3-buffer-alignment-requirement) to really correctly align the buffer.
 
-On Sat, Oct 12, 2024 at 05:22:30PM -0600, Simon Glass wrote:
+No this change is related to the system cacheline to properly flush/invalidate the data
+to the system memory, the dwc3 buffer alignment (if there's one) should be handled
+when allocating the memory, but here we're using dma_alloc_coherent() which
+use DMA_MINALIGN.
 
-> Running "tools/qconfig.py -s" will re-sync files with #include in them
-> and so un-#include them.
->=20
-> Ignore these and mark them as failures.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> Fixes: https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/28
+So it's another unrelated story.
 
-How about marking them as warnings? It may be good to re-sync
-configs/am62px_evm_a53_defconfig for example and then re-add the
-#include line, but configs/am62x_evm_a53_ethboot_defconfig on the other
-hand very much should not be resynced. Thanks for getting on this issue
-so quickly.
-
---=20
-Tom
-
---LaY2oJ+gMqWxsFRm
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcL8hgACgkQFHw5/5Y0
-tyw7zwv8DeBPthxhJiwm6W8vIlAE4WmjUHwnf1gAPlKFCTLsT04XN2xTNHbXDj+s
-nwNvJGcQThusI24PGYpknxGRxpLybjD0vshcdLNaJhH113PbzToIqs1RDhej5pYE
-PtM/zfkMHvuR50JO2QbPvb6RArn0y/IyOFTq0UYtgA6mtbXC69L29vjHxiKAfIdE
-zUqdcbuQgqTyUQF2M15bmf2agUSakGHa0DDCVbeg8Oh/dR9hRvRIVV0/AjA6jzwE
-4/G8qJeZ+vmbtHCeWCKyJEC81gr8sB2A+gMKAlmziwgUvwg4Blab5d3xyqjtN8Ti
-QvhCB31q/nrspbtBmiJO62YKstl0gUqDAhRXEBOH3KzlLyAVrNnKFZaLPFVP0r9Z
-1N5UrrsfzYlj/WkiwMzbhqoSGzPIE9QREvoqRSic/6CYvV/63uFn2onbwIYMa6Bb
-zm3pa2XCRBwcK8a9MOZIvPQFpJ4Ssfr4K+HuP1w2XtwRnfq95S8zCA4z+tL/OUnt
-o25QnUyf
-=AM7m
------END PGP SIGNATURE-----
-
---LaY2oJ+gMqWxsFRm--
+Neil
