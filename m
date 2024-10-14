@@ -4,84 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08488D18153
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 21:30:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED65AD18153
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 21:35:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F6FF891B3;
-	Mon, 14 Oct 2024 23:29:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3DDE088E36;
+	Mon, 14 Oct 2024 23:35:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MjaI7kEU";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 866A4891C1; Mon, 14 Oct 2024 23:29:57 +0200 (CEST)
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
- [IPv6:2607:f8b0:4864:20::731])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1728941714;
+	bh=LtOlV/bGFNMlCZH2dKERGt72Ybm8NvEFWHcbBjdwA00=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=NfWYwBO1NBFVazOnjLmhmfa315+8+KjGQxaxUKddApywhimHf4hZ2Qem3K9kWbIhl
+	 o9+b/Ygz0lobU4eNojx+hhxEvYfUxkkrkXZCE8SYTfxTjOtG/3hfY5Re5y8tZfxF+M
+	 HeoJgyhBKkoFzNLpSBRZZm2WRFu+5MKjRIswcELHDgwZs7/DENvB2Q+ixw9QJ2WVTw
+	 zHplq1aFA9/OeyABlxpLyIbucPyVXwSx5a0f0ks08MLpcH2yFDRRhrq3QUZGrPppHv
+	 /A2TtsxZlfMUiVD2Lqqde+OPqTR/yV6ecGY9gltmCWVLqg18sH2O806bXoMpl+ugIt
+	 UrcU5ZF8AisPA==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5EA9188D1C
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 23:29:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x731.google.com with SMTP id
- af79cd13be357-7b1141a3a2aso451969585a.2
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 14:29:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1728941394; x=1729546194; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Mtx4dVz9u2k95wuf9mkg+2mpNYfuj0dq8bxpPJ5lngw=;
- b=MjaI7kEUcZGaLq7mpDz465DteXo5tcreTKki/zE7zeAJ78REpInMHutqgevwBCIMqg
- EMfoFQqobrUNO2VGuQ7Hi3Mj5wPbEt6/aGMulxObo4993wj1fWBP7T3Q1Am3Q6jJ70uX
- 4S84tCKhJSydvDKmOuFU2tX5LLxtpzZ2eo0cw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728941394; x=1729546194;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Mtx4dVz9u2k95wuf9mkg+2mpNYfuj0dq8bxpPJ5lngw=;
- b=QOGwADKaVoifGUusnlF+iGwMFzr9TzuM7WckW5sPmpAmKMDTQuYG8/Q6IYU1ozEalr
- PnZa+KcuMStAHZflnc8SvdIeiGqt2z8mSK2KJ6eKco2nsves6+h8mHuzkLQfl/otrsUK
- 0lKZujgoD6xusETiCkawIDIi3W9jvNsk+yS8vesVI6BYj2B5bskv/xW765GfOQLdw//8
- ZxdTQ2rXAhMr8wfwniQR2SjV+RqDqVp7WROMUQHfte/DCHBOVa97ROhfV2Xa+f3MO1Mp
- Y0eLEpTF9LP7RBUj+3m26VRq61kK7IAk+L/+1BEutECTlHYx0NH8pBSm1+prhe2qhx7H
- Ecog==
-X-Gm-Message-State: AOJu0Yxr31JujPR/FS7BfQtuFbgTIwh37t+8EWAkOHA8Xaq313pGVx9O
- lvDKiavQZEAAnES2D3rKb0b780tWnoAE+u5CgKiVIMVbkToO4K3onMTNi3x+/wo=
-X-Google-Smtp-Source: AGHT+IHemwCvyEdNkMKTdheWSS5uQmuBIoRCxpUTNGXhXPU8lfSK6DhUC7bT4coT1VhAY7tgQnt4dw==
-X-Received: by 2002:a05:6214:4588:b0:6cc:813:13d5 with SMTP id
- 6a1803df08f44-6cc081314bdmr91495066d6.17.1728941394189; 
- Mon, 14 Oct 2024 14:29:54 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6cbe8609811sm50110146d6.78.2024.10.14.14.29.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Oct 2024 14:29:53 -0700 (PDT)
-Date: Mon, 14 Oct 2024 15:29:49 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>
-Subject: Re: [PATCH v4 1/5] efi: Drop the memset() from efi_alloc()
-Message-ID: <20241014212949.GA53053@bill-the-cat>
-References: <20241011212126.747741-1-sjg@chromium.org>
- <20241011212126.747741-2-sjg@chromium.org>
- <20241012012004.GD14210@bill-the-cat>
- <CAFLszThqX2T0uGmAYvacpPhM_O_JNG9A+wtd0jxmn4ynAuHUzg@mail.gmail.com>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id E753E87DC7;
+ Mon, 14 Oct 2024 23:35:11 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1728941713;
+ bh=LtOlV/bGFNMlCZH2dKERGt72Ybm8NvEFWHcbBjdwA00=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=BQm3GLOUgGxucJ71gAGvGBy/8tvTb9griaUQf4Ebt/dkzlE/2YPsgMJXnVHNP7YHj
+ sHZjdTejCOVw/vhbXO2k8aX77GgWMbU7C5KgOdenO3544S53E/vR77Fdn/6kwe5t5c
+ wk1w9ioD3I1NVqdExLXfsKWMpTUblnmvHJ1XZpRa0/phHwG46qBXrCmk0El0xdiEV8
+ dBOOgBz+cYRP7JP12H7k3mFZhMmdU0IidtzuiFV4aYPjelaVSRKxYCjZq/PjjE/Iy6
+ CmMnQEP+dDEkmgpZUUUIt29lTxzBg4/kpWGscwHl+wAjpx4LGsuirxZP8W2MCh/kal
+ 472diOKv2QT2g==
+Message-ID: <31f823bd-0e55-46f0-960d-c5f361a86ce0@denx.de>
+Date: Mon, 14 Oct 2024 23:35:11 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="pcoEn743ytVH4366"
-Content-Disposition: inline
-In-Reply-To: <CAFLszThqX2T0uGmAYvacpPhM_O_JNG9A+wtd0jxmn4ynAuHUzg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] rockchip: board: Increase rng-seed size to make it
+ sufficient for modern Linux
+To: Alex Shumsky <alexthreed@gmail.com>, u-boot@lists.denx.de
+Cc: Ben Wolsieffer <benwolsieffer@gmail.com>,
+ Chris Morgan <macromorgan@hotmail.com>, Dragan Simic <dsimic@manjaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+References: <20241014202605.2799040-1-alexthreed@gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20241014202605.2799040-1-alexthreed@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,42 +75,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 10/14/24 10:26 PM, Alex Shumsky wrote:
+> Increase rng-seed size to make Linux happy and initialize rng pool instantly.
+> Linux 5.19+ requires 32 bytes of entropy to initialize random pool, but u-boot
+> currently provides only 8 bytes.
+> Linux 5.18 and probably some vesrions before it used to require 64 bytes.
 
---pcoEn743ytVH4366
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+"versions", typo
 
-On Mon, Oct 14, 2024 at 02:20:42PM -0600, Simon Glass wrote:
+> Bump min value to 64 bytes to be on a safe side.
+> 
+> Boot with 8 byte rng-seed (Linux 6.11):
+>      # dmesg | grep crng
+>      [   12.089286] random: crng init done
+> Boot with 32 byte rng-seed (Linux 6.11):
+>      # dmesg | grep crng
+>      [    0.000000] random: crng init done
+> 
+> Linux source references:
+> https://github.com/torvalds/linux/blob/7234e2ea0edd00bfb6bb2159e55878c19885ce68/drivers/char/random.c#L632
+> https://elixir.bootlin.com/linux/v5.18/source/drivers/char/random.c#L236
+> https://elixir.bootlin.com/linux/v5.19/source/drivers/char/random.c#L551
 
-[snip]
-> I certainly don't want to be implementation-compatible with EDKII.
-> Where did that come from?
+Please use https://git.kernel.org torvalds repo , not some random 
+downstream webpages.
 
-It came from Ilias pointing out that EDKII does this too, and so we
-shouldn't deviate from that, and then you re-posted the patch with a
-reworded commit message, rather than dropping it. So I'm just
-emphasizing goals for the public record.
+> Signed-off-by: Alex Shumsky <alexthreed@gmail.com>
+> Fixes: d2048bafae40 ("rockchip: board: Add board_rng_seed() for all Rockchip devices")
+> ---
+> 
+> Changes in v3:
+> - reword warning
+> - increase default rng_seed_size to support older linux as well
+> - reword commit message
+> 
+> Changes in v2:
+> - add env config knob rng_seed_size
+> - add warning for small rng_seed_size
+> - 12-character commit SHA in Fixes
+> 
+>   arch/arm/mach-rockchip/board.c | 9 ++++++++-
+>   1 file changed, 8 insertions(+), 1 deletion(-)
+> 
+> diff --git a/arch/arm/mach-rockchip/board.c b/arch/arm/mach-rockchip/board.c
+> index 3fadf7e412..9ff1567fb1 100644
+> --- a/arch/arm/mach-rockchip/board.c
+> +++ b/arch/arm/mach-rockchip/board.c
+> @@ -472,9 +472,16 @@ __weak int misc_init_r(void)
+>   __weak int board_rng_seed(struct abuf *buf)
+>   {
+>   	struct udevice *dev;
+> -	size_t len = 0x8;
+> +	ulong len = env_get_ulong("rng_seed_size", 10, 64);
+>   	u64 *data;
+>   
+> +	if (len < 64) {
+> +		// rng_seed_size should be at least 32 bytes for Linux 5.19+, or 64 for
+> +		// older Linux'es
 
---=20
-Tom
+/*
+  * Please use C style
+  * multi-line
+  * comment.
+  */
 
---pcoEn743ytVH4366
-Content-Type: application/pgp-signature; name="signature.asc"
+(also, s!Linux.es!Linux kernel versions! while you're fixing it )
 
------BEGIN PGP SIGNATURE-----
+> +		log_warning("Value for rng_seed_size too low (%lu) and likely insufficient for the Linux RNG initialization\n",
+> +			    len);
+> +	}
+> +
+>   	data = malloc(len);
+>   	if (!data) {
+>   		printf("Out of memory\n");
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcNjU0ACgkQFHw5/5Y0
-tywTJgv/cgON7wXtLqrDA5dAYNb6YBjeI5CjX1mYdn/J0S+OonYewyeYh7UGWgz8
-vgxnSxO6oHw3hAbItXHe3jZjy0ryCweBB+Y4Yiez1iRKtqwbYPyYX3Q3hZqpevC7
-LFTHNs+Gt4XAAZIsQ3WJMEmqJT4RTwFW0ZBBjQJW/oMo3K717p5xTXfZaDLzeiDS
-ynXdTdAa8Psq9TXiO17VE/q0Q9MUEhN9bguSl4GdRUOzF1PhbJa9phZfkMQSq5Zs
-OqcplnJcnQ/OTjtN29Vdm3n6mUD53YwENjt5ZSWZ8Eg4C51bYsdv6PbhDT9qTtI2
-xyHz4/PX/TN5kS9WrDHtUn2iiM+qGME1C8tORLmVhCjGAVxdUR8wZ+buFY/m8BWD
-rK/PyJ7xYoWo80VjTOqWxo9iL8OGLRkDNONGSJmQvmjGrd3KSae3KhYrQT6nKJuO
-0P+o8a2pwfd76RLGG2n2iniiVTMYxXB5925sD7PmvAAMRMJ/ziuF07gQEBA8+soY
-z1Ik2r+M
-=Bcph
------END PGP SIGNATURE-----
-
---pcoEn743ytVH4366--
+Thanks !
