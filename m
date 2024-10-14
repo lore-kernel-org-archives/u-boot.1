@@ -4,152 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DF5ACFC535
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 10:21:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29966CFC538
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 10:23:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC92A8902D;
-	Mon, 14 Oct 2024 12:21:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id 7F8BD88FD8;
+	Mon, 14 Oct 2024 12:23:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="Snt2wYl8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cW2A8CRM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F7BE890B1; Mon, 14 Oct 2024 12:21:44 +0200 (CEST)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on2062d.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2613::62d])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id F07018904A; Mon, 14 Oct 2024 12:23:42 +0200 (CEST)
+Received: from mail-pg1-x535.google.com (mail-pg1-x535.google.com
+ [IPv6:2607:f8b0:4864:20::535])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E42D8904A
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 12:21:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A465488A4C
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 12:23:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=rpl3mZ1fn/oTUqh7TA+8k13WFUyhY1D9I1UE4084JA9W8kpKUcibKa/A/jJmTNhPSbzz/RxZJ4dEC/hZyHv7IwCtQFrz9f/IbR+LL2fyOkSBOZIzQJ4T+IJqfrr9K7KA2Rx09uDGxkTc0qY552Pfum7heXeHPHJvVeEpqylDAO8Ls2Cv/ehu7+CcOBI+y5khT2hScRIm73iVbMbCRtemQi5p3kwvl/dhmx0hq84teQqPBMS6VeDv2q3gtrYBv6QMDqSKqCpl3JoE2crarPaWC+FHK8vb/tOTYa0g57tgtPokjQMD95xN8xFvGEdj0lOq+UR8YiGfJjq0pitI9gosCQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=kc23Ee46eqrg9v1f3Nnh/AIkkGMw0woQxyjjQJeHGPc=;
- b=JsV/uRsc47tKFkZBG0o0jWri/R2cc1p3ggs+bnQJE2pCveC9x9A4O6+/cugRPFfvbgFn006UaKhahCTizTSA7h/pDcDfq8azoQ7IFsnhRMxzzazzVM7lGPhdKMG9EZ+I5VfBJV9WcZXpsTQMhzMTrddK4nzldJ8CLEUPpBXwfQB81NXEOyPLN6vLYXlVhsA7IqQCgp5OJUwQC/fDP9NfIot389VI4PMzO3x7OGWbR9YyfsrrQGf5SMBEEXwAUpsqh/ZS1V6F5/q4/MzbRMQBjgWXdj3IpSTa7T/rNV2BAqcq/kFGDdZubrsPsjat8H1dSK4LaROd7pSZg9pvQMaIiw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kc23Ee46eqrg9v1f3Nnh/AIkkGMw0woQxyjjQJeHGPc=;
- b=Snt2wYl8zP44F0jjILxQirbUwT/hVDi7mZTeudkC+bePDyeLh91VLDzA8WB1fjLVL7VT9KWQ/reBX6upcchevIq1oEcgN4THYKlsnBqP4HJJzl0AFj7+x/uXe0w2qYwXdMN/QSUDSDcDJfnFCnHk8WWfhjKxNeOqltONz1dPvzE=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
- by PA2PR10MB8550.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:421::5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8069.16; Mon, 14 Oct
- 2024 10:21:39 +0000
-Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::9fcc:5df3:197:6691]) by DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::9fcc:5df3:197:6691%3]) with mapi id 15.20.8069.009; Mon, 14 Oct 2024
- 10:21:39 +0000
-From: Rasmus Villemoes <ravi@prevas.dk>
-To: Heiko Schocher <hs@denx.de>
-Cc: Peng Fan <peng.fan@nxp.com>,  U-Boot Mailing List
- <u-boot@lists.denx.de>,  Fabio Estevam <festevam@denx.de>,  Fabio Estevam
- <festevam@gmail.com>,  Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Marek Vasut <marex@denx.de>,  dl-uboot-imx <uboot-imx@nxp.com>,  Rasmus
- Villemoes <rasmus.villemoes@prevas.dk>,  Stefano Babic <sbabic@denx.de>,
- "tharvey@gateworks.com" <tharvey@gateworks.com>,  Tom Rini
- <trini@konsulko.com>
-Subject: Re: [RFC PATCH v1] dts: imx8mp-u-boot.dtsi align flash.bin
-In-Reply-To: <aeec07bf-6a3d-08c5-2786-5a7c2bfe92b6@denx.de> (Heiko Schocher's
- message of "Mon, 14 Oct 2024 09:44:45 +0200")
-References: <20241010082831.19983-1-hs@denx.de>
- <DB9PR04MB846127A928CBE4AB1F373DFE88442@DB9PR04MB8461.eurprd04.prod.outlook.com>
- <43ea1972-ee4f-ab25-aa98-2ae3fc4f20fb@denx.de>
- <DB9PR04MB84613CEEBFE7ECE0B249DB6A88442@DB9PR04MB8461.eurprd04.prod.outlook.com>
- <aeec07bf-6a3d-08c5-2786-5a7c2bfe92b6@denx.de>
-Date: Mon, 14 Oct 2024 12:21:42 +0200
-Message-ID: <87a5f7assp.fsf@prevas.dk>
-User-Agent: Gnus/5.13 (Gnus v5.13)
-Content-Type: text/plain
-X-ClientProxiedBy: MM0P280CA0046.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:190:b::20) To DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:10:45a::14)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-7ae3d7222d4so3430657a12.3
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 03:23:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1728901419; x=1729506219; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=0cK4di1wZAUtSHMCY40YXnMRX9pj4a+aK1QJAquE/EA=;
+ b=cW2A8CRMtmRSOPp5Ztx2F2f1DvEZfNIIjqmNMaUQYicZkugid+JSG9QWmFG4dB7sV2
+ DnlFctvwDp2Jir99O7CVkfzDFwRY5qvUgFmLSLdogGdeKed5umMvd1EiSIbpPZwnzp2m
+ a8zNWSWFC3basWnru4JYKwe4unvBih7RU2Q4XPcZ3byq3MyhZt4ywwbzWQJtlrZNrW6j
+ qzxLllfkRnAbF1Q9w0TdUc1nwYilhQr7FXtHTB1V+aQgo8fCRI10ybtyyrIJSlAJM5Em
+ hpS7vBB4xzMdcItTgUe6XLMn+lNRNGnd8HHLQqVhHlZfN+rDveq6n+bMjFARFNn8HCef
+ 7NEw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728901419; x=1729506219;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=0cK4di1wZAUtSHMCY40YXnMRX9pj4a+aK1QJAquE/EA=;
+ b=nG+x6GFeFsWXhktWUAHbwnVakhbyxvypCsFs9qgoUyIW5eIOIVVkYm31L5brdBvIWE
+ q5YfGvjKH44Q+4pG2Lj0013h0KlBrFJRs77qNdUIHGZHxPlnrVXFrQ/D7L7FSa6aqySh
+ xfs7d0neY956WITDUlxN529lHzwSbdqnGV3twLtJ6TsAIpZqA5hCmKsoq5Ok6fw3CtY3
+ Y2JmFbGogJHH3zCPF83CeuJZ92TQ+mURlOSzbhgjNwlfoXFuIBZhyMP4o/yQJ9lLKnRp
+ jlMG/wzZ70h7Ws5W/Qc6G+iMNIy1UfSW/9quZwBv2KYotyEsYmX8N8aapElJXvK48wP4
+ PPOA==
+X-Gm-Message-State: AOJu0YwSn5IncV1qJiwOtxC/aPND8OlMSBButVUkpq3JKVeZJtVTmkNi
+ nJngMJoPvjvZdjq/LrcF+k0PuSWX+56deE1Srm+ZbFIzy90dUkcsrHtTrGb7LI8y3Rc+f2ZUDie
+ XEPvj0G6wuFMW/ynT9zam4zpxWqf2DBOQO62Vmw==
+X-Google-Smtp-Source: AGHT+IFWjrlaTxCGBEXJeTdBX8HsMxfBSPpaxb4ckid7DvxH5vdrmeRNYRKAiDCqN/hj+fcxI9odv0XX8IBlgt8q9pU=
+X-Received: by 2002:a17:90a:1789:b0:2e2:b462:1d21 with SMTP id
+ 98e67ed59e1d1-2e2f0adcc73mr13450560a91.10.1728901419110; Mon, 14 Oct 2024
+ 03:23:39 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|PA2PR10MB8550:EE_
-X-MS-Office365-Filtering-Correlation-Id: bd7b2e41-92e1-4b00-f791-08dcec39fd9c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|52116014|7416014|1800799024|366016|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?7xJ3eOlZyNEUQgNCcxikTNlu71NEAzlE9nAOeUTCG3IP5rLBtKZZtqF5cZay?=
- =?us-ascii?Q?DGRvkNGyMFMdjAQ5koAvERU9wlJcL4pWskI/3Dxfp4SINf9BdXtZUyoZd19I?=
- =?us-ascii?Q?LraK/uZsWOb6cffJR3mN8wvEEcbUtK+rkRjnpm49WHzRw/C88nX8KSjSMntN?=
- =?us-ascii?Q?GC5414scT/vdXXwUA5RuHOzpYtF//wN+iLaAmkX6w6uKgkaVK2YtgaQxg9V1?=
- =?us-ascii?Q?dbi8kGh1EaH7VmauUmdli+vsgMcu/aWuhIcbMTKahM42le0kQB0KSVH5rb77?=
- =?us-ascii?Q?3l2UA5byobZKTWbn15MN8GTd9yF3RKZd9w++VaYs9Ufng3QEqVYbdA2quG7N?=
- =?us-ascii?Q?Ns+cHWVVUD28EuZHN9i2MoYymhe/eZuYABGSbQbf+7JF1JAV+W45LiBmaGHe?=
- =?us-ascii?Q?u4zSZx5Dw945QZxiSLg0Q0x5YES7MFStzKi+TkLonuCR/SDfKII1/h86l/ku?=
- =?us-ascii?Q?hTC+jrANoJP6K8SI9zjGYyhJz+hbZJyRXV0pxtAKr+BQRmbIw1XlHz+j/wM/?=
- =?us-ascii?Q?OPAV+73LRZMaYF0EMeZMAwZAdsL/t5u2QA7iORhaln274NQjhd9C9hMRAIxI?=
- =?us-ascii?Q?GhyUezsRVgW3EG/iPBnsQeaHheuYooRfIzGlb9504606Az71fm1oX9S0h663?=
- =?us-ascii?Q?3iQ6LEE0SRssH1zGgc82nCrVp+b8fUD8StFqXJHqNob+o+ADxeTWIH3OQWjA?=
- =?us-ascii?Q?E7HsPjs+AROAueI8N0F31eCYYaxkWZgQJ+nkUYeC+0UaPEZH9vTr0lRq/2y8?=
- =?us-ascii?Q?BGW8A8j1r6/na3Knt6Xb8SaxEBN4WZ5jsh4lZ7aBS3/VTf+7RJXTFIZsVIFy?=
- =?us-ascii?Q?NxmoAS9ui0ZgNE+QBLB+/N/S+LnL7LVBzQD7GBZ9nMDncihhyYGOpaLriuhi?=
- =?us-ascii?Q?oO8amnN2T0rCHvn5q7VIciiOiXdJq7RyxvIB4zLRXRl73BEZe3o3LJrq0icc?=
- =?us-ascii?Q?HgN11BDIsG+yYtUJFodAzJVS275tTkw7dIqB53jO5lc1/dgrqxlycnvcti4m?=
- =?us-ascii?Q?j2RmitFf4fbupmr2urpBECj4JXj885+ItqsbfVdCDWFlGB4/iFYCdA+raAk4?=
- =?us-ascii?Q?B4yZGJciJD4qxrEo6GgyYO1rnBVP/cU0ITeJXATIYJpXelHEHT7vH204q7gE?=
- =?us-ascii?Q?wHdE6lEz57RTlzM4k4I8b2/GhSar394t+jC6EJlfjoLN/KFUQBvfnfO72WLv?=
- =?us-ascii?Q?fAwKksvKRO44nha47odrvmbyUoF4BLGgNqHjM6TLwjRYSim+7qINJEvrsCrU?=
- =?us-ascii?Q?mqAt5go/pfkVxT+GjxrpoFnnM6coQVrlvFmAppqpHXgD5E0l1ttJ9RYtH1Ms?=
- =?us-ascii?Q?ykFskfr6/sQh0YzH44n+15yp?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(52116014)(7416014)(1800799024)(366016)(38350700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Gfw3wiIdWbpg/r7QrRDWMOk2KYNvDJJew0OUC3i+G4xRp+Ags39nXQEG8s3e?=
- =?us-ascii?Q?x2DSD77YPB40E5nEe/Sjn20tpqfjvJRL30jC6ayIZIYg1jjkZPlzjW4O5kXX?=
- =?us-ascii?Q?6rqOPD+YXbWPoC0uEnwfBXhU0P3slNYHa2X2fcXaiOKuEapEQDuP9MCZ4BJr?=
- =?us-ascii?Q?XuI3GLLa1BzTsk3lt/NLDNXJSDv0isV4EeZjZ+u+YQvnEClM2RLbH06Hy0k4?=
- =?us-ascii?Q?3UC2oZO8hiX3tTmT0Ibi1P+qFGF38SAoFEFmduaskr2eCjK9psJ9wdhFO+Ho?=
- =?us-ascii?Q?Eq1MwdfCR4jBAVgykH3UkjDWNhOk/wrdfGcSpGJDmDdVQz1m44MsByxyeEAx?=
- =?us-ascii?Q?1r7uYHHJMHLFTFb2QHggJhvhwzY7xziIJYNbCVrdtECURq/B+wj2xg8BIJJJ?=
- =?us-ascii?Q?6wroedTuo0NwlAZKD1nFFIy3cgAwJw0g2lNDe3S61u+46ftKLy2seyIIPsRj?=
- =?us-ascii?Q?twM91ZLf3nWSyQXBtAwLX2Dod5g4pSHbNfxg/0ktW0cxm+tNLME9glstlSuu?=
- =?us-ascii?Q?8T+f8Elh5KiODwlRvX9CThM7p+tSvCqs1lgZnTLvSea8oZeaOZ/NxC6Unlkn?=
- =?us-ascii?Q?81encAx4o7cJquzeZDB5+mV+wfIUILaOg+KZenbuRU10+1iyjVNNkIp326Q0?=
- =?us-ascii?Q?ohPfa4KPUiKgIm2pspQqNsqEn9zvxNW48qPiEul08tEwhvVoktE9V0sC5I8W?=
- =?us-ascii?Q?HV5DdmyX1plj7H9t8sdAmd7ld8QzRqm1+NZm0gaSuBdBO45/hppn0qS6Sygg?=
- =?us-ascii?Q?ADR+eJ+hf+BWIfAgXrRwtTM7dQK3oWSCy5yPBtMmKXFPwrEkFkinFJiT4OzJ?=
- =?us-ascii?Q?7k1ewfh1f2pWAcOjQkB1VPfPp9hVAVcBK7phJtKBZ36oizsfaGeIGzcfW8H+?=
- =?us-ascii?Q?shWWNAc4DzAGwUcxhxo/qhrwW9Zs0TowjNsK5w27c9+ZWh+3IInDmpstVkSz?=
- =?us-ascii?Q?CRfb4LEiuVbXTOYMhE1ftrflZIagbwXbiu9PTmtL0rgid6UEBfCN1Rr7zb9L?=
- =?us-ascii?Q?Fq8JRLo8C81WT6o+SAjEPLkpAOCLmIGW671hxjp91Kuu51oSHUuM74ZFfEVZ?=
- =?us-ascii?Q?hDNrkxlIG0fO29K/BCZYeqY/V9Qm8Q56q/Xu+0OAVFQI7dNEzANcEdmslO9p?=
- =?us-ascii?Q?vwNhX+lK9BDje+usM0eFjbB4COljSWmQCb4Yx8c2nhKk5CMBLraOHQXmvvL7?=
- =?us-ascii?Q?VrdFCcPZfrTylw5KYrnywqLm4s+cWvp+OgnqV7CYwF4ijsCitPNIfoOwATg7?=
- =?us-ascii?Q?+UUdzQq4KbqCuY4+uLlQhmPM+sifBt2zVWNBrC20TnE1GsphOJ3lNJg5o/oX?=
- =?us-ascii?Q?nmxZz+iJCH54c2B0f/DQOF59dDpdcDe3T3batlqZGpsgccfSh7sfIVaIXS5Y?=
- =?us-ascii?Q?ScU9JTxA6+Gad5yGPCF1kCCThkTPhRqhn7WKqHElJY0NMny35fZ1AqApcpx5?=
- =?us-ascii?Q?r1qpS7fwhcpa0tWYAIzlawt3DKx+73SlCX5m9LB0KjWsAJv3scp2Rd6nSk25?=
- =?us-ascii?Q?Cl0sZaouv14o57yPO0CL3iglRv5T0KmhWHzCU6wPwy6MsbAiPzqrzzwBlx7e?=
- =?us-ascii?Q?6FPe1AOHztCDGWdMZrZvpUxf1zD/4ciHrq2FhXCoZixUiwSrO1cjsMpXyFIf?=
- =?us-ascii?Q?Qg=3D=3D?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: bd7b2e41-92e1-4b00-f791-08dcec39fd9c
-X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Oct 2024 10:21:39.4083 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: flHNBMh30a47vKkBaX3sHrXP4z3Lhb46CVUWuNLSTIeTB9EyvYq4izQB2lqKHljvqqFB+LWqkUSevmqcY1LCy07SLTcMC7DK7XQ2JYODB5o=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA2PR10MB8550
+References: <20241013105522.391414-1-sughosh.ganu@linaro.org>
+In-Reply-To: <20241013105522.391414-1-sughosh.ganu@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 14 Oct 2024 13:23:03 +0300
+Message-ID: <CAC_iWj+YVGoqC8wRLxQoGTdqCTvERNnAZJ1LktKGySJM4Pnoow@mail.gmail.com>
+Subject: Re: [PATCH v3 00/15] Make EFI memory allocations synchronous with LMB
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, Jonas Karlman <jonas@kwiboo.se>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -166,22 +87,134 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On man, okt 14 2024, Heiko Schocher <hs@denx.de> wrote:
+Hi Sughosh,
 
+On Sun, 13 Oct 2024 at 13:55, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> Board boots fine from emmc, sd card. Booting blank board with
-> uuu works with posted RFC patch, as it seems to me code in
 >
-> spl_romapi_load_image_stream()
+> This is part two of the series to have the EFI and LMB modules have a
+> coherent view of memory. Part one of this goal was to change the LMB
+> module to have a global and persistent memory map. Those patches have
+> now been applied to the next branch.
 >
-> waits for more bytes than flash.bin currently has... appending some
-> zero bytes at the end, and U_Boot begins to boot and works fine, uuu
-> tool ends with errorcode 0.
+> These patches are changing the EFI memory allocation API's such that
+> they rely on the LMB module to allocate RAM memory. This fixes the
+> current scenario where the EFI memory module has no visibility of the
+> allocations/reservations made by the LMB module. One thing to note
+> here is that this is limited to the RAM memory region, i.e. the
+> EFI_CONVENTIONAL_MEMORY type. Any other memory type that is to be
+> added to the EFI memory map, still gets handled by the EFI memory
+> module.
+>
+>
+> Some test logs to highlight the issue that is being fixed by the series.
+>
+> Without patch series
+> --------------------
+>
+> lmb_dump_all:
+>  memory.count = 0x1
+>  memory[0]      [0x40000000-0x820fffff], 0x42100000 bytes flags: none
+>  reserved.count = 0x3
+>  reserved[0]    [0xe100000-0xeffffff], 0x00f00000 bytes flags: no-map
+>  reserved[1]    [0x42000000-0x421fffff], 0x00200000 bytes flags: no-map
+>  reserved[2]    [0x7f77da00-0x820fffff], 0x02982600 bytes flags: no-overwrite
+>
+>
+> => efidebug memmap -- does not show regions allocated by lmb
+>
+> Missing TPMv2 device for EFI_TCG_PROTOCOL
+> Type             Start            End              Attributes
+> ================ ================ ================ ==========
+> CONVENTIONAL     0000000040000000-000000007f751000 WB
+> BOOT DATA        000000007f751000-000000007f756000 WB
+> RUNTIME DATA     000000007f756000-000000007f757000 WB|RT
+> BOOT DATA        000000007f757000-000000007f758000 WB
+> RUNTIME DATA     000000007f758000-000000007f77a000 WB|RT
+> BOOT DATA        000000007f77a000-000000007f781000 WB
+> BOOT CODE        000000007f781000-00000000807b5000 WB
+> RUNTIME DATA     00000000807b5000-00000000807b6000 WB|RT
+> BOOT CODE        00000000807b6000-00000000817c0000 WB
+> RUNTIME CODE     00000000817c0000-00000000817d0000 WB|RT
+> BOOT CODE        00000000817d0000-0000000082100000 WB
+> =>
+>
+>
+> Trying to allocate EFI memory with already allocated region succeeds(should fail)
+> ---------------------------------------------------------------------------------
+>
+> => efi_mem alloc 2000 42000000
+> Address returned 0x42000000
+>
+> => efidebug memmap
+> Type             Start            End              Attributes
+> ================ ================ ================ ==========
+> CONVENTIONAL     0000000040000000-0000000042000000 WB
+> BOOT DATA        0000000042000000-0000000042002000 WB
+> CONVENTIONAL     0000000042002000-000000007f751000 WB
 
-Sounds like exactly the symptoms I fixed with commit 89f19f45d650. 
+Any idea what caused BOOT DATA to start from 000000007f74d000 with the
+patches applied?
 
-So yes, you really do need to ensure that flash.bin (or rather the
-embedded u-boot FIT image) has a large enough size for what the rom api
-expects, and that number changes when HAB is enabled.
+> BOOT DATA        000000007f751000-000000007f756000 WB
+> RUNTIME DATA     000000007f756000-000000007f757000 WB|RT
+> BOOT DATA        000000007f757000-000000007f758000 WB
+> RUNTIME DATA     000000007f758000-000000007f77a000 WB|RT
+> BOOT DATA        000000007f77a000-000000007f781000 WB
+> BOOT CODE        000000007f781000-00000000807b5000 WB
+> RUNTIME DATA     00000000807b5000-00000000807b6000 WB|RT
+> BOOT CODE        00000000807b6000-00000000817c0000 WB
+> RUNTIME CODE     00000000817c0000-00000000817d0000 WB|RT
+> BOOT CODE        00000000817d0000-0000000082100000 WB
+> =>
+>
+>
+> With patch series
+> -----------------
+>
+> lmb_dump_all:
+>  memory.count = 0x1
+>  memory[0]      [0x40000000-0x820fffff], 0x42100000 bytes flags: none
+>  reserved.count = 0x4
+>  reserved[0]    [0xe100000-0xeffffff], 0x00f00000 bytes flags: no-map
+>  reserved[1]    [0x42000000-0x421fffff], 0x00200000 bytes flags: no-map
+>  reserved[2]    [0x7f77a000-0x7f77cfff], 0x00003000 bytes flags: no-notify, no-overwrite
+>  reserved[3]    [0x7f77da00-0x820fffff], 0x02982600 bytes flags: no-overwrite
+>
+>
+> => efidebug memmap -- now shows the lmb allocated memory regions also
+> Missing TPMv2 device for EFI_TCG_PROTOCOL
+> Type             Start            End              Attributes
+> ================ ================ ================ ==========
+> CONVENTIONAL     0000000040000000-0000000042000000 WB
+> BOOT DATA        0000000042000000-0000000042200000 WB
+> CONVENTIONAL     0000000042200000-000000007f74d000 WB
+> BOOT DATA        000000007f74d000-000000007f752000 WB
+> RUNTIME DATA     000000007f752000-000000007f753000 WB|RT
+> BOOT DATA        000000007f753000-000000007f754000 WB
+> RUNTIME DATA     000000007f754000-000000007f776000 WB|RT
+> BOOT DATA        000000007f776000-00000000807b5000 WB
+> RUNTIME DATA     00000000807b5000-00000000807b6000 WB|RT
+> BOOT DATA        00000000807b6000-00000000817c0000 WB
+> RUNTIME CODE     00000000817c0000-00000000817d0000 WB|RT
+> BOOT DATA        00000000817d0000-0000000082100000 WB
+> =>
+>
+>
+> Trying to allocate EFI memory with already allocated region fails as expected
+> -----------------------------------------------------------------------------
+>
+> => efi_mem alloc 2000 42000000
+> efi_allocate_pages failed 800000000000000e
+> =>
+>
+> Trying to allocate EFI memory with non-allocated region succeeds
+> ----------------------------------------------------------------
+>
+> => efi_mem alloc 2000 42200000
+> Address returned 0x42200000
+>
+>
 
-Rasmus
+Thanks
+/Ilias
