@@ -4,83 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B2D6CFC503
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 07:06:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B3DACFC500
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 07:10:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C46388F24;
-	Mon, 14 Oct 2024 09:06:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B402D88F6C;
+	Mon, 14 Oct 2024 09:10:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qESgmrK0";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GsTEDuts";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EADFD88FB9; Mon, 14 Oct 2024 09:06:41 +0200 (CEST)
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
+ id 0D71A88FEC; Mon, 14 Oct 2024 09:10:48 +0200 (CEST)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4B63889C3
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 09:06:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C6914889C3
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 09:10:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-539ee1acb86so1124159e87.0
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 00:06:39 -0700 (PDT)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-431291b27f1so14537015e9.0
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 00:10:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728889599; x=1729494399; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1728889845; x=1729494645; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5U3GuIXHY3cSD5k4kQqUQIyL9BkhSt16J0D5pni9fsk=;
- b=qESgmrK0nEnFvTUMqjpuyg3HsncMRtVBwsOwHAwTUWu+D2sIkfLyMD84N1QkQPCRxw
- aKgNfAF1oGvbH/eoc0ihUkmnQU+Vz7pt+7qJrEM5GbBB0fN2w4gomiklcIovtdjLtkGn
- EkG8awplunFQoW1Bg3wQGtmrLI0VzJ11DOMmTnTlgf1PHZgQQTvwumXMiiGqCnpJTljT
- +K3bu7mieP4TJwNmGG7jksJuQ131Pl5UvIWo8xYkP6xaXzBf9yARDcnVVJgmPQD790/Y
- YAI4hBTc66nchuDPpRSxYx0tT1WrqSAeJzeqR8ZAzetXrVPtdEmckQjxcO/MaV7aLwiL
- quYQ==
+ bh=kc/WpUPRtz4XBALNS2VkyH5vjybfQNk1bhihMja3vVU=;
+ b=GsTEDutsisVFdHEbhdDLrTYMTWTn7cdzWdyrHQyJ5Pdn1sq11iWn/47jnJAZTO62pM
+ i/p+PYNEjj5oiLdFLEp6SGnP6YdreLF7j+gXk3gZ3vLA9fLQVeNM0gZ3CUv+zo/cdTL3
+ 0hfPv1QDZT39k2t5xMSQ37C+nyQHbl/NzwvMA+yZz0d8pCCObcdKle2MsXvYpoHbxcJk
+ icr7xKk4gaCdG1wD0QLN/VepJppai4ho6jDgvb2k6hL1jIKuxNYHbtUPnhgfZzIA9L46
+ P2iDzxfXeuuZFew1C1O4g5Ueb5MpR821KGodv69Vbz+8gQPCM+AHJMS94RDlGQgRQQSK
+ T/Ow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728889599; x=1729494399;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1728889845; x=1729494645;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5U3GuIXHY3cSD5k4kQqUQIyL9BkhSt16J0D5pni9fsk=;
- b=wd/rzKrtyyMOabcMFt95JZraiamwGeXhviG+hcQDKmGAPHIqBfFQkVWCi4/5vAJAdg
- UZ5Ce77+tQcAWt5EU8EGEjcQsQDKy1vAKPQYIQIySa1VWfTSTewTV7WaLa8zGkXtH00r
- ChFn0unljuVz64pameB4Z3RrlZ47HJkXkxdHDD10RRSLaD8XPi65/s9QdPJwPwplMJdo
- ChrEEYNZqQNbfaN/yReUnwfl/8n8z8tUEnmYmPYs7Zc5GaZyTUO9QUxI6PJas4wrLfV1
- yZ9mVwl6+Kt5lw0dXxruEf1TWlZERFG+AzGHMlbf2ABDz8Lalc3Sw+7SYygWBKFMgyHX
- 8lew==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVpXohlcc8MfppFnSqDEIezNE55stTYUrAij8aE0QQlA0OVdos5bOKfjFBZXIxxSZucbeYX4CM=@lists.denx.de
-X-Gm-Message-State: AOJu0YxCKJ8LrNa1+UrW8jKRZ0BgrxVKfiO/QVH4EZ25Rzxo19drfg2W
- GhSHmhAhxST+YtUFv7XTWx7hi0u12zpBu5z1wiU+UflOzPAEWD3pJB01wSdcGe+SrVkBaQYIIUd
- TxAg=
-X-Google-Smtp-Source: AGHT+IHZL3ShY6Vdeefe7PxDPwaAPFS/6O+Gpq3oyUKG4S/D4WluxJ/c3CuAetBE3+YU6rRrCa6M+w==
-X-Received: by 2002:a05:6512:3e15:b0:538:9efb:dbe4 with SMTP id
- 2adb3069b0e04-539e5732139mr2017561e87.46.1728889598865; 
- Mon, 14 Oct 2024 00:06:38 -0700 (PDT)
-Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:8261:5fff:fe11:bdda])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43118362232sm112355015e9.48.2024.10.14.00.06.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Oct 2024 00:06:38 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-To: Tom Rini <trini@konsulko.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: Guillaume La Roque <glaroque@baylibre.com>, u-boot@lists.denx.de, 
- u-boot-amlogic@groups.io
-In-Reply-To: <20241011-yukawa-aosp-parts-v1-0-7d74aa13ff8e@baylibre.com>
-References: <20241011-yukawa-aosp-parts-v1-0-7d74aa13ff8e@baylibre.com>
-Subject: Re: [PATCH 0/2] configs: khadas-vim3{l}: Android bootflow updates
-Message-Id: <172888959800.206113.1581753403828595952.b4-ty@linaro.org>
-Date: Mon, 14 Oct 2024 09:06:38 +0200
+ bh=kc/WpUPRtz4XBALNS2VkyH5vjybfQNk1bhihMja3vVU=;
+ b=Yoldz0gV5KsJqNx9nUEOqvmdjceHmEn7vupRXBSoKDXoWjoTiXiBdhW3jzExQVCuHm
+ yM/uT52Oazpzrct0aNPEiHH01Z0V3H+kuP7GpAd+Cqi2QvlY5+rqAYDZiMMmSobEYdSv
+ hGCKPJGrPaRlDTFwsMI4ZWGKM+1v8bqW2O20YwRX8JyvN8cK6KF70tdRY/iqpqXFw7uP
+ 9oI7+jLusGom5xX9OJ7laZ7QgMascE/Qqy/rmt4bi5x+jch+w1riZFd/aaL5xm9yKpY/
+ i8OCKupN8DUnEpfVBZ9iy7jOj4fvwR82PNf/2tDJUJkDUxHP8CmvuRLgLox7dP1V5q8K
+ q9oQ==
+X-Gm-Message-State: AOJu0YxLLUpxxS0czikghAi8kmKVq4L4cC8onqiy1DDUgKD1vawFeiUE
+ pcxinD4eVHdIzUUs0WH6wYZcSAWNvJkaNL7/chaJYG+6wYYS9FnXiQqhHy4faFW78cOzKbZxxkF
+ aSVGk8/eEVZCPrKtng2uxazpDtLkypQ==
+X-Google-Smtp-Source: AGHT+IE6KKUmtnPFpXmOiixHoF/Np1L7XXJLmdbL9YHSbpV8nKesXoOuEYRWzm2hh9dmT9Azc2IpPm2gvqb8mROawG8=
+X-Received: by 2002:a05:600c:1c1d:b0:42c:d084:ed7e with SMTP id
+ 5b1f17b1804b1-4311deaea1amr79682145e9.4.1728889845058; Mon, 14 Oct 2024
+ 00:10:45 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.1
+References: <20241013155604.87584-1-clamor95@gmail.com>
+ <20241013215444.GA53053@bill-the-cat>
+In-Reply-To: <20241013215444.GA53053@bill-the-cat>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Mon, 14 Oct 2024 10:10:33 +0300
+Message-ID: <CAPVz0n1=sRB+7rT_BQaLRbhtu9SM5vShOZLQxEUbBmbvzS4ptg@mail.gmail.com>
+Subject: Re: Please pull u-boot-tegra staging
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,25 +88,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+=D0=BF=D0=BD, 14 =D0=B6=D0=BE=D0=B2=D1=82. 2024=E2=80=AF=D1=80. =D0=BE 00:5=
+4 Tom Rini <trini@konsulko.com> =D0=BF=D0=B8=D1=88=D0=B5:
+>
+> On Sun, Oct 13, 2024 at 06:55:58PM +0300, Svyatoslav Ryhel wrote:
+>
+> > Dear Tom,
+> >
+> > The following changes since commit 93b9cd792089e536f2bfa85d9903fd479820=
+9f76:
+> >
+> >   mtd: simplify CONFIG_DM_SPI_FLASH dependencies (2024-10-09 14:52:44 -=
+0600)
+> >
+> > are available in the Git repository at:
+> >
+> >   https://source.denx.de/u-boot/custodians/u-boot-tegra.git staging
+> >
+> > for you to fetch changes up to 711fcd3bdad52ba058e8ca3cf1673bf1b8299be2=
+:
+> >
+> >   video: panel: add Sharp LQ101R1SX01 MIPI DSI panel driver (2024-10-13=
+ 17:33:46 +0300)
+> >
+>
+> Please note that I made a few fixes before pushing this out. One of
+> these was a merge problem,
+This is actually an odd incident since I have rebased all commits onto
+u-boot/master (same day I asked for pull, 2 hours earlier). No issues
+occurred while rebasing.
 
-On Fri, 11 Oct 2024 17:51:01 +0200, Mattijs Korpershoek wrote:
-> Recently, some effort has been made to use the
-> upstream android-mainline kernel on these boards [1].
-> 
-> To use android-mainline kernel, we should:
-> * Increase the boot/recovery partition sizes (so that it fits)
-> * Drop dtbo support, since these are not part of android-mainline
-> 
-> [...]
+> but another set were whitespace problems
+> checkpatch.pl noted
+This refers to migration of bootscripts to text env. Last time I
+worked with bootscripts they were quite sensitive to whitespaces and
+broke easily so I assumed that checkpatch mistreated those as errors.
+Seems that checkpatch was well adjusted to check env as well. Sorry,
+this will not happen again.
 
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-amlogic (u-boot-amlogic-next)
+> and the finally a small mistake of mis-naming the
+> apalis-tk1 env file (which is a - and not _ like the rest of the
+> platforms from the vendor).
+Thanks for spotting this out, I must have automatically used _
 
-[1/2] configs: khadas-vim3{l}: Increase boot/recovery partition size
-      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/ce138d9742bfa15f48462c22f25424e0fcbfbb24
-[2/2] configs: meson64_android: Remove dtbo support
-      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/0b063d66406e5bc0f367dd735216abe6a6543271
+>
+> Applied to u-boot/master, thanks!
+>
+> --
+> Tom
 
--- 
-Neil
+Thank you very much and sorry for discomforts.
 
+Best regards,
+Svyatoslav R.
