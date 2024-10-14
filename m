@@ -4,71 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0D3CD18151
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 21:35:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AFDAD18151
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 21:42:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28B46891F5;
-	Mon, 14 Oct 2024 23:35:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 0514F8907F;
+	Mon, 14 Oct 2024 23:42:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="X0ETZV02";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ej5CYINj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3AD5589207; Mon, 14 Oct 2024 23:35:37 +0200 (CEST)
-Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
- [IPv6:2607:f8b0:4864:20::836])
+ id 4DAC48918F; Mon, 14 Oct 2024 23:42:44 +0200 (CEST)
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [IPv6:2607:f8b0:4864:20::f29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DAF35891E3
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 23:35:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 238098907F
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 23:42:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qt1-x836.google.com with SMTP id
- d75a77b69052e-4603d3e456bso43155261cf.2
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 14:35:34 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-6cbd092f7f0so32647266d6.0
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 14:42:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728941733; x=1729546533; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=suXk7f74EzjAxw4kX2oVqePfUWiEw/SB57bW7oKhiDE=;
- b=X0ETZV02RaUgllFUHgXWq34JuAZzIsuzgprL0ZUc6/xcOLPnMeRoMiLZxBNriPAJkh
- kChZwNe9dQl3gszeMxf0HYYN/sOBqCE6ON+nPhl8fLpIxje520wByNnVdp2vyZinl999
- aaBwxddlY94CWjXKRZ3r+N2ynl7tqCvusCoW4=
+ d=konsulko.com; s=google; t=1728942161; x=1729546961; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=mAQYUgZxPMTao16t2BJhD2lvMNgc3oN3mcIARUrB42M=;
+ b=Ej5CYINjJB4VzUuWxI6B0tb6P941QyxlO8c3dDvQj6Zs0JgFGPA5eQ8zRH4LLaBH5U
+ eYVo9rnx5uzuinYrBWkKuXIR9mwBoKN3h9EU+ZpUvm22hBs6Y7HktMAZ11TGObIVBfRc
+ ebgVA0REgUJvlA+77zDXQB/l7EdBehHtYwRc0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728941733; x=1729546533;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=suXk7f74EzjAxw4kX2oVqePfUWiEw/SB57bW7oKhiDE=;
- b=nGYvmz/2FNOh6FJSGB9N6AYcAqvYLna7FHEQVnzgzuAaTh0dP7DYwsSXl/ghBJ/zuL
- DJOrEqaOZpJzGEo+mXgTc4Erxm8Qsg9tM+ruA/RdGqP0feV3ag1BtTHoC0gsLNJIsFfa
- qtwv2nFdonXe2y55G7nKHY0W/+/3a0BXlI0DwvccoK3d8jcNYd7/5LTqYzGMrbb7DV5k
- n/Te/X9wr08YQiQOkXPJbiW5sND5QQXMkW5f67COFwm+EK+O+FTpphvHIs/+Lt91N2n2
- IbS9TJq11sbKYU6eHcxu4oOwCIvdAz4QV1DZOEO6kRqoAe9q0aOlQeWP0otODbmNVZyx
- e7kg==
-X-Gm-Message-State: AOJu0YxoT3jWmCAaUmL7DZIVx6eiZxXa+BqImegzI44c3NPF+uH0Q75G
- GRXkExzutmPSMK/o2bz4bDxOPWK+QYVx7Clpm5+uCGe4G/SGmGTxuJ93JBpQ4i9w+P8CuqQ4ZmL
- arEGc9lVvsFCHb7Fg3wz2OkFY/AmtVZ3SKj/do9iHJ87gt1Q=
-X-Google-Smtp-Source: AGHT+IHbGiPt6Edc8ygsg/Lq6U+/6h2BgCdvddCGlnIwuV6qAJNgWskADXuK2z3n9Qkp7kqHeLfmN3Zu6eHKHZf2Pgc=
-X-Received: by 2002:a05:6214:5c07:b0:6cb:ee89:9986 with SMTP id
- 6a1803df08f44-6cbf009f8cfmr164427786d6.43.1728941733579; Mon, 14 Oct 2024
- 14:35:33 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1728942161; x=1729546961;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mAQYUgZxPMTao16t2BJhD2lvMNgc3oN3mcIARUrB42M=;
+ b=E+X6N1gVxMuh/jnAPlZAbRqHPmwhkF3pRNEE+y+wOVD3vyERNy6KWfXfZ55rnWXCI9
+ 77HFAmxHLtLHN72bAjD2norD50hk28SzR+EvVcEQAeWYFBVpLqV3g0uo3DSKDCXHZlqZ
+ bcYizrSiELZ7OnVfZs0q6f4G1SgKCafEXLN4nwcvteLbcVz/G5pPQI4k7/CCs5l5vIR+
+ zqYwcmaohNLAGXAEMIuzXiHSib9M4zttVIxCn2j4zGbZx0HrP441AQfGuFR6LF8VcVRy
+ cqiGooYajdq4KyYCR/4h3Zp6Ph+s12k1zRnL+7HNu9zQlH4ePMhuXQSn7bWQFcgt4Ck7
+ 4mdQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWlzqN2tc+EAVKvOUL6FejjQRf+KxjJqrSg2wtA+nMo46N5v3Q1J56D59EQU+g8iheVyBNMNsE=@lists.denx.de
+X-Gm-Message-State: AOJu0YzuGjYu1gghKKCfKMIwnowgM5cI5FFOrdfxLpw8GzomMsI/4aT+
+ b3TSyw2j5ZdZhOP/cDDumdcri9riJ6obl36Wrwj1fEeeuNnNi3zRzoim4fnQcik=
+X-Google-Smtp-Source: AGHT+IFf3znUhfPWjN1D1XH1tgDVekO5Z4Kdo2eZkJpJ0tjvQo1doqLaYSwTRtMqax4pGSfuvz/2IQ==
+X-Received: by 2002:a05:6214:2f13:b0:6cb:5f28:6b73 with SMTP id
+ 6a1803df08f44-6cbf000026dmr179117126d6.9.1728942160985; 
+ Mon, 14 Oct 2024 14:42:40 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6cbe85b7a03sm49989666d6.38.2024.10.14.14.42.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 14 Oct 2024 14:42:39 -0700 (PDT)
+Date: Mon, 14 Oct 2024 15:42:36 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>
+Subject: Re: [PATCH v4 4/5] efi: Reserve some memory for initial use
+Message-ID: <20241014214236.GB53053@bill-the-cat>
+References: <20241011212126.747741-1-sjg@chromium.org>
+ <20241011212126.747741-5-sjg@chromium.org>
+ <71ECC011-77EC-4308-AFE5-0E301BC27F84@gmx.de>
+ <20241012012716.GE14210@bill-the-cat>
+ <CAC_iWjL_YQ24ZecbN7oC-37PRR6iuUiiui-a0VPqSSVRunepdQ@mail.gmail.com>
+ <CAFLszTjzHBtR8vzk0wT-nNiwbsotqskVhVEX0ibh-Uea1+Da6Q@mail.gmail.com>
 MIME-Version: 1.0
-References: <20241012232231.5638-1-sjg@chromium.org>
- <20241012232231.5638-2-sjg@chromium.org>
- <20241013161520.GM14210@bill-the-cat>
- <CAFLszTjijFBZar31k1QaLUKcFQyD+CGqyo5wH=7agFF1gr-CLQ@mail.gmail.com>
- <20241014211248.GY53053@bill-the-cat>
-In-Reply-To: <20241014211248.GY53053@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 14 Oct 2024 15:35:23 -0600
-Message-ID: <CAFLszTg6fVsasb8=CJLqFm-T9Vys9_hJDeKfAfTmvfWXNcPZZA@mail.gmail.com>
-Subject: Re: [PATCH 2/2] qconfig: Ignore defconfigs containing #include
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="dH5hcAESIiZ5T6CT"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTjzHBtR8vzk0wT-nNiwbsotqskVhVEX0ibh-Uea1+Da6Q@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,40 +100,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Mon, 14 Oct 2024 at 15:12, Tom Rini <trini@konsulko.com> wrote:
->
-> On Mon, Oct 14, 2024 at 02:20:00PM -0600, Simon Glass wrote:
-> > Hi Tom,
+--dH5hcAESIiZ5T6CT
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Oct 14, 2024 at 02:19:56PM -0600, Simon Glass wrote:
+> Hi,
+>=20
+> On Fri, 11 Oct 2024 at 23:47, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
 > >
-> > On Sun, 13 Oct 2024 at 10:15, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Sat, Oct 12, 2024 at 05:22:30PM -0600, Simon Glass wrote:
-> > >
-> > > > Running "tools/qconfig.py -s" will re-sync files with #include in them
-> > > > and so un-#include them.
-> > > >
-> > > > Ignore these and mark them as failures.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > Fixes: https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/28
-> > >
-> > > How about marking them as warnings? It may be good to re-sync
-> > > configs/am62px_evm_a53_defconfig for example and then re-add the
-> > > #include line, but configs/am62x_evm_a53_ethboot_defconfig on the other
-> > > hand very much should not be resynced. Thanks for getting on this issue
-> > > so quickly.
+> > Hi Tom
 > >
-> > Do you mean still do the resync, but show a warning? It does
-> > obliterate the old defconfig, but I suppose people can just not commit
-> > the changes. Is that what you are thinking?
->
-> No, sorry for being unclear. I was thinking it should NOT be resynced
-> but counted as a warning not a failure.
+> > On Sat, 12 Oct 2024 at 04:27, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Sat, Oct 12, 2024 at 12:01:54AM +0200, Heinrich Schuchardt wrote:
+> > > >
+> > > >
+> > > > Am 11. Oktober 2024 23:21:25 MESZ schrieb Simon Glass <sjg@chromium=
+=2Eorg>:
+> > > > >The 'point of cooperation' is where U-Boot starts allowing EFI to =
+use
+> > > > >memory outside of the U-Boot region. Until that point, it is desir=
+able
+> > > > >to keep more below U-Boot free for loading images.
+> > > > >
+> > > > >Reserve a small region for this purpose.
+> > > >
+> > > > Your commit message provides no clue why this should be needed.
+>=20
+> Yes, I hadn't realised that people didn't understand what I was
+> getting at. Tom asked the same question on irc.
+>=20
+> It allows us to separate the lmb allocations from the EFI allocations,
+> so we don't need to have them both in sync. We use lmb for loading
+> images, then EFI takes over and does what it likes, respecting the
+> existing lmb reservations.
 
-Well qconfig doesn't have the concept of a warning, or at least not in
-the title. How important is this?
+But, again, LMB is not for loading of images. It's for dealing with
+memory reservations of various types.
 
-Regards,
-Simon
+--=20
+Tom
+
+--dH5hcAESIiZ5T6CT
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcNkEcACgkQFHw5/5Y0
+tyx8gwv/aSsPyD0NT0k6iJzBVF8PB+4R51NcVknXy7pPhvuxQv700rT6N/Q7k7ZB
+HV24y6EmJBkAbrG+ekHUvKDAMnZAOmL9Sp9QXJ9CpCiiyPo5/NB1j6eT77V1J4fa
+kyrxMKYhcnhEAQe1mRqx9X3mvI917wikwvgwfI8uJTgaq8s7TI8Nam/3YRUxQqte
+ihb3fSy4c4o+uaaNHQTpIteEuUIIN8H5UcfjVkW0PaiTn6VN/to2HW0+6OUtf0U3
+yLY9ubf9RH0p/4VOa1Xa7GsBX7DPyGa0Keb1OuM93Ufh7NviIrU85clfZaZ4+GM9
+vzpIrywMklGk2gFAxJUjcNuRjSABt2r6KZKG1U1+sU1g5+ocswXYyT4fkGXGPLFq
+FmqKRk0xQuyO0D7CHbiGoUtQEx23HavZyBoyNAAOHUQpTe/co5ycTregYgQfDJbr
+3Ba9kG/w9EXIHvXiSRXf29n/4F6w775INgxJRHhwpNey1drsS7Ll5M7HuFFjjTGS
+25ruUwJ7
+=k+ff
+-----END PGP SIGNATURE-----
+
+--dH5hcAESIiZ5T6CT--
