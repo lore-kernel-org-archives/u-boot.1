@@ -4,61 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B6CBCF259D
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 05:51:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F13BFCF259D
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 06:12:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D9E388D4F;
-	Mon, 14 Oct 2024 07:51:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 229ED88F3F;
+	Mon, 14 Oct 2024 08:12:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1728885118;
-	bh=BmWpi7O7uDEthmLUaTwDDSQQnf4Rczp2cLdjUyJzCuI=;
+	s=phobos-20191101; t=1728886330;
+	bh=7EpOQm2YDQqN0b5p+uZw3doJoOqCA7izEmCIj8AdWdk=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=k/MTuU3+6R4yTanR7dGUULHccLb4rl8DIASd4TXHgHnu5ORY9ks4IScu2YKJ2EY2y
-	 nQQSyQkzhz1hRpmbcAzcMc1JUfwHYSaOle/l+GHpo5iKITWN6FWBelxqNKHE6qybLG
-	 yETbCUFj7PUKdgk40vPtympe/EBcuLmDnM6cJDuWRkWrD+Ha2OGM3NuNH9MJQx7pED
-	 i7HESoFgD0D8WRCUT331LmNRmQet7xMgS5woRgJy/pXmMMVFZJLuIgj6QpL7latIUM
-	 Ekchx1kYaikprVKBV91kvjWTprE/98++POqpgTZjCI2RRfz7g0tNkb+xdtVCFRT6A/
-	 W/z6JkCDzTf9g==
+	b=WWu1sqIuOLqEjaOBWv+ZFdD3gB9ySeum75EfD8bDP8W3At+kA/hclLzRVIVAyWu6w
+	 5Y9trMruyP3xwSn+SbA3LBHvEubO8IIGtVObJQWTA2dO5QPHcpRP3bIiiKxhYuywp7
+	 CZ1AfIk+kYQM8LGP+1YLYR+5nm5ylc5JB1IG0HwsvSRoVv9JTxrwsT9iCkMfzii014
+	 wqscHFYZknSWqKAWowYwZpxEnD2h8rYwvG90UQyvBxqfFyxyLo46y/2yY2Mt/cD/Mf
+	 SHNy9OGkle7jZBBopHIWLWyTQ2k66761iz6kqSkk/KrmqFxk+JR58734+WXNUmb2cu
+	 Pb3fHfzMm1Gqg==
 Received: from [192.168.1.107] (87-97-107-160.pool.digikabel.hu
  [87.97.107.160])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 6534688D4F;
- Mon, 14 Oct 2024 07:51:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 0E6EA88EC6;
+ Mon, 14 Oct 2024 08:12:05 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1728885116;
- bh=BmWpi7O7uDEthmLUaTwDDSQQnf4Rczp2cLdjUyJzCuI=;
- h=Date:Subject:To:Cc:References:From:Reply-To:In-Reply-To:From;
- b=UoNCfNAWMwRmi+EvROGHaFR7/x5x0AbD3Q2/gmIB3fH5dL4GIN3m/Zqv2BNelwP+i
- LYxOYc7o2deDkRPaduA+cOxoMjJ4btEAWy6aeadHV3uR2K0wYENeXiLA2Avc2Piuyo
- 3uF7QHBhLYE5gaJ+OvoI9bjNjxEyOY9MXTAB2TNKt/nrG2/bXm7z9rRaASI7KWuNEi
- GdLlcpgHWdVIKf2RHysSXTHCKgvUz0QfoDqjNF04KHjuXg3uu3WGp8B1VrcY7cqHC0
- KJwrSpp3NZ83W/Fp8lgqOSy4eIZftZ4d3PVgchMKyaJaY13jOUrthPjU0oibx/9Lp5
- 58K3HNh/y4Uxw==
-Message-ID: <135eab78-3fbb-b35f-5327-c0ac4cb36a8e@denx.de>
-Date: Mon, 14 Oct 2024 07:49:46 +0200
+ s=phobos-20191101; t=1728886328;
+ bh=7EpOQm2YDQqN0b5p+uZw3doJoOqCA7izEmCIj8AdWdk=;
+ h=Date:Subject:To:Cc:References:Reply-To:From:In-Reply-To:From;
+ b=kBoRwXfFOn1n8wd+QLzVAwHplFY+uebxxf7yM8HJKC71pnK6Q03RzZQ9OvuYPjqQM
+ m9VVxnsupIYV4xNCfVsTLawqTWxZad1vQP48AsFwjoee+GpnFK6VRYpf7LWxnv7ruh
+ l0awZnddZU315pnXQXVJBkNYvJ8Gz726wO1QCPPcWEhoKoAupkbVksyLSpO+szhLjg
+ VM75si8dZinBDH9ABfgGJed9gHTGdHGSznudO5sctB6ecvZ/j0jxO9vTRZ5bgJyPCX
+ LkrJgwEMZpsx24/0IBVtx2GnVIHKJ2EJCOVmVsR3Lenf2NYaeNkUHBYdytzQ9GIrbZ
+ h3FefNzTFGNNw==
+Message-ID: <8a5017a6-564e-4c65-cda7-912338990ba6@denx.de>
+Date: Mon, 14 Oct 2024 08:09:56 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
 Subject: Re: [RFC PATCH v1] dts: imx8mp-u-boot.dtsi align flash.bin
 Content-Language: en-US
-To: Marek Vasut <marex@denx.de>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Fabio Estevam <festevam@denx.de>, Fabio Estevam <festevam@gmail.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+To: Francesco Dolcini <francesco@dolcini.it>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Fabio Estevam <festevam@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Marek Vasut <marex@denx.de>,
  "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Stefano Babic
  <sbabic@denx.de>, Tim Harvey <tharvey@gateworks.com>,
  Tom Rini <trini@konsulko.com>
 References: <20241010082831.19983-1-hs@denx.de>
- <ccaff439-14f9-4bf1-b13e-79235de20f75@denx.de>
+ <20241013124213.GA15299@francesco-nb>
 From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <ccaff439-14f9-4bf1-b13e-79235de20f75@denx.de>
+In-Reply-To: <20241013124213.GA15299@francesco-nb>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,60 +77,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Marek,
+Hi Francesco,
 
-On 12.10.24 23:24, Marek Vasut wrote:
-> On 10/10/24 10:28 AM, Heiko Schocher wrote:
+On 13.10.24 14:42, Francesco Dolcini wrote:
+> On Thu, Oct 10, 2024 at 10:28:31AM +0200, Heiko Schocher wrote:
 >> trying to load current flash.bin with uuu tool
 >> leads in not booting U-Boot as missing some bytes.
 >>
 >> Align flash.bin in this case to 0x800 bytes, to
 >> make uuu and ROM api happy.
->>
->> Signed-off-by: Heiko Schocher <hs@denx.de>
->> ---
->> I am unsure about the value of 0x800 which is twice the
->> value the code in spl_romapi_load_image_stream(), requests
->> from romapi which in my case on imx8mp is 0x400...
->>
->> May I oversee something?
-> Was the flash.bin aligned differently before the binman conversion , or did it work with UUU by 
-> sheer chance ? I don't see any alignment changes during the binman conversion.
-
-May it was broken before too?
-
-> tools/imx8mimage.c does contain
 > 
->   33 #define ALIGN_SIZE              0x1000
-> 
-> But that should be called internally by binman anyway.
-> 
-> Is the flash.bin correct or is it already corrupted when generated by this binman stuff ? You should 
-> be able to extract the u-boot.itb from flash.bin and run mkimage -l on it to validate it.
+> Are you sure that the issue is on this? Can you check
+> https://github.com/nxp-imx/mfgtools/issues/416 ?  Just sharing something
+> related when using UUU on OE generated binaries to confirm you are
+> not chasing the wrong issue here.
 
-No problem with u-boot.itb, just the spl_romapi_load_image_stream()
-waits for more bytes...
+Thanks for the tip, but I do not use meta-freescale... but yes,
+I build with oe... the issue is, because
 
-Strange ... I disabled CONFIG_IMX_HAB in my defconfig and now without
-this patch U-Boot boots, but uuu stops @ 98% and after a while it shows:
+Okay, I tried the following (flash.bin created without this patch):
 
-"""
- >Start Cmd:SDPS: boot -f /media/pi/data/srv/tftpboot/xxx/20241010/flash.bin
-Wait for Known USB |New USB Device Attached at 1:11313
-98%1:11313>Fail HID(W): LIBUSB_ERROR_TIMEOUT (-7)(24.48s)
+$ cp flash.bin flash.bin-tagged
+$ stat -L -cUUUBURNXXOEUZX7+A-XY5601QQWWZ%sEND flash.bin-tagged >> flash.bin-tagged
 
-
-
-
-
-Error: HID(W): LIBUSB_ERROR_TIMEOUT (-7)
-
-
-
-load flash.bin failure
-"""
-
--7 (E2BIG) ?
+and loading flash.bin-tagged... which leads in uuu reaches 100%
+but U-Boot does not boot, as rom_api_download_image() still waits
+for some bytes ... simply sending more bytes by starting uuu again
+leads in starting U-Boot!
 
 bye,
 Heiko
