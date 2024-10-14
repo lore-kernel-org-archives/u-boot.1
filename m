@@ -4,91 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00338D18157
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 23:07:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E72FD18157
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 23:55:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 410FB89211;
-	Tue, 15 Oct 2024 01:07:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3AEE5891A0;
+	Tue, 15 Oct 2024 01:55:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QlOHO89/";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Jo3c+6vn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DC0E89211; Tue, 15 Oct 2024 01:07:35 +0200 (CEST)
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
+ id 3B7C6889CA; Mon, 14 Oct 2024 20:02:19 +0200 (CEST)
+Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
+ [IPv6:2607:f8b0:4864:20::102f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC4B388DFD
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 01:07:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E538C88730
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 20:02:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-7b11704601cso396857585a.3
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 16:07:32 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pj1-x102f.google.com with SMTP id
+ 98e67ed59e1d1-2e30db524c2so1778551a91.1
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 11:02:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1728947251; x=1729552051; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=v6W5bwYF+kp4ZHMp7cqrN3C+GBQxlKrFH/Dg0hznR1c=;
- b=QlOHO89/O6wgfoxyXqnueld/YDwOFpsATR0gpY1WM+yzQAv91ZtiLN14Ajips1vQ3t
- 2r5+xDVyv8xnED5I6UDiaTyXHuj9HrD+kdCSVZwqAB7t/W20DNayCibfnkoW/pYoDZOD
- /MG8KfMR0SXSO7kGpc0Z/ypoSRkRwn2vu8NnE=
+ d=linaro.org; s=google; t=1728928934; x=1729533734; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=vfS6qUe7K4OlsEGFC3w561P953Zg3pomiiT1lNvMAp8=;
+ b=Jo3c+6vnaFVbyHvQyDs2YCW1svTdXlSFyGRGXF9/9VrNX0NMQH5uQbyJF047Qo6IvS
+ DveK5KQulKs8R6xZASZqvDzWD1KULEuq2eU6eU/fOcN+PWGrulqf9ufLT78dlyTJd2rx
+ gLCHjZw+CHW+Iwv6y9MQ65N+OaHfd2ovP3A4mjXU+ot+AKMdVZaafX0yF1GSKqGMcI8D
+ YwO9SB9KItIbivlUrXg74X6FNowOFgQuDos4yqFARafwQXAqSu/hAWF8FXljT98x49y5
+ o13pDRt7BAixEWw59jUinLlt6eNucwbyQrKfHSVxGLZuzUCA7zIdSxo2ZH6whWvVKC5D
+ ZWkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728947251; x=1729552051;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=v6W5bwYF+kp4ZHMp7cqrN3C+GBQxlKrFH/Dg0hznR1c=;
- b=sdbByF/tey2F17VgB20AIFgr3xEeKLxtn94PVBMePpWvfk0XcThxKBgq0+MNpXzsQT
- y7ryiWW+WwNtOEYi4f4G4ZhM4bqELqaf/lpAKRa3E9ZwcUkHSwhuNHh//6LbWurwxCA4
- LFAQSTxcHoNcqBMeG7b/M2gzw/sg79vfHXLb4TZPQEVgWWkUog6Rf7394RSE0dmvDAgU
- 1hA+5YR3YmeQyiV5065xcvm6oKoB8CGD4gtIHjroS4uSB77A4rdKWs7oWIr2gRGcxWzr
- bHODYk5n18t5VUM4eqG1Bwfo9qAtztO5/NJEgBajl5e4eVbgH0P9CsonhD5U2zHmpsbx
- 6h1w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUyqhySLswfctMpOqsme/yzqtMrj/MTZSkfqB6f52ItEfog/52w5zXxMWJ10Umbs9qf7uOD9pw=@lists.denx.de
-X-Gm-Message-State: AOJu0YwkxeysyF/Z4oxR1ve976nSWdtbzCiZVaxBvBezZP1KZf1K4zO5
- ptOKIijYjpTCuogfM3KkNeupd7xj8a8irMncOADaXaq7tN8xDB26wvXQFPbNfbo8/0V6mG/g9+7
- MdnM=
-X-Google-Smtp-Source: AGHT+IFCrV7FPF0Cme1ZpLOYeIBBmNqa2mUcPYkHRkdj8lY9EcjaT9TyYx5jDpBVZn/nDYQF/T8kOQ==
-X-Received: by 2002:a05:620a:1922:b0:7a9:aeb3:4b22 with SMTP id
- af79cd13be357-7b120faa814mr1869297285a.6.1728947251404; 
- Mon, 14 Oct 2024 16:07:31 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b1363b3f1asm4003885a.118.2024.10.14.16.07.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Oct 2024 16:07:30 -0700 (PDT)
-Date: Mon, 14 Oct 2024 17:07:25 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Caleb Connolly <caleb.connolly@linaro.org>, Jonas Karlman <jonas@kwiboo.se>
-Subject: Re: [PATCH v3 03/15] efi: memory: use the lmb API's for allocating
- and freeing memory
-Message-ID: <20241014230725.GH53053@bill-the-cat>
-References: <20241013105522.391414-4-sughosh.ganu@linaro.org>
- <CAFLszTiov914NOS9_5UU4oLi0fCQ84a-Et82BeSEJbts4MEOVQ@mail.gmail.com>
- <20241014155642.GO53053@bill-the-cat>
- <CAFLszThVP_OgyTt_ksJ1_7HAHT+K-wcixWB+k+fmzAjh6+5Bmg@mail.gmail.com>
- <20241014210453.GU53053@bill-the-cat>
- <CAFLszTgm=t=y1kj7Ju5Ls7nf0ghLCqRppVnY7yorD6v1hoeN1g@mail.gmail.com>
- <20241014212718.GZ53053@bill-the-cat>
- <CAFLszTiW_N-DvivnC_Fq4LWv+H+S2h8A-8o5dXPtGMsii1ToxQ@mail.gmail.com>
- <20241014214841.GD53053@bill-the-cat>
- <CAFLszThxdPd7ty2=X66ZRWopzE0R1ChhdRZzah5tYLS+FvZ-Jg@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1728928934; x=1729533734;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vfS6qUe7K4OlsEGFC3w561P953Zg3pomiiT1lNvMAp8=;
+ b=JA5kDoL9mGNDgOw5kv1oWr6XZe/Mlaj6b28yn10Az09qLIM2mwrJ9ARRP5tNgVkf2L
+ zMWcuYS87HJfvojSbrBpdOEmfgJW79E4bC//dHzjs2DfncHVZcOKC9MEqZMrYKNJiOtd
+ K0IrGg3aZD//nM4ZGC1SSWsqN7fTpaJrNA0m67RKVORZMALqFJb+6RqX842GGjetBDmS
+ NHMbp2VpLkWrgCls3sKp4rTbmDYoYwVpo42FHV7r4jG8XC85w5Pa1m8A+49yUy6iPfd2
+ fllS/k2irGdx6WgAzZOck5R/3SBxsYPH/+zjpE4yVt3WyfBRWi8X0FPPlxnqWWDJ7Ais
+ zHhA==
+X-Gm-Message-State: AOJu0Yx19zZoCFmY3peEriLYIlAa5B0ZhDnAWlCUf8aqxaM2YbxfMjJi
+ SdgVfPDmxd3uOGyCwKX3GHs9uukav6VN756TxshcgXv6ng6Uqm+hdW2lMYxRBokJ8zl+0S7OEDS
+ mvYdbgfCGhwWvTc8tFPJ0+y63FabL4loLUuGteQ==
+X-Google-Smtp-Source: AGHT+IE1Zgqr9alle1qPc69HunHlR9J+2gJMHONGRMB1jdkm/p/bUVerICp+q9mV38uwgzTnQETdRFp704+pJODyYY4=
+X-Received: by 2002:a17:90a:fa88:b0:2d8:8430:8a91 with SMTP id
+ 98e67ed59e1d1-2e3152c0653mr12303856a91.10.1728928934186; Mon, 14 Oct 2024
+ 11:02:14 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="XUrbc5xVkWoFxETt"
-Content-Disposition: inline
-In-Reply-To: <CAFLszThxdPd7ty2=X66ZRWopzE0R1ChhdRZzah5tYLS+FvZ-Jg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20241003215112.3103601-1-raymond.mao@linaro.org>
+ <20241003215112.3103601-8-raymond.mao@linaro.org>
+In-Reply-To: <20241003215112.3103601-8-raymond.mao@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 14 Oct 2024 21:01:38 +0300
+Message-ID: <CAC_iWjJThF8qo61LmnhVmgvG069GUhgWKb7fq0r7viuW5SSJgg@mail.gmail.com>
+Subject: Re: [PATCH v8 07/27] mbedtls: Enable smaller implementation for
+ SHA256/512
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, manish.pandey2@arm.com, 
+ Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
+ Mario Six <mario.six@gdsys.cc>, 
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
+ Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Sumit Garg <sumit.garg@linaro.org>, Sean Anderson <seanga2@gmail.com>,
+ Andrew Davis <afd@ti.com>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Bryan Brattlof <bb@ti.com>, 
+ "Leon M. Busch-George" <leon@georgemail.eu>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Alexander Gendin <agendin@matrox.com>, Jonathan Humphreys <j-humphreys@ti.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Marek Vasut <marex@denx.de>, 
+ Paul Barker <paul.barker.ct@bp.renesas.com>, 
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Linus Walleij <linus.walleij@linaro.org>, 
+ Jonas Karlman <jonas@kwiboo.se>, Greg Malysa <greg.malysa@timesys.com>, 
+ Kongyang Liu <seashell11234455@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Eddie James <eajames@linux.ibm.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Tue, 15 Oct 2024 01:55:13 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,111 +111,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, 4 Oct 2024 at 00:55, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> Smaller implementation for SHA256 and SHA512 helps to reduce the
+> ROM footprint though it has a certain impact on performance.
+> As a trade-off, enable it as a default config when MbedTLS is
+> enabled can reduce the target size significantly with acceptable
+> performace loss.
+>
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> ---
+> Changes in v6
+> - Initial patch
+> Changes in v7
+> - Fixed the config dependencies.
+> Changes in v8
+> - None
+>
+>  lib/mbedtls/Kconfig              | 24 ++++++++++++++++++++++++
+>  lib/mbedtls/mbedtls_def_config.h |  6 ++++++
+>  2 files changed, 30 insertions(+)
+>
+> diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
+> index 262abb2cec7..8e3a94c6f2b 100644
+> --- a/lib/mbedtls/Kconfig
+> +++ b/lib/mbedtls/Kconfig
+> @@ -164,6 +164,18 @@ config SHA256_MBEDTLS
+>           This option enables support of hashing using SHA256 algorithm
+>           with MbedTLS crypto library.
+>
+> +if SHA256_MBEDTLS
+> +
+> +config SHA256_SMALLER
+> +       bool "Enable SHA256 smaller implementation with MbedTLS crypto library"
+> +       depends on SHA256_MBEDTLS
+> +       default y if SHA256_MBEDTLS
+> +       help
+> +         This option enables support of hashing using SHA256 algorithm
+> +         smaller implementation with MbedTLS crypto library.
+> +
+> +endif
+> +
+>  config SHA512_MBEDTLS
+>         bool "Enable SHA512 support with MbedTLS crypto library"
+>         depends on MBEDTLS_LIB_CRYPTO && SHA512
+> @@ -172,6 +184,18 @@ config SHA512_MBEDTLS
+>           This option enables support of hashing using SHA512 algorithm
+>           with MbedTLS crypto library.
+>
+> +if SHA512_MBEDTLS
+> +
+> +config SHA512_SMALLER
+> +       bool "Enable SHA512 smaller implementation with MbedTLS crypto library"
+> +       depends on SHA512_MBEDTLS
+> +       default y if SHA512_MBEDTLS
+> +       help
+> +         This option enables support of hashing using SHA512 algorithm
+> +         smaller implementation with MbedTLS crypto library.
+> +
+> +endif
+> +
+>  config SHA384_MBEDTLS
+>         bool "Enable SHA384 support with MbedTLS crypto library"
+>         depends on MBEDTLS_LIB_CRYPTO && SHA384
+> diff --git a/lib/mbedtls/mbedtls_def_config.h b/lib/mbedtls/mbedtls_def_config.h
+> index 6fba053bd7c..1af911c2003 100644
+> --- a/lib/mbedtls/mbedtls_def_config.h
+> +++ b/lib/mbedtls/mbedtls_def_config.h
+> @@ -35,6 +35,9 @@
+>  #if defined CONFIG_MBEDTLS_LIB_CRYPTO_ALT
+>  #define MBEDTLS_SHA256_ALT
+>  #endif
+> +#if CONFIG_IS_ENABLED(SHA256_SMALLER)
+> +#define MBEDTLS_SHA256_SMALLER
+> +#endif
+>  #endif
+>
+>  #if CONFIG_IS_ENABLED(SHA384)
+> @@ -48,6 +51,9 @@
+>  #if defined CONFIG_MBEDTLS_LIB_CRYPTO_ALT
+>  #define MBEDTLS_SHA512_ALT
+>  #endif
+> +#if CONFIG_IS_ENABLED(SHA512_SMALLER)
+> +#define MBEDTLS_SHA512_SMALLER
+> +#endif
+>  #endif
+>
+>  #if defined CONFIG_MBEDTLS_LIB_X509
+> --
+> 2.25.1
+>
 
---XUrbc5xVkWoFxETt
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, Oct 14, 2024 at 03:55:05PM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Mon, 14 Oct 2024 at 15:48, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Mon, Oct 14, 2024 at 03:35:12PM -0600, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Mon, 14 Oct 2024 at 15:27, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Mon, Oct 14, 2024 at 03:13:01PM -0600, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Mon, 14 Oct 2024 at 15:04, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Mon, Oct 14, 2024 at 01:13:17PM -0600, Simon Glass wrote:
-> > > > > > > Hi Tom,
-> > > > > > >
-> > > > > > > On Mon, 14 Oct 2024 at 09:56, Tom Rini <trini@konsulko.com> w=
-rote:
-> > > > > > > >
-> > > > > > > > On Mon, Oct 14, 2024 at 09:50:37AM -0600, Simon Glass wrote:
-> > > > > > > > > Hi Sughosh,
-> > > > > > > > >
-> > > > > > > > > On Sun, 13 Oct 2024 at 04:55, Sughosh Ganu <sughosh.ganu@=
-linaro.org> wrote:
-> > > > > > > > > >
-> > > > > > > > > > Use the LMB API's for allocating and freeing up memory.=
- With this, the
-> > > > > > > > > > LMB module becomes the common backend for managing non =
-U-Boot image
-> > > > > > > > > > memory that might be requested by other modules.
-> > > > > > > > > >
-> > > > > > > > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > > > > > > > > ---
-> > > > > > > > > > Changes since V2:
-> > > > > > > > > > * Use map_to_sysmem() to get the user-visible address t=
-o be shared
-> > > > > > > > > >   with the lmb API's for sandbox.
-> > > > > > > > > >
-> > > > > > > > > >  lib/efi_loader/Kconfig      |  1 +
-> > > > > > > > > >  lib/efi_loader/efi_memory.c | 77 +++++++++++----------=
-----------------
-> > > > > > > > > >  2 files changed, 24 insertions(+), 54 deletions(-)
-> > > > > > > > >
-> > > > > > > > > When efi_init_obj() is called, it should be able to add t=
-he lmb memory
-> > > > > > > > > to its own tables. There is no need to worry about lmb af=
-ter that,
-> > > >
-> > > > Saying "There is no need to worry about lmb after that" is not true.
-> > > > Invoking the "env" command for example will have efi_init_obj() be
-> > > > called, among the others that Heinrich listed. And to possibly refu=
-te
-> > > > a next issue, that is intentional so that efivars, the standard
-> > > > mechanism used by an OS to talk with the firmware can be available =
-to
-> > > > U-Boot, if I recall things correctly.
-> > > >
-> > > > My understanding of your assumption is that you believe that once t=
-he
-> > > > EFI_LOADER subsystem has started work on a payload we're just a few=
- call
-> > > > chains away from the OS being started and runtime services aside U-=
-Boot
-> > > > being done.
-> > > >
-> > > > My understanding of how things are used today is that this is incor=
-rect.
-> > >
-> > > What I am getting at is that once we have called that function we know
-> > > we are booting an EFI app or using an EFI feature in preparation for
-> > > doing so. Let's start there. Is that correct?
-> >
-> > No, it is not correct.
->=20
-> Can you give me a code link?
-
-env_set() -> env_do_env_set() -> do_env_set_efi() -> efi_init_obj_list()
-
---=20
-Tom
-
---XUrbc5xVkWoFxETt
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcNpCkACgkQFHw5/5Y0
-tywUwwv/XB4yM/GGqNpWbl1rDa9oQGhg8YaqwYw6DimRersbqW174im4LZsb66iu
-jS2dAz5ZFpzmds9B9yKDCMuMT16LhFM9Z6eaBa+CXB5q1i+PklHRhe3kXVV+Ed3j
-vnSG3qqGchkF8/thPew3+Vv9/CYC25eg2IGWJtrPor6XLSC58mnf8wMiR8M8fs2c
-6oXnrT9RiZmtPNakGHg4vzHRME1cI1yiwNsgSAHYj/PKFqBEOrvPdV8iKTpoE+2n
-Y++Had+TZnGd3apH+M4DkI8Y14JRlLjDT0QSsPUVdH1cTPyzuD939gl/qH+8Jq3+
-K5JiNYtBMHiqjHLgM5JsW69St2nj20fioGtMacTn01rrE8ZCV9YTnMiBA/Jdk5fg
-R/QrDodslnRFLJ9s0nNQ+vdMZ/353zaUE7aUzOZcBTjwz0i6I4I5t2pafLg6zijP
-JE5mdHFySIY62YCrRZORoEncrzNBpsXIghEHjZUb6xal+He/gbSAM3v6Czy2/6Sv
-FJmMbb8l
-=jLOH
------END PGP SIGNATURE-----
-
---XUrbc5xVkWoFxETt--
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
