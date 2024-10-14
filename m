@@ -4,74 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E8D5D1813A
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 20:20:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B391D1813F
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 20:21:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0F7F8917A;
-	Mon, 14 Oct 2024 22:20:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 87E8189192;
+	Mon, 14 Oct 2024 22:21:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g7s8A/Vd";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eO1swzTo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 990908913A; Mon, 14 Oct 2024 22:20:56 +0200 (CEST)
-Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
- [IPv6:2607:f8b0:4864:20::236])
+ id 271678918E; Mon, 14 Oct 2024 22:21:08 +0200 (CEST)
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
+ [IPv6:2607:f8b0:4864:20::734])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 728058917A
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 22:20:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 94386891A5
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 22:21:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x236.google.com with SMTP id
- 5614622812f47-3e4d78300c2so2626701b6e.0
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 13:20:54 -0700 (PDT)
+Received: by mail-qk1-x734.google.com with SMTP id
+ af79cd13be357-7a9c3a4e809so379727885a.2
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 13:21:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728937253; x=1729542053; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1728937262; x=1729542062; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=rFBccG6mKD/BY7LF624WUJWM+CRHaSJ+UzWme7qv/Dc=;
- b=g7s8A/VdAn9r1+ZKUiB6ZPKNa9wlHKSAJCAYiMVjEwKEMQYfR0zCDaHHxbMxAFgdNk
- Lx+35NJMzc3kQMx3LttvwXzu3up9helcZjPfasuiCiEibGh5dXFCuVy+JlMegGZ9fbJZ
- YB9EAc4tnH/aLYIfdNeAJ/752TJMgEJWsplak=
+ bh=spy8jmHi3mmlTewGz4yR5ILSZqEE5YviKZSUYN/BQao=;
+ b=eO1swzTockaN2mBSrEuCpoENeyj2XNSWhq0zgHzZnutY0wsEr3ZfCnIEFglb8oQPGR
+ saMDY+5ydwWuH4P3Jae9IMAF7hJebUFLwRzL+uqx60EN58lCq/vzcqP/MdE1nzj9PZU7
+ MkKfmoDdVm98bZhEqYpY6dM5n5hBI1NU7Fe9U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728937253; x=1729542053;
+ d=1e100.net; s=20230601; t=1728937262; x=1729542062;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=rFBccG6mKD/BY7LF624WUJWM+CRHaSJ+UzWme7qv/Dc=;
- b=tMCVM/fLXtMXXFBnNfRgeYmiKAMBRN3gU6tpu4tLC63LzClcLOhCg1JwEO1RifKcbj
- tK90iN9rt3PQ6MoWoy0xa/J6ORwT0OBH2cS2EPfkVLQqTS9Ckrc0fTPMA2meRJOTZwf8
- CXwgEHEwv7bBkjwONh6lLP4wddvM4T3WkO2OoNT885PvtHFlhKsx8DXwsCYteHbuohhI
- OR6NruWSGfkN8G7FWJDxNV/pOz/zxyY7DRRlMf7XTt7i3cWrkj6waRjWqc3EQuui0YV2
- 5y4EgDchcoMlu6U9yOTV9JBELCsMMY++OdPINJzP8SepE324RAB0ExAzO9QdiaoY9cnS
- hIkw==
-X-Gm-Message-State: AOJu0Yyp1Rve1PDeJX+ukYAYwDhTnr5BqDdkgNZcOhZ91fhsvhZ3piIJ
- sc14CqE7EbEVpewVr0vU5lZrhxS/zOvylQrZKj7Szqx9mnu/dL2VXQPBAVnB/Y7Z4cpMMxd+qPs
- yhpHwXRfWuXtw5iOovv2Dk1bluJOLPMSEvoq2AiOTRN/rMF0=
-X-Google-Smtp-Source: AGHT+IEf23VvgGEYGxlLZX6dV4jKeBMFzBbXg8ELHUFB0WAKD4e72RXYSwqNSb+9SBwOdPpABiNP5c5ovDJCyjgXHx4=
-X-Received: by 2002:a05:6808:15a6:b0:3e3:a7f0:103a with SMTP id
- 5614622812f47-3e5d220ddc2mr4105143b6e.15.1728937253266; Mon, 14 Oct 2024
- 13:20:53 -0700 (PDT)
+ bh=spy8jmHi3mmlTewGz4yR5ILSZqEE5YviKZSUYN/BQao=;
+ b=C24Qu9Fa8aWuIOaFBJZpVM9Hw7UG2q5qk3yECrCkiSqiSLk9Dr5JhYCEw6/m2A0k+y
+ z4RFc7aQAYIv+pIHPSMzMj/oanHFHUTWDEOy19TGiXPJWmavCjeIZurVPLaImVZXqjfv
+ oYZpGGRDVtZAF8RpaRUxuBFyJGR805aBBOYb60YwClJy1cevgwGeg8sXv06oVyZJRcku
+ ilrBMI7XAMOtJE3aIGqsojRoFNy/wIznR06lwT9OgcpCjaMMLixZVqnFdGzW95ai4kmR
+ bfNYspSunNPi1ukzUC6KwRWTwGlzegJAQ/zeCEfiqRWuzPA0732NQVpAyqLUX5QmlCBg
+ 7uNA==
+X-Gm-Message-State: AOJu0YwSGUw65Vx9hK0A0XtT6lcZcMXLqb7vHHd5Bf1LgPYW660WTcJT
+ gNaf9gPb493B2KNrlGf+qZ2J5L0YbOnTXne+SxeqwUzzR4zb04pPnF8mTx8vy7F16GXdijnnp/E
+ uKYsgcx799By8jHrEybmzF0HFormB98DZgtw9
+X-Google-Smtp-Source: AGHT+IH9keMOrQJHU9LsECLmAYGaml9sPadhKzrzev8R6pq4CYyJfGitM8tV3VHPg/VxJShatMb76pfBxuoyqSEg2qo=
+X-Received: by 2002:a05:6214:5703:b0:6cb:f12e:90a9 with SMTP id
+ 6a1803df08f44-6cbf9d0c9abmr126736486d6.9.1728937262468; Mon, 14 Oct 2024
+ 13:21:02 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241011212126.747741-1-sjg@chromium.org>
- <20241011212126.747741-2-sjg@chromium.org>
- <20241012012004.GD14210@bill-the-cat>
-In-Reply-To: <20241012012004.GD14210@bill-the-cat>
+References: <20241011214032.760072-1-sjg@chromium.org>
+ <20241011214032.760072-4-sjg@chromium.org>
+ <20241012013713.GH14210@bill-the-cat>
+In-Reply-To: <20241012013713.GH14210@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 14 Oct 2024 14:20:42 -0600
-Message-ID: <CAFLszThqX2T0uGmAYvacpPhM_O_JNG9A+wtd0jxmn4ynAuHUzg@mail.gmail.com>
-Subject: Re: [PATCH v4 1/5] efi: Drop the memset() from efi_alloc()
+Date: Mon, 14 Oct 2024 14:20:51 -0600
+Message-ID: <CAFLszThz3uPk_qvN574GZWqQrkKrWpVvuWtyLLN4XDSqg47GvQ@mail.gmail.com>
+Subject: Re: [PATCH v2 3/7] am65x: Use map_to_sysmem() to convert from pointer
 To: Tom Rini <trini@konsulko.com>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Andrew Davis <afd@ti.com>, 
+ Joao Paulo Goncalves <joao.goncalves@toradex.com>, Nishanth Menon <nm@ti.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,47 +88,84 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Fri, 11 Oct 2024 at 19:20, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 11 Oct 2024 at 19:37, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Fri, Oct 11, 2024 at 03:21:22PM -0600, Simon Glass wrote:
+> On Fri, Oct 11, 2024 at 03:40:27PM -0600, Simon Glass wrote:
 >
-> > From my inspection none of the users need the memory to be zeroed. It
-> > is somewhat unexpected that it does so, since the name gives no clue to
-> > this.
+> > The board_init_f() function for am65x is a bit confusing, since it uses
+> > the variable name 'pool_addr' to hold a pointer. It then casts it to an
+> > address to pass to mem_alloc_init()
 > >
-> > Drop the memset() so that it effectively becomes a wrapper around the
-> > normal EFI-pool allocator.
+> > Rename the variable and use mapmem to convert to an address.
 > >
-> > Another option would be to drop this function and call
-> > efi_allocate_pool() directly, but that increase code size a little.
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
 > >
-> > Move the function comment to the header file like most other exported
-> > functions in U-Boot.
+> > (no changes since v1)
 > >
-> > Comments were made in v3 that another project uses memset() when
-> > allocating memory, but that is not required by the spec. In any case, as
-> > above, from inspection, none of the users need the memory to be zeroed,
-> > as they fill the entire region with their own data.
+> >  arch/arm/mach-k3/am65x/am654_init.c | 11 ++++++-----
+> >  1 file changed, 6 insertions(+), 5 deletions(-)
+> >
+> > diff --git a/arch/arm/mach-k3/am65x/am654_init.c b/arch/arm/mach-k3/am65x/am654_init.c
+> > index a4f038029d7..ddcc1355210 100644
+> > --- a/arch/arm/mach-k3/am65x/am654_init.c
+> > +++ b/arch/arm/mach-k3/am65x/am654_init.c
+> > @@ -8,6 +8,7 @@
+> >
+> >  #include <fdt_support.h>
+> >  #include <init.h>
+> > +#include <mapmem.h>
+> >  #include <asm/global_data.h>
+> >  #include <asm/io.h>
+> >  #include <spl.h>
+> > @@ -165,7 +166,7 @@ void board_init_f(ulong dummy)
+> >  #if defined(CONFIG_K3_LOAD_SYSFW) || defined(CONFIG_K3_AM654_DDRSS)
+> >       struct udevice *dev;
+> >       size_t pool_size;
+> > -     void *pool_addr;
+> > +     void *pool;
+> >       int ret;
+> >  #endif
+> >       /*
+> > @@ -204,14 +205,14 @@ void board_init_f(ulong dummy)
+> >        * malloc pool of which we use all that's left.
+> >        */
+> >       pool_size = CONFIG_VAL(SYS_MALLOC_F_LEN) - gd->malloc_ptr;
+> > -     pool_addr = malloc(pool_size);
+> > -     if (!pool_addr)
+> > +     pool = malloc(pool_size);
+> > +     if (!pool)
+> >               panic("ERROR: Can't allocate full malloc pool!\n");
+> >
+> > -     mem_malloc_init((ulong)pool_addr, (ulong)pool_size);
+> > +     mem_malloc_init(map_to_sysmem(pool), (ulong)pool_size);
+> >       gd->flags |= GD_FLG_FULL_MALLOC_INIT;
+> >       debug("%s: initialized an early full malloc pool at 0x%08lx of 0x%lx bytes\n",
+> > -           __func__, (unsigned long)pool_addr, (unsigned long)pool_size);
+> > +           __func__, (unsigned long)pool, (unsigned long)pool_size);
+> >       /*
+> >        * Process pinctrl for the serial0 a.k.a. WKUP_UART0 module and continue
+> >        * regardless of the result of pinctrl. Do this without probing the
 >
-> The other comments made in v3 about another project (EDKII) is that we
-> want to remain implementation compatible. This is a case where (a) if
-> needed, we can reach out and get the spec clarified to say zeroed memory
-> and (b) even if it's not, this is a case where real world
-> interoperability is more important than strict spec compliance. If
-> there's an app out there relying on the zeroed behavior and it's fine on
-> EDKII and not fine on us, it'll be a problem for us because we
-> stopped matching behavior. So unless in the end Heinrich and/or Ilias
-> drop their previous objection, I don't think this is a good idea.
+> I'm confused since I thought patch 2 removed the need for doing
+> map_to_sysmem() games more widely.
 
-This is a minor point, so I don't mind, so long as we get the
-memory-reservation tidied up. But I'll note that the effect of this
-patch is zero, since every allocated byte is written anyway, by
-current users.
+Right, this patch is not actually needed. It just avoids a cast from a
+pointer, which is always suspicious.
 
-I certainly don't want to be implementation-compatible with EDKII.
-Where did that come from? U-Boot is an open-source bootloader with
-lots of boards supported in mainline. U-Boot has very different goals
-and users.
+> You also forgot to CC anyone from TI
+> that might have comments on if they find "pool" rather than "pool_addr"
+> more or less confusing and given the recent patch from them about what's
+> printed out about memory size, I would think their feedback would
+> be important.
+
+I did cc them on the first version. I don't mind adding maintainers on
+follow-on patches, but don't want to spam people. I'll try adding
+maintainers always, for now.
+
+>
+> --
+> Tom
 
 Regards,
 Simon
