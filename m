@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FC6BD16275
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 14:27:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72CB5D16268
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 14:32:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE2AD88AE7;
-	Mon, 14 Oct 2024 16:27:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D595F88C63;
+	Mon, 14 Oct 2024 16:32:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jMlhwjc+";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Z6J/WEMi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A50489048; Mon, 14 Oct 2024 16:27:29 +0200 (CEST)
-Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
- [IPv6:2607:f8b0:4864:20::829])
+ id 3EF9D88CA1; Mon, 14 Oct 2024 16:32:25 +0200 (CEST)
+Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
+ [IPv6:2607:f8b0:4864:20::82f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 19D968839A
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 16:27:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 035D288A47
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 16:32:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x829.google.com with SMTP id
- d75a77b69052e-45effbc3348so37645911cf.2
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 07:27:27 -0700 (PDT)
+Received: by mail-qt1-x82f.google.com with SMTP id
+ d75a77b69052e-46049c27999so26266851cf.0
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 07:32:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1728916041; x=1729520841; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1728916341; x=1729521141; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=3ETJblymMrFH55qjT3BTOXIT738PIi2YWLjd3/0mIAM=;
- b=jMlhwjc+UvMTor5oYf6XHcANJJH5PF/IjwIyjCmdz5Yb2+AfreMVFj8kgnqF6cR9Hu
- pbSS7+rEpNI5fzIsrBiZPEJDvVTcXUokmMX77DlMNnoSRSKhidpcYkqTm4RP+5cZUJeb
- NqLve1yxl6G3H+uMJW3mxASzORoc4iJb1PcIc=
+ bh=yCWW6ySfASsgEZWqqPuetIJLZOTB06Dh/tRMe2yeiZY=;
+ b=Z6J/WEMirv1r1oF3oOodfarZk3aYc+J2L2s7h1PmKuOlXmBWOCldPUWjnvs2xlJSW0
+ qbJS11NDGFPqluFCazWIkGAYWeTToEO2CzWUx1w3wfLyuh3xYEKj+cEHowWHJjsKiLru
+ E08LGSKAyZ5mLDewIFmmS0sye9WF3wK+GEg9U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728916041; x=1729520841;
+ d=1e100.net; s=20230601; t=1728916341; x=1729521141;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3ETJblymMrFH55qjT3BTOXIT738PIi2YWLjd3/0mIAM=;
- b=Ru2QXzCAaxc80g1fuIa3woNV9cANAM4urJqzXXOK2AFnWsTuX9J1GT1GXZiqzjBmzy
- PTyJLEL21/gAC7EypIH9TgoI72mZ+CXKj6DziCjJ10wSpunbHqZ6CwGLx2FojD9SyItV
- iL4aR1Cuw+T3P8yl7pKpumCcmm1q7H9QNVxOPWNM5BJw5zouN32SfO2P9ZabmUwcgeU3
- jt5Ko0AqX2kltlQrLhGZ28I3SjMj44N4XCuTDFK+5KDRfgLGOY1NMJ08MhxzWymcCx9+
- sjYws9X+XyDe6u6/kFOlO5bRnxJiQ7UQH8OJWIHurwzb/wZOJNQQBlO0aRrvm3Bf/ETF
- +aiA==
+ bh=yCWW6ySfASsgEZWqqPuetIJLZOTB06Dh/tRMe2yeiZY=;
+ b=NNuwBBkT77/DqtiZRL4B0LqYS8Mb9/ZVbtigRFvpYQRLFd0YVdSGUixy13YxcwomEc
+ hCe7ylM0uA9qQC1q4aQlcMf81mAXTLSAe5QIuEYORK6sGIzBiJJhRldmhbHu+74ACBPu
+ rNzXz/UHSctCifPQzrxQENnhcK2snJA3mB4WvB5Wc6+7R4Bl2QoQG+sNM5lr0a6/WpaC
+ 3W0wiI0g+oMbe7GfaVI4p+3BNswKBaR36NwJjNBWyWeSJ80WK+oaBEcveJJwd83YGvng
+ SZPrJ5icSb4OzF/Fu8sPMdhgoTBKTWtZAQhpTVfyvvbpFOh36HuLfg19wCKVLYcUySJT
+ s9yA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW36BI9AxHfpAIUyl28FvcDgafCrPWOcfyGl5r8xUQKfbCTahx+SC3cwqTpEQw/LbaI+/HSKS8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx05gFMCHCruxaO3ZjjwZrKYjUqthw0+tVEYA1yjWeKfOEjUX95
- kNjvJLFoln39GE6KakmLPEzqj0Q1/Mr81hMOHnNMHTh7S4VVjAn31EP0d61NqGs=
-X-Google-Smtp-Source: AGHT+IGFBuSdYk4d3c1rC6/YhpkrYg7VDsrymbqG1oc2Yz/YwzN1bLsUN/MqKyOboNh/IIeT3g4Ptw==
-X-Received: by 2002:a05:622a:5b8e:b0:460:6f9e:96a8 with SMTP id
- d75a77b69052e-4606f9e9765mr37517381cf.50.1728916041178; 
- Mon, 14 Oct 2024 07:27:21 -0700 (PDT)
+ AJvYcCXj7aAxFqrKH0/etMdc3q6SeOQce0Q/VN5dRB5HU0kH2i1smikBCAVBSHHs8WzRDNYbIAEE6+o=@lists.denx.de
+X-Gm-Message-State: AOJu0YxcMnuCBpRwlwS2ls/QdV8J+OaIDUbYW0B29DIim5TrsjYZRpLs
+ k1n/cmMF7EIw9WINZyPsH7rqFARjI0UO9pVhV6Ah4N84QCS0mfHA4T10tyo3Avs=
+X-Google-Smtp-Source: AGHT+IG+/AifpssithMfLBeC0YTuWflQOuewCoZkDBr7NuOGg7JIsyD7yyh4fVBBNs0JoFtZVpmxGA==
+X-Received: by 2002:a05:6214:5bca:b0:6cb:f920:be0a with SMTP id
+ 6a1803df08f44-6cbf920be26mr135611476d6.46.1728916341385; 
+ Mon, 14 Oct 2024 07:32:21 -0700 (PDT)
 Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-460427e8012sm45703341cf.38.2024.10.14.07.27.19
+ 6a1803df08f44-6cbe85d8b48sm45625676d6.68.2024.10.14.07.32.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Oct 2024 07:27:20 -0700 (PDT)
-Date: Mon, 14 Oct 2024 08:27:17 -0600
+ Mon, 14 Oct 2024 07:32:20 -0700 (PDT)
+Date: Mon, 14 Oct 2024 08:32:18 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Neha Malcom Francis <n-francis@ti.com>
-Cc: Andrew Davis <afd@ti.com>, Simon Glass <sjg@chromium.org>,
- devarsht@ti.com, jonas@kwiboo.se, richard@nod.at,
- raymond.mao@linaro.org, u-kumar1@ti.com, u-boot@lists.denx.de
-Subject: Re: [PATCH] boardf: Modify DRAM message
-Message-ID: <20241014142717.GJ53053@bill-the-cat>
-References: <20241010070909.288313-1-n-francis@ti.com>
- <CAFLszTjJ1GJNd5Fn8U2O5WSnKMn99XW_pGLmejkYy_PBfxSEGg@mail.gmail.com>
- <f194f14a-c7c3-4aed-b4b8-f093f64c7b69@ti.com>
- <31aeb96d-55b1-4587-b212-2632ae4cc124@ti.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH v6 12/12] test: efi: boot: Add a test for the efi bootmeth
+Message-ID: <20241014143218.GK53053@bill-the-cat>
+References: <20240926220226.1265965-9-sjg@chromium.org>
+ <20240926220226.1265965-13-sjg@chromium.org>
+ <20241011223227.GA630742@bill-the-cat>
+ <CAFLszTgoxND_qi8WzdgC8-mQLf0e14Mt=KgXy=bqWkqo4svG9Q@mail.gmail.com>
+ <20241014035122.GE53053@bill-the-cat>
+ <A7089CFC-AD83-4F62-B477-17D65B066A4B@gmx.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="QD9DkBJrNz3Ifc9p"
+ protocol="application/pgp-signature"; boundary="oP2wvBVmQisYJRtz"
 Content-Disposition: inline
-In-Reply-To: <31aeb96d-55b1-4587-b212-2632ae4cc124@ti.com>
+In-Reply-To: <A7089CFC-AD83-4F62-B477-17D65B066A4B@gmx.de>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,98 +98,216 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---QD9DkBJrNz3Ifc9p
-Content-Type: text/plain; charset=iso-8859-1
+--oP2wvBVmQisYJRtz
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 14, 2024 at 10:10:43AM +0530, Neha Malcom Francis wrote:
-> Hi Andrew
+On Mon, Oct 14, 2024 at 09:00:40AM +0200, Heinrich Schuchardt wrote:
 >=20
-> On 11/10/24 01:59, Andrew Davis wrote:
-> > On 10/10/24 1:50 PM, Simon Glass wrote:
-> > > Hi Neha,
-> > >=20
-> > > On Thu, 10 Oct 2024 at 01:09, Neha Malcom Francis <n-francis@ti.com> =
-wrote:
-> > > >=20
-> > > > The message "DRAM:=A0 2 GiB (effective 32 GiB)" can be a little con=
-fusing,
-> > > > modify the message to show exactly what is meant:
-> > > >=20
-> > > > "DRAM:=A0 2 GiB (available for U-Boot out of total 32 GiB)"
-> > > >=20
-> > > > Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
-> > > > ---
-> > > > =A0 common/board_f.c | 2 +-
-> > > > =A0 1 file changed, 1 insertion(+), 1 deletion(-)
-> > > >=20
-> > > > diff --git a/common/board_f.c b/common/board_f.c
-> > > > index 154675d0e40..b7add8f7d3d 100644
-> > > > --- a/common/board_f.c
-> > > > +++ b/common/board_f.c
-> > > > @@ -254,7 +254,7 @@ static int show_dram_config(void)
-> > > >=20
-> > > > =A0=A0=A0=A0=A0=A0=A0=A0 print_size(gd->ram_size, "");
-> > > > =A0=A0=A0=A0=A0=A0=A0=A0 if (!sizes_near(gd->ram_size, size)) {
-> > > > -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 printf(" (effective ");
-> > > > +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 printf(" (available for=
- U-Boot out of total ");
-> > > > =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 print_size(size, "=
-)");
-> > > > =A0=A0=A0=A0=A0=A0=A0=A0 }
-> > > > =A0=A0=A0=A0=A0=A0=A0=A0 board_add_ram_info(0);
-> > > > --=20
-> > > > 2.34.1
-> > > >=20
-> > >=20
-> > > I've forgotten why the first number can be so much lower than the
-> > > second. What is causing that?
-> > >=20
-> > > This is quite a long string...could we say "(total 32 GiB)" ? Then
-> > > perhaps add something to doc/ to talk about the banner that U-Boot
-> > > prints?
-> > >=20
-> >=20
-> > Why not just only print the total number? The amount available to
-> > U-Boot seems like an internal detail, I'd guess most folks just what
-> > to see at a glance how much DDR was detected on their system.
-> >=20
 >=20
-> Looking at the git history of this line, seems like we were printing U-Bo=
-ot
-> available size first and then modified it to show the entire DRAM availab=
-le
-> as "effective size"... quite possibly directly showing the total is a bet=
-ter
-> idea.
+> Am 14. Oktober 2024 05:51:22 MESZ schrieb Tom Rini <trini@konsulko.com>:
+> >On Sun, Oct 13, 2024 at 01:33:23PM -0600, Simon Glass wrote:
+> >> Hi Tom,
+> >>=20
+> >> On Fri, 11 Oct 2024 at 16:32, Tom Rini <trini@konsulko.com> wrote:
+> >> >
+> >> > On Fri, Sep 27, 2024 at 12:02:23AM +0200, Simon Glass wrote:
+> >> >
+> >> > > Add a simple test of booting with the EFI bootmeth, which runs the=
+ app
+> >> > > and checks that it can call 'exit boot-services' (to check that al=
+l the
+> >> > > device-removal code doesn't break anything) and then exit back to
+> >> > > U-Boot.
+> >> > >
+> >> > > This uses a disk image containing the testapp, ready for execution=
+ by
+> >> > > sandbox when needed.
+> >> > >
+> >> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> >> >
+> >> > So lets go to the problem point. What asserts here fail due to ANSI
+> >> > escape codes being in the output and needing to be filtered out?
+> >> >
+> >> > [snip]
+> >> > > diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
+> >> > > index e05103188b4..da2ee1ab345 100644
+> >> > > --- a/test/boot/bootflow.c
+> >> > > +++ b/test/boot/bootflow.c
+> >> > > @@ -13,6 +13,7 @@
+> >> > >  #include <cli.h>
+> >> > >  #include <dm.h>
+> >> > >  #include <efi_default_filename.h>
+> >> > > +#include <efi_loader.h>
+> >> > >  #include <expo.h>
+> >> > >  #ifdef CONFIG_SANDBOX
+> >> > >  #include <asm/test.h>
+> >> > > @@ -31,6 +32,9 @@ extern U_BOOT_DRIVER(bootmeth_android);
+> >> > >  extern U_BOOT_DRIVER(bootmeth_cros);
+> >> > >  extern U_BOOT_DRIVER(bootmeth_2script);
+> >> > >
+> >> > > +/* Use this as the vendor for EFI to tell the app to exit boot se=
+rvices */
+> >> > > +static u16 __efi_runtime_data test_vendor[] =3D u"U-Boot testing";
+> >> > > +
+> >> > >  static int inject_response(struct unit_test_state *uts)
+> >> > >  {
+> >> > >       /*
+> >> > > @@ -1205,3 +1209,62 @@ static int bootflow_android(struct unit_tes=
+t_state *uts)
+> >> > >       return 0;
+> >> > >  }
+> >> > >  BOOTSTD_TEST(bootflow_android, UTF_CONSOLE);
+> >> > > +
+> >> > > +/* Test EFI bootmeth */
+> >> > > +static int bootflow_efi(struct unit_test_state *uts)
+> >> > > +{
+> >> > > +     /* disable ethernet since the hunter will run dhcp */
+> >> > > +     test_set_eth_enable(false);
+> >> > > +
+> >> > > +     /* make USB scan without delays */
+> >> > > +     test_set_skip_delays(true);
+> >> > > +
+> >> > > +     bootstd_reset_usb();
+> >> > > +
+> >> > > +     /* Avoid outputting ANSI characters which mess with our asse=
+rts */
+> >> > > +     efi_console_set_ansi(false);
+> >> > > +
+> >> > > +     ut_assertok(bootstd_test_drop_bootdev_order(uts));
+> >> > > +     ut_assertok(run_command("bootflow scan", 0));
+> >> > > +     ut_assert_skip_to_line(
+> >> > > +             "Bus usb@1: scanning bus usb@1 for devices... 5 USB =
+Device(s) found");
+> >> > > +
+> >> > > +     ut_assertok(run_command("bootflow list", 0));
+> >> > > +
+> >> > > +     ut_assert_nextlinen("Showing all");
+> >> > > +     ut_assert_nextlinen("Seq");
+> >> > > +     ut_assert_nextlinen("---");
+> >> > > +     ut_assert_nextlinen("  0  extlinux");
+> >> > > +     ut_assert_nextlinen(
+> >> > > +             "  1  efi          ready   usb_mass_    1  usb_mass_=
+storage.lun0.boo /EFI/BOOT/BOOTSBOX.EFI");
+> >> > > +     ut_assert_nextlinen("---");
+> >> > > +     ut_assert_skip_to_line("(2 bootflows, 2 valid)");
+> >> > > +     ut_assert_console_end();
+> >> > > +
+> >> > > +     ut_assertok(run_command("bootflow select 1", 0));
+> >> > > +     ut_assert_console_end();
+> >> > > +
+> >> > > +     systab.fw_vendor =3D test_vendor;
+> >> > > +
+> >> > > +     ut_asserteq(1, run_command("bootflow boot", 0));
+> >> > > +     ut_assert_nextline(
+> >> > > +             "** Booting bootflow 'usb_mass_storage.lun0.bootdev.=
+part_1' with efi");
+> >> > > +     if (IS_ENABLED(CONFIG_LOGF_FUNC))
+> >> > > +             ut_assert_skip_to_line("       efi_run_image() Booti=
+ng /\\EFI\\BOOT\\BOOTSBOX.EFI");
+> >> > > +     else
+> >> > > +             ut_assert_skip_to_line("Booting /\\EFI\\BOOT\\BOOTSB=
+OX.EFI");
+> >> > > +
+> >> > > +     /* TODO: Why the \r ? */
+> >> > > +     ut_assert_nextline("U-Boot test app for EFI_LOADER\r");
+> >> > > +     ut_assert_nextline("Exiting boot sevices");
+> >> > > +     if (IS_ENABLED(CONFIG_LOGF_FUNC))
+> >> > > +             ut_assert_nextline("     do_bootefi_exec() ## Applic=
+ation failed, r =3D 5");
+> >> > > +     else
+> >> > > +             ut_assert_nextline("## Application failed, r =3D 5");
+> >> > > +     ut_assert_nextline("Boot failed (err=3D-22)");
+> >> > > +
+> >> > > +     ut_assert_console_end();
+> >> > > +
+> >> > > +     return 0;
+> >> > > +}
+> >> > > +BOOTSTD_TEST(bootflow_efi, UTF_CONSOLE);
+> >>=20
+> >> Thanks for taking an interest in this.
+> >>=20
+> >> Nothing at present, as I added ut_assert_skip_to_line() to skip it
+> >> all. But it really is just wrong...I get gibberish showing up in the
+> >> terminal after I run tests! This is what I see with this series:
+> >>=20
+> >> ** Booting bootflow 'usb_mass_storage.lun0.bootdev.part_1' with efi
+> >>  7 [r [999;999H [6n 8No EFI system partition
+> >>=20
+> >> ^^^ strange output there but I'm not sure if it will come through on e=
+mail
 >=20
-> Unless anyone has any reason to have this detail?
+> It seems you are not providing a video console. So the EFI sub-system is =
+asking the serial console for its size in query_console_serial().
+>=20
+> Set CONFIG_VIDEO=3Dy and let vidconsole be your first output device to av=
+oid query_console_serial() being called.
 
-There's probably more history as well, but not totally relevant these
-days. Some solution that starts from "most SoCs are 64bit and can easily
-address all memory" and goes from there to not grow the overall U-Boot
-binary much would be good.
+That's not an answer to the problem. Please note that
+rpi_arm64_defconfig shows this same issue, and it's about being able to
+run tests on hardware and parse the output reasonably. And so:
+
+>=20
+> Best regards
+>=20
+> Heinrich
+>=20
+> >>=20
+> >> No EFI system partition
+> >> Failed to persist EFI variables
+> >> No EFI system partition
+> >> Failed to persist EFI variables
+> >> No EFI system partition
+> >> Failed to persist EFI variables
+> >> Booting /\EFI\BOOT\BOOTSBOX.EFI
+> >> U-Boot test app for EFI_LOADER
+> >>=20
+> >> Exiting boot sevices
+> >> ## Application failed, r =3D 5
+> >> Boot failed (err=3D-22)
+> >> Failures: 0
+> >
+> >So we're finally making progress I think to see what the problem you're
+> >trying to solve is. I think the next thing to figure out is if you use
+> >picocom or screen or whatever on console, the codes are handled
+> >correctly, or no? Specifically, picocom? Next, is this perhaps just
+> >another strange artifact of how oddly (and as you've noted before,
+> >slowly) pytest consumes the console input? It feels like maybe we're
+> >doing several layers of wrong there? Because to be clear, this is not a
+> >sandbox problem. Looking back at the log I had posted about the watchdog
+> >reset not counting banners correctly I see that same escape sequence,
+> >now that I know what I'm looking for/at.
+> >
+> >All of that said, if it's not a pytest-consuming-the-console problem
+> >(and it's not a picocom problem, like I was just asking about since the
+> >board failure in question was via labgrid-client), maybe it's just a
+> >thing to note about making sure tests understand. And perhaps document
+> >somewhere why it matters (and I'm not saying it doesn't!) that we know
+> >what the dimensions of the console are, for EFI, and so that's why we
+> >init them when/where we do.
+
+My last question here was to you or Ilias, thanks.
 
 --=20
 Tom
 
---QD9DkBJrNz3Ifc9p
+--oP2wvBVmQisYJRtz
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcNKkUACgkQFHw5/5Y0
-tyy9dwv/U2PONltDj43LuNmf08w1s1Q1AQLzS25vPzOCWTwEx0lqdtgrO5vZewhB
-q/hD0+dGkGIiYHcm39mwAbjq50Qfjs/An+jStdYtuwD2+NBJUpp6KCPcojtg1GI2
-g2fNV/i482Y2qSbIg04pdvMsdSh2B0CjAHazodxhU3dL41IxA+PrbnubYl0EEgzP
-LU+KWZlmCd+UXhx63cEhdwfpJW8JTS+fT0UmLpA8/EkXyzYvLFns9m6+56lKwUsf
-TDfTg7RrP47FrfKPbuBbuYVTJrkpw/5eoOfdd2Hwe/T1clw114lnHiWknbYaKM8C
-wAVk93orsvziJ4JrSPO9RADMlq+K9fP+Cn7cf7olUa/hmbx7ofOk2vovfdVfuvqK
-KXD3TxurQSown17gSba6SDjq2FLPPNfdKuPM5IwFqqHSGASEYn0hUKI2Otvex4hw
-iPuropHiaQ4ynnLUWhjmeQKxMpFiZuPNdx4JZuQFRigIt+XRpH3mIOowDD4Di5Z0
-0egJk4Ce
-=9HhZ
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcNK3IACgkQFHw5/5Y0
+tyzGhgv/Udm64pupAntHW0SHdthwautaP82P4DiGr1+0SdDoH9a6NOEpL+AvvZg+
+JCK7K3ObTHuPsAhupCtfA0HA2R15054qoPxpqvrrqa6+irKZ8XK+TK6VIJU/9ou5
+LZXjaUqzWWXIbDnC0FQnHrpkKqdBKz7NNkMwEZhLfFwxPq+0teNvHj8kPXdmAWnk
+xlVDoYNAs45HELiK7w8j333L8Pl0nDyPBIKekDe7n3jGBIcfM0U+BS9tt5DjXqv0
+GzB34t1BpCbPFYCz2tQjBzdu0kNmEJVtL+G1yo9IZkvMsfgt0Si8GP/7PNY75QeL
+b/S66C+K3MtKR2bGBGSAY38uDGvPvVTNCQStC0b/5uWIOnYPA+fkl+NEhmDAr0jD
+xRhwWCLkEYXlxK55F6AIRMQ9W+OQkR/xCcTPLj90HLoORf73dOdrCw2ttFoMafCL
+HNuIsniOHDWmipb9CIXNnuTKXxEwjQP2HH97v/BwDUSIYNCyIWLcSwPi+YSpBluu
+yxF/kerw
+=bMsI
 -----END PGP SIGNATURE-----
 
---QD9DkBJrNz3Ifc9p--
+--oP2wvBVmQisYJRtz--
