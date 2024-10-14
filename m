@@ -4,61 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED65AD18153
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 21:35:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26D00D18151
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 21:35:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3DDE088E36;
-	Mon, 14 Oct 2024 23:35:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id AD59F88DED;
+	Mon, 14 Oct 2024 23:35:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1728941714;
-	bh=LtOlV/bGFNMlCZH2dKERGt72Ybm8NvEFWHcbBjdwA00=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=NfWYwBO1NBFVazOnjLmhmfa315+8+KjGQxaxUKddApywhimHf4hZ2Qem3K9kWbIhl
-	 o9+b/Ygz0lobU4eNojx+hhxEvYfUxkkrkXZCE8SYTfxTjOtG/3hfY5Re5y8tZfxF+M
-	 HeoJgyhBKkoFzNLpSBRZZm2WRFu+5MKjRIswcELHDgwZs7/DENvB2Q+ixw9QJ2WVTw
-	 zHplq1aFA9/OeyABlxpLyIbucPyVXwSx5a0f0ks08MLpcH2yFDRRhrq3QUZGrPppHv
-	 /A2TtsxZlfMUiVD2Lqqde+OPqTR/yV6ecGY9gltmCWVLqg18sH2O806bXoMpl+ugIt
-	 UrcU5ZF8AisPA==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fpyrSxp1";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 8EA75885D1; Mon, 14 Oct 2024 23:35:26 +0200 (CEST)
+Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
+ [IPv6:2607:f8b0:4864:20::832])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id E753E87DC7;
- Mon, 14 Oct 2024 23:35:11 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1728941713;
- bh=LtOlV/bGFNMlCZH2dKERGt72Ybm8NvEFWHcbBjdwA00=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=BQm3GLOUgGxucJ71gAGvGBy/8tvTb9griaUQf4Ebt/dkzlE/2YPsgMJXnVHNP7YHj
- sHZjdTejCOVw/vhbXO2k8aX77GgWMbU7C5KgOdenO3544S53E/vR77Fdn/6kwe5t5c
- wk1w9ioD3I1NVqdExLXfsKWMpTUblnmvHJ1XZpRa0/phHwG46qBXrCmk0El0xdiEV8
- dBOOgBz+cYRP7JP12H7k3mFZhMmdU0IidtzuiFV4aYPjelaVSRKxYCjZq/PjjE/Iy6
- CmMnQEP+dDEkmgpZUUUIt29lTxzBg4/kpWGscwHl+wAjpx4LGsuirxZP8W2MCh/kal
- 472diOKv2QT2g==
-Message-ID: <31f823bd-0e55-46f0-960d-c5f361a86ce0@denx.de>
-Date: Mon, 14 Oct 2024 23:35:11 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 077F288DED
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 23:35:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qt1-x832.google.com with SMTP id
+ d75a77b69052e-45ffafa63easo42683431cf.1
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 14:35:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1728941723; x=1729546523; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=UEzaQ7hk89W1kHvmOvVpa+DGADnFEmMjdYzPMNV8UDQ=;
+ b=fpyrSxp1EZ8VOGf9A4kLLY1Rhx750cG66hUJNOc9mFC5uH54vsjNyhaLFO4ZeI5IoW
+ bgQfAYH8+L6hIcUC6HiHvS3cUI48RRT1klO0vN0Hh62IRKPf/fd+Qg1OHx7kvp7WLqgz
+ haQiPzX/I5M93rWIoh247aSHf+QEGOCSwhD4w=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728941723; x=1729546523;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=UEzaQ7hk89W1kHvmOvVpa+DGADnFEmMjdYzPMNV8UDQ=;
+ b=hrdSsdHj5vxJrrGtloHfFxEgAe6ZgM8nLmZsZp8vq+1gCr+GjvsarnPw542AekzanS
+ SBWF3d5/rusEns8gwJ9LFIwBp8iN3f5jkIIAqxiOkbhShQtVMSx2XLmh8N5BxcZBsyqd
+ JuINUG9creDpIlglgpLofXwolj1+wPLi0tIbqkIVoRpRKwkEEYCnkhEGTtIO7tu51Yho
+ sAFd3JUPpn4G0qSxMNIQtaZbTsjEQh1fEZ2gWmnTyKUob+Qr8GeZ7XjM3cK67DQfcXwW
+ 3NNSysM1UcYrHfcYM6G5kqqlQZmg6wMHlCileIlof//1i4k2S6qrei79M5L5dx3Vc5XW
+ VaDA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV7AcMPWFMrCcV6ZkzpuzWYPTaa+vlrT5B7ml6BWm2GumBP7hPXwoRWkubcOBP5kmaFFwXIuyw=@lists.denx.de
+X-Gm-Message-State: AOJu0YxLJdCgz5bVN8vhCBe13e9XQxgTvcBcGTNHY4cJHoyU/L831yi4
+ j0H4U8FcV+2GyR62hfogl0hojW7Jqafn+6lEhAwAoInoRjoiq27PLCfFJGQNGkWr6exZeaDnIWx
+ er8R7c2bdE6HsKTRHgUAPiDB7ZMCbAHsiLx8O
+X-Google-Smtp-Source: AGHT+IGLJgiLso7JCYdUqNU9TulXMEPxZ/DSNHPIB0z9IoBGwcBd9piqEVbnW6STsCz8B/GrsiAEERx9qULpYFZx2Cg=
+X-Received: by 2002:a05:622a:2283:b0:460:59b1:d80 with SMTP id
+ d75a77b69052e-46059b11492mr152517871cf.21.1728941722790; Mon, 14 Oct 2024
+ 14:35:22 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] rockchip: board: Increase rng-seed size to make it
- sufficient for modern Linux
-To: Alex Shumsky <alexthreed@gmail.com>, u-boot@lists.denx.de
-Cc: Ben Wolsieffer <benwolsieffer@gmail.com>,
- Chris Morgan <macromorgan@hotmail.com>, Dragan Simic <dsimic@manjaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-References: <20241014202605.2799040-1-alexthreed@gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20241014202605.2799040-1-alexthreed@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20241013105522.391414-1-sughosh.ganu@linaro.org>
+ <20241013105522.391414-4-sughosh.ganu@linaro.org>
+ <CAFLszTiov914NOS9_5UU4oLi0fCQ84a-Et82BeSEJbts4MEOVQ@mail.gmail.com>
+ <20241014155642.GO53053@bill-the-cat>
+ <CAFLszThVP_OgyTt_ksJ1_7HAHT+K-wcixWB+k+fmzAjh6+5Bmg@mail.gmail.com>
+ <20241014210453.GU53053@bill-the-cat>
+ <CAFLszTgm=t=y1kj7Ju5Ls7nf0ghLCqRppVnY7yorD6v1hoeN1g@mail.gmail.com>
+ <20241014212718.GZ53053@bill-the-cat>
+In-Reply-To: <20241014212718.GZ53053@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 14 Oct 2024 15:35:12 -0600
+Message-ID: <CAFLszTiW_N-DvivnC_Fq4LWv+H+S2h8A-8o5dXPtGMsii1ToxQ@mail.gmail.com>
+Subject: Re: [PATCH v3 03/15] efi: memory: use the lmb API's for allocating
+ and freeing memory
+To: Tom Rini <trini@konsulko.com>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, Jonas Karlman <jonas@kwiboo.se>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,78 +94,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/14/24 10:26 PM, Alex Shumsky wrote:
-> Increase rng-seed size to make Linux happy and initialize rng pool instantly.
-> Linux 5.19+ requires 32 bytes of entropy to initialize random pool, but u-boot
-> currently provides only 8 bytes.
-> Linux 5.18 and probably some vesrions before it used to require 64 bytes.
+Hi Tom,
 
-"versions", typo
+On Mon, 14 Oct 2024 at 15:27, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Mon, Oct 14, 2024 at 03:13:01PM -0600, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Mon, 14 Oct 2024 at 15:04, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Mon, Oct 14, 2024 at 01:13:17PM -0600, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Mon, 14 Oct 2024 at 09:56, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Mon, Oct 14, 2024 at 09:50:37AM -0600, Simon Glass wrote:
+> > > > > > Hi Sughosh,
+> > > > > >
+> > > > > > On Sun, 13 Oct 2024 at 04:55, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > > > > > >
+> > > > > > > Use the LMB API's for allocating and freeing up memory. With this, the
+> > > > > > > LMB module becomes the common backend for managing non U-Boot image
+> > > > > > > memory that might be requested by other modules.
+> > > > > > >
+> > > > > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > > > > > ---
+> > > > > > > Changes since V2:
+> > > > > > > * Use map_to_sysmem() to get the user-visible address to be shared
+> > > > > > >   with the lmb API's for sandbox.
+> > > > > > >
+> > > > > > >  lib/efi_loader/Kconfig      |  1 +
+> > > > > > >  lib/efi_loader/efi_memory.c | 77 +++++++++++--------------------------
+> > > > > > >  2 files changed, 24 insertions(+), 54 deletions(-)
+> > > > > >
+> > > > > > When efi_init_obj() is called, it should be able to add the lmb memory
+> > > > > > to its own tables. There is no need to worry about lmb after that,
+>
+> Saying "There is no need to worry about lmb after that" is not true.
+> Invoking the "env" command for example will have efi_init_obj() be
+> called, among the others that Heinrich listed. And to possibly refute
+> a next issue, that is intentional so that efivars, the standard
+> mechanism used by an OS to talk with the firmware can be available to
+> U-Boot, if I recall things correctly.
+>
+> My understanding of your assumption is that you believe that once the
+> EFI_LOADER subsystem has started work on a payload we're just a few call
+> chains away from the OS being started and runtime services aside U-Boot
+> being done.
+>
+> My understanding of how things are used today is that this is incorrect.
 
-> Bump min value to 64 bytes to be on a safe side.
-> 
-> Boot with 8 byte rng-seed (Linux 6.11):
->      # dmesg | grep crng
->      [   12.089286] random: crng init done
-> Boot with 32 byte rng-seed (Linux 6.11):
->      # dmesg | grep crng
->      [    0.000000] random: crng init done
-> 
-> Linux source references:
-> https://github.com/torvalds/linux/blob/7234e2ea0edd00bfb6bb2159e55878c19885ce68/drivers/char/random.c#L632
-> https://elixir.bootlin.com/linux/v5.18/source/drivers/char/random.c#L236
-> https://elixir.bootlin.com/linux/v5.19/source/drivers/char/random.c#L551
+What I am getting at is that once we have called that function we know
+we are booting an EFI app or using an EFI feature in preparation for
+doing so. Let's start there. Is that correct?
 
-Please use https://git.kernel.org torvalds repo , not some random 
-downstream webpages.
-
-> Signed-off-by: Alex Shumsky <alexthreed@gmail.com>
-> Fixes: d2048bafae40 ("rockchip: board: Add board_rng_seed() for all Rockchip devices")
-> ---
-> 
-> Changes in v3:
-> - reword warning
-> - increase default rng_seed_size to support older linux as well
-> - reword commit message
-> 
-> Changes in v2:
-> - add env config knob rng_seed_size
-> - add warning for small rng_seed_size
-> - 12-character commit SHA in Fixes
-> 
->   arch/arm/mach-rockchip/board.c | 9 ++++++++-
->   1 file changed, 8 insertions(+), 1 deletion(-)
-> 
-> diff --git a/arch/arm/mach-rockchip/board.c b/arch/arm/mach-rockchip/board.c
-> index 3fadf7e412..9ff1567fb1 100644
-> --- a/arch/arm/mach-rockchip/board.c
-> +++ b/arch/arm/mach-rockchip/board.c
-> @@ -472,9 +472,16 @@ __weak int misc_init_r(void)
->   __weak int board_rng_seed(struct abuf *buf)
->   {
->   	struct udevice *dev;
-> -	size_t len = 0x8;
-> +	ulong len = env_get_ulong("rng_seed_size", 10, 64);
->   	u64 *data;
->   
-> +	if (len < 64) {
-> +		// rng_seed_size should be at least 32 bytes for Linux 5.19+, or 64 for
-> +		// older Linux'es
-
-/*
-  * Please use C style
-  * multi-line
-  * comment.
-  */
-
-(also, s!Linux.es!Linux kernel versions! while you're fixing it )
-
-> +		log_warning("Value for rng_seed_size too low (%lu) and likely insufficient for the Linux RNG initialization\n",
-> +			    len);
-> +	}
-> +
->   	data = malloc(len);
->   	if (!data) {
->   		printf("Out of memory\n");
-
-Thanks !
+Regards,
+Simon
