@@ -4,55 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08980CFC53F
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 10:42:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32DF8CF2597
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 10:50:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7901D88C7C;
-	Mon, 14 Oct 2024 12:42:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=163.com
+	by phobos.denx.de (Postfix) with ESMTP id 42ADA88DA3;
+	Mon, 14 Oct 2024 12:50:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="cjLA7QZh";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HpT1dbJ4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86F7B88CEA; Mon, 14 Oct 2024 12:42:52 +0200 (CEST)
-Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.4])
- by phobos.denx.de (Postfix) with ESMTP id 6C76388B79
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 12:42:49 +0200 (CEST)
+ id 8E98788E8A; Mon, 14 Oct 2024 12:50:17 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 6A58B88CEA
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 12:50:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=163.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=andyshrk@163.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=Date:From:Subject:Content-Type:MIME-Version:
- Message-ID; bh=vx8nzzdG2xIiq0hrM8/BaXpFGA2cEfg4RQz7+UwF1/U=; b=c
- jLA7QZh9B7rEwRoZCzdLo6G8F2vWelj3B4Nw4B3uIZqmO6dnPpg/O66yn+Ak36lt
- smoRRYO0BTBuEdgk9q3bNdTrUzzpQeMOGX7I3yuylVU4WEiVugFwzf2aslxbafGZ
- W7Ppmd4gXpV48oyMCPJTQBskOIRs9b9UCxZN64wifQ=
-Received: from andyshrk$163.com ( [58.22.7.114] ) by
- ajax-webmail-wmsvr-40-105 (Coremail) ; Mon, 14 Oct 2024 18:41:16 +0800
- (CST)
-X-Originating-IP: [58.22.7.114]
-Date: Mon, 14 Oct 2024 18:41:16 +0800 (CST)
-From: "Andy Yan" <andyshrk@163.com>
-To: "Sughosh Ganu" <sughosh.ganu@linaro.org>
-Cc: trini@konsulko.com, u-boot@lists.denx.de, kever.yang@rock-chips.com, 
- "Jonas Karlman" <jonas@kwiboo.se>
-Subject: Re:Re: [Regression] rk3588 failed to boot linux
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version XT5.0.14 build 20240801(9da12a7b)
- Copyright (c) 2002-2024 www.mailtech.cn 163com
-In-Reply-To: <CADg8p95OHEmAiVV9HgXeWuqW_CUR0-pvA_WjjCZkT5NFh06sWQ@mail.gmail.com>
-References: <20241014094246.2944-1-andyshrk@163.com>
- <CADg8p95OHEmAiVV9HgXeWuqW_CUR0-pvA_WjjCZkT5NFh06sWQ@mail.gmail.com>
-X-NTES-SC: AL_Qu2ZCvWbvUws4CmeZukXn0kXhec2W8Czvvgg34JRP5k0tyTsxzgGbW9cHXjP+s6ULwOhoAi6XyNfxM5FYqxheYczXf+Ir/LdVYeYnYaHuYy+
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset=UTF-8
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-5c9404c0d50so4092425a12.3
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 03:50:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1728903014; x=1729507814; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=upIQIPxV+QRRLbUyrQT+++Ekcvd3SPiq9gR7qic8AUM=;
+ b=HpT1dbJ4cQh56+PgPKN+wI4c1zFVuWddAbckdIQuXI3EF48l4TzxMBmJp4JMWZf48R
+ VeQ/v3EPwQY4wa3gbJBy0lny8/nL9E1am7wYzv4d/kwDYeylovlyoxDHd+MM8RlUjFNb
+ uQxAukyQu1okn3KAWejYO04JM4qceRF6Ic1OM/esWxO0odjG3GfAbehRThEgn/M9Zt3S
+ Qxf9LUKL0CjwI2iYTT2KhqGqqYJW1Y6laN4sHULlcR1SV9Cce83yMn7Vk1r3A8R2mYIW
+ MI70ylvcOjqn/uUHajZ3whHxHrzT95reF9YCVIFD579xpJw4ir5lLxgw7CKZA9FH5ARv
+ acTg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728903014; x=1729507814;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=upIQIPxV+QRRLbUyrQT+++Ekcvd3SPiq9gR7qic8AUM=;
+ b=AeSYFUX5QaV5QE269ZfvoRn3oTqj8Yk6bebwyB3kninUhFT3DD63YtI9m2sgeRQPrY
+ U/xxoaGwrjMhnDu+IQPhq2ydfAuwFanrNTbRvCl7A1SYvlHzW5zUXH8qgfKGjq60KOTu
+ 7VJJgFiCvo9cc5anBenexrwBdgpUTwY6UeMmSo4JGFYje6isxF8umdSsEP58JwRIGYe3
+ MGLGVeuvYJYkKnmPWeTP54Lu9UVG5WqyUyjTYN4C//GVujVwUw6l8nRru9IvmCdA5XW/
+ 0MCMJLjhSfmbcL6OjzSHPK8n/VZLvFksMs94eq1WR7W/bJ1hFw0njyjSMgEAOj4Y0O6L
+ ZNWQ==
+X-Gm-Message-State: AOJu0YxviKuHmx2b8dNtDY+LoU8HwPlOODTOjXMPqAlNOX4mwDwJCfe/
+ DsEVbCItZG7QMnyGHefr1Q4LRyPOXOQlQxO/O0VEamnUTTEKjU+DB6Fkpo8/QFdexe7xalJQMTy
+ JGSaZ0/2A58KDVoSJlANez8CIB1SEJyP1/FNvqg==
+X-Google-Smtp-Source: AGHT+IHVbogk5rH1ky1jQdVlkrY+G59m5I//dzWbTJgv07wDXsJVIPs/gwt+yYuY5IwmD6Pg5QEaAkeiAly1JH9Xsik=
+X-Received: by 2002:a05:6402:2707:b0:5c9:8705:ea9c with SMTP id
+ 4fb4d7f45d1cf-5c98705eb49mr144232a12.19.1728903014317; Mon, 14 Oct 2024
+ 03:50:14 -0700 (PDT)
 MIME-Version: 1.0
-Message-ID: <7e3d21e6.aaab.1928a9e34a7.Coremail.andyshrk@163.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID: aSgvCgDnv0FN9QxnBFsNAA--.11019W
-X-CM-SenderInfo: 5dqg52xkunqiywtou0bp/1tbiqQx4XmcM8LNGAwADst
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+References: <20241013105522.391414-1-sughosh.ganu@linaro.org>
+ <CAC_iWj+YVGoqC8wRLxQoGTdqCTvERNnAZJ1LktKGySJM4Pnoow@mail.gmail.com>
+In-Reply-To: <CAC_iWj+YVGoqC8wRLxQoGTdqCTvERNnAZJ1LktKGySJM4Pnoow@mail.gmail.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Mon, 14 Oct 2024 16:20:03 +0530
+Message-ID: <CADg8p97b+gk4qdsmF2yu102GM+SCwydbzcDTbrrnaEAyBHpPjw@mail.gmail.com>
+Subject: Re: [PATCH v3 00/15] Make EFI memory allocations synchronous with LMB
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, Jonas Karlman <jonas@kwiboo.se>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,136 +88,147 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-CkhpIFN1cWhvc2gsCgpBdCAyMDI0LTEwLTE0IDE4OjEzOjM1LCAiU3VnaG9zaCBHYW51IiA8c3Vn
-aG9zaC5nYW51QGxpbmFyby5vcmc+IHdyb3RlOgo+T24gTW9uLCAxNCBPY3QgMjAyNCBhdCAxNTox
-MiwgQW5keSBZYW4gPGFuZHlzaHJrQDE2My5jb20+IHdyb3RlOgo+Pgo+PiBXaGVuIHRlc3Qgd2l0
-aCBjdXJyZW50IG1haW4gYnJhbmNoIG9uIHJrMzU4OCBiYXNlZCBjb29scGkgNGIsCj4+IHRoZSBi
-b2FyZCBmYWlsZWQgdG8gYm9vdCBsaW51eCBvc1swXToKPj4gSSBkbyB0aGUgc2FtZSB0ZXN0IG9u
-IGFub3RoZXIgYm9hcmQgdGhhdCBpcyBwcmVwYXJpbmcgdG8gc2VuZAo+PiBwYXRjaGVzIHVwc3Ry
-ZWFtLCBhbmQgaXQgYWxzbyBmYWlsZWQuCj4+Cj4+IFRoZSB0d28gYm9hcmRzIGJvb3RzIGZpbmUg
-d2l0aCB2MjAyNC4xMC4KPj4gV2l0aCBzb21lIGJpc2VjdCwgaXQgc2VlbXMgdGhhdCB0aGlzIGlz
-c3VlIGlzIGNhdXNlZCBieToKPj4KPj4gY29tbWl0IDM2MGFhZGRkOWNlYThjMjU2ZjUwYzU3Njc5
-NDQxNWNhZGZiNjE4MTkKPj4gTWVyZ2U6IDJjODMyYWJjNzMyIGY4ZmZjNmYzY2M0Cj4+IEF1dGhv
-cjogVG9tIFJpbmkgPHRyaW5pQGtvbnN1bGtvLmNvbT4KPj4gRGF0ZTogICBUdWUgU2VwIDMgMTQ6
-MDk6MzAgMjAyNCAtMDYwMAo+Pgo+PiAgICAgTWVyZ2UgcGF0Y2ggc2VyaWVzICJNYWtlIExNQiBt
-ZW1vcnkgbWFwIGdsb2JhbCBhbmQgcGVyc2lzdGVudCIKPj4KPj4gICAgIFN1Z2hvc2ggR2FudSA8
-c3VnaG9zaC5nYW51QGxpbmFyby5vcmc+IHNheXM6Cj4+Cj4+IE15IGJvYXJkcyBib290IGZpbmUg
-YmVmb3JlIHRoaXMgbWVyZ2Ugb24gdS1ib290L25leHQsIGFuZCBhbGwgZmFpbGVkCj4+IHRvIGJv
-b3QgbGludXggYWZ0ZXIgdGhpcyBtZXJnZS4KPj4KPj4gSSBhbSBub3QgZmFtaWxpYXIgd2l0aCB0
-aGUgTE1CIG1lY2hhbmlzbSwgc28gaSBkb24ndCBrbm93IGhvdyB0byBmaW5kCj4+IHRoZSByb290
-IGNhc2Ugbm93Lgo+Pgo+PiBJIGR1bXAgdGhlIGJkaW5mbyBmb3IgYm90aCBnb29kIGNhc2VbMV0g
-YW5kIGdlZ3Jlc3Npb24gY2FzZVsyXSwgbm90IHN1cmUKPj4gaWYgdGhleSBhcmUgdXNlZnVsbCBm
-b3IgZGVidWcgdGhpcyBpc3N1ZS4KPj4KPj4gWzBdIFN5bmNocm9ub3VzIEFib3J0IHdoZW4gc3Rh
-cnRpbmcga2VybmVsOgo+PiBTY2FubmluZyBib290ZGV2ICdtbWNAZmUyYzAwMDAuYm9vdGRldic6
-Cj4+IENhcmQgZGlkIG5vdCByZXNwb25kIHRvIHZvbHRhZ2Ugc2VsZWN0ISA6IC0xMTAKPj4gU2Nh
-bm5pbmcgYm9vdGRldiAnbW1jQGZlMmUwMDAwLmJvb3RkZXYnOgo+PiAgIDEgIHNjcmlwdCAgICAg
-ICByZWFkeSAgIG1tYyAgICAgICAgICAxICBtbWNAZmUyZTAwMDAuYm9vdGRldi5wYXJ0Cj4+IC9i
-b290L2Jvb3Quc2NyCj4+ICoqIEJvb3RpbmcgYm9vdGZsb3cgJ21tY0BmZTJlMDAwMC5ib290ZGV2
-LnBhcnRfMScgd2l0aCBzY3JpcHQKPj4gQm9vdCBzY3JpcHQgbG9hZGVkIGZyb20gbW1jIDA6MQo+
-PiAyMjQgYnl0ZXMgcmVhZCBpbiA3IG1zICgzMS4zIEtpQi9zKQo+PiAyNjUxMDMwMSBieXRlcyBy
-ZWFkIGluIDk3IG1zICgyNjAuNiBNaUIvcykKPj4gMzI4ODMyMDAgYnl0ZXMgcmVhZCBpbiAxMjIg
-bXMgKDI1NyBNaUIvcykKPj4gMTQ4MzIzIGJ5dGVzIHJlYWQgaW4gMzAgbXMgKDQuNyBNaUIvcykK
-Pj4gV29ya2luZyBGRFQgc2V0IHRvIDEyMDAwMDAwCj4+IFRyeWluZyBrYXNscnNlZWQgY29tbWFu
-ZC4uLiBJbmZvOiBVbmtub3duIGNvbW1hbmQgY2FuIGJlIHNhZmVseSBpZ25vcmVkCj4+IHNpbmNl
-IGthc2xyc2VlZCBkb2VzIG5vdCBhcHBseSB0byBhbGwgYm9hcmRzLgo+PiBVbmtub3duIGNvbW1h
-bmQgJ2thc2xyc2VlZCcgLSB0cnkgJ2hlbHAnCj4+ICMjIExvYWRpbmcgaW5pdCBSYW1kaXNrIGZy
-b20gTGVnYWN5IEltYWdlIGF0IDEyMTgwMDAwIC4uLgo+PiAgICBJbWFnZSBOYW1lOiAgIHVJbml0
-cmQKPj4gICAgSW1hZ2UgVHlwZTogICBBQXJjaDY0IExpbnV4IFJBTURpc2sgSW1hZ2UgKGd6aXAg
-Y29tcHJlc3NlZCkKPj4gICAgRGF0YSBTaXplOiAgICAyNjUxMDIzNyBCeXRlcyA9IDI1LjMgTWlC
-Cj4+ICAgIExvYWQgQWRkcmVzczogMDAwMDAwMDAKPj4gICAgRW50cnkgUG9pbnQ6ICAwMDAwMDAw
-MAo+PiAgICBWZXJpZnlpbmcgQ2hlY2tzdW0gLi4uIE9LCj4+ICMjIEZsYXR0ZW5lZCBEZXZpY2Ug
-VHJlZSBibG9iIGF0IDEyMDAwMDAwCj4+ICAgIEJvb3RpbmcgdXNpbmcgdGhlIGZkdCBibG9iIGF0
-IDB4MTIwMDAwMDAKPj4gV29ya2luZyBGRFQgc2V0IHRvIDEyMDAwMDAwCj4+ICAgIExvYWRpbmcg
-UmFtZGlzayB0byBlYjU4ZjAwMCwgZW5kIGVjZWQ3MzlkIC4uLiBPSwo+PiAgICBMb2FkaW5nIERl
-dmljZSBUcmVlIHRvIDAwMDAwMDAwZWI1MDIwMDAsIGVuZCAwMDAwMDAwMGViNThlZmZmIC4uLiBP
-Swo+PiBXb3JraW5nIEZEVCBzZXQgdG8gZWI1MDIwMDAKPj4KPj4gU3RhcnRpbmcga2VybmVsIC4u
-Lgo+Pgo+PiAiU3luY2hyb25vdXMgQWJvcnQiIGhhbmRsZXIsIGVzciAweDk2MDAwMDA0LCBmYXIg
-MHg5NjE0MmI4OTY5MzBiOTA3Cj4+IGVscjogMDAwMDAwMDAwMGE4ZDNiOCBsciA6IDAwMDAwMDAw
-MDBhNzc0NTAgKHJlbG9jKQo+PiBlbHI6IDAwMDAwMDAwZWZmYTEzYjggbHIgOiAwMDAwMDAwMGVm
-ZjhiNDUwCj4+IHgwIDogOTYxNDJiODk2OTMwYjkwNyB4MSA6IDAwMDAwMDAwZWZmYWI4NzAKPj4g
-eDIgOiAwMDAwMDAwMDAwMDAwMDEwIHgzIDogMDAwMDAwMDBlZGY0NzMxMAo+PiB4NCA6IDAwMDAw
-MDAwMDAwMDAwMDAgeDUgOiA5NjE0MmI4OTY5MzBiOTA3Cj4+IHg2IDogMDAwMDAwMDAwMDAwMDAw
-NyB4NyA6IDAwMDAwMDAwMDAwMDAwMDQKPj4geDggOiAwMDAwMDAwMDAwMDAwMDQwIHg5IDogZmZm
-ZmZmZmZmZmZmZmZmMAo+PiB4MTA6IDAwMDAwMDAwZWI1MjZmZmYgeDExOiAwMDAwMDAwMGVkZjNh
-ODA4Cj4+IHgxMjogMDAwMDAwMDAwMDAwMDAwNiB4MTM6IDAwMDAwMDAwZWI1MDIwMDAKPj4geDE0
-OiAwMDAwMDAwMGZmZmZmZmZmIHgxNTogMDAwMDAwMDBlZGVkYjU4OAo+PiB4MTY6IDAwMDAwMDAw
-ZWZmNjg3MzggeDE3OiAwMDAwMDAwMDAwMDAwMDAwCj4+IHgxODogMDAwMDAwMDBlZGVmNGQ3MCB4
-MTk6IDAwMDAwMDAwZWNlYjQwNDAKPj4geDIwOiAwMDAwMDAwMGVmZjE0ZjUwIHgyMTogMDAwMDAw
-MDBlY2VhYzAwMAo+PiB4MjI6IDAwMDAwMDAwZWZmY2MwMDAgeDIzOiAwMDAwMDAwMDAwMDAwMDAx
-Cj4+IHgyNDogMDAwMDAwMDAwMDAwMDAwMSB4MjU6IDAwMDAwMDAwMDAyMDAwMDAKPj4geDI2OiAw
-MDAwMDAwMGVkZjM4NWMwIHgyNzogMDAwMDAwMDBlY2VkODAwMAo+PiB4Mjg6IDAwMDAwMDAwZWNl
-ZDkwMDAgeDI5OiAwMDAwMDAwMGVkZWRiM2MwCj4+Cj4+IENvZGU6IGViMDQwMDVmIDU0MDAwMDYx
-IDUyODAwMDAwIDE0MDAwMDA2ICgzODY0NjhhMykKPj4gUmVzZXR0aW5nIENQVSAuLi4KPj4KPj4g
-WzFdIGJkaW5mbyBmb3Igc3VjY2VzcyBib290Cj4+ID0+IGJkaW5mbwo+PiBib290X3BhcmFtcyA9
-IDB4MDAwMDAwMDAwMDAwMDAwMAo+PiBEUkFNIGJhbmsgICA9IDB4MDAwMDAwMDAwMDAwMDAwMAo+
-PiAtPiBzdGFydCAgICA9IDB4MDAwMDAwMDAwMDIwMDAwMAo+PiAtPiBzaXplICAgICA9IDB4MDAw
-MDAwMDBlZmUwMDAwMAo+PiBEUkFNIGJhbmsgICA9IDB4MDAwMDAwMDAwMDAwMDAwMQo+PiAtPiBz
-dGFydCAgICA9IDB4MDAwMDAwMDFmMDAwMDAwMAo+PiAtPiBzaXplICAgICA9IDB4MDAwMDAwMDAx
-MDAwMDAwMAo+PiBmbGFzaHN0YXJ0ICA9IDB4MDAwMDAwMDAwMDAwMDAwMAo+PiBmbGFzaHNpemUg
-ICA9IDB4MDAwMDAwMDAwMDAwMDAwMAo+PiBmbGFzaG9mZnNldCA9IDB4MDAwMDAwMDAwMDAwMDAw
-MAo+PiBiYXVkcmF0ZSAgICA9IDE1MDAwMDAgYnBzCj4+IHJlbG9jYWRkciAgID0gMHgwMDAwMDAw
-MGVmZjE0MDAwCj4+IHJlbG9jIG9mZiAgID0gMHgwMDAwMDAwMGVmNTE0MDAwCj4+IEJ1aWxkICAg
-ICAgID0gNjQtYml0Cj4+IGN1cnJlbnQgZXRoID0gdW5rbm93bgo+PiBldGgtMWFkZHIgICA9IChu
-b3Qgc2V0KQo+PiBJUCBhZGRyICAgICA9IDxOVUxMPgo+PiBmZHRfYmxvYiAgICA9IDB4MDAwMDAw
-MDBlZGVkY2Q4MAo+PiBuZXdfZmR0ICAgICA9IDB4MDAwMDAwMDBlZGVkY2Q4MAo+PiBmZHRfc2l6
-ZSAgICA9IDB4MDAwMDAwMDAwMDAxN2ZhMAo+PiBsbWJfZHVtcF9hbGw6Cj4+ICBtZW1vcnkuY250
-ID0gMHgyIC8gbWF4ID0gMHgxMAo+PiAgbWVtb3J5WzBdICAgICAgWzB4MjAwMDAwLTB4ZWZmZmZm
-ZmZdLCAweGVmZTAwMDAwIGJ5dGVzIGZsYWdzOiAwCj4+ICBtZW1vcnlbMV0gICAgICBbMHgxZjAw
-MDAwMDAtMHgxZmZmZmZmZmZdLCAweDEwMDAwMDAwIGJ5dGVzIGZsYWdzOiAwCj4+ICByZXNlcnZl
-ZC5jbnQgPSAweDIgLyBtYXggPSAweDEwCj4+ICByZXNlcnZlZFswXSAgICBbMHhlY2VkODAwMC0w
-eGVmZmZmZmZmXSwgMHgwMzEyODAwMCBieXRlcyBmbGFnczogMAo+PiAgcmVzZXJ2ZWRbMV0gICAg
-WzB4MWYwMDAwMDAwLTB4MWZmZmZmZmZmXSwgMHgxMDAwMDAwMCBieXRlcyBmbGFnczogMAo+PiBk
-ZXZpY2V0cmVlICA9IHNlcGFyYXRlCj4+IHNlcmlhbCBhZGRyID0gMHgwMDAwMDAwMGZlYjUwMDAw
-Cj4+ICB3aWR0aCAgICAgID0gMHgwMDAwMDAwMDAwMDAwMDA0Cj4+ICBzaGlmdCAgICAgID0gMHgw
-MDAwMDAwMDAwMDAwMDAyCj4+ICBvZmZzZXQgICAgID0gMHgwMDAwMDAwMDAwMDAwMDAwCj4+ICBj
-bG9jayAgICAgID0gMHgwMDAwMDAwMDAxNmUzNjAwCj4+IGFyY2hfbnVtYmVyID0gMHgwMDAwMDAw
-MDAwMDAwMDAwCj4+IFRMQiBhZGRyICAgID0gMHgwMDAwMDAwMGVmZmYwMDAwCj4+IGlycV9zcCAg
-ICAgID0gMHgwMDAwMDAwMGVkZWRjZDcwCj4+IHNwIHN0YXJ0ICAgID0gMHgwMDAwMDAwMGVkZWRj
-ZDcwCj4+IEVhcmx5IG1hbGxvYyB1c2FnZTogMjQ0MCAvIDEwMDAwCj4+ID0+Cj4+Cj4+Cj4+IFsy
-XSBiZGluZm8gZm9yIGJvb3QgZmFpbGVkIGNhc2U7Cj4+ID0+IGJkaW5mbwo+PiBib290X3BhcmFt
-cyA9IDB4MDAwMDAwMDAwMDAwMDAwMAo+PiBEUkFNIGJhbmsgICA9IDB4MDAwMDAwMDAwMDAwMDAw
-MAo+PiAtPiBzdGFydCAgICA9IDB4MDAwMDAwMDAwMDIwMDAwMAo+PiAtPiBzaXplICAgICA9IDB4
-MDAwMDAwMDBlZmUwMDAwMAo+PiBEUkFNIGJhbmsgICA9IDB4MDAwMDAwMDAwMDAwMDAwMQo+PiAt
-PiBzdGFydCAgICA9IDB4MDAwMDAwMDFmMDAwMDAwMAo+PiAtPiBzaXplICAgICA9IDB4MDAwMDAw
-MDAxMDAwMDAwMAo+PiBmbGFzaHN0YXJ0ICA9IDB4MDAwMDAwMDAwMDAwMDAwMAo+PiBmbGFzaHNp
-emUgICA9IDB4MDAwMDAwMDAwMDAwMDAwMAo+PiBmbGFzaG9mZnNldCA9IDB4MDAwMDAwMDAwMDAw
-MDAwMAo+PiBiYXVkcmF0ZSAgICA9IDE1MDAwMDAgYnBzCj4+IHJlbG9jYWRkciAgID0gMHgwMDAw
-MDAwMGVmZjE0MDAwCj4+IHJlbG9jIG9mZiAgID0gMHgwMDAwMDAwMGVmNTE0MDAwCj4+IEJ1aWxk
-ICAgICAgID0gNjQtYml0Cj4+IGN1cnJlbnQgZXRoID0gdW5rbm93bgo+PiBldGgtMWFkZHIgICA9
-IChub3Qgc2V0KQo+PiBJUCBhZGRyICAgICA9IDxOVUxMPgo+PiBmZHRfYmxvYiAgICA9IDB4MDAw
-MDAwMDBlZGVkYzFiMAo+PiBsbWJfZHVtcF9hbGw6Cj4+ICBtZW1vcnkuY291bnQgPSAweDEKPj4g
-IG1lbW9yeVswXSAgICAgIFsweDIwMDAwMC0weGVmZmZmZmZmXSwgMHhlZmUwMDAwMCBieXRlcyBm
-bGFnczogbm9uZQo+PiAgcmVzZXJ2ZWQuY291bnQgPSAweDEKPj4gIHJlc2VydmVkWzBdICAgIFsw
-eGVjZWQ4MWEwLTB4ZWZmZmZmZmZdLCAweDAzMTI3ZTYwIGJ5dGVzIGZsYWdzOgo+PiBuby1vdmVy
-d3JpdGUKPj4gZGV2aWNldHJlZSAgPSBzZXBhcmF0ZQo+PiBzZXJpYWwgYWRkciA9IDB4MDAwMDAw
-MDBmZWI1MDAwMAo+PiAgd2lkdGggICAgICA9IDB4MDAwMDAwMDAwMDAwMDAwNAo+PiAgc2hpZnQg
-ICAgICA9IDB4MDAwMDAwMDAwMDAwMDAwMgo+PiAgb2Zmc2V0ICAgICA9IDB4MDAwMDAwMDAwMDAw
-MDAwMAo+PiAgY2xvY2sgICAgICA9IDB4MDAwMDAwMDAwMTZlMzYwMAo+PiBhcmNoX251bWJlciA9
-IDB4MDAwMDAwMDAwMDAwMDAwMAo+PiBUTEIgYWRkciAgICA9IDB4MDAwMDAwMDBlZmZmMDAwMAo+
-PiBpcnFfc3AgICAgICA9IDB4MDAwMDAwMDBlZGVkYzFhMAo+PiBzcCBzdGFydCAgICA9IDB4MDAw
-MDAwMDBlZGVkYzFhMAo+PiBFYXJseSBtYWxsb2MgdXNhZ2U6IDI0NDAgLyAxMDAwMAo+Cj5XaXRo
-IHRoZSBMTUIgc2VyaWVzIGFwcGxpZWQsIHRoZSBtZW1vcnkgcmVnaW9uIGNvdmVyZWQgYnkgdGhl
-IERSQU0KPkJhbmsgMSBpcyBub3QgZ2V0dGluZyBhZGRlZCB0byB0aGUgTE1CIG1lbW9yeSBtYXAu
-IEFuZCBJIHN1c3BlY3QgdGhhdAo+dGhlIHNjcmlwdHMgYXJlIHVzaW5nIGFkZHJlc3NlcyBpbiB0
-aGUgYmFuayAxIHRvIGxvYWQgYW5kIGJvb3QgdGhlCj5rZXJuZWwuIENhbiB5b3UgY29uZmlybSB0
-aGlzID8gVGhpcyBzZWVtcyB0byBiZSBoYXBwZW5pbmcgYmVjYXVzZSBvZgo+dGhlIHZhbHVlIG9m
-IGdkLT5yYW1fdG9wIHRoYXQgaXMgYmVpbmcgc2V0IGZvciB0aGUgcm9ja2NoaXAgYm9hcmRzLgo+
-QmFzZWQgb24gYSBjdXJzb3J5IGxvb2sgYXQgYXJjaC9hcm0vbWFjaC1yb2NrY2hpcC9zZHJhbS5j
-LCB0aGUgdmFsdWUKPm9mIGdkLT5yYW1fdG9wIGlzIGNhcHBlZCBhdCAweGYwMDAwMDAwIGZvciB0
-aGUgcmszNTg4IGJvYXJkcy4gQ2FuIHlvdQo+Y29uZmlybSBpZiB0aGlzIGlzIGluZGVlZCB0aGUg
-Y2FzZSA/IElmIHNvLCB0aGUgc2Vjb25kIERSQU0gYmFuayB3aWxsCj5ub3QgZ2V0IGFkZGVkIHRv
-IHRoZSBMTUIgbWVtb3J5IG1hcCwgYW5kIGNvbnNlcXVlbnRseSB5b3Ugd2lsbCBub3QgYmUKPmFi
-bGUgdG8gbG9hZCBpbWFnZXMgdG8gYWRkcmVzc2VzIGluIHRoaXMgYmFuay4gVG8gZml4IHRoaXMs
-IHRoZSB2YWx1ZQo+b2YgZ2QtPnJhbV90b3Agd2lsbCBoYXZlIHRvIGJlIGNoYW5nZWQgZm9yIHRo
-ZSByb2NrY2hpcCBib2FyZHMgdG8KPnJlZmxlY3QgdGhlIHByZXNlbmNlIG9mIG1lbW9yeSBhYm92
-ZSA0R0IuIEFub3RoZXIgcG9zc2libGUgc29sdXRpb24gaXMKPnRvIHVzZSBhZGRyZXNzZXMgaW4g
-dGhlIGJhbmswIGZvciBib290aW5nIHRoZSBpbWFnZXMuCgoKQWNjb3JkaW5nIHRvIHRoZSBiZGlu
-Zm8gWzFdWzJdLCAgdGhlIGJvYXJkIGhhdmUgdHdvIGJhbms6CkRSQU0gYmFuayAgID0gMHgwMDAw
-MDAwMDAwMDAwMDAwCi0+IHN0YXJ0ICAgID0gMHgwMDAwMDAwMDAwMjAwMDAwCi0+IHNpemUgICAg
-ID0gMHgwMDAwMDAwMGVmZTAwMDAwCkRSQU0gYmFuayAgID0gMHgwMDAwMDAwMDAwMDAwMDAxCi0+
-IHN0YXJ0ICAgID0gMHgwMDAwMDAwMWYwMDAwMDAwCi0+IHNpemUgICAgID0gMHgwMDAwMDAwMDEw
-MDAwMDAwCgpUaGUgQXJtYmlhbiBzY3JpcHRzIGJvb3QgbGludXgga2VybmVsIHdpdGggY29tbWFu
-ZDoKCmJvb3RpICR7a2VybmVsX2FkZHJfcn0gJHtyYW1kaXNrX2FkZHJfcn0gJHtmZHRfYWRkcl9y
-fQpmZHRfYWRkcl9yPTB4MTIwMDAwMDAKa2VybmVsX2FkZHJfcj0weDAyMDAwMDAwCnJhbWRpc2tf
-YWRkcl9yPTB4MTIxODAwMDAKCkl0IHNlZW1zIHRoYXQgdGhlIGFyZSBhbGwgaW4gYmFuazAgPwoK
-Cj4KPi1zdWdob3NoCj4KPj4gMi4zNC4xCj4+Cg==
+On Mon, 14 Oct 2024 at 15:53, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> Hi Sughosh,
+>
+> On Sun, 13 Oct 2024 at 13:55, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> >
+> >
+> > This is part two of the series to have the EFI and LMB modules have a
+> > coherent view of memory. Part one of this goal was to change the LMB
+> > module to have a global and persistent memory map. Those patches have
+> > now been applied to the next branch.
+> >
+> > These patches are changing the EFI memory allocation API's such that
+> > they rely on the LMB module to allocate RAM memory. This fixes the
+> > current scenario where the EFI memory module has no visibility of the
+> > allocations/reservations made by the LMB module. One thing to note
+> > here is that this is limited to the RAM memory region, i.e. the
+> > EFI_CONVENTIONAL_MEMORY type. Any other memory type that is to be
+> > added to the EFI memory map, still gets handled by the EFI memory
+> > module.
+> >
+> >
+> > Some test logs to highlight the issue that is being fixed by the series.
+> >
+> > Without patch series
+> > --------------------
+> >
+> > lmb_dump_all:
+> >  memory.count = 0x1
+> >  memory[0]      [0x40000000-0x820fffff], 0x42100000 bytes flags: none
+> >  reserved.count = 0x3
+> >  reserved[0]    [0xe100000-0xeffffff], 0x00f00000 bytes flags: no-map
+> >  reserved[1]    [0x42000000-0x421fffff], 0x00200000 bytes flags: no-map
+> >  reserved[2]    [0x7f77da00-0x820fffff], 0x02982600 bytes flags: no-overwrite
+> >
+> >
+> > => efidebug memmap -- does not show regions allocated by lmb
+> >
+> > Missing TPMv2 device for EFI_TCG_PROTOCOL
+> > Type             Start            End              Attributes
+> > ================ ================ ================ ==========
+> > CONVENTIONAL     0000000040000000-000000007f751000 WB
+> > BOOT DATA        000000007f751000-000000007f756000 WB
+> > RUNTIME DATA     000000007f756000-000000007f757000 WB|RT
+> > BOOT DATA        000000007f757000-000000007f758000 WB
+> > RUNTIME DATA     000000007f758000-000000007f77a000 WB|RT
+> > BOOT DATA        000000007f77a000-000000007f781000 WB
+> > BOOT CODE        000000007f781000-00000000807b5000 WB
+> > RUNTIME DATA     00000000807b5000-00000000807b6000 WB|RT
+> > BOOT CODE        00000000807b6000-00000000817c0000 WB
+> > RUNTIME CODE     00000000817c0000-00000000817d0000 WB|RT
+> > BOOT CODE        00000000817d0000-0000000082100000 WB
+> > =>
+> >
+> >
+> > Trying to allocate EFI memory with already allocated region succeeds(should fail)
+> > ---------------------------------------------------------------------------------
+> >
+> > => efi_mem alloc 2000 42000000
+> > Address returned 0x42000000
+> >
+> > => efidebug memmap
+> > Type             Start            End              Attributes
+> > ================ ================ ================ ==========
+> > CONVENTIONAL     0000000040000000-0000000042000000 WB
+> > BOOT DATA        0000000042000000-0000000042002000 WB
+> > CONVENTIONAL     0000000042002000-000000007f751000 WB
+>
+> Any idea what caused BOOT DATA to start from 000000007f74d000 with the
+> patches applied?
+
+That is a good catch indeed :). This memory showed up because I issued
+the 'efidebug memmap' command before issuing any other efi command.
+And as part of the efi subsystem initialisation, some memory gets
+allocated, and that shows up in the EFI memmap. If another bdinfo
+command is issued after the efi subsystem initialisation, we would see
+this newly added memory as part of the lmb memory map as well.
+
+-sughosh
+
+>
+> > BOOT DATA        000000007f751000-000000007f756000 WB
+> > RUNTIME DATA     000000007f756000-000000007f757000 WB|RT
+> > BOOT DATA        000000007f757000-000000007f758000 WB
+> > RUNTIME DATA     000000007f758000-000000007f77a000 WB|RT
+> > BOOT DATA        000000007f77a000-000000007f781000 WB
+> > BOOT CODE        000000007f781000-00000000807b5000 WB
+> > RUNTIME DATA     00000000807b5000-00000000807b6000 WB|RT
+> > BOOT CODE        00000000807b6000-00000000817c0000 WB
+> > RUNTIME CODE     00000000817c0000-00000000817d0000 WB|RT
+> > BOOT CODE        00000000817d0000-0000000082100000 WB
+> > =>
+> >
+> >
+> > With patch series
+> > -----------------
+> >
+> > lmb_dump_all:
+> >  memory.count = 0x1
+> >  memory[0]      [0x40000000-0x820fffff], 0x42100000 bytes flags: none
+> >  reserved.count = 0x4
+> >  reserved[0]    [0xe100000-0xeffffff], 0x00f00000 bytes flags: no-map
+> >  reserved[1]    [0x42000000-0x421fffff], 0x00200000 bytes flags: no-map
+> >  reserved[2]    [0x7f77a000-0x7f77cfff], 0x00003000 bytes flags: no-notify, no-overwrite
+> >  reserved[3]    [0x7f77da00-0x820fffff], 0x02982600 bytes flags: no-overwrite
+> >
+> >
+> > => efidebug memmap -- now shows the lmb allocated memory regions also
+> > Missing TPMv2 device for EFI_TCG_PROTOCOL
+> > Type             Start            End              Attributes
+> > ================ ================ ================ ==========
+> > CONVENTIONAL     0000000040000000-0000000042000000 WB
+> > BOOT DATA        0000000042000000-0000000042200000 WB
+> > CONVENTIONAL     0000000042200000-000000007f74d000 WB
+> > BOOT DATA        000000007f74d000-000000007f752000 WB
+> > RUNTIME DATA     000000007f752000-000000007f753000 WB|RT
+> > BOOT DATA        000000007f753000-000000007f754000 WB
+> > RUNTIME DATA     000000007f754000-000000007f776000 WB|RT
+> > BOOT DATA        000000007f776000-00000000807b5000 WB
+> > RUNTIME DATA     00000000807b5000-00000000807b6000 WB|RT
+> > BOOT DATA        00000000807b6000-00000000817c0000 WB
+> > RUNTIME CODE     00000000817c0000-00000000817d0000 WB|RT
+> > BOOT DATA        00000000817d0000-0000000082100000 WB
+> > =>
+> >
+> >
+> > Trying to allocate EFI memory with already allocated region fails as expected
+> > -----------------------------------------------------------------------------
+> >
+> > => efi_mem alloc 2000 42000000
+> > efi_allocate_pages failed 800000000000000e
+> > =>
+> >
+> > Trying to allocate EFI memory with non-allocated region succeeds
+> > ----------------------------------------------------------------
+> >
+> > => efi_mem alloc 2000 42200000
+> > Address returned 0x42200000
+> >
+> >
+>
+> Thanks
+> /Ilias
