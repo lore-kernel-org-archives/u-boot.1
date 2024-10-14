@@ -4,66 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63E59CFC501
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 08:21:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 689F3CFC503
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 08:44:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A75C688F5E;
-	Mon, 14 Oct 2024 10:21:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id E62EB89011;
+	Mon, 14 Oct 2024 10:44:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="i21ZLz3V";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="J16YovX+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 685BA88F68; Mon, 14 Oct 2024 10:21:54 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 286F088FEC; Mon, 14 Oct 2024 10:44:08 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 387B188EE0
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 10:21:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C498788FB9
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 10:44:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=p-mantena@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49E8LbdC071209;
- Mon, 14 Oct 2024 03:21:37 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1728894097;
- bh=5f4qoZ2myIH1RghOD0Sgvt6Ik13lQejux2r1e1saA2M=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=i21ZLz3VLKWS3GPhdfWCacf5uUXCuf1lLBzuwhfnoeJGV6RqpaNgfdy02lhGQNXD1
- a8cXvz0bak9GAvDbcC6GPk4cj+IxsNoybqyQkpko4fyadLHiML5zJouuG4Pt0cP5Q0
- ZvnzTWB+O1oMy9r17WtEMDAaf5YX2hmzonqimJPA=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 49E8Lbob006348
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 14 Oct 2024 03:21:37 -0500
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 14
- Oct 2024 03:21:37 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 14 Oct 2024 03:21:37 -0500
-Received: from localhost (prasanth-server.dhcp.ti.com [172.24.227.197])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49E8Lass119240;
- Mon, 14 Oct 2024 03:21:36 -0500
-Date: Mon, 14 Oct 2024 13:51:36 +0530
-From: Prasanth Mantena <p-mantena@ti.com>
-To: Peter Robinson <pbrobinson@gmail.com>
-CC: <trini@konsulko.com>, <sjg@chromium.org>, <alpernebiyasak@gmail.com>,
- <u-boot@lists.denx.de>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
- <n-francis@ti.com>, <vaishnav.a@ti.com>, <s-k6@ti.com>
-Subject: Re: [PATCH v2 0/4] Cleanup dma device in spl and move dma channel[0]
-Message-ID: <20241014082136.dene6rbt3k6lixuy@prasanth-server>
-References: <20241009145703.1970034-1-p-mantena@ti.com>
- <CALeDE9O9STcttgbMe9NgLzaLJM97FVmXE5Ncb_Nc+W9d+tROAg@mail.gmail.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-43115b31366so36932645e9.3
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 01:44:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1728895442; x=1729500242; darn=lists.denx.de;
+ h=content-transfer-encoding:organization:autocrypt:content-language
+ :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=hGnn/1kuvFEYRPlOdtnHvVcZzIkFWxwfHv7bxdm+vKo=;
+ b=J16YovX+0gnhP7YPYkpMVyxVfTKx3k6GRoMPFL0mIgFZO7Iekr8BqL0UtKuPngwNJy
+ kE+Jn84xOOYEezRp7/E78INS1Zh62Z4z/SU/VNBsrPjxJU8y/sVqYqL9+T/iieDrFBr/
+ opoe7aB47RLyBpCmk16bmWUsrHwQgJ2RD/kTj7y4yKbbHqVr/B30U/G6Xf1Ggy9E5HQV
+ snvMnbhjKoZv/1i1hQ4pITg14HIZn3plvXjWCbIfye9XA+QTH1dEp+qWc0ubw4Y42mSj
+ o2e1sVqdfrZy4eKu3o3+qwd5yX7T0klQvlRaOO6KSHeekBny3U3O4Gk6w6QkOHfXD/gr
+ xbPg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728895442; x=1729500242;
+ h=content-transfer-encoding:organization:autocrypt:content-language
+ :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=hGnn/1kuvFEYRPlOdtnHvVcZzIkFWxwfHv7bxdm+vKo=;
+ b=UN47zXqvuHQrxkjBNSOamy/zrIS5WJTc/e7WzhRYJ53qJws/UXEc8x8qxCjbf/L2lN
+ ApFOIrwURYPYX79LCsC7+Qck7hd+u+3v8IHq4ZRV0Sbiw1/WSSUGR1MZ4pj6yHt1Q7Ic
+ PXwKDkwwVf5p1sPPFtVC+22G8KeRsGUwE86pMLcQCmb3dLZvMe7kN94yLKEtYZjIsjzs
+ Dna6wIjqDylZ/IusBcNAoe4gld4beFBtCWNJz0ASwyF5m1lUXJoArpriNbypecKt5P3l
+ s/XOkW3sNblHXfZGG/Kh6hqaguxonvdeSovfP5+9UqBO7LEX6zwJW+rNdRIxAQkshb8v
+ Y1Fw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXo+bpaAZzPQXSKUgh16t40yCOqwyXcJCllKjhnP2i8IeUNKOeMiZRtsxANtXJVC3yj4g/tYDo=@lists.denx.de
+X-Gm-Message-State: AOJu0YyyChYdBoBiWu774kz4gzGM+30/yf5vFExddzjr7rpM0BI9Fziv
+ 2RogPJUBY2odgGqsDIM2qwg45FemkZy5Ak1gV3oz5xY1rMoGYVdc3Eci7Hx6+l4=
+X-Google-Smtp-Source: AGHT+IH7Kus1GHRW62r22CceeHs+6kfZAOeO2YHfWGGvQL2EnOtghf8lkgqJGDGoQWCsqlJ2CryHXQ==
+X-Received: by 2002:a5d:5f56:0:b0:37d:5047:76d8 with SMTP id
+ ffacd0b85a97d-37d5532847bmr9054503f8f.59.1728895442435; 
+ Mon, 14 Oct 2024 01:44:02 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:982:cbb0:6bf3:bb7:467:a56f?
+ ([2a01:e0a:982:cbb0:6bf3:bb7:467:a56f])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-37d4b6cfcdbsm10795813f8f.58.2024.10.14.01.44.01
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 14 Oct 2024 01:44:01 -0700 (PDT)
+Message-ID: <d2b5a5e5-c50b-459e-a81e-90c952efdd16@linaro.org>
+Date: Mon, 14 Oct 2024 10:44:01 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <CALeDE9O9STcttgbMe9NgLzaLJM97FVmXE5Ncb_Nc+W9d+tROAg@mail.gmail.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [GIT PULL] Please pull u-boot-amlogic-next-20241014
+To: trini@konsulko.com
+Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,65 +114,100 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 23:10, Peter Robinson wrote:
-Hi Peter,
+Hi Tom,
 
-> Hi Prasanth,
-> 
-> > The channel allocation and deallocation for dma copy was happening on every
-> > dma transfer. This is a overhead for transactions like NAND, which does
-> > page reads recursively for complete data.
-> >
-> > So, moving the dma allocation to probe and implement corresponding
-> > remove function and cleanup dma device while exiting from spl.
-> >
-> > Enable SPL_DM_DEVICE_REMOVE, for device removal capability in SPL.
-> >
-> > v2 <==> v1
-> > ==========
-> > 1> Improve subject of commit.
-> > 2> Add warning on dma device not found.
-> > 3> Do channel allocation only for udma and bcdma. Passthrough for all other types.
-> >
-> > Prasanth Babu Mantena (2):
-> >   mach-k3: common.c: Remove dma device in spl exit
-> >   configs: k3: Enable device removal in SPL
-> >
-> > Santhosh Kumar K (2):
-> >   dma: ti: k3-udma: Move udma_probe() below all APIs
-> >   dma: ti: k3-udma: Move DMA channel[0] allocation to probe and add
-> >     udma_remove()
-> >
-> >  arch/arm/mach-k3/common.c        |  25 ++-
-> >  configs/am62ax_evm_a53_defconfig |   1 +
-> >  configs/am62ax_evm_r5_defconfig  |   1 +
-> >  configs/am62x_evm_a53_defconfig  |   1 +
-> >  configs/am62x_evm_r5_defconfig   |   1 +
-> >  configs/j7200_evm_a72_defconfig  |   1 +
-> >  configs/j7200_evm_r5_defconfig   |   1 +
-> >  configs/j721e_evm_a72_defconfig  |   1 +
-> >  configs/j721e_evm_r5_defconfig   |   1 +
-> >  configs/j721s2_evm_a72_defconfig |   1 +
-> >  configs/j721s2_evm_r5_defconfig  |   1 +
-> >  configs/j784s4_evm_a72_defconfig |   1 +
-> >  configs/j784s4_evm_r5_defconfig  |   1 +
-> 
-> Is there any reason why devices like j721e_beagleboneai64 and
-> m62x_beagleplay and other TI devices aren't changed as part of this
-> change?
+New Libre Computer boards are added with UEFI Capsule Update support,
+plus various fixes for HDMI support, boot targets and android-mainline
+kernel support for khadas-vim3 android config.
 
-We donot have DMA enabled in SPL for these devices, as a result of which
-doesn't require removal of them at spl exit in current context. We donot
-have any onboard flashes on beagle boards, and hence DMA is not enabled in
-SPL for these boards, which is generally required for flash boot.
+Thanks,
+Neil
 
-Thanks
-Prasanth
+The following changes since commit 580fb5773634c4a01f907a164b2a05961840b4c0:
 
-> 
-> Peter
+   Merge tag 'u-boot-imx-master-20241013' of https://gitlab.denx.de/u-boot/custodians/u-boot-imx (2024-10-13 16:25:01 -0600)
+
+are available in the Git repository at:
+
+   https://source.denx.de/u-boot/custodians/u-boot-amlogic.git tags/u-boot-amlogic-next-20241014
+
+for you to fetch changes up to 315cad97a5ae09b1b975fff2413ce785b3b8592a:
+
+   configs: meson64: Ensure commands for boot targets are available (2024-10-14 09:06:16 +0200)
+
+----------------------------------------------------------------
+- Add Libre Computer boards into proper libre-computer board directory
+- Add new Boards:
+  - Libre Computer aml-s905d3-cc
+  - Libre Computer aml-a311d-cc
+- Add capsule update to libretech-ac and the new boards since they have an onboard SPI nor flash
+- Fix HDMI support after sync to v6.11 and regulator enable from Marek
+- Fix khadas-vim3 android config for android-mainline kernel
+- Disable meson64 boot targets when configs are not eavailable
+
+----------------------------------------------------------------
+Callum Parsey (1):
+       configs: meson64: Ensure commands for boot targets are available
+
+Mattijs Korpershoek (2):
+       configs: khadas-vim3{l}: Increase boot/recovery partition size
+       configs: meson64_android: Remove dtbo support
+
+Neil Armstrong (8):
+       board: libretech-ac: move board support into dedicated directory
+       board: libre-computer: aml-s805x-cc: Enable capsule updates
+       ARM: meson: add support for Libre Computer aml-a311d-cc
+       ARM: meson: add support for Libre Computer aml-s905d3-cc
+       dts: meson-g12-common-u-boot: do not disable canvas
+       video: meson: dw-hdmi: do not fail probe if HDMI regulator is already enabled
+       clk: meson: gxbb: add HDMI clocks
+       power/domain: meson-ee-pwrc: make sure to not enable a domain twice
+
+  arch/arm/dts/meson-g12-common-u-boot.dtsi          |   4 -
+  .../dts/meson-g12b-a311d-libretech-cc-u-boot.dtsi  |  15 +++
+  .../dts/meson-sm1-s905d3-libretech-cc-u-boot.dtsi  |  15 +++
+  board/amlogic/p212/MAINTAINERS                     |   2 -
+  board/libre-computer/aml-a311d-cc/MAINTAINERS      |   7 ++
+  board/libre-computer/aml-a311d-cc/Makefile         |   6 ++
+  board/libre-computer/aml-a311d-cc/aml-a311d-cc.c   |  44 +++++++++
+  board/libre-computer/aml-s805x-ac/MAINTAINERS      |   8 ++
+  board/libre-computer/aml-s805x-ac/Makefile         |   6 ++
+  board/libre-computer/aml-s805x-ac/aml-s805x-ac.c   |  71 ++++++++++++++
+  board/libre-computer/aml-s905d3-cc/MAINTAINERS     |   7 ++
+  board/libre-computer/aml-s905d3-cc/Makefile        |   6 ++
+  board/libre-computer/aml-s905d3-cc/aml-s905d3-cc.c |  44 +++++++++
+  configs/aml-a311d-cc_defconfig                     | 108 +++++++++++++++++++++
+  configs/aml-s905d3-cc_defconfig                    | 108 +++++++++++++++++++++
+  configs/libretech-ac_defconfig                     |   8 ++
+  doc/board/amlogic/aml-a311d-cc.rst                 |  46 +++++++++
+  doc/board/amlogic/aml-s905d3-cc.rst                |  46 +++++++++
+  doc/board/amlogic/index.rst                        |   2 +
+  drivers/clk/meson/gxbb.c                           |  50 +++++++++-
+  drivers/power/domain/meson-ee-pwrc.c               |  15 ++-
+  drivers/video/meson/meson_dw_hdmi.c                |   4 +-
+  include/configs/khadas-vim3_android.h              |   8 +-
+  include/configs/khadas-vim3l_android.h             |   8 +-
+  include/configs/meson64.h                          |  28 +++++-
+  include/configs/meson64_android.h                  |  26 +----
+  26 files changed, 643 insertions(+), 49 deletions(-)
+  create mode 100644 arch/arm/dts/meson-g12b-a311d-libretech-cc-u-boot.dtsi
+  create mode 100644 arch/arm/dts/meson-sm1-s905d3-libretech-cc-u-boot.dtsi
+  create mode 100644 board/libre-computer/aml-a311d-cc/MAINTAINERS
+  create mode 100644 board/libre-computer/aml-a311d-cc/Makefile
+  create mode 100644 board/libre-computer/aml-a311d-cc/aml-a311d-cc.c
+  create mode 100644 board/libre-computer/aml-s805x-ac/MAINTAINERS
+  create mode 100644 board/libre-computer/aml-s805x-ac/Makefile
+  create mode 100644 board/libre-computer/aml-s805x-ac/aml-s805x-ac.c
+  create mode 100644 board/libre-computer/aml-s905d3-cc/MAINTAINERS
+  create mode 100644 board/libre-computer/aml-s905d3-cc/Makefile
+  create mode 100644 board/libre-computer/aml-s905d3-cc/aml-s905d3-cc.c
+  create mode 100644 configs/aml-a311d-cc_defconfig
+  create mode 100644 configs/aml-s905d3-cc_defconfig
+  create mode 100644 doc/board/amlogic/aml-a311d-cc.rst
+  create mode 100644 doc/board/amlogic/aml-s905d3-cc.rst
