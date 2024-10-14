@@ -4,68 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04E0FD16250
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 12:15:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E260D16258
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 12:37:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7756088DCC;
-	Mon, 14 Oct 2024 14:15:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9C07388ED5;
+	Mon, 14 Oct 2024 14:37:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="MGVLOOJY";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bTfJ1D6f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D0AB88CF1; Mon, 14 Oct 2024 14:15:12 +0200 (CEST)
-Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C318A88EE3; Mon, 14 Oct 2024 14:37:40 +0200 (CEST)
+Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
+ [IPv6:2a00:1450:4864:20::22a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1639B88DFD
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 14:15:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id D273C88B6D
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 14:37:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-lj1-x22a.google.com with SMTP id
+ 38308e7fff4ca-2fb59652cb9so1244391fa.3
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 05:37:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1728909458; x=1729514258; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=TRf5BNYHJ1dnLS2KgLg1wx+2hWiheUQIQ1s95RNwcdI=;
+ b=bTfJ1D6fUrry3+xjVNGL3j9UDf7t7N3DYt2b8mDyCN9Ii1BXK/0ywbpm4qYnHDA7cP
+ 8BMIKgpzeSs+UNfCE/LIeBSX/0byWIEb67w7t+nJzve6BPVApm4M9ddgaySZjSI4aFWf
+ w8nPDpv9xnVonaoqGbjFHBqAxCXsMXc5e8ULqg5SiFFvAk1hTgMNfMIBDFOXSBXf3z4w
+ aJPyufz2K53Pi7aP+B67NYn5nYHLG4RaYREVuD/wz53HKqE0qT1Bm3dumBfoM0BEhy7t
+ X758mrVdx4BPvtqbZF3kBtr4QnGq7tNC7UJcI/IBd2CAAjv70eSYpae9ZRUTzEDGR2KH
+ Uung==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728909458; x=1729514258;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=TRf5BNYHJ1dnLS2KgLg1wx+2hWiheUQIQ1s95RNwcdI=;
+ b=AFAXR04khuajb9IDreQ1WJxy9AQmY3H+KSYYC8QCBJ16RiKIWLuedcSwiqFx4JHDX9
+ 5fv++hDbbRihtKxo35Hz3pVmK0Bg1jaw0cbshDXvneRqjRICW/olJhV02nJXAcsEUdLO
+ 3YUwna3HFbR9Iidch1Ve13YZ3WvnmrMlfmL004anBDupX5Psl+RXtn9O4dKJT0Cuh7cK
+ 0sMDqJDKxSwBRJEiMGdeHvcSEjUtPg6guQMs8+xQ7MewiD4aP3c7DQpYlKKxItx2PBJZ
+ MDHe+Q/DW2rtcPP288US2CM3e1WqZDzBVnaD1CW+sziKHDktUYFgvsTNDF8otuTqhH+s
+ RF5A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUuziASFRF6zjYhVZy419/tiMuOLpyrM2I2AJBqtEsxKOq/vOsigGC7wIZdBcBWSBtGZfNtBOE=@lists.denx.de
+X-Gm-Message-State: AOJu0YzC+r2cVaTw/Ullf9EO4lz2yFfgBj04YvM1K9TK8bqiOPmAYAFl
+ TXasHpNwwnlVCJnTzxvw/19aZwkgNoc0594oTDlvgL1EExACRUanJKpGdUk9VY5cpJZof0tJEyR
+ 2j/71N/su2yEPLYDp/0KChFAwJM4=
+X-Google-Smtp-Source: AGHT+IHKksk+3uigiKhbhN0zDvZRIvqYUpZIgz4U2wzp/0NNDqMDrky84jVnYMCinLikpy2ZHQfEruhTAxrLfSzg8O8=
+X-Received: by 2002:a2e:b8c1:0:b0:2fa:d67a:adb8 with SMTP id
+ 38308e7fff4ca-2fb32740243mr47857921fa.8.1728909457645; Mon, 14 Oct 2024
+ 05:37:37 -0700 (PDT)
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1728908109;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ygNyP8XlhohFQB7v346wGNgrwLKGUM9Jd8rk49S7ODU=;
- b=MGVLOOJYHsyPbM5/H4RoRk1XDcI8Jmx50jn8Um1bqrDcangmOhPObiR9DQszV5pcdXsS7l
- +tSoP5ZQuCmKc4LuLo/LlVXSV3CNbatrmX9XSy76MOYh3nyQqJ7S0citSz4xVjyDLtM8r4
- GgighGS/WrlVyXhBvAovyx/6ql52JsoWWCFILDzPYEwtJnFC6StOgMwHDKEwqaOuCPir4o
- Pn1MWKav96sdj0xUGgkHq9IE7jn5HcrakU+UaJ1cB9H2vn7xbOiW1SDgoAyrEgGHJU/7Sn
- oKKDqKeoP9RRRxIi9wtGhRCwzUR/o9OUJo8Yf0pmfrgXZnKnVx33bICoOAuFuQ==
-Date: Mon, 14 Oct 2024 14:15:08 +0200
-From: Dragan Simic <dsimic@manjaro.org>
-To: Marek Vasut <marex@denx.de>
-Cc: Alex ThreeD <alexthreed@gmail.com>, u-boot@lists.denx.de, Ben Wolsieffer
- <benwolsieffer@gmail.com>, Chris Morgan <macromorgan@hotmail.com>, Jonas
- Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>, Philipp
- Tomsich <philipp.tomsich@theobroma-systems.com>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Quentin Schulz <quentin.schulz@cherry.de>, Simon
- Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH] rockchip: board: Increase rng-seed size to make it
- sufficient for modern Linux
-In-Reply-To: <11d5f0df-337f-43b8-808d-2bd5d17902b2@denx.de>
-References: <20241013093244.817790-1-alexthreed@gmail.com>
- <31e0be9e-ba50-4bc6-b07f-d20426b650be@denx.de>
- <CAF4oh-PE7epxtH9FS2PSbcGcd+aVH=7jYhaAUMNKALZNc80x5w@mail.gmail.com>
- <550c164e365e5208628f291d5b295779@manjaro.org>
- <7a104c2b-39e6-4ab2-a46e-cf61979d42b5@denx.de>
- <711feec9071093462de01e4cd17cea25@manjaro.org>
- <4ff7f1f8-5968-45df-87f2-89903f74b153@denx.de>
- <d9f513495bfec24b9f71310c6a74537c@manjaro.org>
- <11d5f0df-337f-43b8-808d-2bd5d17902b2@denx.de>
-Message-ID: <165db18d786ac955398dd8f73c79841e@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
-Content-Transfer-Encoding: 8bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+References: <20241011170914.1980541-1-pbrobinson@gmail.com>
+ <CAFLszTh9ryJNetLVS6Bwe3D1WDhMwvNxd2c4_uJKUmXXK9LXWg@mail.gmail.com>
+In-Reply-To: <CAFLszTh9ryJNetLVS6Bwe3D1WDhMwvNxd2c4_uJKUmXXK9LXWg@mail.gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Mon, 14 Oct 2024 13:37:26 +0100
+Message-ID: <CALeDE9Mec9jiLyAAqhJLawy9Py1rmYySqb8TfXn0nowNgy0veg@mail.gmail.com>
+Subject: Re: [PATCH v2] board: rpi: Pass CMA through from firmware DT
+To: Simon Glass <sjg@chromium.org>
+Cc: Matthias Brugger <mbrugger@suse.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,69 +88,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2024-10-14 14:10, Marek Vasut wrote:
-> On 10/14/24 12:57 PM, Dragan Simic wrote:
->> On 2024-10-14 12:52, Marek Vasut wrote:
->>> On 10/14/24 12:37 PM, Dragan Simic wrote:
->>>> On 2024-10-14 12:35, Marek Vasut wrote:
->>>>> On 10/14/24 12:32 PM, Dragan Simic wrote:
->>>>>> On 2024-10-14 12:26, Alex ThreeD wrote:
->>>>>>> On Mon, Oct 14, 2024 at 12:10 AM Marek Vasut <marex@denx.de> 
->>>>>>> wrote:
->>>>>>>> Let's make this override-able via environment variable, because 
->>>>>>>> this
->>>>>>>> might be growing in the future again. Does this work ?
->>>>>>>> 
->>>>>>>> size_t len = env_get_ulong("kaslrseed_size", 10, 32);
->>>>>>> 
->>>>>>> Maybe `env_get_hex("rng_seed_size", 32)` would be better? As most 
->>>>>>> other env are
->>>>>>> hexadecimal.
->>>>>>> 
->>>>>>> Actually it seems that entropy required to init pool early has 
->>>>>>> decreased in
->>>>>>> Linux 5.19 from 64 bytes (2 * CHACHA_KEY_SIZE) to 32 bytes
->>>>>>> (BLAKE2S_HASH_SIZE)
->>>>>>> https://elixir.bootlin.com/linux/v5.18/source/drivers/char/ 
->>>>>>> random.c#L236
->>>>>>> https://elixir.bootlin.com/linux/v5.19/source/drivers/char/ 
->>>>>>> random.c#L551
->>>>>>> Anyway config knob should not harm.
->>>>>> 
->>>>>> I think that the value received from the new environment variable
->>>>>> should be accepted only if it's greater than some hardcoded value,
->>>>>> in this case 32.  That way, someone won't be able to misconfigure
->>>>>> their board environment and cause the early random pool 
->>>>>> initialization
->>>>>> to be postponed.
->>>>> 
->>>>> Using low number could be useful for testing. Print a WARNING if 
->>>>> the
->>>>> number is too low perhaps?
->>>> 
->>>> Yes, testing with low values has also crossed my mind.  Priting such
->>>> warnings would be a viable option.
->>> 
->>> Sounds good then, thanks!
->> 
->> Thank you. :)  My early thoughts were like "wow, someone can break
->> their early random pool initialization this way", but right after
->> that something like "well, breaking many other things is already
->> possible in the same way" crossed my mind. :)
-> 
-> That crossed my mind too, but ...
-> 
->> So, yes, just printing such warnings is perfectly fine.
-> 
-> ... right. U-Boot is a debug tool and boot monitor, so it gives user
-> the freedom to do whatever they want/need/..., which includes the
-> obligatory footgun .
+On Sun, 13 Oct 2024 at 20:34, Simon Glass <sjg@chromium.org> wrote:
+>
+> On Fri, 11 Oct 2024 at 11:09, Peter Robinson <pbrobinson@gmail.com> wrote:
+> >
+> > For a lot of usecases, such as display, camera, media
+> > the Raspberry Pi needs a lot more CMA than distros
+> > configure as default so we should pass this parameter
+> > through so things work as expected. Fix a spelling
+> > mistake while we're at it.
+> >
+> > Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
+> > ---
+> >
+> > v2: Update the cma string
+> >
+> >  board/raspberrypi/rpi/rpi.c | 5 ++++-
+> >  1 file changed, 4 insertions(+), 1 deletion(-)
+> >
+>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+>
+> > diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
+> > index ab5ea85cf9f..dd5a318d239 100644
+> > --- a/board/raspberrypi/rpi/rpi.c
+> > +++ b/board/raspberrypi/rpi/rpi.c
+> > @@ -540,12 +540,15 @@ void  update_fdt_from_fw(void *fdt, void *fw_fdt)
+> >         if (fdt == fw_fdt)
+> >                 return;
+> >
+> > -       /* The firmware provides a more precie model; so copy that */
+> > +       /* The firmware provides a more precise model; so copy that */
+> >         copy_property(fdt, fw_fdt, "/", "model");
+> >
+> >         /* memory reserve as suggested by the firmware */
+> >         copy_property(fdt, fw_fdt, "/", "memreserve");
+> >
+> > +       /* copy the CMA memory setting from the firmware DT to linux */
+> > +       copy_property(fdt, fw_fdt, "/reserved-memory/linux,cma", "size");
+>
+> Does this need / have nodes pointing to it from elsewhere in the tree?
 
-Haha, foot gun, that brought a smile to my face! :)  Well said.
+Yes! It doesn't work without the /, I am planning on looking at this
+some more but this fixes the issue at hand. Using the fdt cmd from the
+command prompt needs it as well.
 
-> If the concern is lockdown of U-Boot env so it cannot induce negative
-> side effects, there is CONFIG_ENV_WRITEABLE_LIST and others for those
-> purposes.
-
-Yes, while in the default configuration, U-Boot gives virtually full
-freedom to its users, which is good.
+> > +
+> >         /* Adjust dma-ranges for the SD card and PCI bus as they can depend on
+> >          * the SoC revision
+> >          */
+> > --
+> > 2.47.0
+> >
+>
+> Regards,
+> Simon
