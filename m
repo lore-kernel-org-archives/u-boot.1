@@ -4,96 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30E5DD18153
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 21:07:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B598D18151
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 21:07:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9492891A6;
-	Mon, 14 Oct 2024 23:06:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 40E2E88D51;
+	Mon, 14 Oct 2024 23:07:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="QydmlH05";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DQjGEEj9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CEA968907F; Mon, 14 Oct 2024 23:06:40 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 576F8891E9; Mon, 14 Oct 2024 23:07:12 +0200 (CEST)
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9863F891C7
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 23:06:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id 8EEE088D51
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 23:07:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ddrokosov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 0D4FE100010;
- Tue, 15 Oct 2024 00:06:30 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 0D4FE100010
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1728939990;
- bh=+j+IW8vxifHe6pyACzyRYsKbz5zLOTLdDa/ndo93de8=;
- h=From:Date:Subject:MIME-Version:Content-Type:Message-ID:To:From;
- b=QydmlH05sU50gqaDWpRnD1Thq0W5diBlLliLFB7Bec2P2LYgCgqOCKCa6ZNUIYGPp
- WsdQJcpWEPDCVazsHWMIPrRoUn3vuh/6JAbDT+tO8sfLQOZyNI7ifYYq5ka66DlDE9
- dFJv9m3gO+9VTUoiAcq0LRMrlUnIRYf7MEuXlMYeFa4abXG7TkxBKqc+YyL/3d3WjF
- PRG/FRtNs8IviJcjQo7Lz3CTX2aL8y97ThxeN8f6t9M4HYy/4VlVrI96tVIQpuo7wV
- tkkn6AUfFOn40Wg0Z2+igHxvwgqYrXTTYt4TuIh1pz1grVm3pVIRZKgrdBT72kf9CP
- vXj6KBm/fvHRw==
-Received: from smtp.sberdevices.ru (unknown [172.16.192.103])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Tue, 15 Oct 2024 00:06:29 +0300 (MSK)
-From: Dmitry Rokosov <ddrokosov@salutedevices.com>
-Date: Tue, 15 Oct 2024 00:06:17 +0300
-Subject: [PATCH v4 5/5] common: android_ab: fix slot suffix for abc block
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-6cbd1a4217dso50356946d6.2
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 14:07:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1728940026; x=1729544826; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=kNvO090YGh/yMcuaQlw9jFkhFsr85CchvIcnlKlOdl0=;
+ b=DQjGEEj9HjCXDrLUcM0clcA0kdeDxxB4bQjrqiaWq+5JS09X6Kn+LtKrfZwL+Kiljd
+ 0lFwL0JB9kJCgjWBK46dRIZGa+fDYiONZSuUOg2ewIRarFcfihKUkmRRsiBpm9ynFP+C
+ 9Nl/lPQ3zvQ9KSNTsM8enEcSEID2N081RAJbY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728940026; x=1729544826;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=kNvO090YGh/yMcuaQlw9jFkhFsr85CchvIcnlKlOdl0=;
+ b=jdNvJSdbp/iJoYrU65lamuabL323wJa5SXJ2ct+Q57e/oTWc7Tp0nPC0BbMBPp9q0K
+ I6v9/Ho5OJZ+crZkwQyspJ05cYEzDXX3jx1EKbC47wwI5ZaXd2B0wWsja9L7jZSq2Edh
+ wC7QsUA0JiqmNz2zco9UR9akZwRBN0BTf+1HX1TGy4Z7TzT7k84C4cb4kyzEuOTvqrlf
+ cqj3c04WrRFnP15dJo9Ye475iuAuxtSXT/7P9lN/G+Vubbcj5MnlquioSR/dhWxznxly
+ ucV/iZVh21BzKI1Kni8Dsx1IK1DNijLgVvN1jdNzFFV6G3J2K+o2XKfs9kjzwPoDCtgL
+ ow2A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX9ZUoKJtmMz4MKPCtMu+XbW/4l5UmL2bne0BcL0iw4ezP2kiHMMFZt3QZdzrWUnkI0pB1jzN0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw1A6kQu7+G9CMBWp0piPBzPMkrFx618YmWpcAhKQ4GXRSOwmVX
+ PqYstOo5VCSK7FFkqLz2KkNPqeTWLes13JyD+qSVhBiZ+uixjr0grPB6IN6fuFKAeNHKxYC5Ndv
+ +4Bab+3xGG0/yT1LPtKsYqidlAKyzUfsDtTXX
+X-Google-Smtp-Source: AGHT+IHXep4g+YdUP7fWYZgne8JlZ3lqGgIUFMm6+Eid5B46263/+5GB4DXGWfk+qxBgjwHvW+2sq3BOoQegxBoWxbo=
+X-Received: by 2002:a05:6214:5884:b0:6cb:e662:c59a with SMTP id
+ 6a1803df08f44-6cbf9cb325emr128603616d6.11.1728940026224; Mon, 14 Oct 2024
+ 14:07:06 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20241015-android_ab_master-v4-5-a91cca9513c4@salutedevices.com>
-References: <20241015-android_ab_master-v4-0-a91cca9513c4@salutedevices.com>
-In-Reply-To: <20241015-android_ab_master-v4-0-a91cca9513c4@salutedevices.com>
-To: Igor Opaniuk <igor.opaniuk@gmail.com>, Mattijs Korpershoek
- <mkorpershoek@baylibre.com>, Sam Protsenko <semen.protsenko@linaro.org>, "Tom
- Rini" <trini@konsulko.com>, "Andrew F. Davis" <afd@ti.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>, Mario Six
- <mario.six@gdsys.cc>
-CC: <u-boot@lists.denx.de>, <u-boot-amlogic@groups.io>, <rockosov@gmail.com>, 
- <kernel@salutedevices.com>, Dmitry Rokosov <ddrokosov@salutedevices.com>, 
- Guillaume La Roque <glaroque@baylibre.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1728939988; l=1726;
- i=ddrokosov@salutedevices.com; s=20241008; h=from:subject:message-id;
- bh=UUIcWLaYnMuzq03dG5cd2lwXHRzcgTzDwdC2h1czkVo=;
- b=OB4quftMFXdIQaJyCRoy4j07kuv0vJKMu7C9OG815DttnRDT/+tQ2yG5FSO6Retl78EOZvEA3
- I93KlBcZ5y3CqB8ifdxEQLQH9f53u/wf4GHuCXsYfDW96XVRQiRoLPD
-X-Developer-Key: i=ddrokosov@salutedevices.com; a=ed25519;
- pk=J6t8z4aofCVwzR1Xs7royc+IGyQcL0cTby92cz3i8B4=
-X-Originating-IP: [172.28.129.94]
-X-ClientProxiedBy: p-i-exch-a-m2.sberdevices.ru (172.24.196.120) To
- p-i-exch-a-m1.sberdevices.ru (172.24.196.116)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 188429 [Oct 14 2024]
-X-KSMG-AntiSpam-Version: 6.1.0.4
-X-KSMG-AntiSpam-Envelope-From: ddrokosov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 39 0.3.39
- e168d0b3ce73b485ab2648dd465313add1404cce, {Tracking_uf_ne_domains},
- {Tracking_from_domain_doesnt_match_to},
- android-review.googlesource.com:5.0.1,7.1.1; source.android.com:5.0.1,7.1.1;
- 127.0.0.199:7.1.2; smtp.sberdevices.ru:5.0.1,7.1.1; salutedevices.com:7.1.1;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1, FromAlignment: s
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean, bases: 2024/10/14 18:42:00
-X-KSMG-LinksScanning: Clean, bases: 2024/10/14 18:42:00
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2024/10/14 19:21:00 #26753819
-X-KSMG-AntiVirus-Status: Clean, skipped
+References: <20241007130109.227305-1-brian.ruley@gehealthcare.com>
+ <20241010112451.27242-1-brian.ruley@gehealthcare.com>
+ <20241010112451.27242-2-brian.ruley@gehealthcare.com>
+In-Reply-To: <20241010112451.27242-2-brian.ruley@gehealthcare.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 14 Oct 2024 15:06:55 -0600
+Message-ID: <CAFLszTg3RWyx_Z6waYaBkJMRKCQnv_cQr6xaMF3v9s_R3bKmYQ@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] binman: expand test coverage to nxp_imx8mcst
+To: Brian Ruley <brian.ruley@gehealthcare.com>
+Cc: Tom Rini <trini@konsulko.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ ian.ray@gehealthcare.com, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,49 +86,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-To align with the official Android BCB (Bootloader Control Block)
-specifications, it's important to note that the slot_suffix should start
-with an underscore symbol.
+Hi Brian,
 
-For a comprehensive understanding of the expected slot_suffix format in
-userspace, please refer to the provided reference [1].
+On Thu, 10 Oct 2024 at 05:25, Brian Ruley <brian.ruley@gehealthcare.com> wrote:
+>
+> Add coverage for IMX8M code siging. Create PKI tree and other assets
+> required by `cst' using `hab4_pki_tree.sh' script and `srktool' in
+> `cst_3.4.1' [1].
+>
+> [1] https://www.nxp.com/webapp/Download?colCode=IMX_CST_TOOL_NEW
+>
+> Signed-off-by: Brian Ruley <brian.ruley@gehealthcare.com>
+> ---
+> Changes for v2:
+> - Added missing *.pem files
+> - Rebased on top of "[PATCH v4 2/2] binman: add fast authentication
+>   method for i.MX8M signing"
+> - Included a test for fast authentication
+>
+>  tools/binman/ftest.py                         |  11 ++
+>  tools/binman/test/340_nxp_imx8mcst.dts        |  58 +++++++++
+>  .../test/341_nxp_imx8mcst_fast_auth.dts       |  18 +++
+>  .../CSF1_1_sha256_4096_65537_v3_usr_crt.pem   | 121 ++++++++++++++++++
+>  .../IMG1_1_sha256_4096_65537_v3_usr_crt.pem   | 121 ++++++++++++++++++
+>  .../SRK1_sha256_4096_65537_v3_usr_crt.pem     | 121 ++++++++++++++++++
+>  tools/binman/test/cst/crts/SRK_table.bin      | Bin 0 -> 531 bytes
+>  .../test/cst/crts/SRK_table_fast_auth.bin     | Bin 0 -> 531 bytes
+>  .../CSF1_1_sha256_4096_65537_v3_usr_key.pem   |  54 ++++++++
+>  .../IMG1_1_sha256_4096_65537_v3_usr_key.pem   |  54 ++++++++
+>  .../SRK1_sha256_4096_65537_v3_usr_key.pem     |  54 ++++++++
+>  tools/binman/test/cst/keys/key_pass.txt       |   2 +
+>  12 files changed, 614 insertions(+)
+>  create mode 100644 tools/binman/test/340_nxp_imx8mcst.dts
+>  create mode 100644 tools/binman/test/341_nxp_imx8mcst_fast_auth.dts
+>  create mode 100644 tools/binman/test/cst/crts/CSF1_1_sha256_4096_65537_v3_usr_crt.pem
+>  create mode 100644 tools/binman/test/cst/crts/IMG1_1_sha256_4096_65537_v3_usr_crt.pem
+>  create mode 100644 tools/binman/test/cst/crts/SRK1_sha256_4096_65537_v3_usr_crt.pem
+>  create mode 100644 tools/binman/test/cst/crts/SRK_table.bin
+>  create mode 100644 tools/binman/test/cst/crts/SRK_table_fast_auth.bin
+>  create mode 100644 tools/binman/test/cst/keys/CSF1_1_sha256_4096_65537_v3_usr_key.pem
+>  create mode 100644 tools/binman/test/cst/keys/IMG1_1_sha256_4096_65537_v3_usr_key.pem
+>  create mode 100644 tools/binman/test/cst/keys/SRK1_sha256_4096_65537_v3_usr_key.pem
+>  create mode 100644 tools/binman/test/cst/keys/key_pass.txt
+>
 
-Links:
-[1] - https://source.android.com/docs/core/architecture/bootloader/updating#slots
+Thanks for doing this! When I run it I get:
 
-Based-on: https://android-review.googlesource.com/c/platform/external/u-boot/+/1446439
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Tested-by: Guillaume La Roque <glaroque@baylibre.com>
-Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
----
- boot/android_ab.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+inman test testNxpImx8mCstFastAuth
+======================== Running binman tests ========================
+E
+======================================================================
+ERROR: binman.ftest.TestFunctional.testNxpImx8mCstFastAuth
+(subunit.RemotedTestCase)
+binman.ftest.TestFunctional.testNxpImx8mCstFastAuth
+----------------------------------------------------------------------
+testtools.testresult.real._StringException: Traceback (most recent call last):
+ValueError: Error -11 running 'cst -i
+/tmp/binman.lk6cfgwh/nxp.csf-config-txt.nxp-imx8mcst -o
+/tmp/binman.lk6cfgwh/nxp.csf-output-blob.nxp-imx8mcst':
 
-diff --git a/boot/android_ab.c b/boot/android_ab.c
-index c93e51541019d0fe793303c4b3d5286df061906f..a287eac04fe88ad08bdcf1b1b1d6e564d503d800 100644
---- a/boot/android_ab.c
-+++ b/boot/android_ab.c
-@@ -52,7 +52,7 @@ static int ab_control_default(struct bootloader_control *abc)
- 	if (!abc)
- 		return -EFAULT;
- 
--	memcpy(abc->slot_suffix, "a\0\0\0", 4);
-+	memcpy(abc->slot_suffix, "_a\0\0", 4);
- 	abc->magic = BOOT_CTRL_MAGIC;
- 	abc->version = BOOT_CTRL_VERSION;
- 	abc->nb_slot = NUM_SLOTS;
-@@ -328,7 +328,8 @@ int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
- 		 * or the device tree.
- 		 */
- 		memset(slot_suffix, 0, sizeof(slot_suffix));
--		slot_suffix[0] = BOOT_SLOT_NAME(slot);
-+		slot_suffix[0] = '_';
-+		slot_suffix[1] = BOOT_SLOT_NAME(slot);
- 		if (memcmp(abc->slot_suffix, slot_suffix,
- 			   sizeof(slot_suffix))) {
- 			memcpy(abc->slot_suffix, slot_suffix,
 
--- 
-2.43.0
+----------------------------------------------------------------------
+Ran 1 test in 0.198s
 
+FAILED (errors=1)
+
+Another test fails too. Do you know why I see this and you don't?
+
+Regards,
+SImon
