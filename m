@@ -4,83 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32104D18138
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 17:53:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2265DD18138
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 17:57:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 83D3A884FC;
-	Mon, 14 Oct 2024 19:53:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 76CB588A1C;
+	Mon, 14 Oct 2024 19:57:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Bb40au7X";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="buGrh+VW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F0B280245; Mon, 14 Oct 2024 19:53:56 +0200 (CEST)
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [IPv6:2a00:1450:4864:20::12c])
+ id 1262A80245; Mon, 14 Oct 2024 19:57:20 +0200 (CEST)
+Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
+ [IPv6:2607:f8b0:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DBE8988CD9
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 19:53:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AFAE488D72
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 19:57:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alexthreed@gmail.com
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-539e3f35268so2721866e87.3
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 10:53:53 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pg1-x534.google.com with SMTP id
+ 41be03b00d2f7-7e9fd82f1a5so2893261a12.1
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 10:57:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1728928433; x=1729533233; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=8fjJ/Iu2CzWa7akm7Q3yd4fOtzdSuRHjFls/W36bZgo=;
- b=Bb40au7XBDrHE3plFD6znQZon5FjHM4dZcjgixViMIFByS6g3oe79Mj8YbnVZxggjR
- FNkoep9zSqbAPF4KWBjjlu4i1lYDuyCnnAIcAJXAJFvcVNBPiVrML1ko7HHdjcWZ1ZRc
- Phwb+ZT9JAr2oTXMilvkoFtKWVYssjoe8Nuf6STnHCGT77RfbUKi/kdYObCxmEUsx1eS
- Sh0C1PyHGewKg9EywRz4lvjG5Sf0p08hGPl8L+8KRHhKrXEqB0sNaqBK0/oyqFcoz87e
- FwBSPmV5JcUGORZqZe34DYcZSQuQ9ocx4eMI4rOg+skAqmr/Feg4ciV0vXDpUNx0yFkb
- F6NA==
+ d=linaro.org; s=google; t=1728928635; x=1729533435; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ky5X0oRrHxzDGLxVxAYiyMB3YbSjpybKYzujP7pAAHQ=;
+ b=buGrh+VWalU8m8ABtsVBqNPAPngKkfaOhqH7XM5ddw5azOu8yyXtL6Drka/AonhZT/
+ 5Ws4+sGuvSJ35hZSVrJRmTaR6r6gnYKCzrwaqx2FoGCgn9i+6SLEd8+DOCmLwML/ePt8
+ oAXl4zFrAA4jC6kvqmLYDMBU9JteI8Tgswqomt+rIknlmaLjLaYA7s2rK4QPaCh4Qumd
+ nbI54dcGQ56PSuxykSym4WvukW9LEdmZel2QgUyf5osjUiUNVir9YEb1Aw5KUpuqlrwn
+ 0w7g+1qBopFNEGFxWP2MVvLerjO2agqrXb3XXJC6uL/umzee2n+kCyxtAOdOXXKu21jI
+ 6zNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728928433; x=1729533233;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1728928635; x=1729533435;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=8fjJ/Iu2CzWa7akm7Q3yd4fOtzdSuRHjFls/W36bZgo=;
- b=DzgFJsYe2RxYNdqY95zIbpruGAF9tPLJuYEmRIUbQ9uHdIbFSGb52bDrl7o0goRT92
- hEtZbfoftAWYfTxV2BG1IhPsmk++/6D4fwFdIDPpQ6DXENkeC6aSfY7o12Mnu477FYjD
- xIq9jOlkpvhpqFi0tMPggw0s7atYtnwcfuAVAj4J4y4N2ADLhWF5Ftg7QrwLag/ynzxq
- SNhBdFlCVLW68TG06yfX2OKpHj7K7CIVwzow2xiRY7a/9dWspM1SacETE+BPdaSjNiPH
- nnm+jbZcQort5gKydbakhkZtkG3dhPfQzAmkFvw4iAfPAPPXH0HD+IEpfkD+QudwLz4i
- 8I9g==
-X-Gm-Message-State: AOJu0Yw3ZAMdQ3Ho5vdDux8VPF0to3ZZ2/D3n6u5cmALxKfpBSvrZCWl
- lnoVlbZ6a9gx5bGZCpTvLGopL+9I+c4weCOJJHcfndn5cQwSclScZE/FJa7/mn4=
-X-Google-Smtp-Source: AGHT+IH9pnfzmYgkl1Pis1E5j+IP64YiIK/HnZ5MiH9RGi/SbpswOZm6YWUNRe89eF8RonYBGQde/Q==
-X-Received: by 2002:a05:6512:2346:b0:536:9f02:17b4 with SMTP id
- 2adb3069b0e04-539e5731678mr4509895e87.40.1728928432517; 
- Mon, 14 Oct 2024 10:53:52 -0700 (PDT)
-Received: from alex3d.netup (team.netup.ru. [91.213.249.1])
- by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-539ee0ecddfsm690996e87.234.2024.10.14.10.53.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Oct 2024 10:53:51 -0700 (PDT)
-From: Alex Shumsky <alexthreed@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Alex Shumsky <alexthreed@gmail.com>,
- Ben Wolsieffer <benwolsieffer@gmail.com>,
- Chris Morgan <macromorgan@hotmail.com>, Dragan Simic <dsimic@manjaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Marek Vasut <marex@denx.de>,
- Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2] rockchip: board: Increase rng-seed size to make it
- sufficient for modern Linux
-Date: Mon, 14 Oct 2024 20:53:38 +0300
-Message-Id: <20241014175338.2675136-1-alexthreed@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ bh=ky5X0oRrHxzDGLxVxAYiyMB3YbSjpybKYzujP7pAAHQ=;
+ b=PX56e4lprijh7nH6QSj60CX8NAjprjRS9CCevpUyzx4jNmGly/FGmMtESVa6g/LgXA
+ rxbtRT1Iw2DvzenYZ8sswccY6kgWhBpVbqfMbIn+p70txRKRsTuWx7wvGqjuI5SDrXhd
+ EI5Z9KzwXnIRj6E+0xqNsDV4RBvcLFivApr9cu9fWGw3eSZltRUQFYXVEo9lf1Po6Yt8
+ ip6FCHFEq6CgGHk6JKu2buJCwowlbz92SR519IyeHJu4zgzMoZAqS5ISVn50Ic7xE/b5
+ TM5M7plhxnCasblmVOBbfbkdEdMqif1d9kR0o4agZ4ryhhbjjcMvizghH73goPjl3pS3
+ by3Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUwTnaxfheKSvqILYhcBkRqZTtao+odE6bqLs3DmnCyRYdarUh9/WivqUsu7OzoBYcQOeIAqP8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxuDdymdPGoNDTOYAzHg97YoRBw1mzijY3nHTgfKOetyLoTPNz9
+ lJgJb6Of4xT5dcTlrh0Uel1Fh+609YfV/FdEECwIDK+tRcDAdhNrqgQUnz0w8ZkASlHysF3JGJE
+ 55qGwPyu0VQSFDKv8c+f3YyYKR07lLpbJIFjl5KwJ0Zkxv17w
+X-Google-Smtp-Source: AGHT+IGJCmgXhmieYnQRXEUtCDkAk3FX9+WVmcak5+iEzXRvcOwa5/BaSD6bgbsGpcFwCTXJ0YZUcsETOM7i10rhppo=
+X-Received: by 2002:a17:90b:1810:b0:2e2:b281:536e with SMTP id
+ 98e67ed59e1d1-2e3152c825bmr11111094a91.15.1728928635161; Mon, 14 Oct 2024
+ 10:57:15 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241011214032.760072-1-sjg@chromium.org>
+ <20241011214032.760072-8-sjg@chromium.org>
+ <18910B7B-B3C3-4C4E-B2DC-5398F480E075@gmx.de>
+ <20241012014242.GJ14210@bill-the-cat>
+In-Reply-To: <20241012014242.GJ14210@bill-the-cat>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 14 Oct 2024 20:56:38 +0300
+Message-ID: <CAC_iWjL-FBHXATbSZHmcYw-ZKj0zZNwSGN02kuMJ6x6Lp8F1qw@mail.gmail.com>
+Subject: Re: [PATCH v2 7/7] cmd: Update the meminfo command to show the memory
+ map
+To: Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,51 +92,150 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Modern Linux requires 32 byte seed to initialize random pool, but u-boot
-currently provides only 8 bytes. Increase rng-seed size to make Linux happy and
-initialize rng pool instantly.
+Hi all,
 
-Boot with 8 byte rng-seed:
-    # dmesg | grep crng
-    [   12.089286] random: crng init done
-Boot with 32 byte rng-seed:
-    # dmesg | grep crng
-    [    0.000000] random: crng init done
 
-https://github.com/torvalds/linux/blob/7234e2ea0edd00bfb6bb2159e55878c19885ce68/drivers/char/random.c#L632
+On Sat, 12 Oct 2024 at 04:42, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Sat, Oct 12, 2024 at 01:18:19AM +0200, Heinrich Schuchardt wrote:
+> >
+> >
+> > Am 11. Oktober 2024 23:40:31 MESZ schrieb Simon Glass <sjg@chromium.org>:
+> > >U-Boot has a fairly rigid memory map which is normally not visible
+> > >unless debugging is enabled in board_f.c
+> > >
+> > >Update the 'meminfo' command to show it. This command does not cover
+> > >arch-specific pieces but gives a good overview of where things are.
+> > >
+> > >Signed-off-by: Simon Glass <sjg@chromium.org>
+> > >---
+> > >
+> > >Changes in v2:
+> > >- Modify the existing 'meminfo' command instead
+> > >
+> > > cmd/meminfo.c             |  48 ++++++++++++++-
+> > > doc/usage/cmd/meminfo.rst | 126 ++++++++++++++++++++++++++++++++++++++
+> > > doc/usage/index.rst       |   1 +
+> > > test/cmd/Makefile         |   3 +-
+> > > test/cmd/meminfo.c        |  38 ++++++++++++
+> > > 5 files changed, 214 insertions(+), 2 deletions(-)
+> > > create mode 100644 doc/usage/cmd/meminfo.rst
+> > > create mode 100644 test/cmd/meminfo.c
+> > >
+> > >diff --git a/cmd/meminfo.c b/cmd/meminfo.c
+> > >index bb9bcec2e3f..e9a635bf4bf 100644
+> > >--- a/cmd/meminfo.c
+> > >+++ b/cmd/meminfo.c
+> > >@@ -4,18 +4,64 @@
+> > >  * Written by Simon Glass <sjg@chromium.org>
+> > >  */
+> > >
+> > >+#include <bloblist.h>
+> > >+#include <bootstage.h>
+> > > #include <command.h>
+> > > #include <display_options.h>
+> > >+#include <malloc.h>
+> > >+#include <mapmem.h>
+> > > #include <asm/global_data.h>
+> > >
+> > > DECLARE_GLOBAL_DATA_PTR;
+> > >
+> > >+static void print_region(const char *name, ulong base, ulong size, ulong *uptop)
+> > >+{
+> > >+    ulong end = base + size;
+> > >+
+> > >+    printf("%-12s %8lx %8lx %8lx", name, base, size, end);
+> > >+    if (*uptop)
+> > >+            printf(" %8lx", *uptop - end);
+> > >+    putc('\n');
+> > >+    *uptop = base;
+> > >+}
+> > >+
+> > > static int do_meminfo(struct cmd_tbl *cmdtp, int flag, int argc,
+> > >-                   char *const argv[])
+> > >+                  char *const argv[])
+> > > {
+> > >+    ulong upto, stk_bot;
+> > >+
+> > >     puts("DRAM:  ");
+> > >     print_size(gd->ram_size, "\n");
+> > >
+> > >+    printf("\n%-12s %8s %8s %8s %8s\n", "Region", "Base", "Size", "End",
+> > >+           "Gap");
+> > >+    printf("------------------------------------------------\n");
+> > >+    upto = 0;
+> > >+    if (IS_ENABLED(CONFIG_VIDEO))
+> > >+            print_region("video", gd_video_bottom(),
+> > >+                         gd_video_size(), &upto);
+> > >+    if (IS_ENABLED(CONFIG_TRACE))
+> > >+            print_region("trace", map_to_sysmem(gd_trace_buff()),
+> > >+                         gd_trace_size(), &upto);
+> > >+    print_region("code", gd->relocaddr, gd->mon_len, &upto);
+> > >+    print_region("malloc", map_to_sysmem((void *)mem_malloc_start),
+> > >+                 mem_malloc_end - mem_malloc_start, &upto);
+> > >+    print_region("board_info", map_to_sysmem(gd->bd),
+> > >+                 sizeof(struct bd_info), &upto);
+> > >+    print_region("global_data", map_to_sysmem((void *)gd),
+> > >+                 sizeof(struct global_data), &upto);
+> > >+    print_region("devicetree", map_to_sysmem(gd->fdt_blob),
+> > >+                 fdt_totalsize(gd->fdt_blob), &upto);
+> > >+    if (IS_ENABLED(CONFIG_BOOTSTAGE))
+> > >+            print_region("bootstage", map_to_sysmem(gd_bootstage()),
+> > >+                         bootstage_get_size(false), &upto);
+> > >+    if (IS_ENABLED(CONFIG_BLOBLIST))
+> > >+            print_region("bloblist", map_to_sysmem(gd_bloblist()),
+> > >+                         bloblist_get_total_size(), &upto);
+> > >+    stk_bot = gd->start_addr_sp - CONFIG_STACK_SIZE;
+> > >+    print_region("stack", stk_bot, CONFIG_STACK_SIZE, &upto);
+> > >+    print_region("free", gd->ram_base, stk_bot, &upto);
+> > >+
+> > >     return 0;
+> > > }
+> > >
+> > >diff --git a/doc/usage/cmd/meminfo.rst b/doc/usage/cmd/meminfo.rst
+> > >new file mode 100644
+> > >index 00000000000..c628119787e
+> > >--- /dev/null
+> > >+++ b/doc/usage/cmd/meminfo.rst
+> > >@@ -0,0 +1,126 @@
+> > >+.. SPDX-License-Identifier: GPL-2.0+:
+> > >+
+> > >+.. index::
+> > >+   single: meminfo (command)
+> > >+
+> > >+meminfo command
+> > >+===============
+> > >+
+> > >+Synopsis
+> > >+--------
+> > >+
+> > >+::
+> > >+
+> > >+    meminfo
+> > >+
+> > >+Description
+> > >+-----------
+> > >+
+> > >+The meminfo command shows the amount of memory, the layout of memory used by
+> > >+U-Boot and the region which is free for use by images.
+> >
+> > The information offered by this command cannot be used for this purpose as it is incomplete.
+> >
+> > Memory allocated in LMB cannot be used to load images. And EFI in future will use LMB for allocations.
+> >
+> > The command should be changed to show LMB allocations.
+>
+> I agree, this need to include the lmb information as that's quite
+> likely to be helpful to anyone wondering "well where can I place things
+> then?" when denied being able to load an image somewhere.
 
-Signed-off-by: Alex Shumsky <alexthreed@gmail.com>
-Fixes: d2048bafae40 ("rockchip: board: Add board_rng_seed() for all Rockchip devices")
----
+I think we all agree, but since the LMB patches are not in place
+should we wait to pull this? Or pull it since it's an improvement
+anyway and retrifit the LMB and perhaps EFI regions once LMB is good
+to merge?
 
-Changes in v2:
-- add env config knob rng_seed_size
-- 12-character commit SHA in Fixes
-
- arch/arm/mach-rockchip/board.c | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
-
-diff --git a/arch/arm/mach-rockchip/board.c b/arch/arm/mach-rockchip/board.c
-index 3fadf7e412..f9f0d7214c 100644
---- a/arch/arm/mach-rockchip/board.c
-+++ b/arch/arm/mach-rockchip/board.c
-@@ -472,9 +472,15 @@ __weak int misc_init_r(void)
- __weak int board_rng_seed(struct abuf *buf)
- {
- 	struct udevice *dev;
--	size_t len = 0x8;
-+	ulong len = env_get_ulong("rng_seed_size", 10, 32);
- 	u64 *data;
- 
-+	if (len < 32) {
-+		// rng_seed_size should be 32 bytes for Linux 5.19+, or 64 for older Linux'es
-+		log_warning("Too small rng_seed_size (%lu). It is likely insufficient to init linux crng\n",
-+			    len);
-+	}
-+
- 	data = malloc(len);
- 	if (!data) {
- 		printf("Out of memory\n");
--- 
-2.34.1
-
+Thanks
+/Ilias
+>
+> --
+> Tom
