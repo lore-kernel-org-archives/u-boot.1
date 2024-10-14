@@ -4,64 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CE5BD18139
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 17:46:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32104D18138
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 17:53:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 243E288CBB;
-	Mon, 14 Oct 2024 19:46:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id 83D3A884FC;
+	Mon, 14 Oct 2024 19:53:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="SbO5Yw3F";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Bb40au7X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85E4388D72; Mon, 14 Oct 2024 19:46:43 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.184])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1F0B280245; Mon, 14 Oct 2024 19:53:56 +0200 (CEST)
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [IPv6:2a00:1450:4864:20::12c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 75F2F88A3C
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 19:46:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DBE8988CD9
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 19:53:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 439d18dd-8a54-11ef-93fa-005056994fde
-Received: from smtp.kpnmail.nl (unknown [10.31.155.7])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 439d18dd-8a54-11ef-93fa-005056994fde;
- Mon, 14 Oct 2024 19:46:38 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=content-type:mime-version:subject:to:from:message-id:date;
- bh=raDqxVbOffZfPRB4id/lCZrqV6GC0h4fwJ5cACvxzX8=;
- b=SbO5Yw3F7MHvnvwYfUEJuc/TOsHM1Fq9Xe0zvIiSOKNGtb9UThY4Nu1Nwe40HDkinQBiA6t0O+sRg
- ba4ExmZdEUopBSnZ+mZ60/UIfEYXBMzm4d60pQgPi22CJ8k7ilsgCHB9IyTcwhJEozRlDqj+rHgfrV
- GW8/oZvTCFaE75xF56tgQkB4Qc3CnaDLqKVILBqK97HfoI9Fh1McnKUn+5TGdIueolQrbeII3fhfKm
- LBNwANsRcDDy16fSXmi4e9erv20OlCVJUqpXW5gUZ8ddTpx2l5c/GAnpOX8It68jp9GrHjakjPoMEt
- qKDfmFpMDv08Kyd7qm1/ArS1/SFQs6g==
-X-KPN-MID: 33|HnCdLn0546xYvl6pmrFCi/LW1cz3xk/GO7+oGhOVlDmWD0//Mo7uV2x5D2ftJUR
- aE3IVrSzWTzPS/GLJEapmw1auGAdVaBRKkkFSaTEoQXs=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|KQcVQYehmN6UmE8QwJijNrcE7UD9b9dNOVdUFlWNMvAeaIsezH/F5FexKNrvf+l
- EZOsbfJs+5yoMMi6Z1045ww==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 445da487-8a54-11ef-9738-005056998788;
- Mon, 14 Oct 2024 19:46:40 +0200 (CEST)
-Date: Mon, 14 Oct 2024 19:46:39 +0200
-Message-Id: <87r08ik268.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: heinrich.schuchardt@canonical.com, vincent.stehle@arm.com,
- u-boot@lists.denx.de
-In-Reply-To: <CAC_iWjJ6DPe9Fif0cbL12Fc54vhap6Z4NZ+JA0Phr_VthP=7jA@mail.gmail.com>
- (message from Ilias Apalodimas on Mon, 14 Oct 2024 20:16:04 +0300)
-Subject: Re: [PATCH 1/1] efi_loader: provide variable BootOptionSupport
-References: <20241011173341.24330-1-heinrich.schuchardt@canonical.com>
- <875xpyle5k.fsf@bloch.sibelius.xs4all.nl>
- <CAC_iWjJ6DPe9Fif0cbL12Fc54vhap6Z4NZ+JA0Phr_VthP=7jA@mail.gmail.com>
-MIME-version: 1.0
-Content-type: text/plain; charset=utf-8
+ spf=pass smtp.mailfrom=alexthreed@gmail.com
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-539e3f35268so2721866e87.3
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 10:53:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1728928433; x=1729533233; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=8fjJ/Iu2CzWa7akm7Q3yd4fOtzdSuRHjFls/W36bZgo=;
+ b=Bb40au7XBDrHE3plFD6znQZon5FjHM4dZcjgixViMIFByS6g3oe79Mj8YbnVZxggjR
+ FNkoep9zSqbAPF4KWBjjlu4i1lYDuyCnnAIcAJXAJFvcVNBPiVrML1ko7HHdjcWZ1ZRc
+ Phwb+ZT9JAr2oTXMilvkoFtKWVYssjoe8Nuf6STnHCGT77RfbUKi/kdYObCxmEUsx1eS
+ Sh0C1PyHGewKg9EywRz4lvjG5Sf0p08hGPl8L+8KRHhKrXEqB0sNaqBK0/oyqFcoz87e
+ FwBSPmV5JcUGORZqZe34DYcZSQuQ9ocx4eMI4rOg+skAqmr/Feg4ciV0vXDpUNx0yFkb
+ F6NA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728928433; x=1729533233;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=8fjJ/Iu2CzWa7akm7Q3yd4fOtzdSuRHjFls/W36bZgo=;
+ b=DzgFJsYe2RxYNdqY95zIbpruGAF9tPLJuYEmRIUbQ9uHdIbFSGb52bDrl7o0goRT92
+ hEtZbfoftAWYfTxV2BG1IhPsmk++/6D4fwFdIDPpQ6DXENkeC6aSfY7o12Mnu477FYjD
+ xIq9jOlkpvhpqFi0tMPggw0s7atYtnwcfuAVAj4J4y4N2ADLhWF5Ftg7QrwLag/ynzxq
+ SNhBdFlCVLW68TG06yfX2OKpHj7K7CIVwzow2xiRY7a/9dWspM1SacETE+BPdaSjNiPH
+ nnm+jbZcQort5gKydbakhkZtkG3dhPfQzAmkFvw4iAfPAPPXH0HD+IEpfkD+QudwLz4i
+ 8I9g==
+X-Gm-Message-State: AOJu0Yw3ZAMdQ3Ho5vdDux8VPF0to3ZZ2/D3n6u5cmALxKfpBSvrZCWl
+ lnoVlbZ6a9gx5bGZCpTvLGopL+9I+c4weCOJJHcfndn5cQwSclScZE/FJa7/mn4=
+X-Google-Smtp-Source: AGHT+IH9pnfzmYgkl1Pis1E5j+IP64YiIK/HnZ5MiH9RGi/SbpswOZm6YWUNRe89eF8RonYBGQde/Q==
+X-Received: by 2002:a05:6512:2346:b0:536:9f02:17b4 with SMTP id
+ 2adb3069b0e04-539e5731678mr4509895e87.40.1728928432517; 
+ Mon, 14 Oct 2024 10:53:52 -0700 (PDT)
+Received: from alex3d.netup (team.netup.ru. [91.213.249.1])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-539ee0ecddfsm690996e87.234.2024.10.14.10.53.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 14 Oct 2024 10:53:51 -0700 (PDT)
+From: Alex Shumsky <alexthreed@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Alex Shumsky <alexthreed@gmail.com>,
+ Ben Wolsieffer <benwolsieffer@gmail.com>,
+ Chris Morgan <macromorgan@hotmail.com>, Dragan Simic <dsimic@manjaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Marek Vasut <marex@denx.de>,
+ Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2] rockchip: board: Increase rng-seed size to make it
+ sufficient for modern Linux
+Date: Mon, 14 Oct 2024 20:53:38 +0300
+Message-Id: <20241014175338.2675136-1-alexthreed@gmail.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -79,94 +97,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Date: Mon, 14 Oct 2024 20:16:04 +0300
-> 
-> Hi Mark,
-> 
-> On Fri, 11 Oct 2024 at 20:53, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
-> >
-> > > From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> > > Date: Fri, 11 Oct 2024 19:33:40 +0200
-> >
-> > Hi Heinrich,
-> >
-> > > The UEFI variable BootOptionSupport is required by the UEFI specification
-> > > [1]. It reports if specific types of boot options are honored.
-> > >
-> > > We don't support any of these extras. So we should set the value 0.
-> >
-> > It also says:
-> >
-> >   "If the global variable is not present, then an installer or
-> >    application must act as if a value of 0 was returned."
-> >
-> > So until we support any of those extras, we don't have to provide that
-> > variable.
-> >
-> > > [1] 3.1.4 Boot Manager Capabilities, UEFI Specification 2.10 Errata A,
-> 
-> It does, but is there a problem with being explicit? Are you concerned
-> about the size growth?
+Modern Linux requires 32 byte seed to initialize random pool, but u-boot
+currently provides only 8 bytes. Increase rng-seed size to make Linux happy and
+initialize rng pool instantly.
 
-Somewhat, yes.  The EFI code keeps growing and I'd like to avoid
-people disibling CONFIG_EFI_LOADER because u-boot no longer fits into
-SPI flash or something.
+Boot with 8 byte rng-seed:
+    # dmesg | grep crng
+    [   12.089286] random: crng init done
+Boot with 32 byte rng-seed:
+    # dmesg | grep crng
+    [    0.000000] random: crng init done
 
-Cheers,
+https://github.com/torvalds/linux/blob/7234e2ea0edd00bfb6bb2159e55878c19885ce68/drivers/char/random.c#L632
 
-Mark
+Signed-off-by: Alex Shumsky <alexthreed@gmail.com>
+Fixes: d2048bafae40 ("rockchip: board: Add board_rng_seed() for all Rockchip devices")
+---
 
-> > >
-> > > Cc: Vincent Stehlé <vincent.stehle@arm.com>
-> > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> > > ---
-> > >  lib/efi_loader/efi_setup.c | 23 +++++++++++++++++++++++
-> > >  1 file changed, 23 insertions(+)
-> > >
-> > > diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
-> > > index a610e032d2f..05d035f4eb5 100644
-> > > --- a/lib/efi_loader/efi_setup.c
-> > > +++ b/lib/efi_loader/efi_setup.c
-> > > @@ -179,6 +179,22 @@ static efi_status_t efi_init_os_indications(void)
-> > >                                   &os_indications_supported, false);
-> > >  }
-> > >
-> > > +/**
-> > > + * efi_init_boot_options_support() - indicate supported boot option types
-> > > + */
-> > > +static efi_status_t efi_init_boot_options_support(void)
-> > > +{
-> > > +     u32 boot_options_support = 0;
-> > > +
-> > > +     return efi_set_variable_int(u"BootOptionSupport",
-> > > +                                 &efi_global_variable_guid,
-> > > +                                 EFI_VARIABLE_BOOTSERVICE_ACCESS |
-> > > +                                 EFI_VARIABLE_RUNTIME_ACCESS |
-> > > +                                 EFI_VARIABLE_READ_ONLY,
-> > > +                                 sizeof(boot_options_support),
-> > > +                                 &boot_options_support, false);
-> > > +}
-> > > +
-> > >  /**
-> > >   * efi_init_early() - handle initialization at early stage
-> > >   *
-> > > @@ -261,6 +277,13 @@ efi_status_t efi_init_obj_list(void)
-> > >       if (ret != EFI_SUCCESS)
-> > >               goto out;
-> > >
-> > > +     /* Indicate supported boot option types */
-> > > +     if (IS_ENABLED(CONFIG_EFI_BOOTMGR)) {
-> > > +             ret = efi_init_boot_options_support();
-> > > +             if (ret != EFI_SUCCESS)
-> > > +                     goto out;
-> > > +     }
-> > > +
-> > >       /* Initialize system table */
-> > >       ret = efi_initialize_system_table();
-> > >       if (ret != EFI_SUCCESS)
-> > > --
-> > > 2.45.2
-> > >
-> > >
-> 
+Changes in v2:
+- add env config knob rng_seed_size
+- 12-character commit SHA in Fixes
+
+ arch/arm/mach-rockchip/board.c | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm/mach-rockchip/board.c b/arch/arm/mach-rockchip/board.c
+index 3fadf7e412..f9f0d7214c 100644
+--- a/arch/arm/mach-rockchip/board.c
++++ b/arch/arm/mach-rockchip/board.c
+@@ -472,9 +472,15 @@ __weak int misc_init_r(void)
+ __weak int board_rng_seed(struct abuf *buf)
+ {
+ 	struct udevice *dev;
+-	size_t len = 0x8;
++	ulong len = env_get_ulong("rng_seed_size", 10, 32);
+ 	u64 *data;
+ 
++	if (len < 32) {
++		// rng_seed_size should be 32 bytes for Linux 5.19+, or 64 for older Linux'es
++		log_warning("Too small rng_seed_size (%lu). It is likely insufficient to init linux crng\n",
++			    len);
++	}
++
+ 	data = malloc(len);
+ 	if (!data) {
+ 		printf("Out of memory\n");
+-- 
+2.34.1
+
