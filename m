@@ -4,85 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FBFCD1813A
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 19:08:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10EC5D1813A
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 19:13:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E906788FBD;
-	Mon, 14 Oct 2024 21:08:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9587689045;
+	Mon, 14 Oct 2024 21:13:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Tqar5g7u";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iM5W6//o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C7DC98903B; Mon, 14 Oct 2024 21:08:37 +0200 (CEST)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
+ id 58E7989056; Mon, 14 Oct 2024 21:13:31 +0200 (CEST)
+Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
+ [IPv6:2607:f8b0:4864:20::f31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA0ED88FBD
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 21:08:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 35AE088744
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 21:13:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-539f4d8ef66so1834768e87.1
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 12:08:35 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf31.google.com with SMTP id
+ 6a1803df08f44-6cbf0e6414aso15543826d6.1
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 12:13:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1728932915; x=1729537715; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ml39H/V8iV1Q6yY88N1EJ7Ivhu5FPYYVLsvKg7YIyCk=;
- b=Tqar5g7uNLsCo0qtyWAAiXsG+pUv/z+jxTtwMrbBzLTmfx8/9uIp1Ur5l5HKT7ivgC
- FjVljBQvBfzmNFZqvg7mtsHzslP5gF1tdoTmEV0sACar+eOszvDUP3qTwfkpw/rX9uRi
- /PNdUQyJk/BFjmxy9+hgNidoHpVWqjyVd0/0M8TxkWU5/hIuPtF0o3+xMHzmLvX9DKSV
- lXxjirF4zSTWhOjRAHFTHYr7eojABRVtJnhQSg3L7v1kT+A+FZU5B+5sBmZYzROheUvY
- hh40D/vRTDxdCo4fgHBqRk8AeK1lwm4ebweluA0dz7fvvKcUMOOWZL4A3zo7p2ngGen0
- VWxA==
+ d=chromium.org; s=google; t=1728933208; x=1729538008; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=JDlESrcbjOClOhRAVgo1cmDu5cWhVG8WOZYTSmSeCO8=;
+ b=iM5W6//oaOMxLI4mRRqlOdKRGdYEQuyuzXwsMSHSI5p3vrnJgyXBPvD9qVyK5zG82f
+ /S3Y/1RvHvMt/BD4FiS2nCw4S2YU+iipSMeDss/ZQuA5OBFM2nCBjV3gpMkFg9NmYkH8
+ GZokVL46NuG7e3CzYIV3fgivsdQci9bNY1Mps=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728932915; x=1729537715;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ml39H/V8iV1Q6yY88N1EJ7Ivhu5FPYYVLsvKg7YIyCk=;
- b=Dr+Q124zVbIFxyoT4jyXkGw4T0SQchwuDu/K5KgaMXGqipzIYK5HudFQJyYSRyBbtY
- 072PClOOZtEsoWVXiCL6Ej9cxDfZnS89Pykb4YFR08NK5wIkND7GAbkqbwlsOjBwOAfq
- jsNB96hpP/vtKyf9PKlHOh5STra0F05sl4XvE2AtX+OCIfi8VmtrJVjn98dGAEU2uskg
- t2a+0+CCa3jxShr9qh76F674NPbjGqCA5KDDsgzKfatW2Hxy4AhPEQjpiK+LtaZbsJGy
- HxE1+dV8DuruOrkWtCOqCd97duxiAR3qb0W6ol+wZcOrdn2w/pm9e0IA02bj6jMiHGLt
- 5upg==
+ d=1e100.net; s=20230601; t=1728933208; x=1729538008;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=JDlESrcbjOClOhRAVgo1cmDu5cWhVG8WOZYTSmSeCO8=;
+ b=EzPzsm5pIKtLjutIlFoUb07C/FU5nXkD0L7gSbP/yKWY07a+WF47QXaUURfycd3Jrf
+ nqTXQGi51AVvUajWaw7yQT1r1Eij2R41B939ja5BVFfgPrJPylHriMl5MyDMzObvkGZX
+ jqW5r4uUJM+8nlPMpZJJwG4BcHGUYoI92eMVQwOLqmbUX5MocQKcUgbyDucBkkxkFnj5
+ pxreSQmjYy6upr3z0g8gLBlUPt9dhcrGK0QupsAXliTyUrcCSQt/hAU1WwJ+v+95EFjr
+ iIBisvADoxvkBz069H5Ln7rkdwg6/kh3D86dm17xbwY3XFPhmpgADUpRj5w5GFNLAHix
+ eCww==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVncscPyj3dUKpP46e8CqXGAexe8SaMAVNjY5jWo4pomtepEWEZki6duc8c7KFsxK1MhXWWxSM=@lists.denx.de
-X-Gm-Message-State: AOJu0YyO4YN9Te6moiUWZeWB279SN1jLRKcGFx/KWRqOIvHs1/gwPYq+
- yDxdmFxPCxl986etF6ET+Nvh1qW2k4y1LE5mW/w8IdSnt8g6TPtSiuc4W+y0WO3g2tjt6CPrL0O
- ZGE50+zJperKcylHEZ9+0xGbVRCs=
-X-Google-Smtp-Source: AGHT+IFLAB0SObZj2Jj/EOzAtR2Mo5E9z70PKms6cdsM++A+TwU09cF+bFMi8AAxew/ARyLFxW55pC/GBHY1uTRnCsc=
-X-Received: by 2002:a05:6512:230b:b0:52c:d753:2829 with SMTP id
- 2adb3069b0e04-539da3c6c1emr6140993e87.19.1728932914698; Mon, 14 Oct 2024
- 12:08:34 -0700 (PDT)
+ AJvYcCU6BGJJjI0cAkgGJ0Y5U2+lW+lEcrBaUsj8KQ07vpj3d+5l0wgDvPIPp4BVsV1rKGlFQcEBYWI=@lists.denx.de
+X-Gm-Message-State: AOJu0YzHVmAW0rJUNnZl0YRI39mPa2Ce4IaTfLkRUy2sneqpxi16/iv9
+ ZnknAnHkqsAH+5Pt+DdJjLz2xMhdmhQocAqjE2yipfEp2spA6Onucy4tMaa+gO24HtuiIwAxBbM
+ UBjtnlu3qLPAGx3a5gbreqH7jH+e2l4950elt
+X-Google-Smtp-Source: AGHT+IEqJeKm8CG+AVLCcOTk4UcIrfS1sHytwR17gIRn5EDiUVwvNBC90uJWi+DksINNL/g6ASUrorlpQDFR8G+e7Lg=
+X-Received: by 2002:a05:6214:5b06:b0:6cb:e4d3:91c5 with SMTP id
+ 6a1803df08f44-6cbf0098734mr207227446d6.36.1728933208015; Mon, 14 Oct 2024
+ 12:13:28 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241004001118.322531-1-marex@denx.de>
- <CAFLszTiMNeU__kzyRR-3qKPUUKaXEqaypf8YYQgxL83E-2gt3g@mail.gmail.com>
-In-Reply-To: <CAFLszTiMNeU__kzyRR-3qKPUUKaXEqaypf8YYQgxL83E-2gt3g@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 14 Oct 2024 16:08:23 -0300
-Message-ID: <CAOMZO5Cp3TUdMFYfBSm-k49mS_xaOtvpGwqoQH+eCjC5eCfpbw@mail.gmail.com>
-Subject: Re: [PATCH v2] dts: Deduplicate dtbs target
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
- Sumit Garg <sumit.garg@linaro.org>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+References: <20241013105522.391414-1-sughosh.ganu@linaro.org>
+ <20241013105522.391414-4-sughosh.ganu@linaro.org>
+ <CAFLszTiov914NOS9_5UU4oLi0fCQ84a-Et82BeSEJbts4MEOVQ@mail.gmail.com>
+ <20241014155642.GO53053@bill-the-cat>
+In-Reply-To: <20241014155642.GO53053@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 14 Oct 2024 13:13:17 -0600
+Message-ID: <CAFLszThVP_OgyTt_ksJ1_7HAHT+K-wcixWB+k+fmzAjh6+5Bmg@mail.gmail.com>
+Subject: Re: [PATCH v3 03/15] efi: memory: use the lmb API's for allocating
+ and freeing memory
+To: Tom Rini <trini@konsulko.com>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Jonas Karlman <jonas@kwiboo.se>, Lothar Rubusch <l.rubusch@gmail.com>, 
- Michal Simek <michal.simek@amd.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Stefano Babic <sbabic@denx.de>,
- u-boot@dh-electronics.com
+ Caleb Connolly <caleb.connolly@linaro.org>, Jonas Karlman <jonas@kwiboo.se>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,22 +92,36 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Mon, Oct 7, 2024 at 12:23=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
-e:
+On Mon, 14 Oct 2024 at 09:56, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Thu, 3 Oct 2024 at 18:11, Marek Vasut <marex@denx.de> wrote:
+> On Mon, Oct 14, 2024 at 09:50:37AM -0600, Simon Glass wrote:
+> > Hi Sughosh,
 > >
-> > The dtbs: target is almost identical in all architecture Makefiles.
-> > All architecture Makefiles include scripts/Makefile.dts . Deduplicate
-> > the dtbs: target into scripts/Makefile.dts . No functional change.
+> > On Sun, 13 Oct 2024 at 04:55, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > >
+> > > Use the LMB API's for allocating and freeing up memory. With this, the
+> > > LMB module becomes the common backend for managing non U-Boot image
+> > > memory that might be requested by other modules.
+> > >
+> > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > ---
+> > > Changes since V2:
+> > > * Use map_to_sysmem() to get the user-visible address to be shared
+> > >   with the lmb API's for sandbox.
+> > >
+> > >  lib/efi_loader/Kconfig      |  1 +
+> > >  lib/efi_loader/efi_memory.c | 77 +++++++++++--------------------------
+> > >  2 files changed, 24 insertions(+), 54 deletions(-)
 > >
-> > Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
-> > Signed-off-by: Marek Vasut <marex@denx.de>
+> > When efi_init_obj() is called, it should be able to add the lmb memory
+> > to its own tables. There is no need to worry about lmb after that,
+> > since no other images will be loaded, except under EFI's control. Then
+> > perhaps you don't need this patch?
+>
+> But that's not true. The EFI application can return us to the U-Boot
+> prompt.
 
-> Reviewed-by: Simon Glass <sjg@chromium.org>
+Can you finish that thought? What are you getting at?
 
-I have some patches in my queue that depend on this one.
-
-Could you apply it if you are happy with it?
-
-Thanks
+Regards,
+Simon
