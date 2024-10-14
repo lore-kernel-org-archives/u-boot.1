@@ -4,76 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E01DACF259D
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 06:56:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36BA2CF2590
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 06:56:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 62A7D87FA7;
-	Mon, 14 Oct 2024 08:56:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CC7E288FCF;
+	Mon, 14 Oct 2024 08:56:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="S4dN7Rar";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Z2vonKeG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C88788F57; Mon, 14 Oct 2024 08:56:18 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 3520888FCF; Mon, 14 Oct 2024 08:56:33 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1592987F7D
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 08:56:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CFD6D88FEC
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 08:56:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-5c97cc83832so790507a12.0
- for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 23:56:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-37d50fad249so2434392f8f.1
+ for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 23:56:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728888974; x=1729493774; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=suCo//vCmt6wMr67De8PLu2GZ+Qs6qlF9r4GARIUmVw=;
- b=S4dN7Rar16v33Lpl7SZK6b1dwtZlFzEWe4R4L++gcUvxEQ8ehPDL+dM1wvtI+noeFJ
- UuuRXeNnm71xZuXsQ5ThgMhC2hAidpLJyl8vuTjQxFEqpQXTRSv/clqW9GamVlJaKKSN
- 7BLBMTYlwhD7YBJpxGNPDRv39/ojevcpPabz6/qu7VRhSvoqGkexVwijhF79guTOMdu2
- 56slf+S0T1XgQRzJJbDzVxCUpEvB2TW1/8dh+zACnPZmedVO034xnRDpMesHf7Oc0s3l
- Y8/XljJ+N/QQLNhckdcUHlh6Hs2c7WXMrGsYrnP1QhLRf8YBspJFpORUrxESfIhqg6wt
- R/mw==
+ d=linaro.org; s=google; t=1728888985; x=1729493785; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=d6wtmNmPTFH+gCy/ph43KnfAks3+AKH0zYC05KuFF+c=;
+ b=Z2vonKeG12g0dSwYdUJhV/rO+ISErKdzMpQgOlLMLezOSRqlAJCh/rg5LoaeEamQmj
+ jetq/8XAw6axgAeyOZB8zMBC7hJckLPpRNR/oIDjp2p6dgZh+aQ3vq8kbnLSiFj2Btda
+ s135gcCabHI1FSVjYqzrW/Uwx35LrfSe28BIW0HQL1Iva0MgIhYTDLCc5vyKqPxIS30t
+ dhSrXjGKfAD+jegn6njsTYfwhgiHnYtqtXPLojRAFv976irPW7swops2cYzqMXBUf1lX
+ s8eFPhCuntLqGEJVSkSg6HXrKngGl6H9mA7evYZYdvGql0McEkznmDN6cX+rBD998jfN
+ 0vwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728888974; x=1729493774;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=suCo//vCmt6wMr67De8PLu2GZ+Qs6qlF9r4GARIUmVw=;
- b=Wlje79dCw7RludTObj0CUhIr31ce0wzSCGzIf//jNG9zFSO6fBSOxEzGGjNeHiQY1x
- kJwTD+Ci6KCoLJs2LNhhd17cwkVr8z4AX66kTbrZkdQQ/+SbE8SDWiZUh3mC/GBOvuuu
- g88ymGuBpN2BMqjuhJ6Ikd/VGfKWPxmGyrKgJpkTNK9WRTef6mffejMUJVd7zF3JQkLt
- vblyAK8inaIv4+fMBdLTaaC5ht6KyuXZ8X7A0+QxdEuC9qfws3f2s9txWdrRlyJ0xnGu
- XY/sLNnGAFKJtjzSnYUiZe5bYWYRoWRFwibmVUXwGeZ6CcxFp5TrrKUJ6GpEPh61+BqF
- bZkw==
-X-Gm-Message-State: AOJu0YxwTH0+lA8c3JtVMnxjZNFGyIgEHL+3xHxNSnN9CvCWB/QhRxLi
- bVfyV3hCFg5507dX8moNYy7EGhosHxwVP/r8BirLMS8CBMA83l3nyU/G4XqbIrAi7WrkXTDf1Hs
- twoEk41+VsuhskT8AXMI4xxiCc5JZkjc1IAm41w==
-X-Google-Smtp-Source: AGHT+IF94HieRwIcyBxwdAu2AOJY6ThQeEtfDxxY9scsc/rpnPAUCL1Bk/FKue9YvspyVj5IictwC6xMsSqh0aXKtXk=
-X-Received: by 2002:a05:6402:234d:b0:5c9:753f:5aa2 with SMTP id
- 4fb4d7f45d1cf-5c9753f5e61mr2900464a12.7.1728888973782; Sun, 13 Oct 2024
- 23:56:13 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1728888985; x=1729493785;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=d6wtmNmPTFH+gCy/ph43KnfAks3+AKH0zYC05KuFF+c=;
+ b=GEfju94uR8mKm/u9U28Z+Oce/pwceHNl+x5W1AT6PxucDHGoj7Ql+W3A8MQZnVkJes
+ c6MiD+aOhuo02UvOUM27DDhiALzc+Rzp0TnA0bCZp6K1DVG5LL0MxMvtlGvQxaBs1jku
+ /34kiFOO5q6BgsF07Wc62pwNUC5iDl935wK0QYzAPLFACu726i/kCRdLCxG1cNYi6U4e
+ iFXZikpGPYeBpphDM/wns3Dye1abPAgbCXa62tvp9hty8zBTYapV86PhfItUb4eDFRlt
+ Q5/BpnyVqsNn535nsQbLalyzBhoL+sURMJs/C/85er9/7MiH1NZKhheU+i330tPxFm5m
+ Ohcw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX/8Mx+yu6hyxam15qRaUOj15mjRFocOPeJrd9R/fnfFA4MlVEln7HKXK4+Od8Zg5w5RO+uyAc=@lists.denx.de
+X-Gm-Message-State: AOJu0YwFOuHYrteJYZQ88Hy/QNCq9zYSWPaEWYG3EZoDuuWYEWzSL1DY
+ lnMXycag6qcif4ocgAO/k7zkzgtox9OvW38tbtps7ll/8iuaAr5MuYszIwpOOlt6FzIHmYIG8Ut
+ xdkw=
+X-Google-Smtp-Source: AGHT+IGabrOOSj+3X6Y3mXRUHKfJWs9u3dCN+PqdPppUuns34HPK3NWaOf7KN9tfGtdULS6+YVvsug==
+X-Received: by 2002:a5d:48c9:0:b0:37d:45ab:4241 with SMTP id
+ ffacd0b85a97d-37d5518dec8mr6738523f8f.12.1728888985149; 
+ Sun, 13 Oct 2024 23:56:25 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:8261:5fff:fe11:bdda])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-430d70b4331sm145900095e9.36.2024.10.13.23.56.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 13 Oct 2024 23:56:24 -0700 (PDT)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+To: Bhupesh Sharma <bhupesh.linux@gmail.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Marek Vasut <marex@denx.de>, Caleb Connolly <caleb.connolly@linaro.org>, 
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+In-Reply-To: <20240719-u-boot-ufs-dcache-fixup-v1-0-b044fc9564e9@linaro.org>
+References: <20240719-u-boot-ufs-dcache-fixup-v1-0-b044fc9564e9@linaro.org>
+Subject: Re: [PATCH 0/4] ufs: properly fix cache operations
+Message-Id: <172888898374.195460.12545738205075493394.b4-ty@linaro.org>
+Date: Mon, 14 Oct 2024 08:56:23 +0200
 MIME-Version: 1.0
-References: <20241013105522.391414-1-sughosh.ganu@linaro.org>
- <20241013105522.391414-3-sughosh.ganu@linaro.org>
- <20241013175146.GN14210@bill-the-cat>
-In-Reply-To: <20241013175146.GN14210@bill-the-cat>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 14 Oct 2024 12:26:02 +0530
-Message-ID: <CADg8p97a5jVR=_YRpbzBDEFLzPea-UtBFHc+X679vyPhGfC2Xw@mail.gmail.com>
-Subject: Re: [PATCH v3 02/15] lmb: add a flag to allow suppressing memory map
- change notification
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Jonas Karlman <jonas@kwiboo.se>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,29 +98,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 13 Oct 2024 at 23:21, Tom Rini <trini@konsulko.com> wrote:
->
-> On Sun, Oct 13, 2024 at 04:25:09PM +0530, Sughosh Ganu wrote:
->
-> > Add a flag LMB_NONOTIFY that can be passed to the LMB API's for
-> > reserving memory. This will then result in no notification being sent
-> > from the LMB module for the changes to the LMB's memory map.
-> >
-> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
->
-> Can you please elaborate on what we need this flag for, for example what
-> the valid situation for it is? We should be updating (or adding comments
-> such that updates are automatic..) to doc/api/lmb.rst as well. Thanks.
+Hi,
 
-The flag is used to prevent notifying the EFI code about the change in
-the LMB memory map when the alloc/free request originates in the EFI
-memory module. The EFI memory module adds the memory region to its
-memory map as part of the alloc/free operation. The idea is that the
-LMB module should notify EFI about changes to its memory map when
-these changes are initiated from non-EFI consumers of memory.
+On Fri, 19 Jul 2024 13:00:09 +0200, Neil Armstrong wrote:
+> We experience huge problems with cache handling on Qualcomm
+> systems, and it appears the dcache handling in the UFS core
+> is quite wrong and causes all those issues.
+> 
+> This serie fixes the dcache operations, and fixes a big data
+> write corruption due to a wrong data end address calculation.
+> 
+> [...]
 
--sughosh
+Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-ufs (u-boot-ufs-next)
 
->
-> --
-> Tom
+[1/4] ufs: allocate descriptors with size aligned with DMA_MINALIGN
+      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/9c223d8d8b8fbad667971f36eabe203480a8c39b
+[2/4] ufs: fix dcache flush and invalidate range calculation
+      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/c64d22b57d8a9fe4d08ab677ba33d6004b98a468
+[3/4] ufs: split flush and invalidate to only invalidate when required
+      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/4139e5680bcf3016561c8830d914ee0b0ab741d1
+[4/4] ufs: use dcache helpers for scsi_cmd data and only invalidate if necessary
+      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/589a7bf0febbe4d3ca319569a55f21cf06e85424
+
+-- 
+Neil
+
