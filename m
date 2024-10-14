@@ -4,105 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 689F3CFC503
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 08:44:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2396CFC503
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 08:44:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E62EB89011;
-	Mon, 14 Oct 2024 10:44:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 58A098903B;
+	Mon, 14 Oct 2024 10:44:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="J16YovX+";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="IsWoDRSN";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="CrNGKWFb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 286F088FEC; Mon, 14 Oct 2024 10:44:08 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 088438903B; Mon, 14 Oct 2024 10:44:11 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C498788FB9
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 10:44:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BAB7088FB9
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 10:44:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-43115b31366so36932645e9.3
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 01:44:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728895442; x=1729500242; darn=lists.denx.de;
- h=content-transfer-encoding:organization:autocrypt:content-language
- :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=hGnn/1kuvFEYRPlOdtnHvVcZzIkFWxwfHv7bxdm+vKo=;
- b=J16YovX+0gnhP7YPYkpMVyxVfTKx3k6GRoMPFL0mIgFZO7Iekr8BqL0UtKuPngwNJy
- kE+Jn84xOOYEezRp7/E78INS1Zh62Z4z/SU/VNBsrPjxJU8y/sVqYqL9+T/iieDrFBr/
- opoe7aB47RLyBpCmk16bmWUsrHwQgJ2RD/kTj7y4yKbbHqVr/B30U/G6Xf1Ggy9E5HQV
- snvMnbhjKoZv/1i1hQ4pITg14HIZn3plvXjWCbIfye9XA+QTH1dEp+qWc0ubw4Y42mSj
- o2e1sVqdfrZy4eKu3o3+qwd5yX7T0klQvlRaOO6KSHeekBny3U3O4Gk6w6QkOHfXD/gr
- xbPg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728895442; x=1729500242;
- h=content-transfer-encoding:organization:autocrypt:content-language
- :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=hGnn/1kuvFEYRPlOdtnHvVcZzIkFWxwfHv7bxdm+vKo=;
- b=UN47zXqvuHQrxkjBNSOamy/zrIS5WJTc/e7WzhRYJ53qJws/UXEc8x8qxCjbf/L2lN
- ApFOIrwURYPYX79LCsC7+Qck7hd+u+3v8IHq4ZRV0Sbiw1/WSSUGR1MZ4pj6yHt1Q7Ic
- PXwKDkwwVf5p1sPPFtVC+22G8KeRsGUwE86pMLcQCmb3dLZvMe7kN94yLKEtYZjIsjzs
- Dna6wIjqDylZ/IusBcNAoe4gld4beFBtCWNJz0ASwyF5m1lUXJoArpriNbypecKt5P3l
- s/XOkW3sNblHXfZGG/Kh6hqaguxonvdeSovfP5+9UqBO7LEX6zwJW+rNdRIxAQkshb8v
- Y1Fw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXo+bpaAZzPQXSKUgh16t40yCOqwyXcJCllKjhnP2i8IeUNKOeMiZRtsxANtXJVC3yj4g/tYDo=@lists.denx.de
-X-Gm-Message-State: AOJu0YyyChYdBoBiWu774kz4gzGM+30/yf5vFExddzjr7rpM0BI9Fziv
- 2RogPJUBY2odgGqsDIM2qwg45FemkZy5Ak1gV3oz5xY1rMoGYVdc3Eci7Hx6+l4=
-X-Google-Smtp-Source: AGHT+IH7Kus1GHRW62r22CceeHs+6kfZAOeO2YHfWGGvQL2EnOtghf8lkgqJGDGoQWCsqlJ2CryHXQ==
-X-Received: by 2002:a5d:5f56:0:b0:37d:5047:76d8 with SMTP id
- ffacd0b85a97d-37d5532847bmr9054503f8f.59.1728895442435; 
- Mon, 14 Oct 2024 01:44:02 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:982:cbb0:6bf3:bb7:467:a56f?
- ([2a01:e0a:982:cbb0:6bf3:bb7:467:a56f])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d4b6cfcdbsm10795813f8f.58.2024.10.14.01.44.01
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 14 Oct 2024 01:44:01 -0700 (PDT)
-Message-ID: <d2b5a5e5-c50b-459e-a81e-90c952efdd16@linaro.org>
-Date: Mon, 14 Oct 2024 10:44:01 +0200
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4XRrP82Xv0z9sfB;
+ Mon, 14 Oct 2024 10:43:56 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1728895436;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=HIv9e5bLPQFamMOcMXqoy/knLbcEGY4vPo96AorTCVg=;
+ b=IsWoDRSNah4jzyAv0mJoVLaQX0RsLC2nDe91KXcpj19OZ9LjIDyLErkcFijF8961YrnFdG
+ iFhGNUUl2Y+ZXvVbcD1MU9I0h5RK3tc/7dOyNSkPod6ZZU5KlTXAaW9D+HAZ6x1KQTPjV2
+ /wFZncY/hMERNjif01GPoRf3n66ywSSZ5xKL7lScHxPSAVB28VchnX7j0jqMk0YfKljca2
+ ASC6Ouaj9DiuRO/6OaSFPB1YInxPXMsUgP3c+pu1T6+8kN57a7NEGcpVHEstSfKtxOB7Xy
+ 7wMvOrkLZm6tWSEm5hO5ca/Lf+J923N++5LfUJXl5OBPgqMmdgepD47KDtiPUQ==
+Message-ID: <3d811dec-d233-4e6d-bcc7-ac07c915e68a@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1728895434;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=HIv9e5bLPQFamMOcMXqoy/knLbcEGY4vPo96AorTCVg=;
+ b=CrNGKWFbhtoWv9qZTT616UvNkHFAP9UPwoIfQ/axDDfz7cCG8yosmQ9XKe58bvFzc1igGc
+ cX0Kt1gjYwF8nlYOiP461rkLvbKyjUFGTTvEB4Ce3s7VJHtPVKxsDAVxj2rAVRjtja2xuq
+ klb6CpgqxiUPAmnAyOR2lrtcOK9dBU0J01iBIWNOEjuQpXgQQ/vDKyccmVFHv4n+ZeG2Qe
+ k4WUBN8tVnRKB9UqkE3UAY5/q4Slb3Kv7jt8cUEqJDpX1Hf0c8ptASr3X5t/eTIZx3GGaG
+ m2cyd/W7sjVoBnurWbo63egqd3i+wYjEZvqSMYU+xHcr2WgAHOM3ZAMR1vs7eA==
+Date: Mon, 14 Oct 2024 10:43:50 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: [GIT PULL] Please pull u-boot-amlogic-next-20241014
-To: trini@konsulko.com
-Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
+Subject: Re: [PATCH 1/1] net: phy: Do not do CL22 phy reset before ethernet
+ phy driver probe
+To: Sky Huang <SkyLake.Huang@mediatek.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Eugeniu Rosca <erosca@de.adit-jv.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jacky Chou <jacky_chou@aspeedtech.com>
+Cc: u-boot@lists.denx.de, gss_mtk_uboot_upstream@mediatek.com
+References: <20241014070611.32040-1-SkyLake.Huang@mediatek.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20241014070611.32040-1-SkyLake.Huang@mediatek.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 782a5c4d7bc88af7f90
+X-MBO-RS-META: f3jxtccce7wbs5iekszhi91ypuekbmsm
+X-Rspamd-Queue-Id: 4XRrP82Xv0z9sfB
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,100 +90,38 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On 10/14/24 9:06 AM, Sky Huang wrote:
+> From: "SkyLake.Huang" <skylake.huang@mediatek.com>
+> 
+> Remove unnecessary CL22 phy reset before ethernet phy driver
+> probe. Lots of ethernet phys requires driver to load firmware.
+> Before that, CL22 phy reset may lead to malfunction.
+> 
+> Signed-off-by: SkyLake.Huang <skylake.huang@mediatek.com>
+> ---
+>   drivers/net/phy/phy.c | 2 --
+>   1 file changed, 2 deletions(-)
+> 
+> diff --git a/drivers/net/phy/phy.c b/drivers/net/phy/phy.c
+> index 716a1d46111..e6fed8c41d7 100644
+> --- a/drivers/net/phy/phy.c
+> +++ b/drivers/net/phy/phy.c
+> @@ -839,8 +839,6 @@ struct phy_device *phy_find_by_mask(struct mii_dev *bus, uint phy_mask)
+>   static void phy_connect_dev(struct phy_device *phydev, struct udevice *dev,
+>   			    phy_interface_t interface)
+>   {
+> -	/* Soft Reset the PHY */
+> -	phy_reset(phydev);
+>   	if (phydev->dev && phydev->dev != dev) {
+>   		printf("%s:%d is connected to %s.  Reconnecting to %s\n",
+>   		       phydev->bus->name, phydev->addr,
 
-New Libre Computer boards are added with UEFI Capsule Update support,
-plus various fixes for HDMI support, boot targets and android-mainline
-kernel support for khadas-vim3 android config.
+This needs clarification and likely has to be handled differently. 
+Removing the reset would leave the PHY in potentially undefined state.
 
-Thanks,
-Neil
-
-The following changes since commit 580fb5773634c4a01f907a164b2a05961840b4c0:
-
-   Merge tag 'u-boot-imx-master-20241013' of https://gitlab.denx.de/u-boot/custodians/u-boot-imx (2024-10-13 16:25:01 -0600)
-
-are available in the Git repository at:
-
-   https://source.denx.de/u-boot/custodians/u-boot-amlogic.git tags/u-boot-amlogic-next-20241014
-
-for you to fetch changes up to 315cad97a5ae09b1b975fff2413ce785b3b8592a:
-
-   configs: meson64: Ensure commands for boot targets are available (2024-10-14 09:06:16 +0200)
-
-----------------------------------------------------------------
-- Add Libre Computer boards into proper libre-computer board directory
-- Add new Boards:
-  - Libre Computer aml-s905d3-cc
-  - Libre Computer aml-a311d-cc
-- Add capsule update to libretech-ac and the new boards since they have an onboard SPI nor flash
-- Fix HDMI support after sync to v6.11 and regulator enable from Marek
-- Fix khadas-vim3 android config for android-mainline kernel
-- Disable meson64 boot targets when configs are not eavailable
-
-----------------------------------------------------------------
-Callum Parsey (1):
-       configs: meson64: Ensure commands for boot targets are available
-
-Mattijs Korpershoek (2):
-       configs: khadas-vim3{l}: Increase boot/recovery partition size
-       configs: meson64_android: Remove dtbo support
-
-Neil Armstrong (8):
-       board: libretech-ac: move board support into dedicated directory
-       board: libre-computer: aml-s805x-cc: Enable capsule updates
-       ARM: meson: add support for Libre Computer aml-a311d-cc
-       ARM: meson: add support for Libre Computer aml-s905d3-cc
-       dts: meson-g12-common-u-boot: do not disable canvas
-       video: meson: dw-hdmi: do not fail probe if HDMI regulator is already enabled
-       clk: meson: gxbb: add HDMI clocks
-       power/domain: meson-ee-pwrc: make sure to not enable a domain twice
-
-  arch/arm/dts/meson-g12-common-u-boot.dtsi          |   4 -
-  .../dts/meson-g12b-a311d-libretech-cc-u-boot.dtsi  |  15 +++
-  .../dts/meson-sm1-s905d3-libretech-cc-u-boot.dtsi  |  15 +++
-  board/amlogic/p212/MAINTAINERS                     |   2 -
-  board/libre-computer/aml-a311d-cc/MAINTAINERS      |   7 ++
-  board/libre-computer/aml-a311d-cc/Makefile         |   6 ++
-  board/libre-computer/aml-a311d-cc/aml-a311d-cc.c   |  44 +++++++++
-  board/libre-computer/aml-s805x-ac/MAINTAINERS      |   8 ++
-  board/libre-computer/aml-s805x-ac/Makefile         |   6 ++
-  board/libre-computer/aml-s805x-ac/aml-s805x-ac.c   |  71 ++++++++++++++
-  board/libre-computer/aml-s905d3-cc/MAINTAINERS     |   7 ++
-  board/libre-computer/aml-s905d3-cc/Makefile        |   6 ++
-  board/libre-computer/aml-s905d3-cc/aml-s905d3-cc.c |  44 +++++++++
-  configs/aml-a311d-cc_defconfig                     | 108 +++++++++++++++++++++
-  configs/aml-s905d3-cc_defconfig                    | 108 +++++++++++++++++++++
-  configs/libretech-ac_defconfig                     |   8 ++
-  doc/board/amlogic/aml-a311d-cc.rst                 |  46 +++++++++
-  doc/board/amlogic/aml-s905d3-cc.rst                |  46 +++++++++
-  doc/board/amlogic/index.rst                        |   2 +
-  drivers/clk/meson/gxbb.c                           |  50 +++++++++-
-  drivers/power/domain/meson-ee-pwrc.c               |  15 ++-
-  drivers/video/meson/meson_dw_hdmi.c                |   4 +-
-  include/configs/khadas-vim3_android.h              |   8 +-
-  include/configs/khadas-vim3l_android.h             |   8 +-
-  include/configs/meson64.h                          |  28 +++++-
-  include/configs/meson64_android.h                  |  26 +----
-  26 files changed, 643 insertions(+), 49 deletions(-)
-  create mode 100644 arch/arm/dts/meson-g12b-a311d-libretech-cc-u-boot.dtsi
-  create mode 100644 arch/arm/dts/meson-sm1-s905d3-libretech-cc-u-boot.dtsi
-  create mode 100644 board/libre-computer/aml-a311d-cc/MAINTAINERS
-  create mode 100644 board/libre-computer/aml-a311d-cc/Makefile
-  create mode 100644 board/libre-computer/aml-a311d-cc/aml-a311d-cc.c
-  create mode 100644 board/libre-computer/aml-s805x-ac/MAINTAINERS
-  create mode 100644 board/libre-computer/aml-s805x-ac/Makefile
-  create mode 100644 board/libre-computer/aml-s805x-ac/aml-s805x-ac.c
-  create mode 100644 board/libre-computer/aml-s905d3-cc/MAINTAINERS
-  create mode 100644 board/libre-computer/aml-s905d3-cc/Makefile
-  create mode 100644 board/libre-computer/aml-s905d3-cc/aml-s905d3-cc.c
-  create mode 100644 configs/aml-a311d-cc_defconfig
-  create mode 100644 configs/aml-s905d3-cc_defconfig
-  create mode 100644 doc/board/amlogic/aml-a311d-cc.rst
-  create mode 100644 doc/board/amlogic/aml-s905d3-cc.rst
+Which PHY is affected by this ?
