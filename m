@@ -4,93 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4670AD18130
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 17:03:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5408FD18131
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 17:12:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF7F488C7C;
-	Mon, 14 Oct 2024 19:03:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id AF49E88DA0;
+	Mon, 14 Oct 2024 19:12:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Igd0I1Hp";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="LkEhELuu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD80B88DA0; Mon, 14 Oct 2024 19:02:58 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id 9E6B588CA1; Mon, 14 Oct 2024 19:12:45 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C69E7889EB
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 19:02:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 67A4188D72
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 19:12:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 8B1133F5D0
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 17:02:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1728925375;
- bh=mGf4D/P04ALtuM+gdmoAFX924BDNr+C0+gca0XbpxhE=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=Igd0I1HpZWZ02AAEsb+2z4X+8AFWvoHsMqGUGt92HrDSmEeroD3OH6BlySVav9CWw
- QxA8MKU4aQCKRwDsUNWlDUhoDiLnBv/4bWBiFI0X6HTqeFwwppWOU3fWRVgwMGSXBS
- Vvlxv0LsTEOM/qP7/6CVdEQzmo4uxJLhP+gAvIQMOoDeI52DRVWIlyFVo/1C3F0eWo
- pCsGNGWIbBUSmzEOVxLTose2dBzlMf1mVXJyTikhJyaCHxle+jsNMnJsUUC1q466x+
- Mvm9L8UPuIPa9Y4BVnCdd8imGZvL6lkm5+r/WZO9IMYCYVYhqW8AL3t3+hsVLUMNWo
- bticAevaZwD3A==
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-4311a383111so21118025e9.3
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 10:02:55 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728925374; x=1729530174;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=mGf4D/P04ALtuM+gdmoAFX924BDNr+C0+gca0XbpxhE=;
- b=soWG7sDRxiqappvT2y+NNB3kA42X9MgrlfQ3sTSmec528NUd93Y7anwZCyiqp6HAMo
- oP7bqJpyX5O6dpMMWZhP8WAu+oIudaPGasnD+OJfh9tZHbgadICR4k8ocWZWLjkytj4H
- ut4gsl06KgPQ7tkmtYDTz7k5OpGF8W/YK7slC2vWYYAKeu2lZ428gACwnLIos40ZiCOY
- IeHaMJ9/ISY/j3R6gZEtUxPaBvxWXdfKoKB+d4g4Nmt7K8Cidp6gMyWHsAGyJubd7pfM
- p5KmLdGbnTzzFZqpTGEmc5aI8drFNuiQp8kjhZglh51Nl/dvlcTrOmHklidih9Ha3M0c
- aJjQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUX29S/tfd5+wKKds04mKn6wVLs0RiZAoi1QQREjdx9nll48eBD6GXYjUA3Ubvbs2EL4VJvrOA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw+cyOz57sy2nGHhJvunq057zsTxDEivbK53R4XPOwZJTStoMYG
- kH+T1YCTJfBvnDyeFvYnr0YRNBUny+95v0pnEGeJL/iHbE6pOywRWMgIO6cY1zEEPeZHE+3msKG
- SrTwdfflFrhXpIRSmAKdbU+oKdhUWeMGKL2R22GPBS7GRRvnYg31BdlV9mixtkyfIldE=
-X-Received: by 2002:a05:600c:354e:b0:42f:8267:69e6 with SMTP id
- 5b1f17b1804b1-431255d4afcmr80659385e9.3.1728925374447; 
- Mon, 14 Oct 2024 10:02:54 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFmIKuQQkUNs/lUYK7K0Lu/9t113yJecgr15rwQcdSH7CZUFJOY+I6qbP3r+T6LVMqrpzqIAQ==
-X-Received: by 2002:a05:600c:354e:b0:42f:8267:69e6 with SMTP id
- 5b1f17b1804b1-431255d4afcmr80659115e9.3.1728925374064; 
- Mon, 14 Oct 2024 10:02:54 -0700 (PDT)
-Received: from ?IPV6:2a02:3035:6e0:1a81:f4bd:4348:eabe:7707?
- ([2a02:3035:6e0:1a81:f4bd:4348:eabe:7707])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d4b6d0203sm11855477f8f.57.2024.10.14.10.02.51
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 14 Oct 2024 10:02:51 -0700 (PDT)
-Message-ID: <c77b357b-a69e-4c09-962e-a3e5976c9ec9@canonical.com>
-Date: Mon, 14 Oct 2024 19:02:50 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1728925956; x=1729530756; i=xypron.glpk@gmx.de;
+ bh=D3oAWKfZPx/wd5aZ3O71qRdHF+sd0seTXLB7MfcHs8Q=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=LkEhELuu5ERCsEPmlgmsDkDOpv7V2AJKviior+wOqE+shYwKsUByrDsBfA3jjy9x
+ IxAba4lSP2L/h9Su1sZGR92TJDcJYTR88CC/ZNn0m6ASGKEbTLm9kX6VtdREkvL4G
+ 27CZ6D7P3ADVD/SBuyHHDmF20VCu1mTrUCyWPhmJD+pbtLx8uOck7uNNgV6gY6J2E
+ JvuJJ516GdBkSgZNC/1onXkOqw4bzzXstAy2nItjH+i89vGeHuCLqNa/hsfsgGdBW
+ /d025KfXZFnGUBbPiu00Lm0UqPWcRw4LQsoLlO/eRKEN0axOl0/JRPt0G7RO2rrK/
+ hZSIMrbDZgK9yc593g==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MJE6L-1tG0lT0Efb-00IlG2; Mon, 14
+ Oct 2024 19:12:36 +0200
+Message-ID: <ff804d23-b384-41b7-86f9-d0e8abb1d5ed@gmx.de>
+Date: Mon, 14 Oct 2024 19:12:35 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] boot: type boormethod
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20241008204614.56215-1-heinrich.schuchardt@canonical.com>
- <CAFLszTjo=rgvRketvyEHKw9ARZk3kA83HRwXgUQNLKpdvww=Eg@mail.gmail.com>
+Subject: Re: [PATCH v3 02/15] lmb: add a flag to allow suppressing memory map
+ change notification
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>, Jonas Karlman <jonas@kwiboo.se>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>
+References: <20241013105522.391414-1-sughosh.ganu@linaro.org>
+ <20241013105522.391414-3-sughosh.ganu@linaro.org>
+ <20241013175146.GN14210@bill-the-cat>
+ <CADg8p97a5jVR=_YRpbzBDEFLzPea-UtBFHc+X679vyPhGfC2Xw@mail.gmail.com>
+ <20241014150217.GL53053@bill-the-cat>
 Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CAFLszTjo=rgvRketvyEHKw9ARZk3kA83HRwXgUQNLKpdvww=Eg@mail.gmail.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20241014150217.GL53053@bill-the-cat>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:Fw2Io99/B18X2gJBt2ncVeg8e+OX9zQGbYR4a/AA35aEB8pvEbP
+ /d4riCnrA0PdyftiJhVIR+1BVkxUu6ggLN7w0cWftaK2gO0N2lqE+l0XSS4W4U8VsvU/i1V
+ kKeCSYePmOMjb65qRHLXUyZKdS+R+1p+W0kEX/p/qeAjIef/fLnREEApt4PzuvIDWaMZudw
+ 3NGnkg9+eDGVbWcI3bw5w==
+UI-OutboundReport: notjunk:1;M01:P0:hJFQrMI1RCc=;lKp8pFflZBTqnZkmxrOlwudrZRd
+ QWuasyi7i99VPSNXuUdk2/H2AOQrtcMij3qdkEaorlMqgs5R9lgsHQeWV78fSNoJdNQ70TurF
+ 6yQrTngpnAjIww8zFCIOM1aR5a8W6nsi3cxW1/ujZXBN+t+Q184cVn1rV46nnHNjRStUOAH/g
+ gHfKHC59iOo/L86RLlYgfhhSurrtI5CPokJ5384en68YaQm1GvlKvwipsF0r6kqvZndZiQVuK
+ eKpZ8fC8CL96fGtcVH0Xj8sJaL2qg2EjEy8+wkxu4OSstftIVN04RgV6DwhE8V9IH+QNNCxz8
+ HG6EXBGrOUM6n9hf/a9j3UupTuaX4XofwLiLx5X54N21hGl7DLWDL5sY1UlinEk8y4lIDLrGS
+ DPThuxkI0wjUHDwRGGN6GCDX6GEfPljOjJ468ILROtRnOQsh1i32GT/K9cLtOuAyPdC8S8WTb
+ yeg5P4QAkkkxf7T1UpmCc9YodddjzRYUsrQxKYHjkgZFtPJ79eJDGnERYFMBiWmaGYCxgLTdi
+ 0O3JaNvYihmWsiL98G5USQZemR/X58Wdmzah1kzOs0DxvMHbjpCgPk4NBHZvzvbk8tp72u/vc
+ ud7D6+visaRtZh07Z99N9VMR7oht8wFvOhnE0oyghM6eedbBbLSqQs+jjmZ+W1z+JMzOTDjrd
+ jmnL4+Lq3BLekWZvhAzhvJpSX6W4X2Jb3sM+uYrbOVvcCY6yr6tFT98fyqxbXGlvOaC/0mmbs
+ TGGARb6AoSH5t5HQbtRg29k7c/8r5Nm0hG4LzuUMX3+uwrUXjGIAG643wFKlR8tSdbvEuDO+3
+ iZ7aUK87aaKzLxgtlBR28UDw==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,27 +96,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 14.10.24 17:51, Simon Glass wrote:
-> Hi Heinrich,
-> 
-> On Tue, 8 Oct 2024 at 14:46, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
+On 14.10.24 17:02, Tom Rini wrote:
+> On Mon, Oct 14, 2024 at 12:26:02PM +0530, Sughosh Ganu wrote:
+>> On Sun, 13 Oct 2024 at 23:21, Tom Rini <trini@konsulko.com> wrote:
+>>>
+>>> On Sun, Oct 13, 2024 at 04:25:09PM +0530, Sughosh Ganu wrote:
+>>>
+>>>> Add a flag LMB_NONOTIFY that can be passed to the LMB API's for
+>>>> reserving memory. This will then result in no notification being sent
+>>>> from the LMB module for the changes to the LMB's memory map.
+>>>>
+>>>> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+>>>
+>>> Can you please elaborate on what we need this flag for, for example wh=
+at
+>>> the valid situation for it is? We should be updating (or adding commen=
+ts
+>>> such that updates are automatic..) to doc/api/lmb.rst as well. Thanks.
 >>
->> %s/boormethod/bootmethod/
-> 
-> Actually is should be bootmeth now. I am trying to use that consistently.
-> 
->>
->> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> ---
->>   boot/bootstd-uclass.c | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
-> 
-> Regards,
-> Simon
+>> The flag is used to prevent notifying the EFI code about the change in
+>> the LMB memory map when the alloc/free request originates in the EFI
+>> memory module.
+>
+> Simon, this is the loop you referred to on IRC the other day, and
+> instead you solve this with the flag about a point of cooperation?
+>
+>> The EFI memory module adds the memory region to its
+>> memory map as part of the alloc/free operation. The idea is that the
+>> LMB module should notify EFI about changes to its memory map when
+>> these changes are initiated from non-EFI consumers of memory.
+>
+> OK, so the first change is that since doc/api/lmb.rst is just a
+> kerneldoc of include/lmb.h we need to add the flag here, and we need to
+> first document LMB_NOOVERWRITE which is already undocumented. The next
+> change is that at the end of the series, update the rst with some
+> paragraphs about what and why, for clarity, after auditing include/lmb.h
+> for other items that are missing kerneldoc comments. I am willing to
+> make that second change a follow-up series, however.
+>
 
-This patch is already merged.
+Cf.
+[v2,1/1] lmb: add missing LMB_NOOVERWRITE description
+https://patchwork.ozlabs.org/project/uboot/patch/20240919105523.179497-2-h=
+einrich.schuchardt@canonical.com/
 
 Best regards
 
