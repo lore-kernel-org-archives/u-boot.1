@@ -4,81 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C356CD18151
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 21:12:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70B9AD18153
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 21:12:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4089B891B4;
-	Mon, 14 Oct 2024 23:11:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EC49589143;
+	Mon, 14 Oct 2024 23:12:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KjLoAMkk";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="a9dd2p++";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B910891B4; Mon, 14 Oct 2024 23:11:58 +0200 (CEST)
-Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
- [IPv6:2607:f8b0:4864:20::831])
+ id 26EC68917B; Mon, 14 Oct 2024 23:12:55 +0200 (CEST)
+Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
+ [IPv6:2607:f8b0:4864:20::836])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 14021891C6
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 23:11:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CFD6488CC1
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 23:12:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x831.google.com with SMTP id
- d75a77b69052e-46063b6b82eso13578111cf.3
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 14:11:55 -0700 (PDT)
+Received: by mail-qt1-x836.google.com with SMTP id
+ d75a77b69052e-45ffafa63easo42577561cf.1
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 14:12:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1728940315; x=1729545115; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1728940372; x=1729545172; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=fqUM+cRorGUKUNqHrb0XB/RrUf8fDnPSn/hbORR8NoQ=;
- b=KjLoAMkkYaeQYYsy8fuChY5334v4ryXLgSFxSvBfyo3ACGKSf+P7uXEW3SfwLzhzki
- dHgW0oaB5u+h6ojU1vy1EYPkjBz9RzEm9uNXdmF5C/sgNs0v7jFLt4CgzGkfvxHlNwhe
- sXCfuyPdcbA/6ClgCHffa52zhTRlGhdFdEaoc=
+ bh=NA0xuB3mgTgMR+bwIZrnNkcyLmZjbGk6efrfX4ysv0I=;
+ b=a9dd2p++WKuQiogckCVhQEtByEEv4pt5IH0j9USZyZyMb2Y00+O7O/z0WkxaOPr5ZI
+ /oUVIPBPJ91dqvr6vnigYq2QJEyCxK/co+kwkvooBlka/pIXSyLcB0bQoB0PDy4snWS5
+ XUBYENyoVWsd5B6ALvLO+eNAArQZnnInqTuP4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728940315; x=1729545115;
+ d=1e100.net; s=20230601; t=1728940372; x=1729545172;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fqUM+cRorGUKUNqHrb0XB/RrUf8fDnPSn/hbORR8NoQ=;
- b=EtJnCi4aNlq1VS9f6CsBIdg5svd9wUwWkSQFEqIYmCnCTxy86QPE6pLjopeagCMhbT
- XKsRHjV2XvTIhZTtwMYv3pXEph2ym3tj3WJzedoVofmBMh+DLBpKZgqBcGUA1YliKKiN
- ZT920egEHNf+IsAEXj4HWuBTsPFBmOCYUU1RkNXr480Q/+kRg9MUmTP2IdPJXdl+UXbh
- fff/1IWwsuXCv0JK0wtWU0olB20FB44OmbAcOK4GWVZe3WNPk8qGcF1p9xwLy/NMUev5
- sIZ9RDKnxV578vihi2e1afOQGyGspeDYfjRkYmklBFscjObw2V1UvP055feXVK09sAOy
- v/Fg==
-X-Gm-Message-State: AOJu0YwMGPMthyOkwF1pxcnHyknlkAhBAu5uXmLkp0VSdLNJMdMf7AE/
- ijUkLN5iHkwdYW0M3gMm93kHN1WZ9ArzCPgCg9cqo2e2AAT/LfDVu8io9boZgwY=
-X-Google-Smtp-Source: AGHT+IFpMTFkea+iF68niSowAofJxM+N09PooKB9bryjswKuEz8KYfqzAVzOCAnXVOCd7GJy3GFqCw==
-X-Received: by 2002:a05:622a:1999:b0:45f:40f5:143b with SMTP id
- d75a77b69052e-460584c356amr175499141cf.53.1728940314587; 
- Mon, 14 Oct 2024 14:11:54 -0700 (PDT)
+ bh=NA0xuB3mgTgMR+bwIZrnNkcyLmZjbGk6efrfX4ysv0I=;
+ b=HzMsKX5UTieIKfCmem4Ltn4eOaCOAQyFi7Ewp+zvJD3MBuTOXQ1Tc4BVD/HJuUL1AT
+ ZpCak/1pKc2413Msc4NmLAl87H4lJkn64qC+kpDLjeJGGtpoyyl6lF2Jx2RiY/wMJFZL
+ VwkZ5hc33g4WfjKDKSIJRBT3kog/ekKGbzT0Fyoumr6mF13rMY/mZPQfXSy6bSQpym8i
+ yS5/9oX7iKBZMx1OxyUCfMVx65U6RXbOCvc1sxBCZd62U7WOfbMw3bZZiUWHH/AeYF0S
+ eOS9wMyCyYcE7q+xtj25qF11E/g2hShRM50yGoLhniz5wE0NrKRZfpa+T80rOaDM3Vxy
+ SKkA==
+X-Gm-Message-State: AOJu0Ywsvl3S8q1DjLTo0HA7xgDWwYKjzhOzxeRbI8yUvUlaEH9qzwCS
+ mUhg+PNpGJo9kpwS0WainFINVR3UMGsP5t9BN7BoPjOWJC8GjLq3QFp5PxCZjBU=
+X-Google-Smtp-Source: AGHT+IGJjuXr+Amco3pR8nnU1yQZbPyzbY5d8xNU0wUbCw1x0wfQrjns9U5iFrPKQm22lK9Clee7gQ==
+X-Received: by 2002:a05:6214:f27:b0:6cc:1d39:377 with SMTP id
+ 6a1803df08f44-6cc1d390ba1mr40344826d6.13.1728940371671; 
+ Mon, 14 Oct 2024 14:12:51 -0700 (PDT)
 Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b1148c6c8bsm458788885a.11.2024.10.14.14.11.52
+ 6a1803df08f44-6cbe85a5ba0sm50083276d6.16.2024.10.14.14.12.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Oct 2024 14:11:54 -0700 (PDT)
-Date: Mon, 14 Oct 2024 15:11:50 -0600
+ Mon, 14 Oct 2024 14:12:51 -0700 (PDT)
+Date: Mon, 14 Oct 2024 15:12:48 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH v6 12/12] test: efi: boot: Add a test for the efi bootmeth
-Message-ID: <20241014211150.GX53053@bill-the-cat>
-References: <20240926220226.1265965-9-sjg@chromium.org>
- <20240926220226.1265965-13-sjg@chromium.org>
- <20241011223227.GA630742@bill-the-cat>
- <CAFLszTgoxND_qi8WzdgC8-mQLf0e14Mt=KgXy=bqWkqo4svG9Q@mail.gmail.com>
- <20241014035122.GE53053@bill-the-cat>
- <CAFLszTiVsoTdKiKmPVugc9cLk-A+XM2EdiPUE0AFK=g8RPx+0g@mail.gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH 2/2] qconfig: Ignore defconfigs containing #include
+Message-ID: <20241014211248.GY53053@bill-the-cat>
+References: <20241012232231.5638-1-sjg@chromium.org>
+ <20241012232231.5638-2-sjg@chromium.org>
+ <20241013161520.GM14210@bill-the-cat>
+ <CAFLszTjijFBZar31k1QaLUKcFQyD+CGqyo5wH=7agFF1gr-CLQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="g27CEZeaId5Wr51v"
+ protocol="application/pgp-signature"; boundary="zUNJVkflHwI37sIY"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTiVsoTdKiKmPVugc9cLk-A+XM2EdiPUE0AFK=g8RPx+0g@mail.gmail.com>
+In-Reply-To: <CAFLszTjijFBZar31k1QaLUKcFQyD+CGqyo5wH=7agFF1gr-CLQ@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,51 +93,58 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---g27CEZeaId5Wr51v
+--zUNJVkflHwI37sIY
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 14, 2024 at 01:13:41PM -0600, Simon Glass wrote:
+On Mon, Oct 14, 2024 at 02:20:00PM -0600, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Sun, 13 Oct 2024 at 10:15, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Sat, Oct 12, 2024 at 05:22:30PM -0600, Simon Glass wrote:
+> >
+> > > Running "tools/qconfig.py -s" will re-sync files with #include in them
+> > > and so un-#include them.
+> > >
+> > > Ignore these and mark them as failures.
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > Fixes: https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/28
+> >
+> > How about marking them as warnings? It may be good to re-sync
+> > configs/am62px_evm_a53_defconfig for example and then re-add the
+> > #include line, but configs/am62x_evm_a53_ethboot_defconfig on the other
+> > hand very much should not be resynced. Thanks for getting on this issue
+> > so quickly.
+>=20
+> Do you mean still do the resync, but show a warning? It does
+> obliterate the old defconfig, but I suppose people can just not commit
+> the changes. Is that what you are thinking?
 
-[snip]
-> Or perhaps just have a way to turn it off? I first sent this patch
-> last November. It is just wrong to generate output like this which we
-> don't want. There isn't even a test for it, so just add a way to
-> disable it, and be done!
-
-I don't know that it's unwanted. As I'm trying to get Heinrich to
-explain, _why_ does efi_setup_console_size need to exist, and do what it
-does? This isn't the case of color-coding the output of tests as they
-happen, there must be a reason we care about knowing the console size.
-At that point we can figure out if the right answer is:
-- Don't generate that check on serial ports, it's somewhere between
-  misleading to wrong.
-- text-based tests just need to expect and skip it because there's a
-  good reason to need to know the console size and not just assume
-  80x24.
-- Something else we won't know until it's clearly explained why we do
-  this.
+No, sorry for being unclear. I was thinking it should NOT be resynced
+but counted as a warning not a failure.
 
 --=20
 Tom
 
---g27CEZeaId5Wr51v
+--zUNJVkflHwI37sIY
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcNiRYACgkQFHw5/5Y0
-tywaYgv/atRAozoyVs+lrRnoWq80U6GTonRYHt+gvSmu7X6tNry/aEClyDJcKkIa
-RoUVbAoTOOqcUm30jiP61LxNWJsDecBi7Xe9XrnoY44QHcTExKKAypKa/SmBwP7/
-rITvv2jUgHD689lEWCvmIMUOp7I/etglNc0RXyubfd+8BOFF1nX+TZEDFhWsM34O
-7gXz68gOO2JVSfRivLvXcYGLNma4XjVK+e5HmWXnUesgoMb6Idly8VgEv1oEFFkP
-UJUFyi9AXHuaMap6/A1ouDekYwRlonGXgy4eRbwwN32QVaD4j8lEsjg26Tcam4ka
-MsXnX9eGee8PRQZWfwaieEHzoEEEpWNwjyMfazZ8T8bqealXstLl9Bthhs5efMr6
-teCFhYOmD4ICibrzqED4gnT/4R4WakJz/50J3DCGxbt57eioLCWXEZmJV1M+rqnn
-1MeoqP1jI1aj+mNICGnckdu8vBzF9RyhLaYTomaIeGcM/PI3HHXaBCjpjDcf1U2r
-+1RD47qM
-=tu/+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcNiVAACgkQFHw5/5Y0
+tyxZLQv/Rw7r/MAAXj/ucaxC+sV4Pg2FOlHQwxV88LnhDRx+t9HJYHuZLXGnFG4r
+weKxPnhIkQ7UFRSGP96PDX7yq5R5FRXoqzDBagp9ovioWD6YbbI1UK8BbwFRGr3v
+TUjqvOR9kvDWPDQG322pEsRKupE++6V7mdKzFr2OffxuCd/EectCf8n6a40eRnx0
+5o+VzF3luXOJxJp+IvVw2eBiR3SB7kjC/UCWTvSBLvKCQKdCC91uIjQiO4D9rWAu
+EZJ0QoySMG2V6YfoBO++IOrWuBuxVkAyNP6C7EulOxibZsjhbCfP2JqriSFxEIpJ
+9GhW96EPDJVwQyzwKpmsVvm01+y4eM74sWkM+ztYLUJrN99NyUwXjusIgIvh0ea+
+O2oQWeeCrgkulxo8tUDGio8pKY4Q04FRfhZNQ9IwBSJEl3UMyI/rXJ6DWUcYSH7S
+hOuYmo+U0mmsLyxaSfnoqPx8QBuf2k2TZHJgGC/ClS9B5gOeNMxO7O6odPdG9RGZ
+jeQSGGYa
+=B0tT
 -----END PGP SIGNATURE-----
 
---g27CEZeaId5Wr51v--
+--zUNJVkflHwI37sIY--
