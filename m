@@ -4,83 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59976D18138
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 18:13:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40FE1D18138
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 18:19:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D633A88D72;
-	Mon, 14 Oct 2024 20:13:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A963088C7C;
+	Mon, 14 Oct 2024 20:19:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QUcdo/57";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="FITbISEn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A12B88E35; Mon, 14 Oct 2024 20:13:05 +0200 (CEST)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8DAAB88BB2; Mon, 14 Oct 2024 20:19:26 +0200 (CEST)
+Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F6FD88CEA
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 20:13:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4217488D9C
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 20:19:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alexthreed@gmail.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-3e5d3f039ccso966430b6e.0
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 11:13:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1728929582; x=1729534382; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=c+9yEkXX1HnR4/176wu514PmjpQCFXvjVRk5nog78mM=;
- b=QUcdo/57oYdHlbBHvzsAP8nCf2Bznh6C44Bm/YM06tSMbvFRGzWSyY+NMJsQc1/8yp
- VJ2tsI0xadTbmCjquZfLZaZ/vKZ08qSVv55LERhgCNnqFpDm9y+QmNNQiarIa9/+OUnZ
- xsUA6ZOK+eoX8B52MObEP2YbU8L9xL6e0zR9pS1trAvv09jMmqqA7CY+4n2K70veE0nS
- 5jFFGGXpD5Q5E9F8Bkz8Om60e2Q94bP8zKNzbW8/T4Rb91eMnYpMfdbEigPbVVpZ6uvb
- V/0hovZTCYnsExWzJlXZZldHM3LrVd3i55XK2UadwI/Qg+k3HE4EZXZ6gWVGF+tErsU4
- c9UA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728929582; x=1729534382;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=c+9yEkXX1HnR4/176wu514PmjpQCFXvjVRk5nog78mM=;
- b=Q7iy42anaAyAvrCDEkYdmoVez9QiJQb40cXQCt+LIXRXqfnxF+odQRm03TiuOKIIk9
- YW+SmTXefkJRfX4fcT4qWBrQNlEhNrICbEFR+Kvj2wXQkb4ZYirY9fOArcfXY7TAp3ee
- cAstjg0rybw4jKLSjOGS/bB5UzYc3P8Tt4eCIJ6rYJnUxtCDRUk2ZMlnpANiEvMAERjh
- ephYs5c/QZHHNCkJ7z2t3XLSeT9icPmEU8e9MzJBFs8jwtYn4Jrol80RF9kWvRCws6UH
- 9IB3shBqb6X2O+7wvLrr5unYohGMMszSYshAaF6ukDGPYMN7DH1wLnVXXCP8ds2c+VXS
- q43Q==
-X-Gm-Message-State: AOJu0YyGFnC1cVfbZVEx1t4PJFpmm2CqFTgkqcllFAjt7u0M0ZpP5CNn
- brQ9Alh4szPr9wYHTjcdyqdt8esp+icubYGnvvUraAHZIY1rqMnf+JWBQWd9FBKqQ+t/2FJOt5E
- zWuT72nFCLElG5Kj0iW9Y7mpiqi8=
-X-Google-Smtp-Source: AGHT+IHtt2iC5yFYwT3sFf5Lx9o2Zy5FDDIzKuyj1MFYUnV8ZCA+NcBp5agv4LlYjDpY8jY5KFguGXQbuh+458igzbQ=
-X-Received: by 2002:a05:6808:210b:b0:3e0:5596:c998 with SMTP id
- 5614622812f47-3e5c90d75bamr8317906b6e.17.1728929582285; Mon, 14 Oct 2024
- 11:13:02 -0700 (PDT)
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
-References: <20241013093244.817790-1-alexthreed@gmail.com>
- <31e0be9e-ba50-4bc6-b07f-d20426b650be@denx.de>
- <CAF4oh-PE7epxtH9FS2PSbcGcd+aVH=7jYhaAUMNKALZNc80x5w@mail.gmail.com>
- <ef7b756e-b72a-4d76-9168-03371235df19@denx.de>
-In-Reply-To: <ef7b756e-b72a-4d76-9168-03371235df19@denx.de>
-From: Alex ThreeD <alexthreed@gmail.com>
-Date: Mon, 14 Oct 2024 21:12:51 +0300
-Message-ID: <CAF4oh-MzDpuTgLmXyXSwm-zNFMd6Fx_NZz_bxa6vPL_8QU_0eg@mail.gmail.com>
-Subject: Re: [PATCH] rockchip: board: Increase rng-seed size to make it
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1728929961;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=1T2w2SmZruzabX6eNkF0yHdhWs7I4mSD28/xtmsIZfw=;
+ b=FITbISEnUnBkmwkIFHygY89tirB5YSnlSDNM823XRh+Rq7cozwI1H56J1rbpzbpBLtV69N
+ sZXZbz9RLAlG2QKawWWiiXNeG+VxLJELxn2LP8oud5pDhZ0vQLOTw82YCVzWjAlUSNOmi5
+ MkB/NQjAvZp5XVtfC/v/ptX7qy/RrZu8lqwMBYiptAqrl/MncBy4MMHY9ammVBIRASTl8S
+ tXDKWeVXz5/kKAJq2ioqO7QY5/GeBcsVdYDjbU+/hHCnBCSs+watkVW3UZd+eAYD+H1TKF
+ mfbhKj80isVKLKcMo2SKUALnmyCdaqic+Qe0G0avSsRuN4dTWWBHmme/3SxlgA==
+Date: Mon, 14 Oct 2024 20:19:20 +0200
+From: Dragan Simic <dsimic@manjaro.org>
+To: Alex Shumsky <alexthreed@gmail.com>
+Cc: u-boot@lists.denx.de, Ben Wolsieffer <benwolsieffer@gmail.com>, Chris
+ Morgan <macromorgan@hotmail.com>, Jonas Karlman <jonas@kwiboo.se>, Kever
+ Yang <kever.yang@rock-chips.com>, Marek Vasut <marex@denx.de>, Philipp
+ Tomsich <philipp.tomsich@theobroma-systems.com>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Quentin Schulz <quentin.schulz@cherry.de>, Simon
+ Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v2] rockchip: board: Increase rng-seed size to make it
  sufficient for modern Linux
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, Ben Wolsieffer <benwolsieffer@gmail.com>, 
- Chris Morgan <macromorgan@hotmail.com>, Dragan Simic <dsimic@manjaro.org>, 
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>, 
- Philipp Tomsich <philipp.tomsich@theobroma-systems.com>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20241014175338.2675136-1-alexthreed@gmail.com>
+References: <20241014175338.2675136-1-alexthreed@gmail.com>
+Message-ID: <3f4143078e0dc3409c96ea13be5b8317@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,17 +74,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Oct 14, 2024 at 1:34=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
->
-> > Actually it seems that entropy required to init pool early has decrease=
-d in
-> > Linux 5.19 from 64 bytes (2 * CHACHA_KEY_SIZE) to 32 bytes
-> > (BLAKE2S_HASH_SIZE)
->
-> A couple more random numbers would cover all the bases then.
+Hello Alex,
 
-Oops, missed this in v2. Is it vital to add support for 2.5 years old linux=
-?
-Old devices probably stay with older uboot, and new devices will get new li=
-nux
-(maybe not that new but not 2.5 years old).
+Thanks for the v2.  Please see a few comments below.
+
+On 2024-10-14 19:53, Alex Shumsky wrote:
+> Modern Linux requires 32 byte seed to initialize random pool, but 
+> u-boot
+> currently provides only 8 bytes. Increase rng-seed size to make Linux 
+> happy and
+> initialize rng pool instantly.
+> 
+> Boot with 8 byte rng-seed:
+>     # dmesg | grep crng
+>     [   12.089286] random: crng init done
+> Boot with 32 byte rng-seed:
+>     # dmesg | grep crng
+>     [    0.000000] random: crng init done
+> 
+> https://github.com/torvalds/linux/blob/7234e2ea0edd00bfb6bb2159e55878c19885ce68/drivers/char/random.c#L632
+> 
+> Signed-off-by: Alex Shumsky <alexthreed@gmail.com>
+> Fixes: d2048bafae40 ("rockchip: board: Add board_rng_seed() for all
+> Rockchip devices")
+> ---
+> 
+> Changes in v2:
+> - add env config knob rng_seed_size
+
+Perhaps the emitted warning should also be mentioned here.
+
+> - 12-character commit SHA in Fixes
+> 
+>  arch/arm/mach-rockchip/board.c | 8 +++++++-
+>  1 file changed, 7 insertions(+), 1 deletion(-)
+> 
+> diff --git a/arch/arm/mach-rockchip/board.c 
+> b/arch/arm/mach-rockchip/board.c
+> index 3fadf7e412..f9f0d7214c 100644
+> --- a/arch/arm/mach-rockchip/board.c
+> +++ b/arch/arm/mach-rockchip/board.c
+> @@ -472,9 +472,15 @@ __weak int misc_init_r(void)
+>  __weak int board_rng_seed(struct abuf *buf)
+>  {
+>  	struct udevice *dev;
+> -	size_t len = 0x8;
+> +	ulong len = env_get_ulong("rng_seed_size", 10, 32);
+>  	u64 *data;
+> 
+> +	if (len < 32) {
+> +		// rng_seed_size should be 32 bytes for Linux 5.19+, or 64 for older 
+> Linux'es
+
+Shouldn't it be 8 for older kernels?
+
+> +		log_warning("Too small rng_seed_size (%lu). It is likely
+> insufficient to init linux crng\n",
+> +			    len);
+
+Perhaps this would read better:
+
+   "Value for rng_seed_size too low (%lu) and likely insufficient
+   for the Linux RNG initialization"
+
+> +	}
+> +
+>  	data = malloc(len);
+>  	if (!data) {
+>  		printf("Out of memory\n");
