@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19523D18151
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 21:06:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 823C2D18152
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 21:07:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54E56891AB;
+	by phobos.denx.de (Postfix) with ESMTP id CD37D891BB;
 	Mon, 14 Oct 2024 23:06:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="uNA/7t0M";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="p/ANFaC3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9968C891A5; Mon, 14 Oct 2024 23:06:34 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ id BB48E89198; Mon, 14 Oct 2024 23:06:34 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 048BB89198
+ by phobos.denx.de (Postfix) with ESMTPS id 9B729891A6
  for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 23:06:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ddrokosov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 4477312000F;
+Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id D12F810000F;
  Tue, 15 Oct 2024 00:06:29 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 4477312000F
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru D12F810000F
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
  s=mail; t=1728939989;
- bh=jDgtglNmQIL7kQXdLyvLB8BCoi1bwRMSptZ8GXjobZk=;
+ bh=fRzMo71LD7BqHA1uJWtOqmtMAo9WQavtSmqrmTkDOLY=;
  h=From:Date:Subject:MIME-Version:Content-Type:Message-ID:To:From;
- b=uNA/7t0MUXBr6b+2PguvYbitM3KFjC2SAeVIlmCVG5Fa7e+3TIWjGwm8+Qk56xNnW
- DKSgdzRugzxLXTgBbk2hR0YzUjxOVqtxDOt3Mtsy/7P/m3eD6ud8xpvy8Tasq3da17
- z5BzTQHxwUlEusXfkAem55IfI5xGr8NaMMcdfoqEZx/OjHfLC0os/XDbv2LzK7Yq3b
- aRayJFpHE76BlKiamxv5ccU/75Ufc2S/eCxbYNw/aqF3EWDUcksEX7mZMDGJUx0yaq
- pEjpm8b+KF3q4gddyC2UYYu+m1/5n2JAR+lcs8mqsYCNfH8n7PCqDd3ushAme2Q4zL
- uVfl3qvdxVumA==
+ b=p/ANFaC38hClpkLIckxbmHJ3c88FppXsqpOT20EWgToBlDz+cXx5BDRohE0Ah3Rfr
+ LOL3mUQvHDlsKd8jCoP0i8374LfOLR3JPgCdlxPkTgTQy3hs44eEQyh/tH415YjxHD
+ 9ZX3aaKulS6/o1R7xlULACCTpuaGk2Z0wzTEWGosmXAEALKnAPVn0UC+5lPm6J6iyF
+ GK5ZhAAhv/oR/IKoqCYD7IOkKbuzoDfxIQjT9Ovb5UqogC730D8XNQQdpXtJPifhPh
+ ir5oAs/dQ+z+G69HrDJBO1X3WQnbUhVZtoJDRAY3bY4bxiyoxlMI7fi+hG8g4x3jSg
+ lkzX37JIYk2FQ==
 Received: from smtp.sberdevices.ru (unknown [172.16.192.103])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
  Tue, 15 Oct 2024 00:06:29 +0300 (MSK)
 From: Dmitry Rokosov <ddrokosov@salutedevices.com>
-Date: Tue, 15 Oct 2024 00:06:13 +0300
-Subject: [PATCH v4 1/5] include/android_ab: move ab_select_slot()
- documentation to @ notation
+Date: Tue, 15 Oct 2024 00:06:16 +0300
+Subject: [PATCH v4 4/5] cmd: bcb: introduce 'ab_dump' command to print BCB
+ block content
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20241015-android_ab_master-v4-1-a91cca9513c4@salutedevices.com>
+Message-ID: <20241015-android_ab_master-v4-4-a91cca9513c4@salutedevices.com>
 References: <20241015-android_ab_master-v4-0-a91cca9513c4@salutedevices.com>
 In-Reply-To: <20241015-android_ab_master-v4-0-a91cca9513c4@salutedevices.com>
 To: Igor Opaniuk <igor.opaniuk@gmail.com>, Mattijs Korpershoek
@@ -63,11 +63,11 @@ CC: <u-boot@lists.denx.de>, <u-boot-amlogic@groups.io>, <rockosov@gmail.com>,
  <kernel@salutedevices.com>, Dmitry Rokosov <ddrokosov@salutedevices.com>, 
  Guillaume La Roque <glaroque@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1728939988; l=5833;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1728939988; l=9017;
  i=ddrokosov@salutedevices.com; s=20241008; h=from:subject:message-id;
- bh=gZ96OF9nLUs1cQx3rbW/um/mm+jL89LJMvti/2xLQZw=;
- b=kswIHtGIdF+jSX84fkyYFBrSlLBoh+cQIa8VTWOQJxL5CUmRwhICADvu0tLN6WKVbYyfvyjWE
- CSn/RwpZOa1CI1mYWwrgLT6ARZNA2ekQwQMFOt5gE9clPD0Jih1AA1o
+ bh=VPkpbBAYe2MAqSnq2umIfE0yKvNWTj7C5U+vf38hya8=;
+ b=mOv5dzYg0B05UIU+zzxR6yU1PjXWAEJtGI/bui6X+7fGOfi+s4hXHmyu7AMPPxHPnTocS+hrH
+ 3frj9uNFuzlBCZ8Sd9PvK+7wIEUug5IX4d6uY+trJowqL82RFxQBYW6
 X-Developer-Key: i=ddrokosov@salutedevices.com; a=ed25519;
  pk=J6t8z4aofCVwzR1Xs7royc+IGyQcL0cTby92cz3i8B4=
 X-Originating-IP: [172.28.129.94]
@@ -85,8 +85,8 @@ X-KSMG-AntiSpam-Auth: dkim=none
 X-KSMG-AntiSpam-Info: LuaCore: 39 0.3.39
  e168d0b3ce73b485ab2648dd465313add1404cce,
  {Tracking_from_domain_doesnt_match_to}, salutedevices.com:7.1.1;
- 127.0.0.199:7.1.2; d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
- smtp.sberdevices.ru:7.1.1,5.0.1, FromAlignment: s
+ 127.0.0.199:7.1.2; smtp.sberdevices.ru:5.0.1,7.1.1;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1, FromAlignment: s
 X-MS-Exchange-Organization-SCL: -1
 X-KSMG-AntiSpam-Interceptor-Info: scan successful
 X-KSMG-AntiPhishing: Clean
@@ -110,148 +110,272 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There are new function documentation requirements in U-Boot, so apply
-these changes for android_ab.
+It's really helpful to have the ability to dump BCB block for debugging
+A/B logic on the board supported this partition schema.
+
+Command 'bcb ab_dump' prints all fields of bootloader_control struct
+including slot_metadata for all presented slots.
+
+Output example:
+=====
+> board# bcb ab_dump ubi 0#misc
+> Read 512 bytes from volume misc to 000000000bf07580
+> Read 512 bytes from volume misc to 000000000bf42f40
+> Bootloader Control:       [misc]
+> Active Slot:              _a
+> Magic Number:             0x42414342
+> Version:                  1
+> Number of Slots:          2
+> Recovery Tries Remaining: 0
+> CRC:                      0x2c8b50bc (Valid)
+>
+> Slot[0] Metadata:
+> 	- Priority:         15
+> 	- Tries Remaining:  0
+> 	- Successful Boot:  1
+> 	- Verity Corrupted: 0
+>
+> Slot[1] Metadata:
+> 	- Priority:         14
+> 	- Tries Remaining:  7
+> 	- Successful Boot:  0
+> 	- Verity Corrupted: 0
+====
+
+The ab_dump command allows you to display ABC data directly on the
+U-Boot console. During an A/B test execution, this test verifies the
+accuracy of each field within the ABC data.
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Tested-by: Guillaume La Roque <glaroque@baylibre.com>
 Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
 ---
- boot/android_ab.c    | 43 ++++++++++++++++++++++++-------------------
- include/android_ab.h |  7 ++++---
- 2 files changed, 28 insertions(+), 22 deletions(-)
+ boot/android_ab.c                     | 68 +++++++++++++++++++++++++++++++++++
+ cmd/bcb.c                             | 35 ++++++++++++++++++
+ include/android_ab.h                  | 10 ++++++
+ test/py/tests/test_android/test_ab.py | 23 ++++++++++++
+ 4 files changed, 136 insertions(+)
 
 diff --git a/boot/android_ab.c b/boot/android_ab.c
-index 1196a189ed5349ca5c088e3b6ef1796b11c69a84..0045c8133a8e164f1fdd4c0f9b683de0f13f26e0 100644
+index 0045c8133a8e164f1fdd4c0f9b683de0f13f26e0..c93e51541019d0fe793303c4b3d5286df061906f 100644
 --- a/boot/android_ab.c
 +++ b/boot/android_ab.c
-@@ -13,13 +13,13 @@
- #include <u-boot/crc.h>
+@@ -372,3 +372,71 @@ int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
  
- /**
-- * Compute the CRC-32 of the bootloader control struct.
-+ * ab_control_compute_crc() - Compute the CRC32 of the bootloader control.
-+ *
-+ * @abc: Bootloader control block
-  *
-  * Only the bytes up to the crc32_le field are considered for the CRC-32
-  * calculation.
-  *
-- * @param[in] abc bootloader control block
-- *
-  * Return: crc32 sum
-  */
- static uint32_t ab_control_compute_crc(struct bootloader_control *abc)
-@@ -28,14 +28,14 @@ static uint32_t ab_control_compute_crc(struct bootloader_control *abc)
+ 	return slot;
  }
++
++int ab_dump_abc(struct blk_desc *dev_desc, struct disk_partition *part_info)
++{
++	struct bootloader_control *abc;
++	u32 crc32_le;
++	int i, ret;
++	struct slot_metadata *slot;
++
++	if (!dev_desc || !part_info) {
++		log_err("ANDROID: Empty device descriptor or partition info\n");
++		return -EINVAL;
++	}
++
++	ret = ab_control_create_from_disk(dev_desc, part_info, &abc, 0);
++	if (ret < 0) {
++		log_err("ANDROID: Cannot create bcb from disk %d\n", ret);
++		return ret;
++	}
++
++	if (abc->magic != BOOT_CTRL_MAGIC) {
++		log_err("ANDROID: Unknown A/B metadata: %.8x\n", abc->magic);
++		ret = -ENODATA;
++		goto error;
++	}
++
++	if (abc->version > BOOT_CTRL_VERSION) {
++		log_err("ANDROID: Unsupported A/B metadata version: %.8x\n",
++			abc->version);
++		ret = -ENODATA;
++		goto error;
++	}
++
++	if (abc->nb_slot > ARRAY_SIZE(abc->slot_info)) {
++		log_err("ANDROID: Wrong number of slots %u, expected %zu\n",
++			abc->nb_slot, ARRAY_SIZE(abc->slot_info));
++		ret = -ENODATA;
++		goto error;
++	}
++
++	printf("Bootloader Control:       [%s]\n", part_info->name);
++	printf("Active Slot:              %s\n", abc->slot_suffix);
++	printf("Magic Number:             0x%x\n", abc->magic);
++	printf("Version:                  %u\n", abc->version);
++	printf("Number of Slots:          %u\n", abc->nb_slot);
++	printf("Recovery Tries Remaining: %u\n", abc->recovery_tries_remaining);
++
++	printf("CRC:                      0x%.8x", abc->crc32_le);
++
++	crc32_le = ab_control_compute_crc(abc);
++	if (abc->crc32_le != crc32_le)
++		printf(" (Invalid, Expected: 0x%.8x)\n", crc32_le);
++	else
++		printf(" (Valid)\n");
++
++	for (i = 0; i < abc->nb_slot; ++i) {
++		slot = &abc->slot_info[i];
++		printf("\nSlot[%d] Metadata:\n", i);
++		printf("\t- Priority:         %u\n", slot->priority);
++		printf("\t- Tries Remaining:  %u\n", slot->tries_remaining);
++		printf("\t- Successful Boot:  %u\n", slot->successful_boot);
++		printf("\t- Verity Corrupted: %u\n", slot->verity_corrupted);
++	}
++
++error:
++	free(abc);
++
++	return ret;
++}
+diff --git a/cmd/bcb.c b/cmd/bcb.c
+index 3935b7f8d535e87593020b91a6b37d7c5ef02a83..a0eff55c2ed4230e3964297a937c95f9eec3ec85 100644
+--- a/cmd/bcb.c
++++ b/cmd/bcb.c
+@@ -26,6 +26,7 @@ enum bcb_cmd {
+ 	BCB_CMD_STORE,
+ #ifdef CONFIG_ANDROID_AB
+ 	BCB_CMD_AB_SELECT,
++	BCB_CMD_AB_DUMP,
+ #endif
+ };
  
- /**
-- * Initialize bootloader_control to the default value.
-+ * ab_control_default() - Initialize bootloader_control to the default value.
-+ *
-+ * @abc: Bootloader control block
-  *
-  * It allows us to boot all slots in order from the first one. This value
-  * should be used when the bootloader message is corrupted, but not when
-  * a valid message indicates that all slots are unbootable.
-  *
-- * @param[in] abc bootloader control block
-- *
-  * Return: 0 on success and a negative on error
-  */
- static int ab_control_default(struct bootloader_control *abc)
-@@ -67,7 +67,13 @@ static int ab_control_default(struct bootloader_control *abc)
+@@ -59,6 +60,8 @@ static int bcb_cmd_get(char *cmd)
+ #ifdef CONFIG_ANDROID_AB
+ 	if (!strcmp(cmd, "ab_select"))
+ 		return BCB_CMD_AB_SELECT;
++	if (!strcmp(cmd, "ab_dump"))
++		return BCB_CMD_AB_DUMP;
+ #endif
+ 	else
+ 		return -1;
+@@ -98,6 +101,10 @@ static int bcb_is_misused(int argc, char *const argv[])
+ 		if (argc != 4 && argc != 5)
+ 			goto err;
+ 		return 0;
++	case BCB_CMD_AB_DUMP:
++		if (argc != 3)
++			goto err;
++		return 0;
+ #endif
+ 	default:
+ 		printf("Error: 'bcb %s' not supported\n", argv[0]);
+@@ -466,6 +473,28 @@ static int do_bcb_ab_select(struct cmd_tbl *cmdtp, int flag, int argc,
+ 
+ 	return CMD_RET_SUCCESS;
  }
++
++static int do_bcb_ab_dump(struct cmd_tbl *cmdtp, int flag, int argc,
++			  char *const argv[])
++{
++	int ret;
++	struct blk_desc *dev_desc;
++	struct disk_partition part_info;
++
++	if (part_get_info_by_dev_and_name_or_num(argv[1], argv[2],
++						 &dev_desc, &part_info,
++						 false) < 0) {
++		return CMD_RET_FAILURE;
++	}
++
++	ret = ab_dump_abc(dev_desc, &part_info);
++	if (ret < 0) {
++		printf("Cannot dump ABC data, error %d.\n", ret);
++		return CMD_RET_FAILURE;
++	}
++
++	return CMD_RET_SUCCESS;
++}
+ #endif
  
- /**
-- * Load the boot_control struct from disk into newly allocated memory.
-+ * ab_control_create_from_disk() - Load the boot_control from disk into memory.
-+ *
-+ * @dev_desc: Device where to read the boot_control struct from
-+ * @part_info: Partition in 'dev_desc' where to read from, normally
-+ *             the "misc" partition should be used
-+ * @abc: pointer to pointer to bootloader_control data
-+ * @offset: boot_control struct offset
-  *
-  * This function allocates and returns an integer number of disk blocks,
-  * based on the block size of the passed device to help performing a
-@@ -75,10 +81,6 @@ static int ab_control_default(struct bootloader_control *abc)
-  * The boot_control struct offset (2 KiB) must be a multiple of the device
-  * block size, for simplicity.
-  *
-- * @param[in] dev_desc Device where to read the boot_control struct from
-- * @param[in] part_info Partition in 'dev_desc' where to read from, normally
-- *			the "misc" partition should be used
-- * @param[out] pointer to pointer to bootloader_control data
-  * Return: 0 on success and a negative on error
-  */
- static int ab_control_create_from_disk(struct blk_desc *dev_desc,
-@@ -122,15 +124,17 @@ static int ab_control_create_from_disk(struct blk_desc *dev_desc,
- }
+ static struct cmd_tbl cmd_bcb_sub[] = {
+@@ -478,6 +507,8 @@ static struct cmd_tbl cmd_bcb_sub[] = {
+ #ifdef CONFIG_ANDROID_AB
+ 	U_BOOT_CMD_MKENT(ab_select, CONFIG_SYS_MAXARGS, 1,
+ 			 do_bcb_ab_select, "", ""),
++	U_BOOT_CMD_MKENT(ab_dump, CONFIG_SYS_MAXARGS, 1,
++			 do_bcb_ab_dump, "", ""),
+ #endif
+ };
  
- /**
-- * Store the loaded boot_control block.
-+ * ab_control_store() - Store the loaded boot_control block.
-+ *
-+ * @dev_desc: Device where we should write the boot_control struct
-+ * @part_info: Partition on the 'dev_desc' where to write
-+ * @abc Pointer to the boot control struct and the extra bytes after
-+ *      it up to the nearest block boundary
-+ * @offset: boot_control struct offset
-  *
-  * Store back to the same location it was read from with
-  * ab_control_create_from_misc().
-  *
-- * @param[in] dev_desc Device where we should write the boot_control struct
-- * @param[in] part_info Partition on the 'dev_desc' where to write
-- * @param[in] abc Pointer to the boot control struct and the extra bytes after
-- *                it up to the nearest block boundary
-  * Return: 0 on success and a negative on error
-  */
- static int ab_control_store(struct blk_desc *dev_desc,
-@@ -160,12 +164,13 @@ static int ab_control_store(struct blk_desc *dev_desc,
- }
- 
- /**
-- * Compare two slots.
-+ * ab_compare_slots() - Compare two slots.
-+ *
-+ * @a: The first bootable slot metadata
-+ * @b: The second bootable slot metadata
-  *
-  * The function determines slot which is should we boot from among the two.
-  *
-- * @param[in] a The first bootable slot metadata
-- * @param[in] b The second bootable slot metadata
-  * Return: Negative if the slot "a" is better, positive of the slot "b" is
-  *         better or 0 if they are equally good.
-  */
+@@ -534,6 +565,10 @@ U_BOOT_CMD(
+ 	"    - If '--no-dec' is set, the number of tries remaining will not\n"
+ 	"      decremented for the selected boot slot\n"
+ 	"\n"
++	"bcb ab_dump -\n"
++	"    Dump boot_control information from specific partition.\n"
++	"    <interface> <dev[:part|#part_name]>\n"
++	"\n"
+ #endif
+ 	"Legend:\n"
+ 	"<interface> - storage device interface (virtio, mmc, etc)\n"
 diff --git a/include/android_ab.h b/include/android_ab.h
-index dbf20343da62447a237ec845e216517d34455ad3..1e53879a25f145a9d18ac0a6553d8c217123aa6f 100644
+index 1e53879a25f145a9d18ac0a6553d8c217123aa6f..838230e06f8cbf7a5d79d9d84d9ebe9f96aca10d 100644
 --- a/include/android_ab.h
 +++ b/include/android_ab.h
-@@ -18,7 +18,10 @@ struct disk_partition;
- #define NUM_SLOTS 2
- 
- /**
-- * Select the slot where to boot from.
-+ * ab_select_slot() - Select the slot where to boot from.
-+ *
-+ * @dev_desc: Place to store the device description pointer
-+ * @part_info: Place to store the partition information
-  *
-  * On Android devices with more than one boot slot (multiple copies of the
-  * kernel and system images) selects which slot should be used to boot from and
-@@ -28,8 +31,6 @@ struct disk_partition;
-  * registered before returning from this function so it isn't selected
-  * indefinitely.
-  *
-- * @param[in] dev_desc Place to store the device description pointer
-- * @param[in] part_info Place to store the partition information
-  * Return: The slot number (>= 0) on success, or a negative on error
-  */
+@@ -36,4 +36,14 @@ struct disk_partition;
  int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
+                    bool dec_tries);
+ 
++/**
++ * ab_dump_abc() - Dump ABC information for specific partition.
++ *
++ * @dev_desc: Device description pointer
++ * @part_info: Partition information
++ *
++ * Return: 0 on success, or a negative on error
++ */
++int ab_dump_abc(struct blk_desc *dev_desc, struct disk_partition *part_info);
++
+ #endif /* __ANDROID_AB_H */
+diff --git a/test/py/tests/test_android/test_ab.py b/test/py/tests/test_android/test_ab.py
+index 0d7b7995a9fab6e3daad748721818b9e4cfac452..9bf1a0eb00a6ae1edebf62f07fd162b9c8c02e49 100644
+--- a/test/py/tests/test_android/test_ab.py
++++ b/test/py/tests/test_android/test_ab.py
+@@ -54,6 +54,27 @@ def ab_disk_image(u_boot_console):
+         di = ABTestDiskImage(u_boot_console)
+     return di
+ 
++def ab_dump(u_boot_console, slot_num, crc):
++    output = u_boot_console.run_command('bcb ab_dump host 0#misc')
++    header, slot0, slot1 = output.split('\r\r\n\r\r\n')
++    slots = [slot0, slot1]
++    slot_suffixes = ['_a', '_b']
++
++    header = dict(map(lambda x: map(str.strip, x.split(':')), header.split('\r\r\n')))
++    assert header['Bootloader Control'] == '[misc]'
++    assert header['Active Slot'] == slot_suffixes[slot_num]
++    assert header['Magic Number'] == '0x42414342'
++    assert header['Version'] == '1'
++    assert header['Number of Slots'] == '2'
++    assert header['Recovery Tries Remaining'] == '0'
++    assert header['CRC'] == '{} (Valid)'.format(crc)
++
++    slot = dict(map(lambda x: map(str.strip, x.split(':')), slots[slot_num].split('\r\r\n\t- ')[1:]))
++    assert slot['Priority'] == '15'
++    assert slot['Tries Remaining'] == '6'
++    assert slot['Successful Boot'] == '0'
++    assert slot['Verity Corrupted'] == '0'
++
+ @pytest.mark.boardspec('sandbox')
+ @pytest.mark.buildconfigspec('android_ab')
+ @pytest.mark.buildconfigspec('cmd_bcb')
+@@ -68,8 +89,10 @@ def test_ab(ab_disk_image, u_boot_console):
+     assert 'Attempting slot a, tries remaining 7' in output
+     output = u_boot_console.run_command('printenv slot_name')
+     assert 'slot_name=a' in output
++    ab_dump(u_boot_console, 0, '0xd438d1b9')
+ 
+     output = u_boot_console.run_command('bcb ab_select slot_name host 0:1')
+     assert 'Attempting slot b, tries remaining 7' in output
+     output = u_boot_console.run_command('printenv slot_name')
+     assert 'slot_name=b' in output
++    ab_dump(u_boot_console, 1, '0x011ec016')
 
 -- 
 2.43.0
