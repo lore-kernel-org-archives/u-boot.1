@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D776D1812A
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 15:51:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C1B8D18129
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 15:51:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E866E89156;
-	Mon, 14 Oct 2024 17:50:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4934E89166;
+	Mon, 14 Oct 2024 17:50:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UdSa/ch4";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kTMR58Sq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77D2E8916D; Mon, 14 Oct 2024 17:50:55 +0200 (CEST)
-Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
- [IPv6:2607:f8b0:4864:20::f32])
+ id 102B788936; Mon, 14 Oct 2024 17:50:57 +0200 (CEST)
+Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
+ [IPv6:2607:f8b0:4864:20::736])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 261E088A47
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 17:50:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EFC2E89166
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 17:50:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf32.google.com with SMTP id
- 6a1803df08f44-6cbd57cc35bso40968536d6.1
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 08:50:53 -0700 (PDT)
+Received: by mail-qk1-x736.google.com with SMTP id
+ af79cd13be357-7b10e800ba9so449182085a.1
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 08:50:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728921050; x=1729525850; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1728921051; x=1729525851; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=T2mIMAoA0SAlckcJa5ynbA8sAq2ftCdOjAsG/VgKzFM=;
- b=UdSa/ch43AAOx7d3vIH/FdopaLT97o8iU5nFXYtU2LVOFJaQHGCqjD3ugWBX0D0NgG
- xKufmXwHYSXWTN+kL3WJohNlv6QqNo8d+a8jnm3eF6HGYp6RYjJrNypoSrGyok65+eOS
- RE9lFmu13CrHbj7Lg8jt3/ZRA/XXXBl9KC/6g=
+ bh=t+xQ/s9CIoLPB9hzJq3G085nEes8EjnPYS8sb0pVusE=;
+ b=kTMR58Sqp03xoT+CvcEqUAScTdR+GjQjETAnFehcbUUY6aeMfWmOch4rfAMA93HFcU
+ YHxm6bbHuCofNoPWCkydbE2m2EvVL1XDGQxNb2RvDpOgn/m+W0sbyL6OvA/BkoWIAgpR
+ I+ihSRWpQOOjgDzDpi25NJRxUzxUelE8Ur9F8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728921050; x=1729525850;
+ d=1e100.net; s=20230601; t=1728921051; x=1729525851;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=T2mIMAoA0SAlckcJa5ynbA8sAq2ftCdOjAsG/VgKzFM=;
- b=QgNLAHe/eZwxZ7FcoUhfY0Q01lXOkVrdafxA/g8CCp7V7ptZoMCk6G51fIxisB9ikA
- OU551QZM2CT1+MlGKpDbEc5+c/JjAtgUeJO3HroNF7rnx6tUt86nfclTmwRPJse5Yxj0
- Yj1CqNvj8kWFi4jeIVeiZGNc6sjpywkyOdM6dYikoLiRDuKr8HtwN5sjf4qbXYzEmEbj
- BZupHz3fJSrHRrbW0E8vOo6LS53tcVzAakP+OtlRmvfJAWUXLUk1rEbTwE1RJ/2Jw7S3
- rnplLp5IZvQ7duC3aQcctXTUEbUKGFcIUswbpLBN/Z5Ai37myfXpXVquyssg8DvtojZA
- mk5A==
-X-Gm-Message-State: AOJu0YxqdqBxyboNNbHDKr6B1WdQ61G8JqbJZqryT5m4AhPJGVeGFJou
- B8McemKF6s2cklGOW25Qb6vT+K0mvkE+kTYZ8E6n6Jzo9M8nq2Tp6g8pp6LxfSoJDb83xnE/c7v
- OUkIDbS60hesFFGXQ5ZvzGHluwADwLPTYQQCz
-X-Google-Smtp-Source: AGHT+IG5cKQvN2oKR6wNZZtSNw9SiqelmMuSC3U1M8/uTUpLr9rLMJFX8svlhg4kHF635+ywTwdf11cvyKTHCLJS+Ss=
-X-Received: by 2002:a05:6214:2aa2:b0:6b5:1d2f:1d3 with SMTP id
- 6a1803df08f44-6cbe51208camr246747056d6.0.1728921049947; Mon, 14 Oct 2024
- 08:50:49 -0700 (PDT)
+ bh=t+xQ/s9CIoLPB9hzJq3G085nEes8EjnPYS8sb0pVusE=;
+ b=ABGViiFZGR4qSQNxoNwYC/9AFfPTD99sG9ErwfSvEWxSPBryAdmEgNCKXH7CVWrtdu
+ oPc1NCDAn5rkaEW4YIMIYgNIEFIzeC6rqmK4U1NhPi9TLBsUlO/L+YaJnqtrGXH5yAfk
+ HS04ar0AomoW5S00FOFKqwx5CFr5A91x4ca4S79+fjGApLgJP2GvIoIhA1EZVdtlTMJy
+ 7UDbR8Tgf9mVhcy8qQO0kbXr5IyzNlHVbBtQNUMuRXrapQwSKdmz0L7Mys4DkDiSNYGs
+ bqH0mQwNnfUAGX5/s8luSaW18RfCGsx6TK4COrzW71uVBfhYPQX9ZFiYJ7ZP2wOphjFA
+ M4tQ==
+X-Gm-Message-State: AOJu0YwTsKH1vQHUr+hjpci0SoxALNlhU7vhnLWhHIFVRsfvTToU/8kq
+ +h/oTspXkj1H68WQmpXZsXcju1wnlj6Mem7LNdBVJqCQmpmKOSTVDw+03CyR83pgD1t9xkZID7B
+ htNf1kNLfNFazm6B7AJ2nPfAXeqW0cKhWu25d
+X-Google-Smtp-Source: AGHT+IEmzNq5d2PzavBmKNvzP/1JQzp50p5rtPbiIH/1sJBOXyPmVHHCObjqwoV/qt0KUXLAtPKzT97Ru61Jmwg4o3k=
+X-Received: by 2002:a05:6214:5d11:b0:6cb:c832:7f9b with SMTP id
+ 6a1803df08f44-6cbefb161e7mr216293036d6.17.1728921051212; Mon, 14 Oct 2024
+ 08:50:51 -0700 (PDT)
 MIME-Version: 1.0
 References: <20241013105522.391414-1-sughosh.ganu@linaro.org>
- <20241013105522.391414-5-sughosh.ganu@linaro.org>
-In-Reply-To: <20241013105522.391414-5-sughosh.ganu@linaro.org>
+ <20241013105522.391414-6-sughosh.ganu@linaro.org>
+In-Reply-To: <20241013105522.391414-6-sughosh.ganu@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 14 Oct 2024 09:50:38 -0600
-Message-ID: <CAFLszTgLtmApvQL-JVd54b_ZeMQ8sxBwR_TVfz1PwZbu=VJjWQ@mail.gmail.com>
-Subject: Re: [PATCH v3 04/15] lib: Kconfig: add a config symbol for getting
- lmb memory map updates
+Date: Mon, 14 Oct 2024 09:50:40 -0600
+Message-ID: <CAFLszTiXfogDMQCkGiy-136ZSbdcefE0-HNNjqeowLjAnGMJvQ@mail.gmail.com>
+Subject: Re: [PATCH v3 05/15] add a function to check if an address is in RAM
+ memory
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>, 
@@ -89,54 +89,46 @@ Hi Sughosh,
 
 On Sun, 13 Oct 2024 at 04:55, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> Add a Kconfig symbol to enable getting updates on any memory map
-> changes that might be done by the LMB module. This notification
-> mechanism can then be used to have a synchronous view of allocated and
-> free memory.
+> Add a function to check if a given address falls within the RAM
+> address used by U-Boot. This will be used to notify other modules if
+> the address gets allocated, so as to not get re-allocated by some
+> other module.
+
+Can you be a bit more specific about this one? Why is it a weak
+function? Also, can you please add it to init.h with a full function
+comment?
+
 >
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > ---
 > Changes since V2: None
 >
->  lib/Kconfig | 17 +++++++++++++++++
->  1 file changed, 17 insertions(+)
+>  common/board_r.c | 5 +++++
+>  1 file changed, 5 insertions(+)
 >
-> diff --git a/lib/Kconfig b/lib/Kconfig
-> index 1dd4f27159..61452f7ac9 100644
-> --- a/lib/Kconfig
-> +++ b/lib/Kconfig
-> @@ -75,6 +75,23 @@ config LIB_UUID
->         bool
->         select SHA1
+> diff --git a/common/board_r.c b/common/board_r.c
+> index 1acad069d9..4694f49a43 100644
+> --- a/common/board_r.c
+> +++ b/common/board_r.c
+> @@ -73,6 +73,11 @@ DECLARE_GLOBAL_DATA_PTR;
 >
-> +config MEM_MAP_UPDATE_NOTIFY
-> +       bool "Get notified of any changes to the LMB memory map"
-> +       default y if EFI_LOADER
-> +       help
-> +         Enable this option to get notification on any changes to the
-> +         memory that is allocated or freed by the LMB module. This will
-> +         allow different modules that allocate memory or maintain a memory
-> +         map to have a synchronous view of available and allocated memory.
+>  ulong monitor_flash_len;
+>
+> +__weak bool __maybe_unused is_addr_in_ram(uintptr_t addr)
+
+ulong in U-Boot, please avoid uintptr_t as it is confusing for people
+to see both
+
+> +{
+> +       return addr >= gd->ram_base && addr <= gd->ram_top;
+> +}
 > +
-> +config SPL_MEM_MAP_UPDATE_NOTIFY
-> +       bool "Get notified of any changes to the LMB memory map in SPL"
-> +       help
-> +         Enable this option to get notification on any changes to the
-> +         memory that is allocated or freed by the LMB module. This will
-> +         allow different modules that allocate memory or maintain a memory
-> +         map to have a synchronous view of available and allocated memory.
-> +
->  config RANDOM_UUID
->         bool "GPT Random UUID generation"
->         select LIB_UUID
+>  __weak int board_flash_wp_on(void)
+>  {
+>         /*
 > --
 > 2.34.1
 >
 
-We should find a way to avoid this complexity. I have proposed a few
-including my latest series at [1]. Please take a look.
-
 Regards,
-SImon
-
-[1] https://patchwork.ozlabs.org/project/uboot/list/?series=427729
+Simon
