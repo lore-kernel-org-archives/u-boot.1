@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F109DD18129
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 15:51:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21B45D1812A
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 15:51:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E90389179;
-	Mon, 14 Oct 2024 17:51:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2D65D8918F;
+	Mon, 14 Oct 2024 17:51:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="E8nKiXkQ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NX6Tk9yR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8EC9A891A4; Mon, 14 Oct 2024 17:51:02 +0200 (CEST)
-Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
- [IPv6:2607:f8b0:4864:20::1134])
+ id DD0C58915B; Mon, 14 Oct 2024 17:51:02 +0200 (CEST)
+Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
+ [IPv6:2607:f8b0:4864:20::b34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C0E789187
+ by phobos.denx.de (Postfix) with ESMTPS id 756D48918E
  for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 17:50:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-yw1-x1134.google.com with SMTP id
- 00721157ae682-6e38ebcc0abso12066127b3.2
+Received: by mail-yb1-xb34.google.com with SMTP id
+ 3f1490d57ef6-e291f1d659aso2457614276.3
  for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 08:50:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728921055; x=1729525855; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1728921056; x=1729525856; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Qt2AYzJnWPrrqyajVvGkXllFj33MmN9JpEttRwYXQJ8=;
- b=E8nKiXkQ4DYOLtZILr7VuylCRxyq/oKCTLUE59EhdVH5ef3eF49MV+ROmSrjjaNwbE
- eQfDmTgFNLzVFfm/b161QTsw9I5eRypGS7+mPAxD/Rg+GiuDs3wugf8a9q0QpzntEqsH
- Es8J/QMEgf4kgvATZb0LcFCC41bSYW8DKDlAc=
+ bh=v4uw47FISFjd4OvOESpKsAT491nHBFcqp30jeMURD60=;
+ b=NX6Tk9yRtSrQA8eNnECnAf00Oy/eEjGMpNcVw1sQa9R1/LQTS4a1iKMTRZvLUKm2H0
+ 2pwgREdMjmCcIgHWSSL44+UHoZeI1tWzhm2r4fyEVf2V2InQqCGTig52K5Sgas8cVVwV
+ suurrGMNKEUwnHe0KPpwRnL+QeCCU6C9h3kRw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728921055; x=1729525855;
+ d=1e100.net; s=20230601; t=1728921056; x=1729525856;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Qt2AYzJnWPrrqyajVvGkXllFj33MmN9JpEttRwYXQJ8=;
- b=qFCfA0OJtzHkf5LUE/q4eiR17DpCLOMtRkHV1YNm1r5QATVXZiusr3p7wF1HQpAGSO
- rck9XflszaC0Ol5hZi3WxyXkJtkeFxLAOuY7Id17bfeFglkGiG3vEaEaqDGOTcwDs5AU
- +6CIFylL+0BoXI4pW8M4D1lkV5+Otn2GhyADLPAMwRIheGUBmDPxDzw6n3ntz703Cd6Y
- Oh8TBRO4V0zPdYnn0kVLTfzMZzfrHv9AOoewHQuxQdUgeOAi3LxIGrH6cW0HJ8S8c2Nj
- nCPQcCU1M/K9Y4kkbTMSgIfCIlJFb/hMlBl6FNNF+hdFlryq1DUy5ITC0FzPsRFdCrFm
- fPFg==
-X-Gm-Message-State: AOJu0Yw+/JU03mBYHv7AxKXJJyB0ZQC51QQjkG3qkXEcACv4srYRhhN4
- YsyWJrsJKXKVm8tKv3UQB8H5eX7s0byy6UZr4wP/SsWXUPX/14LrQhHmvUsqsDBJwL1nHWNnp8L
- G7ulehgMRxQrSFUaaqi7jL+dhQfeOb46khaV1
-X-Google-Smtp-Source: AGHT+IGFasBVxffImoMyGMbBGCo6g4A6MVqdLTycWvwJ+GvIkLsWQQly2YbOZFT5K3+lnz22VO1AwawHTkcxNQT6CwA=
-X-Received: by 2002:a05:690c:5c12:b0:6e2:43ea:552 with SMTP id
- 00721157ae682-6e3479b5fa2mr82003177b3.16.1728921054725; Mon, 14 Oct 2024
- 08:50:54 -0700 (PDT)
+ bh=v4uw47FISFjd4OvOESpKsAT491nHBFcqp30jeMURD60=;
+ b=rbgfJN+Ry24XjOhGWUFKOQuTpK6mj/2rVcUUzdUtCutyi8qKFMKnzp+yNceHi8Za72
+ sdjSG16kj/v3VoLaW0Z/hfgTM46hiMg8jnLEN5rZcbbRFadsvt1bTgNPKfVlytM1jskY
+ u7r5ukb9GhlQjEhLka8kTieiY3RwwyQwFqWId8Ot4pHRsBM0tBNPlQNLmXygmcw6yAdu
+ jVMqQxlpPqQF8dy9WdiVRZBfoVE6C3Uc77k3YrXls22QGUCBc7D3822d6QmjOk/2FCf7
+ mXvVjAqBJppbiCGldAOiVb/r69J4kEaw9oUplhcShVu5Z0wI3ThMv2krYCiaU4qXwG4d
+ 5JdA==
+X-Gm-Message-State: AOJu0YxxLsjpkWR5OGzDJcTYg6Yu/GMCidPXv0vp50y9EJ5z68wMlTXD
+ 4l1hRm/2VMMr7K2aALjDD9ACmn4ZLJRRomofXWg6naO2FnRj/+ChbpekNSI4J0m2XgghAmoAj+3
+ sm8qYrimGt/0a1/ld97PHSEYeQjGcH/nII9koWK6zfIrbwRI=
+X-Google-Smtp-Source: AGHT+IH1B39gfmFC4DNwOM2AMDHsDvPkZ7HfxNHMz58pzPbnIvjqRz5BwZUxHr9fkxCfGOW/TmmI4Q9nRWUhH+vhEr8=
+X-Received: by 2002:a05:690c:6189:b0:6e3:1b52:d8d1 with SMTP id
+ 00721157ae682-6e364349ddcmr61403007b3.24.1728921056631; Mon, 14 Oct 2024
+ 08:50:56 -0700 (PDT)
 MIME-Version: 1.0
 References: <20241013105522.391414-1-sughosh.ganu@linaro.org>
- <20241013105522.391414-8-sughosh.ganu@linaro.org>
-In-Reply-To: <20241013105522.391414-8-sughosh.ganu@linaro.org>
+ <20241013105522.391414-9-sughosh.ganu@linaro.org>
+In-Reply-To: <20241013105522.391414-9-sughosh.ganu@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 14 Oct 2024 09:50:44 -0600
-Message-ID: <CAFLszTjiq=_xYZUHzVGnZ3_R0NGEbASiPQ5ACEkmkFZBKAFKCw@mail.gmail.com>
-Subject: Re: [PATCH v3 07/15] efi_memory: do not add U-Boot memory to the
- memory map
+Date: Mon, 14 Oct 2024 09:50:45 -0600
+Message-ID: <CAFLszTh09=GPY66eT4neeUtd7wxy7zMeUmq_-Ncwh2Cs_qsDPg@mail.gmail.com>
+Subject: Re: [PATCH v3 08/15] ti: k3: remove efi_add_known_memory() function
+ definition
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>, 
@@ -85,49 +85,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sughosh,
-
 On Sun, 13 Oct 2024 at 04:56, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> The memory region occupied by U-Boot is reserved by LMB, and gets
-> added to the EFI memory map through a call from the LMB module. Remove
-> this superfluous addition to the EFI memory map.
-
-Without the patch before (which so far I don't see the need for), this
-code is needed.
-
+> The efi_add_known_memory() function for the TI K3 platforms is adding
+> the EFI_CONVENTIONAL_MEMORY type. This memory is now being handled
+> through the LMB module -- the lmb_add_memory() adds this memory to the
+> memory map. Remove the definition of the now superfluous
+> efi_add_known_memory() function.
 >
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 > ---
-> Changes since V2: New patch
+> Changes since V2: None
 >
->  lib/efi_loader/efi_memory.c | 10 ----------
->  1 file changed, 10 deletions(-)
->
-> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> index 41501e9d41..16e64987af 100644
-> --- a/lib/efi_loader/efi_memory.c
-> +++ b/lib/efi_loader/efi_memory.c
-> @@ -870,16 +870,6 @@ static void add_u_boot_and_runtime(void)
->  {
->         unsigned long runtime_start, runtime_end, runtime_pages;
->         unsigned long runtime_mask = EFI_PAGE_MASK;
-> -       unsigned long uboot_start, uboot_pages;
-> -       unsigned long uboot_stack_size = CONFIG_STACK_SIZE;
-> -
-> -       /* Add U-Boot */
-> -       uboot_start = ((uintptr_t)map_sysmem(gd->start_addr_sp, 0) -
-> -                      uboot_stack_size) & ~EFI_PAGE_MASK;
-> -       uboot_pages = ((uintptr_t)map_sysmem(gd->ram_top - 1, 0) -
-> -                      uboot_start + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT;
-> -       efi_add_memory_map_pg(uboot_start, uboot_pages, EFI_BOOT_SERVICES_CODE,
-> -                             false);
->
->  #if defined(__aarch64__)
->         /*
-> --
-> 2.34.1
->
+>  arch/arm/mach-k3/common.c | 11 -----------
+>  1 file changed, 11 deletions(-)
 
-Regards,
-Simon
+I agree we should not have these calls sprinkled throughout U-Boot. In
+fact let's make efi_add_memory_map() static at some point!
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
