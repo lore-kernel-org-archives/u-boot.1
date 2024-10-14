@@ -4,80 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47C18D18157
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 22:35:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AE76D18158
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 22:43:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B3693892C5;
-	Tue, 15 Oct 2024 00:32:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id A6DA6891CE;
+	Tue, 15 Oct 2024 00:43:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Cy+7pfdA";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LI/WaszM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8EA5387042; Tue, 15 Oct 2024 00:32:41 +0200 (CEST)
-Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
- [IPv6:2607:f8b0:4864:20::d35])
+ id 3C12489215; Tue, 15 Oct 2024 00:43:16 +0200 (CEST)
+Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
+ [IPv6:2607:f8b0:4864:20::72e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DFCC9892C5
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 00:32:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 49B74891AA
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 00:43:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd35.google.com with SMTP id
- ca18e2360f4ac-8354d853f91so182784239f.0
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 15:32:35 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x72e.google.com with SMTP id
+ af79cd13be357-7afc591c69cso328186185a.0
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 15:43:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728945154; x=1729549954; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=J742mQZS5jPLv/vpb4OaUzyAC9isUaTB5rS8acqZO3g=;
- b=Cy+7pfdAn+99DSy8q2xc946X3YOgnN3LkxtPPT5pejhmjknYgb0uJzT3rHW+UPEgHp
- srObm/TE7jfcIAJIF9NAnrQP4LKYFJTaGobJr36I4TokJPWxv0MmmJ1hkC0pKbgNrW1t
- 4/OJJ2tb5SzvTpDWIM+9i72ailpp8DfGMFRHA=
+ d=konsulko.com; s=google; t=1728945792; x=1729550592; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=u3psiFT+neP/OrRNma+9kDxdfc4QTgDA74Vwsy7cCrU=;
+ b=LI/WaszM9XVNLi4x49ENF2KvrPpT5hDeo/szBqC0kW7ljCwhoiy+VxkkPEcKgfvm27
+ 04TXSUkrTeqLef8tU0bqm/7W/7AO617eiZJZ5KMMs2GsQhxvFo8OSA5cJlJZ9xSpl5ta
+ IWGge9Op5/S1JtEEeFkjDTuwxNJ/JcH3JFKnw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728945154; x=1729549954;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=J742mQZS5jPLv/vpb4OaUzyAC9isUaTB5rS8acqZO3g=;
- b=r5+zMbOVVgstQhLt9MKNvq75CdsJxBum+wkFGFe7ITvX1U4d7o7JyfKzX59N1p323e
- 3aV9mLohASm78zp+1fwubLgYO5ZklF/eyz4gXFUekfj+WFArE+RLwp24IkuQIhf0U7hB
- s6JZHGqTGB2D40rONOOchZk4GyTLd3fIq555e37fGt3reAn9WfAxqGoLZJdCSDBXXTcU
- 3R9zOxUvuBMjcuEhiHI9dUs+q/qHIT2qzyOQa741ONBVS0aaamQvXLaXPgF1tos2uY3f
- kZOujDyXyhMNtc651mfdJfjoDkeKQFMqIE0BWxIdEfiIBzueqVx51sbY38sZ+mQ4tIBK
- qQPA==
-X-Gm-Message-State: AOJu0YypyKq4SkBPpbp0HlDNo/rZQ+BCsiVJ/2/xFk4I1B5pmWF11tOO
- BUN3F3CQ1XRXGazNZNsjYiKY9QwB4tTPrZZ3lp07UXerIgSAsr5WiEVHvU6Q8NMX9ljQnTi2Re7
- CAw==
-X-Google-Smtp-Source: AGHT+IFV5YOdmt40NQhnw0bUfUCrYmbB6M5kK5WsqKN4csmKUkMcmxrOG9J7DL2iwKHBlKikXJfebA==
-X-Received: by 2002:a92:c241:0:b0:3a0:926a:8d31 with SMTP id
- e9e14a558f8ab-3a3b5fa4d7emr104592905ab.16.1728945154620; 
- Mon, 14 Oct 2024 15:32:34 -0700 (PDT)
-Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
- [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4dbecc4924dsm14847173.153.2024.10.14.15.32.33
+ d=1e100.net; s=20230601; t=1728945792; x=1729550592;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=u3psiFT+neP/OrRNma+9kDxdfc4QTgDA74Vwsy7cCrU=;
+ b=wmWoluvmVPFhenW0rE/YNrdtU4tka4e+HlEFjZxemobVlxcnSS1FJe64PxLyaJ3d/w
+ uem3mK0yz9vldROUrdxkKL3J24HnSOufNXXNwOTXFcSlgWJdACsGrCPHWS9iHH9PmYl6
+ op5hPl3h3EJnyoFyG7q3iZIqnAF2zWW7Dhhw6Bq3pH+fwjtZqRPPDP18A5N7s+4oe5Wl
+ MpSnYOUehcmk/VkzOVJOtVRRrqsFOmrM6n+JXqEW5WqRxL4j0o6C3PSu45OcOV5KBmCU
+ WyOsux2NtcXD6xw9n7K6Q+xBz+r89j/785MsnPbHlS9J0JRhCpAVIHERwCWrtUSjQQ7B
+ OYjQ==
+X-Gm-Message-State: AOJu0Yyk1a7jHKdoASbP9LDxCaeDJQqHzLVv8xrThiFGgozyJ0ZWXuQ6
+ KE0CbMgkIeGA6hvgnklqw1sgcL4lspfdeX8acQoOMZ2Z8NuIXYG7lXI9joikwtY=
+X-Google-Smtp-Source: AGHT+IH/EXvxYYfDLAgetdu8wFT48vIof7NhiS1mAukFE0N54tfuGmgXoa5rKGQgir8rL2RzAkC9IQ==
+X-Received: by 2002:a05:620a:7209:b0:7ac:c359:f132 with SMTP id
+ af79cd13be357-7b11a37a38bmr2123523085a.26.1728945792136; 
+ Mon, 14 Oct 2024 15:43:12 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b136395215sm2521985a.75.2024.10.14.15.43.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Oct 2024 15:32:34 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
- Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Subject: [PATCH v3 20/20] x86: Enable RTC command by default
-Date: Mon, 14 Oct 2024 16:32:12 -0600
-Message-Id: <20241014223212.2212442-21-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241014223212.2212442-1-sjg@chromium.org>
-References: <20241014223212.2212442-1-sjg@chromium.org>
+ Mon, 14 Oct 2024 15:43:11 -0700 (PDT)
+Date: Mon, 14 Oct 2024 16:43:06 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>
+Subject: Re: [PATCH v3 3/3] RFC: CI: Skip building dtc for world builds
+Message-ID: <20241014224306.GG53053@bill-the-cat>
+References: <20240815195746.749042-1-sjg@chromium.org>
+ <20240815195746.749042-4-sjg@chromium.org>
+ <CAFLszThRC=YvhPaiQD2bnvNFsGZZVexa3cx=NZ6PaBEdB-7Z2A@mail.gmail.com>
+ <20241010190110.GV14210@bill-the-cat>
+ <CAFLszTjFeT+OKLrUT1Ck_D15nqxoJcq18LMmWFbJAwQocEvm4A@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="glFSo4oqzsOBqRI1"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTjFeT+OKLrUT1Ck_D15nqxoJcq18LMmWFbJAwQocEvm4A@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,32 +97,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The real-time clock is needed for most X86 systems and it is useful to
-be able to read from it. Enable the rtc command by default.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+--glFSo4oqzsOBqRI1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-(no changes since v2)
+On Mon, Oct 14, 2024 at 01:13:26PM -0600, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Thu, 10 Oct 2024 at 13:01, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Thu, Oct 10, 2024 at 12:50:11PM -0600, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Thu, 15 Aug 2024 at 13:58, Simon Glass <sjg@chromium.org> wrote:
+> > > >
+> > > > This is quite a significant waste of time in the world builds as dt=
+c is
+> > > > built separately for each board. Skip this to speed up the builds.
+> > > >
+> > > > Unfortunately the newer dtc produces a lot of warnings, which cause=
+s CI
+> > > > to fail. I am not sure what we can do about this.
+> > >
+> > > What do you think about this one?
+> > >
+> > > We could install an older dtc in the container, perhaps?
+> >
+> > Is backporting applying whatever dtc flags we need to ignore problems
+> > that Linux isn't enforcing so difficult? That would then tell us just
+> > how much work it is / isn't to deal with the rest of the dts files (or
+> > poke maintainers to switch to OF_UPSTREAM where the issues are likely
+> > fixed).
+>=20
+> That could work. Shall I give it a try and then we apply this patch if
+> I figure it out?
 
-Changes in v2:
-- Rebase to -next
+Sure, thanks.
 
- cmd/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+--=20
+Tom
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 031a4f5e9bf..48461e70d67 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -2266,6 +2266,7 @@ config CMD_DATE
- config CMD_RTC
- 	bool "rtc"
- 	depends on DM_RTC
-+	default y if X86
- 	help
- 	  Enable the 'rtc' command for low-level access to RTC devices.
- 
--- 
-2.34.1
+--glFSo4oqzsOBqRI1
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcNnncACgkQFHw5/5Y0
+tyxA4Av/azz4L23qaDNAiv/1Y62MjiohCzClud9m1ljPmt3HBBkAwKoWC7B1L3FR
+oPVLesKrgx/fe+0o8gW4QUUuhVhQj9yT88HrSUCF84bO/viXrD4N6MXPxgPUr8kF
+OC/f7W5T+lBGaShXxseUAUlcbhRH7pp1QJPCE2g5UxT+6lWtgl4p0422hd6EuG9P
+u7hGyIlIdNhQXaQ7rjFC3Y3eldZfcJMjg52dGzemVGi+GsgOEzJxpjukcsKjp0Im
+JpEhMBs8CP5ofxodcsXBWWS7vl/oBpnoFshu/uFP/of3bfnVfdn+fE6up+ZVWkiv
+qAei4wIdCbVS63LaJqrZg0ZAAKaJg9XdmW5tu0cZkSUyYAWt9cEmM83Jr7ZPNoKw
+aiIp7zaLMhUZY7MI/qhJfDSBps7AUNoFkUKIfWWf/a2L8mq/tLhBWsw2EHAmR+bA
+0xxYUU7qn3mkVlIY4zk5U4bkMgUYg0DHDsEev55Q+2wjc+qL2UpPJiKfsr1qVCnI
+uzPUoLYe
+=F9xs
+-----END PGP SIGNATURE-----
+
+--glFSo4oqzsOBqRI1--
