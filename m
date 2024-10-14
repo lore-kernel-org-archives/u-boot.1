@@ -4,74 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 058ECD16271
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 14:02:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68CC3D16271
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 14:02:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5577288FC8;
-	Mon, 14 Oct 2024 16:02:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DFE45890F2;
+	Mon, 14 Oct 2024 16:02:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mklhRQPg";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mPrBnqS4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A4C2B89063; Mon, 14 Oct 2024 16:01:58 +0200 (CEST)
-Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
- [IPv6:2607:f8b0:4864:20::82e])
+ id A14F3890F4; Mon, 14 Oct 2024 16:02:27 +0200 (CEST)
+Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
+ [IPv6:2607:f8b0:4864:20::830])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4042D88970
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 16:01:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 455EF88CB9
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 16:02:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-460371bfda4so36136271cf.2
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 07:01:56 -0700 (PDT)
+Received: by mail-qt1-x830.google.com with SMTP id
+ d75a77b69052e-4603aced3a5so36046041cf.1
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 07:02:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1728914515; x=1729519315; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1728914544; x=1729519344; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=lCo7waPttqAA5QgwICKrZZc3YKLjD6E/v2X70dp+QZU=;
- b=mklhRQPgwlFP/I+ums5ZhX7d5FoXNzj9kJ076mrWNtqmt002EDw+fyLvl/muMNWQOJ
- +ssMH1mxGvGEynOoJLdyglp2vPDLP3Ik/t+KivuO7gvTbPdFIW0YP7U2a8SQN224WdiW
- SikYYs+xb/8A9+EGfq6nS6TLmuqO758ioDz40=
+ bh=CRg3px5Vm4PCD3AGLY3YI9272buzsF7rb9/f8u0K7ME=;
+ b=mPrBnqS496gnXWxy8rL9VoleuEdRHV1cpvL4uao44DLW6LeNbspo+ru6FNNxw56PKY
+ cRCQGqP0DNgjfGh+Xj1y3NTCTlO+0reszS3rf6pEI9GNPJ5n3jv+F5dmWF2yLbF6r7BR
+ rEj+TnGKAp4ecXjtBQEH+rD3OoAtAmQiCQCw0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728914515; x=1729519315;
+ d=1e100.net; s=20230601; t=1728914544; x=1729519344;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lCo7waPttqAA5QgwICKrZZc3YKLjD6E/v2X70dp+QZU=;
- b=Yl0xQhTa2VKK4Mx6gc5xy9R6xtKHVPMG1qtUHkXDsjCsdbONlb/Z5ZsH+CE6+nZpD9
- GWdAmVTgTkD88Ld+KUZGecLPaqW1UbysbXwz4fwaICMex8o5cE7MvNFz528wo25mwyEl
- xc5laGGMoppFEXwT3bwJT1tM0nq4BrHB4Hrf1KM1QM88BQMm4nWDQOYKkxuS40DlQ6lw
- ApM1Bxzq6r+NaqbaoOtrErrYmLS0qfK57PFDFESfb0tQhJ89L2fjs9nF0QRJjBexJ0bW
- kCRBYH9Etckw9jtXIKdUjCfr+3eX+77eRBPpMgLLUXefNVzoTFPsGGLvNW61Yu5KvrVh
- c13w==
-X-Gm-Message-State: AOJu0YyPsrbvak4i/SIEpupZsHYFZa+zw/5swMXI5Nt93fFuvnFHn9XL
- uVaB5QlsUymrdmq6vChK8psh1CwaxLEkEaLJbyoP+8eDYIwc2z97+JlUKxP7Qn4=
-X-Google-Smtp-Source: AGHT+IH8h1TC+0lmm6hZim51WXLedGpoYMYQUjMNMmff2JeRvp5RRgLOBlKMwjG7lvnjR1+DCtNVZA==
-X-Received: by 2002:a05:6214:5b0d:b0:6cb:6059:92a with SMTP id
- 6a1803df08f44-6cbefffe61cmr179705856d6.10.1728914514997; 
- Mon, 14 Oct 2024 07:01:54 -0700 (PDT)
+ bh=CRg3px5Vm4PCD3AGLY3YI9272buzsF7rb9/f8u0K7ME=;
+ b=vWwbsFQTJpIIxzc7ylowet+gwDyRD1cP84EWzkLaiZPBH/lKc10rpklyR6OMLBUxNn
+ WPRognSGeM10jjjKkQ0YsZzOXOYrCTWg2Jo/t4mFUe1kfYTRPYBFHCUUfiSgQ62Wjb7v
+ EKTDIlIYvt0BZQdmbjBYB0UurXQSWzkZ5W8Eqa5NynqlLrnmiMOIgZb9Zt9Pr6c+Cx7s
+ S/Awa0drDRl39s/k7UscMkuodpCjimvsvvt62oSm9sA8zLfDlH1p++dEv4bbyFgQbRjv
+ 9K5ZvmitZdV12qQuH8f9K42GUpQDWMaY3WuTH2BDfB/B7itLCY80ZP6n92FQ9QP8eZiH
+ s2VQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV96lKHEB9RW1qk0vmAc8nub1kq93jZAMnaxzHatFjBebeY3eu0fSXd8qtelpt7qtqQ9xi5zWU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxo6xJB46H/8nUfyY0p190d1M41KX8W8TcHGZEZLOIUK4wi22Q5
+ c7OQ3Jqto/S0V4xZuhR+mgraQDSFUapWVaof7WBv7OL27rgGP0QEnYELj1rcW0xP48Wq7ToDuU4
+ dp+M=
+X-Google-Smtp-Source: AGHT+IHK+kOTgWX0R2Y0tnK+9I1V3NhCOCv5wJELJdzKyItVQ+PvA8TIYd/VMKaPMUg7NfRm9GfOBw==
+X-Received: by 2002:ac8:5708:0:b0:454:f384:41e7 with SMTP id
+ d75a77b69052e-4604bb94ef0mr163044181cf.8.1728914543576; 
+ Mon, 14 Oct 2024 07:02:23 -0700 (PDT)
 Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6cbe8679a66sm45307596d6.141.2024.10.14.07.01.53
+ d75a77b69052e-4604288204csm44827061cf.61.2024.10.14.07.02.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Oct 2024 07:01:54 -0700 (PDT)
-Date: Mon, 14 Oct 2024 08:01:51 -0600
+ Mon, 14 Oct 2024 07:02:23 -0700 (PDT)
+Date: Mon, 14 Oct 2024 08:02:19 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PULL] u-boot-sh/master
-Message-ID: <20241014140151.GF53053@bill-the-cat>
-References: <20241013225123.427552-1-marek.vasut+renesas@mailbox.org>
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Chris Morgan <macromorgan@hotmail.com>, u-boot@lists.denx.de,
+ linux-sunxi@lists.linux.dev
+Subject: Re: Pull request: u-boot-sunxi/master for 2025.01
+Message-ID: <20241014140219.GG53053@bill-the-cat>
+References: <20241013234531.9990-1-andre.przywara@arm.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="/BDhUs9mBwmISYBC"
+ protocol="application/pgp-signature"; boundary="44WtwmuqlpcUvbQr"
 Content-Disposition: inline
-In-Reply-To: <20241013225123.427552-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20241013234531.9990-1-andre.przywara@arm.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,27 +95,56 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---/BDhUs9mBwmISYBC
+--44WtwmuqlpcUvbQr
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 14, 2024 at 12:51:07AM +0200, Marek Vasut wrote:
+On Mon, Oct 14, 2024 at 12:45:31AM +0100, Andre Przywara wrote:
 
-> The following changes since commit 47e544f576699ca4630e20448db6a051789606=
-97:
+> Hi Tom,
 >=20
->   Merge patch series "Tidy up use of 'SPL' and CONFIG_SPL_BUILD" (2024-10=
--11 12:23:25 -0600)
+> please pull the first sunxi changes for this cycle:
+>=20
+> This switches all boards with the Allwinner H616/H618/H313/H700 SoCs over=
+ to
+> use OF_UPSTREAM. We are doing it for this SoC family only since the DTs
+> between the U-Boot and the kernel repo are exactly identical, whereas oth=
+er
+> families have one compatibility fix in U-Boot to allow booting older kern=
+els.
+> Other will follow if this plays out well.
+>=20
+> The biggest chunk otherwise is adding support for an Anbernic game consol=
+e,
+> using the H700 SoC. For that we need to enhance the DRAM support code, and
+> pick two DT commits from the mainline kernel/DT rebasing repo, followed
+> by the defconfig patch.
+>=20
+> On top of that two small fixes for the old Allwinner A80.
+>=20
+> Gitlab CI passed, and I booted that briefly on some boards, including an
+> H616 and an H618 one (with LPDDR4).
+>=20
+> Thanks,
+> Andre
+>=20
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> The following changes since commit f8efc68b30e29360f7a419fe4968432179d736=
+8b:
+>=20
+>   Merge patch series "spi-nor: Add parallel and stacked memories support"=
+ (2024-10-09 09:02:22 -0600)
 >=20
 > are available in the Git repository at:
 >=20
->   https://source.denx.de/u-boot/custodians/u-boot-sh.git master
+>   https://source.denx.de/u-boot/custodians/u-boot-sunxi.git master
 >=20
-> for you to fetch changes up to edcb15c583bf259bc27db1e7073fc79784be8bf7:
+> for you to fetch changes up to 2f7ab49644ed38b6e3fe5eb6cd3f7e3f683fc6a7:
 >=20
->   clk: renesas: Synchronize R-Car R8A779H0 V4M clock tables with Linux 6.=
-10.9 (2024-10-13 23:21:26 +0200)
+>   sunxi: Add support for Anbernic RG35XX-2024 (2024-10-10 00:43:51 +0100)
 >=20
 
 Applied to u-boot/master, thanks!
@@ -118,22 +152,22 @@ Applied to u-boot/master, thanks!
 --=20
 Tom
 
---/BDhUs9mBwmISYBC
+--44WtwmuqlpcUvbQr
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcNJEgACgkQFHw5/5Y0
-tyyhowv9HJzO9FT0vPw0CVYWzcLq7Uebcg26otEqscYE9PTORH7QfJHrj5yawoSX
-C9F2C6iHbAXV2tl6tNft9nuxme3/kZTWdlUIQA8VKzXsZxGDKOnZShJu2Kxpm29t
-bvRYqtBBkCjzfl+vnydJI3/ZvmkdcPRv78+cgbuNz8HRIARDztVNuY8xxZ9i6gqu
-F2egVQvahsBalevXNSw+dxsr5R0/8JOm9x0F93JQjfDoSUAilcvL7ik+HO9fAY5r
-jAPjBsoVvX/RqR6Xce9/GQBMnvOVfn8BgxbIw9BR1Wtynzje0oMwy1lLV7pLVLSV
-TlVQEsKfN8dyVNH/68tdJWm+x5ge4HTwe5pbEGSSnwEC2stzfGRuys+s3WQZYA1g
-M4K1x/t9k/ya9vFl+a7nnIdUozr7EJfcWD8EMwfAyq3fbA+8iprCzB3TYjB2CtqY
-la02Nwmr5Zm66/YLt0BqIY6KYjtHRlymnMplA7UfMfz1NGXMsjeZFnwj1Mdt6GzF
-b18UtJJQ
-=AcSR
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcNJGsACgkQFHw5/5Y0
+tywZ0wv8DtDEROcCim1F8RhF11fDbOgU2pBqr7nLU/2iy7qGrEn0EWwSglkcdF1c
+MnrVGwAro5X9OQ5VNyUdVcXH8cf+8X/R8NiJfaaLvuU81fSYfBwbmVMLNsXPi/w+
+8lPQPwPS2teCDqKEq+zOLYJE+/38myNNt77SRzx9Hf/XZzCvNfMTKTP9XfPkICDa
+mDmsf/It68C81RpS/hwaCxXrSlKEECjt6fh5R9CO4AJmnnsprqANQxoTP0+S2sJ1
+zVfVaKwXb1YbZ0oA69zWsmOBag0kjQPHZ2yFEnbedyP5/StyCgnf3c8z5Aq0RlJk
+srGKpK0y/nfyC9C1r2co+gMbB8U0E330P0/pvCQs2xwKMQtdsP7xuskl9VXGCoQU
+ZSeJLf/1KPfH8jFVdPvfY0KU43r5AijjljrnymVRDxDB1lS9rfoDAHiDeUzo6Dov
+4HO1HXH2Bss23p5eRxLitdJvZWAl5GAVOmq1lgCYbh/cSkhEpbx83huUOnZhCTQZ
+Va0ceY12
+=hXGb
 -----END PGP SIGNATURE-----
 
---/BDhUs9mBwmISYBC--
+--44WtwmuqlpcUvbQr--
