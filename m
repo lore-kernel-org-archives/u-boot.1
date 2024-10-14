@@ -4,88 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A38DD18148
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 21:05:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA2F4D18151
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 21:06:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF26C890E4;
-	Mon, 14 Oct 2024 23:05:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5F85C89166;
+	Mon, 14 Oct 2024 23:06:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fPnW088K";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="ErNKvg+t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A468E8907F; Mon, 14 Oct 2024 23:05:31 +0200 (CEST)
-Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
- [IPv6:2607:f8b0:4864:20::f2e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 183EF8907F; Mon, 14 Oct 2024 23:06:33 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 868DE89143
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 23:05:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C0E9A89179
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 23:06:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2e.google.com with SMTP id
- 6a1803df08f44-6cbd1a4217dso50345166d6.2
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 14:05:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1728939926; x=1729544726; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=aHx5Qp46dMY6yIs7hbjLv+pFZv7NLN7J8KE4HZSWRg8=;
- b=fPnW088KSsENCyF1ACHbEctSeG+VAwv3o7r3Ul/KcE1HeS4vUd5RHIPJc53dvjPvJ8
- Smc2poDhVsG/Ol113A1A9qeNd9r4TcJmz8dBIvL+RNsKSeBbV8H0VnlK5RTcq22/WJ1M
- YNMe3DNsWhkziRmekcTQMB0IrJejeKJW025ro=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728939926; x=1729544726;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=aHx5Qp46dMY6yIs7hbjLv+pFZv7NLN7J8KE4HZSWRg8=;
- b=jOnPsOgRENP9yj3wkXh5ULc059Kti1OeGlk6nlADytTqQO1HeD543cmRov6piPbF/D
- UjzuCtVjlta7pZ75eP7ErKDyi12JeWq3GbKXTYHhg7Kbkl3b6lCswXKIpQZfE/6Mv4cF
- neVeQsNWdD2mczmppC+BiOkuy7AtG6R71xM8AlyT6AqlW89DzdyVnbcMOAOEbcX39So3
- NtrZ9sqviWuW33Jqn2RbZJxdK01mlIM2yNTpGtEP3e6VPbUS0afCtnYG60a/OMAv/cvh
- cwqLEC7PFsAnWzITNOI/TLHc7fnPhsUBhBBYwZyf7v5Ui6zENJpN2YP+GODL+3xJox1f
- Fpjg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUsRNVd1mcDvqRtfIAaEEIPW1e20AmjOEojGafVrkC7b87Ln4izicAHyRmAvCVFAq37KozXGtE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxEzKRUdyLXjeYUO3yNa0rDdTiS4Aqxyjmp61syrUamEkyuJ3gL
- tiQ+nuVIzxwrbm9L7kT7PCi7f/mNr+Xo9H/67jTghVelT8mHiE0XavI218i049Y=
-X-Google-Smtp-Source: AGHT+IF1FmHiPeErJpTcgC/luB7Qxe+t0bFuGuqcb88EeeEbXB7I8i+27RAFRCK5NsDh275aCf5SOA==
-X-Received: by 2002:a05:6214:3b83:b0:6c5:1fe5:f84c with SMTP id
- 6a1803df08f44-6cbf9d08a54mr121865486d6.20.1728939926345; 
- Mon, 14 Oct 2024 14:05:26 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6cbe8608c0esm49998646d6.85.2024.10.14.14.05.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Oct 2024 14:05:24 -0700 (PDT)
-Date: Mon, 14 Oct 2024 15:05:20 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de, Sumit Garg <sumit.garg@linaro.org>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Jonas Karlman <jonas@kwiboo.se>,
- Lothar Rubusch <l.rubusch@gmail.com>, Michal Simek <michal.simek@amd.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Stefano Babic <sbabic@denx.de>, u-boot@dh-electronics.com
-Subject: Re: [PATCH v2] dts: Deduplicate dtbs target
-Message-ID: <20241014210520.GV53053@bill-the-cat>
-References: <20241004001118.322531-1-marex@denx.de>
- <CAFLszTiMNeU__kzyRR-3qKPUUKaXEqaypf8YYQgxL83E-2gt3g@mail.gmail.com>
- <CAOMZO5Cp3TUdMFYfBSm-k49mS_xaOtvpGwqoQH+eCjC5eCfpbw@mail.gmail.com>
+ spf=pass smtp.mailfrom=ddrokosov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 1788E10000A;
+ Tue, 15 Oct 2024 00:06:29 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 1788E10000A
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1728939989;
+ bh=aDfg3I4ACE5005k+hd+okDWxQvCtOeH6HEMOMUaWb3U=;
+ h=From:Subject:Date:Message-ID:MIME-Version:Content-Type:To:From;
+ b=ErNKvg+tDOFcpVOiD5FRYIMTMfngGa2yrHXDCjOtBWFDx5U4/mZa78cgOyfqWpIZp
+ Ggj9o3+k8RyxjCwfYbSAd0fu7OLi+P+bhI7AT2X/DIlVm5jlINyvSvfPUUEUtCRQ1J
+ bNgPaM2iUs+PDY4PaXgNSFxlMS9+3V2WM8E/UuLfZLKr89EZ2benJTPVecwIAYI2Q8
+ 5VOlIUm2W8VXUx14a7fxlGIW2kzDwkHxSpq7doeATeTJUBsO8isIVQj0gd65ZoTeKy
+ XWRWO2ZP3eABrOsXsYaE9olWLaJ70sGRKR+7+ZeQToVnd+NnMsOfLgh5xlU2SeXBfh
+ q7bZXKkJokEAw==
+Received: from smtp.sberdevices.ru (unknown [172.16.192.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Tue, 15 Oct 2024 00:06:28 +0300 (MSK)
+From: Dmitry Rokosov <ddrokosov@salutedevices.com>
+Subject: [PATCH v4 0/5] android_ab: introduce bcb ab_dump command and
+ provide several bcb fixes
+Date: Tue, 15 Oct 2024 00:06:12 +0300
+Message-ID: <20241015-android_ab_master-v4-0-a91cca9513c4@salutedevices.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="AP9KnRae/m+GIDEM"
-Content-Disposition: inline
-In-Reply-To: <CAOMZO5Cp3TUdMFYfBSm-k49mS_xaOtvpGwqoQH+eCjC5eCfpbw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAMSHDWcC/32OUQ6CMBBEr0L225rSVgW/vIchZG0X2USo6SLRE
+ O5u5QB+vknmzSwglJgEzsUCiWYWjmMGtyvA9zjeSXHIDEYbV2pdKRxDihxavLUDykRJheoYTqW
+ vbI0EufdM1PF7c16bzD3LFNNnm5jtL/1nm63SqjO18e6A1pK7CD5eE4V8zpPsfRygWdf1C7E6R
+ om6AAAA
+X-Change-ID: 20241008-android_ab_master-d86d71c839ae
+To: Igor Opaniuk <igor.opaniuk@gmail.com>, Mattijs Korpershoek
+ <mkorpershoek@baylibre.com>, Sam Protsenko <semen.protsenko@linaro.org>, "Tom
+ Rini" <trini@konsulko.com>, "Andrew F. Davis" <afd@ti.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>, Mario Six
+ <mario.six@gdsys.cc>
+CC: <u-boot@lists.denx.de>, <u-boot-amlogic@groups.io>, <rockosov@gmail.com>, 
+ <kernel@salutedevices.com>, Dmitry Rokosov <ddrokosov@salutedevices.com>, 
+ Guillaume La Roque <glaroque@baylibre.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1728939988; l=3615;
+ i=ddrokosov@salutedevices.com; s=20241008; h=from:subject:message-id;
+ bh=0B7+C3ExTSZsloaUzotNBQKBj26Vd+43bDvQOFPjeNQ=;
+ b=6TnLFYtZ+rz5057l7FlbyL09EKONfzAVHoHkqSsAe4mWLAQg5AmEmGXPJL9eYyn8SX0pxRng/
+ oiHfnmplpNPBO11bLdxjZbOxyCIsmsy98wAmnkFs/pweEUz4754qpEo
+X-Developer-Key: i=ddrokosov@salutedevices.com; a=ed25519;
+ pk=J6t8z4aofCVwzR1Xs7royc+IGyQcL0cTby92cz3i8B4=
+X-Originating-IP: [172.28.129.94]
+X-ClientProxiedBy: p-i-exch-a-m2.sberdevices.ru (172.24.196.120) To
+ p-i-exch-a-m1.sberdevices.ru (172.24.196.116)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 188429 [Oct 14 2024]
+X-KSMG-AntiSpam-Version: 6.1.0.4
+X-KSMG-AntiSpam-Envelope-From: ddrokosov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 39 0.3.39
+ e168d0b3ce73b485ab2648dd465313add1404cce, {Tracking_uf_ne_domains},
+ {Tracking_from_domain_doesnt_match_to}, lore.kernel.org:7.1.1;
+ 127.0.0.199:7.1.2; smtp.sberdevices.ru:5.0.1,7.1.1; salutedevices.com:7.1.1;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1, FromAlignment: s
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean, bases: 2024/10/14 18:42:00
+X-KSMG-LinksScanning: Clean, bases: 2024/10/14 18:42:00
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2024/10/14 19:21:00 #26753819
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,55 +113,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The patch series include changes:
+    - move ab_select_slot() documentation to @ notation
+    - move ab_select command to bcb subcommands
+    - introduce the ab_dump command to print the content of the BCB
+      block; it's useful for debugging A/B logic on supported boards
+    - fix the slot suffix format in the ABC block to align with official
+      Android BCB specifications
+    - add a test for the ab_dump command to verify the accuracy of each
+      field within the ABC data displayed, it's also useful for testing
+      slot_suffix problem code paths
 
---AP9KnRae/m+GIDEM
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Changes v3 since v2 at [2]:
+    - return "Legend" block for bcb command
+    - additionally, verify the CONFIG_ANDROID_AB configuration alongside
+      CONFIG_CMD_BCB to ensure that the A/B scheme is used for the
+      designated board.
 
-On Mon, Oct 14, 2024 at 04:08:23PM -0300, Fabio Estevam wrote:
+Changes v2 since v1 at [1]:
+    - move ab_select_slot() documentation to @ notation
+    - move ab_select command to bcb subcommands per Simon and Mattijs
+      suggestions
+    - redesign ab_dump as bcb subcommand
+    - use spaces instead of tabs in the ab_dump command output
+    - print hex values in the lowercase
+    - add RvB tags
 
-> Hi Tom,
->=20
-> On Mon, Oct 7, 2024 at 12:23=E2=80=AFPM Simon Glass <sjg@chromium.org> wr=
-ote:
-> >
-> > On Thu, 3 Oct 2024 at 18:11, Marek Vasut <marex@denx.de> wrote:
-> > >
-> > > The dtbs: target is almost identical in all architecture Makefiles.
-> > > All architecture Makefiles include scripts/Makefile.dts . Deduplicate
-> > > the dtbs: target into scripts/Makefile.dts . No functional change.
-> > >
-> > > Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
-> > > Signed-off-by: Marek Vasut <marex@denx.de>
->=20
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
->=20
-> I have some patches in my queue that depend on this one.
->=20
-> Could you apply it if you are happy with it?
+Links:
+    [1] https://lore.kernel.org/all/20240725194716.32232-1-ddrokosov@salutedevices.com/
+    [2] https://lore.kernel.org/all/20240911214945.15873-1-ddrokosov@salutedevices.com/
 
-Yes, I'll pick it up soon.
+Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
+---
+Changes in v4:
+- add #ifdefs for CONFIG_ANDROID_AB in cmd/bcb.c to allow the usage of
+  the bcb command without A/B enabled
+- run the savedefconfig command for all defconfigs that include the
+  CMD_BCB configuration
+- resolve merge conflicts with latest master
+- provide additional trailers from the previous version (excluding
+  changed patches)
+- Link to v3: https://lore.kernel.org/r/20241008-android_ab_master-v3-0-f292c45a33e4@salutedevices.com
 
---=20
-Tom
+---
+Dmitry Rokosov (5):
+      include/android_ab: move ab_select_slot() documentation to @ notation
+      treewide: bcb: move ab_select command to bcb subcommands
+      cmd: bcb: change strcmp() usage style in the do_bcb_ab_select()
+      cmd: bcb: introduce 'ab_dump' command to print BCB block content
+      common: android_ab: fix slot suffix for abc block
 
---AP9KnRae/m+GIDEM
-Content-Type: application/pgp-signature; name="signature.asc"
+ MAINTAINERS                               |   1 -
+ boot/android_ab.c                         | 116 ++++++++++++++++++++++++------
+ cmd/Kconfig                               |  14 ----
+ cmd/Makefile                              |   1 -
+ cmd/ab_select.c                           |  66 -----------------
+ cmd/bcb.c                                 | 110 ++++++++++++++++++++++++++++
+ configs/am57xx_evm_defconfig              |   1 -
+ configs/am57xx_hs_evm_defconfig           |   1 -
+ configs/am57xx_hs_evm_usb_defconfig       |   1 -
+ configs/khadas-vim3_android_ab_defconfig  |   1 -
+ configs/khadas-vim3l_android_ab_defconfig |   1 -
+ configs/sandbox64_defconfig               |   2 +
+ configs/sandbox_defconfig                 |   1 -
+ doc/android/ab.rst                        |  12 ++--
+ include/android_ab.h                      |  17 ++++-
+ include/configs/khadas-vim3_android.h     |   2 +-
+ include/configs/khadas-vim3l_android.h    |   2 +-
+ include/configs/meson64_android.h         |   4 +-
+ include/configs/ti_omap5_common.h         |   4 +-
+ test/py/tests/test_android/test_ab.py     |  31 ++++++--
+ 20 files changed, 260 insertions(+), 128 deletions(-)
+---
+base-commit: 5d899fc58c44fe5623e31524da2205d8597a53d1
+change-id: 20241008-android_ab_master-d86d71c839ae
 
------BEGIN PGP SIGNATURE-----
+Best regards,
+-- 
+Dmitry Rokosov <ddrokosov@salutedevices.com>
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcNh5AACgkQFHw5/5Y0
-tyyPgAv9ESmWZ5uP7TuLR73624SCXYYud2cqvRR4PdtemTgcRAihRwVN1JGxBL8q
-FAOIlSgs7B3JnHkxX3QGqSLMhDjpzWHGh2SRXZXlYVv/DIH6D606mQ09cVfKtcZN
-dWfj2qzKTAtk3PxVOguCRK8PhZKrfSaaam4nEsgrHqY0ppehDvSlTOdbnOSL7WvI
-cmQfFGJw7SgmYRkYxIU5U+0hm6BFOl/o0iqqzO5ZFopiY3oB9wAk/v5SGvG3KiTB
-niQAGLbWU0osZgyUPu+AMx+1kG5bx+F8lJW+/RrB5kJjO6ej5u4OGYQ7tq7poRD1
-XgaiFSiviNz1VjuYetTZ45RvHoKAOwtSN0LTiVYSQwjktvklc7zW2E1IwB4fxtxA
-ONqbAdZgpqjMamUN5I2uTx/JstLmbSXrbTCAPub1BCMuXSI9o7PnScaJjEY1DjHI
-RBV1SreF1+SFoH2XKjxLYawz0ahO6ehuaZDMIIgU5PpdwyofNxWbzKPlJ3drWWru
-+2mTFsTq
-=nbsr
------END PGP SIGNATURE-----
-
---AP9KnRae/m+GIDEM--
