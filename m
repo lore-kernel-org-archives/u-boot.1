@@ -4,98 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F2CBCF259D
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 07:00:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C05FACF259D
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 07:00:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7DD388E3C;
-	Mon, 14 Oct 2024 09:00:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5CA8D88FC8;
+	Mon, 14 Oct 2024 09:00:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ABNxryB+";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="jCchjO5L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D39988EF7; Mon, 14 Oct 2024 09:00:33 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9F71A88FDA; Mon, 14 Oct 2024 09:00:47 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 54D5087F7D
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 09:00:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C87E88FB9
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 09:00:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-43124843b04so16916945e9.2
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 00:00:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728889231; x=1729494031; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ZxSHMTDDGpjc9iqbCSzfy8IvVbCcEOA3UUkaVHQfFMo=;
- b=ABNxryB+qby6xO82tfdWFAp1ASDh2EPoeSPVB4eUPM8bKunT3mmptSHDZ4o2t6n44/
- eKQQGFzpe7yXBHVd4fMsV/lXBdHIYFmYjZ2zBuERm4HHZ9lHR/m8rnQJB44PyabPIBZZ
- He440L63It71plvH42E0yMcvVgsWB8mc/N8LhbUAzI4y6OWPpjlUKnvtr0uQIO5QpAxr
- DC0ONgqtxatx4fUD6s+h82ed1RZ/YPdnqtJ16YDOr64IB2pc9Vzs93FMvkTBRapHK3Ef
- 2XobtN3353MREYY/rD16qGzNWYJGKfxcsnNMvxF3O5qwfWacMpa9sEIew7X48lX8ywT8
- VqQw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728889231; x=1729494031;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ZxSHMTDDGpjc9iqbCSzfy8IvVbCcEOA3UUkaVHQfFMo=;
- b=LtH+jZYeeaSwH+QLkx/5EvrR1DSoDMBbQu7nrEJNKCufFSYkoEV0sNaGV9E/PsBxH1
- 4fRBBiAXmHLAK/jtGPrUjuXQ2weFGDf9AI8BZduIHdC2XcHJu3UzCylZhgSdBTFxSdsK
- purNJOWyn+s4EEx7teQKYvi+0RiZqeWCRIjN8nHFJMhQnyMeE+JassINKJvfqFxhGczz
- 2UN3h+RMtC9h9fkBCQBN4wUQ6NzKzX838FgnTvkOtcm3X+/tg1QM/PbhMqosUtQEFqTa
- hz9YVSWxSyIrIytXLWcy+bAQjltIeQOm3MCSHIs63R7gqczWhG9iRIRyWChzvKawwivo
- C05g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXqWbC17F4Bh3oS2kRYwUqsXYMkbgGW4ULFN2NSkq98JyF+2bKCIdVA6EP/H3prUlgxfGH0yHc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzo/zU7xGRaxiistZoqKZlguetEyROkUWMV6FvPydbreb7qSMdA
- NdKsvwv10KU220CK1WOkDe6LuK3lwwJ4vr1ZT4jman8PmsEDkNd3xI8dGp0rcZ4=
-X-Google-Smtp-Source: AGHT+IFMxbez5rBg3omEyKl3uzGiVe8ZME0hP6jHLO5OnH1DNGXXGYDo2LJWKDTw4AZPm5VmtvJipg==
-X-Received: by 2002:a05:600c:c0d:b0:42c:b80e:5e50 with SMTP id
- 5b1f17b1804b1-4311ddffb8dmr89357465e9.0.1728889230737; 
- Mon, 14 Oct 2024 00:00:30 -0700 (PDT)
-Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:8261:5fff:fe11:bdda])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d4b6bd382sm10554540f8f.43.2024.10.14.00.00.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Oct 2024 00:00:30 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Mon, 14 Oct 2024 09:00:26 +0200
-Subject: [PATCH] qcom_defconfig: enable UFS Qualcomm controller and PHY drivers
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1728889244; x=1729494044; i=xypron.glpk@gmx.de;
+ bh=mYhEdNBaGKC204I8jZBZZYKxSN2SOvUzdFiOV60e6M0=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
+ Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=jCchjO5L66hs5cUukd0pPi0ZfmfkYUzC6BmzN185kcImtKbXCEQ+wKK162wkOS4O
+ fd7wjF/g7BlpYTicEJQCUokMpKmIMuVcOeVY2JuCMhTa3BTudLWQTs4sbzzEAFSaE
+ MXttkKPUMTjsZZlT39OfCZTACLYG3nzJWFuixvCOcb1kWxU15A8wuE96fuRwLOebJ
+ Qp844dYs5tWAfHvCFsrWe3w4O2h/Bj69IFYxv2nfNflg5W9s7+AgnmNDh9VIjs43B
+ xr9NoByimcSPenv4TN7RC42ZgtiiwySTL2fQ5OUmcgy27vxGkFFeLKx63AdbzdrpG
+ cTChl4b4eTKGg0BUDw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([46.114.111.177]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MZCbB-1tVIU62cSX-00S7DA; Mon, 14
+ Oct 2024 09:00:44 +0200
+Date: Mon, 14 Oct 2024 09:00:40 +0200
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
+CC: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH v6 12/12] test: efi: boot: Add a test for the efi bootmeth
+User-Agent: K-9 Mail for Android
+In-Reply-To: <20241014035122.GE53053@bill-the-cat>
+References: <20240926220226.1265965-9-sjg@chromium.org>
+ <20240926220226.1265965-13-sjg@chromium.org>
+ <20241011223227.GA630742@bill-the-cat>
+ <CAFLszTgoxND_qi8WzdgC8-mQLf0e14Mt=KgXy=bqWkqo4svG9Q@mail.gmail.com>
+ <20241014035122.GE53053@bill-the-cat>
+Message-ID: <A7089CFC-AD83-4F62-B477-17D65B066A4B@gmx.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20241014-topic-ufs-qcom-config-v1-1-b33cf11b6adb@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAInBDGcC/x3MTQ5AMBBA4avIrE3Sip9wFbFgTGsWWlpEIu6us
- fwW7z0QOQhH6LIHAl8SxbsEnWdAy+gso8zJUKii1EqXePhNCE8TcSe/InlnxGKr64q54bmdCFK
- 7BTZy/99+eN8PzSV14mcAAAA=
-To: Caleb Connolly <caleb.connolly@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, 
- Neil Armstrong <neil.armstrong@linaro.org>
-X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1030;
- i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=XmAU6GSv96qkEuqcvCjXUMzFBl07fM9n2bR0G3LnN8c=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBnDMGNDkVgFAJqFhR4dMB1ed7LhJf6ubIAnLvToHdh
- OzvrZ4qJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZwzBjQAKCRB33NvayMhJ0UROD/
- 9dZwR+c+xDJ4gpPr0fgqQEB+3lg1zrcQ99YSL5tJ+PSa/gjorZuNP6hqRB02aE4T2LGzMqSgsDF5ub
- odGLdrJEH0uLPRjGnm6ToOnnLMuZOyCMH3Vi9Te8jV4uTSkOaXd4RCZ/F7Q7bScV0O3RrgH0Xi1GtE
- Vsf6o4QjqmM29Vv/2bW8NrfTnOnc5f1AMqBf0q8u9kHdFbrXrv2JMDgcE3BD5TwAPPy6BMVmzcWPtm
- WBz0WNL1fNxrjknrUiQCfv7Kbzj+Qk0eBVjr+Bst1D7BXulElxlSFL2duiuB8sjAWxbAa0r3is0Dpv
- jZykYI2LifkKkz8ZG2dXkOHocFJ2H4SFFVkIYSWrT8dXrCrHjaBPL/7Ff7X+71VhVn50yYK9ChbBvH
- wOEG0NmGVDZ+Pz94uibnI7KDg364Ht0zIDMfXEM75TO+V6hDp4HoA//owwdVObC1akUkn6lJfB3NYg
- fZM0aU9s3iuZXywYgm9cvQTet2PGqSjtJ+B7kXGQwzk6m7TPUx4HK+jOBeAcwIn0obURR2kJ1VM5Gv
- pjhl/zu+wPFX03l7jxlWqRLntpQopOKoRKZeL9Y7NA4A7uEN0e5c8IlzDcH90UVPnAW9noAtdF24KS
- BlKMRCmPrrG/oFXjBDSMdJJyWbmO8/h3akbRDo4DR8qYCz0jxxidqZftFKxg==
-X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
- fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:JqAgN/a+oq02IEo7QBdz6UOL4wCgu/m8QXLijkqCbzHpjO/YpCA
+ prFnX6WHRp4eLHCw1nMpJgSPWe4zkIsRpy1rfwiwgwCVLioJU+IVBa/XUu6rO1px640u2M4
+ vn5KZyFw37+vBGAAtYtCeuL9m5qJn/grtmhrvMj7gMxjGZb/ddt+PKe6Wpmwd4hKeRQ0mat
+ iLyRNZYm6pn8JJSn03AYQ==
+UI-OutboundReport: notjunk:1;M01:P0:kTJpaTJFjFI=;oq+uZD67dh7oN0jreTAqp7CxkT7
+ ZfRyPjLTNvm7+ylxD6AT4X5KqCOUT+XNFXK1pQtz452Ca2Hjzvh1ItmVigZ9hfFnq4COiWFYQ
+ RbdRGYXgHGQnQlHsN9KNZsZwH6sHQrTv+TUnLjrfNSqANb8H6lSZocV2+yEDuSG4Yqv/bo1pG
+ sy/HShSBDRiidWYh/GPX4MbuvwZf3dYMNS8zjoPcSmNqHHjEIwYt0sH6Uvqcds6zBpGsZE7F9
+ 4P48J0R1wFJA7d4+R7dtxRbvHLGSwRn1oeYaDjakvDw17m9SNXyLcqCOJvQMTry6T2MMgudF8
+ Af8q05qZFgVarOnRNj1ekdEboiWsQn+f7Ot07RMdILXH6+oqAv9GMa8dczaAgxVzIY1wrjr6f
+ ylhpE+G6Z/cUjuuqVixom7LNBka61KKFvMVloOU3dy5TSlKVHT5FoSstfY7i07N/XR5Fi3h6B
+ m2I0UjfyBu9H0RV2PadQyP0Z/OyRTTLv/1POqUFdF2iz1vI0KIaza4Zffi1gVMnzavObaAT00
+ y0VEmD7EUwwSVCsu8Bp/tCV9ZYDBmYOIPI3hSnpO1Y2LZcRQDSsoRV0NJ5vDz8F2vJ1FfBj7u
+ Y+sMhPsBiA+RARxVdTdsMmxE2tNpL88gXULrEXo8HtY2wYU4C4kKNWzhFjprQXDokgwcDPEL6
+ r9pZggtsnNJqILePZ9F/0n5SAc6IPuxllQTHBJIRlnPB2R+wOh2/u/Ndal+q6oVrBp7YIdI+g
+ 9fqG5AKdbkhyE4YoQes+zIbdlvrxEjHQgK9bXbC2Hy9g+0MqwOB8xRuSsuLqZuhxAl+9S7XrZ
+ LI8A/4K3BTTgBgNGPW/pAm3w==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,40 +93,185 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now the Qualcomm controller and PHY drivers were accepted,
-enable then in the qcom_defconfig file.
 
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
----
- configs/qcom_defconfig | 2 ++
- 1 file changed, 2 insertions(+)
 
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index ea0dd3e5801..def171150b1 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -77,6 +77,7 @@ CONFIG_DWC_ETH_QOS=y
- CONFIG_DWC_ETH_QOS_QCOM=y
- CONFIG_RGMII=y
- CONFIG_PHY=y
-+CONFIG_PHY_QCOM_QMP_UFS=y
- CONFIG_PHY_QCOM_QUSB2=y
- CONFIG_PHY_QCOM_USB_SNPS_FEMTO_V2=y
- CONFIG_PHY_QCOM_SNPS_EUSB2=y
-@@ -114,6 +115,7 @@ CONFIG_USB_GADGET=y
- CONFIG_USB_GADGET_DOWNLOAD=y
- CONFIG_USB_FUNCTION_MASS_STORAGE=y
- CONFIG_UFS=y
-+CONFIG_QCOM_UFS=y
- CONFIG_VIDEO=y
- # CONFIG_VIDEO_FONT_8X16 is not set
- CONFIG_VIDEO_FONT_16X32=y
+Am 14=2E Oktober 2024 05:51:22 MESZ schrieb Tom Rini <trini@konsulko=2Ecom=
+>:
+>On Sun, Oct 13, 2024 at 01:33:23PM -0600, Simon Glass wrote:
+>> Hi Tom,
+>>=20
+>> On Fri, 11 Oct 2024 at 16:32, Tom Rini <trini@konsulko=2Ecom> wrote:
+>> >
+>> > On Fri, Sep 27, 2024 at 12:02:23AM +0200, Simon Glass wrote:
+>> >
+>> > > Add a simple test of booting with the EFI bootmeth, which runs the =
+app
+>> > > and checks that it can call 'exit boot-services' (to check that all=
+ the
+>> > > device-removal code doesn't break anything) and then exit back to
+>> > > U-Boot=2E
+>> > >
+>> > > This uses a disk image containing the testapp, ready for execution =
+by
+>> > > sandbox when needed=2E
+>> > >
+>> > > Signed-off-by: Simon Glass <sjg@chromium=2Eorg>
+>> >
+>> > So lets go to the problem point=2E What asserts here fail due to ANSI
+>> > escape codes being in the output and needing to be filtered out?
+>> >
+>> > [snip]
+>> > > diff --git a/test/boot/bootflow=2Ec b/test/boot/bootflow=2Ec
+>> > > index e05103188b4=2E=2Eda2ee1ab345 100644
+>> > > --- a/test/boot/bootflow=2Ec
+>> > > +++ b/test/boot/bootflow=2Ec
+>> > > @@ -13,6 +13,7 @@
+>> > >  #include <cli=2Eh>
+>> > >  #include <dm=2Eh>
+>> > >  #include <efi_default_filename=2Eh>
+>> > > +#include <efi_loader=2Eh>
+>> > >  #include <expo=2Eh>
+>> > >  #ifdef CONFIG_SANDBOX
+>> > >  #include <asm/test=2Eh>
+>> > > @@ -31,6 +32,9 @@ extern U_BOOT_DRIVER(bootmeth_android);
+>> > >  extern U_BOOT_DRIVER(bootmeth_cros);
+>> > >  extern U_BOOT_DRIVER(bootmeth_2script);
+>> > >
+>> > > +/* Use this as the vendor for EFI to tell the app to exit boot ser=
+vices */
+>> > > +static u16 __efi_runtime_data test_vendor[] =3D u"U-Boot testing";
+>> > > +
+>> > >  static int inject_response(struct unit_test_state *uts)
+>> > >  {
+>> > >       /*
+>> > > @@ -1205,3 +1209,62 @@ static int bootflow_android(struct unit_test=
+_state *uts)
+>> > >       return 0;
+>> > >  }
+>> > >  BOOTSTD_TEST(bootflow_android, UTF_CONSOLE);
+>> > > +
+>> > > +/* Test EFI bootmeth */
+>> > > +static int bootflow_efi(struct unit_test_state *uts)
+>> > > +{
+>> > > +     /* disable ethernet since the hunter will run dhcp */
+>> > > +     test_set_eth_enable(false);
+>> > > +
+>> > > +     /* make USB scan without delays */
+>> > > +     test_set_skip_delays(true);
+>> > > +
+>> > > +     bootstd_reset_usb();
+>> > > +
+>> > > +     /* Avoid outputting ANSI characters which mess with our asser=
+ts */
+>> > > +     efi_console_set_ansi(false);
+>> > > +
+>> > > +     ut_assertok(bootstd_test_drop_bootdev_order(uts));
+>> > > +     ut_assertok(run_command("bootflow scan", 0));
+>> > > +     ut_assert_skip_to_line(
+>> > > +             "Bus usb@1: scanning bus usb@1 for devices=2E=2E=2E 5=
+ USB Device(s) found");
+>> > > +
+>> > > +     ut_assertok(run_command("bootflow list", 0));
+>> > > +
+>> > > +     ut_assert_nextlinen("Showing all");
+>> > > +     ut_assert_nextlinen("Seq");
+>> > > +     ut_assert_nextlinen("---");
+>> > > +     ut_assert_nextlinen("  0  extlinux");
+>> > > +     ut_assert_nextlinen(
+>> > > +             "  1  efi          ready   usb_mass_    1  usb_mass_s=
+torage=2Elun0=2Eboo /EFI/BOOT/BOOTSBOX=2EEFI");
+>> > > +     ut_assert_nextlinen("---");
+>> > > +     ut_assert_skip_to_line("(2 bootflows, 2 valid)");
+>> > > +     ut_assert_console_end();
+>> > > +
+>> > > +     ut_assertok(run_command("bootflow select 1", 0));
+>> > > +     ut_assert_console_end();
+>> > > +
+>> > > +     systab=2Efw_vendor =3D test_vendor;
+>> > > +
+>> > > +     ut_asserteq(1, run_command("bootflow boot", 0));
+>> > > +     ut_assert_nextline(
+>> > > +             "** Booting bootflow 'usb_mass_storage=2Elun0=2Ebootd=
+ev=2Epart_1' with efi");
+>> > > +     if (IS_ENABLED(CONFIG_LOGF_FUNC))
+>> > > +             ut_assert_skip_to_line("       efi_run_image() Bootin=
+g /\\EFI\\BOOT\\BOOTSBOX=2EEFI");
+>> > > +     else
+>> > > +             ut_assert_skip_to_line("Booting /\\EFI\\BOOT\\BOOTSBO=
+X=2EEFI");
+>> > > +
+>> > > +     /* TODO: Why the \r ? */
+>> > > +     ut_assert_nextline("U-Boot test app for EFI_LOADER\r");
+>> > > +     ut_assert_nextline("Exiting boot sevices");
+>> > > +     if (IS_ENABLED(CONFIG_LOGF_FUNC))
+>> > > +             ut_assert_nextline("     do_bootefi_exec() ## Applica=
+tion failed, r =3D 5");
+>> > > +     else
+>> > > +             ut_assert_nextline("## Application failed, r =3D 5");
+>> > > +     ut_assert_nextline("Boot failed (err=3D-22)");
+>> > > +
+>> > > +     ut_assert_console_end();
+>> > > +
+>> > > +     return 0;
+>> > > +}
+>> > > +BOOTSTD_TEST(bootflow_efi, UTF_CONSOLE);
+>>=20
+>> Thanks for taking an interest in this=2E
+>>=20
+>> Nothing at present, as I added ut_assert_skip_to_line() to skip it
+>> all=2E But it really is just wrong=2E=2E=2EI get gibberish showing up i=
+n the
+>> terminal after I run tests! This is what I see with this series:
+>>=20
+>> ** Booting bootflow 'usb_mass_storage=2Elun0=2Ebootdev=2Epart_1' with e=
+fi
+>>  7 [r [999;999H [6n 8No EFI system partition
+>>=20
+>> ^^^ strange output there but I'm not sure if it will come through on em=
+ail
 
----
-base-commit: 580fb5773634c4a01f907a164b2a05961840b4c0
-change-id: 20241014-topic-ufs-qcom-config-9165ee7ed9bc
+It seems you are not providing a video console=2E So the EFI sub-system is=
+ asking the serial console for its size in query_console_serial()=2E
 
-Best regards,
--- 
-Neil Armstrong <neil.armstrong@linaro.org>
+Set CONFIG_VIDEO=3Dy and let vidconsole be your first output device to avo=
+id query_console_serial() being called=2E
 
+Best regards
+
+Heinrich
+
+>>=20
+>> No EFI system partition
+>> Failed to persist EFI variables
+>> No EFI system partition
+>> Failed to persist EFI variables
+>> No EFI system partition
+>> Failed to persist EFI variables
+>> Booting /\EFI\BOOT\BOOTSBOX=2EEFI
+>> U-Boot test app for EFI_LOADER
+>>=20
+>> Exiting boot sevices
+>> ## Application failed, r =3D 5
+>> Boot failed (err=3D-22)
+>> Failures: 0
+>
+>So we're finally making progress I think to see what the problem you're
+>trying to solve is=2E I think the next thing to figure out is if you use
+>picocom or screen or whatever on console, the codes are handled
+>correctly, or no? Specifically, picocom? Next, is this perhaps just
+>another strange artifact of how oddly (and as you've noted before,
+>slowly) pytest consumes the console input? It feels like maybe we're
+>doing several layers of wrong there? Because to be clear, this is not a
+>sandbox problem=2E Looking back at the log I had posted about the watchdo=
+g
+>reset not counting banners correctly I see that same escape sequence,
+>now that I know what I'm looking for/at=2E
+>
+>All of that said, if it's not a pytest-consuming-the-console problem
+>(and it's not a picocom problem, like I was just asking about since the
+>board failure in question was via labgrid-client), maybe it's just a
+>thing to note about making sure tests understand=2E And perhaps document
+>somewhere why it matters (and I'm not saying it doesn't!) that we know
+>what the dimensions of the console are, for EFI, and so that's why we
+>init them when/where we do=2E
+>
