@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A664CFC52C
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 10:13:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3BF7CFC535
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 10:18:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E9A08906A;
-	Mon, 14 Oct 2024 12:13:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3E27E8907D;
+	Mon, 14 Oct 2024 12:18:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uQcVVrb2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pGuBFXfP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D52589082; Mon, 14 Oct 2024 12:13:50 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 3B44889095; Mon, 14 Oct 2024 12:18:54 +0200 (CEST)
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
+ [IPv6:2607:f8b0:4864:20::1034])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F307289041
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 12:13:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9EA3C89041
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 12:18:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5c9709c9b0cso1730580a12.1
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 03:13:46 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-2e2ed2230d8so2023597a91.0
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 03:18:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728900826; x=1729505626; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1728901130; x=1729505930; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=oeQWrnuxneY4Pbb8YbLFLehLvjHu7dmxmyhLXvcPmL4=;
- b=uQcVVrb21MWbNK6vtXG5LtqpfR6mmzTMLGFsLLMXgYI9jhdJGMMKKB4e4yUX/IO0dR
- rD+r1KzUmy3sueA8mP9Hk+3GWvs2JCbB5W3C2VHlYNHaDWmOet5HzBJBCXrKqWecQ0EL
- k+I34cjKYka49LaQ96jxUZaBp5OarleUOvfoemwYiRSnYyZM9HHW9B/pAooVqY2ihSNP
- r91nePd5RzWKGredKS2umTcNyi2l0vsZ7AoqiP2VMz5TSprYjZQN9DERt8Xd7/NunGqC
- NUVWtA1Itc5dRfaBacJLOIqD7XcqwBDtqA0xw0VaU8b2ceoIX+M68Q9qK9+gM0/Z3jBN
- kAaQ==
+ bh=ylOC7EyiSp93xPOaWKRJ26r8HUuw3USwwT0Bu7RcIRM=;
+ b=pGuBFXfPN7hgKDCb6IOO1/kvVDScwkLgM4RyNUMROPP7kem2vN9wE3LZfx+3P5T0NI
+ C2f5H1OX/9X9MWESjFDFPpNWsCMYT5alkGroK4mPMYU/6oLPKrNLP5zPpRw0KeAyktZK
+ 6hGo19GtW1C4364kTMncuRM/WuxOT/bCu3MDPTbvfkabdjuWJ622wJA/xGLIgYIUgCpC
+ d42TzNnwx/tmOXYJ3P9eAwyrChZL6BBM/WEgKUEVB7XM16iUSsftFGSzZjmSV7Rbpb/i
+ 4Yjo23XpcW2yRNU4rvltXYEMmWCn0bsomMGURrzBEtSnpr3kCUo34L/tdObE82MspoEG
+ LMHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728900826; x=1729505626;
+ d=1e100.net; s=20230601; t=1728901130; x=1729505930;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=oeQWrnuxneY4Pbb8YbLFLehLvjHu7dmxmyhLXvcPmL4=;
- b=aJTwf7Ozs8DVJkZDY56/wO2jC8LyeHae5iyk04ZebJZmu0BmAg7Sb+jl1n03Tx6Mti
- vZLWGBHEFBfx742pw4yI1XY/KJQvr9IqeeDtTrTk9R2CTlD2LviUZudJ3sPxu88O3Cjm
- Agg9+jghWqSZAmCB/N5nn0hgBaaUNUzYpCrj6HBFU1Z//MQczyo2Glp1x13RGRVpEDI2
- IwI3/D5i02IisUO5wKADxVio7s8PypxmYWjFMwZk82h61lCOa8xRYM+32wg2C8fs4PZ9
- D6Dd1o1UQ1w8AONo61FTxQLUZgScWZIEbPc0ldakA9N9kMBhtUtH/1ymef5TIO/nRLQF
- JGTA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXtT6HNJ3xJp3AGRVz44zXexMgZVoOl6FgOkJobFgKFHSUfsmAfH+O8pScwewgLonIUmuROya4=@lists.denx.de
-X-Gm-Message-State: AOJu0YzTtbPyFGzH4i1LYkdLgCILt9iOirLYqcaUERL5UMLlSBnof4Np
- JuFKI5qtRHXZiaLlwfqepJBNkyKry4s0JsQrzZaLJ3CadhOWaeKdjwNLn1rDtggQXqFAYS5X3IL
- KoeYGIzfuyHPONU6+L/RzgLrpsX/bh/YVZ1qE7Q==
-X-Google-Smtp-Source: AGHT+IEutWtgIwubSX/oMuVAQCjHAefWPGtNZ1yxMlVQ0niygjMo0tknVN9LnunLSO5qus1UTphFk5ZCNChMUzgJws8=
-X-Received: by 2002:a05:6402:2749:b0:5c2:439d:90d4 with SMTP id
- 4fb4d7f45d1cf-5c948d76b4amr6906155a12.30.1728900826259; Mon, 14 Oct 2024
- 03:13:46 -0700 (PDT)
+ bh=ylOC7EyiSp93xPOaWKRJ26r8HUuw3USwwT0Bu7RcIRM=;
+ b=FRBpst0rJVGuzf4LOw2NQ/0fmIY+8hvL+a8uJpENSf92BK5+O8s4r/FvkTpt6tYlSQ
+ bYlREcfNO0KeI500g1nVc4xh63DLOdmaYx+AOXmYyTnQFqKx5XM0pJvR2dW6yfd9fFTV
+ T37NuN5mzFEJvNeu5r2tcIGVx43H6U69ysO3exlcJyWB5ExDMxWacofiNBWO9HseCU/j
+ gRlUkTTc3V1iTih8j0Q3cs3OwnUJ9OS9vQ0aVhj8lexI3UNfGIf/u1sIhESmtMKnql5F
+ TqZrbQsPAaoOnBzdXrJmDUehxuoIT5rLfuEpDdQ16hk++BppQ1OHgI3iSS4efSnkKkj8
+ 8ymg==
+X-Gm-Message-State: AOJu0YwD/y5hKjsoMynBhefYbPgKFOHgh3bWaU0wGBZqQXmnbWSTa8nf
+ jsOnPNRU09UxKpee1EIwCDom/a+tp9eacymR5rQlTlRTnsF7Ym10QRs/ZDWSb/J4DsSuQypQa9q
+ ZhVw+0u19paFs6RqNUp/xtdWlheKwlSpkX/B9bQ==
+X-Google-Smtp-Source: AGHT+IFTmq6s4LeQ/IjO+6NOJwIP3OV0VZLPxkPnf+U44w2edRo5MkyvPIrqsmbswbQWdla82E5GoEM62T8lyOBUIc8=
+X-Received: by 2002:a17:90a:eb13:b0:2e2:d3e9:eb33 with SMTP id
+ 98e67ed59e1d1-2e3152bd73bmr10892885a91.11.1728901129866; Mon, 14 Oct 2024
+ 03:18:49 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241014094246.2944-1-andyshrk@163.com>
-In-Reply-To: <20241014094246.2944-1-andyshrk@163.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 14 Oct 2024 15:43:35 +0530
-Message-ID: <CADg8p95OHEmAiVV9HgXeWuqW_CUR0-pvA_WjjCZkT5NFh06sWQ@mail.gmail.com>
-Subject: Re: [Regression] rk3588 failed to boot linux
-To: Andy Yan <andyshrk@163.com>
-Cc: trini@konsulko.com, u-boot@lists.denx.de, kever.yang@rock-chips.com
+References: <20241013105522.391414-1-sughosh.ganu@linaro.org>
+ <20241013105522.391414-7-sughosh.ganu@linaro.org>
+In-Reply-To: <20241013105522.391414-7-sughosh.ganu@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 14 Oct 2024 13:18:13 +0300
+Message-ID: <CAC_iWjLQPkg4Vu1CZ7B+4BqRZnCUAiZkqgs412RVmDMDqYR__Q@mail.gmail.com>
+Subject: Re: [PATCH v3 06/15] lmb: notify of any changes to the LMB memory map
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, Jonas Karlman <jonas@kwiboo.se>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,184 +88,326 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 14 Oct 2024 at 15:12, Andy Yan <andyshrk@163.com> wrote:
->
-> When test with current main branch on rk3588 based coolpi 4b,
-> the board failed to boot linux os[0]:
-> I do the same test on another board that is preparing to send
-> patches upstream, and it also failed.
->
-> The two boards boots fine with v2024.10.
-> With some bisect, it seems that this issue is caused by:
->
-> commit 360aaddd9cea8c256f50c576794415cadfb61819
-> Merge: 2c832abc732 f8ffc6f3cc4
-> Author: Tom Rini <trini@konsulko.com>
-> Date:   Tue Sep 3 14:09:30 2024 -0600
->
->     Merge patch series "Make LMB memory map global and persistent"
->
->     Sughosh Ganu <sughosh.ganu@linaro.org> says:
->
-> My boards boot fine before this merge on u-boot/next, and all failed
-> to boot linux after this merge.
->
-> I am not familiar with the LMB mechanism, so i don't know how to find
-> the root case now.
->
-> I dump the bdinfo for both good case[1] and gegression case[2], not sure
-> if they are usefull for debug this issue.
->
-> [0] Synchronous Abort when starting kernel:
-> Scanning bootdev 'mmc@fe2c0000.bootdev':
-> Card did not respond to voltage select! : -110
-> Scanning bootdev 'mmc@fe2e0000.bootdev':
->   1  script       ready   mmc          1  mmc@fe2e0000.bootdev.part
-> /boot/boot.scr
-> ** Booting bootflow 'mmc@fe2e0000.bootdev.part_1' with script
-> Boot script loaded from mmc 0:1
-> 224 bytes read in 7 ms (31.3 KiB/s)
-> 26510301 bytes read in 97 ms (260.6 MiB/s)
-> 32883200 bytes read in 122 ms (257 MiB/s)
-> 148323 bytes read in 30 ms (4.7 MiB/s)
-> Working FDT set to 12000000
-> Trying kaslrseed command... Info: Unknown command can be safely ignored
-> since kaslrseed does not apply to all boards.
-> Unknown command 'kaslrseed' - try 'help'
-> ## Loading init Ramdisk from Legacy Image at 12180000 ...
->    Image Name:   uInitrd
->    Image Type:   AArch64 Linux RAMDisk Image (gzip compressed)
->    Data Size:    26510237 Bytes = 25.3 MiB
->    Load Address: 00000000
->    Entry Point:  00000000
->    Verifying Checksum ... OK
-> ## Flattened Device Tree blob at 12000000
->    Booting using the fdt blob at 0x12000000
-> Working FDT set to 12000000
->    Loading Ramdisk to eb58f000, end eced739d ... OK
->    Loading Device Tree to 00000000eb502000, end 00000000eb58efff ... OK
-> Working FDT set to eb502000
->
-> Starting kernel ...
->
-> "Synchronous Abort" handler, esr 0x96000004, far 0x96142b896930b907
-> elr: 0000000000a8d3b8 lr : 0000000000a77450 (reloc)
-> elr: 00000000effa13b8 lr : 00000000eff8b450
-> x0 : 96142b896930b907 x1 : 00000000effab870
-> x2 : 0000000000000010 x3 : 00000000edf47310
-> x4 : 0000000000000000 x5 : 96142b896930b907
-> x6 : 0000000000000007 x7 : 0000000000000004
-> x8 : 0000000000000040 x9 : fffffffffffffff0
-> x10: 00000000eb526fff x11: 00000000edf3a808
-> x12: 0000000000000006 x13: 00000000eb502000
-> x14: 00000000ffffffff x15: 00000000ededb588
-> x16: 00000000eff68738 x17: 0000000000000000
-> x18: 00000000edef4d70 x19: 00000000eceb4040
-> x20: 00000000eff14f50 x21: 00000000eceac000
-> x22: 00000000effcc000 x23: 0000000000000001
-> x24: 0000000000000001 x25: 0000000000200000
-> x26: 00000000edf385c0 x27: 00000000eced8000
-> x28: 00000000eced9000 x29: 00000000ededb3c0
->
-> Code: eb04005f 54000061 52800000 14000006 (386468a3)
-> Resetting CPU ...
->
-> [1] bdinfo for success boot
-> => bdinfo
-> boot_params = 0x0000000000000000
-> DRAM bank   = 0x0000000000000000
-> -> start    = 0x0000000000200000
-> -> size     = 0x00000000efe00000
-> DRAM bank   = 0x0000000000000001
-> -> start    = 0x00000001f0000000
-> -> size     = 0x0000000010000000
-> flashstart  = 0x0000000000000000
-> flashsize   = 0x0000000000000000
-> flashoffset = 0x0000000000000000
-> baudrate    = 1500000 bps
-> relocaddr   = 0x00000000eff14000
-> reloc off   = 0x00000000ef514000
-> Build       = 64-bit
-> current eth = unknown
-> eth-1addr   = (not set)
-> IP addr     = <NULL>
-> fdt_blob    = 0x00000000ededcd80
-> new_fdt     = 0x00000000ededcd80
-> fdt_size    = 0x0000000000017fa0
-> lmb_dump_all:
->  memory.cnt = 0x2 / max = 0x10
->  memory[0]      [0x200000-0xefffffff], 0xefe00000 bytes flags: 0
->  memory[1]      [0x1f0000000-0x1ffffffff], 0x10000000 bytes flags: 0
->  reserved.cnt = 0x2 / max = 0x10
->  reserved[0]    [0xeced8000-0xefffffff], 0x03128000 bytes flags: 0
->  reserved[1]    [0x1f0000000-0x1ffffffff], 0x10000000 bytes flags: 0
-> devicetree  = separate
-> serial addr = 0x00000000feb50000
->  width      = 0x0000000000000004
->  shift      = 0x0000000000000002
->  offset     = 0x0000000000000000
->  clock      = 0x00000000016e3600
-> arch_number = 0x0000000000000000
-> TLB addr    = 0x00000000efff0000
-> irq_sp      = 0x00000000ededcd70
-> sp start    = 0x00000000ededcd70
-> Early malloc usage: 2440 / 10000
-> =>
->
->
-> [2] bdinfo for boot failed case;
-> => bdinfo
-> boot_params = 0x0000000000000000
-> DRAM bank   = 0x0000000000000000
-> -> start    = 0x0000000000200000
-> -> size     = 0x00000000efe00000
-> DRAM bank   = 0x0000000000000001
-> -> start    = 0x00000001f0000000
-> -> size     = 0x0000000010000000
-> flashstart  = 0x0000000000000000
-> flashsize   = 0x0000000000000000
-> flashoffset = 0x0000000000000000
-> baudrate    = 1500000 bps
-> relocaddr   = 0x00000000eff14000
-> reloc off   = 0x00000000ef514000
-> Build       = 64-bit
-> current eth = unknown
-> eth-1addr   = (not set)
-> IP addr     = <NULL>
-> fdt_blob    = 0x00000000ededc1b0
-> lmb_dump_all:
->  memory.count = 0x1
->  memory[0]      [0x200000-0xefffffff], 0xefe00000 bytes flags: none
->  reserved.count = 0x1
->  reserved[0]    [0xeced81a0-0xefffffff], 0x03127e60 bytes flags:
-> no-overwrite
-> devicetree  = separate
-> serial addr = 0x00000000feb50000
->  width      = 0x0000000000000004
->  shift      = 0x0000000000000002
->  offset     = 0x0000000000000000
->  clock      = 0x00000000016e3600
-> arch_number = 0x0000000000000000
-> TLB addr    = 0x00000000efff0000
-> irq_sp      = 0x00000000ededc1a0
-> sp start    = 0x00000000ededc1a0
-> Early malloc usage: 2440 / 10000
+Hi Sughosh
 
-With the LMB series applied, the memory region covered by the DRAM
-Bank 1 is not getting added to the LMB memory map. And I suspect that
-the scripts are using addresses in the bank 1 to load and boot the
-kernel. Can you confirm this ? This seems to be happening because of
-the value of gd->ram_top that is being set for the rockchip boards.
-Based on a cursory look at arch/arm/mach-rockchip/sdram.c, the value
-of gd->ram_top is capped at 0xf0000000 for the rk3588 boards. Can you
-confirm if this is indeed the case ? If so, the second DRAM bank will
-not get added to the LMB memory map, and consequently you will not be
-able to load images to addresses in this bank. To fix this, the value
-of gd->ram_top will have to be changed for the rockchip boards to
-reflect the presence of memory above 4GB. Another possible solution is
-to use addresses in the bank0 for booting the images.
 
--sughosh
+On Sun, 13 Oct 2024 at 13:56, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+>
+> In U-Boot, LMB and EFI are two primary modules who provide memory
+> allocation and reservation API's. Both these modules operate with the
+> same regions of memory for allocations. Use the LMB memory map update
+> event to notify other interested listeners about a change in it's
+> memory map. This can then be used by the other module to keep track of
+> available and used memory.
+>
+> There is no need to send these notifications when the LMB module is
+> being unit-tested. Add a flag to the lmb structure to indicate if the
+> memory map is being used for tests, and suppress sending any
+> notifications when running these unit tests.
+>
+> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> ---
+> Changes since V2: None
+>
+>  include/efi_loader.h        |  14 +++++
+>  include/lmb.h               |   2 +
+>  lib/efi_loader/Kconfig      |   1 +
+>  lib/efi_loader/efi_memory.c |   2 +-
+>  lib/lmb.c                   | 109 ++++++++++++++++++++++++++++++++----
+>  5 files changed, 115 insertions(+), 13 deletions(-)
+>
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index 511281e150..ac20395718 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -784,6 +784,20 @@ efi_status_t efi_get_memory_map(efi_uintn_t *memory_map_size,
+>                                 uint32_t *descriptor_version);
+>  /* Adds a range into the EFI memory map */
+>  efi_status_t efi_add_memory_map(u64 start, u64 size, int memory_type);
+> +
+> +/**
+> + * efi_add_memory_map_pg() - add pages to the memory map
+> + *
+> + * @start:             start address, must be a multiple of EFI_PAGE_SIZE
+> + * @pages:             number of pages to add
+> + * @memory_type:       type of memory added
+> + * @overlap_only_ram:  region may only overlap RAM
+> + * Return:             status code
+> + */
+> +efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
+> +                                         int memory_type,
+> +                                         bool overlap_only_ram);
+> +
+>  /* Adds a conventional range into the EFI memory map */
+>  efi_status_t efi_add_conventional_memory_map(u64 ram_start, u64 ram_end,
+>                                              u64 ram_top);
+> diff --git a/include/lmb.h b/include/lmb.h
+> index a76262d520..92e9aead76 100644
+> --- a/include/lmb.h
+> +++ b/include/lmb.h
+> @@ -44,10 +44,12 @@ struct lmb_region {
+>   *
+>   * @free_mem:  List of free memory regions
+>   * @used_mem:  List of used/reserved memory regions
+> + * @test:      Is structure being used for LMB tests
+>   */
+>  struct lmb {
+>         struct alist free_mem;
+>         struct alist used_mem;
+> +       bool test;
+>  };
+>
+>  /**
+> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> index 69b2c9360d..2282466ae9 100644
+> --- a/lib/efi_loader/Kconfig
+> +++ b/lib/efi_loader/Kconfig
+> @@ -21,6 +21,7 @@ config EFI_LOADER
+>         select EVENT_DYNAMIC
+>         select LIB_UUID
+>         select LMB
+> +       select MEM_MAP_UPDATE_NOTIFY
+>         imply PARTITION_UUIDS
+>         select REGEX
+>         imply FAT
+> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> index aa1da21f9f..41501e9d41 100644
+> --- a/lib/efi_loader/efi_memory.c
+> +++ b/lib/efi_loader/efi_memory.c
+> @@ -264,7 +264,7 @@ static s64 efi_mem_carve_out(struct efi_mem_list *map,
+>   * @overlap_only_ram:  region may only overlap RAM
+>   * Return:             status code
+>   */
+> -static efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
+> +efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
+>                                           int memory_type,
+>                                           bool overlap_only_ram)
+>  {
+> diff --git a/lib/lmb.c b/lib/lmb.c
+> index e1e616679f..a567c02784 100644
+> --- a/lib/lmb.c
+> +++ b/lib/lmb.c
+> @@ -8,6 +8,7 @@
+>
+>  #include <alist.h>
+>  #include <efi_loader.h>
+> +#include <event.h>
+>  #include <image.h>
+>  #include <mapmem.h>
+>  #include <lmb.h>
+> @@ -22,10 +23,55 @@
+>
+>  DECLARE_GLOBAL_DATA_PTR;
+>
+> +#define MAP_OP_RESERVE         (u8)0x1
+> +#define MAP_OP_FREE            (u8)0x2
+> +#define MAP_OP_ADD             (u8)0x3
+> +
+>  #define LMB_ALLOC_ANYWHERE     0
+>  #define LMB_ALIST_INITIAL_SIZE 4
+>
+>  static struct lmb lmb;
+> +extern bool is_addr_in_ram(uintptr_t addr);
+> +
+> +static bool lmb_notify(enum lmb_flags flags)
+> +{
+> +       return !lmb.test && !(flags & LMB_NONOTIFY);
 
+Can you explain where the test flag is needed? Making the code aware
+its testing something is usually a bad idea
+
+> +}
+> +
+> +static int __maybe_unused lmb_map_update_notify(phys_addr_t addr,
+> +                                               phys_size_t size,
+> +                                               u8 op)
+> +{
+> +       u64 efi_addr;
+> +       u64 pages;
+> +       efi_status_t status;
+> +
+> +       if (!is_addr_in_ram((uintptr_t)addr))
+> +               return 0;
+
+This should be an error and at least print something
+
+> +
+> +       if (op != MAP_OP_RESERVE && op != MAP_OP_FREE && op != MAP_OP_ADD) {
+> +               log_debug("Invalid map update op received (%d)\n", op);
+
+log_err
+
+> +               return -1;
+> +       }
+> +
+> +       efi_addr = (uintptr_t)map_sysmem(addr, 0);
+> +       pages = efi_size_in_pages(size + (efi_addr & EFI_PAGE_MASK));
+> +       efi_addr &= ~EFI_PAGE_MASK;
+> +
+> +       status = efi_add_memory_map_pg(efi_addr, pages,
+> +                                      op == MAP_OP_RESERVE ?
+> +                                      EFI_BOOT_SERVICES_DATA :
+> +                                      EFI_CONVENTIONAL_MEMORY,
+> +                                      false);
+> +
+> +       if (status != EFI_SUCCESS) {
+> +               log_err("%s: LMB Map notify failure %lu\n", __func__,
+> +                       status & ~EFI_ERROR_MASK);
+> +               return -1;
+> +       } else {
+> +               return 0;
+> +       }
+> +}
+>
+>  static void lmb_print_region_flags(enum lmb_flags flags)
+>  {
+> @@ -474,9 +520,17 @@ static long lmb_add_region(struct alist *lmb_rgn_lst, phys_addr_t base,
+>  /* This routine may be called with relocation disabled. */
+>  long lmb_add(phys_addr_t base, phys_size_t size)
+>  {
+> +       long ret;
+>         struct alist *lmb_rgn_lst = &lmb.free_mem;
+>
+> -       return lmb_add_region(lmb_rgn_lst, base, size);
+> +       ret = lmb_add_region(lmb_rgn_lst, base, size);
+> +       if (ret)
+> +               return ret;
+> +
+> +       if (CONFIG_IS_ENABLED(MEM_MAP_UPDATE_NOTIFY))
+> +               return lmb_map_update_notify(base, size, MAP_OP_ADD);
+
+I didn't get a chance to answer on the previous series, but I think
+this should just depend on the EFI_LOADER, Is the are problem doing
+that for SPL?
+I think it's cleaner to add that check to lmb_notify() and rename it
+to lmb__should_notify(). Then any future subsystems could use that
+function and add their conditions if they need a notification, instead
+of adding Kconfig options
+
+> +
+> +       return 0;
+>  }
+>
+>  static long __lmb_free(phys_addr_t base, phys_size_t size)
+> @@ -530,11 +584,6 @@ static long __lmb_free(phys_addr_t base, phys_size_t size)
+>                                     rgn[i].flags);
+>  }
+>
+> -long lmb_free(phys_addr_t base, phys_size_t size)
+> -{
+> -       return __lmb_free(base, size);
+> -}
+> -
+>  /**
+>   * lmb_free_flags() - Free up a region of memory
+>   * @base: Base Address of region to be freed
+> @@ -546,16 +595,38 @@ long lmb_free(phys_addr_t base, phys_size_t size)
+>   * Return: 0 if successful, -1 on failure
+>   */
+>  long lmb_free_flags(phys_addr_t base, phys_size_t size,
+> -                   __always_unused uint flags)
+> +                   uint flags)
+>  {
+> -       return __lmb_free(base, size);
+> +       long ret;
+> +
+> +       ret = __lmb_free(base, size);
+> +       if (ret < 0)
+> +               return ret;
+> +
+> +       if (CONFIG_IS_ENABLED(MEM_MAP_UPDATE_NOTIFY) && lmb_notify(flags))
+> +               return lmb_map_update_notify(base, size, MAP_OP_FREE);
+> +
+> +       return ret;
+> +}
+> +
+> +long lmb_free(phys_addr_t base, phys_size_t size)
+> +{
+> +       return lmb_free_flags(base, size, LMB_NONE);
+>  }
+>
+>  long lmb_reserve_flags(phys_addr_t base, phys_size_t size, enum lmb_flags flags)
+>  {
+> +       long ret = 0;
+>         struct alist *lmb_rgn_lst = &lmb.used_mem;
+>
+> -       return lmb_add_region_flags(lmb_rgn_lst, base, size, flags);
+> +       ret = lmb_add_region_flags(lmb_rgn_lst, base, size, flags);
+> +       if (ret < 0)
+> +               return -1;
+> +
+> +       if (CONFIG_IS_ENABLED(MEM_MAP_UPDATE_NOTIFY) && lmb_notify(flags))
+> +               return lmb_map_update_notify(base, size, MAP_OP_RESERVE);
+> +
+> +       return ret;
+>  }
+>
+>  long lmb_reserve(phys_addr_t base, phys_size_t size)
+> @@ -587,6 +658,8 @@ static phys_addr_t lmb_align_down(phys_addr_t addr, phys_size_t size)
+>  static phys_addr_t __lmb_alloc_base(phys_size_t size, ulong align,
+>                                     phys_addr_t max_addr, enum lmb_flags flags)
+>  {
+> +       u8 op;
+> +       int ret;
+>         long i, rgn;
+>         phys_addr_t base = 0;
+>         phys_addr_t res_base;
+> @@ -617,6 +690,16 @@ static phys_addr_t __lmb_alloc_base(phys_size_t size, ulong align,
+>                                 if (lmb_add_region_flags(&lmb.used_mem, base,
+>                                                          size, flags) < 0)
+>                                         return 0;
+> +
+> +                               if (CONFIG_IS_ENABLED(MEM_MAP_UPDATE_NOTIFY) &&
+> +                                   lmb_notify(flags)) {
+> +                                       op = MAP_OP_RESERVE;
+> +                                       ret = lmb_map_update_notify(base, size,
+> +                                                                   op);
+> +                                       if (ret)
+> +                                               return ret;
+> +                               }
+> +
+>                                 return base;
+>                         }
+>
+> @@ -786,7 +869,7 @@ int lmb_is_reserved_flags(phys_addr_t addr, int flags)
+>         return 0;
+>  }
+>
+> -static int lmb_setup(void)
+> +static int lmb_setup(bool test)
+>  {
+>         bool ret;
+>
+> @@ -804,6 +887,8 @@ static int lmb_setup(void)
+>                 return -ENOMEM;
+>         }
+>
+> +       lmb.test = test;
+> +
+>         return 0;
+>  }
+>
+> @@ -823,7 +908,7 @@ int lmb_init(void)
+>  {
+>         int ret;
+>
+> -       ret = lmb_setup();
+> +       ret = lmb_setup(false);
+>         if (ret) {
+>                 log_info("Unable to init LMB\n");
+>                 return ret;
+> @@ -851,7 +936,7 @@ int lmb_push(struct lmb *store)
+>         int ret;
+>
+>         *store = lmb;
+> -       ret = lmb_setup();
+> +       ret = lmb_setup(true);
+>         if (ret)
+>                 return ret;
+>
+> --
 > 2.34.1
 >
+
+Thanks
+/Ilias
