@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16C7FCFC501
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 07:18:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4073CFC501
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 07:19:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98B8188F46;
-	Mon, 14 Oct 2024 09:18:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5136788FE8;
+	Mon, 14 Oct 2024 09:19:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="iFZQPJDH";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="iPmgjHjm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 35DDC88FE5; Mon, 14 Oct 2024 09:18:50 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 81D4288FD6; Mon, 14 Oct 2024 09:19:41 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D794D86BF1
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 09:18:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4059D88FEC
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 09:19:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5c97cc837c3so1006762a12.0
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 00:18:47 -0700 (PDT)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-a9932aa108cso592150366b.2
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 00:19:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1728890327; x=1729495127;
+ d=amarulasolutions.com; s=google; t=1728890375; x=1729495175;
  darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZDftOGxF4JZbTQbbe6WxiADrjJlNdSsbdOAxbJoWuM4=;
- b=iFZQPJDHwl93RqluI2gAoOeWZvlin2DpL1mU4Wl+NMVvriHzwuxZtwm4DE67NFcL4I
- cp/eFfHz5X1KrgbWv9VnzuJKNGSKtmy/AKYF+qSy+KuTyliosvKs84LbFqDCUUtjXSIm
- J0uaVrcX24oqEWFsmaaSIH4V+VCFxKx8+j7cM=
+ bh=DNzmdKNfhrBZebm0Tb7suphkLoWGKG9g/fGm16Nv2fU=;
+ b=iPmgjHjm6+MpmXbhT8oYLqq5wvebtcYaFQx1U3WEBwUeChkOcMEPC06aZ33kc0km2i
+ Ic4/Q1JZ4e8HvnSuYH2cpGhH9tk2BE14htMtJy0IPoPGWei/De+CCGRI9TE/izWA1ZTG
+ qXjo6h3UqKaVmPFO+VwY8QkCfHsn0wSTmwTRE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728890327; x=1729495127;
+ d=1e100.net; s=20230601; t=1728890375; x=1729495175;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZDftOGxF4JZbTQbbe6WxiADrjJlNdSsbdOAxbJoWuM4=;
- b=d7YkrE5K03ipX/iCMwxGlUsARwNgdRXrhE78MCbin1WHy0YMyw114AJRpwmMI8/qxP
- 9G7VJ0CB9qooB3TTbf39Zm92+hFz5a0R4lzanuRPFXkjtUoIM52fVFM0nlqi5ayuI99H
- xnK1oBI8gBh6tArXh0VJ/OHcMR3o38cKl50K+ZjsAegi0t46GZNRvHC0GVAuMGIMNfZP
- fwFHQFkrS8AP35ZAIUrtH30M04LcctKVqw2+9U1w+Kc1dPHZXlonpEwxXZTKTKTSePCU
- 0J3Lmubqs3akXaoXNVQr1T1GQwQpKVce+0wEDkN002ilfXPds4ISIqsY/BIUsFtrX1ZY
- 3k5Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWta23XGNG4BIfR6Dflhqg/6n6k7SEvpSytIH+dvk0BeYXape4684oWbCqXTSaFYnIfN209D5s=@lists.denx.de
-X-Gm-Message-State: AOJu0YwlnxcBb4o1DcLi4kJk7Xqq7w5xdaoe/Av1VZCm6a77wXW1cw3c
- 2Ef6RfmkqN+WxywrLbQNKqK2RaEa3ZqcuvFjEo9Q7Fk++mE8UDilDjerHv93ZPJxC6MG84SSbDD
- A2Ikft+YtLuNLjyxWVq1aPBt/FmogEyEWpm2uLQ==
-X-Google-Smtp-Source: AGHT+IFENkHqp7w0mZY6EcwaNz+haCz6qT2hTIUHyXdc92uExeLVLXyPdHLZT6xx00V3B8ftr4O4tfK3WI/nanu/bOI=
-X-Received: by 2002:a05:6402:5188:b0:5c9:59e6:e908 with SMTP id
- 4fb4d7f45d1cf-5c959e6f56amr6156000a12.6.1728890327228; Mon, 14 Oct 2024
- 00:18:47 -0700 (PDT)
+ bh=DNzmdKNfhrBZebm0Tb7suphkLoWGKG9g/fGm16Nv2fU=;
+ b=RFK3D4H/6mD4JqMi0RFxuze2IOEDn5vb/3EfTw1k4qtESOD6jJiZr1hKDPk9DfxtDo
+ mHjHzHkYvSrRo2TBWqFXHgfE4lmN+yOoUVn7MJUQMDlmV71Q5i0T/9bhQsaq9YPd1bi2
+ heZQc5HRY/vwwy51RZin9YirzyuzufF8GG3+I6KfynQvwFZLVnJT+MNfrW2BVDyQ5hV5
+ s3W4b27moRNid4LbEH/qzj/6EioSUCCtC4tu+U7dPxiYEOHc5qEDimerPEwmb3jUyT20
+ 08dxwDPAptcREGaRNvtcBTTbfSQXrUv7mtkjG5703UfxPtpYDWpyQT9eQx/xA66TKFBf
+ nE8A==
+X-Gm-Message-State: AOJu0YxKvlb1Ic6NYBWtPM0HGALikNuGSCw58PL+MHefUgpZ3vloYOXc
+ d11o7BoseAnFEFDfJy9rvj5zLXQ7UCHdazTJPkyqByToE7o6nzr5k7869a6tHYSUJcLSo1QQp6x
+ I4hSLYhrVl2gKk56yTbmoh6pKQMSY+bdilCU4XQ==
+X-Google-Smtp-Source: AGHT+IFSIVmGGHl+Olt4I1Simklt0H35kBPgvJDyNTg5TtYA5vZ5F9kZuxkaxJcVzCOfkkv81aKTHAFmOvwycl5fYuw=
+X-Received: by 2002:a17:907:1c92:b0:a99:fdb7:4822 with SMTP id
+ a640c23a62f3a-a99fdb748bdmr441350266b.45.1728890374766; Mon, 14 Oct 2024
+ 00:19:34 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240721214552.63965-2-zli@ogga.fr>
- <59a891ca-1f02-4ffa-8727-0934025d88c5@microchip.com>
- <CAOf5uwnP7gGDakGHL1cFSyJQefJ=DG+a5tORU3B8-a7q9+gBiA@mail.gmail.com>
- <3827b52f-e31f-4d41-9a56-b619c35a5705@collabora.com>
- <CAOf5uwnfjRsOQ9NBmgQA9mtU6nm9mOj60KxD26DOZ2rhdchQ4A@mail.gmail.com>
-In-Reply-To: <CAOf5uwnfjRsOQ9NBmgQA9mtU6nm9mOj60KxD26DOZ2rhdchQ4A@mail.gmail.com>
+References: <20241011-bcmbca-nand-support-v2-0-1fe928e5b933@linaro.org>
+ <CAOf5uwm8p6WgzSBAB__V09zqcYnXO8YkFjdjEyTLHPOO-M+eGg@mail.gmail.com>
+In-Reply-To: <CAOf5uwm8p6WgzSBAB__V09zqcYnXO8YkFjdjEyTLHPOO-M+eGg@mail.gmail.com>
 From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Mon, 14 Oct 2024 09:18:34 +0200
-Message-ID: <CAOf5uw=9i8K2tfCUpNxEfXStndfgwhkBUWv7URTvw2ZrLeWaLg@mail.gmail.com>
-Subject: Re: [PATCH v2] mtd: nand: raw: atmel: Use ONFI ECC params if available
-To: Eugen Hristev <eugen.hristev@collabora.com>
-Cc: Balamanikandan.Gunasundar@microchip.com, u-boot@lists.denx.de, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Date: Mon, 14 Oct 2024 09:19:21 +0200
+Message-ID: <CAOf5uwmi6PTsfkcJDYBu_h7HsLJj5N7+fZv-ypfJq8+s=USk0Q@mail.gmail.com>
+Subject: Re: [PATCH v2 0/4] mtd: rawnand: brcmnand: Add BCMBCA support
+To: Linus Walleij <linus.walleij@linaro.org>
+Cc: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Anand Gore <anand.gore@broadcom.com>,
+ William Zhang <william.zhang@broadcom.com>, 
+ Kursad Oney <kursad.oney@broadcom.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -94,98 +93,71 @@ X-Virus-Status: Clean
 
 Hi
 
-On Wed, Oct 9, 2024 at 10:24=E2=80=AFAM Michael Nazzareno Trimarchi
+On Fri, Oct 11, 2024 at 9:54=E2=80=AFPM Michael Nazzareno Trimarchi
 <michael@amarulasolutions.com> wrote:
 >
 > Hi
 >
-> On Mon, Jul 29, 2024 at 10:07=E2=80=AFAM Eugen Hristev
-> <eugen.hristev@collabora.com> wrote:
+> On Fri, Oct 11, 2024 at 4:49=E2=80=AFPM Linus Walleij <linus.walleij@lina=
+ro.org> wrote:
 > >
-> > On 7/25/24 12:41, Michael Nazzareno Trimarchi wrote:
-> > > Hi
-> > >
-> > > On Thu, Jul 25, 2024 at 11:36=E2=80=AFAM
-> > > <Balamanikandan.Gunasundar@microchip.com> wrote:
-> > >>
-> > >> Acked-by: Balamanikandan Gunasundar
-> > >> <balamanikandan.gunasundar@microchip.com>
-> > >>
-> > >> On 22/07/24 3:15 am, Zixun LI wrote:
-> > >>> [Some people who received this message don't often get email from a=
-dmin@hifiphile.com. Learn why this is important at https://aka.ms/LearnAbou=
-tSenderIdentification ]
-> > >>>
-> > >>> EXTERNAL EMAIL: Do not click links or open attachments unless you k=
-now the content is safe
-> > >>>
-> > >>> When ECC parameters are not specified in DT, first try ONFI ECC par=
-ameters
-> > >>> before fallback to maximum strength.
-> > >>>
-> > >>> It's the Linux driver behavior since the driver rewriting in f88fc1=
-2.
-> > >>>
-> > >>>  From then 2 nand system refactors have been done in 6a1b66d6 and 5=
-3576c7b,
-> > >>> chip->ecc_strength_ds and chip->ecc_step_ds became
-> > >>> nanddev_get_ecc_requirements(). U-Boot didn't follow the refactor a=
-nd
-> > >>> always use these 2 fields.
-> > >>>
-> > >>> v2: Fix formatting, add upstream commit hash.
-> > >>>
-> > >>> Signed-off-by: Zixun LI <zli@ogga.fr>
-> > >>> ---
-> > >>>   drivers/mtd/nand/raw/atmel/nand-controller.c | 4 ++++
-> > >>>   1 file changed, 4 insertions(+)
-> > >>>
-> > >>> diff --git a/drivers/mtd/nand/raw/atmel/nand-controller.c b/drivers=
-/mtd/nand/raw/atmel/nand-controller.c
-> > >>> index ee4ec6da58..817fab4ca3 100644
-> > >>> --- a/drivers/mtd/nand/raw/atmel/nand-controller.c
-> > >>> +++ b/drivers/mtd/nand/raw/atmel/nand-controller.c
-> > >>> @@ -1029,11 +1029,15 @@ static int atmel_nand_pmecc_init(struct nan=
-d_chip *chip)
-> > >>>                  req.ecc.strength =3D ATMEL_PMECC_MAXIMIZE_ECC_STRE=
-NGTH;
-> > >>>          else if (chip->ecc.strength)
-> > >>>                  req.ecc.strength =3D chip->ecc.strength;
-> > >>> +       else if (chip->ecc_strength_ds)
-> > >>> +               req.ecc.strength =3D chip->ecc_strength_ds;
-> > >>>          else
-> > >>>                  req.ecc.strength =3D ATMEL_PMECC_MAXIMIZE_ECC_STRE=
-NGTH;
-> > >>>
-> > >>>          if (chip->ecc.size)
-> > >>>                  req.ecc.sectorsize =3D chip->ecc.size;
-> > >>> +       else if (chip->ecc_step_ds)
-> > >>> +               req.ecc.sectorsize =3D chip->ecc_step_ds;
-> > >>>          else
-> > >>>                  req.ecc.sectorsize =3D ATMEL_PMECC_SECTOR_SIZE_AUT=
-O;
-> > >>>
-> > >>> --
-> > >>> 2.45.2
-> > >>>
-> > >>
-> > >
-> > > Feel free to apply on microchip uboot branch if you are on hurry
-> > >
-> > > Michael
-> > >
-> > Hello Michael,
+> > This adds support for the NAND controller on the Broadcom
+> > BCA (Broadband Access) platforms.
 > >
-> > This is fine, you(or Dario) can pick this up through the nand tree.
+> > This requires the series with brcmnand fixes that I sent
+> > separately to be merged first. See:
+> > https://patchwork.ozlabs.org/project/uboot/list/?series=3D424109
 > >
-> > Eugen
+> > The development was done on the Genexis XG6846B which is
+> > a derivative of the BCM96846 reference design, but probably
+> > has a different flash layout, be sure to check the last
+> > patch in the series for a comment on that.
+> >
+> > Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
+> > ---
+> > Changes in v2:
+> > - Switch to using OF_UPSTREAM instead of syncing DTS files.
+> > - Mention the Linux version the BCMBCA NAND driver is based on.
+> > - Link to v1: https://lore.kernel.org/r/20240930-bcmbca-nand-support-v1=
+-0-e637c65de947@linaro.org
+> >
 >
-> I totally missed, I will pick up today
+> Acked-by: Michael Trimarchi <michael@amarulasolutions.com>
 >
+> I will queue in weekend
 
 Applied thanks
 
+Michael
+
+>
 > Michael
+>
+> > ---
+> > Linus Walleij (4):
+> >       mtd: rawnand: brcmnand: Add BCMBCA RAW NAND driver
+> >       drivers: nand: bcmbca: Enable on BCM6846
+> >       board: bcm96846: Enable NAND options
+> >       board: bcm96846: Switch to using OF_UPSTREAM
+> >
+> >  arch/arm/dts/bcm6846.dtsi                   | 103 -------------------
+> >  arch/arm/dts/bcm96846.dts                   |  30 ------
+> >  arch/arm/mach-bcmbca/bcm6846/Kconfig        |   4 +
+> >  configs/bcm96846_defconfig                  |  15 ++-
+> >  drivers/mtd/nand/raw/Kconfig                |   7 ++
+> >  drivers/mtd/nand/raw/brcmnand/Makefile      |   1 +
+> >  drivers/mtd/nand/raw/brcmnand/bcmbca_nand.c | 152 ++++++++++++++++++++=
+++++++++
+> >  7 files changed, 178 insertions(+), 134 deletions(-)
+> > ---
+> > base-commit: a404065479be2c1fe1167c3c91367e8194a69d1b
+> > change-id: 20240930-bcmbca-nand-support-4447e176bbbd
+> >
+> > Best regards,
+> > --
+> > Linus Walleij <linus.walleij@linaro.org>
+> >
+>
 >
 > --
 > Michael Nazzareno Trimarchi
