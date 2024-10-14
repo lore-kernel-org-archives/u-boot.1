@@ -4,19 +4,19 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD6E0CFC52C
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 09:56:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63303CFC534
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 09:56:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34BF98907E;
-	Mon, 14 Oct 2024 11:56:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C6CD689089;
+	Mon, 14 Oct 2024 11:56:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=aspeedtech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 98EFC89049; Mon, 14 Oct 2024 11:56:26 +0200 (CEST)
+ id E3A968907E; Mon, 14 Oct 2024 11:56:26 +0200 (CEST)
 Received: from TWMBX01.aspeed.com (mail.aspeedtech.com [211.20.114.72])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01AC389056
+ by phobos.denx.de (Postfix) with ESMTPS id A051989070
  for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 11:56:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=aspeedtech.com
@@ -31,9 +31,9 @@ Received: from mail.aspeedtech.com (192.168.10.152) by TWMBX01.aspeed.com
  Transport; Mon, 14 Oct 2024 17:56:20 +0800
 From: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
 To: <trini@konsulko.com>, <sjg@chromium.org>, <u-boot@lists.denx.de>
-Subject: [PATCH v3 1/3] lib: ecdsa: Add ECDSA384 support
-Date: Mon, 14 Oct 2024 17:56:18 +0800
-Message-ID: <20241014095620.216936-2-chiawei_wang@aspeedtech.com>
+Subject: [PATCH v3 2/3] image-fit-sig: Remove padding check
+Date: Mon, 14 Oct 2024 17:56:19 +0800
+Message-ID: <20241014095620.216936-3-chiawei_wang@aspeedtech.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241014095620.216936-1-chiawei_wang@aspeedtech.com>
 References: <20241014095620.216936-1-chiawei_wang@aspeedtech.com>
@@ -56,83 +56,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add ECDSA384 algorithm support for image signing and verification.
+The padding algorithm is not mandatory for all signing algorithm.
+For example, ECDSA does not require a padding method.
+
+For RSA requiring PKCS padding, the belonging info->crypto(), assigned
+with rsa_verify_key(), also has the check on the validity of info->padding().
+
+Thus, remove the info->padding check from the upper, general layer.
 
 Signed-off-by: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- include/u-boot/ecdsa.h   |  1 +
- lib/ecdsa/ecdsa-verify.c | 14 +++++++++++---
- tools/image-sig-host.c   |  7 +++++++
- 3 files changed, 19 insertions(+), 3 deletions(-)
+ boot/image-fit-sig.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/include/u-boot/ecdsa.h b/include/u-boot/ecdsa.h
-index 8f9f5e7d6e7..f0ac0f327e9 100644
---- a/include/u-boot/ecdsa.h
-+++ b/include/u-boot/ecdsa.h
-@@ -65,6 +65,7 @@ int ecdsa_verify(struct image_sign_info *info,
- /** @} */
+diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
+index 35873b1fb0e..a121de60ae2 100644
+--- a/boot/image-fit-sig.c
++++ b/boot/image-fit-sig.c
+@@ -95,7 +95,7 @@ static int fit_image_setup_verify(struct image_sign_info *info,
+ 	info->required_keynode = required_keynode;
+ 	printf("%s:%s", algo_name, info->keyname);
  
- #define ECDSA256_BYTES	(256 / 8)
-+#define ECDSA384_BYTES	(384 / 8)
- #define ECDSA521_BYTES	((521 + 7) / 8)
- 
- #endif
-diff --git a/lib/ecdsa/ecdsa-verify.c b/lib/ecdsa/ecdsa-verify.c
-index 4d1835b598a..629b662cf6c 100644
---- a/lib/ecdsa/ecdsa-verify.c
-+++ b/lib/ecdsa/ecdsa-verify.c
-@@ -22,8 +22,10 @@ static int ecdsa_key_size(const char *curve_name)
- {
- 	if (!strcmp(curve_name, "prime256v1"))
- 		return 256;
--	else
--		return 0;
-+	else if (!strcmp(curve_name, "secp384r1"))
-+		return 384;
-+
-+	return 0;
- }
- 
- static int fdt_get_key(struct ecdsa_public_key *key, const void *fdt, int node)
-@@ -121,12 +123,18 @@ int ecdsa_verify(struct image_sign_info *info,
- 	return ecdsa_verify_hash(dev, info, hash, sig, sig_len);
- }
- 
--U_BOOT_CRYPTO_ALGO(ecdsa) = {
-+U_BOOT_CRYPTO_ALGO(ecdsa256) = {
- 	.name = "ecdsa256",
- 	.key_len = ECDSA256_BYTES,
- 	.verify = ecdsa_verify,
- };
- 
-+U_BOOT_CRYPTO_ALGO(ecdsa384) = {
-+	.name = "ecdsa384",
-+	.key_len = ECDSA384_BYTES,
-+	.verify = ecdsa_verify,
-+};
-+
- /*
-  * uclass definition for ECDSA API
-  *
-diff --git a/tools/image-sig-host.c b/tools/image-sig-host.c
-index 21b4fa5d39d..5285263c616 100644
---- a/tools/image-sig-host.c
-+++ b/tools/image-sig-host.c
-@@ -76,6 +76,13 @@ struct crypto_algo crypto_algos[] = {
- 		.add_verify_data = ecdsa_add_verify_data,
- 		.verify = ecdsa_verify,
- 	},
-+	{
-+		.name = "ecdsa384",
-+		.key_len = ECDSA384_BYTES,
-+		.sign = ecdsa_sign,
-+		.add_verify_data = ecdsa_add_verify_data,
-+		.verify = ecdsa_verify,
-+	},
- 	{
- 		.name = "secp521r1",
- 		.key_len = ECDSA521_BYTES,
+-	if (!info->checksum || !info->crypto || !info->padding) {
++	if (!info->checksum || !info->crypto) {
+ 		*err_msgp = "Unknown signature algorithm";
+ 		return -1;
+ 	}
 -- 
 2.25.1
 
