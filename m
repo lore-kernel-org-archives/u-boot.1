@@ -4,83 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB978CF259D
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 06:56:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5430BCF2590
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 06:57:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B678D88FC3;
-	Mon, 14 Oct 2024 08:56:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 291C088FF1;
+	Mon, 14 Oct 2024 08:56:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="j73x+6cV";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SXyoZmf5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D9E7688FD1; Mon, 14 Oct 2024 08:56:33 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id 6824588FD6; Mon, 14 Oct 2024 08:56:34 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A488188FB5
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 08:56:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6A71088FA0
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 08:56:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-43124843b04so16891935e9.2
- for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 23:56:31 -0700 (PDT)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-43124843b04so16891695e9.2
+ for <u-boot@lists.denx.de>; Sun, 13 Oct 2024 23:56:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728888989; x=1729493789; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1728888987; x=1729493787; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=SN8Kmfq33twDsENywLziH03yaLSe7nO4LTbl2LTfcHY=;
- b=j73x+6cVWey/KTI+31acmEmAjSKyiKX4P22vey67bEU2z+3W7KvCVTacxUkkOn6Sgo
- xYyzxQozZtdH6OJ9bNw3g59tkSV6q3o5ReWSyuYqcYQv/ewZlea2PcfF5b1uuf6jUcyY
- 4UDWqvoYxqtDyPNDwsd+kPRBHpI54Pqa8RSEOuUAAEOSxGvWfgIzjit2Zu46mV8+RkoL
- xTT4WHMQLddGEtiGGSo7aDBCoFQE3SA3bPiq8tHw1nWvmJD5ZLCLYCNZMPh6kSs4yV2O
- B9bLjtF/9QN2N9SSiRhRs1fclMApvNixmqqxgcBoC7bBF2IHKhK6b7oSIMwfQVYNzbR1
- BFdg==
+ bh=4Vqjjalkl1kKBqp8C+N+9xKFO0bLAhiifAPI3EGR0dA=;
+ b=SXyoZmf51+yJMXC4EytgTinHEuWEneesZCx9bqaOyMtN92yVpXkE/UEt03BcZ855Gs
+ otgAkKryRy/9qcD3N/UYSndupsxu9QzZ4qtABhf60P4nSr6SCnMRvwrD8rbb/FcXhtIr
+ IusgT6xnxRUFiCPt93EFlXD087HnDodrUo9k30GSMT3oiUoU2ww4l8FoibZrXRZbIJyP
+ 82Pdf2423Ws7e5Kuq4a3Dd9a2EeDl6T7kNDVKyJERCmi2Sm35SCyl8BJJY6sZRsgn57H
+ fbXPaGO/j+hpFkpLr5jlpCiD1NKe8dbQItVRmPEo4LEssU9qvtE6r2TA3jMB+7C2+CKJ
+ plZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728888989; x=1729493789;
+ d=1e100.net; s=20230601; t=1728888987; x=1729493787;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=SN8Kmfq33twDsENywLziH03yaLSe7nO4LTbl2LTfcHY=;
- b=to+ePd4tcWFS7hHv1XyLAlzVVWjxOh6n5S+6duhLvavbWqPQFc2iDw40f5kRP/nIj1
- lHVtO1EDQkG4cvOUpKW6TCIyLZPmIuc0nFFLW+mZEpUFe8HNJ3W6HrGHCd9YYkOSbhTr
- eigo6VcF7Kl4/k0PPrQIfpUNIIE0VWdvOHeByHP/sf2CbuQsYzDhPOC23syf7iFtASwX
- CmMIldNPEEShuOrN8lcEs4pKS8RBUt6DNUMYWQWPPCLMtZUbaNDR+ZdgGQ55l3qzzCj+
- xNHDDzn7UdxPsPZXLmGFQs3HZcmRS4i1bo2RM7bqV2YENajBSezoKkciXb8wbGUDugww
- yyiQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWdSvOm87xMUF60oJZNH7TJYP1q5LlkufTGT7XRGETKptZppXcJHbREpw/0O22G0BnqmxoGk0c=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyg0eQkncekJgPxohe7hHnn8N/a2ZoCBXj0pKX6rx/5J5z76Jvf
- p7I/YQuaId7CPLqecLGwcn/vA0BXjoUGZphp3RfFLJS8wnKFgW2D7H/z6gcEzXE=
-X-Google-Smtp-Source: AGHT+IEQmGJekcAyNYW1NnmI2Bu7rE+ZdskeV4PRIe13rnwVl+nfZ1JDxi8tpvkwUiYJJoI/0mtFUQ==
-X-Received: by 2002:a05:600c:3511:b0:42c:b9a5:ebbc with SMTP id
- 5b1f17b1804b1-4311deeb82dmr98869285e9.16.1728888989570; 
- Sun, 13 Oct 2024 23:56:29 -0700 (PDT)
+ bh=4Vqjjalkl1kKBqp8C+N+9xKFO0bLAhiifAPI3EGR0dA=;
+ b=gfVFXV+fJurKTt1jTVqG5miLqZ1U+gt+Q3xgHvZPauvzNUhySJfHpEuTHq+iISmi8v
+ z6TKfPZwnKYFqXtIwBSn4NJMQwqMWAficRg1FHfPobNKJU6ffm6sDoznV99ATEZmkpVa
+ x7UswEqkrfnA00qIeUe4kyzRrhFxHQcW8CIl/jK7aLNCqvFn6T9mPviZyyYQNBs6CjuV
+ /AdLsgMAwNYkVluTSQUWxZ5xnK/bPPD9LTI4DWPpi8tFlFN1Zv4Dh+jVC4EJTIPpUYmB
+ d7A3K7pWjBoXjDF4j9XjaMp9KimgmGogvnKTw32VpeJkPlgeQnOHtTNy8TaLUL7SDYim
+ DlNQ==
+X-Gm-Message-State: AOJu0YxYHG06ASSE+nkt39mB1a2KjYXkBVV2uPmediy9j6kJd3UL/osV
+ 2z+w2U92+xX7v6sjAxrtMmZr2saHvBf4WeKbui/vA3iBLilY5Elv2Qwn7WlyoPU=
+X-Google-Smtp-Source: AGHT+IHcAqqpAd+CCArqlhB17gOayatq3Ue8VYaXX++Ep1F7Q4qMBR68/QNJMemUBiMpE4YngY/uDA==
+X-Received: by 2002:a05:600c:1551:b0:42f:8515:e48c with SMTP id
+ 5b1f17b1804b1-4311deb6142mr91292595e9.3.1728888987418; 
+ Sun, 13 Oct 2024 23:56:27 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:8261:5fff:fe11:bdda])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-430d70b4331sm145900095e9.36.2024.10.13.23.56.27
+ 5b1f17b1804b1-430d70b4331sm145900095e9.36.2024.10.13.23.56.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 13 Oct 2024 23:56:28 -0700 (PDT)
+ Sun, 13 Oct 2024 23:56:26 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Bhupesh Sharma <bhupesh.linux@gmail.com>, 
  Neha Malcom Francis <n-francis@ti.com>, 
  Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Michal Simek <michal.simek@amd.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, bmeng.cn@gmail.com, 
- u-boot@lists.denx.de, u-boot-qcom@groups.io, 
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, 
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
  Bhupesh Sharma <bhupesh.linux@gmail.com>
-In-Reply-To: <20240930-topic-ufs-enhancements-v3-0-58234f84ab89@linaro.org>
-References: <20240930-topic-ufs-enhancements-v3-0-58234f84ab89@linaro.org>
-Subject: Re: [PATCH v3 00/13] ufs: enhancements to support Qualcomm UFS
+In-Reply-To: <20240910-topic-ufs-enhancements-v1-0-3ee0bffacc64@linaro.org>
+References: <20240910-topic-ufs-enhancements-v1-0-3ee0bffacc64@linaro.org>
+Subject: Re: [PATCH 00/13] ufs: enhancements to support Qualcomm UFS
  controllers
-Message-Id: <172888898751.195460.6252270648855876898.b4-ty@linaro.org>
-Date: Mon, 14 Oct 2024 08:56:27 +0200
+Message-Id: <172888898606.195460.7997216705941687470.b4-ty@linaro.org>
+Date: Mon, 14 Oct 2024 08:56:26 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -103,7 +99,7 @@ X-Virus-Status: Clean
 
 Hi,
 
-On Mon, 30 Sep 2024 14:44:22 +0200, Neil Armstrong wrote:
+On Tue, 10 Sep 2024 11:20:17 +0200, Neil Armstrong wrote:
 > This serie regroups all the fixes and base enhancements required to
 > support the Qualcomm UFS controllers in U-Boot.
 > 
