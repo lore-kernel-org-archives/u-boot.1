@@ -4,84 +4,157 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C254DD1812B
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 15:35:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B60FD1812A
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 15:37:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C8298902A;
-	Mon, 14 Oct 2024 17:35:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 96EB288DEE;
+	Mon, 14 Oct 2024 17:37:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="L9aeU7G+";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="WRfiIF4s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53D1E89005; Mon, 14 Oct 2024 17:35:18 +0200 (CEST)
-Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
- [IPv6:2607:f8b0:4864:20::b31])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 06BDB88DC7; Mon, 14 Oct 2024 17:37:51 +0200 (CEST)
+Received: from EUR02-AM0-obe.outbound.protection.outlook.com
+ (mail-am0eur02on2061f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2606::61f])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2818E89110
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 17:35:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C33488FED
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 17:37:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb31.google.com with SMTP id
- 3f1490d57ef6-e292926104bso2249469276.0
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 08:35:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1728920115; x=1729524915; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=zKDEpYWB3ks0IwImiB/CBStKmRjc37MSxA7z31aTSG8=;
- b=L9aeU7G+spx0o0uCQGvC2Zoi1pf8IkIwexXvVO+tvgJ4oTGbVYltYchYkOGxYz7+h1
- ytqpI7F8eWXHl5xLtxBvwCB1WtIf+FpwQJ+5Sve2uM+UmAArGXb0aiGIworHMono2iO8
- abL8onUdcZdOIdRtrW0MXtrhuYkDiNgOXZQOM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728920115; x=1729524915;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zKDEpYWB3ks0IwImiB/CBStKmRjc37MSxA7z31aTSG8=;
- b=Ul2JSpv4KAgkNz1zhuMvLN6/0h69Tcbrmlh+Ab96Inv1xNRpSjrlDFZ1szvmSOukh8
- QJ2L07K97puTS1nDLZNAqiwXADm+ApgbXXW97S05DP9j2oV9VCoCx3OQawz8osBlWf8/
- I3+xxejzXM6tb5e5oo00hTDXrmL5lqAXXwCwLPyscBUbE77VM5VZs22Vctme5p45DRYu
- yHgKmtJlYynI3m2ohNZErQhO76Qbzd4fdgmvkK1NJt2hAhLD1hNJ6fdwVNDYB5fIFlbA
- s8WhntxvBZSGO2u1vgcBlXYwwrTTLNEse4Kqy1eSdX0aZVFy0IgHi2ch5oALfa4FH6tU
- zWLw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVlLll1A9XOidO+rmm6teDR8H590ajfchFZjSoaFN7LeLwdp3xGaiohtWFun9DVZcmj8XM9y28=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz/FX+LRs8hBPAbuKDrk68IiWoe9AOVnjmibkO33dCaHMYc9ANU
- todXyVGfBPBpVcGuajzdDjyFxA3/ikQMWRnnAh+pOGR3s+fLqNiR5C9IEUajyvo=
-X-Google-Smtp-Source: AGHT+IEAN0H4KZO5Xm3Lw7LPV5TajjAB7MJJIZ0ojR37u2Ladu/ZHXWhbhTGFutViQWfNF5btABUQQ==
-X-Received: by 2002:a05:6902:10cf:b0:e26:9b7:598f with SMTP id
- 3f1490d57ef6-e2919d83c56mr7380820276.13.1728920114863; 
- Mon, 14 Oct 2024 08:35:14 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b1148f07f4sm431172885a.65.2024.10.14.08.35.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Oct 2024 08:35:14 -0700 (PDT)
-Date: Mon, 14 Oct 2024 09:35:10 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Devarsh Thakkar <devarsht@ti.com>
-Cc: Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
- Simon Glass <sjg@chromium.org>, jonas@kwiboo.se, richard@nod.at,
- raymond.mao@linaro.org, u-kumar1@ti.com, u-boot@lists.denx.de
-Subject: Re: [PATCH] boardf: Modify DRAM message
-Message-ID: <20241014153510.GN53053@bill-the-cat>
-References: <20241010070909.288313-1-n-francis@ti.com>
- <CAFLszTjJ1GJNd5Fn8U2O5WSnKMn99XW_pGLmejkYy_PBfxSEGg@mail.gmail.com>
- <f194f14a-c7c3-4aed-b4b8-f093f64c7b69@ti.com>
- <31aeb96d-55b1-4587-b212-2632ae4cc124@ti.com>
- <20241014142717.GJ53053@bill-the-cat>
- <eef0f5e5-1a54-015b-259c-c8eea4a54d6a@ti.com>
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=crLo7jF2z+M+oE98uL5rxgw+r2t4IIAKKc4P1GptrKs6oanlurnWlfmWJUeRUA4IIaHmhKg7H6hLLVi5BXISziM2L5VkgQsJAySxbDCCM4dgWcxXqjq2l4PDzah3KinKUAtyBy6yc5Orsv3fyD+hJz/NHoI3ZX878zAIrZiZYxsBpwhanlzzK2aT2rFLmqg3rK+0PbcXbC24t40O/8ewejwvr0XnEytQmwR0MH1EWG8PSoWt+FCUMaFqyTq+8SEnvijUKupQ6Tv2fEYdFUCjt054ypMSW4zUsEUkHxE84qsirQ9LSbTouMQSx8a4Gge86AhLW9fUrlpoVjVfoTn4GA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=CiB2FXyjV5qnogfaKzAB8hphJlSIeIihExv4VJ94b/U=;
+ b=GLAfOJS+IajTklSxzOqRBYlqLBD7AXSRIkmiZh4BxbEXiOY781aJqfvQljCBKNZzPftQP7+JhjOoruRfaxYKBClD2qd5sZaaQd/w+VyfemwRw5WoQgqeFOWHe5vjtw1hEmMkSWO1vKzQRxY8j1WeAs5sp7s9WAl+B9jOjuqbCedNRqmJFodpdxDIT/MRLMLRjqcM7bVLLEARNnUcAWl167HjEk5qT5B29n7ZVM4T+gdNg3pKSI4xn43XbccRnwHHffQKA6v7j9AhQfb0IamPheEmQvmIVaROgQFXe70OEMY/n2OwVmyefOh6CHqYcTDmwRnA0omVFyTypiwT2WwD4A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=CiB2FXyjV5qnogfaKzAB8hphJlSIeIihExv4VJ94b/U=;
+ b=WRfiIF4sMv2Xqc7hof1S72mpvy+Clmu9poS2qitOR+3GFxFeednjVex3Z/L463VV7h8CVliORNv9D9LXZkNThcjyKsDRUIq+f3LlB7k5OatEq3EajY2h3Rx3W0eKiKtJpwZ0xAUv/mJCTy2P9x+RKU0GWyGC1d/GMqCWv65A/Cs=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by DU4PR04MB10718.eurprd04.prod.outlook.com (2603:10a6:10:58f::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8048.26; Mon, 14 Oct
+ 2024 15:22:17 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%7]) with mapi id 15.20.8048.020; Mon, 14 Oct 2024
+ 15:22:17 +0000
+Message-ID: <48de838f-dd40-403d-b062-083e06e7cdac@cherry.de>
+Date: Mon, 14 Oct 2024 17:22:16 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] boot: type boormethod
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+References: <20241008204614.56215-1-heinrich.schuchardt@canonical.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20241008204614.56215-1-heinrich.schuchardt@canonical.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR4P281CA0360.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:f4::13) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="eIxCydyGUtxyKYYB"
-Content-Disposition: inline
-In-Reply-To: <eef0f5e5-1a54-015b-259c-c8eea4a54d6a@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|DU4PR04MB10718:EE_
+X-MS-Office365-Filtering-Correlation-Id: 73f673b5-5551-472d-b1e9-08dcec63fd33
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?dXJXSDd6bjdQZ1ZKMUhkV2psZXFKVW5GQmRwOUFPMzRpSWpkdllzVEt4WlJC?=
+ =?utf-8?B?T2tiWloyQ3RHRGQ5SDg4YTdKTmlVMEpGb0tBcDRua3FucXpHejM3RXRQcmMx?=
+ =?utf-8?B?dVNEWWUyZXBDclN6Y0o5ZEdMN0pyRC9HcjduRmd6WEp3YUc0bnozcE1SRGZs?=
+ =?utf-8?B?TDEveXBkZ2tPMDNld0dZTnRNMldLanFQSE1BZGNaRlRUUGV2My9YcnhTR0JH?=
+ =?utf-8?B?bFdidDlRZGhaUEVGYTV5Z3FyTU8vRUZtR2gxYlhCdVZwT1RyRzdYZS9UZ3lz?=
+ =?utf-8?B?MWdmclJUcVI0cGNsYzQvenVTT3hlYWw0czlJaU9JbWh6cDlTSCtRSml6cmx2?=
+ =?utf-8?B?Ym1zaURDNW92Z0Zzc0F1QmlJSE14VUNKVjB5aTAwUXd2d2EzeHNqMSs5TUhB?=
+ =?utf-8?B?dndxSlJUVURVbm1OUGs3QVc4bnpkSjlsei9FTUlOSmsvZnJ2ZWdpclduR2tP?=
+ =?utf-8?B?QlBzd3BLcVFLaUMxWjYyTGtNcXhMQ3JCa1BVY0lkM1N2Zk9BbTN2QW9hRG1a?=
+ =?utf-8?B?L1ArYmNpUFExOUNqRGZCNmI4aFBKei91QitiaHpRL3JISUxBL0k0N2F5eXlG?=
+ =?utf-8?B?YXhObDhBMmQxc0pndkJrZUF0dTk3dzU2cGU0azJmbVBPSFBobzJENUY4dEhO?=
+ =?utf-8?B?Q3d0bkRNVUJwVzAzN09Jd3MxV3YwOHZwejczTThaZGxxNUt1eE9rb3dNaTJr?=
+ =?utf-8?B?UDNsVUlUOENTRkJwT25WRk1Wb05iejNqZDNXVFVQMVJUK0RBVzlVRUtCWW14?=
+ =?utf-8?B?VzRZZzhhNVpjOXBQYUtOMUFnUlFaYzdxWmN2d29ETU05TTh1MmhCVDN6RWd0?=
+ =?utf-8?B?dVJqS3BaTm5jdWVKZUM2anNKaDFadE9IaDdTczBUUXdSVkhXZ2NVVjRSbEtZ?=
+ =?utf-8?B?M3BnTlgvY0RmNUFid3lTWjBQWmlwbHlWS3VDNURveVVRU3lmSVUzRjNYSkZs?=
+ =?utf-8?B?d3pmN3REZm80MUhTZ1FRUEIxeGJwVVFyb2tqTk9BZVk1MWxPUUd1V2NDSXJp?=
+ =?utf-8?B?TEpLN05JcWVKYU9aaTFQelBRWHM5WmRueFlBQU51dG5Rcmx0TGgzSmdPMlFW?=
+ =?utf-8?B?RjFwRGg3UUpobEd0TXRadFFyN3ZWSG5TTUliYXQ2OStGcCtleEU0MDRrSTRM?=
+ =?utf-8?B?VFRmQmlUeGUweDByREdnOEQ3SjJoZDMrQkpmWDZjYjd4ZFNGTDVFcVhnTFN4?=
+ =?utf-8?B?WXVWRlZkcy9ZbThNTFlwY3Fid2ZXeEZ4UmljZWJKd0g1V1Y0WXBKc2lPbFh5?=
+ =?utf-8?B?VWVUbUhONnpwWU5TaGNsZTY1MjFZTXh0aFJJbjUzb1Zwa2ZSRWozU0NOZlYv?=
+ =?utf-8?B?T1d3RzJYZ0FMK2M5emZxM0NYbFhJYmlZeFlPMlZ6WExGdFVVT0FDb2YxdHlS?=
+ =?utf-8?B?R0R4Uk5jdFUrZUsyaHVjdGFwNlBtZVVtYVYwSFlDend0SmNpaC85T0dQVUtE?=
+ =?utf-8?B?dU13MGVQVnlVYTZNVVcya2dkcXZrVzdXaitLS05iQTBXSTd3dmtYbFQ1bTVK?=
+ =?utf-8?B?WHJYaHd5VmJOVGpiR2w2SFc3SnVzV3RDbXVlTi9EblhnYlBJNmZENExpaU14?=
+ =?utf-8?B?MENDSW05c21ZRVE4dzZpMXF2cGRaOStFc1d1NXQ1SWhHOGV6bXczejg0WVND?=
+ =?utf-8?B?aVRXeFIydVl2dEgxTjdIb1N0WDNlbHA4V3pSa3hxN1REakpQeXlyeTkvUkJm?=
+ =?utf-8?B?QmllRVpVMC9vZ2R6VnNPOVlUVEFRSEhMNkpzZ3FxQ280Y0liRitYTkF3PT0=?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZUNYMWZvWjVEd08yK0I0dEVZQ21ZSHdnNlRpcWlpT3dLQ0VFamVDWnJRQzNR?=
+ =?utf-8?B?NENrS0VSeDczWEdDa2dUQllXQ0ZRd0hQaUE3WlZLTW54blZYeHlSNzRmMjNO?=
+ =?utf-8?B?eERNTzlpQTU1ZDZjaFRiZFkvVHVTUXBXV29rZG01a1ZnbUFOTWF6ZnpGRk5O?=
+ =?utf-8?B?dkVXRkN6WnVFcEtNTFF4dkVWU0YzQjlOWE5XUURLRTdsUGhaYXppTmRXTTZZ?=
+ =?utf-8?B?cUtzcmhnV1lBUVJvb01IeTN2VE91YXB1NFNBZGc5QVVQRnZWbkFDM1F1VCtt?=
+ =?utf-8?B?WkltVE5BTEtOVmhmdkdDbnVWZnk4d2E2QktWOXF5NGFya01NVWpsZFNxZEVk?=
+ =?utf-8?B?VGVnb0VwTEdnWitrSFcyN0VyN0hpNjQwR0RWUTJhTDNYYnpaS3dZa2Q4Y2Z6?=
+ =?utf-8?B?bjBiQTBiOFIyVXM1aUtkNHdpRlhBSkRFZnJYRm85cVFSWjhBb1pJVWk3R2cr?=
+ =?utf-8?B?MTBwNE5tTW4vQ3hvU081dkgybVZxdm1oWHA5U1dpUENZNzZhMG5ScXN2M0ll?=
+ =?utf-8?B?YUVGRzRlaWFwNXFUVHdOUXpsbmdOYVUwcmtkaTNlMTYwVkQrVUMydDUreWdW?=
+ =?utf-8?B?eTBWN2xaRWJFbmtYbGlCZ29GNlJHQUZSODRQa2t2Q1V0NEpMWkdTbk9MNnFW?=
+ =?utf-8?B?OGxWbnBSQ2Z1K2VPN2MycEFQSG5zaDBxcld0aXVRb1ZXMnpJK0trNjJHcGky?=
+ =?utf-8?B?R2l6MjdMZTFPdFM4cGFXcytTY1I4NUg4UHFCcEN2aDgvTU9OTmRrZWhRRG42?=
+ =?utf-8?B?L3VoaFlFT1V6ZWhVK3ZZcVF5NkV2U2lDNm52OStJaWk2RENGSUpmeURQWGZC?=
+ =?utf-8?B?NjBmQ3hIa1RRL0dDU29BVHVyNmowblRnYVBNRG5LL2FmTjZjS0xueGVKemUz?=
+ =?utf-8?B?QVpUQlJvK1RCY1dnOGFWdzF3eENFVmNaV2x4ZWZjS1RIeUpLbnpPdUV3UHpL?=
+ =?utf-8?B?U3U4Z0wrejg2VHBwUHc5cW4wc01CcFFLS0VpL1JwckFEakZQdmxIQWZLamJk?=
+ =?utf-8?B?WnNZRkdPRW9GN0ZzRUp2UFRjSS9hT0FzU3hQOStEYVF4VkVGSGxEMzhlZVF2?=
+ =?utf-8?B?K1B2bnpSWms1ZytwdCtaTFl0UFp4U1hMczNHNGppelI4TnNJUytqWFFUWWIy?=
+ =?utf-8?B?M0NSSXBPZXpTY3pPN2RkRUs5cFFTNmNxWGZ4UTlTYWM4OFAvVnNvOFFJZ0cz?=
+ =?utf-8?B?YUZTc2J1bzNXZVNPd0YrbnRCZGhDcnhtOENFTndBNmUrRjlDcXBOVFNCSE5Y?=
+ =?utf-8?B?WnFpdVhWYnhCbXpoUFB2aUFoWFZvSDlYeFQwOGZCWEdKakd2aHV4WGJNV2Rv?=
+ =?utf-8?B?c2tpbWx0UWFabFZrQm5KSUFoRmRSWm5BZDF2dURhT2YxOEhUcnhUTHZsbHlU?=
+ =?utf-8?B?ajN4SzB1a0tIUkdWOFpuQk5BMzhUN0JscUJNMXp2b2xBN3lkRkdzQk1OWWg4?=
+ =?utf-8?B?dzJVd20rdnNyc0hyV1UwRGl1aVRsb1V3blpkOUpmaTc1N3RkckdHalBtbUpO?=
+ =?utf-8?B?V1gvOERpTTl0ME1IenhJWEY1ZTFKcWRFaENQZm9oUlM3UzAzVWoxREh2YkJ6?=
+ =?utf-8?B?eFRFaFJLOVV5MzAyTkE3MGFtM1RhVGM2ZnV4cE1jL200aGdKT2NYeFJnMGM3?=
+ =?utf-8?B?M0tQQzUvN25vQnFnbjRmN3FoWXlobUMza0dEaUxBZzg1ZVkyclNqYTdhT2pr?=
+ =?utf-8?B?bXo4cnA0MDlxYUJQRFd1ZURSTklua25uWEhqaHNLU3pIWS9vVVVBZVdLRUdu?=
+ =?utf-8?B?YWh2a1MzM09nNTE2NDNtVDgrdXRMUzVSdEhnVG1iZkwzZ1lyQ0I2M0x1b1B5?=
+ =?utf-8?B?dno4UnpXb3VFQkxGQVpSeHZmdmF2NHVOOWp2aUhoTFNuc2tGRTEzdUJiTGRj?=
+ =?utf-8?B?cmNyQ0xnMGkyNkNhUzZ6Z1Qwck9pc3Frd1ZWcVpmT0ozSndPZERTRDg0QThF?=
+ =?utf-8?B?a00yVTNpdnVZaDNoaDhvMi9HbUU3MVB2d3RYc1pxK2ZTWDh6M3VzbU0xejR0?=
+ =?utf-8?B?R0FlSk5pektyKzk3VG8wVldMT1pyTUJkU01KVTlDeGNEMCtHK3kyY1J2RnZZ?=
+ =?utf-8?B?Z1VHYlhnWXRxVndTNXB1Q2NUYU5mc0JFMXBXQUd6L290OHduVlV1Y0FWSGZ1?=
+ =?utf-8?B?bWZOUEhTaWNEb2hjNU9xOWJrSmJWZUovdnhtQ2dBT2lSSm5NZGVRd1RsY2RJ?=
+ =?utf-8?B?Z1E9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 73f673b5-5551-472d-b1e9-08dcec63fd33
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Oct 2024 15:22:17.5302 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: +eeqSY8zYnSmzbemcFye8LyWU8LG+7ojIKgqf3Uf5kg63/PpS672mapE1bhsp+MM6s4jam5eE/Jg8syXf6lw2ThUNnuvqhek4HwNffx/FXQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR04MB10718
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,103 +171,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Heinrich,
 
---eIxCydyGUtxyKYYB
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 10/8/24 10:46 PM, Heinrich Schuchardt wrote:
+> %s/boormethod/bootmethod/
+> 
 
-On Mon, Oct 14, 2024 at 08:59:39PM +0530, Devarsh Thakkar wrote:
-> Hi,
->=20
-> On 14/10/24 19:57, Tom Rini wrote:
-> > On Mon, Oct 14, 2024 at 10:10:43AM +0530, Neha Malcom Francis wrote:
-> >> Hi Andrew
-> >>
-> >> On 11/10/24 01:59, Andrew Davis wrote:
-> >>> On 10/10/24 1:50 PM, Simon Glass wrote:
-> >>>> Hi Neha,
-> >>>>
-> >>>> On Thu, 10 Oct 2024 at 01:09, Neha Malcom Francis <n-francis@ti.com>=
- wrote:
-> >>>>>
-> >>>>> The message "DRAM:=A0 2 GiB (effective 32 GiB)" can be a little con=
-fusing,
-> >>>>> modify the message to show exactly what is meant:
-> >>>>>
-> >>>>> "DRAM:=A0 2 GiB (available for U-Boot out of total 32 GiB)"
-> >>>>>
-> >>>>> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
-> >>>>> ---
-> >>>>> =A0 common/board_f.c | 2 +-
-> >>>>> =A0 1 file changed, 1 insertion(+), 1 deletion(-)
-> >>>>>
-> >>>>> diff --git a/common/board_f.c b/common/board_f.c
-> >>>>> index 154675d0e40..b7add8f7d3d 100644
-> >>>>> --- a/common/board_f.c
-> >>>>> +++ b/common/board_f.c
-> >>>>> @@ -254,7 +254,7 @@ static int show_dram_config(void)
-> >>>>>
-> >>>>> =A0=A0=A0=A0=A0=A0=A0=A0 print_size(gd->ram_size, "");
-> >>>>> =A0=A0=A0=A0=A0=A0=A0=A0 if (!sizes_near(gd->ram_size, size)) {
-> >>>>> -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 printf(" (effective ");
-> >>>>> +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 printf(" (available for=
- U-Boot out of total ");
-> >>>>> =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 print_size(size, "=
-)");
-> >>>>> =A0=A0=A0=A0=A0=A0=A0=A0 }
-> >>>>> =A0=A0=A0=A0=A0=A0=A0=A0 board_add_ram_info(0);
-> >>>>> --=20
-> >>>>> 2.34.1
-> >>>>>
-> >>>>
-> >>>> I've forgotten why the first number can be so much lower than the
-> >>>> second. What is causing that?
-> >>>>
-> >>>> This is quite a long string...could we say "(total 32 GiB)" ? Then
-> >>>> perhaps add something to doc/ to talk about the banner that U-Boot
-> >>>> prints?
-> >>>>
-> >>>
-> >>> Why not just only print the total number? The amount available to
-> >>> U-Boot seems like an internal detail, I'd guess most folks just what
-> >>> to see at a glance how much DDR was detected on their system.
-> >>>
-> >>
-> Knowing how much u-boot is using might help someone who is working on some
-> memory map related stuff or if they want to stop at u-boot prompt and twe=
-ak
-> environment variables related to memory map (e.g. load address for kernel,
-> dtb, load bitmap to DDR etc). Overall I personally don't see much harm on
-> keeping both the information (DDR available to u-boot and total available
-> DDR). If the word effective is confusing than the print can be made more
-> verbose as being intended in this patch-set or by following the suggestio=
-ns
-> given by Simon and Udit.
+Typo-fixing commits need to have a typo in them, that's the rule. With a 
+typo in the commit title, that's respected :)
 
-U-Boot isn't "using" 2GiB however. And in fact the command Simon is
-working on to dump the memory table and what's where, as far as U-Boot
-knows, would be helpful in that case.
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
---=20
-Tom
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 
---eIxCydyGUtxyKYYB
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcNOikACgkQFHw5/5Y0
-tywh4gwAsoIh88cAa8s5V11Tggb/TJ/ely9Cbo0vWhXQEtor9QqGl+VjEgEUXxAf
-9rj+na1AzcZkXBL6ENwc7zo8g4ZkKO+Yjuzz5fnLYLgJR7+wyCfKoMtdAGBMjbdK
-nWNH7PNmyHNTuxvOR2/Gl7006UKL6VBRWYkGMZ0L0+SK0u9Ot2I/aEwdJTKyMbtB
-9n3H0R3H5kCSh8gXuPhrBP/8PXCjem6kBBPFQI5mPOyahj5o4OeXwDpHe4UYJn3U
-QT20ka4bxvH3R0MvdeYj+UjZcOJcQATLhnM+mwdAw6UI1Vh7sMqYDA0mBk7/KoZi
-bsMKVRW37e9vfu1nfz+ih19j4mtsq3dhoSYVOz52WhD5qyLrkLKNF1aUIC9exezV
-CsjLKZvgfjXMsipKfxB/Q3/rOD6dwH7iexVi/EhHw4VetTsNU0DbCeowh5eltuwb
-jUflTiMEaQoPFUhmIcdUbegsGECxfzC0ksd2whBqYfO05Wqz/CDqJ9gq3m1+SQaa
-3StpzJB4
-=pRMg
------END PGP SIGNATURE-----
-
---eIxCydyGUtxyKYYB--
+Thanks!
+Quentin
