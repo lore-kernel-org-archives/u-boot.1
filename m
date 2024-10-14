@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5408FD18131
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 17:12:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCBADD18133
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 17:16:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AF49E88DA0;
-	Mon, 14 Oct 2024 19:12:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 3602888D51;
+	Mon, 14 Oct 2024 19:16:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="LkEhELuu";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Wskmj4fQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E6B588CA1; Mon, 14 Oct 2024 19:12:45 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 85F9788D72; Mon, 14 Oct 2024 19:16:44 +0200 (CEST)
+Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
+ [IPv6:2607:f8b0:4864:20::102d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 67A4188D72
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 19:12:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F67688CA1
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 19:16:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1728925956; x=1729530756; i=xypron.glpk@gmx.de;
- bh=D3oAWKfZPx/wd5aZ3O71qRdHF+sd0seTXLB7MfcHs8Q=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=LkEhELuu5ERCsEPmlgmsDkDOpv7V2AJKviior+wOqE+shYwKsUByrDsBfA3jjy9x
- IxAba4lSP2L/h9Su1sZGR92TJDcJYTR88CC/ZNn0m6ASGKEbTLm9kX6VtdREkvL4G
- 27CZ6D7P3ADVD/SBuyHHDmF20VCu1mTrUCyWPhmJD+pbtLx8uOck7uNNgV6gY6J2E
- JvuJJ516GdBkSgZNC/1onXkOqw4bzzXstAy2nItjH+i89vGeHuCLqNa/hsfsgGdBW
- /d025KfXZFnGUBbPiu00Lm0UqPWcRw4LQsoLlO/eRKEN0axOl0/JRPt0G7RO2rrK/
- hZSIMrbDZgK9yc593g==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MJE6L-1tG0lT0Efb-00IlG2; Mon, 14
- Oct 2024 19:12:36 +0200
-Message-ID: <ff804d23-b384-41b7-86f9-d0e8abb1d5ed@gmx.de>
-Date: Mon, 14 Oct 2024 19:12:35 +0200
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pj1-x102d.google.com with SMTP id
+ 98e67ed59e1d1-2e31af47681so1624257a91.2
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 10:16:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1728926201; x=1729531001; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ROepkrZLgm2/qdW/IxCAsNJtUSPGi0BXj3Gt+tzMOM4=;
+ b=Wskmj4fQ02y1P74nQMfvFghsj3xnWhw4zyKMzvXRzj3j+bsvV/aJsD/8VVF6s1wmSm
+ EoST4Xnom1IlaIP9Uxt5nVRI7e0pPZYmd/4GM+40gCUg1JZ3ngLZYCa+U1MgZznuV7ea
+ A2milcAqpZq2SBMKprRQP1N7c5MppxD/6f8r9Car/neV8o+BHhrQfvNxJCam7HB0zOab
+ S4m2g13l6oNOSZfFoRyt3rKqP9T4qOpBE0+noQs+EkRjq3c8rPXbB6rJSdDqdq585Bz8
+ WC3WyRuA/OgUUqAnm2KwvAVzxqDbOzf7MY/P2CNH2hurpNae7B9Ab1UScMFgCZYko1iI
+ ZR3w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728926201; x=1729531001;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ROepkrZLgm2/qdW/IxCAsNJtUSPGi0BXj3Gt+tzMOM4=;
+ b=Nco3W76uf1NQ5D/bTiO+NJIfQhxQ5r/tglDYOFtOXFRyF+4t8d9rtTM5zGVyzeUf4L
+ TmQOqmhBwDnNjX+lb1M2q0PnAW1CHrVA8TOLMMKQJqdmC++jYSaAgS3kbAZSwsoWbhnu
+ EPXByZnYEZRvkXc6mWwuCFYoLSKefE6w9nDnGqQ0+IV2aPr/P/WeklFiHx5TKc6CWfi7
+ b0YqWdXfABfHORtBx8zA11R9suv8k0IM9TBYLulPk3KY+FypWgJhRByN/roeYW+IRsKN
+ ulkRMkHHEMWzLxVPzcZ6pnGnPyiahysMqDaPk+FmK+ZmoILf2DenO77k/ywuG16+8n5/
+ CmLA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUnsr9gZls7ZVbZVMNAVJAjckm3184sID4yGU33dD6oQleu2USJYfdrfDijBiE7J+kS9hf8SP0=@lists.denx.de
+X-Gm-Message-State: AOJu0YyvmGcLS0Tsi0Dam1Zo4dxUnOH/hoaso7pF21893KFNqfpW8f1S
+ 9HA61uFywL/8khP3eMK3MNsWXRSq37Ho5jlYXoUn1Mmpo6uNY1sCijJSsqQc83nk8+/wiWgYIeL
+ LrBkM+xsL/ZJmuIwJB+pNPEryyB+tL6g4eiRqfw==
+X-Google-Smtp-Source: AGHT+IGheymr+6wNGl+wlw8wxEJE5ZGFUsKJRoVIbn75y4gXwIYnjMaRSVY00GljMbbTLiNVEXWi41cO2JD9zrJn7aQ=
+X-Received: by 2002:a17:90a:b383:b0:2e2:eacc:3227 with SMTP id
+ 98e67ed59e1d1-2e2f0b01fddmr14039279a91.23.1728926200643; Mon, 14 Oct 2024
+ 10:16:40 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 02/15] lmb: add a flag to allow suppressing memory map
- change notification
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>, Jonas Karlman <jonas@kwiboo.se>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>
-References: <20241013105522.391414-1-sughosh.ganu@linaro.org>
- <20241013105522.391414-3-sughosh.ganu@linaro.org>
- <20241013175146.GN14210@bill-the-cat>
- <CADg8p97a5jVR=_YRpbzBDEFLzPea-UtBFHc+X679vyPhGfC2Xw@mail.gmail.com>
- <20241014150217.GL53053@bill-the-cat>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241014150217.GL53053@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+References: <20241011173341.24330-1-heinrich.schuchardt@canonical.com>
+ <875xpyle5k.fsf@bloch.sibelius.xs4all.nl>
+In-Reply-To: <875xpyle5k.fsf@bloch.sibelius.xs4all.nl>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 14 Oct 2024 20:16:04 +0300
+Message-ID: <CAC_iWjJ6DPe9Fif0cbL12Fc54vhap6Z4NZ+JA0Phr_VthP=7jA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] efi_loader: provide variable BootOptionSupport
+To: Mark Kettenis <mark.kettenis@xs4all.nl>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ vincent.stehle@arm.com, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:Fw2Io99/B18X2gJBt2ncVeg8e+OX9zQGbYR4a/AA35aEB8pvEbP
- /d4riCnrA0PdyftiJhVIR+1BVkxUu6ggLN7w0cWftaK2gO0N2lqE+l0XSS4W4U8VsvU/i1V
- kKeCSYePmOMjb65qRHLXUyZKdS+R+1p+W0kEX/p/qeAjIef/fLnREEApt4PzuvIDWaMZudw
- 3NGnkg9+eDGVbWcI3bw5w==
-UI-OutboundReport: notjunk:1;M01:P0:hJFQrMI1RCc=;lKp8pFflZBTqnZkmxrOlwudrZRd
- QWuasyi7i99VPSNXuUdk2/H2AOQrtcMij3qdkEaorlMqgs5R9lgsHQeWV78fSNoJdNQ70TurF
- 6yQrTngpnAjIww8zFCIOM1aR5a8W6nsi3cxW1/ujZXBN+t+Q184cVn1rV46nnHNjRStUOAH/g
- gHfKHC59iOo/L86RLlYgfhhSurrtI5CPokJ5384en68YaQm1GvlKvwipsF0r6kqvZndZiQVuK
- eKpZ8fC8CL96fGtcVH0Xj8sJaL2qg2EjEy8+wkxu4OSstftIVN04RgV6DwhE8V9IH+QNNCxz8
- HG6EXBGrOUM6n9hf/a9j3UupTuaX4XofwLiLx5X54N21hGl7DLWDL5sY1UlinEk8y4lIDLrGS
- DPThuxkI0wjUHDwRGGN6GCDX6GEfPljOjJ468ILROtRnOQsh1i32GT/K9cLtOuAyPdC8S8WTb
- yeg5P4QAkkkxf7T1UpmCc9YodddjzRYUsrQxKYHjkgZFtPJ79eJDGnERYFMBiWmaGYCxgLTdi
- 0O3JaNvYihmWsiL98G5USQZemR/X58Wdmzah1kzOs0DxvMHbjpCgPk4NBHZvzvbk8tp72u/vc
- ud7D6+visaRtZh07Z99N9VMR7oht8wFvOhnE0oyghM6eedbBbLSqQs+jjmZ+W1z+JMzOTDjrd
- jmnL4+Lq3BLekWZvhAzhvJpSX6W4X2Jb3sM+uYrbOVvcCY6yr6tFT98fyqxbXGlvOaC/0mmbs
- TGGARb6AoSH5t5HQbtRg29k7c/8r5Nm0hG4LzuUMX3+uwrUXjGIAG643wFKlR8tSdbvEuDO+3
- iZ7aUK87aaKzLxgtlBR28UDw==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,50 +91,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 14.10.24 17:02, Tom Rini wrote:
-> On Mon, Oct 14, 2024 at 12:26:02PM +0530, Sughosh Ganu wrote:
->> On Sun, 13 Oct 2024 at 23:21, Tom Rini <trini@konsulko.com> wrote:
->>>
->>> On Sun, Oct 13, 2024 at 04:25:09PM +0530, Sughosh Ganu wrote:
->>>
->>>> Add a flag LMB_NONOTIFY that can be passed to the LMB API's for
->>>> reserving memory. This will then result in no notification being sent
->>>> from the LMB module for the changes to the LMB's memory map.
->>>>
->>>> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
->>>
->>> Can you please elaborate on what we need this flag for, for example wh=
-at
->>> the valid situation for it is? We should be updating (or adding commen=
-ts
->>> such that updates are automatic..) to doc/api/lmb.rst as well. Thanks.
->>
->> The flag is used to prevent notifying the EFI code about the change in
->> the LMB memory map when the alloc/free request originates in the EFI
->> memory module.
->
-> Simon, this is the loop you referred to on IRC the other day, and
-> instead you solve this with the flag about a point of cooperation?
->
->> The EFI memory module adds the memory region to its
->> memory map as part of the alloc/free operation. The idea is that the
->> LMB module should notify EFI about changes to its memory map when
->> these changes are initiated from non-EFI consumers of memory.
->
-> OK, so the first change is that since doc/api/lmb.rst is just a
-> kerneldoc of include/lmb.h we need to add the flag here, and we need to
-> first document LMB_NOOVERWRITE which is already undocumented. The next
-> change is that at the end of the series, update the rst with some
-> paragraphs about what and why, for clarity, after auditing include/lmb.h
-> for other items that are missing kerneldoc comments. I am willing to
-> make that second change a follow-up series, however.
->
+Hi Mark,
 
-Cf.
-[v2,1/1] lmb: add missing LMB_NOOVERWRITE description
-https://patchwork.ozlabs.org/project/uboot/patch/20240919105523.179497-2-h=
-einrich.schuchardt@canonical.com/
+On Fri, 11 Oct 2024 at 20:53, Mark Kettenis <mark.kettenis@xs4all.nl> wrote=
+:
+>
+> > From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > Date: Fri, 11 Oct 2024 19:33:40 +0200
+>
+> Hi Heinrich,
+>
+> > The UEFI variable BootOptionSupport is required by the UEFI specificati=
+on
+> > [1]. It reports if specific types of boot options are honored.
+> >
+> > We don't support any of these extras. So we should set the value 0.
+>
+> It also says:
+>
+>   "If the global variable is not present, then an installer or
+>    application must act as if a value of 0 was returned."
+>
+> So until we support any of those extras, we don't have to provide that
+> variable.
+>
+> > [1] 3.1.4 Boot Manager Capabilities, UEFI Specification 2.10 Errata A,
 
-Best regards
+It does, but is there a problem with being explicit? Are you concerned
+about the size growth?
 
-Heinrich
+Thanks
+/Ilias
+> >
+> > Cc: Vincent Stehl=C3=A9 <vincent.stehle@arm.com>
+> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > ---
+> >  lib/efi_loader/efi_setup.c | 23 +++++++++++++++++++++++
+> >  1 file changed, 23 insertions(+)
+> >
+> > diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
+> > index a610e032d2f..05d035f4eb5 100644
+> > --- a/lib/efi_loader/efi_setup.c
+> > +++ b/lib/efi_loader/efi_setup.c
+> > @@ -179,6 +179,22 @@ static efi_status_t efi_init_os_indications(void)
+> >                                   &os_indications_supported, false);
+> >  }
+> >
+> > +/**
+> > + * efi_init_boot_options_support() - indicate supported boot option ty=
+pes
+> > + */
+> > +static efi_status_t efi_init_boot_options_support(void)
+> > +{
+> > +     u32 boot_options_support =3D 0;
+> > +
+> > +     return efi_set_variable_int(u"BootOptionSupport",
+> > +                                 &efi_global_variable_guid,
+> > +                                 EFI_VARIABLE_BOOTSERVICE_ACCESS |
+> > +                                 EFI_VARIABLE_RUNTIME_ACCESS |
+> > +                                 EFI_VARIABLE_READ_ONLY,
+> > +                                 sizeof(boot_options_support),
+> > +                                 &boot_options_support, false);
+> > +}
+> > +
+> >  /**
+> >   * efi_init_early() - handle initialization at early stage
+> >   *
+> > @@ -261,6 +277,13 @@ efi_status_t efi_init_obj_list(void)
+> >       if (ret !=3D EFI_SUCCESS)
+> >               goto out;
+> >
+> > +     /* Indicate supported boot option types */
+> > +     if (IS_ENABLED(CONFIG_EFI_BOOTMGR)) {
+> > +             ret =3D efi_init_boot_options_support();
+> > +             if (ret !=3D EFI_SUCCESS)
+> > +                     goto out;
+> > +     }
+> > +
+> >       /* Initialize system table */
+> >       ret =3D efi_initialize_system_table();
+> >       if (ret !=3D EFI_SUCCESS)
+> > --
+> > 2.45.2
+> >
+> >
