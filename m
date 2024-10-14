@@ -4,67 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FA6AD1812A
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 15:54:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D92FD1812A
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 15:56:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB1B4891B0;
-	Mon, 14 Oct 2024 17:51:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id EA4428903C;
+	Mon, 14 Oct 2024 17:56:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Fibi7ahW";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TJxwMwN6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 91EDB8921B; Mon, 14 Oct 2024 17:51:25 +0200 (CEST)
-Received: from mail-qt1-x82a.google.com (mail-qt1-x82a.google.com
- [IPv6:2607:f8b0:4864:20::82a])
+ id 8377F89157; Mon, 14 Oct 2024 17:56:53 +0200 (CEST)
+Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
+ [IPv6:2607:f8b0:4864:20::f33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05DE48920C
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 17:51:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 63EFE88EB9
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 17:56:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qt1-x82a.google.com with SMTP id
- d75a77b69052e-45f05a65398so35500241cf.1
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 08:51:22 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf33.google.com with SMTP id
+ 6a1803df08f44-6cc03b649f2so14544936d6.3
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 08:56:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728921081; x=1729525881; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=I8MHR+UG7mUP3QN3xd5DYn9l5qsdcbt40uU+eUfEDnw=;
- b=Fibi7ahWRc6oI6kHvpcQu0XGMtw89sZpDsg12PEeRgUHj0UMhB52xaeXl+a+1KMdNs
- EzZl/PhKOZFqLKR3Ynz/wXVkvmtlRmXn/ij8dBvj5jQhHt+1pWs+vxxCCPd9mOkjighk
- 9j6v+Q6I25AVxXQclOrVqeg1IzxeltYKrNHyQ=
+ d=konsulko.com; s=google; t=1728921406; x=1729526206; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=8lE8dOOwQ1+EDJ8vqAXK9hRw4Q7B/bTjQHy3TTwvMSU=;
+ b=TJxwMwN68Q+gJ/Zi66u6pOnCq7WtozOMq+BIj3uwr0qXiBlM3T1fI4Pe2f1XsxwG/s
+ bbDcNCv7kK3RMvWVvOeCBVbtol+lDJ6CCGWs1f8ivXkH/KRMrVbpJSJbkXhcatWIjpmP
+ SMNG9KLIUj6diSS/PjBbmVTMFr/tZzsB3JGr0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728921081; x=1729525881;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=I8MHR+UG7mUP3QN3xd5DYn9l5qsdcbt40uU+eUfEDnw=;
- b=cMpvcYPemfN1/h29wYfdB3kDvTNbxclYFses6dLw3cq8Tr5piexQ0CQmz34K4iV8mp
- FeIE9I/SkIT0wbeQsRbmo5KdwUKvyaASQQZMKFNlQ2cluCC1uCyPPOhmb9ZPybJczfHG
- sUeP7KD56pRcfCEFZBbFKRImGbHMVGDMP9V4B+/f/NLBMwWNtVn+4bo/sbS0Y60phPjS
- IQ7WvON8cLdhDYS1kyuiw839TRHlT9+FrsL16o/HbQWmJyC4f1aplcZDbYfislHaUXV0
- YQbyY/a7vDuLhxmAsrSwALz+j70zfel2PfglPdVrfpgtsWb69Psp/9ilFZx649kDZ/ON
- 38vg==
-X-Gm-Message-State: AOJu0YxQkz6KnFdbI7eQO2paxw+W77GIyEyFq+1FxzgJL1CMvw4dtPE9
- ui/x4jHQcFVdfENg1XAFIJBcspZeX63yGOCGzkIhqDfGD21qqRXRBZ42krjucLXV01WC7G6yEjH
- 5T+og9iKaZDUB8GQoPZcbPE7B7i266dfzidL8
-X-Google-Smtp-Source: AGHT+IHbafkQHKxvGYWGUItRVpG9LBo+cEfuUwaiSSZ9Y/+rVkq7EfN/y/kn8DMSL2vCZDfbsxkoPAZrhCCP2+W/ky8=
-X-Received: by 2002:a05:6214:418d:b0:6cb:7e7a:ae87 with SMTP id
- 6a1803df08f44-6cbf00f777dmr157198466d6.33.1728921081348; Mon, 14 Oct 2024
- 08:51:21 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1728921406; x=1729526206;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8lE8dOOwQ1+EDJ8vqAXK9hRw4Q7B/bTjQHy3TTwvMSU=;
+ b=MHhxwMjTdMO/viwPVvv8teRvKi0KR+hO0+yH6ymkiVsl9/kWi6Aw1xuEyiVJXyMVLl
+ AlEMRcBD+EXi9B1z0ZwlUDJ77COGP9X2gtE2aWU/WBV+iwScq8PXthGkO03iyZDv7bY9
+ SKvkJTshgrHM/WV2rOK1qh6J1/UKH7Tc1AHlnuOGPB6fdzyS3lhAjQQSz8L7FmvsPupF
+ Ypm+SQofsOw/jo+SmSMn5+w236kNgE28/9NfjIxBOQml455ZQG7CMLpwK4+A6wbtbn45
+ 89gKpcCnOsahk1t1PoPefqxuaS9lVwOZxOKFur3hKnJyfhWWhwp/KUcRO0CFx+a83eP9
+ ZwYw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUR5ewGzVpWT1yybwrDAIvAbrNdeGiSvRsXPaU5d8qv9AgA78rTqMqWijSsjM9iti1VmDZVUf4=@lists.denx.de
+X-Gm-Message-State: AOJu0YwqayVY/sI1TVgRKs8ZM2KuNCGy8X8a9brVRBdBuFqv83oI/FUg
+ uFTlLCQQ0yJqUObpq1f+c/lW3On8aL65fsnT0Xs1BjAEaYMutzCAZjPFQCntQ1I=
+X-Google-Smtp-Source: AGHT+IGsNZ8MsMkDh4dBm5YkNRwh3FC2Ap7Qx1aydalW5CLIFSyCFXIpTCbt+Z81+jZAujRvxr4XCg==
+X-Received: by 2002:a05:6214:3a06:b0:6cb:f8e0:18a7 with SMTP id
+ 6a1803df08f44-6cbf8e018eamr123943186d6.9.1728921406129; 
+ Mon, 14 Oct 2024 08:56:46 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6cbe85b79f6sm46941146d6.51.2024.10.14.08.56.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 14 Oct 2024 08:56:45 -0700 (PDT)
+Date: Mon, 14 Oct 2024 09:56:42 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>, Jonas Karlman <jonas@kwiboo.se>
+Subject: Re: [PATCH v3 03/15] efi: memory: use the lmb API's for allocating
+ and freeing memory
+Message-ID: <20241014155642.GO53053@bill-the-cat>
+References: <20241013105522.391414-1-sughosh.ganu@linaro.org>
+ <20241013105522.391414-4-sughosh.ganu@linaro.org>
+ <CAFLszTiov914NOS9_5UU4oLi0fCQ84a-Et82BeSEJbts4MEOVQ@mail.gmail.com>
 MIME-Version: 1.0
-References: <20241014131152.267405-1-patrick.rudolph@9elements.com>
-In-Reply-To: <20241014131152.267405-1-patrick.rudolph@9elements.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 14 Oct 2024 09:51:10 -0600
-Message-ID: <CAFLszTg29K_NZdjApM-BJMCwWVSWBVxPpQY2nwG-+1ai9kc-mg@mail.gmail.com>
-Subject: Re: [PATCH v8 00/37] Implement ACPI on aarch64
-To: Patrick Rudolph <patrick.rudolph@9elements.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="uzigKdP/G9xlKo9P"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTiov914NOS9_5UU4oLi0fCQ84a-Et82BeSEJbts4MEOVQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,253 +97,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Patrick,
 
-On Mon, 14 Oct 2024 at 07:12, Patrick Rudolph
-<patrick.rudolph@9elements.com> wrote:
->
-> Based on the existing work done by Simon Glass this series adds
-> support for booting aarch64 devices using ACPI only.
-> As first target QEMU SBSA support is added, which relies on ACPI
-> only to boot an OS. As secondary target the Raspberry Pi4 was used,
-> which is broadly available and allows easy testing of the proposed
-> solution.
->
-> The series is split into ACPI cleanups and code movements, adding
-> Arm specific ACPI tables and finally SoC and mainboard related
-> changes to boot a Linux on the QEMU SBSA and RPi4. Currently only the
-> mandatory ACPI tables are supported, allowing to boot into Linux
-> without errors.
->
-> The QEMU SBSA support is feature complete and provides the same
-> functionality as the EDK2 implementation.
->
-> The changes were tested on real hardware as well on QEMU v9.0:
->
-> qemu-system-aarch64 -machine sbsa-ref -nographic -cpu cortex-a57 \
->                     -pflash secure-world.rom \
->                     -pflash unsecure-world.rom
->
-> qemu-system-aarch64 -machine raspi4b -kernel u-boot.bin -cpu cortex-a72 \
-> -smp 4 -m 2G -drive file=raspbian.img,format=raw,index=0 \
-> -dtb bcm2711-rpi-4-b.dtb -nographic
->
-> Tested against FWTS V24.03.00.
->
-> Known issues:
-> - The QEMU rpi4 support is currently limited as it doesn't emulate PCI,
->   USB or ethernet devices!
-> - The SMP bringup doesn't work on RPi4, but works in QEMU (Possibly
->   cache related).
-> - PCI on RPI4 isn't working on real hardware since the pcie_brcmstb
->   Linux kernel module doesn't support ACPI yet.
->
-> Maximilian Brune (3):
->   acpi: x86: Move SPCR and DBG2 into common code
->   acpi: x86: Write FADT in common code
->   serial: serial_pl01x: Implement .getinfo() for PL01
->
-> Patrick Rudolph (32):
->   acpi: x86: Move MADT to common code
->   acpi: Fix typo
->   acpi: Add define for GTDT
->   arm: acpi: Add generic ACPI methods
->   acpi: Add fill_madt to acpi_ops
->   acpi: acpi_table: Bump revisions
->   acpi: Add ACPITAB for PPTT and GTDT
->   acpi: acpi_table: Add IORT support
->   acpi: Move function prototype
->   acpi_table: Support platforms with unusable RSDT
->   acpi: Allocate and write ACPI tables
->   acpi: Add processor device
->   drivers: usb: Add generic XHCI
->   drivers: ata: Rename ahci_mvebu
->   drivers/cpu: Add generic armv8 cpu driver
->   arm: gic-v3-its: Rename objects
->   arm: gic-v3-its: Implement of_xlate
->   arm: lib: Add GICV2 driver
->   drivers: misc: irq-uclass: Update irq_get_by_index
->   drivers/arm: Implement acpi_fill_madt
->   common: Enable BLOBLIST_TABLES on arm
->   board: emulation: Add QEMU sbsa support
->   arm: mach-bcm283x: Map the ARM local MMIO as well
->   arm: bcm283x: Generate ACPI tables
->   arm: cpu: Add ACPI parking protocol support
->   armv8: cpu: Enable ACPI parking protocol
->   arm: Implement read_mpidr on armv7
->   arm: mach-bcm283x: Add ARMV8_MULTIENTRY support
->   arm: mach-bcm283x: Enable ARMV8_MULTIENTRY
->   bloblist: Fix use of uninitialized variable
->   configs: Add RPI4 ACPI defconfig
->   CI: Enable qemu_sbsa
->
-> Simon Glass (2):
->   arm: mach-bcm283x: Bring in some header files from tianocore
->   board: raspberrypi: Add ASL files from tianocore
->
->  .azure-pipelines.yml                          |   8 +
->  .gitlab-ci.yml                                |  11 +
->  MAINTAINERS                                   |   2 +-
->  arch/arm/Kconfig                              |  11 +-
->  arch/arm/cpu/armv8/Makefile                   |   1 +
->  arch/arm/cpu/armv8/acpi_park_v8.S             | 113 ++++
->  arch/arm/cpu/armv8/start.S                    |  12 +
->  arch/arm/dts/qemu-sbsa.dts                    | 137 ++++
->  arch/arm/include/asm/acpi_table.h             | 147 ++++
->  arch/arm/include/asm/arch-qemu-sbsa/boot0.h   |  34 +
->  arch/arm/include/asm/system.h                 |   9 +
->  arch/arm/lib/Makefile                         |   2 +
->  arch/arm/lib/acpi_table.c                     | 276 ++++++++
->  arch/arm/lib/gic-v2.c                         |  89 +++
->  arch/arm/lib/gic-v3-its.c                     | 118 +++-
->  arch/arm/mach-bcm283x/Kconfig                 |  16 +-
->  arch/arm/mach-bcm283x/Makefile                |   4 +
->  arch/arm/mach-bcm283x/bcm2711_acpi.c          | 128 ++++
->  .../mach-bcm283x/include/mach/acpi/bcm2711.h  | 152 +++++
->  .../mach-bcm283x/include/mach/acpi/bcm2836.h  | 127 ++++
->  .../include/mach/acpi/bcm2836_gpio.h          |  19 +
->  .../include/mach/acpi/bcm2836_gpu.h           |  47 ++
->  .../include/mach/acpi/bcm2836_pwm.h           |  33 +
->  .../include/mach/acpi/bcm2836_sdhost.h        |  18 +
->  .../include/mach/acpi/bcm2836_sdio.h          |  21 +
->  arch/arm/mach-bcm283x/init.c                  |   2 +-
->  arch/arm/mach-qemu/Kconfig                    |  36 +-
->  arch/sandbox/dts/test.dts                     |   3 +
->  arch/sandbox/lib/Makefile                     |   9 +-
->  arch/sandbox/lib/acpi_table.c                 |  11 +
->  arch/x86/cpu/apollolake/acpi.c                |  20 +-
->  arch/x86/cpu/baytrail/acpi.c                  |  17 +-
->  arch/x86/cpu/intel_common/acpi.c              |  22 +-
->  arch/x86/cpu/quark/acpi.c                     |  19 +-
->  arch/x86/cpu/tangier/acpi.c                   |  33 +-
->  arch/x86/include/asm/acpi_table.h             |  28 +-
->  arch/x86/lib/acpi_table.c                     | 245 +------
->  board/emulation/qemu-arm/MAINTAINERS          |   2 +
->  board/emulation/qemu-sbsa/Kconfig             |  58 ++
->  board/emulation/qemu-sbsa/Makefile            |   8 +
->  board/emulation/qemu-sbsa/acpi.c              | 192 ++++++
->  board/emulation/qemu-sbsa/dsdt.asl            | 483 ++++++++++++++
->  board/emulation/qemu-sbsa/lowlevel_init.S     |  22 +
->  board/emulation/qemu-sbsa/qemu-sbsa.c         | 273 ++++++++
->  board/emulation/qemu-sbsa/qemu-sbsa.env       |  14 +
->  board/emulation/qemu-sbsa/qemu-sbsa.h         |  38 ++
->  board/emulation/qemu-sbsa/smc.c               |  71 ++
->  board/raspberrypi/rpi/.gitignore              |   3 +
->  board/raspberrypi/rpi/Makefile                |   2 +
->  board/raspberrypi/rpi/acpitables.h            |  90 +++
->  board/raspberrypi/rpi/dsdt.asl                | 254 +++++++
->  board/raspberrypi/rpi/emmc.asl                | 136 ++++
->  board/raspberrypi/rpi/gpudevs.asl             | 372 +++++++++++
->  board/raspberrypi/rpi/pci.asl                 | 177 +++++
->  board/raspberrypi/rpi/pep.asl                 |  90 +++
->  board/raspberrypi/rpi/rhpx.asl                | 195 ++++++
->  board/raspberrypi/rpi/rpi.c                   | 183 +++++
->  board/raspberrypi/rpi/sdhc.asl                | 111 +++
->  board/raspberrypi/rpi/uart.asl                | 208 ++++++
->  boot/bootflow.c                               |   8 +-
->  common/Kconfig                                |   1 +
->  common/bloblist.c                             |   2 +-
->  configs/clearfog_defconfig                    |   2 +-
->  configs/clearfog_gt_8k_defconfig              |   2 +-
->  configs/clearfog_sata_defconfig               |   2 +-
->  configs/clearfog_spi_defconfig                |   2 +-
->  configs/db-88f6820-gp_defconfig               |   2 +-
->  configs/ds116_defconfig                       |   2 +-
->  configs/helios4_defconfig                     |   2 +-
->  configs/mvebu_crb_cn9130_defconfig            |   2 +-
->  configs/mvebu_db-88f3720_defconfig            |   2 +-
->  configs/mvebu_db_armada8k_defconfig           |   2 +-
->  configs/mvebu_db_cn9130_defconfig             |   2 +-
->  configs/mvebu_espressobin-88f3720_defconfig   |   2 +-
->  .../mvebu_espressobin_ultra-88f3720_defconfig |   2 +-
->  configs/mvebu_mcbin-88f8040_defconfig         |   2 +-
->  configs/mvebu_puzzle-m801-88f8040_defconfig   |   2 +-
->  configs/n2350_defconfig                       |   2 +-
->  configs/octeon_nic23_defconfig                |   2 +-
->  configs/qemu-arm-sbsa_defconfig               |  10 +
->  configs/rpi_4_acpi_defconfig                  |  10 +
->  configs/turris_omnia_defconfig                |   2 +-
->  doc/board/emulation/index.rst                 |   1 +
->  doc/board/emulation/qemu-sbsa.rst             |  98 +++
->  doc/develop/driver-model/virtio.rst           |   1 +
->  drivers/ata/Kconfig                           |  12 +-
->  drivers/ata/Makefile                          |   2 +-
->  drivers/ata/{ahci_mvebu.c => ahci_generic.c}  |  17 +-
->  drivers/core/acpi.c                           |  16 +
->  drivers/cpu/Kconfig                           |   7 +
->  drivers/cpu/Makefile                          |   2 +
->  drivers/cpu/armv8_cpu.c                       | 151 +++++
->  drivers/cpu/armv8_cpu.h                       |  31 +
->  drivers/cpu/bcm283x_cpu.c                     | 214 ++++++
->  drivers/misc/irq-uclass.c                     |  66 +-
->  drivers/pci/pcie_brcmstb.c                    | 101 +--
->  drivers/serial/serial_pl01x.c                 |  24 +
->  drivers/usb/host/Kconfig                      |   8 +
->  drivers/usb/host/Makefile                     |   1 +
->  drivers/usb/host/xhci-generic.c               |  75 +++
->  include/acpi/acpi_table.h                     | 324 ++++++++-
->  include/acpi/acpigen.h                        |  12 +
->  include/bloblist.h                            |   1 +
->  include/configs/qemu-sbsa.h                   |  89 +++
->  include/dm/acpi.h                             |  26 +
->  include/irq.h                                 |  14 +
->  include/serial.h                              |   1 +
->  lib/Kconfig                                   |  31 +-
->  lib/acpi/acpi_table.c                         | 630 +++++++++++++++++-
->  lib/acpi/acpigen.c                            |  11 +
->  test/dm/acpi.c                                |  43 ++
->  test/dm/irq.c                                 |  15 +
->  test/py/tests/test_event_dump.py              |   1 +
->  113 files changed, 6512 insertions(+), 542 deletions(-)
->  create mode 100644 arch/arm/cpu/armv8/acpi_park_v8.S
->  create mode 100644 arch/arm/dts/qemu-sbsa.dts
->  create mode 100644 arch/arm/include/asm/arch-qemu-sbsa/boot0.h
->  create mode 100644 arch/arm/lib/acpi_table.c
->  create mode 100644 arch/arm/lib/gic-v2.c
->  create mode 100644 arch/arm/mach-bcm283x/bcm2711_acpi.c
->  create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2711.h
->  create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836.h
->  create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_gpio.h
->  create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_gpu.h
->  create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_pwm.h
->  create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_sdhost.h
->  create mode 100644 arch/arm/mach-bcm283x/include/mach/acpi/bcm2836_sdio.h
->  create mode 100644 arch/sandbox/lib/acpi_table.c
->  create mode 100644 board/emulation/qemu-sbsa/Kconfig
->  create mode 100644 board/emulation/qemu-sbsa/Makefile
->  create mode 100644 board/emulation/qemu-sbsa/acpi.c
->  create mode 100644 board/emulation/qemu-sbsa/dsdt.asl
->  create mode 100644 board/emulation/qemu-sbsa/lowlevel_init.S
->  create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.c
->  create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.env
->  create mode 100644 board/emulation/qemu-sbsa/qemu-sbsa.h
->  create mode 100644 board/emulation/qemu-sbsa/smc.c
->  create mode 100644 board/raspberrypi/rpi/.gitignore
->  create mode 100644 board/raspberrypi/rpi/acpitables.h
->  create mode 100644 board/raspberrypi/rpi/dsdt.asl
->  create mode 100644 board/raspberrypi/rpi/emmc.asl
->  create mode 100644 board/raspberrypi/rpi/gpudevs.asl
->  create mode 100644 board/raspberrypi/rpi/pci.asl
->  create mode 100644 board/raspberrypi/rpi/pep.asl
->  create mode 100644 board/raspberrypi/rpi/rhpx.asl
->  create mode 100644 board/raspberrypi/rpi/sdhc.asl
->  create mode 100644 board/raspberrypi/rpi/uart.asl
->  create mode 100644 configs/qemu-arm-sbsa_defconfig
->  create mode 100644 configs/rpi_4_acpi_defconfig
->  create mode 100644 doc/board/emulation/qemu-sbsa.rst
->  rename drivers/ata/{ahci_mvebu.c => ahci_generic.c} (71%)
->  create mode 100644 drivers/cpu/armv8_cpu.c
->  create mode 100644 drivers/cpu/armv8_cpu.h
->  create mode 100644 drivers/cpu/bcm283x_cpu.c
->  create mode 100644 drivers/usb/host/xhci-generic.c
->  create mode 100644 include/configs/qemu-sbsa.h
->
-> --
-> 2.46.2
->
+--uzigKdP/G9xlKo9P
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This series looks great and I hope it can be applied soon.
-Congratulations on taking on and completing this difficult job!
+On Mon, Oct 14, 2024 at 09:50:37AM -0600, Simon Glass wrote:
+> Hi Sughosh,
+>=20
+> On Sun, 13 Oct 2024 at 04:55, Sughosh Ganu <sughosh.ganu@linaro.org> wrot=
+e:
+> >
+> > Use the LMB API's for allocating and freeing up memory. With this, the
+> > LMB module becomes the common backend for managing non U-Boot image
+> > memory that might be requested by other modules.
+> >
+> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > ---
+> > Changes since V2:
+> > * Use map_to_sysmem() to get the user-visible address to be shared
+> >   with the lmb API's for sandbox.
+> >
+> >  lib/efi_loader/Kconfig      |  1 +
+> >  lib/efi_loader/efi_memory.c | 77 +++++++++++--------------------------
+> >  2 files changed, 24 insertions(+), 54 deletions(-)
+>=20
+> When efi_init_obj() is called, it should be able to add the lmb memory
+> to its own tables. There is no need to worry about lmb after that,
+> since no other images will be loaded, except under EFI's control. Then
+> perhaps you don't need this patch?
 
-Regards,
-Simon
+But that's not true. The EFI application can return us to the U-Boot
+prompt.
+
+--=20
+Tom
+
+--uzigKdP/G9xlKo9P
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcNPzYACgkQFHw5/5Y0
+tyy7+gv7BHrSeFO2hOvrI/jfJSZH/4dJQLE4cBvgFaTiOaLE8wMhPYOaPihSFLWI
+9fyeYwr9eCXDL47OlYb2FMA4dmpweAY5v9IHn84Bo9zDZHUU05gY2AUg03FfJwcL
+5bkj/kqMsXpfVDrN5GbxIepHv+YvlGX9Vwa83UihPvfCBGLIjTZ1bzjCG/5xfR3Y
+dAZ/e/8aHfkkZWpuFAxgoSfbX/RucNEb1kXFYaY06Y6Au97Ra85pz/HjNqWqK7sW
+34xpZWIN38YmwcEyaaX1jmK5NFBTLMgeQ8ml8Ae8GlOIcDYSgFZfwv0P1U4ygzcz
+XfnfBru4u6I40rLul0HK1q+TfQDiM7J/X8DS3+dkGRE5+G/fARzQxNwYJHgb9/u0
+wIV0Tu+WftbdzaM5orFeu2Yz0MfP7OH3IvSsnchY8uLVF4F3XWAGDLBNJA7+Dtxi
+TqZyoNUUvtBPnPdTucGKDfVd497Jh0IgTVsRLogzUczFIgLiHazYjKVYD3HPHCYE
+epVWprS4
+=F86h
+-----END PGP SIGNATURE-----
+
+--uzigKdP/G9xlKo9P--
