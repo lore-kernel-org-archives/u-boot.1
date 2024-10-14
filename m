@@ -4,62 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39C18CFC53F
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 10:32:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C390FCFC53E
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 10:34:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ABAB087FA7;
-	Mon, 14 Oct 2024 12:32:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 60B6C89099;
+	Mon, 14 Oct 2024 12:34:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="En31q/Ji";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B56187F7D; Mon, 14 Oct 2024 12:32:10 +0200 (CEST)
-Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1728902050;
+	bh=FCY/h6MkRZnYIU2+hBWVsgHOAjsrGqrKdOYnDENeOBY=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=UcuWEr7wqVLqVvFli2GtMlFdbzOkA3y70Uh0FyRRCEUY/eH4ddX7Ft3ZKRiYuU5x8
+	 bzgWjz8V//v+GoZBEL3+2i+AZXWt9K2xm4eu7tlkycwjdNh0YfJ+OEQUtRAL896qrk
+	 odqMYUdf0ip2QlnrqSL5okcmXHjLY1O4V9GL7MduB5pazvi78Hxej5F1Xn/4CetuBt
+	 K10cUxIYMluoxOaTrtVaqOrEl/C4s1SNhZsQbSaVRquZBnlKJkYq2Mfix0xc8xrs7z
+	 yWzL+PHQLziee5S21UMu+08fClqSHUAVtFQUoUalujY0Tan/TifPrrWH3eB6erQed5
+	 fgcMcWl7mQPvA==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5AEC890CA
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 12:32:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id E6C0089082;
+ Mon, 14 Oct 2024 12:34:08 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1728902049;
+ bh=FCY/h6MkRZnYIU2+hBWVsgHOAjsrGqrKdOYnDENeOBY=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=EltGKz4fraWixjR1ITAhorcUSS+y0ISyGr9vPJhsG7F1ilM+8doskV6IAYnwdlAin
+ 6wJ0CLFgQqaXQTs+SOYfe+HcoqHWxKtMNMXehoznrKOUi39+4j58Asy1vIkEe5N0rQ
+ BfasBMGCRb4z5O5JdpP9ZOKA29KcFYfNmiF9yqglvMLRU1Sz2ydFCqay/aGi75Ngiv
+ 79vjz3esrph0hXH9kut0A6Y3dTLa4IhkWkfmhfQbmeS8+VE5XQmpPo5+lA5JvAT9Dy
+ kjWGdxNXdb+rQkIcKm4ojqcg+ANjzDB0HeaH8vYO6RLKF+JYer0hl0beF05ggTRGKo
+ 68zZpM3OzwocA==
+Message-ID: <ef7b756e-b72a-4d76-9168-03371235df19@denx.de>
+Date: Mon, 14 Oct 2024 12:34:08 +0200
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1728901926;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=fdEVnGLWGgriFYz+ShqbppoJrKIb4ttO+fK8liaNsSQ=;
- b=En31q/JiVo3arsPxNuliFP2HK0E7nww599TssBJyL0GAcZv/CGyvehn1LukMjuvKBEgOv6
- 3so4eDsEYrYyQHoJ3PKKNi6CpNGpNKqqS88ATN25dCA9WL0PqPbQOou9M0lc7ak3LpMP/K
- hHJaZ2Uayy1X08ZLFrHOWfAAZzB1VGFkdtoP5JdSlLzDUfJTzHG2MVJ/0C8Or0DUjO1T9f
- 1ZQcXeqPTOoqDF/vatFc+/etPNN8hBMY+FRNRibO0itbn252CEjm1egGVHdzOAzy5Ca9sH
- Uk9CBaBVEJ+vq5YWUJXiqh4nmGyGss1f7pY51h6MYTgaGV6kOA++no6oYsIWvg==
-Date: Mon, 14 Oct 2024 12:32:05 +0200
-From: Dragan Simic <dsimic@manjaro.org>
-To: Alex ThreeD <alexthreed@gmail.com>
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de, Ben Wolsieffer
- <benwolsieffer@gmail.com>, Chris Morgan <macromorgan@hotmail.com>, Jonas
- Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>, Philipp
- Tomsich <philipp.tomsich@theobroma-systems.com>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Quentin Schulz <quentin.schulz@cherry.de>, Simon
- Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH] rockchip: board: Increase rng-seed size to make it
  sufficient for modern Linux
-In-Reply-To: <CAF4oh-PE7epxtH9FS2PSbcGcd+aVH=7jYhaAUMNKALZNc80x5w@mail.gmail.com>
+To: Alex ThreeD <alexthreed@gmail.com>
+Cc: u-boot@lists.denx.de, Ben Wolsieffer <benwolsieffer@gmail.com>,
+ Chris Morgan <macromorgan@hotmail.com>, Dragan Simic <dsimic@manjaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
 References: <20241013093244.817790-1-alexthreed@gmail.com>
  <31e0be9e-ba50-4bc6-b07f-d20426b650be@denx.de>
  <CAF4oh-PE7epxtH9FS2PSbcGcd+aVH=7jYhaAUMNKALZNc80x5w@mail.gmail.com>
-Message-ID: <550c164e365e5208628f291d5b295779@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <CAF4oh-PE7epxtH9FS2PSbcGcd+aVH=7jYhaAUMNKALZNc80x5w@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,29 +77,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
-
-On 2024-10-14 12:26, Alex ThreeD wrote:
+On 10/14/24 12:26 PM, Alex ThreeD wrote:
 > On Mon, Oct 14, 2024 at 12:10 AM Marek Vasut <marex@denx.de> wrote:
 >> Let's make this override-able via environment variable, because this
 >> might be growing in the future again. Does this work ?
->> 
+>>
 >> size_t len = env_get_ulong("kaslrseed_size", 10, 32);
 > 
-> Maybe `env_get_hex("rng_seed_size", 32)` would be better? As most other 
-> env are
+> Maybe `env_get_hex("rng_seed_size", 32)` would be better? As most other env are
 > hexadecimal.
-> 
-> Actually it seems that entropy required to init pool early has 
-> decreased in
+
+The env vars are a mixed bag, this one is clearly decimal though.
+
+> Actually it seems that entropy required to init pool early has decreased in
 > Linux 5.19 from 64 bytes (2 * CHACHA_KEY_SIZE) to 32 bytes
 > (BLAKE2S_HASH_SIZE)
 > https://elixir.bootlin.com/linux/v5.18/source/drivers/char/random.c#L236
 > https://elixir.bootlin.com/linux/v5.19/source/drivers/char/random.c#L551
 > Anyway config knob should not harm.
 
-I think that the value received from the new environment variable
-should be accepted only if it's greater than some hardcoded value,
-in this case 32.  That way, someone won't be able to misconfigure
-their board environment and cause the early random pool initialization
-to be postponed.
+A couple more random numbers would cover all the bases then.
