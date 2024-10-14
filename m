@@ -4,109 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EE03D1625B
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 13:03:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C831D16261
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 13:03:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E29D89045;
-	Mon, 14 Oct 2024 15:03:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+	by phobos.denx.de (Postfix) with ESMTP id 032B989066;
+	Mon, 14 Oct 2024 15:03:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="LVpLvhzS";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IYe+4xOb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9AD2488FB9; Mon, 14 Oct 2024 09:06:28 +0200 (CEST)
-Received: from mailgw02.mediatek.com (mailgw02.mediatek.com [216.200.240.185])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 852C388F8E; Mon, 14 Oct 2024 14:17:34 +0200 (CEST)
+Received: from mail-yb1-xb41.google.com (mail-yb1-xb41.google.com
+ [IPv6:2607:f8b0:4864:20::b41])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3570388F24
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 09:06:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mediatek.com
+ by phobos.denx.de (Postfix) with ESMTPS id 6C65988936
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 14:17:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=skylake.huang@mediatek.com
-X-UUID: d118c92c89fa11efba0aef63c0775dbf-20241014
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From;
- bh=Pqm90LdZty8nNtON5VvQaDo+YPjA+4aHiqyHzoU8dZ8=; 
- b=LVpLvhzS7Ce02rWoebNL/ymrxvZxzsSAO/enyvbkebBVGgIaiBigCSAPyODnHUSeYhnXAJMuy7TY3Po1pxh6eFxAPspIoHZq1oRtWio9kq8Hy/zf8jhNgNc8tq8gWsEHGgxEGYZyqcoYs9bXmNmDtM0BhNjbZOaPGqRfKeuJ9fI=;
-X-CID-UNFAMILIAR: 1
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.1.41, REQID:8e59c9f9-cf07-42d5-a637-8c186989054c, IP:0,
- U
- RL:0,TC:0,Content:0,EDM:0,RT:0,SF:100,FILE:0,BULK:0,RULE:Release_Ham,ACTIO
- N:release,TS:100
-X-CID-INFO: VERSION:1.1.41, REQID:8e59c9f9-cf07-42d5-a637-8c186989054c, IP:0,
- URL
- :0,TC:0,Content:0,EDM:0,RT:0,SF:100,FILE:0,BULK:0,RULE:Spam_GS981B3D,ACTIO
- N:quarantine,TS:100
-X-CID-META: VersionHash:6dc6a47, CLOUDID:4a143641-8751-41b2-98dd-475503d45150,
- B
- ulkID:241014150622Z3C4RJOV,BulkQuantity:0,Recheck:0,SF:66|38|29|28|16|19|4
- 8,TC:nil,Content:0,EDM:-3,IP:nil,URL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC
- :nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 0,NGT
-X-CID-BAS: 0,NGT,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR,TF_CID_SPAM_SDM,TF_CID_SPAM_USA,TF_CID_SPAM_FSD
-X-UUID: d118c92c89fa11efba0aef63c0775dbf-20241014
-Received: from mailgw01.mediatek.com [(172.21.84.68)] by mailgw02.mediatek.com
- (envelope-from <skylake.huang@mediatek.com>)
- (musrelay.mediatek.com ESMTP with TLSv1.3 TLS_AES_256_GCM_SHA384 256/256)
- with ESMTP id 1999869535; Mon, 14 Oct 2024 00:06:21 -0700
-X-UUID: ccc9fb6689fa11ef88ecadb115cee93b-20241014
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.1.41, REQID:e6e8fda0-cabe-49b5-80da-64add27eb5e0, IP:0,
- U
- RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
- release,TS:0
-X-CID-META: VersionHash:6dc6a47, CLOUDID:b2c43365-444a-4b47-a99a-591ade3b04b2,
- B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0,EDM:-3,IP:nil,U
- RL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,
- SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 0,NGT
-X-CID-BAS: 0,NGT,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-UUID: ccc9fb6689fa11ef88ecadb115cee93b-20241014
-Received: from mtkmbs14n1.mediatek.inc [(172.21.101.75)] by
- mailgw01.mediatek.com (envelope-from <skylake.huang@mediatek.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 1385590977; Mon, 14 Oct 2024 15:06:14 +0800
-Received: from mtkmbs11n2.mediatek.inc (172.21.101.187) by
- MTKMBS14N1.mediatek.inc (172.21.101.75) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.26; Mon, 14 Oct 2024 15:06:12 +0800
-Received: from mtksdccf07.mediatek.inc (172.21.84.99) by
- mtkmbs11n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.1118.26 via Frontend Transport; Mon, 14 Oct 2024 15:06:12 +0800
-From: Sky Huang <SkyLake.Huang@mediatek.com>
-To: Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
- <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Eugeniu Rosca <erosca@de.adit-jv.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Jacky Chou
- <jacky_chou@aspeedtech.com>
-CC: <u-boot@lists.denx.de>, <gss_mtk_uboot_upstream@mediatek.com>,
- SkyLake.Huang <skylake.huang@mediatek.com>
-Subject: [PATCH 1/1] net: phy: Do not do CL22 phy reset before ethernet phy
- driver probe
-Date: Mon, 14 Oct 2024 15:06:11 +0800
-Message-ID: <20241014070611.32040-1-SkyLake.Huang@mediatek.com>
-X-Mailer: git-send-email 2.18.0
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=aibaykaro@gmail.com
+Received: by mail-yb1-xb41.google.com with SMTP id
+ 3f1490d57ef6-e291f1d659aso2172576276.3
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 05:17:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1728908251; x=1729513051; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=IP7DT9Js2u6FmG+QYDlcgzF/cm4H6bmp1qf8qWiU+M0=;
+ b=IYe+4xObN1HCMTda1C2SgFo0AT6SHl9Giz9bTWWSNp/Itjar6CajhK6xjR1gBm6pyC
+ DNMPaB7+gSvK3NsMYF1YOpkVGgUTqcvNOlKCJ8uFGKPOfvCFbCucCwbrZQSRBtrkHPl8
+ P6IODXPH3V0iHwIsbBuAINW2E60zowNcQh1i4dq0YEJ18LKRCwaP24qWdkuKmmppGcj+
+ L64jO1dx7uZNJVCeuJJD7YMZYbc58nzLGwOQliAeSXM1gLcq542tmvOCvkldO3qZtxxk
+ u1I+z3bK6XOBvetZsOWePoORF1B/KRzdSraLtRTUdsOiqUhWNZz1JbacEWEc0WR6LELo
+ 5vcg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728908251; x=1729513051;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=IP7DT9Js2u6FmG+QYDlcgzF/cm4H6bmp1qf8qWiU+M0=;
+ b=b2Mva0L4a4Uf5O/xKg+7DZEE1nBxcvPTdG16BNJZiEBkbQfpgp3KRUd7GCNprNfTpI
+ W8L51d3c0SXskHOzeNNorZznM8S366sBJX0AIps9xFrtLAfmrR1sUG+dhZQ1UkDO+x6w
+ m2BaKm5QT2EBvUlDaRFRTC3RWAerERyC1WEov6Cs14Ofz1FkuKuEq4efmIYtP2cdnkio
+ LLB0CgPHPcZPgnQoNB+cOEpCBc/Y9ISj76XPStlEEVs9lZCX9Qe7JEckPuZ+IyqlKUhW
+ Kw69SIiOp0a45GTSlHViDfgxf/+4+52KtG7BEeWRZPcEDJSLiSImDYPDTU4ry90S/Vek
+ D8IQ==
+X-Gm-Message-State: AOJu0YxrbhDH/UAAEY+nVeclvWE0U+e5vxB2zVeWKFl3ilugdbEsU3ja
+ CsiPE4OEm8XnBQM9NPbQBWaVTfx4lC/2+wrDd1Wtl8NwtmPogoqAFNO5hb9+VLTrmckxoylm5bg
+ y5SaFudVewywVAN4v9mg8RXei9z12SK5rfnA=
+X-Google-Smtp-Source: AGHT+IFiUg4jwb51ryfWho8dEfcbIyNSuxcRzm63ZA7UjgmCAJKLz1BkcpY5llRRavpuNlY2eI/SfvaliMWvRmvsbns=
+X-Received: by 2002:a05:6902:1b81:b0:e20:2789:80ae with SMTP id
+ 3f1490d57ef6-e2931b157c2mr4582475276.10.1728908251112; Mon, 14 Oct 2024
+ 05:17:31 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-TM-AS-Product-Ver: SMEX-14.0.0.3152-9.1.1006-23728.005
-X-TM-AS-Result: No-10--5.363000-8.000000
-X-TMASE-MatchedRID: NJitR9TboxzhtVvI3rIgychI95kTx6VeaN2KuTwsCwINAzuXf98XU9n7
- b/+Y15IvprhPLBzR/tEIrfMdFvsao1v6Cm/U+wb8ngIgpj8eDcAZ1CdBJOsoY9mzcdRxL+xwKra
- uXd3MZDWuikCL8VXXTNy/9AHauzrzF+mNG7cQQNtoOV0XNceIBMgWyFhyFCThl5lPxc0kjNU=
-X-TM-AS-User-Approved-Sender: No
-X-TM-AS-User-Blocked-Sender: No
-X-TMASE-Result: 10--5.363000-8.000000
-X-TMASE-Version: SMEX-14.0.0.3152-9.1.1006-23728.005
-X-TM-SNTS-SMTP: C99186F7672618583D7F6F7D91DBFC777723B2C32B3386FBE7489DEBE3781CFE2000:8
-X-MTK: N
+From: Osman <aibaykaro@gmail.com>
+Date: Mon, 14 Oct 2024 15:17:20 +0300
+Message-ID: <CAMhyRsAMfYeMKVjGRLHM3DFymHxnxVO0YNM_2G=CYvGmTJoYNw@mail.gmail.com>
+Subject: ll_entry_count returns 0 even though the linker list has 5 entries
+To: u-boot@lists.denx.de
 X-Mailman-Approved-At: Mon, 14 Oct 2024 15:03:22 +0200
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,30 +83,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: "SkyLake.Huang" <skylake.huang@mediatek.com>
+Hello,
+After enabling CONFIG_FIT in defconfig the u-boot-spl becomes unable to
+detect the root_driver in function lists_driver_lookup_name(). The spl
+executes without issues when manually changing the n_ents variable to 5
+while debugging so i am guessing the ll_entry_count() function somehow
+returns the wrong value but i am not sure why. For reference this is the
+section in u-boot-spl.map file that contains the "root_driver":
 
-Remove unnecessary CL22 phy reset before ethernet phy driver
-probe. Lots of ethernet phys requires driver to load firmware.
-Before that, CL22 phy reset may lead to malfunction.
+ __u_boot_list_2_driver_1
+                0x0000000080009b78        0x0 drivers/core/root.o
+ __u_boot_list_2_driver_2_root_driver
+                0x0000000080009c68       0x78 drivers/core/root.o
+                0x0000000080009c68
+ _u_boot_list_2_driver_2_root_driver
+__u_boot_list_2_driver_3
+                0x0000000080009dd0        0x0 drivers/core/root.o
 
-Signed-off-by: SkyLake.Huang <skylake.huang@mediatek.com>
----
- drivers/net/phy/phy.c | 2 --
- 1 file changed, 2 deletions(-)
+(gdb) x /8xw 0x0000000080009c68
+0x80009c68 <_u_boot_list_2_driver_2_root_driver>: 0x800091a0 0x00000000
+0x00000000 0x00000000
 
-diff --git a/drivers/net/phy/phy.c b/drivers/net/phy/phy.c
-index 716a1d46111..e6fed8c41d7 100644
---- a/drivers/net/phy/phy.c
-+++ b/drivers/net/phy/phy.c
-@@ -839,8 +839,6 @@ struct phy_device *phy_find_by_mask(struct mii_dev *bus, uint phy_mask)
- static void phy_connect_dev(struct phy_device *phydev, struct udevice *dev,
- 			    phy_interface_t interface)
- {
--	/* Soft Reset the PHY */
--	phy_reset(phydev);
- 	if (phydev->dev && phydev->dev != dev) {
- 		printf("%s:%d is connected to %s.  Reconnecting to %s\n",
- 		       phydev->bus->name, phydev->addr,
--- 
-2.45.2
+By manually calculating (end-start)/size from the symbol addresses of the
+.map file i found the correct value to be 5 but ll_entry_count returns 0
+while the function lists_driver_lookup_name executes:
 
+(gdb) s
+27 const int n_ents = ll_entry_count(struct driver, driver);
+(gdb) s
+30 for (entry = drv; entry != drv + n_ents; entry++) {
+(gdb) info locals
+drv = 0x80009b78 <_u_boot_list_2_driver_2_cpu_bus>
+n_ents = 0
+entry = 0x80009b78 <_u_boot_list_2_driver_2_cpu_bus>(gdb) frame#0
+ lists_driver_lookup_name (name=0x800091a0 "root_driver")
+
+ I am not sure whats causing this but disabling CONFIG_FIT in my defconfig
+causes the program to execute without issues again. Could someone point out
+what i am missing here?
+
+ Regards,
+
+Osman
