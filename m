@@ -4,157 +4,153 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 700E5D1812F
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 16:47:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2250D18130
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 17:00:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E0B088BB2;
-	Mon, 14 Oct 2024 18:47:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 099A388BB2;
+	Mon, 14 Oct 2024 19:00:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="NplpZuW6";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="Pl3Ea6eD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C45BA88D75; Mon, 14 Oct 2024 18:47:15 +0200 (CEST)
+ id 34CB488C9C; Mon, 14 Oct 2024 19:00:06 +0200 (CEST)
 Received: from AM0PR83CU005.outbound.protection.outlook.com
  (mail-westeuropeazlp170100000.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c201::])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60E5188A1C
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 18:47:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E9EBB87FA7
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 19:00:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=cherry.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=k1fi7N0kscUUIg/2uWYtZ6aerVkUOk7pmxxNhAXjAxSlHeqylBz8ohehPiRXU5SlOJ/1nsFrbqKCu9etDl//B9wS6C58LoaqvhB7XLMAi6W5S3+dOTZ8R+3btrFPyGaaRMfP7aN1EkJeBJE3rXbgQByHEccN9NMhdvo2r5k0JQTcXVqcIGhwT/jLbs3VBoyNli+J9sXtX4PzItcNx3X9dX2DdG5YH1UrGNYfRolf5L5vedAaQP6J46jdU1zbgVP+wOikT/WPMVp6SF6xLrFG79DZ+8CnZ3MrZ+MyA0Adl76e5wHszH0fdg2ZA9Nahsk6lU1uJABbIg+MvCinDoxqFw==
+ b=dakA9uWDWMcxWKar4oWqgMQKk5OnQYBx4m9JW5uK/bvbM4aiM1n47lLqWlNJqruIQR6LcnFldM/B3vKDmea8Nt40nbbOtHqv1sdd+U24/tAVhaeQCrjJVOjudRrssMq65Z0hh7Y2syHzC+s3jsbU0jgMT52hKv8aY55Jn71t/NsFIQDNIiFPPKRa/epQi9le6vP5gu3M96mv/DQQLS+DlgrUQXu5aTibmnEr1Ls1ZEGdyLnKO+yDrk89h0owbXkRYOQvXTpLQfjaaYBPncK4r8OksVrdJ7fDEu6ve5Hxydz3lJpuBm/jxVfvAOIJqAx7I0PpyadVIN62XNLRtjTyJw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=QVe4TyHovXijpUbxRFKifUL8pAiNQLH3O4NlWa0Ck0g=;
- b=jof2gwazPTSxxQm3MKPQJvrm+eKlG4hIAc5EQ9X3LiRw9vUULM1mXIc82j249+BrzyUOI/MRSKV0ORuoNkdWzNyuKj9KrcZ8cUrpmDehedRnhOOagGDN9gblnRKizMOzzMlK6j2c/ni5RgLjZXVTfBpLrJ3R8QB/f4BM51cJPsWLvRw+Nn7iJ8z80gKz6z+8W7XmXxpPvMPCQjWYseKGSNJ32c2dCKYLS17E5ND2cfRVU7FT8q9N/fL5HQIW8SpYco1ZoYTH7ln/J9Zn9W2UBbFpV5zZdN2acN7qwGL2ccW9eFuMVq0I7V7peRwslWTdEry5DphmPgOkofBOBsLD1Q==
+ bh=wTJ4zkwJIt5EVp8UHBlJMIGqq7KR21YfDZC44ODZwpo=;
+ b=arAnFau1Qtlp46DumKdBWQaORF0uAwb61T6KEcJN7jPMtB3OfUtcWSsI4yrA0jez1YIoOrIoS4yoITHso9Jn0kOwDSydVEwoA/mkBxEIhWeAm3HIDWUldVwgL5dPs6VCzO2w3f9Hx2BJnnVJdsRdV6X9s0gEZRvC+DpvZXS0J/lt+Nf+deZjgwob821UsPGEeFWpHVWFQchBj6IngCEz7Tz1HhB2MfgDowAEJEMpy+oxKNnWkHrrnDz8LIvMqrZmUlwpzK2KPWfLwpVRqKeXanN21DVIZVLT6Uqv1opJpp3FxPlJgZ/DetwYFLsgd/mz1DlPao6oyU3tCVINGK7avg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
  dkim=pass header.d=cherry.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QVe4TyHovXijpUbxRFKifUL8pAiNQLH3O4NlWa0Ck0g=;
- b=NplpZuW6o+JZzE9Qlr426YaMqCW4bYtjdSgIO3XG6+XW7YHO2NxSClf2A04F8krlLgCgxhUzAjGHFPPN9Yh9MjcsqTao5R+8h1jZXem1KxTT2iFJ/+1hEAPXtASprWdsJnO/W07BbvmKXmlHeCid0Y7OOF8lpIWkqBy7wH2lt/Q=
+ bh=wTJ4zkwJIt5EVp8UHBlJMIGqq7KR21YfDZC44ODZwpo=;
+ b=Pl3Ea6eDgnpnn0aNNgI6jNIB76nTsbsVJfcTWdhGAUf7lGgQAND7V+pdKmeSqLNTbyugreDNWM1TdkzweA8fPObDWyFW7erNxr5apBuH1KZElpdB3KJREzVKUwsKZPtoPHI9wg2JPcvSAheW4hKxEuGA+CaZSBGSDgArPxPJSS0=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=cherry.de;
 Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by GVXPR04MB11044.eurprd04.prod.outlook.com (2603:10a6:150:215::16)
+ by AS1PR04MB9478.eurprd04.prod.outlook.com (2603:10a6:20b:4d8::12)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8048.26; Mon, 14 Oct
- 2024 16:47:08 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8048.25; Mon, 14 Oct
+ 2024 16:59:52 +0000
 Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
  ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
  ([fe80::35f6:bc7d:633:369a%7]) with mapi id 15.20.8048.020; Mon, 14 Oct 2024
- 16:47:08 +0000
-Message-ID: <085c1f48-4469-4549-850b-62e3c9ae1674@cherry.de>
-Date: Mon, 14 Oct 2024 18:47:07 +0200
+ 16:59:52 +0000
+Message-ID: <8341e1e4-b5da-4c2d-833e-bcc45cf5e8a9@cherry.de>
+Date: Mon, 14 Oct 2024 18:59:51 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] configs: rockchip: Modernise Geekbox config
-To: Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de
-References: <20241011170602.1979605-1-pbrobinson@gmail.com>
+Subject: Re: Mainline kernel bad magic for Pine64-A64-LTS
+To: Louis Holbrook <accounts-uboot@holbrook.no>, u-boot@lists.denx.de
+References: <Zwwg4oXUq6aWlk69@holbrook.no>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20241011170602.1979605-1-pbrobinson@gmail.com>
+In-Reply-To: <Zwwg4oXUq6aWlk69@holbrook.no>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR09CA0185.eurprd09.prod.outlook.com
- (2603:10a6:800:120::39) To AS8PR04MB8897.eurprd04.prod.outlook.com
+X-ClientProxiedBy: FR2P281CA0046.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:92::20) To AS8PR04MB8897.eurprd04.prod.outlook.com
  (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|GVXPR04MB11044:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9ec01026-c713-4ebe-7992-08dcec6fd7ae
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AS1PR04MB9478:EE_
+X-MS-Office365-Filtering-Correlation-Id: a60df4ce-2e3c-4d08-3d29-08dcec719f24
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?ZFJobXpGd2plaTk3MENmKzcwbHU2YXRYV2tkTmprdlpoVVZucjNUdVhDWFVI?=
- =?utf-8?B?cDQyZSthc2RTdVo0cnVaVXFXMkFSRXFPYjB3cWlibEJRbXZYRTlWS0RIM1FI?=
- =?utf-8?B?ZUtlK2h2SUtwNTNDMHNpVVRSZnJOalMveTFkS2Q2SFVDOUJZWWVjdmhyMEk2?=
- =?utf-8?B?ZkJqaFRYWmsveTNnczFabjEzTnRqbUFFOTZxeGdKaUNDN1QvemhsQVpRZHRk?=
- =?utf-8?B?aVR3UE50RmhNNGtjWmxZcDJEMllvaFVmdDhCbDk0aTBnZXdoazE2WnNtSDBz?=
- =?utf-8?B?ZTFvR0RmKzZ6SEVCcm10UnZzTjBEdGlUL0dMTjAxaWkyc0RnVHhqa2o1UzJa?=
- =?utf-8?B?TzM3cGlsbi85TmltMThzWCtuMnoxN0Z2V05yOWJxeDE1bnpqZUVuc1hFcWJi?=
- =?utf-8?B?N0FHbGVLUEJIaUQxNGlMQ0RUVHRtbUxoK3ErQ2dRajVqQTg4ekxvcy9sTjhq?=
- =?utf-8?B?ek4xTWk1eFY5MWZQVHFCS2RUSWNzckROWENoY2lBS0NzOVUwUjJrQTBDZVpM?=
- =?utf-8?B?cjRzczdpdzRKbFViUmljeTBrQkh1N3NiMi9qMXdteEhTa3hCck00cDdqcDda?=
- =?utf-8?B?NnhjZVVhRkcrSHJrWDIwYTZrbjF1WDd6ejBzTXhhQnFST2RhQUNSaDBBc3lu?=
- =?utf-8?B?T1l6ZE1uWE9ja1F3SmVNTVFVRGMzU0lTeUM1dDFMb1N6aEhKM3hORm9XNDE3?=
- =?utf-8?B?WkRKTncvZHMxSTNJQXc0dGh4bjFoOGc3NlZSdnU2bFozMTFEZC81aXE5ZXlo?=
- =?utf-8?B?MCs0N1ZBMmdsanhQalZ2K2dWbGpEZTkzVE9zeHBPVDNHdXFEYU52ZFBiMmFa?=
- =?utf-8?B?SzQwUVU5dHpxVTA3dlliaWpYMjlmYTJ0ZnQvK1lFSkFLODIvUUVnaVRFQnYy?=
- =?utf-8?B?RlRqbzVjWWx3L0ptLy9FdTh4QkQ2NHpZcTJmTDFuSG5MVmU0aFBoSFA4NXE4?=
- =?utf-8?B?R1pScUlaci9od0tQN0Yzbmt4RGJSc21oZmpUbzNQRXl1Z09WOFJuWmczRktU?=
- =?utf-8?B?dUhUT2ZpZUw0aUl5QkVHenRSbXBmeEY4dkZicDZaZHZtSGk5bk9GelpzUlUy?=
- =?utf-8?B?WmQ4ZFZWZjErMUxaR2hwcEp3aVBkMjk2bGJYUXR0UU41SlJJNTJQUjBsZ3dG?=
- =?utf-8?B?T1RhUUVjYmhTQ2plUHVzSjN3RExYWkV0OGprQjZJVXh5N05PSlE5UGF6R016?=
- =?utf-8?B?SkRzeDQ2Wmt6c0E1M3dCQlkyQytBQkZIVER3ZlNYSXlvcFpJRFVDdzB1cS91?=
- =?utf-8?B?TW45clFBWjlrb243S1Q5MlgyeVltSTY4OW1yVms3dGYvVWxoUSt0cWlnK05I?=
- =?utf-8?B?RmNnNHBpWmtEc1I3d2dBVUFQUFdYM3N6bGluQlFKdmphR01RZERWdU80VU1Z?=
- =?utf-8?B?VE5FMlY4RGVzWEloSEpqSkJ4cVo3VWRuMlZvb1lwVDJXNW9uTlJ3T09WQlcw?=
- =?utf-8?B?U0o3ZzUzbnlKVE5zamx6aTE3c1U2T0hpUUV0RWZRTkdQTGVETkFCYzB2MHIx?=
- =?utf-8?B?STZaaHluR04xQU15ZHZiWTF0MWRyUFNwNTQ4SDdEbUl2dzBIa0llZHJxc3hk?=
- =?utf-8?B?NjVpL0pOU0gwUWdMM3BvbmxSTFpTOWlrVVZ6MUpKN2lJVU12MldRRG1PbUxQ?=
- =?utf-8?B?N2QyZXBTWnVqdVpmVFZNZDRiejFzMVdOYW9tT1I0b0hKcjFMdlNWZGlBaEhY?=
- =?utf-8?B?RVRLUktRQVVsWW5JMEFkWnpzZk8rZ3JiLzJCaDI1RllMelRRZzBLcjR3PT0=?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?NEpiZzh5RVZ0THVRbXJjaW5uM0FDNGFoQU1jalNYTWtNMW1ESjNOdll3NXBW?=
+ =?utf-8?B?T215anFybHBvM0l2UVZrZ3pjaFoyODRDNzIxZFJHczZ6UmkyOFduV2RzN0kr?=
+ =?utf-8?B?Z3F0bzFBU3dTYWZMckdvNmh1bmZ4ZFh4TTQ1eTZIdEJMRjNVUTFNYnZTcTQx?=
+ =?utf-8?B?RitMR3c4aE5udGVMTGdmT3d5TmszN24rMkg5VDhEcmtpa2IzSXQ4OUo3VXNX?=
+ =?utf-8?B?R1ZUaDhsK2NwT2dqYVBPYVpkVHNTSHl6U254U1oxVVgzWWRXOVFic3BNMUZT?=
+ =?utf-8?B?VHhlazN0T3lIa09zRk1PZDNpMEQ4SmcxS1p0aHZEKzJ6Zy9lQVRRVzB3OE5o?=
+ =?utf-8?B?Vk8zbDl6eXhaRFZFTm04OUxBb1g2d0EyVTZsTVZOWFZzTXpTMXVxa2tiaEtE?=
+ =?utf-8?B?MHpJUHppTE1NZmwxZElNMVdZOWQzTGM0Q05NMy9WVkh1ajcvYnFtWU5waTBK?=
+ =?utf-8?B?NDRxaWYwdEJtME9GNGFkZWlSWjczZnEyaGozUTYxeUwvUDF0cHR4bjNMbXpM?=
+ =?utf-8?B?a1hjdjhUQkVvTUhQY3NNcUdNZnlLR2NHcEdiUXR4OWZkejZBNTFQUFp0dS9p?=
+ =?utf-8?B?NXVCVktVL1pFeFh6RThhQzU2SDY5cFNWU2JzV2xVckxuckdCWTJZcU9hUzRL?=
+ =?utf-8?B?NVBFVGIwdGlFTjZkbklMWm5SWjUzV0VETmpNWmtRZktiMkIwQTZ0Y2xqb3A2?=
+ =?utf-8?B?VkxMeThzM0M5cGRkRldINEVreStEYzhQWWtaeEZvcVJYcnVVNHU0TWY2UGNW?=
+ =?utf-8?B?TFJuQVRtUVl2WmlUeUtvN2l6cmI0dldwbnIyTjI1WitpMk9ZS0NHSEo1bHRo?=
+ =?utf-8?B?dlY4SGhSUXRZS0JBcXE2cHBObkttTGo5QU1GSy8veG5ka3JFYmVrNjlWK0I2?=
+ =?utf-8?B?N0E4SVdiVGNuTDJLbGh5UVBDYWhvNlFWTmNpZ0c4clFBb1F2bUdublF3TE90?=
+ =?utf-8?B?VC93TmpMOXVuSmxOdXZsc245eDR4Q2xUNmZVc1dXN0xKY3A5Wjk1bVBiTlVk?=
+ =?utf-8?B?ZVY5eHdUR2l0cnBNZGpJZWloVC8xYkhvYWd6VUprU29lZFI4NTlJWmhFT1Vv?=
+ =?utf-8?B?Wi9JM3BHT013VnVXKzNoRnFRZEc1bDNMYlVnNXhyL0FFM0I4OXpLZEJsWFI1?=
+ =?utf-8?B?aG5FUnNwbTY4WlAwM1JtdGVnL2JUUGxKVlZwbHVnaTdlYzhEOXZUdXJZRDJu?=
+ =?utf-8?B?ODJrR1kwZjJvdFJMOFo0TGI3Z1pFSkpMNWFsb212Qzh0RVkrbXExdWVzYlha?=
+ =?utf-8?B?bEdGb0tzek9OT0dqQzE5MlliTFhyNUlFWWh1U09TZmZFY3drNXRmMHVFaFFD?=
+ =?utf-8?B?WDNkcFNoYkMxcjJLcDFJcmZ4Q0hDVDVzbE9sajYzamdzMUdYYS9Dd2YrRGRL?=
+ =?utf-8?B?cTZldTlhQ0F0ejZzZ0VMZm5qc3d5a3hQOWZiOXRiOFVMajYxaVZnUHRVRVky?=
+ =?utf-8?B?aUEyZlZwZjdiN09ZT2F2cWtyM2czcUhiaFFvVHk4WHZkZFE1OUE2OGdKdTBa?=
+ =?utf-8?B?V1EwSjB2NHpTRHpnQ0JnUk9ROHE5Q1ZHN2czZGxkUkhRTjIvV2RPR2E5MmRP?=
+ =?utf-8?B?ZGUxbSs2c0Ntb2VMVnJodG94OVN3K0ZGd1Y2enRTaFgrNkZkOHlmMUNyeGNp?=
+ =?utf-8?Q?+XHL7Zr9j0d3a6VCEqJ+E5doxOHF/r7KBlULxYyE917Y=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?V056dHFYOXdPV0FHWmVocW9pQmRGN081NmMvVm1ZalVlSVNXUS9Fa0UrNzdT?=
- =?utf-8?B?OW5OU2o2ZkgzbTlncWdVVSsyWGRmd1dGekxEL2czazFkbXVjenpXNkgzaVND?=
- =?utf-8?B?RWxHdTJFeTkxRHlBWG1UeUNET3B6MFR3eGlJRFpXcnBiRm5DOGZhTzN6ZGV4?=
- =?utf-8?B?cTNlOXlBQTdzSFVxQXc2emRQNXJwMXVrVmlnM2lXN1N3eVc3SjROODh6MVJl?=
- =?utf-8?B?TTJicEdyZTcyOGZWazROL2dDbDJualVBUzl6WFFmVG9wYllmVHpCN2dIOFNS?=
- =?utf-8?B?eWh3Y0xzUUNadFIvOXJiWWJOcnI0cVZOZmJrbkkzVWgxZW1VMmJ1NDZWUzU5?=
- =?utf-8?B?RWtKaGZtZk5iSDJxdlRZeXVYRTB4VzFnaWZhYk1EMzg5R29FRGVyeUE1bEg5?=
- =?utf-8?B?eXJ4R2REN0hELzZpMFBzdFUzTGpKckdCRW8wSHF3YU5zTGoxeTl3THg3cmQx?=
- =?utf-8?B?YzRBckttbTZERDBUbC92cXYvclZFZ1FGZGJRWC9yMVNyanFTdXV2SXZZTC9E?=
- =?utf-8?B?dDF5cmhqM0JNcERoN01FMER5S1VYbFVFdmpCMSs1Z00xZy9PZ1hsSFoyTHps?=
- =?utf-8?B?ZnRlVWRZM3RDTkxQYnp0bmJ6elZxSDZXdDlEQVhrUi9rUnZ3azNGMENPTkxp?=
- =?utf-8?B?K2FTUXpvRUJ5Znl0d2MrVnluSjU0LzRJM0xrakdDZURMNHdoMERIU1ZTQ2pz?=
- =?utf-8?B?ZHBEdVZQZHdUSjhUZDU0bmNLSGNDWHdBazUwQUNIZTc5V0NzSW1xU3VJTXlR?=
- =?utf-8?B?U042L1FQY0sra2ZWb1pwQ1hETzhCTVlSR2t6Q1dIS2RIU0dFZ3lPZlZmK0py?=
- =?utf-8?B?c2twZVhkSTVmZER3aEpla2xPY2JFQkJMMGlVWDBnY2ROWEFzS2hOeTl2OVNq?=
- =?utf-8?B?dXB1M0pYM0JFWFRLWmZ4ZE4vYXRCNmlLUTdMczdLSnhtenl2cndVZllhM1JU?=
- =?utf-8?B?cDFGRjl3TGc5N3ZiMlNsdHBNazhVOHJoS3N6cGtHL2l3U3Z0cFFTWDFqZHRQ?=
- =?utf-8?B?VUVObmpNaHlyVWR2citjQUdLRmVIQjFBbGlibEcxNUFFUVpZTjZvTHVFRTVV?=
- =?utf-8?B?eDVsRG5ldFR0Z2JFU0FJbXdhd1IxVlVzeEZIWFRUSGh4K29iWUtWNjF1eHV3?=
- =?utf-8?B?TzRXc1ZhL3cxVTNOZHJrUmZNclZLWVpHUVo4UGx4NnZOTWxGLzJlZ1RMTjRC?=
- =?utf-8?B?TUswVkpMMnZvUVdtTG5xMmtGelg4aFlmVkFSby9TOXdwaHNIL3RQWHpLcGFa?=
- =?utf-8?B?VWNseHJNcGEzK2tlMDlvbW1EZVNXaVBpbzBINmxxMy9RVkNLOG1LT2hBZS93?=
- =?utf-8?B?RzdqWFg4SmJGTGEyNkJqeiswTGRVY1N3UlVnR05KekxJVjVRM3pQSzJqTUVY?=
- =?utf-8?B?R3c2QXVOa1NQQUZtZHZFQkFHUTllZHpPZi9JM1p2Q1pvc1FWTk9uQUIrQjBU?=
- =?utf-8?B?YUQ4NDJOY0JhdXNCTGJGbG1vSVA0L0djeHg3SHhtcFQ3aGw5b1JQelhvSEZv?=
- =?utf-8?B?bHpUWStmWi80T05IUzZteWhwM1RXdTg0UXVaVVViWG5SYklNZDhtaStCVUpp?=
- =?utf-8?B?WGxTRkIyWXJZbnMwNG5CWVBlWEpxQldVQnVaeTRyTFgvdTRla1BoMWRTM0Yz?=
- =?utf-8?B?QzdQYjRxVHptdEsxTzdpdjdHV1prUHdIeWlHY2ZReHo3OWF0Y1JWNWdoOU13?=
- =?utf-8?B?dXBaRHV1dlRxdnc1K1BuTkU5azcrSjVVTmNSc0FnVXZrZ25rVjFwbDNpQ01l?=
- =?utf-8?B?TkZ2SzlRWmpxdEp5YldqamFDcmpGU0U3bVN2WWlmRW5SWUc1cjJ5cFQvSnQz?=
- =?utf-8?B?NWhBMVBJU09oVzV4dFo0NXFIcE83d2o5TEk2c0pkUW5xYnBnbjBNSHpIVUE2?=
- =?utf-8?B?QWppQ00vNEZObFREckZwVkRQcjlWV1MzNGYxMDhlZ01pRmMwM2tGZGdvMi9j?=
- =?utf-8?B?VEhSbHhLRHJWV0R3YXF6dURQd2pKNnhzU2dMV1BTazlWR0lFV3JtM1ZHNFJN?=
- =?utf-8?B?MEN3citPZEFBRzd2R0FWUDRzRmIwZGpHUEoyeTZ5UFc5SWdZRU13S2JwRUtx?=
- =?utf-8?B?NDdOb1cxR0NybzhOTEFteDZNbHpqRkdPSlp1N1o2OUMwMVR2aCt6S1NEZ2U2?=
- =?utf-8?B?V2RqK1V0dkFVUkJqdXYxOXRoOGptUXNnemQ5dDdGMU5qdTdYMHAyMmdKR25U?=
- =?utf-8?B?NVE9PQ==?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OHZJTmQwZHRPY2Q3czFwb1p0UUpEalMwS3ZFM3B2K0xiZzI1Q3BTZVhSUDVK?=
+ =?utf-8?B?K0lyaGIzTXJjaDl1NjZPNkFEaHJ2Ym1kV09BNUtMbmdvVG82SXIwRktCVGlB?=
+ =?utf-8?B?MEdiSEFmNnVjSlpjb1dzYmtWdU1aRDJ6WnozdWZDM0ZUbk9qenBrVHI5MmhH?=
+ =?utf-8?B?M0EyN0l6NUhTbzZLYnpCemNMU0M4WitDV2RTUFRlUFdib0lvVVNzdWZ2VWdJ?=
+ =?utf-8?B?Sm12Y3ZtQk00VWRJb0h6R2pzRXpmaWExOUIycDM2SUV2S0R4UUY0US9uTlI4?=
+ =?utf-8?B?YW50dys1Tkcvc2JkNjZ0bGEwb2syYldJOVdTTlZOaGtxdWlBVThuWXcrN1pD?=
+ =?utf-8?B?R0pnZWUxZzNwN1A3dXluSjNLN3FKaERKWFNkQS9VS2dIdis0d21YVFhaZWFS?=
+ =?utf-8?B?MERkVFJhb3VtOFlLRjNEYlNOaEVRNDRTOHczc0VwK0tZQ2g4ZEhxSFNDZytt?=
+ =?utf-8?B?VDhVc3J2MzlKTVh5SGdaMHB5TVBoM0ErMmxIRFJieExxWEU2NzBkOW9VYU40?=
+ =?utf-8?B?eURXOGJTYzZQTTRYaHBLenhCSksyellkVFRYZVZRRm9aaVh4dW9qT01NQjAy?=
+ =?utf-8?B?bG5MRFhZaXlIUTZlMG5uVHo2ZXFocUQ4dlBoVERadHR4cEdtQ0lMaW1lZ1VW?=
+ =?utf-8?B?NGhhOVRNbHdiZFUydXg1U2RnZm15NG1VSGtoWWNtaE9FK3M3T25DRE9oVHVJ?=
+ =?utf-8?B?ZFl2bFV5Y0lXb284R3R6NnI3NnhQVXpkYWZiQTVHMTRGcENVczhCYlQ2NlVv?=
+ =?utf-8?B?SGJFMy9RR05uNnlURmdzZ1dUSmRUUVdMOEcwZlJhMnZoZXpYeS9BNGlkNCsz?=
+ =?utf-8?B?WTNoSDc4bVhCOXhtNnVEcGFrbmdtRjRzZXBGM2wyN2NuU1dlNFBTeG81ejlm?=
+ =?utf-8?B?Z0Q4cmkyZSs1T01TdlJQTUt3WnpqdmFtNnVvbzhXMnhmN0I5TTIwRVVVa1BS?=
+ =?utf-8?B?RWFrTXd5TXBBNVhydGV4a053TXBNbWVNRW56Rk1ETVpHRnY1Y3NsaEhrelNo?=
+ =?utf-8?B?TUZtUmt0dFFqMjMxWjJvTEJQYWVDRTdJeTRkYmJlU3FIaW9jZk9JcysySEda?=
+ =?utf-8?B?TFd3MGhEMEFMRkR2MTRJQk1TM2Zscnd4aVYwR1RDSlpDNXhSTThlL05NSHhS?=
+ =?utf-8?B?dXBEeTlSOHppWXVtZGdPbHlsN0R6SFBKbGR5NmxmM3Fnc1RHVHV5Zzl3L3Mx?=
+ =?utf-8?B?d0NZV3BWYVQ2SzVsYngzT0MrQmFGT29lNjRwUm5Wa0ViYStYRnY1NlMrNlpz?=
+ =?utf-8?B?cXNobmRKY3IzNTdUM0N0SWNFQVIzVm9WVE5HSGh2K2FCYkhJM1dHTHFUQ3RV?=
+ =?utf-8?B?WVpwK2Y0TkFZTWpTYWhvNkcweWl4cjFTbXhqVU0xaVhTWitEMEpCZ2ZGdlpt?=
+ =?utf-8?B?OGtCNzNCZGpWcmdYS01KR2NiRk9DbFhKSGgvRzNuOEtsUnY0L3JSVi8wZnlz?=
+ =?utf-8?B?cjZuazJrUUhqVHhkUDYyK1NVVE8vUllzZ1JCRDlhSlE3WXhOSkUvdVMvaEx4?=
+ =?utf-8?B?RHZaVlVjUEJyMkdRaC90U2VUM045T0FvTStGeEpBdzBWQjlJQ0RoamY5Rjcv?=
+ =?utf-8?B?RFEvMDNKM2lmeHlrVDg4ZTJPQlQ2dGdKQmZCQmQzeGplSHNpaGxOVWVxWHNC?=
+ =?utf-8?B?QVV1NzZMWFgyQ214cGpMNHIvRnd0UzhIRjFCby9QY3kyc2wwYkhxaVh4b0VD?=
+ =?utf-8?B?WUhlUjFUdDMvaUFBWmVKUXpRa1dXVlM0TXJuV0xuODJhcHBhWlUxNG5nYXR5?=
+ =?utf-8?B?Mmt5aUxNV1dUSVdzbGF0dFhUejRLa1d3QTcwelI2Q0c3dFAybXRySllkd1k1?=
+ =?utf-8?B?MXN4WCtoOVJjUXhGK280Yk5sc2ZhT0pwb1IvanMvV1dhOVRYTVV3RzVyTjl3?=
+ =?utf-8?B?MmRUMjFHVi9IbDYyK29DSUZDLzFNa3hHQ3hwVXBacUJobWlvQkQxKy9jN1dJ?=
+ =?utf-8?B?M2Y4T0RrZ081STdRdkVEZ2ZlNTRHenErbDZVaWlRRlBYUFo0aFpxSmpvMFFj?=
+ =?utf-8?B?c3EwbWpGb05MbWlMZFEzOVlBQnhKSFFEM1JXQXRkTzBuYkFRSTJKY01LZFU0?=
+ =?utf-8?B?NXM0Z1l1RFpNQ0NBblVSdm4wQ3F1eUJqYTVNemZJZXY5RElrb21ERlJNdHZK?=
+ =?utf-8?B?QXhsM1JRbDV3NTRwdXBqdXRLMWU2L0pkc0RBTzRxNThnUVUrbzNUeG9Udzdq?=
+ =?utf-8?B?TkE9PQ==?=
 X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9ec01026-c713-4ebe-7992-08dcec6fd7ae
+X-MS-Exchange-CrossTenant-Network-Message-Id: a60df4ce-2e3c-4d08-3d29-08dcec719f24
 X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Oct 2024 16:47:08.5340 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Oct 2024 16:59:52.7520 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 8eiEw/XAxGFj/sO2Xzs2hYN2Jg/cKB6zkBCvUh92/uQksAg8qwwzn17cq6fyPoSnN4B3/pssG994+i2ZySQfYndmD6MEzLe1q8dIAOdO4wE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR04MB11044
+X-MS-Exchange-CrossTenant-UserPrincipalName: tq5tyatx0PSroM7Cn9NjrdKeehxpsXs5ca+d+/KyJyH2T+H6kTvobCBSBtod5IJ2nZZQ4W4vntftXNpiC/8fLzQ9FSROsHQtDhp0VvWc+VY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS1PR04MB9478
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -171,193 +167,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peter,
+Hi Louis,
 
-On 10/11/24 7:05 PM, Peter Robinson wrote:
-> Modernise and move the Geekbox config to use SPL/TPL with
-> upstream TF-A, enable MMC/USB/Eth to make the device more
-> useful and work like other Rockchip devices. Update the
-> readme to reflect the changes to the build process.
+On 10/13/24 9:34 PM, Louis Holbrook wrote:
+> [You don't often get email from accounts-uboot@holbrook.no. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
 > 
-> Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
-> ---
+> (Also posted in pine64 forum
+> https://forum.pine64.org/showthread.php?tid=19460)
 > 
-> I've not moved this to upstream DT as yet because there's some
-> further issues I need to debug but this moves this platform
-> forward.
 > 
->   arch/arm/dts/rk3368-geekbox-u-boot.dtsi | 10 ++++
->   board/geekbuying/geekbox/README         | 40 +++++++++++++-
->   configs/geekbox_defconfig               | 71 ++++++++++++++++++++++++-
->   3 files changed, 118 insertions(+), 3 deletions(-)
+> In an attempt to troubleshoot failing to get generic alpine linux to
+> run on PA64-2G-LTS, I've tried to reduce the problem to the smallest
+> steps that are legible to me.
 > 
-> diff --git a/arch/arm/dts/rk3368-geekbox-u-boot.dtsi b/arch/arm/dts/rk3368-geekbox-u-boot.dtsi
-> index cfc8b9340a8..55d007f7ab8 100644
-> --- a/arch/arm/dts/rk3368-geekbox-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3368-geekbox-u-boot.dtsi
-> @@ -26,6 +26,16 @@
->   	bootph-all;
->   };
->   
-> +&dmc {
-> +	bootph-all;
-> +
-> +	rockchip,memory-schedule = <DMC_MSCH_CBDR>;
-> +	rockchip,ddr-frequency = <800000000>;
-> +	rockchip,ddr-speed-bin = <DDR3_1600K>;
-> +
-> +	status = "okay";
-> +};
-> +
->   &grf {
->   	bootph-all;
->   };
-> diff --git a/board/geekbuying/geekbox/README b/board/geekbuying/geekbox/README
-> index de980f2f233..bd4d8cdd084 100644
-> --- a/board/geekbuying/geekbox/README
-> +++ b/board/geekbuying/geekbox/README
-> @@ -1 +1,39 @@
-> -see board/rockchip/sheep_rk3368/README
-> +Here is the step-by-step to boot to U-Boot on the Geekbox
-> +
-> +Get the Source and build ATF
-> +============================
-> +
-> +  > git clone https://github.com/TrustedFirmware-A/trusted-firmware-a.git
-> +  > cd arm-trusted-firmware
-> +  > make CROSS_COMPILE=aarch64-linux-gnu- PLAT=rk3368 bl31
-> +
-> +Configure U-Boot
-> +================
-> +
-> +  > cd ../u-boot
-> +  > export BL31=../arm-trusted-firmware/build/rk3368/release/bl31.bin
-> +  > make geekbox_defconfig
-> +
-> +Build the full U-Boot/ATF firmware stack
-> +========================================
-> +
-> +  > make CROSS_COMPILE=aarch64-unknown-elf-
-> +
-> +Flash the image
-> +===============
-> +
-> +Copy the SPL to offset 32k and the FIT image containing the payloads
-> +(U-Boot proper, ATF, devicetree) to offset 256k card.
-> +
+> When booting the kernel, I get "Bad ARM64 Image Magic" I can't figure
+> out what this means, and why it is happening. Sources I have searched
+> seem to be board specific, and found nothing on this board. I've arrived
+> at a point where I cannot find a way to reason further about it, so thus
+> I am reaching out.
+> 
+> I am currently loading the kernel and dtb manually at the uboot prompt:
+> 
+> setenv bootargs loglevel=7 earlyprintk
+> fatload mmc 0:1 0x42000000 boot/vmlinux
+> fatload mmc 0:1 0x4a000000 boot/u-boot.dtb
+> booti 0x42000000 - 0x4a000000
+> 
 
-Missing a word here at the end of the sentence I believe?
+Make sure that those are absolutely NOT overlapping, i.e. you may be 
+writing u-boot.dtb over vmlinux and thus corrupting it. I've not made 
+the maths if this is reasonable with the addresses provided there but 
+it's good general advice anyway. What I usually like to do is have the 
+DTB right before the vmlinux, like 1MB before. No way a DTB is going to 
+be bigger than that :)
 
-> +eMMC
-> +----
-> +
-> +rkdeveloptool allows to flash the on-board eMMC via the USB OTG interface with
-> +help of the Rockchip loader binary.
-> +
-> +  > git clone https://github.com/rockchip-linux/rkdeveloptool
-> +  > cd rkdeveloptool
-> +  > autoreconf -i && && ./configure && make
-> +  > git clone https://github.com/rockchip-linux/rkbin.git
-> +  > ./rkdeveloptool db rkbin/rk33/rk3368_loader_v2.00.256.bin
-> +  > ./rkdeveloptool wl 64 ../u-boot-rockchip.bin
-> diff --git a/configs/geekbox_defconfig b/configs/geekbox_defconfig
-> index 8f4be79831a..1b116fa8602 100644
-> --- a/configs/geekbox_defconfig
-> +++ b/configs/geekbox_defconfig
-> @@ -3,29 +3,96 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
->   CONFIG_TEXT_BASE=0x00200000
-> -CONFIG_SYS_MALLOC_F_LEN=0x1000
->   CONFIG_NR_DRAM_BANKS=1
->   CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
->   CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
->   CONFIG_DEFAULT_DEVICE_TREE="rk3368-geekbox"
-> +CONFIG_SPL_TEXT_BASE=0x00000000
->   CONFIG_ROCKCHIP_RK3368=y
-> +CONFIG_TPL_LIBCOMMON_SUPPORT=y
-> +CONFIG_TPL_LIBGENERIC_SUPPORT=y
-> +CONFIG_SPL_DRIVERS_MISC=y
-> +CONFIG_SPL_STACK=0x188000
-> +CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-> +CONFIG_SPL_BSS_START_ADDR=0x400000
-> +CONFIG_SPL_BSS_MAX_SIZE=0x20000
-> +CONFIG_SPL_STACK_R=y
-> +CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x4000
-> +CONFIG_SPL=y
->   CONFIG_TARGET_GEEKBOX=y
->   CONFIG_DEBUG_UART_BASE=0xFF690000
->   CONFIG_DEBUG_UART_CLOCK=24000000
->   CONFIG_SYS_LOAD_ADDR=0x800800
->   CONFIG_DEBUG_UART=y
-> +CONFIG_FIT=y
-> +CONFIG_FIT_VERBOSE=y
-> +CONFIG_SPL_LOAD_FIT=y
->   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3368-geekbox.dtb"
->   # CONFIG_DISPLAY_CPUINFO is not set
->   CONFIG_DISPLAY_BOARDINFO_LATE=y
-> +CONFIG_SPL_MAX_SIZE=0x40000
-> +CONFIG_SPL_PAD_TO=0x7f8000
-> +CONFIG_SPL_BOOTROM_SUPPORT=y
-> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-> +CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x200
-> +CONFIG_SPL_ATF=y
-> +CONFIG_TPL=y
-> +CONFIG_TPL_SYS_MALLOC_SIMPLE=y
-> +CONFIG_TPL_DRIVERS_MISC=y
-> +CONFIG_CMD_GPIO=y
-> +CONFIG_CMD_MMC=y
-> +CONFIG_CMD_REGULATOR=y
-> +CONFIG_CMD_USB=y
-> +CONFIG_SPL_OF_CONTROL=y
-> +CONFIG_TPL_OF_CONTROL=y
-> +CONFIG_OF_LIVE=y
-> +CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names interrupt-parent"
+I have never used vmlinux so cannot tell if you're supposed to use booti 
+with it. I usually just get the Image or Image.gz from arch/arm64/boot 
+and `booti` it and that should just work.
 
-Mmmm... really removing pinctrl in SPL? Not sure this is wise? We 
-usually remove clocks and interrupts specific nodes?
-
-> +CONFIG_TPL_OF_PLATDATA=y
-> +CONFIG_ENV_IS_IN_MMC=y
->   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-> +CONFIG_NET_RANDOM_ETHADDR=y
-> +CONFIG_TPL_DM=y
->   CONFIG_REGMAP=y
-> +CONFIG_SPL_REGMAP=y
-> +CONFIG_TPL_REGMAP=y
->   CONFIG_SYSCON=y
-> -CONFIG_BOUNCE_BUFFER=y
-> +CONFIG_SPL_SYSCON=y
-> +CONFIG_TPL_SYSCON=y
->   CONFIG_CLK=y
-> +CONFIG_SPL_CLK=y
-> +CONFIG_TPL_CLK=y
-> +CONFIG_ROCKCHIP_GPIO=y
-> +CONFIG_SYS_I2C_ROCKCHIP=y
-> +CONFIG_MMC_DW=y
-> +CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_PINCTRL=y
-> +CONFIG_PHY_REALTEK=y
-> +CONFIG_DM_ETH_PHY=y
-> +CONFIG_ETH_DESIGNWARE=y
-> +CONFIG_RGMII=y
-> +CONFIG_GMAC_ROCKCHIP=y
-> +CONFIG_PINCTRL=y
-> +CONFIG_SPL_PINCTRL=y
-> +CONFIG_DM_PMIC=y
-> +CONFIG_PMIC_RK8XX=y
-> +CONFIG_DM_REGULATOR_FIXED=y
-> +CONFIG_REGULATOR_RK8XX=y
->   CONFIG_RAM=y
-> +CONFIG_SPL_RAM=y
-
-Not sure we need SPL_RAM if we have TPL_RAM?
-
-BTW, if you're using upstream TF-A, you can also disable 
-CONFIG_SPL_ATF_NO_PLATFORM_PARAM and let U-Boot pass the serial console 
-to TF-A instead of relying on build time setting in TF-A :) (I've done 
-this for RK3399 Puma already).
+I also do not exactly know if you're supposed to be able to use u-boot's 
+DTB for Linux kernel. Eventually we want to go towards this, but I don't 
+know if that's necessarily possible today (but that wouldn't have 
+anything to do with the bad image).
 
 Cheers,
 Quentin
