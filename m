@@ -4,74 +4,152 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3BF7CFC535
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 10:18:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DF5ACFC535
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 10:21:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E27E8907D;
-	Mon, 14 Oct 2024 12:18:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id EC92A8902D;
+	Mon, 14 Oct 2024 12:21:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pGuBFXfP";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="Snt2wYl8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B44889095; Mon, 14 Oct 2024 12:18:54 +0200 (CEST)
-Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
- [IPv6:2607:f8b0:4864:20::1034])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9F7BE890B1; Mon, 14 Oct 2024 12:21:44 +0200 (CEST)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on2062d.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::62d])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9EA3C89041
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 12:18:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E42D8904A
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 12:21:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-2e2ed2230d8so2023597a91.0
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 03:18:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728901130; x=1729505930; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ylOC7EyiSp93xPOaWKRJ26r8HUuw3USwwT0Bu7RcIRM=;
- b=pGuBFXfPN7hgKDCb6IOO1/kvVDScwkLgM4RyNUMROPP7kem2vN9wE3LZfx+3P5T0NI
- C2f5H1OX/9X9MWESjFDFPpNWsCMYT5alkGroK4mPMYU/6oLPKrNLP5zPpRw0KeAyktZK
- 6hGo19GtW1C4364kTMncuRM/WuxOT/bCu3MDPTbvfkabdjuWJ622wJA/xGLIgYIUgCpC
- d42TzNnwx/tmOXYJ3P9eAwyrChZL6BBM/WEgKUEVB7XM16iUSsftFGSzZjmSV7Rbpb/i
- 4Yjo23XpcW2yRNU4rvltXYEMmWCn0bsomMGURrzBEtSnpr3kCUo34L/tdObE82MspoEG
- LMHg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728901130; x=1729505930;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ylOC7EyiSp93xPOaWKRJ26r8HUuw3USwwT0Bu7RcIRM=;
- b=FRBpst0rJVGuzf4LOw2NQ/0fmIY+8hvL+a8uJpENSf92BK5+O8s4r/FvkTpt6tYlSQ
- bYlREcfNO0KeI500g1nVc4xh63DLOdmaYx+AOXmYyTnQFqKx5XM0pJvR2dW6yfd9fFTV
- T37NuN5mzFEJvNeu5r2tcIGVx43H6U69ysO3exlcJyWB5ExDMxWacofiNBWO9HseCU/j
- gRlUkTTc3V1iTih8j0Q3cs3OwnUJ9OS9vQ0aVhj8lexI3UNfGIf/u1sIhESmtMKnql5F
- TqZrbQsPAaoOnBzdXrJmDUehxuoIT5rLfuEpDdQ16hk++BppQ1OHgI3iSS4efSnkKkj8
- 8ymg==
-X-Gm-Message-State: AOJu0YwD/y5hKjsoMynBhefYbPgKFOHgh3bWaU0wGBZqQXmnbWSTa8nf
- jsOnPNRU09UxKpee1EIwCDom/a+tp9eacymR5rQlTlRTnsF7Ym10QRs/ZDWSb/J4DsSuQypQa9q
- ZhVw+0u19paFs6RqNUp/xtdWlheKwlSpkX/B9bQ==
-X-Google-Smtp-Source: AGHT+IFTmq6s4LeQ/IjO+6NOJwIP3OV0VZLPxkPnf+U44w2edRo5MkyvPIrqsmbswbQWdla82E5GoEM62T8lyOBUIc8=
-X-Received: by 2002:a17:90a:eb13:b0:2e2:d3e9:eb33 with SMTP id
- 98e67ed59e1d1-2e3152bd73bmr10892885a91.11.1728901129866; Mon, 14 Oct 2024
- 03:18:49 -0700 (PDT)
+ spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=rpl3mZ1fn/oTUqh7TA+8k13WFUyhY1D9I1UE4084JA9W8kpKUcibKa/A/jJmTNhPSbzz/RxZJ4dEC/hZyHv7IwCtQFrz9f/IbR+LL2fyOkSBOZIzQJ4T+IJqfrr9K7KA2Rx09uDGxkTc0qY552Pfum7heXeHPHJvVeEpqylDAO8Ls2Cv/ehu7+CcOBI+y5khT2hScRIm73iVbMbCRtemQi5p3kwvl/dhmx0hq84teQqPBMS6VeDv2q3gtrYBv6QMDqSKqCpl3JoE2crarPaWC+FHK8vb/tOTYa0g57tgtPokjQMD95xN8xFvGEdj0lOq+UR8YiGfJjq0pitI9gosCQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=kc23Ee46eqrg9v1f3Nnh/AIkkGMw0woQxyjjQJeHGPc=;
+ b=JsV/uRsc47tKFkZBG0o0jWri/R2cc1p3ggs+bnQJE2pCveC9x9A4O6+/cugRPFfvbgFn006UaKhahCTizTSA7h/pDcDfq8azoQ7IFsnhRMxzzazzVM7lGPhdKMG9EZ+I5VfBJV9WcZXpsTQMhzMTrddK4nzldJ8CLEUPpBXwfQB81NXEOyPLN6vLYXlVhsA7IqQCgp5OJUwQC/fDP9NfIot389VI4PMzO3x7OGWbR9YyfsrrQGf5SMBEEXwAUpsqh/ZS1V6F5/q4/MzbRMQBjgWXdj3IpSTa7T/rNV2BAqcq/kFGDdZubrsPsjat8H1dSK4LaROd7pSZg9pvQMaIiw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=kc23Ee46eqrg9v1f3Nnh/AIkkGMw0woQxyjjQJeHGPc=;
+ b=Snt2wYl8zP44F0jjILxQirbUwT/hVDi7mZTeudkC+bePDyeLh91VLDzA8WB1fjLVL7VT9KWQ/reBX6upcchevIq1oEcgN4THYKlsnBqP4HJJzl0AFj7+x/uXe0w2qYwXdMN/QSUDSDcDJfnFCnHk8WWfhjKxNeOqltONz1dPvzE=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
+ by PA2PR10MB8550.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:421::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8069.16; Mon, 14 Oct
+ 2024 10:21:39 +0000
+Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::9fcc:5df3:197:6691]) by DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::9fcc:5df3:197:6691%3]) with mapi id 15.20.8069.009; Mon, 14 Oct 2024
+ 10:21:39 +0000
+From: Rasmus Villemoes <ravi@prevas.dk>
+To: Heiko Schocher <hs@denx.de>
+Cc: Peng Fan <peng.fan@nxp.com>,  U-Boot Mailing List
+ <u-boot@lists.denx.de>,  Fabio Estevam <festevam@denx.de>,  Fabio Estevam
+ <festevam@gmail.com>,  Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Marek Vasut <marex@denx.de>,  dl-uboot-imx <uboot-imx@nxp.com>,  Rasmus
+ Villemoes <rasmus.villemoes@prevas.dk>,  Stefano Babic <sbabic@denx.de>,
+ "tharvey@gateworks.com" <tharvey@gateworks.com>,  Tom Rini
+ <trini@konsulko.com>
+Subject: Re: [RFC PATCH v1] dts: imx8mp-u-boot.dtsi align flash.bin
+In-Reply-To: <aeec07bf-6a3d-08c5-2786-5a7c2bfe92b6@denx.de> (Heiko Schocher's
+ message of "Mon, 14 Oct 2024 09:44:45 +0200")
+References: <20241010082831.19983-1-hs@denx.de>
+ <DB9PR04MB846127A928CBE4AB1F373DFE88442@DB9PR04MB8461.eurprd04.prod.outlook.com>
+ <43ea1972-ee4f-ab25-aa98-2ae3fc4f20fb@denx.de>
+ <DB9PR04MB84613CEEBFE7ECE0B249DB6A88442@DB9PR04MB8461.eurprd04.prod.outlook.com>
+ <aeec07bf-6a3d-08c5-2786-5a7c2bfe92b6@denx.de>
+Date: Mon, 14 Oct 2024 12:21:42 +0200
+Message-ID: <87a5f7assp.fsf@prevas.dk>
+User-Agent: Gnus/5.13 (Gnus v5.13)
+Content-Type: text/plain
+X-ClientProxiedBy: MM0P280CA0046.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:190:b::20) To DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:10:45a::14)
 MIME-Version: 1.0
-References: <20241013105522.391414-1-sughosh.ganu@linaro.org>
- <20241013105522.391414-7-sughosh.ganu@linaro.org>
-In-Reply-To: <20241013105522.391414-7-sughosh.ganu@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 14 Oct 2024 13:18:13 +0300
-Message-ID: <CAC_iWjLQPkg4Vu1CZ7B+4BqRZnCUAiZkqgs412RVmDMDqYR__Q@mail.gmail.com>
-Subject: Re: [PATCH v3 06/15] lmb: notify of any changes to the LMB memory map
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Jonas Karlman <jonas@kwiboo.se>
-Content-Type: text/plain; charset="UTF-8"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|PA2PR10MB8550:EE_
+X-MS-Office365-Filtering-Correlation-Id: bd7b2e41-92e1-4b00-f791-08dcec39fd9c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|52116014|7416014|1800799024|366016|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?7xJ3eOlZyNEUQgNCcxikTNlu71NEAzlE9nAOeUTCG3IP5rLBtKZZtqF5cZay?=
+ =?us-ascii?Q?DGRvkNGyMFMdjAQ5koAvERU9wlJcL4pWskI/3Dxfp4SINf9BdXtZUyoZd19I?=
+ =?us-ascii?Q?LraK/uZsWOb6cffJR3mN8wvEEcbUtK+rkRjnpm49WHzRw/C88nX8KSjSMntN?=
+ =?us-ascii?Q?GC5414scT/vdXXwUA5RuHOzpYtF//wN+iLaAmkX6w6uKgkaVK2YtgaQxg9V1?=
+ =?us-ascii?Q?dbi8kGh1EaH7VmauUmdli+vsgMcu/aWuhIcbMTKahM42le0kQB0KSVH5rb77?=
+ =?us-ascii?Q?3l2UA5byobZKTWbn15MN8GTd9yF3RKZd9w++VaYs9Ufng3QEqVYbdA2quG7N?=
+ =?us-ascii?Q?Ns+cHWVVUD28EuZHN9i2MoYymhe/eZuYABGSbQbf+7JF1JAV+W45LiBmaGHe?=
+ =?us-ascii?Q?u4zSZx5Dw945QZxiSLg0Q0x5YES7MFStzKi+TkLonuCR/SDfKII1/h86l/ku?=
+ =?us-ascii?Q?hTC+jrANoJP6K8SI9zjGYyhJz+hbZJyRXV0pxtAKr+BQRmbIw1XlHz+j/wM/?=
+ =?us-ascii?Q?OPAV+73LRZMaYF0EMeZMAwZAdsL/t5u2QA7iORhaln274NQjhd9C9hMRAIxI?=
+ =?us-ascii?Q?GhyUezsRVgW3EG/iPBnsQeaHheuYooRfIzGlb9504606Az71fm1oX9S0h663?=
+ =?us-ascii?Q?3iQ6LEE0SRssH1zGgc82nCrVp+b8fUD8StFqXJHqNob+o+ADxeTWIH3OQWjA?=
+ =?us-ascii?Q?E7HsPjs+AROAueI8N0F31eCYYaxkWZgQJ+nkUYeC+0UaPEZH9vTr0lRq/2y8?=
+ =?us-ascii?Q?BGW8A8j1r6/na3Knt6Xb8SaxEBN4WZ5jsh4lZ7aBS3/VTf+7RJXTFIZsVIFy?=
+ =?us-ascii?Q?NxmoAS9ui0ZgNE+QBLB+/N/S+LnL7LVBzQD7GBZ9nMDncihhyYGOpaLriuhi?=
+ =?us-ascii?Q?oO8amnN2T0rCHvn5q7VIciiOiXdJq7RyxvIB4zLRXRl73BEZe3o3LJrq0icc?=
+ =?us-ascii?Q?HgN11BDIsG+yYtUJFodAzJVS275tTkw7dIqB53jO5lc1/dgrqxlycnvcti4m?=
+ =?us-ascii?Q?j2RmitFf4fbupmr2urpBECj4JXj885+ItqsbfVdCDWFlGB4/iFYCdA+raAk4?=
+ =?us-ascii?Q?B4yZGJciJD4qxrEo6GgyYO1rnBVP/cU0ITeJXATIYJpXelHEHT7vH204q7gE?=
+ =?us-ascii?Q?wHdE6lEz57RTlzM4k4I8b2/GhSar394t+jC6EJlfjoLN/KFUQBvfnfO72WLv?=
+ =?us-ascii?Q?fAwKksvKRO44nha47odrvmbyUoF4BLGgNqHjM6TLwjRYSim+7qINJEvrsCrU?=
+ =?us-ascii?Q?mqAt5go/pfkVxT+GjxrpoFnnM6coQVrlvFmAppqpHXgD5E0l1ttJ9RYtH1Ms?=
+ =?us-ascii?Q?ykFskfr6/sQh0YzH44n+15yp?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(52116014)(7416014)(1800799024)(366016)(38350700014);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Gfw3wiIdWbpg/r7QrRDWMOk2KYNvDJJew0OUC3i+G4xRp+Ags39nXQEG8s3e?=
+ =?us-ascii?Q?x2DSD77YPB40E5nEe/Sjn20tpqfjvJRL30jC6ayIZIYg1jjkZPlzjW4O5kXX?=
+ =?us-ascii?Q?6rqOPD+YXbWPoC0uEnwfBXhU0P3slNYHa2X2fcXaiOKuEapEQDuP9MCZ4BJr?=
+ =?us-ascii?Q?XuI3GLLa1BzTsk3lt/NLDNXJSDv0isV4EeZjZ+u+YQvnEClM2RLbH06Hy0k4?=
+ =?us-ascii?Q?3UC2oZO8hiX3tTmT0Ibi1P+qFGF38SAoFEFmduaskr2eCjK9psJ9wdhFO+Ho?=
+ =?us-ascii?Q?Eq1MwdfCR4jBAVgykH3UkjDWNhOk/wrdfGcSpGJDmDdVQz1m44MsByxyeEAx?=
+ =?us-ascii?Q?1r7uYHHJMHLFTFb2QHggJhvhwzY7xziIJYNbCVrdtECURq/B+wj2xg8BIJJJ?=
+ =?us-ascii?Q?6wroedTuo0NwlAZKD1nFFIy3cgAwJw0g2lNDe3S61u+46ftKLy2seyIIPsRj?=
+ =?us-ascii?Q?twM91ZLf3nWSyQXBtAwLX2Dod5g4pSHbNfxg/0ktW0cxm+tNLME9glstlSuu?=
+ =?us-ascii?Q?8T+f8Elh5KiODwlRvX9CThM7p+tSvCqs1lgZnTLvSea8oZeaOZ/NxC6Unlkn?=
+ =?us-ascii?Q?81encAx4o7cJquzeZDB5+mV+wfIUILaOg+KZenbuRU10+1iyjVNNkIp326Q0?=
+ =?us-ascii?Q?ohPfa4KPUiKgIm2pspQqNsqEn9zvxNW48qPiEul08tEwhvVoktE9V0sC5I8W?=
+ =?us-ascii?Q?HV5DdmyX1plj7H9t8sdAmd7ld8QzRqm1+NZm0gaSuBdBO45/hppn0qS6Sygg?=
+ =?us-ascii?Q?ADR+eJ+hf+BWIfAgXrRwtTM7dQK3oWSCy5yPBtMmKXFPwrEkFkinFJiT4OzJ?=
+ =?us-ascii?Q?7k1ewfh1f2pWAcOjQkB1VPfPp9hVAVcBK7phJtKBZ36oizsfaGeIGzcfW8H+?=
+ =?us-ascii?Q?shWWNAc4DzAGwUcxhxo/qhrwW9Zs0TowjNsK5w27c9+ZWh+3IInDmpstVkSz?=
+ =?us-ascii?Q?CRfb4LEiuVbXTOYMhE1ftrflZIagbwXbiu9PTmtL0rgid6UEBfCN1Rr7zb9L?=
+ =?us-ascii?Q?Fq8JRLo8C81WT6o+SAjEPLkpAOCLmIGW671hxjp91Kuu51oSHUuM74ZFfEVZ?=
+ =?us-ascii?Q?hDNrkxlIG0fO29K/BCZYeqY/V9Qm8Q56q/Xu+0OAVFQI7dNEzANcEdmslO9p?=
+ =?us-ascii?Q?vwNhX+lK9BDje+usM0eFjbB4COljSWmQCb4Yx8c2nhKk5CMBLraOHQXmvvL7?=
+ =?us-ascii?Q?VrdFCcPZfrTylw5KYrnywqLm4s+cWvp+OgnqV7CYwF4ijsCitPNIfoOwATg7?=
+ =?us-ascii?Q?+UUdzQq4KbqCuY4+uLlQhmPM+sifBt2zVWNBrC20TnE1GsphOJ3lNJg5o/oX?=
+ =?us-ascii?Q?nmxZz+iJCH54c2B0f/DQOF59dDpdcDe3T3batlqZGpsgccfSh7sfIVaIXS5Y?=
+ =?us-ascii?Q?ScU9JTxA6+Gad5yGPCF1kCCThkTPhRqhn7WKqHElJY0NMny35fZ1AqApcpx5?=
+ =?us-ascii?Q?r1qpS7fwhcpa0tWYAIzlawt3DKx+73SlCX5m9LB0KjWsAJv3scp2Rd6nSk25?=
+ =?us-ascii?Q?Cl0sZaouv14o57yPO0CL3iglRv5T0KmhWHzCU6wPwy6MsbAiPzqrzzwBlx7e?=
+ =?us-ascii?Q?6FPe1AOHztCDGWdMZrZvpUxf1zD/4ciHrq2FhXCoZixUiwSrO1cjsMpXyFIf?=
+ =?us-ascii?Q?Qg=3D=3D?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: bd7b2e41-92e1-4b00-f791-08dcec39fd9c
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Oct 2024 10:21:39.4083 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: flHNBMh30a47vKkBaX3sHrXP4z3Lhb46CVUWuNLSTIeTB9EyvYq4izQB2lqKHljvqqFB+LWqkUSevmqcY1LCy07SLTcMC7DK7XQ2JYODB5o=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA2PR10MB8550
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,326 +166,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sughosh
+On man, okt 14 2024, Heiko Schocher <hs@denx.de> wrote:
 
+>
+> Board boots fine from emmc, sd card. Booting blank board with
+> uuu works with posted RFC patch, as it seems to me code in
+>
+> spl_romapi_load_image_stream()
+>
+> waits for more bytes than flash.bin currently has... appending some
+> zero bytes at the end, and U_Boot begins to boot and works fine, uuu
+> tool ends with errorcode 0.
 
-On Sun, 13 Oct 2024 at 13:56, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
->
-> In U-Boot, LMB and EFI are two primary modules who provide memory
-> allocation and reservation API's. Both these modules operate with the
-> same regions of memory for allocations. Use the LMB memory map update
-> event to notify other interested listeners about a change in it's
-> memory map. This can then be used by the other module to keep track of
-> available and used memory.
->
-> There is no need to send these notifications when the LMB module is
-> being unit-tested. Add a flag to the lmb structure to indicate if the
-> memory map is being used for tests, and suppress sending any
-> notifications when running these unit tests.
->
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> ---
-> Changes since V2: None
->
->  include/efi_loader.h        |  14 +++++
->  include/lmb.h               |   2 +
->  lib/efi_loader/Kconfig      |   1 +
->  lib/efi_loader/efi_memory.c |   2 +-
->  lib/lmb.c                   | 109 ++++++++++++++++++++++++++++++++----
->  5 files changed, 115 insertions(+), 13 deletions(-)
->
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index 511281e150..ac20395718 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -784,6 +784,20 @@ efi_status_t efi_get_memory_map(efi_uintn_t *memory_map_size,
->                                 uint32_t *descriptor_version);
->  /* Adds a range into the EFI memory map */
->  efi_status_t efi_add_memory_map(u64 start, u64 size, int memory_type);
-> +
-> +/**
-> + * efi_add_memory_map_pg() - add pages to the memory map
-> + *
-> + * @start:             start address, must be a multiple of EFI_PAGE_SIZE
-> + * @pages:             number of pages to add
-> + * @memory_type:       type of memory added
-> + * @overlap_only_ram:  region may only overlap RAM
-> + * Return:             status code
-> + */
-> +efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
-> +                                         int memory_type,
-> +                                         bool overlap_only_ram);
-> +
->  /* Adds a conventional range into the EFI memory map */
->  efi_status_t efi_add_conventional_memory_map(u64 ram_start, u64 ram_end,
->                                              u64 ram_top);
-> diff --git a/include/lmb.h b/include/lmb.h
-> index a76262d520..92e9aead76 100644
-> --- a/include/lmb.h
-> +++ b/include/lmb.h
-> @@ -44,10 +44,12 @@ struct lmb_region {
->   *
->   * @free_mem:  List of free memory regions
->   * @used_mem:  List of used/reserved memory regions
-> + * @test:      Is structure being used for LMB tests
->   */
->  struct lmb {
->         struct alist free_mem;
->         struct alist used_mem;
-> +       bool test;
->  };
->
->  /**
-> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> index 69b2c9360d..2282466ae9 100644
-> --- a/lib/efi_loader/Kconfig
-> +++ b/lib/efi_loader/Kconfig
-> @@ -21,6 +21,7 @@ config EFI_LOADER
->         select EVENT_DYNAMIC
->         select LIB_UUID
->         select LMB
-> +       select MEM_MAP_UPDATE_NOTIFY
->         imply PARTITION_UUIDS
->         select REGEX
->         imply FAT
-> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> index aa1da21f9f..41501e9d41 100644
-> --- a/lib/efi_loader/efi_memory.c
-> +++ b/lib/efi_loader/efi_memory.c
-> @@ -264,7 +264,7 @@ static s64 efi_mem_carve_out(struct efi_mem_list *map,
->   * @overlap_only_ram:  region may only overlap RAM
->   * Return:             status code
->   */
-> -static efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
-> +efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
->                                           int memory_type,
->                                           bool overlap_only_ram)
->  {
-> diff --git a/lib/lmb.c b/lib/lmb.c
-> index e1e616679f..a567c02784 100644
-> --- a/lib/lmb.c
-> +++ b/lib/lmb.c
-> @@ -8,6 +8,7 @@
->
->  #include <alist.h>
->  #include <efi_loader.h>
-> +#include <event.h>
->  #include <image.h>
->  #include <mapmem.h>
->  #include <lmb.h>
-> @@ -22,10 +23,55 @@
->
->  DECLARE_GLOBAL_DATA_PTR;
->
-> +#define MAP_OP_RESERVE         (u8)0x1
-> +#define MAP_OP_FREE            (u8)0x2
-> +#define MAP_OP_ADD             (u8)0x3
-> +
->  #define LMB_ALLOC_ANYWHERE     0
->  #define LMB_ALIST_INITIAL_SIZE 4
->
->  static struct lmb lmb;
-> +extern bool is_addr_in_ram(uintptr_t addr);
-> +
-> +static bool lmb_notify(enum lmb_flags flags)
-> +{
-> +       return !lmb.test && !(flags & LMB_NONOTIFY);
+Sounds like exactly the symptoms I fixed with commit 89f19f45d650. 
 
-Can you explain where the test flag is needed? Making the code aware
-its testing something is usually a bad idea
+So yes, you really do need to ensure that flash.bin (or rather the
+embedded u-boot FIT image) has a large enough size for what the rom api
+expects, and that number changes when HAB is enabled.
 
-> +}
-> +
-> +static int __maybe_unused lmb_map_update_notify(phys_addr_t addr,
-> +                                               phys_size_t size,
-> +                                               u8 op)
-> +{
-> +       u64 efi_addr;
-> +       u64 pages;
-> +       efi_status_t status;
-> +
-> +       if (!is_addr_in_ram((uintptr_t)addr))
-> +               return 0;
-
-This should be an error and at least print something
-
-> +
-> +       if (op != MAP_OP_RESERVE && op != MAP_OP_FREE && op != MAP_OP_ADD) {
-> +               log_debug("Invalid map update op received (%d)\n", op);
-
-log_err
-
-> +               return -1;
-> +       }
-> +
-> +       efi_addr = (uintptr_t)map_sysmem(addr, 0);
-> +       pages = efi_size_in_pages(size + (efi_addr & EFI_PAGE_MASK));
-> +       efi_addr &= ~EFI_PAGE_MASK;
-> +
-> +       status = efi_add_memory_map_pg(efi_addr, pages,
-> +                                      op == MAP_OP_RESERVE ?
-> +                                      EFI_BOOT_SERVICES_DATA :
-> +                                      EFI_CONVENTIONAL_MEMORY,
-> +                                      false);
-> +
-> +       if (status != EFI_SUCCESS) {
-> +               log_err("%s: LMB Map notify failure %lu\n", __func__,
-> +                       status & ~EFI_ERROR_MASK);
-> +               return -1;
-> +       } else {
-> +               return 0;
-> +       }
-> +}
->
->  static void lmb_print_region_flags(enum lmb_flags flags)
->  {
-> @@ -474,9 +520,17 @@ static long lmb_add_region(struct alist *lmb_rgn_lst, phys_addr_t base,
->  /* This routine may be called with relocation disabled. */
->  long lmb_add(phys_addr_t base, phys_size_t size)
->  {
-> +       long ret;
->         struct alist *lmb_rgn_lst = &lmb.free_mem;
->
-> -       return lmb_add_region(lmb_rgn_lst, base, size);
-> +       ret = lmb_add_region(lmb_rgn_lst, base, size);
-> +       if (ret)
-> +               return ret;
-> +
-> +       if (CONFIG_IS_ENABLED(MEM_MAP_UPDATE_NOTIFY))
-> +               return lmb_map_update_notify(base, size, MAP_OP_ADD);
-
-I didn't get a chance to answer on the previous series, but I think
-this should just depend on the EFI_LOADER, Is the are problem doing
-that for SPL?
-I think it's cleaner to add that check to lmb_notify() and rename it
-to lmb__should_notify(). Then any future subsystems could use that
-function and add their conditions if they need a notification, instead
-of adding Kconfig options
-
-> +
-> +       return 0;
->  }
->
->  static long __lmb_free(phys_addr_t base, phys_size_t size)
-> @@ -530,11 +584,6 @@ static long __lmb_free(phys_addr_t base, phys_size_t size)
->                                     rgn[i].flags);
->  }
->
-> -long lmb_free(phys_addr_t base, phys_size_t size)
-> -{
-> -       return __lmb_free(base, size);
-> -}
-> -
->  /**
->   * lmb_free_flags() - Free up a region of memory
->   * @base: Base Address of region to be freed
-> @@ -546,16 +595,38 @@ long lmb_free(phys_addr_t base, phys_size_t size)
->   * Return: 0 if successful, -1 on failure
->   */
->  long lmb_free_flags(phys_addr_t base, phys_size_t size,
-> -                   __always_unused uint flags)
-> +                   uint flags)
->  {
-> -       return __lmb_free(base, size);
-> +       long ret;
-> +
-> +       ret = __lmb_free(base, size);
-> +       if (ret < 0)
-> +               return ret;
-> +
-> +       if (CONFIG_IS_ENABLED(MEM_MAP_UPDATE_NOTIFY) && lmb_notify(flags))
-> +               return lmb_map_update_notify(base, size, MAP_OP_FREE);
-> +
-> +       return ret;
-> +}
-> +
-> +long lmb_free(phys_addr_t base, phys_size_t size)
-> +{
-> +       return lmb_free_flags(base, size, LMB_NONE);
->  }
->
->  long lmb_reserve_flags(phys_addr_t base, phys_size_t size, enum lmb_flags flags)
->  {
-> +       long ret = 0;
->         struct alist *lmb_rgn_lst = &lmb.used_mem;
->
-> -       return lmb_add_region_flags(lmb_rgn_lst, base, size, flags);
-> +       ret = lmb_add_region_flags(lmb_rgn_lst, base, size, flags);
-> +       if (ret < 0)
-> +               return -1;
-> +
-> +       if (CONFIG_IS_ENABLED(MEM_MAP_UPDATE_NOTIFY) && lmb_notify(flags))
-> +               return lmb_map_update_notify(base, size, MAP_OP_RESERVE);
-> +
-> +       return ret;
->  }
->
->  long lmb_reserve(phys_addr_t base, phys_size_t size)
-> @@ -587,6 +658,8 @@ static phys_addr_t lmb_align_down(phys_addr_t addr, phys_size_t size)
->  static phys_addr_t __lmb_alloc_base(phys_size_t size, ulong align,
->                                     phys_addr_t max_addr, enum lmb_flags flags)
->  {
-> +       u8 op;
-> +       int ret;
->         long i, rgn;
->         phys_addr_t base = 0;
->         phys_addr_t res_base;
-> @@ -617,6 +690,16 @@ static phys_addr_t __lmb_alloc_base(phys_size_t size, ulong align,
->                                 if (lmb_add_region_flags(&lmb.used_mem, base,
->                                                          size, flags) < 0)
->                                         return 0;
-> +
-> +                               if (CONFIG_IS_ENABLED(MEM_MAP_UPDATE_NOTIFY) &&
-> +                                   lmb_notify(flags)) {
-> +                                       op = MAP_OP_RESERVE;
-> +                                       ret = lmb_map_update_notify(base, size,
-> +                                                                   op);
-> +                                       if (ret)
-> +                                               return ret;
-> +                               }
-> +
->                                 return base;
->                         }
->
-> @@ -786,7 +869,7 @@ int lmb_is_reserved_flags(phys_addr_t addr, int flags)
->         return 0;
->  }
->
-> -static int lmb_setup(void)
-> +static int lmb_setup(bool test)
->  {
->         bool ret;
->
-> @@ -804,6 +887,8 @@ static int lmb_setup(void)
->                 return -ENOMEM;
->         }
->
-> +       lmb.test = test;
-> +
->         return 0;
->  }
->
-> @@ -823,7 +908,7 @@ int lmb_init(void)
->  {
->         int ret;
->
-> -       ret = lmb_setup();
-> +       ret = lmb_setup(false);
->         if (ret) {
->                 log_info("Unable to init LMB\n");
->                 return ret;
-> @@ -851,7 +936,7 @@ int lmb_push(struct lmb *store)
->         int ret;
->
->         *store = lmb;
-> -       ret = lmb_setup();
-> +       ret = lmb_setup(true);
->         if (ret)
->                 return ret;
->
-> --
-> 2.34.1
->
-
-Thanks
-/Ilias
+Rasmus
