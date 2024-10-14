@@ -4,77 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DBC7CFC51B
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 09:02:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88EB9CFC528
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 09:23:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EFDC289034;
-	Mon, 14 Oct 2024 11:02:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 105AA88CBB;
+	Mon, 14 Oct 2024 11:23:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="akUnVSVl";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="w8fG5Rad";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 01B968904A; Mon, 14 Oct 2024 11:02:45 +0200 (CEST)
-Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
- [IPv6:2607:f8b0:4864:20::529])
+ id 4E6EF89049; Mon, 14 Oct 2024 11:23:54 +0200 (CEST)
+Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
+ [IPv6:2607:f8b0:4864:20::1036])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8743A89051
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 11:02:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 00FFD88A1B
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 11:23:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x529.google.com with SMTP id
- 41be03b00d2f7-7db908c9c83so2283116a12.2
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 02:02:42 -0700 (PDT)
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-2e28b75dbd6so2847328a91.0
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 02:23:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728896561; x=1729501361; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1728897830; x=1729502630; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=eWFTYjkr/ZOuUfVz+WIFzeAdGpOebqCfIL2VnQ7tdVs=;
- b=akUnVSVlu26aiaSJYkV0y+pj3vNoWVV166+j6bGnuNHJwtUifqEcj9qS2KxrslhOZZ
- wO0WCNbpQpdQyyD3c+knxiaa4Os2V6i+hNw5TG6vqL5I+fXcvUQ63wPMbByk5GaYWkGY
- MmT2jZ06zNa4sRK99ATZH9GXhgVp74SfQqHr5luZxNiPBShZmUnWKzHR906e/0BzXt4D
- 0/Y/buW23Or+ndLQTrELV9xSIrlsfWQM3iqNVrHoWt7jySUpsuWrwiN0DIdom99j5CdO
- WEEUvlQznO/7P4U+axyCyzSHY9WqOxbZnTH6/g5yRHNuttEzIIZqR2u2cXniywQukz85
- Hshw==
+ bh=sTGgI8Sg9liCXht0tppRBBXDj3cCqWkjtaKl6Nu97B0=;
+ b=w8fG5Rad46Vc+3LPr+dXCrbof2NRmgKYLPUiZMlv73x/mLGmUI9OvVkCKAhrLm7L5a
+ 5fyfv/L2JsaeMl1bOuZzCn5WfuRnRxestXYYZi960B/SFltlkKndU1mVCyvd1R7juZGD
+ N+bt4EuQWN8t8b3NA2xmQfx89HsT/Xt+YgDkjMFav76DOAy1xRLCuEXWHgJKsQRwr/dT
+ vHbeBoSno1RPtHUmbp9rVVi6rEibaOJea+vWWIDxwzf/OuAOD3cPimPy7cBarxUyj70w
+ 2lu8zjsbLDi6vrOyfJhSSRsywvbRwxMAOeuKPQF7Aw3ENuC+UNvdyW1wuldeG2Nvs0jY
+ lkwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728896561; x=1729501361;
+ d=1e100.net; s=20230601; t=1728897830; x=1729502630;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=eWFTYjkr/ZOuUfVz+WIFzeAdGpOebqCfIL2VnQ7tdVs=;
- b=fpQ+QYRIbOyXDYzrrg2CSaGDquSPbTod9MASWl2X9zwKOE/5RpdnIYz97RfJ8sbKzB
- 3amsgWH+or+izY16Utmj0YO0972eLuTQ1pnxYa+vfvqH1cOwm8vKoXgOvZmYDTYvqaNg
- Yrxnz7laDOpj0s31i6ntj9Z7K2c5mtLosl94miyueyA2iR8HIspNUtSP8WY9podlq66E
- HOFHsgQEXBGTe7nSQYPDlf5fksbHHZ5e0FB429rJa6B3tU1YQcGX+1Kg5kda/0QegfrR
- B2Ral1ab8klJ98ETC5JaPzccolgiNUhtOuBWSepbmSFFQfp+WJ+d/H/24HE4FXTyovim
- 3cZg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUbCaxy/8L+QSxBdpqWqM5sFXk7oB6Jj9OdED4Fx7CeQ1ciN0KQodtPSGr3QEPOzbSW2NIGLRU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw7MiJcnCy2B8PFTHZezevCmunSi9IVhtbrwiUC2Qb89ht0o8Ke
- DsRFcSR5/wcRCOy1wfYUOHKxHt7TfmUvhLkpBmOBca2cz0C8qy3cAGGOwCoOLlYADE6MONPtzwR
- k8THDBRgU4eputuqJq8WnzvKAVbju2nCL5a/zIQ==
-X-Google-Smtp-Source: AGHT+IFAhhsKi2CDF2YQa4wzmXO8NR1Vgk86r/QT0kFMlJuCnDc6XhYOCWkLTtSg8dYpndrdqycNvJa7sGDgRpKHGec=
+ bh=sTGgI8Sg9liCXht0tppRBBXDj3cCqWkjtaKl6Nu97B0=;
+ b=df+F1sxEu9rgG8vEU+2cFuan0vt4EZQax0G080o1oJMMfgI/+RhyotcM7t+/u5g1Vl
+ y0h5vt4jEnRvVRPlnBxIrZ4kympPQSi3FRdz9qPHrwOUde7Zl6SWM83Z0xSsI1kjhJuV
+ sLp16UsLdJB9YP55/7JCVsSFv+wJMhNkNVjNCVfAhDa1A3E//yGLhUyIv5UAThxIf7jo
+ yQzokbDwUi9R70zwNUsEwM0WRFJKvxR8zIFMX1RL9veThrG8ymmUjbQC/YarNTcVAKXX
+ 11tzX8SQiPszeO1lZQHge8lJP3dLEXWIX8+jlOBx1+t7Rt8HJ2S6+m2ajjlHbjLc1/q+
+ wonw==
+X-Gm-Message-State: AOJu0Yzer/j83nkIWZMUAJpfOAGPm8nHyD6uFmAQdMc2U5/atq9zYMHr
+ Ikp6rLmIBn4oNatj1WUAGkBGWfGTSXzCyDBHx/lzjU5fOtZqgfoF4F1dpN/L6RZ7mIHojsyRcq2
+ h57CEvM+PV1WotX9GSjvDuS0SxVZkMiTibBt3A5Kw4QYrV8d7zzU=
+X-Google-Smtp-Source: AGHT+IHUWKnK6JLj1ZzQGoPoWESwl0UxLa333l6yLTAmfYRQu7YRBBLglQ1MyQcjO798Z2ADXs0r3kM/11R2zGG8/TA=
 X-Received: by 2002:a17:90b:315:b0:2e2:e597:6cd3 with SMTP id
- 98e67ed59e1d1-2e3152ea871mr9419669a91.17.1728896561008; Mon, 14 Oct 2024
- 02:02:41 -0700 (PDT)
+ 98e67ed59e1d1-2e3152ea871mr9472338a91.17.1728897830409; Mon, 14 Oct 2024
+ 02:23:50 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241012-b4-qcom-capsule-updates-v4-0-abd05f15255f@linaro.org>
- <20241012-b4-qcom-capsule-updates-v4-3-abd05f15255f@linaro.org>
-In-Reply-To: <20241012-b4-qcom-capsule-updates-v4-3-abd05f15255f@linaro.org>
+References: <20241013105522.391414-1-sughosh.ganu@linaro.org>
+ <20241013105522.391414-16-sughosh.ganu@linaro.org>
+In-Reply-To: <20241013105522.391414-16-sughosh.ganu@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 14 Oct 2024 12:02:05 +0300
-Message-ID: <CAC_iWjKi+8uZCWUNLSp3c_o08LQCuC29OwhNwCTn+CuHzV37pw@mail.gmail.com>
-Subject: Re: [PATCH v4 3/4] mach-snapdragon: implement capsule update support
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
- u-boot@lists.denx.de, u-boot-qcom@groups.io
+Date: Mon, 14 Oct 2024 12:23:14 +0300
+Message-ID: <CAC_iWj+4qUvwb-Y3JxVYO_OC9+En_Paz0oMAOyXA4HBKBOqEOA@mail.gmail.com>
+Subject: Re: [PATCH v3 15/15] efi_memory: rename variable to highlight overlap
+ with free memory
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, Jonas Karlman <jonas@kwiboo.se>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,267 +89,163 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 12 Oct 2024 at 16:57, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+On Sun, 13 Oct 2024 at 13:56, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> Qualcomm boards flash U-Boot a variety of partitions, implement support
-> for determining which slot U-Boot is running from, finding the correct
-> partition for that slot and configuring the appropriate DFU string.
+> The variable overlap_only_ram is used to specify that the new memory
+> region that is being created needs to come from the free memory pool
+> -- this is done by carving out the memory region from the free
+> memory. The name is a bit confusing though, as other allocated memory
+> regions, like boot-services code and data are also part of the RAM
+> memory. Rename the variable to overlap_conventional to highlight the
+> fact that it is the free/conventional memory that is being referred to
+> in this context.
 >
-> Initially, we only support the RB3 Gen 2 where U-Boot is flashed to the
-> UEFI partition, and ignore handling of slots. In the future we will
-> additionally support booting U-Boot from other partitions (e.g. boot)
-> and correct handling for A/B.
->
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > ---
->  arch/arm/mach-snapdragon/Kconfig          |   3 +
->  arch/arm/mach-snapdragon/Makefile         |   1 +
->  arch/arm/mach-snapdragon/board.c          |   3 +
->  arch/arm/mach-snapdragon/capsule_update.c | 153 ++++++++++++++++++++++++++++++
->  arch/arm/mach-snapdragon/qcom-priv.h      |   6 ++
->  include/configs/qcom.h                    |   5 +
->  6 files changed, 171 insertions(+)
+> Changes since V2:
+> * Rename overlap_no_freemem to overlap_conventional as suggested by
+>   Ilias.
 >
-> diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
-> index 536960b83c3b..f82cd0d32915 100644
-> --- a/arch/arm/mach-snapdragon/Kconfig
-> +++ b/arch/arm/mach-snapdragon/Kconfig
-> @@ -19,8 +19,11 @@ config SPL_SYS_MALLOC_F
+>  include/efi_loader.h        | 16 +++++++-----
+>  lib/efi_loader/efi_memory.c | 51 ++++++++++++++++++++-----------------
+>  2 files changed, 37 insertions(+), 30 deletions(-)
 >
->  config SPL_SYS_MALLOC_F_LEN
->         default 0x2000
->
-> +config SYS_MALLOC_LEN
-> +       default 0x800000
-> +
->  config LNX_KRNL_IMG_TEXT_OFFSET_BASE
->         default 0x80000000
->
->  config SYS_BOARD
-> diff --git a/arch/arm/mach-snapdragon/Makefile b/arch/arm/mach-snapdragon/Makefile
-> index 7a4495c8108f..343e825c6fdd 100644
-> --- a/arch/arm/mach-snapdragon/Makefile
-> +++ b/arch/arm/mach-snapdragon/Makefile
-> @@ -2,5 +2,6 @@
->  #
->  # (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
->
->  obj-y += board.o
-> +obj-$(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) += capsule_update.o
->  obj-$(CONFIG_OF_LIVE) += of_fixup.o
-> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-> index 2ab2ceb51389..fbb6cf7c6599 100644
-> --- a/arch/arm/mach-snapdragon/board.c
-> +++ b/arch/arm/mach-snapdragon/board.c
-> @@ -447,8 +447,11 @@ int board_late_init(void)
->
->         configure_env();
->         qcom_late_init();
->
-> +       /* Configure the dfu_string for capsule updates */
-> +       qcom_configure_capsule_updates();
-> +
->         return 0;
->  }
->
->  static void build_mem_map(void)
-> diff --git a/arch/arm/mach-snapdragon/capsule_update.c b/arch/arm/mach-snapdragon/capsule_update.c
-> new file mode 100644
-> index 000000000000..bf75a9a1b24c
-> --- /dev/null
-> +++ b/arch/arm/mach-snapdragon/capsule_update.c
-> @@ -0,0 +1,153 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Capsule update support for Qualcomm boards.
-> + *
-> + * Copyright (c) 2024 Linaro Ltd.
-> + * Author: Caleb Connolly <caleb.connolly@linaro.org>
-> + */
-> +
-> +#define pr_fmt(fmt) "QCOM-FMP: " fmt
-> +
-> +#include <dm/device.h>
-> +#include <dm/uclass.h>
-> +#include <efi.h>
-> +#include <efi_loader.h>
-> +#include <malloc.h>
-> +#include <scsi.h>
-> +#include <part.h>
-> +#include <linux/err.h>
-> +
-> +#include "qcom-priv.h"
-> +
-> +/*
-> + * NOTE: for now this implementation only supports the rb3gen2. Supporting other
-> + * boards that boot in different ways (e.g. chainloaded from ABL) will require
-> + * additional complexity to properly create the dfu string and fw_images array.
-> + */
-> +
-> +/*
-> + * To handle different variants like chainloaded U-Boot here we'll need to
-> + * build the fw_images array dynamically at runtime. It looks like
-> + * mach-rockchip is a good example for how to do this.
-> + * Detecting which image types a board uses is TBD, hence for now we only
-> + * support the one new board that runs U-Boot as its primary bootloader.
-> + */
-> +struct efi_fw_image fw_images[] = {
-> +       {
-> +               /* U-Boot flashed to the uefi_X partition (e.g. rb3gen2) */
-> +               .fw_name = u"UBOOT_UEFI_PARTITION",
-> +               .image_index = 1,
-> +       },
-> +};
-> +
-> +struct efi_capsule_update_info update_info = {
-> +       /* Filled in by configure_dfu_string() */
-> +       .dfu_string = NULL,
-> +       .num_images = ARRAY_SIZE(fw_images),
-> +       .images = fw_images,
-> +};
-> +
-> +/* LSB first */
-> +struct part_slot_status {
-> +       u16: 2;
-> +       u16 active : 1;
-> +       u16: 3;
-> +       u16 successful : 1;
-> +       u16 unbootable : 1;
-> +       u16 tries_remaining : 4;
-> +};
-> +
-> +static int find_boot_partition(const char *partname, struct blk_desc *blk_dev, char *name)
-> +{
-> +       int ret;
-> +       int partnum;
-> +       struct disk_partition info;
-> +       struct part_slot_status *slot_status;
-> +
-> +       for (partnum = 1;; partnum++) {
-> +               ret = part_get_info(blk_dev, partnum, &info);
-> +               if (ret)
-> +                       return ret;
-> +
-> +               slot_status = (struct part_slot_status *)&info.type_flags;
-> +               log_io("%16s: Active: %1d, Successful: %1d, Unbootable: %1d, Tries left: %1d\n",
-> +                      info.name, slot_status->active,
-> +                      slot_status->successful, slot_status->unbootable,
-> +                      slot_status->tries_remaining);
-> +               /*
-> +                * FIXME: eventually we'll want to find the active/inactive variant of the partition
-> +                * but on the rb3gen2 these values might all be 0
-> +                */
-> +               if (!strncmp(info.name, partname, strlen(partname))) {
-> +                       log_debug("Found active %s partition: '%s'!\n", partname, info.name);
-> +                       strlcpy(name, info.name, sizeof(info.name));
-> +                       return partnum;
-> +               }
-> +       }
-> +
-> +       return -1;
-> +}
-> +
-> +/**
-> + * qcom_configure_capsule_updates() - Configure the DFU string for capsule updates
-> + *
-> + * U-Boot is flashed to the boot partition on Qualcomm boards. In most cases there
-> + * are two boot partitions, boot_a and boot_b. As we don't currently support doing
-> + * full A/B updates, we only support updating the currently active boot partition.
-> + *
-> + * So we need to find the current slot suffix and the associated boot partition.
-> + * We do this by looking for the boot partition that has the 'active' flag set
-> + * in the GPT partition vendor attribute bits.
-> + */
-> +void qcom_configure_capsule_updates(void)
-> +{
-> +       struct blk_desc *desc;
-> +       int ret = 0, partnum = -1, devnum;
-> +       static char dfu_string[32] = { 0 };
-> +       char name[32]; /* GPT partition name */
-> +       char *partname = "uefi_a";
-> +       struct udevice *dev = NULL;
-> +
-> +       if (IS_ENABLED(CONFIG_SCSI)) {
-> +               /* Scan for SCSI devices */
-> +               ret = scsi_scan(false);
-> +               if (ret) {
-> +                       debug("Failed to scan SCSI devices: %d\n", ret);
-> +                       return;
-> +               }
-> +       }
-> +
-> +       uclass_foreach_dev_probe(UCLASS_BLK, dev) {
-> +               if (device_get_uclass_id(dev) != UCLASS_BLK)
-> +                       continue;
-> +
-> +               desc = dev_get_uclass_plat(dev);
-> +               if (!desc || desc->part_type == PART_TYPE_UNKNOWN)
-> +                       continue;
-> +               devnum = desc->devnum;
-> +               partnum = find_boot_partition(partname, desc,
-> +                                             name);
-> +               if (partnum >= 0)
-> +                       break;
-> +       }
-> +
-> +       if (partnum < 0) {
-> +               log_err("Failed to find boot partition\n");
-> +               return;
-> +       }
-> +
-> +       switch (desc->uclass_id) {
-> +       case UCLASS_SCSI:
-> +               snprintf(dfu_string, 32, "scsi %d=u-boot.bin part %d", devnum, partnum);
-> +               break;
-> +       case UCLASS_MMC:
-> +               snprintf(dfu_string, 32, "mmc 0=u-boot.bin part %d %d", devnum, partnum);
-> +               break;
-> +       default:
-> +               debug("Unsupported storage uclass: %d\n", desc->uclass_id);
-> +               return;
-> +       }
-> +       log_debug("boot partition is %s, DFU string: '%s'\n", name, dfu_string);
-> +
-> +       update_info.dfu_string = dfu_string;
-> +}
-> diff --git a/arch/arm/mach-snapdragon/qcom-priv.h b/arch/arm/mach-snapdragon/qcom-priv.h
-> index 0a7ed5eff8b8..74d39197b89f 100644
-> --- a/arch/arm/mach-snapdragon/qcom-priv.h
-> +++ b/arch/arm/mach-snapdragon/qcom-priv.h
-> @@ -2,8 +2,14 @@
->
->  #ifndef __QCOM_PRIV_H__
->  #define __QCOM_PRIV_H__
->
-> +#if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
-> +void qcom_configure_capsule_updates(void);
-> +#else
-> +void qcom_configure_capsule_updates(void) {}
-> +#endif /* EFI_HAVE_CAPSULE_SUPPORT */
-> +
->  #if CONFIG_IS_ENABLED(OF_LIVE)
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index 6b9a66a06c..291eca5c07 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -788,15 +788,17 @@ efi_status_t efi_add_memory_map(u64 start, u64 size, int memory_type);
 >  /**
->   * qcom_of_fixup_nodes() - Fixup Qualcomm DT nodes
+>   * efi_add_memory_map_pg() - add pages to the memory map
 >   *
-> diff --git a/include/configs/qcom.h b/include/configs/qcom.h
-> index 5b5ebbd844df..9b41ab9e982b 100644
-> --- a/include/configs/qcom.h
-> +++ b/include/configs/qcom.h
-> @@ -10,5 +10,10 @@
->  #define __CONFIGS_SNAPDRAGON_H
+> - * @start:             start address, must be a multiple of EFI_PAGE_SIZE
+> - * @pages:             number of pages to add
+> - * @memory_type:       type of memory added
+> - * @overlap_only_ram:  region may only overlap RAM
+> - * Return:             status code
+> + * @start:                     start address, must be a multiple of
+> + *                             EFI_PAGE_SIZE
+> + * @pages:                     number of pages to add
+> + * @memory_type:               type of memory added
+> + * @overlap_conventional:      region may only overlap free(conventional)
+> + *                             memory
+> + * Return:                     status code
+>   */
+>  efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
+> -                                         int memory_type,
+> -                                         bool overlap_only_ram);
+> +                                  int memory_type,
+> +                                  bool overlap_conventional);
 >
->  #define CFG_SYS_BAUDRATE_TABLE { 115200, 230400, 460800, 921600 }
+>  /* Called by board init to initialize the EFI drivers */
+>  efi_status_t efi_driver_init(void);
+> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> index f59f7780e9..b63b5cca71 100644
+> --- a/lib/efi_loader/efi_memory.c
+> +++ b/lib/efi_loader/efi_memory.c
+> @@ -173,17 +173,19 @@ static void efi_mem_sort(void)
+>  /**
+>   * efi_mem_carve_out() - unmap memory region
+>   *
+> - * @map:               memory map
+> - * @carve_desc:                memory region to unmap
+> - * @overlap_only_ram:  the carved out region may only overlap RAM
+> - * Return:             the number of overlapping pages which have been
+> - *                     removed from the map,
+> - *                     EFI_CARVE_NO_OVERLAP, if the regions don't overlap,
+> - *                     EFI_CARVE_OVERLAPS_NONRAM, if the carve and map overlap,
+> - *                     and the map contains anything but free ram
+> - *                     (only when overlap_only_ram is true),
+> - *                     EFI_CARVE_LOOP_AGAIN, if the mapping list should be
+> - *                     traversed again, as it has been altered.
+> + * @map:                       memory map
+> + * @carve_desc:                        memory region to unmap
+> + * @overlap_conventional:      the carved out region may only overlap free,
+> + *                             or conventional memory
+> + * Return:                     the number of overlapping pages which have been
+> + *                             removed from the map,
+> + *                             EFI_CARVE_NO_OVERLAP, if the regions don't
+> + *                             overlap, EFI_CARVE_OVERLAPS_NONRAM, if the carve
+> + *                             and map overlap, and the map contains anything
+> + *                             but free ram(only when overlap_conventional is
+> + *                             true),
+> + *                             EFI_CARVE_LOOP_AGAIN, if the mapping list should
+> + *                             be traversed again, as it has been altered.
+>   *
+>   * Unmaps all memory occupied by the carve_desc region from the list entry
+>   * pointed to by map.
+> @@ -193,7 +195,7 @@ static void efi_mem_sort(void)
+>   */
+>  static s64 efi_mem_carve_out(struct efi_mem_list *map,
+>                              struct efi_mem_desc *carve_desc,
+> -                            bool overlap_only_ram)
+> +                            bool overlap_conventional)
+>  {
+>         struct efi_mem_list *newmap;
+>         struct efi_mem_desc *map_desc = &map->desc;
+> @@ -208,7 +210,7 @@ static s64 efi_mem_carve_out(struct efi_mem_list *map,
+>                 return EFI_CARVE_NO_OVERLAP;
 >
-> +// 2a5aa852-b856-4d97-baa9-5c5f4421551f
-> +#define QUALCOMM_UBOOT_BOOT_IMAGE_GUID \
-> +       EFI_GUID(0x2a5aa852, 0xb856, 0x4d97, 0xba, 0xa9, \
-> +               0x5c, 0x5f, 0x44, 0x21, 0x55, 0x1f)
-> +
->  #endif
+>         /* We're overlapping with non-RAM, warn the caller if desired */
+> -       if (overlap_only_ram && (map_desc->type != EFI_CONVENTIONAL_MEMORY))
+> +       if (overlap_conventional && (map_desc->type != EFI_CONVENTIONAL_MEMORY))
+>                 return EFI_CARVE_OVERLAPS_NONRAM;
 >
+>         /* Sanitize carve_start and carve_end to lie within our bounds */
+> @@ -258,15 +260,17 @@ static s64 efi_mem_carve_out(struct efi_mem_list *map,
+>  /**
+>   * efi_add_memory_map_pg() - add pages to the memory map
+>   *
+> - * @start:             start address, must be a multiple of EFI_PAGE_SIZE
+> - * @pages:             number of pages to add
+> - * @memory_type:       type of memory added
+> - * @overlap_only_ram:  region may only overlap RAM
+> - * Return:             status code
+> + * @start:                     start address, must be a multiple of
+> + *                             EFI_PAGE_SIZE
+> + * @pages:                     number of pages to add
+> + * @memory_type:               type of memory added
+> + * @overlap_conventional:      region may only overlap free(conventional)
+> + *                             memory
+> + * Return:                     status code
+>   */
+>  efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
+> -                                         int memory_type,
+> -                                         bool overlap_only_ram)
+> +                                  int memory_type,
+> +                                  bool overlap_conventional)
+>  {
+>         struct efi_mem_list *lmem;
+>         struct efi_mem_list *newlist;
+> @@ -275,7 +279,8 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
+>         struct efi_event *evt;
+>
+>         EFI_PRINT("%s: 0x%llx 0x%llx %d %s\n", __func__,
+> -                 start, pages, memory_type, overlap_only_ram ? "yes" : "no");
+> +                 start, pages, memory_type, overlap_conventional ?
+> +                 "yes" : "no");
+>
+>         if (memory_type >= EFI_MAX_MEMORY_TYPE)
+>                 return EFI_INVALID_PARAMETER;
+> @@ -312,7 +317,7 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
+>                         s64 r;
+>
+>                         r = efi_mem_carve_out(lmem, &newlist->desc,
+> -                                             overlap_only_ram);
+> +                                             overlap_conventional);
+>                         switch (r) {
+>                         case EFI_CARVE_OUT_OF_RESOURCES:
+>                                 free(newlist);
+> @@ -348,7 +353,7 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
+>                 }
+>         } while (carve_again);
+>
+> -       if (overlap_only_ram && (carved_pages != pages)) {
+> +       if (overlap_conventional && (carved_pages != pages)) {
+>                 /*
+>                  * The payload wanted to have RAM overlaps, but we overlapped
+>                  * with an unallocated region. Error out.
 > --
-> 2.46.2
+> 2.34.1
 >
-
-
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
