@@ -4,60 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40FE1D18138
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 18:19:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F6F5D18138
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 18:23:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A963088C7C;
-	Mon, 14 Oct 2024 20:19:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 776EA88D9C;
+	Mon, 14 Oct 2024 20:23:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="FITbISEn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="X0UtuMeX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8DAAB88BB2; Mon, 14 Oct 2024 20:19:26 +0200 (CEST)
-Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E33A188E8E; Mon, 14 Oct 2024 20:23:23 +0200 (CEST)
+Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
+ [IPv6:2607:f8b0:4864:20::736])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4217488D9C
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 20:19:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id 7A6F388CA1
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 20:23:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x736.google.com with SMTP id
+ af79cd13be357-7afc5e480dbso340687785a.3
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 11:23:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1728930200; x=1729535000; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=5qLkejdPu9c4tBz29DQ5xQNQ4KVsFVF/gKYeL6xmEa0=;
+ b=X0UtuMeXYUREBig93lr8zOYEJAdFgbB2g7/sYgJXmxsFklEJZrqtcpFn+d4yRnWtX/
+ EP31V1RLlERc2BbN6DbXEHAF8B79hRssNZX/Bu2sXbp9uV09QbVUQy5MDTV+K3sLHfjv
+ kCawQWEtcKsCUhGt6DDAzilIDaOqHWKj8OvMI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728930200; x=1729535000;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=5qLkejdPu9c4tBz29DQ5xQNQ4KVsFVF/gKYeL6xmEa0=;
+ b=oj/QE2kdz4NJY4MeRFSjmFrrOJKrLAbHycUFpkzQdDIM+vsFRxSHwSpc+gMfkUzG5S
+ mrANEE+GTXM168pxBK3PEYN7yP5nSoLUITZj5bQx6BvbJahbywHG+GEyaQ6pL/srZEz5
+ 1cuBYFi8ChsKJCRbjPluD6f6gZbnEkOL0oNZXxSJ3FgzJaw38ux9CXydL1SWoYYdmCX6
+ l18uqlHN4cFm7lEvfZiasaSTOA270hUFF7Dg/2Ft8HIYfG/LW4CV2bnfXVZ+SvVpYTSB
+ +9b8Nv7yjTW6wtA8PoosL3RC8K1CuUNcIcogcWSv/xx5NrnewtGETf1Wgu2Vds/xnDPc
+ wNjA==
+X-Gm-Message-State: AOJu0YxsXzqxzulk0sBdbugR1in96piPjTRUfiDdlALMHBeng7wEL4dJ
+ k9NzgzQ7pOVy5bAFhDSGiLaMvoPiSazCWJ1Bjd6+4aEIbXb/VC047h/ovqqeZkg=
+X-Google-Smtp-Source: AGHT+IEqaCVDnCGk79quOgXEELzALR2IYoLneK1SAcAEsbBf4Hjumo1e/LFMM1ECiwn1dJgYcfxUkQ==
+X-Received: by 2002:a05:6214:419d:b0:6cb:9c55:4215 with SMTP id
+ 6a1803df08f44-6cbf00ef18cmr171300186d6.33.1728930200142; 
+ Mon, 14 Oct 2024 11:23:20 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6cbe85b7d53sm48194386d6.55.2024.10.14.11.23.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 14 Oct 2024 11:23:19 -0700 (PDT)
+Date: Mon, 14 Oct 2024 12:23:17 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Cc: U-Boot-Denx <u-boot@lists.denx.de>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Subject: Re: Pull request for u-boot-nand-20241012
+Message-ID: <20241014182317.GP53053@bill-the-cat>
+References: <CAOf5uw=NJEiiX4qOWqZ6CpAjdwvyBsmonEn5egSAHC8-N6FxKQ@mail.gmail.com>
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1728929961;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=1T2w2SmZruzabX6eNkF0yHdhWs7I4mSD28/xtmsIZfw=;
- b=FITbISEnUnBkmwkIFHygY89tirB5YSnlSDNM823XRh+Rq7cozwI1H56J1rbpzbpBLtV69N
- sZXZbz9RLAlG2QKawWWiiXNeG+VxLJELxn2LP8oud5pDhZ0vQLOTw82YCVzWjAlUSNOmi5
- MkB/NQjAvZp5XVtfC/v/ptX7qy/RrZu8lqwMBYiptAqrl/MncBy4MMHY9ammVBIRASTl8S
- tXDKWeVXz5/kKAJq2ioqO7QY5/GeBcsVdYDjbU+/hHCnBCSs+watkVW3UZd+eAYD+H1TKF
- mfbhKj80isVKLKcMo2SKUALnmyCdaqic+Qe0G0avSsRuN4dTWWBHmme/3SxlgA==
-Date: Mon, 14 Oct 2024 20:19:20 +0200
-From: Dragan Simic <dsimic@manjaro.org>
-To: Alex Shumsky <alexthreed@gmail.com>
-Cc: u-boot@lists.denx.de, Ben Wolsieffer <benwolsieffer@gmail.com>, Chris
- Morgan <macromorgan@hotmail.com>, Jonas Karlman <jonas@kwiboo.se>, Kever
- Yang <kever.yang@rock-chips.com>, Marek Vasut <marex@denx.de>, Philipp
- Tomsich <philipp.tomsich@theobroma-systems.com>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Quentin Schulz <quentin.schulz@cherry.de>, Simon
- Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH v2] rockchip: board: Increase rng-seed size to make it
- sufficient for modern Linux
-In-Reply-To: <20241014175338.2675136-1-alexthreed@gmail.com>
-References: <20241014175338.2675136-1-alexthreed@gmail.com>
-Message-ID: <3f4143078e0dc3409c96ea13be5b8317@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="3a/mA/Wi1sYCztNn"
+Content-Disposition: inline
+In-Reply-To: <CAOf5uw=NJEiiX4qOWqZ6CpAjdwvyBsmonEn5egSAHC8-N6FxKQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,71 +90,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Alex,
 
-Thanks for the v2.  Please see a few comments below.
+--3a/mA/Wi1sYCztNn
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 2024-10-14 19:53, Alex Shumsky wrote:
-> Modern Linux requires 32 byte seed to initialize random pool, but 
-> u-boot
-> currently provides only 8 bytes. Increase rng-seed size to make Linux 
-> happy and
-> initialize rng pool instantly.
-> 
-> Boot with 8 byte rng-seed:
->     # dmesg | grep crng
->     [   12.089286] random: crng init done
-> Boot with 32 byte rng-seed:
->     # dmesg | grep crng
->     [    0.000000] random: crng init done
-> 
-> https://github.com/torvalds/linux/blob/7234e2ea0edd00bfb6bb2159e55878c19885ce68/drivers/char/random.c#L632
-> 
-> Signed-off-by: Alex Shumsky <alexthreed@gmail.com>
-> Fixes: d2048bafae40 ("rockchip: board: Add board_rng_seed() for all
-> Rockchip devices")
-> ---
-> 
-> Changes in v2:
-> - add env config knob rng_seed_size
+On Mon, Oct 14, 2024 at 09:17:25AM +0200, Michael Nazzareno Trimarchi wrote:
 
-Perhaps the emitted warning should also be mentioned here.
+> The following changes since commit 47e544f576699ca4630e20448db6a051789606=
+97:
+>=20
+>   Merge patch series "Tidy up use of 'SPL' and CONFIG_SPL_BUILD"
+> (2024-10-11 12:23:25 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   git@source.denx.de:u-boot/custodians/u-boot-nand-flash.git
+> u-boot-nand-20241012
+>=20
+> for you to fetch changes up to 25e46f8281075d3b3a8d393264ff1cd33f8815b3:
+>=20
+> This merge request add support for BCMBCA raw nand driver for bcm96846 bo=
+ard
+> that switch using OF_UPSTREAM and allow use onfi ecc params when they
+> are available
+> in the atmel nand controller
+>=20
+> The patches pass the pipeline CI:
+> https://source.denx.de/u-boot/custodians/u-boot-nand-flash/-/pipelines/22=
+638
+>=20
 
-> - 12-character commit SHA in Fixes
-> 
->  arch/arm/mach-rockchip/board.c | 8 +++++++-
->  1 file changed, 7 insertions(+), 1 deletion(-)
-> 
-> diff --git a/arch/arm/mach-rockchip/board.c 
-> b/arch/arm/mach-rockchip/board.c
-> index 3fadf7e412..f9f0d7214c 100644
-> --- a/arch/arm/mach-rockchip/board.c
-> +++ b/arch/arm/mach-rockchip/board.c
-> @@ -472,9 +472,15 @@ __weak int misc_init_r(void)
->  __weak int board_rng_seed(struct abuf *buf)
->  {
->  	struct udevice *dev;
-> -	size_t len = 0x8;
-> +	ulong len = env_get_ulong("rng_seed_size", 10, 32);
->  	u64 *data;
-> 
-> +	if (len < 32) {
-> +		// rng_seed_size should be 32 bytes for Linux 5.19+, or 64 for older 
-> Linux'es
+Applied to u-boot/master, thanks!
 
-Shouldn't it be 8 for older kernels?
+--=20
+Tom
 
-> +		log_warning("Too small rng_seed_size (%lu). It is likely
-> insufficient to init linux crng\n",
-> +			    len);
+--3a/mA/Wi1sYCztNn
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Perhaps this would read better:
+-----BEGIN PGP SIGNATURE-----
 
-   "Value for rng_seed_size too low (%lu) and likely insufficient
-   for the Linux RNG initialization"
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcNYYkACgkQFHw5/5Y0
+tyxdBwv+LnB6606+tvjlvLorakVrKFk+wOtCxK+PIHISL9jE6Zp7yvueqS9aVKoa
+Yaom5v6nSRub0TKi04IL1y3Z8NV4+5hebJ10Q9ZO2fXanXP/+xn46kTOoKt5DW8O
+7/wrj5GUgFV80cphv1x7c1+K8EKsm4DyYYvm77Mr3AOOwvdX6boU1WEUagFfUKdk
+Ss54Z9v9e0lwtgX54MS8bax/av7hIFB/6ZDzoFBcir96m0QpubPkptb6Ec85TfBM
+hlL0FqjGSxVAjjBAPq/JpwPEitmiDEUBdLyX2eDyibg5sIZ6JGaBimituELgQ+ln
+rCIEZoJdZ4XAcLEgmf1cOC6E//fLBIpL32/LZmqk6MWLgQZgNUA8Rh308hf6Z3g7
+eJt3h24RwP0QA0GNXvJUPJpcDaONfOIbjIgzHKFtEWJqgWwEaVP762cQllap+MHl
+/+c4k428TWmvbVcyMOC36BD7xjyppK1Lkz4q46MDapTWZe/9+GOuU68IFc2hMS1Y
+hWo49YOt
+=ZNTf
+-----END PGP SIGNATURE-----
 
-> +	}
-> +
->  	data = malloc(len);
->  	if (!data) {
->  		printf("Out of memory\n");
+--3a/mA/Wi1sYCztNn--
