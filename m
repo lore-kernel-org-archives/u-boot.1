@@ -4,71 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3E15D1813F
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 20:20:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1A63D1813A
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 20:20:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8D0C8918A;
-	Mon, 14 Oct 2024 22:20:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5771289169;
+	Mon, 14 Oct 2024 22:20:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hfmuh4hX";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="m2Y65H2b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A8F88917B; Mon, 14 Oct 2024 22:20:19 +0200 (CEST)
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
+ id 9BF218916E; Mon, 14 Oct 2024 22:20:24 +0200 (CEST)
+Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
+ [IPv6:2607:f8b0:4864:20::f33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4ED3A89166
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 22:20:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7585D89166
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 22:20:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-6cbcd49b833so38924526d6.3
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 13:20:17 -0700 (PDT)
+Received: by mail-qv1-xf33.google.com with SMTP id
+ 6a1803df08f44-6cbce8d830dso36765126d6.1
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 13:20:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728937216; x=1729542016; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=j6jEJvsr+XIpp827O3l052SS8l1sEtBL4j2GD6TCMXU=;
- b=hfmuh4hXByNAt/UOviZhYK5LAP/c+MQU1E0MSaCow8ImOP1DK6qdlgeU9LpP7JkdUb
- gkUlOdfjP71mVAlVwItOxP+Y/bUlZYim1cv2cIoU+rtt0DC+bANCnOJN8i+hMUMYv65b
- 7pkhNNEaKUecLZObr7TDIiuKkK+LgwinxPO08=
+ d=chromium.org; s=google; t=1728937221; x=1729542021; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=XtNSay7FoVIf7XDp61iIUsNN3uzt8QsrUqhyAcfFR5Q=;
+ b=m2Y65H2bapL+geZS7JsjL3TZZTOaAt3QFOzRwaVZSNsMBFsGHKUM7AI9FdZOIVxR9Q
+ NwqMSEWdou7yOlLpvR1fetRv5Tqjf+zquLoVwXqx/5s2kxAnwAtXbsB94sHJPdLujFUC
+ ZhfUji3vxx0RSQWDIwFLJkqCqjNuh6tWDjEE4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728937216; x=1729542016;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=j6jEJvsr+XIpp827O3l052SS8l1sEtBL4j2GD6TCMXU=;
- b=sEnZTcw4MtZk8v8hIFCrEq+12x/0smRDKRy4LXz+DHAPui4N/JMoktd33dMIAPmYg+
- ga06VgG5P+eMlMAs4ghPgx4Efj8Td2Dvw+Q0B6N2DvUT7nkiIWOuU0CUk0mXCZ8uyGir
- /Vo7p6Rd0tArb2jkC4K4IamIaT5i50f/h0OHUQ8AXLKrTzZ3Vrfz4xW50fm83+lQGIzH
- Rayq+U8CQ39XjSmRkusSKqv4JDlohznRM6dlaJZ6z4QvUfbQy4OMsiiIsNVGJrTmFxlX
- MdN8u5IWRcQSVC6wCehX8VFeUO8SSXQIHg2jk6yDL/bhmgIZp5BhiYenOPudD9Q2sqDv
- xJbg==
-X-Gm-Message-State: AOJu0YzjR9LvPfajQSbDrhTD9dzJ3wg17epw3y5nooT8ZWrYUKNPS6cA
- OPEeiRPErcwO67eGj2ngwRDq7wzIYAwKDi7p9CHb4vxH+9O64fDndZWi4McQM5DZaIxC0aNjwNm
- z+6dMHy1OmE7lnFnrYF6CLlWGbQaBM4M6KdWq
-X-Google-Smtp-Source: AGHT+IEf3nGnvULUpCfzEnph2Yrndghu/tL5qP7KlVcBwo4WA9g2nKbAsuhH6hVaBcYQZRY3K+gvuyQ8rnq8YAVQLFM=
-X-Received: by 2002:a05:6214:5a02:b0:6cb:4b65:950f with SMTP id
- 6a1803df08f44-6cbf9e9683cmr115515306d6.50.1728937216144; Mon, 14 Oct 2024
- 13:20:16 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1728937221; x=1729542021;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=XtNSay7FoVIf7XDp61iIUsNN3uzt8QsrUqhyAcfFR5Q=;
+ b=QBv+T4IIYpgyp1DImP/x+Sfxj0Hz2Xg3Tv6RGeiP0LNztCFPIpDjXDig6fPxqLkVDT
+ 1tHReVhkGQQ0XG9fnnuyUX8WuF6JNrC4TDFgvOorwE8LcncujQCaMnUsok0ktibSg2Qr
+ LuMVs/H/D7ECH9EyYo61O/XOAwKkP3FQdl6hdsn2JKXkjGMoBhOYZfbsIgfCTxCNHv4L
+ 2CV+6+VHrppPvADqKUg4rY/5PgbM2VLVpkZotHqh6EAZJ5Tn9GI9Iul9l3edRR1a6fWf
+ RQUnxjdr/OlpswTpxqw8NTzOFFE79j2cX4U0yYfjM85Mqn/0butDHqFflkL/AzpnRZdH
+ 0NQw==
+X-Gm-Message-State: AOJu0YwtTmITmEYYZm3W0QyC316Gs3sk8Dmfz6iH1R2UsbyEyamUp6S3
+ xQo0d+Q3Qec0cE0TsAiaQEm0eDUyXfoBzPN67hJpeoJHIbK5y6H137mP7z188omREYMFInCBqzZ
+ bS/9w7l3OBlhAvNkfuNLAwRrcJ06wcJ0arRbK
+X-Google-Smtp-Source: AGHT+IFcrdgu8iNJTSnxgJU4H1p4b/fzehwBNReAVVn+vzptzg7YY0l5Xy4k4Ja0T+hGbPoLPV5JlXslfL82DEyE2wU=
+X-Received: by 2002:a05:6214:320b:b0:6cb:ec6a:7d52 with SMTP id
+ 6a1803df08f44-6cbf9d6121bmr129473056d6.31.1728937221277; Mon, 14 Oct 2024
+ 13:20:21 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAJ+vNU3wz22Ni+Kqy=NuFiEYPdrRkzjRJDNhYGJcCdDsLpbvBQ@mail.gmail.com>
- <CAFLszThkQ4pVmko8PPK5Yyt5RXFQkSatMycjH7GU5eN-_8L7ZA@mail.gmail.com>
- <CAJ+vNU0auiPUeqbAAFy2K4LhVk3ufU586gJYsZJ4f06wedyfCA@mail.gmail.com>
-In-Reply-To: <CAJ+vNU0auiPUeqbAAFy2K4LhVk3ufU586gJYsZJ4f06wedyfCA@mail.gmail.com>
+References: <20241011212126.747741-1-sjg@chromium.org>
+ <20241011212126.747741-3-sjg@chromium.org>
+ <A51D5AB2-A3A6-44E9-BE35-45B79081EB9E@gmx.de>
+In-Reply-To: <A51D5AB2-A3A6-44E9-BE35-45B79081EB9E@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 14 Oct 2024 14:20:05 -0600
-Message-ID: <CAFLszTgioVANXZVUTCzHip-gaAVUEyEgO0MsHczLwyNfoBQMqg@mail.gmail.com>
-Subject: Re: modify live DT with OF_LIVE breaking phy_connect?
-To: Tim Harvey <tharvey@gateworks.com>
-Cc: u-boot <u-boot@lists.denx.de>
+Date: Mon, 14 Oct 2024 14:20:09 -0600
+Message-ID: <CAFLszTinmXQ-O5PKR2ZREeipYi4q-3fyYykBp5aMr0dAh_nV1g@mail.gmail.com>
+Subject: Re: [PATCH v4 2/5] efi: Show the location of the bounce buffer when
+ debugging
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,122 +87,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tim,
+Hi Heinrich,
 
-On Thu, 10 Oct 2024 at 16:05, Tim Harvey <tharvey@gateworks.com> wrote:
+On Fri, 11 Oct 2024 at 16:02, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> On Tue, Oct 8, 2024 at 6:56=E2=80=AFPM Simon Glass <sjg@chromium.org> wro=
-te:
+>
+>
+> Am 11. Oktober 2024 23:21:23 MESZ schrieb Simon Glass <sjg@chromium.org>:
+> >The EFI_LOADER_BOUNCE_BUFFER feature was added many years ago. It is
+> >still needed and 24 boards (lx2160ardb_tfa_stmm,
+> >lx2162aqds_tfa_SECURE_BOOT and the like) use it.
 > >
-> > Hi Tim,
+> >This feature uses EFI page allocation to create a 64MB buffer 'in space'
+> >without any knowledge of where boards intend to load their images. This
+> >may result in image corruption or other problems.
 > >
-> > On Mon, 7 Oct 2024 at 14:16, Tim Harvey <tharvey@gateworks.com> wrote:
-> > >
-> > > Greetings,
-> > >
-> > > I have a need to adjust the U-Boot device-tree live with some board
-> > > revision specific fixups. It would seem I need to enable OF_LIVE to d=
-o
-> > > so but when I do this on imx8mm U-Boot proper seems to fail
-> > > phy_connect() called from the network device probe.
-> > >
-> > > The board I'm working with is an imx8mm-venice board and using
-> > > imx8mm_venice_defconfig (without OF_LIVE) results in:
-> > > U-Boot 2024.10-00735-gc530f6079c70 (Oct 07 2024 - 12:58:38 -0700)
-> > >
-> > > CPU:   Freescale i.MX8MMQ rev1.0 1600 MHz (running at 1200 MHz)
-> > > CPU:   Industrial temperature grade (-40C to 105C) at 44C
-> > > Reset cause: POR
-> > > Model: Gateworks Venice GW73xx-0x i.MX8MM Development Kit
-> > > DRAM:  4 GiB
-> > > Core:  226 devices, 32 uclasses, devicetree: separate
-> > > WDT:   Started watchdog@30280000 with servicing every 1000ms (60s tim=
-eout)
-> > > MMC:   FSL_SDHC: 0, FSL_SDHC: 1, FSL_SDHC: 2
-> > > Loading Environment from MMC... Reading from redundant MMC(2)... OK
-> > > In:    serial@30890000
-> > > Out:   serial@30890000
-> > > Err:   serial@30890000
-> > > SEC0:  RNG instantiated
-> > > Net:   GPY111 eth0: ethernet@30be0000 [PRIME]
-> > > GSC     : boot watchdog disabled
-> > > Thermal protection:enabled at 96C
-> > > Hit any key to stop autoboot:  0
-> > >
-> > > Yet as soon as I enable OF_LIVE:
-> > >
-> > > U-Boot 2024.10-00735-gc530f6079c70 (Oct 07 2024 - 12:59:35 -0700)
-> > >
-> > > CPU:   Freescale i.MX8MMQ rev1.0 1600 MHz (running at 1200 MHz)
-> > > CPU:   Industrial temperature grade (-40C to 105C) at 49C
-> > > Reset cause: POR
-> > > Model: Gateworks Venice GW73xx-0x i.MX8MM Development Kit
-> > > DRAM:  4 GiB
-> > > Core:  214 devices, 32 uclasses, devicetree: separate
-> > > WDT:   Started watchdog@30280000 with servicing every 1000ms (60s tim=
-eout)
-> > > MMC:   FSL_SDHC: 0, FSL_SDHC: 1, FSL_SDHC: 2
-> > > Loading Environment from MMC... Reading from redundant MMC(2)... OK
-> > > In:    serial@30890000
-> > > Out:   serial@30890000
-> > > Err:   serial@30890000
-> > > SEC0:  RNG instantiated
-> > > Net:   Could not get PHY for mdio: addr 0
-> > > Could not get PHY for FEC0: addr 0
-> > > Could not get PHY for mdio: addr 0
-> > > Could not get PHY for FEC0: addr 0
-> > > No ethernet found.
-> > > ^^^ phy_connect failing
-> > >
-> > > Any idea what I'm missing here?
-> > >
-> > > Are there other ways I should be modifying the live dt in U-Boot?
+> >For example, if the feature is enabled on qemu_arm64 it puts the EFI
+> >bounce buffer at 1045MB, with the kernel at 1028MB and the ramdisk at
+> >1088MB. The kernel is probably smaller than 27MB but the buffer does
+> >overlap the ramdisk.
 > >
->
-> Hi Simon, thanks for the response.
->
-> > I am not sure, but the best option would be to debug the PHY stuff and
-> > try to see what is going wrong.
+> >The solution is probably to use BOUNCE_BUFFER instead, with the EFI
+> >version being dropped. For now, show the address of the EFI bounce
+> >buffer so people have a better chance to debug any problem.
 > >
-> > Since the number of devices is smaller, I suspect that there is some
-> > code which doesn't use the ofnode API. But it is hard to say what is
-> > going on.
+> >Signed-off-by: Simon Glass <sjg@chromium.org>
+> >---
+> >In response to questions on how to show this problem:
 > >
->
-> ok, I will look into that
->
-> > For modifying the devicetree, you can do it just before relocation
-> > using the flattree if you like. The reason livetree is better is that
-> > the nodes don't move around when changes are made.
+> >First, add CONFIG_EFI_LOADER_BOUNCE_BUFFER=y to
+> >configs/qemu_arm64_defconfig and build
 > >
+> >Then, to run:
+> >qemu-system-aarch64 -machine virt -nographic -cpu cortex-a57 \
+> >   -bios u-boot.bin
+> >
+> >U-Boot 2024.10-00809-gae29e5f76e4a-dirty (Oct 11 2024 - 11:48:46 -0600)
+> >
+> >DRAM:  128 MiB
+> >Core:  51 devices, 14 uclasses, devicetree: board
+> >Flash: 64 MiB
+> >Loading Environment from Flash... *** Warning - bad CRC, using default environment
+> >
+> >In:    serial,usbkbd
+> >Out:   serial,vidconsole
+> >Err:   serial,vidconsole
+> >No USB controllers found
+> >Net:   eth0: virtio-net#32
+> >
+> >starting USB...
+> >No USB controllers found
+> >Hit any key to stop autoboot:  0
+> >=> bootefi hello
+> >Enabling coop memory
+> >No EFI system partition
+> >No EFI system partition
+> >Failed to persist EFI variables
+> >Missing TPMv2 device for EFI_TCG_PROTOCOL
+> >Missing RNG device for EFI_RNG_PROTOCOL
+> >Warning: EFI bounce buffer 000000004157f000-000000004557f000
+> >Not loaded from disk
+> >Booting /MemoryMapped(0x0,0x47763730,0x31b0)
+> >EFI: Call: efi_load_image(false, efi_root, file_path, source_buffer, source_size, &handle)
+> >EFI: 0 returned by efi_load_image(false, efi_root, file_path, source_buffer, source_size, &handle)
+> >Hello, world!
+> >Running on UEFI 2.10
+> >Firmware vendor: Das U-Boot
+> >Firmware revision: 20241000
+> >Have device tree
+> >Load options: <none>
+> >File path: <none>
+> >Boot device: /MemoryMapped(0x0,0x47763730,0x31b0)
+> >=> print kernel_addr_r
+> >kernel_addr_r=0x40400000
+> >=> print ramdisk_addr_r
+> >ramdisk_addr_r=0x44000000
+> >=>
+> >
+> >The EFI bounce buffer overlaps with the ramdisk.
+> >
+> >Changes in v4:
+> >- Reword the commit message since this feature is needed
+> >
+> > lib/efi_loader/efi_bootbin.c | 9 +++++++++
+> > 1 file changed, 9 insertions(+)
+> >
+> >diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
+> >index a87006b3c0e..eefdd660cee 100644
+> >--- a/lib/efi_loader/efi_bootbin.c
+> >+++ b/lib/efi_loader/efi_bootbin.c
+> >@@ -209,6 +209,15 @@ efi_status_t efi_binary_run(void *image, size_t size, void *fdt)
+> >               return -1;
+> >       }
+> >
+> >+#ifdef CONFIG_EFI_LOADER_BOUNCE_BUFFER
+> >+      /*
+> >+       * Add a warning about this buffer, since it may conflict with other
+> >+       * things
+> >+       */
+> >+      log_debug("Warning: EFI bounce buffer %p-%p\n", efi_bounce_buffer,
+> >+                efi_bounce_buffer + EFI_LOADER_BOUNCE_BUFFER_SIZE);
+> >+#endif
 >
-> Where is relocation done in this case where I'm using SPL and U-Boot
-> proper for imx8m based boards?
-
-It is always done at the end of board_init_f() in U-Boot proper.
-
+> Adding a debug message here is ok.
 >
-> If I want to utilize dt overlays in U-Boot proper can you point me to
-> what is needed or some examples?
+> But writing "warning" in a debug message which is just printing an address for a configuration selected item looks weird to me.
 
-You could use a FIT in SPL and select the correct DT there, avoiding
-needing to change it in U-Boot. But if it is really run-time behaviour
-and not described by different models, then that won't work.
-
-There is board_fix_fdt() where you can find some examples. We should
-really tidy up all the DT stuff...
-
->
-> I'm intending to detect the presence of an add-in card that has a port
-> expander on it so as to allow that port expander to be accessed via
-> U-Boot. As a bit of a hack I'm currently using flat dt (!OF_LIVE) and
-> putting the port expander in the board dt and attempting to disable it
-> via dt modification in board_init(). As a better approach I could
-> attempt to add it to dt but using an overlay would make so much more
-> sense.
-
-Disabling it in board_init() seems OK to me. Unfortunately this is the
-sort of problem which can be solved many ways.
+I added that because you said it needed to say it was a warning. I'll
+remove it and try again.
 
 Regards,
 Simon
