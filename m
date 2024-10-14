@@ -4,74 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B3DACFC500
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 07:10:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 929D3CFC501
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 07:17:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B402D88F6C;
-	Mon, 14 Oct 2024 09:10:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1D7B088D10;
+	Mon, 14 Oct 2024 09:17:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GsTEDuts";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="JnQ1EuG7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D71A88FEC; Mon, 14 Oct 2024 09:10:48 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 384D288F46; Mon, 14 Oct 2024 09:17:43 +0200 (CEST)
+Received: from mail-ed1-x543.google.com (mail-ed1-x543.google.com
+ [IPv6:2a00:1450:4864:20::543])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6914889C3
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 09:10:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 01FC886BF1
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 09:17:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-431291b27f1so14537015e9.0
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 00:10:45 -0700 (PDT)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-ed1-x543.google.com with SMTP id
+ 4fb4d7f45d1cf-5c94dd7e1c0so3567274a12.0
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 00:17:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1728889845; x=1729494645; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=kc/WpUPRtz4XBALNS2VkyH5vjybfQNk1bhihMja3vVU=;
- b=GsTEDutsisVFdHEbhdDLrTYMTWTn7cdzWdyrHQyJ5Pdn1sq11iWn/47jnJAZTO62pM
- i/p+PYNEjj5oiLdFLEp6SGnP6YdreLF7j+gXk3gZ3vLA9fLQVeNM0gZ3CUv+zo/cdTL3
- 0hfPv1QDZT39k2t5xMSQ37C+nyQHbl/NzwvMA+yZz0d8pCCObcdKle2MsXvYpoHbxcJk
- icr7xKk4gaCdG1wD0QLN/VepJppai4ho6jDgvb2k6hL1jIKuxNYHbtUPnhgfZzIA9L46
- P2iDzxfXeuuZFew1C1O4g5Ueb5MpR821KGodv69Vbz+8gQPCM+AHJMS94RDlGQgRQQSK
- T/Ow==
+ d=amarulasolutions.com; s=google; t=1728890260; x=1729495060;
+ darn=lists.denx.de; 
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=qLqq65KH735wkY/mI31qhL4cagciTjAESWJCFyayrTg=;
+ b=JnQ1EuG7jDQ9buutuAKSHstzdq1OXC15OHlYXpAFIhc+KIuut3/7xy3Rm+aRcORb8l
+ PyXlKqpfQgjr+1SkkjVxL3JasJSMvzjTraAccj1+DUBLL6CNMv3/jCUVg5XblzP5lQMS
+ I0ATqxAL+z/rdhEMGIiAG89XlnCkROXzKiz6M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728889845; x=1729494645;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=kc/WpUPRtz4XBALNS2VkyH5vjybfQNk1bhihMja3vVU=;
- b=Yoldz0gV5KsJqNx9nUEOqvmdjceHmEn7vupRXBSoKDXoWjoTiXiBdhW3jzExQVCuHm
- yM/uT52Oazpzrct0aNPEiHH01Z0V3H+kuP7GpAd+Cqi2QvlY5+rqAYDZiMMmSobEYdSv
- hGCKPJGrPaRlDTFwsMI4ZWGKM+1v8bqW2O20YwRX8JyvN8cK6KF70tdRY/iqpqXFw7uP
- 9oI7+jLusGom5xX9OJ7laZ7QgMascE/Qqy/rmt4bi5x+jch+w1riZFd/aaL5xm9yKpY/
- i8OCKupN8DUnEpfVBZ9iy7jOj4fvwR82PNf/2tDJUJkDUxHP8CmvuRLgLox7dP1V5q8K
- q9oQ==
-X-Gm-Message-State: AOJu0YxLLUpxxS0czikghAi8kmKVq4L4cC8onqiy1DDUgKD1vawFeiUE
- pcxinD4eVHdIzUUs0WH6wYZcSAWNvJkaNL7/chaJYG+6wYYS9FnXiQqhHy4faFW78cOzKbZxxkF
- aSVGk8/eEVZCPrKtng2uxazpDtLkypQ==
-X-Google-Smtp-Source: AGHT+IE6KKUmtnPFpXmOiixHoF/Np1L7XXJLmdbL9YHSbpV8nKesXoOuEYRWzm2hh9dmT9Azc2IpPm2gvqb8mROawG8=
-X-Received: by 2002:a05:600c:1c1d:b0:42c:d084:ed7e with SMTP id
- 5b1f17b1804b1-4311deaea1amr79682145e9.4.1728889845058; Mon, 14 Oct 2024
- 00:10:45 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1728890260; x=1729495060;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=qLqq65KH735wkY/mI31qhL4cagciTjAESWJCFyayrTg=;
+ b=ZVfp/Rzl3qXjohDPj3PkcPEWPwI9t2K5QGm7/9G5pLuRZ6w1pasQ1UPQWznmp0G90R
+ phTGlSBOdQoAdO4SW6i8R9+IYU/4KKuWnazVzVLzCuvaAMrZHYqJyqLJBtsWx18tRD24
+ JNehOpvvPLy1a4HMz6FHD/bqJVzi/UOXrNIeLs4e3F3riW2CMBVkXm2AGRnfUHavvIxM
+ 8p+MYsVcEiOWm6QAHMgHfdsCXVLlcYY3JCiY3/O+k9VX7W5XuJ6rYgw84DTCgwDNqFgA
+ IZ3gGqxJBWO7sSPRE1gpFlKi1jy1fCipcDhbF9pbJi7cSuD0+KJWNw7RvIRSfiARv3Qb
+ Mfww==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXc5z01aiBGQGlYzW/nnNjmfrhvZChU7IIifPqIbNFcU89/gB6CnGr8g18euvidC+93TRmgiBc=@lists.denx.de
+X-Gm-Message-State: AOJu0YzMoSIWf8HL/PA0tX1AVkGUFGcxOzkgesGhBb/dDxE3uM0aPfGt
+ TAMiki02E4eCryLF2U3+Wd6PAM0wfDpDMsmSt9GGn9jfSQFVL+s7+XSe3BU+jFbuf9wi75qSH3w
+ PZKfbaZFW3y3LuCWWNFUR3ZN2w15R89Wapj1laQ==
+X-Google-Smtp-Source: AGHT+IFJMAcaVNSwbftIXcbhGpGUhokczhRhe/yswPctUWBRzKu0/DqMuA/bQjYzM9L/+HAoepivo02Ykn1jgBDMNqs=
+X-Received: by 2002:a05:6402:4409:b0:5c9:85ce:d9e3 with SMTP id
+ 4fb4d7f45d1cf-5c985cedd76mr115126a12.16.1728890260281; Mon, 14 Oct 2024
+ 00:17:40 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241013155604.87584-1-clamor95@gmail.com>
- <20241013215444.GA53053@bill-the-cat>
-In-Reply-To: <20241013215444.GA53053@bill-the-cat>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Mon, 14 Oct 2024 10:10:33 +0300
-Message-ID: <CAPVz0n1=sRB+7rT_BQaLRbhtu9SM5vShOZLQxEUbBmbvzS4ptg@mail.gmail.com>
-Subject: Re: Please pull u-boot-tegra staging
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Mon, 14 Oct 2024 09:17:25 +0200
+Message-ID: <CAOf5uw=NJEiiX4qOWqZ6CpAjdwvyBsmonEn5egSAHC8-N6FxKQ@mail.gmail.com>
+Subject: Pull request for u-boot-nand-20241012
+To: Tom Rini <trini@konsulko.com>, U-Boot-Denx <u-boot@lists.denx.de>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,56 +82,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D0=BF=D0=BD, 14 =D0=B6=D0=BE=D0=B2=D1=82. 2024=E2=80=AF=D1=80. =D0=BE 00:5=
-4 Tom Rini <trini@konsulko.com> =D0=BF=D0=B8=D1=88=D0=B5:
->
-> On Sun, Oct 13, 2024 at 06:55:58PM +0300, Svyatoslav Ryhel wrote:
->
-> > Dear Tom,
-> >
-> > The following changes since commit 93b9cd792089e536f2bfa85d9903fd479820=
-9f76:
-> >
-> >   mtd: simplify CONFIG_DM_SPI_FLASH dependencies (2024-10-09 14:52:44 -=
-0600)
-> >
-> > are available in the Git repository at:
-> >
-> >   https://source.denx.de/u-boot/custodians/u-boot-tegra.git staging
-> >
-> > for you to fetch changes up to 711fcd3bdad52ba058e8ca3cf1673bf1b8299be2=
-:
-> >
-> >   video: panel: add Sharp LQ101R1SX01 MIPI DSI panel driver (2024-10-13=
- 17:33:46 +0300)
-> >
->
-> Please note that I made a few fixes before pushing this out. One of
-> these was a merge problem,
-This is actually an odd incident since I have rebased all commits onto
-u-boot/master (same day I asked for pull, 2 hours earlier). No issues
-occurred while rebasing.
+The following changes since commit 47e544f576699ca4630e20448db6a05178960697:
 
-> but another set were whitespace problems
-> checkpatch.pl noted
-This refers to migration of bootscripts to text env. Last time I
-worked with bootscripts they were quite sensitive to whitespaces and
-broke easily so I assumed that checkpatch mistreated those as errors.
-Seems that checkpatch was well adjusted to check env as well. Sorry,
-this will not happen again.
+  Merge patch series "Tidy up use of 'SPL' and CONFIG_SPL_BUILD"
+(2024-10-11 12:23:25 -0600)
 
-> and the finally a small mistake of mis-naming the
-> apalis-tk1 env file (which is a - and not _ like the rest of the
-> platforms from the vendor).
-Thanks for spotting this out, I must have automatically used _
+are available in the Git repository at:
 
->
-> Applied to u-boot/master, thanks!
->
-> --
-> Tom
+  git@source.denx.de:u-boot/custodians/u-boot-nand-flash.git
+u-boot-nand-20241012
 
-Thank you very much and sorry for discomforts.
+for you to fetch changes up to 25e46f8281075d3b3a8d393264ff1cd33f8815b3:
 
-Best regards,
-Svyatoslav R.
+This merge request add support for BCMBCA raw nand driver for bcm96846 board
+that switch using OF_UPSTREAM and allow use onfi ecc params when they
+are available
+in the atmel nand controller
+
+The patches pass the pipeline CI:
+https://source.denx.de/u-boot/custodians/u-boot-nand-flash/-/pipelines/22638
+
+----------------------------------------------------------------
+Linus Walleij (4):
+      mtd: rawnand: brcmnand: Add BCMBCA RAW NAND driver
+      drivers: nand: bcmbca: Enable on BCM6846
+      board: bcm96846: Enable NAND options
+      board: bcm96846: Switch to using OF_UPSTREAM
+
+Zixun LI (1):
+      mtd: nand: raw: atmel: Use ONFI ECC params if available
+
+ arch/arm/dts/bcm6846.dtsi                    | 103 ------------------
+ arch/arm/dts/bcm96846.dts                    |  30 ------
+ arch/arm/mach-bcmbca/bcm6846/Kconfig         |   4 +
+ configs/bcm96846_defconfig                   |  15 ++-
+ drivers/mtd/nand/raw/Kconfig                 |   7 ++
+ drivers/mtd/nand/raw/atmel/nand-controller.c |   4 +
+ drivers/mtd/nand/raw/brcmnand/Makefile       |   1 +
+ drivers/mtd/nand/raw/brcmnand/bcmbca_nand.c  | 152 +++++++++++++++++++++++++++
+ 8 files changed, 182 insertions(+), 134 deletions(-)
+ delete mode 100644 arch/arm/dts/bcm6846.dtsi
+ delete mode 100644 arch/arm/dts/bcm96846.dts
+ create mode 100644 drivers/mtd/nand/raw/brcmnand/bcmbca_nand.c
+
+--
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
+
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
