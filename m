@@ -4,73 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0BF6D1813F
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 20:18:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82F59D1813F
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 20:20:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1805A89056;
-	Mon, 14 Oct 2024 22:18:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 13D0D8912A;
+	Mon, 14 Oct 2024 22:20:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YHVtG4h+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JiaCARrQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD87289063; Mon, 14 Oct 2024 22:18:01 +0200 (CEST)
-Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
- [IPv6:2607:f8b0:4864:20::12b])
+ id 2EF33890D1; Mon, 14 Oct 2024 22:20:11 +0200 (CEST)
+Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
+ [IPv6:2607:f8b0:4864:20::f2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8564E89018
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 22:17:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 23E9789018
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 22:20:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12b.google.com with SMTP id
- e9e14a558f8ab-3a39cabb9b8so13302295ab.1
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 13:17:59 -0700 (PDT)
+Received: by mail-qv1-xf2f.google.com with SMTP id
+ 6a1803df08f44-6cbce9e4598so31035226d6.2
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 13:20:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728937078; x=1729541878; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=f3OxPYY3jLtNofPQaHShk0DnP5CxTb2DtCF93vuqVPo=;
- b=YHVtG4h++uzE1EIBPa4XGrKSphv1yHYp5ZgLE1XOeE0x3HEUE2dx+LhJvDS1MhwOjF
- CJvtgOJHkpNkglPVZMdbd4h09sjHKWDgYenWsRS/31fMw7P/lIntLrffojxMrpVMwtXB
- dHMHSyhMRgt+vJxmWRz9w/hmNuVP2xQ65HLAM=
+ d=chromium.org; s=google; t=1728937207; x=1729542007; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=eGcnc1AHZ0Mr7EARLAbwwCExvgtJNbx0bPJjQWUIfs4=;
+ b=JiaCARrQG54H2/BZ9ZvYeKwXiUwMJN8kmwahGplaHhiVKaunNPh3ROHidgV2p7izEJ
+ zRqYJYfSbxdEqTXvqo/pDUN72FJijlHaIU3xk2str0fvfgh44IIHucwzYr6JOFPw2vbm
+ PiMemww+WXWoOAg2P87F45bf6XDPoIVY62oGw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728937078; x=1729541878;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1728937207; x=1729542007;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=f3OxPYY3jLtNofPQaHShk0DnP5CxTb2DtCF93vuqVPo=;
- b=jR8lwRpZsF84hdSCogCSPsDAhf9ZgQcM9QWZJsarR5lFdnxTN6rXbtkmb0qzmZuWKx
- +1MY/qQRVmMgOqAjfRhHlfe4lqQI6N5oRLW7zH8bX7/atV9CaQfO1388lQadSlHtnDW0
- EgcCJYspaPce7eEvx68xBGEU+xORyoOHvrBE5CNFTnhhiTxVSpH02pB1G7nRruI9XeTP
- qav9cP4DbEV36C3m+dRRlepMuSatFMzsoZmOr7SBjlr4FXqQeNb0OKWUN1XeqxVQZqUq
- hxnu1014q4f9M4coctLdy9biO9AtEGhJD+FXQ+qKv0u3UI27EZdHkl9doQkszsEzBygJ
- ktJA==
-X-Gm-Message-State: AOJu0YxDmQ+YJwtgEFkwxrwxZ2hTk3N+sz1tyUKQKuRZtZUS4KeI2jqd
- 4ncNJ7yI2nheO5F+b3A5GYK6afn+ByR++9uYvPxA4g7AYvE5STOJdpCPAlTwHsb7l+4vyIVgGg/
- 5eg==
-X-Google-Smtp-Source: AGHT+IFa+a6j1U5F+giEfpNUEKbsbQoMJrD7Ko3R8NGdDjpcWabYGTxCkNLDkcfwEl/xHyA5kUyrng==
-X-Received: by 2002:a05:6e02:164b:b0:3a0:a4dd:683b with SMTP id
- e9e14a558f8ab-3a3b5f683f8mr93701625ab.8.1728937078105; 
- Mon, 14 Oct 2024 13:17:58 -0700 (PDT)
-Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
- [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4dbad9b1061sm6976450173.11.2024.10.14.13.17.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Oct 2024 13:17:57 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH] test: Drop mention of old flags in a comment
-Date: Mon, 14 Oct 2024 14:17:53 -0600
-Message-Id: <20241014201753.1902999-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
+ bh=eGcnc1AHZ0Mr7EARLAbwwCExvgtJNbx0bPJjQWUIfs4=;
+ b=JveHWz+pDUdsgCDEfGMUIwZyTmU5eFjaAOtIf2mrE2heG0VI6QPjGEf8VYxJHMRjeU
+ DtBV9qMu/P+ONAzMk6qP/+BJCHgLndQQTbKOwAxe57rjpYiz41LFucMbpur3G4Fbib5N
+ zLnsGvdeW+ICVzdLT4birE7IbTGnXsXY2Nxz1O+4+l0pEB/eMEL1ZAAuViNviqtKyyim
+ nszrMDoUHUV/OcPBuEnXC+1j4MzopbWL7iNKz5OW5FxAVsm/pA/sOzOvgQikxd2mDl+d
+ StpnuPlRdNq7U7ECMcpWTGCU78OGLbYH9ACqLqwsXudIfmjaA1yUBToxeKG6LJrxEyHB
+ iKxA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWlf6deP7qSRbvA328qIMgxUCXfdhhdoswir8fLd9GcJ+zwX7a2oJa5d0EJWuWefGMEj8mkf6o=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw6mRM1ym2UF5W2X7BaF4olGEmVsd9XBRrV5gSfS48lvuwi2Xxf
+ 6/gkRxiJlqNq3gFhwthMr4imRRM0wt7HcKUBcbfQE0DLq7PonbefvMRpq7/eOPIx9KDpqgla2JB
+ 7AyVI44pLqtyHnHI5wzYLKSmV64uZX2HQF5vx
+X-Google-Smtp-Source: AGHT+IGpZe4Y5ff6YYfHg0uSSTp/f4QTrPUBLWtBOeAjLhgDGQIONeVbd+c8Ij6W3FSyohRj3xpGbwwkz47orxB84Rg=
+X-Received: by 2002:a05:6214:4489:b0:6cb:ee38:1bf8 with SMTP id
+ 6a1803df08f44-6cbf9d1f81emr158976946d6.13.1728937206994; Mon, 14 Oct 2024
+ 13:20:06 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241011212126.747741-1-sjg@chromium.org>
+ <20241011212126.747741-5-sjg@chromium.org>
+ <71ECC011-77EC-4308-AFE5-0E301BC27F84@gmx.de>
+ <20241012012716.GE14210@bill-the-cat>
+ <CAC_iWjL_YQ24ZecbN7oC-37PRR6iuUiiui-a0VPqSSVRunepdQ@mail.gmail.com>
+In-Reply-To: <CAC_iWjL_YQ24ZecbN7oC-37PRR6iuUiiui-a0VPqSSVRunepdQ@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 14 Oct 2024 14:19:56 -0600
+Message-ID: <CAFLszTjzHBtR8vzk0wT-nNiwbsotqskVhVEX0ibh-Uea1+Da6Q@mail.gmail.com>
+Subject: Re: [PATCH v4 4/5] efi: Reserve some memory for initial use
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,60 +90,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A comment in test-main.c was not updated with the recent rename. Fix it.
+Hi,
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+On Fri, 11 Oct 2024 at 23:47, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> Hi Tom
+>
+> On Sat, 12 Oct 2024 at 04:27, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Sat, Oct 12, 2024 at 12:01:54AM +0200, Heinrich Schuchardt wrote:
+> > >
+> > >
+> > > Am 11. Oktober 2024 23:21:25 MESZ schrieb Simon Glass <sjg@chromium.org>:
+> > > >The 'point of cooperation' is where U-Boot starts allowing EFI to use
+> > > >memory outside of the U-Boot region. Until that point, it is desirable
+> > > >to keep more below U-Boot free for loading images.
+> > > >
+> > > >Reserve a small region for this purpose.
+> > >
+> > > Your commit message provides no clue why this should be needed.
 
- test/test-main.c | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+Yes, I hadn't realised that people didn't understand what I was
+getting at. Tom asked the same question on irc.
 
-diff --git a/test/test-main.c b/test/test-main.c
-index 479dbb33b72..ed100eda847 100644
---- a/test/test-main.c
-+++ b/test/test-main.c
-@@ -294,27 +294,27 @@ static int test_pre_run(struct unit_test_state *uts, struct unit_test *test)
- 	 * Remove any USB keyboard, so that we can add and remove USB devices
- 	 * in tests.
- 	 *
--	 * For UT_TESTF_DM tests, the old driver model state is saved and
-+	 * For UTF_DM tests, the old driver model state is saved and
- 	 * restored across each test. Within in each test there is therefore a
- 	 * new driver model state, which means that any USB keyboard device in
- 	 * stdio points to the old state.
- 	 *
--	 * This is fine in most cases. But if a non-UT_TESTF_DM test starts up
-+	 * This is fine in most cases. But if a non-UTF_DM test starts up
- 	 * USB (thus creating a stdio record pointing to the USB keyboard
- 	 * device) then when the test finishes, the new driver model state is
- 	 * freed, meaning that there is now a stale pointer in stdio.
- 	 *
--	 * This means that any future UT_TESTF_DM test which uses stdin will
-+	 * This means that any future UTF_DM test which uses stdin will
- 	 * cause the console system to call tstc() on the stale device pointer,
- 	 * causing a crash.
- 	 *
--	 * We don't want to fix this by enabling UT_TESTF_DM for all tests as
-+	 * We don't want to fix this by enabling UTF_DM for all tests as
- 	 * this causes other problems. For example, bootflow_efi relies on
- 	 * U-Boot going through a proper init - without that we don't have the
- 	 * TCG measurement working and get an error
- 	 * 'tcg2 measurement fails(0x8000000000000007)'. Once we tidy up how EFI
- 	 * runs tests (e.g. get rid of all the restarting of U-Boot) we could
--	 * potentially make the bootstd tests set UT_TESTF_DM, but other tests
-+	 * potentially make the bootstd tests set UTF_DM, but other tests
- 	 * might do the same thing.
- 	 *
- 	 * We could add a test flag to declare that USB is being used, but that
-@@ -323,7 +323,7 @@ static int test_pre_run(struct unit_test_state *uts, struct unit_test *test)
- 	 * pointers always.
- 	 *
- 	 * So just remove any USB keyboards from the console tables. This allows
--	 * UT_TESTF_DM and non-UT_TESTF_DM tests to coexist happily.
-+	 * UTF_DM and non-UTF_DM tests to coexist happily.
- 	 */
- 	usb_kbd_remove_for_test();
- 
--- 
-2.34.1
+It allows us to separate the lmb allocations from the EFI allocations,
+so we don't need to have them both in sync. We use lmb for loading
+images, then EFI takes over and does what it likes, respecting the
+existing lmb reservations.
 
+> >
+> > The alternative here would be a patch to doc/develop/memory.rst saying
+> > something to the effect of:
+> >
+> > EFI pool allocations start at ... U-Boot stack pointer +
+> > CONFIG_STACK_SIZE and grow downwards from there. These are done by ... a
+> > brief description of how the pool allocations work ... Nominally, this
+> > will extend for only a few pages worth of memory but depending on
+> > requests made by EFI applications can grow larger. All of this is
+> > covered by the LMB that covers U-Boot itself and is considered part of
+> > the U-Boot memory map. It may be broken down in to further detail to the
+> > memory map provided to the OS, in some cases.
+>
+> I'll send a patch to update that next week. Perhaps even fold it in
+> the LMB series
+
+Before we know we are booting an EFI app? No, thank you. EFI should
+not be growing downwards like a stack while U-Boot is running...
+
+Regards,
+SImon
