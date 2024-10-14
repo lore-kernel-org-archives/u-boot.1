@@ -4,65 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C886D1812A
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 15:53:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBF6ED18129
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 15:53:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C120891C6;
-	Mon, 14 Oct 2024 17:51:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ED607891E3;
+	Mon, 14 Oct 2024 17:51:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FrPo7vDM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CzbDA886";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 300E1891C1; Mon, 14 Oct 2024 17:51:11 +0200 (CEST)
-Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
- [IPv6:2607:f8b0:4864:20::f2b])
+ id 76758891C1; Mon, 14 Oct 2024 17:51:12 +0200 (CEST)
+Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
+ [IPv6:2607:f8b0:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 248F7891AD
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 17:51:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5732F891DE
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 17:51:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-6cb97afcec9so39271676d6.2
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 08:51:09 -0700 (PDT)
+Received: by mail-oi1-x236.google.com with SMTP id
+ 5614622812f47-3e5cfb970c9so1292432b6e.1
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 08:51:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728921067; x=1729525867; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1728921069; x=1729525869; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=eZej2HKzS1ROUG2RMMd3Y5t+vvuFpjYb8KY9D7ujQOw=;
- b=FrPo7vDMTegR0FR2QmBcUMVykaOdMYmnv9ezFh8FvnWnkJ32CZ67i9XqZBfIP4J7U2
- 0mmAH8B+Ul1hh9yTnuTIsau33j5QRHj2FMim3mU0VfgAmJvtIeS9ybyyFqq+7gQUNkKj
- kHceJ9LnjDv0fT1T1ZXE8+o4yQu0NCwJ6wNHw=
+ bh=p4Io2nLDx+Q1os+/+IbK1TK69GRwFzgWVYgMdJH0GAE=;
+ b=CzbDA886dapS7w2XLCXW6NfQQlQW8NenGVC7seek7C/5TVMxoHwu+o2S9vfLKkSd+y
+ GivImwEBymslSWZp012LRhcFprkOrUwBByduihrDMOXljBixbXsR/RpAMQBlkmyqTU6+
+ LYEN04eLHAYxOKH+N4ymkUtTp71dj0L4ynkE0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728921067; x=1729525867;
+ d=1e100.net; s=20230601; t=1728921069; x=1729525869;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=eZej2HKzS1ROUG2RMMd3Y5t+vvuFpjYb8KY9D7ujQOw=;
- b=p4XL/3p/AEuBdvh2Bd9uFKDYYF+pPmjsvKmg4kh6HFLyfOS3iST20PkKQHZOQfgFj3
- LH8AF4QLLqVD2BgepnbzKPdLfAOVcssX+MXAlY1lhAiU21cOj2LBj6Eo77pUrlsJ5tEf
- /D+sWJy9F6bJcZb98p6ghh6IcodeB5D50plyGH6BQ2Mhs05++kNdBJmM/eFOLx+qsIPv
- hcigC2rJON6YUXii4i7UlbibRfdug80hRnIqcEV9ooMLGNmPRoqTh22D0sA+pQiYy52F
- 6a9tBE2F7t/9pWQ7d0lQepmSXY24xRuMcm+ww5SkjozPZnn/IPyxlOYCAX9xSibHo4Hn
- cAhA==
-X-Gm-Message-State: AOJu0YzGPkRKhukNTJtCyvOI2Y+945JjaubdaL5qUsxx5i837X/FaOk0
- YGHPGNdkWzekqtoQn3AZlxBJeBsqgzywKRrAtD3+VIGA3JQe9s90rXuhl0jCauVTeAJNWo+RZbH
- 93F1wgwOlJN5O8wocwxGESma5qR9kfG0O/3jA
-X-Google-Smtp-Source: AGHT+IEVdtkbcgEXR9pFFdlbZctcUG2AkUW+QPcmb7fNXYJkhQBQFdCxb102j2ly3RLxZiVfL9UzezEXnfk94O6nz/M=
-X-Received: by 2002:a05:6214:5b87:b0:6cb:d302:f0cf with SMTP id
- 6a1803df08f44-6cbeff63b0fmr208281536d6.28.1728921067417; Mon, 14 Oct 2024
- 08:51:07 -0700 (PDT)
+ bh=p4Io2nLDx+Q1os+/+IbK1TK69GRwFzgWVYgMdJH0GAE=;
+ b=LtDzVcpxHWHKzocEBAUdqre0kQRhsNmO0+xNmGJ1/0RH31hhRAQmD/TC5BUpSlnFK5
+ k5S3/E1gzg78KofJTs6+W/3ZLxDklbzwBuGhsUVNeie917q0aiW2NSYjTY0LHjny92vK
+ XTxYSUj7eIR0/I+nTJilISPbm9APUirDc3mNTnLdbcYO7KafefjRAs6zqZJcVlr20mYP
+ cPg7zPpmRYTYWXf7hUo67TM3ob/dNQ0DYYOHV7Qbz5h9lbpz/i2kcLRTjWFArNYPRStJ
+ t/E2oFHk2X1GnP+kyuvIqQsiTU3OR9JxdoTtpOmcC0v8ALpiCf3fs8yLxKIW0/dM5umf
+ uqSA==
+X-Gm-Message-State: AOJu0Yx0t1L1/42Lwh62JA78TjXumsw2Tm9lnfqtXe/jWuVLNeyOTyk9
+ PoBBKPoVdcFjLn5Av4uvVNAulR+OboJ/0Q1FjIS41BX6heIp+iZ6yKE3BoItYgID41FP675HSds
+ R0tUyYLDkgFzL4MMQN9HwRGxD5Be6U5EdxI3m
+X-Google-Smtp-Source: AGHT+IGhgSc6lotYd45eisuBIFHoU2XRn1J9RYXqVMRhI1ZSCKKskAuFKH8Zb68ukE9sykT3Ow4GyKacf/CFhtKNrnI=
+X-Received: by 2002:a05:6808:1884:b0:3e0:3c1c:169e with SMTP id
+ 5614622812f47-3e5c90d6fa0mr5354882b6e.14.1728921069110; Mon, 14 Oct 2024
+ 08:51:09 -0700 (PDT)
 MIME-Version: 1.0
 References: <20241013105522.391414-1-sughosh.ganu@linaro.org>
- <20241013105522.391414-15-sughosh.ganu@linaro.org>
-In-Reply-To: <20241013105522.391414-15-sughosh.ganu@linaro.org>
+ <20241013105522.391414-16-sughosh.ganu@linaro.org>
+In-Reply-To: <20241013105522.391414-16-sughosh.ganu@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 14 Oct 2024 09:50:56 -0600
-Message-ID: <CAFLszTizzDx88Rs1rRXXgcFDf8z3Qe1U+BfOW4GM7owuRw2=MQ@mail.gmail.com>
-Subject: Re: [PATCH v3 14/15] lmb: remove call to efi_lmb_reserve()
+Date: Mon, 14 Oct 2024 09:50:58 -0600
+Message-ID: <CAFLszTgkK1zyaFh=96dLa6ebPowucWu_R=7GiT2eKA4xeWD46g@mail.gmail.com>
+Subject: Re: [PATCH v3 15/15] efi_memory: rename variable to highlight overlap
+ with free memory
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>, 
@@ -86,17 +87,24 @@ X-Virus-Status: Clean
 
 On Sun, 13 Oct 2024 at 04:56, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> The EFI memory allocations are now being done through the LMB
-> module. With this change, there is no need to get the EFI memory map
-> and set aside EFI allocated memory.
+> The variable overlap_only_ram is used to specify that the new memory
+> region that is being created needs to come from the free memory pool
+> -- this is done by carving out the memory region from the free
+> memory. The name is a bit confusing though, as other allocated memory
+> regions, like boot-services code and data are also part of the RAM
+> memory. Rename the variable to overlap_conventional to highlight the
+> fact that it is the free/conventional memory that is being referred to
+> in this context.
 >
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 > ---
-> Changes since V2: None
+> Changes since V2:
+> * Rename overlap_no_freemem to overlap_conventional as suggested by
+>   Ilias.
 >
->  lib/lmb.c | 35 -----------------------------------
->  1 file changed, 35 deletions(-)
+>  include/efi_loader.h        | 16 +++++++-----
+>  lib/efi_loader/efi_memory.c | 51 ++++++++++++++++++++-----------------
+>  2 files changed, 37 insertions(+), 30 deletions(-)
 >
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
