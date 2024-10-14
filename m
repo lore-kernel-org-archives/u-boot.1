@@ -4,80 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74238D1813D
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 19:14:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED369D1813D
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 19:14:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0BF8B89110;
-	Mon, 14 Oct 2024 21:13:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6C05989160;
+	Mon, 14 Oct 2024 21:13:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iTsT9ptH";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cmjH34JS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A520A8915C; Mon, 14 Oct 2024 21:13:54 +0200 (CEST)
-Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
- [IPv6:2607:f8b0:4864:20::f30])
+ id E1C528915C; Mon, 14 Oct 2024 21:13:55 +0200 (CEST)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BFD3689096
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 21:13:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 53FF589082
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 21:13:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf30.google.com with SMTP id
- 6a1803df08f44-6cbd00dd21cso30310096d6.3
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 12:13:51 -0700 (PDT)
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-6cbf347dc66so21276476d6.3
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 12:13:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728933230; x=1729538030; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1728933232; x=1729538032; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=YA9kngrAncJRY5Z+BcVqBNArY6gg9k0Zn78InmJ0zN4=;
- b=iTsT9ptHU9QZ7TbwCN3SVDb4rHT5isNMH7ID8TXgC8r8iRwZtuBez1M0ii3BcEAGvE
- fKzcfRXMBddo2jXNFxGJlQdp0/KUZCTpryuzkQqSg9zf8x5uv/z0bE6UC/yzlGqwniRV
- az0imSwGHYsKUCjjGvsfQ9A2AiUJrXCYcP5yo=
+ bh=zIuwPq5CHGuKDgfR8SOkXhVgh/NLk2Sj9mQGP2S8nB4=;
+ b=cmjH34JS51TLJnbD9BmdpD1venCLctA8/SjJqPtOESQr8Aar/QqgE+1AZpDCfM0dC2
+ baJYwjB5dWq/rrf5a9jyOoafZBNHVjsSSehripW0KNt8+rraJxcTskSLZCdwfdztDFRM
+ xR5ppeGk5ETiINfupOUJhNv2zPCSskWywvqY4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728933230; x=1729538030;
+ d=1e100.net; s=20230601; t=1728933232; x=1729538032;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=YA9kngrAncJRY5Z+BcVqBNArY6gg9k0Zn78InmJ0zN4=;
- b=PvS5WhFUG4896b8yY2obhRUScBQcjVyt4UZ+i4FHzI1O0cNLWe4uXzCbXuGoVXsz30
- R1u50bderI86NbQrLT0PLU6d8aVqHWJ3pUGjqYj+GlDKoQn3yK544Yufw5U0TG4mx4B5
- lsHl+CmPl8hqPHOKwdHq/LqLkq+ES0c7MvBUADOoOnZRRlIygoaIqKgfcUjIWj2KddPm
- H71VoZcSqOs7CNYhmyOfMmLyjcWB1grhXs/jQoCgVxIv6cN4PpsYCFaS6NAlu5r5l0Pt
- +vfcEpXPEGmclFY+9qbz6YQ8nFJaI459ymSYH1mULOi72EBSBlQHk7j8snRV7HiHFcmj
- M6Hw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXYpTwEtyhJUmARLTJ5T7YcIh2bL7bRdiDpgEUmmEN7X1jI6XPqHv4iTSyG5mcU2dbS7NWWQDE=@lists.denx.de
-X-Gm-Message-State: AOJu0YyzZYN2zMRHw7+E3PdBhA4hIIPs5RirnJu/No38m66YEF93B1Wd
- GAbBVM1SZ8CYEITNAnyms9IrgaKfEosjsqcWHCQLeqjxjQmUVABx7c1834B+PadbI05n3EcACYS
- SORpmNE6Vp6EdmkKp9+F+kTMYAk618Z4iIZcAVx90Tu8X1kQ=
-X-Google-Smtp-Source: AGHT+IHdrLCarip8t6Bj+EBMwEnmAIqyuWWQvx504mzdVZ/i4XX8v9om0lWXZQ+5Y4BmTFUqR0d6SuJmzwtV8qKRP1s=
-X-Received: by 2002:a05:6214:4346:b0:6cb:fcbe:b34b with SMTP id
- 6a1803df08f44-6cbfcbeb3dcmr145390116d6.32.1728933230697; Mon, 14 Oct 2024
- 12:13:50 -0700 (PDT)
+ bh=zIuwPq5CHGuKDgfR8SOkXhVgh/NLk2Sj9mQGP2S8nB4=;
+ b=JfHMbsa/mWtsQktwey9eMl9bjXW42AY4uQmDPaEQZZuEvlRaaqJh5Dsm2+IvUWvPPk
+ zKLlDMuvTTEX+IvSXdjz8f3AgFo7VKXacYOPNfst0OXIqLoNOR6ytDN6YLWd5swxfzKD
+ t/zBHMv+FjJFrxwc65YgIKizwgP4AcES5bPCGAHu73bRu+R/o+gUUlpSpbunWkJuxfsJ
+ +vX6OTFp21A88wPN8dF7+YBEi/dNpwyDoXpYvZNaYxxoaqSDzcgzLkpUXWKRIEB8NRyY
+ 7GudnuET9wdP+WsYZG/1XwNUmubO8FO32WuGPauDV8I3KJZ9LReVyjyplTeI0yGWIQVL
+ f3jg==
+X-Gm-Message-State: AOJu0YxTeDRoT3p3AeYBuF47c2srF+gTtl89zaRpui8bXleqG5aS3a9D
+ DFziZq2B2ILmJ/2x0+p5pXtFT1KZ1NulqhDR15h/KZZaKD0OUtug9T819gF9gkJYEvTLGrN/TSq
+ b2P4mb+QyjtwDD+dCBWafqFRfgLnrR5iEPLYg
+X-Google-Smtp-Source: AGHT+IEoravcQDf68FaRQ6mq0D/IHG03M8GJLorwUckCZqV08wuWXiwccVGJlXYqkJ4sfFd4X4zXOcJFaOmFna5zRVU=
+X-Received: by 2002:a05:6214:5983:b0:6cb:d4ed:aa59 with SMTP id
+ 6a1803df08f44-6cbf9d0cb79mr145210296d6.4.1728933232137; Mon, 14 Oct 2024
+ 12:13:52 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240926215950.1265143-1-sjg@chromium.org>
- <20240926215950.1265143-9-sjg@chromium.org>
- <08596845-c0b1-4557-9993-cde57420560d@gmx.de>
- <20241001002442.GC4737@bill-the-cat>
- <79d98f61-7659-47a3-938f-1eb79f402edf@gmx.de>
- <20241001180235.GH4737@bill-the-cat>
- <e02a9912-7260-4e0a-81d8-c7814907a791@gmx.de>
- <CAFLszTj6Zuj0b3kEA4OKOQY_D5XMWmtbn+HJXik+xSrB7LUjLA@mail.gmail.com>
- <20241011222807.GZ14210@bill-the-cat>
- <CAFLszTiAdR-LTLqMjpyLgXDT99p+_8KZyDPk1ZJ8hTHGaQd+oA@mail.gmail.com>
- <20241014022501.GC53053@bill-the-cat>
-In-Reply-To: <20241014022501.GC53053@bill-the-cat>
+References: <20240926220226.1265965-9-sjg@chromium.org>
+ <20240926220226.1265965-13-sjg@chromium.org>
+ <20241011223227.GA630742@bill-the-cat>
+ <CAFLszTgoxND_qi8WzdgC8-mQLf0e14Mt=KgXy=bqWkqo4svG9Q@mail.gmail.com>
+ <20241014035122.GE53053@bill-the-cat>
+In-Reply-To: <20241014035122.GE53053@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 14 Oct 2024 13:13:40 -0600
-Message-ID: <CAFLszTiAf505RtnLjFY62PduhXyAEP_9v_gT_8CNORr_Fs+PPw@mail.gmail.com>
-Subject: Re: [PATCH v6 08/12] efi_loader: Disable ANSI output for tests
+Date: Mon, 14 Oct 2024 13:13:41 -0600
+Message-ID: <CAFLszTiVsoTdKiKmPVugc9cLk-A+XM2EdiPUE0AFK=g8RPx+0g@mail.gmail.com>
+Subject: Re: [PATCH v6 12/12] test: efi: boot: Add a test for the efi bootmeth
 To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,54 +89,184 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Sun, 13 Oct 2024 at 20:25, Tom Rini <trini@konsulko.com> wrote:
+On Sun, 13 Oct 2024 at 21:51, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Sun, Oct 13, 2024 at 01:33:32PM -0600, Simon Glass wrote:
+> On Sun, Oct 13, 2024 at 01:33:23PM -0600, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Fri, 11 Oct 2024 at 16:28, Tom Rini <trini@konsulko.com> wrote:
+> > On Fri, 11 Oct 2024 at 16:32, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Fri, Oct 11, 2024 at 04:16:28PM -0600, Simon Glass wrote:
+> > > On Fri, Sep 27, 2024 at 12:02:23AM +0200, Simon Glass wrote:
 > > >
-> > > > Hi Heinrich, Tom,
+> > > > Add a simple test of booting with the EFI bootmeth, which runs the app
+> > > > and checks that it can call 'exit boot-services' (to check that all the
+> > > > device-removal code doesn't break anything) and then exit back to
+> > > > U-Boot.
 > > > >
-> > > > On Tue, 1 Oct 2024 at 16:18, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> > > > This uses a disk image containing the testapp, ready for execution by
+> > > > sandbox when needed.
+> > > >
+> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > >
+> > > So lets go to the problem point. What asserts here fail due to ANSI
+> > > escape codes being in the output and needing to be filtered out?
+> > >
 > > > [snip]
-> > > > > The relevant error message is:
-> > > > >
-> > > > >      E   Exception: Bad pattern found on console: spl_signon
-> > > > >
-> > > > > The error occurs because the substring
-> > > > >
-> > > > >      U-Boot SPL 2024.10
-> > > > >
-> > > > > occurs multiple times during the reboot process. This is not expected in
-> > > > > wait_for_boot_prompt().
-> > > > >
-> > > > > The EFI test is resetting the board and then calling restart_uboot()
-> > > > > which by itself does another reset.
+> > > > diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
+> > > > index e05103188b4..da2ee1ab345 100644
+> > > > --- a/test/boot/bootflow.c
+> > > > +++ b/test/boot/bootflow.c
+> > > > @@ -13,6 +13,7 @@
+> > > >  #include <cli.h>
+> > > >  #include <dm.h>
+> > > >  #include <efi_default_filename.h>
+> > > > +#include <efi_loader.h>
+> > > >  #include <expo.h>
+> > > >  #ifdef CONFIG_SANDBOX
+> > > >  #include <asm/test.h>
+> > > > @@ -31,6 +32,9 @@ extern U_BOOT_DRIVER(bootmeth_android);
+> > > >  extern U_BOOT_DRIVER(bootmeth_cros);
+> > > >  extern U_BOOT_DRIVER(bootmeth_2script);
 > > > >
-> > > > We had this discussion a while back and I was very-much opposed to
-> > > > restarting U-Boot within a test. It has set a bad precedent and now
-> > > > several tests do it.
-> > > >
-> > > > This is another EFI thing that I would like to resolve at some point.
-> > > > As previously mentioned, I understand we might be one test to check
-> > > > that U-Boot does actually kick up a firmware update when started, but
-> > > > I don't think we should be restarting willy-nilly.
-> > >
-> > > We should indeed not be restarting willy-nilly. And we don't. But the
-> > > test for "can we restart the system" must restart the system. That's the
-> > > test. It's not changing. Testing if we can restart the system by faking
-> > > the restart is not testing restarting the system.
+> > > > +/* Use this as the vendor for EFI to tell the app to exit boot services */
+> > > > +static u16 __efi_runtime_data test_vendor[] = u"U-Boot testing";
+> > > > +
+> > > >  static int inject_response(struct unit_test_state *uts)
+> > > >  {
+> > > >       /*
+> > > > @@ -1205,3 +1209,62 @@ static int bootflow_android(struct unit_test_state *uts)
+> > > >       return 0;
+> > > >  }
+> > > >  BOOTSTD_TEST(bootflow_android, UTF_CONSOLE);
+> > > > +
+> > > > +/* Test EFI bootmeth */
+> > > > +static int bootflow_efi(struct unit_test_state *uts)
+> > > > +{
+> > > > +     /* disable ethernet since the hunter will run dhcp */
+> > > > +     test_set_eth_enable(false);
+> > > > +
+> > > > +     /* make USB scan without delays */
+> > > > +     test_set_skip_delays(true);
+> > > > +
+> > > > +     bootstd_reset_usb();
+> > > > +
+> > > > +     /* Avoid outputting ANSI characters which mess with our asserts */
+> > > > +     efi_console_set_ansi(false);
+> > > > +
+> > > > +     ut_assertok(bootstd_test_drop_bootdev_order(uts));
+> > > > +     ut_assertok(run_command("bootflow scan", 0));
+> > > > +     ut_assert_skip_to_line(
+> > > > +             "Bus usb@1: scanning bus usb@1 for devices... 5 USB Device(s) found");
+> > > > +
+> > > > +     ut_assertok(run_command("bootflow list", 0));
+> > > > +
+> > > > +     ut_assert_nextlinen("Showing all");
+> > > > +     ut_assert_nextlinen("Seq");
+> > > > +     ut_assert_nextlinen("---");
+> > > > +     ut_assert_nextlinen("  0  extlinux");
+> > > > +     ut_assert_nextlinen(
+> > > > +             "  1  efi          ready   usb_mass_    1  usb_mass_storage.lun0.boo /EFI/BOOT/BOOTSBOX.EFI");
+> > > > +     ut_assert_nextlinen("---");
+> > > > +     ut_assert_skip_to_line("(2 bootflows, 2 valid)");
+> > > > +     ut_assert_console_end();
+> > > > +
+> > > > +     ut_assertok(run_command("bootflow select 1", 0));
+> > > > +     ut_assert_console_end();
+> > > > +
+> > > > +     systab.fw_vendor = test_vendor;
+> > > > +
+> > > > +     ut_asserteq(1, run_command("bootflow boot", 0));
+> > > > +     ut_assert_nextline(
+> > > > +             "** Booting bootflow 'usb_mass_storage.lun0.bootdev.part_1' with efi");
+> > > > +     if (IS_ENABLED(CONFIG_LOGF_FUNC))
+> > > > +             ut_assert_skip_to_line("       efi_run_image() Booting /\\EFI\\BOOT\\BOOTSBOX.EFI");
+> > > > +     else
+> > > > +             ut_assert_skip_to_line("Booting /\\EFI\\BOOT\\BOOTSBOX.EFI");
+> > > > +
+> > > > +     /* TODO: Why the \r ? */
+> > > > +     ut_assert_nextline("U-Boot test app for EFI_LOADER\r");
+> > > > +     ut_assert_nextline("Exiting boot sevices");
+> > > > +     if (IS_ENABLED(CONFIG_LOGF_FUNC))
+> > > > +             ut_assert_nextline("     do_bootefi_exec() ## Application failed, r = 5");
+> > > > +     else
+> > > > +             ut_assert_nextline("## Application failed, r = 5");
+> > > > +     ut_assert_nextline("Boot failed (err=-22)");
+> > > > +
+> > > > +     ut_assert_console_end();
+> > > > +
+> > > > +     return 0;
+> > > > +}
+> > > > +BOOTSTD_TEST(bootflow_efi, UTF_CONSOLE);
 > >
-> > If it were just one test I would be OK with it...but it has spread,
-> > unfortunately. When I run under gdb I constantly have to manually
-> > restart U-Boot.
+> > Thanks for taking an interest in this.
+> >
+> > Nothing at present, as I added ut_assert_skip_to_line() to skip it
+> > all. But it really is just wrong...I get gibberish showing up in the
+> > terminal after I run tests! This is what I see with this series:
+> >
+> > ** Booting bootflow 'usb_mass_storage.lun0.bootdev.part_1' with efi
+> >  7 [r [999;999H [6n 8No EFI system partition
+> >
+> > ^^^ strange output there but I'm not sure if it will come through on email
+> >
+> > No EFI system partition
+> > Failed to persist EFI variables
+> > No EFI system partition
+> > Failed to persist EFI variables
+> > No EFI system partition
+> > Failed to persist EFI variables
+> > Booting /\EFI\BOOT\BOOTSBOX.EFI
+> > U-Boot test app for EFI_LOADER
+> >
+> > Exiting boot sevices
+> > ## Application failed, r = 5
+> > Boot failed (err=-22)
+> > Failures: 0
 >
-> Then I'm sorry to say you picked a bad example to bring this up on.
+> So we're finally making progress I think to see what the problem you're
+> trying to solve is. I think the next thing to figure out is if you use
+> picocom or screen or whatever on console, the codes are handled
+> correctly, or no? Specifically, picocom?
 
-Ha ha, yes! I will resend the series without the skipping.
+This is my running tests on my normal machine in a terminal. So it is
+just a sandbox connection, with no picocom, etc. See the Spawn class
+in test/py
 
+> Next, is this perhaps just
+> another strange artifact of how oddly (and as you've noted before,
+> slowly) pytest consumes the console input? It feels like maybe we're
+> doing several layers of wrong there?
 
-- Simon
+Well to be frank I would have just applied my ANSI patch some months
+ago and stopped worrying about it. We just shouldn't be sending ANSI
+characters unless we know there is a terminal there. See Color() in
+tools/u_boot_pylib/terminal.py
+
+But even if we did want to blindly send characters, we should have a
+way to turn it off.
+
+> Because to be clear, this is not a
+> sandbox problem. Looking back at the log I had posted about the watchdog
+> reset not counting banners correctly I see that same escape sequence,
+> now that I know what I'm looking for/at.
+
+I see it all over CI as well. We also have [1].
+
+>
+> All of that said, if it's not a pytest-consuming-the-console problem
+> (and it's not a picocom problem, like I was just asking about since the
+> board failure in question was via labgrid-client), maybe it's just a
+> thing to note about making sure tests understand. And perhaps document
+> somewhere why it matters (and I'm not saying it doesn't!) that we know
+> what the dimensions of the console are, for EFI, and so that's why we
+> init them when/where we do.
+
+Or perhaps just have a way to turn it off? I first sent this patch
+last November. It is just wrong to generate output like this which we
+don't want. There isn't even a test for it, so just add a way to
+disable it, and be done!
+
+Regards,
+SImon
+
+[1] https://patchwork.ozlabs.org/project/uboot/patch/20240329160922.127095-1-heinrich.schuchardt@canonical.com/
