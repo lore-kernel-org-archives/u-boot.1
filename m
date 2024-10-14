@@ -4,84 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 083DDD18148
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 21:05:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A38DD18148
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 21:05:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E453389174;
-	Mon, 14 Oct 2024 23:05:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BF26C890E4;
+	Mon, 14 Oct 2024 23:05:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZcXoMBQq";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fPnW088K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6301689178; Mon, 14 Oct 2024 23:05:01 +0200 (CEST)
-Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
- [IPv6:2607:f8b0:4864:20::835])
+ id A468E8907F; Mon, 14 Oct 2024 23:05:31 +0200 (CEST)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F0DEC89170
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 23:04:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 868DE89143
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 23:05:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x835.google.com with SMTP id
- d75a77b69052e-460407b421bso37290761cf.3
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 14:04:58 -0700 (PDT)
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-6cbd1a4217dso50345166d6.2
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 14:05:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1728939898; x=1729544698; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1728939926; x=1729544726; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=gGuJSYKzSTlj8wLaqOTTVR4OyIjMgFOw4ceEat9DSAI=;
- b=ZcXoMBQqu94Up5ByTVIfJdsAFZh7yv2piOONR1GmmlPWg6JMpH0jKhIqJ1I+ELPW36
- jYgeTVmBSIz3OwqMVr0mLhjeIJWQFCSn5EhAVyvy+5Iyidj09PUPQ7NFSY47o2z5jiAC
- +DFTPab3+Zl7zP8EImr2fDp0oXpqvW6eMXtMU=
+ bh=aHx5Qp46dMY6yIs7hbjLv+pFZv7NLN7J8KE4HZSWRg8=;
+ b=fPnW088KSsENCyF1ACHbEctSeG+VAwv3o7r3Ul/KcE1HeS4vUd5RHIPJc53dvjPvJ8
+ Smc2poDhVsG/Ol113A1A9qeNd9r4TcJmz8dBIvL+RNsKSeBbV8H0VnlK5RTcq22/WJ1M
+ YNMe3DNsWhkziRmekcTQMB0IrJejeKJW025ro=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728939898; x=1729544698;
+ d=1e100.net; s=20230601; t=1728939926; x=1729544726;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gGuJSYKzSTlj8wLaqOTTVR4OyIjMgFOw4ceEat9DSAI=;
- b=RNE0Qtcx6emn1qvPaF31H0I76C2bqdy0t60Q0wvPrIyYzNwTrp/9MkYyaZWHtD5i9N
- sBWjsv+RbD5zxFePKOTu76PMW0Zg0vx5kOhcPdKrdX8GeWWdiUvQ5t0ty4S4GyCmwQ2P
- 4keRMvacZXcAHf0oqdLznKBDEcihVK1kHY5YhIZAFCFzXtH9+INvDJ1tpZuGW86sWhbR
- pD5mnoX5noY9/eUcvBuirC0khhouS5Fmk7SRJ0/Gyw4OcmZs+pSUb+8/69SRL5ZiUmdT
- cbXnNnPJ/YCcJrpjU3IGmLOUEaEPpvQ7xfmTiGRPr9V8AGO4UPa+KUcJ9tC4v/4IvmYN
- tq/g==
+ bh=aHx5Qp46dMY6yIs7hbjLv+pFZv7NLN7J8KE4HZSWRg8=;
+ b=jOnPsOgRENP9yj3wkXh5ULc059Kti1OeGlk6nlADytTqQO1HeD543cmRov6piPbF/D
+ UjzuCtVjlta7pZ75eP7ErKDyi12JeWq3GbKXTYHhg7Kbkl3b6lCswXKIpQZfE/6Mv4cF
+ neVeQsNWdD2mczmppC+BiOkuy7AtG6R71xM8AlyT6AqlW89DzdyVnbcMOAOEbcX39So3
+ NtrZ9sqviWuW33Jqn2RbZJxdK01mlIM2yNTpGtEP3e6VPbUS0afCtnYG60a/OMAv/cvh
+ cwqLEC7PFsAnWzITNOI/TLHc7fnPhsUBhBBYwZyf7v5Ui6zENJpN2YP+GODL+3xJox1f
+ Fpjg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUPgutJlv+4mRjn7hsucTiM2ymaFKs5aG59WDM8Di5kluN/3/XlF9u+i8CpBgScXixsjbmw+eI=@lists.denx.de
-X-Gm-Message-State: AOJu0YxpNOhjlDvWciFpFWYDlAszzKw+VEdMwuh2oH8xfDjiXqMs9nra
- gryrdiBI7JiByzo8zuv0NiXePq3GXc32o2zH+UjFK1Tta0plgaj3De6rZ8K3CBY=
-X-Google-Smtp-Source: AGHT+IGZ7MxZrv+4wxYWBlas08YKZ45G36uEJYNerTPvum5ATpPaR2DnZCHrl5GpAEe4qRDF7xFZUg==
-X-Received: by 2002:ac8:584c:0:b0:45d:8e45:762b with SMTP id
- d75a77b69052e-4604bb96254mr210918891cf.10.1728939897740; 
- Mon, 14 Oct 2024 14:04:57 -0700 (PDT)
+ AJvYcCUsRNVd1mcDvqRtfIAaEEIPW1e20AmjOEojGafVrkC7b87Ln4izicAHyRmAvCVFAq37KozXGtE=@lists.denx.de
+X-Gm-Message-State: AOJu0YxEzKRUdyLXjeYUO3yNa0rDdTiS4Aqxyjmp61syrUamEkyuJ3gL
+ tiQ+nuVIzxwrbm9L7kT7PCi7f/mNr+Xo9H/67jTghVelT8mHiE0XavI218i049Y=
+X-Google-Smtp-Source: AGHT+IF1FmHiPeErJpTcgC/luB7Qxe+t0bFuGuqcb88EeeEbXB7I8i+27RAFRCK5NsDh275aCf5SOA==
+X-Received: by 2002:a05:6214:3b83:b0:6c5:1fe5:f84c with SMTP id
+ 6a1803df08f44-6cbf9d08a54mr121865486d6.20.1728939926345; 
+ Mon, 14 Oct 2024 14:05:26 -0700 (PDT)
 Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-46042894150sm48799491cf.85.2024.10.14.14.04.55
+ 6a1803df08f44-6cbe8608c0esm49998646d6.85.2024.10.14.14.05.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Oct 2024 14:04:56 -0700 (PDT)
-Date: Mon, 14 Oct 2024 15:04:53 -0600
+ Mon, 14 Oct 2024 14:05:24 -0700 (PDT)
+Date: Mon, 14 Oct 2024 15:05:20 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Caleb Connolly <caleb.connolly@linaro.org>, Jonas Karlman <jonas@kwiboo.se>
-Subject: Re: [PATCH v3 03/15] efi: memory: use the lmb API's for allocating
- and freeing memory
-Message-ID: <20241014210453.GU53053@bill-the-cat>
-References: <20241013105522.391414-1-sughosh.ganu@linaro.org>
- <20241013105522.391414-4-sughosh.ganu@linaro.org>
- <CAFLszTiov914NOS9_5UU4oLi0fCQ84a-Et82BeSEJbts4MEOVQ@mail.gmail.com>
- <20241014155642.GO53053@bill-the-cat>
- <CAFLszThVP_OgyTt_ksJ1_7HAHT+K-wcixWB+k+fmzAjh6+5Bmg@mail.gmail.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de, Sumit Garg <sumit.garg@linaro.org>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Jonas Karlman <jonas@kwiboo.se>,
+ Lothar Rubusch <l.rubusch@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Stefano Babic <sbabic@denx.de>, u-boot@dh-electronics.com
+Subject: Re: [PATCH v2] dts: Deduplicate dtbs target
+Message-ID: <20241014210520.GV53053@bill-the-cat>
+References: <20241004001118.322531-1-marex@denx.de>
+ <CAFLszTiMNeU__kzyRR-3qKPUUKaXEqaypf8YYQgxL83E-2gt3g@mail.gmail.com>
+ <CAOMZO5Cp3TUdMFYfBSm-k49mS_xaOtvpGwqoQH+eCjC5eCfpbw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="1NQ/Qwp9IfGzQIa8"
+ protocol="application/pgp-signature"; boundary="AP9KnRae/m+GIDEM"
 Content-Disposition: inline
-In-Reply-To: <CAFLszThVP_OgyTt_ksJ1_7HAHT+K-wcixWB+k+fmzAjh6+5Bmg@mail.gmail.com>
+In-Reply-To: <CAOMZO5Cp3TUdMFYfBSm-k49mS_xaOtvpGwqoQH+eCjC5eCfpbw@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,75 +103,54 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---1NQ/Qwp9IfGzQIa8
-Content-Type: text/plain; charset=us-ascii
+--AP9KnRae/m+GIDEM
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 14, 2024 at 01:13:17PM -0600, Simon Glass wrote:
+On Mon, Oct 14, 2024 at 04:08:23PM -0300, Fabio Estevam wrote:
+
 > Hi Tom,
 >=20
-> On Mon, 14 Oct 2024 at 09:56, Tom Rini <trini@konsulko.com> wrote:
+> On Mon, Oct 7, 2024 at 12:23=E2=80=AFPM Simon Glass <sjg@chromium.org> wr=
+ote:
 > >
-> > On Mon, Oct 14, 2024 at 09:50:37AM -0600, Simon Glass wrote:
-> > > Hi Sughosh,
+> > On Thu, 3 Oct 2024 at 18:11, Marek Vasut <marex@denx.de> wrote:
 > > >
-> > > On Sun, 13 Oct 2024 at 04:55, Sughosh Ganu <sughosh.ganu@linaro.org> =
-wrote:
-> > > >
-> > > > Use the LMB API's for allocating and freeing up memory. With this, =
-the
-> > > > LMB module becomes the common backend for managing non U-Boot image
-> > > > memory that might be requested by other modules.
-> > > >
-> > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > > ---
-> > > > Changes since V2:
-> > > > * Use map_to_sysmem() to get the user-visible address to be shared
-> > > >   with the lmb API's for sandbox.
-> > > >
-> > > >  lib/efi_loader/Kconfig      |  1 +
-> > > >  lib/efi_loader/efi_memory.c | 77 +++++++++++----------------------=
-----
-> > > >  2 files changed, 24 insertions(+), 54 deletions(-)
+> > > The dtbs: target is almost identical in all architecture Makefiles.
+> > > All architecture Makefiles include scripts/Makefile.dts . Deduplicate
+> > > the dtbs: target into scripts/Makefile.dts . No functional change.
 > > >
-> > > When efi_init_obj() is called, it should be able to add the lmb memory
-> > > to its own tables. There is no need to worry about lmb after that,
-> > > since no other images will be loaded, except under EFI's control. Then
-> > > perhaps you don't need this patch?
-> >
-> > But that's not true. The EFI application can return us to the U-Boot
-> > prompt.
+> > > Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
+> > > Signed-off-by: Marek Vasut <marex@denx.de>
 >=20
-> Can you finish that thought? What are you getting at?
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+>=20
+> I have some patches in my queue that depend on this one.
+>=20
+> Could you apply it if you are happy with it?
 
-Your assumption is false. As Heinrich followed up with, there are plenty
-of common cases, including *env* where efi_init_obj() is called and then
-the user can still do whatever they like via bootm. There is a need to
-worry about it. Trying to make an artificial distinction here
-complicates matters. Much more so than adjusting our almost non-existent
-documentation about memory map / layout to say that this EFI related
-data *is* U-Boot.
+Yes, I'll pick it up soon.
 
 --=20
 Tom
 
---1NQ/Qwp9IfGzQIa8
+--AP9KnRae/m+GIDEM
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcNh2wACgkQFHw5/5Y0
-tyxDwQv8DCvoplU9aSzCinAMIjnr9j5XZ0PbwGMOksgiEFB87bD+d6ZEj+Ttq5o5
-DdwSZ0saiSLvbjs6olW7McG3+y7LR+Kw4JAkGx/7uL9+zWVrLA+eda1wRADkhKaZ
-3MdzmZL8ymp513u30Gs5jY2mw4lnispaXJNj1HAs7VK0G9AgSwkpBqJkkQgYXqsB
-1zq8lrL2/ttYdhDO57Ia/XPPom2vtj5oPfrjNsAGaGWmUVqQbBmYLdahnQ9HHPPF
-6GKDEPvRgK2/sSNwh09CdwTso+XyJYmphSrlVk43uGYpDnAMZ0nDebclQ7Lrr6ld
-fvOEo7tJgTqHO0wQ4wSWQV94pa5ThCY2H7xwsMeWhzMeR6RcmJI3Y0hg8HiJLyuL
-JsCnJBPiWeWvAGdGIDmRPec8GnvTGRAflZ/1q/rOXsrkSz9TsEXfcNpc+mHBVyih
-A4UtqwGzL70MOt/Ztqp7AsKuyk3zxOdgC8twhjf/aby7ftlXj3HIUDT1R5oNNaAc
-A7WvWwtj
-=SwMo
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcNh5AACgkQFHw5/5Y0
+tyyPgAv9ESmWZ5uP7TuLR73624SCXYYud2cqvRR4PdtemTgcRAihRwVN1JGxBL8q
+FAOIlSgs7B3JnHkxX3QGqSLMhDjpzWHGh2SRXZXlYVv/DIH6D606mQ09cVfKtcZN
+dWfj2qzKTAtk3PxVOguCRK8PhZKrfSaaam4nEsgrHqY0ppehDvSlTOdbnOSL7WvI
+cmQfFGJw7SgmYRkYxIU5U+0hm6BFOl/o0iqqzO5ZFopiY3oB9wAk/v5SGvG3KiTB
+niQAGLbWU0osZgyUPu+AMx+1kG5bx+F8lJW+/RrB5kJjO6ej5u4OGYQ7tq7poRD1
+XgaiFSiviNz1VjuYetTZ45RvHoKAOwtSN0LTiVYSQwjktvklc7zW2E1IwB4fxtxA
+ONqbAdZgpqjMamUN5I2uTx/JstLmbSXrbTCAPub1BCMuXSI9o7PnScaJjEY1DjHI
+RBV1SreF1+SFoH2XKjxLYawz0ahO6ehuaZDMIIgU5PpdwyofNxWbzKPlJ3drWWru
++2mTFsTq
+=nbsr
 -----END PGP SIGNATURE-----
 
---1NQ/Qwp9IfGzQIa8--
+--AP9KnRae/m+GIDEM--
