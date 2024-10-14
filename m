@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D690D1812A
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 15:53:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75AA4D18129
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 15:54:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D482D891F5;
-	Mon, 14 Oct 2024 17:51:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4500E89205;
+	Mon, 14 Oct 2024 17:51:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="R9kTaMlk";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JXT+yp/p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C391891B2; Mon, 14 Oct 2024 17:51:19 +0200 (CEST)
-Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
- [IPv6:2607:f8b0:4864:20::831])
+ id AD020891F3; Mon, 14 Oct 2024 17:51:20 +0200 (CEST)
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
+ [IPv6:2607:f8b0:4864:20::f2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D3B389207
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 17:51:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A1FF3891EF
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 17:51:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qt1-x831.google.com with SMTP id
- d75a77b69052e-45f05a65398so35499551cf.1
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 08:51:17 -0700 (PDT)
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-6cbe3e99680so21774366d6.3
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 08:51:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728921075; x=1729525875; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1728921077; x=1729525877; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=j/jF5sQfAI49iBNSEvgavdab6ZqB/X8+e6/+ZCsCcQs=;
- b=R9kTaMlkxb/VEzMa0xiuEOdL0nkqxf97TGFjMAcfTi9AosB4lY1o4hoVQAiNkqVxA1
- wTXx3HVbUyY9DhAMlS8TeRpvIqF/ZNjZB7SgNzjyn0fCmuonSTrzPJH9K/hgB7Rz+Db1
- lBfO8gkP27lqz9vPdg1UJ8ZcGxeco6Bs9A+To=
+ bh=/CX4rTDqeVWYgajN/YMZoSOPMocwz4QN97zTBDM0XAY=;
+ b=JXT+yp/poBf/Fl2qIwaIQK+rhQnfwF3y17nK0t1BDE3MYjNKDCkpWXod9a+NyOgSqw
+ tqN3x020HiWfyFdfST8NaEI3GBir7QizYuuWNhhDBEXYGn1K29X0G6sOMznLjg0NzBdv
+ o2Yco2hhMqJffUJg8pVtKEiwUWYr+fHAPZgTg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728921075; x=1729525875;
+ d=1e100.net; s=20230601; t=1728921077; x=1729525877;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=j/jF5sQfAI49iBNSEvgavdab6ZqB/X8+e6/+ZCsCcQs=;
- b=vAxI67qClpY5H1Ws5joKXpzWY5uHjF4Rr4mLnGjZdHiBXo1Dd3IxYn0WTTgsxRl/sd
- rWc+Qi7vUp7zlwPFkzN4zKhneR9RsEXjLLyoCN1qEde/7ExU9hWjHvHh7nRdL30o6MIw
- lhW/JT+zR0Uu5Jw48SAG6VBo0pz8SRCml6oYJC+BdFhYHYD8M/i94St8n80cWwtlcKit
- ONh316auVQJ9khpV4HuIgS2jTKTl6LV+4Cadyy4rE6LqDIggmN8maFEY9z01ihZs9gaV
- 7BuRqYBASq5zXDWb/r5d0OTCkdYbG3+nGX2LeQ0vuSKK/uqwLTJlP6+VJF/8ciAWoQKu
- +sHg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWyvMPYycZcsOulJpSgsFDjNwSxYHuKYvO1hpTKgkJKaR7mTV2orXmrRXZF8HDlT6vSutFQxS4=@lists.denx.de
-X-Gm-Message-State: AOJu0YwiduDt17FmuTe86F6/zuIBB+Y40ApHZ9IQuEXF7Tty/BCymSx3
- HVuOohlGla9PRRJsz2zojBQS3Fu+bTsuwZaw/tv50xlshdif/wNRWhl3PBjB6n5Mc8XNqtKumXi
- 5jTXDbR/iYoq0n4MuiINdmAMxE6y7sA122Xtz
-X-Google-Smtp-Source: AGHT+IHDymD0xofP8BCKyUPJGR/EUoUlF7KYushYu/ZZddtzDHtC2StUXKoYi7XoO+s9y8NZTJgqKP5XAZ5s1r5HQFI=
-X-Received: by 2002:a05:6214:451e:b0:6cb:ee7b:7abd with SMTP id
- 6a1803df08f44-6cbf0099ad0mr179452506d6.27.1728921075563; Mon, 14 Oct 2024
- 08:51:15 -0700 (PDT)
+ bh=/CX4rTDqeVWYgajN/YMZoSOPMocwz4QN97zTBDM0XAY=;
+ b=BQA61BErsatEeiCLZTaXuiJv3PgQdK1JHRct9gyDXPuadKy8pyqu9RQmGFTsOJbdNK
+ ZnSRzAGqw3GuRF/DplRKyuZQckjidelTx7nbhwNEnNc818n6Ag+oTZSBmzKRfxqQr+y7
+ 2sv6Zidpd1PIPCY+cQAryswl1kxyEE4ubqYtBZTCpYsobhDZ4q6gfTLUozyou9Gg1bEo
+ eQxqsKU2K+WfDUpyQh8HuJVxvxndJQoy30jrg3/j9/T10v/Owp7Huv9gXM74+x3sYdNp
+ MOyqKq2gKSLcQNLbYzr8fjlGy2YxjlKbQgTfl6dXrf3UG9FKELI4TPCQiU/46t7P3dxx
+ Zd/Q==
+X-Gm-Message-State: AOJu0Yz72awoiosd8Z7JIR+lVv7pJocOwLTxpX3zUJMG9wRK98lo7Yrc
+ qyfaMC/G3158N4Ka1dWQIoJ+Kmb770E37S+OB2XfewAiOWNcS4OoQaaxfli1vP0FW7mKpRaJzvC
+ V9cf8Pvh6W09ld6gm5Yt4adihQtkWk0szIOV+
+X-Google-Smtp-Source: AGHT+IGmpfk58l4aJQ0RxVxlDEIo/tQJ3jqOCyROODJ7Lf9+YqOt5GEsCIVnChqfmmm3wG6IZmp9mT22Oxi7PJJUKRo=
+X-Received: by 2002:a05:6214:3f89:b0:6cb:c72d:6861 with SMTP id
+ 6a1803df08f44-6cbeffa7607mr155682496d6.14.1728921077510; Mon, 14 Oct 2024
+ 08:51:17 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241008204614.56215-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20241008204614.56215-1-heinrich.schuchardt@canonical.com>
+References: <20241014131152.267405-1-patrick.rudolph@9elements.com>
+ <20241014131152.267405-15-patrick.rudolph@9elements.com>
+In-Reply-To: <20241014131152.267405-15-patrick.rudolph@9elements.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 14 Oct 2024 09:51:05 -0600
-Message-ID: <CAFLszTjo=rgvRketvyEHKw9ARZk3kA83HRwXgUQNLKpdvww=Eg@mail.gmail.com>
-Subject: Re: [PATCH 1/1] boot: type boormethod
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Date: Mon, 14 Oct 2024 09:51:07 -0600
+Message-ID: <CAFLszTgVd7RjgWsy4OtdM9L5898Rcs-SP_4Qmgyf95KBRg1+iA@mail.gmail.com>
+Subject: Re: [PATCH v8 14/37] acpi: Allocate and write ACPI tables
+To: Patrick Rudolph <patrick.rudolph@9elements.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,21 +82,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
-
-On Tue, 8 Oct 2024 at 14:46, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Mon, 14 Oct 2024 at 07:12, Patrick Rudolph
+<patrick.rudolph@9elements.com> wrote:
 >
-> %s/boormethod/bootmethod/
-
-Actually is should be bootmeth now. I am trying to use that consistently.
-
+> Allocate memory for ACPI tables in generic acpi code. When ACPI wasn't
+> installed in other places, install the ACPI table using BLOBLISTs.
 >
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> This allows non x86 platforms to boot using ACPI only in case the
+> EFI loader is being used, since EFI is necessary to advertise the location
+> of the ACPI tables in memory.
+>
+> TEST: Booted QEMU SBSA (no QFW) using EFI and ACPI only.
+>
+> Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Tom Rini <trini@konsulko.com>
 > ---
->  boot/bootstd-uclass.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> Changelog v8:
+> - Only use bloblist to store tables on arm
 >
+> ---
+>  lib/acpi/acpi_table.c            | 66 +++++++++++++++++++++++++++++++-
+>  test/py/tests/test_event_dump.py |  1 +
+>  2 files changed, 66 insertions(+), 1 deletion(-)
 
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Thank you
