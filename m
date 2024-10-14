@@ -4,20 +4,20 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63303CFC534
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 09:56:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD519CFC52F
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 09:56:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6CD689089;
-	Mon, 14 Oct 2024 11:56:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4000989098;
+	Mon, 14 Oct 2024 11:56:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=aspeedtech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3A968907E; Mon, 14 Oct 2024 11:56:26 +0200 (CEST)
+ id C8DB589078; Mon, 14 Oct 2024 11:56:27 +0200 (CEST)
 Received: from TWMBX01.aspeed.com (mail.aspeedtech.com [211.20.114.72])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A051989070
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 11:56:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4EA2B89082
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 11:56:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=aspeedtech.com
 Authentication-Results: phobos.denx.de;
@@ -31,9 +31,9 @@ Received: from mail.aspeedtech.com (192.168.10.152) by TWMBX01.aspeed.com
  Transport; Mon, 14 Oct 2024 17:56:20 +0800
 From: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
 To: <trini@konsulko.com>, <sjg@chromium.org>, <u-boot@lists.denx.de>
-Subject: [PATCH v3 2/3] image-fit-sig: Remove padding check
-Date: Mon, 14 Oct 2024 17:56:19 +0800
-Message-ID: <20241014095620.216936-3-chiawei_wang@aspeedtech.com>
+Subject: [PATCH v3 3/3] drivers/crypto: aspeed: Add Caliptra ECDSA384 support
+Date: Mon, 14 Oct 2024 17:56:20 +0800
+Message-ID: <20241014095620.216936-4-chiawei_wang@aspeedtech.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241014095620.216936-1-chiawei_wang@aspeedtech.com>
 References: <20241014095620.216936-1-chiawei_wang@aspeedtech.com>
@@ -56,33 +56,238 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The padding algorithm is not mandatory for all signing algorithm.
-For example, ECDSA does not require a padding method.
+Aspeed AST27xx SoCs integrate the CPTRA 1.0 secure IP, which export
+an ECDSA384_SIGNATURE_VERIFY mailbox command service for SoC to use.
 
-For RSA requiring PKCS padding, the belonging info->crypto(), assigned
-with rsa_verify_key(), also has the check on the validity of info->padding().
-
-Thus, remove the info->padding check from the upper, general layer.
+This patch is verified by the FIT signature verification using the
+"sha384,ecdsa384" algorithm.
 
 Signed-off-by: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- boot/image-fit-sig.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/crypto/aspeed/Kconfig       |  10 ++
+ drivers/crypto/aspeed/Makefile      |   1 +
+ drivers/crypto/aspeed/cptra_ecdsa.c | 184 ++++++++++++++++++++++++++++
+ 3 files changed, 195 insertions(+)
+ create mode 100644 drivers/crypto/aspeed/cptra_ecdsa.c
 
-diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
-index 35873b1fb0e..a121de60ae2 100644
---- a/boot/image-fit-sig.c
-+++ b/boot/image-fit-sig.c
-@@ -95,7 +95,7 @@ static int fit_image_setup_verify(struct image_sign_info *info,
- 	info->required_keynode = required_keynode;
- 	printf("%s:%s", algo_name, info->keyname);
+diff --git a/drivers/crypto/aspeed/Kconfig b/drivers/crypto/aspeed/Kconfig
+index 473e3e5a863..6efcd7da738 100644
+--- a/drivers/crypto/aspeed/Kconfig
++++ b/drivers/crypto/aspeed/Kconfig
+@@ -28,3 +28,13 @@ config ASPEED_CPTRA_SHA
  
--	if (!info->checksum || !info->crypto || !info->padding) {
-+	if (!info->checksum || !info->crypto) {
- 		*err_msgp = "Unknown signature algorithm";
- 		return -1;
- 	}
+ 	  Enabling this allows the use of SHA operations in hardware. Note that only
+ 	  SHA384 and SHA512 are supported by Caliptra 1.0.
++
++config ASPEED_CPTRA_ECDSA
++	bool "Caliptra ECDSA384 signature verifier for Aspeed SoCs"
++	depends on ECDSA_VERIFY || SPL_ECDSA_VERIFY
++	help
++	  Select this option to enable a driver for using the ECDSA384_SIGNATURE_VERIFY
++	  feature of Caliptra, which is integrated in AST27xx BMC SoCs.
++
++	  Enabling this allows the use of ECDSA384 signature verification in hardware.
++	  Note that only ECDSA384 is supported by Caliptra.
+diff --git a/drivers/crypto/aspeed/Makefile b/drivers/crypto/aspeed/Makefile
+index 570587e744f..00def358ddf 100644
+--- a/drivers/crypto/aspeed/Makefile
++++ b/drivers/crypto/aspeed/Makefile
+@@ -1,3 +1,4 @@
+ obj-$(CONFIG_ASPEED_HACE) += aspeed_hace.o
+ obj-$(CONFIG_ASPEED_ACRY) += aspeed_acry.o
+ obj-$(CONFIG_ASPEED_CPTRA_SHA) += cptra_sha.o
++obj-$(CONFIG_ASPEED_CPTRA_ECDSA) += cptra_ecdsa.o
+diff --git a/drivers/crypto/aspeed/cptra_ecdsa.c b/drivers/crypto/aspeed/cptra_ecdsa.c
+new file mode 100644
+index 00000000000..4b70d89def7
+--- /dev/null
++++ b/drivers/crypto/aspeed/cptra_ecdsa.c
+@@ -0,0 +1,184 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * Copyright 2024 ASPEED Technology Inc.
++ */
++#include <asm/io.h>
++#include <config.h>
++#include <crypto/ecdsa-uclass.h>
++#include <dm.h>
++#include <linux/bitfield.h>
++#include <linux/bitops.h>
++#include <linux/iopoll.h>
++#include <malloc.h>
++#include <u-boot/ecdsa.h>
++
++/* SCU register offsets */
++#define SCU1_CPTRA				0x130
++#define   SCU1_CPTRA_RDY_FOR_RT	BIT(18)
++
++/* CPTRA MBOX register offsets */
++#define CPTRA_MBOX_LOCK			0x00
++#define CPTRA_MBOX_USER			0x04
++#define CPTRA_MBOX_CMD			0x08
++#define CPTRA_MBOX_DLEN			0x0c
++#define CPTRA_MBOX_DATAIN		0x10
++#define CPTRA_MBOX_DATAOUT		0x14
++#define CPTRA_MBOX_EXEC			0x18
++#define CPTRA_MBOX_STS			0x1c
++#define   CPTRA_MBOX_STS_SOC_LOCK	BIT(9)
++#define   CPTRA_MBOX_STS_FSM_PS		GENMASK(8, 6)
++#define   CPTRA_MBOX_STS_PS		GENMASK(3, 0)
++#define CPTRA_MBOX_UNLOCK		0x20
++
++#define CPTRA_ECDSA_SIG_LEN	96	/* ECDSA384 */
++#define CPTRA_ECDSA_SHA_LEN	48	/* SHA384 */
++
++#define CPTRA_MBCMD_ECDSA384_SIGNATURE_VERIFY	0x53494756
++
++enum cptra_mbox_sts {
++	CPTRA_MBSTS_CMD_BUSY,
++	CPTRA_MBSTS_DATA_READY,
++	CPTRA_MBSTS_CMD_COMPLETE,
++	CPTRA_MBSTS_CMD_FAILURE,
++};
++
++enum cptra_mbox_fsm {
++	CPTRA_MBFSM_IDLE,
++	CPTRA_MBFSM_RDY_FOR_CMD,
++	CPTRA_MBFSM_RDY_FOR_DLEN,
++	CPTRA_MBFSM_RDY_FOR_DATA,
++	CPTRA_MBFSM_EXEC_UC,
++	CPTRA_MBFSM_EXEC_SOC,
++	CPTRA_MBFSM_ERROR,
++};
++
++struct cptra_ecdsa {
++	void *regs;
++};
++
++static uint32_t mbox_csum(uint32_t csum, uint8_t *data, uint32_t dlen)
++{
++	uint32_t i;
++
++	for (i = 0; i < dlen; ++i)
++		csum -= data[i];
++
++	return csum;
++}
++
++static int cptra_ecdsa_verify(struct udevice *dev, const struct ecdsa_public_key *pubkey,
++			      const void *hash, size_t hash_len,
++			      const void *signature, size_t sig_len)
++{
++	struct cptra_ecdsa *ce;
++	uint8_t *x, *y, *r, *s;
++	uint32_t cmd, csum;
++	uint32_t reg, sts;
++	uint32_t *p32;
++	int i;
++
++	if (hash_len != CPTRA_ECDSA_SHA_LEN || sig_len != CPTRA_ECDSA_SIG_LEN)
++		return -EINVAL;
++
++	if ((strcmp(pubkey->curve_name, "secp384r1") && strcmp(pubkey->curve_name, "prime384v1")) ||
++	    pubkey->size_bits != ((CPTRA_ECDSA_SIG_LEN / 2) << 3))
++		return -EINVAL;
++
++	ce = dev_get_priv(dev);
++
++	/* get CPTRA MBOX lock */
++	if (readl_poll_timeout(ce->regs + CPTRA_MBOX_LOCK, reg, reg == 0, 1000000))
++		return -EBUSY;
++
++	/* check MBOX is ready for command */
++	sts = readl(ce->regs + CPTRA_MBOX_STS);
++	if (FIELD_GET(CPTRA_MBOX_STS_FSM_PS, sts) != CPTRA_MBFSM_RDY_FOR_CMD)
++		return -EACCES;
++
++	/* init mbox parameters */
++	cmd = CPTRA_MBCMD_ECDSA384_SIGNATURE_VERIFY;
++	csum = 0;
++	x = (uint8_t *)pubkey->x;
++	y = (uint8_t *)pubkey->y;
++	r = (uint8_t *)signature;
++	s = (uint8_t *)signature + (CPTRA_ECDSA_SIG_LEN / 2);
++
++	/* calculate checksum */
++	csum = mbox_csum(csum, (uint8_t *)&cmd, sizeof(cmd));
++	csum = mbox_csum(csum, x, CPTRA_ECDSA_SIG_LEN / 2);
++	csum = mbox_csum(csum, y, CPTRA_ECDSA_SIG_LEN / 2);
++	csum = mbox_csum(csum, r, CPTRA_ECDSA_SIG_LEN / 2);
++	csum = mbox_csum(csum, s, CPTRA_ECDSA_SIG_LEN / 2);
++
++	/* write command, data length */
++	writel(cmd, ce->regs + CPTRA_MBOX_CMD);
++	writel(sizeof(csum) + (CPTRA_ECDSA_SIG_LEN << 1), ce->regs + CPTRA_MBOX_DLEN);
++
++	/* write ECDSA384_SIGNATURE_VERIFY command parameters */
++	writel(csum, ce->regs + CPTRA_MBOX_DATAIN);
++
++	for (i = 0, p32 = (uint32_t *)x; i < ((CPTRA_ECDSA_SIG_LEN / 2) / sizeof(*p32)); ++i)
++		writel(p32[i], ce->regs + CPTRA_MBOX_DATAIN);
++
++	for (i = 0, p32 = (uint32_t *)y; i < ((CPTRA_ECDSA_SIG_LEN / 2) / sizeof(*p32)); ++i)
++		writel(p32[i], ce->regs + CPTRA_MBOX_DATAIN);
++
++	for (i = 0, p32 = (uint32_t *)r; i < ((CPTRA_ECDSA_SIG_LEN / 2) / sizeof(*p32)); ++i)
++		writel(p32[i], ce->regs + CPTRA_MBOX_DATAIN);
++
++	for (i = 0, p32 = (uint32_t *)s; i < ((CPTRA_ECDSA_SIG_LEN / 2) / sizeof(*p32)); ++i)
++		writel(p32[i], ce->regs + CPTRA_MBOX_DATAIN);
++
++	/* trigger mbox command */
++	writel(0x1, ce->regs + CPTRA_MBOX_EXEC);
++
++	/* poll for result */
++	while (1) {
++		sts = FIELD_GET(CPTRA_MBOX_STS_PS, readl(ce->regs + CPTRA_MBOX_STS));
++		if (sts != CPTRA_MBSTS_CMD_BUSY)
++			break;
++	}
++
++	/* unlock mbox */
++	writel(0x0, ce->regs + CPTRA_MBOX_EXEC);
++
++	return (sts == CPTRA_MBSTS_CMD_FAILURE) ? sts : 0;
++}
++
++static int cptra_ecdsa_probe(struct udevice *dev)
++{
++	struct cptra_ecdsa *ce = dev_get_priv(dev);
++
++	ce->regs = (void *)devfdt_get_addr(dev);
++	if (ce->regs == (void *)FDT_ADDR_T_NONE) {
++		debug("cannot map Caliptra mailbox registers\n");
++		return -EINVAL;
++	}
++
++	return 0;
++}
++
++static int cptra_ecdsa_remove(struct udevice *dev)
++{
++	return 0;
++}
++
++static const struct ecdsa_ops cptra_ecdsa_ops = {
++	.verify = cptra_ecdsa_verify,
++};
++
++static const struct udevice_id cptra_ecdsa_ids[] = {
++	{ .compatible = "aspeed,ast2700-cptra-ecdsa" },
++	{ }
++};
++
++U_BOOT_DRIVER(aspeed_cptra_ecdsa) = {
++	.name = "aspeed_cptra_ecdsa",
++	.id = UCLASS_ECDSA,
++	.of_match = cptra_ecdsa_ids,
++	.ops = &cptra_ecdsa_ops,
++	.probe = cptra_ecdsa_probe,
++	.remove = cptra_ecdsa_remove,
++	.priv_auto = sizeof(struct cptra_ecdsa),
++	.flags = DM_FLAG_PRE_RELOC,
++};
 -- 
 2.25.1
 
