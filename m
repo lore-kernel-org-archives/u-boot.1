@@ -4,158 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62BD8D1625E
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 12:45:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00E7BD1625B
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 12:55:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB6A788E50;
-	Mon, 14 Oct 2024 14:45:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 6D4DA88E69;
+	Mon, 14 Oct 2024 14:55:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="SuDwUFCF";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="Y6LaeuRv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E6E188E21; Mon, 14 Oct 2024 14:45:51 +0200 (CEST)
-Received: from EUR03-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur03on2062e.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260c::62e])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E273988EE3; Mon, 14 Oct 2024 14:55:18 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 68E1088F3F
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 14:45:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 0854788E21
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 14:55:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=QVYBWa2z46jqhUbNgMLf9lU+IIKdTFQKv0m0FwKBwcNzoPEoqWw2Zz/NoXzhBas4YTWBqeXA7/rgPCxPX8vXUNFh6qbOFGZ8/xEGf7bEAO5HZOfrSZ/RPGm9dhVD/+T83m+Kw3ojqig35z4zsUyeQsjKtr2vRJPUriXmhhOAo5ISeQY9JlvG79AVxq2n5mF+VmiN/NX2HEnNH3ugnnJ+I7xu375mT/pXGSSLBentELFzrFVPcyuHyH9VfVwewdqimQ3U8Wy30zJyKbh1Ok/jQYHf31jt9FhQJd0dE2G6CZdM9Mk3iZvmdeWVE8xzVGhtCHhgjdBD/WPcBjkvToBVfg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=U11fQZIhbNPlYnu4w7IQ7FOWrFjIqmbkMlweIAHEBGo=;
- b=MJIlc3LU34x1Mvuy6lwquUxwxv+Ww+YEwGHgvHk3PqyUdFozAjO9Po4Z05+uVLj6VPZW8t6MoQbEYLKUx+WB2dmRKyTkVVQuo9QI6vrRz3zVlVewZMlGIiJOOrHfHD/in/Y7Redx4qUFDDRmXWy49mlVGpNj3yn3r2Z7KW61DTdVxhWSTNS+u6hmyqxaEgZ2Shaucdtn6c6PO+t9ZY3U4Aja5q3FxHxGzqQJSFtqRy4+dmnoEL5feH34IaWSTlgvBRJkYJP04q2gWX/wo5SgEBLAkcPRHFKZ2xPTu8+/qeXcstcB7PzfZmXD1UAds5Xrn5kNqQNHFo1R3ZAgxpzU5w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=U11fQZIhbNPlYnu4w7IQ7FOWrFjIqmbkMlweIAHEBGo=;
- b=SuDwUFCFkAHNEMDWXuvqLNVR2x60k/lTmvB91utJ2YenyhmEprmY5NnXIA3JaPcfhQz1+KW3foFqZ3vMt0//yLnNKvGIdjrzP5gCCNptVKBESbSe1ubmYUe3cyggogontcZwkhl/Rmtom/C3dFzgAvsHU5P2aN/9LOx+jy3IOOg=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by PAXPR04MB8607.eurprd04.prod.outlook.com (2603:10a6:102:21a::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8048.26; Mon, 14 Oct
- 2024 12:45:46 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a%7]) with mapi id 15.20.8048.020; Mon, 14 Oct 2024
- 12:45:46 +0000
-Message-ID: <ba067182-a114-4ba0-8e29-495b87293c3d@cherry.de>
-Date: Mon, 14 Oct 2024 14:45:45 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] doc: blkmap: Fix typo in command example
-To: Ken Kurematsu <k.kurematsu@nskint.co.jp>,
- Tobias Waldekranz <tobias@waldekranz.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: Masahiro Mizutani <m.mizutani@nskint.co.jp>,
- Yoshitaka Ikeda <ikeda@nskint.co.jp>
-References: <TYCP286MB233485B48812E07222B95435DB6A2@TYCP286MB2334.JPNP286.PROD.OUTLOOK.COM>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <TYCP286MB233485B48812E07222B95435DB6A2@TYCP286MB2334.JPNP286.PROD.OUTLOOK.COM>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR3P281CA0099.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:a1::16) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=34ac=RL=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1728910506;
+ bh=7nJXbVBCWMVx3JUX1R5nt2fI2V97KwN3ORTjh/ZiroU=;
+ b=Y6LaeuRv47zzTL20p0J3BsLgquM5Gzk95gWDopq1/IAlVW5MVzt5UKzl8xFWrYrbIhJJ//h07
+ vk9UaADwzP1pYUrpisqgaik1Wi4Rsy6QqnYFB9Ap3UiAPHFugkuCM9yQ+fJiBgWXg8Q0UHXqd9T
+ Mi8cKN+J215dULmmf2fYL1lQjykJfLIk0GlkmMnKVlpO1aUSwXo85xepYk4EAxcB7rpoagwI2Nn
+ KBvcPpFrcS3+XnwavLOdMes61YWJr0B/Q337vEyUQYAIaxihMbHLJ4Zenuv/jQnH0hKxJO1HAoq
+ WNoCWXZbeuPrYBSvv+BtoauEkhu379yrqsWaUFOGbwFw==
+Message-ID: <6aa8da3d-4b0e-4660-851b-23026c52953e@kwiboo.se>
+Date: Mon, 14 Oct 2024 13:19:25 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|PAXPR04MB8607:EE_
-X-MS-Office365-Filtering-Correlation-Id: 44766bd8-1514-46e5-0981-08dcec4e1fad
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?WWNrWXZKMWRRZnYyQ3Z1MHlJbFF6QTJzYk5sUHlVOGxWKzQ0akUvQkdRRjdP?=
- =?utf-8?B?eG1XaXpYdmdIaDlVWnFkdHRqYVVZb2cvTHNXdmRQN0ZibmRJSm92TkNOb1Bz?=
- =?utf-8?B?aFhYQkJuSnNLWlZnbXR1ZHYyL3Nha21mS2FhNjFzUmVmVGtURjRMQmo1TDQ2?=
- =?utf-8?B?djBsb01UQmVZTTBHaHVhUG5nYjg3UUp0SUFZV3hkSjRtMmJnZVoxQXlOckNU?=
- =?utf-8?B?L29Uc3VUMEVsc3d0N1IvbGJ1am0vUXNJS0d3cXIyUGxROWF3cndXZEQ1MkFQ?=
- =?utf-8?B?UXhuajI4YVpRa1p1R2oyWXFEY0FJcXNvODNrb01aN3llMmUyQXZMWDRxMUJS?=
- =?utf-8?B?NjJPUlUrRlJsbERLamJMK2xkaVV3b0RUbWtIL0ZDTXBZM1I2cnVRS0E1eUJZ?=
- =?utf-8?B?VlBxOE51elZSMVAxWVcxdTFKTUNYNk1mK01BaFpUbjJDMDdOQjVRVkdLa1Bv?=
- =?utf-8?B?RSsxSzNYMmFFUlhSU3o2bDhzWXJjRkU2alNyS3kwOVpITGEwdmNOcS9LendC?=
- =?utf-8?B?R1R3dTJjWklNUlBnbGI0SlpCekRnVUhWTzBVVlNsdGw1N25uenQwUnd5V29Q?=
- =?utf-8?B?N2ZjQW1yNk12TkhhS0VzenZnOVZQMUpwWjFTbUNnbFBRdVk1UXJPbm04UUZP?=
- =?utf-8?B?bHlPZWtlOTBlWm16ekk1MjVSc0FXVGZvb2Qrc2J1RC9OMEFxQ0ljc0tjWVpw?=
- =?utf-8?B?aWxyaWwzQnYvUHgrU2Z6alBEa2dwZjJlWTA2YldWOU5QRVUwN2tkZDBUL0c0?=
- =?utf-8?B?bHVxTlBDdDBMUm1oeFpkOHlnRjU3TUpqTk56STU2bG1FVVdlaXVMOTVyR0c2?=
- =?utf-8?B?aEw1c0dWYXNKMTNRYm1QaC8rcWYxU2R6TDNYVE83YXBHeXJRczNYd1lKSzFD?=
- =?utf-8?B?UklFbUx5RGhHUThla0JxQ0xMNm9qZ2paRGdFZ1VPQU8xUXV3Y1YxUlBIanpG?=
- =?utf-8?B?YXJqbE9uTTBpaWRzVUZGSDRVYzc1OVZKUlZRSHNrdG5kR0pCNVZ0ZGIxUFA2?=
- =?utf-8?B?RVcyeDRRL2ZlUUl6L1VpVEJkUkZtZ0orM2JnbjdHQVZ5S25URnhjQWEzZ3hV?=
- =?utf-8?B?ZmFONEtjUXBickVLbno3a0Z3YjdKMmx6TzhuT1B6NFBaTm9JdlBvbXlwOW52?=
- =?utf-8?B?RER0MzZkK3FmakVWSzh3V1l4a25ib1p1SGprbk1qd2ZCR3pyVVdDdnR1aWRz?=
- =?utf-8?B?VkJaRm1iN2Vvd3ZVYU80NVJBdFdaUUsyTkNVQ2p2TWg0UmhuWnA5a3FYTVV2?=
- =?utf-8?B?cmh5QlBmRVFwQTd5OGlrZnlWVTNrRkpQQ0NpcjFPalA4eHBwV3EzVUxxbytw?=
- =?utf-8?B?QTJEOXRVVC95by9ZVDI4c05xaGFBV2RxL0dPa3YyWHFuTmN2R3p2WjdKRDha?=
- =?utf-8?B?L3JucGpBdnRIc255OEVlMll4eERjRUptR2U4MGJ4UkZZRndZU3ZVWnNQcVQ0?=
- =?utf-8?B?ck5HcG9sOUI0aFMwVjUxSm9vM2thWXV6djljb2NmNzI1M3RUQjdRNkgvMjJj?=
- =?utf-8?B?NXdlNU1uSHNZWUNaYnFJajdyaXVhNFRnalU3T1lQdDV6WXZTZTR3cW54ZEdD?=
- =?utf-8?B?ME5ZVDdCUmsraG55c2VMcjNiMWVMbTJ5YkpSYjFuWjRyN2poMjFpZjhkUDNZ?=
- =?utf-8?B?SkUvNVg0Zlp1NlgrNWV3V3NoaWw3UlJCWTVDd0NkWE95TFYwdWpBZ2Q3S3kv?=
- =?utf-8?B?YjlxYVJjQnFWUmRYbDlkSjREanJUcGwvN3dsSlVFQkJGWG84WnJVUE9BPT0=?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?L243SDJmQjJwYzZsem1kb2gxS3MrdkdGL0crc0dwLzdVVWpUOTVxYXVjazBJ?=
- =?utf-8?B?NXBtNFZkWmhXUS9NRW1oT1NwdFV6c1NqTGMxUzlCdGdSc3JWbHdReDVqRlds?=
- =?utf-8?B?QzhvbjdzVVB2SFJOR1RtTk55dkZtMWNHdUl5M3EyVHIvYVo2L21xZlJsTlp2?=
- =?utf-8?B?ZitqSlZSaE9zOVlkUWp1bUFrZzM0NWNjYU5rOGZNMmlXS0tzQlhjRGQ5YkhC?=
- =?utf-8?B?ZE1lblBzb21EWmlXYTlQMjBWSmpaZHZDdUNKWGJpY25VQ1BuQm1zRGNSa2Q3?=
- =?utf-8?B?dVVneXVFK2lPYnJvUmgvckt5MnJjNjFsK3FiazZVZC9XSCtWSEFWSzFXcWFC?=
- =?utf-8?B?dVM0WHdFTGlRbFBnWS9vbW0vRk4yQUNCRVVPVmRmOGxsVEtrTnE1NFZYNGJ3?=
- =?utf-8?B?M2g4WS82b1NIZG1qbUNTY2R3L3N5L0QyaXVGUThqcnNtQjNmUDhzYldUeXZW?=
- =?utf-8?B?Z1ZybmdtKzRTSVRYK3puc2dhei9OM2owa0ZBSkE3eWhaNHcvZEZQR3NVcDg0?=
- =?utf-8?B?ZnB0MW55QjdjR2ZHMHY5TmlwcXNuazhwWG1pNUdteUxFUnpwcER2anVaMlhn?=
- =?utf-8?B?UVpHRThNM3hRL1BlbDV3a2U1cjRhM0FpQW5PbThxQzVwVk1GdVZScTYvdUtL?=
- =?utf-8?B?UXArQ0R3ME01M3VJeFJHTTl2dXlBNzFjSmd1NzFPOWQ3UnE2UzZ2dW1KQ2JN?=
- =?utf-8?B?WDJ1S0wrR1I4T3RJR2YrS2N1b05RNE1vYVBGemVDMk1ZZHJ0dFlNYVBTR2Vw?=
- =?utf-8?B?eXZkZms5MFIzSzh6SFJrU2F0UGtyRy9kaXhnYmo4ZnVvcUJOQVQ1MDZscUJB?=
- =?utf-8?B?OE8vYjVEbkRrdG9MbXRoakRYZ3Bnc3lqdFRSWXg3UWVrQ2pZSFV5cUxlVy9o?=
- =?utf-8?B?bVF2REdaWkdmZnk0V0RoRkxFY0dLM1dLVUJSblZWRk9tTVphbitmNHg1cUgr?=
- =?utf-8?B?Z1FBY3lLYzdNYXcvbWdSeW1iSXRQZmNxMlQ5Ykh6M0xSU2ZST1NmSGNTOFZy?=
- =?utf-8?B?cE0rb0FWdEYrcW5aaXU4eElDMWdJZnlEdm1CaHNSWU42dldOeEh6Z0FpZ05t?=
- =?utf-8?B?VVRkOUMvZGoybXhGZTJSc1NuNkZSRXJuMnhxWmhSOUJiZWVSM2szOXYzYlNN?=
- =?utf-8?B?c2ZidTNPVllKdWxaQmJ6alR6cUdKMVQ1Tk9EQVVOSGN3NmtOVTVvSWJLclo3?=
- =?utf-8?B?Zm1ENGszZjl5M0dDMHZGemJRZnMvc3RzOHlJSkc0YWFyYXhQdDRnRzA2RmVw?=
- =?utf-8?B?MXBRazlBZDFKa1ZaK3FvRlQzcG9peDN2a093dFFGMWQ4YzJ2QklRbERndnFW?=
- =?utf-8?B?azBtTjB6N0svNVZVeHJHRStXNEZPNXIva1pUbVVHcmxJU3FhbVZIU1QyZnZa?=
- =?utf-8?B?TDhGTlhLNVByR1hJZGgxcXBUOUxqZC9EdGg3WnhLbm5td1U0eFZLMjJHeTFZ?=
- =?utf-8?B?eUdHWDRFWWUwTUtWbld0eEt4STJtQmYrVVQ4NUtCWUIvVUFTNjhhY2EveEph?=
- =?utf-8?B?Mk5URTFVdmhlblZqclpoYmM5V3JGYjNMZml5MlVHOHpuTTFvUlhadUswTWEv?=
- =?utf-8?B?cnhTMWFPUWJMSVRiQmlXMkk5cnl2eVc2LytwTkFCNHJwWHVtUXpWMFRINWUw?=
- =?utf-8?B?YlRsZFhpY2d5eHFtbEZ0VTZnU2FnTGlrSWdQQmE2Vy9UWXZ1YkJBSE1JRTVp?=
- =?utf-8?B?RWtBQk9WYXc2ZWQ4aERXVDNWdXlHckh0Q1p0dFlHNDhrT2tDc044V082TGtH?=
- =?utf-8?B?b3VFMXdvRTgycU5wOTkwUWU3U2tYV2REYldxRGtrTk9kejBtdjlUUk9veU1s?=
- =?utf-8?B?Mm56SlVYSTRMbU5tWFJTM0RrQVNOQXNtWTA5cnVvM3lQQ0orbUhVUnJSZlJT?=
- =?utf-8?B?SXdFbzVxd1dsNk1kdHdZcVpvbTI4ZDREekkwcTFiRzhseFlzZFpTb1hCcS92?=
- =?utf-8?B?OTNsTDIrYmthb1c4ZEZHMG9PbTcwRUZHUlRHellDZ0hCVldnMXozc21TVWFh?=
- =?utf-8?B?QkdMVk5mU0Z2cHlNVWxzREtkK3FyU1BSNE01Zmo4ODZkU2tvUHBuMy9MZExH?=
- =?utf-8?B?WEJ5TVNCa3BtVkxTTnlGeGFVd3dBWFE2WFJoU0ZjNzJKcmw1cXloREtUSnhX?=
- =?utf-8?Q?2kgsegr2v9JrRCa9B+SnuX8qm?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 44766bd8-1514-46e5-0981-08dcec4e1fad
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Oct 2024 12:45:46.4396 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: LXzaTtB4CYEND16upN3nJ9X3M5fPC+6V9CsigSwPHPBUlcVI1u9YpmZQ5pBu9bC4RNzwJ7Vu9P00+v7yb8w12d5UU39cON+Jcza8YQcTAEc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8607
+User-Agent: Mozilla Thunderbird
+Subject: Re: [Regression] rk3588 failed to boot linux
+To: Sughosh Ganu <sughosh.ganu@linaro.org>, Andy Yan <andyshrk@163.com>
+Cc: trini@konsulko.com, u-boot@lists.denx.de, kever.yang@rock-chips.com
+References: <20241014094246.2944-1-andyshrk@163.com>
+ <CADg8p95OHEmAiVV9HgXeWuqW_CUR0-pvA_WjjCZkT5NFh06sWQ@mail.gmail.com>
+ <7e3d21e6.aaab.1928a9e34a7.Coremail.andyshrk@163.com>
+ <CADg8p97zZfT82zZCAraY-CyDhE7c88KoOvHZ1kUDj+4L8DHpww@mail.gmail.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <CADg8p97zZfT82zZCAraY-CyDhE7c88KoOvHZ1kUDj+4L8DHpww@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 207.246.76.47
+X-ForwardEmail-ID: 670cfe400f3927dd268b619d
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -172,16 +74,248 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ken,
-
-On 9/26/24 11:26 AM, Ken Kurematsu wrote:
-> [You don't often get email from k.kurematsu@nskint.co.jp. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+On 2024-10-14 13:00, Sughosh Ganu wrote:
+> On Mon, 14 Oct 2024 at 16:12, Andy Yan <andyshrk@163.com> wrote:
+>>
+>>
+>> Hi Suqhosh,
+>>
+>> At 2024-10-14 18:13:35, "Sughosh Ganu" <sughosh.ganu@linaro.org> wrote:
+>>> On Mon, 14 Oct 2024 at 15:12, Andy Yan <andyshrk@163.com> wrote:
+>>>>
+>>>> When test with current main branch on rk3588 based coolpi 4b,
+>>>> the board failed to boot linux os[0]:
+>>>> I do the same test on another board that is preparing to send
+>>>> patches upstream, and it also failed.
+>>>>
+>>>> The two boards boots fine with v2024.10.
+>>>> With some bisect, it seems that this issue is caused by:
+>>>>
+>>>> commit 360aaddd9cea8c256f50c576794415cadfb61819
+>>>> Merge: 2c832abc732 f8ffc6f3cc4
+>>>> Author: Tom Rini <trini@konsulko.com>
+>>>> Date:   Tue Sep 3 14:09:30 2024 -0600
+>>>>
+>>>>     Merge patch series "Make LMB memory map global and persistent"
+>>>>
+>>>>     Sughosh Ganu <sughosh.ganu@linaro.org> says:
+>>>>
+>>>> My boards boot fine before this merge on u-boot/next, and all failed
+>>>> to boot linux after this merge.
+>>>>
+>>>> I am not familiar with the LMB mechanism, so i don't know how to find
+>>>> the root case now.
+>>>>
+>>>> I dump the bdinfo for both good case[1] and gegression case[2], not sure
+>>>> if they are usefull for debug this issue.
+>>>>
+>>>> [0] Synchronous Abort when starting kernel:
+>>>> Scanning bootdev 'mmc@fe2c0000.bootdev':
+>>>> Card did not respond to voltage select! : -110
+>>>> Scanning bootdev 'mmc@fe2e0000.bootdev':
+>>>>   1  script       ready   mmc          1  mmc@fe2e0000.bootdev.part
+>>>> /boot/boot.scr
+>>>> ** Booting bootflow 'mmc@fe2e0000.bootdev.part_1' with script
+>>>> Boot script loaded from mmc 0:1
+>>>> 224 bytes read in 7 ms (31.3 KiB/s)
+>>>> 26510301 bytes read in 97 ms (260.6 MiB/s)
+>>>> 32883200 bytes read in 122 ms (257 MiB/s)
+>>>> 148323 bytes read in 30 ms (4.7 MiB/s)
+>>>> Working FDT set to 12000000
+>>>> Trying kaslrseed command... Info: Unknown command can be safely ignored
+>>>> since kaslrseed does not apply to all boards.
+>>>> Unknown command 'kaslrseed' - try 'help'
+>>>> ## Loading init Ramdisk from Legacy Image at 12180000 ...
+>>>>    Image Name:   uInitrd
+>>>>    Image Type:   AArch64 Linux RAMDisk Image (gzip compressed)
+>>>>    Data Size:    26510237 Bytes = 25.3 MiB
+>>>>    Load Address: 00000000
+>>>>    Entry Point:  00000000
+>>>>    Verifying Checksum ... OK
+>>>> ## Flattened Device Tree blob at 12000000
+>>>>    Booting using the fdt blob at 0x12000000
+>>>> Working FDT set to 12000000
+>>>>    Loading Ramdisk to eb58f000, end eced739d ... OK
+>>>>    Loading Device Tree to 00000000eb502000, end 00000000eb58efff ... OK
+>>>> Working FDT set to eb502000
+>>>>
+>>>> Starting kernel ...
+>>>>
+>>>> "Synchronous Abort" handler, esr 0x96000004, far 0x96142b896930b907
+>>>> elr: 0000000000a8d3b8 lr : 0000000000a77450 (reloc)
+>>>> elr: 00000000effa13b8 lr : 00000000eff8b450
+>>>> x0 : 96142b896930b907 x1 : 00000000effab870
+>>>> x2 : 0000000000000010 x3 : 00000000edf47310
+>>>> x4 : 0000000000000000 x5 : 96142b896930b907
+>>>> x6 : 0000000000000007 x7 : 0000000000000004
+>>>> x8 : 0000000000000040 x9 : fffffffffffffff0
+>>>> x10: 00000000eb526fff x11: 00000000edf3a808
+>>>> x12: 0000000000000006 x13: 00000000eb502000
+>>>> x14: 00000000ffffffff x15: 00000000ededb588
+>>>> x16: 00000000eff68738 x17: 0000000000000000
+>>>> x18: 00000000edef4d70 x19: 00000000eceb4040
+>>>> x20: 00000000eff14f50 x21: 00000000eceac000
+>>>> x22: 00000000effcc000 x23: 0000000000000001
+>>>> x24: 0000000000000001 x25: 0000000000200000
+>>>> x26: 00000000edf385c0 x27: 00000000eced8000
+>>>> x28: 00000000eced9000 x29: 00000000ededb3c0
+>>>>
+>>>> Code: eb04005f 54000061 52800000 14000006 (386468a3)
+>>>> Resetting CPU ...
+>>>>
+>>>> [1] bdinfo for success boot
+>>>> => bdinfo
+>>>> boot_params = 0x0000000000000000
+>>>> DRAM bank   = 0x0000000000000000
+>>>> -> start    = 0x0000000000200000
+>>>> -> size     = 0x00000000efe00000
+>>>> DRAM bank   = 0x0000000000000001
+>>>> -> start    = 0x00000001f0000000
+>>>> -> size     = 0x0000000010000000
+>>>> flashstart  = 0x0000000000000000
+>>>> flashsize   = 0x0000000000000000
+>>>> flashoffset = 0x0000000000000000
+>>>> baudrate    = 1500000 bps
+>>>> relocaddr   = 0x00000000eff14000
+>>>> reloc off   = 0x00000000ef514000
+>>>> Build       = 64-bit
+>>>> current eth = unknown
+>>>> eth-1addr   = (not set)
+>>>> IP addr     = <NULL>
+>>>> fdt_blob    = 0x00000000ededcd80
+>>>> new_fdt     = 0x00000000ededcd80
+>>>> fdt_size    = 0x0000000000017fa0
+>>>> lmb_dump_all:
+>>>>  memory.cnt = 0x2 / max = 0x10
+>>>>  memory[0]      [0x200000-0xefffffff], 0xefe00000 bytes flags: 0
+>>>>  memory[1]      [0x1f0000000-0x1ffffffff], 0x10000000 bytes flags: 0
+>>>>  reserved.cnt = 0x2 / max = 0x10
+>>>>  reserved[0]    [0xeced8000-0xefffffff], 0x03128000 bytes flags: 0
+>>>>  reserved[1]    [0x1f0000000-0x1ffffffff], 0x10000000 bytes flags: 0
+>>>> devicetree  = separate
+>>>> serial addr = 0x00000000feb50000
+>>>>  width      = 0x0000000000000004
+>>>>  shift      = 0x0000000000000002
+>>>>  offset     = 0x0000000000000000
+>>>>  clock      = 0x00000000016e3600
+>>>> arch_number = 0x0000000000000000
+>>>> TLB addr    = 0x00000000efff0000
+>>>> irq_sp      = 0x00000000ededcd70
+>>>> sp start    = 0x00000000ededcd70
+>>>> Early malloc usage: 2440 / 10000
+>>>> =>
+>>>>
+>>>>
+>>>> [2] bdinfo for boot failed case;
+>>>> => bdinfo
+>>>> boot_params = 0x0000000000000000
+>>>> DRAM bank   = 0x0000000000000000
+>>>> -> start    = 0x0000000000200000
+>>>> -> size     = 0x00000000efe00000
+>>>> DRAM bank   = 0x0000000000000001
+>>>> -> start    = 0x00000001f0000000
+>>>> -> size     = 0x0000000010000000
+>>>> flashstart  = 0x0000000000000000
+>>>> flashsize   = 0x0000000000000000
+>>>> flashoffset = 0x0000000000000000
+>>>> baudrate    = 1500000 bps
+>>>> relocaddr   = 0x00000000eff14000
+>>>> reloc off   = 0x00000000ef514000
+>>>> Build       = 64-bit
+>>>> current eth = unknown
+>>>> eth-1addr   = (not set)
+>>>> IP addr     = <NULL>
+>>>> fdt_blob    = 0x00000000ededc1b0
+>>>> lmb_dump_all:
+>>>>  memory.count = 0x1
+>>>>  memory[0]      [0x200000-0xefffffff], 0xefe00000 bytes flags: none
+>>>>  reserved.count = 0x1
+>>>>  reserved[0]    [0xeced81a0-0xefffffff], 0x03127e60 bytes flags:
+>>>> no-overwrite
+>>>> devicetree  = separate
+>>>> serial addr = 0x00000000feb50000
+>>>>  width      = 0x0000000000000004
+>>>>  shift      = 0x0000000000000002
+>>>>  offset     = 0x0000000000000000
+>>>>  clock      = 0x00000000016e3600
+>>>> arch_number = 0x0000000000000000
+>>>> TLB addr    = 0x00000000efff0000
+>>>> irq_sp      = 0x00000000ededc1a0
+>>>> sp start    = 0x00000000ededc1a0
+>>>> Early malloc usage: 2440 / 10000
+>>>
+>>> With the LMB series applied, the memory region covered by the DRAM
+>>> Bank 1 is not getting added to the LMB memory map. And I suspect that
+>>> the scripts are using addresses in the bank 1 to load and boot the
+>>> kernel. Can you confirm this ? This seems to be happening because of
+>>> the value of gd->ram_top that is being set for the rockchip boards.
+>>> Based on a cursory look at arch/arm/mach-rockchip/sdram.c, the value
+>>> of gd->ram_top is capped at 0xf0000000 for the rk3588 boards. Can you
+>>> confirm if this is indeed the case ? If so, the second DRAM bank will
+>>> not get added to the LMB memory map, and consequently you will not be
+>>> able to load images to addresses in this bank. To fix this, the value
+>>> of gd->ram_top will have to be changed for the rockchip boards to
+>>> reflect the presence of memory above 4GB. Another possible solution is
+>>> to use addresses in the bank0 for booting the images.
+>>
+>>
+>> According to the bdinfo [1][2],  the board have two bank:
+>> DRAM bank   = 0x0000000000000000
+>> -> start    = 0x0000000000200000
+>> -> size     = 0x00000000efe00000
+>> DRAM bank   = 0x0000000000000001
+>> -> start    = 0x00000001f0000000
+>> -> size     = 0x0000000010000000
+>>
+>> The Armbian scripts boot linux kernel with command:
+>>
+>> booti ${kernel_addr_r} ${ramdisk_addr_r} ${fdt_addr_r}
+>> fdt_addr_r=0x12000000
+>> kernel_addr_r=0x02000000
+>> ramdisk_addr_r=0x12180000
+>>
+>> It seems that the are all in bank0 ?
 > 
-> Fixed a variable that was incorrect during the calculation of fileblks.
+> Yes, they all seem to be booting from bank 0. Can you share the
+> command that you use for trying to boot these images ? I will try to
+> boot on the rockpi-4 that I have with me and see if I hit this issue.
+> It will be much easier for me to understand what is happening if I can
+> reproduce the issue on my end.
+
+Looks like my prior mail got stuck, trying again.
+
+The issue above is the same that I reported in #u-boot [1] and [2], EFI
+and ramdisk (or fdt) memory is overlapping, this has been broken since
+next was merged into master.
+
+The ram_top/ram_size or script has nothing to do with it and is working
+perfectly fine as is.
+
+The issue is that EFI_LOADER will enable LMB, and because LMB is enabled
+images/fdt is moved close to ram_top. EFI has however allocated a pool
+in the same area that images/fdt is moved to, so when EFI tries to free
+memory before jumping into linux the pool memory has been overwritten
+and may cause an illegal free or crash.
+
+The only way to avoid this for now is to disable EFI_LOADER Kconfig
+option until Sughoshs EFI/LMB sync series or Simons alternative series
+is merged, or possible boot using EFI. Until then having EFI_LOADER
+enabled (default) and not booting with EFI may cause this type of crash.
+
+[1] https://libera.irclog.whitequark.org/u-boot/2024-10-03#37092785
+[2] https://libera.irclog.whitequark.org/u-boot/2024-10-07#37114863
+
+Regards,
+Jonas
+
 > 
-> Signed-off-by: Ken Kurematsu <k.kurematsu@nskint.co.jp>
+> -sughosh
+> 
+>>
+>>
+>>>
+>>> -sughosh
+>>>
+>>>> 2.34.1
+>>>>
 
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
-
-Thanks!
-Quentin
