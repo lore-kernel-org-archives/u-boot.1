@@ -4,83 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E16DD1813A
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 19:18:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F251D1813A
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 19:28:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8462689082;
-	Mon, 14 Oct 2024 21:18:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2C4BD88E21;
+	Mon, 14 Oct 2024 21:28:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="R6Di/TcN";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="hdujhc2i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2ACF689082; Mon, 14 Oct 2024 21:18:03 +0200 (CEST)
-Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
- [IPv6:2607:f8b0:4864:20::22f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D3DBF88D72; Mon, 14 Oct 2024 21:28:15 +0200 (CEST)
+Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0BC2188FDC
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 21:18:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 130DA88E3C
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 21:28:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alexthreed@gmail.com
-Received: by mail-oi1-x22f.google.com with SMTP id
- 5614622812f47-3e5c9295f3aso874320b6e.1
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 12:18:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1728933480; x=1729538280; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=814NmXplBKw8kTF3c1P1ram8029c8Aon9ilqBDUep1A=;
- b=R6Di/TcNzVr2riFL9DsUQo+of5F4abBklMNdGSbEH87P6n30CCSDiSTDndgXsOuYBF
- RpxuCIqIEi761tK6eISMyB/t6QKXZ1ZTJR6yJiMrnTBFDM9EawPValJN1fm4hzoVXPlm
- USp6SYANSefr911H0CQKSpl5MdccOySVtpq6U81hdDGZAYe1+SP1rrwPleBa02AVQPcH
- 8R/8Do1sYZiPBzceexG8Fb7pJHF6VJJl1ZlFEGL+7OsySIt235xuaBS6hIHcXlGInVC9
- EupGI9l1P6N7VPs21oHxcAwhDwHcjGPIiF7NYigwS2qb2N9dbFqbtiEWvAT+zV3NzdS/
- 2n7A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728933480; x=1729538280;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=814NmXplBKw8kTF3c1P1ram8029c8Aon9ilqBDUep1A=;
- b=YSGtAq+ney7SgZSuyz4Eq0dTKpUkG4uWY3vXB+QiBPoKvnLYvTQmVr/fYW5OVbHJ8X
- Rbk+oh/Fhh6P5MGFsrbVBX3qnP+gVmtlghCgVBJdx2n/lRwEjUWdS9NxVa6WAYZJoLco
- MCDl4VejKG0TFw099IGJX42I82uRcKwjMTy7BhrGcdrFfzQFiduxhK4L4FDclJ51faud
- 5C0gcvrWlklrRB0/NPpFAszviJWS74LxOP33e8TTWa8s2aeBxrcYj28AICQew3842WYE
- IkYUKZEIUD1newCUdGWFWFWA3sxOD4j2dFbDYjobc58ec40DkC9y9sXdMCz+FX9byn04
- yhvA==
-X-Gm-Message-State: AOJu0YxO1t/I3Tb2E6t1FLPJ4kNirGvB8SI/YrVCnHA7fjMTiE1zfCGZ
- 1WssJQ9ciMqhH/oaPU4DnfJxkfrGK+o2Woz9lv+yaJMZJDHLK1FphsBN3OqASiF4ll36Q/VfK+j
- W+HOM9LbY7bHshso9hYsBIoOUA/0=
-X-Google-Smtp-Source: AGHT+IGlvDVx+xP1qh7ik3yYdbR0WFLsBCAUIAeZQfWF1ro+0wUfETNcql/HXHUp1/cNDzlV34jW+kDSq52oyDjXM84=
-X-Received: by 2002:a05:6808:200e:b0:3e0:6d69:96db with SMTP id
- 5614622812f47-3e5d219ebc3mr5419849b6e.12.1728933479785; Mon, 14 Oct 2024
- 12:17:59 -0700 (PDT)
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1728934093;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=qXEnS1J3FYAi6PDY94jq6HtWHuC4ZJfSbi9ECbDkFsY=;
+ b=hdujhc2iBQXFyE0Ky4p67KmaUC27EmbjsmTHjkL68DPpmSofjsD/Q337REIyHOGPMrvBgw
+ aWJmmu0SDNJj4YHBCj2TWImcTg+kAvb9Jvc5ts183ERii+0YjNCtCj/yuAiyUmeZJyMwjP
+ Ks6Pz8nmWZkLOE3StiCLTwobzx0sbMNZWMhhD1/wOfHtTwKAgUeoaNK+if8h5PfPvePOkw
+ XOwmExjv49j+tbk8wtQTigPml3SUhCUDR41wHUFMJy7KHtO4M3fibbt/8hCxQRzbTF03vm
+ mFqAxOPwM7lz85UiV/S9azPmh85Nsmzv3tB8Tk0Gg1X1nU0dbtj3PkojP+mMmQ==
+Date: Mon, 14 Oct 2024 21:28:12 +0200
+From: Dragan Simic <dsimic@manjaro.org>
+To: Alex ThreeD <alexthreed@gmail.com>
+Cc: u-boot@lists.denx.de, Ben Wolsieffer <benwolsieffer@gmail.com>, Chris
+ Morgan <macromorgan@hotmail.com>, Jonas Karlman <jonas@kwiboo.se>, Kever
+ Yang <kever.yang@rock-chips.com>, Marek Vasut <marex@denx.de>, Philipp
+ Tomsich <philipp.tomsich@theobroma-systems.com>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Quentin Schulz <quentin.schulz@cherry.de>, Simon
+ Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v2] rockchip: board: Increase rng-seed size to make it
+ sufficient for modern Linux
+In-Reply-To: <CAF4oh-P-6unDx0HVRegos7FNYv9z7FpQoctu4w465CfFfLzFGw@mail.gmail.com>
 References: <20241014175338.2675136-1-alexthreed@gmail.com>
  <3f4143078e0dc3409c96ea13be5b8317@manjaro.org>
  <CAF4oh-PM8JCymzEbw3ZtYnaF8_fjckHUPUkqv-xS1fZBh5o2cA@mail.gmail.com>
  <65bd30e10c687ec5bf19bda34da7df27@manjaro.org>
-In-Reply-To: <65bd30e10c687ec5bf19bda34da7df27@manjaro.org>
-From: Alex ThreeD <alexthreed@gmail.com>
-Date: Mon, 14 Oct 2024 22:17:48 +0300
-Message-ID: <CAF4oh-P-6unDx0HVRegos7FNYv9z7FpQoctu4w465CfFfLzFGw@mail.gmail.com>
-Subject: Re: [PATCH v2] rockchip: board: Increase rng-seed size to make it
- sufficient for modern Linux
-To: Dragan Simic <dsimic@manjaro.org>
-Cc: u-boot@lists.denx.de, Ben Wolsieffer <benwolsieffer@gmail.com>, 
- Chris Morgan <macromorgan@hotmail.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Kever Yang <kever.yang@rock-chips.com>, Marek Vasut <marex@denx.de>, 
- Philipp Tomsich <philipp.tomsich@theobroma-systems.com>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ <CAF4oh-P-6unDx0HVRegos7FNYv9z7FpQoctu4w465CfFfLzFGw@mail.gmail.com>
+Message-ID: <839e5b9f561fa8e6328216618f9a2e38@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
+Content-Transfer-Encoding: 8bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,8 +78,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Oct 14, 2024 at 10:00=E2=80=AFPM Dragan Simic <dsimic@manjaro.org> =
-wrote:
-> To sum up the replies from Marek, the lower limit should be 64.
-64 by default, warning for custom values less than 32. Right?
-Since 32 bytes is sufficient for kernels released in the last 2 years.
+On 2024-10-14 21:17, Alex ThreeD wrote:
+> On Mon, Oct 14, 2024 at 10:00 PM Dragan Simic <dsimic@manjaro.org> 
+> wrote:
+>> To sum up the replies from Marek, the lower limit should be 64.
+> 
+> 64 by default, warning for custom values less than 32. Right?
+> Since 32 bytes is sufficient for kernels released in the last 2 years.
+
+I'd keep both the default and the warning threshold at 64.  I think
+it's much safer that way.
