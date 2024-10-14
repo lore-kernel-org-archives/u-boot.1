@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86522D18157
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 22:34:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F5DAD18158
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 22:34:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2712E89270;
-	Tue, 15 Oct 2024 00:32:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 915AC892C6;
+	Tue, 15 Oct 2024 00:32:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JhNmLDLs";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RsAVBKWF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 57B9B89294; Tue, 15 Oct 2024 00:32:33 +0200 (CEST)
-Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
- [IPv6:2607:f8b0:4864:20::12c])
+ id 71EAC89237; Tue, 15 Oct 2024 00:32:34 +0200 (CEST)
+Received: from mail-il1-x142.google.com (mail-il1-x142.google.com
+ [IPv6:2607:f8b0:4864:20::142])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 500778922C
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 00:32:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0857689246
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 00:32:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12c.google.com with SMTP id
- e9e14a558f8ab-3a3b4663e40so21630675ab.2
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 15:32:28 -0700 (PDT)
+Received: by mail-il1-x142.google.com with SMTP id
+ e9e14a558f8ab-3a3a3075af2so26076775ab.3
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 15:32:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728945147; x=1729549947; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1728945148; x=1729549948; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=31A4pf2UJu7sXN2OTVNmRnpoZ9C09gUVe0pgYrM+fUk=;
- b=JhNmLDLsvYZlOmxk6eZonodHCKjA6Q2daRjsr32K58eU9WYMJ3+6QqPdoPS0Biv5wH
- vkSZBXudZh0mZiwP4eDuFcsrYnexoWtZHYwQa4tiRigkFwbnhEnvKiYpei+fst1XRPDX
- KuIyYV6GOtI/ZAvkgwcBEP/7JvQPjULlVJMZ8=
+ bh=NHZ3mvNWi+Lu1Xb8Yw/3NgFVKeYynoJDk0hF0/2vuLo=;
+ b=RsAVBKWFMyDkhRbyARXrKU68K9q8fXXz5/9Hhi4rcVxZIeja6LRVsBv9jT1k8sxrWY
+ eTkGPLKzty75Ouvh9kH25kuHXPe7qreqQsFY1UzIlVK7NkecUkvjJn4tylY2PeBhUbRO
+ EERlaWnz2F5UjtS/7LJV5I/JteSUMpfEwDUtc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728945147; x=1729549947;
+ d=1e100.net; s=20230601; t=1728945148; x=1729549948;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=31A4pf2UJu7sXN2OTVNmRnpoZ9C09gUVe0pgYrM+fUk=;
- b=CIXIVhRzmZszNemkl7BpzaHxMWf+Esc3UBGMp/6qjxefj4F+ANYLveQfuDaQzv7cMy
- +fH4m3XiMgitHX1tjZRKbuFOlqUgQQ5wvvq6C+kGP5DF4oMaa4v3y+lJfResShfm27PT
- +mM+z5u7Yde1SulgmkMEtQBUWh3MbnYWisBKxywfD5ukDFkJeWopBt2zibZOg3NqUV8r
- 2dhQCnGFUXjKxp9Vb129sXRXLuVEM8xw9RxrtzsQAxzkJ4OJDub3hQ8wravMSvbm+q81
- CkPJ6Xs0FptKEKJ6CzoyffeLzeSifWJ8iVu8Gt+GZQ1diEPSjFYUczxbzyWLFrZOC5mS
- gybg==
-X-Gm-Message-State: AOJu0YxwiescW+JMZcqXyvkNFqWjXUziQszeZ6YHMQx4V+Pdto6ZLZa3
- I+BBFvlePYqyq2ZUIHzSKYBFevvsd8Ax+xOOpl1NEjrKkI1PbJ0+Msap4w89349mMp1AGIRKy/i
- TRg==
-X-Google-Smtp-Source: AGHT+IFExjABfLSj9Oz8z5/cGvumMx9h+NW8+W4Tz8qsuMWN2PE67+EdA2nfqwFP8ZScNHFWkp/HNQ==
-X-Received: by 2002:a05:6e02:19cb:b0:3a3:3e17:994e with SMTP id
- e9e14a558f8ab-3a3bcdc0bdamr83867035ab.9.1728945146973; 
- Mon, 14 Oct 2024 15:32:26 -0700 (PDT)
+ bh=NHZ3mvNWi+Lu1Xb8Yw/3NgFVKeYynoJDk0hF0/2vuLo=;
+ b=M116YLCIdK2YHLaSoYnmmkqw0vJJOkgCqeqTfDnVohpdC7d3eFjIDHPtg0T/Kp0iHk
+ 4SeVsvRA3XlXXli3iMNLBmdkuvIEskQe5BK3L+Ho6PQVFYGU95MjKDS2OqpUlIlxRK+u
+ dTRKnNldw5qmEwYMKntpJ5i70IH7UGz6suCfhjUerQUeb11WuPoA3xhfRc9IvYp/xMUp
+ LSTu9sVDZtFbP2tITALrufky/4jlXPfbEm5SWcifwCbN4cguGBnoe9mgs4XeHIC3LL4c
+ DWUXSYFrbzCSp8k3mOc3f5QmXBPlyghYTVw1MArVLdoQ9y6Jg3sgLy8hc/FqFSUbAKAn
+ z+Ig==
+X-Gm-Message-State: AOJu0Yzvu1cr0yUPvSRSyb5Va/09kFQWzxVWVdLYhlcpnWYQ1g4/ulSf
+ KGCPXxk0GLxZFQSWpys4kG0iZylUwx9qilWPMKFWONxr7dV8ZqfIoceSjQrj1CQ0s9zuT2g6ydj
+ 3A1GD
+X-Google-Smtp-Source: AGHT+IG7yrxgbJnxEg9O2H+ebBN4QP/Ez1tN7osRcqLtG6A52pOtE+OulBKaTX/Jmb+LfjxuaHfRqg==
+X-Received: by 2002:a05:6e02:1c88:b0:3a2:aed1:1285 with SMTP id
+ e9e14a558f8ab-3a3bccade28mr81019075ab.0.1728945148104; 
+ Mon, 14 Oct 2024 15:32:28 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4dbecc4924dsm14847173.153.2024.10.14.15.32.26
+ 8926c6da1cb9f-4dbecc4924dsm14847173.153.2024.10.14.15.32.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Oct 2024 15:32:26 -0700 (PDT)
+ Mon, 14 Oct 2024 15:32:27 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
- Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>
-Subject: [PATCH v3 12/20] x86: coreboot: Enable unit tests
-Date: Mon, 14 Oct 2024 16:32:04 -0600
-Message-Id: <20241014223212.2212442-13-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: [PATCH v3 13/20] docker: Update coreboot
+Date: Mon, 14 Oct 2024 16:32:05 -0600
+Message-Id: <20241014223212.2212442-14-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241014223212.2212442-1-sjg@chromium.org>
 References: <20241014223212.2212442-1-sjg@chromium.org>
@@ -89,44 +90,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable unit tests so we can run command-line tests in coreboot. Enable
-console recording, with enough space for the 'cbsysinfo' command. Add
-to the pre-relocation malloc() space to make room for this.
+Update to a newer version which supports settings in CMOS RAM and
+linear framebuffer.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+Changes in v3:
+- Update Dockerfile instead
 
- configs/coreboot_defconfig | 4 ++++
- 1 file changed, 4 insertions(+)
+ tools/docker/Dockerfile | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/configs/coreboot_defconfig b/configs/coreboot_defconfig
-index 0b103efe16d..fdf978a539a 100644
---- a/configs/coreboot_defconfig
-+++ b/configs/coreboot_defconfig
-@@ -1,6 +1,7 @@
- CONFIG_X86=y
- CONFIG_TEXT_BASE=0x1110000
- CONFIG_SYS_MALLOC_LEN=0x2000000
-+CONFIG_SYS_MALLOC_F_LEN=0x1000
- CONFIG_NR_DRAM_BANKS=8
- CONFIG_ENV_SIZE=0x1000
- CONFIG_DEFAULT_DEVICE_TREE="coreboot"
-@@ -15,6 +16,8 @@ CONFIG_SHOW_BOOT_PROGRESS=y
- CONFIG_USE_BOOTARGS=y
- CONFIG_BOOTARGS="root=/dev/sdb3 init=/sbin/init rootwait ro"
- CONFIG_BOOTCOMMAND="bootflow scan -l; if bootflow menu; then cls; bootflow boot; fi"
-+CONFIG_CONSOLE_RECORD=y
-+CONFIG_CONSOLE_RECORD_OUT_SIZE=0x1000
- CONFIG_PRE_CONSOLE_BUFFER=y
- CONFIG_SYS_CONSOLE_INFO_QUIET=y
- CONFIG_LOG=y
-@@ -59,3 +62,4 @@ CONFIG_CONSOLE_SCROLL_LINES=5
- CONFIG_CMD_DHRYSTONE=y
- # CONFIG_GZIP is not set
- CONFIG_SMBIOS_PARSER=y
-+CONFIG_UNIT_TEST=y
+diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+index c401170b1e1..967ac89fbde 100644
+--- a/tools/docker/Dockerfile
++++ b/tools/docker/Dockerfile
+@@ -244,12 +244,15 @@ RUN mkdir /tmp/trace && \
+     rm -rf /tmp/trace
+ 
+ # Build coreboot
+-RUN wget -O - https://coreboot.org/releases/coreboot-4.22.01.tar.xz | tar -C /tmp -xJ && \
+-    cd /tmp/coreboot-4.22.01 && \
++RUN wget -O - https://coreboot.org/releases/coreboot-24.08.tar.xz | tar -C /tmp -xJ && \
++    cd /tmp/coreboot-24.08 && \
+     make crossgcc-i386 CPUS=$(nproc) && \
+     make -C payloads/coreinfo olddefconfig && \
+     make -C payloads/coreinfo && \
+     make olddefconfig && \
++    echo CONFIG_GENERIC_LINEAR_FRAMEBUFFER=y | tee -a .config && \
++    echo CONFIG_USE_OPTION_TABLE=y | tee -a .config && \
++    make olddefconfig && \
+     make -j $(nproc) && \
+     sudo mkdir /opt/coreboot && \
+     sudo cp build/coreboot.rom build/cbfstool /opt/coreboot/
 -- 
 2.34.1
 
