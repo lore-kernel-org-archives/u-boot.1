@@ -4,59 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA2F4D18151
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 21:06:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12103D18152
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 21:06:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F85C89166;
-	Mon, 14 Oct 2024 23:06:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C5F8689198;
+	Mon, 14 Oct 2024 23:06:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="ErNKvg+t";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="VeYqR12W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 183EF8907F; Mon, 14 Oct 2024 23:06:33 +0200 (CEST)
+ id 8CFF489190; Mon, 14 Oct 2024 23:06:34 +0200 (CEST)
 Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0E9A89179
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 23:06:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 93BEF891A5
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 23:06:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ddrokosov@salutedevices.com
 Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 1788E10000A;
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 9581A10000D;
  Tue, 15 Oct 2024 00:06:29 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 1788E10000A
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 9581A10000D
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
  s=mail; t=1728939989;
- bh=aDfg3I4ACE5005k+hd+okDWxQvCtOeH6HEMOMUaWb3U=;
- h=From:Subject:Date:Message-ID:MIME-Version:Content-Type:To:From;
- b=ErNKvg+tDOFcpVOiD5FRYIMTMfngGa2yrHXDCjOtBWFDx5U4/mZa78cgOyfqWpIZp
- Ggj9o3+k8RyxjCwfYbSAd0fu7OLi+P+bhI7AT2X/DIlVm5jlINyvSvfPUUEUtCRQ1J
- bNgPaM2iUs+PDY4PaXgNSFxlMS9+3V2WM8E/UuLfZLKr89EZ2benJTPVecwIAYI2Q8
- 5VOlIUm2W8VXUx14a7fxlGIW2kzDwkHxSpq7doeATeTJUBsO8isIVQj0gd65ZoTeKy
- XWRWO2ZP3eABrOsXsYaE9olWLaJ70sGRKR+7+ZeQToVnd+NnMsOfLgh5xlU2SeXBfh
- q7bZXKkJokEAw==
-Received: from smtp.sberdevices.ru (unknown [172.16.192.107])
+ bh=qXFDNTaj+lR/tNGaYS2aNpSICkXv1bwPtbyZsWe8//s=;
+ h=From:Date:Subject:MIME-Version:Content-Type:Message-ID:To:From;
+ b=VeYqR12WzAi4tAxF+9+5LpHrOtZVTF3X7uHrzVHEA1Z5ofG/wb/QuG+rN32bzCFri
+ G78NjN54Zi21spCur7MEV8Ez/H4Iok6IjoobQuTgOHXY5Lp0t1VpOVM4jY+lqeb1jn
+ dSDS9Sj9dMFQgICFU0QphhmYpanueVjrnTWTwEDH7GGwhif52i3KxqOTp6o6H2jNcy
+ vITjc3mMZY1VZtMKFBrPxnt+JdPmUIYMsTlBvsws1wYYwT6r4UCVbmUwi9MmIBRdf9
+ DRpV1itM49WGW46jjdUPJTc1jWh/3ZEkkq9ZsxHJzuA0EX6QUFJgWs0ly4Vp5LefY7
+ ecpCzYn1dyPAQ==
+Received: from smtp.sberdevices.ru (unknown [172.16.192.103])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Tue, 15 Oct 2024 00:06:28 +0300 (MSK)
+ Tue, 15 Oct 2024 00:06:29 +0300 (MSK)
 From: Dmitry Rokosov <ddrokosov@salutedevices.com>
-Subject: [PATCH v4 0/5] android_ab: introduce bcb ab_dump command and
- provide several bcb fixes
-Date: Tue, 15 Oct 2024 00:06:12 +0300
-Message-ID: <20241015-android_ab_master-v4-0-a91cca9513c4@salutedevices.com>
+Date: Tue, 15 Oct 2024 00:06:15 +0300
+Subject: [PATCH v4 3/5] cmd: bcb: change strcmp() usage style in the
+ do_bcb_ab_select()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAMSHDWcC/32OUQ6CMBBEr0L225rSVgW/vIchZG0X2USo6SLRE
- O5u5QB+vknmzSwglJgEzsUCiWYWjmMGtyvA9zjeSXHIDEYbV2pdKRxDihxavLUDykRJheoYTqW
- vbI0EufdM1PF7c16bzD3LFNNnm5jtL/1nm63SqjO18e6A1pK7CD5eE4V8zpPsfRygWdf1C7E6R
- om6AAAA
-X-Change-ID: 20241008-android_ab_master-d86d71c839ae
+Message-ID: <20241015-android_ab_master-v4-3-a91cca9513c4@salutedevices.com>
+References: <20241015-android_ab_master-v4-0-a91cca9513c4@salutedevices.com>
+In-Reply-To: <20241015-android_ab_master-v4-0-a91cca9513c4@salutedevices.com>
 To: Igor Opaniuk <igor.opaniuk@gmail.com>, Mattijs Korpershoek
  <mkorpershoek@baylibre.com>, Sam Protsenko <semen.protsenko@linaro.org>, "Tom
  Rini" <trini@konsulko.com>, "Andrew F. Davis" <afd@ti.com>, Neil Armstrong
@@ -66,11 +63,11 @@ CC: <u-boot@lists.denx.de>, <u-boot-amlogic@groups.io>, <rockosov@gmail.com>,
  <kernel@salutedevices.com>, Dmitry Rokosov <ddrokosov@salutedevices.com>, 
  Guillaume La Roque <glaroque@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1728939988; l=3615;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1728939988; l=972;
  i=ddrokosov@salutedevices.com; s=20241008; h=from:subject:message-id;
- bh=0B7+C3ExTSZsloaUzotNBQKBj26Vd+43bDvQOFPjeNQ=;
- b=6TnLFYtZ+rz5057l7FlbyL09EKONfzAVHoHkqSsAe4mWLAQg5AmEmGXPJL9eYyn8SX0pxRng/
- oiHfnmplpNPBO11bLdxjZbOxyCIsmsy98wAmnkFs/pweEUz4754qpEo
+ bh=8eqJalS2zQLzpfjMM4b8wkNNCz3EQyYFjdBHrlYyhqw=;
+ b=AckodtbYIgHFEa/ZvrBruO2SEHUKcvg4s5rk/OpmQ/rZTb59E4VUUvAemgjY9EKM2dtdMTqxH
+ 1U9FOoY3ZAUAjzC7pG28x9hMwXpwwJlck57pYEXtBXs39rsPcJ+49w+
 X-Developer-Key: i=ddrokosov@salutedevices.com; a=ed25519;
  pk=J6t8z4aofCVwzR1Xs7royc+IGyQcL0cTby92cz3i8B4=
 X-Originating-IP: [172.28.129.94]
@@ -86,14 +83,14 @@ X-KSMG-AntiSpam-Status: not_detected
 X-KSMG-AntiSpam-Method: none
 X-KSMG-AntiSpam-Auth: dkim=none
 X-KSMG-AntiSpam-Info: LuaCore: 39 0.3.39
- e168d0b3ce73b485ab2648dd465313add1404cce, {Tracking_uf_ne_domains},
- {Tracking_from_domain_doesnt_match_to}, lore.kernel.org:7.1.1;
- 127.0.0.199:7.1.2; smtp.sberdevices.ru:5.0.1,7.1.1; salutedevices.com:7.1.1;
+ e168d0b3ce73b485ab2648dd465313add1404cce,
+ {Tracking_from_domain_doesnt_match_to}, salutedevices.com:7.1.1;
+ 127.0.0.199:7.1.2; smtp.sberdevices.ru:5.0.1,7.1.1;
  d41d8cd98f00b204e9800998ecf8427e.com:7.1.1, FromAlignment: s
 X-MS-Exchange-Organization-SCL: -1
 X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean, bases: 2024/10/14 18:42:00
-X-KSMG-LinksScanning: Clean, bases: 2024/10/14 18:42:00
+X-KSMG-AntiPhishing: Clean
+X-KSMG-LinksScanning: Clean
 X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
  bases: 2024/10/14 19:21:00 #26753819
 X-KSMG-AntiVirus-Status: Clean, skipped
@@ -113,82 +110,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The patch series include changes:
-    - move ab_select_slot() documentation to @ notation
-    - move ab_select command to bcb subcommands
-    - introduce the ab_dump command to print the content of the BCB
-      block; it's useful for debugging A/B logic on supported boards
-    - fix the slot suffix format in the ABC block to align with official
-      Android BCB specifications
-    - add a test for the ab_dump command to verify the accuracy of each
-      field within the ABC data displayed, it's also useful for testing
-      slot_suffix problem code paths
+In the entire cmd/bcb.c file, the return value of strcmp() is not
+directly compared to 0. Therefore, it would be better to maintain this
+style in the new do_bcb_ab_select() function as well.
 
-Changes v3 since v2 at [2]:
-    - return "Legend" block for bcb command
-    - additionally, verify the CONFIG_ANDROID_AB configuration alongside
-      CONFIG_CMD_BCB to ensure that the A/B scheme is used for the
-      designated board.
-
-Changes v2 since v1 at [1]:
-    - move ab_select_slot() documentation to @ notation
-    - move ab_select command to bcb subcommands per Simon and Mattijs
-      suggestions
-    - redesign ab_dump as bcb subcommand
-    - use spaces instead of tabs in the ab_dump command output
-    - print hex values in the lowercase
-    - add RvB tags
-
-Links:
-    [1] https://lore.kernel.org/all/20240725194716.32232-1-ddrokosov@salutedevices.com/
-    [2] https://lore.kernel.org/all/20240911214945.15873-1-ddrokosov@salutedevices.com/
-
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Tested-by: Guillaume La Roque <glaroque@baylibre.com>
 Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
 ---
-Changes in v4:
-- add #ifdefs for CONFIG_ANDROID_AB in cmd/bcb.c to allow the usage of
-  the bcb command without A/B enabled
-- run the savedefconfig command for all defconfigs that include the
-  CMD_BCB configuration
-- resolve merge conflicts with latest master
-- provide additional trailers from the previous version (excluding
-  changed patches)
-- Link to v3: https://lore.kernel.org/r/20241008-android_ab_master-v3-0-f292c45a33e4@salutedevices.com
+ cmd/bcb.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
----
-Dmitry Rokosov (5):
-      include/android_ab: move ab_select_slot() documentation to @ notation
-      treewide: bcb: move ab_select command to bcb subcommands
-      cmd: bcb: change strcmp() usage style in the do_bcb_ab_select()
-      cmd: bcb: introduce 'ab_dump' command to print BCB block content
-      common: android_ab: fix slot suffix for abc block
+diff --git a/cmd/bcb.c b/cmd/bcb.c
+index bf28726da91134fa287ca8aada884ed74ecc8f2b..3935b7f8d535e87593020b91a6b37d7c5ef02a83 100644
+--- a/cmd/bcb.c
++++ b/cmd/bcb.c
+@@ -439,7 +439,7 @@ static int do_bcb_ab_select(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	bool dec_tries = true;
+ 
+ 	for (int i = 4; i < argc; i++) {
+-		if (strcmp(argv[i], "--no-dec") == 0)
++		if (!strcmp(argv[i], "--no-dec"))
+ 			dec_tries = false;
+ 		else
+ 			return CMD_RET_USAGE;
 
- MAINTAINERS                               |   1 -
- boot/android_ab.c                         | 116 ++++++++++++++++++++++++------
- cmd/Kconfig                               |  14 ----
- cmd/Makefile                              |   1 -
- cmd/ab_select.c                           |  66 -----------------
- cmd/bcb.c                                 | 110 ++++++++++++++++++++++++++++
- configs/am57xx_evm_defconfig              |   1 -
- configs/am57xx_hs_evm_defconfig           |   1 -
- configs/am57xx_hs_evm_usb_defconfig       |   1 -
- configs/khadas-vim3_android_ab_defconfig  |   1 -
- configs/khadas-vim3l_android_ab_defconfig |   1 -
- configs/sandbox64_defconfig               |   2 +
- configs/sandbox_defconfig                 |   1 -
- doc/android/ab.rst                        |  12 ++--
- include/android_ab.h                      |  17 ++++-
- include/configs/khadas-vim3_android.h     |   2 +-
- include/configs/khadas-vim3l_android.h    |   2 +-
- include/configs/meson64_android.h         |   4 +-
- include/configs/ti_omap5_common.h         |   4 +-
- test/py/tests/test_android/test_ab.py     |  31 ++++++--
- 20 files changed, 260 insertions(+), 128 deletions(-)
----
-base-commit: 5d899fc58c44fe5623e31524da2205d8597a53d1
-change-id: 20241008-android_ab_master-d86d71c839ae
-
-Best regards,
 -- 
-Dmitry Rokosov <ddrokosov@salutedevices.com>
+2.43.0
 
