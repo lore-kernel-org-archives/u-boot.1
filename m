@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7F81D16260
-	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 13:18:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7924D16260
+	for <u-boot@archiver.kernel.org>; Mon, 14 Oct 2024 13:18:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B88618915C;
-	Mon, 14 Oct 2024 15:13:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3EBC2891B4;
+	Mon, 14 Oct 2024 15:13:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="XwwJ3f6p";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="K84Q1b16";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E629B89063; Mon, 14 Oct 2024 15:13:09 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id 0C7CF89063; Mon, 14 Oct 2024 15:13:10 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2F248918A
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 15:13:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5263A891BE
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 15:13:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=9elements.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-37d4ac91d97so3702167f8f.2
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 06:13:05 -0700 (PDT)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-37d4821e6b4so2637348f8f.3
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 06:13:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1728911584; x=1729516384; darn=lists.denx.de;
+ d=9elements.com; s=google; t=1728911586; x=1729516386; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aQ3fiwac6368tQvYZ51DF5qc0QaxNfwumSk8n6WYLF4=;
- b=XwwJ3f6pOa4KIMyXPxrbGw5UO2BSNdaG7WHdv7d1Kr/W0UpTzEL0ZAxYjCcFmtub3V
- I6VxtQv2o89KpDI+62zJ/jGD9ZBZqhcBx0BioOkLixUY1OJMcI7gS2/29QXB/cxxkLDt
- cD0Gpp8IjZufcUSxx5ZzrGhn6EMB8rd07xU9qt72Tk3fa3ASVWyot60QUEiiOyed4jS0
- 4hHMjvFjeqk4UnmNMLqeAOEqJJ7ytnGed2YFz6TPvYqLKvlN7E5mAqRH99hOkqbHCfNd
- skCKSZU43KAy9i6p/hioszBBaOvqns7z1BJkqlY6640+HKuCUDTDvLdoEZDzqcSAFVcO
- A8ig==
+ bh=lMxWbG3IzboBy+GjbpVI1B+44dHkVyWcI9T24UQ7YSc=;
+ b=K84Q1b16n4YHRPq7irm5kO6rCabaX7BwTYdUstLNRDd2oNyEddDmaOrppiyDbF842z
+ ycVH4EoQfROKEdzAJvvSKeFs0xX0icjA5UQoMs35I0m2muCIg1HuCB/mJKPJOSPsaN+A
+ /7CtV7NcAxRezMSivEjXHtrT48aiRHDts+Nj+mQZNILx3uS81gDMIV8/NjNaZrYPxam5
+ rSqkI4TQ02JmV4HLZGBkVuxcy+5kvpl6Zk1Uk0+L1s3LNPA56yuwO1m9Yxwz8j0Gpyfy
+ dH+Fwbqsxo/IrkuvP15WjloYqNwlXHdWbdlrKlos93Syl1HUzMnznpLjdbY8AwFcSvAz
+ 9SYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728911584; x=1729516384;
+ d=1e100.net; s=20230601; t=1728911586; x=1729516386;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=aQ3fiwac6368tQvYZ51DF5qc0QaxNfwumSk8n6WYLF4=;
- b=M0wa7utuVfMMWeXybFvcS1JkVbBDNSawyBq8k3zk8xBELmzxqH03qqwEiSHi0oqlTA
- Kj8/+Osn5NDgGbTPG49iDto/+Q/P9k4xt1H/JvqhUvK/czyTDNUBnVOAsOzSy92g59zh
- c1+v7BB2WCAwDgJPZuDI1vfCOH+TMCluC5tAXuWtGitFCs1X8XKe80A/5hIhf9lIF/UV
- WnV53HTzcaoDUKetzzX3Sp/FtiFMZoaslxOpMarORNjfH8H3cbC9kRELaQbAWD+eFiaN
- SGRICaasCMeXBkeETsBVrPCF5P1oKOgZ03iiFFtk/21XuGP7m0r42/118SADF+7Atvnf
- JLsA==
-X-Gm-Message-State: AOJu0YxlBB7qLN32g7lUnmv4rrbhAb0D0vrDbXGrS9Y3b+un4moj+PNB
- 9OPk3yGIR0V0E34WyOeIulVTaMfpn1Cu3gHweYMAvH1K+gOn7EA2LOBLScAsQ6/CvbVAcmItD7Z
- 5
-X-Google-Smtp-Source: AGHT+IH2GWLzAQw/te43dYy0dVJiY21oZeXtwmtdL2hpOlzksZL6MD4EorkNDlnjyP7fdTbxMbpEeA==
-X-Received: by 2002:a05:6000:11ce:b0:37d:3e6d:6a00 with SMTP id
- ffacd0b85a97d-37d600d329cmr7828611f8f.47.1728911584053; 
- Mon, 14 Oct 2024 06:13:04 -0700 (PDT)
+ bh=lMxWbG3IzboBy+GjbpVI1B+44dHkVyWcI9T24UQ7YSc=;
+ b=U3/O4krYO9QCwG4VwUJ4Boxf9gbbr3xqKUm5AjO1kPK4DuXw/RcCIw+wW1wGyxvNkd
+ fRKeF3u+0vIlu33+wR5X+HIh49u7PJ8lsKBUVTXghBI2tJH0uYiVVlLLTZaagIquwJpW
+ VfmAecQtVC1/1eXiDf2jCzseKlfIamSeKrC0a5tizuiEPn1bxRSDkLVJY+uhzdMmmH/I
+ aWf3/KHEuGz2FqB9FYt2M1bbaQ3KkmbFC7b2Md5AsB+jnkZumM+iOoPw2UIQkgrheztz
+ zptHEOV+tx6vGhVZtGODRMfnOgQrrSZqnaXas2SJ2jUPJFH5pobpoYUGgchHWS40R+xs
+ +Z9A==
+X-Gm-Message-State: AOJu0YysJeGwsYdpcPNE/dgIk6UyN2lw1MRjwUi8WtlR0RFOZ8zlNNeL
+ V7UVpdwnGL2aboU5n24aInl8Ndz2MwzSSKYu+E2BN9cfFVyg1j0eKlLvWcAhO8ugMvPSY1/BRKK
+ 0
+X-Google-Smtp-Source: AGHT+IEPo6MAy2c+4GzFFcgx3sGQ/2Os/WfUJwtAh8XUeAuMsQOlwNE9ajuG1rMx3nJ9KAV3UNhhAg==
+X-Received: by 2002:adf:ea8d:0:b0:37c:ccad:733a with SMTP id
+ ffacd0b85a97d-37d55304285mr7994847f8f.59.1728911585726; 
+ Mon, 14 Oct 2024 06:13:05 -0700 (PDT)
 Received: from fedora.sec.9e.network
  (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d605c197bsm7103718f8f.38.2024.10.14.06.13.03
+ ffacd0b85a97d-37d605c197bsm7103718f8f.38.2024.10.14.06.13.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Oct 2024 06:13:03 -0700 (PDT)
+ Mon, 14 Oct 2024 06:13:05 -0700 (PDT)
 From: Patrick Rudolph <patrick.rudolph@9elements.com>
 To: u-boot@lists.denx.de,
 	linux-kernel@vger.kernel.org
 Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v8 31/37] armv8: cpu: Enable ACPI parking protocol
-Date: Mon, 14 Oct 2024 15:10:47 +0200
-Message-ID: <20241014131152.267405-32-patrick.rudolph@9elements.com>
+Subject: [PATCH v8 32/37] arm: Implement read_mpidr on armv7
+Date: Mon, 14 Oct 2024 15:10:48 +0200
+Message-ID: <20241014131152.267405-33-patrick.rudolph@9elements.com>
 X-Mailer: git-send-email 2.46.2
 In-Reply-To: <20241014131152.267405-1-patrick.rudolph@9elements.com>
 References: <20241014131152.267405-1-patrick.rudolph@9elements.com>
@@ -95,45 +95,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update the generic entry point code to support the ACPI parking protocol.
-The ACPI parking protocol can be used when PSCI is not available to bring
-up secondary CPU cores.
-
-When enabled secondary CPUs will enter U-Boot proper and spin in their own
-4KiB reserved memory page, which also acts as mailbox with the OS to
-release the CPU.
-
-TEST: Boots all CPUs on qemu-system-aarch64 -machine raspi4b
+Implement read_mpidr() on armv8 to make use of it in generic
+code that compiles on both armv8 and armv8.
 
 Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- arch/arm/cpu/armv8/start.S | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ arch/arm/include/asm/system.h | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/arch/arm/cpu/armv8/start.S b/arch/arm/cpu/armv8/start.S
-index 7461280261..544a4a5364 100644
---- a/arch/arm/cpu/armv8/start.S
-+++ b/arch/arm/cpu/armv8/start.S
-@@ -178,6 +178,18 @@ pie_fixup_done:
- 	branch_if_master x0, master_cpu
- 	b	spin_table_secondary_jump
- 	/* never return */
-+#elif defined(CONFIG_ACPI_PARKING_PROTOCOL) && !defined(CONFIG_SPL_BUILD)
-+	branch_if_master x0, master_cpu
-+	/*
-+	 * Waits for ACPI parking protocol memory to be allocated and the spin-table
-+	 * code to be written. Once ready the secondary CPUs will jump and spin in
-+	 * their own 4KiB memory region, which is also used as mailbox, until released
-+	 * by the OS.
-+	 * The mechanism is similar to the DT enable-method = "spin-table", but works
-+	 * with ACPI enabled platforms.
-+	 */
-+	b	acpi_pp_secondary_jump
-+	/* never return */
- #elif defined(CONFIG_ARMV8_MULTIENTRY)
- 	branch_if_master x0, master_cpu
+diff --git a/arch/arm/include/asm/system.h b/arch/arm/include/asm/system.h
+index 2237d7d006..9eb30c2ade 100644
+--- a/arch/arm/include/asm/system.h
++++ b/arch/arm/include/asm/system.h
+@@ -394,6 +394,15 @@ void switch_to_hypervisor_ret(void);
+ #define wfi()
+ #endif
  
++static inline unsigned long read_mpidr(void)
++{
++	unsigned long val;
++
++	asm volatile("mrc p15, 0, %0, c0, c0, 5" : "=r" (val));
++
++	return val;
++}
++
+ static inline unsigned long get_cpsr(void)
+ {
+ 	unsigned long cpsr;
 -- 
 2.46.2
 
