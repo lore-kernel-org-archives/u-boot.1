@@ -4,69 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58196D216B7
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 14:38:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7142D216BB
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 14:38:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ECB4B88009;
-	Tue, 15 Oct 2024 16:38:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 5CEDC88606;
+	Tue, 15 Oct 2024 16:38:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="W5CoJ9A1";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QEu3qdDf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB39388113; Tue, 15 Oct 2024 16:38:24 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 9F3F488606; Tue, 15 Oct 2024 16:38:45 +0200 (CEST)
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
+ [IPv6:2607:f8b0:4864:20::f2b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 29B968657F
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 16:38:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 289BA8880B
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 16:38:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-limaye@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49FEcIpF108146;
- Tue, 15 Oct 2024 09:38:18 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1729003098;
- bh=BSeTLtuOOcKXDpHFmV5628SDdlgRRCZLGWgUXIuFQjw=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=W5CoJ9A1GXjOFz56RyIdWQcZAinEptcHtq1LwNz7SfrPv333BVYCNUycMUMva6KAa
- AvJTq/3L6mpOQlhKIkX+g6EmxUO6IDHS3VihoDhiao9KTbKH6a539y5jlQkvNHsucz
- rENneCMA0YaZ88DZTaEWZ7P46Rreh+Y72OwGnaD4=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 49FEcIxn006370
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 15 Oct 2024 09:38:18 -0500
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 15
- Oct 2024 09:38:17 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 15 Oct 2024 09:38:17 -0500
-Received: from [172.24.227.91] (psdkl-workstation0.dhcp.ti.com [172.24.227.91])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49FEcDvk108428;
- Tue, 15 Oct 2024 09:38:14 -0500
-Message-ID: <dad4ebfb-e95b-4fe7-b38d-2ef52165bad3@ti.com>
-Date: Tue, 15 Oct 2024 20:08:13 +0530
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-6cbd092f7f0so37300986d6.0
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 07:38:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1729003121; x=1729607921; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=CLZ9x7PvrDIuGMJXxDOklvsfmsNgyLlHdf7AqJsdqzo=;
+ b=QEu3qdDfSNs4lA0mraatMvlRl9cLsxPQq0ds+kz9alUy0VhEsN4RHTR2bV5cDpur75
+ W16O9M0cXHITS11ueoXwkC/r65pqqLJ5NoCS0+3AQnuXR97LuwTUKo8ii3Pf8eFJ0nKk
+ AdgiXbF6BOPD9IcWjTnM1NGucZSt9T3HOMf1c=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729003121; x=1729607921;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=CLZ9x7PvrDIuGMJXxDOklvsfmsNgyLlHdf7AqJsdqzo=;
+ b=SPq7PDnJJWCtwtyWwRuGt9XVaJ3XdvXzELmcQIGEz7xEWtY/YbCxfJhAo8RWOyDy9j
+ OtscMInNcVLgy1E6dxH/WLtbNk+mxL/cx5HCC+fB5kDnYPDrgshG6Hv8csCrJmPsaALY
+ 3/UHX5YihGXzN56OfjUwwy6j8i70CsxOSlv0pvbtvtcvDtWztJdWJ5NSyRkb6haH8x2J
+ ULDP7+CWRnj/jVvdr53xR91qv+11sQf5VMKUU8Z1PLXSXRG/o08CRUtdaW9Kkew1V3/2
+ T3qmoNLRDeI2f5KLJ3XkDgPiU6bvBzebuFpWXX9gewlz0767yBgsZTUkYaWygwZs+ma2
+ BdIg==
+X-Gm-Message-State: AOJu0YzRakZkBxm+YLMWTr2h1Q2N74IEZZOTHo9xUMqIxhZM1njvNNGZ
+ KIZZgPMD0ffRE9+LO92ZKLtpmsbkrr5osc7ewQ883kSvabCjz89r8tBpzpwGGTk=
+X-Google-Smtp-Source: AGHT+IEVfW5rKXkP9Fc2XDHqHAWiJXdHG8X+iMgIqb8XccUvX6DwcRkfKzfvc/Wpe2Y0aoS7kKjf3g==
+X-Received: by 2002:a05:6214:5911:b0:6cb:e798:5589 with SMTP id
+ 6a1803df08f44-6cbf0084ad0mr236863466d6.28.1729003120953; 
+ Tue, 15 Oct 2024 07:38:40 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6cc2292f4cesm7292216d6.71.2024.10.15.07.38.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 15 Oct 2024 07:38:40 -0700 (PDT)
+Date: Tue, 15 Oct 2024 08:38:37 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Alexander Gendin <agendin@matrox.com>, Eddie James <eajames@linux.ibm.com>,
+ Emil Kronborg <emil.kronborg@protonmail.com>,
+ Etienne Carriere <etienne.carriere@foss.st.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Tom Fitzhenry <tom@tom-fitzhenry.me.uk>
+Subject: Re: [PATCH v3 7/7] cmd: Update the meminfo command to show the
+ memory map
+Message-ID: <20241015143837.GO53053@bill-the-cat>
+References: <20241015133304.2874735-1-sjg@chromium.org>
+ <20241015133304.2874735-8-sjg@chromium.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 0/7] Add AVS support for J721S2
-To: Manorit Chawdhry <m-chawdhry@ti.com>, Jaehoon Chung
- <jh80.chung@samsung.com>
-CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Keerthy J
- <j-keerthy@ti.com>, Udit Kumar <u-kumar1@ti.com>, Tom Rini
- <trini@konsulko.com>, Vignesh Raghavendra <vigneshr@ti.com>, Andrew Davis
- <afd@ti.com>, Nishanth Menon <nm@ti.com>, Simon Glass <sjg@chromium.org>
-References: <20241015-b4-upstream-j721s2-avs-v5-0-5c8087387dc5@ti.com>
-Content-Language: en-US
-From: Aniket Limaye <a-limaye@ti.com>
-In-Reply-To: <20241015-b4-upstream-j721s2-avs-v5-0-5c8087387dc5@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="S/9imzslXmD5BkZx"
+Content-Disposition: inline
+In-Reply-To: <20241015133304.2874735-8-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,65 +103,42 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--S/9imzslXmD5BkZx
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 15/10/24 16:22, Manorit Chawdhry wrote:
-> This series adds support for Adaptive voltage scaling on J721S2 device [0].
-> 
-> [0]: https://www.ti.com/lit/pdf/spruj28 (Section 5.2.4.1 AVS Support)
-> 
-> AVS Test for J721S2: https://gist.github.com/manorit2001/b2fd9f6764a863294d4aa0755c83c84f
-> Boot Test results: https://gist.github.com/manorit2001/d44e035552cb19aadeb0d928d5cb5f26
-> 
-> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
-> ---
-> Changes in v5:
-> * Nishanth
-> - Update the commit message for defconfig update
-> - Add MPU clock to all devicetree node
-> 
-> * Simon
-> - Update the commit messages to be more helpful
-> 
-> - Link to v4: https://lore.kernel.org/r/20241004-b4-upstream-j721s2-avs-v4-0-6d71c6bab9f4@ti.com
-> 
-> ---
-> Manorit Chawdhry (7):
->        power: pmic: tps65941: Add DM_PMIC dependency
->        drivers: misc: k3_avs: Check return code while programming AVS
->        arm: dts: k3-*-r5: Add MPU clock in clocks property
->        drivers: misc: k3_avs: Extract MPU clk and dev ID from DT
->        arm: mach-k3: j721s2_init: Initialize AVS Class 0
->        arm: dts: j721s2: Add VTM node in R5
->        configs: j721s2_evm_r5_defconfig: Add AVS Configs
-> 
+On Tue, Oct 15, 2024 at 07:33:04AM -0600, Simon Glass wrote:
 
-For the series,
+> U-Boot has a fairly rigid memory map which is normally not visible
+> unless debugging is enabled in board_f.c
+>=20
+> Update the 'meminfo' command to show it. This command does not cover
+> arch-specific pieces but gives a good overview of where things are.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-Reviewed-by: Aniket Limaye <a-limaye@ti.com>
+Please add dumping the lmb to this command, thanks.
 
->   arch/arm/dts/k3-am62-r5-lp-sk.dts               |  3 +-
->   arch/arm/dts/k3-am625-r5-beagleplay.dts         |  3 +-
->   arch/arm/dts/k3-am625-r5-sk.dts                 |  3 +-
->   arch/arm/dts/k3-am62a7-r5-sk.dts                |  3 +-
->   arch/arm/dts/k3-am62p5-r5-sk.dts                |  3 +-
->   arch/arm/dts/k3-am642-r5-evm.dts                |  3 +-
->   arch/arm/dts/k3-am642-r5-sk.dts                 |  3 +-
->   arch/arm/dts/k3-am654-r5-base-board.dts         |  3 +-
->   arch/arm/dts/k3-am69-r5-sk.dts                  |  3 +-
->   arch/arm/dts/k3-j7200-r5-common-proc-board.dts  |  3 +-
->   arch/arm/dts/k3-j721e-r5.dtsi                   |  3 +-
->   arch/arm/dts/k3-j721s2-r5-common-proc-board.dts |  9 ++++++
->   arch/arm/dts/k3-j721s2-r5.dtsi                  |  3 +-
->   arch/arm/dts/k3-j722s-r5-evm.dts                |  3 +-
->   arch/arm/dts/k3-j784s4-r5-evm.dts               |  3 +-
->   arch/arm/mach-k3/j721s2/j721s2_init.c           | 10 +++++++
->   configs/am68_sk_r5_defconfig                    |  4 +++
->   configs/j721s2_evm_r5_defconfig                 |  6 ++++
->   drivers/misc/k3_avs.c                           | 40 ++++++++++++++++++++++++-
->   drivers/power/pmic/Kconfig                      |  1 +
->   20 files changed, 97 insertions(+), 15 deletions(-)
-> ---
-> base-commit: 28dc47038edc4e93f32d75a357131bcf01a18d85
-> change-id: 20240130-b4-upstream-j721s2-avs-8c187d3fe26a
-> 
-> Best regards,
+--=20
+Tom
+
+--S/9imzslXmD5BkZx
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcOfm0ACgkQFHw5/5Y0
+tywOEgv9GRX8QHvp6LYSsXs8zgkOJ7W+u4MdLYXG35WHCa6pYlgoARmYrLyjW7Pp
+CrNHcQOBfwhOsJ5sPtDS+s5n1rXRXbBcNILopsYp1Jjy/eCt0WnGqL9oP6nf8679
+jDC/4PObxpogn3btvGxxP5H9CvmtUXD8iQ2saPOyP3b5IRVOtKVdfOL7f1wtRm6/
+28ryIjDWVVzALjriOd81B1EwVSFk2XrBgFshh6ZyD3ckzE5V3W+3sizrVL/ZkF+I
+fgvwu8r8ladjKOuT4R2GNtv6rvcfnw5wRYmRkb8M8xU/l5cjTzBfi/Z5UerSbJf/
+nQRqfoAx7be6m3U9GlY0Zgn7aKKbXdEk6g4xUfFaW9D21cO3tPelhxrcYAekSCvX
+SOzKDffyzUrMDlZB3EPYb6wFxs0sQ2koCuQyHXW8vC4n1LtxswYYneTj5XgFb5wn
+aZYOdThLy2ePnJR11F3+rjvLW2ai271hChS0bI6iEFlSgQZYhA9DIEjV+LsP3ouI
+yMUZhAlU
+=pSuN
+-----END PGP SIGNATURE-----
+
+--S/9imzslXmD5BkZx--
