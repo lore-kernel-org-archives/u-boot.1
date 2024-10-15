@@ -4,80 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F000D216A2
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 13:26:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C23F9D216A3
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 13:26:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B801588599;
-	Tue, 15 Oct 2024 15:26:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 2D774886DF;
+	Tue, 15 Oct 2024 15:26:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C1TUpKne";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="ROSvrrMm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D8EF883D4; Tue, 15 Oct 2024 15:26:32 +0200 (CEST)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D2248883D4; Tue, 15 Oct 2024 15:26:37 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 95CE888717
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 15:26:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 465C88839A
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 15:26:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-6cbe53a68b5so34331326d6.1
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 06:26:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728998788; x=1729603588; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=GV27+CvWgJHMHqnvGMY9Lsk3P3kOf7p2AHtExm7KMts=;
- b=C1TUpKneGz0WHz3LCuw2YRy/2nf6V6JEJci9KeXClikSd1+L1u11XGteLBCbIXlrIB
- y1tv1TuwHNnRkqesI3jnyLzWiKG8q6f2Rz7xu55Kz7R+z6cqfP0ZNBL7ncLLLdE8t2Rz
- r4b8E30Xz2lRT6zP5YkT189ar/vKrb566RyN4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728998788; x=1729603588;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=GV27+CvWgJHMHqnvGMY9Lsk3P3kOf7p2AHtExm7KMts=;
- b=sxgdsuzx2GpU0F96W5eHAtDGRM2WrOxOTCOuKnrnWgTF9AqvGIXVZIKO9CnvhHFkxA
- 8A5wbch7TDNSwv3Vbwd3FX9Hk13DCHqInuDAqyiGvZ+RATbrvvVKpaJXGUHpIhfePQOG
- 1iougAuqkDWTRX48zIGn9JnMdhBUWEW7v7x0qC3ufjgwlgW/kxQtPKZu+aOwzbpt1BAg
- V6NdJuLcRBMxspB8FgJR16iNkoH8nFpJE9gahBqMJX0r5hNWlVa/LxSJtz0lNZVjfxkJ
- Douo32O26HhoPMLiqTgcmIj/+X2lPHUgdpZ51bgavtp/XYSRDz9tKLMw8zBmwBhm+boP
- ZoZw==
-X-Gm-Message-State: AOJu0Yw79Hsmp6zpM2/TFuYaN45dQcf9BeCtprnc8tddLnXeI9+MvzoV
- uS63b2MuajjtimAFV2CGs0MJ0mUOYVwv8H7nTfIUvN+0IdN5sL4ToF5lJmu05HnQKoTJL1jQIBD
- S8BFTDCuMaN2amyEG/4PdGv2SfGMv0WSrTWHo
-X-Google-Smtp-Source: AGHT+IE3aYWa/5wDiIdYZUW6jde0P49TyvQ5WKolH7JzKmLSRYG2tdoFoQOBrnD9n7ibKHYRAUvDoPmi9h3dvFnWSsw=
-X-Received: by 2002:a05:6214:4a85:b0:6cb:c6d2:3567 with SMTP id
- 6a1803df08f44-6cbf00033ebmr175854636d6.3.1728998788464; Tue, 15 Oct 2024
- 06:26:28 -0700 (PDT)
+ spf=pass smtp.mailfrom=ddrokosov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk02.sberdevices.ru (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id A2735120018;
+ Tue, 15 Oct 2024 16:26:32 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru A2735120018
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1728998792;
+ bh=Oad8sKf61QQyxJ5eWRZdJ/ihpkbqlWtcNbe8xOroYsY=;
+ h=Date:From:To:Subject:Message-ID:MIME-Version:Content-Type:From;
+ b=ROSvrrMmf50AHxlBhOYAau8p1XJOWddn65rPBfpTWZ9WeQR6iSq6I8iC92KsNlukL
+ ku0TlnjoGvaxWj8TYaDlEkMPV2AEmiBcFx1GOx7tJyUs+hEsPoFp1yy+Uei9Pu0c4w
+ hzk8ICPE7oR5CPFRUqZYTh8kJWHyq/cVU8JbgRY3E9WLDP9JakUxw52BzElFwzucUG
+ PYJpHjk5HwT7cxrrmEHuJmmOVNpEqcYOK0vfkluf18UbdN7f8j+0kTGljVHHb2hySk
+ sshFzU7lmgOgH/x9afsXT3kEpcrAEJ7daw/EQpWp+6w9jUH+DvsX1TizODk0ksytZR
+ 3z4BPSbtoc8UQ==
+Received: from smtp.sberdevices.ru (unknown [172.16.192.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Tue, 15 Oct 2024 16:26:32 +0300 (MSK)
+Date: Tue, 15 Oct 2024 16:26:31 +0300
+From: Dmitry Rokosov <ddrokosov@salutedevices.com>
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+CC: Simon Glass <sjg@chromium.org>, <u-boot-amlogic@groups.io>, Igor Opaniuk
+ <igor.opaniuk@gmail.com>, Sam Protsenko <semen.protsenko@linaro.org>, "Tom
+ Rini" <trini@konsulko.com>, "Andrew F. Davis" <afd@ti.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Mario Six <mario.six@gdsys.cc>,
+ <u-boot@lists.denx.de>, <rockosov@gmail.com>, <kernel@salutedevices.com>
+Subject: Re: [PATCH v3 2/6] treewide: bcb: move ab_select command to bcb
+ subcommands
+Message-ID: <20241015132631.qnnbrmnuwp6zr7r5@CAB-WSD-L081021>
+References: <20241008-android_ab_master-v3-0-f292c45a33e4@salutedevices.com>
+ <20241008-android_ab_master-v3-2-f292c45a33e4@salutedevices.com>
+ <17FD691FA1477948.8140@groups.io> <87ed4mhgaw.fsf@baylibre.com>
+ <20241011180031.cgvuhks7zo772wl6@CAB-WSD-L081021>
+ <87frp1r9iz.fsf@baylibre.com>
+ <20241014203820.riljx72bkqw762v5@CAB-WSD-L081021>
+ <CAFLszTgO5h1zdXJTk-PCcDWx6nAz3riV34K_sHcvnO4AYMNSqA@mail.gmail.com>
+ <87ikttzhwd.fsf@baylibre.com>
 MIME-Version: 1.0
-References: <20241011212126.747741-1-sjg@chromium.org>
- <CAC_iWjKD=05pf=gcfCPUA0mGNbAX+jjyx5D03y0MWJRgxYDPOA@mail.gmail.com>
-In-Reply-To: <CAC_iWjKD=05pf=gcfCPUA0mGNbAX+jjyx5D03y0MWJRgxYDPOA@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 15 Oct 2024 07:26:16 -0600
-Message-ID: <CAFLszTgJW2KPbD1dogSVKbxgyYtvKGgSAcB_j5kXtWdkTGvtNA@mail.gmail.com>
-Subject: Re: [PATCH v4 0/5] Adjust initial EFI memory-allocation to be in the
- U-Boot region
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Artur Rojek <artur@conclusive.pl>, 
- Devarsh Thakkar <devarsht@ti.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Joao Marcos Costa <jmcosta944@gmail.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Raymond Mao <raymond.mao@linaro.org>, 
- Richard Weinberger <richard@nod.at>, 
- This contributor prefers not to receive mails <noreply@example.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <87ikttzhwd.fsf@baylibre.com>
+User-Agent: NeoMutt/20220415
+X-Originating-IP: [172.28.129.94]
+X-ClientProxiedBy: p-i-exch-a-m1.sberdevices.ru (172.24.196.116) To
+ p-i-exch-a-m1.sberdevices.ru (172.24.196.116)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 188447 [Oct 15 2024]
+X-KSMG-AntiSpam-Version: 6.1.0.4
+X-KSMG-AntiSpam-Envelope-From: ddrokosov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 39 0.3.39
+ e168d0b3ce73b485ab2648dd465313add1404cce, {Tracking_uf_ne_domains},
+ {Track_E25351}, {Tracking_bl_eng_cat, c15},
+ {Tracking_from_domain_doesnt_match_to}, 127.0.0.199:7.1.2;
+ smtp.sberdevices.ru:7.1.1,5.0.1; source.denx.de:7.1.1; salutedevices.com:7.1.1;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1, FromAlignment: s
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean, bases: 2024/10/15 12:17:00
+X-KSMG-LinksScanning: Clean, bases: 2024/10/15 12:17:00
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2024/10/15 10:33:00 #26756269
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,113 +109,284 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi Mattijs,
 
-On Mon, 14 Oct 2024 at 22:28, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hi Simon,
->
-> On Sat, 12 Oct 2024 at 00:23, Simon Glass <sjg@chromium.org> wrote:
+On Tue, Oct 15, 2024 at 02:10:10PM +0200, Mattijs Korpershoek wrote:
+> Hi Simon, Dmitry
+> 
+> On lun., oct. 14, 2024 at 15:06, Simon Glass <sjg@chromium.org> wrote:
+> 
+> > Hi Dmitry,
 > >
-> > U-Boot relocates itself to the top of memory and is supposed to avoid
-> > using any memory below that region. This allows the maximum amount of
-> > memory to be available for loading images.
+> > On Mon, 14 Oct 2024 at 14:38, Dmitry Rokosov
+> > <ddrokosov@salutedevices.com> wrote:
+> >>
+> >> Hello Mattijs,
+> >>
+> >> On Sat, Oct 12, 2024 at 10:49:08AM +0200, Mattijs Korpershoek wrote:
+> >> > Hi Dmitry,
+> >> >
+> >> > On ven., oct. 11, 2024 at 21:00, Dmitry Rokosov <ddrokosov@salutedevices.com> wrote:
+> >> >
+> >> > > On Fri, Oct 11, 2024 at 04:20:39PM +0200, Mattijs Korpershoek wrote:
+> >> > >> On ven., oct. 11, 2024 at 15:30, "Mattijs Korpershoek via groups.io" <mkorpershoek=baylibre.com@groups.io> wrote:
+> >> > >>
+> >> > >> > Hi Dmitry,
+> >> > >> >
+> >> > >> > Thank you for the patch.
+> >> > >> >
+> >> > >> > On mar., oct. 08, 2024 at 23:18, Dmitry Rokosov <ddrokosov@salutedevices.com> wrote:
+> >> > >> >
+> >> > >> >> To enhance code organization, it is beneficial to consolidate all A/B
+> >> > >> >> BCB management routines into a single super-command.
+> >> > >> >> The 'bcb' command is an excellent candidate for this purpose.
+> >> > >> >>
+> >> > >> >> This patch integrates the separate 'ab_select' command into the 'bcb'
+> >> > >> >> group as the 'ab_select' subcommand, maintaining the same parameter list
+> >> > >> >> for consistency.
+> >> > >> >>
+> >> > >> >> Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
+> >> > >> >> ---
+> >> > >> >>  MAINTAINERS                               |  1 -
+> >> > >> >>  cmd/Kconfig                               | 15 +------
+> >> > >> >>  cmd/Makefile                              |  1 -
+> >> > >> >>  cmd/ab_select.c                           | 66 -------------------------------
+> >> > >> >>  cmd/bcb.c                                 | 63 +++++++++++++++++++++++++++++
+> >> > >> >>  configs/am57xx_hs_evm_usb_defconfig       |  1 -
+> >> > >> >>  configs/khadas-vim3_android_ab_defconfig  |  1 -
+> >> > >> >>  configs/khadas-vim3l_android_ab_defconfig |  1 -
+> >> > >> >>  configs/sandbox64_defconfig               |  4 +-
+> >> > >> >>  configs/sandbox_defconfig                 |  4 +-
+> >> > >> >>  doc/android/ab.rst                        | 12 +++---
+> >> > >> >>  include/configs/khadas-vim3_android.h     |  2 +-
+> >> > >> >>  include/configs/khadas-vim3l_android.h    |  2 +-
+> >> > >> >>  include/configs/meson64_android.h         |  4 +-
+> >> > >> >>  include/configs/ti_omap5_common.h         |  4 +-
+> >> > >> >>  test/py/tests/test_android/test_ab.py     |  8 ++--
+> >> > >> >>  16 files changed, 85 insertions(+), 104 deletions(-)
+> >> > >> >>
+> >> > >> >> diff --git a/MAINTAINERS b/MAINTAINERS
+> >> > >> >> index 7aefda93d017f07d616f0f6d191129914fbeb484..668ccec9ae6df47192b1af668e3fdbeb1dfa15ea 100644
+> >> > >> >> --- a/MAINTAINERS
+> >> > >> >> +++ b/MAINTAINERS
+> >> > >> >> @@ -65,7 +65,6 @@ R:    Sam Protsenko <semen.protsenko@linaro.org>
+> >> > >> >>  S:     Maintained
+> >> > >> >>  T:     git https://source.denx.de/u-boot/custodians/u-boot-dfu.git
+> >> > >> >>  F:     boot/android_ab.c
+> >> > >> >> -F:     cmd/ab_select.c
+> >> > >> >>  F:     doc/android/ab.rst
+> >> > >> >>  F:     include/android_ab.h
+> >> > >> >>  F:     test/py/tests/test_android/test_ab.py
+> >> > >> >> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> >> > >> >> index dd33266cec70a2b134b7244acae1b7f098b921e8..11e8d363dc9b137723a86a240412d82dd0dbccc5 100644
+> >> > >> >> --- a/cmd/Kconfig
+> >> > >> >> +++ b/cmd/Kconfig
+> >> > >> >> @@ -1067,6 +1067,7 @@ config CMD_ADC
+> >> > >> >>  config CMD_BCB
+> >> > >> >>         bool "bcb"
+> >> > >> >>         depends on PARTITIONS
+> >> > >> >> +       depends on ANDROID_AB
+> >> > >> >
+> >> > >> > When building with khadas-vim3_android_defconfig, we can see that CMD_BCB is no
+> >> > >> > longer part of that build:
+> >> > >> >
+> >> > >> > $ grep CMD_BCB .config
+> >> > >> > <empty>
+> >> > >> >
+> >> > >> > However, if we look at include/configs/meson64_android.h, we can see
+> >> > >> > that the "bcb" command is not only used for checking the _slot suffix.
+> >> > >> >
+> >> > >> > It's also used for checking the bootloader reason. For example, in
+> >> > >> > BOOTENV_DEV_FASTBOOT, we call:
+> >> > >> >
+> >> > >> >    "if bcb test command = bootonce-bootloader; then " \
+> >> > >> >
+> >> > >> > Since CMD_BCB is no longer part of the .config (due to this dependency),
+> >> > >> > the boot script now shows errors:
+> >> > >> >
+> >> > >> > """
+> >> > >> > U-Boot 2024.10-00796-g969325278805 (Oct 11 2024 - 14:46:00 +0200) khadas-vim3
+> >> > >> >
+> >> > >> > Model: Khadas VIM3
+> >> > >> > SoC:   Amlogic Meson G12B (A311D) Revision 29:b (10:2)
+> >> > >> > DRAM:  2 GiB (effective 3.8 GiB)
+> >> > >> > Core:  411 devices, 36 uclasses, devicetree: separate
+> >> > >> > MMC:   mmc@ffe03000: 0, mmc@ffe05000: 1, mmc@ffe07000: 2
+> >> > >> > Loading Environment from MMC... fs uses incompatible features: 00020000, ignoring
+> >> > >> > Reading from MMC(2)... *** Warning - bad CRC, using default environment
+> >> > >> >
+> >> > >> > In:    usbkbd,serial
+> >> > >> > Out:   vidconsole,serial
+> >> > >> > Err:   vidconsole,serial
+> >> > >> > Net:   eth0: ethernet@ff3f0000
+> >> > >> >
+> >> > >> > Hit any key to stop autoboot:  0
+> >> > >> > Verify GPT: success!
+> >> > >> > Unknown command 'bcb' - try 'help'
+> >> > >> > Warning: BCB is corrupted or does not exist
+> >> > >> > dev: pinctrl@14
+> >> > >> > dev: pinctrl@40
+> >> > >> > gpio: pin 88 (gpio 88) value is 1
+> >> > >> > Unknown command 'bcb' - try 'help'
+> >> > >> > Warning: BCB is corrupted or does not exist
+> >> > >> > Loading Android boot partition...
+> >> > >> > switch to partitions #0, OK
+> >> > >> > mmc2(part 0) is current device
+> >> > >> > """
+> >> > >> >
+> >> > >> > I know we should not be using a boot script, nor non A/B configs but
+> >> > >> > it's a bummer that this series breaks an upstream
+> >> > >> > defconfig (khadas-vim3_android_defconfig)
+> >> > >> >
+> >> > >> > My recommendation:
+> >> > >> >
+> >> > >> > Make BCB_CMD_AB_SELECT implementation dependant on ANDROID_AB.
+> >> > >> > This way, users can use CMD_BCB with and without ANDROID_AB being enabled.
+> >> > >> >
+> >> > >> > We could do:
+> >> > >> > When ANDROID_AB=y, implement bcb ab_select subcommand
+> >> > >> > When ANDROID_AB=n, command is not accessible.
+> >> > >> >
+> >> > >> > I'll send you a diff shortly for this.
+> >> > >>
+> >> > >> Here is an illustration on how that would work:
+> >> > >>
+> >> > >> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> >> > >> index 861c31e26408..e1a4a97b042d 100644
+> >> > >> --- a/cmd/Kconfig
+> >> > >> +++ b/cmd/Kconfig
+> >> > >> @@ -1055,7 +1055,6 @@ config CMD_ADC
+> >> > >>  config CMD_BCB
+> >> > >>    bool "bcb"
+> >> > >>    depends on PARTITIONS
+> >> > >> -  depends on ANDROID_AB
+> >> > >>    help
+> >> > >>      Read/modify/write the fields of Bootloader Control Block, usually
+> >> > >>      stored on the flash "misc" partition with its structure defined in:
+> >> > >> diff --git a/cmd/bcb.c b/cmd/bcb.c
+> >> > >> index 4fd32186ae65..4fe634f14cc5 100644
+> >> > >> --- a/cmd/bcb.c
+> >> > >> +++ b/cmd/bcb.c
+> >> > >> @@ -438,6 +438,9 @@ static int do_bcb_ab_select(struct cmd_tbl *cmdtp, int flag, int argc,
+> >> > >>    char slot[2];
+> >> > >>    bool dec_tries = true;
+> >> > >>
+> >> > >> +  if (!CONFIG_IS_ENABLED(AB_SELECT))
+> >> > >> +          return CMD_RET_SUCCESS;
+> >> > >> +
+> >> > >>    for (int i = 4; i < argc; i++) {
+> >> > >>            if (!strcmp(argv[i], "--no-dec"))
+> >> > >>                    dec_tries = false;
+> >> > >> @@ -474,6 +477,9 @@ static int do_bcb_ab_dump(struct cmd_tbl *cmdtp, int flag, int argc,
+> >> > >>    struct blk_desc *dev_desc;
+> >> > >>    struct disk_partition part_info;
+> >> > >>
+> >> > >> +  if (!CONFIG_IS_ENABLED(AB_SELECT))
+> >> > >> +          return CMD_RET_SUCCESS;
+> >> > >> +
+> >> > >>    if (part_get_info_by_dev_and_name_or_num(argv[1], argv[2],
+> >> > >>                                             &dev_desc, &part_info,
+> >> > >>                                             false) < 0) {
+> >> > >>
+> >> > >
+> >> > > We also need to include an #ifdef directive for the ab_select_slot()
+> >> > > function usage; otherwise, the code will not compile successfully.
+> >> >
+> >> > Are you sure? Per my understanding, it's possible that the compiler
+> >> > optimizes this out because CONFIG_IS_ENABLED(AB_SELECT)
+> >> > is known as build time.
+> >> >
+> >> > When I tried this diff with khadas-vim3_android_defconfig I did not see
+> >> > any build errors. I will try again early next week.
+> >> >
+> >>
+> >> As I recall, the IS_ENABLED() mechanism serves as a runtime checker to
+> >> determine whether specific CONFIG_* options are enabled. Consequently,
+> >> all code paths under this mechanism are always compiled. I attempted to
+> >> disable CONFIG_ANDROID_AB for the sandbox_defconfig, but it resulted in
+> >> the expected linker error.
+> >>
+> >> /tmp/ccAvYrKL.ltrans25.ltrans.o: In function `do_bcb_ab_select':
+> >> <artificial>:(.text+0x6d5d): undefined reference to `ab_select_slot'
+> >> collect2: error: ld returned 1 exit status
+> >> Makefile:1813: recipe for target 'u-boot' failed
+> >> make: *** [u-boot] Error 1
+> >>
+> >> I have already prepared a new version using #ifdef directives. I will
+> >> send it shortly.
 > >
-> > The lmb subsystem automatically protects U-Boot's code and data from
-> > being overwritten. It relies on this region being a contiguous area of
-> > memory. This setup has worked well for at least 15 years and has been
-> > documented in the README for as long.
+> > Something else is going on here, since we do this all the time and
+> > rely on it. So long as the code is behind an if() the dead code should
+> > be eliminated.
 > >
-> > The EFI_LOADER subsystem currently uses memory outside the U-Boot region
-> > when starting up.
-> >
-> > Some of the downstream problems this causes are:
-> >
-> > 1. It can overwrite images that have been loaded
->
-> So can the load command
+> 
+> I have passed my diff (using CONFIG_IS_ENABLED) through the U-Boot CI:
+> https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/22700
+> 
+> See the branch:
+> https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commits/dmitry/ab-dump-v3
+> 
+> There are some test errors (sandbox test) but the "world build" stage
+> finished sucessfully.
+> 
+> I have also tested locally using the CI container:
+> $ cd ~/work/upstream/u-boot
+> $ git clean -xdf
+> $ make mproper
+> $ docker run -v $PWD:$PWD -it trini/u-boot-gitlab-ci-runner:jammy-20240227-14Mar2024 /bin/bash
+> 
+> # In container
+> uboot@0ba059e8b7af/$ cd /home/mkorpershoek/work/upstream/u-boot
+> uboot@0ba059e8b7af:/home/mkorpershoek/work/upstream/u-boot$ pip install -r test/py/requirements.txt
+> uboot@0ba059e8b7af:/home/mkorpershoek/work/upstream/u-boot$ ./test/py/test.py --bd sandbox --build -k test_ut
+> 
+> No build errors either.
+> 
+> Dmitry, can you clarify what compiler/build commands you've used to see
+> that error?
+> 
+> For reference, here is what buildman has in the CI container:
+> 
+> uboot@0ba059e8b7af:/home/mkorpershoek/work/upstream/u-boot$ ./tools/buildman/buildman --list-tool-chains
+> List of available toolchains (17):
+> aarch64   : /opt/gcc-13.2.0-nolibc/aarch64-linux/bin/aarch64-linux-gcc
+> arc       : /opt/gcc-13.2.0-nolibc/arc-linux/bin/arc-linux-gcc
+> arm       : /opt/gcc-13.2.0-nolibc/arm-linux-gnueabi/bin/arm-linux-gnueabi-gcc
+> c89       : /usr/bin/c89-gcc
+> c99       : /usr/bin/c99-gcc
+> i386      : /opt/gcc-13.2.0-nolibc/i386-linux/bin/i386-linux-gcc
+> m68k      : /opt/gcc-13.2.0-nolibc/m68k-linux/bin/m68k-linux-gcc
+> microblaze: /opt/gcc-13.2.0-nolibc/microblaze-linux/bin/microblaze-linux-gcc
+> mips      : /opt/gcc-13.2.0-nolibc/mips-linux/bin/mips-linux-gcc
+> nios2     : /opt/gcc-13.2.0-nolibc/nios2-linux/bin/nios2-linux-gcc
+> powerpc   : /opt/gcc-13.2.0-nolibc/powerpc-linux/bin/powerpc-linux-gcc
+> riscv32   : /opt/gcc-13.2.0-nolibc/riscv32-linux/bin/riscv32-linux-gcc
+> riscv64   : /opt/gcc-13.2.0-nolibc/riscv64-linux/bin/riscv64-linux-gcc
+> sandbox   : /usr/bin/cgcc
+> sh2       : /opt/gcc-13.2.0-nolibc/sh2-linux/bin/sh2-linux-gcc
+> x86_64    : /usr/bin/x86_64-linux-gnu-gcc
+> xtensa    : /opt/2020.07/xtensa-dc233c-elf/bin/xtensa-dc233c-elf-gcc
+> 
+> I think we should use CONFIG_IS_ENABLED if possible
 
-Can you point to where? If lmb is enabled, it should be using that, so
-not overwrite anything.
+I just run build on the my x86 Ubuntu machine.
 
->
-> > 2. Requires lmb reservations to avoid (1) even if EFI_LOADER is not
-> >    being used
-> > 3. Uses regions which scripts expect to be available, e.g. the existing
-> >    kernel_addr_r variables
-> > 4. Introduces confusion as to what memory U-Boot can use for itself
-> >
-> > This series sets up a very small region of memory which EFI can used at
-> > start-up, thus avoiding touching memory outside the U-Boot region.
->
-> EFI *is* U-Boot memory region. It lies outside the U-Boot binary,
-> because some services are instantiated on boot. It also *is* U-Boot
-> executable code. We should start treating it as such
+$ cd uboot
+$ make mproper
+$ make sandbox_defconfig
+$ make -j$(nproc)
 
-This seems like semantics to me. What do you think of this patch?
+That's all.
 
-Regards,
-Simon
+I've already sent the v4 patch with #ifdef. I can prepare the v5 patch
+using the IS_ENABLED() macro and will aim to send it today.
 
+But I have one question:
 
->
-> Thanks
-> /Ilias
-> >
-> > There are still a few tables which are not in the bloblist, but that
-> > will be resolved separately.
-> >
-> > Other than tables, the amount of API-visible memory allocated by EFI
-> > before booting is actually very small: 3 allocations, of a total of
-> > about 250 bytes. However, there are some areas where EFI allocations are
-> > done unnecessarily. For example efi_disk_add_dev() uses page-allocation
-> > to allocate an efi_device_path, then immediately frees it again. In this
-> > case it would be better to use malloc(). Since each allocation consumes
-> > a page (4KB), 256KB has been chosen for the size here, enough for 64
-> > allocations.
-> >
-> > As soon as efi_init_obj_list() is called, we know that the EFI subsystem
-> > is to be used, so we can relax the restrictions and allow EFI to use any
-> > memory it likes. This is handled using a simple boolean flag in BSS, since
-> > it cannot happen before relocation.
-> >
-> > Changes in v4:
-> > - Expand the commit message
-> > - Reword the commit message since this feature is needed
-> > - Use a different technique to keep the memory-usage in place
-> > - Drop changes to pool allocation
-> > - Reorder the patches
-> > - Rewrite the cover letter
-> > - Make it a debug message for now
-> >
-> > Changes in v3:
-> > - Add new patch to drop the memset() from efi_alloc()
-> > - Drop patch to convert device_path allocation to use malloc()
-> >
-> > Changes in v2:
-> > - Drop patch 'Show more information in efi index'
-> > - Drop patch 'Avoid pool allocation in efi_get_memory_map_alloc()'
-> > - Add the word 'warning', use log_warning() and show the end address
-> >
-> > Simon Glass (5):
-> >   efi: Drop the memset() from efi_alloc()
-> >   efi: Show the location of the bounce buffer when debugging
-> >   event: Add a generic way to reserve memory
-> >   efi: Reserve some memory for initial use
-> >   efi: Keep early allocations to the U-Boot region
-> >
-> >  common/board_f.c                  |  1 +
-> >  common/event.c                    |  1 +
-> >  include/asm-generic/global_data.h |  6 ++++
-> >  include/efi_loader.h              | 24 +++++++++++++-
-> >  include/event.h                   | 11 +++++++
-> >  lib/efi_loader/efi_bootbin.c      |  9 ++++++
-> >  lib/efi_loader/efi_memory.c       | 54 ++++++++++++++++++++++++-------
-> >  lib/efi_loader/efi_setup.c        |  5 +++
-> >  test/py/tests/test_event_dump.py  |  1 +
-> >  9 files changed, 100 insertions(+), 12 deletions(-)
-> >
-> > --
-> > 2.34.1
-> >
+Do we really want to display the ab_select and ab_dump subcommands to
+users if these commands are just stubs? Perhaps we should consider
+adding #ifdef directives to the subcommand arrays.
+
+-- 
+Thank you,
+Dmitry
