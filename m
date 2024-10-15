@@ -4,81 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 615A7CFC263
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 04:10:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A76B0CFC263
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 04:12:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24DD8892F2;
-	Tue, 15 Oct 2024 06:09:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0F654892F5;
+	Tue, 15 Oct 2024 06:12:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="csKBpT8L";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ge9OtVBF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B3AA892F8; Tue, 15 Oct 2024 06:09:39 +0200 (CEST)
-Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
- [IPv6:2607:f8b0:4864:20::529])
+ id 22958892ED; Tue, 15 Oct 2024 06:12:57 +0200 (CEST)
+Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
+ [IPv6:2607:f8b0:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 59E60892D9
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 06:09:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B228589292
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 06:12:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tkuw584924@gmail.com
-Received: by mail-pg1-x529.google.com with SMTP id
- 41be03b00d2f7-7ea7ad1e01fso1333647a12.0
- for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 21:09:37 -0700 (PDT)
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-71e6d988ecfso991869b3a.0
+ for <u-boot@lists.denx.de>; Mon, 14 Oct 2024 21:12:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1728965376; x=1729570176; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=L5YwUgQY0FURG90/A8f5KwFxQLdx+EEFNTa1Pu5btBw=;
- b=csKBpT8LPTZpnUl6yv1jFnQV0ZDQbf8zFtQ66K16beTLsEeuix45B9upXgf6qfWPc+
- R6GV0GrVEQaEYeGAHd04/7Rnh0GaIJq/j7L85RPuURhT9tIPUBDxs97dVF8qA5nqL9V4
- 36vdZEEQc2h7wsWkmq7IVrHYWyPOT1D/fZh7cV4uQcqQsw9gI578238oCxZ8Ss2LTIgE
- BGNbRYugdU87URTUS5SmOxdyD4LHe5C05uM317LTdQtxx+BD16JeK1yDJ+YbWp5qRxIY
- W9Xii6nO96UPuO+gsc/jLA9TP6fEE20u6C6XaxM/+i141ynDFi9IUR5/q7AKiL4qTk7x
- Aupw==
+ d=gmail.com; s=20230601; t=1728965569; x=1729570369; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=6/qWvY3zsbniUXgAq7VkqYdwt+zpCX8P4lzbMyCQ2yw=;
+ b=ge9OtVBFpCrDKeKu3utm1XebzonA+z7wYYvfLgPzGfy2Fg86DjxyzGiiG/+TJz+idj
+ tq3kK87Korn1W7skCc4lQxquuttZGd2Rs8xdwHNeGW/ExsUt3qfOYgRi0fV4H+uHtY2q
+ 2BiGu4m8FAdwcLS+LDteez/KH6ojBxOIdPbUkJx9mdQbkfWVML4/6gw476hZvjLU2zAN
+ jDCwpsQcgY2zLjyb0iVZG3y/CcNvU92cv5tCDk50A1cPFgEPXv0+cXg7VarjGUsX7Gb0
+ Fk77UXQ20S02M7YCm1n/m7eTWekh0a+l0Sba36jmDUbBq1wV4gqycKRzvjsyteQTIAa2
+ 8QDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728965376; x=1729570176;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=L5YwUgQY0FURG90/A8f5KwFxQLdx+EEFNTa1Pu5btBw=;
- b=YEwlmg6WLjM/I30gzk/mtabCTrGEhhUlRJEDGbB7eYpS+Ims2YpAgJ5RT+aZEYYUx+
- OulotLQZyFYL/YEIAanPmjS5C9jhyDtU6D5EqhN3erPCYX4n3fkGKdOFEA7MENpGutAt
- DZvg+Jff+KF/CZu7T4a7m39DzUyK4Oxpff5KOP9lLTgRx5kuDKM4MvzAfpA7DQhL5/U/
- EbmQTimLwNfFG0kaT4pBQoVt1LQgTWcjF16U1hPnQ1Ct/ISdb8sayxzTbVFmF5jpclqG
- SvNu1o54VskUa5XFUxZs6gVEMmSt5vv3jZkhsj4WO5AkwfrkIhApaSLobyV4ptCp8IQ5
- /4Qw==
-X-Gm-Message-State: AOJu0YydoV0LPxZGzvyynD87yOmYCXjU8XdSE5YRFdoWCN7HZvogMok7
- mx2btpXILhtRSF6h3c7gJ7NqtxHP50ccacMCPomwolpaC91mfhTTVBlkY2fr
-X-Google-Smtp-Source: AGHT+IHN5Om6OmdMr1mfHjhwYvXdbytbMNLcVtUC3L0wbiTtBYu5bRLKgmy2OwxlpeddSSKWrEyY4A==
-X-Received: by 2002:a05:6a20:6a04:b0:1d7:e76:6040 with SMTP id
- adf61e73a8af0-1d8ae082fd4mr27198616637.4.1728965375802; 
- Mon, 14 Oct 2024 21:09:35 -0700 (PDT)
-Received: from ISCN5CG2520RPD.infineon.com (sp49-98-220-86.msd.spmode.ne.jp.
+ d=1e100.net; s=20230601; t=1728965569; x=1729570369;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=6/qWvY3zsbniUXgAq7VkqYdwt+zpCX8P4lzbMyCQ2yw=;
+ b=gSAyrog11/x5KqA/v9ivNW4CZfec3Zfj0kuMV4FosTLcmmlKovEqpxsTeOSM/0akt7
+ nSkI/Bf88t3fAgf9TKz7qUuUMkrNHbeFsvLa2Vh0Q3EZk3nl4KIUKTNHPiUcbO8XgKFv
+ X/gsHK82vRMUbKivgY8h0/Q92b6YfHSsmlhYfaeH2eYaCJqFQVI2uOkgo2oFXbS9RvwU
+ 39Domkuy4ST2iVW0XM0znxHqwkqEsBpxeV8jWY4aXQLdcJe/tcot50MYmPwIQ3U6PERy
+ XAPde3Wsw0Pxn4LQ1fIjNyAGkSxKzzpzq0Hqm6D9rz0iOacb4wPcBGHaF5S4fpdqF34P
+ qFog==
+X-Gm-Message-State: AOJu0YzuCW8pu+hjYCY9Dw+qlSgNXp8GNReCO9betNHUPM0+l0EcZdYh
+ FkPEURYvhx0oFaY0QJ7gCb5YrjnklkZl+jeClerDEj0lz7N1W1to
+X-Google-Smtp-Source: AGHT+IEDFe1L4ZacOiElP7FCwTXE/ZElDF3mhNOJvBfUW9dvoDObXaWXLV8Ih6NiUghbCE3BXe4S4g==
+X-Received: by 2002:a05:6a20:cfa9:b0:1d2:e458:4063 with SMTP id
+ adf61e73a8af0-1d8bcfb26cbmr19563002637.33.1728965569125; 
+ Mon, 14 Oct 2024 21:12:49 -0700 (PDT)
+Received: from [192.168.241.151] (sp49-98-220-86.msd.spmode.ne.jp.
  [49.98.220.86]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-7ea9c6ba2a8sm357500a12.6.2024.10.14.21.09.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Oct 2024 21:09:35 -0700 (PDT)
-From: tkuw584924@gmail.com
-X-Google-Original-From: Takahiro.Kuwano@infineon.com
-To: u-boot@lists.denx.de
-Cc: trini@konsulko.com, jagan@amarulasolutions.com, vigneshr@ti.com,
- tudor.ambarus@linaro.org, pratyush@kernel.org, tkuw584924@gmail.com,
- Bacem.Daassi@infineon.com, Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
-Subject: [PATCH v3 6/6] mtd: spi-nor: Set ECC unit size to MTD writesize in
- Infineon SEMPER flashes
-Date: Tue, 15 Oct 2024 13:08:36 +0900
-Message-Id: <377d4d69bf45734c60e7d0ede3ea0c516a11e7c6.1728964655.git.Takahiro.Kuwano@infineon.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1728964655.git.Takahiro.Kuwano@infineon.com>
-References: <cover.1728964655.git.Takahiro.Kuwano@infineon.com>
+ d2e1a72fcca58-71e77370a83sm353586b3a.5.2024.10.14.21.12.46
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 14 Oct 2024 21:12:48 -0700 (PDT)
+Message-ID: <6e914339-3590-4898-a151-9091dc7fdf68@gmail.com>
+Date: Tue, 15 Oct 2024 13:12:44 +0900
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [2nd RESEND PATCH v2 0/6] mtd: Make sure UBIFS does not do
+ multi-pass page programming on flashes that don't support it
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, jagan@amarulasolutions.com, vigneshr@ti.com,
+ tudor.ambarus@linaro.org, pratyush@kernel.org, Bacem.Daassi@infineon.com,
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+References: <cover.1727399650.git.Takahiro.Kuwano@infineon.com>
+ <20241010173236.GA3699035@bill-the-cat>
+Content-Language: en-US
+From: Takahiro Kuwano <tkuw584924@gmail.com>
+In-Reply-To: <20241010173236.GA3699035@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,51 +97,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+Hello Tom,
 
-The Infineon SEMPER NOR flash family uses 2-bit ECC by default with each
-ECC block being 16 bytes. Under this scheme multi-pass programming to an
-ECC block is not allowed. Set the writesize to make sure multi-pass
-programming is not attempted on the flash.
+On 10/11/2024 2:32 AM, Tom Rini wrote:
+> On Fri, Sep 27, 2024 at 10:18:05AM +0900, tkuw584924@gmail.com wrote:
+> 
+>> From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+>>
+>> Resent after modifying commit message in #5 (mention Linux commit first)
+>> and collecting A-b tags.
+>>
+>> This series is equivalent to the one for Linux MTD submitted by
+>> Pratyush Yadav.
+>>
+>> https://patchwork.ozlabs.org/project/linux-mtd/list/?series=217759&state=*
+>>
+>> Changes in v2:
+>>   - Fix an issue in setting macronix_octal_fixups
+>>   - Rework fixup hooks
+> 
+> Sorry, can you please rebase this on top of current master? With some
+> other related backlogged patches now applied this doesn't apply cleanly.
+> Thanks.
+> 
+I have sent v3 based on current master.
 
-Acked-by: Tudor Ambarus <tudor.ambarus@linaro.org>
-Signed-off-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
----
- drivers/mtd/spi/spi-nor-core.c | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
-
-diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
-index 46af9b4fe47..f5c9868bbca 100644
---- a/drivers/mtd/spi/spi-nor-core.c
-+++ b/drivers/mtd/spi/spi-nor-core.c
-@@ -3855,6 +3855,13 @@ static void s25_late_init(struct spi_nor *nor,
- 			  struct spi_nor_flash_parameter *params)
- {
- 	nor->setup = s25_s28_setup;
-+
-+	/*
-+	 * Programming is supported only in 16-byte ECC data unit granularity.
-+	 * Byte-programming, bit-walking, or multiple program operations to the
-+	 * same ECC data unit without an erase are not allowed.
-+	 */
-+	params->writesize = 16;
- }
- 
- static int s25_s28_post_bfpt_fixup(struct spi_nor *nor,
-@@ -4019,6 +4026,13 @@ static void s28hx_t_late_init(struct spi_nor *nor,
- {
- 	nor->octal_dtr_enable = spi_nor_cypress_octal_dtr_enable;
- 	nor->setup = s25_s28_setup;
-+
-+	/*
-+	 * Programming is supported only in 16-byte ECC data unit granularity.
-+	 * Byte-programming, bit-walking, or multiple program operations to the
-+	 * same ECC data unit without an erase are not allowed.
-+	 */
-+	params->writesize = 16;
- }
- 
- static void s28hx_t_post_sfdp_fixup(struct spi_nor *nor,
--- 
-2.34.1
-
+Thanks!
+Takahiro
