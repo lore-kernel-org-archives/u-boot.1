@@ -4,75 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 545C4CFC276
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 09:34:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 801E4CFC27F
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 09:56:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8D5F88581;
-	Tue, 15 Oct 2024 11:34:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id ECD1D88DED;
+	Tue, 15 Oct 2024 11:56:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EoDRtIcI";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="PY6W68z0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B7488852D; Tue, 15 Oct 2024 11:34:52 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id 6DED488C7C; Tue, 15 Oct 2024 11:56:54 +0200 (CEST)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4375B88387
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 11:34:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 13F0689079
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 11:56:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-5c9388a00cfso6178715a12.3
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 02:34:50 -0700 (PDT)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-43057f4a16eso45014505e9.1
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 02:56:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728984890; x=1729589690; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=7/xJ7eWUAZmvkkuxdiwVlpA55Yp1+oDEpSlOAMLv430=;
- b=EoDRtIcIvnyWXgbSE4UUEvgpTROETNqKfvNgadTdc6Z1/sJhE6CphmoKUJEzgBfOMw
- s0M6mXU4elEHGIfD0cW0wjolSwPI59E+MrlJvFFAEE1zqz1XYhJ+ykAISBjHVjAlqohH
- 0Qf5y1AH+yY8fu2EygPmod5pYQYiaPp7dd+EtsCwyoBLtuHVARpa0n+hSn0hLzzup+t2
- eD+AezsIHPLD5EkyikGVVakxVDHhBif/Tfj8W923i7HRiZDGd1t+W3IGdj8yIrbqnB+g
- ujSbX/YjFDuMfOV45Vz8ry2hrUlyWm44703B2oyKX2GFiL5BAMdvUXaLQ5QWUizQI8rE
- ljVQ==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1728986210; x=1729591010;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=qBtp+F+IlaTbTpNlDp658bfu5QSihSpwxJ0eIIzsryM=;
+ b=PY6W68z0c9e98BjzkaBAiWaAKHuEKbIlPdUvviQtGnEw5ln60aYDCCptux/a8Je+6x
+ B6Hq+DwKsmcZ/GWL8ZsHQapRsZcwaVi7s4ajT+QgR7vSutlpIGFtMagzFmPBkxyRsBbq
+ UWqEWsFIK9XqXmUE8H8C8rjlQUxlp4OQSg0TGeEp542THDe05ItKy3OG1tLGwk2WGfX4
+ M+lGPar7WhJ0viCI5tJELTiJ29eiI7Nj3AwuLfbr+OCStOTyARPB+ACRFfgGRctmNJwx
+ 0a9O2LUPTpsvdpv9u+3Fn8DzdCJnDtJna1UEXD1wMn+8ULYsldBAhkrThJYAsjyX5Qgc
+ FEyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728984890; x=1729589690;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=7/xJ7eWUAZmvkkuxdiwVlpA55Yp1+oDEpSlOAMLv430=;
- b=Fc+CLURwFF5msZ61vQLcDES776IRuHNNqNcQn91V7rJWsBPvLNo7CxYpuJ7HCIWKpi
- qQiwzJT6qFISVaORcdJwsaPak8/MJJSmCazoe+1V56ubcR+ZXCa4/AYf9NFAdfoLhuaq
- lLfqFGRJluLJ2IRevZTVqU3r/lK3iVHa0aiJEuqMlTzJcWQ/O9f2RiUUlwEduihnAsAr
- n2gB7I8TjK6o7/EYh+R2OtsTEVdJgpLUztswoYcq6sIuz/sF3QMo/VNHFX5MuEm/ENAX
- wdwjsweQzYj/MbtKPUrZ1PFyZPb2gnSlV+y12osPG6kDbNZtPPWi6jcYE/5oFdyDLuix
- 1tcg==
-X-Gm-Message-State: AOJu0YwzWEwS5PDnEx25UjgJHw+4C/hvsKNth0oajRj5KfKmxDiyKTR0
- O1nCy8pKbCFVmr4gXpFkum1eLFe3m6Wgo+eTTZoy378srEjhCcVtkyQZ41o9TlyhlNh0B/amidW
- 0eCWJyxbzzNu/QxJS3erQo5cmiSNsW0yIMOdqKg==
-X-Google-Smtp-Source: AGHT+IECnQxw0kIks0FavoPFBvI1mrqD/rOs6T03kBKVqSwCreoXkW/IY6unASxGZPOSQvh1wcAFOjdFwx1UHXShMLU=
-X-Received: by 2002:a05:6402:4407:b0:5c9:758c:307d with SMTP id
- 4fb4d7f45d1cf-5c9758c317cmr6219342a12.34.1728984889610; Tue, 15 Oct 2024
- 02:34:49 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1728986210; x=1729591010;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=qBtp+F+IlaTbTpNlDp658bfu5QSihSpwxJ0eIIzsryM=;
+ b=LbzOcHbupLqknYhK32/n4CwZaTwPT+nYi2uVWSXn1TRkgAjBtR2d6EwiDmmKKFsiXV
+ Gv5S5YxO5q4czsUxyByhCwsETM+GG2PGrDa6WRJgvdf6dYmfbIgz9aogw3E+5SPd0X5/
+ D3WSbLTSjXbg4y/SvuuBfWjI0qu6vZc18m03H3CzGnykOEPFS+s9HjLndWL9n+caWwbm
+ gX4v315LS4XE7ja+FhC5UB/74ooFhvfTXh6+gQt9/TTBg46pnf8czqPZJvO+SMvxDfLt
+ 9TEgpDkhqS32KDjpReOBHuxSskYh2FvhtZqeRroHKDhwS9F5g5ZCij5y7ZIzG1Y3TcKF
+ H/rg==
+X-Gm-Message-State: AOJu0YxZktJ2dsxig/9akZicFSfu8iMjkWHgxRnVf3aERzjrU3mBpJ2V
+ FjSSuFrewNgb+F21G76Lf0W7zFHPpb+WJj9o5Wd8J2PBbWotUhazDnLcz35KnH4=
+X-Google-Smtp-Source: AGHT+IG1pix6341x+yFnDMOTsnB0hL4RZWeAb50zkwvtZSQwO6vHVmeVsHFUYNN7X1rjiv1neGkjYQ==
+X-Received: by 2002:a05:600c:4e8a:b0:42c:af06:718 with SMTP id
+ 5b1f17b1804b1-4311df435e7mr134869265e9.28.1728986210456; 
+ Tue, 15 Oct 2024 02:56:50 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-37d7fa87d48sm1130732f8f.32.2024.10.15.02.56.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 15 Oct 2024 02:56:50 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Svyatoslav Ryhel <clamor95@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>, Simon Holesch
+ <simon@holesch.de>, Ion Agorria <ion@agorria.com>, Svyatoslav Ryhel
+ <clamor95@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH v1 1/1] usb: ci_udc: don't use "advance" feature when
+ setting address
+In-Reply-To: <20241013145820.85426-2-clamor95@gmail.com>
+References: <20241013145820.85426-1-clamor95@gmail.com>
+ <20241013145820.85426-2-clamor95@gmail.com>
+Date: Tue, 15 Oct 2024 11:56:47 +0200
+Message-ID: <87sesxzo2o.fsf@baylibre.com>
 MIME-Version: 1.0
-References: <20241013105522.391414-1-sughosh.ganu@linaro.org>
- <20241013105522.391414-12-sughosh.ganu@linaro.org>
- <CAFLszTjYM_4het1OJx_SXb=2ztqmDtVeACmzZMyhB5q=P9sZMA@mail.gmail.com>
-In-Reply-To: <CAFLszTjYM_4het1OJx_SXb=2ztqmDtVeACmzZMyhB5q=P9sZMA@mail.gmail.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Tue, 15 Oct 2024 15:04:38 +0530
-Message-ID: <CADg8p95JcjOXJuer6LLfjWjAC0vsKOPm4F4TmGWUSApjoR2_ig@mail.gmail.com>
-Subject: Re: [PATCH v3 11/15] layerscape: use the lmb API's to add RAM memory
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Jonas Karlman <jonas@kwiboo.se>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,92 +93,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 14 Oct 2024 at 21:21, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Sughosh,
->
-> On Sun, 13 Oct 2024 at 04:56, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> >
-> > The EFI memory allocations are now being done through the LMB module,
-> > and hence the memory map is maintained by the LMB module. Use the
-> > lmb_arch_add_memory() API function to add the usable RAM memory to the
-> > LMB's memory map.
-> >
-> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > ---
-> > Changes since V2: None
-> >
-> >  arch/arm/cpu/armv8/fsl-layerscape/cpu.c | 8 ++++----
-> >  lib/Kconfig                             | 1 +
-> >  2 files changed, 5 insertions(+), 4 deletions(-)
-> >
-> > diff --git a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c b/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
-> > index f9c2083677..d2d3e346a3 100644
-> > --- a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
-> > +++ b/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
-> > @@ -10,6 +10,7 @@
-> >  #include <env.h>
-> >  #include <init.h>
-> >  #include <hang.h>
-> > +#include <lmb.h>
-> >  #include <log.h>
-> >  #include <net.h>
-> >  #include <vsprintf.h>
-> > @@ -1525,8 +1526,8 @@ int dram_init_banksize(void)
-> >         return 0;
-> >  }
-> >
-> > -#if CONFIG_IS_ENABLED(EFI_LOADER)
-> > -void efi_add_known_memory(void)
-> > +#if CONFIG_IS_ENABLED(LMB_ARCH_MEM_MAP)
-> > +void lmb_arch_add_memory(void)
-> >  {
-> >         int i;
-> >         phys_addr_t ram_start;
-> > @@ -1548,8 +1549,7 @@ void efi_add_known_memory(void)
-> >                     gd->arch.resv_ram < ram_start + ram_size)just
-> >                         ram_size = gd->arch.resv_ram - ram_start;
-> >  #endif
-> > -               efi_add_memory_map(ram_start, ram_size,
-> > -                                  EFI_CONVENTIONAL_MEMORY);
-> > +               lmb_add(ram_start, ram_size);
->
-> But isn't RAM added to lmb anyway? I understand the call-removal but
-> why the lmb_add() ?
+Hi Svyatoslav,
 
-This function gets called from lmb_add_memory() since an architecture
-specific memory map is enabled for this arch. And in this case, the
-addition of lmb memory is the responsibility of this function. So this
-code is doing the right thing.
+Thank you for the patch.
 
+On dim., oct. 13, 2024 at 17:58, Svyatoslav Ryhel <clamor95@gmail.com> wrote:
+
+> From: Ion Agorria <ion@agorria.com>
+>
+> In the older USB controllers like for example in ChipIdea controller
+> used by the Tegra 2 the "USBADRA: Device Address Advance" bitflag
+> does not exist, so the new device address set during SET_ADDRESS
+> can't be deferred by hardware, which causes the host to not recognize
+> the device and give an error.
+>
+> Instead store it until ep completes to apply the change into the hw
+> register as Linux kernel does. This should fix regression on old and
+> and be compatible with newer controllers.
+
+Since this is based on a linux commit, can we please mention the
+revision in the commit message?
+
+Per my understanding, this would be:
+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=ef15e5490edc7edf808d3477ab32e0e320792f65
 
 >
-> >         }
-> >  }
-> >  #endif
-> > diff --git a/lib/Kconfig b/lib/Kconfig
-> > index 100c4e5c25..3796adc453 100644
-> > --- a/lib/Kconfig
-> > +++ b/lib/Kconfig
-> > @@ -1135,6 +1135,7 @@ config SPL_LMB
-> >  config LMB_ARCH_MEM_MAP
-> >         bool "Add an architecture specific memory map"
-> >         depends on LMB
-> > +       default y if FSL_LAYERSCAPE
+> Signed-off-by: Ion Agorria <ion@agorria.com>
+> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> ---
+>  drivers/usb/gadget/ci_udc.c | 24 +++++++++++++++++++++++-
+>  drivers/usb/gadget/ci_udc.h |  1 +
+>  2 files changed, 24 insertions(+), 1 deletion(-)
 >
-> This should use an event.
+> diff --git a/drivers/usb/gadget/ci_udc.c b/drivers/usb/gadget/ci_udc.c
+> index bbe03cfff1f..4bff75da759 100644
+> --- a/drivers/usb/gadget/ci_udc.c
+> +++ b/drivers/usb/gadget/ci_udc.c
+> @@ -649,12 +649,30 @@ static void flip_ep0_direction(void)
+>  	}
+>  }
+>  
+> +/*
+> + * This function explicitly sets the address, without the "USBADRA" (advance)
+> + * feature, which is not supported by older versions of the controller.
+> + */
+> +static void ci_set_address(struct ci_udc *udc, u8 address)
+> +{
+> +	DBG("%s %x\n", __func__, address);
+> +	writel(address << 25, &udc->devaddr);
+> +}
+> +
+>  static void handle_ep_complete(struct ci_ep *ci_ep)
+>  {
+>  	struct ept_queue_item *item, *next_td;
+>  	int num, in, len, j;
+>  	struct ci_req *ci_req;
+>  
+> +	/* Set the device address that was previously sent by SET_ADDRESS */
+> +	if (controller.next_device_address != 0) {
+> +		struct ci_udc *udc = (struct ci_udc *)controller.ctrl->hcor;
+> +
+> +		ci_set_address(udc, controller.next_device_address);
+> +		controller.next_device_address = 0;
+> +	}
+> +
+>  	num = ci_ep->desc->bEndpointAddress & USB_ENDPOINT_NUMBER_MASK;
+>  	in = (ci_ep->desc->bEndpointAddress & USB_DIR_IN) != 0;
+>  	item = ci_get_qtd(num, in);
+> @@ -783,7 +801,7 @@ static void handle_setup(void)
+>  		 * write address delayed (will take effect
+>  		 * after the next IN txn)
+>  		 */
+> -		writel((r.wValue << 25) | (1 << 24), &udc->devaddr);
+> +		controller.next_device_address = r.wValue;
+>  		req->length = 0;
+>  		usb_ep_queue(controller.gadget.ep0, req, 0);
+>  		return;
+> @@ -814,6 +832,9 @@ static void stop_activity(void)
+>  	int i, num, in;
+>  	struct ept_queue_head *head;
+>  	struct ci_udc *udc = (struct ci_udc *)controller.ctrl->hcor;
+> +
+> +	ci_set_address(udc, 0);
+> +
+>  	writel(readl(&udc->epcomp), &udc->epcomp);
+>  #ifdef CONFIG_CI_UDC_HAS_HOSTPC
+>  	writel(readl(&udc->epsetupstat), &udc->epsetupstat);
+> @@ -934,6 +955,7 @@ static int ci_pullup(struct usb_gadget *gadget, int is_on)
+>  	struct ci_udc *udc = (struct ci_udc *)controller.ctrl->hcor;
+>  	if (is_on) {
+>  		/* RESET */
+> +		controller.next_device_address = 0;
+>  		writel(USBCMD_ITC(MICRO_8FRAME) | USBCMD_RST, &udc->usbcmd);
+>  		udelay(200);
+>  
+> diff --git a/drivers/usb/gadget/ci_udc.h b/drivers/usb/gadget/ci_udc.h
+> index bea2f9f3fe3..807f2084c1e 100644
+> --- a/drivers/usb/gadget/ci_udc.h
+> +++ b/drivers/usb/gadget/ci_udc.h
+> @@ -105,6 +105,7 @@ struct ci_drv {
+>  	struct ept_queue_head		*epts;
+>  	uint8_t				*items_mem;
+>  	struct ci_ep			ep[NUM_ENDPOINTS];
+> +	u8				next_device_address;
 
-Again, using this method had been agreed upon by you earlier.
+Comparing to
+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=ef15e5490edc7edf808d3477ab32e0e320792f65,
 
--sughosh
+Can we please keep similar logic ?
+Having both:
+- bool setaddr
+- u8 address
 
->
-> >         help
-> >           Some architectures have special or unique aspects which need
-> >           consideration when adding memory ranges to the list of available
-> > --
-> > 2.34.1
-> >
->
-> Regards,
-> Simon
+This way, we keep the diff with the linux driver a bit lower.
+
+>  };
+>  
+>  struct ept_queue_head {
+> -- 
+> 2.43.0
