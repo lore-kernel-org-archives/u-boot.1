@@ -4,88 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C1DFD216AD
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 14:16:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98504D216AD
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 14:17:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 725068837D;
-	Tue, 15 Oct 2024 16:16:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E9DAC88599;
+	Tue, 15 Oct 2024 16:17:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OhwyqKhy";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="G54s3/TO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1546C88387; Tue, 15 Oct 2024 16:16:46 +0200 (CEST)
-Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
- [IPv6:2607:f8b0:4864:20::f2a])
+ id 8BD5C885D1; Tue, 15 Oct 2024 16:17:47 +0200 (CEST)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 24D0C87F19
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 16:16:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 891D38852B
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 16:17:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2a.google.com with SMTP id
- 6a1803df08f44-6cbe700dcc3so41968686d6.3
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 07:16:43 -0700 (PDT)
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-539fe76e802so1111483e87.1
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 07:17:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729001802; x=1729606602; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=JwghM59ba/0hJ3UzaxyIqz6My7MFik4Q1y6mOAOQsVU=;
- b=OhwyqKhyi97UUAnKXLch4y1DAKO3tuz7Nnls+elhhGdT1Z0tGHfbFdxzOnigbP02WG
- LevTVF+Zdp/TKTAQySQppON84W0Ccyjb6+DmC3LbH/WOK1PKgILnggu4uE1Gzkfi1ByL
- Mc/7IIDWvQ9lkM7hJME8mtpLYabQ/0dH+86Is=
+ d=linaro.org; s=google; t=1729001865; x=1729606665; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=7/gbyRSTQRzibMflrFd7z8IlPrxer+KUo5bdDD+IiBY=;
+ b=G54s3/TO48pOUdenPr68FA+v6F2/N8jKGxIT5Uuax1/AGVPN311Blmwfs5kK5Gmbo0
+ zcjBOrHv6mT7YoA22CN3RoJNZmhyb84pn9dii5mog77WcyjX1Lvxz2oSiH85JrIYUw1y
+ +4diVm4W155goeYqVirc2AE/iOE99QODVhcui30vsjE+LwhPHhZ+h/EytNh0AMkSzahX
+ 98JI0t5IxYdPFVUZvnCbEZgTQmdx68Eksd/GwI/cF7q8a9u3SQtx0BUgSMCYTOkLJn7q
+ jQc3/nYDOeR3s8912Il002wfU6pRQWRuPILqhBnWnFrwnnUnwn8FQ/CaBye9U0bWQqF1
+ 3djg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729001802; x=1729606602;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=JwghM59ba/0hJ3UzaxyIqz6My7MFik4Q1y6mOAOQsVU=;
- b=cGMXww51Jf+BHoogrbJDdF/y8ozefObGmDyuTI2Qm0RLsJbvkWKwAmzOatoFP1T627
- Xd4BCW8Pytevxw6vc8ehLJ96umvsT1M+NnSo9P9Z3z6ktqYh+sTFHNRQGuyyOvMMN4DH
- rbATPWC/QWzwQKlDjSL0DFPYWTetuh2xKXOvr/YEFh9OOjIGO5KnUh9RLaHd9YgjCkr6
- 4BqmP7JojrI3gt21mFmBg7eiod8Reg+x5ublbGfxtwwhVQeovDF4Lpb0FyEA1JLusHIW
- Ltd5tRAIAEAtRiLrLr6fni8shcTTRM/NKapfDQZdyoHH7zHhDE91Tf/iolcmPgl8qgtg
- AKOQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXp1CejUijqP6DV2iocHNzTqqpxVEnHVoLail0qvN8Cdxm/OiJePP5449KukABsVOsz3i/YDQc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzxg/ntX3rpYJBGXXxgGUTKopNKa8puveb3OCUK0Hk3lfRYRxgl
- zy+Mh8mnFG0wADVstuGvu0XUnErtfaPlTSQAmjhACdqr0UYKy9CVI4P1v8yu0Tc=
-X-Google-Smtp-Source: AGHT+IECYZ8jEOyNjfOo7v2ntBHyh3jZeaYenWNDpB+i/bm1yRYvi1SkFqWa6aL3zndnpAJKjepmTg==
-X-Received: by 2002:a05:6214:311c:b0:6cb:ef96:c79e with SMTP id
- 6a1803df08f44-6cc2b919931mr7009476d6.34.1729001801862; 
- Tue, 15 Oct 2024 07:16:41 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
+ d=1e100.net; s=20230601; t=1729001865; x=1729606665;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=7/gbyRSTQRzibMflrFd7z8IlPrxer+KUo5bdDD+IiBY=;
+ b=PaHYWs1AQN7ohmguZy63U7YrqwZ7i5yfs+aF22ci3rincZVkg6D/mpMzvyoRlD0z2W
+ w8J5xNzgaMD6WtTX08EYgiqU5kCJOHFcK+zgyDVFpslGQfwSUnc8ep4I9oTD0M2j2brt
+ uaVaTaGG4aHlpGjt7/BYTm9+UjG655OxLjWc7oOQEUbATDGr0apvS+6c5YGDcUMKIWMe
+ GMfedAQ9YcKDrbiMI51tnGzUmMexgcG9h3+/dZ0vLQ7WNC68E7TpYbspU7R3WgA8No2y
+ aP7qQkSzC9Kvy1niOmWBeG8cRNekXqeX1IvOK7vI708NTprolmIES7w3XCCc0kTf8536
+ zNWA==
+X-Gm-Message-State: AOJu0YyG7QxdiNOuQl49JO+IIWiSgF0OSeQENUnGbxW3TWvGKkcPZEAB
+ evzCzzhS4snxI/yyccIOrwHJJvApRou2cfC6yMKPwPDIyTh+RWaCZ1zU7bXmrnrxiWKi1lFNJaW
+ HJ3I=
+X-Google-Smtp-Source: AGHT+IHzXYIkdBG6/l6ZcGGezdFTr8/LYgUUOlkxbednQOulbdxgFoJixHUWKloUhSw78FbRa4Daeg==
+X-Received: by 2002:a05:6512:e9d:b0:535:6aa9:9855 with SMTP id
+ 2adb3069b0e04-539e54051famr5625339e87.0.1729001864654; 
+ Tue, 15 Oct 2024 07:17:44 -0700 (PDT)
+Received: from artemis2.broadband ([2a0a:ef40:edb:fc01:52f8:5161:22d9:48c2])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6cc2290fa66sm7017986d6.26.2024.10.15.07.16.40
+ 5b1f17b1804b1-4313f6c567esm18856535e9.45.2024.10.15.07.17.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Oct 2024 07:16:40 -0700 (PDT)
-Date: Tue, 15 Oct 2024 08:16:36 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mark Kettenis <mark.kettenis@xs4all.nl>, u-boot@lists.denx.de,
- ilias.apalodimas@linaro.org
-Subject: Re: [PATCH v6 12/12] test: efi: boot: Add a test for the efi bootmeth
-Message-ID: <20241015141636.GL53053@bill-the-cat>
-References: <20240926220226.1265965-9-sjg@chromium.org>
- <20240926220226.1265965-13-sjg@chromium.org>
- <20241011223227.GA630742@bill-the-cat>
- <CAFLszTgoxND_qi8WzdgC8-mQLf0e14Mt=KgXy=bqWkqo4svG9Q@mail.gmail.com>
- <20241014035122.GE53053@bill-the-cat>
- <CAFLszTiVsoTdKiKmPVugc9cLk-A+XM2EdiPUE0AFK=g8RPx+0g@mail.gmail.com>
- <20241014211150.GX53053@bill-the-cat>
- <87cyk1hdne.fsf@bloch.sibelius.xs4all.nl>
- <23757cf3-c27a-498d-9e66-59261f060102@gmx.de>
- <CAFLszTikKJ29TEzCQHBL1JfYz4b+O0eVps2Aa9_pMuwHBZgByA@mail.gmail.com>
+ Tue, 15 Oct 2024 07:17:44 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Love Kumar <love.kumar@amd.com>, Marek Vasut <marex@denx.de>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] usb: Fix test dependency on ext4write command
+Date: Tue, 15 Oct 2024 15:17:37 +0100
+Message-Id: <20241015141737.1170669-1-andrew.goodbody@linaro.org>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="FD3Otjqrw2jlZ1ok"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTikKJ29TEzCQHBL1JfYz4b+O0eVps2Aa9_pMuwHBZgByA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,108 +91,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The tests test_usb_ext4load_ext4write, test_usb_ext2load and
+test_usb_load depend on the command ext4write being present not just
+the feature of being able to write to an ext4 file system. So update
+their dependencies to include the ext4write command itself. This will
+prevent spurious test failures when running the USB tests against USB
+storage with an ext2/ext4 partition but no ext4write command available.
 
---FD3Otjqrw2jlZ1ok
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Fixes: 1c5b6edad381 ("test/py: usb: Add tests for USB device")
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
 
-On Tue, Oct 15, 2024 at 07:25:55AM -0600, Simon Glass wrote:
-> Hi Heinrich,
->=20
-> On Tue, 15 Oct 2024 at 05:36, Heinrich Schuchardt <xypron.glpk@gmx.de> wr=
-ote:
-> >
-> > On 15.10.24 12:19, Mark Kettenis wrote:
-> > >> Date: Mon, 14 Oct 2024 15:11:50 -0600
-> > >> From: Tom Rini <trini@konsulko.com>
-> > >>
-> > >> On Mon, Oct 14, 2024 at 01:13:41PM -0600, Simon Glass wrote:
-> > >>
-> > >> [snip]
-> > >>> Or perhaps just have a way to turn it off? I first sent this patch
-> > >>> last November. It is just wrong to generate output like this which =
-we
-> > >>> don't want. There isn't even a test for it, so just add a way to
-> > >>> disable it, and be done!
-> > >>
-> > >> I don't know that it's unwanted. As I'm trying to get Heinrich to
-> > >> explain, _why_ does efi_setup_console_size need to exist, and do wha=
-t it
-> > >> does? This isn't the case of color-coding the output of tests as they
-> > >> happen, there must be a reason we care about knowing the console siz=
-e.
-> > >> At that point we can figure out if the right answer is:
-> > >> - Don't generate that check on serial ports, it's somewhere between
-> > >>    misleading to wrong.
-> > >> - text-based tests just need to expect and skip it because there's a
-> > >>    good reason to need to know the console size and not just assume
-> > >>    80x24.
-> > >> - Something else we won't know until it's clearly explained why we do
-> > >>    this.
-> > >
-> > > Sadly this is a misfeature of UEFI.  The EFI_SIMPLE_TEXT_OUTPUT_PROTO=
-COL
-> > > is required if console devices are supported by the UEFI
-> > > implementation, and is built around the concept of "text mode" with a
-> > > fixed number of character rows and columns.  That pretty much assumes
-> > > there is some sort of terminal emulator on the other end.  And this is
-> > > pretty much incompatible with anything that just want to log serial
-> > > output.
-> > >
-> > > I think it is possible to do better though.  Instead of calling
-> > > efi_setup_console_size() in efi_init_obj_list(), we could postpone
-> > > this until the application makes a call that requires us to know the
-> > > size.  This would mean that a simple EFI application that just uses
-> > > EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL.OutputString() (such as the Hello
-> > > world EFI application or the OpenBSD EFI bootloader) wouldn't have to
-> > > do the size query.
-> >
-> > The implementation of EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL.OutputString()
-> > needs to know the output size to update the cursor position in
-> >
-> >    EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL.MODE.CursorColumn
-> >    EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL.MODE.CursorRow
-> >
-> > The EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL is passed to the entry point of any
-> > EFI application via the system table.
-> >
-> > We could delay the invocation of efi_setup_console_size() to the launch
-> > of the first EFI application (efi_start_image()).
+ test/py/tests/test_usb.py | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-This discussion I believe should continue as it does sound like we can
-be a bit better about when we do this required series of events.
+diff --git a/test/py/tests/test_usb.py b/test/py/tests/test_usb.py
+index fb3d20f082..b86fc290c7 100644
+--- a/test/py/tests/test_usb.py
++++ b/test/py/tests/test_usb.py
+@@ -382,7 +382,7 @@ def test_usb_ext4ls(u_boot_console):
+ 
+ @pytest.mark.buildconfigspec('cmd_usb')
+ @pytest.mark.buildconfigspec('cmd_ext4')
+-@pytest.mark.buildconfigspec('ext4_write')
++@pytest.mark.buildconfigspec('cmd_ext4_write')
+ @pytest.mark.buildconfigspec('cmd_memory')
+ def test_usb_ext4load_ext4write(u_boot_console):
+     devices, controllers, storage_device = test_usb_part(u_boot_console)
+@@ -469,7 +469,7 @@ def test_usb_ext2ls(u_boot_console):
+ @pytest.mark.buildconfigspec('cmd_usb')
+ @pytest.mark.buildconfigspec('cmd_ext2')
+ @pytest.mark.buildconfigspec('cmd_ext4')
+-@pytest.mark.buildconfigspec('ext4_write')
++@pytest.mark.buildconfigspec('cmd_ext4_write')
+ @pytest.mark.buildconfigspec('cmd_memory')
+ def test_usb_ext2load(u_boot_console):
+     devices, controllers, storage_device = test_usb_part(u_boot_console)
+@@ -543,6 +543,7 @@ def test_usb_ls(u_boot_console):
+         pytest.skip('No partition detected')
+ 
+ @pytest.mark.buildconfigspec('cmd_usb')
++@pytest.mark.buildconfigspec('cmd_ext4_write')
+ @pytest.mark.buildconfigspec('cmd_fs_generic')
+ def test_usb_load(u_boot_console):
+     devices, controllers, storage_device = test_usb_part(u_boot_console)
+-- 
+2.39.5
 
-> That's a start, but I think the right answer here is to use my flag
-> and in efi_setup_console_size() don't call query_console_serial() if
-> the flag is set. Then the default (80x25) will be returned, which is
-> fine for the test which is the subject of this series.
-
-No, your series, like other tests that already exist and have this
-escape code printed, should just swallow the escape sequence if it shows
-up because, sadly, there is reason for it. I wonder if we should have
-some test _for_ this sequence, or otherwise make sure we see it when we
-should see it?
-
---=20
-Tom
-
---FD3Otjqrw2jlZ1ok
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcOeUEACgkQFHw5/5Y0
-tyztXAwAgTWW36GKlrfkV84tbGT5Q+ipcaN5JRbBJTM108l/m6f6EVIBq7Dwav/W
-kxMFdtphPxbMBsv+DZVfDbbwUwwARJz+8NSEy0wmeDdbN5RvAP8TwNV+0xtom6XF
-nBjvxHnVK/ELelNxx6IyUuQAqC0XtmPRzCzFeg/SdfGg36htT32EFt8MG+br8kM6
-IW4o24x7AAtjUaDsWcarkqHT5cH8xgIIEsiUbUMerT/KYboVn+O9ET+NTvMqoon2
-xFEY5o9DgW6hAMAVSKs+yS5CrmDYMEOKCwjSFliCVkeSw642Twxf0k4Rb4j3GXs0
-XmXTQb+b50ZlAl7c+s0kobZnuGwmEXKCM8O2dUc++ANwZHa1SeWWl3nqiqOVcWZL
-CMqYDP6+Lop0bEl+1kKPt9UImMYSq/zM/f8gqfNJIK5atbnsC3+XHT74yU6s5kCK
-aJXabuYo9We8fbtfGVNYUWXvtfdSuU8T7LQFO+luTUCsmj42rsEkB60XVWn6eJKA
-3KpLXIGl
-=duK0
------END PGP SIGNATURE-----
-
---FD3Otjqrw2jlZ1ok--
