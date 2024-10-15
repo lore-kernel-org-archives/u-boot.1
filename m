@@ -4,62 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09A66D1D88D
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 16:55:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04274D1D88B
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 16:56:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 639BA88A3C;
+	by phobos.denx.de (Postfix) with ESMTP id B639188A9D;
 	Tue, 15 Oct 2024 18:55:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1729011341;
-	bh=LlWEpDmUnZec3r2C+dYpflZfrVPuktCDVUxIiWZ3fqI=;
+	bh=7B623/ecYjvDu+epUDG/Me/48bzBiiqPK46Mbw1MX9E=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=OgAS0RYiXGVgr1SQSETeLk1uF3Vz0HgJj1mKPWWTl9UvJBmIudFTl1QS7MF1jaYJM
-	 g5e6xISJ6tI3CHx3aSY9PLtSvFSxGeDrXPdksuR4VUdoB0jpxwkCHGEqEJzKzB8D2B
-	 UgCaVISxJL88XGEc4W40SGuPORD2CXdIMb/nPYseBFmSNrJ65MKjlpM3f9O7lBfUfb
-	 Q+jWh0MP5npX6yxmbyV8bXAIwFmr8OrTJ1JADu2ELlh41H8g9N40nFQgeA82ClHeEV
-	 ZUMbqNpeyx8IsqQxzewfYH0VzQoxw33PZRYlld88AEXXYdep+Iei6i2Fp70qdYstPe
-	 d4e6PcWA2KyMg==
+	b=vfX5vde+A6eC8wWnPWXzXHv1bJ3y7eDz8nful/5xnAlnUyY1eAoFQg8adbyFmwXZp
+	 yK/QZl+McgrRR4VXS4r2UdIyegojW2cKsohzChwP1toe9ogkOJ80+KFU+wspMpVP3/
+	 EbEcX37e0xB2bOXMtkRe83N6k6ZG0ofQBpzPXp+PSs71vO4teLHoWf9t+B3O0zJhrp
+	 6Iy0CDD4JCRZij1kcEvE5A75ykajtdhqNUBBs/cZ0OfE8FGscpmq1WIJjsycjkXer0
+	 9LKJZZ9PpBGGTmKozJcYxzefckxAOPU//wg/JiP3wgBhvSf9U2vCFW0V+sQNaEciAO
+	 642r5LOFtwfaA==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id F2107889CA;
- Tue, 15 Oct 2024 18:55:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id F234E88703;
+ Tue, 15 Oct 2024 18:55:39 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1729011339;
- bh=LlWEpDmUnZec3r2C+dYpflZfrVPuktCDVUxIiWZ3fqI=;
+ s=phobos-20191101; t=1729011340;
+ bh=7B623/ecYjvDu+epUDG/Me/48bzBiiqPK46Mbw1MX9E=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=pZiS0ZAQLmtlvG20idP6e8CMTVnsVmFJ1vDi7KHFaLjaC7WnvIcdnbNrsWbw0nMR4
- X5nPjIN6yu2iOiBAk++NdjpaqchcRUllNgXsPF6aMtzWXSeRMC/e1tEBXfOcY1Uhbp
- tbJzT+LsoC0UHYWH3fmCq+6QoAVBflPpmld+j6GM6MAAbLC7n8iSK7qub3Arkcjkmj
- djGY45K+kVezoY9kfBnLga0BLgPpNwYD7G33Xms/LUqd6xgbUZLnUwUXfr5VKByzYJ
- i9KTKGpYat2A92bq/m9t90PGdaW+6KjgTak8Wh11Bj9Fc/Yl6xxMooNokDhopUQOjs
- 4sXn2OOJsNGrg==
-Message-ID: <866aa26b-dc1e-4c64-a539-94592c6249b9@denx.de>
-Date: Tue, 15 Oct 2024 17:47:53 +0200
+ b=kFya77P4xszkWM8deVIWahqLTHcbkatPq8K5JL5kJZffmEqnVamuUMjhQ1EO0uQ/l
+ ZBxkU5aqJ4sV/Wj8wSZXnHrP0s6zOhKBwX01T/uo6rlzrUVdfXg2O5fie1KQo2RwCg
+ /WZSLylx9R2M/ybqd7Q43rlEeRn4qXbjgDInpUMCRUZx5eFnPKiIxa/zs8iM2MrupQ
+ Ii8U5Bb0vIj1i8slmxGHz0I8yvb8w3mADAyF755tPTAQUZ96SAwknrq9JAD9+N1CbJ
+ 80N3MFxgpmNiem/9H+BgHyN9qVsdoQvcl5X9P1uFYqWi6ysoiVux5lIFwSY2fKNunP
+ RMm21U5VUF/4g==
+Message-ID: <c62f454f-b512-44d3-91e1-c53340d3b0c0@denx.de>
+Date: Tue, 15 Oct 2024 17:50:17 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4] rockchip: board: Increase rng-seed size to make it
- sufficient for modern Linux
-To: Quentin Schulz <quentin.schulz@cherry.de>,
- Alex Shumsky <alexthreed@gmail.com>, u-boot@lists.denx.de
-Cc: Dragan Simic <dsimic@manjaro.org>,
- Ben Wolsieffer <benwolsieffer@gmail.com>,
- Chris Morgan <macromorgan@hotmail.com>, Jonas Karlman <jonas@kwiboo.se>,
- Kever Yang <kever.yang@rock-chips.com>, Peter Robinson
- <pbrobinson@gmail.com>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-References: <20241014221523.2912260-1-alexthreed@gmail.com>
- <22953d33-b660-49ba-9664-845416bbc35b@cherry.de>
+Subject: Re: [PATCH] usb: Fix test failure with multiple partitions
+To: Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot@lists.denx.de,
+ Simon Glass <sjg@chromium.org>
+Cc: Love Kumar <love.kumar@amd.com>, Tom Rini <trini@konsulko.com>
+References: <20241015121916.1155120-1-andrew.goodbody@linaro.org>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <22953d33-b660-49ba-9664-845416bbc35b@cherry.de>
+In-Reply-To: <20241015121916.1155120-1-andrew.goodbody@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,71 +69,255 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/15/24 11:34 AM, Quentin Schulz wrote:
-> Hi Alex,
+On 10/15/24 2:19 PM, Andrew Goodbody wrote:
+> When test_usb_load finds multiple partitions of the same type then
+> it will cause a test failure. The call to write the test file will
+> write a different test file to each partition but only return the
+> name and size of the last one written. So the test then fails to
+> load the test file from the first partition as it uses the name of
+> a file on a different partition.
 > 
-> On 10/15/24 12:15 AM, Alex Shumsky wrote:
->> Increase rng-seed size to make Linux happy and initialize rng pool 
->> instantly.
->> Linux 5.19+ requires 32 bytes of entropy to initialize random pool, 
->> but u-boot
->> currently provides only 8 bytes.
->> Linux 5.18 and probably some versions before it used to require 64 bytes.
->> Bump min value to 64 bytes to be on a safe side.
->>
->> Boot with 8 byte rng-seed (Linux 6.11):
->>      # dmesg | grep crng
->>      [   12.089286] random: crng init done
->> Boot with 32 byte rng-seed (Linux 6.11):
->>      # dmesg | grep crng
->>      [    0.000000] random: crng init done
->>
->> Linux source references:
->> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/ 
->> tree/drivers/char/random.c?h=v5.19#n551
->> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/ 
->> tree/drivers/char/random.c?h=v5.18#n236
->>
->> Signed-off-by: Alex Shumsky <alexthreed@gmail.com>
->> Fixes: d2048bafae40 ("rockchip: board: Add board_rng_seed() for all 
->> Rockchip devices")
->> Reviewed-by: Dragan Simic <dsimic@manjaro.org>
->> ---
->>
->> Changes in v4:
->> - fix typos and code style
->>
->> Changes in v3:
->> - reword warning
->> - increase default rng_seed_size to support older linux as well
->> - reword commit message
->>
->> Changes in v2:
->> - add env config knob rng_seed_size
->> - add warning for small rng_seed_size
->> - 12-character commit SHA in Fixes
->>
->>   arch/arm/mach-rockchip/board.c | 11 ++++++++++-
->>   1 file changed, 10 insertions(+), 1 deletion(-)
->>
->> diff --git a/arch/arm/mach-rockchip/board.c b/arch/arm/mach-rockchip/ 
->> board.c
->> index 3fadf7e412..ca6404776f 100644
->> --- a/arch/arm/mach-rockchip/board.c
->> +++ b/arch/arm/mach-rockchip/board.c
->> @@ -472,9 +472,18 @@ __weak int misc_init_r(void)
->>   __weak int board_rng_seed(struct abuf *buf)
->>   {
->>       struct udevice *dev;
->> -    size_t len = 0x8;
->> +    ulong len = env_get_ulong("rng_seed_size", 10, 64);
+> Refactor the code so that only one test file is written at a time
+> and is written to only the partition being tested at that time. This
+> allows the correct file name to always be available to the code that
+> runs the load command. This reduces the number of files written and
+> also the number of calls to crc32 needed.
 > 
-> I'm wondering if we have somewhere some documentation on the environment 
-> variables that exist and what they used for because this would be a nice 
-> addition. At the very least, we can mention this variable in:
-> - include/fdt_support.h for the function
-> - common/Kconfig for the symbol
+> Fixes: 1c5b6edad381 ("test/py: usb: Add tests for USB device")
+> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> ---
 > 
-> I'm also a bit torn on the base though, I think the assumed base is 
-> generally hex and not dec, so maybe we should rather have that?
-It is a decimal number, similar to e.g. bootcount , hence base 10 .
+>   test/py/tests/test_usb.py | 166 +++++++++++++++++++-------------------
+>   1 file changed, 82 insertions(+), 84 deletions(-)
+> 
+> diff --git a/test/py/tests/test_usb.py b/test/py/tests/test_usb.py
+> index fb3d20f082..e7966cad2b 100644
+> --- a/test/py/tests/test_usb.py
+> +++ b/test/py/tests/test_usb.py
+> @@ -288,6 +288,47 @@ def test_usb_fatls_fatinfo(u_boot_console):
+>       if not part_detect:
+>           pytest.skip('No %s partition detected' % fs.upper())
+>   
+> +def usb_fatload_fatwrite(u_boot_console, fs, x, part):
+> +    addr = u_boot_utils.find_ram_base(u_boot_console)
+> +    size = random.randint(4, 1 * 1024 * 1024)
+> +    output = u_boot_console.run_command('crc32 %x %x' % (addr, size))
+> +    m = re.search('==> (.+?)', output)
+> +    if not m:
+> +        pytest.fail('CRC32 failed')
+> +    expected_crc32 = m.group(1)
+> +
+> +    file = '%s_%d' % ('uboot_test', size)
+> +    output = u_boot_console.run_command(
+> +        '%swrite usb %d:%s %x %s %x' % (fs, x, part, addr, file, size)
+> +    )
+> +    assert 'Unable to write' not in output
+> +    assert 'Error' not in output
+> +    assert 'overflow' not in output
+> +    expected_text = '%d bytes written' % size
+> +    assert expected_text in output
+> +
+> +    alignment = int(
+> +        u_boot_console.config.buildconfig.get(
+> +            'config_sys_cacheline_size', 128
+> +        )
+> +    )
+> +    offset = random.randrange(alignment, 1024, alignment)
+> +    output = u_boot_console.run_command(
+> +        '%sload usb %d:%s %x %s' % (fs, x, part, addr + offset, file)
+> +    )
+> +    assert 'Invalid FAT entry' not in output
+> +    assert 'Unable to read file' not in output
+> +    assert 'Misaligned buffer address' not in output
+> +    expected_text = '%d bytes read' % size
+> +    assert expected_text in output
+> +
+> +    output = u_boot_console.run_command(
+> +        'crc32 %x $filesize' % (addr + offset)
+> +    )
+> +    assert expected_crc32 in output
+> +
+> +    return file, size, expected_crc32
+> +
+>   @pytest.mark.buildconfigspec('cmd_usb')
+>   @pytest.mark.buildconfigspec('cmd_fat')
+>   @pytest.mark.buildconfigspec('cmd_memory')
+> @@ -309,49 +350,11 @@ def test_usb_fatload_fatwrite(u_boot_console):
+>   
+>               for part in partitions:
+>                   part_detect = 1
+> -                addr = u_boot_utils.find_ram_base(u_boot_console)
+> -                size = random.randint(4, 1 * 1024 * 1024)
+> -                output = u_boot_console.run_command('crc32 %x %x' % (addr, size))
+> -                m = re.search('==> (.+?)', output)
+> -                if not m:
+> -                    pytest.fail('CRC32 failed')
+> -                expected_crc32 = m.group(1)
+> -
+> -                file = '%s_%d' % ('uboot_test', size)
+> -                output = u_boot_console.run_command(
+> -                    '%swrite usb %d:%s %x %s %x' % (fs, x, part, addr, file, size)
+> -                )
+> -                assert 'Unable to write' not in output
+> -                assert 'Error' not in output
+> -                assert 'overflow' not in output
+> -                expected_text = '%d bytes written' % size
+> -                assert expected_text in output
+> -
+> -                alignment = int(
+> -                    u_boot_console.config.buildconfig.get(
+> -                        'config_sys_cacheline_size', 128
+> -                    )
+> -                )
+> -                offset = random.randrange(alignment, 1024, alignment)
+> -                output = u_boot_console.run_command(
+> -                    '%sload usb %d:%s %x %s' % (fs, x, part, addr + offset, file)
+> -                )
+> -                assert 'Invalid FAT entry' not in output
+> -                assert 'Unable to read file' not in output
+> -                assert 'Misaligned buffer address' not in output
+> -                expected_text = '%d bytes read' % size
+> -                assert expected_text in output
+> -
+> -                output = u_boot_console.run_command(
+> -                    'crc32 %x $filesize' % (addr + offset)
+> -                )
+> -                assert expected_crc32 in output
+> +                usb_fatload_fatwrite(u_boot_console, fs, x, part)
+>   
+>       if not part_detect:
+>           pytest.skip('No %s partition detected' % fs.upper())
+>   
+> -    return file, size
+> -
+>   @pytest.mark.buildconfigspec('cmd_usb')
+>   @pytest.mark.buildconfigspec('cmd_ext4')
+>   def test_usb_ext4ls(u_boot_console):
+> @@ -380,6 +383,39 @@ def test_usb_ext4ls(u_boot_console):
+>       if not part_detect:
+>           pytest.skip('No %s partition detected' % fs.upper())
+>   
+> +def usb_ext4load_ext4write(u_boot_console, fs, x, part):
+> +    addr = u_boot_utils.find_ram_base(u_boot_console)
+> +    size = random.randint(4, 1 * 1024 * 1024)
+> +    output = u_boot_console.run_command('crc32 %x %x' % (addr, size))
+> +    m = re.search('==> (.+?)', output)
+> +    if not m:
+> +        pytest.fail('CRC32 failed')
+> +    expected_crc32 = m.group(1)
+> +    file = '%s_%d' % ('uboot_test', size)
+> +
+> +    output = u_boot_console.run_command(
+> +        '%swrite usb %d:%s %x /%s %x' % (fs, x, part, addr, file, size)
+> +    )
+> +    assert 'Unable to write' not in output
+> +    assert 'Error' not in output
+> +    assert 'overflow' not in output
+> +    expected_text = '%d bytes written' % size
+> +    assert expected_text in output
+> +
+> +    offset = random.randrange(128, 1024, 128)
+> +    output = u_boot_console.run_command(
+> +        '%sload usb %d:%s %x /%s' % (fs, x, part, addr + offset, file)
+> +    )
+> +    expected_text = '%d bytes read' % size
+> +    assert expected_text in output
+> +
+> +    output = u_boot_console.run_command(
+> +        'crc32 %x $filesize' % (addr + offset)
+> +    )
+> +    assert expected_crc32 in output
+> +
+> +    return file, size, expected_crc32
+> +
+>   @pytest.mark.buildconfigspec('cmd_usb')
+>   @pytest.mark.buildconfigspec('cmd_ext4')
+>   @pytest.mark.buildconfigspec('ext4_write')
+> @@ -402,41 +438,11 @@ def test_usb_ext4load_ext4write(u_boot_console):
+>   
+>               for part in partitions:
+>                   part_detect = 1
+> -                addr = u_boot_utils.find_ram_base(u_boot_console)
+> -                size = random.randint(4, 1 * 1024 * 1024)
+> -                output = u_boot_console.run_command('crc32 %x %x' % (addr, size))
+> -                m = re.search('==> (.+?)', output)
+> -                if not m:
+> -                    pytest.fail('CRC32 failed')
+> -                expected_crc32 = m.group(1)
+> -                file = '%s_%d' % ('uboot_test', size)
+> -
+> -                output = u_boot_console.run_command(
+> -                    '%swrite usb %d:%s %x /%s %x' % (fs, x, part, addr, file, size)
+> -                )
+> -                assert 'Unable to write' not in output
+> -                assert 'Error' not in output
+> -                assert 'overflow' not in output
+> -                expected_text = '%d bytes written' % size
+> -                assert expected_text in output
+> -
+> -                offset = random.randrange(128, 1024, 128)
+> -                output = u_boot_console.run_command(
+> -                    '%sload usb %d:%s %x /%s' % (fs, x, part, addr + offset, file)
+> -                )
+> -                expected_text = '%d bytes read' % size
+> -                assert expected_text in output
+> -
+> -                output = u_boot_console.run_command(
+> -                    'crc32 %x $filesize' % (addr + offset)
+> -                )
+> -                assert expected_crc32 in output
+> +                usb_ext4load_ext4write(u_boot_console, fs, x, part)
+>   
+>       if not part_detect:
+>           pytest.skip('No %s partition detected' % fs.upper())
+>   
+> -    return file, size
+> -
+>   @pytest.mark.buildconfigspec('cmd_usb')
+>   @pytest.mark.buildconfigspec('cmd_ext2')
+>   def test_usb_ext2ls(u_boot_console):
+> @@ -473,7 +479,6 @@ def test_usb_ext2ls(u_boot_console):
+>   @pytest.mark.buildconfigspec('cmd_memory')
+>   def test_usb_ext2load(u_boot_console):
+>       devices, controllers, storage_device = test_usb_part(u_boot_console)
+> -    file, size = test_usb_ext4load_ext4write(u_boot_console)
+>   
+>       if not devices:
+>           pytest.skip('No devices detected')
+> @@ -491,12 +496,9 @@ def test_usb_ext2load(u_boot_console):
+>   
+>               for part in partitions:
+>                   part_detect = 1
+> +                file, size, expected_crc32 = \
+> +                    usb_ext4load_ext4write(u_boot_console, 'ext4', x, part)
+>                   addr = u_boot_utils.find_ram_base(u_boot_console)
+> -                output = u_boot_console.run_command('crc32 %x %x' % (addr, size))
+> -                m = re.search('==> (.+?)', output)
+> -                if not m:
+> -                    pytest.fail('CRC32 failed')
+> -                expected_crc32 = m.group(1)
+>   
+>                   offset = random.randrange(128, 1024, 128)
+>                   output = u_boot_console.run_command(
+> @@ -565,15 +567,11 @@ def test_usb_load(u_boot_console):
+>                       addr = u_boot_utils.find_ram_base(u_boot_console)
+>   
+>                       if fs == 'fat':
+> -                        file, size = test_usb_fatload_fatwrite(u_boot_console)
+> +                        file, size, expected_crc32 = \
+> +                            usb_fatload_fatwrite(u_boot_console, fs, x, part)
+>                       elif fs == 'ext4':
+> -                        file, size = test_usb_ext4load_ext4write(u_boot_console)
+> -
+> -                    output = u_boot_console.run_command('crc32 %x %x' % (addr, size))
+> -                    m = re.search('==> (.+?)', output)
+> -                    if not m:
+> -                        pytest.fail('CRC32 failed')
+> -                    expected_crc32 = m.group(1)
+> +                        file, size, expected_crc32 = \
+> +                            usb_ext4load_ext4write(u_boot_console, fs, x, part)
+>   
+>                       offset = random.randrange(128, 1024, 128)
+>                       output = u_boot_console.run_command(
+
++CC Simon the test expert
