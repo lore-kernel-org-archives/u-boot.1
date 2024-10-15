@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25413D20681
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 22:26:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E50DDD20683
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 22:42:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 82E4A889C3;
-	Wed, 16 Oct 2024 00:26:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 57E7888A37;
+	Wed, 16 Oct 2024 00:42:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jW52BWvM";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NWOqnh4D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9EB1188966; Wed, 16 Oct 2024 00:26:13 +0200 (CEST)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
+ id EAE41889CA; Wed, 16 Oct 2024 00:42:02 +0200 (CEST)
+Received: from mail-vs1-xe30.google.com (mail-vs1-xe30.google.com
+ [IPv6:2607:f8b0:4864:20::e30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 89A81889AA
- for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 00:26:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2318D88A1B
+ for <u-boot@lists.denx.de>; Wed, 16 Oct 2024 00:41:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-6cbf0e6414aso22118306d6.1
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 15:26:11 -0700 (PDT)
+Received: by mail-vs1-xe30.google.com with SMTP id
+ ada2fe7eead31-4a470d330a5so1693078137.3
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 15:41:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729031170; x=1729635970; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LBmde6HPvFg3wkQvB7f/ymMqVTsD1t5AR0XgOYmyL2Q=;
- b=jW52BWvMBUtbAaaTedF1bQViqUELFPaRqUhzJvrst/LXGkgFCAx1sH1Q+6whHQGt54
- zj9jCLT3XKgch++tOawpZny57v95vkY4wNMwmEZybaZiF/wvn2tt9tZ4FTGCHzJ8g9g8
- zLXkkyEvVRuaUYl+NFltTC+74rSd06f0EA3VQ=
+ d=konsulko.com; s=google; t=1729032118; x=1729636918; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=KqdG9tdY6HWZAjQGrxLGs9eynjVMuaKBm+w/Y+SQx3o=;
+ b=NWOqnh4Dd/autX/qqYvHmiic0Or/sPI3puBLyDXBD2uNLoPXr4fUer1ZzgMSpzGgv/
+ z1ANZzR0ErPnG6khFJUab1szNNn4cL49HbBNQVL+DwhftL4LzK/xxxENrYDeqi1Ztdm/
+ sbaVrkMsWOQZELGZ7Oz83npl46jqzKvz/Z/8Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729031170; x=1729635970;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=LBmde6HPvFg3wkQvB7f/ymMqVTsD1t5AR0XgOYmyL2Q=;
- b=rj2V7zsoysGjGH1Wxcqq0Una2N4YbWeexD4PChW58CsjV06C7gYZ6DSnaNCjtRpXjx
- s9uI0YvUvF5jOWxc0f6DCfJgd0hZI0kl0882G5loxb28bpeCZn3aNLL8ICuesQDzGjxi
- S45rplMiTr3RI0YZT6a26lOFxZ4HYljZPeYk9yDxiJNz3DJLvPNiLiLN2XtGiUdJvUJL
- jdRDAElI0SspTVIVjOEdGjUhfibA/npBEeMF02Qe4aZisy/Ne8dK3GYgbeQ4rnc9GWfa
- VLrkCOojKrbI1fV4bTbQNTf/+rRt+KFHMHUuERrBDZA3YC1VWR/BaBSQXpDQAW5htPnS
- CLrA==
-X-Gm-Message-State: AOJu0YwCNFnPbvVN3KRrx5TlRyuILNh8GjhA+gQh2h0Gg4vP7JkpYe8E
- dq+GpVt/dCLLNfONWJ3GE27Z5srWGhAZ3tD0xgvXNwewFiQZ+WdeKkgqzbR9cv56egp5iNhz9Eg
- t/Es=
-X-Google-Smtp-Source: AGHT+IG7m58jEkJjs2aPnV3w3Cm5VXJf/CPyMK6UwQ0Ex2qRonDFXDIaFSNlH9TbMDqfH6YmtiKiKw==
-X-Received: by 2002:a05:6214:328d:b0:6cb:c905:f380 with SMTP id
- 6a1803df08f44-6cc2b8bc925mr26590466d6.2.1729031170200; 
- Tue, 15 Oct 2024 15:26:10 -0700 (PDT)
-Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6cc22959ae2sm11381076d6.93.2024.10.15.15.26.08
+ d=1e100.net; s=20230601; t=1729032118; x=1729636918;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=KqdG9tdY6HWZAjQGrxLGs9eynjVMuaKBm+w/Y+SQx3o=;
+ b=MMPkRxx6yYBwvnvBD1Y3VIkey9Am1X+nDfb0uwK/p6fgpcXRzQY5K7JLyM+8taYzYY
+ H0DFkn1G+ZeWB+WBtWGf7Ze4jnYa5Bj+jL08UORz3J25xiKyfF+BjypnNUs3dFno2ruR
+ O8ZhvqvC4M88dQoIsTLd5BQZzYoCn9J1WuvXz/Pv9kr9xwN3s5Rq3KyfR7Po5eJZ/cq6
+ OMAzxQpbw3YJWofbqCGTfx0sVyzF7s/t/WapaeUTlowMMbNaxtdzGnRI7476BL9yfANA
+ MvkuAAmOvqJP5vbfWfMzqm/fDEKmtzDxqcgqiZ+Tf4t3G0p2QTHgVxnCDd/uUaBnwyX3
+ pcDQ==
+X-Gm-Message-State: AOJu0YzNe+eDCg7ulZ7Ir9b+bOgyApdhJ9L4+tk1jz3e4Iqtrw2c8FMT
+ /GwefiBq/vtELr6ZzYplPBg1/brhpCCcn+z6F11hVcfi9PuMEMC1Zl1ta4kgJI8=
+X-Google-Smtp-Source: AGHT+IHcY/9Ei10y65hi5IOtRAJyn6yKc1fwxDruMX9ZmeBlMVvjGgTJQ8Fz5hA7hrIuGTSUtV5KKg==
+X-Received: by 2002:a05:6102:2ac9:b0:4a4:9541:e38c with SMTP id
+ ada2fe7eead31-4a49541e4bbmr7627945137.0.1729032117864; 
+ Tue, 15 Oct 2024 15:41:57 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6cc2290f983sm11351856d6.21.2024.10.15.15.41.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Oct 2024 15:26:09 -0700 (PDT)
+ Tue, 15 Oct 2024 15:41:56 -0700 (PDT)
+Date: Tue, 15 Oct 2024 16:41:53 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Jonas Karlman <jonas@kwiboo.se>, 
- Mark Kettenis <kettenis@openbsd.org>
-In-Reply-To: <20241015153717.401371-1-sughosh.ganu@linaro.org>
-References: <20241015153717.401371-1-sughosh.ganu@linaro.org>
-Subject: Re: [PATCH v4 00/15] Make EFI memory allocations synchronous with LMB
-Message-Id: <172903116836.20251.11081117115298191100.b4-ty@konsulko.com>
-Date: Tue, 15 Oct 2024 16:26:08 -0600
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
+ Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
+ Anton Antonov <Anton.Antonov@arm.com>
+Subject: Re: [PATCH v12 00/21] Introduce the lwIP network stack
+Message-ID: <20241015224153.GA22599@bill-the-cat>
+References: <cover.1728482473.git.jerome.forissier@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ScBf26Z2w530991X"
+Content-Disposition: inline
+In-Reply-To: <cover.1728482473.git.jerome.forissier@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,27 +92,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 15 Oct 2024 21:07:02 +0530, Sughosh Ganu wrote:
 
-> This is part two of the series to have the EFI and LMB modules have a
-> coherent view of memory. Part one of this goal was to change the LMB
-> module to have a global and persistent memory map. Those patches have
-> now been applied to the next branch.
-> 
-> These patches are changing the EFI memory allocation API's such that
-> they rely on the LMB module to allocate RAM memory. This fixes the
-> current scenario where the EFI memory module has no visibility of the
-> allocations/reservations made by the LMB module. One thing to note
-> here is that this is limited to the RAM memory region, i.e. the
-> EFI_CONVENTIONAL_MEMORY type. Any other memory type that is to be
-> added to the EFI memory map, still gets handled by the EFI memory
-> module.
-> 
-> [...]
+--ScBf26Z2w530991X
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Applied to u-boot/master, thanks!
+On Wed, Oct 09, 2024 at 04:02:50PM +0200, Jerome Forissier wrote:
 
--- 
+> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
+> library for the network stack" [1]. The goal is to introduce the lwIP TCP=
+/IP
+> stack [2] [3] as an alternative to the current implementation in net/,
+> selectable with Kconfig, and ultimately keep only lwIP if possible. Some
+> reasons for doing so are:
+> - Make the support of HTTPS in the wget command easier. Javier T. and
+> Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
+> so. With that it becomes possible to fetch and launch a distro installer
+> such as Debian etc. using a secure, authenticated connection directly
+> from the U-Boot shell. Several use cases:
+>   * Authentication: prevent MITM attack (third party replacing the
+> binary with a different one)
+>   * Confidentiality: prevent third parties from grabbing a copy of the
+> image as it is being downloaded
+>   * Allow connection to servers that do not support plain HTTP anymore
+> (this is becoming more and more common on the Internet these days)
+> - Possibly benefit from additional features implemented in lwIP
+> - Less code to maintain in U-Boot
+>=20
+> Prior to applying this series, the lwIP stack needs to be added as a
+> Git subtree with the following command:
+>=20
+>  $ git subtree add --squash --prefix lib/lwip/lwip \
+>    https://github.com/lwip-tcpip/lwip.git  STABLE-2_2_0_RELEASE=20
+
+Can you please rebase on top of current master and repost? For some
+reason after I add the subtree and go for a b4 shazam on the series I
+get:
+Applying: net: lwip: tftp: bind to TFTP port only when in server mode
+Using index info to reconstruct a base tree...
+A       lib/lwip/lwip/src/apps/tftp/tftp.c
+Falling back to patching base and 3-way merge...
+CONFLICT (modify/delete): lib/lwip/lwip/src/apps/tftp/tftp.c deleted in HEA=
+D and modified in net: lwip: tftp: bind to TFTP port only when in server mo=
+de. Version net: lwip: tftp: bind to TFTP port only when in server mode of =
+lib/lwip/lwip/src/apps/tftp/tftp.c left in tree.
+Patch failed at 0010 net: lwip: tftp: bind to TFTP port only when in server=
+ mode
+When you have resolved this problem, run "git am --continue".
+If you prefer to skip this patch, run "git am --skip" instead.
+To restore the original branch and stop patching, run "git am --abort".
+error: Failed to merge in the changes.
+
+--=20
 Tom
 
+--ScBf26Z2w530991X
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmcO760ACgkQFHw5/5Y0
+tyzPwAv9F3oPjmmoCxThQsyA1vBtcGcLz4RFwhetFGpSJpL3Skv1WkYVqYTF+9O0
+T1xRgT6OgYo6e5b3dtxCDCjSADLzY59vnSWubcR+Q3MnnvTtRQjaAtipGIGi9LOy
+QfSdFWk3lwvlXEaAMcXnSQ2su2eMeB6MK2QHtns1i//Fi+BiW73r01n0ILyiaCSM
+HesQDDRL27Qk7QAT8+/xEI3+r8N6yD7kWsS1d4YJf0Z/wQRALqtjL5gEobqT8zhy
+JDWXhbDUTaodqqPecX9UeceIBwjU2NHphH+eO7Q20jUOstLOStfX4HxL01jugaZ3
+bbTRynUcfvMvD24bywJzcIfhVjkO8dq7hf6LlUhX8EDI/K3KAvcrRK9d9XGGzVJC
+QeosL4UcpSeAZahatAvQFu/CtJCSzXDdu89gAug7CEn2b4A8x60jGbf+QBclZ/DA
+StFdbPAaWTCSk6RB/AOqkGT2HWEl1E2sUUo8M9JjiuoPA4ALXL4CPIfY8FR8/r5j
+PM14hvb+
+=2qh5
+-----END PGP SIGNATURE-----
+
+--ScBf26Z2w530991X--
