@@ -4,74 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82D04D216A2
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 13:26:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F000D216A2
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 13:26:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 518F5885B3;
-	Tue, 15 Oct 2024 15:26:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B801588599;
+	Tue, 15 Oct 2024 15:26:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ul/PSVvb";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C1TUpKne";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 49D92886B1; Tue, 15 Oct 2024 15:26:19 +0200 (CEST)
-Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
- [IPv6:2607:f8b0:4864:20::22d])
+ id 5D8EF883D4; Tue, 15 Oct 2024 15:26:32 +0200 (CEST)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F7D0880F4
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 15:26:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 95CE888717
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 15:26:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x22d.google.com with SMTP id
- 5614622812f47-3e3e0a8aaabso1737672b6e.3
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 06:26:17 -0700 (PDT)
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-6cbe53a68b5so34331326d6.1
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 06:26:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728998776; x=1729603576; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1728998788; x=1729603588; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=mQaekSaqifhoZ/p6eNkrsVvUCIMg8fCMWdRVYqIs6jw=;
- b=Ul/PSVvb0W/i8CZGb7ieRnX5xkDV0oKT/PyOlB15vnik89m5IjFC7s4VQzHAJW7qSz
- ivEfANjmCtzcAFXurqPXmKzMrZO79zaF2s20iHjT/DI1YE0E2xUuUOjmIJnKiAAg1mCt
- nLI2gyAuYvuZBwNloLqL1XxCX1karq5UHgroU=
+ bh=GV27+CvWgJHMHqnvGMY9Lsk3P3kOf7p2AHtExm7KMts=;
+ b=C1TUpKneGz0WHz3LCuw2YRy/2nf6V6JEJci9KeXClikSd1+L1u11XGteLBCbIXlrIB
+ y1tv1TuwHNnRkqesI3jnyLzWiKG8q6f2Rz7xu55Kz7R+z6cqfP0ZNBL7ncLLLdE8t2Rz
+ r4b8E30Xz2lRT6zP5YkT189ar/vKrb566RyN4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728998776; x=1729603576;
+ d=1e100.net; s=20230601; t=1728998788; x=1729603588;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=mQaekSaqifhoZ/p6eNkrsVvUCIMg8fCMWdRVYqIs6jw=;
- b=pOwTuMyhVDrqfFq27+CP4NGrswe/WiCrW/40wUz7hUp3MyPOwYsWN0c8ryrjE6HZbp
- tpMKq31Z7ac1m1gDxsT4T+PTnqCc7D9Or5+MCr5ewHhG/qKp+Zi79K3+murfVcDRTZNA
- UTf4OWBgo/IvSWWXm9+2WP5eCnrfXEa7L1oUKXZTkIB0tTWQl29Q/vTXQWKKMupYGDcg
- um1b1uRbiKr1c9dYNeyQyvdIGg0GiJDxUGJz4fIU0Osj3cVWWlgVO/C+yQ0GUjxXi48Z
- Psnptjwsu4epOi/XGuZ5yuJ2GzhWCBzkiDYL5FdnUW+aeKHru7uVD5eH/lk3DBmpaB80
- 8yQA==
-X-Gm-Message-State: AOJu0YzJ7wEBSIadWJyKmII44URm9UJkUNnjnZFgBgVcRVi/4WQq6TtZ
- JLokL4TWDNDLMG4NpZ7ateOOIad1QBbIf/z9kRgJLpEUv4DdLKT2fnGlYRGpifsuqK2TOoUFzQP
- KrC/8bMY9cdepGwA9TVz0e1cm7B+QezvgDVqO
-X-Google-Smtp-Source: AGHT+IEiPzn717lA9d+6isSwc9Bq20NuAiC+TzV6NcJeOSx+GXE3yHnx2HgIx8vaM3QZShFw/1e+gXsxR4l+D8ETl1E=
-X-Received: by 2002:a05:6808:1a02:b0:3e4:d683:c242 with SMTP id
- 5614622812f47-3e5d220de87mr7452279b6e.15.1728998775712; Tue, 15 Oct 2024
- 06:26:15 -0700 (PDT)
+ bh=GV27+CvWgJHMHqnvGMY9Lsk3P3kOf7p2AHtExm7KMts=;
+ b=sxgdsuzx2GpU0F96W5eHAtDGRM2WrOxOTCOuKnrnWgTF9AqvGIXVZIKO9CnvhHFkxA
+ 8A5wbch7TDNSwv3Vbwd3FX9Hk13DCHqInuDAqyiGvZ+RATbrvvVKpaJXGUHpIhfePQOG
+ 1iougAuqkDWTRX48zIGn9JnMdhBUWEW7v7x0qC3ufjgwlgW/kxQtPKZu+aOwzbpt1BAg
+ V6NdJuLcRBMxspB8FgJR16iNkoH8nFpJE9gahBqMJX0r5hNWlVa/LxSJtz0lNZVjfxkJ
+ Douo32O26HhoPMLiqTgcmIj/+X2lPHUgdpZ51bgavtp/XYSRDz9tKLMw8zBmwBhm+boP
+ ZoZw==
+X-Gm-Message-State: AOJu0Yw79Hsmp6zpM2/TFuYaN45dQcf9BeCtprnc8tddLnXeI9+MvzoV
+ uS63b2MuajjtimAFV2CGs0MJ0mUOYVwv8H7nTfIUvN+0IdN5sL4ToF5lJmu05HnQKoTJL1jQIBD
+ S8BFTDCuMaN2amyEG/4PdGv2SfGMv0WSrTWHo
+X-Google-Smtp-Source: AGHT+IE3aYWa/5wDiIdYZUW6jde0P49TyvQ5WKolH7JzKmLSRYG2tdoFoQOBrnD9n7ibKHYRAUvDoPmi9h3dvFnWSsw=
+X-Received: by 2002:a05:6214:4a85:b0:6cb:c6d2:3567 with SMTP id
+ 6a1803df08f44-6cbf00033ebmr175854636d6.3.1728998788464; Tue, 15 Oct 2024
+ 06:26:28 -0700 (PDT)
 MIME-Version: 1.0
 References: <20241011212126.747741-1-sjg@chromium.org>
- <20241011212126.747741-6-sjg@chromium.org>
- <CAC_iWj+HQg0itBTF8ZmsVr4qQkWjX+RdZ2snPKvOsVA5pMhXOQ@mail.gmail.com>
-In-Reply-To: <CAC_iWj+HQg0itBTF8ZmsVr4qQkWjX+RdZ2snPKvOsVA5pMhXOQ@mail.gmail.com>
+ <CAC_iWjKD=05pf=gcfCPUA0mGNbAX+jjyx5D03y0MWJRgxYDPOA@mail.gmail.com>
+In-Reply-To: <CAC_iWjKD=05pf=gcfCPUA0mGNbAX+jjyx5D03y0MWJRgxYDPOA@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 15 Oct 2024 07:26:05 -0600
-Message-ID: <CAFLszTgiebQV4VVWsMiv7Niepf2ceDxpo1yqykpJ-6X9hxchpw@mail.gmail.com>
-Subject: Re: [PATCH v4 5/5] efi: Keep early allocations to the U-Boot region
+Date: Tue, 15 Oct 2024 07:26:16 -0600
+Message-ID: <CAFLszTgJW2KPbD1dogSVKbxgyYtvKGgSAcB_j5kXtWdkTGvtNA@mail.gmail.com>
+Subject: Re: [PATCH v4 0/5] Adjust initial EFI memory-allocation to be in the
+ U-Boot region
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Joao Marcos Costa <jmcosta944@gmail.com>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, Artur Rojek <artur@conclusive.pl>, 
+ Devarsh Thakkar <devarsht@ti.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Joao Marcos Costa <jmcosta944@gmail.com>, Jonas Karlman <jonas@kwiboo.se>, 
  Masahisa Kojima <kojima.masahisa@socionext.com>,
  Raymond Mao <raymond.mao@linaro.org>, 
+ Richard Weinberger <richard@nod.at>, 
+ This contributor prefers not to receive mails <noreply@example.com>,
  =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -92,162 +96,111 @@ X-Virus-Status: Clean
 
 Hi Ilias,
 
-On Mon, 14 Oct 2024 at 22:26, Ilias Apalodimas
+On Mon, 14 Oct 2024 at 22:28, Ilias Apalodimas
 <ilias.apalodimas@linaro.org> wrote:
 >
 > Hi Simon,
 >
 > On Sat, 12 Oct 2024 at 00:23, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > Adjust EFI_LOADER to use the provided region for early memory
-> > allocations, to avoid going outside the U-Boot region.
+> > U-Boot relocates itself to the top of memory and is supposed to avoid
+> > using any memory below that region. This allows the maximum amount of
+> > memory to be available for loading images.
 > >
-> > Expand the available memory when efi_init_obj_list() is called.
->
-> efi_init_obj_list() is not called when an EFI app is called. It's
-> called when the EFI subsystem comes up.
-
-Indeed.
-
->
+> > The lmb subsystem automatically protects U-Boot's code and data from
+> > being overwritten. It relies on this region being a contiguous area of
+> > memory. This setup has worked well for at least 15 years and has been
+> > documented in the README for as long.
 > >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
+> > The EFI_LOADER subsystem currently uses memory outside the U-Boot region
+> > when starting up.
+> >
+> > Some of the downstream problems this causes are:
+> >
+> > 1. It can overwrite images that have been loaded
+>
+> So can the load command
+
+Can you point to where? If lmb is enabled, it should be using that, so
+not overwrite anything.
+
+>
+> > 2. Requires lmb reservations to avoid (1) even if EFI_LOADER is not
+> >    being used
+> > 3. Uses regions which scripts expect to be available, e.g. the existing
+> >    kernel_addr_r variables
+> > 4. Introduces confusion as to what memory U-Boot can use for itself
+> >
+> > This series sets up a very small region of memory which EFI can used at
+> > start-up, thus avoiding touching memory outside the U-Boot region.
+>
+> EFI *is* U-Boot memory region. It lies outside the U-Boot binary,
+> because some services are instantiated on boot. It also *is* U-Boot
+> executable code. We should start treating it as such
+
+This seems like semantics to me. What do you think of this patch?
+
+Regards,
+Simon
+
+
+>
+> Thanks
+> /Ilias
+> >
+> > There are still a few tables which are not in the bloblist, but that
+> > will be resolved separately.
+> >
+> > Other than tables, the amount of API-visible memory allocated by EFI
+> > before booting is actually very small: 3 allocations, of a total of
+> > about 250 bytes. However, there are some areas where EFI allocations are
+> > done unnecessarily. For example efi_disk_add_dev() uses page-allocation
+> > to allocate an efi_device_path, then immediately frees it again. In this
+> > case it would be better to use malloc(). Since each allocation consumes
+> > a page (4KB), 256KB has been chosen for the size here, enough for 64
+> > allocations.
+> >
+> > As soon as efi_init_obj_list() is called, we know that the EFI subsystem
+> > is to be used, so we can relax the restrictions and allow EFI to use any
+> > memory it likes. This is handled using a simple boolean flag in BSS, since
+> > it cannot happen before relocation.
 > >
 > > Changes in v4:
+> > - Expand the commit message
+> > - Reword the commit message since this feature is needed
 > > - Use a different technique to keep the memory-usage in place
 > > - Drop changes to pool allocation
 > > - Reorder the patches
 > > - Rewrite the cover letter
 > > - Make it a debug message for now
 > >
+> > Changes in v3:
+> > - Add new patch to drop the memset() from efi_alloc()
+> > - Drop patch to convert device_path allocation to use malloc()
+> >
 > > Changes in v2:
 > > - Drop patch 'Show more information in efi index'
 > > - Drop patch 'Avoid pool allocation in efi_get_memory_map_alloc()'
 > > - Add the word 'warning', use log_warning() and show the end address
 > >
-> >  include/efi_loader.h        | 13 +++++++++++++
-> >  lib/efi_loader/efi_memory.c | 24 ++++++++++++++++++++++--
-> >  lib/efi_loader/efi_setup.c  |  5 +++++
-> >  3 files changed, 40 insertions(+), 2 deletions(-)
+> > Simon Glass (5):
+> >   efi: Drop the memset() from efi_alloc()
+> >   efi: Show the location of the bounce buffer when debugging
+> >   event: Add a generic way to reserve memory
+> >   efi: Reserve some memory for initial use
+> >   efi: Keep early allocations to the U-Boot region
 > >
-> > diff --git a/include/efi_loader.h b/include/efi_loader.h
-> > index 08e27e61b06..aa464e9d754 100644
-> > --- a/include/efi_loader.h
-> > +++ b/include/efi_loader.h
-> > @@ -805,6 +805,19 @@ int efi_disk_probe(void *ctx, struct event *event);
-> >  int efi_disk_remove(void *ctx, struct event *event);
-> >  /* Called by board init to initialize the EFI memory map */
-> >  int efi_memory_init(void);
-> > +
-> > +/**
-> > + * efi_memory_coop() - Allow EFI to use all available memory
-> > + *
-> > + * Up until this function is called, only a small portion of memory is available
-> > + * for use by the EFI memory-allocator. This function is called at the
-> > + * 'point of cooperation', before jumping into an EFI app, which needs to be
-> > + * able to make use of all the memory in the machine
->
-> As above, this is called when the EFI subsystem comes up. Not when an
-> application is called. For example doing a 'printenv -e' to print EFI
-> variables would trigger this.
-
-Yes. At that point we know we are using an EFI feature. We can
-certainly extend the intent of this patch to cover that, but I am
-trying to take baby steps here.
-
-> The funtion call you are removing just adds all memory all memory as
-> EFI_CONVENTIONAL_MEMORY, which basically means free memory. I can't
-> understand what this patch is supposed to fix
-
-Basically it feeds a small amount of memory to EFI initially, within
-the U-Boot region. That is enough to deal with the few allocations
-that are done before efi_init_obj_list() is called.
-
-So if you don't use any EFI features, EFI's memory usage is limited to
-the U-Boot region.
-
->
-> > + *
-> > + * Return: efi_status_t (EFI_SUCCESS on success)
-> > + */
-> > +int efi_memory_coop(void);
-> > +
-> >  /* Adds new or overrides configuration table entry to the system table */
-> >  efi_status_t efi_install_configuration_table(const efi_guid_t *guid, void *table);
-> >  /* Sets up a loaded image */
-> > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> > index 9cc33397371..2cd0b00e9eb 100644
-> > --- a/lib/efi_loader/efi_memory.c
-> > +++ b/lib/efi_loader/efi_memory.c
-> > @@ -30,6 +30,9 @@ DECLARE_GLOBAL_DATA_PTR;
-> >   */
-> >  #define EFI_EARLY_REGION_SIZE  SZ_256K
-> >
-> > +/* Set when all memory has been added for use by EFI */
-> > +static bool efi_full_memory;
-> > +
-> >  efi_uintn_t efi_memory_map_key;
-> >
-> >  struct efi_mem_list {
-> > @@ -932,8 +935,25 @@ static void add_u_boot_and_runtime(void)
-> >
-> >  int efi_memory_init(void)
-> >  {
-> > -       efi_add_known_memory();
-> > +       efi_status_t ret;
-> > +
-> > +       /* restrict EFI to its own region until efi_memory_coop() is called */
-> > +       ret = efi_add_memory_map_pg((ulong)map_sysmem(gd->efi_region, 0),
-> > +                                   EFI_EARLY_REGION_SIZE >> EFI_PAGE_SHIFT,
-> > +                                   EFI_CONVENTIONAL_MEMORY, false);
-> > +
-> > +       return ret;
-> > +}
-> >
-> > +int efi_memory_coop(void)
-> > +{
-> > +       if (efi_full_memory)
-> > +               return 0;
-> > +       log_debug("Enabling coop memory\n");
-> > +
-> > +       efi_full_memory = true;
-> > +
-> > +       efi_add_known_memory();
-> >         add_u_boot_and_runtime();
-> >
-> >  #ifdef CONFIG_EFI_LOADER_BOUNCE_BUFFER
-> > @@ -943,7 +963,7 @@ int efi_memory_init(void)
-> >         if (efi_allocate_pages(EFI_ALLOCATE_MAX_ADDRESS, EFI_BOOT_SERVICES_DATA,
-> >                                (64 * 1024 * 1024) >> EFI_PAGE_SHIFT,
-> >                                &efi_bounce_buffer_addr) != EFI_SUCCESS)
-> > -               return -1;
-> > +               return -ENOMEM;
-> >
-> >         efi_bounce_buffer = (void*)(uintptr_t)efi_bounce_buffer_addr;
-> >  #endif
-> > diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
-> > index a610e032d2f..40e23ca104c 100644
-> > --- a/lib/efi_loader/efi_setup.c
-> > +++ b/lib/efi_loader/efi_setup.c
-> > @@ -228,6 +228,11 @@ efi_status_t efi_init_obj_list(void)
-> >         if (efi_obj_list_initialized != OBJ_LIST_NOT_INITIALIZED)
-> >                 return efi_obj_list_initialized;
-> >
-> > +       /* Allow EFI to use all memory */
-> > +       ret = efi_memory_coop();
-> > +       if (ret != EFI_SUCCESS)
-> > +               goto out;
-> > +
-> >         /* Set up console modes */
-> >         efi_setup_console_size();
+> >  common/board_f.c                  |  1 +
+> >  common/event.c                    |  1 +
+> >  include/asm-generic/global_data.h |  6 ++++
+> >  include/efi_loader.h              | 24 +++++++++++++-
+> >  include/event.h                   | 11 +++++++
+> >  lib/efi_loader/efi_bootbin.c      |  9 ++++++
+> >  lib/efi_loader/efi_memory.c       | 54 ++++++++++++++++++++++++-------
+> >  lib/efi_loader/efi_setup.c        |  5 +++
+> >  test/py/tests/test_event_dump.py  |  1 +
+> >  9 files changed, 100 insertions(+), 12 deletions(-)
 > >
 > > --
 > > 2.34.1
 > >
->
-> Thanks
-> /Ilias
-
-Regards,
-SImon
