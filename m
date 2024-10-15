@@ -4,76 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83B8DCFC287
-	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 10:53:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4034CFC293
+	for <u-boot@archiver.kernel.org>; Tue, 15 Oct 2024 11:36:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA9A0891B3;
-	Tue, 15 Oct 2024 12:52:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 24E1688E5F;
+	Tue, 15 Oct 2024 13:36:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="p1N10L4/";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="F1TgIrgW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1CE6889181; Tue, 15 Oct 2024 12:52:54 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id C246788E84; Tue, 15 Oct 2024 13:36:37 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07FA3890F2
- for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 12:52:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C9FB088E3F
+ for <u-boot@lists.denx.de>; Tue, 15 Oct 2024 13:36:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 49FAqn8Q050606;
- Tue, 15 Oct 2024 05:52:49 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1728989569;
- bh=yWASetu0LicvkPFLHQdgDPIfFB63t9OI0Dceq2IhCLU=;
- h=From:Date:Subject:References:In-Reply-To:To:CC;
- b=p1N10L4/y+KXTFPo0w5+A1vkifjqCJ/99eQYGgz2BJ+fogtLFcBC0yBTg43xWgEnS
- +aeGmL6tNvVp1to1+iXDCS+ye8YSeOLCvmIZ3FpjR/OZuAxXcr+D0bmlvLjLx6SeRX
- eLAHnYGjBRBl7ZxXRHMAR1SXw92kLEjFHaDsBRQo=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49FAqnMf082726;
- Tue, 15 Oct 2024 05:52:49 -0500
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 15
- Oct 2024 05:52:49 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 15 Oct 2024 05:52:49 -0500
-Received: from [127.0.1.1] (uda0497581.dhcp.ti.com [10.24.68.185])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 49FAqJbl044559;
- Tue, 15 Oct 2024 05:52:45 -0500
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-Date: Tue, 15 Oct 2024 16:22:23 +0530
-Subject: [PATCH v5 7/7] configs: j721s2_evm_r5_defconfig: Add AVS Configs
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1728992194; x=1729596994; i=xypron.glpk@gmx.de;
+ bh=27gWFAMoeQ9Ip+Nz92VG+77GaOmhpggw4VKZT3q84oI=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=F1TgIrgW2Uywtv3pMv4vO9/DH8+sE66mxAtIrGS5afpiwdEbqXBQULjtftb/3KIk
+ amUmHPXnHajuE4lHOCXYTm930QHBLeQYAUm/sVHm/LnM/30AlKlqOj6X8oVRA0AJY
+ MaihOl2TcLeEWYA4k3ugy9YJ8/hr+JEEJZ31H0YFh4IizPfW32kIXr7VRs8N6Pvcj
+ FO0vLNEo59kzfAASSD4v+hpzslcfAIHRFgrN5O6VjulPJm9PjQR1LYZLFdmttsg6B
+ 1DYgWFfzsLkGqJOYQJR2nQiKnqcC4q2jQJ4o4FTKCMZzbV88YA40luyOZ5GNQzvrR
+ GBrXDg77L838jg2Dzg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MJVDW-1tG0qY15wm-00RxVv; Tue, 15
+ Oct 2024 13:36:34 +0200
+Message-ID: <23757cf3-c27a-498d-9e66-59261f060102@gmx.de>
+Date: Tue, 15 Oct 2024 13:36:23 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20241015-b4-upstream-j721s2-avs-v5-7-5c8087387dc5@ti.com>
-References: <20241015-b4-upstream-j721s2-avs-v5-0-5c8087387dc5@ti.com>
-In-Reply-To: <20241015-b4-upstream-j721s2-avs-v5-0-5c8087387dc5@ti.com>
-To: Jaehoon Chung <jh80.chung@samsung.com>
-CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Keerthy J
- <j-keerthy@ti.com>, Udit Kumar <u-kumar1@ti.com>, Aniket Limaye
- <a-limaye@ti.com>, Tom Rini <trini@konsulko.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, Andrew Davis <afd@ti.com>,
- Nishanth Menon <nm@ti.com>, Simon Glass <sjg@chromium.org>,
- Manorit Chawdhry <m-chawdhry@ti.com>
-X-Mailer: b4 0.15-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1728989539; l=1611;
- i=m-chawdhry@ti.com; s=20231127; h=from:subject:message-id;
- bh=ucKLPjt8eS1zfc/KfQzJej5lSCxi3npNj6qv9s9/VsU=;
- b=oI+jpISZ5gevUgux0WIj86mue96F4fD1Wgfwu/0kQodC0Pve6kRf1r5lXjxwXI8mdISj3BdtT
- 0twtCdSOegDDWFDi8Ljph8D8wL7dav5d6ZOXyOjyMLZH4PsD/EdXXRX
-X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
- pk=fsr6Tm39TvsTgfyfFQLk+nnqIz2sBA1PthfqqfiiYSs=
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 12/12] test: efi: boot: Add a test for the efi bootmeth
+To: Mark Kettenis <mark.kettenis@xs4all.nl>
+Cc: sjg@chromium.org, u-boot@lists.denx.de, ilias.apalodimas@linaro.org,
+ Tom Rini <trini@konsulko.com>
+References: <20240926220226.1265965-9-sjg@chromium.org>
+ <20240926220226.1265965-13-sjg@chromium.org>
+ <20241011223227.GA630742@bill-the-cat>
+ <CAFLszTgoxND_qi8WzdgC8-mQLf0e14Mt=KgXy=bqWkqo4svG9Q@mail.gmail.com>
+ <20241014035122.GE53053@bill-the-cat>
+ <CAFLszTiVsoTdKiKmPVugc9cLk-A+XM2EdiPUE0AFK=g8RPx+0g@mail.gmail.com>
+ <20241014211150.GX53053@bill-the-cat>
+ <87cyk1hdne.fsf@bloch.sibelius.xs4all.nl>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <87cyk1hdne.fsf@bloch.sibelius.xs4all.nl>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:qEFk9wkAkQN021Dc70p24mOXF7AgTfwaDzfZc5iCVKIAJXI0x+/
+ 5GERG1Ng8YNRS5i6jWKoYgA5LFu8PJ8pXIAr9HhulPj5FOFV1s/+AZzZTBpXJLV8zeY5tdF
+ sIMGHTkwwegh1GlUvHuQUBDy65onJMETHsgQ3i2G7kRsODjZsDaLeqSEt0N5CEaD/tq2MEd
+ 7j/I96eqCDh3NS0orCtTg==
+UI-OutboundReport: notjunk:1;M01:P0:k2mAv3Tesr4=;1DE2io1BaklqRUfvwG4hYdp3ok4
+ AvqY1NjzBJIWavN4V32LTpDEvsOLts9Hc3ZagK05kT4sJKdR/OjB0vzK1a45kHFjaUrHm3acT
+ CAbc4m5QpqV9ivm+7CQrQEZHdTr3P7+ZrhsiFGSSaTUXhTbeQ68bdIf2AMhlTgKKj0fT6Iqdn
+ dsc60XexuAD8IYtiIaqhipYN6OlMU5LzW1e2ZoYTLWZiSJpyNPHFTthSK5Pj3kXUyC9tSiXjy
+ XafMH/67ITlooqSl0FAXivRrdqcW6fUjOc08r9hLihmtc/8PkvAxrnnZ0ODWf6toN6XkD8Ozl
+ LPrUHCX/q3wtKHJM57Ev0iH4Ta+Kt3sNl368XEW6xsUIHVuyhDRpPX2IsqcBKp5N82v0I6BMf
+ u2FMs5PPzfnktJbvo1DjKrMtJ3oIbaKGiQYweerPjECRKBlPUAl5d6r9i+wv398Bs7FQRyORF
+ DvHsyCChSdWoWZVaX21jpYdegYeQzCni54DnJYoJSDMDJ7NNOnTohk9YSue2hgUw8LD3PsjbO
+ ikuemwFHJJvAdvEJr0Stxs5mOwdAmXcpmBVbKJlgB3mlWsWcIxMYhNABhXrbkhIOAQkVT971M
+ Zy8uvu4bkjquEz9dtO78XCNZHsuK7cl1dDTVge0AHfBq3CW53TNx8/G0geslU6TgT7HNUaQ5y
+ JAUigz6UL7EYcTi/GXRFszW4kJq1iqxT/zT4HJPXTZyyYcNLfdjIu+lTLF6cpXCDSBcOJAP+R
+ V+b90P8jqekIHeG+upCf6l3NvSHfkWPykMGlzgcJQXdhH9reAYGmkhTGSNTELxkIwdvUYfjSM
+ EHXuxiS/e4vbErJZOYycvl8g==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,57 +97,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add AVS and PMIC regulator configs
+On 15.10.24 12:19, Mark Kettenis wrote:
+>> Date: Mon, 14 Oct 2024 15:11:50 -0600
+>> From: Tom Rini <trini@konsulko.com>
+>>
+>> On Mon, Oct 14, 2024 at 01:13:41PM -0600, Simon Glass wrote:
+>>
+>> [snip]
+>>> Or perhaps just have a way to turn it off? I first sent this patch
+>>> last November. It is just wrong to generate output like this which we
+>>> don't want. There isn't even a test for it, so just add a way to
+>>> disable it, and be done!
+>>
+>> I don't know that it's unwanted. As I'm trying to get Heinrich to
+>> explain, _why_ does efi_setup_console_size need to exist, and do what i=
+t
+>> does? This isn't the case of color-coding the output of tests as they
+>> happen, there must be a reason we care about knowing the console size.
+>> At that point we can figure out if the right answer is:
+>> - Don't generate that check on serial ports, it's somewhere between
+>>    misleading to wrong.
+>> - text-based tests just need to expect and skip it because there's a
+>>    good reason to need to know the console size and not just assume
+>>    80x24.
+>> - Something else we won't know until it's clearly explained why we do
+>>    this.
+>
+> Sadly this is a misfeature of UEFI.  The EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL
+> is required if console devices are supported by the UEFI
+> implementation, and is built around the concept of "text mode" with a
+> fixed number of character rows and columns.  That pretty much assumes
+> there is some sort of terminal emulator on the other end.  And this is
+> pretty much incompatible with anything that just want to log serial
+> output.
+>
+> I think it is possible to do better though.  Instead of calling
+> efi_setup_console_size() in efi_init_obj_list(), we could postpone
+> this until the application makes a call that requires us to know the
+> size.  This would mean that a simple EFI application that just uses
+> EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL.OutputString() (such as the Hello
+> world EFI application or the OpenBSD EFI bootloader) wouldn't have to
+> do the size query.
 
-Also, disable it explicitly in am68_sk_r5_defconfig as it includes
-j721s2_evm_r5_defconfig for re-usability.
+The implementation of EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL.OutputString()
+needs to know the output size to update the cursor position in
 
-Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
----
- configs/am68_sk_r5_defconfig    | 4 ++++
- configs/j721s2_evm_r5_defconfig | 6 ++++++
- 2 files changed, 10 insertions(+)
+   EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL.MODE.CursorColumn
+   EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL.MODE.CursorRow
 
-diff --git a/configs/am68_sk_r5_defconfig b/configs/am68_sk_r5_defconfig
-index e9b6882c1f68..f4800ef1b8ac 100644
---- a/configs/am68_sk_r5_defconfig
-+++ b/configs/am68_sk_r5_defconfig
-@@ -5,6 +5,10 @@ CONFIG_ARCH_K3=y
- CONFIG_SOC_K3_J721S2=y
- CONFIG_TARGET_J721S2_R5_EVM=y
- 
-+CONFIG_K3_AVS0=n
-+CONFIG_DM_REGULATOR_TPS65941=n
-+CONFIG_PMIC_TPS65941=n
-+
- CONFIG_DEFAULT_DEVICE_TREE="k3-am68-sk-r5-base-board"
- CONFIG_SPL_OF_LIST="k3-am68-sk-r5-base-board"
- CONFIG_OF_LIST="k3-am68-sk-r5-base-board"
-diff --git a/configs/j721s2_evm_r5_defconfig b/configs/j721s2_evm_r5_defconfig
-index b6adb6a77d7e..ad7653c8f99b 100644
---- a/configs/j721s2_evm_r5_defconfig
-+++ b/configs/j721s2_evm_r5_defconfig
-@@ -112,6 +112,7 @@ CONFIG_DM_MAILBOX=y
- CONFIG_K3_SEC_PROXY=y
- CONFIG_FS_LOADER=y
- CONFIG_SPL_FS_LOADER=y
-+CONFIG_K3_AVS0=y
- CONFIG_SUPPORT_EMMC_BOOT=y
- CONFIG_SPL_MMC_HS400_SUPPORT=y
- CONFIG_MMC_SDHCI=y
-@@ -141,6 +142,11 @@ CONFIG_SPL_PINCTRL=y
- CONFIG_PINCTRL_SINGLE=y
- CONFIG_POWER_DOMAIN=y
- CONFIG_TI_POWER_DOMAIN=y
-+CONFIG_DM_PMIC=y
-+CONFIG_PMIC_TPS65941=y
-+CONFIG_DM_REGULATOR=y
-+CONFIG_SPL_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_TPS65941=y
- CONFIG_K3_SYSTEM_CONTROLLER=y
- CONFIG_REMOTEPROC_TI_K3_ARM64=y
- CONFIG_RESET_TI_SCI=y
+The EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL is passed to the entry point of any
+EFI application via the system table.
 
--- 
-2.46.0
+We could delay the invocation of efi_setup_console_size() to the launch
+of the first EFI application (efi_start_image()).
 
+Best regards
+
+Heinrich
